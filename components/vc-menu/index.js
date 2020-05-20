@@ -1,4 +1,4 @@
-// based on rc-menu 7.5.5
+// based on rc-menu 8.2.1
 import Menu from './Menu';
 import SubMenu from './SubMenu';
 import MenuItem, { menuItemProps } from './MenuItem';

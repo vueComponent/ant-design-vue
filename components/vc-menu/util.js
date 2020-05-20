@@ -101,6 +101,7 @@ export const menuAllProps = {
     'theme',
     'itemIcon',
     'expandIcon',
+    'direction',
   ],
   on: [
     'select',

@@ -159,6 +159,11 @@ const Menu = {
 
   render() {
     const props = getOptionProps(this);
+    let className = `${props.prefixCls}-root`;
+    if (props.direction === 'rtl') {
+      className += ` ${props.prefixCls}-rtl`;
+    }
+    console.log(props.direction);
     const subPopupMenuProps = {
       props: {
         ...props,
@@ -171,7 +176,7 @@ const Menu = {
         parentMenu: this,
         children: filterEmpty(this.$slots.default || []),
       },
-      class: `${props.prefixCls}-root`,
+      class: className,
       on: {
         ...getListeners(this),
         click: this.onClick,

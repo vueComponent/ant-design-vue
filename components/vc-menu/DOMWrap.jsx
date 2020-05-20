@@ -6,19 +6,8 @@ import { getWidth, setStyle, menuAllProps } from './util';
 import { cloneElement } from '../_util/vnode';
 import { getClass, getPropsData, getEvents, getListeners } from '../_util/props-util';
 
-const canUseDOM = !!(
-  typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
-);
-
 const MENUITEM_OVERFLOWED_CLASSNAME = 'menuitem-overflowed';
 const FLOAT_PRECISION_ADJUST = 0.5;
-
-// Fix ssr
-if (canUseDOM) {
-  require('mutationobserver-shim');
-}
 
 const DOMWrap = {
   name: 'DOMWrap',
@@ -35,6 +24,8 @@ const DOMWrap = {
 
     // cache item of the original items (so we can track the size and order)
     this.menuItemSizes = [];
+
+    this.cancelFrameId = null;
     return {
       lastVisibleIndex: undefined,
     };
@@ -49,7 +40,10 @@ const DOMWrap = {
           return;
         }
         this.resizeObserver = new ResizeObserver(entries => {
-          entries.forEach(this.setChildrenWidthAndResize);
+          entries.forEach(() => {
+            cancelAnimationFrame(this.cancelFrameId);
+            this.cancelFrameId = requestAnimationFrame(this.setChildrenWidthAndResize);
+          });
         });
 
         [].slice
@@ -87,6 +81,7 @@ const DOMWrap = {
     if (this.mutationObserver) {
       this.mutationObserver.disconnect();
     }
+    cancelAnimationFrame(this.cancelFrameId);
   },
   methods: {
     // get all valid menuItem nodes

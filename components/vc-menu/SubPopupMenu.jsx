@@ -119,6 +119,7 @@ const SubPopupMenu = {
       overflowedIndicator: PropTypes.any,
       children: PropTypes.any.def([]),
       __propsSymbol__: PropTypes.any, // mock componentWillReceiveProps
+      direction: PropTypes.oneOf(['ltr', 'rtl']).def('ltr'),
     },
     {
       prefixCls: 'rc-menu',
@@ -334,6 +335,7 @@ const SubPopupMenu = {
           itemIcon: this.getIcon(child, 'itemIcon') || this.getIcon(this, 'itemIcon'),
           expandIcon: this.getIcon(child, 'expandIcon') || this.getIcon(this, 'expandIcon'),
           ...extraProps,
+          direction: props.direction,
         },
         on: {
           click: e => {

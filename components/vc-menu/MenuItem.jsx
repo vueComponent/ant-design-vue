@@ -1,7 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import KeyCode from '../_util/KeyCode';
 import BaseMixin from '../_util/BaseMixin';
-import scrollIntoView from 'dom-scroll-into-view';
 import { connect } from '../_util/store';
 import { noop, menuAllProps } from './util';
 import { getComponentFromProp, getListeners } from '../_util/props-util';
@@ -33,6 +32,7 @@ const props = {
   subMenuKey: PropTypes.string,
   itemIcon: PropTypes.any,
   // clearSubMenuTimers: PropTypes.func.def(noop),
+  direction: PropTypes.oneOf(['ltr', 'rtl']).def('ltr'),
 };
 const MenuItem = {
   name: 'MenuItem',
@@ -45,18 +45,6 @@ const MenuItem = {
     this.callRef();
   },
   updated() {
-    this.$nextTick(() => {
-      const { active, parentMenu, eventKey } = this.$props;
-      if (!this.prevActive && active && (!parentMenu || !parentMenu[`scrolled-${eventKey}`])) {
-        scrollIntoView(this.$el, this.parentMenu.$el, {
-          onlyScrollIfNeeded: true,
-        });
-        parentMenu[`scrolled-${eventKey}`] = true;
-      } else if (parentMenu && parentMenu[`scrolled-${eventKey}`]) {
-        delete parentMenu[`scrolled-${eventKey}`];
-      }
-      this.prevActive = active;
-    });
     this.callRef();
   },
   beforeDestroy() {
@@ -178,7 +166,11 @@ const MenuItem = {
 
     const style = {};
     if (props.mode === 'inline') {
-      style.paddingLeft = `${props.inlineIndent * props.level}px`;
+      if (props.direction === 'rtl') {
+        style.paddingRight = `${props.inlineIndent * props.level}px`;
+      } else {
+        style.paddingLeft = `${props.inlineIndent * props.level}px`;
+      }
     }
     const listeners = { ...getListeners(this) };
     menuAllProps.props.forEach(key => delete props[key]);

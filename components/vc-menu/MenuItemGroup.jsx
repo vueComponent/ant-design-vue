@@ -14,6 +14,7 @@ const MenuItemGroup = {
     rootPrefixCls: PropTypes.string,
     disabled: PropTypes.bool.def(true),
     title: PropTypes.any,
+    direction: PropTypes.oneOf(['ltr', 'rtl']).def('ltr'),
   },
   isMenuItemGroup: true,
   methods: {

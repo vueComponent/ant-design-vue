@@ -19,11 +19,16 @@
   outline: none;
   margin-bottom: 0;
   padding-left: 0; // Override default ul/ol
+  padding-right: 0; // Override default ul/ol in RTL direction
   list-style: none;
   border: 1px solid #d9d9d9;
   box-shadow: 0 0 4px #d9d9d9;
   border-radius: 3px;
   color: #666;
+
+  &-rtl {
+    direction: rtl;
+  }
 
   &-hidden {
     display: none;
@@ -31,9 +36,9 @@
 
   &-collapse {
     overflow: hidden;
-    &-active {
-      transition: height 0.3s ease-out;
-    }
+    // &-active {
+    transition: height 0.3s ease-out;
+    // }
   }
 
   &-item-group-list {
@@ -83,6 +88,10 @@
     padding: 7px 7px 7px 16px;
     white-space: nowrap;
 
+    .@{menuPrefixCls}-rtl & {
+      padding: 7px 16px 7px 7px;
+    }
+
     // Disabled state sets text to gray and nukes hover/tab effects
     &.@{menuPrefixCls}-item-disabled,
     &.@{menuPrefixCls}-submenu-disabled {
@@ -104,6 +113,12 @@
 
       .submenu-title-wrapper {
         padding-right: 20px;
+
+        .@{menuPrefixCls}-submenu-rtl&,
+        .@{menuPrefixCls}-submenu-rtl & {
+          padding-right: 0;
+          padding-left: 20px;
+        }
       }
     }
     > .@{menuPrefixCls} {
@@ -118,6 +133,11 @@
       height: 14px;
       margin-right: 8px;
       top: -1px;
+
+      .@{menuPrefixCls}-rtl & {
+        margin-right: 0;
+        margin-left: 8px;
+      }
     }
   }
 
@@ -163,6 +183,10 @@
     & > .@{menuPrefixCls}-item,
     & > .@{menuPrefixCls}-submenu > .@{menuPrefixCls}-submenu-title {
       padding: 12px 8px 12px 24px;
+
+      .@{menuPrefixCls}-rtl& {
+        padding: 12px 24px 12px 8px;
+      }
     }
     .@{menuPrefixCls}-submenu-arrow {
       display: inline-block;
@@ -177,6 +201,17 @@
       line-height: 1.5em;
       &:before {
         content: '\f0da';
+
+        .@{menuPrefixCls}-rtl&,
+        .@{menuPrefixCls}-submenu-rtl & {
+          content: '\f0d9';
+        }
+      }
+
+      .@{menuPrefixCls}-rtl&,
+      .@{menuPrefixCls}-submenu-rtl & {
+        right: auto;
+        left: 16px;
       }
     }
   }
@@ -196,6 +231,10 @@
   &-vertical-left&-sub,
   &-vertical-right&-sub {
     padding: 0;
+
+    .@{menuPrefixCls}-submenu-rtl & {
+      direction: rtl;
+    }
   }
 
   &-sub&-inline {
@@ -209,6 +248,10 @@
       padding-top: 8px;
       padding-bottom: 8px;
       padding-right: 0;
+
+      .@{menuPrefixCls}-rtl & {
+        padding-left: 0;
+      }
     }
   }
 
@@ -293,6 +336,15 @@
     &-zoom-leave&-zoom-leave-active {
       animation-name: rcMenuOpenZoomOut;
       animation-play-state: running;
+    }
+
+    &-zoom-enter,
+    &-zoom-appear,
+    &-zoom-leave {
+      .@{menuPrefixCls}-submenu-rtl&,
+      .@{menuPrefixCls}-submenu-rtl & {
+        transform-origin: top right !important;
+      }
     }
 
     @keyframes rcMenuOpenZoomIn {

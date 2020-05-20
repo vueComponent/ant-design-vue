@@ -4,7 +4,7 @@ import Trigger from '../vc-trigger';
 import KeyCode from '../_util/KeyCode';
 import { connect } from '../_util/store';
 import SubPopupMenu from './SubPopupMenu';
-import placements from './placements';
+import { placements, placementsRtl } from './placements';
 import BaseMixin from '../_util/BaseMixin';
 import { getComponentFromProp, filterEmpty, getListeners } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
@@ -71,6 +71,7 @@ const SubMenu = {
     itemIcon: PropTypes.any,
     expandIcon: PropTypes.any,
     subMenuKey: PropTypes.string,
+    direction: PropTypes.oneOf(['ltr', 'rtl']).def('ltr'),
   },
   mixins: [BaseMixin],
   isSubMenu: true,
@@ -363,6 +364,7 @@ const SubMenu = {
           itemIcon: getComponentFromProp(this, 'itemIcon'),
           expandIcon: getComponentFromProp(this, 'expandIcon'),
           children,
+          direction: props.direction,
         },
         on: {
           click: this.onSubMenuClick,
@@ -387,6 +389,8 @@ const SubMenu = {
       // show appear transition if it's not inline mode
       const transitionAppear = haveRendered || !baseProps.visible || !baseProps.mode === 'inline';
       subPopupMenuProps.class = ` ${baseProps.prefixCls}-sub`;
+      subPopupMenuProps.class +=
+        subPopupMenuProps.direction === 'rtl' ? ` ${baseProps.prefixCls}-rtl` : ``;
       let animProps = { appear: transitionAppear, css: false };
       let transitionProps = {
         props: animProps,
@@ -460,7 +464,11 @@ const SubMenu = {
 
     const style = {};
     if (isInlineMode) {
-      style.paddingLeft = `${props.inlineIndent * props.level}px`;
+      if (props.direction === 'rtl') {
+        style.paddingRight = `${props.inlineIndent * props.level}px`;
+      } else {
+        style.paddingLeft = `${props.inlineIndent * props.level}px`;
+      }
     }
     let ariaOwns = {};
     // only set aria-owns when menu is open
@@ -477,6 +485,7 @@ const SubMenu = {
         ...ariaOwns,
         'aria-haspopup': 'true',
         title: typeof props.title === 'string' ? props.title : undefined,
+        role: 'button',
       },
       on: {
         ...titleMouseEvents,
@@ -504,11 +513,17 @@ const SubMenu = {
       : triggerNode => triggerNode.parentNode;
     const popupPlacement = popupPlacementMap[props.mode];
     const popupAlign = props.popupOffset ? { offset: props.popupOffset } : {};
-    const popupClassName = props.mode === 'inline' ? '' : props.popupClassName;
+    let popupClassName = props.mode === 'inline' ? '' : props.popupClassName;
+    popupClassName += props.direction === 'rtl' ? ` ${prefixCls}-rtl` : '';
     const liProps = {
       on: { ...omit(getListeners(this), ['click']), ...mouseEvents },
       class: className,
     };
+
+    const placement =
+      props.direction === 'rtl'
+        ? Object.assign({}, placementsRtl, props.builtinPlacements)
+        : Object.assign({}, placements, props.builtinPlacements);
 
     return (
       <li {...liProps} role="menuitem">
@@ -521,8 +536,7 @@ const SubMenu = {
               parentMenu.theme
             } ${popupClassName || ''}`}
             getPopupContainer={getPopupContainer}
-            builtinPlacements={placements}
-            builtinPlacements={Object.assign({}, placements, props.builtinPlacements)}
+            builtinPlacements={placement}
             popupPlacement={popupPlacement}
             popupVisible={isOpen}
             popupAlign={popupAlign}

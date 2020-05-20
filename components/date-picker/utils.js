@@ -1,8 +1,8 @@
-const isFunction = function(obj) {
-  return !!(obj && obj.constructor && obj.call && obj.apply);
-};
-
 export function formatDate(value, format) {
+  const isFunction = function(obj) {
+    return !!(obj && obj.constructor && obj.call && obj.apply);
+  };
+  
   if (!value) {
     return '';
   }

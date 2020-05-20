@@ -416,7 +416,9 @@ export default {
       data = data.slice(0);
       const sorterFn = this.getSorterFn(currentState);
       if (sorterFn) {
-        data = this.recursiveSort(data, sorterFn);
+        // 使用新数组，避免改变原数组导致无限循环更新
+        // https://github.com/vueComponent/ant-design-vue/issues/2270
+        data = this.recursiveSort([...data], sorterFn);
       }
       // 筛选
       if (filter && filters) {
@@ -885,7 +887,7 @@ export default {
         item[childrenColumnName]
           ? {
               ...item,
-              [childrenColumnName]: this.recursiveSort(item[childrenColumnName], sorterFn),
+              [childrenColumnName]: this.recursiveSort([...item[childrenColumnName]], sorterFn),
             }
           : item,
       );

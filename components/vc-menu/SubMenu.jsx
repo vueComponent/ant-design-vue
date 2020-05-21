@@ -70,6 +70,7 @@ const SubMenu = {
     builtinPlacements: PropTypes.object.def(() => ({})),
     itemIcon: PropTypes.any,
     expandIcon: PropTypes.any,
+    subMenuKey: PropTypes.string,
   },
   mixins: [BaseMixin],
   isSubMenu: true,

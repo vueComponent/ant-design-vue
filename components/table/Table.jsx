@@ -157,6 +157,7 @@ export default {
       sPagination: this.getDefaultPagination(this.$props),
       pivot: undefined,
       sComponents: createComponents(this.components),
+      filterDataCnt: 0
     };
   },
   watch: {
@@ -375,6 +376,7 @@ export default {
 
     getCurrentPageData() {
       let data = this.getLocalData();
+      this.filterDataCnt = data.length;
       let current;
       let pageSize;
       const sPagination = this.sPagination;
@@ -934,7 +936,7 @@ export default {
         size = 'small';
       }
       const position = pagination.position || 'bottom';
-      const total = pagination.total || this.getLocalData().length;
+      const total = pagination.total || this.filterDataCnt;
       const { class: cls, style, onChange, onShowSizeChange, ...restProps } = pagination; // eslint-disable-line
       const paginationProps = mergeProps({
         key: `pagination-${paginationPosition}`,

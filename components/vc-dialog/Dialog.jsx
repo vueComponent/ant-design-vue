@@ -218,8 +218,10 @@ export default {
         visible,
         bodyProps,
         forceRender,
+        dialogStyle,
+        dialogClass,
       } = this;
-      const dest = {};
+      const dest = { ...dialogStyle };
       if (width !== undefined) {
         dest.width = typeof width === 'number' ? `${width}px` : width;
       }
@@ -276,7 +278,7 @@ export default {
           role="document"
           ref="dialog"
           style={style}
-          class={cls}
+          class={[cls, dialogClass]}
           forceRender={forceRender}
           onMousedown={this.onDialogMouseDown}
         >

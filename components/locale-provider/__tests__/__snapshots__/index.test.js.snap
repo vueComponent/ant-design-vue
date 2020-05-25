@@ -9301,17 +9301,23 @@ exports[`Locale Provider should display the text as id 1`] = `
         <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
           <thead>
             <tr role="row">
+              <th role="columnheader" title="Min" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Mg</span></th>
               <th role="columnheader" title="Sen" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Sn</span></th>
               <th role="columnheader" title="Sel" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Sl</span></th>
               <th role="columnheader" title="Rab" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Rb</span></th>
               <th role="columnheader" title="Kam" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Km</span></th>
               <th role="columnheader" title="Jum" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Jm</span></th>
               <th role="columnheader" title="Sab" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Sb</span></th>
-              <th role="columnheader" title="Min" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Mg</span></th>
             </tr>
           </thead>
           <tbody class="ant-fullcalendar-tbody">
             <tr role="row" class="">
+              <td role="gridcell" title="27 Agustus 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">27</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
               <td role="gridcell" title="28 Agustus 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">28</div>
@@ -9348,14 +9354,14 @@ exports[`Locale Provider should display the text as id 1`] = `
                   <div class="ant-fullcalendar-content"></div>
                 </div>
               </td>
+            </tr>
+            <tr role="row" class="">
               <td role="gridcell" title="3 September 2017" class="ant-fullcalendar-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">03</div>
                   <div class="ant-fullcalendar-content"></div>
                 </div>
               </td>
-            </tr>
-            <tr role="row" class="">
               <td role="gridcell" title="4 September 2017" class="ant-fullcalendar-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">04</div>
@@ -9392,14 +9398,14 @@ exports[`Locale Provider should display the text as id 1`] = `
                   <div class="ant-fullcalendar-content"></div>
                 </div>
               </td>
+            </tr>
+            <tr role="row" class="">
               <td role="gridcell" title="10 September 2017" class="ant-fullcalendar-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">10</div>
                   <div class="ant-fullcalendar-content"></div>
                 </div>
               </td>
-            </tr>
-            <tr role="row" class="">
               <td role="gridcell" title="11 September 2017" class="ant-fullcalendar-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">11</div>
@@ -9436,14 +9442,14 @@ exports[`Locale Provider should display the text as id 1`] = `
                   <div class="ant-fullcalendar-content"></div>
                 </div>
               </td>
+            </tr>
+            <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
               <td role="gridcell" title="17 September 2017" class="ant-fullcalendar-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">17</div>
                   <div class="ant-fullcalendar-content"></div>
                 </div>
               </td>
-            </tr>
-            <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
               <td role="gridcell" title="18 September 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">18</div>
@@ -9480,14 +9486,14 @@ exports[`Locale Provider should display the text as id 1`] = `
                   <div class="ant-fullcalendar-content"></div>
                 </div>
               </td>
+            </tr>
+            <tr role="row" class="">
               <td role="gridcell" title="24 September 2017" class="ant-fullcalendar-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">24</div>
                   <div class="ant-fullcalendar-content"></div>
                 </div>
               </td>
-            </tr>
-            <tr role="row" class="">
               <td role="gridcell" title="25 September 2017" class="ant-fullcalendar-cell">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">25</div>
@@ -9524,14 +9530,14 @@ exports[`Locale Provider should display the text as id 1`] = `
                   <div class="ant-fullcalendar-content"></div>
                 </div>
               </td>
+            </tr>
+            <tr role="row" class="">
               <td role="gridcell" title="1 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">01</div>
                   <div class="ant-fullcalendar-content"></div>
                 </div>
               </td>
-            </tr>
-            <tr role="row" class="">
               <td role="gridcell" title="2 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">02</div>
@@ -9565,12 +9571,6 @@ exports[`Locale Provider should display the text as id 1`] = `
               <td role="gridcell" title="7 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
                 <div class="ant-fullcalendar-date">
                   <div class="ant-fullcalendar-value">07</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="8 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">08</div>
                   <div class="ant-fullcalendar-content"></div>
                 </div>
               </td>

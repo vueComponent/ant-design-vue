@@ -10,6 +10,19 @@
 
 ---
 
+## 1.6.1
+
+`2020-05-25`
+
+- 🐞 修复 DatePicker blur 时填充当前时间的问题 [#2246](https://github.com/vueComponent/ant-design-vue/issues/2246)
+- 🐞 修复 Drawer 销毁时报错问题 [#2254](https://github.com/vueComponent/ant-design-vue/issues/2254)
+- 🐞 修复 Tabs 不能移除已 0 作为 key 的选项卡 [55bbf9](https://github.com/vueComponent/ant-design-vue/commit/55bbf940401cf2a67114102da1c035abc4152f06)
+- 🐞 修复 Menu 触发两次 click 事件的问题 [#2266](https://github.com/vueComponent/ant-design-vue/issues/2266)
+- 🐞 修复 Menu active 类名没有添加问题 [ffc002](https://github.com/vueComponent/ant-design-vue/commit/ffc002f09454a56b531aeb08530303d566cf24f2)
+- 🌟 TreeSelect 添加自定义数据字段功能 [#2253](https://github.com/vueComponent/ant-design-vue/issues/2253)
+- 🌟 Modal 新增 dialogStyle、dialogClass 代替重构前的 style、class [#2285](https://github.com/vueComponent/ant-design-vue/issues/2285)
+- 🐞 修复 Table 排序触发无限更新问题 [#2270](https://github.com/vueComponent/ant-design-vue/issues/2270)
+
 ## 1.6.0
 
 `2020-05-15`

@@ -10,6 +10,18 @@
 
 ---
 
+## 1.6.1
+
+`2020-05-25`
+
+- 🐞 Fix the problem of filling the current time when DatePicker blur [#2246](https://github.com/vueComponent/ant-design-vue/issues/2246)
+- 🐞 Fix Drawer error when destroying [#2254](https://github.com/vueComponent/ant-design-vue/issues/2254)
+- 🐞 Fix Tabs cannot remove tabs with 0 as key [55bbf9](https://github.com/vueComponent/ant-design-vue/commit/55bbf940401cf2a67114102da1c035abc4152f06)
+- 🐞 Fix Menu trigger twice click event [#2266](https://github.com/vueComponent/ant-design-vue/issues/2266)
+- 🐞 Fix Menu active class name is not added [ffc002](https://github.com/vueComponent/ant-design-vue/commit/ffc002f09454a56b531aeb08530303d566cf24f2)
+- 🌟 TreeSelect add custom data field function [#2253](https://github.com/vueComponent/ant-design-vue/issues/2253)
+- 🌟 Modal added dialogStyle and dialogClass instead of style and class before refactoring [#2285](https://github.com/vueComponent/ant-design-vue/issues/2285)
+- 🐞 Fix Table sorting trigger infinite update issue [#2270](https://github.com/vueComponent/ant-design-vue/issues/2270)
 
 ## 1.6.0
 

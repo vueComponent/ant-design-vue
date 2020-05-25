@@ -114,7 +114,6 @@ const CalendarPart = {
         value={value}
         showClear={showClear || false}
         selectedValue={selectedValue[index]}
-        onChange={inputSelect}
         onChange={inputChange}
         onSelect={inputSelect}
         clearIcon={clearIcon}

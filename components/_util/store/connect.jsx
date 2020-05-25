@@ -80,7 +80,6 @@ export default function connect(mapStateToProps) {
         },
       },
       render() {
-        this.preProps = { ...this.$props };
         const { $slots = {}, $scopedSlots, subscribed, store } = this;
         const props = getOptionProps(this);
         this.preProps = { ...omit(props, ['__propsSymbol__']) };

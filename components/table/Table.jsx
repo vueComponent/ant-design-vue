@@ -867,7 +867,7 @@ export default {
       }
 
       const extra = {
-        currentDataSource: this.getLocalData(state),
+        currentDataSource: []//this.getLocalData(state),// 这里应该是冗余的
       };
 
       return [pagination, filters, sorter, extra];
@@ -1171,7 +1171,7 @@ export default {
       transformCellText,
     }) {
       const { showHeader, locale, getPopupContainer, ...restProps } = getOptionProps(this);
-      const data = this.getCurrentPageData();
+      const data = this.filterCurrentPageData;
       const expandIconAsCell = this.expandedRowRender && this.expandIconAsCell !== false;
 
       // use props.getPopupContainer first
@@ -1242,6 +1242,7 @@ export default {
       transformCellText: customizeTransformCellText,
     } = this;
     const data = this.getCurrentPageData();
+    this.filterCurrentPageData = data;   // 当前页过滤后数据，变量不能放到 data 里面，否则会导致无限循环，这里直接赋值即可
     const {
       getPopupContainer: getContextPopupContainer,
       transformCellText: tct,

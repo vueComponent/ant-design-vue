@@ -954,11 +954,7 @@ exports[`Locale Provider should display the text as ar 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -1382,11 +1378,7 @@ exports[`Locale Provider should display the text as bg 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -1810,11 +1802,7 @@ exports[`Locale Provider should display the text as ca 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -2238,11 +2226,7 @@ exports[`Locale Provider should display the text as cs 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -2666,11 +2650,7 @@ exports[`Locale Provider should display the text as da 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -3094,11 +3074,7 @@ exports[`Locale Provider should display the text as de 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -3522,11 +3498,7 @@ exports[`Locale Provider should display the text as el 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -3950,11 +3922,7 @@ exports[`Locale Provider should display the text as en 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -4378,11 +4346,7 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -4806,11 +4770,7 @@ exports[`Locale Provider should display the text as es 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -5234,11 +5194,7 @@ exports[`Locale Provider should display the text as et 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -5662,11 +5618,7 @@ exports[`Locale Provider should display the text as fa 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -6090,11 +6042,7 @@ exports[`Locale Provider should display the text as fi 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -6518,11 +6466,7 @@ exports[`Locale Provider should display the text as fr 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -6946,11 +6890,7 @@ exports[`Locale Provider should display the text as fr 2`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -7374,11 +7314,7 @@ exports[`Locale Provider should display the text as he 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -7802,11 +7738,7 @@ exports[`Locale Provider should display the text as hi 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -7895,305 +7827,12 @@ exports[`Locale Provider should display the text as hr 1`] = `
           <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
         </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
       </div>
-<<<<<<< HEAD
     </div>
     <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
           <div title="ruj." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">ruj.</div>
         </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
-=======
-      <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
-          <div class="ant-select-selection__rendered">
-            <div title="ruj." class="ant-select-selection-selected-value" style="display: block; opacity: 1;">ruj.</div>
-          </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="ikona: down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
-        </div>
-      </div>
-      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Mjesec</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Godina</span></label></div>
-    </div>
-    <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
-      <div class="ant-fullcalendar-calendar-body">
-        <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
-          <thead>
-            <tr role="row">
-              <th role="columnheader" title="pon." class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">po</span></th>
-              <th role="columnheader" title="uto." class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">ut</span></th>
-              <th role="columnheader" title="sri." class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">sr</span></th>
-              <th role="columnheader" title="čet." class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">če</span></th>
-              <th role="columnheader" title="pet." class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">pe</span></th>
-              <th role="columnheader" title="sub." class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">su</span></th>
-              <th role="columnheader" title="ned." class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">ne</span></th>
-            </tr>
-          </thead>
-          <tbody class="ant-fullcalendar-tbody">
-            <tr role="row" class="">
-              <td role="gridcell" title="28. kolovoza 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">28</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="29. kolovoza 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">29</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="30. kolovoza 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">30</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="31. kolovoza 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">31</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="1. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">01</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="2. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">02</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="3. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">03</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="4. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">04</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="5. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">05</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="6. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">06</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="7. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">07</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="8. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">08</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="9. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">09</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="10. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">10</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="11. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">11</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="12. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">12</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="13. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">13</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="14. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">14</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="15. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">15</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="16. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">16</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="17. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">17</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
-              <td role="gridcell" title="18. rujna 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">18</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="19. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">19</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="20. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">20</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="21. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">21</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="22. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">22</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="23. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">23</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="24. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">24</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="25. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">25</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="26. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">26</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="27. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">27</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="28. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">28</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="29. rujna 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">29</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="30. rujna 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">30</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="1. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">01</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="2. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">02</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="3. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">03</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="4. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">04</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="5. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">05</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="6. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">06</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="7. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">07</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="8. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">08</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
->>>>>>> origin/master
       </div>
     </div>
     <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Mjesec</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Godina</span></label></div>
@@ -8214,43 +7853,43 @@ exports[`Locale Provider should display the text as hr 1`] = `
         </thead>
         <tbody class="ant-fullcalendar-tbody">
           <tr role="row" class="">
-            <td role="gridcell" title="28. kolovoz 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="28. kolovoza 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">28</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="29. kolovoz 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="29. kolovoza 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">29</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="30. kolovoz 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="30. kolovoza 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">30</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="31. kolovoz 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
+            <td role="gridcell" title="31. kolovoza 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">31</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="1. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="1. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">01</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="2. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="2. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">02</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="3. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="3. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">03</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -8258,43 +7897,43 @@ exports[`Locale Provider should display the text as hr 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="4. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="4. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">04</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="5. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="5. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">05</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="6. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="6. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">06</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="7. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="7. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">07</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="8. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="8. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">08</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="9. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="9. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">09</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="10. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="10. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">10</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -8302,43 +7941,43 @@ exports[`Locale Provider should display the text as hr 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="11. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="11. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">11</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="12. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="12. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">12</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="13. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="13. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">13</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="14. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="14. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">14</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="15. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="15. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">15</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="16. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="16. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">16</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="17. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="17. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">17</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -8346,43 +7985,43 @@ exports[`Locale Provider should display the text as hr 1`] = `
             </td>
           </tr>
           <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
-            <td role="gridcell" title="18. rujan 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
+            <td role="gridcell" title="18. rujna 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">18</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="19. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="19. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">19</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="20. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="20. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">20</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="21. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="21. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">21</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="22. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="22. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">22</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="23. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="23. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">23</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="24. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="24. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">24</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -8390,43 +8029,43 @@ exports[`Locale Provider should display the text as hr 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="25. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="25. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">25</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="26. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="26. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">26</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="27. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="27. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">27</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="28. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="28. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">28</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="29. rujan 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="29. rujna 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">29</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="30. rujan 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
+            <td role="gridcell" title="30. rujna 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">30</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="1. listopad 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="1. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">01</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -8434,43 +8073,43 @@ exports[`Locale Provider should display the text as hr 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="2. listopad 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="2. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">02</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="3. listopad 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="3. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">03</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="4. listopad 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="4. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">04</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="5. listopad 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="5. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">05</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="6. listopad 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="6. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">06</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="7. listopad 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="7. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">07</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="8. listopad 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="8. listopada 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">08</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -8523,11 +8162,7 @@ exports[`Locale Provider should display the text as hr 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -8951,11 +8586,7 @@ exports[`Locale Provider should display the text as hu 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -9379,11 +9010,7 @@ exports[`Locale Provider should display the text as hy 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -9472,305 +9099,12 @@ exports[`Locale Provider should display the text as id 1`] = `
           <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
         </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
       </div>
-<<<<<<< HEAD
     </div>
     <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
           <div title="Sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Sep</div>
         </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
-=======
-      <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
-          <div class="ant-select-selection__rendered">
-            <div title="Sep" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Sep</div>
-          </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
-        </div>
-      </div>
-      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Bulan</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Tahun</span></label></div>
-    </div>
-    <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
-      <div class="ant-fullcalendar-calendar-body">
-        <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
-          <thead>
-            <tr role="row">
-              <th role="columnheader" title="Min" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Mg</span></th>
-              <th role="columnheader" title="Sen" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Sn</span></th>
-              <th role="columnheader" title="Sel" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Sl</span></th>
-              <th role="columnheader" title="Rab" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Rb</span></th>
-              <th role="columnheader" title="Kam" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Km</span></th>
-              <th role="columnheader" title="Jum" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Jm</span></th>
-              <th role="columnheader" title="Sab" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Sb</span></th>
-            </tr>
-          </thead>
-          <tbody class="ant-fullcalendar-tbody">
-            <tr role="row" class="">
-              <td role="gridcell" title="27 Agustus 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">27</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="28 Agustus 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">28</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="29 Agustus 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">29</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="30 Agustus 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">30</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="31 Agustus 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">31</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="1 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">01</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="2 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">02</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="3 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">03</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="4 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">04</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="5 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">05</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="6 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">06</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="7 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">07</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="8 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">08</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="9 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">09</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="10 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">10</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="11 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">11</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="12 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">12</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="13 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">13</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="14 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">14</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="15 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">15</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="16 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">16</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
-              <td role="gridcell" title="17 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">17</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="18 September 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">18</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="19 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">19</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="20 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">20</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="21 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">21</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="22 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">22</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="23 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">23</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="24 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">24</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="25 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">25</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="26 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">26</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="27 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">27</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="28 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">28</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="29 September 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">29</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="30 September 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">30</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="1 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">01</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="2 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">02</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="3 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">03</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="4 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">04</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="5 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">05</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="6 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">06</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="7 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">07</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
->>>>>>> origin/master
       </div>
     </div>
     <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Bulan</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Tahun</span></label></div>
@@ -9780,17 +9114,23 @@ exports[`Locale Provider should display the text as id 1`] = `
       <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
         <thead>
           <tr role="row">
+            <th role="columnheader" title="Min" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Mg</span></th>
             <th role="columnheader" title="Sen" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Sn</span></th>
             <th role="columnheader" title="Sel" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Sl</span></th>
             <th role="columnheader" title="Rab" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Rb</span></th>
             <th role="columnheader" title="Kam" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Km</span></th>
             <th role="columnheader" title="Jum" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Jm</span></th>
             <th role="columnheader" title="Sab" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Sb</span></th>
-            <th role="columnheader" title="Min" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Mg</span></th>
           </tr>
         </thead>
         <tbody class="ant-fullcalendar-tbody">
           <tr role="row" class="">
+            <td role="gridcell" title="27 Agustus 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+              <div class="ant-fullcalendar-date">
+                <div class="ant-fullcalendar-value">27</div>
+                <div class="ant-fullcalendar-content"></div>
+              </div>
+            </td>
             <td role="gridcell" title="28 Agustus 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">28</div>
@@ -9827,14 +9167,14 @@ exports[`Locale Provider should display the text as id 1`] = `
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
+          </tr>
+          <tr role="row" class="">
             <td role="gridcell" title="3 September 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">03</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-          </tr>
-          <tr role="row" class="">
             <td role="gridcell" title="4 September 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">04</div>
@@ -9871,14 +9211,14 @@ exports[`Locale Provider should display the text as id 1`] = `
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
+          </tr>
+          <tr role="row" class="">
             <td role="gridcell" title="10 September 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">10</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-          </tr>
-          <tr role="row" class="">
             <td role="gridcell" title="11 September 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">11</div>
@@ -9915,14 +9255,14 @@ exports[`Locale Provider should display the text as id 1`] = `
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
+          </tr>
+          <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
             <td role="gridcell" title="17 September 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">17</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-          </tr>
-          <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
             <td role="gridcell" title="18 September 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">18</div>
@@ -9959,14 +9299,14 @@ exports[`Locale Provider should display the text as id 1`] = `
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
+          </tr>
+          <tr role="row" class="">
             <td role="gridcell" title="24 September 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">24</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-          </tr>
-          <tr role="row" class="">
             <td role="gridcell" title="25 September 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">25</div>
@@ -10003,14 +9343,14 @@ exports[`Locale Provider should display the text as id 1`] = `
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
+          </tr>
+          <tr role="row" class="">
             <td role="gridcell" title="1 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">01</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-          </tr>
-          <tr role="row" class="">
             <td role="gridcell" title="2 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">02</div>
@@ -10044,12 +9384,6 @@ exports[`Locale Provider should display the text as id 1`] = `
             <td role="gridcell" title="7 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">07</div>
-                <div class="ant-fullcalendar-content"></div>
-              </div>
-            </td>
-            <td role="gridcell" title="8 Oktober 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-              <div class="ant-fullcalendar-date">
-                <div class="ant-fullcalendar-value">08</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
@@ -10100,11 +9434,7 @@ exports[`Locale Provider should display the text as id 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -10528,11 +9858,7 @@ exports[`Locale Provider should display the text as is 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -10956,11 +10282,7 @@ exports[`Locale Provider should display the text as it 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -11384,11 +10706,7 @@ exports[`Locale Provider should display the text as ja 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -11812,11 +11130,7 @@ exports[`Locale Provider should display the text as kn 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -12240,11 +11554,7 @@ exports[`Locale Provider should display the text as ko 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -12668,11 +11978,7 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -13096,11 +12402,7 @@ exports[`Locale Provider should display the text as lv 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -13524,11 +12826,7 @@ exports[`Locale Provider should display the text as mk 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -13952,11 +13250,7 @@ exports[`Locale Provider should display the text as mn-mn 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -14380,11 +13674,7 @@ exports[`Locale Provider should display the text as ms-my 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -14808,11 +14098,7 @@ exports[`Locale Provider should display the text as nb 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -15236,11 +14522,7 @@ exports[`Locale Provider should display the text as ne-np 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -15664,11 +14946,7 @@ exports[`Locale Provider should display the text as nl 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -16092,11 +15370,7 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -16520,11 +15794,7 @@ exports[`Locale Provider should display the text as pl 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -16613,305 +15883,12 @@ exports[`Locale Provider should display the text as pt 1`] = `
           <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
         </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
       </div>
-<<<<<<< HEAD
     </div>
     <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
-          <div title="Set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Set</div>
+          <div title="set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set</div>
         </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
-=======
-      <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
-          <div class="ant-select-selection__rendered">
-            <div title="set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set</div>
-          </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
-        </div>
-      </div>
-      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Mês</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Ano</span></label></div>
-    </div>
-    <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
-      <div class="ant-fullcalendar-calendar-body">
-        <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
-          <thead>
-            <tr role="row">
-              <th role="columnheader" title="Seg" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">2ª</span></th>
-              <th role="columnheader" title="Ter" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">3ª</span></th>
-              <th role="columnheader" title="Qua" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">4ª</span></th>
-              <th role="columnheader" title="Qui" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">5ª</span></th>
-              <th role="columnheader" title="Sex" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">6ª</span></th>
-              <th role="columnheader" title="Sáb" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Sá</span></th>
-              <th role="columnheader" title="Dom" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Do</span></th>
-            </tr>
-          </thead>
-          <tbody class="ant-fullcalendar-tbody">
-            <tr role="row" class="">
-              <td role="gridcell" title="28 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">28</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="29 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">29</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="30 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">30</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="31 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">31</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="1 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">01</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="2 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">02</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="3 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">03</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="4 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">04</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="5 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">05</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="6 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">06</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="7 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">07</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="8 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">08</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="9 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">09</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="10 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">10</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="11 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">11</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="12 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">12</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="13 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">13</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="14 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">14</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="15 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">15</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="16 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">16</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="17 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">17</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
-              <td role="gridcell" title="18 de setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">18</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="19 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">19</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="20 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">20</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="21 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">21</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="22 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">22</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="23 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">23</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="24 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">24</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="25 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">25</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="26 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">26</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="27 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">27</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="28 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">28</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="29 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">29</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="30 de setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">30</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="1 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">01</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="2 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">02</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="3 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">03</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="4 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">04</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="5 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">05</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="6 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">06</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="7 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">07</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="8 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">08</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
->>>>>>> origin/master
       </div>
     </div>
     <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Mês</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Ano</span></label></div>
@@ -16932,43 +15909,43 @@ exports[`Locale Provider should display the text as pt 1`] = `
         </thead>
         <tbody class="ant-fullcalendar-tbody">
           <tr role="row" class="">
-            <td role="gridcell" title="28 de Agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="28 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">28</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="29 de Agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="29 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">29</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="30 de Agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="30 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">30</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="31 de Agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
+            <td role="gridcell" title="31 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">31</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="1 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="1 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">01</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="2 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="2 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">02</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="3 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="3 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">03</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -16976,43 +15953,43 @@ exports[`Locale Provider should display the text as pt 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="4 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="4 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">04</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="5 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="5 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">05</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="6 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="6 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">06</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="7 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="7 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">07</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="8 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="8 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">08</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="9 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="9 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">09</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="10 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="10 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">10</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -17020,43 +15997,43 @@ exports[`Locale Provider should display the text as pt 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="11 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="11 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">11</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="12 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="12 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">12</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="13 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="13 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">13</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="14 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="14 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">14</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="15 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="15 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">15</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="16 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="16 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">16</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="17 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="17 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">17</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -17064,43 +16041,43 @@ exports[`Locale Provider should display the text as pt 1`] = `
             </td>
           </tr>
           <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
-            <td role="gridcell" title="18 de Setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
+            <td role="gridcell" title="18 de setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">18</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="19 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="19 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">19</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="20 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="20 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">20</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="21 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="21 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">21</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="22 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="22 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">22</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="23 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="23 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">23</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="24 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="24 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">24</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -17108,43 +16085,43 @@ exports[`Locale Provider should display the text as pt 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="25 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="25 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">25</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="26 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="26 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">26</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="27 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="27 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">27</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="28 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="28 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">28</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="29 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="29 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">29</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="30 de Setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
+            <td role="gridcell" title="30 de setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">30</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="1 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="1 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">01</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -17152,43 +16129,43 @@ exports[`Locale Provider should display the text as pt 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="2 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="2 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">02</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="3 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="3 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">03</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="4 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="4 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">04</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="5 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="5 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">05</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="6 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="6 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">06</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="7 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="7 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">07</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="8 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="8 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">08</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -17241,11 +16218,7 @@ exports[`Locale Provider should display the text as pt 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -17334,305 +16307,12 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
           <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
         </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
       </div>
-<<<<<<< HEAD
     </div>
     <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
       <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
         <div class="ant-select-selection__rendered">
-          <div title="Set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Set</div>
+          <div title="set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set</div>
         </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
-=======
-      <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
-        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
-          <div class="ant-select-selection__rendered">
-            <div title="set" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">set</div>
-          </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
-        </div>
-      </div>
-      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Mês</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Ano</span></label></div>
-    </div>
-    <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
-      <div class="ant-fullcalendar-calendar-body">
-        <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
-          <thead>
-            <tr role="row">
-              <th role="columnheader" title="dom" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">do</span></th>
-              <th role="columnheader" title="seg" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">2ª</span></th>
-              <th role="columnheader" title="ter" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">3ª</span></th>
-              <th role="columnheader" title="qua" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">4ª</span></th>
-              <th role="columnheader" title="qui" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">5ª</span></th>
-              <th role="columnheader" title="sex" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">6ª</span></th>
-              <th role="columnheader" title="sáb" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">sá</span></th>
-            </tr>
-          </thead>
-          <tbody class="ant-fullcalendar-tbody">
-            <tr role="row" class="">
-              <td role="gridcell" title="27 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">27</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="28 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">28</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="29 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">29</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="30 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">30</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="31 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">31</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="1 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">01</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="2 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">02</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="3 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">03</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="4 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">04</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="5 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">05</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="6 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">06</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="7 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">07</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="8 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">08</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="9 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">09</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="10 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">10</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="11 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">11</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="12 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">12</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="13 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">13</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="14 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">14</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="15 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">15</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="16 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">16</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
-              <td role="gridcell" title="17 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">17</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="18 de setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">18</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="19 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">19</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="20 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">20</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="21 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">21</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="22 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">22</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="23 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">23</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="24 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">24</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="25 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">25</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="26 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">26</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="27 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">27</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="28 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">28</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="29 de setembro de 2017" class="ant-fullcalendar-cell">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">29</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="30 de setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">30</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-            <tr role="row" class="">
-              <td role="gridcell" title="1 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">01</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="2 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">02</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="3 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">03</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="4 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">04</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="5 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">05</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="6 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">06</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-              <td role="gridcell" title="7 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
-                <div class="ant-fullcalendar-date">
-                  <div class="ant-fullcalendar-value">07</div>
-                  <div class="ant-fullcalendar-content"></div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
->>>>>>> origin/master
       </div>
     </div>
     <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Mês</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Ano</span></label></div>
@@ -17642,54 +16322,54 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
       <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
         <thead>
           <tr role="row">
-            <th role="columnheader" title="Dom" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Do</span></th>
-            <th role="columnheader" title="Seg" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">2ª</span></th>
-            <th role="columnheader" title="Ter" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">3ª</span></th>
-            <th role="columnheader" title="Qua" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">4ª</span></th>
-            <th role="columnheader" title="Qui" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">5ª</span></th>
-            <th role="columnheader" title="Sex" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">6ª</span></th>
-            <th role="columnheader" title="Sáb" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">Sá</span></th>
+            <th role="columnheader" title="dom" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">do</span></th>
+            <th role="columnheader" title="seg" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">2ª</span></th>
+            <th role="columnheader" title="ter" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">3ª</span></th>
+            <th role="columnheader" title="qua" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">4ª</span></th>
+            <th role="columnheader" title="qui" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">5ª</span></th>
+            <th role="columnheader" title="sex" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">6ª</span></th>
+            <th role="columnheader" title="sáb" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">sá</span></th>
           </tr>
         </thead>
         <tbody class="ant-fullcalendar-tbody">
           <tr role="row" class="">
-            <td role="gridcell" title="27 de Agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="27 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">27</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="28 de Agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="28 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">28</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="29 de Agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="29 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">29</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="30 de Agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="30 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">30</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="31 de Agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
+            <td role="gridcell" title="31 de agosto de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">31</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="1 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="1 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">01</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="2 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="2 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">02</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -17697,43 +16377,43 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="3 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="3 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">03</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="4 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="4 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">04</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="5 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="5 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">05</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="6 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="6 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">06</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="7 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="7 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">07</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="8 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="8 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">08</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="9 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="9 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">09</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -17741,43 +16421,43 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="10 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="10 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">10</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="11 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="11 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">11</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="12 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="12 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">12</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="13 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="13 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">13</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="14 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="14 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">14</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="15 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="15 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">15</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="16 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="16 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">16</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -17785,43 +16465,43 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
             </td>
           </tr>
           <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
-            <td role="gridcell" title="17 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="17 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">17</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="18 de Setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
+            <td role="gridcell" title="18 de setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">18</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="19 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="19 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">19</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="20 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="20 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">20</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="21 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="21 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">21</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="22 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="22 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">22</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="23 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="23 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">23</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -17829,43 +16509,43 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="24 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="24 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">24</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="25 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="25 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">25</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="26 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="26 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">26</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="27 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="27 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">27</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="28 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="28 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">28</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="29 de Setembro de 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="29 de setembro de 2017" class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">29</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="30 de Setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
+            <td role="gridcell" title="30 de setembro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">30</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -17873,43 +16553,43 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
             </td>
           </tr>
           <tr role="row" class="">
-            <td role="gridcell" title="1 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="1 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">01</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="2 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="2 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">02</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="3 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="3 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">03</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="4 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="4 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">04</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="5 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="5 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">05</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="6 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="6 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">06</div>
                 <div class="ant-fullcalendar-content"></div>
               </div>
             </td>
-            <td role="gridcell" title="7 de Outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="7 de outubro de 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">07</div>
                 <div class="ant-fullcalendar-content"></div>
@@ -17962,11 +16642,7 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -18390,11 +17066,7 @@ exports[`Locale Provider should display the text as ro 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -18818,11 +17490,7 @@ exports[`Locale Provider should display the text as ru 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -19246,11 +17914,7 @@ exports[`Locale Provider should display the text as sk 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -19674,11 +18338,7 @@ exports[`Locale Provider should display the text as sl 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -20102,11 +18762,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -20530,11 +19186,7 @@ exports[`Locale Provider should display the text as sv 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -20958,11 +19610,7 @@ exports[`Locale Provider should display the text as ta 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -21386,11 +20034,7 @@ exports[`Locale Provider should display the text as th 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -21814,11 +20458,7 @@ exports[`Locale Provider should display the text as tr 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -22242,11 +20882,7 @@ exports[`Locale Provider should display the text as uk 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -22670,11 +21306,7 @@ exports[`Locale Provider should display the text as vi 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -23098,11 +21730,7 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;
 
@@ -23526,10 +22154,6 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
   </div>
 </div>
 </div>
-<<<<<<< HEAD
 </div>
-<!---->
-=======
->>>>>>> origin/master
 </div>
 `;

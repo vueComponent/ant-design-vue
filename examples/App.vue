@@ -3,7 +3,7 @@
     <div><h4>v-model: <input v-model="color" type="text"></h4><a-color-picker v-model="color" style="width:130px" @show="changeHandler" /></div>
     <div><h4>v-model:{{ color }}</h4><a-color-picker v-model="color" style="width:130px" @show="changeHandler" /></div>
     <div><h4>备选颜色</h4><a-color-picker :config="config1" /></div>
-    <div><h4>多种输入格式</h4><a-color-picker :config="config2" :getPopupContainer="node=>node.parentNode" /></div>
+    <div><h4>多种输入格式</h4><a-color-picker :config="config2" :get-popup-container="node=>node.parentNode" /></div>
     <div><h4>多种尺寸</h4><a-color-picker size="large" /></div>
     <div><a-color-picker size="small" /></div>
   </div>

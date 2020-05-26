@@ -39,6 +39,11 @@ export default {
       pickr: null,
     };
   },
+  watch: {
+    value(val) {
+      this.setColor(val);
+    },
+  },
   mounted() {
     this.createPickr();
     this.eventsBinding();
@@ -46,14 +51,9 @@ export default {
   destroyed() {
     this.pickr.destroyAndRemove();
   },
-  watch: {
-    value(val) {
-      this.setColor(val);
-    }
-  },
   methods: {
     setColor: debounce(function(val){
-      this.pickr.setColor(val)
+      this.pickr.setColor(val);
     }, 1000),
     eventsBinding() {
       const pickrEvents = [

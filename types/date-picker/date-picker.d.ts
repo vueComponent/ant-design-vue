@@ -19,7 +19,7 @@ export declare class DatePicker extends DatepickerCommon {
    * @default undefined
    * @type Moment
    */
-  defaultValue: Moment;
+  defaultValue: Moment | string;
 
   /**
    * Default Picker Value
@@ -27,7 +27,7 @@ export declare class DatePicker extends DatepickerCommon {
    * @default undefined
    * @type Moment
    */
-  defaultPickerValue: Moment;
+  defaultPickerValue: Moment | string;
 
   /**
    * Disabled Time
@@ -77,5 +77,5 @@ export declare class DatePicker extends DatepickerCommon {
    * @default undefined
    * @type Moment
    */
-  value: Moment;
+  value: Moment | string;
 }

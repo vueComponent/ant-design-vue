@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
 
       - name: cache package-lock.json
         uses: actions/cache@v1
@@ -40,10 +40,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
-          submodules: true
+
+      - name: Checkout submodules
+        uses: actions/checkout@v2
+        with:
+          repository: tangjinzhou/antdv-demo
+          token: ${{ secrets.ACCESS_TOKEN }}
+          path: antdv-demo
 
       - name: restore cache from package-lock.json
         uses: actions/cache@v1
@@ -66,6 +72,5 @@ jobs:
         uses: codecov/codecov-action@v1
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          
-    needs: setup
 
+    needs: setup

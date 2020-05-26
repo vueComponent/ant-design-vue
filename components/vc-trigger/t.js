@@ -5,7 +5,7 @@ import contains from '../vc-util/Dom/contains';
 import {
   hasProp,
   getComponentFromProp,
-  getDataEvents,
+  getEvents,
   filterEmpty,
   getListeners,
 } from '../_util/props-util';
@@ -16,7 +16,7 @@ import Popup from './Popup';
 import { getAlignFromPlacement, getAlignPopupClassName, noop } from './utils';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
-import ContainerRender from '../_util/ContainerRender';
+import Portal from '../_util/Portal';
 
 Vue.use(ref, { name: 'ant-ref' });
 
@@ -118,19 +118,11 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      this.renderComponent(null);
       this.updatedCal();
     });
   },
 
   updated() {
-    const triggerAfterPopupVisibleChange = () => {
-      if (this.sPopupVisible !== this.prevPopupVisible) {
-        this.afterPopupVisibleChange(this.sPopupVisible);
-      }
-      this.prevPopupVisible = this.sPopupVisible;
-    };
-    this.renderComponent(null, triggerAfterPopupVisibleChange);
     this.$nextTick(() => {
       this.updatedCal();
     });
@@ -482,7 +474,11 @@ export default {
         },
       });
     },
-
+    handlePortalUpdate() {
+      if (this.prevPopupVisible !== this.sPopupVisible) {
+        this.afterPopupVisibleChange(this.sPopupVisible);
+      }
+    },
     delaySetPopupVisible(visible, delayS, event) {
       const delay = delayS * 1000;
       this.clearDelayTimer();
@@ -595,69 +591,75 @@ export default {
       warning(false, 'Trigger $slots.default.length > 1, just support only one default', true);
     }
     const child = children[0];
-    this.childOriginEvents = getDataEvents(child);
+    this.childOriginEvents = getEvents(child);
     const newChildProps = {
       props: {},
-      nativeOn: {},
+      on: {},
       key: 'trigger',
     };
 
     if (this.isContextmenuToShow()) {
-      newChildProps.nativeOn.contextmenu = this.onContextmenu;
+      newChildProps.on.contextmenu = this.onContextmenu;
     } else {
-      newChildProps.nativeOn.contextmenu = this.createTwoChains('contextmenu');
+      newChildProps.on.contextmenu = this.createTwoChains('contextmenu');
     }
 
     if (this.isClickToHide() || this.isClickToShow()) {
-      newChildProps.nativeOn.click = this.onClick;
-      newChildProps.nativeOn.mousedown = this.onMousedown;
-      newChildProps.nativeOn.touchstart = this.onTouchstart;
+      newChildProps.on.click = this.onClick;
+      newChildProps.on.mousedown = this.onMousedown;
+      newChildProps.on.touchstart = this.onTouchstart;
     } else {
-      newChildProps.nativeOn.click = this.createTwoChains('click');
-      newChildProps.nativeOn.mousedown = this.createTwoChains('mousedown');
-      newChildProps.nativeOn.touchstart = this.createTwoChains('onTouchstart');
+      newChildProps.on.click = this.createTwoChains('click');
+      newChildProps.on.mousedown = this.createTwoChains('mousedown');
+      newChildProps.on.touchstart = this.createTwoChains('onTouchstart');
     }
     if (this.isMouseEnterToShow()) {
-      newChildProps.nativeOn.mouseenter = this.onMouseenter;
+      newChildProps.on.mouseenter = this.onMouseenter;
       if (alignPoint) {
-        newChildProps.nativeOn.mousemove = this.onMouseMove;
+        newChildProps.on.mousemove = this.onMouseMove;
       }
     } else {
-      newChildProps.nativeOn.mouseenter = this.createTwoChains('mouseenter');
+      newChildProps.on.mouseenter = this.createTwoChains('mouseenter');
     }
     if (this.isMouseLeaveToHide()) {
-      newChildProps.nativeOn.mouseleave = this.onMouseleave;
+      newChildProps.on.mouseleave = this.onMouseleave;
     } else {
-      newChildProps.nativeOn.mouseleave = this.createTwoChains('mouseleave');
+      newChildProps.on.mouseleave = this.createTwoChains('mouseleave');
     }
 
     if (this.isFocusToShow() || this.isBlurToHide()) {
-      newChildProps.nativeOn.focus = this.onFocus;
-      newChildProps.nativeOn.blur = this.onBlur;
+      newChildProps.on.focus = this.onFocus;
+      newChildProps.on.blur = this.onBlur;
     } else {
-      newChildProps.nativeOn.focus = this.createTwoChains('focus');
-      newChildProps.nativeOn.blur = e => {
+      newChildProps.on.focus = this.createTwoChains('focus');
+      newChildProps.on.blur = e => {
         if (e && (!e.relatedTarget || !contains(e.target, e.relatedTarget))) {
           this.createTwoChains('blur')(e);
         }
       };
     }
 
-    this.trigger = cloneElement(child, newChildProps);
-
-    return (
-      <ContainerRender
-        parent={this}
-        visible={sPopupVisible}
-        autoMount={false}
-        forceRender={forceRender}
-        getComponent={this.getComponent}
-        getContainer={this.getContainer}
-        children={({ renderComponent }) => {
-          this.renderComponent = renderComponent;
-          return this.trigger;
-        }}
-      />
-    );
+    const trigger = cloneElement(child, newChildProps);
+    let portal;
+    // prevent unmounting after it's rendered
+    if (sPopupVisible || this._component || forceRender) {
+      portal = (
+        <Portal
+          key="portal"
+          children={this.getComponent()}
+          getContainer={this.getContainer}
+          didUpdate={this.handlePortalUpdate}
+        ></Portal>
+      );
+    }
+    return portal
+      ? cloneElement(trigger, {
+          children: [
+            ...((trigger.componentOptions ? trigger.componentOptions.children : trigger.children) ||
+              []),
+            portal,
+          ],
+        })
+      : trigger;
   },
 };

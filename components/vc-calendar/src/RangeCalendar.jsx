@@ -119,6 +119,7 @@ const RangeCalendar = {
     renderSidebar: PropTypes.func.def(() => null),
     dateRender: PropTypes.func,
     clearIcon: PropTypes.any,
+    inputReadOnly: PropTypes.bool,
   },
 
   mixins: [BaseMixin, CommonMixin],
@@ -434,7 +435,7 @@ const RangeCalendar = {
       const newValue = [sValue[0], value || sValue[1]];
       this.__emit('panelChange', newValue, newMode);
       const newState = {
-        sPanelTriggerSource: 'start',
+        sPanelTriggerSource: 'end',
       };
       if (!hasProp(this, 'mode')) {
         newState.sMode = newMode;
@@ -493,7 +494,7 @@ const RangeCalendar = {
       // Adjust month if date not align
       if (
         !showTimePicker &&
-        panelTriggerSource !== 'end' &&
+        panelTriggerSource === 'start' &&
         mode[0] === 'date' &&
         mode[1] === 'date' &&
         endValue.isSame(value[0], 'month')

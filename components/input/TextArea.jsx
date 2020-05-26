@@ -28,7 +28,7 @@ export default {
   data() {
     const value = typeof this.value === 'undefined' ? this.defaultValue : this.value;
     return {
-      stateValue: value,
+      stateValue: typeof value === 'undefined' ? '' : value,
     };
   },
   computed: {},
@@ -52,7 +52,9 @@ export default {
           callback && callback();
         });
       } else {
-        this.$forceUpdate();
+        // 不在严格受控
+        // https://github.com/vueComponent/ant-design-vue/issues/2207，modal 是 新 new 实例，更新队列和当前不在同一个更新队列中
+        // this.$forceUpdate();
       }
     },
     handleKeyDown(e) {
@@ -68,7 +70,7 @@ export default {
     },
     handleChange(e) {
       const { value, composing } = e.target;
-      if (composing || this.stateValue === value) return;
+      if (((e.isComposing || composing) && this.lazy) || this.stateValue === value) return;
 
       this.setValue(e.target.value, () => {
         this.$refs.resizableTextArea.resizeTextarea();

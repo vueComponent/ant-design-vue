@@ -158,6 +158,7 @@ export default {
       sPagination: this.getDefaultPagination(this.$props),
       pivot: undefined,
       sComponents: createComponents(this.components),
+      filterDataCnt: 0
     };
   },
   watch: {
@@ -376,6 +377,7 @@ export default {
 
     getCurrentPageData() {
       let data = this.getLocalData();
+      this.filterDataCnt = data.length;
       let current;
       let pageSize;
       const sPagination = this.sPagination;
@@ -417,7 +419,9 @@ export default {
       data = data.slice(0);
       const sorterFn = this.getSorterFn(currentState);
       if (sorterFn) {
-        data = this.recursiveSort(data, sorterFn);
+        // 使用新数组，避免改变原数组导致无限循环更新
+        // https://github.com/vueComponent/ant-design-vue/issues/2270
+        data = this.recursiveSort([...data], sorterFn);
       }
       // 筛选
       if (filter && filters) {
@@ -886,7 +890,7 @@ export default {
         item[childrenColumnName]
           ? {
               ...item,
-              [childrenColumnName]: this.recursiveSort(item[childrenColumnName], sorterFn),
+              [childrenColumnName]: this.recursiveSort([...item[childrenColumnName]], sorterFn),
             }
           : item,
       );
@@ -933,7 +937,7 @@ export default {
         size = 'small';
       }
       const position = pagination.position || 'bottom';
-      const total = pagination.total || this.getLocalData().length;
+      const total = pagination.total || this.filterDataCnt;
       const { class: cls, style, onChange, onShowSizeChange, ...restProps } = pagination; // eslint-disable-line
       const paginationProps = mergeProps({
         key: `pagination-${paginationPosition}`,

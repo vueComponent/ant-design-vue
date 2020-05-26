@@ -9,6 +9,7 @@ import interopDefault from '../_util/interopDefault';
 import { ConfigConsumerProps } from '../config-provider';
 import enUS from './locale/en_US';
 import Base from '../base';
+import { checkValidate, stringToMoment, momentToString, TimeType } from '../_util/moment-util';
 
 function noop() {
   return null;
@@ -20,12 +21,6 @@ function zerofixed(v) {
   }
   return `${v}`;
 }
-export const MomentType = {
-  type: Object,
-  validator(value) {
-    return moment.isMoment(value);
-  },
-};
 function isMomentArray(value) {
   return Array.isArray(value) && !!value.find(val => moment.isMoment(val));
 }
@@ -33,8 +28,8 @@ export const CalendarMode = PropTypes.oneOf(['month', 'year']);
 
 export const CalendarProps = () => ({
   prefixCls: PropTypes.string,
-  value: MomentType,
-  defaultValue: MomentType,
+  value: TimeType,
+  defaultValue: TimeType,
   mode: CalendarMode,
   fullscreen: PropTypes.bool,
   // dateCellRender: PropTypes.func,
@@ -47,6 +42,7 @@ export const CalendarProps = () => ({
   disabledDate: PropTypes.func,
   validRange: PropTypes.custom(isMomentArray),
   headerRender: PropTypes.func,
+  valueFormat: PropTypes.string,
 });
 
 const Calendar = {
@@ -64,20 +60,21 @@ const Calendar = {
     configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
-    const value = this.value || this.defaultValue || interopDefault(moment)();
-    if (!interopDefault(moment).isMoment(value)) {
-      throw new Error('The value/defaultValue of Calendar must be a moment object, ');
-    }
+    const { value, defaultValue, valueFormat } = this;
+    const sValue = value || defaultValue || interopDefault(moment)();
+    checkValidate('Calendar', defaultValue, 'defaultValue', valueFormat);
+    checkValidate('Calendar', value, 'value', valueFormat);
     this._sPrefixCls = undefined;
     return {
-      sValue: value,
+      sValue: stringToMoment(sValue, valueFormat),
       sMode: this.mode || 'month',
     };
   },
   watch: {
     value(val) {
+      checkValidate('Calendar', val, 'value', this.valueFormat);
       this.setState({
-        sValue: val,
+        sValue: stringToMoment(val, this.valueFormat),
       });
     },
     mode(val) {
@@ -95,9 +92,10 @@ const Calendar = {
       this.onPanelChange(this.sValue, mode);
     },
     onPanelChange(value, mode) {
-      this.$emit('panelChange', value, mode);
+      const val = this.valueFormat ? momentToString(value, this.valueFormat) : value;
+      this.$emit('panelChange', val, mode);
       if (value !== this.sValue) {
-        this.$emit('change', value);
+        this.$emit('change', val);
       }
     },
 
@@ -105,8 +103,8 @@ const Calendar = {
       this.setValue(value, 'select');
     },
     setValue(value, way) {
-      const prevValue = this.value || this.sValue;
-      const { sMode: mode } = this;
+      const prevValue = this.value ? stringToMoment(this.value, this.valueFormat) : this.sValue;
+      const { sMode: mode, valueFormat } = this;
       if (!hasProp(this, 'value')) {
         this.setState({ sValue: value });
       }
@@ -114,7 +112,7 @@ const Calendar = {
         if (prevValue && prevValue.month() !== value.month()) {
           this.onPanelChange(value, mode);
         }
-        this.$emit('select', value);
+        this.$emit('select', valueFormat ? momentToString(value, valueFormat) : value);
       } else if (way === 'changePanel') {
         this.onPanelChange(value, mode);
       }

@@ -4,18 +4,50 @@ exports[`renders ./antdv-demo/docs/tag/demo/basic.md correctly 1`] = `<div><span
 
 exports[`renders ./antdv-demo/docs/tag/demo/checkable.md correctly 1`] = `
 <div>
-  <div class="ant-tag ant-tag-checkable">Tag1</div>
-  <div class="ant-tag ant-tag-checkable">Tag2</div>
-  <div class="ant-tag ant-tag-checkable">Tag3</div>
+  <div class="ant-tag ant-tag-checkable">
+    Tag1
+  </div>
+  <div class="ant-tag ant-tag-checkable">
+    Tag2
+  </div>
+  <div class="ant-tag ant-tag-checkable">
+    Tag3
+  </div>
 </div>
 `;
 
 exports[`renders ./antdv-demo/docs/tag/demo/colorful.md correctly 1`] = `
 <div>
-  <h4 style="margin-bottom: 16px;">Presets:</h4>
-  <div><span class="ant-tag ant-tag-pink">pink</span> <span class="ant-tag ant-tag-red">red</span> <span class="ant-tag ant-tag-orange">orange</span> <span class="ant-tag ant-tag-green">green</span> <span class="ant-tag ant-tag-cyan">cyan</span> <span class="ant-tag ant-tag-blue">blue</span> <span class="ant-tag ant-tag-purple">purple</span></div>
-  <h4>Custom:</h4>
-  <div><span class="ant-tag ant-tag-has-color" style="background-color: rgb(255, 85, 0);">#f50</span> <span class="ant-tag ant-tag-has-color" style="background-color: rgb(45, 183, 245);">#2db7f5</span> <span class="ant-tag ant-tag-has-color" style="background-color: rgb(135, 208, 104);">#87d068</span> <span class="ant-tag ant-tag-has-color" style="background-color: rgb(16, 142, 233);">#108ee9</span></div>
+  <h4 style="margin-bottom: 16px;">
+    Presets:
+  </h4>
+  <div><span class="ant-tag ant-tag-pink">
+      pink
+    </span> <span class="ant-tag ant-tag-red">
+      red
+    </span> <span class="ant-tag ant-tag-orange">
+      orange
+    </span> <span class="ant-tag ant-tag-green">
+      green
+    </span> <span class="ant-tag ant-tag-cyan">
+      cyan
+    </span> <span class="ant-tag ant-tag-blue">
+      blue
+    </span> <span class="ant-tag ant-tag-purple">
+      purple
+    </span></div>
+  <h4>
+    Custom:
+  </h4>
+  <div><span class="ant-tag ant-tag-has-color" style="background-color: rgb(255, 85, 0);">
+      #f50
+    </span> <span class="ant-tag ant-tag-has-color" style="background-color: rgb(45, 183, 245);">
+      #2db7f5
+    </span> <span class="ant-tag ant-tag-has-color" style="background-color: rgb(135, 208, 104);">
+      #87d068
+    </span> <span class="ant-tag ant-tag-has-color" style="background-color: rgb(16, 142, 233);">
+      #108ee9
+    </span></div>
 </div>
 `;
 

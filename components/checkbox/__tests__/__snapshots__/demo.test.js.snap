@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/checkbox/demo/basic.md correctly 1`] = `<label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>Checkbox</span></label>`;
+exports[`renders ./antdv-demo/docs/checkbox/demo/basic.md correctly 1`] = `
+<label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>
+  Checkbox
+</span></label>
+`;
 
 exports[`renders ./antdv-demo/docs/checkbox/demo/check-all.md correctly 1`] = `
 <div>
@@ -34,11 +38,21 @@ exports[`renders ./antdv-demo/docs/checkbox/demo/group.md correctly 1`] = `
 exports[`renders ./antdv-demo/docs/checkbox/demo/layout.md correctly 1`] = `
 <div class="ant-checkbox-group">
   <div class="ant-row">
-    <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="A"><span class="ant-checkbox-inner"></span></span><span>A</span></label></div>
-    <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="B"><span class="ant-checkbox-inner"></span></span><span>B</span></label></div>
-    <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="C"><span class="ant-checkbox-inner"></span></span><span>C</span></label></div>
-    <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="D"><span class="ant-checkbox-inner"></span></span><span>D</span></label></div>
-    <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="E"><span class="ant-checkbox-inner"></span></span><span>E</span></label></div>
+    <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="A"><span class="ant-checkbox-inner"></span></span><span>
+        A
+      </span></label></div>
+    <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="B"><span class="ant-checkbox-inner"></span></span><span>
+        B
+      </span></label></div>
+    <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="C"><span class="ant-checkbox-inner"></span></span><span>
+        C
+      </span></label></div>
+    <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="D"><span class="ant-checkbox-inner"></span></span><span>
+        D
+      </span></label></div>
+    <div class="ant-col ant-col-8"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="E"><span class="ant-checkbox-inner"></span></span><span>
+        E
+      </span></label></div>
   </div>
 </div>
 `;

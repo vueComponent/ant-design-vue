@@ -222,6 +222,8 @@ export declare class TreeSelect extends AntdComponent {
 
   clearIcon?: any;
 
+  replaceFields: object;
+
   /**
    * remove focus
    */

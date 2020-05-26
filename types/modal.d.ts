@@ -105,6 +105,9 @@ export interface ModalOptions {
    */
   zIndex?: number;
 
+  dialogStyle?: object;
+  dialogClass?: string;
+
   /**
    * Specify a function that will be called when the user clicks the Cancel button.
    * The parameter of this function is a function whose execution should include closing the dialog.

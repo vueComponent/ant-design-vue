@@ -222,7 +222,8 @@ const Menu = {
     const { layoutSiderContext, $slots } = this;
     const { collapsedWidth } = layoutSiderContext;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
-    const { prefixCls: customizePrefixCls, theme, getPopupContainer } = this.$props;
+    const props = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, theme, getPopupContainer } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('menu', customizePrefixCls);
     const menuMode = this.getRealMenuMode();
@@ -235,7 +236,7 @@ const Menu = {
 
     const menuProps = {
       props: {
-        ...omit(this.$props, ['inlineCollapsed']),
+        ...omit(props, ['inlineCollapsed']),
         getPopupContainer: getPopupContainer || getContextPopupContainer,
         openKeys: this.sOpenKeys,
         mode: menuMode,
@@ -246,7 +247,7 @@ const Menu = {
         select: this.handleSelect,
         deselect: this.handleDeselect,
         openChange: this.handleOpenChange,
-        onMouseenter: this.handleMouseEnter,
+        mouseenter: this.handleMouseEnter,
       },
       nativeOn: {
         transitionend: this.handleTransitionEnd,

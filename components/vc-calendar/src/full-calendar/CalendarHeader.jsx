@@ -3,6 +3,7 @@ import BaseMixin from '../../../_util/BaseMixin';
 import { getMonthName } from '../util';
 
 const CalendarHeader = {
+  name: 'CalendarHeader',
   mixins: [BaseMixin],
   props: {
     value: PropTypes.object,

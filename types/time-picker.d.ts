@@ -44,7 +44,7 @@ export declare class TimePicker extends AntdComponent {
    * to set default time
    * @type Moment
    */
-  defaultValue: Moment;
+  defaultValue: Moment | string;
 
   /**
    * determine whether the TimePicker is disabled
@@ -158,7 +158,7 @@ export declare class TimePicker extends AntdComponent {
    * to set time
    * @type Moment
    */
-  value: Moment;
+  value: Moment | string;
 
   /**
    * Time picker size

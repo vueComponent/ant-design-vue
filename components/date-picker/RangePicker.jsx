@@ -292,6 +292,7 @@ export default {
       localeCode,
       format,
       separator,
+      inputReadOnly,
     } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('calendar', customizePrefixCls);
@@ -351,6 +352,7 @@ export default {
         value: showDate,
         hoverValue,
         showToday,
+        inputReadOnly,
       },
       on: {
         change: calendarChange,

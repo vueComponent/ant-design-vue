@@ -77,7 +77,6 @@ const Drawer = {
     // unmount drawer in child, clear push.
     if (this.parentDrawer) {
       this.parentDrawer.pull();
-      this.parentDrawer = null;
     }
   },
   methods: {

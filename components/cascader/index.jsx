@@ -263,6 +263,7 @@ const Cascader = {
     handleInputChange(e) {
       const inputValue = e.target.value;
       this.setState({ inputValue });
+      this.$emit('search', inputValue);
     },
 
     setValue(value, selectedOptions) {

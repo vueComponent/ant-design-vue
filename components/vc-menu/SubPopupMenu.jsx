@@ -337,10 +337,8 @@ const SubPopupMenu = {
         },
         on: {
           click: e => {
-            if ('keyPath' in e) {
-              (childListeners.click || noop)(e);
-              this.onClick(e);
-            }
+            (childListeners.click || noop)(e);
+            this.onClick(e);
           },
           itemHover: this.onItemHover,
           openChange: this.onOpenChange,

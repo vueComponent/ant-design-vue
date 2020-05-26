@@ -75,7 +75,7 @@
       }
     }
 
-    .@{table-prefix-cls}-filter-selected.@{iconfont-css-prefix}-filter {
+    .@{table-prefix-cls}-filter-selected.@{iconfont-css-prefix} {
       color: @primary-color;
     }
 
@@ -447,7 +447,7 @@
     .@{ant-prefix}-dropdown-menu {
       // https://github.com/ant-design/ant-design/issues/4916
       // https://github.com/ant-design/ant-design/issues/19542
-      max-height: calc(100vh - 130px);
+      max-height: ~'calc(100vh - 130px)';
       overflow-x: hidden;
       border: 0;
       border-radius: @border-radius-base @border-radius-base 0 0;
@@ -722,7 +722,7 @@
     table {
       border-radius: @table-border-radius-base 0 0 0;
     }
-    .ant-table-thead > tr > th:last-child {
+    .@{table-prefix-cls}-thead > tr > th:last-child {
       border-top-right-radius: 0;
     }
   }
@@ -740,7 +740,7 @@
       color: transparent;
       pointer-events: none;
     }
-    .ant-table-thead > tr > th:first-child {
+    .@{table-prefix-cls}-thead > tr > th:first-child {
       border-top-left-radius: 0;
     }
   }

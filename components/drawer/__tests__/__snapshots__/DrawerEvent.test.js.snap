@@ -2,7 +2,7 @@
 
 exports[`Drawer render correctly 1`] = `
 <div><button type="button" class="ant-btn" ant-click-animating-without-extra-node="false"><span>open</span></button>
-  <div tabindex="-1" class="">
+  <div class="">
     <div tabindex="-1" class="ant-drawer ant-drawer-right">
       <div class="ant-drawer-mask"></div>
       <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 256px;">

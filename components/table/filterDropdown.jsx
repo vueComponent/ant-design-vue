@@ -216,7 +216,7 @@ export default {
         filterIcon = filterIcon(filtered, column);
       }
       const dropdownIconClass = classNames({
-        [`${prefixCls}-selected`]: filtered,
+        [`${prefixCls}-selected`]: 'filtered' in column ? column.filtered : filtered,
         [`${prefixCls}-open`]: this.getDropdownVisible(),
       });
       if (!filterIcon) {

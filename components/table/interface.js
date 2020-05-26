@@ -36,6 +36,7 @@ export const ColumnProps = {
   fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['left', 'right'])]),
   filterIcon: PropTypes.any,
   filteredValue: PropTypes.array,
+  filtered: PropTypes.bool,
   defaultFilteredValue: PropTypes.array,
   sortOrder: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['ascend', 'descend'])]),
   sortDirections: PropTypes.array,

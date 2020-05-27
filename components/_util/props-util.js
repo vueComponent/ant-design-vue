@@ -1,9 +1,9 @@
 import isPlainObject from 'lodash/isPlainObject';
 import classNames from 'classnames';
-function getType(fn) {
-  const match = fn && fn.toString().match(/^\s*function (\w+)/);
-  return match ? match[1] : '';
-}
+// function getType(fn) {
+//   const match = fn && fn.toString().match(/^\s*function (\w+)/);
+//   return match ? match[1] : '';
+// }
 
 const camelizeRE = /-(\w)/g;
 const camelize = str => {
@@ -35,10 +35,10 @@ const slotHasProp = (slot, prop) => {
   const propsData = $options.propsData || {};
   return prop in propsData;
 };
-const filterProps = (props, propsData = {}) => {
+const filterProps = props => {
   const res = {};
   Object.keys(props).forEach(k => {
-    if (k in propsData || props[k] !== undefined) {
+    if (props[k] !== undefined) {
       res[k] = props[k];
     }
   });
@@ -66,11 +66,7 @@ const getSlots = ele => {
   return { ...slots, ...getScopedSlots(ele) };
 };
 const getSlot = (self, name = 'default', options = {}) => {
-  return (
-    (self.$scopedSlots && self.$scopedSlots[name] && self.$scopedSlots[name](options)) ||
-    self.$slots[name] ||
-    undefined
-  );
+  return self.$slots[name] && self.$slots[name](options);
 };
 
 const getAllChildren = ele => {
@@ -92,22 +88,22 @@ const getSlotOptions = ele => {
   return componentOptions ? componentOptions.Ctor.options || {} : {};
 };
 const getOptionProps = instance => {
-  if (instance.componentOptions) {
-    const componentOptions = instance.componentOptions;
-    const { propsData = {}, Ctor = {} } = componentOptions;
-    const props = (Ctor.options || {}).props || {};
-    const res = {};
-    for (const [k, v] of Object.entries(props)) {
-      const def = v.default;
-      if (def !== undefined) {
-        res[k] =
-          typeof def === 'function' && getType(v.type) !== 'Function' ? def.call(instance) : def;
-      }
-    }
-    return { ...res, ...propsData };
-  }
-  const { $options = {}, $props = {} } = instance;
-  return filterProps($props, $options.propsData);
+  // if (instance.componentOptions) {
+  //   const componentOptions = instance.componentOptions;
+  //   const { propsData = {}, Ctor = {} } = componentOptions;
+  //   const props = (Ctor.options || {}).props || {};
+  //   const res = {};
+  //   for (const [k, v] of Object.entries(props)) {
+  //     const def = v.default;
+  //     if (def !== undefined) {
+  //       res[k] =
+  //         typeof def === 'function' && getType(v.type) !== 'Function' ? def.call(instance) : def;
+  //     }
+  //   }
+  //   return { ...res, ...propsData };
+  // }
+  const { $props = {} } = instance;
+  return filterProps($props);
 };
 
 const getComponentFromProp = (instance, prop, options = instance, execute = true) => {

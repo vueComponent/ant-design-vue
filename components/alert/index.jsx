@@ -1,3 +1,4 @@
+import { Transition } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -92,22 +93,23 @@ const Alert = {
     },
   },
 
-  render(h) {
+  render() {
     const { prefixCls: customizePrefixCls, banner, closing, closed } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const getPrefixCls = this.configProvider().getPrefixCls;
     const prefixCls = getPrefixCls('alert', customizePrefixCls);
 
     let { closable, type, showIcon } = this;
-    const closeText = getComponentFromProp(this, 'closeText');
-    const description = getComponentFromProp(this, 'description');
-    const message = getComponentFromProp(this, 'message');
-    const icon = getComponentFromProp(this, 'icon');
+    const { closeText, description, message, icon } = this.$props;
+    // const closeText = getComponentFromProp(this, 'closeText');
+    // const description = getComponentFromProp(this, 'description');
+    // const message = getComponentFromProp(this, 'message');
+    // const icon = getComponentFromProp(this, 'icon');
     // banner模式默认有 Icon
     showIcon = banner && showIcon === undefined ? true : showIcon;
     // banner模式默认为警告
     type = banner && type === undefined ? 'warning' : type || 'info';
 
-    const iconType = (description ? iconMapOutlined : iconMapFilled)[type] || null;
+    const IconType = (description ? iconMapOutlined : iconMapFilled)[type] || null;
 
     // closeable when closeText is assigned
     if (closeText) {
@@ -129,30 +131,29 @@ const Alert = {
       </a>
     ) : null;
 
-    const iconNode =
-      (icon &&
-        (isValidElement(icon) ? (
-          cloneElement(icon, {
-            class: `${prefixCls}-icon`,
-          })
-        ) : (
-          <span class={`${prefixCls}-icon`}>{icon}</span>
-        ))) ||
-      h(iconType, { class: `${prefixCls}-icon` });
+    const iconNode = (icon &&
+      (isValidElement(icon) ? (
+        cloneElement(icon, {
+          class: `${prefixCls}-icon`,
+        })
+      ) : (
+        <span class={`${prefixCls}-icon`}>{icon}</span>
+      ))) || <IconType class={`${prefixCls}-icon`} />;
+    // h(iconType, { class: `${prefixCls}-icon` });
 
     const transitionProps = getTransitionProps(`${prefixCls}-slide-up`, {
       appear: false,
       afterLeave: this.animationEnd,
     });
     return closed ? null : (
-      <transition {...transitionProps}>
+      <Transition {...transitionProps}>
         <div v-show={!closing} class={alertCls} data-show={!closing}>
           {showIcon ? iconNode : null}
           <span class={`${prefixCls}-message`}>{message}</span>
           <span class={`${prefixCls}-description`}>{description}</span>
           {closeIcon}
         </div>
-      </transition>
+      </Transition>
     );
   },
 };

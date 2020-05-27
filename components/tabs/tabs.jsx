@@ -50,7 +50,7 @@ export default {
   methods: {
     removeTab(targetKey, e) {
       e.stopPropagation();
-      if(isValid(targetKey)) {
+      if (isValid(targetKey)) {
         this.$emit('edit', targetKey, 'remove');
       }
     },
@@ -82,7 +82,7 @@ export default {
       hideAdd,
       renderTabBar,
     } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const getPrefixCls = this.configProvider().getPrefixCls;
     const prefixCls = getPrefixCls('tabs', customizePrefixCls);
     const children = filterEmpty(this.$slots.default);
 

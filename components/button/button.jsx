@@ -64,7 +64,7 @@ export default {
         icon,
         $slots,
       } = this;
-      const getPrefixCls = this.configProvider.getPrefixCls;
+      const getPrefixCls = this.configProvider().getPrefixCls;
       const prefixCls = getPrefixCls('btn', customizePrefixCls);
       const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
 
@@ -82,7 +82,7 @@ export default {
           break;
       }
       const iconType = sLoading ? 'loading' : icon;
-      const children = filterEmpty($slots.default);
+      const children = filterEmpty($slots.default());
       return {
         [`${prefixCls}`]: true,
         [`${prefixCls}-${type}`]: type,
@@ -130,11 +130,12 @@ export default {
     },
     isNeedInserted() {
       const { icon, $slots, type } = this;
-      return $slots.default && $slots.default.length === 1 && !icon && type !== 'link';
+      const children = filterEmpty($slots.default());
+      return children && children.length === 1 && !icon && type !== 'link';
     },
   },
   render() {
-    this.icon = this.$scopedSlots.icon && this.$scopedSlots.icon();
+    this.icon = this.$slots.icon && this.$slots.icon();
     const classes = this.getClasses();
     const { type, htmlType, icon, disabled, handleClick, sLoading, $slots, $attrs } = this;
     const buttonProps = {
@@ -148,9 +149,9 @@ export default {
         click: handleClick,
       },
     };
-    const iconNode = sLoading ? <LoadingOutlined /> : icon || null;
-    const children = filterEmpty($slots.default);
-    const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
+    const iconNode = sLoading ? <LoadingOutlined /> : icon;
+    const children = $slots.default();
+    const autoInsertSpace = this.configProvider().autoInsertSpaceInButton !== false;
     const kids = children.map(child =>
       this.insertSpace(child, this.isNeedInserted() && autoInsertSpace),
     );

@@ -2,24 +2,25 @@
 
 module.exports = function(modules) {
   const plugins = [
-    require.resolve('babel-plugin-transform-vue-jsx'),
     require.resolve('babel-plugin-inline-import-data-uri'),
-    require.resolve('babel-plugin-transform-es3-member-expression-literals'),
-    require.resolve('babel-plugin-transform-es3-property-literals'),
-    require.resolve('babel-plugin-transform-object-assign'),
-    require.resolve('babel-plugin-transform-object-rest-spread'),
-    require.resolve('babel-plugin-transform-class-properties'),
+    require.resolve('@babel/plugin-transform-member-expression-literals'),
+    require.resolve('@babel/plugin-transform-property-literals'),
+    require.resolve('@babel/plugin-proposal-export-default-from'),
+    require.resolve('@babel/plugin-transform-object-assign'),
+    require.resolve('@babel/plugin-transform-template-literals'),
+    require.resolve('@babel/plugin-proposal-object-rest-spread'),
+    require.resolve('@babel/plugin-proposal-class-properties'),
   ];
   plugins.push([
-    require.resolve('babel-plugin-transform-runtime'),
+    require.resolve('@babel/plugin-transform-runtime'),
     {
-      polyfill: false,
+      helpers: false,
     },
   ]);
   return {
     presets: [
       [
-        require.resolve('babel-preset-env'),
+        require.resolve('@babel/preset-env'),
         {
           modules,
           targets: {
@@ -34,6 +35,7 @@ module.exports = function(modules) {
           },
         },
       ],
+      require.resolve('@ant-design-vue/babel-preset-jsx'),
     ],
     plugins,
     env: {

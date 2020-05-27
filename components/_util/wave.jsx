@@ -1,3 +1,4 @@
+import { nextTick } from 'vue';
 import TransitionEvents from './css-animation/Event';
 import raf from './raf';
 import { ConfigConsumerProps } from '../config-provider';
@@ -22,7 +23,7 @@ export default {
   name: 'Wave',
   props: ['insertExtraNode'],
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       const node = this.$el;
       if (node.nodeType !== 1) {
         return;
@@ -161,9 +162,10 @@ export default {
   },
 
   render() {
-    if (this.configProvider.csp) {
-      this.csp = this.configProvider.csp;
+    const csp = this.configProvider().csp;
+    if (csp) {
+      this.csp = csp;
     }
-    return this.$slots.default && this.$slots.default[0];
+    return this.$slots.default() && this.$slots.default()[0];
   },
 };

@@ -1,3 +1,4 @@
+import { Transition } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import PropTypes from '../_util/vue-types';
 import getTransitionProps from '../_util/getTransitionProps';
@@ -119,7 +120,7 @@ export default {
 
   render() {
     const { prefixCls: customizePrefixCls } = this.$props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const getPrefixCls = this.configProvider().getPrefixCls;
     const prefixCls = getPrefixCls('tag', customizePrefixCls);
     const { _visible: visible } = this.$data;
     const tag = (
@@ -129,7 +130,7 @@ export default {
         class={this.getTagClassName(prefixCls)}
         style={this.getTagStyle()}
       >
-        {this.$slots.default}
+        {this.$slots.default()}
         {this.renderCloseIcon()}
       </span>
     );
@@ -138,7 +139,7 @@ export default {
     });
     return (
       <Wave>
-        <transition {...transitionProps}>{tag}</transition>
+        <Transition {...transitionProps}>{tag}</Transition>
       </Wave>
     );
   },

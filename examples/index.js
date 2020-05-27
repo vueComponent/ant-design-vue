@@ -1,12 +1,9 @@
-import 'babel-polyfill';
-import Vue from 'vue';
+import '@babel/polyfill';
+import { createApp } from 'vue';
 import App from './App.vue';
-import Antd from 'ant-design-vue';
-import 'ant-design-vue/style.js';
+import Button from 'ant-design-vue/button';
+import 'ant-design-vue/button/style/index.less';
 
-Vue.use(Antd);
-
-new Vue({
-  el: '#app',
-  render: h => h(App),
-});
+createApp(App)
+  .use(Button)
+  .mount('#app');

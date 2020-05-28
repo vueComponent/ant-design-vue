@@ -7,7 +7,11 @@
     <div><h4>多种尺寸</h4><a-color-picker size="large" /></div>
     <div><a-color-picker size="small" /></div>
     <div><h4>切换禁用</h4><a-color-picker :disabled="disabled" /></div>
-    <div><button @click="disabled = !disabled">切换</button> </div>
+    <div>
+      <button @click="disabled = !disabled">
+        切换
+      </button>
+    </div>
   </div>
 </template>
 

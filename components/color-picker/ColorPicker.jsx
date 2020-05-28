@@ -44,9 +44,8 @@ export default {
       this.setColor(val);
     },
     disabled(val) {
-      console.log(val);
       this.pickr[val ? 'disable' : 'enable']();
-    }
+    },
   },
   mounted() {
     this.createPickr();

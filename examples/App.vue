@@ -4,12 +4,35 @@
     <div><h4>v-model:{{ color }}</h4><a-color-picker v-model="color" style="width:130px" @show="changeHandler" /></div>
     <div><h4>备选颜色</h4><a-color-picker :config="config1" /></div>
     <div><h4>多种输入格式</h4><a-color-picker :config="config2" :get-popup-container="node=>node.parentNode" /></div>
+    <div>
+      <button @click="config2.components.preview = !config2.components.preview">
+        修改config
+      </button>
+    </div>
     <div><h4>多种尺寸</h4><a-color-picker size="large" /></div>
     <div><a-color-picker size="small" /></div>
     <div><h4>切换禁用</h4><a-color-picker :disabled="disabled" /></div>
     <div>
       <button @click="disabled = !disabled">
         切换
+      </button>
+    </div>
+    <div><h4>切换格式 [color:{{color2}}]</h4><a-color-picker  v-model="color2" :format="format" /></div>
+    <div>
+      <button @click="format = 'HEX'">
+        HEX
+      </button>
+      <button @click="format = 'RGBA'">
+        RGBA
+      </button>
+      <button @click="format = 'HSVA'">
+        HSVA
+      </button>
+      <button @click="format = 'HSLA'">
+        HSLA
+      </button>
+      <button @click="format = 'CMYK'">
+        CMYK
       </button>
     </div>
   </div>
@@ -21,7 +44,9 @@ export default {
   data () {
     return {
       color:'#ccc',
+      color2:'#ccc',
       disabled:false,
+      format:'',
       config1:{
         swatches: [
           'rgba(244, 67, 54, 1)',

@@ -28,6 +28,7 @@ export default {
     size: PropTypes.string,//尺寸
     getPopupContainer: PropTypes.func,//指定渲染容器
     disabled: PropTypes.bool,//是否禁用
+    format:PropTypes.string,//颜色格式设置
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -46,6 +47,21 @@ export default {
     disabled(val) {
       this.pickr[val ? 'disable' : 'enable']();
     },
+    config:{
+      handler:function(){
+        this.reInitialize();
+      },
+      deep: true
+    },
+    format(val){
+      const type = val.toLocaleUpperCase();
+      let res = this.pickr.setColorRepresentation(type);
+      if(res){
+        this.pickr.applyColor();
+      }else{
+        throw new TypeError('format was invalid');
+      }
+    }
   },
   mounted() {
     this.createPickr();
@@ -55,6 +71,15 @@ export default {
     this.pickr.destroyAndRemove();
   },
   methods: {
+    reInitialize() {
+      this.pickr.destroyAndRemove();
+      const dom = document.createElement('div');
+      dom.id = 'color-picker' + this._uid;
+      const box = this.$el.querySelector('#color-picker-box' + this._uid);
+      box.appendChild(dom);
+      this.createPickr();
+      this.eventsBinding();
+    },
     setColor: debounce(function (val) {
       this.pickr.setColor(val);
     }, 1000),
@@ -142,7 +167,9 @@ export default {
           onClick={this.handleOpenChange}
         >
           <div class={`${prefixCls}-selection`}>
-            <div id={"color-picker" + this._uid}></div>
+            <div id={"color-picker-box" + this._uid}>
+              <div id={"color-picker" + this._uid}></div>
+            </div>
             <Icon type="down" class={`${prefixCls}-icon`} />
           </div>
         </div>

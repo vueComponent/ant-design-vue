@@ -10,7 +10,7 @@ function getWatch(keys = []) {
   const watch = {};
   keys.forEach(k => {
     watch[k] = function(value) {
-      this._proxyVm._data[k] = value;
+      this.configProvider[k] = value;
     };
   });
   return watch;
@@ -28,21 +28,19 @@ const ConfigProvider = {
     pageHeader: PropTypes.object,
     transformCellText: PropTypes.func,
   },
-  setup(props, context) {
-    provide(
-      'configProvider',
-      reactive({
-        ...props,
-        getPrefixCls: context.getPrefixCls,
-        renderEmpty: context.renderEmptyComponent,
-      }),
-    );
+  setup(props) {
+    const configProvider = reactive({
+      ...props,
+      getPrefixCls: undefined,
+      renderEmpty: undefined,
+    });
+    provide('configProvider', configProvider);
+    return { configProvider };
   },
-  // provide() {
-  //   return {
-  //     configProvider: this._proxyVm,
-  //   };
-  // },
+  created() {
+    this.configProvider.getPrefixCls = this.getPrefixCls;
+    this.configProvider.renderEmpty = this.renderEmpty;
+  },
   watch: {
     ...getWatch([
       'prefixCls',

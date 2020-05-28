@@ -1,14 +1,18 @@
 <template>
-  <a-config-provider prefixCls="ss">
-    jdjj
-    <div>ddd</div>
+  <a-config-provider>
+    <a-button-group class="dddd" style="color: red" @click="onClick">
+      <a-button>Cancel</a-button>
+      <a-button type="primary">
+        OK
+      </a-button>
+    </a-button-group>
     <a-button
       :class="['test']"
       class="aaa"
       style="display: inline"
       block
-      @click="onClick"
       :type="type"
+      @click="onClick"
     >
       Primary
     </a-button>

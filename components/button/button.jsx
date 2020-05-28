@@ -69,7 +69,7 @@ export default {
         $slots,
         $attrs,
       } = this;
-      const getPrefixCls = this.configProvider().getPrefixCls;
+      const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('btn', customizePrefixCls);
       const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
 

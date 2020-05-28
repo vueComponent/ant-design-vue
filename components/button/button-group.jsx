@@ -1,4 +1,5 @@
-import { filterEmpty } from '../_util/props-util';
+import { inject } from 'vue';
+import { filterEmpty, getSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -14,8 +15,11 @@ export { ButtonGroupProps };
 export default {
   name: 'AButtonGroup',
   props: ButtonGroupProps,
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    const configProvider = inject('configProvider') || ConfigConsumerProps;
+    return {
+      configProvider,
+    };
   },
   data() {
     return {
@@ -26,7 +30,7 @@ export default {
     };
   },
   render() {
-    const { prefixCls: customizePrefixCls, size, $slots } = this;
+    const { prefixCls: customizePrefixCls, size } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('btn-group', customizePrefixCls);
 
@@ -47,6 +51,6 @@ export default {
       [`${prefixCls}`]: true,
       [`${prefixCls}-${sizeCls}`]: sizeCls,
     };
-    return <div class={classes}>{filterEmpty($slots.default)}</div>;
+    return <div class={classes}>{filterEmpty(getSlot(this))}</div>;
   },
 };

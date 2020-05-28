@@ -1,6 +1,15 @@
 <template>
-  <div>
-    <a-button type="primary" block @click="onClick">
+  <a-config-provider prefixCls="ss">
+    jdjj
+    <div>ddd</div>
+    <a-button
+      :class="['test']"
+      class="aaa"
+      style="display: inline"
+      block
+      @click="onClick"
+      :type="type"
+    >
       Primary
     </a-button>
     <a-button block>
@@ -15,12 +24,17 @@
     <a-button type="link" block>
       Link
     </a-button>
-  </div>
+  </a-config-provider>
 </template>
 
 <script>
 export default {
   name: 'Demo',
+  data() {
+    return {
+      type: 'primary',
+    };
+  },
   methods: {
     onClick() {
       console.log(1);

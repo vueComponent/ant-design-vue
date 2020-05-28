@@ -36,8 +36,8 @@ export default {
   },
 
   render() {
-    const { $scopedSlots } = this;
-    const children = this.children || $scopedSlots.default;
+    const { $slots } = this;
+    const children = this.children || $slots.default;
     const { antLocale } = this.localeData;
     return children(this.getLocale(), this.getLocaleCode(), antLocale);
   },

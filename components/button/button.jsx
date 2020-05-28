@@ -1,7 +1,8 @@
+import { inject } from 'vue';
 import Wave from '../_util/wave';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';
-import { filterEmpty, getListeners } from '../_util/props-util';
+import { filterEmpty } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 // eslint-disable-next-line no-console
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
@@ -12,8 +13,11 @@ export default {
   inheritAttrs: false,
   __ANT_BUTTON: true,
   props,
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    const configProvider = inject('configProvider') || ConfigConsumerProps;
+    return {
+      configProvider,
+    };
   },
   data() {
     return {
@@ -63,6 +67,7 @@ export default {
         block,
         icon,
         $slots,
+        $attrs,
       } = this;
       const getPrefixCls = this.configProvider().getPrefixCls;
       const prefixCls = getPrefixCls('btn', customizePrefixCls);
@@ -84,6 +89,7 @@ export default {
       const iconType = sLoading ? 'loading' : icon;
       const children = filterEmpty($slots.default());
       return {
+        [$attrs.class]: $attrs.class,
         [`${prefixCls}`]: true,
         [`${prefixCls}-${type}`]: type,
         [`${prefixCls}-${shape}`]: shape,
@@ -139,19 +145,14 @@ export default {
     const classes = this.getClasses();
     const { type, htmlType, icon, disabled, handleClick, sLoading, $slots, $attrs } = this;
     const buttonProps = {
-      attrs: {
-        ...$attrs,
-        disabled,
-      },
+      ...$attrs,
+      disabled,
       class: classes,
-      on: {
-        ...getListeners(this),
-        click: handleClick,
-      },
+      onClick: handleClick,
     };
     const iconNode = sLoading ? <LoadingOutlined /> : icon;
     const children = $slots.default();
-    const autoInsertSpace = this.configProvider().autoInsertSpaceInButton !== false;
+    const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
     const kids = children.map(child =>
       this.insertSpace(child, this.isNeedInserted() && autoInsertSpace),
     );

@@ -69,7 +69,7 @@ const LocaleProvider = {
     changeConfirmLocale();
   },
   render() {
-    return this.$slots.default ? this.$slots.default[0] : null;
+    return this.$slots.default ? this.$slots.default() : null;
   },
 };
 

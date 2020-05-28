@@ -1,6 +1,6 @@
-import Vue from 'vue';
+import { reactive, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { filterEmpty, getComponentFromProp } from '../_util/props-util';
+import { getComponentFromProp } from '../_util/props-util';
 import defaultRenderEmpty from './renderEmpty';
 import Base from '../base';
 import LocaleProvider, { ANT_MARK } from '../locale-provider';
@@ -28,21 +28,21 @@ const ConfigProvider = {
     pageHeader: PropTypes.object,
     transformCellText: PropTypes.func,
   },
-  provide() {
-    const _self = this;
-    this._proxyVm = new Vue({
-      data() {
-        return {
-          ..._self.$props,
-          getPrefixCls: _self.getPrefixCls,
-          renderEmpty: _self.renderEmptyComponent,
-        };
-      },
-    });
-    return {
-      configProvider: this._proxyVm._data,
-    };
+  setup(props, context) {
+    provide(
+      'configProvider',
+      reactive({
+        ...props,
+        getPrefixCls: context.getPrefixCls,
+        renderEmpty: context.renderEmptyComponent,
+      }),
+    );
   },
+  // provide() {
+  //   return {
+  //     configProvider: this._proxyVm,
+  //   };
+  // },
   watch: {
     ...getWatch([
       'prefixCls',
@@ -67,18 +67,14 @@ const ConfigProvider = {
     renderProvider(legacyLocale) {
       return (
         <LocaleProvider locale={this.locale || legacyLocale} _ANT_MARK__={ANT_MARK}>
-          {this.$slots.default ? filterEmpty(this.$slots.default)[0] : null}
+          {this.$slots.default ? this.$slots.default() : null}
         </LocaleProvider>
       );
     },
   },
 
   render() {
-    return (
-      <LocaleReceiver
-        scopedSlots={{ default: (_, __, legacyLocale) => this.renderProvider(legacyLocale) }}
-      />
-    );
+    return <LocaleReceiver children={(_, __, legacyLocale) => this.renderProvider(legacyLocale)} />;
   },
 };
 

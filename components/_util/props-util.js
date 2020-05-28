@@ -5,6 +5,23 @@ import classNames from 'classnames';
 //   return match ? match[1] : '';
 // }
 
+const onRE = /^on[^a-z]/;
+export const isOn = key => onRE.test(key);
+
+const splitAttrs = attrs => {
+  const allAttrs = Object.keys(attrs);
+  const eventAttrs = [];
+  const extraAttrs = [];
+  for (let i = 0, l = allAttrs.length; i < l; i++) {
+    const key = allAttrs[i];
+    if (isOn(key)) {
+      eventAttrs.push({ [key[2].toLowerCase() + key.slice(3)]: attrs[key] });
+    } else {
+      extraAttrs.push({ [key]: attrs[key] });
+    }
+  }
+  return { events: eventAttrs, extraAttrs };
+};
 const camelizeRE = /-(\w)/g;
 const camelize = str => {
   return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ''));
@@ -261,7 +278,7 @@ export function getComponentName(opts) {
 }
 
 export function isEmptyElement(c) {
-  return !(c.tag || (c.text && c.text.trim() !== ''));
+  return typeof c.type === 'symbol' && c.children.trim() === '';
 }
 
 export function isStringElement(c) {
@@ -309,6 +326,7 @@ function isValidElement(element) {
 }
 
 export {
+  splitAttrs,
   hasProp,
   filterProps,
   getOptionProps,

@@ -6,6 +6,8 @@
     <div><h4>多种输入格式</h4><a-color-picker :config="config2" :get-popup-container="node=>node.parentNode" /></div>
     <div><h4>多种尺寸</h4><a-color-picker size="large" /></div>
     <div><a-color-picker size="small" /></div>
+    <div><h4>切换禁用</h4><a-color-picker :disabled="disabled" /></div>
+    <div><button @click="disabled = !disabled">切换</button> </div>
   </div>
 </template>
 
@@ -15,6 +17,7 @@ export default {
   data () {
     return {
       color:'#ccc',
+      disabled:false,
       config1:{
         swatches: [
           'rgba(244, 67, 54, 1)',

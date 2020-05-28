@@ -27,7 +27,7 @@ export default {
     colorRounded: PropTypes.number,//颜色数值保留几位小数
     size: PropTypes.string,//尺寸
     getPopupContainer: PropTypes.func,//指定渲染容器
-    disabled:PropTypes.bool,//是否禁用
+    disabled: PropTypes.bool,//是否禁用
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -43,6 +43,10 @@ export default {
     value(val) {
       this.setColor(val);
     },
+    disabled(val) {
+      console.log(val);
+      this.pickr[val ? 'disable' : 'enable']();
+    }
   },
   mounted() {
     this.createPickr();
@@ -52,7 +56,7 @@ export default {
     this.pickr.destroyAndRemove();
   },
   methods: {
-    setColor: debounce(function(val){
+    setColor: debounce(function (val) {
       this.pickr.setColor(val);
     }, 1000),
     eventsBinding() {
@@ -130,6 +134,7 @@ export default {
         [`${prefixCls}-open`]: this.myOpen,
         [`${prefixCls}-lg`]: this.size === 'large',
         [`${prefixCls}-sm`]: this.size === 'small',
+        [`${prefixCls}-disabled`]: this.disabled,
       };
       return (
         <div

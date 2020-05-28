@@ -17,7 +17,7 @@
         切换
       </button>
     </div>
-    <div><h4>切换格式 [color:{{color2}}]</h4><a-color-picker  v-model="color2" :format="format" /></div>
+    <div><h4>切换格式 [color:{{ color2 }}]</h4><a-color-picker v-model="color2" :format="format" /></div>
     <div>
       <button @click="format = 'HEX'">
         HEX

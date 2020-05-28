@@ -48,10 +48,10 @@ export default {
       this.pickr[val ? 'disable' : 'enable']();
     },
     config:{
-      handler:function(){
+      handler(){
         this.reInitialize();
       },
-      deep: true
+      deep: true,
     },
     format(val){
       const type = val.toLocaleUpperCase();
@@ -61,7 +61,7 @@ export default {
       }else{
         throw new TypeError('format was invalid');
       }
-    }
+    },
   },
   mounted() {
     this.createPickr();

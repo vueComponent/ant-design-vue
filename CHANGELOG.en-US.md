@@ -1,4 +1,4 @@
-# Change Log
+# Change Log (The following content is translated by Google)
 
 `ant-design-vue` strictly follows [Semantic Versioning 2.0.0](http://semver.org/).
 
@@ -10,6 +10,67 @@
 
 ---
 
+## 1.6.1
+
+`2020-05-25`
+
+- 🐞 Fix the problem of filling the current time when DatePicker blur [#2246](https://github.com/vueComponent/ant-design-vue/issues/2246)
+- 🐞 Fix Drawer error when destroying [#2254](https://github.com/vueComponent/ant-design-vue/issues/2254)
+- 🐞 Fix Tabs cannot remove tabs with 0 as key [55bbf9](https://github.com/vueComponent/ant-design-vue/commit/55bbf940401cf2a67114102da1c035abc4152f06)
+- 🐞 Fix Menu trigger twice click event [#2266](https://github.com/vueComponent/ant-design-vue/issues/2266)
+- 🐞 Fix Menu active class name is not added [ffc002](https://github.com/vueComponent/ant-design-vue/commit/ffc002f09454a56b531aeb08530303d566cf24f2)
+- 🌟 TreeSelect add custom data field function [#2253](https://github.com/vueComponent/ant-design-vue/issues/2253)
+- 🌟 Modal added dialogStyle and dialogClass instead of style and class before refactoring [#2285](https://github.com/vueComponent/ant-design-vue/issues/2285)
+- 🐞 Fix Table sorting trigger infinite update issue [#2270](https://github.com/vueComponent/ant-design-vue/issues/2270)
+
+## 1.6.0
+
+`2020-05-15`
+
+- 🌟 Tootip supports custom components [741897](https://github.com/vueComponent/ant-design-vue/commit/741897be6742c752f0b0d29481add702ee7e7fb0)
+- 🐞 Refactor Modal's underlying Portal components to solve the problem of delayed content update in Modal [#2244](https://github.com/vueComponent/ant-design-vue/issues/2244)
+- 🐞 Fix Select option focus border style in Input.Group [#2224](https://github.com/vueComponent/ant-design-vue/pull/2224)
+- 🐞 Fix Cascader option icon color when disabled [#2223](https://github.com/vueComponent/ant-design-vue/pull/2223)
+- 🐞 Fix DatePicker color when separator is disabled [#2222](https://github.com/vueComponent/ant-design-vue/pull/2222)
+- 🐞 Fix Carousel keyboard switch to Radio / Checkbox on inactive slide.
+- 🐞 Fix the problem that Table filter menu is not displayed when less version is `2.x`. [#23272](https://github.com/ant-design/ant-design/pull/23272)
+- 🐞 Fix the failure of Table `column.filtered`.
+- 🐞 Fix the style problem of Input in Safari browser in Select `multiple` mode. [#22586](https://github.com/ant-design/ant-design/pull/22586)
+- 🐞 Fix the problem that Descriptions can not adapt in small size. [#22407](https://github.com/ant-design/ant-design/pull/22407)
+
+## 1.5.6
+
+`2020-05-09`
+
+- 🐞 Fix the problem of missing css, min.js and other files in the dist folder
+
+## 1.5.5
+
+`2020-05-08`
+
+- 🐞 Fix `Tabs` not showing issue under safari 13 [#2199](https://github.com/vueComponent/ant-design-vue/issues/2199)
+- 🐞 Fix the first input failure of `Input` under FireFox [#2151](https://github.com/vueComponent/ant-design-vue/issues/2151)
+- 🐞 Fix `Input` cursor shift issue in Modal component [#2207](https://github.com/vueComponent/ant-design-vue/issues/2207)
+
+## 1.5.4
+
+`2020-04-30`
+
+- 🌟 `DatePicker` supports the align attribute and sets the popup position [#1112f2](https://github.com/vueComponent/ant-design-vue/commit/1112f2f791fd64866284ec82def90baefe81e798)
+- 🌟 `DatePicker` supports inputReadOnly attribute [#138eae](https://github.com/vueComponent/ant-design-vue/commit/138eae594dd440ce815e45d811a0778cb3e7583f)
+- 🌟 `DatePicker` `TimePicker` `Calendar` supports string-type binding values ​​[#718](https://github.com/vueComponent/ant-design-vue/issues/718)
+- 🌟 `Table` `ConfigProvider` adds `transformCellText` for transforming table rendering values, such as processing of empty data [#2109](https://github.com/vueComponent/ant-design-vue/issues/2109)
+- 🌟 `FormModel` added validateMessages attribute [#2130](https://github.com/vueComponent/ant-design-vue/issues/2130)
+- 🌟 Optimize pop-up window animation effect [#bf52f73](https://github.com/vueComponent/ant-design-vue/commit/bf52f73c5c2f8d05981e426b41a5f46d66e096db)
+- 🐞 Fix the `tabBarGutter` attribute of the `Tabs` component does not take effect [#2083](https://github.com/vueComponent/ant-design-vue/issues/2083)
+- 🐞 Fix renderTabBar of `Tabs` component not working [#2157](https://github.com/vueComponent/ant-design-vue/issues/2157)
+- 🌟 `Tabs` component supports number 0 as key [#2167](https://github.com/vueComponent/ant-design-vue/issues/2167)
+- 🐞 Fix the style of the Input.Search component is misaligned [#2077](https://github.com/vueComponent/ant-design-vue/issues/2077)
+- 🐞 Fix the style misalignment of `Slider` component [#2097](https://github.com/vueComponent/ant-design-vue/issues/2097)
+- 🐞 Fix `Tree.TreeNode` customTitle scope slot can not get selected status issue [#2006](https://github.com/vueComponent/ant-design-vue/issues/2006)
+- 🐞 Fix `SelectTree` showSearch error when reporting [#2082](https://github.com/vueComponent/ant-design-vue/issues/2082)
+- 🐞 Fix the inconsistent position of original dots in `Badge` dot state [#2121](https://github.com/vueComponent/ant-design-vue/issues/2121)
+
 ## 1.5.3
 
 `2020-04-13`
@@ -20,10 +81,10 @@
 
 `2020-04-09`
 
-- 🐞 Fix ts type of `FormModel` not introduced [# 1996](https://github.com/vueComponent/ant-design-vue/issues/1966)
-- 🐞 Fix `DatePicker.WeekPicker` type file error [# 2044](https://github.com/vueComponent/ant-design-vue/issues/2044)
-- 🐞 Fix "Tabs" tabClick event does not take effect [# 2030](https://github.com/vueComponent/ant-design-vue/issues/2030)
-- 🐞 Fix `Table` resize error issue [# 2033](https://github.com/vueComponent/ant-design-vue/issues/2033)
+- 🐞 Fix ts type of `FormModel` not introduced [#1996](https://github.com/vueComponent/ant-design-vue/issues/1966)
+- 🐞 Fix `DatePicker.WeekPicker` type file error [#2044](https://github.com/vueComponent/ant-design-vue/issues/2044)
+- 🐞 Fix "Tabs" tabClick event does not take effect [#2030](https://github.com/vueComponent/ant-design-vue/issues/2030)
+- 🐞 Fix `Table` resize error issue [#2033](https://github.com/vueComponent/ant-design-vue/issues/2033)
 
 ## 1.5.1
 
@@ -172,7 +233,7 @@
 
 `2019-11-27`
 
-- 🌟 `getPopupContainer` of`ConfigProvider` Added popup context as the second parameter for uniform configuration of `getPopupContainer` in`Modal` [7a3c88] (https://github.com/vueComponent/ant-design -vue / commit / 7a3c88107598b4b1cf6842d3254b43dc26103c14)
+- 🌟 `getPopupContainer` of`ConfigProvider` Added popup context as the second parameter for uniform configuration of `getPopupContainer` in`Modal` [7a3c88](https://github.com/vueComponent/ant-design -vue / commit / 7a3c88107598b4b1cf6842d3254b43dc26103c14)
 - 🐞 Fix `ConfigProvider` reporting error in Vue 2.5 [309baa](https://github.com/vueComponent/ant-design-vue/commit/309baa138a9c9a1885c17ef636c9132349024359)
 - 🐞 Fix `Menu` click event is triggered twice [#1450](https://github.com/vueComponent/ant-design-vue/issues/1427)
 - 🐞 Fix incorrect width of input box in `Select` [#1458](https://github.com/vueComponent/ant-design-vue/issues/1458)

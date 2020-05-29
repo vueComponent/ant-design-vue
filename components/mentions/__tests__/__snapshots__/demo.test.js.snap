@@ -41,6 +41,6 @@ exports[`renders ./antdv-demo/docs/mentions/demo/readonly.md correctly 1`] = `
   <div style="margin-bottom: 10px;">
     <div class="ant-mentions ant-mentions-disabled"><textarea disabled="disabled" rows="1" placeholder="this is disabled Mentions"></textarea></div>
   </div>
-  <div class="ant-mentions"><textarea rows="1" placeholder="this is readOnly a-mentions" readonly=""></textarea></div>
+  <div class="ant-mentions"><textarea rows="1" placeholder="this is readOnly a-mentions" readonly="readonly"></textarea></div>
 </div>
 `;

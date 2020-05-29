@@ -8,6 +8,7 @@ import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import enUs from './locale/en_US';
 const MonthCalendar = {
+  name: 'MonthCalendar',
   props: {
     locale: PropTypes.object.def(enUs),
     format: PropTypes.string,

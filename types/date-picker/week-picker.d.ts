@@ -10,13 +10,13 @@ export declare class WeekPicker extends DatepickerCommon {
    * to set default date
    * @type Moment
    */
-  defaultValue: Moment;
+  defaultValue: Moment | string;
 
   /**
    * to set default picker date
    * @type Moment
    */
-  defaultPickerValue: Moment;
+  defaultPickerValue: Moment | string;
 
   /**
    * to set the date format, refer to moment.js
@@ -30,5 +30,5 @@ export declare class WeekPicker extends DatepickerCommon {
    * to set date
    * @type Moment
    */
-  value: Moment;
+  value: Moment | string;
 }

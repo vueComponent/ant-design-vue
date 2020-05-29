@@ -9,7 +9,7 @@ import { createRef } from '../util';
 //   onTreeNodeSelect: PropTypes.func.isRequired,
 //   onTreeNodeCheck: PropTypes.func.isRequired,
 // }
-function getDerivedStateFromProps(nextProps, prevState) {
+function getDerivedState(nextProps, prevState) {
   const {
     _prevProps: prevProps = {},
     _loadedKeys: loadedKeys,
@@ -106,7 +106,7 @@ const BasePopup = {
   },
   watch: {
     __propsSymbol__() {
-      const state = getDerivedStateFromProps(this.$props, this.$data);
+      const state = getDerivedState(this.$props, this.$data);
       this.setState(state);
     },
   },
@@ -124,14 +124,14 @@ const BasePopup = {
     const state = {
       _keyList: [],
       _expandedKeyList: expandedKeyList,
-      // Cache `expandedKeyList` when tree is in filter. This is used in `getDerivedStateFromProps`
+      // Cache `expandedKeyList` when tree is in filter. This is used in `getDerivedState`
       _cachedExpandedKeyList: [],
       _loadedKeys: [],
       _prevProps: {},
     };
     return {
       ...state,
-      ...getDerivedStateFromProps(this.$props, state),
+      ...getDerivedState(this.$props, state),
     };
   },
   methods: {

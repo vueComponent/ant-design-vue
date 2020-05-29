@@ -10,13 +10,13 @@ export declare class RangePicker extends DatepickerCommon {
    * to set default date
    * @type [Moment, Moment]
    */
-  defaultValue: [Moment, Moment];
+  defaultValue: [Moment, Moment] | [string, string];
 
   /**
    * to set default picker date
    * @type [Moment, Moment]
    */
-  defaultPickerValue: [Moment, Moment];
+  defaultPickerValue: [Moment, Moment] | [string, string];
 
   /**
    * to specify the time that cannot be selected
@@ -56,5 +56,5 @@ export declare class RangePicker extends DatepickerCommon {
    * to set date
    * @type [Moment, Moment]
    */
-  value: [Moment, Moment];
+  value: [Moment, Moment] | [string, string];
 }

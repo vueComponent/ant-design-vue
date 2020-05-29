@@ -10,7 +10,9 @@ exports[`renders ./antdv-demo/docs/timeline/demo/alternate.md correctly 1`] = `
   <li class="ant-timeline-item ant-timeline-item-right">
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-green"></div>
-    <div class="ant-timeline-item-content">Solve initial network problems 2015-09-01</div>
+    <div class="ant-timeline-item-content">
+      Solve initial network problems 2015-09-01
+    </div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-left">
     <div class="ant-timeline-item-tail"></div>
@@ -27,7 +29,9 @@ exports[`renders ./antdv-demo/docs/timeline/demo/alternate.md correctly 1`] = `
   <li class="ant-timeline-item ant-timeline-item-right">
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-red"></div>
-    <div class="ant-timeline-item-content">Network problems being solved 2015-09-01</div>
+    <div class="ant-timeline-item-content">
+      Network problems being solved 2015-09-01
+    </div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-left">
     <div class="ant-timeline-item-tail"></div>
@@ -77,12 +81,16 @@ exports[`renders ./antdv-demo/docs/timeline/demo/color.md correctly 1`] = `
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-green"></div>
-    <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
+    <div class="ant-timeline-item-content">
+      Create a services site 2015-09-01
+    </div>
   </li>
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-green"></div>
-    <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
+    <div class="ant-timeline-item-content">
+      Create a services site 2015-09-01
+    </div>
   </li>
   <li class="ant-timeline-item">
     <div class="ant-timeline-item-tail"></div>

@@ -53,4 +53,5 @@ export const TreeSelectProps = () => ({
   treeDefaultExpandedKeys: PropTypes.array,
   treeNodeFilterProp: PropTypes.string,
   treeNodeLabelProp: PropTypes.string,
+  replaceFields: PropTypes.object.def({}),
 });

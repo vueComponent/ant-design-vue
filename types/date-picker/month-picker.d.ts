@@ -10,13 +10,13 @@ export declare class MonthPicker extends DatepickerCommon {
    * to set default date
    * @type Moment
    */
-  defaultValue: Moment;
+  defaultValue: Moment | string;
 
   /**
    * to set default picker date
    * @type Moment
    */
-  defaultPickerValue: Moment;
+  defaultPickerValue: Moment | string;
 
   /**
    * to set the date format, When an array is provided, all values are used for parsing and first value for display. refer to moment.js
@@ -42,5 +42,5 @@ export declare class MonthPicker extends DatepickerCommon {
    * to set date
    * @type Moment
    */
-  value: Moment;
+  value: Moment | string;
 }

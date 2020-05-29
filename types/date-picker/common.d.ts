@@ -86,4 +86,7 @@ export declare class DatepickerCommon extends AntdComponent {
    * @type any (VNode | slot)
    */
   suffixIcon: any;
+
+  inputReadOnly: boolean;
+  valueFormat: string;
 }

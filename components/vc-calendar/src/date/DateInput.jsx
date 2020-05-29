@@ -26,6 +26,7 @@ const DateInput = {
     selectedValue: PropTypes.object,
     clearIcon: PropTypes.any,
     inputMode: PropTypes.string,
+    inputReadOnly: PropTypes.bool,
   },
 
   data() {
@@ -38,10 +39,10 @@ const DateInput = {
   },
   watch: {
     selectedValue() {
-      this.updateState();
+      this.setState();
     },
     format() {
-      this.updateState();
+      this.setState();
     },
   },
 
@@ -61,19 +62,21 @@ const DateInput = {
     return dateInputInstance;
   },
   methods: {
-    updateState() {
+    getDerivedStateFromProps(nextProps, state) {
+      let newState = {};
       if (dateInputInstance) {
         cachedSelectionStart = dateInputInstance.selectionStart;
         cachedSelectionEnd = dateInputInstance.selectionEnd;
       }
       // when popup show, click body will call this, bug!
-      const selectedValue = this.selectedValue;
-      if (!this.$data.hasFocus) {
-        this.setState({
+      const selectedValue = nextProps.selectedValue;
+      if (!state.hasFocus) {
+        newState = {
           str: formatDate(selectedValue, this.format),
           invalid: false,
-        });
+        };
       }
+      return newState;
     },
     onClear() {
       this.setState({
@@ -84,7 +87,7 @@ const DateInput = {
     onInputChange(e) {
       const { value: str, composing } = e.target;
       const { str: oldStr = '' } = this;
-      if (composing || oldStr === str) return;
+      if (e.isComposing || composing || oldStr === str) return;
 
       const { disabledDate, format, selectedValue } = this.$props;
 
@@ -166,7 +169,17 @@ const DateInput = {
   },
 
   render() {
-    const { invalid, str, locale, prefixCls, placeholder, disabled, showClear, inputMode } = this;
+    const {
+      invalid,
+      str,
+      locale,
+      prefixCls,
+      placeholder,
+      disabled,
+      showClear,
+      inputMode,
+      inputReadOnly,
+    } = this;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (
@@ -193,6 +206,7 @@ const DateInput = {
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             inputMode={inputMode}
+            readOnly={inputReadOnly}
           />
         </div>
         {showClear ? (

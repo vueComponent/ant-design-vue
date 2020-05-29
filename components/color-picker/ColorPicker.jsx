@@ -28,7 +28,7 @@ export default {
     size: PropTypes.string,//尺寸
     getPopupContainer: PropTypes.func,//指定渲染容器
     disabled: PropTypes.bool,//是否禁用
-    format:PropTypes.string,//颜色格式设置
+    format: PropTypes.string,//颜色格式设置
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -38,32 +38,47 @@ export default {
       colors,
       myOpen: false,
       pickr: null,
+      i18n: enUS,
     };
   },
   watch: {
+    "configProvider.locale.ColorPicker": {
+      handler(val) {
+        if (this.locale) return;
+        this.i18n = val;
+        this.reInitialize();
+      },
+    },
+    locale(val) {
+      this.i18n = val.ColorPicker;
+      this.reInitialize();
+    },
     value(val) {
       this.setColor(val);
     },
     disabled(val) {
       this.pickr[val ? 'disable' : 'enable']();
     },
-    config:{
-      handler(){
+    config: {
+      handler() {
         this.reInitialize();
       },
       deep: true,
     },
-    format(val){
+    format(val) {
       const type = val.toLocaleUpperCase();
       let res = this.pickr.setColorRepresentation(type);
-      if(res){
+      if (res) {
         this.pickr.applyColor();
-      }else{
+      } else {
         throw new TypeError('format was invalid');
       }
     },
   },
   mounted() {
+    if (this.locale) {
+      this.i18n = this.locale.ColorPicker;
+    }
     this.createPickr();
     this.eventsBinding();
   },
@@ -122,7 +137,7 @@ export default {
             save: true,
           },
         },
-      }, this.config)).on('save', (color, instance) => {
+      }, this.config, { i18n: this.i18n })).on('save', (color, instance) => {
         if (color) {
           color = color['to' + instance._representation]().toString(this.colorRounded || 0);
         }
@@ -152,7 +167,7 @@ export default {
       const { prefixCls: customizePrefixCls } = this.$props;
       const { getPrefixCls } = this.configProvider;
       const prefixCls = getPrefixCls('color-picker', customizePrefixCls);
-      const props = getOptionProps(this);
+      const { disabled } = getOptionProps(this);
       const classString = {
         [`${prefixCls}-box`]: true,
         [`${prefixCls}-open`]: this.myOpen,
@@ -163,7 +178,7 @@ export default {
       return (
         <div
           class={classString}
-          tabIndex={props.disabled ? -1 : 0}
+          tabIndex={disabled ? -1 : 0}
           onClick={this.handleOpenChange}
         >
           <div class={`${prefixCls}-selection`}>

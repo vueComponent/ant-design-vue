@@ -1,5 +1,5 @@
 export default {
-  save: '保存',
-  clear: '清除',
-  cancel: '取消',
+  'btn:save': '保存',
+  'btn:cancel': '取消',
+  'btn:clear': '清除',
 };

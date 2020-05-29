@@ -1,5 +1,5 @@
 export default {
-  save: 'Save',
-  clear: 'Clear',
-  cancel: 'Cancel',
+  'btn:save': 'Save',
+  'btn:cancel': 'Cancel',
+  'btn:clear': 'Clear',
 };

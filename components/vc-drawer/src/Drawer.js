@@ -1,9 +1,9 @@
 import classnames from 'classnames';
-import Vue from 'vue';
-import ref from 'vue-ref';
+import { cloneVNode, withDirectives, Teleport, nextTick } from 'vue';
+import antRef from '../../_util/ant-ref';
 import BaseMixin from '../../_util/BaseMixin';
-import { initDefaultProps, getEvents, getListeners } from '../../_util/props-util';
-import { cloneElement } from '../../_util/vnode';
+import { initDefaultProps, getEvents, getListeners, getSlot } from '../../_util/props-util';
+// import { cloneElement } from '../../_util/vnode';
 import getScrollBarSize from '../../_util/getScrollBarSize';
 import { IDrawerProps } from './IDrawerPropTypes';
 import KeyCode from '../../_util/KeyCode';
@@ -16,7 +16,7 @@ import {
   transformArguments,
   isNumeric,
 } from './utils';
-import Portal from '../../_util/Portal';
+// import Portal from '../../_util/Portal';
 
 function noop() {}
 
@@ -27,9 +27,10 @@ const windowIsUndefined = !(
   window.document.createElement
 );
 
-Vue.use(ref, { name: 'ant-ref' });
+// Vue.use(ref, { name: 'ant-ref' });
 const Drawer = {
   mixins: [BaseMixin],
+  directives: { 'ant-ref': antRef },
   props: initDefaultProps(IDrawerProps, {
     prefixCls: 'drawer',
     placement: 'left',
@@ -65,7 +66,7 @@ const Drawer = {
     };
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (!windowIsUndefined) {
         let passiveSupported = false;
         window.addEventListener(
@@ -119,7 +120,7 @@ const Drawer = {
     },
   },
   updated() {
-    this.$nextTick(() => {
+    nextTick(() => {
       // dom 没渲染时，重走一遍。
       if (!this.sFirstEnter && this.container) {
         this.$forceUpdate();
@@ -362,7 +363,9 @@ const Drawer = {
           }
         }
       }
-      const { change } = getListeners(this);
+      // TODO
+      // const { change } = getListeners(this);
+      const change = false;
       if (change && this.isOpenChange && this.sFirstEnter) {
         change(open);
         this.isOpenChange = false;
@@ -382,7 +385,7 @@ const Drawer = {
         keyboard,
         maskClosable,
       } = this.$props;
-      const children = this.$slots.default;
+      const children = getSlot(this);
       const wrapperClassname = classnames(prefixCls, {
         [`${prefixCls}-${placement}`]: true,
         [`${prefixCls}-open`]: open,
@@ -411,73 +414,80 @@ const Drawer = {
           </div>
         );
         const { handler: handlerSlot } = this;
-        const handlerSlotVnode = (handlerSlot && handlerSlot[0]) || handlerDefalut;
-        const { click: handleIconClick } = getEvents(handlerSlotVnode);
-        handlerChildren = cloneElement(handlerSlotVnode, {
-          on: {
-            click: e => {
+        const handlerSlotVnode = handlerSlot || handlerDefalut;
+        const { onclick: handleIconClick } = getEvents(handlerSlotVnode);
+        handlerChildren = withDirectives(
+          cloneVNode(handlerSlotVnode, {
+            onClick: e => {
               handleIconClick && handleIconClick();
               this.onIconTouchEnd(e);
             },
-          },
-          directives: [
-            {
-              name: 'ant-ref',
-              value: c => {
+          }),
+          [
+            [
+              antRef, //directive
+              c => {
                 this.handlerdom = c;
-              },
-            },
+              }, // value
+            ],
           ],
-        });
+        );
       }
       const domContProps = {
         class: wrapperClassname,
-        directives: [
-          {
-            name: 'ant-ref',
-            value: c => {
-              this.dom = c;
-            },
-          },
-        ],
-        on: {
-          transitionend: this.onWrapperTransitionEnd,
-          keydown: open && keyboard ? this.onKeyDown : noop,
-        },
+        // directives: [
+        //   {
+        //     name: 'ant-ref',
+        //     value: c => {
+        //       this.dom = c;
+        //     },
+        //   },
+        // ],
+        onTransitionend: this.onWrapperTransitionEnd,
+        onKeydown: open && keyboard ? this.onKeyDown : noop,
         style: wrapStyle,
       };
-      const directivesMaskDom = [
-        {
-          name: 'ant-ref',
-          value: c => {
-            this.maskDom = c;
-          },
-        },
-      ];
-      const directivesContentWrapper = [
-        {
-          name: 'ant-ref',
-          value: c => {
-            this.contentWrapper = c;
-          },
-        },
-      ];
-      const directivesContentDom = [
-        {
-          name: 'ant-ref',
-          value: c => {
-            this.contentDom = c;
-          },
-        },
-      ];
+      // const directivesMaskDom = [
+      //   {
+      //     name: 'ant-ref',
+      //     value: c => {
+      //       this.maskDom = c;
+      //     },
+      //   },
+      // ];
+      // const directivesContentWrapper = [
+      //   {
+      //     name: 'ant-ref',
+      //     value: c => {
+      //       this.contentWrapper = c;
+      //     },
+      //   },
+      // ];
+      // const directivesContentDom = [
+      //   {
+      //     name: 'ant-ref',
+      //     value: c => {
+      //       this.contentDom = c;
+      //     },
+      //   },
+      // ];
       return (
-        <div {...domContProps} tabIndex={-1}>
+        <div
+          v-ant-ref={c => {
+            this.dom = c;
+          }}
+          {...domContProps}
+          tabIndex={-1}
+        >
           {showMask && (
             <div
               class={`${prefixCls}-mask`}
               onClick={maskClosable ? this.onMaskTouchEnd : noop}
               style={maskStyle}
-              {...{ directives: directivesMaskDom }}
+              v-ant-ref={c => {
+                this.maskDom = c;
+              }}
+              // {...{ directives: directivesMaskDom }}
             />
           )}
           <div
@@ -488,11 +498,17 @@ const Drawer = {
               width: isNumeric(width) ? `${width}px` : width,
               height: isNumeric(height) ? `${height}px` : height,
             }}
-            {...{ directives: directivesContentWrapper }}
+            v-ant-ref={c => {
+              this.contentWrapper = c;
+            }}
+            // {...{ directives: directivesContentWrapper }}
           >
             <div
               class={`${prefixCls}-content`}
-              {...{ directives: directivesContentDom }}
+              v-ant-ref={c => {
+                this.contentDom = c;
+              }}
+              // {...{ directives: directivesContentDom }}
               onTouchstart={open ? this.removeStartHandler : noop} // 跑用例用
               onTouchmove={open ? this.removeMoveHandler : noop} // 跑用例用
             >
@@ -604,16 +620,21 @@ const Drawer = {
     currentDrawer[this.drawerId] = open ? this.container : open;
     const children = this.getChildToRender(this.sFirstEnter ? open : false);
     if (!getContainer) {
-      const directives = [
-        {
-          name: 'ant-ref',
-          value: c => {
-            this.container = c;
-          },
-        },
-      ];
+      // const directives = [
+      //   {
+      //     name: 'ant-ref',
+      //     value: c => {
+      //       this.container = c;
+      //     },
+      //   },
+      // ];
       return (
-        <div class={wrapperClassName} {...{ directives }}>
+        <div
+          class={wrapperClassName}
+          v-ant-ref={c => {
+            this.container = c;
+          }}
+        >
           {children}
         </div>
       );
@@ -624,7 +645,7 @@ const Drawer = {
     // 如果有 handler 为内置强制渲染；
     const $forceRender = !!handler || forceRender;
     if ($forceRender || open || this.dom) {
-      portal = <Portal getContainer={this.getSelfContainer} children={children}></Portal>;
+      portal = <Teleport to={this.getSelfContainer()}>{children}</Teleport>;
     }
     return portal;
   },

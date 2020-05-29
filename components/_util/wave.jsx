@@ -1,4 +1,4 @@
-import { nextTick } from 'vue';
+import { nextTick, inject } from 'vue';
 import TransitionEvents from './css-animation/Event';
 import raf from './raf';
 import { ConfigConsumerProps } from '../config-provider';
@@ -31,8 +31,11 @@ export default {
       this.instance = this.bindAnimationEvent(node);
     });
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    const configProvider = inject('configProvider', ConfigConsumerProps);
+    return {
+      configProvider,
+    };
   },
   beforeDestroy() {
     if (this.instance) {
@@ -162,10 +165,10 @@ export default {
   },
 
   render() {
-    const csp = this.configProvider().csp;
+    const csp = this.configProvider.csp;
     if (csp) {
       this.csp = csp;
     }
-    return this.$slots.default() && this.$slots.default()[0];
+    return this.$slots.default && this.$slots.default()[0];
   },
 };

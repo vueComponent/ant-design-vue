@@ -114,10 +114,18 @@ const Form = {
         field.clearValidate();
       });
     },
-    validate(callback) {
+    validate(callback, fieldProps) {
       if (!this.model) {
         warning(false, 'FormModel', 'model is required for resetFields to work.');
         return;
+      }
+      fieldProps = [].concat(fieldProps);
+      let fields;
+      // 没传入fieldProps或者传入的为空数组时，验证所有字段
+      if (fieldProps.length === 0) {
+        fields = this.fields;
+      } else {
+        fields = this.fields.filter(field => fieldProps.indexOf(field.prop) !== -1);
       }
       let promise;
       // if no callback, return promise
@@ -131,17 +139,17 @@ const Form = {
       let valid = true;
       let count = 0;
       // 如果需要验证的fields为空，调用验证时立刻返回callback
-      if (this.fields.length === 0 && callback) {
+      if (fields.length === 0 && callback) {
         callback(true);
       }
       let invalidFields = {};
-      this.fields.forEach(field => {
+      fields.forEach(field => {
         field.validate('', (message, field) => {
           if (message) {
             valid = false;
           }
           invalidFields = Object.assign({}, invalidFields, field);
-          if (typeof callback === 'function' && ++count === this.fields.length) {
+          if (typeof callback === 'function' && ++count === fields.length) {
             callback(valid, invalidFields);
           }
         });

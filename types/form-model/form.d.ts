@@ -148,12 +148,12 @@ export declare class FormModel extends AntdComponent {
   validateOnRuleChange: boolean;
 
   /**
-   * validate the whole form. Takes a callback as a param. After validation,
-   * the callback will be executed with two params: a boolean indicating if the validation has passed,
-   * and an object containing all fields that fail the validation. Returns a promise if callback is omitted
+   * validate the whole form or part of the fields. Takes a callback as the 1st param and field props to validate as the 2nd param.
+   * After validation, the callback will be executed with two params: a boolean indicating if the validation has passed,
+   * and an object containing all fields that fail the validation. Returns a promise if callback is not provided.
    * @type Function
    */
-  validate: (callback?: (boolean: Boolean, object: Object) => void) => void | Promise<any>;
+  validate: (callback?: (boolean: Boolean, object: Object) => void, fieldProps?: string[] | string) => void | Promise<any>;
 
   /**
    * validate one or several form items

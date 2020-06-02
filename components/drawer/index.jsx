@@ -5,12 +5,12 @@ import VcDrawer from '../vc-drawer/src';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
-import { getComponentFromProp, getOptionProps, getListeners } from '../_util/props-util';
+import { getComponent, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 
 const Drawer = {
   name: 'ADrawer',
+  inheritAttrs: false,
   props: {
     closable: PropTypes.bool.def(true),
     destroyOnClose: PropTypes.bool,
@@ -145,9 +145,7 @@ const Drawer = {
     },
     renderHeader(prefixCls) {
       const { closable, headerStyle } = this.$props;
-      // TODO
-      // const title = getComponentFromProp(this, 'title');
-      const title = null;
+      const title = getComponent(this, 'title');
       if (!title && !closable) {
         return null;
       }
@@ -220,13 +218,12 @@ const Drawer = {
     } else {
       offsetStyle.height = typeof height === 'number' ? `${height}px` : height;
     }
-    // TODO
-    // const handler = getComponentFromProp(this, 'handle') || false;
-    const handler = false;
+    const handler = getComponent(this, 'handle') || false;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('drawer', customizePrefixCls);
 
     const vcDrawerProps = {
+      ...this.$attrs,
       ...omit(rest, [
         'closable',
         'destroyOnClose',
@@ -256,22 +253,12 @@ const Drawer = {
       }),
       wrapStyle: this.getRcDrawerStyle(),
     };
-    return (
-      <VcDrawer
-        {...vcDrawerProps}
-        on={{
-          ...getListeners(this), //TODO
-        }}
-      >
-        {this.renderBody(prefixCls)}
-      </VcDrawer>
-    );
+    return <VcDrawer {...vcDrawerProps}>{this.renderBody(prefixCls)}</VcDrawer>;
   },
 };
 
 /* istanbul ignore next */
 Drawer.install = function(app) {
-  app.use(Base);
   app.component(Drawer.name, Drawer);
 };
 

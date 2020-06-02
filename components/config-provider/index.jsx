@@ -2,7 +2,6 @@ import { reactive, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp } from '../_util/props-util';
 import defaultRenderEmpty from './renderEmpty';
-import Base from '../base';
 import LocaleProvider, { ANT_MARK } from '../locale-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 
@@ -85,9 +84,8 @@ export const ConfigConsumerProps = {
 };
 
 /* istanbul ignore next */
-ConfigProvider.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(ConfigProvider.name, ConfigProvider);
+ConfigProvider.install = function(app) {
+  app.component(ConfigProvider.name, ConfigProvider);
 };
 
 export default ConfigProvider;

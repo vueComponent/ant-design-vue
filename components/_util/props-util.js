@@ -122,7 +122,16 @@ const getOptionProps = instance => {
   const { $props = {} } = instance;
   return filterProps($props);
 };
-
+const getComponent = (instance, prop, options = instance, execute = true) => {
+  const temp = instance[prop];
+  if (temp !== undefined) {
+    return typeof temp === 'function' && execute ? temp(options) : temp;
+  } else {
+    let com = instance.$slots[prop] || null;
+    com = execute && com ? com(options) : com;
+    return Array.isArray(com) && com.length === 1 ? com[0] : com;
+  }
+};
 const getComponentFromProp = (instance, prop, options = instance, execute = true) => {
   if (instance.$createElement) {
     const h = instance.$createElement;
@@ -217,6 +226,9 @@ export function getEvents(child) {
   //   events = child.data.on;
   // }
   // return { ...events };
+}
+export function getEvent(child, event) {
+  return child.props && child.props[event];
 }
 
 // 获取 xxx.native 或者 原生标签 事件
@@ -338,6 +350,7 @@ export {
   hasProp,
   filterProps,
   getOptionProps,
+  getComponent,
   getComponentFromProp,
   getSlotOptions,
   slotHasProp,

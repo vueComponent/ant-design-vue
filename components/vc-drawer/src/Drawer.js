@@ -2,8 +2,7 @@ import classnames from 'classnames';
 import { cloneVNode, withDirectives, Teleport, nextTick } from 'vue';
 import antRef from '../../_util/ant-ref';
 import BaseMixin from '../../_util/BaseMixin';
-import { initDefaultProps, getEvents, getListeners, getSlot } from '../../_util/props-util';
-// import { cloneElement } from '../../_util/vnode';
+import { initDefaultProps, getSlot } from '../../_util/props-util';
 import getScrollBarSize from '../../_util/getScrollBarSize';
 import { IDrawerProps } from './IDrawerPropTypes';
 import KeyCode from '../../_util/KeyCode';
@@ -16,7 +15,6 @@ import {
   transformArguments,
   isNumeric,
 } from './utils';
-// import Portal from '../../_util/Portal';
 
 function noop() {}
 
@@ -27,9 +25,10 @@ const windowIsUndefined = !(
   window.document.createElement
 );
 
-// Vue.use(ref, { name: 'ant-ref' });
 const Drawer = {
+  name: 'Drawer',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   directives: { 'ant-ref': antRef },
   props: initDefaultProps(IDrawerProps, {
     prefixCls: 'drawer',
@@ -63,6 +62,9 @@ const Drawer = {
     this.preProps = { ...this.$props };
     return {
       sOpen: open,
+      isOpenChange: undefined,
+      passive: undefined,
+      container: undefined,
     };
   },
   mounted() {
@@ -363,11 +365,9 @@ const Drawer = {
           }
         }
       }
-      // TODO
-      // const { change } = getListeners(this);
-      const change = false;
-      if (change && this.isOpenChange && this.sFirstEnter) {
-        change(open);
+      const { onChange } = this.$attrs;
+      if (onChange && this.isOpenChange && this.sFirstEnter) {
+        onChange(open);
         this.isOpenChange = false;
       }
     },
@@ -385,12 +385,14 @@ const Drawer = {
         keyboard,
         maskClosable,
       } = this.$props;
+      const { class: cls, style } = this.$attrs;
       const children = getSlot(this);
       const wrapperClassname = classnames(prefixCls, {
         [`${prefixCls}-${placement}`]: true,
         [`${prefixCls}-open`]: open,
         [className]: !!className,
         'no-mask': !showMask,
+        [cls]: true,
       });
       const isOpenChange = this.isOpenChange;
       const isHorizontal = placement === 'left' || placement === 'right';
@@ -409,13 +411,13 @@ const Drawer = {
       let handlerChildren;
       if (handler !== false) {
         const handlerDefalut = (
-          <div class="drawer-handle">
+          <div class="drawer-handle" onClick={() => {}}>
             <i class="drawer-handle-icon" />
           </div>
         );
         const { handler: handlerSlot } = this;
         const handlerSlotVnode = handlerSlot || handlerDefalut;
-        const { onclick: handleIconClick } = getEvents(handlerSlotVnode);
+        const handleIconClick = handlerSlotVnode.props && handlerSlotVnode.props.onClick;
         handlerChildren = withDirectives(
           cloneVNode(handlerSlotVnode, {
             onClick: e => {
@@ -445,7 +447,7 @@ const Drawer = {
         // ],
         onTransitionend: this.onWrapperTransitionEnd,
         onKeydown: open && keyboard ? this.onKeyDown : noop,
-        style: wrapStyle,
+        style: { ...wrapStyle, ...style },
       };
       // const directivesMaskDom = [
       //   {

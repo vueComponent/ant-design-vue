@@ -203,12 +203,20 @@ const getKey = ele => {
 
 export function getEvents(child) {
   let events = {};
-  if (child.componentOptions && child.componentOptions.listeners) {
-    events = child.componentOptions.listeners;
-  } else if (child.data && child.data.on) {
-    events = child.data.on;
+  for (let key in child) {
+    if (/^on/.test(key)) {
+      key = key.toLowerCase();
+      events[key] = child[key];
+    }
   }
-  return { ...events };
+  return events;
+  // let events = {};
+  // if (child.componentOptions && child.componentOptions.listeners) {
+  //   events = child.componentOptions.listeners;
+  // } else if (child.data && child.data.on) {
+  //   events = child.data.on;
+  // }
+  // return { ...events };
 }
 
 // 获取 xxx.native 或者 原生标签 事件

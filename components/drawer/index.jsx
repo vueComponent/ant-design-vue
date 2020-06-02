@@ -1,3 +1,4 @@
+import { inject, provide, nextTick } from 'vue';
 import classnames from 'classnames';
 import omit from 'omit.js';
 import VcDrawer from '../vc-drawer/src';
@@ -42,16 +43,27 @@ const Drawer = {
       _push: false,
     };
   },
-  inject: {
-    parentDrawer: {
-      default: () => null,
-    },
-    configProvider: { default: () => ConfigConsumerProps },
-  },
-  provide() {
+  setup() {
+    const configProvider = inject('configProvider', ConfigConsumerProps);
     return {
-      parentDrawer: this,
+      configProvider,
     };
+  },
+  // inject: {
+  //   parentDrawer: {
+  //     default: () => null,
+  //   },
+  //   configProvider: { default: () => ConfigConsumerProps },
+  // },
+  // provide() {
+  //   return {
+  //     parentDrawer: this,
+  //   };
+  // },
+  beforeCreate() {
+    const parentDrawer = inject('parentDrawer', null);
+    provide('parentDrawer', this);
+    this.parentDrawer = parentDrawer;
   },
   mounted() {
     // fix: delete drawer in child and re-render, no push started.
@@ -62,7 +74,7 @@ const Drawer = {
     }
   },
   updated() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (this.preVisible !== this.visible && this.parentDrawer) {
         if (this.visible) {
           this.parentDrawer.push();
@@ -133,7 +145,9 @@ const Drawer = {
     },
     renderHeader(prefixCls) {
       const { closable, headerStyle } = this.$props;
-      const title = getComponentFromProp(this, 'title');
+      // TODO
+      // const title = getComponentFromProp(this, 'title');
+      const title = null;
       if (!title && !closable) {
         return null;
       }
@@ -181,7 +195,7 @@ const Drawer = {
         >
           {this.renderHeader(prefixCls)}
           <div key="body" class={`${prefixCls}-body`} style={bodyStyle}>
-            {this.$slots.default}
+            {this.$slots.default && this.$slots.default()}
           </div>
         </div>
       );
@@ -206,53 +220,59 @@ const Drawer = {
     } else {
       offsetStyle.height = typeof height === 'number' ? `${height}px` : height;
     }
-    const handler = getComponentFromProp(this, 'handle') || false;
+    // TODO
+    // const handler = getComponentFromProp(this, 'handle') || false;
+    const handler = false;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('drawer', customizePrefixCls);
 
     const vcDrawerProps = {
-      props: {
-        ...omit(rest, [
-          'closable',
-          'destroyOnClose',
-          'drawerStyle',
-          'headerStyle',
-          'bodyStyle',
-          'title',
-          'push',
-          'visible',
-          'getPopupContainer',
-          'rootPrefixCls',
-          'getPrefixCls',
-          'renderEmpty',
-          'csp',
-          'pageHeader',
-          'autoInsertSpaceInButton',
-        ]),
-        handler,
-        ...offsetStyle,
-        prefixCls,
-        open: visible,
-        showMask: mask,
-        placement,
-        className: classnames({
-          [wrapClassName]: !!wrapClassName,
-          [haveMask]: !!haveMask,
-        }),
-        wrapStyle: this.getRcDrawerStyle(),
-      },
-      on: {
-        ...getListeners(this),
-      },
+      ...omit(rest, [
+        'closable',
+        'destroyOnClose',
+        'drawerStyle',
+        'headerStyle',
+        'bodyStyle',
+        'title',
+        'push',
+        'visible',
+        'getPopupContainer',
+        'rootPrefixCls',
+        'getPrefixCls',
+        'renderEmpty',
+        'csp',
+        'pageHeader',
+        'autoInsertSpaceInButton',
+      ]),
+      handler,
+      ...offsetStyle,
+      prefixCls,
+      open: visible,
+      showMask: mask,
+      placement,
+      className: classnames({
+        [wrapClassName]: !!wrapClassName,
+        [haveMask]: !!haveMask,
+      }),
+      wrapStyle: this.getRcDrawerStyle(),
     };
-    return <VcDrawer {...vcDrawerProps}>{this.renderBody(prefixCls)}</VcDrawer>;
+    return (
+      <VcDrawer
+        {...vcDrawerProps}
+        on={{
+          ...getListeners(this), //TODO
+        }}
+      >
+        {this.renderBody(prefixCls)}
+      </VcDrawer>
+    );
   },
 };
 
 /* istanbul ignore next */
-Drawer.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Drawer.name, Drawer);
+Drawer.install = function(app) {
+  app.use(Base);
+  app.component(Drawer.name, Drawer);
 };
 
 export default Drawer;

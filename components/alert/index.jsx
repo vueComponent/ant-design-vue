@@ -1,4 +1,4 @@
-import { Transition } from 'vue';
+import { Transition, inject, cloneVNode } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -12,10 +12,8 @@ import classNames from 'classnames';
 import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
 import getTransitionProps from '../_util/getTransitionProps';
-import { getComponentFromProp, isValidElement } from '../_util/props-util';
-import { cloneElement } from '../_util/vnode';
+import { getComponent, isValidElement } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 
 function noop() {}
 
@@ -61,8 +59,10 @@ const Alert = {
   name: 'AAlert',
   props: AlertProps,
   mixins: [BaseMixin],
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     return {
@@ -99,11 +99,10 @@ const Alert = {
     const prefixCls = getPrefixCls('alert', customizePrefixCls);
 
     let { closable, type, showIcon } = this;
-    const { closeText, description, message, icon } = this.$props;
-    // const closeText = getComponentFromProp(this, 'closeText');
-    // const description = getComponentFromProp(this, 'description');
-    // const message = getComponentFromProp(this, 'message');
-    // const icon = getComponentFromProp(this, 'icon');
+    const closeText = getComponent(this, 'closeText');
+    const description = getComponent(this, 'description');
+    const message = getComponent(this, 'message');
+    const icon = getComponent(this, 'icon');
     // banner模式默认有 Icon
     showIcon = banner && showIcon === undefined ? true : showIcon;
     // banner模式默认为警告
@@ -133,7 +132,7 @@ const Alert = {
 
     const iconNode = (icon &&
       (isValidElement(icon) ? (
-        cloneElement(icon, {
+        cloneVNode(icon, {
           class: `${prefixCls}-icon`,
         })
       ) : (
@@ -159,9 +158,8 @@ const Alert = {
 };
 
 /* istanbul ignore next */
-Alert.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Alert.name, Alert);
+Alert.install = function(app) {
+  app.component(Alert.name, Alert);
 };
 
 export default Alert;

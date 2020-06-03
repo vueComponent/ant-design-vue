@@ -1,26 +1,15 @@
 <template>
   <div>
-    <a-affix :offset-top="top">
-      <a-button type="primary" @click="top += 10">
-        Affix top
-      </a-button>
-    </a-affix>
+    <a-alert message="Warning text" banner />
     <br />
-    <a-affix :offset-bottom="bottom">
-      <a-button type="primary" @click="bottom += 10">
-        Affix bottom
-      </a-button>
-    </a-affix>
+    <a-alert
+      message="Very long warning text warning text text text text text text text"
+      banner
+      closable
+    />
+    <br />
+    <a-alert :show-icon="false" message="Warning text without icon" banner />
+    <br />
+    <a-alert type="error" message="Error text" banner />
   </div>
 </template>
-
-<script>
-export default {
-  data() {
-    return {
-      top: 10,
-      bottom: 10,
-    };
-  },
-};
-</script>

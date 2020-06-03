@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import omit from 'omit.js';
@@ -5,7 +6,6 @@ import ResizeObserver from '../vc-resize-observer';
 import BaseMixin from '../_util/BaseMixin';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 import warning from '../_util/warning';
 import {
   addObserveTarget,
@@ -31,7 +31,7 @@ const AffixProps = {
   /** 固定状态改变时触发的回调函数 */
   // onChange?: (affixed?: boolean) => void;
   /** 设置 Affix 需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数 */
-  target: PropTypes.func.def(getDefaultTarget),
+  target: PropTypes.func.def(() => getDefaultTarget),
   prefixCls: PropTypes.string,
 };
 const AffixStatus = {
@@ -42,8 +42,10 @@ const Affix = {
   name: 'AAffix',
   props: AffixProps,
   mixins: [BaseMixin],
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     return {
@@ -238,9 +240,7 @@ const Affix = {
       [getPrefixCls('affix', prefixCls)]: affixStyle,
     });
 
-    const props = {
-      attrs: omit($props, ['prefixCls', 'offsetTop', 'offsetBottom', 'target']),
-    };
+    const props = omit($props, ['prefixCls', 'offsetTop', 'offsetBottom', 'target']);
     return (
       <ResizeObserver
         onResize={() => {
@@ -249,7 +249,7 @@ const Affix = {
       >
         <div {...props} style={placeholderStyle} ref="placeholderNode">
           <div class={className} ref="fixedNode" style={affixStyle}>
-            {$slots.default}
+            {$slots.default && $slots.default()}
           </div>
         </div>
       </ResizeObserver>
@@ -258,9 +258,8 @@ const Affix = {
 };
 
 /* istanbul ignore next */
-Affix.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Affix.name, Affix);
+Affix.install = function(app) {
+  app.component(Affix.name, Affix);
 };
 
 export default Affix;

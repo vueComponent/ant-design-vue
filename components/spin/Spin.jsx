@@ -1,3 +1,4 @@
+import { inject, cloneVNode } from 'vue';
 import debounce from 'lodash/debounce';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
@@ -5,10 +6,9 @@ import {
   filterEmpty,
   initDefaultProps,
   isValidElement,
-  getComponentFromProp,
+  getComponent,
   getListeners,
 } from '../_util/props-util';
-import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
 
 export const SpinSize = PropTypes.oneOf(['small', 'default', 'large']);
@@ -47,8 +47,10 @@ export default {
     spinning: true,
     wrapperClassName: '',
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     const { spinning, delay } = this;
@@ -100,7 +102,7 @@ export default {
     renderIndicator(h, prefixCls) {
       // const h = this.$createElement
       const dotClassName = `${prefixCls}-dot`;
-      let indicator = getComponentFromProp(this, 'indicator');
+      let indicator = getComponent(this, 'indicator');
       // should not be render default indicator when indicator value is null
       if (indicator === null) {
         return null;
@@ -110,11 +112,11 @@ export default {
         indicator = indicator.length === 1 ? indicator[0] : indicator;
       }
       if (isValidElement(indicator)) {
-        return cloneElement(indicator, { class: dotClassName });
+        return cloneVNode(indicator, { class: dotClassName });
       }
 
       if (defaultIndicator && isValidElement(defaultIndicator(h))) {
-        return cloneElement(defaultIndicator(h), { class: dotClassName });
+        return cloneVNode(defaultIndicator(h), { class: dotClassName });
       }
 
       return (

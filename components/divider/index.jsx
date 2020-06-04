@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
@@ -10,8 +11,10 @@ const Divider = {
     dashed: PropTypes.bool,
     orientation: PropTypes.oneOf(['left', 'right', 'center']),
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   render() {
     const { prefixCls: customizePrefixCls, type, $slots, dashed, orientation = 'center' } = this;
@@ -28,16 +31,18 @@ const Divider = {
 
     return (
       <div class={classString} role="separator">
-        {$slots.default && <span class={`${prefixCls}-inner-text`}>{$slots.default}</span>}
+        {$slots.default && (
+          <span class={`${prefixCls}-inner-text`}>{$slots.default && $slots.default()}</span>
+        )}
       </div>
     );
   },
 };
 
 /* istanbul ignore next */
-Divider.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Divider.name, Divider);
+Divider.install = function(app) {
+  app.use(Base);
+  app.component(Divider.name, Divider);
 };
 
 export default Divider;

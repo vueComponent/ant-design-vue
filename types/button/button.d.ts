@@ -5,9 +5,7 @@
 import { AntdComponent } from '../component';
 import { ButtonGroup } from './button-group';
 
-export declare class Button extends AntdComponent {
-  static Group: typeof ButtonGroup;
-
+export class ButtonProps {
   /**
    * can be set to primary ghost dashed danger(added in 2.7) or omitted (meaning default)
    * @default 'default'
@@ -68,4 +66,8 @@ export declare class Button extends AntdComponent {
    * @type boolean
    */
   block: boolean;
+}
+
+export declare class Button extends AntdComponent<ButtonProps> {
+  static Group: typeof ButtonGroup;
 }

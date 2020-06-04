@@ -4,7 +4,7 @@
 
 import { AntdComponent } from '../component';
 
-export declare class ButtonGroup extends AntdComponent {
+export declare class ButtonGroupProps {
   /**
    * can be set to small large or omitted
    * @default 'default'
@@ -12,3 +12,5 @@ export declare class ButtonGroup extends AntdComponent {
    */
   size: 'small' | 'large' | 'default';
 }
+
+export declare class ButtonGroup extends AntdComponent<ButtonGroupProps> {}

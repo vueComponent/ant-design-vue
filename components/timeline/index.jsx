@@ -8,10 +8,10 @@ export { TimeLineItemProps } from './TimelineItem';
 Timeline.Item = TimelineItem;
 
 /* istanbul ignore next */
-Timeline.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Timeline.name, Timeline);
-  Vue.component(TimelineItem.name, TimelineItem);
+Timeline.install = function(app) {
+  app.use(Base);
+  app.component(Timeline.name, Timeline);
+  app.component(TimelineItem.name, TimelineItem);
 };
 
 export default Timeline;

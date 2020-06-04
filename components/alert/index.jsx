@@ -95,7 +95,7 @@ const Alert = {
 
   render() {
     const { prefixCls: customizePrefixCls, banner, closing, closed } = this;
-    const getPrefixCls = this.configProvider().getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('alert', customizePrefixCls);
 
     let { closable, type, showIcon } = this;

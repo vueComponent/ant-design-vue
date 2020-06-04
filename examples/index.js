@@ -10,6 +10,8 @@ import Divider from 'ant-design-vue/divider';
 import ConfigProvider from 'ant-design-vue/config-provider';
 import Result from 'ant-design-vue/result';
 import Spin from 'ant-design-vue/spin';
+import PageHeader from 'ant-design-vue/page-header';
+import Spin from 'ant-design-vue/Spin';
 import Empty from 'ant-design-vue/empty';
 import Timeline from 'ant-design-vue/timeline';
 import 'ant-design-vue/style.js';
@@ -23,6 +25,7 @@ createApp(App)
   .use(Alert)
   .use(Divider)
   .use(Result)
+  .use(PageHeader)
   .use(Spin)
   .use(Empty)
   .use(Timeline)

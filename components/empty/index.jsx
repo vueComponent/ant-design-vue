@@ -1,10 +1,9 @@
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
-import { getComponentFromProp, getListeners } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import DefaultEmptyImg from './empty';
 import SimpleEmptyImg from './simple';
-import Base from '../base';
 
 export const TransferLocale = () => {
   return {
@@ -30,8 +29,8 @@ const Empty = {
     renderEmpty(contentLocale) {
       const { prefixCls: customizePrefixCls, imageStyle } = this.$props;
       const prefixCls = ConfigConsumerProps.getPrefixCls('empty', customizePrefixCls);
-      const image = getComponentFromProp(this, 'image') || <DefaultEmptyImg />;
-      const description = getComponentFromProp(this, 'description');
+      const image = getComponent(this, 'image') || <DefaultEmptyImg />;
+      const description = getComponent(this, 'description');
 
       const des = typeof description !== 'undefined' ? description : contentLocale.description;
       const alt = typeof des === 'string' ? des : 'empty';
@@ -47,7 +46,7 @@ const Empty = {
         imageNode = image;
       }
       return (
-        <div class={cls} {...{ on: getListeners(this) }}>
+        <div class={cls}>
           <div class={`${prefixCls}-image`} style={imageStyle}>
             {imageNode}
           </div>
@@ -66,9 +65,8 @@ Empty.PRESENTED_IMAGE_DEFAULT = DefaultEmptyImg;
 Empty.PRESENTED_IMAGE_SIMPLE = SimpleEmptyImg;
 
 /* istanbul ignore next */
-Empty.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Empty.name, Empty);
+Empty.install = function(app) {
+  app.component(Empty.name, Empty);
 };
 
 export default Empty;

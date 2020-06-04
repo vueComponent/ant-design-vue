@@ -6,6 +6,7 @@ import Drawer from 'ant-design-vue/drawer';
 import Affix from 'ant-design-vue/affix';
 import Alert from 'ant-design-vue/alert';
 import ConfigProvider from 'ant-design-vue/config-provider';
+import Spin from 'ant-design-vue/Spin';
 import 'ant-design-vue/style.js';
 
 createApp(App)
@@ -14,4 +15,5 @@ createApp(App)
   .use(Drawer)
   .use(Affix)
   .use(Alert)
+  .use(Spin)
   .mount('#app');

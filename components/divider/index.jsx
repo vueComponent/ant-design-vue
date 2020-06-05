@@ -1,7 +1,6 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 
 const Divider = {
   name: 'ADivider',
@@ -41,7 +40,6 @@ const Divider = {
 
 /* istanbul ignore next */
 Divider.install = function(app) {
-  app.use(Base);
   app.component(Divider.name, Divider);
 };
 

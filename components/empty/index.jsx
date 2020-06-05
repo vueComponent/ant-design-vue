@@ -51,13 +51,13 @@ const Empty = {
             {imageNode}
           </div>
           {des && <p class={`${prefixCls}-description`}>{des}</p>}
-          {this.$slots.default && <div class={`${prefixCls}-footer`}>{this.$slots.default}</div>}
+          {this.$slots.default && <div class={`${prefixCls}-footer`}>{this.$slots.default()}</div>}
         </div>
       );
     },
   },
   render() {
-    return <LocaleReceiver componentName="Empty" scopedSlots={{ default: this.renderEmpty }} />;
+    return <LocaleReceiver componentName="Empty" children={this.renderEmpty} />;
   },
 };
 

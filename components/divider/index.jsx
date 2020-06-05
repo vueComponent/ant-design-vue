@@ -30,8 +30,8 @@ const Divider = {
 
     return (
       <div class={classString} role="separator">
-        {$slots.default && (
-          <span class={`${prefixCls}-inner-text`}>{$slots.default && $slots.default()}</span>
+        {$slots.default && $slots.default() && (
+          <span class={`${prefixCls}-inner-text`}>{$slots.default()}</span>
         )}
       </div>
     );

@@ -7,6 +7,7 @@ import Affix from 'ant-design-vue/affix';
 import Alert from 'ant-design-vue/alert';
 import ConfigProvider from 'ant-design-vue/config-provider';
 import Spin from 'ant-design-vue/Spin';
+import Empty from 'ant-design-vue/empty';
 import 'ant-design-vue/style.js';
 
 createApp(App)
@@ -16,4 +17,5 @@ createApp(App)
   .use(Affix)
   .use(Alert)
   .use(Spin)
+  .use(Empty)
   .mount('#app');

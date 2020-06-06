@@ -127,7 +127,7 @@ const getComponent = (instance, prop, options = instance, execute = true) => {
   if (temp !== undefined) {
     return typeof temp === 'function' && execute ? temp(options) : temp;
   } else {
-    let com = instance.$slots[prop] || null;
+    let com = instance.$slots[prop];
     com = execute && com ? com(options) : com;
     return Array.isArray(com) && com.length === 1 ? com[0] : com;
   }

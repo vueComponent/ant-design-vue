@@ -75,7 +75,7 @@ const Result = {
         {renderIcon(h, prefixCls, { status, icon })}
         <div class={`${prefixCls}-title`}>{title}</div>
         {subTitle && <div class={`${prefixCls}-subtitle`}>{subTitle}</div>}
-        {this.$slots.default && <div class={`${prefixCls}-content`}>{this.$slots.default}</div>}
+        {this.$slots.default && <div class={`${prefixCls}-content`}>{this.$slots.default()}</div>}
         {renderExtra(h, prefixCls, extra)}
       </div>
     );

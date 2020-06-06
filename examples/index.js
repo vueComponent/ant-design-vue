@@ -7,8 +7,8 @@ import Affix from 'ant-design-vue/affix';
 import Alert from 'ant-design-vue/alert';
 import Divider from 'ant-design-vue/divider';
 import ConfigProvider from 'ant-design-vue/config-provider';
-import Result from 'ant-design-vue/Result';
-import Spin from 'ant-design-vue/Spin';
+import Result from 'ant-design-vue/result';
+import Spin from 'ant-design-vue/spin';
 import Empty from 'ant-design-vue/empty';
 import 'ant-design-vue/style.js';
 

@@ -81,7 +81,7 @@ const Comment = {
         {contentDom}
       </div>
     );
-    const children = this.$slots.default;
+    const children = this.$slots.default && this.$slots.default();
     return (
       <div class={prefixCls}>
         {comment}

@@ -1,10 +1,10 @@
+import { inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getOptionProps, getListeners } from '../_util/props-util';
+import { initDefaultProps, getOptionProps } from '../_util/props-util';
 import VcSteps from '../vc-steps';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 
 const getStepsProps = (defaultProps = {}) => {
   const props = {
@@ -27,8 +27,10 @@ const Steps = {
   props: getStepsProps({
     current: 0,
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   model: {
     prop: 'current',
@@ -41,30 +43,27 @@ const Steps = {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('steps', customizePrefixCls);
     const iconPrefix = getPrefixCls('', customizeIconPrefixCls);
+    const progressDot = this.progressDot || this.$slots.progressDot;
 
     const icons = {
       finish: <CheckOutlined class={`${prefixCls}-finish-icon`} />,
       error: <CloseOutlined class={`${prefixCls}-error-icon`} />,
     };
     const stepsProps = {
-      props: {
-        icons,
-        iconPrefix,
-        prefixCls,
-        ...props,
-      },
-      on: getListeners(this),
-      scopedSlots: this.$scopedSlots,
+      icons,
+      iconPrefix,
+      prefixCls,
+      progressDot,
+      ...props,
     };
-    return <VcSteps {...stepsProps}>{this.$slots.default}</VcSteps>;
+    return <VcSteps {...stepsProps}>{this.$slots.default && this.$slots.default()}</VcSteps>;
   },
 };
 
 /* istanbul ignore next */
-Steps.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Steps.name, Steps);
-  Vue.component(Steps.Step.name, Steps.Step);
+Steps.install = function(app) {
+  app.component(Steps.name, Steps);
+  app.component(Steps.Step.name, Steps.Step);
 };
 
 export default Steps;

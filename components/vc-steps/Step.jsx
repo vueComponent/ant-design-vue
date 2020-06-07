@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
+import { getOptionProps, getComponent } from '../_util/props-util';
 
 function isString(str) {
   return typeof str === 'string';
@@ -35,14 +35,12 @@ export default {
       this.$emit('stepClick', this.stepIndex);
     },
     renderIconNode() {
-      const { prefixCls, stepNumber, status, iconPrefix, icons } = getOptionProps(this);
-      let progressDot = this.progressDot;
-      if (progressDot === undefined) {
-        progressDot = this.$scopedSlots.progressDot;
-      }
-      const icon = getComponentFromProp(this, 'icon');
-      const title = getComponentFromProp(this, 'title');
-      const description = getComponentFromProp(this, 'description');
+      const { prefixCls, stepNumber, status, iconPrefix, icons, progressDot } = getOptionProps(
+        this,
+      );
+      const icon = getComponent(this, 'icon');
+      const title = getComponent(this, 'title');
+      const description = getComponent(this, 'description');
       let iconNode;
       const iconClassName = {
         [`${prefixCls}-icon`]: true,
@@ -88,20 +86,19 @@ export default {
       disabled,
     } = getOptionProps(this);
 
-    const title = getComponentFromProp(this, 'title');
-    const subTitle = getComponentFromProp(this, 'subTitle');
-    const description = getComponentFromProp(this, 'description');
+    const title = getComponent(this, 'title');
+    const subTitle = getComponent(this, 'subTitle');
+    const description = getComponent(this, 'description');
 
     const classString = {
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-item-${status}`]: true,
-      [`${prefixCls}-item-custom`]: getComponentFromProp(this, 'icon'),
+      [`${prefixCls}-item-custom`]: getComponent(this, 'icon'),
       [`${prefixCls}-item-active`]: active,
       [`${prefixCls}-item-disabled`]: disabled === true,
     };
     const stepProps = {
       class: classString,
-      on: getListeners(this),
     };
     const stepItemStyle = {};
     if (itemWidth) {
@@ -110,17 +107,15 @@ export default {
     if (adjustMarginRight) {
       stepItemStyle.marginRight = adjustMarginRight;
     }
-    const listeners = getListeners(this);
+
+    const { onClick, onStepClick } = this.$attrs;
     const accessibilityProps = {
-      attrs: {},
-      on: {
-        click: listeners.click || noop,
-      },
+      onClick: onClick || noop,
     };
-    if (listeners.stepClick && !disabled) {
-      accessibilityProps.attrs.role = 'button';
-      accessibilityProps.attrs.tabIndex = 0;
-      accessibilityProps.on.click = this.onClick;
+    if (onStepClick && !disabled) {
+      accessibilityProps.role = 'button';
+      accessibilityProps.tabIndex = 0;
+      accessibilityProps.onClick = this.onClick;
     }
     return (
       <div {...stepProps} style={stepItemStyle}>

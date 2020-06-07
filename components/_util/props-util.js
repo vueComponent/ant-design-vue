@@ -44,12 +44,12 @@ const parseStyleText = (cssText = '', camel) => {
 
 const hasProp = (instance, prop) => {
   const $options = instance.$options || {};
-  const propsData = $options.propsData || {};
+  const propsData = $options.props || {};
   return prop in propsData;
 };
 const slotHasProp = (slot, prop) => {
   const $options = slot.componentOptions || {};
-  const propsData = $options.propsData || {};
+  const propsData = $options.props || {};
   return prop in propsData;
 };
 const filterProps = props => {

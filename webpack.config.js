@@ -37,7 +37,7 @@ module.exports = {
             ],
           ],
           plugins: [
-            ['@ant-design-vue/babel-plugin-jsx', { transformOn: true, compatibleProps: true }],
+            ['@ant-design-vue/babel-plugin-jsx', { transformOn: true }],
             '@babel/plugin-transform-object-assign',
             '@babel/plugin-proposal-object-rest-spread',
             '@babel/plugin-proposal-export-default-from',

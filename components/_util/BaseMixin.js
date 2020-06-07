@@ -25,7 +25,7 @@ export default {
       // 直接调用listeners，底层组件不需要vueTool记录events
       const args = [].slice.call(arguments, 0);
       const eventName = args[0];
-      const event = this.$listeners[eventName];
+      const event = this[eventName];
       if (args.length && event) {
         if (Array.isArray(event)) {
           for (let i = 0, l = event.length; i < l; i++) {

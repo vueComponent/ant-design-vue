@@ -1,12 +1,7 @@
+import { nextTick } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import classNames from 'classnames';
-import {
-  getOptionProps,
-  hasProp,
-  initDefaultProps,
-  getAttrs,
-  getListeners,
-} from '../../_util/props-util';
+import { getOptionProps, hasProp, initDefaultProps } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 
 export default {
@@ -53,7 +48,7 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (this.autoFocus) {
         this.$refs.input && this.$refs.input.focus();
       }
@@ -78,7 +73,7 @@ export default {
       }
       this.$forceUpdate(); // change前，维持现有状态
       e.shiftKey = this.eventShiftKey;
-      this.__emit('change', {
+      this.$emit('change', {
         target: {
           ...props,
           checked: e.target.checked,
@@ -94,7 +89,7 @@ export default {
       this.eventShiftKey = false;
     },
     onClick(e) {
-      this.__emit('click', e);
+      this.$emit('click', e);
       // onChange没能获取到shiftKey，使用onClick hack
       this.eventShiftKey = e.shiftKey;
     },
@@ -113,8 +108,8 @@ export default {
       value,
       ...others
     } = getOptionProps(this);
-    const attrs = getAttrs(this);
-    const globalProps = Object.keys({ ...others, ...attrs }).reduce((prev, key) => {
+    const { class: className, ...restAttrs } = this.$attrs;
+    const globalProps = Object.keys({ ...others, ...restAttrs }).reduce((prev, key) => {
       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
         prev[key] = others[key];
       }
@@ -122,34 +117,29 @@ export default {
     }, {});
 
     const { sChecked } = this;
-    const classString = classNames(prefixCls, {
+    const classString = classNames(prefixCls, className, {
       [`${prefixCls}-checked`]: sChecked,
       [`${prefixCls}-disabled`]: disabled,
     });
+    const inputProps = {
+      name,
+      id,
+      type,
+      readOnly,
+      disabled,
+      tabIndex,
+      class: `${prefixCls}-input`,
+      checked: !!sChecked,
+      autoFocus,
+      value,
+      ...globalProps,
+      onChange: this.handleChange,
+      onClick: this.onClick,
+    };
 
     return (
       <span class={classString}>
-        <input
-          name={name}
-          id={id}
-          type={type}
-          readOnly={readOnly}
-          disabled={disabled}
-          tabIndex={tabIndex}
-          class={`${prefixCls}-input`}
-          checked={!!sChecked}
-          autoFocus={autoFocus}
-          ref="input"
-          value={value}
-          {...{
-            attrs: globalProps,
-            on: {
-              ...getListeners(this),
-              change: this.handleChange,
-              click: this.onClick,
-            },
-          }}
-        />
+        <input ref="input" {...inputProps} />
         <span class={`${prefixCls}-inner`} />
       </span>
     );

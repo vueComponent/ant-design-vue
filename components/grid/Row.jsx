@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
@@ -25,8 +26,10 @@ export default {
       rowContext: this,
     };
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     return {
@@ -101,7 +104,7 @@ export default {
     };
     return (
       <div class={classes} style={rowStyle}>
-        {$slots.default}
+        {$slots.default && $slots.default()}
       </div>
     );
   },

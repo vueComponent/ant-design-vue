@@ -1,11 +1,7 @@
+import { inject } from 'vue';
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
-import {
-  getOptionProps,
-  initDefaultProps,
-  getComponentFromProp,
-  getListeners,
-} from '../_util/props-util';
+import { getOptionProps, initDefaultProps, getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export const TimeLineItemProps = {
@@ -22,15 +18,18 @@ export default {
     color: 'blue',
     pending: false,
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    const configProvider = inject('configProvider', ConfigConsumerProps);
+    return {
+      configProvider,
+    };
   },
   render() {
     const { prefixCls: customizePrefixCls, color = '', pending } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('timeline', customizePrefixCls);
 
-    const dot = getComponentFromProp(this, 'dot');
+    const dot = getComponent(this, 'dot');
     const itemClassName = classNames({
       [`${prefixCls}-item`]: true,
       [`${prefixCls}-item-pending`]: pending,
@@ -43,7 +42,6 @@ export default {
     });
     const liProps = {
       class: itemClassName,
-      on: getListeners(this),
     };
     return (
       <li {...liProps}>
@@ -54,7 +52,9 @@ export default {
         >
           {dot}
         </div>
-        <div class={`${prefixCls}-item-content`}>{this.$slots.default}</div>
+        <div class={`${prefixCls}-item-content`}>
+          {this.$slots.default && this.$slots.default()}
+        </div>
       </li>
     );
   },

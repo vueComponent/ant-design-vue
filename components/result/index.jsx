@@ -1,11 +1,11 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponentFromProp } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
 import WarningFilled from '@ant-design/icons-vue/WarningFilled';
-import Base from '../base';
 import noFound from './noFound';
 import serverError from './serverError';
 import unauthorized from './unauthorized';
@@ -55,25 +55,27 @@ const renderExtra = (h, prefixCls, extra) =>
 const Result = {
   name: 'AResult',
   props: ResultProps,
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   render(h) {
     const { prefixCls: customizePrefixCls, status } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('result', customizePrefixCls);
 
-    const title = getComponentFromProp(this, 'title');
-    const subTitle = getComponentFromProp(this, 'subTitle');
-    const icon = getComponentFromProp(this, 'icon');
-    const extra = getComponentFromProp(this, 'extra');
+    const title = getComponent(this, 'title');
+    const subTitle = getComponent(this, 'subTitle');
+    const icon = getComponent(this, 'icon');
+    const extra = getComponent(this, 'extra');
 
     return (
       <div class={`${prefixCls} ${prefixCls}-${status}`}>
         {renderIcon(h, prefixCls, { status, icon })}
         <div class={`${prefixCls}-title`}>{title}</div>
         {subTitle && <div class={`${prefixCls}-subtitle`}>{subTitle}</div>}
-        {this.$slots.default && <div class={`${prefixCls}-content`}>{this.$slots.default}</div>}
+        {this.$slots.default && <div class={`${prefixCls}-content`}>{this.$slots.default()}</div>}
         {renderExtra(h, prefixCls, extra)}
       </div>
     );
@@ -86,8 +88,7 @@ Result.PRESENTED_IMAGE_404 = ExceptionMap[404];
 Result.PRESENTED_IMAGE_500 = ExceptionMap[500];
 
 /* istanbul ignore next */
-Result.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Result.name, Result);
+Result.install = function(app) {
+  app.component(Result.name, Result);
 };
 export default Result;

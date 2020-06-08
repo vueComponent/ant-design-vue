@@ -95,11 +95,9 @@ const Skeleton = {
       let avatarNode;
       if (hasAvatar) {
         const avatarProps = {
-          props: {
-            prefixCls: `${prefixCls}-avatar`,
-            ...getAvatarBasicProps(hasTitle, hasParagraph),
-            ...getComponentProps(avatar),
-          },
+          prefixCls: `${prefixCls}-avatar`,
+          ...getAvatarBasicProps(hasTitle, hasParagraph),
+          ...getComponentProps(avatar),
         };
 
         avatarNode = (
@@ -115,11 +113,9 @@ const Skeleton = {
         let $title;
         if (hasTitle) {
           const titleProps = {
-            props: {
-              prefixCls: `${prefixCls}-title`,
-              ...getTitleBasicProps(hasAvatar, hasParagraph),
-              ...getComponentProps(title),
-            },
+            prefixCls: `${prefixCls}-title`,
+            ...getTitleBasicProps(hasAvatar, hasParagraph),
+            ...getComponentProps(title),
           };
 
           $title = <Title {...titleProps} />;
@@ -129,11 +125,9 @@ const Skeleton = {
         let paragraphNode;
         if (hasParagraph) {
           const paragraphProps = {
-            props: {
-              prefixCls: `${prefixCls}-paragraph`,
-              ...getParagraphBasicProps(hasAvatar, hasTitle),
-              ...getComponentProps(paragraph),
-            },
+            prefixCls: `${prefixCls}-paragraph`,
+            ...getParagraphBasicProps(hasAvatar, hasTitle),
+            ...getComponentProps(paragraph),
           };
 
           paragraphNode = <Paragraph {...paragraphProps} />;
@@ -159,8 +153,7 @@ const Skeleton = {
         </div>
       );
     }
-    const children = this.$slots.default && this.$slots.default();
-    return children && children.length === 1 ? children[0] : <span>{children}</span>;
+    return this.$slots.default && this.$slots.default();
   },
 };
 /* istanbul ignore next */

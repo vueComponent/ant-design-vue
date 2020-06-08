@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 import interopDefault from '../_util/interopDefault';
-import { initDefaultProps, getListeners } from '../_util/props-util';
+import { initDefaultProps } from '../_util/props-util';
 import Statistic, { StatisticProps } from './Statistic';
 import { formatCountdown } from './utils';
 
@@ -82,7 +82,6 @@ export default {
             valueRender: this.valueRenderHtml,
             formatter: this.formatCountdown,
           },
-          on: getListeners(this),
         }}
       />
     );

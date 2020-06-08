@@ -1,5 +1,6 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponentFromProp, initDefaultProps } from '../_util/props-util';
+import { getComponent, initDefaultProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import StatisticNumber from './Number';
 
@@ -28,15 +29,21 @@ export default {
     configProvider: { default: () => ConfigConsumerProps },
   },
 
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
+  },
+
   render() {
     const { prefixCls: customizePrefixCls, value = 0, valueStyle, valueRender } = this.$props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('statistic', customizePrefixCls);
 
-    const title = getComponentFromProp(this, 'title');
-    let prefix = getComponentFromProp(this, 'prefix');
-    let suffix = getComponentFromProp(this, 'suffix');
-    const formatter = getComponentFromProp(this, 'formatter', {}, false);
+    const title = getComponent(this, 'title');
+    let prefix = getComponent(this, 'prefix');
+    let suffix = getComponent(this, 'suffix');
+    const formatter = getComponent(this, 'formatter', {}, false);
     let valueNode = (
       <StatisticNumber {...{ props: { ...this.$props, prefixCls, value, formatter } }} />
     );

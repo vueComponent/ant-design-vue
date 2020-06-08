@@ -14,6 +14,7 @@ import Result from 'ant-design-vue/result';
 import Spin from 'ant-design-vue/spin';
 import Empty from 'ant-design-vue/empty';
 import Timeline from 'ant-design-vue/timeline';
+import Statistic from 'ant-design-vue/statistic';
 import 'ant-design-vue/style.js';
 
 createApp(App)
@@ -30,4 +31,5 @@ createApp(App)
   .use(Spin)
   .use(Empty)
   .use(Timeline)
+  .use(Statistic)
   .mount('#app');

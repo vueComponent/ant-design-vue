@@ -62,7 +62,7 @@ const renderTitle = (h, prefixCls, instance) => {
     ) : (
       <ArrowLeftOutlined />
     );
-  const onBack = instance.$listeners.back;
+  const onBack = instance.$attrs.onBack;
   const headingPrefixCls = `${prefixCls}-heading`;
   if (title || subTitle || tags || extra) {
     const backIconDom = renderBack(instance, prefixCls, backIcon, onBack);
@@ -104,7 +104,7 @@ const PageHeader = {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, breadcrumb } = props;
     const footer = getComponent(this, 'footer');
-    const children = this.$slots.default;
+    const children = this.$slots.default && this.$slots.default();
 
     let ghost = true;
 

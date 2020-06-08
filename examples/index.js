@@ -1,6 +1,7 @@
 import '@babel/polyfill';
 import { createApp } from 'vue';
 import App from './App.vue';
+import Avatar from 'ant-design-vue/avatar';
 import Button from 'ant-design-vue/button';
 import Comment from 'ant-design-vue/comment';
 import Drawer from 'ant-design-vue/drawer';
@@ -15,6 +16,7 @@ import Timeline from 'ant-design-vue/timeline';
 import 'ant-design-vue/style.js';
 
 createApp(App)
+  .use(Avatar)
   .use(Button)
   .use(Comment)
   .use(ConfigProvider)

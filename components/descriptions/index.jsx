@@ -1,17 +1,11 @@
+import { inject, isVNode, cloneVNode } from 'vue';
 import warning from '../_util/warning';
 import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import { ConfigConsumerProps } from '../config-provider';
 import Col from './Col';
 import PropTypes from '../_util/vue-types';
-import {
-  initDefaultProps,
-  isValidElement,
-  getOptionProps,
-  getComponentFromProp,
-} from '../_util/props-util';
+import { initDefaultProps, getOptionProps, getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import Base from '../base';
-import { cloneElement } from '../_util/vnode';
 
 export const DescriptionsItemProps = {
   prefixCls: PropTypes.string,
@@ -70,7 +64,7 @@ const generateChildrenRows = (children, column) => {
     let lastSpanSame = true;
     if (lastItem) {
       lastSpanSame = !itemProps.span || itemProps.span === leftSpans;
-      itemNode = cloneElement(itemNode, {
+      itemNode = cloneVNode(itemNode, {
         props: {
           span: leftSpans,
         },
@@ -109,12 +103,14 @@ const Descriptions = {
   name: 'ADescriptions',
   Item: DescriptionsItem,
   mixins: [BaseMixin],
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-  },
   props: initDefaultProps(DescriptionsProps, {
     column: defaultColumnMap,
   }),
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
+  },
   data() {
     return {
       screens: {},
@@ -205,16 +201,16 @@ const Descriptions = {
       layout = 'horizontal',
       colon = true,
     } = this.$props;
-    const title = getComponentFromProp(this, 'title') || null;
+    const title = getComponent(this, 'title') || null;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
 
     const column = this.getColumn();
-    const children = this.$slots.default;
+    const children = this.$slots.default && this.$slots.default();
     const cloneChildren = toArray(children)
       .map(child => {
-        if (isValidElement(child)) {
-          return cloneElement(child, {
+        if (isVNode(child)) {
+          return cloneVNode(child, {
             props: {
               prefixCls,
             },
@@ -259,10 +255,9 @@ const Descriptions = {
   },
 };
 
-Descriptions.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Descriptions.name, Descriptions);
-  Vue.component(Descriptions.Item.name, Descriptions.Item);
+Descriptions.install = function(app) {
+  app.component(Descriptions.name, Descriptions);
+  app.component(Descriptions.Item.name, Descriptions.Item);
 };
 
 export default Descriptions;

@@ -43,23 +43,11 @@ const parseStyleText = (cssText = '', camel) => {
 };
 
 const hasProp = (instance, prop) => {
-  const $options = instance.$options || {};
-  const propsData = $options.propsData || {};
-  return prop in propsData;
+  return prop in getOptionProps(instance);
 };
+// 重构后直接使用 hasProp 替换
 const slotHasProp = (slot, prop) => {
-  const $options = slot.componentOptions || {};
-  const propsData = $options.propsData || {};
-  return prop in propsData;
-};
-const filterProps = props => {
-  const res = {};
-  Object.keys(props).forEach(k => {
-    if (props[k] !== undefined) {
-      res[k] = props[k];
-    }
-  });
-  return res;
+  return hasProp(slot, prop);
 };
 
 const getScopedSlots = ele => {
@@ -105,22 +93,7 @@ const getSlotOptions = ele => {
   return componentOptions ? componentOptions.Ctor.options || {} : {};
 };
 const getOptionProps = instance => {
-  // if (instance.componentOptions) {
-  //   const componentOptions = instance.componentOptions;
-  //   const { propsData = {}, Ctor = {} } = componentOptions;
-  //   const props = (Ctor.options || {}).props || {};
-  //   const res = {};
-  //   for (const [k, v] of Object.entries(props)) {
-  //     const def = v.default;
-  //     if (def !== undefined) {
-  //       res[k] =
-  //         typeof def === 'function' && getType(v.type) !== 'Function' ? def.call(instance) : def;
-  //     }
-  //   }
-  //   return { ...res, ...propsData };
-  // }
-  const { $props = {} } = instance;
-  return filterProps($props);
+  return (instance.$ && instance.$.vnode && instance.$.vnode.props) || instance.props || {};
 };
 const getComponent = (instance, prop, options = instance, execute = true) => {
   const temp = instance[prop];
@@ -183,12 +156,10 @@ const getAllProps = ele => {
   return { ...data.props, ...data.attrs, ...componentOptions.propsData };
 };
 
+// 使用 getOptionProps 替换 ，待测试
 const getPropsData = ele => {
-  let componentOptions = ele.componentOptions;
-  if (ele.$vnode) {
-    componentOptions = ele.$vnode.componentOptions;
-  }
-  return componentOptions ? componentOptions.propsData || {} : {};
+  return getOptionProps(ele);
+  //return ele.props || {};
 };
 const getValueByProp = (ele, prop) => {
   return getPropsData(ele)[prop];
@@ -348,7 +319,6 @@ function isValidElement(element) {
 export {
   splitAttrs,
   hasProp,
-  filterProps,
   getOptionProps,
   getComponent,
   getComponentFromProp,

@@ -1,5 +1,6 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getComponentFromProp } from '../_util/props-util';
+import { initDefaultProps, getComponent } from '../_util/props-util';
 import classNames from 'classnames';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -15,10 +16,12 @@ export default {
   props: initDefaultProps(AnchorLinkProps, {
     href: '#',
   }),
-  inject: {
-    antAnchor: { default: () => ({}) },
-    antAnchorContext: { default: () => ({}) },
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      antAnchor: inject('antAnchor', {}),
+      antAnchorContext: inject('antAnchorContext', {}),
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   watch: {
     href(val, oldVal) {
@@ -53,7 +56,7 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('anchor', customizePrefixCls);
 
-    const title = getComponentFromProp(this, 'title');
+    const title = getComponent(this, 'title');
     const active = this.antAnchor.$data.activeLink === href;
     const wrapperClassName = classNames(`${prefixCls}-link`, {
       [`${prefixCls}-link-active`]: active,
@@ -72,7 +75,7 @@ export default {
         >
           {title}
         </a>
-        {$slots.default}
+        {$slots.default && $slots.default()}
       </div>
     );
   },

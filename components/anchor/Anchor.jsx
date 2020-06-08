@@ -1,3 +1,4 @@
+import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import addEventListener from '../vc-util/Dom/addEventListener';
@@ -98,9 +99,6 @@ export default {
     showInkInFixed: false,
     getContainer: getDefaultContainer,
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-  },
   data() {
     this.links = [];
     this._sPrefixCls = '';
@@ -108,27 +106,29 @@ export default {
       activeLink: null,
     };
   },
-  provide() {
-    return {
-      antAnchor: {
-        registerLink: link => {
-          if (!this.links.includes(link)) {
-            this.links.push(link);
-          }
-        },
-        unregisterLink: link => {
-          const index = this.links.indexOf(link);
-          if (index !== -1) {
-            this.links.splice(index, 1);
-          }
-        },
-        $data: this.$data,
-        scrollTo: this.handleScrollTo,
+  created() {
+    provide('antAnchor', {
+      registerLink: link => {
+        if (!this.links.includes(link)) {
+          this.links.push(link);
+        }
       },
-      antAnchorContext: this,
+      unregisterLink: link => {
+        const index = this.links.indexOf(link);
+        if (index !== -1) {
+          this.links.splice(index, 1);
+        }
+      },
+      $data: this.$data,
+      scrollTo: this.handleScrollTo,
+    });
+    provide('antAnchorContext', this);
+  },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
     };
   },
-
   mounted() {
     this.$nextTick(() => {
       const { getContainer } = this;
@@ -294,7 +294,7 @@ export default {
           <div class={`${prefixCls}-ink`}>
             <span class={inkClass} ref="inkNode" />
           </div>
-          {$slots.default}
+          {$slots.default && $slots.default()}
         </div>
       </div>
     );

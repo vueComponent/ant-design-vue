@@ -1,5 +1,6 @@
+import { inject } from 'vue';
 import { ConfigConsumerProps } from '../config-provider';
-import { getListeners, getComponentFromProp } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 
 export default {
@@ -26,8 +27,10 @@ export default {
     alt: String,
     loadError: Function,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     return {
@@ -87,7 +90,7 @@ export default {
   },
   render() {
     const { prefixCls: customizePrefixCls, shape, size, src, alt, srcSet } = this.$props;
-    const icon = getComponentFromProp(this, 'icon');
+    const icon = getComponent(this, 'icon');
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('avatar', customizePrefixCls);
 
@@ -116,7 +119,7 @@ export default {
           }
         : {};
 
-    let children = this.$slots.default;
+    let children = this.$slots.default && this.$slots.default();
     if (src && isImgExist) {
       children = <img src={src} srcSet={srcSet} onError={this.handleImgLoadError} alt={alt} />;
     } else if (icon) {
@@ -158,7 +161,7 @@ export default {
       }
     }
     return (
-      <span ref="avatarNode" {...{ on: getListeners(this), class: classString, style: sizeStyle }}>
+      <span ref="avatarNode" class={classString} style={sizeStyle}>
         {children}
       </span>
     );

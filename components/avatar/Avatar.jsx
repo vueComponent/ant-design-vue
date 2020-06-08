@@ -161,7 +161,7 @@ export default {
       }
     }
     return (
-      <span ref="avatarNode" {...{ class: classString, style: sizeStyle }}>
+      <span ref="avatarNode" class={classString} style={sizeStyle}>
         {children}
       </span>
     );

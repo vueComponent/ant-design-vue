@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import addEventListener from '../vc-util/Dom/addEventListener';
@@ -98,8 +99,10 @@ export default {
     showInkInFixed: false,
     getContainer: getDefaultContainer,
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     this.links = [];
@@ -294,7 +297,7 @@ export default {
           <div class={`${prefixCls}-ink`}>
             <span class={inkClass} ref="inkNode" />
           </div>
-          {$slots.default}
+          {$slots.default && $slots.default()}
         </div>
       </div>
     );

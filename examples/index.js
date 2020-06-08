@@ -8,6 +8,7 @@ import Drawer from 'ant-design-vue/drawer';
 import Affix from 'ant-design-vue/affix';
 import Alert from 'ant-design-vue/alert';
 import Divider from 'ant-design-vue/divider';
+import Anchor from 'ant-design-vue/anchor';
 import ConfigProvider from 'ant-design-vue/config-provider';
 import Result from 'ant-design-vue/result';
 import Spin from 'ant-design-vue/spin';
@@ -25,6 +26,7 @@ createApp(App)
   .use(Alert)
   .use(Divider)
   .use(Result)
+  .use(Anchor)
   .use(Spin)
   .use(Empty)
   .use(Timeline)

@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, hasProp } from '../_util/props-util';
@@ -5,7 +6,6 @@ import { ConfigConsumerProps } from '../config-provider';
 import Avatar, { SkeletonAvatarProps } from './Avatar';
 import Title, { SkeletonTitleProps } from './Title';
 import Paragraph, { SkeletonParagraphProps } from './Paragraph';
-import Base from '../base';
 
 export const SkeletonProps = {
   active: PropTypes.bool,
@@ -69,8 +69,10 @@ const Skeleton = {
     title: true,
     paragraph: true,
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   render() {
     const {
@@ -157,13 +159,12 @@ const Skeleton = {
         </div>
       );
     }
-    const children = this.$slots.default;
+    const children = this.$slots.default && this.$slots.default();
     return children && children.length === 1 ? children[0] : <span>{children}</span>;
   },
 };
 /* istanbul ignore next */
-Skeleton.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Skeleton.name, Skeleton);
+Skeleton.install = function(app) {
+  app.component(Skeleton.name, Skeleton);
 };
 export default Skeleton;

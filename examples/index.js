@@ -12,6 +12,7 @@ import Anchor from 'ant-design-vue/anchor';
 import ConfigProvider from 'ant-design-vue/config-provider';
 import Result from 'ant-design-vue/result';
 import Spin from 'ant-design-vue/spin';
+import Skeleton from 'ant-design-vue/skeleton';
 import Empty from 'ant-design-vue/empty';
 import Timeline from 'ant-design-vue/timeline';
 import 'ant-design-vue/style.js';
@@ -27,6 +28,7 @@ createApp(App)
   .use(Divider)
   .use(Result)
   .use(Anchor)
+  .use(Skeleton)
   .use(Spin)
   .use(Empty)
   .use(Timeline)

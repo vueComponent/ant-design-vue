@@ -269,7 +269,7 @@ export function getComponentName(opts) {
 }
 
 export function isEmptyElement(c) {
-  return typeof c.type === 'symbol' && c.children.trim() === '';
+  return typeof c.type.toString() === 'Symbol(Text)' && c.children.trim() === '';
 }
 
 export function isStringElement(c) {

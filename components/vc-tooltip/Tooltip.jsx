@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
 import { placements } from './placements';
 import Content from './Content';
-import { hasProp, getComponentFromProp, getOptionProps, getListeners } from '../_util/props-util';
+import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
 function noop() {}
 export default {
   props: {
@@ -31,14 +31,14 @@ export default {
       const { prefixCls, tipId } = this.$props;
       return [
         <div class={`${prefixCls}-arrow`} key="arrow">
-          {getComponentFromProp(this, 'arrowContent')}
+          {getComponent(this, 'arrowContent')}
         </div>,
         <Content
           key="content"
           trigger={this.$refs.trigger}
           prefixCls={prefixCls}
           id={tipId}
-          overlay={getComponentFromProp(this, 'overlay')}
+          overlay={getComponent(this, 'overlay')}
         />,
       ];
     },
@@ -69,37 +69,33 @@ export default {
     if (hasProp(this, 'visible')) {
       extraProps.popupVisible = this.$props.visible;
     }
-    const listeners = getListeners(this);
+    const { $attrs } = this;
     const triggerProps = {
-      props: {
-        popupClassName: overlayClassName,
-        prefixCls,
-        action: trigger,
-        builtinPlacements: placements,
-        popupPlacement: placement,
-        popupAlign: align,
-        getPopupContainer: getTooltipContainer,
-        afterPopupVisibleChange: afterVisibleChange,
-        popupTransitionName: transitionName,
-        popupAnimation: animation,
-        defaultPopupVisible: defaultVisible,
-        destroyPopupOnHide: destroyTooltipOnHide,
-        mouseLeaveDelay,
-        popupStyle: overlayStyle,
-        mouseEnterDelay,
-        ...extraProps,
-      },
-      on: {
-        ...listeners,
-        popupVisibleChange: listeners.visibleChange || noop,
-        popupAlign: listeners.popupAlign || noop,
-      },
+      popupClassName: overlayClassName,
+      prefixCls,
+      action: trigger,
+      builtinPlacements: placements,
+      popupPlacement: placement,
+      popupAlign: align,
+      getPopupContainer: getTooltipContainer,
+      afterPopupVisibleChange: afterVisibleChange,
+      popupTransitionName: transitionName,
+      popupAnimation: animation,
+      defaultPopupVisible: defaultVisible,
+      destroyPopupOnHide: destroyTooltipOnHide,
+      mouseLeaveDelay,
+      popupStyle: overlayStyle,
+      mouseEnterDelay,
+      ...extraProps,
+      ...$attrs,
+      onPopupVisibleChange: $attrs.onVisibleChange || noop,
+      onPopupAlign: $attrs.onPopupAlign || noop,
       ref: 'trigger',
     };
     return (
       <Trigger {...triggerProps}>
-        <template slot="popup">{this.getPopupElement(h)}</template>
-        {this.$slots.default}
+        <template slot="popup">{this.getPopupElement()}</template>
+        {this.$slots.default && this.$slots.default()}
       </Trigger>
     );
   },

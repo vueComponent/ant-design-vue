@@ -80,7 +80,7 @@ export default {
   render() {
     const props = getOptionProps(this);
     const { checkboxGroupContext: checkboxGroup, $slots, $attrs } = this;
-    const children = $slots.default();
+    const children = $slots.default && $slots.default();
     const { indeterminate, prefixCls: customizePrefixCls, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);

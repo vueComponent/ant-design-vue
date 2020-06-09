@@ -32,10 +32,6 @@ const Steps = {
       configProvider: inject('configProvider', ConfigConsumerProps),
     };
   },
-  model: {
-    prop: 'current',
-    event: 'change',
-  },
   Step: { ...VcSteps.Step, name: 'AStep' },
   render() {
     const props = getOptionProps(this);

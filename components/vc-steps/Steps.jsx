@@ -59,6 +59,7 @@ export default {
       const { current } = this.$props;
       if (current !== next) {
         this.$emit('change', next);
+        this.$emit('update:current', next);
       }
     },
     calcStepOffsetWidth() {
@@ -136,7 +137,7 @@ export default {
             ...this.$attrs,
           };
           const { onChange } = this.$attrs;
-          if (onChange) {
+          if (onChange || this.$attrs['onUpdate:current']) {
             stepProps.onStepClick = this.onStepClick;
           }
           if (!flexSupported && direction !== 'vertical') {

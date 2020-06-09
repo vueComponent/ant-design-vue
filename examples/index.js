@@ -2,6 +2,7 @@ import '@babel/polyfill';
 import { createApp } from 'vue';
 import App from './App.vue';
 import Avatar from 'ant-design-vue/avatar';
+import Breadcrumb from 'ant-design-vue/breadcrumb';
 import Button from 'ant-design-vue/button';
 import Comment from 'ant-design-vue/comment';
 import Drawer from 'ant-design-vue/drawer';
@@ -20,6 +21,7 @@ import 'ant-design-vue/style.js';
 
 createApp(App)
   .use(Avatar)
+  .use(Breadcrumb)
   .use(Button)
   .use(Comment)
   .use(ConfigProvider)

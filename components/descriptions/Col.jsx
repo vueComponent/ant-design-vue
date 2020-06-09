@@ -1,7 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
 
-// eslint-disable-next-line no-unused-vars
 const ColProps = {
   child: PropTypes.any,
   bordered: PropTypes.bool,
@@ -25,7 +24,6 @@ const Col = (_, { attrs }) => {
   const defaultSlot = children.default && children.default();
 
   const someLabelProps = {
-    attrs: {},
     class: [
       `${prefixCls}-item-label`,
       {
@@ -37,7 +35,7 @@ const Col = (_, { attrs }) => {
   };
 
   if (layout === 'vertical') {
-    someLabelProps.attrs.colSpan = span * 2 - 1;
+    someLabelProps.colSpan = span * 2 - 1;
   }
 
   if (bordered) {

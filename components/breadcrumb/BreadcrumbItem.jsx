@@ -1,5 +1,6 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { hasProp, getComponentFromProp } from '../_util/props-util';
+import { hasProp, getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import DropDown from '../dropdown/dropdown';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
@@ -13,8 +14,10 @@ export default {
     separator: PropTypes.any.def('/'),
     overlay: PropTypes.any,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   methods: {
     /**
@@ -22,7 +25,7 @@ export default {
      * Wrap a DropDown
      */
     renderBreadcrumbNode(breadcrumbItem, prefixCls) {
-      const overlay = getComponentFromProp(this, 'overlay');
+      const overlay = getComponent(this, 'overlay');
       if (overlay) {
         return (
           <DropDown overlay={overlay} placement="bottomCenter">
@@ -40,8 +43,8 @@ export default {
     const { prefixCls: customizePrefixCls, $slots } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
-    const separator = getComponentFromProp(this, 'separator');
-    const children = $slots.default;
+    const separator = getComponent(this, 'separator');
+    const children = $slots.default && $slots.default();
     let link;
     if (hasProp(this, 'href')) {
       link = <a class={`${prefixCls}-link`}>{children}</a>;

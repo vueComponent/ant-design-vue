@@ -1,7 +1,7 @@
+import { inject } from 'vue';
 import PropsTypes from '../_util/vue-types';
-import { getComponentFromProp, getListeners } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 export const CommentProps = {
   actions: PropsTypes.array,
   /** The element to display as the comment author. */
@@ -19,8 +19,10 @@ export const CommentProps = {
 const Comment = {
   name: 'AComment',
   props: CommentProps,
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   methods: {
     getAction(actions) {
@@ -41,11 +43,11 @@ const Comment = {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('comment', customizePrefixCls);
 
-    const actions = getComponentFromProp(this, 'actions');
-    const author = getComponentFromProp(this, 'author');
-    const avatar = getComponentFromProp(this, 'avatar');
-    const content = getComponentFromProp(this, 'content');
-    const datetime = getComponentFromProp(this, 'datetime');
+    const actions = getComponent(this, 'actions');
+    const author = getComponent(this, 'author');
+    const avatar = getComponent(this, 'avatar');
+    const content = getComponent(this, 'content');
+    const datetime = getComponent(this, 'datetime');
 
     const avatarDom = (
       <div class={`${prefixCls}-avatar`}>
@@ -79,19 +81,18 @@ const Comment = {
         {contentDom}
       </div>
     );
-    const children = this.$slots.default;
+    const children = this.$slots.default && this.$slots.default();
     return (
-      <div class={prefixCls} {...{ on: getListeners(this) }}>
+      <div class={prefixCls}>
         {comment}
-        {children ? this.renderNested(prefixCls, children) : null}
+        {children && children.length ? this.renderNested(prefixCls, children) : null}
       </div>
     );
   },
 };
 
 /* istanbul ignore next */
-Comment.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Comment.name, Comment);
+Comment.install = function(app) {
+  app.component(Comment.name, Comment);
 };
 export default Comment;

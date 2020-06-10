@@ -1,15 +1,16 @@
-import { inject, cloneVNode, isVNode } from 'vue';
+import { inject } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import getPlacements from './placements';
 import PropTypes from '../_util/vue-types';
 import {
   hasProp,
   getComponent,
-  getClass,
   getStyle,
   filterEmpty,
   getSlot,
+  isValidElement,
 } from '../_util/props-util';
+import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
 import abstractTooltipProps from './abstractTooltipProps';
 
@@ -27,6 +28,7 @@ const splitObject = (obj, keys) => {
 const props = abstractTooltipProps();
 export default {
   name: 'ATooltip',
+  inheritAttrs: false,
   model: {
     prop: 'visible',
     event: 'visibleChange',
@@ -80,18 +82,14 @@ export default {
     // mouse events don't trigger at disabled button in Chrome
     // https://github.com/react-component/tooltip/issues/18
     getDisabledCompatibleChildren(ele) {
-      const options = (ele.componentOptions && ele.componentOptions.Ctor.options) || {};
-
       if (
-        ((options.__ANT_BUTTON === true ||
-          options.__ANT_SWITCH === true ||
-          options.__ANT_CHECKBOX === true) &&
-          (ele.componentOptions.propsData.disabled ||
-            ele.componentOptions.propsData.disabled === '')) ||
-        (ele.tag === 'button' &&
-          ele.data &&
-          ele.data.attrs &&
-          ele.data.attrs.disabled !== undefined)
+        ((typeof ele.type === 'object' &&
+          (ele.type.__ANT_BUTTON === true ||
+            ele.type.__ANT_SWITCH === true ||
+            ele.type.__ANT_CHECKBOX === true)) ||
+          ele.type === 'button') &&
+        ele.props &&
+        (ele.props.disabled || ele.props.disabled === '')
       ) {
         // Pick some layout related style properties up to span
         // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
@@ -115,16 +113,14 @@ export default {
           ...omitted,
           pointerEvents: 'none',
         };
-        const spanCls = getClass(ele);
-        const child = cloneVNode(ele, {
-          style: buttonStyle,
-          class: null,
-        });
-        return (
-          <span style={spanStyle} class={spanCls}>
-            {child}
-          </span>
+        const child = cloneElement(
+          ele,
+          {
+            style: buttonStyle,
+          },
+          true,
         );
+        return <span style={spanStyle}>{child}</span>;
       }
       return ele;
     },
@@ -191,10 +187,11 @@ export default {
       return null;
     }
     const child = this.getDisabledCompatibleChildren(
-      isVNode(children) ? children : <span>{children}</span>,
+      isValidElement(children) ? children : <span>{children}</span>,
     );
     const childCls = {
       [openClassName || `${prefixCls}-open`]: true,
+      [child.props && child.props.class]: child.props && child.props.class,
     };
     const tooltipProps = {
       ...$attrs,
@@ -210,7 +207,7 @@ export default {
     };
     return (
       <VcTooltip {...tooltipProps}>
-        {sVisible ? cloneVNode(child, { class: childCls }) : child}
+        {sVisible ? cloneElement(child, { class: childCls }) : child}
       </VcTooltip>
     );
   },

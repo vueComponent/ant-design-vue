@@ -17,6 +17,7 @@ import PageHeader from 'ant-design-vue/page-header';
 import Skeleton from 'ant-design-vue/skeleton';
 import Empty from 'ant-design-vue/empty';
 import Timeline from 'ant-design-vue/timeline';
+import Tooltip from 'ant-design-vue/tooltip';
 import 'ant-design-vue/style.js';
 
 createApp(App)
@@ -36,4 +37,5 @@ createApp(App)
   .use(Spin)
   .use(Empty)
   .use(Timeline)
+  .use(Tooltip)
   .mount('#app');

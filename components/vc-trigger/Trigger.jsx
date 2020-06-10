@@ -1,15 +1,8 @@
-import { cloneVNode, inject, provide } from 'vue';
-import ref from 'vue-ref';
+import { inject, provide } from 'vue';
+import antRef from '../_util/ant-ref';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
-import {
-  hasProp,
-  getComponentFromProp,
-  getEvents,
-  filterEmpty,
-  getSlot,
-  getListeners,
-} from '../_util/props-util';
+import { hasProp, getComponent, getEvents, filterEmpty, getSlot } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import warning from '../_util/warning';
@@ -17,6 +10,9 @@ import Popup from './Popup';
 import { getAlignFromPlacement, getAlignPopupClassName, noop } from './utils';
 import BaseMixin from '../_util/BaseMixin';
 import Portal from '../_util/Portal';
+import classNames from 'classnames';
+import { cloneElement } from '../_util/vnode';
+import createRefHooks from '../_util/createRefHooks';
 
 function returnEmptyString() {
   return '';
@@ -38,7 +34,7 @@ const ALL_HANDLERS = [
 
 export default {
   name: 'Trigger',
-  directives: { 'ant-ref': ref },
+  directives: { 'ant-ref': antRef },
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
@@ -89,6 +85,7 @@ export default {
         this.fireEvents(h, e);
       };
     });
+    this._component = null;
     return {
       prevPopupVisible: popupVisible,
       sPopupVisible: popupVisible,
@@ -328,8 +325,7 @@ export default {
     },
 
     getRootDomNode() {
-      return this.$el;
-      // return this.$el.children[0] || this.$el
+      return this.$refs.trigger.$el || this.$refs.trigger;
     },
 
     handleGetPopupClassFromAlign(align) {
@@ -367,14 +363,14 @@ export default {
       const self = this;
       const mouseProps = {};
       if (this.isMouseEnterToShow()) {
-        mouseProps.mouseenter = self.onPopupMouseenter;
+        mouseProps.onMouseenter = self.onPopupMouseenter;
       }
       if (this.isMouseLeaveToHide()) {
-        mouseProps.mouseleave = self.onPopupMouseleave;
+        mouseProps.onMouseleave = self.onPopupMouseleave;
       }
-      mouseProps.mousedown = this.onPopupMouseDown;
-      mouseProps.touchstart = this.onPopupMouseDown;
-      const { handleGetPopupClassFromAlign, getRootDomNode, getContainer } = self;
+      mouseProps.onMousedown = this.onPopupMouseDown;
+      mouseProps.onTouchstart = this.onPopupMouseDown;
+      const { handleGetPopupClassFromAlign, getRootDomNode, getContainer, $attrs } = self;
       const {
         prefixCls,
         destroyPopupOnHide,
@@ -393,34 +389,31 @@ export default {
       const { sPopupVisible, point } = this.$data;
       const align = this.getPopupAlign();
       const popupProps = {
-        props: {
-          prefixCls,
-          destroyPopupOnHide,
-          visible: sPopupVisible,
-          point: alignPoint && point,
-          action,
-          align,
-          animation: popupAnimation,
-          getClassNameFromAlign: handleGetPopupClassFromAlign,
-          stretch,
-          getRootDomNode,
-          mask,
-          zIndex,
-          transitionName: popupTransitionName,
-          maskAnimation,
-          maskTransitionName,
-          getContainer,
-          popupClassName,
-          popupStyle,
-        },
-        on: {
-          align: getListeners(this).popupAlign || noop,
-          ...mouseProps,
-        },
+        prefixCls,
+        destroyPopupOnHide,
+        visible: sPopupVisible,
+        point: alignPoint && point,
+        action,
+        align,
+        animation: popupAnimation,
+        getClassNameFromAlign: handleGetPopupClassFromAlign,
+        stretch,
+        getRootDomNode,
+        mask,
+        zIndex,
+        transitionName: popupTransitionName,
+        maskAnimation,
+        maskTransitionName,
+        getContainer,
+        popupClassName,
+        popupStyle,
+        onAlign: $attrs.onPopupAlign || noop,
+        ...mouseProps,
+        ...createRefHooks(this.savePopup),
       };
       return (
-        <Popup v-ant-ref={this.savePopup} {...popupProps}>
-          {getComponentFromProp(self, 'popup')}
+        <Popup ref="popup" key="ddd" {...popupProps}>
+          {getComponent(self, 'popup')}
         </Popup>
       );
     },
@@ -521,7 +514,7 @@ export default {
 
     createTwoChains(event) {
       let fn = () => {};
-      const events = getListeners(this);
+      const events = getEvents(this);
       if (this.childOriginEvents[event] && events[event]) {
         return this[`fire${event}`];
       }
@@ -564,8 +557,8 @@ export default {
       return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1;
     },
     forcePopupAlign() {
-      if (this.$data.sPopupVisible && this._component && this._component.$refs.alignInstance) {
-        this._component.$refs.alignInstance.forceAlign();
+      if (this.$data.sPopupVisible && this._component && this._component.refs.alignInstance) {
+        this._component.refs.alignInstance.forceAlign();
       }
     },
     fireEvents(type, e) {
@@ -591,7 +584,7 @@ export default {
     this.childOriginEvents = getEvents(this);
     const newChildProps = {
       key: 'trigger',
-      class: $attrs.class,
+      ref: 'trigger',
     };
 
     if (this.isContextmenuToShow()) {
@@ -634,8 +627,11 @@ export default {
         }
       };
     }
-
-    const trigger = cloneVNode(child, newChildProps);
+    const childrenClassName = classNames(child && child.props && child.props.class, $attrs.class);
+    if (childrenClassName) {
+      newChildProps.class = childrenClassName;
+    }
+    const trigger = cloneElement(child, newChildProps);
     let portal;
     // prevent unmounting after it's rendered
     if (sPopupVisible || this._component || forceRender) {

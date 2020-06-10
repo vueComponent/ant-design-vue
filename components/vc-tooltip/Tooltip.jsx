@@ -5,6 +5,8 @@ import Content from './Content';
 import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
 function noop() {}
 export default {
+  name: 'Tooltip',
+  inheritAttrs: false,
   props: {
     trigger: PropTypes.any.def(['hover']),
     defaultVisible: PropTypes.bool,
@@ -91,12 +93,8 @@ export default {
       onPopupVisibleChange: $attrs.onVisibleChange || noop,
       onPopupAlign: $attrs.onPopupAlign || noop,
       ref: 'trigger',
+      popup: this.getPopupElement(),
     };
-    return (
-      <Trigger {...triggerProps}>
-        <template slot="popup">{this.getPopupElement()}</template>
-        {this.$slots.default && this.$slots.default()}
-      </Trigger>
-    );
+    return <Trigger {...triggerProps}>{this.$slots.default && this.$slots.default()[0]}</Trigger>;
   },
 };

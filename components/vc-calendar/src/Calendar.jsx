@@ -24,7 +24,7 @@ const getMomentObjectIfValid = date => {
 const Calendar = {
   props: {
     locale: PropTypes.object.def(enUs),
-    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string), PropTypes.func]),
     visible: PropTypes.bool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     // prefixCls: PropTypes.string,

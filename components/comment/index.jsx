@@ -85,7 +85,7 @@ const Comment = {
     return (
       <div class={prefixCls}>
         {comment}
-        {children ? this.renderNested(prefixCls, children) : null}
+        {children && children.length ? this.renderNested(prefixCls, children) : null}
       </div>
     );
   },

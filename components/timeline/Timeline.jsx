@@ -34,7 +34,7 @@ export default {
     };
   },
   render() {
-    const { prefixCls: customizePrefixCls, reverse, mode, ...restProps } = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, reverse, mode } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('timeline', customizePrefixCls);
 
@@ -96,9 +96,6 @@ export default {
     });
 
     const timelineProps = {
-      props: {
-        ...restProps,
-      },
       class: classString,
     };
     return <ul {...timelineProps}>{items}</ul>;

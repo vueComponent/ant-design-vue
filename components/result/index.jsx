@@ -35,7 +35,7 @@ export const ResultProps = {
   extra: PropTypes.any,
 };
 
-const renderIcon = (h, prefixCls, { status, icon }) => {
+const renderIcon = (prefixCls, { status, icon }) => {
   if (ExceptionStatus.includes(`${status}`)) {
     const SVGComponent = ExceptionMap[status];
     return (
@@ -49,8 +49,7 @@ const renderIcon = (h, prefixCls, { status, icon }) => {
   return <div class={`${prefixCls}-icon`}>{iconNode}</div>;
 };
 
-const renderExtra = (h, prefixCls, extra) =>
-  extra && <div class={`${prefixCls}-extra`}>{extra}</div>;
+const renderExtra = (prefixCls, extra) => extra && <div class={`${prefixCls}-extra`}>{extra}</div>;
 
 const Result = {
   name: 'AResult',
@@ -72,11 +71,11 @@ const Result = {
 
     return (
       <div class={`${prefixCls} ${prefixCls}-${status}`}>
-        {renderIcon(h, prefixCls, { status, icon })}
+        {renderIcon(prefixCls, { status, icon })}
         <div class={`${prefixCls}-title`}>{title}</div>
         {subTitle && <div class={`${prefixCls}-subtitle`}>{subTitle}</div>}
         {this.$slots.default && <div class={`${prefixCls}-content`}>{this.$slots.default()}</div>}
-        {renderExtra(h, prefixCls, extra)}
+        {renderExtra(prefixCls, extra)}
       </div>
     );
   },

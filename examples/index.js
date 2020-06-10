@@ -2,6 +2,7 @@ import '@babel/polyfill';
 import { createApp } from 'vue';
 import App from './App.vue';
 import Avatar from 'ant-design-vue/avatar';
+import Breadcrumb from 'ant-design-vue/breadcrumb';
 import Button from 'ant-design-vue/button';
 import Comment from 'ant-design-vue/comment';
 import Drawer from 'ant-design-vue/drawer';
@@ -12,6 +13,8 @@ import Anchor from 'ant-design-vue/anchor';
 import ConfigProvider from 'ant-design-vue/config-provider';
 import Result from 'ant-design-vue/result';
 import Spin from 'ant-design-vue/spin';
+import PageHeader from 'ant-design-vue/page-header';
+import Skeleton from 'ant-design-vue/skeleton';
 import Empty from 'ant-design-vue/empty';
 import Timeline from 'ant-design-vue/timeline';
 import Statistic from 'ant-design-vue/statistic';
@@ -19,6 +22,7 @@ import 'ant-design-vue/style.js';
 
 createApp(App)
   .use(Avatar)
+  .use(Breadcrumb)
   .use(Button)
   .use(Comment)
   .use(ConfigProvider)
@@ -27,7 +31,9 @@ createApp(App)
   .use(Alert)
   .use(Divider)
   .use(Result)
+  .use(PageHeader)
   .use(Anchor)
+  .use(Skeleton)
   .use(Spin)
   .use(Empty)
   .use(Timeline)

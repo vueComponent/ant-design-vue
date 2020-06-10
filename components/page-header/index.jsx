@@ -1,12 +1,12 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponentFromProp, getOptionProps } from '../_util/props-util';
+import { getComponent, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import ArrowLeftOutlined from '@ant-design/icons-vue/ArrowLeftOutlined';
 import Breadcrumb from '../breadcrumb';
 import Avatar from '../avatar';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import Base from '../base';
 
 export const PageHeaderProps = {
   backIcon: PropTypes.any,
@@ -52,17 +52,17 @@ const renderBreadcrumb = (h, breadcrumb) => {
 
 const renderTitle = (h, prefixCls, instance) => {
   const { avatar } = instance;
-  const title = getComponentFromProp(instance, 'title');
-  const subTitle = getComponentFromProp(instance, 'subTitle');
-  const tags = getComponentFromProp(instance, 'tags');
-  const extra = getComponentFromProp(instance, 'extra');
+  const title = getComponent(instance, 'title');
+  const subTitle = getComponent(instance, 'subTitle');
+  const tags = getComponent(instance, 'tags');
+  const extra = getComponent(instance, 'extra');
   const backIcon =
-    getComponentFromProp(instance, 'backIcon') !== undefined ? (
-      getComponentFromProp(instance, 'backIcon')
+    getComponent(instance, 'backIcon') !== undefined ? (
+      getComponent(instance, 'backIcon')
     ) : (
       <ArrowLeftOutlined />
     );
-  const onBack = instance.$listeners.back;
+  const onBack = instance.$attrs.onBack;
   const headingPrefixCls = `${prefixCls}-heading`;
   if (title || subTitle || tags || extra) {
     const backIconDom = renderBack(instance, prefixCls, backIcon, onBack);
@@ -94,15 +94,17 @@ const renderChildren = (h, prefixCls, children) => {
 const PageHeader = {
   name: 'APageHeader',
   props: PageHeaderProps,
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   render(h) {
     const { getPrefixCls, pageHeader } = this.configProvider;
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, breadcrumb } = props;
-    const footer = getComponentFromProp(this, 'footer');
-    const children = this.$slots.default;
+    const footer = getComponent(this, 'footer');
+    const children = this.$slots.default && this.$slots.default();
 
     let ghost = true;
 
@@ -138,9 +140,8 @@ const PageHeader = {
 };
 
 /* istanbul ignore next */
-PageHeader.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(PageHeader.name, PageHeader);
+PageHeader.install = function(app) {
+  app.component(PageHeader.name, PageHeader);
 };
 
 export default PageHeader;

@@ -131,12 +131,7 @@ const Affix = {
     measure() {
       const { status, lastAffix } = this;
       const { target } = this;
-      if (
-        status !== AffixStatus.Prepare ||
-        !this.$refs.fixedNode ||
-        !this.$refs.placeholderNode ||
-        !target
-      ) {
+      if (status !== AffixStatus.Prepare || !this.$refs.fixedNode || !this.$el || !target) {
         return;
       }
 
@@ -152,7 +147,7 @@ const Affix = {
         status: AffixStatus.None,
       };
       const targetRect = getTargetRect(targetNode);
-      const placeholderReact = getTargetRect(this.$refs.placeholderNode);
+      const placeholderReact = getTargetRect(this.$el);
       const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
       const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
       if (fixedTop !== undefined) {
@@ -214,9 +209,9 @@ const Affix = {
         const offsetBottom = this.getOffsetBottom();
 
         const targetNode = target();
-        if (targetNode && this.$refs.placeholderNode) {
+        if (targetNode && this.$el) {
           const targetRect = getTargetRect(targetNode);
-          const placeholderReact = getTargetRect(this.$refs.placeholderNode);
+          const placeholderReact = getTargetRect(this.$el);
           const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
           const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
 

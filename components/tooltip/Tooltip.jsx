@@ -1,14 +1,14 @@
-import { cloneElement } from '../_util/vnode';
+import { inject, cloneVNode, isVNode } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import getPlacements from './placements';
 import PropTypes from '../_util/vue-types';
 import {
   hasProp,
-  getComponentFromProp,
+  getComponent,
   getClass,
   getStyle,
-  isValidElement,
-  getListeners,
+  filterEmpty,
+  getSlot,
 } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import abstractTooltipProps from './abstractTooltipProps';
@@ -35,8 +35,10 @@ export default {
     ...props,
     title: PropTypes.any,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     return {
@@ -107,14 +109,14 @@ export default {
           display: 'inline-block', // default inline-block is important
           ...picked,
           cursor: 'not-allowed',
-          width: ele.componentOptions.propsData.block ? '100%' : null,
+          width: ele.props && ele.props.block ? '100%' : null,
         };
         const buttonStyle = {
           ...omitted,
           pointerEvents: 'none',
         };
         const spanCls = getClass(ele);
-        const child = cloneElement(ele, {
+        const child = cloneVNode(ele, {
           style: buttonStyle,
           class: null,
         });
@@ -128,12 +130,12 @@ export default {
     },
 
     isNoTitle() {
-      const title = getComponentFromProp(this, 'title');
+      const title = getComponent(this, 'title');
       return !title && title !== 0;
     },
 
     getOverlay() {
-      const title = getComponentFromProp(this, 'title');
+      const title = getComponent(this, 'title');
       if (title === 0) {
         return title;
       }
@@ -173,12 +175,12 @@ export default {
   },
 
   render() {
-    const { $props, $data, $slots } = this;
+    const { $props, $data, $attrs } = this;
     const { prefixCls: customizePrefixCls, openClassName, getPopupContainer } = $props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
-    let children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '');
+    let children = filterEmpty(getSlot(this));
     children = children.length === 1 ? children[0] : children;
     let sVisible = $data.sVisible;
     // Hide tooltip when there is no title
@@ -189,30 +191,26 @@ export default {
       return null;
     }
     const child = this.getDisabledCompatibleChildren(
-      isValidElement(children) ? children : <span>{children}</span>,
+      isVNode(children) ? children : <span>{children}</span>,
     );
     const childCls = {
       [openClassName || `${prefixCls}-open`]: true,
     };
     const tooltipProps = {
-      props: {
-        ...$props,
-        prefixCls,
-        getTooltipContainer: getPopupContainer || getContextPopupContainer,
-        builtinPlacements: this.getPlacements(),
-        overlay: this.getOverlay(),
-        visible: sVisible,
-      },
+      ...$attrs,
+      ...$props,
+      prefixCls,
+      getTooltipContainer: getPopupContainer || getContextPopupContainer,
+      builtinPlacements: this.getPlacements(),
+      overlay: this.getOverlay(),
+      visible: sVisible,
       ref: 'tooltip',
-      on: {
-        ...getListeners(this),
-        visibleChange: this.onVisibleChange,
-        popupAlign: this.onPopupAlign,
-      },
+      onVisibleChange: this.onVisibleChange,
+      onPopupAlign: this.onPopupAlign,
     };
     return (
       <VcTooltip {...tooltipProps}>
-        {sVisible ? cloneElement(child, { class: childCls }) : child}
+        {sVisible ? cloneVNode(child, { class: childCls }) : child}
       </VcTooltip>
     );
   },

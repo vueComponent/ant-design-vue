@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import { ConfigConsumerProps } from '../config-provider';
 import PropTypes from '../_util/vue-types';
 
@@ -7,15 +8,17 @@ export default {
   props: {
     prefixCls: PropTypes.string,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   render() {
     const { prefixCls: customizePrefixCls, $slots } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
 
-    const children = $slots.default;
+    const children = $slots.default && $slots.default();
     return <span class={`${prefixCls}-separator`}>{children || '/'}</span>;
   },
 };

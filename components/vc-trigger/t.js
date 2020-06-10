@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import { cloneVNode, inject, provide } from 'vue';
 import ref from 'vue-ref';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
@@ -7,6 +7,7 @@ import {
   getComponentFromProp,
   getEvents,
   filterEmpty,
+  getSlot,
   getListeners,
 } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
@@ -15,10 +16,7 @@ import warning from '../_util/warning';
 import Popup from './Popup';
 import { getAlignFromPlacement, getAlignPopupClassName, noop } from './utils';
 import BaseMixin from '../_util/BaseMixin';
-import { cloneElement } from '../_util/vnode';
 import Portal from '../_util/Portal';
-
-Vue.use(ref, { name: 'ant-ref' });
 
 function returnEmptyString() {
   return '';
@@ -40,6 +38,7 @@ const ALL_HANDLERS = [
 
 export default {
   name: 'Trigger',
+  directives: { 'ant-ref': ref },
   mixins: [BaseMixin],
   props: {
     action: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def([]),
@@ -76,16 +75,6 @@ export default {
     stretch: PropTypes.string,
     alignPoint: PropTypes.bool, // Maybe we can support user pass position in the future
   },
-  provide() {
-    return {
-      vcTriggerContext: this,
-    };
-  },
-  inject: {
-    vcTriggerContext: { default: () => ({}) },
-    savePopupRef: { default: () => noop },
-    dialogContext: { default: () => null },
-  },
   data() {
     const props = this.$props;
     let popupVisible;
@@ -112,6 +101,16 @@ export default {
         this.sPopupVisible = val;
       }
     },
+  },
+  created() {
+    provide('vcTriggerContext', this);
+  },
+  setup() {
+    return {
+      vcTriggerContext: inject('configProvider', {}),
+      savePopupRef: inject('vcTriggerContext', noop),
+      dialogContext: inject('dialogContext', null),
+    };
   },
   deactivated() {
     this.setPopupVisible(false);
@@ -417,14 +416,12 @@ export default {
           align: getListeners(this).popupAlign || noop,
           ...mouseProps,
         },
-        directives: [
-          {
-            name: 'ant-ref',
-            value: this.savePopup,
-          },
-        ],
       };
-      return <Popup {...popupProps}>{getComponentFromProp(self, 'popup')}</Popup>;
+      return (
+        <Popup v-ant-ref={this.savePopup} {...popupProps}>
+          {getComponentFromProp(self, 'popup')}
+        </Popup>
+      );
     },
 
     getContainer() {
@@ -584,7 +581,7 @@ export default {
   },
   render() {
     const { sPopupVisible } = this;
-    const children = filterEmpty(this.$slots.default);
+    const children = filterEmpty(getSlot(this));
     const { forceRender, alignPoint } = this.$props;
 
     if (children.length > 1) {
@@ -639,7 +636,7 @@ export default {
       };
     }
 
-    const trigger = cloneElement(child, newChildProps);
+    const trigger = cloneVNode(child, newChildProps);
     let portal;
     // prevent unmounting after it's rendered
     if (sPopupVisible || this._component || forceRender) {
@@ -652,14 +649,6 @@ export default {
         ></Portal>
       );
     }
-    return portal
-      ? cloneElement(trigger, {
-          children: [
-            ...((trigger.componentOptions ? trigger.componentOptions.children : trigger.children) ||
-              []),
-            portal,
-          ],
-        })
-      : trigger;
+    return [portal, trigger];
   },
 };

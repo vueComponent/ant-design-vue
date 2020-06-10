@@ -1,12 +1,13 @@
-import Vue from 'vue';
+import { cloneVNode, inject, provide } from 'vue';
 import ref from 'vue-ref';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
 import {
   hasProp,
   getComponentFromProp,
-  getDataEvents,
+  getEvents,
   filterEmpty,
+  getSlot,
   getListeners,
 } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
@@ -15,10 +16,7 @@ import warning from '../_util/warning';
 import Popup from './Popup';
 import { getAlignFromPlacement, getAlignPopupClassName, noop } from './utils';
 import BaseMixin from '../_util/BaseMixin';
-import { cloneElement } from '../_util/vnode';
-import ContainerRender from '../_util/ContainerRender';
-
-Vue.use(ref, { name: 'ant-ref' });
+import Portal from '../_util/Portal';
 
 function returnEmptyString() {
   return '';
@@ -40,7 +38,9 @@ const ALL_HANDLERS = [
 
 export default {
   name: 'Trigger',
+  directives: { 'ant-ref': ref },
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     action: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def([]),
     showAction: PropTypes.any.def([]),
@@ -76,16 +76,6 @@ export default {
     stretch: PropTypes.string,
     alignPoint: PropTypes.bool, // Maybe we can support user pass position in the future
   },
-  provide() {
-    return {
-      vcTriggerContext: this,
-    };
-  },
-  inject: {
-    vcTriggerContext: { default: () => ({}) },
-    savePopupRef: { default: () => noop },
-    dialogContext: { default: () => null },
-  },
   data() {
     const props = this.$props;
     let popupVisible;
@@ -113,24 +103,26 @@ export default {
       }
     },
   },
+  created() {
+    provide('vcTriggerContext', this);
+  },
+  setup() {
+    return {
+      vcTriggerContext: inject('configProvider', {}),
+      savePopupRef: inject('vcTriggerContext', noop),
+      dialogContext: inject('dialogContext', null),
+    };
+  },
   deactivated() {
     this.setPopupVisible(false);
   },
   mounted() {
     this.$nextTick(() => {
-      this.renderComponent(null);
       this.updatedCal();
     });
   },
 
   updated() {
-    const triggerAfterPopupVisibleChange = () => {
-      if (this.sPopupVisible !== this.prevPopupVisible) {
-        this.afterPopupVisibleChange(this.sPopupVisible);
-      }
-      this.prevPopupVisible = this.sPopupVisible;
-    };
-    this.renderComponent(null, triggerAfterPopupVisibleChange);
     this.$nextTick(() => {
       this.updatedCal();
     });
@@ -425,14 +417,12 @@ export default {
           align: getListeners(this).popupAlign || noop,
           ...mouseProps,
         },
-        directives: [
-          {
-            name: 'ant-ref',
-            value: this.savePopup,
-          },
-        ],
       };
-      return <Popup {...popupProps}>{getComponentFromProp(self, 'popup')}</Popup>;
+      return (
+        <Popup v-ant-ref={this.savePopup} {...popupProps}>
+          {getComponentFromProp(self, 'popup')}
+        </Popup>
+      );
     },
 
     getContainer() {
@@ -453,7 +443,7 @@ export default {
     },
 
     setPopupVisible(sPopupVisible, event) {
-      const { alignPoint, sPopupVisible: prevPopupVisible } = this;
+      const { alignPoint, sPopupVisible: prevPopupVisible, $attrs } = this;
       this.clearDelayTimer();
       if (prevPopupVisible !== sPopupVisible) {
         if (!hasProp(this, 'popupVisible')) {
@@ -462,8 +452,7 @@ export default {
             prevPopupVisible,
           });
         }
-        const listeners = getListeners(this);
-        listeners.popupVisibleChange && listeners.popupVisibleChange(sPopupVisible);
+        $attrs.onPopupVisibleChange && $attrs.onPopupVisibleChange(sPopupVisible);
       }
       // Always record the point position since mouseEnterDelay will delay the show
       if (alignPoint && event) {
@@ -482,7 +471,11 @@ export default {
         },
       });
     },
-
+    handlePortalUpdate() {
+      if (this.prevPopupVisible !== this.sPopupVisible) {
+        this.afterPopupVisibleChange(this.sPopupVisible);
+      }
+    },
     delaySetPopupVisible(visible, delayS, event) {
       const delay = delayS * 1000;
       this.clearDelayTimer();
@@ -587,77 +580,74 @@ export default {
     },
   },
   render() {
-    const { sPopupVisible } = this;
-    const children = filterEmpty(this.$slots.default);
+    const { sPopupVisible, $attrs } = this;
+    const children = filterEmpty(getSlot(this));
     const { forceRender, alignPoint } = this.$props;
 
     if (children.length > 1) {
       warning(false, 'Trigger $slots.default.length > 1, just support only one default', true);
     }
     const child = children[0];
-    this.childOriginEvents = getDataEvents(child);
+    this.childOriginEvents = getEvents(this);
     const newChildProps = {
-      props: {},
-      nativeOn: {},
       key: 'trigger',
+      class: $attrs.class,
     };
 
     if (this.isContextmenuToShow()) {
-      newChildProps.nativeOn.contextmenu = this.onContextmenu;
+      newChildProps.onContextmenu = this.onContextmenu;
     } else {
-      newChildProps.nativeOn.contextmenu = this.createTwoChains('contextmenu');
+      newChildProps.onContextmenu = this.createTwoChains('contextmenu');
     }
 
     if (this.isClickToHide() || this.isClickToShow()) {
-      newChildProps.nativeOn.click = this.onClick;
-      newChildProps.nativeOn.mousedown = this.onMousedown;
-      newChildProps.nativeOn.touchstart = this.onTouchstart;
+      newChildProps.onClick = this.onClick;
+      newChildProps.onMousedown = this.onMousedown;
+      newChildProps.onTouchstart = this.onTouchstart;
     } else {
-      newChildProps.nativeOn.click = this.createTwoChains('click');
-      newChildProps.nativeOn.mousedown = this.createTwoChains('mousedown');
-      newChildProps.nativeOn.touchstart = this.createTwoChains('onTouchstart');
+      newChildProps.onClick = this.createTwoChains('click');
+      newChildProps.onMousedown = this.createTwoChains('mousedown');
+      newChildProps.onTouchstart = this.createTwoChains('onTouchstart');
     }
     if (this.isMouseEnterToShow()) {
-      newChildProps.nativeOn.mouseenter = this.onMouseenter;
+      newChildProps.onMouseenter = this.onMouseenter;
       if (alignPoint) {
-        newChildProps.nativeOn.mousemove = this.onMouseMove;
+        newChildProps.onMousemove = this.onMouseMove;
       }
     } else {
-      newChildProps.nativeOn.mouseenter = this.createTwoChains('mouseenter');
+      newChildProps.onMouseenter = this.createTwoChains('mouseenter');
     }
     if (this.isMouseLeaveToHide()) {
-      newChildProps.nativeOn.mouseleave = this.onMouseleave;
+      newChildProps.onMouseleave = this.onMouseleave;
     } else {
-      newChildProps.nativeOn.mouseleave = this.createTwoChains('mouseleave');
+      newChildProps.onMouseleave = this.createTwoChains('mouseleave');
     }
 
     if (this.isFocusToShow() || this.isBlurToHide()) {
-      newChildProps.nativeOn.focus = this.onFocus;
-      newChildProps.nativeOn.blur = this.onBlur;
+      newChildProps.onFocus = this.onFocus;
+      newChildProps.onBlur = this.onBlur;
     } else {
-      newChildProps.nativeOn.focus = this.createTwoChains('focus');
-      newChildProps.nativeOn.blur = e => {
+      newChildProps.onFocus = this.createTwoChains('focus');
+      newChildProps.onBlur = e => {
         if (e && (!e.relatedTarget || !contains(e.target, e.relatedTarget))) {
           this.createTwoChains('blur')(e);
         }
       };
     }
 
-    this.trigger = cloneElement(child, newChildProps);
-
-    return (
-      <ContainerRender
-        parent={this}
-        visible={sPopupVisible}
-        autoMount={false}
-        forceRender={forceRender}
-        getComponent={this.getComponent}
-        getContainer={this.getContainer}
-        children={({ renderComponent }) => {
-          this.renderComponent = renderComponent;
-          return this.trigger;
-        }}
-      />
-    );
+    const trigger = cloneVNode(child, newChildProps);
+    let portal;
+    // prevent unmounting after it's rendered
+    if (sPopupVisible || this._component || forceRender) {
+      portal = (
+        <Portal
+          key="portal"
+          children={this.getComponent()}
+          getContainer={this.getContainer}
+          didUpdate={this.handlePortalUpdate}
+        ></Portal>
+      );
+    }
+    return [portal, trigger];
   },
 };

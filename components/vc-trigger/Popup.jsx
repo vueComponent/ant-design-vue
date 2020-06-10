@@ -1,3 +1,4 @@
+import { Transition } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Align from '../vc-align';
 import PopupInner from './PopupInner';
@@ -9,6 +10,7 @@ import { getListeners } from '../_util/props-util';
 export default {
   name: 'VCTriggerPopup',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     visible: PropTypes.bool,
     getClassNameFromAlign: PropTypes.func,
@@ -255,7 +257,7 @@ export default {
       }
       if (destroyPopupOnHide) {
         return (
-          <transition {...transitionProps}>
+          <Transition {...transitionProps}>
             {visible ? (
               <Align
                 target={this.getAlignTarget()}
@@ -268,11 +270,11 @@ export default {
                 <PopupInner {...popupInnerProps}>{$slots.default}</PopupInner>
               </Align>
             ) : null}
-          </transition>
+          </Transition>
         );
       }
       return (
-        <transition {...transitionProps}>
+        <Transition {...transitionProps}>
           <Align
             v-show={visible}
             target={this.getAlignTarget()}
@@ -285,7 +287,7 @@ export default {
           >
             <PopupInner {...popupInnerProps}>{$slots.default}</PopupInner>
           </Align>
-        </transition>
+        </Transition>
       );
     },
 
@@ -314,9 +316,9 @@ export default {
         );
         if (maskTransition) {
           maskElement = (
-            <transition appear name={maskTransition}>
+            <Transition appear name={maskTransition}>
               {maskElement}
-            </transition>
+            </Transition>
           );
         }
       }

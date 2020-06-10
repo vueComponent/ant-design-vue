@@ -25,10 +25,12 @@ export default {
     value: PropTypes.string,//颜色值
     locale: PropTypes.object,//双语包
     colorRounded: PropTypes.number,//颜色数值保留几位小数
-    size: PropTypes.string,//尺寸
+    size: PropTypes.oneOf(['default', 'small','large']).def('default'),//尺寸
     getPopupContainer: PropTypes.func,//指定渲染容器
-    disabled: PropTypes.bool,//是否禁用
+    disabled: PropTypes.bool.def(false),//是否禁用
     format: PropTypes.string,//颜色格式设置
+    alpha: PropTypes.bool.def(false),//是否开启透明通道
+    hue: PropTypes.bool.def(true),//是否开启色彩预选
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -122,12 +124,12 @@ export default {
         el: '#color-picker' + this._uid,
         container: (container && container(this.$el)) || document.body,
         theme: 'monolith', // or 'monolith', or 'nano'
-        default: this.value || this.defaultValue || '#1890ff', // 有默认颜色pickr才可以获取到_representation
+        default: this.value || this.defaultValue||null, // 有默认颜色pickr才可以获取到_representation
         components: {
           // Main components
           preview: true,
-          opacity: true,
-          hue: true,
+          opacity: this.alpha,
+          hue: this.hue,
           // Input / output Options
           interaction: {
             hex: true,
@@ -139,7 +141,8 @@ export default {
         },
       }, this.config, { i18n: this.i18n })).on('save', (color, instance) => {
         if (color) {
-          color = color['to' + instance._representation]().toString(this.colorRounded || 0);
+          let _representation =  instance._representation || 'HEXA';
+          color = color['to' + _representation]().toString(this.colorRounded || 0);
         }
         this.$emit('change.value', color || '');
       }).on('hide', () => {

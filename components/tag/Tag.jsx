@@ -119,7 +119,6 @@ export default {
     const getPrefixCls = this.configProvider().getPrefixCls;
     const prefixCls = getPrefixCls('tag', customizePrefixCls);
     const { _visible: visible } = this.$data;
-    debugger;
     const tag = (
       <span
         v-show={visible}

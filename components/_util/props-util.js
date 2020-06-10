@@ -1,5 +1,6 @@
 import isPlainObject from 'lodash/isPlainObject';
 import classNames from 'classnames';
+import { isVNode } from 'vue';
 // function getType(fn) {
 //   const match = fn && fn.toString().match(/^\s*function (\w+)/);
 //   return match ? match[1] : '';
@@ -10,17 +11,19 @@ export const isOn = key => onRE.test(key);
 
 const splitAttrs = attrs => {
   const allAttrs = Object.keys(attrs);
-  const eventAttrs = [];
-  const extraAttrs = [];
+  const eventAttrs = {};
+  const onEvents = {};
+  const extraAttrs = {};
   for (let i = 0, l = allAttrs.length; i < l; i++) {
     const key = allAttrs[i];
     if (isOn(key)) {
-      eventAttrs.push({ [key[2].toLowerCase() + key.slice(3)]: attrs[key] });
+      eventAttrs[key[2].toLowerCase() + key.slice(3)] = attrs[key];
+      onEvents[key] = attrs[key];
     } else {
-      extraAttrs.push({ [key]: attrs[key] });
+      extraAttrs[key] = attrs[key];
     }
   }
-  return { events: eventAttrs, extraAttrs };
+  return { onEvents, events: eventAttrs, extraAttrs };
 };
 const camelizeRE = /-(\w)/g;
 const camelize = str => {
@@ -93,7 +96,7 @@ const getSlotOptions = ele => {
   return componentOptions ? componentOptions.Ctor.options || {} : {};
 };
 const getOptionProps = instance => {
-  return (instance.$ && instance.$.vnode && instance.$.vnode.props) || instance.props || {};
+  return (instance.$ && instance.$.vnode ? instance.$.vnode.props : instance.props) || {};
 };
 const getComponent = (instance, prop, options = instance, execute = true) => {
   const temp = instance[prop];
@@ -182,14 +185,9 @@ const getKey = ele => {
 };
 
 export function getEvents(child) {
-  let events = {};
-  for (let key in child) {
-    if (/^on/.test(key)) {
-      key = key.toLowerCase();
-      events[key] = child[key];
-    }
-  }
-  return events;
+  const { $attrs } = child;
+  return splitAttrs($attrs).events;
+
   // let events = {};
   // if (child.componentOptions && child.componentOptions.listeners) {
   //   events = child.componentOptions.listeners;
@@ -217,19 +215,9 @@ export function getListeners(context) {
   return (context.$vnode ? context.$vnode.componentOptions.listeners : context.$listeners) || {};
 }
 export function getClass(ele) {
-  let data = {};
-  if (ele.data) {
-    data = ele.data;
-  } else if (ele.$vnode && ele.$vnode.data) {
-    data = ele.$vnode.data;
-  }
-  const tempCls = data.class || {};
-  const staticClass = data.staticClass;
+  const props = (isVNode(ele) ? ele.props : ele.$attrs) || {};
+  let tempCls = props.class || {};
   let cls = {};
-  staticClass &&
-    staticClass.split(' ').forEach(c => {
-      cls[c.trim()] = true;
-    });
   if (typeof tempCls === 'string') {
     tempCls.split(' ').forEach(c => {
       cls[c.trim()] = true;
@@ -246,13 +234,8 @@ export function getClass(ele) {
   return cls;
 }
 export function getStyle(ele, camel) {
-  let data = {};
-  if (ele.data) {
-    data = ele.data;
-  } else if (ele.$vnode && ele.$vnode.data) {
-    data = ele.$vnode.data;
-  }
-  let style = data.style || data.staticStyle;
+  const props = (isVNode(ele) ? ele.props : ele.$attrs) || {};
+  let style = props.style || {};
   if (typeof style === 'string') {
     style = parseStyleText(style, camel);
   } else if (camel && style) {
@@ -307,13 +290,7 @@ export function mergeProps() {
 }
 
 function isValidElement(element) {
-  return (
-    element &&
-    typeof element === 'object' &&
-    'componentOptions' in element &&
-    'context' in element &&
-    element.tag !== undefined
-  ); // remove text node
+  return element && element.__v_isVNode && typeof element.type !== 'symbol'; // remove text node
 }
 
 export {

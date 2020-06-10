@@ -2,6 +2,7 @@ import { Transition } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import PropTypes from '../_util/vue-types';
 import getTransitionProps from '../_util/getTransitionProps';
+import omit from 'omit.js';
 import Wave from '../_util/wave';
 import { hasProp, getOptionProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
@@ -119,7 +120,12 @@ export default {
     const prefixCls = getPrefixCls('tag', customizePrefixCls);
     const { _visible: visible } = this.$data;
     const tag = (
-      <span v-show={visible} class={this.getTagClassName(prefixCls)} style={this.getTagStyle()}>
+      <span
+        v-show={visible}
+        class={this.getTagClassName(prefixCls)}
+        style={this.getTagStyle()}
+        {...omit(this.$attr, ['onClose'])}
+      >
         {this.$slots.default()}
         {this.renderCloseIcon()}
       </span>

@@ -96,7 +96,26 @@ const getSlotOptions = ele => {
   return componentOptions ? componentOptions.Ctor.options || {} : {};
 };
 const getOptionProps = instance => {
-  return (instance.$ && instance.$.vnode ? instance.$.vnode.props : instance.props) || {};
+  const res = {};
+  if (instance.$ && instance.$.vnode) {
+    const props = instance.$.vnode.props || {};
+    Object.keys(instance.$props).forEach(k => {
+      const v = instance.$props[k];
+      if (v !== undefined || k in props) {
+        res[k] = v;
+      }
+    });
+  } else if (isVNode(instance) && typeof instance.type === 'object') {
+    const props = instance.props || {};
+    const allProps = instance.type.props;
+    Object.keys(allProps).forEach(k => {
+      const v = allProps[k].default;
+      if (v !== undefined || k in props) {
+        res[k] = v;
+      }
+    });
+  }
+  return res;
 };
 const getComponent = (instance, prop, options = instance, execute = true) => {
   const temp = instance[prop];

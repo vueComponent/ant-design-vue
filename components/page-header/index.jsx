@@ -22,14 +22,13 @@ export const PageHeaderProps = {
 };
 
 const renderBack = (instance, prefixCls, backIcon, onBack) => {
-  // eslint-disable-next-line no-unused-vars
-  const h = instance.$createElement;
   if (!backIcon || !onBack) {
     return null;
   }
   return (
-    <LocaleReceiver componentName="PageHeader">
-      {({ back }) => (
+    <LocaleReceiver
+      componentName="PageHeader"
+      children={({ back }) => (
         <div class={`${prefixCls}-back`}>
           <TransButton
             onClick={e => {
@@ -42,15 +41,15 @@ const renderBack = (instance, prefixCls, backIcon, onBack) => {
           </TransButton>
         </div>
       )}
-    </LocaleReceiver>
+    ></LocaleReceiver>
   );
 };
 
-const renderBreadcrumb = (h, breadcrumb) => {
+const renderBreadcrumb = breadcrumb => {
   return <Breadcrumb {...breadcrumb} />;
 };
 
-const renderTitle = (h, prefixCls, instance) => {
+const renderTitle = (prefixCls, instance) => {
   const { avatar } = instance;
   const title = getComponent(instance, 'title');
   const subTitle = getComponent(instance, 'subTitle');
@@ -80,14 +79,14 @@ const renderTitle = (h, prefixCls, instance) => {
   return null;
 };
 
-const renderFooter = (h, prefixCls, footer) => {
+const renderFooter = (prefixCls, footer) => {
   if (footer) {
     return <div class={`${prefixCls}-footer`}>{footer}</div>;
   }
   return null;
 };
 
-const renderChildren = (h, prefixCls, children) => {
+const renderChildren = (prefixCls, children) => {
   return <div class={`${prefixCls}-content`}>{children}</div>;
 };
 
@@ -99,13 +98,12 @@ const PageHeader = {
       configProvider: inject('configProvider', ConfigConsumerProps),
     };
   },
-  render(h) {
+  render() {
     const { getPrefixCls, pageHeader } = this.configProvider;
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, breadcrumb } = props;
     const footer = getComponent(this, 'footer');
     const children = this.$slots.default && this.$slots.default();
-
     let ghost = true;
 
     // Use `ghost` from `props` or from `ConfigProvider` instead.
@@ -117,7 +115,7 @@ const PageHeader = {
     const prefixCls = getPrefixCls('page-header', customizePrefixCls);
     const breadcrumbDom =
       breadcrumb && breadcrumb.props && breadcrumb.props.routes
-        ? renderBreadcrumb(h, breadcrumb)
+        ? renderBreadcrumb(breadcrumb)
         : null;
     const className = [
       prefixCls,
@@ -131,9 +129,9 @@ const PageHeader = {
     return (
       <div class={className}>
         {breadcrumbDom}
-        {renderTitle(h, prefixCls, this)}
-        {children && renderChildren(h, prefixCls, children)}
-        {renderFooter(h, prefixCls, footer)}
+        {renderTitle(prefixCls, this)}
+        {children && children.length && renderChildren(prefixCls, children)}
+        {renderFooter(prefixCls, footer)}
       </div>
     );
   },

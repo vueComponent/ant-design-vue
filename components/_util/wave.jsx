@@ -37,7 +37,7 @@ export default {
       configProvider,
     };
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.instance) {
       this.instance.cancel();
     }

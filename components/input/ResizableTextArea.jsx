@@ -31,7 +31,7 @@ const ResizableTextArea = {
   mounted() {
     this.resizeTextarea();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     raf.cancel(this.nextFrameActionId);
     raf.cancel(this.resizeFrameId);
   },

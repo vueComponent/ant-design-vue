@@ -66,7 +66,7 @@ export default {
       this.updateSpinning();
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.cancelExistingSpin();
   },
   methods: {

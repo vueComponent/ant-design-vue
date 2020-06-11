@@ -1,13 +1,13 @@
 const createRef = fn => {
   return {
-    onVnodeBeforeMounted: vnode => {
+    onVnodeBeforeMount: vnode => {
       fn(vnode.component || vnode.el, vnode.key);
     },
     onVnodeUpdated: vnode => {
       fn(vnode.component || vnode.el, vnode.key);
     },
-    onVnodeDestroyed: vnode => {
-      fn(vnode.component || vnode.el, vnode.key);
+    onVnodeUnmounted: vnode => {
+      fn(null, vnode.key);
     },
   };
 };

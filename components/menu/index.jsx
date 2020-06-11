@@ -64,7 +64,7 @@ const Menu = {
   updated() {
     this.propsUpdating = false;
   },
-  // beforeDestroy() {
+  // beforeUnmount() {
   //   raf.cancel(this.mountRafId);
   // },
   watch: {

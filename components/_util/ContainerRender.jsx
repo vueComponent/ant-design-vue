@@ -24,7 +24,7 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.autoDestroy) {
       this.removeContainer();
     }

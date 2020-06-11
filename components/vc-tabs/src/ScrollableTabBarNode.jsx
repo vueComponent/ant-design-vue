@@ -58,7 +58,7 @@ export default {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
     }

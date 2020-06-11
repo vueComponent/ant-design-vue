@@ -96,7 +96,7 @@ export default {
       }
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const { visible, getOpenCount } = this;
     if ((visible || this.inTransition) && !getOpenCount()) {
       this.switchScrollingEffect();

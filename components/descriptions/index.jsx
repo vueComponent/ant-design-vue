@@ -194,7 +194,7 @@ const Descriptions = {
       });
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     ResponsiveObserve.unsubscribe(this.token);
   },
   render() {

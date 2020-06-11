@@ -28,7 +28,7 @@ export default {
     this.syncTimer();
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.stopTimer();
   },
 

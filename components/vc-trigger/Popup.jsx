@@ -62,7 +62,7 @@ export default {
       this.setStretchSize();
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el);
     } else if (this.$el.remove) {

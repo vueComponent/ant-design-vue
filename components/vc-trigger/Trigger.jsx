@@ -125,7 +125,7 @@ export default {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.clearDelayTimer();
     this.clearOutsideHandler();
     clearTimeout(this.mouseDownTimeout);

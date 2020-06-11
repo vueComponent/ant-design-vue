@@ -102,7 +102,7 @@ const SubMenu = {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     const { eventKey } = this;
     this.__emit('destroy', eventKey);
 

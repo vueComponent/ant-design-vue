@@ -24,7 +24,7 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.removeContainer();
   },
   methods: {

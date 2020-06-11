@@ -78,7 +78,7 @@ const TreeNode = {
   updated() {
     this.syncLoadData(this.$props);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const {
       eventKey,
       vcTree: { registerTreeNode },

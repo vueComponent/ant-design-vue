@@ -87,7 +87,7 @@ export default {
         });
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this._responsiveMediaHandlers.forEach(function(obj) {
       enquire.unregister(obj.query, obj.handler);
     });

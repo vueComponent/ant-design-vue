@@ -174,7 +174,7 @@ export default {
       this.updatedFunc();
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.stop();
   },
   methods: {

@@ -23,7 +23,7 @@ const VueResizeObserver = {
   updated() {
     this.onComponentUpdated();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.destroyObserver();
   },
   methods: {

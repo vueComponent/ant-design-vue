@@ -50,7 +50,7 @@ export default {
   updated() {
     this.fixTwoCNChar();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.delayTimeout) {
       clearTimeout(this.delayTimeout);
     }

@@ -98,7 +98,7 @@ const Affix = {
       this.updatePosition();
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     clearTimeout(this.timeout);
     removeObserveTarget(this);
     this.updatePosition.cancel();

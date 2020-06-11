@@ -20,6 +20,7 @@ import Timeline from 'ant-design-vue/timeline';
 import Col from 'ant-design-vue/col';
 import Row from 'ant-design-vue/row';
 import Tooltip from 'ant-design-vue/tooltip';
+import Descriptions from 'ant-design-vue/descriptions';
 import 'ant-design-vue/style.js';
 
 createApp(App)
@@ -42,4 +43,5 @@ createApp(App)
   .use(Col)
   .use(Row)
   .use(Tooltip)
+  .use(Descriptions)
   .mount('#app');

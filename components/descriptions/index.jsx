@@ -1,10 +1,15 @@
-import { inject, isVNode, cloneVNode } from 'vue';
+import { inject, cloneVNode } from 'vue';
 import warning from '../_util/warning';
 import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import { ConfigConsumerProps } from '../config-provider';
 import Col from './Col';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getOptionProps, getComponent } from '../_util/props-util';
+import {
+  initDefaultProps,
+  getOptionProps,
+  getComponent,
+  isValidElement,
+} from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 
 export const DescriptionsItemProps = {
@@ -65,9 +70,7 @@ const generateChildrenRows = (children, column) => {
     if (lastItem) {
       lastSpanSame = !itemProps.span || itemProps.span === leftSpans;
       itemNode = cloneVNode(itemNode, {
-        props: {
-          span: leftSpans,
-        },
+        span: leftSpans,
       });
     }
 
@@ -145,6 +148,7 @@ const Descriptions = {
             colon={colon}
             type={type}
             key={`${type}-${colItem.key || idx}`}
+            colKey={`${type}-${colItem.key || idx}`}
             layout={layout}
           />
         );
@@ -201,7 +205,7 @@ const Descriptions = {
       layout = 'horizontal',
       colon = true,
     } = this.$props;
-    const title = getComponent(this, 'title') || null;
+    const title = getComponent(this, 'title');
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
 
@@ -209,11 +213,9 @@ const Descriptions = {
     const children = this.$slots.default && this.$slots.default();
     const cloneChildren = toArray(children)
       .map(child => {
-        if (isVNode(child)) {
+        if (isValidElement(child)) {
           return cloneVNode(child, {
-            props: {
-              prefixCls,
-            },
+            prefixCls,
           });
         }
         return null;

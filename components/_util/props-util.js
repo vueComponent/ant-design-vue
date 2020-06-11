@@ -102,7 +102,7 @@ const getOptionProps = instance => {
     Object.keys(instance.$props).forEach(k => {
       const v = instance.$props[k];
       if (v !== undefined || k in props) {
-        res[k] = v;
+        res[k] = k in props ? props[k] : v;
       }
     });
   } else if (isVNode(instance) && typeof instance.type === 'object') {
@@ -111,7 +111,7 @@ const getOptionProps = instance => {
     Object.keys(allProps).forEach(k => {
       const v = allProps[k].default;
       if (v !== undefined || k in props) {
-        res[k] = v;
+        res[k] = k in props ? props[k] : v;
       }
     });
   }

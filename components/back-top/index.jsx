@@ -44,7 +44,7 @@ const BackTop = {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.scrollEvent) {
       this.scrollEvent.remove();
     }

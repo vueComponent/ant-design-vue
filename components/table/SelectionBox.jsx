@@ -18,7 +18,7 @@ export default {
     this.subscribe();
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.unsubscribe) {
       this.unsubscribe();
     }

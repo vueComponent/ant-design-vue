@@ -200,7 +200,7 @@ const Select = {
       this.forcePopupAlign();
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.clearFocusTime();
     this.clearBlurTime();
     this.clearComboboxTime();

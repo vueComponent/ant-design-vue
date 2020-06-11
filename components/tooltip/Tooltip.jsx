@@ -1,15 +1,16 @@
-import { cloneElement } from '../_util/vnode';
+import { inject } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import getPlacements from './placements';
 import PropTypes from '../_util/vue-types';
 import {
   hasProp,
-  getComponentFromProp,
-  getClass,
+  getComponent,
   getStyle,
+  filterEmpty,
+  getSlot,
   isValidElement,
-  getListeners,
 } from '../_util/props-util';
+import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
 import abstractTooltipProps from './abstractTooltipProps';
 
@@ -27,6 +28,7 @@ const splitObject = (obj, keys) => {
 const props = abstractTooltipProps();
 export default {
   name: 'ATooltip',
+  inheritAttrs: false,
   model: {
     prop: 'visible',
     event: 'visibleChange',
@@ -35,8 +37,10 @@ export default {
     ...props,
     title: PropTypes.any,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     return {
@@ -78,18 +82,14 @@ export default {
     // mouse events don't trigger at disabled button in Chrome
     // https://github.com/react-component/tooltip/issues/18
     getDisabledCompatibleChildren(ele) {
-      const options = (ele.componentOptions && ele.componentOptions.Ctor.options) || {};
-
       if (
-        ((options.__ANT_BUTTON === true ||
-          options.__ANT_SWITCH === true ||
-          options.__ANT_CHECKBOX === true) &&
-          (ele.componentOptions.propsData.disabled ||
-            ele.componentOptions.propsData.disabled === '')) ||
-        (ele.tag === 'button' &&
-          ele.data &&
-          ele.data.attrs &&
-          ele.data.attrs.disabled !== undefined)
+        ((typeof ele.type === 'object' &&
+          (ele.type.__ANT_BUTTON === true ||
+            ele.type.__ANT_SWITCH === true ||
+            ele.type.__ANT_CHECKBOX === true)) ||
+          ele.type === 'button') &&
+        ele.props &&
+        (ele.props.disabled || ele.props.disabled === '')
       ) {
         // Pick some layout related style properties up to span
         // Prevent layout bugs like https://github.com/ant-design/ant-design/issues/5254
@@ -107,33 +107,31 @@ export default {
           display: 'inline-block', // default inline-block is important
           ...picked,
           cursor: 'not-allowed',
-          width: ele.componentOptions.propsData.block ? '100%' : null,
+          width: ele.props && ele.props.block ? '100%' : null,
         };
         const buttonStyle = {
           ...omitted,
           pointerEvents: 'none',
         };
-        const spanCls = getClass(ele);
-        const child = cloneElement(ele, {
-          style: buttonStyle,
-          class: null,
-        });
-        return (
-          <span style={spanStyle} class={spanCls}>
-            {child}
-          </span>
+        const child = cloneElement(
+          ele,
+          {
+            style: buttonStyle,
+          },
+          true,
         );
+        return <span style={spanStyle}>{child}</span>;
       }
       return ele;
     },
 
     isNoTitle() {
-      const title = getComponentFromProp(this, 'title');
+      const title = getComponent(this, 'title');
       return !title && title !== 0;
     },
 
     getOverlay() {
-      const title = getComponentFromProp(this, 'title');
+      const title = getComponent(this, 'title');
       if (title === 0) {
         return title;
       }
@@ -173,12 +171,12 @@ export default {
   },
 
   render() {
-    const { $props, $data, $slots } = this;
+    const { $props, $data, $attrs } = this;
     const { prefixCls: customizePrefixCls, openClassName, getPopupContainer } = $props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
-    let children = ($slots.default || []).filter(c => c.tag || c.text.trim() !== '');
+    let children = filterEmpty(getSlot(this));
     children = children.length === 1 ? children[0] : children;
     let sVisible = $data.sVisible;
     // Hide tooltip when there is no title
@@ -193,22 +191,19 @@ export default {
     );
     const childCls = {
       [openClassName || `${prefixCls}-open`]: true,
+      [child.props && child.props.class]: child.props && child.props.class,
     };
     const tooltipProps = {
-      props: {
-        ...$props,
-        prefixCls,
-        getTooltipContainer: getPopupContainer || getContextPopupContainer,
-        builtinPlacements: this.getPlacements(),
-        overlay: this.getOverlay(),
-        visible: sVisible,
-      },
+      ...$attrs,
+      ...$props,
+      prefixCls,
+      getTooltipContainer: getPopupContainer || getContextPopupContainer,
+      builtinPlacements: this.getPlacements(),
+      overlay: this.getOverlay(),
+      visible: sVisible,
       ref: 'tooltip',
-      on: {
-        ...getListeners(this),
-        visibleChange: this.onVisibleChange,
-        popupAlign: this.onPopupAlign,
-      },
+      onVisibleChange: this.onVisibleChange,
+      onPopupAlign: this.onPopupAlign,
     };
     return (
       <VcTooltip {...tooltipProps}>

@@ -53,7 +53,7 @@ export default {
       });
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     ResponsiveObserve.unsubscribe(this.token);
   },
   methods: {

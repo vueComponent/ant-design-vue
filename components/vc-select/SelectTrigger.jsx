@@ -82,7 +82,7 @@ export default {
       this.setDropdownWidth();
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.cancelRafInstance();
   },
   methods: {

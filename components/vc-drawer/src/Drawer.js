@@ -130,7 +130,7 @@ const Drawer = {
       }
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     delete currentDrawer[this.drawerId];
     delete this.isOpenChange;
     if (this.container) {

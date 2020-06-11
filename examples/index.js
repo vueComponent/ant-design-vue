@@ -19,6 +19,7 @@ import Empty from 'ant-design-vue/empty';
 import Timeline from 'ant-design-vue/timeline';
 import Col from 'ant-design-vue/col';
 import Row from 'ant-design-vue/row';
+import Tooltip from 'ant-design-vue/tooltip';
 import 'ant-design-vue/style.js';
 
 createApp(App)
@@ -40,4 +41,5 @@ createApp(App)
   .use(Timeline)
   .use(Col)
   .use(Row)
+  .use(Tooltip)
   .mount('#app');

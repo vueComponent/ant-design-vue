@@ -1,5 +1,5 @@
 import PropTypes from './vue-types';
-import { cloneElement } from './vnode';
+import { Teleport } from 'vue';
 
 export default {
   name: 'Portal',
@@ -7,6 +7,10 @@ export default {
     getContainer: PropTypes.func.isRequired,
     children: PropTypes.any.isRequired,
     didUpdate: PropTypes.func,
+  },
+  data() {
+    this._container = null;
+    return {};
   },
   mounted() {
     this.createContainer();
@@ -20,7 +24,7 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.removeContainer();
   },
   methods: {
@@ -37,14 +41,7 @@ export default {
 
   render() {
     if (this._container) {
-      return cloneElement(this.$props.children, {
-        directives: [
-          {
-            name: 'ant-portal',
-            value: this._container,
-          },
-        ],
-      });
+      return <Teleport to={this._container}>{this.$props.children}</Teleport>;
     }
     return null;
   },

@@ -24,7 +24,7 @@ export default {
       this.timeoutId = setTimeout(() => this.$el.focus());
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     clearTimeout(this.timeoutId);
   },
   methods: {

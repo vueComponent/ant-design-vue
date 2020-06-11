@@ -82,7 +82,7 @@ export default {
       this.clearPasswordValueAttribute();
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.removePasswordTimeout) {
       clearTimeout(this.removePasswordTimeout);
     }

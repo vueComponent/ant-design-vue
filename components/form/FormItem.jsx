@@ -106,7 +106,7 @@ export default {
       this.collectContext();
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.collectFormItemContext(this.$vnode && this.$vnode.context, 'delete');
   },
   mounted() {

@@ -46,7 +46,7 @@ export default {
       this.calcStepOffsetWidth();
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.calcTimeout) {
       clearTimeout(this.calcTimeout);
     }

@@ -489,7 +489,7 @@ export default {
       }
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.animationEndCallback) {
       clearTimeout(this.animationEndCallback);
     }

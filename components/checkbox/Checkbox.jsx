@@ -53,7 +53,7 @@ export default {
       '`value` is not validate prop, do you mean `checked`?',
     );
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const { value, checkboxGroupContext: checkboxGroup = {} } = this;
     if (checkboxGroup.cancelValue) {
       checkboxGroup.cancelValue(value);

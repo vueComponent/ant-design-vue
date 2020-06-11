@@ -46,7 +46,7 @@ export default {
       }
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const { visible } = this.$props;
     // 离开时不会 render， 导到离开时数值不变，改用 func 。。
     openCount = visible && openCount ? openCount - 1 : openCount;

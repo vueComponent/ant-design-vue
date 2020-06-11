@@ -80,7 +80,7 @@ const DOMWrap = {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.resizeObserver) {
       this.resizeObserver.disconnect();
     }

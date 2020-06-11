@@ -28,9 +28,9 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.clearCloseTimer();
-    this.willDestroy = true; // beforeDestroy调用后依然会触发onMouseleave事件
+    this.willDestroy = true; // beforeUnmount调用后依然会触发onMouseleave事件
   },
   methods: {
     close(e) {

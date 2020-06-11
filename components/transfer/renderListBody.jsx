@@ -46,7 +46,7 @@ const ListBody = {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     raf.cancel(this.mountId);
     raf.cancel(this.lazyId);
   },

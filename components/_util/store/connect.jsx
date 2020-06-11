@@ -44,7 +44,7 @@ export default function connect(mapStateToProps) {
         this.trySubscribe();
       },
 
-      beforeDestroy() {
+      beforeUnmount() {
         this.tryUnsubscribe();
       },
       methods: {

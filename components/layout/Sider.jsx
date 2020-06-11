@@ -145,7 +145,7 @@ export default {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.mql) {
       this.mql.removeListener(this.responsiveHandler);
     }

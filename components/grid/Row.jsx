@@ -1,3 +1,4 @@
+import { inject, provide, reactive } from 'vue';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
@@ -20,20 +21,24 @@ export default {
     ...RowProps,
     gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]).def(0),
   },
-  provide() {
+  setup() {
+    const rowContext = reactive({
+      getGutter: undefined,
+    });
+    provide('rowContext', rowContext);
     return {
-      rowContext: this,
+      configProvider: inject('configProvider', ConfigConsumerProps),
+      rowContext,
     };
-  },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return {
       screens: {},
     };
   },
-
+  created() {
+    this.rowContext.getGutter = this.getGutter;
+  },
   mounted() {
     this.$nextTick(() => {
       this.token = ResponsiveObserve.subscribe(screens => {
@@ -101,7 +106,7 @@ export default {
     };
     return (
       <div class={classes} style={rowStyle}>
-        {$slots.default}
+        {$slots.default && $slots.default()}
       </div>
     );
   },

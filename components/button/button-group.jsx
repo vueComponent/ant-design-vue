@@ -16,7 +16,7 @@ export default {
   name: 'AButtonGroup',
   props: ButtonGroupProps,
   setup() {
-    const configProvider = inject('configProvider') || ConfigConsumerProps;
+    const configProvider = inject('configProvider', ConfigConsumerProps);
     return {
       configProvider,
     };

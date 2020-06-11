@@ -1,7 +1,7 @@
 import Button from '../index';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 import { mount } from '@vue/test-utils';
-import Vue from 'vue';
+import { nextTick } from 'vue';
 import { asyncExpect } from '@/tests/utils';
 import { sleep } from '../../../tests/utils';
 import mountTest from '../../../tests/shared/mountTest';
@@ -24,7 +24,7 @@ describe('Button', () => {
         return <Button type="primary">按钮</Button>;
       },
     });
-    expect(wrapper.contains('.ant-btn-primary')).toBe(true);
+    expect(wrapper.find('.ant-btn-primary').exists()).toBe(true);
   });
 
   it('renders Chinese characters correctly', done => {
@@ -99,8 +99,8 @@ describe('Button', () => {
         );
       },
     });
-    Vue.nextTick(() => {
-      expect(wrapper6.find('.ant-btn').contains('.ant-btn-two-chinese-chars')).toBe(true);
+    nextTick(() => {
+      expect(wrapper6.find('.ant-btn-two-chinese-chars').exists()).toBe(true);
       done();
     });
   });
@@ -160,7 +160,7 @@ describe('Button', () => {
       wrapper.trigger('click');
     });
     await asyncExpect(() => {
-      expect(wrapper.contains('.ant-btn-loading')).toBe(false);
+      expect(wrapper.find('.ant-btn-loading').exists()).toBe(false);
     });
   });
   it('should not clickable when button is loading', () => {
@@ -227,16 +227,15 @@ describe('Button', () => {
   });
 
   it('should support to change loading', async () => {
-    const wrapper = mount(Button, {
-      slots: {
-        default: ['button'],
-      },
-    });
+    const wrapper = mount(Button);
     wrapper.setProps({ loading: true });
+    await sleep();
     expect(wrapper.findAll('.ant-btn-loading').length).toBe(1);
     wrapper.setProps({ loading: false });
+    await sleep();
     expect(wrapper.findAll('.ant-btn-loading').length).toBe(0);
     wrapper.setProps({ loading: { delay: 50 } });
+    await sleep();
     expect(wrapper.findAll('.ant-btn-loading').length).toBe(0);
     await sleep(50);
     expect(wrapper.findAll('.ant-btn-loading').length).toBe(1);
@@ -244,7 +243,7 @@ describe('Button', () => {
     await sleep(50);
     expect(wrapper.findAll('.ant-btn-loading').length).toBe(0);
     expect(() => {
-      wrapper.destroy();
+      wrapper.unmount();
     }).not.toThrow();
   });
 });

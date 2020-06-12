@@ -7,6 +7,7 @@ export default {
   props: {
     prefixCls: PropTypes.string,
     checked: PropTypes.bool,
+    onChange: PropTypes.func,
   },
   setup() {
     return {

@@ -65,6 +65,7 @@
         "@babel/plugin-proposal-class-properties": "^7.8.3",
         "@babel/plugin-proposal-export-default-from": "^7.8.3",
         "@babel/plugin-proposal-object-rest-spread": "^7.9.6",
+        "@babel/plugin-proposal-optional-chaining": "^7.10.1",
         "@babel/plugin-transform-member-expression-literals": "^7.8.3",
         "@babel/plugin-transform-object-assign": "^7.8.3",
         "@babel/plugin-transform-property-literals": "^7.8.3",

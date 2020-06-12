@@ -21,6 +21,7 @@ import Col from 'ant-design-vue/col';
 import Row from 'ant-design-vue/row';
 import Tooltip from 'ant-design-vue/tooltip';
 import Descriptions from 'ant-design-vue/descriptions';
+import BackTop from 'ant-design-vue/back-top';
 import 'ant-design-vue/style.js';
 
 createApp(App)
@@ -44,4 +45,5 @@ createApp(App)
   .use(Row)
   .use(Tooltip)
   .use(Descriptions)
+  .use(BackTop)
   .mount('#app');

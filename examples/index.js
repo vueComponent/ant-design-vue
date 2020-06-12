@@ -29,6 +29,7 @@ import Popover from 'ant-design-vue/popover';
 import notification from 'ant-design-vue/notification';
 import message from 'ant-design-vue/message';
 import Modal from 'ant-design-vue/modal';
+import Badge from 'ant-design-vue/badge';
 import 'ant-design-vue/style.js';
 
 const app = createApp(App);
@@ -61,4 +62,5 @@ app
   .use(Popconfirm)
   .use(Popover)
   .use(Modal)
+  .use(Badge)
   .mount('#app');

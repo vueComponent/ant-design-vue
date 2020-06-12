@@ -1,8 +1,7 @@
-import { Transition } from 'vue';
+import { Transition, inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import PropTypes from '../_util/vue-types';
 import getTransitionProps from '../_util/getTransitionProps';
-import omit from 'omit.js';
 import Wave from '../_util/wave';
 import { hasProp, getOptionProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
@@ -36,8 +35,10 @@ export default {
     visible: PropTypes.bool,
     afterClose: PropTypes.func,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     let _visible = true;
@@ -116,16 +117,11 @@ export default {
 
   render() {
     const { prefixCls: customizePrefixCls } = this.$props;
-    const getPrefixCls = this.configProvider().getPrefixCls;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tag', customizePrefixCls);
     const { _visible: visible } = this.$data;
     const tag = (
-      <span
-        v-show={visible}
-        class={this.getTagClassName(prefixCls)}
-        style={this.getTagStyle()}
-        {...omit(this.$attr, ['onClose'])}
-      >
+      <span v-show={visible} class={this.getTagClassName(prefixCls)} style={this.getTagStyle()}>
         {this.$slots.default()}
         {this.renderCloseIcon()}
       </span>

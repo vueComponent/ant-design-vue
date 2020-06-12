@@ -10,6 +10,7 @@ import Affix from 'ant-design-vue/affix';
 import Alert from 'ant-design-vue/alert';
 import Divider from 'ant-design-vue/divider';
 import Anchor from 'ant-design-vue/anchor';
+import Radio from 'ant-design-vue/radio';
 import ConfigProvider from 'ant-design-vue/config-provider';
 import Result from 'ant-design-vue/result';
 import Spin from 'ant-design-vue/spin';
@@ -34,6 +35,7 @@ createApp(App)
   .use(Drawer)
   .use(Affix)
   .use(Alert)
+  .use(Radio)
   .use(Divider)
   .use(Result)
   .use(PageHeader)

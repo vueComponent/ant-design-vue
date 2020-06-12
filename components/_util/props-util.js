@@ -1,13 +1,11 @@
 import isPlainObject from 'lodash/isPlainObject';
 import classNames from 'classnames';
 import { isVNode } from 'vue';
+import { camelize, hyphenate, isOn, resolvePropValue } from './util';
 // function getType(fn) {
 //   const match = fn && fn.toString().match(/^\s*function (\w+)/);
 //   return match ? match[1] : '';
 // }
-
-const onRE = /^on[^a-z]/;
-export const isOn = key => onRE.test(key);
 
 const splitAttrs = attrs => {
   const allAttrs = Object.keys(attrs);
@@ -24,10 +22,6 @@ const splitAttrs = attrs => {
     }
   }
   return { onEvents, events: eventAttrs, extraAttrs };
-};
-const camelizeRE = /-(\w)/g;
-const camelize = str => {
-  return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ''));
 };
 const parseStyleText = (cssText = '', camel) => {
   const res = {};
@@ -101,17 +95,19 @@ const getOptionProps = instance => {
     const props = instance.$.vnode.props || {};
     Object.keys(instance.$props).forEach(k => {
       const v = instance.$props[k];
-      if (v !== undefined || k in props) {
-        res[k] = k in props ? props[k] : v;
+      const hyphenateKey = hyphenate(k);
+      if (v !== undefined || hyphenateKey in props) {
+        res[k] = v; // 直接取 $props[k]
       }
     });
   } else if (isVNode(instance) && typeof instance.type === 'object') {
     const props = instance.props || {};
-    const allProps = instance.type.props;
-    Object.keys(allProps).forEach(k => {
-      const v = allProps[k].default;
-      if (v !== undefined || k in props) {
-        res[k] = k in props ? props[k] : v;
+    const options = instance.type.props;
+    Object.keys(options).forEach(k => {
+      const hyphenateKey = hyphenate(k);
+      const v = resolvePropValue(options, props, k, props[hyphenateKey], hyphenateKey);
+      if (v !== undefined || hyphenateKey in props) {
+        res[k] = v;
       }
     });
   }

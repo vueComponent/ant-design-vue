@@ -1,13 +1,10 @@
-import { Transition } from 'vue';
+import { inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import PropTypes from '../_util/vue-types';
-import getTransitionProps from '../_util/getTransitionProps';
-import omit from 'omit.js';
 import Wave from '../_util/wave';
-import { hasProp, getListeners, getOptionProps } from '../_util/props-util';
+import { hasProp, getOptionProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
-import warning from '../_util/warning';
 
 const PresetColorTypes = [
   'pink',
@@ -29,19 +26,17 @@ const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?
 export default {
   name: 'ATag',
   mixins: [BaseMixin],
-  model: {
-    prop: 'visible',
-    event: 'close.visible',
-  },
   props: {
     prefixCls: PropTypes.string,
     color: PropTypes.string,
     closable: PropTypes.bool.def(false),
     visible: PropTypes.bool,
-    afterClose: PropTypes.func,
+    onClose: PropTypes.func,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     let _visible = true;
@@ -49,11 +44,6 @@ export default {
     if ('visible' in props) {
       _visible = this.visible;
     }
-    warning(
-      !('afterClose' in props),
-      'Tag',
-      "'afterClose' will be deprecated, please use 'close' event, we will remove this in the next version.",
-    );
     return {
       _visible,
     };
@@ -68,12 +58,7 @@ export default {
   methods: {
     setVisible(visible, e) {
       this.$emit('close', e);
-      this.$emit('close.visible', false);
-      const afterClose = this.afterClose;
-      if (afterClose) {
-        // next version remove.
-        afterClose();
-      }
+      this.$emit('update:visible', false);
       if (e.defaultPrevented) {
         return;
       }
@@ -120,27 +105,16 @@ export default {
 
   render() {
     const { prefixCls: customizePrefixCls } = this.$props;
-    const getPrefixCls = this.configProvider().getPrefixCls;
+    const isNeedWave = 'onClick' in this.$attrs;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tag', customizePrefixCls);
     const { _visible: visible } = this.$data;
     const tag = (
-      <span
-        v-show={visible}
-        {...{ on: omit(getListeners(this), ['close']) }}
-        class={this.getTagClassName(prefixCls)}
-        style={this.getTagStyle()}
-      >
-        {this.$slots.default()}
+      <span v-show={visible} class={this.getTagClassName(prefixCls)} style={this.getTagStyle()}>
+        {this.$slots.default && this.$slots.default()}
         {this.renderCloseIcon()}
       </span>
     );
-    const transitionProps = getTransitionProps(`${prefixCls}-zoom`, {
-      appear: false,
-    });
-    return (
-      <Wave>
-        <Transition {...transitionProps}>{tag}</Transition>
-      </Wave>
-    );
+    return isNeedWave ? <Wave>{tag}</Wave> : tag;
   },
 };

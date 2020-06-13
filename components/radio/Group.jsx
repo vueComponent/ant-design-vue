@@ -4,11 +4,9 @@ import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
 import { getOptionProps, filterEmpty, hasProp, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-function noop() {}
 
 export default {
   name: 'ARadioGroup',
-  inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
     defaultValue: PropTypes.any,
@@ -26,6 +24,7 @@ export default {
     disabled: Boolean,
     name: String,
     buttonStyle: PropTypes.string.def('outline'),
+    onChange: PropTypes.func,
   },
   data() {
     const { value, defaultValue } = this;
@@ -56,7 +55,6 @@ export default {
     },
   },
   created() {
-    this.configProvider = inject('configProvider', ConfigConsumerProps);
     this.radioGroupContext = provide('radioGroupContext', this);
   },
   methods: {
@@ -69,7 +67,7 @@ export default {
       // nextTick for https://github.com/vueComponent/ant-design-vue/issues/1280
       if (!this.updatingValue && value !== lastValue) {
         this.updatingValue = true;
-        this.$emit('update:modelValue', value);
+        this.$emit('update:value', value);
         this.$emit('change', ev);
       }
       nextTick(() => {
@@ -78,7 +76,6 @@ export default {
     },
   },
   render() {
-    const { onMouseenter = noop, onMouseleave = noop, class: className, style, id } = this.$attrs;
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, options, buttonStyle } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -91,7 +88,6 @@ export default {
       {
         [`${groupPrefixCls}-${props.size}`]: props.size,
       },
-      className,
     );
 
     let children = filterEmpty(getSlot(this));
@@ -129,10 +125,6 @@ export default {
     return (
       <div
         class={classString}
-        onMouseenter={onMouseenter}
-        onMouseleave={onMouseleave}
-        style={style}
-        id={id}
       >
         {children}
       </div>

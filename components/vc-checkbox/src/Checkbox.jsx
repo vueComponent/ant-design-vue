@@ -8,10 +8,6 @@ export default {
   name: 'Checkbox',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  model: {
-    prop: 'checked',
-    event: 'change',
-  },
   props: initDefaultProps(
     {
       prefixCls: PropTypes.string,
@@ -73,7 +69,7 @@ export default {
       }
       this.$forceUpdate(); // change前，维持现有状态
       e.shiftKey = this.eventShiftKey;
-      this.__emit('change', {
+      const eventObj = {
         target: {
           ...props,
           checked: e.target.checked,
@@ -85,7 +81,9 @@ export default {
           e.preventDefault();
         },
         nativeEvent: e,
-      });
+      };
+      this.$emit('update:checked', eventObj);
+      this.$emit('change', eventObj);
       this.eventShiftKey = false;
     },
     onClick(e) {

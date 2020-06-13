@@ -1,7 +1,6 @@
 import Radio from './Radio';
 import Group from './Group';
 import Button from './RadioButton';
-// import Base from '../base';
 
 Radio.Group = Group;
 Radio.Button = Button;

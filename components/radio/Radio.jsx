@@ -5,11 +5,8 @@ import classNames from 'classnames';
 import { getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
-function noop() {}
-
 export default {
   name: 'ARadio',
-  inheritAttrs: false,
   model: {
     prop: 'checked',
   },
@@ -24,6 +21,7 @@ export default {
     id: String,
     autoFocus: Boolean,
     type: PropTypes.string.def('radio'),
+    onChange: PropTypes.func,
   },
   setup() {
     return {
@@ -43,7 +41,7 @@ export default {
       this.$emit('update:value', targetChecked);
       this.$emit('change', event);
     },
-    onChange(e) {
+    onChange2(e) {
       this.$emit('change', e);
       if (this.radioGroupContext && this.radioGroupContext.onRadioChange) {
         this.radioGroupContext.onRadioChange(e);
@@ -52,15 +50,8 @@ export default {
   },
 
   render() {
-    const { $slots, radioGroupContext: radioGroup, $attrs } = this;
+    const { $slots, radioGroupContext: radioGroup } = this;
     const props = getOptionProps(this);
-    const {
-      onMouseenter = noop,
-      onMouseleave = noop,
-      class: className,
-      style,
-      ...restAttrs
-    } = $attrs;
     const { prefixCls: customizePrefixCls, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
@@ -68,18 +59,17 @@ export default {
     const radioProps = {
       prefixCls,
       ...restProps,
-      ...restAttrs,
     };
 
     if (radioGroup) {
       radioProps.name = radioGroup.name;
-      radioProps.onChange = this.onChange;
+      radioProps.onChange = this.onChange2;
       radioProps.checked = props.value === radioGroup.stateValue;
       radioProps.disabled = props.disabled || radioGroup.disabled;
     } else {
       radioProps.onChange = this.handleChange;
     }
-    const wrapperClassString = classNames(className, {
+    const wrapperClassString = classNames( {
       [`${prefixCls}-wrapper`]: true,
       [`${prefixCls}-wrapper-checked`]: radioProps.checked,
       [`${prefixCls}-wrapper-disabled`]: radioProps.disabled,
@@ -88,12 +78,9 @@ export default {
     return (
       <label
         class={wrapperClassString}
-        style={style}
-        onMouseenter={onMouseenter}
-        onMouseleave={onMouseleave}
       >
         <VcCheckbox {...radioProps} ref="vcCheckbox" />
-        {$slots.default !== undefined ? <span>{$slots.default()}</span> : null}
+        {$slots.default && <span>{$slots.default()}</span>}
       </label>
     );
   },

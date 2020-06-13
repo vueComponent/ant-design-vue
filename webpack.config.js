@@ -37,7 +37,8 @@ module.exports = {
             ],
           ],
           plugins: [
-            ['@ant-design-vue/babel-plugin-jsx', { transformOn: true, compatibleProps: true }],
+            ['@ant-design-vue/babel-plugin-jsx', { transformOn: true }],
+            '@babel/plugin-proposal-optional-chaining',
             '@babel/plugin-transform-object-assign',
             '@babel/plugin-proposal-object-rest-spread',
             '@babel/plugin-proposal-export-default-from',
@@ -85,8 +86,6 @@ module.exports = {
     extensions: ['.js', '.jsx', '.vue'],
   },
   devServer: {
-    host: 'localhost',
-    port: 3002,
     historyApiFallback: {
       rewrites: [{ from: /./, to: '/index.html' }],
     },

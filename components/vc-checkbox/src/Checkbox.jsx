@@ -1,13 +1,8 @@
-import PropTypes from '../../_util/vue-types';
+import { nextTick } from 'vue';
 import classNames from 'classnames';
-import {
-  getOptionProps,
-  hasProp,
-  initDefaultProps,
-  getAttrs,
-  getListeners,
-} from '../../_util/props-util';
+import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
+import { getOptionProps, hasProp, initDefaultProps } from '../../_util/props-util';
 
 export default {
   name: 'Checkbox',
@@ -53,7 +48,7 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (this.autoFocus) {
         this.$refs.input && this.$refs.input.focus();
       }
@@ -94,7 +89,7 @@ export default {
       this.eventShiftKey = false;
     },
     onClick(e) {
-      this.__emit('click', e);
+      this.$emit('click', e);
       // onChange没能获取到shiftKey，使用onClick hack
       this.eventShiftKey = e.shiftKey;
     },
@@ -110,11 +105,12 @@ export default {
       readOnly,
       tabIndex,
       autoFocus,
+      onFocus,
+      onBlur,
       value,
       ...others
     } = getOptionProps(this);
-    const attrs = getAttrs(this);
-    const globalProps = Object.keys({ ...others, ...attrs }).reduce((prev, key) => {
+    const globalProps = Object.keys({ ...others, ...this.$attrs }).reduce((prev, key) => {
       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
         prev[key] = others[key];
       }
@@ -141,14 +137,11 @@ export default {
           autoFocus={autoFocus}
           ref="input"
           value={value}
-          {...{
-            attrs: globalProps,
-            on: {
-              ...getListeners(this),
-              change: this.handleChange,
-              click: this.onClick,
-            },
-          }}
+          onChange={this.handleChange}
+          onClick={this.onClick}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          {...globalProps}
         />
         <span class={`${prefixCls}-inner`} />
       </span>

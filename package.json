@@ -1,6 +1,6 @@
 {
     "name": "ant-design-vue",
-    "version": "1.6.1",
+    "version": "1.6.2",
     "title": "Ant Design Vue",
     "description": "An enterprise-class UI design language and Vue-based implementation",
     "keywords": [
@@ -148,7 +148,7 @@
         "stylelint": "^13.0.0",
         "stylelint-config-prettier": "^8.0.0",
         "stylelint-config-standard": "^19.0.0",
-        "terser-webpack-plugin": "^2.3.1",
+        "terser-webpack-plugin": "^3.0.3",
         "through2": "^3.0.0",
         "url-loader": "^3.0.0",
         "vue": "^3.0.0-beta.14",

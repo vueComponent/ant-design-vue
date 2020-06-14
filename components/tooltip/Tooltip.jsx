@@ -29,10 +29,6 @@ const props = abstractTooltipProps();
 export default {
   name: 'ATooltip',
   inheritAttrs: false,
-  model: {
-    prop: 'visible',
-    event: 'visibleChange',
-  },
   props: {
     ...props,
     title: PropTypes.any,
@@ -58,6 +54,7 @@ export default {
         this.sVisible = this.isNoTitle() ? false : visible;
       }
       if (!this.isNoTitle()) {
+        this.$emit('update:visible', visible);
         this.$emit('visibleChange', visible);
       }
     },

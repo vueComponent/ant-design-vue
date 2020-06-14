@@ -1,11 +1,10 @@
-import Vue from 'vue';
+import { createApp, TransitionGroup } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getStyle, getComponentFromProp } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import createChainedFunction from '../_util/createChainedFunction';
 import getTransitionProps from '../_util/getTransitionProps';
 import Notice from './Notice';
-import Base from '../base';
 
 function noop() {}
 
@@ -74,8 +73,8 @@ const Notification = {
     },
   },
 
-  render(h) {
-    const { prefixCls, notices, remove, getTransitionName } = this;
+  render() {
+    const { prefixCls, notices, remove, getTransitionName, $attrs } = this;
     const transitionProps = getTransitionProps(getTransitionName());
     const noticeNodes = notices.map((notice, index) => {
       const update = Boolean(index === notices.length - 1 && notice.updateKey);
@@ -84,40 +83,37 @@ const Notification = {
       const { content, duration, closable, onClose, style, class: className } = notice;
       const close = createChainedFunction(remove.bind(this, notice.key), onClose);
       const noticeProps = {
-        props: {
-          prefixCls,
-          duration,
-          closable,
-          update,
-          closeIcon: getComponentFromProp(this, 'closeIcon'),
-        },
-        on: {
-          close,
-          click: notice.onClick || noop,
-        },
+        prefixCls,
+        duration,
+        closable,
+        update,
+        closeIcon: getComponent(this, 'closeIcon'),
+        onClose: close,
+        onClick: notice.onClick || noop,
         style,
         class: className,
         key,
       };
       return (
-        <Notice {...noticeProps}>{typeof content === 'function' ? content(h) : content}</Notice>
+        <Notice {...noticeProps}>{typeof content === 'function' ? content() : content}</Notice>
       );
     });
     const className = {
       [prefixCls]: 1,
     };
-    const style = getStyle(this);
     return (
       <div
         class={className}
         style={
-          style || {
+          $attrs.style || {
             top: '65px',
             left: '50%',
           }
         }
       >
-        <transition-group {...transitionProps}>{noticeNodes}</transition-group>
+        <TransitionGroup tag="span" {...transitionProps}>
+          {noticeNodes}
+        </TransitionGroup>
       </div>
     );
   },
@@ -132,9 +128,7 @@ Notification.newInstance = function newNotificationInstance(properties, callback
   } else {
     document.body.appendChild(div);
   }
-  const V = Base.Vue || Vue;
-  new V({
-    el: div,
+  const app = createApp({
     mounted() {
       const self = this;
       this.$nextTick(() => {
@@ -147,15 +141,17 @@ Notification.newInstance = function newNotificationInstance(properties, callback
           },
           component: self,
           destroy() {
-            self.$destroy();
-            self.$el.parentNode.removeChild(self.$el);
+            app.unmount(div);
+            if (div.parentNode) {
+              div.parentNode.removeChild(div);
+            }
           },
         });
       });
     },
     render() {
       const p = {
-        props,
+        ...props,
         ref: 'notification',
         style,
         class: className,
@@ -163,6 +159,7 @@ Notification.newInstance = function newNotificationInstance(properties, callback
       return <Notification {...p} />;
     },
   });
+  app.mount(div);
 };
 
 export default Notification;

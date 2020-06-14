@@ -27,7 +27,7 @@ export default {
       let eventName = args[0];
       // TODO: 后续统一改成onXxxx，不在运行时转，提升性能
       eventName = `on${eventName[0].toUpperCase()}${eventName.substring(1)}`;
-      const event = this.$attrs[eventName];
+      const event = this.$props[eventName] || this.$attrs[eventName];
       if (args.length && event) {
         if (Array.isArray(event)) {
           for (let i = 0, l = event.length; i < l; i++) {

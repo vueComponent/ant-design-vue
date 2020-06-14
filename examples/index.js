@@ -24,9 +24,16 @@ import Tooltip from 'ant-design-vue/tooltip';
 import Descriptions from 'ant-design-vue/descriptions';
 import BackTop from 'ant-design-vue/back-top';
 import Tag from 'ant-design-vue/tag';
+import Popconfirm from 'ant-design-vue/popconfirm';
+import Popover from 'ant-design-vue/popover';
+import notification from 'ant-design-vue/notification';
+import message from 'ant-design-vue/message';
 import 'ant-design-vue/style.js';
 
-createApp(App)
+const app = createApp(App);
+app.config.globalProperties.$notification = notification;
+app.config.globalProperties.$message = message;
+app
   .use(Avatar)
   .use(Breadcrumb)
   .use(Button)
@@ -50,4 +57,6 @@ createApp(App)
   .use(Descriptions)
   .use(BackTop)
   .use(Tag)
+  .use(Popconfirm)
+  .use(Popover)
   .mount('#app');

@@ -1,6 +1,6 @@
 import isPlainObject from 'lodash/isPlainObject';
 import classNames from 'classnames';
-import { isVNode } from 'vue';
+import { isVNode, Fragment, Comment, Text } from 'vue';
 import { camelize, hyphenate, isOn, resolvePropValue } from './util';
 // function getType(fn) {
 //   const match = fn && fn.toString().match(/^\s*function (\w+)/);
@@ -68,7 +68,11 @@ const getSlots = ele => {
   return { ...slots, ...getScopedSlots(ele) };
 };
 const getSlot = (self, name = 'default', options = {}) => {
-  return self.$slots[name] && self.$slots[name](options);
+  let res = self.$slots[name] && self.$slots[name](options);
+  while (res && res.length === 1 && res[0].type === Fragment) {
+    res = res[0].children;
+  }
+  return res;
 };
 
 const getAllChildren = ele => {
@@ -267,7 +271,7 @@ export function getComponentName(opts) {
 }
 
 export function isEmptyElement(c) {
-  return typeof c.type.toString() === 'Symbol(Text)' && c.children.trim() === '';
+  return c.type === Comment || (c.type === Text && c.children.trim() === '');
 }
 
 export function isStringElement(c) {

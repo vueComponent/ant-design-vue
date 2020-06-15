@@ -1,3 +1,4 @@
+import { provide, Transition } from 'vue';
 import { initDefaultProps } from '../_util/props-util';
 import KeyCode from '../_util/KeyCode';
 import contains from '../vc-util/Dom/contains';
@@ -66,12 +67,6 @@ export default {
     };
   },
 
-  provide() {
-    return {
-      dialogContext: this,
-    };
-  },
-
   watch: {
     visible(val) {
       if (val) {
@@ -81,6 +76,9 @@ export default {
         this.updatedCallback(!val);
       });
     },
+  },
+  created() {
+    provide('dialogContext', this);
   },
 
   beforeMount() {
@@ -295,12 +293,12 @@ export default {
         </LazyRenderBox>
       );
       const dialogTransitionProps = getTransitionProps(transitionName, {
-        afterLeave: this.onAnimateLeave,
+        onAfterLeave: this.onAnimateLeave,
       });
       return (
-        <transition key="dialog" {...dialogTransitionProps}>
+        <Transition key="dialog" {...dialogTransitionProps}>
           {visible || !this.destroyPopup ? dialogElement : null}
-        </transition>
+        </Transition>
       );
     },
     getZIndexStyle() {
@@ -334,9 +332,9 @@ export default {
         if (maskTransition) {
           const maskTransitionProps = getTransitionProps(maskTransition);
           maskElement = (
-            <transition key="mask" {...maskTransitionProps}>
+            <Transition key="mask" {...maskTransitionProps}>
               {maskElement}
-            </transition>
+            </Transition>
           );
         }
       }

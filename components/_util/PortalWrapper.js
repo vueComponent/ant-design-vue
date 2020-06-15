@@ -2,6 +2,7 @@ import PropTypes from './vue-types';
 import switchScrollingEffect from './switchScrollingEffect';
 import setStyle from './setStyle';
 import Portal from './Portal';
+import createRefHooks from './createRefHooks';
 
 let openCount = 0;
 const windowIsUndefined = !(
@@ -140,14 +141,7 @@ export default {
         <Portal
           getContainer={this.getDomContainer}
           children={children(childProps)}
-          {...{
-            directives: [
-              {
-                name: 'ant-ref',
-                value: this.savePortal,
-              },
-            ],
-          }}
+          {...createRefHooks(this.savePortal)}
         ></Portal>
       );
     }

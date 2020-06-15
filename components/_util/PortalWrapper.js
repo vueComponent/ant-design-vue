@@ -24,6 +24,7 @@ export default {
     visible: PropTypes.bool,
   },
   data() {
+    this._component = null;
     const { visible } = this.$props;
     openCount = visible ? openCount + 1 : openCount;
     return {};

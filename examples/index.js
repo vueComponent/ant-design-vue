@@ -28,6 +28,7 @@ import Popconfirm from 'ant-design-vue/popconfirm';
 import Popover from 'ant-design-vue/popover';
 import notification from 'ant-design-vue/notification';
 import message from 'ant-design-vue/message';
+import Modal from 'ant-design-vue/modal';
 import 'ant-design-vue/style.js';
 
 const app = createApp(App);
@@ -59,4 +60,5 @@ app
   .use(Tag)
   .use(Popconfirm)
   .use(Popover)
+  .use(Modal)
   .mount('#app');

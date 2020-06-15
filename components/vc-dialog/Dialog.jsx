@@ -1,5 +1,5 @@
 import { provide, Transition } from 'vue';
-import { initDefaultProps } from '../_util/props-util';
+import { initDefaultProps, getSlot } from '../_util/props-util';
 import KeyCode from '../_util/KeyCode';
 import contains from '../vc-util/Dom/contains';
 import LazyRenderBox from './LazyRenderBox';
@@ -49,6 +49,7 @@ function offset(el) {
 let cacheOverflow = {};
 
 export default {
+  name: 'VcDialog',
   mixins: [BaseMixin],
   props: initDefaultProps(IDialogPropTypes, {
     mask: true,
@@ -64,6 +65,9 @@ export default {
   data() {
     return {
       destroyPopup: false,
+      inTransition: false,
+      titleId: `rcDialogTitle${uuid++}`,
+      dialogMouseDown: undefined,
     };
   },
 
@@ -79,11 +83,6 @@ export default {
   },
   created() {
     provide('dialogContext', this);
-  },
-
-  beforeMount() {
-    this.inTransition = false;
-    this.titleId = `rcDialogTitle${uuid++}`;
   },
   mounted() {
     this.$nextTick(() => {
@@ -285,7 +284,7 @@ export default {
             {closer}
             {header}
             <div key="body" class={`${prefixCls}-body`} style={bodyStyle} ref="body" {...bodyProps}>
-              {this.$slots.default}
+              {getSlot(this)}
             </div>
             {footer}
           </div>
@@ -320,22 +319,24 @@ export default {
       let maskElement;
       if (props.mask) {
         const maskTransition = this.getMaskTransitionName();
-        maskElement = (
+        const tempMaskElement = (
           <LazyRenderBox
             v-show={props.visible}
             style={this.getMaskStyle()}
             key="mask"
             class={`${props.prefixCls}-mask`}
-            {...props.maskProps}
+            {...(props.maskProps || {})}
           />
         );
         if (maskTransition) {
           const maskTransitionProps = getTransitionProps(maskTransition);
           maskElement = (
             <Transition key="mask" {...maskTransitionProps}>
-              {maskElement}
+              {tempMaskElement}
             </Transition>
           );
+        } else {
+          maskElement = tempMaskElement;
         }
       }
       return maskElement;

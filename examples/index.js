@@ -35,7 +35,7 @@ import Menu from 'ant-design-vue/menu';
 import Mentions from 'ant-design-vue/mentions';
 import Dropdown from 'ant-design-vue/dropdown';
 import Steps from 'ant-design-vue/steps';
-
+import Switch from 'ant-design-vue/switch';
 import 'ant-design-vue/style.js';
 
 const basic = {
@@ -84,4 +84,5 @@ app
   .use(Mentions)
   .use(Dropdown)
   .use(Steps)
+  .use(Switch)
   .mount('#app');

@@ -1,19 +1,16 @@
+import { inject } from 'vue';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PropTypes from '../_util/vue-types';
-import hasProp, { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
+import hasProp, { getOptionProps, getComponent } from '../_util/props-util';
 import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 import warning from '../_util/warning';
+import createRefHooks from '../_util/createRefHooks';
 
 const Switch = {
   name: 'ASwitch',
   __ANT_SWITCH: true,
-  model: {
-    prop: 'checked',
-    event: 'change',
-  },
   props: {
     prefixCls: PropTypes.string,
     // size=default and size=large are the same
@@ -27,15 +24,20 @@ const Switch = {
     autoFocus: PropTypes.bool,
     loading: PropTypes.bool,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   methods: {
     focus() {
-      this.$refs.refSwitchNode.focus();
+      this.refSwitchNode?.ctx?.focus();
     },
     blur() {
-      this.$refs.refSwitchNode.blur();
+      this.refSwitchNode?.ctx?.blur();
+    },
+    saveRef(c) {
+      this.refSwitchNode = c;
     },
   },
   created() {
@@ -57,22 +59,19 @@ const Switch = {
       [`${prefixCls}-small`]: size === 'small',
       [`${prefixCls}-loading`]: loading,
     };
-    const loadingIcon = loading ? (
-      <LoadingOutlined class={`${prefixCls}-loading-icon`} />
-    ) : null;
+    const loadingIcon = loading ? <LoadingOutlined class={`${prefixCls}-loading-icon`} /> : null;
     const switchProps = {
-      props: {
-        ...restProps,
-        prefixCls,
-        loadingIcon,
-        checkedChildren: getComponentFromProp(this, 'checkedChildren'),
-        unCheckedChildren: getComponentFromProp(this, 'unCheckedChildren'),
-        disabled: disabled || loading,
-      },
-      on: getListeners(this),
+      ...restProps,
+      prefixCls,
+      loadingIcon,
+      checkedChildren: getComponent(this, 'checkedChildren'),
+      unCheckedChildren: getComponent(this, 'unCheckedChildren'),
+      disabled: disabled || loading,
+      ...this.$attrs,
       class: classes,
-      ref: 'refSwitchNode',
+      ...createRefHooks(this.saveRef),
     };
+
     return (
       <Wave insertExtraNode>
         <VcSwitch {...switchProps} />
@@ -82,9 +81,8 @@ const Switch = {
 };
 
 /* istanbul ignore next */
-Switch.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Switch.name, Switch);
+Switch.install = function(app) {
+  app.component(Switch.name, Switch);
 };
 
 export default Switch;

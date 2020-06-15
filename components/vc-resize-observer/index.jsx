@@ -6,6 +6,7 @@ const VueResizeObserver = {
   name: 'ResizeObserver',
   props: {
     disabled: Boolean,
+    onResize: Function,
   },
   data() {
     this.currentElement = null;
@@ -45,12 +46,12 @@ const VueResizeObserver = {
       }
 
       if (!this.resizeObserver && element) {
-        this.resizeObserver = new ResizeObserver(this.onResize);
+        this.resizeObserver = new ResizeObserver(this.handleResize);
         this.resizeObserver.observe(element);
       }
     },
 
-    onResize(entries) {
+    handleResize(entries) {
       const { target } = entries[0];
       const { width, height } = target.getBoundingClientRect();
       /**

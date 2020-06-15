@@ -131,7 +131,12 @@ const Affix = {
     measure() {
       const { status, lastAffix } = this;
       const { target } = this;
-      if (status !== AffixStatus.Prepare || !this.$refs.fixedNode || !this.$el || !target) {
+      if (
+        status !== AffixStatus.Prepare ||
+        !this.$refs.fixedNode ||
+        !this.$refs.placeholderNode ||
+        !target
+      ) {
         return;
       }
 
@@ -147,7 +152,7 @@ const Affix = {
         status: AffixStatus.None,
       };
       const targetRect = getTargetRect(targetNode);
-      const placeholderReact = getTargetRect(this.$el);
+      const placeholderReact = getTargetRect(this.$refs.placeholderNode);
       const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
       const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
       if (fixedTop !== undefined) {
@@ -209,9 +214,9 @@ const Affix = {
         const offsetBottom = this.getOffsetBottom();
 
         const targetNode = target();
-        if (targetNode && this.$el) {
+        if (targetNode && this.$refs.placeholderNode) {
           const targetRect = getTargetRect(targetNode);
-          const placeholderReact = getTargetRect(this.$el);
+          const placeholderReact = getTargetRect(this.$refs.placeholderNode);
           const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
           const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
 
@@ -234,7 +239,6 @@ const Affix = {
     const className = classNames({
       [getPrefixCls('affix', prefixCls)]: affixStyle,
     });
-
     const props = omit($props, ['prefixCls', 'offsetTop', 'offsetBottom', 'target']);
     return (
       <ResizeObserver

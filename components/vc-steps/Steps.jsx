@@ -3,7 +3,7 @@ import BaseMixin from '../_util/BaseMixin';
 import debounce from 'lodash/debounce';
 import isFlexSupported from '../_util/isFlexSupported';
 import { filterEmpty } from '../_util/props-util';
-import { cloneVNode } from 'vue';
+import { cloneElement } from '../_util/vnode';
 
 export default {
   name: 'Steps',
@@ -134,8 +134,8 @@ export default {
             progressDot,
             icons,
             ...childProps,
-            ...this.$attrs,
           };
+
           const { onChange } = this.$attrs;
           if (onChange || this.$attrs['onUpdate:current']) {
             stepProps.onStepClick = this.onStepClick;
@@ -163,7 +163,7 @@ export default {
             }
           }
           stepProps.active = stepNumber === current;
-          return cloneVNode(child, stepProps);
+          return cloneElement(child, stepProps);
         })}
       </div>
     );

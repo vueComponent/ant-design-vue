@@ -7,7 +7,6 @@ function isString(str) {
 function noop() {}
 export default {
   name: 'Step',
-  inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
     wrapperStyle: PropTypes.object,
@@ -29,10 +28,17 @@ export default {
       finish: PropTypes.any,
       error: PropTypes.any,
     }).loose,
+    onClick: PropTypes.func,
+    onStepClick: PropTypes.func,
   },
   methods: {
-    onClick(...args) {
-      this.$emit('click', ...args);
+    onItemClick(...args) {
+      const { onClick } = this.$props;
+
+      if (onClick) {
+        this.$emit('click', ...args);
+      }
+
       this.$emit('stepClick', this.stepIndex);
     },
     renderIconNode() {
@@ -85,6 +91,8 @@ export default {
       tailContent,
       adjustMarginRight,
       disabled,
+      onClick,
+      onStepClick,
     } = getOptionProps(this);
 
     const title = getComponent(this, 'title');
@@ -109,14 +117,14 @@ export default {
       stepItemStyle.marginRight = adjustMarginRight;
     }
 
-    const { onClick, onStepClick } = this.$attrs;
     const accessibilityProps = {
       onClick: onClick || noop,
     };
+
     if (onStepClick && !disabled) {
       accessibilityProps.role = 'button';
       accessibilityProps.tabIndex = 0;
-      accessibilityProps.onClick = this.onClick;
+      accessibilityProps.onClick = this.onItemClick;
     }
     return (
       <div {...stepProps} style={stepItemStyle}>

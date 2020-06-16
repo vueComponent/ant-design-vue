@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getOptionProps } from '../_util/props-util';
+import { initDefaultProps, getOptionProps, getComponent } from '../_util/props-util';
 import VcSteps from '../vc-steps';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -39,7 +39,7 @@ const Steps = {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('steps', customizePrefixCls);
     const iconPrefix = getPrefixCls('', customizeIconPrefixCls);
-    const progressDot = this.progressDot || this.$slots.progressDot;
+    const progressDot = getComponent(this, 'progressDot', this, false);
 
     const icons = {
       finish: <CheckOutlined class={`${prefixCls}-finish-icon`} />,

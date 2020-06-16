@@ -7,6 +7,7 @@ function isString(str) {
 function noop() {}
 export default {
   name: 'Step',
+  inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
     wrapperStyle: PropTypes.object,

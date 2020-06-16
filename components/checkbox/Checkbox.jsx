@@ -10,9 +10,6 @@ export default {
   name: 'ACheckbox',
   inheritAttrs: false,
   __ANT_CHECKBOX: true,
-  model: {
-    prop: 'checked',
-  },
   props: {
     prefixCls: PropTypes.string,
     defaultChecked: PropTypes.bool,
@@ -45,6 +42,7 @@ export default {
       });
     },
   },
+
   mounted() {
     const { value, checkboxGroupContext: checkboxGroup = {} } = this;
     if (checkboxGroup.registerValue) {
@@ -84,7 +82,7 @@ export default {
     const { indeterminate, prefixCls: customizePrefixCls, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
-    const { onMouseenter, onMouseleave, onInput, ...restAttrs } = $attrs;
+    const { onMouseenter, onMouseleave, onInput, class: className, style, ...restAttrs } = $attrs;
     const checkboxProps = {
       ...restProps,
       prefixCls,
@@ -102,16 +100,24 @@ export default {
     } else {
       checkboxProps.onChange = this.handleChange;
     }
-    const classString = classNames({
-      [`${prefixCls}-wrapper`]: true,
-      [`${prefixCls}-wrapper-checked`]: checkboxProps.checked,
-      [`${prefixCls}-wrapper-disabled`]: checkboxProps.disabled,
-    });
+    const classString = classNames(
+      {
+        [`${prefixCls}-wrapper`]: true,
+        [`${prefixCls}-wrapper-checked`]: checkboxProps.checked,
+        [`${prefixCls}-wrapper-disabled`]: checkboxProps.disabled,
+      },
+      className,
+    );
     const checkboxClass = classNames({
       [`${prefixCls}-indeterminate`]: indeterminate,
     });
     return (
-      <label class={classString} onMouseenter={onMouseenter} onMouseenter={onMouseleave}>
+      <label
+        class={classString}
+        style={style}
+        onMouseenter={onMouseenter}
+        onMouseenter={onMouseleave}
+      >
         <VcCheckbox {...checkboxProps} class={checkboxClass} ref="vcCheckbox" />
         {children !== undefined && <span>{children}</span>}
       </label>

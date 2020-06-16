@@ -17,19 +17,8 @@ export default {
     value: PropTypes.array,
     options: PropTypes.array.def([]),
     disabled: PropTypes.bool,
-    onChange: PropTypes.func,
   },
-  provide() {
-    return {
-      checkboxGroupContext: this,
-    };
-  },
-  setup() {
-    return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
-      checkboxGroupContext: provide('checkboxGroupContext', this),
-    };
-  },
+
   data() {
     const { value, defaultValue } = this;
     return {
@@ -41,6 +30,10 @@ export default {
     value(val) {
       this.sValue = val || [];
     },
+  },
+  created() {
+    (this.configProvider = inject('configProvider', ConfigConsumerProps)),
+      provide('checkboxGroupContext', this);
   },
   methods: {
     getOptions() {

@@ -48,7 +48,7 @@ export default {
       this.sFileList = val || [];
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.clearProgressTimer();
   },
   methods: {

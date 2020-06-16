@@ -6,7 +6,7 @@ export default function mountTest(Component) {
       const wrapper = mount(Component, { sync: false });
       expect(() => {
         wrapper.vm.$forceUpdate();
-        wrapper.destroy();
+        wrapper.unmount();
       }).not.toThrow();
     });
   });

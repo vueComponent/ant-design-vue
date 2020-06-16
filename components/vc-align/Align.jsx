@@ -94,7 +94,7 @@ export default {
       this.prevProps = { ...this.$props, align: clonedeep(this.$props.align) };
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.stopMonitorWindowResize();
   },
   methods: {

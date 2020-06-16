@@ -25,7 +25,7 @@ const ExpandableRow = {
     // children: PropTypes.func.isRequired,
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.handleDestroy();
   },
   methods: {

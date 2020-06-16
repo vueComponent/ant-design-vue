@@ -73,7 +73,7 @@ export default {
       this.scrollHander = addEventListener(eventNode, 'scroll', this.lazyLoadHandler);
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this._mounted = false;
     if (this.lazyLoadHandler.cancel) {
       this.lazyLoadHandler.cancel();

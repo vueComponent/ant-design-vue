@@ -1,14 +1,16 @@
+import { Transition } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Align from '../vc-align';
 import PopupInner from './PopupInner';
 import LazyRenderBox from './LazyRenderBox';
 import animate from '../_util/css-animation';
 import BaseMixin from '../_util/BaseMixin';
-import { getListeners } from '../_util/props-util';
+import { getListeners, splitAttrs } from '../_util/props-util';
 
 export default {
   name: 'VCTriggerPopup',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     visible: PropTypes.bool,
     getClassNameFromAlign: PropTypes.func,
@@ -33,6 +35,7 @@ export default {
   },
   data() {
     this.domEl = null;
+    this.currentAlignClassName = undefined;
     return {
       // Used for stretch
       stretchChecked: false,
@@ -59,7 +62,7 @@ export default {
       this.setStretchSize();
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.$el.parentNode) {
       this.$el.parentNode.removeChild(this.$el);
     } else if (this.$el.remove) {
@@ -150,12 +153,15 @@ export default {
     },
 
     getClassName(currentAlignClassName) {
-      return `${this.$props.prefixCls} ${this.$props.popupClassName} ${currentAlignClassName}`;
+      return `${this.$props.prefixCls} ${this.$attrs.class || ''} ${
+        this.$props.popupClassName
+      } ${currentAlignClassName}`;
     },
     getPopupElement() {
-      const { $props: props, $slots, getTransitionName } = this;
+      const { $props: props, $attrs, $slots, getTransitionName } = this;
       const { stretchChecked, targetHeight, targetWidth } = this.$data;
-
+      const { style = {} } = $attrs;
+      const onEvents = splitAttrs($attrs).onEvents;
       const {
         align,
         visible,
@@ -198,30 +204,26 @@ export default {
         }
       }
       const popupInnerProps = {
-        props: {
-          prefixCls,
-          visible,
-          // hiddenClassName,
-        },
+        prefixCls,
+        visible,
+        // hiddenClassName,
         class: className,
-        on: getListeners(this),
+        ...onEvents,
         ref: 'popupInstance',
-        style: { ...sizeStyle, ...popupStyle, ...this.getZIndexStyle() },
+        style: { ...sizeStyle, ...popupStyle, ...style, ...this.getZIndexStyle() },
       };
       let transitionProps = {
-        props: {
-          appear: true,
-          css: false,
-        },
+        appear: true,
+        css: false,
       };
       const transitionName = getTransitionName();
       let useTransition = !!transitionName;
       const transitionEvent = {
-        beforeEnter: () => {
+        onBeforeEnter: () => {
           // el.style.display = el.__vOriginalDisplay
           // this.$refs.alignInstance.forceAlign();
         },
-        enter: (el, done) => {
+        onEnter: (el, done) => {
           // render 后 vue 会移除通过animate动态添加的 class导致动画闪动，延迟两帧添加动画class，可以进一步定位或者重写 transition 组件
           this.$nextTick(() => {
             if (this.$refs.alignInstance) {
@@ -234,28 +236,24 @@ export default {
             }
           });
         },
-        beforeLeave: () => {
+        onBeforeLeave: () => {
           this.domEl = null;
         },
-        leave: (el, done) => {
+        onLeave: (el, done) => {
           animate(el, `${transitionName}-leave`, done);
         },
       };
-
+      transitionProps = { ...transitionProps, ...transitionEvent };
       if (typeof animation === 'object') {
         useTransition = true;
-        const { on = {}, props = {} } = animation;
-        transitionProps.props = { ...transitionProps.props, ...props };
-        transitionProps.on = { ...transitionEvent, ...on };
-      } else {
-        transitionProps.on = transitionEvent;
+        transitionProps = { ...transitionProps, ...animation };
       }
       if (!useTransition) {
         transitionProps = {};
       }
       if (destroyPopupOnHide) {
         return (
-          <transition {...transitionProps}>
+          <Transition {...transitionProps}>
             {visible ? (
               <Align
                 target={this.getAlignTarget()}
@@ -265,14 +263,14 @@ export default {
                 align={align}
                 onAlign={this.onAlign}
               >
-                <PopupInner {...popupInnerProps}>{$slots.default}</PopupInner>
+                <PopupInner {...popupInnerProps}>{$slots.default && $slots.default()}</PopupInner>
               </Align>
             ) : null}
-          </transition>
+          </Transition>
         );
       }
       return (
-        <transition {...transitionProps}>
+        <Transition {...transitionProps}>
           <Align
             v-show={visible}
             target={this.getAlignTarget()}
@@ -283,9 +281,9 @@ export default {
             align={align}
             onAlign={this.onAlign}
           >
-            <PopupInner {...popupInnerProps}>{$slots.default}</PopupInner>
+            <PopupInner {...popupInnerProps}>{$slots.default && $slots.default()}</PopupInner>
           </Align>
-        </transition>
+        </Transition>
       );
     },
 
@@ -314,9 +312,9 @@ export default {
         );
         if (maskTransition) {
           maskElement = (
-            <transition appear name={maskTransition}>
+            <Transition appear name={maskTransition}>
               {maskElement}
-            </transition>
+            </Transition>
           );
         }
       }

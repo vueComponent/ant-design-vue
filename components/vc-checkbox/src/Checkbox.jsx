@@ -1,17 +1,13 @@
 import { nextTick } from 'vue';
-import PropTypes from '../../_util/vue-types';
 import classNames from 'classnames';
-import { getOptionProps, hasProp, initDefaultProps } from '../../_util/props-util';
+import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
+import { getOptionProps, hasProp, initDefaultProps } from '../../_util/props-util';
 
 export default {
   name: 'Checkbox',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  model: {
-    prop: 'checked',
-    event: 'change',
-  },
   props: initDefaultProps(
     {
       prefixCls: PropTypes.string,
@@ -73,7 +69,7 @@ export default {
       }
       this.$forceUpdate(); // change前，维持现有状态
       e.shiftKey = this.eventShiftKey;
-      this.$emit('change', {
+      const eventObj = {
         target: {
           ...props,
           checked: e.target.checked,
@@ -85,7 +81,9 @@ export default {
           e.preventDefault();
         },
         nativeEvent: e,
-      });
+      };
+      this.$emit('update:checked', eventObj);
+      this.$emit('change', eventObj);
       this.eventShiftKey = false;
     },
     onClick(e) {
@@ -105,11 +103,12 @@ export default {
       readOnly,
       tabIndex,
       autoFocus,
+      onFocus,
+      onBlur,
       value,
       ...others
     } = getOptionProps(this);
-    const { class: className, ...restAttrs } = this.$attrs;
-    const globalProps = Object.keys({ ...others, ...restAttrs }).reduce((prev, key) => {
+    const globalProps = Object.keys({ ...others, ...this.$attrs }).reduce((prev, key) => {
       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
         prev[key] = others[key];
       }

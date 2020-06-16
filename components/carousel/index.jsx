@@ -108,7 +108,7 @@ const Carousel = {
     // https://github.com/ant-design/ant-design/issues/7191
     this.innerSlider = this.$refs.slick && this.$refs.slick.innerSlider;
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const { autoplay } = this;
     if (autoplay) {
       window.removeEventListener('resize', this.onWindowResized);

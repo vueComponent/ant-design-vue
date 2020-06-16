@@ -36,7 +36,7 @@ export default {
     this.antAnchor.registerLink(this.href);
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.antAnchor.unregisterLink(this.href);
   },
   methods: {

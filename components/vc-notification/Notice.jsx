@@ -1,8 +1,6 @@
 import PropTypes from '../_util/vue-types';
-import { getStyle, getComponentFromProp, getListeners } from '../_util/props-util';
+import { getComponent, getSlot } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-
-function noop() {}
 
 export default {
   mixins: [BaseMixin],
@@ -12,6 +10,7 @@ export default {
     prefixCls: PropTypes.string,
     update: PropTypes.bool,
     closeIcon: PropTypes.any,
+    onClose: PropTypes.func,
   },
   watch: {
     duration() {
@@ -28,9 +27,9 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.clearCloseTimer();
-    this.willDestroy = true; // beforeDestroy调用后依然会触发onMouseleave事件
+    this.willDestroy = true; // beforeUnmount调用后依然会触发onMouseleave事件
   },
   methods: {
     close(e) {
@@ -63,23 +62,21 @@ export default {
   },
 
   render() {
-    const { prefixCls, closable, clearCloseTimer, startCloseTimer, $slots, close } = this;
+    const { prefixCls, closable, clearCloseTimer, startCloseTimer, close, $attrs } = this;
     const componentClass = `${prefixCls}-notice`;
     const className = {
       [`${componentClass}`]: 1,
       [`${componentClass}-closable`]: closable,
     };
-    const style = getStyle(this);
-    const closeIcon = getComponentFromProp(this, 'closeIcon');
+    const closeIcon = getComponent(this, 'closeIcon');
     return (
       <div
         class={className}
-        style={style || { right: '50%' }}
+        style={$attrs.style || { right: '50%' }}
         onMouseenter={clearCloseTimer}
         onMouseleave={startCloseTimer}
-        onClick={getListeners(this).click || noop}
       >
-        <div class={`${componentClass}-content`}>{$slots.default}</div>
+        <div class={`${componentClass}-content`}>{getSlot(this)}</div>
         {closable ? (
           <a tabIndex="0" onClick={close} class={`${componentClass}-close`}>
             {closeIcon || <span class={`${componentClass}-close-x`} />}

@@ -1,3 +1,4 @@
+import { inject, cloneVNode } from 'vue';
 import warning from '../_util/warning';
 import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import { ConfigConsumerProps } from '../config-provider';
@@ -5,13 +6,11 @@ import Col from './Col';
 import PropTypes from '../_util/vue-types';
 import {
   initDefaultProps,
-  isValidElement,
   getOptionProps,
-  getComponentFromProp,
+  getComponent,
+  isValidElement,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import Base from '../base';
-import { cloneElement } from '../_util/vnode';
 
 export const DescriptionsItemProps = {
   prefixCls: PropTypes.string,
@@ -70,10 +69,8 @@ const generateChildrenRows = (children, column) => {
     let lastSpanSame = true;
     if (lastItem) {
       lastSpanSame = !itemProps.span || itemProps.span === leftSpans;
-      itemNode = cloneElement(itemNode, {
-        props: {
-          span: leftSpans,
-        },
+      itemNode = cloneVNode(itemNode, {
+        span: leftSpans,
       });
     }
 
@@ -109,12 +106,14 @@ const Descriptions = {
   name: 'ADescriptions',
   Item: DescriptionsItem,
   mixins: [BaseMixin],
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-  },
   props: initDefaultProps(DescriptionsProps, {
     column: defaultColumnMap,
   }),
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
+  },
   data() {
     return {
       screens: {},
@@ -149,6 +148,7 @@ const Descriptions = {
             colon={colon}
             type={type}
             key={`${type}-${colItem.key || idx}`}
+            colKey={`${type}-${colItem.key || idx}`}
             layout={layout}
           />
         );
@@ -194,7 +194,7 @@ const Descriptions = {
       });
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     ResponsiveObserve.unsubscribe(this.token);
   },
   render() {
@@ -205,19 +205,17 @@ const Descriptions = {
       layout = 'horizontal',
       colon = true,
     } = this.$props;
-    const title = getComponentFromProp(this, 'title') || null;
+    const title = getComponent(this, 'title');
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
 
     const column = this.getColumn();
-    const children = this.$slots.default;
+    const children = this.$slots.default && this.$slots.default();
     const cloneChildren = toArray(children)
       .map(child => {
         if (isValidElement(child)) {
-          return cloneElement(child, {
-            props: {
-              prefixCls,
-            },
+          return cloneVNode(child, {
+            prefixCls,
           });
         }
         return null;
@@ -259,10 +257,9 @@ const Descriptions = {
   },
 };
 
-Descriptions.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Descriptions.name, Descriptions);
-  Vue.component(Descriptions.Item.name, Descriptions.Item);
+Descriptions.install = function(app) {
+  app.component(Descriptions.name, Descriptions);
+  app.component(Descriptions.Item.name, Descriptions.Item);
 };
 
 export default Descriptions;

@@ -10,6 +10,13 @@
 
 ---
 
+## 1.6.2
+
+`2020-06-02`
+
+- 🐞 Fix dialogClass type error [#2298](https://github.com/vueComponent/ant-design-vue/issues/2298)
+- 🐞 Fix RangePicker panel display error [#2318](https://github.com/vueComponent/ant-design-vue/issues/2318)
+
 ## 1.6.1
 
 `2020-05-25`

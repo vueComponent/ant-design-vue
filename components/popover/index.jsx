@@ -1,9 +1,9 @@
+import { inject } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
+import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 
 const props = abstractTooltipProps();
 const Popover = {
@@ -15,12 +15,10 @@ const Popover = {
     content: PropTypes.any,
     title: PropTypes.any,
   },
-  model: {
-    prop: 'visible',
-    event: 'visibleChange',
-  },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   methods: {
     getPopupDomNode() {
@@ -37,33 +35,25 @@ const Popover = {
     delete props.title;
     delete props.content;
     const tooltipProps = {
-      props: {
-        ...props,
-        prefixCls,
-      },
+      ...props,
+      prefixCls,
       ref: 'tooltip',
-      on: getListeners(this),
+      title: (
+        <div>
+          {(title || $slots.title) && (
+            <div class={`${prefixCls}-title`}>{getComponent(this, 'title')}</div>
+          )}
+          <div class={`${prefixCls}-inner-content`}>{getComponent(this, 'content')}</div>
+        </div>
+      ),
     };
-    return (
-      <Tooltip {...tooltipProps}>
-        <template slot="title">
-          <div>
-            {(title || $slots.title) && (
-              <div class={`${prefixCls}-title`}>{getComponentFromProp(this, 'title')}</div>
-            )}
-            <div class={`${prefixCls}-inner-content`}>{getComponentFromProp(this, 'content')}</div>
-          </div>
-        </template>
-        {this.$slots.default}
-      </Tooltip>
-    );
+    return <Tooltip {...tooltipProps}>{getSlot(this)}</Tooltip>;
   },
 };
 
 /* istanbul ignore next */
-Popover.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Popover.name, Popover);
+Popover.install = function(app) {
+  app.component(Popover.name, Popover);
 };
 
 export default Popover;

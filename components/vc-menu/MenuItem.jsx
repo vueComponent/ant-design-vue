@@ -59,7 +59,7 @@ const MenuItem = {
     });
     this.callRef();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const props = this.$props;
     this.__emit('destroy', props.eventKey);
   },

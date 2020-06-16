@@ -14,6 +14,8 @@ const inlineStyle = {
 };
 
 const TransButton = {
+  name: 'TransButton',
+  inheritAttrs: false,
   props: {
     noStyle: PropTypes.bool,
   },
@@ -34,18 +36,18 @@ const TransButton = {
     },
 
     setRef(btn) {
-      this.div = btn;
+      this.$refs.div = btn;
     },
 
     focus() {
-      if (this.div) {
-        this.div.focus();
+      if (this.$refs.div) {
+        this.$refs.div.focus();
       }
     },
 
     blur() {
-      if (this.div) {
-        this.div.blur();
+      if (this.$refs.div) {
+        this.$refs.div.blur();
       }
     },
   },
@@ -57,22 +59,13 @@ const TransButton = {
       <div
         role="button"
         tabIndex={0}
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: this.setRef,
-            },
-          ],
-          on: {
-            ...this.$listeners,
-            keydown: this.onKeyDown,
-            keyup: this.onKeyUp,
-          },
-        }}
+        ref="div"
+        {...this.$attrs}
+        onKeydown={this.onKeyDown}
+        onKeyup={this.onKeyUp}
         style={{ ...(!noStyle ? inlineStyle : null) }}
       >
-        {this.$slots.default}
+        {this.$slots.default && this.$slots.default()}
       </div>
     );
   },

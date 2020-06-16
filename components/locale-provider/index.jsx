@@ -65,7 +65,7 @@ const LocaleProvider = {
     setMomentLocale(locale);
     changeConfirmLocale(locale && locale.Modal);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     changeConfirmLocale();
   },
   render() {

@@ -1,4 +1,5 @@
-import { initDefaultProps } from '../_util/props-util';
+import { provide, Transition } from 'vue';
+import { initDefaultProps, getSlot } from '../_util/props-util';
 import KeyCode from '../_util/KeyCode';
 import contains from '../vc-util/Dom/contains';
 import LazyRenderBox from './LazyRenderBox';
@@ -48,6 +49,7 @@ function offset(el) {
 let cacheOverflow = {};
 
 export default {
+  name: 'VcDialog',
   mixins: [BaseMixin],
   props: initDefaultProps(IDialogPropTypes, {
     mask: true,
@@ -63,12 +65,9 @@ export default {
   data() {
     return {
       destroyPopup: false,
-    };
-  },
-
-  provide() {
-    return {
-      dialogContext: this,
+      inTransition: false,
+      titleId: `rcDialogTitle${uuid++}`,
+      dialogMouseDown: undefined,
     };
   },
 
@@ -82,10 +81,8 @@ export default {
       });
     },
   },
-
-  beforeMount() {
-    this.inTransition = false;
-    this.titleId = `rcDialogTitle${uuid++}`;
+  created() {
+    provide('dialogContext', this);
   },
   mounted() {
     this.$nextTick(() => {
@@ -96,7 +93,7 @@ export default {
       }
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const { visible, getOpenCount } = this;
     if ((visible || this.inTransition) && !getOpenCount()) {
       this.switchScrollingEffect();
@@ -287,7 +284,7 @@ export default {
             {closer}
             {header}
             <div key="body" class={`${prefixCls}-body`} style={bodyStyle} ref="body" {...bodyProps}>
-              {this.$slots.default}
+              {getSlot(this)}
             </div>
             {footer}
           </div>
@@ -295,12 +292,12 @@ export default {
         </LazyRenderBox>
       );
       const dialogTransitionProps = getTransitionProps(transitionName, {
-        afterLeave: this.onAnimateLeave,
+        onAfterLeave: this.onAnimateLeave,
       });
       return (
-        <transition key="dialog" {...dialogTransitionProps}>
+        <Transition key="dialog" {...dialogTransitionProps}>
           {visible || !this.destroyPopup ? dialogElement : null}
-        </transition>
+        </Transition>
       );
     },
     getZIndexStyle() {
@@ -322,22 +319,24 @@ export default {
       let maskElement;
       if (props.mask) {
         const maskTransition = this.getMaskTransitionName();
-        maskElement = (
+        const tempMaskElement = (
           <LazyRenderBox
             v-show={props.visible}
             style={this.getMaskStyle()}
             key="mask"
             class={`${props.prefixCls}-mask`}
-            {...props.maskProps}
+            {...(props.maskProps || {})}
           />
         );
         if (maskTransition) {
           const maskTransitionProps = getTransitionProps(maskTransition);
           maskElement = (
-            <transition key="mask" {...maskTransitionProps}>
-              {maskElement}
-            </transition>
+            <Transition key="mask" {...maskTransitionProps}>
+              {tempMaskElement}
+            </Transition>
           );
+        } else {
+          maskElement = tempMaskElement;
         }
       }
       return maskElement;

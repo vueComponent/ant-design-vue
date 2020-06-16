@@ -81,10 +81,8 @@ export const withDefault = function(type) {
         warn(`${this._vueTypes_name} - invalid default value: "${def}"`, def);
         return this;
       }
-
-      // isFunction(def) 关注 https://github.com/vuejs/vue-next/pull/1291 合并发版本后可删除
       this.default =
-        isArray(def) || isPlainObject(def) || isFunction(def)
+        isArray(def) || isPlainObject(def)
           ? function() {
               return def;
             }

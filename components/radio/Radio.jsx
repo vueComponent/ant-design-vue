@@ -1,10 +1,9 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import VcCheckbox from '../vc-checkbox';
 import classNames from 'classnames';
-import { getOptionProps, getAttrs, getListeners } from '../_util/props-util';
+import { getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-
-function noop() {}
 
 export default {
   name: 'ARadio',
@@ -22,10 +21,13 @@ export default {
     id: String,
     autoFocus: Boolean,
     type: PropTypes.string.def('radio'),
+    onChange: PropTypes.func,
   },
-  inject: {
-    radioGroupContext: { default: undefined },
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+      radioGroupContext: inject('radioGroupContext'),
+    };
   },
   methods: {
     focus() {
@@ -36,10 +38,10 @@ export default {
     },
     handleChange(event) {
       const targetChecked = event.target.checked;
-      this.$emit('input', targetChecked);
+      this.$emit('update:value', targetChecked);
       this.$emit('change', event);
     },
-    onChange(e) {
+    onChange2(e) {
       this.$emit('change', e);
       if (this.radioGroupContext && this.radioGroupContext.onRadioChange) {
         this.radioGroupContext.onRadioChange(e);
@@ -50,36 +52,33 @@ export default {
   render() {
     const { $slots, radioGroupContext: radioGroup } = this;
     const props = getOptionProps(this);
-    const children = $slots.default;
-    const { mouseenter = noop, mouseleave = noop, ...restListeners } = getListeners(this);
     const { prefixCls: customizePrefixCls, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
     const radioProps = {
-      props: { ...restProps, prefixCls },
-      on: restListeners,
-      attrs: getAttrs(this),
+      prefixCls,
+      ...restProps,
     };
 
     if (radioGroup) {
-      radioProps.props.name = radioGroup.name;
-      radioProps.on.change = this.onChange;
-      radioProps.props.checked = props.value === radioGroup.stateValue;
-      radioProps.props.disabled = props.disabled || radioGroup.disabled;
+      radioProps.name = radioGroup.name;
+      radioProps.onChange = this.onChange2;
+      radioProps.checked = props.value === radioGroup.stateValue;
+      radioProps.disabled = props.disabled || radioGroup.disabled;
     } else {
-      radioProps.on.change = this.handleChange;
+      radioProps.onChange = this.handleChange;
     }
     const wrapperClassString = classNames({
       [`${prefixCls}-wrapper`]: true,
-      [`${prefixCls}-wrapper-checked`]: radioProps.props.checked,
-      [`${prefixCls}-wrapper-disabled`]: radioProps.props.disabled,
+      [`${prefixCls}-wrapper-checked`]: radioProps.checked,
+      [`${prefixCls}-wrapper-disabled`]: radioProps.disabled,
     });
 
     return (
-      <label class={wrapperClassString} onMouseenter={mouseenter} onMouseleave={mouseleave}>
+      <label class={wrapperClassString}>
         <VcCheckbox {...radioProps} ref="vcCheckbox" />
-        {children !== undefined ? <span>{children}</span> : null}
+        {$slots.default && <span>{$slots.default()}</span>}
       </label>
     );
   },

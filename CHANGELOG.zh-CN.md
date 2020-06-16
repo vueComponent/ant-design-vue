@@ -10,6 +10,13 @@
 
 ---
 
+## 1.6.2
+
+`2020-06-02`
+
+- 🐞 修复弹窗 dialogClass 类型错误 [#2298](https://github.com/vueComponent/ant-design-vue/issues/2298)
+- 🐞 修复 RangePicker 面板展示错误 [#2318](https://github.com/vueComponent/ant-design-vue/issues/2318)
+
 ## 1.6.1
 
 `2020-05-25`

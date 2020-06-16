@@ -1,13 +1,17 @@
 {
   "env": {
     "test": {
-      "presets": [["env", { "targets": { "node": "current" } }]],
+      "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]],
       "plugins": [
-        "transform-vue-jsx",
-        "transform-object-assign",
-        "transform-object-rest-spread",
-        "transform-class-properties",
-        "transform-runtime"
+        "@ant-design-vue/babel-plugin-jsx",
+        "babel-plugin-inline-import-data-uri",
+        "@babel/plugin-transform-member-expression-literals",
+        "@babel/plugin-transform-property-literals",
+        "@babel/plugin-proposal-export-default-from",
+        "@babel/plugin-transform-object-assign",
+        "@babel/plugin-transform-template-literals",
+        "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-proposal-class-properties"
       ]
     }
   }

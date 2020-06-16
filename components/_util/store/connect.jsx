@@ -1,6 +1,7 @@
 import shallowEqual from 'shallowequal';
+import { inject, createVNode } from 'vue';
 import omit from 'omit.js';
-import { getOptionProps, getListeners } from '../props-util';
+import { getOptionProps } from '../props-util';
 import PropTypes from '../vue-types';
 import proxyComponent from '../proxyComponent';
 
@@ -22,9 +23,12 @@ export default function connect(mapStateToProps) {
     });
     const Connect = {
       name: `Connect_${getDisplayName(WrappedComponent)}`,
+      inheritAttrs: false,
       props,
-      inject: {
-        storeContext: { default: () => ({}) },
+      setup() {
+        return {
+          storeContext: inject('storeContext', {}),
+        };
       },
       data() {
         this.store = this.storeContext.store;
@@ -80,25 +84,19 @@ export default function connect(mapStateToProps) {
         },
       },
       render() {
-        const { $slots = {}, $scopedSlots, subscribed, store } = this;
+        const { $slots = {}, subscribed, store, $attrs } = this;
         const props = getOptionProps(this);
         this.preProps = { ...omit(props, ['__propsSymbol__']) };
         const wrapProps = {
-          props: {
-            ...props,
-            ...subscribed,
-            store,
-          },
-          on: getListeners(this),
-          scopedSlots: $scopedSlots,
+          ...props,
+          ...subscribed,
+          ...$attrs,
+          store,
+          slots: $slots,
+          ref: 'wrappedInstance',
         };
-        return (
-          <WrappedComponent {...wrapProps} ref="wrappedInstance">
-            {Object.keys($slots).map(name => {
-              return <template slot={name}>{$slots[name]}</template>;
-            })}
-          </WrappedComponent>
-        );
+        return createVNode(WrappedComponent, wrapProps);
+        // return <WrappedComponent {...wrapProps} ref="wrappedInstance"></WrappedComponent>;
       },
     };
     return proxyComponent(Connect);

@@ -29,3 +29,9 @@ v-model -> v-model:visible
 ## Tooltip
 
 v-model -> v-model:visible
+
+## Modal
+
+v-model -> v-model:visible
+
+okButtonProps、cancelButtonProps 扁平化处理

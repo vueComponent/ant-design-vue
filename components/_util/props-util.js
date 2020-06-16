@@ -118,14 +118,26 @@ const getOptionProps = instance => {
   return res;
 };
 const getComponent = (instance, prop, options = instance, execute = true) => {
-  const temp = instance[prop];
-  if (temp !== undefined) {
-    return typeof temp === 'function' && execute ? temp(options) : temp;
-  } else {
-    let com = instance.$slots[prop];
-    com = execute && com ? com(options) : com;
-    return Array.isArray(com) && com.length === 1 ? com[0] : com;
+  if (instance.$) {
+    const temp = instance[prop];
+    if (temp !== undefined) {
+      return typeof temp === 'function' && execute ? temp(options) : temp;
+    } else {
+      let com = instance.$slots[prop];
+      com = execute && com ? com(options) : com;
+      return Array.isArray(com) && com.length === 1 ? com[0] : com;
+    }
+  } else if (isVNode(instance)) {
+    const temp = instance.props && instance.props[prop];
+    if (temp !== undefined) {
+      return typeof temp === 'function' && execute ? temp(options) : temp;
+    } else if (instance.children && instance.children[name]) {
+      let com = instance.children[prop];
+      com = execute && com ? com(options) : com;
+      return Array.isArray(com) && com.length === 1 ? com[0] : com;
+    }
   }
+  return undefined;
 };
 const getComponentFromProp = (instance, prop, options = instance, execute = true) => {
   if (instance.$createElement) {
@@ -169,13 +181,13 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
 };
 
 const getAllProps = ele => {
-  let data = ele.data || {};
-  let componentOptions = ele.componentOptions || {};
-  if (ele.$vnode) {
-    data = ele.$vnode.data || {};
-    componentOptions = ele.$vnode.componentOptions || {};
+  let props = getOptionProps(ele);
+  if (ele.$) {
+    props = { ...props, ...this.$attrs };
+  } else {
+    props = { ...props, ...ele.props };
   }
-  return { ...data.props, ...data.attrs, ...componentOptions.propsData };
+  return props;
 };
 
 // 使用 getOptionProps 替换 ，待测试

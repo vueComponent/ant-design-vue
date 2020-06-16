@@ -1,16 +1,20 @@
+import { inject } from 'vue';
 import { Item, itemProps } from '../vc-menu';
-import { getOptionProps, getListeners } from '../_util/props-util';
+import { getOptionProps, getSlot } from '../_util/props-util';
 import Tooltip from '../tooltip';
 function noop() {}
 export default {
   name: 'MenuItem',
   inheritAttrs: false,
   props: itemProps,
-  inject: {
-    getInlineCollapsed: { default: () => noop },
-    layoutSiderContext: { default: () => ({}) },
-  },
+
   isMenuItem: true,
+  setup() {
+    return {
+      getInlineCollapsed: inject('getInlineCollapsed', noop),
+      layoutSiderContext: inject('layoutSiderContext', {}),
+    };
+  },
   methods: {
     onKeyDown(e) {
       this.$refs.menuItem.onKeyDown(e);
@@ -33,24 +37,20 @@ export default {
     }
 
     const itemProps = {
-      props: {
-        ...props,
-        title,
-      },
-      attrs,
-      on: getListeners(this),
+      ...props,
+      title,
+      ...attrs,
     };
     const toolTipProps = {
-      props: {
-        ...tooltipProps,
-        placement: 'right',
-        overlayClassName: `${rootPrefixCls}-inline-collapsed-tooltip`,
-      },
+      ...tooltipProps,
+      placement: 'right',
+      overlayClassName: `${rootPrefixCls}-inline-collapsed-tooltip`,
     };
+    // return <div>ddd</div>;
     return (
       <Tooltip {...toolTipProps}>
         <Item {...itemProps} ref="menuItem">
-          {$slots.default}
+          {getSlot(this)}
         </Item>
       </Tooltip>
     );

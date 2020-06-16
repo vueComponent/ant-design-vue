@@ -1,5 +1,6 @@
+import { createVNode } from 'vue';
 import PropTypes from './vue-types';
-import { getOptionProps, getListeners } from './props-util';
+import { getOptionProps } from './props-util';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.name || 'Component';
@@ -15,6 +16,7 @@ export default function wrapWithConnect(WrappedComponent) {
   WrappedComponent.props.children = PropTypes.array.def([]);
   const ProxyWrappedComponent = {
     props,
+    inheritAttrs: false,
     model: WrappedComponent.model,
     name: `Proxy_${getDisplayName(WrappedComponent)}`,
     methods: {
@@ -23,30 +25,21 @@ export default function wrapWithConnect(WrappedComponent) {
       },
     },
     render() {
-      const { $slots = {}, $scopedSlots } = this;
+      const { $slots = {} } = this;
       const props = getOptionProps(this);
       const wrapProps = {
-        props: {
-          ...props,
-          __propsSymbol__: Symbol(),
-          componentWillReceiveProps: { ...props },
-          children: $slots.default || props.children || [],
-        },
-        on: getListeners(this),
+        ...props,
+        __propsSymbol__: Symbol(),
+        componentWillReceiveProps: { ...props },
+        children: props.children || $slots?.default() || [],
+        slots: $slots,
+        ref: 'wrappedInstance',
       };
-      if (Object.keys($scopedSlots).length) {
-        wrapProps.scopedSlots = $scopedSlots;
-      }
-      const slotsKey = Object.keys($slots);
-      return (
-        <WrappedComponent {...wrapProps} ref="wrappedInstance">
-          {slotsKey.length
-            ? slotsKey.map(name => {
-                return <template slot={name}>{$slots[name]}</template>;
-              })
-            : null}
-        </WrappedComponent>
-      );
+      return createVNode(WrappedComponent, wrapProps);
+      // return (
+      //   <WrappedComponent {...wrapProps} ref="wrappedInstance">
+      //   </WrappedComponent>
+      // );
     },
   };
   Object.keys(methods).map(m => {

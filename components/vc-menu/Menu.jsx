@@ -2,16 +2,12 @@ import PropTypes from '../_util/vue-types';
 import { Provider, create } from '../_util/store';
 import { default as SubPopupMenu, getActiveKey } from './SubPopupMenu';
 import BaseMixin from '../_util/BaseMixin';
-import hasProp, {
-  getOptionProps,
-  getComponentFromProp,
-  filterEmpty,
-  getListeners,
-} from '../_util/props-util';
+import hasProp, { getOptionProps, getComponent, filterEmpty } from '../_util/props-util';
 import commonPropsType from './commonPropsType';
 
 const Menu = {
   name: 'Menu',
+  inheritAttrs: false,
   props: {
     ...commonPropsType,
     selectable: PropTypes.bool.def(true),
@@ -33,7 +29,7 @@ const Menu = {
       selectedKeys,
       openKeys,
       activeKey: {
-        '0-menu-': getActiveKey({ ...props, children: this.$slots.default || [] }, props.activeKey),
+        '0-menu-': getActiveKey({ ...props, children: props.children || [] }, props.activeKey),
       },
     });
 
@@ -158,27 +154,20 @@ const Menu = {
   },
 
   render() {
-    const props = getOptionProps(this);
+    const props = { ...getOptionProps(this), ...this.$attrs };
+    props.class += ` ${props.prefixCls}-root`;
     const subPopupMenuProps = {
-      props: {
-        ...props,
-        itemIcon: getComponentFromProp(this, 'itemIcon', props),
-        expandIcon: getComponentFromProp(this, 'expandIcon', props),
-        overflowedIndicator: getComponentFromProp(this, 'overflowedIndicator', props) || (
-          <span>···</span>
-        ),
-        openTransitionName: this.getOpenTransitionName(),
-        parentMenu: this,
-        children: filterEmpty(this.$slots.default || []),
-      },
-      class: `${props.prefixCls}-root`,
-      on: {
-        ...getListeners(this),
-        click: this.onClick,
-        openChange: this.onOpenChange,
-        deselect: this.onDeselect,
-        select: this.onSelect,
-      },
+      ...props,
+      itemIcon: getComponent(this, 'itemIcon', props),
+      expandIcon: getComponent(this, 'expandIcon', props),
+      overflowedIndicator: getComponent(this, 'overflowedIndicator', props) || <span>···</span>,
+      openTransitionName: this.getOpenTransitionName(),
+      parentMenu: this,
+      children: filterEmpty(props.children),
+      onClick: this.onClick,
+      onOpenChange: this.onOpenChange,
+      onDeselect: this.onDeselect,
+      onSelect: this.onSelect,
       ref: 'innerMenu',
     };
     return (

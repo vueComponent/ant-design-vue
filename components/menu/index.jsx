@@ -1,3 +1,4 @@
+import { inject, provide } from 'vue';
 import omit from 'omit.js';
 import VcMenu, { Divider, ItemGroup } from '../vc-menu';
 import SubMenu from './SubMenu';
@@ -5,11 +6,10 @@ import PropTypes from '../_util/vue-types';
 import animation from '../_util/openAnimation';
 import warning from '../_util/warning';
 import Item from './MenuItem';
-import { hasProp, getListeners, getOptionProps } from '../_util/props-util';
+import { hasProp, getOptionProps, getSlot } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import commonPropsType from '../vc-menu/commonPropsType';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 // import raf from '../_util/raf';
 
 export const MenuMode = PropTypes.oneOf([
@@ -41,26 +41,27 @@ export const menuProps = {
 
 const Menu = {
   name: 'AMenu',
+  inheritAttrs: false,
   props: menuProps,
   Divider: { ...Divider, name: 'AMenuDivider' },
   Item: { ...Item, name: 'AMenuItem' },
   SubMenu: { ...SubMenu, name: 'ASubMenu' },
   ItemGroup: { ...ItemGroup, name: 'AMenuItemGroup' },
-  provide() {
+  mixins: [BaseMixin],
+  created() {
+    provide('getInlineCollapsed', this.getInlineCollapsed);
+    provide('menuPropsContext', this.$props);
+  },
+  setup() {
     return {
-      getInlineCollapsed: this.getInlineCollapsed,
-      menuPropsContext: this.$props,
+      configProvider: inject('configProvider', ConfigConsumerProps),
+      layoutSiderContext: inject('layoutSiderContext', {}),
     };
   },
-  mixins: [BaseMixin],
-  inject: {
-    layoutSiderContext: { default: () => ({}) },
-    configProvider: { default: () => ConfigConsumerProps },
-  },
-  model: {
-    prop: 'selectedKeys',
-    event: 'selectChange',
-  },
+  // model: {
+  //   prop: 'selectedKeys',
+  //   event: 'selectChange',
+  // },
   updated() {
     this.propsUpdating = false;
   },
@@ -165,10 +166,12 @@ const Menu = {
     },
     handleSelect(info) {
       this.$emit('select', info);
+      this.$emit('update:selectedKeys', info.selectedKeys);
       this.$emit('selectChange', info.selectedKeys);
     },
     handleDeselect(info) {
       this.$emit('deselect', info);
+      this.$emit('update:selectedKeys', info.selectedKeys);
       this.$emit('selectChange', info.selectedKeys);
     },
     handleOpenChange(openKeys) {
@@ -203,7 +206,7 @@ const Menu = {
         if (menuMode === 'horizontal') {
           menuOpenAnimation = 'slide-up';
         } else if (menuMode === 'inline') {
-          menuOpenAnimation = { on: animation };
+          menuOpenAnimation = animation;
         } else {
           // When mode switch from inline
           // submenu should hide without animation
@@ -219,7 +222,7 @@ const Menu = {
     },
   },
   render() {
-    const { layoutSiderContext, $slots } = this;
+    const { layoutSiderContext } = this;
     const { collapsedWidth } = layoutSiderContext;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const props = getOptionProps(this);
@@ -235,37 +238,32 @@ const Menu = {
     };
 
     const menuProps = {
-      props: {
-        ...omit(props, ['inlineCollapsed']),
-        getPopupContainer: getPopupContainer || getContextPopupContainer,
-        openKeys: this.sOpenKeys,
-        mode: menuMode,
-        prefixCls,
-      },
-      on: {
-        ...getListeners(this),
-        select: this.handleSelect,
-        deselect: this.handleDeselect,
-        openChange: this.handleOpenChange,
-        mouseenter: this.handleMouseEnter,
-      },
-      nativeOn: {
-        transitionend: this.handleTransitionEnd,
-      },
+      ...omit(props, ['inlineCollapsed']),
+      getPopupContainer: getPopupContainer || getContextPopupContainer,
+      openKeys: this.sOpenKeys,
+      mode: menuMode,
+      prefixCls,
+      ...this.$attrs,
+      onSelect: this.handleSelect,
+      onDeselect: this.handleDeselect,
+      onOpenChange: this.handleOpenChange,
+      onMouseenter: this.handleMouseEnter,
+      onTransitionend: this.handleTransitionEnd,
+      children: getSlot(this),
     };
     if (!hasProp(this, 'selectedKeys')) {
-      delete menuProps.props.selectedKeys;
+      delete menuProps.selectedKeys;
     }
 
     if (menuMode !== 'inline') {
       // closing vertical popup submenu after click it
-      menuProps.on.click = this.handleClick;
-      menuProps.props.openTransitionName = menuOpenAnimation;
+      menuProps.onClick = this.handleClick;
+      menuProps.openTransitionName = menuOpenAnimation;
     } else {
-      menuProps.on.click = e => {
+      menuProps.onClick = e => {
         this.$emit('click', e);
       };
-      menuProps.props.openAnimation = menuOpenAnimation;
+      menuProps.openAnimation = menuOpenAnimation;
     }
 
     // https://github.com/ant-design/ant-design/issues/8587
@@ -273,24 +271,19 @@ const Menu = {
       this.getInlineCollapsed() &&
       (collapsedWidth === 0 || collapsedWidth === '0' || collapsedWidth === '0px');
     if (hideMenu) {
-      menuProps.props.openKeys = [];
+      menuProps.openKeys = [];
     }
 
-    return (
-      <VcMenu {...menuProps} class={menuClassName}>
-        {$slots.default}
-      </VcMenu>
-    );
+    return <VcMenu {...menuProps} class={menuClassName} />;
   },
 };
 
 /* istanbul ignore next */
-Menu.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Menu.name, Menu);
-  Vue.component(Menu.Item.name, Menu.Item);
-  Vue.component(Menu.SubMenu.name, Menu.SubMenu);
-  Vue.component(Menu.Divider.name, Menu.Divider);
-  Vue.component(Menu.ItemGroup.name, Menu.ItemGroup);
+Menu.install = function(app) {
+  app.component(Menu.name, Menu);
+  app.component(Menu.Item.name, Menu.Item);
+  app.component(Menu.SubMenu.name, Menu.SubMenu);
+  app.component(Menu.Divider.name, Menu.Divider);
+  app.component(Menu.ItemGroup.name, Menu.ItemGroup);
 };
 export default Menu;

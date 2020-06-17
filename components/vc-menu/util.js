@@ -109,6 +109,7 @@ export const menuAllProps = [
   'onTitleMouseenter',
   'onTitleMouseleave',
   'onTitleClick',
+  '__propsSymbol__',
 ];
 
 // ref: https://github.com/ant-design/ant-design/issues/14007

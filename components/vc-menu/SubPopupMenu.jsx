@@ -4,7 +4,7 @@ import { connect } from '../_util/store';
 import BaseMixin from '../_util/BaseMixin';
 import KeyCode from '../_util/KeyCode';
 import classNames from 'classnames';
-import { getKeyFromChildrenIndex, loopMenuItem, noop, isMobileDevice } from './util';
+import { getKeyFromChildrenIndex, loopMenuItem, noop, isMobileDevice, menuAllProps } from './util';
 import DOMWrap from './DOMWrap';
 import { cloneElement } from '../_util/vnode';
 import { initDefaultProps, getOptionProps, getComponent, splitAttrs } from '../_util/props-util';
@@ -342,6 +342,7 @@ const SubPopupMenu = {
     this.instanceArray = [];
     this.instanceArrayKeyIndexMap = {};
     const className = classNames(props.class, props.prefixCls, `${props.prefixCls}-${props.mode}`);
+    menuAllProps.forEach(key => delete props[key]);
     // Otherwise, the propagated click event will trigger another onClick
     delete onEvents.onClick;
     const domWrapProps = {

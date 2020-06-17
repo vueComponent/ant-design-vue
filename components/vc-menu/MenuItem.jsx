@@ -183,14 +183,13 @@ const MenuItem = {
     if (props.mode === 'inline') {
       style.paddingLeft = `${props.inlineIndent * props.level}px`;
     }
-    [...menuAllProps, 'children', 'slots', '__propsSymbol__', 'componentWillReceiveProps'].forEach(
-      key => delete props[key],
-    );
+    menuAllProps.forEach(key => delete props[key]);
     const liProps = {
       ...props,
       ...attrs,
       ...mouseEvent,
     };
+    delete liProps.children;
     return (
       <li {...liProps} style={style} class={className}>
         {getSlot(this)}

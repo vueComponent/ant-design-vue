@@ -23,10 +23,10 @@ export default {
   render() {
     const props = getOptionProps(this);
     const { level, title, rootPrefixCls } = props;
-    const { getInlineCollapsed, $slots, $attrs: attrs } = this;
+    const { getInlineCollapsed, $attrs: attrs } = this;
     const inlineCollapsed = getInlineCollapsed();
     const tooltipProps = {
-      title: title || (level === 1 ? $slots.default : ''),
+      title: title || (level === 1 ? getSlot(this) : ''),
     };
     const siderCollapsed = this.layoutSiderContext.sCollapsed;
     if (!siderCollapsed && !inlineCollapsed) {

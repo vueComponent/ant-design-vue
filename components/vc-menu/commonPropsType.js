@@ -37,5 +37,4 @@ export default {
   itemIcon: PropTypes.any,
   expandIcon: PropTypes.any,
   overflowedIndicator: PropTypes.any,
-  children: PropTypes.any,
 };

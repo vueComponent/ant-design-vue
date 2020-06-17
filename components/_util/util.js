@@ -27,7 +27,7 @@ const hasOwnProperty = Object.prototype.hasOwnProperty;
 const hasOwn = (val, key) => hasOwnProperty.call(val, key);
 
 // change from vue sourcecode
-function resolvePropValue(options, props, key, value, hyphenateKey) {
+function resolvePropValue(options, props, key, value) {
   const opt = options[key];
   if (opt != null) {
     const hasDefault = hasOwn(opt, 'default');
@@ -38,9 +38,9 @@ function resolvePropValue(options, props, key, value, hyphenateKey) {
     }
     // boolean casting
     if (opt[0 /* shouldCast */]) {
-      if (!hasOwn(props, hyphenateKey) && !hasDefault) {
+      if (!hasOwn(props, key) && !hasDefault) {
         value = false;
-      } else if (opt[1 /* shouldCastTrue */] && (value === '' || value === hyphenateKey)) {
+      } else if (opt[1 /* shouldCastTrue */] && (value === '' || value === hyphenate(key))) {
         value = true;
       }
     }

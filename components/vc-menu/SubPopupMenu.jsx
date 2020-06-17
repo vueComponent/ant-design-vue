@@ -274,7 +274,7 @@ const SubPopupMenu = {
       const state = this.$props.store.getState();
       const props = this.$props;
       const key = getKeyFromChildrenIndex(child, props.eventKey, i);
-      const childProps = { ...getOptionProps(child), ...child.props }; // child.props 包含事件
+      const childProps = child.props; // 不包含默认值
 
       const isActive = key === state.activeKey[getEventKey(this.$props)];
       if (!childProps.disabled) {
@@ -337,11 +337,15 @@ const SubPopupMenu = {
   },
   render() {
     const props = { ...this.$props };
-    const { onEvents } = splitAttrs(this.$attrs);
+    const { onEvents, extraAttrs } = splitAttrs(this.$attrs);
     const { eventKey, prefixCls, visible, level, mode, theme } = props;
     this.instanceArray = [];
     this.instanceArrayKeyIndexMap = {};
-    const className = classNames(props.class, props.prefixCls, `${props.prefixCls}-${props.mode}`);
+    const className = classNames(
+      extraAttrs.class,
+      props.prefixCls,
+      `${props.prefixCls}-${props.mode}`,
+    );
     menuAllProps.forEach(key => delete props[key]);
     // Otherwise, the propagated click event will trigger another onClick
     delete onEvents.onClick;
@@ -357,6 +361,7 @@ const SubPopupMenu = {
       overflowedIndicator: getComponent(this, 'overflowedIndicator'),
       role: props.role || 'menu',
       class: className,
+      style: extraAttrs.style,
       ...onEvents,
     };
     // if (props.id) {
@@ -366,6 +371,7 @@ const SubPopupMenu = {
       domWrapProps.tabIndex = '0';
       domWrapProps.onKeydown = this.onKeyDown;
     }
+    delete domWrapProps.children;
     return (
       // ESLint is not smart enough to know that the type of `children` was checked.
       /* eslint-disable */

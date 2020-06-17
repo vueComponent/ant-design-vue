@@ -110,6 +110,10 @@ export const menuAllProps = [
   'onTitleMouseleave',
   'onTitleClick',
   '__propsSymbol__',
+  'slots',
+  'ref',
+  'componentWillReceiveProps',
+  'isRootMenu',
 ];
 
 // ref: https://github.com/ant-design/ant-design/issues/14007

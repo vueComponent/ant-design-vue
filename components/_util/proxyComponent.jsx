@@ -17,7 +17,6 @@ export default function wrapWithConnect(WrappedComponent) {
   const ProxyWrappedComponent = {
     props,
     inheritAttrs: false,
-    model: WrappedComponent.model,
     name: `Proxy_${getDisplayName(WrappedComponent)}`,
     methods: {
       getProxyWrappedInstance() {
@@ -25,17 +24,16 @@ export default function wrapWithConnect(WrappedComponent) {
       },
     },
     render() {
-      const { $slots = {} } = this;
+      const { $slots = {}, $attrs } = this;
       const props = getOptionProps(this);
       const wrapProps = {
         ...props,
+        ...$attrs,
         __propsSymbol__: Symbol(),
         componentWillReceiveProps: { ...props },
-        children: props.children || $slots?.default() || [],
-        slots: $slots,
         ref: 'wrappedInstance',
       };
-      return createVNode(WrappedComponent, wrapProps);
+      return createVNode(WrappedComponent, wrapProps, $slots);
       // return (
       //   <WrappedComponent {...wrapProps} ref="wrappedInstance">
       //   </WrappedComponent>

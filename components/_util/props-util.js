@@ -69,8 +69,8 @@ const getSlots = ele => {
 };
 const getSlot = (self, name = 'default', options = {}) => {
   let res = self.$slots[name] && self.$slots[name](options);
-  while (res && res.length === 1 && res[0].type === Fragment) {
-    res = res[0].children;
+  while (res && res.length === 1 && (res[0].type === Fragment || Array.isArray(res[0]))) {
+    res = res[0].children || res[0];
   }
   return res;
 };
@@ -105,12 +105,15 @@ const getOptionProps = instance => {
       }
     });
   } else if (isVNode(instance) && typeof instance.type === 'object') {
-    const props = instance.props || {};
+    const originProps = instance.props || {};
+    const props = {};
+    Object.keys(originProps).forEach(key => {
+      props[camelize(key)] = originProps[key];
+    });
     const options = instance.type.props;
     Object.keys(options).forEach(k => {
-      const hyphenateKey = hyphenate(k);
-      const v = resolvePropValue(options, props, k, props[hyphenateKey], hyphenateKey);
-      if (v !== undefined || hyphenateKey in props) {
+      const v = resolvePropValue(options, props, k, props[k]);
+      if (v !== undefined || k in props) {
         res[k] = v;
       }
     });

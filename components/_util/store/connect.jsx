@@ -92,10 +92,9 @@ export default function connect(mapStateToProps) {
           ...subscribed,
           ...$attrs,
           store,
-          slots: $slots,
           ref: 'wrappedInstance',
         };
-        return createVNode(WrappedComponent, wrapProps);
+        return createVNode(WrappedComponent, wrapProps, $slots);
         // return <WrappedComponent {...wrapProps} ref="wrappedInstance"></WrappedComponent>;
       },
     };

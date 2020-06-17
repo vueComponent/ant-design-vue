@@ -4,7 +4,7 @@ import SubMenu from './SubMenu';
 import BaseMixin from '../_util/BaseMixin';
 import { getWidth, setStyle, menuAllProps } from './util';
 import { cloneElement } from '../_util/vnode';
-import { getPropsData, getSlot, getAllProps } from '../_util/props-util';
+import { getPropsData, getAllProps, getSlot } from '../_util/props-util';
 
 const canUseDOM = !!(
   typeof window !== 'undefined' &&
@@ -241,7 +241,10 @@ const DOMWrap = {
         const eventKey = getPropsData(childNode).eventKey;
         if (this.mode === 'horizontal') {
           let overflowed = this.getOverflowedSubMenuItem(eventKey, []);
-          if (lastVisibleIndex !== undefined && className[`${this.prefixCls}-root`] !== -1) {
+          if (
+            lastVisibleIndex !== undefined &&
+            className.indexOf(`${this.prefixCls}-root`) !== -1
+          ) {
             if (index > lastVisibleIndex) {
               item = cloneElement(
                 childNode,
@@ -299,7 +302,6 @@ DOMWrap.props = {
   visible: PropTypes.bool,
   hiddenClassName: PropTypes.string,
   tag: PropTypes.string.def('div'),
-  children: PropTypes.any,
 };
 
 export default DOMWrap;

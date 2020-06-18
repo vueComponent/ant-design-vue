@@ -1,9 +1,8 @@
 import shallowEqual from 'shallowequal';
-import { inject, createVNode } from 'vue';
+import { inject, createVNode, watchEffect } from 'vue';
 import omit from 'omit.js';
 import { getOptionProps } from '../props-util';
 import PropTypes from '../vue-types';
-import proxyComponent from '../proxyComponent';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.name || 'Component';
@@ -33,16 +32,14 @@ export default function connect(mapStateToProps) {
       data() {
         this.store = this.storeContext.store;
         this.preProps = omit(getOptionProps(this), ['__propsSymbol__']);
-        return {
-          subscribed: finnalMapStateToProps(this.store.getState(), this.$props),
-        };
-      },
-      watch: {
-        __propsSymbol__() {
+        watchEffect(() => {
           if (mapStateToProps && mapStateToProps.length === 2) {
             this.subscribed = finnalMapStateToProps(this.store.getState(), this.$props);
           }
-        },
+        });
+        return {
+          subscribed: finnalMapStateToProps(this.store.getState(), this.$props),
+        };
       },
       mounted() {
         this.trySubscribe();
@@ -56,7 +53,7 @@ export default function connect(mapStateToProps) {
           if (!this.unsubscribe) {
             return;
           }
-          const props = omit(getOptionProps(this), ['__propsSymbol__']);
+          const props = getOptionProps(this);
           const nextSubscribed = finnalMapStateToProps(this.store.getState(), props);
           if (
             !shallowEqual(this.preProps, props) ||
@@ -86,7 +83,7 @@ export default function connect(mapStateToProps) {
       render() {
         const { $slots = {}, subscribed, store, $attrs } = this;
         const props = getOptionProps(this);
-        this.preProps = { ...omit(props, ['__propsSymbol__']) };
+        this.preProps = { ...props };
         const wrapProps = {
           ...props,
           ...subscribed,
@@ -95,9 +92,8 @@ export default function connect(mapStateToProps) {
           ref: 'wrappedInstance',
         };
         return createVNode(WrappedComponent, wrapProps, $slots);
-        // return <WrappedComponent {...wrapProps} ref="wrappedInstance"></WrappedComponent>;
       },
     };
-    return proxyComponent(Connect);
+    return Connect;
   };
 }

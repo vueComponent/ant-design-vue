@@ -136,10 +136,10 @@ const MenuItem = {
   },
 
   render() {
-    const props = { ...this.$props, ...this.$attrs };
+    const { class: cls, style, ...props } = { ...this.$props, ...this.$attrs };
 
     const className = {
-      [props.class]: props.class,
+      [cls]: !!cls,
       [this.getPrefixCls()]: true,
       [this.getActiveClassName()]: !props.disabled && props.active,
       [this.getSelectedClassName()]: props.isSelected,
@@ -173,9 +173,9 @@ const MenuItem = {
       onMouseenter: props.disabled ? noop : this.onMouseEnter,
     };
 
-    const style = { ...(props.style || {}) };
+    const styles = { ...(style || {}) };
     if (props.mode === 'inline') {
-      style.paddingLeft = `${props.inlineIndent * props.level}px`;
+      styles.paddingLeft = `${props.inlineIndent * props.level}px`;
     }
     menuAllProps.forEach(key => delete props[key]);
     const liProps = {
@@ -186,7 +186,7 @@ const MenuItem = {
     };
     delete liProps.children;
     return (
-      <li {...liProps} style={style} class={className}>
+      <li {...liProps} style={styles} class={className}>
         {getSlot(this)}
         {getComponent(this, 'itemIcon', props)}
       </li>

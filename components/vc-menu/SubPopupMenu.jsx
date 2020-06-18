@@ -116,7 +116,6 @@ const SubPopupMenu = {
       expandIcon: PropTypes.any,
       overflowedIndicator: PropTypes.any,
       children: PropTypes.any.def([]),
-      __propsSymbol__: PropTypes.any, // mock componentWillReceiveProps
     },
     {
       prefixCls: 'rc-menu',

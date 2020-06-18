@@ -111,7 +111,6 @@ export const menuAllProps = [
   'onTitleMouseenter',
   'onTitleMouseleave',
   'onTitleClick',
-  '__propsSymbol__',
   'slots',
   'ref',
   'isRootMenu',

@@ -4,7 +4,7 @@ import SubMenu from './SubMenu';
 import BaseMixin from '../_util/BaseMixin';
 import { getWidth, setStyle, menuAllProps } from './util';
 import { cloneElement } from '../_util/vnode';
-import { getPropsData, getAllProps, getSlot } from '../_util/props-util';
+import { getPropsData, getAllProps, getSlot, findDOMNode } from '../_util/props-util';
 
 const canUseDOM = !!(
   typeof window !== 'undefined' &&
@@ -44,7 +44,7 @@ const DOMWrap = {
     this.$nextTick(() => {
       this.setChildrenWidthAndResize();
       if (this.level === 1 && this.mode === 'horizontal') {
-        const menuUl = this.$el;
+        const menuUl = findDOMNode(this);
         if (!menuUl) {
           return;
         }
@@ -92,7 +92,7 @@ const DOMWrap = {
     // get all valid menuItem nodes
     getMenuItemNodes() {
       const { prefixCls } = this.$props;
-      const ul = this.$el;
+      const ul = findDOMNode(this);
       if (!ul) {
         return [];
       }
@@ -156,7 +156,7 @@ const DOMWrap = {
       if (this.mode !== 'horizontal') {
         return;
       }
-      const ul = this.$el;
+      const ul = findDOMNode(this);
 
       if (!ul) {
         return;
@@ -203,7 +203,7 @@ const DOMWrap = {
         return;
       }
 
-      const ul = this.$el;
+      const ul = findDOMNode(this);
       if (!ul) {
         return;
       }

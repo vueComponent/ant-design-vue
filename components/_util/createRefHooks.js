@@ -1,4 +1,4 @@
-const createRef = fn => {
+const createRefHooks = fn => {
   return {
     onVnodeBeforeMount: vnode => {
       fn(vnode.component || vnode.el, vnode.key);
@@ -11,4 +11,4 @@ const createRef = fn => {
     },
   };
 };
-export default createRef;
+export default createRefHooks;

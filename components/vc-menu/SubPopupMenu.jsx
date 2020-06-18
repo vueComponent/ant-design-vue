@@ -45,8 +45,12 @@ export function getActiveKey(props, originalActiveKey) {
   if (activeKey !== undefined && activeKey !== null) {
     let found;
     loopMenuItem(children, (c, i) => {
-      const propsData = c.componentOptions.propsData || {};
-      if (c && !propsData.disabled && activeKey === getKeyFromChildrenIndex(c, eventKey, i)) {
+      const propsData = c.props || {};
+      if (
+        c &&
+        propsData.disabled !== false &&
+        activeKey === getKeyFromChildrenIndex(c, eventKey, i)
+      ) {
         found = true;
       }
     });
@@ -57,9 +61,9 @@ export function getActiveKey(props, originalActiveKey) {
   activeKey = null;
   if (defaultActiveFirst) {
     loopMenuItem(children, (c, i) => {
-      const propsData = c.componentOptions.propsData || {};
+      const propsData = c.props || {};
       const noActiveKey = activeKey === null || activeKey === undefined;
-      if (noActiveKey && c && !propsData.disabled) {
+      if (noActiveKey && c && propsData.disabled !== false) {
         activeKey = getKeyFromChildrenIndex(c, eventKey, i);
       }
     });
@@ -274,7 +278,7 @@ const SubPopupMenu = {
       const state = this.$props.store.getState();
       const props = this.$props;
       const key = getKeyFromChildrenIndex(child, props.eventKey, i);
-      const childProps = child.props; // 不包含默认值
+      const childProps = child.props || {}; // child.props 包含事件
 
       const isActive = key === state.activeKey[getEventKey(this.$props)];
       if (!childProps.disabled) {

@@ -1,10 +1,11 @@
 import isMobile from './utils/isMobile';
+import isObject from 'lodash/isObject';
 
 export function noop() {}
 
 export function getKeyFromChildrenIndex(child, menuEventKey, index) {
   const prefix = menuEventKey || '';
-  return child.key === undefined ? `${prefix}item_${index}` : child.key;
+  return child.key === null ? `${prefix}item_${index}` : child.key;
 }
 
 export function getMenuIdFromSubMenuEventKey(eventKey) {
@@ -16,12 +17,13 @@ export function loopMenuItem(children, cb) {
   children.forEach(c => {
     index++;
     if (c && c.type && c.type.isMenuItemGroup) {
-      c.$slots.default.forEach(c2 => {
-        index++;
-        c.componentOptions && cb(c2, index);
-      });
+      c.children.default &&
+        c.children.default().forEach(c2 => {
+          index++;
+          cb(c2, index);
+        });
     } else {
-      c.componentOptions && cb(c, index);
+      cb(c, index);
     }
   });
 }
@@ -34,18 +36,18 @@ export function loopMenuItemRecursively(children, keys, ret) {
     if (ret.find) {
       return;
     }
-    if (c.data && c.data.slot && c.data.slot !== 'default') {
-      return;
-    }
-    if (c && c.componentOptions) {
-      const options = c.componentOptions.Ctor.options;
-      if (!options || !(options.isSubMenu || options.isMenuItem || options.isMenuItemGroup)) {
+    const construct = c.type;
+    if (construct && isObject(construct)) {
+      if (
+        !construct ||
+        !(construct.isSubMenu || construct.isMenuItem || construct.isMenuItemGroup)
+      ) {
         return;
       }
       if (keys.indexOf(c.key) !== -1) {
         ret.find = true;
-      } else if (c.componentOptions.children) {
-        loopMenuItemRecursively(c.componentOptions.children, keys, ret);
+      } else if (c.children && c.children.default) {
+        loopMenuItemRecursively(c.children.default(), keys, ret);
       }
     }
   });
@@ -112,7 +114,6 @@ export const menuAllProps = [
   '__propsSymbol__',
   'slots',
   'ref',
-  'componentWillReceiveProps',
   'isRootMenu',
 ];
 

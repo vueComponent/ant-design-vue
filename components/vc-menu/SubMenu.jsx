@@ -1,3 +1,4 @@
+import { Transition } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
@@ -6,10 +7,11 @@ import { connect } from '../_util/store';
 import SubPopupMenu from './SubPopupMenu';
 import placements from './placements';
 import BaseMixin from '../_util/BaseMixin';
-import { getComponent, filterEmpty, getSlot, splitAttrs } from '../_util/props-util';
+import { getComponent, filterEmpty, getSlot, splitAttrs, findDOMNode } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import { noop, loopMenuItemRecursively, getMenuIdFromSubMenuEventKey } from './util';
 import getTransitionProps from '../_util/getTransitionProps';
+import createRefHooks from '../_util/createRefHooks';
 
 let guid = 0;
 
@@ -72,6 +74,7 @@ const SubMenu = {
     itemIcon: PropTypes.any,
     expandIcon: PropTypes.any,
     subMenuKey: PropTypes.string,
+    theme: PropTypes.string,
   },
   mixins: [BaseMixin],
   isSubMenu: true,
@@ -90,6 +93,7 @@ const SubMenu = {
     this.internalMenuId = undefined;
     this.haveRendered = undefined;
     this.haveOpened = undefined;
+    this.subMenuTitle = undefined;
     return {
       // defaultActiveFirst: false,
     };
@@ -325,18 +329,20 @@ const SubMenu = {
 
     adjustWidth() {
       /* istanbul ignore if */
-      if (!this.$refs.subMenuTitle || !this.menuInstance) {
+      if (!this.subMenuTitle || !this.menuInstance) {
         return;
       }
-      const popupMenu = this.menuInstance.$el;
-      if (popupMenu.offsetWidth >= this.$refs.subMenuTitle.offsetWidth) {
+      const popupMenu = findDOMNode(this.menuInstance);
+      if (popupMenu.offsetWidth >= this.subMenuTitle.offsetWidth) {
         return;
       }
 
       /* istanbul ignore next */
-      popupMenu.style.minWidth = `${this.$refs.subMenuTitle.offsetWidth}px`;
+      popupMenu.style.minWidth = `${this.subMenuTitle.offsetWidth}px`;
     },
-
+    saveSubMenuTitle(subMenuTitle) {
+      this.subMenuTitle = subMenuTitle;
+    },
     renderChildren(children) {
       const props = { ...this.$props, ...this.$attrs };
       const subPopupMenuProps = {
@@ -365,7 +371,7 @@ const SubMenu = {
         itemIcon: getComponent(this, 'itemIcon'),
         expandIcon: getComponent(this, 'expandIcon'),
         children,
-        click: this.onSubMenuClick,
+        onClick: this.onSubMenuClick,
         onSelect: props.onSelect || noop,
         onDeselect: props.onDeselect || noop,
         onOpenChange: props.onOpenChange || noop,
@@ -404,9 +410,9 @@ const SubMenu = {
         });
       }
       return (
-        <transition {...transitionProps}>
+        <Transition {...transitionProps}>
           <SubPopupMenu v-show={props.isOpen} {...subPopupMenuProps} />
-        </transition>
+        </Transition>
       );
     },
   },
@@ -421,7 +427,7 @@ const SubMenu = {
     const className = {
       [prefixCls]: true,
       [`${prefixCls}-${props.mode}`]: true,
-      [props.className]: !!props.className,
+      [props.class]: !!props.class,
       [this.getOpenClassName()]: isOpen,
       [this.getActiveClassName()]: props.active || (isOpen && !isInlineMode),
       [this.getDisabledClassName()]: props.disabled,
@@ -439,7 +445,7 @@ const SubMenu = {
     let mouseEvents = {};
     let titleClickEvents = {};
     let titleMouseEvents = {};
-    if (!props.disabled) {
+    if (props.disabled === false) {
       mouseEvents = {
         onMouseleave: this.onMouseLeave,
         onMouseenter: this.onMouseEnter,
@@ -477,8 +483,9 @@ const SubMenu = {
       ...titleClickEvents,
       style,
       class: `${prefixCls}-title`,
-      ref: 'subMenuTitle',
+      ...createRefHooks(this.saveSubMenuTitle),
     };
+
     // expand custom icon should NOT be displayed in menu with horizontal mode.
     let icon = null;
     if (props.mode !== 'horizontal') {
@@ -497,11 +504,13 @@ const SubMenu = {
       : triggerNode => triggerNode.parentNode;
     const popupPlacement = popupPlacementMap[props.mode];
     const popupAlign = props.popupOffset ? { offset: props.popupOffset } : {};
-    const popupClassName = props.mode === 'inline' ? '' : props.popupClassName;
+    let popupClassName = props.mode === 'inline' ? '' : props.popupClassName || '';
+    popupClassName = `${prefixCls}-popup ${rootPrefixCls}-${parentMenu.theme} ${popupClassName}`;
     const liProps = {
       ...omit(onEvents, ['onClick']),
       ...mouseEvents,
       class: className,
+      style: props.style,
     };
 
     return (
@@ -511,9 +520,7 @@ const SubMenu = {
         {!isInlineMode && (
           <Trigger
             prefixCls={prefixCls}
-            popupClassName={`${prefixCls}-popup ${rootPrefixCls}-${
-              parentMenu.theme
-            } ${popupClassName || ''}`}
+            popupClassName={popupClassName}
             getPopupContainer={getPopupContainer}
             builtinPlacements={placements}
             builtinPlacements={Object.assign({}, placements, props.builtinPlacements)}
@@ -537,11 +544,13 @@ const SubMenu = {
   },
 };
 
-const connected = connect(({ openKeys, activeKey, selectedKeys }, { eventKey, subMenuKey }) => ({
-  isOpen: openKeys.indexOf(eventKey) > -1,
-  active: activeKey[subMenuKey] === eventKey,
-  selectedKeys,
-}))(SubMenu);
+const connected = connect(({ openKeys, activeKey, selectedKeys }, { eventKey, subMenuKey }) => {
+  return {
+    isOpen: openKeys.indexOf(eventKey) > -1,
+    active: activeKey[subMenuKey] === eventKey,
+    selectedKeys,
+  };
+})(SubMenu);
 
 connected.isSubMenu = true;
 

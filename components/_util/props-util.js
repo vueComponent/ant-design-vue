@@ -93,6 +93,13 @@ const getSlotOptions = ele => {
   }
   return componentOptions ? componentOptions.Ctor.options || {} : {};
 };
+const findDOMNode = instance => {
+  let node = instance.$el;
+  while (!node.tagName) {
+    node = node.nextSibling;
+  }
+  return node;
+};
 const getOptionProps = instance => {
   const res = {};
   if (instance.$ && instance.$.vnode) {
@@ -218,18 +225,16 @@ const getKey = ele => {
   return key;
 };
 
-export function getEvents(child) {
-  const { $attrs } = child;
-  return splitAttrs($attrs).events;
-
-  // let events = {};
-  // if (child.componentOptions && child.componentOptions.listeners) {
-  //   events = child.componentOptions.listeners;
-  // } else if (child.data && child.data.on) {
-  //   events = child.data.on;
-  // }
-  // return { ...events };
+export function getEvents(ele, on = true) {
+  let props = {};
+  if (ele.$) {
+    props = { ...props, ...ele.$attrs };
+  } else {
+    props = { ...props, ...ele.props };
+  }
+  return splitAttrs(props)[on ? 'onEvents' : 'events'];
 }
+
 export function getEvent(child, event) {
   return child.props && child.props[event];
 }
@@ -347,5 +352,6 @@ export {
   getSlot,
   getAllProps,
   getAllChildren,
+  findDOMNode,
 };
 export default hasProp;

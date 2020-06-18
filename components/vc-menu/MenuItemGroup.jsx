@@ -1,7 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { getComponent, getSlot } from '../_util/props-util';
-
-// import { menuAllProps } from './util'
+import { menuAllProps } from './util';
 
 const MenuItemGroup = {
   name: 'MenuItemGroup',
@@ -27,7 +26,8 @@ const MenuItemGroup = {
     const { class: cls = '', rootPrefixCls, title } = props;
     const titleClassName = `${rootPrefixCls}-item-group-title`;
     const listClassName = `${rootPrefixCls}-item-group-list`;
-    // menuAllProps.props.forEach(key => delete props[key])
+    menuAllProps.forEach(key => delete props[key]);
+    // Set onClick to null, to ignore propagated onClick event
     delete props.onClick;
     const children = getSlot(this);
     return (

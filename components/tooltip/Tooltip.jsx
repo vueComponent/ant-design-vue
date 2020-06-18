@@ -187,7 +187,7 @@ export default {
       isValidElement(children) ? children : <span>{children}</span>,
     );
     const childCls = {
-      [openClassName || `${prefixCls}-open`]: true,
+      [openClassName || `${prefixCls}-open`]: sVisible,
       [child.props && child.props.class]: child.props && child.props.class,
     };
     const tooltipProps = {

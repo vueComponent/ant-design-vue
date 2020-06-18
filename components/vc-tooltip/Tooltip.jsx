@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
 import { placements } from './placements';
 import Content from './Content';
-import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
+import { hasProp, getComponent, getOptionProps, getSlot } from '../_util/props-util';
 function noop() {}
 export default {
   name: 'Tooltip',
@@ -95,6 +95,6 @@ export default {
       ref: 'trigger',
       popup: this.getPopupElement(),
     };
-    return <Trigger {...triggerProps}>{this.$slots.default && this.$slots.default()[0]}</Trigger>;
+    return <Trigger {...triggerProps}>{getSlot(this)[0]}</Trigger>;
   },
 };

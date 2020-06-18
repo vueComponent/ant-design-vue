@@ -4,7 +4,7 @@ import BaseMixin from '../_util/BaseMixin';
 import scrollIntoView from 'dom-scroll-into-view';
 import { connect } from '../_util/store';
 import { noop, menuAllProps } from './util';
-import { getComponent, getSlot } from '../_util/props-util';
+import { getComponent, getSlot, findDOMNode } from '../_util/props-util';
 
 const props = {
   attribute: PropTypes.object,
@@ -17,13 +17,7 @@ const props = {
   index: PropTypes.number,
   inlineIndent: PropTypes.number.def(24),
   level: PropTypes.number.def(1),
-  mode: PropTypes.oneOf([
-    'horizontal',
-    'vertical',
-    'vertical-left',
-    'vertical-right',
-    'inline',
-  ]).def('vertical'),
+  mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']),
   parentMenu: PropTypes.object,
   multiple: PropTypes.bool,
   value: PropTypes.any,
@@ -35,7 +29,7 @@ const props = {
   // clearSubMenuTimers: PropTypes.func.def(noop),
 };
 const MenuItem = {
-  name: 'MenuItem',
+  name: 'AMenuItem',
   inheritAttrs: false,
   props,
   mixins: [BaseMixin],
@@ -49,7 +43,7 @@ const MenuItem = {
     this.$nextTick(() => {
       const { active, parentMenu, eventKey } = this.$props;
       if (!this.prevActive && active && (!parentMenu || !parentMenu[`scrolled-${eventKey}`])) {
-        scrollIntoView(this.$el, this.parentMenu.$el, {
+        scrollIntoView(this.$refs.node, findDOMNode(this.parentMenu), {
           onlyScrollIfNeeded: true,
         });
         parentMenu[`scrolled-${eventKey}`] = true;
@@ -188,6 +182,7 @@ const MenuItem = {
       ...props,
       ...attrs,
       ...mouseEvent,
+      ref: 'node',
     };
     delete liProps.children;
     return (

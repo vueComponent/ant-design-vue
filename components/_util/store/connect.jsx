@@ -11,7 +11,7 @@ function getDisplayName(WrappedComponent) {
 const defaultMapStateToProps = () => ({});
 export default function connect(mapStateToProps) {
   const shouldSubscribe = !!mapStateToProps;
-  const finnalMapStateToProps = mapStateToProps || defaultMapStateToProps;
+  const finalMapStateToProps = mapStateToProps || defaultMapStateToProps;
   return function wrapWithConnect(WrappedComponent) {
     const tempProps = omit(WrappedComponent.props || {}, ['store']);
     const props = {
@@ -30,13 +30,13 @@ export default function connect(mapStateToProps) {
         this.store = this.storeContext.store;
         this.preProps = omit(getOptionProps(this), ['__propsSymbol__']);
         return {
-          subscribed: finnalMapStateToProps(this.store.getState(), this.$props),
+          subscribed: finalMapStateToProps(this.store.getState(), this.$props),
         };
       },
       watch: {
         __propsSymbol__() {
           if (mapStateToProps && mapStateToProps.length === 2) {
-            this.subscribed = finnalMapStateToProps(this.store.getState(), this.$props);
+            this.subscribed = finalMapStateToProps(this.store.getState(), this.$props);
           }
         },
       },
@@ -53,7 +53,7 @@ export default function connect(mapStateToProps) {
             return;
           }
           const props = omit(getOptionProps(this), ['__propsSymbol__']);
-          const nextSubscribed = finnalMapStateToProps(this.store.getState(), props);
+          const nextSubscribed = finalMapStateToProps(this.store.getState(), props);
           if (
             !shallowEqual(this.preProps, props) ||
             !shallowEqual(this.subscribed, nextSubscribed)

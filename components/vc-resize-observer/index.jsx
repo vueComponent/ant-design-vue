@@ -1,9 +1,9 @@
 // based on rc-resize-observer 0.1.3
-import ResizeObserver from 'resize-observer-polyfill';
+import ResizeObserver from "resize-observer-polyfill";
 
 // Still need to be compatible with React 15, we use class component here
 const VueResizeObserver = {
-  name: 'ResizeObserver',
+  name: "ResizeObserver",
   props: {
     disabled: Boolean,
   },
@@ -64,8 +64,8 @@ const VueResizeObserver = {
       if (this.width !== fixedWidth || this.height !== fixedHeight) {
         const size = { width: fixedWidth, height: fixedHeight };
         this.width = fixedWidth;
-        this.fixedHeight = fixedHeight;
-        this.$emit('resize', size);
+        this.height = fixedHeight;
+        this.$emit("resize", size);
       }
     },
 

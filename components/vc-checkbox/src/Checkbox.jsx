@@ -108,6 +108,7 @@ export default {
       value,
       ...others
     } = getOptionProps(this);
+    const { class: className } = this.$attrs;
     const globalProps = Object.keys({ ...others, ...this.$attrs }).reduce((prev, key) => {
       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
         prev[key] = others[key];

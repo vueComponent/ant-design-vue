@@ -69,16 +69,14 @@ export default {
     } else {
       radioProps.onChange = this.handleChange;
     }
-    const wrapperClassString = classNames( {
+    const wrapperClassString = classNames({
       [`${prefixCls}-wrapper`]: true,
       [`${prefixCls}-wrapper-checked`]: radioProps.checked,
       [`${prefixCls}-wrapper-disabled`]: radioProps.disabled,
     });
 
     return (
-      <label
-        class={wrapperClassString}
-      >
+      <label class={wrapperClassString}>
         <VcCheckbox {...radioProps} ref="vcCheckbox" />
         {$slots.default && <span>{$slots.default()}</span>}
       </label>

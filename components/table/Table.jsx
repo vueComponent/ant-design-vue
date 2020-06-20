@@ -158,7 +158,7 @@ export default {
       sPagination: this.getDefaultPagination(this.$props),
       pivot: undefined,
       sComponents: createComponents(this.components),
-      filterDataCnt: 0
+      filterDataCnt: 0,
     };
   },
   watch: {

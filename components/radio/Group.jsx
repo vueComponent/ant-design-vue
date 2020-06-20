@@ -82,13 +82,9 @@ export default {
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
     const groupPrefixCls = `${prefixCls}-group`;
-    const classString = classNames(
-      groupPrefixCls,
-      `${groupPrefixCls}-${buttonStyle}`,
-      {
-        [`${groupPrefixCls}-${props.size}`]: props.size,
-      },
-    );
+    const classString = classNames(groupPrefixCls, `${groupPrefixCls}-${buttonStyle}`, {
+      [`${groupPrefixCls}-${props.size}`]: props.size,
+    });
 
     let children = filterEmpty(getSlot(this));
 
@@ -122,12 +118,6 @@ export default {
       });
     }
 
-    return (
-      <div
-        class={classString}
-      >
-        {children}
-      </div>
-    );
+    return <div class={classString}>{children}</div>;
   },
 };

@@ -18,6 +18,7 @@ import PageHeader from 'ant-design-vue/page-header';
 import Skeleton from 'ant-design-vue/skeleton';
 import Empty from 'ant-design-vue/empty';
 import Timeline from 'ant-design-vue/timeline';
+import Checkbox from 'ant-design-vue/checkbox';
 import Col from 'ant-design-vue/col';
 import Row from 'ant-design-vue/row';
 import Tooltip from 'ant-design-vue/tooltip';
@@ -63,6 +64,7 @@ app
   .use(Skeleton)
   .use(Spin)
   .use(Empty)
+  .use(Checkbox)
   .use(Timeline)
   .use(Col)
   .use(Row)

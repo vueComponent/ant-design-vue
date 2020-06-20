@@ -82,8 +82,7 @@ export const withDefault = function(type) {
         return this;
       }
       this.default =
-        isArray(def) ||
-        isPlainObject(def)
+        isArray(def) || isPlainObject(def)
           ? function() {
               return def;
             }

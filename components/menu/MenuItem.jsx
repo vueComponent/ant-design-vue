@@ -7,7 +7,6 @@ export default {
   name: 'MenuItem',
   inheritAttrs: false,
   props: itemProps,
-
   isMenuItem: true,
   setup() {
     return {
@@ -40,19 +39,14 @@ export default {
       ...props,
       title,
       ...attrs,
+      ref: 'menuItem',
     };
     const toolTipProps = {
       ...tooltipProps,
       placement: 'right',
       overlayClassName: `${rootPrefixCls}-inline-collapsed-tooltip`,
     };
-    return (
-      <Tooltip {...toolTipProps}>
-        {/*  */}
-        <Item {...itemProps} ref="menuItem">
-          {getSlot(this)}
-        </Item>
-      </Tooltip>
-    );
+    const item = <Item {...itemProps}>{getSlot(this)}</Item>;
+    return <Tooltip {...toolTipProps}>{item}</Tooltip>;
   },
 };

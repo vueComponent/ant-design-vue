@@ -30,6 +30,7 @@ import notification from 'ant-design-vue/notification';
 import message from 'ant-design-vue/message';
 import Modal from 'ant-design-vue/modal';
 import Menu from 'ant-design-vue/menu';
+import Mentions from 'ant-design-vue/mentions';
 import 'ant-design-vue/style.js';
 
 const basic = {
@@ -73,4 +74,5 @@ app
   .use(Popover)
   .use(Modal)
   .use(Menu)
+  .use(Mentions)
   .mount('#app');

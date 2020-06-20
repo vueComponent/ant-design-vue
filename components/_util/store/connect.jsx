@@ -2,7 +2,6 @@ import shallowEqual from 'shallowequal';
 import { inject, createVNode, watchEffect } from 'vue';
 import omit from 'omit.js';
 import { getOptionProps } from '../props-util';
-import PropTypes from '../vue-types';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.name || 'Component';
@@ -14,9 +13,7 @@ export default function connect(mapStateToProps) {
   const finnalMapStateToProps = mapStateToProps || defaultMapStateToProps;
   return function wrapWithConnect(WrappedComponent) {
     const tempProps = omit(WrappedComponent.props || {}, ['store']);
-    const props = {
-      __propsSymbol__: PropTypes.any,
-    };
+    const props = {};
     Object.keys(tempProps).forEach(k => {
       props[k] = { ...tempProps[k], required: false };
     });
@@ -31,7 +28,7 @@ export default function connect(mapStateToProps) {
       },
       data() {
         this.store = this.storeContext.store;
-        this.preProps = omit(getOptionProps(this), ['__propsSymbol__']);
+        this.preProps = getOptionProps(this);
         watchEffect(() => {
           if (mapStateToProps && mapStateToProps.length === 2) {
             this.subscribed = finnalMapStateToProps(this.store.getState(), this.$props);
@@ -91,7 +88,11 @@ export default function connect(mapStateToProps) {
           store,
           ref: 'wrappedInstance',
         };
-        return createVNode(WrappedComponent, wrapProps, $slots);
+        const slots = {};
+        for (let [key, value] of Object.entries($slots)) {
+          slots[key] = () => value();
+        }
+        return createVNode(WrappedComponent, wrapProps, slots);
       },
     };
     return Connect;

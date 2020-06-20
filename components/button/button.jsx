@@ -1,8 +1,8 @@
-import { inject } from 'vue';
+import { inject, Text } from 'vue';
 import Wave from '../_util/wave';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';
-import { filterEmpty } from '../_util/props-util';
+import { filterEmpty, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 // eslint-disable-next-line no-console
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
@@ -124,7 +124,7 @@ export default {
     },
     insertSpace(child, needInserted) {
       const SPACE = needInserted ? ' ' : '';
-      if (typeof child.children === 'string') {
+      if (child.type === Text) {
         let text = child.children.trim();
         if (isTwoCNChar(text)) {
           text = text.split('').join(SPACE);
@@ -139,9 +139,9 @@ export default {
     },
   },
   render() {
-    this.icon = this.$slots.icon && this.$slots.icon();
-    const { type, htmlType, icon, disabled, handleClick, sLoading, $slots, $attrs } = this;
-    const children = filterEmpty($slots.default && $slots.default());
+    this.icon = getSlot(this, 'icon');
+    const { type, htmlType, icon, disabled, handleClick, sLoading, $attrs } = this;
+    const children = filterEmpty(getSlot(this));
     this.children = children;
     const classes = this.getClasses();
 

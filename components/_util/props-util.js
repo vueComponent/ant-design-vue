@@ -72,7 +72,7 @@ const getSlot = (self, name = 'default', options = {}) => {
   while (res && res.length === 1 && (res[0].type === Fragment || Array.isArray(res[0]))) {
     res = res[0].children || res[0];
   }
-  return res;
+  return res && res.__v_isVNode ? [res] : res;
 };
 
 const getAllChildren = ele => {

@@ -33,11 +33,11 @@ export default function wrapWithConnect(WrappedComponent) {
         __propsSymbol__: k++,
         ref: 'wrappedInstance',
       };
-      return createVNode(WrappedComponent, wrapProps, $slots);
-      // return (
-      //   <WrappedComponent {...wrapProps} ref="wrappedInstance">
-      //   </WrappedComponent>
-      // );
+      const slots = {};
+      for (let [key, value] of Object.entries($slots)) {
+        slots[key] = () => value();
+      }
+      return createVNode(WrappedComponent, wrapProps, slots);
     },
   };
   Object.keys(methods).map(m => {

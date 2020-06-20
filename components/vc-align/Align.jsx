@@ -1,3 +1,4 @@
+import { nextTick } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { alignElement, alignPoint } from 'dom-align';
 import addEventListener from '../vc-util/Dom/addEventListener';
@@ -30,7 +31,7 @@ export default {
     return {};
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       this.prevProps = { ...this.$props };
       const props = this.$props;
       // if parent ref not attached .... use document.getElementById
@@ -41,7 +42,7 @@ export default {
     });
   },
   updated() {
-    this.$nextTick(() => {
+    nextTick(() => {
       const prevProps = this.prevProps;
       const props = this.$props;
       let reAlign = false;

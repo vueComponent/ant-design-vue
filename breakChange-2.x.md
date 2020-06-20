@@ -35,3 +35,7 @@ v-model -> v-model:visible
 v-model -> v-model:visible
 
 okButtonProps、cancelButtonProps 扁平化处理
+
+## Mentions
+
+v-model -> v-model:value

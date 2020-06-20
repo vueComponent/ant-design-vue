@@ -13,7 +13,6 @@ const Menu = {
     selectable: PropTypes.bool.def(true),
   },
   mixins: [BaseMixin],
-
   data() {
     const props = getOptionProps(this);
     let selectedKeys = props.defaultSelectedKeys;

@@ -1,17 +1,18 @@
 <template>
   <div>
-    <a-button @click="show = !show">按钮</a-button>
-    <a-tooltip class="ddddd" style="color: blue" v-if="show">
-      <template v-slot:title>prompt text</template>
-      <a-button class="test" style="color: red">Tooltip will show when mouse enter.</a-button>
-    </a-tooltip>
+    <demo />
   </div>
 </template>
 <script>
+import demo from '../antdv-demo/docs/menu/demo/horizontal';
+
 export default {
+  components: {
+    demo,
+  },
   data() {
     return {
-      show: true,
+      current: ['mail'],
     };
   },
 };

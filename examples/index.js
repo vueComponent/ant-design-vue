@@ -32,10 +32,20 @@ import Modal from 'ant-design-vue/modal';
 import Menu from 'ant-design-vue/menu';
 import 'ant-design-vue/style.js';
 
+const basic = {
+  render() {
+    return this.$slots.default && this.$slots.default();
+  },
+};
 const app = createApp(App);
 app.config.globalProperties.$notification = notification;
 app.config.globalProperties.$message = message;
 app
+  .component('demo-sort', { ...basic })
+  .component('md', { ...basic })
+  .component('api', { ...basic })
+  .component('CN', { ...basic })
+  .component('US', { ...basic })
   .use(Avatar)
   .use(Breadcrumb)
   .use(Button)

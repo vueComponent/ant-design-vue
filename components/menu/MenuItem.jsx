@@ -45,13 +45,14 @@ export default {
       ...tooltipProps,
       placement: 'right',
       overlayClassName: `${rootPrefixCls}-inline-collapsed-tooltip`,
-      children: (
+    };
+    return (
+      <Tooltip {...toolTipProps}>
+        {/*  */}
         <Item {...itemProps} ref="menuItem">
           {getSlot(this)}
         </Item>
-      ),
-    };
-    // return <div>ddd</div>;
-    return <Tooltip {...toolTipProps}></Tooltip>;
+      </Tooltip>
+    );
   },
 };

@@ -195,15 +195,28 @@ const getAllProps = ele => {
   if (ele.$) {
     props = { ...props, ...this.$attrs };
   } else {
-    props = { ...props, ...ele.props };
+    props = { ...ele.props, ...props };
   }
   return props;
 };
 
 // 使用 getOptionProps 替换 ，待测试
-const getPropsData = ele => {
-  return getOptionProps(ele);
-  //return ele.props || {};
+const getPropsData = vnode => {
+  const res = {};
+  const originProps = vnode.props || {};
+  const props = {};
+  Object.keys(originProps).forEach(key => {
+    props[camelize(key)] = originProps[key];
+  });
+  const options = vnode.type.props;
+  Object.keys(options).forEach(k => {
+    const v = resolvePropValue(options, props, k, props[k]);
+    if (k in props) {
+      // 仅包含 props，不包含默认值
+      res[k] = v;
+    }
+  });
+  return res;
 };
 const getValueByProp = (ele, prop) => {
   return getPropsData(ele)[prop];

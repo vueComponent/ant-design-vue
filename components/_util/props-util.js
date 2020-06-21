@@ -200,7 +200,6 @@ const getAllProps = ele => {
   return props;
 };
 
-// 使用 getOptionProps 替换 ，待测试
 const getPropsData = vnode => {
   const res = {};
   const originProps = vnode.props || {};
@@ -208,7 +207,7 @@ const getPropsData = vnode => {
   Object.keys(originProps).forEach(key => {
     props[camelize(key)] = originProps[key];
   });
-  const options = vnode.type.props;
+  const options = isPlainObject(vnode.type) ? vnode.type.props : {};
   Object.keys(options).forEach(k => {
     const v = resolvePropValue(options, props, k, props[k]);
     if (k in props) {

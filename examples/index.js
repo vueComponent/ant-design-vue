@@ -32,6 +32,7 @@ import message from 'ant-design-vue/message';
 import Modal from 'ant-design-vue/modal';
 import Menu from 'ant-design-vue/menu';
 import Mentions from 'ant-design-vue/mentions';
+import Dropdown from 'ant-design-vue/dropdown';
 import 'ant-design-vue/style.js';
 
 const basic = {
@@ -77,4 +78,5 @@ app
   .use(Modal)
   .use(Menu)
   .use(Mentions)
+  .use(Dropdown)
   .mount('#app');

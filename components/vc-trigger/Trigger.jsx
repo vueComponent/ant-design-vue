@@ -412,7 +412,7 @@ export default {
         ...createRefHooks(this.savePopup),
       };
       return (
-        <Popup ref="popup" key="ddd" {...popupProps}>
+        <Popup ref="popup" {...popupProps}>
           {getComponent(self, 'popup')}
         </Popup>
       );

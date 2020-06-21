@@ -7,7 +7,13 @@ import classNames from 'classnames';
 import { getKeyFromChildrenIndex, loopMenuItem, noop, isMobileDevice, menuAllProps } from './util';
 import DOMWrap from './DOMWrap';
 import { cloneElement } from '../_util/vnode';
-import { initDefaultProps, getOptionProps, getComponent, splitAttrs } from '../_util/props-util';
+import {
+  initDefaultProps,
+  getOptionProps,
+  getComponent,
+  splitAttrs,
+  getPropsData,
+} from '../_util/props-util';
 
 function allDisabled(arr) {
   if (!arr.length) {
@@ -45,12 +51,8 @@ export function getActiveKey(props, originalActiveKey) {
   if (activeKey !== undefined && activeKey !== null) {
     let found;
     loopMenuItem(children, (c, i) => {
-      const propsData = c.props || {};
-      if (
-        c &&
-        propsData.disabled !== false &&
-        activeKey === getKeyFromChildrenIndex(c, eventKey, i)
-      ) {
+      const propsData = getPropsData(c);
+      if (c && !propsData.disabled && activeKey === getKeyFromChildrenIndex(c, eventKey, i)) {
         found = true;
       }
     });
@@ -61,9 +63,9 @@ export function getActiveKey(props, originalActiveKey) {
   activeKey = null;
   if (defaultActiveFirst) {
     loopMenuItem(children, (c, i) => {
-      const propsData = c.props || {};
+      const propsData = getPropsData(c);
       const noActiveKey = activeKey === null || activeKey === undefined;
-      if (noActiveKey && c && propsData.disabled !== false) {
+      if (noActiveKey && c && !propsData.disabled) {
         activeKey = getKeyFromChildrenIndex(c, eventKey, i);
       }
     });

@@ -191,7 +191,7 @@ describe('Button', () => {
     expect(wrapper.html()).toMatchSnapshot();
   });
 
-  fit('fixbug renders {0} , 0 and {false}', () => {
+  it('fixbug renders {0} , 0 and {false}', () => {
     const wrapper = mount({
       render() {
         return <Button>{0}</Button>;

@@ -2,7 +2,7 @@ import '@babel/polyfill';
 import { createApp } from 'vue';
 import App from './App.vue';
 import Avatar from 'ant-design-vue/avatar';
-import Breadcrumb from 'ant-design-vue/breadcrumb';
+// import Breadcrumb from 'ant-design-vue/breadcrumb';
 import Button from 'ant-design-vue/button';
 import Comment from 'ant-design-vue/comment';
 import Drawer from 'ant-design-vue/drawer';
@@ -49,7 +49,7 @@ app
   .component('CN', { ...basic })
   .component('US', { ...basic })
   .use(Avatar)
-  .use(Breadcrumb)
+  // .use(Breadcrumb)
   .use(Button)
   .use(Comment)
   .use(ConfigProvider)

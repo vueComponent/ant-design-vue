@@ -445,7 +445,7 @@ const SubMenu = {
     let mouseEvents = {};
     let titleClickEvents = {};
     let titleMouseEvents = {};
-    if (props.disabled === false) {
+    if (!props.disabled) {
       mouseEvents = {
         onMouseleave: this.onMouseLeave,
         onMouseenter: this.onMouseEnter,

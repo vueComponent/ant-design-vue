@@ -1,5 +1,5 @@
 import shallowEqual from 'shallowequal';
-import { inject, createVNode, watchEffect } from 'vue';
+import { inject, createVNode, watchEffect, toRaw } from 'vue';
 import omit from 'omit.js';
 import { getOptionProps } from '../props-util';
 
@@ -54,7 +54,7 @@ export default function connect(mapStateToProps) {
           const nextSubscribed = finnalMapStateToProps(this.store.getState(), props);
           if (
             !shallowEqual(this.preProps, props) ||
-            !shallowEqual(this.subscribed, nextSubscribed)
+            !shallowEqual(toRaw(this.subscribed), nextSubscribed)
           ) {
             this.subscribed = nextSubscribed;
           }

@@ -4,7 +4,6 @@ import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import VcMentions from '../vc-mentions';
 import { mentionsProps } from '../vc-mentions/src/mentionsProps';
-import Base from '../base';
 import Spin from '../spin';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
@@ -171,7 +170,6 @@ const Mentions = {
 
 /* istanbul ignore next */
 Mentions.install = function(app) {
-  app.use(Base);
   app.component(Mentions.name, Mentions);
   app.component(Mentions.Option.name, Mentions.Option);
 };

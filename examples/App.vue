@@ -1,10 +1,11 @@
 <template>
   <div>
+    <a-button><span>按钮</span></a-button>
     <demo />
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/menu/demo/horizontal';
+import demo from '../antdv-demo/docs/menu/demo/inline';
 
 export default {
   components: {

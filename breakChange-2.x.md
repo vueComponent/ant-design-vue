@@ -39,3 +39,7 @@ okButtonProps、cancelButtonProps 扁平化处理
 ## Mentions
 
 v-model -> v-model:value
+
+## menu
+
+v-model -> v-model:selectedKeys :openKeys.sync -> v-mdoel:openKeys

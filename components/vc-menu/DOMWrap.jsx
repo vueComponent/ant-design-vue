@@ -288,7 +288,6 @@ const DOMWrap = {
 
   render() {
     const Tag = this.$props.tag;
-
     return <Tag>{this.renderChildren(getSlot(this))}</Tag>;
   },
 };

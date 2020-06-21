@@ -1,4 +1,5 @@
-import { provide, nextTick } from 'vue';
+import { provide } from 'vue';
+import classNames from 'classnames';
 import omit from 'omit.js';
 import KeyCode from '../../_util/KeyCode';
 import BaseMixin from '../../_util/BaseMixin';
@@ -42,7 +43,7 @@ const Mentions = {
     },
   },
   updated() {
-    nextTick(() => {
+    this.$nextTick(() => {
       const { measuring } = this.$data;
 
       // Sync measure div top with textarea for rc-trigger usage
@@ -173,7 +174,7 @@ const Mentions = {
         this.setState({ isFocus: false });
         this.stopMeasure();
         this.$emit('blur', event);
-      }, 0);
+      }, 100);
     },
     selectOption(option) {
       const { _value: value, measureLocation, measurePrefix } = this.$data;
@@ -204,7 +205,7 @@ const Mentions = {
       const { filterOption, children = [] } = this.$props;
       const list = (Array.isArray(children) ? children : [children])
         .map(item => {
-          return { ...getOptionProps(item), children: item.children.default?.() || item.children };
+          return { ...getOptionProps(item), children: item.children.default?.() };
         })
         .filter(option => {
           /** Return all result if `filterOption` is false. */
@@ -254,6 +255,8 @@ const Mentions = {
       ...restProps
     } = getOptionProps(this);
 
+    const { class: className, style, ...otherAttrs } = this.$attrs;
+
     const inputProps = omit(restProps, [
       'value',
       'defaultValue',
@@ -267,12 +270,12 @@ const Mentions = {
     const options = measuring ? this.getOptions() : [];
 
     return (
-      <div class={prefixCls}>
+      <div class={classNames(prefixCls, className)} style={style}>
         <textarea
           ref="textarea"
           {...{
             ...inputProps,
-            ...this.$attrs,
+            ...otherAttrs,
             onChange: noop,
             onSelect: noop,
           }}

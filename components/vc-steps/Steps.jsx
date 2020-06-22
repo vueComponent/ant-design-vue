@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import debounce from 'lodash/debounce';
 import isFlexSupported from '../_util/isFlexSupported';
-import { filterEmpty, getEvents, getPropsData, getListeners } from '../_util/props-util';
+import { filterEmpty } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 
 export default {
@@ -59,6 +59,7 @@ export default {
       const { current } = this.$props;
       if (current !== next) {
         this.$emit('change', next);
+        this.$emit('update:current', next);
       }
     },
     calcStepOffsetWidth() {
@@ -97,17 +98,14 @@ export default {
       status,
       size,
       current,
-      $scopedSlots,
+      $slots,
+      progressDot,
       initial,
       icons,
     } = this;
     const isNav = type === 'navigation';
-    let progressDot = this.progressDot;
-    if (progressDot === undefined) {
-      progressDot = $scopedSlots.progressDot;
-    }
     const { lastStepOffsetWidth, flexSupported } = this;
-    const filteredChildren = filterEmpty(this.$slots.default);
+    const filteredChildren = filterEmpty($slots.default && $slots.default());
     const lastIndex = filteredChildren.length - 1;
     const adjustedlabelPlacement = progressDot ? 'vertical' : labelPlacement;
     const classString = {
@@ -119,42 +117,36 @@ export default {
       [`${prefixCls}-navigation`]: isNav,
       [`${prefixCls}-flex-not-supported`]: !flexSupported,
     };
-    const listeners = getListeners(this);
     const stepsProps = {
       class: classString,
       ref: 'vcStepsRef',
-      on: listeners,
     };
     return (
       <div {...stepsProps}>
         {filteredChildren.map((child, index) => {
-          const childProps = getPropsData(child);
+          const childProps = child.props || {};
           const stepNumber = initial + index;
           const stepProps = {
-            props: {
-              stepNumber: `${stepNumber + 1}`,
-              stepIndex: stepNumber,
-              prefixCls,
-              iconPrefix,
-              progressDot: this.progressDot,
-              icons,
-              ...childProps,
-            },
-            on: getEvents(child),
-            scopedSlots: $scopedSlots,
+            stepNumber: `${stepNumber + 1}`,
+            stepIndex: stepNumber,
+            prefixCls,
+            iconPrefix,
+            progressDot,
+            icons,
+            ...childProps,
           };
-          if (listeners.change) {
-            stepProps.on.stepClick = this.onStepClick;
+
+          const { onChange } = this.$attrs;
+          if (onChange || this.$attrs['onUpdate:current']) {
+            stepProps.onStepClick = this.onStepClick;
           }
           if (!flexSupported && direction !== 'vertical') {
             if (isNav) {
-              stepProps.props.itemWidth = `${100 / (lastIndex + 1)}%`;
-              stepProps.props.adjustMarginRight = 0;
+              stepProps.itemWidth = `${100 / (lastIndex + 1)}%`;
+              stepProps.adjustMarginRight = 0;
             } else if (index !== lastIndex) {
-              stepProps.props.itemWidth = `${100 / lastIndex}%`;
-              stepProps.props.adjustMarginRight = `${-Math.round(
-                lastStepOffsetWidth / lastIndex + 1,
-              )}px`;
+              stepProps.itemWidth = `${100 / lastIndex}%`;
+              stepProps.adjustMarginRight = `${-Math.round(lastStepOffsetWidth / lastIndex + 1)}px`;
             }
           }
           // fix tail color
@@ -163,14 +155,14 @@ export default {
           }
           if (!childProps.status) {
             if (stepNumber === current) {
-              stepProps.props.status = status;
+              stepProps.status = status;
             } else if (stepNumber < current) {
-              stepProps.props.status = 'finish';
+              stepProps.status = 'finish';
             } else {
-              stepProps.props.status = 'wait';
+              stepProps.status = 'wait';
             }
           }
-          stepProps.props.active = stepNumber === current;
+          stepProps.active = stepNumber === current;
           return cloneElement(child, stepProps);
         })}
       </div>

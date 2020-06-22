@@ -302,6 +302,10 @@ export function getComponentName(opts) {
   return opts && (opts.Ctor.options.name || opts.tag);
 }
 
+export function isFragment(c) {
+  return c.length === 1 && c[0].type === Fragment;
+}
+
 export function isEmptyElement(c) {
   return c.type === Comment || (c.type === Text && c.children.trim() === '');
 }
@@ -311,6 +315,9 @@ export function isStringElement(c) {
 }
 
 export function filterEmpty(children = []) {
+  if (isFragment(children)) {
+    return children[0].children.filter(c => !isEmptyElement(c));
+  }
   return children.filter(c => !isEmptyElement(c));
 }
 const initDefaultProps = (propTypes, defaultProps) => {

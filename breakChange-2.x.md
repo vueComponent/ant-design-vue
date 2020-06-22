@@ -47,3 +47,7 @@ v-model -> v-model:selectedKeys :openKeys.sync -> v-mdoel:openKeys
 ## dropdown
 
 v-model -> v-model:visible
+
+## Steps
+
+v-model -> v-model:current

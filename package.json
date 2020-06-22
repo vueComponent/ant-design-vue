@@ -58,8 +58,8 @@
     "vue-template-compiler": ">=2.6.0"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.0.0",
-    "@commitlint/config-conventional": "^8.0.0",
+    "@commitlint/cli": "^9.0.0",
+    "@commitlint/config-conventional": "^9.0.0",
     "@octokit/rest": "^16.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/server-test-utils": "1.0.0-beta.16",

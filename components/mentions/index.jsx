@@ -1,4 +1,4 @@
-import { inject, nextTick } from 'vue';
+import { inject } from 'vue';
 import classNames from 'classnames';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
@@ -7,7 +7,7 @@ import { mentionsProps } from '../vc-mentions/src/mentionsProps';
 import Spin from '../spin';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
-import { getOptionProps, getComponent, filterEmpty } from '../_util/props-util';
+import { getOptionProps, getComponent, filterEmpty, getSlot } from '../_util/props-util';
 
 const { Option } = VcMentions;
 
@@ -65,7 +65,7 @@ const Mentions = {
     };
   },
   mounted() {
-    nextTick(() => {
+    this.$nextTick(() => {
       if (this.autoFocus) {
         this.focus();
       }
@@ -104,7 +104,7 @@ const Mentions = {
     },
     getOptions() {
       const { loading } = this.$props;
-      const children = filterEmpty(this.$slots.default?.() || []);
+      const children = filterEmpty(getSlot(this) || []);
 
       if (loading) {
         return (
@@ -138,10 +138,11 @@ const Mentions = {
       getPopupContainer,
       ...restProps
     } = getOptionProps(this);
+    const { class: className, ...otherAttrs } = this.$attrs;
     const prefixCls = getPrefixCls('mentions', customizePrefixCls);
     const otherProps = omit(restProps, ['loading']);
 
-    const mergedClassName = classNames({
+    const mergedClassName = classNames(className, {
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-focused`]: focused,
     });
@@ -156,7 +157,7 @@ const Mentions = {
       children: this.getOptions(),
       class: mergedClassName,
       rows: 1,
-      ...this.$attrs,
+      ...otherAttrs,
       onChange: this.onChange,
       onSelect: this.onSelect,
       onFocus: this.onFocus,

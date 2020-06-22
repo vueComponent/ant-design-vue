@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PropTypes from '../_util/vue-types';
-import hasProp, { getOptionProps, getComponent, getPropsData } from '../_util/props-util';
+import hasProp, { getOptionProps, getComponent } from '../_util/props-util';
 import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
 import { ConfigConsumerProps } from '../config-provider';

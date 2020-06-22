@@ -77,11 +77,9 @@ export default {
       <Statistic
         ref="statistic"
         {...{
-          props: {
-            ...this.$props,
-            valueRender: this.valueRenderHtml,
-            formatter: this.formatCountdown,
-          },
+          ...this.$props,
+          valueRender: this.valueRenderHtml,
+          formatter: this.formatCountdown,
         }}
       />
     );

@@ -1,7 +1,7 @@
 import padEnd from 'lodash/padEnd';
 import { createVNode } from 'vue';
 
-export default (_, { attrs }) => {
+const Number = (_, { attrs }) => {
   const { value, formatter, precision, decimalSeparator, groupSeparator = '', prefixCls } = attrs;
   let valueNode;
 
@@ -46,5 +46,5 @@ export default (_, { attrs }) => {
   return <span class={`${prefixCls}-content-value`}>{valueNode}</span>;
 };
 
-const name = 'AStatisticNumber';
-export { name };
+Number.name = 'AStatisticNumber';
+export default Number;

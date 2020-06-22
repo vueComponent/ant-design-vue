@@ -17,6 +17,7 @@ export const StatisticProps = {
   prefix: PropTypes.any,
   suffix: PropTypes.any,
   title: PropTypes.any,
+  onFinish: PropTypes.func,
 };
 
 export default {
@@ -25,9 +26,6 @@ export default {
     decimalSeparator: '.',
     groupSeparator: ',',
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-  },
 
   setup() {
     return {
@@ -44,9 +42,13 @@ export default {
     let prefix = getComponent(this, 'prefix');
     let suffix = getComponent(this, 'suffix');
     const formatter = getComponent(this, 'formatter', {}, false);
-    let valueNode = (
-      <StatisticNumber {...{ props: { ...this.$props, prefixCls, value, formatter } }} />
-    );
+    const props = {
+      ...this.$props,
+      prefixCls,
+      value,
+      formatter,
+    };
+    let valueNode = <StatisticNumber {...props} />;
     if (valueRender) {
       valueNode = valueRender(valueNode);
     }

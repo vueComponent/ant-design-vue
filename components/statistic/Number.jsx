@@ -45,6 +45,4 @@ const Number = (_, { attrs }) => {
 
   return <span class={`${prefixCls}-content-value`}>{valueNode}</span>;
 };
-
-Number.name = 'AStatisticNumber';
 export default Number;

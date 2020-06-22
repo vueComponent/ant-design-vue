@@ -2,9 +2,10 @@ import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import VcCheckbox from '../vc-checkbox';
-import hasProp, { getOptionProps } from '../_util/props-util';
+import hasProp, { getOptionProps, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import warning from '../_util/warning';
+function noop() {}
 
 export default {
   name: 'ACheckbox',
@@ -64,7 +65,8 @@ export default {
   methods: {
     handleChange(event) {
       const targetChecked = event.target.checked;
-      this.$emit('input', targetChecked);
+      this.$emit('update:checked', targetChecked);
+      // this.$emit('input', targetChecked);
       this.$emit('change', event);
     },
     focus() {
@@ -77,12 +79,19 @@ export default {
 
   render() {
     const props = getOptionProps(this);
-    const { checkboxGroupContext: checkboxGroup, $slots, $attrs } = this;
-    const children = $slots.default && $slots.default();
+    const { checkboxGroupContext: checkboxGroup, $attrs } = this;
+    const children = getSlot(this);
     const { indeterminate, prefixCls: customizePrefixCls, ...restProps } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
-    const { onMouseenter, onMouseleave, onInput, class: className, style, ...restAttrs } = $attrs;
+    const {
+      onMouseenter = noop,
+      onMouseleave = noop,
+      onInput,
+      class: className,
+      style,
+      ...restAttrs
+    } = $attrs;
     const checkboxProps = {
       ...restProps,
       prefixCls,

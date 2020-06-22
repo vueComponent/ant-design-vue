@@ -51,3 +51,11 @@ v-model -> v-model:visible
 ## Steps
 
 v-model -> v-model:current
+
+## checkbox
+
+v-model -> v-model:checked
+
+checkboxGroup
+
+v-model -> v-model:value

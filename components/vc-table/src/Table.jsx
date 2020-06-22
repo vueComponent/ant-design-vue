@@ -203,7 +203,7 @@ export default {
     });
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.resizeEvent) {
       this.resizeEvent.remove();
     }

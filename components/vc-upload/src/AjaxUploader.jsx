@@ -45,7 +45,7 @@ const AjaxUploader = {
   mounted() {
     this._isMounted = true;
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this._isMounted = false;
     this.abort();
   },

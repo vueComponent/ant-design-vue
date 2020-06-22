@@ -1,11 +1,10 @@
 import PropTypes from '../_util/vue-types';
-import { getComponentFromProp, getListeners } from '../_util/props-util';
-
-// import { menuAllProps } from './util'
+import { getComponent, getSlot } from '../_util/props-util';
+import { menuAllProps } from './util';
 
 const MenuItemGroup = {
   name: 'MenuItemGroup',
-
+  inheritAttrs: false,
   props: {
     renderMenuItem: PropTypes.func,
     index: PropTypes.number,
@@ -23,22 +22,20 @@ const MenuItemGroup = {
     },
   },
   render() {
-    const props = { ...this.$props };
-    const { rootPrefixCls, title } = props;
+    const props = { ...this.$props, ...this.$attrs };
+    const { class: cls = '', rootPrefixCls, title } = props;
     const titleClassName = `${rootPrefixCls}-item-group-title`;
     const listClassName = `${rootPrefixCls}-item-group-list`;
-    // menuAllProps.props.forEach(key => delete props[key])
-    const listeners = { ...getListeners(this) };
-    delete listeners.click;
-
+    menuAllProps.forEach(key => delete props[key]);
+    // Set onClick to null, to ignore propagated onClick event
+    delete props.onClick;
+    const children = getSlot(this);
     return (
-      <li {...{ on: listeners, class: `${rootPrefixCls}-item-group` }}>
+      <li {...props} class={`${cls} ${rootPrefixCls}-item-group`}>
         <div class={titleClassName} title={typeof title === 'string' ? title : undefined}>
-          {getComponentFromProp(this, 'title')}
+          {getComponent(this, 'title')}
         </div>
-        <ul class={listClassName}>
-          {this.$slots.default && this.$slots.default.map(this.renderInnerMenuItem)}
-        </ul>
+        <ul class={listClassName}>{children && children.map(this.renderInnerMenuItem)}</ul>
       </li>
     );
   },

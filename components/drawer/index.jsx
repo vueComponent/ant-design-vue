@@ -85,7 +85,7 @@ const Drawer = {
       this.preVisible = this.visible;
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     // unmount drawer in child, clear push.
     if (this.parentDrawer) {
       this.parentDrawer.pull();

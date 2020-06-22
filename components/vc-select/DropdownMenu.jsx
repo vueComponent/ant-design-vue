@@ -63,7 +63,7 @@ export default {
     this.lastInputValue = props.inputValue;
     this.prevVisible = this.visible;
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.rafInstance) {
       raf.cancel(this.rafInstance);
     }

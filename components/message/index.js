@@ -63,13 +63,13 @@ function notice(args) {
         key: target,
         duration,
         style: {},
-        content: h => {
+        content: () => {
           return (
             <div
               class={`${prefixCls}-custom-content${args.type ? ` ${prefixCls}-${args.type}` : ''}`}
             >
-              {args.icon ? typeof args.icon === 'function' ? args.icon(h) : args.icon : <Icon />}
-              <span>{typeof args.content === 'function' ? args.content(h) : args.content}</span>
+              {args.icon ? typeof args.icon === 'function' ? args.icon() : args.icon : <Icon />}
+              <span>{typeof args.content === 'function' ? args.content() : args.content}</span>
             </div>
           );
         },

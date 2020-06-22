@@ -1,22 +1,13 @@
-import PropTypes from '../../_util/vue-types';
+import { nextTick } from 'vue';
 import classNames from 'classnames';
-import {
-  getOptionProps,
-  hasProp,
-  initDefaultProps,
-  getAttrs,
-  getListeners,
-} from '../../_util/props-util';
+import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
+import { getOptionProps, hasProp, initDefaultProps } from '../../_util/props-util';
 
 export default {
   name: 'Checkbox',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  model: {
-    prop: 'checked',
-    event: 'change',
-  },
   props: initDefaultProps(
     {
       prefixCls: PropTypes.string,
@@ -53,7 +44,7 @@ export default {
     },
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (this.autoFocus) {
         this.$refs.input && this.$refs.input.focus();
       }
@@ -78,7 +69,7 @@ export default {
       }
       this.$forceUpdate(); // change前，维持现有状态
       e.shiftKey = this.eventShiftKey;
-      this.__emit('change', {
+      const eventObj = {
         target: {
           ...props,
           checked: e.target.checked,
@@ -90,11 +81,13 @@ export default {
           e.preventDefault();
         },
         nativeEvent: e,
-      });
+      };
+      this.$emit('update:checked', eventObj);
+      this.$emit('change', eventObj);
       this.eventShiftKey = false;
     },
     onClick(e) {
-      this.__emit('click', e);
+      this.$emit('click', e);
       // onChange没能获取到shiftKey，使用onClick hack
       this.eventShiftKey = e.shiftKey;
     },
@@ -110,11 +103,13 @@ export default {
       readOnly,
       tabIndex,
       autoFocus,
+      onFocus,
+      onBlur,
       value,
       ...others
     } = getOptionProps(this);
-    const attrs = getAttrs(this);
-    const globalProps = Object.keys({ ...others, ...attrs }).reduce((prev, key) => {
+    const { class: className } = this.$attrs;
+    const globalProps = Object.keys({ ...others, ...this.$attrs }).reduce((prev, key) => {
       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
         prev[key] = others[key];
       }
@@ -122,34 +117,29 @@ export default {
     }, {});
 
     const { sChecked } = this;
-    const classString = classNames(prefixCls, {
+    const classString = classNames(prefixCls, className, {
       [`${prefixCls}-checked`]: sChecked,
       [`${prefixCls}-disabled`]: disabled,
     });
+    const inputProps = {
+      name,
+      id,
+      type,
+      readOnly,
+      disabled,
+      tabIndex,
+      class: `${prefixCls}-input`,
+      checked: !!sChecked,
+      autoFocus,
+      value,
+      ...globalProps,
+      onChange: this.handleChange,
+      onClick: this.onClick,
+    };
 
     return (
       <span class={classString}>
-        <input
-          name={name}
-          id={id}
-          type={type}
-          readOnly={readOnly}
-          disabled={disabled}
-          tabIndex={tabIndex}
-          class={`${prefixCls}-input`}
-          checked={!!sChecked}
-          autoFocus={autoFocus}
-          ref="input"
-          value={value}
-          {...{
-            attrs: globalProps,
-            on: {
-              ...getListeners(this),
-              change: this.handleChange,
-              click: this.onClick,
-            },
-          }}
-        />
+        <input ref="input" {...inputProps} />
         <span class={`${prefixCls}-inner`} />
       </span>
     );

@@ -12,7 +12,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.vue$/,
+        test: /\.(vue|md)$/,
         loader: 'vue-loader',
       },
       {
@@ -37,7 +37,8 @@ module.exports = {
             ],
           ],
           plugins: [
-            ['@ant-design-vue/babel-plugin-jsx', { transformOn: true, compatibleProps: true }],
+            ['@ant-design-vue/babel-plugin-jsx', { transformOn: true }],
+            '@babel/plugin-proposal-optional-chaining',
             '@babel/plugin-transform-object-assign',
             '@babel/plugin-proposal-object-rest-spread',
             '@babel/plugin-proposal-export-default-from',
@@ -82,11 +83,9 @@ module.exports = {
       'ant-design-vue': path.join(__dirname, './components'),
       // vue$: 'vue/dist/vue.esm.js',
     },
-    extensions: ['.js', '.jsx', '.vue'],
+    extensions: ['.js', '.jsx', '.vue', '.md'],
   },
   devServer: {
-    host: 'localhost',
-    port: 3002,
     historyApiFallback: {
       rewrites: [{ from: /./, to: '/index.html' }],
     },

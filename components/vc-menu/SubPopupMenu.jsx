@@ -1,19 +1,18 @@
-import omit from 'omit.js';
+import { Comment } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { connect } from '../_util/store';
 import BaseMixin from '../_util/BaseMixin';
 import KeyCode from '../_util/KeyCode';
 import classNames from 'classnames';
-import { getKeyFromChildrenIndex, loopMenuItem, noop, isMobileDevice } from './util';
+import { getKeyFromChildrenIndex, loopMenuItem, noop, isMobileDevice, menuAllProps } from './util';
 import DOMWrap from './DOMWrap';
 import { cloneElement } from '../_util/vnode';
 import {
   initDefaultProps,
   getOptionProps,
+  getComponent,
+  splitAttrs,
   getPropsData,
-  getEvents,
-  getComponentFromProp,
-  getListeners,
 } from '../_util/props-util';
 
 function allDisabled(arr) {
@@ -52,7 +51,7 @@ export function getActiveKey(props, originalActiveKey) {
   if (activeKey !== undefined && activeKey !== null) {
     let found;
     loopMenuItem(children, (c, i) => {
-      const propsData = c.componentOptions.propsData || {};
+      const propsData = getPropsData(c);
       if (c && !propsData.disabled && activeKey === getKeyFromChildrenIndex(c, eventKey, i)) {
         found = true;
       }
@@ -64,7 +63,7 @@ export function getActiveKey(props, originalActiveKey) {
   activeKey = null;
   if (defaultActiveFirst) {
     loopMenuItem(children, (c, i) => {
-      const propsData = c.componentOptions.propsData || {};
+      const propsData = getPropsData(c);
       const noActiveKey = activeKey === null || activeKey === undefined;
       if (noActiveKey && c && !propsData.disabled) {
         activeKey = getKeyFromChildrenIndex(c, eventKey, i);
@@ -77,6 +76,7 @@ export function getActiveKey(props, originalActiveKey) {
 
 const SubPopupMenu = {
   name: 'SubPopupMenu',
+  inheritAttrs: false,
   props: initDefaultProps(
     {
       // onSelect: PropTypes.func,
@@ -118,7 +118,6 @@ const SubPopupMenu = {
       expandIcon: PropTypes.any,
       overflowedIndicator: PropTypes.any,
       children: PropTypes.any.def([]),
-      __propsSymbol__: PropTypes.any, // mock componentWillReceiveProps
     },
     {
       prefixCls: 'rc-menu',
@@ -271,85 +270,57 @@ const SubPopupMenu = {
       return null;
     },
     getIcon(instance, name) {
-      if (instance.$createElement) {
-        const temp = instance[name];
-        if (temp !== undefined) {
-          return temp;
-        }
-        return instance.$slots[name] || instance.$scopedSlots[name];
-      } else {
-        const temp = getPropsData(instance)[name];
-        if (temp !== undefined) {
-          return temp;
-        }
-        const slotsProp = [];
-        const componentOptions = instance.componentOptions || {};
-        (componentOptions.children || []).forEach(child => {
-          if (child.data && child.data.slot === name) {
-            if (child.tag === 'template') {
-              slotsProp.push(child.children);
-            } else {
-              slotsProp.push(child);
-            }
-          }
-        });
-        return slotsProp.length ? slotsProp : undefined;
-      }
+      return getComponent(instance, name);
     },
     renderCommonMenuItem(child, i, extraProps) {
-      if (child.tag === undefined) {
+      if (child.type === Comment) {
         return child;
       }
       const state = this.$props.store.getState();
       const props = this.$props;
       const key = getKeyFromChildrenIndex(child, props.eventKey, i);
-      const childProps = child.componentOptions.propsData || {};
+      const childProps = child.props || {}; // child.props 包含事件
 
       const isActive = key === state.activeKey[getEventKey(this.$props)];
       if (!childProps.disabled) {
         // manualRef的执行顺序不能保证，使用key映射ref在this.instanceArray中的位置
         this.instanceArrayKeyIndexMap[key] = Object.keys(this.instanceArrayKeyIndexMap).length;
       }
-      const childListeners = getEvents(child);
       const newChildProps = {
-        props: {
-          mode: childProps.mode || props.mode,
-          level: props.level,
-          inlineIndent: props.inlineIndent,
-          renderMenuItem: this.renderMenuItem,
-          rootPrefixCls: props.prefixCls,
-          index: i,
-          parentMenu: props.parentMenu,
-          // customized ref function, need to be invoked manually in child's componentDidMount
-          manualRef: childProps.disabled ? noop : saveRef.bind(this, key),
-          eventKey: key,
-          active: !childProps.disabled && isActive,
-          multiple: props.multiple,
-          openTransitionName: this.getOpenTransitionName(),
-          openAnimation: props.openAnimation,
-          subMenuOpenDelay: props.subMenuOpenDelay,
-          subMenuCloseDelay: props.subMenuCloseDelay,
-          forceSubMenuRender: props.forceSubMenuRender,
-          builtinPlacements: props.builtinPlacements,
-          itemIcon: this.getIcon(child, 'itemIcon') || this.getIcon(this, 'itemIcon'),
-          expandIcon: this.getIcon(child, 'expandIcon') || this.getIcon(this, 'expandIcon'),
-          ...extraProps,
+        mode: childProps.mode || props.mode,
+        level: props.level,
+        inlineIndent: props.inlineIndent,
+        renderMenuItem: this.renderMenuItem,
+        rootPrefixCls: props.prefixCls,
+        index: i,
+        parentMenu: props.parentMenu,
+        // customized ref function, need to be invoked manually in child's componentDidMount
+        manualRef: childProps.disabled ? noop : saveRef.bind(this, key),
+        eventKey: key,
+        active: !childProps.disabled && isActive,
+        multiple: props.multiple,
+        openTransitionName: this.getOpenTransitionName(),
+        openAnimation: props.openAnimation,
+        subMenuOpenDelay: props.subMenuOpenDelay,
+        subMenuCloseDelay: props.subMenuCloseDelay,
+        forceSubMenuRender: props.forceSubMenuRender,
+        builtinPlacements: props.builtinPlacements,
+        itemIcon: this.getIcon(child, 'itemIcon') || this.getIcon(this, 'itemIcon'),
+        expandIcon: this.getIcon(child, 'expandIcon') || this.getIcon(this, 'expandIcon'),
+        ...extraProps,
+        onClick: e => {
+          (childProps.onClick || noop)(e);
+          this.onClick(e);
         },
-        on: {
-          click: e => {
-            (childListeners.click || noop)(e);
-            this.onClick(e);
-          },
-          itemHover: this.onItemHover,
-          openChange: this.onOpenChange,
-          deselect: this.onDeselect,
-          // destroy: this.onDestroy,
-          select: this.onSelect,
-        },
+        onItemHover: this.onItemHover,
+        onOpenChange: this.onOpenChange,
+        onDeselect: this.onDeselect,
+        // destroy: this.onDestroy,
+        onSelect: this.onSelect,
       };
       // ref: https://github.com/ant-design/ant-design/issues/13943
       if (props.mode === 'inline' || isMobileDevice()) {
-        newChildProps.props.triggerSubMenuAction = 'click';
+        newChildProps.triggerSubMenuAction = 'click';
       }
       return cloneElement(child, newChildProps);
     },
@@ -370,36 +341,42 @@ const SubPopupMenu = {
     },
   },
   render() {
-    const { ...props } = this.$props;
+    const props = { ...this.$props };
+    const { onEvents, extraAttrs } = splitAttrs(this.$attrs);
     const { eventKey, prefixCls, visible, level, mode, theme } = props;
     this.instanceArray = [];
     this.instanceArrayKeyIndexMap = {};
-    const className = classNames(props.prefixCls, `${props.prefixCls}-${props.mode}`);
+    const className = classNames(
+      extraAttrs.class,
+      props.prefixCls,
+      `${props.prefixCls}-${props.mode}`,
+    );
+    menuAllProps.forEach(key => delete props[key]);
+    // Otherwise, the propagated click event will trigger another onClick
+    delete onEvents.onClick;
     const domWrapProps = {
-      props: {
-        tag: 'ul',
-        // hiddenClassName: `${prefixCls}-hidden`,
-        visible,
-        prefixCls,
-        level,
-        mode,
-        theme,
-        overflowedIndicator: getComponentFromProp(this, 'overflowedIndicator'),
-      },
-      attrs: {
-        role: props.role || 'menu',
-      },
+      ...props,
+      tag: 'ul',
+      // hiddenClassName: `${prefixCls}-hidden`,
+      visible,
+      prefixCls,
+      level,
+      mode,
+      theme,
+      overflowedIndicator: getComponent(this, 'overflowedIndicator'),
+      role: props.role || 'menu',
       class: className,
-      // Otherwise, the propagated click event will trigger another onClick
-      on: omit(getListeners(this), ['click']),
+      style: extraAttrs.style,
+      ...onEvents,
     };
     // if (props.id) {
     //   domProps.id = props.id
     // }
     if (props.focusable) {
-      domWrapProps.attrs.tabIndex = '0';
-      domWrapProps.on.keydown = this.onKeyDown;
+      domWrapProps.tabIndex = '0';
+      domWrapProps.onKeydown = this.onKeyDown;
     }
+    delete domWrapProps.children;
     return (
       // ESLint is not smart enough to know that the type of `children` was checked.
       /* eslint-disable */

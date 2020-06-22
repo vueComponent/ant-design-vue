@@ -31,7 +31,7 @@ export default {
     // so we listen on document here.
     this.onMouseUpListener = addEventListener(document, 'mouseup', this.handleMouseUp);
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.onMouseUpListener) {
       this.onMouseUpListener.remove();
     }

@@ -80,7 +80,7 @@ const Picker = {
     this.preSOpen = this.sOpen;
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     clearTimeout(this.focusTimeout);
   },
   methods: {

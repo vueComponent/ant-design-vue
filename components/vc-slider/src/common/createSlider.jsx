@@ -81,7 +81,7 @@ export default function createSlider(Component) {
         }
       });
     },
-    beforeDestroy() {
+    beforeUnmount() {
       this.$nextTick(() => {
         // if (super.componentWillUnmount) super.componentWillUnmount()
         this.removeDocumentEvents();

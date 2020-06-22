@@ -152,7 +152,7 @@ export default {
       this.updateInk();
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.scrollEvent) {
       this.scrollEvent.remove();
     }

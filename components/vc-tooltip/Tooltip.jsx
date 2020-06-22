@@ -2,9 +2,11 @@ import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
 import { placements } from './placements';
 import Content from './Content';
-import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
+import { hasProp, getComponent, getOptionProps, getSlot } from '../_util/props-util';
 function noop() {}
 export default {
+  name: 'Tooltip',
+  inheritAttrs: false,
   props: {
     trigger: PropTypes.any.def(['hover']),
     defaultVisible: PropTypes.bool,
@@ -91,12 +93,8 @@ export default {
       onPopupVisibleChange: $attrs.onVisibleChange || noop,
       onPopupAlign: $attrs.onPopupAlign || noop,
       ref: 'trigger',
+      popup: this.getPopupElement(),
     };
-    return (
-      <Trigger {...triggerProps}>
-        <template slot="popup">{this.getPopupElement()}</template>
-        {this.$slots.default && this.$slots.default()}
-      </Trigger>
-    );
+    return <Trigger {...triggerProps}>{getSlot(this)[0]}</Trigger>;
   },
 };

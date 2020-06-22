@@ -1,33 +1,16 @@
 import animate from './css-animation';
-const noop = () => {};
 const getTransitionProps = (transitionName, opt = {}) => {
-  const { beforeEnter, enter, afterEnter, leave, afterLeave, appear = true, tag, nativeOn } = opt;
   const transitionProps = {
-    props: {
-      appear,
-      css: false,
+    appear: true,
+    css: false,
+    onEnter: (el, done) => {
+      animate(el, `${transitionName}-enter`, done);
     },
-    on: {
-      beforeEnter: beforeEnter || noop,
-      enter:
-        enter ||
-        ((el, done) => {
-          animate(el, `${transitionName}-enter`, done);
-        }),
-      afterEnter: afterEnter || noop,
-      leave:
-        leave ||
-        ((el, done) => {
-          animate(el, `${transitionName}-leave`, done);
-        }),
-      afterLeave: afterLeave || noop,
+    onLeave: (el, done) => {
+      animate(el, `${transitionName}-leave`, done);
     },
-    nativeOn,
+    ...opt,
   };
-  // transition-group
-  if (tag) {
-    transitionProps.tag = tag;
-  }
   return transitionProps;
 };
 

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import MockDate from 'mockdate';
-import Vue from 'vue';
+import { nextTick } from 'vue';
 
 export function setMockDate(dateString = '2017-09-18T03:30:07.795') {
   MockDate.set(moment(dateString));
@@ -18,7 +18,7 @@ export function asyncExpect(fn, timeout) {
         resolve();
       }, timeout);
     } else {
-      Vue.nextTick(() => {
+      nextTick(() => {
         fn();
         resolve();
       });

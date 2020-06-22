@@ -1,8 +1,8 @@
-import { inject } from 'vue';
+import { inject, Text } from 'vue';
 import Wave from '../_util/wave';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';
-import { filterEmpty } from '../_util/props-util';
+import { filterEmpty, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 // eslint-disable-next-line no-console
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
@@ -20,6 +20,7 @@ export default {
     };
   },
   data() {
+    this.children = [];
     return {
       sizeMap: {
         large: 'lg',
@@ -49,7 +50,7 @@ export default {
   updated() {
     this.fixTwoCNChar();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     if (this.delayTimeout) {
       clearTimeout(this.delayTimeout);
     }
@@ -66,7 +67,6 @@ export default {
         ghost,
         block,
         icon,
-        $slots,
         $attrs,
       } = this;
       const getPrefixCls = this.configProvider.getPrefixCls;
@@ -87,14 +87,13 @@ export default {
           break;
       }
       const iconType = sLoading ? 'loading' : icon;
-      const children = filterEmpty($slots.default());
       return {
         [$attrs.class]: $attrs.class,
         [`${prefixCls}`]: true,
         [`${prefixCls}-${type}`]: type,
         [`${prefixCls}-${shape}`]: shape,
         [`${prefixCls}-${sizeCls}`]: sizeCls,
-        [`${prefixCls}-icon-only`]: children.length === 0 && iconType,
+        [`${prefixCls}-icon-only`]: this.children.length === 0 && iconType,
         [`${prefixCls}-loading`]: sLoading,
         [`${prefixCls}-background-ghost`]: ghost || type === 'ghost',
         [`${prefixCls}-two-chinese-chars`]: hasTwoCNChar && autoInsertSpace,
@@ -125,8 +124,8 @@ export default {
     },
     insertSpace(child, needInserted) {
       const SPACE = needInserted ? ' ' : '';
-      if (typeof child.text === 'string') {
-        let text = child.text.trim();
+      if (child.type === Text) {
+        let text = child.children.trim();
         if (isTwoCNChar(text)) {
           text = text.split('').join(SPACE);
         }
@@ -135,15 +134,17 @@ export default {
       return child;
     },
     isNeedInserted() {
-      const { icon, $slots, type } = this;
-      const children = filterEmpty($slots.default());
-      return children && children.length === 1 && !icon && type !== 'link';
+      const { icon, type } = this;
+      return this.children.length === 1 && !icon && type !== 'link';
     },
   },
   render() {
-    this.icon = this.$slots.icon && this.$slots.icon();
+    this.icon = getSlot(this, 'icon');
+    const { type, htmlType, icon, disabled, handleClick, sLoading, $attrs } = this;
+    const children = filterEmpty(getSlot(this));
+    this.children = children;
     const classes = this.getClasses();
-    const { type, htmlType, icon, disabled, handleClick, sLoading, $slots, $attrs } = this;
+
     const buttonProps = {
       ...$attrs,
       disabled,
@@ -151,7 +152,7 @@ export default {
       onClick: handleClick,
     };
     const iconNode = sLoading ? <LoadingOutlined /> : icon;
-    const children = $slots.default();
+
     const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
     const kids = children.map(child =>
       this.insertSpace(child, this.isNeedInserted() && autoInsertSpace),

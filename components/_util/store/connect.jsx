@@ -1,8 +1,7 @@
 import shallowEqual from 'shallowequal';
+import { inject, createVNode, watchEffect, toRaw } from 'vue';
 import omit from 'omit.js';
-import { getOptionProps, getListeners } from '../props-util';
-import PropTypes from '../vue-types';
-import proxyComponent from '../proxyComponent';
+import { getOptionProps } from '../props-util';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.name || 'Component';
@@ -14,37 +13,36 @@ export default function connect(mapStateToProps) {
   const finnalMapStateToProps = mapStateToProps || defaultMapStateToProps;
   return function wrapWithConnect(WrappedComponent) {
     const tempProps = omit(WrappedComponent.props || {}, ['store']);
-    const props = {
-      __propsSymbol__: PropTypes.any,
-    };
+    const props = {};
     Object.keys(tempProps).forEach(k => {
       props[k] = { ...tempProps[k], required: false };
     });
     const Connect = {
       name: `Connect_${getDisplayName(WrappedComponent)}`,
+      inheritAttrs: false,
       props,
-      inject: {
-        storeContext: { default: () => ({}) },
+      setup() {
+        return {
+          storeContext: inject('storeContext', {}),
+        };
       },
       data() {
         this.store = this.storeContext.store;
-        this.preProps = omit(getOptionProps(this), ['__propsSymbol__']);
-        return {
-          subscribed: finnalMapStateToProps(this.store.getState(), this.$props),
-        };
-      },
-      watch: {
-        __propsSymbol__() {
+        this.preProps = getOptionProps(this);
+        watchEffect(() => {
           if (mapStateToProps && mapStateToProps.length === 2) {
             this.subscribed = finnalMapStateToProps(this.store.getState(), this.$props);
           }
-        },
+        });
+        return {
+          subscribed: finnalMapStateToProps(this.store.getState(), this.$props),
+        };
       },
       mounted() {
         this.trySubscribe();
       },
 
-      beforeDestroy() {
+      beforeUnmount() {
         this.tryUnsubscribe();
       },
       methods: {
@@ -52,11 +50,11 @@ export default function connect(mapStateToProps) {
           if (!this.unsubscribe) {
             return;
           }
-          const props = omit(getOptionProps(this), ['__propsSymbol__']);
+          const props = getOptionProps(this);
           const nextSubscribed = finnalMapStateToProps(this.store.getState(), props);
           if (
             !shallowEqual(this.preProps, props) ||
-            !shallowEqual(this.subscribed, nextSubscribed)
+            !shallowEqual(toRaw(this.subscribed), nextSubscribed)
           ) {
             this.subscribed = nextSubscribed;
           }
@@ -80,27 +78,23 @@ export default function connect(mapStateToProps) {
         },
       },
       render() {
-        const { $slots = {}, $scopedSlots, subscribed, store } = this;
+        const { $slots = {}, subscribed, store, $attrs } = this;
         const props = getOptionProps(this);
-        this.preProps = { ...omit(props, ['__propsSymbol__']) };
+        this.preProps = { ...props };
         const wrapProps = {
-          props: {
-            ...props,
-            ...subscribed,
-            store,
-          },
-          on: getListeners(this),
-          scopedSlots: $scopedSlots,
+          ...props,
+          ...subscribed,
+          ...$attrs,
+          store,
+          ref: 'wrappedInstance',
         };
-        return (
-          <WrappedComponent {...wrapProps} ref="wrappedInstance">
-            {Object.keys($slots).map(name => {
-              return <template slot={name}>{$slots[name]}</template>;
-            })}
-          </WrappedComponent>
-        );
+        const slots = {};
+        for (let [key, value] of Object.entries($slots)) {
+          slots[key] = () => value();
+        }
+        return createVNode(WrappedComponent, wrapProps, slots);
       },
     };
-    return proxyComponent(Connect);
+    return Connect;
   };
 }

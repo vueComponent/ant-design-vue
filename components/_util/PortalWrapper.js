@@ -2,6 +2,7 @@ import PropTypes from './vue-types';
 import switchScrollingEffect from './switchScrollingEffect';
 import setStyle from './setStyle';
 import Portal from './Portal';
+import createRefHooks from './createRefHooks';
 
 let openCount = 0;
 const windowIsUndefined = !(
@@ -23,6 +24,7 @@ export default {
     visible: PropTypes.bool,
   },
   data() {
+    this._component = null;
     const { visible } = this.$props;
     openCount = visible ? openCount + 1 : openCount;
     return {};
@@ -46,7 +48,7 @@ export default {
       }
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const { visible } = this.$props;
     // 离开时不会 render， 导到离开时数值不变，改用 func 。。
     openCount = visible && openCount ? openCount - 1 : openCount;
@@ -140,14 +142,7 @@ export default {
         <Portal
           getContainer={this.getDomContainer}
           children={children(childProps)}
-          {...{
-            directives: [
-              {
-                name: 'ant-ref',
-                value: this.savePortal,
-              },
-            ],
-          }}
+          {...createRefHooks(this.savePortal)}
         ></Portal>
       );
     }

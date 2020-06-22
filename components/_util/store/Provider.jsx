@@ -1,15 +1,15 @@
+import { provide } from 'vue';
 import { storeShape } from './PropTypes';
+import { getSlot } from '../props-util';
 export default {
   name: 'StoreProvider',
   props: {
     store: storeShape.isRequired,
   },
-  provide() {
-    return {
-      storeContext: this.$props,
-    };
+  created() {
+    provide('storeContext', this.$props);
   },
   render() {
-    return this.$slots.default[0];
+    return getSlot(this);
   },
 };

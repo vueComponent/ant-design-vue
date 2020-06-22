@@ -1,30 +1,27 @@
 import isPlainObject from 'lodash/isPlainObject';
 import classNames from 'classnames';
+import { isVNode, Fragment, Comment, Text } from 'vue';
+import { camelize, hyphenate, isOn, resolvePropValue } from './util';
 // function getType(fn) {
 //   const match = fn && fn.toString().match(/^\s*function (\w+)/);
 //   return match ? match[1] : '';
 // }
 
-const onRE = /^on[^a-z]/;
-export const isOn = key => onRE.test(key);
-
 const splitAttrs = attrs => {
   const allAttrs = Object.keys(attrs);
-  const eventAttrs = [];
-  const extraAttrs = [];
+  const eventAttrs = {};
+  const onEvents = {};
+  const extraAttrs = {};
   for (let i = 0, l = allAttrs.length; i < l; i++) {
     const key = allAttrs[i];
     if (isOn(key)) {
-      eventAttrs.push({ [key[2].toLowerCase() + key.slice(3)]: attrs[key] });
+      eventAttrs[key[2].toLowerCase() + key.slice(3)] = attrs[key];
+      onEvents[key] = attrs[key];
     } else {
-      extraAttrs.push({ [key]: attrs[key] });
+      extraAttrs[key] = attrs[key];
     }
   }
-  return { events: eventAttrs, extraAttrs };
-};
-const camelizeRE = /-(\w)/g;
-const camelize = str => {
-  return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ''));
+  return { onEvents, events: eventAttrs, extraAttrs };
 };
 const parseStyleText = (cssText = '', camel) => {
   const res = {};
@@ -71,7 +68,11 @@ const getSlots = ele => {
   return { ...slots, ...getScopedSlots(ele) };
 };
 const getSlot = (self, name = 'default', options = {}) => {
-  return self.$slots[name] && self.$slots[name](options);
+  let res = self.$slots[name] && self.$slots[name](options);
+  while (res && res.length === 1 && (res[0].type === Fragment || Array.isArray(res[0]))) {
+    res = res[0].children || res[0];
+  }
+  return res && res.__v_isVNode ? [res] : res;
 };
 
 const getAllChildren = ele => {
@@ -92,18 +93,61 @@ const getSlotOptions = ele => {
   }
   return componentOptions ? componentOptions.Ctor.options || {} : {};
 };
+const findDOMNode = instance => {
+  let node = instance.$el;
+  while (!node.tagName) {
+    node = node.nextSibling;
+  }
+  return node;
+};
 const getOptionProps = instance => {
-  return (instance.$ && instance.$.vnode && instance.$.vnode.props) || instance.props || {};
+  const res = {};
+  if (instance.$ && instance.$.vnode) {
+    const props = instance.$.vnode.props || {};
+    Object.keys(instance.$props).forEach(k => {
+      const v = instance.$props[k];
+      const hyphenateKey = hyphenate(k);
+      if (v !== undefined || hyphenateKey in props) {
+        res[k] = v; // 直接取 $props[k]
+      }
+    });
+  } else if (isVNode(instance) && typeof instance.type === 'object') {
+    const originProps = instance.props || {};
+    const props = {};
+    Object.keys(originProps).forEach(key => {
+      props[camelize(key)] = originProps[key];
+    });
+    const options = instance.type.props;
+    Object.keys(options).forEach(k => {
+      const v = resolvePropValue(options, props, k, props[k]);
+      if (v !== undefined || k in props) {
+        res[k] = v;
+      }
+    });
+  }
+  return res;
 };
 const getComponent = (instance, prop, options = instance, execute = true) => {
-  const temp = instance[prop];
-  if (temp !== undefined) {
-    return typeof temp === 'function' && execute ? temp(options) : temp;
-  } else {
-    let com = instance.$slots[prop];
-    com = execute && com ? com(options) : com;
-    return Array.isArray(com) && com.length === 1 ? com[0] : com;
+  if (instance.$) {
+    const temp = instance[prop];
+    if (temp !== undefined) {
+      return typeof temp === 'function' && execute ? temp(options) : temp;
+    } else {
+      let com = instance.$slots[prop];
+      com = execute && com ? com(options) : com;
+      return Array.isArray(com) && com.length === 1 ? com[0] : com;
+    }
+  } else if (isVNode(instance)) {
+    const temp = instance.props && instance.props[prop];
+    if (temp !== undefined) {
+      return typeof temp === 'function' && execute ? temp(options) : temp;
+    } else if (instance.children && instance.children[name]) {
+      let com = instance.children[prop];
+      com = execute && com ? com(options) : com;
+      return Array.isArray(com) && com.length === 1 ? com[0] : com;
+    }
   }
+  return undefined;
 };
 const getComponentFromProp = (instance, prop, options = instance, execute = true) => {
   if (instance.$createElement) {
@@ -147,19 +191,31 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
 };
 
 const getAllProps = ele => {
-  let data = ele.data || {};
-  let componentOptions = ele.componentOptions || {};
-  if (ele.$vnode) {
-    data = ele.$vnode.data || {};
-    componentOptions = ele.$vnode.componentOptions || {};
+  let props = getOptionProps(ele);
+  if (ele.$) {
+    props = { ...props, ...this.$attrs };
+  } else {
+    props = { ...ele.props, ...props };
   }
-  return { ...data.props, ...data.attrs, ...componentOptions.propsData };
+  return props;
 };
 
-// 使用 getOptionProps 替换 ，待测试
-const getPropsData = ele => {
-  return getOptionProps(ele);
-  //return ele.props || {};
+const getPropsData = vnode => {
+  const res = {};
+  const originProps = vnode.props || {};
+  const props = {};
+  Object.keys(originProps).forEach(key => {
+    props[camelize(key)] = originProps[key];
+  });
+  const options = isPlainObject(vnode.type) ? vnode.type.props : {};
+  Object.keys(options).forEach(k => {
+    const v = resolvePropValue(options, props, k, props[k]);
+    if (k in props) {
+      // 仅包含 props，不包含默认值
+      res[k] = v;
+    }
+  });
+  return { ...props, ...res }; // 合并事件、未声明属性等
 };
 const getValueByProp = (ele, prop) => {
   return getPropsData(ele)[prop];
@@ -181,23 +237,16 @@ const getKey = ele => {
   return key;
 };
 
-export function getEvents(child) {
-  let events = {};
-  for (let key in child) {
-    if (/^on/.test(key)) {
-      key = key.toLowerCase();
-      events[key] = child[key];
-    }
+export function getEvents(ele, on = true) {
+  let props = {};
+  if (ele.$) {
+    props = { ...props, ...ele.$attrs };
+  } else {
+    props = { ...props, ...ele.props };
   }
-  return events;
-  // let events = {};
-  // if (child.componentOptions && child.componentOptions.listeners) {
-  //   events = child.componentOptions.listeners;
-  // } else if (child.data && child.data.on) {
-  //   events = child.data.on;
-  // }
-  // return { ...events };
+  return splitAttrs(props)[on ? 'onEvents' : 'events'];
 }
+
 export function getEvent(child, event) {
   return child.props && child.props[event];
 }
@@ -217,19 +266,9 @@ export function getListeners(context) {
   return (context.$vnode ? context.$vnode.componentOptions.listeners : context.$listeners) || {};
 }
 export function getClass(ele) {
-  let data = {};
-  if (ele.data) {
-    data = ele.data;
-  } else if (ele.$vnode && ele.$vnode.data) {
-    data = ele.$vnode.data;
-  }
-  const tempCls = data.class || {};
-  const staticClass = data.staticClass;
+  const props = (isVNode(ele) ? ele.props : ele.$attrs) || {};
+  let tempCls = props.class || {};
   let cls = {};
-  staticClass &&
-    staticClass.split(' ').forEach(c => {
-      cls[c.trim()] = true;
-    });
   if (typeof tempCls === 'string') {
     tempCls.split(' ').forEach(c => {
       cls[c.trim()] = true;
@@ -246,13 +285,8 @@ export function getClass(ele) {
   return cls;
 }
 export function getStyle(ele, camel) {
-  let data = {};
-  if (ele.data) {
-    data = ele.data;
-  } else if (ele.$vnode && ele.$vnode.data) {
-    data = ele.$vnode.data;
-  }
-  let style = data.style || data.staticStyle;
+  const props = (isVNode(ele) ? ele.props : ele.$attrs) || {};
+  let style = props.style || {};
   if (typeof style === 'string') {
     style = parseStyleText(style, camel);
   } else if (camel && style) {
@@ -268,8 +302,12 @@ export function getComponentName(opts) {
   return opts && (opts.Ctor.options.name || opts.tag);
 }
 
+export function isFragment(c) {
+  return c.length === 1 && c[0].type === Fragment;
+}
+
 export function isEmptyElement(c) {
-  return typeof c.type.toString() === 'Symbol(Text)' && c.children.trim() === '';
+  return c.type === Comment || (c.type === Text && c.children.trim() === '');
 }
 
 export function isStringElement(c) {
@@ -277,6 +315,9 @@ export function isStringElement(c) {
 }
 
 export function filterEmpty(children = []) {
+  if (isFragment(children)) {
+    return children[0].children.filter(c => !isEmptyElement(c));
+  }
   return children.filter(c => !isEmptyElement(c));
 }
 const initDefaultProps = (propTypes, defaultProps) => {
@@ -307,13 +348,7 @@ export function mergeProps() {
 }
 
 function isValidElement(element) {
-  return (
-    element &&
-    typeof element === 'object' &&
-    'componentOptions' in element &&
-    'context' in element &&
-    element.tag !== undefined
-  ); // remove text node
+  return element && element.__v_isVNode && typeof element.type !== 'symbol'; // remove text node
 }
 
 export {
@@ -336,5 +371,6 @@ export {
   getSlot,
   getAllProps,
   getAllChildren,
+  findDOMNode,
 };
 export default hasProp;

@@ -40,28 +40,28 @@ function getPlacementStyle(placement, top = defaultTop, bottom = defaultBottom) 
   switch (placement) {
     case 'topLeft':
       style = {
-        left: 0,
+        left: '0px',
         top,
         bottom: 'auto',
       };
       break;
     case 'topRight':
       style = {
-        right: 0,
+        right: '0px',
         top,
         bottom: 'auto',
       };
       break;
     case 'bottomLeft':
       style = {
-        left: 0,
+        left: '0px',
         top: 'auto',
         bottom,
       };
       break;
     default:
       style = {
-        right: 0,
+        right: '0px',
         top: 'auto',
         bottom,
       };
@@ -92,8 +92,8 @@ function getNotificationInstance(
       class: `${prefixCls}-${placement}`,
       style: getPlacementStyle(placement, top, bottom),
       getContainer,
-      closeIcon: h => {
-        const icon = typeof closeIcon === 'function' ? closeIcon(h) : closeIcon;
+      closeIcon: () => {
+        const icon = typeof closeIcon === 'function' ? closeIcon() : closeIcon;
         const closeIconToRender = (
           <span class={`${prefixCls}-close-x`}>
             {icon || <CloseOutlined class={`${prefixCls}-close-icon`} />}
@@ -124,12 +124,12 @@ function notice(args) {
 
   let iconNode = null;
   if (icon) {
-    iconNode = h => (
-      <span class={`${prefixCls}-icon`}>{typeof icon === 'function' ? icon(h) : icon}</span>
+    iconNode = () => (
+      <span class={`${prefixCls}-icon`}>{typeof icon === 'function' ? icon() : icon}</span>
     );
   } else if (type) {
     const Icon = typeToIcon[type];
-    iconNode = h => <Icon class={`${prefixCls}-icon ${prefixCls}-icon-${type}`} />; // eslint-disable-line
+    iconNode = () => <Icon class={`${prefixCls}-icon ${prefixCls}-icon-${type}`} />;
   }
   const { placement, top, bottom, getContainer, closeIcon } = args;
   getNotificationInstance(
@@ -143,20 +143,20 @@ function notice(args) {
     },
     notification => {
       notification.notice({
-        content: h => (
+        content: () => (
           <div class={iconNode ? `${prefixCls}-with-icon` : ''}>
             {iconNode && iconNode(h)}
             <div class={`${prefixCls}-message`}>
               {!description && iconNode ? (
                 <span class={`${prefixCls}-message-single-line-auto-margin`} />
               ) : null}
-              {typeof message === 'function' ? message(h) : message}
+              {typeof message === 'function' ? message() : message}
             </div>
             <div class={`${prefixCls}-description`}>
-              {typeof description === 'function' ? description(h) : description}
+              {typeof description === 'function' ? description() : description}
             </div>
             {btn ? (
-              <span class={`${prefixCls}-btn`}>{typeof btn === 'function' ? btn(h) : btn}</span>
+              <span class={`${prefixCls}-btn`}>{typeof btn === 'function' ? btn() : btn}</span>
             ) : null}
           </div>
         ),

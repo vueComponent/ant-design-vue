@@ -1,7 +1,7 @@
 import Dialog from './Dialog';
 import getDialogPropTypes from './IDialogPropTypes';
-import { getListeners } from '../_util/props-util';
 import Portal from '../_util/PortalWrapper';
+import { getSlot } from '../_util/props-util';
 const IDialogPropTypes = getDialogPropTypes();
 const DialogWrap = {
   inheritAttrs: false,
@@ -12,12 +12,11 @@ const DialogWrap = {
 
   render() {
     const { visible, getContainer, forceRender } = this.$props;
-    const dialogProps = {
-      props: this.$props,
-      attrs: this.$attrs,
+    let dialogProps = {
+      ...this.$props,
+      ...this.$attrs,
       ref: '_component',
       key: 'dialog',
-      on: getListeners(this),
     };
     // 渲染在当前 dom 里；
     if (getContainer === false) {
@@ -26,7 +25,7 @@ const DialogWrap = {
           {...dialogProps}
           getOpenCount={() => 2} // 不对 body 做任何操作。。
         >
-          {this.$slots.default}
+          {getSlot(this)}
         </Dialog>
       );
     }
@@ -36,8 +35,8 @@ const DialogWrap = {
         forceRender={forceRender}
         getContainer={getContainer}
         children={childProps => {
-          dialogProps.props = { ...dialogProps.props, ...childProps };
-          return <Dialog {...dialogProps}>{this.$slots.default}</Dialog>;
+          dialogProps = { ...dialogProps, ...childProps };
+          return <Dialog {...dialogProps}>{getSlot(this)}</Dialog>;
         }}
       />
     );

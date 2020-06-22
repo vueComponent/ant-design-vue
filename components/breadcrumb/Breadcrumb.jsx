@@ -6,7 +6,6 @@ import { ConfigConsumerProps } from '../config-provider';
 import BreadcrumbItem from './BreadcrumbItem';
 import Menu from '../menu';
 
-const MenuItem = Menu.Item;
 const Route = PropTypes.shape({
   path: PropTypes.string,
   breadcrumbName: PropTypes.string,
@@ -78,7 +77,7 @@ export default {
           overlay = (
             <Menu>
               {route.children.map(child => (
-                <MenuItem key={child.breadcrumbName || child.path}>
+                <Menu.Item key={child.breadcrumbName || child.path}>
                   {itemRender({
                     route: child,
                     params,
@@ -86,7 +85,7 @@ export default {
                     paths: this.addChildPath(paths, child.path, params),
                     h: this.$createElement,
                   })}
-                </MenuItem>
+                </Menu.Item>
               ))}
             </Menu>
           );

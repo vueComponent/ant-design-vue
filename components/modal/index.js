@@ -4,7 +4,6 @@ import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
-import Base from '../base';
 
 // export { ActionButtonProps } from './ActionButton'
 // export { ModalProps, ModalFuncProps } from './Modal'
@@ -12,9 +11,7 @@ import Base from '../base';
 const info = function(props) {
   const config = {
     type: 'info',
-    icon: h => {
-      return <InfoCircleOutlined />;
-    },
+    icon: <InfoCircleOutlined />,
     okCancel: false,
     ...props,
   };
@@ -24,9 +21,7 @@ const info = function(props) {
 const success = function(props) {
   const config = {
     type: 'success',
-    icon: h => {
-      return <CheckCircleOutlined />;
-    },
+    icon: <CheckCircleOutlined />,
     okCancel: false,
     ...props,
   };
@@ -36,9 +31,7 @@ const success = function(props) {
 const error = function(props) {
   const config = {
     type: 'error',
-    icon: h => {
-      return <CloseCircleOutlined />;
-    },
+    icon: <CloseCircleOutlined />,
     okCancel: false,
     ...props,
   };
@@ -48,9 +41,7 @@ const error = function(props) {
 const warning = function(props) {
   const config = {
     type: 'warning',
-    icon: h => {
-      return <ExclamationCircleOutlined />;
-    },
+    icon: <ExclamationCircleOutlined />,
     okCancel: false,
     ...props,
   };
@@ -83,9 +74,8 @@ Modal.destroyAll = function destroyAllFn() {
 };
 
 /* istanbul ignore next */
-Modal.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Modal.name, Modal);
+Modal.install = function(app) {
+  app.component(Modal.name, Modal);
 };
 
 export default Modal;

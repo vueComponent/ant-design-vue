@@ -121,7 +121,7 @@ export default {
       this.initialValue = cloneDeep(this.fieldValue);
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const { removeField } = this.FormContext;
     removeField && removeField(this);
   },

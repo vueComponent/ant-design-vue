@@ -1,6 +1,7 @@
 import PropTypes from '../_util/vue-types';
 
 export default {
+  name: 'Content',
   props: {
     prefixCls: PropTypes.string,
     overlay: PropTypes.any,

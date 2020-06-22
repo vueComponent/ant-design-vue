@@ -4,7 +4,7 @@ import BaseMixin from '../_util/BaseMixin';
 import scrollIntoView from 'dom-scroll-into-view';
 import { connect } from '../_util/store';
 import { noop, menuAllProps } from './util';
-import { getComponentFromProp, getListeners } from '../_util/props-util';
+import { getComponent, getSlot, findDOMNode } from '../_util/props-util';
 
 const props = {
   attribute: PropTypes.object,
@@ -17,13 +17,7 @@ const props = {
   index: PropTypes.number,
   inlineIndent: PropTypes.number.def(24),
   level: PropTypes.number.def(1),
-  mode: PropTypes.oneOf([
-    'horizontal',
-    'vertical',
-    'vertical-left',
-    'vertical-right',
-    'inline',
-  ]).def('vertical'),
+  mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']),
   parentMenu: PropTypes.object,
   multiple: PropTypes.bool,
   value: PropTypes.any,
@@ -35,7 +29,8 @@ const props = {
   // clearSubMenuTimers: PropTypes.func.def(noop),
 };
 const MenuItem = {
-  name: 'MenuItem',
+  name: 'AMenuItem',
+  inheritAttrs: false,
   props,
   mixins: [BaseMixin],
   isMenuItem: true,
@@ -48,7 +43,7 @@ const MenuItem = {
     this.$nextTick(() => {
       const { active, parentMenu, eventKey } = this.$props;
       if (!this.prevActive && active && (!parentMenu || !parentMenu[`scrolled-${eventKey}`])) {
-        scrollIntoView(this.$el, this.parentMenu.$el, {
+        scrollIntoView(this.$refs.node, findDOMNode(this.parentMenu), {
           onlyScrollIfNeeded: true,
         });
         parentMenu[`scrolled-${eventKey}`] = true;
@@ -59,7 +54,7 @@ const MenuItem = {
     });
     this.callRef();
   },
-  beforeDestroy() {
+  beforeUnmount() {
     const props = this.$props;
     this.__emit('destroy', props.eventKey);
   },
@@ -141,8 +136,10 @@ const MenuItem = {
   },
 
   render() {
-    const props = { ...this.$props };
+    const { class: cls, style, ...props } = { ...this.$props, ...this.$attrs };
+
     const className = {
+      [cls]: !!cls,
       [this.getPrefixCls()]: true,
       [this.getActiveClassName()]: !props.disabled && props.active,
       [this.getSelectedClassName()]: props.isSelected,
@@ -171,32 +168,27 @@ const MenuItem = {
     }
     // In case that onClick/onMouseLeave/onMouseEnter is passed down from owner
     const mouseEvent = {
-      click: props.disabled ? noop : this.onClick,
-      mouseleave: props.disabled ? noop : this.onMouseLeave,
-      mouseenter: props.disabled ? noop : this.onMouseEnter,
+      onClick: props.disabled ? noop : this.onClick,
+      onMouseleave: props.disabled ? noop : this.onMouseLeave,
+      onMouseenter: props.disabled ? noop : this.onMouseEnter,
     };
 
-    const style = {};
+    const styles = { ...(style || {}) };
     if (props.mode === 'inline') {
-      style.paddingLeft = `${props.inlineIndent * props.level}px`;
+      styles.paddingLeft = `${props.inlineIndent * props.level}px`;
     }
-    const listeners = { ...getListeners(this) };
-    menuAllProps.props.forEach(key => delete props[key]);
-    menuAllProps.on.forEach(key => delete listeners[key]);
+    menuAllProps.forEach(key => delete props[key]);
     const liProps = {
-      attrs: {
-        ...props,
-        ...attrs,
-      },
-      on: {
-        ...listeners,
-        ...mouseEvent,
-      },
+      ...props,
+      ...attrs,
+      ...mouseEvent,
+      ref: 'node',
     };
+    delete liProps.children;
     return (
-      <li {...liProps} style={style} class={className}>
-        {this.$slots.default}
-        {getComponentFromProp(this, 'itemIcon', props)}
+      <li {...liProps} style={styles} class={className}>
+        {getSlot(this)}
+        {getComponent(this, 'itemIcon', props)}
       </li>
     );
   },

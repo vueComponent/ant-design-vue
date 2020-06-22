@@ -1,13 +1,9 @@
+import { provide } from 'vue';
+import classNames from 'classnames';
 import omit from 'omit.js';
 import KeyCode from '../../_util/KeyCode';
 import BaseMixin from '../../_util/BaseMixin';
-import {
-  getSlots,
-  hasProp,
-  getOptionProps,
-  getListeners,
-  initDefaultProps,
-} from '../../_util/props-util';
+import { hasProp, getOptionProps, initDefaultProps } from '../../_util/props-util';
 import warning from 'warning';
 import {
   getBeforeSelectionText,
@@ -24,15 +20,9 @@ const Mentions = {
   name: 'Mentions',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  model: {
-    prop: 'value',
-    event: 'change',
-  },
   props: initDefaultProps(vcMentionsProps, defaultProps),
-  provide() {
-    return {
-      mentionsContext: this,
-    };
+  created() {
+    this.mentionsContext = provide('mentionsContext', this);
   },
   data() {
     const { value = '', defaultValue = '' } = this.$props;
@@ -184,7 +174,7 @@ const Mentions = {
         this.setState({ isFocus: false });
         this.stopMeasure();
         this.$emit('blur', event);
-      }, 0);
+      }, 100);
     },
     selectOption(option) {
       const { _value: value, measureLocation, measurePrefix } = this.$data;
@@ -215,8 +205,7 @@ const Mentions = {
       const { filterOption, children = [] } = this.$props;
       const list = (Array.isArray(children) ? children : [children])
         .map(item => {
-          const children = getSlots(item).default;
-          return { ...getOptionProps(item), children };
+          return { ...getOptionProps(item), children: item.children.default?.() };
         })
         .filter(option => {
           /** Return all result if `filterOption` is false. */
@@ -266,6 +255,8 @@ const Mentions = {
       ...restProps
     } = getOptionProps(this);
 
+    const { class: className, style, ...otherAttrs } = this.$attrs;
+
     const inputProps = omit(restProps, [
       'value',
       'defaultValue',
@@ -279,25 +270,21 @@ const Mentions = {
     const options = measuring ? this.getOptions() : [];
 
     return (
-      <div class={prefixCls}>
+      <div class={classNames(prefixCls, className)} style={style}>
         <textarea
           ref="textarea"
           {...{
-            directives: [{ name: 'ant-input' }],
-            attrs: { ...inputProps, ...this.$attrs },
-            domProps: {
-              value,
-            },
-            on: {
-              ...getListeners(this),
-              select: noop,
-              change: noop,
-              input: this.onChange,
-              keydown: this.onKeyDown,
-              keyup: this.onKeyUp,
-              blur: this.onInputBlur,
-            },
+            ...inputProps,
+            ...otherAttrs,
+            onChange: noop,
+            onSelect: noop,
           }}
+          value={value}
+          onInput={this.onChange}
+          onBlur={this.onInputBlur}
+          onKeyDown={this.onKeyDown}
+          onKeyUp={this.onKeyUp}
+          onFocus={this.onInputFocus}
         />
         {measuring && (
           <div ref="measure" class={`${prefixCls}-measure`}>

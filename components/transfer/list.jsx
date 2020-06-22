@@ -92,7 +92,7 @@ export default {
   //     }
   //   });
   // },
-  beforeDestroy() {
+  beforeUnmount() {
     clearTimeout(this.triggerScrollTimer);
     // if (this.scrollEvent) {
     //   this.scrollEvent.remove();

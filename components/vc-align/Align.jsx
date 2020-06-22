@@ -1,10 +1,11 @@
+import { nextTick } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { alignElement, alignPoint } from 'dom-align';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import { isWindow, buffer, isSamePoint, isSimilarValue, restoreFocus } from './util';
 import { cloneElement } from '../_util/vnode.js';
 import clonedeep from 'lodash/cloneDeep';
-import { getSlot, getListeners } from '../_util/props-util';
+import { getSlot, findDOMNode } from '../_util/props-util';
 
 function getElement(func) {
   if (typeof func !== 'function' || !func) return null;
@@ -30,7 +31,7 @@ export default {
     return {};
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       this.prevProps = { ...this.$props };
       const props = this.$props;
       // if parent ref not attached .... use document.getElementById
@@ -41,7 +42,7 @@ export default {
     });
   },
   updated() {
-    this.$nextTick(() => {
+    nextTick(() => {
       const prevProps = this.prevProps;
       const props = this.$props;
       let reAlign = false;
@@ -94,7 +95,7 @@ export default {
       this.prevProps = { ...this.$props, align: clonedeep(this.$props.align) };
     });
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.stopMonitorWindowResize();
   },
   methods: {
@@ -116,8 +117,7 @@ export default {
     forceAlign() {
       const { disabled, target, align } = this.$props;
       if (!disabled && target) {
-        const source = this.$el;
-        const listeners = getListeners(this);
+        const source = findDOMNode(this);
         let result;
         const element = getElement(target);
         const point = getPoint(target);
@@ -133,7 +133,7 @@ export default {
         }
         restoreFocus(activeElement, source);
         this.aligned = true;
-        listeners.align && listeners.align(source, result);
+        this.$attrs.onAlign && this.$attrs.onAlign(source, result);
       }
     },
   },
@@ -142,7 +142,7 @@ export default {
     const { childrenProps } = this.$props;
     const child = getSlot(this);
     if (child && childrenProps) {
-      return cloneElement(child[0], { props: childrenProps });
+      return cloneElement(child[0], childrenProps);
     }
     return child && child[0];
   },

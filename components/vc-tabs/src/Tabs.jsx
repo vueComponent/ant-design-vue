@@ -80,7 +80,7 @@ export default {
       }
     },
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.destroy = true;
     raf.cancel(this.sentinelId);
   },

@@ -65,7 +65,7 @@ export default {
       });
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.clearTimeout();
   },
   methods: {

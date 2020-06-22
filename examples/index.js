@@ -18,6 +18,7 @@ import PageHeader from 'ant-design-vue/page-header';
 import Skeleton from 'ant-design-vue/skeleton';
 import Empty from 'ant-design-vue/empty';
 import Timeline from 'ant-design-vue/timeline';
+import Statistic from 'ant-design-vue/statistic';
 import Checkbox from 'ant-design-vue/checkbox';
 import Col from 'ant-design-vue/col';
 import Row from 'ant-design-vue/row';
@@ -34,6 +35,7 @@ import Menu from 'ant-design-vue/menu';
 import Mentions from 'ant-design-vue/mentions';
 import Dropdown from 'ant-design-vue/dropdown';
 import Steps from 'ant-design-vue/steps';
+
 import 'ant-design-vue/style.js';
 
 const basic = {
@@ -68,6 +70,7 @@ app
   .use(Empty)
   .use(Checkbox)
   .use(Timeline)
+  .use(Statistic)
   .use(Col)
   .use(Row)
   .use(Tooltip)

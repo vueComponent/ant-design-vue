@@ -134,7 +134,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss": "^7.0.6",
     "postcss-loader": "^3.0.0",
-    "prettier": "^1.18.2",
+    "prettier": "^2.0.0",
     "pretty-quick": "^2.0.0",
     "querystring": "^0.2.0",
     "raw-loader": "^4.0.0",

@@ -1,6 +1,6 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { hasProp, getComponent } from '../_util/props-util';
+import { hasProp, getComponent, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import DropDown from '../dropdown/dropdown';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
@@ -40,11 +40,11 @@ export default {
     },
   },
   render() {
-    const { prefixCls: customizePrefixCls, $slots } = this;
+    const { prefixCls: customizePrefixCls } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
     const separator = getComponent(this, 'separator');
-    const children = $slots.default && $slots.default();
+    const children = getSlot(this);
     let link;
     if (hasProp(this, 'href')) {
       link = <a class={`${prefixCls}-link`}>{children}</a>;

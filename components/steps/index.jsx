@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getOptionProps, getComponent } from '../_util/props-util';
+import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import VcSteps from '../vc-steps';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -52,7 +52,7 @@ const Steps = {
       progressDot,
       ...props,
     };
-    return <VcSteps {...stepsProps}>{this.$slots.default && this.$slots.default()}</VcSteps>;
+    return <VcSteps {...stepsProps}>{getSlot(this)}</VcSteps>;
   },
 };
 

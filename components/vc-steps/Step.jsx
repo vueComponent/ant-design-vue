@@ -33,12 +33,7 @@ export default {
   },
   methods: {
     onItemClick(...args) {
-      const { onClick } = this.$props;
-
-      if (onClick) {
-        this.$emit('click', ...args);
-      }
-
+      this.$emit('click', ...args);
       this.$emit('stepClick', this.stepIndex);
     },
     renderIconNode() {

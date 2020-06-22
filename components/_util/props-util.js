@@ -215,7 +215,7 @@ const getPropsData = vnode => {
       res[k] = v;
     }
   });
-  return res;
+  return { ...props, ...res }; // 合并事件、未声明属性等
 };
 const getValueByProp = (ele, prop) => {
   return getPropsData(ele)[prop];

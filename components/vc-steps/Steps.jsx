@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import debounce from 'lodash/debounce';
 import isFlexSupported from '../_util/isFlexSupported';
-import { filterEmpty } from '../_util/props-util';
+import { filterEmpty, getSlot, getPropsData } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 
 export default {
@@ -98,14 +98,13 @@ export default {
       status,
       size,
       current,
-      $slots,
       progressDot,
       initial,
       icons,
     } = this;
     const isNav = type === 'navigation';
     const { lastStepOffsetWidth, flexSupported } = this;
-    const filteredChildren = filterEmpty($slots.default && $slots.default());
+    const filteredChildren = filterEmpty(getSlot(this));
     const lastIndex = filteredChildren.length - 1;
     const adjustedlabelPlacement = progressDot ? 'vertical' : labelPlacement;
     const classString = {
@@ -124,7 +123,7 @@ export default {
     return (
       <div {...stepsProps}>
         {filteredChildren.map((child, index) => {
-          const childProps = child.props || {};
+          const childProps = getPropsData(child);
           const stepNumber = initial + index;
           const stepProps = {
             stepNumber: `${stepNumber + 1}`,

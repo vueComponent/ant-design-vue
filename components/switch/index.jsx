@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PropTypes from '../_util/vue-types';
-import hasProp, { getOptionProps, getComponent } from '../_util/props-util';
+import hasProp, { getOptionProps, getComponent, getPropsData } from '../_util/props-util';
 import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
 import { ConfigConsumerProps } from '../config-provider';
@@ -11,6 +11,7 @@ import createRefHooks from '../_util/createRefHooks';
 const Switch = {
   name: 'ASwitch',
   __ANT_SWITCH: true,
+  inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
     // size=default and size=large are the same
@@ -42,7 +43,7 @@ const Switch = {
   },
   created() {
     warning(
-      hasProp(this, 'checked') || !hasProp(this, 'value'),
+      hasProp(this, 'checked') || !('value' in this.$attrs),
       'Switch',
       '`value` is not validate prop, do you mean `checked`?',
     );
@@ -54,8 +55,10 @@ const Switch = {
     );
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('switch', customizePrefixCls);
+    const { $attrs } = this;
 
     const classes = {
+      [$attrs.class]: $attrs.class,
       [`${prefixCls}-small`]: size === 'small',
       [`${prefixCls}-loading`]: loading,
     };
@@ -67,7 +70,7 @@ const Switch = {
       checkedChildren: getComponent(this, 'checkedChildren'),
       unCheckedChildren: getComponent(this, 'unCheckedChildren'),
       disabled: disabled || loading,
-      ...this.$attrs,
+      ...$attrs,
       class: classes,
       ...createRefHooks(this.saveRef),
     };

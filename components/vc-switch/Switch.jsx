@@ -8,6 +8,7 @@ import createRefHooks from '../_util/createRefHooks';
 export default {
   name: 'VcSwitch',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     ...switchPropTypes,
     prefixCls: switchPropTypes.prefixCls.def('rc-switch'),
@@ -88,13 +89,16 @@ export default {
       ...restProps
     } = getOptionProps(this);
     const checked = this.stateChecked;
+    const { $attrs } = this;
     const switchClassName = {
+      [$attrs.class]: $attrs.class,
       [prefixCls]: true,
       [`${prefixCls}-checked`]: checked,
       [`${prefixCls}-disabled`]: disabled,
     };
     const spanProps = {
       ...restProps,
+      ...$attrs,
       onKeydown: this.handleKeyDown,
       onClick: this.handleClick,
       onMouseup: this.handleMouseUp,

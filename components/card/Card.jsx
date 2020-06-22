@@ -1,14 +1,10 @@
+import { inject } from 'vue';
 import omit from 'omit.js';
 import Tabs from '../tabs';
 import Row from '../row';
 import Col from '../col';
 import PropTypes from '../_util/vue-types';
-import {
-  getComponentFromProp,
-  getSlotOptions,
-  filterEmpty,
-  getListeners,
-} from '../_util/props-util';
+import { getComponent, getSlotOptions, filterEmpty, getListeners } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -33,8 +29,10 @@ export default {
     activeTabKey: PropTypes.string,
     defaultActiveTabKey: PropTypes.string,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     return {
@@ -82,7 +80,7 @@ export default {
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
     const { $slots, $scopedSlots } = this;
-    const tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent');
+    const tabBarExtraContent = getComponent(this, 'tabBarExtraContent');
     const classString = {
       [`${prefixCls}`]: true,
       [`${prefixCls}-loading`]: loading,
@@ -170,8 +168,8 @@ export default {
           })}
         </Tabs>
       ) : null;
-    const titleDom = getComponentFromProp(this, 'title');
-    const extraDom = getComponentFromProp(this, 'extra');
+    const titleDom = getComponent(this, 'title');
+    const extraDom = getComponent(this, 'extra');
     if (titleDom || extraDom || tabs) {
       head = (
         <div class={`${prefixCls}-head`} style={headStyle}>
@@ -185,7 +183,7 @@ export default {
     }
 
     const children = $slots.default;
-    const cover = getComponentFromProp(this, 'cover');
+    const cover = getComponent(this, 'cover');
     const coverDom = cover ? <div class={`${prefixCls}-cover`}>{cover}</div> : null;
     const body = (
       <div class={`${prefixCls}-body`} style={bodyStyle}>

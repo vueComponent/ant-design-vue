@@ -1,5 +1,6 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponentFromProp, getListeners } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export default {
@@ -9,8 +10,10 @@ export default {
     title: PropTypes.any,
     description: PropTypes.any,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   render() {
     const { prefixCls: customizePrefixCls } = this.$props;
@@ -22,9 +25,9 @@ export default {
       [`${prefixCls}-meta`]: true,
     };
 
-    const avatar = getComponentFromProp(this, 'avatar');
-    const title = getComponentFromProp(this, 'title');
-    const description = getComponentFromProp(this, 'description');
+    const avatar = getComponent(this, 'avatar');
+    const title = getComponent(this, 'title');
+    const description = getComponent(this, 'description');
 
     const avatarDom = avatar ? <div class={`${prefixCls}-meta-avatar`}>{avatar}</div> : null;
     const titleDom = title ? <div class={`${prefixCls}-meta-title`}>{title}</div> : null;
@@ -39,7 +42,7 @@ export default {
         </div>
       ) : null;
     return (
-      <div {...{ on: getListeners(this) }} class={classString}>
+      <div class={classString}>
         {avatarDom}
         {MetaDetail}
       </div>

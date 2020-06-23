@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import PlusOutlined from '@ant-design/icons-vue/PlusOutlined';
 import VcTabs, { TabPane } from '../vc-tabs/src';
@@ -5,10 +6,12 @@ import TabContent from '../vc-tabs/src/TabContent';
 import { isFlexSupported } from '../_util/styleChecker';
 import PropTypes from '../_util/vue-types';
 import {
-  getComponentFromProp,
+  getComponent,
   getOptionProps,
   filterEmpty,
-  getListeners,
+  findDOMNode,
+  getPropsData,
+  getSlot,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import isValid from '../_util/isValid';
@@ -37,12 +40,14 @@ export default {
     tabBarGutter: PropTypes.number,
     renderTabBar: PropTypes.func,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   mounted() {
     const NO_FLEX = ' no-flex';
-    const tabNode = this.$el;
+    const tabNode = findDOMNode(this);
     if (tabNode && !isFlexSupported && tabNode.className.indexOf(NO_FLEX) === -1) {
       tabNode.className += NO_FLEX;
     }
@@ -55,6 +60,7 @@ export default {
       }
     },
     handleChange(activeKey) {
+      this.$emit('update:activeKey', activeKey);
       this.$emit('change', activeKey);
     },
     createNewTab(targetKey) {
@@ -82,11 +88,12 @@ export default {
       hideAdd,
       renderTabBar,
     } = props;
+    const { class: className, style, ...restProps } = this.$attrs;
     const getPrefixCls = this.configProvider().getPrefixCls;
     const prefixCls = getPrefixCls('tabs', customizePrefixCls);
-    const children = filterEmpty(this.$slots.default);
+    const children = filterEmpty(getSlot(this));
 
-    let tabBarExtraContent = getComponentFromProp(this, 'tabBarExtraContent');
+    let tabBarExtraContent = getComponent(this, 'tabBarExtraContent');
     let tabPaneAnimated = typeof animated === 'object' ? animated.tabPane : animated;
 
     // card tabs should not have animation
@@ -94,6 +101,7 @@ export default {
       tabPaneAnimated = 'animated' in props ? tabPaneAnimated : false;
     }
     const cls = {
+      [className]: className,
       [`${prefixCls}-vertical`]: tabPosition === 'left' || tabPosition === 'right',
       [`${prefixCls}-${size}`]: !!size,
       [`${prefixCls}-card`]: type.indexOf('card') >= 0,
@@ -105,7 +113,7 @@ export default {
     if (type === 'editable-card') {
       childrenWithClose = [];
       children.forEach((child, index) => {
-        const props = getOptionProps(child);
+        const props = getPropsData(child);
         let closable = props.closable;
         closable = typeof closable === 'undefined' ? true : closable;
         const closeIcon = closable ? (
@@ -116,14 +124,12 @@ export default {
         ) : null;
         childrenWithClose.push(
           cloneElement(child, {
-            props: {
-              tab: (
-                <div class={closable ? undefined : `${prefixCls}-tab-unclosable`}>
-                  {getComponentFromProp(child, 'tab')}
-                  {closeIcon}
-                </div>
-              ),
-            },
+            tab: (
+              <div class={closable ? undefined : `${prefixCls}-tab-unclosable`}>
+                {getComponent(child, 'tab')}
+                {closeIcon}
+              </div>
+            ),
             key: child.key || index,
           }),
         );
@@ -143,40 +149,33 @@ export default {
       <div class={`${prefixCls}-extra-content`}>{tabBarExtraContent}</div>
     ) : null;
 
-    const renderTabBarSlot = renderTabBar || this.$scopedSlots.renderTabBar;
-    const listeners = getListeners(this);
+    const renderTabBarSlot = renderTabBar || this.$slots.renderTabBar;
     const tabBarProps = {
-      props: {
-        ...this.$props,
-        prefixCls,
-        tabBarExtraContent,
-        renderTabBar: renderTabBarSlot,
-      },
-      on: listeners,
+      ...this.$props,
+      prefixCls,
+      tabBarExtraContent,
+      renderTabBar: renderTabBarSlot,
+      ...restProps,
     };
     const contentCls = {
       [`${prefixCls}-${tabPosition}-content`]: true,
       [`${prefixCls}-card-content`]: type.indexOf('card') >= 0,
     };
     const tabsProps = {
-      props: {
-        ...getOptionProps(this),
-        prefixCls,
-        tabBarPosition: tabPosition,
-        // https://github.com/vueComponent/ant-design-vue/issues/2030
-        // 如仅传递 tabBarProps 会导致，第二次执行 renderTabBar 时，丢失 on 属性，
-        // 添加key之后，会在babel jsx 插件中做一次merge，最终TabBar接收的是一个新的对象，而不是 tabBarProps
-        renderTabBar: () => <TabBar key="tabBar" {...tabBarProps} />,
-        renderTabContent: () => (
-          <TabContent class={contentCls} animated={tabPaneAnimated} animatedWithMargin />
-        ),
-        children: childrenWithClose.length > 0 ? childrenWithClose : children,
-        __propsSymbol__: Symbol(),
-      },
-      on: {
-        ...listeners,
-        change: this.handleChange,
-      },
+      ...getOptionProps(this),
+      prefixCls,
+      tabBarPosition: tabPosition,
+      // https://github.com/vueComponent/ant-design-vue/issues/2030
+      // 如仅传递 tabBarProps 会导致，第二次执行 renderTabBar 时，丢失 on 属性，
+      // 添加key之后，会在babel jsx 插件中做一次merge，最终TabBar接收的是一个新的对象，而不是 tabBarProps
+      renderTabBar: () => <TabBar key="tabBar" {...tabBarProps} />,
+      renderTabContent: () => (
+        <TabContent class={contentCls} animated={tabPaneAnimated} animatedWithMargin />
+      ),
+      children: childrenWithClose.length > 0 ? childrenWithClose : children,
+      __propsSymbol__: Symbol(),
+      ...restProps,
+      onChange: this.handleChange,
       class: cls,
     };
     return <VcTabs {...tabsProps} />;

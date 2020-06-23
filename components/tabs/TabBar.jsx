@@ -5,7 +5,7 @@ import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import ScrollableInkTabBar from '../vc-tabs/src/ScrollableInkTabBar';
 import { cloneElement } from '../_util/vnode';
 import PropTypes from '../_util/vue-types';
-import { getListeners } from '../_util/props-util';
+
 const TabBar = {
   name: 'TabBar',
   inheritAttrs: false,
@@ -55,25 +55,22 @@ const TabBar = {
         )}
       </span>
     );
-
     // Additional className for style usage
     const cls = {
+      [this.$attrs.class]: this.$attrs.class,
       [`${prefixCls}-${tabPosition}-bar`]: true,
       [`${prefixCls}-${size}-bar`]: !!size,
       [`${prefixCls}-card-bar`]: type && type.indexOf('card') >= 0,
     };
 
     const renderProps = {
-      props: {
-        ...this.$props,
-        ...this.$attrs,
-        inkBarAnimated,
-        extraContent: tabBarExtraContent,
-        prevIcon,
-        nextIcon,
-      },
+      ...this.$props,
+      ...this.$attrs,
+      inkBarAnimated,
+      extraContent: tabBarExtraContent,
+      prevIcon,
+      nextIcon,
       style: tabBarStyle,
-      on: getListeners(this),
       class: cls,
     };
 

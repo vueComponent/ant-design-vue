@@ -2,6 +2,7 @@ import { cloneElement } from '../../_util/vnode';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import createRefHooks from '../../_util/createRefHooks';
+import { getSlot } from '../../_util/props-util';
 function noop() {}
 export default {
   name: 'TabBarRootNode',
@@ -26,7 +27,7 @@ export default {
     };
     const topOrBottom = tabBarPosition === 'top' || tabBarPosition === 'bottom';
     const tabBarExtraContentStyle = topOrBottom ? { float: 'right' } : {};
-    const children = this.$slots.default;
+    const children = getSlot(this);
     let newChildren = children;
     if (extraContent) {
       newChildren = [

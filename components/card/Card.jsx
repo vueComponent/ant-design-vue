@@ -1,12 +1,12 @@
 import { inject } from 'vue';
-import omit from 'omit.js';
 import Tabs from '../tabs';
 import Row from '../row';
 import Col from '../col';
 import PropTypes from '../_util/vue-types';
-import { getComponent, getSlotOptions, filterEmpty, getListeners } from '../_util/props-util';
+import { getComponent, filterEmpty, getSlot } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
+import isPlainObject from 'lodash/isPlainObject';
 
 const { TabPane } = Tabs;
 export default {
@@ -54,7 +54,7 @@ export default {
     isContainGrid(obj = []) {
       let containGrid;
       obj.forEach(element => {
-        if (element && getSlotOptions(element).__ANT_CARD_GRID) {
+        if (element && isPlainObject(element.type) && element.type.__ANT_CARD_GRID) {
           containGrid = true;
         }
       });
@@ -75,18 +75,17 @@ export default {
       activeTabKey,
       defaultActiveTabKey,
     } = this.$props;
-
+    const children = getSlot(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
-    const { $slots, $scopedSlots } = this;
     const tabBarExtraContent = getComponent(this, 'tabBarExtraContent');
     const classString = {
       [`${prefixCls}`]: true,
       [`${prefixCls}-loading`]: loading,
       [`${prefixCls}-bordered`]: bordered,
       [`${prefixCls}-hoverable`]: !!hoverable,
-      [`${prefixCls}-contain-grid`]: this.isContainGrid($slots.default),
+      [`${prefixCls}-contain-grid`]: this.isContainGrid(children),
       [`${prefixCls}-contain-tabs`]: tabList && tabList.length,
       [`${prefixCls}-${size}`]: size !== 'default',
       [`${prefixCls}-type-${type}`]: !!type,
@@ -142,16 +141,12 @@ export default {
 
     const hasActiveTabKey = activeTabKey !== undefined;
     const tabsProps = {
-      props: {
-        size: 'large',
-        [hasActiveTabKey ? 'activeKey' : 'defaultActiveKey']: hasActiveTabKey
-          ? activeTabKey
-          : defaultActiveTabKey,
-        tabBarExtraContent,
-      },
-      on: {
-        change: this.onTabChange,
-      },
+      size: 'large',
+      [hasActiveTabKey ? 'activeKey' : 'defaultActiveKey']: hasActiveTabKey
+        ? activeTabKey
+        : defaultActiveTabKey,
+      tabBarExtraContent,
+      onChange: this.onTabChange,
       class: `${prefixCls}-head-tabs`,
     };
 
@@ -160,10 +155,9 @@ export default {
       tabList && tabList.length ? (
         <Tabs {...tabsProps}>
           {tabList.map(item => {
-            const { tab: temp, scopedSlots = {} } = item;
-            const name = scopedSlots.tab;
-            const tab =
-              temp !== undefined ? temp : $scopedSlots[name] ? $scopedSlots[name](item) : null;
+            const { tab: temp, children = {} } = item;
+            const name = children.tab;
+            const tab = temp !== undefined ? temp : children[name] ? children[name](item) : null;
             return <TabPane tab={tab} key={item.key} disabled={item.disabled} />;
           })}
         </Tabs>
@@ -182,7 +176,6 @@ export default {
       );
     }
 
-    const children = $slots.default;
     const cover = getComponent(this, 'cover');
     const coverDom = cover ? <div class={`${prefixCls}-cover`}>{cover}</div> : null;
     const body = (
@@ -190,18 +183,14 @@ export default {
         {loading ? loadingBlock : children}
       </div>
     );
-    const actions = filterEmpty(this.$slots.actions);
+    const actions = filterEmpty(getComponent(this, 'action'));
     const actionDom =
       actions && actions.length ? (
         <ul class={`${prefixCls}-actions`}>{this.getAction(actions)}</ul>
       ) : null;
 
     return (
-      <div
-        class={classString}
-        ref="cardContainerRef"
-        {...{ on: omit(getListeners(this), ['tabChange', 'tab-change']) }}
-      >
+      <div class={classString} ref="cardContainerRef">
         {head}
         {coverDom}
         {children ? body : null}

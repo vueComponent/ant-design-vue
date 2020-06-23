@@ -1,9 +1,9 @@
-import omit from 'omit.js';
+import { provide } from 'vue';
 import BaseMixin from '../../_util/BaseMixin';
 import PropTypes from '../../_util/vue-types';
 import raf from 'raf';
 import KeyCode from './KeyCode';
-import { getOptionProps, getListeners } from '../../_util/props-util';
+import { getOptionProps } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import Sentinel from './Sentinel';
 import isValid from '../../_util/isValid';
@@ -28,10 +28,7 @@ function activeKeyIsValid(props, key) {
 export default {
   name: 'Tabs',
   mixins: [BaseMixin],
-  model: {
-    prop: 'activeKey',
-    event: 'change',
-  },
+  inheritAttrs: false,
   props: {
     destroyInactiveTabPane: PropTypes.bool,
     renderTabBar: PropTypes.func.isRequired,
@@ -47,6 +44,7 @@ export default {
     tabBarGutter: PropTypes.number,
   },
   data() {
+    provide('sentinelContext', this);
     const props = getOptionProps(this);
     let activeKey;
     if ('activeKey' in props) {
@@ -58,11 +56,6 @@ export default {
     }
     return {
       _activeKey: activeKey,
-    };
-  },
-  provide() {
-    return {
-      sentinelContext: this,
     };
   },
   watch: {
@@ -86,12 +79,8 @@ export default {
   },
   methods: {
     onTabClick(activeKey, e) {
-      if (
-        this.tabBar.componentOptions &&
-        this.tabBar.componentOptions.listeners &&
-        this.tabBar.componentOptions.listeners.tabClick
-      ) {
-        this.tabBar.componentOptions.listeners.tabClick(activeKey, e);
+      if (this.tabBar.props && this.tabBar.props.onTabClick) {
+        this.tabBar.props.onTabClick(activeKey, e);
       }
       this.setActiveKey(activeKey);
     },
@@ -146,6 +135,7 @@ export default {
             _activeKey: activeKey,
           });
         }
+        this.$emit('update:activeKey', activeKey);
         this.__emit('change', activeKey);
       }
     },
@@ -197,7 +187,9 @@ export default {
       direction,
       tabBarGutter,
     } = props;
+    const { class: className, onChange, ...restProps } = this.$attrs;
     const cls = {
+      [className]: className,
       [prefixCls]: 1,
       [`${prefixCls}-${tabBarPosition}`]: 1,
       [`${prefixCls}-rtl`]: direction === 'rtl',
@@ -205,32 +197,24 @@ export default {
 
     this.tabBar = renderTabBar();
     const tabBar = cloneElement(this.tabBar, {
-      props: {
-        prefixCls,
-        navWrapper,
-        tabBarPosition,
-        panels: props.children,
-        activeKey: this.$data._activeKey,
-        direction,
-        tabBarGutter,
-      },
-      on: {
-        keydown: this.onNavKeyDown,
-        tabClick: this.onTabClick,
-      },
+      prefixCls,
+      navWrapper,
+      tabBarPosition,
+      panels: props.children,
+      activeKey: this.$data._activeKey,
+      direction,
+      tabBarGutter,
+      onKeydown: this.onNavKeyDown,
+      onTabClick: this.onTabClick,
       key: 'tabBar',
     });
     const tabContent = cloneElement(renderTabContent(), {
-      props: {
-        prefixCls,
-        tabBarPosition,
-        activeKey: this.$data._activeKey,
-        destroyInactiveTabPane,
-        direction,
-      },
-      on: {
-        change: this.setActiveKey,
-      },
+      prefixCls,
+      tabBarPosition,
+      activeKey: this.$data._activeKey,
+      destroyInactiveTabPane,
+      direction,
+      onChange: this.setActiveKey,
       children: props.children,
       key: 'tabContent',
     });
@@ -257,10 +241,11 @@ export default {
     } else {
       contents.push(tabBar, sentinelStart, tabContent, sentinelEnd);
     }
-    const listeners = {
-      ...omit(getListeners(this), ['change']),
-      scroll: this.onScroll,
+    const p = {
+      ...restProps,
+      onScroll: this.onScroll,
+      class: cls,
     };
-    return <div {...{ on: listeners, class: cls }}>{contents}</div>;
+    return <div {...p}>{contents}</div>;
   },
 };

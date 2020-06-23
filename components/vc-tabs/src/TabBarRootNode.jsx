@@ -1,6 +1,7 @@
 import { cloneElement } from '../../_util/vnode';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
+import createRefHooks from '../../_util/createRefHooks';
 function noop() {}
 export default {
   name: 'TabBarRootNode',
@@ -11,6 +12,7 @@ export default {
     prefixCls: PropTypes.string.def(''),
     tabBarPosition: PropTypes.string.def('top'),
     extraContent: PropTypes.any,
+    onKeydown: PropTypes.func,
   },
   methods: {
     onKeyDown(e) {
@@ -45,14 +47,7 @@ export default {
         class={cls}
         tabIndex="0"
         onKeydown={onKeyDown}
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: this.saveRef('root'),
-            },
-          ],
-        }}
+        {...createRefHooks(this.saveRef('root'))}
       >
         {newChildren}
       </div>

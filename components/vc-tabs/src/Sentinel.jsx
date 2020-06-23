@@ -1,5 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 import KeyCode from '../../_util/KeyCode';
+import createRefHooks from '../../_util/createRefHooks';
+import { getSlot } from '../../_util/props-util';
 
 const sentinelStyle = { width: 0, height: 0, overflow: 'hidden', position: 'absolute' };
 export default {
@@ -31,19 +33,12 @@ export default {
     return (
       <div
         tabIndex={0}
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: setRef,
-            },
-          ],
-        }}
+        {...createRefHooks(setRef)}
         style={sentinelStyle}
         onKeydown={this.onKeyDown}
         role="presentation"
       >
-        {this.$slots.default}
+        {getSlot(this)}
       </div>
     );
   },

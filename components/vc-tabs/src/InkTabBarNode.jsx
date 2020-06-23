@@ -8,6 +8,7 @@ import {
   getActiveIndex,
 } from './utils';
 import BaseMixin from '../../_util/BaseMixin';
+import createRefHooks from '../../_util/createRefHooks';
 
 function componentDidUpdate(component, init) {
   const { styles = {}, panels, activeKey, direction } = component.$props;
@@ -120,14 +121,7 @@ export default {
         style={styles.inkBar}
         class={classes}
         key="inkBar"
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: this.saveRef('inkBar'),
-            },
-          ],
-        }}
+        {...createRefHooks(this.saveRef('inkBar'))}
       />
     );
   },

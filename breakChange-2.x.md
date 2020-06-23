@@ -59,3 +59,7 @@ v-model -> v-model:checked
 checkboxGroup
 
 v-model -> v-model:value
+
+## Switch
+
+v-model -> v-model:checked

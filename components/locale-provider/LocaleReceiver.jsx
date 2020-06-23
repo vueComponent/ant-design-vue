@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import defaultLocaleData from './default';
 
@@ -8,8 +9,10 @@ export default {
     defaultLocale: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
     children: PropTypes.func,
   },
-  inject: {
-    localeData: { default: () => ({}) },
+  setup() {
+    return {
+      localeData: inject('localeData', {}),
+    };
   },
   methods: {
     getLocale() {

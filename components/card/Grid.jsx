@@ -1,6 +1,7 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
-import { getListeners } from '../_util/props-util';
+import { getSlot } from '../_util/props-util';
 
 export default {
   name: 'ACardGrid',
@@ -9,8 +10,10 @@ export default {
     prefixCls: PropTypes.string,
     hoverable: PropTypes.bool,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   render() {
     const { prefixCls: customizePrefixCls, hoverable = true } = this.$props;
@@ -22,10 +25,6 @@ export default {
       [`${prefixCls}-grid`]: true,
       [`${prefixCls}-grid-hoverable`]: hoverable,
     };
-    return (
-      <div {...{ on: getListeners(this) }} class={classString}>
-        {this.$slots.default}
-      </div>
-    );
+    return <div class={classString}>{getSlot(this)}</div>;
   },
 };

@@ -14,9 +14,8 @@ export default {
   __ANT_BUTTON: true,
   props,
   setup() {
-    const configProvider = inject('configProvider', ConfigConsumerProps);
     return {
-      configProvider,
+      configProvider: inject('configProvider', ConfigConsumerProps),
     };
   },
   data() {

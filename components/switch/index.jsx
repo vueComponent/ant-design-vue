@@ -32,10 +32,10 @@ const Switch = {
   },
   methods: {
     focus() {
-      this.refSwitchNode?.ctx?.focus();
+      this.refSwitchNode?.focus();
     },
     blur() {
-      this.refSwitchNode?.ctx?.blur();
+      this.refSwitchNode?.blur();
     },
     saveRef(c) {
       this.refSwitchNode = c;

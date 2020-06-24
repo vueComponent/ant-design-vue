@@ -4,7 +4,6 @@ import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { getComponent, getSlot } from '../../_util/props-util';
 import { setTransform, isTransform3dSupported } from './utils';
-import createRefHooks from '../../_util/createRefHooks';
 
 function noop() {}
 export default {
@@ -320,13 +319,13 @@ export default {
           [`${prefixCls}-nav-container-scrolling`]: showNextPrev,
         }}
         key="container"
-        {...createRefHooks(this.saveRef('container'))}
+        ref={this.saveRef('container')}
       >
         {prevButton}
         {nextButton}
-        <div class={`${prefixCls}-nav-wrap`} {...createRefHooks(this.saveRef('navWrap'))}>
+        <div class={`${prefixCls}-nav-wrap`} ref={this.saveRef('navWrap')}>
           <div class={`${prefixCls}-nav-scroll`}>
-            <div class={navClasses} {...createRefHooks(this.saveRef('nav'))}>
+            <div class={navClasses} ref={this.saveRef('nav')}>
               {navWrapper(getSlot(this))}
             </div>
           </div>

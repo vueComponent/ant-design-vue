@@ -1,7 +1,6 @@
 import { cloneElement } from '../../_util/vnode';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import createRefHooks from '../../_util/createRefHooks';
 import { getSlot } from '../../_util/props-util';
 import { getDataAttr } from './utils';
 function noop() {}
@@ -52,7 +51,7 @@ export default {
         tabIndex="0"
         onKeydown={onKeyDown}
         style={style}
-        {...createRefHooks(this.saveRef('root'))}
+        ref={this.saveRef('root')}
         {...getDataAttr(restProps)}
       >
         {newChildren}

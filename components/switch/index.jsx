@@ -6,7 +6,6 @@ import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
 import { ConfigConsumerProps } from '../config-provider';
 import warning from '../_util/warning';
-import createRefHooks from '../_util/createRefHooks';
 
 const Switch = {
   name: 'ASwitch',
@@ -72,7 +71,7 @@ const Switch = {
       disabled: disabled || loading,
       ...$attrs,
       class: classes,
-      ...createRefHooks(this.saveRef),
+      ref: this.saveRef,
     };
 
     return (

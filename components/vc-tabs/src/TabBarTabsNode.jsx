@@ -3,7 +3,6 @@ import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { getComponent, getPropsData } from '../../_util/props-util';
 import { isVertical } from './utils';
-import createRefHooks from '../../_util/createRefHooks';
 function noop() {}
 export default {
   name: 'TabBarTabsNode',
@@ -67,7 +66,7 @@ export default {
           class={cls}
           key={key}
           style={style}
-          {...createRefHooks(activeKey === key ? saveRef('activeTab') : noop)}
+          ref={activeKey === key ? saveRef('activeTab') : noop}
         >
           {tab}
         </div>
@@ -79,6 +78,6 @@ export default {
       rst.push(node);
     });
 
-    return <div {...createRefHooks(this.saveRef('navTabsContainer'))}>{rst}</div>;
+    return <div ref={this.saveRef('navTabsContainer')}>{rst}</div>;
   },
 };

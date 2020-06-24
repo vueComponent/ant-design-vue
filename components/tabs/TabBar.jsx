@@ -65,6 +65,7 @@ const TabBar = {
     const renderProps = {
       ...this.$props,
       ...this.$attrs,
+      children: null,
       inkBarAnimated,
       extraContent: tabBarExtraContent,
       prevIcon,

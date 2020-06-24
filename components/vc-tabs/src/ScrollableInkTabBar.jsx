@@ -8,7 +8,7 @@ export default {
   name: 'ScrollableInkTabBar',
   inheritAttrs: false,
   render() {
-    const { default: renderTabBarNode } = this.$slots;
+    const { children: renderTabBarNode } = this.$attrs;
     return (
       <SaveRef
         children={(saveRef, getRef) => (

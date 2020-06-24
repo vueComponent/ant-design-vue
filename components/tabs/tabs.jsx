@@ -153,6 +153,7 @@ export default {
       tabBarExtraContent,
       renderTabBar: renderTabBarSlot,
       ...restProps,
+      children,
     };
     const contentCls = {
       [`${prefixCls}-${tabPosition}-content`]: true,

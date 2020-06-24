@@ -8,7 +8,6 @@ import {
   getActiveIndex,
 } from './utils';
 import BaseMixin from '../../_util/BaseMixin';
-import createRefHooks from '../../_util/createRefHooks';
 
 function componentDidUpdate(component, init) {
   const { styles = {}, panels, activeKey, direction } = component.$props;
@@ -117,13 +116,6 @@ export default {
       [className]: true,
       [inkBarAnimated ? `${className}-animated` : `${className}-no-animated`]: true,
     };
-    return (
-      <div
-        style={styles.inkBar}
-        class={classes}
-        key="inkBar"
-        {...createRefHooks(this.saveRef('inkBar'))}
-      />
-    );
+    return <div style={styles.inkBar} class={classes} key="inkBar" ref={this.saveRef('inkBar')} />;
   },
 };

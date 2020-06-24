@@ -12,7 +12,6 @@ import BaseMixin from '../_util/BaseMixin';
 import Portal from '../_util/Portal';
 import classNames from 'classnames';
 import { cloneElement } from '../_util/vnode';
-import createRefHooks from '../_util/createRefHooks';
 
 function returnEmptyString() {
   return '';
@@ -409,7 +408,7 @@ export default {
         popupStyle,
         onAlign: $attrs.onPopupAlign || noop,
         ...mouseProps,
-        ...createRefHooks(this.savePopup),
+        ref: this.savePopup,
       };
       return (
         <Popup ref="popup" {...popupProps}>
@@ -557,8 +556,8 @@ export default {
       return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1;
     },
     forcePopupAlign() {
-      if (this.$data.sPopupVisible && this._component && this._component.refs.alignInstance) {
-        this._component.refs.alignInstance.forceAlign();
+      if (this.$data.sPopupVisible && this._component && this._component.$refs.alignInstance) {
+        this._component.$refs.alignInstance.forceAlign();
       }
     },
     fireEvents(type, e) {

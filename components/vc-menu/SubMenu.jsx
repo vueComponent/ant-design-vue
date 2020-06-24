@@ -11,7 +11,6 @@ import { getComponent, filterEmpty, getSlot, splitAttrs, findDOMNode } from '../
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import { noop, loopMenuItemRecursively, getMenuIdFromSubMenuEventKey } from './util';
 import getTransitionProps from '../_util/getTransitionProps';
-import createRefHooks from '../_util/createRefHooks';
 
 let guid = 0;
 
@@ -483,7 +482,7 @@ const SubMenu = {
       ...titleClickEvents,
       style,
       class: `${prefixCls}-title`,
-      ...createRefHooks(this.saveSubMenuTitle),
+      ref: this.saveSubMenuTitle,
     };
 
     // expand custom icon should NOT be displayed in menu with horizontal mode.

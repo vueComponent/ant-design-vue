@@ -1,7 +1,6 @@
 import { switchPropTypes } from './PropTypes';
 import BaseMixin from '../_util/BaseMixin';
 import { hasProp, getOptionProps, getComponent } from '../_util/props-util';
-import createRefHooks from '../_util/createRefHooks';
 
 // function noop () {
 // }
@@ -107,7 +106,7 @@ export default {
       'aria-checked': checked,
       disabled,
       class: switchClassName,
-      ...createRefHooks(this.saveRef),
+      ref: this.saveRef,
     };
 
     return (

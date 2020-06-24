@@ -21,10 +21,7 @@ import TabBar from './TabBar';
 export default {
   TabPane,
   name: 'ATabs',
-  model: {
-    prop: 'activeKey',
-    event: 'change',
-  },
+  inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -88,8 +85,8 @@ export default {
       hideAdd,
       renderTabBar,
     } = props;
-    const { class: className, style, ...restProps } = this.$attrs;
-    const getPrefixCls = this.configProvider().getPrefixCls;
+    const { class: className, ...restProps } = this.$attrs;
+    const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tabs', customizePrefixCls);
     const children = filterEmpty(getSlot(this));
 
@@ -151,7 +148,7 @@ export default {
 
     const renderTabBarSlot = renderTabBar || this.$slots.renderTabBar;
     const tabBarProps = {
-      ...this.$props,
+      ...props,
       prefixCls,
       tabBarExtraContent,
       renderTabBar: renderTabBarSlot,
@@ -162,7 +159,7 @@ export default {
       [`${prefixCls}-card-content`]: type.indexOf('card') >= 0,
     };
     const tabsProps = {
-      ...getOptionProps(this),
+      ...props,
       prefixCls,
       tabBarPosition: tabPosition,
       // https://github.com/vueComponent/ant-design-vue/issues/2030

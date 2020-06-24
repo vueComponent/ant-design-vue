@@ -10,6 +10,7 @@ function noop() {}
 export default {
   name: 'ScrollableTabBarNode',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     activeKey: PropTypes.any,
     getRef: PropTypes.func.def(() => {}),

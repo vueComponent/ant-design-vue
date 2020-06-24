@@ -141,7 +141,7 @@ const getComponent = (instance, prop, options = instance, execute = true) => {
     const temp = instance.props && instance.props[prop];
     if (temp !== undefined) {
       return typeof temp === 'function' && execute ? temp(options) : temp;
-    } else if (instance.children && instance.children[name]) {
+    } else if (instance.children && instance.children[prop]) {
       let com = instance.children[prop];
       com = execute && com ? com(options) : com;
       return Array.isArray(com) && com.length === 1 ? com[0] : com;

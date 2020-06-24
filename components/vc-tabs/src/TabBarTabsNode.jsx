@@ -8,6 +8,7 @@ function noop() {}
 export default {
   name: 'TabBarTabsNode',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     panels: PropTypes.any.def([]),

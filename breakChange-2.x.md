@@ -63,3 +63,9 @@ v-model -> v-model:value
 ## Switch
 
 v-model -> v-model:checked
+
+## tabs
+
+v-model -> v-model:activeKey
+
+renderTabBar({props, on, style, class}, DefaultTabBar) -> {DefaultTabBar, ...props} 多参数改成单参数并且扁平化处理

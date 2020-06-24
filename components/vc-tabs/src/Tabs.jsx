@@ -7,6 +7,7 @@ import { getOptionProps } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import Sentinel from './Sentinel';
 import isValid from '../../_util/isValid';
+import { getDataAttr } from './utils';
 
 function getDefaultActiveKey(props) {
   let activeKey;
@@ -54,6 +55,10 @@ export default {
     } else {
       activeKey = getDefaultActiveKey(props);
     }
+    this.panelSentinelStart = undefined;
+    this.panelSentinelEnd = undefined;
+    this.sentinelStart = undefined;
+    this.sentinelEnd = undefined;
     return {
       _activeKey: activeKey,
     };
@@ -187,7 +192,7 @@ export default {
       direction,
       tabBarGutter,
     } = props;
-    const { class: className, onChange, ...restProps } = this.$attrs;
+    const { class: className, onChange, style, ...restProps } = this.$attrs;
     const cls = {
       [className]: className,
       [prefixCls]: 1,
@@ -242,7 +247,8 @@ export default {
       contents.push(tabBar, sentinelStart, tabContent, sentinelEnd);
     }
     const p = {
-      ...restProps,
+      ...getDataAttr(restProps),
+      style,
       onScroll: this.onScroll,
       class: cls,
     };

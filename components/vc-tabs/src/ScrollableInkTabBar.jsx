@@ -7,18 +7,6 @@ import SaveRef from './SaveRef';
 export default {
   name: 'ScrollableInkTabBar',
   inheritAttrs: false,
-  props: [
-    'extraContent',
-    'inkBarAnimated',
-    'tabBarGutter',
-    'prefixCls',
-    'navWrapper',
-    'tabBarPosition',
-    'panels',
-    'activeKey',
-    'prevIcon',
-    'nextIcon',
-  ],
   render() {
     const { default: renderTabBarNode } = this.$slots;
     return (

@@ -6,7 +6,6 @@ import {
   getTransformPropValue,
   getMarginStyle,
 } from './utils';
-import { getSlot } from '../../_util/props-util';
 export default {
   name: 'TabContent',
   props: {
@@ -17,6 +16,7 @@ export default {
     tabBarPosition: PropTypes.string,
     direction: PropTypes.string,
     destroyInactiveTabPane: PropTypes.bool,
+    children: PropTypes.any,
   },
   computed: {
     classes() {
@@ -52,9 +52,16 @@ export default {
     },
   },
   render() {
-    const { activeKey, tabBarPosition, animated, animatedWithMargin, direction, classes } = this;
+    const {
+      activeKey,
+      tabBarPosition,
+      animated,
+      animatedWithMargin,
+      direction,
+      classes,
+      children,
+    } = this;
     let style = {};
-    const children = getSlot(this);
     if (animated && children) {
       const activeIndex = getActiveIndex(children, activeKey);
       if (activeIndex !== -1) {

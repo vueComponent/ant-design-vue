@@ -2,7 +2,7 @@ import '@babel/polyfill';
 import { createApp } from 'vue';
 import App from './App.vue';
 import Avatar from 'ant-design-vue/avatar';
-// import Breadcrumb from 'ant-design-vue/breadcrumb';
+import Breadcrumb from 'ant-design-vue/breadcrumb';
 import Button from 'ant-design-vue/button';
 import Comment from 'ant-design-vue/comment';
 import Drawer from 'ant-design-vue/drawer';
@@ -37,6 +37,7 @@ import Dropdown from 'ant-design-vue/dropdown';
 import Steps from 'ant-design-vue/steps';
 import Switch from 'ant-design-vue/switch';
 import Layout from 'ant-design-vue/layout';
+import Tabs from 'ant-design-vue/tabs';
 import 'ant-design-vue/style.js';
 
 const basic = {
@@ -54,7 +55,7 @@ app
   .component('CN', { ...basic })
   .component('US', { ...basic })
   .use(Avatar)
-  // .use(Breadcrumb)
+  .use(Breadcrumb)
   .use(Button)
   .use(Comment)
   .use(ConfigProvider)
@@ -87,4 +88,5 @@ app
   .use(Steps)
   .use(Switch)
   .use(Layout)
+  .use(Tabs)
   .mount('#app');

@@ -3,17 +3,18 @@ import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import createRefHooks from '../../_util/createRefHooks';
 import { getSlot } from '../../_util/props-util';
+import { getDataAttr } from './utils';
 function noop() {}
 export default {
   name: 'TabBarRootNode',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     saveRef: PropTypes.func.def(noop),
     getRef: PropTypes.func.def(noop),
     prefixCls: PropTypes.string.def(''),
     tabBarPosition: PropTypes.string.def('top'),
     extraContent: PropTypes.any,
-    onKeydown: PropTypes.func,
   },
   methods: {
     onKeyDown(e) {
@@ -22,8 +23,10 @@ export default {
   },
   render() {
     const { prefixCls, onKeyDown, tabBarPosition, extraContent } = this;
+    const { class: className, style, onKeydown, ...restProps } = this.$attrs;
     const cls = {
       [`${prefixCls}-bar`]: true,
+      [className]: !!className,
     };
     const topOrBottom = tabBarPosition === 'top' || tabBarPosition === 'bottom';
     const tabBarExtraContentStyle = topOrBottom ? { float: 'right' } : {};
@@ -48,7 +51,9 @@ export default {
         class={cls}
         tabIndex="0"
         onKeydown={onKeyDown}
+        style={style}
         {...createRefHooks(this.saveRef('root'))}
+        {...getDataAttr(restProps)}
       >
         {newChildren}
       </div>

@@ -3,7 +3,6 @@ import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import ScrollableInkTabBar from '../vc-tabs/src/ScrollableInkTabBar';
-import { cloneElement } from '../_util/vnode';
 import PropTypes from '../_util/vue-types';
 
 const TabBar = {
@@ -74,12 +73,8 @@ const TabBar = {
       class: cls,
     };
 
-    let RenderTabBar;
-
     if (renderTabBar) {
-      RenderTabBar = renderTabBar(renderProps, ScrollableInkTabBar);
-      // https://github.com/vueComponent/ant-design-vue/issues/2157
-      return cloneElement(RenderTabBar, renderProps);
+      return renderTabBar({ ...renderProps, DefaultTabBar: ScrollableInkTabBar });
     } else {
       return <ScrollableInkTabBar {...renderProps} />;
     }

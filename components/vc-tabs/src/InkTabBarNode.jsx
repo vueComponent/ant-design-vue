@@ -84,6 +84,7 @@ function componentDidUpdate(component, init) {
 export default {
   name: 'InkTabBarNode',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     inkBarAnimated: {
       type: Boolean,
@@ -99,13 +100,13 @@ export default {
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   },
   updated() {
-    this.$nextTick(function() {
+    this.$nextTick(() => {
       componentDidUpdate(this);
     });
   },
 
   mounted() {
-    this.$nextTick(function() {
+    this.$nextTick(() => {
       componentDidUpdate(this, true);
     });
   },

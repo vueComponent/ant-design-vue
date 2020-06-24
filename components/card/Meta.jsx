@@ -9,6 +9,7 @@ export default {
     prefixCls: PropTypes.string,
     title: PropTypes.any,
     description: PropTypes.any,
+    avatar: PropTypes.any,
   },
   setup() {
     return {

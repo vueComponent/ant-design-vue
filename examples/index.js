@@ -38,6 +38,7 @@ import Steps from 'ant-design-vue/steps';
 import Switch from 'ant-design-vue/switch';
 import Layout from 'ant-design-vue/layout';
 import Tabs from 'ant-design-vue/tabs';
+import Card from 'ant-design-vue/card';
 import 'ant-design-vue/style.js';
 
 const basic = {
@@ -89,4 +90,5 @@ app
   .use(Switch)
   .use(Layout)
   .use(Tabs)
+  .use(Card)
   .mount('#app');

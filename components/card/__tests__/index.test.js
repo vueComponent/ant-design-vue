@@ -64,10 +64,7 @@ describe('Card', () => {
         sync: false,
       },
     );
-    wrapper
-      .findAll('.ant-tabs-tab')
-      .at(1)
-      .trigger('click');
+    wrapper.findAll('.ant-tabs-tab')[1].trigger('click');
     expect(onTabChange).toHaveBeenCalledWith('tab2');
   });
 

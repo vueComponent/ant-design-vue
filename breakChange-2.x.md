@@ -69,3 +69,7 @@ v-model -> v-model:checked
 v-model -> v-model:activeKey
 
 renderTabBar({props, on, style, class}, DefaultTabBar) -> {DefaultTabBar, ...props} 多参数改成单参数并且扁平化处理
+
+## card
+
+tabList[{scopedSlots}] -> tabList[{slots}]

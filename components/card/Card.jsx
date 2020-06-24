@@ -1,9 +1,9 @@
-import { inject } from 'vue';
+import { inject, isVNode } from 'vue';
 import Tabs from '../tabs';
 import Row from '../row';
 import Col from '../col';
 import PropTypes from '../_util/vue-types';
-import { getComponent, filterEmpty, getSlot } from '../_util/props-util';
+import { getComponent, getSlot, isEmptyElement } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
 import isPlainObject from 'lodash/isPlainObject';
@@ -28,6 +28,7 @@ export default {
     tabBarExtraContent: PropTypes.any,
     activeTabKey: PropTypes.string,
     defaultActiveTabKey: PropTypes.string,
+    cover: PropTypes.any,
   },
   setup() {
     return {
@@ -41,11 +42,13 @@ export default {
   },
   methods: {
     getAction(actions) {
-      const actionList = actions.map((action, index) => (
-        <li style={{ width: `${100 / actions.length}%` }} key={`action-${index}`}>
-          <span>{action}</span>
-        </li>
-      ));
+      const actionList = actions.map((action, index) =>
+        (isVNode(action) && !isEmptyElement(action)) || !isVNode(action) ? (
+          <li style={{ width: `${100 / actions.length}%` }} key={`action-${index}`}>
+            <span>{action}</span>
+          </li>
+        ) : null,
+      );
       return actionList;
     },
     onTabChange(key) {
@@ -75,6 +78,7 @@ export default {
       activeTabKey,
       defaultActiveTabKey,
     } = this.$props;
+    const { $slots } = this;
     const children = getSlot(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
@@ -155,9 +159,9 @@ export default {
       tabList && tabList.length ? (
         <Tabs {...tabsProps}>
           {tabList.map(item => {
-            const { tab: temp, children = {} } = item;
-            const name = children.tab;
-            const tab = temp !== undefined ? temp : children[name] ? children[name](item) : null;
+            const { tab: temp, scopedSlots = {}, slots = {} } = item;
+            const name = slots.tab || scopedSlots.tab;
+            const tab = temp !== undefined ? temp : $slots[name] ? $slots[name](item) : null;
             return <TabPane tab={tab} key={item.key} disabled={item.disabled} />;
           })}
         </Tabs>
@@ -183,7 +187,7 @@ export default {
         {loading ? loadingBlock : children}
       </div>
     );
-    const actions = filterEmpty(getComponent(this, 'action'));
+    const actions = getComponent(this, 'actions');
     const actionDom =
       actions && actions.length ? (
         <ul class={`${prefixCls}-actions`}>{this.getAction(actions)}</ul>

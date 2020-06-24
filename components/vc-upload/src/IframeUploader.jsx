@@ -3,6 +3,7 @@ import BaseMixin from '../../_util/BaseMixin';
 import classNames from 'classnames';
 import getUid from './uid';
 import warning from '../../_util/warning';
+import { getSlot } from '../../_util/props-util';
 
 const IFRAME_STYLE = {
   position: 'absolute',
@@ -268,7 +269,7 @@ const IframeUploader = {
     return (
       <Tag className={cls} style={{ position: 'relative', zIndex: 0 }}>
         <iframe ref="iframeRef" onLoad={this.onLoad} style={iframeStyle} />
-        {this.$slots.default}
+        {getSlot(this)}
       </Tag>
     );
   },

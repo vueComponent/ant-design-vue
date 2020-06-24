@@ -6,7 +6,7 @@ import defaultRequest from './request';
 import getUid from './uid';
 import attrAccept from './attr-accept';
 import traverseFileTree from './traverseFileTree';
-import { getListeners } from '../../_util/props-util';
+import { getListeners, getSlot } from '../../_util/props-util';
 
 const upLoadPropTypes = {
   componentTag: PropTypes.string,
@@ -223,20 +223,15 @@ const AjaxUploader = {
     const events = disabled
       ? {}
       : {
-          click: openFileDialogOnClick ? this.onClick : () => {},
-          keydown: openFileDialogOnClick ? this.onKeyDown : () => {},
-          drop: this.onFileDrop,
-          dragover: this.onFileDrop,
+          onClick: openFileDialogOnClick ? this.onClick : () => {},
+          onKeydown: openFileDialogOnClick ? this.onKeyDown : () => {},
+          onDrop: this.onFileDrop,
+          onDragover: this.onFileDrop,
         };
     const tagProps = {
-      on: {
-        ...getListeners(this),
-        ...events,
-      },
-      attrs: {
-        role: 'button',
-        tabIndex: disabled ? null : '0',
-      },
+      ...events,
+      role: 'button',
+      tabIndex: disabled ? null : '0',
       class: cls,
     };
     return (
@@ -254,7 +249,7 @@ const AjaxUploader = {
           multiple={multiple}
           onChange={this.onChange}
         />
-        {this.$slots.default}
+        {getSlot(this)}
       </Tag>
     );
   },

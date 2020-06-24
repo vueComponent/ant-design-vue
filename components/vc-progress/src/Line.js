@@ -1,13 +1,11 @@
-import Vue from 'vue';
-import ref from 'vue-ref';
 import { initDefaultProps } from '../../_util/props-util';
+import antRef from '../../_util/ant-ref';
 import enhancer from './enhancer';
 import { propTypes, defaultProps } from './types';
 
-Vue.use(ref, { name: 'ant-ref' });
-
 const Line = {
   props: initDefaultProps(propTypes, defaultProps),
+  directives: { antRef },
   created() {
     this.paths = {};
   },
@@ -78,17 +76,9 @@ const Line = {
             },
             class: `${prefixCls}-line-path`,
             style: pathStyle,
-            directives: [
-              {
-                name: 'ant-ref',
-                value: c => {
-                  this.paths[index] = c;
-                },
-              },
-            ],
           };
 
-          return <path {...pathProps} />;
+          return <path v-antRef={c => (this.paths[index] = c)} {...pathProps} />;
         })}
       </svg>
     );

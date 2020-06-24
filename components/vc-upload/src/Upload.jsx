@@ -1,5 +1,5 @@
 import PropTypes from '../../_util/vue-types';
-import { initDefaultProps, getListeners } from '../../_util/props-util';
+import { initDefaultProps, getSlot } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import AjaxUpload from './AjaxUploader';
 import IframeUpload from './IframeUploader';
@@ -13,10 +13,10 @@ const uploadProps = {
   name: PropTypes.string,
   multipart: PropTypes.bool,
   directory: PropTypes.bool,
-  // onError: PropTypes.func,
-  // onSuccess: PropTypes.func,
-  // onProgress: PropTypes.func,
-  // onStart: PropTypes.func,
+  onError: PropTypes.func,
+  onSuccess: PropTypes.func,
+  onProgress: PropTypes.func,
+  onStart: PropTypes.func,
   data: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   headers: PropTypes.object,
   accept: PropTypes.string,
@@ -24,7 +24,7 @@ const uploadProps = {
   disabled: PropTypes.bool,
   beforeUpload: PropTypes.func,
   customRequest: PropTypes.func,
-  // onReady: PropTypes.func,
+  onReady: PropTypes.func,
   withCredentials: PropTypes.bool,
   supportServerRender: PropTypes.bool,
   openFileDialogOnClick: PropTypes.bool,
@@ -40,10 +40,10 @@ export default {
     headers: {},
     name: 'file',
     multipart: false,
-    // onReady: empty,
-    // onStart: empty,
-    // onError: empty,
-    // onSuccess: empty,
+    onReady: empty,
+    onStart: empty,
+    onError: empty,
+    onSuccess: empty,
     supportServerRender: false,
     multiple: false,
     beforeUpload: empty,
@@ -80,21 +80,18 @@ export default {
 
   render() {
     const componentProps = {
-      props: {
-        ...this.$props,
-      },
-      on: getListeners(this),
+      ...this.$props,
       ref: 'uploaderRef',
-      attrs: this.$attrs,
+      ...this.$attrs,
     };
     if (this.supportServerRender) {
       const ComponentUploader = this.Component;
       if (ComponentUploader) {
-        return <ComponentUploader {...componentProps}>{this.$slots.default}</ComponentUploader>;
+        return <ComponentUploader {...componentProps}>{getSlot(this)}</ComponentUploader>;
       }
       return null;
     }
     const ComponentUploader = this.getComponent();
-    return <ComponentUploader {...componentProps}>{this.$slots.default}</ComponentUploader>;
+    return <ComponentUploader {...componentProps}>{getSlot(this)}</ComponentUploader>;
   },
 };

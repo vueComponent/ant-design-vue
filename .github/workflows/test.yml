@@ -103,9 +103,10 @@ jobs:
       - name: Checkout submodules
         uses: actions/checkout@v2
         with:
-          repository: git@github.com:tangjinzhou/antdv-demo.git
+          repository: tangjinzhou/antdv-demo
           token: ${{ secrets.ACCESS_TOKEN }}
           path: antdv-demo
+          submodules: true
 
       - name: restore cache from package-lock.json
         uses: actions/cache@v1

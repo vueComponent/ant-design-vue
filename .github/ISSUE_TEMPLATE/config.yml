@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Create new issue
+    url: https://vuecomponent.github.io/issue-helper/
+    about: Please use the following link to create a new issue.
+  - name: Patreon
+    url: https://www.patreon.com/tangjinzhou
+    about: Love Ant Design Vue? Please consider supporting us via Patreon.
+  - name: Open Collective
+    url: https://opencollective.com/ant-design-vue/donate
+    about: Love Ant Design Vue? Please consider supporting us via Open Collective.
+  - name: Paypal
+    url: https://www.paypal.me/tangjinzhou
+    about: Love Ant Design Vue? Please consider supporting us via Paypal.
+  - name: 支付宝/微信 赞助
+    url: https://qn.antdv.com/alipay-and-wechat.png
+    about: Ant Design Vue 的健康持续发展需要您的支持，🙏

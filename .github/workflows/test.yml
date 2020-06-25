@@ -103,7 +103,7 @@ jobs:
       - name: Checkout submodules
         uses: actions/checkout@v2
         with:
-          repository: tangjinzhou/antdv-demo
+          repository: git@github.com:tangjinzhou/antdv-demo.git
           token: ${{ secrets.ACCESS_TOKEN }}
           path: antdv-demo
 

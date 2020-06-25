@@ -19,6 +19,7 @@ module.exports = {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         options: {
+          cacheDirectory: true,
           presets: [
             [
               '@babel/preset-env',
@@ -37,6 +38,14 @@ module.exports = {
             ],
           ],
           plugins: [
+            [
+              'babel-plugin-import',
+              {
+                libraryName: 'ant-design-vue',
+                libraryDirectory: '', // default: lib
+                style: true,
+              },
+            ],
             ['@ant-design-vue/babel-plugin-jsx', { transformOn: true }],
             '@babel/plugin-proposal-optional-chaining',
             '@babel/plugin-transform-object-assign',

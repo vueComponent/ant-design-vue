@@ -1,6 +1,5 @@
-import Vue from 'vue';
-import ref from 'vue-ref';
 import PropTypes from '../../_util/vue-types';
+import antRef from '../../_util/ant-ref';
 import { initDefaultProps } from '../../_util/props-util';
 import enhancer from './enhancer';
 import { propTypes, defaultProps } from './types';
@@ -15,8 +14,6 @@ const circleDefaultProps = {
   ...defaultProps,
   gapPosition: 'top',
 };
-
-Vue.use(ref, { name: 'ant-ref' });
 
 let gradientSeed = 0;
 
@@ -74,6 +71,7 @@ function getPathStyles(offset, percent, strokeColor, strokeWidth, gapDegree = 0,
 
 const Circle = {
   props: initDefaultProps(circlePropTypes, circleDefaultProps),
+  directives: { antRef },
   created() {
     this.paths = {};
     this.gradientId = gradientSeed;
@@ -113,25 +111,15 @@ const Circle = {
 
         const pathProps = {
           key: index,
-          attrs: {
-            d: pathString,
-            stroke,
-            'stroke-linecap': strokeLinecap,
-            'stroke-width': ptg === 0 ? 0 : strokeWidth,
-            'fill-opacity': '0',
-          },
+          d: pathString,
+          stroke,
+          'stroke-linecap': strokeLinecap,
+          'stroke-width': ptg === 0 ? 0 : strokeWidth,
+          'fill-opacity': '0',
           class: `${prefixCls}-circle-path`,
           style: pathStyle,
-          directives: [
-            {
-              name: 'ant-ref',
-              value: c => {
-                this.paths[index] = c;
-              },
-            },
-          ],
         };
-        return <path {...pathProps} />;
+        return <path v-antRef={c => (this.paths[index] = c)} {...pathProps} />;
       });
     },
   },

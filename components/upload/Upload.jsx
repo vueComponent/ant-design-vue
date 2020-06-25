@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import uniqBy from 'lodash/uniqBy';
 import findIndex from 'lodash/findIndex';
-import pick from 'lodash/pick';
 import VcUpload from '../vc-upload';
 import BaseMixin from '../_util/BaseMixin';
-import { getOptionProps, initDefaultProps, hasProp, getListeners } from '../_util/props-util';
+import { getOptionProps, initDefaultProps, hasProp, getSlot } from '../_util/props-util';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
 import { ConfigConsumerProps } from '../config-provider';
@@ -12,6 +11,7 @@ import Dragger from './Dragger';
 import UploadList from './UploadList';
 import { UploadProps } from './interface';
 import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './utils';
+import { inject } from 'vue';
 
 export { UploadProps };
 
@@ -32,8 +32,10 @@ export default {
     disabled: false,
     supportServerRender: true,
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   // recentUploadStatus: boolean | PromiseLike<any>;
   data() {
@@ -217,20 +219,18 @@ export default {
       } = getOptionProps(this);
       const { showRemoveIcon, showPreviewIcon, showDownloadIcon } = showUploadList;
       const { sFileList: fileList } = this.$data;
+      const { onDownload, onPreview } = this.$attrs;
       const uploadListProps = {
-        props: {
-          listType,
-          items: fileList,
-          previewFile,
-          showRemoveIcon: !disabled && showRemoveIcon,
-          showPreviewIcon,
-          showDownloadIcon,
-          locale: { ...locale, ...propLocale },
-        },
-        on: {
-          remove: this.handleManualRemove,
-          ...pick(getListeners(this), ['download', 'preview']), // 如果没有配置该事件，不要传递， uploadlist 会有相应逻辑
-        },
+        listType,
+        items: fileList,
+        previewFile,
+        showRemoveIcon: !disabled && showRemoveIcon,
+        showPreviewIcon,
+        showDownloadIcon,
+        locale: { ...locale, ...propLocale },
+        onRemove: this.handleManualRemove,
+        onDownload,
+        onPreview,
       };
       return <UploadList {...uploadListProps} />;
     },
@@ -248,31 +248,27 @@ export default {
     const prefixCls = getPrefixCls('upload', customizePrefixCls);
 
     const vcUploadProps = {
-      props: {
-        ...this.$props,
-        prefixCls,
-        beforeUpload: this.reBeforeUpload,
-      },
-      on: {
-        start: this.onStart,
-        error: this.onError,
-        progress: this.onProgress,
-        success: this.onSuccess,
-        reject: this.onReject,
-      },
+      ...this.$props,
+      prefixCls,
+      beforeUpload: this.reBeforeUpload,
+      onStart: this.onStart,
+      onError: this.onError,
+      onProgress: this.onProgress,
+      onSuccess: this.onSuccess,
+      onReject: this.onReject,
       ref: 'uploadRef',
-      attrs: this.$attrs,
+      ...this.$attrs,
     };
 
     const uploadList = showUploadList ? (
       <LocaleReceiver
         componentName="Upload"
         defaultLocale={defaultLocale.Upload}
-        scopedSlots={{ default: this.renderUploadList }}
+        children={this.renderUploadList}
       />
     ) : null;
 
-    const children = this.$slots.default;
+    const children = getSlot(this);
 
     if (type === 'drag') {
       const dragCls = classNames(prefixCls, {

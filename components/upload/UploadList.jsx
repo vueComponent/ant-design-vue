@@ -1,6 +1,6 @@
-import { inject, TransitionGroup } from 'vue';
+import { inject, Transition, TransitionGroup } from 'vue';
 import BaseMixin from '../_util/BaseMixin';
-import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
+import { getOptionProps, initDefaultProps } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
 import { ConfigConsumerProps } from '../config-provider';
 import { previewImage, isImageUrl } from './utils';
@@ -66,17 +66,17 @@ export default {
   },
   methods: {
     handlePreview(file, e) {
-      const { preview } = getListeners(this);
-      if (!preview) {
+      const { onPreview } = this.$attrs;
+      if (!onPreview) {
         return;
       }
       e.preventDefault();
       return this.$emit('preview', file);
     },
     handleDownload(file) {
-      const { download } = getListeners(this);
-      if (typeof download === 'function') {
-        download(file);
+      const { onDownload } = this.$attrs;
+      if (typeof onDownload === 'function') {
+        onDownload(file);
       } else if (file.url) {
         window.open(file.url);
       }

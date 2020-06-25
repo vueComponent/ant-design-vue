@@ -244,6 +244,7 @@ export default {
       disabled,
     } = getOptionProps(this);
     const { sFileList: fileList, dragState } = this.$data;
+    const { class: className, style } = this.$attrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('upload', customizePrefixCls);
 
@@ -257,7 +258,6 @@ export default {
       onSuccess: this.onSuccess,
       onReject: this.onReject,
       ref: 'uploadRef',
-      ...this.$attrs,
     };
 
     const uploadList = showUploadList ? (
@@ -272,6 +272,7 @@ export default {
 
     if (type === 'drag') {
       const dragCls = classNames(prefixCls, {
+        [className]: !!className,
         [`${prefixCls}-drag`]: true,
         [`${prefixCls}-drag-uploading`]: fileList.some(file => file.status === 'uploading'),
         [`${prefixCls}-drag-hover`]: dragState === 'dragover',
@@ -284,6 +285,7 @@ export default {
             onDrop={this.onFileDrop}
             onDragover={this.onFileDrop}
             onDragleave={this.onFileDrop}
+            style={style}
           >
             <VcUpload {...vcUploadProps} class={`${prefixCls}-btn`}>
               <div class={`${prefixCls}-drag-container`}>{children}</div>
@@ -303,7 +305,7 @@ export default {
     // Remove id to avoid open by label when trigger is hidden
     // https://github.com/ant-design/ant-design/issues/14298
     if (!children || disabled) {
-      delete vcUploadProps.props.id;
+      delete vcUploadProps.id;
     }
 
     const uploadButton = (

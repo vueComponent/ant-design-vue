@@ -3,6 +3,7 @@ import { initDefaultProps, getSlot } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import AjaxUpload from './AjaxUploader';
 import IframeUpload from './IframeUploader';
+import { nextTick } from 'vue';
 
 function empty() {}
 
@@ -51,21 +52,19 @@ export default {
     openFileDialogOnClick: true,
   }),
   data() {
+    this.Component = null;
     return {
-      Component: null,
+      // Component: null, // 组件作为响应式数据，性能比较低，采用强制刷新
     };
   },
   mounted() {
     this.$nextTick(() => {
       if (this.supportServerRender) {
-        this.setState(
-          {
-            Component: this.getComponent(),
-          },
-          () => {
-            this.$emit('ready');
-          },
-        );
+        this.Component = this.getComponent();
+        this.$forceUpdate();
+        nextTick(() => {
+          this.$emit('ready');
+        });
       }
     });
   },

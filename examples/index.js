@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import { createApp } from 'vue';
 import App from './App.vue';
-import { Button, Upload, Icon, notification, message } from 'ant-design-vue';
+import { Button, Upload, Icon, Modal, notification, message } from 'ant-design-vue';
 import 'ant-design-vue/style.js';
 
 const basic = {
@@ -21,4 +21,5 @@ app
   .use(Upload)
   .use(Button)
   .use(Icon)
+  .use(Modal)
   .mount('#app');

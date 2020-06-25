@@ -1,11 +1,9 @@
 import { initDefaultProps } from '../../_util/props-util';
-import antRef from '../../_util/ant-ref';
 import enhancer from './enhancer';
 import { propTypes, defaultProps } from './types';
 
 const Line = {
   props: initDefaultProps(propTypes, defaultProps),
-  directives: { antRef },
   created() {
     this.paths = {};
   },
@@ -78,7 +76,7 @@ const Line = {
             style: pathStyle,
           };
 
-          return <path v-antRef={c => (this.paths[index] = c)} {...pathProps} />;
+          return <path ref={c => (this.paths[index] = c)} {...pathProps} />;
         })}
       </svg>
     );

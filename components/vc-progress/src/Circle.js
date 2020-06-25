@@ -1,5 +1,4 @@
 import PropTypes from '../../_util/vue-types';
-import antRef from '../../_util/ant-ref';
 import { initDefaultProps } from '../../_util/props-util';
 import enhancer from './enhancer';
 import { propTypes, defaultProps } from './types';
@@ -71,7 +70,6 @@ function getPathStyles(offset, percent, strokeColor, strokeWidth, gapDegree = 0,
 
 const Circle = {
   props: initDefaultProps(circlePropTypes, circleDefaultProps),
-  directives: { antRef },
   created() {
     this.paths = {};
     this.gradientId = gradientSeed;
@@ -119,7 +117,7 @@ const Circle = {
           class: `${prefixCls}-circle-path`,
           style: pathStyle,
         };
-        return <path v-antRef={c => (this.paths[index] = c)} {...pathProps} />;
+        return <path ref={c => (this.paths[index] = c)} {...pathProps} />;
       });
     },
   },

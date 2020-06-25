@@ -257,6 +257,7 @@ const IframeUploader = {
 
   render() {
     const { componentTag: Tag, disabled, prefixCls } = this.$props;
+    const { class: className, style } = this.$attrs;
     const iframeStyle = {
       ...IFRAME_STYLE,
       display: this.uploading || disabled ? 'none' : '',
@@ -264,10 +265,11 @@ const IframeUploader = {
     const cls = classNames({
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,
+      [className]: className,
     });
 
     return (
-      <Tag className={cls} style={{ position: 'relative', zIndex: 0 }}>
+      <Tag class={cls} style={{ position: 'relative', zIndex: 0, ...style }}>
         <iframe ref="iframeRef" onLoad={this.onLoad} style={iframeStyle} />
         {getSlot(this)}
       </Tag>

@@ -1,11 +1,11 @@
+import { inject } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
+import { getOptionProps, getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import VcRate from '../vc-rate';
 import StarFilled from '@ant-design/icons-vue/StarFilled';
 import Tooltip from '../tooltip';
-import Base from '../base';
 
 export const RateProps = {
   prefixCls: PropTypes.string,
@@ -22,13 +22,11 @@ export const RateProps = {
 
 const Rate = {
   name: 'ARate',
-  model: {
-    prop: 'value',
-    event: 'change',
-  },
   props: RateProps,
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   methods: {
     characterRender(node, { index }) {
@@ -48,15 +46,13 @@ const Rate = {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('rate', customizePrefixCls);
 
-    const character = getComponentFromProp(this, 'character') || <StarFilled />;
+    const character = getComponent(this, 'character') || <StarFilled />;
     const rateProps = {
-      props: {
-        character,
-        characterRender: this.characterRender,
-        prefixCls,
-        ...omit(restProps, ['tooltips']),
-      },
-      on: getListeners(this),
+      character,
+      characterRender: this.characterRender,
+      prefixCls,
+      ...omit(restProps, ['tooltips']),
+      ...this.$attrs,
       ref: 'refRate',
     };
     return <VcRate {...rateProps} />;
@@ -64,8 +60,7 @@ const Rate = {
 };
 
 /* istanbul ignore next */
-Rate.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Rate.name, Rate);
+Rate.install = function(app) {
+  app.component(Rate.name, Rate);
 };
 export default Rate;

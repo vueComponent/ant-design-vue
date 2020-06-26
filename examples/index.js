@@ -1,12 +1,12 @@
 import '@babel/polyfill';
 import { createApp } from 'vue';
 import App from './App.vue';
-import { Button, Upload, Icon, Modal, Progress, notification, message } from 'ant-design-vue';
+import { Rate, Button, Upload, Icon, Modal, Progress, notification, message } from 'ant-design-vue';
 import 'ant-design-vue/style.js';
 
 const basic = {
   render() {
-    return this.$slots.default && this.$slots.default();
+    return this.$slots?.default();
   },
 };
 const app = createApp(App);
@@ -23,4 +23,5 @@ app
   .use(Icon)
   .use(Modal)
   .use(Progress)
+  .use(Rate)
   .mount('#app');

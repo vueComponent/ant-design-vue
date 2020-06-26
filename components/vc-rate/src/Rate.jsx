@@ -1,12 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 import classNames from 'classnames';
 import KeyCode from '../../_util/KeyCode';
-import {
-  initDefaultProps,
-  hasProp,
-  getOptionProps,
-  getComponentFromProp,
-} from '../../_util/props-util';
+import { initDefaultProps, hasProp, getOptionProps, getComponent } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import { getOffsetLeft } from './util';
 import Star from './Star';
@@ -30,10 +25,7 @@ function noop() {}
 export default {
   name: 'Rate',
   mixins: [BaseMixin],
-  model: {
-    prop: 'value',
-    event: 'change',
-  },
+  inheritAttrs: false,
   props: initDefaultProps(rateProps, {
     defaultValue: 0,
     count: 5,
@@ -167,33 +159,31 @@ export default {
           sValue: value,
         });
       }
+      this.$emit('update:value', value);
       this.$emit('change', value);
     },
   },
   render() {
     const { count, allowHalf, prefixCls, disabled, tabIndex } = getOptionProps(this);
     const { sValue, hoverValue, focused } = this;
+    const { class: className, style } = this.$attrs;
     const stars = [];
     const disabledClass = disabled ? `${prefixCls}-disabled` : '';
-    const character = getComponentFromProp(this, 'character');
-    const characterRender = this.characterRender || this.$scopedSlots.characterRender;
+    const character = getComponent(this, 'character');
+    const characterRender = this.characterRender || this.$slots.characterRender;
     for (let index = 0; index < count; index++) {
       const starProps = {
-        props: {
-          index,
-          count,
-          disabled,
-          prefixCls: `${prefixCls}-star`,
-          allowHalf,
-          value: hoverValue === undefined ? sValue : hoverValue,
-          character,
-          characterRender,
-          focused,
-        },
-        on: {
-          click: this.onClick,
-          hover: this.onHover,
-        },
+        index,
+        count,
+        disabled,
+        prefixCls: `${prefixCls}-star`,
+        allowHalf,
+        value: hoverValue === undefined ? sValue : hoverValue,
+        character,
+        characterRender,
+        focused,
+        onClick: this.onClick,
+        onHover: this.onHover,
         key: index,
         ref: `stars${index}`,
       };
@@ -201,7 +191,8 @@ export default {
     }
     return (
       <ul
-        class={classNames(prefixCls, disabledClass)}
+        class={classNames(prefixCls, disabledClass, className)}
+        style={style}
         onMouseleave={disabled ? noop : this.onMouseLeave}
         tabIndex={disabled ? -1 : tabIndex}
         onFocus={disabled ? noop : this.onFocus}

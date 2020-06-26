@@ -1,11 +1,12 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { getComponentFromProp } from '../../_util/props-util';
+import { getComponent } from '../../_util/props-util';
 function noop() {}
 
 export default {
   name: 'Star',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     value: PropTypes.number,
     index: PropTypes.number,
@@ -65,7 +66,7 @@ export default {
       value,
     } = this;
 
-    const character = getComponentFromProp(this, 'character');
+    const character = getComponent(this, 'character');
     let star = (
       <li class={this.getClassName()}>
         <div

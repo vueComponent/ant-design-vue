@@ -1,6 +1,6 @@
 function enhancer(Component) {
   return {
-    mixins: [Component],
+    ...Component,
     updated() {
       const now = Date.now();
       let updated = false;

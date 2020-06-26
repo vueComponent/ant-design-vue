@@ -3,6 +3,7 @@ import enhancer from './enhancer';
 import { propTypes, defaultProps } from './types';
 
 const Line = {
+  name: 'Line',
   props: initDefaultProps(propTypes, defaultProps),
   created() {
     this.paths = {};
@@ -34,13 +35,11 @@ const Line = {
     let stackPtg = 0;
 
     const pathFirst = {
-      attrs: {
-        d: pathString,
-        'stroke-linecap': strokeLinecap,
-        stroke: trailColor,
-        'stroke-width': trailWidth || strokeWidth,
-        'fill-opacity': '0',
-      },
+      d: pathString,
+      'stroke-linecap': strokeLinecap,
+      stroke: trailColor,
+      'stroke-width': trailWidth || strokeWidth,
+      'fill-opacity': '0',
       class: `${prefixCls}-line-trail`,
     };
     return (
@@ -65,13 +64,11 @@ const Line = {
 
           const pathProps = {
             key: index,
-            attrs: {
-              d: pathString,
-              'stroke-linecap': strokeLinecap,
-              stroke: color,
-              'stroke-width': strokeWidth,
-              'fill-opacity': '0',
-            },
+            d: pathString,
+            'stroke-linecap': strokeLinecap,
+            stroke: color,
+            'stroke-width': strokeWidth,
+            'fill-opacity': '0',
             class: `${prefixCls}-line-path`,
             style: pathStyle,
           };

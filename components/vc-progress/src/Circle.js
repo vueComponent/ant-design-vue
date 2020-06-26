@@ -69,6 +69,7 @@ function getPathStyles(offset, percent, strokeColor, strokeWidth, gapDegree = 0,
 }
 
 const Circle = {
+  name: 'Circle',
   props: initDefaultProps(circlePropTypes, circleDefaultProps),
   created() {
     this.paths = {};
@@ -148,13 +149,11 @@ const Circle = {
       color => Object.prototype.toString.call(color) === '[object Object]',
     );
     const pathFirst = {
-      attrs: {
-        d: pathString,
-        stroke: trailColor,
-        'stroke-linecap': strokeLinecap,
-        'stroke-width': trailWidth || strokeWidth,
-        'fill-opacity': '0',
-      },
+      d: pathString,
+      stroke: trailColor,
+      'stroke-linecap': strokeLinecap,
+      'stroke-width': trailWidth || strokeWidth,
+      'fill-opacity': '0',
       class: `${prefixCls}-circle-trail`,
       style: pathStyle,
     };

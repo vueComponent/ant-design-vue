@@ -3,6 +3,7 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import {
   Input,
+  InputNumber,
   Rate,
   Button,
   Upload,
@@ -41,4 +42,5 @@ app
   .use(Tooltip)
   .use(Col)
   .use(Row)
+  .use(InputNumber)
   .mount('#app');

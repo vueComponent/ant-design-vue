@@ -1,7 +1,20 @@
 import '@babel/polyfill';
 import { createApp } from 'vue';
 import App from './App.vue';
-import { Rate, Button, Upload, Icon, Modal, Progress, notification, message } from 'ant-design-vue';
+import {
+  Input,
+  Rate,
+  Button,
+  Upload,
+  Icon,
+  Modal,
+  Progress,
+  Tooltip,
+  Col,
+  Row,
+  notification,
+  message,
+} from 'ant-design-vue';
 import 'ant-design-vue/style.js';
 
 const basic = {
@@ -24,4 +37,8 @@ app
   .use(Modal)
   .use(Progress)
   .use(Rate)
+  .use(Input)
+  .use(Tooltip)
+  .use(Col)
+  .use(Row)
   .mount('#app');

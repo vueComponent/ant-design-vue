@@ -1,8 +1,8 @@
+import { inject } from 'vue';
 import classNames from 'classnames';
-import TextArea from './TextArea';
 import omit from 'omit.js';
 import inputProps from './inputProps';
-import { hasProp, getComponentFromProp, getListeners, getOptionProps } from '../_util/props-util';
+import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
 
@@ -52,15 +52,13 @@ export function getInputClassName(prefixCls, size, disabled) {
 export default {
   name: 'AInput',
   inheritAttrs: false,
-  model: {
-    prop: 'value',
-    event: 'change.value',
-  },
   props: {
     ...inputProps,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     const props = this.$props;
@@ -89,14 +87,22 @@ export default {
   },
   methods: {
     focus() {
-      this.$refs.input.focus();
+      this.input.focus();
     },
 
     blur() {
-      this.$refs.input.blur();
+      this.input.blur();
     },
     select() {
-      this.$refs.input.select();
+      this.input.select();
+    },
+
+    saveClearableInput(input) {
+      this.clearableInput = input;
+    },
+
+    saveInput(input) {
+      this.input = input;
     },
 
     setValue(value, callback) {
@@ -109,13 +115,11 @@ export default {
           callback && callback();
         });
       } else {
-        // 不在严格受控
-        // https://github.com/vueComponent/ant-design-vue/issues/2207，modal 是 新 new 实例，更新队列和当前不在同一个更新队列中
-        // this.$forceUpdate();
+        this.$forceUpdate();
       }
     },
     onChange(e) {
-      this.$emit('change.value', e.target.value);
+      this.$emit('update:value', e.target.value);
       this.$emit('change', e);
       this.$emit('input', e);
     },
@@ -123,9 +127,9 @@ export default {
       this.setValue('', () => {
         this.focus();
       });
-      resolveOnChange(this.$refs.input, e, this.onChange);
+      resolveOnChange(this.input, e, this.onChange);
     },
-    renderInput(prefixCls) {
+    renderInput(prefixCls, { addonBefore, addonAfter }) {
       const otherProps = omit(this.$props, [
         'prefixCls',
         'addonBefore',
@@ -133,42 +137,43 @@ export default {
         'prefix',
         'suffix',
         'allowClear',
-        'value',
         'defaultValue',
         'lazy',
         'size',
         'inputType',
         'className',
+        'autoFocus',
+        'inputPrefixCls',
+        'loading',
       ]);
-      const { stateValue, handleKeyDown, handleChange, size, disabled } = this;
+      const { handleKeyDown, handleChange, size, disabled, $attrs } = this;
+
       const inputProps = {
-        directives: [{ name: 'ant-input' }],
-        domProps: {
-          value: fixControlledValue(stateValue),
-        },
-        attrs: { ...otherProps, ...this.$attrs },
-        on: {
-          ...getListeners(this),
-          keydown: handleKeyDown,
-          input: handleChange,
-          change: noop,
-        },
-        class: getInputClassName(prefixCls, size, disabled),
-        ref: 'input',
+        ...otherProps,
+        ...$attrs,
+        onKeydown: handleKeyDown,
+        class: classNames(getInputClassName(prefixCls, size, disabled), {
+          [$attrs.class]: $attrs.class && !addonBefore && !addonAfter,
+        }),
+        ref: this.saveInput,
         key: 'ant-input',
       };
-      return <input {...inputProps} />;
+      // vue bug ？
+      if (inputProps.maxLength === undefined) {
+        delete inputProps.maxLength;
+      }
+      return <input {...inputProps} onInput={handleChange} onChange={noop} />;
     },
     clearPasswordValueAttribute() {
       // https://github.com/ant-design/ant-design/issues/20541
       this.removePasswordTimeout = setTimeout(() => {
         if (
-          this.$refs.input &&
-          this.$refs.input.getAttribute &&
-          this.$refs.input.getAttribute('type') === 'password' &&
-          this.$refs.input.hasAttribute('value')
+          this.input &&
+          this.input.getAttribute &&
+          this.input.getAttribute('type') === 'password' &&
+          this.input.hasAttribute('value')
         ) {
-          this.$refs.input.removeAttribute('value');
+          this.input.removeAttribute('value');
         }
       });
     },
@@ -177,7 +182,7 @@ export default {
       // https://github.com/vueComponent/ant-design-vue/issues/2203
       if (((e.isComposing || composing) && this.lazy) || this.stateValue === value) return;
       this.setValue(value, this.clearPasswordValueAttribute);
-      resolveOnChange(this.$refs.input, e, this.onChange);
+      resolveOnChange(this.input, e, this.onChange);
     },
     handleKeyDown(e) {
       if (e.keyCode === 13) {
@@ -187,42 +192,37 @@ export default {
     },
   },
   render() {
-    if (this.$props.type === 'textarea') {
-      const textareaProps = {
-        props: this.$props,
-        attrs: this.$attrs,
-        on: {
-          ...getListeners(this),
-          input: this.handleChange,
-          keydown: this.handleKeyDown,
-          change: noop,
-        },
-      };
-      return <TextArea {...textareaProps} ref="input" />;
-    }
+    // if (this.$props.type === 'textarea') {
+    //   const textareaProps = {
+    //     ...this.$props,
+    //     ...this.$attrs,
+    //     onInput: this.handleChange,
+    //     onKeydown: this.handleKeyDown,
+    //     onChange: noop,
+    //   };
+    //   return <TextArea {...textareaProps} ref="input" />;
+    // }
     const { prefixCls: customizePrefixCls } = this.$props;
     const { stateValue } = this.$data;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
-    const addonAfter = getComponentFromProp(this, 'addonAfter');
-    const addonBefore = getComponentFromProp(this, 'addonBefore');
-    const suffix = getComponentFromProp(this, 'suffix');
-    const prefix = getComponentFromProp(this, 'prefix');
+    const addonAfter = getComponent(this, 'addonAfter');
+    const addonBefore = getComponent(this, 'addonBefore');
+    const suffix = getComponent(this, 'suffix');
+    const prefix = getComponent(this, 'prefix');
     const props = {
-      props: {
-        ...getOptionProps(this),
-        prefixCls,
-        inputType: 'input',
-        value: fixControlledValue(stateValue),
-        element: this.renderInput(prefixCls),
-        handleReset: this.handleReset,
-        addonAfter,
-        addonBefore,
-        suffix,
-        prefix,
-      },
-      on: getListeners(this),
+      ...this.$attrs,
+      ...getOptionProps(this),
+      prefixCls,
+      inputType: 'input',
+      value: fixControlledValue(stateValue),
+      element: this.renderInput(prefixCls, { addonAfter, addonBefore }),
+      handleReset: this.handleReset,
+      addonAfter,
+      addonBefore,
+      suffix,
+      prefix,
     };
-    return <ClearableLabeledInput {...props} />;
+    return <ClearableLabeledInput {...props} ref={this.saveClearableInput} />;
   },
 };

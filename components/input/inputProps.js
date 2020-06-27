@@ -32,5 +32,4 @@ export default {
   },
   maxLength: PropTypes.number,
   loading: PropTypes.bool,
-  className: PropTypes.string,
 };

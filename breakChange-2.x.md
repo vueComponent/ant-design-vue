@@ -73,3 +73,7 @@ renderTabBar({props, on, style, class}, DefaultTabBar) -> {DefaultTabBar, ...pro
 ## card
 
 tabList[{scopedSlots}] -> tabList[{slots}]
+
+## rate
+
+v-model -> v-model:value

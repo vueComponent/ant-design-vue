@@ -169,11 +169,10 @@ const Menu = {
       onSelect: this.onSelect,
       ref: 'innerMenu',
     };
-    return (
-      <Provider store={this.store}>
-        <SubPopupMenu {...subPopupMenuProps} />
-      </Provider>
-    );
+
+    const subPopupMenu = <SubPopupMenu {...subPopupMenuProps} />;
+    return <Provider store={this.store}>{subPopupMenu}</Provider>;
   },
 };
+
 export default Menu;

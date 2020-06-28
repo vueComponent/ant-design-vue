@@ -7,7 +7,7 @@ import warning from '../_util/warning';
 import BaseMixin from '../_util/BaseMixin';
 import inputProps from './inputProps';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getListeners } from '../_util/props-util';
+import { getOptionProps } from '../_util/props-util';
 
 const RESIZE_STATUS_NONE = 0;
 const RESIZE_STATUS_RESIZING = 1;
@@ -20,6 +20,7 @@ const TextAreaProps = {
 };
 const ResizableTextArea = {
   name: 'ResizableTextArea',
+  inheritAttrs: false,
   props: TextAreaProps,
   data() {
     return {
@@ -43,6 +44,9 @@ const ResizableTextArea = {
     },
   },
   methods: {
+    saveTextArea(textArea) {
+      this.textArea = textArea;
+    },
     handleResize(size) {
       const { resizeStatus } = this.$data;
       const { autoSize } = this.$props;
@@ -62,11 +66,11 @@ const ResizableTextArea = {
 
     resizeTextarea() {
       const autoSize = this.$props.autoSize || this.$props.autosize;
-      if (!autoSize || !this.$refs.textArea) {
+      if (!autoSize || !this.textArea) {
         return;
       }
       const { minRows, maxRows } = autoSize;
-      const textareaStyles = calculateNodeHeight(this.$refs.textArea, false, minRows, maxRows);
+      const textareaStyles = calculateNodeHeight(this.textArea, false, minRows, maxRows);
       this.setState({ textareaStyles, resizeStatus: RESIZE_STATUS_RESIZING }, () => {
         raf.cancel(this.resizeFrameId);
         this.resizeFrameId = raf(() => {
@@ -82,10 +86,10 @@ const ResizableTextArea = {
     // https://github.com/ant-design/ant-design/issues/21870
     fixFirefoxAutoScroll() {
       try {
-        if (document.activeElement === this.$refs.textArea) {
-          const currentStart = this.$refs.textArea.selectionStart;
-          const currentEnd = this.$refs.textArea.selectionEnd;
-          this.$refs.textArea.setSelectionRange(currentStart, currentEnd);
+        if (document.activeElement === this.textArea) {
+          const currentStart = this.textArea.selectionStart;
+          const currentEnd = this.textArea.selectionEnd;
+          this.textArea.setSelectionRange(currentStart, currentEnd);
         }
       } catch (e) {
         // Fix error in Chrome:
@@ -95,8 +99,8 @@ const ResizableTextArea = {
     },
 
     renderTextArea() {
-      const props = getOptionProps(this);
-      const { prefixCls, autoSize, autosize, disabled } = props;
+      const props = { ...getOptionProps(this), ...this.$attrs };
+      const { prefixCls, autoSize, autosize, disabled, class: className } = props;
       const { textareaStyles, resizeStatus } = this.$data;
       warning(
         autosize === undefined,
@@ -105,35 +109,33 @@ const ResizableTextArea = {
       );
       const otherProps = omit(props, [
         'prefixCls',
+        'onPressEnter',
         'autoSize',
         'autosize',
         'defaultValue',
         'allowClear',
         'type',
         'lazy',
-        'value',
       ]);
-      const cls = classNames(prefixCls, {
+      const cls = classNames(prefixCls, className, {
         [`${prefixCls}-disabled`]: disabled,
       });
-      const domProps = {};
       // Fix https://github.com/ant-design/ant-design/issues/6776
       // Make sure it could be reset when using form.getFieldDecorator
-      if ('value' in props) {
-        domProps.value = props.value || '';
+      if ('value' in otherProps) {
+        otherProps.value = otherProps.value || '';
       }
       const style = {
+        ...props.style,
         ...textareaStyles,
         ...(resizeStatus === RESIZE_STATUS_RESIZING
           ? { overflowX: 'hidden', overflowY: 'hidden' }
           : null),
       };
       const textareaProps = {
-        attrs: otherProps,
-        domProps,
+        ...otherProps,
         style,
         class: cls,
-        on: omit(getListeners(this), 'pressEnter'),
         directives: [
           {
             name: 'ant-input',
@@ -142,7 +144,7 @@ const ResizableTextArea = {
       };
       return (
         <ResizeObserver onResize={this.handleResize} disabled={!(autoSize || autosize)}>
-          <textarea {...textareaProps} ref="textArea" />
+          <textarea {...textareaProps} ref={this.saveTextArea} />
         </ResizeObserver>
       );
     },

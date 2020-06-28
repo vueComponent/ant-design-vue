@@ -1,18 +1,13 @@
+import { inject } from 'vue';
 import classNames from 'classnames';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import VcMentions from '../vc-mentions';
 import { mentionsProps } from '../vc-mentions/src/mentionsProps';
-import Base from '../base';
 import Spin from '../spin';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
-import {
-  getOptionProps,
-  getComponentFromProp,
-  getListeners,
-  filterEmpty,
-} from '../_util/props-util';
+import { getOptionProps, getComponent, filterEmpty, getSlot } from '../_util/props-util';
 
 const { Option } = VcMentions;
 
@@ -53,18 +48,16 @@ const Mentions = {
   name: 'AMentions',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  model: {
-    prop: 'value',
-    event: 'change',
-  },
   Option: { ...Option, name: 'AMentionsOption' },
   getMentions,
   props: {
     ...mentionsProps,
     loading: PropTypes.bool,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     return {
@@ -99,19 +92,19 @@ const Mentions = {
     },
     onChange(val) {
       this.$emit('change', val);
+      this.$emit('update:value', val);
     },
     getNotFoundContent(renderEmpty) {
-      const h = this.$createElement;
-      const notFoundContent = getComponentFromProp(this, 'notFoundContent');
+      const notFoundContent = getComponent(this, 'notFoundContent');
       if (notFoundContent !== undefined) {
         return notFoundContent;
       }
 
-      return renderEmpty(h, 'Select');
+      return renderEmpty('Select');
     },
     getOptions() {
       const { loading } = this.$props;
-      const children = filterEmpty(this.$slots.default || []);
+      const children = filterEmpty(getSlot(this) || []);
 
       if (loading) {
         return (
@@ -145,33 +138,30 @@ const Mentions = {
       getPopupContainer,
       ...restProps
     } = getOptionProps(this);
+    const { class: className, ...otherAttrs } = this.$attrs;
     const prefixCls = getPrefixCls('mentions', customizePrefixCls);
     const otherProps = omit(restProps, ['loading']);
 
-    const mergedClassName = classNames({
+    const mergedClassName = classNames(className, {
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-focused`]: focused,
     });
 
     const mentionsProps = {
-      props: {
-        prefixCls,
-        notFoundContent: this.getNotFoundContent(renderEmpty),
-        ...otherProps,
-        disabled,
-        filterOption: this.getFilterOption(),
-        getPopupContainer,
-        children: this.getOptions(),
-      },
+      prefixCls,
+      notFoundContent: this.getNotFoundContent(renderEmpty),
+      ...otherProps,
+      disabled,
+      filterOption: this.getFilterOption(),
+      getPopupContainer,
+      children: this.getOptions(),
       class: mergedClassName,
-      attrs: { rows: 1, ...this.$attrs },
-      on: {
-        ...getListeners(this),
-        change: this.onChange,
-        select: this.onSelect,
-        focus: this.onFocus,
-        blur: this.onBlur,
-      },
+      rows: 1,
+      ...otherAttrs,
+      onChange: this.onChange,
+      onSelect: this.onSelect,
+      onFocus: this.onFocus,
+      onBlur: this.onBlur,
       ref: 'vcMentions',
     };
 
@@ -180,10 +170,9 @@ const Mentions = {
 };
 
 /* istanbul ignore next */
-Mentions.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Mentions.name, Mentions);
-  Vue.component(Mentions.Option.name, Mentions.Option);
+Mentions.install = function(app) {
+  app.component(Mentions.name, Mentions);
+  app.component(Mentions.Option.name, Mentions.Option);
 };
 
 export default Mentions;

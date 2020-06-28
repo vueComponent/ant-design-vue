@@ -5,7 +5,7 @@ import Progress from '..';
 describe('Progress', () => {
   it('successPercent should decide the progress status when it exists', async () => {
     const wrapper = mount(Progress, {
-      propsData: {
+      props: {
         percent: 100,
         successPercent: 50,
       },
@@ -28,7 +28,7 @@ describe('Progress', () => {
 
   it('render out-of-range progress', async () => {
     const wrapper = mount(Progress, {
-      propsData: {
+      props: {
         percent: 120,
       },
       sync: false,
@@ -40,7 +40,7 @@ describe('Progress', () => {
 
   it('render out-of-range progress with info', async () => {
     const wrapper = mount(Progress, {
-      propsData: {
+      props: {
         percent: 120,
         showInfo: true,
       },
@@ -53,7 +53,7 @@ describe('Progress', () => {
 
   it('render negetive progress', async () => {
     const wrapper = mount(Progress, {
-      propsData: {
+      props: {
         percent: -20,
       },
       sync: false,
@@ -65,7 +65,7 @@ describe('Progress', () => {
 
   it('render negetive successPercent', async () => {
     const wrapper = mount(Progress, {
-      propsData: {
+      props: {
         percent: 50,
         successPercent: -20,
       },
@@ -78,7 +78,7 @@ describe('Progress', () => {
 
   it('render negetive successPercent', async () => {
     const wrapper = mount(Progress, {
-      propsData: {
+      props: {
         percent: 50,
         successPercent: 10,
         format: (percent, successPercent) => `${percent} ${successPercent}`,
@@ -92,7 +92,7 @@ describe('Progress', () => {
 
   it('render format', async () => {
     const wrapper = mount(Progress, {
-      propsData: {
+      props: {
         percent: 50,
         type: 'circle',
         strokeColor: 'red',
@@ -105,7 +105,7 @@ describe('Progress', () => {
   });
 
   it('render normal progress', () => {
-    const wrapper = mount(Progress, { propsData: { status: 'normal' } });
+    const wrapper = mount(Progress, { props: { status: 'normal' } });
     expect(wrapper.html()).toMatchSnapshot();
   });
 });

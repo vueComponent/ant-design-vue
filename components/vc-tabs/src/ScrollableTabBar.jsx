@@ -3,21 +3,18 @@ import TabBarRootNode from './TabBarRootNode';
 import TabBarTabsNode from './TabBarTabsNode';
 import SaveRef from './SaveRef';
 
-export default {
-  name: 'ScrollableTabBar',
-  functional: true,
-  render(h, context) {
-    const { props, listeners = {} } = context;
-    return (
-      <SaveRef
-        children={(saveRef, getRef) => (
-          <TabBarRootNode saveRef={saveRef} {...{ props, on: listeners }}>
-            <ScrollableTabBarNode saveRef={saveRef} getRef={getRef} {...{ props, on: listeners }}>
-              <TabBarTabsNode saveRef={saveRef} {...{ props, on: listeners }} />
-            </ScrollableTabBarNode>
-          </TabBarRootNode>
-        )}
-      />
-    );
-  },
+const ScrollableTabBar = (_, { attrs }) => {
+  return (
+    <SaveRef
+      children={(saveRef, getRef) => (
+        <TabBarRootNode saveRef={saveRef} {...attrs}>
+          <ScrollableTabBarNode saveRef={saveRef} getRef={getRef} {...attrs}>
+            <TabBarTabsNode saveRef={saveRef} {...attrs} />
+          </ScrollableTabBarNode>
+        </TabBarRootNode>
+      )}
+    />
+  );
 };
+ScrollableTabBar.inheritAttrs = false;
+export default ScrollableTabBar;

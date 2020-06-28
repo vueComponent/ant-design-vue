@@ -1,3 +1,4 @@
+import { Transition } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
@@ -6,7 +7,7 @@ import { connect } from '../_util/store';
 import SubPopupMenu from './SubPopupMenu';
 import placements from './placements';
 import BaseMixin from '../_util/BaseMixin';
-import { getComponentFromProp, filterEmpty, getListeners } from '../_util/props-util';
+import { getComponent, filterEmpty, getSlot, splitAttrs, findDOMNode } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import { noop, loopMenuItemRecursively, getMenuIdFromSubMenuEventKey } from './util';
 import getTransitionProps from '../_util/getTransitionProps';
@@ -33,6 +34,7 @@ const updateDefaultActiveFirst = (store, eventKey, defaultActiveFirst) => {
 
 const SubMenu = {
   name: 'SubMenu',
+  inheritAttrs: false,
   props: {
     parentMenu: PropTypes.object,
     title: PropTypes.any,
@@ -71,6 +73,7 @@ const SubMenu = {
     itemIcon: PropTypes.any,
     expandIcon: PropTypes.any,
     subMenuKey: PropTypes.string,
+    theme: PropTypes.string,
   },
   mixins: [BaseMixin],
   isSubMenu: true,
@@ -86,6 +89,10 @@ const SubMenu = {
     }
 
     updateDefaultActiveFirst(store, eventKey, value);
+    this.internalMenuId = undefined;
+    this.haveRendered = undefined;
+    this.haveOpened = undefined;
+    this.subMenuTitle = undefined;
     return {
       // defaultActiveFirst: false,
     };
@@ -312,7 +319,7 @@ const SubMenu = {
 
     isChildrenSelected() {
       const ret = { find: false };
-      loopMenuItemRecursively(this.$slots.default, this.$props.selectedKeys, ret);
+      loopMenuItemRecursively(getSlot(this), this.$props.selectedKeys, ret);
       return ret.find;
     },
     // isOpen () {
@@ -321,62 +328,59 @@ const SubMenu = {
 
     adjustWidth() {
       /* istanbul ignore if */
-      if (!this.$refs.subMenuTitle || !this.menuInstance) {
+      if (!this.subMenuTitle || !this.menuInstance) {
         return;
       }
-      const popupMenu = this.menuInstance.$el;
-      if (popupMenu.offsetWidth >= this.$refs.subMenuTitle.offsetWidth) {
+      const popupMenu = findDOMNode(this.menuInstance);
+      if (popupMenu.offsetWidth >= this.subMenuTitle.offsetWidth) {
         return;
       }
 
       /* istanbul ignore next */
-      popupMenu.style.minWidth = `${this.$refs.subMenuTitle.offsetWidth}px`;
+      popupMenu.style.minWidth = `${this.subMenuTitle.offsetWidth}px`;
     },
-
+    saveSubMenuTitle(subMenuTitle) {
+      this.subMenuTitle = subMenuTitle;
+    },
     renderChildren(children) {
-      const props = this.$props;
-      const { select, deselect, openChange } = getListeners(this);
+      const props = { ...this.$props, ...this.$attrs };
       const subPopupMenuProps = {
-        props: {
-          mode: props.mode === 'horizontal' ? 'vertical' : props.mode,
-          visible: props.isOpen,
-          level: props.level + 1,
-          inlineIndent: props.inlineIndent,
-          focusable: false,
-          selectedKeys: props.selectedKeys,
-          eventKey: `${props.eventKey}-menu-`,
-          openKeys: props.openKeys,
-          openTransitionName: props.openTransitionName,
-          openAnimation: props.openAnimation,
-          subMenuOpenDelay: props.subMenuOpenDelay,
-          parentMenu: this,
-          subMenuCloseDelay: props.subMenuCloseDelay,
-          forceSubMenuRender: props.forceSubMenuRender,
-          triggerSubMenuAction: props.triggerSubMenuAction,
-          builtinPlacements: props.builtinPlacements,
-          defaultActiveFirst: props.store.getState().defaultActiveFirst[
-            getMenuIdFromSubMenuEventKey(props.eventKey)
-          ],
-          multiple: props.multiple,
-          prefixCls: props.rootPrefixCls,
-          manualRef: this.saveMenuInstance,
-          itemIcon: getComponentFromProp(this, 'itemIcon'),
-          expandIcon: getComponentFromProp(this, 'expandIcon'),
-          children,
-        },
-        on: {
-          click: this.onSubMenuClick,
-          select,
-          deselect,
-          openChange,
-        },
+        mode: props.mode === 'horizontal' ? 'vertical' : props.mode,
+        visible: props.isOpen,
+        level: props.level + 1,
+        inlineIndent: props.inlineIndent,
+        focusable: false,
+        selectedKeys: props.selectedKeys,
+        eventKey: `${props.eventKey}-menu-`,
+        openKeys: props.openKeys,
+        openTransitionName: props.openTransitionName,
+        openAnimation: props.openAnimation,
+        subMenuOpenDelay: props.subMenuOpenDelay,
+        parentMenu: this,
+        subMenuCloseDelay: props.subMenuCloseDelay,
+        forceSubMenuRender: props.forceSubMenuRender,
+        triggerSubMenuAction: props.triggerSubMenuAction,
+        builtinPlacements: props.builtinPlacements,
+        defaultActiveFirst: props.store.getState().defaultActiveFirst[
+          getMenuIdFromSubMenuEventKey(props.eventKey)
+        ],
+        multiple: props.multiple,
+        prefixCls: props.rootPrefixCls,
+        manualRef: this.saveMenuInstance,
+        itemIcon: getComponent(this, 'itemIcon'),
+        expandIcon: getComponent(this, 'expandIcon'),
+        children,
+        onClick: this.onSubMenuClick,
+        onSelect: props.onSelect || noop,
+        onDeselect: props.onDeselect || noop,
+        onOpenChange: props.onOpenChange || noop,
         id: this.internalMenuId,
       };
-      const baseProps = subPopupMenuProps.props;
       const haveRendered = this.haveRendered;
       this.haveRendered = true;
 
-      this.haveOpened = this.haveOpened || baseProps.visible || baseProps.forceSubMenuRender;
+      this.haveOpened =
+        this.haveOpened || subPopupMenuProps.visible || subPopupMenuProps.forceSubMenuRender;
       // never rendered not planning to, don't render
       if (!this.haveOpened) {
         return <div />;
@@ -385,39 +389,36 @@ const SubMenu = {
       // don't show transition on first rendering (no animation for opened menu)
       // show appear transition if it's not visible (not sure why)
       // show appear transition if it's not inline mode
-      const transitionAppear = haveRendered || !baseProps.visible || !baseProps.mode === 'inline';
-      subPopupMenuProps.class = ` ${baseProps.prefixCls}-sub`;
-      let animProps = { appear: transitionAppear, css: false };
-      let transitionProps = {
-        props: animProps,
-        on: {},
-      };
-      if (baseProps.openTransitionName) {
-        transitionProps = getTransitionProps(baseProps.openTransitionName, {
+      const transitionAppear =
+        haveRendered || !subPopupMenuProps.visible || !subPopupMenuProps.mode === 'inline';
+      subPopupMenuProps.class = ` ${subPopupMenuProps.prefixCls}-sub`;
+      let transitionProps = { appear: transitionAppear, css: false };
+
+      if (subPopupMenuProps.openTransitionName) {
+        transitionProps = getTransitionProps(subPopupMenuProps.openTransitionName, {
           appear: transitionAppear,
         });
-      } else if (typeof baseProps.openAnimation === 'object') {
-        animProps = { ...animProps, ...(baseProps.openAnimation.props || {}) };
+      } else if (typeof subPopupMenuProps.openAnimation === 'object') {
+        transitionProps = { ...transitionProps, ...(subPopupMenuProps.openAnimation || {}) };
         if (!transitionAppear) {
-          animProps.appear = false;
+          transitionProps.appear = false;
         }
-      } else if (typeof baseProps.openAnimation === 'string') {
-        transitionProps = getTransitionProps(baseProps.openAnimation, { appear: transitionAppear });
-      }
-
-      if (typeof baseProps.openAnimation === 'object' && baseProps.openAnimation.on) {
-        transitionProps.on = baseProps.openAnimation.on;
+      } else if (typeof subPopupMenuProps.openAnimation === 'string') {
+        transitionProps = getTransitionProps(subPopupMenuProps.openAnimation, {
+          appear: transitionAppear,
+        });
       }
       return (
-        <transition {...transitionProps}>
+        <Transition {...transitionProps}>
           <SubPopupMenu v-show={props.isOpen} {...subPopupMenuProps} />
-        </transition>
+        </Transition>
       );
     },
   },
 
   render() {
-    const props = this.$props;
+    const props = { ...this.$props, ...this.$attrs };
+    const { onEvents } = splitAttrs(props);
     const { rootPrefixCls, parentMenu } = this;
     const isOpen = props.isOpen;
     const prefixCls = this.getPrefixCls();
@@ -425,6 +426,7 @@ const SubMenu = {
     const className = {
       [prefixCls]: true,
       [`${prefixCls}-${props.mode}`]: true,
+      [props.class]: !!props.class,
       [this.getOpenClassName()]: isOpen,
       [this.getActiveClassName()]: props.active || (isOpen && !isInlineMode),
       [this.getDisabledClassName()]: props.disabled,
@@ -444,17 +446,17 @@ const SubMenu = {
     let titleMouseEvents = {};
     if (!props.disabled) {
       mouseEvents = {
-        mouseleave: this.onMouseLeave,
-        mouseenter: this.onMouseEnter,
+        onMouseleave: this.onMouseLeave,
+        onMouseenter: this.onMouseEnter,
       };
 
       // only works in title, not outer li
       titleClickEvents = {
-        click: this.onTitleClick,
+        onClick: this.onTitleClick,
       };
       titleMouseEvents = {
-        mouseenter: this.onTitleMouseEnter,
-        mouseleave: this.onTitleMouseLeave,
+        onMouseenter: this.onTitleMouseEnter,
+        onMouseleave: this.onTitleMouseLeave,
       };
     }
 
@@ -472,42 +474,42 @@ const SubMenu = {
       };
     }
     const titleProps = {
-      attrs: {
-        'aria-expanded': isOpen,
-        ...ariaOwns,
-        'aria-haspopup': 'true',
-        title: typeof props.title === 'string' ? props.title : undefined,
-      },
-      on: {
-        ...titleMouseEvents,
-        ...titleClickEvents,
-      },
+      'aria-expanded': isOpen,
+      ...ariaOwns,
+      'aria-haspopup': 'true',
+      title: typeof props.title === 'string' ? props.title : undefined,
+      ...titleMouseEvents,
+      ...titleClickEvents,
       style,
       class: `${prefixCls}-title`,
-      ref: 'subMenuTitle',
+      ref: this.saveSubMenuTitle,
     };
+
     // expand custom icon should NOT be displayed in menu with horizontal mode.
     let icon = null;
     if (props.mode !== 'horizontal') {
-      icon = getComponentFromProp(this, 'expandIcon', props);
+      icon = getComponent(this, 'expandIcon', props);
     }
     const title = (
       <div {...titleProps}>
-        {getComponentFromProp(this, 'title')}
+        {getComponent(this, 'title')}
         {icon || <i class={`${prefixCls}-arrow`} />}
       </div>
     );
-    const children = this.renderChildren(filterEmpty(this.$slots.default));
+    const children = this.renderChildren(filterEmpty(getSlot(this)));
 
     const getPopupContainer = this.parentMenu.isRootMenu
       ? this.parentMenu.getPopupContainer
       : triggerNode => triggerNode.parentNode;
     const popupPlacement = popupPlacementMap[props.mode];
     const popupAlign = props.popupOffset ? { offset: props.popupOffset } : {};
-    const popupClassName = props.mode === 'inline' ? '' : props.popupClassName;
+    let popupClassName = props.mode === 'inline' ? '' : props.popupClassName || '';
+    popupClassName = `${prefixCls}-popup ${rootPrefixCls}-${parentMenu.theme} ${popupClassName}`;
     const liProps = {
-      on: { ...omit(getListeners(this), ['click']), ...mouseEvents },
+      ...omit(onEvents, ['onClick']),
+      ...mouseEvents,
       class: className,
+      style: props.style,
     };
 
     return (
@@ -517,9 +519,7 @@ const SubMenu = {
         {!isInlineMode && (
           <Trigger
             prefixCls={prefixCls}
-            popupClassName={`${prefixCls}-popup ${rootPrefixCls}-${
-              parentMenu.theme
-            } ${popupClassName || ''}`}
+            popupClassName={popupClassName}
             getPopupContainer={getPopupContainer}
             builtinPlacements={placements}
             builtinPlacements={Object.assign({}, placements, props.builtinPlacements)}
@@ -533,8 +533,8 @@ const SubMenu = {
             forceRender={props.forceSubMenuRender}
             // popupTransitionName='rc-menu-open-slide-up'
             // popupAnimation={transitionProps}
+            popup={children}
           >
-            <template slot="popup">{children}</template>
             {title}
           </Trigger>
         )}
@@ -543,11 +543,13 @@ const SubMenu = {
   },
 };
 
-const connected = connect(({ openKeys, activeKey, selectedKeys }, { eventKey, subMenuKey }) => ({
-  isOpen: openKeys.indexOf(eventKey) > -1,
-  active: activeKey[subMenuKey] === eventKey,
-  selectedKeys,
-}))(SubMenu);
+const connected = connect(({ openKeys, activeKey, selectedKeys }, { eventKey, subMenuKey }) => {
+  return {
+    isOpen: openKeys.indexOf(eventKey) > -1,
+    active: activeKey[subMenuKey] === eventKey,
+    selectedKeys,
+  };
+})(SubMenu);
 
 connected.isSubMenu = true;
 

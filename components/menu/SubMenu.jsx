@@ -1,13 +1,18 @@
+import { inject } from 'vue';
 import { SubMenu as VcSubMenu } from '../vc-menu';
-import { getListeners } from '../_util/props-util';
 import classNames from 'classnames';
+import Omit from 'omit.js';
+import { getSlot } from '../_util/props-util';
 
 export default {
   name: 'ASubMenu',
   isSubMenu: true,
+  inheritAttrs: false,
   props: { ...VcSubMenu.props },
-  inject: {
-    menuPropsContext: { default: () => ({}) },
+  setup() {
+    return {
+      menuPropsContext: inject('menuPropsContext', {}),
+    };
   },
   methods: {
     onKeyDown(e) {
@@ -16,27 +21,16 @@ export default {
   },
 
   render() {
-    const { $slots, $scopedSlots } = this;
+    const { $slots, $attrs } = this;
     const { rootPrefixCls, popupClassName } = this.$props;
     const { theme: antdMenuTheme } = this.menuPropsContext;
     const props = {
-      props: {
-        ...this.$props,
-        popupClassName: classNames(`${rootPrefixCls}-${antdMenuTheme}`, popupClassName),
-      },
+      ...this.$props,
+      popupClassName: classNames(`${rootPrefixCls}-${antdMenuTheme}`, popupClassName),
       ref: 'subMenu',
-      on: getListeners(this),
-      scopedSlots: $scopedSlots,
+      ...$attrs,
+      ...Omit($slots, ['default']),
     };
-    const slotsKey = Object.keys($slots);
-    return (
-      <VcSubMenu {...props}>
-        {slotsKey.length
-          ? slotsKey.map(name => {
-              return <template slot={name}>{$slots[name]}</template>;
-            })
-          : null}
-      </VcSubMenu>
-    );
+    return <VcSubMenu {...props}>{getSlot(this)}</VcSubMenu>;
   },
 };

@@ -40,7 +40,7 @@ describe('TextArea', () => {
       sync: false,
     });
 
-    const mockFunc = jest.spyOn(wrapper.vm.$refs.resizableTextArea, 'resizeTextarea');
+    const mockFunc = jest.spyOn(wrapper.vm.resizableTextArea, 'resizeTextarea');
     await asyncExpect(() => {
       wrapper.setProps({ value: '1111\n2222\n3333' });
     });

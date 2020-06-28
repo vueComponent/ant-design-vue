@@ -1,15 +1,12 @@
 import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Checkbox from './Checkbox';
-import hasProp from '../_util/props-util';
+import hasProp, { getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 function noop() {}
 export default {
   name: 'ACheckboxGroup',
-  model: {
-    prop: 'value',
-  },
   props: {
     name: PropTypes.string,
     prefixCls: PropTypes.string,
@@ -17,6 +14,7 @@ export default {
     value: PropTypes.array,
     options: PropTypes.array.def([]),
     disabled: PropTypes.bool,
+    onChange: PropTypes.func,
   },
 
   data() {
@@ -31,9 +29,13 @@ export default {
       this.sValue = val || [];
     },
   },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
+  },
   created() {
-    (this.configProvider = inject('configProvider', ConfigConsumerProps)),
-      provide('checkboxGroupContext', this);
+    provide('checkboxGroupContext', this);
   },
   methods: {
     getOptions() {
@@ -79,16 +81,17 @@ export default {
           const indexB = options.findIndex(opt => opt.value === b);
           return indexA - indexB;
         });
-      this.$emit('input', val);
+      // this.$emit('input', val);
+      this.$emit('update:value', val);
       this.$emit('change', val);
     },
   },
   render() {
-    const { $props: props, $data: state, $slots } = this;
+    const { $props: props, $data: state } = this;
     const { prefixCls: customizePrefixCls, options } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
-    let children = $slots.default;
+    let children = getSlot(this);
     const groupPrefixCls = `${prefixCls}-group`;
     if (options && options.length > 0) {
       children = this.getOptions().map(option => (

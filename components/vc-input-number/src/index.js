@@ -1,7 +1,7 @@
 // based on rc-input-number 4.5.5
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { initDefaultProps, hasProp, getOptionProps, getListeners } from '../../_util/props-util';
+import { initDefaultProps, hasProp, getOptionProps } from '../../_util/props-util';
 import classNames from 'classnames';
 import KeyCode from '../../_util/KeyCode';
 import InputHandler from './InputHandler';
@@ -76,15 +76,17 @@ const inputNumberProps = {
   title: PropTypes.string,
   name: PropTypes.string,
   id: PropTypes.string,
+  type: PropTypes.string,
 };
 
 export default {
   name: 'VCInputNumber',
   mixins: [BaseMixin],
-  model: {
-    prop: 'value',
-    event: 'change',
-  },
+  inheritAttrs: false,
+  // model: {
+  //   prop: 'value',
+  //   event: 'change',
+  // },
   props: initDefaultProps(inputNumberProps, {
     focusOnUpDown: true,
     useTouch: false,
@@ -158,6 +160,7 @@ export default {
         typeof nextValue === 'number' &&
         nextValue > max
       ) {
+        this.$emit('update:value', max);
         this.$emit('change', max);
       }
       if (
@@ -166,6 +169,7 @@ export default {
         typeof nextValue === 'number' &&
         nextValue < min
       ) {
+        this.$emit('update:value', min);
         this.$emit('change', min);
       }
     }
@@ -179,7 +183,7 @@ export default {
   },
   methods: {
     updatedFunc() {
-      const inputElem = this.$refs.inputRef;
+      const inputElem = this.inputRef;
       // Restore cursor
       try {
         // Firefox set the input cursor after it get focused.
@@ -270,7 +274,9 @@ export default {
       }
       this.rawInput = this.parser(this.getValueFromEvent(e));
       this.setState({ inputValue: this.rawInput });
-      this.$emit('change', this.toNumber(this.rawInput)); // valid number or invalid string
+      const num = this.toNumber(this.rawInput); // valid number or invalid string
+      this.$emit('update:value', num);
+      this.$emit('change', num);
     },
     onFocus(...args) {
       this.setState({
@@ -285,12 +291,12 @@ export default {
       });
       const value = this.getCurrentValidValue(this.inputValue);
       const newValue = this.setValue(value);
-      if (this.$listeners.blur) {
-        const originValue = this.$refs.inputRef.value;
+      if (this.$attrs.onBlur) {
+        const originValue = this.inputRef.value;
         const inputValue = this.getInputDisplayValue({ focused: false, sValue: newValue });
-        this.$refs.inputRef.value = inputValue;
+        this.inputRef.value = inputValue;
         this.$emit('blur', ...args);
-        this.$refs.inputRef.value = originValue;
+        this.inputRef.value = originValue;
       }
     },
     getCurrentValidValue(value) {
@@ -366,6 +372,7 @@ export default {
         );
       }
       if (changed) {
+        this.$emit('update:value', newValue);
         this.$emit('change', newValue);
       }
       return newValue;
@@ -431,7 +438,7 @@ export default {
     recordCursorPosition() {
       // Record position
       try {
-        const inputElem = this.$refs.inputRef;
+        const inputElem = this.inputRef;
         this.cursorStart = inputElem.selectionStart;
         this.cursorEnd = inputElem.selectionEnd;
         this.currentValue = inputElem.value;
@@ -444,17 +451,12 @@ export default {
       }
     },
     fixCaret(start, end) {
-      if (
-        start === undefined ||
-        end === undefined ||
-        !this.$refs.inputRef ||
-        !this.$refs.inputRef.value
-      ) {
+      if (start === undefined || end === undefined || !this.inputRef || !this.inputRef.value) {
         return;
       }
 
       try {
-        const inputElem = this.$refs.inputRef;
+        const inputElem = this.inputRef;
         const currentStart = inputElem.selectionStart;
         const currentEnd = inputElem.selectionEnd;
 
@@ -470,7 +472,7 @@ export default {
     restoreByAfter(str) {
       if (str === undefined) return false;
 
-      const fullStr = this.$refs.inputRef.value;
+      const fullStr = this.inputRef.value;
       const index = fullStr.lastIndexOf(str);
 
       if (index === -1) return false;
@@ -504,11 +506,11 @@ export default {
       });
     },
     focus() {
-      this.$refs.inputRef.focus();
+      this.inputRef.focus();
       this.recordCursorPosition();
     },
     blur() {
-      this.$refs.inputRef.blur();
+      this.inputRef.blur();
     },
     formatWrapper(num) {
       // http://2ality.com/2012/03/signedzero.html
@@ -621,8 +623,20 @@ export default {
     handleInputClick() {
       this.$emit('click');
     },
+    saveUp(node) {
+      this.upHandlerRef = node;
+    },
+
+    saveDown(node) {
+      this.downHandlerRef = node;
+    },
+
+    saveInput(node) {
+      this.inputRef = node;
+    },
   },
   render() {
+    const props = { ...this.$props, ...this.$attrs };
     const {
       prefixCls,
       disabled,
@@ -631,8 +645,10 @@ export default {
       autoComplete,
       upHandler,
       downHandler,
-    } = this.$props;
+      class: className,
+    } = props;
     const classes = classNames({
+      [className]: className,
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,
       [`${prefixCls}-focused`]: this.focused,
@@ -655,6 +671,16 @@ export default {
       }
     }
 
+    const dataOrAriaAttributeProps = {};
+    for (const key in props) {
+      if (
+        props.hasOwnProperty(key) &&
+        (key.substr(0, 5) === 'data-' || key.substr(0, 5) === 'aria-' || key === 'role')
+      ) {
+        dataOrAriaAttributeProps[key] = props[key];
+      }
+    }
+
     const editable = !this.readOnly && !this.disabled;
 
     // focus state, show input value
@@ -665,71 +691,61 @@ export default {
     let downEvents;
     if (useTouch) {
       upEvents = {
-        touchstart: editable && !upDisabledClass ? this.up : noop,
-        touchend: this.stop,
+        onTouchstart: editable && !upDisabledClass ? this.up : noop,
+        onTouchend: this.stop,
       };
       downEvents = {
-        touchstart: editable && !downDisabledClass ? this.down : noop,
-        touchend: this.stop,
+        onTouchstart: editable && !downDisabledClass ? this.down : noop,
+        onTouchend: this.stop,
       };
     } else {
       upEvents = {
-        mousedown: editable && !upDisabledClass ? this.up : noop,
-        mouseup: this.stop,
-        mouseleave: this.stop,
+        onMousedown: editable && !upDisabledClass ? this.up : noop,
+        onMouseup: this.stop,
+        onMouseleave: this.stop,
       };
       downEvents = {
-        mousedown: editable && !downDisabledClass ? this.down : noop,
-        mouseup: this.stop,
-        mouseleave: this.stop,
+        onMousedown: editable && !downDisabledClass ? this.down : noop,
+        onMouseup: this.stop,
+        onMouseleave: this.stop,
       };
     }
     const isUpDisabled = !!upDisabledClass || disabled || readOnly;
     const isDownDisabled = !!downDisabledClass || disabled || readOnly;
-    const {
-      mouseenter = noop,
-      mouseleave = noop,
-      mouseover = noop,
-      mouseout = noop,
-    } = getListeners(this);
-    const contentProps = {
-      on: { mouseenter, mouseleave, mouseover, mouseout },
-      class: classes,
-      attrs: { title: this.$props.title },
-    };
+
     const upHandlerProps = {
-      props: {
-        disabled: isUpDisabled,
-        prefixCls,
-      },
-      attrs: {
-        unselectable: 'unselectable',
-        role: 'button',
-        'aria-label': 'Increase Value',
-        'aria-disabled': !!isUpDisabled,
-      },
+      disabled: isUpDisabled,
+      prefixCls,
+      unselectable: 'unselectable',
+      role: 'button',
+      'aria-label': 'Increase Value',
+      'aria-disabled': !!isUpDisabled,
       class: `${prefixCls}-handler ${prefixCls}-handler-up ${upDisabledClass}`,
-      on: upEvents,
-      ref: 'up',
+      ...upEvents,
+      ref: this.saveUp,
     };
     const downHandlerProps = {
-      props: {
-        disabled: isDownDisabled,
-        prefixCls,
-      },
-      attrs: {
-        unselectable: 'unselectable',
-        role: 'button',
-        'aria-label': 'Decrease Value',
-        'aria-disabled': !!isDownDisabled,
-      },
+      disabled: isDownDisabled,
+      prefixCls,
+      unselectable: 'unselectable',
+      role: 'button',
+      'aria-label': 'Decrease Value',
+      'aria-disabled': !!isDownDisabled,
       class: `${prefixCls}-handler ${prefixCls}-handler-down ${downDisabledClass}`,
-      on: downEvents,
-      ref: 'down',
+      ...downEvents,
+      ref: this.saveDown,
     };
-    // ref for test
+
     return (
-      <div {...contentProps}>
+      <div
+        class={classes}
+        style={props.style}
+        title={props.title}
+        onMouseenter={props.onMouseenter}
+        onMouseleave={props.onMouseleave}
+        onMouseover={props.onMouseover}
+        onMouseout={props.onMouseout}
+      >
         <div class={`${prefixCls}-handler-wrap`}>
           <InputHandler {...upHandlerProps}>
             {upHandler || (
@@ -757,7 +773,7 @@ export default {
             aria-valuemax={this.max}
             aria-valuenow={sValue}
             required={this.required}
-            type={this.type}
+            type={props.type}
             placeholder={this.placeholder}
             onClick={this.handleInputClick}
             class={`${prefixCls}-input`}
@@ -767,7 +783,7 @@ export default {
             onBlur={this.onBlur}
             onKeydown={editable ? this.onKeyDown : noop}
             onKeyup={editable ? this.onKeyUp : noop}
-            maxLength={this.maxLength}
+            maxlength={props.maxLength}
             readOnly={this.readOnly}
             disabled={this.disabled}
             max={this.max}
@@ -777,9 +793,10 @@ export default {
             title={this.title}
             id={this.id}
             onInput={this.onChange}
-            ref="inputRef"
+            ref={this.saveInput}
             value={inputDisplayValue}
             pattern={this.pattern}
+            {...dataOrAriaAttributeProps}
           />
         </div>
       </div>

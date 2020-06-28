@@ -20971,12 +20971,296 @@ exports[`Locale Provider should display the text as vi 1`] = `
           <div title="2017" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">2017</div>
         </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
       </div>
+      <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
+        <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
+          <div class="ant-select-selection__rendered">
+            <div title="Thg 09" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Thg 09</div>
+          </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><i aria-label="icon: down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></i></span>
+        </div>
+      </div>
+      <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Tháng</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Năm</span></label></div>
     </div>
-    <div tabindex="0" class="ant-select ant-select-enabled ant-select-sm ant-fullcalendar-month-select">
-      <div role="combobox" aria-autocomplete="list" aria-haspopup="true" aria-controls="test-uuid" class="ant-select-selection ant-select-selection--single">
-        <div class="ant-select-selection__rendered">
-          <div title="Th09" class="ant-select-selection-selected-value" style="display: block; opacity: 1;">Th09</div>
-        </div><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+    <div tabindex="0" class="ant-fullcalendar ant-fullcalendar-full">
+      <div class="ant-fullcalendar-calendar-body">
+        <table cellspacing="0" role="grid" class="ant-fullcalendar-table">
+          <thead>
+            <tr role="row">
+              <th role="columnheader" title="T2" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">T2</span></th>
+              <th role="columnheader" title="T3" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">T3</span></th>
+              <th role="columnheader" title="T4" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">T4</span></th>
+              <th role="columnheader" title="T5" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">T5</span></th>
+              <th role="columnheader" title="T6" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">T6</span></th>
+              <th role="columnheader" title="T7" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">T7</span></th>
+              <th role="columnheader" title="CN" class="ant-fullcalendar-column-header"><span class="ant-fullcalendar-column-header-inner">CN</span></th>
+            </tr>
+          </thead>
+          <tbody class="ant-fullcalendar-tbody">
+            <tr role="row" class="">
+              <td role="gridcell" title="28 tháng 8 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">28</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="29 tháng 8 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">29</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="30 tháng 8 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">30</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="31 tháng 8 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">31</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="1 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">01</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="2 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">02</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="3 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">03</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="">
+              <td role="gridcell" title="4 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">04</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="5 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">05</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="6 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">06</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="7 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">07</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="8 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">08</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="9 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">09</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="10 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">10</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="">
+              <td role="gridcell" title="11 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">11</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="12 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">12</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="13 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">13</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="14 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">14</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="15 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">15</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="16 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">16</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="17 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">17</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
+              <td role="gridcell" title="18 tháng 9 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">18</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="19 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">19</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="20 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">20</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="21 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">21</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="22 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">22</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="23 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">23</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="24 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">24</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="">
+              <td role="gridcell" title="25 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">25</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="26 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">26</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="27 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">27</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="28 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">28</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="29 tháng 9 năm 2017" class="ant-fullcalendar-cell">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">29</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="30 tháng 9 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">30</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="1 tháng 10 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">01</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+            </tr>
+            <tr role="row" class="">
+              <td role="gridcell" title="2 tháng 10 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">02</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="3 tháng 10 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">03</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="4 tháng 10 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">04</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="5 tháng 10 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">05</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="6 tháng 10 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">06</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="7 tháng 10 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">07</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+              <td role="gridcell" title="8 tháng 10 năm 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+                <div class="ant-fullcalendar-date">
+                  <div class="ant-fullcalendar-value">08</div>
+                  <div class="ant-fullcalendar-content"></div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
     <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Tháng</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Năm</span></label></div>

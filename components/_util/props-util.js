@@ -69,10 +69,10 @@ const getSlots = ele => {
 };
 const getSlot = (self, name = 'default', options = {}) => {
   let res = self.$slots[name] && self.$slots[name](options);
-  while (res && res.length === 1 && res[0].type === Fragment) {
-    res = res[0].children;
+  while (res && res.length === 1 && (res[0].type === Fragment || Array.isArray(res[0]))) {
+    res = res[0].children || res[0];
   }
-  return res;
+  return res && res.__v_isVNode ? [res] : res;
 };
 
 const getAllChildren = ele => {
@@ -93,6 +93,13 @@ const getSlotOptions = ele => {
   }
   return componentOptions ? componentOptions.Ctor.options || {} : {};
 };
+const findDOMNode = instance => {
+  let node = instance.$el;
+  while (!node.tagName) {
+    node = node.nextSibling;
+  }
+  return node;
+};
 const getOptionProps = instance => {
   const res = {};
   if (instance.$ && instance.$.vnode) {
@@ -105,12 +112,15 @@ const getOptionProps = instance => {
       }
     });
   } else if (isVNode(instance) && typeof instance.type === 'object') {
-    const props = instance.props || {};
+    const originProps = instance.props || {};
+    const props = {};
+    Object.keys(originProps).forEach(key => {
+      props[camelize(key)] = originProps[key];
+    });
     const options = instance.type.props;
     Object.keys(options).forEach(k => {
-      const hyphenateKey = hyphenate(k);
-      const v = resolvePropValue(options, props, k, props[hyphenateKey], hyphenateKey);
-      if (v !== undefined || hyphenateKey in props) {
+      const v = resolvePropValue(options, props, k, props[k]);
+      if (v !== undefined || k in props) {
         res[k] = v;
       }
     });
@@ -118,14 +128,26 @@ const getOptionProps = instance => {
   return res;
 };
 const getComponent = (instance, prop, options = instance, execute = true) => {
-  const temp = instance[prop];
-  if (temp !== undefined) {
-    return typeof temp === 'function' && execute ? temp(options) : temp;
-  } else {
-    let com = instance.$slots[prop];
-    com = execute && com ? com(options) : com;
-    return Array.isArray(com) && com.length === 1 ? com[0] : com;
+  if (instance.$) {
+    const temp = instance[prop];
+    if (temp !== undefined) {
+      return typeof temp === 'function' && execute ? temp(options) : temp;
+    } else {
+      let com = instance.$slots[prop];
+      com = execute && com ? com(options) : com;
+      return Array.isArray(com) && com.length === 1 ? com[0] : com;
+    }
+  } else if (isVNode(instance)) {
+    const temp = instance.props && instance.props[prop];
+    if (temp !== undefined) {
+      return typeof temp === 'function' && execute ? temp(options) : temp;
+    } else if (instance.children && instance.children[prop]) {
+      let com = instance.children[prop];
+      com = execute && com ? com(options) : com;
+      return Array.isArray(com) && com.length === 1 ? com[0] : com;
+    }
   }
+  return undefined;
 };
 const getComponentFromProp = (instance, prop, options = instance, execute = true) => {
   if (instance.$createElement) {
@@ -169,19 +191,31 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
 };
 
 const getAllProps = ele => {
-  let data = ele.data || {};
-  let componentOptions = ele.componentOptions || {};
-  if (ele.$vnode) {
-    data = ele.$vnode.data || {};
-    componentOptions = ele.$vnode.componentOptions || {};
+  let props = getOptionProps(ele);
+  if (ele.$) {
+    props = { ...props, ...this.$attrs };
+  } else {
+    props = { ...ele.props, ...props };
   }
-  return { ...data.props, ...data.attrs, ...componentOptions.propsData };
+  return props;
 };
 
-// 使用 getOptionProps 替换 ，待测试
-const getPropsData = ele => {
-  return getOptionProps(ele);
-  //return ele.props || {};
+const getPropsData = vnode => {
+  const res = {};
+  const originProps = vnode.props || {};
+  const props = {};
+  Object.keys(originProps).forEach(key => {
+    props[camelize(key)] = originProps[key];
+  });
+  const options = isPlainObject(vnode.type) ? vnode.type.props : {};
+  Object.keys(options).forEach(k => {
+    const v = resolvePropValue(options, props, k, props[k]);
+    if (k in props) {
+      // 仅包含 props，不包含默认值
+      res[k] = v;
+    }
+  });
+  return { ...props, ...res }; // 合并事件、未声明属性等
 };
 const getValueByProp = (ele, prop) => {
   return getPropsData(ele)[prop];
@@ -203,18 +237,16 @@ const getKey = ele => {
   return key;
 };
 
-export function getEvents(child) {
-  const { $attrs } = child;
-  return splitAttrs($attrs).events;
-
-  // let events = {};
-  // if (child.componentOptions && child.componentOptions.listeners) {
-  //   events = child.componentOptions.listeners;
-  // } else if (child.data && child.data.on) {
-  //   events = child.data.on;
-  // }
-  // return { ...events };
+export function getEvents(ele, on = true) {
+  let props = {};
+  if (ele.$) {
+    props = { ...props, ...ele.$attrs };
+  } else {
+    props = { ...props, ...ele.props };
+  }
+  return splitAttrs(props)[on ? 'onEvents' : 'events'];
 }
+
 export function getEvent(child, event) {
   return child.props && child.props[event];
 }
@@ -270,6 +302,10 @@ export function getComponentName(opts) {
   return opts && (opts.Ctor.options.name || opts.tag);
 }
 
+export function isFragment(c) {
+  return c.length === 1 && c[0].type === Fragment;
+}
+
 export function isEmptyElement(c) {
   return c.type === Comment || (c.type === Text && c.children.trim() === '');
 }
@@ -279,6 +315,9 @@ export function isStringElement(c) {
 }
 
 export function filterEmpty(children = []) {
+  if (isFragment(children)) {
+    return children[0].children.filter(c => !isEmptyElement(c));
+  }
   return children.filter(c => !isEmptyElement(c));
 }
 const initDefaultProps = (propTypes, defaultProps) => {
@@ -332,5 +371,6 @@ export {
   getSlot,
   getAllProps,
   getAllChildren,
+  findDOMNode,
 };
 export default hasProp;

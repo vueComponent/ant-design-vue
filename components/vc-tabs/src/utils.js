@@ -1,7 +1,8 @@
+import { isVNode } from 'vue';
 export function toArray(children) {
   const c = [];
   children.forEach(child => {
-    if (child.data) {
+    if (isVNode(child)) {
       c.push(child);
     }
   });
@@ -100,6 +101,9 @@ function getTypeValue(start, current, end, tabNode, wrapperNode) {
 
   const { childNodes } = tabNode.parentNode;
   Array.prototype.some.call(childNodes, node => {
+    if (!node.tagName) {
+      return false;
+    }
     const style = window.getComputedStyle(node);
     if (node !== tabNode) {
       total += toNum(style, `margin-${start}`);

@@ -1,6 +1,7 @@
 import Menu, { MenuItem } from '../../vc-menu';
 import PropTypes from '../../_util/vue-types';
 import { OptionProps } from './Option';
+import { inject } from 'vue';
 
 function noop() {}
 export default {
@@ -9,10 +10,11 @@ export default {
     prefixCls: PropTypes.string,
     options: PropTypes.arrayOf(OptionProps),
   },
-  inject: {
-    mentionsContext: { default: {} },
+  setup() {
+    return {
+      mentionsContext: inject('mentionsContext'),
+    };
   },
-
   render() {
     const {
       notFoundContent,
@@ -27,37 +29,36 @@ export default {
 
     return (
       <Menu
-        {...{
-          props: {
-            prefixCls: `${prefixCls}-menu`,
-            activeKey: activeOption.value,
-          },
-          on: {
-            select: ({ key }) => {
-              const option = options.find(({ value }) => value === key);
-              selectOption(option);
-            },
-            focus: onFocus,
-            blur: onBlur,
-          },
+        prefixCls={`${prefixCls}-menu`}
+        activeKey={activeOption.value}
+        onSelect={({ key }) => {
+          const option = options.find(({ value }) => value === key);
+          selectOption(option);
         }}
-      >
-        {options.map((option, index) => {
-          const { value, disabled, children } = option;
-          return (
-            <MenuItem
-              key={value}
-              disabled={disabled}
-              onMouseenter={() => {
-                setActiveIndex(index);
-              }}
-            >
-              {children}
+        onBlur={onBlur}
+        onFocus={onFocus}
+        children={[
+          ...options.map((option, index) => {
+            const { value, disabled, children } = option;
+            return (
+              <MenuItem
+                key={value}
+                disabled={disabled}
+                onMouseenter={() => {
+                  setActiveIndex(index);
+                }}
+              >
+                {children}
+              </MenuItem>
+            );
+          }),
+          !options.length && (
+            <MenuItem key="notFoundContent" disabled>
+              {notFoundContent}
             </MenuItem>
-          );
-        })}
-        {!options.length && <MenuItem disabled>{notFoundContent}</MenuItem>}
-      </Menu>
+          ),
+        ].filter(Boolean)}
+      />
     );
   },
 };

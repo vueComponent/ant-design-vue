@@ -1,5 +1,3 @@
-import Vue from 'vue';
-import ref from 'vue-ref';
 import PropTypes from '../../_util/vue-types';
 import { initDefaultProps } from '../../_util/props-util';
 import enhancer from './enhancer';
@@ -15,8 +13,6 @@ const circleDefaultProps = {
   ...defaultProps,
   gapPosition: 'top',
 };
-
-Vue.use(ref, { name: 'ant-ref' });
 
 let gradientSeed = 0;
 
@@ -73,6 +69,7 @@ function getPathStyles(offset, percent, strokeColor, strokeWidth, gapDegree = 0,
 }
 
 const Circle = {
+  name: 'Circle',
   props: initDefaultProps(circlePropTypes, circleDefaultProps),
   created() {
     this.paths = {};
@@ -113,25 +110,15 @@ const Circle = {
 
         const pathProps = {
           key: index,
-          attrs: {
-            d: pathString,
-            stroke,
-            'stroke-linecap': strokeLinecap,
-            'stroke-width': ptg === 0 ? 0 : strokeWidth,
-            'fill-opacity': '0',
-          },
+          d: pathString,
+          stroke,
+          'stroke-linecap': strokeLinecap,
+          'stroke-width': ptg === 0 ? 0 : strokeWidth,
+          'fill-opacity': '0',
           class: `${prefixCls}-circle-path`,
           style: pathStyle,
-          directives: [
-            {
-              name: 'ant-ref',
-              value: c => {
-                this.paths[index] = c;
-              },
-            },
-          ],
         };
-        return <path {...pathProps} />;
+        return <path ref={c => (this.paths[index] = c)} {...pathProps} />;
       });
     },
   },
@@ -162,13 +149,11 @@ const Circle = {
       color => Object.prototype.toString.call(color) === '[object Object]',
     );
     const pathFirst = {
-      attrs: {
-        d: pathString,
-        stroke: trailColor,
-        'stroke-linecap': strokeLinecap,
-        'stroke-width': trailWidth || strokeWidth,
-        'fill-opacity': '0',
-      },
+      d: pathString,
+      stroke: trailColor,
+      'stroke-linecap': strokeLinecap,
+      'stroke-width': trailWidth || strokeWidth,
+      'fill-opacity': '0',
       class: `${prefixCls}-circle-trail`,
       style: pathStyle,
     };

@@ -9,16 +9,14 @@ import {
 export default {
   name: 'TabContent',
   props: {
-    animated: { type: Boolean, default: true },
-    animatedWithMargin: { type: Boolean, default: true },
-    prefixCls: {
-      default: 'ant-tabs',
-      type: String,
-    },
+    animated: PropTypes.bool.def(true),
+    animatedWithMargin: PropTypes.bool.def(true),
+    prefixCls: PropTypes.string.def('ant-tabs'),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    tabBarPosition: String,
+    tabBarPosition: PropTypes.string,
     direction: PropTypes.string,
     destroyInactiveTabPane: PropTypes.bool,
+    children: PropTypes.any,
   },
   computed: {
     classes() {
@@ -30,10 +28,9 @@ export default {
     },
   },
   methods: {
-    getTabPanes() {
+    getTabPanes(children) {
       const props = this.$props;
       const activeKey = props.activeKey;
-      const children = this.$slots.default || [];
       const newChildren = [];
 
       children.forEach(child => {
@@ -44,11 +41,9 @@ export default {
         const active = activeKey === key;
         newChildren.push(
           cloneElement(child, {
-            props: {
-              active,
-              destroyInactiveTabPane: props.destroyInactiveTabPane,
-              rootPrefixCls: props.prefixCls,
-            },
+            active,
+            destroyInactiveTabPane: props.destroyInactiveTabPane,
+            rootPrefixCls: props.prefixCls,
           }),
         );
       });
@@ -57,10 +52,18 @@ export default {
     },
   },
   render() {
-    const { activeKey, tabBarPosition, animated, animatedWithMargin, direction, classes } = this;
+    const {
+      activeKey,
+      tabBarPosition,
+      animated,
+      animatedWithMargin,
+      direction,
+      classes,
+      children,
+    } = this;
     let style = {};
-    if (animated && this.$slots.default) {
-      const activeIndex = getActiveIndex(this.$slots.default, activeKey);
+    if (animated && children) {
+      const activeIndex = getActiveIndex(children, activeKey);
       if (activeIndex !== -1) {
         const animatedStyle = animatedWithMargin
           ? getMarginStyle(activeIndex, tabBarPosition)
@@ -74,7 +77,7 @@ export default {
     }
     return (
       <div class={classes} style={style}>
-        {this.getTabPanes()}
+        {this.getTabPanes(children || [])}
       </div>
     );
   },

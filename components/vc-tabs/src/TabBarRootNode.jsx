@@ -1,10 +1,13 @@
 import { cloneElement } from '../../_util/vnode';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
+import { getSlot } from '../../_util/props-util';
+import { getDataAttr } from './utils';
 function noop() {}
 export default {
   name: 'TabBarRootNode',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     saveRef: PropTypes.func.def(noop),
     getRef: PropTypes.func.def(noop),
@@ -19,12 +22,14 @@ export default {
   },
   render() {
     const { prefixCls, onKeyDown, tabBarPosition, extraContent } = this;
+    const { class: className, style, onKeydown, ...restProps } = this.$attrs;
     const cls = {
       [`${prefixCls}-bar`]: true,
+      [className]: !!className,
     };
     const topOrBottom = tabBarPosition === 'top' || tabBarPosition === 'bottom';
     const tabBarExtraContentStyle = topOrBottom ? { float: 'right' } : {};
-    const children = this.$slots.default;
+    const children = getSlot(this);
     let newChildren = children;
     if (extraContent) {
       newChildren = [
@@ -45,14 +50,9 @@ export default {
         class={cls}
         tabIndex="0"
         onKeydown={onKeyDown}
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: this.saveRef('root'),
-            },
-          ],
-        }}
+        style={style}
+        ref={this.saveRef('root')}
+        {...getDataAttr(restProps)}
       >
         {newChildren}
       </div>

@@ -1,5 +1,4 @@
 import warning from '../_util/warning';
-import Base from '../base';
 
 const Icon = {
   name: 'AIcon',
@@ -10,9 +9,8 @@ const Icon = {
 };
 
 /* istanbul ignore next */
-Icon.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Icon.name, Icon);
+Icon.install = function(app) {
+  app.component(Icon.name, Icon);
 };
 
 export default Icon;

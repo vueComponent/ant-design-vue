@@ -1,6 +1,7 @@
 import { inject } from 'vue';
 import { ConfigConsumerProps } from '../config-provider';
 import PropTypes from '../_util/vue-types';
+import { getSlot } from '../_util/props-util';
 
 export default {
   name: 'ABreadcrumbSeparator',
@@ -14,11 +15,11 @@ export default {
     };
   },
   render() {
-    const { prefixCls: customizePrefixCls, $slots } = this;
+    const { prefixCls: customizePrefixCls } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
 
-    const children = $slots.default && $slots.default();
+    const children = getSlot(this);
     return <span class={`${prefixCls}-separator`}>{children || '/'}</span>;
   },
 };

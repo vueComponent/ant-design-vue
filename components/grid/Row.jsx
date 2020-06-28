@@ -3,6 +3,7 @@ import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
 import ResponsiveObserve from '../_util/responsiveObserve';
+import { getSlot } from '../_util/props-util';
 
 const RowProps = {
   gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]),
@@ -79,7 +80,7 @@ export default {
   },
 
   render() {
-    const { type, justify, align, prefixCls: customizePrefixCls, $slots } = this;
+    const { type, justify, align, prefixCls: customizePrefixCls } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('row', customizePrefixCls);
 
@@ -106,7 +107,7 @@ export default {
     };
     return (
       <div class={classes} style={rowStyle}>
-        {$slots.default && $slots.default()}
+        {getSlot(this)}
       </div>
     );
   },

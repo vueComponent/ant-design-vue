@@ -21,54 +21,50 @@ function getStrokeColor({ progressStatus, successPercent, strokeColor }) {
   return [statusColorMap.success, color];
 }
 
-const Circle = {
-  functional: true,
-  render(h, context) {
-    const { props, children } = context;
-    const {
-      prefixCls,
-      width,
-      strokeWidth,
-      trailColor,
-      strokeLinecap,
-      gapPosition,
-      gapDegree,
-      type,
-    } = props;
-    const circleSize = width || 120;
-    const circleStyle = {
-      width: typeof circleSize === 'number' ? `${circleSize}px` : circleSize,
-      height: typeof circleSize === 'number' ? `${circleSize}px` : circleSize,
-      fontSize: circleSize * 0.15 + 6,
-    };
-    const circleWidth = strokeWidth || 6;
-    const gapPos = gapPosition || (type === 'dashboard' && 'bottom') || 'top';
-    const gapDeg = gapDegree || (type === 'dashboard' && 75);
-    const strokeColor = getStrokeColor(props);
-    const isGradient = Object.prototype.toString.call(strokeColor) === '[object Object]';
+const Circle = (_, { attrs, slots }) => {
+  const {
+    prefixCls,
+    width,
+    strokeWidth,
+    trailColor,
+    strokeLinecap,
+    gapPosition,
+    gapDegree,
+    type,
+  } = attrs;
+  const circleSize = width || 120;
+  const circleStyle = {
+    width: typeof circleSize === 'number' ? `${circleSize}px` : circleSize,
+    height: typeof circleSize === 'number' ? `${circleSize}px` : circleSize,
+    fontSize: `${circleSize * 0.15 + 6}px`,
+  };
+  const circleWidth = strokeWidth || 6;
+  const gapPos = gapPosition || (type === 'dashboard' && 'bottom') || 'top';
+  const gapDeg = gapDegree || (type === 'dashboard' && 75);
+  const strokeColor = getStrokeColor(attrs);
+  const isGradient = Object.prototype.toString.call(strokeColor) === '[object Object]';
 
-    const wrapperClassName = {
-      [`${prefixCls}-inner`]: true,
-      [`${prefixCls}-circle-gradient`]: isGradient,
-    };
+  const wrapperClassName = {
+    [`${prefixCls}-inner`]: true,
+    [`${prefixCls}-circle-gradient`]: isGradient,
+  };
 
-    return (
-      <div class={wrapperClassName} style={circleStyle}>
-        <VCCircle
-          percent={getPercentage(props)}
-          strokeWidth={circleWidth}
-          trailWidth={circleWidth}
-          strokeColor={strokeColor}
-          strokeLinecap={strokeLinecap}
-          trailColor={trailColor}
-          prefixCls={prefixCls}
-          gapDegree={gapDeg}
-          gapPosition={gapPos}
-        />
-        {children}
-      </div>
-    );
-  },
+  return (
+    <div class={wrapperClassName} style={circleStyle}>
+      <VCCircle
+        percent={getPercentage(attrs)}
+        strokeWidth={circleWidth}
+        trailWidth={circleWidth}
+        strokeColor={strokeColor}
+        strokeLinecap={strokeLinecap}
+        trailColor={trailColor}
+        prefixCls={prefixCls}
+        gapDegree={gapDeg}
+        gapPosition={gapPos}
+      />
+      {slots?.default()}
+    </div>
+  );
 };
 
 export default Circle;

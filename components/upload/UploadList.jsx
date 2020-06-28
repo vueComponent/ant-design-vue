@@ -1,5 +1,6 @@
+import { inject, Transition, TransitionGroup } from 'vue';
 import BaseMixin from '../_util/BaseMixin';
-import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
+import { getOptionProps, initDefaultProps } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
 import { ConfigConsumerProps } from '../config-provider';
 import { previewImage, isImageUrl } from './utils';
@@ -29,8 +30,10 @@ export default {
     showPreviewIcon: true,
     previewFile: previewImage,
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   updated() {
     this.$nextTick(() => {
@@ -63,17 +66,17 @@ export default {
   },
   methods: {
     handlePreview(file, e) {
-      const { preview } = getListeners(this);
-      if (!preview) {
+      const { onPreview } = this.$attrs;
+      if (!onPreview) {
         return;
       }
       e.preventDefault();
       return this.$emit('preview', file);
     },
     handleDownload(file) {
-      const { download } = getListeners(this);
-      if (typeof download === 'function') {
-        download(file);
+      const { onDownload } = this.$attrs;
+      if (typeof onDownload === 'function') {
+        onDownload(file);
       } else if (file.url) {
         window.open(file.url);
       }
@@ -132,11 +135,9 @@ export default {
 
       if (file.status === 'uploading') {
         const progressProps = {
-          props: {
-            ...progressAttr,
-            type: 'line',
-            percent: file.percent,
-          },
+          ...progressAttr,
+          type: 'line',
+          percent: file.percent,
         };
         // show loading icon if upload progress listener is disabled
         const loadingProgress = 'percent' in file ? <Progress {...progressProps} /> : null;
@@ -160,10 +161,7 @@ export default {
       ) : null;
       const downloadIcon =
         showDownloadIcon && file.status === 'done' ? (
-          <DownloadOutlined
-            title={locale.downloadFile}
-            onClick={() => this.handleDownload(file)}
-          />
+          <DownloadOutlined title={locale.downloadFile} onClick={() => this.handleDownload(file)} />
         ) : null;
       const downloadOrDelete = listType !== 'picture-card' && (
         <span
@@ -250,7 +248,7 @@ export default {
         <div class={infoUploadingClass} key={file.uid}>
           <div class={`${prefixCls}-list-item-info`}>{iconAndPreview}</div>
           {actions}
-          <transition {...transitionProps}>{progress}</transition>
+          <Transition {...transitionProps}>{progress}</Transition>
         </div>
       );
       const listContainerNameClass = classNames({
@@ -269,9 +267,9 @@ export default {
     const animationDirection = listType === 'picture-card' ? 'animate-inline' : 'animate';
     const transitionGroupProps = getTransitionProps(`${prefixCls}-${animationDirection}`);
     return (
-      <transition-group {...transitionGroupProps} tag="div" class={listClassNames}>
+      <TransitionGroup {...transitionGroupProps} tag="div" class={listClassNames}>
         {list}
-      </transition-group>
+      </TransitionGroup>
     );
   },
 };

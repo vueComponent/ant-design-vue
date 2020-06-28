@@ -1,11 +1,12 @@
 import classNames from 'classnames';
+import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import {
   initDefaultProps,
   getOptionProps,
   hasProp,
-  getComponentFromProp,
-  getListeners,
+  getComponent,
+  getSlot,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import isNumeric from '../_util/isNumeric';
@@ -76,10 +77,6 @@ export default {
   name: 'ALayoutSider',
   __ANT_LAYOUT_SIDER: true,
   mixins: [BaseMixin],
-  model: {
-    prop: 'collapsed',
-    event: 'collapse',
-  },
   props: initDefaultProps(SiderProps, {
     collapsible: false,
     defaultCollapsed: false,
@@ -109,27 +106,21 @@ export default {
       belowShow: false,
     };
   },
-  provide() {
-    return {
-      layoutSiderContext: this, // menu组件中使用
-    };
-  },
-  inject: {
-    siderHook: { default: () => ({}) },
-    configProvider: { default: () => ConfigConsumerProps },
-  },
-  // getChildContext() {
-  //   return {
-  //     siderCollapsed: this.state.collapsed,
-  //     collapsedWidth: this.props.collapsedWidth,
-  //   };
-  // }
   watch: {
     collapsed(val) {
       this.setState({
         sCollapsed: val,
       });
     },
+  },
+  created() {
+    provide('layoutSiderContext', this); // menu组件中使用
+  },
+  setup() {
+    return {
+      siderHook: inject('siderHook', {}),
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
 
   mounted() {
@@ -169,6 +160,7 @@ export default {
           sCollapsed: collapsed,
         });
       }
+      this.$emit('update:collapsed', collapsed);
       this.$emit('collapse', collapsed, type);
     },
 
@@ -195,7 +187,7 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('layout-sider', customizePrefixCls);
 
-    const trigger = getComponentFromProp(this, 'trigger');
+    const trigger = getComponent(this, 'trigger');
     const rawWidth = this.sCollapsed ? collapsedWidth : width;
     // use "px" as fallback unit for width
     const siderWidth = isNumeric(rawWidth) ? `${rawWidth}px` : String(rawWidth);
@@ -240,13 +232,12 @@ export default {
       [`${prefixCls}-zero-width`]: parseFloat(siderWidth) === 0,
     });
     const divProps = {
-      on: getListeners(this),
       class: siderCls,
       style: divStyle,
     };
     return (
       <aside {...divProps}>
-        <div class={`${prefixCls}-children`}>{this.$slots.default}</div>
+        <div class={`${prefixCls}-children`}>{getSlot(this)}</div>
         {collapsible || (this.below && zeroWidthTrigger) ? triggerDom : null}
       </aside>
     );

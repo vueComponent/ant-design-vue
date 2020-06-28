@@ -83,6 +83,7 @@ function componentDidUpdate(component, init) {
 export default {
   name: 'InkTabBarNode',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     inkBarAnimated: {
       type: Boolean,
@@ -98,13 +99,13 @@ export default {
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   },
   updated() {
-    this.$nextTick(function() {
+    this.$nextTick(() => {
       componentDidUpdate(this);
     });
   },
 
   mounted() {
-    this.$nextTick(function() {
+    this.$nextTick(() => {
       componentDidUpdate(this, true);
     });
   },
@@ -115,20 +116,6 @@ export default {
       [className]: true,
       [inkBarAnimated ? `${className}-animated` : `${className}-no-animated`]: true,
     };
-    return (
-      <div
-        style={styles.inkBar}
-        class={classes}
-        key="inkBar"
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: this.saveRef('inkBar'),
-            },
-          ],
-        }}
-      />
-    );
+    return <div style={styles.inkBar} class={classes} key="inkBar" ref={this.saveRef('inkBar')} />;
   },
 };

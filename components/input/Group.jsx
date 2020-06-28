@@ -1,5 +1,6 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { filterEmpty, getListeners } from '../_util/props-util';
+import { filterEmpty, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export default {
@@ -13,8 +14,10 @@ export default {
     },
     compact: Boolean,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   computed: {
     classes() {
@@ -30,12 +33,7 @@ export default {
       };
     },
   },
-  methods: {},
   render() {
-    return (
-      <span class={this.classes} {...{ on: getListeners(this) }}>
-        {filterEmpty(this.$slots.default)}
-      </span>
-    );
+    return <span class={this.classes}>{filterEmpty(getSlot(this))}</span>;
   },
 };

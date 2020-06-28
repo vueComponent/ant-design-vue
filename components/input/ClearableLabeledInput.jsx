@@ -3,12 +3,12 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import { getInputClassName } from './Input';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
-import { getComponentFromProp } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
 
 export function hasPrefixSuffix(instance) {
   return !!(
-    getComponentFromProp(instance, 'prefix') ||
-    getComponentFromProp(instance, 'suffix') ||
+    getComponent(instance, 'prefix') ||
+    getComponent(instance, 'suffix') ||
     instance.$props.allowClear
   );
 }
@@ -16,6 +16,8 @@ export function hasPrefixSuffix(instance) {
 const ClearableInputType = ['text', 'input'];
 
 const ClearableLabeledInput = {
+  name: 'ClearableLabeledInput',
+  inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
     inputType: PropTypes.oneOf(ClearableInputType),
@@ -30,7 +32,6 @@ const ClearableLabeledInput = {
     prefix: PropTypes.any,
     addonBefore: PropTypes.any,
     addonAfter: PropTypes.any,
-    className: PropTypes.string,
     readOnly: PropTypes.bool,
   },
   methods: {
@@ -71,7 +72,7 @@ const ClearableLabeledInput = {
       const suffix = this.renderSuffix(prefixCls);
       if (!hasPrefixSuffix(this)) {
         return cloneElement(element, {
-          props: { value: props.value },
+          value: props.value,
         });
       }
 
@@ -91,7 +92,7 @@ const ClearableLabeledInput = {
           {prefix}
           {cloneElement(element, {
             style: null,
-            props: { value: props.value },
+            value: props.value,
             class: getInputClassName(prefixCls, props.size, props.disabled),
           })}
           {suffix}
@@ -100,7 +101,8 @@ const ClearableLabeledInput = {
     },
 
     renderInputWithLabel(prefixCls, labeledElement) {
-      const { addonBefore, addonAfter, style, size, className } = this.$props;
+      const { addonBefore, addonAfter, size } = this.$props;
+      const { style, class: className } = this.$attrs;
       // Not wrap when there is not addons
       if (!addonBefore && !addonAfter) {
         return labeledElement;
@@ -136,11 +138,10 @@ const ClearableLabeledInput = {
     },
 
     renderTextAreaWithClearIcon(prefixCls, element) {
-      const { value, allowClear, className, style } = this.$props;
+      const { value, allowClear } = this.$props;
+      const { style, class: className } = this.$attrs;
       if (!allowClear) {
-        return cloneElement(element, {
-          props: { value },
-        });
+        return cloneElement(element, { value });
       }
       const affixWrapperCls = classNames(
         className,
@@ -151,7 +152,7 @@ const ClearableLabeledInput = {
         <span class={affixWrapperCls} style={style}>
           {cloneElement(element, {
             style: null,
-            props: { value },
+            value,
           })}
           {this.renderClearIcon(prefixCls)}
         </span>

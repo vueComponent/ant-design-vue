@@ -81,6 +81,7 @@ const Select = {
   OptGroup,
   name: 'Select',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     ...SelectPropTypes,
     prefixCls: SelectPropTypes.prefixCls.def('rc-select'),
@@ -112,10 +113,10 @@ const Select = {
     // onDeselect: noop,
     // onInputKeydown: noop,
   },
-  model: {
-    prop: 'value',
-    event: 'change',
-  },
+  // model: {
+  //   prop: 'value',
+  //   event: 'change',
+  // },
   created() {
     this.saveInputRef = saveRef(this, 'inputRef');
     this.saveInputMirrorRef = saveRef(this, 'inputMirrorRef');
@@ -1667,14 +1668,7 @@ const Select = {
         onMouseleave={mouseleave}
         showAction={props.showAction}
         menuItemSelectedIcon={getComponentFromProp(this, 'menuItemSelectedIcon')}
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: this.saveSelectTriggerRef,
-            },
-          ],
-        }}
+        ref={this.saveSelectTriggerRef}
         dropdownRender={props.dropdownRender}
         ariaId={this.$data._ariaId}
       >

@@ -127,7 +127,7 @@ const getOptionProps = instance => {
   }
   return res;
 };
-const getComponent = (instance, prop, options = instance, execute = true) => {
+const getComponent = (instance, prop = 'default', options = instance, execute = true) => {
   if (instance.$) {
     const temp = instance[prop];
     if (temp !== undefined) {
@@ -231,9 +231,6 @@ const getAttrs = ele => {
 
 const getKey = ele => {
   let key = ele.key;
-  if (ele.$vnode) {
-    key = ele.$vnode.key;
-  }
   return key;
 };
 

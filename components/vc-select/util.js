@@ -1,11 +1,5 @@
-import {
-  getPropsData,
-  getSlotOptions,
-  getKey,
-  getAttrs,
-  getComponentFromProp,
-} from '../_util/props-util';
-import { cloneVNodes } from '../_util/vnode';
+import { getPropsData, getSlotOptions, getKey, getComponent } from '../_util/props-util';
+import { cloneElement } from '../_util/vnode';
 
 export function toTitle(title) {
   if (typeof title === 'string') {
@@ -24,8 +18,8 @@ export function getValuePropValue(child) {
   if (getKey(child) !== undefined) {
     return getKey(child);
   }
-  if (getSlotOptions(child).isSelectOptGroup) {
-    const label = getComponentFromProp(child, 'label');
+  if (typeof child.type === 'object' && child.type.isSelectOptGroup) {
+    const label = getComponent(child, 'label');
     if (label) {
       return label;
     }
@@ -39,8 +33,8 @@ export function getPropValue(child, prop) {
   }
   if (prop === 'children') {
     const newChild = child.$slots
-      ? cloneVNodes(child.$slots.default, true)
-      : cloneVNodes(child.componentOptions.children, true);
+      ? cloneElement(child.$slots.default)
+      : cloneElement(child.componentOptions.children);
     if (newChild.length === 1 && !newChild[0].tag) {
       return newChild[0].text;
     }
@@ -50,7 +44,7 @@ export function getPropValue(child, prop) {
   if (prop in data) {
     return data[prop];
   } else {
-    return getAttrs(child)[prop];
+    return child.props && child.props[prop];
   }
 }
 

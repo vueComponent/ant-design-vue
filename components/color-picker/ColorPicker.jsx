@@ -79,7 +79,7 @@ export default {
   },
   mounted() {
     if (this.locale) {
-      this.i18n = this.locale.ColorPicker;
+      this.i18n = this.locale.ColorPicker || this.locale.lang;
     }
     this.createPickr();
     this.eventsBinding();

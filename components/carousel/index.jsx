@@ -9,6 +9,7 @@ import hasProp, {
 import { ConfigConsumerProps } from '../config-provider';
 import Base from '../base';
 import warning from '../_util/warning';
+import classNames from 'classnames';
 
 // matchMedia polyfill for
 // https://github.com/WickyNilliams/enquire.js/issues/82
@@ -164,7 +165,9 @@ const Carousel = {
     const dotsClass = 'slick-dots';
     const dotPosition = this.getDotPosition();
     props.vertical = dotPosition === 'left' || dotPosition === 'right';
-    props.dotsClass = `${dotsClass} ${dotsClass}-${dotPosition || 'bottom'} ${props.dotsClass}`;
+    props.dotsClass = classNames(`${dotsClass}`, `${dotsClass}-${dotPosition || 'bottom'}`, {
+      [`${props.dotsClass}`]: !!props.dotsClass,
+    });
     if (props.vertical) {
       className = `${className} ${className}-vertical`;
     }

@@ -474,6 +474,7 @@ const Drawer = {
         <div {...domContProps} tabIndex={-1}>
           {showMask && (
             <div
+              key={open} // 第二次渲染时虚拟DOM没有改变，没有出发dom更新，使用key强制更新 https://github.com/vueComponent/ant-design-vue/issues/2407
               class={`${prefixCls}-mask`}
               onClick={maskClosable ? this.onMaskTouchEnd : noop}
               style={maskStyle}

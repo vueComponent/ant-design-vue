@@ -84,7 +84,7 @@ const responsiveObserve = {
           };
           this.dispatch(pointMap);
         },
-        // Keep a empty destory to avoid triggering unmatch when unregister
+        // Keep a empty destroy to avoid triggering unmatch when unregister
         destroy() {},
       }),
     );

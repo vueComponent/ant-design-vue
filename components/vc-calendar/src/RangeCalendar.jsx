@@ -494,7 +494,7 @@ const RangeCalendar = {
       // Adjust month if date not align
       if (
         !showTimePicker &&
-        panelTriggerSource === 'start' &&
+        panelTriggerSource !== 'end' &&
         mode[0] === 'date' &&
         mode[1] === 'date' &&
         endValue.isSame(value[0], 'month')

@@ -2,6 +2,9 @@ import '@babel/polyfill';
 import { createApp } from 'vue';
 import App from './App.vue';
 import {
+  Radio,
+  Spin,
+  Select,
   Input,
   InputNumber,
   Rate,
@@ -32,6 +35,8 @@ app
   .component('api', { ...basic })
   .component('CN', { ...basic })
   .component('US', { ...basic })
+  .use(Select)
+  .use(Spin)
   .use(Upload)
   .use(Button)
   .use(Icon)
@@ -42,5 +47,6 @@ app
   .use(Tooltip)
   .use(Col)
   .use(Row)
+  .use(Radio)
   .use(InputNumber)
   .mount('#app');

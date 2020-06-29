@@ -139,7 +139,7 @@ const getComponent = (instance, prop = 'default', options = instance, execute = 
     }
   } else if (isVNode(instance)) {
     const temp = instance.props && instance.props[prop];
-    if (temp !== undefined) {
+    if (temp !== undefined && temp !== null) {
       return typeof temp === 'function' && execute ? temp(options) : temp;
     } else if (instance.children && instance.children[prop]) {
       let com = instance.children[prop];
@@ -305,7 +305,11 @@ export function isFragment(c) {
 }
 
 export function isEmptyElement(c) {
-  return c.type === Comment || (c.type === Text && c.children.trim() === '');
+  return (
+    c.type === Comment ||
+    (c.type === Fragment && c.children.length === 0) ||
+    (c.type === Text && c.children.trim() === '')
+  );
 }
 
 export function isStringElement(c) {
@@ -313,10 +317,17 @@ export function isStringElement(c) {
 }
 
 export function filterEmpty(children = []) {
-  if (isFragment(children)) {
-    return children[0].children.filter(c => !isEmptyElement(c));
-  }
-  return children.filter(c => !isEmptyElement(c));
+  const res = [];
+  children.forEach(child => {
+    if (Array.isArray(child)) {
+      res.push(...child);
+    } else if (child.type === Fragment) {
+      res.push(...child.children);
+    } else {
+      res.push(child);
+    }
+  });
+  return res.filter(c => !isEmptyElement(c));
 }
 const initDefaultProps = (propTypes, defaultProps) => {
   Object.keys(defaultProps).forEach(k => {

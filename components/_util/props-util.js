@@ -95,7 +95,7 @@ const getSlotOptions = ele => {
 };
 const findDOMNode = instance => {
   let node = instance.$el;
-  while (!node.tagName) {
+  while (node && !node.tagName) {
     node = node.nextSibling;
   }
   return node;
@@ -200,7 +200,8 @@ const getAllProps = ele => {
   return props;
 };
 
-const getPropsData = vnode => {
+const getPropsData = ins => {
+  const vnode = ins.$ ? ins.$ : ins;
   const res = {};
   const originProps = vnode.props || {};
   const props = {};

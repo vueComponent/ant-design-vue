@@ -107,10 +107,6 @@ const Select = {
     choiceTransitionName: PropTypes.string.def('zoom'),
   },
   propTypes: SelectPropTypes,
-  // model: {
-  //   prop: 'value',
-  //   event: 'change',
-  // },
   setup() {
     return {
       configProvider: inject('configProvider', ConfigConsumerProps),

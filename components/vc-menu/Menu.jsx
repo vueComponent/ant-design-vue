@@ -154,7 +154,9 @@ const Menu = {
 
   render() {
     const props = { ...getOptionProps(this), ...this.$attrs };
-    props.class += ` ${props.prefixCls}-root`;
+    props.class = props.class
+      ? `${props.class} ${props.prefixCls}-root`
+      : `${props.prefixCls}-root`;
     const subPopupMenuProps = {
       ...props,
       itemIcon: getComponent(this, 'itemIcon', props),

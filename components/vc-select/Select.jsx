@@ -1,3 +1,4 @@
+import {TransitionGroup} from 'vue';
 import KeyCode from '../_util/KeyCode';
 import PropTypes from '../_util/vue-types';
 import classnames from 'classnames';
@@ -8,13 +9,10 @@ import Option from './Option';
 import OptGroup from './OptGroup';
 import {
   hasProp,
-  getSlotOptions,
   getPropsData,
   getValueByProp as getValue,
   getComponent,
   getEvents,
-  getClass,
-  getAttrs,
   getOptionProps,
 } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
@@ -106,10 +104,6 @@ const Select = {
     // onDeselect: noop,
     // onInputKeydown: noop,
   },
-  // model: {
-  //   prop: 'value',
-  //   event: 'change',
-  // },
   created() {
     this.saveInputRef = saveRef(this, 'inputRef');
     this.saveInputMirrorRef = saveRef(this, 'inputMirrorRef');
@@ -175,7 +169,7 @@ const Select = {
     __propsSymbol__() {
       Object.assign(this.$data, this.getDerivedState(getOptionProps(this), this.$data));
     },
-    '$data._inputValue'(val) {
+    _inputValue(val) {
       this.$data._mirrorInputValue = val;
     },
   },
@@ -232,8 +226,8 @@ const Select = {
         if (!child.data || child.data.slot !== undefined) {
           return;
         }
-        if (getSlotOptions(child).isSelectOptGroup) {
-          this.getOptionsFromChildren(child.componentOptions.children, options);
+        if (child.type?.isSelectOptGroup) {
+          this.getOptionsFromChildren(child.children?.default(), options);
         } else {
           options.push(child);
         }
@@ -787,32 +781,31 @@ const Select = {
     _getInputElement() {
       const props = this.$props;
       const { _inputValue: inputValue, _mirrorInputValue } = this.$data;
-      const attrs = getAttrs(this);
+      const attrs = this.$attrs;
       const defaultInput = <input id={attrs.id} autoComplete="off" />;
 
       const inputElement = props.getInputElement ? props.getInputElement() : defaultInput;
-      const inputCls = classnames(getClass(inputElement), {
+      const inputCls = classnames(inputElement.class, {
         [`${props.prefixCls}-search__field`]: true,
       });
       const inputEvents = getEvents(inputElement);
       // https://github.com/ant-design/ant-design/issues/4992#issuecomment-281542159
       // Add space to the end of the inputValue as the width measurement tolerance
-      inputElement.data = inputElement.data || {};
       return (
         <div class={`${props.prefixCls}-search__field__wrap`} onClick={this.inputClick}>
           {cloneElement(inputElement, {
             disabled: props.disabled,
             value: inputValue,
-            ...(inputElement.data.attrs || {}),
+            ...(inputElement.props || {}),
             disabled: props.disabled,
             value: inputValue,
             class: inputCls,
             ref: this.saveInputRef,
-            directives: [
-              {
-                name: 'ant-input',
-              },
-            ],
+            // directives: [
+            //   {
+            //     name: 'ant-input',
+            //   },
+            // ],
             onInput: this.onInputChange,
             onKeydown: chaining(
               this.onInputKeydown,
@@ -1099,6 +1092,7 @@ const Select = {
       const vls = this.getVLForOnChange(value);
       const options = this.getOptionsBySingleValue(value);
       this._valueOptions = options;
+      this.$emit('update:value', vls);
       this.$emit('change', vls, isMultipleOrTags(this.$props) ? options : options[0]);
     },
 
@@ -1186,16 +1180,11 @@ const Select = {
       const { _inputValue: inputValue } = this.$data;
       const tags = props.tags;
       children.forEach(child => {
-        const type = child.type;
-        warning(
-          typeof type === 'object' && type.isSelectOption,
-          'the children of `Select` should be `Select.Option` or `Select.OptGroup`, ' +
-            `instead of \`${getSlotOptions(child).name || getSlotOptions(child)}\`.`,
-        );
-        if (typeof type !== 'object' || !type.isSelectOption) {
+        if (!child) {
           return;
         }
-        if (type.isSelectOptGroup) {
+        const type = child.type;
+        if (type?.isSelectOptGroup) {
           let label = getComponent(child, 'label');
           let key = child.key;
           if (!key && typeof label === 'string') {
@@ -1211,14 +1200,14 @@ const Select = {
               const childValueSub = getValuePropValue(subChild) || subChild.key;
               return (
                 <MenuItem key={childValueSub} value={childValueSub} {...subChild.props}>
-                  {subChild.children?.default()}
+                  {...(subChild.children?.default())}
                 </MenuItem>
               );
             });
 
             sel.push(
               <MenuItemGroup key={key} title={label} class={child.props?.class}>
-                {innerItems}
+                {...innerItems}
               </MenuItemGroup>,
             );
 
@@ -1232,7 +1221,7 @@ const Select = {
             if (innerItems.length) {
               sel.push(
                 <MenuItemGroup key={key} title={label} {...child.props}>
-                  {innerItems}
+                  {...innerItems}
                 </MenuItemGroup>,
               );
             }
@@ -1240,6 +1229,10 @@ const Select = {
 
           return;
         }
+        warning(
+          typeof type === 'object' && type.isSelectOption,
+          'the children of `Select` should be `Select.Option` or `Select.OptGroup`, ',
+        );
 
         const childValue = getValuePropValue(child);
 
@@ -1416,10 +1409,10 @@ const Select = {
         if (isMultipleOrTags(props) && choiceTransitionName) {
           const transitionProps = getTransitionProps(choiceTransitionName, {
             tag: 'ul',
-            afterLeave: this.onChoiceAnimationLeave,
+            onAfterLeave: this.onChoiceAnimationLeave,
           });
           innerNode = (
-            <transition-group {...transitionProps}>{selectedValueNodes}</transition-group>
+            <TransitionGroup {...transitionProps}>{selectedValueNodes}</TransitionGroup>
           );
         } else {
           innerNode = <ul>{selectedValueNodes}</ul>;

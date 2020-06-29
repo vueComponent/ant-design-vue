@@ -318,7 +318,7 @@ export default {
         return;
       }
       const target = event.target;
-      const root = this.$el;
+      const root = findDOMNode(this);
       if (!contains(root, target) && !this.hasPopupMouseDown) {
         this.close();
       }
@@ -417,11 +417,7 @@ export default {
         ...mouseProps,
         ref: this.savePopup,
       };
-      return (
-        <Popup ref="popup" {...popupProps}>
-          {getComponent(self, 'popup')}
-        </Popup>
-      );
+      return <Popup {...popupProps}>{getComponent(self, 'popup')}</Popup>;
     },
 
     getContainer() {
@@ -434,7 +430,7 @@ export default {
       popupContainer.style.left = '0';
       popupContainer.style.width = '100%';
       const mountNode = props.getPopupContainer
-        ? props.getPopupContainer(this.$el, dialogContext)
+        ? props.getPopupContainer(findDOMNode(this), dialogContext)
         : props.getDocument().body;
       mountNode.appendChild(popupContainer);
       this.popupContainer = popupContainer;

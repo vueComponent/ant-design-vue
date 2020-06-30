@@ -56,4 +56,6 @@ export const SelectPropTypes = {
   dropdownMenuStyle: PropTypes.object,
   notFoundContent: PropTypes.oneOfType([String, Number]),
   tabIndex: PropTypes.oneOfType([String, Number]),
+  __propsSymbol__: PropTypes.any,
+  children: PropTypes.array,
 };

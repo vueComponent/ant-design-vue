@@ -2,7 +2,14 @@ import { inject, provide } from 'vue';
 import antRef from '../_util/ant-ref';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
-import { hasProp, getComponent, getEvents, filterEmpty, getSlot } from '../_util/props-util';
+import {
+  hasProp,
+  getComponent,
+  getEvents,
+  filterEmpty,
+  getSlot,
+  findDOMNode,
+} from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import warning from '../_util/warning';
@@ -311,7 +318,7 @@ export default {
         return;
       }
       const target = event.target;
-      const root = this.$el;
+      const root = findDOMNode(this);
       if (!contains(root, target) && !this.hasPopupMouseDown) {
         this.close();
       }
@@ -324,7 +331,7 @@ export default {
     },
 
     getRootDomNode() {
-      return this.$refs.trigger.$el || this.$refs.trigger;
+      return findDOMNode(this);
     },
 
     handleGetPopupClassFromAlign(align) {
@@ -410,11 +417,7 @@ export default {
         ...mouseProps,
         ref: this.savePopup,
       };
-      return (
-        <Popup ref="popup" {...popupProps}>
-          {getComponent(self, 'popup')}
-        </Popup>
-      );
+      return <Popup {...popupProps}>{getComponent(self, 'popup')}</Popup>;
     },
 
     getContainer() {
@@ -427,7 +430,7 @@ export default {
       popupContainer.style.left = '0';
       popupContainer.style.width = '100%';
       const mountNode = props.getPopupContainer
-        ? props.getPopupContainer(this.$el, dialogContext)
+        ? props.getPopupContainer(findDOMNode(this), dialogContext)
         : props.getDocument().body;
       mountNode.appendChild(popupContainer);
       this.popupContainer = popupContainer;
@@ -583,7 +586,6 @@ export default {
     this.childOriginEvents = getEvents(child);
     const newChildProps = {
       key: 'trigger',
-      ref: 'trigger',
     };
 
     if (this.isContextmenuToShow()) {

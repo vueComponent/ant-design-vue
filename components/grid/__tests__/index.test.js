@@ -7,7 +7,7 @@ describe('Grid', () => {
   mountTest(Col);
   it('should render Col', () => {
     const wrapper = mount(Col, {
-      propsData: {
+      props: {
         span: 2,
       },
     });

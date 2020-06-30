@@ -5,7 +5,8 @@ import PopupInner from './PopupInner';
 import LazyRenderBox from './LazyRenderBox';
 import animate from '../_util/css-animation';
 import BaseMixin from '../_util/BaseMixin';
-import { getListeners, splitAttrs } from '../_util/props-util';
+import { saveRef } from './utils';
+import { getListeners, splitAttrs, findDOMNode } from '../_util/props-util';
 
 export default {
   name: 'VCTriggerPopup',
@@ -36,6 +37,8 @@ export default {
   data() {
     this.domEl = null;
     this.currentAlignClassName = undefined;
+    this.savePopupRef = saveRef.bind(this, 'popupInstance');
+    this.saveAlignRef = saveRef.bind(this, 'alignInstance');
     return {
       // Used for stretch
       stretchChecked: false,
@@ -62,13 +65,13 @@ export default {
       this.setStretchSize();
     });
   },
-  beforeUnmount() {
-    if (this.$el.parentNode) {
-      this.$el.parentNode.removeChild(this.$el);
-    } else if (this.$el.remove) {
-      this.$el.remove();
-    }
-  },
+  // beforeUnmount() {
+  //   if (this.$el.parentNode) {
+  //     this.$el.parentNode.removeChild(this.$el);
+  //   } else if (this.$el.remove) {
+  //     this.$el.remove();
+  //   }
+  // },
   methods: {
     onAlign(popupDomNode, align) {
       const props = this.$props;
@@ -111,7 +114,7 @@ export default {
     },
 
     getPopupDomNode() {
-      return this.$refs.popupInstance ? this.$refs.popupInstance.$el : null;
+      return findDOMNode(this.popupInstance);
     },
 
     getTargetElement() {
@@ -158,6 +161,7 @@ export default {
       } ${currentAlignClassName}`;
     },
     getPopupElement() {
+      const { savePopupRef } = this;
       const { $props: props, $attrs, $slots, getTransitionName } = this;
       const { stretchChecked, targetHeight, targetWidth } = this.$data;
       const { style = {} } = $attrs;
@@ -197,8 +201,8 @@ export default {
         if (!stretchChecked) {
           // sizeStyle.visibility = 'hidden'
           setTimeout(() => {
-            if (this.$refs.alignInstance) {
-              this.$refs.alignInstance.forceAlign();
+            if (this.alignInstance) {
+              this.alignInstance.forceAlign();
             }
           }, 0);
         }
@@ -209,7 +213,7 @@ export default {
         // hiddenClassName,
         class: className,
         ...onEvents,
-        ref: 'popupInstance',
+        ref: savePopupRef,
         style: { ...sizeStyle, ...popupStyle, ...style, ...this.getZIndexStyle() },
       };
       let transitionProps = {
@@ -221,13 +225,13 @@ export default {
       const transitionEvent = {
         onBeforeEnter: () => {
           // el.style.display = el.__vOriginalDisplay
-          // this.$refs.alignInstance.forceAlign();
+          // this.alignInstance.forceAlign();
         },
         onEnter: (el, done) => {
           // render 后 vue 会移除通过animate动态添加的 class导致动画闪动，延迟两帧添加动画class，可以进一步定位或者重写 transition 组件
           this.$nextTick(() => {
-            if (this.$refs.alignInstance) {
-              this.$refs.alignInstance.$nextTick(() => {
+            if (this.alignInstance) {
+              this.alignInstance.$nextTick(() => {
                 this.domEl = el;
                 animate(el, `${transitionName}-enter`, done);
               });
@@ -258,7 +262,7 @@ export default {
               <Align
                 target={this.getAlignTarget()}
                 key="popup"
-                ref="alignInstance"
+                ref={this.saveAlignRef}
                 monitorWindowResize
                 align={align}
                 onAlign={this.onAlign}
@@ -275,7 +279,7 @@ export default {
             v-show={visible}
             target={this.getAlignTarget()}
             key="popup"
-            ref="alignInstance"
+            ref={this.saveAlignRef}
             monitorWindowResize
             disabled={!visible}
             align={align}

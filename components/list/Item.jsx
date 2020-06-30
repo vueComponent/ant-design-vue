@@ -1,15 +1,11 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
-import {
-  getComponentFromProp,
-  isStringElement,
-  getListeners,
-  isEmptyElement,
-} from '../_util/props-util';
+import { getComponent, isStringElement, isEmptyElement, getSlot } from '../_util/props-util';
 import { Col } from '../grid';
 import { ConfigConsumerProps } from '../config-provider';
 import { ListGridType } from './index';
 import { cloneElement } from '../_util/vnode';
+import { inject } from 'vue';
 
 export const ListItemProps = {
   prefixCls: PropTypes.string,
@@ -26,34 +22,33 @@ export const ListItemMetaProps = {
 };
 
 export const Meta = {
+  props: ListItemMetaProps,
+  inheritAttributes: false,
   functional: true,
   name: 'AListItemMeta',
   __ANT_LIST_ITEM_META: true,
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-  },
-  render(h, context) {
-    const { props, slots, listeners, injections } = context;
-    const slotsMap = slots();
-    const getPrefixCls = injections.configProvider.getPrefixCls;
-    const { prefixCls: customizePrefixCls } = props;
-    const prefixCls = getPrefixCls('list', customizePrefixCls);
-
-    const avatar = props.avatar || slotsMap.avatar;
-    const title = props.title || slotsMap.title;
-    const description = props.description || slotsMap.description;
-    const content = (
-      <div class={`${prefixCls}-item-meta-content`}>
-        {title && <h4 class={`${prefixCls}-item-meta-title`}>{title}</h4>}
-        {description && <div class={`${prefixCls}-item-meta-description`}>{description}</div>}
-      </div>
-    );
-    return (
-      <div {...{ on: listeners }} class={`${prefixCls}-item-meta`}>
-        {avatar && <div class={`${prefixCls}-item-meta-avatar`}>{avatar}</div>}
-        {(title || description) && content}
-      </div>
-    );
+  setup(props, { slots, attrs }) {
+    const configProvider = inject('configProvider', ConfigConsumerProps);
+    return () => {
+      const getPrefixCls = configProvider.getPrefixCls;
+      const { prefixCls: customizePrefixCls } = props;
+      const prefixCls = getPrefixCls('list', customizePrefixCls);
+      const avatar = props.avatar || slots.avatar?.();
+      const title = props.title || slots.title?.();
+      const description = props.description || slots.description?.();
+      const content = (
+        <div class={`${prefixCls}-item-meta-content`}>
+          {title && <h4 class={`${prefixCls}-item-meta-title`}>{title}</h4>}
+          {description && <div class={`${prefixCls}-item-meta-description`}>{description}</div>}
+        </div>
+      );
+      return (
+        <div {...attrs} class={`${prefixCls}-item-meta`}>
+          {avatar && <div class={`${prefixCls}-item-meta-avatar`}>{avatar}</div>}
+          {(title || description) && content}
+        </div>
+      );
+    };
   },
 };
 
@@ -62,18 +57,22 @@ function getGrid(grid, t) {
 }
 
 export default {
+  inheritAttributes: false,
   name: 'AListItem',
   Meta,
   props: ListItemProps,
-  inject: {
-    listContext: { default: () => ({}) },
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    const listContext = inject('listContext', {});
+    const configProvider = inject('configProvider', ConfigConsumerProps);
+    return {
+      listContext,
+      configProvider,
+    };
   },
   methods: {
     isItemContainsTextNodeAndNotSingular() {
-      const { $slots } = this;
+      const children = getSlot(this) || [];
       let result;
-      const children = $slots.default || [];
       children.forEach(element => {
         if (isStringElement(element) && !isEmptyElement(element)) {
           result = true;
@@ -83,7 +82,7 @@ export default {
     },
 
     isFlexMode() {
-      const extra = getComponentFromProp(this, 'extra');
+      const extra = getComponent(this, 'extra');
       const { itemLayout } = this.listContext;
       if (itemLayout === 'vertical') {
         return !!extra;
@@ -93,12 +92,12 @@ export default {
   },
   render() {
     const { grid, itemLayout } = this.listContext;
-    const { prefixCls: customizePrefixCls, $slots } = this;
-    const listeners = getListeners(this);
+    const { prefixCls: customizePrefixCls, $slots, $attrs } = this;
+    const { class: _className } = $attrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
-    const extra = getComponentFromProp(this, 'extra');
-    const actions = getComponentFromProp(this, 'actions');
+    const extra = getComponent(this, 'extra');
+    const actions = getComponent(this, 'actions');
 
     const actionsContent = actions && actions.length > 0 && (
       <ul class={`${prefixCls}-item-action`} key="actions">
@@ -110,12 +109,12 @@ export default {
         ))}
       </ul>
     );
-
+    const children = $slots.default && $slots.default();
     const Tag = grid ? 'div' : 'li';
     const itemChildren = (
       <Tag
-        {...{ on: listeners }}
-        class={classNames(`${prefixCls}-item`, {
+        {...$attrs}
+        class={classNames(`${prefixCls}-item `, _className, {
           [`${prefixCls}-item-no-flex`]: !this.isFlexMode(),
         })}
       >
@@ -129,7 +128,7 @@ export default {
                 {extra}
               </div>,
             ]
-          : [$slots.default, actionsContent, cloneElement(extra, { key: 'extra' })]}
+          : [children, actionsContent, cloneElement(extra, { key: 'extra' })]}
       </Tag>
     );
 

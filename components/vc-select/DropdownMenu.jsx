@@ -5,7 +5,7 @@ import scrollIntoView from 'dom-scroll-into-view';
 import { getSelectKeys, preventDefaultEvent, saveRef } from './util';
 import { cloneElement } from '../_util/vnode';
 import BaseMixin from '../_util/BaseMixin';
-import { findDOMNode } from '../_util/props-util';
+import { findDOMNode, getSlot } from '../_util/props-util';
 
 export default {
   name: 'DropdownMenu',
@@ -152,7 +152,7 @@ export default {
 
           clonedMenuItems = menuItems.map(item => {
             if (item.type.isMenuItemGroup) {
-              const children = (item.children?.default() || []).map(clone);
+              const children = getSlot(item).map(clone);
               const newItem = cloneElement(item);
               newItem.children = { ...item.children, default: () => children };
               return newItem;

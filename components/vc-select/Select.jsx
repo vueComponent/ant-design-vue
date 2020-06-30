@@ -14,6 +14,7 @@ import {
   getComponent,
   getEvents,
   getOptionProps,
+  getSlot,
 } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
 import { cloneElement } from '../_util/vnode';
@@ -223,11 +224,11 @@ const Select = {
     },
     getOptionsFromChildren(children = [], options = []) {
       children.forEach(child => {
-        if (!child.data || child.data.slot !== undefined) {
+        if (!child) {
           return;
         }
         if (child.type?.isSelectOptGroup) {
-          this.getOptionsFromChildren(child.children?.default(), options);
+          this.getOptionsFromChildren(getSlot(child), options);
         } else {
           options.push(child);
         }
@@ -782,7 +783,7 @@ const Select = {
       const props = this.$props;
       const { _inputValue: inputValue, _mirrorInputValue } = this.$data;
       const attrs = this.$attrs;
-      const defaultInput = <input id={attrs.id} autoComplete="off" />;
+      const defaultInput = <input {...(attrs.id !== undefined ? {id: attrs.id}: {})} autoComplete="off"/>;
 
       const inputElement = props.getInputElement ? props.getInputElement() : defaultInput;
       const inputCls = classnames(inputElement.class, {
@@ -795,7 +796,6 @@ const Select = {
         <div class={`${props.prefixCls}-search__field__wrap`} onClick={this.inputClick}>
           {cloneElement(inputElement, {
             disabled: props.disabled,
-            value: inputValue,
             ...(inputElement.props || {}),
             disabled: props.disabled,
             value: inputValue,
@@ -881,6 +881,21 @@ const Select = {
         if (fireSearch) {
           this.$emit('search', inputValue);
         }
+      } else {
+        // TODO
+        // https://github.com/vuejs/vue-next/issues/1471
+        this.setState(
+          {
+            _inputValue: `${inputValue} `,
+          },
+        );
+        this.$nextTick(()=>{
+          this.setState(
+            {
+              _inputValue: inputValue,
+            },
+          );
+        });
       }
     },
     getValueByInput(str) {
@@ -1200,7 +1215,7 @@ const Select = {
               const childValueSub = getValuePropValue(subChild) || subChild.key;
               return (
                 <MenuItem key={childValueSub} value={childValueSub} {...subChild.props}>
-                  {...(subChild.children?.default())}
+                  {...getSlot(subChild)}
                 </MenuItem>
               );
             });
@@ -1247,7 +1262,7 @@ const Select = {
             style: UNSELECTABLE_STYLE,
             class: child?.class,
           };
-          const menuItem = <MenuItem {...p}>{child.children?.default()}</MenuItem>;
+          const menuItem = <MenuItem {...p}>{getSlot(child)}</MenuItem>;
           sel.push(menuItem);
           menuItems.push(menuItem);
         }
@@ -1503,14 +1518,17 @@ const Select = {
         }
       }
     },
-    selectionRefFocus(e) {
-      if (this._focused || this.disabled || isMultipleOrTagsOrCombobox(this.$props)) {
-        e.preventDefault();
-        return;
+    selectionRefFocus() {
+      if (this.getInputDOMNode() && this.getInputDOMNode()) {
+        this.getInputDOMNode().focus();
       }
-      this._focused = true;
-      this.updateFocusClassName();
-      this.$emit('focus');
+      // if (this._focused || this.disabled || isMultipleOrTagsOrCombobox(this.$props)) {
+      //   e.preventDefault();
+      //   return;
+      // }
+      // this._focused = true;
+      // this.updateFocusClassName();
+      // this.$emit('focus');
     },
     selectionRefBlur(e) {
       if (isMultipleOrTagsOrCombobox(this.$props)) {

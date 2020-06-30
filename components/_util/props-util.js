@@ -67,12 +67,39 @@ const getSlots = ele => {
   });
   return { ...slots, ...getScopedSlots(ele) };
 };
+
+const flattenChildren = (children = [], filterEmpty = true) => {
+  const temp = Array.isArray(children) ? children : [children];
+  const res = [];
+  temp.forEach(child => {
+    if (Array.isArray(child)) {
+      res.push(...flattenChildren(child, filterEmpty));
+    } else if (child && child.type === Fragment) {
+      res.push(...flattenChildren(child.children, filterEmpty));
+    } else if (child && isVNode(child)) {
+      if (filterEmpty && !isEmptyElement(child)) {
+        res.push(child);
+      } else if (!filterEmpty) {
+        res.push(child);
+      }
+    }
+  });
+  return res;
+};
+
 const getSlot = (self, name = 'default', options = {}) => {
-  let res = self.$slots[name] && self.$slots[name](options);
-  while (res && res.length === 1 && (res[0].type === Fragment || Array.isArray(res[0]))) {
-    res = res[0].children || res[0];
+  if (isVNode(self)) {
+    if (self.type === Fragment) {
+      return name === 'default' ? flattenChildren(self.children) : [];
+    } else if (self.children && self.children[name]) {
+      return flattenChildren(self.children[name](options));
+    } else {
+      return [];
+    }
+  } else {
+    let res = self.$slots[name] && self.$slots[name](options);
+    return flattenChildren(res);
   }
-  return res && res.__v_isVNode ? [res] : res;
 };
 
 const getAllChildren = ele => {
@@ -128,26 +155,32 @@ const getOptionProps = instance => {
   return res;
 };
 const getComponent = (instance, prop = 'default', options = instance, execute = true) => {
+  let com = undefined;
   if (instance.$) {
     const temp = instance[prop];
     if (temp !== undefined) {
       return typeof temp === 'function' && execute ? temp(options) : temp;
     } else {
-      let com = instance.$slots[prop];
+      com = instance.$slots[prop];
       com = execute && com ? com(options) : com;
-      return Array.isArray(com) && com.length === 1 ? com[0] : com;
     }
   } else if (isVNode(instance)) {
     const temp = instance.props && instance.props[prop];
-    if (temp !== undefined && temp !== null) {
+    if (temp !== undefined && instance.props !== null) {
       return typeof temp === 'function' && execute ? temp(options) : temp;
+    } else if (instance.type === Fragment) {
+      com = instance.children;
     } else if (instance.children && instance.children[prop]) {
-      let com = instance.children[prop];
+      com = instance.children[prop];
       com = execute && com ? com(options) : com;
-      return Array.isArray(com) && com.length === 1 ? com[0] : com;
     }
   }
-  return undefined;
+  if (Array.isArray(com)) {
+    com = flattenChildren(com);
+    com = com.length === 1 ? com[0] : com;
+    com = com.length === 0 ? undefined : com;
+  }
+  return com;
 };
 const getComponentFromProp = (instance, prop, options = instance, execute = true) => {
   if (instance.$createElement) {
@@ -381,5 +414,6 @@ export {
   getAllProps,
   getAllChildren,
   findDOMNode,
+  flattenChildren,
 };
 export default hasProp;

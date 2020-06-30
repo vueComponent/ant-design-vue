@@ -1,4 +1,4 @@
-import { getPropsData, getComponent } from '../_util/props-util';
+import { getPropsData, getComponent, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { isVNode, Text } from 'vue';
 
@@ -115,7 +115,7 @@ export function getSelectKeys(menuItems = [], value) {
   let selectedKeys = [];
   menuItems.forEach(item => {
     if (item.type?.isMenuItemGroup) {
-      selectedKeys = selectedKeys.concat(getSelectKeys(item.children?.default(), value));
+      selectedKeys = selectedKeys.concat(getSelectKeys(getSlot(item), value));
     } else {
       const itemValue = getValuePropValue(item);
       const itemKey = item.key;
@@ -141,7 +141,7 @@ export function findFirstMenuItem(children) {
     const child = children[i];
     const props = getPropsData(child);
     if (child.type?.isMenuItemGroup) {
-      const found = findFirstMenuItem(child.children?.default());
+      const found = findFirstMenuItem(getSlot(child));
       if (found) {
         return found;
       }

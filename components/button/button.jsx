@@ -2,7 +2,7 @@ import { inject, Text } from 'vue';
 import Wave from '../_util/wave';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';
-import { filterEmpty, getSlot } from '../_util/props-util';
+import { getSlot, getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 // eslint-disable-next-line no-console
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
@@ -20,6 +20,7 @@ export default {
   },
   data() {
     this.children = [];
+    this.iconCom = undefined;
     return {
       sizeMap: {
         large: 'lg',
@@ -133,14 +134,14 @@ export default {
       return child;
     },
     isNeedInserted() {
-      const { icon, type } = this;
-      return this.children.length === 1 && !icon && type !== 'link';
+      const { iconCom, type } = this;
+      return this.children.length === 1 && !iconCom && type !== 'link';
     },
   },
   render() {
-    this.icon = getSlot(this, 'icon');
-    const { type, htmlType, icon, disabled, handleClick, sLoading, $attrs } = this;
-    const children = filterEmpty(getSlot(this));
+    this.iconCom = getComponent(this, 'icon');
+    const { type, htmlType, iconCom, disabled, handleClick, sLoading, $attrs } = this;
+    const children = getSlot(this);
     this.children = children;
     const classes = this.getClasses();
 
@@ -150,7 +151,7 @@ export default {
       class: classes,
       onClick: handleClick,
     };
-    const iconNode = sLoading ? <LoadingOutlined /> : icon;
+    const iconNode = sLoading ? <LoadingOutlined /> : iconCom;
 
     const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
     const kids = children.map(child =>

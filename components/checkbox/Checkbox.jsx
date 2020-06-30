@@ -5,6 +5,7 @@ import VcCheckbox from '../vc-checkbox';
 import hasProp, { getOptionProps, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import warning from '../_util/warning';
+function noop() {}
 
 export default {
   name: 'ACheckbox',

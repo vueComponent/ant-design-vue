@@ -23,7 +23,7 @@ import 'ant-design-vue/style.js';
 
 const basic = {
     render() {
-        return this.$slots ? .default();
+        return this.$slots?.default();
     },
 };
 const app = createApp(App);

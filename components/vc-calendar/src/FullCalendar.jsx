@@ -12,7 +12,7 @@ const FullCalendar = {
   name: 'FullCalendar',
   props: {
     locale: PropTypes.object.def(enUs),
-    format: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.func]),
     visible: PropTypes.bool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     defaultType: PropTypes.string.def('date'),

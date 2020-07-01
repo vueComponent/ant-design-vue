@@ -881,21 +881,6 @@ const Select = {
         if (fireSearch) {
           this.$emit('search', inputValue);
         }
-      } else {
-        // TODO
-        // https://github.com/vuejs/vue-next/issues/1471
-        this.setState(
-          {
-            _inputValue: `${inputValue} `,
-          },
-        );
-        this.$nextTick(()=>{
-          this.setState(
-            {
-              _inputValue: inputValue,
-            },
-          );
-        });
       }
     },
     getValueByInput(str) {

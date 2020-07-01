@@ -2,6 +2,7 @@ import isPlainObject from 'lodash/isPlainObject';
 import classNames from 'classnames';
 import { isVNode, Fragment, Comment, Text } from 'vue';
 import { camelize, hyphenate, isOn, resolvePropValue } from './util';
+import isValid from './isValid';
 // function getType(fn) {
 //   const match = fn && fn.toString().match(/^\s*function (\w+)/);
 //   return match ? match[1] : '';
@@ -82,6 +83,8 @@ const flattenChildren = (children = [], filterEmpty = true) => {
       } else if (!filterEmpty) {
         res.push(child);
       }
+    } else if (isValid(child)) {
+      res.push(child);
     }
   });
   return res;

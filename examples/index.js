@@ -2,6 +2,7 @@ import '@babel/polyfill';
 import { createApp } from 'vue';
 import App from './App.vue';
 import {
+  AutoComplete,
   Radio,
   Spin,
   Select,
@@ -49,4 +50,5 @@ app
   .use(Row)
   .use(Radio)
   .use(InputNumber)
+  .use(AutoComplete)
   .mount('#app');

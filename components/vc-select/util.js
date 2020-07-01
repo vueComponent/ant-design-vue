@@ -33,7 +33,8 @@ export function getPropValue(child, prop) {
     return getValuePropValue(child);
   }
   if (prop === 'children') {
-    const newChild = cloneElement(getComponent(child));
+    const temp = getComponent(child);
+    const newChild = isVNode(temp) ? cloneElement(temp) : temp;
     if (isVNode(newChild) && newChild.type === Text) {
       return newChild.children;
     }

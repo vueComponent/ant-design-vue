@@ -92,10 +92,6 @@ export function isAllowedDate(value, disabledDate, disabledTime) {
 }
 
 export function formatDate(value, format) {
-  const isFunction = function(obj) {
-    return !!(obj && obj.constructor && obj.call && obj.apply);
-  };
-  
   if (!value) {
     return '';
   }
@@ -104,7 +100,7 @@ export function formatDate(value, format) {
     format = format[0];
   }
 
-  if (isFunction(format)) {
+  if (typeof format === 'function') {
     const result = format(value);
     if (typeof result === 'string') {
       return result;

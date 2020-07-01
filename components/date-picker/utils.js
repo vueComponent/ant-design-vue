@@ -1,15 +1,11 @@
 export function formatDate(value, format) {
-  const isFunction = function(obj) {
-    return !!(obj && obj.constructor && obj.call && obj.apply);
-  };
-  
   if (!value) {
     return '';
   }
   if (Array.isArray(format)) {
     format = format[0];
   }
-  if (isFunction(format)) {
+  if (typeof format === 'function') {
     const result = format(value);
     if (typeof result === 'string') {
       return result;

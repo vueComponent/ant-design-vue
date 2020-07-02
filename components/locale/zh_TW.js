@@ -2,6 +2,7 @@ import Pagination from '../vc-pagination/locale/zh_TW';
 import DatePicker from '../date-picker/locale/zh_TW';
 import TimePicker from '../time-picker/locale/zh_TW';
 import Calendar from '../calendar/locale/zh_TW';
+import ColorPicker from '../color-picker/locale/zh_TW';
 
 export default {
   locale: 'zh-tw',
@@ -9,6 +10,7 @@ export default {
   DatePicker,
   TimePicker,
   Calendar,
+  ColorPicker,
   Table: {
     filterTitle: '篩選器',
     filterConfirm: '確 定',

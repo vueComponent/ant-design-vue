@@ -178,7 +178,7 @@ export default {
       const prefixCls = getPrefixCls('color-picker', customizePrefixCls);
       const { disabled } = getOptionProps(this);
       const classString = {
-        [`${prefixCls}-box`]: true,
+        [prefixCls]: true,
         [`${prefixCls}-open`]: this.myOpen,
         [`${prefixCls}-lg`]: this.size === 'large',
         [`${prefixCls}-sm`]: this.size === 'small',

@@ -1,55 +1,51 @@
 @import '../../style/themes/index';
 @import '../../input/style/mixin';
-@import '~@simonwep/pickr/dist/themes/classic.min.css';   // 'classic' theme
-@import '~@simonwep/pickr/dist/themes/monolith.min.css';  // 'monolith' theme
-@import '~@simonwep/pickr/dist/themes/nano.min.css';      // 'nano' theme
+
 @color-picker-prefix-cls: ~'@{ant-prefix}-color-picker';
 .@{color-picker-prefix-cls} {
-  &-box{
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    color: rgba(0, 0, 0, 0.65);
-    font-size: 14px;
-    font-variant: tabular-nums;
-    line-height: 1.5;
-    list-style: none;
-    font-feature-settings: 'tnum';
-    position: relative;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  position: relative;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  min-width: 55px;
+  .pickr {
     display: inline-block;
-    outline: none;
-    cursor: pointer;
-    transition: opacity 0.3s;
-    min-width: 55px;
-    .pickr{
-      display: inline-block;
-      button{
-        width: 18px;
-        height: 18px;
-        margin-left: 7px;
-        &:focus{
-          box-shadow: none;
-        }
+    .pcr-button {
+      width: 18px;
+      height: 18px;
+      margin-left: 7px;
+      &:focus {
+        box-shadow: none;
       }
     }
-    &.@{color-picker-prefix-cls}-disabled{
-      cursor: not-allowed;
-      .@{color-picker-prefix-cls}-selection {
-        background: @input-disabled-bg;
-        box-shadow: none;
+  }
+  &.@{color-picker-prefix-cls}-disabled {
+    cursor: not-allowed;
+    .@{color-picker-prefix-cls}-selection {
+      background: @input-disabled-bg;
+      box-shadow: none;
+      border: @border-width-base @border-style-base @select-border-color;
+      &:hover,
+      &:focus,
+      &:active {
         border: @border-width-base @border-style-base @select-border-color;
-        &:hover,
-        &:focus,
-        &:active {
-          border: @border-width-base @border-style-base @select-border-color;
-          box-shadow: none;
-        }
+        box-shadow: none;
       }
-      &.@{color-picker-prefix-cls}-open {
-        .@{color-picker-prefix-cls}-icon {
-          & svg {
-            transform: none;
-          }
+    }
+    &.@{color-picker-prefix-cls}-open {
+      .@{color-picker-prefix-cls}-icon {
+        & svg {
+          transform: none;
         }
       }
     }
@@ -64,7 +60,7 @@
       .active();
     }
   }
-  &-selection{
+  &-selection {
     display: block;
     box-sizing: border-box;
     background-color: @select-background;
@@ -82,7 +78,7 @@
       .hover;
     }
   }
-  &-icon{
+  &-icon {
     .iconfont-mixin();
     position: absolute;
     top: 50%;
@@ -112,7 +108,7 @@
       line-height: @input-height-sm - 12;
       height: @input-height-sm;
     }
-    .pickr button{
+    .pickr .pcr-button {
       width: 14px;
       height: 14px;
     }

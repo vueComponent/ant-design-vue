@@ -767,7 +767,6 @@ export default {
             onBlur={this.onBlur}
             onKeydown={editable ? this.onKeyDown : noop}
             onKeyup={editable ? this.onKeyUp : noop}
-            maxLength={this.maxLength}
             readOnly={this.readOnly}
             disabled={this.disabled}
             max={this.max}

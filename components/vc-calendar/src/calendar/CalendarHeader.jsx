@@ -174,7 +174,7 @@ const CalendarHeader = {
       panel = (
         <YearPanel
           locale={locale}
-          defaultValue={value}
+          value={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onYearSelect}
           onDecadePanelShow={this.showDecadePanel}
@@ -186,7 +186,7 @@ const CalendarHeader = {
       panel = (
         <DecadePanel
           locale={locale}
-          defaultValue={value}
+          value={value}
           rootPrefixCls={prefixCls}
           onSelect={this.onDecadeSelect}
           renderFooter={renderFooter}

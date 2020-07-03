@@ -1,4 +1,4 @@
-import {TransitionGroup} from 'vue';
+import { TransitionGroup } from 'vue';
 import KeyCode from '../_util/KeyCode';
 import PropTypes from '../_util/vue-types';
 import classnames from 'classnames';
@@ -149,7 +149,7 @@ const Select = {
     };
     return {
       ...state,
-      _mirrorInputValue: state._inputValue, // https://github.com/vueComponent/ant-design-vue/issues/1458
+      // _mirrorInputValue: state._inputValue, // https://github.com/vueComponent/ant-design-vue/issues/1458
       ...this.getDerivedState(props, state),
     };
   },
@@ -170,22 +170,10 @@ const Select = {
     __propsSymbol__() {
       Object.assign(this.$data, this.getDerivedState(getOptionProps(this), this.$data));
     },
-    _inputValue(val) {
-      this.$data._mirrorInputValue = val;
-    },
   },
   updated() {
     this.$nextTick(() => {
-      if (isMultipleOrTags(this.$props)) {
-        const inputNode = this.getInputDOMNode();
-        const mirrorNode = this.getInputMirrorDOMNode();
-        if (inputNode && inputNode.value && mirrorNode) {
-          inputNode.style.width = '';
-          inputNode.style.width = `${mirrorNode.clientWidth + 10}px`;
-        } else if (inputNode) {
-          inputNode.style.width = '';
-        }
-      }
+      this.updateInputWidth();
       this.forcePopupAlign();
     });
   },
@@ -199,6 +187,18 @@ const Select = {
     }
   },
   methods: {
+    updateInputWidth() {
+      if (isMultipleOrTags(this.$props)) {
+        const inputNode = this.getInputDOMNode();
+        const mirrorNode = this.getInputMirrorDOMNode();
+        if (inputNode && inputNode.value && mirrorNode) {
+          inputNode.style.width = '';
+          inputNode.style.width = `${mirrorNode.clientWidth + 10}px`;
+        } else if (inputNode) {
+          inputNode.style.width = '';
+        }
+      }
+    },
     getDerivedState(nextProps, prevState) {
       const optionsInfo = prevState._skipBuildOptionsInfo
         ? prevState._optionsInfo
@@ -310,14 +310,7 @@ const Select = {
     },
 
     onInputChange(e) {
-      const { value: val, composing } = e.target;
-      const { _inputValue = '' } = this.$data;
-      if (e.isComposing || composing || _inputValue === val) {
-        this.setState({
-          _mirrorInputValue: val,
-        });
-        return;
-      }
+      const { value: val } = e.target;
       const { tokenSeparators } = this.$props;
       if (
         isMultipleOrTags(this.$props) &&
@@ -639,20 +632,14 @@ const Select = {
     getPlaceholderElement() {
       const { $props: props, $data: state } = this;
       let hidden = false;
-      if (state._mirrorInputValue) {
+      if (state._inputValue) {
         hidden = true;
       }
       const value = state._value;
       if (value.length) {
         hidden = true;
       }
-      if (
-        !state._mirrorInputValue &&
-        isCombobox(props) &&
-        value.length === 1 &&
-        state._value &&
-        !state._value[0]
-      ) {
+      if (isCombobox(props) && value.length === 1 && state._value && !state._value[0]) {
         hidden = false;
       }
       const placeholder = props.placeholder;
@@ -781,9 +768,11 @@ const Select = {
     },
     _getInputElement() {
       const props = this.$props;
-      const { _inputValue: inputValue, _mirrorInputValue } = this.$data;
+      const { _inputValue: inputValue } = this.$data;
       const attrs = this.$attrs;
-      const defaultInput = <input {...(attrs.id !== undefined ? {id: attrs.id}: {})} autoComplete="off"/>;
+      const defaultInput = (
+        <input {...(attrs.id !== undefined ? { id: attrs.id } : {})} autoComplete="off" />
+      );
 
       const inputElement = props.getInputElement ? props.getInputElement() : defaultInput;
       const inputCls = classnames(inputElement.class, {
@@ -816,7 +805,7 @@ const Select = {
             onBlur: chaining(this.inputBlur, inputEvents.onBlur),
           })}
           <span ref={this.saveInputMirrorRef} class={`${props.prefixCls}-search__field__mirror`}>
-            {_mirrorInputValue}&nbsp;
+            {inputValue}&nbsp;
           </span>
         </div>
       );
@@ -1206,7 +1195,7 @@ const Select = {
             });
 
             sel.push(
-              <MenuItemGroup key={key} title={label} class={child.props?.class}>
+              <MenuItemGroup key={key} title={label} class={child.props && child.props.class}>
                 {...innerItems}
               </MenuItemGroup>,
             );
@@ -1411,9 +1400,7 @@ const Select = {
             tag: 'ul',
             onAfterLeave: this.onChoiceAnimationLeave,
           });
-          innerNode = (
-            <TransitionGroup {...transitionProps}>{selectedValueNodes}</TransitionGroup>
-          );
+          innerNode = <TransitionGroup {...transitionProps}>{selectedValueNodes}</TransitionGroup>;
         } else {
           innerNode = <ul>{selectedValueNodes}</ul>;
         }

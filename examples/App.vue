@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/select/demo/tags';
+import demo from '../antdv-demo/docs/auto-complete/demo/index';
 
 export default {
   components: {

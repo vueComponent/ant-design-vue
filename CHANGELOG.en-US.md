@@ -12,7 +12,7 @@
 
 ## 1.6.3
 
-`2020-07-03`
+`2020-07-05`
 
 - 🐞 Fix Input.Password focus position shift issue [#2420](https://github.com/vueComponent/ant-design-vue/pull/2420)
 - 🐞 Fix Drawer maskstyle not working [#2407](https://github.com/vueComponent/ant-design-vue/issues/2407)

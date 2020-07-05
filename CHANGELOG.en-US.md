@@ -22,6 +22,7 @@
 - 🐞 Fix DatePicker year and time is incorrect [#2488](https://github.com/vueComponent/ant-design-vue/issues/2488)
 - 🌟 Optimize the Menu component, the animation is smoother
 - 🐞 Fix Dropdown pop-up position error [#2359](https://github.com/vueComponent/ant-design-vue/issues/2359)
+- 🐞 Fix the problem of duplicate key when `Breadcrumb` has the same name [#2505](https://github.com/vueComponent/ant-design-vue/issues/2505)
 
 ## 1.6.2
 

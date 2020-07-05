@@ -22,6 +22,7 @@
 - 🐞 修复 DatePicker 年份时间不正确问题 [#2488](https://github.com/vueComponent/ant-design-vue/issues/2488)
 - 🌟 优化 Menu 组件，动画更加流畅
 - 🐞 修复 Dropdown 弹窗位置错误问题 [#2359](https://github.com/vueComponent/ant-design-vue/issues/2359)
+- 🐞 修复 Breadcrumb 名称相同时重复key问题 [#2505](https://github.com/vueComponent/ant-design-vue/issues/2505)
 
 ## 1.6.2
 

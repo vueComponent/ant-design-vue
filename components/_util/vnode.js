@@ -15,3 +15,12 @@ export function cloneElement(n, nodeProps = {}, override = true) {
   node.props = override ? { ...node.props, ...nodeProps } : node.props;
   return node;
 }
+
+export function cloneVNodes(vnodes, deep) {
+  const len = vnodes.length;
+  const res = new Array(len);
+  for (let i = 0; i < len; i++) {
+    res[i] = cloneVNode(vnodes[i], deep);
+  }
+  return res;
+}

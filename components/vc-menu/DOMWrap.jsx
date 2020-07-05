@@ -15,9 +15,10 @@ const canUseDOM = !!(
 const MENUITEM_OVERFLOWED_CLASSNAME = 'menuitem-overflowed';
 const FLOAT_PRECISION_ADJUST = 0.5;
 
+import 'mutationobserver-shim';
 // Fix ssr
 if (canUseDOM) {
-  require('mutationobserver-shim');
+  // require('mutationobserver-shim');
 }
 
 const DOMWrap = {

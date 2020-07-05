@@ -1,6 +1,7 @@
 // matchMedia polyfill for
 // https://github.com/WickyNilliams/enquire.js/issues/82
-let enquire;
+// let enquire;
+import enquire from 'enquire.js';
 
 // TODO: Will be removed in antd 4.0 because we will no longer support ie9
 if (typeof window !== 'undefined') {
@@ -15,7 +16,6 @@ if (typeof window !== 'undefined') {
   // ref: https://github.com/ant-design/ant-design/issues/18774
   if (!window.matchMedia) window.matchMedia = matchMediaPolyfill;
   // eslint-disable-next-line global-require
-  enquire = require('enquire.js');
 }
 
 export const responsiveArray = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];

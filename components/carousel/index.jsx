@@ -28,7 +28,8 @@ if (typeof window !== 'undefined') {
 // make sure matchMedia polyfill run before require('vc-slick')
 // Fix https://github.com/ant-design/ant-design/issues/6560
 // Fix https://github.com/ant-design/ant-design/issues/3308
-const SlickCarousel = require('../vc-slick/src').default;
+// const SlickCarousel = require('../vc-slick/src').default;
+import SlickCarousel from '../vc-slick/src';
 
 export const CarouselEffect = PropTypes.oneOf(['scrollx', 'fade']);
 // Carousel

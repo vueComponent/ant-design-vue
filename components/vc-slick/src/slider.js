@@ -6,8 +6,10 @@ import { cloneElement } from '../../_util/vnode';
 import { getStyle, getListeners } from '../../_util/props-util';
 import InnerSlider from './inner-slider';
 import defaultProps from './default-props';
-import { canUseDOM } from './utils/innerSliderUtils';
-const enquire = canUseDOM() && require('enquire.js');
+// import { canUseDOM } from './utils/innerSliderUtils';
+import enquire from 'enquire.js';
+const canUseDOM = () => true;
+// const enquire = canUseDOM() && require('enquire.js');
 
 Vue.use(ref, { name: 'ant-ref' });
 

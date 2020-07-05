@@ -2,7 +2,7 @@ import { TransitionGroup } from 'vue';
 import KeyCode from '../_util/KeyCode';
 import PropTypes from '../_util/vue-types';
 import classnames from 'classnames';
-import classes from 'component-classes';
+import * as classes from 'component-classes';
 import { Item as MenuItem, ItemGroup as MenuItemGroup } from '../vc-menu';
 import warning from 'warning';
 import Option from './Option';

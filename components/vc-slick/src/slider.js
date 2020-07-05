@@ -1,6 +1,6 @@
 import json2mq from 'json2mq';
-import Vue from 'vue';
-import ref from 'vue-ref';
+// import * as Vue from 'vue';
+// import ref from 'vue-ref';
 import BaseMixin from '../../_util/BaseMixin';
 import { cloneElement } from '../../_util/vnode';
 import { getStyle, getListeners } from '../../_util/props-util';
@@ -11,7 +11,7 @@ import enquire from 'enquire.js';
 const canUseDOM = () => true;
 // const enquire = canUseDOM() && require('enquire.js');
 
-Vue.use(ref, { name: 'ant-ref' });
+// Vue.use(ref, { name: 'ant-ref' });
 
 export default {
   props: {

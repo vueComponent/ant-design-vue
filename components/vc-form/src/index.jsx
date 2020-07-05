@@ -2,9 +2,9 @@
 import createForm from './createForm';
 import createFormField from './createFormField';
 import formShape from './propTypes';
-import Vue from 'vue';
-import ref from 'vue-ref';
+// import * as Vue from 'vue';
+// import ref from 'vue-ref';
 
-Vue.use(ref, { name: 'ant-ref' });
+// Vue.use(ref, { name: 'ant-ref' });
 
 export { createFormField, formShape, createForm };

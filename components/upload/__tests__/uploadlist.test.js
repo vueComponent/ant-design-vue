@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import Vue from 'vue';
+import * as Vue from 'vue';
 import Upload from '..';
 import { errorRequest, successRequest } from './requests';
 import PropsTypes from '../../_util/vue-types';

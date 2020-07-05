@@ -1,11 +1,15 @@
-import Vue from 'vue';
+// import * as Vue from 'vue';
 import Form from './Form';
 import ref from 'vue-ref';
 import FormDecoratorDirective from '../_util/FormDecoratorDirective';
 import Base from '../base';
 
-Vue.use(ref, { name: 'ant-ref' });
-Vue.use(FormDecoratorDirective);
+export const fulfill = {
+  install(Vue) {
+    Vue.use(ref, { name: 'ant-ref' });
+    Vue.use(FormDecoratorDirective);
+  },
+};
 
 export { FormProps, ValidationRule } from './Form';
 export { FormItemProps } from './FormItem';

@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Table from '..';
-import Vue from 'vue';
+import * as Vue from 'vue';
 
 const columns = [
   { title: 'Column 1', dataIndex: 'address', key: '1' },

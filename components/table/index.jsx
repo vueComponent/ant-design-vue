@@ -1,6 +1,6 @@
 import T from './Table';
 import ref from 'vue-ref';
-import Vue from 'vue';
+import * as Vue from 'vue';
 import {
   getOptionProps,
   getKey,
@@ -14,7 +14,7 @@ import {
 } from '../_util/props-util';
 import Base from '../base';
 
-Vue.use(ref, { name: 'ant-ref' });
+// Vue.use(ref, { name: 'ant-ref' });
 
 const Table = {
   name: 'ATable',

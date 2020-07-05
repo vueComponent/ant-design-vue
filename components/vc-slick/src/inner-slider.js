@@ -1,7 +1,7 @@
 import { debounce } from 'lodash-es';
 import classnames from 'classnames';
-import Vue from 'vue';
-import ref from 'vue-ref';
+// import * as Vue from 'vue';
+// import ref from 'vue-ref';
 import { getStyle, getListeners } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import defaultProps from './default-props';
@@ -28,7 +28,7 @@ import Dots from './dots';
 import { PrevArrow, NextArrow } from './arrows';
 import ResizeObserver from 'resize-observer-polyfill';
 
-Vue.use(ref, { name: 'ant-ref' });
+// Vue.use(ref, { name: 'ant-ref' });
 
 function noop() {}
 

@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Table from '..';
-import Vue from 'vue';
+import * as Vue from 'vue';
 import { asyncExpect } from '@/tests/utils';
 
 describe('Table.pagination', () => {

@@ -1,7 +1,7 @@
 import interopDefault from './interopDefault';
 import * as moment from 'moment';
 import warning from './warning';
-import isNil from 'lodash/isNil';
+import { isNil } from 'lodash-es';
 
 export const TimeType = {
   validator(value) {

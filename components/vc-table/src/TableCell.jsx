@@ -1,5 +1,5 @@
 import PropTypes from '../../_util/vue-types';
-import get from 'lodash/get';
+import { get } from 'lodash-es';
 import classNames from 'classnames';
 import { isValidElement, mergeProps } from '../../_util/props-util';
 

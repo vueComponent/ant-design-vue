@@ -1,4 +1,4 @@
-import isPlainObject from 'lodash/isPlainObject';
+import { isPlainObject } from 'lodash-es';
 import classNames from 'classnames';
 import { isVNode, Fragment, Comment, Text } from 'vue';
 import { camelize, hyphenate, isOn, resolvePropValue } from './util';

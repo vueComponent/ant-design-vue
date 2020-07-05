@@ -1,4 +1,4 @@
-import debounce from 'lodash/debounce';
+import { debounce } from 'lodash-es';
 import classnames from 'classnames';
 import Vue from 'vue';
 import ref from 'vue-ref';

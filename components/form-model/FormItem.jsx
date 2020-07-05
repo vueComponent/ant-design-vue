@@ -1,5 +1,5 @@
 import AsyncValidator from 'async-validator';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep } from 'lodash-es';
 import PropTypes from '../_util/vue-types';
 import { ColProps } from '../grid/Col';
 import {

@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import { ColProps } from '../grid/Col';
 import Vue from 'vue';
-import isRegExp from 'lodash/isRegExp';
+import { isRegExp } from 'lodash-es';
 import warning from '../_util/warning';
 import createDOMForm from '../vc-form/src/createDOMForm';
 import createFormField from '../vc-form/src/createFormField';

@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import padStart from 'lodash/padStart';
+import { padStart } from 'lodash-es';
 
 import interopDefault from '../_util/interopDefault';
 

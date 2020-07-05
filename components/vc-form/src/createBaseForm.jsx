@@ -1,9 +1,9 @@
 import AsyncValidator from 'async-validator';
 import warning from 'warning';
-import get from 'lodash/get';
-import set from 'lodash/set';
-import eq from 'lodash/eq';
-import omit from 'lodash/omit';
+import { get } from 'lodash-es';
+import { set } from 'lodash-es';
+import { eq } from 'lodash-es';
+import { omit } from 'lodash-es';
 import createFieldsStore from './createFieldsStore';
 import { cloneElement } from '../../_util/vnode';
 import BaseMixin from '../../_util/BaseMixin';

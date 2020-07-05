@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import uniqBy from 'lodash/uniqBy';
-import findIndex from 'lodash/findIndex';
+import { uniqBy } from 'lodash-es';
+import { findIndex } from 'lodash-es';
 import VcUpload from '../vc-upload';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps, hasProp, getSlot } from '../_util/props-util';

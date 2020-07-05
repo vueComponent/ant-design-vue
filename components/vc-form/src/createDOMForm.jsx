@@ -1,5 +1,5 @@
 import scrollIntoView from 'dom-scroll-into-view';
-import has from 'lodash/has';
+import { has } from 'lodash-es';
 import createBaseForm from './createBaseForm';
 import { mixin as formMixin } from './createForm';
 import { getParams } from './utils';

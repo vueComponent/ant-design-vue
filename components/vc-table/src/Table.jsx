@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import shallowequal from 'shallowequal';
-import merge from 'lodash/merge';
-import classes from 'component-classes';
+import { merge } from 'lodash-es';
+import * as classes from 'component-classes';
 import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
 import { debounce } from './utils';

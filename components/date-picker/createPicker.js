@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import omit from 'lodash/omit';
+import { omit } from 'lodash-es';
 import MonthCalendar from '../vc-calendar/src/MonthCalendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
 import classNames from 'classnames';

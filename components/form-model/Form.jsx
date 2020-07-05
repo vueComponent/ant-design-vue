@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import { ColProps } from '../grid/Col';
-import isRegExp from 'lodash/isRegExp';
+import { isRegExp } from 'lodash-es';
 import warning from '../_util/warning';
 import FormItem from './FormItem';
 import { initDefaultProps, getListeners } from '../_util/props-util';

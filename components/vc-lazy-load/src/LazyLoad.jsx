@@ -3,8 +3,8 @@ import BaseMixin from '../../_util/BaseMixin';
 import addEventListener from '../../vc-util/Dom/addEventListener';
 import { initDefaultProps } from '../../_util/props-util';
 import warning from '../../_util/warning';
-import debounce from 'lodash/debounce';
-import throttle from 'lodash/throttle';
+import { debounce } from 'lodash-es';
+import { throttle } from 'lodash-es';
 import parentScroll from './utils/parentScroll';
 import inViewport from './utils/inViewport';
 

@@ -1,5 +1,5 @@
 import isMobile from './utils/isMobile';
-import isObject from 'lodash/isObject';
+import { isObject } from 'lodash-es';
 
 export function noop() {}
 

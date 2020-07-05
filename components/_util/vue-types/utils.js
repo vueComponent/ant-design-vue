@@ -1,4 +1,4 @@
-import isPlainObject from 'lodash/isPlainObject';
+import { isPlainObject } from 'lodash-es';
 
 const ObjProto = Object.prototype;
 const toString = ObjProto.toString;

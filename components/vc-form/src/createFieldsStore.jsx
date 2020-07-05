@@ -1,4 +1,4 @@
-import set from 'lodash/set';
+import { set } from 'lodash-es';
 import createFormField, { isFormField } from './createFormField';
 import { hasRules, flattenFields, getErrorStrs, startsWith } from './utils';
 

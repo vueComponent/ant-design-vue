@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
-import find from 'lodash/find';
+import { find } from 'lodash-es';
 import Row from '../grid/Row';
 import Col, { ColProps } from '../grid/Col';
 import warning from '../_util/warning';

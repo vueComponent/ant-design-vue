@@ -31,7 +31,7 @@ global.Math = mockMath;
 //   },
 // });
 
-// Vue.prototype.$emit = function() {
+// Vue.config.globalProperties.$emit = function() {
 //   const vm = this;
 //   const args = [].slice.call(arguments, 0);
 //   const filterEvent = [];

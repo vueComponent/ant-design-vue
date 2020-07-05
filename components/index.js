@@ -215,14 +215,14 @@ const install = function(Vue) {
     Vue.use(component);
   });
 
-  Vue.prototype.$message = message;
-  Vue.prototype.$notification = notification;
-  Vue.prototype.$info = Modal.info;
-  Vue.prototype.$success = Modal.success;
-  Vue.prototype.$error = Modal.error;
-  Vue.prototype.$warning = Modal.warning;
-  Vue.prototype.$confirm = Modal.confirm;
-  Vue.prototype.$destroyAll = Modal.destroyAll;
+  Vue.config.globalProperties.$message = message;
+  Vue.config.globalProperties.$notification = notification;
+  Vue.config.globalProperties.$info = Modal.info;
+  Vue.config.globalProperties.$success = Modal.success;
+  Vue.config.globalProperties.$error = Modal.error;
+  Vue.config.globalProperties.$warning = Modal.warning;
+  Vue.config.globalProperties.$confirm = Modal.confirm;
+  Vue.config.globalProperties.$destroyAll = Modal.destroyAll;
 };
 
 /* istanbul ignore if */

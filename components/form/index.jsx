@@ -16,7 +16,7 @@ Form.install = function(Vue) {
   Vue.use(Base);
   Vue.component(Form.name, Form);
   Vue.component(Form.Item.name, Form.Item);
-  Vue.prototype.$form = Form;
+  Vue.config.globalProperties.$form = Form;
 };
 
 export default Form;

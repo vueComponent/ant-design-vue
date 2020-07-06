@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getSlots, getComponentFromProp } from '../_util/props-util';
+import { getOptionProps, getSlots, getComponentFromProp, getClass } from '../_util/props-util';
 
 const ColProps = {
   child: PropTypes.any,
@@ -14,6 +14,7 @@ const Col = {
   props: ColProps,
   render(h, ctx) {
     const { child, bordered, colon, type, layout } = ctx.props;
+    const className = getClass(child);
     const { prefixCls, span = 1 } = getOptionProps(child);
     const { key } = ctx.data;
     const label = getComponentFromProp(child, 'label');
@@ -65,7 +66,7 @@ const Col = {
       );
     }
     return (
-      <td colSpan={span} class={`${prefixCls}-item`}>
+      <td colSpan={span} class={[`${prefixCls}-item`, className]}>
         <span {...labelProps}>{label}</span>
         <span class={`${prefixCls}-item-content`} key={`${key}-content`}>
           {slots.default}

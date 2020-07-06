@@ -138,7 +138,7 @@ describe('Descriptions', () => {
       render() {
         return (
           <Descriptions>
-            <Descriptions.Item label="Product" className="my-class">
+            <Descriptions.Item label="Product" class="my-class">
               Cloud Database
             </Descriptions.Item>
           </Descriptions>

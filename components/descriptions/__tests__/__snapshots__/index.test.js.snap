@@ -34,7 +34,7 @@ exports[`Descriptions Descriptions.Item support className 1`] = `
     <table>
       <tbody>
         <tr class="ant-descriptions-row">
-          <td colspan="3" class="ant-descriptions-item"><span class="ant-descriptions-item-label ant-descriptions-item-colon">Product</span><span class="ant-descriptions-item-content">Cloud Database</span></td>
+          <td colspan="3" class="ant-descriptions-item my-class"><span class="ant-descriptions-item-label ant-descriptions-item-colon">Product</span><span class="ant-descriptions-item-content">Cloud Database</span></td>
         </tr>
       </tbody>
     </table>

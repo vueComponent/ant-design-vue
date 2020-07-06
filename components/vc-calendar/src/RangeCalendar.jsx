@@ -110,7 +110,11 @@ const RangeCalendar = {
     // onValueChange: PropTypes.func,
     // onHoverChange: PropTypes.func,
     // onPanelChange: PropTypes.func,
-    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string), PropTypes.func]),
+    format: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+      PropTypes.func,
+    ]),
     // onClear: PropTypes.func,
     type: PropTypes.any.def('both'),
     disabledDate: PropTypes.func,

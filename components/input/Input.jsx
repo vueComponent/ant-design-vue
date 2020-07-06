@@ -157,12 +157,14 @@ export default {
         }),
         ref: this.saveInput,
         key: 'ant-input',
+        onInput: handleChange,
+        onChange: noop,
       };
       // vue bug ？
       if (inputProps.maxLength === undefined) {
         delete inputProps.maxLength;
       }
-      return <input {...inputProps} onInput={handleChange} onChange={noop} />;
+      return <input {...inputProps} />;
     },
     clearPasswordValueAttribute() {
       // https://github.com/ant-design/ant-design/issues/20541

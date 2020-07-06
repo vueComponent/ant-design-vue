@@ -775,7 +775,7 @@ const Select = {
       );
 
       const inputElement = props.getInputElement ? props.getInputElement() : defaultInput;
-      const inputCls = classnames(inputElement.class, {
+      const inputCls = classnames(inputElement.props && inputElement.props.class, {
         [`${props.prefixCls}-search__field`]: true,
       });
       const inputEvents = getEvents(inputElement);

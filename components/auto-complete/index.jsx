@@ -73,10 +73,13 @@ const AutoComplete = {
       this.select = node;
     },
     getInputElement() {
-      const { placeholder } = this;
       const children = getSlot(this);
       const element = children.length ? children[0] : <Input lazy={false} />;
-      return <InputElement placeholder={placeholder}>{element}</InputElement>;
+      return (
+        <InputElement placeholder={this.placeholder} {...element.props}>
+          {element}
+        </InputElement>
+      );
     },
 
     focus() {

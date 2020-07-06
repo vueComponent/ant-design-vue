@@ -18,6 +18,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
+        exclude: /pickr.*js/,
         options: {
           cacheDirectory: true,
           presets: [

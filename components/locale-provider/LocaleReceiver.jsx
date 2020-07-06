@@ -37,7 +37,6 @@ export default {
       return localeCode;
     },
   },
-
   render() {
     const { $slots } = this;
     const children = this.children || $slots.default;

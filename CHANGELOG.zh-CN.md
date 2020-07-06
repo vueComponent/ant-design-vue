@@ -10,6 +10,20 @@
 
 ---
 
+## 1.6.3
+
+`2020-07-05`
+
+- 🐞 修复 Input.Password focus 位置移位问题 [#2420](https://github.com/vueComponent/ant-design-vue/pull/2420)
+- 🐞 修复 Drawer maskstyle 不生效问题 [#2407](https://github.com/vueComponent/ant-design-vue/issues/2407)
+- 🐞 修复 Drawer maskstyle 不生效问题 [#2407](https://github.com/vueComponent/ant-design-vue/issues/2407)
+- 🌟 Button 支持自定义 Icon [#2245](https://github.com/vueComponent/ant-design-vue/pull/2245)
+- 🌟 DatePicker 支持自定义 format [#2276](https://github.com/vueComponent/ant-design-vue/pull/2276)
+- 🐞 修复 DatePicker 年份时间不正确问题 [#2488](https://github.com/vueComponent/ant-design-vue/issues/2488)
+- 🌟 优化 Menu 组件，动画更加流畅
+- 🐞 修复 Dropdown 弹窗位置错误问题 [#2359](https://github.com/vueComponent/ant-design-vue/issues/2359)
+- 🐞 修复 Breadcrumb 名称相同时重复 key 问题 [#2505](https://github.com/vueComponent/ant-design-vue/issues/2505)
+
 ## 1.6.2
 
 `2020-06-02`

@@ -25,7 +25,7 @@ const Picker = {
     animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
     disabled: PropTypes.bool,
     transitionName: PropTypes.string,
-    format: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.func]),
     // onChange: PropTypes.func,
     // onOpenChange: PropTypes.func,
     children: PropTypes.func,

@@ -77,7 +77,7 @@ export default {
           overlay = (
             <Menu>
               {route.children.map(child => (
-                <Menu.Item key={child.breadcrumbName || child.path}>
+                <Menu.Item key={child.path || child.breadcrumbName}>
                   {itemRender({
                     route: child,
                     params,

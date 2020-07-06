@@ -1,6 +1,6 @@
 {
   "name": "ant-design-vue",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation",
   "keywords": [
@@ -175,6 +175,7 @@
   "dependencies": {
     "@ant-design-vue/babel-helper-vue-compatible-props": "^1.0.0",
     "@ant-design/icons-vue": "^5.0.0-beta.0",
+    "@simonwep/pickr": "~1.7.0",
     "add-dom-event-listener": "^1.0.2",
     "array-tree-filter": "^2.1.0",
     "async-validator": "^3.0.3",

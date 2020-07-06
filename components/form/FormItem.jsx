@@ -1,3 +1,4 @@
+import { provide, inject, Transition } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import find from 'lodash/find';
@@ -7,11 +8,12 @@ import warning from '../_util/warning';
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants';
 import {
   initDefaultProps,
-  getComponentFromProp,
-  filterEmpty,
+  getComponent,
   getSlotOptions,
   isValidElement,
   getAllChildren,
+  findDOMNode,
+  getSlot,
 } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
 import BaseMixin from '../_util/BaseMixin';
@@ -73,22 +75,20 @@ function comeFromSlot(vnodes = [], itemVnode) {
 
 export default {
   name: 'AFormItem',
-  __ANT_FORM_ITEM: true,
   mixins: [BaseMixin],
+  inheritAttrs: false,
+  __ANT_FORM_ITEM: true,
   props: initDefaultProps(FormItemProps, {
     hasFeedback: false,
   }),
-  provide() {
+  setup() {
     return {
-      isFormItemChildren: true,
+      isFormItemChildren: inject('isFormItemChildren', false),
+      FormContext: inject('FormContext', {}),
+      decoratorFormProps: inject('decoratorFormProps', {}),
+      collectFormItemContext: inject('collectFormItemContext', noop),
+      configProvider: inject('configProvider', ConfigConsumerProps),
     };
-  },
-  inject: {
-    isFormItemChildren: { default: false },
-    FormContext: { default: () => ({}) },
-    decoratorFormProps: { default: () => ({}) },
-    collectFormItemContext: { default: () => noop },
-    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return { helpShow: false };
@@ -99,6 +99,7 @@ export default {
     },
   },
   created() {
+    provide('isFormItemChildren', true);
     this.collectContext();
   },
   beforeUpdate() {
@@ -145,7 +146,7 @@ export default {
       }
     },
     getHelpMessage() {
-      const help = getComponentFromProp(this, 'help');
+      const help = getComponent(this, 'help');
       const onlyControl = this.getOnlyControl();
       if (help === undefined && onlyControl) {
         const errors = this.getField().errors;
@@ -177,15 +178,15 @@ export default {
         }
 
         const child = childrenArray[i];
-        if (!child.tag && child.text.trim() === '') {
-          continue;
-        }
+        // if (!child.tag && child.text.trim() === '') {
+        //   continue;
+        // }
 
-        if (getSlotOptions(child).__ANT_FORM_ITEM) {
+        if (typeof child.type === 'object' && child.type.__ANT_FORM_ITEM) {
           continue;
         }
         const children = getAllChildren(child);
-        const attrs = (child.data && child.data.attrs) || {};
+        const attrs = child.props || {};
         if (FIELD_META_PROP in attrs) {
           // And means FIELD_DATA_PROP in child.props, too.
           controls.push(child);
@@ -207,6 +208,7 @@ export default {
       if (!child) {
         return undefined;
       }
+      debugger;
       if (child.data) {
         data = child.data;
       } else if (child.$vnode && child.$vnode.data) {
@@ -253,7 +255,7 @@ export default {
       if (!id) {
         return;
       }
-      const formItemNode = this.$el;
+      const formItemNode = findDOMNode(this);
       const control = formItemNode.querySelector(`[id="${id}"]`);
       if (control && control.focus) {
         control.focus();
@@ -296,18 +298,18 @@ export default {
         this.helpShow = !!children;
       }
       const transitionProps = getTransitionProps('show-help', {
-        afterEnter: () => this.onHelpAnimEnd('help', true),
-        afterLeave: () => this.onHelpAnimEnd('help', false),
+        onAfterEnter: () => this.onHelpAnimEnd('help', true),
+        onAfterLeave: () => this.onHelpAnimEnd('help', false),
       });
       return (
-        <transition {...transitionProps} key="help">
+        <Transition {...transitionProps} key="help">
           {children}
-        </transition>
+        </Transition>
       );
     },
 
     renderExtra(prefixCls) {
-      const extra = getComponentFromProp(this, 'extra');
+      const extra = getComponent(this, 'extra');
       return extra ? <div class={`${prefixCls}-extra`}>{extra}</div> : null;
     },
 
@@ -353,15 +355,14 @@ export default {
       const { wrapperCol: contextWrapperCol } = this.isFormItemChildren ? {} : this.FormContext;
       const { wrapperCol } = this;
       const mergedWrapperCol = wrapperCol || contextWrapperCol || {};
-      const { style, id, on, ...restProps } = mergedWrapperCol;
+      const { style, id, ...restProps } = mergedWrapperCol;
       const className = classNames(`${prefixCls}-item-control-wrapper`, mergedWrapperCol.class);
       const colProps = {
-        props: restProps,
+        ...restProps,
         class: className,
         key: 'wrapper',
         style,
         id,
-        on,
       };
       return <Col {...colProps}>{children}</Col>;
     },
@@ -374,7 +375,7 @@ export default {
         colon: contextColon,
       } = this.FormContext;
       const { labelAlign, labelCol, colon, id, htmlFor } = this;
-      const label = getComponentFromProp(this, 'label');
+      const label = getComponent(this, 'label');
       const required = this.isRequired();
       const mergedLabelCol = labelCol || contextLabelCol || {};
 
@@ -389,7 +390,6 @@ export default {
         class: labelColClass,
         style: labelColStyle,
         id: labelColId,
-        on,
         ...restProps
       } = mergedLabelCol;
       let labelChildren = label;
@@ -406,12 +406,11 @@ export default {
         [`${prefixCls}-item-no-colon`]: !computedColon,
       });
       const colProps = {
-        props: restProps,
+        ...restProps,
         class: labelColClassName,
         key: 'label',
         style: labelColStyle,
         id: labelColId,
-        on,
       };
 
       return label ? (
@@ -443,16 +442,18 @@ export default {
     },
     renderFormItem() {
       const { prefixCls: customizePrefixCls } = this.$props;
+      const { class: className, ...restProps } = this.$attrs;
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('form', customizePrefixCls);
       const children = this.renderChildren(prefixCls);
       const itemClassName = {
+        [className]: true,
         [`${prefixCls}-item`]: true,
         [`${prefixCls}-item-with-help`]: this.helpShow,
       };
 
       return (
-        <Row class={classNames(itemClassName)} key="row">
+        <Row class={classNames(itemClassName)} key="row" {...restProps}>
           {children}
         </Row>
       );
@@ -497,14 +498,8 @@ export default {
   },
 
   render() {
-    const {
-      $slots,
-      decoratorFormProps,
-      fieldDecoratorId,
-      fieldDecoratorOptions = {},
-      FormContext,
-    } = this;
-    let child = filterEmpty($slots.default || []);
+    const { decoratorFormProps, fieldDecoratorId, fieldDecoratorOptions = {}, FormContext } = this;
+    let child = getSlot(this);
     if (decoratorFormProps.form && fieldDecoratorId && child.length) {
       const getFieldDecorator = decoratorFormProps.form.getFieldDecorator;
       child[0] = getFieldDecorator(fieldDecoratorId, fieldDecoratorOptions, this)(child[0]);

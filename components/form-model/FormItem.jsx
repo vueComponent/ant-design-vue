@@ -1,14 +1,15 @@
+import { inject } from 'vue';
 import AsyncValidator from 'async-validator';
 import cloneDeep from 'lodash/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import { ColProps } from '../grid/Col';
 import {
   initDefaultProps,
-  getComponentFromProp,
+  getComponent,
   getOptionProps,
   getEvents,
-  filterEmpty,
   isValidElement,
+  getSlot,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
@@ -63,15 +64,18 @@ export const FormItemProps = {
 
 export default {
   name: 'AFormModelItem',
-  __ANT_NEW_FORM_ITEM: true,
   mixins: [BaseMixin],
+  inheritAttrs: false,
+  __ANT_NEW_FORM_ITEM: true,
   props: initDefaultProps(FormItemProps, {
     hasFeedback: false,
     autoLink: true,
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-    FormContext: { default: () => ({}) },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+      FormContext: inject('FormContext', {}),
+    };
   },
   data() {
     return {
@@ -216,43 +220,39 @@ export default {
     },
   },
   render() {
-    const { $slots, $scopedSlots } = this;
-    const props = getOptionProps(this);
-    const label = getComponentFromProp(this, 'label');
-    const extra = getComponentFromProp(this, 'extra');
-    const help = getComponentFromProp(this, 'help');
+    const { autoLink, ...props } = getOptionProps(this);
+    const label = getComponent(this, 'label');
+    const extra = getComponent(this, 'extra');
+    const help = getComponent(this, 'help');
     const formProps = {
-      props: {
-        ...props,
-        label,
-        extra,
-        validateStatus: this.validateState,
-        help: this.validateMessage || help,
-        required: this.isRequired || props.required,
-      },
+      ...this.$attrs,
+      ...props,
+      label,
+      extra,
+      validateStatus: this.validateState,
+      help: this.validateMessage || help,
+      required: this.isRequired || props.required,
     };
-    const children = filterEmpty($scopedSlots.default ? $scopedSlots.default() : $slots.default);
+    const children = getSlot(this);
     let firstChildren = children[0];
-    if (this.prop && this.autoLink && isValidElement(firstChildren)) {
+    if (this.prop && autoLink && isValidElement(firstChildren)) {
       const originalEvents = getEvents(firstChildren);
-      const originalBlur = originalEvents.blur;
-      const originalChange = originalEvents.change;
+      const originalBlur = originalEvents.onBlur;
+      const originalChange = originalEvents.onChange;
       firstChildren = cloneElement(firstChildren, {
-        on: {
-          blur: (...args) => {
-            originalBlur && originalBlur(...args);
-            this.onFieldBlur();
-          },
-          change: (...args) => {
-            if (Array.isArray(originalChange)) {
-              for (let i = 0, l = originalChange.length; i < l; i++) {
-                originalChange[i](...args);
-              }
-            } else if (originalChange) {
-              originalChange(...args);
+        onBlur: (...args) => {
+          originalBlur && originalBlur(...args);
+          this.onFieldBlur();
+        },
+        onChange: (...args) => {
+          if (Array.isArray(originalChange)) {
+            for (let i = 0, l = originalChange.length; i < l; i++) {
+              originalChange[i](...args);
             }
-            this.onFieldChange();
-          },
+          } else if (originalChange) {
+            originalChange(...args);
+          }
+          this.onFieldChange();
         },
       });
     }

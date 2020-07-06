@@ -17,6 +17,9 @@ import {
   Tooltip,
   Col,
   Row,
+  FormModel,
+  Switch,
+  Checkbox,
   notification,
   message,
 } from 'ant-design-vue';
@@ -49,6 +52,9 @@ app
   .use(Col)
   .use(Row)
   .use(Radio)
+  .use(Switch)
+  .use(Checkbox)
   .use(InputNumber)
   .use(AutoComplete)
+  .use(FormModel)
   .mount('#app');

@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import { getStyle } from '../_util/props-util';
 import omit from 'omit.js';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
 import { inject } from 'vue';
+import syncWatch from '../_util/syncWatch';
 
 function getNumberArray(num) {
   return num
@@ -26,11 +26,12 @@ const ScrollNumberProps = {
   component: PropTypes.string,
   title: PropTypes.oneOfType([PropTypes.number, PropTypes.string, null]),
   displayComponent: PropTypes.any,
-  className: PropTypes.object,
 };
 
 export default {
+  name: 'ScrollNumber',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: ScrollNumberProps,
   setup() {
     return {
@@ -38,18 +39,19 @@ export default {
     };
   },
   data() {
+    this.lastCount = undefined;
     return {
       animateStarted: true,
       sCount: this.count,
     };
   },
   watch: {
-    count() {
+    count: syncWatch(function() {
       this.lastCount = this.sCount;
       this.setState({
         animateStarted: true,
       });
-    },
+    }),
   },
   updated() {
     const { animateStarted, count } = this;
@@ -157,31 +159,22 @@ export default {
   },
 
   render() {
-    const {
-      prefixCls: customizePrefixCls,
-      title,
-      component: Tag = 'sup',
-      displayComponent,
-      className,
-    } = this;
+    const { prefixCls: customizePrefixCls, title, component: Tag = 'sup', displayComponent } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('scroll-number', customizePrefixCls);
+    const { class: className, style = {} } = this.$attrs;
     if (displayComponent) {
       return cloneElement(displayComponent, {
         class: `${prefixCls}-custom-component`,
       });
     }
-    const style = getStyle(this, true);
     // fix https://fb.me/react-unknown-prop
     const restProps = omit(this.$props, ['count', 'component', 'prefixCls', 'displayComponent']);
+    const tempStyle = { ...style };
     const newProps = {
-      props: {
-        ...restProps,
-      },
-      attrs: {
-        title,
-      },
-      style,
+      ...restProps,
+      title,
+      style: tempStyle,
       class: classNames(prefixCls, className),
     };
     // allow specify the border

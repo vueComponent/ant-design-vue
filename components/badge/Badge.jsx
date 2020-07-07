@@ -2,17 +2,12 @@ import PropTypes from '../_util/vue-types';
 import ScrollNumber from './ScrollNumber';
 import { PresetColorTypes } from '../_util/colors';
 import classNames from 'classnames';
-import {
-  initDefaultProps,
-  filterEmpty,
-  getComponentFromProp,
-  getListeners,
-} from '../_util/props-util';
+import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import getTransitionProps from '../_util/getTransitionProps';
 import isNumeric from '../_util/isNumeric';
 import { ConfigConsumerProps } from '../config-provider';
-import { inject } from 'vue';
+import { inject, Transition } from 'vue';
 
 const BadgeProps = {
   /** Number to show in badge */
@@ -82,8 +77,7 @@ export default {
           }
         : { ...numberStyle };
     },
-    getBadgeClassName(prefixCls) {
-      const children = filterEmpty(this.$slots.default && this.$slots.default());
+    getBadgeClassName(prefixCls, children) {
       const hasStatus = this.hasStatus();
       return classNames(prefixCls, {
         [`${prefixCls}-status`]: hasStatus,
@@ -127,9 +121,13 @@ export default {
       if (!customNode || typeof customNode !== 'object') {
         return undefined;
       }
-      return cloneElement(customNode, {
-        style: this.getStyleWithOffset(),
-      });
+      return cloneElement(
+        customNode,
+        {
+          style: this.getStyleWithOffset(),
+        },
+        false,
+      );
     },
 
     renderBadgeNumber(prefixCls, scrollNumberPrefixCls) {
@@ -158,8 +156,8 @@ export default {
         <ScrollNumber
           prefixCls={scrollNumberPrefixCls}
           data-show={!hidden}
-          v-show={!hidden}
-          className={scrollNumberCls}
+          vShow={!hidden}
+          class={scrollNumberCls}
           count={displayCount}
           displayComponent={this.renderDispayComponent()}
           title={this.getScrollNumberTitle()}
@@ -177,15 +175,14 @@ export default {
       status,
       text,
       color,
-      $slots,
     } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('badge', customizePrefixCls);
     const scrollNumberPrefixCls = getPrefixCls('scroll-number', customizeScrollNumberPrefixCls);
 
-    const children = filterEmpty($slots.default && $slots.default());
-    let count = getComponentFromProp(this, 'count');
+    const children = getSlot(this);
+    let count = getComponent(this, 'count');
     if (Array.isArray(count)) {
       count = count[0];
     }
@@ -206,11 +203,7 @@ export default {
       const styleWithOffset = this.getStyleWithOffset();
       const statusTextColor = styleWithOffset && styleWithOffset.color;
       return (
-        <span
-          {...{ on: getListeners(this) }}
-          class={this.getBadgeClassName(prefixCls)}
-          style={styleWithOffset}
-        >
+        <span class={this.getBadgeClassName(prefixCls, children)} style={styleWithOffset}>
           <span class={statusCls} style={statusStyle} />
           <span style={{ color: statusTextColor }} class={`${prefixCls}-status-text`}>
             {text}
@@ -222,9 +215,9 @@ export default {
     const transitionProps = getTransitionProps(children.length ? `${prefixCls}-zoom` : '');
 
     return (
-      <span {...{ on: getListeners(this) }} class={this.getBadgeClassName(prefixCls)}>
+      <span class={this.getBadgeClassName(prefixCls, children)}>
         {children}
-        <transition {...transitionProps}>{scrollNumber}</transition>
+        <Transition {...transitionProps}>{scrollNumber}</Transition>
         {statusText}
       </span>
     );

@@ -73,12 +73,8 @@ const Switch = {
       class: classes,
       ref: this.saveRef,
     };
-
-    return (
-      <Wave insertExtraNode>
-        <VcSwitch {...switchProps} />
-      </Wave>
-    );
+    const comp = <VcSwitch {...switchProps} />;
+    return <Wave insertExtraNode>{comp}</Wave>;
   },
 };
 

@@ -1,6 +1,6 @@
 import isPlainObject from 'lodash/isPlainObject';
 import classNames from 'classnames';
-import { isVNode, Fragment, Comment, Text } from 'vue';
+import { isVNode, Fragment, Comment, Text, h } from 'vue';
 import { camelize, hyphenate, isOn, resolvePropValue } from './util';
 import isValid from './isValid';
 // function getType(fn) {
@@ -187,7 +187,7 @@ const getComponent = (instance, prop = 'default', options = instance, execute = 
 };
 const getComponentFromProp = (instance, prop, options = instance, execute = true) => {
   if (instance.$createElement) {
-    const h = instance.$createElement;
+    // const h = instance.$createElement;
     const temp = instance[prop];
     if (temp !== undefined) {
       return typeof temp === 'function' && execute ? temp(h, options) : temp;
@@ -199,7 +199,7 @@ const getComponentFromProp = (instance, prop, options = instance, execute = true
       undefined
     );
   } else {
-    const h = instance.context.$createElement;
+    // const h = instance.context.$createElement;
     const temp = getPropsData(instance)[prop];
     if (temp !== undefined) {
       return typeof temp === 'function' && execute ? temp(h, options) : temp;

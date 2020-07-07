@@ -5,6 +5,7 @@ import { getStyle } from '../_util/props-util';
 import omit from 'omit.js';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
+import { inject } from 'vue';
 
 function getNumberArray(num) {
   return num
@@ -31,8 +32,10 @@ const ScrollNumberProps = {
 export default {
   mixins: [BaseMixin],
   props: ScrollNumberProps,
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     return {

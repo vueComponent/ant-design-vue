@@ -12,6 +12,7 @@ import { cloneElement } from '../_util/vnode';
 import getTransitionProps from '../_util/getTransitionProps';
 import isNumeric from '../_util/isNumeric';
 import { ConfigConsumerProps } from '../config-provider';
+import { inject } from 'vue';
 
 const BadgeProps = {
   /** Number to show in badge */
@@ -40,8 +41,10 @@ export default {
     dot: false,
     overflowCount: 99,
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   methods: {
     getNumberedDispayCount() {
@@ -80,7 +83,7 @@ export default {
         : { ...numberStyle };
     },
     getBadgeClassName(prefixCls) {
-      const children = filterEmpty(this.$slots.default);
+      const children = filterEmpty(this.$slots.default && this.$slots.default());
       const hasStatus = this.hasStatus();
       return classNames(prefixCls, {
         [`${prefixCls}-status`]: hasStatus,
@@ -181,7 +184,7 @@ export default {
     const prefixCls = getPrefixCls('badge', customizePrefixCls);
     const scrollNumberPrefixCls = getPrefixCls('scroll-number', customizeScrollNumberPrefixCls);
 
-    const children = filterEmpty($slots.default);
+    const children = filterEmpty($slots.default && $slots.default());
     let count = getComponentFromProp(this, 'count');
     if (Array.isArray(count)) {
       count = count[0];

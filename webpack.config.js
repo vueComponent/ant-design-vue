@@ -1,8 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/dist/plugin').default;
-const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
@@ -84,7 +84,15 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['css-loader'],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              hmr: true,
+            },
+          },
+          'css-loader',
+        ],
       },
     ],
   },
@@ -103,9 +111,11 @@ module.exports = {
     hot: true,
     open: true,
   },
-  devtool: '#source-map',
+  devtool: 'cheap-module-eval-source-map',
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new MiniCssExtractPlugin({
+      filename: '[name].css',
+    }),
     new HtmlWebpackPlugin({
       template: 'examples/index.html',
       filename: 'index.html',

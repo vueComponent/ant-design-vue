@@ -1,12 +1,12 @@
 import warning from '../_util/warning';
 import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import { ConfigConsumerProps } from '../config-provider';
-import Col from './Col';
+import Row from './Row';
 import PropTypes from '../_util/vue-types';
 import {
+  filterEmpty,
   initDefaultProps,
-  isValidElement,
-  getOptionProps,
+  getPropsData,
   getComponentFromProp,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
@@ -44,65 +44,82 @@ export const DescriptionsProps = {
   colon: PropTypes.bool,
 };
 
-/**
- * Convert children into `column` groups.
- * @param children: DescriptionsItem
- * @param column: number
- */
-const generateChildrenRows = (children, column) => {
-  const rows = [];
-  let columns = null;
-  let leftSpans;
-
-  const itemNodes = toArray(children);
-  itemNodes.forEach((node, index) => {
-    const itemProps = getOptionProps(node);
-    let itemNode = node;
-
-    if (!columns) {
-      leftSpans = column;
-      columns = [];
-      rows.push(columns);
-    }
-
-    // Always set last span to align the end of Descriptions
-    const lastItem = index === itemNodes.length - 1;
-    let lastSpanSame = true;
-    if (lastItem) {
-      lastSpanSame = !itemProps.span || itemProps.span === leftSpans;
-      itemNode = cloneElement(itemNode, {
-        props: {
-          span: leftSpans,
-        },
-      });
-    }
-
-    // Calculate left fill span
-    const { span = 1 } = itemProps;
-    columns.push(itemNode);
-    leftSpans -= span;
-
-    if (leftSpans <= 0) {
-      columns = null;
-
-      warning(
-        leftSpans === 0 && lastSpanSame,
-        'Descriptions',
-        'Sum of column `span` in a line exceeds `column` of Descriptions.',
-      );
-    }
-  });
-
-  return rows;
-};
-
-const defaultColumnMap = {
+const DEFAULT_COLUMN_MAP = {
   xxl: 3,
   xl: 3,
   lg: 3,
   md: 3,
   sm: 2,
   xs: 1,
+};
+
+const getColumn = (column, screens) => {
+  if (typeof column === 'number') {
+    return column;
+  }
+
+  if (typeof column === 'object') {
+    for (let i = 0; i < responsiveArray.length; i++) {
+      const breakpoint = responsiveArray[i];
+      if (screens[breakpoint] && column[breakpoint] !== undefined) {
+        return column[breakpoint] || DEFAULT_COLUMN_MAP[breakpoint];
+      }
+    }
+  }
+
+  return 3;
+};
+
+const getFilledItem = (node, span, rowRestCol) => {
+  let clone = node;
+
+  if (span === undefined || span > rowRestCol) {
+    clone = cloneElement(node, {
+      props: {
+        span: rowRestCol,
+      },
+    });
+    warning(
+      span === undefined,
+      'Descriptions',
+      'Sum of column `span` in a line not match `column` of Descriptions.',
+    );
+  }
+
+  return clone;
+};
+
+const getRows = (children, column) => {
+  const childNodes = toArray(children).filter(n => n);
+  const rows = [];
+
+  let tmpRow = [];
+  let rowRestCol = column;
+
+  childNodes.forEach((node, index) => {
+    const itemProps = getPropsData(node);
+    const { span } = itemProps;
+    const mergedSpan = span || 1;
+
+    // Additional handle last one
+    if (index === childNodes.length - 1) {
+      tmpRow.push(getFilledItem(node, span, rowRestCol));
+      rows.push(tmpRow);
+      return;
+    }
+
+    if (mergedSpan < rowRestCol) {
+      rowRestCol -= mergedSpan;
+      tmpRow.push(node);
+    } else {
+      tmpRow.push(getFilledItem(node, mergedSpan, rowRestCol));
+      rows.push(tmpRow);
+      rowRestCol = column;
+      tmpRow = [];
+    }
+  });
+
+  return rows;
 };
 
 const Descriptions = {
@@ -113,7 +130,7 @@ const Descriptions = {
     configProvider: { default: () => ConfigConsumerProps },
   },
   props: initDefaultProps(DescriptionsProps, {
-    column: defaultColumnMap,
+    column: DEFAULT_COLUMN_MAP,
   }),
   data() {
     return {
@@ -122,24 +139,6 @@ const Descriptions = {
     };
   },
   methods: {
-    getColumn() {
-      const { column } = this.$props;
-      if (typeof column === 'object') {
-        for (let i = 0; i < responsiveArray.length; i++) {
-          const breakpoint = responsiveArray[i];
-          if (this.screens[breakpoint] && column[breakpoint] !== undefined) {
-            return column[breakpoint] || defaultColumnMap[breakpoint];
-          }
-        }
-      }
-      // If the configuration is not an object, it is a number, return number
-      if (typeof column === 'number') {
-        return column;
-      }
-      // If it is an object, but no response is found, this happens only in the test.
-      // Maybe there are some strange environments
-      return 3;
-    },
     renderRow(children, index, { prefixCls }, bordered, layout, colon) {
       const renderCol = (colItem, type, idx) => {
         return (
@@ -200,6 +199,7 @@ const Descriptions = {
   render() {
     const {
       prefixCls: customizePrefixCls,
+      column,
       size,
       bordered = false,
       layout = 'horizontal',
@@ -209,22 +209,10 @@ const Descriptions = {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
 
-    const column = this.getColumn();
-    const children = this.$slots.default;
-    const cloneChildren = toArray(children)
-      .map(child => {
-        if (isValidElement(child)) {
-          return cloneElement(child, {
-            props: {
-              prefixCls,
-            },
-          });
-        }
-        return null;
-      })
-      .filter(node => node);
+    const mergedColumn = getColumn(column, this.screens);
+    const children = filterEmpty(this.$slots.default);
+    const rows = getRows(children, mergedColumn);
 
-    const childrenArray = generateChildrenRows(cloneChildren, column);
     return (
       <div
         class={[
@@ -239,18 +227,17 @@ const Descriptions = {
         <div class={`${prefixCls}-view`}>
           <table>
             <tbody>
-              {childrenArray.map((child, index) =>
-                this.renderRow(
-                  child,
-                  index,
-                  {
-                    prefixCls,
-                  },
-                  bordered,
-                  layout,
-                  colon,
-                ),
-              )}
+              {rows.map((row, index) => (
+                <Row
+                  key={index}
+                  index={index}
+                  colon={colon}
+                  prefixCls={prefixCls}
+                  vertical={layout === 'vertical'}
+                  bordered={bordered}
+                  row={row}
+                />
+              ))}
             </tbody>
           </table>
         </div>

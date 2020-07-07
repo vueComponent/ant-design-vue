@@ -51,7 +51,11 @@ describe('Descriptions', () => {
       { sync: false, attachToDocument: true },
     );
     await asyncExpect(() => {
-      expect(wrapper.vm.$refs.descriptions.getColumn()).toBe(8);
+      expect(
+        wrapper
+          .findAll('td')
+          .wrappers.reduce((total, td) => total + parseInt(td.attributes().colspan), 0),
+      ).toBe(8);
     }, 100);
     wrapper.destroy();
   });
@@ -92,7 +96,7 @@ describe('Descriptions', () => {
       },
     });
     expect(errorSpy).toHaveBeenCalledWith(
-      'Warning: [antdv: Descriptions] Sum of column `span` in a line exceeds `column` of Descriptions.',
+      'Warning: [antdv: Descriptions] Sum of column `span` in a line not match `column` of Descriptions.',
     );
   });
 
@@ -195,7 +199,7 @@ describe('Descriptions', () => {
     );
     await asyncExpect(() => {
       expect(wrapper.findAll('tr')).toHaveLength(5);
-      expect(wrapper.findAll('.ant-descriptions-item-no-label')).toHaveLength(1);
+      expect(wrapper.findAll('.ant-descriptions-item-label')).toHaveLength(4);
     });
 
     enquire.callunmatch();
@@ -230,5 +234,61 @@ describe('Descriptions', () => {
     await asyncExpect(() => {});
     await asyncExpect(() => {});
     await asyncExpect(() => {});
+  });
+
+  it('columns 5 with customize', () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <Descriptions layout="vertical" column={4}>
+            {/* 1 1 1 1 */}
+            <Descriptions.Item label="bamboo">bamboo</Descriptions.Item>
+            <Descriptions.Item label="bamboo">bamboo</Descriptions.Item>
+            <Descriptions.Item label="bamboo">bamboo</Descriptions.Item>
+            <Descriptions.Item label="bamboo">bamboo</Descriptions.Item>
+            {/* 2 2 */}
+            <Descriptions.Item label="bamboo" span={2}>
+              bamboo
+            </Descriptions.Item>
+            <Descriptions.Item label="bamboo" span={2}>
+              bamboo
+            </Descriptions.Item>
+            {/* 3 1 */}
+            <Descriptions.Item label="bamboo" span={3}>
+              bamboo
+            </Descriptions.Item>
+            <Descriptions.Item label="bamboo">bamboo</Descriptions.Item>
+          </Descriptions>
+        );
+      },
+    });
+
+    function matchSpan(rowIndex, spans) {
+      const tr = wrapper.findAll('tr').at(rowIndex);
+      const tds = tr.findAll('th');
+      expect(tds.length).toEqual(spans.length);
+      tds.wrappers.forEach((td, index) => {
+        expect(parseInt(td.attributes().colspan)).toEqual(spans[index]);
+      });
+    }
+
+    matchSpan(0, [1, 1, 1, 1]);
+    matchSpan(2, [2, 2]);
+    matchSpan(4, [3, 1]);
+  });
+
+  it('number value should render correct', () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <Descriptions bordered>
+            <Descriptions.Item label={0}>{0}</Descriptions.Item>
+          </Descriptions>
+        );
+      },
+    });
+
+    expect(wrapper.find('th').classes()).toContain('ant-descriptions-item-label');
+    expect(wrapper.find('td').classes()).toContain('ant-descriptions-item-content');
   });
 });

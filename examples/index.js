@@ -2,6 +2,7 @@ import '@babel/polyfill';
 import { createApp } from 'vue';
 import App from './App.vue';
 import {
+  Badge,
   AutoComplete,
   Radio,
   Spin,
@@ -23,6 +24,7 @@ import {
   notification,
   message,
 } from 'ant-design-vue';
+
 import 'ant-design-vue/style.js';
 
 const basic = {
@@ -51,6 +53,7 @@ app
   .use(Tooltip)
   .use(Col)
   .use(Row)
+  .use(Badge)
   .use(Radio)
   .use(Switch)
   .use(Checkbox)

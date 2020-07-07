@@ -1,8 +1,8 @@
-import { inject } from 'vue';
+import { inject, Text } from 'vue';
 import Wave from '../_util/wave';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';
-import { filterEmpty } from '../_util/props-util';
+import { getSlot, getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 // eslint-disable-next-line no-console
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
@@ -14,13 +14,13 @@ export default {
   __ANT_BUTTON: true,
   props,
   setup() {
-    const configProvider = inject('configProvider', ConfigConsumerProps);
     return {
-      configProvider,
+      configProvider: inject('configProvider', ConfigConsumerProps),
     };
   },
   data() {
     this.children = [];
+    this.iconCom = undefined;
     return {
       sizeMap: {
         large: 'lg',
@@ -124,7 +124,7 @@ export default {
     },
     insertSpace(child, needInserted) {
       const SPACE = needInserted ? ' ' : '';
-      if (typeof child.children === 'string') {
+      if (child.type === Text) {
         let text = child.children.trim();
         if (isTwoCNChar(text)) {
           text = text.split('').join(SPACE);
@@ -134,14 +134,14 @@ export default {
       return child;
     },
     isNeedInserted() {
-      const { icon, type } = this;
-      return this.children.length === 1 && !icon && type !== 'link';
+      const { iconCom, type } = this;
+      return this.children.length === 1 && !iconCom && type !== 'link';
     },
   },
   render() {
-    this.icon = this.$slots.icon && this.$slots.icon();
-    const { type, htmlType, icon, disabled, handleClick, sLoading, $slots, $attrs } = this;
-    const children = filterEmpty($slots.default && $slots.default());
+    this.iconCom = getComponent(this, 'icon');
+    const { type, htmlType, iconCom, disabled, handleClick, sLoading, $attrs } = this;
+    const children = getSlot(this);
     this.children = children;
     const classes = this.getClasses();
 
@@ -151,7 +151,7 @@ export default {
       class: classes,
       onClick: handleClick,
     };
-    const iconNode = sLoading ? <LoadingOutlined /> : icon;
+    const iconNode = sLoading ? <LoadingOutlined /> : iconCom;
 
     const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
     const kids = children.map(child =>

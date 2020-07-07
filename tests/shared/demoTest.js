@@ -18,7 +18,8 @@ export default function demoTest(component, options = {}) {
     testMethod(`renders ${file} correctly`, done => {
       MockDate.set(moment('2016-11-22'));
       const demo = require(`../.${file}`).default || require(`../.${file}`);
-      const wrapper = mount(demo, { sync: false });
+      document.body.innerHTML = '';
+      const wrapper = mount(demo, { sync: false, attachToDocument: true });
       Vue.nextTick(() => {
         // should get dom from element
         // snap files copy from antd does not need to change
@@ -27,6 +28,7 @@ export default function demoTest(component, options = {}) {
         expect(dom).toMatchSnapshot();
         MockDate.reset();
         wrapper.destroy();
+        document.body.innerHTML = '';
         done();
       });
     });

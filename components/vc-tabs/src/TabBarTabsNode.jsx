@@ -1,12 +1,13 @@
 import warning from 'warning';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { getOptionProps, getComponentFromProp } from '../../_util/props-util';
+import { getComponent, getPropsData } from '../../_util/props-util';
 import { isVertical } from './utils';
 function noop() {}
 export default {
   name: 'TabBarTabsNode',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     panels: PropTypes.any.def([]),
@@ -30,32 +31,25 @@ export default {
       direction,
     } = this.$props;
     const rst = [];
-    const renderTabBarNode = this.renderTabBarNode || this.$scopedSlots.renderTabBarNode;
+    const renderTabBarNode = this.renderTabBarNode || this.$slots.renderTabBarNode;
     children.forEach((child, index) => {
       if (!child) {
         return;
       }
-      const props = getOptionProps(child);
+      const props = getPropsData(child);
       const key = child.key;
       let cls = activeKey === key ? `${prefixCls}-tab-active` : '';
       cls += ` ${prefixCls}-tab`;
-      const events = { on: {} };
-      const disabled = props.disabled || props.disabled === '';
+      const events = {};
+      const disabled = props.disabled;
       if (disabled) {
         cls += ` ${prefixCls}-tab-disabled`;
       } else {
-        events.on.click = () => {
+        events.onClick = () => {
           this.__emit('tabClick', key);
         };
       }
-      const directives = [];
-      if (activeKey === key) {
-        directives.push({
-          name: 'ant-ref',
-          value: saveRef('activeTab'),
-        });
-      }
-      const tab = getComponentFromProp(child, 'tab');
+      const tab = getComponent(child, 'tab');
       let gutter = tabBarGutter && index === children.length - 1 ? 0 : tabBarGutter;
       gutter = typeof gutter === 'number' ? `${gutter}px` : gutter;
       const marginProperty = direction === 'rtl' ? 'marginLeft' : 'marginRight';
@@ -72,7 +66,7 @@ export default {
           class={cls}
           key={key}
           style={style}
-          {...{ directives }}
+          ref={activeKey === key ? saveRef('activeTab') : noop}
         >
           {tab}
         </div>
@@ -84,19 +78,6 @@ export default {
       rst.push(node);
     });
 
-    return (
-      <div
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: this.saveRef('navTabsContainer'),
-            },
-          ],
-        }}
-      >
-        {rst}
-      </div>
-    );
+    return <div ref={this.saveRef('navTabsContainer')}>{rst}</div>;
   },
 };

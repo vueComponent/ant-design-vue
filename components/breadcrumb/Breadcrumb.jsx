@@ -1,12 +1,11 @@
-import { inject, cloneVNode } from 'vue';
+import { inject, cloneVNode, createVNode } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { filterEmpty, getComponent, getSlotOptions, getSlot } from '../_util/props-util';
+import { filterEmpty, getComponent, getSlot } from '../_util/props-util';
 import warning from '../_util/warning';
 import { ConfigConsumerProps } from '../config-provider';
 import BreadcrumbItem from './BreadcrumbItem';
 import Menu from '../menu';
 
-const MenuItem = Menu.Item;
 const Route = PropTypes.shape({
   path: PropTypes.string,
   breadcrumbName: PropTypes.string,
@@ -78,15 +77,15 @@ export default {
           overlay = (
             <Menu>
               {route.children.map(child => (
-                <MenuItem key={child.breadcrumbName || child.path}>
+                <Menu.Item key={child.path || child.breadcrumbName}>
                   {itemRender({
                     route: child,
                     params,
                     routes,
                     paths: this.addChildPath(paths, child.path, params),
-                    h: this.$createElement,
+                    h: createVNode,
                   })}
-                </MenuItem>
+                </Menu.Item>
               ))}
             </Menu>
           );
@@ -98,7 +97,7 @@ export default {
             separator={separator}
             key={route.breadcrumbName || path}
           >
-            {itemRender({ route, params, routes, paths, h: this.$createElement })}
+            {itemRender({ route, params, routes, paths, h: createVNode })}
           </BreadcrumbItem>
         );
       });
@@ -124,8 +123,8 @@ export default {
     } else if (children.length) {
       crumbs = children.map((element, index) => {
         warning(
-          getSlotOptions(element).__ANT_BREADCRUMB_ITEM ||
-            getSlotOptions(element).__ANT_BREADCRUMB_SEPARATOR,
+          typeof element.type === 'object' &&
+            (element.type.__ANT_BREADCRUMB_ITEM || element.type.__ANT_BREADCRUMB_SEPARATOR),
           'Breadcrumb',
           "Only accepts Breadcrumb.Item and Breadcrumb.Separator as it's children",
         );

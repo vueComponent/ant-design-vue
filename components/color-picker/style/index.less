@@ -1,0 +1,121 @@
+@import '../../style/themes/index';
+@import '../../input/style/mixin';
+
+@color-picker-prefix-cls: ~'@{ant-prefix}-color-picker';
+.@{color-picker-prefix-cls} {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5;
+  list-style: none;
+  font-feature-settings: 'tnum';
+  position: relative;
+  display: inline-block;
+  outline: none;
+  cursor: pointer;
+  transition: opacity 0.3s;
+  min-width: 55px;
+  .pickr {
+    display: inline-block;
+    .pcr-button {
+      width: 18px;
+      height: 18px;
+      margin-left: 7px;
+      &:focus {
+        box-shadow: none;
+      }
+    }
+  }
+  &.@{color-picker-prefix-cls}-disabled {
+    cursor: not-allowed;
+    .@{color-picker-prefix-cls}-selection {
+      background: @input-disabled-bg;
+      box-shadow: none;
+      border: @border-width-base @border-style-base @select-border-color;
+      &:hover,
+      &:focus,
+      &:active {
+        border: @border-width-base @border-style-base @select-border-color;
+        box-shadow: none;
+      }
+    }
+    &.@{color-picker-prefix-cls}-open {
+      .@{color-picker-prefix-cls}-icon {
+        & svg {
+          transform: none;
+        }
+      }
+    }
+  }
+  &-open {
+    .@{color-picker-prefix-cls}-icon {
+      & svg {
+        transform: rotate(180deg);
+      }
+    }
+    .@{color-picker-prefix-cls}-selection {
+      .active();
+    }
+  }
+  &-selection {
+    display: block;
+    box-sizing: border-box;
+    background-color: @select-background;
+    border: @border-width-base @border-style-base @select-border-color;
+    border-top-width: @border-width-base + 0.02px;
+    border-radius: @border-radius-base;
+    outline: none;
+    transition: all 0.3s @ease-in-out;
+    user-select: none;
+
+    position: relative;
+    height: @input-height-base;
+    cursor: inherit;
+    &:hover {
+      .hover;
+    }
+  }
+  &-icon {
+    .iconfont-mixin();
+    position: absolute;
+    top: 50%;
+    right: @control-padding-horizontal - 4px;
+    margin-top: -@font-size-sm / 2;
+    color: @disabled-color;
+    font-size: @font-size-sm;
+    line-height: 1;
+    transform-origin: 50% 50%;
+    & svg {
+      transition: transform 0.3s;
+    }
+  }
+  &-lg {
+    font-size: @font-size-lg;
+    .@{color-picker-prefix-cls}-selection {
+      line-height: @input-height-lg - 12;
+      height: @input-height-lg;
+    }
+    .@{color-picker-prefix-cls}-icon {
+      top: @input-height-lg / 2;
+    }
+  }
+
+  &-sm {
+    .@{color-picker-prefix-cls}-selection {
+      line-height: @input-height-sm - 12;
+      height: @input-height-sm;
+    }
+    .pickr .pcr-button {
+      width: 14px;
+      height: 14px;
+    }
+    .@{color-picker-prefix-cls}-icon {
+      right: @control-padding-horizontal - 2px;
+      top: @input-height-sm / 2;
+      font-size: 10px;
+    }
+  }
+}

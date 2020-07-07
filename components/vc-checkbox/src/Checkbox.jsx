@@ -108,6 +108,7 @@ export default {
       value,
       ...others
     } = getOptionProps(this);
+    const { class: className } = this.$attrs;
     const globalProps = Object.keys({ ...others, ...this.$attrs }).reduce((prev, key) => {
       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
         prev[key] = others[key];
@@ -116,31 +117,29 @@ export default {
     }, {});
 
     const { sChecked } = this;
-    const classString = classNames(prefixCls, {
+    const classString = classNames(prefixCls, className, {
       [`${prefixCls}-checked`]: sChecked,
       [`${prefixCls}-disabled`]: disabled,
     });
+    const inputProps = {
+      name,
+      id,
+      type,
+      readOnly,
+      disabled,
+      tabIndex,
+      class: `${prefixCls}-input`,
+      checked: !!sChecked,
+      autoFocus,
+      value,
+      ...globalProps,
+      onChange: this.handleChange,
+      onClick: this.onClick,
+    };
 
     return (
       <span class={classString}>
-        <input
-          name={name}
-          id={id}
-          type={type}
-          readOnly={readOnly}
-          disabled={disabled}
-          tabIndex={tabIndex}
-          class={`${prefixCls}-input`}
-          checked={!!sChecked}
-          autoFocus={autoFocus}
-          ref="input"
-          value={value}
-          onChange={this.handleChange}
-          onClick={this.onClick}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          {...globalProps}
-        />
+        <input ref="input" {...inputProps} />
         <span class={`${prefixCls}-inner`} />
       </span>
     );

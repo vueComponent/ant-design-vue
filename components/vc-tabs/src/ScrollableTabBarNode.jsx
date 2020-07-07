@@ -2,13 +2,14 @@ import debounce from 'lodash/debounce';
 import ResizeObserver from 'resize-observer-polyfill';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { getComponentFromProp } from '../../_util/props-util';
+import { getComponent, getSlot } from '../../_util/props-util';
 import { setTransform, isTransform3dSupported } from './utils';
 
 function noop() {}
 export default {
   name: 'ScrollableTabBarNode',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     activeKey: PropTypes.any,
     getRef: PropTypes.func.def(() => {}),
@@ -202,9 +203,6 @@ export default {
     },
 
     setNext(v) {
-      if (!v) {
-        // debugger
-      }
       if (this.next !== v) {
         this.next = v;
       }
@@ -275,8 +273,8 @@ export default {
   render() {
     const { next, prev } = this;
     const { prefixCls, scrollAnimated, navWrapper } = this.$props;
-    const prevIcon = getComponentFromProp(this, 'prevIcon');
-    const nextIcon = getComponentFromProp(this, 'nextIcon');
+    const prevIcon = getComponent(this, 'prevIcon');
+    const nextIcon = getComponent(this, 'nextIcon');
     const showNextPrev = prev || next;
 
     const prevButton = (
@@ -321,41 +319,14 @@ export default {
           [`${prefixCls}-nav-container-scrolling`]: showNextPrev,
         }}
         key="container"
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: this.saveRef('container'),
-            },
-          ],
-        }}
+        ref={this.saveRef('container')}
       >
         {prevButton}
         {nextButton}
-        <div
-          class={`${prefixCls}-nav-wrap`}
-          {...{
-            directives: [
-              {
-                name: 'ant-ref',
-                value: this.saveRef('navWrap'),
-              },
-            ],
-          }}
-        >
+        <div class={`${prefixCls}-nav-wrap`} ref={this.saveRef('navWrap')}>
           <div class={`${prefixCls}-nav-scroll`}>
-            <div
-              class={navClasses}
-              {...{
-                directives: [
-                  {
-                    name: 'ant-ref',
-                    value: this.saveRef('nav'),
-                  },
-                ],
-              }}
-            >
-              {navWrapper(this.$slots.default)}
+            <div class={navClasses} ref={this.saveRef('nav')}>
+              {navWrapper(getSlot(this))}
             </div>
           </div>
         </div>

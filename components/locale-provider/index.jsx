@@ -1,9 +1,10 @@
+import { provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import * as moment from 'moment';
 import interopDefault from '../_util/interopDefault';
 import { changeConfirmLocale } from '../modal/locale';
-import Base from '../base';
 import warning from '../_util/warning';
+import { getSlot } from '../_util/props-util';
 // export interface Locale {
 //   locale: string;
 //   Pagination?: Object;
@@ -45,10 +46,8 @@ const LocaleProvider = {
       },
     };
   },
-  provide() {
-    return {
-      localeData: this.$data,
-    };
+  created() {
+    provide('localeData', this.$data);
   },
   watch: {
     locale(val) {
@@ -69,14 +68,13 @@ const LocaleProvider = {
     changeConfirmLocale();
   },
   render() {
-    return this.$slots.default ? this.$slots.default() : null;
+    return getSlot(this);
   },
 };
 
 /* istanbul ignore next */
-LocaleProvider.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(LocaleProvider.name, LocaleProvider);
+LocaleProvider.install = function(app) {
+  app.component(LocaleProvider.name, LocaleProvider);
 };
 
 export default LocaleProvider;

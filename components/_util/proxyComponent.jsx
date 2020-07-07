@@ -1,9 +1,11 @@
+import { createVNode } from 'vue';
 import PropTypes from './vue-types';
-import { getOptionProps, getListeners } from './props-util';
+import { getOptionProps } from './props-util';
 
 function getDisplayName(WrappedComponent) {
   return WrappedComponent.name || 'Component';
 }
+let k = 1;
 export default function wrapWithConnect(WrappedComponent) {
   const tempProps = WrappedComponent.props || {};
   const methods = WrappedComponent.methods || {};
@@ -15,7 +17,7 @@ export default function wrapWithConnect(WrappedComponent) {
   WrappedComponent.props.children = PropTypes.array.def([]);
   const ProxyWrappedComponent = {
     props,
-    model: WrappedComponent.model,
+    inheritAttrs: false,
     name: `Proxy_${getDisplayName(WrappedComponent)}`,
     methods: {
       getProxyWrappedInstance() {
@@ -23,30 +25,19 @@ export default function wrapWithConnect(WrappedComponent) {
       },
     },
     render() {
-      const { $slots = {}, $scopedSlots } = this;
+      const { $slots = {}, $attrs } = this;
       const props = getOptionProps(this);
       const wrapProps = {
-        props: {
-          ...props,
-          __propsSymbol__: Symbol(),
-          componentWillReceiveProps: { ...props },
-          children: $slots.default || props.children || [],
-        },
-        on: getListeners(this),
+        ...props,
+        ...$attrs,
+        __propsSymbol__: k++,
+        ref: 'wrappedInstance',
       };
-      if (Object.keys($scopedSlots).length) {
-        wrapProps.scopedSlots = $scopedSlots;
+      const slots = {};
+      for (let [key, value] of Object.entries($slots)) {
+        slots[key] = () => value();
       }
-      const slotsKey = Object.keys($slots);
-      return (
-        <WrappedComponent {...wrapProps} ref="wrappedInstance">
-          {slotsKey.length
-            ? slotsKey.map(name => {
-                return <template slot={name}>{$slots[name]}</template>;
-              })
-            : null}
-        </WrappedComponent>
-      );
+      return createVNode(WrappedComponent, wrapProps, slots);
     },
   };
   Object.keys(methods).map(m => {

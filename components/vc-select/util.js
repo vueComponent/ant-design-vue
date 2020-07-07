@@ -1,11 +1,6 @@
-import {
-  getPropsData,
-  getSlotOptions,
-  getKey,
-  getAttrs,
-  getComponentFromProp,
-} from '../_util/props-util';
-import { cloneVNodes } from '../_util/vnode';
+import { getPropsData, getComponent, getSlot } from '../_util/props-util';
+import { cloneElement } from '../_util/vnode';
+import { isVNode, Text } from 'vue';
 
 export function toTitle(title) {
   if (typeof title === 'string') {
@@ -21,11 +16,11 @@ export function getValuePropValue(child) {
   if ('value' in props) {
     return props.value;
   }
-  if (getKey(child) !== undefined) {
-    return getKey(child);
+  if (child.key !== undefined) {
+    return child.key;
   }
-  if (getSlotOptions(child).isSelectOptGroup) {
-    const label = getComponentFromProp(child, 'label');
+  if (typeof child.type === 'object' && child.type.isSelectOptGroup) {
+    const label = getComponent(child, 'label');
     if (label) {
       return label;
     }
@@ -38,20 +33,15 @@ export function getPropValue(child, prop) {
     return getValuePropValue(child);
   }
   if (prop === 'children') {
-    const newChild = child.$slots
-      ? cloneVNodes(child.$slots.default, true)
-      : cloneVNodes(child.componentOptions.children, true);
-    if (newChild.length === 1 && !newChild[0].tag) {
-      return newChild[0].text;
+    const temp = getComponent(child);
+    const newChild = isVNode(temp) ? cloneElement(temp) : temp;
+    if (isVNode(newChild) && newChild.type === Text) {
+      return newChild.children;
     }
     return newChild;
   }
-  const data = getPropsData(child);
-  if (prop in data) {
-    return data[prop];
-  } else {
-    return getAttrs(child)[prop];
-  }
+  const props = getPropsData(child);
+  return props[prop];
 }
 
 export function isMultiple(props) {
@@ -119,14 +109,14 @@ export function getLabelFromPropsValue(value, key) {
   return label;
 }
 
-export function getSelectKeys(menuItems, value) {
+export function getSelectKeys(menuItems = [], value) {
   if (value === null || value === undefined) {
     return [];
   }
   let selectedKeys = [];
   menuItems.forEach(item => {
-    if (getSlotOptions(item).isMenuItemGroup) {
-      selectedKeys = selectedKeys.concat(getSelectKeys(item.componentOptions.children, value));
+    if (item.type?.isMenuItemGroup) {
+      selectedKeys = selectedKeys.concat(getSelectKeys(getSlot(item), value));
     } else {
       const itemValue = getValuePropValue(item);
       const itemKey = item.key;
@@ -151,8 +141,8 @@ export function findFirstMenuItem(children) {
   for (let i = 0; i < children.length; i++) {
     const child = children[i];
     const props = getPropsData(child);
-    if (getSlotOptions(child).isMenuItemGroup) {
-      const found = findFirstMenuItem(child.componentOptions.children);
+    if (child.type?.isMenuItemGroup) {
+      const found = findFirstMenuItem(getSlot(child));
       if (found) {
         return found;
       }

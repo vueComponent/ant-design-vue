@@ -58,7 +58,7 @@ export default {
       const attributeName = this.getAttributeName();
       node.removeAttribute(attributeName);
       node.setAttribute(attributeName, 'true');
-      // Not white or transparnt or grey
+      // Not white or transparent or grey
       styleForPesudo = styleForPesudo || document.createElement('style');
       if (
         waveColor &&

@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { getComponentFromProp, getOptionProps, getListeners } from '../_util/props-util';
+import { getComponent, getOptionProps } from '../_util/props-util';
 import Input from './Input';
 import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import EyeInvisibleOutlined from '@ant-design/icons-vue/EyeInvisibleOutlined';
@@ -8,18 +8,14 @@ import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 
 const ActionMap = {
-  click: 'click',
-  hover: 'mouseover',
+  click: 'onClick',
+  hover: 'onMouseover',
 };
 
 export default {
   name: 'AInputPassword',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  model: {
-    prop: 'value',
-    event: 'change.value',
-  },
   props: {
     ...inputProps,
     prefixCls: PropTypes.string.def('ant-input-password'),
@@ -33,11 +29,14 @@ export default {
     };
   },
   methods: {
+    saveInput(node) {
+      this.input = node;
+    },
     focus() {
-      this.$refs.input.focus();
+      this.input.focus();
     },
     blur() {
-      this.$refs.input.blur();
+      this.input.blur();
     },
     onVisibleChange() {
       if (this.disabled) {
@@ -51,18 +50,16 @@ export default {
       const { prefixCls, action } = this.$props;
       const iconTrigger = ActionMap[action] || '';
       const iconProps = {
-        on: {
-          [iconTrigger]: this.onVisibleChange,
-          mousedown: e => {
-            // Prevent focused state lost
-            // https://github.com/ant-design/ant-design/issues/15173
-            e.preventDefault();
-          },
-          mouseup: e => {
-            // Prevent focused state lost
-            // https://github.com/ant-design/ant-design/pull/23633/files
-            e.preventDefault();
-          },
+        [iconTrigger]: this.onVisibleChange,
+        onMousedown: e => {
+          // Prevent focused state lost
+          // https://github.com/ant-design/ant-design/issues/15173
+          e.preventDefault();
+        },
+        onMouseup: e => {
+          // Prevent focused state lost
+          // https://github.com/ant-design/ant-design/pull/23633/files
+          e.preventDefault();
         },
         class: `${prefixCls}-icon`,
         key: 'passwordIcon',
@@ -83,28 +80,24 @@ export default {
       visibilityToggle,
       ...restProps
     } = getOptionProps(this);
+    const { class: className } = this.$attrs;
     const suffixIcon = visibilityToggle && this.getIcon();
-    const inputClassName = classNames(prefixCls, {
+    const inputClassName = classNames(prefixCls, className, {
       [`${prefixCls}-${size}`]: !!size,
     });
     const inputProps = {
-      props: {
-        ...restProps,
-        prefixCls: inputPrefixCls,
-        size,
-        suffix: suffixIcon,
-        prefix: getComponentFromProp(this, 'prefix'),
-        addonAfter: getComponentFromProp(this, 'addonAfter'),
-        addonBefore: getComponentFromProp(this, 'addonBefore'),
-      },
-      attrs: {
-        ...this.$attrs,
-        type: this.visible ? 'text' : 'password',
-      },
+      ...restProps,
+      prefixCls: inputPrefixCls,
+      size,
+      suffix: suffixIcon,
+      prefix: getComponent(this, 'prefix'),
+      addonAfter: getComponent(this, 'addonAfter'),
+      addonBefore: getComponent(this, 'addonBefore'),
+      ...this.$attrs,
+      type: this.visible ? 'text' : 'password',
       class: inputClassName,
       ref: 'input',
-      on: getListeners(this),
     };
-    return <Input {...inputProps} />;
+    return <Input {...inputProps} ref={this.saveInput} />;
   },
 };

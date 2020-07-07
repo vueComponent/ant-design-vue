@@ -1,6 +1,6 @@
 import { reactive, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponentFromProp } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
 import defaultRenderEmpty from './renderEmpty';
 import LocaleProvider, { ANT_MARK } from '../locale-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -51,10 +51,9 @@ const ConfigProvider = {
     ]),
   },
   methods: {
-    renderEmptyComponent(h, name) {
-      const renderEmpty =
-        getComponentFromProp(this, 'renderEmpty', {}, false) || defaultRenderEmpty;
-      return renderEmpty(h, name);
+    renderEmptyComponent(name) {
+      const renderEmpty = getComponent(this, 'renderEmpty', {}, false) || defaultRenderEmpty;
+      return renderEmpty(name);
     },
     getPrefixCls(suffixCls, customizePrefixCls) {
       const { prefixCls = 'ant' } = this.$props;

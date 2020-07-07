@@ -1,7 +1,8 @@
+import { inject } from 'vue';
 import ClearableLabeledInput from './ClearableLabeledInput';
 import ResizableTextArea from './ResizableTextArea';
 import inputProps from './inputProps';
-import hasProp, { getListeners, getOptionProps } from '../_util/props-util';
+import { hasProp, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import { fixControlledValue, resolveOnChange } from './Input';
 import PropTypes from '../_util/vue-types';
@@ -15,15 +16,13 @@ const TextAreaProps = {
 export default {
   name: 'ATextarea',
   inheritAttrs: false,
-  model: {
-    prop: 'value',
-    event: 'change.value',
-  },
   props: {
     ...TextAreaProps,
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     const value = typeof this.value === 'undefined' ? this.defaultValue : this.value;
@@ -52,9 +51,7 @@ export default {
           callback && callback();
         });
       } else {
-        // 不在严格受控
-        // https://github.com/vueComponent/ant-design-vue/issues/2207，modal 是 新 new 实例，更新队列和当前不在同一个更新队列中
-        // this.$forceUpdate();
+        this.$forceUpdate();
       }
     },
     handleKeyDown(e) {
@@ -64,7 +61,7 @@ export default {
       this.$emit('keydown', e);
     },
     onChange(e) {
-      this.$emit('change.value', e.target.value);
+      this.$emit('update:value', e.target.value);
       this.$emit('change', e);
       this.$emit('input', e);
     },
@@ -73,41 +70,43 @@ export default {
       if (((e.isComposing || composing) && this.lazy) || this.stateValue === value) return;
 
       this.setValue(e.target.value, () => {
-        this.$refs.resizableTextArea.resizeTextarea();
+        this.resizableTextArea.resizeTextarea();
       });
-      resolveOnChange(this.$refs.resizableTextArea.$refs.textArea, e, this.onChange);
+      resolveOnChange(this.resizableTextArea.textArea, e, this.onChange);
     },
 
     focus() {
-      this.$refs.resizableTextArea.$refs.textArea.focus();
+      this.resizableTextArea.textArea.focus();
     },
 
     blur() {
-      this.$refs.resizableTextArea.$refs.textArea.blur();
+      this.resizableTextArea.textArea.blur();
+    },
+    saveTextArea(resizableTextArea) {
+      this.resizableTextArea = resizableTextArea;
+    },
+
+    saveClearableInput(clearableInput) {
+      this.clearableInput = clearableInput;
     },
     handleReset(e) {
       this.setValue('', () => {
-        this.$refs.resizableTextArea.renderTextArea();
+        this.resizableTextArea.renderTextArea();
         this.focus();
       });
-      resolveOnChange(this.$refs.resizableTextArea.$refs.textArea, e, this.onChange);
+      resolveOnChange(this.resizableTextArea.textArea, e, this.onChange);
     },
 
     renderTextArea(prefixCls) {
       const props = getOptionProps(this);
       const resizeProps = {
-        props: {
-          ...props,
-          prefixCls,
-        },
-        on: {
-          ...getListeners(this),
-          input: this.handleChange,
-          keydown: this.handleKeyDown,
-        },
-        attrs: this.$attrs,
+        ...props,
+        ...this.$attrs,
+        prefixCls,
+        onInput: this.handleChange,
+        onKeydown: this.handleKeyDown,
       };
-      return <ResizableTextArea {...resizeProps} ref="resizableTextArea" />;
+      return <ResizableTextArea {...resizeProps} ref={this.saveTextArea} />;
     },
   },
   render() {
@@ -116,16 +115,14 @@ export default {
     const prefixCls = getPrefixCls('input', customizePrefixCls);
 
     const props = {
-      props: {
-        ...getOptionProps(this),
-        prefixCls,
-        inputType: 'text',
-        value: fixControlledValue(stateValue),
-        element: this.renderTextArea(prefixCls),
-        handleReset: this.handleReset,
-      },
-      on: getListeners(this),
+      ...getOptionProps(this),
+      ...this.$attrs,
+      prefixCls,
+      inputType: 'text',
+      value: fixControlledValue(stateValue),
+      element: this.renderTextArea(prefixCls),
+      handleReset: this.handleReset,
     };
-    return <ClearableLabeledInput {...props} />;
+    return <ClearableLabeledInput {...props} ref={this.saveClearableInput} />;
   },
 };

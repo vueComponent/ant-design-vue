@@ -54,12 +54,12 @@ function animate(node, show, done) {
 }
 
 const animation = {
-  enter(node, done) {
+  onEnter(node, done) {
     nextTick(() => {
       animate(node, true, done);
     });
   },
-  leave(node, done) {
+  onLeave(node, done) {
     return animate(node, false, done);
   },
 };

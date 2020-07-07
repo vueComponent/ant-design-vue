@@ -1,10 +1,11 @@
+import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import { ColProps } from '../grid/Col';
 import isRegExp from 'lodash/isRegExp';
 import warning from '../_util/warning';
 import FormItem from './FormItem';
-import { initDefaultProps, getListeners } from '../_util/props-util';
+import { initDefaultProps, getListeners, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export const FormProps = {
@@ -48,6 +49,7 @@ export const ValidationRule = {
 
 const Form = {
   name: 'AFormModel',
+  inheritAttrs: false,
   props: initDefaultProps(FormProps, {
     layout: 'horizontal',
     hideRequiredMark: false,
@@ -56,14 +58,13 @@ const Form = {
   Item: FormItem,
   created() {
     this.fields = [];
+    this.form = undefined;
+    provide('FormContext', this);
   },
-  provide() {
+  setup() {
     return {
-      FormContext: this,
+      configProvider: inject('configProvider', ConfigConsumerProps),
     };
-  },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
   },
   watch: {
     rules() {
@@ -164,19 +165,20 @@ const Form = {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, hideRequiredMark, layout, onSubmit, $slots } = this;
+    const { prefixCls: customizePrefixCls, hideRequiredMark, layout, onSubmit } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('form', customizePrefixCls);
+    const { class: className, onSubmit: originSubmit, ...restProps } = this.$attrs;
 
-    const formClassName = classNames(prefixCls, {
+    const formClassName = classNames(prefixCls, className, {
       [`${prefixCls}-horizontal`]: layout === 'horizontal',
       [`${prefixCls}-vertical`]: layout === 'vertical',
       [`${prefixCls}-inline`]: layout === 'inline',
       [`${prefixCls}-hide-required-mark`]: hideRequiredMark,
     });
     return (
-      <form onSubmit={onSubmit} class={formClassName}>
-        {$slots.default}
+      <form onSubmit={onSubmit} class={formClassName} {...restProps}>
+        {getSlot(this)}
       </form>
     );
   },

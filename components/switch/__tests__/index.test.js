@@ -19,7 +19,7 @@ describe('Switch', () => {
     resetWarned();
 
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    mount(Switch, { propsData: { value: '' } });
+    mount(Switch, { props: { value: '' } });
     expect(errorSpy).toHaveBeenCalledWith(
       'Warning: [antdv: Switch] `value` is not validate prop, do you mean `checked`?',
     );

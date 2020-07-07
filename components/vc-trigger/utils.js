@@ -25,3 +25,7 @@ export function getAlignPopupClassName(builtinPlacements, prefixCls, align, isAl
   return '';
 }
 export function noop() {}
+
+export function saveRef(name, component) {
+  this[name] = component;
+}

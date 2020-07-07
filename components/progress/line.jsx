@@ -50,55 +50,51 @@ export const handleGradient = strokeColor => {
   return { backgroundImage: `linear-gradient(${direction}, ${from}, ${to})` };
 };
 
-const Line = {
-  functional: true,
-  render(h, context) {
-    const { props, children } = context;
-    const {
-      prefixCls,
-      percent,
-      successPercent,
-      strokeWidth,
-      size,
-      strokeColor,
-      strokeLinecap,
-    } = props;
-    let backgroundProps;
-    if (strokeColor && typeof strokeColor !== 'string') {
-      backgroundProps = handleGradient(strokeColor);
-    } else {
-      backgroundProps = {
-        background: strokeColor,
-      };
-    }
-    const percentStyle = {
-      width: `${validProgress(percent)}%`,
-      height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
+const Line = (_, { attrs, slots }) => {
+  const {
+    prefixCls,
+    percent,
+    successPercent,
+    strokeWidth,
+    size,
+    strokeColor,
+    strokeLinecap,
+  } = attrs;
+  let backgroundProps;
+  if (strokeColor && typeof strokeColor !== 'string') {
+    backgroundProps = handleGradient(strokeColor);
+  } else {
+    backgroundProps = {
       background: strokeColor,
-      borderRadius: strokeLinecap === 'square' ? 0 : '100px',
-      ...backgroundProps,
     };
-    const successPercentStyle = {
-      width: `${validProgress(successPercent)}%`,
-      height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
-      borderRadius: strokeLinecap === 'square' ? 0 : '',
-    };
-    const successSegment =
-      successPercent !== undefined ? (
-        <div class={`${prefixCls}-success-bg`} style={successPercentStyle} />
-      ) : null;
-    return (
-      <div>
-        <div class={`${prefixCls}-outer`}>
-          <div class={`${prefixCls}-inner`}>
-            <div class={`${prefixCls}-bg`} style={percentStyle} />
-            {successSegment}
-          </div>
+  }
+  const percentStyle = {
+    width: `${validProgress(percent)}%`,
+    height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
+    background: strokeColor,
+    borderRadius: strokeLinecap === 'square' ? 0 : '100px',
+    ...backgroundProps,
+  };
+  const successPercentStyle = {
+    width: `${validProgress(successPercent)}%`,
+    height: `${strokeWidth || (size === 'small' ? 6 : 8)}px`,
+    borderRadius: strokeLinecap === 'square' ? 0 : '',
+  };
+  const successSegment =
+    successPercent !== undefined ? (
+      <div class={`${prefixCls}-success-bg`} style={successPercentStyle} />
+    ) : null;
+  return (
+    <div>
+      <div class={`${prefixCls}-outer`}>
+        <div class={`${prefixCls}-inner`}>
+          <div class={`${prefixCls}-bg`} style={percentStyle} />
+          {successSegment}
         </div>
-        {children}
       </div>
-    );
-  },
+      {slots?.default()}
+    </div>
+  );
 };
 
 export default Line;

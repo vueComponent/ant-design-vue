@@ -1,16 +1,19 @@
+import { inject } from 'vue';
 import { Item, itemProps } from '../vc-menu';
-import { getOptionProps, getListeners } from '../_util/props-util';
+import { getOptionProps, getSlot } from '../_util/props-util';
 import Tooltip from '../tooltip';
 function noop() {}
 export default {
   name: 'MenuItem',
   inheritAttrs: false,
   props: itemProps,
-  inject: {
-    getInlineCollapsed: { default: () => noop },
-    layoutSiderContext: { default: () => ({}) },
-  },
   isMenuItem: true,
+  setup() {
+    return {
+      getInlineCollapsed: inject('getInlineCollapsed', noop),
+      layoutSiderContext: inject('layoutSiderContext', {}),
+    };
+  },
   methods: {
     onKeyDown(e) {
       this.$refs.menuItem.onKeyDown(e);
@@ -19,10 +22,10 @@ export default {
   render() {
     const props = getOptionProps(this);
     const { level, title, rootPrefixCls } = props;
-    const { getInlineCollapsed, $slots, $attrs: attrs } = this;
+    const { getInlineCollapsed, $attrs: attrs } = this;
     const inlineCollapsed = getInlineCollapsed();
     const tooltipProps = {
-      title: title || (level === 1 ? $slots.default : ''),
+      title: title || (level === 1 ? getSlot(this) : ''),
     };
     const siderCollapsed = this.layoutSiderContext.sCollapsed;
     if (!siderCollapsed && !inlineCollapsed) {
@@ -33,26 +36,17 @@ export default {
     }
 
     const itemProps = {
-      props: {
-        ...props,
-        title,
-      },
-      attrs,
-      on: getListeners(this),
+      ...props,
+      title,
+      ...attrs,
+      ref: 'menuItem',
     };
     const toolTipProps = {
-      props: {
-        ...tooltipProps,
-        placement: 'right',
-        overlayClassName: `${rootPrefixCls}-inline-collapsed-tooltip`,
-      },
+      ...tooltipProps,
+      placement: 'right',
+      overlayClassName: `${rootPrefixCls}-inline-collapsed-tooltip`,
     };
-    return (
-      <Tooltip {...toolTipProps}>
-        <Item {...itemProps} ref="menuItem">
-          {$slots.default}
-        </Item>
-      </Tooltip>
-    );
+    const item = <Item {...itemProps}>{getSlot(this)}</Item>;
+    return <Tooltip {...toolTipProps}>{item}</Tooltip>;
   },
 };

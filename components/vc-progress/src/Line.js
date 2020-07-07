@@ -1,12 +1,9 @@
-import Vue from 'vue';
-import ref from 'vue-ref';
 import { initDefaultProps } from '../../_util/props-util';
 import enhancer from './enhancer';
 import { propTypes, defaultProps } from './types';
 
-Vue.use(ref, { name: 'ant-ref' });
-
 const Line = {
+  name: 'Line',
   props: initDefaultProps(propTypes, defaultProps),
   created() {
     this.paths = {};
@@ -38,13 +35,11 @@ const Line = {
     let stackPtg = 0;
 
     const pathFirst = {
-      attrs: {
-        d: pathString,
-        'stroke-linecap': strokeLinecap,
-        stroke: trailColor,
-        'stroke-width': trailWidth || strokeWidth,
-        'fill-opacity': '0',
-      },
+      d: pathString,
+      'stroke-linecap': strokeLinecap,
+      stroke: trailColor,
+      'stroke-width': trailWidth || strokeWidth,
+      'fill-opacity': '0',
       class: `${prefixCls}-line-trail`,
     };
     return (
@@ -69,26 +64,16 @@ const Line = {
 
           const pathProps = {
             key: index,
-            attrs: {
-              d: pathString,
-              'stroke-linecap': strokeLinecap,
-              stroke: color,
-              'stroke-width': strokeWidth,
-              'fill-opacity': '0',
-            },
+            d: pathString,
+            'stroke-linecap': strokeLinecap,
+            stroke: color,
+            'stroke-width': strokeWidth,
+            'fill-opacity': '0',
             class: `${prefixCls}-line-path`,
             style: pathStyle,
-            directives: [
-              {
-                name: 'ant-ref',
-                value: c => {
-                  this.paths[index] = c;
-                },
-              },
-            ],
           };
 
-          return <path {...pathProps} />;
+          return <path ref={c => (this.paths[index] = c)} {...pathProps} />;
         })}
       </svg>
     );

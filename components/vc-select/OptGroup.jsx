@@ -5,4 +5,7 @@ export default {
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   },
   isSelectOptGroup: true,
+  render() {
+    return null;
+  },
 };

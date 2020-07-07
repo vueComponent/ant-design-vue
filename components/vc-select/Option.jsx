@@ -8,4 +8,7 @@ export default {
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   },
   isSelectOption: true,
+  render() {
+    return null;
+  },
 };

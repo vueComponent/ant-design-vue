@@ -1,6 +1,7 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
+import { getSlot } from '../_util/props-util';
 
 const stringOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
 
@@ -39,16 +40,7 @@ export default {
     };
   },
   render() {
-    const {
-      span,
-      order,
-      offset,
-      push,
-      pull,
-      prefixCls: customizePrefixCls,
-      $slots,
-      rowContext,
-    } = this;
+    const { span, order, offset, push, pull, prefixCls: customizePrefixCls, rowContext } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('col', customizePrefixCls);
 
@@ -104,6 +96,6 @@ export default {
         };
       }
     }
-    return <div {...divProps}>{$slots.default && $slots.default()}</div>;
+    return <div {...divProps}>{getSlot(this)}</div>;
   },
 };

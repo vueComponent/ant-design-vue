@@ -1,6 +1,7 @@
+import { inject } from 'vue';
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
+import { getOptionProps, initDefaultProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
@@ -43,8 +44,10 @@ export default {
     gapDegree: 0,
     strokeLinecap: 'round',
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   methods: {
     getPercentNumber() {
@@ -67,12 +70,11 @@ export default {
       if (!showInfo) return null;
 
       let text;
-      const textFormatter =
-        format || this.$scopedSlots.format || (percentNumber => `${percentNumber}%`);
+      const textFormatter = format || this.$slots.format || (percentNumber => `${percentNumber}%`);
       const isLineType = type === 'line';
       if (
         format ||
-        this.$scopedSlots.format ||
+        this.$slots.format ||
         (progressStatus !== 'exception' && progressStatus !== 'success')
       ) {
         text = textFormatter(validProgress(percent), validProgress(successPercent));
@@ -101,19 +103,15 @@ export default {
     // Render progress shape
     if (type === 'line') {
       const lineProps = {
-        props: {
-          ...props,
-          prefixCls,
-        },
+        ...props,
+        prefixCls,
       };
       progress = <Line {...lineProps}>{progressInfo}</Line>;
     } else if (type === 'circle' || type === 'dashboard') {
       const circleProps = {
-        props: {
-          ...props,
-          prefixCls,
-          progressStatus,
-        },
+        ...props,
+        prefixCls,
+        progressStatus,
       };
       progress = <Circle {...circleProps}>{progressInfo}</Circle>;
     }
@@ -126,7 +124,6 @@ export default {
     });
 
     const progressProps = {
-      on: getListeners(this),
       class: classString,
     };
     return <div {...progressProps}>{progress}</div>;

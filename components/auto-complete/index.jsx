@@ -1,17 +1,11 @@
+import { inject, provide } from 'vue';
 import { Option, OptGroup } from '../vc-select';
 import Select, { AbstractSelectProps, SelectValue } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';
 import PropTypes from '../_util/vue-types';
 import { ConfigConsumerProps } from '../config-provider';
-import {
-  getComponentFromProp,
-  getOptionProps,
-  filterEmpty,
-  isValidElement,
-  getListeners,
-} from '../_util/props-util';
-import Base from '../base';
+import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
 
 // const DataSourceItemObject = PropTypes.shape({
 //   value: String,
@@ -26,6 +20,9 @@ import Base from '../base';
 //   onChange?: React.FormEventHandler<any>;
 //   value: any;
 // }
+function isSelectOptionOrSelectOptGroup(child) {
+  return child && child.type && (child.type.isSelectOption || child.type.isSelectOptGroup);
+}
 
 const AutoCompleteProps = {
   ...AbstractSelectProps(),
@@ -41,6 +38,7 @@ const AutoCompleteProps = {
 
 const AutoComplete = {
   name: 'AAutoComplete',
+  inheritAttrs: false,
   props: {
     ...AutoCompleteProps,
     prefixCls: PropTypes.string.def('ant-select'),
@@ -55,50 +53,56 @@ const AutoComplete = {
   },
   Option: { ...Option, name: 'AAutoCompleteOption' },
   OptGroup: { ...OptGroup, name: 'AAutoCompleteOptGroup' },
-  model: {
-    prop: 'value',
-    event: 'change',
-  },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-  },
-  provide() {
+  // model: {
+  //   prop: 'value',
+  //   event: 'change',
+  // },
+  setup() {
     return {
-      savePopupRef: this.savePopupRef,
+      configProvider: inject('configProvider', ConfigConsumerProps),
     };
+  },
+  created() {
+    provide('savePopupRef', this.savePopupRef);
   },
   methods: {
     savePopupRef(ref) {
       this.popupRef = ref;
     },
-
+    saveSelect(node) {
+      this.select = node;
+    },
     getInputElement() {
-      const { $slots, placeholder } = this;
-      const children = filterEmpty($slots.default);
+      const children = getSlot(this);
       const element = children.length ? children[0] : <Input lazy={false} />;
-      return <InputElement placeholder={placeholder}>{element}</InputElement>;
+      return (
+        <InputElement placeholder={this.placeholder} {...element.props}>
+          {element}
+        </InputElement>
+      );
     },
 
     focus() {
-      if (this.$refs.select) {
-        this.$refs.select.focus();
+      if (this.select) {
+        this.select.focus();
       }
     },
 
     blur() {
-      if (this.$refs.select) {
-        this.$refs.select.blur();
+      if (this.select) {
+        this.select.blur();
       }
     },
   },
 
   render() {
-    const { size, prefixCls: customizePrefixCls, optionLabelProp, dataSource, $slots } = this;
+    const { size, prefixCls: customizePrefixCls, optionLabelProp, dataSource } = this;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
-
+    const { class: className } = this.$attrs;
     const cls = {
+      [className]: !!className,
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-sm`]: size === 'small',
       [`${prefixCls}-show-search`]: true,
@@ -106,8 +110,8 @@ const AutoComplete = {
     };
 
     let options;
-    const childArray = filterEmpty($slots.dataSource);
-    if (childArray.length) {
+    const childArray = getSlot(this, 'dataSource');
+    if (childArray.length && isSelectOptionOrSelectOptGroup(childArray[0])) {
       options = childArray;
     } else {
       options = dataSource
@@ -129,28 +133,25 @@ const AutoComplete = {
         : [];
     }
     const selectProps = {
-      props: {
-        ...getOptionProps(this),
-        mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
-        optionLabelProp,
-        getInputElement: this.getInputElement,
-        notFoundContent: getComponentFromProp(this, 'notFoundContent'),
-        placeholder: '',
-      },
+      ...getOptionProps(this),
+      ...this.$attrs,
+      mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
+      optionLabelProp,
+      getInputElement: this.getInputElement,
+      notFoundContent: getComponent(this, 'notFoundContent'),
+      placeholder: '',
       class: cls,
-      ref: 'select',
-      on: getListeners(this),
+      ref: this.saveSelect,
     };
     return <Select {...selectProps}>{options}</Select>;
   },
 };
 
 /* istanbul ignore next */
-AutoComplete.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(AutoComplete.name, AutoComplete);
-  Vue.component(AutoComplete.Option.name, AutoComplete.Option);
-  Vue.component(AutoComplete.OptGroup.name, AutoComplete.OptGroup);
+AutoComplete.install = function(app) {
+  app.component(AutoComplete.name, AutoComplete);
+  app.component(AutoComplete.Option.name, AutoComplete.Option);
+  app.component(AutoComplete.OptGroup.name, AutoComplete.OptGroup);
 };
 
 export default AutoComplete;

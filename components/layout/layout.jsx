@@ -1,6 +1,7 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
-import { getOptionProps, getListeners } from '../_util/props-util';
+import { getOptionProps, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export const BasicProps = {
@@ -14,8 +15,10 @@ function generator({ suffixCls, tagName, name }) {
     return {
       name,
       props: BasicComponent.props,
-      inject: {
-        configProvider: { default: () => ConfigConsumerProps },
+      setup() {
+        return {
+          configProvider: inject('configProvider', ConfigConsumerProps),
+        };
       },
       render() {
         const { prefixCls: customizePrefixCls } = this.$props;
@@ -23,14 +26,11 @@ function generator({ suffixCls, tagName, name }) {
         const prefixCls = getPrefixCls(suffixCls, customizePrefixCls);
 
         const basicComponentProps = {
-          props: {
-            prefixCls,
-            ...getOptionProps(this),
-            tagName,
-          },
-          on: getListeners(this),
+          prefixCls,
+          ...getOptionProps(this),
+          tagName,
         };
-        return <BasicComponent {...basicComponentProps}>{this.$slots.default}</BasicComponent>;
+        return <BasicComponent {...basicComponentProps}>{getSlot(this)}</BasicComponent>;
       },
     };
   };
@@ -39,12 +39,11 @@ function generator({ suffixCls, tagName, name }) {
 const Basic = {
   props: BasicProps,
   render() {
-    const { prefixCls, tagName: Tag, $slots } = this;
+    const { prefixCls, tagName: Tag } = this;
     const divProps = {
       class: prefixCls,
-      on: getListeners(this),
     };
-    return <Tag {...divProps}>{$slots.default}</Tag>;
+    return <Tag {...divProps}>{getSlot(this)}</Tag>;
   },
 };
 
@@ -68,15 +67,14 @@ const BasicLayout = {
     };
   },
   render() {
-    const { prefixCls, $slots, hasSider, tagName: Tag } = this;
+    const { prefixCls, hasSider, tagName: Tag } = this;
     const divCls = classNames(prefixCls, {
       [`${prefixCls}-has-sider`]: typeof hasSider === 'boolean' ? hasSider : this.siders.length > 0,
     });
     const divProps = {
       class: divCls,
-      on: getListeners,
     };
-    return <Tag {...divProps}>{$slots.default}</Tag>;
+    return <Tag {...divProps}>{getSlot(this)}</Tag>;
   },
 };
 

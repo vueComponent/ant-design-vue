@@ -5,7 +5,7 @@ import PropTypes from '../_util/vue-types';
 import DropdownMenu from './DropdownMenu';
 import { isSingleMode, saveRef } from './util';
 import BaseMixin from '../_util/BaseMixin';
-import { getListeners } from '../_util/props-util';
+import { findDOMNode, getSlot } from '../_util/props-util';
 
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {
@@ -29,6 +29,7 @@ const BUILT_IN_PLACEMENTS = {
 export default {
   name: 'SelectTrigger',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     // onPopupFocus: PropTypes.func,
     // onPopupScroll: PropTypes.func,
@@ -89,7 +90,7 @@ export default {
     setDropdownWidth() {
       this.cancelRafInstance();
       this.rafInstance = raf(() => {
-        const width = this.$el.offsetWidth;
+        const width = findDOMNode(this).offsetWidth;
         if (width !== this.dropdownWidth) {
           this.setState({ dropdownWidth: width });
         }
@@ -101,7 +102,7 @@ export default {
       }
     },
     getInnerMenu() {
-      return this.dropdownMenuRef && this.dropdownMenuRef.$refs.menuRef;
+      return this.dropdownMenuRef && this.dropdownMenuRef.menuRef;
     },
 
     getPopupDOMNode() {
@@ -109,45 +110,25 @@ export default {
     },
 
     getDropdownElement(newProps) {
-      const {
-        value,
-        firstActiveValue,
-        defaultActiveFirstOption,
-        dropdownMenuStyle,
-        getDropdownPrefixCls,
-        backfillValue,
-        menuItemSelectedIcon,
-      } = this;
-      const { menuSelect, menuDeselect, popupScroll } = getListeners(this);
-      const props = this.$props;
-
+      const props = { ...this.$props, ...this.$attrs };
       const { dropdownRender, ariaId } = props;
-      const dropdownMenuProps = {
-        props: {
-          ...newProps.props,
-          ariaId,
-          prefixCls: getDropdownPrefixCls(),
-          value,
-          firstActiveValue,
-          defaultActiveFirstOption,
-          dropdownMenuStyle,
-          backfillValue,
-          menuItemSelectedIcon,
-        },
-        on: {
-          ...newProps.on,
-          menuSelect,
-          menuDeselect,
-          popupScroll,
-        },
-        directives: [
-          {
-            name: 'ant-ref',
-            value: this.saveDropdownMenuRef,
-          },
-        ],
-      };
-      const menuNode = <DropdownMenu {...dropdownMenuProps} />;
+      const menuNode = (
+        <DropdownMenu
+          ref={this.saveDropdownMenuRef}
+          {...newProps}
+          ariaId={ariaId}
+          prefixCls={this.getDropdownPrefixCls()}
+          onMenuSelect={props.onMenuSelect}
+          onMenuDeselect={props.onMenuDeselect}
+          onPopupScroll={props.onPopupScroll}
+          value={props.value}
+          backfillValue={props.backfillValue}
+          firstActiveValue={props.firstActiveValue}
+          defaultActiveFirstOption={props.defaultActiveFirstOption}
+          dropdownMenuStyle={props.dropdownMenuStyle}
+          menuItemSelectedIcon={props.menuItemSelectedIcon}
+        />
+      );
 
       if (dropdownRender) {
         return dropdownRender(menuNode, props);
@@ -170,7 +151,7 @@ export default {
   },
 
   render() {
-    const { $props, $slots } = this;
+    const { onPopupFocus, empty, ...props } = { ...this.$props, ...this.$attrs };
     const {
       multiple,
       visible,
@@ -181,12 +162,8 @@ export default {
       dropdownClassName,
       dropdownStyle,
       dropdownMatchSelectWidth,
-      options,
-      getPopupContainer,
-      showAction,
-      empty,
-    } = $props;
-    const { mouseenter, mouseleave, popupFocus, dropdownVisibleChange } = getListeners(this);
+    } = props;
+    //const { mouseenter, mouseleave, popupFocus, dropdownVisibleChange } = getListeners(this);
     const dropdownPrefixCls = this.getDropdownPrefixCls();
     const popupClassName = {
       [dropdownClassName]: !!dropdownClassName,
@@ -194,20 +171,16 @@ export default {
       [`${dropdownPrefixCls}--empty`]: empty,
     };
     const popupElement = this.getDropdownElement({
-      props: {
-        menuItems: options,
-        multiple,
-        inputValue,
-        visible,
-      },
-      on: {
-        popupFocus,
-      },
+      menuItems: props.options,
+      multiple,
+      inputValue,
+      visible,
+      onPopupFocus,
     });
     let hideAction;
     if (disabled) {
       hideAction = [];
-    } else if (isSingleMode($props) && !showSearch) {
+    } else if (isSingleMode(props) && !showSearch) {
       hideAction = ['click'];
     } else {
       hideAction = ['blur'];
@@ -217,42 +190,25 @@ export default {
     if (this.dropdownWidth) {
       popupStyle[widthProp] = `${this.dropdownWidth}px`;
     }
-    const triggerProps = {
-      props: {
-        ...$props,
-        showAction: disabled ? [] : showAction,
-        hideAction,
-        ref: 'triggerRef',
-        popupPlacement: 'bottomLeft',
-        builtinPlacements: BUILT_IN_PLACEMENTS,
-        prefixCls: dropdownPrefixCls,
-        popupTransitionName: this.getDropdownTransitionName(),
-        popupAlign: dropdownAlign,
-        popupVisible: visible,
-        getPopupContainer,
-        popupClassName: classnames(popupClassName),
-        popupStyle,
-      },
-      on: {
-        popupVisibleChange: dropdownVisibleChange,
-      },
-      directives: [
-        {
-          name: 'ant-ref',
-          value: this.saveTriggerRef,
-        },
-      ],
-    };
-    if (mouseenter) {
-      triggerProps.on.mouseenter = mouseenter;
-    }
-    if (mouseleave) {
-      triggerProps.on.mouseleave = mouseleave;
-    }
     return (
-      <Trigger {...triggerProps}>
-        {$slots.default}
-        <template slot="popup">{popupElement}</template>
+      <Trigger
+        {...props}
+        showAction={disabled ? [] : this.$props.showAction}
+        hideAction={hideAction}
+        ref={this.saveTriggerRef}
+        popupPlacement="bottomLeft"
+        builtinPlacements={BUILT_IN_PLACEMENTS}
+        prefixCls={dropdownPrefixCls}
+        popupTransitionName={this.getDropdownTransitionName()}
+        onPopupVisibleChange={props.onDropdownVisibleChange}
+        popup={popupElement}
+        popupAlign={dropdownAlign}
+        popupVisible={visible}
+        getPopupContainer={props.getPopupContainer}
+        popupClassName={classnames(popupClassName)}
+        popupStyle={popupStyle}
+      >
+        {getSlot(this)[0]}
       </Trigger>
     );
   },

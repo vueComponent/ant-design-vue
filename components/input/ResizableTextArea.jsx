@@ -136,12 +136,15 @@ const ResizableTextArea = {
         ...otherProps,
         style,
         class: cls,
-        directives: [
-          {
-            name: 'ant-input',
-          },
-        ],
+        // directives: [
+        //   {
+        //     name: 'ant-input',
+        //   },
+        // ],
       };
+      if (!textareaProps.autoFocus) {
+        delete textareaProps.autoFocus;
+      }
       return (
         <ResizeObserver onResize={this.handleResize} disabled={!(autoSize || autosize)}>
           <textarea {...textareaProps} ref={this.saveTextArea} />

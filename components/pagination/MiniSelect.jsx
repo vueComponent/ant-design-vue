@@ -1,5 +1,5 @@
 import VcSelect, { SelectProps } from '../select';
-import { getOptionProps, filterEmpty, getListeners } from '../_util/props-util';
+import { getOptionProps, filterEmpty } from '../_util/props-util';
 
 export default {
   props: {
@@ -9,12 +9,10 @@ export default {
   render() {
     const selectOptionsProps = getOptionProps(this);
     const selelctProps = {
-      props: {
-        ...selectOptionsProps,
-        size: 'small',
-      },
-      on: getListeners(this),
+      ...selectOptionsProps,
+      size: 'small',
+      ...this.$attrs,
     };
-    return <VcSelect {...selelctProps}>{filterEmpty(this.$slots.default)}</VcSelect>;
+    return <VcSelect {...selelctProps}>{filterEmpty(this.$slots.default?.())}</VcSelect>;
   },
 };

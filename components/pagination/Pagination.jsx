@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import VcSelect from '../select';
 import MiniSelect from './MiniSelect';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import { getOptionProps, getListeners } from '../_util/props-util';
+import { getOptionProps } from '../_util/props-util';
 import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
@@ -10,6 +10,8 @@ import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
 import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
 import { ConfigConsumerProps } from '../config-provider';
+import { inject } from 'vue';
+import classNames from 'classnames';
 
 export const PaginationProps = () => ({
   total: PropTypes.number,
@@ -42,6 +44,7 @@ export const PaginationConfig = () => ({
 
 export default {
   name: 'APagination',
+  inheritAttrs: false,
   model: {
     prop: 'current',
     event: 'change.current',
@@ -49,19 +52,23 @@ export default {
   props: {
     ...PaginationProps(),
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
+
   methods: {
     getIconsProps(prefixCls) {
       const prevIcon = (
         <a class={`${prefixCls}-item-link`}>
-          <LeftOutlined/>
+          <LeftOutlined />
         </a>
       );
       const nextIcon = (
         <a class={`${prefixCls}-item-link`}>
-          <RightOutlined/>
+          <RightOutlined />
         </a>
       );
       const jumpPrevIcon = (
@@ -104,19 +111,15 @@ export default {
 
       const isSmall = size === 'small';
       const paginationProps = {
-        props: {
-          prefixCls,
-          selectPrefixCls,
-          ...restProps,
-          ...this.getIconsProps(prefixCls),
-          selectComponentClass: isSmall ? MiniSelect : VcSelect,
-          locale: { ...contextLocale, ...customLocale },
-          buildOptionText: buildOptionText || this.$scopedSlots.buildOptionText,
-        },
-        class: {
-          mini: isSmall,
-        },
-        on: getListeners(this),
+        prefixCls,
+        selectPrefixCls,
+        ...restProps,
+        ...this.getIconsProps(prefixCls),
+        selectComponentClass: isSmall ? MiniSelect : VcSelect,
+        locale: { ...contextLocale, ...customLocale },
+        buildOptionText: buildOptionText || this.$slots.buildOptionText?.(),
+        ...this.$attrs,
+        class: classNames({ mini: isSmall }, this.$attrs.class),
       };
 
       return <VcPagination {...paginationProps} />;
@@ -127,8 +130,8 @@ export default {
       <LocaleReceiver
         componentName="Pagination"
         defaultLocale={enUS}
-        scopedSlots={{ default: this.renderPagination }}
-      />
+        slots={{ default: this.renderPagination }}
+      ></LocaleReceiver>
     );
   },
 };

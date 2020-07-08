@@ -3,6 +3,7 @@ import classNames from 'classnames';
 
 export default {
   name: 'Pager',
+  inheritAttrs: false,
   props: {
     rootPrefixCls: PropTypes.string,
     page: PropTypes.number,
@@ -26,18 +27,24 @@ export default {
   render() {
     const props = this.$props;
     const prefixCls = `${props.rootPrefixCls}-item`;
-    const cls = classNames(prefixCls, `${prefixCls}-${props.page}`, {
-      [`${prefixCls}-active`]: props.active,
-      [`${prefixCls}-disabled`]: !props.page,
-    });
+    const cls = classNames(
+      prefixCls,
+      `${prefixCls}-${props.page}`,
+      {
+        [`${prefixCls}-active`]: props.active,
+        [`${prefixCls}-disabled`]: !props.page,
+      },
+      this.$attrs.class,
+    );
 
     return (
       <li
-        class={cls}
         onClick={this.handleClick}
         onKeypress={this.handleKeyPress}
         title={this.showTitle ? this.page : null}
         tabIndex="0"
+        {...this.$attrs}
+        class={cls}
       >
         {this.itemRender(this.page, 'page', <a>{this.page}</a>)}
       </li>

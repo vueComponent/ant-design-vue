@@ -21,44 +21,41 @@ export const ListItemMetaProps = {
   title: PropTypes.any,
 };
 
-export const Meta = {
-  props: ListItemMetaProps,
-  inheritAttributes: false,
-  functional: true,
-  name: 'AListItemMeta',
-  __ANT_LIST_ITEM_META: true,
-  setup(props, { slots, attrs }) {
-    const configProvider = inject('configProvider', ConfigConsumerProps);
-    return () => {
-      const getPrefixCls = configProvider.getPrefixCls;
-      const { prefixCls: customizePrefixCls } = props;
-      const prefixCls = getPrefixCls('list', customizePrefixCls);
-      const avatar = props.avatar || slots.avatar?.();
-      const title = props.title || slots.title?.();
-      const description = props.description || slots.description?.();
-      const content = (
-        <div class={`${prefixCls}-item-meta-content`}>
-          {title && <h4 class={`${prefixCls}-item-meta-title`}>{title}</h4>}
-          {description && <div class={`${prefixCls}-item-meta-description`}>{description}</div>}
-        </div>
-      );
-      return (
-        <div {...attrs} class={`${prefixCls}-item-meta`}>
-          {avatar && <div class={`${prefixCls}-item-meta-avatar`}>{avatar}</div>}
-          {(title || description) && content}
-        </div>
-      );
-    };
-  },
+export const Meta = (props, { slots, attrs }) => {
+  const configProvider = inject('configProvider', ConfigConsumerProps);
+  const getPrefixCls = configProvider.getPrefixCls;
+  const { prefixCls: customizePrefixCls } = props;
+  const prefixCls = getPrefixCls('list', customizePrefixCls);
+  const avatar = props.avatar || slots.avatar?.();
+  const title = props.title || slots.title?.();
+  const description = props.description || slots.description?.();
+  const content = (
+    <div class={`${prefixCls}-item-meta-content`}>
+      {title && <h4 class={`${prefixCls}-item-meta-title`}>{title}</h4>}
+      {description && <div class={`${prefixCls}-item-meta-description`}>{description}</div>}
+    </div>
+  );
+  return (
+    <div {...attrs} class={`${prefixCls}-item-meta`}>
+      {avatar && <div class={`${prefixCls}-item-meta-avatar`}>{avatar}</div>}
+      {(title || description) && content}
+    </div>
+  );
 };
+
+Object.assign(Meta, {
+  props: ListItemMetaProps,
+  inheritAttrs: false,
+  __ANT_LIST_ITEM_META: true,
+});
 
 function getGrid(grid, t) {
   return grid[t] && Math.floor(24 / grid[t]);
 }
 
 export default {
-  inheritAttributes: false,
   name: 'AListItem',
+  inheritAttrs: false,
   Meta,
   props: ListItemProps,
   setup() {

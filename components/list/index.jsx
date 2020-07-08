@@ -51,7 +51,7 @@ export const ListProps = () => ({
 });
 
 const List = {
-  inheritAttributes: false,
+  inheritAttrs: false,
   Item,
   name: 'AList',
   props: initDefaultProps(ListProps(), {

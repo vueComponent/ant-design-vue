@@ -124,7 +124,7 @@ const getSlotOptions = ele => {
   return componentOptions ? componentOptions.Ctor.options || {} : {};
 };
 const findDOMNode = instance => {
-  let node = instance.$el;
+  let node = instance.$el || instance;
   while (node && !node.tagName) {
     node = node.nextSibling;
   }
@@ -271,7 +271,7 @@ const getKey = ele => {
   return key;
 };
 
-export function getEvents(ele, on = true) {
+export function getEvents(ele = {}, on = true) {
   let props = {};
   if (ele.$) {
     props = { ...props, ...ele.$attrs };

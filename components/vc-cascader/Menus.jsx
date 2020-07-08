@@ -1,4 +1,4 @@
-import { getComponent } from '../_util/props-util';
+import { getComponent, findDOMNode } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import arrayTreeFilter from 'array-tree-filter';
 import BaseMixin from '../_util/BaseMixin';
@@ -6,6 +6,7 @@ import BaseMixin from '../_util/BaseMixin';
 export default {
   name: 'CascaderMenus',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     value: PropTypes.array.def([]),
     activeValue: PropTypes.array.def([]),
@@ -55,16 +56,9 @@ export default {
         this.__emit('itemDoubleClick', option, menuIndex, e);
       };
       const key = option[this.getFieldName('value')];
-      const expandProps = {
-        attrs: {
-          role: 'menuitem',
-        },
-        on: {
-          click: onSelect,
-          dblclick: onItemDoubleClick,
-          mousedown: e => e.preventDefault(),
-        },
-        key: Array.isArray(key) ? key.join('__ant__') : key,
+      let expandProps = {
+        onClick: onSelect,
+        onDblclick: onItemDoubleClick,
       };
       let menuItemCls = `${prefixCls}-menu-item`;
       let expandIconNode = null;
@@ -77,15 +71,15 @@ export default {
         }
       }
       if (expandTrigger === 'hover' && (hasChildren || option.isLeaf === false)) {
-        expandProps.on = {
-          mouseenter: this.delayOnSelect.bind(this, onSelect),
-          mouseleave: this.delayOnSelect.bind(this),
-          click: onSelect,
+        expandProps = {
+          onMouseenter: this.delayOnSelect.bind(this, onSelect),
+          onMouseleave: this.delayOnSelect.bind(this),
+          onClick: onSelect,
         };
       }
       if (this.isActiveOption(option, menuIndex)) {
         menuItemCls += ` ${prefixCls}-menu-item-active`;
-        expandProps.ref = this.getMenuItemRef(menuIndex);
+        expandProps.ref = this.saveMenuItem(menuIndex);
       }
       if (option.disabled) {
         menuItemCls += ` ${prefixCls}-menu-item-disabled`;
@@ -101,10 +95,15 @@ export default {
       } else if (typeof option[this.getFieldName('label')] === 'string') {
         title = option[this.getFieldName('label')];
       }
-      expandProps.attrs.title = title;
-      expandProps.class = menuItemCls;
       return (
-        <li {...expandProps}>
+        <li
+          key={Array.isArray(key) ? key.join('__ant__') : key}
+          class={menuItemCls}
+          title={title}
+          {...expandProps}
+          role="menuitem"
+          onMousedown={e => e.preventDefault()}
+        >
           {option[this.getFieldName('label')]}
           {expandIconNode}
           {loadingIconNode}
@@ -148,9 +147,9 @@ export default {
       // scroll into view
       const optionsLength = this.getShowOptions().length;
       for (let i = 0; i < optionsLength; i++) {
-        const itemComponent = this.$refs[`menuItems_${i}`];
+        const itemComponent = this.menuItems[i];
         if (itemComponent) {
-          const target = itemComponent;
+          const target = findDOMNode(itemComponent);
           target.parentNode.scrollTop = target.offsetTop;
         }
       }
@@ -160,9 +159,10 @@ export default {
       const { activeValue = [] } = this;
       return activeValue[menuIndex] === option[this.getFieldName('value')];
     },
-
-    getMenuItemRef(index) {
-      return `menuItems_${index}`;
+    saveMenuItem(index) {
+      return node => {
+        this.menuItems[index] = node;
+      };
     },
   },
 

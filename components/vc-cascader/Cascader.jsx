@@ -1,4 +1,4 @@
-import { getComponent, getListeners } from '../_util/props-util';
+import { getComponent, getSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
 import Menus from './Menus';
@@ -92,7 +92,7 @@ export default {
     this.children = undefined;
     // warning(!('filedNames' in props),
     //   '`filedNames` of Cascader is a typo usage and deprecated, please use `fieldNames` instead.');
-
+    this.defaultFieldNames = { label: 'label', value: 'value', children: 'children' };
     return {
       sPopupVisible: popupVisible,
       sActiveValue: initialValue,
@@ -327,7 +327,6 @@ export default {
       handlePopupVisibleChange,
       handleKeyDown,
     } = this;
-    const listeners = getListeners(this);
     const {
       prefixCls,
       transitionName,
@@ -353,7 +352,6 @@ export default {
         visible: sPopupVisible,
         loadingIcon,
         expandIcon,
-        ...listeners,
         onSelect: handleMenuSelect,
         onItemDoubleClick: this.handleItemDoubleClick,
       };
@@ -376,7 +374,8 @@ export default {
       onPopupVisibleChange: handlePopupVisibleChange,
       ref: this.saveTrigger,
     };
-    const children = this.children;
+    const children = getSlot(this);
+    this.children = children;
     return (
       <Trigger {...triggerProps}>
         {children &&

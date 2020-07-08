@@ -12,13 +12,12 @@ import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import RedoOutlined from '@ant-design/icons-vue/RedoOutlined';
 import {
   hasProp,
-  filterEmpty,
   getOptionProps,
-  getComponentFromProp,
   isValidElement,
   getComponent,
   splitAttrs,
   findDOMNode,
+  getSlot,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
@@ -279,7 +278,7 @@ const Cascader = {
     getLabel() {
       const { options } = this;
       const names = getFilledFieldNames(this.$props);
-      const displayRender = getComponent(this, 'displayRender') || defaultDisplayRender;
+      const displayRender = getComponent(this, 'displayRender', {}, false) || defaultDisplayRender;
       const value = this.sValue;
       const unwrappedValue = Array.isArray(value[0]) ? value[0] : value;
       const selectedOptions = arrayTreeFilter(
@@ -374,10 +373,10 @@ const Cascader = {
   },
 
   render() {
-    const { $slots, sPopupVisible, inputValue, configProvider, localeData } = this;
+    const { sPopupVisible, inputValue, configProvider, localeData } = this;
     const { sValue: value, inputFocused } = this.$data;
     const props = getOptionProps(this);
-    let suffixIcon = getComponentFromProp(this, 'suffixIcon');
+    let suffixIcon = getComponent(this, 'suffixIcon');
     suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
     const { getPopupContainer: getContextPopupContainer } = configProvider;
     const {
@@ -494,7 +493,7 @@ const Cascader = {
       onKeydown: this.handleKeyDown,
       onChange: showSearch ? this.handleInputChange : noop,
     };
-    const children = filterEmpty($slots.default);
+    const children = getSlot(this);
     const inputIcon = (suffixIcon &&
       (isValidElement(suffixIcon) ? (
         cloneElement(suffixIcon, {
@@ -542,11 +541,6 @@ const Cascader = {
     };
     return <VcCascader {...cascaderProps}>{input}</VcCascader>;
   },
-};
-
-/* istanbul ignore next */
-Cascader.install = function(app) {
-  app.component(Cascader.name, Cascader);
 };
 
 export default Cascader;

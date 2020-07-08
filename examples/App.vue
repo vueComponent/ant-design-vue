@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/auto-complete/demo/index';
+import demo from '../antdv-demo/docs/cascader/demo/index';
 
 export default {
   components: {

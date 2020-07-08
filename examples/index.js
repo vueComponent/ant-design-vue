@@ -1,5 +1,5 @@
 import '@babel/polyfill';
-import { createApp } from 'vue';
+import { createApp, version } from 'vue';
 import App from './App.vue';
 import {
   Badge,
@@ -21,12 +21,15 @@ import {
   FormModel,
   Switch,
   Checkbox,
+  Cascader,
   notification,
   message,
 } from 'ant-design-vue';
 
 import 'ant-design-vue/style.js';
 
+// eslint-disable-next-line no-console
+console.log('Vue version: ', version);
 const basic = {
   render() {
     return this.$slots?.default();
@@ -60,4 +63,5 @@ app
   .use(InputNumber)
   .use(AutoComplete)
   .use(FormModel)
+  .use(Cascader)
   .mount('#app');

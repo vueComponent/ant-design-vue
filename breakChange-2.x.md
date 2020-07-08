@@ -79,3 +79,7 @@ tabList[{scopedSlots}] -> tabList[{slots}]
 ## rate
 
 v-model -> v-model:value
+
+## Collapse
+
+v-model -> v-model:activeKey

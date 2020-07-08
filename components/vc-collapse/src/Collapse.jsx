@@ -1,5 +1,11 @@
 import BaseMixin from '../../_util/BaseMixin';
-import { hasProp, getPropsData, isEmptyElement, initDefaultProps } from '../../_util/props-util';
+import {
+  hasProp,
+  getPropsData,
+  isEmptyElement,
+  initDefaultProps,
+  getSlot,
+} from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import openAnimationFactory from './openAnimationFactory';
 import { collapseProps } from './commonProps';
@@ -14,10 +20,6 @@ function _toArray(activeKey) {
 export default {
   name: 'Collapse',
   mixins: [BaseMixin],
-  model: {
-    prop: 'activeKey',
-    event: 'change',
-  },
   props: initDefaultProps(collapseProps(), {
     prefixCls: 'rc-collapse',
     accordion: false,
@@ -84,32 +86,30 @@ export default {
       let panelEvents = {};
       if (!disabled && disabled !== '') {
         panelEvents = {
-          itemClick: this.onClickItem,
+          onItemClick: this.onClickItem,
         };
       }
 
       const props = {
         key,
-        props: {
-          panelKey: key,
-          header,
-          headerClass,
-          isActive,
-          prefixCls,
-          destroyInactivePanel,
-          openAnimation: this.currentOpenAnimations,
-          accordion,
-          expandIcon,
-        },
-        on: panelEvents,
+        panelKey: key,
+        header,
+        headerClass,
+        isActive,
+        prefixCls,
+        destroyInactivePanel,
+        openAnimation: this.currentOpenAnimations,
+        accordion,
+        expandIcon,
+        ...panelEvents,
       };
 
       return cloneElement(child, props);
     },
     getItems() {
       const newChildren = [];
-      this.$slots.default &&
-        this.$slots.default.forEach((child, index) => {
+      getSlot(this) &&
+        getSlot(this).forEach((child, index) => {
           newChildren.push(this.getNewChild(child, index));
         });
       return newChildren;
@@ -117,6 +117,7 @@ export default {
     setActiveKey(activeKey) {
       this.setState({ stateActiveKey: activeKey });
       this.$emit('change', this.accordion ? activeKey[0] : activeKey);
+      this.$emit('update:activeKey', this.accordion ? activeKey[0] : activeKey);
     },
   },
   render() {

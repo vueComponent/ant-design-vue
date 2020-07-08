@@ -1,4 +1,4 @@
-import { getComponentFromProp } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import arrayTreeFilter from 'array-tree-filter';
 import BaseMixin from '../_util/BaseMixin';
@@ -46,8 +46,8 @@ export default {
     },
     getOption(option, menuIndex) {
       const { prefixCls, expandTrigger } = this;
-      const loadingIcon = getComponentFromProp(this, 'loadingIcon');
-      const expandIcon = getComponentFromProp(this, 'expandIcon');
+      const loadingIcon = getComponent(this, 'loadingIcon');
+      const expandIcon = getComponent(this, 'expandIcon');
       const onSelect = e => {
         this.__emit('select', option, menuIndex, e);
       };

@@ -1,13 +1,14 @@
-import { getComponentFromProp, getListeners } from '../_util/props-util';
+import { getComponent, getListeners } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
 import Menus from './Menus';
 import KeyCode from '../_util/KeyCode';
 import arrayTreeFilter from 'array-tree-filter';
 import shallowEqualArrays from 'shallow-equal/arrays';
-import { hasProp, getEvents, getSlot } from '../_util/props-util';
+import { hasProp, getEvents } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
+import syncWatch from '../_util/syncWatch';
 
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {
@@ -45,11 +46,13 @@ const BUILT_IN_PLACEMENTS = {
 };
 
 export default {
+  name: 'Cascader',
   mixins: [BaseMixin],
-  model: {
-    prop: 'value',
-    event: 'change',
-  },
+  inheritAttrs: false,
+  // model: {
+  //   prop: 'value',
+  //   event: 'change',
+  // },
   props: {
     value: PropTypes.array,
     defaultValue: PropTypes.array,
@@ -86,6 +89,7 @@ export default {
     } else if (hasProp(this, 'defaultValue')) {
       initialValue = defaultValue || [];
     }
+    this.children = undefined;
     // warning(!('filedNames' in props),
     //   '`filedNames` of Cascader is a typo usage and deprecated, please use `fieldNames` instead.');
 
@@ -96,7 +100,7 @@ export default {
     };
   },
   watch: {
-    value(val, oldValue) {
+    value: syncWatch(function(val, oldValue) {
       if (!shallowEqualArrays(val, oldValue)) {
         const newValues = {
           sValue: val || [],
@@ -108,16 +112,16 @@ export default {
         }
         this.setState(newValues);
       }
-    },
-    popupVisible(val) {
+    }),
+    popupVisible: syncWatch(function(val) {
       this.setState({
         sPopupVisible: val,
       });
-    },
+    }),
   },
   methods: {
     getPopupDOMNode() {
-      return this.$refs.trigger.getPopupDomNode();
+      return this.trigger.getPopupDomNode();
     },
     getFieldName(name) {
       const { defaultFieldNames, fieldNames } = this;
@@ -159,11 +163,9 @@ export default {
     },
     handleChange(options, setProps, e) {
       if (e.type !== 'keydown' || e.keyCode === KeyCode.ENTER) {
-        this.__emit(
-          'change',
-          options.map(o => o[this.getFieldName('value')]),
-          options,
-        );
+        const value = options.map(o => o[this.getFieldName('value')]);
+        this.$emit('update:value', value);
+        this.__emit('change', value, options);
         this.setPopupVisible(setProps.visible);
       }
     },
@@ -172,7 +174,7 @@ export default {
     },
     handleMenuSelect(targetOption, menuIndex, e) {
       // Keep focused state for keyboard support
-      const triggerNode = this.$refs.trigger.getRootDomNode();
+      const triggerNode = this.trigger.getRootDomNode();
       if (triggerNode && triggerNode.focus) {
         triggerNode.focus();
       }
@@ -228,12 +230,11 @@ export default {
       }
     },
     handleKeyDown(e) {
-      const { $slots } = this;
-      const children = $slots.default && $slots.default[0];
+      const children = this.children;
       // https://github.com/ant-design/ant-design/issues/6717
       // Don't bind keyboard support when children specify the onKeyDown
       if (children) {
-        const keydown = getEvents(children).keydown;
+        const keydown = getEvents(children).onKeydown;
         if (keydown) {
           keydown(e);
           return;
@@ -312,6 +313,9 @@ export default {
       this.handleMenuSelect(targetOption, activeOptions.length - 1, e);
       this.__emit('keydown', e);
     },
+    saveTrigger(node) {
+      this.trigger = node;
+    },
   },
 
   render() {
@@ -338,59 +342,48 @@ export default {
     let menus = <div />;
     let emptyMenuClassName = '';
     if (options && options.length > 0) {
-      const loadingIcon = getComponentFromProp(this, 'loadingIcon');
-      const expandIcon = getComponentFromProp(this, 'expandIcon') || '>';
+      const loadingIcon = getComponent(this, 'loadingIcon');
+      const expandIcon = getComponent(this, 'expandIcon') || '>';
       const menusProps = {
-        props: {
-          ...$props,
-          fieldNames: this.getFieldNames(),
-          defaultFieldNames: this.defaultFieldNames,
-          activeValue: sActiveValue,
-          visible: sPopupVisible,
-          loadingIcon,
-          expandIcon,
-        },
-        on: {
-          ...listeners,
-          select: handleMenuSelect,
-          itemDoubleClick: this.handleItemDoubleClick,
-        },
+        ...$props,
+        ...this.$attrs,
+        fieldNames: this.getFieldNames(),
+        defaultFieldNames: this.defaultFieldNames,
+        activeValue: sActiveValue,
+        visible: sPopupVisible,
+        loadingIcon,
+        expandIcon,
+        ...listeners,
+        onSelect: handleMenuSelect,
+        onItemDoubleClick: this.handleItemDoubleClick,
       };
       menus = <Menus {...menusProps} />;
     } else {
       emptyMenuClassName = ` ${prefixCls}-menus-empty`;
     }
     const triggerProps = {
-      props: {
-        ...restProps,
-        disabled,
-        popupPlacement,
-        builtinPlacements,
-        popupTransitionName: transitionName,
-        action: disabled ? [] : ['click'],
-        popupVisible: disabled ? false : sPopupVisible,
-        prefixCls: `${prefixCls}-menus`,
-        popupClassName: popupClassName + emptyMenuClassName,
-      },
-      on: {
-        ...listeners,
-        popupVisibleChange: handlePopupVisibleChange,
-      },
-      ref: 'trigger',
+      ...restProps,
+      ...this.$attrs,
+      disabled,
+      popupPlacement,
+      builtinPlacements,
+      popupTransitionName: transitionName,
+      action: disabled ? [] : ['click'],
+      popupVisible: disabled ? false : sPopupVisible,
+      prefixCls: `${prefixCls}-menus`,
+      popupClassName: popupClassName + emptyMenuClassName,
+      popup: menus,
+      onPopupVisibleChange: handlePopupVisibleChange,
+      ref: this.saveTrigger,
     };
-    const children = getSlot(this, 'default');
+    const children = this.children;
     return (
       <Trigger {...triggerProps}>
         {children &&
           cloneElement(children[0], {
-            on: {
-              keydown: handleKeyDown,
-            },
-            attrs: {
-              tabIndex: disabled ? undefined : 0,
-            },
+            onKeydown: handleKeyDown,
+            tabIndex: disabled ? undefined : 0,
           })}
-        <template slot="popup">{menus}</template>
       </Trigger>
     );
   },

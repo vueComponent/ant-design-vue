@@ -59,6 +59,7 @@ export const FormItemProps = {
   rules: PropTypes.oneOfType([Array, Object]),
   autoLink: PropTypes.bool,
   required: PropTypes.bool,
+  validateFirst: PropTypes.bool,
   validateStatus: PropTypes.oneOf(['', 'success', 'warning', 'error', 'validating']),
 };
 

@@ -7,6 +7,7 @@ import warning from '../_util/warning';
 import FormItem from './FormItem';
 import { initDefaultProps, getListeners, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
+import { getParams } from './utils';
 
 export const FormProps = {
   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
@@ -45,6 +46,8 @@ export const ValidationRule = {
   transform: PropTypes.func,
   /** custom validate function (Note: callback must be called) */
   validator: PropTypes.func,
+  // 提交失败自动滚动到第一个错误字段
+  scrollToFirstError: PropTypes.bool,
 };
 
 const Form = {
@@ -96,12 +99,17 @@ const Form = {
         this.$emit('submit', e);
       }
     },
-    resetFields() {
+    resetFields(props = this.fields) {
       if (!this.model) {
         warning(false, 'FormModel', 'model is required for resetFields to work.');
         return;
       }
-      this.fields.forEach(field => {
+      const fields = props.length
+        ? typeof props === 'string'
+          ? this.fields.filter(field => props === field.prop)
+          : this.fields.filter(field => props.indexOf(field.prop) > -1)
+        : this.fields;
+      fields.forEach(field => {
         field.resetField();
       });
     },
@@ -151,16 +159,80 @@ const Form = {
         return promise;
       }
     },
-    validateField(props, cb) {
-      props = [].concat(props);
-      const fields = this.fields.filter(field => props.indexOf(field.prop) !== -1);
-      if (!fields.length) {
-        warning(false, 'FormModel', 'please pass correct props!');
-        return;
-      }
-      fields.forEach(field => {
-        field.validate('', cb);
+    scrollToField() {},
+    getFieldsValue(allFields) {
+      return allFields.map(({ prop, fieldValue }) => {
+        return { [prop]: fieldValue };
       });
+    },
+    validateFields() {
+      this.validateField(...arguments);
+    },
+    validateField(ns, opt, cb) {
+      const pending = new Promise((resolve, reject) => {
+        const params = getParams(ns, opt, cb);
+        const { names, options } = params;
+        let { callback } = params;
+        if (!callback || typeof callback === 'function') {
+          const oldCb = callback;
+          callback = (errors, values) => {
+            if (oldCb) {
+              oldCb(errors, values);
+            } else if (errors) {
+              reject({ errors, values });
+            } else {
+              resolve(values);
+            }
+          };
+        }
+        const allFields = names
+          ? this.fields.filter(field => names.indexOf(field.prop) !== -1)
+          : this.fields;
+        const fields = allFields.filter(field => {
+          const rules = field.getFilteredRule('');
+          return rules && rules.length;
+        });
+        if (!fields.length) {
+          callback(null, this.getFieldsValue(allFields));
+          return;
+        }
+        if (!('firstFields' in options)) {
+          options.firstFields = allFields.filter(field => {
+            return !!field.validateFirst;
+          });
+        }
+        let invalidFields = {};
+        let valid = true;
+        let count = 0;
+        fields.forEach(field => {
+          field.validate('', (message, field) => {
+            if (message) {
+              valid = false;
+            }
+            // TODO：
+            invalidFields = Object.assign({}, invalidFields, field);
+            if (typeof callback === 'function' && ++count === fields.length) {
+              callback(valid, invalidFields);
+            }
+          });
+        });
+      });
+      pending.catch(e => {
+        if (console.error && process.env.NODE_ENV !== 'production') {
+          console.error(e);
+        }
+        return e;
+      });
+      return pending;
+      // names = [].concat(names);
+      // const fields = this.fields.filter(field => names.indexOf(field.prop) !== -1);
+      // if (!fields.length) {
+      //   warning(false, 'FormModel', 'please pass correct props!');
+      //   return;
+      // }
+      // fields.forEach(field => {
+      //   field.validate('', cb);
+      // });
     },
   },
 

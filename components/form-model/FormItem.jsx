@@ -152,10 +152,10 @@ export default {
       }
       const model = {};
       model[this.prop] = this.fieldValue;
-      validator.validate(model, { firstFields: true }, (errors, invalidFields) => {
+      validator.validate(model, {}, errors => {
         this.validateState = errors ? 'error' : 'success';
         this.validateMessage = errors ? errors[0].message : '';
-        callback(this.validateMessage, invalidFields);
+        callback(errors);
         this.FormContext &&
           this.FormContext.$emit &&
           this.FormContext.$emit('validate', this.prop, !errors, this.validateMessage || null);

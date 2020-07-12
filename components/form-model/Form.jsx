@@ -1,4 +1,5 @@
 import { inject, provide } from 'vue';
+// import scrollIntoView from 'dom-scroll-into-view';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import { ColProps } from '../grid/Col';
@@ -99,7 +100,7 @@ const Form = {
         this.$emit('submit', e);
       }
     },
-    resetFields(props = this.fields) {
+    resetFields(props = []) {
       if (!this.model) {
         warning(false, 'FormModel', 'model is required for resetFields to work.');
         return;
@@ -123,50 +124,53 @@ const Form = {
         field.clearValidate();
       });
     },
-    validate(callback) {
-      if (!this.model) {
-        warning(false, 'FormModel', 'model is required for resetFields to work.');
-        return;
-      }
-      let promise;
-      // if no callback, return promise
-      if (typeof callback !== 'function' && window.Promise) {
-        promise = new window.Promise((resolve, reject) => {
-          callback = function(valid) {
-            valid ? resolve(valid) : reject(valid);
-          };
-        });
-      }
-      let valid = true;
-      let count = 0;
-      // 如果需要验证的fields为空，调用验证时立刻返回callback
-      if (this.fields.length === 0 && callback) {
-        callback(true);
-      }
-      let invalidFields = {};
-      this.fields.forEach(field => {
-        field.validate('', (message, field) => {
-          if (message) {
-            valid = false;
-          }
-          invalidFields = Object.assign({}, invalidFields, field);
-          if (typeof callback === 'function' && ++count === this.fields.length) {
-            callback(valid, invalidFields);
-          }
-        });
-      });
-      if (promise) {
-        return promise;
-      }
+    validate() {
+      return this.validateField(...arguments);
+      // if (!this.model) {
+      //   warning(false, 'FormModel', 'model is required for resetFields to work.');
+      //   return;
+      // }
+      // let promise;
+      // // if no callback, return promise
+      // if (typeof callback !== 'function' && window.Promise) {
+      //   promise = new window.Promise((resolve, reject) => {
+      //     callback = function(valid) {
+      //       valid ? resolve(valid) : reject(valid);
+      //     };
+      //   });
+      // }
+      // let valid = true;
+      // let count = 0;
+      // // 如果需要验证的fields为空，调用验证时立刻返回callback
+      // if (this.fields.length === 0 && callback) {
+      //   callback(true);
+      // }
+      // let invalidFields = {};
+      // this.fields.forEach(field => {
+      //   field.validate('', (message, field) => {
+      //     if (message) {
+      //       valid = false;
+      //     }
+      //     invalidFields = Object.assign({}, invalidFields, field);
+      //     if (typeof callback === 'function' && ++count === this.fields.length) {
+      //       callback(valid, invalidFields);
+      //     }
+      //   });
+      // });
+      // if (promise) {
+      //   return promise;
+      // }
     },
     scrollToField() {},
     getFieldsValue(allFields) {
-      return allFields.map(({ prop, fieldValue }) => {
-        return { [prop]: fieldValue };
+      const values = {};
+      allFields.forEach(({ prop, fieldValue }) => {
+        values[prop] = fieldValue;
       });
+      return values;
     },
     validateFields() {
-      this.validateField(...arguments);
+      return this.validateField(...arguments);
     },
     validateField(ns, opt, cb) {
       const pending = new Promise((resolve, reject) => {
@@ -201,18 +205,18 @@ const Form = {
             return !!field.validateFirst;
           });
         }
-        let invalidFields = {};
+        let fieldsErrors = {};
         let valid = true;
         let count = 0;
         fields.forEach(field => {
-          field.validate('', (message, field) => {
-            if (message) {
+          field.validate('', errors => {
+            if (errors) {
               valid = false;
+              fieldsErrors[field.prop] = errors;
             }
-            // TODO：
-            invalidFields = Object.assign({}, invalidFields, field);
-            if (typeof callback === 'function' && ++count === fields.length) {
-              callback(valid, invalidFields);
+
+            if (++count === fields.length) {
+              callback(valid ? null : fieldsErrors, this.getFieldsValue(fields));
             }
           });
         });

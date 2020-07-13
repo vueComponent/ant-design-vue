@@ -8,7 +8,10 @@ import warning from '../_util/warning';
 import FormItem from './FormItem';
 import { initDefaultProps, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import { getParams } from './utils';
+import { getNamePath, containsNamePath } from './utils/valueUtil';
+import { defaultValidateMessages } from './utils/messages';
+import { allPromiseFinish } from './utils/asyncUtil';
+import { toArray } from './utils/typeUtil';
 
 export const FormProps = {
   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
@@ -66,6 +69,7 @@ const Form = {
   created() {
     this.fields = [];
     this.form = undefined;
+    this.lastValidatePromise = null;
     provide('FormContext', this);
   },
   setup() {
@@ -100,12 +104,16 @@ const Form = {
       e.preventDefault();
       e.stopPropagation();
       this.$emit('submit', e);
-      const res = this.validate();
+      const res = this.validateFields();
       res
         .then(values => {
+          // eslint-disable-next-line no-console
+          console.log('values', values);
           this.$emit('finish', values);
         })
         .catch(errors => {
+          // eslint-disable-next-line no-console
+          console.log('errors', errors);
           this.handleFinishFailed(errors);
         });
     },
@@ -179,74 +187,98 @@ const Form = {
       // }
     },
     scrollToField() {},
-    getFieldsValue(allFields) {
+    // TODO
+    // eslint-disable-next-line no-unused-vars
+    getFieldsValue(nameList) {
       const values = {};
-      allFields.forEach(({ prop, fieldValue }) => {
+      this.fields.forEach(({ prop, fieldValue }) => {
         values[prop] = fieldValue;
       });
       return values;
     },
-    validateFields() {
-      return this.validateField(...arguments);
-    },
-    validateField(ns, opt, cb) {
-      const pending = new Promise((resolve, reject) => {
-        const params = getParams(ns, opt, cb);
-        const { names, options } = params;
-        let { callback } = params;
-        if (!callback || typeof callback === 'function') {
-          const oldCb = callback;
-          callback = (errorFields, values) => {
-            if (oldCb) {
-              oldCb(errorFields, values);
-            } else if (errorFields) {
-              reject({ errorFields, values });
-            } else {
-              resolve(values);
-            }
-          };
+    validateFields(nameList, options) {
+      if (!this.model) {
+        warning(false, 'Form', 'model is required for validateFields to work.');
+        return;
+      }
+      const provideNameList = !!nameList;
+      const namePathList = provideNameList ? toArray(nameList).map(getNamePath) : [];
+
+      // Collect result in promise list
+      const promiseList = [];
+
+      this.fields.forEach(field => {
+        // Add field if not provide `nameList`
+        if (!provideNameList) {
+          namePathList.push(field.getNamePath());
         }
-        const allFields = names
-          ? this.fields.filter(field => names.indexOf(field.prop) !== -1)
-          : this.fields;
-        const fields = allFields.filter(field => {
-          const rules = field.getFilteredRule('');
-          return rules && rules.length;
-        });
-        if (!fields.length) {
-          callback(null, this.getFieldsValue(allFields));
+
+        // Skip if without rule
+        if (!field.getRules().length) {
           return;
         }
-        if (!('firstFields' in options)) {
-          options.firstFields = allFields.filter(field => {
-            return !!field.validateFirst;
-          });
-        }
-        let fieldsErrors = {};
-        let valid = true;
-        let count = 0;
-        const promiseList = [];
-        fields.forEach(field => {
-          const promise = field.validate('', errors => {
-            if (errors) {
-              valid = false;
-              fieldsErrors[field.prop] = errors;
-            }
 
-            if (++count === fields.length) {
-              callback(valid ? null : fieldsErrors, this.getFieldsValue(fields));
-            }
+        const fieldNamePath = field.getNamePath();
+
+        // Add field validate rule in to promise list
+        if (!provideNameList || containsNamePath(namePathList, fieldNamePath)) {
+          const promise = field.validateRules({
+            validateMessages: {
+              ...defaultValidateMessages,
+              ...this.validateMessages,
+            },
+            ...options,
           });
-          promiseList.push(promise.then(() => {}));
-        });
-      });
-      pending.catch(e => {
-        if (console.error && process.env.NODE_ENV !== 'production') {
-          console.error(e);
+
+          // Wrap promise with field
+          promiseList.push(
+            promise
+              .then(() => ({ name: fieldNamePath, errors: [] }))
+              .catch(errors =>
+                Promise.reject({
+                  name: fieldNamePath,
+                  errors,
+                }),
+              ),
+          );
         }
-        return e;
       });
-      return pending;
+
+      const summaryPromise = allPromiseFinish(promiseList);
+      this.lastValidatePromise = summaryPromise;
+
+      // // Notify fields with rule that validate has finished and need update
+      // summaryPromise
+      //   .catch(results => results)
+      //   .then(results => {
+      //     const resultNamePathList = results.map(({ name }) => name);
+      //     // eslint-disable-next-line no-console
+      //     console.log(resultNamePathList);
+      //   });
+
+      const returnPromise = summaryPromise
+        .then(() => {
+          if (this.lastValidatePromise === summaryPromise) {
+            return Promise.resolve(this.getFieldsValue(namePathList));
+          }
+          return Promise.reject([]);
+        })
+        .catch(results => {
+          const errorList = results.filter(result => result && result.errors.length);
+          return Promise.reject({
+            values: this.getFieldsValue(namePathList),
+            errorFields: errorList,
+            outOfDate: this.lastValidatePromise !== summaryPromise,
+          });
+        });
+
+      // Do not throw in console
+      returnPromise.catch(e => e);
+
+      return returnPromise;
+    },
+    validateField() {
+      return this.validateFields(...arguments);
     },
   },
 

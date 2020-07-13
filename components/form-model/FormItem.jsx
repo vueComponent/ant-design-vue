@@ -1,5 +1,4 @@
 import { inject, provide, Transition } from 'vue';
-import AsyncValidator from 'async-validator';
 import cloneDeep from 'lodash/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
@@ -22,8 +21,9 @@ import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
-import { finishOnAllFailed, finishOnFirstFailed, getNamePath } from './utils';
-import { warning } from '../vc-util/warning';
+import { validateRules } from './utils/validateUtil';
+import { getNamePath } from './utils/valueUtil';
+import { toArray } from './utils/typeUtil';
 
 const iconMap = {
   success: CheckCircleFilled,
@@ -100,6 +100,7 @@ export default {
       validateDisabled: false,
       validator: {},
       helpShow: false,
+      errors: [],
     };
   },
 
@@ -155,188 +156,51 @@ export default {
     removeField && removeField(this);
   },
   methods: {
-    async validateRule(name, value, rule) {
-      const cloneRule = { ...rule };
-      // We should special handle array validate
-      let subRuleField = null;
-      if (cloneRule && cloneRule.type === 'array' && cloneRule.defaultField) {
-        subRuleField = cloneRule.defaultField;
-        delete cloneRule.defaultField;
-      }
-      let result = [];
-      const validator = new AsyncValidator({
-        [name]: [cloneRule],
-      });
-      if (this.FormContext && this.FormContext.validateMessages) {
-        validator.messages(this.FormContext.validateMessages);
-      }
-      try {
-        await validator.validate(
-          { [this.prop]: this.fieldValue },
-          { firstFields: !!this.validateFirst },
-        );
-      } catch (errObj) {
-        if (errObj.errors) {
-          result = errObj.errors.map(({ message }) => message);
-        } else {
-          console.error(errObj);
-        }
-      }
-      if (!result.length && subRuleField) {
-        const subResults = await Promise.all(
-          value.map((subValue, i) => this.validateRule(`${name}.${i}`, subValue, subRuleField)),
-        );
+    getNamePath() {
+      const { prop } = this.$props;
+      const { prefixName = [] } = this.FormContext;
 
-        return subResults.reduce((prev, errors) => [...prev, ...errors], []);
-      }
-      return result;
+      return prop !== undefined ? [...prefixName, ...getNamePath(prop)] : [];
     },
-    validateRules(namePath, value, rules, validateFirst) {
-      const name = namePath.join('.');
+    validateRules(options) {
+      const { validateFirst = false, messageVariables } = this.$props;
+      const { triggerName } = options || {};
+      const namePath = this.getNamePath();
 
-      // Fill rule with context
-      const filledRules = rules.map(currentRule => {
-        const originValidatorFunc = currentRule.validator;
-
-        if (!originValidatorFunc) {
-          return currentRule;
-        }
-        return {
-          ...currentRule,
-          validator(rule, val, callback) {
-            let hasPromise = false;
-
-            // Wrap callback only accept when promise not provided
-            const wrappedCallback = (...args) => {
-              // Wait a tick to make sure return type is a promise
-              Promise.resolve().then(() => {
-                warning(
-                  !hasPromise,
-                  'Your validator function has already return a promise. `callback` will be ignored.',
-                );
-
-                if (!hasPromise) {
-                  callback(...args);
-                }
-              });
-            };
-
-            // Get promise
-            const promise = originValidatorFunc(rule, val, wrappedCallback);
-            hasPromise =
-              promise && typeof promise.then === 'function' && typeof promise.catch === 'function';
-
-            /**
-             * 1. Use promise as the first priority.
-             * 2. If promise not exist, use callback with warning instead
-             */
-            warning(hasPromise, '`callback` is deprecated. Please return a promise instead.');
-
-            if (hasPromise) {
-              promise
-                .then(() => {
-                  callback();
-                })
-                .catch(err => {
-                  callback(err);
-                });
-            }
-          },
-        };
-      });
-
-      let summaryPromise;
-
-      if (validateFirst === true) {
-        // >>>>> Validate by serialization
-        summaryPromise = new Promise(async resolve => {
-          /* eslint-disable no-await-in-loop */
-          for (let i = 0; i < filledRules.length; i += 1) {
-            const errors = await this.validateRule(name, value, filledRules[i]);
-            if (errors.length) {
-              resolve(errors);
-              return;
-            }
+      let filteredRules = this.getRules();
+      if (triggerName) {
+        filteredRules = filteredRules.filter(rule => {
+          const { validateTrigger } = rule;
+          if (!validateTrigger) {
+            return true;
           }
-          /* eslint-enable */
-
-          resolve([]);
-        });
-      } else {
-        // >>>>> Validate by parallel
-        const rulePromises = filledRules.map(rule => this.validateRule(name, value, rule));
-
-        summaryPromise = (validateFirst
-          ? finishOnFirstFailed(rulePromises)
-          : finishOnAllFailed(rulePromises)
-        ).then(errors => {
-          if (!errors.length) {
-            return [];
-          }
-
-          return Promise.reject(errors);
+          const triggerList = toArray(validateTrigger);
+          return triggerList.includes(triggerName);
         });
       }
 
-      // Internal catch error to avoid console error log.
-      summaryPromise.catch(e => e);
-
-      return summaryPromise;
-    },
-    validate(trigger) {
-      this.validateDisabled = false;
-      const rules = this.getFilteredRule(trigger);
-      if (!rules || rules.length === 0) {
-        return;
-      }
+      const promise = validateRules(
+        namePath,
+        this.fieldValue,
+        filteredRules,
+        options,
+        validateFirst,
+        messageVariables,
+      );
       this.validateState = 'validating';
-      if (rules && rules.length > 0) {
-        rules.forEach(rule => {
-          delete rule.trigger;
-        });
-      }
-      // descriptor[this.prop] = rules;
-      // const validator = new AsyncValidator(descriptor);
-      // if (this.FormContext && this.FormContext.validateMessages) {
-      //   validator.messages(this.FormContext.validateMessages);
-      // }
-      const fieldNamePath = getNamePath(this.prop);
-      // const promiseList = [];
-      const promise = this.validateRules(fieldNamePath, this.fieldValue, rules, this.validateFirst);
+      this.errors = [];
+
       promise
-        .then(res => {
-          // eslint-disable-next-line no-console
-          console.log(res);
-          this.validateState = 'success';
-          this.validateMessage = '';
-          return { name: fieldNamePath, errors: [] };
-        })
-        .catch(errors => {
-          this.validateState = 'error';
-          this.validateMessage = errors;
-          Promise.reject({
-            name: fieldNamePath,
-            errors,
-          });
+        .catch(e => e)
+        .then((errors = []) => {
+          if (this.validateState === 'validating') {
+            this.validateState = errors.length ? 'error' : 'success';
+            this.validateMessage = errors[0];
+            this.errors = errors;
+          }
         });
+
       return promise;
-      // // Wrap promise with field
-      // promiseList.push(
-      //   promise
-      //     .then(() => ({ name: fieldNamePath, errors: [] }))
-      //     .catch(errors =>
-      //       Promise.reject({
-      //         name: fieldNamePath,
-      //         errors,
-      //       }),
-      //     ),
-      // );
-      // this.validateState = result.length ? 'error' : 'success';
-      // this.validateMessage = result.length ? result[0] : '';
-      // this.FormContext &&
-      //   this.FormContext.$emit &&
-      //   this.FormContext.$emit('validate', this.prop, !result.length, this.validateMessage || null);
-      // return result;
     },
     getRules() {
       let formRules = this.FormContext.rules;
@@ -361,14 +225,14 @@ export default {
         .map(rule => ({ ...rule }));
     },
     onFieldBlur() {
-      this.validate('blur');
+      this.validateRules({ triggerName: 'blur' });
     },
     onFieldChange() {
       if (this.validateDisabled) {
         this.validateDisabled = false;
         return;
       }
-      this.validate('change');
+      this.validateRules({ triggerName: 'change' });
     },
     clearValidate() {
       this.validateState = '';

@@ -1,7 +1,8 @@
 import VcSelect, { SelectProps } from '../select';
-import { getOptionProps, filterEmpty } from '../_util/props-util';
+import { getOptionProps, getSlot } from '../_util/props-util';
 
 export default {
+  inheritAttrs: false,
   props: {
     ...SelectProps,
   },
@@ -13,6 +14,6 @@ export default {
       size: 'small',
       ...this.$attrs,
     };
-    return <VcSelect {...selelctProps}>{filterEmpty(this.$slots.default?.())}</VcSelect>;
+    return <VcSelect {...selelctProps}>{getSlot(this)}</VcSelect>;
   },
 };

@@ -363,10 +363,7 @@ export default {
       const hasNext = this.hasNext();
 
       return (
-        <ul
-          {...this.$attrs}
-          class={classNames(`${prefixCls} ${prefixCls}-simple`, this.$attrs.class)}
-        >
+        <ul class={classNames(`${prefixCls} ${prefixCls}-simple`, this.$attrs.class)}>
           <li
             title={this.showTitle ? locale.prev_page : null}
             onClick={this.prev}
@@ -583,15 +580,13 @@ export default {
     const prevDisabled = !this.hasPrev() || !allPages;
     const nextDisabled = !this.hasNext() || !allPages;
     const buildOptionText = this.buildOptionText || this.$slots.buildOptionText?.();
+    const { class: _cls, style } = this.$attrs;
     return (
       <ul
         unselectable="unselectable"
         ref="paginationNode"
-        {...this.$attrs}
-        class={classNames(
-          { [`${prefixCls}`]: true, [`${prefixCls}-disabled`]: disabled },
-          this.$attrs.class,
-        )}
+        style={style}
+        class={classNames({ [`${prefixCls}`]: true, [`${prefixCls}-disabled`]: disabled }, _cls)}
       >
         {totalText}
         <li

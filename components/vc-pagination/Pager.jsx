@@ -25,6 +25,7 @@ export default {
     },
   },
   render() {
+    const { class: _cls, style } = this.$attrs;
     const props = this.$props;
     const prefixCls = `${props.rootPrefixCls}-item`;
     const cls = classNames(
@@ -34,7 +35,7 @@ export default {
         [`${prefixCls}-active`]: props.active,
         [`${prefixCls}-disabled`]: !props.page,
       },
-      this.$attrs.class,
+      _cls,
     );
 
     return (
@@ -43,8 +44,8 @@ export default {
         onKeypress={this.handleKeyPress}
         title={this.showTitle ? this.page : null}
         tabIndex="0"
-        {...this.$attrs}
         class={cls}
+        style={style}
       >
         {this.itemRender(this.page, 'page', <a>{this.page}</a>)}
       </li>

@@ -45,10 +45,6 @@ export const PaginationConfig = () => ({
 export default {
   name: 'APagination',
   inheritAttrs: false,
-  model: {
-    prop: 'current',
-    event: 'change.current',
-  },
   props: {
     ...PaginationProps(),
   },

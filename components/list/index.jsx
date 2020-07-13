@@ -163,7 +163,7 @@ const List = {
     } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
-
+    const { class: _cls, ...restAttrs } = $attrs;
     const loadMore = getComponent(this, 'loadMore');
     const footer = getComponent(this, 'footer');
     const header = getComponent(this, 'header');
@@ -209,6 +209,7 @@ const List = {
       pageSize: paginationSize,
       ...(pagination || {}),
     };
+    classString;
     const largestPage = Math.ceil(paginationProps.total / paginationProps.pageSize);
     if (paginationProps.current > largestPage) {
       paginationProps.current = largestPage;
@@ -262,7 +263,7 @@ const List = {
     const paginationPosition = paginationProps.position || 'bottom';
 
     return (
-      <div class={classString} {...$attrs}>
+      <div class={classString} {...restAttrs}>
         {(paginationPosition === 'top' || paginationPosition === 'both') && paginationContent}
         {header && <div class={`${prefixCls}-header`}>{header}</div>}
         <Spin {...loadingProp}>

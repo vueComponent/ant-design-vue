@@ -23,6 +23,7 @@ export const ListItemMetaProps = {
 
 export const Meta = (props, { slots, attrs }) => {
   const configProvider = inject('configProvider', ConfigConsumerProps);
+  const { style, class: _cls } = attrs;
   const getPrefixCls = configProvider.getPrefixCls;
   const { prefixCls: customizePrefixCls } = props;
   const prefixCls = getPrefixCls('list', customizePrefixCls);
@@ -36,7 +37,7 @@ export const Meta = (props, { slots, attrs }) => {
     </div>
   );
   return (
-    <div {...attrs} class={`${prefixCls}-item-meta`}>
+    <div class={`${prefixCls}-item-meta`} style={style} class={_cls}>
       {avatar && <div class={`${prefixCls}-item-meta-avatar`}>{avatar}</div>}
       {(title || description) && content}
     </div>

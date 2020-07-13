@@ -6,7 +6,7 @@ import { ColProps } from '../grid/Col';
 import isRegExp from 'lodash/isRegExp';
 import warning from '../_util/warning';
 import FormItem from './FormItem';
-import { initDefaultProps, getListeners, getSlot } from '../_util/props-util';
+import { initDefaultProps, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import { getParams } from './utils';
 
@@ -22,6 +22,11 @@ export const FormProps = {
   rules: PropTypes.object,
   validateMessages: PropTypes.any,
   validateOnRuleChange: PropTypes.bool,
+  // 提交失败自动滚动到第一个错误字段
+  scrollToFirstError: PropTypes.bool,
+  onFinish: PropTypes.func,
+  onFinishFailed: PropTypes.func,
+  name: PropTypes.name,
 };
 
 export const ValidationRule = {
@@ -47,8 +52,6 @@ export const ValidationRule = {
   transform: PropTypes.func,
   /** custom validate function (Note: callback must be called) */
   validator: PropTypes.func,
-  // 提交失败自动滚动到第一个错误字段
-  scrollToFirstError: PropTypes.bool,
 };
 
 const Form = {
@@ -93,12 +96,18 @@ const Form = {
         this.fields.splice(this.fields.indexOf(field), 1);
       }
     },
-    onSubmit(e) {
-      if (!getListeners(this).submit) {
-        e.preventDefault();
-      } else {
-        this.$emit('submit', e);
-      }
+    handleSubmit(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.$emit('submit', e);
+      const res = this.validate();
+      res
+        .then(values => {
+          this.$emit('finish', values);
+        })
+        .catch(errors => {
+          this.handleFinishFailed(errors);
+        });
     },
     resetFields(props = []) {
       if (!this.model) {
@@ -124,8 +133,16 @@ const Form = {
         field.clearValidate();
       });
     },
+    handleFinishFailed(errorInfo) {
+      const { scrollToFirstError } = this;
+      this.$emit('finishFailed', errorInfo);
+      if (scrollToFirstError && errorInfo.errorFields.length) {
+        this.scrollToField(errorInfo.errorFields[0].name);
+      }
+    },
     validate() {
       return this.validateField(...arguments);
+
       // if (!this.model) {
       //   warning(false, 'FormModel', 'model is required for resetFields to work.');
       //   return;
@@ -179,11 +196,11 @@ const Form = {
         let { callback } = params;
         if (!callback || typeof callback === 'function') {
           const oldCb = callback;
-          callback = (errors, values) => {
+          callback = (errorFields, values) => {
             if (oldCb) {
-              oldCb(errors, values);
-            } else if (errors) {
-              reject({ errors, values });
+              oldCb(errorFields, values);
+            } else if (errorFields) {
+              reject({ errorFields, values });
             } else {
               resolve(values);
             }
@@ -208,8 +225,9 @@ const Form = {
         let fieldsErrors = {};
         let valid = true;
         let count = 0;
+        const promiseList = [];
         fields.forEach(field => {
-          field.validate('', errors => {
+          const promise = field.validate('', errors => {
             if (errors) {
               valid = false;
               fieldsErrors[field.prop] = errors;
@@ -219,6 +237,7 @@ const Form = {
               callback(valid ? null : fieldsErrors, this.getFieldsValue(fields));
             }
           });
+          promiseList.push(promise.then(() => {}));
         });
       });
       pending.catch(e => {
@@ -228,20 +247,11 @@ const Form = {
         return e;
       });
       return pending;
-      // names = [].concat(names);
-      // const fields = this.fields.filter(field => names.indexOf(field.prop) !== -1);
-      // if (!fields.length) {
-      //   warning(false, 'FormModel', 'please pass correct props!');
-      //   return;
-      // }
-      // fields.forEach(field => {
-      //   field.validate('', cb);
-      // });
     },
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, hideRequiredMark, layout, onSubmit } = this;
+    const { prefixCls: customizePrefixCls, hideRequiredMark, layout, handleSubmit } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('form', customizePrefixCls);
     const { class: className, onSubmit: originSubmit, ...restProps } = this.$attrs;
@@ -253,7 +263,7 @@ const Form = {
       [`${prefixCls}-hide-required-mark`]: hideRequiredMark,
     });
     return (
-      <form onSubmit={onSubmit} class={formClassName} {...restProps}>
+      <form onSubmit={handleSubmit} class={formClassName} {...restProps}>
         {getSlot(this)}
       </form>
     );

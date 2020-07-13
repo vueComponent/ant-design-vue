@@ -102,3 +102,42 @@ export function getScrollableContainer(n) {
   }
   return nodeName === 'body' ? node.ownerDocument : node;
 }
+
+export async function finishOnAllFailed(rulePromises) {
+  return Promise.all(rulePromises).then(errorsList => {
+    const errors = [].concat(...errorsList);
+
+    return errors;
+  });
+}
+
+export async function finishOnFirstFailed(rulePromises) {
+  let count = 0;
+
+  return new Promise(resolve => {
+    rulePromises.forEach(promise => {
+      promise.then(errors => {
+        if (errors.length) {
+          resolve(errors);
+        }
+
+        count += 1;
+        if (count === rulePromises.length) {
+          resolve([]);
+        }
+      });
+    });
+  });
+}
+
+export function toArray(value) {
+  if (value === undefined || value === null) {
+    return [];
+  }
+
+  return Array.isArray(value) ? value : [value];
+}
+
+export function getNamePath(path) {
+  return toArray(path);
+}

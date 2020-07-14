@@ -1,5 +1,4 @@
 import { inject, provide } from 'vue';
-// import scrollIntoView from 'dom-scroll-into-view';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import { ColProps } from '../grid/Col';
@@ -12,6 +11,8 @@ import { getNamePath, containsNamePath } from './utils/valueUtil';
 import { defaultValidateMessages } from './utils/messages';
 import { allPromiseFinish } from './utils/asyncUtil';
 import { toArray } from './utils/typeUtil';
+import isEqual from 'lodash/isEqual';
+import scrollIntoView from 'scroll-into-view-if-needed';
 
 export const FormProps = {
   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
@@ -57,6 +58,10 @@ export const ValidationRule = {
   validator: PropTypes.func,
 };
 
+function isEqualName(name1, name2) {
+  return isEqual(toArray(name1), toArray(name2));
+}
+
 const Form = {
   name: 'AFormModel',
   inheritAttrs: false,
@@ -80,7 +85,7 @@ const Form = {
   watch: {
     rules() {
       if (this.validateOnRuleChange) {
-        this.validate(() => {});
+        this.validateFields();
       }
     },
   },
@@ -96,7 +101,7 @@ const Form = {
       }
     },
     removeField(field) {
-      if (field.prop) {
+      if (field.fieldName) {
         this.fields.splice(this.fields.indexOf(field), 1);
       }
     },
@@ -107,37 +112,34 @@ const Form = {
       const res = this.validateFields();
       res
         .then(values => {
-          // eslint-disable-next-line no-console
-          console.log('values', values);
           this.$emit('finish', values);
         })
         .catch(errors => {
-          // eslint-disable-next-line no-console
-          console.log('errors', errors);
           this.handleFinishFailed(errors);
         });
     },
-    resetFields(props = []) {
+    getFieldsByNameList(nameList) {
+      const provideNameList = !!nameList;
+      const namePathList = provideNameList ? toArray(nameList).map(getNamePath) : [];
+      if (!provideNameList) {
+        return this.fields;
+      } else {
+        return this.fields.filter(
+          field => namePathList.findIndex(namePath => isEqualName(namePath, field.fieldName)) > -1,
+        );
+      }
+    },
+    resetFields(name) {
       if (!this.model) {
-        warning(false, 'FormModel', 'model is required for resetFields to work.');
+        warning(false, 'Form', 'model is required for resetFields to work.');
         return;
       }
-      const fields = props.length
-        ? typeof props === 'string'
-          ? this.fields.filter(field => props === field.prop)
-          : this.fields.filter(field => props.indexOf(field.prop) > -1)
-        : this.fields;
-      fields.forEach(field => {
+      this.getFieldsByNameList(name).forEach(field => {
         field.resetField();
       });
     },
-    clearValidate(props = []) {
-      const fields = props.length
-        ? typeof props === 'string'
-          ? this.fields.filter(field => props === field.prop)
-          : this.fields.filter(field => props.indexOf(field.prop) > -1)
-        : this.fields;
-      fields.forEach(field => {
+    clearValidate(name) {
+      this.getFieldsByNameList(name).forEach(field => {
         field.clearValidate();
       });
     },
@@ -150,51 +152,35 @@ const Form = {
     },
     validate() {
       return this.validateField(...arguments);
-
-      // if (!this.model) {
-      //   warning(false, 'FormModel', 'model is required for resetFields to work.');
-      //   return;
-      // }
-      // let promise;
-      // // if no callback, return promise
-      // if (typeof callback !== 'function' && window.Promise) {
-      //   promise = new window.Promise((resolve, reject) => {
-      //     callback = function(valid) {
-      //       valid ? resolve(valid) : reject(valid);
-      //     };
-      //   });
-      // }
-      // let valid = true;
-      // let count = 0;
-      // // 如果需要验证的fields为空，调用验证时立刻返回callback
-      // if (this.fields.length === 0 && callback) {
-      //   callback(true);
-      // }
-      // let invalidFields = {};
-      // this.fields.forEach(field => {
-      //   field.validate('', (message, field) => {
-      //     if (message) {
-      //       valid = false;
-      //     }
-      //     invalidFields = Object.assign({}, invalidFields, field);
-      //     if (typeof callback === 'function' && ++count === this.fields.length) {
-      //       callback(valid, invalidFields);
-      //     }
-      //   });
-      // });
-      // if (promise) {
-      //   return promise;
-      // }
     },
-    scrollToField() {},
-    // TODO
+    scrollToField(name, options = {}) {
+      const fields = this.getFieldsByNameList([name]);
+      if (fields.length) {
+        const fieldId = fields[0].fieldId;
+        const node = fieldId ? document.getElementById(fieldId) : null;
+
+        if (node) {
+          scrollIntoView(node, {
+            scrollMode: 'if-needed',
+            block: 'nearest',
+            ...options,
+          });
+        }
+      }
+    },
     // eslint-disable-next-line no-unused-vars
-    getFieldsValue(nameList) {
+    getFieldsValue(nameList = true) {
       const values = {};
-      this.fields.forEach(({ prop, fieldValue }) => {
-        values[prop] = fieldValue;
+      this.fields.forEach(({ fieldName, fieldValue }) => {
+        values[fieldName] = fieldValue;
       });
-      return values;
+      if (nameList === true) {
+        return values;
+      } else {
+        const res = {};
+        toArray(nameList).forEach(namePath => (res[namePath] = values[namePath]));
+        return res;
+      }
     },
     validateFields(nameList, options) {
       if (!this.model) {
@@ -246,15 +232,6 @@ const Form = {
 
       const summaryPromise = allPromiseFinish(promiseList);
       this.lastValidatePromise = summaryPromise;
-
-      // // Notify fields with rule that validate has finished and need update
-      // summaryPromise
-      //   .catch(results => results)
-      //   .then(results => {
-      //     const resultNamePathList = results.map(({ name }) => name);
-      //     // eslint-disable-next-line no-console
-      //     console.log(resultNamePathList);
-      //   });
 
       const returnPromise = summaryPromise
         .then(() => {

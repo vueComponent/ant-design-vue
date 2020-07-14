@@ -199,6 +199,7 @@
     "omit.js": "^1.0.0",
     "raf": "^3.4.0",
     "resize-observer-polyfill": "^1.5.1",
+    "scroll-into-view-if-needed": "^2.2.25",
     "shallow-equal": "^1.0.0",
     "shallowequal": "^1.0.2",
     "vue-ref": "^2.0.0",

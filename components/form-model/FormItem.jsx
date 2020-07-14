@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import getTransitionProps from '../_util/getTransitionProps';
 import Row from '../grid/Row';
 import Col, { ColProps } from '../grid/Col';
-import {
+import hasProp, {
   initDefaultProps,
   findDOMNode,
   getComponent,
@@ -24,6 +24,7 @@ import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import { validateRules } from './utils/validateUtil';
 import { getNamePath } from './utils/valueUtil';
 import { toArray } from './utils/typeUtil';
+import { warning } from '../vc-util/warning';
 
 const iconMap = {
   success: CheckCircleFilled,
@@ -32,29 +33,35 @@ const iconMap = {
   validating: LoadingOutlined,
 };
 
-function getPropByPath(obj, path, strict) {
+function getPropByPath(obj, namePathList, strict) {
   let tempObj = obj;
-  path = path.replace(/\[(\w+)\]/g, '.$1');
-  path = path.replace(/^\./, '');
 
-  let keyArr = path.split('.');
+  const keyArr = namePathList;
   let i = 0;
-  for (let len = keyArr.length; i < len - 1; ++i) {
-    if (!tempObj && !strict) break;
-    let key = keyArr[i];
-    if (key in tempObj) {
-      tempObj = tempObj[key];
-    } else {
-      if (strict) {
-        throw new Error('please transfer a valid prop path to form item!');
+  try {
+    for (let len = keyArr.length; i < len - 1; ++i) {
+      if (!tempObj && !strict) break;
+      let key = keyArr[i];
+      if (key in tempObj) {
+        tempObj = tempObj[key];
+      } else {
+        if (strict) {
+          throw Error('please transfer a valid name path to form item!');
+        }
+        break;
       }
-      break;
     }
+    if (strict && !tempObj) {
+      throw Error('please transfer a valid name path to form item!');
+    }
+  } catch (error) {
+    console.error('please transfer a valid name path to form item!');
   }
+
   return {
     o: tempObj,
     k: keyArr[i],
-    v: tempObj ? tempObj[keyArr[i]] : null,
+    v: tempObj ? tempObj[keyArr[i]] : undefined,
   };
 }
 export const FormItemProps = {
@@ -69,7 +76,8 @@ export const FormItemProps = {
   hasFeedback: PropTypes.bool,
   colon: PropTypes.bool,
   labelAlign: PropTypes.oneOf(['left', 'right']),
-  prop: PropTypes.string,
+  prop: PropTypes.oneOfType([Array, String, Number]),
+  name: PropTypes.oneOfType([Array, String, Number]),
   rules: PropTypes.oneOfType([Array, Object]),
   autoLink: PropTypes.bool,
   required: PropTypes.bool,
@@ -94,6 +102,7 @@ export default {
     };
   },
   data() {
+    warning(hasProp(this, 'prop'), `\`prop\` is deprecated. Please use \`name\` instead.`);
     return {
       validateState: this.validateStatus,
       validateMessage: '',
@@ -105,21 +114,29 @@ export default {
   },
 
   computed: {
+    fieldName() {
+      return this.name || this.prop;
+    },
+    namePath() {
+      return getNamePath(this.fieldName);
+    },
     fieldId() {
-      return this.id || (this.FormContext.name && this.prop)
-        ? `${this.FormContext.name}_${this.prop}`
-        : undefined;
+      if (this.id) {
+        return this.id;
+      } else if (!this.namePath.length) {
+        return undefined;
+      } else {
+        const formName = this.FormContext.name;
+        const mergedId = this.namePath.join('_');
+        return formName ? `${formName}_${mergedId}` : mergedId;
+      }
     },
     fieldValue() {
       const model = this.FormContext.model;
-      if (!model || !this.prop) {
+      if (!model || !this.fieldName) {
         return;
       }
-      let path = this.prop;
-      if (path.indexOf(':') !== -1) {
-        path = path.replace(/:/g, '.');
-      }
-      return getPropByPath(model, path, true).v;
+      return getPropByPath(model, this.namePath, true).v;
     },
     isRequired() {
       let rules = this.getRules();
@@ -145,7 +162,7 @@ export default {
     provide('isFormItemChildren', true);
   },
   mounted() {
-    if (this.prop) {
+    if (this.fieldName) {
       const { addField } = this.FormContext;
       addField && addField(this);
       this.initialValue = cloneDeep(this.fieldValue);
@@ -157,10 +174,10 @@ export default {
   },
   methods: {
     getNamePath() {
-      const { prop } = this.$props;
+      const { fieldName } = this;
       const { prefixName = [] } = this.FormContext;
 
-      return prop !== undefined ? [...prefixName, ...getNamePath(prop)] : [];
+      return fieldName !== undefined ? [...prefixName, ...this.namePath] : [];
     },
     validateRules(options) {
       const { validateFirst = false, messageVariables } = this.$props;
@@ -170,15 +187,17 @@ export default {
       let filteredRules = this.getRules();
       if (triggerName) {
         filteredRules = filteredRules.filter(rule => {
-          const { validateTrigger } = rule;
-          if (!validateTrigger) {
+          const { trigger } = rule;
+          if (!trigger) {
             return true;
           }
-          const triggerList = toArray(validateTrigger);
+          const triggerList = toArray(trigger);
           return triggerList.includes(triggerName);
         });
       }
-
+      if (!filteredRules.length) {
+        return Promise.resolve();
+      }
       const promise = validateRules(
         namePath,
         this.fieldValue,
@@ -207,8 +226,8 @@ export default {
       const selfRules = this.rules;
       const requiredRule =
         this.required !== undefined ? { required: !!this.required, trigger: 'change' } : [];
-      const prop = getPropByPath(formRules, this.prop || '');
-      formRules = formRules ? prop.o[this.prop || ''] || prop.v : [];
+      const prop = getPropByPath(formRules, this.namePath);
+      formRules = formRules ? prop.o[prop.k] || prop.v : [];
       return [].concat(selfRules || formRules || []).concat(requiredRule);
     },
     getFilteredRule(trigger) {
@@ -242,13 +261,9 @@ export default {
     resetField() {
       this.validateState = '';
       this.validateMessage = '';
-      let model = this.FormContext.model || {};
-      let value = this.fieldValue;
-      let path = this.prop;
-      if (path.indexOf(':') !== -1) {
-        path = path.replace(/:/, '.');
-      }
-      let prop = getPropByPath(model, path, true);
+      const model = this.FormContext.model || {};
+      const value = this.fieldValue;
+      const prop = getPropByPath(model, this.namePath, true);
       this.validateDisabled = true;
       if (Array.isArray(value)) {
         prop.o[prop.k] = [].concat(this.initialValue);
@@ -456,7 +471,7 @@ export default {
     const { autoLink } = getOptionProps(this);
     const children = getSlot(this);
     let firstChildren = children[0];
-    if (this.prop && autoLink && isValidElement(firstChildren)) {
+    if (this.fieldName && autoLink && isValidElement(firstChildren)) {
       const originalEvents = getEvents(firstChildren);
       const originalBlur = originalEvents.onBlur;
       const originalChange = originalEvents.onChange;

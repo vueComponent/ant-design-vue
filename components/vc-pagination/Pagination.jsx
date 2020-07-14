@@ -1,10 +1,11 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import { hasProp, getComponentFromProp, getOptionProps } from '../_util/props-util';
+import { hasProp, getOptionProps, getComponent } from '../_util/props-util';
 import Pager from './Pager';
 import Options from './Options';
 import LOCALE from './locale/zh_CN';
 import KEYCODE from './KeyCode';
+import classNames from 'classnames';
 
 function noop() {}
 
@@ -28,6 +29,7 @@ function calculatePage(p, state, props) {
 export default {
   name: 'Pagination',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   model: {
     prop: 'current',
     event: 'change.current',
@@ -151,7 +153,7 @@ export default {
     },
     getItemIcon(icon) {
       const { prefixCls } = this.$props;
-      const iconNode = getComponentFromProp(this, icon, this.$props) || (
+      const iconNode = getComponent(this, icon, this.$props) || (
         <a class={`${prefixCls}-item-link`} />
       );
       return iconNode;
@@ -359,8 +361,9 @@ export default {
       }
       const hasPrev = this.hasPrev();
       const hasNext = this.hasNext();
+
       return (
-        <ul class={`${prefixCls} ${prefixCls}-simple`}>
+        <ul class={classNames(`${prefixCls} ${prefixCls}-simple`, this.$attrs.class)}>
           <li
             title={this.showTitle ? locale.prev_page : null}
             onClick={this.prev}
@@ -409,16 +412,12 @@ export default {
     }
     if (allPages <= 5 + pageBufferSize * 2) {
       const pagerProps = {
-        props: {
-          locale,
-          rootPrefixCls: prefixCls,
-          showTitle: props.showTitle,
-          itemRender: props.itemRender,
-        },
-        on: {
-          click: this.handleChange,
-          keypress: this.runIfEnter,
-        },
+        locale,
+        rootPrefixCls: prefixCls,
+        showTitle: props.showTitle,
+        itemRender: props.itemRender,
+        onClick: this.handleChange,
+        onKeypress: this.runIfEnter,
       };
       if (!allPages) {
         pagerList.push(
@@ -580,12 +579,14 @@ export default {
     }
     const prevDisabled = !this.hasPrev() || !allPages;
     const nextDisabled = !this.hasNext() || !allPages;
-    const buildOptionText = this.buildOptionText || this.$scopedSlots.buildOptionText;
+    const buildOptionText = this.buildOptionText || this.$slots.buildOptionText?.();
+    const { class: _cls, style } = this.$attrs;
     return (
       <ul
-        class={{ [`${prefixCls}`]: true, [`${prefixCls}-disabled`]: disabled }}
         unselectable="unselectable"
         ref="paginationNode"
+        style={style}
+        class={classNames({ [`${prefixCls}`]: true, [`${prefixCls}-disabled`]: disabled }, _cls)}
       >
         {totalText}
         <li

@@ -41,6 +41,6 @@ export default {
     const { $slots } = this;
     const children = this.children || $slots.default;
     const { antLocale } = this.localeData;
-    return children(this.getLocale(), this.getLocaleCode(), antLocale);
+    return children?.(this.getLocale(), this.getLocaleCode(), antLocale);
   },
 };

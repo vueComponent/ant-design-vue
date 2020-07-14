@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/form-model/demo/custom-validation';
+import demo from '../antdv-demo/docs/pagination/demo/custom-changer';
 
 export default {
   components: {

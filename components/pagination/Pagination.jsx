@@ -113,7 +113,7 @@ export default {
         ...this.getIconsProps(prefixCls),
         selectComponentClass: isSmall ? MiniSelect : VcSelect,
         locale: { ...contextLocale, ...customLocale },
-        buildOptionText: buildOptionText || this.$slots.buildOptionText?.(),
+        buildOptionText: buildOptionText || this.$slots.buildOptionText,
         ...this.$attrs,
         class: classNames({ mini: isSmall }, this.$attrs.class),
       };
@@ -126,7 +126,7 @@ export default {
       <LocaleReceiver
         componentName="Pagination"
         defaultLocale={enUS}
-        slots={{ default: this.renderPagination }}
+        children={this.renderPagination}
       ></LocaleReceiver>
     );
   },

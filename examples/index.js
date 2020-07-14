@@ -22,6 +22,7 @@ import {
   Switch,
   Checkbox,
   Cascader,
+  Pagination,
   notification,
   message,
 } from 'ant-design-vue';
@@ -44,6 +45,7 @@ app
   .component('api', { ...basic })
   .component('CN', { ...basic })
   .component('US', { ...basic })
+  .use(Pagination)
   .use(Select)
   .use(Spin)
   .use(Upload)

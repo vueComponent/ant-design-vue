@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import { hasProp, getOptionProps, getComponent } from '../_util/props-util';
+import { hasProp, getOptionProps, getComponent, splitAttrs } from '../_util/props-util';
 import Pager from './Pager';
 import Options from './Options';
 import LOCALE from './locale/zh_CN';
@@ -30,10 +30,6 @@ export default {
   name: 'Pagination',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  model: {
-    prop: 'current',
-    event: 'change.current',
-  },
   props: {
     disabled: PropTypes.bool,
     prefixCls: PropTypes.string.def('rc-pagination'),
@@ -241,7 +237,7 @@ export default {
       this.$emit('update:pageSize', size);
       this.$emit('showSizeChange', current, size);
       if (current !== preCurrent) {
-        this.$emit('change.current', current, size);
+        this.$emit('update:current', current);
       }
     },
     handleChange(p) {
@@ -262,7 +258,7 @@ export default {
         }
         // this.$emit('input', page)
         this.$emit('change', page, this.statePageSize);
-        this.$emit('change.current', page, this.statePageSize);
+        this.$emit('update:current', page);
         return page;
       }
       return this.stateCurrent;
@@ -314,7 +310,7 @@ export default {
   },
   render() {
     const { prefixCls, disabled } = this.$props;
-
+    const { class: className, ...restAttrs } = splitAttrs(this.$attrs).extraAttrs;
     // When hideOnSinglePage is true and there is only 1 page, hide the pager
     if (this.hideOnSinglePage === true && this.total <= this.statePageSize) {
       return null;
@@ -363,7 +359,7 @@ export default {
       const hasNext = this.hasNext();
 
       return (
-        <ul class={classNames(`${prefixCls} ${prefixCls}-simple`, this.$attrs.class)}>
+        <ul class={classNames(`${prefixCls} ${prefixCls}-simple`, className)} {...restAttrs}>
           <li
             title={this.showTitle ? locale.prev_page : null}
             onClick={this.prev}
@@ -579,14 +575,16 @@ export default {
     }
     const prevDisabled = !this.hasPrev() || !allPages;
     const nextDisabled = !this.hasNext() || !allPages;
-    const buildOptionText = this.buildOptionText || this.$slots.buildOptionText?.();
-    const { class: _cls, style } = this.$attrs;
+    const buildOptionText = this.buildOptionText || this.$slots.buildOptionText;
     return (
       <ul
         unselectable="unselectable"
         ref="paginationNode"
-        style={style}
-        class={classNames({ [`${prefixCls}`]: true, [`${prefixCls}-disabled`]: disabled }, _cls)}
+        {...restAttrs}
+        class={classNames(
+          { [`${prefixCls}`]: true, [`${prefixCls}-disabled`]: disabled },
+          className,
+        )}
       >
         {totalText}
         <li

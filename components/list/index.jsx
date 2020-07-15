@@ -8,14 +8,9 @@ import Pagination, { PaginationConfig } from '../pagination';
 import { Row } from '../grid';
 
 import Item from './Item';
-import {
-  initDefaultProps,
-  getComponentFromProp,
-  filterEmpty,
-  getListeners,
-} from '../_util/props-util';
+import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import Base from '../base';
+import { provide, inject } from 'vue';
 
 export { ListItemProps, ListItemMetaProps } from './Item';
 
@@ -56,6 +51,7 @@ export const ListProps = () => ({
 });
 
 const List = {
+  inheritAttrs: false,
   Item,
   name: 'AList',
   props: initDefaultProps(ListProps(), {
@@ -65,14 +61,15 @@ const List = {
     loading: false,
     pagination: false,
   }),
-  provide() {
+  created() {
+    provide('listContext', this);
+  },
+  setup() {
     return {
-      listContext: this,
+      configProvider: inject('configProvider', ConfigConsumerProps),
     };
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-  },
+
   data() {
     this.keys = [];
     this.defaultPaginationProps = {
@@ -107,10 +104,13 @@ const List = {
         }
       };
     },
-    renderItem2(item, index) {
-      const { $scopedSlots, rowKey } = this;
-      const renderItem = this.renderItem || $scopedSlots.renderItem;
-      if (!renderItem) return null;
+    innerRenderItem(item, index) {
+      const {
+        $slots: { renderItem },
+        rowKey,
+      } = this;
+      const renderer = this.renderItem || renderItem;
+      if (!renderer) return null;
       let key;
       if (typeof rowKey === 'function') {
         key = rowKey(item);
@@ -126,13 +126,13 @@ const List = {
 
       this.keys[index] = key;
 
-      return renderItem(item, index);
+      return renderer(item, index);
     },
 
     isSomethingAfterLastItem() {
       const { pagination } = this;
-      const loadMore = getComponentFromProp(this, 'loadMore');
-      const footer = getComponentFromProp(this, 'footer');
+      const loadMore = getComponent(this, 'loadMore');
+      const footer = getComponent(this, 'footer');
       return !!(loadMore || pagination || footer);
     },
 
@@ -140,7 +140,7 @@ const List = {
       const { locale } = this;
       return (
         <div class={`${prefixCls}-empty-text`}>
-          {(locale && locale.emptyText) || renderEmpty(h, 'List')}
+          {(locale && locale.emptyText) || renderEmpty('List')}
         </div>
       );
     },
@@ -157,17 +157,17 @@ const List = {
       dataSource = [],
       size,
       loading,
-      $slots,
       paginationCurrent,
       paginationSize,
+      $attrs,
     } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
-
-    const loadMore = getComponentFromProp(this, 'loadMore');
-    const footer = getComponentFromProp(this, 'footer');
-    const header = getComponentFromProp(this, 'header');
-    const children = filterEmpty($slots.default || []);
+    const { class: _cls, ...restAttrs } = $attrs;
+    const loadMore = getComponent(this, 'loadMore');
+    const footer = getComponent(this, 'footer');
+    const header = getComponent(this, 'header');
+    const children = getSlot(this);
     let loadingProp = loading;
     if (typeof loadingProp === 'boolean') {
       loadingProp = {
@@ -189,15 +189,19 @@ const List = {
       default:
         break;
     }
-    const classString = classNames(prefixCls, {
-      [`${prefixCls}-vertical`]: itemLayout === 'vertical',
-      [`${prefixCls}-${sizeCls}`]: sizeCls,
-      [`${prefixCls}-split`]: split,
-      [`${prefixCls}-bordered`]: bordered,
-      [`${prefixCls}-loading`]: isLoading,
-      [`${prefixCls}-grid`]: grid,
-      [`${prefixCls}-something-after-last-item`]: this.isSomethingAfterLastItem(),
-    });
+    const classString = classNames(
+      prefixCls,
+      {
+        [`${prefixCls}-vertical`]: itemLayout === 'vertical',
+        [`${prefixCls}-${sizeCls}`]: sizeCls,
+        [`${prefixCls}-split`]: split,
+        [`${prefixCls}-bordered`]: bordered,
+        [`${prefixCls}-loading`]: isLoading,
+        [`${prefixCls}-grid`]: grid,
+        [`${prefixCls}-something-after-last-item`]: this.isSomethingAfterLastItem(),
+      },
+      $attrs.class,
+    );
     const paginationProps = {
       ...this.defaultPaginationProps,
       total: dataSource.length,
@@ -205,6 +209,7 @@ const List = {
       pageSize: paginationSize,
       ...(pagination || {}),
     };
+    classString;
     const largestPage = Math.ceil(paginationProps.total / paginationProps.pageSize);
     if (paginationProps.current > largestPage) {
       paginationProps.current = largestPage;
@@ -239,7 +244,7 @@ const List = {
     let childrenContent;
     childrenContent = isLoading && <div style={{ minHeight: 53 }} />;
     if (splitDataSource.length > 0) {
-      const items = splitDataSource.map((item, index) => this.renderItem2(item, index));
+      const items = splitDataSource.map((item, index) => this.innerRenderItem(item, index));
       const childrenList = items.map((child, index) =>
         cloneElement(child, {
           key: this.keys[index],
@@ -258,10 +263,10 @@ const List = {
     const paginationPosition = paginationProps.position || 'bottom';
 
     return (
-      <div class={classString} {...{ on: getListeners(this) }}>
+      <div class={classString} {...restAttrs}>
         {(paginationPosition === 'top' || paginationPosition === 'both') && paginationContent}
         {header && <div class={`${prefixCls}-header`}>{header}</div>}
-        <Spin {...{ props: loadingProp }}>
+        <Spin {...loadingProp}>
           {childrenContent}
           {children}
         </Spin>
@@ -274,11 +279,10 @@ const List = {
 };
 
 /* istanbul ignore next */
-List.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(List.name, List);
-  Vue.component(List.Item.name, List.Item);
-  Vue.component(List.Item.Meta.name, List.Item.Meta);
+List.install = function(app) {
+  app.component(List.name, List);
+  app.component(List.Item.name, List.Item);
+  app.component(List.Item.Meta.name, List.Item.Meta);
 };
 
 export default List;

@@ -126,7 +126,7 @@ const List = {
 
       this.keys[index] = key;
 
-      return renderer(item, index);
+      return renderer({ item, index });
     },
 
     isSomethingAfterLastItem() {
@@ -163,7 +163,7 @@ const List = {
     } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
-    const { class: _cls, ...restAttrs } = $attrs;
+    const { class: className, ...restAttrs } = $attrs;
     const loadMore = getComponent(this, 'loadMore');
     const footer = getComponent(this, 'footer');
     const header = getComponent(this, 'header');
@@ -200,7 +200,7 @@ const List = {
         [`${prefixCls}-grid`]: grid,
         [`${prefixCls}-something-after-last-item`]: this.isSomethingAfterLastItem(),
       },
-      $attrs.class,
+      className,
     );
     const paginationProps = {
       ...this.defaultPaginationProps,
@@ -219,13 +219,11 @@ const List = {
       <div class={`${prefixCls}-pagination`}>
         <Pagination
           {...{
-            props: omit(restProps, ['onChange']),
+            ...omit(restProps, ['onChange']),
             class: cls,
             style,
-            on: {
-              change: this.onPaginationChange,
-              showSizeChange: this.onPaginationShowSizeChange,
-            },
+            onChange: this.onPaginationChange,
+            onShowSizeChange: this.onPaginationShowSizeChange,
           }}
         />
       </div>

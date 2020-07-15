@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/pagination/demo/custom-changer';
+import demo from '../antdv-demo/docs/list/demo/basic';
 
 export default {
   components: {

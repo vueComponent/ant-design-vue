@@ -23,6 +23,9 @@ import {
   Checkbox,
   Cascader,
   Pagination,
+  List,
+  Collapse,
+  Avatar,
   notification,
   message,
 } from 'ant-design-vue';
@@ -66,4 +69,7 @@ app
   .use(AutoComplete)
   .use(FormModel)
   .use(Cascader)
+  .use(List)
+  .use(Collapse)
+  .use(Avatar)
   .mount('#app');

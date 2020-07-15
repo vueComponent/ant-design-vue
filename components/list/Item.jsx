@@ -21,9 +21,8 @@ export const ListItemMetaProps = {
   title: PropTypes.any,
 };
 
-export const Meta = (props, { slots, attrs }) => {
+export const AListItemMeta = (props, { slots }) => {
   const configProvider = inject('configProvider', ConfigConsumerProps);
-  const { style, class: _cls } = attrs;
   const getPrefixCls = configProvider.getPrefixCls;
   const { prefixCls: customizePrefixCls } = props;
   const prefixCls = getPrefixCls('list', customizePrefixCls);
@@ -37,16 +36,15 @@ export const Meta = (props, { slots, attrs }) => {
     </div>
   );
   return (
-    <div class={`${prefixCls}-item-meta`} style={style} class={_cls}>
+    <div class={`${prefixCls}-item-meta`}>
       {avatar && <div class={`${prefixCls}-item-meta-avatar`}>{avatar}</div>}
       {(title || description) && content}
     </div>
   );
 };
 
-Object.assign(Meta, {
+Object.assign(AListItemMeta, {
   props: ListItemMetaProps,
-  inheritAttrs: false,
   __ANT_LIST_ITEM_META: true,
 });
 
@@ -57,7 +55,7 @@ function getGrid(grid, t) {
 export default {
   name: 'AListItem',
   inheritAttrs: false,
-  Meta,
+  Meta: AListItemMeta,
   props: ListItemProps,
   setup() {
     const listContext = inject('listContext', {});
@@ -91,7 +89,7 @@ export default {
   render() {
     const { grid, itemLayout } = this.listContext;
     const { prefixCls: customizePrefixCls, $slots, $attrs } = this;
-    const { class: _className } = $attrs;
+    const { class: _className, ...restAttrs } = $attrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
     const extra = getComponent(this, 'extra');
@@ -107,11 +105,11 @@ export default {
         ))}
       </ul>
     );
-    const children = $slots.default && $slots.default();
+    const children = getSlot(this);
     const Tag = grid ? 'div' : 'li';
     const itemChildren = (
       <Tag
-        {...$attrs}
+        {...restAttrs}
         class={classNames(`${prefixCls}-item `, _className, {
           [`${prefixCls}-item-no-flex`]: !this.isFlexMode(),
         })}

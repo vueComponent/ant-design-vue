@@ -47,7 +47,7 @@ module.exports = {
                 style: true,
               },
             ],
-            ['@ant-design-vue/babel-plugin-jsx', { transformOn: true, usePatchFlag: true }],
+            ['@ant-design-vue/babel-plugin-jsx', { transformOn: true, usePatchFlag: false }],
             '@babel/plugin-proposal-optional-chaining',
             '@babel/plugin-transform-object-assign',
             '@babel/plugin-proposal-object-rest-spread',

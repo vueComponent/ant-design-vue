@@ -72,7 +72,7 @@ const Menu = {
     // e.g., in rc-select, we need to navigate menu item while
     // current active item is rc-select input box rather than the menu itself
     onKeyDown(e, callback) {
-      this.$refs.innerMenu.getWrappedInstance().onKeyDown(e, callback);
+      this.innerMenu.getWrappedInstance().onKeyDown(e, callback);
     },
     onOpenChange(event) {
       const openKeys = this.store.getState().openKeys.concat();
@@ -150,6 +150,9 @@ const Menu = {
         });
       }
     },
+    saveInnerMenu(ref) {
+      this.innerMenu = ref;
+    },
   },
 
   render() {
@@ -169,7 +172,7 @@ const Menu = {
       onOpenChange: this.onOpenChange,
       onDeselect: this.onDeselect,
       onSelect: this.onSelect,
-      ref: 'innerMenu',
+      ref: this.saveInnerMenu,
     };
 
     const subPopupMenu = <SubPopupMenu {...subPopupMenuProps} />;

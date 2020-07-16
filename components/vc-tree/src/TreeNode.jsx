@@ -1,8 +1,8 @@
-import { inject, provide } from 'vue';
+import { inject, provide, Transition } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import classNames from 'classnames';
 import { getNodeChildren, mapChildren, warnOnlyTreeNode, getDataAndAria } from './util';
-import { initDefaultProps, filterEmpty, getComponent } from '../../_util/props-util';
+import { initDefaultProps, getComponent, getSlot } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import getTransitionProps from '../../_util/getTransitionProps';
 
@@ -63,10 +63,6 @@ const TreeNode = {
       vcTree: inject('vcTree', {}),
       vcTreeNode: inject('vcTreeNode', {}),
     };
-  },
-  inject: {
-    vcTree: { default: () => ({}) },
-    vcTreeNode: { default: () => ({}) },
   },
   created() {
     provide('vcTreeNode', this);
@@ -245,10 +241,7 @@ const TreeNode = {
     },
 
     getNodeChildren() {
-      const {
-        $slots: { default: children },
-      } = this;
-      const originList = filterEmpty(children);
+      const originList = getSlot(this);
       const targetList = getNodeChildren(originList);
 
       if (originList.length !== targetList.length) {
@@ -523,7 +516,7 @@ const TreeNode = {
         );
       }
 
-      return <transition {...animProps}>{$children}</transition>;
+      return <Transition {...animProps}>{$children}</Transition>;
     },
   },
 

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/tree/demo/basic';
+import demo from '../antdv-demo/docs/tree/demo/customized-icon';
 
 export default {
   components: {

@@ -1,7 +1,7 @@
 /* eslint no-loop-func: 0*/
 import warning from 'warning';
 import TreeNode from './TreeNode';
-import { getOptionProps } from '../../_util/props-util';
+import { getOptionProps, getSlot } from '../../_util/props-util';
 const DRAG_SIDE_RANGE = 0.25;
 const DRAG_MIN_GAP = 2;
 
@@ -54,7 +54,7 @@ export function isCheckDisabled(node) {
 
 export function traverseTreeNodes(treeNodes, callback) {
   function processNode(node, index, parent) {
-    const children = node ? node.children?.default() : treeNodes;
+    const children = node ? getSlot(node) : treeNodes;
     const pos = node ? getPosition(parent.pos, index) : 0;
 
     // Filter children

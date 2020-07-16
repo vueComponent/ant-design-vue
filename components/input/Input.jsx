@@ -66,7 +66,7 @@ export default {
     const props = this.$props;
     const value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
     return {
-      stateValue: value,
+      stateValue: typeof value === 'undefined' ? '' : value,
     };
   },
   watch: {
@@ -109,7 +109,9 @@ export default {
           callback && callback();
         });
       } else {
-        this.$forceUpdate();
+        // 不在严格受控
+        // https://github.com/vueComponent/ant-design-vue/issues/2207，modal 是 新 new 实例，更新队列和当前不在同一个更新队列中
+        // this.$forceUpdate();
       }
     },
     onChange(e) {
@@ -172,7 +174,8 @@ export default {
     },
     handleChange(e) {
       const { value, composing } = e.target;
-      if (composing && this.lazy) return;
+      // https://github.com/vueComponent/ant-design-vue/issues/2203
+      if (((e.isComposing || composing) && this.lazy) || this.stateValue === value) return;
       this.setValue(value, this.clearPasswordValueAttribute);
       resolveOnChange(this.$refs.input, e, this.onChange);
     },

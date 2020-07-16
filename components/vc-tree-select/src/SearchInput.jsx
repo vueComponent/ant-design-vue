@@ -98,7 +98,7 @@ const SearchInput = {
     handleInputChange(e) {
       const { value, composing } = e.target;
       const { searchValue = '' } = this;
-      if (composing || searchValue === value) {
+      if (e.isComposing || composing || searchValue === value) {
         this.mirrorSearchValue = value;
         return;
       }

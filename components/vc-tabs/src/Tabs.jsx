@@ -6,12 +6,13 @@ import KeyCode from './KeyCode';
 import { getOptionProps, getListeners } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import Sentinel from './Sentinel';
+import isValid from '../../_util/isValid';
 
 function getDefaultActiveKey(props) {
   let activeKey;
   const children = props.children;
   children.forEach(child => {
-    if (child && !activeKey && !child.disabled) {
+    if (child && !isValid(activeKey) && !child.disabled) {
       activeKey = child.key;
     }
   });

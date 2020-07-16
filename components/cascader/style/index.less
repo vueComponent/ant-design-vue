@@ -218,6 +218,9 @@
       position: absolute;
       right: @control-padding-horizontal;
       color: @text-color-secondary;
+      .@{cascader-prefix-cls}-menu-item-disabled& {
+        color: @disabled-color;
+      }
     }
 
     & &-keyword {

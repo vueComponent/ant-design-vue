@@ -33,7 +33,7 @@ function IDialogPropTypes() {
     wrapProps: PropTypes.any,
     getContainer: PropTypes.any,
     dialogStyle: PropTypes.object.def(() => ({})),
-    dialogClass: PropTypes.object.def(() => ({})),
+    dialogClass: PropTypes.string.def(''),
     closeIcon: PropTypes.any,
     forceRender: PropTypes.bool,
     getOpenCount: PropTypes.func,

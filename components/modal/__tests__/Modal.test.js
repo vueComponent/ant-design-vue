@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import Modal from '..';
 import mountTest from '../../../tests/shared/mountTest';
+import { asyncExpect } from '@/tests/utils';
 
 const ModalTester = {
   props: ['footer', 'visible'],
@@ -27,30 +28,43 @@ const ModalTester = {
 
 describe('Modal', () => {
   mountTest(Modal);
-  it('render correctly', done => {
-    const wrapper = mount({
-      render() {
-        return <ModalTester visible />;
+  it('render correctly', async () => {
+    const wrapper = mount(
+      {
+        render() {
+          return <ModalTester visible />;
+        },
       },
+      {
+        sync: false,
+        attachToDocument: true,
+      },
+    );
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot();
     });
-    expect(wrapper.html()).toMatchSnapshot();
     // https://github.com/vuejs/vue-test-utils/issues/624
     const wrapper1 = mount(ModalTester, {
       sync: false,
+      attachToDocument: true,
     });
     wrapper1.setProps({ visible: true });
-    setTimeout(() => {
+    await asyncExpect(() => {
       expect(wrapper1.html()).toMatchSnapshot();
-      done();
-    }, 10);
+    });
   });
 
-  it('render without footer', () => {
-    const wrapper = mount({
-      render() {
-        return <ModalTester visible footer={null} />;
+  it('render without footer', async () => {
+    const wrapper = mount(
+      {
+        render() {
+          return <ModalTester visible footer={null} />;
+        },
       },
+      { attachToDocument: true, sync: true },
+    );
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot();
     });
-    expect(wrapper.html()).toMatchSnapshot();
   });
 });

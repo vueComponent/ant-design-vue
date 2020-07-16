@@ -40,7 +40,7 @@ exports[`renders ./antdv-demo/docs/drawer/demo/render-in-current.md correctly 1`
 <div style="height: 200px; overflow: hidden; position: relative; border: 1px solid #ebedf0; border-radius: 2px; padding: 48px; text-align: center; background: rgb(250, 250, 250);">
   Render in this
   <div style="margin-top: 16px;"><button type="button" class="ant-btn ant-btn-primary"><span>Open</span></button></div>
-  <div tabindex="-1" class="">
+  <div class="">
     <div tabindex="-1" class="ant-drawer ant-drawer-right" style="position: absolute;">
       <div class="ant-drawer-mask"></div>
       <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 256px;">

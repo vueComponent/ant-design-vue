@@ -106,6 +106,7 @@ jobs:
           repository: tangjinzhou/antdv-demo
           token: ${{ secrets.ACCESS_TOKEN }}
           path: antdv-demo
+          submodules: true
 
       - name: restore cache from package-lock.json
         uses: actions/cache@v1

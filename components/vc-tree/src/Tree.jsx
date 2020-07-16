@@ -128,7 +128,7 @@ const Tree = {
     };
     return {
       ...state,
-      ...this.getDerivedStateFromProps(getOptionProps(this), state),
+      ...this.getDerivedState(getOptionProps(this), state),
     };
   },
   provide() {
@@ -148,13 +148,13 @@ const Tree = {
       'loadedKeys',
     ]),
     __propsSymbol__() {
-      this.setState(this.getDerivedStateFromProps(getOptionProps(this), this.$data));
+      this.setState(this.getDerivedState(getOptionProps(this), this.$data));
       this.needSyncKeys = {};
     },
   },
 
   methods: {
-    getDerivedStateFromProps(props, prevState) {
+    getDerivedState(props, prevState) {
       const { _prevProps } = prevState;
       const newState = {
         _prevProps: { ...props },

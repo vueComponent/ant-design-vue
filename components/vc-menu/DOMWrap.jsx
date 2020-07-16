@@ -112,7 +112,7 @@ const DOMWrap = {
       // with a title of overflow indicator ('...')
       const copy = this.$slots.default[0];
       const { title, ...rest } = getPropsData(copy); // eslint-disable-line no-unused-vars
-
+      const events = getEvents(copy);
       let style = {};
       let key = `${keyPrefix}-overflowed-indicator`;
       let eventKey = `${keyPrefix}-overflowed-indicator`;
@@ -133,9 +133,15 @@ const DOMWrap = {
 
       const popupClassName = theme ? `${prefixCls}-${theme}` : '';
       const props = {};
+      const on = {};
       menuAllProps.props.forEach(k => {
         if (rest[k] !== undefined) {
           props[k] = rest[k];
+        }
+      });
+      menuAllProps.on.forEach(k => {
+        if (events[k] !== undefined) {
+          on[k] = events[k];
         }
       });
       const subMenuProps = {
@@ -149,7 +155,7 @@ const DOMWrap = {
         class: `${prefixCls}-overflowed-submenu`,
         key,
         style,
-        on: getEvents(copy),
+        on,
       };
 
       return <SubMenu {...subMenuProps}>{overflowedItems}</SubMenu>;
@@ -263,7 +269,10 @@ const DOMWrap = {
                   c,
                   // children[index].key will become '.$key' in clone by default,
                   // we have to overwrite with the correct key explicitly
-                  { key: getPropsData(c).eventKey, props: { mode: 'vertical-left' } },
+                  {
+                    key: getPropsData(c).eventKey,
+                    props: { mode: 'vertical-left' },
+                  },
                 );
               });
 

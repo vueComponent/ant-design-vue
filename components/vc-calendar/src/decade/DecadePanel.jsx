@@ -35,7 +35,11 @@ export default {
       sValue: this.value || this.defaultValue,
     };
   },
-
+  watch: {
+    value(val) {
+      this.sValue = val;
+    },
+  },
   render() {
     const value = this.sValue;
     const { locale, renderFooter } = this.$props;

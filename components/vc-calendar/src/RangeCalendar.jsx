@@ -110,7 +110,7 @@ const RangeCalendar = {
     // onValueChange: PropTypes.func,
     // onHoverChange: PropTypes.func,
     // onPanelChange: PropTypes.func,
-    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string), PropTypes.func]),
     // onClear: PropTypes.func,
     type: PropTypes.any.def('both'),
     disabledDate: PropTypes.func,
@@ -435,7 +435,7 @@ const RangeCalendar = {
       const newValue = [sValue[0], value || sValue[1]];
       this.__emit('panelChange', newValue, newMode);
       const newState = {
-        sPanelTriggerSource: 'start',
+        sPanelTriggerSource: 'end',
       };
       if (!hasProp(this, 'mode')) {
         newState.sMode = newMode;

@@ -138,9 +138,10 @@ export default {
           if (
             this.$refs.trigger &&
             this.$refs.trigger._component &&
-            this.$refs.trigger._component.alignInstance
+            this.$refs.trigger._component.$refs &&
+            this.$refs.trigger._component.$refs.alignInstance
           ) {
-            this.$refs.trigger._component.alignInstance.forceAlign();
+            this.$refs.trigger._component.$refs.alignInstance.forceAlign();
           }
         }
       }

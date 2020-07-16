@@ -16,7 +16,7 @@ const DateInput = {
     timePicker: PropTypes.object,
     value: PropTypes.object,
     disabledTime: PropTypes.any,
-    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string), PropTypes.func]),
     locale: PropTypes.object,
     disabledDate: PropTypes.func,
     // onChange: PropTypes.func,
@@ -39,10 +39,10 @@ const DateInput = {
   },
   watch: {
     selectedValue() {
-      this.updateState();
+      this.setState();
     },
     format() {
-      this.updateState();
+      this.setState();
     },
   },
 
@@ -62,19 +62,21 @@ const DateInput = {
     return dateInputInstance;
   },
   methods: {
-    updateState() {
+    getDerivedStateFromProps(nextProps, state) {
+      let newState = {};
       if (dateInputInstance) {
         cachedSelectionStart = dateInputInstance.selectionStart;
         cachedSelectionEnd = dateInputInstance.selectionEnd;
       }
       // when popup show, click body will call this, bug!
-      const selectedValue = this.selectedValue;
-      if (!this.$data.hasFocus) {
-        this.setState({
+      const selectedValue = nextProps.selectedValue;
+      if (!state.hasFocus) {
+        newState = {
           str: formatDate(selectedValue, this.format),
           invalid: false,
-        });
+        };
       }
+      return newState;
     },
     onClear() {
       this.setState({
@@ -85,7 +87,7 @@ const DateInput = {
     onInputChange(e) {
       const { value: str, composing } = e.target;
       const { str: oldStr = '' } = this;
-      if (composing || oldStr === str) return;
+      if (e.isComposing || composing || oldStr === str) return;
 
       const { disabledDate, format, selectedValue } = this.$props;
 

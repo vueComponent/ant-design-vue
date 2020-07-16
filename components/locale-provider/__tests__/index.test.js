@@ -2,6 +2,7 @@ import { mount } from '@vue/test-utils';
 import Vue from 'vue';
 import moment from 'moment';
 import MockDate from 'mockdate';
+import { sleep } from '../../../tests/utils';
 import {
   LocaleProvider,
   Pagination,
@@ -188,7 +189,7 @@ describe('Locale Provider', () => {
             );
           },
         },
-        { sync: false },
+        { sync: false, attachToDocument: true },
       );
       Vue.nextTick(() => {
         expect(wrapper.html()).toMatchSnapshot();
@@ -197,7 +198,7 @@ describe('Locale Provider', () => {
     });
   });
 
-  it('should change locale of Modal.xxx', () => {
+  it('should change locale of Modal.xxx', async () => {
     const ModalDemo = {
       mounted() {
         Modal.confirm({
@@ -208,7 +209,8 @@ describe('Locale Provider', () => {
         return null;
       },
     };
-    locales.forEach(locale => {
+    for (let locale of locales) {
+      document.body.innerHTML = '';
       mount(
         {
           render() {
@@ -219,8 +221,9 @@ describe('Locale Provider', () => {
             );
           },
         },
-        { sync: false },
+        { sync: false, attachToDocument: true },
       );
+      await sleep();
       const currentConfirmNode = document.querySelectorAll('.ant-modal-confirm')[
         document.querySelectorAll('.ant-modal-confirm').length - 1
       ];
@@ -234,10 +237,10 @@ describe('Locale Provider', () => {
       }
       expect(cancelButtonText).toBe(locale.Modal.cancelText);
       expect(okButtonText).toBe(locale.Modal.okText);
-    });
+    }
   });
 
-  it('set moment locale when locale changes', done => {
+  it('set moment locale when locale changes', async () => {
     document.body.innerHTML = '';
     const Test = {
       data() {
@@ -256,17 +259,13 @@ describe('Locale Provider', () => {
       },
     };
     const wrapper = mount(Test, { sync: false, attachToDocument: true });
-    setTimeout(() => {
-      expect(document.body.innerHTML).toMatchSnapshot();
-      wrapper.setData({ locale: frFR });
-      setTimeout(() => {
-        expect(document.body.innerHTML).toMatchSnapshot();
-        wrapper.setData({ locale: null });
-        setTimeout(() => {
-          expect(document.body.innerHTML).toMatchSnapshot();
-          done();
-        });
-      });
-    });
+    await sleep(50);
+    expect(document.body.innerHTML).toMatchSnapshot();
+    wrapper.setData({ locale: frFR });
+    await sleep(50);
+    expect(document.body.innerHTML).toMatchSnapshot();
+    wrapper.setData({ locale: null });
+    await sleep(50);
+    expect(document.body.innerHTML).toMatchSnapshot();
   });
 });

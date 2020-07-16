@@ -27,6 +27,7 @@ import {
   Collapse,
   Card,
   Avatar,
+  Tree,
   notification,
   message,
 } from 'ant-design-vue';
@@ -74,4 +75,5 @@ app
   .use(Collapse)
   .use(Avatar)
   .use(Card)
+  .use(Tree)
   .mount('#app');

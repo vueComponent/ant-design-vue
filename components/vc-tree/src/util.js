@@ -1,8 +1,7 @@
 /* eslint no-loop-func: 0*/
 import warning from 'warning';
-import omit from 'omit.js';
 import TreeNode from './TreeNode';
-import { getSlotOptions, getOptionProps } from '../../_util/props-util';
+import { getOptionProps } from '../../_util/props-util';
 const DRAG_SIDE_RANGE = 0.25;
 const DRAG_MIN_GAP = 2;
 
@@ -41,7 +40,7 @@ export function getPosition(level, index) {
 }
 
 export function isTreeNode(node) {
-  return getSlotOptions(node).isTreeNode;
+  return typeof node.type === 'object' && node.type.isTreeNode;
 }
 
 export function getNodeChildren(children = []) {
@@ -55,7 +54,7 @@ export function isCheckDisabled(node) {
 
 export function traverseTreeNodes(treeNodes, callback) {
   function processNode(node, index, parent) {
-    const children = node ? node.componentOptions.children : treeNodes;
+    const children = node ? node.children?.default() : treeNodes;
     const pos = node ? getPosition(parent.pos, index) : 0;
 
     // Filter children
@@ -111,7 +110,7 @@ export function getDragNodesKeys(treeNodes, node) {
 
 export function calcDropPosition(event, treeNode) {
   const { clientY } = event;
-  const { top, bottom, height } = treeNode.$refs.selectHandle.getBoundingClientRect();
+  const { top, bottom, height } = treeNode.selectHandle.getBoundingClientRect();
   const des = Math.max(height * DRAG_SIDE_RANGE, DRAG_MIN_GAP);
 
   if (clientY <= top + des) {
@@ -156,20 +155,19 @@ export function calcSelectedKeys(selectedKeys, props) {
 
 const internalProcessProps = (props = {}) => {
   return {
-    props: omit(props, ['on', 'key', 'class', 'className', 'style']),
-    on: props.on || {},
+    ...props,
     class: props.class || props.className,
     style: props.style,
     key: props.key,
   };
 };
-export function convertDataToTree(h, treeData, processor) {
+export function convertDataToTree(treeData, processor) {
   if (!treeData) return [];
 
   const { processProps = internalProcessProps } = processor || {};
   const list = Array.isArray(treeData) ? treeData : [treeData];
   return list.map(({ children, ...props }) => {
-    const childrenNodes = convertDataToTree(h, children, processor);
+    const childrenNodes = convertDataToTree(children, processor);
     return <TreeNode {...processProps(props)}>{childrenNodes}</TreeNode>;
   });
 }

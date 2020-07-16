@@ -1,10 +1,11 @@
+import { inject } from 'vue';
 import omit from 'omit.js';
 import debounce from 'lodash/debounce';
 import FolderOpenOutlined from '@ant-design/icons-vue/FolderOpenOutlined';
 import FolderOutlined from '@ant-design/icons-vue/FolderOutlined';
 import FileOutlined from '@ant-design/icons-vue/FileOutlined';
 import PropTypes from '../_util/vue-types';
-import warning from '../_util/warning';
+import classNames from 'classnames';
 import { conductExpandParent, convertTreeToEntities } from '../vc-tree/src/util';
 import Tree, { TreeProps } from './Tree';
 import {
@@ -14,12 +15,7 @@ import {
   getFullKeyListByTreeData,
 } from './util';
 import BaseMixin from '../_util/BaseMixin';
-import {
-  initDefaultProps,
-  getOptionProps,
-  getListeners,
-  getComponentFromProp,
-} from '../_util/props-util';
+import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 // export type ExpandAction = false | 'click' | 'dblclick'; export interface
@@ -27,7 +23,7 @@ import { ConfigConsumerProps } from '../config-provider';
 // export interface DirectoryTreeState {   expandedKeys?: string[];
 // selectedKeys?: string[]; }
 
-function getIcon(props, h) {
+function getIcon(props) {
   const { isLeaf, expanded } = props;
   if (isLeaf) {
     return <FileOutlined />;
@@ -38,10 +34,11 @@ function getIcon(props, h) {
 export default {
   name: 'ADirectoryTree',
   mixins: [BaseMixin],
-  model: {
-    prop: 'checkedKeys',
-    event: 'check',
-  },
+  inheritAttrs: false,
+  // model: {
+  //   prop: 'checkedKeys',
+  //   event: 'check',
+  // },
   props: initDefaultProps(
     {
       ...TreeProps(),
@@ -52,14 +49,10 @@ export default {
       expandAction: 'click',
     },
   ),
-
-  // state: DirectoryTreeState; onDebounceExpand: (event, node: AntTreeNode) =>
-  // void; // Shift click usage lastSelectedKey?: string; cachedSelectedKeys?:
-  // string[];
-  inject: {
-    configProvider: {
-      default: () => ConfigConsumerProps,
-    },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
   data() {
     const props = getOptionProps(this);
@@ -83,6 +76,7 @@ export default {
     }
 
     this.onDebounceExpand = debounce(this.expandFolderNode, 200, { leading: true });
+    this.children = null;
     return {
       _selectedKeys: [],
       _expandedKeys: [],
@@ -130,7 +124,7 @@ export default {
 
     onSelect(keys, event) {
       const { multiple } = this.$props;
-      const children = this.$slots.default || [];
+      const children = this.children || [];
       const { _expandedKeys: expandedKeys = [] } = this.$data;
       const { node, nativeEvent } = event;
       const { eventKey = '' } = node;
@@ -178,6 +172,9 @@ export default {
 
       this.setUncontrolledState(newState);
     },
+    setTreeRef(node) {
+      this.tree = node;
+    },
 
     expandFolderNode(event, node) {
       const { isLeaf } = node;
@@ -186,9 +183,9 @@ export default {
         return;
       }
 
-      if (this.$refs.tree.$refs.tree) {
+      if (this.tree.tree) {
         // Get internal vc-tree
-        const internalTree = this.$refs.tree.$refs.tree;
+        const internalTree = this.tree.tree;
 
         // Call internal rc-tree expand function
         // https://github.com/ant-design/ant-design/issues/12567
@@ -208,31 +205,28 @@ export default {
   },
 
   render() {
+    this.children = getSlot(this);
     const { prefixCls: customizePrefixCls, ...props } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tree', customizePrefixCls);
     const { _expandedKeys: expandedKeys, _selectedKeys: selectedKeys } = this.$data;
-    const listeners = getListeners(this);
-    warning(!listeners.doubleclick, '`doubleclick` is deprecated. please use `dblclick` instead.');
+    const { class: className, ...restAttrs } = this.$attrs;
+    const connectClassName = classNames(`${prefixCls}-directory`, className);
     const treeProps = {
-      props: {
-        icon: getIcon,
-        ...props,
-        prefixCls,
-        expandedKeys,
-        selectedKeys,
-        switcherIcon: getComponentFromProp(this, 'switcherIcon'),
-      },
-      ref: 'tree',
-      class: `${prefixCls}-directory`,
-      on: {
-        ...omit(listeners, ['update:selectedKeys']),
-        select: this.onSelect,
-        click: this.onClick,
-        dblclick: this.onDoubleClick,
-        expand: this.onExpand,
-      },
+      icon: getIcon,
+      ...props,
+      ...omit(restAttrs, ['onUpdate:selectedKeys']),
+      prefixCls,
+      expandedKeys,
+      selectedKeys,
+      switcherIcon: getComponent(this, 'switcherIcon'),
+      ref: this.setTreeRef,
+      class: connectClassName,
+      onSelect: this.onSelect,
+      onClick: this.onClick,
+      onDblclick: this.onDoubleClick,
+      onExpand: this.onExpand,
     };
-    return <Tree {...treeProps}>{this.$slots.default}</Tree>;
+    return <Tree {...treeProps}>{this.children}</Tree>;
   },
 };

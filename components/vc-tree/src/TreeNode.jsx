@@ -1,7 +1,8 @@
+import { inject, provide } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import classNames from 'classnames';
-import { getNodeChildren, mapChildren, warnOnlyTreeNode } from './util';
-import { initDefaultProps, filterEmpty, getComponentFromProp } from '../../_util/props-util';
+import { getNodeChildren, mapChildren, warnOnlyTreeNode, getDataAndAria } from './util';
+import { initDefaultProps, filterEmpty, getComponent } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import getTransitionProps from '../../_util/getTransitionProps';
 
@@ -13,6 +14,7 @@ const defaultTitle = '---';
 
 const TreeNode = {
   name: 'TreeNode',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   __ANT_TREE_NODE: true,
   props: initDefaultProps(
@@ -56,16 +58,19 @@ const TreeNode = {
       dragNodeHighlight: false,
     };
   },
+  setup() {
+    return {
+      vcTree: inject('vcTree', {}),
+      vcTreeNode: inject('vcTreeNode', {}),
+    };
+  },
   inject: {
     vcTree: { default: () => ({}) },
     vcTreeNode: { default: () => ({}) },
   },
-  provide() {
-    return {
-      vcTreeNode: this,
-    };
+  created() {
+    provide('vcTreeNode', this);
   },
-
   // Isomorphic needn't load data in server side
   mounted() {
     const {
@@ -234,6 +239,10 @@ const TreeNode = {
       } = this;
       onNodeExpand(e, this);
     },
+    // Drag usage
+    setSelectHandle(node) {
+      this.selectHandle = node;
+    },
 
     getNodeChildren() {
       const {
@@ -336,8 +345,8 @@ const TreeNode = {
         vcTree: { prefixCls },
       } = this;
       const switcherIcon =
-        getComponentFromProp(this, 'switcherIcon', {}, false) ||
-        getComponentFromProp(this.vcTree, 'switcherIcon', {}, false);
+        getComponent(this, 'switcherIcon', {}, false) ||
+        getComponent(this.vcTree, 'switcherIcon', {}, false);
       if (this.isLeaf2()) {
         return (
           <span
@@ -413,14 +422,14 @@ const TreeNode = {
     },
 
     // Icon + Title
-    renderSelector(h) {
+    renderSelector() {
       const { selected, loading, dragNodeHighlight } = this;
-      const icon = getComponentFromProp(this, 'icon', {}, false);
+      const icon = getComponent(this, 'icon', {}, false);
       const {
         vcTree: { prefixCls, showIcon, icon: treeIcon, draggable, loadData },
       } = this;
       const disabled = this.isDisabled();
-      const title = getComponentFromProp(this, 'title', {}, false);
+      const title = getComponent(this, 'title', {}, false);
       const wrapClass = `${prefixCls}-node-content-wrapper`;
 
       // Icon - Still show loading icon when loading without showIcon
@@ -431,7 +440,7 @@ const TreeNode = {
         $icon = currentIcon ? (
           <span class={classNames(`${prefixCls}-iconEle`, `${prefixCls}-icon__customize`)}>
             {typeof currentIcon === 'function'
-              ? currentIcon({ ...this.$props, ...this.$props.dataRef }, h)
+              ? currentIcon({ ...this.$props, ...this.$props.dataRef })
               : currentIcon}
           </span>
         ) : (
@@ -445,17 +454,16 @@ const TreeNode = {
       let $title = currentTitle ? (
         <span class={`${prefixCls}-title`}>
           {typeof currentTitle === 'function'
-            ? currentTitle({ ...this.$props, ...this.$props.dataRef }, h)
+            ? currentTitle({ ...this.$props, ...this.$props.dataRef })
             : currentTitle}
         </span>
       ) : (
         <span class={`${prefixCls}-title`}>{defaultTitle}</span>
       );
-
       return (
         <span
           key="selector"
-          ref="selectHandle"
+          ref={this.setSelectHandle}
           title={typeof title === 'string' ? title : ''}
           class={classNames(
             `${wrapClass}`,
@@ -489,8 +497,7 @@ const TreeNode = {
       if (openTransitionName) {
         animProps = getTransitionProps(openTransitionName);
       } else if (typeof openAnimation === 'object') {
-        animProps = { ...openAnimation };
-        animProps.props = { css: false, ...animProps.props };
+        animProps = { ...openAnimation, css: false, ...animProps };
       }
 
       // Children TreeNode
@@ -520,7 +527,7 @@ const TreeNode = {
     },
   },
 
-  render(h) {
+  render() {
     const {
       dragOver,
       dragOverGapTop,
@@ -536,9 +543,12 @@ const TreeNode = {
       vcTree: { prefixCls, filterTreeNode, draggable },
     } = this;
     const disabled = this.isDisabled();
+    const dataOrAriaAttributeProps = getDataAndAria({ ...this.$props, ...this.$attrs });
+    const { class: className, style } = this.$attrs;
     return (
       <li
         class={{
+          className,
           [`${prefixCls}-treenode-disabled`]: disabled,
           [`${prefixCls}-treenode-switcher-${expanded ? 'open' : 'close'}`]: !isLeaf,
           [`${prefixCls}-treenode-checkbox-checked`]: checked,
@@ -550,16 +560,18 @@ const TreeNode = {
           'drag-over-gap-bottom': !disabled && dragOverGapBottom,
           'filter-node': filterTreeNode && filterTreeNode(this),
         }}
+        style={style}
         role="treeitem"
         onDragenter={draggable ? this.onDragEnter : noop}
         onDragover={draggable ? this.onDragOver : noop}
         onDragleave={draggable ? this.onDragLeave : noop}
         onDrop={draggable ? this.onDrop : noop}
         onDragend={draggable ? this.onDragEnd : noop}
+        {...dataOrAriaAttributeProps}
       >
         {this.renderSwitcher()}
         {this.renderCheckbox()}
-        {this.renderSelector(h)}
+        {this.renderSelector()}
         {this.renderChildren()}
       </li>
     );

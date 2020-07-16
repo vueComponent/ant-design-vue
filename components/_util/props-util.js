@@ -113,6 +113,7 @@ const getAllChildren = ele => {
   return ele.children || componentOptions.children || [];
 };
 const getSlotOptions = ele => {
+  throw Error('使用 .type 直接取值');
   if (ele.fnOptions) {
     // 函数式组件
     return ele.fnOptions;

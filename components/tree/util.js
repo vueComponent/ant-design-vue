@@ -13,7 +13,7 @@ function traverseNodesKey(rootChildren, callback) {
 
   function processNode(node) {
     const { key } = node;
-    const children = getSlots(node).default;
+    const children = getSlots(node);
     if (callback(key, node) !== false) {
       traverseNodesKey(typeof children === 'function' ? children() : children, callback);
     }

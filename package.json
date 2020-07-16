@@ -191,7 +191,7 @@
     "is-negative-zero": "^2.0.0",
     "ismobilejs": "^1.0.0",
     "json2mq": "^0.2.0",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.19",
     "moment": "^2.21.0",
     "mutationobserver-shim": "^0.3.2",
     "node-emoji": "^1.10.0",

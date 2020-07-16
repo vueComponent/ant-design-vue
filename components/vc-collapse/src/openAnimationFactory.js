@@ -23,10 +23,10 @@ function animate(node, show, transitionName, done) {
 
 function animation(prefixCls) {
   return {
-    enter(node, done) {
+    onEnter(node, done) {
       return animate(node, true, `${prefixCls}-anim`, done);
     },
-    leave(node, done) {
+    onLeave(node, done) {
       return animate(node, false, `${prefixCls}-anim`, done);
     },
   };

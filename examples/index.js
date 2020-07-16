@@ -25,6 +25,7 @@ import {
   Pagination,
   List,
   Collapse,
+  Card,
   Avatar,
   notification,
   message,
@@ -72,4 +73,5 @@ app
   .use(List)
   .use(Collapse)
   .use(Avatar)
+  .use(Card)
   .mount('#app');

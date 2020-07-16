@@ -5,6 +5,7 @@ import { ConfigConsumerProps } from '../config-provider';
 
 export default {
   name: 'ACollapsePanel',
+  inheritAttrs: false,
   props: {
     ...panelProps(),
   },
@@ -17,8 +18,9 @@ export default {
     const { prefixCls: customizePrefixCls, showArrow = true } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('collapse', customizePrefixCls);
-
+    const { class: className, ...restAttrs } = this.$attrs;
     const collapsePanelClassName = {
+      [className]: className,
       [`${prefixCls}-no-arrow`]: !showArrow,
     };
 
@@ -28,6 +30,7 @@ export default {
       prefixCls,
       extra: getComponent(this, 'extra'),
       class: collapsePanelClassName,
+      ...restAttrs,
     };
     return <VcCollapse.Panel {...rcCollapePanelProps}>{getSlot(this)}</VcCollapse.Panel>;
   },

@@ -20,6 +20,7 @@ function _toArray(activeKey) {
 export default {
   name: 'Collapse',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps(collapseProps(), {
     prefixCls: 'rc-collapse',
     accordion: false,
@@ -108,8 +109,9 @@ export default {
     },
     getItems() {
       const newChildren = [];
-      getSlot(this) &&
-        getSlot(this).forEach((child, index) => {
+      const children = getSlot(this);
+      children &&
+        children.forEach((child, index) => {
           newChildren.push(this.getNewChild(child, index));
         });
       return newChildren;
@@ -122,11 +124,13 @@ export default {
   },
   render() {
     const { prefixCls, accordion } = this.$props;
+    const { class: className, style } = this.$attrs;
     const collapseClassName = {
       [prefixCls]: true,
+      [className]: className,
     };
     return (
-      <div class={collapseClassName} role={accordion ? 'tablist' : null}>
+      <div class={collapseClassName} style={style} role={accordion ? 'tablist' : null}>
         {this.getItems()}
       </div>
     );

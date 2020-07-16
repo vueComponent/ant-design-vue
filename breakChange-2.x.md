@@ -83,3 +83,7 @@ v-model -> v-model:value
 ## Collapse
 
 v-model -> v-model:activeKey
+
+## List
+
+renderItem(item, index) => renderItem({item, index}) 该用单参数

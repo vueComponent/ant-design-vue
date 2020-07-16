@@ -14,6 +14,7 @@ import { ConfigConsumerProps } from '../config-provider';
 
 export default {
   name: 'ACollapse',
+  inheritAttrs: false,
   props: initDefaultProps(collapseProps(), {
     bordered: true,
     openAnimation: animation,
@@ -39,8 +40,9 @@ export default {
     const { prefixCls: customizePrefixCls, bordered, expandIconPosition } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('collapse', customizePrefixCls);
-
+    const { class: className, ...restAttrs } = this.$attrs;
     const collapseClassName = {
+      [className]: className,
       [`${prefixCls}-borderless`]: !bordered,
       [`${prefixCls}-icon-position-${expandIconPosition}`]: true,
     };
@@ -49,6 +51,7 @@ export default {
       prefixCls,
       expandIcon: panelProps => this.renderExpandIcon(panelProps, prefixCls),
       class: collapseClassName,
+      ...restAttrs,
     };
 
     return <VcCollapse {...rcCollapeProps}>{getSlot(this)}</VcCollapse>;

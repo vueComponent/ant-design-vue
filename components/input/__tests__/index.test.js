@@ -11,12 +11,6 @@ describe('Input', () => {
   focusTest(TextArea);
   focusTest(Password);
 
-  it('should support maxLength', async () => {
-    const wrapper = mount(Input, { attrs: { maxLength: 3 }, sync: false });
-    await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot();
-    }, 0);
-  });
   it('select()', () => {
     const wrapper = mount(Input);
     wrapper.vm.select();
@@ -58,13 +52,6 @@ describe('TextArea', () => {
 
   it('should support disabled', async () => {
     const wrapper = mount(TextArea, { propsData: { disabled: true }, sync: false });
-    await asyncExpect(() => {
-      expect(wrapper.html()).toMatchSnapshot();
-    });
-  });
-
-  it('should support maxLength', async () => {
-    const wrapper = mount(TextArea, { attrs: { maxLength: 10 }, sync: false });
     await asyncExpect(() => {
       expect(wrapper.html()).toMatchSnapshot();
     });

@@ -484,7 +484,7 @@ const Cascader = {
       placeholder: value && value.length > 0 ? undefined : placeholder,
       value: inputValue,
       disabled,
-      readOnly: !showSearch,
+      readonly: !showSearch,
       autoComplete: 'off',
       class: `${prefixCls}-input ${sizeCls}`,
       onFocus: showSearch ? this.handleInputFocus : noop,

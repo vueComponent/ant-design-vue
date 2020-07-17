@@ -14,7 +14,7 @@ export const InputNumberProps = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  tabIndex: PropTypes.number,
+  tabindex: PropTypes.number,
   disabled: PropTypes.bool,
   size: PropTypes.oneOf(['large', 'small', 'default']),
   formatter: PropTypes.func,

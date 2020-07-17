@@ -118,7 +118,7 @@ export default {
 
     if (onStepClick && !disabled) {
       accessibilityProps.role = 'button';
-      accessibilityProps.tabIndex = 0;
+      accessibilityProps.tabindex = 0;
       accessibilityProps.onClick = this.onItemClick;
     }
     return (

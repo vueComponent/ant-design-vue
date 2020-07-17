@@ -163,7 +163,7 @@ export default {
             cloneElement(children[k], {
               key: 100 * i + 10 * j + k,
               attrs: {
-                tabIndex: -1,
+                tabindex: -1,
               },
               style: {
                 width: `${100 / settings.slidesPerRow}%`,

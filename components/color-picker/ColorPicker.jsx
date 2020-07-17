@@ -185,7 +185,7 @@ export default {
         [`${prefixCls}-disabled`]: this.disabled,
       };
       return (
-        <div class={classString} tabIndex={disabled ? -1 : 0} onClick={this.handleOpenChange}>
+        <div class={classString} tabindex={disabled ? -1 : 0} onClick={this.handleOpenChange}>
           <div class={`${prefixCls}-selection`}>
             <div id={'color-picker-box' + this._uid}>
               <div id={'color-picker' + this._uid}></div>

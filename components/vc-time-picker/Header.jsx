@@ -165,7 +165,7 @@ const Header = {
           value={str}
           placeholder={placeholder}
           onInput={this.onInputChange}
-          readOnly={!!inputReadOnly}
+          readonly={!!inputReadOnly}
           {...{
             directives: [
               {

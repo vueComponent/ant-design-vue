@@ -821,7 +821,7 @@ const RangeCalendar = {
     }
     const extraFooter = this.renderFooter(mode);
     return (
-      <div ref="rootInstance" class={className} tabIndex="0" onKeydown={this.onKeyDown}>
+      <div ref="rootInstance" class={className} tabindex="0" onKeydown={this.onKeyDown}>
         {props.renderSidebar()}
         <div class={`${prefixCls}-panel`}>
           {showClear && sSelectedValue[0] && sSelectedValue[1] ? (

@@ -386,20 +386,20 @@ export default {
         <span class={props.pickerInputClass}>
           <input
             disabled={props.disabled}
-            readOnly
+            readonly
             value={formatDate(start, props.format)}
             placeholder={startPlaceholder}
             class={`${prefixCls}-range-picker-input`}
-            tabIndex={-1}
+            tabindex={-1}
           />
           <span class={`${prefixCls}-range-picker-separator`}> {separator} </span>
           <input
             disabled={props.disabled}
-            readOnly
+            readonly
             value={formatDate(end, props.format)}
             placeholder={endPlaceholder}
             class={`${prefixCls}-range-picker-input`}
-            tabIndex={-1}
+            tabindex={-1}
           />
           {clearIcon}
           {inputIcon}
@@ -431,7 +431,7 @@ export default {
         ref="picker"
         class={props.pickerClass}
         style={pickerStyle}
-        tabIndex={props.disabled ? -1 : 0}
+        tabindex={props.disabled ? -1 : 0}
         onFocus={focus}
         onBlur={blur}
         onMouseenter={this.onMouseEnter}

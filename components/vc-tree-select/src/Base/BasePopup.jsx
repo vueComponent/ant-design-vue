@@ -282,7 +282,7 @@ const BasePopup = {
     }
 
     return (
-      <div role="listbox" id={ariaId} onKeydown={onPopupKeyDown} tabIndex={-1}>
+      <div role="listbox" id={ariaId} onKeydown={onPopupKeyDown} tabindex={-1}>
         {renderSearch ? renderSearch() : null}
         {$tree}
       </div>

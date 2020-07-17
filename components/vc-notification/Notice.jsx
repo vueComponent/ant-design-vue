@@ -78,7 +78,7 @@ export default {
       >
         <div class={`${componentClass}-content`}>{getSlot(this)}</div>
         {closable ? (
-          <a tabIndex="0" onClick={close} class={`${componentClass}-close`}>
+          <a tabindex="0" onClick={close} class={`${componentClass}-close`}>
             {closeIcon || <span class={`${componentClass}-close-x`} />}
           </a>
         ) : null}

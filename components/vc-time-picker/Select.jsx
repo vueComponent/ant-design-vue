@@ -83,7 +83,7 @@ const Select = {
             class={cls}
             key={index}
             disabled={item.disabled}
-            tabIndex="0"
+            tabindex="0"
             onKeydown={onKeyDown}
           >
             {item.value}

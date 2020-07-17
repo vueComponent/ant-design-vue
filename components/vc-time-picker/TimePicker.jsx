@@ -315,7 +315,7 @@ export default {
           class={`${prefixCls}-clear`}
           title={clearText}
           onClick={this.onClear}
-          tabIndex={0}
+          tabindex={0}
         >
           {clearIcon || <i class={`${prefixCls}-clear-icon`} />}
         </a>
@@ -375,7 +375,7 @@ export default {
             onFocus={onFocus}
             onBlur={onBlur}
             autoFocus={autoFocus}
-            readOnly={!!inputReadOnly}
+            readonly={!!inputReadOnly}
             id={id}
           />
           {inputIcon || <span class={`${prefixCls}-icon`} />}

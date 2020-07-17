@@ -75,7 +75,7 @@ const CalendarMixin = {
         <div
           ref="rootInstance"
           class={className}
-          tabIndex="0"
+          tabindex="0"
           onKeydown={this.onKeyDown || noop}
           onBlur={this.onBlur || noop}
         >

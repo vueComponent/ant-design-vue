@@ -381,7 +381,7 @@ export default {
         {children &&
           cloneElement(children[0], {
             onKeydown: handleKeyDown,
-            tabIndex: disabled ? undefined : 0,
+            tabindex: disabled ? undefined : 0,
           })}
       </Trigger>
     );

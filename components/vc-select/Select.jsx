@@ -95,7 +95,7 @@ const Select = {
     combobox: PropTypes.bool.def(false),
     tokenSeparators: PropTypes.arrayOf(PropTypes.string).def([]),
     autoClearSearchValue: PropTypes.bool.def(true),
-    tabIndex: PropTypes.any.def(0),
+    tabindex: PropTypes.any.def(0),
     dropdownRender: PropTypes.func.def(menu => menu),
     // onChange: noop,
     // onFocus: noop,
@@ -1541,7 +1541,7 @@ const Select = {
     // selectionProps.on.keydown = this.onKeyDown;
     // selectionProps.on.focus = this.selectionRefFocus;
     // selectionProps.on.blur = this.selectionRefBlur;
-    // selectionProps.attrs.tabIndex = props.disabled ? -1 : props.tabIndex;
+    // selectionProps.attrs.tabindex = props.disabled ? -1 : props.tabindex;
     //}
     const rootCls = {
       [className]: className,
@@ -1598,7 +1598,7 @@ const Select = {
           onMousedown={this.markMouseDown}
           onMouseup={this.markMouseLeave}
           onMouseout={this.markMouseLeave}
-          tabIndex={props.disabled ? -1 : props.tabIndex}
+          tabindex={props.disabled ? -1 : props.tabindex}
           onBlur={this.selectionRefBlur}
           onFocus={this.selectionRefFocus}
           onClick={this.selectionRefClick}

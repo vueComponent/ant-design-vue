@@ -34,7 +34,7 @@ const Tree = {
   props: initDefaultProps(
     {
       prefixCls: PropTypes.string,
-      tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       children: PropTypes.any,
       treeData: PropTypes.array, // Generate treeNode by children
       showLine: PropTypes.bool,
@@ -647,7 +647,7 @@ const Tree = {
 
   render() {
     const { _treeNode: treeNode } = this.$data;
-    const { prefixCls, focusable, showLine, tabIndex = 0 } = this.$props;
+    const { prefixCls, focusable, showLine, tabindex = 0 } = this.$props;
     const domProps = getDataAndAria({ ...this.$props, ...this.$attrs });
     const { class: className, style } = this.$attrs;
     return (
@@ -659,7 +659,7 @@ const Tree = {
         style={style}
         role="tree"
         unselectable="on"
-        tabindex={focusable ? tabIndex : null}
+        tabindex={focusable ? tabindex : null}
       >
         {mapChildren(treeNode, (node, index) => this.renderTreeNode(node, index))}
       </ul>

@@ -77,7 +77,7 @@ export default {
           onClick={this.handleItemClick}
           onKeypress={this.handleKeyPress}
           role={accordion ? 'tab' : 'button'}
-          tabIndex={disabled ? -1 : 0}
+          tabindex={disabled ? -1 : 0}
           aria-expanded={isActive}
         >
           {showArrow && icon}

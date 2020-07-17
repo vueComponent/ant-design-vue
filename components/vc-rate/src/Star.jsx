@@ -77,7 +77,7 @@ export default {
           aria-checked={value > index ? 'true' : 'false'}
           aria-posinset={index + 1}
           aria-setsize={count}
-          tabIndex={0}
+          tabindex={0}
         >
           <div class={`${prefixCls}-first`}>{character}</div>
           <div class={`${prefixCls}-second`}>{character}</div>

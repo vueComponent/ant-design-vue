@@ -109,7 +109,7 @@ const renderSlides = function(spec, children, createElement) {
         {
           key: 'original' + getKey(child, index),
           attrs: {
-            tabIndex: '-1',
+            tabindex: '-1',
             'data-index': index,
             'aria-hidden': !slideClasses['slick-active'],
           },
@@ -142,7 +142,7 @@ const renderSlides = function(spec, children, createElement) {
             key: 'precloned' + getKey(child, key),
             class: classnames(slideClasses, slideClass),
             attrs: {
-              tabIndex: '-1',
+              tabindex: '-1',
               'data-index': key,
               'aria-hidden': !slideClasses['slick-active'],
             },
@@ -169,7 +169,7 @@ const renderSlides = function(spec, children, createElement) {
           cloneElement(child, {
             key: 'postcloned' + getKey(child, key),
             attrs: {
-              tabIndex: '-1',
+              tabindex: '-1',
               'data-index': key,
               'aria-hidden': !slideClasses['slick-active'],
             },

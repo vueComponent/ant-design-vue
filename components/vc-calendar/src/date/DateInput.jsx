@@ -210,7 +210,7 @@ const DateInput = {
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             inputMode={inputMode}
-            readOnly={inputReadOnly}
+            readonly={inputReadOnly}
           />
         </div>
         {showClear ? (

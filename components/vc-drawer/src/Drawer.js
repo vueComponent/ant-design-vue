@@ -479,7 +479,7 @@ const Drawer = {
             this.dom = c;
           }}
           {...domContProps}
-          tabIndex={-1}
+          tabindex={-1}
         >
           {showMask && (
             <div

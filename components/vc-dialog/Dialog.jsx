@@ -279,7 +279,7 @@ export default {
           forceRender={forceRender}
           onMousedown={this.onDialogMouseDown}
         >
-          <div tabIndex={0} ref="sentinelStart" style={sentinelStyle} aria-hidden="true" />
+          <div tabindex={0} ref="sentinelStart" style={sentinelStyle} aria-hidden="true" />
           <div class={`${prefixCls}-content`}>
             {closer}
             {header}
@@ -288,7 +288,7 @@ export default {
             </div>
             {footer}
           </div>
-          <div tabIndex={0} ref="sentinelEnd" style={sentinelStyle} aria-hidden="true" />
+          <div tabindex={0} ref="sentinelEnd" style={sentinelStyle} aria-hidden="true" />
         </LazyRenderBox>
       );
       const dialogTransitionProps = getTransitionProps(transitionName, {
@@ -421,7 +421,7 @@ export default {
       <div class={`${prefixCls}-root`}>
         {this.getMaskElement()}
         <div
-          tabIndex={-1}
+          tabindex={-1}
           onKeydown={this.onKeydown}
           class={`${prefixCls}-wrap ${wrapClassName || ''}`}
           ref="wrap"

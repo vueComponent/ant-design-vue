@@ -193,7 +193,7 @@ const MultipleSelector = {
         {...{
           props: {
             ...this.$props,
-            tabIndex: -1,
+            tabindex: -1,
             showArrow: false,
             renderSelection: this.renderSelection,
             renderPlaceholder: this._renderPlaceholder,

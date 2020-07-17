@@ -30,7 +30,7 @@ const rangeProps = {
   allowCross: PropTypes.bool,
   disabled: PropTypes.bool,
   reverse: PropTypes.bool,
-  tabIndex: PropTypes.arrayOf(PropTypes.number),
+  tabindex: PropTypes.arrayOf(PropTypes.number),
   prefixCls: PropTypes.string,
   min: PropTypes.number,
   max: PropTypes.number,
@@ -44,7 +44,7 @@ const Range = {
     count: 1,
     allowCross: true,
     pushable: false,
-    tabIndex: [],
+    tabindex: [],
   }),
   data() {
     const { count, min, max } = this;
@@ -395,15 +395,15 @@ const Range = {
         defaultHandle,
         trackStyle,
         handleStyle,
-        tabIndex,
+        tabindex,
       } = this;
       const handleGenerator = handle || defaultHandle;
       const offsets = bounds.map(v => this.calcOffset(v));
 
       const handleClassName = `${prefixCls}-handle`;
       const handles = bounds.map((v, i) => {
-        let _tabIndex = tabIndex[i] || 0;
-        if (disabled || tabIndex[i] === null) {
+        let _tabIndex = tabindex[i] || 0;
+        if (disabled || tabindex[i] === null) {
           _tabIndex = null;
         }
         return handleGenerator({
@@ -417,7 +417,7 @@ const Range = {
           value: v,
           dragging: sHandle === i,
           index: i,
-          tabIndex: _tabIndex,
+          tabindex: _tabIndex,
           min,
           max,
           reverse,

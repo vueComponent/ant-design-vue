@@ -200,7 +200,7 @@ export default {
           transform: 'translateZ(0)',
         }}
         id={this.$props.ariaId}
-        tabIndex="-1"
+        tabindex="-1"
         onFocus={onPopupFocus}
         onMousedown={preventDefaultEvent}
         onScroll={onPopupScroll}

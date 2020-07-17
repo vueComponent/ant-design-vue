@@ -36,7 +36,7 @@ focusTest(TextArea);
 describe('TextArea', () => {
   it('should auto calculate height according to content length', async () => {
     const wrapper = mount(TextArea, {
-      propsData: { value: '', readOnly: true, autoSize: true },
+      propsData: { value: '', readonly: true, autoSize: true },
       sync: false,
     });
 

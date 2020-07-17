@@ -48,7 +48,7 @@ export default {
       <div
         role="tablist"
         class={cls}
-        tabIndex="0"
+        tabindex="0"
         onKeydown={onKeyDown}
         style={style}
         ref={this.saveRef('root')}

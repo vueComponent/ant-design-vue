@@ -320,7 +320,7 @@ const Calendar = {
     children.push(
       <div class={`${prefixCls}-panel`} key="panel">
         {dateInputElement}
-        <div tabIndex={props.focusablePanel ? 0 : undefined} class={`${prefixCls}-date-panel`}>
+        <div tabindex={props.focusablePanel ? 0 : undefined} class={`${prefixCls}-date-panel`}>
           <CalendarHeader
             locale={locale}
             mode={sMode}

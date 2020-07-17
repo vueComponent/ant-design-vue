@@ -58,7 +58,7 @@ const TransButton = {
     return (
       <div
         role="button"
-        tabIndex={0}
+        tabindex={0}
         ref="div"
         {...this.$attrs}
         onKeydown={this.onKeyDown}

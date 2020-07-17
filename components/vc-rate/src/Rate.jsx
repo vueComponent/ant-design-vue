@@ -16,7 +16,7 @@ const rateProps = {
   prefixCls: PropTypes.string,
   character: PropTypes.any,
   characterRender: PropTypes.func,
-  tabIndex: PropTypes.number,
+  tabindex: PropTypes.number,
   autoFocus: PropTypes.bool,
 };
 
@@ -32,7 +32,7 @@ export default {
     allowHalf: false,
     allowClear: true,
     prefixCls: 'rc-rate',
-    tabIndex: 0,
+    tabindex: 0,
     character: '★',
   }),
   data() {
@@ -164,7 +164,7 @@ export default {
     },
   },
   render() {
-    const { count, allowHalf, prefixCls, disabled, tabIndex } = getOptionProps(this);
+    const { count, allowHalf, prefixCls, disabled, tabindex } = getOptionProps(this);
     const { sValue, hoverValue, focused } = this;
     const { class: className, style } = this.$attrs;
     const stars = [];
@@ -194,7 +194,7 @@ export default {
         class={classNames(prefixCls, disabledClass, className)}
         style={style}
         onMouseleave={disabled ? noop : this.onMouseLeave}
-        tabIndex={disabled ? -1 : tabIndex}
+        tabindex={disabled ? -1 : tabindex}
         onFocus={disabled ? noop : this.onFocus}
         onBlur={disabled ? noop : this.onBlur}
         onKeydown={disabled ? noop : this.onKeyDown}

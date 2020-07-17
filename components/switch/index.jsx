@@ -18,7 +18,7 @@ const Switch = {
     disabled: PropTypes.bool,
     checkedChildren: PropTypes.any,
     unCheckedChildren: PropTypes.any,
-    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     checked: PropTypes.bool,
     defaultChecked: PropTypes.bool,
     autoFocus: PropTypes.bool,

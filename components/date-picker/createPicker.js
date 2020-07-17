@@ -223,11 +223,11 @@ export default function createPicker(TheCalendar, props) {
             disabled={props.disabled}
             onFocus={focus}
             onBlur={blur}
-            readOnly
+            readonly
             value={formatDate(inputValue, this.format)}
             placeholder={placeholder}
             class={props.pickerInputClass}
-            tabIndex={props.tabIndex}
+            tabindex={props.tabindex}
             name={this.name}
           />
           {clearIcon}
@@ -255,7 +255,7 @@ export default function createPicker(TheCalendar, props) {
         <span
           class={props.pickerClass}
           style={pickerStyle}
-          // tabIndex={props.disabled ? -1 : 0}
+          // tabindex={props.disabled ? -1 : 0}
           // onFocus={focus}
           // onBlur={blur}
           onMouseenter={this.onMouseEnter}

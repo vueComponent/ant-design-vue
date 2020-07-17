@@ -299,7 +299,7 @@ export default function createSlider(Component) {
       return (
         <div
           ref="sliderRef"
-          tabIndex="-1"
+          tabindex="-1"
           class={sliderClassName}
           onTouchstart={disabled ? noop : this.onTouchStart}
           onMousedown={disabled ? noop : this.onMouseDown}

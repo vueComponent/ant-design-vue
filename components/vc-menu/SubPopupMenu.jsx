@@ -373,7 +373,7 @@ const SubPopupMenu = {
     //   domProps.id = props.id
     // }
     if (props.focusable) {
-      domWrapProps.tabIndex = '0';
+      domWrapProps.tabindex = '0';
       domWrapProps.onKeydown = this.onKeyDown;
     }
     delete domWrapProps.children;

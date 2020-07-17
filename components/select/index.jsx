@@ -28,7 +28,7 @@ const AbstractSelectProps = () => ({
   showSearch: PropTypes.bool,
   allowClear: PropTypes.bool,
   disabled: PropTypes.bool,
-  tabIndex: PropTypes.number,
+  tabindex: PropTypes.number,
   placeholder: PropTypes.any,
   defaultActiveFirstOption: PropTypes.bool,
   dropdownClassName: PropTypes.string,

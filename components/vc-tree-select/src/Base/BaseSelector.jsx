@@ -44,10 +44,10 @@ export default function(modeName) {
         // Pass by HOC
         renderSelection: PropTypes.func.isRequired,
         renderPlaceholder: PropTypes.func,
-        tabIndex: PropTypes.number,
+        tabindex: PropTypes.number,
       },
       {
-        tabIndex: 0,
+        tabindex: 0,
       },
     ),
     inject: {
@@ -130,13 +130,13 @@ export default function(modeName) {
         ariaId,
         renderSelection,
         renderPlaceholder,
-        tabIndex,
+        tabindex,
       } = this.$props;
       const {
         vcTreeSelect: { onSelectorKeyDown },
       } = this;
 
-      let myTabIndex = tabIndex;
+      let myTabIndex = tabindex;
       if (disabled) {
         myTabIndex = null;
       }
@@ -166,7 +166,7 @@ export default function(modeName) {
           aria-controls={open ? ariaId : undefined}
           aria-haspopup="listbox"
           aria-disabled={disabled}
-          tabIndex={myTabIndex}
+          tabindex={myTabIndex}
           onFocus={this.onFocus}
           onBlur={this.onBlur}
           onKeydown={onSelectorKeyDown}

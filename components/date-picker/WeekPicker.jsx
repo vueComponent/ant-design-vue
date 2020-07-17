@@ -193,7 +193,7 @@ export default {
           <input
             ref="input"
             disabled={disabled}
-            readOnly
+            readonly
             value={(value && value.format(format)) || ''}
             placeholder={placeholder}
             class={pickerInputClass}

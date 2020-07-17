@@ -233,7 +233,7 @@ const AjaxUploader = {
     const tagProps = {
       ...events,
       role: 'button',
-      tabIndex: disabled ? null : '0',
+      tabindex: disabled ? null : '0',
       class: cls,
       style,
     };

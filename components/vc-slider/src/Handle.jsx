@@ -15,7 +15,7 @@ export default {
     min: PropTypes.number,
     max: PropTypes.number,
     value: PropTypes.number,
-    tabIndex: PropTypes.number,
+    tabindex: PropTypes.number,
     className: PropTypes.string,
     reverse: PropTypes.bool,
     // handleFocus: PropTypes.func.def(noop),
@@ -78,7 +78,7 @@ export default {
       min,
       max,
       value,
-      tabIndex,
+      tabindex,
     } = getOptionProps(this);
     const className = classNames(this.$props.className, {
       [`${prefixCls}-handle-click-focused`]: this.clickFocused,
@@ -102,15 +102,15 @@ export default {
       'aria-valuenow': value,
       'aria-disabled': !!disabled,
     };
-    let _tabIndex = tabIndex || 0;
-    if (disabled || tabIndex === null) {
+    let _tabIndex = tabindex || 0;
+    if (disabled || tabindex === null) {
       _tabIndex = null;
     }
 
     const handleProps = {
       attrs: {
         role: 'slider',
-        tabIndex: _tabIndex,
+        tabindex: _tabIndex,
         ...ariaProps,
       },
       class: className,

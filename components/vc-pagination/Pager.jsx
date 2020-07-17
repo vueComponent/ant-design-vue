@@ -43,7 +43,7 @@ export default {
         onClick={this.handleClick}
         onKeypress={this.handleKeyPress}
         title={this.showTitle ? this.page : null}
-        tabIndex="0"
+        tabindex="0"
         class={cls}
         style={style}
       >

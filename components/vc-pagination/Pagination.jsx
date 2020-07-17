@@ -363,7 +363,7 @@ export default {
           <li
             title={this.showTitle ? locale.prev_page : null}
             onClick={this.prev}
-            tabIndex={hasPrev ? 0 : null}
+            tabindex={hasPrev ? 0 : null}
             onKeypress={this.runIfEnterPrev}
             class={`${hasPrev ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
             aria-disabled={!this.hasPrev()}
@@ -395,7 +395,7 @@ export default {
           <li
             title={this.showTitle ? locale.next_page : null}
             onClick={this.next}
-            tabIndex={this.hasNext ? 0 : null}
+            tabindex={this.hasNext ? 0 : null}
             onKeypress={this.runIfEnterNext}
             class={`${hasNext ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this.hasNext()}
@@ -437,7 +437,7 @@ export default {
             title={this.showTitle ? prevItemTitle : null}
             key="prev"
             onClick={this.jumpPrev}
-            tabIndex="0"
+            tabindex="0"
             onKeypress={this.runIfEnterJumpPrev}
             class={jumpPrevClassString}
           >
@@ -452,7 +452,7 @@ export default {
           <li
             title={this.showTitle ? nextItemTitle : null}
             key="next"
-            tabIndex="0"
+            tabindex="0"
             onClick={this.jumpNext}
             onKeypress={this.runIfEnterJumpNext}
             class={jumpNextClassString}
@@ -590,7 +590,7 @@ export default {
         <li
           title={this.showTitle ? locale.prev_page : null}
           onClick={this.prev}
-          tabIndex={prevDisabled ? null : 0}
+          tabindex={prevDisabled ? null : 0}
           onKeypress={this.runIfEnterPrev}
           class={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
@@ -601,7 +601,7 @@ export default {
         <li
           title={this.showTitle ? locale.next_page : null}
           onClick={this.next}
-          tabIndex={nextDisabled ? null : 0}
+          tabindex={nextDisabled ? null : 0}
           onKeypress={this.runIfEnterNext}
           class={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}

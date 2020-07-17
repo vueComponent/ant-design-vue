@@ -50,12 +50,12 @@ const inputNumberProps = {
   // onKeyDown: PropTypes.func,
   // onKeyUp: PropTypes.func,
   prefixCls: PropTypes.string,
-  tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
   // onFocus: PropTypes.func,
   // onBlur: PropTypes.func,
-  readOnly: PropTypes.bool,
+  readonly: PropTypes.bool,
   max: PropTypes.number,
   min: PropTypes.number,
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -640,7 +640,7 @@ export default {
     const {
       prefixCls,
       disabled,
-      readOnly,
+      readonly,
       useTouch,
       autoComplete,
       upHandler,
@@ -681,7 +681,7 @@ export default {
       }
     }
 
-    const editable = !this.readOnly && !this.disabled;
+    const editable = !this.readonly && !this.disabled;
 
     // focus state, show input value
     // unfocus state, show valid value
@@ -710,8 +710,8 @@ export default {
         onMouseleave: this.stop,
       };
     }
-    const isUpDisabled = !!upDisabledClass || disabled || readOnly;
-    const isDownDisabled = !!downDisabledClass || disabled || readOnly;
+    const isUpDisabled = !!upDisabledClass || disabled || readonly;
+    const isDownDisabled = !!downDisabledClass || disabled || readonly;
 
     const upHandlerProps = {
       disabled: isUpDisabled,
@@ -777,13 +777,13 @@ export default {
             placeholder={this.placeholder}
             onClick={this.handleInputClick}
             class={`${prefixCls}-input`}
-            tabIndex={this.tabIndex}
+            tabindex={this.tabindex}
             autoComplete={autoComplete}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             onKeydown={editable ? this.onKeyDown : noop}
             onKeyup={editable ? this.onKeyUp : noop}
-            readOnly={this.readOnly}
+            readonly={this.readonly}
             disabled={this.disabled}
             max={this.max}
             min={this.min}

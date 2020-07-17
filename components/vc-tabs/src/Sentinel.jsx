@@ -31,7 +31,7 @@ export default {
 
     return (
       <div
-        tabIndex={0}
+        tabindex={0}
         ref={setRef}
         style={sentinelStyle}
         onKeydown={this.onKeyDown}

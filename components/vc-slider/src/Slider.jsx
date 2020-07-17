@@ -14,7 +14,7 @@ const Slider = {
     value: PropTypes.number,
     disabled: PropTypes.bool,
     autoFocus: PropTypes.bool,
-    tabIndex: PropTypes.number,
+    tabindex: PropTypes.number,
     reverse: PropTypes.bool,
     min: PropTypes.number,
     max: PropTypes.number,
@@ -159,7 +159,7 @@ const Slider = {
         minimumTrackStyle,
         trackStyle,
         handleStyle,
-        tabIndex,
+        tabindex,
         min,
         max,
         reverse,
@@ -181,7 +181,7 @@ const Slider = {
         max,
         reverse,
         index: 0,
-        tabIndex,
+        tabindex,
         style: handleStyle[0] || handleStyle,
         directives: [
           {

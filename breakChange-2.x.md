@@ -2,6 +2,12 @@
 
 ## global api
 
+所有 dom 原生属性由驼峰改成全小写，涉及 API
+
+####
+
+maxLength -> maxlength tabIndex => tabindex readOnly => readonly autoComplete => autocomplete
+
 ## Tag
 
 ### CheckableTag

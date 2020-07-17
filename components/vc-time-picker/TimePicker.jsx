@@ -58,7 +58,7 @@ export default {
       // onFocus: PropTypes.func,
       // onBlur: PropTypes.func,
       name: PropTypes.string,
-      autoComplete: PropTypes.string,
+      autocomplete: PropTypes.string,
       use12Hours: PropTypes.bool,
       hourStep: PropTypes.number,
       minuteStep: PropTypes.number,
@@ -334,7 +334,7 @@ export default {
       transitionName,
       getPopupContainer,
       name,
-      autoComplete,
+      autocomplete,
       autoFocus,
       inputReadOnly,
       sOpen,
@@ -371,7 +371,7 @@ export default {
             onKeydown={this.onKeyDown}
             disabled={disabled}
             value={(sValue && sValue.format(this.getFormat())) || ''}
-            autoComplete={autoComplete}
+            autocomplete={autocomplete}
             onFocus={onFocus}
             onBlur={onBlur}
             autoFocus={autoFocus}

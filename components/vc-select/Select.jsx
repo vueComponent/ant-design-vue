@@ -771,7 +771,7 @@ const Select = {
       const { _inputValue: inputValue } = this.$data;
       const attrs = this.$attrs;
       const defaultInput = (
-        <input {...(attrs.id !== undefined ? { id: attrs.id } : {})} autoComplete="off" />
+        <input {...(attrs.id !== undefined ? { id: attrs.id } : {})} autocomplete="off" />
       );
 
       const inputElement = props.getInputElement ? props.getInputElement() : defaultInput;

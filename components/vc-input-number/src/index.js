@@ -72,7 +72,7 @@ const inputNumberProps = {
   required: PropTypes.bool,
   pattern: PropTypes.string,
   decimalSeparator: PropTypes.string,
-  autoComplete: PropTypes.string,
+  autocomplete: PropTypes.string,
   title: PropTypes.string,
   name: PropTypes.string,
   id: PropTypes.string,
@@ -95,7 +95,7 @@ export default {
     step: 1,
     parser: defaultParser,
     required: false,
-    autoComplete: 'off',
+    autocomplete: 'off',
   }),
   data() {
     const props = getOptionProps(this);
@@ -642,7 +642,7 @@ export default {
       disabled,
       readonly,
       useTouch,
-      autoComplete,
+      autocomplete,
       upHandler,
       downHandler,
       class: className,
@@ -778,7 +778,7 @@ export default {
             onClick={this.handleInputClick}
             class={`${prefixCls}-input`}
             tabindex={this.tabindex}
-            autoComplete={autoComplete}
+            autocomplete={autocomplete}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
             onKeydown={editable ? this.onKeyDown : noop}

@@ -30,6 +30,6 @@ export default {
     default: true,
     type: Boolean,
   },
-  maxLength: PropTypes.number,
+  maxlength: PropTypes.number,
   loading: PropTypes.bool,
 };

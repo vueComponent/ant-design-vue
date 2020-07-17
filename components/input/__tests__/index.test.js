@@ -11,8 +11,8 @@ describe('Input', () => {
   focusTest(TextArea);
   focusTest(Password);
 
-  it('should support maxLength', async () => {
-    const wrapper = mount(Input, { attrs: { maxLength: 3 }, sync: false });
+  it('should support maxlength', async () => {
+    const wrapper = mount(Input, { attrs: { maxlength: 3 }, sync: false });
     await asyncExpect(() => {
       expect(wrapper.html()).toMatchSnapshot();
     }, 0);
@@ -63,8 +63,8 @@ describe('TextArea', () => {
     });
   });
 
-  it('should support maxLength', async () => {
-    const wrapper = mount(TextArea, { attrs: { maxLength: 10 }, sync: false });
+  it('should support maxlength', async () => {
+    const wrapper = mount(TextArea, { attrs: { maxlength: 10 }, sync: false });
     await asyncExpect(() => {
       expect(wrapper.html()).toMatchSnapshot();
     });

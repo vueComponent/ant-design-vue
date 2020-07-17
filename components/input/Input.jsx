@@ -157,10 +157,6 @@ export default {
         onInput: handleChange,
         onChange: noop,
       };
-      // vue bug ？
-      if (inputProps.maxLength === undefined) {
-        delete inputProps.maxLength;
-      }
       if (!inputProps.autoFocus) {
         delete inputProps.autoFocus;
       }

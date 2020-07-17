@@ -48,7 +48,7 @@ const ConfirmDialog = (_, { attrs }) => {
     <ActionButton
       actionFn={onCancel}
       closeModal={close}
-      autoFocus={autoFocusButton === 'cancel'}
+      autofocus={autoFocusButton === 'cancel'}
       buttonProps={cancelButtonProps}
     >
       {cancelText}
@@ -94,7 +94,7 @@ const ConfirmDialog = (_, { attrs }) => {
             type={okType}
             actionFn={onOk}
             closeModal={close}
-            autoFocus={autoFocusButton === 'ok'}
+            autofocus={autoFocusButton === 'ok'}
             buttonProps={okButtonProps}
           >
             {okText}

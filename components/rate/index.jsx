@@ -17,7 +17,7 @@ export const RateProps = {
   tooltips: PropTypes.arrayOf(PropTypes.string),
   disabled: PropTypes.bool,
   character: PropTypes.any,
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
 };
 
 const Rate = {

@@ -10,7 +10,7 @@ export declare class Switch extends AntdComponent {
    * @default false
    * @type boolean
    */
-  autoFocus: boolean;
+  autofocus: boolean;
 
   /**
    * determine whether the Switch is checked

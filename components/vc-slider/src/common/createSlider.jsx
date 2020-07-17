@@ -31,7 +31,7 @@ export default function createSlider(Component) {
     railStyle: PropTypes.object,
     dotStyle: PropTypes.object,
     activeDotStyle: PropTypes.object,
-    autoFocus: PropTypes.bool,
+    autofocus: PropTypes.bool,
   };
   return {
     name: 'createSlider',
@@ -75,8 +75,8 @@ export default function createSlider(Component) {
         // Snapshot testing cannot handle refs, so be sure to null-check this.
         this.document = this.$refs.sliderRef && this.$refs.sliderRef.ownerDocument;
         // this.setHandleRefs()
-        const { autoFocus, disabled } = this;
-        if (autoFocus && !disabled) {
+        const { autofocus, disabled } = this;
+        if (autofocus && !disabled) {
           this.focus();
         }
       });

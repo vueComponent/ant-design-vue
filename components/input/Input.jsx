@@ -157,8 +157,8 @@ export default {
         onInput: handleChange,
         onChange: noop,
       };
-      if (!inputProps.autoFocus) {
-        delete inputProps.autoFocus;
+      if (!inputProps.autofocus) {
+        delete inputProps.autofocus;
       }
       return <input {...inputProps} />;
     },

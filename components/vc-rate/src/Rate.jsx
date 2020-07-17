@@ -17,7 +17,7 @@ const rateProps = {
   character: PropTypes.any,
   characterRender: PropTypes.func,
   tabindex: PropTypes.number,
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
 };
 
 function noop() {}
@@ -56,7 +56,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      if (this.autoFocus && !this.disabled) {
+      if (this.autofocus && !this.disabled) {
         this.focus();
       }
     });

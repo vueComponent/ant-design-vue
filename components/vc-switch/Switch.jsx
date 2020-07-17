@@ -32,8 +32,8 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      const { autoFocus, disabled } = this;
-      if (autoFocus && !disabled) {
+      const { autofocus, disabled } = this;
+      if (autofocus && !disabled) {
         this.focus();
       }
     });
@@ -84,7 +84,7 @@ export default {
       disabled,
       loadingIcon,
       defaultChecked,
-      autoFocus,
+      autofocus,
       ...restProps
     } = getOptionProps(this);
     const checked = this.stateChecked;

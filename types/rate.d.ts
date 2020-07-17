@@ -24,7 +24,7 @@ export declare class Rate extends AntdComponent {
    * @default false
    * @type boolean
    */
-  autoFocus: boolean;
+  autofocus: boolean;
 
   /**
    * custom character of rate

@@ -22,7 +22,7 @@ export default {
     id: PropTypes.string,
     indeterminate: PropTypes.bool,
     type: PropTypes.string.def('checkbox'),
-    autoFocus: PropTypes.bool,
+    autofocus: PropTypes.bool,
   },
 
   setup() {

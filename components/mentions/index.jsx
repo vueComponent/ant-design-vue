@@ -66,7 +66,7 @@ const Mentions = {
   },
   mounted() {
     this.$nextTick(() => {
-      if (this.autoFocus) {
+      if (this.autofocus) {
         this.focus();
       }
     });

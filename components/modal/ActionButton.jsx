@@ -8,7 +8,7 @@ const ActionButtonProps = {
   type: ButtonType,
   actionFn: PropTypes.func,
   closeModal: PropTypes.func,
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
   buttonProps: PropTypes.object,
 };
 
@@ -21,7 +21,7 @@ export default {
     };
   },
   mounted() {
-    if (this.autoFocus) {
+    if (this.autofocus) {
       this.timeoutId = setTimeout(() => this.$el.focus());
     }
   },

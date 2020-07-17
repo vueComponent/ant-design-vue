@@ -81,7 +81,7 @@ const Select = {
       open: PropTypes.bool,
       value: PropTypes.any,
 
-      autoFocus: PropTypes.bool,
+      autofocus: PropTypes.bool,
 
       defaultOpen: PropTypes.bool,
       defaultValue: PropTypes.any,
@@ -258,8 +258,8 @@ const Select = {
   },
   mounted() {
     this.$nextTick(() => {
-      const { autoFocus, disabled } = this.$props;
-      if (autoFocus && !disabled) {
+      const { autofocus, disabled } = this.$props;
+      if (autofocus && !disabled) {
         this.focus();
       }
     });

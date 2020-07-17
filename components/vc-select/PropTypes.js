@@ -42,7 +42,7 @@ export const SelectPropTypes = {
   tokenSeparators: PropTypes.arrayOf(PropTypes.string),
   getInputElement: PropTypes.func,
   showAction: PropTypes.arrayOf(PropTypes.string),
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
   getPopupContainer: PropTypes.func,
   clearIcon: PropTypes.any,
   inputIcon: PropTypes.any,

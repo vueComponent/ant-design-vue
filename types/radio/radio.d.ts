@@ -15,7 +15,7 @@ export declare class Radio extends AntdComponent {
    * @default false
    * @type boolean
    */
-  autoFocus: boolean;
+  autofocus: boolean;
 
   /**
    * Specifies whether the radio is selected.

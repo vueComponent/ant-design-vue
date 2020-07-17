@@ -25,7 +25,7 @@ export const PickerProps = () => ({
   pickerClass: PropTypes.string,
   pickerInputClass: PropTypes.string,
   timePicker: PropTypes.any,
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
   tagPrefixCls: PropTypes.string,
   tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   align: PropTypes.object.def(() => ({})),

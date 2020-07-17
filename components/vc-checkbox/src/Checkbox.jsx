@@ -23,7 +23,7 @@ export default {
       // onClick: PropTypes.func,
       tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       readonly: PropTypes.bool,
-      autoFocus: PropTypes.bool,
+      autofocus: PropTypes.bool,
       value: PropTypes.any,
     },
     {
@@ -45,7 +45,7 @@ export default {
   },
   mounted() {
     nextTick(() => {
-      if (this.autoFocus) {
+      if (this.autofocus) {
         this.$refs.input && this.$refs.input.focus();
       }
     });
@@ -102,7 +102,7 @@ export default {
       disabled,
       readonly,
       tabindex,
-      autoFocus,
+      autofocus,
       onFocus,
       onBlur,
       value,
@@ -130,7 +130,7 @@ export default {
       tabindex,
       class: `${prefixCls}-input`,
       checked: !!sChecked,
-      autoFocus,
+      autofocus,
       value,
       ...globalProps,
       onChange: this.handleChange,

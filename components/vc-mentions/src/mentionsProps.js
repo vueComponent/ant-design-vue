@@ -7,7 +7,7 @@ import {
 import { PlaceMent } from './placement';
 
 export const mentionsProps = {
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
   prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   prefixCls: PropTypes.string,
   value: PropTypes.string,

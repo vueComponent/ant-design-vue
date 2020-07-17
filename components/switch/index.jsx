@@ -21,7 +21,7 @@ const Switch = {
     tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     checked: PropTypes.bool,
     defaultChecked: PropTypes.bool,
-    autoFocus: PropTypes.bool,
+    autofocus: PropTypes.bool,
     loading: PropTypes.bool,
   },
   setup() {

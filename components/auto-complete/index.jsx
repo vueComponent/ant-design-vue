@@ -45,7 +45,7 @@ const AutoComplete = {
     showSearch: PropTypes.bool.def(false),
     transitionName: PropTypes.string.def('slide-up'),
     choiceTransitionName: PropTypes.string.def('zoom'),
-    autoFocus: PropTypes.bool,
+    autofocus: PropTypes.bool,
     backfill: PropTypes.bool,
     optionLabelProp: PropTypes.string.def('children'),
     filterOption: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]).def(false),

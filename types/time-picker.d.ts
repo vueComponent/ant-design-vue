@@ -24,7 +24,7 @@ export declare class TimePicker extends AntdComponent {
    * @default false
    * @type boolean
    */
-  autoFocus: boolean;
+  autofocus: boolean;
 
   /**
    * clear tooltip of icon

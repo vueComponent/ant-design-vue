@@ -142,8 +142,8 @@ const ResizableTextArea = {
         //   },
         // ],
       };
-      if (!textareaProps.autoFocus) {
-        delete textareaProps.autoFocus;
+      if (!textareaProps.autofocus) {
+        delete textareaProps.autofocus;
       }
       return (
         <ResizeObserver onResize={this.handleResize} disabled={!(autoSize || autosize)}>

@@ -19,7 +19,7 @@ export default {
     value: PropTypes.any,
     name: String,
     id: String,
-    autoFocus: Boolean,
+    autofocus: Boolean,
     type: PropTypes.string.def('radio'),
     onChange: PropTypes.func,
   },

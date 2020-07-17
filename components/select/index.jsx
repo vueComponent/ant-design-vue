@@ -37,7 +37,7 @@ const AbstractSelectProps = () => ({
   dropdownMatchSelectWidth: PropTypes.bool,
   // onSearch: (value: string) => any,
   filterOption: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
   backfill: PropTypes.bool,
   showArrow: PropTypes.bool,
   getPopupContainer: PropTypes.func,

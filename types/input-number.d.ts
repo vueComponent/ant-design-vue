@@ -10,7 +10,7 @@ export declare class InputNumber extends AntdComponent {
    * @default false
    * @type boolean
    */
-  autoFocus: boolean;
+  autofocus: boolean;
 
   /**
    * initial value

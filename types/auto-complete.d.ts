@@ -22,7 +22,7 @@ export declare class AutoComplete extends AntdComponent {
    * @default false
    * @type boolean
    */
-  autoFocus: boolean;
+  autofocus: boolean;
 
   /**
    * backfill selected item the input when using keyboard

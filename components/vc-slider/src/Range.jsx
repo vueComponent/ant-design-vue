@@ -34,7 +34,7 @@ const rangeProps = {
   prefixCls: PropTypes.string,
   min: PropTypes.number,
   max: PropTypes.number,
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
 };
 const Range = {
   name: 'Range',

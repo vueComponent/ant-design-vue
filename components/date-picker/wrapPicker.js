@@ -59,10 +59,10 @@ export default function wrapPicker(Picker, props, pickerType) {
       };
     },
     mounted() {
-      const { autoFocus, disabled, value, defaultValue, valueFormat } = this;
+      const { autofocus, disabled, value, defaultValue, valueFormat } = this;
       checkValidate('DatePicker', defaultValue, 'defaultValue', valueFormat);
       checkValidate('DatePicker', value, 'value', valueFormat);
-      if (autoFocus && !disabled) {
+      if (autofocus && !disabled) {
         this.$nextTick(() => {
           this.focus();
         });

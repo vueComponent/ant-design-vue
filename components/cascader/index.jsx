@@ -90,7 +90,7 @@ const CascaderProps = {
   getPopupContainer: PropTypes.func,
   popupVisible: PropTypes.bool,
   fieldNames: FieldNamesType,
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
   suffixIcon: PropTypes.any,
 };
 
@@ -167,7 +167,7 @@ const Cascader = {
   },
   // mounted() {
   //   this.$nextTick(() => {
-  //     if (this.autoFocus && !this.showSearch && !this.disabled) {
+  //     if (this.autofocus && !this.showSearch && !this.disabled) {
   //       this.$refs.picker.focus();
   //     }
   //   });

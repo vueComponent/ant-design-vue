@@ -45,7 +45,7 @@ const inputNumberProps = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   focusOnUpDown: PropTypes.bool,
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
   // onChange: PropTypes.func,
   // onKeyDown: PropTypes.func,
   // onKeyUp: PropTypes.func,
@@ -110,12 +110,12 @@ export default {
     return {
       inputValue: this.toPrecisionAsStep(validValue),
       sValue: validValue,
-      focused: this.autoFocus,
+      focused: this.autofocus,
     };
   },
   mounted() {
     this.$nextTick(() => {
-      if (this.autoFocus && !this.disabled) {
+      if (this.autofocus && !this.disabled) {
         this.focus();
       }
       this.updatedFunc();
@@ -540,8 +540,8 @@ export default {
       );
     },
     toNumber(num) {
-      const { precision, autoFocus } = this.$props;
-      const { focused = autoFocus } = this;
+      const { precision, autofocus } = this.$props;
+      const { focused = autofocus } = this;
       // num.length > 16 => This is to prevent input of large numbers
       const numberIsTooLarge = num && num.length > 16 && focused;
       if (this.isNotCompleteNumber(num) || numberIsTooLarge) {

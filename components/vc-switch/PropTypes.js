@@ -11,6 +11,6 @@ export const switchPropTypes = {
   tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   checked: PropTypes.bool,
   defaultChecked: PropTypes.bool.def(false),
-  autoFocus: PropTypes.bool.def(false),
+  autofocus: PropTypes.bool.def(false),
   loadingIcon: PropTypes.any,
 };

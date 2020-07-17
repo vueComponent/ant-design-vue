@@ -11,7 +11,7 @@ export declare class Slider extends AntdComponent {
    * @default false
    * @type boolean
    */
-  autoFocus: boolean;
+  autofocus: boolean;
 
   /**
    * The default value of slider. When range is false, use number, otherwise, use [number, number]

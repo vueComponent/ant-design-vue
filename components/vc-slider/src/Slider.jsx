@@ -13,7 +13,7 @@ const Slider = {
     defaultValue: PropTypes.number,
     value: PropTypes.number,
     disabled: PropTypes.bool,
-    autoFocus: PropTypes.bool,
+    autofocus: PropTypes.bool,
     tabindex: PropTypes.number,
     reverse: PropTypes.bool,
     min: PropTypes.number,

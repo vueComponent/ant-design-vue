@@ -64,7 +64,7 @@ export const TimePickerProps = () => ({
   align: PropTypes.object,
   placement: PropTypes.any,
   transitionName: PropTypes.string,
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
   addon: PropTypes.any,
   clearIcon: PropTypes.any,
   locale: PropTypes.object,

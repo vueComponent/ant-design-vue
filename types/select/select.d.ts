@@ -30,7 +30,7 @@ export declare class Select extends AntdComponent {
    * @default false
    * @type boolean
    */
-  autoFocus: boolean;
+  autofocus: boolean;
 
   /**
    * Whether active first option by default

@@ -11,7 +11,7 @@ export declare class Mentions extends AntdComponent {
    * @default false
    * @type boolean
    */
-  autoFocus: boolean;
+  autofocus: boolean;
 
   /**
    * Default value

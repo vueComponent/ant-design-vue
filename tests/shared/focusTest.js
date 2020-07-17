@@ -44,13 +44,13 @@ export default function focusTest(Component) {
       });
     });
 
-    it('autoFocus', done => {
+    it('autofocus', done => {
       jest.useRealTimers();
       const handleFocus = jest.fn();
       mount(
         {
           render(h) {
-            return <Component autoFocus onFocus={handleFocus} />;
+            return <Component autofocus onFocus={handleFocus} />;
           },
         },
         { attachToDocument: true, sync: false },

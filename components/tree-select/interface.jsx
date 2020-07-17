@@ -11,7 +11,7 @@ export const TreeData = PropTypes.shape({
 
 export const TreeSelectProps = () => ({
   ...AbstractSelectProps(),
-  autoFocus: PropTypes.bool,
+  autofocus: PropTypes.bool,
   dropdownStyle: PropTypes.object,
   filterTreeNode: PropTypes.oneOfType([Function, Boolean]),
   getPopupContainer: PropTypes.func,

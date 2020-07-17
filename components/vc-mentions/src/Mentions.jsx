@@ -249,7 +249,7 @@ const Mentions = {
       prefixCls,
       placement,
       transitionName,
-      autoFocus,
+      autofocus,
       notFoundContent,
       getPopupContainer,
       ...restProps

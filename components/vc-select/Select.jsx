@@ -158,7 +158,7 @@ const Select = {
     this.$nextTick(() => {
       // when defaultOpen is true, we should auto focus search input
       // https://github.com/ant-design/ant-design/issues/14254
-      if (this.autoFocus || this._open) {
+      if (this.autofocus || this._open) {
         this.focus();
       }
       // this.setState({

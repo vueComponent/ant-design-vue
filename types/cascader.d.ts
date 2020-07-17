@@ -59,7 +59,7 @@ export declare class Cascader extends AntdComponent {
    * @default false
    * @type boolean
    */
-  autoFocus: boolean;
+  autofocus: boolean;
 
   /**
    * change value on each selection if set to true.

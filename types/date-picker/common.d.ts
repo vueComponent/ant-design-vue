@@ -18,7 +18,7 @@ export declare class DatepickerCommon extends AntdComponent {
    * @default false
    * @type boolean
    */
-  autoFocus: boolean;
+  autofocus: boolean;
 
   /**
    * custom rendering function for date cells by setting a scoped slot

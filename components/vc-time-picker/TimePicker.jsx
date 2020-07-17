@@ -65,7 +65,7 @@ export default {
       secondStep: PropTypes.number,
       focusOnOpen: PropTypes.bool,
       // onKeyDown: PropTypes.func,
-      autoFocus: PropTypes.bool,
+      autofocus: PropTypes.bool,
       id: PropTypes.string,
       inputIcon: PropTypes.any,
       clearIcon: PropTypes.any,
@@ -116,7 +116,7 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      if (this.autoFocus) {
+      if (this.autofocus) {
         this.focus();
       }
     });
@@ -335,7 +335,7 @@ export default {
       getPopupContainer,
       name,
       autocomplete,
-      autoFocus,
+      autofocus,
       inputReadOnly,
       sOpen,
       sValue,
@@ -374,7 +374,7 @@ export default {
             autocomplete={autocomplete}
             onFocus={onFocus}
             onBlur={onBlur}
-            autoFocus={autoFocus}
+            autofocus={autofocus}
             readonly={!!inputReadOnly}
             id={id}
           />

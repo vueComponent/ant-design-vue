@@ -54,6 +54,7 @@ const TreeNode = {
   ),
 
   data() {
+    this.children = null;
     return {
       dragNodeHighlight: false,
     };
@@ -241,7 +242,7 @@ const TreeNode = {
     },
 
     getNodeChildren() {
-      const originList = getSlot(this);
+      const originList = this.children;
       const targetList = getNodeChildren(originList);
 
       if (originList.length !== targetList.length) {
@@ -521,6 +522,7 @@ const TreeNode = {
   },
 
   render() {
+    this.children = getSlot(this);
     const {
       dragOver,
       dragOverGapTop,

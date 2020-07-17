@@ -1,5 +1,5 @@
 import { getNodeChildren, convertTreeToEntities } from '../vc-tree/src/util';
-import { getSlots } from '../_util/props-util';
+import { getSlot } from '../_util/props-util';
 
 const Record = {
   None: 'node',
@@ -13,9 +13,9 @@ function traverseNodesKey(rootChildren, callback) {
 
   function processNode(node) {
     const { key } = node;
-    const children = getSlots(node);
+    const children = getSlot(node);
     if (callback(key, node) !== false) {
-      traverseNodesKey(typeof children === 'function' ? children() : children, callback);
+      traverseNodesKey(children, callback);
     }
   }
 

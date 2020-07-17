@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 import classNames from 'classnames';
 import warning from 'warning';
-import { hasProp, initDefaultProps, getOptionProps, getSlots } from '../../_util/props-util';
+import { hasProp, initDefaultProps, getOptionProps, getSlot } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import BaseMixin from '../../_util/BaseMixin';
 import {
@@ -237,7 +237,7 @@ const Tree = {
     onNodeDragStart(event, node) {
       const { _expandedKeys } = this.$data;
       const { eventKey } = node;
-      const children = getSlots(node);
+      const children = getSlot(node);
       this.dragNode = node;
 
       this.setState({

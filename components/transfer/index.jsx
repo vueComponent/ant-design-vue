@@ -120,10 +120,9 @@ const Transfer = {
     },
 
     getLocale(transferLocale, renderEmpty) {
-      const h = this.$createElement;
       // Keep old locale props still working.
       const oldLocale = {
-        notFoundContent: renderEmpty(h, 'Transfer'),
+        notFoundContent: renderEmpty('Transfer'),
       };
       const notFoundContent = getComponentFromProp(this, 'notFoundContent');
       if (notFoundContent) {

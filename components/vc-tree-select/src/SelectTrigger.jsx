@@ -1,8 +1,8 @@
 import PropTypes from '../../_util/vue-types';
-
 import Trigger from '../../vc-trigger';
 import { createRef } from './util';
 import classNames from 'classnames';
+import { getSlot } from '../../_util/props-util';
 
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {
@@ -27,6 +27,7 @@ const BUILT_IN_PLACEMENTS = {
 
 const SelectTrigger = {
   name: 'SelectTrigger',
+  inheritAttrs: false,
   props: {
     // Pass by outside user props
     disabled: PropTypes.bool,
@@ -93,14 +94,7 @@ const SelectTrigger = {
     }
     return (
       <Trigger
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: this.triggerRef,
-            },
-          ],
-        }}
+        ref={this.triggerRef}
         action={disabled ? [] : ['click']}
         popupPlacement="bottomLeft"
         builtinPlacements={BUILT_IN_PLACEMENTS}
@@ -118,7 +112,7 @@ const SelectTrigger = {
         })}
         popupStyle={dropdownStyle}
       >
-        {this.$slots.default}
+        {getSlot(this)}
       </Trigger>
     );
   },

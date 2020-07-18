@@ -112,17 +112,8 @@ const getAllChildren = ele => {
   }
   return ele.children || componentOptions.children || [];
 };
-const getSlotOptions = ele => {
+const getSlotOptions = () => {
   throw Error('使用 .type 直接取值');
-  if (ele.fnOptions) {
-    // 函数式组件
-    return ele.fnOptions;
-  }
-  let componentOptions = ele.componentOptions;
-  if (ele.$vnode) {
-    componentOptions = ele.$vnode.componentOptions;
-  }
-  return componentOptions ? componentOptions.Ctor.options || {} : {};
 };
 const findDOMNode = instance => {
   let node = instance.$el || instance;
@@ -148,7 +139,7 @@ const getOptionProps = instance => {
     Object.keys(originProps).forEach(key => {
       props[camelize(key)] = originProps[key];
     });
-    const options = instance.type.props;
+    const options = instance.type.props || {};
     Object.keys(options).forEach(k => {
       const v = resolvePropValue(options, props, k, props[k]);
       if (v !== undefined || k in props) {
@@ -246,13 +237,14 @@ const getPropsData = ins => {
     props[camelize(key)] = originProps[key];
   });
   const options = isPlainObject(vnode.type) ? vnode.type.props : {};
-  Object.keys(options).forEach(k => {
-    const v = resolvePropValue(options, props, k, props[k]);
-    if (k in props) {
-      // 仅包含 props，不包含默认值
-      res[k] = v;
-    }
-  });
+  options &&
+    Object.keys(options).forEach(k => {
+      const v = resolvePropValue(options, props, k, props[k]);
+      if (k in props) {
+        // 仅包含 props，不包含默认值
+        res[k] = v;
+      }
+    });
   return { ...props, ...res }; // 合并事件、未声明属性等
 };
 const getValueByProp = (ele, prop) => {

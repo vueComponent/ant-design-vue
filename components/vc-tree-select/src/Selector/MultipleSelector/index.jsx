@@ -1,9 +1,10 @@
+import { inject, TransitionGroup } from 'vue';
 import PropTypes from '../../../../_util/vue-types';
 import { createRef } from '../../util';
 import generateSelector, { selectorPropTypes } from '../../Base/BaseSelector';
 import SearchInput from '../../SearchInput';
 import Selection from './Selection';
-import { getComponentFromProp, getListeners } from '../../../../_util/props-util';
+import { getComponent, getSlot } from '../../../../_util/props-util';
 import getTransitionProps from '../../../../_util/getTransitionProps';
 import BaseMixin from '../../../../_util/BaseMixin';
 const TREE_SELECT_EMPTY_VALUE_KEY = 'RC_TREE_SELECT_EMPTY_VALUE_KEY';
@@ -15,7 +16,9 @@ const Selector = generateSelector('multiple');
 // }
 
 const MultipleSelector = {
+  name: 'MultipleSelector',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     ...selectorPropTypes(),
     ...SearchInput.props,
@@ -28,8 +31,10 @@ const MultipleSelector = {
 
     // onChoiceAnimationLeave: PropTypes.func,
   },
-  inject: {
-    vcTreeSelect: { default: () => ({}) },
+  setup() {
+    return {
+      vcTreeSelect: inject('vcTreeSelect', {}),
+    };
   },
   created() {
     this.inputRef = createRef();
@@ -85,11 +90,10 @@ const MultipleSelector = {
         labelInValue,
         maxTagCount,
       } = this.$props;
+      const children = getSlot(this);
       const {
         vcTreeSelect: { onMultipleSelectorRemove },
-        $slots,
       } = this;
-      const listeners = getListeners(this);
       // Check if `maxTagCount` is set
       let myValueList = selectorValueList;
       if (maxTagCount >= 0) {
@@ -99,23 +103,21 @@ const MultipleSelector = {
       const selectedValueNodes = myValueList.map(({ label, value }) => (
         <Selection
           {...{
-            props: {
-              ...this.$props,
-              label,
-              value,
-            },
-            on: { ...listeners, remove: onMultipleSelectorRemove },
+            ...this.$props,
+            label,
+            value,
+            onRemove: onMultipleSelectorRemove,
           }}
           key={value || TREE_SELECT_EMPTY_VALUE_KEY}
         >
-          {$slots.default}
+          {children}
         </Selection>
       ));
 
       // Rest node count
       if (maxTagCount >= 0 && maxTagCount < selectorValueList.length) {
         let content = `+ ${selectorValueList.length - maxTagCount} ...`;
-        const maxTagPlaceholder = getComponentFromProp(this, 'maxTagPlaceholder', {}, false);
+        const maxTagPlaceholder = getComponent(this, 'maxTagPlaceholder', {}, false);
         if (typeof maxTagPlaceholder === 'string') {
           content = maxTagPlaceholder;
         } else if (typeof maxTagPlaceholder === 'function') {
@@ -128,16 +130,13 @@ const MultipleSelector = {
         const restNodeSelect = (
           <Selection
             {...{
-              props: {
-                ...this.$props,
-                label: content,
-                value: null,
-              },
-              on: listeners,
+              ...this.$props,
+              label: content,
+              value: null,
             }}
             key="rc-tree-select-internal-max-tag-counter"
           >
-            {$slots.default}
+            {children}
           </Selection>
         );
 
@@ -148,20 +147,13 @@ const MultipleSelector = {
         <li class={`${prefixCls}-search ${prefixCls}-search--inline`} key="__input">
           <SearchInput
             {...{
-              props: {
-                ...this.$props,
-                needAlign: true,
-              },
-              on: listeners,
-              directives: [
-                {
-                  name: 'ant-ref',
-                  value: this.inputRef,
-                },
-              ],
+              ...this.$props,
+              ...this.$attrs,
+              needAlign: true,
             }}
+            ref={this.inputRef}
           >
-            {$slots.default}
+            {children}
           </SearchInput>
         </li>,
       );
@@ -169,12 +161,12 @@ const MultipleSelector = {
       if (choiceTransitionName) {
         const transitionProps = getTransitionProps(choiceTransitionName, {
           tag: 'ul',
-          afterLeave: this.onChoiceAnimationLeave,
+          onAfterLeave: this.onChoiceAnimationLeave,
         });
         return (
-          <transition-group class={className} {...transitionProps}>
+          <TransitionGroup class={className} {...transitionProps}>
             {selectedValueNodes}
-          </transition-group>
+          </TransitionGroup>
         );
       }
       return (
@@ -186,22 +178,18 @@ const MultipleSelector = {
   },
 
   render() {
-    const { $slots } = this;
-    const listeners = getListeners(this);
     return (
       <Selector
         {...{
-          props: {
-            ...this.$props,
-            tabindex: -1,
-            showArrow: false,
-            renderSelection: this.renderSelection,
-            renderPlaceholder: this._renderPlaceholder,
-          },
-          on: listeners,
+          ...this.$props,
+          ...this.$attrs,
+          tabindex: -1,
+          showArrow: false,
+          renderSelection: this.renderSelection,
+          renderPlaceholder: this._renderPlaceholder,
         }}
       >
-        {$slots.default}
+        {getSlot(this)}
       </Selector>
     );
   },

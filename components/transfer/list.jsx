@@ -174,7 +174,7 @@ export default {
       if (!listBody) {
         let bodyNode;
 
-        const { bodyContent, customize } = renderListNode(this.$createElement, renderList, {
+        const { bodyContent, customize } = renderListNode(renderList, {
           props: { ...this.$props, filteredItems, filteredRenderItems, selectedKeys: checkedKeys },
           on: getListeners(this),
         });

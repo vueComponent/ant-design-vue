@@ -302,7 +302,6 @@ const Cascader = {
     },
 
     generateFilteredOptions(prefixCls, renderEmpty) {
-      const h = this.$createElement;
       const { showSearch, notFoundContent } = this;
       const names = getFilledFieldNames(this.$props);
       const {
@@ -356,7 +355,7 @@ const Cascader = {
       }
       return [
         {
-          [names.label]: notFoundContent || renderEmpty(h, 'Cascader'),
+          [names.label]: notFoundContent || renderEmpty('Cascader'),
           [names.value]: 'ANT_CASCADER_NOT_FOUND',
           disabled: true,
         },
@@ -541,6 +540,10 @@ const Cascader = {
     };
     return <VcCascader {...cascaderProps}>{input}</VcCascader>;
   },
+};
+
+Cascader.install = function(app) {
+  app.component(Cascader.name, Cascader);
 };
 
 export default Cascader;

@@ -96,7 +96,6 @@ export default {
       return null;
     },
     renderIndicator(h, prefixCls) {
-      // const h = this.$createElement
       const dotClassName = `${prefixCls}-dot`;
       let indicator = getComponent(this, 'indicator');
       // should not be render default indicator when indicator value is null

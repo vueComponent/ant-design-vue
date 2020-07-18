@@ -18,7 +18,7 @@
  * In single mode, we should focus on the `span`
  * In multiple mode, we should focus on the `input`
  */
-
+import { provide } from 'vue';
 import shallowEqual from 'shallowequal';
 import raf from 'raf';
 import scrollIntoView from 'dom-scroll-into-view';
@@ -55,10 +55,8 @@ import SelectNode from './SelectNode';
 import {
   initDefaultProps,
   getOptionProps,
-  mergeProps,
   getPropsData,
-  filterEmpty,
-  getListeners,
+  findDOMNode,
 } from '../../_util/props-util';
 function getWatch(keys = []) {
   const watch = {};
@@ -71,6 +69,7 @@ function getWatch(keys = []) {
 }
 const Select = {
   name: 'Select',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   props: initDefaultProps(
     {
@@ -193,24 +192,21 @@ const Select = {
       ...newState,
     };
   },
+  created() {
+    provide('vcTreeSelect', {
+      onSelectorFocus: this.onSelectorFocus,
+      onSelectorBlur: this.onSelectorBlur,
+      onSelectorKeyDown: this.onComponentKeyDown,
+      onSelectorClear: this.onSelectorClear,
+      onMultipleSelectorRemove: this.onMultipleSelectorRemove,
 
-  provide() {
-    return {
-      vcTreeSelect: {
-        onSelectorFocus: this.onSelectorFocus,
-        onSelectorBlur: this.onSelectorBlur,
-        onSelectorKeyDown: this.onComponentKeyDown,
-        onSelectorClear: this.onSelectorClear,
-        onMultipleSelectorRemove: this.onMultipleSelectorRemove,
+      onTreeNodeSelect: this.onTreeNodeSelect,
+      onTreeNodeCheck: this.onTreeNodeCheck,
+      onPopupKeyDown: this.onComponentKeyDown,
 
-        onTreeNodeSelect: this.onTreeNodeSelect,
-        onTreeNodeCheck: this.onTreeNodeCheck,
-        onPopupKeyDown: this.onComponentKeyDown,
-
-        onSearchInputChange: this.onSearchInputChange,
-        onSearchInputKeyDown: this.onSearchInputKeyDown,
-      },
-    };
+      onSearchInputChange: this.onSearchInputChange,
+      onSearchInputKeyDown: this.onSearchInputKeyDown,
+    });
   },
   watch: {
     ...getWatch(['treeData', 'defaultValue', 'value']),
@@ -238,7 +234,7 @@ const Select = {
           const treeNode = domTreeNodes[key];
 
           if (treeNode) {
-            const domNode = treeNode.$el;
+            const domNode = findDOMNode(treeNode);
             raf(() => {
               const popupNode = this.popup.$el;
               const triggerContainer = findPopupContainer(popupNode, `${prefixCls}-dropdown`);
@@ -267,7 +263,6 @@ const Select = {
 
   methods: {
     getDerivedState(nextProps, prevState) {
-      const h = this.$createElement;
       const { _prevProps: prevProps = {} } = prevState;
       const {
         treeCheckable,
@@ -302,7 +297,7 @@ const Select = {
       let treeDataChanged = false;
       let treeDataModeChanged = false;
       processState('treeData', propValue => {
-        treeNodes = convertDataToTree(h, propValue);
+        treeNodes = convertDataToTree(propValue);
         treeDataChanged = true;
       });
 
@@ -325,7 +320,7 @@ const Select = {
           rootPId: null,
           ...(treeDataSimpleMode !== true ? treeDataSimpleMode : {}),
         };
-        treeNodes = convertDataToTree(h, parseSimpleTreeData(nextProps.treeData, simpleMapper));
+        treeNodes = convertDataToTree(parseSimpleTreeData(nextProps.treeData, simpleMapper));
       }
 
       // If `treeData` not provide, use children TreeNodes
@@ -333,7 +328,7 @@ const Select = {
         // processState('children', (propValue) => {
         //   treeNodes = Array.isArray(propValue) ? propValue : [propValue]
         // })
-        treeNodes = filterEmpty(this.$slots.default);
+        treeNodes = this.children || [];
       }
 
       // Convert `treeData` to entities
@@ -462,7 +457,6 @@ const Select = {
         }
 
         newState._filteredTreeNodes = getFilterTree(
-          this.$createElement,
           newState._treeNodes || prevState._treeNodes,
           searchValue,
           filterTreeNodeFn,
@@ -868,7 +862,6 @@ const Select = {
 
         this.setState({
           _filteredTreeNodes: getFilterTree(
-            this.$createElement,
             treeNodes,
             value,
             filterTreeNodeFn,
@@ -1012,7 +1005,7 @@ const Select = {
       }
 
       // Only do the logic when `onChange` function provided
-      if (getListeners(this).change) {
+      if (this.$attrs.onChange) {
         let connectValueList;
 
         // Get value by mode
@@ -1038,6 +1031,7 @@ const Select = {
         if (!this.isMultiple()) {
           returnValue = returnValue[0];
         }
+        // this.__emit('update:value', returnValue);
         this.__emit('change', returnValue, labelList, extra);
       }
     },
@@ -1072,75 +1066,45 @@ const Select = {
     const isMultiple = this.isMultiple();
 
     const passProps = {
-      props: {
-        ...props,
-        isMultiple,
-        valueList,
-        searchHalfCheckedKeys,
-        selectorValueList: [...missValueList, ...selectorValueList],
-        valueEntities,
-        keyEntities,
-        searchValue,
-        upperSearchValue: (searchValue || '').toUpperCase(), // Perf save
-        open,
-        focused,
-        dropdownPrefixCls: `${prefixCls}-dropdown`,
-        ariaId: this.ariaId,
-      },
-      on: {
-        ...getListeners(this),
-        choiceAnimationLeave: this.onChoiceAnimationLeave,
-      },
-      scopedSlots: this.$scopedSlots,
+      ...props,
+      ...this.$attrs,
+      isMultiple,
+      valueList,
+      searchHalfCheckedKeys,
+      selectorValueList: [...missValueList, ...selectorValueList],
+      valueEntities,
+      keyEntities,
+      searchValue,
+      upperSearchValue: (searchValue || '').toUpperCase(), // Perf save
+      open,
+      focused,
+      dropdownPrefixCls: `${prefixCls}-dropdown`,
+      ariaId: this.ariaId,
+      onChoiceAnimationLeave: this.onChoiceAnimationLeave,
+      vSlots: this.$slots,
     };
-    const popupProps = mergeProps(passProps, {
-      props: {
-        treeNodes,
-        filteredTreeNodes,
-        // Tree expanded control
-        treeExpandedKeys,
-        __propsSymbol__: Symbol(),
-      },
-      on: {
-        treeExpanded: this.delayForcePopupAlign,
-      },
-      directives: [
-        {
-          name: 'ant-ref',
-          value: this.setPopupRef,
-        },
-      ],
-    });
+    const popupProps = {
+      ...passProps,
+      treeNodes,
+      filteredTreeNodes,
+      // Tree expanded control
+      treeExpandedKeys,
+      __propsSymbol__: Symbol(),
+      onTreeExpanded: this.delayForcePopupAlign,
+      ref: this.setPopupRef,
+    };
 
     const Popup = isMultiple ? MultiplePopup : SinglePopup;
     const $popup = <Popup {...popupProps} />;
 
     const Selector = isMultiple ? MultipleSelector : SingleSelector;
-    const $selector = (
-      <Selector
-        {...passProps}
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: this.selectorRef,
-            },
-          ],
-        }}
-      />
-    );
-    const selectTriggerProps = mergeProps(passProps, {
-      props: {
-        popupElement: $popup,
-        dropdownVisibleChange: this.onDropdownVisibleChange,
-      },
-      directives: [
-        {
-          name: 'ant-ref',
-          value: this.selectTriggerRef,
-        },
-      ],
-    });
+    const $selector = <Selector {...passProps} ref={this.selectorRef} />;
+    const selectTriggerProps = {
+      ...passProps,
+      popupElement: $popup,
+      dropdownVisibleChange: this.onDropdownVisibleChange,
+      ref: this.selectTriggerRef,
+    };
     return <SelectTrigger {...selectTriggerProps}>{$selector}</SelectTrigger>;
   },
 };

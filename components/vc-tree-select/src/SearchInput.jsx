@@ -4,12 +4,13 @@
  * - multiple: in the selector
  * Move the code as a SearchInput for easy management.
  */
-
+import { inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { createRef } from './util';
 
 const SearchInput = {
   name: 'SearchInput',
+  inheritAttrs: false,
   props: {
     open: PropTypes.bool,
     searchValue: PropTypes.string,
@@ -19,8 +20,10 @@ const SearchInput = {
     needAlign: PropTypes.bool,
     ariaId: PropTypes.string,
   },
-  inject: {
-    vcTreeSelect: { default: () => ({}) },
+  setup() {
+    return {
+      vcTreeSelect: inject('vcTreeSelect', {}),
+    };
   },
   data() {
     return {
@@ -117,17 +120,7 @@ const SearchInput = {
       <span class={`${prefixCls}-search__field__wrap`}>
         <input
           type="text"
-          {...{
-            directives: [
-              {
-                name: 'ant-ref',
-                value: this.inputRef,
-              },
-              {
-                name: 'ant-input',
-              },
-            ],
-          }}
+          ref={this.inputRef}
           onInput={handleInputChange}
           onKeydown={onSearchInputKeyDown}
           value={searchValue}
@@ -138,17 +131,7 @@ const SearchInput = {
           aria-controls={open ? ariaId : undefined}
           aria-multiline="false"
         />
-        <span
-          {...{
-            directives: [
-              {
-                name: 'ant-ref',
-                value: this.mirrorInputRef,
-              },
-            ],
-          }}
-          class={`${prefixCls}-search__field__mirror`}
-        >
+        <span ref={this.mirrorInputRef} class={`${prefixCls}-search__field__mirror`}>
           {mirrorSearchValue}&nbsp;
         </span>
         {renderPlaceholder && !mirrorSearchValue ? renderPlaceholder() : null}

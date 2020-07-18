@@ -40,7 +40,7 @@ export function getPosition(level, index) {
 }
 
 export function isTreeNode(node) {
-  return typeof node.type === 'object' && node.type.isTreeNode;
+  return node.type && node.type.isTreeNode;
 }
 
 export function getNodeChildren(children = []) {

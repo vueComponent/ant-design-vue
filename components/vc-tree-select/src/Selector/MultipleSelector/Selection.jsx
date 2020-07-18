@@ -1,10 +1,12 @@
+import classNames from 'classnames';
 import PropTypes from '../../../../_util/vue-types';
 import { toTitle, UNSELECTABLE_ATTRIBUTE, UNSELECTABLE_STYLE } from '../../util';
-import { getComponentFromProp, getListeners } from '../../../../_util/props-util';
+import { getComponent } from '../../../../_util/props-util';
 import BaseMixin from '../../../../_util/BaseMixin';
 
 const Selection = {
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
     maxTagTextLength: PropTypes.number,
@@ -28,18 +30,18 @@ const Selection = {
     if (maxTagTextLength && typeof content === 'string' && content.length > maxTagTextLength) {
       content = `${content.slice(0, maxTagTextLength)}...`;
     }
-
+    const { class: className, style, onRemove } = this.$attrs;
     return (
       <li
-        style={UNSELECTABLE_STYLE}
-        {...{ attrs: UNSELECTABLE_ATTRIBUTE }}
+        style={{ ...UNSELECTABLE_STYLE, ...style }}
+        {...UNSELECTABLE_ATTRIBUTE}
         role="menuitem"
-        class={`${prefixCls}-selection__choice`}
+        class={classNames(`${prefixCls}-selection__choice`, className)}
         title={toTitle(label)}
       >
-        {getListeners(this).remove && (
+        {onRemove && (
           <span class={`${prefixCls}-selection__choice__remove`} onClick={this.onRemove}>
-            {getComponentFromProp(this, 'removeIcon')}
+            {getComponent(this, 'removeIcon')}
           </span>
         )}
         <span class={`${prefixCls}-selection__choice__content`}>{content}</span>

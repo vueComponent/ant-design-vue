@@ -93,3 +93,7 @@ v-model -> v-model:activeKey
 ## List
 
 renderItem(item, index) => renderItem({item, index}) 该用单参数
+
+## TreeSelect
+
+treeData 中 scopedSlots => slots , v-model => v-model:value

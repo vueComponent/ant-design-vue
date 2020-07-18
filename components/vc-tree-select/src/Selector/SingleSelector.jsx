@@ -1,11 +1,12 @@
 import generateSelector, { selectorPropTypes } from '../Base/BaseSelector';
 import { toTitle } from '../util';
-import { getOptionProps, getListeners } from '../../../_util/props-util';
+import { getOptionProps } from '../../../_util/props-util';
 import { createRef } from '../util';
 const Selector = generateSelector('single');
 
 const SingleSelector = {
   name: 'SingleSelector',
+  inheritAttrs: false,
   props: selectorPropTypes(),
   created() {
     this.selectorRef = createRef();
@@ -43,17 +44,10 @@ const SingleSelector = {
 
   render() {
     const props = {
-      props: {
-        ...getOptionProps(this),
-        renderSelection: this.renderSelection,
-      },
-      on: getListeners(this),
-      directives: [
-        {
-          name: 'ant-ref',
-          value: this.selectorRef,
-        },
-      ],
+      ...getOptionProps(this),
+      ...this.$attrs,
+      renderSelection: this.renderSelection,
+      ref: this.selectorRef,
     };
     return <Selector {...props} />;
   },

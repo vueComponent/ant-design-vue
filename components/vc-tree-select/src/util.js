@@ -1,5 +1,4 @@
 import warning from 'warning';
-import omit from 'omit.js';
 import {
   convertDataToTree as vcConvertDataToTree,
   convertTreeToEntities as vcConvertTreeToEntities,
@@ -7,7 +6,7 @@ import {
 } from '../../vc-tree/src/util';
 import { hasClass } from '../../vc-util/Dom/class';
 import { SHOW_CHILD, SHOW_PARENT } from './strategies';
-import { getSlots, getPropsData, isEmptyElement } from '../../_util/props-util';
+import { getSlot, getPropsData, isEmptyElement } from '../../_util/props-util';
 
 let warnDeprecatedLabel = false;
 
@@ -203,7 +202,7 @@ export function cleanEntity({ node, pos, children }) {
  * we have to convert `treeNodes > data > treeNodes` to keep the key.
  * Such performance hungry!
  */
-export function getFilterTree(h, treeNodes, searchValue, filterFunc, valueEntities, Component) {
+export function getFilterTree(treeNodes, searchValue, filterFunc, valueEntities, Component) {
   if (!searchValue) {
     return null;
   }
@@ -215,13 +214,13 @@ export function getFilterTree(h, treeNodes, searchValue, filterFunc, valueEntiti
     if (filterFunc(searchValue, node)) {
       match = true;
     }
-    let children = getSlots(node).default;
+    let children = getSlot(node);
     children = ((typeof children === 'function' ? children() : children) || [])
       .map(mapFilteredNodeToData)
       .filter(n => n);
     if (children.length || match) {
       return (
-        <Component {...node.data} key={valueEntities[getPropsData(node).value].key}>
+        <Component {...node.props} key={valueEntities[getPropsData(node).value].key}>
           {children}
         </Component>
       );
@@ -341,18 +340,8 @@ export function formatSelectorValue(valueList, props, valueEntities) {
  * This will change the label to title value
  */
 function processProps(props) {
-  const { title, label, value, class: cls, style, on = {} } = props;
-  let key = props.key;
-  if (!key && (key === undefined || key === null)) {
-    key = value;
-  }
-  const p = {
-    props: omit(props, ['on', 'key', 'class', 'className', 'style']),
-    on,
-    class: cls || props.className,
-    style,
-    key,
-  };
+  const { title, label, key, value } = props;
+  const cloneProps = { ...props };
   // Warning user not to use deprecated label prop.
   if (label && !title) {
     if (!warnDeprecatedLabel) {
@@ -360,14 +349,18 @@ function processProps(props) {
       warnDeprecatedLabel = true;
     }
 
-    p.props.title = label;
+    cloneProps.title = label;
   }
 
-  return p;
+  if (!key && (key === undefined || key === null)) {
+    cloneProps.key = value;
+  }
+
+  return cloneProps;
 }
 
-export function convertDataToTree(h, treeData) {
-  return vcConvertDataToTree(h, treeData, { processProps });
+export function convertDataToTree(treeData) {
+  return vcConvertDataToTree(treeData, { processProps });
 }
 
 /**

@@ -92,6 +92,7 @@ export default {
       };
     });
     this._component = null;
+    this.focusTime = null;
     return {
       prevPopupVisible: popupVisible,
       sPopupVisible: popupVisible,

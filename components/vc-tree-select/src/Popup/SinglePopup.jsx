@@ -2,10 +2,10 @@ import PropTypes from '../../../_util/vue-types';
 import BasePopup from '../Base/BasePopup';
 import SearchInput from '../SearchInput';
 import { createRef } from '../util';
-import { getListeners } from '../../../_util/props-util';
 
 const SinglePopup = {
   name: 'SinglePopup',
+  inheritAttrs: false,
   props: {
     ...BasePopup.props,
     ...SearchInput.props,
@@ -55,28 +55,10 @@ const SinglePopup = {
       }
 
       return (
-        <span
-          class={`${dropdownPrefixCls}-search`}
-          {...{
-            directives: [
-              {
-                name: 'ant-ref',
-                value: this.searchRef,
-              },
-            ],
-          }}
-        >
+        <span class={`${dropdownPrefixCls}-search`} ref={this.searchRef}>
           <SearchInput
-            {...{
-              props: { ...this.$props, renderPlaceholder: this._renderPlaceholder },
-              on: getListeners(this),
-              directives: [
-                {
-                  name: 'ant-ref',
-                  value: this.inputRef,
-                },
-              ],
-            }}
+            {...{ ...this.$props, ...this.$attrs, renderPlaceholder: this._renderPlaceholder }}
+            ref={this.inputRef}
           />
         </span>
       );
@@ -86,15 +68,12 @@ const SinglePopup = {
     return (
       <BasePopup
         {...{
-          props: { ...this.$props, renderSearch: this._renderSearch, __propsSymbol__: Symbol() },
-          on: getListeners(this),
-          directives: [
-            {
-              name: 'ant-ref',
-              value: this.popupRef,
-            },
-          ],
+          ...this.$props,
+          ...this.$attrs,
+          renderSearch: this._renderSearch,
+          __propsSymbol__: Symbol(),
         }}
+        ref={this.popupRef}
       />
     );
   },

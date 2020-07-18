@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import warning from 'warning';
 import PropTypes from '../../../_util/vue-types';
 import { Tree } from '../../../vc-tree';
@@ -69,6 +70,7 @@ function getDerivedState(nextProps, prevState) {
 }
 const BasePopup = {
   mixins: [BaseMixin],
+  inheritAttrs: false,
   name: 'BasePopup',
   props: {
     prefixCls: PropTypes.string,
@@ -101,8 +103,10 @@ const BasePopup = {
 
     __propsSymbol__: PropTypes.any,
   },
-  inject: {
-    vcTreeSelect: { default: () => ({}) },
+  setup() {
+    return {
+      vcTreeSelect: inject('vcTreeSelect', {}),
+    };
   },
   watch: {
     __propsSymbol__() {
@@ -248,37 +252,27 @@ const BasePopup = {
       $tree = $notFound;
     } else {
       const treeAllProps = {
-        props: {
-          prefixCls: `${prefixCls}-tree`,
-          showIcon: treeIcon,
-          showLine: treeLine,
-          selectable: !treeCheckable,
-          checkable: treeCheckable,
-          checkStrictly: treeCheckStrictly,
-          multiple,
-          loadData,
-          loadedKeys,
-          expandedKeys: expandedKeyList,
-          filterTreeNode: this.filterTreeNode,
-          switcherIcon,
-          ...treeProps,
-          __propsSymbol__: Symbol(),
-          children: $treeNodes,
-        },
-        on: {
-          select: onTreeNodeSelect,
-          check: onTreeNodeCheck,
-          expand: this.onTreeExpand,
-          load: this.onLoad,
-        },
-        directives: [
-          {
-            name: 'ant-ref',
-            value: this.treeRef,
-          },
-        ],
+        prefixCls: `${prefixCls}-tree`,
+        showIcon: treeIcon,
+        showLine: treeLine,
+        selectable: !treeCheckable,
+        checkable: treeCheckable,
+        checkStrictly: treeCheckStrictly,
+        multiple,
+        loadData,
+        loadedKeys,
+        expandedKeys: expandedKeyList,
+        filterTreeNode: this.filterTreeNode,
+        switcherIcon,
+        ...treeProps,
+        __propsSymbol__: Symbol(),
+        children: $treeNodes,
+        onSelect: onTreeNodeSelect,
+        onCheck: onTreeNodeCheck,
+        onExpand: this.onTreeExpand,
+        onLoad: this.onLoad,
       };
-      $tree = <Tree {...treeAllProps} />;
+      $tree = <Tree {...treeAllProps} ref={this.treeRef} />;
     }
 
     return (

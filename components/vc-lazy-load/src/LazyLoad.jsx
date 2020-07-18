@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import addEventListener from '../../vc-util/Dom/addEventListener';
-import { initDefaultProps } from '../../_util/props-util';
+import { initDefaultProps, findDOMNode, getSlot } from '../../_util/props-util';
 import warning from '../../_util/warning';
 import debounce from 'lodash/debounce';
 import throttle from 'lodash/throttle';
@@ -28,6 +28,7 @@ const lazyLoadProps = {
 export default {
   name: 'LazyLoad',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps(lazyLoadProps, {
     elementType: 'div',
     debounce: true,
@@ -83,7 +84,7 @@ export default {
   },
   methods: {
     getEventNode() {
-      return parentScroll(this.$el);
+      return parentScroll(findDOMNode(this));
     },
     getOffset() {
       const {
@@ -113,7 +114,7 @@ export default {
         return;
       }
       const offset = this.getOffset();
-      const node = this.$el;
+      const node = findDOMNode(this);
       const eventNode = this.getEventNode();
 
       if (inViewport(node, eventNode, offset)) {
@@ -128,14 +129,15 @@ export default {
       this.scrollHander && this.scrollHander.remove();
     },
   },
-  render(createElement) {
-    const children = this.$slots.default;
+  render() {
+    const children = getSlot(this);
     if (children.length !== 1) {
       warning(false, 'lazyLoad组件只能包含一个子元素');
       return null;
     }
-    const { height, width, elementType } = this.$props;
+    const { height, width, elementType: ElementType } = this.$props;
     const { visible } = this;
+    const { class: className } = this.$attrs;
 
     const elStyles = {
       height: typeof height === 'number' ? height + 'px' : height,
@@ -144,15 +146,12 @@ export default {
     const elClasses = {
       LazyLoad: true,
       'is-visible': visible,
+      [className]: className,
     };
-
-    return createElement(
-      elementType,
-      {
-        class: elClasses,
-        style: elStyles,
-      },
-      [visible ? children[0] : null],
+    return (
+      <ElementType class={elClasses} style={elStyles}>
+        {visible ? children[0] : null}
+      </ElementType>
     );
   },
 };

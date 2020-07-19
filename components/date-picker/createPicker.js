@@ -13,7 +13,7 @@ import {
   getOptionProps,
   initDefaultProps,
   mergeProps,
-  getComponentFromProp,
+  getComponent,
   isValidElement,
   getListeners,
 } from '../_util/props-util';
@@ -135,7 +135,7 @@ export default function createPicker(TheCalendar, props) {
     render() {
       const { $scopedSlots } = this;
       const { sValue: value, showDate, _open: open } = this.$data;
-      let suffixIcon = getComponentFromProp(this, 'suffixIcon');
+      let suffixIcon = getComponent(this, 'suffixIcon');
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
       const listeners = getListeners(this);
       const { panelChange = noop, focus = noop, blur = noop, ok = noop } = listeners;

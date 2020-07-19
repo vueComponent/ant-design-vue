@@ -5,7 +5,7 @@ import BaseMixin from '../_util/BaseMixin';
 import {
   initDefaultProps,
   hasProp,
-  getComponentFromProp,
+  getComponent,
   isValidElement,
   getEvents,
 } from '../_util/props-util';
@@ -205,7 +205,7 @@ export default {
         secondStep,
         sValue,
       } = this;
-      const clearIcon = getComponentFromProp(this, 'clearIcon');
+      const clearIcon = getComponent(this, 'clearIcon');
       return (
         <Panel
           clearText={clearText}
@@ -296,7 +296,7 @@ export default {
       if (!allowEmpty || !sValue || disabled) {
         return null;
       }
-      const clearIcon = getComponentFromProp(this, 'clearIcon');
+      const clearIcon = getComponent(this, 'clearIcon');
       if (isValidElement(clearIcon)) {
         const { click } = getEvents(clearIcon) || {};
         return cloneElement(clearIcon, {
@@ -344,7 +344,7 @@ export default {
       popupStyle,
     } = this;
     const popupClassName = this.getPopupClassName();
-    const inputIcon = getComponentFromProp(this, 'inputIcon');
+    const inputIcon = getComponent(this, 'inputIcon');
     return (
       <Trigger
         prefixCls={`${prefixCls}-panel`}

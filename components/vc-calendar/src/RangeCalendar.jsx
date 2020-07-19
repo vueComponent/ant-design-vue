@@ -4,7 +4,7 @@ import {
   getOptionProps,
   hasProp,
   mergeProps,
-  getComponentFromProp,
+  getComponent,
   getListeners,
 } from '../../_util/props-util';
 import moment from 'moment';
@@ -669,7 +669,7 @@ const RangeCalendar = {
       type,
       seperator,
     } = props;
-    const clearIcon = getComponentFromProp(this, 'clearIcon');
+    const clearIcon = getComponent(this, 'clearIcon');
     const { sHoverValue, sSelectedValue, sMode: mode, sShowTimePicker, sValue } = this;
     const className = {
       [prefixCls]: 1,

@@ -11,7 +11,7 @@ import {
   initDefaultProps,
   hasProp,
   getOptionProps,
-  getComponentFromProp,
+  getComponent,
   isValidElement,
   getListeners,
 } from '../_util/props-util';
@@ -174,7 +174,7 @@ const TimePicker = {
     },
 
     renderInputIcon(prefixCls) {
-      let suffixIcon = getComponentFromProp(this, 'suffixIcon');
+      let suffixIcon = getComponent(this, 'suffixIcon');
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
       const clockIcon = (suffixIcon &&
         isValidElement(suffixIcon) &&
@@ -186,7 +186,7 @@ const TimePicker = {
     },
 
     renderClearIcon(prefixCls) {
-      const clearIcon = getComponentFromProp(this, 'clearIcon');
+      const clearIcon = getComponent(this, 'clearIcon');
       const clearIconPrefixCls = `${prefixCls}-clear`;
 
       if (clearIcon && isValidElement(clearIcon)) {
@@ -210,7 +210,7 @@ const TimePicker = {
       const pickerClassName = {
         [`${prefixCls}-${size}`]: !!size,
       };
-      const tempAddon = getComponentFromProp(this, 'addon', {}, false);
+      const tempAddon = getComponent(this, 'addon', {}, false);
       const pickerAddon = panel => {
         return tempAddon ? (
           <div class={`${prefixCls}-panel-addon`}>

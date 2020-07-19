@@ -1,6 +1,6 @@
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
-import { getOptionProps, getComponentFromProp, getListeners } from '../../../_util/props-util';
+import { getOptionProps, getComponent, getListeners } from '../../../_util/props-util';
 import { cloneElement } from '../../../_util/vnode';
 import CalendarHeader from '../calendar/CalendarHeader';
 import DateTable from '../date/DateTable';
@@ -62,7 +62,7 @@ const CalendarPart = {
       inputMode,
       inputReadOnly,
     } = props;
-    const clearIcon = getComponentFromProp(this, 'clearIcon');
+    const clearIcon = getComponent(this, 'clearIcon');
     const {
       inputChange = noop,
       inputSelect = noop,

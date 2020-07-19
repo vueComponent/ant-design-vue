@@ -1,6 +1,6 @@
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
-import { getComponentFromProp } from '../../../_util/props-util';
+import { getComponent } from '../../../_util/props-util';
 import moment from 'moment';
 import { formatDate } from '../util';
 import KeyCode from '../../../_util/KeyCode';
@@ -184,7 +184,7 @@ const DateInput = {
       inputMode,
       inputReadOnly,
     } = this;
-    const clearIcon = getComponentFromProp(this, 'clearIcon');
+    const clearIcon = getComponent(this, 'clearIcon');
     const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
     return (
       <div class={`${prefixCls}-input-wrap`}>

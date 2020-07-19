@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import debounce from 'lodash/debounce';
 import hasProp, {
   initDefaultProps,
-  getComponentFromProp,
+  getComponent,
   filterEmpty,
   getListeners,
 } from '../_util/props-util';
@@ -174,8 +174,8 @@ const Carousel = {
     const SlickCarouselProps = {
       props: {
         ...props,
-        nextArrow: getComponentFromProp(this, 'nextArrow'),
-        prevArrow: getComponentFromProp(this, 'prevArrow'),
+        nextArrow: getComponent(this, 'nextArrow'),
+        prevArrow: getComponent(this, 'prevArrow'),
       },
       on: getListeners(this),
       scopedSlots: this.$scopedSlots,

@@ -13,7 +13,7 @@ import {
   getOptionProps,
   initDefaultProps,
   mergeProps,
-  getComponentFromProp,
+  getComponent,
   getListeners,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
@@ -262,7 +262,7 @@ export default {
 
   render() {
     const props = getOptionProps(this);
-    let suffixIcon = getComponentFromProp(this, 'suffixIcon');
+    let suffixIcon = getComponent(this, 'suffixIcon');
     suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
     const {
       sValue: value,

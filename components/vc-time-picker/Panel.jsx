@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import Header from './Header';
 import Combobox from './Combobox';
-import { getComponentFromProp, getListeners } from '../_util/props-util';
+import { getComponent, getListeners } from '../_util/props-util';
 
 function noop() {}
 
@@ -144,7 +144,7 @@ const Panel = {
       sValue,
       currentSelectPanel,
     } = this;
-    const clearIcon = getComponentFromProp(this, 'clearIcon');
+    const clearIcon = getComponent(this, 'clearIcon');
     const { esc = noop, keydown = noop } = getListeners(this);
 
     const disabledHourOptions = this.disabledHours2();

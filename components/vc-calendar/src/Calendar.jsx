@@ -1,6 +1,6 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { getOptionProps, hasProp, getComponentFromProp } from '../../_util/props-util';
+import { getOptionProps, hasProp, getComponent } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import KeyCode from '../../_util/KeyCode';
 import moment from 'moment';
@@ -261,7 +261,7 @@ const Calendar = {
       monthCellContentRender,
       $props: props,
     } = this;
-    const clearIcon = getComponentFromProp(this, 'clearIcon');
+    const clearIcon = getComponent(this, 'clearIcon');
     const showTimePicker = sMode === 'time';
     const disabledTimeConfig =
       showTimePicker && disabledTime && timePicker

@@ -482,6 +482,7 @@ const Tree = {
         });
       }
       this.$emit('update:checkedKeys', checkedObj);
+
       this.__emit('check', checkedObj, eventObj);
     },
     onNodeLoad(treeNode) {

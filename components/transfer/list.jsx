@@ -1,12 +1,11 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
-import { isValidElement, initDefaultProps, getListeners } from '../_util/props-util';
+import { isValidElement, initDefaultProps, splitAttrs } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import Checkbox from '../checkbox';
 import Search from './search';
 import defaultRenderList from './renderListBody';
 import triggerEvent from '../_util/triggerEvent';
-import addEventListener from '../vc-util/Dom/addEventListener';
 
 const defaultRender = () => null;
 
@@ -51,11 +50,11 @@ export const TransferListProps = {
   showSelectAll: PropTypes.bool,
 };
 
-function renderListNode(h, renderList, props) {
+function renderListNode(renderList, props) {
   let bodyContent = renderList ? renderList(props) : null;
   const customize = !!bodyContent;
   if (!customize) {
-    bodyContent = defaultRenderList(h, props);
+    bodyContent = defaultRenderList(props);
   }
   return {
     customize,
@@ -66,6 +65,7 @@ function renderListNode(h, renderList, props) {
 export default {
   name: 'TransferList',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps(TransferListProps, {
     dataSource: [],
     titleText: '',
@@ -79,19 +79,6 @@ export default {
       filterValue: '',
     };
   },
-  // mounted() {
-  //   this.timer = setTimeout(() => {
-  //     this.setState({
-  //       mounted: true,
-  //     });
-  //   }, 0);
-  //   this.$nextTick(() => {
-  //     if (this.$refs.listContentWrapper) {
-  //       const listContentWrapperDom = this.$refs.listContentWrapper.$el;
-  //       this.scrollEvent = addEventListener(listContentWrapperDom, 'scroll', this.handleScroll);
-  //     }
-  //   });
-  // },
   beforeUnmount() {
     clearTimeout(this.triggerScrollTimer);
     // if (this.scrollEvent) {
@@ -102,10 +89,6 @@ export default {
     this.$nextTick(() => {
       if (this.scrollEvent) {
         this.scrollEvent.remove();
-      }
-      if (this.$refs.listContentWrapper) {
-        const listContentWrapperDom = this.$refs.listContentWrapper.$el;
-        this.scrollEvent = addEventListener(listContentWrapperDom, 'scroll', this.handleScroll);
       }
     });
   },
@@ -173,10 +156,13 @@ export default {
       let listBody = bodyDom;
       if (!listBody) {
         let bodyNode;
-
+        const { onEvents } = splitAttrs(this.$attrs);
         const { bodyContent, customize } = renderListNode(renderList, {
-          props: { ...this.$props, filteredItems, filteredRenderItems, selectedKeys: checkedKeys },
-          on: getListeners(this),
+          ...this.$props,
+          filteredItems,
+          filteredRenderItems,
+          selectedKeys: checkedKeys,
+          ...onEvents,
         });
 
         // We should wrap customize list body in a classNamed div to use flex layout.
@@ -334,7 +320,7 @@ export default {
     const checkAllCheckbox = this.getCheckBox(filteredItems, showSelectAll, disabled);
 
     return (
-      <div class={listCls}>
+      <div class={listCls} style={this.$attrs.style}>
         <div class={`${prefixCls}-header`}>
           {checkAllCheckbox}
           <span class={`${prefixCls}-header-selected`}>

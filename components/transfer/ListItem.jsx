@@ -7,6 +7,7 @@ function noop() {}
 
 export default {
   name: 'ListItem',
+  inheritAttrs: false,
   props: {
     renderedText: PropTypes.any,
     renderedEl: PropTypes.any,
@@ -48,14 +49,12 @@ export default {
     let children = null;
     if (lazy) {
       const lazyProps = {
-        props: {
-          height: 32,
-          offset: 500,
-          throttle: 0,
-          debounce: false,
-          ...lazy,
-          _propsSymbol: Symbol(),
-        },
+        height: 32,
+        offset: 500,
+        throttle: 0,
+        debounce: false,
+        ...lazy,
+        _propsSymbol: Symbol(),
       };
       children = <Lazyload {...lazyProps}>{listItem}</Lazyload>;
     } else {

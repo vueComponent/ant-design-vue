@@ -1,3 +1,4 @@
+import { TransitionGroup } from 'vue';
 import raf from '../_util/raf';
 import ListItem from './ListItem';
 import PropTypes from '../_util/vue-types';
@@ -91,18 +92,16 @@ const ListBody = {
       mounted ? `${prefixCls}-content-item-highlight` : '',
       {
         tag: 'ul',
-        nativeOn: {
-          scroll: this.onScroll,
-        },
-        leave: noop,
+        onScroll: this.onScroll,
+        onLeave: noop,
       },
     );
     return (
-      <transition-group class={`${prefixCls}-content`} {...transitionProps}>
+      <TransitionGroup class={`${prefixCls}-content`} {...transitionProps}>
         {items}
-      </transition-group>
+      </TransitionGroup>
     );
   },
 };
 
-export default (h, props) => <ListBody {...props} />;
+export default props => <ListBody {...props} />;

@@ -29,6 +29,7 @@ import {
   Avatar,
   Tree,
   TreeSelect,
+  Transfer,
   notification,
   message,
 } from 'ant-design-vue';
@@ -46,11 +47,11 @@ const app = createApp(App);
 app.config.globalProperties.$notification = notification;
 app.config.globalProperties.$message = message;
 app
-  // .component('demo-sort', { ...basic })
-  // .component('md', { ...basic })
-  // .component('api', { ...basic })
-  // .component('CN', { ...basic })
-  // .component('US', { ...basic })
+  .component('demo-sort', { ...basic })
+  .component('md', { ...basic })
+  .component('api', { ...basic })
+  .component('CN', { ...basic })
+  .component('US', { ...basic })
   .use(Pagination)
   .use(Select)
   .use(Spin)
@@ -78,4 +79,5 @@ app
   .use(Card)
   .use(Tree)
   .use(TreeSelect)
+  .use(Transfer)
   .mount('#app');

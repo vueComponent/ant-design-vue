@@ -14,6 +14,7 @@ export const TransferSearchProps = {
 
 export default {
   name: 'Search',
+  inheritAttrs: false,
   props: initDefaultProps(TransferSearchProps, {
     placeholder: '',
   }),

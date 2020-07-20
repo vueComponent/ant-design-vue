@@ -1,146 +1,119 @@
+import classnames from 'classnames';
 import { cloneElement } from '../../_util/vnode';
 import { canGoNext } from './utils/innerSliderUtils';
 
 function noop() {}
 
-export const PrevArrow = {
-  functional: true,
-  clickHandler(options, handle, e) {
-    if (e) {
-      e.preventDefault();
-    }
-    handle(options, e);
-  },
-  render(createElement, context) {
-    const { props } = context;
-    const { clickHandler, infinite, currentSlide, slideCount, slidesToShow } = props;
-    const prevClasses = { 'slick-arrow': true, 'slick-prev': true };
-    let prevHandler = function(e) {
-      if (e) {
-        e.preventDefault();
-      }
-      clickHandler({ message: 'previous' });
-    };
+function handler(options, handle, e) {
+  if (e) {
+    e.preventDefault();
+  }
+  handle(options, e);
+}
 
-    if (!infinite && (currentSlide === 0 || slideCount <= slidesToShow)) {
-      prevClasses['slick-disabled'] = true;
-      prevHandler = noop;
-    }
+const PrevArrow = (_, { attrs }) => {
+  const { clickHandler, infinite, currentSlide, slideCount, slidesToShow } = attrs;
+  const prevClasses = { 'slick-arrow': true, 'slick-prev': true };
+  let prevHandler = function(e) {
+    handler({ message: 'previous' }, clickHandler, e);
+  };
 
-    const prevArrowProps = {
-      key: '0',
-      domProps: {
-        'data-role': 'none',
+  if (!infinite && (currentSlide === 0 || slideCount <= slidesToShow)) {
+    prevClasses['slick-disabled'] = true;
+    prevHandler = noop;
+  }
+
+  const prevArrowProps = {
+    key: '0',
+    'data-role': 'none',
+    class: prevClasses,
+    style: { display: 'block' },
+    onClick: prevHandler,
+  };
+  const customProps = {
+    currentSlide,
+    slideCount,
+  };
+  let prevArrow;
+
+  if (attrs.prevArrow) {
+    prevArrow = cloneElement(
+      attrs.prevArrow({
+        ...prevArrowProps,
+        ...customProps,
+      }),
+      {
+        key: '0',
+        class: prevClasses,
+        style: { display: 'block' },
+        onClick: prevHandler,
       },
-      class: prevClasses,
-      style: { display: 'block' },
-      on: {
-        click: prevHandler,
-      },
-    };
-    const customProps = {
-      currentSlide,
-      slideCount,
-    };
-    let prevArrow;
-
-    if (props.prevArrow) {
-      prevArrow = cloneElement(
-        props.prevArrow({
-          ...prevArrowProps,
-          ...{
-            props: customProps,
-          },
-        }),
-        {
-          key: '0',
-          class: prevClasses,
-          style: { display: 'block' },
-          on: {
-            click: prevHandler,
-          },
-        },
-      );
-    } else {
-      prevArrow = (
-        <button key="0" type="button" {...prevArrowProps}>
-          {' '}
-          Previous
-        </button>
-      );
-    }
-
-    return prevArrow;
-  },
+      false,
+    );
+  } else {
+    prevArrow = (
+      <button key="0" type="button" {...prevArrowProps}>
+        {' '}
+        Previous
+      </button>
+    );
+  }
+  return prevArrow;
 };
 
-export const NextArrow = {
-  functional: true,
-  clickHandler(options, handle, e) {
-    if (e) {
-      e.preventDefault();
-    }
-    handle(options, e);
-  },
-  render(createElement, context) {
-    const { props } = context;
-    const { clickHandler, currentSlide, slideCount } = props;
+PrevArrow.inheritAttrs = false;
 
-    const nextClasses = { 'slick-arrow': true, 'slick-next': true };
-    let nextHandler = function(e) {
-      if (e) {
-        e.preventDefault();
-      }
-      clickHandler({ message: 'next' });
-    };
-    if (!canGoNext(props)) {
-      nextClasses['slick-disabled'] = true;
-      nextHandler = noop;
-    }
+const NextArrow = (_, { attrs }) => {
+  const { clickHandler, currentSlide, slideCount } = attrs;
 
-    const nextArrowProps = {
-      key: '1',
-      domProps: {
-        'data-role': 'none',
+  const nextClasses = { 'slick-arrow': true, 'slick-next': true };
+  let nextHandler = function(e) {
+    handler({ message: 'next' }, clickHandler, e);
+  };
+  if (!canGoNext(attrs)) {
+    nextClasses['slick-disabled'] = true;
+    nextHandler = noop;
+  }
+
+  const nextArrowProps = {
+    key: '1',
+    'data-role': 'none',
+    class: classnames(nextClasses),
+    style: { display: 'block' },
+    onClick: nextHandler,
+  };
+  const customProps = {
+    currentSlide,
+    slideCount,
+  };
+  let nextArrow;
+
+  if (attrs.nextArrow) {
+    nextArrow = cloneElement(
+      attrs.nextArrow({
+        ...nextArrowProps,
+        ...customProps,
+      }),
+      {
+        key: '1',
+        class: classnames(nextClasses),
+        style: { display: 'block' },
+        onClick: nextHandler,
       },
-      class: nextClasses,
-      style: { display: 'block' },
-      on: {
-        click: nextHandler,
-      },
-    };
-    const customProps = {
-      currentSlide,
-      slideCount,
-    };
-    let nextArrow;
+      false,
+    );
+  } else {
+    nextArrow = (
+      <button key="1" type="button" {...nextArrowProps}>
+        {' '}
+        Next
+      </button>
+    );
+  }
 
-    if (props.nextArrow) {
-      nextArrow = cloneElement(
-        props.nextArrow({
-          ...nextArrowProps,
-          ...{
-            props: customProps,
-          },
-        }),
-        {
-          key: '1',
-          class: nextClasses,
-          style: { display: 'block' },
-          on: {
-            click: nextHandler,
-          },
-        },
-      );
-    } else {
-      nextArrow = (
-        <button key="1" type="button" {...nextArrowProps}>
-          {' '}
-          Next
-        </button>
-      );
-    }
-
-    return nextArrow;
-  },
+  return nextArrow;
 };
+
+NextArrow.inheritAttrs = false;
+
+export { PrevArrow, NextArrow };

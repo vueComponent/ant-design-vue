@@ -1,6 +1,7 @@
+import { createVNode } from 'vue';
 import classnames from 'classnames';
 import { cloneElement } from '../../_util/vnode';
-import { getStyle, getClass } from '../../_util/props-util';
+import { flattenChildren } from '../../_util/props-util';
 import { lazyStartIndex, lazyEndIndex, getPreClones } from './utils/innerSliderUtils';
 
 // given specifications/props for a slide, fetch all the classes that need to be applied to the slide
@@ -75,7 +76,7 @@ const getSlideStyle = function(spec) {
 
 const getKey = (child, fallbackKey) => child.key || (child.key === 0 && '0') || fallbackKey;
 
-const renderSlides = function(spec, children, createElement) {
+const renderSlides = function(spec, children) {
   let key;
   const slides = [];
   const preCloneSlides = [];
@@ -97,35 +98,27 @@ const renderSlides = function(spec, children, createElement) {
     if (!spec.lazyLoad || (spec.lazyLoad && spec.lazyLoadedList.indexOf(index) >= 0)) {
       child = elem;
     } else {
-      child = createElement('div');
+      child = createVNode('div');
     }
     const childStyle = getSlideStyle({ ...spec, index });
-    const slideClass = getClass(child.context) || '';
+    const slideClass = child.props.class || '';
     let slideClasses = getSlideClasses({ ...spec, index });
     // push a cloned element of the desired slide
     slides.push(
-      cloneElement(
-        child,
-        {
-          key: 'original' + getKey(child, index),
-          attrs: {
-            tabindex: '-1',
-            'data-index': index,
-            'aria-hidden': !slideClasses['slick-active'],
-          },
-          class: classnames(slideClasses, slideClass),
-          style: { outline: 'none', ...(getStyle(child.context) || {}), ...childStyle },
-          on: {
-            click: () => {
-              // child.props && child.props.onClick && child.props.onClick(e)
-              if (spec.focusOnSelect) {
-                spec.focusOnSelect(childOnClickOptions);
-              }
-            },
-          },
+      cloneElement(child, {
+        key: 'original' + getKey(child, index),
+        tabindex: '-1',
+        'data-index': index,
+        'aria-hidden': !slideClasses['slick-active'],
+        class: classnames(slideClasses, slideClass),
+        style: { outline: 'none', ...(child.props.style || {}), ...childStyle },
+        onClick: () => {
+          // child.props && child.props.onClick && child.props.onClick(e)
+          if (spec.focusOnSelect) {
+            spec.focusOnSelect(childOnClickOptions);
+          }
         },
-        true,
-      ),
+      }),
     );
 
     // if slide needs to be precloned or postcloned
@@ -141,19 +134,15 @@ const renderSlides = function(spec, children, createElement) {
           cloneElement(child, {
             key: 'precloned' + getKey(child, key),
             class: classnames(slideClasses, slideClass),
-            attrs: {
-              tabindex: '-1',
-              'data-index': key,
-              'aria-hidden': !slideClasses['slick-active'],
-            },
-            style: { ...(getStyle(child.context) || {}), ...childStyle },
-            on: {
-              click: () => {
-                // child.props && child.props.onClick && child.props.onClick(e)
-                if (spec.focusOnSelect) {
-                  spec.focusOnSelect(childOnClickOptions);
-                }
-              },
+            tabindex: '-1',
+            'data-index': key,
+            'aria-hidden': !slideClasses['slick-active'],
+            style: { ...(child.props.style || {}), ...childStyle },
+            onClick: () => {
+              // child.props && child.props.onClick && child.props.onClick(e)
+              if (spec.focusOnSelect) {
+                spec.focusOnSelect(childOnClickOptions);
+              }
             },
           }),
         );
@@ -168,20 +157,16 @@ const renderSlides = function(spec, children, createElement) {
         postCloneSlides.push(
           cloneElement(child, {
             key: 'postcloned' + getKey(child, key),
-            attrs: {
-              tabindex: '-1',
-              'data-index': key,
-              'aria-hidden': !slideClasses['slick-active'],
-            },
+            tabindex: '-1',
+            'data-index': key,
+            'aria-hidden': !slideClasses['slick-active'],
             class: classnames(slideClasses, slideClass),
-            style: { ...(getStyle(child.context) || {}), ...childStyle },
-            on: {
-              click: () => {
-                // child.props && child.props.onClick && child.props.onClick(e)
-                if (spec.focusOnSelect) {
-                  spec.focusOnSelect(childOnClickOptions);
-                }
-              },
+            style: { ...(child.props.style || {}), ...childStyle },
+            onClick: () => {
+              // child.props && child.props.onClick && child.props.onClick(e)
+              if (spec.focusOnSelect) {
+                spec.focusOnSelect(childOnClickOptions);
+              }
             },
           }),
         );
@@ -195,21 +180,18 @@ const renderSlides = function(spec, children, createElement) {
   }
 };
 
-export default {
-  functional: true,
-  render(createElement, context) {
-    const { props, listeners, children, data } = context;
-    const slides = renderSlides(props, children, createElement);
-    const { mouseenter, mouseover, mouseleave } = listeners;
-    const mouseEvents = { mouseenter, mouseover, mouseleave };
-    const trackProps = {
-      class: 'slick-track',
-      style: props.trackStyle,
-      on: {
-        ...mouseEvents,
-      },
-      directives: data.directives,
-    };
-    return <div {...trackProps}>{slides}</div>;
-  },
+const Track = (_, { attrs, slots }) => {
+  const slides = renderSlides(attrs, flattenChildren(slots?.default()));
+  const { onMouseenter, onMouseover, onMouseleave } = attrs;
+  const mouseEvents = { onMouseenter, onMouseover, onMouseleave };
+  const trackProps = {
+    class: 'slick-track',
+    style: attrs.trackStyle,
+    ...mouseEvents,
+  };
+  return <div {...trackProps}>{slides}</div>;
 };
+
+Track.inheritAttrs = false;
+
+export default Track;

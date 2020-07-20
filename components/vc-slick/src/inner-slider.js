@@ -1,8 +1,5 @@
 import debounce from 'lodash/debounce';
 import classnames from 'classnames';
-import Vue from 'vue';
-import ref from 'vue-ref';
-import { getStyle, getListeners } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import defaultProps from './default-props';
 import initialState from './initial-state';
@@ -28,11 +25,11 @@ import Dots from './dots';
 import { PrevArrow, NextArrow } from './arrows';
 import ResizeObserver from 'resize-observer-polyfill';
 
-Vue.use(ref, { name: 'ant-ref' });
-
 function noop() {}
 
 export default {
+  name: 'InnerSlider',
+  inheritAttrs: false,
   props: {
     ...defaultProps,
   },
@@ -119,7 +116,7 @@ export default {
           slideCount: children.length,
         });
         children.forEach(child => {
-          const childWidth = getStyle(child).width.split('px')[0];
+          const childWidth = child.props.width.split('px')[0];
           childrenWidths.push(childWidth);
           trackWidth += childWidth;
         });
@@ -236,7 +233,7 @@ export default {
       const slidesToLoad = state.lazyLoadedList.filter(
         value => this.lazyLoadedList.indexOf(value) < 0,
       );
-      if (getListeners(this).lazyLoad && slidesToLoad.length > 0) {
+      if (this.$attrs.onLazyLoad && slidesToLoad.length > 0) {
         this.$emit('lazyLoad', slidesToLoad);
       }
       this.setState(state, () => {
@@ -574,7 +571,7 @@ export default {
     },
   },
   render() {
-    const className = classnames('slick-slider', {
+    const className = classnames('slick-slider', this.$attrs.class, {
       'slick-vertical': this.vertical,
       'slick-initialized': true,
     });
@@ -604,21 +601,12 @@ export default {
     ]);
     const { pauseOnHover } = this.$props;
     trackProps = {
-      props: {
-        ...trackProps,
-        focusOnSelect: this.focusOnSelect ? this.selectHandler : null,
-      },
-      directives: [
-        {
-          name: 'ant-ref',
-          value: this.trackRefHandler,
-        },
-      ],
-      on: {
-        mouseenter: pauseOnHover ? this.onTrackOver : noop,
-        mouseleave: pauseOnHover ? this.onTrackLeave : noop,
-        mouseover: pauseOnHover ? this.onTrackOver : noop,
-      },
+      ...trackProps,
+      focusOnSelect: this.focusOnSelect ? this.selectHandler : null,
+      ref: this.trackRefHandler,
+      onMouseenter: pauseOnHover ? this.onTrackOver : noop,
+      onMouseleave: pauseOnHover ? this.onTrackLeave : noop,
+      onMouseover: pauseOnHover ? this.onTrackOver : noop,
     };
 
     let dots;
@@ -636,7 +624,7 @@ export default {
       ]);
       dotProps.customPaging = this.customPaging;
       dotProps.appendDots = this.appendDots;
-      const { customPaging, appendDots } = this.$scopedSlots;
+      const { customPaging, appendDots } = this.$slots;
       if (customPaging) {
         dotProps.customPaging = customPaging;
       }
@@ -645,15 +633,11 @@ export default {
       }
       const { pauseOnDotsHover } = this.$props;
       dotProps = {
-        props: {
-          ...dotProps,
-          clickHandler: this.changeSlide,
-        },
-        on: {
-          mouseenter: pauseOnDotsHover ? this.onDotsLeave : noop,
-          mouseover: pauseOnDotsHover ? this.onDotsOver : noop,
-          mouseleave: pauseOnDotsHover ? this.onDotsLeave : noop,
-        },
+        ...dotProps,
+        clickHandler: this.changeSlide,
+        onMouseenter: pauseOnDotsHover ? this.onDotsLeave : noop,
+        onMouseover: pauseOnDotsHover ? this.onDotsOver : noop,
+        onMouseleave: pauseOnDotsHover ? this.onDotsLeave : noop,
       };
       dots = <Dots {...dotProps} />;
     }
@@ -667,7 +651,7 @@ export default {
       'slidesToShow',
     ]);
     arrowProps.clickHandler = this.changeSlide;
-    const { prevArrow: prevArrowCustom, nextArrow: nextArrowCustom } = this.$scopedSlots;
+    const { prevArrow: prevArrowCustom, nextArrow: nextArrowCustom } = this.$slots;
     if (prevArrowCustom) {
       arrowProps.prevArrow = prevArrowCustom;
     }
@@ -675,8 +659,8 @@ export default {
       arrowProps.nextArrow = nextArrowCustom;
     }
     if (this.arrows) {
-      prevArrow = <PrevArrow {...{ props: arrowProps }} />;
-      nextArrow = <NextArrow {...{ props: arrowProps }} />;
+      prevArrow = <PrevArrow {...arrowProps} />;
+      nextArrow = <NextArrow {...arrowProps} />;
     }
     let verticalHeightStyle = null;
 
@@ -705,44 +689,30 @@ export default {
     const listStyle = { ...verticalHeightStyle, ...centerPaddingStyle };
     const touchMove = this.touchMove;
     let listProps = {
-      directives: [
-        {
-          name: 'ant-ref',
-          value: this.listRefHandler,
-        },
-      ],
+      ref: this.listRefHandler,
       class: 'slick-list',
       style: listStyle,
-      on: {
-        click: this.clickHandler,
-        mousedown: touchMove ? this.swipeStart : noop,
-        mousemove: this.dragging && touchMove ? this.swipeMove : noop,
-        mouseup: touchMove ? this.swipeEnd : noop,
-        mouseleave: this.dragging && touchMove ? this.swipeEnd : noop,
-        touchstart: touchMove ? this.swipeStart : noop,
-        touchmove: this.dragging && touchMove ? this.swipeMove : noop,
-        touchend: touchMove ? this.swipeEnd : noop,
-        touchcancel: this.dragging && touchMove ? this.swipeEnd : noop,
-        keydown: this.accessibility ? this.keyHandler : noop,
-      },
+      onClick: this.clickHandler,
+      onMousedown: touchMove ? this.swipeStart : noop,
+      onMousemove: this.dragging && touchMove ? this.swipeMove : noop,
+      onMouseup: touchMove ? this.swipeEnd : noop,
+      onMouseleave: this.dragging && touchMove ? this.swipeEnd : noop,
+      onTouchstart: touchMove ? this.swipeStart : noop,
+      onTouchmove: this.dragging && touchMove ? this.swipeMove : noop,
+      onTouchend: touchMove ? this.swipeEnd : noop,
+      onTouchcancel: this.dragging && touchMove ? this.swipeEnd : noop,
+      onKeydown: this.accessibility ? this.keyHandler : noop,
     };
 
     let innerSliderProps = {
       class: className,
-      props: {
-        dir: 'ltr',
-      },
+      dir: 'ltr',
     };
 
     if (this.unslick) {
       listProps = {
         class: 'slick-list',
-        directives: [
-          {
-            name: 'ant-ref',
-            value: this.listRefHandler,
-          },
-        ],
+        ref: this.listRefHandler,
       };
       innerSliderProps = { class: className };
     }

@@ -17,7 +17,9 @@ export default {
         }
       }
       Object.assign(this.$data, newState);
-      this.$forceUpdate();
+      if (this._.isMounted) {
+        this.$forceUpdate();
+      }
       this.$nextTick(() => {
         callback && callback();
       });

@@ -1,4 +1,5 @@
 import '@babel/polyfill';
+import 'ant-design-vue/style.js';
 import { createApp, version } from 'vue';
 import App from './App.vue';
 import {
@@ -30,11 +31,10 @@ import {
   Tree,
   TreeSelect,
   Transfer,
+  Carousel,
   notification,
   message,
 } from 'ant-design-vue';
-
-import 'ant-design-vue/style.js';
 
 // eslint-disable-next-line no-console
 console.log('Vue version: ', version);
@@ -80,4 +80,5 @@ app
   .use(Tree)
   .use(TreeSelect)
   .use(Transfer)
+  .use(Carousel)
   .mount('#app');

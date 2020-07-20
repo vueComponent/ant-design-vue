@@ -1,20 +1,18 @@
 import json2mq from 'json2mq';
-import Vue from 'vue';
-import ref from 'vue-ref';
 import BaseMixin from '../../_util/BaseMixin';
 import { cloneElement } from '../../_util/vnode';
-import { getStyle, getListeners } from '../../_util/props-util';
 import InnerSlider from './inner-slider';
 import defaultProps from './default-props';
 import { canUseDOM } from './utils/innerSliderUtils';
+import { getSlot } from '../../_util/props-util';
 const enquire = canUseDOM() && require('enquire.js');
 
-Vue.use(ref, { name: 'ant-ref' });
-
 export default {
+  name: 'Slider',
   props: {
     ...defaultProps,
   },
+  inheritAttrs: false,
   mixins: [BaseMixin],
   data() {
     this._responsiveMediaHandlers = [];
@@ -132,7 +130,7 @@ export default {
     }
 
     // makes sure that children is an array, even when there is only 1 child
-    let children = this.$slots.default || [];
+    let children = getSlot(this) || [];
 
     // Children may contain false or null, so we should filter them
     // children may also contain string filled with spaces (in certain cases where we use jsx strings)
@@ -155,16 +153,14 @@ export default {
       for (let j = i; j < i + settings.rows * settings.slidesPerRow; j += settings.slidesPerRow) {
         const row = [];
         for (let k = j; k < j + settings.slidesPerRow; k += 1) {
-          if (settings.variableWidth && getStyle(children[k])) {
-            currentWidth = getStyle(children[k]).width;
+          if (settings.variableWidth && children[k].props.style) {
+            currentWidth = children[k].props.style.width;
           }
           if (k >= children.length) break;
           row.push(
             cloneElement(children[k], {
               key: 100 * i + 10 * j + k,
-              attrs: {
-                tabindex: -1,
-              },
+              tabindex: -1,
               style: {
                 width: `${100 / settings.slidesPerRow}%`,
                 display: 'inline-block',
@@ -192,20 +188,12 @@ export default {
       settings.unslick = true;
     }
     const sliderProps = {
-      props: {
-        ...settings,
-        children: newChildren,
-        __propsSymbol__: Symbol(),
-      },
-      on: getListeners(this),
-      directives: [
-        {
-          name: 'ant-ref',
-          value: this.innerSliderRefHandler,
-        },
-      ],
-      scopedSlots: this.$scopedSlots,
+      ...this.$attrs,
+      ...settings,
+      children: newChildren,
+      __propsSymbol__: Symbol(),
+      ref: this.innerSliderRefHandler,
     };
-    return <InnerSlider {...sliderProps} />;
+    return <InnerSlider {...sliderProps} vSlots={this.$slots} />;
   },
 };

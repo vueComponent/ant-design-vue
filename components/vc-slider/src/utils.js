@@ -1,9 +1,10 @@
 import keyCode from '../../_util/KeyCode';
+import { findDOMNode } from '../../_util/props-util';
 
 export function isEventFromHandle(e, handles) {
   try {
     return Object.keys(handles).some(
-      key => e.target === handles[key].$el || e.target === handles[key],
+      key => e.target === findDOMNode(handles[key]) || e.target === handles[key],
     );
   } catch (error) {
     return false;

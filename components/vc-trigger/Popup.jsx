@@ -6,7 +6,7 @@ import LazyRenderBox from './LazyRenderBox';
 import animate from '../_util/css-animation';
 import BaseMixin from '../_util/BaseMixin';
 import { saveRef } from './utils';
-import { getListeners, splitAttrs, findDOMNode } from '../_util/props-util';
+import { splitAttrs, findDOMNode } from '../_util/props-util';
 
 export default {
   name: 'VCTriggerPopup',
@@ -82,8 +82,8 @@ export default {
         this.currentAlignClassName = currentAlignClassName;
         popupDomNode.className = this.getClassName(currentAlignClassName);
       }
-      const listeners = getListeners(this);
-      listeners.align && listeners.align(popupDomNode, align);
+      const { onaAlign } = this.$attrs;
+      onaAlign && onaAlign(popupDomNode, align);
     },
 
     // Record size if stretch needed

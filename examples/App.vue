@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/tree-select/demo/treeData';
+import demo from '../antdv-demo/docs/slider/demo/basic';
 
 export default {
   components: {

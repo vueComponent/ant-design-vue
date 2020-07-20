@@ -30,6 +30,7 @@ import {
   Tree,
   TreeSelect,
   Transfer,
+  Slider,
   notification,
   message,
 } from 'ant-design-vue';
@@ -80,4 +81,5 @@ app
   .use(Tree)
   .use(TreeSelect)
   .use(Transfer)
+  .use(Slider)
   .mount('#app');

@@ -6,6 +6,8 @@ import Handle from './Handle';
 
 export default function createSliderWithTooltip(Component) {
   return {
+    name: 'SliderTooltip',
+    inheritAttrs: false,
     mixins: [BaseMixin, Component],
     props: {
       ...Component.props,
@@ -50,27 +52,19 @@ export default function createSliderWithTooltip(Component) {
         }
 
         const tooltipProps = {
-          props: {
-            ...restTooltipProps,
-            prefixCls,
-            overlay,
-            placement,
-            visible: (!disabled && (this.visibles[index] || dragging)) || visible,
-          },
+          ...restTooltipProps,
+          prefixCls,
+          overlay,
+          placement,
+          visible: (!disabled && (this.visibles[index] || dragging)) || visible,
           key: index,
         };
         const handleProps = {
-          props: {
-            value,
-            ...restProps,
-          },
-          on: {
-            mouseenter: () => this.handleTooltipVisibleChange(index, true),
-            mouseleave: () => this.handleTooltipVisibleChange(index, false),
-          },
-          style: {
-            ...handleStyleWithIndex,
-          },
+          value,
+          ...restProps,
+          onMouseenter: () => this.handleTooltipVisibleChange(index, true),
+          onMouseleave: () => this.handleTooltipVisibleChange(index, false),
+          style: handleStyleWithIndex,
         };
 
         return (
@@ -82,10 +76,8 @@ export default function createSliderWithTooltip(Component) {
     },
     render() {
       const componentProps = {
-        props: {
-          ...getOptionProps(this),
-          handle: this.handleWithTooltip,
-        },
+        ...getOptionProps(this),
+        handle: this.handleWithTooltip,
       };
       return <Component {...componentProps} />;
     },

@@ -560,8 +560,8 @@ export default {
       return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1;
     },
     forcePopupAlign() {
-      if (this.$data.sPopupVisible && this._component && this._component.$refs.alignInstance) {
-        this._component.$refs.alignInstance.forceAlign();
+      if (this.$data.sPopupVisible && this._component && this._component.alignInstance) {
+        this._component.alignInstance.forceAlign();
       }
     },
     fireEvents(type, e) {

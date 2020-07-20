@@ -116,7 +116,7 @@ export default {
     },
 
     getPopupDomNode() {
-      return this.$refs.trigger.getPopupDomNode();
+      return this.trigger.getPopupDomNode();
     },
 
     getOpenClassName() {
@@ -133,13 +133,8 @@ export default {
         const rootNode = findDOMNode(this);
         if (rootNode && overlayNode && rootNode.offsetWidth > overlayNode.offsetWidth) {
           overlayNode.style.minWidth = `${rootNode.offsetWidth}px`;
-          if (
-            this.$refs.trigger &&
-            this.$refs.trigger._component &&
-            this.$refs.trigger._component.$refs &&
-            this.$refs.trigger._component.$refs.alignInstance
-          ) {
-            this.$refs.trigger._component.$refs.alignInstance.forceAlign();
+          if (this.trigger && this.trigger._component && this.trigger._component.alignInstance) {
+            this.trigger._component.alignInstance.forceAlign();
           }
         }
       }
@@ -151,6 +146,9 @@ export default {
       return sVisible && children
         ? cloneElement(children[0], { class: this.getOpenClassName() }, false)
         : children;
+    },
+    saveTrigger(node) {
+      this.trigger = node;
     },
   },
 
@@ -192,7 +190,7 @@ export default {
       getPopupContainer,
       onPopupVisibleChange: this.onVisibleChange,
       popup: this.getMenuElementOrLambda(),
-      ref: 'trigger',
+      ref: this.saveTrigger,
     };
     return <Trigger {...triggerProps}>{this.renderChildren()}</Trigger>;
   },

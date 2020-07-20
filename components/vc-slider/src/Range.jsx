@@ -38,6 +38,7 @@ const rangeProps = {
 };
 const Range = {
   name: 'Range',
+  inheritAttrs: false,
   displayName: 'Range',
   mixins: [BaseMixin],
   props: initDefaultProps(rangeProps, {
@@ -407,7 +408,7 @@ const Range = {
           _tabIndex = null;
         }
         return handleGenerator({
-          className: classNames({
+          class: classNames({
             [handleClassName]: true,
             [`${handleClassName}-${i + 1}`]: true,
           }),
@@ -423,16 +424,9 @@ const Range = {
           reverse,
           disabled,
           style: handleStyle[i],
-          directives: [
-            {
-              name: 'ant-ref',
-              value: h => this.saveHandle(i, h),
-            },
-          ],
-          on: {
-            focus: this.onFocus,
-            blur: this.onBlur,
-          },
+          ref: h => this.saveHandle(i, h),
+          onFocus: this.onFocus,
+          onBlur: this.onBlur,
         });
       });
 

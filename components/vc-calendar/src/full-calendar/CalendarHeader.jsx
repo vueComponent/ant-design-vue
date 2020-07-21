@@ -4,6 +4,7 @@ import { getMonthName } from '../util';
 
 const CalendarHeader = {
   name: 'CalendarHeader',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   props: {
     value: PropTypes.object,

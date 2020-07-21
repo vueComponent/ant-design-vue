@@ -20,7 +20,9 @@ function chooseDecade(year, event) {
 }
 
 export default {
+  name: 'DecadePanel',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     locale: PropTypes.object,
     value: PropTypes.object,

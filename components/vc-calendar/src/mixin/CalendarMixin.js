@@ -26,6 +26,7 @@ function isMoment(value) {
 const MomentType = PropTypes.custom(isMoment);
 const CalendarMixin = {
   mixins: [BaseMixin],
+  inheritAttrs: false,
   name: 'CalendarMixinWrapper',
   props: {
     value: MomentType,
@@ -62,18 +63,18 @@ const CalendarMixin = {
     },
 
     renderRoot(newProps) {
-      const props = this.$props;
+      const props = { ...this.$props, ...this.$attrs };
       const prefixCls = props.prefixCls;
 
       const className = {
         [prefixCls]: 1,
         [`${prefixCls}-hidden`]: !props.visible,
-        // [props.className]: !!props.className,
+        [props.class]: !!props.class,
         [newProps.class]: !!newProps.class,
       };
       return (
         <div
-          ref="rootInstance"
+          ref={this.saveRoot}
           class={className}
           tabindex="0"
           onKeydown={this.onKeyDown || noop}

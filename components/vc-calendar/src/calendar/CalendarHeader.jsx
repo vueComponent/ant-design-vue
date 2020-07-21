@@ -23,6 +23,7 @@ function showIf(condition, el) {
 
 const CalendarHeader = {
   name: 'CalendarHeader',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   props: {
     prefixCls: PropTypes.string,

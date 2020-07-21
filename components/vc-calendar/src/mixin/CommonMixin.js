@@ -15,12 +15,15 @@ export default {
     focus() {
       if (this.focusElement) {
         this.focusElement.focus();
-      } else if (this.$refs.rootInstance) {
-        this.$refs.rootInstance.focus();
+      } else if (this.rootInstance) {
+        this.rootInstance.focus();
       }
     },
     saveFocusElement(focusElement) {
       this.focusElement = focusElement;
+    },
+    saveRoot(root) {
+      this.rootInstance = root;
     },
   },
 };

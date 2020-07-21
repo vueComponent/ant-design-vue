@@ -10,6 +10,8 @@ let cachedSelectionEnd;
 let dateInputInstance;
 
 const DateInput = {
+  name: 'DateInput',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   props: {
     prefixCls: PropTypes.string,
@@ -190,17 +192,7 @@ const DateInput = {
       <div class={`${prefixCls}-input-wrap`}>
         <div class={`${prefixCls}-date-input-wrap`}>
           <input
-            {...{
-              directives: [
-                {
-                  name: 'ant-ref',
-                  value: this.saveDateInput,
-                },
-                {
-                  name: 'ant-input',
-                },
-              ],
-            }}
+            ref={this.saveDateInput}
             class={`${prefixCls}-input ${invalidClass}`}
             value={str}
             disabled={disabled}

@@ -1,9 +1,10 @@
 import moment from 'moment';
+import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import Header from './Header';
 import Combobox from './Combobox';
-import { getComponent, getListeners } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
 
 function noop() {}
 
@@ -31,6 +32,8 @@ function toNearestValidTime(time, hourOptions, minuteOptions, secondOptions) {
 }
 
 const Panel = {
+  name: 'Panel',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   props: {
     clearText: PropTypes.string,
@@ -144,8 +147,8 @@ const Panel = {
       sValue,
       currentSelectPanel,
     } = this;
+    const { class: className, onEsc = noop, onKeydown = noop } = this.$attrs;
     const clearIcon = getComponent(this, 'clearIcon');
-    const { esc = noop, keydown = noop } = getListeners(this);
 
     const disabledHourOptions = this.disabledHours2();
     const disabledMinuteOptions = disabledMinutes(sValue ? sValue.hour() : null);
@@ -173,14 +176,14 @@ const Panel = {
       secondOptions,
     );
     return (
-      <div class={`${prefixCls}-inner`}>
+      <div className={classNames(className, `${prefixCls}-inner`)}>
         <Header
           clearText={clearText}
           prefixCls={prefixCls}
           defaultOpenValue={validDefaultOpenValue}
           value={sValue}
           currentSelectPanel={currentSelectPanel}
-          onEsc={esc}
+          onEsc={onEsc}
           format={format}
           placeholder={placeholder}
           hourOptions={hourOptions}
@@ -191,7 +194,7 @@ const Panel = {
           disabledSeconds={disabledSeconds}
           onChange={this.onChange}
           focusOnOpen={focusOnOpen}
-          onKeydown={keydown}
+          onKeydown={onKeydown}
           inputReadOnly={inputReadOnly}
           clearIcon={clearIcon}
         />

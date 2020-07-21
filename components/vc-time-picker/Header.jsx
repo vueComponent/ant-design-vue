@@ -3,6 +3,8 @@ import BaseMixin from '../_util/BaseMixin';
 import moment from 'moment';
 
 const Header = {
+  inheritAttrs: false,
+  name: 'Header',
   mixins: [BaseMixin],
   props: {
     format: PropTypes.string,
@@ -41,8 +43,8 @@ const Header = {
       // Wait one frame for the panel to be positioned before focusing
       const requestAnimationFrame = window.requestAnimationFrame || window.setTimeout;
       requestAnimationFrame(() => {
-        this.$refs.input.focus();
-        this.$refs.input.select();
+        this.refInput.focus();
+        this.refInput.select();
       });
     }
   },
@@ -160,19 +162,14 @@ const Header = {
       return (
         <input
           class={`${prefixCls}-input ${invalidClass}`}
-          ref="input"
+          ref={ref => {
+            this.refInput = ref;
+          }}
           onKeydown={this.onKeyDown}
           value={str}
           placeholder={placeholder}
           onInput={this.onInputChange}
           readonly={!!inputReadOnly}
-          {...{
-            directives: [
-              {
-                name: 'ant-input',
-              },
-            ],
-          }}
         />
       );
     },

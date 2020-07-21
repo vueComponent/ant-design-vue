@@ -1,4 +1,5 @@
 import omit from 'omit.js';
+import { inject, provide } from 'vue';
 import VcTimePicker from '../vc-time-picker';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import BaseMixin from '../_util/BaseMixin';
@@ -13,11 +14,9 @@ import {
   getOptionProps,
   getComponent,
   isValidElement,
-  getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 import {
   checkValidate,
   stringToMoment,
@@ -69,10 +68,21 @@ export const TimePickerProps = () => ({
   clearIcon: PropTypes.any,
   locale: PropTypes.object,
   valueFormat: PropTypes.string,
+  onChange: PropTypes.func,
+  onAmPmChange: PropTypes.func,
+  onOpen: PropTypes.func,
+  onClose: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  onKeydown: PropTypes.func,
+  onOpenChange: PropTypes.func,
+  'onUpdate:value': PropTypes.func,
+  'onUpdate:open': PropTypes.func,
 });
 
 const TimePicker = {
   name: 'ATimePicker',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   props: initDefaultProps(TimePickerProps(), {
     align: {
@@ -88,18 +98,15 @@ const TimePicker = {
     focusOnOpen: true,
     allowClear: true,
   }),
-  model: {
-    prop: 'value',
-    event: 'change',
+  created() {
+    provide('savePopupRef', this.savePopupRef);
   },
-  provide() {
+  setup() {
     return {
-      savePopupRef: this.savePopupRef,
+      configProvider: inject('configProvider', ConfigConsumerProps),
     };
   },
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-  },
+
   data() {
     const { value, defaultValue, valueFormat } = this;
 
@@ -148,16 +155,17 @@ const TimePicker = {
     savePopupRef(ref) {
       this.popupRef = ref;
     },
+    saveTimePicker(timePickerRef) {
+      this.timePickerRef = timePickerRef;
+    },
     handleChange(value) {
       if (!hasProp(this, 'value')) {
         this.setState({ sValue: value });
       }
       const { format = 'HH:mm:ss' } = this;
-      this.$emit(
-        'change',
-        this.valueFormat ? momentToString(value, this.valueFormat) : value,
-        (value && value.format(format)) || '',
-      );
+      const val = this.valueFormat ? momentToString(value, this.valueFormat) : value;
+      this.$emit('update:value', val);
+      this.$emit('change', val, (value && value.format(format)) || '');
     },
 
     handleOpenClose({ open }) {
@@ -166,11 +174,11 @@ const TimePicker = {
     },
 
     focus() {
-      this.$refs.timePicker.focus();
+      this.timePickerRef.focus();
     },
 
     blur() {
-      this.$refs.timePicker.blur();
+      this.timePickerRef.blur();
     },
 
     renderInputIcon(prefixCls) {
@@ -201,13 +209,14 @@ const TimePicker = {
     renderTimePicker(locale) {
       let props = getOptionProps(this);
       props = omit(props, ['defaultValue', 'suffixIcon', 'allowEmpty', 'allowClear']);
-
+      const { class: className } = this.$attrs;
       const { prefixCls: customizePrefixCls, getPopupContainer, placeholder, size } = props;
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('time-picker', customizePrefixCls);
 
       const format = this.getDefaultFormat();
       const pickerClassName = {
+        [className]: className,
         [`${prefixCls}-${size}`]: !!size,
       };
       const tempAddon = getComponent(this, 'addon', {}, false);
@@ -222,27 +231,23 @@ const TimePicker = {
       const clearIcon = this.renderClearIcon(prefixCls);
       const { getPopupContainer: getContextPopupContainer } = this.configProvider;
       const timeProps = {
-        props: {
-          ...generateShowHourMinuteSecond(format),
-          ...props,
-          allowEmpty: this.getAllowClear(),
-          prefixCls,
-          getPopupContainer: getPopupContainer || getContextPopupContainer,
-          format,
-          value: this.sValue,
-          placeholder: placeholder === undefined ? locale.placeholder : placeholder,
-          addon: pickerAddon,
-          inputIcon,
-          clearIcon,
-        },
+        ...generateShowHourMinuteSecond(format),
+        ...props,
+        ...this.$attrs,
+        allowEmpty: this.getAllowClear(),
+        prefixCls,
+        getPopupContainer: getPopupContainer || getContextPopupContainer,
+        format,
+        value: this.sValue,
+        placeholder: placeholder === undefined ? locale.placeholder : placeholder,
+        addon: pickerAddon,
+        inputIcon,
+        clearIcon,
         class: pickerClassName,
-        ref: 'timePicker',
-        on: {
-          ...getListeners(this),
-          change: this.handleChange,
-          open: this.handleOpenClose,
-          close: this.handleOpenClose,
-        },
+        ref: this.saveTimePicker,
+        onChange: this.handleChange,
+        onOpen: this.handleOpenClose,
+        onClose: this.handleOpenClose,
       };
       return <VcTimePicker {...timeProps} />;
     },
@@ -253,16 +258,15 @@ const TimePicker = {
       <LocaleReceiver
         componentName="TimePicker"
         defaultLocale={this.getDefaultLocale()}
-        scopedSlots={{ default: this.renderTimePicker }}
+        children={this.renderTimePicker}
       />
     );
   },
 };
 
 /* istanbul ignore next */
-TimePicker.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(TimePicker.name, TimePicker);
+TimePicker.install = function(app) {
+  app.component(TimePicker.name, TimePicker);
 };
 
 export default TimePicker;

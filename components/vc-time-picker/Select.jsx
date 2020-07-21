@@ -23,7 +23,9 @@ const scrollTo = (element, to, duration) => {
 };
 
 const Select = {
+  name: 'Select',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
     options: PropTypes.array,
@@ -101,6 +103,10 @@ const Select = {
       this.setState({ active: false });
     },
 
+    saveList(node) {
+      this.list = node;
+    },
+
     scrollToSelected(duration) {
       // move to selected item
       const select = this.$el;
@@ -131,7 +137,7 @@ const Select = {
 
     return (
       <div class={cls} onMouseenter={this.handleMouseEnter} onMouseleave={this.handleMouseLeave}>
-        <ul ref="list">{this.getOptions()}</ul>
+        <ul ref={this.saveList}>{this.getOptions()}</ul>
       </div>
     );
   },

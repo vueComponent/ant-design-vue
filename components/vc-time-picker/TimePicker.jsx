@@ -15,10 +15,14 @@ import Panel from './Panel';
 import placements from './placements';
 
 function noop() {}
+function refFn(field, component) {
+  this[field] = component;
+}
 
 export default {
   name: 'VcTimePicker',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps(
     {
       prefixCls: PropTypes.string,
@@ -93,6 +97,8 @@ export default {
     },
   ),
   data() {
+    this.saveInputRef = refFn.bind(this, 'picker');
+    this.savePanelRef = refFn.bind(this, 'panelInstance');
     const { defaultOpen, defaultValue, open = defaultOpen, value = defaultValue } = this;
     return {
       sOpen: open,
@@ -210,7 +216,7 @@ export default {
         <Panel
           clearText={clearText}
           prefixCls={`${prefixCls}-panel`}
-          ref="panel"
+          ref={this.savePanelRef}
           value={sValue}
           inputReadOnly={inputReadOnly}
           onChange={this.onPanelChange}
@@ -278,11 +284,11 @@ export default {
     },
 
     focus() {
-      this.$refs.picker.focus();
+      this.picker.focus();
     },
 
     blur() {
-      this.$refs.picker.blur();
+      this.picker.blur();
     },
     onFocus(e) {
       this.__emit('focus', e);
@@ -298,13 +304,11 @@ export default {
       }
       const clearIcon = getComponent(this, 'clearIcon');
       if (isValidElement(clearIcon)) {
-        const { click } = getEvents(clearIcon) || {};
+        const { onClick } = getEvents(clearIcon) || {};
         return cloneElement(clearIcon, {
-          on: {
-            click: (...args) => {
-              if (click) click(...args);
-              this.onClear(...args);
-            },
+          onClick: (...args) => {
+            if (onClick) onClick(...args);
+            this.onClear(...args);
           },
         });
       }
@@ -343,6 +347,7 @@ export default {
       onBlur,
       popupStyle,
     } = this;
+    const { class: className, style } = this.$attrs;
     const popupClassName = this.getPopupClassName();
     const inputIcon = getComponent(this, 'inputIcon');
     return (
@@ -359,12 +364,12 @@ export default {
         popupTransitionName={transitionName}
         popupVisible={sOpen}
         onPopupVisibleChange={this.onVisibleChange}
+        popup={this.getPanelElement()}
       >
-        <template slot="popup">{this.getPanelElement()}</template>
-        <span class={`${prefixCls}`}>
+        <span class={classNames(prefixCls, className)} style={style}>
           <input
             class={`${prefixCls}-input`}
-            ref="picker"
+            ref={this.saveInputRef}
             type="text"
             placeholder={placeholder}
             name={name}

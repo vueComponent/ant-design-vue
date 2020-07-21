@@ -33,6 +33,7 @@ import {
   Transfer,
   Slider,
   Carousel,
+  TimePicker,
   notification,
   message,
 } from 'ant-design-vue';
@@ -83,4 +84,5 @@ app
   .use(Transfer)
   .use(Slider)
   .use(Carousel)
+  .use(TimePicker)
   .mount('#app');

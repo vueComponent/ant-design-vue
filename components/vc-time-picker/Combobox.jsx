@@ -20,6 +20,7 @@ const formatOption = (option, disabledOptions) => {
 };
 
 const Combobox = {
+  inheritAttrs: false,
   mixins: [BaseMixin],
   name: 'Combobox',
   props: {

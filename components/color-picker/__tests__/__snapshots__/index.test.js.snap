@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ColorPicker prop locale should works 1`] = `
-<div tabindex="0" class="ant-color-picker ant-color-picker-open">
+<div tabindex="0" class="ant-color-picker">
   <div class="ant-color-picker-selection">
     <div id="color-picker-box25">
       <div class="pickr">
 
-        <button type="button" class="pcr-button" role="button" aria-label="toggle color picker dialog" style="color: rgb(205, 2, 0);"></button>
+        <button type="button" class="pcr-button" role="button" aria-label="toggle color picker dialog"></button>
 
 
       </div>
@@ -14,20 +14,20 @@ exports[`ColorPicker prop locale should works 1`] = `
         <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
       </svg></i>
   </div>
-  <div class="pcr-app visible" data-theme="monolith" aria-label="color picker dialog" role="window" style="left: 512px; top: 384px;">
+  <div class="pcr-app" data-theme="monolith" aria-label="color picker dialog" role="window">
     <div class="pcr-selection">
       <div class="pcr-color-preview">
-        <button type="button" class="pcr-last-color" aria-label="use previous color" style="color: rgb(205, 2, 0);"></button>
-        <div class="pcr-current-color" style="color: rgb(205, 2, 0);"></div>
+        <button type="button" class="pcr-last-color" aria-label="use previous color"></button>
+        <div class="pcr-current-color"></div>
       </div>
 
       <div class="pcr-color-palette">
-        <div class="pcr-picker" style="background: rgb(205, 2, 0);"></div>
+        <div class="pcr-picker"></div>
         <div class="pcr-palette" tabindex="0" aria-label="color selection area" role="listbox"></div>
       </div>
 
       <div class="pcr-color-chooser">
-        <div class="pcr-picker" style="background-color: hsl(0.5853658536585238, 100%, 50%);"></div>
+        <div class="pcr-picker"></div>
         <div class="pcr-hue pcr-slider" tabindex="0" aria-label="hue selection slider" role="slider"></div>
       </div>
 
@@ -57,12 +57,12 @@ exports[`ColorPicker prop locale should works 1`] = `
 `;
 
 exports[`ColorPicker save event should works 1`] = `
-<div tabindex="0" class="ant-color-picker ant-color-picker-open">
+<div tabindex="0" class="ant-color-picker">
   <div class="ant-color-picker-selection">
     <div id="color-picker-box31">
       <div class="pickr">
 
-        <button type="button" class="pcr-button" role="button" aria-label="toggle color picker dialog" style="color: rgb(205, 2, 0);"></button>
+        <button type="button" class="pcr-button" role="button" aria-label="toggle color picker dialog" style="color: rgb(0, 0, 0);"></button>
 
 
       </div>
@@ -70,20 +70,20 @@ exports[`ColorPicker save event should works 1`] = `
         <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
       </svg></i>
   </div>
-  <div class="pcr-app" data-theme="monolith" aria-label="color picker dialog" role="window" style="left: 512px; top: 384px;">
+  <div class="pcr-app visible" data-theme="monolith" aria-label="color picker dialog" role="window" style="left: 512px; top: 384px;">
     <div class="pcr-selection">
       <div class="pcr-color-preview">
-        <button type="button" class="pcr-last-color" aria-label="use previous color" style="color: rgb(205, 2, 0);"></button>
-        <div class="pcr-current-color" style="color: rgb(205, 2, 0);"></div>
+        <button type="button" class="pcr-last-color" aria-label="use previous color" style="color: rgb(0, 0, 0);"></button>
+        <div class="pcr-current-color"></div>
       </div>
 
       <div class="pcr-color-palette">
-        <div class="pcr-picker" style="background: rgb(205, 2, 0);"></div>
+        <div class="pcr-picker"></div>
         <div class="pcr-palette" tabindex="0" aria-label="color selection area" role="listbox"></div>
       </div>
 
       <div class="pcr-color-chooser">
-        <div class="pcr-picker" style="background-color: hsl(0.5853658536585238, 100%, 50%);"></div>
+        <div class="pcr-picker"></div>
         <div class="pcr-hue pcr-slider" tabindex="0" aria-label="hue selection slider" role="slider"></div>
       </div>
 
@@ -113,12 +113,12 @@ exports[`ColorPicker save event should works 1`] = `
 `;
 
 exports[`ColorPicker should support default value 1`] = `
-<div tabindex="0" class="ant-color-picker ant-color-picker-open">
+<div tabindex="0" class="ant-color-picker">
   <div class="ant-color-picker-selection">
     <div id="color-picker-box1">
       <div class="pickr">
 
-        <button type="button" class="pcr-button" role="button" aria-label="toggle color picker dialog" style="color: rgb(205, 2, 0);"></button>
+        <button type="button" class="pcr-button" role="button" aria-label="toggle color picker dialog"></button>
 
 
       </div>
@@ -126,20 +126,20 @@ exports[`ColorPicker should support default value 1`] = `
         <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
       </svg></i>
   </div>
-  <div class="pcr-app visible" data-theme="monolith" aria-label="color picker dialog" role="window" style="left: 512px; top: 384px;">
+  <div class="pcr-app" data-theme="monolith" aria-label="color picker dialog" role="window">
     <div class="pcr-selection">
       <div class="pcr-color-preview">
-        <button type="button" class="pcr-last-color" aria-label="use previous color" style="color: rgb(205, 2, 0);"></button>
-        <div class="pcr-current-color" style="color: rgb(205, 2, 0);"></div>
+        <button type="button" class="pcr-last-color" aria-label="use previous color"></button>
+        <div class="pcr-current-color"></div>
       </div>
 
       <div class="pcr-color-palette">
-        <div class="pcr-picker" style="background: rgb(205, 2, 0);"></div>
+        <div class="pcr-picker"></div>
         <div class="pcr-palette" tabindex="0" aria-label="color selection area" role="listbox"></div>
       </div>
 
       <div class="pcr-color-chooser">
-        <div class="pcr-picker" style="background-color: hsl(0.5853658536585238, 100%, 50%);"></div>
+        <div class="pcr-picker"></div>
         <div class="pcr-hue pcr-slider" tabindex="0" aria-label="hue selection slider" role="slider"></div>
       </div>
 
@@ -174,7 +174,7 @@ exports[`ColorPicker should support disabled 1`] = `
     <div id="color-picker-box13">
       <div class="pickr">
 
-        <button type="button" class="pcr-button disabled clear" role="button" aria-label="toggle color picker dialog" style="color: rgba(0, 0, 0, 0.15);"></button>
+        <button type="button" class="pcr-button disabled" role="button" aria-label="toggle color picker dialog"></button>
 
 
       </div>
@@ -182,7 +182,7 @@ exports[`ColorPicker should support disabled 1`] = `
         <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
       </svg></i>
   </div>
-  <div class="pcr-app" data-theme="monolith" aria-label="color picker dialog" role="window" style="left: 512px; top: 384px;">
+  <div class="pcr-app" data-theme="monolith" aria-label="color picker dialog" role="window">
     <div class="pcr-selection">
       <div class="pcr-color-preview">
         <button type="button" class="pcr-last-color" aria-label="use previous color"></button>
@@ -225,12 +225,12 @@ exports[`ColorPicker should support disabled 1`] = `
 `;
 
 exports[`ColorPicker should support format 1`] = `
-<div tabindex="0" class="ant-color-picker">
+<div tabindex="0" class="ant-color-picker ant-color-picker-open">
   <div class="ant-color-picker-selection">
     <div id="color-picker-box19">
       <div class="pickr">
 
-        <button type="button" class="pcr-button clear" role="button" aria-label="toggle color picker dialog" style="color: rgba(0, 0, 0, 0.15);"></button>
+        <button type="button" class="pcr-button" role="button" aria-label="toggle color picker dialog" style="color: rgb(0, 0, 0);"></button>
 
 
       </div>
@@ -238,7 +238,7 @@ exports[`ColorPicker should support format 1`] = `
         <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
       </svg></i>
   </div>
-  <div class="pcr-app" data-theme="monolith" aria-label="color picker dialog" role="window" style="left: 512px; top: 384px;">
+  <div class="pcr-app visible" data-theme="monolith" aria-label="color picker dialog" role="window" style="left: 512px; top: 384px;">
     <div class="pcr-selection">
       <div class="pcr-color-preview">
         <button type="button" class="pcr-last-color" aria-label="use previous color" style="color: rgb(0, 0, 0);"></button>
@@ -286,7 +286,7 @@ exports[`ColorPicker should support v-model 1`] = `
     <div id="color-picker-box7">
       <div class="pickr">
 
-        <button type="button" class="pcr-button clear" role="button" aria-label="toggle color picker dialog" style="color: rgba(0, 0, 0, 0.15);"></button>
+        <button type="button" class="pcr-button" role="button" aria-label="toggle color picker dialog"></button>
 
 
       </div>
@@ -294,7 +294,7 @@ exports[`ColorPicker should support v-model 1`] = `
         <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
       </svg></i>
   </div>
-  <div class="pcr-app" data-theme="monolith" aria-label="color picker dialog" role="window" style="left: 512px; top: 384px;">
+  <div class="pcr-app" data-theme="monolith" aria-label="color picker dialog" role="window">
     <div class="pcr-selection">
       <div class="pcr-color-preview">
         <button type="button" class="pcr-last-color" aria-label="use previous color"></button>

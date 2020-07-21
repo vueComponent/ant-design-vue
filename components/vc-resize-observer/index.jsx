@@ -64,7 +64,7 @@ const VueResizeObserver = {
       if (this.width !== fixedWidth || this.height !== fixedHeight) {
         const size = { width: fixedWidth, height: fixedHeight };
         this.width = fixedWidth;
-        this.fixedHeight = fixedHeight;
+        this.height = fixedHeight;
         this.$emit('resize', size);
       }
     },

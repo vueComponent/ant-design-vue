@@ -9,6 +9,7 @@ function noop() {}
 
 const MonthTable = {
   name: 'MonthTable',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   props: {
     cellRender: PropTypes.func,
@@ -122,7 +123,7 @@ const MonthTable = {
     });
 
     return (
-      <table class={`${prefixCls}-table`} cellSpacing="0" role="grid">
+      <table class={`${prefixCls}-table`} cellspacing="0" role="grid">
         <tbody class={`${prefixCls}-tbody`}>{monthsEls}</tbody>
       </table>
     );

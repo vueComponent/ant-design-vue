@@ -8,7 +8,6 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import interopDefault from '../_util/interopDefault';
 import { ConfigConsumerProps } from '../config-provider';
 import enUS from './locale/en_US';
-import Base from '../base';
 import { checkValidate, stringToMoment, momentToString, TimeType } from '../_util/moment-util';
 
 function noop() {
@@ -248,9 +247,8 @@ const Calendar = {
 };
 
 /* istanbul ignore next */
-Calendar.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Calendar.name, Calendar);
+Calendar.install = function(app) {
+  app.component(Calendar.name, Calendar);
 };
 export { HeaderProps } from './Header';
 export default Calendar;

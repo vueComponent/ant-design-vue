@@ -122,7 +122,7 @@ export default {
           />
         </div>
         <div class={`${prefixCls}-body`}>
-          <table class={`${prefixCls}-table`} cellSpacing="0" role="grid">
+          <table class={`${prefixCls}-table`} cellspacing="0" role="grid">
             <tbody class={`${prefixCls}-tbody`}>{decadesEls}</tbody>
           </table>
         </div>

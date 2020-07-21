@@ -9,6 +9,7 @@ import CommonMixin from './mixin/CommonMixin';
 import enUs from './locale/en_US';
 const MonthCalendar = {
   name: 'MonthCalendar',
+  inheritAttrs: false,
   props: {
     locale: PropTypes.object.def(enUs),
     format: PropTypes.string,
@@ -90,12 +91,11 @@ const MonthCalendar = {
   },
 
   render() {
-    const { mode, sValue: value, $props: props, $scopedSlots } = this;
+    const { mode, sValue: value, $props: props, $slots } = this;
     const { prefixCls, locale, disabledDate } = props;
-    const monthCellRender = this.monthCellRender || $scopedSlots.monthCellRender;
-    const monthCellContentRender =
-      this.monthCellContentRender || $scopedSlots.monthCellContentRender;
-    const renderFooter = this.renderFooter || $scopedSlots.renderFooter;
+    const monthCellRender = this.monthCellRender || $slots.monthCellRender;
+    const monthCellContentRender = this.monthCellContentRender || $slots.monthCellContentRender;
+    const renderFooter = this.renderFooter || $slots.renderFooter;
     const children = (
       <div class={`${prefixCls}-month-calendar-content`}>
         <div class={`${prefixCls}-month-header-wrap`}>

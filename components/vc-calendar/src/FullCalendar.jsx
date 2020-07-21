@@ -1,7 +1,7 @@
 import moment from 'moment';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { getOptionProps, hasProp, getListeners } from '../../_util/props-util';
+import { getOptionProps, hasProp } from '../../_util/props-util';
 import DateTable from './date/DateTable';
 import MonthTable from './month/MonthTable';
 import CalendarMixin, { getNowByCurrentStateValue } from './mixin/CalendarMixin';
@@ -10,6 +10,7 @@ import CalendarHeader from './full-calendar/CalendarHeader';
 import enUs from './locale/en_US';
 const FullCalendar = {
   name: 'FullCalendar',
+  inheritAttrs: false,
   props: {
     locale: PropTypes.object.def(enUs),
     format: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.func]),
@@ -103,17 +104,13 @@ const FullCalendar = {
       } else {
         const TheHeader = headerComponent || CalendarHeader;
         const headerProps = {
-          props: {
-            ...props,
-            prefixCls: `${prefixCls}-full`,
-            type,
-            value,
-          },
-          on: {
-            ...getListeners(this),
-            typeChange: this.setType,
-            valueChange: this.setValue,
-          },
+          ...props,
+          ...this.$attrs,
+          prefixCls: `${prefixCls}-full`,
+          type,
+          value,
+          onTypeChange: this.setType,
+          onValueChange: this.setValue,
           key: 'calendar-header',
         };
         header = <TheHeader {...headerProps} />;

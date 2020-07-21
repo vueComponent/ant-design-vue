@@ -23,6 +23,7 @@ const getMomentObjectIfValid = date => {
 
 const Calendar = {
   name: 'Calendar',
+  inheritAttrs: false,
   props: {
     locale: PropTypes.object.def(enUs),
     format: PropTypes.oneOfType([
@@ -273,22 +274,18 @@ const Calendar = {
     if (timePicker && showTimePicker) {
       const timePickerOriginProps = getOptionProps(timePicker);
       const timePickerProps = {
-        props: {
-          showHour: true,
-          showSecond: true,
-          showMinute: true,
-          ...timePickerOriginProps,
-          ...disabledTimeConfig,
-          value: sSelectedValue,
-          disabledTime,
-        },
-        on: {
-          change: this.onDateInputChange,
-        },
+        showHour: true,
+        showSecond: true,
+        showMinute: true,
+        ...timePickerOriginProps,
+        ...disabledTimeConfig,
+        value: sSelectedValue,
+        disabledTime,
+        onChange: this.onDateInputChange,
       };
 
       if (timePickerOriginProps.defaultValue !== undefined) {
-        timePickerProps.props.defaultOpenValue = timePickerOriginProps.defaultValue;
+        timePickerProps.defaultOpenValue = timePickerOriginProps.defaultValue;
       }
       timePickerEle = cloneElement(timePicker, timePickerProps);
     }

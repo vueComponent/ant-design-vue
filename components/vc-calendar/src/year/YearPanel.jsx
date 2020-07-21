@@ -1,6 +1,5 @@
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
-import { getListeners } from '../../../_util/props-util';
 const ROW = 4;
 const COL = 3;
 function noop() {}
@@ -21,7 +20,9 @@ function chooseYear(year) {
 }
 
 export default {
+  name: 'YearPanel',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     rootPrefixCls: PropTypes.string,
     value: PropTypes.object,
@@ -68,7 +69,7 @@ export default {
 
   render() {
     const { sValue: value, locale, renderFooter } = this;
-    const decadePanelShow = getListeners(this).decadePanelShow || noop;
+    const onDecadePanelShow = this.$attrs.onDecadePanelShow || noop;
     const years = this.years();
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
@@ -123,7 +124,7 @@ export default {
             <a
               class={`${prefixCls}-decade-select`}
               role="button"
-              onClick={decadePanelShow}
+              onClick={onDecadePanelShow}
               title={locale.decadeSelect}
             >
               <span class={`${prefixCls}-decade-select-content`}>
@@ -140,7 +141,7 @@ export default {
             />
           </div>
           <div class={`${prefixCls}-body`}>
-            <table class={`${prefixCls}-table`} cellSpacing="0" role="grid">
+            <table class={`${prefixCls}-table`} cellspacing="0" role="grid">
               <tbody class={`${prefixCls}-tbody`}>{yeasEls}</tbody>
             </table>
           </div>

@@ -4,7 +4,7 @@ import DateTBody from './DateTBody';
 const DateTable = (_, { attrs }) => {
   const prefixCls = attrs.prefixCls;
   return (
-    <table class={`${prefixCls}-table`} cellSpacing="0" role="grid">
+    <table class={`${prefixCls}-table`} cellspacing="0" role="grid">
       <DateTHead {...attrs} />
       <DateTBody {...attrs} />
     </table>

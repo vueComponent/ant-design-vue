@@ -11,6 +11,7 @@ function noop() {}
 
 const MonthPanel = {
   name: 'MonthPanel',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   props: {
     value: PropTypes.any,

@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import Select from '../select';
 import { Group, Button } from '../radio';
 import PropTypes from '../_util/vue-types';
@@ -24,22 +25,26 @@ export const HeaderProps = {
   yearSelectOffset: PropTypes.number,
   yearSelectTotal: PropTypes.number,
   type: PropTypes.string,
-  // onValueChange: PropTypes.(value: moment.Moment) => void,
-  // onTypeChange: PropTypes.(type: string) => void,
   value: PropTypes.any,
   validRange: PropTypes.array,
   headerRender: PropTypes.func,
+  onValueChange: PropTypes.func,
+  onTypeChange: PropTypes.func,
 };
 
 export default {
+  name: 'CalendarHeader',
+  inheritAttrs: false,
   props: initDefaultProps(HeaderProps, {
     yearSelectOffset: 10,
     yearSelectTotal: 20,
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+  setup() {
+    return {
+      configProvider: inject('configProvider', ConfigConsumerProps),
+    };
   },
-  // private calenderHeaderNode: HTMLDivElement;
+  // private calendarHeaderNode: HTMLDivElement;
   methods: {
     getYearSelectElement(prefixCls, year) {
       const { yearSelectOffset, yearSelectTotal, locale = {}, fullscreen, validRange } = this;
@@ -62,7 +67,7 @@ export default {
           class={`${prefixCls}-year-select`}
           onChange={this.onYearChange}
           value={String(year)}
-          getPopupContainer={() => this.getCalenderHeaderNode()}
+          getPopupContainer={() => this.calenderHeaderNode}
         >
           {options}
         </Select>
@@ -95,7 +100,7 @@ export default {
           class={`${prefixCls}-month-select`}
           value={String(month)}
           onChange={this.onMonthChange}
-          getPopupContainer={() => this.getCalenderHeaderNode()}
+          getPopupContainer={() => this.calendarHeaderNode}
         >
           {options}
         </Select>
@@ -128,15 +133,11 @@ export default {
     },
 
     onInternalTypeChange(e) {
-      this.onTypeChange(e.target.value);
+      this.triggerTypeChange(e.target.value);
     },
 
-    onTypeChange(val) {
+    triggerTypeChange(val) {
       this.$emit('typeChange', val);
-    },
-
-    getCalenderHeaderNode() {
-      return this.$refs.calenderHeaderNode;
     },
     getMonthYearSelections(getPrefixCls) {
       const { prefixCls: customizePrefixCls, type, value } = this.$props;
@@ -163,16 +164,19 @@ export default {
         </Group>
       );
     },
-    onValueChange() {
+    triggerValueChange() {
       this.$emit('valueChange', ...arguments);
+    },
+    saveCalendarHeaderNode(node) {
+      this.calendarHeaderNode = node;
     },
     headerRenderCustom(headerRender) {
       const { type, value } = this.$props;
       return headerRender({
         value,
         type: type || 'month',
-        onChange: this.onValueChange,
-        onTypeChange: this.onTypeChange,
+        onChange: this.triggerValueChange,
+        onTypeChange: this.triggerTypeChange,
       });
     },
   },
@@ -186,7 +190,7 @@ export default {
     return headerRender ? (
       this.headerRenderCustom(headerRender)
     ) : (
-      <div class={`${prefixCls}-header`} ref="calenderHeaderNode">
+      <div class={`${prefixCls}-header`} ref={this.saveCalendarHeaderNode}>
         {yearReactNode}
         {monthReactNode}
         {typeSwitch}

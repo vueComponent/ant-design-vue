@@ -34,6 +34,8 @@ const CalendarMixin = {
   },
 
   data() {
+    this.onKeyDown = this.onKeyDown || noop;
+    this.onBlur = this.onBlur || noop;
     const props = this.$props;
     const sValue = props.value || props.defaultValue || getNowByCurrentStateValue();
     return {

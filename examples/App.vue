@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/time-picker/demo/basic';
+import demo from '../antdv-demo/docs/calendar/demo/basic';
 
 export default {
   components: {

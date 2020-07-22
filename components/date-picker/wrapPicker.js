@@ -1,9 +1,10 @@
+import { provide, inject } from 'vue';
 import TimePickerPanel from '../vc-time-picker/Panel';
 import classNames from 'classnames';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { generateShowHourMinuteSecond } from '../time-picker';
 import enUS from './locale/en_US';
-import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
+import { getOptionProps, initDefaultProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import { checkValidate, stringToMoment, momentToString } from '../_util/moment-util';
 
@@ -41,22 +42,23 @@ function getColumns({ showHour, showMinute, showSecond, use12Hours }) {
 export default function wrapPicker(Picker, props, pickerType) {
   return {
     name: Picker.name,
+    inheritAttrs: false,
     props: initDefaultProps(props, {
       transitionName: 'slide-up',
       popupStyle: {},
       locale: {},
     }),
-    model: {
-      prop: 'value',
-      event: 'change',
-    },
-    inject: {
-      configProvider: { default: () => ConfigConsumerProps },
-    },
-    provide() {
+    // model: {
+    //   prop: 'value',
+    //   event: 'change',
+    // },
+    setup() {
       return {
-        savePopupRef: this.savePopupRef,
+        configProvider: inject('configProvider', ConfigConsumerProps),
       };
+    },
+    created() {
+      provide('savePopupRef', this.savePopupRef);
     },
     mounted() {
       const { autofocus, disabled, value, defaultValue, valueFormat } = this;
@@ -74,6 +76,9 @@ export default function wrapPicker(Picker, props, pickerType) {
       },
     },
     methods: {
+      savePicker(node) {
+        this.picker = node;
+      },
       getDefaultLocale() {
         const result = {
           ...enUS,
@@ -109,11 +114,9 @@ export default function wrapPicker(Picker, props, pickerType) {
         this.$emit('mouseleave', e);
       },
       handleChange(date, dateString) {
-        this.$emit(
-          'change',
-          this.valueFormat ? momentToString(date, this.valueFormat) : date,
-          dateString,
-        );
+        const value = this.valueFormat ? momentToString(date, this.valueFormat) : date;
+        this.$emit('update:value', value);
+        this.$emit('change', value, dateString);
       },
       handleOk(val) {
         this.$emit('ok', this.valueFormat ? momentToString(val, this.valueFormat) : val);
@@ -126,11 +129,11 @@ export default function wrapPicker(Picker, props, pickerType) {
         );
       },
       focus() {
-        this.$refs.picker.focus();
+        this.picker.focus();
       },
 
       blur() {
-        this.$refs.picker.blur();
+        this.picker.blur();
       },
 
       transformValue(props) {
@@ -146,7 +149,7 @@ export default function wrapPicker(Picker, props, pickerType) {
       },
 
       renderPicker(locale, localeCode) {
-        const props = getOptionProps(this);
+        const props = { ...getOptionProps(this), ...this.$attrs };
         this.transformValue(props);
         const {
           prefixCls: customizePrefixCls,
@@ -186,54 +189,35 @@ export default function wrapPicker(Picker, props, pickerType) {
         const columns = getColumns(vcTimePickerProps);
         const timePickerCls = `${prefixCls}-time-picker-column-${columns}`;
         const timePickerPanelProps = {
-          props: {
-            ...vcTimePickerProps,
-            ...showTime,
-            prefixCls: `${prefixCls}-time-picker`,
-            placeholder: locale.timePickerLocale.placeholder,
-            transitionName: 'slide-up',
-          },
+          ...vcTimePickerProps,
+          ...showTime,
+          prefixCls: `${prefixCls}-time-picker`,
+          placeholder: locale.timePickerLocale.placeholder,
+          transitionName: 'slide-up',
           class: timePickerCls,
-          on: {
-            esc: () => {},
-          },
+          onEsc: () => {},
         };
         const timePicker = showTime ? <TimePickerPanel {...timePickerPanelProps} /> : null;
         const pickerProps = {
-          props: {
-            ...props,
-            getCalendarContainer: getPopupContainer,
-            format: mergedFormat,
-            pickerClass,
-            pickerInputClass,
-            locale,
-            localeCode,
-            timePicker,
-          },
-          on: {
-            ...getListeners(this),
-            openChange: this.handleOpenChange,
-            focus: this.handleFocus,
-            blur: this.handleBlur,
-            mouseenter: this.handleMouseEnter,
-            mouseleave: this.handleMouseLeave,
-            change: this.handleChange,
-            ok: this.handleOk,
-            calendarChange: this.handleCalendarChange,
-          },
-          ref: 'picker',
-          scopedSlots: this.$scopedSlots || {},
+          ...props,
+          getCalendarContainer: getPopupContainer,
+          format: mergedFormat,
+          pickerClass,
+          pickerInputClass,
+          locale,
+          localeCode,
+          timePicker,
+          onOpenChange: this.handleOpenChange,
+          onFocus: this.handleFocus,
+          onBlur: this.handleBlur,
+          onMouseenter: this.handleMouseEnter,
+          onMouseleave: this.handleMouseLeave,
+          onChange: this.handleChange,
+          onOk: this.handleOk,
+          onCalendarChange: this.handleCalendarChange,
+          ref: this.savePicker,
         };
-        return (
-          <Picker {...pickerProps}>
-            {this.$slots &&
-              Object.keys(this.$slots).map(key => (
-                <template slot={key} key={key}>
-                  {this.$slots[key]}
-                </template>
-              ))}
-          </Picker>
-        );
+        return <Picker {...pickerProps} vSlots={this.$slots} />;
       },
     },
 
@@ -242,7 +226,7 @@ export default function wrapPicker(Picker, props, pickerType) {
         <LocaleReceiver
           componentName="DatePicker"
           defaultLocale={this.getDefaultLocale}
-          scopedSlots={{ default: this.renderPicker }}
+          children={this.renderPicker}
         />
       );
     },

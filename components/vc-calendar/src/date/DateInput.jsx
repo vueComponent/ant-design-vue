@@ -33,6 +33,8 @@ const DateInput = {
     clearIcon: PropTypes.any,
     inputMode: PropTypes.string,
     inputReadOnly: PropTypes.bool,
+    disabled: PropTypes.bool,
+    showClear: PropTypes.bool,
   },
 
   data() {

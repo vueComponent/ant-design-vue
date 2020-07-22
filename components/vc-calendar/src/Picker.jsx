@@ -52,6 +52,7 @@ const Picker = {
 
   data() {
     const props = this.$props;
+    this.calendarElement = null;
     this.saveCalendarRef = refFn.bind(this, 'calendarInstance');
     let open;
     if (hasProp(this, 'open')) {

@@ -61,6 +61,8 @@ const Calendar = {
     focusablePanel: PropTypes.bool.def(true),
     inputMode: PropTypes.string,
     inputReadOnly: PropTypes.bool,
+    monthCellRender: PropTypes.func,
+    monthCellContentRender: PropTypes.func,
   },
 
   mixins: [BaseMixin, CommonMixin, CalendarMixin],

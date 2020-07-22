@@ -52,7 +52,7 @@ const CalendarFooter = {
       if (showToday) {
         nowEl = <TodayButton key="todayButton" {...btnProps} />;
       }
-      delete btnProps.props.value;
+      delete btnProps.value;
       let okBtn = null;
       if (showOk === true || (showOk !== false && !!timePicker)) {
         okBtn = <OkButton key="okButton" {...btnProps} />;

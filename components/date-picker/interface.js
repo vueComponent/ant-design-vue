@@ -18,7 +18,6 @@ export const PickerProps = () => ({
   size: PropTypes.oneOf(['large', 'small', 'default']),
   getCalendarContainer: PropTypes.func,
   open: PropTypes.bool,
-  // onOpenChange: PropTypes.(status: bool) => void,
   disabledDate: PropTypes.func,
   showToday: PropTypes.bool,
   dateRender: PropTypes.any, // (current: moment.Moment, today: moment.Moment) => React.ReactNode,
@@ -31,6 +30,12 @@ export const PickerProps = () => ({
   align: PropTypes.object.def(() => ({})),
   inputReadOnly: PropTypes.bool,
   valueFormat: PropTypes.string,
+  onOpenChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  'onUpdate:value': PropTypes.func,
+  onMouseenter: PropTypes.func,
+  onMouseleave: PropTypes.func,
 });
 
 export const SinglePickerProps = () => ({
@@ -39,7 +44,7 @@ export const SinglePickerProps = () => ({
   defaultPickerValue: TimeType,
   renderExtraFooter: PropTypes.any,
   placeholder: PropTypes.string,
-  // onChange?: (date: moment.Moment, dateString: string) => void;
+  onChange: PropTypes.func,
 });
 
 export const DatePickerProps = () => ({
@@ -48,9 +53,10 @@ export const DatePickerProps = () => ({
   showTime: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   open: PropTypes.bool,
   disabledTime: PropTypes.func,
-  // onOpenChange?: (status: bool) => void;
-  // onOk?: (selectedTime: moment.Moment) => void;
   mode: PropTypes.oneOf(['time', 'date', 'month', 'year']),
+  onOpenChange: PropTypes.func,
+  onPanelChange: PropTypes.func,
+  onOk: PropTypes.func,
 });
 
 export const MonthPickerProps = () => ({
@@ -68,9 +74,6 @@ export const RangePickerProps = () => ({
   defaultValue: TimesType,
   defaultPickerValue: TimesType,
   timePicker: PropTypes.any,
-  // onChange?: (dates: TimesType, dateStrings: [string, string]) => void;
-  // onCalendarChange?: (dates: TimesType, dateStrings: [string, string]) => void;
-  // onOk?: (selectedTime: moment.Moment) => void;
   showTime: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   ranges: PropTypes.object,
   placeholder: PropTypes.arrayOf(String),
@@ -79,7 +82,12 @@ export const RangePickerProps = () => ({
   disabledTime: PropTypes.func,
   showToday: PropTypes.bool,
   renderExtraFooter: PropTypes.any,
-  // onPanelChange?: (value?: TimesType, mode?: string | string[]) => void;
+  onChange: PropTypes.func,
+  onCalendarChange: PropTypes.func,
+  onOk: PropTypes.func,
+  onPanelChange: PropTypes.func,
+  onMouseenter: PropTypes.func,
+  onMouseleave: PropTypes.func,
 });
 
 export const WeekPickerProps = () => ({

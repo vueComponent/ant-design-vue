@@ -35,6 +35,7 @@ import {
   Carousel,
   TimePicker,
   Calendar,
+  DatePicker,
   notification,
   message,
 } from 'ant-design-vue';
@@ -87,4 +88,5 @@ app
   .use(Carousel)
   .use(TimePicker)
   .use(Calendar)
+  .use(DatePicker)
   .mount('#app');

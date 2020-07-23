@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/date-picker/demo/index';
+import demo from '../antdv-demo/docs/table/demo/ajax';
 
 export default {
   components: {

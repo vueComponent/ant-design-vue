@@ -169,7 +169,9 @@ const ExpandableTable = {
             return {
               props: { colSpan: colCount },
               children:
-                fixed !== 'right' ? expandedRowRender(record, index, indent, expanded) : '&nbsp;',
+                fixed !== 'right'
+                  ? expandedRowRender({ record, index, indent, expanded })
+                  : '&nbsp;',
             };
           },
         },

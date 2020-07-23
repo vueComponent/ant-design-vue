@@ -105,3 +105,11 @@ dateRender
 (current: moment.Moment, today: moment.Moment) => ({current: moment.Moment, today: moment.Moment})
 
 monthCellContentRender (date, locale) => ({date, locale})
+
+## table
+
+customRender( text, record, index, column ); => customRender({ text, record, index, column });
+
+expandedRowRender(record, index, indent, expanded) => expandedRowRender({ record, index, indent, expanded })
+
+filterIcon(filtered, column) => filterIcon({ filtered, column })

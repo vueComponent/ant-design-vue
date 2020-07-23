@@ -27,6 +27,7 @@ export default {
   }),
 
   data() {
+    this.neverShown = false;
     const visible =
       'filterDropdownVisible' in this.column ? this.column.filterDropdownVisible : false;
     this.preProps = { ...getOptionProps(this) };
@@ -214,7 +215,7 @@ export default {
       const filtered = selectedKeys && selectedKeys.length > 0;
       let filterIcon = column.filterIcon;
       if (typeof filterIcon === 'function') {
-        filterIcon = filterIcon(filtered, column);
+        filterIcon = filterIcon({ filtered, column });
       }
       const dropdownIconClass = classNames({
         [`${prefixCls}-selected`]: 'filtered' in column ? column.filtered : filtered,
@@ -299,9 +300,8 @@ export default {
           onDeselect={this.setSelectedKeys}
           selectedKeys={originSelectedKeys && originSelectedKeys.map(val => val.toString())}
           getPopupContainer={getPopupContainer}
-        >
-          {this.renderMenus(column.filters)}
-        </Menu>
+          children={this.renderMenus(column.filters)}
+        ></Menu>
         <div class={`${prefixCls}-dropdown-btns`}>
           <a class={`${prefixCls}-dropdown-link confirm`} onClick={this.handleConfirm}>
             {locale.filterConfirm}

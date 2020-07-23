@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { provide } from 'vue';
+import { provide, markRaw } from 'vue';
 import shallowequal from 'shallowequal';
 import merge from 'lodash/merge';
 import classes from 'component-classes';
@@ -89,21 +89,23 @@ export default {
     this.preData = [...this.data];
     return {
       columnManager: new ColumnManager(this.columns),
-      sComponents: merge(
-        {
-          table: 'table',
-          header: {
-            wrapper: 'thead',
-            row: 'tr',
-            cell: 'th',
+      sComponents: markRaw(
+        merge(
+          {
+            table: 'table',
+            header: {
+              wrapper: 'thead',
+              row: 'tr',
+              cell: 'th',
+            },
+            body: {
+              wrapper: 'tbody',
+              row: 'tr',
+              cell: 'td',
+            },
           },
-          body: {
-            wrapper: 'tbody',
-            row: 'tr',
-            cell: 'td',
-          },
-        },
-        this.components,
+          this.components,
+        ),
       ),
     };
   },

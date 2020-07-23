@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { inject, markRaw } from 'vue';
 import CaretUpFilled from '@ant-design/icons-vue/CaretUpFilled';
 import CaretDownFilled from '@ant-design/icons-vue/CaretDownFilled';
 import VcTable, { INTERNAL_COL_DEFINE } from '../vc-table';
@@ -137,6 +137,7 @@ export default {
   },
 
   data() {
+    this.vcTable = null;
     // this.columns = props.columns || normalizeColumns(props.children)
     const props = getOptionProps(this);
     warning(
@@ -155,7 +156,7 @@ export default {
       sFilters: this.getDefaultFilters(props.columns),
       sPagination: this.getDefaultPagination(this.$props),
       pivot: undefined,
-      sComponents: createComponents(this.components),
+      sComponents: markRaw(createComponents(this.components)),
       filterDataCnt: 0,
     };
   },
@@ -947,7 +948,7 @@ export default {
       ) : null;
     },
     renderSelectionBox(type) {
-      return (_, record, index) => {
+      return ({ record, index }) => {
         const rowKey = this.getRecordKey(record, index); // 从 1 开始
         const props = this.getCheckboxPropsByItem(record, index);
         const handleChange = e => {

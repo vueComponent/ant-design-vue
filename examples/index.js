@@ -36,6 +36,9 @@ import {
   TimePicker,
   Calendar,
   DatePicker,
+  Table,
+  Tag,
+  Divider,
   notification,
   message,
 } from 'ant-design-vue';
@@ -89,4 +92,7 @@ app
   .use(TimePicker)
   .use(Calendar)
   .use(DatePicker)
+  .use(Table)
+  .use(Tag)
+  .use(Divider)
   .mount('#app');

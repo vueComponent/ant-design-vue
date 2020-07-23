@@ -139,7 +139,7 @@ const BaseTable = {
   },
 
   render() {
-    const { sComponents: components, prefixCls, scroll, data, getBodyWrapper } = this.table;
+    const { sComponents: components, prefixCls, scroll, data } = this.table;
     const { expander, tableClassName, hasHead, hasBody, fixed, isAnyColumnsFixed } = this.$props;
 
     const tableStyle = {};
@@ -160,9 +160,6 @@ const BaseTable = {
     let body;
     if (hasBody) {
       body = <BodyWrapper class={`${prefixCls}-tbody`}>{this.renderRows(data, 0)}</BodyWrapper>;
-      if (getBodyWrapper) {
-        body = getBodyWrapper(body);
-      }
     }
     const columns = this.getColumns();
     return (

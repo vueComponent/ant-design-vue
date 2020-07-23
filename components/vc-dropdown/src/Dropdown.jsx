@@ -116,7 +116,7 @@ export default {
     },
 
     getPopupDomNode() {
-      return this.trigger.getPopupDomNode();
+      return this.triggerRef.getPopupDomNode();
     },
 
     getOpenClassName() {
@@ -133,8 +133,12 @@ export default {
         const rootNode = findDOMNode(this);
         if (rootNode && overlayNode && rootNode.offsetWidth > overlayNode.offsetWidth) {
           overlayNode.style.minWidth = `${rootNode.offsetWidth}px`;
-          if (this.trigger && this.trigger._component && this.trigger._component.alignInstance) {
-            this.trigger._component.alignInstance.forceAlign();
+          if (
+            this.triggerRef &&
+            this.triggerRef._component &&
+            this.triggerRef._component.alignInstance
+          ) {
+            this.triggerRef._component.alignInstance.forceAlign();
           }
         }
       }
@@ -148,7 +152,7 @@ export default {
         : children;
     },
     saveTrigger(node) {
-      this.trigger = node;
+      this.triggerRef = node;
     },
   },
 

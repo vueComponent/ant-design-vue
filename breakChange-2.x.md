@@ -97,3 +97,11 @@ renderItem(item, index) => renderItem({item, index}) 该用单参数
 ## TreeSelect
 
 treeData 中 scopedSlots => slots , v-model => v-model:value
+
+## datePicker
+
+dateRender
+
+(current: moment.Moment, today: moment.Moment) => ({current: moment.Moment, today: moment.Moment})
+
+monthCellContentRender (date, locale) => ({date, locale})

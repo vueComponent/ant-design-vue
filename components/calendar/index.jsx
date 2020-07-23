@@ -143,24 +143,24 @@ const Calendar = {
       };
       return result;
     },
-    monthCellRender2(value) {
+    monthCellRender2({ current: value }) {
       const { _sPrefixCls, $slots } = this;
       const monthCellRender = this.monthCellRender || $slots.monthCellRender || noop;
       return (
         <div class={`${_sPrefixCls}-month`}>
           <div class={`${_sPrefixCls}-value`}>{value.localeData().monthsShort(value)}</div>
-          <div class={`${_sPrefixCls}-content`}>{monthCellRender(value)}</div>
+          <div class={`${_sPrefixCls}-content`}>{monthCellRender({ current: value })}</div>
         </div>
       );
     },
 
-    dateCellRender2(value) {
+    dateCellRender2({ current: value }) {
       const { _sPrefixCls, $slots } = this;
       const dateCellRender = this.dateCellRender || $slots.dateCellRender || noop;
       return (
         <div class={`${_sPrefixCls}-date`}>
           <div class={`${_sPrefixCls}-value`}>{zerofixed(value.date())}</div>
-          <div class={`${_sPrefixCls}-content`}>{dateCellRender(value)}</div>
+          <div class={`${_sPrefixCls}-content`}>{dateCellRender({ current: value })}</div>
         </div>
       );
     },

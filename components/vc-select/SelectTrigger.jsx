@@ -163,7 +163,6 @@ export default {
       dropdownStyle,
       dropdownMatchSelectWidth,
     } = props;
-    //const { mouseenter, mouseleave, popupFocus, dropdownVisibleChange } = getListeners(this);
     const dropdownPrefixCls = this.getDropdownPrefixCls();
     const popupClassName = {
       [dropdownClassName]: !!dropdownClassName,

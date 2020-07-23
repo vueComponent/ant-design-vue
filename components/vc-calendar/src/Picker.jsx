@@ -34,7 +34,6 @@ const Picker = {
     format: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.func]),
     // onChange: PropTypes.func,
     // onOpenChange: PropTypes.func,
-    children: PropTypes.func,
     getCalendarContainer: PropTypes.func,
     calendar: PropTypes.any,
     open: PropTypes.bool,
@@ -46,7 +45,7 @@ const Picker = {
     align: PropTypes.object.def(() => ({})),
     dropdownClassName: PropTypes.string,
     dateRender: PropTypes.func,
-    children: PropTypes.func.isRequired,
+    children: PropTypes.func,
   },
   mixins: [BaseMixin],
 
@@ -214,7 +213,7 @@ const Picker = {
       value: sValue,
       open: sOpen,
     };
-    const children = this.children(childrenState, props);
+    const children = this.$slots.default(childrenState);
     if (this.sOpen || !this.calendarElement) {
       this.calendarElement = this.getCalendarElement();
     }

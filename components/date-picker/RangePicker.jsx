@@ -414,7 +414,7 @@ export default {
         onMouseenter={this.onMouseEnter}
         onMouseleave={this.onMouseLeave}
       >
-        <VcDatePicker {...vcDatePickerProps} vSlots={$slots} children={input}></VcDatePicker>
+        <VcDatePicker {...vcDatePickerProps} vSlots={{ default: input, ...$slots }}></VcDatePicker>
       </span>
     );
   },

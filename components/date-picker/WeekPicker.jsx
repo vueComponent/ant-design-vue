@@ -74,11 +74,11 @@ export default {
     saveInput(node) {
       this.input = node;
     },
-    weekDateRender(current) {
+    weekDateRender({ current }) {
       const selectedValue = this.$data._value;
       const { _prefixCls: prefixCls, $slots } = this;
       const dateRender = this.dateRender || $slots.dateRender;
-      const dateNode = dateRender ? dateRender(current) : current.date();
+      const dateNode = dateRender ? dateRender({ current }) : current.date();
       if (
         selectedValue &&
         current.year() === selectedValue.year() &&
@@ -208,7 +208,7 @@ export default {
     };
     return (
       <span class={classNames(className, pickerClass)} style={style} id={id}>
-        <VcDatePicker {...vcDatePickerProps} vSlots={$slots} children={input}></VcDatePicker>
+        <VcDatePicker {...vcDatePickerProps} vSlots={{ default: input, ...$slots }}></VcDatePicker>
       </span>
     );
   },

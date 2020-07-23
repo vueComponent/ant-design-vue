@@ -211,9 +211,9 @@ const DateTBody = {
 
         let dateHtml;
         if (dateRender) {
-          dateHtml = dateRender(current, value);
+          dateHtml = dateRender({ current, today: value });
         } else {
-          const content = contentRender ? contentRender(current, value) : current.date();
+          const content = contentRender ? contentRender({ current, today: value }) : current.date();
           dateHtml = (
             <div
               key={getIdFromDate(current)}

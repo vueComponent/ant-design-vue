@@ -106,11 +106,11 @@ export default function createPicker(TheCalendar, props) {
         this.$emit('openChange', open);
       },
       focus() {
-        this.input.focus();
+        this.input?.focus();
       },
 
       blur() {
-        this.input.blur();
+        this.input?.blur();
       },
       renderFooter(...args) {
         const { $slots, _prefixCls: prefixCls } = this;
@@ -235,7 +235,6 @@ export default function createPicker(TheCalendar, props) {
         open,
         onOpenChange: this.handleOpenChange,
         style: props.popupStyle,
-        children: input,
       };
       return (
         <span
@@ -248,7 +247,10 @@ export default function createPicker(TheCalendar, props) {
           onMouseenter={this.onMouseEnter}
           onMouseleave={this.onMouseLeave}
         >
-          <VcDatePicker {...vcDatePickerProps} vSlots={omit($slots, ['default'])}></VcDatePicker>
+          <VcDatePicker
+            {...vcDatePickerProps}
+            vSlots={{ default: input, ...$slots }}
+          ></VcDatePicker>
         </span>
       );
     },

@@ -58,7 +58,7 @@ export default {
 
       const options = [];
       for (let index = start; index < end; index++) {
-        options.push(<Option key={`${index}`}>{index + suffix}</Option>);
+        options.push(<Option key={`${index}`}>{(() => index + suffix)()}</Option>);
       }
       return (
         <Select
@@ -67,7 +67,7 @@ export default {
           class={`${prefixCls}-year-select`}
           onChange={this.onYearChange}
           value={String(year)}
-          getPopupContainer={() => this.calenderHeaderNode}
+          getPopupContainer={() => this.calendarHeaderNode}
         >
           {options}
         </Select>
@@ -90,7 +90,7 @@ export default {
         }
       }
       for (let index = start; index < end; index++) {
-        options.push(<Option key={`${index}`}>{months[index]}</Option>);
+        options.push(<Option key={`${index}`}>{(() => months[index])()}</Option>);
       }
 
       return (

@@ -20,7 +20,7 @@ export const PickerProps = () => ({
   open: PropTypes.bool,
   disabledDate: PropTypes.func,
   showToday: PropTypes.bool,
-  dateRender: PropTypes.any, // (current: moment.Moment, today: moment.Moment) => React.ReactNode,
+  dateRender: PropTypes.any, // ({current: moment.Moment, today: moment.Moment}) => vNode,
   pickerClass: PropTypes.string,
   pickerInputClass: PropTypes.string,
   timePicker: PropTypes.any,

@@ -1,7 +1,8 @@
+import { inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import get from 'lodash/get';
 import classNames from 'classnames';
-import { isValidElement, mergeProps } from '../../_util/props-util';
+import { isValidElement } from '../../_util/props-util';
 
 function isInvalidRenderCellText(text) {
   return (
@@ -11,6 +12,7 @@ function isInvalidRenderCellText(text) {
 
 export default {
   name: 'TableCell',
+  inheritAttrs: false,
   props: {
     record: PropTypes.object,
     prefixCls: PropTypes.string,
@@ -21,8 +23,10 @@ export default {
     expandIcon: PropTypes.any,
     component: PropTypes.any,
   },
-  inject: {
-    table: { default: () => ({}) },
+  setup() {
+    return {
+      table: inject('table', {}),
+    };
   },
   methods: {
     handleClick(e) {
@@ -60,11 +64,7 @@ export default {
       text = get(record, dataIndex);
     }
     let tdProps = {
-      props: {},
-      attrs: {},
-      on: {
-        click: this.handleClick,
-      },
+      onClick: this.handleClick,
     };
     let colSpan;
     let rowSpan;
@@ -72,18 +72,14 @@ export default {
     if (customRender) {
       text = customRender(text, record, index, column);
       if (isInvalidRenderCellText(text)) {
-        tdProps.attrs = text.attrs || {};
-        tdProps.props = text.props || {};
-        tdProps.class = text.class;
-        tdProps.style = text.style;
-        colSpan = tdProps.attrs.colSpan;
-        rowSpan = tdProps.attrs.rowSpan;
+        tdProps = text.props || tdProps;
+        ({ colSpan, rowSpan } = tdProps);
         text = text.children;
       }
     }
 
     if (column.customCell) {
-      tdProps = mergeProps(tdProps, column.customCell(record, index));
+      tdProps = { ...tdProps, ...column.customCell(record, index) };
     }
 
     // Fix https://github.com/ant-design/ant-design/issues/1202
@@ -118,7 +114,7 @@ export default {
 
     if (column.ellipsis) {
       if (typeof text === 'string') {
-        tdProps.attrs.title = text;
+        tdProps.title = text;
       } else if (text) {
         // const { props: textProps } = text;
         // if (textProps && textProps.children && typeof textProps.children === 'string') {

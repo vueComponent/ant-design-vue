@@ -1,9 +1,11 @@
+import { inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { measureScrollbar } from './utils';
 import BaseTable from './BaseTable';
 
 export default {
   name: 'BodyTable',
+  inheritAttrs: false,
   props: {
     fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     columns: PropTypes.array.isRequired,
@@ -14,8 +16,10 @@ export default {
     expander: PropTypes.object.isRequired,
     isAnyColumnsFixed: PropTypes.bool,
   },
-  inject: {
-    table: { default: () => ({}) },
+  setup() {
+    return {
+      table: inject('table', {}),
+    };
   },
   render() {
     const { prefixCls, scroll } = this.table;
@@ -89,14 +93,7 @@ export default {
           <div
             class={`${prefixCls}-body-inner`}
             style={innerBodyStyle}
-            {...{
-              directives: [
-                {
-                  name: 'ant-ref',
-                  value: saveRef(refName),
-                },
-              ],
-            }}
+            ref={saveRef(refName)}
             onWheel={handleWheel}
             onScroll={handleBodyScroll}
           >
@@ -114,14 +111,7 @@ export default {
         key="bodyTable"
         class={`${prefixCls}-body`}
         style={bodyStyle}
-        {...{
-          directives: [
-            {
-              name: 'ant-ref',
-              value: saveRef('bodyTable'),
-            },
-          ],
-        }}
+        ref={saveRef('bodyTable')}
         onWheel={handleWheel}
         onScroll={handleBodyScroll}
       >

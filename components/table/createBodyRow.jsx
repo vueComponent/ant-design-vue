@@ -1,7 +1,8 @@
 import PropTypes from '../_util/vue-types';
 
 import { Store } from './createStore';
-import { getListeners } from '../_util/props-util';
+import { getSlot } from '../_util/props-util';
+import Omit from 'omit.js';
 
 const BodyRowProps = {
   store: Store,
@@ -12,6 +13,7 @@ const BodyRowProps = {
 export default function createBodyRow(Component = 'tr') {
   const BodyRow = {
     name: 'BodyRow',
+    inheritAttrs: false,
     props: BodyRowProps,
     data() {
       const { selectedRowKeys } = this.store.getState();
@@ -44,13 +46,20 @@ export default function createBodyRow(Component = 'tr') {
     },
 
     render() {
+      const rowProps = Omit({ ...this.$props, ...this.$attrs }, [
+        'prefixCls',
+        'rowKey',
+        'store',
+        'class',
+      ]);
       const className = {
         [`${this.prefixCls}-row-selected`]: this.selected,
+        [this.$attrs.class]: !!this.$attrs.class,
       };
 
       return (
-        <Component class={className} {...{ on: getListeners(this) }}>
-          {this.$slots.default}
+        <Component class={className} {...rowProps}>
+          {getSlot(this)}
         </Component>
       );
     },

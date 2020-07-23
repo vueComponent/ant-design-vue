@@ -2,10 +2,12 @@ import PropTypes from '../../_util/vue-types';
 import ExpandIcon from './ExpandIcon';
 import BaseMixin from '../../_util/BaseMixin';
 import { connect } from '../../_util/store';
+import { getSlot } from '../../_util/props-util';
 
 const ExpandableRow = {
   mixins: [BaseMixin],
   name: 'ExpandableRow',
+  inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string.isRequired,
     rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -96,35 +98,22 @@ const ExpandableRow = {
   },
 
   render() {
-    const {
-      childrenColumnName,
-      expandedRowRender,
-      indentSize,
-      record,
-      fixed,
-      $scopedSlots,
-      expanded,
-    } = this;
+    const { childrenColumnName, expandedRowRender, indentSize, record, fixed, expanded } = this;
 
     this.tempExpandIconAsCell = fixed !== 'right' ? this.expandIconAsCell : false;
     this.tempExpandIconColumnIndex = fixed !== 'right' ? this.expandIconColumnIndex : -1;
     const childrenData = record[childrenColumnName];
     this.expandable = !!(childrenData || expandedRowRender);
     const expandableRowProps = {
-      props: {
-        indentSize,
-        expanded, // not used in TableRow, but it's required to re-render TableRow when `expanded` changes
-        hasExpandIcon: this.hasExpandIcon,
-        renderExpandIcon: this.renderExpandIcon,
-        renderExpandIconCell: this.renderExpandIconCell,
-      },
-
-      on: {
-        rowClick: this.handleRowClick,
-      },
+      indentSize,
+      expanded, // not used in TableRow, but it's required to re-render TableRow when `expanded` changes
+      hasExpandIcon: this.hasExpandIcon,
+      renderExpandIcon: this.renderExpandIcon,
+      renderExpandIconCell: this.renderExpandIconCell,
+      onRowClick: this.handleRowClick,
     };
 
-    return $scopedSlots.default && $scopedSlots.default(expandableRowProps);
+    return getSlot(this, 'default', expandableRowProps);
   },
 };
 

@@ -1,53 +1,32 @@
 import T from './Table';
-import ref from 'vue-ref';
-import Vue from 'vue';
-import {
-  getOptionProps,
-  getKey,
-  getClass,
-  getStyle,
-  getEvents,
-  getSlotOptions,
-  camelize,
-  getSlots,
-  getListeners,
-} from '../_util/props-util';
-import Base from '../base';
-
-Vue.use(ref, { name: 'ant-ref' });
+import { getOptionProps, getKey, getPropsData, getSlot } from '../_util/props-util';
 
 const Table = {
   name: 'ATable',
   Column: T.Column,
   ColumnGroup: T.ColumnGroup,
   props: T.props,
+  inheritAttrs: false,
   methods: {
     normalize(elements = []) {
       const columns = [];
       elements.forEach(element => {
-        if (!element.tag) {
+        if (!element) {
           return;
         }
         const key = getKey(element);
-        const style = getStyle(element);
-        const cls = getClass(element);
-        const props = getOptionProps(element);
-        const events = getEvents(element);
-        const listeners = {};
-        Object.keys(events).forEach(e => {
-          const k = `on-${e}`;
-          listeners[camelize(k)] = events[e];
-        });
-        const { default: children, ...restSlots } = getSlots(element);
-        const column = { ...restSlots, ...props, style, class: cls, ...listeners };
+        const style = element.props?.style || {};
+        const cls = element.props?.class || '';
+        const props = getPropsData(element);
+        const { default: children, ...restSlots } = element.children;
+        const column = { ...restSlots, ...props, style, class: cls };
         if (key) {
           column.key = key;
         }
-        if (getSlotOptions(element).__ANT_TABLE_COLUMN_GROUP) {
+        if (element.type?.__ANT_TABLE_COLUMN_GROUP) {
           column.children = this.normalize(typeof children === 'function' ? children() : children);
         } else {
-          const customRender =
-            element.data && element.data.scopedSlots && element.data.scopedSlots.default;
+          const customRender = element.children?.default;
           column.customRender = column.customRender || customRender;
         }
         columns.push(column);
@@ -56,22 +35,16 @@ const Table = {
     },
     updateColumns(cols = []) {
       const columns = [];
-      const { $slots, $scopedSlots } = this;
+      const { $slots } = this;
       cols.forEach(col => {
-        const { slots = {}, scopedSlots = {}, ...restProps } = col;
+        const { slots = {}, ...restProps } = col;
         const column = {
           ...restProps,
         };
         Object.keys(slots).forEach(key => {
           const name = slots[key];
           if (column[key] === undefined && $slots[name]) {
-            column[key] = $slots[name].length === 1 ? $slots[name][0] : $slots[name];
-          }
-        });
-        Object.keys(scopedSlots).forEach(key => {
-          const name = scopedSlots[key];
-          if (column[key] === undefined && $scopedSlots[name]) {
-            column[key] = $scopedSlots[name];
+            column[key] = $slots[name];
           }
         });
         // if (slotScopeName && $scopedSlots[slotScopeName]) {
@@ -86,36 +59,32 @@ const Table = {
     },
   },
   render() {
-    const { $slots, normalize, $scopedSlots } = this;
-    const props = getOptionProps(this);
-    const columns = props.columns ? this.updateColumns(props.columns) : normalize($slots.default);
+    const { normalize, $slots } = this;
+    const props = { ...getOptionProps(this), ...this.$attrs };
+    const columns = props.columns ? this.updateColumns(props.columns) : normalize(getSlot(this));
     let { title, footer } = props;
     const {
       title: slotTitle,
       footer: slotFooter,
       expandedRowRender = props.expandedRowRender,
-    } = $scopedSlots;
+    } = $slots;
     title = title || slotTitle;
     footer = footer || slotFooter;
     const tProps = {
-      props: {
-        ...props,
-        columns,
-        title,
-        footer,
-        expandedRowRender,
-      },
-      on: getListeners(this),
+      ...props,
+      columns,
+      title,
+      footer,
+      expandedRowRender,
     };
     return <T {...tProps} />;
   },
 };
 /* istanbul ignore next */
-Table.install = function(Vue) {
-  Vue.use(Base);
-  Vue.component(Table.name, Table);
-  Vue.component(Table.Column.name, Table.Column);
-  Vue.component(Table.ColumnGroup.name, Table.ColumnGroup);
+Table.install = function(app) {
+  app.component(Table.name, Table);
+  app.component(Table.Column.name, Table.Column);
+  app.component(Table.ColumnGroup.name, Table.ColumnGroup);
 };
 
 export default Table;

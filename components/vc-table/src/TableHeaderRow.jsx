@@ -1,9 +1,10 @@
 import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
 import { connect } from '../../_util/store';
-import { mergeProps } from '../../_util/props-util';
 
 const TableHeaderRow = {
+  name: 'TableHeaderRow',
+  inheritAttrs: false,
   props: {
     index: PropTypes.number,
     fixed: PropTypes.string,
@@ -15,8 +16,7 @@ const TableHeaderRow = {
     customHeaderRow: PropTypes.func,
     prefixCls: PropTypes.prefixCls,
   },
-  name: 'TableHeaderRow',
-  render(h) {
+  render() {
     const { row, index, height, components, customHeaderRow, prefixCls } = this;
     const HeaderRow = components.header.row;
     const HeaderCell = components.header.cell;
@@ -34,17 +34,11 @@ const TableHeaderRow = {
         {row.map((cell, i) => {
           const { column, isLast, children, className, ...cellProps } = cell;
           const customProps = column.customHeaderCell ? column.customHeaderCell(column) : {};
-          const headerCellProps = mergeProps(
-            {
-              attrs: {
-                ...cellProps,
-              },
-            },
-            {
-              ...customProps,
-              key: column.key || column.dataIndex || i,
-            },
-          );
+          const headerCellProps = {
+            ...cellProps,
+            ...customProps,
+            key: column.key || column.dataIndex || i,
+          };
 
           if (column.align) {
             headerCellProps.style = { ...customProps.style, textAlign: column.align };
@@ -64,7 +58,7 @@ const TableHeaderRow = {
           );
 
           if (typeof HeaderCell === 'function') {
-            return HeaderCell(h, headerCellProps, children);
+            return HeaderCell(headerCellProps, children);
           }
           return <HeaderCell {...headerCellProps}>{children}</HeaderCell>;
         })}

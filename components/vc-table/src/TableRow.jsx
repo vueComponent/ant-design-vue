@@ -2,12 +2,13 @@ import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
 import { connect } from '../../_util/store';
 import TableCell from './TableCell';
-import { initDefaultProps, mergeProps, getStyle } from '../../_util/props-util';
+import { initDefaultProps, findDOMNode } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import warning from '../../_util/warning';
 function noop() {}
 const TableRow = {
   name: 'TableRow',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   props: initDefaultProps(
     {
@@ -140,7 +141,7 @@ const TableRow = {
 
     getStyle() {
       const { height, visible } = this;
-      let style = getStyle(this);
+      let style = this.$attrs.style || {};
       if (height) {
         style = { ...style, height };
       }
@@ -153,7 +154,7 @@ const TableRow = {
     },
 
     saveRowRef() {
-      this.rowRef = this.$el;
+      this.rowRef = findDOMNode(this);
 
       const { isAnyColumnsFixed, fixed, expandedRow, ancestorKeys } = this;
 
@@ -196,7 +197,7 @@ const TableRow = {
     const BodyRow = components.body.row;
     const BodyCell = components.body.cell;
 
-    let className = '';
+    let className = this.$attrs.class || '';
 
     if (hovered) {
       className += ` ${prefixCls}-hover`;
@@ -246,35 +247,27 @@ const TableRow = {
       customClassName,
       customClass,
     );
-    const rowPropEvents = rowProps.on || {};
-    const bodyRowProps = mergeProps(
-      { ...rowProps, style },
-      {
-        on: {
-          click: e => {
-            this.onRowClick(e, rowPropEvents.click);
-          },
-          dblclick: e => {
-            this.onRowDoubleClick(e, rowPropEvents.dblclick);
-          },
-          mouseenter: e => {
-            this.onMouseEnter(e, rowPropEvents.mouseenter);
-          },
-          mouseleave: e => {
-            this.onMouseLeave(e, rowPropEvents.mouseleave);
-          },
-          contextmenu: e => {
-            this.onContextMenu(e, rowPropEvents.contextmenu);
-          },
-        },
-        class: rowClassName,
+    const bodyRowProps = {
+      ...rowProps,
+      style,
+      onClick: e => {
+        this.onRowClick(e, rowProps.click);
       },
-      {
-        attrs: {
-          'data-row-key': rowKey,
-        },
+      onDblclick: e => {
+        this.onRowDoubleClick(e, rowProps.dblclick);
       },
-    );
+      onMouseenter: e => {
+        this.onMouseEnter(e, rowProps.mouseenter);
+      },
+      onMouseleave: e => {
+        this.onMouseLeave(e, rowProps.mouseleave);
+      },
+      onContextmenu: e => {
+        this.onContextMenu(e, rowProps.contextmenu);
+      },
+      class: rowClassName,
+      'data-row-key': rowKey,
+    };
     return <BodyRow {...bodyRowProps}>{cells}</BodyRow>;
   },
 };

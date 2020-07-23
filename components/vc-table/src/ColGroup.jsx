@@ -1,14 +1,18 @@
+import { inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { INTERNAL_COL_DEFINE } from './utils';
 
 export default {
   name: 'ColGroup',
+  inheritAttrs: false,
   props: {
     fixed: PropTypes.string,
     columns: PropTypes.array,
   },
-  inject: {
-    table: { default: () => ({}) },
+  setup() {
+    return {
+      table: inject('table', {}),
+    };
   },
   render() {
     const { fixed, table } = this;

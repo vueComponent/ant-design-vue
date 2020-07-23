@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import TableHeaderRow from './TableHeaderRow';
 
@@ -42,13 +43,16 @@ function getHeaderRows({ columns = [], currentRow = 0, rows = [], isLast = true 
 
 export default {
   name: 'TableHeader',
+  inheritAttrs: false,
   props: {
     fixed: PropTypes.string,
     columns: PropTypes.array.isRequired,
     expander: PropTypes.object.isRequired,
   },
-  inject: {
-    table: { default: () => ({}) },
+  setup() {
+    return {
+      table: inject('table', {}),
+    };
   },
 
   render() {

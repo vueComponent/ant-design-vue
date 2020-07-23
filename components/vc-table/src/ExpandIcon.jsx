@@ -3,6 +3,7 @@ import BaseMixin from '../../_util/BaseMixin';
 export default {
   name: 'ExpandIcon',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     record: PropTypes.object,
     prefixCls: PropTypes.string,

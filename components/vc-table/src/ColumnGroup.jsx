@@ -6,4 +6,7 @@ export default {
     title: PropTypes.any,
   },
   isTableColumnGroup: true,
+  render() {
+    return null;
+  },
 };

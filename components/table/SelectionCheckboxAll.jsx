@@ -90,6 +90,7 @@ function getCheckState(props) {
 export default {
   name: 'SelectionCheckboxAll',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: SelectionCheckboxAllProps,
   data() {
     const { $props: props } = this;
@@ -136,7 +137,7 @@ export default {
       // type should be 'every' | 'some'
       if (type === 'every' || type === 'some') {
         return byDefaultChecked
-          ? data[type]((item, i) => getCheckboxPropsByItem(item, i).props.defaultChecked)
+          ? data[type]((item, i) => getCheckboxPropsByItem(item, i).defaultChecked)
           : data[type](
               (item, i) => store.getState().selectedRowKeys.indexOf(getRecordKey(item, i)) >= 0,
             );
@@ -207,8 +208,7 @@ export default {
 
       customSelections =
         newSelections.length > 0 ? (
-          <Dropdown getPopupContainer={getPopupContainer}>
-            <template slot="overlay">{menu}</template>
+          <Dropdown getPopupContainer={getPopupContainer} overlay={menu}>
             <div class={`${selectionPrefixCls}-down`}>
               <DownOutlined />
             </div>

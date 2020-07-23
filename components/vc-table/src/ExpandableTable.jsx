@@ -4,7 +4,7 @@ import { connect } from '../../_util/store';
 import shallowEqual from 'shallowequal';
 import TableRow from './TableRow';
 import { remove } from './utils';
-import { initDefaultProps, getOptionProps, getListeners } from '../../_util/props-util';
+import { initDefaultProps, getOptionProps, getSlot } from '../../_util/props-util';
 
 export const ExpandableTableProps = () => ({
   expandIconAsCell: PropTypes.bool,
@@ -29,6 +29,7 @@ export const ExpandableTableProps = () => ({
 
 const ExpandableTable = {
   name: 'ExpandableTable',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   props: initDefaultProps(ExpandableTableProps(), {
     expandIconAsCell: false,
@@ -166,9 +167,7 @@ const ExpandableTable = {
             const { expandedRowKeys } = this.store.getState();
             const expanded = expandedRowKeys.includes(parentKey);
             return {
-              attrs: {
-                colSpan: colCount,
-              },
+              props: { colSpan: colCount },
               children:
                 fixed !== 'right' ? expandedRowRender(record, index, indent, expanded) : '&nbsp;',
             };
@@ -227,21 +226,18 @@ const ExpandableTable = {
   },
 
   render() {
-    const { data, childrenColumnName, $scopedSlots } = this;
+    const { data, childrenColumnName } = this;
     const props = getOptionProps(this);
     const needIndentSpaced = data.some(record => record[childrenColumnName]);
 
-    return (
-      $scopedSlots.default &&
-      $scopedSlots.default({
-        props,
-        on: getListeners(this),
-        needIndentSpaced,
-        renderRows: this.renderRows,
-        handleExpandChange: this.handleExpandChange,
-        renderExpandIndentCell: this.renderExpandIndentCell,
-      })
-    );
+    return getSlot(this, 'default', {
+      ...props,
+      ...this.$attrs,
+      needIndentSpaced,
+      renderRows: this.renderRows,
+      handleExpandChange: this.handleExpandChange,
+      renderExpandIndentCell: this.renderExpandIndentCell,
+    });
   },
 };
 

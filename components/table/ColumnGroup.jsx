@@ -6,4 +6,7 @@ export default {
     title: PropTypes.any,
   },
   __ANT_TABLE_COLUMN_GROUP: true,
+  render() {
+    return null;
+  },
 };

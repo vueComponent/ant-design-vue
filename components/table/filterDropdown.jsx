@@ -20,6 +20,7 @@ function stopPropagation(e) {
 export default {
   name: 'FilterMenu',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps(FilterMenuProps, {
     handleFilter() {},
     column: {},
@@ -230,10 +231,9 @@ export default {
       }
       if (filterIcon.length === 1 && isValidElement(filterIcon[0])) {
         return cloneElement(filterIcon[0], {
-          on: {
-            click: stopPropagation,
-          },
-          class: classNames(`${prefixCls}-icon`, dropdownIconClass),
+          title: filterIcon.props?.title || locale.filterTitle,
+          onClick: stopPropagation,
+          class: classNames(`${prefixCls}-icon`, dropdownIconClass, filterIcon.props?.class),
         });
       }
       return <span class={classNames(`${prefixCls}-icon`, dropdownIconClass)}>{filterIcon}</span>;
@@ -321,8 +321,8 @@ export default {
         onVisibleChange={this.onVisibleChange}
         getPopupContainer={getPopupContainer}
         forceRender
+        overlay={menus}
       >
-        <template slot="overlay">{menus}</template>
         {this.renderFilterIcon()}
       </Dropdown>
     );

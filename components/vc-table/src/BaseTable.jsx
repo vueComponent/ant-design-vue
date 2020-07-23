@@ -1,14 +1,15 @@
+import { inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import classNames from 'classnames';
 import ColGroup from './ColGroup';
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 import ExpandableRow from './ExpandableRow';
-import { mergeProps, getListeners } from '../../_util/props-util';
 import { connect } from '../../_util/store';
 function noop() {}
 const BaseTable = {
   name: 'BaseTable',
+  inheritAttrs: false,
   props: {
     fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     columns: PropTypes.array.isRequired,
@@ -20,8 +21,10 @@ const BaseTable = {
     getRowKey: PropTypes.func,
     isAnyColumnsFixed: PropTypes.bool,
   },
-  inject: {
-    table: { default: () => ({}) },
+  setup() {
+    return {
+      table: inject('table', {}),
+    };
   },
   methods: {
     getColumns(cols) {
@@ -32,8 +35,8 @@ const BaseTable = {
         ...column,
         className:
           !!column.fixed && !fixed
-            ? classNames(`${prefixCls}-fixed-columns-in-body`, column.className || column.class)
-            : column.className || column.class,
+            ? classNames(`${prefixCls}-fixed-columns-in-body`, column.className, column.class)
+            : classNames(column.className, column.class),
       }));
     },
     handleRowHover(isHover, key) {
@@ -50,14 +53,13 @@ const BaseTable = {
         childrenColumnName,
         rowClassName,
         customRow = noop,
-      } = this.table;
-      const {
-        rowClick: onRowClick = noop,
-        rowDoubleclick: onRowDoubleClick = noop,
-        rowContextmenu: onRowContextMenu = noop,
-        rowMouseenter: onRowMouseEnter = noop,
-        rowMouseleave: onRowMouseLeave = noop,
-      } = getListeners(this.table);
+        onRowClick = noop,
+        onRowDoubleClick = noop,
+        onRowContextMenu = noop,
+        onRowMouseEnter = noop,
+        onRowMouseLeave = noop,
+        rowRef,
+      } = { ...this.table.$attrs, ...this.table.$props, ...this.table.$data };
       const { getRowKey, fixed, expander, isAnyColumnsFixed } = this;
 
       const rows = [];
@@ -70,7 +72,7 @@ const BaseTable = {
 
         const onHoverProps = {};
         if (columnManager.isAnyColumnsFixed()) {
-          onHoverProps.hover = this.handleRowHover;
+          onHoverProps.onHover = this.handleRowHover;
         }
 
         let leafColumns;
@@ -85,56 +87,49 @@ const BaseTable = {
         const rowPrefixCls = `${prefixCls}-row`;
 
         const expandableRowProps = {
-          props: {
-            ...expander.props,
-            fixed,
-            index: i,
-            prefixCls: rowPrefixCls,
-            record,
-            rowKey: key,
-            needIndentSpaced: expander.needIndentSpaced,
-          },
+          ...expander.props,
+          fixed,
+          index: i,
+          prefixCls: rowPrefixCls,
+          record,
+          rowKey: key,
+          needIndentSpaced: expander.needIndentSpaced,
           key,
-          on: {
-            // ...expander.on,
-            rowClick: onRowClick,
-            expandedChange: expander.handleExpandChange,
-          },
-          scopedSlots: {
-            default: expandableRow => {
-              const tableRowProps = mergeProps(
-                {
-                  props: {
-                    fixed,
-                    indent,
-                    record,
-                    index: i,
-                    prefixCls: rowPrefixCls,
-                    childrenColumnName,
-                    columns: leafColumns,
-                    rowKey: key,
-                    ancestorKeys,
-                    components,
-                    isAnyColumnsFixed,
-                    customRow,
-                  },
-                  on: {
-                    rowDoubleclick: onRowDoubleClick,
-                    rowContextmenu: onRowContextMenu,
-                    rowMouseenter: onRowMouseEnter,
-                    rowMouseleave: onRowMouseLeave,
-                    ...onHoverProps,
-                  },
-                  class: className,
-                  ref: `row_${i}_${indent}`,
-                },
-                expandableRow,
-              );
-              return <TableRow {...tableRowProps} />;
-            },
-          },
+          onRowClick,
+          onExpandedChange: expander.handleExpandChange,
         };
-        const row = <ExpandableRow {...expandableRowProps} />;
+        const row = (
+          <ExpandableRow
+            {...expandableRowProps}
+            vSlots={{
+              default: expandableRow => {
+                const tableRowProps = {
+                  fixed,
+                  indent,
+                  record,
+                  index: i,
+                  prefixCls: rowPrefixCls,
+                  childrenColumnName,
+                  columns: leafColumns,
+                  rowKey: key,
+                  ancestorKeys,
+                  components,
+                  isAnyColumnsFixed,
+                  customRow,
+                  onRowDoubleClick,
+                  onRowContextMenu,
+                  onRowMouseEnter,
+                  onRowMouseLeave,
+                  ...onHoverProps,
+                  class: className,
+                  ref: rowRef(record, i, indent),
+                  ...expandableRow,
+                };
+                return <TableRow {...tableRowProps} />;
+              },
+            }}
+          />
+        );
 
         rows.push(row);
         expander.renderRows(this.renderRows, rows, record, i, indent, fixed, key, ancestorKeys);

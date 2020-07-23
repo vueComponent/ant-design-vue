@@ -88,11 +88,11 @@ export default function connect(mapStateToProps) {
           store,
           ref: 'wrappedInstance',
         };
-        const slots = {};
-        for (let [key, value] of Object.entries($slots)) {
-          slots[key] = () => value();
-        }
-        return createVNode(WrappedComponent, wrapProps, slots);
+        // const slots = {};
+        // for (let [key, value] of Object.entries($slots)) {
+        //   slots[key] = () => value();
+        // }
+        return createVNode(WrappedComponent, wrapProps, $slots);
       },
     };
     return Connect;

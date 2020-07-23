@@ -2,11 +2,12 @@ import Checkbox from '../checkbox';
 import Radio from '../radio';
 import { SelectionBoxProps } from './interface';
 import BaseMixin from '../_util/BaseMixin';
-import { getOptionProps, getListeners } from '../_util/props-util';
+import { getOptionProps } from '../_util/props-util';
 
 export default {
   name: 'SelectionBox',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: SelectionBoxProps,
   data() {
     return {
@@ -46,17 +47,14 @@ export default {
   },
 
   render() {
-    const { type, rowIndex, ...rest } = getOptionProps(this);
+    const { type, rowIndex, ...rest } = { ...getOptionProps(this), ...this.$attrs };
     const { checked } = this;
     const checkboxProps = {
-      props: {
-        checked,
-        ...rest,
-      },
-      on: getListeners(this),
+      checked,
+      ...rest,
     };
     if (type === 'radio') {
-      checkboxProps.props.value = rowIndex;
+      checkboxProps.value = rowIndex;
       return <Radio {...checkboxProps} />;
     }
     return <Checkbox {...checkboxProps} />;

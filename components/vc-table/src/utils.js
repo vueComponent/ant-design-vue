@@ -85,3 +85,16 @@ export function remove(array, item) {
   const last = array.slice(index + 1, array.length);
   return front.concat(last);
 }
+
+/**
+ * Returns only data- and aria- key/value pairs
+ * @param {object} props
+ */
+export function getDataAndAriaProps(props) {
+  return Object.keys(props).reduce((memo, key) => {
+    if (key.substr(0, 5) === 'data-' || key.substr(0, 5) === 'aria-') {
+      memo[key] = props[key];
+    }
+    return memo;
+  }, {});
+}

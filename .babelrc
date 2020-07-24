@@ -1,7 +1,7 @@
 {
   "env": {
     "test": {
-      "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]],
+      "presets": [["env", { "targets": { "node": "current" } }]],
       "plugins": [
         ["@ant-design-vue/babel-plugin-jsx", { "usePatchFlag": false }],
         "babel-plugin-inline-import-data-uri",
@@ -11,7 +11,8 @@
         "@babel/plugin-transform-object-assign",
         "@babel/plugin-transform-template-literals",
         "@babel/plugin-proposal-object-rest-spread",
-        "@babel/plugin-proposal-class-properties"
+        "@babel/plugin-proposal-class-properties",
+        "transform-runtime"
       ]
     }
   }

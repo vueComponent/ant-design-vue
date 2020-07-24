@@ -2,9 +2,8 @@ import glob from 'glob';
 import { mount } from '@vue/test-utils';
 import MockDate from 'mockdate';
 import moment from 'moment';
-import Vue from 'vue';
+import { createApp, nextTick } from 'vue';
 import antd from 'ant-design-vue';
-Vue.use(antd);
 
 export default function demoTest(component, options = {}) {
   const suffix = options.suffix || 'md';
@@ -20,7 +19,8 @@ export default function demoTest(component, options = {}) {
       const demo = require(`../.${file}`).default || require(`../.${file}`);
       document.body.innerHTML = '';
       const wrapper = mount(demo, { sync: false, attachToDocument: true });
-      Vue.nextTick(() => {
+      createApp(wrapper).use(antd);
+      nextTick(() => {
         // should get dom from element
         // snap files copy from antd does not need to change
         // or just change a little

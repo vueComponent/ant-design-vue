@@ -3,6 +3,7 @@ import 'ant-design-vue/style.js';
 import { createApp, version } from 'vue';
 import App from './App.vue';
 import {
+  Affix,
   Badge,
   AutoComplete,
   Radio,
@@ -45,20 +46,18 @@ import {
 
 // eslint-disable-next-line no-console
 console.log('Vue version: ', version);
-const basic = {
-  render() {
-    return this.$slots?.default();
-  },
+const basic = (_, { slots }) => {
+  return slots?.default();
 };
 const app = createApp(App);
 app.config.globalProperties.$notification = notification;
 app.config.globalProperties.$message = message;
 app
-  .component('demo-sort', { ...basic })
-  .component('md', { ...basic })
-  .component('api', { ...basic })
-  .component('CN', { ...basic })
-  .component('US', { ...basic })
+  .component('demo-sort', basic)
+  .component('md', basic)
+  .component('api', basic)
+  .component('CN', basic)
+  .component('US', basic)
   .use(Pagination)
   .use(Select)
   .use(Spin)
@@ -95,4 +94,5 @@ app
   .use(Table)
   .use(Tag)
   .use(Divider)
+  .use(Affix)
   .mount('#app');

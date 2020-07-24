@@ -568,7 +568,10 @@ export default {
       if (this.childOriginEvents[type]) {
         this.childOriginEvents[type](e);
       }
-      this.__emit(type, e);
+      const event = this.$props[type] || this.$attrs[type];
+      if (event) {
+        event(e);
+      }
     },
 
     close() {

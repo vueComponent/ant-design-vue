@@ -1,9 +1,11 @@
 // based on rc-resize-observer 0.1.3
 import ResizeObserver from 'resize-observer-polyfill';
+import BaseMixin from '../_util/BaseMixin';
 
 // Still need to be compatible with React 15, we use class component here
 const VueResizeObserver = {
   name: 'ResizeObserver',
+  mixins: [BaseMixin],
   props: {
     disabled: Boolean,
     onResize: Function,
@@ -66,7 +68,7 @@ const VueResizeObserver = {
         const size = { width: fixedWidth, height: fixedHeight };
         this.width = fixedWidth;
         this.height = fixedHeight;
-        this.$emit('resize', size);
+        this.__emit('resize', size);
       }
     },
 

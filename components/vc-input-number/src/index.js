@@ -160,8 +160,8 @@ export default {
         typeof nextValue === 'number' &&
         nextValue > max
       ) {
-        this.$emit('update:value', max);
-        this.$emit('change', max);
+        this.__emit('update:value', max);
+        this.__emit('change', max);
       }
       if (
         'min' in props &&
@@ -169,8 +169,8 @@ export default {
         typeof nextValue === 'number' &&
         nextValue < min
       ) {
-        this.$emit('update:value', min);
-        this.$emit('change', min);
+        this.__emit('update:value', min);
+        this.__emit('change', min);
       }
     }
     this.prevProps = { ...props };
@@ -254,19 +254,19 @@ export default {
         this.down(e, ratio);
         this.stop();
       } else if (e.keyCode === KeyCode.ENTER) {
-        this.$emit('pressEnter', e);
+        this.__emit('pressEnter', e);
       }
       // Trigger user key down
       this.recordCursorPosition();
       this.lastKeyCode = e.keyCode;
-      this.$emit('keydown', e, ...args);
+      this.__emit('keydown', e, ...args);
     },
     onKeyUp(e, ...args) {
       this.stop();
 
       this.recordCursorPosition();
 
-      this.$emit('keyup', e, ...args);
+      this.__emit('keyup', e, ...args);
     },
     onChange(e) {
       if (this.focused) {
@@ -275,14 +275,14 @@ export default {
       this.rawInput = this.parser(this.getValueFromEvent(e));
       this.setState({ inputValue: this.rawInput });
       const num = this.toNumber(this.rawInput); // valid number or invalid string
-      this.$emit('update:value', num);
-      this.$emit('change', num);
+      this.__emit('update:value', num);
+      this.__emit('change', num);
     },
     onFocus(...args) {
       this.setState({
         focused: true,
       });
-      this.$emit('focus', ...args);
+      this.__emit('focus', ...args);
     },
     onBlur(...args) {
       this.inputting = false;
@@ -295,7 +295,7 @@ export default {
         const originValue = this.inputRef.value;
         const inputValue = this.getInputDisplayValue({ focused: false, sValue: newValue });
         this.inputRef.value = inputValue;
-        this.$emit('blur', ...args);
+        this.__emit('blur', ...args);
         this.inputRef.value = originValue;
       }
     },
@@ -372,8 +372,8 @@ export default {
         );
       }
       if (changed) {
-        this.$emit('update:value', newValue);
-        this.$emit('change', newValue);
+        this.__emit('update:value', newValue);
+        this.__emit('change', newValue);
       }
       return newValue;
     },
@@ -621,7 +621,7 @@ export default {
       this.stepFn('up', e, ratio, recursive);
     },
     handleInputClick() {
-      this.$emit('click');
+      this.__emit('click');
     },
     saveUp(node) {
       this.upHandlerRef = node;

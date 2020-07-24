@@ -16,6 +16,7 @@ const IFRAME_STYLE = {
 
 // diferent from AjaxUpload, can only upload on at one time, serial seriously
 const IframeUploader = {
+  name: 'IframeUploader',
   mixins: [BaseMixin],
   props: {
     componentTag: PropTypes.string,
@@ -51,14 +52,14 @@ const IframeUploader = {
           doc.body.removeChild(script);
         }
         response = doc.body.innerHTML;
-        this.$emit('success', response, file);
+        this.__emit('success', response, file);
       } catch (err) {
         warning(
           false,
           'cross domain error for Upload. Maybe server should return document.domain script. see Note from https://github.com/react-component/upload',
         );
         response = 'cross-domain';
-        this.$emit('error', err, null, file);
+        this.__emit('error', err, null, file);
       }
       this.endUpload();
     },
@@ -239,7 +240,7 @@ const IframeUploader = {
         formNode.setAttribute('action', action);
         formNode.submit();
         dataSpan.innerHTML = '';
-        this.$emit('start', file);
+        this.__emit('start', file);
       });
     },
   },

@@ -227,7 +227,7 @@ const Calendar = {
           return;
         }
 
-        this.$emit('blur', event);
+        this.__emit('blur', event);
       }, 0);
     },
 

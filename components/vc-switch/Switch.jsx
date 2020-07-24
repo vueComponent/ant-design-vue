@@ -49,13 +49,13 @@ export default {
       if (!hasProp(this, 'checked')) {
         this.stateChecked = checked;
       }
-      this.$emit('change', checked, e);
-      this.$emit('update:checked', checked);
+      this.__emit('change', checked, e);
+      this.__emit('update:checked', checked);
     },
     handleClick(e) {
       const checked = !this.stateChecked;
       this.setChecked(checked, e);
-      this.$emit('click', checked, e);
+      this.__emit('click', checked, e);
     },
     handleKeyDown(e) {
       if (e.keyCode === 37) {
@@ -69,7 +69,7 @@ export default {
     handleMouseUp(e) {
       this.refSwitchNode?.blur();
 
-      this.$emit('mouseup', e);
+      this.__emit('mouseup', e);
     },
     focus() {
       this.refSwitchNode?.focus();

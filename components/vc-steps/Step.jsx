@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
+import BaseMixin from '../_util/BaseMixin';
 
 function isString(str) {
   return typeof str === 'string';
@@ -7,6 +8,7 @@ function isString(str) {
 function noop() {}
 export default {
   name: 'Step',
+  mixins: [BaseMixin],
   props: {
     prefixCls: PropTypes.string,
     wrapperStyle: PropTypes.object,
@@ -33,8 +35,8 @@ export default {
   },
   methods: {
     onItemClick(...args) {
-      this.$emit('click', ...args);
-      this.$emit('stepClick', this.stepIndex);
+      this.__emit('click', ...args);
+      this.__emit('stepClick', this.stepIndex);
     },
     renderIconNode() {
       const { prefixCls, stepNumber, status, iconPrefix, icons, progressDot } = getOptionProps(

@@ -51,7 +51,7 @@ const Slider = {
 
       this.setState({ sValue: nextValue });
       if (utils.isValueOutOfRange(newValue, this.$props)) {
-        this.$emit('change', nextValue);
+        this.__emit('change', nextValue);
       }
     },
     onChange(state) {
@@ -62,12 +62,12 @@ const Slider = {
       }
 
       const changedValue = nextState.sValue;
-      this.$emit('change', changedValue);
+      this.__emit('change', changedValue);
     },
     onStart(position) {
       this.setState({ dragging: true });
       const { sValue } = this;
-      this.$emit('beforeChange', sValue);
+      this.__emit('beforeChange', sValue);
 
       const value = this.calcValueByPos(position);
 
@@ -82,7 +82,7 @@ const Slider = {
       const { dragging } = this;
       this.removeDocumentEvents();
       if (dragging || force) {
-        this.$emit('afterChange', this.sValue);
+        this.__emit('afterChange', this.sValue);
       }
       this.setState({ dragging: false });
     },
@@ -105,7 +105,7 @@ const Slider = {
         if (value === sValue) return;
 
         this.onChange({ sValue: value });
-        this.$emit('afterChange', value);
+        this.__emit('afterChange', value);
         this.onEnd();
       }
     },

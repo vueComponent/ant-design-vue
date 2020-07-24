@@ -733,7 +733,7 @@ const Select = {
           return;
         }
         this.setOpenState(false);
-        this.$emit('blur', this.getVLForOnChange(value));
+        this.__emit('blur', this.getVLForOnChange(value));
       }, 200);
     },
     inputFocus(e) {
@@ -868,7 +868,7 @@ const Select = {
           this.forcePopupAlign,
         );
         if (fireSearch) {
-          this.$emit('search', inputValue);
+          this.__emit('search', inputValue);
         }
       }
     },
@@ -981,7 +981,7 @@ const Select = {
       this.focusTimer = window.setTimeout(() => {
         // this._focused = true
         // this.updateFocusClassName()
-        this.$emit('focus');
+        this.__emit('focus');
       }, 10);
     },
 
@@ -1055,7 +1055,7 @@ const Select = {
             label: this.getLabelBySingleValue(selectedKey),
           };
         }
-        this.$emit('deselect', event, this.getOptionBySingleValue(selectedKey));
+        this.__emit('deselect', event, this.getOptionBySingleValue(selectedKey));
       }
       this.fireChange(value);
     },
@@ -1067,7 +1067,7 @@ const Select = {
       }
     },
     fireSelect(value) {
-      this.$emit('select', this.getVLBySingleValue(value), this.getOptionBySingleValue(value));
+      this.__emit('select', this.getVLBySingleValue(value), this.getOptionBySingleValue(value));
     },
     fireChange(value) {
       if (!hasProp(this, 'value')) {
@@ -1081,8 +1081,8 @@ const Select = {
       const vls = this.getVLForOnChange(value);
       const options = this.getOptionsBySingleValue(value);
       this._valueOptions = options;
-      this.$emit('update:value', vls);
-      this.$emit('change', vls, isMultipleOrTags(this.$props) ? options : options[0]);
+      this.__emit('update:value', vls);
+      this.__emit('change', vls, isMultipleOrTags(this.$props) ? options : options[0]);
     },
 
     isChildDisabled(key) {
@@ -1500,7 +1500,7 @@ const Select = {
       // }
       // this._focused = true;
       // this.updateFocusClassName();
-      // this.$emit('focus');
+      // this.__emit('focus');
     },
     selectionRefBlur(e) {
       if (isMultipleOrTagsOrCombobox(this.$props)) {

@@ -186,7 +186,7 @@ export default {
             image.onload = handler;
             image.onerror = () => {
               handler();
-              this.$emit('lazyLoadError');
+              this.__emit('lazyLoadError');
             };
           }
         }
@@ -211,7 +211,7 @@ export default {
         this.setState(state => ({
           lazyLoadedList: state.lazyLoadedList.concat(slidesToLoad),
         }));
-        this.$emit('lazyLoad', slidesToLoad);
+        this.__emit('lazyLoad', slidesToLoad);
       } else {
         if (this.lazyLoadTimer) {
           clearInterval(this.lazyLoadTimer);
@@ -234,7 +234,7 @@ export default {
         value => this.lazyLoadedList.indexOf(value) < 0,
       );
       if (this.$attrs.onLazyLoad && slidesToLoad.length > 0) {
-        this.$emit('lazyLoad', slidesToLoad);
+        this.__emit('lazyLoad', slidesToLoad);
       }
       this.setState(state, () => {
         asNavFor &&
@@ -433,7 +433,7 @@ export default {
   },
   beforeMount() {
     this.ssrInit();
-    this.$emit('init');
+    this.__emit('init');
     if (this.lazyLoad) {
       const slidesToLoad = getOnDemandLazySlides({
         ...this.$props,
@@ -443,7 +443,7 @@ export default {
         this.setState(prevState => ({
           lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad),
         }));
-        this.$emit('lazyLoad', slidesToLoad);
+        this.__emit('lazyLoad', slidesToLoad);
       }
     }
   },
@@ -508,7 +508,7 @@ export default {
   },
   updated() {
     this.checkImagesLoad();
-    this.$emit('reInit');
+    this.__emit('reInit');
     if (this.lazyLoad) {
       const slidesToLoad = getOnDemandLazySlides({
         ...this.$props,
@@ -518,7 +518,7 @@ export default {
         this.setState(prevState => ({
           lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad),
         }));
-        this.$emit('lazyLoad');
+        this.__emit('lazyLoad');
       }
     }
     // if (this.props.onLazyLoad) {

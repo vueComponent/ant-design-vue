@@ -58,8 +58,8 @@ export default {
     onStepClick(next) {
       const { current } = this.$props;
       if (current !== next) {
-        this.$emit('change', next);
-        this.$emit('update:current', next);
+        this.__emit('change', next);
+        this.__emit('update:current', next);
       }
     },
     calcStepOffsetWidth() {

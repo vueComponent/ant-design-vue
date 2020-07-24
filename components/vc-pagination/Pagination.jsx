@@ -234,10 +234,10 @@ export default {
           });
         }
       }
-      this.$emit('update:pageSize', size);
-      this.$emit('showSizeChange', current, size);
+      this.__emit('update:pageSize', size);
+      this.__emit('showSizeChange', current, size);
       if (current !== preCurrent) {
-        this.$emit('update:current', current);
+        this.__emit('update:current', current);
       }
     },
     handleChange(p) {
@@ -256,9 +256,9 @@ export default {
             stateCurrentInputValue: page,
           });
         }
-        // this.$emit('input', page)
-        this.$emit('update:current', page);
-        this.$emit('change', page, this.statePageSize);
+        // this.__emit('input', page)
+        this.__emit('update:current', page);
+        this.__emit('change', page, this.statePageSize);
         return page;
       }
       return this.stateCurrent;

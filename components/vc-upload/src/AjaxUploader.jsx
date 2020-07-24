@@ -89,7 +89,7 @@ const AjaxUploader = {
         this.uploadFiles(successFiles);
 
         if (errorFiles.length) {
-          this.$emit('reject', errorFiles);
+          this.__emit('reject', errorFiles);
         }
       }
     },
@@ -161,19 +161,19 @@ const AjaxUploader = {
             withCredentials: this.withCredentials,
             method: props.method || 'post',
             onProgress: e => {
-              this.$emit('progress', e, file);
+              this.__emit('progress', e, file);
             },
             onSuccess: (ret, xhr) => {
               delete this.reqs[uid];
-              this.$emit('success', ret, file, xhr);
+              this.__emit('success', ret, file, xhr);
             },
             onError: (err, ret) => {
               delete this.reqs[uid];
-              this.$emit('error', err, ret, file);
+              this.__emit('error', err, ret, file);
             },
           };
           this.reqs[uid] = request(requestOption);
-          this.$emit('start', file);
+          this.__emit('start', file);
         });
       });
     },

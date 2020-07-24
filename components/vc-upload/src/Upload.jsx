@@ -63,7 +63,7 @@ export default {
         this.Component = this.getComponent();
         this.$forceUpdate();
         nextTick(() => {
-          this.$emit('ready');
+          this.__emit('ready');
         });
       }
     });

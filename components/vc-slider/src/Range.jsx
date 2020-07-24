@@ -106,7 +106,7 @@ const Range = {
         const newValues = value.map(v => {
           return utils.ensureValueInRange(v, this.$props);
         });
-        this.$emit('change', newValues);
+        this.__emit('change', newValues);
       }
     },
     onChange(state) {
@@ -129,11 +129,11 @@ const Range = {
 
       const data = { ...this.$data, ...state };
       const changedValue = data.bounds;
-      this.$emit('change', changedValue);
+      this.__emit('change', changedValue);
     },
     onStart(position) {
       const { bounds } = this;
-      this.$emit('beforeChange', bounds);
+      this.__emit('beforeChange', bounds);
 
       const value = this.calcValueByPos(position);
       this.startValue = value;
@@ -157,7 +157,7 @@ const Range = {
       const { sHandle } = this;
       this.removeDocumentEvents();
       if (sHandle !== null || force) {
-        this.$emit('afterChange', this.bounds);
+        this.__emit('afterChange', this.bounds);
       }
       this.setState({ sHandle: null });
     },
@@ -267,7 +267,7 @@ const Range = {
         // so trigger focus will invoke handler's onEnd and another handler's onStart too early,
         // cause onBeforeChange and onAfterChange receive wrong value.
         // here use setState callback to hack，but not elegant
-        this.$emit('afterChange', nextBounds);
+        this.__emit('afterChange', nextBounds);
         this.setState({}, () => {
           this.handlesRefs[nextHandle].focus();
         });

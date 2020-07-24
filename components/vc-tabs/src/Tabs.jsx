@@ -140,7 +140,7 @@ export default {
             _activeKey: activeKey,
           });
         }
-        this.$emit('update:activeKey', activeKey);
+        this.__emit('update:activeKey', activeKey);
         this.__emit('change', activeKey);
       }
     },

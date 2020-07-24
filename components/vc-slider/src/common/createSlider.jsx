@@ -7,6 +7,7 @@ import Steps from './Steps';
 import Marks from './Marks';
 import Handle from '../Handle';
 import * as utils from '../utils';
+import BaseMixin from '../../../_util/BaseMixin';
 
 function noop() {}
 
@@ -36,7 +37,7 @@ export default function createSlider(Component) {
   return {
     name: 'createSlider',
     inheritAttrs: false,
-    mixins: [Component],
+    mixins: [BaseMixin, Component],
     // model: {
     //   prop: 'value',
     //   event: 'change',
@@ -143,12 +144,12 @@ export default function createSlider(Component) {
           this.dragOffset = 0;
           this.onStart(handlePosition);
           utils.pauseEvent(e);
-          this.$emit('focus', e);
+          this.__emit('focus', e);
         }
       },
       onBlur(e) {
         this.onEnd();
-        this.$emit('blur', e);
+        this.__emit('blur', e);
       },
       onMouseUp() {
         if (this.handlesRefs[this.prevMovedHandleIndex]) {

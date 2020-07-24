@@ -1,8 +1,10 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
+import BaseMixin from '../_util/BaseMixin';
 
 export default {
   name: 'Pager',
+  mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
     rootPrefixCls: PropTypes.string,
@@ -18,10 +20,10 @@ export default {
   },
   methods: {
     handleClick() {
-      this.$emit('click', this.page);
+      this.__emit('click', this.page);
     },
     handleKeyPress(event) {
-      this.$emit('keypress', event, this.handleClick, this.page);
+      this.__emit('keypress', event, this.handleClick, this.page);
     },
   },
   render() {

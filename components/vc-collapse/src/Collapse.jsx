@@ -118,8 +118,8 @@ export default {
     },
     setActiveKey(activeKey) {
       this.setState({ stateActiveKey: activeKey });
-      this.$emit('change', this.accordion ? activeKey[0] : activeKey);
-      this.$emit('update:activeKey', this.accordion ? activeKey[0] : activeKey);
+      this.__emit('change', this.accordion ? activeKey[0] : activeKey);
+      this.__emit('update:activeKey', this.accordion ? activeKey[0] : activeKey);
     },
   },
   render() {

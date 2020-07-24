@@ -146,15 +146,15 @@ const Drawer = {
     onKeyDown(e) {
       if (e.keyCode === KeyCode.ESC) {
         e.stopPropagation();
-        this.$emit('close', e);
+        this.__emit('close', e);
       }
     },
     onMaskTouchEnd(e) {
-      this.$emit('close', e);
+      this.__emit('close', e);
       this.onTouchEnd(e, true);
     },
     onIconTouchEnd(e) {
-      this.$emit('handleClick', e);
+      this.__emit('handleClick', e);
       this.onTouchEnd(e);
     },
     onTouchEnd(e, close) {

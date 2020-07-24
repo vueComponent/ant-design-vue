@@ -481,7 +481,7 @@ const Tree = {
           _halfCheckedKeys: halfCheckedKeys,
         });
       }
-      this.$emit('update:checkedKeys', checkedObj);
+      this.__emit('update:checkedKeys', checkedObj);
 
       this.__emit('check', checkedObj, eventObj);
     },

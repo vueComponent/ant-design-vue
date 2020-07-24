@@ -62,7 +62,7 @@ export default {
           sVisible: false,
         });
       }
-      this.$emit('overlayClick', e);
+      this.__emit('overlayClick', e);
       if (overlayProps.onClick) {
         overlayProps.onClick(e);
       }
@@ -74,7 +74,7 @@ export default {
           sVisible: visible,
         });
       }
-      this.$emit('update:visible', visible);
+      this.__emit('update:visible', visible);
       this.__emit('visibleChange', visible);
     },
 

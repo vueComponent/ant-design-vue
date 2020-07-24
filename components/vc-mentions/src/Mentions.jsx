@@ -60,7 +60,7 @@ const Mentions = {
       } else {
         this.$forceUpdate();
       }
-      this.$emit('change', value);
+      this.__emit('change', value);
     },
     onChange({ target: { value, composing }, isComposing }) {
       if (isComposing || composing) return;
@@ -143,7 +143,7 @@ const Mentions = {
          * If met `space` means user finished searching.
          */
         if (validateMeasure) {
-          this.$emit('search', measureText, measurePrefix);
+          this.__emit('search', measureText, measurePrefix);
         }
       } else if (measuring) {
         this.stopMeasure();
@@ -165,7 +165,7 @@ const Mentions = {
       window.clearTimeout(this.focusId);
       const { isFocus } = this.$data;
       if (!isFocus && event) {
-        this.$emit('focus', event);
+        this.__emit('focus', event);
       }
       this.setState({ isFocus: true });
     },
@@ -173,7 +173,7 @@ const Mentions = {
       this.focusId = window.setTimeout(() => {
         this.setState({ isFocus: false });
         this.stopMeasure();
-        this.$emit('blur', event);
+        this.__emit('blur', event);
       }, 100);
     },
     selectOption(option) {
@@ -193,7 +193,7 @@ const Mentions = {
         setInputSelection(this.$refs.textarea, selectionLocation);
       });
 
-      this.$emit('select', option, measurePrefix);
+      this.__emit('select', option, measurePrefix);
     },
     setActiveIndex(activeIndex) {
       this.setState({

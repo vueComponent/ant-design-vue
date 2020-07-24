@@ -2,9 +2,11 @@ import PanelContent from './PanelContent';
 import { initDefaultProps, getComponent, getSlot } from '../../_util/props-util';
 import { panelProps } from './commonProps';
 import { Transition } from 'vue';
+import BaseMixin from '../../_util/BaseMixin';
 
 export default {
   name: 'Panel',
+  mixins: [BaseMixin],
   props: initDefaultProps(panelProps(), {
     showArrow: true,
     isActive: false,
@@ -14,7 +16,7 @@ export default {
   }),
   methods: {
     handleItemClick() {
-      this.$emit('itemClick', this.panelKey);
+      this.__emit('itemClick', this.panelKey);
     },
     handleKeyPress(e) {
       if (e.key === 'Enter' || e.keyCode === 13 || e.which === 13) {

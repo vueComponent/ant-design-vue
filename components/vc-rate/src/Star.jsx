@@ -21,11 +21,11 @@ export default {
   methods: {
     onHover(e) {
       const { index } = this;
-      this.$emit('hover', e, index);
+      this.__emit('hover', e, index);
     },
     onClick(e) {
       const { index } = this;
-      this.$emit('click', e, index);
+      this.__emit('click', e, index);
     },
     onKeyDown(e) {
       const { index } = this.$props;

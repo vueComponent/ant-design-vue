@@ -82,12 +82,12 @@ export default {
         },
         nativeEvent: e,
       };
-      this.$emit('update:checked', eventObj);
-      this.$emit('change', eventObj);
+      this.__emit('update:checked', eventObj);
+      this.__emit('change', eventObj);
       this.eventShiftKey = false;
     },
     onClick(e) {
-      this.$emit('click', e);
+      this.__emit('click', e);
       // onChange没能获取到shiftKey，使用onClick hack
       this.eventShiftKey = e.shiftKey;
     },

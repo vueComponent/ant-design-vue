@@ -71,14 +71,14 @@ export default {
           cleanedValue: null,
         });
       }
-      this.$emit('hoverChange', hoverValue);
+      this.__emit('hoverChange', hoverValue);
     },
     onMouseLeave() {
       this.setState({
         hoverValue: undefined,
         cleanedValue: null,
       });
-      this.$emit('hoverChange', undefined);
+      this.__emit('hoverChange', undefined);
     },
     onClick(event, index) {
       const { allowClear, sValue: value } = this;
@@ -97,13 +97,13 @@ export default {
       this.setState({
         focused: true,
       });
-      this.$emit('focus');
+      this.__emit('focus');
     },
     onBlur() {
       this.setState({
         focused: false,
       });
-      this.$emit('blur');
+      this.__emit('blur');
     },
     onKeyDown(event) {
       const { keyCode } = event;
@@ -126,7 +126,7 @@ export default {
         this.changeValue(sValue);
         event.preventDefault();
       }
-      this.$emit('keydown', event);
+      this.__emit('keydown', event);
     },
     getStarDOM(index) {
       return this.$refs['stars' + index].$el;
@@ -159,8 +159,8 @@ export default {
           sValue: value,
         });
       }
-      this.$emit('update:value', value);
-      this.$emit('change', value);
+      this.__emit('update:value', value);
+      this.__emit('change', value);
     },
   },
   render() {

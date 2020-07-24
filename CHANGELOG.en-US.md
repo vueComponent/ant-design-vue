@@ -10,6 +10,16 @@
 
 ---
 
+## 1.6.4
+
+`2020-07-21`
+
+- 🐞 Fix breadcrumb `Breadcrumb` duplicate key problem [#2505](https://github.com/vueComponent/ant-design-vue/issues/2505)
+- 🐞 Fix the Tooltip issue when MenuItem title is empty [#2526](https://github.com/vueComponent/ant-design-vue/issues/2505)
+- 🐞 Fix the problem that Input textarea cannot be dragged up when allow-clear is activated. [#2563](https://github.com/vueComponent/ant-design-vue/issues/2563)
+- 🌟 Add less variables @select-item-selected-color [#2458](https://github.com/vueComponent/ant-design-vue/issues/2458)
+- 🌟 Add flex attribute to Col in Grid [#2558](https://github.com/vueComponent/ant-design-vue/issues/2558)
+
 ## 1.6.3
 
 `2020-07-05`

@@ -20,6 +20,13 @@ export declare class Col extends AntdComponent {
   order: ColSpanType;
 
   /**
+   * the layout fill of flex
+   * @default none
+   * @type ColSpanType
+   */
+  flex: ColSpanType;
+
+  /**
    * the number of cells to offset Col from the left
    * @default 0
    * @type ColSpanType

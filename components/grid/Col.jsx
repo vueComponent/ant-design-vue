@@ -28,6 +28,7 @@ export const ColProps = {
   xl: objectOrNumber,
   xxl: objectOrNumber,
   prefixCls: PropTypes.string,
+  flex: stringOrNumber,
 };
 
 export default {
@@ -39,8 +40,28 @@ export default {
       rowContext: inject('rowContext', null),
     };
   },
+  methods: {
+    parseFlex(flex) {
+      if (typeof flex === 'number') {
+        return `${flex} ${flex} auto`;
+      }
+      if (/^\d+(\.\d+)?(px|em|rem|%)$/.test(flex)) {
+        return `0 0 ${flex}`;
+      }
+      return flex;
+    },
+  },
   render() {
-    const { span, order, offset, push, pull, prefixCls: customizePrefixCls, rowContext } = this;
+    const {
+      span,
+      order,
+      offset,
+      push,
+      pull,
+      flex,
+      prefixCls: customizePrefixCls,
+      rowContext,
+    } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('col', customizePrefixCls);
 
@@ -95,6 +116,9 @@ export default {
             : {}),
         };
       }
+    }
+    if (flex) {
+      divProps.style.flex = this.parseFlex(flex);
     }
     return <div {...divProps}>{getSlot(this)}</div>;
   },

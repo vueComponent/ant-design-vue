@@ -10,6 +10,16 @@
 
 ---
 
+## 1.6.4
+
+`2020-07-21`
+
+- 🐞 修复面包屑 `Breadcrumb` 重复 key 问题 [#2505](https://github.com/vueComponent/ant-design-vue/issues/2505)
+- 🐞 修复 MenuItem title 为空时，依然有 Tooltip 问题 [#2526](https://github.com/vueComponent/ant-design-vue/issues/2505)
+- 🐞 修复 Input textarea 激活 allow-clear 时无法向上拖动的问题。[#2563](https://github.com/vueComponent/ant-design-vue/issues/2563)
+- 🌟 添加 less 变量 @select-item-selected-color [#2458](https://github.com/vueComponent/ant-design-vue/issues/2458)
+- 🌟 Grid 中 Col 添加 flex 属性 [#2558](https://github.com/vueComponent/ant-design-vue/issues/2558)
+
 ## 1.6.3
 
 `2020-07-05`

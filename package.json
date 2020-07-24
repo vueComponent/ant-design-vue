@@ -1,6 +1,6 @@
 {
   "name": "ant-design-vue",
-  "version": "1.6.3",
+  "version": "1.6.4",
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation",
   "keywords": [
@@ -119,7 +119,7 @@
     "jest": "^25.4.0",
     "jest-serializer-vue": "^2.0.0",
     "jest-transform-stub": "^2.0.0",
-    "js-base64": "^2.4.8",
+    "js-base64": "^3.0.0",
     "json-templater": "^1.2.0",
     "jsonp": "^0.2.1",
     "less": "^3.9.0",

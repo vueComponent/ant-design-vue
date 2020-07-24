@@ -24,8 +24,14 @@ export default {
     const { level, title, rootPrefixCls } = props;
     const { getInlineCollapsed, $attrs: attrs } = this;
     const inlineCollapsed = getInlineCollapsed();
+    let tooltipTitle = title;
+    if (typeof title === 'undefined') {
+      tooltipTitle = level === 1 ? getSlot(this) : '';
+    } else if (title === false) {
+      tooltipTitle = '';
+    }
     const tooltipProps = {
-      title: title || (level === 1 ? getSlot(this) : ''),
+      title: tooltipTitle,
     };
     const siderCollapsed = this.layoutSiderContext.sCollapsed;
     if (!siderCollapsed && !inlineCollapsed) {

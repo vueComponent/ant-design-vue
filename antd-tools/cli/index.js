@@ -3,6 +3,7 @@
 'use strict';
 
 require('colorful').colorful();
+require('colorful').isatty = true;
 
 const program = require('commander');
 const packageInfo = require('../../package.json');

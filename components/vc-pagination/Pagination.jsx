@@ -257,8 +257,8 @@ export default {
           });
         }
         // this.$emit('input', page)
-        this.$emit('change', page, this.statePageSize);
         this.$emit('update:current', page);
+        this.$emit('change', page, this.statePageSize);
         return page;
       }
       return this.stateCurrent;

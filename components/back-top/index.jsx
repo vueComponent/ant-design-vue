@@ -1,4 +1,5 @@
 import { inject, Transition } from 'vue';
+import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import backTopTypes from './backTopTypes';
 import addEventListener from '../vc-util/Dom/addEventListener';
@@ -16,6 +17,7 @@ const props = backTopTypes();
 
 const BackTop = {
   name: 'ABackTop',
+  inheritAttrs: false,
   mixins: [BaseMixin],
   props: {
     ...props,
@@ -77,15 +79,16 @@ const BackTop = {
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('back-top', customizePrefixCls);
-
+    const classString = classNames(prefixCls, this.$attrs.class);
     const defaultElement = (
       <div class={`${prefixCls}-content`}>
         <div class={`${prefixCls}-icon`} />
       </div>
     );
     const divProps = {
+      ...this.$attrs,
       onClick: this.scrollToTop,
-      class: prefixCls,
+      class: classString,
     };
 
     const backTopBtn = this.visible ? (

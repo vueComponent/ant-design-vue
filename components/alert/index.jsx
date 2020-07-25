@@ -53,6 +53,7 @@ export const AlertProps = {
   prefixCls: PropTypes.string,
   banner: PropTypes.bool,
   icon: PropTypes.any,
+  onClose: PropTypes.func,
 };
 
 const Alert = {
@@ -142,7 +143,7 @@ const Alert = {
 
     const transitionProps = getTransitionProps(`${prefixCls}-slide-up`, {
       appear: false,
-      afterLeave: this.animationEnd,
+      onAfterLeave: this.animationEnd,
     });
     return closed ? null : (
       <Transition {...transitionProps}>

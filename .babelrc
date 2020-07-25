@@ -1,18 +1,16 @@
 {
   "env": {
     "test": {
-      "presets": [["env", { "targets": { "node": "current" } }]],
+      "presets": [["@babel/preset-env", { "targets": { "node": true } }]],
       "plugins": [
         ["@ant-design-vue/babel-plugin-jsx", { "usePatchFlag": false }],
-        "babel-plugin-inline-import-data-uri",
-        "@babel/plugin-transform-member-expression-literals",
-        "@babel/plugin-transform-property-literals",
-        "@babel/plugin-proposal-export-default-from",
+        "@babel/plugin-proposal-optional-chaining",
         "@babel/plugin-transform-object-assign",
-        "@babel/plugin-transform-template-literals",
         "@babel/plugin-proposal-object-rest-spread",
+        "@babel/plugin-proposal-export-default-from",
         "@babel/plugin-proposal-class-properties",
-        "transform-runtime"
+        "@babel/plugin-syntax-dynamic-import",
+        "@babel/plugin-transform-runtime"
       ]
     }
   }

@@ -35,7 +35,6 @@ module.exports = function(modules) {
           },
         },
       ],
-      require.resolve('@ant-design-vue/babel-preset-jsx'),
     ],
     plugins,
     env: {

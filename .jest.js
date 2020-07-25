@@ -12,7 +12,7 @@ module.exports = {
   modulePathIgnorePatterns: ['/_site/'],
   testPathIgnorePatterns: ['/node_modules/', 'node'],
   transform: {
-    '.*\\.(vue|md)$': '<rootDir>/node_modules/vue-jest',
+    '^.+\\.(vue|md)$': '<rootDir>/node_modules/vue-jest',
     '^.+\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',
     '^.+\\.svg$': '<rootDir>/node_modules/jest-transform-stub',
   },

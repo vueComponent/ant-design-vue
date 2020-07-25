@@ -10,7 +10,6 @@ import FormItem from './FormItem';
 import { FIELD_META_PROP, FIELD_DATA_PROP } from './constants';
 import { initDefaultProps, getListeners } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import Base from '../base';
 
 export const FormCreateOption = {
   onFieldsChange: PropTypes.func,
@@ -143,7 +142,7 @@ const Form = {
     });
   },
   createForm(context, options = {}) {
-    const V = Base.Vue || Vue;
+    const V = Vue;
     return new V(Form.create({ ...options, templateContext: context })());
   },
   created() {

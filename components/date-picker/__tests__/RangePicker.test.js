@@ -23,7 +23,7 @@ describe('RangePicker', () => {
   it('show month panel according to value', async () => {
     const birthday = moment('2000-01-01', 'YYYY-MM-DD').locale('zh-cn');
     const wrapper = mount(RangePicker, {
-      propsData: {
+      props: {
         getCalendarContainer: trigger => trigger,
         format: 'YYYY/MM/DD',
         showTime: true,
@@ -166,7 +166,7 @@ describe('RangePicker', () => {
   it('should not throw error when value is reset to `[]`', async () => {
     const birthday = moment('2000-01-01', 'YYYY-MM-DD');
     const wrapper = mount(RangePicker, {
-      propsData: {
+      props: {
         getCalendarContainer: trigger => trigger,
         value: [birthday, birthday],
         open: true,
@@ -196,7 +196,7 @@ describe('RangePicker', () => {
   // issue: https://github.com/ant-design/ant-design/issues/7077
   it('should not throw error when select after clear', async () => {
     const wrapper = mount(RangePicker, {
-      propsData: {
+      props: {
         getCalendarContainer: trigger => trigger,
         open: true,
       },
@@ -247,7 +247,7 @@ describe('RangePicker', () => {
           );
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
       wrapper.find('.ant-calendar-picker-input').trigger('click');
@@ -277,12 +277,12 @@ describe('RangePicker', () => {
       const range = [moment().subtract(2, 'd'), moment()];
       const format = 'YYYY-MM-DD HH:mm:ss';
       const wrapper = mount(RangePicker, {
-        propsData: {
+        props: {
           ranges: { 'recent two days': range },
           format,
         },
         sync: false,
-        attachToDocument: true,
+        attachTo: 'body',
       });
       await asyncExpect(() => {
         wrapper.find('.ant-calendar-picker-input').trigger('click');
@@ -306,12 +306,12 @@ describe('RangePicker', () => {
       const range = [moment().subtract(2, 'd'), moment()];
       const format = 'YYYY-MM-DD HH:mm:ss';
       const wrapper = mount(RangePicker, {
-        propsData: {
+        props: {
           ranges: { 'recent two days': () => range },
           format,
         },
         sync: false,
-        attachToDocument: true,
+        attachTo: 'body',
       });
       await asyncExpect(() => {
         wrapper.find('.ant-calendar-picker-input').trigger('click');
@@ -333,7 +333,7 @@ describe('RangePicker', () => {
 
   // https://github.com/ant-design/ant-design/issues/6999
   it('input date manually', async () => {
-    mount(RangePicker, { propsData: { open: true }, sync: false, attachToDocument: true });
+    mount(RangePicker, { props: { open: true }, sync: false, attachTo: 'body' });
     const dateString = '2008-12-31';
     let input = null;
     await asyncExpect(() => {
@@ -347,12 +347,12 @@ describe('RangePicker', () => {
     const handleOk = jest.fn();
     const range = [moment().subtract(2, 'd'), moment()];
     const wrapper = mount(RangePicker, {
-      propsData: {
+      props: {
         ranges: { 'recent two days': range },
       },
       listeners: { ok: handleOk },
       sync: false,
-      attachToDocument: true,
+      attachTo: 'body',
     });
 
     await asyncExpect(() => {
@@ -368,7 +368,7 @@ describe('RangePicker', () => {
 
   // https://github.com/ant-design/ant-design/issues/9267
   it('invali end date not throw error', async () => {
-    const wrapper = mount(RangePicker, { sync: false, attachToDocument: true });
+    const wrapper = mount(RangePicker, { sync: false, attachTo: 'body' });
     await asyncExpect(() => {
       wrapper.find('.ant-calendar-picker-input').trigger('click');
     });
@@ -401,7 +401,7 @@ describe('RangePicker', () => {
       },
       {
         sync: false,
-        attachToDocument: true,
+        attachTo: 'body',
       },
     );
     await asyncExpect(() => {

@@ -29,7 +29,7 @@ describe('Popconfirm', () => {
           );
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     let triggerNode = null;
     await asyncExpect(() => {

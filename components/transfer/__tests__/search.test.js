@@ -16,7 +16,7 @@ describe('Search', () => {
 
   it('should show cross icon when input value exists', () => {
     const props = {
-      propsData: {
+      props: {
         value: '',
       },
     };

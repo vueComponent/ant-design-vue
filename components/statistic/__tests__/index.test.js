@@ -20,7 +20,7 @@ describe('Statistic', () => {
   it('customize formatter', () => {
     const formatter = jest.fn(() => 93);
     const props = {
-      propsData: {
+      props: {
         value: 1128,
         formatter,
       },
@@ -32,7 +32,7 @@ describe('Statistic', () => {
 
   it('groupSeparator', () => {
     const props = {
-      propsData: {
+      props: {
         value: 1128,
         groupSeparator: '__TEST__',
       },
@@ -43,7 +43,7 @@ describe('Statistic', () => {
 
   it('not a number', () => {
     const props = {
-      propsData: {
+      props: {
         value: 'bamboo',
       },
     };
@@ -53,7 +53,7 @@ describe('Statistic', () => {
 
   it('support negetive number', () => {
     const props = {
-      propsData: {
+      props: {
         title: 'Account Balance (CNY)',
         value: -112893.12345,
         precision: 2,
@@ -79,7 +79,7 @@ describe('Statistic', () => {
         ['DD-HH:mm:ss', '02-11:28:09'],
       ].forEach(([format, value]) => {
         const props = {
-          propsData: {
+          props: {
             format,
             value: now,
           },
@@ -92,7 +92,7 @@ describe('Statistic', () => {
     it('time going', async () => {
       const now = Date.now() + 1000;
       const props = {
-        propsData: {
+        props: {
           value: now,
         },
       };

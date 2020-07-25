@@ -31,7 +31,7 @@ describe('Upload', () => {
   it('return promise in beforeUpload', done => {
     const data = jest.fn();
     const props = {
-      propsData: {
+      props: {
         action: 'http://upload.com',
         beforeUpload: () => new Promise(resolve => setTimeout(() => resolve('success'), 100)),
         data,
@@ -62,7 +62,7 @@ describe('Upload', () => {
   it('upload promise return file in beforeUpload', done => {
     const data = jest.fn();
     const props = {
-      propsData: {
+      props: {
         action: 'http://upload.com',
         beforeUpload: file =>
           new Promise(resolve =>
@@ -103,7 +103,7 @@ describe('Upload', () => {
   it('should not stop upload when return value of beforeUpload is false', done => {
     const data = jest.fn();
     const props = {
-      propsData: {
+      props: {
         action: 'http://upload.com',
         beforeUpload: () => false,
         data,
@@ -137,7 +137,7 @@ describe('Upload', () => {
     let uploadInstance;
     let lastPercent = -1;
     const props = {
-      propsData: {
+      props: {
         action: 'http://upload.com',
       },
       listeners: {
@@ -176,7 +176,7 @@ describe('Upload', () => {
   it('should not stop upload when return value of beforeUpload is not false', done => {
     const data = jest.fn();
     const props = {
-      propsData: {
+      props: {
         action: 'http://upload.com',
         beforeUpload() {},
         data,
@@ -296,7 +296,7 @@ describe('Upload', () => {
       },
     ];
     const props = {
-      propsData: {
+      props: {
         fileList,
       },
       sync: false,
@@ -324,7 +324,7 @@ describe('Upload', () => {
       },
     ];
     const props = {
-      propsData: {
+      props: {
         fileList,
       },
       sync: false,

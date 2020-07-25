@@ -27,7 +27,7 @@ export default function demoTest(component, options = {}) {
         const dom = options.getDomFromElement ? wrapper.element : wrapper.html();
         expect(dom).toMatchSnapshot();
         MockDate.reset();
-        wrapper.destroy();
+        wrapper.unmount();
         document.body.innerHTML = '';
         done();
       });

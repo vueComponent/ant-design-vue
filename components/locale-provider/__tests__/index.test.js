@@ -189,7 +189,7 @@ describe('Locale Provider', () => {
             );
           },
         },
-        { sync: false, attachToDocument: true },
+        { sync: false, attachTo: 'body' },
       );
       Vue.nextTick(() => {
         expect(wrapper.html()).toMatchSnapshot();
@@ -221,7 +221,7 @@ describe('Locale Provider', () => {
             );
           },
         },
-        { sync: false, attachToDocument: true },
+        { sync: false, attachTo: 'body' },
       );
       await sleep();
       const currentConfirmNode = document.querySelectorAll('.ant-modal-confirm')[
@@ -258,7 +258,7 @@ describe('Locale Provider', () => {
         );
       },
     };
-    const wrapper = mount(Test, { sync: false, attachToDocument: true });
+    const wrapper = mount(Test, { sync: false, attachTo: 'body' });
     await sleep(50);
     expect(document.body.innerHTML).toMatchSnapshot();
     wrapper.setData({ locale: frFR });

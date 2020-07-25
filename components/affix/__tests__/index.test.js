@@ -70,7 +70,7 @@ describe('Affix Render', () => {
     jest.runAllTimers();
   };
   it('Anchor render perfectly', () => {
-    wrapper = mount(AffixMounter, { attachToDocument: true });
+    wrapper = mount(AffixMounter, { attachTo: 'body' });
     jest.runAllTimers();
 
     movePlaceholder(0);
@@ -84,8 +84,8 @@ describe('Affix Render', () => {
   });
   it('support offsetBottom', () => {
     wrapper = mount(AffixMounter, {
-      attachToDocument: true,
-      propsData: {
+      attachTo: 'body',
+      props: {
         offsetBottom: 0,
       },
     });
@@ -104,8 +104,8 @@ describe('Affix Render', () => {
 
   // it('updatePosition when offsetTop changed', () => {
   //   wrapper = mount(AffixMounter, {
-  //     attachToDocument: true,
-  //     propsData: {
+  //     attachTo: 'body',
+  //     props: {
   //       offsetTop: 0,
   //     },
   //   });

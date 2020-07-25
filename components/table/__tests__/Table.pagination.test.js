@@ -22,7 +22,7 @@ describe('Table.pagination', () => {
 
   function getTableOptions(props = {}, listeners = {}) {
     return {
-      propsData: {
+      props: {
         columns,
         dataSource: data,
         pagination,

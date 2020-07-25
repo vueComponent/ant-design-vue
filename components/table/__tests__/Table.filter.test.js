@@ -41,7 +41,7 @@ describe('Table.filter', () => {
 
   function getTableOptions(props = {}, listeners = {}) {
     return {
-      propsData: {
+      props: {
         columns: [column],
         dataSource: data,
         pagination: false,
@@ -51,7 +51,7 @@ describe('Table.filter', () => {
         ...listeners,
       },
       sync: false,
-      attachToDocument: true,
+      attachTo: 'body',
     };
   }
 
@@ -374,7 +374,7 @@ describe('Table.filter', () => {
           return wrapper.find({ name: 'Trigger' }).vm.getComponent();
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
       dropdownWrapper.find({ name: 'MenuItem' }).trigger('click');
@@ -421,7 +421,7 @@ describe('Table.filter', () => {
       { key: 3, name: 'Jerry', age: 22 },
     ];
     const wrapper = mount(Table, {
-      propsData: {
+      props: {
         columns,
         dataSource: testData,
       },
@@ -450,7 +450,7 @@ describe('Table.filter', () => {
         },
         { change: handleChange },
       ),
-      attachToDocument: true,
+      attachTo: 'body',
     });
     await asyncExpect(() => {
       wrapper.find('.ant-dropdown-trigger').trigger('click');

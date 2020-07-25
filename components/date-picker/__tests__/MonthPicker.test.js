@@ -11,9 +11,9 @@ describe('MonthPicker', () => {
   focusTest(MonthPicker);
   it('reset select item when popup close', async () => {
     const wrapper = mount(MonthPicker, {
-      propsData: { value: moment('2018-07-01') },
+      props: { value: moment('2018-07-01') },
       sync: false,
-      attachToDocument: true,
+      attachTo: 'body',
     });
     await asyncExpect(() => {
       openPanel(wrapper);

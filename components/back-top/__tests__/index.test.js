@@ -5,7 +5,7 @@ import { sleep } from '../../../tests/utils';
 describe('BackTop', () => {
   it('should scroll to top after click it', async () => {
     const wrapper = mount(BackTop, {
-      propsData: {
+      props: {
         visibilityHeight: -1,
       },
     });
@@ -25,7 +25,7 @@ describe('BackTop', () => {
   it('support onClick', async () => {
     const onClick = jest.fn();
     const wrapper = mount(BackTop, {
-      propsData: {
+      props: {
         visibilityHeight: -1,
       },
       listeners: {

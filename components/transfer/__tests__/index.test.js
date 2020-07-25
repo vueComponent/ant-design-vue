@@ -91,7 +91,7 @@ describe('Transfer', () => {
   mountTest(Transfer);
   it('should render correctly', () => {
     const props = {
-      propsData: listCommonProps,
+      props: listCommonProps,
     };
     const wrapper = renderToString(Transfer, props);
     expect(wrapper).toMatchSnapshot();
@@ -100,7 +100,7 @@ describe('Transfer', () => {
   it('should move selected keys to corresponding list', done => {
     const handleChange = jest.fn();
     const wrapper = mount(Transfer, {
-      propsData: listCommonProps,
+      props: listCommonProps,
       listeners: {
         change: handleChange,
       },
@@ -118,7 +118,7 @@ describe('Transfer', () => {
   it('should move selected keys expect disabled to corresponding list', done => {
     const handleChange = jest.fn();
     const wrapper = mount(Transfer, {
-      propsData: listDisabledProps,
+      props: listDisabledProps,
       listeners: {
         change: handleChange,
       },
@@ -137,7 +137,7 @@ describe('Transfer', () => {
   it('should uncheck checkbox when click on checked item', done => {
     const handleSelectChange = jest.fn();
     const wrapper = mount(Transfer, {
-      propsData: listCommonProps,
+      props: listCommonProps,
       listeners: {
         selectChange: handleSelectChange,
       },
@@ -158,7 +158,7 @@ describe('Transfer', () => {
   it('should check checkbox when click on unchecked item', done => {
     const handleSelectChange = jest.fn();
     const wrapper = mount(Transfer, {
-      propsData: listCommonProps,
+      props: listCommonProps,
       listeners: {
         selectChange: handleSelectChange,
       },
@@ -179,7 +179,7 @@ describe('Transfer', () => {
   it('should not check checkbox when click on disabled item', done => {
     const handleSelectChange = jest.fn();
     const wrapper = mount(Transfer, {
-      propsData: listCommonProps,
+      props: listCommonProps,
       listeners: {
         selectChange: handleSelectChange,
       },
@@ -200,7 +200,7 @@ describe('Transfer', () => {
   it('should check all item when click on check all', done => {
     const handleSelectChange = jest.fn();
     const wrapper = mount(Transfer, {
-      propsData: listCommonProps,
+      props: listCommonProps,
       listeners: {
         selectChange: handleSelectChange,
       },
@@ -221,7 +221,7 @@ describe('Transfer', () => {
   it('should uncheck all item when click on uncheck all', done => {
     const handleSelectChange = jest.fn();
     const wrapper = mount(Transfer, {
-      propsData: listCommonProps,
+      props: listCommonProps,
       listeners: {
         selectChange: handleSelectChange,
       },
@@ -242,7 +242,7 @@ describe('Transfer', () => {
   it('should call `filterOption` when use input in search box', done => {
     const filterOption = (inputValue, option) => inputValue === option.title;
     const wrapper = mount(Transfer, {
-      propsData: {
+      props: {
         ...listCommonProps,
         showSearch: true,
         filterOption,
@@ -270,7 +270,7 @@ describe('Transfer', () => {
     const filterOption = (inputValue, option) => option.description.indexOf(inputValue) > -1;
     const renderFunc = item => item.title;
     const wrapper = mount(Transfer, {
-      propsData: {
+      props: {
         ...searchTransferProps,
         showSearch: true,
         filterOption,
@@ -302,7 +302,7 @@ describe('Transfer', () => {
     const renderFunc = item => item.title;
     const handleSelectChange = jest.fn();
     const wrapper = mount(Transfer, {
-      propsData: {
+      props: {
         ...searchTransferProps,
         showSearch: true,
         filterOption,
@@ -342,7 +342,7 @@ describe('Transfer', () => {
       });
     };
     const wrapper = mount(Transfer, {
-      propsData: {
+      props: {
         ...searchTransferProps,
         showSearch: true,
         filterOption,
@@ -385,7 +385,7 @@ describe('Transfer', () => {
     delete newProps.selectedKeys;
     const handleSelectChange = jest.fn();
     const wrapper = mount(Transfer, {
-      propsData: {
+      props: {
         ...newProps,
         showSearch: true,
         render: item => item.title,
@@ -448,7 +448,7 @@ describe('Transfer', () => {
     };
 
     const props = {
-      propsData: {
+      props: {
         ...sortedTargetKeyProps,
         render: item => item.title,
       },

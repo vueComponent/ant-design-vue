@@ -97,7 +97,7 @@ describe('Drawer', () => {
 
   it('maskClosable no trigger onClose', async () => {
     const wrapper = mount(DrawerEventTester, {
-      propsData: {
+      props: {
         maskClosable: false,
       },
       sync: false,
@@ -113,7 +113,7 @@ describe('Drawer', () => {
 
   it('destroyOnClose is true onClose', async () => {
     const wrapper = mount(DrawerEventTester, {
-      propsData: {
+      props: {
         destroyOnClose: true,
       },
       sync: false,
@@ -134,7 +134,7 @@ describe('Drawer', () => {
 
   it('no mask and no closable', async () => {
     const wrapper = mount(DrawerEventTester, {
-      propsData: {
+      props: {
         destroyOnClose: true,
       },
       sync: false,

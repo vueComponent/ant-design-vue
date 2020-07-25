@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import Vue from 'vue';
+import * as Vue from 'vue';
 import { asyncExpect } from '@/tests/utils';
 import Anchor from '..';
 
@@ -63,7 +63,7 @@ describe('Anchor Render', () => {
           );
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     Vue.nextTick(() => {
       wrapper.vm.$refs.anchor.handleScroll();
@@ -87,7 +87,7 @@ describe('Anchor Render', () => {
           );
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
       wrapper.vm.$refs.anchor.handleScrollTo('##API');
@@ -110,11 +110,11 @@ describe('Anchor Render', () => {
           );
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
       const removeListenerSpy = jest.spyOn(wrapper.vm.$refs.anchor.scrollEvent, 'remove');
-      wrapper.destroy();
+      wrapper.unmount();
       expect(removeListenerSpy).toHaveBeenCalled();
     });
   });
@@ -134,7 +134,7 @@ describe('Anchor Render', () => {
           );
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
       expect(wrapper.vm.$refs.anchor.links).toEqual(['#API']);
@@ -159,8 +159,8 @@ describe('Anchor Render', () => {
       },
       {
         sync: false,
-        attachToDocument: true,
-        propsData: {
+        attachTo: 'body',
+        props: {
           href: '#API',
         },
       },

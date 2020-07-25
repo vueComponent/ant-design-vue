@@ -114,7 +114,7 @@ const MultiDrawer = {
 describe('Drawer', () => {
   it('render right MultiDrawer', async () => {
     const wrapper = mount(MultiDrawer, {
-      propsData: {
+      props: {
         placement: 'right',
       },
       sync: false,
@@ -135,7 +135,7 @@ describe('Drawer', () => {
   it('render left MultiDrawer', async () => {
     document.body.innerHTML = '';
     const wrapper = mount(MultiDrawer, {
-      propsData: {
+      props: {
         placement: 'left',
       },
       sync: false,
@@ -155,7 +155,7 @@ describe('Drawer', () => {
 
   it('render top MultiDrawer', async () => {
     const wrapper = mount(MultiDrawer, {
-      propsData: {
+      props: {
         placement: 'top',
       },
       sync: false,

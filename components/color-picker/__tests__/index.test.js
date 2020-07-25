@@ -9,11 +9,11 @@ describe('ColorPicker', () => {
           return <ColorPicker default-value="#cd0200" getPopupContainer={p => p}></ColorPicker>;
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
       expect(wrapper.html()).toMatchSnapshot();
-      wrapper.destroy();
+      wrapper.unmount();
     }, 1000);
   });
   it('should support v-model', async () => {
@@ -32,12 +32,12 @@ describe('ColorPicker', () => {
           this.color = 'rgba(110, 120, 130, 1)';
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
 
     await asyncExpect(() => {
       expect(wrapper.html()).toMatchSnapshot();
-      wrapper.destroy();
+      wrapper.unmount();
     }, 1000);
   });
   it('should support disabled', async () => {
@@ -55,13 +55,13 @@ describe('ColorPicker', () => {
           this.disabled = true;
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
 
     await asyncExpect(async () => {
       expect(wrapper.html()).toMatchSnapshot();
       await asyncExpect(() => {
-        wrapper.destroy();
+        wrapper.unmount();
       });
     }, 1000);
   });
@@ -80,13 +80,13 @@ describe('ColorPicker', () => {
           this.format = 'HEX';
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
 
     await asyncExpect(async () => {
       expect(wrapper.html()).toMatchSnapshot();
       await asyncExpect(() => {
-        wrapper.destroy();
+        wrapper.unmount();
       });
     }, 1000);
   });
@@ -119,12 +119,12 @@ describe('ColorPicker', () => {
           };
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(async () => {
       expect(wrapper.html()).toMatchSnapshot();
       await asyncExpect(() => {
-        wrapper.destroy();
+        wrapper.unmount();
       });
     }, 1000);
   });
@@ -142,13 +142,13 @@ describe('ColorPicker', () => {
           },
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(async () => {
       wrapper.find('.pcr-save').trigger('click');
       expect(wrapper.html()).toMatchSnapshot();
       await asyncExpect(() => {
-        wrapper.destroy();
+        wrapper.unmount();
       });
     }, 1000);
   });

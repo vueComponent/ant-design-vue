@@ -18,7 +18,7 @@ describe('Table.rowSelection', () => {
   ];
   function getTableOptions(props = {}, listeners = {}) {
     return {
-      propsData: {
+      props: {
         columns,
         dataSource: data,
         rowSelection: {},
@@ -489,7 +489,7 @@ describe('Table.rowSelection', () => {
   // https://github.com/ant-design/ant-design/issues/10629
   it('should keep all checked state when remove item from dataSource', async () => {
     const wrapper = mount(Table, {
-      propsData: {
+      props: {
         columns,
         dataSource: data,
         rowSelection: {
@@ -527,7 +527,7 @@ describe('Table.rowSelection', () => {
   // https://github.com/ant-design/ant-design/issues/11042
   it('add columnTitle for rowSelection', async () => {
     const wrapper = mount(Table, {
-      propsData: {
+      props: {
         columns,
         dataSource: data,
         rowSelection: {
@@ -589,7 +589,7 @@ describe('Table.rowSelection', () => {
     };
 
     const wrapper = mount(Table, {
-      propsData: {
+      props: {
         columns: filterColumns,
         dataSource: data,
         rowSelection,
@@ -691,7 +691,7 @@ describe('Table.rowSelection', () => {
     ];
 
     const wrapper = mount(Table, {
-      propsData: {
+      props: {
         columns,
         dataSource: newDatas,
         rowSelection: {},

@@ -48,12 +48,12 @@ describe('Descriptions', () => {
           );
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
       expect(wrapper.vm.$refs.descriptions.getColumn()).toBe(8);
     }, 100);
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   it('column is number', () => {
@@ -71,7 +71,7 @@ describe('Descriptions', () => {
       },
     });
     expect(wrapper.html()).toMatchSnapshot();
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   it('warning if ecceed the row span', () => {
@@ -112,7 +112,7 @@ describe('Descriptions', () => {
       },
     });
     expect(wrapper.html()).toMatchSnapshot();
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   it('vertical layout', () => {
@@ -130,7 +130,7 @@ describe('Descriptions', () => {
       },
     });
     expect(wrapper.html()).toMatchSnapshot();
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   it('Descriptions.Item support className', () => {
@@ -191,7 +191,7 @@ describe('Descriptions', () => {
           );
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
       expect(wrapper.findAll('tr')).toHaveLength(5);
@@ -199,7 +199,7 @@ describe('Descriptions', () => {
     });
 
     enquire.callunmatch();
-    wrapper.destroy();
+    wrapper.unmount();
   });
 
   it('when max-width: 575px，column=2', async () => {
@@ -218,13 +218,13 @@ describe('Descriptions', () => {
           );
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {});
     expect(wrapper.findAll('tr')).toHaveLength(2);
 
     enquire.callunmatch();
-    wrapper.destroy();
+    wrapper.unmount();
 
     await asyncExpect(() => {});
     await asyncExpect(() => {});

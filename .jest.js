@@ -39,5 +39,6 @@ module.exports = {
     '!components/style.js',
     '!**/node_modules/**',
   ],
+  testEnvironment: 'jest-environment-jsdom-fifteen',
   transformIgnorePatterns,
 };

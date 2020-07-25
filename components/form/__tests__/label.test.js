@@ -205,7 +205,7 @@ describe('Form', () => {
       },
     });
 
-    const wrapper = mount(Form1, { sync: false, attachToDocument: true });
+    const wrapper = mount(Form1, { sync: false, attachTo: 'body' });
     await asyncExpect(() => {
       expect(() => {
         wrapper

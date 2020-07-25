@@ -155,7 +155,7 @@ describe('Calendar', () => {
           return <Calendar validRange={validRange} />;
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
       wrapper.find('.ant-fullcalendar-year-select').trigger('click');
@@ -168,7 +168,7 @@ describe('Calendar', () => {
   it('getDateRange should returns a disabledDate function', async () => {
     const validRange = [Moment('2018-02-02'), Moment('2018-05-18')];
     const wrapper = mount(Calendar, {
-      propsData: {
+      props: {
         validRange,
         defaultValue: Moment('2018-02-02'),
       },
@@ -200,7 +200,7 @@ describe('Calendar', () => {
     const yearMode = 'year';
     const onPanelChangeStub = jest.fn();
     const wrapper = mount(Calendar, {
-      propsData: {
+      props: {
         mode: yearMode,
       },
       listeners: {
@@ -223,7 +223,7 @@ describe('Calendar', () => {
     // eslint-disable-next-line
     const zhCN = require('../locale/zh_CN').default;
     const wrapper = mount(Calendar, {
-      propsData: {
+      props: {
         locale: zhCN,
       },
       sync: false,
@@ -238,7 +238,7 @@ describe('Calendar', () => {
     const onPanelChange = jest.fn();
     const date = new Moment('1990-09-03');
     const wrapper = mount(Calendar, {
-      propsData: {
+      props: {
         value: date,
       },
       listeners: {
@@ -259,7 +259,7 @@ describe('Calendar', () => {
     const onPanelChange = jest.fn();
     const date = new Moment(new Date(Date.UTC(2017, 7, 9, 8)));
     const wrapper = mount(Calendar, {
-      propsData: {
+      props: {
         value: date,
       },
       listeners: {
@@ -295,7 +295,7 @@ describe('Calendar', () => {
       },
       {
         sync: false,
-        attachToDocument: true,
+        attachTo: 'body',
       },
     );
     await sleep(50);
@@ -355,7 +355,7 @@ describe('Calendar', () => {
       },
       {
         sync: false,
-        attachToDocument: true,
+        attachTo: 'body',
       },
     );
     await sleep(50);

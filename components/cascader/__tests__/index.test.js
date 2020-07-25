@@ -50,7 +50,7 @@ describe('Cascader', () => {
   focusTest(Cascader);
 
   it('popup correctly when panel is hidden', async () => {
-    const wrapper = mount(Cascader, { propsData: { options }, sync: false });
+    const wrapper = mount(Cascader, { props: { options }, sync: false });
     const CascaderWrapper = mount(
       {
         render() {
@@ -65,7 +65,7 @@ describe('Cascader', () => {
   });
 
   it('popup correctly when panel is open', async () => {
-    const wrapper = mount(Cascader, { propsData: { options }, sync: false });
+    const wrapper = mount(Cascader, { props: { options }, sync: false });
     await asyncExpect(() => {
       wrapper.find('input').trigger('click');
     });
@@ -86,7 +86,7 @@ describe('Cascader', () => {
   });
 
   it('support controlled mode', async () => {
-    const wrapper = mount(Cascader, { propsData: { options }, sync: false });
+    const wrapper = mount(Cascader, { props: { options }, sync: false });
     await asyncExpect(() => {
       wrapper.setProps({
         value: ['zhejiang', 'hangzhou', 'xihu'],
@@ -99,7 +99,7 @@ describe('Cascader', () => {
 
   it('popup correctly with defaultValue', async () => {
     const wrapper = mount(Cascader, {
-      propsData: {
+      props: {
         options,
         defaultValue: ['zhejiang', 'hangzhou'],
       },
@@ -127,7 +127,7 @@ describe('Cascader', () => {
   });
 
   it('can be selected', async () => {
-    const wrapper = mount(Cascader, { propsData: { options }, sync: false });
+    const wrapper = mount(Cascader, { props: { options }, sync: false });
     await asyncExpect(() => {
       wrapper.find('input').trigger('click');
     });
@@ -229,7 +229,7 @@ describe('Cascader', () => {
   });
 
   it('backspace should work with `Cascader[showSearch]`', async () => {
-    const wrapper = mount(Cascader, { propsData: { options, showSearch: true }, sync: false });
+    const wrapper = mount(Cascader, { props: { options, showSearch: true }, sync: false });
     await asyncExpect(() => {
       wrapper.find('input').element.value = '123';
       wrapper.find('input').trigger('input');
@@ -258,9 +258,9 @@ describe('Cascader', () => {
 
     it('limit with positive number', async () => {
       const wrapper = mount(Cascader, {
-        propsData: { options, showSearch: { filter, limit: 1 } },
+        props: { options, showSearch: { filter, limit: 1 } },
         sync: false,
-        attachToDocument: true,
+        attachTo: 'body',
       });
       wrapper.find('input').trigger('click');
       wrapper.find('input').element.value = 'a';
@@ -272,9 +272,9 @@ describe('Cascader', () => {
 
     it('not limit', async () => {
       const wrapper = mount(Cascader, {
-        propsData: { options, showSearch: { filter, limit: false } },
+        props: { options, showSearch: { filter, limit: false } },
         sync: false,
-        attachToDocument: true,
+        attachTo: 'body',
       });
       wrapper.find('input').trigger('click');
       wrapper.find('input').element.value = 'a';
@@ -287,9 +287,9 @@ describe('Cascader', () => {
     it('negative limit', async () => {
       const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
       const wrapper = mount(Cascader, {
-        propsData: { options, showSearch: { filter, limit: -1 } },
+        props: { options, showSearch: { filter, limit: -1 } },
         sync: false,
-        attachToDocument: true,
+        attachTo: 'body',
       });
       wrapper.find('input').trigger('click');
       wrapper.find('input').element.value = 'a';

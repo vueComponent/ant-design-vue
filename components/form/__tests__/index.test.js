@@ -23,7 +23,7 @@ describe('Form', () => {
 
   it('hideRequiredMark', () => {
     const wrapper = mount(Form, {
-      propsData: {
+      props: {
         hideRequiredMark: true,
       },
     });
@@ -45,7 +45,7 @@ describe('Form', () => {
       const Wrapped = Form.create()(TestForm);
       let form;
       mount(Wrapped, {
-        propsData: {
+        props: {
           wrappedComponentRef: node => {
             form = node;
           },

@@ -19,7 +19,7 @@ describe('AutoComplete with Custom Input Element Render', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     expect(wrapper.findAll('input').length).toBe(1);
     const input = wrapper.find('input');

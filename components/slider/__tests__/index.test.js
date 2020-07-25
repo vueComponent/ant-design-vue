@@ -7,7 +7,7 @@ describe('Slider', () => {
   mountTest(Slider);
   it('should show tooltip when hovering slider handler', async () => {
     const wrapper = mount(Slider, {
-      propsData: {
+      props: {
         defaultValue: 30,
       },
       sync: false,

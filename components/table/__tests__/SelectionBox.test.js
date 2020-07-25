@@ -13,7 +13,7 @@ const getDefaultStore = selectedRowKeys => {
 describe('SelectionBox', () => {
   it('unchecked by selectedRowKeys ', () => {
     const wrapper = mount(SelectionBox, {
-      propsData: {
+      props: {
         store: getDefaultStore(),
         rowIndex: '1',
         disabled: false,
@@ -31,7 +31,7 @@ describe('SelectionBox', () => {
 
   it('checked by selectedRowKeys ', () => {
     const wrapper = mount(SelectionBox, {
-      propsData: {
+      props: {
         store: getDefaultStore(['1']),
         rowIndex: '1',
         disabled: false,
@@ -49,7 +49,7 @@ describe('SelectionBox', () => {
 
   it('checked by defaultSelection', () => {
     const wrapper = mount(SelectionBox, {
-      propsData: {
+      props: {
         store: getDefaultStore(),
         rowIndex: '1',
         disabled: false,
@@ -68,7 +68,7 @@ describe('SelectionBox', () => {
   it('checked when store change', () => {
     const store = getDefaultStore();
     const wrapper = mount(SelectionBox, {
-      propsData: {
+      props: {
         store,
         rowIndex: '1',
         disabled: false,
@@ -94,7 +94,7 @@ describe('SelectionBox', () => {
       id: 'testId',
     };
     const wrapper = mount(SelectionBox, {
-      propsData: {
+      props: {
         store: getDefaultStore(),
         rowIndex: '1',
         disabled: false,
@@ -121,7 +121,7 @@ describe('SelectionBox', () => {
       id: 'testId',
     };
     const wrapper = mount(SelectionBox, {
-      propsData: {
+      props: {
         store: getDefaultStore(),
         rowIndex: '1',
         disabled: false,

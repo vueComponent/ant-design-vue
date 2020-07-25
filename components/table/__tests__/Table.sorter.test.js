@@ -21,7 +21,7 @@ describe('Table.sorter', () => {
 
   function getTableOptions(props = {}, columnProps = {}, listeners = {}) {
     return {
-      propsData: {
+      props: {
         columns: [
           {
             ...column,
@@ -179,7 +179,7 @@ describe('Table.sorter', () => {
       { key: 3, name: 'Jerry', age: 22 },
     ];
     const wrapper = mount(Table, {
-      propsData: {
+      props: {
         columns,
         dataSource: testData,
       },

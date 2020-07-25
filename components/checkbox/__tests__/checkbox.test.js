@@ -29,7 +29,7 @@ describe('Checkbox', () => {
 
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
     mount(Checkbox, {
-      propsData: {
+      props: {
         value: 'xxx',
       },
     });

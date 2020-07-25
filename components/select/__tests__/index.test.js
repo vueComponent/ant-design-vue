@@ -11,7 +11,7 @@ describe('Select', () => {
 
   it('should have default notFoundContent', async () => {
     const wrapper = mount(Select, {
-      propsData: {
+      props: {
         mode: 'multiple',
       },
       sync: false,
@@ -41,7 +41,7 @@ describe('Select', () => {
 
   it('should support set notFoundContent to null', async () => {
     const wrapper = mount(Select, {
-      propsData: {
+      props: {
         mode: 'multiple',
         notFoundContent: null,
       },
@@ -65,7 +65,7 @@ describe('Select', () => {
 
   it('should not have default notFoundContent when mode is combobox', async () => {
     const wrapper = mount(Select, {
-      propsData: {
+      props: {
         mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
       },
       sync: false,
@@ -89,7 +89,7 @@ describe('Select', () => {
 
   it('should not have notFoundContent when mode is combobox and notFoundContent is set', async () => {
     const wrapper = mount(Select, {
-      propsData: {
+      props: {
         mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
         notFoundContent: 'not at all',
       },

@@ -5,7 +5,7 @@ import Spin from '..';
 describe('delay spinning', () => {
   it("should render with delay when it's mounted with spinning=true and delay", async () => {
     const props = {
-      propsData: {
+      props: {
         delay: 500,
         spinning: true,
       },
@@ -24,7 +24,7 @@ describe('delay spinning', () => {
 
   it('should render when delay is init set', async () => {
     const props = {
-      propsData: {
+      props: {
         delay: 100,
         spinning: true,
       },
@@ -55,7 +55,7 @@ describe('delay spinning', () => {
 
   it('should cancel debounce function when unmount', async () => {
     const props = {
-      propsData: {
+      props: {
         delay: 100,
         spinning: true,
       },

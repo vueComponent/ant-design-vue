@@ -38,11 +38,11 @@ describe('Avatar Render', () => {
       slots: {
         default: 'Fallback',
       },
-      propsData: {
+      props: {
         src: 'http://error.url',
       },
       sync: false,
-      attachToDocument: true,
+      attachTo: 'body',
     });
     wrapper.vm.setScale = jest.fn(() => {
       if (wrapper.vm.scale === 0.5) {
@@ -91,7 +91,7 @@ describe('Avatar Render', () => {
       },
     };
 
-    const wrapper = mount(Foo, { sync: false, attachToDocument: true });
+    const wrapper = mount(Foo, { sync: false, attachTo: 'body' });
     await asyncExpect(() => {
       // mock img load Error, since jsdom do not load resource by default
       // https://github.com/jsdom/jsdom/issues/1816
@@ -122,7 +122,7 @@ describe('Avatar Render', () => {
       },
     };
 
-    const wrapper = mount(Foo, { sync: false, attachToDocument: true });
+    const wrapper = mount(Foo, { sync: false, attachTo: 'body' });
     await asyncExpect(() => {
       wrapper.find('img').trigger('error');
     }, 0);

@@ -24,7 +24,7 @@ describe('Result', () => {
   });
 
   it('🙂  different status, different class', () => {
-    const wrapper = mount(Result, { propsData: { status: 'warning' } });
+    const wrapper = mount(Result, { props: { status: 'warning' } });
     expect(wrapper.findAll('.ant-result-warning')).toHaveLength(1);
 
     wrapper.setProps({

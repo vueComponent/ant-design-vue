@@ -120,7 +120,7 @@ describe('CheckboxGroup', () => {
     ];
 
     const wrapper = mount(Checkbox.Group, {
-      propsData: { options },
+      props: { options },
       sync: false,
     });
 

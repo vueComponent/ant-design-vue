@@ -49,7 +49,7 @@ describe('Picker format by locale', () => {
 describe('MonthPicker and WeekPicker', () => {
   it('render MonthPicker', async () => {
     const birthday = moment('2000-01-01', 'YYYY-MM-DD').locale('zh-cn');
-    const wrapper = mount(MonthPicker, { propsData: { open: true }, sync: false });
+    const wrapper = mount(MonthPicker, { props: { open: true }, sync: false });
     await asyncExpect(() => {
       wrapper.setProps({ value: birthday });
     });
@@ -69,7 +69,7 @@ describe('MonthPicker and WeekPicker', () => {
 
   it('render WeekPicker', async () => {
     const birthday = moment('2000-01-01', 'YYYY-MM-DD').locale('zh-cn');
-    const wrapper = mount(WeekPicker, { propsData: { open: true }, sync: false });
+    const wrapper = mount(WeekPicker, { props: { open: true }, sync: false });
     await asyncExpect(() => {
       wrapper.setProps({ value: birthday });
     });

@@ -59,7 +59,7 @@ describe('Carousel', () => {
 
   it('should trigger autoPlay after window resize', async () => {
     const props = {
-      propsData: {
+      props: {
         autoplay: true,
       },
       slots: {
@@ -77,7 +77,7 @@ describe('Carousel', () => {
 
   it('cancel resize listener when unmount', async () => {
     const props = {
-      propsData: {
+      props: {
         autoplay: true,
       },
       slots: {
@@ -89,7 +89,7 @@ describe('Carousel', () => {
     const { onWindowResized } = wrapper.vm;
     const spy = jest.spyOn(wrapper.vm.onWindowResized, 'cancel');
     const spy2 = jest.spyOn(window, 'removeEventListener');
-    wrapper.destroy();
+    wrapper.unmount();
     expect(spy).toHaveBeenCalled();
     expect(spy2).toHaveBeenCalledWith('resize', onWindowResized);
   });

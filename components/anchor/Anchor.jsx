@@ -88,6 +88,8 @@ export const AnchorProps = {
   wrapperStyle: PropTypes.object,
   getCurrentAnchor: PropTypes.func,
   targetOffset: PropTypes.number,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export default {

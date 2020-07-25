@@ -24,7 +24,7 @@ describe('Input', () => {
 
   it('should not support allowClear when it is disabled', () => {
     const wrapper = mount(Input, {
-      propsData: { allowClear: true, defaultValue: '111', disabled: true },
+      props: { allowClear: true, defaultValue: '111', disabled: true },
       sync: false,
     });
     expect(wrapper.findAll('.ant-input-clear-icon').length).toBe(0);
@@ -36,7 +36,7 @@ focusTest(TextArea);
 describe('TextArea', () => {
   it('should auto calculate height according to content length', async () => {
     const wrapper = mount(TextArea, {
-      propsData: { value: '', readonly: true, autoSize: true },
+      props: { value: '', readonly: true, autoSize: true },
       sync: false,
     });
 
@@ -57,7 +57,7 @@ describe('TextArea', () => {
   });
 
   it('should support disabled', async () => {
-    const wrapper = mount(TextArea, { propsData: { disabled: true }, sync: false });
+    const wrapper = mount(TextArea, { props: { disabled: true }, sync: false });
     await asyncExpect(() => {
       expect(wrapper.html()).toMatchSnapshot();
     });
@@ -115,7 +115,7 @@ describe('As Form Control', () => {
 
 describe('Input.Search', () => {
   it('should support suffix', async () => {
-    const wrapper = mount(Input.Search, { propsData: { suffix: 'suffix' }, sync: false });
+    const wrapper = mount(Input.Search, { props: { suffix: 'suffix' }, sync: false });
     await asyncExpect(() => {
       expect(wrapper.html()).toMatchSnapshot();
     });

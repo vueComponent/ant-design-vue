@@ -54,7 +54,7 @@ describe('Menu', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
       expect($$('.ant-menu-submenu-selected').length).toBe(1);
@@ -75,7 +75,7 @@ describe('Menu', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none');
@@ -97,7 +97,7 @@ describe('Menu', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none');
@@ -119,7 +119,7 @@ describe('Menu', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none');
@@ -149,7 +149,7 @@ describe('Menu', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none');
@@ -188,7 +188,7 @@ describe('Menu', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].style.display).not.toBe('none');
@@ -226,7 +226,7 @@ describe('Menu', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none');
@@ -258,7 +258,7 @@ describe('Menu', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     wrapper.vm.$forceUpdate();
     // just expect no error emit
@@ -285,7 +285,7 @@ describe('Menu', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
       expect($$('ul.ant-menu-sub')[0].style.display).not.toBe('none');
@@ -329,7 +329,7 @@ describe('Menu', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
       expect(
@@ -399,7 +399,7 @@ describe('Menu', () => {
           );
         },
       },
-      { attachToDocument: true, sync: false },
+      { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
       expect(wrapper.findAll('.ant-menu-sub').length).toBe(0);
@@ -464,7 +464,7 @@ describe('Menu', () => {
             );
           },
         },
-        { attachToDocument: true, sync: false },
+        { attachTo: 'body', sync: false },
       );
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(0);
@@ -495,7 +495,7 @@ describe('Menu', () => {
             );
           },
         },
-        { attachToDocument: true, sync: false },
+        { attachTo: 'body', sync: false },
       );
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(0);
@@ -526,7 +526,7 @@ describe('Menu', () => {
             );
           },
         },
-        { attachToDocument: true, sync: false },
+        { attachTo: 'body', sync: false },
       );
       await asyncExpect(() => {
         expect($$('.ant-menu-sub').length).toBe(0);
@@ -564,7 +564,7 @@ describe('Menu', () => {
           );
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
 
     wrapper.find('.ant-menu-item').trigger('mouseenter');

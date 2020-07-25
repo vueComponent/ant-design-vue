@@ -63,7 +63,7 @@ describe('Badge', () => {
 
   it('should render when count is changed', async () => {
     const wrapper = mount(Badge, {
-      propsData: {
+      props: {
         count: 9,
       },
       sync: false,

@@ -14,7 +14,7 @@ describe('DropdownButton', () => {
     };
 
     const wrapper = mount(Dropdown.Button, {
-      propsData: props,
+      props,
       listeners: {
         visibleChange: () => {},
       },

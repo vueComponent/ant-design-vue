@@ -34,7 +34,7 @@ describe('Spin', () => {
 
   it('should be controlled by spinning', async () => {
     const props = {
-      propsData: {
+      props: {
         spinning: false,
       },
       sync: false,

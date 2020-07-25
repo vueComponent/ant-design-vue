@@ -109,7 +109,7 @@ describe('DatePicker', () => {
       },
     };
 
-    const wrapper = mount(Test, { sync: false, attachToDocument: true });
+    const wrapper = mount(Test, { sync: false, attachTo: 'body' });
     await asyncExpect(() => {
       // clear input
       clearInput(wrapper);
@@ -143,7 +143,7 @@ describe('DatePicker', () => {
           return <DatePicker onChange={handleChange} />;
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
       openPanel(wrapper);
@@ -169,7 +169,7 @@ describe('DatePicker', () => {
   });
 
   it('clear input', async () => {
-    const wrapper = mount(DatePicker, { sync: false, attachToDocument: true });
+    const wrapper = mount(DatePicker, { sync: false, attachTo: 'body' });
     await asyncExpect(() => {
       openPanel(wrapper);
     }, 0);

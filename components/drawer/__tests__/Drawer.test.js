@@ -37,7 +37,7 @@ const DrawerCom = {
 describe('Drawer', () => {
   it('render correctly', async () => {
     const props = {
-      propsData: {
+      props: {
         visible: true,
         width: 400,
         getContainer: false,
@@ -55,7 +55,7 @@ describe('Drawer', () => {
 
   it('render top drawer', async () => {
     const props = {
-      propsData: {
+      props: {
         visible: true,
         height: 400,
         placement: 'top',
@@ -74,7 +74,7 @@ describe('Drawer', () => {
 
   it('have a title', async () => {
     const props = {
-      propsData: {
+      props: {
         visible: true,
         title: 'Test Title',
         getContainer: false,
@@ -92,7 +92,7 @@ describe('Drawer', () => {
 
   it('closable is false', async () => {
     const props = {
-      propsData: {
+      props: {
         visible: true,
         closable: false,
         getContainer: false,
@@ -110,7 +110,7 @@ describe('Drawer', () => {
 
   it('destroyOnClose is true', async () => {
     const props = {
-      propsData: {
+      props: {
         destroyOnClose: true,
         closable: false,
         getContainer: false,
@@ -128,7 +128,7 @@ describe('Drawer', () => {
 
   it('class is test_drawer', async () => {
     const props = {
-      propsData: {
+      props: {
         wrapClassName: 'test_drawer',
       },
       sync: false,

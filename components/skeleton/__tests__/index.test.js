@@ -6,7 +6,7 @@ import mountTest from '../../../tests/shared/mountTest';
 describe('Skeleton', () => {
   const genSkeleton = props => {
     const skeletonProps = {
-      propsData: {
+      props: {
         loading: true,
         ...props,
       },

@@ -14,7 +14,7 @@ describe('Tag', () => {
           return <Tag closable onClose={onClose} />;
         },
       },
-      { sync: false, attachToDocument: true },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
       expect(wrapper.findAll('.anticon-close').length).toBe(1);
@@ -50,7 +50,7 @@ describe('Tag', () => {
   });
   describe('visibility', () => {
     it('can be controlled by visible with visible as initial value', async () => {
-      const wrapper = mount(Tag, { propsData: { visible: true }, sync: false });
+      const wrapper = mount(Tag, { props: { visible: true }, sync: false });
       await asyncExpect(() => {
         expect(wrapper.html()).toMatchSnapshot();
         wrapper.setProps({ visible: false });
@@ -65,7 +65,7 @@ describe('Tag', () => {
     });
 
     it('can be controlled by visible with hidden as initial value', async () => {
-      const wrapper = mount(Tag, { propsData: { visible: false }, sync: false });
+      const wrapper = mount(Tag, { props: { visible: false }, sync: false });
       await asyncExpect(() => {
         expect(wrapper.html()).toMatchSnapshot();
         wrapper.setProps({ visible: true });

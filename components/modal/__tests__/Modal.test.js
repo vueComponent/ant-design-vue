@@ -37,7 +37,7 @@ describe('Modal', () => {
       },
       {
         sync: false,
-        attachToDocument: true,
+        attachTo: 'body',
       },
     );
     await asyncExpect(() => {
@@ -46,7 +46,7 @@ describe('Modal', () => {
     // https://github.com/vuejs/vue-test-utils/issues/624
     const wrapper1 = mount(ModalTester, {
       sync: false,
-      attachToDocument: true,
+      attachTo: 'body',
     });
     wrapper1.setProps({ visible: true });
     await asyncExpect(() => {
@@ -61,7 +61,7 @@ describe('Modal', () => {
           return <ModalTester visible footer={null} />;
         },
       },
-      { attachToDocument: true, sync: true },
+      { attachTo: 'body', sync: true },
     );
     await asyncExpect(() => {
       expect(wrapper.html()).toMatchSnapshot();

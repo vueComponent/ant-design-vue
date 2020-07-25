@@ -90,7 +90,7 @@ describe('Breadcrumb', () => {
         breadcrumbName: 'second',
       },
     ];
-    const wrapper = mount(Breadcrumb, { propsData: { routes } });
+    const wrapper = mount(Breadcrumb, { props: { routes } });
     expect(wrapper.html()).toMatchSnapshot();
   });
 

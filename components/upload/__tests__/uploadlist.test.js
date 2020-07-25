@@ -38,7 +38,7 @@ describe('Upload List', () => {
   });
   it('should use file.thumbUrl for <img /> in priority', done => {
     const props = {
-      propsData: {
+      props: {
         defaultFileList: fileList,
         listType: 'picture',
         action: '',
@@ -79,7 +79,7 @@ describe('Upload List', () => {
       },
     ];
     const props = {
-      propsData: {
+      props: {
         defaultFileList: list,
         action: '',
       },
@@ -105,7 +105,7 @@ describe('Upload List', () => {
 
   it('should be uploading when upload a file', done => {
     const props = {
-      propsData: {
+      props: {
         action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         customRequest: successRequest,
       },
@@ -141,7 +141,7 @@ describe('Upload List', () => {
 
   it('handle error', done => {
     const props = {
-      propsData: {
+      props: {
         action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         customRequest: errorRequest,
       },
@@ -174,7 +174,7 @@ describe('Upload List', () => {
   it('does concat filelist when beforeUpload returns false', done => {
     const handleChange = jest.fn();
     const props = {
-      propsData: {
+      props: {
         action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
         listType: 'picture',
         defaultFileList: fileList,
@@ -279,7 +279,7 @@ describe('Upload List', () => {
   it('should support onPreview', done => {
     const handlePreview = jest.fn();
     const props = {
-      propsData: {
+      props: {
         defaultFileList: fileList,
         listType: 'picture-card',
         action: '',
@@ -312,7 +312,7 @@ describe('Upload List', () => {
     const handleRemove = jest.fn();
     const handleChange = jest.fn();
     const props = {
-      propsData: {
+      props: {
         defaultFileList: fileList,
         listType: 'picture-card',
         action: '',
@@ -352,7 +352,7 @@ describe('Upload List', () => {
     delete newFile.thumbUrl;
     newFileList.push(newFile);
     const props = {
-      propsData: {
+      props: {
         defaultFileList: newFileList,
         listType: 'picture-card',
         action: '',
@@ -438,7 +438,7 @@ describe('Upload List', () => {
       },
     ];
     const props = {
-      propsData: {
+      props: {
         defaultFileList: list,
         listType: 'picture',
         action: '',

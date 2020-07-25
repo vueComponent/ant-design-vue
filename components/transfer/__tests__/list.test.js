@@ -27,7 +27,7 @@ const listCommonProps = {
 describe('List', () => {
   it('should render correctly', () => {
     const props = {
-      propsData: listCommonProps,
+      props: listCommonProps,
     };
     const wrapper = renderToString(List, props);
     expect(wrapper).toMatchSnapshot();
@@ -35,7 +35,7 @@ describe('List', () => {
 
   it('should check top Checkbox while all available items are checked', () => {
     const props = {
-      propsData: {
+      props: {
         ...listCommonProps,
         checkedKeys: ['a', 'b'],
       },

@@ -223,7 +223,7 @@ describe('Radio', () => {
     ];
 
     const wrapper = mount(RadioGroup, {
-      propsData: {
+      props: {
         prefixCls: 'my-radio',
         options,
       },

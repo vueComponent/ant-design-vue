@@ -55,7 +55,7 @@ describe('Table', () => {
       },
     ];
     const wrapper = shallow(Table, {
-      propsData: {
+      props: {
         columns,
       },
       sync: false,
@@ -80,7 +80,7 @@ describe('Table', () => {
       delay: 500,
     };
     const wrapper = mount(Table, {
-      propsData: {
+      props: {
         loading,
       },
       sync: false,
@@ -117,7 +117,7 @@ describe('Table', () => {
       },
     ];
     const wrapper = mount(Table, {
-      propsData: {
+      props: {
         columns,
         dataSource: data,
       },

@@ -12,9 +12,9 @@ describe('Checkbox', () => {
     const onMouseLeave = jest.fn();
 
     const wrapper = mount(Checkbox, {
-      listeners: {
-        mouseenter: onMouseEnter,
-        mouseleave: onMouseLeave,
+      props: {
+        onMouseenter: onMouseEnter,
+        onMouseleave: onMouseLeave,
       },
     });
 

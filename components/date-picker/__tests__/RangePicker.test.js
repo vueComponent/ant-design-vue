@@ -349,8 +349,8 @@ describe('RangePicker', () => {
     const wrapper = mount(RangePicker, {
       props: {
         ranges: { 'recent two days': range },
+        onOk: handleOk,
       },
-      listeners: { ok: handleOk },
       sync: false,
       attachTo: 'body',
     });

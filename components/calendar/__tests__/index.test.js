@@ -202,9 +202,7 @@ describe('Calendar', () => {
     const wrapper = mount(Calendar, {
       props: {
         mode: yearMode,
-      },
-      listeners: {
-        panelChange: onPanelChangeStub,
+        onPanelChange: onPanelChangeStub,
       },
       sync: false,
     });
@@ -240,9 +238,7 @@ describe('Calendar', () => {
     const wrapper = mount(Calendar, {
       props: {
         value: date,
-      },
-      listeners: {
-        panelChange: onPanelChange,
+        onPanelChange,
       },
       sync: false,
     });
@@ -261,9 +257,7 @@ describe('Calendar', () => {
     const wrapper = mount(Calendar, {
       props: {
         value: date,
-      },
-      listeners: {
-        panelChange: onPanelChange,
+        onPanelChange,
       },
       sync: false,
     });

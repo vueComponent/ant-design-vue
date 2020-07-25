@@ -11,13 +11,11 @@ describe('DropdownButton', () => {
       disabled: false,
       trigger: ['hover'],
       visible: true,
+      onVisibleChange: () => {},
     };
 
     const wrapper = mount(Dropdown.Button, {
       props,
-      listeners: {
-        visibleChange: () => {},
-      },
     });
     const dropdownProps = wrapper.find({ name: 'ADropdown' }).props();
 

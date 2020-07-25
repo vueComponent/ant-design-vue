@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import Vue from 'vue';
+import * as Vue from 'vue';
 import Mentions from '..';
 import focusTest from '../../../tests/shared/focusTest';
 

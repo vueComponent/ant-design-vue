@@ -1,5 +1,4 @@
 import { inject, provide } from 'vue';
-import antRef from '../_util/ant-ref';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
 import {
@@ -40,7 +39,6 @@ const ALL_HANDLERS = [
 
 export default {
   name: 'Trigger',
-  directives: { 'ant-ref': antRef },
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: {

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import Vue from 'vue';
+import * as Vue from 'vue';
 import AutoComplete from '..';
 import focusTest from '../../../tests/shared/focusTest';
 
@@ -26,18 +26,8 @@ describe('AutoComplete with Custom Input Element Render', () => {
     input.element.value = '123';
     input.trigger('input');
     Vue.nextTick(() => {
-      mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
-      Vue.nextTick(() => {
-        expect($$('.ant-select-dropdown-menu-item').length).toBe(3);
-        done();
-      });
+      expect($$('.ant-select-dropdown-menu-item').length).toBe(3);
+      done();
     });
   });
 });

@@ -1,4 +1,4 @@
-import Vue from 'vue';
+import * as Vue from 'vue';
 import { mount } from '@vue/test-utils';
 import createStore from '../createStore';
 import SelectionBox from '../SelectionBox';

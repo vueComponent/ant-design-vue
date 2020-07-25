@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { renderToString } from '@vue/server-test-utils';
 import Transfer from '..';
-import Vue from 'vue';
+import * as Vue from 'vue';
 import { asyncExpect } from '@/tests/utils';
 import mountTest from '../../../tests/shared/mountTest';
 

@@ -27,9 +27,7 @@ describe('BackTop', () => {
     const wrapper = mount(BackTop, {
       props: {
         visibilityHeight: -1,
-      },
-      listeners: {
-        click: onClick,
+        onClick,
       },
     });
     const scrollToSpy = jest.spyOn(window, 'scrollTo').mockImplementation((x, y) => {

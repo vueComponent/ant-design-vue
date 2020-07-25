@@ -1,3 +1,4 @@
+import { inject, Transition } from 'vue';
 import PropTypes from '../_util/vue-types';
 import backTopTypes from './backTopTypes';
 import addEventListener from '../vc-util/Dom/addEventListener';
@@ -6,7 +7,6 @@ import BaseMixin from '../_util/BaseMixin';
 import getTransitionProps from '../_util/getTransitionProps';
 import { ConfigConsumerProps } from '../config-provider';
 import scrollTo from '../_util/scrollTo';
-import { inject } from 'vue';
 
 function getDefaultTarget() {
   return window;
@@ -92,7 +92,7 @@ const BackTop = {
       <div {...divProps}>{($slots.default && $slots.default()) || defaultElement}</div>
     ) : null;
     const transitionProps = getTransitionProps('fade');
-    return <transition {...transitionProps}>{backTopBtn}</transition>;
+    return <Transition {...transitionProps}>{backTopBtn}</Transition>;
   },
 };
 

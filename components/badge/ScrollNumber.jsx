@@ -26,6 +26,7 @@ const ScrollNumberProps = {
   component: PropTypes.string,
   title: PropTypes.oneOfType([PropTypes.number, PropTypes.string, null]),
   displayComponent: PropTypes.any,
+  onAnimated: PropTypes.func,
 };
 
 export default {
@@ -65,7 +66,7 @@ export default {
             animateStarted: false,
             sCount: count,
           },
-          this.onAnimated,
+          this.handleAnimated,
         );
       });
     }
@@ -102,7 +103,7 @@ export default {
       }
       return num;
     },
-    onAnimated() {
+    handleAnimated() {
       this.$emit('animated');
     },
 
@@ -165,11 +166,20 @@ export default {
     const { class: className, style = {} } = this.$attrs;
     if (displayComponent) {
       return cloneElement(displayComponent, {
-        class: `${prefixCls}-custom-component`,
+        class: classNames(
+          `${prefixCls}-custom-component`,
+          displayComponent.props && displayComponent.props.class,
+        ),
       });
     }
     // fix https://fb.me/react-unknown-prop
-    const restProps = omit(this.$props, ['count', 'component', 'prefixCls', 'displayComponent']);
+    const restProps = omit({ ...this.$props, ...this.$attrs }, [
+      'count',
+      'onAnimated',
+      'component',
+      'prefixCls',
+      'displayComponent',
+    ]);
     const tempStyle = { ...style };
     const newProps = {
       ...restProps,

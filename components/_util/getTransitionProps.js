@@ -4,10 +4,10 @@ const getTransitionProps = (transitionName, opt = {}) => {
     appear: true,
     css: false,
     onEnter: (el, done) => {
-      animate(el, `${transitionName}-enter`, done);
+      transitionName ? animate(el, `${transitionName}-enter`, done) : done();
     },
     onLeave: (el, done) => {
-      animate(el, `${transitionName}-leave`, done);
+      transitionName ? animate(el, `${transitionName}-leave`, done) : done();
     },
     ...opt,
   };

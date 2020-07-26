@@ -1,4 +1,4 @@
-import { inject, cloneVNode, createVNode } from 'vue';
+import { inject, cloneVNode } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, getComponent, getSlot } from '../_util/props-util';
 import warning from '../_util/warning';
@@ -71,6 +71,7 @@ export default {
         if (path) {
           paths.push(path);
         }
+        const tempPaths = [...paths];
         // generated overlay by route.children
         let overlay = null;
         if (route.children && route.children.length) {
@@ -82,8 +83,7 @@ export default {
                     route: child,
                     params,
                     routes,
-                    paths: this.addChildPath(paths, child.path, params),
-                    h: createVNode,
+                    paths: this.addChildPath(tempPaths, child.path, params),
                   })}
                 </Menu.Item>
               ))}
@@ -97,7 +97,7 @@ export default {
             separator={separator}
             key={route.breadcrumbName || path}
           >
-            {itemRender({ route, params, routes, paths, h: createVNode })}
+            {itemRender({ route, params, routes, paths: tempPaths })}
           </BreadcrumbItem>
         );
       });

@@ -7,7 +7,7 @@ import antd from 'ant-design-vue/index.js';
 // eslint-disable-next-line no-console
 console.log('Vue version: ', version);
 const basic = (_, { slots }) => {
-  return slots?.default();
+  return slots && slots.default && slots.default();
 };
 const app = createApp(App);
 app

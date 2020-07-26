@@ -14,6 +14,11 @@ module.exports = {
       {
         test: /\.(vue|md)$/,
         loader: 'vue-loader',
+        exclude: /\.(en-US.md|zh-CN.md)$/,
+      },
+      {
+        test: /\.(en-US.md|zh-CN.md)$/,
+        use: [{ loader: 'vue-loader' }, { loader: './loader.js' }],
       },
       {
         test: /\.(js|jsx)$/,

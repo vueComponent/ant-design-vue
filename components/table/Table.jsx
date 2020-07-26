@@ -936,7 +936,7 @@ export default {
         size = 'small';
       }
       const position = pagination.position || 'bottom';
-      const total = pagination.total || this.filterDataCnt;
+      const total = this.filterDataCnt;
       const { class: cls, style, onChange, onShowSizeChange, ...restProps } = pagination; // eslint-disable-line
       const paginationProps = mergeProps({
         key: `pagination-${paginationPosition}`,

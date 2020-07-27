@@ -29,6 +29,7 @@ export default {
     activeTabKey: PropTypes.string,
     defaultActiveTabKey: PropTypes.string,
     cover: PropTypes.any,
+    onTabChange: PropTypes.func,
   },
   setup() {
     return {
@@ -51,7 +52,7 @@ export default {
       );
       return actionList;
     },
-    onTabChange(key) {
+    triggerTabChange(key) {
       this.$emit('tabChange', key);
     },
     isContainGrid(obj = []) {
@@ -150,7 +151,7 @@ export default {
         ? activeTabKey
         : defaultActiveTabKey,
       tabBarExtraContent,
-      onChange: this.onTabChange,
+      onChange: this.triggerTabChange,
       class: `${prefixCls}-head-tabs`,
     };
 

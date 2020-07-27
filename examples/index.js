@@ -16,5 +16,6 @@ app
   .component('api', basic)
   .component('CN', basic)
   .component('US', basic)
+  .component('demo-container', basic)
   .use(antd)
   .mount('#app');

@@ -113,3 +113,9 @@ customRender( text, record, index, column ); => customRender({ text, record, ind
 expandedRowRender(record, index, indent, expanded) => expandedRowRender({ record, index, indent, expanded })
 
 filterIcon(filtered, column) => filterIcon({ filtered, column })
+
+## calendar
+
+dateCellRender、dateFullCellRender、monthCellRender、monthFullCellRender
+
+function (date, today?) => function({current, today?})

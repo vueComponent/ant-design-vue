@@ -12,7 +12,7 @@ function $$(className) {
 }
 describe('Calendar', () => {
   mountTest(Calendar);
-  beforeAll(() => {
+  beforeEach(() => {
     document.body.innerHTML = '';
   });
   it('Calendar should be selectable', async () => {
@@ -26,10 +26,7 @@ describe('Calendar', () => {
       { sync: false },
     );
     await asyncExpect(() => {
-      wrapper
-        .findAll('.ant-fullcalendar-cell')
-        .at(0)
-        .trigger('click');
+      wrapper.findAll('.ant-fullcalendar-cell')[0].trigger('click');
     });
     await asyncExpect(() => {
       expect(onSelect).toHaveBeenCalledWith(expect.anything());
@@ -56,14 +53,8 @@ describe('Calendar', () => {
       { sync: false },
     );
     await asyncExpect(() => {
-      wrapper
-        .findAll('[title="February 1, 2018"]')
-        .at(0)
-        .trigger('click');
-      wrapper
-        .findAll('[title="February 2, 2018"]')
-        .at(0)
-        .trigger('click');
+      wrapper.findAll('[title="February 1, 2018"]')[0].trigger('click');
+      wrapper.findAll('[title="February 2, 2018"]')[0].trigger('click');
       expect(onSelect.mock.calls.length).toBe(1);
     });
   });
@@ -86,10 +77,7 @@ describe('Calendar', () => {
       { sync: false },
     );
     await asyncExpect(() => {
-      wrapper
-        .findAll('[title="February 20, 2018"]')
-        .at(0)
-        .trigger('click');
+      wrapper.findAll('[title="February 20, 2018"]')[0].trigger('click');
       expect(wrapper.find('[title="February 20, 2018"]').classes()).toContain(
         'ant-fullcalendar-disabled-cell',
       );
@@ -116,32 +104,17 @@ describe('Calendar', () => {
       { sync: false },
     );
     await asyncExpect(() => {
-      expect(
-        wrapper
-          .findAll('[title="Jan"]')
-          .at(0)
-          .classes(),
-      ).toContain('ant-fullcalendar-month-panel-cell-disabled');
-      expect(
-        wrapper
-          .findAll('[title="Feb"]')
-          .at(0)
-          .classes(),
-      ).not.toContain('ant-fullcalendar-month-panel-cell-disabled');
-      expect(
-        wrapper
-          .findAll('[title="Jun"]')
-          .at(0)
-          .classes(),
-      ).toContain('ant-fullcalendar-month-panel-cell-disabled');
-      wrapper
-        .findAll('[title="Jan"]')
-        .at(0)
-        .trigger('click');
-      wrapper
-        .findAll('[title="Mar"]')
-        .at(0)
-        .trigger('click');
+      expect(wrapper.findAll('[title="Jan"]')[0].classes()).toContain(
+        'ant-fullcalendar-month-panel-cell-disabled',
+      );
+      expect(wrapper.findAll('[title="Feb"]')[0].classes()).not.toContain(
+        'ant-fullcalendar-month-panel-cell-disabled',
+      );
+      expect(wrapper.findAll('[title="Jun"]')[0].classes()).toContain(
+        'ant-fullcalendar-month-panel-cell-disabled',
+      );
+      wrapper.findAll('[title="Jan"]')[0].trigger('click');
+      wrapper.findAll('[title="Mar"]')[0].trigger('click');
       expect(onSelect.mock.calls.length).toBe(1);
     });
   });
@@ -186,13 +159,11 @@ describe('Calendar', () => {
     const monthMode = 'month';
     const yearMode = 'year';
     const wrapper = mount(Calendar, { sync: false });
-    await asyncExpect(() => {
-      expect(wrapper.vm.sMode).toEqual(monthMode);
-      wrapper.setProps({ mode: 'year' });
-    });
-    await asyncExpect(() => {
-      expect(wrapper.vm.sMode).toEqual(yearMode);
-    });
+    await sleep(50);
+    expect(wrapper.vm.sMode).toEqual(monthMode);
+    wrapper.setProps({ mode: 'year' });
+    await sleep(50);
+    expect(wrapper.vm.sMode).toEqual(yearMode);
   });
 
   it('Calendar should switch mode', async () => {
@@ -242,10 +213,7 @@ describe('Calendar', () => {
       },
       sync: false,
     });
-    wrapper
-      .findAll('.ant-fullcalendar-cell')
-      .at(0)
-      .trigger('click');
+    wrapper.findAll('.ant-fullcalendar-cell')[0].trigger('click');
 
     expect(onPanelChange).toHaveBeenCalled();
     expect(onPanelChange.mock.calls[0][0].month()).toEqual(date.month() - 1);
@@ -260,12 +228,14 @@ describe('Calendar', () => {
         onPanelChange,
       },
       sync: false,
+      attachTo: 'body',
     });
+    await sleep(300);
     expect(wrapper.vm.sMode).toBe('month');
     expect(wrapper.findAll('.ant-fullcalendar-table').length).toBe(1);
     expect(wrapper.findAll('.ant-fullcalendar-month-panel-table').length).toBe(0);
-    wrapper.findAll('.ant-radio-button-input[value="year"]').trigger('change');
-    await sleep(50);
+    await wrapper.findAll('.ant-radio-button-input[value="year"]')[0].trigger('change');
+    await sleep(300);
     expect(wrapper.findAll('.ant-fullcalendar-table').length).toBe(0);
     expect(wrapper.findAll('.ant-fullcalendar-month-panel-table').length).toBe(1);
     expect(onPanelChange).toHaveBeenCalled();
@@ -293,10 +263,7 @@ describe('Calendar', () => {
       },
     );
     await sleep(50);
-    wrapper
-      .findAll('.ant-fullcalendar-year-select')
-      .at(0)
-      .trigger('click');
+    wrapper.findAll('.ant-fullcalendar-year-select')[0].trigger('click');
     await sleep(50);
     $$('.ant-select-dropdown-menu-item')[0].click();
     await sleep(50);
@@ -353,15 +320,9 @@ describe('Calendar', () => {
       },
     );
     await sleep(50);
-    wrapper
-      .findAll('.ant-fullcalendar-month-select')
-      .at(0)
-      .trigger('click');
+    wrapper.findAll('.ant-fullcalendar-month-select')[0].trigger('click');
     await sleep(50);
-    wrapper
-      .findAll('.ant-select-dropdown-menu-item')
-      .at(0)
-      .trigger('click');
+    wrapper.findAll('.ant-select-dropdown-menu-item')[0].trigger('click');
     await sleep(50);
     expect(onValueChange).toHaveBeenCalledWith(value.month(10));
   });
@@ -381,10 +342,7 @@ describe('Calendar', () => {
         );
       },
     });
-    wrapper
-      .findAll('input')
-      .at(1)
-      .trigger('change');
+    wrapper.findAll('input')[1].trigger('change');
     expect(onTypeChange).toHaveBeenCalledWith('year');
   });
 });

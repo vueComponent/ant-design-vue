@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/affix/demo/index';
+import demo from '../antdv-demo/docs/calendar/demo/index';
 
 export default {
   components: {

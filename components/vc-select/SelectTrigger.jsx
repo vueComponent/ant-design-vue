@@ -90,7 +90,7 @@ export default {
     setDropdownWidth() {
       this.cancelRafInstance();
       this.rafInstance = raf(() => {
-        const width = findDOMNode(this).offsetWidth;
+        const width = findDOMNode(this)?.offsetWidth;
         if (width !== this.dropdownWidth) {
           this.setState({ dropdownWidth: width });
         }

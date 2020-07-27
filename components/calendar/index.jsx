@@ -111,10 +111,13 @@ const Calendar = {
         this.setState({ sValue: value });
       }
       if (way === 'select') {
+        const val = valueFormat ? momentToString(value, valueFormat) : value;
         if (prevValue && prevValue.month() !== value.month()) {
           this.triggerPanelChange(value, mode);
+        } else {
+          this.$emit('update:value', val);
         }
-        this.$emit('select', valueFormat ? momentToString(value, valueFormat) : value);
+        this.$emit('select', val);
       } else if (way === 'changePanel') {
         this.triggerPanelChange(value, mode);
       }

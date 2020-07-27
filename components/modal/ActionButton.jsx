@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import Button from '../button';
 import BaseMixin from '../_util/BaseMixin';
 import buttonTypes from '../button/buttonTypes';
-import { getSlot } from '../_util/props-util';
+import { getSlot, findDOMNode } from '../_util/props-util';
 const ButtonType = buttonTypes().type;
 const ActionButtonProps = {
   type: ButtonType,
@@ -22,7 +22,7 @@ export default {
   },
   mounted() {
     if (this.autofocus) {
-      this.timeoutId = setTimeout(() => this.$el.focus());
+      this.timeoutId = setTimeout(() => findDOMNode(this).focus());
     }
   },
   beforeUnmount() {

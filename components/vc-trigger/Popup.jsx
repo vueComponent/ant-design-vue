@@ -65,13 +65,6 @@ export default {
       this.setStretchSize();
     });
   },
-  // beforeUnmount() {
-  //   if (this.$el.parentNode) {
-  //     this.$el.parentNode.removeChild(this.$el);
-  //   } else if (this.$el.remove) {
-  //     this.$el.remove();
-  //   }
-  // },
   methods: {
     onAlign(popupDomNode, align) {
       const props = this.$props;

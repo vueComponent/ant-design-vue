@@ -3,7 +3,7 @@ import BaseMixin from '../../_util/BaseMixin';
 import classNames from 'classnames';
 import getUid from './uid';
 import warning from '../../_util/warning';
-import { getSlot } from '../../_util/props-util';
+import { getSlot, findDOMNode } from '../../_util/props-util';
 
 const IFRAME_STYLE = {
   position: 'absolute',
@@ -195,7 +195,7 @@ const IframeUploader = {
       }
     },
     updateIframeWH() {
-      const rootNode = this.$el;
+      const rootNode = findDOMNode(this);
       const iframeNode = this.getIframeNode();
       iframeNode.style.height = `${rootNode.offsetHeight}px`;
       iframeNode.style.width = `${rootNode.offsetWidth}px`;

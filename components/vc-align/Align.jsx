@@ -47,7 +47,7 @@ export default {
       const props = this.$props;
       let reAlign = false;
       if (!props.disabled) {
-        const source = this.$el;
+        const source = findDOMNode(this);
         const sourceRect = source ? source.getBoundingClientRect() : null;
 
         if (prevProps.disabled) {

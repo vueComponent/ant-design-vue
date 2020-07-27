@@ -2,6 +2,7 @@ import { nextTick, inject } from 'vue';
 import TransitionEvents from './css-animation/Event';
 import raf from './raf';
 import { ConfigConsumerProps } from '../config-provider';
+import { findDOMNode } from './props-util';
 let styleForPesudo;
 
 // Where el is the DOM element you'd like to test for visibility
@@ -24,7 +25,7 @@ export default {
   props: ['insertExtraNode'],
   mounted() {
     nextTick(() => {
-      const node = this.$el;
+      const node = findDOMNode(this);
       if (node.nodeType !== 1) {
         return;
       }
@@ -90,7 +91,7 @@ export default {
     onTransitionStart(e) {
       if (this.destroy) return;
 
-      const node = this.$el;
+      const node = findDOMNode(this);
       if (!e || e.target !== node) {
         return;
       }

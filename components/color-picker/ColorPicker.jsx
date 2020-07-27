@@ -7,7 +7,7 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import enUS from './locale/en_US';
 import debounce from 'lodash/debounce';
 
-import { getOptionProps } from '../_util/props-util';
+import { getOptionProps, findDOMNode } from '../_util/props-util';
 let colors = '#194d33';
 export default {
   name: 'AColorPicker',
@@ -90,7 +90,7 @@ export default {
       this.pickr.destroyAndRemove();
       const dom = document.createElement('div');
       dom.id = 'color-picker' + this._uid;
-      const box = this.$el.querySelector('#color-picker-box' + this._uid);
+      const box = findDOMNode(this).querySelector('#color-picker-box' + this._uid);
       box.appendChild(dom);
       this.createPickr();
       this.eventsBinding();
@@ -122,7 +122,7 @@ export default {
         Object.assign(
           {
             el: '#color-picker' + this._uid,
-            container: (container && container(this.$el)) || document.body,
+            container: (container && container(findDOMNode(this))) || document.body,
             theme: 'monolith', // or 'monolith', or 'nano'
             default: this.value || this.defaultValue || null, // 有默认颜色pickr才可以获取到_representation
             components: {

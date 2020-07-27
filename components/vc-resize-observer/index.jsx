@@ -1,6 +1,7 @@
 // based on rc-resize-observer 0.1.3
 import ResizeObserver from 'resize-observer-polyfill';
 import BaseMixin from '../_util/BaseMixin';
+import { findDOMNode } from '../_util/props-util';
 
 // Still need to be compatible with React 15, we use class component here
 const VueResizeObserver = {
@@ -40,7 +41,7 @@ const VueResizeObserver = {
       }
 
       // Unregister if element changed
-      const element = this.$el;
+      const element = findDOMNode(this);
       const elementChanged = element !== this.currentElement;
       if (elementChanged) {
         this.destroyObserver();

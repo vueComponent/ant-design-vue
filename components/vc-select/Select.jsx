@@ -15,6 +15,7 @@ import {
   getEvents,
   getOptionProps,
   getSlot,
+  findDOMNode,
 } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
 import { cloneElement } from '../_util/vnode';
@@ -471,15 +472,12 @@ const Select = {
 
     onMenuDeselect({ item, domEvent }) {
       if (domEvent.type === 'keydown' && domEvent.keyCode === KeyCode.ENTER) {
-        const menuItemDomNode = item.$el;
+        const menuItemDomNode = findDOMNode(item);
         // https://github.com/ant-design/ant-design/issues/20465#issuecomment-569033796
         if (!isHidden(menuItemDomNode)) {
           this.removeSelected(getValuePropValue(item));
         }
         return;
-      }
-      if (domEvent.type === 'click') {
-        this.removeSelected(getValuePropValue(item));
       }
       if (this.autoClearSearchValue) {
         this.setInputValue('');
@@ -676,15 +674,13 @@ const Select = {
         (e.relatedTarget === this.$refs.arrow ||
           (target &&
             this.selectTriggerRef &&
-            this.selectTriggerRef.getInnerMenu() &&
-            this.selectTriggerRef.getInnerMenu().$el === target) ||
+            findDOMNode(this.selectTriggerRef.getInnerMenu()) === target) ||
           contains(e.target, target))
       ) {
         e.target.focus();
         e.preventDefault();
         return;
       }
-      this.clearBlurTime();
       if (this.disabled) {
         e.preventDefault();
         return;

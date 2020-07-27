@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
-import { isValidElement, initDefaultProps, splitAttrs } from '../_util/props-util';
+import { isValidElement, initDefaultProps, splitAttrs, findDOMNode } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import Checkbox from '../checkbox';
 import Search from './search';
@@ -230,7 +230,7 @@ export default {
       // Manually trigger scroll event for lazy search bug
       // https://github.com/ant-design/ant-design/issues/5631
       this.triggerScrollTimer = setTimeout(() => {
-        const transferNode = this.$el;
+        const transferNode = findDOMNode(this);
         const listNode = transferNode.querySelectorAll('.ant-transfer-list-content')[0];
         if (listNode) {
           triggerEvent(listNode, 'scroll');

@@ -1,5 +1,5 @@
 import { provide, Transition } from 'vue';
-import { initDefaultProps, getSlot } from '../_util/props-util';
+import { initDefaultProps, getSlot, findDOMNode } from '../_util/props-util';
 import KeyCode from '../_util/KeyCode';
 import contains from '../vc-util/Dom/contains';
 import LazyRenderBox from './LazyRenderBox';
@@ -116,7 +116,7 @@ export default {
           this.switchScrollingEffect();
           // this.$refs.wrap.focus()
           this.tryFocus();
-          const dialogNode = this.$refs.dialog.$el;
+          const dialogNode = findDOMNode(this.$refs.dialog);
           if (mousePosition) {
             const elOffset = offset(dialogNode);
             setTransformOrigin(

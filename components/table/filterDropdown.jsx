@@ -8,7 +8,7 @@ import Checkbox from '../checkbox';
 import Radio from '../radio';
 import FilterDropdownMenuWrapper from './FilterDropdownMenuWrapper';
 import { FilterMenuProps } from './interface';
-import { initDefaultProps, getOptionProps, isValidElement } from '../_util/props-util';
+import { initDefaultProps, getOptionProps, isValidElement, findDOMNode } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import BaseMixin from '../_util/BaseMixin';
 import { generateValueMaps } from './util';
@@ -98,7 +98,7 @@ export default {
       return this.neverShown ? false : this.sVisible;
     },
     setNeverShown(column) {
-      const rootNode = this.$el;
+      const rootNode = findDOMNode(this);
       const filterBelongToScrollBody = !!closest(rootNode, `.ant-table-scroll`);
       if (filterBelongToScrollBody) {
         // When fixed column have filters, there will be two dropdown menus

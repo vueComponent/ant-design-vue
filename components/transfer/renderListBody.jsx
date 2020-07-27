@@ -3,6 +3,7 @@ import raf from '../_util/raf';
 import ListItem from './ListItem';
 import PropTypes from '../_util/vue-types';
 import getTransitionProps from '../_util/getTransitionProps';
+import { findDOMNode } from '../_util/props-util';
 function noop() {}
 const ListBody = {
   name: 'ListBody',
@@ -29,7 +30,7 @@ const ListBody = {
       this.$nextTick(() => {
         const { lazy } = this.$props;
         if (lazy !== false) {
-          const container = this.$el;
+          const container = findDOMNode(this);
           raf.cancel(this.lazyId);
           this.lazyId = raf(() => {
             if (container) {

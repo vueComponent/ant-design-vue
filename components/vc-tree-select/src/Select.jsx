@@ -236,7 +236,7 @@ const Select = {
           if (treeNode) {
             const domNode = findDOMNode(treeNode);
             raf(() => {
-              const popupNode = this.popup.$el;
+              const popupNode = findDOMNode(this.popup);
               const triggerContainer = findPopupContainer(popupNode, `${prefixCls}-dropdown`);
               const searchNode = this.popup.searchRef.current;
 

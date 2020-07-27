@@ -1,6 +1,6 @@
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
-import { getOptionProps } from '../../../_util/props-util';
+import { getOptionProps, findDOMNode } from '../../../_util/props-util';
 import TodayButton from './TodayButton';
 import OkButton from './OkButton';
 import TimePickerButton from './TimePickerButton';
@@ -33,7 +33,7 @@ const CalendarFooter = {
     },
 
     getRootDOMNode() {
-      return this.$el;
+      return findDOMNode(this);
     },
   },
 

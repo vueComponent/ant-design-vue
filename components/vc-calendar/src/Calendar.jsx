@@ -1,6 +1,6 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { getOptionProps, hasProp, getComponent } from '../../_util/props-util';
+import { getOptionProps, hasProp, getComponent, findDOMNode } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import KeyCode from '../../_util/KeyCode';
 import moment from 'moment';
@@ -232,7 +232,7 @@ const Calendar = {
     },
 
     getRootDOMNode() {
-      return this.$el;
+      return findDOMNode(this);
     },
     openTimePicker() {
       this.onPanelChange(null, 'time');

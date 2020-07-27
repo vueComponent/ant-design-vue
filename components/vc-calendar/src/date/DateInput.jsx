@@ -1,6 +1,6 @@
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
-import { getComponent } from '../../../_util/props-util';
+import { getComponent, findDOMNode } from '../../../_util/props-util';
 import moment from 'moment';
 import { formatDate } from '../util';
 import KeyCode from '../../../_util/KeyCode';
@@ -164,7 +164,7 @@ const DateInput = {
       }
     },
     getRootDOMNode() {
-      return this.$el;
+      return findDOMNode(this);
     },
     focus() {
       if (dateInputInstance) {

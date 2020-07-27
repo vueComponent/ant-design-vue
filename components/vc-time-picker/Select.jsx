@@ -2,6 +2,7 @@ import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import classnames from 'classnames';
 import raf from 'raf';
+import { findDOMNode } from '../_util/props-util';
 
 function noop() {}
 const scrollTo = (element, to, duration) => {
@@ -109,7 +110,7 @@ const Select = {
 
     scrollToSelected(duration) {
       // move to selected item
-      const select = this.$el;
+      const select = findDOMNode(this);
       const list = this.$refs.list;
       if (!list) {
         return;

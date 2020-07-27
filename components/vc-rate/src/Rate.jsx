@@ -1,7 +1,13 @@
 import PropTypes from '../../_util/vue-types';
 import classNames from 'classnames';
 import KeyCode from '../../_util/KeyCode';
-import { initDefaultProps, hasProp, getOptionProps, getComponent } from '../../_util/props-util';
+import {
+  initDefaultProps,
+  hasProp,
+  getOptionProps,
+  getComponent,
+  findDOMNode,
+} from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import { getOffsetLeft } from './util';
 import Star from './Star';
@@ -129,7 +135,7 @@ export default {
       this.__emit('keydown', event);
     },
     getStarDOM(index) {
-      return this.$refs['stars' + index].$el;
+      return findDOMNode(this.$refs['stars' + index]);
     },
     getStarValue(index, x) {
       let value = index + 1;

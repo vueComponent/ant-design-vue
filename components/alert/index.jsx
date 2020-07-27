@@ -12,7 +12,7 @@ import classNames from 'classnames';
 import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
 import getTransitionProps from '../_util/getTransitionProps';
-import { getComponent, isValidElement } from '../_util/props-util';
+import { getComponent, isValidElement, findDOMNode } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 function noop() {}
@@ -74,7 +74,7 @@ const Alert = {
   methods: {
     handleClose(e) {
       e.preventDefault();
-      const dom = this.$el;
+      const dom = findDOMNode(this);
       dom.style.height = `${dom.offsetHeight}px`;
       // Magic code
       // 重复一次后才能正确设置 height

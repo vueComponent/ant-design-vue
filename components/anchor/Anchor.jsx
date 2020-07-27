@@ -5,7 +5,7 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 import Affix from '../affix';
 import scrollTo from '../_util/scrollTo';
 import getScroll from '../_util/getScroll';
-import { initDefaultProps } from '../_util/props-util';
+import { initDefaultProps, findDOMNode } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -253,7 +253,9 @@ export default {
         return;
       }
       const { _sPrefixCls } = this;
-      const linkNode = this.$el.getElementsByClassName(`${_sPrefixCls}-link-title-active`)[0];
+      const linkNode = findDOMNode(this).getElementsByClassName(
+        `${_sPrefixCls}-link-title-active`,
+      )[0];
       if (linkNode) {
         this.$refs.inkNode.style.top = `${linkNode.offsetTop + linkNode.clientHeight / 2 - 4.5}px`;
       }

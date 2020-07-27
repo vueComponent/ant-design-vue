@@ -73,7 +73,7 @@ export default {
   methods: {
     scrollActiveItemToView() {
       // scroll into view
-      const itemComponent = this.firstActiveItem && this.firstActiveItem.$el;
+      const itemComponent = this.firstActiveItem && findDOMNode(this.firstActiveItem);
       const props = this.$props;
       const { value, visible, firstActiveValue } = props;
       if (!itemComponent || !visible) {

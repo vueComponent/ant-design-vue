@@ -116,7 +116,7 @@ const getSlotOptions = () => {
   throw Error('使用 .type 直接取值');
 };
 const findDOMNode = instance => {
-  let node = instance.$el || instance;
+  let node = instance && (instance.$el || instance);
   while (node && !node.tagName) {
     node = node.nextSibling;
   }

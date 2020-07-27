@@ -173,7 +173,7 @@ const Carousel = {
     };
     return (
       <div class={className}>
-        <SlickCarousel ref="slick" {...SlickCarouselProps} vSlots={$slots}></SlickCarousel>
+        <SlickCarousel ref={this.saveSlick} {...SlickCarouselProps} vSlots={$slots}></SlickCarousel>
       </div>
     );
   },

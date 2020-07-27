@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/calendar/demo/index';
+import demo from '../antdv-demo/docs/carousel/demo/position';
 
 export default {
   components: {

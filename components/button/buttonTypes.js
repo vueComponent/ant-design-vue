@@ -11,4 +11,5 @@ export default () => ({
   ghost: PropTypes.bool,
   block: PropTypes.bool,
   icon: PropTypes.any,
+  onClick: PropTypes.func,
 });

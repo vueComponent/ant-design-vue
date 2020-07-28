@@ -9,7 +9,7 @@ const InputIcon = (_, { attrs }) => {
     (suffixIcon && isValidElement(suffixIcon) ? (
       cloneElement(suffixIcon, {
         class: classNames({
-          [suffixIcon.props?.class]: suffixIcon.props.class,
+          [suffixIcon.props?.class]: suffixIcon.props?.class,
           [`${prefixCls}-picker-icon`]: true,
         }),
       })

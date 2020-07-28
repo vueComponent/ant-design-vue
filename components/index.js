@@ -53,7 +53,7 @@ import { default as Divider } from './divider';
 
 import { default as Dropdown } from './dropdown';
 
-import { default as FormModel } from './form-model';
+import { default as Form } from './form';
 
 import { default as Icon } from './icon';
 
@@ -164,7 +164,7 @@ const components = [
   DatePicker,
   Divider,
   Dropdown,
-  FormModel,
+  Form,
   Icon,
   Input,
   InputNumber,
@@ -249,7 +249,7 @@ export {
   DatePicker,
   Divider,
   Dropdown,
-  FormModel,
+  Form,
   Icon,
   Input,
   InputNumber,

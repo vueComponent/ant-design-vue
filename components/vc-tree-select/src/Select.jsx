@@ -238,7 +238,8 @@ const Select = {
           const treeNode = domTreeNodes[key];
 
           if (treeNode) {
-            const domNode = treeNode.$el;
+            // Fix scroll when value has children https://github.com/vueComponent/ant-design-vue/issues/2615
+            const domNode = treeNode.$children.length ? treeNode.$el.children[1] : treeNode.$el;
             raf(() => {
               const popupNode = this.popup.$el;
               const triggerContainer = findPopupContainer(popupNode, `${prefixCls}-dropdown`);

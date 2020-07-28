@@ -17,25 +17,13 @@ describe('CheckboxGroup', () => {
         sync: false,
       },
     );
-    wrapper
-      .findAll('.ant-checkbox-input')
-      .at(0)
-      .trigger('change');
+    wrapper.findAll('.ant-checkbox-input')[0].trigger('change');
     expect(onChange).toHaveBeenCalledWith(['Apple']);
-    wrapper
-      .findAll('.ant-checkbox-input')
-      .at(1)
-      .trigger('change');
+    wrapper.findAll('.ant-checkbox-input')[1].trigger('change');
     expect(onChange).toHaveBeenCalledWith(['Apple', 'Pear']);
-    wrapper
-      .findAll('.ant-checkbox-input')
-      .at(2)
-      .trigger('change');
+    wrapper.findAll('.ant-checkbox-input')[2].trigger('change');
     expect(onChange).toHaveBeenCalledWith(['Apple', 'Pear', 'Orange']);
-    wrapper
-      .findAll('.ant-checkbox-input')
-      .at(1)
-      .trigger('change');
+    wrapper.findAll('.ant-checkbox-input')[1].trigger('change');
     expect(onChange).toHaveBeenCalledWith(['Apple', 'Orange']);
   });
 
@@ -57,15 +45,9 @@ describe('CheckboxGroup', () => {
         sync: false,
       },
     );
-    groupWrapper
-      .findAll('.ant-checkbox-input')
-      .at(0)
-      .trigger('change');
+    groupWrapper.findAll('.ant-checkbox-input')[0].trigger('change');
     expect(onChangeGroup).not.toBeCalled();
-    groupWrapper
-      .findAll('.ant-checkbox-input')
-      .at(1)
-      .trigger('change');
+    groupWrapper.findAll('.ant-checkbox-input')[1].trigger('change');
     expect(onChangeGroup).not.toBeCalled();
   });
 
@@ -87,15 +69,9 @@ describe('CheckboxGroup', () => {
         sync: false,
       },
     );
-    groupWrapper
-      .findAll('.ant-checkbox-input')
-      .at(0)
-      .trigger('change');
+    groupWrapper.findAll('.ant-checkbox-input')[0].trigger('change');
     expect(onChangeGroup).toHaveBeenCalledWith(['Apple']);
-    groupWrapper
-      .findAll('.ant-checkbox-input')
-      .at(1)
-      .trigger('change');
+    groupWrapper.findAll('.ant-checkbox-input')[1].trigger('change');
     expect(onChangeGroup).toHaveBeenCalledWith(['Apple']);
   });
 
@@ -143,10 +119,7 @@ describe('CheckboxGroup', () => {
         );
       },
     });
-    wrapper
-      .findAll('.ant-checkbox-input')
-      .at(0)
-      .trigger('change');
+    wrapper.findAll('.ant-checkbox-input')[0].trigger('change');
     expect(onChange).toBeCalled();
     expect(onChange.mock.calls[0][0].target.value).toEqual('my');
   });

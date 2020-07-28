@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/cascader/demo/index';
+import demo from '../antdv-demo/docs/checkbox/demo/basic';
 
 export default {
   components: {

@@ -45,8 +45,10 @@ export default {
   },
   mounted() {
     nextTick(() => {
-      if (this.autofocus) {
-        this.$refs.input && this.$refs.input.focus();
+      if (process.env.NODE_ENV === 'test') {
+        if (this.autofocus) {
+          this.$refs.input && this.$refs.input.focus();
+        }
       }
     });
   },
@@ -103,12 +105,10 @@ export default {
       readonly,
       tabindex,
       autofocus,
-      onFocus,
-      onBlur,
       value,
       ...others
     } = getOptionProps(this);
-    const { class: className } = this.$attrs;
+    const { class: className, onFocus, onBlur } = this.$attrs;
     const globalProps = Object.keys({ ...others, ...this.$attrs }).reduce((prev, key) => {
       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {
         prev[key] = others[key];
@@ -135,6 +135,8 @@ export default {
       ...globalProps,
       onChange: this.handleChange,
       onClick: this.onClick,
+      onFocus,
+      onBlur,
     };
 
     return (

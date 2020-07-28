@@ -164,7 +164,6 @@ export default {
     handleChange(options, setProps, e) {
       if (e.type !== 'keydown' || e.keyCode === KeyCode.ENTER) {
         const value = options.map(o => o[this.getFieldName('value')]);
-        this.__emit('update:value', value);
         this.__emit('change', value, options);
         this.setPopupVisible(setProps.visible);
       }

@@ -75,6 +75,11 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
+      if (process.env.NODE_ENV === 'test') {
+        if (this.autofocus) {
+          this.focus();
+        }
+      }
       this.clearPasswordValueAttribute();
     });
   },

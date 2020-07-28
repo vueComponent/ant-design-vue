@@ -48,41 +48,29 @@ function filter(inputValue, path) {
 
 describe('Cascader', () => {
   focusTest(Cascader);
-
+  beforeEach(() => {
+    document.body.innerHTML = '';
+  });
   it('popup correctly when panel is hidden', async () => {
-    const wrapper = mount(Cascader, { props: { options }, sync: false });
-    const CascaderWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
+    mount(Cascader, {
+      props: { options },
+      sync: false,
+      attachTo: 'body',
+    });
     await asyncExpect(() => {
-      expect(CascaderWrapper.html()).toMatchSnapshot();
+      expect($$('.ant-cascader-menus').length).toBe(0);
     });
   });
 
   it('popup correctly when panel is open', async () => {
-    const wrapper = mount(Cascader, { props: { options }, sync: false });
+    const wrapper = mount(Cascader, { props: { options }, sync: false, attachTo: 'body' });
     await asyncExpect(() => {
       wrapper.find('input').trigger('click');
     });
-    let CascaderWrapper = null;
+    expect($$('.ant-cascader-menus').length).toBe(1);
     await asyncExpect(() => {
-      CascaderWrapper = mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
-    });
-    await asyncExpect(() => {
-      expect(CascaderWrapper.html()).toMatchSnapshot();
-    });
+      expect($$('.ant-cascader-menus')[0].parentNode.parentNode.innerHTML).toMatchSnapshot();
+    }, 1000);
   });
 
   it('support controlled mode', async () => {
@@ -109,20 +97,9 @@ describe('Cascader', () => {
     await asyncExpect(() => {
       wrapper.find('input').trigger('click');
     });
-    let CascaderWrapper = null;
+    expect($$('.ant-cascader-menus').length).toBe(1);
     await asyncExpect(() => {
-      CascaderWrapper = mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
-    });
-
-    await asyncExpect(() => {
-      expect(CascaderWrapper.html()).toMatchSnapshot();
+      expect($$('.ant-cascader-menus')[0].parentNode.parentNode.innerHTML).toMatchSnapshot();
     });
   });
 
@@ -131,100 +108,35 @@ describe('Cascader', () => {
     await asyncExpect(() => {
       wrapper.find('input').trigger('click');
     });
-    let popupWrapper = null;
+
     await asyncExpect(() => {
-      popupWrapper = mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
-    });
-    await asyncExpect(() => {
-      popupWrapper
-        .findAll('.ant-cascader-menu')
-        .at(0)
-        .findAll('.ant-cascader-menu-item')
-        .at(0)
-        .trigger('click');
-    });
-    await asyncExpect(() => {
-      popupWrapper = mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
+      $$('.ant-cascader-menu')[0]
+        .querySelectorAll('.ant-cascader-menu-item')[0]
+        .click();
     });
 
     await asyncExpect(() => {
-      expect(popupWrapper.html()).toMatchSnapshot();
+      expect($$('.ant-cascader-menus')[0].innerHTML).toMatchSnapshot();
     });
+
     await asyncExpect(() => {
-      popupWrapper = mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
+      $$('.ant-cascader-menu')[1]
+        .querySelectorAll('.ant-cascader-menu-item')[0]
+        .click();
     });
+
     await asyncExpect(() => {
-      popupWrapper
-        .findAll('.ant-cascader-menu')
-        .at(1)
-        .findAll('.ant-cascader-menu-item')
-        .at(0)
-        .trigger('click');
+      expect($$('.ant-cascader-menus')[0].innerHTML).toMatchSnapshot();
     });
+
     await asyncExpect(() => {
-      popupWrapper = mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
+      $$('.ant-cascader-menu')[2]
+        .querySelectorAll('.ant-cascader-menu-item')[0]
+        .click();
     });
+
     await asyncExpect(() => {
-      expect(popupWrapper.html()).toMatchSnapshot();
-    });
-    await asyncExpect(() => {
-      popupWrapper = mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
-    });
-    await asyncExpect(() => {
-      popupWrapper
-        .findAll('.ant-cascader-menu')
-        .at(2)
-        .findAll('.ant-cascader-menu-item')
-        .at(0)
-        .trigger('click');
-    });
-    await asyncExpect(() => {
-      popupWrapper = mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
-    });
-    await asyncExpect(() => {
-      expect(popupWrapper.html()).toMatchSnapshot();
+      expect($$('.ant-cascader-menus')[0].innerHTML).toMatchSnapshot();
     });
   });
 

@@ -92,6 +92,13 @@ const CascaderProps = {
   fieldNames: FieldNamesType,
   autofocus: PropTypes.bool,
   suffixIcon: PropTypes.any,
+  showSearchRender: PropTypes.any,
+  onChange: PropTypes.func,
+  onPopupVisibleChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  onSearch: PropTypes.func,
+  'onUpdate:value': PropTypes.func,
 };
 
 // We limit the filtered item count by default
@@ -423,6 +430,7 @@ const Cascader = {
     // Fix bug of https://github.com/facebook/react/pull/5004
     // and https://fb.me/react-unknown-prop
     const tempInputProps = omit(otherProps, [
+      'popupStyle',
       'options',
       'popupPlacement',
       'transitionName',
@@ -439,6 +447,12 @@ const Cascader = {
       'notFoundContent',
       'defaultValue',
       'fieldNames',
+      'onChange',
+      'onPopupVisibleChange',
+      'onFocus',
+      'onBlur',
+      'onSearch',
+      'onUpdate:value',
     ]);
 
     let options = props.options;
@@ -486,9 +500,9 @@ const Cascader = {
       readonly: !showSearch,
       autocomplete: 'off',
       class: `${prefixCls}-input ${sizeCls}`,
-      onFocus: showSearch ? this.handleInputFocus : noop,
+      onFocus: this.handleInputFocus,
       onClick: showSearch ? this.handleInputClick : noop,
-      onBlur: showSearch ? this.handleInputBlur : noop,
+      onBlur: showSearch ? this.handleInputBlur : props.onBlur,
       onKeydown: this.handleKeyDown,
       onChange: showSearch ? this.handleInputChange : noop,
     };
@@ -496,9 +510,7 @@ const Cascader = {
     const inputIcon = (suffixIcon &&
       (isValidElement(suffixIcon) ? (
         cloneElement(suffixIcon, {
-          class: {
-            [`${prefixCls}-picker-arrow`]: true,
-          },
+          class: `${prefixCls}-picker-arrow`,
         })
       ) : (
         <span class={`${prefixCls}-picker-arrow`}>{suffixIcon}</span>
@@ -508,9 +520,8 @@ const Cascader = {
       children
     ) : (
       <span class={pickerCls} style={style}>
-        {showSearch ? <span class={`${prefixCls}-picker-label`}>{this.getLabel()}</span> : null}
+        <span class={`${prefixCls}-picker-label`}>{this.getLabel()}</span>
         <Input {...inputProps} ref={this.saveInput} />
-        {!showSearch ? <span class={`${prefixCls}-picker-label`}>{this.getLabel()}</span> : null}
         {clearIcon}
         {inputIcon}
       </span>

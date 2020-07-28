@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/carousel/demo/position';
+import demo from '../antdv-demo/docs/cascader/demo/index';
 
 export default {
   components: {

@@ -1,6 +1,6 @@
 import { inject } from 'vue';
 import PropsTypes from '../_util/vue-types';
-import { getComponent } from '../_util/props-util';
+import { getComponent, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 export const CommentProps = {
   actions: PropsTypes.array,
@@ -81,7 +81,7 @@ const Comment = {
         {contentDom}
       </div>
     );
-    const children = this.$slots.default && this.$slots.default();
+    const children = getSlot(this);
     return (
       <div class={prefixCls}>
         {comment}

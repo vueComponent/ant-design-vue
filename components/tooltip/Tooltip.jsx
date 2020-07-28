@@ -1,5 +1,6 @@
 import { inject } from 'vue';
 import VcTooltip from '../vc-tooltip';
+import classNames from 'classnames';
 import getPlacements from './placements';
 import PropTypes from '../_util/vue-types';
 import {
@@ -186,10 +187,10 @@ export default {
     const child = this.getDisabledCompatibleChildren(
       isValidElement(children) ? children : <span>{children}</span>,
     );
-    const childCls = {
+    const childCls = classNames({
       [openClassName || `${prefixCls}-open`]: sVisible,
       [child.props && child.props.class]: child.props && child.props.class,
-    };
+    });
     const tooltipProps = {
       ...$attrs,
       ...$props,

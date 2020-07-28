@@ -51,7 +51,7 @@ const CommentTest = {
             dataSource={this.comments}
             header={`${this.comments.length} ${this.comments.length > 1 ? 'replies' : 'reply'}`}
             itemLayout="horizontal"
-            renderItem={item => {
+            renderItem={({ item }) => {
               return (
                 <List.Item>
                   <Comment
@@ -65,23 +65,27 @@ const CommentTest = {
             }}
           />
         ) : null}
-        <Comment>
-          <div slot="content">
-            <Form.Item>
-              <Input.TextArea rows={4} onChange={this.handleChange} value={this.value} />
-            </Form.Item>
-            <Form.Item>
-              <Button
-                htmlType="submit"
-                loading={this.submitting}
-                onClick={this.handleSubmit}
-                type="primary"
-              >
-                Add Comment
-              </Button>
-            </Form.Item>
-          </div>
-        </Comment>
+        <Comment
+          vSlots={{
+            content: () => (
+              <div>
+                <Form.Item>
+                  <Input.TextArea rows={4} onChange={this.handleChange} value={this.value} />
+                </Form.Item>
+                <Form.Item>
+                  <Button
+                    htmlType="submit"
+                    loading={this.submitting}
+                    onClick={this.handleSubmit}
+                    type="primary"
+                  >
+                    Add Comment
+                  </Button>
+                </Form.Item>
+              </div>
+            ),
+          }}
+        ></Comment>
       </div>
     );
   },
@@ -98,11 +102,11 @@ describe('Comment', () => {
       wrapper.find('textarea').trigger('input');
     });
     await asyncExpect(() => {
-      wrapper.find('Button').trigger('click');
+      wrapper.find('.ant-btn').trigger('click');
     });
 
     await asyncExpect(() => {
-      expect(wrapper.findAll('.ant-list-header').wrappers[0].element.innerHTML).toBe('1 reply');
+      expect(wrapper.findAll('.ant-list-header')[0].element.innerHTML).toBe('1 reply');
       expect(wrapper.html()).toMatchSnapshot();
     }, 2000);
   });

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/checkbox/demo/basic';
+import demo from '../antdv-demo/docs/collapse/demo/index';
 
 export default {
   components: {

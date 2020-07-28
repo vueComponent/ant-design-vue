@@ -35,6 +35,10 @@ export default {
           })
         : icon;
     },
+    handleChange(activeKey) {
+      this.$emit('update:activeKey', activeKey);
+      this.$emit('change', activeKey);
+    },
   },
   render() {
     const { prefixCls: customizePrefixCls, bordered, expandIconPosition } = this;
@@ -52,6 +56,8 @@ export default {
       expandIcon: panelProps => this.renderExpandIcon(panelProps, prefixCls),
       class: collapseClassName,
       ...restAttrs,
+      onChange: this.handleChange,
+      'onUpdate:change': undefined,
     };
 
     return <VcCollapse {...rcCollapeProps}>{getSlot(this)}</VcCollapse>;

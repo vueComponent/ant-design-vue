@@ -117,9 +117,10 @@ export default {
       return newChildren;
     },
     setActiveKey(activeKey) {
-      this.setState({ stateActiveKey: activeKey });
+      if (!hasProp(this, 'activeKey')) {
+        this.setState({ stateActiveKey: activeKey });
+      }
       this.__emit('change', this.accordion ? activeKey[0] : activeKey);
-      this.__emit('update:activeKey', this.accordion ? activeKey[0] : activeKey);
     },
   },
   render() {

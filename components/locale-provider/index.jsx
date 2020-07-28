@@ -46,13 +46,10 @@ const LocaleProvider = {
       },
     };
   },
-  created() {
-    provide('localeData', this.$data);
-  },
   watch: {
     locale(val) {
       this.antLocale = {
-        ...this.locale,
+        ...val,
         exist: true,
       };
       setMomentLocale(val);
@@ -60,6 +57,7 @@ const LocaleProvider = {
     },
   },
   created() {
+    provide('localeData', this.$data);
     const { locale } = this;
     setMomentLocale(locale);
     changeConfirmLocale(locale && locale.Modal);

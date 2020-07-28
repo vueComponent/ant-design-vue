@@ -6,8 +6,6 @@ import Omit from 'omit.js';
 
 export default function confirm(config) {
   const div = document.createElement('div');
-  const el = document.createElement('div');
-  div.appendChild(el);
   document.body.appendChild(div);
   let currentConfig = { ...Omit(config, ['parentContext']), close, visible: true };
 
@@ -25,7 +23,7 @@ export default function confirm(config) {
   }
   function destroy(...args) {
     if (confirmDialogInstance && div.parentNode) {
-      confirmDialogInstance.unmount(div);
+      confirmDialogInstance.vIf = false; // hack destroy
       confirmDialogInstance = null;
       div.parentNode.removeChild(div);
     }
@@ -47,14 +45,14 @@ export default function confirm(config) {
     return createApp({
       parent: config.parentContext,
       data() {
-        return { confirmDialogProps };
+        return { confirmDialogProps, vIf: true };
       },
       render() {
         // 先解构，避免报错，原因不详
         const cdProps = { ...this.confirmDialogProps };
-        return <ConfirmDialog {...cdProps} />;
+        return this.vIf ? <ConfirmDialog {...cdProps} /> : null;
       },
-    }).mount(el);
+    }).mount(div);
   }
 
   confirmDialogInstance = render(currentConfig);

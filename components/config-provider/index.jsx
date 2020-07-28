@@ -27,18 +27,13 @@ const ConfigProvider = {
     pageHeader: PropTypes.object,
     transformCellText: PropTypes.func,
   },
-  setup(props) {
-    const configProvider = reactive({
-      ...props,
-      getPrefixCls: undefined,
-      renderEmpty: undefined,
-    });
-    provide('configProvider', configProvider);
-    return { configProvider };
-  },
   created() {
-    this.configProvider.getPrefixCls = this.getPrefixCls;
-    this.configProvider.renderEmpty = this.renderEmpty;
+    this.configProvider = reactive({
+      ...this.$props,
+      getPrefixCls: this.getPrefixCls,
+      renderEmpty: this.renderEmptyComponent,
+    });
+    provide('configProvider', this.configProvider);
   },
   watch: {
     ...getWatch([

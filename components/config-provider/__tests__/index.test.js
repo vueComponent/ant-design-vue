@@ -25,7 +25,7 @@ describe('ConfigProvider', () => {
         );
       },
     });
-    expect(wrapper.find({ name: 'Wave' }).vm.csp).toBe(csp);
+    expect(wrapper.findComponent('Wave').vm.csp).toBe(csp);
   });
 
   it('autoInsertSpaceInButton', () => {
@@ -39,6 +39,6 @@ describe('ConfigProvider', () => {
       },
     });
 
-    expect(wrapper.find({ name: 'AButton' }).text()).toBe('确定');
+    expect(wrapper.findComponent('AButton').text()).toBe('确定');
   });
 });

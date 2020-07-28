@@ -103,7 +103,16 @@ module.exports = {
   },
   resolve: {
     alias: {
+      'ant-design-vue/es/locale/en_US': path.join(
+        __dirname,
+        './components/locale-provider/en_US.js',
+      ),
+      'ant-design-vue/es/locale/zh_CN': path.join(
+        __dirname,
+        './components/locale-provider/zh_CN.js',
+      ),
       'ant-design-vue': path.join(__dirname, './components'),
+
       // vue$: 'vue/dist/vue.esm.js',
     },
     extensions: ['.js', '.jsx', '.vue', '.md'],

@@ -22,15 +22,7 @@ const DrawerCom = {
     },
   },
   render() {
-    const drawerProps = {
-      props: {
-        destroyOnClose: true,
-        getContainer: false,
-        visible: false,
-        wrapClassName: this.wrapClassName,
-      },
-    };
-    return <Drawer {...drawerProps}>Here is content of Drawer</Drawer>;
+    return <Drawer {...this.$props}>Here is content of Drawer</Drawer>;
   },
 };
 
@@ -43,7 +35,7 @@ describe('Drawer', () => {
         getContainer: false,
       },
       slots: {
-        default: ['Here is content of Drawer'],
+        default: () => ['Here is content of Drawer'],
       },
       sync: false,
     };
@@ -62,7 +54,7 @@ describe('Drawer', () => {
         getContainer: false,
       },
       slots: {
-        default: 'Here is content of Drawer',
+        default: () => 'Here is content of Drawer',
       },
       sync: false,
     };
@@ -80,7 +72,7 @@ describe('Drawer', () => {
         getContainer: false,
       },
       slots: {
-        default: 'Here is content of Drawer',
+        default: () => 'Here is content of Drawer',
       },
       sync: false,
     };
@@ -98,7 +90,7 @@ describe('Drawer', () => {
         getContainer: false,
       },
       slots: {
-        default: 'Here is content of Drawer',
+        default: () => 'Here is content of Drawer',
       },
       sync: false,
     };
@@ -116,7 +108,7 @@ describe('Drawer', () => {
         getContainer: false,
       },
       slots: {
-        default: 'Here is content of Drawer',
+        default: () => 'Here is content of Drawer',
       },
       sync: false,
     };

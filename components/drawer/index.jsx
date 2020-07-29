@@ -34,6 +34,8 @@ const Drawer = {
     handle: PropTypes.any,
     afterVisibleChange: PropTypes.func,
     keyboard: PropTypes.bool.def(true),
+    onClose: PropTypes.func,
+    'onUpdate:visible': PropTypes.func,
   },
   mixins: [BaseMixin],
   data() {
@@ -49,17 +51,6 @@ const Drawer = {
       configProvider,
     };
   },
-  // inject: {
-  //   parentDrawer: {
-  //     default: () => null,
-  //   },
-  //   configProvider: { default: () => ConfigConsumerProps },
-  // },
-  // provide() {
-  //   return {
-  //     parentDrawer: this,
-  //   };
-  // },
   beforeCreate() {
     const parentDrawer = inject('parentDrawer', null);
     provide('parentDrawer', this);
@@ -93,6 +84,7 @@ const Drawer = {
   },
   methods: {
     close(e) {
+      this.$emit('update:visible', false);
       this.$emit('close', e);
     },
     // onMaskClick(e) {
@@ -241,13 +233,14 @@ const Drawer = {
         'pageHeader',
         'autoInsertSpaceInButton',
       ]),
+      onClose: this.close,
       handler,
       ...offsetStyle,
       prefixCls,
       open: visible,
       showMask: mask,
       placement,
-      className: classnames({
+      class: classnames({
         [wrapClassName]: !!wrapClassName,
         [haveMask]: !!haveMask,
       }),

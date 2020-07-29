@@ -93,8 +93,8 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
     const extra = getComponent(this, 'extra');
-    const actions = getComponent(this, 'actions');
-
+    let actions = getComponent(this, 'actions');
+    actions = actions && !Array.isArray(actions) ? [actions] : actions;
     const actionsContent = actions && actions.length > 0 && (
       <ul class={`${prefixCls}-item-action`} key="actions">
         {actions.map((action, i) => (

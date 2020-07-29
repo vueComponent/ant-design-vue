@@ -31,6 +31,9 @@ function toArray(value) {
 export const DescriptionsItem = {
   name: 'ADescriptionsItem',
   props: initDefaultProps(DescriptionsItemProps, { span: 1 }),
+  render() {
+    return null;
+  },
 };
 
 export const DescriptionsProps = {

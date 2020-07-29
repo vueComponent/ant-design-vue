@@ -2,6 +2,7 @@
 
 exports[`Descriptions Descriptions support colon 1`] = `
 <div class="ant-descriptions">
+  <!---->
   <div class="ant-descriptions-view">
     <table>
       <tbody>
@@ -16,11 +17,12 @@ exports[`Descriptions Descriptions support colon 1`] = `
 
 exports[`Descriptions Descriptions support style 1`] = `
 <div class="ant-descriptions" style="background-color: rgb(232, 232, 232);">
+  <!---->
   <div class="ant-descriptions-view">
     <table>
       <tbody>
         <tr class="ant-descriptions-row">
-          <td colspan="3" class="ant-descriptions-item"><span class="ant-descriptions-item-label ant-descriptions-item-colon ant-descriptions-item-no-label"></span><span class="ant-descriptions-item-content">Cloud Database</span></td>
+          <td colspan="3" class="ant-descriptions-item"><span class="ant-descriptions-item-label ant-descriptions-item-colon ant-descriptions-item-no-label"><!----></span><span class="ant-descriptions-item-content">Cloud Database</span></td>
         </tr>
       </tbody>
     </table>
@@ -30,6 +32,7 @@ exports[`Descriptions Descriptions support style 1`] = `
 
 exports[`Descriptions Descriptions.Item support className 1`] = `
 <div class="ant-descriptions">
+  <!---->
   <div class="ant-descriptions-view">
     <table>
       <tbody>
@@ -44,6 +47,7 @@ exports[`Descriptions Descriptions.Item support className 1`] = `
 
 exports[`Descriptions column is number 1`] = `
 <div class="ant-descriptions">
+  <!---->
   <div class="ant-descriptions-view">
     <table>
       <tbody>
@@ -63,6 +67,7 @@ exports[`Descriptions column is number 1`] = `
 
 exports[`Descriptions vertical layout 1`] = `
 <div class="ant-descriptions">
+  <!---->
   <div class="ant-descriptions-view">
     <table>
       <tbody>
@@ -90,6 +95,7 @@ exports[`Descriptions vertical layout 1`] = `
 
 exports[`Descriptions when item is rendered conditionally 1`] = `
 <div class="ant-descriptions">
+  <!---->
   <div class="ant-descriptions-view">
     <table>
       <tbody>

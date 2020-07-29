@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/date-picker/demo/disabled';
+import demo from '../antdv-demo/docs/descriptions/demo/index';
 
 export default {
   components: {

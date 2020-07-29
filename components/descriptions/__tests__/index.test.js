@@ -61,7 +61,7 @@ describe('Descriptions', () => {
     const wrapper = mount({
       render() {
         return (
-          <Descriptions column="3">
+          <Descriptions column={3}>
             <Descriptions.Item label="Product">Cloud Database</Descriptions.Item>
             <Descriptions.Item label="Billing">Prepaid</Descriptions.Item>
             <Descriptions.Item label="time">18:00:00</Descriptions.Item>
@@ -225,10 +225,5 @@ describe('Descriptions', () => {
 
     enquire.callunmatch();
     wrapper.unmount();
-
-    await asyncExpect(() => {});
-    await asyncExpect(() => {});
-    await asyncExpect(() => {});
-    await asyncExpect(() => {});
   });
 });

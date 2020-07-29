@@ -178,6 +178,6 @@ export default {
       return buttonNode;
     }
 
-    return <Wave>{buttonNode}</Wave>;
+    return <Wave ref="wave">{buttonNode}</Wave>;
   },
 };

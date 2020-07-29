@@ -2,14 +2,17 @@ import { mount } from '@vue/test-utils';
 import ConfigProvider from '..';
 import Button from '../../button';
 import mountTest from '../../../tests/shared/mountTest';
+import { sleep } from '../../../tests/utils';
 
 describe('ConfigProvider', () => {
   mountTest({
     render() {
       return (
-        <ConfigProvider>
-          <div />
-        </ConfigProvider>
+        <div>
+          <ConfigProvider>
+            <div />
+          </ConfigProvider>
+        </div>
       );
     },
   });
@@ -20,25 +23,33 @@ describe('ConfigProvider', () => {
       render() {
         return (
           <ConfigProvider csp={csp}>
-            <Button />
+            <Button ref="button" />
           </ConfigProvider>
         );
       },
     });
-    expect(wrapper.findComponent('Wave').vm.csp).toBe(csp);
+    expect(wrapper.findComponent({ ref: 'button' }).vm.$refs.wave.csp.nonce).toBe(csp.nonce);
   });
 
-  it('autoInsertSpaceInButton', () => {
+  it('autoInsertSpaceInButton', async () => {
     const wrapper = mount({
+      data() {
+        return {
+          autoInsertSpaceInButton: false,
+        };
+      },
       render() {
         return (
-          <ConfigProvider autoInsertSpaceInButton={false}>
-            <Button>确定</Button>
+          <ConfigProvider autoInsertSpaceInButton={this.autoInsertSpaceInButton}>
+            <Button ref="button">确定</Button>
           </ConfigProvider>
         );
       },
     });
 
-    expect(wrapper.findComponent('AButton').text()).toBe('确定');
+    expect(wrapper.find('.ant-btn').text()).toBe('确定');
+    wrapper.vm.autoInsertSpaceInButton = true;
+    await sleep();
+    expect(wrapper.find('.ant-btn').text()).toBe('确 定');
   });
 });

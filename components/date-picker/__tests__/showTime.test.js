@@ -2,35 +2,29 @@ import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import moment from 'moment';
 import DatePicker from '../';
+import { $$ } from './utils';
+import { sleep } from '../../../tests/utils';
 
 const { RangePicker } = DatePicker;
 
 describe('DatePicker with showTime', () => {
+  beforeEach(() => {
+    document.body.outerHTML = '';
+  });
   it('should trigger onChange when select value', async () => {
     const onChangeFn = jest.fn();
     const onOpenChangeFn = jest.fn();
-    const wrapper = mount(
+    mount(
       {
         render() {
           return <DatePicker showTime open onChange={onChangeFn} onOpenChange={onOpenChangeFn} />;
         },
       },
-      { sync: false },
+      { sync: false, attachTo: 'body' },
     );
 
-    const calendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
     await asyncExpect(() => {
-      calendarWrapper
-        .findAll('.ant-calendar-date')
-        .at(0)
-        .trigger('click');
+      $$('.ant-calendar-date')[0].click();
     });
     await asyncExpect(() => {
       expect(onChangeFn).toHaveBeenCalled();
@@ -42,7 +36,7 @@ describe('DatePicker with showTime', () => {
     const onOkFn = jest.fn();
     const onOpenChangeFn = jest.fn();
     const onChangeFn = jest.fn();
-    const wrapper = mount(
+    mount(
       {
         render() {
           return (
@@ -57,19 +51,11 @@ describe('DatePicker with showTime', () => {
           );
         },
       },
-      { sync: false },
+      { sync: false, attachTo: 'body' },
     );
 
-    const calendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
     await asyncExpect(() => {
-      calendarWrapper.find('.ant-calendar-ok-btn').trigger('click');
+      $$('.ant-calendar-ok-btn')[0].click();
     });
     await asyncExpect(() => {
       expect(onOkFn).toHaveBeenCalled();
@@ -81,25 +67,17 @@ describe('DatePicker with showTime', () => {
   it('should trigger onChange when click Now link', async () => {
     const onOpenChangeFn = jest.fn();
     const onChangeFn = jest.fn();
-    const wrapper = mount(
+    mount(
       {
         render() {
           return <DatePicker showTime open onChange={onChangeFn} onOpenChange={onOpenChangeFn} />;
         },
       },
-      { sync: false },
+      { sync: false, attachTo: 'body' },
     );
 
-    const calendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
     await asyncExpect(() => {
-      calendarWrapper.find('.ant-calendar-today-btn').trigger('click');
+      $$('.ant-calendar-today-btn')[0].click();
     });
     await asyncExpect(() => {
       expect(onOpenChangeFn).toHaveBeenCalledWith(false);
@@ -108,40 +86,35 @@ describe('DatePicker with showTime', () => {
   });
 
   it('should have correct className when use12Hours is true', async () => {
-    const wrapper = mount(
+    mount(
       {
         render() {
           return <DatePicker showTime={{ use12Hours: true }} open />;
         },
       },
-      { sync: false },
+      { sync: false, attachTo: 'body' },
     );
-    const calendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
+
     await asyncExpect(() => {
-      expect(calendarWrapper.findAll('.ant-calendar-time-picker-column-4').length).toBe(0);
+      expect($$('.ant-calendar-time-picker-column-4').length).toBe(0);
     });
-    calendarWrapper
-      .findAll('.ant-calendar-time-picker-btn')
-      .at(0)
-      .trigger('click');
+    $$('.ant-calendar-today')[0].click();
+    await sleep();
+    $$('.ant-calendar-time-picker-btn')[0].click();
     await asyncExpect(() => {
-      expect(calendarWrapper.findAll('.ant-calendar-time-picker-column-4').length).toBe(1);
+      expect($$('.ant-calendar-time-picker-column-4').length).toBe(1);
     });
   });
 });
 
 describe('RangePicker with showTime', () => {
+  beforeEach(() => {
+    document.body.outerHTML = '';
+  });
   it('should trigger onChange when select value', async () => {
     const onChangeFn = jest.fn();
     const onOpenChangeFn = jest.fn();
-    const wrapper = mount(
+    mount(
       {
         render() {
           return <RangePicker showTime open onChange={onChangeFn} onOpenChange={onOpenChangeFn} />;
@@ -150,37 +123,31 @@ describe('RangePicker with showTime', () => {
       { sync: false },
     );
 
-    const calendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
     await asyncExpect(() => {
-      expect(calendarWrapper.find('.ant-calendar-time-picker-btn').classes()).toContain(
-        'ant-calendar-time-picker-btn-disabled',
-      );
-      expect(calendarWrapper.find('.ant-calendar-ok-btn').classes()).toContain(
-        'ant-calendar-ok-btn-disabled',
-      );
+      expect(
+        $$('.ant-calendar-time-picker-btn')[0]
+          .getAttribute('class')
+          .split(' '),
+      ).toContain('ant-calendar-time-picker-btn-disabled');
+      expect(
+        $$('.ant-calendar-ok-btn')[0]
+          .getAttribute('class')
+          .split(' '),
+      ).toContain('ant-calendar-ok-btn-disabled');
     });
-    calendarWrapper
-      .findAll('.ant-calendar-date')
-      .at(10)
-      .trigger('click');
-    calendarWrapper
-      .findAll('.ant-calendar-date')
-      .at(11)
-      .trigger('click');
+    $$('.ant-calendar-date')[10].click();
+    $$('.ant-calendar-date')[11].click();
     await asyncExpect(() => {
-      expect(calendarWrapper.find('.ant-calendar-time-picker-btn').classes()).not.toContain(
-        'ant-calendar-time-picker-btn-disabled',
-      );
-      expect(calendarWrapper.find('.ant-calendar-ok-btn').classes()).not.toContain(
-        'ant-calendar-ok-btn-disabled',
-      );
+      expect(
+        $$('.ant-calendar-time-picker-btn')[0]
+          .getAttribute('class')
+          .split(' '),
+      ).not.toContain('ant-calendar-time-picker-btn-disabled');
+      expect(
+        $$('.ant-calendar-ok-btn')[0]
+          .getAttribute('class')
+          .split(' '),
+      ).not.toContain('ant-calendar-ok-btn-disabled');
     });
     expect(onChangeFn).toHaveBeenCalled();
     expect(onOpenChangeFn).not.toHaveBeenCalled();
@@ -190,7 +157,7 @@ describe('RangePicker with showTime', () => {
     const onOkFn = jest.fn();
     const onChangeFn = jest.fn();
     const onOpenChangeFn = jest.fn();
-    const wrapper = mount(
+    mount(
       {
         render() {
           return (
@@ -204,29 +171,14 @@ describe('RangePicker with showTime', () => {
           );
         },
       },
-      { sync: false },
-    );
-
-    const calendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
-      calendarWrapper
-        .findAll('.ant-calendar-date')
-        .at(10)
-        .trigger('click');
-      calendarWrapper
-        .findAll('.ant-calendar-date')
-        .at(11)
-        .trigger('click');
+      $$('.ant-calendar-date')[10].click();
+      $$('.ant-calendar-date')[11].click();
     });
     onChangeFn.mockClear();
-    calendarWrapper.find('.ant-calendar-ok-btn').trigger('click');
+    $$('.ant-calendar-ok-btn')[0].click();
     expect(onOkFn).toHaveBeenCalled();
     expect(onOpenChangeFn).toHaveBeenCalledWith(false);
     expect(onChangeFn).not.toHaveBeenCalled();

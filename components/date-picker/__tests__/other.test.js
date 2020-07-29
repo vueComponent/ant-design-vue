@@ -4,6 +4,7 @@ import moment from 'moment';
 import DatePicker from '../';
 import LocaleProvider from '../../locale-provider';
 import locale from '../../locale-provider/zh_CN';
+import { sleep } from '../../../tests/utils';
 
 const { MonthPicker, WeekPicker } = DatePicker;
 
@@ -68,7 +69,7 @@ describe('MonthPicker and WeekPicker', () => {
     await asyncExpect(() => {
       wrapper.setProps({ value: birthday, open: true });
     });
-
+    await sleep(50);
     await asyncExpect(() => {
       expect(document.body.innerHTML).toMatchSnapshot();
     });

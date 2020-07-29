@@ -30,20 +30,13 @@ describe('RangePicker', () => {
         open: true,
       },
       sync: false,
+      attachTo: 'body',
     });
     await asyncExpect(() => {
       wrapper.setProps({ value: [birthday, birthday] });
     });
-    const rangeCalendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
     await asyncExpect(() => {
-      expect(rangeCalendarWrapper.html()).toMatchSnapshot();
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
   });
 
@@ -65,27 +58,18 @@ describe('RangePicker', () => {
           );
         },
       },
-      { sync: false },
-    );
-
-    const rangeCalendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
-      rangeCalendarWrapper.find('.ant-calendar-range-quick-selector .ant-tag').trigger('click');
+      $$('.ant-calendar-range-quick-selector .ant-tag')[0].click();
     });
     await asyncExpect(() => {
-      expect(rangeCalendarWrapper.html()).toMatchSnapshot();
+      expect(wrapper.html()).toMatchSnapshot();
     });
   });
 
   it('highlight range when hover presetted range', async () => {
-    const wrapper = mount(
+    mount(
       {
         render() {
           return (
@@ -100,38 +84,22 @@ describe('RangePicker', () => {
           );
         },
       },
-      { sync: false },
+      { sync: false, attachTo: 'body' },
     );
 
-    let rangeCalendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
     await asyncExpect(() => {
-      rangeCalendarWrapper
-        .find('.ant-calendar-range-quick-selector .ant-tag')
-        .trigger('mouseenter');
+      $$('.ant-calendar-range-quick-selector .ant-tag')[0].dispatchEvent(
+        new MouseEvent('mouseenter'),
+      );
     });
-    rangeCalendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
     await asyncExpect(() => {
-      expect(rangeCalendarWrapper.findAll('.ant-calendar-selected-day').length).toBe(2);
+      expect($$('.ant-calendar-selected-day').length).toBe(2);
     });
   });
 
   it('should trigger onCalendarChange when change value', async () => {
     const onCalendarChangeFn = jest.fn();
-    const wrapper = mount(
+    mount(
       {
         render() {
           return (
@@ -143,21 +111,10 @@ describe('RangePicker', () => {
           );
         },
       },
-      { sync: false },
-    );
-    const rangeCalendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
+      { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
-      rangeCalendarWrapper
-        .findAll('.ant-calendar-cell')
-        .at(15)
-        .trigger('click');
+      $$('.ant-calendar-cell')[15].click();
     });
     expect(onCalendarChangeFn).toHaveBeenCalled();
   });
@@ -172,72 +129,49 @@ describe('RangePicker', () => {
         open: true,
       },
       sync: false,
+      attachTo: 'body',
     });
     await asyncExpect(() => {
       wrapper.setProps({ value: [] });
     });
-    const rangeCalendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
     await asyncExpect(() => {
       expect(() => {
-        const cell = rangeCalendarWrapper.findAll('.ant-calendar-cell').at(15);
-        cell.trigger('click');
-        cell.trigger('click');
+        const cell = $$('.ant-calendar-cell')[15];
+        cell.click();
+        cell.click();
       }).not.toThrow();
     });
   });
 
   // issue: https://github.com/ant-design/ant-design/issues/7077
   it('should not throw error when select after clear', async () => {
-    const wrapper = mount(RangePicker, {
+    mount(RangePicker, {
       props: {
         getCalendarContainer: trigger => trigger,
         open: true,
       },
       sync: false,
+      attachTo: 'body',
     });
-
-    let rangeCalendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
     await asyncExpect(() => {
-      const cell = rangeCalendarWrapper.findAll('.ant-calendar-cell').at(15);
-      cell.trigger('click');
-      cell.trigger('click');
+      const cell = $$('.ant-calendar-cell')[15];
+      cell.click();
+      cell.click();
     });
+    $$('.ant-calendar-picker-clear')[0].click();
+    $$('.ant-calendar-picker-input')[0].click();
 
-    wrapper.find('.ant-calendar-picker-clear').trigger('click');
-    wrapper.find('.ant-calendar-picker-input').trigger('click');
-    rangeCalendarWrapper = mount(
-      {
-        render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-        },
-      },
-      { sync: false },
-    );
     await asyncExpect(() => {
       expect(() => {
-        const cell = rangeCalendarWrapper.findAll('.ant-calendar-cell').at(15);
-        cell.trigger('click');
-        cell.trigger('click');
+        const cell = $$('.ant-calendar-cell')[15];
+        cell.click();
+        cell.click();
       }).not.toThrow();
     });
   });
 
   it('clear hover value after panel close', async () => {
-    const wrapper = mount(
+    mount(
       {
         render() {
           return (
@@ -250,7 +184,7 @@ describe('RangePicker', () => {
       { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
-      wrapper.find('.ant-calendar-picker-input').trigger('click');
+      $$('.ant-calendar-picker-input')[0].click();
     });
     await asyncExpect(() => {
       $$('.ant-calendar-cell')[25].click();
@@ -258,7 +192,7 @@ describe('RangePicker', () => {
       document.dispatchEvent(new MouseEvent('mousedown'));
     }, 500);
     await asyncExpect(() => {
-      wrapper.find('.ant-calendar-picker-input').trigger('click');
+      $$('.ant-calendar-picker-input')[0].click();
     });
     await asyncExpect(() => {
       expect(
@@ -285,19 +219,19 @@ describe('RangePicker', () => {
         attachTo: 'body',
       });
       await asyncExpect(() => {
-        wrapper.find('.ant-calendar-picker-input').trigger('click');
+        $$('.ant-calendar-picker-input')[0].click();
       });
       await asyncExpect(() => {
         $$('.ant-calendar-range-quick-selector .ant-tag')[0].click();
       }, 500);
       await asyncExpect(() => {
-        expect(wrapper.findAll('.ant-calendar-range-picker-input').at(0).element.value).toBe(
+        expect(wrapper.findAll('.ant-calendar-range-picker-input')[0].element.value).toBe(
           range[0].format(format),
         );
       });
       await asyncExpect(() => {
         const inputs = wrapper.findAll('.ant-calendar-range-picker-input');
-        expect(inputs.at(inputs.length - 1).element.value).toBe(range[1].format(format));
+        expect(inputs[inputs.length - 1].element.value).toBe(range[1].format(format));
       });
       await asyncExpect(() => {});
     });
@@ -314,19 +248,19 @@ describe('RangePicker', () => {
         attachTo: 'body',
       });
       await asyncExpect(() => {
-        wrapper.find('.ant-calendar-picker-input').trigger('click');
+        $$('.ant-calendar-picker-input')[0].click();
       });
       await asyncExpect(() => {
         $$('.ant-calendar-range-quick-selector .ant-tag')[0].click();
       }, 500);
       await asyncExpect(() => {
-        expect(wrapper.findAll('.ant-calendar-range-picker-input').at(0).element.value).toBe(
+        expect(wrapper.findAll('.ant-calendar-range-picker-input')[0].element.value).toBe(
           range[0].format(format),
         );
       });
       await asyncExpect(() => {
         const inputs = wrapper.findAll('.ant-calendar-range-picker-input');
-        expect(inputs.at(inputs.length - 1).element.value).toBe(range[1].format(format));
+        expect(inputs[inputs.length - 1].element.value).toBe(range[1].format(format));
       });
     });
   });

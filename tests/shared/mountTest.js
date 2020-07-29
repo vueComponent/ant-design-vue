@@ -3,7 +3,7 @@ export default function mountTest(Component) {
   describe(`mount and unmount`, () => {
     // https://github.com/ant-design/ant-design/pull/18441
     it(`component could be updated and unmounted without errors`, () => {
-      const wrapper = mount(Component, { sync: false });
+      const wrapper = mount(Component, { sync: false, attachTo: 'body' });
       expect(() => {
         wrapper.vm.$forceUpdate();
         wrapper.unmount();

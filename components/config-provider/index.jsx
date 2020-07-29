@@ -1,6 +1,6 @@
 import { reactive, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponent } from '../_util/props-util';
+import { getComponent, getSlot } from '../_util/props-util';
 import defaultRenderEmpty from './renderEmpty';
 import LocaleProvider, { ANT_MARK } from '../locale-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -58,7 +58,7 @@ const ConfigProvider = {
     renderProvider(legacyLocale) {
       return (
         <LocaleProvider locale={this.locale || legacyLocale} _ANT_MARK__={ANT_MARK}>
-          {this.$slots.default ? this.$slots.default() : null}
+          {getSlot(this)}
         </LocaleProvider>
       );
     },

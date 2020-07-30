@@ -29,6 +29,9 @@ export const SliderProps = () => ({
   tooltipVisible: PropTypes.bool,
   tooltipPlacement: tooltipProps.placement,
   getTooltipPopupContainer: PropTypes.func,
+  onChange: PropTypes.func,
+  'onUpdate:value': PropTypes.func,
+  onAfterChange: PropTypes.func,
 });
 
 const defaultTipFormatter = value => value.toString();
@@ -104,6 +107,10 @@ const Slider = {
     blur() {
       this.vcSlider.blur();
     },
+    handleChange(val) {
+      this.$emit('update:value', val);
+      this.$emit('change', val);
+    },
   },
   render() {
     const {
@@ -122,6 +129,7 @@ const Slider = {
         tooltipPrefixCls,
         handle: info => this.handleWithTooltip(tooltipPrefixCls, prefixCls, info),
         ref: this.saveSlider,
+        onChange: this.handleChange,
       };
       return <VcRange {...vcRangeProps} />;
     }
@@ -131,6 +139,7 @@ const Slider = {
       tooltipPrefixCls,
       handle: info => this.handleWithTooltip(tooltipPrefixCls, prefixCls, info),
       ref: this.saveSlider,
+      onChange: this.handleChange,
     };
     return <VcSlider {...vcSliderProps} />;
   },

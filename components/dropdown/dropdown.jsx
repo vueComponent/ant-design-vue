@@ -3,6 +3,7 @@ import RcDropdown from '../vc-dropdown/src/index';
 import DropdownButton from './dropdown-button';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
+import classNames from 'classnames';
 import {
   getOptionProps,
   getPropsData,
@@ -17,12 +18,14 @@ import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 const DropdownProps = getDropdownProps();
 const Dropdown = {
   name: 'ADropdown',
+  inheritAttrs: false,
   props: {
     ...DropdownProps,
     prefixCls: PropTypes.string,
     mouseEnterDelay: PropTypes.number.def(0.15),
     mouseLeaveDelay: PropTypes.number.def(0.1),
     placement: DropdownProps.placement.def('bottomLeft'),
+    onVisibleChange: PropTypes.func,
   },
   setup() {
     return {
@@ -69,6 +72,10 @@ const Dropdown = {
         : overlay;
       return fixedModeOverlay;
     },
+    handleVisibleChange(val) {
+      this.$emit('update:visible', val);
+      this.$emit('visibleChange', val);
+    },
   },
 
   render() {
@@ -78,14 +85,10 @@ const Dropdown = {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('dropdown', customizePrefixCls);
 
-    const dropdownTrigger = cloneElement(
-      getSlot(this),
-      {
-        class: `${prefixCls}-trigger`,
-        disabled,
-      },
-      false,
-    );
+    const dropdownTrigger = cloneElement(getSlot(this), {
+      class: classNames(this.$attrs?.class, `${prefixCls}-trigger`),
+      disabled,
+    });
     const triggerActions = disabled ? [] : trigger;
     let alignPoint;
     if (triggerActions && triggerActions.indexOf('contextmenu') !== -1) {
@@ -94,11 +97,13 @@ const Dropdown = {
     const dropdownProps = {
       alignPoint,
       ...props,
+      ...this.$attrs,
       prefixCls,
       getPopupContainer: getPopupContainer || getContextPopupContainer,
       transitionName: this.getTransitionName(),
       trigger: triggerActions,
       overlay: this.renderOverlay(prefixCls),
+      onVisibleChange: this.handleVisibleChange,
     };
     return <RcDropdown {...dropdownProps}>{dropdownTrigger}</RcDropdown>;
   },

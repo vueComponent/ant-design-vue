@@ -1,4 +1,4 @@
-import { Transition } from 'vue';
+import { Transition, inject, provide } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
@@ -36,7 +36,6 @@ const SubMenu = {
   name: 'SubMenu',
   inheritAttrs: false,
   props: {
-    parentMenu: PropTypes.object,
     title: PropTypes.any,
     selectedKeys: PropTypes.array.def([]),
     openKeys: PropTypes.array.def([]),
@@ -77,6 +76,12 @@ const SubMenu = {
   },
   mixins: [BaseMixin],
   isSubMenu: true,
+  setup() {
+    return { parentMenu: inject('parentMenu', undefined) };
+  },
+  created() {
+    provide('parentMenu', this);
+  },
   data() {
     const props = this.$props;
     const store = props.store;
@@ -127,7 +132,7 @@ const SubMenu = {
   },
   methods: {
     handleUpdated() {
-      const { mode, parentMenu, manualRef } = this.$props;
+      const { mode, parentMenu, manualRef } = this;
 
       // invoke customized ref to expose component to mixin
       if (manualRef) {
@@ -196,26 +201,15 @@ const SubMenu = {
     },
 
     onMouseLeave(e) {
-      const { eventKey, parentMenu } = this;
-      parentMenu.subMenuInstance = this;
-      // parentMenu.subMenuLeaveFn = () => {
-      // // trigger mouseleave
-      //   this.__emit('mouseleave', {
-      //     key: eventKey,
-      //     domEvent: e,
-      //   })
-      // }
+      const { eventKey } = this;
       this.__emit('mouseleave', {
         key: eventKey,
         domEvent: e,
       });
-      // prevent popup menu and submenu gap
-      // parentMenu.subMenuLeaveTimer = setTimeout(parentMenu.subMenuLeaveFn, 100)
     },
 
     onTitleMouseEnter(domEvent) {
       const { eventKey: key } = this.$props;
-      // this.clearSubMenuTitleLeaveTimer()
       this.__emit('itemHover', {
         key,
         hover: true,
@@ -227,8 +221,7 @@ const SubMenu = {
     },
 
     onTitleMouseLeave(e) {
-      const { eventKey, parentMenu } = this;
-      parentMenu.subMenuInstance = this;
+      const { eventKey } = this;
       this.__emit('itemHover', {
         key: eventKey,
         hover: false,
@@ -356,7 +349,6 @@ const SubMenu = {
         openTransitionName: props.openTransitionName,
         openAnimation: props.openAnimation,
         subMenuOpenDelay: props.subMenuOpenDelay,
-        parentMenu: this,
         subMenuCloseDelay: props.subMenuCloseDelay,
         forceSubMenuRender: props.forceSubMenuRender,
         triggerSubMenuAction: props.triggerSubMenuAction,

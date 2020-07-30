@@ -74,7 +74,6 @@ export const menuAllProps = [
   'defaultActiveFirst',
   'prefixCls',
   'inlineIndent',
-  'parentMenu',
   'title',
   'rootPrefixCls',
   'eventKey',

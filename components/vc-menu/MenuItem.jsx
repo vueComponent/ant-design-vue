@@ -5,6 +5,7 @@ import scrollIntoView from 'dom-scroll-into-view';
 import { connect } from '../_util/store';
 import { noop, menuAllProps } from './util';
 import { getComponent, getSlot, findDOMNode } from '../_util/props-util';
+import { inject } from 'vue';
 
 const props = {
   attribute: PropTypes.object,
@@ -18,7 +19,6 @@ const props = {
   inlineIndent: PropTypes.number.def(24),
   level: PropTypes.number.def(1),
   mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']),
-  parentMenu: PropTypes.object,
   multiple: PropTypes.bool,
   value: PropTypes.any,
   isSelected: PropTypes.bool,
@@ -34,6 +34,9 @@ const MenuItem = {
   props,
   mixins: [BaseMixin],
   isMenuItem: true,
+  setup() {
+    return { parentMenu: inject('parentMenu', undefined) };
+  },
   created() {
     this.prevActive = this.active;
     // invoke customized ref to expose component to mixin
@@ -41,9 +44,9 @@ const MenuItem = {
   },
   updated() {
     this.$nextTick(() => {
-      const { active, parentMenu, eventKey } = this.$props;
+      const { active, parentMenu, eventKey } = this;
       if (!this.prevActive && active && (!parentMenu || !parentMenu[`scrolled-${eventKey}`])) {
-        scrollIntoView(this.$refs.node, findDOMNode(this.parentMenu), {
+        scrollIntoView(findDOMNode(this.node), findDOMNode(parentMenu), {
           onlyScrollIfNeeded: true,
         });
         parentMenu[`scrolled-${eventKey}`] = true;
@@ -127,7 +130,9 @@ const MenuItem = {
     getDisabledClassName() {
       return `${this.getPrefixCls()}-disabled`;
     },
-
+    saveNode(node) {
+      this.node = node;
+    },
     callRef() {
       if (this.manualRef) {
         this.manualRef(this);
@@ -182,7 +187,7 @@ const MenuItem = {
       ...props,
       ...attrs,
       ...mouseEvent,
-      ref: 'node',
+      ref: this.saveNode,
     };
     delete liProps.children;
     return (

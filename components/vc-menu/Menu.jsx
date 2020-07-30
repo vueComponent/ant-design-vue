@@ -4,6 +4,7 @@ import { default as SubPopupMenu, getActiveKey } from './SubPopupMenu';
 import BaseMixin from '../_util/BaseMixin';
 import hasProp, { getOptionProps, getComponent, filterEmpty } from '../_util/props-util';
 import commonPropsType from './commonPropsType';
+import { provide } from 'vue';
 
 const Menu = {
   name: 'Menu',
@@ -34,6 +35,9 @@ const Menu = {
 
     // this.isRootMenu = true // 声明在props上
     return {};
+  },
+  created() {
+    provide('parentMenu', this);
   },
   mounted() {
     this.updateMiniStore();
@@ -166,7 +170,6 @@ const Menu = {
       expandIcon: getComponent(this, 'expandIcon', props),
       overflowedIndicator: getComponent(this, 'overflowedIndicator', props) || <span>···</span>,
       openTransitionName: this.getOpenTransitionName(),
-      parentMenu: this,
       children: filterEmpty(props.children),
       onClick: this.onClick,
       onOpenChange: this.onOpenChange,

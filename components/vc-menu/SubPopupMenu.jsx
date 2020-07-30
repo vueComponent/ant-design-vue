@@ -1,4 +1,4 @@
-import { Comment } from 'vue';
+import { Comment, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { connect } from '../_util/store';
 import BaseMixin from '../_util/BaseMixin';
@@ -89,7 +89,6 @@ const SubPopupMenu = {
       openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
       openKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
       visible: PropTypes.bool,
-      parentMenu: PropTypes.object,
       eventKey: PropTypes.string,
       store: PropTypes.object,
 
@@ -131,6 +130,9 @@ const SubPopupMenu = {
   ),
 
   mixins: [BaseMixin],
+  setup() {
+    return { parentMenu: inject('parentMenu', undefined) };
+  },
   created() {
     const props = getOptionProps(this);
     this.prevProps = { ...props };
@@ -293,7 +295,6 @@ const SubPopupMenu = {
         renderMenuItem: this.renderMenuItem,
         rootPrefixCls: props.prefixCls,
         index: i,
-        parentMenu: props.parentMenu,
         // customized ref function, need to be invoked manually in child's componentDidMount
         manualRef: childProps.disabled ? noop : saveRef.bind(this, key),
         eventKey: key,

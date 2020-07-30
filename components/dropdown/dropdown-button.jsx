@@ -1,5 +1,6 @@
 import { provide, inject } from 'vue';
 import Button from '../button';
+import classNames from 'classnames';
 import buttonTypes from '../button/buttonTypes';
 import { ButtonGroupProps } from '../button/button-group';
 import Dropdown from './dropdown';
@@ -24,10 +25,14 @@ const DropdownButtonProps = {
   placement: DropdownProps.placement.def('bottomRight'),
   icon: PropTypes.any,
   title: PropTypes.string,
+  onClick: PropTypes.func,
+  onVisibleChange: PropTypes.func,
+  'onUpdate:visible': PropTypes.func,
 };
 export { DropdownButtonProps };
 export default {
   name: 'ADropdownButton',
+  inheritAttrs: false,
   props: DropdownButtonProps,
   setup() {
     return {
@@ -41,10 +46,10 @@ export default {
     savePopupRef(ref) {
       this.popupRef = ref;
     },
-    onClick(e) {
+    handleClick(e) {
       this.$emit('click', e);
     },
-    onVisibleChange(val) {
+    handleVisibleChange(val) {
       this.$emit('update:visible', val);
       this.$emit('visibleChange', val);
     },
@@ -53,17 +58,21 @@ export default {
     const {
       type,
       disabled,
+      onClick,
       htmlType,
+      class: className,
       prefixCls: customizePrefixCls,
+      overlay,
       trigger,
       align,
       visible,
+      onVisibleChange,
       placement,
       getPopupContainer,
       href,
       title,
       ...restProps
-    } = this.$props;
+    } = { ...this.$props, ...this.$attrs };
     const icon = getComponent(this, 'icon') || <EllipsisOutlined />;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -74,7 +83,7 @@ export default {
       trigger: disabled ? [] : trigger,
       placement,
       getPopupContainer: getPopupContainer || getContextPopupContainer,
-      onVisibleChange: this.onVisibleChange,
+      onVisibleChange: this.handleVisibleChange,
     };
     if (hasProp(this, 'visible')) {
       dropdownProps.visible = visible;
@@ -82,7 +91,7 @@ export default {
 
     const buttonGroupProps = {
       ...restProps,
-      class: prefixCls,
+      class: classNames(prefixCls, className),
     };
 
     return (
@@ -90,7 +99,7 @@ export default {
         <Button
           type={type}
           disabled={disabled}
-          onClick={this.onClick}
+          onClick={this.handleClick}
           htmlType={htmlType}
           href={href}
           title={title}

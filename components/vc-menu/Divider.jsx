@@ -1,5 +1,6 @@
 export default {
   name: 'MenuDivider',
+  inheritAttrs: false,
   props: {
     disabled: {
       type: Boolean,
@@ -9,6 +10,7 @@ export default {
   },
   render() {
     const { rootPrefixCls } = this.$props;
-    return <li class={`${rootPrefixCls}-item-divider`} />;
+    const { class: className = '', style } = this.$attrs;
+    return <li class={`${className} ${rootPrefixCls}-item-divider`} style={style} />;
   },
 };

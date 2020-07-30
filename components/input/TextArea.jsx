@@ -41,12 +41,12 @@ export default {
     setValue(value, callback) {
       if (!hasProp(this, 'value')) {
         this.stateValue = value;
-        this.$nextTick(() => {
-          callback && callback();
-        });
       } else {
         this.$forceUpdate();
       }
+      this.$nextTick(() => {
+        callback && callback();
+      });
     },
     handleKeyDown(e) {
       if (e.keyCode === 13) {
@@ -54,7 +54,7 @@ export default {
       }
       this.$emit('keydown', e);
     },
-    onChange(e) {
+    triggerChange(e) {
       this.$emit('update:value', e.target.value);
       this.$emit('change', e);
       this.$emit('input', e);
@@ -66,7 +66,7 @@ export default {
       this.setValue(e.target.value, () => {
         this.resizableTextArea.resizeTextarea();
       });
-      resolveOnChange(this.resizableTextArea.textArea, e, this.onChange);
+      resolveOnChange(this.resizableTextArea.textArea, e, this.triggerChange);
     },
 
     focus() {
@@ -88,7 +88,7 @@ export default {
         this.resizableTextArea.renderTextArea();
         this.focus();
       });
-      resolveOnChange(this.resizableTextArea.textArea, e, this.onChange);
+      resolveOnChange(this.resizableTextArea.textArea, e, this.triggerChange);
     },
 
     renderTextArea(prefixCls) {

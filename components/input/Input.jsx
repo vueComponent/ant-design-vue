@@ -114,14 +114,14 @@ export default {
       }
       if (!hasProp(this, 'value')) {
         this.stateValue = value;
-        this.$nextTick(() => {
-          callback && callback();
-        });
       } else {
         this.$forceUpdate();
       }
+      this.$nextTick(() => {
+        callback && callback();
+      });
     },
-    onChange(e) {
+    triggerChange(e) {
       this.$emit('update:value', e.target.value);
       this.$emit('change', e);
       this.$emit('input', e);
@@ -130,11 +130,12 @@ export default {
       this.setValue('', () => {
         this.focus();
       });
-      resolveOnChange(this.input, e, this.onChange);
+      resolveOnChange(this.input, e, this.triggerChange);
     },
     renderInput(prefixCls, { addonBefore, addonAfter }) {
       const otherProps = omit(this.$props, [
         'prefixCls',
+        'onPressEnter',
         'addonBefore',
         'addonAfter',
         'prefix',
@@ -185,7 +186,7 @@ export default {
       // https://github.com/vueComponent/ant-design-vue/issues/2203
       if (((e.isComposing || composing) && this.lazy) || this.stateValue === value) return;
       this.setValue(value, this.clearPasswordValueAttribute);
-      resolveOnChange(this.input, e, this.onChange);
+      resolveOnChange(this.input, e, this.triggerChange);
     },
     handleKeyDown(e) {
       if (e.keyCode === 13) {

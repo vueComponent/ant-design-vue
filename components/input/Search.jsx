@@ -19,6 +19,7 @@ export default {
     ...inputProps,
     // 不能设置默认值 https://github.com/vueComponent/ant-design-vue/issues/1916
     enterButton: PropTypes.any,
+    onSearch: PropTypes.func,
   },
   setup() {
     return {
@@ -29,13 +30,14 @@ export default {
     saveInput(node) {
       this.input = node;
     },
-    onChange(e) {
+    handleChange(e) {
       if (e && e.target && e.type === 'click') {
         this.$emit('search', e.target.value, e);
       }
+      this.$emit('update:value', e.target.value);
       this.$emit('change', e);
     },
-    onSearch(e) {
+    handleSearch(e) {
       if (this.loading || this.disabled) {
         return;
       }
@@ -78,7 +80,7 @@ export default {
       if (enterButton) return suffix;
 
       const icon = (
-        <SearchOutlined class={`${prefixCls}-icon`} key="searchIcon" onClick={this.onSearch} />
+        <SearchOutlined class={`${prefixCls}-icon`} key="searchIcon" onClick={this.handleSearch} />
       );
 
       if (suffix) {
@@ -114,7 +116,7 @@ export default {
           key: 'enterButton',
           class: isAntdButton ? btnClassName : '',
           ...(isAntdButton ? { size } : {}),
-          onClick: this.onSearch,
+          onClick: this.handleSearch,
         });
       } else {
         button = (
@@ -124,7 +126,7 @@ export default {
             size={size}
             disabled={disabled}
             key="enterButton"
-            onClick={this.onSearch}
+            onClick={this.handleSearch}
           >
             {enterButton === true || enterButton === '' ? <SearchOutlined /> : enterButton}
           </Button>
@@ -149,6 +151,7 @@ export default {
     delete restProps.loading;
     delete restProps.enterButton;
     delete restProps.addonBefore;
+    delete restProps['onUpdate:value'];
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input-search', customizePrefixCls);
     const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
@@ -175,8 +178,8 @@ export default {
       addonAfter: this.renderAddonAfter(prefixCls),
       addonBefore,
       class: inputClassName,
-      onPressEnter: this.onSearch,
-      onChange: this.onChange,
+      onPressEnter: this.handleSearch,
+      onChange: this.handleChange,
     };
     return <Input {...inputProps} ref={this.saveInput} />;
   },

@@ -1,6 +1,6 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { filterEmpty, getSlot } from '../_util/props-util';
+import { getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export default {
@@ -34,6 +34,6 @@ export default {
     },
   },
   render() {
-    return <span class={this.classes}>{filterEmpty(getSlot(this))}</span>;
+    return <span class={this.classes}>{getSlot(this)}</span>;
   },
 };

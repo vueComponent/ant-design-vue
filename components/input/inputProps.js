@@ -32,4 +32,12 @@ export default {
   },
   maxlength: PropTypes.number,
   loading: PropTypes.bool,
+  onPressEnter: PropTypes.func,
+  onKeydown: PropTypes.func,
+  onKeyup: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
+  onInput: PropTypes.func,
+  'onUpdate:value': PropTypes.func,
 };

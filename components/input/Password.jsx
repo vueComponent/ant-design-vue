@@ -77,6 +77,7 @@ export default {
       inputPrefixCls,
       size,
       suffix,
+      action,
       visibilityToggle,
       ...restProps
     } = getOptionProps(this);

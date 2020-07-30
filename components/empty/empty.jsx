@@ -1,10 +1,10 @@
 const Empty = () => {
   return (
     <svg width="184" height="152" viewBox="0 0 184 152" xmlns="http://www.w3.org/2000/svg">
-      <g fill="none" fillRule="evenodd">
+      <g fill="none" fill-rule="evenodd">
         <g transform="translate(24 31.67)">
           <ellipse
-            fillOpacity=".8"
+            fill-opacity=".8"
             fill="#F5F5F7"
             cx="67.797"
             cy="106.89"

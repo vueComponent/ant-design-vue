@@ -486,8 +486,8 @@ const Cascader = {
     }
     // The default value of `matchInputWidth` is `true`
     const resultListMatchInputWidth = showSearch.matchInputWidth !== false;
-    if (resultListMatchInputWidth && (inputValue || isNotFound) && this.$refs.input) {
-      dropdownMenuColumnStyle.width = findDOMNode(this.input).offsetWidth + 'px';
+    if (resultListMatchInputWidth && (inputValue || isNotFound) && this.input) {
+      dropdownMenuColumnStyle.width = findDOMNode(this.input.input).offsetWidth + 'px';
     }
     // showSearch时，focus、blur在input上触发，反之在ref='picker'上触发
     const inputProps = {

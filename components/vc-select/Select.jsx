@@ -437,7 +437,7 @@ const Select = {
 
       if (isRealOpen && this.selectTriggerRef) {
         const menu = this.selectTriggerRef.getInnerMenu();
-        if (menu && menu.onKeyDown(event, this.handleBackfill)) {
+        if (menu && menu.onKeyDown(event, callback => this.handleBackfill(event, callback))) {
           event.preventDefault();
           event.stopPropagation();
         }
@@ -982,7 +982,9 @@ const Select = {
       this._mouseDown = false;
     },
 
-    handleBackfill(item) {
+    handleBackfill(event, item) {
+      const dropDownMenu = this.selectTriggerRef.dropdownMenuRef;
+      dropDownMenu.onKeyDown(event, item);
       if (!this.backfill || !(isSingleMode(this.$props) || isCombobox(this.$props))) {
         return;
       }

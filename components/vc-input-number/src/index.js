@@ -6,8 +6,6 @@ import classNames from 'classnames';
 import KeyCode from '../../_util/KeyCode';
 import InputHandler from './InputHandler';
 
-function noop() {}
-
 function preventDefault(e) {
   e.preventDefault();
 }
@@ -77,6 +75,7 @@ const inputNumberProps = {
   name: PropTypes.string,
   id: PropTypes.string,
   type: PropTypes.string,
+  maxlength: PropTypes.any,
 };
 
 export default {
@@ -115,9 +114,6 @@ export default {
   },
   mounted() {
     this.$nextTick(() => {
-      if (this.autofocus && !this.disabled) {
-        this.focus();
-      }
       this.updatedFunc();
     });
   },
@@ -691,21 +687,21 @@ export default {
     let downEvents;
     if (useTouch) {
       upEvents = {
-        onTouchstart: editable && !upDisabledClass ? this.up : noop,
+        onTouchstart: editable && !upDisabledClass && this.up,
         onTouchend: this.stop,
       };
       downEvents = {
-        onTouchstart: editable && !downDisabledClass ? this.down : noop,
+        onTouchstart: editable && !downDisabledClass && this.down,
         onTouchend: this.stop,
       };
     } else {
       upEvents = {
-        onMousedown: editable && !upDisabledClass ? this.up : noop,
+        onMousedown: editable && !upDisabledClass && this.up,
         onMouseup: this.stop,
         onMouseleave: this.stop,
       };
       downEvents = {
-        onMousedown: editable && !downDisabledClass ? this.down : noop,
+        onMousedown: editable && !downDisabledClass && this.down,
         onMouseup: this.stop,
         onMouseleave: this.stop,
       };
@@ -735,7 +731,6 @@ export default {
       ...downEvents,
       ref: this.saveDown,
     };
-
     return (
       <div
         class={classes}
@@ -747,16 +742,18 @@ export default {
         onMouseout={props.onMouseout}
       >
         <div class={`${prefixCls}-handler-wrap`}>
-          <InputHandler {...upHandlerProps}>
-            {upHandler || (
-              <span
-                unselectable="unselectable"
-                class={`${prefixCls}-handler-up-inner`}
-                onClick={preventDefault}
-              />
-            )}
-          </InputHandler>
-          <InputHandler {...downHandlerProps}>
+          <span>
+            <InputHandler {...upHandlerProps} key="upHandler">
+              {upHandler || (
+                <span
+                  unselectable="unselectable"
+                  class={`${prefixCls}-handler-up-inner`}
+                  onClick={preventDefault}
+                />
+              )}
+            </InputHandler>
+          </span>
+          <InputHandler {...downHandlerProps} key="downHandler">
             {downHandler || (
               <span
                 unselectable="unselectable"
@@ -781,8 +778,10 @@ export default {
             autocomplete={autocomplete}
             onFocus={this.onFocus}
             onBlur={this.onBlur}
-            onKeydown={editable ? this.onKeyDown : noop}
-            onKeyup={editable ? this.onKeyUp : noop}
+            onKeydown={editable && this.onKeyDown}
+            onKeyup={editable && this.onKeyUp}
+            autofocus={this.autofocus}
+            maxlength={this.maxlength}
             readonly={this.readonly}
             disabled={this.disabled}
             max={this.max}

@@ -38,6 +38,15 @@ const InputNumber = {
       configProvider: inject('configProvider', ConfigConsumerProps),
     };
   },
+  mounted() {
+    this.$nextTick(() => {
+      if (process.env.NODE_ENV === 'test') {
+        if (this.autofocus && !this.disabled) {
+          this.focus();
+        }
+      }
+    });
+  },
   methods: {
     saveInputNumber(inputNumberRef) {
       this.inputNumberRef = inputNumberRef;

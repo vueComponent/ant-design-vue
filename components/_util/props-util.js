@@ -342,7 +342,7 @@ export function isEmptyElement(c) {
 }
 
 export function isStringElement(c) {
-  return !c.tag;
+  return c && c.type === Text;
 }
 
 export function filterEmpty(children = []) {

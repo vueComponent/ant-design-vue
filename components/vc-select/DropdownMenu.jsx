@@ -6,9 +6,10 @@ import { getSelectKeys, preventDefaultEvent } from './util';
 import { cloneElement } from '../_util/vnode';
 import BaseMixin from '../_util/BaseMixin';
 import { getSlotOptions, getComponentFromProp, getListeners } from '../_util/props-util';
+import KeyCode from '../_util/KeyCode';
 
 // 默认偏移值
-let defaultOffset = 10;
+let defaultOffset = 9;
 
 export default {
   name: 'DropdownMenu',
@@ -35,8 +36,13 @@ export default {
     menuItemStart: 0,
     menuItemOffset: defaultOffset,
     itemSize: 32,
-    maxHeight: 250,
+    menuContainerHeight: 250,
   }),
+  computed: {
+    virtualMaxHeight() {
+      return this.menuItems.length * this.itemSize;
+    },
+  },
   watch: {
     visible(val) {
       if (!val) {
@@ -64,13 +70,21 @@ export default {
   mounted() {
     this.$nextTick(() => {
       this.scrollActiveItemToView();
-    });
-    this.lastVisible = this.$props.visible;
+      // Roughly calculate the height of ‘select-option’
+      const menuRef = this.$refs.menuRef;
+      const menuEle = menuRef && menuRef.$el;
+      if (menuEle) {
+        const option = menuEle.querySelector("li[role='option']");
+        if (option) this.itemSize = option.clientHeight;
+      }
 
-    // Calculate the offset value during virtual scrolling
-    const { maxHeight } = this.dropdownMenuStyle;
-    this.menuItemOffset = defaultOffset =
-      Math.ceil(parseInt(maxHeight || this.maxHeight) / this.itemSize) + 2;
+      // Calculate the offset value during virtual scrolling
+      const { maxHeight } = this.dropdownMenuStyle;
+      this.menuContainerHeight = parseInt(maxHeight) || 250;
+      this.menuItemOffset = defaultOffset = Math.ceil(this.menuContainerHeight / this.itemSize) + 1;
+    });
+
+    this.lastVisible = this.$props.visible;
   },
   updated() {
     const props = this.$props;
@@ -79,14 +93,7 @@ export default {
     //     this.scrollActiveItemToView();
     //   });
     // }
-    // Roughly calculate the height of ‘select-option’
-    this.$nextTick(() => {
-      const menuRef = this.$refs.menuRef;
-      if (menuRef && menuRef.$el) {
-        const option = menuRef.$el.querySelector("li[role='option']");
-        if (option) this.itemSize = option.clientHeight;
-      }
-    });
+
     this.lastVisible = props.visible;
     this.lastInputValue = props.inputValue;
     this.prevVisible = this.visible;
@@ -146,7 +153,6 @@ export default {
           on: {},
           style: {
             ...dropdownMenuStyle,
-            // Movement control for virtual scrolling
             overflowY: 'hidden',
             maxHeight: this.menuItemOffset * this.itemSize + 'px',
           },
@@ -255,18 +261,42 @@ export default {
       const { popupScroll } = getListeners(this);
       popupScroll(event);
     },
+    onKeyDown(event, item) {
+      const { keyCode } = event;
+      const menuContainer = this.$refs.menuContainer;
+
+      let scrollTop = menuContainer.scrollTop;
+      let itemOffsetTop = item.$el.offsetTop;
+
+      if (keyCode === KeyCode.DOWN) {
+        if (this.menuItemStart > 0) itemOffsetTop -= this.itemSize;
+        if (itemOffsetTop > this.menuContainerHeight) scrollTop += this.itemSize;
+        if (
+          itemOffsetTop <= 0 &&
+          scrollTop + this.itemSize >= this.virtualMaxHeight - this.menuContainerHeight
+        )
+          scrollTop = 0;
+      }
+
+      if (keyCode === KeyCode.UP) {
+        if (itemOffsetTop < this.itemSize) scrollTop -= this.itemSize;
+        if (itemOffsetTop >= this.menuContainerHeight && scrollTop <= this.itemSize)
+          scrollTop = this.virtualMaxHeight;
+      }
+
+      menuContainer.scrollTop = scrollTop;
+    },
   },
   render() {
     const renderMenu = this.renderMenu();
     const { popupFocus } = getListeners(this);
-    const { maxHeight = this.maxHeight + 'px' } = this.dropdownMenuStyle;
 
     return renderMenu ? (
       <div
         style={{
           overflow: 'auto',
           transform: 'translateZ(0)',
-          maxHeight,
+          maxHeight: this.menuContainerHeight + 'px',
         }}
         id={this.$props.ariaId}
         tabIndex="-1"
@@ -276,8 +306,9 @@ export default {
         ref="menuContainer"
       >
         <div
+          ref="virtualWrap"
           style={{
-            minHeight: this.menuItems.length * this.itemSize + 'px',
+            minHeight: this.virtualMaxHeight + 'px',
           }}
         >
           {renderMenu}

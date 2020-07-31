@@ -51,15 +51,11 @@ const ResizableTextArea = {
     },
     handleResize(size) {
       const { resizeStatus } = this.$data;
-      const { autoSize } = this.$props;
 
       if (resizeStatus !== RESIZE_STATUS_NONE) {
         return;
       }
       this.$emit('resize', size);
-      if (autoSize) {
-        this.resizeOnNextFrame();
-      }
     },
     resizeOnNextFrame() {
       raf.cancel(this.nextFrameActionId);
@@ -138,11 +134,6 @@ const ResizableTextArea = {
         ...otherProps,
         style,
         class: cls,
-        // directives: [
-        //   {
-        //     name: 'ant-input',
-        //   },
-        // ],
       };
       if (!textareaProps.autofocus) {
         delete textareaProps.autofocus;

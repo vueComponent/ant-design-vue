@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/input/demo/index';
+import demo from '../antdv-demo/docs/input/demo/textarea';
 
 export default {
   components: {

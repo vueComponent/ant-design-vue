@@ -31,11 +31,19 @@ export default {
       stateValue: typeof value === 'undefined' ? '' : value,
     };
   },
-  computed: {},
   watch: {
     value: syncWatch(function(val) {
       this.stateValue = val;
     }),
+  },
+  mounted() {
+    this.$nextTick(() => {
+      if (process.env.NODE_ENV === 'test') {
+        if (this.autofocus) {
+          this.focus();
+        }
+      }
+    });
   },
   methods: {
     setValue(value, callback) {

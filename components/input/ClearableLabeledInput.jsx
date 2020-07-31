@@ -80,7 +80,7 @@ const ClearableLabeledInput = {
         <span class={`${prefixCls}-prefix`}>{props.prefix}</span>
       ) : null;
 
-      const affixWrapperCls = classNames(props.className, `${prefixCls}-affix-wrapper`, {
+      const affixWrapperCls = classNames(this.$attrs?.class, `${prefixCls}-affix-wrapper`, {
         [`${prefixCls}-affix-wrapper-sm`]: props.size === 'small',
         [`${prefixCls}-affix-wrapper-lg`]: props.size === 'large',
         [`${prefixCls}-affix-wrapper-input-with-clear-btn`]:

@@ -303,10 +303,11 @@ export default {
         bodyRows,
         (acc, row) => {
           const rowKey = row.getAttribute('data-row-key');
-          const height =
-            row.getBoundingClientRect().height ||
-            state.fixedColumnsBodyRowsHeight[rowKey] ||
-            'auto';
+          const height = 'auto';
+          // const height =
+          //   row.getBoundingClientRect().height ||
+          //   state.fixedColumnsBodyRowsHeight[rowKey] ||
+          //   'auto';
           acc[rowKey] = height;
           return acc;
         },

@@ -14,6 +14,7 @@ import { ConfigConsumerProps } from '../config-provider';
 import BarsOutlined from '@ant-design/icons-vue/BarsOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
+import omit from 'omit.js';
 
 // matchMedia polyfill for
 // https://github.com/WickyNilliams/enquire.js/issues/82
@@ -53,6 +54,9 @@ export const SiderProps = {
   collapsedWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   breakpoint: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', 'xxl']),
   theme: PropTypes.oneOf(['light', 'dark']).def('dark'),
+  onBreakpoint: PropTypes.func,
+  onCollapse: PropTypes.func,
+  'onUpdate:collapse': PropTypes.func,
 };
 
 // export interface SiderState {
@@ -177,16 +181,29 @@ export default {
   render() {
     const {
       prefixCls: customizePrefixCls,
+      class: className,
       theme,
       collapsible,
       reverseArrow,
+      style,
       width,
       collapsedWidth,
       zeroWidthTriggerStyle,
-    } = getOptionProps(this);
+      ...others
+    } = { ...getOptionProps(this), ...this.$attrs };
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('layout-sider', customizePrefixCls);
-
+    const divProps = omit(others, [
+      'collapsed',
+      'defaultCollapsed',
+      'onCollapse',
+      'breakpoint',
+      'onBreakpoint',
+      'siderHook',
+      'zeroWidthTriggerStyle',
+      'trigger',
+      'onUpdate:collapse',
+    ]);
     const trigger = getComponent(this, 'trigger');
     const rawWidth = this.sCollapsed ? collapsedWidth : width;
     // use "px" as fallback unit for width
@@ -219,24 +236,20 @@ export default {
           )
         : null;
     const divStyle = {
-      // ...style,
+      ...style,
       flex: `0 0 ${siderWidth}`,
       maxWidth: siderWidth, // Fix width transition bug in IE11
       minWidth: siderWidth, // https://github.com/ant-design/ant-design/issues/6349
       width: siderWidth,
     };
-    const siderCls = classNames(prefixCls, `${prefixCls}-${theme}`, {
+    const siderCls = classNames(className, prefixCls, `${prefixCls}-${theme}`, {
       [`${prefixCls}-collapsed`]: !!this.sCollapsed,
       [`${prefixCls}-has-trigger`]: collapsible && trigger !== null && !zeroWidthTrigger,
       [`${prefixCls}-below`]: !!this.below,
       [`${prefixCls}-zero-width`]: parseFloat(siderWidth) === 0,
     });
-    const divProps = {
-      class: siderCls,
-      style: divStyle,
-    };
     return (
-      <aside {...divProps}>
+      <aside class={siderCls} {...divProps} style={divStyle}>
         <div class={`${prefixCls}-children`}>{getSlot(this)}</div>
         {collapsible || (this.below && zeroWidthTrigger) ? triggerDom : null}
       </aside>

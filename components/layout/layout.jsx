@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import { getOptionProps, getSlot } from '../_util/props-util';
@@ -54,17 +54,15 @@ const BasicLayout = {
       siders: [],
     };
   },
-  provide() {
-    return {
-      siderHook: {
-        addSider: id => {
-          this.siders = [...this.siders, id];
-        },
-        removeSider: id => {
-          this.siders = this.siders.filter(currentId => currentId !== id);
-        },
+  created() {
+    provide('siderHook', {
+      addSider: id => {
+        this.siders = [...this.siders, id];
       },
-    };
+      removeSider: id => {
+        this.siders = this.siders.filter(currentId => currentId !== id);
+      },
+    });
   },
   render() {
     const { prefixCls, hasSider, tagName: Tag } = this;

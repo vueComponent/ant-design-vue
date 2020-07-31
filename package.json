@@ -19,6 +19,7 @@
   "module": "es/index.js",
   "typings": "types/index.d.ts",
   "files": [
+    "components",
     "dist",
     "lib",
     "es",

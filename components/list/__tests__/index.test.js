@@ -14,7 +14,7 @@ describe('List', () => {
           return (
             <List
               dataSource={[]}
-              renderItem={item => <List.Item>{item}</List.Item>}
+              renderItem={({ item }) => <List.Item>{item}</List.Item>}
               locale={locale}
             />
           );

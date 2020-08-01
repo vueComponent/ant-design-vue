@@ -15,14 +15,14 @@ const RenderEmpty = {
       switch (componentName) {
         case 'Table':
         case 'List':
-          return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
+          return <Empty image={<Empty.PRESENTED_IMAGE_SIMPLE />} />;
 
         case 'Select':
         case 'TreeSelect':
         case 'Cascader':
         case 'Transfer':
         case 'Mentions':
-          return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} class={`${prefix}-small`} />;
+          return <Empty image={<Empty.PRESENTED_IMAGE_SIMPLE />} class={`${prefix}-small`} />;
 
         default:
           return <Empty />;

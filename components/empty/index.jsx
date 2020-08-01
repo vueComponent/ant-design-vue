@@ -38,7 +38,7 @@ const Empty = {
       let imageNode = null;
       if (typeof image === 'string') {
         imageNode = <img alt={alt} src={image} />;
-      } else if (typeof image === 'object' && image.PRESENTED_IMAGE_SIMPLE) {
+      } else if (typeof image === 'object' && image.type?.PRESENTED_IMAGE_SIMPLE) {
         const Image = image;
         imageNode = <Image />;
         cls[`${prefixCls}-normal`] = true;

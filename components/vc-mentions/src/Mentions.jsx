@@ -249,7 +249,6 @@ const Mentions = {
       prefixCls,
       placement,
       transitionName,
-      autofocus,
       notFoundContent,
       getPopupContainer,
       ...restProps
@@ -268,24 +267,21 @@ const Mentions = {
     ]);
 
     const options = measuring ? this.getOptions() : [];
-
+    const textareaProps = {
+      ...inputProps,
+      ...otherAttrs,
+      onChange: noop,
+      onSelect: noop,
+      value,
+      onInput: this.onChange,
+      onBlur: this.onInputBlur,
+      onKeydown: this.onKeyDown,
+      onKeyup: this.onKeyUp,
+      onFocus: this.onInputFocus,
+    };
     return (
       <div class={classNames(prefixCls, className)} style={style}>
-        <textarea
-          ref="textarea"
-          {...{
-            ...inputProps,
-            ...otherAttrs,
-            onChange: noop,
-            onSelect: noop,
-          }}
-          value={value}
-          onInput={this.onChange}
-          onBlur={this.onInputBlur}
-          onKeyDown={this.onKeyDown}
-          onKeyUp={this.onKeyUp}
-          onFocus={this.onInputFocus}
-        />
+        <textarea ref="textarea" {...textareaProps} />
         {measuring && (
           <div ref="measure" class={`${prefixCls}-measure`}>
             {value.slice(0, measureLocation)}

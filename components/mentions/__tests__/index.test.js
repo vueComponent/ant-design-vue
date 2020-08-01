@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
-import * as Vue from 'vue';
 import Mentions from '..';
 import focusTest from '../../../tests/shared/focusTest';
+import { sleep } from '../../../tests/utils';
 
 const { getMentions } = Mentions;
 
@@ -18,12 +18,8 @@ function triggerInput(wrapper, text = '') {
 }
 
 describe('Mentions', () => {
-  beforeAll(() => {
-    jest.useFakeTimers();
-  });
-
-  afterAll(() => {
-    jest.useRealTimers();
+  beforeEach(() => {
+    document.body.innerHTML = '';
   });
 
   it('getMentions', () => {
@@ -40,50 +36,43 @@ describe('Mentions', () => {
     ]);
   });
 
-  it('focus', () => {
+  fit('focus', async () => {
     const onFocus = jest.fn();
     const onBlur = jest.fn();
 
-    const wrapper = mount({
-      render() {
-        return <Mentions onFocus={onFocus} onBlur={onBlur} />;
+    const wrapper = mount(
+      {
+        render() {
+          return <Mentions onFocus={onFocus} onBlur={onBlur} />;
+        },
       },
-    });
+      { sync: false, attachTo: 'body' },
+    );
+    await sleep();
     wrapper.find('textarea').trigger('focus');
+    await sleep();
     expect(wrapper.find('.ant-mentions').classes('ant-mentions-focused')).toBeTruthy();
     expect(onFocus).toHaveBeenCalled();
-
     wrapper.find('textarea').trigger('blur');
-    jest.runAllTimers();
+    await sleep(500);
     expect(wrapper.classes()).not.toContain('ant-mentions-focused');
     expect(onBlur).toHaveBeenCalled();
   });
 
-  it('loading', done => {
+  it('loading', async () => {
     const wrapper = mount(
       {
         render() {
           return <Mentions loading />;
         },
       },
-      { sync: false },
+      { sync: false, attachTo: 'body' },
     );
+    await sleep(500);
     triggerInput(wrapper, '@');
-    Vue.nextTick(() => {
-      mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
-      Vue.nextTick(() => {
-        expect($$('.ant-mentions-dropdown-menu-item').length).toBeTruthy();
-        expect($$('.ant-spin')).toBeTruthy();
-        done();
-      });
-    });
+    await sleep(500);
+    expect($$('.ant-mentions-dropdown-menu-item').length).toBeTruthy();
+    expect($$('.ant-spin')).toBeTruthy();
   });
 
   focusTest(Mentions);

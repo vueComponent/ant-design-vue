@@ -7,7 +7,7 @@ import { mentionsProps } from '../vc-mentions/src/mentionsProps';
 import Spin from '../spin';
 import BaseMixin from '../_util/BaseMixin';
 import { ConfigConsumerProps } from '../config-provider';
-import { getOptionProps, getComponent, filterEmpty, getSlot } from '../_util/props-util';
+import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
 
 const { Option } = VcMentions;
 
@@ -53,6 +53,11 @@ const Mentions = {
   props: {
     ...mentionsProps,
     loading: PropTypes.bool,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+    onSelect: PropTypes.func,
+    onChange: PropTypes.func,
+    'onUpdate:value': PropTypes.func,
   },
   setup() {
     return {
@@ -66,31 +71,33 @@ const Mentions = {
   },
   mounted() {
     this.$nextTick(() => {
-      if (this.autofocus) {
-        this.focus();
+      if (process.env.NODE_ENV === 'test') {
+        if (this.autofocus) {
+          this.focus();
+        }
       }
     });
   },
   methods: {
-    onFocus(...args) {
+    handleFocus(...args) {
       this.$emit('focus', ...args);
       this.setState({
         focused: true,
       });
     },
-    onBlur(...args) {
+    handleBlur(...args) {
       this.$emit('blur', ...args);
       this.setState({
         focused: false,
       });
     },
-    onSelect(...args) {
+    handleSelect(...args) {
       this.$emit('select', ...args);
       this.setState({
         focused: true,
       });
     },
-    onChange(val) {
+    handleChange(val) {
       this.$emit('change', val);
       this.$emit('update:value', val);
     },
@@ -104,7 +111,7 @@ const Mentions = {
     },
     getOptions() {
       const { loading } = this.$props;
-      const children = filterEmpty(getSlot(this) || []);
+      const children = getSlot(this);
 
       if (loading) {
         return (
@@ -140,7 +147,7 @@ const Mentions = {
     } = getOptionProps(this);
     const { class: className, ...otherAttrs } = this.$attrs;
     const prefixCls = getPrefixCls('mentions', customizePrefixCls);
-    const otherProps = omit(restProps, ['loading']);
+    const otherProps = omit(restProps, ['loading', 'onUpdate:value']);
 
     const mergedClassName = classNames(className, {
       [`${prefixCls}-disabled`]: disabled,
@@ -158,10 +165,10 @@ const Mentions = {
       class: mergedClassName,
       rows: 1,
       ...otherAttrs,
-      onChange: this.onChange,
-      onSelect: this.onSelect,
-      onFocus: this.onFocus,
-      onBlur: this.onBlur,
+      onChange: this.handleChange,
+      onSelect: this.handleSelect,
+      onFocus: this.handleFocus,
+      onBlur: this.handleBlur,
       ref: 'vcMentions',
     };
 

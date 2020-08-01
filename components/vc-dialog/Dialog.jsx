@@ -51,6 +51,7 @@ let cacheOverflow = {};
 export default {
   name: 'VcDialog',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps(IDialogPropTypes, {
     mask: true,
     visible: false,
@@ -261,12 +262,10 @@ export default {
           </button>
         );
       }
-
-      const style = dest;
+      const { style: stl, class: className } = this.$attrs;
+      const style = { ...stl, ...dest };
       const sentinelStyle = { width: 0, height: 0, overflow: 'hidden' };
-      const cls = {
-        [prefixCls]: true,
-      };
+      const cls = [prefixCls, className, dialogClass];
       const transitionName = this.getTransitionName();
       const dialogElement = (
         <LazyRenderBox
@@ -275,7 +274,7 @@ export default {
           role="document"
           ref="dialog"
           style={style}
-          class={[cls, dialogClass]}
+          class={cls}
           forceRender={forceRender}
           onMousedown={this.onDialogMouseDown}
         >

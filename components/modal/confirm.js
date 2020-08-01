@@ -12,14 +12,20 @@ export default function confirm(config) {
   let confirmDialogInstance = null;
   let confirmDialogProps = {};
   function close(...args) {
-    destroy(...args);
+    currentConfig = {
+      ...currentConfig,
+      visible: false,
+      afterClose: destroy.bind(this, ...args),
+    };
+    update(currentConfig);
   }
   function update(newConfig) {
     currentConfig = {
       ...currentConfig,
       ...newConfig,
     };
-    Object.assign(confirmDialogInstance, currentConfig);
+    confirmDialogInstance &&
+      Object.assign(confirmDialogInstance, { confirmDialogProps: currentConfig });
   }
   function destroy(...args) {
     if (confirmDialogInstance && div.parentNode) {

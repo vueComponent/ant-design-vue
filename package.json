@@ -176,7 +176,7 @@
   },
   "dependencies": {
     "@ant-design-vue/babel-helper-vue-compatible-props": "^1.0.0",
-    "@ant-design/icons-vue": "^5.0.0-beta.0",
+    "@ant-design/icons-vue": "^5.0.0",
     "@babel/runtime": "^7.10.5",
     "@simonwep/pickr": "~1.7.0",
     "add-dom-event-listener": "^1.0.2",

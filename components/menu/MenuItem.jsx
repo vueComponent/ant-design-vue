@@ -25,8 +25,9 @@ export default {
     const { getInlineCollapsed, $attrs: attrs } = this;
     const inlineCollapsed = getInlineCollapsed();
     let tooltipTitle = title;
+    const children = getSlot(this);
     if (typeof title === 'undefined') {
-      tooltipTitle = level === 1 ? getSlot(this) : '';
+      tooltipTitle = level === 1 ? children : '';
     } else if (title === false) {
       tooltipTitle = '';
     }
@@ -52,7 +53,7 @@ export default {
       placement: 'right',
       overlayClassName: `${rootPrefixCls}-inline-collapsed-tooltip`,
     };
-    const item = <Item {...itemProps}>{getSlot(this)}</Item>;
+    const item = <Item {...itemProps}>{children}</Item>;
     return <Tooltip {...toolTipProps}>{item}</Tooltip>;
   },
 };

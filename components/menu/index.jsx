@@ -37,6 +37,14 @@ export const menuProps = {
   inlineCollapsed: PropTypes.bool,
   isRootMenu: PropTypes.bool.def(true),
   focusable: PropTypes.bool.def(false),
+  onOpenChange: PropTypes.func,
+  onSelect: PropTypes.func,
+  onDeselect: PropTypes.func,
+  onClick: PropTypes.func,
+  onMouseenter: PropTypes.func,
+  onSelectChange: PropTypes.func,
+  'onUpdate:selectedKeys': PropTypes.func,
+  'onUpdate:openKeys': PropTypes.func,
 };
 
 const Menu = {
@@ -231,19 +239,25 @@ const Menu = {
     const prefixCls = getPrefixCls('menu', customizePrefixCls);
     const menuMode = this.getRealMenuMode();
     const menuOpenAnimation = this.getMenuOpenAnimation(menuMode);
-
+    const { class: className, ...otherAttrs } = this.$attrs;
     const menuClassName = {
+      [className]: className,
       [`${prefixCls}-${theme}`]: true,
       [`${prefixCls}-inline-collapsed`]: this.getInlineCollapsed(),
     };
 
     const menuProps = {
-      ...omit(props, ['inlineCollapsed']),
+      ...omit(props, [
+        'inlineCollapsed',
+        'onUpdate:selectedKeys',
+        'onUpdate:openKeys',
+        'onSelectChange',
+      ]),
       getPopupContainer: getPopupContainer || getContextPopupContainer,
       openKeys: this.sOpenKeys,
       mode: menuMode,
       prefixCls,
-      ...this.$attrs,
+      ...otherAttrs,
       onSelect: this.handleSelect,
       onDeselect: this.handleDeselect,
       onOpenChange: this.handleOpenChange,

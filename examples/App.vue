@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/mentions/demo/index';
+import demo from '../antdv-demo/docs/menu/demo/index';
 
 export default {
   components: {
@@ -12,6 +12,7 @@ export default {
   },
   data() {
     return {
+      visible: true,
       current: ['mail'],
     };
   },

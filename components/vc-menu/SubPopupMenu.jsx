@@ -370,9 +370,9 @@ const SubPopupMenu = {
       style: extraAttrs.style,
       ...onEvents,
     };
-    // if (props.id) {
-    //   domProps.id = props.id
-    // }
+    if (extraAttrs.id !== undefined) {
+      domWrapProps.id = extraAttrs.id;
+    }
     if (props.focusable) {
       domWrapProps.tabindex = '0';
       domWrapProps.onKeydown = this.onKeyDown;

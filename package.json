@@ -29,7 +29,8 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js",
-    "dev:site": "node --max_old_space_size=4096 antdv-demo/build/dev.js",
+    "dev:demo": "node --max_old_space_size=4096 antdv-demo/build/dev.js",
+    "dev:site": "cross-env PORT=3001 NODE_ENV=development --max_old_space_size=4096 webpack-dev-server --config antdv-demo/build/webpack.dev.conf.js",
     "test": "cross-env NODE_ENV=test jest --config .jest.js",
     "compile": "node antd-tools/cli/run.js compile",
     "pub": "node antd-tools/cli/run.js pub",
@@ -158,6 +159,7 @@
     "through2": "^3.0.0",
     "typescript": "^3.9.7",
     "umi-mock-middleware": "^1.0.0",
+    "umi-request": "^1.3.5",
     "url-loader": "^3.0.0",
     "vue": "^3.0.0-rc.5",
     "vue-antd-md-loader": "^1.1.0",

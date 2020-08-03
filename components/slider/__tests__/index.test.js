@@ -11,43 +11,17 @@ describe('Slider', () => {
         defaultValue: 30,
       },
       sync: false,
+      attachTo: 'body',
     });
     await asyncExpect(() => {
-      wrapper
-        .findAll('.ant-slider-handle')
-        .at(0)
-        .trigger('mouseenter');
-    });
-    let dropdownWrapper = null;
-    await asyncExpect(() => {
-      dropdownWrapper = mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
+      wrapper.findAll('.ant-slider-handle')[0].trigger('mouseenter');
     });
     await asyncExpect(() => {
-      expect(dropdownWrapper.html()).toMatchSnapshot();
-      wrapper
-        .findAll('.ant-slider-handle')
-        .at(0)
-        .trigger('mouseleave');
+      expect(document.body.innerHTML).toMatchSnapshot();
+      wrapper.findAll('.ant-slider-handle')[0].trigger('mouseleave');
     });
     await asyncExpect(() => {
-      dropdownWrapper = mount(
-        {
-          render() {
-            return wrapper.find({ name: 'Trigger' }).vm.getComponent();
-          },
-        },
-        { sync: false },
-      );
-    });
-    await asyncExpect(() => {
-      expect(dropdownWrapper.html()).toMatchSnapshot();
+      expect(document.body.innerHTML).toMatchSnapshot();
     });
   });
 });

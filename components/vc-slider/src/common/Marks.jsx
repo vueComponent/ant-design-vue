@@ -3,7 +3,7 @@ import { isValidElement } from '../../../_util/props-util';
 
 const Marks = (_, { attrs }) => {
   const {
-    className,
+    class: className,
     vertical,
     reverse,
     marks,

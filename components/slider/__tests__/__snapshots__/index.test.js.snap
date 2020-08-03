@@ -1,22 +1,56 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Slider should show tooltip when hovering slider handler 1`] = `
-<div>
-  <div class="ant-tooltip ant-slider-tooltip ant-tooltip-placement-top" style="left: -999px; top: -1003px; transform-origin: 50% 4px;">
-    <div class="ant-tooltip-content">
-      <div class="ant-tooltip-arrow"></div>
-      <div role="tooltip" class="ant-tooltip-inner">30</div>
+<div id="app" data-v-app=""></div>
+<div id="app" data-v-app="">
+  <div tabindex="-1" class="ant-slider">
+    <div class="ant-slider-rail"></div>
+    <div class="ant-slider-track" style="left: 0%; width: 30%;"></div>
+    <div class="ant-slider-step"></div>
+    <!--teleport start-->
+    <!--teleport end-->
+    <div class="ant-tooltip-open ant-slider-handle" style="left: 30%; transform: translateX(-50%);" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30" aria-disabled="false"></div>
+    <div class=""></div>
+  </div>
+</div>
+<div style="position: absolute; top: 0px; left: 0px; width: 100%;">
+  <div>
+    <!---->
+    <div class="ant-tooltip  ant-slider-tooltip ant-tooltip-placement-top" style="left: -999px; top: -1003px;">
+      <div class="ant-tooltip-content">
+        <div class="ant-tooltip-arrow">
+          <!---->
+        </div>
+        <div class="ant-tooltip-inner" role="tooltip">30</div>
+      </div>
     </div>
   </div>
 </div>
 `;
 
 exports[`Slider should show tooltip when hovering slider handler 2`] = `
-<div>
-  <div class="ant-tooltip ant-slider-tooltip ant-tooltip-placement-top" style="display: none;">
-    <div class="ant-tooltip-content">
-      <div class="ant-tooltip-arrow"></div>
-      <div role="tooltip" class="ant-tooltip-inner">30</div>
+<div id="app" data-v-app=""></div>
+<div id="app" data-v-app="">
+  <div tabindex="-1" class="ant-slider">
+    <div class="ant-slider-rail"></div>
+    <div class="ant-slider-track" style="left: 0%; width: 30%;"></div>
+    <div class="ant-slider-step"></div>
+    <!--teleport start-->
+    <!--teleport end-->
+    <div class="ant-slider-handle" style="left: 30%; transform: translateX(-50%);" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30" aria-disabled="false"></div>
+    <div class=""></div>
+  </div>
+</div>
+<div style="position: absolute; top: 0px; left: 0px; width: 100%;">
+  <div>
+    <!---->
+    <div class="ant-tooltip ant-slider-tooltip ant-tooltip-placement-top zoom-down-leave" style="left: -999px; top: -1003px;">
+      <div class="ant-tooltip-content">
+        <div class="ant-tooltip-arrow">
+          <!---->
+        </div>
+        <div class="ant-tooltip-inner" role="tooltip">30</div>
+      </div>
     </div>
   </div>
 </div>

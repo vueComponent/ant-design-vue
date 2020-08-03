@@ -145,7 +145,7 @@ function notice(args) {
       notification.notice({
         content: () => (
           <div class={iconNode ? `${prefixCls}-with-icon` : ''}>
-            {iconNode && iconNode(h)}
+            {iconNode && iconNode()}
             <div class={`${prefixCls}-message`}>
               {!description && iconNode ? (
                 <span class={`${prefixCls}-message-single-line-auto-margin`} />

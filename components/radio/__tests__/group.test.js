@@ -4,7 +4,7 @@ import Radio from '../Radio';
 import RadioGroup from '../Group';
 
 describe('Radio', () => {
-  function createRadioGroup(props, listeners = {}) {
+  function createRadioGroup(props) {
     return {
       props: ['value'],
       render() {
@@ -13,7 +13,7 @@ describe('Radio', () => {
           groupProps.value = this.value;
         }
         return (
-          <RadioGroup ref="radioGroup" {...{ props: groupProps, on: listeners }}>
+          <RadioGroup ref="radioGroup" {...groupProps}>
             <Radio value="A">A</Radio>
             <Radio value="B">B</Radio>
             <Radio value="C">C</Radio>
@@ -50,35 +50,24 @@ describe('Radio', () => {
       },
     });
 
-    wrapper
-      .findAll('div')
-      .at(0)
-      .trigger('mouseenter');
+    wrapper.findAll('div')[0].trigger('mouseenter');
     expect(onMouseEnter).toHaveBeenCalled();
 
-    wrapper
-      .findAll('div')
-      .at(0)
-      .trigger('mouseleave');
+    wrapper.findAll('div')[0].trigger('mouseleave');
     expect(onMouseLeave).toHaveBeenCalled();
   });
 
   it('fire change events when value changes', async () => {
     const onChange = jest.fn();
-    const props = {};
-    const wrapper = mount(
-      createRadioGroup(props, {
-        change: onChange,
-      }),
-      { sync: false },
-    );
+    const props = { onChange };
+    const wrapper = mount(createRadioGroup(props), { sync: false });
     let radios = null;
     await asyncExpect(() => {
       radios = wrapper.findAll('input');
       // uncontrolled component
       wrapper.vm.$refs.radioGroup.stateValue = 'B';
       // wrapper.setData({ value: 'B' })
-      radios.at(0).trigger('change');
+      radios[0].trigger('change');
       expect(onChange.mock.calls.length).toBe(1);
     });
     await asyncExpect(() => {
@@ -87,7 +76,7 @@ describe('Radio', () => {
     await asyncExpect(() => {
       // controlled component
       wrapper.setProps({ value: 'A' });
-      radios.at(1).trigger('change');
+      radios[1].trigger('change');
       expect(onChange.mock.calls.length).toBe(2);
     });
     await asyncExpect(() => {
@@ -128,36 +117,31 @@ describe('Radio', () => {
 
     // uncontrolled component
     wrapper.vm.$refs.radioGroup.stateValue = 'B';
-    radios.at(0).trigger('change');
+    radios[0].trigger('change');
     expect(onChange.mock.calls.length).toBe(1);
     expect(onChangeRadioGroup.mock.calls.length).toBe(1);
 
     // controlled component
     wrapper.setProps({ value: 'A' });
-    radios.at(1).trigger('change');
+    radios[1].trigger('change');
     expect(onChange.mock.calls.length).toBe(2);
   });
 
   it('Trigger onChange when both of radioButton and radioGroup exists', async () => {
     const onChange = jest.fn();
-    const props = {};
-    const wrapper = mount(
-      createRadioGroup(props, {
-        change: onChange,
-      }),
-      { sync: false },
-    );
+    const props = { onChange };
+    const wrapper = mount(createRadioGroup(props), { sync: false });
     const radios = wrapper.findAll('input');
 
     // uncontrolled component
     wrapper.vm.$refs.radioGroup.stateValue = 'B';
-    radios.at(0).trigger('change');
+    radios[0].trigger('change');
     expect(onChange.mock.calls.length).toBe(1);
 
     asyncExpect(() => {
       // controlled component
       wrapper.setProps({ value: 'A' });
-      radios.at(1).trigger('change');
+      radios[1].trigger('change');
       expect(onChange.mock.calls.length).toBe(2);
     });
   });
@@ -184,7 +168,7 @@ describe('Radio', () => {
   //   await asyncExpect(() => {
   //     // uncontrolled component
   //     wrapper.vm.$refs.radioGroup.stateValue = 'B'
-  //     radios.at(1).trigger('change')
+  //     radios[1].trigger('change')
   //     expect(onChange.mock.calls.length).toBe(0)
   //   })
 
@@ -194,7 +178,7 @@ describe('Radio', () => {
 
   //   // // controlled component
   //   // wrapper.setProps({ value: 'A' })
-  //   // radios.at(0).trigger('change')
+  //   // radios[0].trigger('change')
   //   // expect(onChange.mock.calls.length).toBe(0)
   // })
 
@@ -210,7 +194,7 @@ describe('Radio', () => {
     const wrapper = mount(createRadioGroup({ name: GROUP_NAME }));
     expect(wrapper.html()).toMatchSnapshot();
     expect(
-      wrapper.findAll('input[type="radio"]').wrappers.forEach(el => {
+      wrapper.findAll('input[type="radio"]').forEach(el => {
         expect(el.element.name).toEqual(GROUP_NAME);
       }),
     );

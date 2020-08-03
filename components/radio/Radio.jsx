@@ -22,11 +22,13 @@ export default {
     autofocus: Boolean,
     type: PropTypes.string.def('radio'),
     onChange: PropTypes.func,
+    'onUpdate:checked': PropTypes.func,
+    'onUpdate:value': PropTypes.func,
   },
   setup() {
     return {
       configProvider: inject('configProvider', ConfigConsumerProps),
-      radioGroupContext: inject('radioGroupContext'),
+      radioGroupContext: inject('radioGroupContext', null),
     };
   },
   methods: {
@@ -38,6 +40,7 @@ export default {
     },
     handleChange(event) {
       const targetChecked = event.target.checked;
+      this.$emit('update:checked', targetChecked);
       this.$emit('update:value', targetChecked);
       this.$emit('change', event);
     },

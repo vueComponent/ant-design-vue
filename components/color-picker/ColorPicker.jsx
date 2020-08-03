@@ -116,13 +116,21 @@ export default {
         pickrEvents.includes(event) && this.pickr.on(event, this.$listeners[event]);
       });
     },
+    //防止pickr的css污染
+    wrapperElement(element){
+      let newWrapper = document.createElement('div');
+      newWrapper.className = 'ant-color-picker';
+      element.appendChild(newWrapper);
+      return newWrapper;
+    },
     createPickr() {
       const { getPopupContainer } = getOptionProps(this);
       const { getPopupContainer: getContextPopupContainer } = this.configProvider;
       const container = getPopupContainer || getContextPopupContainer;
+
       this.pickr = Pickr.create(Object.assign({
         el: '#color-picker' + this._uid,
-        container: (container && container(this.$el)) || document.body,
+        container: (container && container(this.wrapperElement(this.$el))) || this.wrapperElement(document.body),
         theme: 'monolith', // or 'monolith', or 'nano'
         default: this.value || this.defaultValue||null, // 有默认颜色pickr才可以获取到_representation
         components: {
@@ -172,6 +180,7 @@ export default {
       const prefixCls = getPrefixCls('color-picker', customizePrefixCls);
       const { disabled } = getOptionProps(this);
       const classString = {
+        [`${prefixCls}`]:true,
         [`${prefixCls}-box`]: true,
         [`${prefixCls}-open`]: this.myOpen,
         [`${prefixCls}-lg`]: this.size === 'large',

@@ -125,10 +125,9 @@ export default {
       const { getPopupContainer } = getOptionProps(this);
       const { getPopupContainer: getContextPopupContainer } = this.configProvider;
       const container = getPopupContainer || getContextPopupContainer;
-
       this.pickr = Pickr.create(Object.assign({
         el: '#color-picker' + this._uid,
-        container: (container && container(this.wrapperElement(this.$el))) || this.wrapperElement(document.body),
+        container: (container && container(this.$el)) || document.body,
         theme: 'monolith', // or 'monolith', or 'nano'
         default: this.value || this.defaultValue||null, // 有默认颜色pickr才可以获取到_representation
         components: {
@@ -144,20 +143,16 @@ export default {
             clear: true,
             save: true,
           },
-          this.config,
-          { i18n: this.i18n },
-        ),
-      )
-        .on('save', (color, instance) => {
-          if (color) {
-            let _representation = instance._representation || 'HEXA';
-            color = color['to' + _representation]().toString(this.colorRounded || 0);
-          }
-          this.$emit('change.value', color || '');
-        })
-        .on('hide', () => {
-          this.setState({ myOpen: false });
-        });
+        },
+      }, this.config, { i18n: this.i18n })).on('save', (color, instance) => {
+        if (color) {
+          let _representation =  instance._representation || 'HEXA';
+          color = color['to' + _representation]().toString(this.colorRounded || 0);
+        }
+        this.$emit('change.value', color || '');
+      }).on('hide', () => {
+        this.setState({ myOpen: false });
+      });
     },
     handleOpenChange() {
       const open = !this.myOpen;

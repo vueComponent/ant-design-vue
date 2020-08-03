@@ -44,7 +44,7 @@ export default {
     };
   },
   watch: {
-    "configProvider.locale.ColorPicker": {
+    'configProvider.locale.ColorPicker': {
       handler(val) {
         if (this.locale) return;
         this.i18n = val;
@@ -52,7 +52,7 @@ export default {
       },
     },
     locale(val) {
-      this.i18n = val.ColorPicker;
+      this.i18n = val.ColorPicker || val.lang;
       this.reInitialize();
     },
     value(val) {
@@ -97,20 +97,20 @@ export default {
       this.createPickr();
       this.eventsBinding();
     },
-    setColor: debounce(function (val) {
+    setColor: debounce(function(val) {
       this.pickr.setColor(val);
     }, 1000),
     eventsBinding() {
       const pickrEvents = [
-        "init",
-        "hide",
-        "show",
-        "save",
-        "clear",
-        "change",
-        "changestop",
-        "cancel",
-        "swatchselect",
+        'init',
+        'hide',
+        'show',
+        'save',
+        'clear',
+        'change',
+        'changestop',
+        'cancel',
+        'swatchselect',
       ];
       Object.keys(this.$listeners).forEach(event => {
         pickrEvents.includes(event) && this.pickr.on(event, this.$listeners[event]);

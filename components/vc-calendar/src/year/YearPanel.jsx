@@ -36,6 +36,11 @@ export default {
       sValue: this.value || this.defaultValue,
     };
   },
+  watch: {
+    value(val) {
+      this.sValue = val;
+    },
+  },
   methods: {
     years() {
       const value = this.sValue;

@@ -1,7 +1,7 @@
 import Wave from '../_util/wave';
 import Icon from '../icon';
 import buttonTypes from './buttonTypes';
-import { filterEmpty, getListeners } from '../_util/props-util';
+import { filterEmpty, getListeners, getComponentFromProp } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
@@ -134,12 +134,14 @@ export default {
       return child;
     },
     isNeedInserted() {
-      const { icon, $slots, type } = this;
+      const { $slots, type } = this;
+      const icon = getComponentFromProp(this, 'icon');
       return $slots.default && $slots.default.length === 1 && !icon && type !== 'link';
     },
   },
   render() {
-    const { type, htmlType, classes, icon, disabled, handleClick, sLoading, $slots, $attrs } = this;
+    const { type, htmlType, classes, disabled, handleClick, sLoading, $slots, $attrs } = this;
+    const icon = getComponentFromProp(this, 'icon');
     const buttonProps = {
       attrs: {
         ...$attrs,

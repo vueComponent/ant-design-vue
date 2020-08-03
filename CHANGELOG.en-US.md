@@ -10,6 +10,30 @@
 
 ---
 
+## 1.6.4
+
+`2020-07-21`
+
+- 🐞 Fix breadcrumb `Breadcrumb` duplicate key problem [#2505](https://github.com/vueComponent/ant-design-vue/issues/2505)
+- 🐞 Fix the Tooltip issue when MenuItem title is empty [#2526](https://github.com/vueComponent/ant-design-vue/issues/2505)
+- 🐞 Fix the problem that Input textarea cannot be dragged up when allow-clear is activated. [#2563](https://github.com/vueComponent/ant-design-vue/issues/2563)
+- 🌟 Add less variables @select-item-selected-color [#2458](https://github.com/vueComponent/ant-design-vue/issues/2458)
+- 🌟 Add flex attribute to Col in Grid [#2558](https://github.com/vueComponent/ant-design-vue/issues/2558)
+
+## 1.6.3
+
+`2020-07-05`
+
+- 🐞 Fix Input.Password focus position shift issue [#2420](https://github.com/vueComponent/ant-design-vue/pull/2420)
+- 🐞 Fix Drawer maskstyle not working [#2407](https://github.com/vueComponent/ant-design-vue/issues/2407)
+- 🐞 Fix Drawer maskstyle not working [#2407](https://github.com/vueComponent/ant-design-vue/issues/2407)
+- 🌟 Button supports custom Icon [#2245](https://github.com/vueComponent/ant-design-vue/pull/2245)
+- 🌟 DatePicker supports custom format [#2276](https://github.com/vueComponent/ant-design-vue/pull/2276)
+- 🐞 Fix DatePicker year and time is incorrect [#2488](https://github.com/vueComponent/ant-design-vue/issues/2488)
+- 🌟 Optimize the Menu component, the animation is smoother
+- 🐞 Fix Dropdown pop-up position error [#2359](https://github.com/vueComponent/ant-design-vue/issues/2359)
+- 🐞 Fix the problem of duplicate key when `Breadcrumb` has the same name [#2505](https://github.com/vueComponent/ant-design-vue/issues/2505)
+
 ## 1.6.2
 
 `2020-06-02`

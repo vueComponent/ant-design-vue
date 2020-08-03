@@ -192,6 +192,32 @@ exports[`renders ./antdv-demo/docs/grid/demo/flex-align.md correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./antdv-demo/docs/grid/demo/flex-fill.md correctly 1`] = `
+<div>
+  <div role="separator" class="ant-divider ant-divider-horizontal ant-divider-with-text-left"><span class="ant-divider-inner-text">
+    Percentage columns
+  </span></div>
+  <div class="ant-row-flex">
+    <div class="ant-col" style="flex: 2 2 auto;">2 / 5</div>
+    <div class="ant-col" style="flex: 3 3 auto;">3 / 5</div>
+  </div>
+  <div role="separator" class="ant-divider ant-divider-horizontal ant-divider-with-text-left"><span class="ant-divider-inner-text">
+    Fill rest
+  </span></div>
+  <div class="ant-row-flex">
+    <div class="ant-col" style="flex: 0 0 100px;">100px</div>
+    <div class="ant-col" style="flex-basis: auto;">auto</div>
+  </div>
+  <div role="separator" class="ant-divider ant-divider-horizontal ant-divider-with-text-left"><span class="ant-divider-inner-text">
+    Raw flex style
+  </span></div>
+  <div class="ant-row-flex">
+    <div class="ant-col" style="flex: 1 1 200px;">1 1 200px</div>
+    <div class="ant-col" style="flex: 0 1 300px;">0 1 300px</div>
+  </div>
+</div>
+`;
+
 exports[`renders ./antdv-demo/docs/grid/demo/flex-order.md correctly 1`] = `
 <div>
   <div class="ant-row-flex">

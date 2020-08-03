@@ -196,6 +196,9 @@ function githubRelease(done) {
     })
     .then(() => {
       done();
+    })
+    .catch(err => {
+      console.log(err);
     });
 }
 

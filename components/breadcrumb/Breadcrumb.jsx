@@ -75,7 +75,7 @@ export default {
           overlay = (
             <Menu>
               {route.children.map(child => (
-                <Menu.Item key={child.breadcrumbName || child.path}>
+                <Menu.Item key={child.path || child.breadcrumbName}>
                   {itemRender({
                     route: child,
                     params,
@@ -93,7 +93,7 @@ export default {
           <BreadcrumbItem
             overlay={overlay}
             separator={separator}
-            key={route.breadcrumbName || path}
+            key={path || route.breadcrumbName}
           >
             {itemRender({ route, params, routes, paths, h: this.$createElement })}
           </BreadcrumbItem>

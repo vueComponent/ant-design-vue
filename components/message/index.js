@@ -49,6 +49,7 @@ const iconMap = {
 function notice(args) {
   const duration = args.duration !== undefined ? args.duration : defaultDuration;
   const Icon = iconMap[args.type];
+  const iconNode = Icon ? <Icon /> : '';
 
   const target = args.key || key++;
   const closePromise = new Promise(resolve => {
@@ -68,7 +69,7 @@ function notice(args) {
             <div
               class={`${prefixCls}-custom-content${args.type ? ` ${prefixCls}-${args.type}` : ''}`}
             >
-              {args.icon ? typeof args.icon === 'function' ? args.icon() : args.icon : <Icon />}
+              {args.icon ? (typeof args.icon === 'function' ? args.icon() : args.icon) : iconNode}
               <span>{typeof args.content === 'function' ? args.content() : args.content}</span>
             </div>
           );

@@ -1,4 +1,3 @@
-import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import message from '..';
 import SmileOutlined from '@ant-design/icons-vue/SmileOutlined';
@@ -59,7 +58,9 @@ describe('message', () => {
       expect(document.querySelectorAll('.ant-message-notice').length).toBe(1);
       hide2();
     }, 0);
-    expect(document.querySelectorAll('.ant-message-notice').length).toBe(0);
+    await asyncExpect(() => {
+      expect(document.querySelectorAll('.ant-message-notice').length).toBe(0);
+    }, 0);
   });
 
   it('should be able to destroy globally', async () => {
@@ -110,16 +111,7 @@ describe('message', () => {
 
   // https:// github.com/ant-design/ant-design/issues/8201
   it('should hide message correctly', async () => {
-    let hide;
-    const Test = {
-      mounted() {
-        hide = message.loading('Action in progress..', 0);
-      },
-      render() {
-        return <div>test</div>;
-      },
-    };
-    mount(Test, { sync: false });
+    let hide = message.loading('Action in progress..', 0);
     await asyncExpect(() => {
       expect(document.querySelectorAll('.ant-message-notice').length).toBe(1);
       hide();
@@ -129,7 +121,7 @@ describe('message', () => {
     }, 0);
   });
   it('should allow custom icon', async () => {
-    message.open({ content: 'Message', icon: h => <SmileOutlined /> }); // eslint-disable-line
+    message.open({ content: 'Message', icon: () => <SmileOutlined /> }); // eslint-disable-line
     await asyncExpect(() => {
       expect(document.querySelectorAll('.anticon-smile').length).toBe(1);
     }, 0);
@@ -143,18 +135,9 @@ describe('message', () => {
   });
   // https://github.com/ant-design/ant-design/issues/8201
   it('should destroy messages correctly', async () => {
-    // eslint-disable-next-line
-    const Test = {
-      mounted() {
-        message.loading('Action in progress1..', 0);
-        message.loading('Action in progress2..', 0);
-        setTimeout(() => message.destroy(), 1000);
-      },
-      render() {
-        return <div>test</div>;
-      },
-    };
-    mount(Test, { sync: false });
+    message.loading('Action in progress1..', 0);
+    message.loading('Action in progress2..', 0);
+    setTimeout(() => message.destroy(), 1000);
 
     await asyncExpect(() => {
       expect(document.querySelectorAll('.ant-message-notice').length).toBe(2);

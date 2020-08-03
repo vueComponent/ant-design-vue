@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Tag visibility can be controlled by visible with hidden as initial value 1`] = `<span class="ant-tag" style="display: none;"></span>`;
+exports[`Tag visibility can be controlled by visible with hidden as initial value 1`] = `<span class="ant-tag" style="display: none;"><!----><!----></span>`;
 
-exports[`Tag visibility can be controlled by visible with hidden as initial value 2`] = `<span class="ant-tag" style=""></span>`;
+exports[`Tag visibility can be controlled by visible with hidden as initial value 2`] = `<span class="ant-tag" style=""><!----><!----></span>`;
 
-exports[`Tag visibility can be controlled by visible with hidden as initial value 3`] = `<span class="ant-tag" style="display: none;"></span>`;
+exports[`Tag visibility can be controlled by visible with hidden as initial value 3`] = `<span class="ant-tag" style="display: none;"><!----><!----></span>`;
 
-exports[`Tag visibility can be controlled by visible with visible as initial value 1`] = `<span class="ant-tag"></span>`;
+exports[`Tag visibility can be controlled by visible with visible as initial value 1`] = `<span class="ant-tag"><!----><!----></span>`;
 
-exports[`Tag visibility can be controlled by visible with visible as initial value 2`] = `<span class="ant-tag" style="display: none;"></span>`;
+exports[`Tag visibility can be controlled by visible with visible as initial value 2`] = `<span class="ant-tag" style="display: none;"><!----><!----></span>`;
 
-exports[`Tag visibility can be controlled by visible with visible as initial value 3`] = `<span class="ant-tag" style=""></span>`;
+exports[`Tag visibility can be controlled by visible with visible as initial value 3`] = `<span class="ant-tag" style=""><!----><!----></span>`;

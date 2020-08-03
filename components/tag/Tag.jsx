@@ -32,6 +32,7 @@ export default {
     closable: PropTypes.bool.def(false),
     visible: PropTypes.bool,
     onClose: PropTypes.func,
+    'onUpdate:visible': PropTypes.func,
   },
   setup() {
     return {
@@ -58,10 +59,10 @@ export default {
   methods: {
     setVisible(visible, e) {
       this.$emit('close', e);
-      this.$emit('update:visible', false);
       if (e.defaultPrevented) {
         return;
       }
+      this.$emit('update:visible', false);
       if (!hasProp(this, 'visible')) {
         this.setState({ _visible: visible });
       }

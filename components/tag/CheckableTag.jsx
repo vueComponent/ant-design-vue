@@ -8,6 +8,7 @@ export default {
     prefixCls: PropTypes.string,
     checked: PropTypes.bool,
     onChange: PropTypes.func,
+    'onUpdate:checked': PropTypes.func,
   },
   setup() {
     return {

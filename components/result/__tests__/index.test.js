@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import Result from '../index';
 import Button from '../../button';
+import { sleep } from '../../../tests/utils';
 
 describe('Result', () => {
   it('🙂  successPercent should decide the progress status when it exists', () => {
@@ -23,20 +24,21 @@ describe('Result', () => {
     expect(wrapper.findAll('.anticon-check-circle')).toHaveLength(1);
   });
 
-  it('🙂  different status, different class', () => {
-    const wrapper = mount(Result, { props: { status: 'warning' } });
+  it('🙂  different status, different class', async () => {
+    const wrapper = mount(Result, { props: { status: 'warning' }, sync: false });
     expect(wrapper.findAll('.ant-result-warning')).toHaveLength(1);
 
     wrapper.setProps({
       status: 'error',
     });
 
+    await sleep();
     expect(wrapper.findAll('.ant-result-error')).toHaveLength(1);
 
     wrapper.setProps({
       status: '500',
     });
-
+    await sleep();
     expect(wrapper.findAll('.ant-result-500')).toHaveLength(1);
   });
 

@@ -1,6 +1,6 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponent, getOptionProps } from '../_util/props-util';
+import { getComponent, getOptionProps, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import ArrowLeftOutlined from '@ant-design/icons-vue/ArrowLeftOutlined';
 import Breadcrumb from '../breadcrumb';
@@ -19,6 +19,7 @@ export const PageHeaderProps = {
   extra: PropTypes.any,
   avatar: PropTypes.object,
   ghost: PropTypes.bool,
+  onBack: PropTypes.func,
 };
 
 const renderBack = (instance, prefixCls, backIcon, onBack) => {
@@ -61,7 +62,7 @@ const renderTitle = (prefixCls, instance) => {
     ) : (
       <ArrowLeftOutlined />
     );
-  const onBack = instance.$attrs.onBack;
+  const onBack = instance.onBack;
   const headingPrefixCls = `${prefixCls}-heading`;
   if (title || subTitle || tags || extra) {
     const backIconDom = renderBack(instance, prefixCls, backIcon, onBack);
@@ -103,7 +104,7 @@ const PageHeader = {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, breadcrumb } = props;
     const footer = getComponent(this, 'footer');
-    const children = this.$slots.default && this.$slots.default();
+    const children = getSlot(this);
     let ghost = true;
 
     // Use `ghost` from `props` or from `ConfigProvider` instead.
@@ -113,10 +114,7 @@ const PageHeader = {
       ghost = pageHeader.ghost;
     }
     const prefixCls = getPrefixCls('page-header', customizePrefixCls);
-    const breadcrumbDom =
-      breadcrumb && breadcrumb.props && breadcrumb.props.routes
-        ? renderBreadcrumb(breadcrumb)
-        : null;
+    const breadcrumbDom = breadcrumb && breadcrumb.routes ? renderBreadcrumb(breadcrumb) : null;
     const className = [
       prefixCls,
       {
@@ -130,7 +128,7 @@ const PageHeader = {
       <div class={className}>
         {breadcrumbDom}
         {renderTitle(prefixCls, this)}
-        {children && children.length && renderChildren(prefixCls, children)}
+        {children.length ? renderChildren(prefixCls, children) : null}
         {renderFooter(prefixCls, footer)}
       </div>
     );

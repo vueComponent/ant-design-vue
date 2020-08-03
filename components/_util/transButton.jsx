@@ -54,7 +54,7 @@ const TransButton = {
   },
 
   render() {
-    const { noStyle } = this.$props;
+    const { noStyle, onClick } = this.$props;
 
     return (
       <div
@@ -62,6 +62,7 @@ const TransButton = {
         tabindex={0}
         ref="div"
         {...this.$attrs}
+        onClick={onClick}
         onKeydown={this.onKeyDown}
         onKeyup={this.onKeyUp}
         style={{ ...(!noStyle ? inlineStyle : null) }}

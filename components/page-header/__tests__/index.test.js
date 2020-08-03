@@ -1,8 +1,5 @@
-import { createLocalVue, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import PageHeader from '..';
-import ref from 'vue-ref';
-const localVue = createLocalVue();
-localVue.use(ref, { name: 'ant-ref' });
 
 describe('PageHeader', () => {
   it('pageHeader should not contain back it back', () => {
@@ -22,7 +19,7 @@ describe('PageHeader', () => {
     ];
     const wrapper = mount({
       render() {
-        return <PageHeader title="Page Title" breadcrumb={{ props: { routes } }} />;
+        return <PageHeader title="Page Title" breadcrumb={{ routes }} />;
       },
     });
     expect(wrapper.findAll('.ant-page-header-back')).toHaveLength(0);
@@ -37,7 +34,7 @@ describe('PageHeader', () => {
     ];
     const wrapper = mount({
       render() {
-        return <PageHeader title="Page Title" breadcrumb={{ props: { routes } }} />;
+        return <PageHeader title="Page Title" breadcrumb={{ routes }} />;
       },
     });
     expect(wrapper.findAll('.ant-breadcrumb')).toHaveLength(1);
@@ -61,7 +58,7 @@ describe('PageHeader', () => {
           return <PageHeader title="Page Title" onBack={callback} />;
         },
       },
-      { localVue },
+      { sync: false },
     );
     expect(wrapper.findAll('.ant-page-header-back')).toHaveLength(1);
   });
@@ -74,7 +71,7 @@ describe('PageHeader', () => {
           return <PageHeader title="Page Title" onBack={callback} />;
         },
       },
-      { localVue },
+      { sync: false },
     );
     wrapper.find('div.ant-page-header-back-button').trigger('click');
     expect(callback).toHaveBeenCalled();
@@ -115,19 +112,16 @@ describe('PageHeader', () => {
     ];
     const wrapper = mount({
       render() {
-        return <PageHeader title="Title" breadcrumb={{ props: { routes } }} />;
+        return <PageHeader title="Title" breadcrumb={{ routes }} />;
       },
     });
     expect(wrapper.findAll('.ant-breadcrumb')).toHaveLength(1);
 
-    const wrapperBack = mount(
-      {
-        render() {
-          return <PageHeader title="Title" breadcrumb={{ props: { routes } }} onBack={() => {}} />;
-        },
+    const wrapperBack = mount({
+      render() {
+        return <PageHeader title="Title" breadcrumb={{ routes }} onBack={() => {}} />;
       },
-      { localVue },
-    );
+    });
     expect(wrapperBack.findAll('.ant-breadcrumb')).toHaveLength(1);
   });
 });

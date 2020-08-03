@@ -14,8 +14,8 @@
   </div>
 </template>
 <script>
-import enUS from 'ant-design-vue/../components/locale/en_US';
-import zhCN from 'ant-design-vue/../components/locale/zh_CN';
+// import enUS from 'ant-design-vue/../components/locale/en_US';
+// import zhCN from 'ant-design-vue/../components/locale/zh_CN';
 export default {
   data() {
     return {

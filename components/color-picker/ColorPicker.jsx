@@ -7,30 +7,28 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import enUS from './locale/en_US';
 import debounce from 'lodash/debounce';
 
-import {
-  getOptionProps,
-} from '../_util/props-util';
+import { getOptionProps } from '../_util/props-util';
 let colors = '#194d33';
 export default {
   name: 'AColorPicker',
   mixins: [BaseMixin],
   model: {
     prop: 'value',
-    event: 'change.value',//为了支持v-model直接返回颜色字符串 所以用了自定义的事件,与pickr自带change事件进行区分
+    event: 'change.value', //为了支持v-model直接返回颜色字符串 所以用了自定义的事件,与pickr自带change事件进行区分
   },
   props: {
     prefixCls: PropTypes.string,
-    defaultValue: PropTypes.string,//默认值
-    config: PropTypes.object,//pickr配置
-    value: PropTypes.string,//颜色值
-    locale: PropTypes.object,//双语包
-    colorRounded: PropTypes.number,//颜色数值保留几位小数
-    size: PropTypes.oneOf(['default', 'small','large']).def('default'),//尺寸
-    getPopupContainer: PropTypes.func,//指定渲染容器
-    disabled: PropTypes.bool.def(false),//是否禁用
-    format: PropTypes.string,//颜色格式设置
-    alpha: PropTypes.bool.def(false),//是否开启透明通道
-    hue: PropTypes.bool.def(true),//是否开启色彩预选
+    defaultValue: PropTypes.string, //默认值
+    config: PropTypes.object, //pickr配置
+    value: PropTypes.string, //颜色值
+    locale: PropTypes.object, //双语包
+    colorRounded: PropTypes.number, //颜色数值保留几位小数
+    size: PropTypes.oneOf(['default', 'small', 'large']).def('default'), //尺寸
+    getPopupContainer: PropTypes.func, //指定渲染容器
+    disabled: PropTypes.bool.def(false), //是否禁用
+    format: PropTypes.string, //颜色格式设置
+    alpha: PropTypes.bool.def(false), //是否开启透明通道
+    hue: PropTypes.bool.def(true), //是否开启色彩预选
   },
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -146,16 +144,20 @@ export default {
             clear: true,
             save: true,
           },
-        },
-      }, this.config, { i18n: this.i18n })).on('save', (color, instance) => {
-        if (color) {
-          let _representation =  instance._representation || 'HEXA';
-          color = color['to' + _representation]().toString(this.colorRounded || 0);
-        }
-        this.$emit('change.value', color || '');
-      }).on('hide', () => {
-        this.setState({ myOpen: false });
-      });
+          this.config,
+          { i18n: this.i18n },
+        ),
+      )
+        .on('save', (color, instance) => {
+          if (color) {
+            let _representation = instance._representation || 'HEXA';
+            color = color['to' + _representation]().toString(this.colorRounded || 0);
+          }
+          this.$emit('change.value', color || '');
+        })
+        .on('hide', () => {
+          this.setState({ myOpen: false });
+        });
     },
     handleOpenChange() {
       const open = !this.myOpen;
@@ -188,14 +190,10 @@ export default {
         [`${prefixCls}-disabled`]: this.disabled,
       };
       return (
-        <div
-          class={classString}
-          tabIndex={disabled ? -1 : 0}
-          onClick={this.handleOpenChange}
-        >
+        <div class={classString} tabIndex={disabled ? -1 : 0} onClick={this.handleOpenChange}>
           <div class={`${prefixCls}-selection`}>
-            <div id={"color-picker-box" + this._uid}>
-              <div id={"color-picker" + this._uid}></div>
+            <div id={'color-picker-box' + this._uid}>
+              <div id={'color-picker' + this._uid}></div>
             </div>
             <Icon type="down" class={`${prefixCls}-icon`} />
           </div>

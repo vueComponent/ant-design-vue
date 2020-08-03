@@ -4,7 +4,15 @@ import Popover from '..';
 import mountTest from '../../../tests/shared/mountTest';
 
 describe('Popover', () => {
-  mountTest(Popover);
+  mountTest({
+    render() {
+      return (
+        <div>
+          <Popover />
+        </div>
+      );
+    },
+  });
   it('should show overlay when trigger is clicked', async () => {
     const popover = mount(
       {

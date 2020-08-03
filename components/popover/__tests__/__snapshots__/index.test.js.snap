@@ -2,8 +2,10 @@
 
 exports[`Popover should show overlay when trigger is clicked 1`] = `
 <div class="ant-popover-content">
-  <div class="ant-popover-arrow"></div>
-  <div role="tooltip" class="ant-popover-inner">
+  <div class="ant-popover-arrow">
+    <!---->
+  </div>
+  <div class="ant-popover-inner" role="tooltip">
     <div>
       <div class="ant-popover-title">code</div>
       <div class="ant-popover-inner-content">console.log('hello world')</div>
@@ -14,8 +16,10 @@ exports[`Popover should show overlay when trigger is clicked 1`] = `
 
 exports[`Popover should show overlay when trigger is clicked 2`] = `
 <div class="ant-popover-content">
-  <div class="ant-popover-arrow"></div>
-  <div role="tooltip" class="ant-popover-inner">
+  <div class="ant-popover-arrow">
+    <!---->
+  </div>
+  <div class="ant-popover-inner" role="tooltip">
     <div>
       <div class="ant-popover-title">code</div>
       <div class="ant-popover-inner-content">console.log('hello world')</div>

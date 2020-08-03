@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/popconfirm/demo/index';
+import demo from '../antdv-demo/docs/popover/demo/index';
 
 export default {
   components: {

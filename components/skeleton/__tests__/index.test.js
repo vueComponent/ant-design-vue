@@ -11,7 +11,7 @@ describe('Skeleton', () => {
         ...props,
       },
       slots: {
-        default: 'Bamboo',
+        default: () => 'Bamboo',
       },
       sync: false,
     };

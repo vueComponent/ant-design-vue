@@ -45,7 +45,6 @@ export default {
     if (this.clickWaveTimeoutId) {
       clearTimeout(this.clickWaveTimeoutId);
     }
-    this.destroy = true;
   },
   methods: {
     onClick(node, waveColor) {
@@ -89,7 +88,7 @@ export default {
       TransitionEvents.addEndEventListener(node, this.onTransitionEnd);
     },
     onTransitionStart(e) {
-      if (this.destroy) return;
+      if (this._.isUnmounted) return;
 
       const node = findDOMNode(this);
       if (!e || e.target !== node) {

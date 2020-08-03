@@ -34,8 +34,7 @@ describe('delay spinning', () => {
 
     expect(
       wrapper
-        .findAll('.ant-spin')
-        .at(0)
+        .findAll('.ant-spin')[0]
         .classes()
         .includes('ant-spin-spinning'),
     ).toEqual(false);
@@ -46,8 +45,7 @@ describe('delay spinning', () => {
 
     expect(
       wrapper
-        .findAll('.ant-spin')
-        .at(0)
+        .findAll('.ant-spin')[0]
         .classes()
         .includes('ant-spin-spinning'),
     ).toEqual(true);

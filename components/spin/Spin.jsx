@@ -2,7 +2,7 @@ import { inject, cloneVNode, isVNode } from 'vue';
 import debounce from 'lodash/debounce';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import { filterEmpty, initDefaultProps, getComponent } from '../_util/props-util';
+import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
 export const SpinSize = PropTypes.oneOf(['small', 'default', 'large']);
@@ -89,13 +89,7 @@ export default {
         updateSpinning.cancel();
       }
     },
-    getChildren() {
-      if (this.$slots && this.$slots.default) {
-        return filterEmpty(this.$slots.default());
-      }
-      return null;
-    },
-    renderIndicator(h, prefixCls) {
+    renderIndicator(prefixCls) {
       const dotClassName = `${prefixCls}-dot`;
       let indicator = getComponent(this, 'indicator');
       // should not be render default indicator when indicator value is null
@@ -103,15 +97,14 @@ export default {
         return null;
       }
       if (Array.isArray(indicator)) {
-        indicator = filterEmpty(indicator);
         indicator = indicator.length === 1 ? indicator[0] : indicator;
       }
       if (isVNode(indicator)) {
         return cloneVNode(indicator, { class: dotClassName });
       }
 
-      if (defaultIndicator && isVNode(defaultIndicator(h))) {
-        return cloneVNode(defaultIndicator(h), { class: dotClassName });
+      if (defaultIndicator && isVNode(defaultIndicator())) {
+        return cloneVNode(defaultIndicator(), { class: dotClassName });
       }
 
       return (
@@ -124,7 +117,7 @@ export default {
       );
     },
   },
-  render(h) {
+  render() {
     const { size, prefixCls: customizePrefixCls, tip, wrapperClassName } = this.$props;
     const { class: cls, style, ...divProps } = this.$attrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -137,17 +130,17 @@ export default {
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-spinning`]: sSpinning,
       [`${prefixCls}-show-text`]: !!tip,
-      [cls]: true,
+      [cls]: !!cls,
     };
 
     const spinElement = (
       <div {...divProps} style={style} class={spinClassName}>
-        {this.renderIndicator(h, prefixCls)}
+        {this.renderIndicator(prefixCls)}
         {tip ? <div class={`${prefixCls}-text`}>{tip}</div> : null}
       </div>
     );
-    const children = this.getChildren();
-    if (children) {
+    const children = getSlot(this);
+    if (children && children.length) {
       const containerClassName = {
         [`${prefixCls}-container`]: true,
         [`${prefixCls}-blur`]: sSpinning,

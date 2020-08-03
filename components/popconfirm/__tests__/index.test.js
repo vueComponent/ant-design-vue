@@ -33,7 +33,7 @@ describe('Popconfirm', () => {
     );
     let triggerNode = null;
     await asyncExpect(() => {
-      triggerNode = wrapper.findAll('span').at(0);
+      triggerNode = wrapper.findAll('span')[0];
       triggerNode.trigger('click');
     });
     await asyncExpect(() => {

@@ -33,6 +33,7 @@ const Popconfirm = {
     onConfirm: PropTypes.func,
     onCancel: PropTypes.func,
     onVisibleChange: PropTypes.func,
+    'onUpdate:visible': PropTypes.func,
   },
   mixins: [BaseMixin],
   watch: {
@@ -123,7 +124,13 @@ const Popconfirm = {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('popover', customizePrefixCls);
 
-    const otherProps = omit(props, ['title', 'content', 'cancelText', 'okText']);
+    const otherProps = omit(props, [
+      'title',
+      'content',
+      'cancelText',
+      'okText',
+      'onUpdate:visible',
+    ]);
     const overlay = (
       <LocaleReceiver
         componentName="Popconfirm"

@@ -50,7 +50,7 @@ export default {
     },
   },
   methods: {
-    onVisibleChange(visible) {
+    handleVisibleChange(visible) {
       if (!hasProp(this, 'visible')) {
         this.sVisible = this.isNoTitle() ? false : visible;
       }
@@ -200,7 +200,7 @@ export default {
       overlay: this.getOverlay(),
       visible: sVisible,
       ref: 'tooltip',
-      onVisibleChange: this.onVisibleChange,
+      onVisibleChange: this.handleVisibleChange,
       onPopupAlign: this.onPopupAlign,
     };
     return (

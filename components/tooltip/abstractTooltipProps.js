@@ -19,7 +19,7 @@ export default () => ({
     'rightBottom',
   ]).def('top'),
   transitionName: PropTypes.string.def('zoom-big-fast'),
-  // onVisibleChange: PropTypes.func,
+
   overlayStyle: PropTypes.object.def(() => ({})),
   overlayClassName: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -32,4 +32,6 @@ export default () => ({
   align: PropTypes.object.def(() => ({})),
   builtinPlacements: PropTypes.object,
   children: PropTypes.any,
+  onVisibleChange: PropTypes.func,
+  'onUpdate:visible': PropTypes.func,
 });

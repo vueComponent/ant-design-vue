@@ -5,7 +5,6 @@ import BaseMixin from '../../_util/BaseMixin';
 import { getComponent, getSlot } from '../../_util/props-util';
 import { setTransform, isTransform3dSupported } from './utils';
 
-function noop() {}
 export default {
   name: 'ScrollableTabBarNode',
   mixins: [BaseMixin],
@@ -279,7 +278,7 @@ export default {
 
     const prevButton = (
       <span
-        onClick={prev ? this.prevClick : noop}
+        onClick={prev && this.prevClick}
         unselectable="unselectable"
         class={{
           [`${prefixCls}-tab-prev`]: 1,
@@ -294,7 +293,7 @@ export default {
 
     const nextButton = (
       <span
-        onClick={next ? this.nextClick : noop}
+        onClick={next && this.nextClick}
         unselectable="unselectable"
         class={{
           [`${prefixCls}-tab-next`]: 1,

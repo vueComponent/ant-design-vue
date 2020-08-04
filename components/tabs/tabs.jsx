@@ -36,6 +36,12 @@ export default {
     animated: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     tabBarGutter: PropTypes.number,
     renderTabBar: PropTypes.func,
+    onChange: PropTypes.func,
+    onTabClick: PropTypes.func,
+    onPrevClick: PropTypes.func,
+    onNextClick: PropTypes.func,
+    onEdit: PropTypes.func,
+    'onUpdate:activeKey': PropTypes.func,
   },
   setup() {
     return {
@@ -62,15 +68,6 @@ export default {
     },
     createNewTab(targetKey) {
       this.$emit('edit', targetKey, 'add');
-    },
-    onTabClick(val) {
-      this.$emit('tabClick', val);
-    },
-    onPrevClick(val) {
-      this.$emit('prevClick', val);
-    },
-    onNextClick(val) {
-      this.$emit('nextClick', val);
     },
   },
 

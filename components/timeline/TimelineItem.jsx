@@ -40,11 +40,8 @@ export default {
       [`${prefixCls}-item-head-custom`]: dot,
       [`${prefixCls}-item-head-${color}`]: true,
     });
-    const liProps = {
-      class: itemClassName,
-    };
     return (
-      <li {...liProps}>
+      <li class={itemClassName}>
         <div class={`${prefixCls}-item-tail`} />
         <div
           class={dotClassName}

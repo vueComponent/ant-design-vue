@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils';
-import VcTimePicker from '../../vc-time-picker/TimePicker';
 import TimePicker from '..';
 import moment from 'moment';
 import focusTest from '../../../tests/shared/focusTest';

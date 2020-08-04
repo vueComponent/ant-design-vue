@@ -57,8 +57,7 @@ export default {
     //   })
     // })
     const pendingItem = pending ? (
-      <TimelineItem pending={!!pending}>
-        <template slot="dot">{pendingDot || <LoadingOutlined />}</template>
+      <TimelineItem pending={!!pending} dot={pendingDot || <LoadingOutlined />}>
         {pendingNode}
       </TimelineItem>
     ) : null;

@@ -1,14 +1,109 @@
 @import '../../style/themes/index';
 @import '../../input/style/mixin';
+@import '../../button/style/mixin.less';
+
+.antdv-color-picker-btn() {
+  line-height: 1.499;
+  position: relative;
+  display: inline-block;
+  font-weight: 400;
+  white-space: nowrap;
+  text-align: center;
+  background-image: none;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.015);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  height: 28px;
+  padding: 0 7px;
+  font-size: 12px;
+  border-radius: 4px;
+  color: rgba(0, 0, 0, 0.65);
+  background-color: #fff;
+  border: 1px solid #d9d9d9;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  margin-bottom: 2px;
+  outline: 0;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.click-animating-node() {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  border-radius: inherit;
+  box-shadow: 0 0 0 0 @primary-color;
+  opacity: 0.2;
+  animation: fadeEffect 2s @ease-out-circ, waveEffect 0.4s @ease-out-circ;
+  animation-fill-mode: forwards;
+  content: '';
+  pointer-events: none;
+}
+
 @color-picker-prefix-cls: ~'@{ant-prefix}-color-picker';
 .@{color-picker-prefix-cls} {
   @import (less) '~@simonwep/pickr/dist/themes/classic.min.css';
   @import (less) '~@simonwep/pickr/dist/themes/monolith.min.css';
   @import (less) '~@simonwep/pickr/dist/themes/nano.min.css';
-  .pcr-app{
+  .pcr-app {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    &[data-theme=nano] .pcr-selection .pcr-color-palette {
+    border-radius: 4px;
+    transform: translateX(-8px);
+    &[data-theme='nano'] .pcr-selection .pcr-color-palette {
       grid-area: ~'1/1/2/3';
+    }
+    .pcr-interaction input {
+      &.pcr-cancel,
+      &.pcr-save {
+        .antdv-color-picker-btn;
+        color: #fff;
+        background-color: @primary-color;
+        border-color: @primary-color;
+        &:focus::after{
+          position: relative !important;
+        }
+        &:after {
+          .click-animating-node();
+        }
+        &:active {
+          color: #fff;
+          background-color: #096dd9;
+          border-color: #096dd9;
+        }
+        &:hover {
+          color: #fff;
+          background-color: #40a9ff;
+          border-color: #40a9ff;
+        }
+      }
+      &.pcr-clear {
+        .antdv-color-picker-btn;
+        color: #fff;
+        background-color: #ff4d4f;
+        border-color: #ff4d4f;
+        &:hover {
+          color: #fff;
+          background-color: #ff7875;
+          border-color: #ff7875;
+        }
+        &:active {
+          color: #fff;
+          background-color: #d9363e;
+          border-color: #d9363e;
+        }
+        &:after {
+          .click-animating-node();
+        }
+      }
     }
   }
   &-box {
@@ -127,5 +222,18 @@
       top: @input-height-sm / 2;
       font-size: 10px;
     }
+  }
+}
+
+@keyframes waveEffect {
+  100% {
+    box-shadow: 0 0 0 @primary-color;
+    box-shadow: 0 0 0 @wave-animation-width var(--antd-wave-shadow-color);
+  }
+}
+
+@keyframes fadeEffect {
+  100% {
+    opacity: 0;
   }
 }

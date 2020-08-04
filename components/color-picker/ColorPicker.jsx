@@ -127,7 +127,7 @@ export default {
       const container = getPopupContainer || getContextPopupContainer;
       this.pickr = Pickr.create(Object.assign({
         el: '#color-picker' + this._uid,
-        container: (container && container(this.$el)) || document.body,
+        container: (container && container(this.wrapperElement( this.$el))) || this.wrapperElement(document.body),
         theme: 'monolith', // or 'monolith', or 'nano'
         default: this.value || this.defaultValue||null, // 有默认颜色pickr才可以获取到_representation
         components: {

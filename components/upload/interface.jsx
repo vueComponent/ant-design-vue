@@ -73,10 +73,8 @@ export const UploadProps = {
   multiple: PropsTypes.bool,
   accept: PropsTypes.string,
   beforeUpload: PropsTypes.func,
-  // onChange: PropsTypes.func,
   listType: PropsTypes.oneOf(['text', 'picture', 'picture-card']),
   // className: PropsTypes.string,
-  // onPreview: PropsTypes.func,
   remove: PropsTypes.func,
   supportServerRender: PropsTypes.bool,
   // style: PropsTypes.object,
@@ -90,6 +88,11 @@ export const UploadProps = {
   id: PropsTypes.string,
   previewFile: PropsTypes.func,
   transformFile: PropsTypes.func,
+  onChange: PropsTypes.func,
+  onPreview: PropsTypes.func,
+  onRemove: PropsTypes.func,
+  onDownload: PropsTypes.func,
+  'onUpdate:fileList': PropsTypes.func,
 };
 
 export const UploadState = {
@@ -99,8 +102,6 @@ export const UploadState = {
 
 export const UploadListProps = {
   listType: PropsTypes.oneOf(['text', 'picture', 'picture-card']),
-  // onPreview: PropsTypes.func,
-  // onRemove: PropsTypes.func,
   // items: PropsTypes.arrayOf(UploadFile),
   items: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
   // items: PropsTypes.any,
@@ -111,4 +112,7 @@ export const UploadListProps = {
   showPreviewIcon: PropsTypes.bool,
   locale: UploadLocale,
   previewFile: PropsTypes.func,
+  onPreview: PropsTypes.func,
+  onRemove: PropsTypes.func,
+  onDownload: PropsTypes.func,
 };

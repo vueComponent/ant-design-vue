@@ -64,7 +64,7 @@ export default {
       } else {
         nextFileList[fileIndex] = targetItem;
       }
-      this.onChange({
+      this.handleChange({
         file: targetItem,
         fileList: nextFileList,
       });
@@ -92,7 +92,7 @@ export default {
       targetItem.status = 'done';
       targetItem.response = response;
       targetItem.xhr = xhr;
-      this.onChange({
+      this.handleChange({
         file: { ...targetItem },
         fileList,
       });
@@ -105,7 +105,7 @@ export default {
         return;
       }
       targetItem.percent = e.percent;
-      this.onChange({
+      this.handleChange({
         event: e,
         file: { ...targetItem },
         fileList: this.sFileList,
@@ -122,7 +122,7 @@ export default {
       targetItem.error = error;
       targetItem.response = response;
       targetItem.status = 'error';
-      this.onChange({
+      this.handleChange({
         file: { ...targetItem },
         fileList,
       });
@@ -149,7 +149,7 @@ export default {
             this.upload.abort(file);
           }
 
-          this.onChange({
+          this.handleChange({
             file,
             fileList: removedFileList,
           });
@@ -162,10 +162,11 @@ export default {
       }
       this.handleRemove(file);
     },
-    onChange(info) {
+    handleChange(info) {
       if (!hasProp(this, 'fileList')) {
         this.setState({ sFileList: info.fileList });
       }
+      this.$emit('update:fileList', info.fileList);
       this.$emit('change', info);
     },
     onFileDrop(e) {
@@ -181,7 +182,7 @@ export default {
       }
       const result = beforeUpload(file, fileList);
       if (result === false) {
-        this.onChange({
+        this.handleChange({
           file,
           fileList: uniqBy(stateFileList.concat(fileList.map(fileToObject)), item => item.uid),
         });
@@ -219,7 +220,7 @@ export default {
       } = getOptionProps(this);
       const { showRemoveIcon, showPreviewIcon, showDownloadIcon } = showUploadList;
       const { sFileList: fileList } = this.$data;
-      const { onDownload, onPreview } = this.$attrs;
+      const { onDownload, onPreview } = this.$props;
       const uploadListProps = {
         listType,
         items: fileList,

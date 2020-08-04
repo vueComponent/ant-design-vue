@@ -74,9 +74,9 @@ export default {
       return this.$emit('preview', file);
     },
     handleDownload(file) {
-      const { onDownload } = this.$attrs;
+      const { onDownload } = this.$props;
       if (typeof onDownload === 'function') {
-        onDownload(file);
+        this.$emit('download', file);
       } else if (file.url) {
         window.open(file.url);
       }

@@ -91,6 +91,10 @@ export default {
     });
     this._component = null;
     this.focusTime = null;
+    this.clickOutsideHandler = null;
+    this.contextmenuOutsideHandler1 = null;
+    this.contextmenuOutsideHandler2 = null;
+    this.touchOutsideHandler = null;
     return {
       prevPopupVisible: popupVisible,
       sPopupVisible: popupVisible,

@@ -4,10 +4,13 @@ import TimePicker from '..';
 import moment from 'moment';
 import focusTest from '../../../tests/shared/focusTest';
 import mountTest from '../../../tests/shared/mountTest';
+import { sleep } from '../../../tests/utils';
 
 describe('TimePicker', () => {
   const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-
+  beforeEach(() => {
+    document.body.innerHTML = '';
+  });
   afterEach(() => {
     errorSpy.mockReset();
   });
@@ -19,19 +22,17 @@ describe('TimePicker', () => {
   focusTest(TimePicker);
   mountTest(TimePicker);
 
-  it('renders addon correctly', () => {
-    const wrapper = mount({
-      render() {
-        return <TimePicker addon={() => <button type="button">Ok</button>} />;
+  it('renders addon correctly', async () => {
+    mount(
+      {
+        render() {
+          return <TimePicker open addon={() => <button type="button">Ok</button>} />;
+        },
       },
-    });
-    const vcTimePicker = wrapper.find({ name: VcTimePicker.name });
-    const addonWrapper = mount({
-      render() {
-        return vcTimePicker.vm.addon();
-      },
-    });
-    expect(addonWrapper.html()).toMatchSnapshot();
+      { sync: false, attachTo: 'body' },
+    );
+    await sleep();
+    expect(document.body.querySelector('.ant-time-picker-panel-addon').outerHTML).toMatchSnapshot();
   });
 
   it('allowEmpty deprecated', () => {

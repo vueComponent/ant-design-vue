@@ -4,13 +4,7 @@ import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import { Select as VcSelect, Option, OptGroup } from '../vc-select';
 import { ConfigConsumerProps } from '../config-provider';
-import {
-  getComponent,
-  getOptionProps,
-  filterEmpty,
-  isValidElement,
-  getSlot,
-} from '../_util/props-util';
+import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
@@ -244,14 +238,14 @@ const Select = {
       placeholder: getComponent(this, 'placeholder'),
       children: options
         ? options.map(option => {
-            const { key, label = option.title, on, class: cls, style, ...restOption } = option;
+            const { key, label = option.title, class: cls, style, ...restOption } = option;
             return (
-              <Option key={key} {...{ on, class: cls, style, ...restOption }}>
+              <Option key={key} {...{ class: cls, style, ...restOption }}>
                 {label}
               </Option>
             );
           })
-        : filterEmpty(getSlot(this)),
+        : getSlot(this),
       __propsSymbol__: Symbol(),
       dropdownRender: getComponent(this, 'dropdownRender', {}, false),
       getPopupContainer: getPopupContainer || getContextPopupContainer,

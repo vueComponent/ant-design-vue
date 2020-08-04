@@ -1486,17 +1486,8 @@ const Select = {
         }
       }
     },
-    selectionRefFocus() {
-      if (this.getInputDOMNode() && this.getInputDOMNode()) {
-        this.getInputDOMNode().focus();
-      }
-      // if (this._focused || this.disabled || isMultipleOrTagsOrCombobox(this.$props)) {
-      //   e.preventDefault();
-      //   return;
-      // }
-      // this._focused = true;
-      // this.updateFocusClassName();
-      // this.__emit('focus');
+    selectionRefFocus(e) {
+      this.inputFocus(e);
     },
     selectionRefBlur(e) {
       if (isMultipleOrTagsOrCombobox(this.$props)) {

@@ -61,7 +61,7 @@
     "@vue/compiler-sfc": ">=3.0.0"
   },
   "devDependencies": {
-    "@ant-design-vue/babel-plugin-jsx": "^1.0.0-beta.3",
+    "@ant-design-vue/babel-plugin-jsx": "^1.0.0-rc.1",
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.10.5",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
@@ -183,7 +183,6 @@
     "xhr-mock": "^2.5.1"
   },
   "dependencies": {
-    "@ant-design-vue/babel-helper-vue-compatible-props": "^1.0.0",
     "@ant-design/icons-vue": "^5.0.0",
     "@babel/runtime": "^7.10.5",
     "@simonwep/pickr": "~1.7.0",

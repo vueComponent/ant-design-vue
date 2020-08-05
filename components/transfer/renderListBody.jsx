@@ -14,6 +14,9 @@ const ListBody = {
     lazy: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     selectedKeys: PropTypes.array,
     disabled: PropTypes.bool,
+    onItemSelect: PropTypes.func,
+    onItemSelectAll: PropTypes.func,
+    onScroll: PropTypes.func,
   },
   data() {
     return {
@@ -53,12 +56,12 @@ const ListBody = {
     raf.cancel(this.lazyId);
   },
   methods: {
-    onItemSelect(item) {
+    handleItemSelect(item) {
       const { selectedKeys } = this.$props;
       const checked = selectedKeys.indexOf(item.key) >= 0;
       this.$emit('itemSelect', item.key, !checked);
     },
-    onScroll(e) {
+    handleScroll(e) {
       this.$emit('scroll', e);
     },
   },
@@ -85,7 +88,7 @@ const ListBody = {
           renderedEl={renderedEl}
           checked={checked}
           prefixCls={prefixCls}
-          onClick={this.onItemSelect}
+          onClick={this.handleItemSelect}
         />
       );
     });
@@ -93,7 +96,7 @@ const ListBody = {
       mounted ? `${prefixCls}-content-item-highlight` : '',
       {
         tag: 'ul',
-        onScroll: this.onScroll,
+        onScroll: this.handleScroll,
         onLeave: noop,
       },
     );

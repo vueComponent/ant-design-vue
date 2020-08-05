@@ -16,6 +16,7 @@ export default {
     checked: PropTypes.bool,
     prefixCls: PropTypes.string,
     disabled: PropTypes.bool,
+    onClick: PropTypes.func,
   },
   render() {
     const { renderedText, renderedEl, item, lazy, checked, disabled, prefixCls } = this.$props;

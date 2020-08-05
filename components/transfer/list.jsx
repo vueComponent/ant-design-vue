@@ -48,6 +48,9 @@ export const TransferListProps = {
   disabled: PropTypes.bool,
   direction: PropTypes.string,
   showSelectAll: PropTypes.bool,
+  onItemSelect: PropTypes.func,
+  onItemSelectAll: PropTypes.func,
+  onScroll: PropTypes.func,
 };
 
 function renderListNode(renderList, props) {

@@ -38,6 +38,11 @@ export const TransferProps = {
   lazy: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
   showSelectAll: PropTypes.bool,
   children: PropTypes.any,
+  onChange: PropTypes.func,
+  onSelectChange: PropTypes.func,
+  onSearchChange: PropTypes.func,
+  onSearch: PropTypes.func,
+  onScroll: PropTypes.func,
 };
 
 export const TransferLocale = {
@@ -378,7 +383,7 @@ const Transfer = {
       const locale = this.getLocale(transferLocale, renderEmpty);
       const { sourceSelectedKeys, targetSelectedKeys, $slots } = this;
       const { body, footer } = $slots;
-      const renderItem = props.render;
+      const renderItem = props.render || this.$slots.render;
       const { leftDataSource, rightDataSource } = this.separateDataSource();
       const leftActive = targetSelectedKeys.length > 0;
       const rightActive = sourceSelectedKeys.length > 0;

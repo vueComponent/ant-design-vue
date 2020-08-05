@@ -19,12 +19,22 @@ const Operation = (_, { attrs }) => {
 
   return (
     <div class={className} style={style}>
-      <Button type="primary" size="small" disabled={disabled || !rightActive} onClick={moveToRight}>
-        <RightOutlined slot="icon" />
+      <Button
+        type="primary"
+        size="small"
+        disabled={disabled || !rightActive}
+        onClick={moveToRight}
+        icon={<RightOutlined />}
+      >
         {rightArrowText}
       </Button>
-      <Button type="primary" size="small" disabled={disabled || !leftActive} onClick={moveToLeft}>
-        <LeftOutlined slot="icon" />
+      <Button
+        type="primary"
+        size="small"
+        disabled={disabled || !leftActive}
+        onClick={moveToLeft}
+        icon={<LeftOutlined />}
+      >
         {leftArrowText}
       </Button>
     </div>

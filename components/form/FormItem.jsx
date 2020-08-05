@@ -25,6 +25,7 @@ import { validateRules } from './utils/validateUtil';
 import { getNamePath } from './utils/valueUtil';
 import { toArray } from './utils/typeUtil';
 import { warning } from '../vc-util/warning';
+import find from 'lodash/find';
 
 const iconMap = {
   success: CheckCircleFilled,
@@ -228,7 +229,12 @@ export default {
         this.required !== undefined ? { required: !!this.required, trigger: 'change' } : [];
       const prop = getPropByPath(formRules, this.namePath);
       formRules = formRules ? prop.o[prop.k] || prop.v : [];
-      return [].concat(selfRules || formRules || []).concat(requiredRule);
+      const rules = [].concat(selfRules || formRules || []);
+      if (find(rules, rule => rule.required)) {
+        return rules;
+      } else {
+        return rules.concat(requiredRule);
+      }
     },
     getFilteredRule(trigger) {
       const rules = this.getRules();

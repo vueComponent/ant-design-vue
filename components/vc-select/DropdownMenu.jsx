@@ -244,9 +244,10 @@ export default {
     onVirtualScroller(event) {
       // 现在的位置
       const newPositionY = event.target.scrollTop;
-      // 根据滚轴的距离来计算截取数据的起点，由于 wrapper 向上偏移了 1 位， 相应的将起始位置也偏移
+      // 根据滚轴的距离来计算截取数据的起点
       let start = Math.floor(newPositionY / this.itemSize);
       // 控制 wrapper 的偏移，防止出现空白
+      // 由于 wrapper 向上偏移了 1 个身位，相应的将起始位置也偏移
       let offsetSize = 0;
       if (start >= 1) {
         this.menuItemOffset = defaultOffset + 1;
@@ -254,7 +255,6 @@ export default {
         offsetSize = -8;
       } else {
         this.menuItemOffset = defaultOffset;
-        offsetSize = 0;
       }
       this.menuItemStart = start;
 
@@ -288,8 +288,9 @@ export default {
         // Move up one position
         if (itemOffsetTop < this.itemSize) scrollTop -= this.itemSize;
         // At the top
-        if (itemOffsetTop >= this.menuContainerHeight && scrollTop <= this.itemSize)
+        if (itemOffsetTop >= this.menuContainerHeight && scrollTop <= this.itemSize) {
           scrollTop = this.virtualMaxHeight;
+        }
       }
 
       // This is to standardize the position of the offset

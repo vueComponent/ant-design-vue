@@ -46,7 +46,7 @@ export function saveRef(key, c) {
     this.instanceArray[index] = c;
   }
 }
-export function getActiveKey(props, originalActiveKey) {
+export function getActiveKey(props, originalActiveKey, direction) {
   let activeKey = originalActiveKey;
   const { eventKey, defaultActiveFirst, children } = props;
   if (activeKey !== undefined && activeKey !== null) {
@@ -62,8 +62,10 @@ export function getActiveKey(props, originalActiveKey) {
     }
   }
   activeKey = null;
+  let _children = children.concat();
+  if (direction === KeyCode.UP) _children = _children.reverse();
   if (defaultActiveFirst) {
-    loopMenuItem(children, (c, i) => {
+    loopMenuItem(_children, (c, i) => {
       const propsData = c.componentOptions.propsData || {};
       const noActiveKey = activeKey === null || activeKey === undefined;
       if (noActiveKey && c && !propsData.disabled) {
@@ -154,7 +156,7 @@ const SubPopupMenu = {
     const prevProps = this.prevProps;
     const originalActiveKey =
       'activeKey' in props ? props.activeKey : props.store.getState().activeKey[getEventKey(props)];
-    const activeKey = getActiveKey(props, originalActiveKey);
+    const activeKey = getActiveKey(props, originalActiveKey, this.direction);
     if (activeKey !== originalActiveKey) {
       updateActiveKey(props.store, getEventKey(props), activeKey);
     } else if ('activeKey' in prevProps) {
@@ -183,6 +185,7 @@ const SubPopupMenu = {
       let activeItem = null;
       if (keyCode === KeyCode.UP || keyCode === KeyCode.DOWN) {
         activeItem = this.step(keyCode === KeyCode.UP ? -1 : 1);
+        this.direction = keyCode;
       }
       if (activeItem) {
         e.preventDefault();

@@ -153,8 +153,6 @@ export default {
           on: {},
           style: {
             ...dropdownMenuStyle,
-            overflowY: 'hidden',
-            maxHeight: this.menuItemOffset * this.itemSize + 'px',
           },
           ref: 'menuRef',
           attrs: {
@@ -209,6 +207,8 @@ export default {
 
           clonedMenuItems = menuItems.map(item => {
             if (getSlotOptions(item).isMenuItemGroup) {
+              // 分组模式下不使用虚拟滚动
+              this.isMenuItemGroup = true;
               const children = item.componentOptions.children.map(clone);
               return cloneElement(item, { children });
             }
@@ -219,13 +219,19 @@ export default {
           // Avoid `Unable to find node on an unmounted component`
           // https://github.com/ant-design/ant-design/issues/10774
           this.firstActiveItem = null;
+          // 判断是否有处于分组模式的
+          this.isMenuItemGroup = menuItems.some(item => getSlotOptions(item).isMenuItemGroup);
         }
 
         // Control the displayed data
-        clonedMenuItems = clonedMenuItems.slice(
-          this.menuItemStart,
-          this.menuItemStart + this.menuItemOffset,
-        );
+        if (!this.isMenuItemGroup) {
+          clonedMenuItems = clonedMenuItems.slice(
+            this.menuItemStart,
+            this.menuItemStart + this.menuItemOffset,
+          );
+          menuProps.style['maxHeight'] = this.menuItemOffset * this.itemSize + 'px';
+          menuProps.style['overflowY'] = 'hidden';
+        }
 
         // clear activeKey when inputValue change
         const lastValue = value && value[value.length - 1];
@@ -242,6 +248,9 @@ export default {
       return null;
     },
     onVirtualScroller(event) {
+      const { popupScroll } = getListeners(this);
+      popupScroll(event);
+      if (this.isMenuItemGroup) return;
       // 现在的位置
       const newPositionY = event.target.scrollTop;
       // 根据滚轴的距离来计算截取数据的起点
@@ -260,9 +269,6 @@ export default {
 
       this.$refs.menuRef.$el.style.transform = `translateY(${this.menuItemStart * this.itemSize +
         offsetSize}px)`;
-
-      const { popupScroll } = getListeners(this);
-      popupScroll(event);
     },
     onKeyDown(event, item) {
       const { keyCode } = event;
@@ -301,13 +307,15 @@ export default {
     const renderMenu = this.renderMenu();
     const { popupFocus } = getListeners(this);
 
+    const menuContainerStyle = {
+      overflow: 'auto',
+      transform: 'translateZ(0)',
+    };
+    if (!this.isMenuItemGroup) menuContainerStyle['maxHeight'] = this.menuContainerHeight + 'px';
+
     return renderMenu ? (
       <div
-        style={{
-          overflow: 'auto',
-          transform: 'translateZ(0)',
-          maxHeight: this.menuContainerHeight + 'px',
-        }}
+        style={menuContainerStyle}
         id={this.$props.ariaId}
         tabIndex="-1"
         onFocus={popupFocus}
@@ -315,14 +323,18 @@ export default {
         onScroll={this.onVirtualScroller}
         ref="menuContainer"
       >
-        <div
-          ref="virtualWrap"
-          style={{
-            minHeight: this.virtualMaxHeight + 'px',
-          }}
-        >
-          {renderMenu}
-        </div>
+        {!this.isMenuItemGroup ? (
+          <div
+            ref="virtualWrap"
+            style={{
+              minHeight: this.virtualMaxHeight + 'px',
+            }}
+          >
+            {renderMenu}
+          </div>
+        ) : (
+          renderMenu
+        )}
       </div>
     ) : null;
   },

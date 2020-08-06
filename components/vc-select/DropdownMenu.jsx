@@ -247,16 +247,19 @@ export default {
       // 根据滚轴的距离来计算截取数据的起点，由于 wrapper 向上偏移了 1 位， 相应的将起始位置也偏移
       let start = Math.floor(newPositionY / this.itemSize);
       // 控制 wrapper 的偏移，防止出现空白
+      let offsetSize = 0;
       if (start >= 1) {
         this.menuItemOffset = defaultOffset + 1;
         start -= 1;
+        offsetSize = -8;
       } else {
         this.menuItemOffset = defaultOffset;
+        offsetSize = 0;
       }
       this.menuItemStart = start;
 
-      this.$refs.menuRef.$el.style.transform = `translateY(${this.menuItemStart *
-        this.itemSize}px)`;
+      this.$refs.menuRef.$el.style.transform = `translateY(${this.menuItemStart * this.itemSize +
+        offsetSize}px)`;
 
       const { popupScroll } = getListeners(this);
       popupScroll(event);
@@ -269,8 +272,11 @@ export default {
       let itemOffsetTop = item.$el.offsetTop;
 
       if (keyCode === KeyCode.DOWN) {
+        // When the starting value is greater than 0, I need to remove the offset value at the top
         if (this.menuItemStart > 0) itemOffsetTop -= this.itemSize;
+        // Move down one position
         if (itemOffsetTop > this.menuContainerHeight) scrollTop += this.itemSize;
+        // When it reaches the bottom
         if (
           itemOffsetTop <= 0 &&
           scrollTop + this.itemSize >= this.virtualMaxHeight - this.menuContainerHeight
@@ -279,12 +285,15 @@ export default {
       }
 
       if (keyCode === KeyCode.UP) {
+        // Move up one position
         if (itemOffsetTop < this.itemSize) scrollTop -= this.itemSize;
+        // At the top
         if (itemOffsetTop >= this.menuContainerHeight && scrollTop <= this.itemSize)
           scrollTop = this.virtualMaxHeight;
       }
 
-      menuContainer.scrollTop = scrollTop;
+      // This is to standardize the position of the offset
+      menuContainer.scrollTop = scrollTop - (scrollTop % this.itemSize);
     },
   },
   render() {

@@ -155,12 +155,13 @@ export default {
         newEvent.selectedNodes = convertDirectoryKeysToNodes(children, newSelectedKeys);
       } else if (multiple && shiftPick) {
         // Shift click
-        newSelectedKeys = Array.from(
-          new Set([
-            ...(this.cachedSelectedKeys || []),
-            ...calcRangeKeys(children, expandedKeys, eventKey, this.lastSelectedKey),
-          ]),
-        );
+        // newSelectedKeys = Array.from(
+        //   new Set([
+        //     ...(this.cachedSelectedKeys || []),
+        //     ...calcRangeKeys(children, expandedKeys, eventKey, this.lastSelectedKey),
+        //   ]),
+        // );
+        newSelectedKeys = keys;
         newEvent.selectedNodes = convertDirectoryKeysToNodes(children, newSelectedKeys);
       } else {
         // Single click

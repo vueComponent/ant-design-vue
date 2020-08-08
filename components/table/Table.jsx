@@ -892,8 +892,10 @@ export default {
       return ({ expandable, expanded, needIndentSpaced, record, onExpand }) => {
         if (expandable) {
           return (
-            <LocaleReceiver componentName="Table" defaultLocale={defaultLocale.Table}>
-              {locale => (
+            <LocaleReceiver
+              componentName="Table"
+              defaultLocale={defaultLocale.Table}
+              children={locale => (
                 <TransButton
                   class={classNames(`${prefixCls}-row-expand-icon`, {
                     [`${prefixCls}-row-collapsed`]: !expanded,
@@ -906,7 +908,7 @@ export default {
                   noStyle
                 />
               )}
-            </LocaleReceiver>
+            />
           );
         }
 

@@ -18,7 +18,7 @@ const Table = {
         const style = element.props?.style || {};
         const cls = element.props?.class || '';
         const props = getPropsData(element);
-        const { default: children, ...restSlots } = element.children;
+        const { default: children, ...restSlots } = element.children || {};
         const column = { ...restSlots, ...props, style, class: cls };
         if (key) {
           column.key = key;

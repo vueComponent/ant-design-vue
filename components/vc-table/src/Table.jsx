@@ -175,11 +175,6 @@ export default {
 
     this.debouncedWindowResize = debounce(this.handleWindowResize, 150);
   },
-  provide() {
-    return {
-      table: this,
-    };
-  },
 
   mounted() {
     this.$nextTick(() => {

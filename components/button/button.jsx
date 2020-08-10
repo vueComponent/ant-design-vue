@@ -66,7 +66,6 @@ export default {
         sLoading,
         ghost,
         block,
-        icon,
         $attrs,
       } = this;
       const getPrefixCls = this.configProvider.getPrefixCls;
@@ -86,7 +85,7 @@ export default {
         default:
           break;
       }
-      const iconType = sLoading ? 'loading' : icon;
+      const iconType = sLoading ? 'loading' : this.iconCom;
       return {
         [$attrs.class]: $attrs.class,
         [`${prefixCls}`]: true,

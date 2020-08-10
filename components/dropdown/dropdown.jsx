@@ -84,9 +84,9 @@ const Dropdown = {
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('dropdown', customizePrefixCls);
-
-    const dropdownTrigger = cloneElement(getSlot(this), {
-      class: classNames(this.$attrs?.class, `${prefixCls}-trigger`),
+    const child = getSlot(this)[0];
+    const dropdownTrigger = cloneElement(child, {
+      class: classNames(child?.props?.class, `${prefixCls}-trigger`),
       disabled,
     });
     const triggerActions = disabled ? [] : trigger;

@@ -56,6 +56,7 @@ const TableRow = {
 
   data() {
     // this.shouldRender = this.visible
+    this.rowRef = null;
     return {
       shouldRender: this.visible,
     };
@@ -155,17 +156,13 @@ const TableRow = {
 
     saveRowRef() {
       this.rowRef = findDOMNode(this);
-
       const { isAnyColumnsFixed, fixed, expandedRow, ancestorKeys } = this;
-
       if (!isAnyColumnsFixed) {
         return;
       }
-
       if (!fixed && expandedRow) {
         this.setExpandedRowHeight();
       }
-
       if (!fixed && ancestorKeys.length >= 0) {
         this.setRowHeight();
       }

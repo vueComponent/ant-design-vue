@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/transfer/demo/basic';
+import demo from '../antdv-demo/docs/table/demo/custom-filter-panel';
 
 export default {
   components: {

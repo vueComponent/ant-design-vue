@@ -233,8 +233,10 @@ const ExpandableTable = {
     const needIndentSpaced = data.some(record => record[childrenColumnName]);
 
     return getSlot(this, 'default', {
-      props,
-      ...this.$attrs,
+      props: {
+        ...props,
+        ...this.$attrs,
+      },
       needIndentSpaced,
       renderRows: this.renderRows,
       handleExpandChange: this.handleExpandChange,

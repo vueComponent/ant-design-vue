@@ -70,9 +70,9 @@ export default {
     let rowSpan;
 
     if (customRender) {
-      text = customRender(text, record, index, column);
+      text = customRender({ text, record, index, column });
       if (isInvalidRenderCellText(text)) {
-        tdProps = text.props || tdProps;
+        tdProps = text.props || text.attrs || tdProps;
         ({ colSpan, rowSpan } = tdProps);
         text = text.children;
       }

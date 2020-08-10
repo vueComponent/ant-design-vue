@@ -1,6 +1,7 @@
+import { toRaw } from 'vue';
 export default class ColumnManager {
   constructor(columns) {
-    this.columns = columns;
+    this.columns = toRaw(columns);
     this._cached = {};
   }
 
@@ -89,7 +90,7 @@ export default class ColumnManager {
   }
 
   reset(columns) {
-    this.columns = columns;
+    this.columns = toRaw(columns);
     this._cached = {};
   }
 

@@ -88,7 +88,7 @@ export default {
   data() {
     this.preData = [...this.data];
     return {
-      columnManager: new ColumnManager(this.columns),
+      columnManager: markRaw(new ColumnManager(this.columns)),
       sComponents: markRaw(
         merge(
           {
@@ -178,6 +178,7 @@ export default {
 
   mounted() {
     this.$nextTick(() => {
+      console.log(this.ref_headTable);
       if (this.columnManager.isAnyColumnsFixed()) {
         this.handleWindowResize();
         this.resizeEvent = addEventListener(window, 'resize', this.debouncedWindowResize);

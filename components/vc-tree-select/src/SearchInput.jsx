@@ -122,6 +122,7 @@ const SearchInput = {
           type="text"
           ref={this.inputRef}
           onInput={handleInputChange}
+          onChange={handleInputChange}
           onKeydown={onSearchInputKeyDown}
           value={searchValue}
           disabled={disabled}

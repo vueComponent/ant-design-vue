@@ -169,6 +169,7 @@ const Header = {
           value={str}
           placeholder={placeholder}
           onInput={this.onInputChange}
+          onChange={this.onInputChange}
           readonly={!!inputReadOnly}
         />
       );

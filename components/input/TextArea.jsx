@@ -106,6 +106,7 @@ export default {
         ...this.$attrs,
         prefixCls,
         onInput: this.handleChange,
+        onChange: this.handleChange,
         onKeydown: this.handleKeyDown,
       };
       return <ResizableTextArea {...resizeProps} ref={this.saveTextArea} />;

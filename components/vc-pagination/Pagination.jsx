@@ -380,14 +380,8 @@ export default {
               onKeydown={this.handleKeyDown}
               onKeyup={this.handleKeyUp}
               onInput={this.handleKeyUp}
+              onChange={this.handleKeyUp}
               size="3"
-              {...{
-                directives: [
-                  {
-                    name: 'ant-input',
-                  },
-                ],
-              }}
             />
             <span class={`${prefixCls}-slash`}>／</span>
             {allPages}

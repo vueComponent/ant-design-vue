@@ -161,7 +161,7 @@ export default {
         ref: this.saveInput,
         key: 'ant-input',
         onInput: handleChange,
-        onChange: noop,
+        onChange: handleChange,
       };
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;

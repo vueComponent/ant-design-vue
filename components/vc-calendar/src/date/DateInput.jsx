@@ -200,6 +200,7 @@ const DateInput = {
             disabled={disabled}
             placeholder={placeholder}
             onInput={this.onInputChange}
+            onChange={this.onInputChange}
             onKeydown={this.onKeyDown}
             onFocus={this.onFocus}
             onBlur={this.onBlur}

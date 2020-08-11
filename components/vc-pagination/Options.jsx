@@ -136,15 +136,9 @@ export default {
             type="text"
             value={goInputText}
             onInput={this.handleChange}
+            onChange={this.handleChange}
             onKeyup={this.go}
             onBlur={this.handleBlur}
-            {...{
-              directives: [
-                {
-                  name: 'ant-input',
-                },
-              ],
-            }}
           />
           {locale.page}
           {gotoButton}

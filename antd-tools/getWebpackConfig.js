@@ -50,7 +50,6 @@ function getWebpackConfig(modules) {
       modules: ['node_modules', path.join(__dirname, '../node_modules')],
       extensions: ['.js', '.jsx', '.vue', '.md', '.json'],
       alias: {
-        vue$: 'vue/dist/vue.esm.js',
         '@': process.cwd(),
       },
     },
@@ -83,8 +82,11 @@ function getWebpackConfig(modules) {
                     {
                       loader: 'babel-loader',
                       options: {
-                        presets: ['env'],
-                        plugins: ['transform-vue-jsx', 'transform-object-rest-spread'],
+                        presets: [require.resolve('@babel/preset-env')],
+                        plugins: [
+                          require.resolve('@ant-design-vue/babel-plugin-jsx'),
+                          require.resolve('@babel/plugin-proposal-object-rest-spread'),
+                        ],
                       },
                     },
                   ],

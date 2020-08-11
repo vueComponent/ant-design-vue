@@ -180,6 +180,9 @@ export default {
       if (Date.now() - this.openTime < 300) {
         return;
       }
+      if (this.mask === false) {
+        return;
+      }
       if (e.target === e.currentTarget && !this.dialogMouseDown) {
         this.close(e);
       }
@@ -411,7 +414,7 @@ export default {
     },
   },
   render() {
-    const { prefixCls, maskClosable, visible, wrapClassName, title, wrapProps } = this;
+    const { prefixCls, maskClosable, visible, wrapClassName, title, wrapProps, mask } = this;
     const style = this.getWrapStyle();
     // clear hide display
     // and only set display after async anim, not here for hide
@@ -424,7 +427,11 @@ export default {
         <div
           tabIndex={-1}
           onKeydown={this.onKeydown}
-          class={`${prefixCls}-wrap ${wrapClassName || ''}`}
+          class={{
+            [`${prefixCls}-wrap`]: true,
+            [`${prefixCls}-no-mask`]: !mask,
+            [wrapClassName]: !!wrapClassName,
+          }}
           ref="wrap"
           onClick={maskClosable ? this.onMaskClick : noop}
           onMouseup={maskClosable ? this.onMaskMouseUp : noop}

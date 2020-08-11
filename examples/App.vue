@@ -1,24 +1,45 @@
 <template>
   <div>
-    <a-collapse :accordion="true" default-active-key="2" :bordered="false">
-      <a-collapse-panel key="1" header="This is panel header 1">
-        <p>{{ text }}</p>
-      </a-collapse-panel>
-      <a-collapse-panel key="2" header="This is panel header 2" :disabled="false">
-        <p>{{ text }}</p>
-      </a-collapse-panel>
-      <a-collapse-panel key="3" header="This is panel header 3">
-        <p>{{ text }}</p>
-      </a-collapse-panel>
-    </a-collapse>
+    <a-button type="primary" @click="showModal">
+      Open Modal with async logic
+    </a-button>
+    <a-modal
+      title="Title"
+      :visible="visible"
+      :confirm-loading="confirmLoading"
+      :mask="false"
+      @ok="handleOk"
+      @cancel="handleCancel"
+    >
+      <p>{{ ModalText }}</p>
+    </a-modal>
   </div>
 </template>
 <script>
 export default {
   data() {
     return {
-      text: `A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.`,
+      ModalText: 'Content of the modal',
+      visible: false,
+      confirmLoading: false,
     };
+  },
+  methods: {
+    showModal() {
+      this.visible = true;
+    },
+    handleOk(e) {
+      this.ModalText = 'The modal will be closed after two seconds';
+      this.confirmLoading = true;
+      setTimeout(() => {
+        this.visible = false;
+        this.confirmLoading = false;
+      }, 2000);
+    },
+    handleCancel(e) {
+      console.log('Clicked cancel button');
+      this.visible = false;
+    },
   },
 };
 </script>

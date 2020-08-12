@@ -168,11 +168,10 @@ export default {
         <TabContent class={contentCls} animated={tabPaneAnimated} animatedWithMargin />
       ),
       children: childrenWithClose.length > 0 ? childrenWithClose : children,
-      __propsSymbol__: Symbol(),
       ...restProps,
       onChange: this.handleChange,
       class: cls,
     };
-    return <VcTabs {...tabsProps} />;
+    return <VcTabs {...tabsProps} __propsSymbol__={Symbol()} />;
   },
 };

@@ -55,9 +55,12 @@ export default {
         throttle: 0,
         debounce: false,
         ...lazy,
-        _propsSymbol: Symbol(),
       };
-      children = <Lazyload {...lazyProps}>{listItem}</Lazyload>;
+      children = (
+        <Lazyload {...lazyProps} _propsSymbol={Symbol()}>
+          {listItem}
+        </Lazyload>
+      );
     } else {
       children = listItem;
     }

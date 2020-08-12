@@ -28,11 +28,11 @@ export default {
   },
   data() {
     this.aligned = false;
+    this.prevProps = { ...this.$props };
     return {};
   },
   mounted() {
     nextTick(() => {
-      this.prevProps = { ...this.$props };
       const props = this.$props;
       // if parent ref not attached .... use document.getElementById
       !this.aligned && this.forceAlign();

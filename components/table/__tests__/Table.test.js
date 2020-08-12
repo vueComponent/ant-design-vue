@@ -2,6 +2,7 @@ import { shallowMount as shallow, mount } from '@vue/test-utils';
 import Table from '..';
 import * as Vue from 'vue';
 import mountTest from '../../../tests/shared/mountTest';
+import { sleep } from '../../../tests/utils';
 
 const { Column, ColumnGroup } = Table;
 
@@ -46,7 +47,7 @@ describe('Table', () => {
     });
   });
 
-  it('updates columns when receiving props', done => {
+  it('updates columns when receiving props', async () => {
     const columns = [
       {
         title: 'Name',
@@ -68,13 +69,11 @@ describe('Table', () => {
       },
     ];
     wrapper.setProps({ columns: newColumns });
-    Vue.nextTick(() => {
-      expect(wrapper.vm.columns).toBe(newColumns);
-      done();
-    });
+    await sleep();
+    expect(wrapper.vm.columns).toStrictEqual(newColumns);
   });
 
-  it('loading with Spin', done => {
+  it('loading with Spin', async () => {
     const loading = {
       spinning: false,
       delay: 500,
@@ -85,18 +84,17 @@ describe('Table', () => {
       },
       sync: false,
     });
-    Vue.nextTick(async () => {
-      expect(wrapper.findAll('.ant-spin')).toHaveLength(0);
-      expect(wrapper.find('.ant-table-placeholder').text()).not.toEqual('');
+    await sleep();
+    expect(wrapper.findAll('.ant-spin')).toHaveLength(0);
+    expect(wrapper.find('.ant-table-placeholder').text()).not.toEqual('');
 
-      loading.spinning = true;
-      wrapper.setProps({ loading });
-      expect(wrapper.findAll('.ant-spin')).toHaveLength(0);
+    loading.spinning = true;
+    wrapper.setProps({ loading: { ...loading } });
+    await sleep();
+    expect(wrapper.findAll('.ant-spin')).toHaveLength(0);
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      expect(wrapper.findAll('.ant-spin')).toHaveLength(1);
-      done();
-    });
+    await sleep(500);
+    expect(wrapper.findAll('.ant-spin')).toHaveLength(1);
   });
 
   it('align column should not override cell style', done => {

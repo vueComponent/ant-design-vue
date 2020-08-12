@@ -1045,7 +1045,6 @@ export default {
           const colFilters = key in filters ? filters[key] : [];
           filterDropdown = (
             <FilterDropdown
-              _propsSymbol={Symbol()}
               locale={locale}
               column={column}
               selectedKeys={colFilters}
@@ -1266,10 +1265,7 @@ export default {
         : `${prefixCls}-without-pagination`;
     const spinProps = {
       ...loading,
-      class:
-        loading.props && loading.props.spinning
-          ? `${paginationPatchClass} ${prefixCls}-spin-holder`
-          : '',
+      class: loading && loading.spinning ? `${paginationPatchClass} ${prefixCls}-spin-holder` : '',
     };
     const { class: className, style } = this.$attrs;
     return (

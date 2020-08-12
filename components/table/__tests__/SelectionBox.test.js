@@ -38,9 +38,6 @@ describe('SelectionBox', () => {
         onChange: () => {},
         defaultSelection: [],
       },
-      listeners: {
-        change: () => {},
-      },
       sync: false,
     });
 
@@ -56,9 +53,6 @@ describe('SelectionBox', () => {
         onChange: () => {},
         defaultSelection: ['1'],
       },
-      listeners: {
-        change: () => {},
-      },
       sync: false,
     });
 
@@ -72,10 +66,8 @@ describe('SelectionBox', () => {
         store,
         rowIndex: '1',
         disabled: false,
+        onChange: () => {},
         defaultSelection: [],
-      },
-      listeners: {
-        change: () => {},
       },
       sync: false,
     });
@@ -98,16 +90,14 @@ describe('SelectionBox', () => {
         store: getDefaultStore(),
         rowIndex: '1',
         disabled: false,
+        onChange: () => {},
         defaultSelection: ['1'],
         ...checkboxProps,
-      },
-      listeners: {
-        change: () => {},
       },
       sync: false,
     });
     Vue.nextTick(() => {
-      wrapper.findAll({ name: 'ACheckbox' }).wrappers.forEach(box => {
+      wrapper.findAllComponents({ name: 'ACheckbox' }).forEach(box => {
         expect(box.props().name).toEqual(checkboxProps.name);
         expect(box.props().id).toEqual(checkboxProps.id);
       });
@@ -125,17 +115,15 @@ describe('SelectionBox', () => {
         store: getDefaultStore(),
         rowIndex: '1',
         disabled: false,
+        onChange: () => {},
         defaultSelection: ['1'],
         type: 'radio',
         ...radioProps,
       },
-      listeners: {
-        change: () => {},
-      },
       sync: false,
     });
     Vue.nextTick(() => {
-      wrapper.findAll({ name: 'ARadio' }).wrappers.forEach(radio => {
+      wrapper.findAllComponents({ name: 'ARadio' }).forEach(radio => {
         expect(radio.props().name).toEqual(radioProps.name);
         expect(radio.props().id).toEqual(radioProps.id);
       });

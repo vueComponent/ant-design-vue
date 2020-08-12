@@ -191,9 +191,8 @@ export default {
       ...this.$attrs,
       ...settings,
       children: newChildren,
-      __propsSymbol__: Symbol(),
       ref: this.innerSliderRefHandler,
     };
-    return <InnerSlider {...sliderProps} vSlots={this.$slots} />;
+    return <InnerSlider {...sliderProps} vSlots={this.$slots} __propsSymbol__={Symbol()} />;
   },
 };

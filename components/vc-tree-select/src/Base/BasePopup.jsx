@@ -265,14 +265,13 @@ const BasePopup = {
         filterTreeNode: this.filterTreeNode,
         switcherIcon,
         ...treeProps,
-        __propsSymbol__: Symbol(),
         children: $treeNodes,
         onSelect: onTreeNodeSelect,
         onCheck: onTreeNodeCheck,
         onExpand: this.onTreeExpand,
         onLoad: this.onLoad,
       };
-      $tree = <Tree {...treeAllProps} ref={this.treeRef} />;
+      $tree = <Tree {...treeAllProps} ref={this.treeRef} __propsSymbol__={Symbol()} />;
     }
 
     return (

@@ -1,6 +1,5 @@
 import classnames from 'classnames';
 import { cloneVNode, Teleport, nextTick } from 'vue';
-import antRef from '../../_util/ant-ref';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, getSlot } from '../../_util/props-util';
 import getScrollBarSize from '../../_util/getScrollBarSize';
@@ -29,7 +28,6 @@ const Drawer = {
   name: 'Drawer',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  directives: { 'ant-ref': antRef },
   props: initDefaultProps(IDrawerProps, {
     prefixCls: 'drawer',
     placement: 'left',

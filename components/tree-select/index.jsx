@@ -177,7 +177,6 @@ const TreeSelect = {
           dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },
           treeCheckable: checkable,
           notFoundContent: notFoundContent || renderEmpty('Select'),
-          __propsSymbol__: Symbol(),
         },
         treeData ? { treeData } : {},
       ),
@@ -186,7 +185,13 @@ const TreeSelect = {
       ref: this.saveTreeSelect,
       children: getSlot(this),
     };
-    return <VcTreeSelect {...VcTreeSelectProps} vSlots={omit(this.$slots, ['default'])} />;
+    return (
+      <VcTreeSelect
+        {...VcTreeSelectProps}
+        vSlots={omit(this.$slots, ['default'])}
+        __propsSymbol__={Symbol()}
+      />
+    );
   },
 };
 

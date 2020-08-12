@@ -1089,13 +1089,12 @@ const Select = {
       filteredTreeNodes,
       // Tree expanded control
       treeExpandedKeys,
-      __propsSymbol__: Symbol(),
       onTreeExpanded: this.delayForcePopupAlign,
       ref: this.setPopupRef,
     };
 
     const Popup = isMultiple ? MultiplePopup : SinglePopup;
-    const $popup = <Popup {...popupProps} />;
+    const $popup = <Popup {...popupProps} __propsSymbol__={Symbol()} />;
 
     const Selector = isMultiple ? MultipleSelector : SingleSelector;
     const $selector = <Selector {...passProps} ref={this.selectorRef} />;

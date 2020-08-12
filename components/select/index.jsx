@@ -246,14 +246,13 @@ const Select = {
             );
           })
         : getSlot(this),
-      __propsSymbol__: Symbol(),
       dropdownRender: getComponent(this, 'dropdownRender', {}, false),
       getPopupContainer: getPopupContainer || getContextPopupContainer,
       ...this.$attrs,
       class: cls,
       ref: 'vcSelect',
     };
-    return <VcSelect {...selectProps} />;
+    return <VcSelect {...selectProps} __propsSymbol__={Symbol()} />;
   },
 };
 

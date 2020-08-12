@@ -190,7 +190,6 @@ export default {
       prefixCls,
       checkable: checkable ? <span class={`${prefixCls}-checkbox-inner`} /> : checkable,
       children: getSlot(this),
-      __propsSymbol__: Symbol(),
       switcherIcon: nodeProps => this.renderSwitcherIcon(prefixCls, switcherIcon, nodeProps),
       ref: this.setTreeRef,
       ...restAttrs,
@@ -202,6 +201,6 @@ export default {
     if (treeData) {
       vcTreeProps.treeData = treeData;
     }
-    return <VcTree {...vcTreeProps} />;
+    return <VcTree {...vcTreeProps} __propsSymbol__={Symbol()} />;
   },
 };

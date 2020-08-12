@@ -77,7 +77,7 @@ const Table = {
       footer,
       expandedRowRender,
     };
-    return <T {...tProps} />;
+    return <T {...tProps} ref="table" />;
   },
 };
 /* istanbul ignore next */

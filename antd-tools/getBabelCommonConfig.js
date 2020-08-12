@@ -2,6 +2,7 @@
 
 module.exports = function(modules) {
   const plugins = [
+    require.resolve('@ant-design-vue/babel-plugin-jsx'),
     require.resolve('babel-plugin-inline-import-data-uri'),
     require.resolve('@babel/plugin-transform-member-expression-literals'),
     require.resolve('@babel/plugin-transform-property-literals'),

@@ -48,16 +48,7 @@ function TreeProps() {
     /** 默认选中的树节点 */
     defaultSelectedKeys: PropTypes.array,
     selectable: PropTypes.bool,
-    /** 展开/收起节点时触发 */
-    // onExpand: (expandedKeys: string[], info: AntTreeNodeExpandedEvent) => void | PromiseLike<any>,
-    /** 点击复选框触发 */
-    // onCheck: (checkedKeys: string[] | { checked: string[]; halfChecked: string[] }, e: AntTreeNodeCheckedEvent) => void,
-    /** 点击树节点触发 */
-    // onSelect: (selectedKeys: string[], e: AntTreeNodeSelectedEvent) => void,
-    /** 单击树节点触发 */
-    // onClick: (e: React.MouseEvent<HTMLElement>, node: AntTreeNode) => void,
-    /** 双击树节点触发 */
-    // onDoubleClick: (e: React.MouseEvent<HTMLElement>, node: AntTreeNode) => void,
+
     /** filter some AntTreeNodes as you need. it should return true */
     filterAntTreeNode: PropTypes.func,
     /** 异步加载数据 */
@@ -91,6 +82,20 @@ function TreeProps() {
      */
     replaceFields: PropTypes.object,
     blockNode: PropTypes.bool,
+    /** 展开/收起节点时触发 */
+    onExpand: PropTypes.func,
+    /** 点击复选框触发 */
+    onCheck: PropTypes.func,
+    /** 点击树节点触发 */
+    onSelect: PropTypes.func,
+    /** 单击树节点触发 */
+    onClick: PropTypes.func,
+    /** 双击树节点触发 */
+    onDoubleclick: PropTypes.func,
+    onDblclick: PropTypes.func,
+    'onUpdate:selectedKeys': PropTypes.func,
+    'onUpdate:checkedKeys': PropTypes.func,
+    'onUpdate:expandedKeys': PropTypes.func,
   };
 }
 
@@ -127,9 +132,7 @@ export default {
       const switcherCls = `${prefixCls}-switcher-icon`;
       if (switcherIcon) {
         return cloneElement(switcherIcon, {
-          class: {
-            [switcherCls]: true,
-          },
+          class: switcherCls,
         });
       }
       return showLine ? (
@@ -172,6 +175,18 @@ export default {
     setTreeRef(node) {
       this.tree = node;
     },
+    handleCheck(checkedObj, eventObj) {
+      this.$emit('update:checkedKeys', checkedObj);
+      this.$emit('check', checkedObj, eventObj);
+    },
+    handleExpand(expandedKeys, eventObj) {
+      this.$emit('update:expandedKeys', expandedKeys);
+      this.$emit('expand', expandedKeys, eventObj);
+    },
+    handleSelect(selectedKeys, eventObj) {
+      this.$emit('update:selectedKeys', selectedKeys);
+      this.$emit('select', selectedKeys, eventObj);
+    },
   },
   render() {
     const props = getOptionProps(this);
@@ -197,6 +212,9 @@ export default {
         [`${prefixCls}-icon-hide`]: !showIcon,
         [`${prefixCls}-block-node`]: blockNode,
       }),
+      onCheck: this.handleCheck,
+      onExpand: this.handleExpand,
+      onSelect: this.handleSelect,
     };
     if (treeData) {
       vcTreeProps.treeData = treeData;

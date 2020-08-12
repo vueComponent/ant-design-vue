@@ -93,15 +93,15 @@ export default {
     },
   },
   methods: {
-    onExpand(expandedKeys, info) {
+    handleExpand(expandedKeys, info) {
       this.setUncontrolledState({ _expandedKeys: expandedKeys });
-
+      this.$emit('update:expandedKeys', expandedKeys);
       this.$emit('expand', expandedKeys, info);
 
       return undefined;
     },
 
-    onClick(event, node) {
+    handleClick(event, node) {
       const { expandAction } = this.$props;
 
       // Expand the tree
@@ -111,7 +111,7 @@ export default {
       this.$emit('click', event, node);
     },
 
-    onDoubleClick(event, node) {
+    handleDoubleClick(event, node) {
       const { expandAction } = this.$props;
 
       // Expand the tree
@@ -123,7 +123,7 @@ export default {
       this.$emit('dblclick', event, node);
     },
 
-    onSelect(keys, event) {
+    hanldeSelect(keys, event) {
       const { multiple } = this.$props;
       const children = this.children || [];
       const { _expandedKeys: expandedKeys = [] } = this.$data;
@@ -203,6 +203,10 @@ export default {
         this.setState(newState);
       }
     },
+    handleCheck(checkedObj, eventObj) {
+      this.$emit('update:checkedKeys', checkedObj);
+      this.$emit('check', checkedObj, eventObj);
+    },
   },
 
   render() {
@@ -215,18 +219,19 @@ export default {
     const connectClassName = classNames(`${prefixCls}-directory`, className);
     const treeProps = {
       icon: getIcon,
-      ...props,
-      ...omit(restAttrs, ['onUpdate:selectedKeys']),
+      ...restAttrs,
+      ...omit(props, ['onUpdate:selectedKeys', 'onUpdate:checkedKeys', 'onUpdate:expandedKeys']),
       prefixCls,
       expandedKeys,
       selectedKeys,
       switcherIcon: getComponent(this, 'switcherIcon'),
       ref: this.setTreeRef,
       class: connectClassName,
-      onSelect: this.onSelect,
-      onClick: this.onClick,
-      onDblclick: this.onDoubleClick,
-      onExpand: this.onExpand,
+      onSelect: this.hanldeSelect,
+      onClick: this.handleClick,
+      onDblclick: this.handleDoubleClick,
+      onExpand: this.handleExpand,
+      onCheck: this.handleCheck,
     };
     return <Tree {...treeProps}>{this.children}</Tree>;
   },

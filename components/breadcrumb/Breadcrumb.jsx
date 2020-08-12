@@ -95,7 +95,7 @@ export default {
           <BreadcrumbItem
             overlay={overlay}
             separator={separator}
-            key={route.breadcrumbName || path}
+            key={path || route.breadcrumbName}
           >
             {itemRender({ route, params, routes, paths: tempPaths })}
           </BreadcrumbItem>

@@ -707,7 +707,6 @@ const Select = {
         // We should also trigger onSearch with empty string here
         // since if user use `treeExpandedKeys`, it need user have the ability to reset it.
         if (searchValue && searchValue.length) {
-          this.__emit('update:searchValue', '');
           this.__emit('search', '');
         }
       }
@@ -834,7 +833,6 @@ const Select = {
       const value = event.target.value;
       const { _treeNodes: treeNodes, _valueEntities: valueEntities } = this.$data;
       const { filterTreeNode, treeNodeFilterProp } = this.$props;
-      this.__emit('update:searchValue', value);
       this.__emit('search', value);
 
       let isSet = false;
@@ -1031,7 +1029,6 @@ const Select = {
         if (!this.isMultiple()) {
           returnValue = returnValue[0];
         }
-        // this.__emit('update:value', returnValue);
         this.__emit('change', returnValue, labelList, extra);
       }
     },

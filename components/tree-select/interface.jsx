@@ -33,9 +33,6 @@ export const TreeSelectProps = () => ({
   ]),
   multiple: PropTypes.bool,
   notFoundContent: PropTypes.any,
-  // onSelect: (value: any) => void,
-  // onChange: (value: any, label: any) => void,
-  // onSearch: (value: any) => void,
   searchPlaceholder: PropTypes.string,
   searchValue: PropTypes.string,
   showCheckedStrategy: PropTypes.oneOf(['SHOW_ALL', 'SHOW_PARENT', 'SHOW_CHILD']),
@@ -56,4 +53,12 @@ export const TreeSelectProps = () => ({
   replaceFields: PropTypes.object.def({}),
   clearIcon: PropTypes.any,
   removeIcon: PropTypes.any,
+
+  onSelect: PropTypes.func,
+  onChange: PropTypes.func,
+  onSearch: PropTypes.func,
+  onTreeExpand: PropTypes.func,
+  'onUpdate:treeExpandedKeys': PropTypes.func,
+  'onUpdate:searchValue': PropTypes.func,
+  'onUpdate:value': PropTypes.func,
 });

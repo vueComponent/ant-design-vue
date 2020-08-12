@@ -61,9 +61,17 @@ const TreeSelect = {
       }
       return <CaretDownOutlined class={`${prefixCls}-switcher-icon`} />;
     },
-    onChange(...args) {
+    handleChange(...args) {
       this.$emit('update:value', args[0]);
       this.$emit('change', ...args);
+    },
+    handleTreeExpand(...args) {
+      this.$emit('update:treeExpandedKeys', args[0]);
+      this.$emit('treeExpand', ...args);
+    },
+    handleSearch(...args) {
+      this.$emit('update:searchValue', args[0]);
+      this.$emit('search', ...args);
     },
     updateTreeData(treeData) {
       const { $slots } = this;
@@ -163,25 +171,23 @@ const TreeSelect = {
     );
     const VcTreeSelectProps = {
       ...this.$attrs,
-      ...Object.assign(
-        {
-          switcherIcon: nodeProps => this.renderSwitcherIcon(prefixCls, nodeProps),
-          inputIcon,
-          removeIcon: finalRemoveIcon,
-          clearIcon: finalClearIcon,
-          ...rest,
-          showSearch,
-          getPopupContainer: getPopupContainer || getContextPopupContainer,
-          dropdownClassName: classNames(dropdownClassName, `${prefixCls}-tree-dropdown`),
-          prefixCls,
-          dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },
-          treeCheckable: checkable,
-          notFoundContent: notFoundContent || renderEmpty('Select'),
-        },
-        treeData ? { treeData } : {},
-      ),
+      switcherIcon: nodeProps => this.renderSwitcherIcon(prefixCls, nodeProps),
+      inputIcon,
+      removeIcon: finalRemoveIcon,
+      clearIcon: finalClearIcon,
+      ...rest,
+      showSearch,
+      getPopupContainer: getPopupContainer || getContextPopupContainer,
+      dropdownClassName: classNames(dropdownClassName, `${prefixCls}-tree-dropdown`),
+      prefixCls,
+      dropdownStyle: { maxHeight: '100vh', overflow: 'auto', ...dropdownStyle },
+      treeCheckable: checkable,
+      notFoundContent: notFoundContent || renderEmpty('Select'),
+      ...(treeData ? { treeData } : {}),
       class: cls,
-      onChange: this.onChange,
+      onChange: this.handleChange,
+      onSearch: this.handleSearch,
+      onTreeExpand: this.handleTreeExpand,
       ref: this.saveTreeSelect,
       children: getSlot(this),
     };

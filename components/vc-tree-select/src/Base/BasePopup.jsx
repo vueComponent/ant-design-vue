@@ -148,7 +148,6 @@ const BasePopup = {
           this.__emit('treeExpanded');
         });
       }
-      this.__emit('update:treeExpandedKeys', expandedKeyList);
       this.__emit('treeExpand', expandedKeyList);
     },
 

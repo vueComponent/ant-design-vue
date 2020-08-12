@@ -21,7 +21,6 @@ module.exports = {
     '^@/(.*)$': '<rootDir>/$1',
     'ant-design-vue$': '<rootDir>/components/index.js',
     'ant-design-vue/es': '<rootDir>/components',
-    // '^vue$': 'vue/dist/vue.global.js',
   },
   snapshotSerializers: ['<rootDir>/node_modules/jest-serializer-vue'],
   collectCoverage: process.env.COVERAGE === 'true',

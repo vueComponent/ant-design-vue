@@ -1,3 +1,4 @@
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, initDefaultProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
@@ -20,70 +21,59 @@ export const SpaceProps = {
   align: PropTypes.oneOf(['start', 'end', 'center', 'baseline']),
 };
 
-const Space = {
-  functional: true,
-  name: 'ASpace',
-  props: initDefaultProps(SpaceProps, {
-    size: 'small',
-    direction: 'horizontal',
-  }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-  },
-  render(h, content) {
-    const {
-      prefixCls: customizePrefixCls,
-      injections: { configProvider },
-      children,
-    } = content;
-    const { align, size, direction } = content.props;
+const ASpace = (props, { slots }) => {
+  const configProvider = inject('configProvider', ConfigConsumerProps);
+  const { align, size, direction, prefixCls: customizePrefixCls } = props;
 
-    const getPrefixCls = configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('space', customizePrefixCls);
-    const items = filterEmpty(children);
-    const len = items.length;
+  const getPrefixCls = configProvider.getPrefixCls;
+  const prefixCls = getPrefixCls('space', customizePrefixCls);
+  const items = filterEmpty(slots.default && slots.default());
+  const len = items.length;
 
-    if (len === 0) {
-      return null;
-    }
+  if (len === 0) {
+    return null;
+  }
 
-    const mergedAlign = align === undefined && direction === 'horizontal' ? 'center' : align;
+  const mergedAlign = align === undefined && direction === 'horizontal' ? 'center' : align;
 
-    const someSpaceClass = {
-      [prefixCls]: true,
-      [`${prefixCls}-${direction}`]: true,
-      // [`${prefixCls}-rtl`]: directionConfig === 'rtl',
-      [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
-    };
+  const someSpaceClass = {
+    [prefixCls]: true,
+    [`${prefixCls}-${direction}`]: true,
+    // [`${prefixCls}-rtl`]: directionConfig === 'rtl',
+    [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
+  };
 
-    const itemClassName = `${prefixCls}-item`;
-    const marginDirection = 'marginRight'; // directionConfig === 'rtl' ? 'marginLeft' : 'marginRight';
+  const itemClassName = `${prefixCls}-item`;
+  const marginDirection = 'marginRight'; // directionConfig === 'rtl' ? 'marginLeft' : 'marginRight';
 
-    return (
-      <div class={someSpaceClass}>
-        {items.map((child, i) => (
-          <div
-            class={itemClassName}
-            key={`${itemClassName}-${i}`}
-            style={
-              i === len - 1
-                ? {}
-                : {
-                    [direction === 'vertical' ? 'marginBottom' : marginDirection]:
-                      typeof size === 'string' ? `${spaceSize[size]}px` : `${size}px`,
-                  }
-            }
-          >
-            {child}
-          </div>
-        ))}
-      </div>
-    );
-  },
+  return (
+    <div class={someSpaceClass}>
+      {items.map((child, i) => (
+        <div
+          class={itemClassName}
+          key={`${itemClassName}-${i}`}
+          style={
+            i === len - 1
+              ? {}
+              : {
+                  [direction === 'vertical' ? 'marginBottom' : marginDirection]:
+                    typeof size === 'string' ? `${spaceSize[size]}px` : `${size}px`,
+                }
+          }
+        >
+          {child}
+        </div>
+      ))}
+    </div>
+  );
 };
+ASpace.props = initDefaultProps(SpaceProps, {
+  size: 'small',
+  direction: 'horizontal',
+});
 
 /* istanbul ignore next */
-Space.install = function(Vue) {
-  Vue.component(Space.name, Space);
+ASpace.install = function(app) {
+  app.component(ASpace.name, ASpace);
 };
-export default Space;
+export default ASpace;

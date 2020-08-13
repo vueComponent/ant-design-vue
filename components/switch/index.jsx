@@ -64,12 +64,12 @@ const Switch = {
     const loadingIcon = loading ? <LoadingOutlined class={`${prefixCls}-loading-icon`} /> : null;
     const switchProps = {
       ...restProps,
+      ...$attrs,
       prefixCls,
       loadingIcon,
       checkedChildren: getComponent(this, 'checkedChildren'),
       unCheckedChildren: getComponent(this, 'unCheckedChildren'),
       disabled: disabled || loading,
-      ...$attrs,
       class: classes,
       ref: this.saveRef,
     };

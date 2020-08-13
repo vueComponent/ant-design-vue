@@ -1,6 +1,12 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
-import { isValidElement, initDefaultProps, splitAttrs, findDOMNode } from '../_util/props-util';
+import {
+  isValidElement,
+  initDefaultProps,
+  splitAttrs,
+  findDOMNode,
+  filterEmpty,
+} from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import Checkbox from '../checkbox';
 import Search from './search';
@@ -55,7 +61,7 @@ export const TransferListProps = {
 
 function renderListNode(renderList, props) {
   let bodyContent = renderList ? renderList(props) : null;
-  const customize = !!bodyContent;
+  const customize = !!bodyContent && filterEmpty(bodyContent).length > 0;
   if (!customize) {
     bodyContent = defaultRenderList(props);
   }

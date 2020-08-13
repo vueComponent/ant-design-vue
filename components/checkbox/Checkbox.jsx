@@ -128,7 +128,7 @@ export default {
         onMouseenter={onMouseleave}
       >
         <VcCheckbox {...checkboxProps} class={checkboxClass} ref="vcCheckbox" />
-        {children !== undefined && <span>{children}</span>}
+        {children.length ? <span>{children}</span> : null}
       </label>
     );
   },

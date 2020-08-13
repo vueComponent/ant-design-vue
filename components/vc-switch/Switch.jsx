@@ -85,6 +85,8 @@ export default {
       loadingIcon,
       defaultChecked,
       autofocus,
+      checkedChildren,
+      unCheckedChildren,
       ...restProps
     } = getOptionProps(this);
     const checked = this.stateChecked;

@@ -1,6 +1,7 @@
 import { switchPropTypes } from './PropTypes';
 import BaseMixin from '../_util/BaseMixin';
 import { hasProp, getOptionProps, getComponent } from '../_util/props-util';
+import Omit from 'omit.js';
 
 // function noop () {
 // }
@@ -79,16 +80,7 @@ export default {
     },
   },
   render() {
-    const {
-      prefixCls,
-      disabled,
-      loadingIcon,
-      defaultChecked,
-      autofocus,
-      checkedChildren,
-      unCheckedChildren,
-      ...restProps
-    } = getOptionProps(this);
+    const { prefixCls, disabled, loadingIcon, ...restProps } = getOptionProps(this);
     const checked = this.stateChecked;
     const { $attrs } = this;
     const switchClassName = {
@@ -98,7 +90,13 @@ export default {
       [`${prefixCls}-disabled`]: disabled,
     };
     const spanProps = {
-      ...restProps,
+      ...Omit(restProps, [
+        'checkedChildren',
+        'unCheckedChildren',
+        'checked',
+        'autofocus',
+        'defaultChecked',
+      ]),
       ...$attrs,
       onKeydown: this.handleKeyDown,
       onClick: this.handleClick,

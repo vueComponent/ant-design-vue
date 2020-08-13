@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/transfer/demo/tree-transfer';
+import demo from '../antdv-demo/docs/tooltip/demo/auto-adjust-overflow';
 
 export default {
   components: {

@@ -47,6 +47,7 @@ import {
 import { SelectPropTypes } from './PropTypes';
 import contains from '../vc-util/Dom/contains';
 import { isIE, isEdge } from '../_util/env';
+import isValid from '../_util/isValid';
 
 const SELECT_EMPTY_VALUE_KEY = 'RC_SELECT_EMPTY_VALUE_KEY';
 
@@ -637,7 +638,7 @@ const Select = {
       if (value.length) {
         hidden = true;
       }
-      if (isCombobox(props) && value.length === 1 && state._value && !state._value[0]) {
+      if (value.length === 1 && state._value && !isValid(state._value[0])) {
         hidden = false;
       }
       const placeholder = props.placeholder;

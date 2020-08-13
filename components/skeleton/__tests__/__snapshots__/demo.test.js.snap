@@ -2,6 +2,7 @@
 
 exports[`renders ./antdv-demo/docs/skeleton/demo/active.md correctly 1`] = `
 <div class="ant-skeleton ant-skeleton-active">
+  <!---->
   <div class="ant-skeleton-content">
     <h3 class="ant-skeleton-title" style="width: 38%;"></h3>
     <ul class="ant-skeleton-paragraph">
@@ -15,6 +16,7 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/active.md correctly 1`] = `
 
 exports[`renders ./antdv-demo/docs/skeleton/demo/basic.md correctly 1`] = `
 <div class="ant-skeleton">
+  <!---->
   <div class="ant-skeleton-content">
     <h3 class="ant-skeleton-title" style="width: 38%;"></h3>
     <ul class="ant-skeleton-paragraph">
@@ -30,12 +32,9 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/children.md correctly 1`] = `
 <div class="article">
   <div>
     <h4>Ant Design Vue, a design language</h4>
-    <p>
-      We supply a series of design principles, practical patterns and high quality design
-      resources (Sketch and Axure), to help people create their product prototypes beautifully
-      and efficiently.
-    </p>
-  </div> <button type="button" class="ant-btn"><span>Show Skeleton</span></button>
+    <p> We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently. </p>
+  </div><button class="ant-btn" type="button">
+    <!----><span>Show Skeleton</span></button>
 </div>
 `;
 
@@ -55,16 +54,16 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/complex.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/skeleton/demo/list.md correctly 1`] = `
-<div><button type="button" role="switch" class="ant-switch"><span class="ant-switch-inner"></span></button>
+<div><button class="ant-switch" type="button" role="switch" aria-checked="false">
+    <!----><span class="ant-switch-inner"><!----></span></button>
   <div class="ant-list ant-list-vertical ant-list-lg ant-list-split">
+    <!---->
+    <!---->
     <div class="ant-spin-nested-loading">
+      <!---->
       <div class="ant-spin-container">
         <ul class="ant-list-items">
-          <li class="ant-list-item ant-list-item-no-flex">
-            <!---->
-            <!---->
-            <!---->
-            <!---->
+          <li class="ant-list-item  ant-list-item-no-flex">
             <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
               <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
               <div class="ant-skeleton-content">
@@ -75,12 +74,10 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/list.md correctly 1`] = `
                 </ul>
               </div>
             </div>
+            <!---->
+            <!---->
           </li>
-          <li class="ant-list-item ant-list-item-no-flex">
-            <!---->
-            <!---->
-            <!---->
-            <!---->
+          <li class="ant-list-item  ant-list-item-no-flex">
             <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
               <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
               <div class="ant-skeleton-content">
@@ -91,12 +88,10 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/list.md correctly 1`] = `
                 </ul>
               </div>
             </div>
+            <!---->
+            <!---->
           </li>
-          <li class="ant-list-item ant-list-item-no-flex">
-            <!---->
-            <!---->
-            <!---->
-            <!---->
+          <li class="ant-list-item  ant-list-item-no-flex">
             <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
               <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
               <div class="ant-skeleton-content">
@@ -107,10 +102,14 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/list.md correctly 1`] = `
                 </ul>
               </div>
             </div>
+            <!---->
+            <!---->
           </li>
         </ul>
       </div>
     </div>
+    <!---->
+    <!---->
   </div>
 </div>
 `;

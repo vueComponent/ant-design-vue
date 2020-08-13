@@ -274,7 +274,7 @@ export default function createSlider(Component) {
         dotStyle,
         activeDotStyle,
       } = this;
-      const { class: className, style } = this.$attrs;
+      const { class: className, style, id } = this.$attrs;
       const { tracks, handles } = this.renderSlider();
 
       const sliderClassName = classNames(prefixCls, className, {
@@ -296,6 +296,7 @@ export default function createSlider(Component) {
       };
       return (
         <div
+          id={id}
           ref={this.saveSlider}
           tabindex="-1"
           class={sliderClassName}

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/tooltip/demo/auto-adjust-overflow';
+import demo from '../antdv-demo/docs/slider/demo/basic';
 
 export default {
   components: {

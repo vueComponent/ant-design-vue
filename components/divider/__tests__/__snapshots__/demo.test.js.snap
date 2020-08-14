@@ -1,70 +1,50 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders ./antdv-demo/docs/divider/demo/customize-style.md correctly 1`] = `
-<div>
-  <div role="separator" class="ant-divider ant-divider-horizontal" style="height: 2px; background-color: rgb(124, 179, 5);"></div>
-  <div role="separator" class="ant-divider ant-divider-horizontal ant-divider-dashed" style="border-color: #7cb305;"></div>
-  <div role="separator" class="ant-divider ant-divider-vertical" style="height: 60px; background-color: rgb(124, 179, 5);"></div>
-  <div role="separator" class="ant-divider ant-divider-vertical ant-divider-dashed" style="height: 60px; border-color: #7cb305;"></div>
+<div class="ant-divider ant-divider-horizontal" role="separator" style="height: 2px; background-color: rgb(124, 179, 5);">
+  <!---->
+</div>
+<div class="ant-divider ant-divider-horizontal ant-divider-dashed" role="separator" style="border-color: #7cb305;">
+  <!---->
+</div>
+<div class="ant-divider ant-divider-vertical" role="separator" style="height: 60px; background-color: rgb(124, 179, 5);">
+  <!---->
+</div>
+<div class="ant-divider ant-divider-vertical ant-divider-dashed" role="separator" style="height: 60px; border-color: #7cb305;">
+  <!---->
 </div>
 `;
 
 exports[`renders ./antdv-demo/docs/divider/demo/horizontal.md correctly 1`] = `
-<div>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-    probare, quae sunt a te dicta? Refert tamen, quo modo.
-  </p>
-  <div role="separator" class="ant-divider ant-divider-horizontal"></div>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-    probare, quae sunt a te dicta? Refert tamen, quo modo.
-  </p>
-  <div role="separator" class="ant-divider ant-divider-horizontal ant-divider-with-text-center"><span class="ant-divider-inner-text">With Text</span></div>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-    probare, quae sunt a te dicta? Refert tamen, quo modo.
-  </p>
-  <div role="separator" class="ant-divider ant-divider-horizontal ant-divider-dashed"></div>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-    probare, quae sunt a te dicta? Refert tamen, quo modo.
-  </p>
+<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
+<div class="ant-divider ant-divider-horizontal" role="separator">
+  <!---->
 </div>
+<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
+<div class="ant-divider ant-divider-horizontal ant-divider-with-text-center" role="separator"><span class="ant-divider-inner-text">With Text</span></div>
+<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
+<div class="ant-divider ant-divider-horizontal ant-divider-dashed" role="separator">
+  <!---->
+</div>
+<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
 `;
 
 exports[`renders ./antdv-demo/docs/divider/demo/vertical.md correctly 1`] = `
-<div>
-  Text
-  <div role="separator" class="ant-divider ant-divider-vertical"></div> <a href="#">Link</a>
-  <div role="separator" class="ant-divider ant-divider-vertical"></div> <a href="#">Link</a>
+<div> Text <div class="ant-divider ant-divider-vertical" role="separator">
+    <!---->
+  </div><a href="#">Link</a>
+  <div class="ant-divider ant-divider-vertical" role="separator">
+    <!---->
+  </div><a href="#">Link</a>
 </div>
 `;
 
 exports[`renders ./antdv-demo/docs/divider/demo/with-text.md correctly 1`] = `
-<div>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-    probare, quae sunt a te dicta? Refert tamen, quo modo.
-  </p>
-  <div role="separator" class="ant-divider ant-divider-horizontal ant-divider-with-text-center"><span class="ant-divider-inner-text">Text</span></div>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-    probare, quae sunt a te dicta? Refert tamen, quo modo.
-  </p>
-  <div role="separator" class="ant-divider ant-divider-horizontal ant-divider-with-text-left"><span class="ant-divider-inner-text">
-    Left Text
-  </span></div>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-    probare, quae sunt a te dicta? Refert tamen, quo modo.
-  </p>
-  <div role="separator" class="ant-divider ant-divider-horizontal ant-divider-with-text-right"><span class="ant-divider-inner-text">
-    Right Text
-  </span></div>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista
-    probare, quae sunt a te dicta? Refert tamen, quo modo.
-  </p>
-</div>
+<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
+<div class="ant-divider ant-divider-horizontal ant-divider-with-text-center" role="separator"><span class="ant-divider-inner-text">Text</span></div>
+<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
+<div class="ant-divider ant-divider-horizontal ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text"> Left Text </span></div>
+<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
+<div class="ant-divider ant-divider-horizontal ant-divider-with-text-right" role="separator"><span class="ant-divider-inner-text"> Right Text </span></div>
+<p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
 `;

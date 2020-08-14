@@ -79,8 +79,8 @@ describe('Modal.confirm triggers callbacks correctly', () => {
 
   it('allows extra props on buttons', async () => {
     open({
-      okButtonProps: { props: { disabled: true } },
-      cancelButtonProps: { attrs: { 'data-test': 'baz' } },
+      okButtonProps: { disabled: true },
+      cancelButtonProps: { 'data-test': 'baz' },
     });
     await sleep();
     expect($$('.ant-btn')).toHaveLength(2);
@@ -88,7 +88,7 @@ describe('Modal.confirm triggers callbacks correctly', () => {
     expect($$('.ant-btn')[1].disabled).toBe(true);
   });
 
-  fit('trigger onCancel once when click on cancel button', async () => {
+  it('trigger onCancel once when click on cancel button', async () => {
     const arr = ['info', 'success', 'warning', 'error'];
     for (let type of arr) {
       Modal[type]({
@@ -98,7 +98,7 @@ describe('Modal.confirm triggers callbacks correctly', () => {
       await sleep();
       expect($$(`.ant-modal-confirm-${type}`)).toHaveLength(1);
       $$('.ant-btn')[0].click();
-      await sleep();
+      await sleep(500);
       expect($$(`.ant-modal-confirm-${type}`)).toHaveLength(0);
     }
   });

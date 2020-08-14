@@ -12,10 +12,8 @@ const ModalTester = {
   },
   render() {
     const modalProps = {
-      props: {
-        ...this.$props,
-        getContainer: this.getContainer,
-      },
+      ...this.$props,
+      getContainer: this.getContainer,
     };
     return (
       <div>

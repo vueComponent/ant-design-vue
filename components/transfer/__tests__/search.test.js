@@ -69,7 +69,7 @@ describe('Search', () => {
       },
     );
     await asyncExpect(() => {
-      const input = wrapper.findAll('.ant-input').at(0);
+      const input = wrapper.findAll('.ant-input')[0];
       input.element.value = 'a';
       input.trigger('input');
     });
@@ -80,37 +80,7 @@ describe('Search', () => {
 
     onSearch.mockReset();
 
-    wrapper
-      .findAll('.ant-transfer-list-search-action')
-      .at(0)
-      .trigger('click');
+    wrapper.findAll('.ant-transfer-list-search-action')[0].trigger('click');
     expect(onSearch).toBeCalledWith('left', '');
-  });
-
-  it('legacy onSearchChange', () => {
-    const onSearchChange = jest.fn();
-
-    const wrapper = mount(
-      {
-        render() {
-          return (
-            <Transfer render={item => item.title} onSearchChange={onSearchChange} showSearch />
-          );
-        },
-      },
-      {
-        sync: false,
-      },
-    );
-
-    const input = wrapper.findAll('.ant-input').at(0);
-    input.element.value = 'a';
-    input.trigger('input');
-
-    expect(errorSpy.mock.calls[0][0]).toMatch(
-      'Warning: [antdv: Transfer] `searchChange` in Transfer is deprecated. Please use `search` instead.',
-    );
-    expect(onSearchChange.mock.calls[0][0]).toEqual('left');
-    expect(onSearchChange.mock.calls[0][1].target.value).toEqual('a');
   });
 });

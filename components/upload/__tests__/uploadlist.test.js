@@ -38,7 +38,7 @@ describe('Upload List', () => {
     window.URL.createObjectURL = originCreateObjectURL;
     window.HTMLCanvasElement.prototype.getContext = originHTMLCanvasElementGetContext;
   });
-  fit('should use file.thumbUrl for <img /> in priority', done => {
+  it('should use file.thumbUrl for <img /> in priority', done => {
     const props = {
       props: {
         defaultFileList: fileList,
@@ -63,7 +63,7 @@ describe('Upload List', () => {
   });
 
   // https://github.com/ant-design/ant-design/issues/7269
-  fit('should remove correct item when uid is 0', done => {
+  it('should remove correct item when uid is 0', done => {
     const list = [
       {
         uid: 0,
@@ -273,7 +273,7 @@ describe('Upload List', () => {
   //   }, 0)
   // })
 
-  fit('should support onPreview', async () => {
+  it('should support onPreview', async () => {
     const handlePreview = jest.fn();
     const props = {
       props: {
@@ -295,7 +295,7 @@ describe('Upload List', () => {
     expect(handlePreview).toBeCalledWith(fileList[1]);
   });
 
-  fit('should support onRemove', done => {
+  it('should support onRemove', done => {
     const handleRemove = jest.fn();
     const handleChange = jest.fn();
     const props = {
@@ -356,7 +356,7 @@ describe('Upload List', () => {
     }, 1000);
   });
 
-  fit('should non-image format file preview', done => {
+  it('should non-image format file preview', done => {
     const list = [
       {
         name: 'not-image',

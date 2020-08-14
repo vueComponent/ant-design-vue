@@ -37,7 +37,7 @@ describe('Mentions', () => {
     ]);
   });
 
-  fit('focus', async () => {
+  it('focus', async () => {
     const onFocus = jest.fn();
     const onBlur = jest.fn();
 

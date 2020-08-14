@@ -8,7 +8,7 @@ exports[`Locale Provider set moment locale when locale changes 1`] = `
 <div style="position: absolute; top: 0px; left: 0px; width: 100%;">
   <div>
     <!---->
-    <div class="ant-calendar-picker-container ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
+    <div class="ant-calendar-picker-container ant-calendar-picker-container-placement-bottomLeft slide-up-enter" style="left: -999px; top: -1002px;">
       <div class="ant-calendar ant-calendar-picker-container-content" tabindex="0">
         <!---->
         <div class="ant-calendar-panel">
@@ -193,175 +193,189 @@ exports[`Locale Provider set moment locale when locale changes 1`] = `
 `;
 
 exports[`Locale Provider set moment locale when locale changes 2`] = `
-<div><span class="ant-calendar-picker"><div class="" style=""><input readonly="true" placeholder="Sélectionner une date" class="ant-calendar-picker-input ant-input"><span role="img" aria-label="close-circle" tabindex="-1" class="anticon anticon-close-circle ant-calendar-picker-clear"><svg viewBox="64 64 896 896" focusable="false" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg></span><span role="img" aria-label="calendar" class="anticon anticon-calendar ant-calendar-picker-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></div></span></div>
+<div id="app" data-v-app="">
+  <div><span class="ant-calendar-picker"><!--teleport start--><!--teleport end--><div style=""><input readonly="" placeholder="Sélectionner une date" class="ant-calendar-picker-input ant-input"><span tabindex="-1" role="img" aria-label="close-circle" class="anticon anticon-close-circle ant-calendar-picker-clear"><svg class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg></span><span role="img" aria-label="calendar" class="anticon anticon-calendar ant-calendar-picker-icon"><svg class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></div></span>
+</div>
+</div>
 <div style="position: absolute; top: 0px; left: 0px; width: 100%;">
   <div>
-    <div class="ant-calendar-picker-container  ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
-      <div tabindex="0" class="ant-calendar ant-calendar-picker-container-content">
+    <!---->
+    <div class="ant-calendar-picker-container ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
+      <div class="ant-calendar ant-calendar-picker-container-content" tabindex="0">
+        <!---->
         <div class="ant-calendar-panel">
-          <div class="ant-calendar-input-wrap" showclear="true">
-            <div class="ant-calendar-date-input-wrap"><input placeholder="Sélectionner une date" class="ant-calendar-input "></div>
+          <div class="ant-calendar-input-wrap">
+            <div class="ant-calendar-date-input-wrap"><input class="ant-calendar-input " placeholder="Sélectionner une date"></div><a role="button" title="Rétablir"><span class="ant-calendar-clear-btn"></span></a>
           </div>
           <div tabindex="0" class="ant-calendar-date-panel">
             <div class="ant-calendar-header">
-              <div style="position: relative;"><a role="button" title="Année précédente (Ctrl + gauche)" class="ant-calendar-prev-year-btn"></a><a role="button" title="Mois précédent (PageUp)" class="ant-calendar-prev-month-btn"></a><span class="ant-calendar-my-select"><a role="button" title="Choisissez un mois" class="ant-calendar-month-select">9月</a><a role="button" title="Choisissez une année" class="ant-calendar-year-select">2017</a></span><a title="Mois suivant (PageDown)" class="ant-calendar-next-month-btn"></a><a title="Année prochaine (Ctrl + droite)" class="ant-calendar-next-year-btn"></a></div>
+              <div style="position: relative;"><a class="ant-calendar-prev-year-btn" role="button" title="Année précédente (Ctrl + gauche)"></a><a class="ant-calendar-prev-month-btn" role="button" title="Mois précédent (PageUp)"></a><span class="ant-calendar-my-select"><a class="ant-calendar-month-select" role="button" title="Choisissez un mois">sept.</a><!----><a class="ant-calendar-year-select" role="button" title="Choisissez une année">2017</a></span><a class="ant-calendar-next-month-btn" title="Mois suivant (PageDown)"></a><a class="ant-calendar-next-year-btn" title="Année prochaine (Ctrl + droite)"></a></div>
+              <!---->
             </div>
+            <!---->
             <div class="ant-calendar-body">
-              <table cellspacing="0" role="grid" class="ant-calendar-table">
+              <table class="ant-calendar-table" cellspacing="0" role="grid">
                 <thead>
                   <tr role="row">
-                    <th role="columnheader" title="周一" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">一</span></th>
-                    <th role="columnheader" title="周二" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">二</span></th>
-                    <th role="columnheader" title="周三" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">三</span></th>
-                    <th role="columnheader" title="周四" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">四</span></th>
-                    <th role="columnheader" title="周五" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">五</span></th>
-                    <th role="columnheader" title="周六" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">六</span></th>
-                    <th role="columnheader" title="周日" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">日</span></th>
+                    <!---->
+                    <th role="columnheader" title="lun." class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">lu</span></th>
+                    <th role="columnheader" title="mar." class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">ma</span></th>
+                    <th role="columnheader" title="mer." class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">me</span></th>
+                    <th role="columnheader" title="jeu." class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">je</span></th>
+                    <th role="columnheader" title="ven." class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">ve</span></th>
+                    <th role="columnheader" title="sam." class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">sa</span></th>
+                    <th role="columnheader" title="dim." class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">di</span></th>
                   </tr>
                 </thead>
                 <tbody class="ant-calendar-tbody">
                   <tr role="row" class="">
-                    <td role="gridcell" title="2017年8月28日" class="ant-calendar-cell ant-calendar-last-month-cell">
-                      <div class="ant-calendar-date">28</div>
+                    <!---->
+                    <td role="gridcell" title="28 août 2017" class="ant-calendar-cell ant-calendar-last-month-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">28</div>
                     </td>
-                    <td role="gridcell" title="2017年8月29日" class="ant-calendar-cell ant-calendar-last-month-cell">
-                      <div class="ant-calendar-date">29</div>
+                    <td role="gridcell" title="29 août 2017" class="ant-calendar-cell ant-calendar-last-month-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">29</div>
                     </td>
-                    <td role="gridcell" title="2017年8月30日" class="ant-calendar-cell ant-calendar-last-month-cell">
-                      <div class="ant-calendar-date">30</div>
+                    <td role="gridcell" title="30 août 2017" class="ant-calendar-cell ant-calendar-last-month-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">30</div>
                     </td>
-                    <td role="gridcell" title="2017年8月31日" class="ant-calendar-cell ant-calendar-last-month-cell ant-calendar-last-day-of-month">
-                      <div class="ant-calendar-date">31</div>
+                    <td role="gridcell" title="31 août 2017" class="ant-calendar-cell ant-calendar-last-month-cell ant-calendar-last-day-of-month">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">31</div>
                     </td>
-                    <td role="gridcell" title="2017年9月1日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">1</div>
+                    <td role="gridcell" title="1 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">1</div>
                     </td>
-                    <td role="gridcell" title="2017年9月2日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">2</div>
+                    <td role="gridcell" title="2 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">2</div>
                     </td>
-                    <td role="gridcell" title="2017年9月3日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">3</div>
-                    </td>
-                  </tr>
-                  <tr role="row" class="">
-                    <td role="gridcell" title="2017年9月4日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">4</div>
-                    </td>
-                    <td role="gridcell" title="2017年9月5日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">5</div>
-                    </td>
-                    <td role="gridcell" title="2017年9月6日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">6</div>
-                    </td>
-                    <td role="gridcell" title="2017年9月7日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">7</div>
-                    </td>
-                    <td role="gridcell" title="2017年9月8日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">8</div>
-                    </td>
-                    <td role="gridcell" title="2017年9月9日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">9</div>
-                    </td>
-                    <td role="gridcell" title="2017年9月10日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">10</div>
+                    <td role="gridcell" title="3 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">3</div>
                     </td>
                   </tr>
                   <tr role="row" class="">
-                    <td role="gridcell" title="2017年9月11日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">11</div>
+                    <!---->
+                    <td role="gridcell" title="4 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">4</div>
                     </td>
-                    <td role="gridcell" title="2017年9月12日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">12</div>
+                    <td role="gridcell" title="5 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">5</div>
                     </td>
-                    <td role="gridcell" title="2017年9月13日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">13</div>
+                    <td role="gridcell" title="6 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">6</div>
                     </td>
-                    <td role="gridcell" title="2017年9月14日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">14</div>
+                    <td role="gridcell" title="7 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">7</div>
                     </td>
-                    <td role="gridcell" title="2017年9月15日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">15</div>
+                    <td role="gridcell" title="8 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">8</div>
                     </td>
-                    <td role="gridcell" title="2017年9月16日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">16</div>
+                    <td role="gridcell" title="9 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">9</div>
                     </td>
-                    <td role="gridcell" title="2017年9月17日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">17</div>
+                    <td role="gridcell" title="10 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">10</div>
+                    </td>
+                  </tr>
+                  <tr role="row" class="">
+                    <!---->
+                    <td role="gridcell" title="11 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">11</div>
+                    </td>
+                    <td role="gridcell" title="12 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">12</div>
+                    </td>
+                    <td role="gridcell" title="13 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">13</div>
+                    </td>
+                    <td role="gridcell" title="14 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">14</div>
+                    </td>
+                    <td role="gridcell" title="15 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">15</div>
+                    </td>
+                    <td role="gridcell" title="16 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">16</div>
+                    </td>
+                    <td role="gridcell" title="17 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">17</div>
                     </td>
                   </tr>
                   <tr role="row" class="ant-calendar-current-week ant-calendar-active-week">
-                    <td role="gridcell" title="2017年9月18日" class="ant-calendar-cell ant-calendar-today ant-calendar-selected-date ant-calendar-selected-day">
-                      <div aria-selected="true" class="ant-calendar-date">18</div>
+                    <!---->
+                    <td role="gridcell" title="18 septembre 2017" class="ant-calendar-cell ant-calendar-today ant-calendar-selected-date ant-calendar-selected-day">
+                      <div class="ant-calendar-date" aria-selected="true" aria-disabled="false">18</div>
                     </td>
-                    <td role="gridcell" title="2017年9月19日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">19</div>
+                    <td role="gridcell" title="19 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">19</div>
                     </td>
-                    <td role="gridcell" title="2017年9月20日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">20</div>
+                    <td role="gridcell" title="20 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">20</div>
                     </td>
-                    <td role="gridcell" title="2017年9月21日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">21</div>
+                    <td role="gridcell" title="21 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">21</div>
                     </td>
-                    <td role="gridcell" title="2017年9月22日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">22</div>
+                    <td role="gridcell" title="22 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">22</div>
                     </td>
-                    <td role="gridcell" title="2017年9月23日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">23</div>
+                    <td role="gridcell" title="23 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">23</div>
                     </td>
-                    <td role="gridcell" title="2017年9月24日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">24</div>
-                    </td>
-                  </tr>
-                  <tr role="row" class="">
-                    <td role="gridcell" title="2017年9月25日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">25</div>
-                    </td>
-                    <td role="gridcell" title="2017年9月26日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">26</div>
-                    </td>
-                    <td role="gridcell" title="2017年9月27日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">27</div>
-                    </td>
-                    <td role="gridcell" title="2017年9月28日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">28</div>
-                    </td>
-                    <td role="gridcell" title="2017年9月29日" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">29</div>
-                    </td>
-                    <td role="gridcell" title="2017年9月30日" class="ant-calendar-cell ant-calendar-last-day-of-month">
-                      <div class="ant-calendar-date">30</div>
-                    </td>
-                    <td role="gridcell" title="2017年10月1日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">1</div>
+                    <td role="gridcell" title="24 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">24</div>
                     </td>
                   </tr>
                   <tr role="row" class="">
-                    <td role="gridcell" title="2017年10月2日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">2</div>
+                    <!---->
+                    <td role="gridcell" title="25 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">25</div>
                     </td>
-                    <td role="gridcell" title="2017年10月3日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">3</div>
+                    <td role="gridcell" title="26 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">26</div>
                     </td>
-                    <td role="gridcell" title="2017年10月4日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">4</div>
+                    <td role="gridcell" title="27 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">27</div>
                     </td>
-                    <td role="gridcell" title="2017年10月5日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">5</div>
+                    <td role="gridcell" title="28 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">28</div>
                     </td>
-                    <td role="gridcell" title="2017年10月6日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">6</div>
+                    <td role="gridcell" title="29 septembre 2017" class="ant-calendar-cell">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">29</div>
                     </td>
-                    <td role="gridcell" title="2017年10月7日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">7</div>
+                    <td role="gridcell" title="30 septembre 2017" class="ant-calendar-cell ant-calendar-last-day-of-month">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">30</div>
                     </td>
-                    <td role="gridcell" title="2017年10月8日" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">8</div>
+                    <td role="gridcell" title="1 octobre 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">1</div>
+                    </td>
+                  </tr>
+                  <tr role="row" class="">
+                    <!---->
+                    <td role="gridcell" title="2 octobre 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">2</div>
+                    </td>
+                    <td role="gridcell" title="3 octobre 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">3</div>
+                    </td>
+                    <td role="gridcell" title="4 octobre 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">4</div>
+                    </td>
+                    <td role="gridcell" title="5 octobre 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">5</div>
+                    </td>
+                    <td role="gridcell" title="6 octobre 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">6</div>
+                    </td>
+                    <td role="gridcell" title="7 octobre 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">7</div>
+                    </td>
+                    <td role="gridcell" title="8 octobre 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">8</div>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div class="ant-calendar-footer"><span class="ant-calendar-footer-btn"><a role="button" title="2017年9月18日" class="ant-calendar-today-btn ">Aujourd'hui</a></span></div>
+            <div class="ant-calendar-footer"><span class="ant-calendar-footer-btn"><!----><a class="ant-calendar-today-btn " role="button" title="18 septembre 2017">Aujourd'hui</a><!----><!----></span></div>
           </div>
         </div>
       </div>
@@ -371,23 +385,31 @@ exports[`Locale Provider set moment locale when locale changes 2`] = `
 `;
 
 exports[`Locale Provider set moment locale when locale changes 3`] = `
-<div><span class="ant-calendar-picker"><div class="" style=""><input readonly="true" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span role="img" aria-label="close-circle" tabindex="-1" class="anticon anticon-close-circle ant-calendar-picker-clear"><svg viewBox="64 64 896 896" focusable="false" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg></span><span role="img" aria-label="calendar" class="anticon anticon-calendar ant-calendar-picker-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" class=""><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></div></span></div>
+<div id="app" data-v-app="">
+  <div><span class="ant-calendar-picker"><!--teleport start--><!--teleport end--><div style=""><input readonly="" placeholder="Select date" class="ant-calendar-picker-input ant-input"><span tabindex="-1" role="img" aria-label="close-circle" class="anticon anticon-close-circle ant-calendar-picker-clear"><svg class="" data-icon="close-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm165.4 618.2l-66-.3L512 563.4l-99.3 118.4-66.1.3c-4.4 0-8-3.5-8-8 0-1.9.7-3.7 1.9-5.2l130.1-155L340.5 359a8.32 8.32 0 01-1.9-5.2c0-4.4 3.6-8 8-8l66.1.3L512 464.6l99.3-118.4 66-.3c4.4 0 8 3.5 8 8 0 1.9-.7 3.7-1.9 5.2L553.5 514l130 155c1.2 1.5 1.9 3.3 1.9 5.2 0 4.4-3.6 8-8 8z"></path></svg></span><span role="img" aria-label="calendar" class="anticon anticon-calendar ant-calendar-picker-icon"><svg class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></div></span>
+</div>
+</div>
 <div style="position: absolute; top: 0px; left: 0px; width: 100%;">
   <div>
-    <div class="ant-calendar-picker-container  ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
-      <div tabindex="0" class="ant-calendar ant-calendar-picker-container-content">
+    <!---->
+    <div class="ant-calendar-picker-container ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
+      <div class="ant-calendar ant-calendar-picker-container-content" tabindex="0">
+        <!---->
         <div class="ant-calendar-panel">
-          <div class="ant-calendar-input-wrap" showclear="true">
-            <div class="ant-calendar-date-input-wrap"><input placeholder="Select date" class="ant-calendar-input "></div>
+          <div class="ant-calendar-input-wrap">
+            <div class="ant-calendar-date-input-wrap"><input class="ant-calendar-input " placeholder="Select date"></div><a role="button" title="Clear"><span class="ant-calendar-clear-btn"></span></a>
           </div>
           <div tabindex="0" class="ant-calendar-date-panel">
             <div class="ant-calendar-header">
-              <div style="position: relative;"><a role="button" title="Last year (Control + left)" class="ant-calendar-prev-year-btn"></a><a role="button" title="Previous month (PageUp)" class="ant-calendar-prev-month-btn"></a><span class="ant-calendar-my-select"><a role="button" title="Choose a month" class="ant-calendar-month-select">Sep</a><a role="button" title="Choose a year" class="ant-calendar-year-select">2017</a></span><a title="Next month (PageDown)" class="ant-calendar-next-month-btn"></a><a title="Next year (Control + right)" class="ant-calendar-next-year-btn"></a></div>
+              <div style="position: relative;"><a class="ant-calendar-prev-year-btn" role="button" title="Last year (Control + left)"></a><a class="ant-calendar-prev-month-btn" role="button" title="Previous month (PageUp)"></a><span class="ant-calendar-my-select"><a class="ant-calendar-month-select" role="button" title="Choose a month">Sep</a><!----><a class="ant-calendar-year-select" role="button" title="Choose a year">2017</a></span><a class="ant-calendar-next-month-btn" title="Next month (PageDown)"></a><a class="ant-calendar-next-year-btn" title="Next year (Control + right)"></a></div>
+              <!---->
             </div>
+            <!---->
             <div class="ant-calendar-body">
-              <table cellspacing="0" role="grid" class="ant-calendar-table">
+              <table class="ant-calendar-table" cellspacing="0" role="grid">
                 <thead>
                   <tr role="row">
+                    <!---->
                     <th role="columnheader" title="Sun" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">Su</span></th>
                     <th role="columnheader" title="Mon" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">Mo</span></th>
                     <th role="columnheader" title="Tue" class="ant-calendar-column-header"><span class="ant-calendar-column-header-inner">Tu</span></th>
@@ -399,147 +421,153 @@ exports[`Locale Provider set moment locale when locale changes 3`] = `
                 </thead>
                 <tbody class="ant-calendar-tbody">
                   <tr role="row" class="">
+                    <!---->
                     <td role="gridcell" title="August 27, 2017" class="ant-calendar-cell ant-calendar-last-month-cell">
-                      <div class="ant-calendar-date">27</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">27</div>
                     </td>
                     <td role="gridcell" title="August 28, 2017" class="ant-calendar-cell ant-calendar-last-month-cell">
-                      <div class="ant-calendar-date">28</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">28</div>
                     </td>
                     <td role="gridcell" title="August 29, 2017" class="ant-calendar-cell ant-calendar-last-month-cell">
-                      <div class="ant-calendar-date">29</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">29</div>
                     </td>
                     <td role="gridcell" title="August 30, 2017" class="ant-calendar-cell ant-calendar-last-month-cell">
-                      <div class="ant-calendar-date">30</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">30</div>
                     </td>
                     <td role="gridcell" title="August 31, 2017" class="ant-calendar-cell ant-calendar-last-month-cell ant-calendar-last-day-of-month">
-                      <div class="ant-calendar-date">31</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">31</div>
                     </td>
                     <td role="gridcell" title="September 1, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">1</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">1</div>
                     </td>
                     <td role="gridcell" title="September 2, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">2</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">2</div>
                     </td>
                   </tr>
                   <tr role="row" class="">
+                    <!---->
                     <td role="gridcell" title="September 3, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">3</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">3</div>
                     </td>
                     <td role="gridcell" title="September 4, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">4</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">4</div>
                     </td>
                     <td role="gridcell" title="September 5, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">5</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">5</div>
                     </td>
                     <td role="gridcell" title="September 6, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">6</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">6</div>
                     </td>
                     <td role="gridcell" title="September 7, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">7</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">7</div>
                     </td>
                     <td role="gridcell" title="September 8, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">8</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">8</div>
                     </td>
                     <td role="gridcell" title="September 9, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">9</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">9</div>
                     </td>
                   </tr>
                   <tr role="row" class="">
+                    <!---->
                     <td role="gridcell" title="September 10, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">10</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">10</div>
                     </td>
                     <td role="gridcell" title="September 11, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">11</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">11</div>
                     </td>
                     <td role="gridcell" title="September 12, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">12</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">12</div>
                     </td>
                     <td role="gridcell" title="September 13, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">13</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">13</div>
                     </td>
                     <td role="gridcell" title="September 14, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">14</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">14</div>
                     </td>
                     <td role="gridcell" title="September 15, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">15</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">15</div>
                     </td>
                     <td role="gridcell" title="September 16, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">16</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">16</div>
                     </td>
                   </tr>
                   <tr role="row" class="ant-calendar-current-week ant-calendar-active-week">
+                    <!---->
                     <td role="gridcell" title="September 17, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">17</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">17</div>
                     </td>
                     <td role="gridcell" title="September 18, 2017" class="ant-calendar-cell ant-calendar-today ant-calendar-selected-date ant-calendar-selected-day">
-                      <div aria-selected="true" class="ant-calendar-date">18</div>
+                      <div class="ant-calendar-date" aria-selected="true" aria-disabled="false">18</div>
                     </td>
                     <td role="gridcell" title="September 19, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">19</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">19</div>
                     </td>
                     <td role="gridcell" title="September 20, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">20</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">20</div>
                     </td>
                     <td role="gridcell" title="September 21, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">21</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">21</div>
                     </td>
                     <td role="gridcell" title="September 22, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">22</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">22</div>
                     </td>
                     <td role="gridcell" title="September 23, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">23</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">23</div>
                     </td>
                   </tr>
                   <tr role="row" class="">
+                    <!---->
                     <td role="gridcell" title="September 24, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">24</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">24</div>
                     </td>
                     <td role="gridcell" title="September 25, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">25</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">25</div>
                     </td>
                     <td role="gridcell" title="September 26, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">26</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">26</div>
                     </td>
                     <td role="gridcell" title="September 27, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">27</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">27</div>
                     </td>
                     <td role="gridcell" title="September 28, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">28</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">28</div>
                     </td>
                     <td role="gridcell" title="September 29, 2017" class="ant-calendar-cell">
-                      <div class="ant-calendar-date">29</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">29</div>
                     </td>
                     <td role="gridcell" title="September 30, 2017" class="ant-calendar-cell ant-calendar-last-day-of-month">
-                      <div class="ant-calendar-date">30</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">30</div>
                     </td>
                   </tr>
                   <tr role="row" class="">
+                    <!---->
                     <td role="gridcell" title="October 1, 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">1</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">1</div>
                     </td>
                     <td role="gridcell" title="October 2, 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">2</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">2</div>
                     </td>
                     <td role="gridcell" title="October 3, 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">3</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">3</div>
                     </td>
                     <td role="gridcell" title="October 4, 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">4</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">4</div>
                     </td>
                     <td role="gridcell" title="October 5, 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">5</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">5</div>
                     </td>
                     <td role="gridcell" title="October 6, 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">6</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">6</div>
                     </td>
                     <td role="gridcell" title="October 7, 2017" class="ant-calendar-cell ant-calendar-next-month-btn-day">
-                      <div class="ant-calendar-date">7</div>
+                      <div class="ant-calendar-date" aria-selected="false" aria-disabled="false">7</div>
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-            <div class="ant-calendar-footer"><span class="ant-calendar-footer-btn"><a role="button" title="September 18, 2017" class="ant-calendar-today-btn ">Today</a></span></div>
+            <div class="ant-calendar-footer"><span class="ant-calendar-footer-btn"><!----><a class="ant-calendar-today-btn " role="button" title="September 18, 2017">Today</a><!----><!----></span></div>
           </div>
         </div>
       </div>

@@ -26,7 +26,7 @@ describe('Avatar Render', () => {
   it('Render long string correctly', () => {
     const wrapper = mount(Avatar, {
       slots: {
-        default: 'TestString',
+        default: () => 'TestString',
       },
     });
     const children = wrapper.findAll('.ant-avatar-string');
@@ -36,7 +36,7 @@ describe('Avatar Render', () => {
     global.document.body.innerHTML = '';
     const wrapper = mount(Avatar, {
       slots: {
-        default: 'Fallback',
+        default: () => 'Fallback',
       },
       props: {
         src: 'http://error.url',
@@ -48,7 +48,7 @@ describe('Avatar Render', () => {
       if (wrapper.vm.scale === 0.5) {
         return;
       }
-      wrapper.setData({ scale: 0.5 });
+      wrapper.vm.scale = 0.5;
       wrapper.vm.$forceUpdate();
     });
     await asyncExpect(() => {
@@ -57,7 +57,7 @@ describe('Avatar Render', () => {
     await asyncExpect(() => {
       const children = wrapper.findAll('.ant-avatar-string');
       expect(children.length).toBe(1);
-      expect(children.at(0).text()).toBe('Fallback');
+      expect(children[0].text()).toBe('Fallback');
       expect(wrapper.vm.setScale).toHaveBeenCalled();
     });
     await asyncExpect(() => {
@@ -98,7 +98,7 @@ describe('Avatar Render', () => {
       wrapper.find('img').trigger('error');
     }, 0);
     await asyncExpect(() => {
-      expect(wrapper.find({ name: 'AAvatar' }).vm.isImgExist).toBe(true);
+      expect(wrapper.findComponent({ name: 'AAvatar' }).vm.isImgExist).toBe(true);
     }, 0);
     await asyncExpect(() => {
       expect(global.document.body.querySelector('img').getAttribute('src')).toBe(LOAD_SUCCESS_SRC);
@@ -128,15 +128,15 @@ describe('Avatar Render', () => {
     }, 0);
 
     await asyncExpect(() => {
-      expect(wrapper.find({ name: 'AAvatar' }).vm.isImgExist).toBe(false);
+      expect(wrapper.findComponent({ name: 'AAvatar' }).vm.isImgExist).toBe(false);
       expect(wrapper.findAll('.ant-avatar-string').length).toBe(1);
     }, 0);
 
     await asyncExpect(() => {
-      wrapper.setData({ src: LOAD_SUCCESS_SRC });
+      wrapper.vm.src = LOAD_SUCCESS_SRC;
     });
     await asyncExpect(() => {
-      expect(wrapper.find({ name: 'AAvatar' }).vm.isImgExist).toBe(true);
+      expect(wrapper.findComponent({ name: 'AAvatar' }).vm.isImgExist).toBe(true);
       expect(wrapper.findAll('.ant-avatar-image').length).toBe(1);
     }, 0);
   });

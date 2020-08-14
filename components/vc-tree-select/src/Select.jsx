@@ -19,7 +19,7 @@
  * In multiple mode, we should focus on the `input`
  */
 import { provide } from 'vue';
-import shallowEqual from 'shallowequal';
+import shallowEqual from '../../_util/shallowequal';
 import raf from 'raf';
 import scrollIntoView from 'dom-scroll-into-view';
 import warning from 'warning';

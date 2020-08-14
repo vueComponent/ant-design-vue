@@ -3,7 +3,7 @@ import CaretUpFilled from '@ant-design/icons-vue/CaretUpFilled';
 import CaretDownFilled from '@ant-design/icons-vue/CaretDownFilled';
 import VcTable, { INTERNAL_COL_DEFINE } from '../vc-table';
 import classNames from 'classnames';
-import shallowEqual from 'shallowequal';
+import shallowEqual from '../_util/shallowequal';
 import FilterDropdown from './filterDropdown';
 import createStore from './createStore';
 import SelectionBox from './SelectionBox';

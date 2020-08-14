@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { connect } from '../../_util/store';
-import shallowEqual from 'shallowequal';
+import shallowEqual from '../../_util/shallowequal';
 import TableRow from './TableRow';
 import { remove } from './utils';
 import { initDefaultProps, getOptionProps, getSlot } from '../../_util/props-util';

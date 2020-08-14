@@ -706,7 +706,7 @@ export default {
 
     let innerSliderProps = {
       class: className,
-      dir: 'ltr',
+      // dir: 'ltr',
     };
 
     if (this.unslick) {

@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/comment/demo/nested';
+import demo from '../antdv-demo/docs/carousel/demo/autoplay.md';
 
 export default {
   components: {

@@ -8,6 +8,7 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const postcssConfig = require('./postcssConfig');
 const CleanUpStatsPlugin = require('./utils/CleanUpStatsPlugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const distFileBaseName = 'antd';
 
@@ -25,13 +26,11 @@ function getWebpackConfig(modules) {
   const pkg = require(path.join(process.cwd(), 'package.json'));
   const babelConfig = require('./getBabelCommonConfig')(modules || false);
 
-  const pluginImportOptions = [
-    {
-      style: true,
-      libraryName: distFileBaseName,
-      libraryDirectory: 'components',
-    },
-  ];
+  const pluginImportOptions = {
+    style: true,
+    libraryName: distFileBaseName,
+    libraryDirectory: 'components',
+  };
   babelConfig.plugins.push([require.resolve('babel-plugin-import'), pluginImportOptions]);
 
   if (modules === false) {
@@ -157,6 +156,7 @@ function getWebpackConfig(modules) {
     },
 
     plugins: [
+      // new BundleAnalyzerPlugin(),
       new CaseSensitivePathsPlugin(),
       new webpack.BannerPlugin(`
 ${pkg.name} v${pkg.version}

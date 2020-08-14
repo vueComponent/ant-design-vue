@@ -113,7 +113,7 @@ module.exports = {
       ),
       'ant-design-vue': path.join(__dirname, './components'),
 
-      // vue$: 'vue/dist/vue.esm.js',
+      vue$: 'vue/dist/vue.esm-bundler.js',
     },
     extensions: ['.js', '.jsx', '.vue', '.md'],
   },

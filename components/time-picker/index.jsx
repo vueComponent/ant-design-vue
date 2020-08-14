@@ -169,8 +169,8 @@ const TimePicker = {
     },
 
     handleOpenClose({ open }) {
-      this.$emit('openChange', open);
       this.$emit('update:open', open);
+      this.$emit('openChange', open);
     },
 
     focus() {

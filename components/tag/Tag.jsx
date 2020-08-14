@@ -58,11 +58,11 @@ export default {
   },
   methods: {
     setVisible(visible, e) {
+      this.$emit('update:visible', false);
       this.$emit('close', e);
       if (e.defaultPrevented) {
         return;
       }
-      this.$emit('update:visible', false);
       if (!hasProp(this, 'visible')) {
         this.setState({ _visible: visible });
       }

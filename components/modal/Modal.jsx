@@ -123,8 +123,8 @@ export default {
   // static confirm: ModalFunc;
   methods: {
     handleCancel(e) {
-      this.$emit('cancel', e);
       this.$emit('update:visible', false);
+      this.$emit('cancel', e);
       this.$emit('change', false);
     },
 

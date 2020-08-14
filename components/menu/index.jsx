@@ -173,19 +173,19 @@ const Menu = {
       this.$emit('click', e);
     },
     handleSelect(info) {
-      this.$emit('select', info);
       this.$emit('update:selectedKeys', info.selectedKeys);
+      this.$emit('select', info);
       this.$emit('selectChange', info.selectedKeys);
     },
     handleDeselect(info) {
-      this.$emit('deselect', info);
       this.$emit('update:selectedKeys', info.selectedKeys);
+      this.$emit('deselect', info);
       this.$emit('selectChange', info.selectedKeys);
     },
     handleOpenChange(openKeys) {
       this.setOpenKeys(openKeys);
-      this.$emit('openChange', openKeys);
       this.$emit('update:openKeys', openKeys);
+      this.$emit('openChange', openKeys);
     },
     setOpenKeys(openKeys) {
       if (!hasProp(this, 'openKeys')) {

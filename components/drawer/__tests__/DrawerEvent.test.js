@@ -34,14 +34,10 @@ const DrawerEventTester = {
   },
   render() {
     const drawerProps = {
-      props: {
-        visible: this.visible,
-        getContainer: false,
-        ...this.$props,
-      },
-      on: {
-        close: this.onClose,
-      },
+      visible: this.visible,
+      getContainer: false,
+      ...this.$props,
+      onClose: this.onClose,
     };
     return (
       <div>
@@ -60,8 +56,8 @@ describe('Drawer', () => {
     await asyncExpect(() => {
       const body = wrapper.find('.ant-drawer-body').exists();
       expect(body).toBe(true);
-      wrapper.find('button.ant-btn').trigger('click');
-      const content = wrapper.find('.ant-drawer-body').vnode.elm.innerHTML;
+      wrapper.find('.ant-btn').trigger('click');
+      const content = wrapper.find('.ant-drawer-body').element.innerHTML;
       expect(content).toBe('Here is content of Drawer');
 
       expect(wrapper.html()).toMatchSnapshot();
@@ -122,9 +118,7 @@ describe('Drawer', () => {
       wrapper.find('button.ant-btn').trigger('click');
       expect(wrapper.find('.ant-drawer-wrapper-body').exists()).toBe(true);
 
-      wrapper.setData({
-        visible: false,
-      });
+      wrapper.vm.visible = false;
       wrapper.find('.ant-drawer-wrapper-body').trigger('transitionend');
     });
     await asyncExpect(() => {

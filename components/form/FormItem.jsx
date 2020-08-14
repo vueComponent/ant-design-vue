@@ -84,6 +84,7 @@ export const FormItemProps = {
   required: PropTypes.bool,
   validateFirst: PropTypes.bool,
   validateStatus: PropTypes.oneOf(['', 'success', 'warning', 'error', 'validating']),
+  validateTrigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 };
 
 export default {
@@ -113,7 +114,6 @@ export default {
       errors: [],
     };
   },
-
   computed: {
     fieldName() {
       return this.name || this.prop;
@@ -153,6 +153,14 @@ export default {
       }
       return isRequired || this.required;
     },
+    mergedValidateTrigger() {
+      let validateTrigger =
+        this.validateTrigger !== undefined
+          ? this.validateTrigger
+          : this.FormContext.validateTrigger;
+      validateTrigger = validateTrigger === undefined ? 'change' : validateTrigger;
+      return toArray(validateTrigger);
+    },
   },
   watch: {
     validateStatus(val) {
@@ -189,10 +197,10 @@ export default {
       if (triggerName) {
         filteredRules = filteredRules.filter(rule => {
           const { trigger } = rule;
-          if (!trigger) {
+          if (!trigger && !this.mergedValidateTrigger.length) {
             return true;
           }
-          const triggerList = toArray(trigger);
+          const triggerList = toArray(trigger || this.mergedValidateTrigger);
           return triggerList.includes(triggerName);
         });
       }
@@ -226,7 +234,9 @@ export default {
       let formRules = this.FormContext.rules;
       const selfRules = this.rules;
       const requiredRule =
-        this.required !== undefined ? { required: !!this.required, trigger: 'change' } : [];
+        this.required !== undefined
+          ? { required: !!this.required, trigger: this.mergedValidateTrigger }
+          : [];
       const prop = getPropByPath(formRules, this.namePath);
       formRules = formRules ? prop.o[prop.k] || prop.v : [];
       const rules = [].concat(selfRules || formRules || []);
@@ -235,19 +245,6 @@ export default {
       } else {
         return rules.concat(requiredRule);
       }
-    },
-    getFilteredRule(trigger) {
-      const rules = this.getRules();
-      return rules
-        .filter(rule => {
-          if (!rule.trigger || trigger === '') return true;
-          if (Array.isArray(rule.trigger)) {
-            return rule.trigger.indexOf(trigger) > -1;
-          } else {
-            return rule.trigger === trigger;
-          }
-        })
-        .map(rule => ({ ...rule }));
     },
     onFieldBlur() {
       this.validateRules({ triggerName: 'blur' });

@@ -31,6 +31,7 @@ export const FormProps = {
   onFinish: PropTypes.func,
   onFinishFailed: PropTypes.func,
   name: PropTypes.name,
+  validateTrigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
 };
 
 export const ValidationRule = {

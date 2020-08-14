@@ -98,8 +98,8 @@ const Mentions = {
       });
     },
     handleChange(val) {
-      this.$emit('change', val);
       this.$emit('update:value', val);
+      this.$emit('change', val);
     },
     getNotFoundContent(renderEmpty) {
       const notFoundContent = getComponent(this, 'notFoundContent');

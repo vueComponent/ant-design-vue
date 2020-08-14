@@ -55,10 +55,11 @@ const Comment = {
       </div>
     );
 
-    const actionDom =
-      actions && actions.length ? (
-        <ul class={`${prefixCls}-actions`}>{this.getAction(actions)}</ul>
-      ) : null;
+    const actionDom = actions ? (
+      <ul class={`${prefixCls}-actions`}>
+        {this.getAction(Array.isArray(actions) ? actions : [actions])}
+      </ul>
+    ) : null;
 
     const authorContent = (
       <div class={`${prefixCls}-content-author`}>

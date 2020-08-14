@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/menu/demo/template';
+import demo from '../antdv-demo/docs/comment/demo/nested';
 
 export default {
   components: {

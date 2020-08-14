@@ -22,6 +22,8 @@ export default {
     autofocus: Boolean,
     type: PropTypes.string.def('radio'),
     onChange: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
     'onUpdate:checked': PropTypes.func,
     'onUpdate:value': PropTypes.func,
   },

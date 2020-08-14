@@ -11,7 +11,7 @@ export default {
   setup() {
     return {
       configProvider: inject('configProvider', ConfigConsumerProps),
-      radioGroupContext: inject('radioGroupContext'),
+      radioGroupContext: inject('radioGroupContext', {}),
     };
   },
   render() {

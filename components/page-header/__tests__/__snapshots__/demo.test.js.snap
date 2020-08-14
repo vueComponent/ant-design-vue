@@ -6,6 +6,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
     class="ant-page-header ant-page-header-ghost"
     style="border: 1px solid rgb(235, 237, 240);"
   >
+    <!---->
     <div
       class="ant-page-header-heading"
     >
@@ -19,6 +20,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
           style="border: 0px; background: transparent; padding: 0px; line-height: inherit; display: inline-block;"
           tabindex="0"
         >
+          
           <span
             aria-label="arrow-left"
             class="anticon anticon-arrow-left"
@@ -39,8 +41,10 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
               />
             </svg>
           </span>
+          
         </div>
       </div>
+      <!---->
       <span
         class="ant-page-header-heading-title"
       >
@@ -51,52 +55,65 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
       >
         This is a subtitle
       </span>
+      <!---->
       <span
         class="ant-page-header-heading-extra"
       >
+        
         <button
           class="ant-btn"
           type="button"
         >
+          <!---->
+          
           <span>
             Operation
           </span>
+          
         </button>
-         
         <button
           class="ant-btn"
           type="button"
         >
+          <!---->
+          
           <span>
             Operation
           </span>
+          
         </button>
-         
         <button
           class="ant-btn ant-btn-primary"
           type="button"
         >
+          <!---->
+          
           <span>
             Primary
           </span>
+          
         </button>
+        
       </span>
     </div>
     <div
       class="ant-page-header-content"
     >
-       
+      
       <div
         class="ant-descriptions ant-descriptions-small"
       >
+        <!---->
         <div
           class="ant-descriptions-view"
         >
           <table>
             <tbody>
+              
               <tr
                 class="ant-descriptions-row"
               >
+                
                 <td
                   class="ant-descriptions-item"
                   colspan="1"
@@ -110,8 +127,8 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
                     class="ant-descriptions-item-content"
                   >
                     
-        Lili Qu
-      
+                     Lili Qu 
+                    
                   </span>
                 </td>
                 <td
@@ -126,9 +143,11 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
                   <span
                     class="ant-descriptions-item-content"
                   >
+                    
                     <a>
                       421421
                     </a>
+                    
                   </span>
                 </td>
                 <td
@@ -144,14 +163,16 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
                     class="ant-descriptions-item-content"
                   >
                     
-        2017-01-10
-      
+                     2017-01-10 
+                    
                   </span>
                 </td>
+                
               </tr>
               <tr
                 class="ant-descriptions-row"
               >
+                
                 <td
                   class="ant-descriptions-item"
                   colspan="1"
@@ -165,8 +186,8 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
                     class="ant-descriptions-item-content"
                   >
                     
-        2017-10-10
-      
+                     2017-10-10 
+                    
                   </span>
                 </td>
                 <td
@@ -182,23 +203,26 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
                     class="ant-descriptions-item-content"
                   >
                     
-        Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
-      
+                     Gonghu Road, Xihu District, Hangzhou, Zhejiang, China 
+                    
                   </span>
                 </td>
+                
               </tr>
+              
             </tbody>
           </table>
         </div>
       </div>
+      
     </div>
+    <!---->
   </div>
-   
   <br />
-   
   <div
     class="ant-page-header ant-page-header-ghost"
   >
+    <!---->
     <div
       class="ant-page-header-heading"
     >
@@ -212,6 +236,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
           style="border: 0px; background: transparent; padding: 0px; line-height: inherit; display: inline-block;"
           tabindex="0"
         >
+          
           <span
             aria-label="arrow-left"
             class="anticon anticon-arrow-left"
@@ -232,8 +257,10 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
               />
             </svg>
           </span>
+          
         </div>
       </div>
+      <!---->
       <span
         class="ant-page-header-heading-title"
       >
@@ -251,48 +278,58 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
           class="ant-tag ant-tag-blue"
         >
           
-        Running
-      
+           Running 
+          
+          <!---->
         </span>
       </span>
-      <span
-        class="ant-page-header-heading-extra"
-      >
-        <button
-          class="ant-btn"
-          type="button"
-        >
-          <span>
-            Operation
-          </span>
-        </button>
-         
-        <button
-          class="ant-btn"
-          type="button"
-        >
-          <span>
-            Operation
-          </span>
-        </button>
-         
-        <button
-          class="ant-btn ant-btn-primary"
-          type="button"
-        >
-          <span>
-            Primary
-          </span>
-        </button>
-      </span>
+      <!---->
     </div>
     <div
       class="ant-page-header-content"
     >
-        
+      
+      <template
+        slot="extra"
+      >
+        <button
+          class="ant-btn"
+          type="button"
+        >
+          <!---->
+          
+          <span>
+            Operation
+          </span>
+          
+        </button>
+        <button
+          class="ant-btn"
+          type="button"
+        >
+          <!---->
+          
+          <span>
+            Operation
+          </span>
+          
+        </button>
+        <button
+          class="ant-btn ant-btn-primary"
+          type="button"
+        >
+          <!---->
+          
+          <span>
+            Primary
+          </span>
+          
+        </button>
+      </template>
       <div
         class="ant-row-flex"
       >
+        
         <div
           class="ant-statistic"
         >
@@ -304,14 +341,15 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
           <div
             class="ant-statistic-content"
           >
+            <!---->
             <span
               class="ant-statistic-content-value"
             >
               Pending
             </span>
+            <!---->
           </div>
         </div>
-         
         <div
           class="ant-statistic"
           style="margin: 0px 32px;"
@@ -332,9 +370,11 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
             <span
               class="ant-statistic-content-value"
             >
+              
               <span
                 class="ant-statistic-content-value-int"
               >
+                
                 568
               </span>
               <span
@@ -342,10 +382,11 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
               >
                 .08
               </span>
+              
             </span>
+            <!---->
           </div>
         </div>
-         
         <div
           class="ant-statistic"
         >
@@ -365,9 +406,11 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
             <span
               class="ant-statistic-content-value"
             >
+              
               <span
                 class="ant-statistic-content-value-int"
               >
+                
                 3,345
               </span>
               <span
@@ -375,11 +418,16 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
               >
                 .08
               </span>
+              
             </span>
+            <!---->
           </div>
         </div>
+        
       </div>
+      
     </div>
+    <!---->
   </div>
 </div>
 `;
@@ -389,6 +437,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/basic.md correctly 1`] = `
   class="ant-page-header ant-page-header-ghost"
   style="border: 1px solid rgb(235, 237, 240);"
 >
+  <!---->
   <div
     class="ant-page-header-heading"
   >
@@ -402,6 +451,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/basic.md correctly 1`] = `
         style="border: 0px; background: transparent; padding: 0px; line-height: inherit; display: inline-block;"
         tabindex="0"
       >
+        
         <span
           aria-label="arrow-left"
           class="anticon anticon-arrow-left"
@@ -422,8 +472,10 @@ exports[`renders ./antdv-demo/docs/page-header/demo/basic.md correctly 1`] = `
             />
           </svg>
         </span>
+        
       </div>
     </div>
+    <!---->
     <span
       class="ant-page-header-heading-title"
     >
@@ -434,7 +486,11 @@ exports[`renders ./antdv-demo/docs/page-header/demo/basic.md correctly 1`] = `
     >
       This is a subtitle
     </span>
+    <!---->
+    <!---->
   </div>
+  <!---->
+  <!---->
 </div>
 `;
 
@@ -446,15 +502,18 @@ exports[`renders ./antdv-demo/docs/page-header/demo/breadcrumb.md correctly 1`] 
   <div
     class="ant-breadcrumb"
   >
+    
     <span>
       <span
         class="ant-breadcrumb-link"
       >
+        
         <a
           href="#/index"
         >
           First-level Menu
         </a>
+        
       </span>
       <span
         class="ant-breadcrumb-separator"
@@ -466,11 +525,13 @@ exports[`renders ./antdv-demo/docs/page-header/demo/breadcrumb.md correctly 1`] 
       <span
         class="ant-breadcrumb-link"
       >
+        
         <a
           href="#/index/first"
         >
           Second-level Menu
         </a>
+        
       </span>
       <span
         class="ant-breadcrumb-separator"
@@ -482,9 +543,11 @@ exports[`renders ./antdv-demo/docs/page-header/demo/breadcrumb.md correctly 1`] 
       <span
         class="ant-breadcrumb-link"
       >
+        
         <span>
           Third-level Menu
         </span>
+        
       </span>
       <span
         class="ant-breadcrumb-separator"
@@ -492,10 +555,13 @@ exports[`renders ./antdv-demo/docs/page-header/demo/breadcrumb.md correctly 1`] 
         /
       </span>
     </span>
+    
   </div>
   <div
     class="ant-page-header-heading"
   >
+    <!---->
+    <!---->
     <span
       class="ant-page-header-heading-title"
     >
@@ -506,7 +572,11 @@ exports[`renders ./antdv-demo/docs/page-header/demo/breadcrumb.md correctly 1`] 
     >
       This is a subtitle
     </span>
+    <!---->
+    <!---->
   </div>
+  <!---->
+  <!---->
 </div>
 `;
 
@@ -517,6 +587,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
   <div
     class="ant-page-header"
   >
+    <!---->
     <div
       class="ant-page-header-heading"
     >
@@ -530,6 +601,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
           style="border: 0px; background: transparent; padding: 0px; line-height: inherit; display: inline-block;"
           tabindex="0"
         >
+          
           <span
             aria-label="arrow-left"
             class="anticon anticon-arrow-left"
@@ -550,8 +622,10 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
               />
             </svg>
           </span>
+          
         </div>
       </div>
+      <!---->
       <span
         class="ant-page-header-heading-title"
       >
@@ -562,52 +636,65 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
       >
         This is a subtitle
       </span>
+      <!---->
       <span
         class="ant-page-header-heading-extra"
       >
+        
         <button
           class="ant-btn"
           type="button"
         >
+          <!---->
+          
           <span>
             Operation
           </span>
+          
         </button>
-         
         <button
           class="ant-btn"
           type="button"
         >
+          <!---->
+          
           <span>
             Operation
           </span>
+          
         </button>
-         
         <button
           class="ant-btn ant-btn-primary"
           type="button"
         >
+          <!---->
+          
           <span>
             Primary
           </span>
+          
         </button>
+        
       </span>
     </div>
     <div
       class="ant-page-header-content"
     >
-       
+      
       <div
         class="ant-descriptions ant-descriptions-small"
       >
+        <!---->
         <div
           class="ant-descriptions-view"
         >
           <table>
             <tbody>
+              
               <tr
                 class="ant-descriptions-row"
               >
+                
                 <td
                   class="ant-descriptions-item"
                   colspan="1"
@@ -621,8 +708,8 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
                     class="ant-descriptions-item-content"
                   >
                     
-        Lili Qu
-      
+                     Lili Qu 
+                    
                   </span>
                 </td>
                 <td
@@ -637,9 +724,11 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
                   <span
                     class="ant-descriptions-item-content"
                   >
+                    
                     <a>
                       421421
                     </a>
+                    
                   </span>
                 </td>
                 <td
@@ -655,14 +744,16 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
                     class="ant-descriptions-item-content"
                   >
                     
-        2017-01-10
-      
+                     2017-01-10 
+                    
                   </span>
                 </td>
+                
               </tr>
               <tr
                 class="ant-descriptions-row"
               >
+                
                 <td
                   class="ant-descriptions-item"
                   colspan="1"
@@ -676,8 +767,8 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
                     class="ant-descriptions-item-content"
                   >
                     
-        2017-10-10
-      
+                     2017-10-10 
+                    
                   </span>
                 </td>
                 <td
@@ -693,16 +784,20 @@ exports[`renders ./antdv-demo/docs/page-header/demo/ghost.md correctly 1`] = `
                     class="ant-descriptions-item-content"
                   >
                     
-        Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
-      
+                     Gonghu Road, Xihu District, Hangzhou, Zhejiang, China 
+                    
                   </span>
                 </td>
+                
               </tr>
+              
             </tbody>
           </table>
         </div>
       </div>
+      
     </div>
+    <!---->
   </div>
 </div>
 `;
@@ -713,6 +808,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
     class="ant-page-header has-footer ant-page-header-ghost"
     style="border: 1px solid rgb(235, 237, 240);"
   >
+    <!---->
     <div
       class="ant-page-header-heading"
     >
@@ -726,6 +822,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
           style="border: 0px; background: transparent; padding: 0px; line-height: inherit; display: inline-block;"
           tabindex="0"
         >
+          
           <span
             aria-label="arrow-left"
             class="anticon anticon-arrow-left"
@@ -746,8 +843,10 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
               />
             </svg>
           </span>
+          
         </div>
       </div>
+      <!---->
       <span
         class="ant-page-header-heading-title"
       >
@@ -758,41 +857,51 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
       >
         This is a subtitle
       </span>
+      <!---->
       <span
         class="ant-page-header-heading-extra"
       >
+        
         <button
           class="ant-btn"
           type="button"
         >
+          <!---->
+          
           <span>
             Operation
           </span>
+          
         </button>
-         
         <button
           class="ant-btn"
           type="button"
         >
+          <!---->
+          
           <span>
             Operation
           </span>
+          
         </button>
-         
         <button
           class="ant-btn ant-btn-primary"
           type="button"
         >
+          <!---->
+          
           <span>
             Primary
           </span>
+          
         </button>
+        
       </span>
     </div>
     <div
       class="ant-page-header-content"
     >
-        
+      
       <div
         class="content"
       >
@@ -802,14 +911,17 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
           <div
             class="ant-descriptions ant-descriptions-small"
           >
+            <!---->
             <div
               class="ant-descriptions-view"
             >
               <table>
                 <tbody>
+                  
                   <tr
                     class="ant-descriptions-row"
                   >
+                    
                     <td
                       class="ant-descriptions-item"
                       colspan="1"
@@ -823,8 +935,8 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                         class="ant-descriptions-item-content"
                       >
                         
-            Lili Qu
-          
+                         Lili Qu 
+                        
                       </span>
                     </td>
                     <td
@@ -839,15 +951,19 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                       <span
                         class="ant-descriptions-item-content"
                       >
+                        
                         <a>
                           421421
                         </a>
+                        
                       </span>
                     </td>
+                    
                   </tr>
                   <tr
                     class="ant-descriptions-row"
                   >
+                    
                     <td
                       class="ant-descriptions-item"
                       colspan="1"
@@ -861,8 +977,8 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                         class="ant-descriptions-item-content"
                       >
                         
-            2017-01-10
-          
+                         2017-01-10 
+                        
                       </span>
                     </td>
                     <td
@@ -878,14 +994,16 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                         class="ant-descriptions-item-content"
                       >
                         
-            2017-10-10
-          
+                         2017-10-10 
+                        
                       </span>
                     </td>
+                    
                   </tr>
                   <tr
                     class="ant-descriptions-row"
                   >
+                    
                     <td
                       class="ant-descriptions-item"
                       colspan="2"
@@ -899,17 +1017,18 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                         class="ant-descriptions-item-content"
                       >
                         
-            Gonghu Road, Xihu District, Hangzhou, Zhejiang, China
-          
+                         Gonghu Road, Xihu District, Hangzhou, Zhejiang, China 
+                        
                       </span>
                     </td>
+                    
                   </tr>
+                  
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-         
         <div
           class="extra"
         >
@@ -928,14 +1047,15 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
               <div
                 class="ant-statistic-content"
               >
+                <!---->
                 <span
                   class="ant-statistic-content-value"
                 >
                   Pending
                 </span>
+                <!---->
               </div>
             </div>
-             
             <div
               class="ant-statistic"
             >
@@ -955,9 +1075,11 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                 <span
                   class="ant-statistic-content-value"
                 >
+                  
                   <span
                     class="ant-statistic-content-value-int"
                   >
+                    
                     568
                   </span>
                   <span
@@ -965,24 +1087,29 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                   >
                     .08
                   </span>
+                  
                 </span>
+                <!---->
               </div>
             </div>
           </div>
         </div>
       </div>
+      
     </div>
     <div
       class="ant-page-header-footer"
     >
       <div
-        class="ant-tabs ant-tabs-top ant-tabs-line"
+        class="ant-tabs-line ant-tabs ant-tabs-top"
       >
+        
         <div
           class="ant-tabs-bar ant-tabs-top-bar"
           role="tablist"
           tabindex="0"
         >
+          
           <div
             class="ant-tabs-nav-container"
           >
@@ -1053,7 +1180,9 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                 <div
                   class="ant-tabs-nav ant-tabs-nav-animated"
                 >
+                  
                   <div>
+                    
                     <div
                       aria-disabled="false"
                       aria-selected="true"
@@ -1065,30 +1194,37 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
                     <div
                       aria-disabled="false"
                       aria-selected="false"
-                      class=" ant-tabs-tab"
+                      class="ant-tabs-tab"
                       role="tab"
                     >
                       Rule
                     </div>
+                    
                   </div>
                   <div
                     class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"
                     style="display: block; transform: translate3d(0px,0,0); webkit-transform: translate3d(0px,0,0); width: 0px;"
                   />
+                  
                 </div>
               </div>
             </div>
           </div>
+          
         </div>
         <div
           role="presentation"
           style="width: 0px; height: 0px; overflow: hidden; position: absolute;"
           tabindex="0"
-        />
+        >
+          
+          
+        </div>
         <div
           class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content"
           style="margin-left: 0%;"
         >
+          
           <div
             aria-hidden="false"
             class="ant-tabs-tabpane ant-tabs-tabpane-active"
@@ -1098,24 +1234,41 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
               role="presentation"
               style="width: 0px; height: 0px; overflow: hidden; position: absolute;"
               tabindex="0"
-            />
+            >
+              
+              
+            </div>
+            
+            
             <div
               role="presentation"
               style="width: 0px; height: 0px; overflow: hidden; position: absolute;"
               tabindex="0"
-            />
+            >
+              
+              
+            </div>
           </div>
           <div
             aria-hidden="true"
             class="ant-tabs-tabpane ant-tabs-tabpane-inactive"
             role="tabpanel"
-          />
+          >
+            <!---->
+            <!---->
+            <!---->
+          </div>
+          
         </div>
         <div
           role="presentation"
           style="width: 0px; height: 0px; overflow: hidden; position: absolute;"
           tabindex="0"
-        />
+        >
+          
+          
+        </div>
+        
       </div>
     </div>
   </div>

@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     handlePreview(file, e) {
-      const { onPreview } = this.$attrs;
+      const { onPreview } = this.$props;
       if (!onPreview) {
         return;
       }

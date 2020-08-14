@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/mentions/demo/form.md';
+import demo from '../antdv-demo/docs/upload/demo/index';
 
 export default {
   components: {

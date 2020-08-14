@@ -7,8 +7,6 @@ import { ConfigConsumerProps } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
 import syncWatch from '../_util/syncWatch';
 
-function noop() {}
-
 export function fixControlledValue(value) {
   if (typeof value === 'undefined' || value === null) {
     return '';

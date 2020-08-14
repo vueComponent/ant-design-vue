@@ -97,9 +97,14 @@ const Mentions = {
         this.stopMeasure();
       } else if (which === KeyCode.ENTER) {
         // Measure hit
-        const option = this.getOptions()[activeIndex];
-        this.selectOption(option);
         event.preventDefault();
+        const options = this.getOptions();
+        if (!options.length) {
+          this.stopMeasure();
+          return;
+        }
+        const option = options[activeIndex];
+        this.selectOption(option);
       }
     },
     /**

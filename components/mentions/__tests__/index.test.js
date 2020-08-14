@@ -2,8 +2,9 @@ import { mount } from '@vue/test-utils';
 import Vue from 'vue';
 import Mentions from '..';
 import focusTest from '../../../tests/shared/focusTest';
+import KeyCode from '../../_util/KeyCode';
 
-const { getMentions } = Mentions;
+const { getMentions, Option } = Mentions;
 
 function $$(className) {
   return document.body.querySelectorAll(className);
@@ -84,6 +85,29 @@ describe('Mentions', () => {
         done();
       });
     });
+  });
+
+  it('notExist', async () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <Mentions>
+            <Option value="bamboo">Bamboo</Option>
+            <Option value="light">Light</Option>
+            <Option value="cat">Cat</Option>
+          </Mentions>
+        );
+      },
+    });
+
+    triggerInput(wrapper, '@notExist');
+    jest.runAllTimers();
+
+    wrapper.find('textarea').element.keyCode = KeyCode.ENTER;
+    wrapper.find('textarea').trigger('keydown');
+    jest.runAllTimers();
+
+    expect(wrapper.find('textarea').element.value).toBe('@notExist');
   });
 
   focusTest(Mentions);

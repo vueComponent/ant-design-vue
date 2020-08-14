@@ -175,7 +175,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/basic.md correctly 1`] = `
       </div>
       <!---->
     </div>
-  </div><button checked="false" style="margin-top: 16px;" class="ant-switch" type="button" role="switch" aria-checked="false">
+  </div><button style="margin-top: 16px;" class="ant-switch" type="button" role="switch" aria-checked="false">
     <!----><span class="ant-switch-inner">enabled</span></button>
 </div>
 `;
@@ -6727,8 +6727,8 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
 </div>
 <!---->
 </div>
-</div><button checked="false" style="margin-top: 16px;" class="ant-switch" type="button" role="switch" aria-checked="false">
-  <!----><span class="ant-switch-inner">disabled</span></button><button checked="false" style="margin-top: 16px;" class="ant-switch" type="button" role="switch" aria-checked="false">
+</div><button style="margin-top: 16px;" class="ant-switch" type="button" role="switch" aria-checked="false">
+  <!----><span class="ant-switch-inner">disabled</span></button><button style="margin-top: 16px;" class="ant-switch" type="button" role="switch" aria-checked="false">
   <!----><span class="ant-switch-inner">showSearch</span></button></div>
 `;
 

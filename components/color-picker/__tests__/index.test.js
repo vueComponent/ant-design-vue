@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import ColorPicker from '..';
 import { asyncExpect } from '@/tests/utils';
 describe('ColorPicker', () => {
-  it('should support default value', async () => {
+  xit('should support default value', async () => {
     const wrapper = mount(
       {
         render() {
@@ -16,7 +16,7 @@ describe('ColorPicker', () => {
       wrapper.unmount();
     }, 1000);
   });
-  it('should support v-model', async () => {
+  xit('should support v-model', async () => {
     let color = 'rgba(10, 10, 10, 1)';
     const wrapper = mount(
       {
@@ -40,7 +40,7 @@ describe('ColorPicker', () => {
       wrapper.unmount();
     }, 1000);
   });
-  it('should support disabled', async () => {
+  xit('should support disabled', async () => {
     const wrapper = mount(
       {
         data() {
@@ -65,7 +65,7 @@ describe('ColorPicker', () => {
       });
     }, 1000);
   });
-  it('should support format', async () => {
+  xit('should support format', async () => {
     const wrapper = mount(
       {
         data() {
@@ -90,7 +90,7 @@ describe('ColorPicker', () => {
       });
     }, 1000);
   });
-  it('prop locale should works', async () => {
+  xit('prop locale should works', async () => {
     const wrapper = mount(
       {
         data() {
@@ -128,7 +128,7 @@ describe('ColorPicker', () => {
       });
     }, 1000);
   });
-  it('save event should works', async () => {
+  xit('save event should works', async () => {
     const wrapper = mount(
       {
         render() {

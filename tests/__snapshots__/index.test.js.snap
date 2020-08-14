@@ -2,11 +2,6 @@
 
 exports[`antd dist files exports modules correctly 1`] = `
 Array [
-  "Base",
-  "version",
-  "install",
-  "message",
-  "notification",
   "Affix",
   "Anchor",
   "AutoComplete",
@@ -27,16 +22,17 @@ Array [
   "Divider",
   "Dropdown",
   "Form",
-  "FormModel",
   "Icon",
   "Input",
   "InputNumber",
   "Layout",
   "List",
   "LocaleProvider",
+  "message",
   "Menu",
   "Mentions",
   "Modal",
+  "notification",
   "Pagination",
   "Popconfirm",
   "Popover",
@@ -60,6 +56,7 @@ Array [
   "Timeline",
   "Tooltip",
   "Upload",
+  "version",
   "Drawer",
   "Skeleton",
   "Comment",
@@ -68,6 +65,8 @@ Array [
   "Result",
   "Descriptions",
   "PageHeader",
+  "Space",
+  "install",
   "default",
 ]
 `;

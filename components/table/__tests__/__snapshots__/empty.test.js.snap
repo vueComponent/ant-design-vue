@@ -299,7 +299,7 @@ exports[`Table renders empty table without emptyText when loading 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div>
-      <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
+      <div class="ant-spin ant-spin-spinning ant-table-without-pagination ant-table-spin-holder"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
         <!---->
       </div>
     </div>

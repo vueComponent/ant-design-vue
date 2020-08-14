@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/carousel/demo/autoplay.md';
+import demo from '../antdv-demo/docs/mentions/demo/form.md';
 
 export default {
   components: {

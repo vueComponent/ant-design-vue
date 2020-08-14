@@ -194,7 +194,7 @@ describe('Upload List', () => {
       const mockFile = new File(['foo'], 'foo.png', {
         type: 'image/png',
       });
-      wrapper.find({ name: 'ajaxUploader' }).vm.onChange({
+      wrapper.findComponent({ name: 'ajaxUploader' }).vm.onChange({
         target: {
           files: [mockFile],
         },

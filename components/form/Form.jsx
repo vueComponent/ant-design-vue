@@ -183,6 +183,11 @@ const Form = {
       }
     },
     validateFields(nameList, options) {
+      warning(
+        !(nameList instanceof Function),
+        'Form',
+        'validateFields/validateField/validate not support callback, please use promise instead',
+      );
       if (!this.model) {
         warning(false, 'Form', 'model is required for validateFields to work.');
         return;

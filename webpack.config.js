@@ -4,6 +4,44 @@ const WebpackBar = require('webpackbar');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
+const babelConfig = {
+  cacheDirectory: true,
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        targets: {
+          browsers: [
+            'last 2 versions',
+            'Firefox ESR',
+            '> 1%',
+            'ie >= 9',
+            'iOS >= 8',
+            'Android >= 4',
+          ],
+        },
+      },
+    ],
+    '@babel/preset-typescript',
+  ],
+  plugins: [
+    [
+      'babel-plugin-import',
+      {
+        libraryName: 'ant-design-vue',
+        libraryDirectory: '', // default: lib
+        style: true,
+      },
+    ],
+    ['@ant-design-vue/babel-plugin-jsx', { optimize: true }],
+    '@babel/plugin-proposal-optional-chaining',
+    '@babel/plugin-transform-object-assign',
+    '@babel/plugin-proposal-object-rest-spread',
+    '@babel/plugin-proposal-export-default-from',
+    '@babel/plugin-proposal-class-properties',
+  ],
+};
+
 module.exports = {
   mode: 'development',
   entry: {
@@ -21,45 +59,26 @@ module.exports = {
         use: [{ loader: 'vue-loader' }, { loader: './loader.js' }],
       },
       {
+        test: /\.tsx?$/,
+        use: [
+          {
+            loader: 'babel-loader',
+            options: babelConfig,
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+            },
+          },
+        ],
+        exclude: /node_modules/,
+      },
+      {
         test: /\.(js|jsx)$/,
         loader: 'babel-loader',
         exclude: /pickr.*js/,
-        options: {
-          cacheDirectory: true,
-          presets: [
-            [
-              '@babel/preset-env',
-              {
-                targets: {
-                  browsers: [
-                    'last 2 versions',
-                    'Firefox ESR',
-                    '> 1%',
-                    'ie >= 9',
-                    'iOS >= 8',
-                    'Android >= 4',
-                  ],
-                },
-              },
-            ],
-          ],
-          plugins: [
-            [
-              'babel-plugin-import',
-              {
-                libraryName: 'ant-design-vue',
-                libraryDirectory: '', // default: lib
-                style: true,
-              },
-            ],
-            ['@ant-design-vue/babel-plugin-jsx', { transformOn: true, usePatchFlag: false }],
-            '@babel/plugin-proposal-optional-chaining',
-            '@babel/plugin-transform-object-assign',
-            '@babel/plugin-proposal-object-rest-spread',
-            '@babel/plugin-proposal-export-default-from',
-            '@babel/plugin-proposal-class-properties',
-          ],
-        },
+        options: babelConfig,
       },
       {
         test: /\.(png|jpg|gif|svg)$/,
@@ -115,7 +134,7 @@ module.exports = {
 
       vue$: 'vue/dist/vue.esm-bundler.js',
     },
-    extensions: ['.js', '.jsx', '.vue', '.md'],
+    extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue', '.md'],
   },
   devServer: {
     historyApiFallback: {

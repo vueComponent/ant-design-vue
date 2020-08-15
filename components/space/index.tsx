@@ -1,22 +1,15 @@
-import { inject, defineComponent, CSSProperties } from 'vue';
+import { inject, defineComponent, App } from 'vue';
+import { initDefaultProps } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
-export interface SpaceProps {
-  prefixCls?: string;
-  class?: any;
-  style?: CSSProperties | string;
-  size?: number;
-  direction?: 'horizontal' | 'vertical';
-  // No `stretch` since many components do not support that.
-  align?: 'start' | 'end' | 'center' | 'baseline';
-}
-
-export const SpaceSizeType = PropTypes.oneOfType([
-  PropTypes.number,
-  PropTypes.oneOf(['small', 'middle', 'large']),
-]);
+export const SpaceProps = {
+  prefixCls: PropTypes.string,
+  align: PropTypes.tuple<'start' | 'end' | 'center' | 'baseline'>(),
+  size: PropTypes.tuple<'small' | 'middle' | 'large'>(),
+  direction: PropTypes.tuple<'horizontal' | 'vertical'>(),
+};
 
 const spaceSize = {
   small: 8,
@@ -35,26 +28,25 @@ const Space = (props, { slots }) => {
   const configProvider = inject('configProvider', ConfigConsumerProps);
   const { align, size, direction, prefixCls: customizePrefixCls } = props;
 
-  const getPrefixCls = configProvider.getPrefixCls;
-  const prefixCls = getPrefixCls('space', customizePrefixCls);
-  const items = filterEmpty(slots.default?.());
-  const len = items.length;
+    const { getPrefixCls } = configProvider;
+    const prefixCls = getPrefixCls('space', customizePrefixCls);
+    const items = filterEmpty(slots.default?.());
+    const len = items.length;
 
-  if (len === 0) {
-    return null;
-  }
+    if (len === 0) {
+      return null;
+    }
 
-  const mergedAlign = align === undefined && direction === 'horizontal' ? 'center' : align;
+    const mergedAlign = align === undefined && direction === 'horizontal' ? 'center' : align;
 
-  const someSpaceClass = {
-    [prefixCls]: true,
-    [`${prefixCls}-${direction}`]: true,
-    // [`${prefixCls}-rtl`]: directionConfig === 'rtl',
-    [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
-  };
+    const someSpaceClass = {
+      [prefixCls]: true,
+      [`${prefixCls}-${direction}`]: true,
+      [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
+    };
 
-  const itemClassName = `${prefixCls}-item`;
-  const marginDirection = 'marginRight'; // directionConfig === 'rtl' ? 'marginLeft' : 'marginRight';
+    const itemClassName = `${prefixCls}-item`;
+    const marginDirection = 'marginRight'; // directionConfig === 'rtl' ? 'marginLeft' : 'marginRight';
 
   return (
     <div class={someSpaceClass}>

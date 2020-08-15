@@ -38,7 +38,9 @@ function setMomentLocale(locale?: Locale) {
 const LocaleProvider = defineComponent({
   name: 'ALocaleProvider',
   props: {
-    locale: PropTypes.object.def(() => ({})),
+    locale: {
+      type: Object,
+    },
     _ANT_MARK__: PropTypes.string,
   },
   data() {

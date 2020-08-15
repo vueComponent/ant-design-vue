@@ -1,6 +1,6 @@
 import isPlainObject from 'lodash/isPlainObject';
 import classNames from 'classnames';
-import { isVNode, Fragment, Comment, Text, h } from 'vue';
+import { isVNode, Fragment, Comment, Text, h, VNode, Prop, PropOptions } from 'vue';
 import { camelize, hyphenate, isOn, resolvePropValue } from './util';
 import isValid from './isValid';
 // function getType(fn) {
@@ -345,8 +345,8 @@ export function isStringElement(c) {
   return c && c.type === Text;
 }
 
-export function filterEmpty(children = []) {
-  const res = [];
+export function filterEmpty(children: VNode[] = []) {
+  const res: VNode[] = [];
   children.forEach(child => {
     if (Array.isArray(child)) {
       res.push(...child);
@@ -358,10 +358,14 @@ export function filterEmpty(children = []) {
   });
   return res.filter(c => !isEmptyElement(c));
 }
-const initDefaultProps = (propTypes, defaultProps) => {
-  Object.keys(defaultProps).forEach(k => {
-    if (propTypes[k]) {
-      propTypes[k].def && (propTypes[k] = propTypes[k].def(defaultProps[k]));
+const initDefaultProps = <T>(
+  propTypes: T,
+  defaultProps: { [K in Extract<keyof T, string>]?: any },
+): T => {
+  Object.keys(defaultProps).forEach((k: Extract<keyof T, string>) => {
+    let prop = propTypes[k] as PropOptions<any>;
+    if (prop) {
+      prop.default = defaultProps[k];
     } else {
       throw new Error(`not have ${k} prop`);
     }

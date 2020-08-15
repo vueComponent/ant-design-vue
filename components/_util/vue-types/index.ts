@@ -1,3 +1,4 @@
+import { PropType } from 'vue';
 import isPlainObject from 'lodash/isPlainObject';
 import { toType, getType, isFunction, validateType, isInteger, isArray, warn } from './utils';
 
@@ -9,57 +10,57 @@ const VuePropTypes = {
   },
 
   get func() {
-    return toType('function', {
+    return {
       type: Function,
-    }).def(currentDefaults.func);
+    };
   },
 
   get bool() {
-    return toType('boolean', {
+    return {
       type: Boolean,
-    }).def(currentDefaults.bool);
+    };
   },
 
   get string() {
-    return toType('string', {
+    return {
       type: String,
-    }).def(currentDefaults.string);
+    };
   },
 
   get number() {
-    return toType('number', {
+    return {
       type: Number,
-    }).def(currentDefaults.number);
+    };
   },
 
   get array() {
-    return toType('array', {
+    return {
       type: Array,
-    }).def(currentDefaults.array);
+    };
   },
 
   get object() {
-    return toType('object', {
+    return {
       type: Object,
-    }).def(currentDefaults.object);
+    };
   },
 
   get integer() {
-    return toType('integer', {
+    return {
       type: Number,
-      validator(value) {
+      validator(value: number) {
         return isInteger(value);
       },
-    }).def(currentDefaults.integer);
+    };
   },
 
   get symbol() {
-    return toType('symbol', {
+    return {
       type: null,
-      validator(value) {
+      validator(value: Symbol) {
         return typeof value === 'symbol';
       },
-    });
+    };
   },
 
   custom(validatorFn, warnMsg = 'custom validation failed') {
@@ -76,7 +77,13 @@ const VuePropTypes = {
     });
   },
 
-  oneOf(arr) {
+  tuple<T>() {
+    return {
+      type: (String as unknown) as PropType<T>,
+    };
+  },
+
+  oneOf(arr: unknown[]) {
     if (!isArray(arr)) {
       throw new TypeError('[VueTypes error]: You must provide an array as argument');
     }
@@ -90,7 +97,7 @@ const VuePropTypes = {
 
     return toType('oneOf', {
       type: allowedTypes.length > 0 ? allowedTypes : null,
-      validator(value) {
+      validator(value: unknown) {
         const valid = arr.indexOf(value) !== -1;
         if (!valid) warn(msg);
         return valid;
@@ -98,10 +105,10 @@ const VuePropTypes = {
     });
   },
 
-  instanceOf(instanceConstructor) {
-    return toType('instanceOf', {
+  instanceOf<T>(instanceConstructor: T) {
+    return {
       type: instanceConstructor,
-    });
+    };
   },
 
   oneOfType(arr) {
@@ -158,10 +165,10 @@ const VuePropTypes = {
     }).def(undefined);
   },
 
-  arrayOf(type) {
+  arrayOf<T extends object>(type: T) {
     return toType('arrayOf', {
-      type: Array,
-      validator(values) {
+      type: Array as PropType<T[]>,
+      validator(values: T[]) {
         const valid = values.every(value => validateType(type, value));
         if (!valid) warn(`arrayOf - value must be an array of "${getType(type)}"`);
         return valid;
@@ -171,8 +178,8 @@ const VuePropTypes = {
 
   objectOf(type) {
     return toType('objectOf', {
-      type: Object,
-      validator(obj) {
+      type: Object as PropType<T>,
+      validator(obj: T): obj is T {
         const valid = Object.keys(obj).every(key => validateType(type, obj[key]));
         if (!valid) warn(`objectOf - value must be an object of "${getType(type)}"`);
         return valid;

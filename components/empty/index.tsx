@@ -1,9 +1,10 @@
-import { defineComponent, CSSProperties, VNodeChild, inject, App } from 'vue';
+import { defineComponent, CSSProperties, VNodeChild, inject, App, PropType, VNode } from 'vue';
 import classNames from 'classnames';
 import { ConfigConsumerProps } from '../config-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import DefaultEmptyImg from './empty';
 import SimpleEmptyImg from './simple';
+import { filterEmpty } from '../_util/props-util';
 
 const defaultEmptyImg = <DefaultEmptyImg />;
 const simpleEmptyImg = <SimpleEmptyImg />;
@@ -12,19 +13,23 @@ export interface TransferLocale {
   description: string;
 }
 
-export interface EmptyProps {
-  prefixCls?: string;
-  class?: string;
-  style?: CSSProperties;
-  imageStyle?: CSSProperties;
-  image?: VNodeChild;
-  description?: VNodeChild;
-  children?: VNodeChild;
-}
-
-const Empty = defineComponent<EmptyProps>({
+const Empty = defineComponent({
   name: 'AEmpty',
-  setup(props) {
+  props: {
+    prefixCls: {
+      type: String,
+    },
+    imageStyle: {
+      type: Object as PropType<string | CSSProperties>,
+    },
+    image: {
+      type: Object as PropType<VNode>,
+    },
+    description: {
+      type: String,
+    },
+  },
+  setup(props, { slots }) {
     const configProvider = inject('configProvider', ConfigConsumerProps);
     const { getPrefixCls } = configProvider;
     const {
@@ -32,7 +37,6 @@ const Empty = defineComponent<EmptyProps>({
       prefixCls: customizePrefixCls,
       image = defaultEmptyImg,
       description,
-      children,
       imageStyle,
       ...restProps
     } = props;
@@ -44,7 +48,6 @@ const Empty = defineComponent<EmptyProps>({
           const prefixCls = getPrefixCls('empty', customizePrefixCls);
           const des = typeof description !== 'undefined' ? description : locale.description;
           const alt = typeof des === 'string' ? des : 'empty';
-
           let imageNode: any = null;
 
           if (typeof image === 'string') {
@@ -68,7 +71,9 @@ const Empty = defineComponent<EmptyProps>({
                 {imageNode}
               </div>
               {des && <p class={`${prefixCls}-description`}>{des}</p>}
-              {children && <div class={`${prefixCls}-footer`}>{children}</div>}
+              {slots.default && (
+                <div class={`${prefixCls}-footer`}>{filterEmpty(slots.default?.())}</div>
+              )}
             </div>
           ) as VNodeChild;
         }}

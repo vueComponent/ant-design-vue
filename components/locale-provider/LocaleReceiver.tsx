@@ -1,4 +1,4 @@
-import { inject, defineComponent, VNode, VNodeChild } from 'vue';
+import { inject, defineComponent, VNodeChild, PropType } from 'vue';
 import defaultLocaleData from './default';
 
 export interface LocaleReceiverProps {
@@ -11,8 +11,21 @@ interface LocaleInterface {
   [key: string]: any;
 }
 
-export default defineComponent<LocaleReceiverProps>({
+export default defineComponent({
   name: 'LocaleReceiver',
+  props: {
+    componentName: {
+      type: String,
+    },
+    defaultLocale: {
+      type: [Object, Function],
+    },
+    children: {
+      type: Function as PropType<
+        (locale: object, localeCode?: string, fullLocale?: object) => VNodeChild
+      >,
+    },
+  },
   setup() {
     return {
       localeData: inject('localeData', {}),

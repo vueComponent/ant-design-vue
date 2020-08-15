@@ -39,8 +39,12 @@ Use Drawer to quickly preview details of an object, such as those in a list.
       </template>
     </a-list>
     <a-drawer width="640" placement="right" :closable="false" :visible="visible" @close="onClose">
-      <p :style="[pStyle, pStyle2]">User Profile</p>
-      <p :style="pStyle">Personal</p>
+      <p :style="[pStyle, pStyle2]">
+        User Profile
+      </p>
+      <p :style="pStyle">
+        Personal
+      </p>
       <a-row>
         <a-col :span="12">
           <description-item title="Full Name" content="Lily" />
@@ -74,7 +78,9 @@ Use Drawer to quickly preview details of an object, such as those in a list.
         </a-col>
       </a-row>
       <a-divider />
-      <p :style="pStyle">Company</p>
+      <p :style="pStyle">
+        Company
+      </p>
       <a-row>
         <a-col :span="12">
           <description-item title="Position" content="Programmer" />
@@ -104,7 +110,9 @@ Use Drawer to quickly preview details of an object, such as those in a list.
         </a-col>
       </a-row>
       <a-divider />
-      <p :style="pStyle">Contacts</p>
+      <p :style="pStyle">
+        Contacts
+      </p>
       <a-row>
         <a-col :span="12">
           <description-item title="Email" content="ant-design-vue@example.com" />
@@ -117,9 +125,9 @@ Use Drawer to quickly preview details of an object, such as those in a list.
         <a-col :span="24">
           <description-item title="Github">
             <template v-slot:content>
-              <a href="https://github.com/vueComponent/ant-design-vue"
-                >github.com/vueComponent/ant-design-vue</a
-              >
+              <a
+                href="https://github.com/vueComponent/ant-design-vue"
+              >github.com/vueComponent/ant-design-vue</a>
             </template>
           </description-item>
         </a-col>

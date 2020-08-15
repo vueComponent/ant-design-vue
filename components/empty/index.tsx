@@ -1,71 +1,90 @@
-import PropTypes from '../_util/vue-types';
+import { defineComponent, CSSProperties, VNodeChild, inject, App } from 'vue';
+import classNames from 'classnames';
 import { ConfigConsumerProps } from '../config-provider';
-import { getComponent } from '../_util/props-util';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import DefaultEmptyImg from './empty';
 import SimpleEmptyImg from './simple';
 
-export const TransferLocale = () => {
-  return {
-    description: PropTypes.string,
-  };
-};
+const defaultEmptyImg = <DefaultEmptyImg />;
+const simpleEmptyImg = <SimpleEmptyImg />;
 
-export const EmptyProps = () => {
-  return {
-    prefixCls: PropTypes.string,
-    image: PropTypes.any,
-    description: PropTypes.any,
-    imageStyle: PropTypes.object,
-  };
-};
+export interface TransferLocale {
+  description: string;
+}
 
-const Empty = {
+export interface EmptyProps {
+  prefixCls?: string;
+  class?: string;
+  style?: CSSProperties;
+  imageStyle?: CSSProperties;
+  image?: VNodeChild;
+  description?: VNodeChild;
+  children?: VNodeChild;
+}
+
+const Empty = defineComponent<EmptyProps>({
   name: 'AEmpty',
-  props: {
-    ...EmptyProps(),
-  },
-  methods: {
-    renderEmpty(contentLocale) {
-      const { prefixCls: customizePrefixCls, imageStyle } = this.$props;
-      const prefixCls = ConfigConsumerProps.getPrefixCls('empty', customizePrefixCls);
-      const image = getComponent(this, 'image') || <DefaultEmptyImg />;
-      const description = getComponent(this, 'description');
+  setup(props) {
+    const configProvider = inject('configProvider', ConfigConsumerProps);
+    const { getPrefixCls } = configProvider;
+    const {
+      class: className,
+      prefixCls: customizePrefixCls,
+      image = defaultEmptyImg,
+      description,
+      children,
+      imageStyle,
+      ...restProps
+    } = props;
 
-      const des = typeof description !== 'undefined' ? description : contentLocale.description;
-      const alt = typeof des === 'string' ? des : 'empty';
-      const cls = { [prefixCls]: true };
-      let imageNode = null;
-      if (typeof image === 'string') {
-        imageNode = <img alt={alt} src={image} />;
-      } else if (typeof image === 'object' && image.type?.PRESENTED_IMAGE_SIMPLE) {
-        const Image = image;
-        imageNode = <Image />;
-        cls[`${prefixCls}-normal`] = true;
-      } else {
-        imageNode = image;
-      }
-      return (
-        <div class={cls}>
-          <div class={`${prefixCls}-image`} style={imageStyle}>
-            {imageNode}
-          </div>
-          {des && <p class={`${prefixCls}-description`}>{des}</p>}
-          {this.$slots.default && <div class={`${prefixCls}-footer`}>{this.$slots.default()}</div>}
-        </div>
-      );
-    },
+    return () => (
+      <LocaleReceiver
+        componentName="Empty"
+        children={(locale: TransferLocale) => {
+          const prefixCls = getPrefixCls('empty', customizePrefixCls);
+          const des = typeof description !== 'undefined' ? description : locale.description;
+          const alt = typeof des === 'string' ? des : 'empty';
+
+          let imageNode: any = null;
+
+          if (typeof image === 'string') {
+            imageNode = <img alt={alt} src={image} />;
+          } else {
+            imageNode = image;
+          }
+
+          return (
+            <div
+              class={classNames(
+                prefixCls,
+                {
+                  [`${prefixCls}-normal`]: image === simpleEmptyImg,
+                },
+                className,
+              )}
+              {...restProps}
+            >
+              <div class={`${prefixCls}-image`} style={imageStyle}>
+                {imageNode}
+              </div>
+              {des && <p class={`${prefixCls}-description`}>{des}</p>}
+              {children && <div class={`${prefixCls}-footer`}>{children}</div>}
+            </div>
+          ) as VNodeChild;
+        }}
+      />
+    );
   },
   render() {
     return <LocaleReceiver componentName="Empty" children={this.renderEmpty} />;
   },
-};
+});
 
-Empty.PRESENTED_IMAGE_DEFAULT = DefaultEmptyImg;
-Empty.PRESENTED_IMAGE_SIMPLE = SimpleEmptyImg;
+Empty.PRESENTED_IMAGE_DEFAULT = defaultEmptyImg;
+Empty.PRESENTED_IMAGE_SIMPLE = simpleEmptyImg;
 
 /* istanbul ignore next */
-Empty.install = function(app) {
+Empty.install = function(app: App) {
   app.component(Empty.name, Empty);
 };
 

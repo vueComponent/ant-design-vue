@@ -1,14 +1,18 @@
-import { inject } from 'vue';
-import PropTypes from '../_util/vue-types';
+import { inject, defineComponent, VNode, VNodeChild } from 'vue';
 import defaultLocaleData from './default';
 
-export default {
+export interface LocaleReceiverProps {
+  componentName?: string;
+  defaultLocale?: object | Function;
+  children: (locale: object, localeCode?: string, fullLocale?: object) => VNodeChild;
+}
+
+interface LocaleInterface {
+  [key: string]: any;
+}
+
+export default defineComponent<LocaleReceiverProps>({
   name: 'LocaleReceiver',
-  props: {
-    componentName: PropTypes.string.def('global'),
-    defaultLocale: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-    children: PropTypes.func,
-  },
   setup() {
     return {
       localeData: inject('localeData', {}),
@@ -16,8 +20,9 @@ export default {
   },
   methods: {
     getLocale() {
-      const { componentName, defaultLocale } = this;
-      const locale = defaultLocale || defaultLocaleData[componentName || 'global'];
+      const { componentName = 'global', defaultLocale } = this;
+      const locale =
+        defaultLocale || (defaultLocaleData as LocaleInterface)[componentName || 'global'];
       const { antLocale } = this.localeData;
 
       const localeFromContext = componentName && antLocale ? antLocale[componentName] : {};
@@ -43,4 +48,4 @@ export default {
     const { antLocale } = this.localeData;
     return children?.(this.getLocale(), this.getLocaleCode(), antLocale);
   },
-};
+});

@@ -1,25 +1,33 @@
-import { provide } from 'vue';
+import { provide, App, defineComponent, VNode } from 'vue';
 import PropTypes from '../_util/vue-types';
 import * as moment from 'moment';
 import interopDefault from '../_util/interopDefault';
-import { changeConfirmLocale } from '../modal/locale';
+import { ModalLocale, changeConfirmLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { getSlot } from '../_util/props-util';
-// export interface Locale {
-//   locale: string;
-//   Pagination?: Object;
-//   DatePicker?: Object;
-//   TimePicker?: Object;
-//   Calendar?: Object;
-//   Table?: Object;
-//   Modal?: ModalLocale;
-//   Popconfirm?: Object;
-//   Transfer?: Object;
-//   Select?: Object;
-//   Upload?: Object;
-// }
+export interface Locale {
+  locale: string;
+  Pagination?: Object;
+  DatePicker?: Object;
+  TimePicker?: Object;
+  Calendar?: Object;
+  Table?: Object;
+  Modal?: ModalLocale;
+  Popconfirm?: Object;
+  Transfer?: Object;
+  Select?: Object;
+  Upload?: Object;
+}
+
+export interface LocaleProviderProps {
+  locale: Locale;
+  children?: VNode | VNode[];
+  _ANT_MARK__?: string;
+}
+
 export const ANT_MARK = 'internalMark';
-function setMomentLocale(locale) {
+
+function setMomentLocale(locale?: Locale) {
   if (locale && locale.locale) {
     interopDefault(moment).locale(locale.locale);
   } else {
@@ -27,7 +35,7 @@ function setMomentLocale(locale) {
   }
 }
 
-const LocaleProvider = {
+const LocaleProvider = defineComponent({
   name: 'ALocaleProvider',
   props: {
     locale: PropTypes.object.def(() => ({})),
@@ -68,10 +76,10 @@ const LocaleProvider = {
   render() {
     return getSlot(this);
   },
-};
+});
 
 /* istanbul ignore next */
-LocaleProvider.install = function(app) {
+LocaleProvider.install = function(app: App) {
   app.component(LocaleProvider.name, LocaleProvider);
 };
 

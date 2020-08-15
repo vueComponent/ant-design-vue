@@ -79,6 +79,8 @@
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "@octokit/rest": "^16.0.0",
+    "@types/classnames": "^2.2.10",
+    "@types/lodash": "^4.14.159",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/compiler-sfc": "^3.0.0-rc.5",
     "@vue/server-test-utils": "1.0.0-beta.16",

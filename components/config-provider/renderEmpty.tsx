@@ -9,7 +9,7 @@ const RenderEmpty = {
   },
   setup(props) {
     const configProvider = inject('configProvider', ConfigConsumerProps);
-    function renderHtml(componentName) {
+    function renderHtml(componentName: string) {
       const getPrefixCls = configProvider.getPrefixCls;
       const prefix = getPrefixCls('empty');
       switch (componentName) {

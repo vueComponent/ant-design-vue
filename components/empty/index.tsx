@@ -75,9 +75,6 @@ const Empty = defineComponent<EmptyProps>({
       />
     );
   },
-  render() {
-    return <LocaleReceiver componentName="Empty" children={this.renderEmpty} />;
-  },
 });
 
 Empty.PRESENTED_IMAGE_DEFAULT = defaultEmptyImg;

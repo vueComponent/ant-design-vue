@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import Vue from 'vue';
+import { App } from 'vue';
 
 import { Affix } from './affix';
 import { Anchor } from './anchor/anchor';
@@ -73,7 +73,7 @@ import { PageHeader } from './page-header';
  * Please do not invoke this method directly.
  * Call `Vue.use(Antd)` to install.
  */
-export function install(vue: typeof Vue): void;
+export function install(app: App): void;
 
 declare const message: Message;
 declare const notification: Notification;

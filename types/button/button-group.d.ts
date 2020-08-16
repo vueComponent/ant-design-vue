@@ -9,6 +9,6 @@ export declare class ButtonGroup {
      * @default 'default'
      * @type string
      */
-    size: 'small' | 'large' | 'default';
+    size?: 'small' | 'large' | 'default';
   };
 }

@@ -8,20 +8,20 @@ export declare class CheckboxGroup {
      * Default selected value
      * @type string[]
      */
-    defaultValue: string[];
+    defaultValue?: string[];
 
     /**
      * Disable all checkboxes
      * @default false
      * @type boolean
      */
-    disabled: boolean;
+    disabled?: boolean;
 
     /**
      * Specifies options, you can customize `label` with slot = "label" slot-scope = "option"
      * @type Array<string | { label: string, value: string, disabled?: boolean, onChange?: Function }>
      */
-    options: Array<
+    options?: Array<
       string | { label: string; value: string; disabled?: boolean; onChange?: Function }
     >;
 
@@ -31,5 +31,11 @@ export declare class CheckboxGroup {
      */
     value: string[];
     name?: string;
+
+    /**
+     * The callback function that is triggered when the state changes.
+     * @param e
+     */
+    onChange?: (checkedValue?: any) => void;
   };
 }

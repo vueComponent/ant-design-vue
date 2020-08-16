@@ -68,5 +68,7 @@ export declare class Button {
      * @type boolean
      */
     block: boolean;
+
+    onClick?: (e?: Event) => void;
   };
 }

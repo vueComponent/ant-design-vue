@@ -13,6 +13,14 @@ export interface ColumnFilterItem {
 
 export declare type SortOrder = 'ascend' | 'descend';
 
+export interface Record {
+  text?: any;
+  record?: object;
+  index?: number;
+}
+
+export declare type CustomRenderFunction = (record: Record) => VNodeChild | JSX.Element;
+
 export declare class Column extends AntdComponent {
   $props: {
     /**
@@ -116,7 +124,7 @@ export declare class Column extends AntdComponent {
      * Renderer of the table cell. The return value should be a VNode, or an object for colSpan/rowSpan config
      * @type Function | ScopedSlot
      */
-    customRender?: Function | VNodeChild;
+    customRender?: CustomRenderFunction | VNodeChild | JSX.Element;
 
     /**
      * Sort function for local sort, see Array.sort's compareFunction. If you need sort buttons only, set to true
@@ -141,7 +149,7 @@ export declare class Column extends AntdComponent {
      * Title of this column
      * @type any (string | slot)
      */
-    title?: string | VNodeChild;
+    title?: VNodeChild | JSX.Element;
 
     /**
      * Width of this column

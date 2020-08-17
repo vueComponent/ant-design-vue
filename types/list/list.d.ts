@@ -28,7 +28,7 @@ export class List extends AntdComponent {
      * List footer renderer
      * @type any (string | slot)
      */
-    footer?: string | VNodeChild;
+    footer?: VNodeChild | JSX.Element;
 
     /**
      * The grid type of list. You can set grid to something like {gutter: 16, column: 4}
@@ -49,7 +49,7 @@ export class List extends AntdComponent {
      * List header renderer
      * @type any (string | slot)
      */
-    header?: string | VNodeChild;
+    header?: VNodeChild | JSX.Element;
 
     /**
      * The layout of list, default is horizontal,
@@ -70,7 +70,7 @@ export class List extends AntdComponent {
      * Shows a load more content
      * @type any (string | slot)
      */
-    loadMore?: string | VNodeChild;
+    loadMore?: VNodeChild | JSX.Element;
 
     /**
      * i18n text including empty text
@@ -103,7 +103,7 @@ export class List extends AntdComponent {
      * @default null
      * @type Function
      */
-    renderItem?: (item: any, index?: number) => VNodeChild;
+    renderItem?: (item: any, index?: number) => VNodeChild | JSX.Element;
 
     /**
      * Specify the key that will be used for uniquely identify each element

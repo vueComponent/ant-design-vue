@@ -28,7 +28,7 @@ export interface customSelection {
    * @default undefined
    * @type string | VNode
    */
-  text?: string | VNodeChild;
+  text?: string | VNodeChild | JSX.Element;
 
   /**
    * On Select
@@ -36,7 +36,7 @@ export interface customSelection {
    * @default undefined
    * @type Function
    */
-  onSelect?: (changeableRowKeys?: any) => any;
+  onSelect?: (changeableRowKeys?: any[]) => any;
 }
 
 export interface TableRowSelection {
@@ -88,7 +88,7 @@ export interface TableRowSelection {
    * Set the title of the selection column
    * @type string | VNode
    */
-  columnTitle?: string | VNodeChild;
+  columnTitle?: VNodeChild | JSX.Element;
 
   /**
    * Callback executed when selected rows change
@@ -181,7 +181,7 @@ export declare class Table extends AntdComponent {
      * Customize row expand Icon.
      * @type Function | VNodeChild
      */
-    expandIcon?: Function | VNodeChild;
+    expandIcon?: Function | VNodeChild | JSX.Element;
 
     /**
      * Whether to expand row by clicking anywhere in the whole row
@@ -199,7 +199,7 @@ export declare class Table extends AntdComponent {
      * Table footer renderer
      * @type Function | VNodeChild
      */
-    footer?: Function | VNodeChild;
+    footer?: Function | VNodeChild | JSX.Element;
 
     /**
      * Indent size in pixels of tree data
@@ -213,7 +213,7 @@ export declare class Table extends AntdComponent {
      * @default false
      * @type boolean | object
      */
-    loading?: boolean | Spin | VNodeChild;
+    loading?: boolean | Spin | VNodeChild | JSX.Element;
 
     /**
      * i18n text including filter, sort, empty text, etc
@@ -273,7 +273,7 @@ export declare class Table extends AntdComponent {
      * Table title renderer
      * @type Function | ScopedSlot
      */
-    title?: Function | VNodeChild;
+    title?: Function | VNodeChild | JSX.Element;
 
     /**
      * Set props on per header row

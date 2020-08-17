@@ -11,7 +11,7 @@ export declare class ColumnGroup extends AntdComponent {
      * Title of the column group
      * @type any
      */
-    title?: string | VNodeChild;
+    title?: VNodeChild | JSX.Element;
 
     /**
      * When using columns, you can use this property to configure the properties that support the slot,

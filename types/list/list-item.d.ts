@@ -15,13 +15,13 @@ export declare class ListItem extends AntdComponent {
      * otherwise shows content on the far right.
      * @type any (VNode[] | slot)
      */
-    actions?: VNodeChild;
+    actions?: VNodeChild | JSX.Element;
 
     /**
      * The extra content of list item. If itemLayout is vertical, shows the content on right,
      * otherwise shows content on the far right.
      * @type any (string | slot)
      */
-    extra?: string | VNodeChild;
+    extra?: VNodeChild | JSX.Element;
   };
 }

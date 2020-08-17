@@ -115,6 +115,16 @@ export interface TableRowSelection {
   onSelectInvert?: (selectedRows: Object[]) => any;
 }
 
+export interface TableCustomRecord {
+  record?: any;
+  index?: number;
+}
+
+export interface ExpandedRowRenderRecord extends TableCustomRecord {
+  indent?: number;
+  expanded?: boolean;
+}
+
 export declare class Table extends AntdComponent {
   static Column: typeof Column;
   static ColumnGroup: typeof ColumnGroup;
@@ -175,7 +185,7 @@ export declare class Table extends AntdComponent {
      * Expanded container render for each row
      * @type Function
      */
-    expandedRowRender?: (record: any, index: number, indent: number, expanded: boolean) => any;
+    expandedRowRender?: (record?: ExpandedRowRenderRecord) => any;
 
     /**
      * Customize row expand Icon.
@@ -232,7 +242,7 @@ export declare class Table extends AntdComponent {
      * Row's className
      * @type Function
      */
-    rowClassName?: (record: any, index: number) => string;
+    rowClassName?: (record?: TableCustomRecord) => string;
 
     /**
      * Row's unique key, could be a string or function that returns a string
@@ -279,33 +289,13 @@ export declare class Table extends AntdComponent {
      * Set props on per header row
      * @type Function
      */
-    customHeaderRow?: (
-      column: any,
-      index: number,
-    ) => {
-      props: object;
-      attrs: object;
-      on: object;
-      class: object;
-      style: object;
-      nativeOn: object;
-    };
+    customHeaderRow?: (column: any, index: number) => object;
 
     /**
      * Set props on per row
      * @type Function
      */
-    customRow?: (
-      record: any,
-      index: number,
-    ) => {
-      props: object;
-      attrs: object;
-      on: object;
-      class: object;
-      style: object;
-      nativeOn: object;
-    };
+    customRow?: (record: any, index: number) => object;
 
     /**
      * `table-layout` attribute of table element

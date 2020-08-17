@@ -161,32 +161,13 @@ export declare class Column extends AntdComponent {
      * Set props on per cell
      * @type Function
      */
-    customCell?: (
-      record: any,
-      rowIndex: number,
-    ) => {
-      props: object;
-      attrs: object;
-      on: object;
-      class: object;
-      style: object;
-      nativeOn: object;
-    };
+    customCell?: (record: any, rowIndex: number) => object;
 
     /**
      * Set props on per header cell
      * @type object
      */
-    customHeaderCell?: (
-      column: any,
-    ) => {
-      props: object;
-      attrs: object;
-      on: object;
-      class: object;
-      style: object;
-      nativeOn: object;
-    };
+    customHeaderCell?: (column: any) => object;
 
     /**
      * Callback executed when the confirm filter button is clicked, Use as a filter event when using template or jsx
@@ -206,12 +187,5 @@ export declare class Column extends AntdComponent {
      * @type object
      */
     slots?: object;
-
-    /**
-     * When using columns, you can use this property to configure the properties that support the slot-scope,
-     * such as scopedSlots: { customRender: 'XXX'}
-     * @type object
-     */
-    scopedSlots?: object;
   };
 }

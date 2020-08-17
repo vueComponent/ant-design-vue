@@ -13,6 +13,11 @@ export declare class PaginationConfig extends Pagination {
   position?: 'top' | 'bottom' | 'both';
 }
 
+export interface Item {
+  item?: any;
+  index?: number;
+}
+
 export class List extends AntdComponent {
   static Item: typeof ListItem;
 
@@ -99,11 +104,11 @@ export class List extends AntdComponent {
     dataSource?: any[];
 
     /**
-     * Custom item renderer, slot="renderItem" and slot-scope="item, index"
+     * Custom item renderer, slot="renderItem" and slot-scope="{ item, index }"
      * @default null
-     * @type Function
+     * @type Function()
      */
-    renderItem?: (item: any, index?: number) => VNodeChild | JSX.Element;
+    renderItem?: (item?: Item) => VNodeChild | JSX.Element;
 
     /**
      * Specify the key that will be used for uniquely identify each element

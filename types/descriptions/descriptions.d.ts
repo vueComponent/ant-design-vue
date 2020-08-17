@@ -6,6 +6,15 @@ import { VNodeChild } from 'vue';
 import { AntdComponent } from '../component';
 import { DescriptionsItem } from './descriptions-item';
 
+type Breakpoint = {
+  xs: number;
+  sm: number;
+  md: number;
+  lg: number;
+  xl: number;
+  xxl: number;
+};
+
 export declare class Descriptions extends AntdComponent {
   static Item: typeof DescriptionsItem;
 
@@ -41,7 +50,7 @@ export declare class Descriptions extends AntdComponent {
      * @default 3
      * @type number | object
      */
-    column?: number | object;
+    column?: number | Partial<Breakpoint>;
 
     /**
      * descriptions layout

@@ -4,7 +4,7 @@
 
 import { AntdComponent } from './component';
 import { TreeNode } from './tree-node';
-import { VNodeChild } from 'vue';
+import { VNodeChild, CSSProperties } from 'vue';
 
 export interface TreeData {
   key: string | number;
@@ -31,7 +31,7 @@ export declare class TreeSelect extends AntdComponent {
   $props: {
     treeIcon?: boolean;
 
-    notFoundContent?: any;
+    notFoundContent?: VNodeChild | JSX.Element;
 
     /**
      * Whether allow clear
@@ -66,7 +66,7 @@ export declare class TreeSelect extends AntdComponent {
      * To set the style of the dropdown menu
      * @type object
      */
-    dropdownStyle?: object;
+    dropdownStyle?: CSSProperties;
 
     /**
      * Whether to filter treeNodes by input value. The value of treeNodeFilterProp is used for filtering by default.
@@ -92,13 +92,20 @@ export declare class TreeSelect extends AntdComponent {
 
     /**
      * Load data asynchronously.
-     * @type
+     * @param node
      */
-    loadData?: (node: any) => void;
+    loadData?: (node: object) => Promise<void>;
 
+    /**
+     * Max tag count to show
+     */
     maxTagCount?: number;
 
-    maxTagPlaceholder?: any;
+    /**
+     * Placeholder for not showing tags
+     * @param omittedValues
+     */
+    maxTagPlaceholder?: (omittedValues: any[]) => VNodeChild | JSX.Element;
 
     /**
      * Support multiple or not, will be true when enable treeCheckable.
@@ -225,11 +232,11 @@ export declare class TreeSelect extends AntdComponent {
      * The custom suffix icon
      * @type any (VNode | slot)
      */
-    suffixIcon?: any;
+    suffixIcon?: VNodeChild | JSX.Element;
 
-    removeIcon?: any;
+    removeIcon?: VNodeChild | JSX.Element;
 
-    clearIcon?: any;
+    clearIcon?: VNodeChild | JSX.Element;
 
     replaceFields?: ReplaceFields | object;
 
@@ -240,13 +247,13 @@ export declare class TreeSelect extends AntdComponent {
      * @param label
      * @param extra
      */
-    onChange?: (value: any, label: any, extra: any) => void;
+    onChange?: (value?: any, label?: any, extra?: any) => void;
 
     /**
      * A callback function, can be executed when the search input changes.
      * @param value
      */
-    onSearch?: (value: string) => void;
+    onSearch?: (value?: string) => void;
 
     /**
      * A callback function, can be executed when you select a treeNode.
@@ -254,13 +261,13 @@ export declare class TreeSelect extends AntdComponent {
      * @param label
      * @param extra
      */
-    onSelect?: (value: any, label: any, extra: any) => void;
+    onSelect?: (value?: any, label?: any, extra?: any) => void;
 
     /**
      * A callback function, can be executed when treeNode expanded
      * @param expandedKeys
      */
-    onTreeExpand?: (expandedKeys: any[]) => void;
+    onTreeExpand?: (expandedKeys?: any[]) => void;
   };
 
   /**

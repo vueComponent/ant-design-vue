@@ -9,46 +9,46 @@ import { RadioButton } from './radio-button';
 export declare class Radio extends AntdComponent {
   static Group: typeof RadioGroup;
   static Button: typeof RadioButton;
-
-  /**
+  $props: {
+    /**
    * get focus when component mounted
    * @default false
    * @type boolean
    */
-  autofocus?: boolean;
+    autofocus?: boolean;
 
-  /**
-   * Specifies whether the radio is selected.
-   * @type boolean
-   */
-  checked?: boolean;
+    /**
+     * Specifies whether the radio is selected.
+     * @type boolean
+     */
+    checked?: boolean;
 
-  /**
-   * Specifies the initial state: whether or not the radio is selected.
-   * @type boolean
-   */
-  defaultChecked?: boolean;
+    /**
+     * Specifies the initial state: whether or not the radio is selected.
+     * @type boolean
+     */
+    defaultChecked?: boolean;
 
-  /**
-   * Disable radio
-   * @default false
-   * @type boolean
-   */
-  disabled?: boolean;
+    /**
+     * Disable radio
+     * @default false
+     * @type boolean
+     */
+    disabled?: boolean;
 
-  /**
-   * According to value for comparison, to determine whether the selected
-   * @type any
-   */
-  value?: any;
-
+    /**
+     * According to value for comparison, to determine whether the selected
+     * @type any
+     */
+    value?: any;
+  }
   /**
    * remove focus
    */
-  blur()?: void;
+  blur(): void;
 
   /**
    * get focus
    */
-  focus()?: void;
+  focus(): void;
 }

@@ -5,10 +5,12 @@
 import { AntdComponent } from '../component';
 
 export declare class CheckableTag extends AntdComponent {
-  /**
-   * Checked status of Tag
-   * @default false
-   * @type boolean
-   */
-  checked: boolean;
+  $props: {
+    /**
+     * Checked status of Tag
+     * @default false
+     * @type boolean
+     */
+    checked?: boolean;
+  };
 }

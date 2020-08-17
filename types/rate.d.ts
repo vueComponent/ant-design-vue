@@ -10,65 +10,65 @@ export declare class Rate extends AntdComponent {
    * @default true
    * @type boolean
    */
-  allowClear: boolean;
+  allowClear?: boolean;
 
   /**
    * whether to allow semi selection
    * @default false
    * @type boolean
    */
-  allowHalf: boolean;
+  allowHalf?: boolean;
 
   /**
    * get focus when component mounted
    * @default false
    * @type boolean
    */
-  autofocus: boolean;
+  autofocus?: boolean;
 
   /**
    * custom character of rate
    * @default <StarOutlined />
    * @type any (String or slot="character")
    */
-  character: any;
+  character?: string | VNodeChild | JSX.Element;
 
   /**
    * star count
    * @default 5
    * @type number
    */
-  count: number;
+  count?: number;
 
   /**
    * default value
    * @default 0
    * @type number
    */
-  defaultValue: number;
+  defaultValue?: number;
 
   /**
    * read only, unable to interact
    * @default false
    * @type boolean
    */
-  disabled: boolean;
+  disabled?: boolean;
 
   /**
    * current value
    * @type number
    */
-  value: number;
+  value?: number;
 
-  tooltips: Array<string>;
+  tooltips?: Array<string>;
 
   /**
    * remove focus
    */
-  blur(): void;
+  blur()?: void;
 
   /**
    * get focus
    */
-  focus(): void;
+  focus()?: void;
 }

@@ -20,25 +20,25 @@ export declare class Row extends AntdComponent {
    * @default 0
    * @type numner | object
    */
-  gutter: Gutter | [Gutter, Gutter];
+  gutter?: Gutter | [Gutter, Gutter];
 
   /**
    * layout mode, optional flex
    * @type string
    */
-  type: string;
+  type?: string;
 
   /**
    * the vertical alignment of the flex layout: top middle bottom
    * @default 'top'
    * @type string
    */
-  align: 'top' | 'middle' | 'bottom';
+  align?: 'top' | 'middle' | 'bottom';
 
   /**
    * horizontal arrangement of the flex layout: start end center space-around space-between
    * @default 'start'
    * @type string
    */
-  justify: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
+  justify?: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
 }

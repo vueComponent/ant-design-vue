@@ -3,6 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
+import { VNodeChild } from 'vue';
 
 export declare class PageHeader extends AntdComponent {
   /**
@@ -10,52 +11,52 @@ export declare class PageHeader extends AntdComponent {
    * @default <ArrowLeftOutlined />
    * @type any (string | slot)
    */
-  backIcon: any;
+  backIcon?: string | VNodeChild | JSX.Element;
 
   /**
    * Custom prefixCls
    * @type string
    */
-  prefixCls: string;
+  prefixCls?: string;
 
   /**
    * Custom title
    * @type any (string | slot)
    */
-  title: any;
+  title?: string | VNodeChild | JSX.Element;
 
   /**
    * Custom subTitle
    * @type any (string | slot)
    */
-  subTitle: any;
+  subTitle?: string | VNodeChild | JSX.Element;
 
-  breadcrumb: object;
+  breadcrumb?: object;
 
   /**
    * Custom tags
    * @type any (string | slot)
    */
-  tags: any;
+  tags?: string | VNodeChild | JSX.Element;
 
   /**
    * Custom footer
    * @type any (string | slot)
    */
-  footer: any;
+  footer?: string | VNodeChild | JSX.Element;
 
   /**
    * Custom extra
    * @type any (string | slot)
    */
-  extra: any;
+  extra?: string | VNodeChild | JSX.Element;
 
-  avatar: object;
+  avatar?: object;
 
-  ghost: boolean;
+  ghost?: boolean;
 
   /**
    * Specify a callback that will be called when a user clicks backIcon.
    */
-  back(): void;
+  back()?: void;
 }

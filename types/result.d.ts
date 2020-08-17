@@ -1,7 +1,7 @@
 import { VNodeChild } from 'vue';
 import { AntdComponent } from './component';
 
-export declare class Result {
+export declare class Result extends AntdComponent {
   $props: {
     /**
      * result title

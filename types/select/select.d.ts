@@ -5,8 +5,11 @@
 import { AntdComponent } from '../component';
 import { Option } from './option';
 import { OptionGroup } from './option-group';
-import { VNodeChild } from 'vue';
-
+import { VNodeChild, CSSProperties } from 'vue';
+type dropdownRenderProps = {
+  menu?: VNodeChild,
+  props?: object
+}
 export declare class Select extends AntdComponent {
   static Option: typeof Option;
   static OptGroup: typeof OptionGroup;
@@ -69,13 +72,13 @@ export declare class Select extends AntdComponent {
      * Customize dropdown content
      * @type function | slot-scope
      */
-    dropdownRender?: (menu?: VNodeChild, props?: object) => VNodeChild;
+    dropdownRender?: (props:dropdownRenderProps) => VNodeChild;
 
     /**
      * style of dropdown menu
      * @type object
      */
-    dropdownStyle?: object;
+    dropdownStyle?: CSSProperties;
 
     /**
      * If true, filter options by input, if function, filter options against it. The function will receive two arguments, inputValue and option,
@@ -243,11 +246,11 @@ export declare class Select extends AntdComponent {
     /**
      * remove focus
      */
-    onBlur:(e?: Event) => void
+    onBlur: (e?: Event) => void
 
     /**
      * get focus
      */
-    onFocus:(e?: Event) => void
+    onFocus: (e?: Event) => void
   }
 }

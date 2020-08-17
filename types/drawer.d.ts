@@ -113,12 +113,12 @@ export declare class Drawer extends AntdComponent {
      * @type string
      */
     placement?: 'top' | 'right' | 'bottom' | 'left';
-    afterVisibleChange?: (visible: boolean) => void;
+    afterVisibleChange?: (visible?: boolean) => void;
     keyboard?: boolean;
 
     /**
      * Specify a callback that will be called when a user clicks mask, close button or Cancel button.
      */
-    close?: (e: Event) => void;
+    onClose?: (e: Event) => void;
   };
 }

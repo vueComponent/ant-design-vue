@@ -3,65 +3,68 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { VNode } from 'vue';
+import { VNodeChild, CSSProperties } from 'vue';
 
 export declare class Badge extends AntdComponent {
-  color: string;
-  /**
-   * Number to show in badge, support slot
-   * @type number | string | VNode
-   */
-  count: number | string | VNode;
+  $props: {
+    color?: string;
 
-  /**
-   * to display a red dot instead of count
-   * @default false
-   * @type boolean
-   */
-  dot: boolean;
+    /**
+     * Number to show in badge, support slot
+     * @type number | string | VNode
+     */
+    count?: number | VNodeChild | JSX.Element;
 
-  /**
-   * set offset of the badge dot, like [x, y]
-   * @type Array<number | string>
-   */
-  offset: Array<number | string>;
+    /**
+     * to display a red dot instead of count
+     * @default false
+     * @type boolean
+     */
+    dot?: boolean;
 
-  /**
-   * Max count to show
-   * @default 99
-   * @type number
-   */
-  overflowCount: number;
+    /**
+     * set offset of the badge dot, like [x, y]
+     * @type Array<number | string>
+     */
+    offset?: Array<number | string>;
 
-  /**
-   * Whether to show badge when count is zero
-   * @default false
-   * @type boolean
-   */
-  showZero: boolean;
+    /**
+     * Max count to show
+     * @default 99
+     * @type number
+     */
+    overflowCount?: number;
 
-  /**
-   * Set Badge as a status dot
-   * @type string
-   */
-  status: 'success' | 'processing' | 'default' | 'error' | 'warning';
+    /**
+     * Whether to show badge when count is zero
+     * @default false
+     * @type boolean
+     */
+    showZero?: boolean;
 
-  /**
-   * If status is set, text sets the display text of the status dot
-   * @type string
-   */
-  text: string;
+    /**
+     * Set Badge as a status dot
+     * @type string
+     */
+    status?: 'success' | 'processing' | 'default' | 'error' | 'warning';
 
-  /**
-   * sets the display style of the status dot
-   * @type
-   */
-  numberStyle: object;
+    /**
+     * If status is set, text sets the display text of the status dot
+     * @type string
+     */
+    text?: string;
 
-  /**
-   * Text to show when hovering over the badge
-   * @default 'count'
-   * @type string
-   */
-  title: string;
+    /**
+     * sets the display style of the status dot
+     * @type
+     */
+    numberStyle?: CSSProperties | string;
+
+    /**
+     * Text to show when hovering over the badge
+     * @default 'count'
+     * @type string
+     */
+    title?: string;
+  };
 }

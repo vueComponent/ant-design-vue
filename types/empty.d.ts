@@ -5,7 +5,7 @@
 import { AntdComponent } from './component';
 import { VNodeChild, CSSProperties } from 'vue';
 
-export declare class Empty {
+export declare class Empty extends AntdComponent {
   $props: {
     /**
      * customize description

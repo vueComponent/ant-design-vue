@@ -119,6 +119,6 @@ export declare class Drawer extends AntdComponent {
     /**
      * Specify a callback that will be called when a user clicks mask, close button or Cancel button.
      */
-    onClose?: (e: Event) => void;
+    onClose?: (e?: Event) => void;
   };
 }

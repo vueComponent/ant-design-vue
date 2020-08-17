@@ -32,7 +32,7 @@ export const PaginationProps = () => ({
   locale: PropTypes.object,
   prefixCls: PropTypes.string,
   selectPrefixCls: PropTypes.string,
-  itemRender: PropTypes.any,
+  itemRender: PropTypes.func,
   role: PropTypes.string,
   showLessItems: PropTypes.bool,
 });
@@ -116,6 +116,7 @@ export default {
         buildOptionText: buildOptionText || this.$slots.buildOptionText,
         ...this.$attrs,
         class: classNames({ mini: isSmall }, this.$attrs.class),
+        itemRender: this.itemRender || this.$slots.itemRender,
       };
 
       return <VcPagination {...paginationProps} />;

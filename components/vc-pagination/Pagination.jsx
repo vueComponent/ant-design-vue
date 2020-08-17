@@ -14,8 +14,8 @@ function isInteger(value) {
   return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
 }
 
-function defaultItemRender(page, type, element) {
-  return element;
+function defaultItemRender({ originalElement }) {
+  return originalElement;
 }
 
 function calculatePage(p, state, props) {
@@ -52,7 +52,7 @@ export default {
     showTotal: PropTypes.func,
     simple: PropTypes.bool,
     locale: PropTypes.object.def(LOCALE),
-    itemRender: PropTypes.func.def(defaultItemRender),
+    itemRender: PropTypes.func,
     prevIcon: PropTypes.any,
     nextIcon: PropTypes.any,
     jumpPrevIcon: PropTypes.any,
@@ -315,6 +315,7 @@ export default {
     if (this.hideOnSinglePage === true && this.total <= this.statePageSize) {
       return null;
     }
+    const itemRender = this.itemRender || defaultItemRender;
     const props = this.$props;
     const locale = this.locale;
 
@@ -368,7 +369,11 @@ export default {
             class={`${hasPrev ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
             aria-disabled={!this.hasPrev()}
           >
-            {this.itemRender(prevPage, 'prev', this.getItemIcon('prevIcon'))}
+            {itemRender({
+              page: prevPage,
+              type: 'prev',
+              originalElement: this.getItemIcon('prevIcon'),
+            })}
           </li>
           <li
             title={this.showTitle ? `${stateCurrent}/${allPages}` : null}
@@ -394,7 +399,11 @@ export default {
             class={`${hasNext ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
             aria-disabled={!this.hasNext()}
           >
-            {this.itemRender(nextPage, 'next', this.getItemIcon('nextIcon'))}
+            {itemRender({
+              page: nextPage,
+              type: 'next',
+              originalElement: this.getItemIcon('nextIcon'),
+            })}
           </li>
           {gotoButton}
         </ul>
@@ -405,7 +414,7 @@ export default {
         locale,
         rootPrefixCls: prefixCls,
         showTitle: props.showTitle,
-        itemRender: props.itemRender,
+        itemRender,
         onClick: this.handleChange,
         onKeypress: this.runIfEnter,
       };
@@ -435,7 +444,11 @@ export default {
             onKeypress={this.runIfEnterJumpPrev}
             class={jumpPrevClassString}
           >
-            {this.itemRender(this.getJumpPrevPage(), 'jump-prev', this.getItemIcon('jumpPrevIcon'))}
+            {itemRender({
+              page: this.getJumpPrevPage(),
+              type: 'jump-prev',
+              originalElement: this.getItemIcon('jumpPrevIcon'),
+            })}
           </li>
         );
         let jumpNextClassString = `${prefixCls}-jump-next`;
@@ -451,7 +464,11 @@ export default {
             onKeypress={this.runIfEnterJumpNext}
             class={jumpNextClassString}
           >
-            {this.itemRender(this.getJumpNextPage(), 'jump-next', this.getItemIcon('jumpNextIcon'))}
+            {itemRender({
+              page: this.getJumpNextPage(),
+              type: 'jump-next',
+              originalElement: this.getItemIcon('jumpNextIcon'),
+            })}
           </li>
         );
       }
@@ -467,7 +484,7 @@ export default {
           page={allPages}
           active={false}
           showTitle={this.showTitle}
-          itemRender={this.itemRender}
+          itemRender={itemRender}
         />
       );
       firstPager = (
@@ -480,7 +497,7 @@ export default {
           page={1}
           active={false}
           showTitle={this.showTitle}
-          itemRender={this.itemRender}
+          itemRender={itemRender}
         />
       );
 
@@ -507,7 +524,7 @@ export default {
             page={i}
             active={active}
             showTitle={this.showTitle}
-            itemRender={this.itemRender}
+            itemRender={itemRender}
           />,
         );
       }
@@ -524,7 +541,7 @@ export default {
             class={`${prefixCls}-item-after-jump-prev`}
             active={false}
             showTitle={this.showTitle}
-            itemRender={this.itemRender}
+            itemRender={itemRender}
           />
         );
         pagerList.unshift(jumpPrev);
@@ -541,7 +558,7 @@ export default {
             class={`${prefixCls}-item-before-jump-next`}
             active={false}
             showTitle={this.showTitle}
-            itemRender={this.itemRender}
+            itemRender={itemRender}
           />
         );
         pagerList.push(jumpNext);
@@ -589,7 +606,11 @@ export default {
           class={`${!prevDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-prev`}
           aria-disabled={prevDisabled}
         >
-          {this.itemRender(prevPage, 'prev', this.getItemIcon('prevIcon'))}
+          {itemRender({
+            page: prevPage,
+            type: 'prev',
+            originalElement: this.getItemIcon('prevIcon'),
+          })}
         </li>
         {pagerList}
         <li
@@ -600,7 +621,11 @@ export default {
           class={`${!nextDisabled ? '' : `${prefixCls}-disabled`} ${prefixCls}-next`}
           aria-disabled={nextDisabled}
         >
-          {this.itemRender(nextPage, 'next', this.getItemIcon('nextIcon'))}
+          {itemRender({
+            page: nextPage,
+            type: 'next',
+            originalElement: this.getItemIcon('nextIcon'),
+          })}
         </li>
         <Options
           disabled={disabled}

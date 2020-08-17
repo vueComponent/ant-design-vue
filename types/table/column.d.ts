@@ -3,8 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from '../component';
-import { VNode } from 'vue';
-import { ScopedSlot } from 'vue/types/vnode';
+import { VNodeChild } from 'vue';
 
 export interface ColumnFilterItem {
   text?: string;
@@ -14,196 +13,179 @@ export interface ColumnFilterItem {
 
 export declare type SortOrder = 'ascend' | 'descend';
 
+export interface Record {
+  text?: any;
+  record?: object;
+  index?: number;
+}
+
+export declare type CustomRenderFunction = (record: Record) => VNodeChild | JSX.Element;
+
 export declare class Column extends AntdComponent {
-  /**
-   * specify how content is aligned
-   * @default 'left'
-   * @type string
-   */
-  align?: 'left' | 'right' | 'center';
-  
-  /**
-   * ellipsize cell content, not working with sorter and filters for now. 
-   * tableLayout would be fixed when ellipsis is true.
-   * @default false
-   * @type boolean
-   */
-  ellipsis?: boolean;
+  $props: {
+    /**
+     * specify how content is aligned
+     * @default 'left'
+     * @type string
+     */
+    align?: 'left' | 'right' | 'center';
 
+    /**
+     * ellipsize cell content, not working with sorter and filters for now.
+     * tableLayout would be fixed when ellipsis is true.
+     * @default false
+     * @type boolean
+     */
+    ellipsis?: boolean;
 
-  /**
-   * Span of this column's title
-   * @type number
-   */
-  colSpan?: number;
+    /**
+     * Span of this column's title
+     * @type number
+     */
+    colSpan?: number;
 
-  /**
-   * Display field of the data record, could be set like a.b.c
-   * @type string
-   */
-  dataIndex?: string;
-  
-  /**
-  * Default filtered values	
-  * @type string[]
-  */
-  defaultFilteredValue?: string[];
+    /**
+     * Display field of the data record, could be set like a.b.c
+     * @type string
+     */
+    dataIndex?: string;
 
-  /**
-   * Default order of sorted values: 'ascend' 'descend' null
-   * @type string
-   */
-  defaultSortOrder?: SortOrder;
+    /**
+     * Default filtered values
+     * @type string[]
+     */
+    defaultFilteredValue?: string[];
 
-  /**
-   * Customized filter overlay
-   * @type any (slot)
-   */
-  filterDropdown?: any;
+    /**
+     * Default order of sorted values: 'ascend' 'descend' null
+     * @type string
+     */
+    defaultSortOrder?: SortOrder;
 
-  /**
-   * Whether filterDropdown is visible
-   * @type boolean
-   */
-  filterDropdownVisible?: boolean;
+    /**
+     * Customized filter overlay
+     * @type any (slot)
+     */
+    filterDropdown?: any;
 
-  /**
-   * Whether the dataSource is filtered
-   * @default false
-   * @type boolean
-   */
-  filtered?: boolean;
+    /**
+     * Whether filterDropdown is visible
+     * @type boolean
+     */
+    filterDropdownVisible?: boolean;
 
-  /**
-   * Controlled filtered value, filter icon will highlight
-   * @type string[]
-   */
-  filteredValue?: string[];
+    /**
+     * Whether the dataSource is filtered
+     * @default false
+     * @type boolean
+     */
+    filtered?: boolean;
 
-  /**
-   * Customized filter icon
-   * @default false
-   * @type any
-   */
-  filterIcon?: any;
+    /**
+     * Controlled filtered value, filter icon will highlight
+     * @type string[]
+     */
+    filteredValue?: string[];
 
-  /**
-   * Whether multiple filters can be selected
-   * @default true
-   * @type boolean
-   */
-  filterMultiple?: boolean;
+    /**
+     * Customized filter icon
+     * @default false
+     * @type any
+     */
+    filterIcon?: any;
 
-  /**
-   * Filter menu config
-   * @type object[]
-   */
-  filters?: ColumnFilterItem[];
+    /**
+     * Whether multiple filters can be selected
+     * @default true
+     * @type boolean
+     */
+    filterMultiple?: boolean;
 
-  /**
-   * Set column to be fixed: true(same as left) 'left' 'right'
-   * @default false
-   * @type boolean | string
-   */
-  fixed?: boolean | 'left' | 'right';
+    /**
+     * Filter menu config
+     * @type object[]
+     */
+    filters?: ColumnFilterItem[];
 
-  /**
-   * Unique key of this column, you can ignore this prop if you've set a unique dataIndex
-   * @type string
-   */
-  key?: string;
+    /**
+     * Set column to be fixed: true(same as left) 'left' 'right'
+     * @default false
+     * @type boolean | string
+     */
+    fixed?: boolean | 'left' | 'right';
 
-  /**
-   * Renderer of the table cell. The return value should be a VNode, or an object for colSpan/rowSpan config
-   * @type Function | ScopedSlot
-   */
-  customRender?: Function | ScopedSlot;
+    /**
+     * Unique key of this column, you can ignore this prop if you've set a unique dataIndex
+     * @type string
+     */
+    key?: string;
 
-  /**
-   * Sort function for local sort, see Array.sort's compareFunction. If you need sort buttons only, set to true
-   * @type boolean | Function
-   */
-  sorter?: boolean | Function;
+    /**
+     * Renderer of the table cell. The return value should be a VNode, or an object for colSpan/rowSpan config
+     * @type Function | ScopedSlot
+     */
+    customRender?: CustomRenderFunction | VNodeChild | JSX.Element;
 
-  /**
-   * Order of sorted values: 'ascend' 'descend' false
-   * @type boolean | string
-   */
-  sortOrder?: boolean | SortOrder;
-  
-  /**
-  * supported sort way, could be 'ascend', 'descend'
-  * @default ['ascend', 'descend']
-  * @type string[]
-  */
-  sortDirections?: string[];
-  
-  /**
-   * Title of this column
-   * @type any (string | slot)
-   */
-  title?: any;
+    /**
+     * Sort function for local sort, see Array.sort's compareFunction. If you need sort buttons only, set to true
+     * @type boolean | Function
+     */
+    sorter?: boolean | Function;
 
-  /**
-   * Width of this column
-   * @type string | number
-   */
-  width?: string | number;
+    /**
+     * Order of sorted values: 'ascend' 'descend' false
+     * @type boolean | string
+     */
+    sortOrder?: boolean | SortOrder;
 
-  /**
-   * Set props on per cell
-   * @type Function
-   */
-  customCell?: (
-    record: any,
-    rowIndex: number,
-  ) => {
-    props: object;
-    attrs: object;
-    on: object;
-    class: object;
-    style: object;
-    nativeOn: object;
+    /**
+     * supported sort way, could be 'ascend', 'descend'
+     * @default ['ascend', 'descend']
+     * @type string[]
+     */
+    sortDirections?: string[];
+
+    /**
+     * Title of this column
+     * @type any (string | slot)
+     */
+    title?: VNodeChild | JSX.Element;
+
+    /**
+     * Width of this column
+     * @type string | number
+     */
+    width?: string | number;
+
+    /**
+     * Set props on per cell
+     * @type Function
+     */
+    customCell?: (record: any, rowIndex: number) => object;
+
+    /**
+     * Set props on per header cell
+     * @type object
+     */
+    customHeaderCell?: (column: any) => object;
+
+    /**
+     * Callback executed when the confirm filter button is clicked, Use as a filter event when using template or jsx
+     * @type Function
+     */
+    onFilter?: Function;
+
+    /**
+     * Callback executed when filterDropdownVisible is changed, Use as a filterDropdownVisible event when using template or jsx
+     * @type Function
+     */
+    onFilterDropdownVisibleChange?: (visible: boolean) => void;
+
+    /**
+     * When using columns, you can use this property to configure the properties that support the slot,
+     * such as slots: { filterIcon: 'XXX'}
+     * @type object
+     */
+    slots?: object;
   };
-
-  /**
-   * Set props on per header cell
-   * @type
-   */
-  customHeaderCell?: (
-    column: any,
-  ) => {
-    props: object;
-    attrs: object;
-    on: object;
-    class: object;
-    style: object;
-    nativeOn: object;
-  };
-
-  /**
-   * Callback executed when the confirm filter button is clicked, Use as a filter event when using template or jsx
-   * @type Function
-   */
-  onFilter?: Function;
-
-  /**
-   * Callback executed when filterDropdownVisible is changed, Use as a filterDropdownVisible event when using template or jsx
-   * @type Function
-   */
-  onFilterDropdownVisibleChange?: (visible: boolean) => void;
-
-  /**
-   * When using columns, you can use this property to configure the properties that support the slot,
-   * such as slots: { filterIcon: 'XXX'}
-   * @type object
-   */
-  slots?: object;
-
-  /**
-   * When using columns, you can use this property to configure the properties that support the slot-scope,
-   * such as scopedSlots: { customRender: 'XXX'}
-   * @type object
-   */
-  scopedSlots?: object;
 }

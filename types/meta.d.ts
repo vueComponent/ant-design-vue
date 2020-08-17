@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { VNodeChild } from 'vue';
 
 export declare class Meta {
   $props: {
@@ -10,18 +10,18 @@ export declare class Meta {
      * The avatar of list item
      * @type any (slot)
      */
-    avatar: any;
+    avatar?: VNodeChild;
 
     /**
      * The description of list item
      * @type any (string | slot)
      */
-    description: any;
+    description?: string | VNodeChild;
 
     /**
      * The title of list item
      * @type any (string | slot)
      */
-    title: any;
+    title?: string | VNodeChild;
   };
 }

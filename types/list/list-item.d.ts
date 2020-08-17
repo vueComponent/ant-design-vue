@@ -4,21 +4,24 @@
 
 import { AntdComponent } from '../component';
 import { Meta } from '../meta';
+import { VNodeChild } from 'vue';
 
 export declare class ListItem extends AntdComponent {
   static Meta: typeof Meta;
 
-  /**
-   * The actions content of list item. If itemLayout is vertical, shows the content on bottom,
-   * otherwise shows content on the far right.
-   * @type any (VNode[] | slot)
-   */
-  actions: any;
+  $props: {
+    /**
+     * The actions content of list item. If itemLayout is vertical, shows the content on bottom,
+     * otherwise shows content on the far right.
+     * @type any (VNode[] | slot)
+     */
+    actions?: VNodeChild | JSX.Element;
 
-  /**
-   * The extra content of list item. If itemLayout is vertical, shows the content on right,
-   * otherwise shows content on the far right.
-   * @type any (string | slot)
-   */
-  extra: any;
+    /**
+     * The extra content of list item. If itemLayout is vertical, shows the content on right,
+     * otherwise shows content on the far right.
+     * @type any (string | slot)
+     */
+    extra?: VNodeChild | JSX.Element;
+  };
 }

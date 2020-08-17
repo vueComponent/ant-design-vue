@@ -3,99 +3,106 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
+import { VNodeChild } from 'vue';
 
 export declare class TreeNode extends AntdComponent {
-  /**
-   * Class
-   * @description className
-   * @type string
-   */
-  class: string;
+  $props: {
+    /**
+     * Class
+     * @description className
+     * @type string
+     */
+    class?: string;
 
-  /**
-   * Style
-   * @description style of tree node
-   * @type string | object
-   */
-  style: string | object;
+    /**
+     * Style
+     * @description style of tree node
+     * @type string | object
+     */
+    style?: string | object;
 
-  /**
-   * Disable Checkbox
-   * @description Disables the checkbox of the treeNode
-   * @default false
-   * @type boolean
-   */
-  disableCheckbox: boolean;
+    /**
+     * When Tree is checkable, set TreeNode display Checkbox or not
+     * @version 1.5.0
+     */
+    checkable?: boolean;
 
-  /**
-   * Disabled
-   * @description Disabled or not
-   * @default false
-   * @type boolean
-   */
-  disabled: boolean;
+    /**
+     * Disable Checkbox
+     * @description Disables the checkbox of the treeNode
+     * @default false
+     * @type boolean
+     */
+    disableCheckbox?: boolean;
 
-  /**
-   * Icon
-   * @description customize icon. When you pass component, whose render will receive full TreeNode props as component props
-   * @type any (slot | slot-scope)
-   */
-  icon: any;
+    /**
+     * Disabled
+     * @description Disabled or not
+     * @default false
+     * @type boolean
+     */
+    disabled?: boolean;
 
-  /**
-   * Is Leaf?
-   * @description Leaf node or not
-   * @default false
-   * @type boolean
-   */
-  isLeaf: boolean;
+    /**
+     * Icon
+     * @description customize icon. When you pass component, whose render will receive full TreeNode props as component props
+     * @type any (slot | slot-scope)
+     */
+    icon?: VNodeChild | JSX.Element;
 
-  /**
-   * Key
-   * @description Required property, should be unique in the tree
-   * (In tree: Used with (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys)
-   * @default internal calculated position of treeNode or undefined
-   * @type string | number
-   */
-  key: string | number;
+    /**
+     * Is Leaf?
+     * @description Leaf node or not
+     * @default false
+     * @type boolean
+     */
+    isLeaf?: boolean;
 
-  /**
-   * Selectable
-   * @description Set whether the treeNode can be selected
-   * @default true
-   * @type boolean
-   */
-  selectable: boolean;
+    /**
+     * Key
+     * @description Required property, should be unique in the tree
+     * (In tree: Used with (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys)
+     * @default internal calculated position of treeNode or undefined
+     * @type string | number
+     */
+    key?: string | number;
 
-  /**
-   * Title
-   * @description Content showed on the treeNodes
-   * @default '---'
-   * @type any (string | slot)
-   */
-  title: any;
+    /**
+     * Selectable
+     * @description Set whether the treeNode can be selected
+     * @default true
+     * @type boolean
+     */
+    selectable?: boolean;
 
-  /**
-   * Value
-   * @description Will be treated as treeNodeFilterProp by default, should be unique in the tree
-   * @default undefined
-   * @type string
-   */
-  value: string;
+    /**
+     * Title
+     * @description Content showed on the treeNodes
+     * @default '---'
+     * @type any (string | slot)
+     */
+    title?: VNodeChild | JSX.Element;
 
-  /**
-   * Slots
-   * @description When using treeNodes, you can use this property to configure the properties that support the slot,
-   * such as slots: { title: 'XXX'}
-   * @type object
-   */
-  slots: object;
+    /**
+     * Value
+     * @description Will be treated as treeNodeFilterProp by default, should be unique in the tree
+     * @default undefined
+     * @type string
+     */
+    value?: string;
 
-  /**
-   * Scoped Slots
-   * @description When using treeNodes, you can use this property to configure the properties that support the slot,
-   * such as scopedSlots: { title: 'XXX'}
-   * @type object
-   */
-  scopedSlots: object;
+    /**
+     * Slots
+     * @description When using treeNodes, you can use this property to configure the properties that support the slot,
+     * such as slots: { title: 'XXX'}
+     * @type object
+     */
+    slots?: object;
+
+    /**
+     * When using treeNodes, you can use this property to configure the events,
+     * such as on: { click: () => {}}
+     */
+    on?: object;
+  };
 }

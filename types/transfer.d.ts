@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { VNodeChild } from 'vue';
+import { VNodeChild, CSSProperties } from 'vue';
 
 export interface TransferItem {
   key: string;
@@ -54,7 +54,7 @@ export declare class Transfer extends AntdComponent {
      * A custom CSS style used for rendering the transfer columns.
      * @type object
      */
-    listStyle?: object;
+    listStyle?: CSSProperties;
 
     /**
      * i18n text including filter, empty text, item unit, etc

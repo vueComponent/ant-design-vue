@@ -100,14 +100,6 @@ export declare class TreeNode extends AntdComponent {
     slots?: object;
 
     /**
-     * Scoped Slots
-     * @description When using treeNodes, you can use this property to configure the properties that support the slot,
-     * such as scopedSlots: { title: 'XXX'}
-     * @type object
-     */
-    scopedSlots?: object;
-
-    /**
      * When using treeNodes, you can use this property to configure the events,
      * such as on: { click: () => {}}
      */

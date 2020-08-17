@@ -10,7 +10,7 @@ export declare class RadioGroup extends AntdComponent {
    * Specifies the initial state: whether or not the radio is selected.
    * @type boolean
    */
-    defaultValue?: boolean;
+    defaultValue?: any;
 
     /**
      * Disable radio

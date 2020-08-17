@@ -148,7 +148,7 @@ export declare class Table extends AntdComponent {
      * Columns of table
      * @type array
      */
-    columns?: any;
+    columns: any[];
 
     /**
      * Override default table elements
@@ -160,7 +160,7 @@ export declare class Table extends AntdComponent {
      * Data record array to be displayed
      * @type array
      */
-    dataSource?: any;
+    dataSource: any;
 
     /**
      * Expand all rows initially
@@ -329,7 +329,7 @@ export declare class Table extends AntdComponent {
      * @param sorter
      * @param currentDataSource
      */
-    onChange?: (pagination: object, filters, sorter, { currentDataSource }) => any;
+    onChange?: (pagination: object, filters, sorter, { currentDataSource }) => void;
 
     /**
      * Callback executed when the row expand icon is clicked
@@ -337,12 +337,12 @@ export declare class Table extends AntdComponent {
      * @param expanded
      * @param record
      */
-    onExpand: (expanded, record) => any;
+    onExpand: (expanded, record) => void;
 
     /**
      * Callback executed when the expanded rows change
      * @param expandedRows
      */
-    onExpandedRowsChange: (expandedRows: any) => any;
+    onExpandedRowsChange: (expandedRows: any) => void;
   };
 }

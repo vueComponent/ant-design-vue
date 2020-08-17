@@ -10,14 +10,14 @@ export declare class Popconfirm extends TooltipCommon {
    * @default 'Cancel'
    * @type any (string | slot)
    */
-  cancelText?: string | VNodeChild | JSX.Element;
+  cancelText?:  VNodeChild | JSX.Element;
 
   /**
    * text of the Confirm button
    * @default 'Confirm'
    * @type any (string | slot)
    */
-  okText?: string | VNodeChild | JSX.Element;
+  okText?:  VNodeChild | JSX.Element;
 
   /**
    * Button type of the Confirm button
@@ -30,7 +30,7 @@ export declare class Popconfirm extends TooltipCommon {
    * title of the confirmation box
    * @type any (string | slot)
    */
-  title?: string | VNodeChild | JSX.Element;
+  title?:  VNodeChild | JSX.Element;
 
   /**
    * customize icon of confirmation

@@ -31,7 +31,7 @@ export declare class Rate extends AntdComponent {
    * @default <StarOutlined />
    * @type any (String or slot="character")
    */
-  character?: string | VNodeChild | JSX.Element;
+  character?: VNodeChild | JSX.Element;
 
   /**
    * star count

@@ -9,11 +9,11 @@ export declare class Popover extends TooltipCommon {
    * Content of the card
    * @type any (string | slot | VNode)
    */
-  content?: string | VNodeChild | JSX.Element;
+  content?:  VNodeChild | JSX.Element;
 
   /**
    * Title of the card
    * @type any (string | slot | VNode)
    */
-  title?: string | VNodeChild | JSX.Element;
+  title?:  VNodeChild | JSX.Element;
 }

@@ -11,7 +11,7 @@ export declare class PageHeader extends AntdComponent {
    * @default <ArrowLeftOutlined />
    * @type any (string | slot)
    */
-  backIcon?: string | VNodeChild | JSX.Element;
+  backIcon?: VNodeChild | JSX.Element;
 
   /**
    * Custom prefixCls
@@ -23,13 +23,13 @@ export declare class PageHeader extends AntdComponent {
    * Custom title
    * @type any (string | slot)
    */
-  title?: string | VNodeChild | JSX.Element;
+  title?: VNodeChild | JSX.Element;
 
   /**
    * Custom subTitle
    * @type any (string | slot)
    */
-  subTitle?: string | VNodeChild | JSX.Element;
+  subTitle?: VNodeChild | JSX.Element;
 
   breadcrumb?: object;
 
@@ -37,19 +37,19 @@ export declare class PageHeader extends AntdComponent {
    * Custom tags
    * @type any (string | slot)
    */
-  tags?: string | VNodeChild | JSX.Element;
+  tags?: VNodeChild | JSX.Element;
 
   /**
    * Custom footer
    * @type any (string | slot)
    */
-  footer?: string | VNodeChild | JSX.Element;
+  footer?: VNodeChild | JSX.Element;
 
   /**
    * Custom extra
    * @type any (string | slot)
    */
-  extra?: string | VNodeChild | JSX.Element;
+  extra?: VNodeChild | JSX.Element;
 
   avatar?: object;
 
@@ -58,5 +58,5 @@ export declare class PageHeader extends AntdComponent {
   /**
    * Specify a callback that will be called when a user clicks backIcon.
    */
-  back()?: void;
+  back(): void;
 }

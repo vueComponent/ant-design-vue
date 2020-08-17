@@ -3,10 +3,14 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from '../component';
-import { VNodeChild } from 'vue';
+import { VNodeChild, CSSProperties } from 'vue';
 
 export declare class StatisticCountdown extends AntdComponent {
   $props:{
+    /**
+     * Format as moment
+     * @default 'HH:mm:ss'
+     */
     format?: string;
     /**
      * prefix node of value
@@ -31,6 +35,9 @@ export declare class StatisticCountdown extends AntdComponent {
      * @type string or number
      */
     value?: string | number;
-    valueStyle?: object;
+    /**
+     * Set value css style
+     */
+    valueStyle?: CSSProperties;
   }
 }

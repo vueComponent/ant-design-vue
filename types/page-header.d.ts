@@ -8,10 +8,10 @@ import { VNodeChild } from 'vue';
 export declare class PageHeader extends AntdComponent {
   $props: {
     /**
- * Custom backIcon
- * @default <ArrowLeftOutlined />
- * @type any (string | slot)
- */
+     * Custom backIcon
+     * @default <ArrowLeftOutlined />
+     * @type any (string | slot)
+     */
     backIcon?: VNodeChild | JSX.Element;
 
     /**
@@ -31,35 +31,45 @@ export declare class PageHeader extends AntdComponent {
      * @type any (string | slot)
      */
     subTitle?: VNodeChild | JSX.Element;
-
+    /**
+     * Breadcrumb configuration
+     * @type breadcrumb
+     */
     breadcrumb?: object;
 
     /**
-     * Custom tags
+     * Tag list next to title
      * @type any (string | slot)
      */
     tags?: VNodeChild | JSX.Element;
 
     /**
-     * Custom footer
+     * PageHeader's footer, generally used to render TabBar
      * @type any (string | slot)
      */
     footer?: VNodeChild | JSX.Element;
 
     /**
-     * Custom extra
+     * Operating area, at the end of the line of the title line
      * @type any (string | slot)
      */
     extra?: VNodeChild | JSX.Element;
-
+    /**
+     * Avatar next to the title bar
+     * @type Avatar
+     */
     avatar?: object;
-
+    /**
+     * PageHeader type, will change background color
+     * @default true
+     * @type boolean
+     */
     ghost?: boolean;
 
     /**
      * Specify a callback that will be called when a user clicks backIcon.
      */
-    back(): void;
+    onBack(): () => void;
   }
 
 }

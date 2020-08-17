@@ -49,7 +49,7 @@ export default {
         class={cls}
         style={style}
       >
-        {this.itemRender(this.page, 'page', <a>{this.page}</a>)}
+        {this.itemRender({ page: this.page, type: 'page', originalElement: <a>{this.page}</a> })}
       </li>
     );
   },

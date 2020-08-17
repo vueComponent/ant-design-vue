@@ -98,7 +98,7 @@ const Select = {
     tokenSeparators: PropTypes.arrayOf(PropTypes.string).def([]),
     autoClearSearchValue: PropTypes.bool.def(true),
     tabindex: PropTypes.any.def(0),
-    dropdownRender: PropTypes.func.def(menu => menu),
+    dropdownRender: PropTypes.func.def(({ menuNode }) => menuNode),
     // onChange: noop,
     // onFocus: noop,
     // onBlur: noop,

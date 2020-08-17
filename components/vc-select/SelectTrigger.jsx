@@ -131,7 +131,7 @@ export default {
       );
 
       if (dropdownRender) {
-        return dropdownRender(menuNode, props);
+        return dropdownRender({ menuNode, props });
       }
       return null;
     },

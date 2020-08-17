@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { VNode } from 'vue';
+import { VNodeChild } from 'vue';
 
 export declare class AnchorLink {
   $props: {
@@ -10,13 +10,13 @@ export declare class AnchorLink {
      * target of hyperlink
      * @type string
      */
-    href: string;
+    href?: string;
 
     /**
      * content of hyperlink
      * @type any (string | slot)
      */
-    title?: string | VNode | VNode[];
+    title?: VNodeChild | JSX.Element;
 
     /**
      * Specifies where to display the linked URL

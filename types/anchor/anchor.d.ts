@@ -2,6 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
+import { CSSProperties } from 'vue';
 import { AnchorLink } from './anchor-link';
 import { AntdComponent } from '../component';
 
@@ -60,7 +61,7 @@ export declare class Anchor extends AntdComponent {
      * The style of the container
      * @type object
      */
-    wrapperStyle?: object;
+    wrapperStyle?: CSSProperties | string;
 
     /**
      * Customize the anchor highlight

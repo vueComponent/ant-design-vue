@@ -50,5 +50,9 @@ export declare class RadioGroup extends AntdComponent {
      * @type string
      */
     buttonStyle?: 'outline' | 'solid';
+    /**
+     * The callback function that is triggered when the state changes.
+     */
+    onChange?:(e:Event)=>void
   }
 }

@@ -13,7 +13,7 @@ export declare class Badge extends AntdComponent {
      * Number to show in badge, support slot
      * @type number | string | VNode
      */
-    count?: number | string | VNodeChild | JSX.Element;
+    count?: number | VNodeChild | JSX.Element;
 
     /**
      * to display a red dot instead of count

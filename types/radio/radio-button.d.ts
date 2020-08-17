@@ -9,5 +9,5 @@ export declare class RadioButton extends Radio {
    * Type of radio button
    * @type string
    */
-  type: 'primary' | 'danger' | 'dashed' | 'ghost' | 'default';
+  type?: 'primary' | 'danger' | 'dashed' | 'ghost' | 'default';
 }

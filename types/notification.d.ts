@@ -3,14 +3,14 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { VNode } from 'vue';
+import { VNodeChild, CSSProperties } from 'vue';
 
-export interface NotificationOptions {
+export interface NotificationOptions extends NotificationConfigOptions {
   /**
    * Customized close button
    * @type VNode | Function
    */
-  btn?: VNode | Function;
+  btn?: VNodeChild | JSX.Element | Function;
 
   /**
    * Customized CSS class
@@ -22,20 +22,13 @@ export interface NotificationOptions {
    * The content of notification box (required)
    * @type string | VNode | Function
    */
-  description: string | VNode | Function;
-
-  /**
-   * Time in seconds before Notification is closed. When set to 0 or null, it will never be closed automatically
-   * @default 4.5
-   * @type number
-   */
-  duration?: number;
+  description: VNodeChild | JSX.Element | Function;
 
   /**
    * Customized icon
    * @type VNode | Function
    */
-  icon?: VNode | Function;
+  icon?: VNodeChild | JSX.Element | Function;
 
   /**
    * The unique identifier of the Notification
@@ -47,20 +40,13 @@ export interface NotificationOptions {
    * The title of notification box (required)
    * @type string | VNode | Function
    */
-  message: string | VNode | Function;
-
-  /**
-   * Position of Notification, can be one of topLeft topRight bottomLeft bottomRight
-   * @default 'topRight'
-   * @type string
-   */
-  placement?: string;
+  message: VNodeChild | JSX.Element | Function;
 
   /**
    * Customized inline style
    * @type object | string
    */
-  style?: object | string;
+  style?: CSSProperties | string;
 
   /**
    * Specify a function that will be called when the close button is clicked
@@ -73,12 +59,6 @@ export interface NotificationOptions {
    * @type Function
    */
   onClick?: Function;
-
-  closeIcon?: any;
-
-  getContainer?: () => HTMLElement;
-  bottom?: string;
-  top?: string;
 }
 
 export interface NotificationConfigOptions {
@@ -116,8 +96,11 @@ export interface NotificationConfigOptions {
    * @type string
    */
   top?: string;
-
-  closeIcon?: any;
+  /**
+     * custom close icon
+     * @type VNode | function
+     */
+  closeIcon?: VNodeChild | JSX.Element | Function;
 }
 
 export declare class Notification {

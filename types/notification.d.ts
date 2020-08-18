@@ -4,7 +4,7 @@
 
 import { AntdComponent } from './component';
 import { VNodeChild, CSSProperties } from 'vue';
-
+export type NotificationPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 export interface NotificationOptions extends NotificationConfigOptions {
   /**
    * Customized close button
@@ -52,13 +52,13 @@ export interface NotificationOptions extends NotificationConfigOptions {
    * Specify a function that will be called when the close button is clicked
    * @type Function
    */
-  onClose?: Function;
+  onClose?: () => void;
 
   /**
    * Specify a function that will be called when the notification is clicked
    * @type Function
    */
-  onClick?: Function;
+  onClick?: () => void;
 }
 
 export interface NotificationConfigOptions {
@@ -74,7 +74,7 @@ export interface NotificationConfigOptions {
    * @default 4.5
    * @type number
    */
-  duration?: number;
+  duration?: number | null;
 
   /**
    * Return the mount node for Notification
@@ -88,7 +88,7 @@ export interface NotificationConfigOptions {
    * @default 'topRight'
    * @type string
    */
-  placement?: string;
+  placement?: NotificationPlacement;
 
   /**
    * Distance from the top of the viewport, when placement is topRight or topLeft (unit: pixels).
@@ -103,7 +103,7 @@ export interface NotificationConfigOptions {
   closeIcon?: VNodeChild | JSX.Element | Function;
 }
 
-export declare class Notification {
+export interface NotificationApi {
   success(config: NotificationOptions): void;
   warning(config: NotificationOptions): void;
   warn(config: NotificationOptions): void;
@@ -115,8 +115,3 @@ export declare class Notification {
   destroy(): void;
 }
 
-declare module 'vue/types/vue' {
-  interface Vue {
-    $notification: Notification;
-  }
-}

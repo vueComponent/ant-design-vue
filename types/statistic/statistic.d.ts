@@ -3,58 +3,60 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from '../component';
-import { VNode } from 'vue';
+import { VNodeChild } from 'vue';
 import { StatisticCountdown } from './statistic-countdown';
 
 export declare class Statistic extends AntdComponent {
   static Countdown: typeof StatisticCountdown;
-  /**
+  $props: {
+    /**
    * decimal separator
    * @default '.'
    * @type string
    */
-  decimalSeparator: string;
+    decimalSeparator?: string;
 
-  /**
-   * the shape of statistic
-   * @type string
-   */
-  formatter: () => VNode;
+    /**
+     * the shape of statistic
+     * @type string
+     */
+    formatter?: () => VNodeChild | JSX.Element;
 
-  /**
-   * group separator
-   * @default ','
-   * @type string
-   */
-  groupSeparator: string;
+    /**
+     * group separator
+     * @default ','
+     * @type string
+     */
+    groupSeparator?: string;
 
-  /**
-   * precision of input value
-   * @type number
-   */
-  precision: number;
+    /**
+     * precision of input value
+     * @type number
+     */
+    precision?: number;
 
-  /**
-   * prefix node of value
-   * @type string | VNode
-   */
-  prefix: string | VNode;
+    /**
+     * prefix node of value
+     * @type string | VNodeChild
+     */
+    prefix?: VNodeChild | JSX.Element;
 
-  /**
-   * suffix node of value
-   * @type string | VNode
-   */
-  suffix: string | VNode;
+    /**
+     * suffix node of value
+     * @type string | VNodeChild
+     */
+    suffix?: VNodeChild | JSX.Element;
 
-  /**
-   * Display title
-   * @type string | VNode
-   */
-  title: string | VNode;
+    /**
+     * Display title
+     * @type string | VNodeChild
+     */
+    title?: VNodeChild | JSX.Element;
 
-  /**
-   * Display value
-   * @type string or number
-   */
-  value: string | number;
+    /**
+     * Display value
+     * @type string or number
+     */
+    value?: string | number;
+  }
 }

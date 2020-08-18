@@ -3,65 +3,67 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-
+import { VNodeChild } from 'vue';
 export declare class Rate extends AntdComponent {
-  /**
+  $props: {
+    /**
    * whether to allow clear when click again
    * @default true
    * @type boolean
    */
-  allowClear: boolean;
+    allowClear?: boolean;
 
-  /**
-   * whether to allow semi selection
-   * @default false
-   * @type boolean
-   */
-  allowHalf: boolean;
+    /**
+     * whether to allow semi selection
+     * @default false
+     * @type boolean
+     */
+    allowHalf?: boolean;
 
-  /**
-   * get focus when component mounted
-   * @default false
-   * @type boolean
-   */
-  autofocus: boolean;
+    /**
+     * get focus when component mounted
+     * @default false
+     * @type boolean
+     */
+    autofocus?: boolean;
 
-  /**
-   * custom character of rate
-   * @default <StarOutlined />
-   * @type any (String or slot="character")
-   */
-  character: any;
+    /**
+     * custom character of rate
+     * @default <StarOutlined />
+     * @type any (String or slot="character")
+     */
+    character?: VNodeChild | JSX.Element;
 
-  /**
-   * star count
-   * @default 5
-   * @type number
-   */
-  count: number;
+    /**
+     * star count
+     * @default 5
+     * @type number
+     */
+    count?: number;
 
-  /**
-   * default value
-   * @default 0
-   * @type number
-   */
-  defaultValue: number;
+    /**
+     * default value
+     * @default 0
+     * @type number
+     */
+    defaultValue?: number;
 
-  /**
-   * read only, unable to interact
-   * @default false
-   * @type boolean
-   */
-  disabled: boolean;
+    /**
+     * read only, unable to interact
+     * @default false
+     * @type boolean
+     */
+    disabled?: boolean;
 
-  /**
-   * current value
-   * @type number
-   */
-  value: number;
+    /**
+     * current value
+     * @type number
+     */
+    value?: number;
 
-  tooltips: Array<string>;
+    tooltips?: Array<string>;
 
+  }
   /**
    * remove focus
    */

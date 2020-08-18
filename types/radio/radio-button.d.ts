@@ -2,12 +2,15 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { Radio } from './radio';
+import { RadioProps, Radio } from './radio';
 
-export declare class RadioButton extends Radio {
+declare class RadioButtonProps extends RadioProps {
   /**
-   * Type of radio button
-   * @type string
-   */
-  type: 'primary' | 'danger' | 'dashed' | 'ghost' | 'default';
+* Type of radio button
+* @type string
+*/
+  type?: 'primary' | 'danger' | 'dashed' | 'ghost' | 'default';
+}
+export declare class RadioButton extends Radio {
+  $props: RadioButtonProps
 }

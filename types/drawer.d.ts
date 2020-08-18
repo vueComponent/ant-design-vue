@@ -26,7 +26,7 @@ export declare class Drawer extends AntdComponent {
      * @default 'body'
      * @type any ( HTMLElement| () => HTMLElement | string)
      */
-    getContainer?: () => HTMLElement | HTMLElement | string;
+    getContainer?: () => HTMLElement | string;
 
     /**
      * Whether to show mask or not.

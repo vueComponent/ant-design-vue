@@ -64,9 +64,9 @@
 @heading-2-size: ceil(@font-size-base * 2.14);
 @heading-3-size: ceil(@font-size-base * 1.71);
 @heading-4-size: ceil(@font-size-base * 1.42);
-@line-height-base: 1.5;
-@border-radius-base: 4px;
-@border-radius-sm: 2px;
+@line-height-base: 1.5715;
+@border-radius-base: 2px;
+@border-radius-sm: @border-radius-base;
 
 // vertical paddings
 @padding-lg: 24px; // containers
@@ -111,7 +111,7 @@
 
 // Border color
 @border-color-base: hsv(0, 0, 85%); // base border outline a component
-@border-color-split: hsv(0, 0, 91%); // split border inside a component
+@border-color-split: hsv(0, 0, 94%); // split border inside a component
 @border-color-inverse: @white;
 @border-width-base: 1px; // width of the border for a component
 @border-style-base: solid; // style of a components border
@@ -445,6 +445,7 @@
 
 // Table
 // --
+@table-bg: @component-background;
 @table-header-bg: @background-color-light;
 @table-header-color: @heading-color;
 @table-header-sort-bg: @background-color-base;

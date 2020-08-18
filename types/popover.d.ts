@@ -3,17 +3,19 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { TooltipCommon } from './tootip/common';
-
+import { VNodeChild } from 'vue';
 export declare class Popover extends TooltipCommon {
-  /**
-   * Content of the card
-   * @type any (string | slot | VNode)
-   */
-  content: any;
+  $props: {
+    /**
+     * Content of the card
+     * @type any (string | slot | VNode)
+     */
+    content?: VNodeChild | JSX.Element;
 
-  /**
-   * Title of the card
-   * @type any (string | slot | VNode)
-   */
-  title: any;
+    /**
+     * Title of the card
+     * @type any (string | slot | VNode)
+     */
+    title?: VNodeChild | JSX.Element;
+  }
 }

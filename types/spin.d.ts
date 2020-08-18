@@ -3,6 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
+import { VNodeChild } from 'vue';
 
 export declare class Spin extends AntdComponent {
   /**
@@ -10,42 +11,44 @@ export declare class Spin extends AntdComponent {
    * @param param0 indicator
    */
   static setDefaultIndicator({ indicator }: { indicator: any }): void;
+  $props: {
 
-  /**
-   * specifies a delay in milliseconds for loading state (prevent flush)
-   * @type number (milliseconds)
-   */
-  delay: number;
+    /**
+     * specifies a delay in milliseconds for loading state (prevent flush)
+     * @type number (milliseconds)
+     */
+    delay?: number;
 
-  /**
-   * vue node of the spinning indicator
-   * @type any (VNode | slot)
-   */
-  indicator: any;
+    /**
+     * vue node of the spinning indicator
+     * @type any (VNode | slot)
+     */
+    indicator?: VNodeChild | JSX.Element;
 
-  /**
-   * size of Spin, options: small, default and large
-   * @default 'default'
-   * @type string
-   */
-  size: 'small' | 'default' | 'large';
+    /**
+     * size of Spin, options: small, default and large
+     * @default 'default'
+     * @type string
+     */
+    size?: 'small' | 'default' | 'large';
 
-  /**
-   * whether Spin is spinning
-   * @default true
-   * @type boolean
-   */
-  spinning: boolean;
+    /**
+     * whether Spin is spinning
+     * @default true
+     * @type boolean
+     */
+    spinning?: boolean;
 
-  /**
-   * customize description content when Spin has children
-   * @type string
-   */
-  tip: string;
+    /**
+     * customize description content when Spin has children
+     * @type string
+     */
+    tip?: string;
 
-  /**
-   * className of wrapper when Spin has children
-   * @type string
-   */
-  wrapperClassName: string;
+    /**
+     * className of wrapper when Spin has children
+     * @type string
+     */
+    wrapperClassName?: string;
+  }
 }

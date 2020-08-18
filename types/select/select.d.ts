@@ -7,9 +7,9 @@ import { Option } from './option';
 import { OptionGroup } from './option-group';
 import { VNodeChild, CSSProperties } from 'vue';
 type dropdownRenderProps = {
-  menu?: VNodeChild,
-  props?: object
-}
+  menuNode?: VNodeChild;
+  props?: object;
+};
 export declare class Select extends AntdComponent {
   static Option: typeof Option;
   static OptGroup: typeof OptionGroup;
@@ -72,7 +72,7 @@ export declare class Select extends AntdComponent {
      * Customize dropdown content
      * @type function | slot-scope
      */
-    dropdownRender?: (props:dropdownRenderProps) => VNodeChild;
+    dropdownRender?: (props: dropdownRenderProps) => VNodeChild;
 
     /**
      * style of dropdown menu
@@ -159,7 +159,7 @@ export declare class Select extends AntdComponent {
      * Placeholder of select
      * @type any (string | slot)
      */
-    placeholder?: VNodeChild | JSX.Element
+    placeholder?: VNodeChild | JSX.Element;
 
     /**
      * Whether show search input in single mode.
@@ -186,25 +186,25 @@ export declare class Select extends AntdComponent {
      * The custom suffix icon
      * @type any (VNode | slot)
      */
-    suffixIcon?: VNodeChild | JSX.Element
+    suffixIcon?: VNodeChild | JSX.Element;
 
     /**
      * The custom remove icon
      * @type any (VNode | slot)
      */
-    removeIcon?: VNodeChild | JSX.Element
+    removeIcon?: VNodeChild | JSX.Element;
 
     /**
      * The custom clear icon
      * @type any (VNode | slot)
      */
-    clearIcon?: VNodeChild | JSX.Element
+    clearIcon?: VNodeChild | JSX.Element;
 
     /**
      * The custom menuItemSelected icon
      * @type any (VNode | slot)
      */
-    menuItemSelectedIcon?: VNodeChild | JSX.Element
+    menuItemSelectedIcon?: VNodeChild | JSX.Element;
 
     /**
      * Separator used to tokenize on tag/multiple mode
@@ -246,11 +246,11 @@ export declare class Select extends AntdComponent {
     /**
      * remove focus
      */
-    onBlur: (e?: Event) => void
+    onBlur: (e?: Event) => void;
 
     /**
      * get focus
      */
-    onFocus: (e?: Event) => void
-  }
+    onFocus: (e?: Event) => void;
+  };
 }

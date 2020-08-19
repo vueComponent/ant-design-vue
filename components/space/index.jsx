@@ -21,7 +21,7 @@ export const SpaceProps = {
   align: PropTypes.oneOf(['start', 'end', 'center', 'baseline']),
 };
 
-const ASpace = (props, { slots }) => {
+const Space = (props, { slots }) => {
   const configProvider = inject('configProvider', ConfigConsumerProps);
   const { align, size, direction, prefixCls: customizePrefixCls } = props;
 
@@ -67,13 +67,13 @@ const ASpace = (props, { slots }) => {
     </div>
   );
 };
-ASpace.props = initDefaultProps(SpaceProps, {
+Space.props = initDefaultProps(SpaceProps, {
   size: 'small',
   direction: 'horizontal',
 });
 
 /* istanbul ignore next */
-ASpace.install = function(app) {
-  app.component(ASpace.name, ASpace);
+Space.install = function(app) {
+  app.component('ASpace', Space);
 };
-export default ASpace;
+export default Space;

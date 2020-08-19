@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
+import { VNodeChild, Slots } from 'vue';
 import { AntdComponent } from '../component';
-import { VNodeChild } from 'vue';
 
 export declare class ColumnGroup extends AntdComponent {
   $props: {
@@ -18,6 +18,6 @@ export declare class ColumnGroup extends AntdComponent {
      * such as slots: { title: 'XXX'}
      * @type object
      */
-    slots?: object;
+    slots?: Slots;
   };
 }

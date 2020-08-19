@@ -3,6 +3,7 @@ import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getComponent } from '../_util/props-util';
 import classNames from 'classnames';
 import { ConfigConsumerProps } from '../config-provider';
+function noop() {}
 
 export const AnchorLinkProps = {
   prefixCls: PropTypes.string,
@@ -18,7 +19,11 @@ export default {
   }),
   setup() {
     return {
-      antAnchor: inject('antAnchor', {}),
+      antAnchor: inject('antAnchor', {
+        registerLink: noop,
+        unregisterLink: noop,
+        scrollTo: noop,
+      }),
       antAnchorContext: inject('antAnchorContext', {}),
       configProvider: inject('configProvider', ConfigConsumerProps),
     };
@@ -57,7 +62,7 @@ export default {
     const prefixCls = getPrefixCls('anchor', customizePrefixCls);
 
     const title = getComponent(this, 'title');
-    const active = this.antAnchor.$data.activeLink === href;
+    const active = this.antAnchor.activeLink === href;
     const wrapperClassName = classNames(`${prefixCls}-link`, {
       [`${prefixCls}-link-active`]: active,
     });

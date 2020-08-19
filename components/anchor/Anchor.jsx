@@ -281,7 +281,7 @@ export default {
       visible: activeLink,
     });
 
-    const wrapperClass = classNames(this.wrapperClass, `${prefixCls}-wrapper`);
+    const wrapperClass = classNames(this.$attrs.class, this.wrapperClass, `${prefixCls}-wrapper`);
 
     const anchorClass = classNames(prefixCls, {
       fixed: !affix && !showInkInFixed,
@@ -290,6 +290,7 @@ export default {
     const wrapperStyle = {
       maxHeight: offsetTop ? `calc(100vh - ${offsetTop}px)` : '100vh',
       ...this.wrapperStyle,
+      ...this.$attrs.style,
     };
 
     const anchorContent = (

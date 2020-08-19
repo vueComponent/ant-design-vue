@@ -310,7 +310,7 @@ exports[`renders ./antdv-demo/docs/card/demo/tabs.md correctly 1`] = `
         </div>
       </div>
       <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-      <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
+      <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
         <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
           <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
           <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
@@ -353,7 +353,7 @@ exports[`renders ./antdv-demo/docs/card/demo/tabs.md correctly 1`] = `
         </div>
       </div>
       <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-      <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: -100%;">
+      <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: -100%;">
         <div class="ant-tabs-tabpane ant-tabs-tabpane-inactive" role="tabpanel" aria-hidden="true">
           <!---->
           <!---->

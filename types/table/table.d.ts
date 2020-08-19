@@ -3,9 +3,9 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from '../component';
-import { Spin } from '../spin';
+import { SpinProps } from '../spin';
 import { Pagination } from '../pagination';
-import { Column } from './column';
+import { Column, ColumnProps, SortOrder } from './column';
 import { ColumnGroup } from './column-group';
 import { VNodeChild } from 'vue';
 
@@ -13,7 +13,14 @@ export declare class PaginationConfig extends Pagination {
   position?: 'top' | 'bottom' | 'both';
 }
 
-export interface customSelection {
+export interface SorterResult<T> {
+  column: ColumnProps<T>;
+  order: SortOrder;
+  field: string;
+  columnKey: string;
+}
+
+export interface SelectionItem {
   /**
    * Key
    * @description Unique key of this selection
@@ -36,10 +43,14 @@ export interface customSelection {
    * @default undefined
    * @type Function
    */
-  onSelect?: (changeableRowKeys?: any[]) => any;
+  onSelect?: (changeableRowKeys?: string[]) => void;
 }
 
-export interface TableRowSelection {
+export interface TableCurrentDataSource<T> {
+  currentDataSource: T[];
+}
+
+export interface TableRowSelection<T> {
   /**
    * checkbox or radio
    * @default 'checkbox'
@@ -57,13 +68,13 @@ export interface TableRowSelection {
    * Get Checkbox or Radio props
    * @type Function
    */
-  getCheckboxProps?: (record: any) => any;
+  getCheckboxProps?: (record: T) => Object;
 
   /**
    * Custom selection config, only displays default selections when set to true
    * @type boolean | object[]
    */
-  selections?: boolean | customSelection[];
+  selections?: boolean | SelectionItem[];
 
   /**
    * Remove the default Select All and Select Invert selections
@@ -94,38 +105,38 @@ export interface TableRowSelection {
    * Callback executed when selected rows change
    * @type Function
    */
-  onChange?: (selectedRowKeys: Array<string | number>, selectedRows: object[]) => any;
+  onChange?: (selectedRowKeys: string[] | number[], selectedRows: T[]) => any;
 
   /**
    * Callback executed when select/deselect one row
-   * @type Function
+   * @type FunctionT
    */
-  onSelect?: (record: any, selected: boolean, selectedRows: object[], nativeEvent: Event) => any;
+  onSelect?: (record: T, selected: boolean, selectedRows: Object[], nativeEvent: Event) => any;
 
   /**
    * Callback executed when select/deselect all rows
    * @type Function
    */
-  onSelectAll?: (selected: boolean, selectedRows: object[], changeRows: object[]) => any;
+  onSelectAll?: (selected: boolean, selectedRows: T[], changeRows: T[]) => any;
 
   /**
    * Callback executed when row selection is inverted
    * @type Function
    */
-  onSelectInvert?: (selectedRows: Object[]) => any;
+  onSelectInvert?: (selectedRows: string[] | number[]) => any;
 }
 
-export interface TableCustomRecord {
-  record?: any;
+export interface TableCustomRecord<T> {
+  record?: T;
   index?: number;
 }
 
-export interface ExpandedRowRenderRecord extends TableCustomRecord {
+export interface ExpandedRowRenderRecord<T> extends TableCustomRecord<T> {
   indent?: number;
   expanded?: boolean;
 }
 
-export declare class Table extends AntdComponent {
+export declare class Table<T> extends AntdComponent {
   static Column: typeof Column;
   static ColumnGroup: typeof ColumnGroup;
 
@@ -148,7 +159,7 @@ export declare class Table extends AntdComponent {
      * Columns of table
      * @type array
      */
-    columns: any[];
+    columns?: ColumnProps<T>[];
 
     /**
      * Override default table elements
@@ -160,7 +171,7 @@ export declare class Table extends AntdComponent {
      * Data record array to be displayed
      * @type array
      */
-    dataSource: any;
+    dataSource?: T[];
 
     /**
      * Expand all rows initially
@@ -185,7 +196,7 @@ export declare class Table extends AntdComponent {
      * Expanded container render for each row
      * @type Function
      */
-    expandedRowRender?: (record?: ExpandedRowRenderRecord) => any;
+    expandedRowRender?: (record?: ExpandedRowRenderRecord<T>) => VNodeChild | JSX.Element;
 
     /**
      * Customize row expand Icon.
@@ -223,7 +234,7 @@ export declare class Table extends AntdComponent {
      * @default false
      * @type boolean | object
      */
-    loading?: boolean | Spin | VNodeChild | JSX.Element;
+    loading?: boolean | SpinProps | VNodeChild | JSX.Element;
 
     /**
      * i18n text including filter, sort, empty text, etc
@@ -242,7 +253,7 @@ export declare class Table extends AntdComponent {
      * Row's className
      * @type Function
      */
-    rowClassName?: (record?: TableCustomRecord) => string;
+    rowClassName?: (record?: TableCustomRecord<T>) => string;
 
     /**
      * Row's unique key, could be a string or function that returns a string
@@ -255,7 +266,7 @@ export declare class Table extends AntdComponent {
      * Row selection config
      * @type object
      */
-    rowSelection?: TableRowSelection;
+    rowSelection?: TableRowSelection<T>;
 
     /**
      * Set horizontal or vertical scrolling, can also be used to specify the width and height of the scroll area.
@@ -283,19 +294,19 @@ export declare class Table extends AntdComponent {
      * Table title renderer
      * @type Function | ScopedSlot
      */
-    title?: Function | VNodeChild | JSX.Element;
+    title?: VNodeChild | JSX.Element;
 
     /**
      * Set props on per header row
      * @type Function
      */
-    customHeaderRow?: (column: any, index: number) => object;
+    customHeaderRow?: (column: ColumnProps<T>, index: number) => object;
 
     /**
      * Set props on per row
      * @type Function
      */
-    customRow?: (record: any, index: number) => object;
+    customRow?: (record: T, index: number) => object;
 
     /**
      * `table-layout` attribute of table element
@@ -329,7 +340,12 @@ export declare class Table extends AntdComponent {
      * @param sorter
      * @param currentDataSource
      */
-    onChange?: (pagination: object, filters, sorter, { currentDataSource }) => void;
+    onChange?: (
+      pagination: PaginationConfig,
+      filters: Partial<Record<keyof T, string[]>>,
+      sorter: SorterResult<T>,
+      extra: TableCurrentDataSource<T>,
+    ) => void;
 
     /**
      * Callback executed when the row expand icon is clicked
@@ -337,12 +353,12 @@ export declare class Table extends AntdComponent {
      * @param expanded
      * @param record
      */
-    onExpand: (expanded, record) => void;
+    onExpand?: (expande: boolean, record: T) => void;
 
     /**
      * Callback executed when the expanded rows change
      * @param expandedRows
      */
-    onExpandedRowsChange: (expandedRows: any) => void;
+    onExpandedRowsChange?: (expandedRows: string[] | number[]) => void;
   };
 }

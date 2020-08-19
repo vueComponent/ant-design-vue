@@ -1221,7 +1221,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/responsive.md correctly 1`] 
           
         </div>
         <div
-          class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content"
+          class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated"
           style="margin-left: 0%;"
         >
           

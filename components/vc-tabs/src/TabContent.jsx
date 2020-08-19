@@ -8,6 +8,7 @@ import {
 } from './utils';
 export default {
   name: 'TabContent',
+  inheritAttrs: false,
   props: {
     animated: PropTypes.bool.def(true),
     animatedWithMargin: PropTypes.bool.def(true),
@@ -21,7 +22,9 @@ export default {
   computed: {
     classes() {
       const { animated, prefixCls } = this;
+      const { class: className } = this.$attrs;
       return {
+        [className]: !!className,
         [`${prefixCls}-content`]: true,
         [animated ? `${prefixCls}-content-animated` : `${prefixCls}-content-no-animated`]: true,
       };
@@ -68,9 +71,13 @@ export default {
         const animatedStyle = animatedWithMargin
           ? getMarginStyle(activeIndex, tabBarPosition)
           : getTransformPropValue(getTransformByIndex(activeIndex, tabBarPosition, direction));
-        style = animatedStyle;
+        style = {
+          ...this.$attrs.style,
+          ...animatedStyle,
+        };
       } else {
         style = {
+          ...this.$attrs.style,
           display: 'none',
         };
       }

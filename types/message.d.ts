@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { VNode, CreateElement } from 'vue';
+import { VNodeChild } from 'vue';
 
 export interface ThenableArgument {
   (val: any): void;
@@ -12,7 +12,7 @@ export interface MessageType {
   then: (fill: ThenableArgument, reject: ThenableArgument) => Promise<void>;
   promise: Promise<void>;
 }
-export type ConfigType = VNode | ((h: CreateElement) => VNode);
+export type ConfigType = VNodeChild | (() => VNodeChild);
 export type ConfigDuration = number | (() => void);
 export type ConfigOnClose = () => void;
 
@@ -47,6 +47,9 @@ export interface MessageOptions {
    * @type Function
    */
   onClose?: ConfigOnClose;
+  /**
+   * The unique identifier of the Message
+   */
   key?: string | number;
 }
 
@@ -95,10 +98,4 @@ export declare interface Message {
   open: (config: MessageOptions) => MessageType;
   config: (options: MessageConfigOptions) => void;
   destroy: () => void;
-}
-
-declare module 'vue/types/vue' {
-  interface Vue {
-    $message: Message;
-  }
 }

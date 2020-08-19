@@ -82,7 +82,7 @@ export declare type RuleType =
   | 'url'
   | 'hex'
   | 'email';
-export declare type RuleObject = BaseRule | ArrayRule;
+
 declare type Validator = (
   rule: any,
   value: any,

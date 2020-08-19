@@ -4,17 +4,19 @@
 
 import { AntdComponent } from '../component';
 import { MenuItem } from './menu-item';
+import { VNodeChild } from 'vue';
 
 export declare class MenuItemGroup extends AntdComponent {
-  /**
+  $props:{
+      /**
    * sub menu items
    * @type MenuItem[]
    */
-  children: MenuItem[];
-
+  children?: MenuItem[];
   /**
    * title of the group
    * @type string | slot
    */
-  title: any;
+  title?: VNodeChild | JSX.Element;
+  }
 }

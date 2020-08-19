@@ -5,5 +5,12 @@
 import { AntdComponent } from '../component';
 
 export declare class Password extends AntdComponent {
-  visibilityToggle?: boolean;
+  $props:{
+    /**
+     * Whether show toggle button
+     * @default true
+     */
+    visibilityToggle?: boolean;
+  }
+
 }

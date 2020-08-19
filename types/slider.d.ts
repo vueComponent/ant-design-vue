@@ -3,108 +3,137 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { VNode } from 'vue';
+import { VNodeChild } from 'vue';
 
 export declare class Slider extends AntdComponent {
-  /**
-   * get focus when component mounted
-   * @default false
-   * @type boolean
-   */
-  autofocus: boolean;
+  $props: {
+    /**
+     * get focus when component mounted
+     * @default false
+     * @type boolean
+     */
+    autofocus?: boolean;
 
-  /**
-   * The default value of slider. When range is false, use number, otherwise, use [number, number]
-   * @default 0 | [0, 0]
-   * @type number | number[]
-   */
-  defaultValue: number | number[];
+    /**
+     * The default value of slider. When range is false, use number, otherwise, use [number, number]
+     * @default 0 | [0, 0]
+     * @type number | number[]
+     */
+    defaultValue?: number | number[];
 
-  /**
-   * If true, the slider will not be interactable.
-   * @default false
-   * @type boolean
-   */
-  disabled: boolean;
+    /**
+     * If true, the slider will not be interactable.
+     * @default false
+     * @type boolean
+     */
+    disabled?: boolean;
 
-  /**
-   * Whether the thumb can drag over tick only.
-   * @default false
-   * @type boolean
-   */
-  dots: boolean;
+    /**
+     * Whether the thumb can drag over tick only.
+     * @default false
+     * @type boolean
+     */
+    dots?: boolean;
 
-  /**
-   * Make effect when marks not null，true means containment and false means coordinative
-   * @default true
-   * @type boolean
-   */
-  included: boolean;
+    /**
+     * Make effect when marks not null，true means containment and false means coordinative
+     * @default true
+     * @type boolean
+     */
+    included?: boolean;
 
-  /**
-   * Tick mark of Slider, type of key must be number, and must in closed interval [min, max] ，each mark can declare its own style.
-   * @default { number: string|VNode } | { number: { style: object, label: string|VNode } } | { number: () => VNode }
-   * @type object
-   */
-  marks: {
-    [key: number]: string | VNode | { style: object; label: string | VNode } | Function;
-  };
+    /**
+     * Tick mark of Slider, type of key must be number, and must in closed interval [min, max] ，each mark can declare its own style.
+     * @default { number: string|VNode } | { number: { style: object, label: string|VNode } } | { number: () => VNode }
+     * @type object
+     */
+    marks?: {
+      [key: number]: string
+        | VNodeChild
+        | { style: object; label: string | VNodeChild }
+        | Function;
+    };
 
-  /**
-   * The maximum value the slider can slide to
-   * @default 100
-   * @type number
-   */
-  max: number;
+    /**
+     * The maximum value the slider can slide to
+     * @default 100
+     * @type number
+     */
+    max?: number;
 
-  /**
-   * The minimum value the slider can slide to.
-   * @default 0
-   * @type number
-   */
-  min: number;
+    /**
+     * The minimum value the slider can slide to.
+     * @default 0
+     * @type number
+     */
+    min?: number;
 
-  /**
-   * dual thumb mode
-   * @default false
-   * @type boolean
-   */
-  range: boolean;
+    /**
+     * dual thumb mode
+     * @default false
+     * @type boolean
+     */
+    range?: boolean;
 
-  /**
-   * The granularity the slider can step through values.
-   * Must greater than 0, and be divided by (max - min) . When marks no null, step can be null.
-   * @default 1
-   * @type number | null
-   */
-  step: number | null;
+    /**
+     * The granularity the slider can step through values.
+     * Must greater than 0, and be divided by (max - min) . When marks no null, step can be null.
+     * @default 1
+     * @type number | null
+     */
+    step?: number | null;
 
-  /**
-   * Slider will pass its value to tipFormatter, and display its value in Tooltip, and hide Tooltip when return value is null.
-   * @default IDENTITY
-   * @type Function | null
-   */
-  tipFormatter: Function | null;
+    /**
+     * Slider will pass its value to tipFormatter, and display its value in Tooltip, and hide Tooltip when return value is null.
+     * @default IDENTITY
+     * @type Function | null
+     */
+    tipFormatter?: Function | null;
 
-  /**
-   * The value of slider. When range is false, use number, otherwise, use [number, number]
-   * @type number | number[]
-   */
-  value: number | number[];
+    /**
+     * The value of slider. When range is false, use number, otherwise, use [number, number]
+     * @type number | number[]
+     */
+    value?: number | number[];
 
-  /**
-   * If true, the slider will be vertical.
-   * @default false
-   * @type boolean
-   */
-  vertical: boolean;
+    /**
+     * If true, the slider will be vertical.
+     * @default false
+     * @type boolean
+     */
+    vertical?: boolean;
 
-  /**
-   * If true, Tooltip will show always, or it will not show anyway, even if dragging or hovering.
-   * @default false
-   * @type boolean
-   */
-  tooltipVisible: boolean;
+    /**
+     * If true, Tooltip will show always, or it will not show anyway, even if dragging or hovering.
+     * @default false
+     * @type boolean
+     */
+    tooltipVisible?: boolean;
+
+    /**
+     * Set Tooltip display position. Ref Tooltip
+     * @see https://antdv.com/components/tooltip/
+     */
+    tooltipPlacement?: string;
+
+    /**
+     * The DOM container of the Tooltip,
+     * the default behavior is to create a div element in body.
+     */
+    getTooltipPopupContainer?: Function;
+
+    /**
+     * Fire when mouseup is fired.
+     * @param value
+     */
+    onAfterChange?: (value?: any) => void;
+
+    /**
+     * Callback function that is fired when the user changes the slider's value.
+     * @param value
+     */
+    onChange?: (value?: any) => void;
+  }
 
   /**
    * remove focus

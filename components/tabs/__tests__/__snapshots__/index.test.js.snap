@@ -18,7 +18,7 @@ exports[`Tabs tabPosition remove card 1`] = `
     <div class="ant-tabs-extra-content">xxx</div>
   </div>
   <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-  <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-left-content" style="margin-top: 0%;">
+  <div class="ant-tabs-left-content ant-tabs-content ant-tabs-content-animated" style="margin-top: 0%;">
     <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
       <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>foo<div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
     </div>

@@ -20,7 +20,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/basic.md correctly 1`] = `
       </div>
     </div>
     <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-    <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
+    <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
       <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
         <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div> Content of Tab Pane 1 <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
       </div>
@@ -58,7 +58,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/card.md correctly 1`] = `
     </div>
   </div>
   <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-  <div class="ant-tabs-content ant-tabs-content-no-animated ant-tabs-top-content ant-tabs-card-content">
+  <div class="ant-tabs-top-content ant-tabs-card-content ant-tabs-content ant-tabs-content-no-animated">
     <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
       <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div> Content of Tab Pane 1 <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
     </div>
@@ -97,7 +97,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/card-top.md correctly 1`] = `
       </div>
     </div>
     <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-    <div class="ant-tabs-content ant-tabs-content-no-animated ant-tabs-top-content ant-tabs-card-content">
+    <div class="ant-tabs-top-content ant-tabs-card-content ant-tabs-content ant-tabs-content-no-animated">
       <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
         <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
         <p>Content of Tab Pane 1</p>
@@ -146,7 +146,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/custom-add-trigger.md correctly 1`]
       </div>
     </div>
     <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-    <div class="ant-tabs-content ant-tabs-content-no-animated ant-tabs-top-content ant-tabs-card-content">
+    <div class="ant-tabs-top-content ant-tabs-card-content ant-tabs-content ant-tabs-content-no-animated">
       <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
         <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>Content of Tab 1<div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
       </div>
@@ -181,7 +181,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/custom-tab-bar.md correctly 1`] = `
       </div>
     </div>
     <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-    <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
+    <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
       <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false" style="height: 200px;">
         <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div> Content of Tab Pane 1 <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
       </div>
@@ -219,7 +219,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/disabled.md correctly 1`] = `
     </div>
   </div>
   <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-  <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
+  <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
     <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
       <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div> Tab 1 <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
     </div>
@@ -267,7 +267,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/editable-card.md correctly 1`] = `
     </div>
   </div>
   <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-  <div class="ant-tabs-content ant-tabs-content-no-animated ant-tabs-top-content ant-tabs-card-content">
+  <div class="ant-tabs-top-content ant-tabs-card-content ant-tabs-content ant-tabs-content-no-animated">
     <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
       <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>Content of Tab 1<div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
     </div>
@@ -307,7 +307,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/extra.md correctly 1`] = `
     </div>
   </div>
   <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-  <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
+  <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
     <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
       <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div> Content of tab 1 <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
     </div>
@@ -344,7 +344,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/icon.md correctly 1`] = `
     </div>
   </div>
   <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-  <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
+  <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
     <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
       <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div> Tab 1 <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
     </div>
@@ -417,7 +417,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/nest.md correctly 1`] = `
       </div>
     </div>
     <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-    <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
+    <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
       <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
         <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
         <div style="height: 300px;" class="ant-tabs-line ant-tabs ant-tabs-top">
@@ -455,7 +455,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/nest.md correctly 1`] = `
             </div>
           </div>
           <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-          <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
+          <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
             <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
               <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div> TTTT 0<div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
             </div>
@@ -591,7 +591,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/position.md correctly 1`] = `
       </div>
     </div>
     <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-    <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
+    <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
       <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
         <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div> Content of Tab 1 <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
       </div>
@@ -632,7 +632,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/size.md correctly 1`] = `
       </div>
     </div>
     <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-    <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
+    <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
       <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
         <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div> Content of tab 1 <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
       </div>
@@ -700,7 +700,7 @@ exports[`renders ./antdv-demo/docs/tabs/demo/slide.md correctly 1`] = `
       </div>
     </div>
     <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
-    <div class="ant-tabs-content ant-tabs-content-animated ant-tabs-top-content" style="margin-left: 0%;">
+    <div class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated" style="margin-left: 0%;">
       <div class="ant-tabs-tabpane ant-tabs-tabpane-active" role="tabpanel" aria-hidden="false">
         <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div> Content of tab 1<div tabindex="0" style="width: 0px; height: 0px; overflow: hidden; position: absolute;" role="presentation"></div>
       </div>

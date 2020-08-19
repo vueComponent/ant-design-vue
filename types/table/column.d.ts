@@ -199,7 +199,7 @@ export interface ColumnProps<T> {
    * such as slots: { filterIcon: 'XXX'}
    * @type object
    */
-  slots?: Slots;
+  slots?: { [key: string]: string };
 }
 
 export declare class Column<T> extends AntdComponent {

@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from '../component';
-import { Spin } from '../spin';
+import { SpinProps } from '../spin';
 import { Pagination } from '../pagination';
 import { Column, ColumnProps, SortOrder } from './column';
 import { ColumnGroup } from './column-group';
@@ -234,7 +234,7 @@ export declare class Table<T> extends AntdComponent {
      * @default false
      * @type boolean | object
      */
-    loading?: boolean | Spin | VNodeChild | JSX.Element;
+    loading?: boolean | SpinProps | VNodeChild | JSX.Element;
 
     /**
      * i18n text including filter, sort, empty text, etc

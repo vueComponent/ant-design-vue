@@ -4,26 +4,31 @@
 
 import { AntdComponent } from '../component';
 import { MenuItem } from './menu-item';
+import { VNodeChild } from 'vue';
 
 export declare class SubMenu extends AntdComponent {
-  /**
-   * unique id of the menu item
-   * @type string
-   */
-  key: string;
+  $props: {
+    /**
+    * unique id of the menu item
+    * @type string
+    */
+    key?: string;
 
-  /**
-   * whether menu item is disabled or not
-   * @default false
-   * @type boolean
-   */
-  disabled: boolean;
+    /**
+     * whether menu item is disabled or not
+     * @default false
+     * @type boolean
+     */
+    disabled?: boolean;
 
-  /**
-   * title of the sub menu
-   * @type string | slot
-   */
-  title: any;
-
-  popupClassName: string;
+    /**
+     * title of the sub menu
+     * @type string | slot
+     */
+    title?: VNodeChild | JSX.Element;
+    /**
+     * Sub-menu class name (1.5.0)
+     */
+    popupClassName?: string;
+  }
 }

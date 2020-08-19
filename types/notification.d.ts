@@ -22,7 +22,7 @@ export interface NotificationOptions extends NotificationConfigOptions {
    * The content of notification box (required)
    * @type string | VNode | Function
    */
-  description: VNodeChild | JSX.Element | Function;
+  description?: VNodeChild | JSX.Element | Function;
 
   /**
    * Customized icon

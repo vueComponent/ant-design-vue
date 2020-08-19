@@ -232,8 +232,21 @@ export declare class Form extends AntdComponent {
     scrollToFirstError?: boolean;
 
     validateTrigger?: string | string[] | false;
-    onFinish?: (values: object) => void;
-    onFinishFailed?: (errorInfo: ValidateErrorEntity) => void;
+    /**
+     * Defines a function will be called if form data validation.
+     * @param e
+     */
+    onSubmit?: (e?: Event) => void;
+    /**
+     * Trigger after submitting the form and verifying data successfully
+     * @param values
+     */
+    onFinish?: (values?: object) => void;
+    /**
+     * Trigger after submitting the form and verifying data failed
+     * @param errorInfo
+     */
+    onFinishFailed?: (errorInfo?: ValidateErrorEntity) => void;
   };
   /**
    * clear validation message for certain fields.

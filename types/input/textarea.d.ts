@@ -10,18 +10,22 @@ export declare class TextArea extends AntdComponent {
    * @default false
    * @type boolean | object
    */
-  autosize: boolean | { minRows: number; maxRows: number };
-  autoSize: boolean | { minRows: number; maxRows: number };
+  autosize?: boolean | { minRows: number; maxRows: number };
 
   /**
    * The initial input content
    * @type string | number
    */
-  defaultValue: string | number;
+  defaultValue?: string | number;
 
   /**
    * The input content value
    * @type string | number
    */
-  value: string | number;
+  value?: string | number;
+  /**
+   *allow to remove input content with clear icon (1.5.0)
+   * @type boolean
+   */
+  allowClear?: boolean
 }

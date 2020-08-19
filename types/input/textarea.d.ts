@@ -10,7 +10,7 @@ export declare class TextArea extends AntdComponent {
    * @default false
    * @type boolean | object
    */
-  autosize?: boolean | { minRows: number; maxRows: number };
+  autoSize?: boolean | { minRows: number; maxRows: number };
 
   /**
    * The initial input content

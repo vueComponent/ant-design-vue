@@ -78,7 +78,7 @@ export declare class FormItem extends AntdComponent {
     /**
      * a key of model. In the use of validate and resetFields method, the attribute is required
      */
-    name?: string | InternalNamePath;
+    name?: NamePath;
     /**
      * validation rules of form
      */

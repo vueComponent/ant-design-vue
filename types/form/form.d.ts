@@ -5,7 +5,6 @@
 import { AntdComponent } from '../component';
 import { Col } from '../grid/col';
 import { FormItem } from './form-item';
-export { Options as ScrollOptions } from 'scroll-into-view-if-needed';
 
 export declare type InternalNamePath = (string | number)[];
 export declare type NamePath = string | number | InternalNamePath;

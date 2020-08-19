@@ -1,3 +1,4 @@
+import { CSSProperties } from 'vue';
 // Project: https://github.com/vueComponent/ant-design-vue
 // Definitions by: Pythonfo <https://github.com/Pythonfo>
 // Copy from: akki-jat <https://github.com/akki-jat>
@@ -5,23 +6,27 @@
 
 import { AntdComponent } from '../component';
 
-export default class LayoutFooter extends AntdComponent {
+export interface LayoutFooterProps {
   /**
    * container className
    * @default undefined
    * @type string
    */
-  class: string;
+  class?: string;
 
   /**
    * to customize the styles
-   * @type string | object
+   * @type CSSProperties
    */
-  style: string | object;
+  style?: CSSProperties;
 
   /**
    * whether contain Sider in children, don't have to assign it normally. Useful in ssr avoid style flickering
    * @type boolean
    */
-  hasSider: boolean;
+  hasSider?: boolean;
+}
+
+export default class LayoutFooter extends AntdComponent {
+  $props: LayoutFooterProps;
 }

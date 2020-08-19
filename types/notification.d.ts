@@ -97,13 +97,13 @@ export interface NotificationConfigOptions {
    */
   top?: string;
   /**
-     * custom close icon
-     * @type VNode | function
-     */
+   * custom close icon
+   * @type VNode | function
+   */
   closeIcon?: VNodeChild | JSX.Element | Function;
 }
 
-export interface NotificationApi {
+export interface Notification {
   success(config: NotificationOptions): void;
   warning(config: NotificationOptions): void;
   warn(config: NotificationOptions): void;
@@ -114,4 +114,3 @@ export interface NotificationApi {
   close(key: string): void;
   destroy(): void;
 }
-

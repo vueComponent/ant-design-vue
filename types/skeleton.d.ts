@@ -19,37 +19,39 @@ export interface SkeletonParagraphProps {
 }
 
 export declare class Skeleton extends AntdComponent {
-  /**
-   * Show animation effect
-   * @default false
-   * @type boolean
-   */
-  active: boolean;
+  $props: {
+    /**
+     * Show animation effect
+     * @default false
+     * @type boolean
+     */
+    active?: boolean;
 
-  /**
-   * Show avatar placeholder
-   * @default false
-   * @type boolean | object
-   */
-  avatar: boolean | SkeletonAvatarProps;
+    /**
+     * Show avatar placeholder
+     * @default false
+     * @type boolean | object
+     */
+    avatar?: boolean | SkeletonAvatarProps;
 
-  /**
-   * Display the skeleton when true
-   * @type boolean
-   */
-  loading: boolean;
+    /**
+     * Display the skeleton when true
+     * @type boolean
+     */
+    loading?: boolean;
 
-  /**
-   * Show paragraph placeholder
-   * @default true
-   * @type boolean | object
-   */
-  paragraph: boolean | SkeletonParagraphProps;
+    /**
+     * Show paragraph placeholder
+     * @default true
+     * @type boolean | object
+     */
+    paragraph?: boolean | SkeletonParagraphProps;
 
-  /**
-   * Show title placeholder
-   * @default true
-   * @type boolean | object
-   */
-  title: boolean | SkeletonTitleProps;
+    /**
+     * Show title placeholder
+     * @default true
+     * @type boolean | object
+     */
+    title?: boolean | SkeletonTitleProps;
+  };
 }

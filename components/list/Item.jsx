@@ -46,7 +46,7 @@ export const ListItemMeta = (props, { slots }) => {
 Object.assign(ListItemMeta, {
   props: ListItemMetaProps,
   __ANT_LIST_ITEM_META: true,
-  componentName: 'AListItemMeta',
+  displayName: 'AListItemMeta',
 });
 
 function getGrid(grid, t) {

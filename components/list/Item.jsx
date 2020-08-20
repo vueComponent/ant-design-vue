@@ -21,7 +21,7 @@ export const ListItemMetaProps = {
   title: PropTypes.any,
 };
 
-export const AListItemMeta = (props, { slots }) => {
+export const ListItemMeta = (props, { slots }) => {
   const configProvider = inject('configProvider', ConfigConsumerProps);
   const getPrefixCls = configProvider.getPrefixCls;
   const { prefixCls: customizePrefixCls } = props;
@@ -43,9 +43,10 @@ export const AListItemMeta = (props, { slots }) => {
   );
 };
 
-Object.assign(AListItemMeta, {
+Object.assign(ListItemMeta, {
   props: ListItemMetaProps,
   __ANT_LIST_ITEM_META: true,
+  componentName: 'AListItemMeta',
 });
 
 function getGrid(grid, t) {
@@ -55,7 +56,7 @@ function getGrid(grid, t) {
 export default {
   name: 'AListItem',
   inheritAttrs: false,
-  Meta: AListItemMeta,
+  Meta: ListItemMeta,
   props: ListItemProps,
   setup() {
     const listContext = inject('listContext', {});

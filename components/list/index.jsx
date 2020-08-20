@@ -280,7 +280,7 @@ const List = {
 List.install = function(app) {
   app.component(List.name, List);
   app.component(List.Item.name, List.Item);
-  app.component(List.Item.Meta.name, List.Item.Meta);
+  app.component(List.Item.Meta.componentName, List.Item.Meta);
 };
 
 export default List;

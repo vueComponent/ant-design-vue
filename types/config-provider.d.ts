@@ -1,5 +1,5 @@
 import { AntdComponent } from './component';
-import Vue from 'vue';
+import { App, VNodeChild } from 'vue';
 
 import { Locale } from './locale-provider';
 
@@ -8,10 +8,13 @@ export interface CSPConfig {
 }
 
 export declare class ConfigProvider extends AntdComponent {
-  getPopupContainer?: (triggerNode: HTMLElement, dialogContext?: Vue | null) => HTMLElement;
-  getPrefixCls: (suffixCls: string, customizePrefixCls?: string) => string;
-  renderEmpty: Function;
-  csp?: CSPConfig;
-  autoInsertSpaceInButton?: boolean;
-  transformCellText?: Function;
+  $props: {
+    getPopupContainer?: (triggerNode: HTMLElement, dialogContext?: App | null) => HTMLElement;
+    getPrefixCls?: (suffixCls: string, customizePrefixCls?: string) => string;
+    renderEmpty?: Function | VNodeChild | JSX.Element;
+    csp?: CSPConfig;
+    autoInsertSpaceInButton?: boolean;
+    transformCellText?: Function | VNodeChild | JSX.Element;
+    locale: Locale | object;
+  };
 }

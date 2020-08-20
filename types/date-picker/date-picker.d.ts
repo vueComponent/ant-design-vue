@@ -2,24 +2,21 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { DatepickerCommon } from './common';
+import { DatepickerProps, DatepickerMethod } from './common';
 import { Moment } from 'moment';
 import { RangePicker } from './range-picker';
 import { MonthPicker } from './month-picker';
 import { WeekPicker } from './week-picker';
+import { VNodeChild } from 'vue';
 
-export declare class DatePicker extends DatepickerCommon {
-  static RangePicker: typeof RangePicker;
-  static MonthPicker: typeof MonthPicker;
-  static WeekPicker: typeof WeekPicker;
-
+declare class DatePickerProps extends DatepickerProps {
   /**
    * Defualt Value
    * @description to set default date
    * @default undefined
    * @type Moment
    */
-  defaultValue: Moment | string;
+  defaultValue?: Moment | string;
 
   /**
    * Default Picker Value
@@ -27,7 +24,7 @@ export declare class DatePicker extends DatepickerCommon {
    * @default undefined
    * @type Moment
    */
-  defaultPickerValue: Moment | string;
+  defaultPickerValue?: Moment | string;
 
   /**
    * Disabled Time
@@ -35,7 +32,7 @@ export declare class DatePicker extends DatepickerCommon {
    * @default undefined
    * @type Function (function(date))
    */
-  disabledTime: Function;
+  disabledTime?: Function;
 
   /**
    * Format
@@ -43,7 +40,7 @@ export declare class DatePicker extends DatepickerCommon {
    * @default 'YYYY-MM-DD'
    * @type string
    */
-  format: string;
+  format?: string;
 
   /**
    * Render Extra Footer
@@ -51,7 +48,7 @@ export declare class DatePicker extends DatepickerCommon {
    * @default undefined
    * @type any (slot="renderExtraFooter")
    */
-  renderExtraFooter: any;
+  renderExtraFooter?: VNodeChild | JSX.Element;
 
   /**
    * Show Time
@@ -61,7 +58,7 @@ export declare class DatePicker extends DatepickerCommon {
    * @default TimePicker Options
    * @type object | boolean
    */
-  showTime: object | boolean;
+  showTime?: object | boolean;
 
   /**
    * Show Today
@@ -69,7 +66,7 @@ export declare class DatePicker extends DatepickerCommon {
    * @default true
    * @type boolean
    */
-  showToday: boolean;
+  showToday?: boolean;
 
   /**
    * Value
@@ -77,5 +74,23 @@ export declare class DatePicker extends DatepickerCommon {
    * @default undefined
    * @type Moment
    */
-  value: Moment | string;
+  value?: Moment | string;
+
+  /**
+   * a callback function, can be executed when the selected time is changing
+   */
+  onChange?: (date?: Moment | string, dateString?: string) => void;
+
+  /**
+   * callback when click ok button
+   */
+  onOk?: () => void;
+}
+
+export declare class DatePicker extends DatepickerMethod {
+  static RangePicker: typeof RangePicker;
+  static MonthPicker: typeof MonthPicker;
+  static WeekPicker: typeof WeekPicker;
+
+  $props: DatePickerProps;
 }

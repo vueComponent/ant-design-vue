@@ -51,83 +51,85 @@ export interface ResponsiveObject {
   settings: 'unslick' | Settings;
 }
 export declare class Carousel extends AntdComponent {
-  accessibility?: boolean;
-  adaptiveHeight?: boolean;
-  arrows?: boolean;
-  autoplaySpeed?: number;
-  /**
-   * Whether to scroll automatically
-   * @default false
-   * @type boolean
-   */
-  autoplay?: boolean;
-  centerMode?: boolean;
-  centerPadding?: string;
-  cssEase?: string;
-  dotsClass?: string;
-  /**
-   * Whether to show the dots at the bottom of the gallery
-   * @default true
-   * @type boolean
-   */
-  dots?: boolean;
-  draggable?: boolean;
-  /**
-   * Transition interpolation function name
-   * @default 'linear'
-   * @type string
-   */
-  easing?: string;
-  edgeFriction?: number;
-  fade?: boolean;
-  focusOnSelect?: boolean;
-  infinite?: boolean;
-  initialSlide?: number;
-  pauseOnDotsHover?: boolean;
-  pauseOnFocus?: boolean;
-  pauseOnHover?: boolean;
-  responsive?: ResponsiveObject[] | undefined;
-  rows?: number;
-  rtl?: boolean;
-  slide?: string;
-  slidesPerRow?: number;
-  slidesToScroll?: number;
-  slidesToShow?: number;
-  speed?: number;
-  swipeToSlide?: boolean;
-  swipe?: boolean;
-  touchMove?: boolean;
-  touchThreshold?: number;
-  useCSS?: boolean;
-  useTransform?: boolean;
-  variableWidth?: boolean;
-  /**
-   * Whether to use a vertical display
-   * @default false
-   * @type boolean
-   */
-  vertical?: boolean;
-  verticalSwiping?: boolean;
-  waitForAnimate?: boolean;
-  dotPosition?: DotPosition;
-  /**
-   * Callback function called after the current index changes
-   * @type Function
-   */
-  afterChange: (current: number) => any;
+  $props: {
+    accessibility?: boolean;
+    adaptiveHeight?: boolean;
+    arrows?: boolean;
+    autoplaySpeed?: number;
+    /**
+     * Whether to scroll automatically
+     * @default false
+     * @type boolean
+     */
+    autoplay?: boolean;
+    centerMode?: boolean;
+    centerPadding?: string;
+    cssEase?: string;
+    dotsClass?: string;
+    /**
+     * Whether to show the dots at the bottom of the gallery
+     * @default true
+     * @type boolean
+     */
+    dots?: boolean;
+    draggable?: boolean;
+    /**
+     * Transition interpolation function name
+     * @default 'linear'
+     * @type string
+     */
+    easing?: string;
+    edgeFriction?: number;
+    fade?: boolean;
+    focusOnSelect?: boolean;
+    infinite?: boolean;
+    initialSlide?: number;
+    pauseOnDotsHover?: boolean;
+    pauseOnFocus?: boolean;
+    pauseOnHover?: boolean;
+    responsive?: ResponsiveObject[] | undefined;
+    rows?: number;
+    rtl?: boolean;
+    slide?: string;
+    slidesPerRow?: number;
+    slidesToScroll?: number;
+    slidesToShow?: number;
+    speed?: number;
+    swipeToSlide?: boolean;
+    swipe?: boolean;
+    touchMove?: boolean;
+    touchThreshold?: number;
+    useCSS?: boolean;
+    useTransform?: boolean;
+    variableWidth?: boolean;
+    /**
+     * Whether to use a vertical display
+     * @default false
+     * @type boolean
+     */
+    vertical?: boolean;
+    verticalSwiping?: boolean;
+    waitForAnimate?: boolean;
+    dotPosition?: DotPosition;
+    /**
+     * Callback function called after the current index changes
+     * @type Function
+     */
+    afterChange?: (current: number) => void;
 
-  /**
-   * Callback function called before the current index changes
-   * @type Function
-   */
-  beforeChange: (from: number, to: number) => any;
+    /**
+     * Callback function called before the current index changes
+     * @type Function
+     */
+    beforeChange?: (from?: number, to?: number) => void;
 
-  /**
-   * Transition effect
-   * @default 'scrollx'
-   * @type string
-   */
-  effect: 'scrollx' | 'fade';
+    /**
+     * Transition effect
+     * @default 'scrollx'
+     * @type string
+     */
+    effect?: 'scrollx' | 'fade';
+  };
 
   /**
    * Go to slide index, if dontAnimate=true, it happens without animation

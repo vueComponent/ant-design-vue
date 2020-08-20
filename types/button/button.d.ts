@@ -4,8 +4,9 @@
 
 import { ButtonGroup } from './button-group';
 import { VNodeChild } from 'vue';
+import { AntdComponent } from '../component';
 
-export declare class Button {
+export declare class Button extends AntdComponent {
   static Group: typeof ButtonGroup;
 
   $props: {

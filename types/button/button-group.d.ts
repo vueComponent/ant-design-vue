@@ -2,7 +2,9 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-export declare class ButtonGroup {
+import { AntdComponent } from '../component';
+
+export declare class ButtonGroup extends AntdComponent {
   $props: {
     /**
      * can be set to small large or omitted

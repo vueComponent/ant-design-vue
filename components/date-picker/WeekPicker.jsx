@@ -10,6 +10,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { WeekPickerProps } from './interface';
 import interopDefault from '../_util/interopDefault';
 import InputIcon from './InputIcon';
+import { getDataAndAriaProps } from '../_util/util';
 
 function formatValue(value, format) {
   return (value && value.format(format)) || '';
@@ -207,7 +208,12 @@ export default {
       style: popupStyle,
     };
     return (
-      <span class={classNames(className, pickerClass)} style={style} id={id}>
+      <span
+        class={classNames(className, pickerClass)}
+        style={style}
+        id={id}
+        {...getDataAndAriaProps(props)}
+      >
         <VcDatePicker {...vcDatePickerProps} vSlots={{ default: input, ...$slots }}></VcDatePicker>
       </span>
     );

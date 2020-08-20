@@ -272,7 +272,6 @@ export default {
       $slots,
       getContainer,
     } = this;
-
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('anchor', customizePrefixCls);
     this._sPrefixCls = prefixCls;
@@ -281,7 +280,7 @@ export default {
       visible: activeLink,
     });
 
-    const wrapperClass = classNames(this.$attrs.class, this.wrapperClass, `${prefixCls}-wrapper`);
+    const wrapperClass = classNames(this.wrapperClass, `${prefixCls}-wrapper`);
 
     const anchorClass = classNames(prefixCls, {
       fixed: !affix && !showInkInFixed,
@@ -290,9 +289,7 @@ export default {
     const wrapperStyle = {
       maxHeight: offsetTop ? `calc(100vh - ${offsetTop}px)` : '100vh',
       ...this.wrapperStyle,
-      ...this.$attrs.style,
     };
-
     const anchorContent = (
       <div class={wrapperClass} style={wrapperStyle}>
         <div class={anchorClass}>
@@ -307,7 +304,7 @@ export default {
     return !affix ? (
       anchorContent
     ) : (
-      <Affix offsetTop={offsetTop} target={getContainer}>
+      <Affix {...this.$attrs} offsetTop={offsetTop} target={getContainer}>
         {anchorContent}
       </Affix>
     );

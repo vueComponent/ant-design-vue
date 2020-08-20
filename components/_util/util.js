@@ -48,4 +48,13 @@ function resolvePropValue(options, props, key, value) {
   return value;
 }
 
+export function getDataAndAriaProps(props) {
+  return Object.keys(props).reduce((memo, key) => {
+    if (key.substr(0, 5) === 'data-' || key.substr(0, 5) === 'aria-') {
+      memo[key] = props[key];
+    }
+    return memo;
+  }, {});
+}
+
 export { isOn, cacheStringFunction, camelize, hyphenate, capitalize, resolvePropValue };

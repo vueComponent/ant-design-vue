@@ -18,6 +18,7 @@ import {
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { formatDate } from './utils';
+import { getDataAndAriaProps } from '../_util/util';
 
 // export const PickerProps = {
 //   value?: moment.Moment;
@@ -244,6 +245,7 @@ export default function createPicker(TheCalendar, props) {
           // tabindex={props.disabled ? -1 : 0}
           // onFocus={focus}
           // onBlur={blur}
+          {...getDataAndAriaProps(this.$attrs)}
           onMouseenter={this.onMouseEnter}
           onMouseleave={this.onMouseLeave}
         >

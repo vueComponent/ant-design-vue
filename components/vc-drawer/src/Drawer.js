@@ -381,7 +381,7 @@ const Drawer = {
         keyboard,
         maskClosable,
       } = this.$props;
-      const { class: cls, style } = this.$attrs;
+      const { class: cls, style, ...restAttrs } = this.$attrs;
       const children = getSlot(this);
       const wrapperClassname = classnames(prefixCls, {
         [`${prefixCls}-${placement}`]: true,
@@ -424,6 +424,7 @@ const Drawer = {
         });
       }
       const domContProps = {
+        ...restAttrs,
         class: wrapperClassname,
         onTransitionend: this.onWrapperTransitionEnd,
         onKeydown: open && keyboard ? this.onKeyDown : noop,

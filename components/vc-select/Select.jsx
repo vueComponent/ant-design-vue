@@ -48,6 +48,7 @@ import { SelectPropTypes } from './PropTypes';
 import contains from '../vc-util/Dom/contains';
 import { isIE, isEdge } from '../_util/env';
 import isValid from '../_util/isValid';
+import { getDataAndAriaProps } from '../_util/util';
 
 const SELECT_EMPTY_VALUE_KEY = 'RC_SELECT_EMPTY_VALUE_KEY';
 
@@ -1580,6 +1581,7 @@ const Select = {
         ariaId={this.$data._ariaId}
       >
         <div
+          {...getDataAndAriaProps(this.$attrs)}
           ref={chaining(this.saveRootRef, this.saveSelectionRef)}
           style={style}
           class={classnames(rootCls)}

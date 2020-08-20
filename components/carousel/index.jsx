@@ -153,7 +153,7 @@ const Carousel = {
     if (props.effect === 'fade') {
       props.fade = true;
     }
-
+    const { class: cls, style, ...restAttrs } = this.$attrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
     let className = getPrefixCls('carousel', props.prefixCls);
     const dotsClass = 'slick-dots';
@@ -162,17 +162,19 @@ const Carousel = {
     props.dotsClass = classNames(`${dotsClass}`, `${dotsClass}-${dotPosition || 'bottom'}`, {
       [`${props.dotsClass}`]: !!props.dotsClass,
     });
-    if (props.vertical) {
-      className = `${className} ${className}-vertical`;
-    }
+    className = classNames({
+      [cls]: !!cls,
+      [className]: !!className,
+      [`${className}-vertical`]: props.vertical,
+    });
     const SlickCarouselProps = {
       ...props,
-      ...this.$attrs,
+      ...restAttrs,
       nextArrow: getComponent(this, 'nextArrow'),
       prevArrow: getComponent(this, 'prevArrow'),
     };
     return (
-      <div class={className}>
+      <div class={className} style={style}>
         <SlickCarousel ref={this.saveSlick} {...SlickCarouselProps} vSlots={$slots}></SlickCarousel>
       </div>
     );

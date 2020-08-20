@@ -23,6 +23,7 @@ export default {
         registerLink: noop,
         unregisterLink: noop,
         scrollTo: noop,
+        $data: {},
       }),
       antAnchorContext: inject('antAnchorContext', {}),
       configProvider: inject('configProvider', ConfigConsumerProps),
@@ -62,7 +63,7 @@ export default {
     const prefixCls = getPrefixCls('anchor', customizePrefixCls);
 
     const title = getComponent(this, 'title');
-    const active = this.antAnchor.activeLink === href;
+    const active = this.antAnchor.$data.activeLink === href;
     const wrapperClassName = classNames(`${prefixCls}-link`, {
       [`${prefixCls}-link-active`]: active,
     });

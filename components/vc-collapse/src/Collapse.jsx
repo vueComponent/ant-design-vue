@@ -9,6 +9,7 @@ import {
 import { cloneElement } from '../../_util/vnode';
 import openAnimationFactory from './openAnimationFactory';
 import { collapseProps } from './commonProps';
+import { getDataAndAriaProps } from '../../_util/util';
 
 function _toArray(activeKey) {
   let currentActiveKey = activeKey;
@@ -131,7 +132,12 @@ export default {
       [className]: className,
     };
     return (
-      <div class={collapseClassName} style={style} role={accordion ? 'tablist' : null}>
+      <div
+        class={collapseClassName}
+        {...getDataAndAriaProps(this.$attrs)}
+        style={style}
+        role={accordion ? 'tablist' : null}
+      >
         {this.getItems()}
       </div>
     );

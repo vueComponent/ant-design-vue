@@ -13,6 +13,7 @@ import { hasProp, getOptionProps, initDefaultProps, getComponent } from '../_uti
 import BaseMixin from '../_util/BaseMixin';
 import { formatDate } from './utils';
 import InputIcon from './InputIcon';
+import { getDataAndAriaProps } from '../_util/util';
 
 function getShowDateFromValue(value, mode) {
   const [start, end] = value;
@@ -413,6 +414,7 @@ export default {
         onBlur={onBlur}
         onMouseenter={this.onMouseEnter}
         onMouseleave={this.onMouseLeave}
+        {...getDataAndAriaProps(props)}
       >
         <VcDatePicker {...vcDatePickerProps} vSlots={{ default: input, ...$slots }}></VcDatePicker>
       </span>

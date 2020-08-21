@@ -16,12 +16,12 @@ export declare class Meta {
      * The description of list item
      * @type any (string | slot)
      */
-    description?: string | VNodeChild;
+    description?: VNodeChild | JSX.Element;
 
     /**
      * The title of list item
      * @type any (string | slot)
      */
-    title?: string | VNodeChild;
+    title?: VNodeChild | JSX.Element;
   };
 }

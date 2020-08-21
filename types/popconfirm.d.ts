@@ -4,7 +4,8 @@
 
 import { TooltipCommon } from './tootip/common';
 import { VNodeChild } from 'vue';
-export declare class Popconfirm extends TooltipCommon {
+import { AntdComponent } from './component';
+export declare class Popconfirm extends AntdComponent {
   $props: {
     /**
      * text of the Cancel button
@@ -45,6 +46,6 @@ export declare class Popconfirm extends TooltipCommon {
      * @type boolean
      */
     disabled?: boolean;
-  }
+  } & TooltipCommon
 
 }

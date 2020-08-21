@@ -2,13 +2,16 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import Vue from 'vue';
+import Vue, { VNodeChild } from 'vue';
+import { AntdComponent } from '../component';
 import { TooltipCommon } from './common';
 
-export declare class Tooltip extends TooltipCommon {
-  /**
-   * The text shown in the tooltip
-   * @type any (string | slot)
-   */
-  title: any;
+export declare class Tooltip  extends AntdComponent {
+  $props: {
+    /**
+     * The text shown in the tooltip
+     * @type any (string | slot)
+     */
+    title: VNodeChild | JSX.Element
+  } & TooltipCommon
 }

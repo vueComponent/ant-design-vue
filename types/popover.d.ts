@@ -4,7 +4,8 @@
 
 import { TooltipCommon } from './tootip/common';
 import { VNodeChild } from 'vue';
-export declare class Popover extends TooltipCommon {
+import { AntdComponent } from './component';
+export declare class Popover extends AntdComponent {
   $props: {
     /**
      * Content of the card
@@ -17,5 +18,5 @@ export declare class Popover extends TooltipCommon {
      * @type any (string | slot | VNode)
      */
     title?: VNodeChild | JSX.Element;
-  }
+  } & TooltipCommon
 }

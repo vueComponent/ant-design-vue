@@ -39,7 +39,7 @@ export interface ModalOptions {
    * Modal content
    * @type string | VNode | (h) => VNode
    */
-  content?:  VNodeChild | JSX.Element;
+  content?: VNodeChild | JSX.Element;
   /**
    * custom icon (Added in 1.14.0)
    */
@@ -94,7 +94,7 @@ export interface ModalOptions {
    * Title
    * @type string | VNode | (h) => VNode
    */
-  title?:  VNodeChild | JSX.Element;
+  title?: VNodeChild | JSX.Element;
 
   /**
    * Width of the modal dialog
@@ -112,7 +112,7 @@ export interface ModalOptions {
   /**
    * Style of floating layer, typically used at least for adjusting the position.
    */
-  dialogStyle?: CSSProperties
+  dialogStyle?: CSSProperties;
   /**
    * className of floating layer.
    */
@@ -155,9 +155,9 @@ export interface ModalConfirm {
 export declare class Modal extends AntdComponent {
   $props: {
     /**
-   * Specify a function that will be called when modal is closed completely.
-   * @type Function
-   */
+     * Specify a function that will be called when modal is closed completely.
+     * @type Function
+     */
     afterClose?: () => any;
 
     /**
@@ -271,7 +271,7 @@ export declare class Modal extends AntdComponent {
      * The modal dialog's title
      * @type any (string | slot)
      */
-    title?:  VNodeChild | JSX.Element;
+    title?: VNodeChild | JSX.Element;
 
     /**
      * Whether the modal dialog is visible or not
@@ -299,21 +299,11 @@ export declare class Modal extends AntdComponent {
      * @type number
      */
     zIndex?: number;
-  }
+  };
   static info(options: ModalOptions): ModalConfirm;
   static success(options: ModalOptions): ModalConfirm;
   static error(options: ModalOptions): ModalConfirm;
   static warning(options: ModalOptions): ModalConfirm;
   static confirm(options: ModalOptions): ModalConfirm;
   static destroyAll(): void;
-}
-
-declare module 'vue/types/vue' {
-  interface Vue {
-    $info: (modalOptios: ModalOptions) => ModalConfirm;
-    $success: (modalOptios: ModalOptions) => ModalConfirm;
-    $error: (modalOptios: ModalOptions) => ModalConfirm;
-    $warning: (modalOptios: ModalOptions) => ModalConfirm;
-    $confirm: (modalOptios: ModalOptions) => ModalConfirm;
-  }
 }

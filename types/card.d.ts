@@ -81,7 +81,7 @@ export declare class Card extends AntdComponent {
      * List of TabPane's head, Custom tabs can be created with the scopedSlots property
      * @type Array<{key: string, tab: any, scopedSlots: {tab: string}}>
      */
-    tabList?: Array<{ key: string; tab: any; scopedSlots: { tab: string } }>;
+    tabList?: Array<{ key: string; tab: any; slots: { tab: string } }>;
 
     /**
      * Card title

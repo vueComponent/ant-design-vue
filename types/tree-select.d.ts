@@ -8,12 +8,21 @@ import { VNodeChild, CSSProperties } from 'vue';
 
 export interface TreeData {
   key: string | number;
+  title: string | VNodeChild | JSX.Element;
   value: string;
-  label: any;
-  children: any;
+  label?: any;
+  children?: object[];
   disabled?: boolean;
   disableCheckbox?: boolean;
   selectable?: boolean;
+  checkable?: boolean;
+  /**
+   * Slots
+   * @description When using treeNodes, you can use this property to configure the properties that support the slot,
+   * such as slots: { title: 'XXX'}
+   * @type object
+   */
+  slots?: Record<string, string>;
 }
 
 export interface ReplaceFields {

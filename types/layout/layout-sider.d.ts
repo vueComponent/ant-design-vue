@@ -7,12 +7,6 @@ import { AntdComponent } from '../component';
 
 export interface LayoutSiderProps {
   /**
-   * container className
-   * @type string
-   */
-  class?: string;
-
-  /**
    * whether can be collapsed
    * @default false
    * @type boolean
@@ -38,12 +32,6 @@ export interface LayoutSiderProps {
    * @type boolean
    */
   reverseArrow?: boolean;
-
-  /**
-   * to customize the styles
-   * @type CSSProperties
-   */
-  style?: CSSProperties;
 
   /**
    * specify the customized trigger, set to null to hide the trigger

@@ -8,20 +8,6 @@ import { VNodeChild } from 'vue';
 export declare class TreeNode extends AntdComponent {
   $props: {
     /**
-     * Class
-     * @description className
-     * @type string
-     */
-    class?: string;
-
-    /**
-     * Style
-     * @description style of tree node
-     * @type string | object
-     */
-    style?: string | object;
-
-    /**
      * When Tree is checkable, set TreeNode display Checkbox or not
      * @version 1.5.0
      */
@@ -90,19 +76,5 @@ export declare class TreeNode extends AntdComponent {
      * @type string
      */
     value?: string;
-
-    /**
-     * Slots
-     * @description When using treeNodes, you can use this property to configure the properties that support the slot,
-     * such as slots: { title: 'XXX'}
-     * @type object
-     */
-    slots?: object;
-
-    /**
-     * When using treeNodes, you can use this property to configure the events,
-     * such as on: { click: () => {}}
-     */
-    on?: object;
   };
 }

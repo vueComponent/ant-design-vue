@@ -32,7 +32,7 @@ import { Input } from './input/input';
 import { InputNumber } from './input-number';
 import { Layout } from './layout/layout';
 import { List } from './list/list';
-import { LocaleProvider } from './locale-provider';
+import { Space } from './space';
 import { Message } from './message';
 import { Mentions } from './mentions/mentions';
 import { Menu } from './menu/menu';
@@ -104,7 +104,7 @@ export {
   InputNumber,
   Layout,
   List,
-  LocaleProvider,
+  Space,
   message,
   Menu,
   Mentions,

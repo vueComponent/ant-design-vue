@@ -184,7 +184,7 @@
     "xhr-mock": "^2.5.1"
   },
   "dependencies": {
-    "@ant-design/icons-vue": "^5.0.0",
+    "@ant-design/icons-vue": "^5.1.1",
     "@babel/runtime": "^7.10.5",
     "@simonwep/pickr": "~1.7.0",
     "add-dom-event-listener": "^1.0.2",

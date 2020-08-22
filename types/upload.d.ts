@@ -4,6 +4,10 @@
 
 import { AntdComponent } from './component';
 
+export interface HttpRequestHeader {
+  [key: string]: string;
+}
+
 export interface VcFile extends File {
   uid: string;
   readonly lastModifiedDate: Date;
@@ -30,7 +34,25 @@ export interface UploadFile<T = any> {
   preview?: string;
 }
 
-export interface ShowUploadList {
+export interface UploadChangeParam<T extends object = UploadFile> {
+  file: T;
+  fileList: UploadFile[];
+  event?: { percent: number };
+}
+
+export interface VcCustomRequestOptions {
+  onProgress: (event: { percent: number }, file: File) => void;
+  onError: (error: Error) => void;
+  onSuccess: (response: object, file: File) => void;
+  data: object;
+  filename: string;
+  file: File;
+  withCredentials: boolean;
+  action: string;
+  headers: object;
+}
+
+export interface ShowUploadListInterface {
   showRemoveIcon?: boolean;
   showPreviewIcon?: boolean;
   showDownloadIcon?: boolean;
@@ -66,7 +88,7 @@ export declare class Upload extends AntdComponent {
      * Uploading URL
      * @type string | Function
      */
-    action?: string | Function;
+    action?: string | ((file: VcFile) => string) | ((file: VcFile) => PromiseLike<string>);
 
     /**
      * support upload whole directory
@@ -81,19 +103,41 @@ export declare class Upload extends AntdComponent {
      * Warning：this function is not supported in IE9.
      * @type Function
      */
-    beforeUpload?: (file: any, fileList: UploadFile[]) => boolean | Promise<boolean>;
+    beforeUpload?: (file: VcFile, fileList: VcFile[]) => boolean | Promise<boolean>;
+
+    /**
+     * A callback function, can be executed when uploading state is changing.
+     */
+    onChange?: (info: UploadChangeParam) => void;
+
+    /**
+     * A callback function, will be executed when file link or preview icon is clicked.
+     */
+    onPreview?: (file: UploadFile) => void;
+
+    /**
+     * Click the method to download the file, pass the method to perform the method logic, do not pass the default jump to the new TAB.
+     */
+    onDownload?: (file: UploadFile) => void;
+
+    /**
+     * A callback function, will be executed when removing file button is clicked,
+     * remove event will be prevented when return value is false or a Promise which resolve(false) or reject.
+     * @type Function
+     */
+    onRemove?: (file: UploadFile) => boolean | Promise<boolean>;
 
     /**
      * override for the default xhr behavior allowing for additional customization and ability to implement your own XMLHttpRequest
      * @type Function
      */
-    customRequest?: Function;
+    customRequest?: (options: VcCustomRequestOptions) => void;
 
     /**
      * Uploading params or function which can return uploading params.
      * @type object | Function
      */
-    data?: object | Function;
+    data?: object | ((file: UploadFile) => object);
     /**
      * http method of upload request
      */
@@ -122,7 +166,7 @@ export declare class Upload extends AntdComponent {
      * Set request headers, valid above IE10.
      * @type object
      */
-    headers?: object;
+    headers?: HttpRequestHeader;
 
     /**
      * Built-in stylesheets, support for three types: text, picture or picture-card
@@ -149,9 +193,9 @@ export declare class Upload extends AntdComponent {
     /**
      * Whether to show default upload list, could be an object to specify showPreviewIcon and showRemoveIcon individually
      * @default true
-     * @type boolean | ShowUploadList
+     * @type boolean | ShowUploadListInterface
      */
-    showUploadList?: boolean | ShowUploadList;
+    showUploadList?: boolean | ShowUploadListInterface;
 
     /**
      * Need to be turned on while the server side is rendering.
@@ -174,13 +218,6 @@ export declare class Upload extends AntdComponent {
      */
     openFileDialogOnClick?: boolean;
 
-    /**
-     * A callback function, will be executed when removing file button is clicked,
-     * remove event will be prevented when return value is false or a Promise which resolve(false) or reject.
-     * @type Function
-     */
-    remove?: (file: any) => boolean | Promise<boolean>;
-
     locale?: UploadLocale;
     id?: string;
     /**
@@ -191,6 +228,5 @@ export declare class Upload extends AntdComponent {
      * Customize transform file before request (1.5.0)
      */
     transformFile?: TransformFileHandler;
-  }
-
+  };
 }

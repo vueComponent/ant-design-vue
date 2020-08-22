@@ -55,132 +55,142 @@ type TransformFileHandler = (
 
 export declare class Upload extends AntdComponent {
   static Dragger: typeof Upload;
+  $props: {
+    /**
+     * File types that can be accepted.
+     * @type string
+     */
+    accept?: string;
 
-  /**
-   * File types that can be accepted.
-   * @type string
-   */
-  accept: string;
+    /**
+     * Uploading URL
+     * @type string | Function
+     */
+    action?: string | Function;
 
-  /**
-   * Uploading URL
-   * @type string | Function
-   */
-  action: string | Function;
+    /**
+     * support upload whole directory
+     * @type boolean
+     * @see https://caniuse.com/#feat=input-file-directory
+     */
+    directory?: boolean;
 
-  /**
-   * support upload whole directory
-   * @type boolean
-   * @see https://caniuse.com/#feat=input-file-directory
-   */
-  directory: boolean;
+    /**
+     * Hook function which will be executed before uploading.
+     * Uploading will be stopped with false or a rejected Promise returned.
+     * Warning：this function is not supported in IE9.
+     * @type Function
+     */
+    beforeUpload?: (file: any, fileList: UploadFile[]) => boolean | Promise<boolean>;
 
-  /**
-   * Hook function which will be executed before uploading.
-   * Uploading will be stopped with false or a rejected Promise returned.
-   * Warning：this function is not supported in IE9.
-   * @type Function
-   */
-  beforeUpload: (file: any, fileList: any) => boolean | Promise<boolean>;
+    /**
+     * override for the default xhr behavior allowing for additional customization and ability to implement your own XMLHttpRequest
+     * @type Function
+     */
+    customRequest?: Function;
 
-  /**
-   * override for the default xhr behavior allowing for additional customization and ability to implement your own XMLHttpRequest
-   * @type Function
-   */
-  customRequest: Function;
+    /**
+     * Uploading params or function which can return uploading params.
+     * @type object | Function
+     */
+    data?: object | Function;
+    /**
+     * http method of upload request
+     */
+    method?: 'POST' | 'PUT' | 'post' | 'put';
 
-  /**
-   * Uploading params or function which can return uploading params.
-   * @type object | Function
-   */
-  data: object | Function;
+    /**
+     * Default list of files that have been uploaded.
+     * @type UploadFile[]
+     */
+    defaultFileList?: UploadFile[];
 
-  method?: 'POST' | 'PUT' | 'post' | 'put';
+    /**
+     * disable upload button
+     * @default false
+     * @type boolean
+     */
+    disabled?: boolean;
 
-  /**
-   * Default list of files that have been uploaded.
-   * @type UploadFile[]
-   */
-  defaultFileList: UploadFile[];
+    /**
+     * List of files that have been uploaded (controlled)
+     * @type UploadFile[]
+     */
+    fileList?: UploadFile[];
 
-  /**
-   * disable upload button
-   * @default false
-   * @type boolean
-   */
-  disabled: boolean;
+    /**
+     * Set request headers, valid above IE10.
+     * @type object
+     */
+    headers?: object;
 
-  /**
-   * List of files that have been uploaded (controlled)
-   * @type UploadFile[]
-   */
-  fileList: UploadFile[];
+    /**
+     * Built-in stylesheets, support for three types: text, picture or picture-card
+     * @default 'text'
+     * @type string
+     */
+    listType?: 'text' | 'picture' | 'picture-card';
 
-  /**
-   * Set request headers, valid above IE10.
-   * @type object
-   */
-  headers: object;
+    /**
+     * Whether to support selected multiple file. IE10+ supported.
+     *  You can select multiple files with CTRL holding down while multiple is set to be true
+     * @default false
+     * @type boolean
+     */
+    multiple?: boolean;
 
-  /**
-   * Built-in stylesheets, support for three types: text, picture or picture-card
-   * @default 'text'
-   * @type string
-   */
-  listType: 'text' | 'picture' | 'picture-card';
+    /**
+     * The name of uploading file
+     * @default 'file'
+     * @type string
+     */
+    name?: string;
 
-  /**
-   * Whether to support selected multiple file. IE10+ supported.
-   *  You can select multiple files with CTRL holding down while multiple is set to be true
-   * @default false
-   * @type boolean
-   */
-  multiple: boolean;
+    /**
+     * Whether to show default upload list, could be an object to specify showPreviewIcon and showRemoveIcon individually
+     * @default true
+     * @type boolean | ShowUploadList
+     */
+    showUploadList?: boolean | ShowUploadList;
 
-  /**
-   * The name of uploading file
-   * @default 'file'
-   * @type string
-   */
-  name: string;
+    /**
+     * Need to be turned on while the server side is rendering.
+     * @default false
+     * @type boolean
+     */
+    supportServerRender?: boolean;
 
-  /**
-   * Whether to show default upload list, could be an object to specify showPreviewIcon and showRemoveIcon individually
-   * @default true
-   * @type boolean | ShowUploadList
-   */
-  showUploadList: boolean | ShowUploadList;
+    /**
+     * ajax upload with cookie sent
+     * @default false
+     * @type boolean
+     */
+    withCredentials?: boolean;
 
-  /**
-   * Need to be turned on while the server side is rendering.
-   * @default false
-   * @type boolean
-   */
-  supportServerRender: boolean;
+    /**
+     * click open file dialog
+     * @default true
+     * @type boolean
+     */
+    openFileDialogOnClick?: boolean;
 
-  /**
-   * ajax upload with cookie sent
-   * @default false
-   * @type boolean
-   */
-  withCredentials: boolean;
+    /**
+     * A callback function, will be executed when removing file button is clicked,
+     * remove event will be prevented when return value is false or a Promise which resolve(false) or reject.
+     * @type Function
+     */
+    remove?: (file: any) => boolean | Promise<boolean>;
 
-  /**
-   * click open file dialog
-   * @default true
-   * @type boolean
-   */
-  openFileDialogOnClick: boolean;
+    locale?: UploadLocale;
+    id?: string;
+    /**
+     * Customize preview file logic (1.5.0)
+     */
+    previewFile?: PreviewFileHandler;
+    /**
+     * Customize transform file before request (1.5.0)
+     */
+    transformFile?: TransformFileHandler;
+  }
 
-  /**
-   * A callback function, will be executed when removing file button is clicked,
-   * remove event will be prevented when return value is false or a Promise which resolve(false) or reject.
-   * @type Function
-   */
-  remove: (file: any) => boolean | Promise<boolean>;
-
-  locale?: UploadLocale;
-  id?: string;
-  previewFile?: PreviewFileHandler;
-  transformFile?: TransformFileHandler;
 }

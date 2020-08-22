@@ -133,7 +133,7 @@
     "markdown-it-anchor": "^5.3.0",
     "marked": "0.3.18",
     "merge2": "^1.2.1",
-    "mini-css-extract-plugin": "^0.9.0",
+    "mini-css-extract-plugin": "^0.10.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "mockdate": "^2.0.2",

@@ -1,18 +1,18 @@
-import { nextTick, inject } from 'vue';
+import { nextTick, inject, defineComponent } from 'vue';
 import TransitionEvents from './css-animation/Event';
 import raf from './raf';
 import { ConfigConsumerProps } from '../config-provider';
 import { findDOMNode } from './props-util';
-let styleForPesudo;
+let styleForPesudo: HTMLStyleElement | null;
 
 // Where el is the DOM element you'd like to test for visibility
-function isHidden(element) {
+function isHidden(element: HTMLElement) {
   if (process.env.NODE_ENV === 'test') {
     return false;
   }
   return !element || element.offsetParent === null;
 }
-function isNotGrey(color) {
+function isNotGrey(color: string) {
   // eslint-disable-next-line no-useless-escape
   const match = (color || '').match(/rgba?\((\d*), (\d*), (\d*)(, [\.\d]*)?\)/);
   if (match && match[1] && match[2] && match[3]) {
@@ -20,7 +20,7 @@ function isNotGrey(color) {
   }
   return true;
 }
-export default {
+export default defineComponent({
   name: 'Wave',
   props: ['insertExtraNode'],
   mounted() {
@@ -47,7 +47,7 @@ export default {
     }
   },
   methods: {
-    onClick(node, waveColor) {
+    onClick(node: HTMLElement, waveColor: string) {
       if (!node || isHidden(node) || node.className.indexOf('-leave') >= 0) {
         return;
       }
@@ -87,7 +87,7 @@ export default {
       TransitionEvents.addStartEventListener(node, this.onTransitionStart);
       TransitionEvents.addEndEventListener(node, this.onTransitionEnd);
     },
-    onTransitionStart(e) {
+    onTransitionStart(e: AnimationEvent) {
       if (this._.isUnmounted) return;
 
       const node = findDOMNode(this);
@@ -99,7 +99,7 @@ export default {
         this.resetEffect(node);
       }
     },
-    onTransitionEnd(e) {
+    onTransitionEnd(e: AnimationEvent) {
       if (!e || e.animationName !== 'fadeEffect') {
         return;
       }
@@ -109,7 +109,7 @@ export default {
       const { insertExtraNode } = this.$props;
       return insertExtraNode ? 'ant-click-animating' : 'ant-click-animating-without-extra-node';
     },
-    bindAnimationEvent(node) {
+    bindAnimationEvent(node: HTMLElement) {
       if (
         !node ||
         !node.getAttribute ||
@@ -118,9 +118,9 @@ export default {
       ) {
         return;
       }
-      const onClick = e => {
+      const onClick = (e: MouseEvent) => {
         // Fix radio button click twice
-        if (e.target.tagName === 'INPUT' || isHidden(e.target)) {
+        if ((e.target as HTMLElement).tagName === 'INPUT' || isHidden(e.target as HTMLElement)) {
           return;
         }
         this.resetEffect(node);
@@ -146,7 +146,7 @@ export default {
       };
     },
 
-    resetEffect(node) {
+    resetEffect(node: HTMLElement) {
       if (!node || node === this.extraNode || !(node instanceof Element)) {
         return;
       }
@@ -171,4 +171,4 @@ export default {
     }
     return this.$slots.default && this.$slots.default()[0];
   },
-};
+});

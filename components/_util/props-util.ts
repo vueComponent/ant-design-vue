@@ -1,6 +1,15 @@
 import isPlainObject from 'lodash/isPlainObject';
 import classNames from 'classnames';
-import { isVNode, Fragment, Comment, Text, h, VNode, Prop, PropOptions } from 'vue';
+import {
+  isVNode,
+  Fragment,
+  Comment,
+  Text,
+  h,
+  VNode,
+  ComponentPublicInstance,
+  PropOptions,
+} from 'vue';
 import { camelize, hyphenate, isOn, resolvePropValue } from './util';
 import isValid from './isValid';
 // function getType(fn) {
@@ -40,7 +49,7 @@ const parseStyleText = (cssText = '', camel) => {
   return res;
 };
 
-const hasProp = (instance, prop) => {
+const hasProp = (instance: VNode, prop: string) => {
   return prop in getOptionProps(instance);
 };
 // 重构后直接使用 hasProp 替换
@@ -115,14 +124,14 @@ const getAllChildren = ele => {
 const getSlotOptions = () => {
   throw Error('使用 .type 直接取值');
 };
-const findDOMNode = instance => {
+const findDOMNode = (instance: ComponentPublicInstance) => {
   let node = instance && (instance.$el || instance);
   while (node && !node.tagName) {
     node = node.nextSibling;
   }
   return node;
 };
-const getOptionProps = instance => {
+const getOptionProps = (instance: ComponentPublicInstance) => {
   const res = {};
   if (instance.$ && instance.$.vnode) {
     const props = instance.$.vnode.props || {};
@@ -149,7 +158,12 @@ const getOptionProps = instance => {
   }
   return res;
 };
-const getComponent = (instance, prop = 'default', options = instance, execute = true) => {
+const getComponent = (
+  instance: ComponentPublicInstance,
+  prop: string = 'default',
+  options = instance,
+  execute: boolean = true,
+) => {
   let com = undefined;
   if (instance.$) {
     const temp = instance[prop];
@@ -228,7 +242,7 @@ const getAllProps = ele => {
   return props;
 };
 
-const getPropsData = ins => {
+const getPropsData = (ins: ComponentPublicInstance) => {
   const vnode = ins.$ ? ins.$ : ins;
   const res = {};
   const originProps = vnode.props || {};
@@ -333,7 +347,7 @@ export function isFragment(c) {
   return c.length === 1 && c[0].type === Fragment;
 }
 
-export function isEmptyElement(c) {
+export function isEmptyElement(c: VNode) {
   return (
     c.type === Comment ||
     (c.type === Fragment && c.children.length === 0) ||
@@ -341,7 +355,7 @@ export function isEmptyElement(c) {
   );
 }
 
-export function isStringElement(c) {
+export function isStringElement(c: VNode): boolean {
   return c && c.type === Text;
 }
 
@@ -372,22 +386,6 @@ const initDefaultProps = <T>(
   });
   return propTypes;
 };
-
-export function mergeProps() {
-  const args = [].slice.call(arguments, 0);
-  const props = {};
-  args.forEach((p = {}) => {
-    for (const [k, v] of Object.entries(p)) {
-      props[k] = props[k] || {};
-      if (isPlainObject(v)) {
-        Object.assign(props[k], v);
-      } else {
-        props[k] = v;
-      }
-    }
-  });
-  return props;
-}
 
 function isValidElement(element) {
   return element && element.__v_isVNode && typeof element.type !== 'symbol'; // remove text node

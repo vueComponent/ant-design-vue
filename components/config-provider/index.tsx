@@ -70,7 +70,7 @@ const ConfigProvider = {
 };
 
 export const ConfigConsumerProps = {
-  getPrefixCls: (suffixCls, customizePrefixCls) => {
+  getPrefixCls: (suffixCls: string, customizePrefixCls?: string) => {
     if (customizePrefixCls) return customizePrefixCls;
     return `ant-${suffixCls}`;
   },

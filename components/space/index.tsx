@@ -1,15 +1,14 @@
-import { inject, defineComponent, App } from 'vue';
+import { inject, App, CSSProperties, SetupContext } from 'vue';
 import { initDefaultProps } from '../_util/props-util';
-import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 
-export const SpaceProps = {
-  prefixCls: PropTypes.string,
-  align: PropTypes.tuple<'start' | 'end' | 'center' | 'baseline'>(),
-  size: PropTypes.tuple<'small' | 'middle' | 'large'>(),
-  direction: PropTypes.tuple<'horizontal' | 'vertical'>(),
-};
+// export const SpaceProps = {
+//   prefixCls: PropTypes.string,
+//   align: PropTypes.tuple<'start' | 'end' | 'center' | 'baseline'>(),
+//   size: PropTypes.tuple<'small' | 'middle' | 'large'>(),
+//   direction: PropTypes.tuple<'horizontal' | 'vertical'>(),
+// };
 
 const spaceSize = {
   small: 8,
@@ -17,36 +16,39 @@ const spaceSize = {
   large: 24,
 };
 
-// export const SpaceProps = {
-//   prefixCls: PropTypes.string,
-//   size: SpaceSizeType,
-//   direction: PropTypes.oneOf(['horizontal', 'vertical']),
-//   align: PropTypes.oneOf(['start', 'end', 'center', 'baseline']),
-// };
+export interface SpaceProps {
+  prefixCls?: string;
+  className?: string;
+  style?: CSSProperties;
+  size?: SizeType | number;
+  direction?: 'horizontal' | 'vertical';
+  // No `stretch` since many components do not support that.
+  align?: 'start' | 'end' | 'center' | 'baseline';
+}
 
-const Space = (props, { slots }) => {
+const Space = (props: SpaceProps, { slots }: SetupContext) => {
   const configProvider = inject('configProvider', ConfigConsumerProps);
   const { align, size, direction, prefixCls: customizePrefixCls } = props;
 
-    const { getPrefixCls } = configProvider;
-    const prefixCls = getPrefixCls('space', customizePrefixCls);
-    const items = filterEmpty(slots.default?.());
-    const len = items.length;
+  const { getPrefixCls } = configProvider;
+  const prefixCls = getPrefixCls('space', customizePrefixCls);
+  const items = filterEmpty(slots.default?.());
+  const len = items.length;
 
-    if (len === 0) {
-      return null;
-    }
+  if (len === 0) {
+    return null;
+  }
 
-    const mergedAlign = align === undefined && direction === 'horizontal' ? 'center' : align;
+  const mergedAlign = align === undefined && direction === 'horizontal' ? 'center' : align;
 
-    const someSpaceClass = {
-      [prefixCls]: true,
-      [`${prefixCls}-${direction}`]: true,
-      [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
-    };
+  const someSpaceClass = {
+    [prefixCls]: true,
+    [`${prefixCls}-${direction}`]: true,
+    [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
+  };
 
-    const itemClassName = `${prefixCls}-item`;
-    const marginDirection = 'marginRight'; // directionConfig === 'rtl' ? 'marginLeft' : 'marginRight';
+  const itemClassName = `${prefixCls}-item`;
+  const marginDirection = 'marginRight'; // directionConfig === 'rtl' ? 'marginLeft' : 'marginRight';
 
   return (
     <div class={someSpaceClass}>
@@ -75,7 +77,8 @@ Space.props = initDefaultProps(SpaceProps, {
 });
 
 /* istanbul ignore next */
-Space.install = function(app) {
+Space.install = function(app: App) {
   app.component('ASpace', Space);
 };
+
 export default Space;

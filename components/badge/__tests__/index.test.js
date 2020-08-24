@@ -140,7 +140,7 @@ describe('Badge', () => {
   it('text works with vnode', () => {
     const wrapper = mount({
       render() {
-        return <Badge status="success" text={() => <span>hello</span>} />;
+        return <Badge status="success" text={<span>hello</span>} />;
       },
     });
 

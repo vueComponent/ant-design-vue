@@ -44,3 +44,5 @@ exports[`Badge should support offset when count is a VueNode 1`] = `
 <span class="ant-badge"><a href="#" class="head-example">head</a><span class="ant-scroll-number-custom-component custom ant-badge-zoom-enter" style="color: rgb(245, 34, 45); right: -10px; margin-top: 20px;"></span>
 <!----></span>
 `;
+
+exports[`Badge text works with vnode 1`] = `<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text"><span>hello</span></span></span>`;

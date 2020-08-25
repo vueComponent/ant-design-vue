@@ -52,7 +52,7 @@ export declare class Badge extends AntdComponent {
      * If status is set, text sets the display text of the status dot
      * @type string
      */
-    text?: string;
+    text?: VNodeChild | JSX.Element;
 
     /**
      * sets the display style of the status dot

@@ -106,5 +106,15 @@ export declare class Menu extends AntdComponent {
      * @type boolean
      */
     inlineCollapsed?: boolean;
+
+    /**
+     * 	set the handler to handle click event
+     * @param params
+     */
+    onClick?: (params: {
+      key: string | number;
+      keyPath: string[] | number[];
+      item: Object;
+    }) => void;
   };
 }

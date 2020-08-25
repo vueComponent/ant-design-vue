@@ -10,6 +10,17 @@
 
 ---
 
+## 1.6.5
+
+`2020-08-25`
+
+- 🔥🔥🔥 Vue 3 compatible [2.0.0-beta.3](https://2x.antdv.com/)
+- 🔥 Add Space component [#2669](https://github.com/vueComponent/ant-design-vue/pull/2669)
+- 🌟 Optimize zh_TW language pack [#2679](https://github.com/vueComponent/ant-design-vue/pull/2679)
+- 🐞 Fix breadcrumb `Breadcrumb` repeated key problem [#2505](https://github.com/vueComponent/ant-design-vue/issues/2505)
+- 🐞 Fix the problem of misalignment in the fixed column of Table [#1493](https://github.com/vueComponent/ant-design-vue/issues/1493)
+- 🐞 Fix the problem that the Enter key will report an error when the Mentions component is empty [#2662](https://github.com/vueComponent/ant-design-vue/pull/2662)
+
 ## 1.6.4
 
 `2020-07-21`

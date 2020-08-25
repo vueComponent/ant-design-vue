@@ -10,6 +10,17 @@
 
 ---
 
+## 1.6.5
+
+`2020-08-25`
+
+- 🔥🔥🔥 兼容 Vue 3 的 [2.0.0-beta.3](https://2x.antdv.com/) 版本发布
+- 🔥 新增 Space 组件 [#2669](https://github.com/vueComponent/ant-design-vue/pull/2669)
+- 🌟 优化 zh_TW 语言包 [#2679](https://github.com/vueComponent/ant-design-vue/pull/2679)
+- 🐞 修复面包屑 `Breadcrumb` 重复 key 问题 [#2505](https://github.com/vueComponent/ant-design-vue/issues/2505)
+- 🐞 修复 Table 固定列情况下错位问题 [#1493](https://github.com/vueComponent/ant-design-vue/issues/1493)
+- 🐞 修复 Mentions 组件为空时回车键报错的问题 [#2662](https://github.com/vueComponent/ant-design-vue/pull/2662)
+
 ## 1.6.4
 
 `2020-07-21`

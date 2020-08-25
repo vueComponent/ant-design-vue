@@ -191,7 +191,7 @@ const Form = {
       );
       if (!this.model) {
         warning(false, 'Form', 'model is required for validateFields to work.');
-        return;
+        return Promise.reject('Form `model` is required for validateFields to work.');
       }
       const provideNameList = !!nameList;
       const namePathList = provideNameList ? toArray(nameList).map(getNamePath) : [];

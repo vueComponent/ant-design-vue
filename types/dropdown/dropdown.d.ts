@@ -47,7 +47,7 @@ export declare class Dropdown extends AntdComponent {
   disabled: boolean;
 
   /**
-   * to set the ontainer of the dropdown menu. The default is to create a div element in body, you can reset it to the scrolling area and make a relative reposition.
+   * to set the container of the dropdown menu. The default is to create a div element in body, you can reset it to the scrolling area and make a relative reposition.
    * @default () => document.body
    * @type Function
    */

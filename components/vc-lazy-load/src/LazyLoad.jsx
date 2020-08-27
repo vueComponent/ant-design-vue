@@ -7,6 +7,7 @@ import debounce from 'lodash/debounce';
 import throttle from 'lodash/throttle';
 import parentScroll from './utils/parentScroll';
 import inViewport from './utils/inViewport';
+import { watchEffect } from 'vue';
 
 const lazyLoadProps = {
   debounce: PropTypes.bool,
@@ -22,7 +23,6 @@ const lazyLoadProps = {
   threshold: PropTypes.number,
   throttle: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  _propsSymbol: PropTypes.any,
 };
 
 export default {
@@ -53,19 +53,14 @@ export default {
       visible: false,
     };
   },
-  watch: {
-    _propsSymbol() {
-      if (!this.visible) {
-        this.lazyLoadHandler();
-      }
-    },
-  },
   mounted() {
     this.$nextTick(() => {
-      this._mounted = true;
+      watchEffect(() => {
+        if (!this.visible) {
+          this.lazyLoadHandler(this.$props);
+        }
+      });
       const eventNode = this.getEventNode();
-
-      this.lazyLoadHandler();
 
       if (this.lazyLoadHandler.flush) {
         this.lazyLoadHandler.flush();
@@ -75,7 +70,6 @@ export default {
     });
   },
   beforeUnmount() {
-    this._mounted = false;
     if (this.lazyLoadHandler.cancel) {
       this.lazyLoadHandler.cancel();
     }
@@ -110,7 +104,7 @@ export default {
       };
     },
     lazyLoadHandler() {
-      if (!this._mounted) {
+      if (!this._.isMounted) {
         return;
       }
       const offset = this.getOffset();

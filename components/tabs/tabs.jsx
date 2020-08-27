@@ -172,6 +172,6 @@ export default {
       onChange: this.handleChange,
       class: cls,
     };
-    return <VcTabs {...tabsProps} __propsSymbol__={Symbol()} />;
+    return <VcTabs {...tabsProps} />;
   },
 };

@@ -270,7 +270,7 @@ const BasePopup = {
         onExpand: this.onTreeExpand,
         onLoad: this.onLoad,
       };
-      $tree = <Tree {...treeAllProps} ref={this.treeRef} __propsSymbol__={Symbol()} />;
+      $tree = <Tree {...treeAllProps} ref={this.treeRef} __propsSymbol__={[]} />;
     }
 
     return (

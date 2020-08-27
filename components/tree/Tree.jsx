@@ -219,6 +219,6 @@ export default {
     if (treeData) {
       vcTreeProps.treeData = treeData;
     }
-    return <VcTree {...vcTreeProps} __propsSymbol__={Symbol()} />;
+    return <VcTree {...vcTreeProps} __propsSymbol__={[]} />;
   },
 };

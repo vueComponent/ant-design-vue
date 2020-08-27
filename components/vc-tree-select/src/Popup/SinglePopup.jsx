@@ -73,7 +73,7 @@ const SinglePopup = {
           renderSearch: this._renderSearch,
         }}
         ref={this.popupRef}
-        __propsSymbol__={Symbol()}
+        __propsSymbol__={[]}
       />
     );
   },

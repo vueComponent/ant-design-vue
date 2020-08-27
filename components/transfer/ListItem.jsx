@@ -57,7 +57,7 @@ export default {
         ...lazy,
       };
       children = (
-        <Lazyload {...lazyProps} _propsSymbol={Symbol()}>
+        <Lazyload {...lazyProps} _propsSymbol={[]}>
           {listItem}
         </Lazyload>
       );

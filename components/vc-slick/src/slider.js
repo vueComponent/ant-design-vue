@@ -193,6 +193,6 @@ export default {
       children: newChildren,
       ref: this.innerSliderRefHandler,
     };
-    return <InnerSlider {...sliderProps} vSlots={this.$slots} __propsSymbol__={Symbol()} />;
+    return <InnerSlider {...sliderProps} vSlots={this.$slots} __propsSymbol__={[]} />;
   },
 };

@@ -1091,7 +1091,7 @@ const Select = {
     };
 
     const Popup = isMultiple ? MultiplePopup : SinglePopup;
-    const $popup = <Popup {...popupProps} __propsSymbol__={Symbol()} />;
+    const $popup = <Popup {...popupProps} __propsSymbol__={[]} />;
 
     const Selector = isMultiple ? MultipleSelector : SingleSelector;
     const $selector = <Selector {...passProps} ref={this.selectorRef} />;

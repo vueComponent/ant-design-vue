@@ -195,7 +195,7 @@ const TreeSelect = {
       <VcTreeSelect
         {...VcTreeSelectProps}
         vSlots={omit(this.$slots, ['default'])}
-        __propsSymbol__={Symbol()}
+        __propsSymbol__={[]}
       />
     );
   },

@@ -577,14 +577,6 @@ const Drawer = {
     currentDrawer[this.drawerId] = open ? this.container : open;
     const children = this.getChildToRender(this.sFirstEnter ? open : false);
     if (!getContainer) {
-      // const directives = [
-      //   {
-      //     name: 'ant-ref',
-      //     value: c => {
-      //       this.container = c;
-      //     },
-      //   },
-      // ];
       return (
         <div
           class={wrapperClassName}

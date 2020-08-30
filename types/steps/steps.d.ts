@@ -57,5 +57,5 @@ export declare class Steps extends AntdComponent {
      * @type boolean | Funtion
      */
     progressDot?: boolean | Function;
-  }
+  };
 }

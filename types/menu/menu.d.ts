@@ -106,5 +106,5 @@ export declare class Menu extends AntdComponent {
      * @type boolean
      */
     inlineCollapsed?: boolean;
-  }
+  };
 }

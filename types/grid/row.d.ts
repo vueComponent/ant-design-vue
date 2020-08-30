@@ -7,20 +7,20 @@ import { AntdComponent } from '../component';
 type Gutter =
   | number
   | {
-    xs: number;
-    sm: number;
-    md: number;
-    lg: number;
-    xl: number;
-    xxl: number;
-  };
+      xs: number;
+      sm: number;
+      md: number;
+      lg: number;
+      xl: number;
+      xxl: number;
+    };
 export declare class Row extends AntdComponent {
   $props: {
     /**
-   * spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}
-   * @default 0
-   * @type numner | object
-   */
+     * spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}
+     * @default 0
+     * @type numner | object
+     */
     gutter?: Gutter | [Gutter, Gutter];
 
     /**
@@ -42,5 +42,5 @@ export declare class Row extends AntdComponent {
      * @type string
      */
     justify?: 'start' | 'end' | 'center' | 'space-around' | 'space-between';
-  }
+  };
 }

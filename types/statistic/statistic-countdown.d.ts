@@ -6,7 +6,7 @@ import { AntdComponent } from '../component';
 import { VNodeChild, CSSProperties } from 'vue';
 
 export declare class StatisticCountdown extends AntdComponent {
-  $props:{
+  $props: {
     /**
      * Format as moment
      * @default 'HH:mm:ss'
@@ -39,5 +39,5 @@ export declare class StatisticCountdown extends AntdComponent {
      * Set value css style
      */
     valueStyle?: CSSProperties;
-  }
+  };
 }

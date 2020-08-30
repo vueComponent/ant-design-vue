@@ -70,6 +70,5 @@ export declare class PageHeader extends AntdComponent {
      * Specify a callback that will be called when a user clicks backIcon.
      */
     onBack(): () => void;
-  }
-
+  };
 }

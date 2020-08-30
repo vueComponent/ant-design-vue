@@ -6,12 +6,12 @@ import { VNodeChild } from 'vue';
 import { AntdComponent } from '../component';
 
 export declare class TimelineItem extends AntdComponent {
-  $props:{
-     /**
-      * Set the circle's color to blue, red, green or other custom colors
-      * @default 'blue'
-      * @type string
-      */
+  $props: {
+    /**
+     * Set the circle's color to blue, red, green or other custom colors
+     * @default 'blue'
+     * @type string
+     */
     color?: string;
 
     /**
@@ -19,6 +19,5 @@ export declare class TimelineItem extends AntdComponent {
      * @type any (string | slot)
      */
     dot?: VNodeChild | JSX.Element;
-
-  }
+  };
 }

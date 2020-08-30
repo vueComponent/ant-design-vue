@@ -13,5 +13,5 @@ export declare class InputSearch extends AntdComponent {
      * @type any (boolean | slot)
      */
     enterButton?: boolean | VNodeChild | JSX.Element;
-  }
+  };
 }

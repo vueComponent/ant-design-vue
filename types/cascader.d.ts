@@ -198,7 +198,7 @@ export declare class Cascader extends AntdComponent {
      * @type Array<string | number>
      */
     value?: Array<string | number>;
-  }
+  };
   /**
    * remove focus
    */

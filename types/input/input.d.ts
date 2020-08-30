@@ -81,5 +81,5 @@ export declare class Input extends AntdComponent {
      * allow to remove input content with clear icon
      */
     allowClear?: boolean;
-  }
+  };
 }

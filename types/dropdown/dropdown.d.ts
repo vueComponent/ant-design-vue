@@ -11,17 +11,17 @@ export declare class Dropdown extends AntdComponent {
   static Button: typeof DropdownButton;
   $props: {
     /**
-    * the trigger mode which executes the drop-down action
-    * @default ['hover']
-    * @type string[]
-    */
+     * the trigger mode which executes the drop-down action
+     * @default ['hover']
+     * @type string[]
+     */
     trigger?: Array<'click' | 'hover' | 'contextmenu'>;
 
     /**
      * the dropdown menu
      * @type () => Menu
      */
-    overlay?: () => Menu
+    overlay?: () => Menu;
 
     /**
      * Class name of the dropdown root element
@@ -59,6 +59,12 @@ export declare class Dropdown extends AntdComponent {
      * @default 'bottomLeft'
      * @type string
      */
-    placement?: 'topLeft' | 'topCenter' | 'topRight' | 'bottomLeft' | 'bottomCenter' | 'bottomRight';
-  }
+    placement?:
+      | 'topLeft'
+      | 'topCenter'
+      | 'topRight'
+      | 'bottomLeft'
+      | 'bottomCenter'
+      | 'bottomRight';
+  };
 }

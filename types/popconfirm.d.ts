@@ -46,6 +46,5 @@ export declare class Popconfirm extends AntdComponent {
      * @type boolean
      */
     disabled?: boolean;
-  } & TooltipCommon
-
+  } & TooltipCommon;
 }

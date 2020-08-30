@@ -24,5 +24,5 @@ export declare class MenuItem extends AntdComponent {
      * @type string
      */
     title?: string;
-  }
+  };
 }

@@ -3,13 +3,13 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from '../component';
-import {VNodeChild} from 'vue';
+import { VNodeChild } from 'vue';
 export declare class Step extends AntdComponent {
   $props: {
     /**
- * description of the step, optional property
- * @type any (string | slot)
- */
+     * description of the step, optional property
+     * @type any (string | slot)
+     */
     description?: VNodeChild | JSX.Element;
 
     /**
@@ -32,5 +32,5 @@ export declare class Step extends AntdComponent {
     title?: VNodeChild | JSX.Element;
     disabled?: boolean;
     subTitle?: VNodeChild | JSX.Element;
-  }
+  };
 }

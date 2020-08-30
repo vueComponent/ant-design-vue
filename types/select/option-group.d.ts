@@ -8,9 +8,9 @@ import { VNodeChild } from 'vue';
 export declare class OptionGroup extends AntdComponent {
   $props: {
     /**
-   * Key
-   * @type string
-   */
+     * Key
+     * @type string
+     */
     key?: string;
 
     /**
@@ -18,6 +18,5 @@ export declare class OptionGroup extends AntdComponent {
      * @type any (string | slot)
      */
     label?: VNodeChild | JSX.Element;
-  }
-
+  };
 }

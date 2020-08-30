@@ -18,14 +18,20 @@ export declare class DropdownButton extends AntdComponent {
      * the dropdown menu
      * @type () => Menu
      */
-    overlay?: () => Menu
+    overlay?: () => Menu;
 
     /**
      * placement of pop menu: bottomLeft bottomCenter bottomRight topLeft topCenter topRight
      * @default 'bottomLeft'
      * @type string
      */
-    placement?: 'topLeft' | 'topCenter' | 'topRight' | 'bottomLeft' | 'bottomCenter' | 'bottomRight';
+    placement?:
+      | 'topLeft'
+      | 'topCenter'
+      | 'topRight'
+      | 'bottomLeft'
+      | 'bottomCenter'
+      | 'bottomRight';
 
     /**
      * size of the button, the same as Button
@@ -57,5 +63,5 @@ export declare class DropdownButton extends AntdComponent {
      * Icon (appears on the right) (1.5.0)
      */
     icon?: VNodeChild | JSX.Element;
-  }
+  };
 }

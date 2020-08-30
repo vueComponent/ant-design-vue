@@ -10,10 +10,10 @@ export type ProgressGradient = { direction?: string } & (StringGradients | FromT
 export declare class Progress extends AntdComponent {
   $props: {
     /**
-       * template function of the content
-       * @default percent => percent + '%'
-       * @type Function
-       */
+     * template function of the content
+     * @default percent => percent + '%'
+     * @type Function
+     */
     format?: (percent?: number, successPercent?: number) => any;
 
     /**
@@ -92,5 +92,5 @@ export declare class Progress extends AntdComponent {
      * @type number
      */
     width?: number;
-  }
+  };
 }

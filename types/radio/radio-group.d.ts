@@ -7,9 +7,9 @@ import { AntdComponent } from '../component';
 export declare class RadioGroup extends AntdComponent {
   $props: {
     /**
-   * Specifies the initial state: whether or not the radio is selected.
-   * @type boolean
-   */
+     * Specifies the initial state: whether or not the radio is selected.
+     * @type boolean
+     */
     defaultValue?: any;
 
     /**
@@ -53,6 +53,6 @@ export declare class RadioGroup extends AntdComponent {
     /**
      * The callback function that is triggered when the state changes.
      */
-    onChange?:(e:Event)=>void
-  }
+    onChange?: (e: Event) => void;
+  };
 }

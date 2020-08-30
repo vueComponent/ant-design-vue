@@ -10,10 +10,10 @@ export declare class Statistic extends AntdComponent {
   static Countdown: typeof StatisticCountdown;
   $props: {
     /**
-   * decimal separator
-   * @default '.'
-   * @type string
-   */
+     * decimal separator
+     * @default '.'
+     * @type string
+     */
     decimalSeparator?: string;
 
     /**
@@ -58,5 +58,5 @@ export declare class Statistic extends AntdComponent {
      * @type string or number
      */
     value?: string | number;
-  }
+  };
 }

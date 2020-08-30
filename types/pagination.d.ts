@@ -5,9 +5,9 @@
 import { AntdComponent } from './component';
 import { VNodeChild } from 'vue';
 interface PaginationRenderProps {
-  page: number
-  type: 'page' | 'prev' | 'next'
-  originalElement: any
+  page: number;
+  type: 'page' | 'prev' | 'next';
+  originalElement: any;
 }
 export declare class Pagination extends AntdComponent {
   $props: {
@@ -95,6 +95,6 @@ export declare class Pagination extends AntdComponent {
      * to customize item innerHTML
      * @type Function
      */
-    itemRender?: (props:PaginationRenderProps) => VNodeChild | JSX.Element;
-  }
+    itemRender?: (props: PaginationRenderProps) => VNodeChild | JSX.Element;
+  };
 }

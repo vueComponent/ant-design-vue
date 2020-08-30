@@ -18,5 +18,5 @@ export declare class Popover extends AntdComponent {
      * @type any (string | slot | VNode)
      */
     title?: VNodeChild | JSX.Element;
-  } & TooltipCommon
+  } & TooltipCommon;
 }

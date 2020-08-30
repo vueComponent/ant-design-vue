@@ -71,5 +71,5 @@ export declare class Mentions extends AntdComponent {
      * @default () => HTMLElement
      */
     getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
-  }
+  };
 }

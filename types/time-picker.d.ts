@@ -207,7 +207,7 @@ export declare class TimePicker extends AntdComponent {
      * @param open
      */
     onOpenChange?: (open?: boolean) => void;
-  }
+  };
 
   /**
    * remove focus

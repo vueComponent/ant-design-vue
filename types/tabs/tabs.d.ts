@@ -73,5 +73,5 @@ export declare class Tabs extends AntdComponent {
      * @type number
      */
     tabBarGutter?: number;
-  }
+  };
 }

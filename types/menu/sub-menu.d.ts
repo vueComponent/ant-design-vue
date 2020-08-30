@@ -9,9 +9,9 @@ import { VNodeChild } from 'vue';
 export declare class SubMenu extends AntdComponent {
   $props: {
     /**
-    * unique id of the menu item
-    * @type string
-    */
+     * unique id of the menu item
+     * @type string
+     */
     key?: string;
 
     /**
@@ -30,5 +30,5 @@ export declare class SubMenu extends AntdComponent {
      * Sub-menu class name (1.5.0)
      */
     popupClassName?: string;
-  }
+  };
 }

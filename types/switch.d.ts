@@ -7,10 +7,10 @@ import { VNodeChild } from 'vue';
 export declare class Switch extends AntdComponent {
   $props: {
     /**
-   * get focus when component mounted
-   * @default false
-   * @type boolean
-   */
+     * get focus when component mounted
+     * @default false
+     * @type boolean
+     */
     autofocus?: boolean;
 
     /**
@@ -59,8 +59,7 @@ export declare class Switch extends AntdComponent {
      * @type any (string | slot)
      */
     unCheckedChildren?: VNodeChild | JSX.Element;
-
-  }
+  };
   /**
    * remove focus
    */

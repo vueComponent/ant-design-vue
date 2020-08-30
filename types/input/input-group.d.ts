@@ -19,5 +19,5 @@ export declare class InputGroup extends AntdComponent {
      * @type string
      */
     size?: 'small' | 'large' | 'default';
-  }
+  };
 }

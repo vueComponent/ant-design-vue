@@ -83,6 +83,5 @@ export declare class Col extends AntdComponent {
      * @type { span: ColSpanType, offset: ColSpanType } | ColSpanType
      */
     xxl?: { span: ColSpanType; offset: ColSpanType } | ColSpanType;
-  }
-
+  };
 }

@@ -25,5 +25,5 @@ export declare class TabPane extends AntdComponent {
      * @type any (string | slot)
      */
     tab?: VNodeChild | JSX.Element;
-  }
+  };
 }

@@ -9,7 +9,7 @@ import { TimelineItem } from './timeline-item';
 export declare class Timeline extends AntdComponent {
   static Item: typeof TimelineItem;
 
-  $props:{
+  $props: {
     /**
      * Set the last ghost node's existence or its content
      * @default false
@@ -37,5 +37,5 @@ export declare class Timeline extends AntdComponent {
      * @type string
      */
     mode?: 'left' | 'alternate' | 'right';
-  }
+  };
 }

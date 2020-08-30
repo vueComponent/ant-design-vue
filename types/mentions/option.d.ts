@@ -6,10 +6,10 @@ import { AntdComponent } from '../component';
 export declare class Option extends AntdComponent {
   $props: {
     /**
-   * value of suggestion, the value will insert into input filed while selected
-   * @default ''
-   * @type string
-   */
+     * value of suggestion, the value will insert into input filed while selected
+     * @default ''
+     * @type string
+     */
     value?: string;
-  }
+  };
 }

@@ -83,5 +83,5 @@ export declare class InputNumber extends AntdComponent {
      * @type number | string
      */
     value?: number | string;
-  }
+  };
 }

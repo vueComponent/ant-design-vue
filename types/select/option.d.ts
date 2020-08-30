@@ -7,10 +7,10 @@ import { AntdComponent } from '../component';
 export declare class Option extends AntdComponent {
   $props: {
     /**
-  * Disable this option
-  * @default false
-  * @type boolean
-  */
+     * Disable this option
+     * @default false
+     * @type boolean
+     */
     disabled?: boolean;
 
     /**
@@ -36,6 +36,5 @@ export declare class Option extends AntdComponent {
      * @type string
      */
     class?: string;
-  }
-
+  };
 }

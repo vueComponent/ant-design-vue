@@ -7,10 +7,10 @@ import { VNodeChild } from 'vue';
 export declare class Rate extends AntdComponent {
   $props: {
     /**
-   * whether to allow clear when click again
-   * @default true
-   * @type boolean
-   */
+     * whether to allow clear when click again
+     * @default true
+     * @type boolean
+     */
     allowClear?: boolean;
 
     /**
@@ -62,8 +62,7 @@ export declare class Rate extends AntdComponent {
     value?: number;
 
     tooltips?: Array<string>;
-
-  }
+  };
   /**
    * remove focus
    */

@@ -6,19 +6,8 @@ import { getWidth, setStyle, menuAllProps } from './util';
 import { cloneElement } from '../_util/vnode';
 import { getPropsData, getAllProps, getSlot, findDOMNode } from '../_util/props-util';
 
-const canUseDOM = !!(
-  typeof window !== 'undefined' &&
-  window.document &&
-  window.document.createElement
-);
-
 const MENUITEM_OVERFLOWED_CLASSNAME = 'menuitem-overflowed';
 const FLOAT_PRECISION_ADJUST = 0.5;
-
-// Fix ssr
-if (canUseDOM) {
-  require('mutationobserver-shim');
-}
 
 const DOMWrap = {
   name: 'DOMWrap',

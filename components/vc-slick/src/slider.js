@@ -5,7 +5,6 @@ import InnerSlider from './inner-slider';
 import defaultProps from './default-props';
 import { canUseDOM } from './utils/innerSliderUtils';
 import { getSlot } from '../../_util/props-util';
-const enquire = canUseDOM() && require('enquire.js');
 
 export default {
   name: 'Slider',
@@ -26,8 +25,15 @@ export default {
     },
     media(query, handler) {
       // javascript handler for  css media query
-      enquire.register(query, handler);
-      this._responsiveMediaHandlers.push({ query, handler });
+      const mql = window.matchMedia(query);
+      const listener = ({ matches }) => {
+        if (matches) {
+          handler();
+        }
+      };
+      mql.addListener(listener);
+      listener(mql);
+      this._responsiveMediaHandlers.push({ mql, query, listener });
     },
     slickPrev() {
       this.innerSlider.slickPrev();
@@ -47,11 +53,6 @@ export default {
   },
   // handles responsive breakpoints
   beforeMount() {
-    // performance monitoring
-    // if (process.env.NODE_ENV !== 'production') {
-    // const { whyDidYouUpdate } = require('why-did-you-update')
-    // whyDidYouUpdate(React)
-    // }
     if (this.responsive) {
       const breakpoints = this.responsive.map(breakpt => breakpt.breakpoint);
       // sort them in increasing order of their numerical value
@@ -87,7 +88,7 @@ export default {
   },
   beforeUnmount() {
     this._responsiveMediaHandlers.forEach(function(obj) {
-      enquire.unregister(obj.query, obj.handler);
+      obj.mql.removeListener(obj.listener);
     });
   },
 

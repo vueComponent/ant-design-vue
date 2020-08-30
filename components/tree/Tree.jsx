@@ -5,13 +5,14 @@ import FileOutlined from '@ant-design/icons-vue/FileOutlined';
 import CaretDownFilled from '@ant-design/icons-vue/CaretDownFilled';
 import MinusSquareOutlined from '@ant-design/icons-vue/MinusSquareOutlined';
 import PlusSquareOutlined from '@ant-design/icons-vue/PlusSquareOutlined';
-import { Tree as VcTree, TreeNode } from '../vc-tree';
+import VcTree from '../vc-tree';
 import animation from '../_util/openAnimation';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
 
+const TreeNode = VcTree.TreeNode;
 function TreeProps() {
   return {
     showLine: PropTypes.bool,

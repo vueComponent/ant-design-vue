@@ -42,7 +42,7 @@ exports[`renders ./antdv-demo/docs/space/demo/base.md correctly 1`] = `
   <div class="ant-space-item" style="margin-right: 8px;"> Space </div>
   <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>Button</span></button></div>
-  <div class="ant-space-item" style="margin-right: 8px;"><span><div class="ant-upload ant-upload-select ant-upload-select-text"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span></div>
+  <div class="ant-space-item" style="margin-right: 8px;"><span class=""><div class="ant-upload ant-upload-select ant-upload-select-text"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span></div>
   <div class="ant-space-item">
     <!----><button class="ant-btn" type="button">
       <!----><span>Confirm</span></button></div>

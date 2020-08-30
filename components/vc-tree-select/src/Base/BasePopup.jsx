@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import warning from 'warning';
 import PropTypes from '../../../_util/vue-types';
-import { Tree } from '../../../vc-tree';
+import Tree from '../../../vc-tree';
 import BaseMixin from '../../../_util/BaseMixin';
 import { createRef } from '../util';
 

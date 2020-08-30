@@ -1,23 +1,3 @@
-// matchMedia polyfill for
-// https://github.com/WickyNilliams/enquire.js/issues/82
-let enquire;
-
-// TODO: Will be removed in antd 4.0 because we will no longer support ie9
-if (typeof window !== 'undefined') {
-  const matchMediaPolyfill = mediaQuery => {
-    return {
-      media: mediaQuery,
-      matches: false,
-      addListener() {},
-      removeListener() {},
-    };
-  };
-  // ref: https://github.com/ant-design/ant-design/issues/18774
-  if (!window.matchMedia) window.matchMedia = matchMediaPolyfill;
-  // eslint-disable-next-line global-require
-  enquire = require('enquire.js');
-}
-
 export const responsiveArray = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
 
 export const responsiveMap = {
@@ -29,65 +9,54 @@ export const responsiveMap = {
   xxl: '(min-width: 1600px)',
 };
 
-let subscribers = [];
+const subscribers = new Map();
 let subUid = -1;
 let screens = {};
 
 const responsiveObserve = {
+  matchHandlers: {},
   dispatch(pointMap) {
     screens = pointMap;
-    if (subscribers.length < 1) {
-      return false;
-    }
-
-    subscribers.forEach(item => {
-      item.func(screens);
-    });
-
-    return true;
+    subscribers.forEach(func => func(screens));
+    return subscribers.size >= 1;
   },
   subscribe(func) {
-    if (subscribers.length === 0) {
-      this.register();
-    }
-    const token = (++subUid).toString();
-    subscribers.push({
-      token,
-      func,
-    });
+    if (!subscribers.size) this.register();
+    subUid += 1;
+    subscribers.set(subUid, func);
     func(screens);
-    return token;
+    return subUid;
   },
   unsubscribe(token) {
-    subscribers = subscribers.filter(item => item.token !== token);
-    if (subscribers.length === 0) {
-      this.unregister();
-    }
+    subscribers.delete(token);
+    if (!subscribers.size) this.unregister();
   },
   unregister() {
-    Object.keys(responsiveMap).map(screen => enquire.unregister(responsiveMap[screen]));
+    Object.keys(responsiveMap).forEach(screen => {
+      const matchMediaQuery = responsiveMap[screen];
+      const handler = this.matchHandlers[matchMediaQuery];
+      handler?.mql.removeListener(handler?.listener);
+    });
+    subscribers.clear();
   },
   register() {
-    Object.keys(responsiveMap).map(screen =>
-      enquire.register(responsiveMap[screen], {
-        match: () => {
-          const pointMap = {
-            ...screens,
-            [screen]: true,
-          };
-          this.dispatch(pointMap);
-        },
-        unmatch: () => {
-          const pointMap = {
-            ...screens,
-            [screen]: false,
-          };
-          this.dispatch(pointMap);
-        },
-        // Keep a empty destroy to avoid triggering unmatch when unregister
-        destroy() {},
-      }),
-    );
+    Object.keys(responsiveMap).forEach(screen => {
+      const matchMediaQuery = responsiveMap[screen];
+      const listener = ({ matches }) => {
+        this.dispatch({
+          ...screens,
+          [screen]: matches,
+        });
+      };
+      const mql = window.matchMedia(matchMediaQuery);
+      mql.addListener(listener);
+      this.matchHandlers[matchMediaQuery] = {
+        mql,
+        listener,
+      };
+
+      listener(mql);
+    });
   },
 };
 

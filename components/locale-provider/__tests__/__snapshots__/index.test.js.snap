@@ -8,7 +8,7 @@ exports[`Locale Provider set moment locale when locale changes 1`] = `
 <div style="position: absolute; top: 0px; left: 0px; width: 100%;">
   <div>
     <!---->
-    <div class="ant-calendar-picker-container ant-calendar-picker-container-placement-bottomLeft" style="left: -999px; top: -1002px;">
+    <div class="ant-calendar-picker-container ant-calendar-picker-container-placement-bottomLeft slide-up-enter" style="left: -999px; top: -1002px;">
       <div class="ant-calendar ant-calendar-picker-container-content" tabindex="0">
         <!---->
         <div class="ant-calendar-panel">

@@ -15,7 +15,7 @@ Use Drawer to quickly preview details of an object, such as those in a list.
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/transfer/demo/basic.md';
+import demo from '../antdv-demo/docs/tree/demo';
 export default {
   components: {
     demo,

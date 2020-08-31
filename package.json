@@ -32,8 +32,6 @@
     "compile": "node antd-tools/cli/run.js compile",
     "pub": "node antd-tools/cli/run.js pub",
     "pub-with-ci": "node antd-tools/cli/run.js pub-with-ci",
-    "prepublish": "node antd-tools/cli/run.js guard",
-    "pre-publish": "node ./scripts/prepub",
     "prettier": "prettier -c --write '**/*'",
     "pretty-quick": "pretty-quick",
     "dist": "node antd-tools/cli/run.js dist",
@@ -174,6 +172,7 @@
   "dependencies": {
     "@ant-design/icons": "^2.1.1",
     "@ant-design/icons-vue": "^2.0.0",
+    "@shopify/draggable": "^1.0.0-beta.8",
     "@simonwep/pickr": "~1.7.0",
     "add-dom-event-listener": "^1.0.2",
     "array-tree-filter": "^2.1.0",

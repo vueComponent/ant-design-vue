@@ -229,7 +229,7 @@ export default {
         },
         on: {
           remove: this.handleManualRemove,
-          ...pick(getListeners(this), ['download', 'preview']), // 如果没有配置该事件，不要传递， uploadlist 会有相应逻辑
+          ...pick(getListeners(this), ['download', 'preview', 'sorted']), // 如果没有配置该事件，不要传递， uploadlist 会有相应逻辑
         },
       };
       return <UploadList {...uploadListProps} />;

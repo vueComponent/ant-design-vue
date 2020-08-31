@@ -5,6 +5,11 @@
 @upload-item: ~'@{ant-prefix}-upload-list-item';
 @upload-picture-card-size: 104px;
 @upload-picture-card-border-style: @border-style-base;
+@upload-wrapper: ~'@{upload-prefix-cls}-picture-card-wrapper';
+
+.@{upload-wrapper} div:focus {
+  outline: none;
+}
 
 .@{upload-prefix-cls} {
   .reset-component;
@@ -403,6 +408,7 @@
       opacity: 0;
       transition: all 0.3s;
 
+      .@{iconfont-css-prefix}-drag,
       .@{iconfont-css-prefix}-eye-o,
       .@{iconfont-css-prefix}-download,
       .@{iconfont-css-prefix}-delete {

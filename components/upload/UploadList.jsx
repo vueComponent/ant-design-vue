@@ -8,9 +8,11 @@ import Tooltip from '../tooltip';
 import Progress from '../progress';
 import classNames from 'classnames';
 import { UploadListProps } from './interface';
+import { SortableList, SortableItem, SortableHandle } from './sortable';
 
 export default {
   name: 'AUploadList',
+  components: { SortableList, SortableItem, SortableHandle },
   mixins: [BaseMixin],
   props: initDefaultProps(UploadListProps, {
     listType: 'text', // or picture
@@ -71,6 +73,9 @@ export default {
       } else if (file.url) {
         window.open(file.url);
       }
+    },
+    handleSorting(arr) {
+      return this.$emit('sorted', arr);
     },
 
     handleClose(file) {
@@ -221,11 +226,19 @@ export default {
           <Icon type="eye-o" />
         </a>
       ) : null;
+
+      const dragIcon = showPreviewIcon ? (
+        <sortable-handle>
+          <Icon type="drag"/>
+        </sortable-handle>
+      ) : null;
+
       const actions = listType === 'picture-card' && file.status !== 'uploading' && (
         <span class={`${prefixCls}-list-item-actions`}>
           {previewIcon}
           {file.status === 'done' && downloadIcon}
           {removeIcon}
+          {dragIcon}
         </span>
       );
       let message;
@@ -252,9 +265,11 @@ export default {
         [`${prefixCls}-list-picture-card-container`]: listType === 'picture-card',
       });
       return (
-        <div key={file.uid} class={listContainerNameClass}>
-          {file.status === 'error' ? <Tooltip title={message}>{dom}</Tooltip> : <span>{dom}</span>}
-        </div>
+        <sortable-item key={file.uid}>
+          <div key={file.uid} class={listContainerNameClass}>
+            {file.status === 'error' ? <Tooltip title={message}>{dom}</Tooltip> : <span>{dom}</span>}
+          </div>
+        </sortable-item>
       );
     });
     const listClassNames = classNames({
@@ -264,9 +279,11 @@ export default {
     const animationDirection = listType === 'picture-card' ? 'animate-inline' : 'animate';
     const transitionGroupProps = getTransitionProps(`${prefixCls}-${animationDirection}`);
     return (
-      <transition-group {...transitionGroupProps} tag="div" class={listClassNames}>
-        {list}
-      </transition-group>
+      <sortable-list value={this.items} onInput={this.handleSorting}>
+        <transition-group {...transitionGroupProps} tag="div" class={listClassNames}>
+          {list}
+        </transition-group>
+      </sortable-list>
     );
   },
 };

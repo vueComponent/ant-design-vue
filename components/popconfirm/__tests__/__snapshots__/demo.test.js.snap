@@ -5,7 +5,9 @@ exports[`renders ./antdv-demo/docs/popconfirm/demo/basic.md correctly 1`] = `<!-
 exports[`renders ./antdv-demo/docs/popconfirm/demo/dynamic-trigger.md correctly 1`] = `
 <div>
   <!----><a href="#">Delete a task</a><br><br> Whether directly execute：<label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-    <!----></label></div>
+    <!---->
+  </label>
+</div>
 `;
 
 exports[`renders ./antdv-demo/docs/popconfirm/demo/icon.md correctly 1`] = `<!----><a href="#">Delete</a>`;
@@ -16,31 +18,47 @@ exports[`renders ./antdv-demo/docs/popconfirm/demo/placement.md correctly 1`] = 
 <div id="components-a-popconfirm-demo-placement">
   <div style="margin-left: 70px; white-space: nowrap;">
     <!----><button class="ant-btn" type="button">
-      <!----><span>TL</span></button>
+      <!----><span>TL</span>
+    </button>
     <!----><button class="ant-btn" type="button">
-      <!----><span>Top</span></button>
+      <!----><span>Top</span>
+    </button>
     <!----><button class="ant-btn" type="button">
-      <!----><span>TR</span></button></div>
+      <!----><span>TR</span>
+    </button>
+  </div>
   <div style="width: 70px; float: left;">
     <!----><button class="ant-btn" type="button">
-      <!----><span>LT</span></button>
+      <!----><span>LT</span>
+    </button>
     <!----><button class="ant-btn" type="button">
-      <!----><span>Left</span></button>
+      <!----><span>Left</span>
+    </button>
     <!----><button class="ant-btn" type="button">
-      <!----><span>LB</span></button></div>
+      <!----><span>LB</span>
+    </button>
+  </div>
   <div style="width: 70px; margin-left: 304px;">
     <!----><button class="ant-btn" type="button">
-      <!----><span>RT</span></button>
+      <!----><span>RT</span>
+    </button>
     <!----><button class="ant-btn" type="button">
-      <!----><span>Right</span></button>
+      <!----><span>Right</span>
+    </button>
     <!----><button class="ant-btn" type="button">
-      <!----><span>RB</span></button></div>
+      <!----><span>RB</span>
+    </button>
+  </div>
   <div style="margin-left: 70px; clear: both; white-space: nowrap;">
     <!----><button class="ant-btn" type="button">
-      <!----><span>BL</span></button>
+      <!----><span>BL</span>
+    </button>
     <!----><button class="ant-btn" type="button">
-      <!----><span>Bottom</span></button>
+      <!----><span>Bottom</span>
+    </button>
     <!----><button class="ant-btn" type="button">
-      <!----><span>BR</span></button></div>
+      <!----><span>BR</span>
+    </button>
+  </div>
 </div>
 `;

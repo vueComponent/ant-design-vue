@@ -23,7 +23,8 @@ exports[`renders ./antdv-demo/docs/input-number/demo/disabled.md correctly 1`] =
     <div class="ant-input-number-input-wrap"><input role="spinbutton" aria-valuemin="1" aria-valuemax="10" aria-valuenow="3" class="ant-input-number-input" autocomplete="off" disabled="" max="10" min="1" step="1"></div>
   </div>
   <div style="margin-top: 20px;"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Toggle disabled</span></button></div>
+      <!----><span>Toggle disabled</span>
+    </button></div>
 </div>
 `;
 

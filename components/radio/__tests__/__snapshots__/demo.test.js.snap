@@ -5,7 +5,8 @@ exports[`renders ./antdv-demo/docs/radio/demo/basic.md correctly 1`] = `<label c
 exports[`renders ./antdv-demo/docs/radio/demo/disabled.md correctly 1`] = `
 <div><label class="ant-radio-wrapper ant-radio-wrapper-disabled"><span class="ant-radio ant-radio-disabled"><input type="radio" disabled="" class="ant-radio-input" value=""><span class="ant-radio-inner"></span></span><span> Disabled </span></label><br><label class="ant-radio-wrapper ant-radio-wrapper-disabled"><span class="ant-radio ant-radio-disabled"><input type="radio" disabled="" class="ant-radio-input" value=""><span class="ant-radio-inner"></span></span><span> Disabled </span></label>
   <div><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Toggle disabled</span></button></div>
+      <!----><span>Toggle disabled</span>
+    </button></div>
 </div>
 `;
 

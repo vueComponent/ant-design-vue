@@ -1647,7 +1647,7 @@ exports[`renders ./antdv-demo/docs/calendar/demo/notice-calendar.md correctly 1`
 `;
 
 exports[`renders ./antdv-demo/docs/calendar/demo/select.md correctly 1`] = `
-<div class="ant-alert ant-alert-info ant-alert-no-icon" data-show="true">
+<div class="ant-alert ant-alert-info ant-alert-no-icon ant-alert-slide-up-enter" data-show="true">
   <!----><span class="ant-alert-message">You selected date: 2017-01-25</span><span class="ant-alert-description"><!----></span>
   <!---->
 </div>

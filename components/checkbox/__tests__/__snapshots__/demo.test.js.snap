@@ -10,14 +10,18 @@ exports[`renders ./antdv-demo/docs/checkbox/demo/check-all.md correctly 1`] = `
 exports[`renders ./antdv-demo/docs/checkbox/demo/controller.md correctly 1`] = `
 <p style="margin-bottom: 20px;"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span><span>Checked-Enabled</span></label></p>
 <p><button class="ant-btn ant-btn-primary ant-btn-sm" type="button">
-    <!----><span>Uncheck</span></button><button style="margin-left: 10px;" class="ant-btn ant-btn-primary ant-btn-sm" type="button">
-    <!----><span>Disable</span></button></p>
+    <!----><span>Uncheck</span>
+  </button><button style="margin-left: 10px;" class="ant-btn ant-btn-primary ant-btn-sm" type="button">
+    <!----><span>Disable</span>
+  </button></p>
 `;
 
 exports[`renders ./antdv-demo/docs/checkbox/demo/disabled.md correctly 1`] = `
 <label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-  <!----></label><br><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-  <!----></label>
+  <!---->
+</label><br><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
+  <!---->
+</label>
 `;
 
 exports[`renders ./antdv-demo/docs/checkbox/demo/group.md correctly 1`] = `

@@ -198,7 +198,8 @@ exports[`RangePicker show month panel according to value 1`] = `
                   <div class="ant-calendar-header">
                     <div style="position: relative;">
                       <!---->
-                      <!----><span class="ant-calendar-my-select"><a class="ant-calendar-month-select" role="button" title="Choose a month">2月</a><!----><a class="ant-calendar-year-select" role="button" title="Choose a year">2000</a></span><a class="ant-calendar-next-month-btn" title="Next month (PageDown)"></a><a class="ant-calendar-next-year-btn" title="Next year (Control + right)"></a></div>
+                      <!----><span class="ant-calendar-my-select"><a class="ant-calendar-month-select" role="button" title="Choose a month">2月</a><!----><a class="ant-calendar-year-select" role="button" title="Choose a year">2000</a></span><a class="ant-calendar-next-month-btn" title="Next month (PageDown)"></a><a class="ant-calendar-next-year-btn" title="Next year (Control + right)"></a>
+                    </div>
                     <!---->
                   </div>
                   <!---->
@@ -370,7 +371,8 @@ exports[`RangePicker show month panel according to value 1`] = `
             <div class="ant-calendar-footer ant-calendar-range-bottom ant-calendar-footer-show-ok">
               <div class="ant-calendar-footer-btn">
                 <!---->
-                <!----><a class="ant-calendar-time-picker-btn" role="button">select time</a><a class="ant-calendar-ok-btn" role="button">Ok</a></div>
+                <!----><a class="ant-calendar-time-picker-btn" role="button">select time</a><a class="ant-calendar-ok-btn" role="button">Ok</a>
+              </div>
             </div>
           </div>
         </div>
@@ -578,7 +580,8 @@ exports[`RangePicker switch to corresponding month panel when click presetted ra
                 <div class="ant-calendar-header">
                   <div style="position: relative;">
                     <!---->
-                    <!----><span class="ant-calendar-my-select"><a class="ant-calendar-month-select" role="button" title="Choose a month">2月</a><!----><a class="ant-calendar-year-select" role="button" title="Choose a year">2000</a></span><a class="ant-calendar-next-month-btn" title="Next month (PageDown)"></a><a class="ant-calendar-next-year-btn" title="Next year (Control + right)"></a></div>
+                    <!----><span class="ant-calendar-my-select"><a class="ant-calendar-month-select" role="button" title="Choose a month">2月</a><!----><a class="ant-calendar-year-select" role="button" title="Choose a year">2000</a></span><a class="ant-calendar-next-month-btn" title="Next month (PageDown)"></a><a class="ant-calendar-next-year-btn" title="Next year (Control + right)"></a>
+                  </div>
                   <!---->
                 </div>
                 <!---->

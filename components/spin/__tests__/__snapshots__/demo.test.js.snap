@@ -32,7 +32,8 @@ exports[`renders ./antdv-demo/docs/spin/demo/delayAndDebounce.md correctly 1`] =
       <div class="spin-content"> 可以点击‘切换’按钮，延迟显示 loading 效果。当 spinning 状态在 \`delay\` 时间内结束，则不显示 loading 状态。 </div>
     </div>
   </div> Loading state：<button class="ant-switch" type="button" role="switch" aria-checked="false">
-    <!----><span class="ant-switch-inner"><!----></span></button>
+    <!----><span class="ant-switch-inner"><!----></span>
+  </button>
 </div>
 `;
 
@@ -52,7 +53,8 @@ exports[`renders ./antdv-demo/docs/spin/demo/nested.md correctly 1`] = `
       <div class="spin-content"> 可以点击‘切换’按钮，控制本区域的spin展示。 </div>
     </div>
   </div> Loading state：<button class="ant-switch" type="button" role="switch" aria-checked="false">
-    <!----><span class="ant-switch-inner"><!----></span></button>
+    <!----><span class="ant-switch-inner"><!----></span>
+  </button>
 </div>
 `;
 

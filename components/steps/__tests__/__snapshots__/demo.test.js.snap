@@ -694,7 +694,8 @@ exports[`renders ./antdv-demo/docs/steps/demo/step-next.md correctly 1`] = `
   </div>
   <div class="steps-content">First-content</div>
   <div class="steps-action"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Next</span></button>
+      <!----><span>Next</span>
+    </button>
     <!--v-if-->
     <!--v-if-->
   </div>

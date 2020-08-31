@@ -25,7 +25,8 @@ exports[`renders ./antdv-demo/docs/empty/demo/basic.md correctly 1`] = `
 
 exports[`renders ./antdv-demo/docs/empty/demo/config-provider.md correctly 1`] = `
 <button class="ant-switch" type="button" role="switch" aria-checked="false">
-  <!----><span class="ant-switch-inner">default</span></button>
+  <!----><span class="ant-switch-inner">default</span>
+</button>
 <div class="ant-divider ant-divider-horizontal" role="separator">
   <!---->
 </div>
@@ -52,7 +53,8 @@ exports[`renders ./antdv-demo/docs/empty/demo/config-provider.md correctly 1`] =
   <div class="ant-transfer">
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-          <!----></label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span></div>
+          <!---->
+        </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span></div>
       <div class="ant-transfer-list-body">
         <!---->
         <div class="ant-transfer-list-body-not-found">
@@ -76,7 +78,8 @@ exports[`renders ./antdv-demo/docs/empty/demo/config-provider.md correctly 1`] =
     <div class="ant-transfer-operation"><button disabled="" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only" type="button"><span role="img" aria-label="right" class="anticon anticon-right"><svg class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button><button disabled="" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only" type="button"><span role="img" aria-label="left" class="anticon anticon-left"><svg class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></div>
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
-          <!----></label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span></div>
+          <!---->
+        </label><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title"></span></span></div>
       <div class="ant-transfer-list-body">
         <!---->
         <div class="ant-transfer-list-body-not-found">
@@ -186,7 +189,8 @@ exports[`renders ./antdv-demo/docs/empty/demo/customize.md correctly 1`] = `
   <div class="ant-empty-image" style="height: 60px;"><img alt="empty" src="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"></div>
   <p class="ant-empty-description"><span> Customize <a href="#API">Description</a></span></p>
   <div class="ant-empty-footer"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Create Now</span></button></div>
+      <!----><span>Create Now</span>
+    </button></div>
 </div>
 `;
 

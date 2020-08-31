@@ -36,7 +36,8 @@ exports[`Table align column should not override cell style 1`] = `
             </td>
             <td style="text-align: center; color: red;" class="">
               <!---->
-              <!---->32</td>
+              <!---->32
+            </td>
           </tr>
           <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
             <td class="">
@@ -46,7 +47,8 @@ exports[`Table align column should not override cell style 1`] = `
             </td>
             <td style="text-align: center; color: red;" class="">
               <!---->
-              <!---->42</td>
+              <!---->42
+            </td>
           </tr>
         </tbody>
         </table>
@@ -111,24 +113,30 @@ exports[`Table renders JSX correctly 1`] = `
       <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
         <td class="">
           <!---->
-          <!---->John</td>
+          <!---->John
+        </td>
         <td class="">
           <!---->
-          <!---->Brown</td>
+          <!---->Brown
+        </td>
         <td class="">
           <!---->
-          <!---->32</td>
+          <!---->32
+        </td>
       </tr>
       <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
         <td class="">
           <!---->
-          <!---->Jim</td>
+          <!---->Jim
+        </td>
         <td class="">
           <!---->
-          <!---->Green</td>
+          <!---->Green
+        </td>
         <td class="">
           <!---->
-          <!---->42</td>
+          <!---->42
+        </td>
       </tr>
     </tbody>
     </table>

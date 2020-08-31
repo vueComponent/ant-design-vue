@@ -58,7 +58,8 @@ exports[`Card title should be vertically aligned 1`] = `
     <div class="ant-card-head-wrapper">
       <div class="ant-card-head-title">Card title</div>
       <div class="ant-card-extra"><button class="ant-btn" type="button">
-          <!----><span>Button</span></button></div>
+          <!----><span>Button</span>
+        </button></div>
     </div>
     <!---->
   </div>

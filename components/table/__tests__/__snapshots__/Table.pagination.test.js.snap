@@ -26,12 +26,14 @@ exports[`Table.pagination renders pagination correctly 1`] = `
             <tr data-row-key="0" class="ant-table-row ant-table-row-level-0">
               <td class="">
                 <!---->
-                <!---->Jack</td>
+                <!---->Jack
+              </td>
             </tr>
             <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
               <td class="">
                 <!---->
-                <!---->Lucy</td>
+                <!---->Lucy
+              </td>
             </tr>
           </tbody>
           </table>

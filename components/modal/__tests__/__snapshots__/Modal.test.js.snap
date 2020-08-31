@@ -14,8 +14,10 @@ exports[`Modal render correctly 1`] = `
               <div class="ant-modal-body">Here is content of Modal</div>
               <div class="ant-modal-footer">
                 <div><button class="ant-btn" type="button">
-                    <!----><span>Cancel</span></button><button class="ant-btn ant-btn-primary" type="button">
-                    <!----><span>OK</span></button></div>
+                    <!----><span>Cancel</span>
+                  </button><button class="ant-btn ant-btn-primary" type="button">
+                    <!----><span>OK</span>
+                  </button></div>
               </div>
             </div>
             <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden;" aria-hidden="true"></div>
@@ -43,8 +45,10 @@ exports[`Modal render correctly 2`] = `
               <div class="ant-modal-body">Here is content of Modal</div>
               <div class="ant-modal-footer">
                 <div><button class="ant-btn" type="button">
-                    <!----><span>Cancel</span></button><button class="ant-btn ant-btn-primary" type="button">
-                    <!----><span>OK</span></button></div>
+                    <!----><span>Cancel</span>
+                  </button><button class="ant-btn ant-btn-primary" type="button">
+                    <!----><span>OK</span>
+                  </button></div>
               </div>
             </div>
             <div tabindex="0" style="width: 0px; height: 0px; overflow: hidden;" aria-hidden="true"></div>

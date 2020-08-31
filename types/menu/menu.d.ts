@@ -14,7 +14,7 @@ export declare class Menu extends AntdComponent {
   static SubMenu: typeof SubMenu;
   static ItemGroup: typeof MenuItemGroup;
   static Divider: typeof Divider;
-  $props: AntdProps & {
+  $props: Omit<AntdProps, 'onClick'> & {
     /**
      * Allow selection of multiple items
      * @default false
@@ -111,10 +111,6 @@ export declare class Menu extends AntdComponent {
      * 	set the handler to handle click event
      * @param params
      */
-    onClick?: (params: {
-      key: string | number;
-      keyPath: string[] | number[];
-      item: Object;
-    }) => void;
+    onClick?: (params: { key: string | number; keyPath: string[] | number[]; item: any }) => void;
   };
 }

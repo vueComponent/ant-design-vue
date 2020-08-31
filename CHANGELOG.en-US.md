@@ -10,6 +10,10 @@
 
 ---
 
+## 2.0.0-beta.5
+
+- 🔥 Support Vite
+
 ## 2.0.0-beta.4
 
 - 🌟 Remove polyfills that are no longer used

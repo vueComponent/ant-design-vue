@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { getComponent, getOptionProps } from '../_util/props-util';
 import Input from './Input';
 import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';

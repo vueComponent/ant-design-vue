@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 import Trigger from '../../vc-trigger';
 import { createRef } from './util';
-import classNames from 'classnames';
+import classNames from '../../_util/classNames';
 import { getSlot } from '../../_util/props-util';
 
 const BUILT_IN_PLACEMENTS = {

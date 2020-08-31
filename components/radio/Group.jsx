@@ -1,5 +1,5 @@
 import { provide, inject, nextTick } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
 import { getOptionProps, filterEmpty, hasProp, getSlot } from '../_util/props-util';

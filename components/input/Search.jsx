@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { isMobile } from 'is-mobile';
 import Input from './Input';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';

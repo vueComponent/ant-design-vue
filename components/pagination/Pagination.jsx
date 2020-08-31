@@ -11,7 +11,7 @@ import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
 import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
 import { ConfigConsumerProps } from '../config-provider';
 import { inject } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 
 export const PaginationProps = () => ({
   total: PropTypes.number,

@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import ScrollNumber from './ScrollNumber';
 import { PresetColorTypes } from '../_util/colors';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import getTransitionProps from '../_util/getTransitionProps';

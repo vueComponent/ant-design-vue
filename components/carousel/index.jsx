@@ -4,7 +4,7 @@ import debounce from 'lodash/debounce';
 import hasProp, { initDefaultProps, getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import warning from '../_util/warning';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import SlickCarousel from '../vc-slick/src';
 
 export const CarouselEffect = PropTypes.oneOf(['scrollx', 'fade']);

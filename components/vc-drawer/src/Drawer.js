@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classnames from '../../_util/classNames';
 import { cloneVNode, Teleport, nextTick } from 'vue';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, getSlot } from '../../_util/props-util';

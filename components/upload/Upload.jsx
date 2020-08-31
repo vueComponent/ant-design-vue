@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import uniqBy from 'lodash/uniqBy';
 import findIndex from 'lodash/findIndex';
 import VcUpload from '../vc-upload';

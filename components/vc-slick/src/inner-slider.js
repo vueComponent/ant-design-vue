@@ -1,5 +1,5 @@
 import debounce from 'lodash/debounce';
-import classnames from 'classnames';
+import classnames from '../../_util/classNames';
 import BaseMixin from '../../_util/BaseMixin';
 import defaultProps from './default-props';
 import initialState from './initial-state';

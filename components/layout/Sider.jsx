@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import {

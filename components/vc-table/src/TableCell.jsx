@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import get from 'lodash/get';
-import classNames from 'classnames';
+import classNames from '../../_util/classNames';
 import { isValidElement } from '../../_util/props-util';
 
 function isInvalidRenderCellText(text) {

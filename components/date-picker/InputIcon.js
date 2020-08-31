@@ -1,7 +1,7 @@
 import CalendarOutlined from '@ant-design/icons-vue/CalendarOutlined';
 import { isValidElement } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 
 const InputIcon = (_, { attrs }) => {
   const { suffixIcon, prefixCls } = attrs;

@@ -3,7 +3,7 @@ import { provide, markRaw } from 'vue';
 import shallowequal from '../../_util/shallowequal';
 import merge from 'lodash/merge';
 import classes from 'component-classes';
-import classNames from 'classnames';
+import classNames from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
 import { debounce, getDataAndAriaProps } from './utils';
 import warning from '../../_util/warning';

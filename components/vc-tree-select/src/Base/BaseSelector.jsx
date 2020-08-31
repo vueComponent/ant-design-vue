@@ -8,7 +8,7 @@
 import { inject } from 'vue';
 import { createRef } from '../util';
 import PropTypes from '../../../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../../../_util/classNames';
 import { initDefaultProps, getComponent } from '../../../_util/props-util';
 import BaseMixin from '../../../_util/BaseMixin';
 export const selectorPropTypes = () => ({

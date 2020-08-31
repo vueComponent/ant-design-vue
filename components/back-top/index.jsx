@@ -1,5 +1,5 @@
 import { inject, Transition } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import backTopTypes from './backTopTypes';
 import addEventListener from '../vc-util/Dom/addEventListener';

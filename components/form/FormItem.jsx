@@ -1,7 +1,7 @@
 import { inject, provide, Transition } from 'vue';
 import cloneDeep from 'lodash/cloneDeep';
 import PropTypes from '../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import getTransitionProps from '../_util/getTransitionProps';
 import Row from '../grid/Row';
 import Col, { ColProps } from '../grid/Col';

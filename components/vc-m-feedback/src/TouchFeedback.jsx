@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from '../../_util/classNames';
 import { initDefaultProps, getSlot } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import warning from '../../_util/warning';

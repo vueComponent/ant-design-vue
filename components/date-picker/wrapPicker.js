@@ -1,6 +1,6 @@
 import { provide, inject } from 'vue';
 import TimePickerPanel from '../vc-time-picker/Panel';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { generateShowHourMinuteSecond } from '../time-picker';
 import enUS from './locale/en_US';

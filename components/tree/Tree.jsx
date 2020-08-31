@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import FileOutlined from '@ant-design/icons-vue/FileOutlined';
 import CaretDownFilled from '@ant-design/icons-vue/CaretDownFilled';

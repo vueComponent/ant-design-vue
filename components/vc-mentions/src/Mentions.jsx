@@ -1,5 +1,5 @@
 import { provide } from 'vue';
-import classNames from 'classnames';
+import classNames from '../../_util/classNames';
 import omit from 'omit.js';
 import KeyCode from '../../_util/KeyCode';
 import BaseMixin from '../../_util/BaseMixin';

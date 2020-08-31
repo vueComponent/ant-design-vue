@@ -1,6 +1,6 @@
 import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { ColProps } from '../grid/Col';
 import isRegExp from 'lodash/isRegExp';
 import warning from '../_util/warning';

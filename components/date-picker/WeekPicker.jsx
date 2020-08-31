@@ -5,7 +5,7 @@ import VcDatePicker from '../vc-calendar/src/Picker';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import { ConfigConsumerProps } from '../config-provider';
 import { hasProp, getOptionProps, initDefaultProps, getComponent } from '../_util/props-util';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import BaseMixin from '../_util/BaseMixin';
 import { WeekPickerProps } from './interface';
 import interopDefault from '../_util/interopDefault';

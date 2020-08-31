@@ -2,7 +2,7 @@ import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import VcCascader from '../vc-cascader';
 import arrayTreeFilter from 'array-tree-filter';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import KeyCode from '../_util/KeyCode';
 import Input from '../input';

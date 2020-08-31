@@ -1,4 +1,9 @@
-const isFunction = val => typeof val === 'function';
+export const isFunction = val => typeof val === 'function';
+
+export const isArray = Array.isArray;
+export const isString = val => typeof val === 'string';
+export const isSymbol = val => typeof val === 'symbol';
+export const isObject = val => val !== null && typeof val === 'object';
 const onRE = /^on[^a-z]/;
 const isOn = key => onRE.test(key);
 

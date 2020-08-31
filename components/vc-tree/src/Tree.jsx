@@ -1,5 +1,5 @@
 import PropTypes from '../../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../../_util/classNames';
 import warning from 'warning';
 import { hasProp, initDefaultProps, getOptionProps, getSlot } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';

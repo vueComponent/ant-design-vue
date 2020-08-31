@@ -3,7 +3,7 @@ import RcDropdown from '../vc-dropdown/src/index';
 import DropdownButton from './dropdown-button';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import {
   getOptionProps,
   getPropsData,

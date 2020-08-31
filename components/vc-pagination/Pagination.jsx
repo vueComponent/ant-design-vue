@@ -5,7 +5,7 @@ import Pager from './Pager';
 import Options from './Options';
 import LOCALE from './locale/zh_CN';
 import KEYCODE from './KeyCode';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 
 function noop() {}
 

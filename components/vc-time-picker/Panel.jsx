@@ -1,5 +1,5 @@
 import moment from 'moment';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import Header from './Header';

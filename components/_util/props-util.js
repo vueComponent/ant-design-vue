@@ -1,5 +1,5 @@
 import isPlainObject from 'lodash/isPlainObject';
-import classNames from 'classnames';
+import classNames from './classNames';
 import { isVNode, Fragment, Comment, Text, h } from 'vue';
 import { camelize, hyphenate, isOn, resolvePropValue } from './util';
 import isValid from './isValid';

@@ -191,7 +191,6 @@
     "array-tree-filter": "^2.1.0",
     "async-validator": "^3.3.0",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",
-    "classnames": "^2.2.5",
     "component-classes": "^1.2.6",
     "dom-align": "^1.10.4",
     "dom-closest": "^0.2.0",

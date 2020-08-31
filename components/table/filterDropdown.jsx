@@ -1,7 +1,7 @@
 import FilterFilled from '@ant-design/icons-vue/FilterFilled';
 import Menu, { SubMenu, Item as MenuItem } from '../vc-menu';
 import closest from 'dom-closest';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import shallowequal from '../_util/shallowequal';
 import Dropdown from '../dropdown';
 import Checkbox from '../checkbox';

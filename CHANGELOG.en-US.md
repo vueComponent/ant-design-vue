@@ -10,6 +10,12 @@
 
 ---
 
+## 2.0.0-beta.4
+
+- 🌟 Remove polyfills that are no longer used
+- 🐞 Fix the problem of calling `Modal` afterClose twice
+- 🐞 Supplement the declaration that ts type files lack native attributes
+
 ## 2.0.0-beta.3
 
 - 🔥 Support Typescript.

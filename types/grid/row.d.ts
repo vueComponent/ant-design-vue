@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 
 type Gutter =
   | number
@@ -15,7 +15,7 @@ type Gutter =
       xxl: number;
     };
 export declare class Row extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * spacing between grids, could be a number or a object like { xs: 8, sm: 16, md: 24}
      * @default 0

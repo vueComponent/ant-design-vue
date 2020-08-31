@@ -2,12 +2,12 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { CollapsePanel } from './collapse-panel';
 export type ExpandIconPosition = 'left' | 'right';
 export declare class Collapse extends AntdComponent {
   static Panel: typeof CollapsePanel;
-  $props: {
+  $props: AntdProps & {
     expandIconPosition?: ExpandIconPosition;
     /**
      * If true, Collapse renders as Accordion

@@ -3,10 +3,10 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild, CSSProperties } from 'vue';
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 
 export declare class Drawer extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * Whether a close (x) button is visible on top right of the Drawer dialog or not.
      * @default true

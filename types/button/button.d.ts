@@ -4,12 +4,12 @@
 
 import { ButtonGroup } from './button-group';
 import { VNodeChild } from 'vue';
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 
 export declare class Button extends AntdComponent {
   static Group: typeof ButtonGroup;
 
-  $props: {
+  $props: AntdProps & {
     /**
      * can be set to primary ghost dashed danger(added in 2.7) or omitted (meaning default)
      * @default 'default'

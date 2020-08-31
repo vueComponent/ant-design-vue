@@ -2,10 +2,10 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild } from 'vue';
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 
 export declare class Comment extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /** List of action items rendered below the comment content
      * any ( array | slot )
      */

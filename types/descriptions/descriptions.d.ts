@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild } from 'vue';
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { DescriptionsItem } from './descriptions-item';
 
 import { Breakpoint } from '../pub';
@@ -11,7 +11,7 @@ import { Breakpoint } from '../pub';
 export declare class Descriptions extends AntdComponent {
   static Item: typeof DescriptionsItem;
 
-  $props: {
+  $props: AntdProps & {
     /**
      * descriptions size type
      * @default 'default'

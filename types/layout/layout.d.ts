@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { LayoutSider } from './layout-sider';
 import LayoutHeader from './layout-header';
 import LayoutContent from './layout-content';

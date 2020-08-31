@@ -1,13 +1,13 @@
 // Project: https://github.com/vueComponent/ant-design-vue
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { Option } from './option';
 import { VNodeChild } from 'vue';
 
 export declare class Mentions extends AntdComponent {
   static Option: typeof Option;
-  $props: {
+  $props: AntdProps & {
     /**
      * Auto get focus when component mounted
      * @default false

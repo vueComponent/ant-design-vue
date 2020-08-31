@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { SpinProps } from '../spin';
 import { Pagination } from '../pagination';
 import { Column, ColumnProps, SortOrder } from './column';
@@ -140,7 +140,7 @@ export declare class Table<T> extends AntdComponent {
   static Column: typeof Column;
   static ColumnGroup: typeof ColumnGroup;
 
-  $props: {
+  $props: AntdProps & {
     /**
      * Whether to show all table borders
      * @default false

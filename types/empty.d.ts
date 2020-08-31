@@ -2,11 +2,11 @@
 // Definitions by: Svreber <https://github.com/Svreber>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { VNodeChild, CSSProperties } from 'vue';
 
 export declare class Empty extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * customize description
      * @type string | VNode

@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 
 export interface HttpRequestHeader {
   [key: string]: string;
@@ -77,7 +77,7 @@ type TransformFileHandler = (
 
 export declare class Upload extends AntdComponent {
   static Dragger: typeof Upload;
-  $props: {
+  $props: AntdProps & {
     /**
      * File types that can be accepted.
      * @type string

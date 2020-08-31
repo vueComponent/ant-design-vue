@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { Col } from '../grid/col';
 import { VNodeChild } from 'vue';
 
@@ -10,7 +10,7 @@ export declare type InternalNamePath = (string | number)[];
 export declare type NamePath = string | number | InternalNamePath;
 
 export declare class FormItem extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * Used with label, whether to display : after label text.
      * @default true

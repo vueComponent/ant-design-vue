@@ -2,12 +2,12 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { Menu } from '../menu/menu';
 import { VNodeChild } from 'vue';
 
 export declare class DropdownButton extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * whether the dropdown menu is disabled
      * @type boolean

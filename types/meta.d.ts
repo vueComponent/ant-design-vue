@@ -5,7 +5,7 @@
 import { VNodeChild } from 'vue';
 
 export declare class Meta {
-  $props: {
+  $props: AntdProps & {
     /**
      * The avatar of list item
      * @type any (slot)

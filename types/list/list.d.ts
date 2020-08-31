@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { VNodeChild } from 'vue';
 import { Pagination } from '../pagination';
 import { ListItem } from './list-item';
@@ -21,7 +21,7 @@ export interface Item {
 export class List extends AntdComponent {
   static Item: typeof ListItem;
 
-  $props: {
+  $props: AntdProps & {
     /**
      * Toggles rendering of the border around the list
      * @default false

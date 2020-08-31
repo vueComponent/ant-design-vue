@@ -2,12 +2,12 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { Step } from './step';
 
 export declare class Steps extends AntdComponent {
   static Step: typeof Step;
-  $props: {
+  $props: AntdProps & {
     type?: 'default' | 'navigation';
     /**
      * to set the current step, counting from 0. You can overwrite this state by using status of Step

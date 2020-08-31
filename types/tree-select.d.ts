@@ -2,7 +2,7 @@
 // akki-jat <https://github.com/akki-jat> Definitions:
 // https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { TreeNode } from './tree-node';
 import { VNodeChild, CSSProperties } from 'vue';
 
@@ -37,7 +37,7 @@ export type TreeNodeValue = string | number | string[] | number[];
 export declare class TreeSelect extends AntdComponent {
   static TreeNode: typeof TreeNode;
 
-  $props: {
+  $props: AntdProps & {
     treeIcon?: boolean;
 
     notFoundContent?: VNodeChild | JSX.Element;

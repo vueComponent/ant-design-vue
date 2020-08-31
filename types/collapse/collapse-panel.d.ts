@@ -2,10 +2,10 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 
 export declare class CollapsePanel extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * If true, panel cannot be opened or closed
      * @default false

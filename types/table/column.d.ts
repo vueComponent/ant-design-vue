@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild, Slots } from 'vue';
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 
 export interface ColumnFilterItem {
   text?: string;

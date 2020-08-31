@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 export declare class CheckboxGroup {
-  $props: {
+  $props: AntdProps & {
     /**
      * Default selected value
      * @type string[]

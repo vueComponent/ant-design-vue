@@ -2,13 +2,13 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { TabPane } from './tab-pane';
 import { CSSProperties, VNodeChild } from 'vue';
 
 export declare class Tabs extends AntdComponent {
   static TabPane: typeof TabPane;
-  $props: {
+  $props: AntdProps & {
     /**
      * Current TabPane's key
      * @type string

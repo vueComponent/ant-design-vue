@@ -3,7 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild, CSSProperties } from 'vue';
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { Meta } from './meta';
 
 export type CardSize = 'default' | 'small';
@@ -12,7 +12,7 @@ export declare class Card extends AntdComponent {
   static Grid: any;
   static Meta: typeof Meta;
 
-  $props: {
+  $props: AntdProps & {
     tabBarExtraContent: any;
     /**
      * The action list, shows at the bottom of the Card.

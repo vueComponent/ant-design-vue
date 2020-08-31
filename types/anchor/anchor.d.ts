@@ -4,12 +4,12 @@
 
 import { CSSProperties } from 'vue';
 import { AnchorLink } from './anchor-link';
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 
 export declare class Anchor extends AntdComponent {
   static Link: typeof AnchorLink;
 
-  $props: {
+  $props: AntdProps & {
     /**
      * Fixed mode of Anchor
      * @default true

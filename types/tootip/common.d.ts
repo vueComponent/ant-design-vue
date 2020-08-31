@@ -6,7 +6,7 @@ import { CSSProperties } from 'vue';
 export declare type triggerType = 'hover' | 'focus' | 'click' | 'contextmenu';
 
 export declare class TooltipCommon {
-  // $props: {
+  // $props: AntdProps & {
   /**
    * Whether the arrow is pointed at the center of target
    * @default false

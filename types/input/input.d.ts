@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { InputGroup } from './input-group';
 import { InputSearch } from './input-search';
 import { TextArea } from './textarea';
@@ -14,7 +14,7 @@ export declare class Input extends AntdComponent {
   static Search: typeof InputSearch;
   static TextArea: typeof TextArea;
   static Password: typeof Password;
-  $props: {
+  $props: AntdProps & {
     /**
      * The label text displayed after (on the right side of) the input field.
      * @type any (string | slot)

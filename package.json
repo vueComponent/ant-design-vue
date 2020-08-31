@@ -184,7 +184,7 @@
     "xhr-mock": "^2.5.1"
   },
   "dependencies": {
-    "@ant-design/icons-vue": "^5.1.4",
+    "@ant-design/icons-vue": "^5.1.5",
     "@babel/runtime": "^7.10.5",
     "@simonwep/pickr": "~1.7.0",
     "add-dom-event-listener": "^1.0.2",
@@ -201,7 +201,7 @@
     "ismobilejs": "^1.0.0",
     "json2mq": "^0.2.0",
     "lodash": "^4.17.5",
-    "moment": "^2.21.0",
+    "moment": "^2.27.0",
     "node-emoji": "^1.10.0",
     "omit.js": "^2.0.0",
     "raf": "^3.4.0",

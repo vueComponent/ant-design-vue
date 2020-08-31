@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import padStart from 'lodash/padStart';
 
 import interopDefault from '../_util/interopDefault';

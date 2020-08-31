@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import * as moment from 'moment';
+import moment from 'moment';
 import Calendar from '../vc-calendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';

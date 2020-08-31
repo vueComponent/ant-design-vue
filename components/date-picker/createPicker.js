@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import * as moment from 'moment';
+import moment from 'moment';
 import omit from 'lodash/omit';
 import MonthCalendar from '../vc-calendar/src/MonthCalendar';
 import VcDatePicker from '../vc-calendar/src/Picker';

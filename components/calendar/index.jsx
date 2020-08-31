@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, hasProp, initDefaultProps } from '../_util/props-util';
-import * as moment from 'moment';
+import moment from 'moment';
 import FullCalendar from '../vc-calendar/src/FullCalendar';
 import Header from './Header';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';

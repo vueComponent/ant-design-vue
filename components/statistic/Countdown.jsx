@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
 import { initDefaultProps } from '../_util/props-util';
 import Statistic, { StatisticProps } from './Statistic';

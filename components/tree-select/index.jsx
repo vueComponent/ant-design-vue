@@ -13,12 +13,9 @@ import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
 import omit from 'omit.js';
-const ATreeSelectNode = function ATreeSelectNode(props, ctx) {
-  return TreeNode(props, ctx);
-};
-Object.keys(TreeNode).forEach(key => (ATreeSelectNode[key] = TreeNode[key]));
+
 const TreeSelect = {
-  TreeNode: ATreeSelectNode,
+  TreeNode,
   SHOW_ALL,
   SHOW_PARENT,
   SHOW_CHILD,
@@ -204,7 +201,7 @@ const TreeSelect = {
 /* istanbul ignore next */
 TreeSelect.install = function(app) {
   app.component(TreeSelect.name, TreeSelect);
-  app.component(TreeSelect.TreeNode.name, TreeSelect.TreeNode);
+  app.component('ATreeSelectNode', TreeSelect.TreeNode);
 };
 
 export default TreeSelect;

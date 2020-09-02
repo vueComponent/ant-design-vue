@@ -10,7 +10,7 @@ import { cloneElement } from '../_util/vnode';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import isPlainObject from 'lodash/isPlainObject';
+import isPlainObject from 'lodash-es/isPlainObject';
 
 export default {
   name: 'AInputSearch',

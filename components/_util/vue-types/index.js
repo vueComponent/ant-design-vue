@@ -1,4 +1,4 @@
-import isPlainObject from 'lodash/isPlainObject';
+import isPlainObject from 'lodash-es/isPlainObject';
 import { toType, getType, isFunction, validateType, isInteger, isArray, warn } from './utils';
 
 const VuePropTypes = {

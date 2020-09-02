@@ -1,6 +1,6 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import partition from 'lodash/partition';
+import partition from 'lodash-es/partition';
 import classNames from '../../_util/classNames';
 import defaultRequest from './request';
 import getUid from './uid';

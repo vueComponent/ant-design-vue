@@ -1,6 +1,6 @@
 import { inject } from 'vue';
 import omit from 'omit.js';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash-es/debounce';
 import FolderOpenOutlined from '@ant-design/icons-vue/FolderOpenOutlined';
 import FolderOutlined from '@ant-design/icons-vue/FolderOutlined';
 import FileOutlined from '@ant-design/icons-vue/FileOutlined';

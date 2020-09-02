@@ -7,7 +7,7 @@ import KeyCode from '../../_util/KeyCode';
 import placements from './picker/placements';
 import Trigger from '../../vc-trigger';
 import moment from 'moment';
-import isNil from 'lodash/isNil';
+import isNil from 'lodash-es/isNil';
 const TimeType = {
   validator(value) {
     if (Array.isArray(value)) {

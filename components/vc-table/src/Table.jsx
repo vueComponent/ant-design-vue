@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { provide, markRaw } from 'vue';
 import shallowequal from '../../_util/shallowequal';
-import merge from 'lodash/merge';
+import merge from 'lodash-es/merge';
 import classes from 'component-classes';
 import classNames from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';

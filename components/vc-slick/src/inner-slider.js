@@ -1,4 +1,4 @@
-import debounce from 'lodash/debounce';
+import debounce from 'lodash-es/debounce';
 import classnames from '../../_util/classNames';
 import BaseMixin from '../../_util/BaseMixin';
 import defaultProps from './default-props';

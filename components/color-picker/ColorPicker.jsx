@@ -5,7 +5,7 @@ import Pickr from '@simonwep/pickr/dist/pickr.es5.min';
 import Icon from '../icon';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import enUS from './locale/en_US';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash-es/debounce';
 
 import { getOptionProps, findDOMNode } from '../_util/props-util';
 let colors = '#194d33';

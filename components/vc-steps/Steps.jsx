@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash-es/debounce';
 import isFlexSupported from '../_util/isFlexSupported';
 import { filterEmpty, getSlot, getPropsData } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';

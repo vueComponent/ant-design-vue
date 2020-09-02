@@ -1,6 +1,6 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash-es/debounce';
 import hasProp, { initDefaultProps, getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import warning from '../_util/warning';

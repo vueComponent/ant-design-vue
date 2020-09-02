@@ -58,7 +58,7 @@
   "homepage": "https://www.antdv.com/",
   "peerDependencies": {
     "@vue/compiler-sfc": ">=3.0.0",
-    "vue": ">=3.0.0"
+    "vue": "3.0.0-rc.10"
   },
   "devDependencies": {
     "@ant-design-vue/babel-plugin-jsx": "^1.0.0-rc.1",

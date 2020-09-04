@@ -9,6 +9,7 @@ import {
   getOptionProps,
   getComponent,
   isValidElement,
+  isFragment,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 
@@ -215,11 +216,17 @@ const Descriptions = {
     const column = this.getColumn();
     const children = this.$slots.default && this.$slots.default();
     const cloneChildren = toArray(children)
-      .map(child => {
+      .flatMap(child => {
         if (isValidElement(child)) {
           return cloneVNode(child, {
             prefixCls,
           });
+        } else if (isFragment(child) && child.children.length > 0) {
+          return child.children.map(c =>
+            cloneVNode(c, {
+              prefixCls,
+            }),
+          );
         }
         return null;
       })

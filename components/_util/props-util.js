@@ -330,7 +330,7 @@ export function getComponentName(opts) {
 }
 
 export function isFragment(c) {
-  return c.length === 1 && c[0].type === Fragment;
+  return (c.length === 1 && c[0].type === Fragment) || c.type === Fragment;
 }
 
 export function isEmptyElement(c) {

@@ -167,7 +167,6 @@ export default {
 
   render() {
     const csp = this.configProvider.csp;
-    console.log(this.configProvider);
     if (csp) {
       this.csp = csp;
     }

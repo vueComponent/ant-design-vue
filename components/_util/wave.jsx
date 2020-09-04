@@ -79,11 +79,12 @@ export default {
         }`;
         if (!document.body.contains(styleForPesudo)) {
           document.body.appendChild(styleForPesudo);
+          if (insertExtraNode) {
+            node.appendChild(extraNode);
+          }
         }
       }
-      if (insertExtraNode) {
-        node.appendChild(extraNode);
-      }
+
       TransitionEvents.addStartEventListener(node, this.onTransitionStart);
       TransitionEvents.addEndEventListener(node, this.onTransitionEnd);
     },
@@ -166,6 +167,7 @@ export default {
 
   render() {
     const csp = this.configProvider.csp;
+    console.log(this.configProvider);
     if (csp) {
       this.csp = csp;
     }

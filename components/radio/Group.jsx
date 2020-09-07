@@ -25,6 +25,7 @@ export default {
     name: String,
     buttonStyle: PropTypes.string.def('outline'),
     onChange: PropTypes.func,
+    'onUpdate:value': PropTypes.func,
   },
   data() {
     const { value, defaultValue } = this;

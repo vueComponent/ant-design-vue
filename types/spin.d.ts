@@ -51,5 +51,5 @@ export declare class Spin extends AntdComponent {
    * @param param0 indicator
    */
   static setDefaultIndicator({ indicator }: { indicator: any }): void;
-  $props: SpinProps;
+  $props: AntdProps & SpinProps;
 }

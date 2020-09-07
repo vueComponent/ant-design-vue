@@ -68,5 +68,5 @@ export interface LayoutSiderProps {
 }
 
 export declare class LayoutSider extends AntdComponent {
-  $props: LayoutSiderProps;
+  $props: AntdProps & LayoutSiderProps;
 }

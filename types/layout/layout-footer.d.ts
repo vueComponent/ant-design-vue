@@ -15,5 +15,5 @@ export interface LayoutFooterProps {
 }
 
 export default class LayoutFooter extends AntdComponent {
-  $props: LayoutFooterProps;
+  $props: AntdProps & LayoutFooterProps;
 }

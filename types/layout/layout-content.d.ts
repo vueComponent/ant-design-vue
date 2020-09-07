@@ -28,5 +28,5 @@ export interface LayoutContentProps {
 }
 
 export default class LayoutContent extends AntdComponent {
-  $props: LayoutContentProps;
+  $props: AntdProps & LayoutContentProps;
 }

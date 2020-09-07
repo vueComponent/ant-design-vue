@@ -42,7 +42,7 @@ export declare class RadioProps {
 export declare class Radio extends AntdComponent {
   static Group: typeof RadioGroup;
   static Button: typeof RadioButton;
-  $props: RadioProps;
+  $props: AntdProps & RadioProps;
   /**
    * remove focus
    */

@@ -23,5 +23,5 @@ export declare class Layout extends AntdComponent {
   static Footer: typeof LayoutFooter;
   static Sider: typeof LayoutSider;
 
-  $props: LayoutProps;
+  $props: AntdProps & LayoutProps;
 }

@@ -14,5 +14,5 @@ interface DictionaryTreeProps extends TreeProps {
   expandAction?: string | boolean;
 }
 export declare class DictionaryTree extends AntdComponent {
-  $props: DictionaryTreeProps;
+  $props: AntdProps & DictionaryTreeProps;
 }

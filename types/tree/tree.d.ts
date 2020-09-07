@@ -271,5 +271,5 @@ export declare class Tree extends AntdComponent {
   static TreeNode: typeof TreeNode;
   static DirectoryTree: typeof DictionaryTree;
 
-  $props: TreeProps;
+  $props: AntdProps & TreeProps;
 }

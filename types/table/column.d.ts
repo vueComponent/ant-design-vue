@@ -203,5 +203,5 @@ export interface ColumnProps<T> {
 }
 
 export declare class Column<T> extends AntdComponent {
-  $props: ColumnProps<T>;
+  $props: AntdProps & ColumnProps<T>;
 }

@@ -15,5 +15,5 @@ export interface LayoutHeaderProps {
 }
 
 export default class LayoutHeader extends AntdComponent {
-  $props: LayoutHeaderProps;
+  $props: AntdProps & LayoutHeaderProps;
 }

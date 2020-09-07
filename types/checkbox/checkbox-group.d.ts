@@ -2,7 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-export declare class CheckboxGroup {
+import { AntdComponent, AntdProps } from '../component';
+export declare class CheckboxGroup extends AntdComponent {
   $props: AntdProps & {
     /**
      * Default selected value

@@ -23,6 +23,8 @@ export default {
     indeterminate: PropTypes.bool,
     type: PropTypes.string.def('checkbox'),
     autofocus: PropTypes.bool,
+    onChange: PropTypes.func,
+    'onUpdate:checked': PropTypes.func,
   },
 
   setup() {

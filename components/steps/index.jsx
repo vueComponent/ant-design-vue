@@ -18,12 +18,15 @@ const getStepsProps = (defaultProps = {}) => {
     direction: PropTypes.oneOf(['horizontal', 'vertical']),
     progressDot: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
     type: PropTypes.oneOf(['default', 'navigation']),
+    onChange: PropTypes.func,
+    'onUpdate:current': PropTypes.func,
   };
   return initDefaultProps(props, defaultProps);
 };
 
 const Steps = {
   name: 'ASteps',
+  inheritAttrs: false,
   props: getStepsProps({
     current: 0,
   }),
@@ -33,8 +36,14 @@ const Steps = {
     };
   },
   Step: { ...VcSteps.Step, name: 'AStep' },
+  methods: {
+    handleChange(current) {
+      this.$emit('update:current', current);
+      this.$emit('change', current);
+    },
+  },
   render() {
-    const props = getOptionProps(this);
+    const props = { ...getOptionProps(this), ...this.$attrs };
     const { prefixCls: customizePrefixCls, iconPrefix: customizeIconPrefixCls } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('steps', customizePrefixCls);
@@ -51,6 +60,8 @@ const Steps = {
       prefixCls,
       progressDot,
       ...props,
+      canClick: !!(this.onChange || this['onUpdate:current']),
+      onChange: this.handleChange,
     };
     return <VcSteps {...stepsProps}>{getSlot(this)}</VcSteps>;
   },

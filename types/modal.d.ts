@@ -82,13 +82,13 @@ export interface ModalOptions {
    * The ok button props
    * @type object
    */
-  okButtonProps?: Button;
+  okButtonProps?: Button.$props;
 
   /**
    * The cancel button props
    * @type object
    */
-  cancelButtonProps?: Button;
+  cancelButtonProps?: Button.$props;
 
   /**
    * Title
@@ -259,13 +259,13 @@ export declare class Modal extends AntdComponent {
      * The ok button props, follow jsx rules
      * @type object
      */
-    okButtonProps?: { props: Button; on: {} };
+    okButtonProps?: Button.$props;
 
     /**
      * The cancel button props, follow jsx rules
      * @type object
      */
-    cancelButtonProps?: { props: Button; on: {} };
+    cancelButtonProps?: Button.$props;
 
     /**
      * The modal dialog's title

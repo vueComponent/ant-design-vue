@@ -2,6 +2,8 @@
 
 exports[`renders ./antdv-demo/docs/upload/demo/avatar.md correctly 1`] = `<span class="ant-upload-picture-card-wrapper avatar-uploader"><!----><div class="ant-upload ant-upload-select ant-upload-select-picture-card"><!----></div></span>`;
 
+exports[`renders ./antdv-demo/docs/upload/demo/basic copy 3.md correctly 1`] = `<span class=""><div class="ant-upload ant-upload-select ant-upload-select-text"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span>`;
+
 exports[`renders ./antdv-demo/docs/upload/demo/basic.md correctly 1`] = `<span class=""><div class="ant-upload ant-upload-select ant-upload-select-text"><!----></div><div class="ant-upload-list ant-upload-list-text"></div></span>`;
 
 exports[`renders ./antdv-demo/docs/upload/demo/defaultFileList.md correctly 1`] = `

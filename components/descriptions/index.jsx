@@ -9,6 +9,7 @@ import {
   getOptionProps,
   getComponent,
   isValidElement,
+  getSlot,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 
@@ -213,7 +214,7 @@ const Descriptions = {
     const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
 
     const column = this.getColumn();
-    const children = this.$slots.default && this.$slots.default();
+    const children = getSlot(this);
     const cloneChildren = toArray(children)
       .map(child => {
         if (isValidElement(child)) {

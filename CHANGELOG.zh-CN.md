@@ -10,6 +10,14 @@
 
 ---
 
+## 2.0.0-beta.7
+
+- 🐞 修复 Descriptions Item 不支持 v-for 问题 [#2793](https://github.com/vueComponent/ant-design-vue/issues/2793)
+- 🐞 修复 Modal button loading 效果不生效问题 [9257c1](https://github.com/vueComponent/ant-design-vue/commit/9257c1ea685db4339239589153aee3189d0434fe)
+- 🐞 修复 Steps 组件使用 v-model 时不可点击的问题 [ec7309](https://github.com/vueComponent/ant-design-vue/commit/ec73097d9b6ea8e2f2942ac28853c19191ca3298)
+- 🌟 Checkbox、Radio 添加事件声明
+- 🐞 修复 ts 类型错误 [802446](https://github.com/vueComponent/ant-design-vue/commit/8024469b8832cfc4fe85498b639bfb48820531aa)
+
 ## 2.0.0-beta.6
 
 - 🐞 修复 TreeSelectNode 子组件 TreeSelectNode 没有注册的问题

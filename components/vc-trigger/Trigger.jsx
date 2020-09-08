@@ -165,6 +165,7 @@ export default {
             currentDocument,
             'touchstart',
             this.onDocumentClick,
+            { passive: true },
           );
         }
         // close popup when trigger type contains 'onContextmenu' and document is scrolling.
@@ -174,6 +175,7 @@ export default {
             currentDocument,
             'scroll',
             this.onContextmenuClose,
+            { passive: true },
           );
         }
         // close popup when trigger type contains 'onContextmenu' and window is blur.
@@ -378,7 +380,7 @@ export default {
         mouseProps.onMouseleave = self.onPopupMouseleave;
       }
       mouseProps.onMousedown = this.onPopupMouseDown;
-      mouseProps.onTouchstart = this.onPopupMouseDown;
+      mouseProps.onTouchstartPassive = this.onPopupMouseDown;
       const { handleGetPopupClassFromAlign, getRootDomNode, getContainer, $attrs } = self;
       const {
         prefixCls,
@@ -603,11 +605,11 @@ export default {
     if (this.isClickToHide() || this.isClickToShow()) {
       newChildProps.onClick = this.onClick;
       newChildProps.onMousedown = this.onMousedown;
-      newChildProps.onTouchstart = this.onTouchstart;
+      newChildProps.onTouchstartPassive = this.onTouchstart;
     } else {
       newChildProps.onClick = this.createTwoChains('onClick');
       newChildProps.onMousedown = this.createTwoChains('onMousedown');
-      newChildProps.onTouchstart = this.createTwoChains('onTouchstart');
+      newChildProps.onTouchstartPassive = this.createTwoChains('onTouchstart');
     }
     if (this.isMouseEnterToShow()) {
       newChildProps.onMouseenter = this.onMouseenter;

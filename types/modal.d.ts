@@ -42,7 +42,7 @@ export interface ModalOptions {
   /**
    * custom icon (Added in 1.14.0)
    */
-  icon?: VNodeChild | JSX.Element | function;
+  icon?: VNodeChild | JSX.Element | Function;
   /**
    * Whether show mask or not.
    * @default true

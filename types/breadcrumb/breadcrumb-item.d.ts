@@ -9,7 +9,7 @@ export declare class BreadcrumbItem extends AntdComponent {
      * @default ''
      * @type string
      */
-    href?: String;
+    href?: string;
     overlay?: any;
   };
 }

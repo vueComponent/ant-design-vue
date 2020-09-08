@@ -3,9 +3,8 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent, AntdProps } from './component';
-import { VNode, CSSProperties, VNodeChild } from 'vue';
-import { TreeNode } from './tree-node';
-import { Button } from './button/button';
+import { CSSProperties, VNodeChild } from 'vue';
+import { ButtonProps } from './button/button';
 
 export interface ModalOptions {
   /**
@@ -43,7 +42,7 @@ export interface ModalOptions {
   /**
    * custom icon (Added in 1.14.0)
    */
-  icon?: VNode | Function;
+  icon?: VNodeChild | JSX.Element | function;
   /**
    * Whether show mask or not.
    * @default true
@@ -82,13 +81,13 @@ export interface ModalOptions {
    * The ok button props
    * @type object
    */
-  okButtonProps?: Button.$props;
+  okButtonProps?: ButtonProps;
 
   /**
    * The cancel button props
    * @type object
    */
-  cancelButtonProps?: Button.$props;
+  cancelButtonProps?: ButtonProps;
 
   /**
    * Title
@@ -133,10 +132,6 @@ export interface ModalOptions {
    * @type Function
    */
   onOk?: () => any;
-  /**
-   * The parent context of the popup is generally used to get the parent provider, such as the configuration of ConfigProvider
-   */
-  parentContext?: object;
 }
 
 export interface ModalConfirm {
@@ -259,13 +254,13 @@ export declare class Modal extends AntdComponent {
      * The ok button props, follow jsx rules
      * @type object
      */
-    okButtonProps?: Button.$props;
+    okButtonProps?: ButtonProps;
 
     /**
      * The cancel button props, follow jsx rules
      * @type object
      */
-    cancelButtonProps?: Button.$props;
+    cancelButtonProps?: ButtonProps;
 
     /**
      * The modal dialog's title

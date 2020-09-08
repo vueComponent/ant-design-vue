@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { VNodeChild, Slots } from 'vue';
+import { VNodeChild } from 'vue';
 import { AntdComponent, AntdProps } from '../component';
 
 export interface ColumnFilterItem {

@@ -3,7 +3,6 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent, AntdProps } from '../component';
-import { MenuItem } from './menu-item';
 import { VNodeChild } from 'vue';
 
 export declare class SubMenu extends AntdComponent {

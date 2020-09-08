@@ -10,6 +10,10 @@
 
 ---
 
+## 2.0.0-beta.8
+
+- 🐞 修复 ts 类型错误
+
 ## 2.0.0-beta.7
 
 - 🐞 修复 Descriptions Item 不支持 v-for 问题 [#2793](https://github.com/vueComponent/ant-design-vue/issues/2793)

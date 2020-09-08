@@ -8,4 +8,4 @@ export declare class AntdComponent {
   static install(app: App): void;
 }
 
-export interface AntdProps extends HTMLAttributes {}
+export type AntdProps = HTMLAttributes

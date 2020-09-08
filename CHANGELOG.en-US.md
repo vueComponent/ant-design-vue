@@ -10,6 +10,10 @@
 
 ---
 
+## 2.0.0-beta.8
+
+- 🐞 Fix ts types error
+
 ## 2.0.0-beta.7
 
 - 🐞 Fix the problem that Descriptions Item does not support v-for [#2793](https://github.com/vueComponent/ant-design-vue/issues/2793)

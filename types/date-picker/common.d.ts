@@ -4,7 +4,7 @@
 
 import { Moment } from 'moment';
 import { VNodeChild } from 'vue';
-import { AntdComponent, AntdProps } from '../component';
+import { AntdComponent } from '../component';
 
 export declare class DatepickerProps {
   /**

@@ -1,4 +1,3 @@
-import { CSSProperties } from 'vue';
 // Project: https://github.com/vueComponent/ant-design-vue
 // Definitions by: Pythonfo <https://github.com/Pythonfo>
 // Copy from: akki-jat <https://github.com/akki-jat>

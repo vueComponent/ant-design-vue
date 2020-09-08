@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "node",
+    "jsx": "preserve",
+    "esModuleInterop": true
+  },
+  "include": ["./types"],
+  "exclude": ["node_modules", "build", "scripts", "components", "webpack", "jest"]
+}

@@ -8,8 +8,8 @@ import { BreadcrumbSeparator } from './breadcrumb-separator';
 import { AntdComponent, AntdProps } from '../component';
 
 export interface Route {
-  path?: String;
-  breadcrumbName?: String;
+  path?: string;
+  breadcrumbName?: string;
   children?: Route[];
 }
 

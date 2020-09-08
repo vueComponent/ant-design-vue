@@ -7,7 +7,6 @@ import { LayoutSider } from './layout-sider';
 import LayoutHeader from './layout-header';
 import LayoutContent from './layout-content';
 import LayoutFooter from './layout-footer';
-import { CSSProperties } from 'vue';
 
 export interface LayoutProps {
   /**

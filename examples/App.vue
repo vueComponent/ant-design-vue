@@ -15,7 +15,7 @@ Use Drawer to quickly preview details of an object, such as those in a list.
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/date-picker/demo';
+import demo from '../antdv-demo/docs/form/demo/nested-useForm';
 export default {
   components: {
     demo,

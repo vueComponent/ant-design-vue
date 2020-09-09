@@ -3,6 +3,7 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent, AntdProps } from '../component';
+import { VNodeChild } from 'vue';
 
 export declare class Option extends AntdComponent {
   $props: AntdProps & {
@@ -36,5 +37,6 @@ export declare class Option extends AntdComponent {
      * @type string
      */
     class?: string;
+    label?: VNodeChild | JSX.Element;
   };
 }

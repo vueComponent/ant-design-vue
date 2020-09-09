@@ -246,11 +246,11 @@ export declare class Select extends AntdComponent {
     /**
      * remove focus
      */
-    onBlur: (e?: Event) => void;
+    onBlur?: (e?: Event) => void;
 
     /**
      * get focus
      */
-    onFocus: (e?: Event) => void;
+    onFocus?: (e?: Event) => void;
   };
 }

@@ -74,6 +74,7 @@ export default {
     width: 200,
     collapsedWidth: 80,
   }),
+  emits: ['update:collapsed', 'breakpoint', 'collapse'],
   data() {
     this.uniqueId = generateId('ant-sider-');
     let matchMedia;

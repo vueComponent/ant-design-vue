@@ -1,6 +1,6 @@
-import classNames from 'classnames';
-import uniqBy from 'lodash/uniqBy';
-import findIndex from 'lodash/findIndex';
+import classNames from '../_util/classNames';
+import uniqBy from 'lodash-es/uniqBy';
+import findIndex from 'lodash-es/findIndex';
 import VcUpload from '../vc-upload';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps, hasProp, getSlot } from '../_util/props-util';
@@ -12,6 +12,7 @@ import UploadList from './UploadList';
 import { UploadProps } from './interface';
 import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './utils';
 import { inject } from 'vue';
+import { getDataAndAria } from '../vc-tree/src/util';
 
 export { UploadProps };
 
@@ -273,14 +274,13 @@ export default {
 
     if (type === 'drag') {
       const dragCls = classNames(prefixCls, {
-        [className]: !!className,
         [`${prefixCls}-drag`]: true,
         [`${prefixCls}-drag-uploading`]: fileList.some(file => file.status === 'uploading'),
         [`${prefixCls}-drag-hover`]: dragState === 'dragover',
         [`${prefixCls}-disabled`]: disabled,
       });
       return (
-        <span>
+        <span class={className} {...getDataAndAria(this.$attrs)}>
           <div
             class={dragCls}
             onDrop={this.onFileDrop}
@@ -317,14 +317,14 @@ export default {
 
     if (listType === 'picture-card') {
       return (
-        <span class={`${prefixCls}-picture-card-wrapper`}>
+        <span class={classNames(`${prefixCls}-picture-card-wrapper`, className)}>
           {uploadList}
           {uploadButton}
         </span>
       );
     }
     return (
-      <span>
+      <span class={className}>
         {uploadButton}
         {uploadList}
       </span>

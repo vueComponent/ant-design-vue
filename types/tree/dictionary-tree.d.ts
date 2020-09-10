@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { TreeProps } from './tree';
 
 interface DictionaryTreeProps extends TreeProps {
@@ -14,5 +14,5 @@ interface DictionaryTreeProps extends TreeProps {
   expandAction?: string | boolean;
 }
 export declare class DictionaryTree extends AntdComponent {
-  $props: DictionaryTreeProps;
+  $props: AntdProps & DictionaryTreeProps;
 }

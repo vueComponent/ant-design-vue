@@ -20,7 +20,8 @@ exports[`renders ./antdv-demo/docs/slider/demo/basic.md correctly 1`] = `
     <div class="ant-slider-handle ant-slider-handle-2" style="left: 50%; transform: translateX(-50%);" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-disabled="false"></div>
     <div class="ant-slider-mark"></div>
   </div> Disabled: <button class="ant-switch-small ant-switch" type="button" role="switch" aria-checked="false">
-    <!----><span class="ant-switch-inner"><!----></span></button>
+    <!----><span class="ant-switch-inner"><!----></span>
+  </button>
 </div>
 `;
 
@@ -180,7 +181,8 @@ exports[`renders ./antdv-demo/docs/slider/demo/reverse.md correctly 1`] = `
     <div class="ant-slider-handle ant-slider-handle-2" style="right: 50%; transform: translateX(+50%);" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-disabled="false"></div>
     <div class="ant-slider-mark"></div>
   </div> Reversed: <button class="ant-switch-small ant-switch ant-switch-checked" type="button" role="switch" aria-checked="true">
-    <!----><span class="ant-switch-inner"><!----></span></button>
+    <!----><span class="ant-switch-inner"><!----></span>
+  </button>
 </div>
 `;
 

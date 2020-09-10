@@ -2,18 +2,18 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { VNodeChild } from 'vue';
 import { StatisticCountdown } from './statistic-countdown';
 
 export declare class Statistic extends AntdComponent {
   static Countdown: typeof StatisticCountdown;
-  $props: {
+  $props: AntdProps & {
     /**
-   * decimal separator
-   * @default '.'
-   * @type string
-   */
+     * decimal separator
+     * @default '.'
+     * @type string
+     */
     decimalSeparator?: string;
 
     /**
@@ -58,5 +58,5 @@ export declare class Statistic extends AntdComponent {
      * @type string or number
      */
     value?: string | number;
-  }
+  };
 }

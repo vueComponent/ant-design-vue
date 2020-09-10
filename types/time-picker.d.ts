@@ -2,12 +2,12 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { Moment } from 'moment';
 import { VNodeChild } from 'vue';
 
 export declare class TimePicker extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * some addon to timepicker panel bottom
      * @type any (slot | slot-scope)
@@ -207,7 +207,7 @@ export declare class TimePicker extends AntdComponent {
      * @param open
      */
     onOpenChange?: (open?: boolean) => void;
-  }
+  };
 
   /**
    * remove focus

@@ -1,6 +1,6 @@
 import { inject } from 'vue';
 import VcTooltip from '../vc-tooltip';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import getPlacements from './placements';
 import PropTypes from '../_util/vue-types';
 import {

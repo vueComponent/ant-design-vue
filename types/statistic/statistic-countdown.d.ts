@@ -2,11 +2,11 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { VNodeChild, CSSProperties } from 'vue';
 
 export declare class StatisticCountdown extends AntdComponent {
-  $props:{
+  $props: AntdProps & {
     /**
      * Format as moment
      * @default 'HH:mm:ss'
@@ -39,5 +39,5 @@ export declare class StatisticCountdown extends AntdComponent {
      * Set value css style
      */
     valueStyle?: CSSProperties;
-  }
+  };
 }

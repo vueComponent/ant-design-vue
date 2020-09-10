@@ -2,11 +2,11 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { VNodeChild, CSSProperties } from 'vue';
 
 export declare class Badge extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     color?: string;
 
     /**
@@ -52,7 +52,7 @@ export declare class Badge extends AntdComponent {
      * If status is set, text sets the display text of the status dot
      * @type string
      */
-    text?: string;
+    text?: VNodeChild | JSX.Element;
 
     /**
      * sets the display style of the status dot

@@ -1,10 +1,9 @@
-import { CSSProperties } from 'vue';
 // Project: https://github.com/vueComponent/ant-design-vue
 // Definitions by: Pythonfo <https://github.com/Pythonfo>
 // Copy from: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 
 export interface LayoutHeaderProps {
   /**
@@ -15,5 +14,5 @@ export interface LayoutHeaderProps {
 }
 
 export default class LayoutHeader extends AntdComponent {
-  $props: LayoutHeaderProps;
+  $props: AntdProps & LayoutHeaderProps;
 }

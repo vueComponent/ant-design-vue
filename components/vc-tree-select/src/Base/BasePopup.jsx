@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import warning from 'warning';
 import PropTypes from '../../../_util/vue-types';
-import { Tree } from '../../../vc-tree';
+import Tree from '../../../vc-tree';
 import BaseMixin from '../../../_util/BaseMixin';
 import { createRef } from '../util';
 
@@ -270,7 +270,7 @@ const BasePopup = {
         onExpand: this.onTreeExpand,
         onLoad: this.onLoad,
       };
-      $tree = <Tree {...treeAllProps} ref={this.treeRef} __propsSymbol__={Symbol()} />;
+      $tree = <Tree {...treeAllProps} ref={this.treeRef} __propsSymbol__={[]} />;
     }
 
     return (

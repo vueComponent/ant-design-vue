@@ -2,10 +2,10 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 type ColSpanType = number | string;
 export declare class Col extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * raster number of cells to occupy, 0 corresponds to display: none
      * @default none (0)
@@ -83,6 +83,5 @@ export declare class Col extends AntdComponent {
      * @type { span: ColSpanType, offset: ColSpanType } | ColSpanType
      */
     xxl?: { span: ColSpanType; offset: ColSpanType } | ColSpanType;
-  }
-
+  };
 }

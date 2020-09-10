@@ -1,6 +1,6 @@
 import VcTreeSelect, { TreeNode, SHOW_ALL, SHOW_PARENT, SHOW_CHILD } from '../vc-tree-select';
 import { inject } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { TreeSelectProps } from './interface';
 import warning from '../_util/warning';
 import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
@@ -13,12 +13,9 @@ import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
 import omit from 'omit.js';
-const ATreeSelectNode = function ATreeSelectNode(props, ctx) {
-  return TreeNode(props, ctx);
-};
-Object.keys(TreeNode).forEach(key => (ATreeSelectNode[key] = TreeNode[key]));
+
 const TreeSelect = {
-  TreeNode: ATreeSelectNode,
+  TreeNode,
   SHOW_ALL,
   SHOW_PARENT,
   SHOW_CHILD,
@@ -195,7 +192,7 @@ const TreeSelect = {
       <VcTreeSelect
         {...VcTreeSelectProps}
         vSlots={omit(this.$slots, ['default'])}
-        __propsSymbol__={Symbol()}
+        __propsSymbol__={[]}
       />
     );
   },
@@ -204,7 +201,7 @@ const TreeSelect = {
 /* istanbul ignore next */
 TreeSelect.install = function(app) {
   app.component(TreeSelect.name, TreeSelect);
-  app.component(TreeSelect.TreeNode.name, TreeSelect.TreeNode);
+  app.component('ATreeSelectNode', TreeSelect.TreeNode);
 };
 
 export default TreeSelect;

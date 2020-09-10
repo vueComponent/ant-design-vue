@@ -252,7 +252,7 @@ const Select = {
       class: cls,
       ref: 'vcSelect',
     };
-    return <VcSelect {...selectProps} __propsSymbol__={Symbol()} />;
+    return <VcSelect {...selectProps} __propsSymbol__={[]} />;
   },
 };
 

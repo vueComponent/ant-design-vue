@@ -16,7 +16,7 @@ import Popup from './Popup';
 import { getAlignFromPlacement, getAlignPopupClassName, noop } from './utils';
 import BaseMixin from '../_util/BaseMixin';
 import Portal from '../_util/Portal';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { cloneElement } from '../_util/vnode';
 
 function returnEmptyString() {

@@ -136,4 +136,14 @@ describe('Badge', () => {
     });
     expect(wrapper.html()).toMatchSnapshot();
   });
+
+  it('text works with vnode', () => {
+    const wrapper = mount({
+      render() {
+        return <Badge status="success" text={<span>hello</span>} />;
+      },
+    });
+
+    expect(wrapper.html()).toMatchSnapshot();
+  });
 });

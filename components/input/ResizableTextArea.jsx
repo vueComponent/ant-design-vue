@@ -1,6 +1,6 @@
 import ResizeObserver from '../vc-resize-observer';
 import omit from 'omit.js';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import calculateNodeHeight from './calculateNodeHeight';
 import raf from '../_util/raf';
 import warning from '../_util/warning';

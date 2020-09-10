@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classnames from '../../_util/classNames';
 import { cloneVNode, Teleport, nextTick } from 'vue';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, getSlot } from '../../_util/props-util';
@@ -577,14 +577,6 @@ const Drawer = {
     currentDrawer[this.drawerId] = open ? this.container : open;
     const children = this.getChildToRender(this.sFirstEnter ? open : false);
     if (!getContainer) {
-      // const directives = [
-      //   {
-      //     name: 'ant-ref',
-      //     value: c => {
-      //       this.container = c;
-      //     },
-      //   },
-      // ];
       return (
         <div
           class={wrapperClassName}

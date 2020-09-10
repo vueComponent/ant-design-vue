@@ -4,7 +4,7 @@ import { alignElement, alignPoint } from 'dom-align';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import { isWindow, buffer, isSamePoint, isSimilarValue, restoreFocus } from './util';
 import { cloneElement } from '../_util/vnode.js';
-import clonedeep from 'lodash/cloneDeep';
+import clonedeep from 'lodash-es/cloneDeep';
 import { getSlot, findDOMNode } from '../_util/props-util';
 
 function getElement(func) {

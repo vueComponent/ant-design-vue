@@ -1,9 +1,9 @@
 import { inject } from 'vue';
-import * as moment from 'moment';
-import omit from 'lodash/omit';
+import moment from 'moment';
+import omit from 'lodash-es/omit';
 import MonthCalendar from '../vc-calendar/src/MonthCalendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import CalendarOutlined from '@ant-design/icons-vue/CalendarOutlined';
 import { ConfigConsumerProps } from '../config-provider';

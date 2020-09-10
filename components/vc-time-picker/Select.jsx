@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import classnames from 'classnames';
+import classnames from '../_util/classNames';
 import raf from 'raf';
 import { findDOMNode } from '../_util/props-util';
 

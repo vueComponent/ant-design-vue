@@ -2,7 +2,7 @@ import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import Checkbox from '../checkbox';
 import Dropdown from '../dropdown';
 import Menu from '../menu';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { SelectionCheckboxAllProps } from './interface';
 import BaseMixin from '../_util/BaseMixin';
 

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import { getInputClassName } from './Input';
 import PropTypes from '../_util/vue-types';

@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { Option } from './option';
 import { OptionGroup } from './option-group';
 import { VNodeChild, CSSProperties } from 'vue';
@@ -13,7 +13,7 @@ type dropdownRenderProps = {
 export declare class Select extends AntdComponent {
   static Option: typeof Option;
   static OptGroup: typeof OptionGroup;
-  $props: {
+  $props: AntdProps & {
     /**
      * Show clear button.
      * @default false
@@ -246,11 +246,11 @@ export declare class Select extends AntdComponent {
     /**
      * remove focus
      */
-    onBlur: (e?: Event) => void;
+    onBlur?: (e?: Event) => void;
 
     /**
      * get focus
      */
-    onFocus: (e?: Event) => void;
+    onFocus?: (e?: Event) => void;
   };
 }

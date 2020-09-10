@@ -4,24 +4,6 @@ import Descriptions from '..';
 import { resetWarned } from '../../_util/warning';
 import { asyncExpect } from '@/tests/utils';
 
-jest.mock('enquire.js', () => {
-  let that;
-  let unmatchFun;
-  return {
-    unregister: jest.fn(),
-    register: (media, options) => {
-      if (media === '(max-width: 575px)') {
-        that = this;
-        options.match.call(that);
-        unmatchFun = options.unmatch;
-      }
-    },
-    callunmatch() {
-      unmatchFun.call(that);
-    },
-  };
-});
-
 describe('Descriptions', () => {
   const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
@@ -176,7 +158,6 @@ describe('Descriptions', () => {
 
   it('when max-width: 575px，column=1', async () => {
     // eslint-disable-next-line global-require
-    const enquire = require('enquire.js');
     const wrapper = mount(
       {
         render() {
@@ -198,13 +179,10 @@ describe('Descriptions', () => {
       expect(wrapper.findAll('.ant-descriptions-item-no-label')).toHaveLength(1);
     });
 
-    enquire.callunmatch();
     wrapper.unmount();
   });
 
   it('when max-width: 575px，column=2', async () => {
-    // eslint-disable-next-line global-require
-    const enquire = require('enquire.js');
     const wrapper = mount(
       {
         render() {
@@ -222,8 +200,6 @@ describe('Descriptions', () => {
     );
     await asyncExpect(() => {});
     expect(wrapper.findAll('tr')).toHaveLength(2);
-
-    enquire.callunmatch();
     wrapper.unmount();
   });
 });

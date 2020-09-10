@@ -1,4 +1,4 @@
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { App, VNodeChild } from 'vue';
 
 import { Locale } from './locale-provider';
@@ -8,7 +8,7 @@ export interface CSPConfig {
 }
 
 export declare class ConfigProvider extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     getPopupContainer?: (triggerNode: HTMLElement, dialogContext?: App | null) => HTMLElement;
     getPrefixCls?: (suffixCls: string, customizePrefixCls?: string) => string;
     renderEmpty?: Function | VNodeChild | JSX.Element;

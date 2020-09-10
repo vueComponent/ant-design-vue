@@ -1,6 +1,6 @@
 import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { getOptionProps, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 

@@ -1,8 +1,8 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash-es/debounce';
 import isFlexSupported from '../_util/isFlexSupported';
-import { filterEmpty, getSlot, getPropsData } from '../_util/props-util';
+import { getSlot, getPropsData } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 
 export default {
@@ -23,6 +23,7 @@ export default {
       finish: PropTypes.any,
       error: PropTypes.any,
     }).loose,
+    canClick: PropTypes.bool,
   },
   data() {
     this.calcStepOffsetWidth = debounce(this.calcStepOffsetWidth, 150);
@@ -59,7 +60,6 @@ export default {
       const { current } = this.$props;
       if (current !== next) {
         this.__emit('change', next);
-        this.__emit('update:current', next);
       }
     },
     calcStepOffsetWidth() {
@@ -101,10 +101,11 @@ export default {
       progressDot,
       initial,
       icons,
+      canClick,
     } = this;
     const isNav = type === 'navigation';
     const { lastStepOffsetWidth, flexSupported } = this;
-    const filteredChildren = filterEmpty(getSlot(this));
+    const filteredChildren = getSlot(this);
     const lastIndex = filteredChildren.length - 1;
     const adjustedlabelPlacement = progressDot ? 'vertical' : labelPlacement;
     const classString = {
@@ -134,9 +135,7 @@ export default {
             icons,
             ...childProps,
           };
-
-          const { onChange } = this.$attrs;
-          if (onChange || this.$attrs['onUpdate:current']) {
+          if (canClick) {
             stepProps.onStepClick = this.onStepClick;
           }
           if (!flexSupported && direction !== 'vertical') {

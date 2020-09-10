@@ -1,9 +1,8 @@
-import { provide } from 'vue';
+import { provide, reactive, watchEffect } from 'vue';
 import BaseMixin from '../../_util/BaseMixin';
 import PropTypes from '../../_util/vue-types';
 import raf from 'raf';
 import KeyCode from './KeyCode';
-import { getOptionProps } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import Sentinel from './Sentinel';
 import isValid from '../../_util/isValid';
@@ -40,43 +39,42 @@ export default {
     tabBarPosition: PropTypes.string.def('top'),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    __propsSymbol__: PropTypes.any,
     direction: PropTypes.string.def('ltr'),
     tabBarGutter: PropTypes.number,
   },
-  data() {
-    provide('sentinelContext', this);
-    const props = getOptionProps(this);
+  setup(props) {
     let activeKey;
-    if ('activeKey' in props) {
+    if (props.activeKey !== undefined) {
       activeKey = props.activeKey;
-    } else if ('defaultActiveKey' in props) {
+    } else if (props.defaultActiveKey !== undefined) {
       activeKey = props.defaultActiveKey;
     } else {
       activeKey = getDefaultActiveKey(props);
     }
+    const state = reactive({
+      _activeKey: activeKey,
+    });
+    watchEffect(
+      () => {
+        if (props.activeKey !== undefined) {
+          state._activeKey = props.activeKey;
+        } else if (!activeKeyIsValid(props, state._activeKey)) {
+          // https://github.com/ant-design/ant-design/issues/7093
+          state._activeKey = getDefaultActiveKey(props);
+        }
+      },
+      {
+        flush: 'sync',
+      },
+    );
+    return { state };
+  },
+  created() {
     this.panelSentinelStart = undefined;
     this.panelSentinelEnd = undefined;
     this.sentinelStart = undefined;
     this.sentinelEnd = undefined;
-    return {
-      _activeKey: activeKey,
-    };
-  },
-  watch: {
-    __propsSymbol__() {
-      const nextProps = getOptionProps(this);
-      if ('activeKey' in nextProps) {
-        this.setState({
-          _activeKey: nextProps.activeKey,
-        });
-      } else if (!activeKeyIsValid(nextProps, this.$data._activeKey)) {
-        // https://github.com/ant-design/ant-design/issues/7093
-        this.setState({
-          _activeKey: getDefaultActiveKey(nextProps),
-        });
-      }
-    },
+    provide('sentinelContext', this);
   },
   beforeUnmount() {
     this.destroy = true;
@@ -133,12 +131,10 @@ export default {
     },
 
     setActiveKey(activeKey) {
-      if (this.$data._activeKey !== activeKey) {
-        const props = getOptionProps(this);
-        if (!('activeKey' in props)) {
-          this.setState({
-            _activeKey: activeKey,
-          });
+      if (this.state._activeKey !== activeKey) {
+        const props = this.$props;
+        if (props.activeKey === undefined) {
+          this.state._activeKey = activeKey;
         }
         this.__emit('update:activeKey', activeKey);
         this.__emit('change', activeKey);
@@ -146,7 +142,7 @@ export default {
     },
 
     getNextActiveKey(next) {
-      const activeKey = this.$data._activeKey;
+      const activeKey = this.state._activeKey;
       const children = [];
       this.$props.children.forEach(c => {
         if (c && !c.disabled && c.disabled !== '') {
@@ -206,7 +202,7 @@ export default {
       navWrapper,
       tabBarPosition,
       panels: props.children,
-      activeKey: this.$data._activeKey,
+      activeKey: this.state._activeKey,
       direction,
       tabBarGutter,
       onKeydown: this.onNavKeyDown,
@@ -216,7 +212,7 @@ export default {
     const tabContent = cloneElement(renderTabContent(), {
       prefixCls,
       tabBarPosition,
-      activeKey: this.$data._activeKey,
+      activeKey: this.state._activeKey,
       destroyInactiveTabPane,
       direction,
       onChange: this.setActiveKey,

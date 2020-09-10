@@ -1,5 +1,5 @@
 import PropTypes from '../../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../../_util/classNames';
 import KeyCode from '../../_util/KeyCode';
 import {
   initDefaultProps,

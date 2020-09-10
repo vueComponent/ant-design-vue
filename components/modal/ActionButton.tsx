@@ -66,10 +66,12 @@ export default {
 
   render() {
     const { type, loading, buttonProps } = this;
-    return (
-      <Button type={type} onClick={this.onClick} loading={loading} {...buttonProps}>
-        {getSlot(this)}
-      </Button>
-    );
+    const props = {
+      type,
+      onClick: this.onClick,
+      loading,
+      ...buttonProps,
+    };
+    return <Button {...props}>{getSlot(this)}</Button>;
   },
 };

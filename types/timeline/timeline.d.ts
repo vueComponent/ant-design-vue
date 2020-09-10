@@ -3,13 +3,13 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild } from 'vue';
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { TimelineItem } from './timeline-item';
 
 export declare class Timeline extends AntdComponent {
   static Item: typeof TimelineItem;
 
-  $props:{
+  $props: AntdProps & {
     /**
      * Set the last ghost node's existence or its content
      * @default false
@@ -37,5 +37,5 @@ export declare class Timeline extends AntdComponent {
      * @type string
      */
     mode?: 'left' | 'alternate' | 'right';
-  }
+  };
 }

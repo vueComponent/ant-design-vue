@@ -2,14 +2,14 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 
 export declare class RadioGroup extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
-   * Specifies the initial state: whether or not the radio is selected.
-   * @type boolean
-   */
+     * Specifies the initial state: whether or not the radio is selected.
+     * @type boolean
+     */
     defaultValue?: any;
 
     /**
@@ -53,6 +53,6 @@ export declare class RadioGroup extends AntdComponent {
     /**
      * The callback function that is triggered when the state changes.
      */
-    onChange?:(e:Event)=>void
-  }
+    onChange?: (e: Event) => void;
+  };
 }

@@ -1,5 +1,5 @@
 import { createVNode } from 'vue';
-import classnames from 'classnames';
+import classnames from '../../_util/classNames';
 import { cloneElement } from '../../_util/vnode';
 import { flattenChildren } from '../../_util/props-util';
 import { lazyStartIndex, lazyEndIndex, getPreClones } from './utils/innerSliderUtils';

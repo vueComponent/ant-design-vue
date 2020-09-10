@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types';
 import { connect } from '../_util/store';
 import BaseMixin from '../_util/BaseMixin';
 import KeyCode from '../_util/KeyCode';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { getKeyFromChildrenIndex, loopMenuItem, noop, isMobileDevice, menuAllProps } from './util';
 import DOMWrap from './DOMWrap';
 import { cloneElement } from '../_util/vnode';

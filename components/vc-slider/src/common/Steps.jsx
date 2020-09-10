@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from '../../../_util/classNames';
 import warning from '../../../_util/warning';
 
 const calcPoints = (vertical, marks, dots, step, min, max) => {

@@ -1,7 +1,7 @@
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
 export declare class Space extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     prefixCls?: string;
     size?: SizeType | number;
     direction?: 'horizontal' | 'vertical';

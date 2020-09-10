@@ -1,8 +1,8 @@
 import { VNodeChild } from 'vue';
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 
 export declare class Result extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * result title
      * @type string

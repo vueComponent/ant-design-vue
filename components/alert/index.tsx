@@ -8,7 +8,7 @@ import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
 import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
 import getTransitionProps from '../_util/getTransitionProps';

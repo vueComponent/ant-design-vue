@@ -3,10 +3,10 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild } from 'vue';
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 
 export declare class DescriptionsItem extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * the label of descriptions item
      * @type any

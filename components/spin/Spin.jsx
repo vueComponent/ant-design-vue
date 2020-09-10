@@ -1,5 +1,5 @@
 import { inject, cloneVNode, isVNode } from 'vue';
-import debounce from 'lodash/debounce';
+import debounce from 'lodash-es/debounce';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';

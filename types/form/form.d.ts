@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { Col } from '../grid/col';
 import { FormItem } from './form-item';
 
@@ -162,7 +162,7 @@ declare interface ValidationRule {
 
 export declare class Form extends AntdComponent {
   static Item: typeof FormItem;
-  $props: {
+  $props: AntdProps & {
     /**
      * Hide required mark of all form items
      * @default false

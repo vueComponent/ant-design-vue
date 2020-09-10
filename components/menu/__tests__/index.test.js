@@ -4,13 +4,6 @@ import Menu from '..';
 import { InboxOutlined, PieChartOutlined } from '@ant-design/icons-vue';
 import mountTest from '../../../tests/shared/mountTest';
 
-jest.mock('mutationobserver-shim', () => {
-  global.MutationObserver = function MutationObserver() {
-    this.observe = () => {};
-    this.disconnect = () => {};
-  };
-});
-
 const { SubMenu } = Menu;
 function $$(className) {
   return document.body.querySelectorAll(className);

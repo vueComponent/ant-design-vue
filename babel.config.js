@@ -3,7 +3,7 @@ module.exports = {
     test: {
       presets: [['@babel/preset-env', { targets: { node: true } }]],
       plugins: [
-        ['@ant-design-vue/babel-plugin-jsx'],
+        ['@vue/babel-plugin-jsx'],
         '@babel/plugin-proposal-optional-chaining',
         '@babel/plugin-transform-object-assign',
         '@babel/plugin-proposal-object-rest-spread',

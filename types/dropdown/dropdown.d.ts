@@ -2,26 +2,26 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { Menu } from '../menu/menu';
 import { DropdownButton } from './dropdown-button';
 import { CSSProperties } from 'vue';
 
 export declare class Dropdown extends AntdComponent {
   static Button: typeof DropdownButton;
-  $props: {
+  $props: AntdProps & {
     /**
-    * the trigger mode which executes the drop-down action
-    * @default ['hover']
-    * @type string[]
-    */
+     * the trigger mode which executes the drop-down action
+     * @default ['hover']
+     * @type string[]
+     */
     trigger?: Array<'click' | 'hover' | 'contextmenu'>;
 
     /**
      * the dropdown menu
      * @type () => Menu
      */
-    overlay?: () => Menu
+    overlay?: () => Menu;
 
     /**
      * Class name of the dropdown root element
@@ -59,6 +59,12 @@ export declare class Dropdown extends AntdComponent {
      * @default 'bottomLeft'
      * @type string
      */
-    placement?: 'topLeft' | 'topCenter' | 'topRight' | 'bottomLeft' | 'bottomCenter' | 'bottomRight';
-  }
+    placement?:
+      | 'topLeft'
+      | 'topCenter'
+      | 'topRight'
+      | 'bottomLeft'
+      | 'bottomCenter'
+      | 'bottomRight';
+  };
 }

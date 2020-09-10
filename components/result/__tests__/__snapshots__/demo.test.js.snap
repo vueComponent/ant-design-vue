@@ -64,7 +64,8 @@ exports[`renders ./antdv-demo/docs/result/demo/403.md correctly 1`] = `
   <div class="ant-result-subtitle">Sorry, you are not authorized to access this page.</div>
   <!---->
   <div class="ant-result-extra"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Back Home</span></button></div>
+      <!----><span>Back Home</span>
+    </button></div>
 </div>
 `;
 
@@ -140,7 +141,8 @@ exports[`renders ./antdv-demo/docs/result/demo/404.md correctly 1`] = `
   <div class="ant-result-subtitle">Sorry, the page you visited does not exist.</div>
   <!---->
   <div class="ant-result-extra"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Back Home</span></button></div>
+      <!----><span>Back Home</span>
+    </button></div>
 </div>
 `;
 
@@ -223,7 +225,8 @@ exports[`renders ./antdv-demo/docs/result/demo/500.md correctly 1`] = `
   <div class="ant-result-subtitle">Sorry, the server is wrong.</div>
   <!---->
   <div class="ant-result-extra"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Back Home</span></button></div>
+      <!----><span>Back Home</span>
+    </button></div>
 </div>
 `;
 
@@ -234,7 +237,8 @@ exports[`renders ./antdv-demo/docs/result/demo/customIcon.md correctly 1`] = `
   <!---->
   <!---->
   <div class="ant-result-extra"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Next</span></button></div>
+      <!----><span>Next</span>
+    </button></div>
 </div>
 `;
 
@@ -251,8 +255,10 @@ exports[`renders ./antdv-demo/docs/result/demo/error.md correctly 1`] = `
     </div>
   </div>
   <div class="ant-result-extra"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Go Console</span></button><button class="ant-btn" type="button">
-      <!----><span>Buy Again</span></button></div>
+      <!----><span>Go Console</span>
+    </button><button class="ant-btn" type="button">
+      <!----><span>Buy Again</span>
+    </button></div>
 </div>
 `;
 
@@ -263,7 +269,8 @@ exports[`renders ./antdv-demo/docs/result/demo/info.md correctly 1`] = `
   <!---->
   <!---->
   <div class="ant-result-extra"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Go Console</span></button></div>
+      <!----><span>Go Console</span>
+    </button></div>
 </div>
 `;
 
@@ -274,8 +281,10 @@ exports[`renders ./antdv-demo/docs/result/demo/success.md correctly 1`] = `
   <div class="ant-result-subtitle">Order number: 2017182818828182881 Cloud server configuration takes 1-5 minutes, please wait.</div>
   <!---->
   <div class="ant-result-extra"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Go Console</span></button><button class="ant-btn" type="button">
-      <!----><span>Buy Again</span></button></div>
+      <!----><span>Go Console</span>
+    </button><button class="ant-btn" type="button">
+      <!----><span>Buy Again</span>
+    </button></div>
 </div>
 `;
 
@@ -286,6 +295,7 @@ exports[`renders ./antdv-demo/docs/result/demo/warning.md correctly 1`] = `
   <!---->
   <!---->
   <div class="ant-result-extra"><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Go Console</span></button></div>
+      <!----><span>Go Console</span>
+    </button></div>
 </div>
 `;

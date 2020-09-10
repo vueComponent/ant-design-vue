@@ -65,7 +65,6 @@ export default {
   }),
   data() {
     return {
-      destroyPopup: false,
       inTransition: false,
       titleId: `rcDialogTitle${uuid++}`,
       dialogMouseDown: undefined,
@@ -74,9 +73,6 @@ export default {
 
   watch: {
     visible(val) {
-      if (val) {
-        this.destroyPopup = false;
-      }
       this.$nextTick(() => {
         this.updatedCallback(!val);
       });
@@ -147,14 +143,11 @@ export default {
       }
     },
     onAnimateLeave() {
-      const { afterClose, destroyOnClose } = this;
+      const { afterClose } = this;
       // need demo?
       // https://github.com/react-component/dialog/pull/28
       if (this.$refs.wrap) {
         this.$refs.wrap.style.display = 'none';
-      }
-      if (destroyOnClose) {
-        this.destroyPopup = true;
       }
       this.inTransition = false;
       this.switchScrollingEffect();
@@ -295,7 +288,7 @@ export default {
       });
       return (
         <Transition key="dialog" {...dialogTransitionProps}>
-          {visible || !this.destroyPopup ? dialogElement : null}
+          {visible || !this.destroyOnClose ? dialogElement : null}
         </Transition>
       );
     },

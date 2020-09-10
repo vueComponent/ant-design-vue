@@ -200,7 +200,8 @@ exports[`renders ./antdv-demo/docs/timeline/demo/pending.md correctly 1`] = `
       <div class="ant-timeline-item-content">Recording...</div>
     </li>
   </ul><button style="margin-top: 16px;" class="ant-btn ant-btn-primary" type="button">
-    <!----><span>Toggle Reverse</span></button>
+    <!----><span>Toggle Reverse</span>
+  </button>
 </div>
 `;
 

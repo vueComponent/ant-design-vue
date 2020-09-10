@@ -1,6 +1,6 @@
 import { provide, inject } from 'vue';
 import Button from '../button';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import buttonTypes from '../button/buttonTypes';
 import { ButtonGroupProps } from '../button/button-group';
 import Dropdown from './dropdown';

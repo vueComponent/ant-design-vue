@@ -1,6 +1,6 @@
 import { provide, App, defineComponent, VNode } from 'vue';
 import PropTypes from '../_util/vue-types';
-import * as moment from 'moment';
+import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
 import { ModalLocale, changeConfirmLocale } from '../modal/locale';
 import warning from '../_util/warning';

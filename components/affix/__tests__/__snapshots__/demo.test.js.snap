@@ -3,18 +3,21 @@
 exports[`renders ./antdv-demo/docs/affix/demo/basic.md correctly 1`] = `
 <div>
   <div class=""><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Affix top</span></button></div>
+      <!----><span>Affix top</span>
+    </button></div>
 </div><br>
 <div>
   <div class=""><button class="ant-btn ant-btn-primary" type="button">
-      <!----><span>Affix bottom</span></button></div>
+      <!----><span>Affix bottom</span>
+    </button></div>
 </div>
 `;
 
 exports[`renders ./antdv-demo/docs/affix/demo/on-change.md correctly 1`] = `
 <div>
   <div class=""><button class="ant-btn" type="button">
-      <!----><span>120px to affix top</span></button></div>
+      <!----><span>120px to affix top</span>
+    </button></div>
 </div>
 `;
 
@@ -23,7 +26,8 @@ exports[`renders ./antdv-demo/docs/affix/demo/target.md correctly 1`] = `
   <div class="background">
     <div>
       <div class=""><button class="ant-btn ant-btn-primary" type="button">
-          <!----><span>Fixed at the top of container</span></button></div>
+          <!----><span>Fixed at the top of container</span>
+        </button></div>
     </div>
   </div>
 </div>

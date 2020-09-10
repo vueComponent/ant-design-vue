@@ -314,28 +314,28 @@ exports[`renders ./antdv-demo/docs/carousel/demo/fade.md correctly 1`] = `
     <!---->
     <div class="slick-list">
       <div class="slick-track" style="width: 900%; left: -100%;">
-        <div tabindex="-1" data-index="0" aria-hidden="false" class="slick-slide slick-active slick-current" style="outline: none; position: relative; opacity: 1; transition: opacity 500ms ease, visibility 500ms ease; width: 11.11111111111111%; left: 0px;">
+        <div tabindex="-1" data-index="0" aria-hidden="false" class="slick-slide slick-active slick-current" style="outline: none; width: 11.11111111111111%; position: relative; left: 0px; opacity: 1; transition: opacity 500ms ease, visibility 500ms ease;">
           <div>
             <div tabindex="-1" style="width: 100%; display: inline-block;">
               <h3>1</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; position: relative; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease; width: 11.11111111111111%; left: -11px;">
+        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%; position: relative; left: -11px; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease;">
           <div>
             <div tabindex="-1" style="width: 100%; display: inline-block;">
               <h3>2</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; position: relative; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease; width: 11.11111111111111%; left: -22px;">
+        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%; position: relative; left: -22px; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease;">
           <div>
             <div tabindex="-1" style="width: 100%; display: inline-block;">
               <h3>3</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; position: relative; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease; width: 11.11111111111111%; left: -33px;">
+        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%; position: relative; left: -33px; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease;">
           <div>
             <div tabindex="-1" style="width: 100%; display: inline-block;">
               <h3>4</h3>

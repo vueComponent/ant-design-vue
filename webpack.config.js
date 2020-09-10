@@ -33,7 +33,7 @@ const babelConfig = {
         style: true,
       },
     ],
-    ['@ant-design-vue/babel-plugin-jsx', { optimize: true }],
+    ['@vue/babel-plugin-jsx', { optimize: true }],
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-transform-object-assign',
     '@babel/plugin-proposal-object-rest-spread',
@@ -122,6 +122,18 @@ module.exports = {
   },
   resolve: {
     alias: {
+      'ant-design-vue/es/form/utils/asyncUtil': path.join(
+        __dirname,
+        './components/form/utils/asyncUtil',
+      ),
+      'ant-design-vue/es/form/utils/messages': path.join(
+        __dirname,
+        './components/form/utils/messages',
+      ),
+      'ant-design-vue/es/form/utils/validateUtil': path.join(
+        __dirname,
+        './components/form/utils/validateUtil',
+      ),
       'ant-design-vue/es/locale/en_US': path.join(
         __dirname,
         './components/locale-provider/en_US.js',

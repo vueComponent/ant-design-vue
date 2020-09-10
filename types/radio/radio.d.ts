@@ -2,16 +2,16 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { RadioGroup } from './radio-group';
 import { RadioButton } from './radio-button';
 
 export declare class RadioProps {
   /**
- * get focus when component mounted
- * @default false
- * @type boolean
- */
+   * get focus when component mounted
+   * @default false
+   * @type boolean
+   */
   autofocus?: boolean;
 
   /**
@@ -42,7 +42,7 @@ export declare class RadioProps {
 export declare class Radio extends AntdComponent {
   static Group: typeof RadioGroup;
   static Button: typeof RadioButton;
-  $props: RadioProps
+  $props: AntdProps & RadioProps;
   /**
    * remove focus
    */

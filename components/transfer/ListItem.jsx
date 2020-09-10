@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import Lazyload from '../vc-lazy-load';
 import Checkbox from '../checkbox';
 
@@ -56,11 +56,7 @@ export default {
         debounce: false,
         ...lazy,
       };
-      children = (
-        <Lazyload {...lazyProps} _propsSymbol={Symbol()}>
-          {listItem}
-        </Lazyload>
-      );
+      children = <Lazyload {...lazyProps}>{listItem}</Lazyload>;
     } else {
       children = listItem;
     }

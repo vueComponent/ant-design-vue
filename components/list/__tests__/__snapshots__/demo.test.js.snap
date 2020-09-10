@@ -199,7 +199,8 @@ exports[`renders ./antdv-demo/docs/list/demo/loadmore.md correctly 1`] = `
   </div>
   <!---->
   <div style="text-align: center; margin-top: 12px; height: 32px; line-height: 32px;"><button class="ant-btn" type="button">
-      <!----><span>loading more</span></button></div>
+      <!----><span>loading more</span>
+    </button></div>
 </div>
 `;
 

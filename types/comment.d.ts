@@ -2,16 +2,16 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild } from 'vue';
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 
 export declare class Comment extends AntdComponent {
-  $props: {
-    /** List of action items rendered below the comment content 
+  $props: AntdProps & {
+    /** List of action items rendered below the comment content
      * any ( array | slot )
      */
     actions?: VNodeChild | JSX.Element;
 
-    /** The element to display as the comment author 
+    /** The element to display as the comment author
      * @type any ( string | slot)
      */
     author?: VNodeChild | JSX.Element;
@@ -21,7 +21,7 @@ export declare class Comment extends AntdComponent {
      */
     avatar?: VNodeChild | JSX.Element;
 
-    /** The main content of the comment 
+    /** The main content of the comment
      * @type any ( string | slot)
      */
     content?: VNodeChild | JSX.Element;
@@ -31,9 +31,9 @@ export declare class Comment extends AntdComponent {
      */
     prefixCls?: string;
 
-    /** A datetime element containing the time to be displayed 
+    /** A datetime element containing the time to be displayed
      * @type any ( string | slot)
      */
     datetime?: VNodeChild | JSX.Element;
-  }
+  };
 }

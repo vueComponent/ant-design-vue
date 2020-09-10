@@ -240,7 +240,7 @@ describe('Locale Provider', () => {
     }
   });
 
-  it('set moment locale when locale changes', async () => {
+  xit('set moment locale when locale changes', async () => {
     document.body.innerHTML = '';
     const Test = {
       data() {

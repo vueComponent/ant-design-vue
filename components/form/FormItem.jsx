@@ -1,7 +1,7 @@
 import { inject, provide, Transition } from 'vue';
-import cloneDeep from 'lodash/cloneDeep';
+import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import getTransitionProps from '../_util/getTransitionProps';
 import Row from '../grid/Row';
 import Col, { ColProps } from '../grid/Col';
@@ -25,7 +25,7 @@ import { validateRules } from './utils/validateUtil';
 import { getNamePath } from './utils/valueUtil';
 import { toArray } from './utils/typeUtil';
 import { warning } from '../vc-util/warning';
-import find from 'lodash/find';
+import find from 'lodash-es/find';
 
 const iconMap = {
   success: CheckCircleFilled,

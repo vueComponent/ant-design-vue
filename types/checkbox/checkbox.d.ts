@@ -3,12 +3,12 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { CheckboxGroup } from './checkbox-group';
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 
 export declare class Checkbox extends AntdComponent {
   static Group: typeof CheckboxGroup;
 
-  $props: {
+  $props: AntdProps & {
     /**
      * get focus when component mounted
      * @default false

@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import {
@@ -15,20 +15,6 @@ import BarsOutlined from '@ant-design/icons-vue/BarsOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import omit from 'omit.js';
-
-// matchMedia polyfill for
-// https://github.com/WickyNilliams/enquire.js/issues/82
-if (typeof window !== 'undefined') {
-  const matchMediaPolyfill = mediaQuery => {
-    return {
-      media: mediaQuery,
-      matches: false,
-      addListener() {},
-      removeListener() {},
-    };
-  };
-  window.matchMedia = window.matchMedia || matchMediaPolyfill;
-}
 
 const dimensionMaxMap = {
   xs: '479.98px',

@@ -249,7 +249,8 @@ exports[`renders ./antdv-demo/docs/card/demo/loading.md correctly 1`] = `
   </div>
   <!---->
 </div><button style="margin-top: 16px;" class="ant-btn" type="button">
-  <!----><span>Toggle loading</span></button>
+  <!----><span>Toggle loading</span>
+</button>
 `;
 
 exports[`renders ./antdv-demo/docs/card/demo/meta.md correctly 1`] = `

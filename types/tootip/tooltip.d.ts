@@ -3,11 +3,11 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild } from 'vue';
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { TooltipCommon } from './common';
 
 export declare class Tooltip extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * The text shown in the tooltip
      * @type any (string | slot)

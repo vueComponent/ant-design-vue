@@ -1,8 +1,8 @@
 import { inject } from 'vue';
-import * as moment from 'moment';
+import moment from 'moment';
 import RangeCalendar from '../vc-calendar/src/RangeCalendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import shallowequal from '../_util/shallowequal';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import Tag from '../tag';

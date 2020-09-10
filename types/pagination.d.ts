@@ -2,15 +2,15 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { VNodeChild } from 'vue';
 interface PaginationRenderProps {
-  page: number
-  type: 'page' | 'prev' | 'next'
-  originalElement: any
+  page: number;
+  type: 'page' | 'prev' | 'next';
+  originalElement: any;
 }
 export declare class Pagination extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * total number of data items
      * @default 0
@@ -95,6 +95,6 @@ export declare class Pagination extends AntdComponent {
      * to customize item innerHTML
      * @type Function
      */
-    itemRender?: (props:PaginationRenderProps) => VNodeChild | JSX.Element;
-  }
+    itemRender?: (props: PaginationRenderProps) => VNodeChild | JSX.Element;
+  };
 }

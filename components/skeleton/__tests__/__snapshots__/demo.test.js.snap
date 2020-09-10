@@ -34,7 +34,8 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/children.md correctly 1`] = `
     <h4>Ant Design Vue, a design language</h4>
     <p> We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently. </p>
   </div><button class="ant-btn" type="button">
-    <!----><span>Show Skeleton</span></button>
+    <!----><span>Show Skeleton</span>
+  </button>
 </div>
 `;
 
@@ -55,7 +56,8 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/complex.md correctly 1`] = `
 
 exports[`renders ./antdv-demo/docs/skeleton/demo/list.md correctly 1`] = `
 <div><button class="ant-switch" type="button" role="switch" aria-checked="false">
-    <!----><span class="ant-switch-inner"><!----></span></button>
+    <!----><span class="ant-switch-inner"><!----></span>
+  </button>
   <div class="ant-list ant-list-vertical ant-list-lg ant-list-split">
     <!---->
     <!---->

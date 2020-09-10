@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { MenuItem } from './menu-item';
 import { SubMenu } from './sub-menu';
 import { MenuItemGroup } from './menu-item-group';
@@ -14,7 +14,7 @@ export declare class Menu extends AntdComponent {
   static SubMenu: typeof SubMenu;
   static ItemGroup: typeof MenuItemGroup;
   static Divider: typeof Divider;
-  $props: {
+  $props: AntdProps & {
     /**
      * Allow selection of multiple items
      * @default false
@@ -106,5 +106,5 @@ export declare class Menu extends AntdComponent {
      * @type boolean
      */
     inlineCollapsed?: boolean;
-  }
+  };
 }

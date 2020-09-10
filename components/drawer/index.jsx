@@ -1,5 +1,5 @@
 import { inject, provide, nextTick } from 'vue';
-import classnames from 'classnames';
+import classnames from '../_util/classNames';
 import omit from 'omit.js';
 import VcDrawer from '../vc-drawer/src';
 import PropTypes from '../_util/vue-types';

@@ -2,13 +2,13 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { CheckableTag } from './checkable-tag';
 
 export declare class Tag extends AntdComponent {
   static CheckableTag: typeof CheckableTag;
 
-  $props: {
+  $props: AntdProps & {
     /**
      * Callback executed when close animation is completed
      * @type Function

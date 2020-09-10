@@ -13,7 +13,7 @@ import DownloadOutlined from '@ant-design/icons-vue/DownloadOutlined';
 import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import Tooltip from '../tooltip';
 import Progress from '../progress';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { UploadListProps } from './interface';
 
 export default {

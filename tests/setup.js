@@ -8,15 +8,15 @@ if (typeof window !== 'undefined') {
     global.window.dispatchEvent(new Event('resize'));
   };
   global.window.scrollTo = () => {};
-  // if (!window.matchMedia) {
-  //   Object.defineProperty(global.window, 'matchMedia', {
-  //     value: jest.fn(query => ({
-  //       matches: query.includes('max-width'),
-  //       addListener: jest.fn(),
-  //       removeListener: jest.fn(),
-  //     })),
-  //   });
-  // }
+  if (!window.matchMedia) {
+    Object.defineProperty(global.window, 'matchMedia', {
+      value: jest.fn(query => ({
+        matches: query.includes('max-width'),
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+      })),
+    });
+  }
 }
 
 // The built-in requestAnimationFrame and cancelAnimationFrame not working with jest.runFakeTimes()

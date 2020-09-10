@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 
 export type DotPosition = 'top' | 'bottom' | 'left' | 'right';
 export interface Settings {
@@ -51,7 +51,7 @@ export interface ResponsiveObject {
   settings: 'unslick' | Settings;
 }
 export declare class Carousel extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     accessibility?: boolean;
     adaptiveHeight?: boolean;
     arrows?: boolean;

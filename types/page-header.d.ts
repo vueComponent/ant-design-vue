@@ -2,11 +2,11 @@
 // Definitions by: drafish <https://github.com/drafish>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { VNodeChild } from 'vue';
 
 export declare class PageHeader extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * Custom backIcon
      * @default <ArrowLeftOutlined />
@@ -70,6 +70,5 @@ export declare class PageHeader extends AntdComponent {
      * Specify a callback that will be called when a user clicks backIcon.
      */
     onBack(): () => void;
-  }
-
+  };
 }

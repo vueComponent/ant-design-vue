@@ -2,8 +2,8 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { VNodeChild, Slots } from 'vue';
-import { AntdComponent } from '../component';
+import { VNodeChild } from 'vue';
+import { AntdComponent, AntdProps } from '../component';
 
 export interface ColumnFilterItem {
   text?: string;
@@ -203,5 +203,5 @@ export interface ColumnProps<T> {
 }
 
 export declare class Column<T> extends AntdComponent {
-  $props: ColumnProps<T>;
+  $props: AntdProps & ColumnProps<T>;
 }

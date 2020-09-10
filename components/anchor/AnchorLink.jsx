@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getComponent } from '../_util/props-util';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { ConfigConsumerProps } from '../config-provider';
 function noop() {}
 

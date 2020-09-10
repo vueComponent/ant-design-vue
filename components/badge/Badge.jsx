@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import ScrollNumber from './ScrollNumber';
 import { PresetColorTypes } from '../_util/colors';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import getTransitionProps from '../_util/getTransitionProps';
@@ -21,7 +21,7 @@ const BadgeProps = {
   scrollNumberPrefixCls: PropTypes.string,
   status: PropTypes.oneOf(['success', 'processing', 'default', 'error', 'warning']),
   color: PropTypes.string,
-  text: PropTypes.string,
+  text: PropTypes.any,
   offset: PropTypes.array,
   numberStyle: PropTypes.object.def(() => ({})),
   title: PropTypes.string,
@@ -110,7 +110,7 @@ export default {
     },
 
     renderStatusText(prefixCls) {
-      const { text } = this.$props;
+      const text = getComponent(this, 'text');
       const hidden = this.isHidden();
       return hidden || !text ? null : <span class={`${prefixCls}-status-text`}>{text}</span>;
     },
@@ -173,10 +173,10 @@ export default {
       prefixCls: customizePrefixCls,
       scrollNumberPrefixCls: customizeScrollNumberPrefixCls,
       status,
-      text,
       color,
     } = this;
 
+    const text = getComponent(this, 'text');
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('badge', customizePrefixCls);
     const scrollNumberPrefixCls = getPrefixCls('scroll-number', customizeScrollNumberPrefixCls);

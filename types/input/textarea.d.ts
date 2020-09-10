@@ -2,10 +2,10 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 
 export declare class TextArea extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * Height autosize feature, can be set to true|false or an object { minRows: 2, maxRows: 6 }
      * @default false

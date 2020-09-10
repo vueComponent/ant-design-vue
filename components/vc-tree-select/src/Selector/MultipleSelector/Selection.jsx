@@ -1,4 +1,4 @@
-import classNames from 'classnames';
+import classNames from '../../../../_util/classNames';
 import PropTypes from '../../../../_util/vue-types';
 import { toTitle, UNSELECTABLE_ATTRIBUTE, UNSELECTABLE_STYLE } from '../../util';
 import { getComponent } from '../../../../_util/props-util';

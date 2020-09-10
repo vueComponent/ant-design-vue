@@ -2,12 +2,12 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { Menu } from '../menu/menu';
 import { VNodeChild } from 'vue';
 
 export declare class DropdownButton extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * whether the dropdown menu is disabled
      * @type boolean
@@ -18,14 +18,20 @@ export declare class DropdownButton extends AntdComponent {
      * the dropdown menu
      * @type () => Menu
      */
-    overlay?: () => Menu
+    overlay?: () => Menu;
 
     /**
      * placement of pop menu: bottomLeft bottomCenter bottomRight topLeft topCenter topRight
      * @default 'bottomLeft'
      * @type string
      */
-    placement?: 'topLeft' | 'topCenter' | 'topRight' | 'bottomLeft' | 'bottomCenter' | 'bottomRight';
+    placement?:
+      | 'topLeft'
+      | 'topCenter'
+      | 'topRight'
+      | 'bottomLeft'
+      | 'bottomCenter'
+      | 'bottomRight';
 
     /**
      * size of the button, the same as Button
@@ -57,5 +63,5 @@ export declare class DropdownButton extends AntdComponent {
      * Icon (appears on the right) (1.5.0)
      */
     icon?: VNodeChild | JSX.Element;
-  }
+  };
 }

@@ -1,6 +1,6 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import classNames from 'classnames';
+import classNames from '../../_util/classNames';
 import getUid from './uid';
 import warning from '../../_util/warning';
 import { getSlot, findDOMNode } from '../../_util/props-util';

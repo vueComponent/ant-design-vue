@@ -2,15 +2,15 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { VNodeChild } from 'vue';
 export declare class Rate extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
-   * whether to allow clear when click again
-   * @default true
-   * @type boolean
-   */
+     * whether to allow clear when click again
+     * @default true
+     * @type boolean
+     */
     allowClear?: boolean;
 
     /**
@@ -62,8 +62,7 @@ export declare class Rate extends AntdComponent {
     value?: number;
 
     tooltips?: Array<string>;
-
-  }
+  };
   /**
    * remove focus
    */

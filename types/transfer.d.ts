@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { VNodeChild, CSSProperties } from 'vue';
 
 export interface TransferItem {
@@ -15,7 +15,7 @@ export interface TransferItem {
 export declare type Direction = 'left' | 'right';
 
 export declare class Transfer extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * Used for setting the source data. The elements that are part of this array will be present the left column.
      * Except the elements whose keys are included in targetKeys prop.

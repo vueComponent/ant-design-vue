@@ -2,6 +2,7 @@ import PropTypes from './vue-types';
 import switchScrollingEffect from './switchScrollingEffect';
 import setStyle from './setStyle';
 import Portal from './Portal';
+import syncWatch from './syncWatch';
 
 let openCount = 0;
 const windowIsUndefined = !(
@@ -32,9 +33,9 @@ export default {
     this.setWrapperClassName();
   },
   watch: {
-    visible(val) {
+    visible: syncWatch(function(val) {
       openCount = val ? openCount + 1 : openCount - 1;
-    },
+    }),
     getContainer(getContainer, prevGetContainer) {
       const getContainerIsFunc =
         typeof getContainer === 'function' && typeof prevGetContainer === 'function';

@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { CSSProperties } from 'vue';
 
 export declare type Value = { key: string };
@@ -10,7 +10,7 @@ export declare type Value = { key: string };
 export declare type SelectValue = string | number | Value | Array<Value | string | number>;
 
 export declare class AutoComplete extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     dropdownMenuStyle: CSSProperties;
     /**
      * Show clear button, effective in multiple mode only.

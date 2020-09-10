@@ -2,18 +2,18 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 
 export type StringGradients = { [percentage: string]: string };
 type FromToGradients = { from: string; to: string };
 export type ProgressGradient = { direction?: string } & (StringGradients | FromToGradients);
 export declare class Progress extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
-       * template function of the content
-       * @default percent => percent + '%'
-       * @type Function
-       */
+     * template function of the content
+     * @default percent => percent + '%'
+     * @type Function
+     */
     format?: (percent?: number, successPercent?: number) => any;
 
     /**
@@ -92,5 +92,5 @@ export declare class Progress extends AntdComponent {
      * @type number
      */
     width?: number;
-  }
+  };
 }

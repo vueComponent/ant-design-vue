@@ -1,9 +1,10 @@
 import PropTypes from '../../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../../_util/classNames';
 import warning from 'warning';
 import { hasProp, initDefaultProps, getOptionProps, getSlot } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import BaseMixin from '../../_util/BaseMixin';
+import syncWatch from '../../_util/syncWatch';
 import {
   convertTreeToEntities,
   convertDataToTree,
@@ -30,8 +31,11 @@ import {
 function getWatch(keys = []) {
   const watch = {};
   keys.forEach(k => {
-    watch[k] = function() {
-      this.needSyncKeys[k] = true;
+    watch[k] = {
+      handler() {
+        this.needSyncKeys[k] = true;
+      },
+      flush: 'sync',
     };
   });
   return watch;
@@ -149,10 +153,10 @@ const Tree = {
       'checkedKeys',
       'loadedKeys',
     ]),
-    __propsSymbol__() {
+    __propsSymbol__: syncWatch(function() {
       this.setState(this.getDerivedState(getOptionProps(this), this.$data));
       this.needSyncKeys = {};
-    },
+    }),
   },
 
   methods: {

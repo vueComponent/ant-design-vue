@@ -1,7 +1,7 @@
 import { TransitionGroup } from 'vue';
 import KeyCode from '../_util/KeyCode';
 import PropTypes from '../_util/vue-types';
-import classnames from 'classnames';
+import classnames from '../_util/classNames';
 import classes from 'component-classes';
 import { Item as MenuItem, ItemGroup as MenuItemGroup } from '../vc-menu';
 import warning from 'warning';

@@ -3,9 +3,10 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild } from 'vue';
+import { AntdComponent, AntdProps } from './component';
 
-export declare class Meta {
-  $props: {
+export declare class Meta extends AntdComponent {
+  $props: AntdProps & {
     /**
      * The avatar of list item
      * @type any (slot)

@@ -6,11 +6,11 @@ import { RadioProps, Radio } from './radio';
 
 declare class RadioButtonProps extends RadioProps {
   /**
-* Type of radio button
-* @type string
-*/
+   * Type of radio button
+   * @type string
+   */
   type?: 'primary' | 'danger' | 'dashed' | 'ghost' | 'default';
 }
 export declare class RadioButton extends Radio {
-  $props: RadioButtonProps
+  $props: RadioButtonProps;
 }

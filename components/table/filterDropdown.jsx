@@ -1,7 +1,7 @@
 import FilterFilled from '@ant-design/icons-vue/FilterFilled';
 import Menu, { SubMenu, Item as MenuItem } from '../vc-menu';
 import closest from 'dom-closest';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import shallowequal from '../_util/shallowequal';
 import Dropdown from '../dropdown';
 import Checkbox from '../checkbox';
@@ -52,59 +52,6 @@ export default {
       { flush: 'sync' },
     );
     return state;
-  },
-  // data() {
-  //   this.neverShown = false;
-  //   const visible =
-  //     'filterDropdownVisible' in this.column ? this.column.filterDropdownVisible : false;
-  //   this.preProps = { ...getOptionProps(this) };
-  //   return {
-  //     sSelectedKeys: this.selectedKeys,
-  //     sKeyPathOfSelectedItem: {}, // 记录所有有选中子菜单的祖先菜单
-  //     sVisible: visible,
-  //     sValueKeys: generateValueMaps(this.column.filters),
-  //   };
-  // },
-  watch: {
-    // _propsSymbol: syncWatch(function() {
-    //   const nextProps = getOptionProps(this);
-    //   const { column } = nextProps;
-    //   const newState = {};
-    //   /**
-    //    * if the state is visible the component should ignore updates on selectedKeys prop to avoid
-    //    * that the user selection is lost
-    //    * this happens frequently when a table is connected on some sort of realtime data
-    //    * Fixes https://github.com/ant-design/ant-design/issues/10289 and
-    //    * https://github.com/ant-design/ant-design/issues/10209
-    //    */
-    //   if (
-    //     'selectedKeys' in nextProps &&
-    //     !shallowequal(this.preProps.selectedKeys, nextProps.selectedKeys)
-    //   ) {
-    //     newState.sSelectedKeys = nextProps.selectedKeys;
-    //   }
-    //   if (!shallowequal((this.preProps.column || {}).filters, (nextProps.column || {}).filters)) {
-    //     newState.sValueKeys = generateValueMaps(nextProps.column.filters);
-    //   }
-    //   if ('filterDropdownVisible' in column) {
-    //     newState.sVisible = column.filterDropdownVisible;
-    //   }
-    //   if (Object.keys(newState).length > 0) {
-    //     this.setState(newState);
-    //   }
-    //   this.preProps = { ...nextProps };
-    // }),
-    // 'column.fixed': function (val) {
-    //   this.setNeverShown(this.column)
-    // },
-    // column (val) {
-    //   if ('filterDropdownVisible' in val) {
-    //     this.sVisible = val.filterDropdownVisible
-    //   }
-    // },
-    // selectedKeys (val) {
-    //   this.sSelectedKeys = val
-    // },
   },
 
   mounted() {

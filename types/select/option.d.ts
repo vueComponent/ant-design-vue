@@ -2,15 +2,16 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
+import { VNodeChild } from 'vue';
 
 export declare class Option extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
-  * Disable this option
-  * @default false
-  * @type boolean
-  */
+     * Disable this option
+     * @default false
+     * @type boolean
+     */
     disabled?: boolean;
 
     /**
@@ -36,6 +37,6 @@ export declare class Option extends AntdComponent {
      * @type string
      */
     class?: string;
-  }
-
+    label?: VNodeChild | JSX.Element;
+  };
 }

@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { getComponent, isStringElement, isEmptyElement, getSlot } from '../_util/props-util';
 import { Col } from '../grid';
 import { ConfigConsumerProps } from '../config-provider';

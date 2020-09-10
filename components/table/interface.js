@@ -195,7 +195,6 @@ export const SelectionBoxProps = {
 // }
 
 export const FilterMenuProps = {
-  _propsSymbol: PropTypes.any,
   locale: TableLocale,
   selectedKeys: PropTypes.arrayOf([PropTypes.string, PropTypes.number]),
   column: PropTypes.object,

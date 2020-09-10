@@ -2,11 +2,11 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { VNodeChild } from 'vue';
 
 export declare class Slider extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * get focus when component mounted
      * @default false
@@ -48,10 +48,7 @@ export declare class Slider extends AntdComponent {
      * @type object
      */
     marks?: {
-      [key: number]: string
-        | VNodeChild
-        | { style: object; label: string | VNodeChild }
-        | Function;
+      [key: number]: string | VNodeChild | { style: object; label: string | VNodeChild } | Function;
     };
 
     /**
@@ -133,7 +130,7 @@ export declare class Slider extends AntdComponent {
      * @param value
      */
     onChange?: (value?: any) => void;
-  }
+  };
 
   /**
    * remove focus

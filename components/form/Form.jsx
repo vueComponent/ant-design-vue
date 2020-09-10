@@ -1,8 +1,8 @@
 import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { ColProps } from '../grid/Col';
-import isRegExp from 'lodash/isRegExp';
+import isRegExp from 'lodash-es/isRegExp';
 import warning from '../_util/warning';
 import FormItem from './FormItem';
 import { initDefaultProps, getSlot } from '../_util/props-util';
@@ -11,7 +11,7 @@ import { getNamePath, containsNamePath } from './utils/valueUtil';
 import { defaultValidateMessages } from './utils/messages';
 import { allPromiseFinish } from './utils/asyncUtil';
 import { toArray } from './utils/typeUtil';
-import isEqual from 'lodash/isEqual';
+import isEqual from 'lodash-es/isEqual';
 import scrollIntoView from 'scroll-into-view-if-needed';
 
 export const FormProps = {
@@ -191,7 +191,7 @@ const Form = {
       );
       if (!this.model) {
         warning(false, 'Form', 'model is required for validateFields to work.');
-        return;
+        return Promise.reject('Form `model` is required for validateFields to work.');
       }
       const provideNameList = !!nameList;
       const namePathList = provideNameList ? toArray(nameList).map(getNamePath) : [];

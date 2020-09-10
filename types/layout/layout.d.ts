@@ -2,12 +2,11 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { LayoutSider } from './layout-sider';
 import LayoutHeader from './layout-header';
 import LayoutContent from './layout-content';
 import LayoutFooter from './layout-footer';
-import { CSSProperties } from 'vue';
 
 export interface LayoutProps {
   /**
@@ -23,5 +22,5 @@ export declare class Layout extends AntdComponent {
   static Footer: typeof LayoutFooter;
   static Sider: typeof LayoutSider;
 
-  $props: LayoutProps;
+  $props: AntdProps & LayoutProps;
 }

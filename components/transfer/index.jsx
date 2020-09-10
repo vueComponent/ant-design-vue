@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { hasProp, initDefaultProps, getOptionProps, getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';

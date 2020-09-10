@@ -74,7 +74,8 @@ exports[`renders ./antdv-demo/docs/form/demo/basic.md correctly 1`] = `
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="button"><!----><span>Create</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Cancel</span></button>
+          <!----><span>Cancel</span>
+        </button>
         <!----></span>
         <!---->
         <!---->
@@ -119,7 +120,8 @@ exports[`renders ./antdv-demo/docs/form/demo/custom-validation.md correctly 1`] 
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="submit"><!----><span>Submit</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Reset</span></button>
+          <!----><span>Reset</span>
+        </button>
         <!----></span>
         <!---->
         <!---->
@@ -143,7 +145,8 @@ exports[`renders ./antdv-demo/docs/form/demo/dynamic-form-item.md correctly 1`] 
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-20 ant-col-sm-offset-4 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="submit"><!----><span>Submit</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Reset</span></button>
+          <!----><span>Reset</span>
+        </button>
         <!----></span>
         <!---->
         <!---->
@@ -303,7 +306,8 @@ exports[`renders ./antdv-demo/docs/form/demo/validation.md correctly 1`] = `
   <div class="ant-row ant-form-item">
     <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="button"><!----><span>Create</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Reset</span></button>
+          <!----><span>Reset</span>
+        </button>
         <!----></span>
         <!---->
         <!---->

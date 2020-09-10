@@ -1,4 +1,4 @@
-import classnames from 'classnames';
+import classnames from '../_util/classNames';
 import raf from 'raf';
 import Trigger from '../vc-trigger';
 import PropTypes from '../_util/vue-types';

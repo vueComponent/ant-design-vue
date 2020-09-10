@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { measureScrollbar } from './utils';
 import BaseTable from './BaseTable';
-import classNames from 'classnames';
+import classNames from '../../_util/classNames';
 
 export default {
   name: 'HeadTable',

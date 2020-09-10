@@ -3,10 +3,10 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild } from 'vue';
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 
 export declare class Avatar extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * the Icon type for an icon avatar, see Icon Component
      * @type any (VNode | slot)

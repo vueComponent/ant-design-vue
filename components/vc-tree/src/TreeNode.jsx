@@ -1,6 +1,6 @@
 import { inject, provide, Transition } from 'vue';
 import PropTypes from '../../_util/vue-types';
-import classNames from 'classnames';
+import classNames from '../../_util/classNames';
 import { getNodeChildren, mapChildren, warnOnlyTreeNode, getDataAndAria } from './util';
 import { initDefaultProps, getComponent, getSlot } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';

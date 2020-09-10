@@ -2,16 +2,15 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
-import { MenuItem } from './menu-item';
+import { AntdComponent, AntdProps } from '../component';
 import { VNodeChild } from 'vue';
 
 export declare class SubMenu extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
-    * unique id of the menu item
-    * @type string
-    */
+     * unique id of the menu item
+     * @type string
+     */
     key?: string;
 
     /**
@@ -30,5 +29,5 @@ export declare class SubMenu extends AntdComponent {
      * Sub-menu class name (1.5.0)
      */
     popupClassName?: string;
-  }
+  };
 }

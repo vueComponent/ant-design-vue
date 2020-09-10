@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { VNode, VNodeChild, CSSProperties } from 'vue';
 
 export interface CascaderOptionType {
@@ -48,7 +48,7 @@ export interface ShowSearchType {
 }
 
 export declare class Cascader extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * whether allow clear
      * @default true
@@ -198,7 +198,7 @@ export declare class Cascader extends AntdComponent {
      * @type Array<string | number>
      */
     value?: Array<string | number>;
-  }
+  };
   /**
    * remove focus
    */

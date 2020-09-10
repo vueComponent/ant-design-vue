@@ -2,15 +2,15 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import { VNodeChild } from 'vue';
 export declare class Switch extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
-   * get focus when component mounted
-   * @default false
-   * @type boolean
-   */
+     * get focus when component mounted
+     * @default false
+     * @type boolean
+     */
     autofocus?: boolean;
 
     /**
@@ -59,8 +59,7 @@ export declare class Switch extends AntdComponent {
      * @type any (string | slot)
      */
     unCheckedChildren?: VNodeChild | JSX.Element;
-
-  }
+  };
   /**
    * remove focus
    */

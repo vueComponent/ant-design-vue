@@ -2,7 +2,7 @@
 // akki-jat <https://github.com/akki-jat> Definitions:
 // https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 import { TreeNode } from '../tree-node';
 import { DictionaryTree } from './dictionary-tree';
 import { TreeData } from '../tree-select';
@@ -271,5 +271,5 @@ export declare class Tree extends AntdComponent {
   static TreeNode: typeof TreeNode;
   static DirectoryTree: typeof DictionaryTree;
 
-  $props: TreeProps;
+  $props: AntdProps & TreeProps;
 }

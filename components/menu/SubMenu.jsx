@@ -1,6 +1,6 @@
 import { inject } from 'vue';
 import { SubMenu as VcSubMenu } from '../vc-menu';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import Omit from 'omit.js';
 import { getSlot } from '../_util/props-util';
 

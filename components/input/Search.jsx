@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { isMobile } from 'is-mobile';
 import Input from './Input';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
@@ -10,7 +10,7 @@ import { cloneElement } from '../_util/vnode';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import isPlainObject from 'lodash/isPlainObject';
+import isPlainObject from 'lodash-es/isPlainObject';
 
 export default {
   name: 'AInputSearch',

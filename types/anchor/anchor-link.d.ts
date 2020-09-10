@@ -3,9 +3,10 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { VNodeChild } from 'vue';
+import { AntdComponent, AntdProps } from '../component';
 
-export declare class AnchorLink {
-  $props: {
+export declare class AnchorLink extends AntdComponent {
+  $props: AntdProps & {
     /**
      * target of hyperlink
      * @type string

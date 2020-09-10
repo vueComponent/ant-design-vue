@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import Dialog from '../vc-dialog';
 import PropTypes from '../_util/vue-types';
 import addEventListener from '../vc-util/Dom/addEventListener';
@@ -11,6 +11,7 @@ const ButtonType = buttonTypes().type;
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
+import syncWatch from '../_util/syncWatch';
 
 let mousePosition = null;
 // ref: https://github.com/ant-design/ant-design/issues/15795
@@ -106,9 +107,9 @@ export default {
     };
   },
   watch: {
-    visible(val) {
+    visible: syncWatch(function(val) {
       this.sVisible = val;
-    },
+    }),
   },
   setup() {
     return {

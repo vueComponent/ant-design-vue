@@ -2,10 +2,10 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from '../component';
+import { AntdComponent, AntdProps } from '../component';
 
 export declare class InputGroup extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /**
      * Whether use compact style
      * @default false
@@ -19,5 +19,5 @@ export declare class InputGroup extends AntdComponent {
      * @type string
      */
     size?: 'small' | 'large' | 'default';
-  }
+  };
 }

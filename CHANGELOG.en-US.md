@@ -10,6 +10,133 @@
 
 ---
 
+## 2.0.0-beta.8
+
+- 🐞 Fix ts types error
+
+## 2.0.0-beta.7
+
+- 🐞 Fix the problem that Descriptions Item does not support v-for [#2793](https://github.com/vueComponent/ant-design-vue/issues/2793)
+- 🐞 Fix Modal button loading effect not working problem [9257c1](https://github.com/vueComponent/ant-design-vue/commit/9257c1ea685db4339239589153aee3189d0434fe)
+- 🐞 Fix the problem that the Steps component cannot be clicked when using v-model [ec7309](https://github.com/vueComponent/ant-design-vue/commit/ec73097d9b6ea8e2f2942ac28853c19191ca3298)
+- 🌟 Checkbox, Radio add event declaration
+- 🐞 Fix ts type error [802446](https://github.com/vueComponent/ant-design-vue/commit/8024469b8832cfc4fe85498b639bfb48820531aa)
+
+## 2.0.0-beta.6
+
+- 🐞 Fix the problem that TreeSelectNode subcomponent TreeSelectNode is not registered
+
+## 2.0.0-beta.5
+
+- 🔥 Support Vite.
+
+## 2.0.0-beta.4
+
+- 🌟 Remove polyfills that are no longer used
+- 🐞 Fix the problem of calling `Modal` afterClose twice
+- 🐞 Supplement the declaration that ts type files lack native attributes
+
+## 2.0.0-beta.3
+
+- 🔥 Support Typescript.
+- 🔥 Added `Space` component.
+- 🐞 Fix the problem that some components cannot use css scope [4bdb24](https://github.com/vueComponent/ant-design-vue/commit/4bdb241aa674b50fafa29b3b98e291643f2a06cc).
+- 🐞 Fix `List.Meta` registration failure problem [03a42a](https://github.com/vueComponent/ant-design-vue/commit/03a42a5b35e7d42a39aedb1aba8346995be2c27e)
+- 🐞 Fix the problem of misalignment in the fixed column of Table [#1493](https://github.com/vueComponent/ant-design-vue/issues/1493)
+- 🐞 Fix the problem that the `Button` is not vertically centered [bd71e3](https://github.com/vueComponent/ant-design-vue/commit/bd71e3806b73881f9a95028982d17a10b2cd0b5c)
+- 🐞 Fix `Tabs` multiple departure `change` event issue [8ed937](https://github.com/vueComponent/ant-design-vue/commit/8ed937344a57142a575e5272f50933c9c4459a43)
+
+## 2.0.0-beta.2
+
+### Design specification adjustment
+
+- Adjust the row height from `1.5`(`21px`) to `1.5715`(`22px`).
+- Basic round corner adjustment, changed from `4px` to `2px`.
+- The color brightness of the dividing line is reduced, from `#E8E8E8` to `#F0F0F0`.
+- The default background color of Table is changed from transparent to white.
+
+### Compatibility adjustment
+
+- The minimum supported version of IE is IE 11.
+- The minimum supported version of Vue is Vue 3.0.
+
+#### Adjusted API
+
+- Removed LocaleProvider, please use `ConfigProvider` instead.
+- Removed the afterClose property of Tag.
+- Merged FormModel and Form, see the Form refactoring part below for details.
+- `tabIndex`, `maxLength`, `readOnly`, `autoComplete`, `autoFocus` are changed to all lowercase.
+- In order to use the slot more friendly in template syntax, all related to xxxRender, renderXxxx are changed to single parameter, involving `itemRender`, `renderItem`, `customRender`, `dropdownRender`, `dateCellRender`, `dateFullCellRender`, `monthCellRender`, `monthFullCellRender`, `renderTabBar`.
+- All the places where scopedSlots are configured are changed to slots.
+- `{ on, props, attrs, ... }` configuration is flattened, such as `{ props: {type:'xxx'}, on: {click: this.handleClick}}` changed to `{ type: 'xxx', onClick: this.handleClick }`, related fields: `okButtonProps`, `cancelButtonProps`.
+- Change xxx.sync to v-model:xxx
+- v-model is changed to v-model:xxx, which specifically involves components:
+
+  - The components changed from v-model to v-model:checked are: CheckableTag, Checkbox, Switch
+  - The components changed from v-model to v-model:value are: Radio, Mentions, CheckboxGroup, Rate, DatePicker
+  - The components changed from v-model to v-model:visible are: Tag, Popconfirm, Popove, Tooltip, Moda, Dropdown
+  - The components changed from v-model to v-model:activeKey are: Collaps, Tabs
+  - The components changed from v-model to v-model:current are: Steps
+  - The components changed from v-model to v-model:selectedKeys are: Menu
+
+#### Icon Upgrade
+
+In `ant-design-vue@1.2.0`, we introduced the svg icon ([Why use the svg icon?](https://github.com/ant-design/ant-design/issues/10353)). The icon API that uses string naming cannot be loaded on demand, so the svg icon file is fully introduced, which greatly increases the size of the packaged product. In 2.0, we adjusted the icon usage API to support tree shaking, reducing the default package size by approximately 150 KB (Gzipped).
+
+The old way of using Icon will be obsolete:
+
+```html
+<a-icon type="smile" /> <a-button icon="smile" />
+```
+
+In 2.0, an on-demand introduction method will be adopted:
+
+```html
+<template>
+  <smile-outlined />
+  <a-button>
+    <template v-slot:icon><smile-outlined /></template>
+  </a-buttom>
+</template>
+<script>
+import SmileOutlined from'@ant-design/icons/SmileOutlined';
+export default {
+  components: {
+    SmileOutlined
+  }
+}
+</script>
+```
+
+#### Component refactoring
+
+In 1.x, we provide two form components, Form and FormModel. The original Form component uses v-decorator for data binding. In Vue2, we use context to force update components. However, in Vue3, due to the introduction of patchFlag, etc. Optimization method, forced refresh will destroy the performance advantage brought by patchFlag. So in version 2.0, we merged Form and FormModel, retained the use of FormModel, enriched related functions, and renamed it to Form.
+
+Involving changes:
+
+- Added `scrollToFirstError`, `name`, `validateTrigger` properties for Form, added `finish`, `finishFailed` events, and added `scrollToField` method.
+- Form.Item adds `validateFirst`, `validateTrigger`, and discards the `prop` attribute, and replaces it with `name`.
+- The nested field path uses an array. In the past version, we used. To represent the nested path (such as user.name to represent {user: {name:''} }). However, in some back-end systems, the variable name will also carry .. This causes users to need additional codes for conversion. Therefore, in the new version, nested paths are represented by arrays to avoid wrong handling behaviors (such as ['user','name']).
+- validateFields no longer supports callback. validateFields will return a Promise object, so you can perform corresponding error handling through async/await or then/catch. It is no longer necessary to determine whether errors is empty:
+
+```js
+// v1
+validateFields((err, value) => {
+  if (!err) {
+    // Do something with value
+  }
+});
+```
+
+Change to
+
+```js
+// v2
+validateFields().then(values ​​=> {
+  // Do something with value
+});
+```
+
 ## 1.6.4
 
 `2020-07-21`

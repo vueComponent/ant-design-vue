@@ -1,4 +1,4 @@
-import padEnd from 'lodash/padEnd';
+import padEnd from 'lodash-es/padEnd';
 import { createVNode } from 'vue';
 
 const Number = (_, { attrs }) => {

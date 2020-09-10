@@ -1,11 +1,11 @@
 // Project: https://github.com/vueComponent/ant-design-vue Definitions by:
 // https://github.com/vueComponent/ant-design-vue/types
 
-import { AntdComponent } from './component';
+import { AntdComponent, AntdProps } from './component';
 import Pickr from '@simonwep/pickr';
 
 export declare class ColorPicker extends AntdComponent {
-  $props: {
+  $props: AntdProps & {
     /** simonwep/pickr's options */
     config?: Pickr.Options;
     /**prefix class name */

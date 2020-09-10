@@ -81,10 +81,10 @@ const TreeSelect = {
         let newLabel = typeof label === 'function' ? label(this.$createElement) : label;
         let newTitle = typeof title === 'function' ? title(this.$createElement) : title;
         if (!newLabel && scopedSlots.label && $scopedSlots[scopedSlots.label]) {
-          newLabel = $scopedSlots.label(item);
+          newLabel = $scopedSlots[scopedSlots.label](item);
         }
         if (!newTitle && scopedSlots.title && $scopedSlots[scopedSlots.title]) {
-          newTitle = $scopedSlots.title(item);
+          newTitle = $scopedSlots[scopedSlots.title](item);
         }
         const treeNodeProps = {
           ...item,

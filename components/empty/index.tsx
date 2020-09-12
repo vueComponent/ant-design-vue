@@ -1,4 +1,4 @@
-import { CSSProperties, VNodeChild, inject, App, SetupContext } from 'vue';
+import { CSSProperties, VNodeTypes, inject, App, SetupContext } from 'vue';
 import classNames from 'classnames';
 import { ConfigConsumerProps } from '../config-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -18,9 +18,9 @@ export interface EmptyProps {
   class?: string;
   style?: CSSProperties;
   imageStyle?: CSSProperties;
-  image?: VNodeChild | JSX.Element;
-  description?: VNodeChild | JSX.Element;
-  children?: VNodeChild | JSX.Element;
+  image?: VNodeTypes;
+  description?: VNodeTypes;
+  children?: VNodeTypes;
 }
 
 const Empty = (props: EmptyProps, { slots }: SetupContext) => {
@@ -35,7 +35,7 @@ const Empty = (props: EmptyProps, { slots }: SetupContext) => {
     ...restProps
   } = props;
 
-  return () => (
+  return (
     <LocaleReceiver
       componentName="Empty"
       children={(locale: TransferLocale) => {
@@ -69,7 +69,7 @@ const Empty = (props: EmptyProps, { slots }: SetupContext) => {
               <div class={`${prefixCls}-footer`}>{filterEmpty(slots.default())}</div>
             )}
           </div>
-        ) as VNodeChild;
+        );
       }}
     />
   );

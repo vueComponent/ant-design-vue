@@ -1,9 +1,5 @@
-<<<<<<< HEAD:components/_util/vue-types/index.ts
 import { PropType } from 'vue';
-import isPlainObject from 'lodash/isPlainObject';
-=======
 import isPlainObject from 'lodash-es/isPlainObject';
->>>>>>> @{-1}:components/_util/vue-types/index.js
 import { toType, getType, isFunction, validateType, isInteger, isArray, warn } from './utils';
 
 const VuePropTypes = {

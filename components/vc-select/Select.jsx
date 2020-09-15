@@ -376,7 +376,7 @@ const Select = {
     },
 
     onInputKeydown(event) {
-      const { disabled, combobox, defaultActiveFirstOption } = this.$props;
+      const { disabled, combobox, defaultActiveFirstOption, tags, open } = this.$props;
       if (disabled) {
         return;
       }
@@ -410,6 +410,15 @@ const Select = {
           this.comboboxTimer = setTimeout(() => {
             this.setOpenState(false);
           });
+        }
+        if (typeof open === 'boolean' && !open && tags) {
+          this.setOpenState(false);
+          const { _inputValue } = state;
+          this.setInputValue('');
+          const tmpValue = this.getValueByInput(_inputValue);
+          if (tmpValue !== undefined) {
+            this.fireChange(tmpValue);
+          }
         }
       } else if (keyCode === KeyCode.ESC) {
         if (state._open) {

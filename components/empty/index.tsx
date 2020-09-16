@@ -1,5 +1,5 @@
 import { CSSProperties, VNodeTypes, inject, App, SetupContext } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { ConfigConsumerProps } from '../config-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import DefaultEmptyImg from './empty';
@@ -28,10 +28,10 @@ const Empty = (props: EmptyProps, { slots }: SetupContext) => {
   const { getPrefixCls } = configProvider;
   const {
     prefixCls: customizePrefixCls,
-    class: className,
     image = defaultEmptyImg,
     description,
     imageStyle,
+    class: className,
     ...restProps
   } = props;
 
@@ -52,13 +52,9 @@ const Empty = (props: EmptyProps, { slots }: SetupContext) => {
 
         return (
           <div
-            class={classNames(
-              prefixCls,
-              {
-                [`${prefixCls}-normal`]: image === simpleEmptyImg,
-              },
-              className,
-            )}
+            class={classNames(prefixCls, {
+              [`${prefixCls}-normal`]: image === simpleEmptyImg,
+            })}
             {...restProps}
           >
             <div class={`${prefixCls}-image`} style={imageStyle}>
@@ -75,12 +71,14 @@ const Empty = (props: EmptyProps, { slots }: SetupContext) => {
   );
 };
 
+Empty.displayName = 'AEmpty';
+
 Empty.PRESENTED_IMAGE_DEFAULT = defaultEmptyImg;
 Empty.PRESENTED_IMAGE_SIMPLE = simpleEmptyImg;
 
 /* istanbul ignore next */
 Empty.install = function(app: App) {
-  app.component('AEmpty', Empty);
+  app.component(Empty.displayName, Empty);
 };
 
 export default Empty;

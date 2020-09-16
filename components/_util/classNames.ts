@@ -1,9 +1,27 @@
 import { isArray, isString, isObject } from './util';
-function classNames() {
-  let classes = [];
-  for (let i = 0; i < arguments.length; i++) {
-    const value = arguments[i];
-    if (!value) continue;
+
+export type ClassArray = ClassValue[];
+
+export interface ClassDictionary {
+  [id: string]: any;
+}
+
+export type ClassValue =
+  | string
+  | number
+  | ClassDictionary
+  | ClassArray
+  | undefined
+  | null
+  | boolean;
+
+function classNames(...args: ClassValue[]): string {
+  const classes = [];
+  for (let i = 0; i < args.length; i++) {
+    const value = args[i];
+    if (!value) {
+      continue;
+    }
     if (isString(value)) {
       classes.push(value);
     } else if (isArray(value)) {

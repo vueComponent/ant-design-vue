@@ -1,21 +1,5 @@
-<<<<<<< HEAD:components/_util/props-util.ts
-import isPlainObject from 'lodash/isPlainObject';
-import classNames from 'classnames';
-import {
-  isVNode,
-  Fragment,
-  Comment,
-  Text,
-  h,
-  VNode,
-  ComponentPublicInstance,
-  PropOptions,
-} from 'vue';
-=======
+import { isVNode, Fragment, Comment, Text, h, VNode, ComponentPublicInstance } from 'vue';
 import isPlainObject from 'lodash-es/isPlainObject';
-import classNames from './classNames';
-import { isVNode, Fragment, Comment, Text, h } from 'vue';
->>>>>>> @{-1}:components/_util/props-util.js
 import { camelize, hyphenate, isOn, resolvePropValue } from './util';
 import isValid from './isValid';
 // function getType(fn) {

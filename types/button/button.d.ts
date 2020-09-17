@@ -12,7 +12,7 @@ export interface ButtonProps extends AntdProps {
    * @default 'default'
    * @type string
    */
-  type?: 'primary' | 'danger' | 'dashed' | 'ghost' | 'default';
+  type?: 'primary' | 'danger' | 'dashed' | 'ghost' | 'default' | 'link';
 
   /**
    * set the original html type of button

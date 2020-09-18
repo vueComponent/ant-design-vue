@@ -17,7 +17,7 @@ export default {
   },
   setup() {
     return {
-      _isActived: undefined,
+      isActived: undefined,
       sentinelContext: inject('sentinelContext', {}),
     };
   },
@@ -25,14 +25,14 @@ export default {
     const { destroyInactiveTabPane, active, forceRender, rootPrefixCls } = this.$props;
     const children = getSlot(this);
     const placeholder = getComponent(this, 'placeholder');
-    this._isActived = this._isActived || active;
+    this.isActived = this.isActived || active;
     const prefixCls = `${rootPrefixCls}-tabpane`;
     const cls = {
       [prefixCls]: 1,
       [`${prefixCls}-inactive`]: !active,
       [`${prefixCls}-active`]: active,
     };
-    const isRender = destroyInactiveTabPane ? active : this._isActived;
+    const isRender = destroyInactiveTabPane ? active : this.isActived;
     const shouldRender = isRender || forceRender;
     const {
       sentinelStart,

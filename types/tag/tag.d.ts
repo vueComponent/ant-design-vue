@@ -10,10 +10,10 @@ export declare class Tag extends AntdComponent {
 
   $props: AntdProps & {
     /**
-     * Callback executed when close animation is completed
+     * Callback executed when close
      * @type Function
      */
-    afterClose?: () => void;
+    onClose?: (e: MouseEvent) => void;
 
     /**
      * Whether the Tag can be closed

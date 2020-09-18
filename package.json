@@ -58,7 +58,7 @@
   },
   "homepage": "https://www.antdv.com/",
   "peerDependencies": {
-    "@vue/compiler-sfc": ">=3.0.0",
+    "@vue/compiler-sfc": "3.0.0-rc.13",
     "vue": ">=3.0.0"
   },
   "devDependencies": {

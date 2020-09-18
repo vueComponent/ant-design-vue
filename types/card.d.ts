@@ -14,12 +14,13 @@ export declare class Card extends AntdComponent {
 
   $props: AntdProps & {
     tabBarExtraContent?: VNodeChild | JSX.Element;
+    
     /**
      * The action list, shows at the bottom of the Card.
      * @type any (slots)
      */
     actions?: VNodeChild[] | JSX.Element[];
-
+    
     /**
      * Current TabPane's key
      * @type string

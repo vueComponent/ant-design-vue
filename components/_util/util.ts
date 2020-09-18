@@ -1,11 +1,11 @@
-export const isFunction = val => typeof val === 'function';
+export const isFunction = (val: unknown): val is Function => typeof val === 'function';
 
 export const isArray = Array.isArray;
-export const isString = val => typeof val === 'string';
-export const isSymbol = val => typeof val === 'symbol';
-export const isObject = val => val !== null && typeof val === 'object';
+export const isString = (val: unknown): val is string => typeof val === 'string';
+export const isSymbol = (val: unknown): val is symbol => typeof val === 'symbol';
+export const isObject = (val: unknown): val is object => val !== null && typeof val === 'object';
 const onRE = /^on[^a-z]/;
-const isOn = key => onRE.test(key);
+const isOn = (key: string) => onRE.test(key);
 
 const cacheStringFunction = fn => {
   const cache = Object.create(null);
@@ -20,16 +20,16 @@ const camelize = cacheStringFunction(str => {
 });
 
 const hyphenateRE = /\B([A-Z])/g;
-const hyphenate = cacheStringFunction(str => {
+const hyphenate = cacheStringFunction((str: string) => {
   return str.replace(hyphenateRE, '-$1').toLowerCase();
 });
 
-const capitalize = cacheStringFunction(str => {
+const capitalize = cacheStringFunction((str: string) => {
   return str.charAt(0).toUpperCase() + str.slice(1);
 });
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;
-const hasOwn = (val, key) => hasOwnProperty.call(val, key);
+const hasOwn = (val: object, key: string) => hasOwnProperty.call(val, key);
 
 // change from vue sourcecode
 function resolvePropValue(options, props, key, value) {

@@ -12,6 +12,6 @@ export declare class Tooltip extends AntdComponent {
      * The text shown in the tooltip
      * @type any (string | slot)
      */
-    title: VNodeChild | JSX.Element;
+    title?: VNodeChild | JSX.Element;
   } & TooltipCommon;
 }

@@ -33,25 +33,25 @@ exports[`Table.filter renders filter correctly 1`] = `
           </tr>
           </thead>
           <tbody class="ant-table-tbody">
-            <tr data-row-key="0" class="ant-table-row ant-table-row-level-0">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
               <td class="ant-table-column-has-actions ant-table-column-has-filters">
                 <!---->
                 <!---->Jack
               </td>
             </tr>
-            <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
               <td class="ant-table-column-has-actions ant-table-column-has-filters">
                 <!---->
                 <!---->Lucy
               </td>
             </tr>
-            <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
               <td class="ant-table-column-has-actions ant-table-column-has-filters">
                 <!---->
                 <!---->Tom
               </td>
             </tr>
-            <tr data-row-key="3" class="ant-table-row ant-table-row-level-0">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
               <td class="ant-table-column-has-actions ant-table-column-has-filters">
                 <!---->
                 <!---->Jerry

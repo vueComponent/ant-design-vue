@@ -28,24 +28,24 @@ exports[`Table align column should not override cell style 1`] = `
         </tr>
         </thead>
         <tbody class="ant-table-tbody">
-          <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
+          <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
             <td class="">
               <!---->
               <!---->
               <!---->
             </td>
-            <td style="text-align: center; color: red;" class="">
+            <td class="" style="text-align: center; color: red;">
               <!---->
               <!---->32
             </td>
           </tr>
-          <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
+          <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
             <td class="">
               <!---->
               <!---->
               <!---->
             </td>
-            <td style="text-align: center; color: red;" class="">
+            <td class="" style="text-align: center; color: red;">
               <!---->
               <!---->42
             </td>
@@ -110,7 +110,7 @@ exports[`Table renders JSX correctly 1`] = `
     </tr>
     </thead>
     <tbody class="ant-table-tbody">
-      <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
+      <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
         <td class="">
           <!---->
           <!---->John
@@ -124,7 +124,7 @@ exports[`Table renders JSX correctly 1`] = `
           <!---->32
         </td>
       </tr>
-      <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
+      <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
         <td class="">
           <!---->
           <!---->Jim

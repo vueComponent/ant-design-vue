@@ -6483,7 +6483,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
               </tr>
               </thead>
               <tbody class="ant-table-tbody">
-                <tr data-row-key="0" class="ant-table-row ant-table-row-level-0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
                   <td class="ant-table-selection-column">
                     <!---->
                     <!----><span><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6498,7 +6498,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                     <!---->description of content1
                   </td>
                 </tr>
-                <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
                   <td class="ant-table-selection-column">
                     <!---->
                     <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6513,7 +6513,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                     <!---->description of content2
                   </td>
                 </tr>
-                <tr data-row-key="3" class="ant-table-row ant-table-row-level-0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
                   <td class="ant-table-selection-column">
                     <!---->
                     <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6528,7 +6528,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                     <!---->description of content4
                   </td>
                 </tr>
-                <tr data-row-key="4" class="ant-table-row ant-table-row-level-0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
                   <td class="ant-table-selection-column">
                     <!---->
                     <!----><span><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6543,7 +6543,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                     <!---->description of content5
                   </td>
                 </tr>
-                <tr data-row-key="6" class="ant-table-row ant-table-row-level-0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
                   <td class="ant-table-selection-column">
                     <!---->
                     <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6558,7 +6558,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                     <!---->description of content7
                   </td>
                 </tr>
-                <tr data-row-key="7" class="ant-table-row ant-table-row-level-0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
                   <td class="ant-table-selection-column">
                     <!---->
                     <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6573,7 +6573,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                     <!---->description of content8
                   </td>
                 </tr>
-                <tr data-row-key="9" class="ant-table-row ant-table-row-level-0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
                   <td class="ant-table-selection-column">
                     <!---->
                     <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6588,7 +6588,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                     <!---->description of content10
                   </td>
                 </tr>
-                <tr data-row-key="10" class="ant-table-row ant-table-row-level-0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="10">
                   <td class="ant-table-selection-column">
                     <!---->
                     <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6603,7 +6603,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                     <!---->description of content11
                   </td>
                 </tr>
-                <tr data-row-key="12" class="ant-table-row ant-table-row-level-0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="12">
                   <td class="ant-table-selection-column">
                     <!---->
                     <!----><span><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6618,7 +6618,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                     <!---->description of content13
                   </td>
                 </tr>
-                <tr data-row-key="13" class="ant-table-row ant-table-row-level-0">
+                <tr class="ant-table-row ant-table-row-level-0" data-row-key="13">
                   <td class="ant-table-selection-column">
                     <!---->
                     <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6695,7 +6695,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
             </tr>
             </thead>
             <tbody class="ant-table-tbody">
-              <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
                 <td class="ant-table-selection-column">
                   <!---->
                   <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6706,7 +6706,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                   <!---->content3
                 </td>
               </tr>
-              <tr data-row-key="5" class="ant-table-row ant-table-row-level-0">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
                 <td class="ant-table-selection-column">
                   <!---->
                   <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6717,7 +6717,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                   <!---->content6
                 </td>
               </tr>
-              <tr data-row-key="8" class="ant-table-row ant-table-row-level-0">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
                 <td class="ant-table-selection-column">
                   <!---->
                   <!----><span><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6728,7 +6728,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                   <!---->content9
                 </td>
               </tr>
-              <tr data-row-key="11" class="ant-table-row ant-table-row-level-0">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="11">
                 <td class="ant-table-selection-column">
                   <!---->
                   <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6739,7 +6739,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                   <!---->content12
                 </td>
               </tr>
-              <tr data-row-key="14" class="ant-table-row ant-table-row-level-0">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="14">
                 <td class="ant-table-selection-column">
                   <!---->
                   <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
@@ -6750,7 +6750,7 @@ exports[`renders ./antdv-demo/docs/transfer/demo/table-transfer.md correctly 1`]
                   <!---->content15
                 </td>
               </tr>
-              <tr data-row-key="17" class="ant-table-row ant-table-row-level-0">
+              <tr class="ant-table-row ant-table-row-level-0" data-row-key="17">
                 <td class="ant-table-selection-column">
                   <!---->
                   <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>

@@ -66,7 +66,7 @@ describe('notification', () => {
     notification.destroy();
   });
 
-  it('should be able to open with icon', done => {
+  it('should be able to open with icon', async () => {
     const openNotificationWithIcon = async type => {
       const iconPrefix = '.ant-notification-notice-icon';
       notification[type]({
@@ -78,10 +78,10 @@ describe('notification', () => {
         expect(document.querySelectorAll(`${iconPrefix}-${type}`).length).toBe(1);
       }, 0);
     };
-    ['success', 'info', 'warning', 'error'].forEach(type => {
-      openNotificationWithIcon(type);
-    });
-    done();
+    await openNotificationWithIcon('success');
+    await openNotificationWithIcon('info');
+    await openNotificationWithIcon('warning');
+    await openNotificationWithIcon('error');
   });
 
   it('trigger onClick', () => {
@@ -97,27 +97,27 @@ describe('notification', () => {
       notification.open({
         message: 'Notification Title',
         duration: 0,
-        closeIcon: h => <StepBackwardOutlined />,
+        closeIcon: <StepBackwardOutlined />,
       });
     });
     await asyncExpect(() => {
       expect(document.querySelectorAll('.anticon-step-backward').length).toBe(1);
-    });
+    }, 100);
   });
 
   it('support config closeIcon', async () => {
     notification.config({
-      closeIcon: h => <StepBackwardOutlined />,
+      closeIcon: <StepBackwardOutlined />,
     });
     await asyncExpect(() => {
       notification.open({
         message: 'Notification Title',
         duration: 0,
-        closeIcon: h => <StepBackwardOutlined />,
+        closeIcon: <StepBackwardOutlined />,
       });
     });
     await asyncExpect(() => {
       expect(document.querySelectorAll('.anticon-step-backward').length).toBe(1);
-    });
+    }, 100);
   });
 });

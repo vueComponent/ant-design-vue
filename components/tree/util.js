@@ -88,13 +88,14 @@ export function convertDirectoryKeysToNodes(rootChildren, keys) {
   return nodes;
 }
 
-export function getFullKeyListByTreeData(treeData) {
+export function getFullKeyListByTreeData(treeData,replaceFields) {
   let keys = [];
+  const {key='key',children='children'} = replaceFields
 
   (treeData || []).forEach(item => {
-    keys.push(item.key);
-    if (item.children) {
-      keys = [...keys, ...getFullKeyListByTreeData(item.children)];
+    keys.push(item[key]);
+    if (item[children]) {
+      keys = [...keys, ...getFullKeyListByTreeData(item[children],replaceFields)];
     }
   });
   return keys;

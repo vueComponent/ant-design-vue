@@ -1,18 +1,17 @@
 @import '../../style/themes/index';
 @import '../../style/mixins/index';
 
+@input-affix-margin: 4px;
 @input-affix-width: 19px;
 @input-affix-with-clear-btn-width: 38px;
 
 // size mixins for input
 .input-lg() {
-  height: @input-height-lg;
   padding: @input-padding-vertical-lg @input-padding-horizontal-lg;
   font-size: @font-size-lg;
 }
 
 .input-sm() {
-  height: @input-height-sm;
   padding: @input-padding-vertical-sm @input-padding-horizontal-sm;
 }
 
@@ -47,7 +46,6 @@
   position: relative;
   display: inline-block;
   width: 100%;
-  height: @input-height-base;
   padding: @input-padding-vertical-base @input-padding-horizontal-base;
   color: @input-color;
   font-size: @font-size-base;
@@ -264,12 +262,6 @@
     height: @input-height-sm;
   }
 
-  .@{inputClass}-affix-wrapper {
-    display: table-cell;
-    float: left;
-    width: 100%;
-  }
-
   &&-compact {
     display: block;
     .clearfix;
@@ -295,6 +287,10 @@
       float: none;
       vertical-align: top; // https://github.com/ant-design/ant-design-pro/issues/139
       border-radius: 0;
+    }
+
+    & > .@{inputClass}-affix-wrapper {
+      display: inline-flex;
     }
 
     & > *:not(:last-child) {
@@ -364,17 +360,44 @@
 
 .input-affix-wrapper(@inputClass) {
   position: relative;
-  display: inline-block;
+  display: inline-flex;
+  border: @border-width-base @border-style-base @input-border-color;
+  border-radius: @border-radius-base;
+  padding: @input-padding-vertical-base @input-padding-horizontal-base;
   width: 100%;
   text-align: start;
 
-  &:hover .@{inputClass}:not(.@{inputClass}-disabled) {
+  &:hover {
     .hover();
+  }
+
+  &-disabled {
+    .disabled();
+  }
+
+  &-focused {
+    .active();
+  }
+
+  // Size
+  &-lg {
+    .input-lg();
+  }
+
+  &-sm {
+    .input-sm();
   }
 
   .@{inputClass} {
     position: relative;
     text-align: inherit;
+    border: none;
+    padding: 0;
+    &:focus {
+      border: none;
+      outline: none;
+      box-shadow: none;
+    }
   }
 
   // Should not break align of icon & text
@@ -385,14 +408,10 @@
   // https://codesandbox.io/embed/nifty-benz-gb7ml
   .@{inputClass}-prefix,
   .@{inputClass}-suffix {
-    position: absolute;
-    top: 50%;
-    z-index: 2;
     display: flex;
     align-items: center;
     color: @input-color;
-    line-height: 0;
-    transform: translateY(-50%);
+    white-space: nowrap;
 
     :not(.anticon) {
       line-height: @line-height-base;
@@ -407,27 +426,11 @@
   }
 
   .@{inputClass}-prefix {
-    left: @input-padding-horizontal-base + 1px;
+    margin-right: @input-affix-margin;
   }
 
   .@{inputClass}-suffix {
-    right: @input-padding-horizontal-base + 1px;
-  }
-
-  .@{inputClass}:not(:first-child) {
-    padding-left: @input-padding-horizontal-base + @input-affix-width;
-  }
-
-  .@{inputClass}:not(:last-child) {
-    padding-right: @input-padding-horizontal-base + @input-affix-width;
-  }
-
-  &.@{inputClass}-affix-wrapper-input-with-clear-btn .@{inputClass}:not(:last-child) {
-    padding-right: @input-padding-horizontal-base + @input-affix-with-clear-btn-width;
-  }
-
-  &.@{inputClass}-affix-wrapper-textarea-with-clear-btn .@{inputClass} {
-    padding-right: 22px;
+    margin-left: @input-affix-margin;
   }
 }
 
@@ -438,7 +441,7 @@
   // https://codesandbox.io/s/wizardly-sun-u10br
   cursor: pointer;
   transition: color 0.3s;
-
+  margin: 0 @input-affix-margin;
   &:hover {
     color: @text-color-secondary;
   }

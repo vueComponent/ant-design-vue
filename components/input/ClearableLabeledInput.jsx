@@ -33,6 +33,8 @@ const ClearableLabeledInput = {
     addonBefore: PropTypes.any,
     addonAfter: PropTypes.any,
     readonly: PropTypes.bool,
+    isFocused: PropTypes.bool,
+    style: PropTypes.object,
   },
   methods: {
     renderClearIcon(prefixCls) {
@@ -81,12 +83,13 @@ const ClearableLabeledInput = {
       ) : null;
 
       const affixWrapperCls = classNames(this.$attrs?.class, `${prefixCls}-affix-wrapper`, {
+        [`${prefixCls}-affix-wrapper-focused`]: props.isFocused,
+        [`${prefixCls}-affix-wrapper-disabled`]: props.disabled,
         [`${prefixCls}-affix-wrapper-sm`]: props.size === 'small',
         [`${prefixCls}-affix-wrapper-lg`]: props.size === 'large',
         [`${prefixCls}-affix-wrapper-input-with-clear-btn`]:
           props.suffix && props.allowClear && this.$props.value,
       });
-
       return (
         <span class={affixWrapperCls} style={props.style}>
           {prefix}

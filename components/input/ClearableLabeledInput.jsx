@@ -39,21 +39,24 @@ const ClearableLabeledInput = {
   methods: {
     renderClearIcon(prefixCls) {
       const { allowClear, value, disabled, readonly, inputType, handleReset } = this.$props;
-      if (
-        !allowClear ||
-        disabled ||
-        readonly ||
-        value === undefined ||
-        value === null ||
-        value === ''
-      ) {
+      if (!allowClear) {
         return null;
       }
+      const showClearIcon =
+        !disabled && !readonly && value !== undefined && value !== null && value !== '';
       const className =
         inputType === ClearableInputType[0]
           ? `${prefixCls}-textarea-clear-icon`
           : `${prefixCls}-clear-icon`;
-      return <CloseCircleFilled onClick={handleReset} class={className} role="button" />;
+      return (
+        <CloseCircleFilled
+          onClick={handleReset}
+          class={classNames(className, {
+            [`${className}-hidden`]: !showClearIcon,
+          })}
+          role="button"
+        />
+      );
     },
 
     renderSuffix(prefixCls) {

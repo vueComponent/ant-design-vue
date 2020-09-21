@@ -4,7 +4,8 @@
  * - multiple: in the selector
  * Move the code as a SearchInput for easy management.
  */
-import { inject } from 'vue';
+import { inject, withDirectives } from 'vue';
+import antInput from '../../_util/antInputDirective';
 import PropTypes from '../../_util/vue-types';
 import { createRef } from './util';
 
@@ -118,20 +119,23 @@ const SearchInput = {
     } = this;
     return (
       <span class={`${prefixCls}-search__field__wrap`}>
-        <input
-          type="text"
-          ref={this.inputRef}
-          onInput={handleInputChange}
-          onChange={handleInputChange}
-          onKeydown={onSearchInputKeyDown}
-          value={searchValue}
-          disabled={disabled}
-          class={`${prefixCls}-search__field`}
-          aria-label="filter select"
-          aria-autocomplete="list"
-          aria-controls={open ? ariaId : undefined}
-          aria-multiline="false"
-        />
+        {withDirectives(
+          <input
+            type="text"
+            ref={this.inputRef}
+            onInput={handleInputChange}
+            onChange={handleInputChange}
+            onKeydown={onSearchInputKeyDown}
+            value={searchValue}
+            disabled={disabled}
+            class={`${prefixCls}-search__field`}
+            aria-label="filter select"
+            aria-autocomplete="list"
+            aria-controls={open ? ariaId : undefined}
+            aria-multiline="false"
+          />,
+          [[antInput]],
+        )}
         <span ref={this.mirrorInputRef} class={`${prefixCls}-search__field__mirror`}>
           {mirrorSearchValue}&nbsp;
         </span>

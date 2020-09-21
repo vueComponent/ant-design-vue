@@ -1,4 +1,4 @@
-import { provide } from 'vue';
+import { provide, withDirectives } from 'vue';
 import classNames from '../../_util/classNames';
 import omit from 'omit.js';
 import KeyCode from '../../_util/KeyCode';
@@ -13,6 +13,7 @@ import {
 } from './util';
 import KeywordTrigger from './KeywordTrigger';
 import { vcMentionsProps, defaultProps } from './mentionsProps';
+import antInput from '../../_util/antInputDirective';
 
 function noop() {}
 
@@ -286,7 +287,7 @@ const Mentions = {
     };
     return (
       <div class={classNames(prefixCls, className)} style={style}>
-        <textarea ref="textarea" {...textareaProps} />
+        {withDirectives(<textarea ref="textarea" {...textareaProps} />, [[antInput]])}
         {measuring && (
           <div ref="measure" class={`${prefixCls}-measure`}>
             {value.slice(0, measureLocation)}

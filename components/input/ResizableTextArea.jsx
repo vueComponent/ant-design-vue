@@ -8,6 +8,8 @@ import BaseMixin from '../_util/BaseMixin';
 import inputProps from './inputProps';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
+import { withDirectives } from 'vue';
+import antInput from '../_util/antInputDirective';
 
 const RESIZE_STATUS_NONE = 0;
 const RESIZE_STATUS_RESIZING = 1;
@@ -139,7 +141,7 @@ const ResizableTextArea = {
       }
       return (
         <ResizeObserver onResize={this.handleResize} disabled={!(autoSize || autosize)}>
-          <textarea {...textareaProps} ref={this.saveTextArea} />
+          {withDirectives(<textarea {...textareaProps} ref={this.saveTextArea} />, [[antInput]])}
         </ResizeObserver>
       );
     },

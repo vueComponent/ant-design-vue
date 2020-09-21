@@ -4,6 +4,8 @@ import { getComponent, findDOMNode } from '../../../_util/props-util';
 import moment from 'moment';
 import { formatDate } from '../util';
 import KeyCode from '../../../_util/KeyCode';
+import { withDirectives } from 'vue';
+import antInput from '../../../_util/antInputDirective';
 
 let cachedSelectionStart;
 let cachedSelectionEnd;
@@ -193,20 +195,23 @@ const DateInput = {
     return (
       <div class={`${prefixCls}-input-wrap`}>
         <div class={`${prefixCls}-date-input-wrap`}>
-          <input
-            ref={this.saveDateInput}
-            class={`${prefixCls}-input ${invalidClass}`}
-            value={str}
-            disabled={disabled}
-            placeholder={placeholder}
-            onInput={this.onInputChange}
-            onChange={this.onInputChange}
-            onKeydown={this.onKeyDown}
-            onFocus={this.onFocus}
-            onBlur={this.onBlur}
-            inputMode={inputMode}
-            readonly={inputReadOnly}
-          />
+          {withDirectives(
+            <input
+              ref={this.saveDateInput}
+              class={`${prefixCls}-input ${invalidClass}`}
+              value={str}
+              disabled={disabled}
+              placeholder={placeholder}
+              onInput={this.onInputChange}
+              onChange={this.onInputChange}
+              onKeydown={this.onKeyDown}
+              onFocus={this.onFocus}
+              onBlur={this.onBlur}
+              inputMode={inputMode}
+              readonly={inputReadOnly}
+            />,
+            [[antInput]],
+          )}
         </div>
         {showClear ? (
           <a role="button" title={locale.clear} onClick={this.onClear}>

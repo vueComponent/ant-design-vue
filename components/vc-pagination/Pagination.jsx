@@ -6,6 +6,8 @@ import Options from './Options';
 import LOCALE from './locale/zh_CN';
 import KEYCODE from './KeyCode';
 import classNames from '../_util/classNames';
+import { withDirectives } from 'vue';
+import antInput from '../_util/antInputDirective';
 
 function noop() {}
 
@@ -379,15 +381,18 @@ export default {
             title={this.showTitle ? `${stateCurrent}/${allPages}` : null}
             class={`${prefixCls}-simple-pager`}
           >
-            <input
-              type="text"
-              value={this.stateCurrentInputValue}
-              onKeydown={this.handleKeyDown}
-              onKeyup={this.handleKeyUp}
-              onInput={this.handleKeyUp}
-              onChange={this.handleKeyUp}
-              size="3"
-            />
+            {withDirectives(
+              <input
+                type="text"
+                value={this.stateCurrentInputValue}
+                onKeydown={this.handleKeyDown}
+                onKeyup={this.handleKeyUp}
+                onInput={this.handleKeyUp}
+                onChange={this.handleKeyUp}
+                size="3"
+              />,
+              [[antInput]],
+            )}
             <span class={`${prefixCls}-slash`}>／</span>
             {allPages}
           </li>

@@ -15,7 +15,6 @@ import BodyTable from './BodyTable';
 import ExpandableTable from './ExpandableTable';
 import { initDefaultProps, getOptionProps } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
-import syncWatch from '../../_util/syncWatch';
 
 export default {
   name: 'Table',
@@ -129,11 +128,11 @@ export default {
         this.components,
       );
     },
-    columns: syncWatch(function(val) {
+    columns(val) {
       if (val) {
         this.columnManager.reset(val);
       }
-    }),
+    },
     data(val) {
       if (val.length === 0 && this.hasScrollX()) {
         this.$nextTick(() => {

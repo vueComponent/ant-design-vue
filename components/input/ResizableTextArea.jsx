@@ -8,7 +8,6 @@ import BaseMixin from '../_util/BaseMixin';
 import inputProps from './inputProps';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
-import syncWatch from '../_util/syncWatch';
 
 const RESIZE_STATUS_NONE = 0;
 const RESIZE_STATUS_RESIZING = 1;
@@ -39,11 +38,11 @@ const ResizableTextArea = {
     raf.cancel(this.resizeFrameId);
   },
   watch: {
-    value: syncWatch(function() {
+    value() {
       this.$nextTick(() => {
         this.resizeTextarea();
       });
-    }),
+    },
   },
   methods: {
     saveTextArea(textArea) {

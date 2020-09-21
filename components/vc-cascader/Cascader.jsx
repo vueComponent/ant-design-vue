@@ -8,7 +8,6 @@ import shallowEqualArrays from 'shallow-equal/arrays';
 import { hasProp, getEvents } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
-import syncWatch from '../_util/syncWatch';
 
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {
@@ -100,7 +99,7 @@ export default {
     };
   },
   watch: {
-    value: syncWatch(function(val, oldValue) {
+    value(val, oldValue) {
       if (!shallowEqualArrays(val, oldValue)) {
         const newValues = {
           sValue: val || [],
@@ -112,12 +111,12 @@ export default {
         }
         this.setState(newValues);
       }
-    }),
-    popupVisible: syncWatch(function(val) {
+    },
+    popupVisible(val) {
       this.setState({
         sPopupVisible: val,
       });
-    }),
+    },
   },
   methods: {
     getPopupDOMNode() {

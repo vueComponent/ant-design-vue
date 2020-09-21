@@ -6,7 +6,6 @@ import inputProps from './inputProps';
 import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
-import syncWatch from '../_util/syncWatch';
 
 export function fixControlledValue(value) {
   if (typeof value === 'undefined' || value === null) {
@@ -68,9 +67,9 @@ export default {
     };
   },
   watch: {
-    value: syncWatch(function(val) {
+    value(val) {
       this.stateValue = val;
-    }),
+    },
   },
   mounted() {
     this.$nextTick(() => {

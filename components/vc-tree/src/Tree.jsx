@@ -4,7 +4,6 @@ import warning from 'warning';
 import { hasProp, initDefaultProps, getOptionProps, getSlot } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import BaseMixin from '../../_util/BaseMixin';
-import syncWatch from '../../_util/syncWatch';
 import {
   convertTreeToEntities,
   convertDataToTree,
@@ -153,10 +152,10 @@ const Tree = {
       'checkedKeys',
       'loadedKeys',
     ]),
-    __propsSymbol__: syncWatch(function() {
+    __propsSymbol__() {
       this.setState(this.getDerivedState(getOptionProps(this), this.$data));
       this.needSyncKeys = {};
-    }),
+    },
   },
 
   methods: {

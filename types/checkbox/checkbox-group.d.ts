@@ -4,7 +4,7 @@
 
 import { AntdComponent, AntdProps } from '../component';
 export declare class CheckboxGroup extends AntdComponent {
-  $props: AntdProps & {
+  $props: Omit<AntdProps, 'onChange'> & {
     /**
      * Default selected value
      * @type string[]
@@ -30,13 +30,13 @@ export declare class CheckboxGroup extends AntdComponent {
      * Used for setting the currently selected value.
      * @type string[]
      */
-    value: string[];
+    value?: string[];
     name?: string;
 
     /**
      * The callback function that is triggered when the state changes.
-     * @param e
+     * @param {string[]} checkedValue
      */
-    onChange?: (checkedValue?: any) => void;
+    onChange?: (checkedValue?: string[]) => void;
   };
 }

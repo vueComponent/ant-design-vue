@@ -100,7 +100,7 @@ describe('Cascader', () => {
     expect($$('.ant-cascader-menus').length).toBe(1);
     await asyncExpect(() => {
       expect($$('.ant-cascader-menus')[0].parentNode.parentNode.innerHTML).toMatchSnapshot();
-    });
+    }, 0);
   });
 
   it('can be selected', async () => {

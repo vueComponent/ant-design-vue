@@ -1,5 +1,5 @@
 import { inject, CSSProperties, SetupContext } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { ConfigConsumerProps } from '../config-provider';
 
 export interface CheckableTagProps {
@@ -8,12 +8,12 @@ export interface CheckableTagProps {
   style?: CSSProperties;
   checked: boolean;
   onChange?: (checked: boolean) => void;
-  onClick?: (e: Event) => void;
+  onClick?: (e: MouseEvent) => void;
 }
 
 const CheckableTag = (props: CheckableTagProps, { slots }: SetupContext) => {
   const { getPrefixCls } = inject('configProvider', ConfigConsumerProps);
-  const handleClick = (e: Event) => {
+  const handleClick = (e: MouseEvent) => {
     const { checked, onChange, onClick } = props;
     if (onChange) {
       onChange(!checked);
@@ -23,16 +23,12 @@ const CheckableTag = (props: CheckableTagProps, { slots }: SetupContext) => {
     }
   };
 
-  const { prefixCls: customizePrefixCls, class: className, checked } = props;
+  const { prefixCls: customizePrefixCls, checked } = props;
   const prefixCls = getPrefixCls('tag', customizePrefixCls);
-  const cls = classNames(
-    prefixCls,
-    {
-      [`${prefixCls}-checkable`]: true,
-      [`${prefixCls}-checkable-checked`]: checked,
-    },
-    className,
-  );
+  const cls = classNames(prefixCls, {
+    [`${prefixCls}-checkable`]: true,
+    [`${prefixCls}-checkable-checked`]: checked,
+  });
 
   return (
     <span class={cls} onClick={handleClick}>

@@ -2,14 +2,14 @@ import {
   inject,
   ref,
   HTMLAttributes,
-  VNodeChild,
-  Events,
   defineComponent,
   SetupContext,
   App,
   watchEffect,
+  VNodeTypes,
+  CSSProperties,
 } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Wave from '../_util/wave';
@@ -19,46 +19,65 @@ import {
   PresetColorType,
   PresetStatusColorType,
 } from '../_util/colors';
-import { LiteralUnion, EventHandlers } from '../_util/type';
+import { LiteralUnion } from '../_util/type';
 import { ConfigConsumerProps } from '../config-provider';
 import CheckableTag from './CheckableTag';
 
 const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 const PresetStatusColorRegex = new RegExp(`^(${PresetStatusColorTypes.join('|')})$`);
 
-export interface TagProps extends HTMLAttributes, Partial<EventHandlers<Events>> {
+export interface TagProps extends HTMLAttributes {
   prefixCls?: string;
+  class?: string;
   color?: LiteralUnion<PresetColorType | PresetStatusColorType, string>;
   closable?: boolean;
-  closeIcon?: VNodeChild | JSX.Element;
+  closeIcon?: VNodeTypes;
+  style?: CSSProperties;
   visible?: boolean;
   onClose?: Function;
-  icon?: VNodeChild | JSX.Element;
+  icon?: VNodeTypes;
 }
 
 const Tag = defineComponent({
+  inheritAttrs: false,
   setup(_: TagProps, { slots, attrs }: SetupContext) {
     const { getPrefixCls } = inject('configProvider', ConfigConsumerProps);
 
     const visible = ref(true);
 
+    const props = attrs as TagProps;
+
+    watchEffect(() => {
+      if ('visible' in props) {
+        visible.value = props.visible!;
+      }
+    });
+
+    const handleCloseClick = (e: MouseEvent) => {
+      e.stopPropagation();
+      if (props.onClose) {
+        props.onClose(e);
+      }
+
+      if (e.defaultPrevented) {
+        return;
+      }
+      if (!('visible' in props)) {
+        visible.value = false;
+      }
+    };
+
     return () => {
       const {
         prefixCls: customizePrefixCls,
-        style,
         icon,
         color,
-        onClose,
         closeIcon,
+        class: className,
+        style = {},
         closable = false,
-        ...props
-      } = attrs as TagProps;
-
-      watchEffect(() => {
-        if ('visible' in props) {
-          visible.value = props.visible!;
-        }
-      });
+        ...restProps
+      } = props;
 
       const isPresetColor = (): boolean => {
         if (!color) {
@@ -69,20 +88,6 @@ const Tag = defineComponent({
 
       const presetColor = isPresetColor();
       const prefixCls = getPrefixCls('tag', customizePrefixCls);
-
-      const handleCloseClick = (e: MouseEvent) => {
-        e.stopPropagation();
-        if (onClose) {
-          onClose(e);
-        }
-
-        if (e.defaultPrevented) {
-          return;
-        }
-        if (!('visible' in props)) {
-          visible.value = false;
-        }
-      };
 
       const renderCloseIcon = () => {
         if (closable) {
@@ -99,6 +104,7 @@ const Tag = defineComponent({
 
       const tagStyle = {
         backgroundColor: color && !isPresetColor() ? color : undefined,
+        ...style,
       };
 
       const tagClassName = classNames(prefixCls, {
@@ -107,7 +113,7 @@ const Tag = defineComponent({
         [`${prefixCls}-hidden`]: !visible.value,
       });
 
-      const tagProps = omit(props, ['visible']);
+      const tagProps = omit(restProps, ['visible']);
       const iconNode = icon || null;
       const children = slots.default?.();
       const kids = iconNode ? (

@@ -9,7 +9,7 @@ import { TextArea } from './textarea';
 import { Password } from './password';
 import { VNodeChild } from 'vue';
 
-export type InputProps = {
+export type InputProps = Omit<AntdProps, 'prefix'> & {
   /**
    * The label text displayed after (on the right side of) the input field.
    * @type any (string | slot)
@@ -83,5 +83,5 @@ export declare class Input extends AntdComponent {
   static Search: typeof InputSearch;
   static TextArea: typeof TextArea;
   static Password: typeof Password;
-  $props: AntdProps & InputProps;
+  $props: InputProps;
 }

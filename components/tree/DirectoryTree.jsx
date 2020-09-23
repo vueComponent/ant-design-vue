@@ -70,7 +70,7 @@ export default {
     // Expanded keys
     if (defaultExpandAll) {
       if (props.treeData) {
-        state._expandedKeys = getFullKeyListByTreeData(props.treeData);
+        state._expandedKeys = getFullKeyListByTreeData(props.treeData,props.replaceFields);
       } else {
         state._expandedKeys = getFullKeyList(this.$slots.default);
       }

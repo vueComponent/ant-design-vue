@@ -19,7 +19,7 @@ describe('Slider', () => {
     await asyncExpect(() => {
       expect(document.body.innerHTML).toMatchSnapshot();
       wrapper.findAll('.ant-slider-handle')[0].trigger('mouseleave');
-    });
+    }, 0);
     await asyncExpect(() => {
       expect(document.body.innerHTML).toMatchSnapshot();
     }, 0);

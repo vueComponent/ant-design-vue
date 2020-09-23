@@ -310,7 +310,7 @@ export default {
     }
 
     const uploadButton = (
-      <div class={uploadButtonCls} style={children ? undefined : { display: 'none' }}>
+      <div class={uploadButtonCls} style={children.length ? undefined : { display: 'none' }}>
         <VcUpload {...vcUploadProps}>{children}</VcUpload>
       </div>
     );

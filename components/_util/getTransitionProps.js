@@ -1,5 +1,8 @@
 import animate from './css-animation';
 const getTransitionProps = (transitionName, opt = {}) => {
+  if (process.env.NODE_ENV === 'test') {
+    return { css: false, ...opt };
+  }
   const transitionProps = {
     appear: true,
     css: false,

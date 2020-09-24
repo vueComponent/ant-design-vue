@@ -1,4 +1,4 @@
-import { inject, provide } from 'vue';
+import { inject, provide, toRef } from 'vue';
 import omit from 'omit.js';
 import VcMenu, { Divider, ItemGroup } from '../vc-menu';
 import SubMenu from './SubMenu';
@@ -61,9 +61,12 @@ const Menu = {
     provide('menuPropsContext', this.$props);
   },
   setup() {
+    const layoutSiderContext = inject('layoutSiderContext', {});
+    const layoutSiderCollapsed = toRef(layoutSiderContext, 'sCollapsed');
     return {
       configProvider: inject('configProvider', ConfigConsumerProps),
-      layoutSiderContext: inject('layoutSiderContext', {}),
+      layoutSiderContext,
+      layoutSiderCollapsed,
     };
   },
   // model: {
@@ -88,7 +91,7 @@ const Menu = {
     inlineCollapsed(val) {
       this.collapsedChange(val);
     },
-    'layoutSiderContext.sCollapsed'(val) {
+    layoutSiderCollapsed(val) {
       this.collapsedChange(val);
     },
   },

@@ -1,6 +1,8 @@
 import PropTypes from '../_util/vue-types';
 import KEYCODE from './KeyCode';
 import BaseMixin from '../_util/BaseMixin';
+import { withDirectives } from 'vue';
+import antInput from '../_util/antInputDirective';
 
 export default {
   mixins: [BaseMixin],
@@ -131,15 +133,18 @@ export default {
       goInput = (
         <div class={`${prefixCls}-quick-jumper`}>
           {locale.jump_to}
-          <input
-            disabled={disabled}
-            type="text"
-            value={goInputText}
-            onInput={this.handleChange}
-            onChange={this.handleChange}
-            onKeyup={this.go}
-            onBlur={this.handleBlur}
-          />
+          {withDirectives(
+            <input
+              disabled={disabled}
+              type="text"
+              value={goInputText}
+              onInput={this.handleChange}
+              onChange={this.handleChange}
+              onKeyup={this.go}
+              onBlur={this.handleBlur}
+            />,
+            [[antInput]],
+          )}
           {locale.page}
           {gotoButton}
         </div>

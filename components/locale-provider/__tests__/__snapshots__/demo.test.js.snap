@@ -25,7 +25,7 @@ exports[`renders ./antdv-demo/docs/locale-provider/demo/all.md correctly 1`] = `
                 <!---->
                 <div class="ant-select-selection-selected-value" title="10 / page" style="display: block; opacity: 1;">10 / page</div>
               </div>
-              <!----><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+              <!----><span class="ant-select-arrow" style="user-select: none;" unselectable="on"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
             </div>
           </div>
           <!---->
@@ -43,7 +43,7 @@ exports[`renders ./antdv-demo/docs/locale-provider/demo/all.md correctly 1`] = `
               <div class="ant-select-search__field__wrap"><input autocomplete="off" class="ant-select-search__field"><span class="ant-select-search__field__mirror">&nbsp;</span></div>
             </div>
           </div>
-          <!----><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+          <!----><span class="ant-select-arrow" style="user-select: none;" unselectable="on"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
         </div>
       </div><span class="ant-calendar-picker"><!----><div><input readonly="" placeholder="Select date" class="ant-calendar-picker-input ant-input"><!----><span role="img" aria-label="calendar" class="anticon anticon-calendar ant-calendar-picker-icon"><svg class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span>
     </div></span>
@@ -127,7 +127,7 @@ exports[`renders ./antdv-demo/docs/locale-provider/demo/all.md correctly 1`] = `
               <!---->
               <div class="ant-select-selection-selected-value" title="2016" style="display: block; opacity: 1;">2016</div>
             </div>
-            <!----><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+            <!----><span class="ant-select-arrow" style="user-select: none;" unselectable="on"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
           </div>
         </div>
         <!---->
@@ -137,7 +137,7 @@ exports[`renders ./antdv-demo/docs/locale-provider/demo/all.md correctly 1`] = `
               <!---->
               <div class="ant-select-selection-selected-value" title="Nov" style="display: block; opacity: 1;">Nov</div>
             </div>
-            <!----><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+            <!----><span class="ant-select-arrow" style="user-select: none;" unselectable="on"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
           </div>
         </div>
         <div class="ant-radio-group ant-radio-group-outline ant-radio-group-small"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="month"><span class="ant-radio-button-inner"></span></span><span>Month</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="year"><span class="ant-radio-button-inner"></span></span><span>Year</span></label></div>
@@ -542,7 +542,7 @@ exports[`renders ./antdv-demo/docs/locale-provider/demo/basic.md correctly 1`] =
           <!---->
           <div class="ant-select-selection-selected-value" title="10 / page" style="display: block; opacity: 1;">10 / page</div>
         </div>
-        <!----><span unselectable="on" class="ant-select-arrow" style="user-select: none;"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+        <!----><span class="ant-select-arrow" style="user-select: none;" unselectable="on"><span role="img" aria-label="down" class="anticon anticon-down ant-select-arrow-icon"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
       </div>
     </div>
     <!---->

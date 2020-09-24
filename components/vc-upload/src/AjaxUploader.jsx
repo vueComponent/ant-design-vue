@@ -29,6 +29,7 @@ const upLoadPropTypes = {
   withCredentials: PropTypes.bool,
   openFileDialogOnClick: PropTypes.bool,
   transformFile: PropTypes.func,
+  method: PropTypes.string,
 };
 
 const AjaxUploader = {

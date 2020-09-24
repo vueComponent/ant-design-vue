@@ -1,4 +1,4 @@
-import { TransitionGroup } from 'vue';
+import { TransitionGroup, withDirectives } from 'vue';
 import KeyCode from '../_util/KeyCode';
 import PropTypes from '../_util/vue-types';
 import classnames from '../_util/classNames';
@@ -49,6 +49,7 @@ import contains from '../vc-util/Dom/contains';
 import { isIE, isEdge } from '../_util/env';
 import isValid from '../_util/isValid';
 import { getDataAndAriaProps } from '../_util/util';
+import antInput from '../_util/antInputDirective';
 
 const SELECT_EMPTY_VALUE_KEY = 'RC_SELECT_EMPTY_VALUE_KEY';
 
@@ -639,7 +640,7 @@ const Select = {
       if (value.length) {
         hidden = true;
       }
-      if (value.length === 1 && state._value && !isValid(state._value[0])) {
+      if (isCombobox(props) && value.length === 1 && state._value && !isValid(state._value[0])) {
         hidden = false;
       }
       const placeholder = props.placeholder;
@@ -781,18 +782,13 @@ const Select = {
       // Add space to the end of the inputValue as the width measurement tolerance
       return (
         <div class={`${props.prefixCls}-search__field__wrap`} onClick={this.inputClick}>
-          {cloneElement(inputElement, {
+          {cloneElement(withDirectives(inputElement, [[antInput]]), {
             disabled: props.disabled,
             ...(inputElement.props || {}),
             disabled: props.disabled,
             value: inputValue,
             class: inputCls,
             ref: this.saveInputRef,
-            // directives: [
-            //   {
-            //     name: 'ant-input',
-            //   },
-            // ],
             onInput: this.onInputChange,
             onKeydown: chaining(
               this.onInputKeydown,

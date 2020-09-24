@@ -426,7 +426,7 @@ describe('Table.filter', () => {
     expect(renderedNames(wrapper)).toEqual(['Jack']);
   });
 
-  it('confirm filter when dropdown hidden', async () => {
+  fit('confirm filter when dropdown hidden', async () => {
     const handleChange = jest.fn();
     const wrapper = mount(Table, {
       ...getTableOptions({
@@ -452,7 +452,8 @@ describe('Table.filter', () => {
     await asyncExpect(() => {
       wrapper.find('.ant-dropdown-trigger').trigger('click');
     }, 500);
-
-    expect(handleChange).toBeCalled();
+    await asyncExpect(() => {
+      expect(handleChange).toBeCalled();
+    }, 0);
   });
 });

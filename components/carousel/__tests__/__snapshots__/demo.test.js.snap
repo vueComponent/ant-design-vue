@@ -248,7 +248,7 @@ exports[`renders ./antdv-demo/docs/carousel/demo/customArrows.md correctly 1`] =
 
 exports[`renders ./antdv-demo/docs/carousel/demo/customPaging.md correctly 1`] = `
 <div class="ant-carousel">
-  <div class="slick-slider slick-initialized"><button data-role="none" class="slick-arrow slick-prev" style="display: block;" type="button"> Previous</button>
+  <div class="slick-slider slick-initialized"><button type="button" data-role="none" class="slick-arrow slick-prev" style="display: block;"> Previous</button>
     <div class="slick-list">
       <div class="slick-track" style="width: 900%; left: -100%;">
         <div class="slick-slide slick-cloned" tabindex="-1" data-index="-1" aria-hidden="true" style="width: 11.11111111111111%;">
@@ -297,7 +297,7 @@ exports[`renders ./antdv-demo/docs/carousel/demo/customPaging.md correctly 1`] =
           </div>
         </div>
       </div>
-    </div><button data-role="none" class="slick-arrow slick-next" style="display: block;" type="button"> Next</button>
+    </div><button type="button" data-role="none" class="slick-arrow slick-next" style="display: block;"> Next</button>
     <ul style="display: block;" class="slick-dots slick-dots-bottom slick-dots slick-thumb">
       <li class="slick-active"><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg"></a></li>
       <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg"></a></li>

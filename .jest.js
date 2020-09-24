@@ -6,13 +6,16 @@ const transformIgnorePatterns = [
   // Update: @babel/runtime should also be transformed
   'node_modules/(?!.*(@babel|lodash-es))[^/]+?/(?!(es|node_modules)/)',
 ];
-
+const testPathIgnorePatterns = ['/node_modules/', 'node'];
+if (process.env.WORKFLOW === 'true') {
+  testPathIgnorePatterns.push('demo\\.test*');
+}
 module.exports = {
   testURL: 'http://localhost/',
   setupFiles: ['./tests/setup.js'],
   moduleFileExtensions: ['js', 'jsx', 'json', 'vue', 'md', 'jpg'],
   modulePathIgnorePatterns: ['/_site/'],
-  testPathIgnorePatterns: ['/node_modules/', 'node'],
+  testPathIgnorePatterns: testPathIgnorePatterns,
   transform: {
     '^.+\\.(vue|md)$': '<rootDir>/node_modules/vue-jest',
     '^.+\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',

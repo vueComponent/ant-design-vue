@@ -92,5 +92,12 @@ export declare class Progress extends AntdComponent {
      * @type number
      */
     width?: number;
+
+    /**
+     * the size of progress
+     * @default 'default'
+     * @type string
+     */
+    size?: 'default' | 'middle';
   };
 }

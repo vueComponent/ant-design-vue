@@ -305,12 +305,12 @@ export default {
 
     // Remove id to avoid open by label when trigger is hidden
     // https://github.com/ant-design/ant-design/issues/14298
-    if (!children || disabled) {
+    if (!children.length || disabled) {
       delete vcUploadProps.id;
     }
 
     const uploadButton = (
-      <div class={uploadButtonCls} style={children ? undefined : { display: 'none' }}>
+      <div class={uploadButtonCls} style={children.length ? undefined : { display: 'none' }}>
         <VcUpload {...vcUploadProps}>{children}</VcUpload>
       </div>
     );

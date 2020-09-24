@@ -72,6 +72,6 @@ describe('MonthPicker and WeekPicker', () => {
     await sleep(50);
     await asyncExpect(() => {
       expect(document.body.innerHTML).toMatchSnapshot();
-    });
+    }, 0);
   });
 });

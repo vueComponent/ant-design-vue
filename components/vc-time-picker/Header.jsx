@@ -1,6 +1,8 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import moment from 'moment';
+import { withDirectives } from 'vue';
+import antInput from '../_util/antInputDirective';
 
 const Header = {
   inheritAttrs: false,
@@ -159,7 +161,7 @@ const Header = {
     getInput() {
       const { prefixCls, placeholder, inputReadOnly, invalid, str } = this;
       const invalidClass = invalid ? `${prefixCls}-input-invalid` : '';
-      return (
+      return withDirectives(
         <input
           class={`${prefixCls}-input ${invalidClass}`}
           ref={ref => {
@@ -171,7 +173,8 @@ const Header = {
           onInput={this.onInputChange}
           onChange={this.onInputChange}
           readonly={!!inputReadOnly}
-        />
+        />,
+        [[antInput]],
       );
     },
   },

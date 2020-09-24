@@ -1,5 +1,4 @@
 import { mount } from '@vue/test-utils';
-import * as Vue from 'vue';
 import moment from 'moment';
 import MockDate from 'mockdate';
 import { sleep } from '../../../tests/utils';
@@ -178,7 +177,7 @@ describe('Locale Provider', () => {
   });
 
   locales.forEach(locale => {
-    it(`should display the text as ${locale.locale}`, done => {
+    it(`should display the text as ${locale.locale}`, async () => {
       const wrapper = mount(
         {
           render() {
@@ -191,10 +190,8 @@ describe('Locale Provider', () => {
         },
         { sync: false, attachTo: 'body' },
       );
-      Vue.nextTick(() => {
-        expect(wrapper.html()).toMatchSnapshot();
-        done();
-      });
+      await sleep();
+      expect(wrapper.html()).toMatchSnapshot();
     });
   });
 

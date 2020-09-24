@@ -42,7 +42,7 @@ export const SiderProps = {
   theme: PropTypes.oneOf(['light', 'dark']).def('dark'),
   onBreakpoint: PropTypes.func,
   onCollapse: PropTypes.func,
-  'onUpdate:collapse': PropTypes.func,
+  'onUpdate:collapsed': PropTypes.func,
 };
 
 // export interface SiderState {

@@ -5,7 +5,6 @@ import omit from 'omit.js';
 import { cloneElement } from '../_util/vnode';
 import { ConfigConsumerProps } from '../config-provider';
 import { inject } from 'vue';
-import syncWatch from '../_util/syncWatch';
 
 function getNumberArray(num) {
   return num
@@ -47,12 +46,12 @@ export default {
     };
   },
   watch: {
-    count: syncWatch(function() {
+    count() {
       this.lastCount = this.sCount;
       this.setState({
         animateStarted: true,
       });
-    }),
+    },
   },
   updated() {
     const { animateStarted, count } = this;

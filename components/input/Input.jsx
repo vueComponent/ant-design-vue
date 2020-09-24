@@ -1,11 +1,11 @@
-import { inject } from 'vue';
+import { inject, withDirectives } from 'vue';
+import antInputDirective from '../_util/antInputDirective';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import inputProps from './inputProps';
 import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
-import syncWatch from '../_util/syncWatch';
 
 export function fixControlledValue(value) {
   if (typeof value === 'undefined' || value === null) {
@@ -67,9 +67,9 @@ export default {
     };
   },
   watch: {
-    value: syncWatch(function(val) {
+    value(val) {
       this.stateValue = val;
-    }),
+    },
   },
   mounted() {
     this.$nextTick(() => {
@@ -164,7 +164,7 @@ export default {
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }
-      return <input {...inputProps} />;
+      return withDirectives(<input {...inputProps} />, [[antInputDirective]]);
     },
     clearPasswordValueAttribute() {
       // https://github.com/ant-design/ant-design/issues/20541

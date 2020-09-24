@@ -6,7 +6,6 @@ import { hasProp, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import { fixControlledValue, resolveOnChange } from './Input';
 import PropTypes from '../_util/vue-types';
-import syncWatch from '../_util/syncWatch';
 
 const TextAreaProps = {
   ...inputProps,
@@ -32,9 +31,9 @@ export default {
     };
   },
   watch: {
-    value: syncWatch(function(val) {
+    value(val) {
       this.stateValue = val;
-    }),
+    },
   },
   mounted() {
     this.$nextTick(() => {

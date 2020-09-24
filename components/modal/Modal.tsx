@@ -11,7 +11,6 @@ const ButtonType = buttonTypes().type;
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
-import syncWatch from '../_util/syncWatch';
 
 let mousePosition = null;
 // ref: https://github.com/ant-design/ant-design/issues/15795
@@ -107,9 +106,9 @@ export default {
     };
   },
   watch: {
-    visible: syncWatch(function(val) {
+    visible(val) {
       this.sVisible = val;
-    }),
+    },
   },
   setup() {
     return {

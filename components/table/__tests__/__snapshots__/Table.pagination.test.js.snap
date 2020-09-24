@@ -23,13 +23,13 @@ exports[`Table.pagination renders pagination correctly 1`] = `
           </tr>
           </thead>
           <tbody class="ant-table-tbody">
-            <tr data-row-key="0" class="ant-table-row ant-table-row-level-0">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
               <td class="">
                 <!---->
                 <!---->Jack
               </td>
             </tr>
-            <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
+            <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
               <td class="">
                 <!---->
                 <!---->Lucy

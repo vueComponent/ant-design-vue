@@ -10,6 +10,18 @@
 
 ---
 
+## 2.0.0-beta.10
+
+`2020-09-24`
+
+- 🌟 Update Vue dependency to release version
+- 🐞 Fix the problem that Menu does not collapse in Layout [#2819](https://github.com/vueComponent/ant-design-vue/issues/2819)
+- 🐞 Fix a warning issue when switching Tabs [#2865](https://github.com/vueComponent/ant-design-vue/issues/2865)
+- 🐞 Fix the problem that the input box does not trigger the change event when compositionend
+- 🐞 Fix the problem that the Upload button does not disappear [#2884](https://github.com/vueComponent/ant-design-vue/issues/2884)
+- 🐞 Fix upload custom method not working issue [#2837](https://github.com/vueComponent/ant-design-vue/issues/2837)
+- 🐞 Fix some ts type errors
+
 ## 2.0.0-beta.8
 
 - 🐞 Fix ts types error

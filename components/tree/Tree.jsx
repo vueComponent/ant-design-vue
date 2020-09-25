@@ -161,7 +161,11 @@ export default {
             $slots[scopedSlots.switcherIcon] ||
             $slots[slots.switcherIcon] ||
             restProps.switcherIcon,
-          title: $slots[scopedSlots.title] || $slots[slots.title] || restProps[replaceFields.title],
+          title:
+            $slots[scopedSlots.title] ||
+            $slots[slots.title] ||
+            $slots.title ||
+            restProps[replaceFields.title],
           dataRef: item,
           key,
           class: cls,

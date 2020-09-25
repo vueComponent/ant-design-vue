@@ -67,10 +67,12 @@ export default {
     // Selected keys
     state._selectedKeys = props.selectedKeys || props.defaultSelectedKeys || [];
 
+    const defaultFields = { children: 'children', title: 'title', key: 'key' };
+    const replaceFields = { ...defaultFields, ...props.replaceFields };
     // Expanded keys
     if (defaultExpandAll) {
       if (props.treeData) {
-        state._expandedKeys = getFullKeyListByTreeData(props.treeData,props.replaceFields);
+        state._expandedKeys = getFullKeyListByTreeData(props.treeData, replaceFields);
       } else {
         state._expandedKeys = getFullKeyList(this.$slots.default);
       }
@@ -93,6 +95,17 @@ export default {
     },
     selectedKeys(val) {
       this.setState({ _selectedKeys: val });
+    },
+    defaultExpandAll(val) {
+      if (!val) {
+        this.setState({ _expandedKeys: undefined });
+      } else {
+        const { treeData, replaceFields } = this;
+        const defaultFields = { children: 'children', title: 'title', key: 'key' };
+        this.setState({
+          _expandedKeys: getFullKeyListByTreeData(treeData, { ...defaultFields, ...replaceFields }),
+        });
+      }
     },
   },
   methods: {

@@ -10,6 +10,18 @@
 
 ---
 
+## 2.0.0-beta.10
+
+`2020-09-24`
+
+- 🌟 更新 Vue 依赖到 release 版本
+- 🐞 修复 Menu 在 Layout 中不折叠问题 [#2819](https://github.com/vueComponent/ant-design-vue/issues/2819)
+- 🐞 修复 Tabs 切换时出现 warning 问题 [#2865](https://github.com/vueComponent/ant-design-vue/issues/2865)
+- 🐞 修复输入框在 compositionend 时不触发 change 事件问题
+- 🐞 修复 Upload 上传按钮不消失问题 [#2884](https://github.com/vueComponent/ant-design-vue/issues/2884)
+- 🐞 修复 Upload 自定义 method 不生效问题 [#2837](https://github.com/vueComponent/ant-design-vue/issues/2837)
+- 🐞 修复若干 ts 类型错误
+
 ## 2.0.0-beta.8
 
 - 🐞 修复 ts 类型错误

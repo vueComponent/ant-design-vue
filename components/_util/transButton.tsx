@@ -2,8 +2,8 @@
  * Wrap of sub component which need use as Button capacity (like Icon component).
  * This helps accessibility reader to tread as a interactive button to operation.
  */
+import { defineComponent, PropType } from 'vue';
 import KeyCode from './KeyCode';
-import PropTypes from './vue-types';
 
 const inlineStyle = {
   border: 0,
@@ -13,30 +13,30 @@ const inlineStyle = {
   display: 'inline-block',
 };
 
-const TransButton = {
+const TransButton = defineComponent({
   name: 'TransButton',
   inheritAttrs: false,
   props: {
-    noStyle: PropTypes.bool,
-    onClick: PropTypes.func,
+    noStyle: Boolean,
+    onClick: Function as PropType<(e: MouseEvent) => void>,
   },
 
   methods: {
-    onKeyDown(event) {
+    onKeyDown(event: KeyboardEvent) {
       const { keyCode } = event;
       if (keyCode === KeyCode.ENTER) {
         event.preventDefault();
       }
     },
 
-    onKeyUp(event) {
+    onKeyUp(event: KeyboardEvent) {
       const { keyCode } = event;
       if (keyCode === KeyCode.ENTER) {
         this.$emit('click', event);
       }
     },
 
-    setRef(btn) {
+    setRef(btn: HTMLDivElement) {
       this.$refs.div = btn;
     },
 
@@ -67,10 +67,10 @@ const TransButton = {
         onKeyup={this.onKeyUp}
         style={{ ...(!noStyle ? inlineStyle : null) }}
       >
-        {this.$slots.default && this.$slots.default()}
+        {this.$slots.default?.()}
       </div>
     );
   },
-};
+});
 
 export default TransButton;

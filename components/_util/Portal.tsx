@@ -1,10 +1,13 @@
 import PropTypes from './vue-types';
-import { Teleport } from 'vue';
+import { Teleport, defineComponent, PropType } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'Portal',
   props: {
-    getContainer: PropTypes.func.isRequired,
+    getContainer: {
+      type: Function as PropType<(triggerNode: HTMLElement) => HTMLElement>,
+      required: true,
+    },
     children: PropTypes.any.isRequired,
     didUpdate: PropTypes.func,
   },
@@ -45,4 +48,4 @@ export default {
     }
     return null;
   },
-};
+});

@@ -1,5 +1,5 @@
 import { inject, defineComponent, HTMLAttributes, CSSProperties } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { ConfigConsumerProps } from '../config-provider';
 import { rowContextState } from './Row';
 

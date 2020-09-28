@@ -53,8 +53,8 @@ function resolvePropValue(options, props, key, value) {
   return value;
 }
 
-export function getDataAndAriaProps(props) {
-  return Object.keys(props).reduce((memo, key) => {
+export function getDataAndAriaProps(props: Record<string, unknown>) {
+  return Object.keys(props).reduce((memo: Record<string, unknown>, key: string) => {
     if (key.substr(0, 5) === 'data-' || key.substr(0, 5) === 'aria-') {
       memo[key] = props[key];
     }

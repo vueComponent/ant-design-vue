@@ -1,17 +1,25 @@
-export default function getScroll(target, top) {
+export function isWindow(obj: any) {
+  return obj !== null && obj !== undefined && obj === obj.window;
+}
+
+export default function getScroll(target: HTMLElement | Window | Document | null, top: Boolean) {
   if (typeof window === 'undefined') {
     return 0;
   }
 
-  const prop = top ? 'pageYOffset' : 'pageXOffset';
   const method = top ? 'scrollTop' : 'scrollLeft';
-  const isWindow = target === window;
-
-  let ret = isWindow ? target[prop] : target[method];
-  // ie6,7,8 standard mode
-  if (isWindow && typeof ret !== 'number') {
-    ret = window.document.documentElement[method];
+  let result = 0;
+  if (isWindow(target)) {
+    result = (target as Window)[top ? 'pageYOffset' : 'pageXOffset'];
+  } else if (target instanceof Document) {
+    result = target.documentElement[method];
+  } else if (target) {
+    result = (target as HTMLElement)[method];
   }
-
-  return ret;
+  if (target && !isWindow(target) && typeof result !== 'number') {
+    result = ((target as HTMLElement).ownerDocument || (target as Document)).documentElement[
+      method
+    ];
+  }
+  return result;
 }

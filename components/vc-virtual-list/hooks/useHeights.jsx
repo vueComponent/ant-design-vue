@@ -1,16 +1,14 @@
-import { ref } from 'vue';
+import { reactive, ref } from 'vue';
 import { findDOMNode } from '../../_util/props-util';
-import CacheMap from '../utils/CacheMap';
 
 export default function useHeights(getKey, onItemAdd, onItemRemove) {
   const instance = new Map();
-  const heights = new CacheMap();
+  const heights = reactive({});
   let updatedMark = ref(0);
   let heightUpdateId = 0;
   function collectHeight() {
     heightUpdateId += 1;
     const currentId = heightUpdateId;
-
     Promise.resolve().then(() => {
       // Only collect when it's latest call
       if (currentId !== heightUpdateId) return;
@@ -19,9 +17,9 @@ export default function useHeights(getKey, onItemAdd, onItemRemove) {
         if (element && element.offsetParent) {
           const htmlElement = findDOMNode(element);
           const { offsetHeight } = htmlElement;
-          if (heights.get(key) !== offsetHeight) {
+          if (heights[key] !== offsetHeight) {
             changed = true;
-            heights.set(key, htmlElement.offsetHeight);
+            heights[key] = htmlElement.offsetHeight;
           }
         }
       });

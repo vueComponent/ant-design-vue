@@ -93,7 +93,7 @@ const List = {
       const alignedTop = keepInRange(value);
 
       componentRef.current.scrollTop = alignedTop;
-      return alignedTop;
+      state.scrollTop = alignedTop;
     }
 
     // ================================ Legacy ================================
@@ -105,7 +105,7 @@ const List = {
     // diffItemRef.current = diffItem;
 
     // ================================ Height ================================
-    const [setInstance, collectHeight, heights, updatedMark] = useHeights(getKey, null, null);
+    const [setInstance, collectHeight, heights] = useHeights(getKey, null, null);
 
     // ========================== Visible Calculation =========================
     const calRes = computed(() => {
@@ -117,19 +117,16 @@ const List = {
           offset: undefined,
         };
       }
-
       let itemTop = 0;
       let startIndex;
       let startOffset;
       let endIndex;
-      // eslint-disable-next-line no-console
-      console.log('updatedMark', updatedMark);
       const dataLen = state.mergedData.length;
       for (let i = 0; i < dataLen; i += 1) {
         const item = state.mergedData[i];
         const key = getKey(item);
 
-        const cacheHeight = heights.get(key);
+        const cacheHeight = heights[key];
         const currentItemBottom =
           itemTop + (cacheHeight === undefined ? props.itemHeight : cacheHeight);
 

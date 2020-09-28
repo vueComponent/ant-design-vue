@@ -68,7 +68,7 @@ export default {
     this.thumbRef.current.addEventListener('touchstart', this.onMouseDown);
   },
 
-  unmounted() {
+  beforeUnmount() {
     this.removeEvents();
     clearTimeout(this.visibleTimeout);
   },

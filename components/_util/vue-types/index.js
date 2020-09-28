@@ -1,7 +1,7 @@
 import isPlainObject from 'lodash-es/isPlainObject';
 import { toType, getType, isFunction, validateType, isInteger, isArray, warn } from './utils';
 
-const VuePropTypes = {
+const PropTypes = {
   get any() {
     return toType('any', {
       type: null,
@@ -244,7 +244,7 @@ const typeDefaults = () => ({
 
 let currentDefaults = typeDefaults();
 
-Object.defineProperty(VuePropTypes, 'sensibleDefaults', {
+Object.defineProperty(PropTypes, 'sensibleDefaults', {
   enumerable: false,
   set(value) {
     if (value === false) {
@@ -260,4 +260,4 @@ Object.defineProperty(VuePropTypes, 'sensibleDefaults', {
   },
 });
 
-export default VuePropTypes;
+export default PropTypes;

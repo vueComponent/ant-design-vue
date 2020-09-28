@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import demo from '../antdv-demo/docs/input/demo/basic.md';
+import demo from '../components/vc-virtual-list/examples/basic.jsx';
 export default {
   components: {
     demo,

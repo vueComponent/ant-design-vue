@@ -1,6 +1,7 @@
 import classNames from '../_util/classNames';
+import ResizeObserver from '../vc-resize-observer';
 
-const Filter = ({ height, offset, prefixCls }, { slots }) => {
+const Filter = ({ height, offset, prefixCls, onInnerResize }, { slots }) => {
   let outerStyle = {};
 
   let innerStyle = {
@@ -9,7 +10,7 @@ const Filter = ({ height, offset, prefixCls }, { slots }) => {
   };
 
   if (offset !== undefined) {
-    outerStyle = { height, position: 'relative', overflow: 'hidden' };
+    outerStyle = { height: `${height}px`, position: 'relative', overflow: 'hidden' };
 
     innerStyle = {
       ...innerStyle,
@@ -23,16 +24,34 @@ const Filter = ({ height, offset, prefixCls }, { slots }) => {
 
   return (
     <div style={outerStyle}>
-      <div
-        style={innerStyle}
-        class={classNames({
-          [`${prefixCls}-holder-inner`]: prefixCls,
-        })}
+      <ResizeObserver
+        onResize={({ offsetHeight }) => {
+          if (offsetHeight && onInnerResize) {
+            onInnerResize();
+          }
+        }}
       >
-        {slots.default?.()}
-      </div>
+        <div
+          style={innerStyle}
+          class={classNames({
+            [`${prefixCls}-holder-inner`]: prefixCls,
+          })}
+        >
+          {slots.default?.()}
+        </div>
+      </ResizeObserver>
     </div>
   );
+};
+Filter.displayName = 'Filter';
+Filter.inheritAttrs = false;
+Filter.props = {
+  prefixCls: String,
+  /** Virtual filler height. Should be `count * itemMinHeight` */
+  height: Number,
+  /** Set offset of visible items. Should be the top of start item position */
+  offset: Number,
+  onInnerResize: Function,
 };
 
 export default Filter;

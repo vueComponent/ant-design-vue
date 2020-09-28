@@ -482,6 +482,11 @@ const Select = {
         }
         return;
       }
+
+      if (domEvent.type === 'click') {
+        this.removeSelected(getValuePropValue(item));
+      }
+
       if (this.autoClearSearchValue) {
         this.setInputValue('');
       }

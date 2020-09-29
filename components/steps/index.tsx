@@ -1,7 +1,6 @@
 import { App, defineComponent, HTMLAttributes, inject, SetupContext, VNodeTypes } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
-import { getSlot } from '../_util/props-util';
 import VcSteps from '../vc-steps';
 import { ConfigConsumerProps } from '../config-provider';
 
@@ -76,7 +75,7 @@ const Steps = defineComponent({
         canClick: !!(props.onChange || props['onUpdate:current']),
         onChange: handleChange,
       };
-      return <VcSteps {...stepsProps}>{getSlot(this)}</VcSteps>;
+      return <VcSteps {...stepsProps}>{slots.default?.()}</VcSteps>;
     };
   },
 });

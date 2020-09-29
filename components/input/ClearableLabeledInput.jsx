@@ -33,25 +33,30 @@ const ClearableLabeledInput = {
     addonBefore: PropTypes.any,
     addonAfter: PropTypes.any,
     readonly: PropTypes.bool,
+    isFocused: PropTypes.bool,
+    style: PropTypes.object,
   },
   methods: {
     renderClearIcon(prefixCls) {
       const { allowClear, value, disabled, readonly, inputType, handleReset } = this.$props;
-      if (
-        !allowClear ||
-        disabled ||
-        readonly ||
-        value === undefined ||
-        value === null ||
-        value === ''
-      ) {
+      if (!allowClear) {
         return null;
       }
+      const showClearIcon =
+        !disabled && !readonly && value !== undefined && value !== null && value !== '';
       const className =
         inputType === ClearableInputType[0]
           ? `${prefixCls}-textarea-clear-icon`
           : `${prefixCls}-clear-icon`;
-      return <CloseCircleFilled onClick={handleReset} class={className} role="button" />;
+      return (
+        <CloseCircleFilled
+          onClick={handleReset}
+          class={classNames(className, {
+            [`${className}-hidden`]: !showClearIcon,
+          })}
+          role="button"
+        />
+      );
     },
 
     renderSuffix(prefixCls) {
@@ -81,12 +86,13 @@ const ClearableLabeledInput = {
       ) : null;
 
       const affixWrapperCls = classNames(this.$attrs?.class, `${prefixCls}-affix-wrapper`, {
+        [`${prefixCls}-affix-wrapper-focused`]: props.isFocused,
+        [`${prefixCls}-affix-wrapper-disabled`]: props.disabled,
         [`${prefixCls}-affix-wrapper-sm`]: props.size === 'small',
         [`${prefixCls}-affix-wrapper-lg`]: props.size === 'large',
         [`${prefixCls}-affix-wrapper-input-with-clear-btn`]:
           props.suffix && props.allowClear && this.$props.value,
       });
-
       return (
         <span class={affixWrapperCls} style={props.style}>
           {prefix}

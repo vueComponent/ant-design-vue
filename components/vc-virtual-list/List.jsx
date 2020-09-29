@@ -7,7 +7,7 @@ import useFrameWheel from './hooks/useFrameWheel';
 import useMobileTouchMove from './hooks/useMobileTouchMove';
 import useOriginScroll from './hooks/useOriginScroll';
 import PropTypes from '../_util/vue-types';
-import { computed, nextTick, reactive, watchEffect } from 'vue';
+import { computed, nextTick, onBeforeUnmount, reactive, watchEffect } from 'vue';
 import classNames from '../_util/classNames';
 import createRef from '../_util/createRef';
 
@@ -212,23 +212,32 @@ const List = {
       onRawWheel({ preventDefault() {}, deltaY });
       return true;
     });
+    // Firefox only
+    function onMozMousePixelScroll(e) {
+      if (inVirtual.value) {
+        e.preventDefault();
+      }
+    }
+    const removeEventListener = () => {
+      if (componentRef.current) {
+        componentRef.current.removeEventListener('wheel', onRawWheel);
+        componentRef.current.removeEventListener('DOMMouseScroll', onFireFoxScroll);
+        componentRef.current.removeEventListener('MozMousePixelScroll', onMozMousePixelScroll);
+      }
+    };
     watchEffect(() => {
       nextTick(() => {
         if (componentRef.current) {
-          // Firefox only
-          function onMozMousePixelScroll(e) {
-            if (inVirtual.value) {
-              e.preventDefault();
-            }
-          }
-          componentRef.current.removeEventListener('wheel', onRawWheel);
-          componentRef.current.removeEventListener('DOMMouseScroll', onFireFoxScroll);
-          componentRef.current.removeEventListener('MozMousePixelScroll', onMozMousePixelScroll);
+          removeEventListener();
           componentRef.current.addEventListener('wheel', onRawWheel);
           componentRef.current.addEventListener('DOMMouseScroll', onFireFoxScroll);
           componentRef.current.addEventListener('MozMousePixelScroll', onMozMousePixelScroll);
         }
       });
+    });
+
+    onBeforeUnmount(() => {
+      removeEventListener();
     });
 
     // ================================= Ref ==================================

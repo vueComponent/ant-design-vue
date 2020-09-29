@@ -1,3 +1,4 @@
+import { reactive } from 'vue';
 import classNames from '../_util/classNames';
 import createRef from '../_util/createRef';
 import raf from '../_util/raf';
@@ -46,12 +47,12 @@ export default {
       scrollbarRef: createRef(),
       thumbRef: createRef(),
       visibleTimeout: null,
-      state: {
+      state: reactive({
         dragging: false,
         pageY: null,
         startTop: null,
         visible: false,
-      },
+      }),
     };
   },
   watch: {
@@ -79,7 +80,6 @@ export default {
 
       this.visibleTimeout = setTimeout(() => {
         this.state.visible = false;
-        this.$forceUpdate(); // why ?
       }, 2000);
     },
 

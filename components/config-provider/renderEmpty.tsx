@@ -34,4 +34,6 @@ function renderEmpty(componentName?: string) {
   return <RenderEmpty componentName={componentName} />;
 }
 
+export type RenderEmptyHandler = typeof renderEmpty;
+
 export default renderEmpty;

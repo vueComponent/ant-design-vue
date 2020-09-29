@@ -1,73 +1,132 @@
-import { reactive, provide } from 'vue';
+import { reactive, provide, VNodeTypes, PropType, defineComponent, App } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponent, getSlot } from '../_util/props-util';
-import defaultRenderEmpty from './renderEmpty';
-import LocaleProvider, { ANT_MARK } from '../locale-provider';
+import { getComponentFromSetup } from '../_util/props-util';
+import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
+import { CSPConfig } from './context';
+import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
+
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 
-function getWatch(keys = []) {
-  const watch = {};
-  keys.forEach(k => {
-    watch[k] = function(value) {
-      this.configProvider[k] = value;
-    };
-  });
-  return watch;
+export type SizeType = 'small' | 'middle' | 'large' | undefined;
+
+export const configConsumerProps = [
+  'getTargetContainer',
+  'getPopupContainer',
+  'rootPrefixCls',
+  'getPrefixCls',
+  'renderEmpty',
+  'csp',
+  'autoInsertSpaceInButton',
+  'locale',
+  'pageHeader',
+];
+
+export interface ConfigProviderProps {
+  getTargetContainer?: () => HTMLElement;
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+  prefixCls?: string;
+  children?: VNodeTypes;
+  renderEmpty?: RenderEmptyHandler;
+  csp?: CSPConfig;
+  autoInsertSpaceInButton?: boolean;
+  input?: {
+    autoComplete?: string;
+  };
+  locale?: Locale;
+  pageHeader?: {
+    ghost: boolean;
+  };
+  componentSize?: SizeType;
+  direction?: 'ltr' | 'rtl';
+  space?: {
+    size?: SizeType | number;
+  };
+  virtual?: boolean;
+  dropdownMatchSelectWidth?: boolean;
 }
 
-const ConfigProvider = {
+const ConfigProvider = defineComponent({
   name: 'AConfigProvider',
   props: {
-    getPopupContainer: PropTypes.func,
-    prefixCls: PropTypes.string,
-    renderEmpty: PropTypes.func,
-    csp: PropTypes.object,
-    autoInsertSpaceInButton: PropTypes.bool,
-    locale: PropTypes.object,
-    pageHeader: PropTypes.object,
-    transformCellText: PropTypes.func,
-  },
-  created() {
-    this.configProvider = reactive({
-      ...this.$props,
-      getPrefixCls: this.getPrefixCls,
-      renderEmpty: this.renderEmptyComponent,
-    });
-    provide('configProvider', this.configProvider);
-  },
-  watch: {
-    ...getWatch([
-      'prefixCls',
-      'csp',
-      'autoInsertSpaceInButton',
-      'locale',
-      'pageHeader',
-      'transformCellText',
-    ]),
-  },
-  methods: {
-    renderEmptyComponent(name) {
-      const renderEmpty = getComponent(this, 'renderEmpty', {}, false) || defaultRenderEmpty;
-      return renderEmpty(name);
+    getTargetContainer: {
+      type: Function as PropType<() => HTMLElement>,
     },
-    getPrefixCls(suffixCls, customizePrefixCls) {
-      const { prefixCls = 'ant' } = this.$props;
+    getPopupContainer: {
+      type: Function as PropType<(triggerNode: HTMLElement) => HTMLElement>,
+    },
+    prefixCls: PropTypes.string,
+    getPrefixCls: {
+      type: Function as PropType<(suffixCls?: string, customizePrefixCls?: string) => string>,
+    },
+    renderEmpty: {
+      type: Function as PropType<RenderEmptyHandler>,
+    },
+    csp: {
+      type: Object as PropType<CSPConfig>,
+    },
+    autoInsertSpaceInButton: PropTypes.bool,
+    locale: {
+      type: Object as PropType<Locale>,
+    },
+    pageHeader: {
+      type: Object as PropType<{ ghost: boolean }>,
+    },
+    componentSize: {
+      type: Object as PropType<SizeType>,
+    },
+    direction: {
+      type: String as PropType<'ltr' | 'rtl'>,
+    },
+    space: {
+      type: [String, Number] as PropType<SizeType | number>,
+    },
+    virtual: PropTypes.bool,
+    dropdownMatchSelectWidth: PropTypes.bool,
+  },
+  setup(props, { slots }) {
+    const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
+      const { prefixCls = 'ant' } = props;
       if (customizePrefixCls) return customizePrefixCls;
       return suffixCls ? `${prefixCls}-${suffixCls}` : prefixCls;
-    },
-    renderProvider(legacyLocale) {
+    };
+
+    const renderEmptyComponent = (name?: string) => {
+      const renderEmpty = (getComponentFromSetup(props, slots, 'renderEmpty') ||
+        defaultRenderEmpty) as RenderEmptyHandler;
+      return renderEmpty(name);
+    };
+
+    const getPrefixClsWrapper = (suffixCls: string, customizePrefixCls?: string) => {
+      const { prefixCls } = props;
+
+      if (customizePrefixCls) return customizePrefixCls;
+
+      const mergedPrefixCls = prefixCls || getPrefixCls('');
+
+      return suffixCls ? `${mergedPrefixCls}-${suffixCls}` : mergedPrefixCls;
+    };
+
+    const configProvider = reactive({
+      ...props,
+      getPrefixCls: getPrefixClsWrapper,
+      renderEmpty: renderEmptyComponent,
+    });
+
+    provide('configProvider', configProvider);
+
+    const renderProvider = (legacyLocale: Locale) => {
       return (
-        <LocaleProvider locale={this.locale || legacyLocale} _ANT_MARK__={ANT_MARK}>
-          {getSlot(this)}
+        <LocaleProvider locale={props.locale || legacyLocale} _ANT_MARK__={ANT_MARK}>
+          {slots.default?.()}
         </LocaleProvider>
       );
-    },
-  },
+    };
 
-  render() {
-    return <LocaleReceiver children={(_, __, legacyLocale) => this.renderProvider(legacyLocale)} />;
+    return () => (
+      <LocaleReceiver children={(_, __, legacyLocale) => renderProvider(legacyLocale as Locale)} />
+    );
   },
-};
+});
 
 export const ConfigConsumerProps = {
   getPrefixCls: (suffixCls: string, customizePrefixCls?: string) => {
@@ -78,7 +137,7 @@ export const ConfigConsumerProps = {
 };
 
 /* istanbul ignore next */
-ConfigProvider.install = function(app) {
+ConfigProvider.install = function(app: App) {
   app.component(ConfigProvider.name, ConfigProvider);
 };
 

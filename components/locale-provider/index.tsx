@@ -56,6 +56,22 @@ const LocaleProvider = defineComponent({
       },
     };
   },
+  setup(props) {
+    warning(
+      props._ANT_MARK__ === ANT_MARK,
+      'LocaleProvider',
+      '`LocaleProvider` is deprecated. Please use `locale` with `ConfigProvider` instead',
+    );
+    const data = {
+      antLocale: {
+        ...props.locale,
+        exist: true,
+      },
+      _ANT_MARK__: ANT_MARK,
+    };
+    provide('localeData', data);
+    return data;
+  },
   watch: {
     locale(val) {
       this.antLocale = {
@@ -67,7 +83,6 @@ const LocaleProvider = defineComponent({
     },
   },
   created() {
-    provide('localeData', this.$data);
     const { locale } = this;
     setMomentLocale(locale);
     changeConfirmLocale(locale && locale.Modal);

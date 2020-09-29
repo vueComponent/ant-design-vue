@@ -3,12 +3,11 @@ import Item from './Item';
 import ScrollBar from './ScrollBar';
 import useHeights from './hooks/useHeights';
 import useScrollTo from './hooks/useScrollTo';
-// import useDiffItem from './hooks/useDiffItem';
 import useFrameWheel from './hooks/useFrameWheel';
 import useMobileTouchMove from './hooks/useMobileTouchMove';
 import useOriginScroll from './hooks/useOriginScroll';
 import PropTypes from '../_util/vue-types';
-import { computed, nextTick, reactive, ref, watchEffect } from 'vue';
+import { computed, nextTick, reactive, watchEffect } from 'vue';
 import classNames from '../_util/classNames';
 import createRef from '../_util/createRef';
 
@@ -40,7 +39,7 @@ const ListProps = {
   height: PropTypes.number,
   itemHeight: PropTypes.number,
   /** If not match virtual scroll condition, Set List still use height of container. */
-  fullHeight: PropTypes.bool,
+  fullHeight: PropTypes.bool.def(true),
   itemKey: PropTypes.any,
   component: PropTypes.any,
   /** Set `false` will always use real scroll instead of virtual one */
@@ -92,17 +91,12 @@ const List = {
 
       const alignedTop = keepInRange(value);
 
-      componentRef.current.scrollTop = alignedTop;
+      if (componentRef.current) {
+        componentRef.current.scrollTop = alignedTop;
+      }
+
       state.scrollTop = alignedTop;
     }
-
-    // ================================ Legacy ================================
-    // Put ref here since the range is generate by follow
-    const rangeRef = ref({ start: 0, end: state.mergedData.length });
-
-    // const diffItemRef = ref();
-    // const [diffItem] = useDiffItem(mergedData, getKey);
-    // diffItemRef.current = diffItem;
 
     // ================================ Height ================================
     const [setInstance, collectHeight, heights] = useHeights(getKey, null, null);
@@ -130,7 +124,6 @@ const List = {
         const currentItemBottom =
           itemTop + (cacheHeight === undefined ? props.itemHeight : cacheHeight);
 
-        // Check item top in the range
         if (currentItemBottom >= state.scrollTop && startIndex === undefined) {
           startIndex = i;
           startOffset = itemTop;
@@ -156,8 +149,6 @@ const List = {
 
       // Give cache to improve scroll experience
       endIndex = Math.min(endIndex + 1, state.mergedData.length);
-      rangeRef.value.start = startIndex;
-      rangeRef.value.end = endIndex;
       return {
         scrollHeight: itemTop,
         start: startIndex,
@@ -166,7 +157,7 @@ const List = {
       };
     });
     // =============================== In Range ===============================
-    const maxScrollHeight = computed(() => calRes.scrollHeight - props.height);
+    const maxScrollHeight = computed(() => calRes.value.scrollHeight - props.height);
 
     function keepInRange(newScrollTop) {
       let newTop = Math.max(newScrollTop, 0);
@@ -223,29 +214,29 @@ const List = {
     });
     watchEffect(() => {
       nextTick(() => {
-        componentRef.current.removeEventListener('wheel', onRawWheel);
-        componentRef.current.removeEventListener('DOMMouseScroll', onFireFoxScroll);
-        componentRef.current.removeEventListener('MozMousePixelScroll', onMozMousePixelScroll);
-
-        // Firefox only
-        function onMozMousePixelScroll(e) {
-          if (inVirtual.value) {
-            e.preventDefault();
+        if (componentRef.current) {
+          // Firefox only
+          function onMozMousePixelScroll(e) {
+            if (inVirtual.value) {
+              e.preventDefault();
+            }
           }
+          componentRef.current.removeEventListener('wheel', onRawWheel);
+          componentRef.current.removeEventListener('DOMMouseScroll', onFireFoxScroll);
+          componentRef.current.removeEventListener('MozMousePixelScroll', onMozMousePixelScroll);
+          componentRef.current.addEventListener('wheel', onRawWheel);
+          componentRef.current.addEventListener('DOMMouseScroll', onFireFoxScroll);
+          componentRef.current.addEventListener('MozMousePixelScroll', onMozMousePixelScroll);
         }
-
-        componentRef.current.addEventListener('wheel', onRawWheel);
-        componentRef.current.addEventListener('DOMMouseScroll', onFireFoxScroll);
-        componentRef.current.addEventListener('MozMousePixelScroll', onMozMousePixelScroll);
       });
     });
 
     // ================================= Ref ==================================
     const scrollTo = useScrollTo(
       componentRef,
-      state.mergedData,
+      state,
       heights,
-      props.itemHeight,
+      props,
       getKey,
       collectHeight,
       syncScrollTop,
@@ -288,7 +279,7 @@ const List = {
       height,
       itemHeight,
       // eslint-disable-next-line no-unused-vars
-      fullHeight = true,
+      fullHeight,
       data,
       itemKey,
       virtual,

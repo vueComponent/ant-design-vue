@@ -61,14 +61,11 @@ export default function useMobileTouchMove(inVirtual, listRef, callback) {
     }
   };
   watch(inVirtual, val => {
+    listRef.current.removeEventListener('touchstart', onTouchStart);
+    cleanUpEvents();
+    clearInterval(interval);
     if (val.value) {
       listRef.current.addEventListener('touchstart', onTouchStart);
     }
-
-    return () => {
-      listRef.current.removeEventListener('touchstart', onTouchStart);
-      cleanUpEvents();
-      clearInterval(interval);
-    };
   });
 }

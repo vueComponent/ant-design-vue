@@ -1,5 +1,3 @@
-import { reactive } from 'vue';
-
 export default (isScrollAtTop, isScrollAtBottom) => {
   // Do lock for a wheel when scrolling
   let lock = false;
@@ -13,21 +11,12 @@ export default (isScrollAtTop, isScrollAtBottom) => {
       lock = false;
     }, 50);
   }
-
-  // Pass to ref since global add is in closure
-  const scrollPingRef = reactive({
-    top: isScrollAtTop.value,
-    bottom: isScrollAtBottom.value,
-  });
-  // scrollPingRef.value.top = isScrollAtTop;
-  // scrollPingRef.value.bottom = isScrollAtBottom;
-
   return (deltaY, smoothOffset = false) => {
     const originScroll =
       // Pass origin wheel when on the top
-      (deltaY < 0 && scrollPingRef.top) ||
+      (deltaY < 0 && isScrollAtTop.value) ||
       // Pass origin wheel when on the bottom
-      (deltaY > 0 && scrollPingRef.bottom);
+      (deltaY > 0 && isScrollAtBottom.value);
 
     if (smoothOffset && originScroll) {
       // No need lock anymore when it's smooth offset from touchMove interval

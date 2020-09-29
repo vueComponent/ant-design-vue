@@ -4,9 +4,9 @@ import raf from '../../_util/raf';
 
 export default function useScrollTo(
   containerRef,
-  data,
+  state,
   heights,
-  itemHeight,
+  props,
   getKey,
   collectHeight,
   syncScrollTop,
@@ -15,7 +15,8 @@ export default function useScrollTo(
 
   return arg => {
     raf.cancel(scroll);
-
+    const data = state.mergedData;
+    const itemHeight = props.itemHeight;
     if (typeof arg === 'number') {
       syncScrollTop(arg);
     } else if (arg && typeof arg === 'object') {

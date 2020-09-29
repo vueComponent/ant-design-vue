@@ -76,8 +76,10 @@ export default {
     delayHidden() {
       clearTimeout(this.visibleTimeout);
       this.state.visible = true;
+
       this.visibleTimeout = setTimeout(() => {
         this.state.visible = false;
+        this.$forceUpdate(); // why ?
       }, 2000);
     },
 
@@ -191,7 +193,6 @@ export default {
     const { prefixCls } = this.$props;
     const spinHeight = this.getSpinHeight() + 'px';
     const top = this.getTop() + 'px';
-
     return (
       <div
         ref={this.scrollbarRef}
@@ -202,7 +203,7 @@ export default {
           bottom: 0,
           right: 0,
           position: 'absolute',
-          // display: visible ? null : 'none',
+          display: visible ? null : 'none',
         }}
         onMousedown={this.onContainerMouseDown}
         onMousemove={this.delayHidden}

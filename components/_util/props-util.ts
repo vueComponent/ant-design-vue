@@ -1,4 +1,14 @@
-import { isVNode, Fragment, Comment, Text, h, VNode, ComponentPublicInstance, Slots } from 'vue';
+import {
+  isVNode,
+  Fragment,
+  Comment,
+  Text,
+  h,
+  VNode,
+  ComponentPublicInstance,
+  Slots,
+  VNodeTypes,
+} from 'vue';
 import isPlainObject from 'lodash-es/isPlainObject';
 import { camelize, hyphenate, isOn, resolvePropValue } from './util';
 import isValid from './isValid';
@@ -155,14 +165,14 @@ function getComponentFromSetup<T, TKey extends keyof T>(
   name: TKey,
   options?: unknown,
   execute?: true,
-): T[TKey] | VNode | undefined;
+): T[TKey] | VNodeTypes | undefined;
 function getComponentFromSetup<T, TKey extends keyof T>(
   props: { [P in TKey]: T[P] },
   slots: Slots,
   name: TKey,
   options?: unknown,
   execute?: false,
-): T[TKey] | ((options?: unknown) => VNode) | undefined;
+): T[TKey] | ((options?: unknown) => VNodeTypes) | undefined;
 function getComponentFromSetup<T>(
   props: { [P in keyof T]: T[P] },
   slots: Slots,

@@ -117,7 +117,7 @@ const ConfigProvider = defineComponent({
     };
 
     const renderEmptyComponent = (name?: string) => {
-      const renderEmpty = (getComponentFromSetup(props, slots, 'renderEmpty') ||
+      const renderEmpty = (getComponentFromSetup(props, slots, 'renderEmpty', undefined, false) ||
         defaultRenderEmpty) as RenderEmptyHandler;
       return renderEmpty(name);
     };

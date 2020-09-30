@@ -149,14 +149,33 @@ const getOptionProps = (instance: ComponentPublicInstance) => {
   return res;
 };
 
-const getComponentFromSetup = (
-  props: Record<string, unknown>,
+function getComponentFromSetup<T, TKey extends keyof T>(
+  props: { [P in TKey]: T[P] },
+  slots: Slots,
+  name: TKey,
+  options?: unknown,
+  execute?: true,
+): T[TKey] | VNode | undefined;
+function getComponentFromSetup<T, TKey extends keyof T>(
+  props: { [P in TKey]: T[P] },
+  slots: Slots,
+  name: TKey,
+  options?: unknown,
+  execute?: false,
+): T[TKey] | ((options?: unknown) => VNode) | undefined;
+function getComponentFromSetup<T>(
+  props: { [P in keyof T]: T[P] },
   slots: Slots,
   name: string,
   options?: unknown,
-) => {
-  return props[name] ? props[name] : slots[name]?.(options);
-};
+  execute: boolean = true,
+) {
+  if (name in props) {
+    return props[name as keyof T];
+  } else {
+    return execute ? slots[name]?.(options) : slots[name];
+  }
+}
 
 const getComponent = (
   instance: ComponentPublicInstance,

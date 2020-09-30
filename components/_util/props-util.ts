@@ -1,4 +1,4 @@
-import { isVNode, Fragment, Comment, Text, h, VNode, ComponentPublicInstance } from 'vue';
+import { isVNode, Fragment, Comment, Text, h, VNode, ComponentPublicInstance, Slots } from 'vue';
 import isPlainObject from 'lodash-es/isPlainObject';
 import { camelize, hyphenate, isOn, resolvePropValue } from './util';
 import isValid from './isValid';
@@ -148,6 +148,16 @@ const getOptionProps = (instance: ComponentPublicInstance) => {
   }
   return res;
 };
+
+const getComponentFromSetup = (
+  props: Record<string, unknown>,
+  slots: Slots,
+  name: string,
+  options?: unknown,
+) => {
+  return props[name] ? props[name] : slots[name]?.(options);
+};
+
 const getComponent = (
   instance: ComponentPublicInstance,
   prop: string = 'default',
@@ -403,5 +413,6 @@ export {
   getAllChildren,
   findDOMNode,
   flattenChildren,
+  getComponentFromSetup,
 };
 export default hasProp;

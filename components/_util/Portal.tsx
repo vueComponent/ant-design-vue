@@ -11,9 +11,8 @@ export default defineComponent({
     children: PropTypes.any.isRequired,
     didUpdate: PropTypes.func,
   },
-  data() {
+  beforeCreate() {
     this._container = null;
-    return {};
   },
   mounted() {
     this.createContainer();

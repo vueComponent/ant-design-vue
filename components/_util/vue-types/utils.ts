@@ -63,7 +63,8 @@ export const isArray =
  * @param {any} value - Value to check
  * @returns {boolean}
  */
-export const isFunction = (value: any) => toString.call(value) === '[object Function]';
+export const isFunction = (value: any): value is (...args: any[]) => any =>
+  toString.call(value) === '[object Function]';
 
 /**
  * Adds a `def` method to the object returning a new object with passed in argument as `default` property

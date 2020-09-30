@@ -99,7 +99,7 @@ const getSlot = (self, name = 'default', options = {}) => {
       return [];
     }
   } else {
-    let res = self.$slots[name] && self.$slots[name](options);
+    const res = self.$slots[name] && self.$slots[name](options);
     return flattenChildren(res);
   }
 };
@@ -160,9 +160,9 @@ const getComponentFromSetup = (
 
 const getComponent = (
   instance: ComponentPublicInstance,
-  prop: string = 'default',
+  prop = 'default',
   options = instance,
-  execute: boolean = true,
+  execute = true,
 ) => {
   let com = undefined;
   if (instance.$) {
@@ -274,7 +274,7 @@ const getAttrs = ele => {
 };
 
 const getKey = ele => {
-  let key = ele.key;
+  const key = ele.key;
   return key;
 };
 
@@ -308,7 +308,7 @@ export function getListeners(context) {
 }
 export function getClass(ele) {
   const props = (isVNode(ele) ? ele.props : ele.$attrs) || {};
-  let tempCls = props.class || {};
+  const tempCls = props.class || {};
   let cls = {};
   if (typeof tempCls === 'string') {
     tempCls.split(' ').forEach(c => {
@@ -377,7 +377,7 @@ const initDefaultProps = <T>(
   defaultProps: { [K in Extract<keyof T, string>]?: any },
 ): T => {
   Object.keys(defaultProps).forEach((k: Extract<keyof T, string>) => {
-    let prop = propTypes[k] as PropOptions<any>;
+    const prop = propTypes[k] as PropOptions<any>;
     if (prop) {
       prop.default = defaultProps[k];
     } else {

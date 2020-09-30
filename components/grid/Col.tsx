@@ -99,7 +99,7 @@ export default defineComponent<ColProps>({
         className,
         sizeClassObj,
       );
-      let mergedStyle: CSSProperties = {};
+      let mergedStyle: CSSProperties = { ...(style as CSSProperties) };
       if (gutter) {
         mergedStyle = {
           ...(gutter[0]! > 0

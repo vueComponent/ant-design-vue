@@ -4,11 +4,11 @@ interface RafMap {
   [id: number]: number;
 }
 
-let id: number = 0;
+let id = 0;
 const ids: RafMap = {};
 
 // Support call raf with delay specified frame
-export default function wrapperRaf(callback: () => void, delayFrames: number = 1): number {
+export default function wrapperRaf(callback: () => void, delayFrames = 1): number {
   const myId = id++;
   let restFrames = delayFrames;
 

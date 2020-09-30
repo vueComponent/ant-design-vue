@@ -21,8 +21,12 @@
       }
     },
     {
-      "files": ["*.ts"],
-      "extends": ["@vue/typescript/recommended"],
+      "files": ["*.ts", "*.tsx"],
+      "extends": [
+        "@vue/typescript/recommended",
+        "@vue/prettier",
+        "@vue/prettier/@typescript-eslint"
+      ],
       "rules": {
         "@typescript-eslint/no-explicit-any": 0,
         "@typescript-eslint/ban-types": 0,

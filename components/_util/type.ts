@@ -1,3 +1,5 @@
+import { PropType } from 'vue';
+
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 // https://stackoverflow.com/questions/46176165/ways-to-get-string-literal-type-of-array-values-without-enum-overhead
 export const tuple = <T extends string[]>(...args: T) => args;
@@ -20,3 +22,13 @@ export type StringKeyOf<T> = Extract<keyof T, string>;
 export type EventHandlers<E> = {
   [K in StringKeyOf<E>]?: E[K] extends Function ? E[K] : (payload: E[K]) => void;
 };
+
+export type Data = Record<string, unknown>;
+
+export declare type DefaultFactory<T> = (props: Data) => T | null | undefined;
+export declare interface PropOptions<T = any, D = T> {
+  type?: PropType<T> | true | null;
+  required?: boolean;
+  default?: D | DefaultFactory<D> | null | undefined | object;
+  validator?(value: unknown): boolean;
+}

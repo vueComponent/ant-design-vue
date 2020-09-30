@@ -1,6 +1,6 @@
-let cached;
+let cached: number | undefined;
 
-export default function getScrollBarSize(fresh) {
+export default function getScrollBarSize(fresh?: boolean) {
   if (fresh || cached === undefined) {
     const inner = document.createElement('div');
     inner.style.width = '100%';
@@ -10,8 +10,8 @@ export default function getScrollBarSize(fresh) {
     const outerStyle = outer.style;
 
     outerStyle.position = 'absolute';
-    outerStyle.top = 0;
-    outerStyle.left = 0;
+    outerStyle.top = '0';
+    outerStyle.left = '0';
     outerStyle.pointerEvents = 'none';
     outerStyle.visibility = 'hidden';
     outerStyle.width = '200px';

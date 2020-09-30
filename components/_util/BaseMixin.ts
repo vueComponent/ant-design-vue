@@ -2,7 +2,7 @@ import { getOptionProps } from './props-util';
 
 export default {
   methods: {
-    setState(state = {}, callback) {
+    setState(state = {}, callback: () => any) {
       let newState = typeof state === 'function' ? state(this.$data, this.$props) : state;
       if (this.getDerivedStateFromProps) {
         const s = this.getDerivedStateFromProps(getOptionProps(this), {
@@ -25,6 +25,7 @@ export default {
     },
     __emit() {
       // 直接调用事件，底层组件不需要vueTool记录events
+      // eslint-disable-next-line prefer-rest-params
       const args = [].slice.call(arguments, 0);
       let eventName = args[0];
       eventName = `on${eventName[0].toUpperCase()}${eventName.substring(1)}`;

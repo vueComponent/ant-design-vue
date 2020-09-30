@@ -1,25 +1,31 @@
-function onCompositionStart(e) {
-  e.target.composing = true;
+function onCompositionStart(e: Event) {
+  (e.target as any).composing = true;
 }
 
-function onCompositionEnd(e) {
-  // prevent triggering an input event for no reason
-  if (!e.target.composing) return;
-  e.target.composing = false;
-  trigger(e.target, 'input');
+function onCompositionEnd(e: Event) {
+  const target = e.target as any;
+  if (target.composing) {
+    target.composing = false;
+    trigger(target, 'input');
+  }
 }
 
-function trigger(el, type) {
+function trigger(el: HTMLElement, type: string) {
   const e = document.createEvent('HTMLEvents');
   e.initEvent(type, true, true);
   el.dispatchEvent(e);
 }
 
-export function addEventListener(el, event, handler, options) {
+export function addEventListener(
+  el: Element,
+  event: string,
+  handler: EventListener,
+  options?: EventListenerOptions,
+) {
   el.addEventListener(event, handler, options);
 }
 const antInput = {
-  created(el, binding) {
+  created(el: Element, binding: { modifiers: { lazy: any } }) {
     if (!binding.modifiers || !binding.modifiers.lazy) {
       addEventListener(el, 'compositionstart', onCompositionStart);
       addEventListener(el, 'compositionend', onCompositionEnd);

@@ -2,16 +2,17 @@ import { isVNode, Fragment, Comment, Text, h, VNode, ComponentPublicInstance, Sl
 import isPlainObject from 'lodash-es/isPlainObject';
 import { camelize, hyphenate, isOn, resolvePropValue } from './util';
 import isValid from './isValid';
+import { Data, PropOptions } from './type';
 // function getType(fn) {
 //   const match = fn && fn.toString().match(/^\s*function (\w+)/);
 //   return match ? match[1] : '';
 // }
 
-const splitAttrs = attrs => {
+const splitAttrs = (attrs: Data) => {
   const allAttrs = Object.keys(attrs);
-  const eventAttrs = {};
-  const onEvents = {};
-  const extraAttrs = {};
+  const eventAttrs: Data = {};
+  const onEvents: Data = {};
+  const extraAttrs: Data = {};
   for (let i = 0, l = allAttrs.length; i < l; i++) {
     const key = allAttrs[i];
     if (isOn(key)) {
@@ -23,8 +24,8 @@ const splitAttrs = attrs => {
   }
   return { onEvents, events: eventAttrs, extraAttrs };
 };
-const parseStyleText = (cssText = '', camel) => {
-  const res = {};
+const parseStyleText = (cssText = '', camel: boolean) => {
+  const res: Record<string, string> = {};
   const listDelimiter = /;(?![^(]*\))/g;
   const propertyDelimiter = /:(.+)/;
   cssText.split(listDelimiter).forEach(function(item) {
@@ -39,7 +40,7 @@ const parseStyleText = (cssText = '', camel) => {
   return res;
 };
 
-const hasProp = (instance: VNode, prop: string) => {
+const hasProp = (instance: ComponentPublicInstance, prop: string) => {
   return prop in getOptionProps(instance);
 };
 // 重构后直接使用 hasProp 替换
@@ -288,7 +289,7 @@ export function getEvents(ele = {}, on = true) {
   return splitAttrs(props)[on ? 'onEvents' : 'events'];
 }
 
-export function getEvent(child, event) {
+export function getEvent(child: VNode, event: string) {
   return child.props && child.props[event];
 }
 
@@ -374,10 +375,10 @@ export function filterEmpty(children: VNode[] = []) {
 }
 const initDefaultProps = <T>(
   propTypes: T,
-  defaultProps: { [K in Extract<keyof T, string>]?: any },
+  defaultProps: { [K in Extract<keyof T, string>]?: T[K] },
 ): T => {
   Object.keys(defaultProps).forEach((k: Extract<keyof T, string>) => {
-    const prop = propTypes[k] as PropOptions<any>;
+    const prop = propTypes[k] as PropOptions;
     if (prop) {
       prop.default = defaultProps[k];
     } else {

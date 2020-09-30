@@ -33,7 +33,7 @@ export const noop = () => {};
  * @param {object} obj - Object
  * @param {string} prop - Property to check
  */
-export const has = (obj: any, prop: any) => hasOwn.call(obj, prop);
+export const has = (obj: object, prop: string) => hasOwn.call(obj, prop);
 
 /**
  * Determines whether the passed value is an integer. Uses `Number.isInteger` if available
@@ -66,7 +66,8 @@ export const isArray =
  * @param {any} value - Value to check
  * @returns {boolean}
  */
-export const isFunction = (value: any) => toString.call(value) === '[object Function]';
+export const isFunction = (value: unknown): value is Function =>
+  toString.call(value) === '[object Function]';
 
 /**
  * Adds a `def` method to the object returning a new object with passed in argument as `default` property

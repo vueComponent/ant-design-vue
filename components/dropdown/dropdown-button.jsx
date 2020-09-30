@@ -7,7 +7,7 @@ import Dropdown from './dropdown';
 import PropTypes from '../_util/vue-types';
 import { hasProp, getComponent, getSlot } from '../_util/props-util';
 import getDropdownProps from './getDropdownProps';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 
 const ButtonTypesProps = buttonTypes();
@@ -36,7 +36,7 @@ export default {
   props: DropdownButtonProps,
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   created() {

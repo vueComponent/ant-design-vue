@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getComponent } from '../_util/props-util';
 import classNames from '../_util/classNames';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 function noop() {}
 
 export const AnchorLinkProps = {
@@ -26,7 +26,7 @@ export default {
         $data: {},
       }),
       antAnchorContext: inject('antAnchorContext', {}),
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   watch: {

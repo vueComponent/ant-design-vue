@@ -3,7 +3,7 @@ import Wave from '../_util/wave';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';
 import { getSlot, getComponent } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 // eslint-disable-next-line no-console
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
@@ -15,7 +15,7 @@ export default {
   props,
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

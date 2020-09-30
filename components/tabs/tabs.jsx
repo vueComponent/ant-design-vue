@@ -15,7 +15,7 @@ import {
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import isValid from '../_util/isValid';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import TabBar from './TabBar';
 
 export default {
@@ -45,7 +45,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   mounted() {

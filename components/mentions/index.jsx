@@ -6,7 +6,7 @@ import VcMentions from '../vc-mentions';
 import { mentionsProps } from '../vc-mentions/src/mentionsProps';
 import Spin from '../spin';
 import BaseMixin from '../_util/BaseMixin';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
 
 const { Option } = VcMentions;
@@ -61,7 +61,7 @@ const Mentions = {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

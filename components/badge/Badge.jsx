@@ -6,7 +6,7 @@ import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import getTransitionProps from '../_util/getTransitionProps';
 import isNumeric from '../_util/isNumeric';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { inject, Transition } from 'vue';
 
 const BadgeProps = {
@@ -38,7 +38,7 @@ export default {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   methods: {

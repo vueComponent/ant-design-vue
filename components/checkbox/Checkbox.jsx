@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import VcCheckbox from '../vc-checkbox';
 import hasProp, { getOptionProps, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 function noop() {}
 
@@ -29,7 +29,7 @@ export default {
 
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
       checkboxGroupContext: inject('checkboxGroupContext', undefined),
     };
   },

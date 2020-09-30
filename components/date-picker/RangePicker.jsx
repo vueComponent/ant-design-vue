@@ -6,7 +6,7 @@ import classNames from '../_util/classNames';
 import shallowequal from '../_util/shallowequal';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import Tag from '../tag';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import interopDefault from '../_util/interopDefault';
 import { RangePickerProps } from './interface';
 import { hasProp, getOptionProps, initDefaultProps, getComponent } from '../_util/props-util';
@@ -72,7 +72,7 @@ export default {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

@@ -1,7 +1,7 @@
 import { nextTick, inject, defineComponent } from 'vue';
 import TransitionEvents from './css-animation/Event';
 import raf from './raf';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { findDOMNode } from './props-util';
 let styleForPesudo: HTMLStyleElement | null;
 
@@ -33,7 +33,7 @@ export default defineComponent({
     });
   },
   setup() {
-    const configProvider = inject('configProvider', ConfigConsumerProps);
+    const configProvider = inject('configProvider', defaultConfigProvider);
     return {
       configProvider,
     };

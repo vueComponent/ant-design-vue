@@ -4,7 +4,7 @@ import classNames from '../_util/classNames';
 import { TreeSelectProps } from './interface';
 import warning from '../_util/warning';
 import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export { TreeData, TreeSelectProps } from './interface';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
@@ -28,7 +28,7 @@ const TreeSelect = {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   created() {

@@ -6,7 +6,7 @@ import VcDatePicker from '../vc-calendar/src/Picker';
 import classNames from '../_util/classNames';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import CalendarOutlined from '@ant-design/icons-vue/CalendarOutlined';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import interopDefault from '../_util/interopDefault';
 import BaseMixin from '../_util/BaseMixin';
 import {
@@ -34,7 +34,7 @@ export default function createPicker(TheCalendar, props) {
     mixins: [BaseMixin],
     setup() {
       return {
-        configProvider: inject('configProvider', ConfigConsumerProps),
+        configProvider: inject('configProvider', defaultConfigProvider),
       };
     },
     data() {

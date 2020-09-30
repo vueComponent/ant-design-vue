@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, hasProp } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import Avatar, { SkeletonAvatarProps } from './Avatar';
 import Title, { SkeletonTitleProps } from './Title';
 import Paragraph, { SkeletonParagraphProps } from './Paragraph';
@@ -71,7 +71,7 @@ const Skeleton = {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   render() {

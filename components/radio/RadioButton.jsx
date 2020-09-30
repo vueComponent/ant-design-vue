@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import Radio from './Radio';
 import { getOptionProps, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export default {
   name: 'ARadioButton',
@@ -10,7 +10,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
       radioGroupContext: inject('radioGroupContext', {}),
     };
   },

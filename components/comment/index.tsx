@@ -1,6 +1,6 @@
 import { inject, VNodeTypes, CSSProperties, App, SetupContext } from 'vue';
 import classNames from '../_util/classNames';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export interface CommentProps {
   /** List of action items rendered below the comment content */
@@ -31,7 +31,7 @@ const Comment = (
   }: CommentProps,
   { slots }: SetupContext,
 ) => {
-  const { getPrefixCls } = inject('configProvider', ConfigConsumerProps);
+  const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
 
   const renderNested = (prefixCls: string, nestedChildren: any) => {
     return <div class={classNames(`${prefixCls}-nested`)}>{nestedChildren}</div>;

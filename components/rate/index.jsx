@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import VcRate from '../vc-rate';
 import StarFilled from '@ant-design/icons-vue/StarFilled';
 import Tooltip from '../tooltip';
@@ -25,7 +25,7 @@ const Rate = {
   props: RateProps,
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   methods: {

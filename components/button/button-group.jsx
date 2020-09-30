@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import { filterEmpty, getSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 const ButtonGroupProps = {
   prefixCls: PropTypes.string,
@@ -16,7 +16,7 @@ export default {
   name: 'AButtonGroup',
   props: ButtonGroupProps,
   setup() {
-    const configProvider = inject('configProvider', ConfigConsumerProps);
+    const configProvider = inject('configProvider', defaultConfigProvider);
     return {
       configProvider,
     };

@@ -4,7 +4,7 @@ import Select, { AbstractSelectProps, SelectValue } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';
 import PropTypes from '../_util/vue-types';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
 
 // const DataSourceItemObject = PropTypes.shape({
@@ -59,7 +59,7 @@ const AutoComplete = {
   // },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   created() {

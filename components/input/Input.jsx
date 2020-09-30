@@ -4,7 +4,7 @@ import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import inputProps from './inputProps';
 import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
 
 export function fixControlledValue(value) {
@@ -56,7 +56,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

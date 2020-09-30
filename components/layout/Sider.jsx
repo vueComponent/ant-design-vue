@@ -10,7 +10,7 @@ import {
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import isNumeric from '../_util/isNumeric';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import BarsOutlined from '@ant-design/icons-vue/BarsOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
@@ -109,7 +109,7 @@ export default {
   setup() {
     return {
       siderHook: inject('siderHook', {}),
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
 

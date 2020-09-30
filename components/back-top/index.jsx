@@ -6,7 +6,7 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 import getScroll from '../_util/getScroll';
 import BaseMixin from '../_util/BaseMixin';
 import getTransitionProps from '../_util/getTransitionProps';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import scrollTo from '../_util/scrollTo';
 
 function getDefaultTarget() {
@@ -25,7 +25,7 @@ const BackTop = {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

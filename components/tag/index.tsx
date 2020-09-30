@@ -20,7 +20,7 @@ import {
   PresetStatusColorType,
 } from '../_util/colors';
 import { LiteralUnion } from '../_util/type';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import CheckableTag from './CheckableTag';
 
 const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
@@ -41,7 +41,7 @@ export interface TagProps extends HTMLAttributes {
 const Tag = defineComponent({
   inheritAttrs: false,
   setup(_: TagProps, { slots, attrs }: SetupContext) {
-    const { getPrefixCls } = inject('configProvider', ConfigConsumerProps);
+    const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
 
     const visible = ref(true);
 

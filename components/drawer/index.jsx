@@ -6,7 +6,7 @@ import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import { getComponent, getOptionProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 const Drawer = {
   name: 'ADrawer',
@@ -46,7 +46,7 @@ const Drawer = {
     };
   },
   setup() {
-    const configProvider = inject('configProvider', ConfigConsumerProps);
+    const configProvider = inject('configProvider', defaultConfigProvider);
     return {
       configProvider,
     };

@@ -10,7 +10,7 @@ import buttonTypes from '../button/buttonTypes';
 const ButtonType = buttonTypes().type;
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 let mousePosition = null;
 // ref: https://github.com/ant-design/ant-design/issues/15795
@@ -112,7 +112,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   // static info: ModalFunc;

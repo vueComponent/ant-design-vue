@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export default {
   name: 'AInputGroup',
@@ -16,7 +16,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   computed: {

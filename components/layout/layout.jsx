@@ -2,7 +2,7 @@ import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import { getOptionProps, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export const BasicProps = {
   prefixCls: PropTypes.string,
@@ -17,7 +17,7 @@ function generator({ suffixCls, tagName, name }) {
       props: BasicComponent.props,
       setup() {
         return {
-          configProvider: inject('configProvider', ConfigConsumerProps),
+          configProvider: inject('configProvider', defaultConfigProvider),
         };
       },
       render() {

@@ -4,7 +4,7 @@ import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import VcSteps from '../vc-steps';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 const getStepsProps = (defaultProps = {}) => {
   const props = {
@@ -32,7 +32,7 @@ const Steps = {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   Step: { ...VcSteps.Step, name: 'AStep' },

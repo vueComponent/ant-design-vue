@@ -1,13 +1,13 @@
 import { inject } from 'vue';
 import Empty from '../empty';
-import { ConfigConsumerProps } from '.';
+import { defaultConfigProvider } from '.';
 
 export interface RenderEmptyProps {
   componentName?: string;
 }
 
 const RenderEmpty = (props: RenderEmptyProps) => {
-  const configProvider = inject('configProvider', ConfigConsumerProps);
+  const configProvider = inject('configProvider', defaultConfigProvider);
   const renderHtml = (componentName?: string) => {
     const { getPrefixCls } = configProvider;
     const prefix = getPrefixCls('empty');

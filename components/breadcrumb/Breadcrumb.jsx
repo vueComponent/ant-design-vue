@@ -2,7 +2,7 @@ import { inject, cloneVNode } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, getComponent, getSlot } from '../_util/props-util';
 import warning from '../_util/warning';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import BreadcrumbItem from './BreadcrumbItem';
 import Menu from '../menu';
 
@@ -37,7 +37,7 @@ export default {
   props: BreadcrumbProps,
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   methods: {

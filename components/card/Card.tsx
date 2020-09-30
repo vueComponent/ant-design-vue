@@ -5,7 +5,7 @@ import Col from '../col';
 import PropTypes from '../_util/vue-types';
 import { getComponent, getSlot, isEmptyElement } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
 
 const { TabPane } = Tabs;
@@ -33,7 +33,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

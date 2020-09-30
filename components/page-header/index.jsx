@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent, getOptionProps, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import ArrowLeftOutlined from '@ant-design/icons-vue/ArrowLeftOutlined';
 import Breadcrumb from '../breadcrumb';
 import Avatar from '../avatar';
@@ -96,7 +96,7 @@ const PageHeader = {
   props: PageHeaderProps,
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   render() {

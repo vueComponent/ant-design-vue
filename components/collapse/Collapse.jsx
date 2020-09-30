@@ -10,7 +10,7 @@ import {
 import { cloneElement } from '../_util/vnode';
 import VcCollapse, { collapseProps } from '../vc-collapse';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export default {
   name: 'ACollapse',
@@ -22,7 +22,7 @@ export default {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   methods: {

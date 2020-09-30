@@ -12,7 +12,7 @@ import {
   getSlot,
 } from '../_util/props-util';
 import getDropdownProps from './getDropdownProps';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 
 const DropdownProps = getDropdownProps();
@@ -29,7 +29,7 @@ const Dropdown = {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   created() {

@@ -15,7 +15,7 @@ import hasProp, {
   getSlot,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { cloneElement } from '../_util/vnode';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
@@ -99,7 +99,7 @@ export default {
   setup() {
     return {
       isFormItemChildren: inject('isFormItemChildren', false),
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
       FormContext: inject('FormContext', {}),
     };
   },

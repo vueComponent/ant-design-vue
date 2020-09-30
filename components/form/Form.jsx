@@ -6,7 +6,7 @@ import isRegExp from 'lodash-es/isRegExp';
 import warning from '../_util/warning';
 import FormItem from './FormItem';
 import { initDefaultProps, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { getNamePath, containsNamePath } from './utils/valueUtil';
 import { defaultValidateMessages } from './utils/messages';
 import { allPromiseFinish } from './utils/asyncUtil';
@@ -80,7 +80,7 @@ const Form = {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   watch: {

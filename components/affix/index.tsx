@@ -5,7 +5,7 @@ import omit from 'omit.js';
 import ResizeObserver from '../vc-resize-observer';
 import BaseMixin from '../_util/BaseMixin';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 import {
   addObserveTarget,
@@ -46,7 +46,7 @@ const Affix = {
   mixins: [BaseMixin],
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

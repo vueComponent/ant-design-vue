@@ -7,7 +7,7 @@ import FullCalendar from '../vc-calendar/src/FullCalendar';
 import Header from './Header';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import interopDefault from '../_util/interopDefault';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import enUS from './locale/en_US';
 import { checkValidate, stringToMoment, momentToString, TimeType } from '../_util/moment-util';
 
@@ -57,7 +57,7 @@ const Calendar = {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

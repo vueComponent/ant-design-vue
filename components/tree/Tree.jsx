@@ -10,7 +10,7 @@ import animation from '../_util/openAnimation';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 const TreeNode = VcTree.TreeNode;
 function TreeProps() {
@@ -116,7 +116,7 @@ export default {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   TreeNode,

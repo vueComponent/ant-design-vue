@@ -1,6 +1,6 @@
 import { inject, CSSProperties, SetupContext } from 'vue';
 import classNames from '../_util/classNames';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export interface CheckableTagProps {
   prefixCls?: string;
@@ -12,7 +12,7 @@ export interface CheckableTagProps {
 }
 
 const CheckableTag = (props: CheckableTagProps, { slots }: SetupContext) => {
-  const { getPrefixCls } = inject('configProvider', ConfigConsumerProps);
+  const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
   const handleClick = (e: MouseEvent) => {
     const { checked, onChange, onClick } = props;
     if (onChange) {

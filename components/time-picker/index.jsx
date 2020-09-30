@@ -16,7 +16,7 @@ import {
   isValidElement,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import {
   checkValidate,
   stringToMoment,
@@ -103,7 +103,7 @@ const TimePicker = {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
 

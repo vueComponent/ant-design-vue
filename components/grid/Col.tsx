@@ -1,6 +1,6 @@
 import { inject, defineComponent, HTMLAttributes, CSSProperties } from 'vue';
 import classNames from '../_util/classNames';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { rowContextState } from './Row';
 
 type ColSpanType = number | string;
@@ -46,7 +46,7 @@ function parseFlex(flex: FlexType): string {
 export default defineComponent<ColProps>({
   name: 'ACol',
   setup(props, { slots }) {
-    const configProvider = inject('configProvider', ConfigConsumerProps);
+    const configProvider = inject('configProvider', defaultConfigProvider);
     const rowContext = inject<rowContextState>('rowContext', {});
 
     return () => {

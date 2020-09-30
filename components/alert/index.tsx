@@ -13,7 +13,7 @@ import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
 import getTransitionProps from '../_util/getTransitionProps';
 import { getComponent, isValidElement, findDOMNode } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 function noop() {}
 
@@ -62,7 +62,7 @@ const Alert = {
   mixins: [BaseMixin],
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

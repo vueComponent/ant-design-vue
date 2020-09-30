@@ -6,7 +6,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps, hasProp, getSlot } from '../_util/props-util';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import Dragger from './Dragger';
 import UploadList from './UploadList';
 import { UploadProps } from './interface';
@@ -35,7 +35,7 @@ export default {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   // recentUploadStatus: boolean | PromiseLike<any>;

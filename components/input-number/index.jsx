@@ -5,7 +5,7 @@ import classNames from '../_util/classNames';
 import UpOutlined from '@ant-design/icons-vue/UpOutlined';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import VcInputNumber from '../vc-input-number/src';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export const InputNumberProps = {
   prefixCls: PropTypes.string,
@@ -35,7 +35,7 @@ const InputNumber = {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   mounted() {

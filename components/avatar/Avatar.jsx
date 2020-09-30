@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { getComponent } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 
@@ -29,7 +29,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

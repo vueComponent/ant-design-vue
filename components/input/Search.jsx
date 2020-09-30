@@ -9,7 +9,7 @@ import Button from '../button';
 import { cloneElement } from '../_util/vnode';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
 
 export default {
@@ -23,7 +23,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   methods: {

@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
@@ -56,7 +56,7 @@ const Result = {
   props: ResultProps,
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   render(h) {

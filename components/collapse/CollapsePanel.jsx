@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import VcCollapse, { panelProps } from '../vc-collapse';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export default {
   name: 'ACollapsePanel',
@@ -11,7 +11,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   render() {

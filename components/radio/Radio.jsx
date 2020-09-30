@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types';
 import VcCheckbox from '../vc-checkbox';
 import classNames from '../_util/classNames';
 import { getOptionProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export default {
   name: 'ARadio',
@@ -29,7 +29,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
       radioGroupContext: inject('radioGroupContext', null),
     };
   },

@@ -3,7 +3,7 @@ import debounce from 'lodash-es/debounce';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export const SpinSize = PropTypes.oneOf(['small', 'default', 'large']);
 
@@ -45,7 +45,7 @@ export default {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

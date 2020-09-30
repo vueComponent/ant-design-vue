@@ -2,7 +2,7 @@ import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Checkbox from './Checkbox';
 import hasProp, { getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 function noop() {}
 export default {
@@ -31,7 +31,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   created() {

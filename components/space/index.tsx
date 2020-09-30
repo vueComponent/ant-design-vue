@@ -1,14 +1,6 @@
 import { inject, App, CSSProperties, SetupContext } from 'vue';
-import { initDefaultProps } from '../_util/props-util';
 import { filterEmpty } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
-
-// export const SpaceProps = {
-//   prefixCls: PropTypes.string,
-//   align: PropTypes.tuple<'start' | 'end' | 'center' | 'baseline'>(),
-//   size: PropTypes.tuple<'small' | 'middle' | 'large'>(),
-//   direction: PropTypes.tuple<'horizontal' | 'vertical'>(),
-// };
+import { defaultConfigProvider, SizeType } from '../config-provider';
 
 const spaceSize = {
   small: 8,
@@ -27,8 +19,8 @@ export interface SpaceProps {
 }
 
 const Space = (props: SpaceProps, { slots }: SetupContext) => {
-  const configProvider = inject('configProvider', ConfigConsumerProps);
-  const { align, size, direction, prefixCls: customizePrefixCls } = props;
+  const configProvider = inject('configProvider', defaultConfigProvider);
+  const { align, size = 'small', direction = 'horizontal', prefixCls: customizePrefixCls } = props;
 
   const { getPrefixCls } = configProvider;
   const prefixCls = getPrefixCls('space', customizePrefixCls);
@@ -71,14 +63,12 @@ const Space = (props: SpaceProps, { slots }: SetupContext) => {
     </div>
   );
 };
-Space.props = initDefaultProps(SpaceProps, {
-  size: 'small',
-  direction: 'horizontal',
-});
+
+Space.displayName = 'ASpace';
 
 /* istanbul ignore next */
 Space.install = function(app: App) {
-  app.component('ASpace', Space);
+  app.component(Space.displayName, Space);
 };
 
 export default Space;

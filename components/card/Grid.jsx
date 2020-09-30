@@ -1,6 +1,6 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { getSlot } from '../_util/props-util';
 
 export default {
@@ -12,7 +12,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   render() {

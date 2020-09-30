@@ -3,7 +3,7 @@ import Select from '../select';
 import { Group, Button } from '../radio';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 const { Option } = Select;
 
@@ -41,7 +41,7 @@ export default {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   // private calendarHeaderNode: HTMLDivElement;

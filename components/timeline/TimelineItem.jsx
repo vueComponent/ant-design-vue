@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, initDefaultProps, getComponent } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export const TimeLineItemProps = {
   prefixCls: PropTypes.string,
@@ -19,7 +19,7 @@ export default {
     pending: false,
   }),
   setup() {
-    const configProvider = inject('configProvider', ConfigConsumerProps);
+    const configProvider = inject('configProvider', defaultConfigProvider);
     return {
       configProvider,
     };

@@ -2,12 +2,38 @@ import { reactive, provide, VNodeTypes, PropType, defineComponent, App } from 'v
 import PropTypes from '../_util/vue-types';
 import { getComponentFromSetup } from '../_util/props-util';
 import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
-import { CSPConfig } from './context';
 import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
 
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
+
+export interface CSPConfig {
+  nonce?: string;
+}
+
+export interface ConfigConsumerProps {
+  getTargetContainer?: () => HTMLElement;
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+  rootPrefixCls?: string;
+  getPrefixCls: (suffixCls?: string, customizePrefixCls?: string) => string;
+  renderEmpty: RenderEmptyHandler;
+  csp?: CSPConfig;
+  autoInsertSpaceInButton?: boolean;
+  input?: {
+    autoComplete?: string;
+  };
+  locale?: Locale;
+  pageHeader?: {
+    ghost: boolean;
+  };
+  direction?: 'ltr' | 'rtl';
+  space?: {
+    size?: SizeType | number;
+  };
+  virtual?: boolean;
+  dropdownMatchSelectWidth?: boolean;
+}
 
 export const configConsumerProps = [
   'getTargetContainer',
@@ -128,7 +154,7 @@ const ConfigProvider = defineComponent({
   },
 });
 
-export const ConfigConsumerProps = {
+export const defaultConfigProvider = {
   getPrefixCls: (suffixCls: string, customizePrefixCls?: string) => {
     if (customizePrefixCls) return customizePrefixCls;
     return `ant-${suffixCls}`;

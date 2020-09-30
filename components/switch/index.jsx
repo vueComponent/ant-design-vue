@@ -4,7 +4,7 @@ import PropTypes from '../_util/vue-types';
 import hasProp, { getOptionProps, getComponent } from '../_util/props-util';
 import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 
 const Switch = {
@@ -26,7 +26,7 @@ const Switch = {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   methods: {

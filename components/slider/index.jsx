@@ -6,7 +6,7 @@ import VcSlider from '../vc-slider/src/Slider';
 import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
 import Tooltip from '../tooltip';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 
 const tooltipProps = abstractTooltipProps();
@@ -46,7 +46,7 @@ const Slider = {
   mixins: [BaseMixin],
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   props: {

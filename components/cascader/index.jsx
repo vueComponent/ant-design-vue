@@ -22,7 +22,7 @@ import {
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
 import warning from '../_util/warning';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 const CascaderOptionType = PropTypes.shape({
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -157,7 +157,7 @@ const Cascader = {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
       localeData: inject('localeData', {}),
     };
   },

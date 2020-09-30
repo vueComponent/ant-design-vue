@@ -3,7 +3,7 @@ import ClearableLabeledInput from './ClearableLabeledInput';
 import ResizableTextArea from './ResizableTextArea';
 import inputProps from './inputProps';
 import { hasProp, getOptionProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { fixControlledValue, resolveOnChange } from './Input';
 import PropTypes from '../_util/vue-types';
 
@@ -21,7 +21,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

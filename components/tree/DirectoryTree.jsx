@@ -16,7 +16,7 @@ import {
 } from './util';
 import BaseMixin from '../_util/BaseMixin';
 import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 // export type ExpandAction = false | 'click' | 'dblclick'; export interface
 // DirectoryTreeProps extends TreeProps {   expandAction?: ExpandAction; }
@@ -51,7 +51,7 @@ export default {
   ),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

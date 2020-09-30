@@ -1,7 +1,7 @@
 import { inject, cloneVNode } from 'vue';
 import warning from '../_util/warning';
 import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import Col from './Col';
 import PropTypes from '../_util/vue-types';
 import {
@@ -115,7 +115,7 @@ const Descriptions = {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

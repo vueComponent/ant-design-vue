@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import BaseMixin from '../_util/BaseMixin';
 import Pickr from '@simonwep/pickr/dist/pickr.es5.min';
 import Icon from '../icon';
@@ -31,7 +31,7 @@ export default {
     hue: PropTypes.bool.def(true), //是否开启色彩预选
   },
   inject: {
-    configProvider: { default: () => ConfigConsumerProps },
+    configProvider: { default: () => defaultConfigProvider },
   },
   data() {
     return {

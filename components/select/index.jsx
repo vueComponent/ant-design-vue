@@ -3,7 +3,7 @@ import warning from '../_util/warning';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import { Select as VcSelect, Option, OptGroup } from '../vc-select';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
@@ -103,7 +103,7 @@ const Select = {
   propTypes: SelectPropTypes,
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   created() {

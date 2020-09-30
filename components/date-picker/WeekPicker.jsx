@@ -3,7 +3,7 @@ import moment from 'moment';
 import Calendar from '../vc-calendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { hasProp, getOptionProps, initDefaultProps, getComponent } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import BaseMixin from '../_util/BaseMixin';
@@ -27,7 +27,7 @@ export default {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

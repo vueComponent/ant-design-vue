@@ -7,7 +7,7 @@ import scrollTo from '../_util/scrollTo';
 import getScroll from '../_util/getScroll';
 import { initDefaultProps, findDOMNode } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 function getDefaultContainer() {
   return window;
@@ -128,7 +128,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   mounted() {

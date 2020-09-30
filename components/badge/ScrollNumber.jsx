@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import omit from 'omit.js';
 import { cloneElement } from '../_util/vnode';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { inject } from 'vue';
 
 function getNumberArray(num) {
@@ -35,7 +35,7 @@ export default {
   props: ScrollNumberProps,
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

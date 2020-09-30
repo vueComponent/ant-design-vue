@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, initDefaultProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
@@ -46,7 +46,7 @@ export default {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   methods: {

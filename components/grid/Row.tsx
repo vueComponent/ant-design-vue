@@ -11,7 +11,7 @@ import {
 import classNames from 'classnames';
 import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import ResponsiveObserve, {
   Breakpoint,
   ScreenMap,
@@ -79,7 +79,7 @@ export default defineComponent<RowProps>({
     const gutterRef = ref<Gutter | [Gutter, Gutter]>();
     gutterRef.value = props.gutter;
 
-    const configProvider = inject('configProvider', ConfigConsumerProps);
+    const configProvider = inject('configProvider', defaultConfigProvider);
     const { getPrefixCls } = configProvider;
 
     const getGutter = (): [number, number] => {

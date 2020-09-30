@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import debounce from 'lodash-es/debounce';
 import hasProp, { initDefaultProps, getComponent } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 import classNames from '../_util/classNames';
 import SlickCarousel from '../vc-slick/src';
@@ -63,7 +63,7 @@ const Carousel = {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   beforeMount() {

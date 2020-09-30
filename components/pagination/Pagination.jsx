@@ -9,7 +9,7 @@ import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
 import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { inject } from 'vue';
 import classNames from '../_util/classNames';
 
@@ -51,7 +51,7 @@ export default {
 
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
 

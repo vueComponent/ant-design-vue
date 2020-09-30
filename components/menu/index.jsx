@@ -9,7 +9,7 @@ import Item from './MenuItem';
 import { hasProp, getOptionProps, getSlot } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import commonPropsType from '../vc-menu/commonPropsType';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 // import raf from '../_util/raf';
 
 export const MenuMode = PropTypes.oneOf([
@@ -64,7 +64,7 @@ const Menu = {
     const layoutSiderContext = inject('layoutSiderContext', {});
     const layoutSiderCollapsed = toRef(layoutSiderContext, 'sCollapsed');
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
       layoutSiderContext,
       layoutSiderCollapsed,
     };

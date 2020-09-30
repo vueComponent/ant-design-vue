@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { hasProp, getComponent, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import DropDown from '../dropdown/dropdown';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 
@@ -16,7 +16,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   methods: {

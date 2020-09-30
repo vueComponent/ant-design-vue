@@ -14,7 +14,7 @@ import createBodyRow from './createBodyRow';
 import { flatArray, treeMap, flatFilter } from './util';
 import { initDefaultProps, getOptionProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { TableProps } from './interface';
 import Pagination from '../pagination';
 import Spin from '../spin';
@@ -132,7 +132,7 @@ export default {
 
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
 

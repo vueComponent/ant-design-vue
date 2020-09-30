@@ -23,7 +23,7 @@ export default defineComponent({
     },
     children: {
       type: Function as PropType<
-        (locale: Locale, localeCode?: string, fullLocale?: Locale) => VNodeTypes
+        (locale: object, localeCode?: string, fullLocale?: object) => VNodeTypes
       >,
     },
   },

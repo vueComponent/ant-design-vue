@@ -11,13 +11,13 @@ const attributes = `accept acceptCharset accessKey action allowFullScreen allowT
     shape size sizes span spellCheck src srcDoc srcLang srcSet start step style
     summary tabIndex target title type useMap value width wmode wrap`;
 
-const eventsName = `onCopy onCut onPaste onCompositionEnd onCompositionStart onCompositionUpdate onKeyDown
-    onKeyPress onKeyUp onFocus onBlur onChange onInput onSubmit onClick onContextMenu onDoubleClick
-    onDrag onDragEnd onDragEnter onDragExit onDragLeave onDragOver onDragStart onDrop onMouseDown
-    onMouseEnter onMouseLeave onMouseMove onMouseOut onMouseOver onMouseUp onSelect onTouchCancel
-    onTouchEnd onTouchMove onTouchStart onScroll onWheel onAbort onCanPlay onCanPlayThrough
-    onDurationChange onEmptied onEncrypted onEnded onError onLoadedData onLoadedMetadata
-    onLoadStart onPause onPlay onPlaying onProgress onRateChange onSeeked onSeeking onStalled onSuspend onTimeUpdate onVolumeChange onWaiting onLoad onError`;
+const eventsName = `onCopy onCut onPaste onCompositionend onCompositionstart onCompositionupdate onKeydown
+    onKeypress onKeyup onFocus onBlur onChange onInput onSubmit onClick onContextmenu onDoubleclick onDblclick
+    onDrag onDragend onDragenter onDragexit onDragleave onDragover onDragstart onDrop onMousedown
+    onMouseenter onMouseleave onMousemove onMouseout onMouseover onMouseup onSelect onTouchcancel
+    onTouchend onTouchmove onTouchstart onScroll onWheel onAbort onCanplay onCanplaythrough
+    onDurationchange onEmptied onEncrypted onEnded onError onLoadedsata onLoadedmetadata
+    onLoadstart onPause onPlay onPlaying onProgress onRatechange onSeeked onSeeking onStalled onSuspend onTimeupdate onVolumechange onWaiting onLoad onError`;
 
 const propList = `${attributes} ${eventsName}`.split(/[\s\n]+/);
 
@@ -25,8 +25,14 @@ const propList = `${attributes} ${eventsName}`.split(/[\s\n]+/);
 const ariaPrefix = 'aria-';
 const dataPrefix = 'data-';
 
-function match(key, prefix) {
+function match(key: string, prefix: string) {
   return key.indexOf(prefix) === 0;
+}
+
+export interface PickConfig {
+  aria?: boolean;
+  data?: boolean;
+  attr?: boolean;
 }
 
 /**
@@ -34,8 +40,8 @@ function match(key, prefix) {
  * @param props Passed props
  * @param ariaOnly boolean | { aria?: boolean; data?: boolean; attr?: boolean; } filter config
  */
-export default function pickAttrs(props, ariaOnly = false) {
-  let mergedConfig;
+export default function pickAttrs(props: object, ariaOnly: boolean | PickConfig = false) {
+  let mergedConfig: PickConfig;
   if (ariaOnly === false) {
     mergedConfig = {
       aria: true,

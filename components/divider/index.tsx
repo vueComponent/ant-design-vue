@@ -9,7 +9,10 @@ const Divider = defineComponent({
       type: String as PropType<'horizontal' | 'vertical' | ''>,
       default: 'horizontal',
     },
-    dashed: Boolean,
+    dashed: {
+      type: Boolean,
+      default: false,
+    },
     orientation: {
       type: String as PropType<'left' | 'right' | 'center'>,
       default: 'center',

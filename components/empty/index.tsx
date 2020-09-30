@@ -1,6 +1,6 @@
 import { CSSProperties, VNodeTypes, inject, App, SetupContext } from 'vue';
 import classNames from '../_util/classNames';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider, ConfigConsumerProps } from '../config-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import DefaultEmptyImg from './empty';
 import SimpleEmptyImg from './simple';
@@ -18,14 +18,14 @@ export interface EmptyProps {
   class?: string;
   style?: CSSProperties;
   imageStyle?: CSSProperties;
-  image?: VNodeTypes;
+  image?: VNodeTypes | null;
   description?: VNodeTypes;
   children?: VNodeTypes;
 }
 
 const Empty = (props: EmptyProps, { slots }: SetupContext) => {
-  const configProvider = inject('configProvider', ConfigConsumerProps);
-  const { getPrefixCls } = configProvider;
+  const configProvider = inject<ConfigConsumerProps>('configProvider', defaultConfigProvider);
+  const { getPrefixCls, direction } = configProvider;
   const {
     prefixCls: customizePrefixCls,
     image = defaultEmptyImg,
@@ -54,6 +54,7 @@ const Empty = (props: EmptyProps, { slots }: SetupContext) => {
           <div
             class={classNames(prefixCls, {
               [`${prefixCls}-normal`]: image === simpleEmptyImg,
+              [`${prefixCls}-rtl`]: direction === 'rtl',
             })}
             {...restProps}
           >

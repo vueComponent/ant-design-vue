@@ -1,4 +1,4 @@
-import { App, computed, defineComponent, inject, PropType, toRefs, unref } from 'vue';
+import { App, computed, defineComponent, inject, PropType, unref } from 'vue';
 import { ConfigConsumerProps } from '../config-provider';
 
 const Divider = defineComponent({

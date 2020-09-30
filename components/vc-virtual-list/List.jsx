@@ -282,7 +282,6 @@ const List = {
     };
   },
   render() {
-    const { style, class: className } = this.$attrs;
     const {
       prefixCls = 'rc-virtual-list',
       height,
@@ -295,8 +294,10 @@ const List = {
       component: Component = 'div',
       onScroll,
       children,
+      style,
+      class: className,
       ...restProps
-    } = this.$props;
+    } = { ...this.$props, ...this.$attrs };
     const mergedClassName = classNames(prefixCls, className);
     const { scrollTop, mergedData } = this.state;
     const { scrollHeight, offset, start, end } = this.calRes;

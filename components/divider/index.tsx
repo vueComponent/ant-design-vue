@@ -1,5 +1,5 @@
 import { App, computed, defineComponent, inject, PropType, unref } from 'vue';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 const Divider = defineComponent({
   name: 'ADivider',
@@ -19,8 +19,7 @@ const Divider = defineComponent({
     },
   },
   setup(props, { slots }) {
-    const configProvider = inject('configProvider', ConfigConsumerProps);
-    const getPrefixCls = configProvider.getPrefixCls;
+    const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
     const prefixCls = computed(() => getPrefixCls('divider', props.prefixCls));
 
     const classString = computed(() => {
@@ -38,7 +37,7 @@ const Divider = defineComponent({
     return () => {
       return (
         <div class={classString.value} role="separator">
-          {<span class={`${prefixCls.value}-inner-text`}>{slots.default?.()}</span>}
+          <span class={`${prefixCls.value}-inner-text`}>{slots.default?.()}</span>
         </div>
       );
     };

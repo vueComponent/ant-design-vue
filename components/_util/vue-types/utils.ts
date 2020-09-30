@@ -7,13 +7,15 @@ export const hasOwn = ObjProto.hasOwnProperty;
 const FN_MATCH_REGEXP = /^\s*function (\w+)/;
 
 // https://github.com/vuejs/vue/blob/dev/src/core/util/props.js#L159
-export const getType = fn => {
+export const getType = (fn: any) => {
   const type = fn !== null && fn !== undefined ? (fn.type ? fn.type : fn) : null;
   const match = type && type.toString().match(FN_MATCH_REGEXP);
   return match && match[1];
 };
 
-export const getNativeType = value => {
+export const getNativeType = (
+  value: { constructor: { toString: () => string } } | null | undefined,
+) => {
   if (value === null || value === undefined) return null;
   const match = value.constructor.toString().match(FN_MATCH_REGEXP);
   return match && match[1];
@@ -22,6 +24,7 @@ export const getNativeType = value => {
 /**
  * No-op function
  */
+// eslint-disable-next-line @typescript-eslint/no-empty-function
 export const noop = () => {};
 
 /**
@@ -30,7 +33,7 @@ export const noop = () => {};
  * @param {object} obj - Object
  * @param {string} prop - Property to check
  */
-export const has = (obj, prop) => hasOwn.call(obj, prop);
+export const has = (obj: any, prop: any) => hasOwn.call(obj, prop);
 
 /**
  * Determines whether the passed value is an integer. Uses `Number.isInteger` if available
@@ -70,9 +73,9 @@ export const isFunction = (value: any) => toString.call(value) === '[object Func
  *
  * @param {object} type - Object to enhance
  */
-export const withDefault = function(type) {
+export const withDefault = function(type: any) {
   Object.defineProperty(type, 'def', {
-    value(def) {
+    value(def: undefined) {
       if (def === undefined && this.default === undefined) {
         this.default = undefined;
         return this;
@@ -100,7 +103,7 @@ export const withDefault = function(type) {
  *
  * @param {object} type - Object to enhance
  */
-export const withRequired = function(type) {
+export const withRequired = function(type: any) {
   Object.defineProperty(type, 'isRequired', {
     get() {
       this.required = true;
@@ -117,7 +120,7 @@ export const withRequired = function(type) {
  * @param {object} obj - Object to enhance
  * @returns {object}
  */
-export const toType = (name, obj) => {
+export const toType = (name: string, obj: { type?: any; validator?: any; def?: any }) => {
   Object.defineProperty(obj, '_vueTypes_name', {
     enumerable: false,
     writable: false,
@@ -140,7 +143,11 @@ export const toType = (name, obj) => {
  * @param {boolean} silent - Silence warnings
  * @returns {boolean}
  */
-export const validateType = (type, value, silent = false) => {
+export const validateType = (
+  type: any,
+  value: { constructor: { toString: () => string } } | null | undefined,
+  silent = false,
+) => {
   let typeToCheck = type;
   let valid = true;
   let expectedType;
@@ -151,8 +158,8 @@ export const validateType = (type, value, silent = false) => {
 
   if (hasOwn.call(typeToCheck, 'type') && typeToCheck.type !== null) {
     if (isArray(typeToCheck.type)) {
-      valid = typeToCheck.type.some(type => validateType(type, value, true));
-      expectedType = typeToCheck.type.map(type => getType(type)).join(' or ');
+      valid = typeToCheck.type.some((type: any) => validateType(type, value, true));
+      expectedType = typeToCheck.type.map((type: any) => getType(type)).join(' or ');
     } else {
       expectedType = getType(typeToCheck);
 

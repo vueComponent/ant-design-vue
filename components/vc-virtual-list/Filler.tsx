@@ -1,10 +1,23 @@
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
+import { CSSProperties, FunctionalComponent } from 'vue';
 
-const Filter = ({ height, offset, prefixCls, onInnerResize }, { slots }) => {
+interface FillerProps {
+  prefixCls?: string;
+  /** Virtual filler height. Should be `count * itemMinHeight` */
+  height: number;
+  /** Set offset of visible items. Should be the top of start item position */
+  offset?: number;
+  onInnerResize?: () => void;
+}
+
+const Filter: FunctionalComponent<FillerProps> = (
+  { height, offset, prefixCls, onInnerResize },
+  { slots },
+) => {
   let outerStyle = {};
 
-  let innerStyle = {
+  let innerStyle: CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
   };
@@ -43,15 +56,8 @@ const Filter = ({ height, offset, prefixCls, onInnerResize }, { slots }) => {
     </div>
   );
 };
+
 Filter.displayName = 'Filter';
 Filter.inheritAttrs = false;
-Filter.props = {
-  prefixCls: String,
-  /** Virtual filler height. Should be `count * itemMinHeight` */
-  height: Number,
-  /** Set offset of visible items. Should be the top of start item position */
-  offset: Number,
-  onInnerResize: Function,
-};
 
 export default Filter;

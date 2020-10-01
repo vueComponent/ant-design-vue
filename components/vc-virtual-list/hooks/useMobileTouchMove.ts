@@ -1,19 +1,28 @@
-import { watch } from 'vue';
+import { watch, Ref } from 'vue';
 
 const SMOOTH_PTG = 14 / 15;
 
-export default function useMobileTouchMove(inVirtual, listRef, callback) {
+export default function useMobileTouchMove(
+  inVirtual: Ref<boolean>,
+  listRef: Ref<Element | undefined>,
+  callback: (offsetY: number, smoothOffset?: boolean) => boolean,
+) {
   let touched = false;
   let touchY = 0;
 
-  let element = null;
+  let element: HTMLElement | null = null;
 
   // Smooth scroll
-  let interval = null;
+  let interval: any = null;
 
-  let cleanUpEvents;
+  const cleanUpEvents = () => {
+    if (element) {
+      element.removeEventListener('touchmove', onTouchMove);
+      element.removeEventListener('touchend', onTouchEnd);
+    }
+  };
 
-  const onTouchMove = e => {
+  const onTouchMove = (e: TouchEvent) => {
     if (touched) {
       const currentY = Math.ceil(e.touches[0].pageY);
       let offsetY = touchY - currentY;
@@ -41,31 +50,25 @@ export default function useMobileTouchMove(inVirtual, listRef, callback) {
     cleanUpEvents();
   };
 
-  const onTouchStart = e => {
+  const onTouchStart = (e: TouchEvent) => {
     cleanUpEvents();
 
     if (e.touches.length === 1 && !touched) {
       touched = true;
       touchY = Math.ceil(e.touches[0].pageY);
 
-      element = e.target;
-      element.addEventListener('touchmove', onTouchMove);
-      element.addEventListener('touchend', onTouchEnd);
+      element = e.target as HTMLElement;
+      element!.addEventListener('touchmove', onTouchMove);
+      element!.addEventListener('touchend', onTouchEnd);
     }
   };
 
-  cleanUpEvents = () => {
-    if (element) {
-      element.removeEventListener('touchmove', onTouchMove);
-      element.removeEventListener('touchend', onTouchEnd);
-    }
-  };
   watch(inVirtual, val => {
-    listRef.current.removeEventListener('touchstart', onTouchStart);
+    listRef.value.removeEventListener('touchstart', onTouchStart);
     cleanUpEvents();
     clearInterval(interval);
-    if (val.value) {
-      listRef.current.addEventListener('touchstart', onTouchStart);
+    if (val) {
+      listRef.value.addEventListener('touchstart', onTouchStart);
     }
   });
 }

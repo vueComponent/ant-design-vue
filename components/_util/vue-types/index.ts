@@ -16,7 +16,7 @@ const PropTypes = {
   get func() {
     return {
       type: Function,
-    } as BaseTypes;
+    };
   },
 
   get bool() {

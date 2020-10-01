@@ -1,7 +1,9 @@
-export default (isScrollAtTop, isScrollAtBottom) => {
+import { Ref } from 'vue';
+
+export default (isScrollAtTop: Ref<boolean>, isScrollAtBottom: Ref<boolean>) => {
   // Do lock for a wheel when scrolling
   let lock = false;
-  let lockTimeout = null;
+  let lockTimeout: any = null;
   function lockScroll() {
     clearTimeout(lockTimeout);
 
@@ -11,7 +13,7 @@ export default (isScrollAtTop, isScrollAtBottom) => {
       lock = false;
     }, 50);
   }
-  return (deltaY, smoothOffset = false) => {
+  return (deltaY: number, smoothOffset = false) => {
     const originScroll =
       // Pass origin wheel when on the top
       (deltaY < 0 && isScrollAtTop.value) ||

@@ -1,4 +1,4 @@
-import { reactive } from 'vue';
+import { defineComponent, PropType, reactive } from 'vue';
 import classNames from '../_util/classNames';
 import createRef from '../_util/createRef';
 import raf from '../_util/raf';
@@ -6,29 +6,18 @@ import PropTypes from '../_util/vue-types';
 
 const MIN_SIZE = 20;
 
-// export interface ScrollBarProps {
-//   prefixCls: string;
-//   scrollTop: number;
-//   scrollHeight: number;
-//   height: number;
-//   count: number;
-//   onScroll: (scrollTop: number) => void;
-//   onStartMove: () => void;
-//   onStopMove: () => void;
-// }
+interface ScrollBarState {
+  dragging: boolean;
+  pageY: number | null;
+  startTop: number | null;
+  visible: boolean;
+}
 
-// interface ScrollBarState {
-//   dragging: boolean;
-//   pageY: number;
-//   startTop: number;
-//   visible: boolean;
-// }
-
-function getPageY(e) {
+function getPageY(e: MouseEvent | TouchEvent) {
   return 'touches' in e ? e.touches[0].pageY : e.pageY;
 }
 
-export default {
+export default defineComponent({
   name: 'ScrollBar',
   inheritAttrs: false,
   props: {
@@ -37,9 +26,15 @@ export default {
     scrollHeight: PropTypes.number,
     height: PropTypes.number,
     count: PropTypes.number,
-    onScroll: PropTypes.func,
-    onStartMove: PropTypes.func,
-    onStopMove: PropTypes.func,
+    onScroll: {
+      type: Function as PropType<(scrollTop: number) => void>,
+    },
+    onStartMove: {
+      type: Function as PropType<() => void>,
+    },
+    onStopMove: {
+      type: Function as PropType<() => void>,
+    },
   },
   setup() {
     return {
@@ -47,7 +42,7 @@ export default {
       scrollbarRef: createRef(),
       thumbRef: createRef(),
       visibleTimeout: null,
-      state: reactive({
+      state: reactive<ScrollBarState>({
         dragging: false,
         pageY: null,
         startTop: null,
@@ -83,11 +78,11 @@ export default {
       }, 2000);
     },
 
-    onScrollbarTouchStart(e) {
+    onScrollbarTouchStart(e: TouchEvent) {
       e.preventDefault();
     },
 
-    onContainerMouseDown(e) {
+    onContainerMouseDown(e: MouseEvent) {
       e.stopPropagation();
       e.preventDefault();
     },
@@ -114,7 +109,7 @@ export default {
     },
 
     // ======================= Thumb =======================
-    onMouseDown(e) {
+    onMouseDown(e: MouseEvent | TouchEvent) {
       const { onStartMove } = this.$props;
 
       Object.assign(this.state, {
@@ -129,7 +124,7 @@ export default {
       e.preventDefault();
     },
 
-    onMouseMove(e) {
+    onMouseMove(e: MouseEvent | TouchEvent) {
       const { dragging, pageY, startTop } = this.state;
       const { onScroll } = this.$props;
 
@@ -203,7 +198,7 @@ export default {
           bottom: 0,
           right: 0,
           position: 'absolute',
-          display: visible ? null : 'none',
+          display: visible ? undefined : 'none',
         }}
         onMousedown={this.onContainerMouseDown}
         onMousemove={this.delayHidden}
@@ -229,4 +224,4 @@ export default {
       </div>
     );
   },
-};
+});

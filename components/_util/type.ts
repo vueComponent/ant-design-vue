@@ -1,4 +1,4 @@
-import { PropType } from 'vue';
+import { PropType, VNodeProps } from 'vue';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 // https://stackoverflow.com/questions/46176165/ways-to-get-string-literal-type-of-array-values-without-enum-overhead
@@ -24,6 +24,8 @@ export type EventHandlers<E> = {
 };
 
 export type Data = Record<string, unknown>;
+
+export type Key = string | number;
 
 export declare type DefaultFactory<T> = (props: Data) => T | null | undefined;
 export declare interface PropOptions<T = any, D = T> {

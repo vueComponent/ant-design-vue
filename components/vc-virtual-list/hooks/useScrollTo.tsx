@@ -1,41 +1,43 @@
-/* eslint-disable no-param-reassign */
-
+import { Data } from '../../_util/type';
+import { Ref } from 'vue';
 import raf from '../../_util/raf';
+import { GetKey } from '../interface';
+import { ListState } from '../List';
 
 export default function useScrollTo(
-  containerRef,
-  state,
-  heights,
+  containerRef: Ref<Element | undefined>,
+  state: ListState,
+  heights: Data,
   props,
-  getKey,
-  collectHeight,
-  syncScrollTop,
+  getKey: GetKey,
+  collectHeight: () => void,
+  syncScrollTop: (newTop: number) => void,
 ) {
-  let scroll = null;
+  let scroll: number | null = null;
 
   return arg => {
-    raf.cancel(scroll);
+    raf.cancel(scroll!);
     const data = state.mergedData;
     const itemHeight = props.itemHeight;
     if (typeof arg === 'number') {
       syncScrollTop(arg);
     } else if (arg && typeof arg === 'object') {
-      let index;
+      let index: number;
       const { align } = arg;
 
       if ('index' in arg) {
         ({ index } = arg);
       } else {
-        index = data.findIndex(item => getKey(item) === arg.key);
+        index = data.findIndex((item: object) => getKey(item) === arg.key);
       }
 
       const { offset = 0 } = arg;
 
       // We will retry 3 times in case dynamic height shaking
-      const syncScroll = (times, targetAlign) => {
-        if (times < 0 || !containerRef.current) return;
+      const syncScroll = (times: number, targetAlign?: 'top' | 'bottom') => {
+        if (times < 0 || !containerRef.value) return;
 
-        const height = containerRef.current.clientHeight;
+        const height = containerRef.value.clientHeight;
         let needCollectHeight = false;
         let newTargetAlign = targetAlign;
 
@@ -51,7 +53,7 @@ export default function useScrollTo(
           for (let i = 0; i <= index; i += 1) {
             const key = getKey(data[i]);
             itemTop = stackTop;
-            const cacheHeight = heights[key];
+            const cacheHeight = heights[key!];
             itemBottom = itemTop + (cacheHeight === undefined ? itemHeight : cacheHeight);
 
             stackTop = itemBottom;
@@ -62,7 +64,7 @@ export default function useScrollTo(
           }
 
           // Scroll to
-          let targetTop = null;
+          let targetTop: number | null = null;
 
           switch (mergedAlign) {
             case 'top':
@@ -73,7 +75,7 @@ export default function useScrollTo(
               break;
 
             default: {
-              const { scrollTop } = containerRef.current;
+              const { scrollTop } = containerRef.value;
               const scrollBottom = scrollTop + height;
               if (itemTop < scrollTop) {
                 newTargetAlign = 'top';
@@ -83,7 +85,7 @@ export default function useScrollTo(
             }
           }
 
-          if (targetTop !== null && targetTop !== containerRef.current.scrollTop) {
+          if (targetTop !== null && targetTop !== containerRef.value.scrollTop) {
             syncScrollTop(targetTop);
           }
         }

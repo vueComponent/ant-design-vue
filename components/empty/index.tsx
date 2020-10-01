@@ -1,4 +1,4 @@
-import { CSSProperties, VNodeTypes, inject, App, SetupContext } from 'vue';
+import { CSSProperties, VNodeTypes, inject, App, SetupContext, FunctionalComponent } from 'vue';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider, ConfigConsumerProps } from '../config-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -20,10 +20,16 @@ export interface EmptyProps {
   imageStyle?: CSSProperties;
   image?: VNodeTypes | null;
   description?: VNodeTypes;
-  children?: VNodeTypes;
 }
 
-const Empty = (props: EmptyProps, { slots }: SetupContext) => {
+interface EmptyType extends FunctionalComponent<EmptyProps> {
+  displayName: string;
+  PRESENTED_IMAGE_DEFAULT: VNodeTypes;
+  PRESENTED_IMAGE_SIMPLE: VNodeTypes;
+  install: (app: App) => void;
+}
+
+const Empty: EmptyType = (props: EmptyProps, { slots }: SetupContext) => {
   const configProvider = inject<ConfigConsumerProps>('configProvider', defaultConfigProvider);
   const { getPrefixCls, direction } = configProvider;
   const {

@@ -2,10 +2,10 @@ import cssAnimation from './css-animation';
 import raf from 'raf';
 import { nextTick } from 'vue';
 
-function animate(node, show, done) {
-  let height;
-  let requestAnimationFrameId;
-  let appearRequestAnimationFrameId;
+function animate(node: HTMLElement, show: boolean, done: () => void) {
+  let height: number;
+  let requestAnimationFrameId: number;
+  let appearRequestAnimationFrameId: number;
   return cssAnimation(node, 'ant-motion-collapse-legacy', {
     start() {
       if (appearRequestAnimationFrameId) {
@@ -54,12 +54,12 @@ function animate(node, show, done) {
 }
 
 const animation = {
-  onEnter(node, done) {
+  onEnter(node: HTMLElement, done: () => void) {
     nextTick(() => {
       animate(node, true, done);
     });
   },
-  onLeave(node, done) {
+  onLeave(node: HTMLElement, done: () => void) {
     return animate(node, false, done);
   },
 };

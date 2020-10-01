@@ -14,7 +14,13 @@ const capitalPrefixes = [
 ];
 const prefixes = ['-webkit-', '-moz-', '-o-', 'ms-', ''];
 
-function getStyleProperty(node, name) {
+interface CustomHTMLElement extends HTMLElement {
+  rcEndAnimTimeout?: any;
+  rcAnimTimeout?: any;
+  rcEndListener?: Function | null;
+}
+
+function getStyleProperty(node: HTMLElement, name: string) {
   // old ff need null, https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
   const style = window.getComputedStyle(node, null);
   let ret = '';
@@ -27,7 +33,7 @@ function getStyleProperty(node, name) {
   return ret;
 }
 
-function fixBrowserByTimeout(node) {
+function fixBrowserByTimeout(node: CustomHTMLElement) {
   if (isCssAnimationSupported) {
     const transitionDelay = parseFloat(getStyleProperty(node, 'transition-delay')) || 0;
     const transitionDuration = parseFloat(getStyleProperty(node, 'transition-duration')) || 0;
@@ -44,20 +50,29 @@ function fixBrowserByTimeout(node) {
   }
 }
 
-function clearBrowserBugTimeout(node) {
+function clearBrowserBugTimeout(node: CustomHTMLElement) {
   if (node.rcEndAnimTimeout) {
     clearTimeout(node.rcEndAnimTimeout);
     node.rcEndAnimTimeout = null;
   }
 }
-
-const cssAnimation = (node, transitionName, endCallback) => {
+interface TransitionName {
+  name?: string;
+  active?: string;
+}
+const cssAnimation = (
+  node: CustomHTMLElement,
+  transitionName: string | TransitionName,
+  endCallback?: any,
+) => {
   const nameIsObj = typeof transitionName === 'object';
-  const className = nameIsObj ? transitionName.name : transitionName;
-  const activeClassName = nameIsObj ? transitionName.active : `${transitionName}-active`;
+  const className = nameIsObj ? (transitionName as TransitionName).name : transitionName;
+  const activeClassName = nameIsObj
+    ? (transitionName as TransitionName).active
+    : `${transitionName}-active`;
   let end = endCallback;
   let start;
-  let active;
+  let active: any;
   const nodeClasses = classes(node);
 
   if (endCallback && Object.prototype.toString.call(endCallback) === '[object Object]') {
@@ -70,7 +85,7 @@ const cssAnimation = (node, transitionName, endCallback) => {
     node.rcEndListener();
   }
 
-  node.rcEndListener = e => {
+  node.rcEndListener = (e: Event) => {
     if (e && e.target !== node) {
       return;
     }
@@ -124,12 +139,12 @@ const cssAnimation = (node, transitionName, endCallback) => {
   };
 };
 
-cssAnimation.style = (node, style, callback) => {
+cssAnimation.style = (node: CustomHTMLElement, style: Record<string, any>, callback?: Function) => {
   if (node.rcEndListener) {
     node.rcEndListener();
   }
 
-  node.rcEndListener = e => {
+  node.rcEndListener = (e: Event) => {
     if (e && e.target !== node) {
       return;
     }
@@ -156,7 +171,7 @@ cssAnimation.style = (node, style, callback) => {
   node.rcAnimTimeout = requestAnimationTimeout(() => {
     for (const s in style) {
       if (style.hasOwnProperty(s)) {
-        node.style[s] = style[s];
+        node.style[s as any] = style[s];
       }
     }
     node.rcAnimTimeout = null;
@@ -164,7 +179,7 @@ cssAnimation.style = (node, style, callback) => {
   }, 0);
 };
 
-cssAnimation.setTransition = (node, p, value) => {
+cssAnimation.setTransition = (node: HTMLElement, p?: any, value?: any) => {
   let property = p;
   let v = value;
   if (value === undefined) {
@@ -173,7 +188,7 @@ cssAnimation.setTransition = (node, p, value) => {
   }
   property = property || '';
   capitalPrefixes.forEach(prefix => {
-    node.style[`${prefix}Transition${property}`] = v;
+    node.style[`${prefix}Transition${property}` as any] = v;
   });
 };
 

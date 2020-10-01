@@ -13,12 +13,13 @@ if (process.env.WORKFLOW === 'true') {
 module.exports = {
   testURL: 'http://localhost/',
   setupFiles: ['./tests/setup.js'],
-  moduleFileExtensions: ['js', 'jsx', 'json', 'vue', 'md', 'jpg'],
+  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'vue', 'md', 'jpg'],
   modulePathIgnorePatterns: ['/_site/'],
   testPathIgnorePatterns: testPathIgnorePatterns,
   transform: {
     '^.+\\.(vue|md)$': '<rootDir>/node_modules/vue-jest',
     '^.+\\.(js|jsx)$': '<rootDir>/node_modules/babel-jest',
+    '^.+\\.(ts|tsx)$': '<rootDir>/node_modules/ts-jest',
     '^.+\\.svg$': '<rootDir>/node_modules/jest-transform-stub',
   },
   testRegex: libDir === 'dist' ? 'demo\\.test\\.js$' : '.*\\.test\\.js$',
@@ -45,4 +46,9 @@ module.exports = {
   ],
   testEnvironment: 'jest-environment-jsdom-fifteen',
   transformIgnorePatterns,
+  globals: {
+    'ts-jest': {
+      babelConfig: true,
+    },
+  },
 };

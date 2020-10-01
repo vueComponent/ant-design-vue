@@ -12,7 +12,7 @@
     "jsx": "preserve",
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
     "target": "es6",
     "lib": ["dom", "es2017"],
     "skipLibCheck": true

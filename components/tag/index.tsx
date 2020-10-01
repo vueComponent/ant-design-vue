@@ -33,11 +33,12 @@ export interface TagProps extends HTMLAttributes {
   closeIcon?: VNodeTypes;
   style?: CSSProperties;
   visible?: boolean;
-  onClose?: Function;
+  onClose?: (e: MouseEvent) => void;
   icon?: VNodeTypes;
 }
 
 const Tag = defineComponent({
+  name: 'ATag',
   inheritAttrs: false,
   setup(_: TagProps, { slots, attrs }: SetupContext) {
     const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
@@ -103,11 +104,15 @@ const Tag = defineComponent({
         ...style,
       };
 
-      const tagClassName = classNames(prefixCls, {
-        [`${prefixCls}-${color}`]: presetColor,
-        [`${prefixCls}-has-color`]: color && !presetColor,
-        [`${prefixCls}-hidden`]: !visible.value,
-      });
+      const tagClassName = classNames(
+        prefixCls,
+        {
+          [`${prefixCls}-${color}`]: presetColor,
+          [`${prefixCls}-has-color`]: color && !presetColor,
+          [`${prefixCls}-hidden`]: !visible.value,
+        },
+        className,
+      );
 
       const tagProps = omit(restProps, ['visible']);
       const iconNode = icon || null;

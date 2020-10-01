@@ -1,11 +1,13 @@
 import { PropType } from 'vue';
 import isPlainObject from 'lodash-es/isPlainObject';
 import { toType, getType, isFunction, validateType, isInteger, isArray, warn } from './utils';
-interface BaseTypes {
-  type: any;
-  def: Function;
-  validator: Function;
-}
+
+// interface BaseTypes {
+//   type: any;
+//   def: Function;
+//   validator: Function;
+// }
+
 const PropTypes = {
   get any() {
     return toType('any', {
@@ -16,7 +18,7 @@ const PropTypes = {
   get func() {
     return {
       type: Function,
-    } as BaseTypes;
+    };
   },
 
   get bool() {

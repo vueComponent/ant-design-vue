@@ -16,7 +16,7 @@ export type ClassValue =
   | boolean;
 
 function classNames(...args: ClassValue[]): string {
-  const classes = [];
+  const classes: string[] = [];
   for (let i = 0; i < args.length; i++) {
     const value = args[i];
     if (!value) {

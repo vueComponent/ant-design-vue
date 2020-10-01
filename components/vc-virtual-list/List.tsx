@@ -1,3 +1,16 @@
+import {
+  ref,
+  defineComponent,
+  PropType,
+  watchEffect,
+  Component,
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  reactive,
+  CSSProperties,
+} from 'vue';
+import { Key } from '../_util/type';
 import Filler from './Filler';
 import Item from './Item';
 import ScrollBar from './ScrollBar';
@@ -7,18 +20,24 @@ import useFrameWheel from './hooks/useFrameWheel';
 import useMobileTouchMove from './hooks/useMobileTouchMove';
 import useOriginScroll from './hooks/useOriginScroll';
 import PropTypes from '../_util/vue-types';
-import { computed, nextTick, onBeforeUnmount, reactive, watchEffect } from 'vue';
 import classNames from '../_util/classNames';
-import createRef from '../_util/createRef';
+import { RenderFunc, SharedConfig } from './interface';
 
 const EMPTY_DATA = [];
 
-const ScrollStyle = {
+const ScrollStyle: CSSProperties = {
   overflowY: 'auto',
   overflowAnchor: 'none',
 };
 
-function renderChildren(list, startIndex, endIndex, setNodeRef, renderFunc, { getKey }) {
+function renderChildren<T>(
+  list: T[],
+  startIndex: number,
+  endIndex: number,
+  setNodeRef: (item: T, element: HTMLElement) => void,
+  renderFunc: RenderFunc<T>,
+  { getKey }: SharedConfig<T>,
+) {
   return list.slice(startIndex, endIndex + 1).map((item, index) => {
     const eleIndex = startIndex + index;
     const node = renderFunc(item, eleIndex, {
@@ -33,43 +52,58 @@ function renderChildren(list, startIndex, endIndex, setNodeRef, renderFunc, { ge
   });
 }
 
-const ListProps = {
-  prefixCls: PropTypes.string,
-  data: PropTypes.array,
-  height: PropTypes.number,
-  itemHeight: PropTypes.number,
-  /** If not match virtual scroll condition, Set List still use height of container. */
-  fullHeight: PropTypes.bool.def(true),
-  itemKey: PropTypes.any,
-  component: PropTypes.any,
-  /** Set `false` will always use real scroll instead of virtual one */
-  virtual: PropTypes.bool,
-  children: PropTypes.func,
-  onScroll: PropTypes.func,
-};
+export interface ListState<T = object> {
+  scrollTop: number;
+  scrollMoving: boolean;
+  mergedData: T[];
+}
 
-const List = {
-  props: ListProps,
+const List = defineComponent({
   inheritAttrs: false,
   name: 'List',
+  props: {
+    prefixCls: PropTypes.string,
+    data: PropTypes.array,
+    height: PropTypes.number,
+    itemHeight: PropTypes.number,
+    /** If not match virtual scroll condition, Set List still use height of container. */
+    fullHeight: PropTypes.bool,
+    itemKey: {
+      type: [String, Number, Function] as PropType<Key | ((item: object) => Key)>,
+      required: true,
+    },
+    component: {
+      type: [String, Object] as PropType<string | Component>,
+    },
+    /** Set `false` will always use real scroll instead of virtual one */
+    virtual: PropTypes.bool,
+    children: PropTypes.func,
+    onScroll: PropTypes.func,
+  },
   setup(props) {
     // ================================= MISC =================================
 
     const inVirtual = computed(() => {
       const { height, itemHeight, data, virtual } = props;
-      return virtual !== false && height && itemHeight && data && itemHeight * data.length > height;
+      return !!(
+        virtual !== false &&
+        height &&
+        itemHeight &&
+        data &&
+        itemHeight * data.length > height
+      );
     });
 
-    const state = reactive({
+    const state = reactive<ListState>({
       scrollTop: 0,
       scrollMoving: false,
-      mergedData: computed(() => props.data || EMPTY_DATA),
+      mergedData: computed(() => props.data || EMPTY_DATA) as any,
     });
 
-    const componentRef = createRef();
+    const componentRef = ref<Element>();
 
     // =============================== Item Key ===============================
-    const getKey = item => {
+    const getKey = (item: Record<string, any>) => {
       if (typeof props.itemKey === 'function') {
         return props.itemKey(item);
       }
@@ -81,8 +115,8 @@ const List = {
     };
 
     // ================================ Scroll ================================
-    function syncScrollTop(newTop) {
-      let value;
+    function syncScrollTop(newTop: number | ((prev: number) => number)) {
+      let value: number;
       if (typeof newTop === 'function') {
         value = newTop(state.scrollTop);
       } else {
@@ -91,8 +125,8 @@ const List = {
 
       const alignedTop = keepInRange(value);
 
-      if (componentRef.current) {
-        componentRef.current.scrollTop = alignedTop;
+      if (componentRef.value) {
+        componentRef.value.scrollTop = alignedTop;
       }
 
       state.scrollTop = alignedTop;
@@ -112,9 +146,9 @@ const List = {
         };
       }
       let itemTop = 0;
-      let startIndex;
-      let startOffset;
-      let endIndex;
+      let startIndex: number | undefined;
+      let startOffset: number | undefined;
+      let endIndex: number | undefined;
       const dataLen = state.mergedData.length;
       for (let i = 0; i < dataLen; i += 1) {
         const item = state.mergedData[i];
@@ -122,7 +156,7 @@ const List = {
 
         const cacheHeight = heights[key];
         const currentItemBottom =
-          itemTop + (cacheHeight === undefined ? props.itemHeight : cacheHeight);
+          itemTop + (cacheHeight === undefined ? props.itemHeight! : cacheHeight);
 
         if (currentItemBottom >= state.scrollTop && startIndex === undefined) {
           startIndex = i;
@@ -130,7 +164,7 @@ const List = {
         }
 
         // Check item bottom in the range. We will render additional one item for motion usage
-        if (currentItemBottom > state.scrollTop + props.height && endIndex === undefined) {
+        if (currentItemBottom > state.scrollTop + props.height! && endIndex === undefined) {
           endIndex = i;
         }
 
@@ -157,9 +191,9 @@ const List = {
       };
     });
     // =============================== In Range ===============================
-    const maxScrollHeight = computed(() => calRes.value.scrollHeight - props.height);
+    const maxScrollHeight = computed(() => calRes.value.scrollHeight! - props.height!);
 
-    function keepInRange(newScrollTop) {
+    function keepInRange(newScrollTop: number) {
       let newTop = Math.max(newScrollTop, 0);
       if (!Number.isNaN(maxScrollHeight.value)) {
         newTop = Math.min(newTop, maxScrollHeight.value);
@@ -173,15 +207,15 @@ const List = {
     const originScroll = useOriginScroll(isScrollAtTop, isScrollAtBottom);
 
     // ================================ Scroll ================================
-    function onScrollBar(newScrollTop) {
+    function onScrollBar(newScrollTop: number) {
       const newTop = newScrollTop;
       syncScrollTop(newTop);
     }
 
     // This code may only trigger in test case.
     // But we still need a sync if some special escape
-    function onFallbackScroll(e) {
-      const { scrollTop: newScrollTop } = e.currentTarget;
+    function onFallbackScroll(e: UIEvent) {
+      const { scrollTop: newScrollTop } = e.currentTarget as Element;
       if (newScrollTop !== state.scrollTop) {
         syncScrollTop(newScrollTop);
       }
@@ -209,29 +243,29 @@ const List = {
         return false;
       }
 
-      onRawWheel({ preventDefault() {}, deltaY });
+      onRawWheel({ preventDefault() {}, deltaY } as WheelEvent);
       return true;
     });
     // Firefox only
-    function onMozMousePixelScroll(e) {
+    function onMozMousePixelScroll(e: MouseEvent) {
       if (inVirtual.value) {
         e.preventDefault();
       }
     }
     const removeEventListener = () => {
-      if (componentRef.current) {
-        componentRef.current.removeEventListener('wheel', onRawWheel);
-        componentRef.current.removeEventListener('DOMMouseScroll', onFireFoxScroll);
-        componentRef.current.removeEventListener('MozMousePixelScroll', onMozMousePixelScroll);
+      if (componentRef.value) {
+        componentRef.value.removeEventListener('wheel', onRawWheel);
+        componentRef.value.removeEventListener('DOMMouseScroll', onFireFoxScroll);
+        componentRef.value.removeEventListener('MozMousePixelScroll', onMozMousePixelScroll);
       }
     };
     watchEffect(() => {
       nextTick(() => {
-        if (componentRef.current) {
+        if (componentRef.value) {
           removeEventListener();
-          componentRef.current.addEventListener('wheel', onRawWheel);
-          componentRef.current.addEventListener('DOMMouseScroll', onFireFoxScroll);
-          componentRef.current.addEventListener('MozMousePixelScroll', onMozMousePixelScroll);
+          componentRef.value.addEventListener('wheel', onRawWheel);
+          componentRef.value.addEventListener('DOMMouseScroll', onFireFoxScroll);
+          componentRef.value.addEventListener('MozMousePixelScroll', onMozMousePixelScroll);
         }
       });
     });
@@ -252,15 +286,15 @@ const List = {
     );
 
     const componentStyle = computed(() => {
-      let cs = null;
+      let cs: CSSProperties | null = null;
       if (props.height) {
         cs = { [props.fullHeight ? 'height' : 'maxHeight']: props.height + 'px', ...ScrollStyle };
 
         if (inVirtual.value) {
-          cs.overflowY = 'hidden';
+          cs!.overflowY = 'hidden';
 
           if (state.scrollMoving) {
-            cs.pointerEvents = 'none';
+            cs!.pointerEvents = 'none';
           }
         }
       }
@@ -305,7 +339,6 @@ const List = {
       componentStyle,
       onFallbackScroll,
       onScrollBar,
-      componentRef,
       inVirtual,
       collectHeight,
       sharedConfig,
@@ -332,7 +365,7 @@ const List = {
         <Component
           class={`${prefixCls}-holder`}
           style={componentStyle}
-          ref={componentRef}
+          ref="componentRef"
           onScroll={onFallbackScroll}
         >
           <Filler
@@ -364,6 +397,6 @@ const List = {
       </div>
     );
   },
-};
+});
 
 export default List;

@@ -5,7 +5,6 @@ import {
   defineComponent,
   SetupContext,
   App,
-  watchEffect,
   VNodeTypes,
   CSSProperties,
 } from 'vue';
@@ -44,28 +43,7 @@ const Tag = defineComponent({
     const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
 
     const visible = ref(true);
-
     const props = attrs as TagProps;
-
-    watchEffect(() => {
-      if ('visible' in props) {
-        visible.value = props.visible!;
-      }
-    });
-
-    const handleCloseClick = (e: MouseEvent) => {
-      e.stopPropagation();
-      if (props.onClose) {
-        props.onClose(e);
-      }
-
-      if (e.defaultPrevented) {
-        return;
-      }
-      if (!('visible' in props)) {
-        visible.value = false;
-      }
-    };
 
     return () => {
       const {
@@ -78,6 +56,24 @@ const Tag = defineComponent({
         closable = false,
         ...restProps
       } = props;
+
+      if ('visible' in props) {
+        visible.value = props.visible!;
+      }
+
+      const handleCloseClick = (e: MouseEvent) => {
+        e.stopPropagation();
+        if (props.onClose) {
+          props.onClose(e);
+        }
+
+        if (e.defaultPrevented) {
+          return;
+        }
+        if (!('visible' in props)) {
+          visible.value = false;
+        }
+      };
 
       const isPresetColor = (): boolean => {
         if (!color) {

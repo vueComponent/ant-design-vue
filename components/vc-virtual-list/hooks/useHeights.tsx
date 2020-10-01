@@ -1,9 +1,15 @@
-import { reactive, ref } from 'vue';
-import { findDOMNode } from '../../_util/props-util';
+import { reactive, Ref, ref, VNodeProps } from 'vue';
+import { GetKey } from '../interface';
 
-export default function useHeights(getKey, onItemAdd, onItemRemove) {
-  const instance = new Map();
-  const heights = reactive({});
+type CacheMap = Record<string, number>;
+
+export default function useHeights<T>(
+  getKey: GetKey<T>,
+  onItemAdd?: ((item: T) => void) | null,
+  onItemRemove?: ((item: T) => void) | null,
+): [(item: T, instance: HTMLElement) => void, () => void, CacheMap, Ref<number>] {
+  const instance = new Map<VNodeProps['key'], HTMLElement>();
+  const heights = reactive<CacheMap>({});
   let updatedMark = ref(0);
   let heightUpdateId = 0;
   function collectHeight() {
@@ -15,11 +21,10 @@ export default function useHeights(getKey, onItemAdd, onItemRemove) {
       let changed = false;
       instance.forEach((element, key) => {
         if (element && element.offsetParent) {
-          const htmlElement = findDOMNode(element);
-          const { offsetHeight } = htmlElement;
-          if (heights[key] !== offsetHeight) {
+          const { offsetHeight } = element;
+          if (heights[key!] !== offsetHeight) {
             changed = true;
-            heights[key] = htmlElement.offsetHeight;
+            heights[key!] = element.offsetHeight;
           }
         }
       });
@@ -29,7 +34,7 @@ export default function useHeights(getKey, onItemAdd, onItemRemove) {
     });
   }
 
-  function setInstance(item, ins) {
+  function setInstance(item: T, ins: HTMLElement) {
     const key = getKey(item);
     const origin = instance.get(key);
 

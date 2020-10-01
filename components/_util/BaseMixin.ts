@@ -2,7 +2,7 @@ import { getOptionProps } from './props-util';
 
 export default {
   methods: {
-    setState(state = {}, callback: () => any) {
+    setState(state = {}, callback: () => void) {
       let newState = typeof state === 'function' ? state(this.$data, this.$props) : state;
       if (this.getDerivedStateFromProps) {
         const s = this.getDerivedStateFromProps(getOptionProps(this), {

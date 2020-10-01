@@ -1,22 +1,33 @@
+import { Ref } from 'vue';
 import raf from '../../_util/raf';
 import isFF from '../utils/isFirefox';
 import useOriginScroll from './useOriginScroll';
 
-export default function useFrameWheel(inVirtual, isScrollAtTop, isScrollAtBottom, onWheelDelta) {
+interface FireFoxDOMMouseScrollEvent {
+  detail: number;
+  preventDefault: Function;
+}
+
+export default function useFrameWheel(
+  inVirtual: Ref<boolean>,
+  isScrollAtTop: Ref<boolean>,
+  isScrollAtBottom: Ref<boolean>,
+  onWheelDelta: (offset: number) => void,
+): [(e: WheelEvent) => void, (e: FireFoxDOMMouseScrollEvent) => void] {
   let offsetRef = 0;
-  let nextFrame = null;
+  let nextFrame: number | null | undefined = null;
 
   // Firefox patch
-  let wheelValue = null;
+  let wheelValue: null = null;
   let isMouseScroll = false;
 
   // Scroll status sync
   const originScroll = useOriginScroll(isScrollAtTop, isScrollAtBottom);
 
-  function onWheel(event) {
+  function onWheel(event: { preventDefault?: any; deltaY?: any }) {
     if (!inVirtual.value) return;
 
-    raf.cancel(nextFrame);
+    raf.cancel(nextFrame!);
 
     const { deltaY } = event;
     offsetRef += deltaY;
@@ -40,7 +51,7 @@ export default function useFrameWheel(inVirtual, isScrollAtTop, isScrollAtBottom
   }
 
   // A patch for firefox
-  function onFireFoxScroll(event) {
+  function onFireFoxScroll(event: { detail: any }) {
     if (!inVirtual.value) return;
 
     isMouseScroll = event.detail === wheelValue;

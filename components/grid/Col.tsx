@@ -43,9 +43,10 @@ function parseFlex(flex: FlexType): string {
   return flex;
 }
 
-export default defineComponent<ColProps>({
+export default defineComponent({
   name: 'ACol',
-  setup(props, { slots }) {
+  inheritAttrs: false,
+  setup(_: ColProps, { slots, attrs }) {
     const configProvider = inject('configProvider', defaultConfigProvider);
     const rowContext = inject<rowContextState>('rowContext', {});
 
@@ -62,12 +63,12 @@ export default defineComponent<ColProps>({
         flex,
         style,
         ...others
-      } = props;
+      } = attrs as ColProps;
       const prefixCls = configProvider.getPrefixCls('col', customizePrefixCls);
       let sizeClassObj = {};
       ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
         let sizeProps: ColSize = {};
-        const propSize = (props as any)[size];
+        const propSize = attrs[size];
         if (typeof propSize === 'number') {
           sizeProps.span = propSize;
         } else if (typeof propSize === 'object') {

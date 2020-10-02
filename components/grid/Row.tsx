@@ -8,7 +8,7 @@ import {
   onMounted,
   onBeforeUnmount,
 } from 'vue';
-import classNames from 'classnames';
+import classNames from '../_util/classNames';
 import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
@@ -43,11 +43,13 @@ export interface RowProps extends HTMLAttributes {
 
 export default defineComponent<RowProps>({
   name: 'ARow',
-  setup(props, { slots }) {
+  setup(_: RowProps, { slots, attrs }) {
     const rowContext = reactive<rowContextState>({
       gutter: undefined,
     });
     provide('rowContext', rowContext);
+
+    const props = attrs as RowProps;
 
     let token: number;
 

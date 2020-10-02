@@ -5,6 +5,7 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import DefaultEmptyImg from './empty';
 import SimpleEmptyImg from './simple';
 import { filterEmpty } from '../_util/props-util';
+import PropTypes from '../_util/vue-types';
 
 const defaultEmptyImg = <DefaultEmptyImg />;
 const simpleEmptyImg = <SimpleEmptyImg />;
@@ -15,8 +16,6 @@ export interface TransferLocale {
 
 export interface EmptyProps {
   prefixCls?: string;
-  class?: string;
-  style?: CSSProperties;
   imageStyle?: CSSProperties;
   image?: VNodeTypes | null;
   description?: VNodeTypes;
@@ -29,17 +28,17 @@ interface EmptyType extends FunctionalComponent<EmptyProps> {
   install: (app: App) => void;
 }
 
-const Empty: EmptyType = (props: EmptyProps, { slots }: SetupContext) => {
+const Empty: EmptyType = (props: EmptyProps, { slots = {}, attrs }: SetupContext) => {
   const configProvider = inject<ConfigConsumerProps>('configProvider', defaultConfigProvider);
   const { getPrefixCls, direction } = configProvider;
   const {
     prefixCls: customizePrefixCls,
     image = defaultEmptyImg,
-    description,
+    description = (slots.description && slots.description()) || undefined,
     imageStyle,
-    class: className,
+    class: className = '',
     ...restProps
-  } = props;
+  } = { ...props, ...attrs };
 
   return (
     <LocaleReceiver
@@ -58,7 +57,7 @@ const Empty: EmptyType = (props: EmptyProps, { slots }: SetupContext) => {
 
         return (
           <div
-            class={classNames(prefixCls, {
+            class={classNames(prefixCls, className, {
               [`${prefixCls}-normal`]: image === simpleEmptyImg,
               [`${prefixCls}-rtl`]: direction === 'rtl',
             })}
@@ -82,6 +81,13 @@ Empty.displayName = 'AEmpty';
 
 Empty.PRESENTED_IMAGE_DEFAULT = defaultEmptyImg;
 Empty.PRESENTED_IMAGE_SIMPLE = simpleEmptyImg;
+Empty.inheritAttrs = false;
+Empty.props = {
+  prefixCls: PropTypes.string,
+  image: PropTypes.any,
+  description: PropTypes.any,
+  imageStyle: PropTypes.object,
+};
 
 /* istanbul ignore next */
 Empty.install = function(app: App) {

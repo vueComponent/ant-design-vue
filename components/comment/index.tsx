@@ -49,7 +49,7 @@ const Comment = (
     actions && actions.length ? (
       <ul class={`${prefixCls}-actions`}>
         {actions.map((action, index) => (
-          <li key={`action-${index}`}>{action}</li> // eslint-disable-line react/no-array-index-key
+          <li key={`action-${index}`}>{action}</li>
         ))}
       </ul>
     ) : null;

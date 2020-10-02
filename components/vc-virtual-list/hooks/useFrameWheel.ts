@@ -18,7 +18,7 @@ export default function useFrameWheel(
   let nextFrame: number | null | undefined = null;
 
   // Firefox patch
-  let wheelValue: null = null;
+  let wheelValue = null;
   let isMouseScroll = false;
 
   // Scroll status sync

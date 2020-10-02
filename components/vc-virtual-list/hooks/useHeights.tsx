@@ -10,7 +10,7 @@ export default function useHeights<T>(
 ): [(item: T, instance: HTMLElement) => void, () => void, CacheMap, Ref<number>] {
   const instance = new Map<VNodeProps['key'], HTMLElement>();
   const heights = reactive<CacheMap>({});
-  let updatedMark = ref(0);
+  const updatedMark = ref(0);
   let heightUpdateId = 0;
   function collectHeight() {
     heightUpdateId += 1;

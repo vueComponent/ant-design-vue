@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types';
 import { alignElement, alignPoint } from 'dom-align';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import { isWindow, buffer, isSamePoint, isSimilarValue, restoreFocus } from './util';
-import { cloneElement } from '../_util/vnode.js';
+import { cloneElement } from '../_util/vnode';
 import clonedeep from 'lodash-es/cloneDeep';
 import { getSlot, findDOMNode } from '../_util/props-util';
 

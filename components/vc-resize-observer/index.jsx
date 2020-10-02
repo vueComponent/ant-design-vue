@@ -1,24 +1,19 @@
 // based on rc-resize-observer 0.1.3
-import { defineComponent, PropType } from 'vue';
 import ResizeObserver from 'resize-observer-polyfill';
 import BaseMixin from '../_util/BaseMixin';
 import { findDOMNode } from '../_util/props-util';
 
 // Still need to be compatible with React 15, we use class component here
-const VueResizeObserver = defineComponent({
+const VueResizeObserver = {
   name: 'ResizeObserver',
   mixins: [BaseMixin],
   props: {
     disabled: Boolean,
-    onResize: Function as PropType<
-      (size: { width: number; height: number; offsetWidth: number; offsetHeight: number }) => void
-    >,
-  },
-  beforeCreate() {
-    this.currentElement = null;
-    this.resizeObserver = null;
+    onResize: Function,
   },
   data() {
+    this.currentElement = null;
+    this.resizeObserver = null;
     return {
       width: 0,
       height: 0,
@@ -59,7 +54,7 @@ const VueResizeObserver = defineComponent({
       }
     },
 
-    handleResize(entries: ResizeObserverEntry[]) {
+    handleResize(entries) {
       const { target } = entries[0];
       const { width, height } = target.getBoundingClientRect();
       /**
@@ -87,8 +82,8 @@ const VueResizeObserver = defineComponent({
   },
 
   render() {
-    return this.$slots.default?.()[0];
+    return this.$slots.default && this.$slots.default()[0];
   },
-});
+};
 
 export default VueResizeObserver;

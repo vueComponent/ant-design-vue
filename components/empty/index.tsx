@@ -1,4 +1,12 @@
-import { CSSProperties, VNodeTypes, inject, App, SetupContext, FunctionalComponent } from 'vue';
+import {
+  CSSProperties,
+  VNodeTypes,
+  inject,
+  App,
+  SetupContext,
+  FunctionalComponent,
+  HTMLAttributes,
+} from 'vue';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider, ConfigConsumerProps } from '../config-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -14,7 +22,7 @@ export interface TransferLocale {
   description: string;
 }
 
-export interface EmptyProps {
+export interface EmptyProps extends HTMLAttributes {
   prefixCls?: string;
   imageStyle?: CSSProperties;
   image?: VNodeTypes | null;

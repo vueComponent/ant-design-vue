@@ -4,7 +4,7 @@ import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import getTransitionProps from '../_util/getTransitionProps';
 import Row from '../grid/Row';
-import Col, { ColProps } from '../grid/Col';
+import Col from '../grid/Col';
 import hasProp, {
   initDefaultProps,
   findDOMNode,
@@ -72,8 +72,8 @@ export const FormItemProps = {
   label: PropTypes.any,
   help: PropTypes.any,
   extra: PropTypes.any,
-  labelCol: PropTypes.shape(ColProps).loose,
-  wrapperCol: PropTypes.shape(ColProps).loose,
+  labelCol: PropTypes.object,
+  wrapperCol: PropTypes.object,
   hasFeedback: PropTypes.bool,
   colon: PropTypes.bool,
   labelAlign: PropTypes.oneOf(['left', 'right']),

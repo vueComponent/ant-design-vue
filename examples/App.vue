@@ -1,36 +1,16 @@
 <template>
-  <div>
-    <demo />
-  </div>
+  <a-empty
+    class="ddd"
+    image="https://gw.alipayobjects.com/mdn/miniapp_social/afts/img/A*pevERLJC9v0AAAAAAAAAAABjAQAAAQ/original"
+    :image-style="{
+      height: '60px',
+    }"
+  >
+    <template v-slot:description>
+      <span> Customize <a href="#API">Description</a> </span>
+    </template>
+    <a-button type="primary">
+      Create Now
+    </a-button>
+  </a-empty>
 </template>
-<script>
-import demo from '../components/vc-virtual-list/examples/basic.jsx';
-export default {
-  components: {
-    demo,
-  },
-  data() {
-    return {
-      visible: false,
-      pStyle: {
-        fontSize: '16px',
-        color: 'rgba(0,0,0,0.85)',
-        lineHeight: '24px',
-        display: 'block',
-        marginBottom: '16px',
-      },
-      pStyle2: {
-        marginBottom: '24px',
-      },
-    };
-  },
-  methods: {
-    showDrawer() {
-      this.visible = true;
-    },
-    onClose() {
-      this.visible = false;
-    },
-  },
-};
-</script>

@@ -15,7 +15,8 @@
     "noImplicitAny": false,
     "target": "es6",
     "lib": ["dom", "es2017"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowJs": true
   },
   "exclude": ["node_modules", "lib", "es"]
 }

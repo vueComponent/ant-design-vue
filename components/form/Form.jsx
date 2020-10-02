@@ -1,7 +1,6 @@
 import { inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import { ColProps } from '../grid/Col';
 import isRegExp from 'lodash-es/isRegExp';
 import warning from '../_util/warning';
 import FormItem from './FormItem';
@@ -16,8 +15,8 @@ import scrollIntoView from 'scroll-into-view-if-needed';
 
 export const FormProps = {
   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
-  labelCol: PropTypes.shape(ColProps).loose,
-  wrapperCol: PropTypes.shape(ColProps).loose,
+  labelCol: PropTypes.object,
+  wrapperCol: PropTypes.object,
   colon: PropTypes.bool,
   labelAlign: PropTypes.oneOf(['left', 'right']),
   prefixCls: PropTypes.string,

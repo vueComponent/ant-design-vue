@@ -126,6 +126,17 @@ const findDOMNode = instance => {
   }
   return node;
 };
+
+const findDOMNodeBySetup = instance => {
+  let node = instance && instance.ctx && instance.ctx.$el;
+  if (!node) return null;
+
+  while (node && !node.tagName) {
+    node = node.nextSibling;
+  }
+  return node;
+};
+
 const getOptionProps = instance => {
   const res = {};
   if (instance.$ && instance.$.vnode) {
@@ -415,6 +426,7 @@ export {
   getAllProps,
   getAllChildren,
   findDOMNode,
+  findDOMNodeBySetup,
   flattenChildren,
 };
 export default hasProp;

@@ -224,6 +224,7 @@
     "scroll-into-view-if-needed": "^2.2.25",
     "shallow-equal": "^1.0.0",
     "shallowequal": "^1.0.2",
+    "vue-types": "^3.0.0",
     "warning": "^4.0.0"
   },
   "sideEffects": [

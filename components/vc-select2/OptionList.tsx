@@ -5,7 +5,7 @@ import classNames from '../_util/classNames';
 import pickAttrs from '../_util/pickAttrs';
 import { isValidElement } from '../_util/props-util';
 import createRef from '../_util/createRef';
-import { computed, reactive, watch } from 'vue';
+import { computed, defineComponent, reactive, watch } from 'vue';
 import List from '../vc-virtual-list/List';
 
 const OptionListProps = {
@@ -39,7 +39,7 @@ const OptionListProps = {
  * Using virtual list of option display.
  * Will fallback to dom if use customize render.
  */
-const OptionList = {
+const OptionList = defineComponent({
   props: OptionListProps,
   name: 'OptionList',
   inheritAttrs: false,
@@ -138,7 +138,7 @@ const OptionList = {
       const mergedLabel = props.childrenAsData ? children : label;
       return item ? (
         <div
-          aria-label={typeof mergedLabel === 'string' ? mergedLabel : null}
+          aria-label={typeof mergedLabel === 'string' ? mergedLabel : undefined}
           {...attrs}
           key={index}
           role="option"
@@ -343,6 +343,6 @@ const OptionList = {
       </>
     );
   },
-};
+});
 
 export default OptionList;

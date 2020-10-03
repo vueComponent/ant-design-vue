@@ -1,4 +1,4 @@
-import { inject, provide } from 'vue';
+import { defineComponent, inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
 import {
@@ -37,7 +37,7 @@ const ALL_HANDLERS = [
   'onContextmenu',
 ];
 
-export default {
+export default defineComponent({
   name: 'Trigger',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -653,4 +653,4 @@ export default {
     }
     return [portal, trigger];
   },
-};
+});

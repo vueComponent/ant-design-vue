@@ -3,8 +3,10 @@ import PropTypes from '../_util/vue-types';
 import { getSlot } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import createRef from '../_util/createRef';
+import { CSSProperties, defineComponent, VNodeChild } from 'vue';
+import { RenderDOMFunc } from './interface';
 
-const getBuiltInPlacements = dropdownMatchSelectWidth => {
+const getBuiltInPlacements = (dropdownMatchSelectWidth: number | boolean) => {
   // Enable horizontal overflow auto-adjustment when a custom dropdown width is provided
   const adjustX = typeof dropdownMatchSelectWidth !== 'number' ? 0 : 1;
 
@@ -43,33 +45,27 @@ const getBuiltInPlacements = dropdownMatchSelectWidth => {
     },
   };
 };
-
-export default {
+export interface SelectTriggerProps {
+  prefixCls: string;
+  disabled: boolean;
+  visible: boolean;
+  popupElement: VNodeChild;
+  animation?: string;
+  transitionName?: string;
+  containerWidth: number;
+  dropdownStyle: CSSProperties;
+  dropdownClassName: string;
+  direction: string;
+  dropdownMatchSelectWidth?: boolean | number;
+  dropdownRender?: (menu: VNodeChild) => VNodeChild;
+  getPopupContainer?: RenderDOMFunc;
+  dropdownAlign: object;
+  empty: boolean;
+  getTriggerDOMNode: () => HTMLElement;
+}
+const SelectTrigger = defineComponent<SelectTriggerProps>({
   name: 'SelectTrigger',
   inheritAttrs: false,
-  props: {
-    // onPopupFocus: PropTypes.func,
-    // onPopupScroll: PropTypes.func,
-    dropdownAlign: PropTypes.object,
-    visible: PropTypes.bool,
-    disabled: PropTypes.bool,
-    dropdownClassName: PropTypes.string,
-    dropdownStyle: PropTypes.object,
-    empty: PropTypes.bool,
-    prefixCls: PropTypes.string,
-    popupClassName: PropTypes.string,
-    // children: PropTypes.any,
-    animation: PropTypes.string,
-    transitionName: PropTypes.string,
-    getPopupContainer: PropTypes.func,
-    dropdownRender: PropTypes.func,
-    containerWidth: PropTypes.number,
-    dropdownMatchSelectWidth: PropTypes.oneOfType([Number, Boolean]).def(true),
-    popupElement: PropTypes.any,
-    direction: PropTypes.string,
-    getTriggerDOMNode: PropTypes.func,
-  },
-
   created() {
     this.popupRef = createRef();
   },
@@ -89,7 +85,7 @@ export default {
   },
 
   render() {
-    const { empty, ...props } = { ...this.$props, ...this.$attrs };
+    const { empty = false, ...props } = { ...this.$props, ...this.$attrs };
     const {
       visible,
       dropdownAlign,
@@ -122,7 +118,6 @@ export default {
         showAction={[]}
         hideAction={[]}
         popupPlacement={this.direction === 'rtl' ? 'bottomRight' : 'bottomLeft'}
-        popupPlacement="bottomLeft"
         builtinPlacements={builtInPlacements}
         prefixCls={dropdownPrefixCls}
         popupTransitionName={this.getDropdownTransitionName()}
@@ -141,4 +136,24 @@ export default {
       </Trigger>
     );
   },
+});
+SelectTrigger.props = {
+  dropdownAlign: PropTypes.object,
+  visible: PropTypes.bool,
+  disabled: PropTypes.bool,
+  dropdownClassName: PropTypes.string,
+  dropdownStyle: PropTypes.object,
+  empty: PropTypes.bool,
+  prefixCls: PropTypes.string,
+  popupClassName: PropTypes.string,
+  animation: PropTypes.string,
+  transitionName: PropTypes.string,
+  getPopupContainer: PropTypes.func,
+  dropdownRender: PropTypes.func,
+  containerWidth: PropTypes.number,
+  dropdownMatchSelectWidth: PropTypes.oneOfType([Number, Boolean]).def(true),
+  popupElement: PropTypes.any,
+  direction: PropTypes.string,
+  getTriggerDOMNode: PropTypes.func,
 };
+export default SelectTrigger;

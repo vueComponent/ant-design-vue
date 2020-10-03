@@ -1,6 +1,10 @@
-export const responsiveArray = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
+export type Breakpoint = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+export type BreakpointMap = Partial<Record<Breakpoint, string>>;
+export type ScreenMap = Partial<Record<Breakpoint, boolean>>;
 
-export const responsiveMap = {
+export const responsiveArray: Breakpoint[] = ['xxl', 'xl', 'lg', 'md', 'sm', 'xs'];
+
+export const responsiveMap: BreakpointMap = {
   xs: '(max-width: 575px)',
   sm: '(min-width: 576px)',
   md: '(min-width: 768px)',
@@ -9,40 +13,46 @@ export const responsiveMap = {
   xxl: '(min-width: 1600px)',
 };
 
-const subscribers = new Map();
+type SubscribeFunc = (screens: ScreenMap) => void;
+const subscribers = new Map<Number, SubscribeFunc>();
 let subUid = -1;
 let screens = {};
 
 const responsiveObserve = {
-  matchHandlers: {},
-  dispatch(pointMap) {
+  matchHandlers: {} as {
+    [prop: string]: {
+      mql: MediaQueryList;
+      listener: ((this: MediaQueryList, ev: MediaQueryListEvent) => any) | null;
+    };
+  },
+  dispatch(pointMap: ScreenMap) {
     screens = pointMap;
     subscribers.forEach(func => func(screens));
     return subscribers.size >= 1;
   },
-  subscribe(func) {
+  subscribe(func: SubscribeFunc): number {
     if (!subscribers.size) this.register();
     subUid += 1;
     subscribers.set(subUid, func);
     func(screens);
     return subUid;
   },
-  unsubscribe(token) {
+  unsubscribe(token: number) {
     subscribers.delete(token);
     if (!subscribers.size) this.unregister();
   },
   unregister() {
-    Object.keys(responsiveMap).forEach(screen => {
-      const matchMediaQuery = responsiveMap[screen];
+    Object.keys(responsiveMap).forEach((screen: Breakpoint) => {
+      const matchMediaQuery = responsiveMap[screen]!;
       const handler = this.matchHandlers[matchMediaQuery];
       handler?.mql.removeListener(handler?.listener);
     });
     subscribers.clear();
   },
   register() {
-    Object.keys(responsiveMap).forEach(screen => {
-      const matchMediaQuery = responsiveMap[screen];
-      const listener = ({ matches }) => {
+    Object.keys(responsiveMap).forEach((screen: Breakpoint) => {
+      const matchMediaQuery = responsiveMap[screen]!;
+      const listener = ({ matches }: { matches: boolean }) => {
         this.dispatch({
           ...screens,
           [screen]: matches,

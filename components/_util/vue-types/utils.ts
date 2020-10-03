@@ -1,8 +1,22 @@
+import { PropOptions } from '../type';
 import isPlainObject from 'lodash-es/isPlainObject';
 
 const ObjProto = Object.prototype;
 const toString = ObjProto.toString;
 export const hasOwn = ObjProto.hasOwnProperty;
+
+export type NativeType = string | boolean | number | null | undefined | Function;
+
+export type DefaultFactory<T> = (() => T) | T;
+
+export type InferType<T> = T extends NativeType ? T : DefaultFactory<T>;
+
+export interface TypeDef<T = unknown, D = InferType<T>, U = T extends NativeType ? T : () => T>
+  extends PropOptions<T> {
+  _vueTypes_name: string;
+  readonly def: (def?: D) => this & { default: U };
+  readonly isRequired: this & { required: true };
+}
 
 const FN_MATCH_REGEXP = /^\s*function (\w+)/;
 
@@ -13,7 +27,7 @@ export const getType = fn => {
   return match && match[1];
 };
 
-export const getNativeType = value => {
+export const getNativeType = (value: any) => {
   if (value === null || value === undefined) return null;
   const match = value.constructor.toString().match(FN_MATCH_REGEXP);
   return match && match[1];
@@ -30,7 +44,7 @@ export const noop = () => {};
  * @param {object} obj - Object
  * @param {string} prop - Property to check
  */
-export const has = (obj, prop) => hasOwn.call(obj, prop);
+export const has = <T extends any, U extends keyof T>(obj: T, prop: U) => hasOwn.call(obj, prop);
 
 /**
  * Determines whether the passed value is an integer. Uses `Number.isInteger` if available
@@ -41,7 +55,7 @@ export const has = (obj, prop) => hasOwn.call(obj, prop);
  */
 export const isInteger =
   Number.isInteger ||
-  function(value) {
+  function(value: unknown): value is number {
     return typeof value === 'number' && isFinite(value) && Math.floor(value) === value;
   };
 
@@ -53,7 +67,7 @@ export const isInteger =
  */
 export const isArray =
   Array.isArray ||
-  function(value) {
+  function(value: unknown): value is any[] {
     return toString.call(value) === '[object Array]';
   };
 
@@ -63,22 +77,23 @@ export const isArray =
  * @param {any} value - Value to check
  * @returns {boolean}
  */
-export const isFunction = value => toString.call(value) === '[object Function]';
+export const isFunction = (value: unknown): value is Function =>
+  toString.call(value) === '[object Function]';
 
 /**
  * Adds a `def` method to the object returning a new object with passed in argument as `default` property
  *
  * @param {object} type - Object to enhance
  */
-export const withDefault = function(type) {
+export const withDefault = function<T>(type: T) {
   Object.defineProperty(type, 'def', {
-    value(def) {
+    value(def: T) {
       if (def === undefined && this.default === undefined) {
         this.default = undefined;
         return this;
       }
       if (!isFunction(def) && !validateType(this, def)) {
-        warn(`${this._vueTypes_name} - invalid default value: "${def}"`, def);
+        warn(`${this._vueTypes_name} - invalid default value: "${def}"`);
         return this;
       }
       this.default =
@@ -100,7 +115,7 @@ export const withDefault = function(type) {
  *
  * @param {object} type - Object to enhance
  */
-export const withRequired = function(type) {
+export const withRequired = function<T>(type: T) {
   Object.defineProperty(type, 'isRequired', {
     get() {
       this.required = true;
@@ -117,7 +132,7 @@ export const withRequired = function(type) {
  * @param {object} obj - Object to enhance
  * @returns {object}
  */
-export const toType = (name, obj) => {
+export const toType = <T extends any>(name: string, obj: PropOptions<T>): TypeDef<T> => {
   Object.defineProperty(obj, '_vueTypes_name', {
     enumerable: false,
     writable: false,
@@ -129,7 +144,7 @@ export const toType = (name, obj) => {
   if (isFunction(obj.validator)) {
     obj.validator = obj.validator.bind(obj);
   }
-  return obj;
+  return obj as TypeDef<T>;
 };
 
 /**
@@ -186,7 +201,14 @@ export const validateType = (type, value, silent = false) => {
   return valid;
 };
 
-let warn = noop;
+/**
+ * A function that returns its first argument
+ *
+ * @param arg - Any argument
+ */
+export const identity = (arg: any) => arg;
+
+let warn: (msg: string) => string | void = identity;
 
 if (process.env.NODE_ENV !== 'production') {
   const hasConsole = typeof console !== 'undefined';

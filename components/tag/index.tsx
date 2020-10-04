@@ -6,10 +6,9 @@ import {
   SetupContext,
   App,
   VNodeTypes,
-  CSSProperties,
+  watchEffect,
 } from 'vue';
 import classNames from '../_util/classNames';
-import omit from 'omit.js';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Wave from '../_util/wave';
 import {
@@ -27,11 +26,9 @@ const PresetStatusColorRegex = new RegExp(`^(${PresetStatusColorTypes.join('|')}
 
 export interface TagProps extends HTMLAttributes {
   prefixCls?: string;
-  class?: string;
   color?: LiteralUnion<PresetColorType | PresetStatusColorType, string>;
   closable?: boolean;
   closeIcon?: VNodeTypes;
-  style?: CSSProperties;
   visible?: boolean;
   onClose?: (e: MouseEvent) => void;
   icon?: VNodeTypes;
@@ -39,49 +36,49 @@ export interface TagProps extends HTMLAttributes {
 
 const Tag = defineComponent({
   name: 'ATag',
-  inheritAttrs: false,
-  setup(_: TagProps, { slots, attrs }: SetupContext) {
+  emits: ['update:visible'],
+  setup(props: TagProps, { slots, emit, attrs }: SetupContext) {
     const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
 
     const visible = ref(true);
-    const props = attrs as TagProps;
+
+    watchEffect(() => {
+      if ('visible' in props) {
+        visible.value = props.visible!;
+      }
+    });
+
+    const handleCloseClick = (e: MouseEvent) => {
+      e.stopPropagation();
+      if (props.onClose) {
+        emit('update:visible', false);
+        props.onClose(e);
+      }
+
+      if (e.defaultPrevented) {
+        return;
+      }
+      if (!('visible' in props)) {
+        visible.value = false;
+      }
+    };
+
+    const isPresetColor = (): boolean => {
+      const { color } = props;
+      if (!color) {
+        return false;
+      }
+      return PresetColorRegex.test(color) || PresetStatusColorRegex.test(color);
+    };
 
     return () => {
       const {
         prefixCls: customizePrefixCls,
         icon,
         color,
-        closeIcon,
-        class: className,
-        style = {},
+        closeIcon = slots.closeIcon?.(),
         closable = false,
-        ...restProps
       } = props;
-
-      if ('visible' in props) {
-        visible.value = props.visible!;
-      }
-
-      const handleCloseClick = (e: MouseEvent) => {
-        e.stopPropagation();
-        if (props.onClose) {
-          props.onClose(e);
-        }
-
-        if (e.defaultPrevented) {
-          return;
-        }
-        if (!('visible' in props)) {
-          visible.value = false;
-        }
-      };
-
-      const isPresetColor = (): boolean => {
-        if (!color) {
-          return false;
-        }
-        return PresetColorRegex.test(color) || PresetStatusColorRegex.test(color);
-      };
 
       const presetColor = isPresetColor();
       const prefixCls = getPrefixCls('tag', customizePrefixCls);
@@ -101,20 +98,14 @@ const Tag = defineComponent({
 
       const tagStyle = {
         backgroundColor: color && !isPresetColor() ? color : undefined,
-        ...style,
       };
 
-      const tagClassName = classNames(
-        prefixCls,
-        {
-          [`${prefixCls}-${color}`]: presetColor,
-          [`${prefixCls}-has-color`]: color && !presetColor,
-          [`${prefixCls}-hidden`]: !visible.value,
-        },
-        className,
-      );
+      const tagClassName = classNames(prefixCls, {
+        [`${prefixCls}-${color}`]: presetColor,
+        [`${prefixCls}-has-color`]: color && !presetColor,
+        [`${prefixCls}-hidden`]: !visible.value,
+      });
 
-      const tagProps = omit(restProps, ['visible']);
       const iconNode = icon || null;
       const children = slots.default?.();
       const kids = iconNode ? (
@@ -126,10 +117,10 @@ const Tag = defineComponent({
         children
       );
 
-      const isNeedWave = 'onClick' in props;
+      const isNeedWave = 'onClick' in attrs;
 
       const tagNode = (
-        <span {...tagProps} class={tagClassName} style={tagStyle}>
+        <span v-show={visible.value} class={tagClassName} style={tagStyle}>
           {kids}
           {renderCloseIcon()}
         </span>
@@ -139,6 +130,8 @@ const Tag = defineComponent({
     };
   },
 });
+
+Tag.props = ['prefixCls', 'color', 'closable', 'closeIcon', 'visible', 'icon'];
 
 Tag.CheckableTag = CheckableTag;
 

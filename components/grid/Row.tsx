@@ -18,13 +18,6 @@ import ResponsiveObserve, {
   responsiveArray,
 } from '../_util/responsiveObserve';
 
-const RowProps = {
-  gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]),
-  type: PropTypes.oneOf(['flex']),
-  align: PropTypes.oneOf(['top', 'middle', 'bottom', 'stretch']),
-  justify: PropTypes.oneOf(['start', 'end', 'center', 'space-around', 'space-between']),
-  prefixCls: PropTypes.string,
-};
 const RowAligns = tuple('top', 'middle', 'bottom', 'stretch');
 const RowJustify = tuple('start', 'end', 'center', 'space-around', 'space-between');
 
@@ -35,21 +28,20 @@ export interface rowContextState {
 }
 
 export interface RowProps extends HTMLAttributes {
+  type?: 'flex';
   gutter?: Gutter | [Gutter, Gutter];
   align?: typeof RowAligns[number];
   justify?: typeof RowJustify[number];
   prefixCls?: string;
 }
 
-export default defineComponent<RowProps>({
+const ARow = defineComponent<RowProps>({
   name: 'ARow',
-  setup(_: RowProps, { slots, attrs }) {
+  setup(props, { slots }) {
     const rowContext = reactive<rowContextState>({
       gutter: undefined,
     });
     provide('rowContext', rowContext);
-
-    const props = attrs as RowProps;
 
     let token: number;
 
@@ -81,8 +73,7 @@ export default defineComponent<RowProps>({
     const gutterRef = ref<Gutter | [Gutter, Gutter]>();
     gutterRef.value = props.gutter;
 
-    const configProvider = inject('configProvider', defaultConfigProvider);
-    const { getPrefixCls } = configProvider;
+    const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
 
     const getGutter = (): [number, number] => {
       const results: [number, number] = [0, 0];
@@ -105,24 +96,13 @@ export default defineComponent<RowProps>({
     };
 
     return () => {
-      const {
-        prefixCls: customizePrefixCls,
-        justify,
-        align,
-        class: className,
-        style,
-        ...others
-      } = props;
+      const { prefixCls: customizePrefixCls, justify, align } = props;
       const prefixCls = getPrefixCls('row', customizePrefixCls);
       const gutter = getGutter();
-      const classes = classNames(
-        prefixCls,
-        {
-          [`${prefixCls}-${justify}`]: justify,
-          [`${prefixCls}-${align}`]: align,
-        },
-        className,
-      );
+      const classes = classNames(prefixCls, {
+        [`${prefixCls}-${justify}`]: justify,
+        [`${prefixCls}-${align}`]: align,
+      });
       const rowStyle = {
         ...(gutter[0]! > 0
           ? {
@@ -137,15 +117,23 @@ export default defineComponent<RowProps>({
             }
           : {}),
       };
-      const otherProps = { ...others, style };
-      delete otherProps.gutter;
 
       rowContext.gutter = gutter;
       return (
-        <div {...otherProps} class={classes} style={rowStyle}>
+        <div class={classes} style={rowStyle}>
           {slots.default?.()}
         </div>
       );
     };
   },
 });
+
+ARow.props = {
+  type: PropTypes.oneOf(['flex']),
+  align: PropTypes.oneOf(RowAligns),
+  justify: PropTypes.oneOf(RowJustify),
+  prefixCls: PropTypes.string,
+  gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]).def(0),
+};
+
+export default ARow;

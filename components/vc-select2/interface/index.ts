@@ -1,4 +1,5 @@
 import * as Vue from 'vue';
+import { VNode } from 'vue';
 import { Key, RawValueType } from './generator';
 
 export type RenderDOMFunc = (props: any) => HTMLElement;
@@ -19,12 +20,11 @@ export interface OptionCoreData {
   disabled?: boolean;
   value: Key;
   title?: string;
-  className?: string;
   class?: string;
   style?: Vue.CSSProperties;
   label?: Vue.VNodeChild;
   /** @deprecated Only works when use `children` as option data */
-  children?: Vue.VNodeChild;
+  children?: VNode[] | JSX.Element[];
 }
 
 export interface OptionData extends OptionCoreData {
@@ -36,7 +36,6 @@ export interface OptionGroupData {
   key?: Key;
   label?: Vue.VNodeChild;
   options: OptionData[];
-  className?: string;
   class?: string;
   style?: Vue.CSSProperties;
 

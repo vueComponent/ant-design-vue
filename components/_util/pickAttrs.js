@@ -1,23 +1,23 @@
-const attributes = `accept acceptCharset accessKey action allowFullScreen allowTransparency
-    alt async autoComplete autoFocus autoPlay capture cellPadding cellSpacing challenge
-    charSet checked classID className colSpan cols content contentEditable contextMenu
-    controls coords crossOrigin data dateTime default defer dir disabled download draggable
-    encType form formAction formEncType formMethod formNoValidate formTarget frameBorder
-    headers height hidden high href hrefLang htmlFor httpEquiv icon id inputMode integrity
-    is keyParams keyType kind label lang list loop low manifest marginHeight marginWidth max maxLength media
-    mediaGroup method min minLength multiple muted name noValidate nonce open
-    optimum pattern placeholder poster preload radioGroup readOnly rel required
-    reversed role rowSpan rows sandbox scope scoped scrolling seamless selected
-    shape size sizes span spellCheck src srcDoc srcLang srcSet start step style
-    summary tabIndex target title type useMap value width wmode wrap`;
+const attributes = `accept acceptcharset accesskey action allowfullscreen allowtransparency
+alt async autocomplete autofocus autoplay capture cellpadding cellspacing challenge
+charset checked classid classname colspan cols content contenteditable contextmenu
+controls coords crossorigin data datetime default defer dir disabled download draggable
+enctype form formaction formenctype formmethod formnovalidate formtarget frameborder
+headers height hidden high href hreflang htmlfor httpequiv icon id inputmode integrity
+is keyparams keytype kind label lang list loop low manifest marginheight marginwidth max maxlength media
+mediagroup method min minlength multiple muted name novalidate nonce open
+optimum pattern placeholder poster preload radiogroup readonly rel required
+reversed role rowspan rows sandbox scope scoped scrolling seamless selected
+shape size sizes span spellcheck src srcdoc srclang srcset start step style
+summary tabindex target title type usemap value width wmode wrap`;
 
-const eventsName = `onCopy onCut onPaste onCompositionEnd onCompositionStart onCompositionUpdate onKeyDown
-    onKeyPress onKeyUp onFocus onBlur onChange onInput onSubmit onClick onContextMenu onDoubleClick
-    onDrag onDragEnd onDragEnter onDragExit onDragLeave onDragOver onDragStart onDrop onMouseDown
-    onMouseEnter onMouseLeave onMouseMove onMouseOut onMouseOver onMouseUp onSelect onTouchCancel
-    onTouchEnd onTouchMove onTouchStart onScroll onWheel onAbort onCanPlay onCanPlayThrough
-    onDurationChange onEmptied onEncrypted onEnded onError onLoadedData onLoadedMetadata
-    onLoadStart onPause onPlay onPlaying onProgress onRateChange onSeeked onSeeking onStalled onSuspend onTimeUpdate onVolumeChange onWaiting onLoad onError`;
+const eventsName = `onCopy onCut onPaste onCompositionend onCompositionstart onCompositionupdate onKeydown
+    onKeypress onKeyup onFocus onBlur onChange onInput onSubmit onClick onContextmenu onDoubleclick onDblclick
+    onDrag onDragend onDragenter onDragexit onDragleave onDragover onDragstart onDrop onMousedown
+    onMouseenter onMouseleave onMousemove onMouseout onMouseover onMouseup onSelect onTouchcancel
+    onTouchend onTouchmove onTouchstart onScroll onWheel onAbort onCanplay onCanplaythrough
+    onDurationchange onEmptied onEncrypted onEnded onError onLoadeddata onLoadedmetadata
+    onLoadstart onPause onPlay onPlaying onProgress onRatechange onSeeked onSeeking onStalled onSuspend onTimeupdate onVolumechange onWaiting onLoad onError`;
 
 const propList = `${attributes} ${eventsName}`.split(/[\s\n]+/);
 
@@ -60,7 +60,7 @@ export default function pickAttrs(props, ariaOnly = false) {
       // Data
       (mergedConfig.data && match(key, dataPrefix)) ||
       // Attr
-      (mergedConfig.attr && propList.includes(key))
+      (mergedConfig.attr && (propList.includes(key) || propList.includes(key.toLowerCase())))
     ) {
       attrs[key] = props[key];
     }

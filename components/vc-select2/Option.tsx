@@ -1,14 +1,17 @@
-import PropTypes from '../_util/vue-types';
+import { FunctionalComponent } from 'vue';
 
-export default {
-  props: {
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    label: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    disabled: PropTypes.bool,
-    title: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  },
-  isSelectOption: true,
-  render() {
-    return null;
-  },
-};
+import { OptionCoreData } from './interface';
+
+export interface OptionProps extends Omit<OptionCoreData, 'label'> {
+  /** Save for customize data */
+  [prop: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
+}
+
+export interface OptionFC extends FunctionalComponent<OptionProps> {
+  /** Legacy for check if is a Option Group */
+  isSelectOption: boolean;
+}
+
+const Option: OptionFC = () => null;
+Option.isSelectOption = true;
+export default Option;

@@ -5,8 +5,41 @@ import classNames from '../_util/classNames';
 import pickAttrs from '../_util/pickAttrs';
 import { isValidElement } from '../_util/props-util';
 import createRef from '../_util/createRef';
-import { computed, defineComponent, reactive, watch } from 'vue';
+import { computed, defineComponent, reactive, VNodeChild, watch } from 'vue';
 import List from '../vc-virtual-list/List';
+import {
+  OptionsType as SelectOptionsType,
+  OptionData,
+  RenderNode,
+  OnActiveValue,
+} from './interface';
+import { RawValueType, FlattenOptionsType } from './interface/generator';
+export interface OptionListProps {
+  prefixCls: string;
+  id: string;
+  options: SelectOptionsType;
+  flattenOptions: FlattenOptionsType<SelectOptionsType>;
+  height: number;
+  itemHeight: number;
+  values: Set<RawValueType>;
+  multiple: boolean;
+  open: boolean;
+  defaultActiveFirstOption?: boolean;
+  notFoundContent?: VNodeChild;
+  menuItemSelectedIcon?: RenderNode;
+  childrenAsData: boolean;
+  searchValue: string;
+  virtual: boolean;
+
+  onSelect: (value: RawValueType, option: { selected: boolean }) => void;
+  onToggleOpen: (open?: boolean) => void;
+  /** Tell Select that some value is now active to make accessibility work */
+  onActiveValue: OnActiveValue;
+  onScroll: EventHandlerNonNull;
+
+  /** Tell Select that mouse enter the popup to force re-render */
+  onMouseenter?: EventHandlerNonNull;
+}
 
 const OptionListProps = {
   prefixCls: PropTypes.string,
@@ -39,8 +72,7 @@ const OptionListProps = {
  * Using virtual list of option display.
  * Will fallback to dom if use customize render.
  */
-const OptionList = defineComponent({
-  props: OptionListProps,
+const OptionList = defineComponent<OptionListProps>({
   name: 'OptionList',
   inheritAttrs: false,
   setup(props) {
@@ -49,25 +81,25 @@ const OptionList = defineComponent({
     // =========================== List ===========================
     const listRef = createRef();
 
-    const onListMouseDown = event => {
+    const onListMouseDown: EventHandlerNonNull = event => {
       event.preventDefault();
     };
 
-    const scrollIntoView = index => {
+    const scrollIntoView = (index: number) => {
       if (listRef.current) {
         listRef.current.scrollTo({ index });
       }
     };
 
     // ========================== Active ==========================
-    const getEnabledActiveIndex = (index, offset = 1) => {
+    const getEnabledActiveIndex = (index: number, offset = 1) => {
       const len = props.flattenOptions.length;
 
       for (let i = 0; i < len; i += 1) {
         const current = (index + i * offset + len) % len;
 
         const { group, data } = props.flattenOptions[current];
-        if (!group && !data.disabled) {
+        if (!group && !(data as OptionData).disabled) {
           return current;
         }
       }
@@ -78,9 +110,9 @@ const OptionList = defineComponent({
       activeIndex: getEnabledActiveIndex(0),
     });
 
-    const setActive = (index, fromKeyboard = false) => {
+    const setActive = (index: number, fromKeyboard = false) => {
       state.activeIndex = index;
-      const info = { source: fromKeyboard ? 'keyboard' : 'mouse' };
+      const info = { source: fromKeyboard ? ('keyboard' as const) : ('mouse' as const) };
 
       // Trigger active event
       const flattenItem = props.flattenOptions[index];
@@ -94,30 +126,38 @@ const OptionList = defineComponent({
 
     // Auto active first item when list length or searchValue changed
 
-    watch([props.flattenOptions.length, props.searchValue], () => {
-      setActive(props.defaultActiveFirstOption !== false ? getEnabledActiveIndex(0) : -1);
-    });
+    watch(
+      computed(() => [props.flattenOptions.length, props.searchValue]),
+      () => {
+        setActive(props.defaultActiveFirstOption !== false ? getEnabledActiveIndex(0) : -1);
+      },
+    );
     // Auto scroll to item position in single mode
-    watch(props.open, () => {
-      /**
-       * React will skip `onChange` when component update.
-       * `setActive` function will call root accessibility state update which makes re-render.
-       * So we need to delay to let Input component trigger onChange first.
-       */
-      const timeoutId = setTimeout(() => {
-        if (!props.multiple && props.open && props.values.size === 1) {
-          const value = Array.from(props.values)[0];
-          const index = props.flattenOptions.findIndex(({ data }) => data.value === value);
-          setActive(index);
-          scrollIntoView(index);
-        }
-      });
 
-      return () => clearTimeout(timeoutId);
-    });
+    let timeoutId: number;
+    watch(
+      computed(() => props.open),
+      () => {
+        /**
+         * React will skip `onChange` when component update.
+         * `setActive` function will call root accessibility state update which makes re-render.
+         * So we need to delay to let Input component trigger onChange first.
+         */
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+          if (!props.multiple && props.open && props.values.size === 1) {
+            const value = Array.from(props.values)[0];
+            const index = props.flattenOptions.findIndex(({ data }) => data.value === value);
+            setActive(index);
+            scrollIntoView(index);
+          }
+        });
+      },
+      { immediate: true, flush: 'post' },
+    );
 
     // ========================== Values ==========================
-    const onSelectValue = value => {
+    const onSelectValue = (value?: RawValueType) => {
       if (value !== undefined) {
         props.onSelect(value, { selected: !props.values.has(value) });
       }
@@ -128,11 +168,11 @@ const OptionList = defineComponent({
       }
     };
 
-    function renderItem(index) {
+    function renderItem(index: number) {
       const item = props.flattenOptions[index];
       if (!item) return null;
 
-      const itemData = item.data || {};
+      const itemData = (item.data || {}) as OptionData;
       const { value, label, children } = itemData;
       const attrs = pickAttrs(itemData, true);
       const mergedLabel = props.childrenAsData ? children : label;
@@ -157,7 +197,7 @@ const OptionList = defineComponent({
       itemPrefixCls,
       setActive,
       onSelectValue,
-      onKeydown: event => {
+      onKeydown: (event: KeyboardEvent) => {
         const { which } = event;
         switch (which) {
           // >>> Arrow keys
@@ -204,7 +244,7 @@ const OptionList = defineComponent({
       },
       onKeyup: () => {},
 
-      scrollTo: index => {
+      scrollTo: (index: number) => {
         scrollIntoView(index);
       },
     };
@@ -256,8 +296,7 @@ const OptionList = defineComponent({
           onScroll={onScroll}
           virtual={virtual}
           onMouseenter={onMouseenter}
-        >
-          {({ group, groupOption, data }, itemIndex) => {
+          children={({ group, groupOption, data }, itemIndex) => {
             const { label, key } = data;
 
             // Group
@@ -339,10 +378,12 @@ const OptionList = defineComponent({
               </div>
             );
           }}
-        </List>
+        ></List>
       </>
     );
   },
 });
+
+OptionList.props = OptionListProps;
 
 export default OptionList;

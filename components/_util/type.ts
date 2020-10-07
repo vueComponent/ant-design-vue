@@ -19,6 +19,8 @@ export type LiteralUnion<T extends U, U> = T | (U & {});
 
 export type Data = Record<string, unknown>;
 
+export type Key = string | number;
+
 type DefaultFactory<T> = (props: Data) => T | null | undefined;
 
 export interface PropOptions<T = any, D = T> {

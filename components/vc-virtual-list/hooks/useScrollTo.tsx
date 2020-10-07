@@ -15,7 +15,7 @@ export default function useScrollTo(
 ) {
   let scroll: number | null = null;
 
-  return arg => {
+  return (arg: any) => {
     raf.cancel(scroll!);
     const data = state.mergedData;
     const itemHeight = props.itemHeight;

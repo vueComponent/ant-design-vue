@@ -401,7 +401,7 @@ export default defineComponent({
         prefixCls,
         destroyPopupOnHide,
         visible: sPopupVisible,
-        point: alignPoint && point,
+        point: alignPoint ? point : null,
         action,
         align,
         animation: popupAnimation,

@@ -83,7 +83,7 @@ function getWebpackConfig(modules) {
                       options: {
                         presets: [require.resolve('@babel/preset-env')],
                         plugins: [
-                          require.resolve('@vue/babel-plugin-jsx'),
+                          [require.resolve('@vue/babel-plugin-jsx'), { mergeProps: false }],
                           require.resolve('@babel/plugin-proposal-object-rest-spread'),
                         ],
                       },
@@ -231,7 +231,6 @@ All rights reserved.
   return config;
 }
 
-getWebpackConfig.webpack = webpack;
 getWebpackConfig.svgRegex = svgRegex;
 getWebpackConfig.svgOptions = svgOptions;
 getWebpackConfig.imageOptions = imageOptions;

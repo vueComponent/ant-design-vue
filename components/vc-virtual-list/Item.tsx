@@ -1,4 +1,4 @@
-import { cloneVNode, FunctionalComponent } from 'vue';
+import { cloneVNode, FunctionalComponent, PropType } from 'vue';
 
 export interface ItemProps {
   setRef: (element: HTMLElement) => void;
@@ -13,5 +13,10 @@ const Item: FunctionalComponent<ItemProps> = ({ setRef }, { slots }) => {
       })
     : children;
 };
-
+Item.props = {
+  setRef: {
+    type: Function as PropType<(element: HTMLElement) => void>,
+    default: () => {},
+  },
+};
 export default Item;

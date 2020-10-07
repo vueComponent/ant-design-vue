@@ -33,7 +33,7 @@ const babelConfig = {
         style: true,
       },
     ],
-    ['@vue/babel-plugin-jsx'],
+    ['@vue/babel-plugin-jsx', { mergeProps: false }],
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-transform-object-assign',
     '@babel/plugin-proposal-object-rest-spread',

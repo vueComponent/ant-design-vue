@@ -1,5 +1,4 @@
 import * as Vue from 'vue';
-import { SelectProps, RefSelectProps } from '../generate';
 
 export type SelectSource = 'option' | 'selection' | 'input';
 
@@ -8,9 +7,9 @@ export const INTERNAL_PROPS_MARK = 'RC_SELECT_INTERNAL_PROPS_MARK';
 // =================================== Shared Type ===================================
 export type Key = string | number;
 
-export type RawValueType = string | number;
+export type RawValueType = string | number | null;
 
-export interface LabelValueType {
+export interface LabelValueType extends Record<string, any> {
   key?: Key;
   value?: RawValueType;
   label?: Vue.VNodeChild;

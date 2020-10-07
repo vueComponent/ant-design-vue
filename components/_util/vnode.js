@@ -2,7 +2,7 @@ import { filterEmpty } from './props-util';
 import { cloneVNode } from 'vue';
 import warning from './warning';
 
-export function cloneElement(vnode, nodeProps = {}, override = true) {
+export function cloneElement(vnode, nodeProps = {}, override = true, mergeRef = false) {
   let ele = vnode;
   if (Array.isArray(vnode)) {
     ele = filterEmpty(vnode)[0];
@@ -10,7 +10,7 @@ export function cloneElement(vnode, nodeProps = {}, override = true) {
   if (!ele) {
     return null;
   }
-  const node = cloneVNode(ele, nodeProps);
+  const node = cloneVNode(ele, nodeProps, mergeRef);
 
   // cloneVNode内部是合并属性，这里改成覆盖属性
   node.props = override ? { ...node.props, ...nodeProps } : node.props;

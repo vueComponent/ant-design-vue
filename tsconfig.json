@@ -5,7 +5,7 @@
       "ant-design-vue": ["components/index.tsx"],
       "ant-design-vue/es/*": ["components/*"]
     },
-    "strictNullChecks": true,
+    "strictNullChecks": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,

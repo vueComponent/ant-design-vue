@@ -79,6 +79,8 @@ const List = defineComponent({
     virtual: PropTypes.bool,
     children: PropTypes.func,
     onScroll: PropTypes.func,
+    onMousedown: PropTypes.func,
+    onMouseenter: PropTypes.func,
   },
   setup(props) {
     // ================================= MISC =================================
@@ -255,7 +257,7 @@ const List = defineComponent({
     const removeEventListener = () => {
       if (componentRef.value) {
         componentRef.value.removeEventListener('wheel', onRawWheel);
-        componentRef.value.removeEventListener('DOMMouseScroll', onFireFoxScroll);
+        componentRef.value.removeEventListener('DOMMouseScroll' as any, onFireFoxScroll);
         componentRef.value.removeEventListener('MozMousePixelScroll', onMozMousePixelScroll);
       }
     };
@@ -264,7 +266,7 @@ const List = defineComponent({
         if (componentRef.value) {
           removeEventListener();
           componentRef.value.addEventListener('wheel', onRawWheel);
-          componentRef.value.addEventListener('DOMMouseScroll', onFireFoxScroll);
+          componentRef.value.addEventListener('DOMMouseScroll' as any, onFireFoxScroll);
           componentRef.value.addEventListener('MozMousePixelScroll', onMozMousePixelScroll);
         }
       });
@@ -331,7 +333,7 @@ const List = defineComponent({
       style,
       class: className,
       ...restProps
-    } = { ...this.$props, ...this.$attrs };
+    } = { ...this.$props, ...this.$attrs } as any;
     const mergedClassName = classNames(prefixCls, className);
     const { scrollTop, mergedData } = this.state;
     const { scrollHeight, offset, start, end } = this.calRes;

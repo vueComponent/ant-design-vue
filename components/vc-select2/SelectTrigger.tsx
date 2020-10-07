@@ -49,7 +49,7 @@ export interface SelectTriggerProps {
   prefixCls: string;
   disabled: boolean;
   visible: boolean;
-  popupElement: VNodeChild;
+  popupElement: VNodeChild | JSX.Element;
   animation?: string;
   transitionName?: string;
   containerWidth: number;
@@ -61,7 +61,7 @@ export interface SelectTriggerProps {
   getPopupContainer?: RenderDOMFunc;
   dropdownAlign: object;
   empty: boolean;
-  getTriggerDOMNode: () => HTMLElement;
+  getTriggerDOMNode: () => any;
 }
 const SelectTrigger = defineComponent<SelectTriggerProps>({
   name: 'SelectTrigger',

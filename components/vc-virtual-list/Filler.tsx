@@ -1,6 +1,6 @@
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
-import { CSSProperties, FunctionalComponent } from 'vue';
+import { CSSProperties, FunctionalComponent, PropType } from 'vue';
 
 interface FillerProps {
   prefixCls?: string;
@@ -59,5 +59,13 @@ const Filter: FunctionalComponent<FillerProps> = (
 
 Filter.displayName = 'Filter';
 Filter.inheritAttrs = false;
+Filter.props = {
+  prefixCls: String,
+  /** Virtual filler height. Should be `count * itemMinHeight` */
+  height: Number,
+  /** Set offset of visible items. Should be the top of start item position */
+  offset: Number,
+  onInnerResize: Function as PropType<() => void>,
+};
 
 export default Filter;

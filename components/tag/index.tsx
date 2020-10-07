@@ -1,14 +1,6 @@
-import {
-  inject,
-  ref,
-  HTMLAttributes,
-  defineComponent,
-  SetupContext,
-  App,
-  VNodeTypes,
-  watchEffect,
-} from 'vue';
+import { inject, ref, HTMLAttributes, defineComponent, App, VNodeTypes, watchEffect } from 'vue';
 import classNames from '../_util/classNames';
+import PropTypes from '../_util/vue-types';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Wave from '../_util/wave';
 import {
@@ -36,29 +28,27 @@ export interface TagProps extends HTMLAttributes {
 
 const Tag = defineComponent({
   name: 'ATag',
-  emits: ['update:visible'],
-  setup(props: TagProps, { slots, emit, attrs }: SetupContext) {
+  emits: ['update:visible', 'close'],
+  setup(props: TagProps, { slots, emit, attrs }) {
     const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
 
     const visible = ref(true);
 
     watchEffect(() => {
-      if ('visible' in props) {
+      if (props.visible !== undefined) {
         visible.value = props.visible!;
       }
     });
 
     const handleCloseClick = (e: MouseEvent) => {
       e.stopPropagation();
-      if (props.onClose) {
-        emit('update:visible', false);
-        props.onClose(e);
-      }
+      emit('update:visible', false);
+      emit('close', e);
 
       if (e.defaultPrevented) {
         return;
       }
-      if (!('visible' in props)) {
+      if (props.visible === undefined) {
         visible.value = false;
       }
     };
@@ -131,7 +121,18 @@ const Tag = defineComponent({
   },
 });
 
-Tag.props = ['prefixCls', 'color', 'closable', 'closeIcon', 'visible', 'icon'];
+Tag.props = {
+  prefixCls: PropTypes.string,
+  color: PropTypes.string,
+  closable: PropTypes.bool.def(false),
+  closeIcon: PropTypes.any,
+  visible: {
+    type: Boolean,
+    default: undefined,
+  },
+  onClose: PropTypes.func,
+  icon: PropTypes.any,
+};
 
 Tag.CheckableTag = CheckableTag;
 

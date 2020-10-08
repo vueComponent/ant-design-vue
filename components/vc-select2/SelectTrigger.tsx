@@ -71,14 +71,6 @@ const SelectTrigger = defineComponent<SelectTriggerProps>({
   },
 
   methods: {
-    getDropdownTransitionName() {
-      const props = this.$props;
-      let transitionName = props.transitionName;
-      if (!transitionName && props.animation) {
-        transitionName = `${this.getDropdownPrefixCls()}-${props.animation}`;
-      }
-      return transitionName;
-    },
     getPopupElement() {
       return this.popupRef.current;
     },
@@ -96,6 +88,8 @@ const SelectTrigger = defineComponent<SelectTriggerProps>({
       dropdownMatchSelectWidth,
       containerWidth,
       dropdownRender,
+      animation,
+      transitionName,
     } = props;
     const dropdownPrefixCls = `${prefixCls}-dropdown`;
 
@@ -105,6 +99,9 @@ const SelectTrigger = defineComponent<SelectTriggerProps>({
     }
 
     const builtInPlacements = getBuiltInPlacements(dropdownMatchSelectWidth);
+
+    const mergedTransitionName = animation ? `${dropdownPrefixCls}-${animation}` : transitionName;
+
     const popupStyle = { minWidth: containerWidth, ...dropdownStyle };
 
     if (typeof dropdownMatchSelectWidth === 'number') {
@@ -120,7 +117,7 @@ const SelectTrigger = defineComponent<SelectTriggerProps>({
         popupPlacement={this.direction === 'rtl' ? 'bottomRight' : 'bottomLeft'}
         builtinPlacements={builtInPlacements}
         prefixCls={dropdownPrefixCls}
-        popupTransitionName={this.getDropdownTransitionName()}
+        popupTransitionName={mergedTransitionName}
         onPopupVisibleChange={props.onDropdownVisibleChange}
         popup={<div ref={this.popupRef}>{popupNode}</div>}
         popupAlign={dropdownAlign}
@@ -139,11 +136,11 @@ const SelectTrigger = defineComponent<SelectTriggerProps>({
 });
 SelectTrigger.props = {
   dropdownAlign: PropTypes.object,
-  visible: PropTypes.bool,
-  disabled: PropTypes.bool,
+  visible: { type: Boolean, default: undefined },
+  disabled: { type: Boolean, default: undefined },
   dropdownClassName: PropTypes.string,
   dropdownStyle: PropTypes.object,
-  empty: PropTypes.bool,
+  empty: { type: Boolean, default: undefined },
   prefixCls: PropTypes.string,
   popupClassName: PropTypes.string,
   animation: PropTypes.string,

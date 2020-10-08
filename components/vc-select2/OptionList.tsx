@@ -49,14 +49,14 @@ const OptionListProps = {
   height: PropTypes.number,
   itemHeight: PropTypes.number,
   values: PropTypes.any,
-  multiple: PropTypes.bool,
-  open: PropTypes.bool,
-  defaultActiveFirstOption: PropTypes.bool,
+  multiple: { type: Boolean, default: undefined },
+  open: { type: Boolean, default: undefined },
+  defaultActiveFirstOption: { type: Boolean, default: undefined },
   notFoundContent: PropTypes.any,
   menuItemSelectedIcon: PropTypes.any,
-  childrenAsData: PropTypes.bool,
+  childrenAsData: { type: Boolean, default: undefined },
   searchValue: PropTypes.string,
-  virtual: PropTypes.bool,
+  virtual: { type: Boolean, default: undefined },
 
   onSelect: PropTypes.func,
   onToggleOpen: PropTypes.func,
@@ -131,6 +131,7 @@ const OptionList = defineComponent<OptionListProps>({
       () => {
         setActive(props.defaultActiveFirstOption !== false ? getEnabledActiveIndex(0) : -1);
       },
+      { immediate: true },
     );
     // Auto scroll to item position in single mode
 

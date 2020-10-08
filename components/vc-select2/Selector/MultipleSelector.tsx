@@ -43,19 +43,19 @@ const props = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
   values: PropTypes.array,
-  open: PropTypes.bool,
+  open: { type: Boolean, default: undefined },
   searchValue: PropTypes.string,
   inputRef: PropTypes.any,
   placeholder: PropTypes.any,
-  disabled: PropTypes.bool,
+  disabled: { type: Boolean, default: undefined },
   mode: PropTypes.string,
-  showSearch: PropTypes.bool,
-  autofocus: PropTypes.bool,
+  showSearch: { type: Boolean, default: undefined },
+  autofocus: { type: Boolean, default: undefined },
   autocomplete: PropTypes.string,
   accessibilityIndex: PropTypes.number,
   tabindex: PropTypes.number,
 
-  removeIcon: PropTypes.bool,
+  removeIcon: { type: Boolean, default: undefined },
   choiceTransitionName: PropTypes.string,
 
   maxTagCount: PropTypes.number,
@@ -95,13 +95,16 @@ const SelectSelector = defineComponent<SelectorProps>({
     );
 
     // We measure width and set to the input immediately
-    watch(
-      inputValue,
-      () => {
-        inputWidth.value = measureRef.value.scrollWidth;
-      },
-      { flush: 'pre' },
-    );
+    onMounted(() => {
+      watch(
+        inputValue,
+        () => {
+          inputWidth.value = measureRef.value.scrollWidth;
+        },
+        { flush: 'post' },
+      );
+    });
+
     const selectionNode = ref();
     watchEffect(() => {
       const {

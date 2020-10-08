@@ -128,7 +128,7 @@ export interface SelectProps<OptionsType extends object[], ValueType> {
   notFoundContent?: VNodeChild;
   placeholder?: VNodeChild;
   backfill?: boolean;
-  getInputElement?: () => VNodeChild;
+  getInputElement?: () => VNodeChild | JSX.Element;
   optionLabelProp?: string;
   maxTagTextLength?: number;
   maxTagCount?: number;
@@ -379,16 +379,17 @@ export default function generateSelector<
       });
 
       const displayFlattenOptions = computed(() => flattenOptions(displayOptions.value, props));
-
-      watch(
-        mergedSearchValue,
-        () => {
-          if (listRef.value && listRef.value.scrollTo) {
-            listRef.value.scrollTo(0);
-          }
-        },
-        { flush: 'post' },
-      );
+      onMounted(() => {
+        watch(
+          mergedSearchValue,
+          () => {
+            if (listRef.value && listRef.value.scrollTo) {
+              listRef.value.scrollTo(0);
+            }
+          },
+          { flush: 'post', immediate: true },
+        );
+      });
 
       // ============================ Selector ============================
       let displayValues = computed<DisplayLabelValueType[]>(() => {
@@ -556,13 +557,14 @@ export default function generateSelector<
       let mergedOpen = ref(undefined);
       const setInnerOpen = (val: boolean) => {
         innerOpen.value = val;
-        mergedOpen.value = val;
+        mergedOpen.value = innerOpen.value;
       };
       watch(
         computed(() => [props.defaultOpen, props.open]),
         () => {
           setInnerOpen(props.open !== undefined ? props.open : props.defaultOpen);
         },
+        { immediate: true },
       );
 
       // Not trigger `open` in `combobox` when `notFoundContent` is empty
@@ -573,14 +575,16 @@ export default function generateSelector<
         computed(
           () =>
             props.disabled ||
-            (emptyListContent.value && mergedOpen.value && props.mode === 'combobox'),
+            (emptyListContent.value && innerOpen.value && props.mode === 'combobox'),
         ),
         val => {
-          debugger;
           if (val) {
             mergedOpen.value = false;
+          } else {
+            mergedOpen.value = innerOpen.value;
           }
         },
+        { immediate: true },
       );
 
       const triggerOpen = computed(() => (emptyListContent.value ? false : mergedOpen.value));
@@ -590,7 +594,6 @@ export default function generateSelector<
 
         if (innerOpen.value !== nextOpen && !props.disabled) {
           setInnerOpen(nextOpen);
-
           if (props.onDropdownVisibleChange) {
             props.onDropdownVisibleChange(nextOpen);
           }
@@ -681,14 +684,19 @@ export default function generateSelector<
             setInnerOpen(false);
           }
         },
+        { immediate: true },
       );
 
       // Close will clean up single mode search text
-      watch(mergedOpen, () => {
-        if (innerOpen.value && !!props.disabled) {
-          setInnerOpen(false);
-        }
-      });
+      watch(
+        mergedOpen,
+        () => {
+          if (!mergedOpen.value && !isMultiple.value && props.mode !== 'combobox') {
+            triggerSearch('', false, false);
+          }
+        },
+        { immediate: true },
+      );
       // ============================ Keyboard ============================
       /**
        * We record input value here to check if can press to clean up by backspace
@@ -857,15 +865,21 @@ export default function generateSelector<
 
       // ============================= Popup ==============================
       const containerWidth = ref(null);
-
-      watch(triggerOpen, () => {
-        if (triggerOpen.value) {
-          const newWidth = Math.ceil(containerRef.value.offsetWidth);
-          if (containerWidth !== newWidth) {
-            containerWidth.value = newWidth;
-          }
-        }
+      onMounted(() => {
+        watch(
+          triggerOpen,
+          () => {
+            if (triggerOpen.value) {
+              const newWidth = Math.ceil(containerRef.value.offsetWidth);
+              if (containerWidth !== newWidth) {
+                containerWidth.value = newWidth;
+              }
+            }
+          },
+          { immediate: true },
+        );
       });
+
       const focus = () => {
         selectorRef.value.focus();
       };
@@ -954,10 +968,27 @@ export default function generateSelector<
       const {
         prefixCls = defaultPrefixCls,
         class: className,
-        children,
+        id,
+
+        open,
+        defaultOpen,
         options,
+        children,
 
         mode,
+        value,
+        defaultValue,
+        labelInValue,
+
+        // Search related
+        showSearch,
+        inputValue,
+        searchValue,
+        filterOption,
+        optionFilterProp = 'value',
+        autoClearSearchValue = true,
+        onSearch,
+
         // Icons
         allowClear,
         clearIcon,
@@ -968,7 +999,10 @@ export default function generateSelector<
         // Others
         disabled,
         loading,
+        defaultActiveFirstOption,
         notFoundContent = 'Not Found',
+        optionLabelProp,
+        backfill,
         getInputElement,
         getPopupContainer,
 
@@ -983,13 +1017,25 @@ export default function generateSelector<
         dropdownMatchSelectWidth,
         dropdownRender,
         dropdownAlign,
+        showAction = [],
         direction,
 
+        // Tags
+        tokenSeparators,
         tagRender,
 
         // Events
         onPopupScroll,
+        onDropdownVisibleChange,
+        onFocus,
+        onBlur,
+        onKeyup,
+        onKeydown,
+        onMousedown,
 
+        onChange,
+        onSelect,
+        onDeselect,
         onClear,
 
         internalProps = {},
@@ -999,7 +1045,7 @@ export default function generateSelector<
 
       // ============================= Input ==============================
       // Only works in `combobox`
-      const customizeInputElement: VNodeChild =
+      const customizeInputElement: VNodeChild | JSX.Element =
         (mode === 'combobox' && getInputElement && getInputElement()) || null;
 
       const domProps = omitDOMProps ? omitDOMProps(restProps) : restProps;
@@ -1192,7 +1238,7 @@ export default function generateSelector<
     // Value
     value: PropTypes.any,
     defaultValue: PropTypes.any,
-    labelInValue: PropTypes.bool,
+    labelInValue: { type: Boolean, default: undefined },
 
     // Search
     inputValue: PropTypes.string,
@@ -1204,13 +1250,13 @@ export default function generateSelector<
      * It's by design.
      */
     filterOption: PropTypes.any,
-    showSearch: PropTypes.bool,
-    autoClearSearchValue: PropTypes.bool,
+    showSearch: { type: Boolean, default: undefined },
+    autoClearSearchValue: { type: Boolean, default: undefined },
     onSearch: PropTypes.func,
     onClear: PropTypes.func,
 
     // Icons
-    allowClear: PropTypes.bool,
+    allowClear: { type: Boolean, default: undefined },
     clearIcon: PropTypes.any,
     showArrow: {
       type: Boolean,
@@ -1221,14 +1267,14 @@ export default function generateSelector<
     menuItemSelectedIcon: PropTypes.func,
 
     // Dropdown
-    open: PropTypes.bool,
-    defaultOpen: PropTypes.bool,
+    open: { type: Boolean, default: undefined },
+    defaultOpen: { type: Boolean, default: undefined },
     listHeight: PropTypes.number.def(200),
     listItemHeight: PropTypes.number.def(20),
     dropdownStyle: PropTypes.object,
     dropdownClassName: PropTypes.string,
     dropdownMatchSelectWidth: PropTypes.oneOfType([Boolean, Number]).def(true),
-    virtual: PropTypes.bool,
+    virtual: { type: Boolean, default: undefined },
     dropdownRender: PropTypes.func,
     dropdownAlign: PropTypes.any,
     animation: PropTypes.string,
@@ -1237,13 +1283,13 @@ export default function generateSelector<
     direction: PropTypes.string,
 
     // Others
-    disabled: PropTypes.bool,
-    loading: PropTypes.bool,
-    autofocus: PropTypes.bool,
-    defaultActiveFirstOption: PropTypes.bool,
+    disabled: { type: Boolean, default: undefined },
+    loading: { type: Boolean, default: undefined },
+    autofocus: { type: Boolean, default: undefined },
+    defaultActiveFirstOption: { type: Boolean, default: undefined },
     notFoundContent: PropTypes.any.def('Not Found'),
     placeholder: PropTypes.any,
-    backfill: PropTypes.bool,
+    backfill: { type: Boolean, default: undefined },
     getInputElement: PropTypes.func,
     optionLabelProp: PropTypes.string,
     maxTagTextLength: PropTypes.number,

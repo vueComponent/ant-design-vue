@@ -14,19 +14,19 @@ const props = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
   values: PropTypes.array,
-  open: PropTypes.bool,
+  open: { type: Boolean, default: undefined },
   searchValue: PropTypes.string,
   inputRef: PropTypes.any,
   placeholder: PropTypes.any,
-  disabled: PropTypes.bool,
+  disabled: { type: Boolean, default: undefined },
   mode: PropTypes.string,
-  showSearch: PropTypes.bool,
-  autofocus: PropTypes.bool,
+  showSearch: { type: Boolean, default: undefined },
+  autofocus: { type: Boolean, default: undefined },
   autocomplete: PropTypes.string,
   accessibilityIndex: PropTypes.number,
   tabindex: PropTypes.number,
   activeValue: PropTypes.string,
-  backfill: PropTypes.bool,
+  backfill: { type: Boolean, default: undefined },
   onInputChange: PropTypes.func,
   onInputPaste: PropTypes.func,
   onInputKeyDown: PropTypes.func,
@@ -56,6 +56,7 @@ const SingleSelector = defineComponent<SelectorProps>({
           inputChanged.value = false;
         }
       },
+      { immediate: true },
     );
 
     // Not show text when closed expect combobox mode

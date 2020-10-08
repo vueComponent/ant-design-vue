@@ -18,7 +18,7 @@ export type OnActiveValue = (
 export interface OptionCoreData {
   key?: Key;
   disabled?: boolean;
-  value: Key;
+  value?: Key;
   title?: string;
   class?: string;
   style?: Vue.CSSProperties;

@@ -17,7 +17,7 @@ import {
 import classNames from '../../_util/classNames';
 import pickAttrs from '../../_util/pickAttrs';
 import PropTypes from '../../_util/vue-types';
-import getTransitionProps from '../../_util/getTransitionProps';
+import getTransitionGroupProps from '../../_util/getTransitionGroupProps';
 
 const REST_TAG_KEY = '__RC_SELECT_MAX_REST_COUNT__';
 
@@ -158,12 +158,12 @@ const SelectSelector = defineComponent<SelectorProps>({
               : maxTagPlaceholder,
         });
       }
-      const transitionProps = getTransitionProps(choiceTransitionName, {
+      const transitionProps = getTransitionGroupProps(choiceTransitionName, {
         appear: motionAppear,
       });
       selectionNode.value = (
         <TransitionGroup {...transitionProps}>
-          {displayValues.map(
+          {...displayValues.map(
             ({ key, label, value, disabled: itemDisabled, class: className, style }) => {
               const mergedKey = key || value;
               const closable = key !== REST_TAG_KEY && !itemDisabled;
@@ -180,7 +180,7 @@ const SelectSelector = defineComponent<SelectorProps>({
                 <span
                   key={mergedKey as string}
                   onMousedown={onMousedown}
-                  class={className}
+                  class={classNames(className)}
                   style={style}
                 >
                   {tagRender({
@@ -214,7 +214,6 @@ const SelectSelector = defineComponent<SelectorProps>({
               );
             },
           )}
-          {}
         </TransitionGroup>
       );
     });
@@ -238,6 +237,7 @@ const SelectSelector = defineComponent<SelectorProps>({
         onInputMouseDown,
         onInputCompositionStart,
         onInputCompositionEnd,
+        choiceTransitionName,
       } = props;
       return (
         <>

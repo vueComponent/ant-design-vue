@@ -1,17 +1,18 @@
-import animate from './css-animation';
 const getTransitionProps = (transitionName, opt = {}) => {
   if (process.env.NODE_ENV === 'test') {
     return { css: false, ...opt };
   }
   const transitionProps = {
     appear: true,
-    css: false,
-    onEnter: (el, done) => {
-      transitionName ? animate(el, `${transitionName}-enter`, done) : done();
-    },
-    onLeave: (el, done) => {
-      transitionName ? animate(el, `${transitionName}-leave`, done) : done();
-    },
+    appearFromClass: `${transitionName}-appear`,
+    appearActiveClass: `${transitionName}-appear ${transitionName}-appear-active`,
+    appearToClass: `${transitionName}-appear ${transitionName}-appear-active`,
+    enterFromClass: `${transitionName}-enter`,
+    enterActiveClass: `${transitionName}-enter ${transitionName}-enter-active`,
+    enterToClass: `${transitionName}-enter ${transitionName}-enter-active`,
+    leaveFormClass: ` ${transitionName}-leave`,
+    leaveActiveClass: `${transitionName}-leave ${transitionName}-leave-active`,
+    leaveToClass: `${transitionName}-leave ${transitionName}-leave-active`,
     ...opt,
   };
   return transitionProps;

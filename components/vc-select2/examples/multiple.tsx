@@ -18,7 +18,7 @@ for (let i = 10; i < 36; i += 1) {
 const Test = {
   data: () => ({
     state: {
-      useAnim: false,
+      useAnim: true,
       showArrow: false,
       loading: false,
       value: ['a10'],
@@ -64,7 +64,6 @@ const Test = {
 
   render() {
     const { useAnim, showArrow, loading, value } = this.state;
-    console.log(showArrow);
     return (
       <div>
         <h2>multiple select（scroll the menu）</h2>

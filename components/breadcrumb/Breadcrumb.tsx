@@ -57,6 +57,7 @@ export default defineComponent({
       return originalPaths;
     }
 
+
     function genForRoutes({
       routes = [],
       params = {},

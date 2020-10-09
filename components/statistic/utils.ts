@@ -12,7 +12,7 @@ const timeUnits = [
   ['m', 1000 * 60], // minutes
   ['s', 1000], // seconds
   ['S', 1], // million seconds
-];
+] as const;
 
 export function formatTimeStr(duration, format) {
   let leftDuration = duration;

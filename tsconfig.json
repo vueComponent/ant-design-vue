@@ -6,6 +6,7 @@
       "ant-design-vue/es/*": ["components/*"]
     },
     "strictNullChecks": false,
+    "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,
@@ -13,6 +14,7 @@
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "noImplicitAny": false,
+    "module": "esnext",
     "target": "es6",
     "lib": ["dom", "es2017"],
     "skipLibCheck": true,

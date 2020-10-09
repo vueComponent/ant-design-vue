@@ -80,7 +80,7 @@ export default {
             reAlign = true;
           }
         }
-        this.sourceRect = sourceRect;
+        this.sourceRect = { width: sourceRect.width, height: sourceRect.height };
       }
 
       if (reAlign) {
@@ -99,6 +99,11 @@ export default {
     this.stopMonitorWindowResize();
   },
   methods: {
+    // TODO
+    startMonitorElementResize() {
+      const currentElement = getElement(this.$props.target);
+      const element = findDOMNode(this);
+    },
     startMonitorWindowResize() {
       if (!this.resizeHandler) {
         this.bufferMonitor = buffer(this.forceAlign, this.$props.monitorBufferTime);

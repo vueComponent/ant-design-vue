@@ -151,10 +151,14 @@ export default {
 
     getClassName(currentAlignClassName, originClassName = '') {
       // 保留动画 class
-      const enterActiveClass = [
-        ...(this.transitionProps?.enterActiveClass?.split(' ') || []),
-        ...(this.transitionProps?.appearActiveClass?.split(' ') || []),
-      ];
+      const enterActiveClass = [];
+      if (this.transitionProps) {
+        Object.keys(this.transitionProps).forEach(k => {
+          if (typeof this.transitionProps[k] === 'string') {
+            enterActiveClass.push(...this.transitionProps[k].split(' '));
+          }
+        });
+      }
       const classNames = originClassName
         .split(' ')
         .filter(c => enterActiveClass.indexOf(c) !== -1)

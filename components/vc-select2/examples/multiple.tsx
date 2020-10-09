@@ -65,7 +65,7 @@ const Test = {
   render() {
     const { useAnim, showArrow, loading, value } = this.state;
     return (
-      <div>
+      <div style="margin: 20px">
         <h2>multiple select（scroll the menu）</h2>
 
         <p>

@@ -1,4 +1,4 @@
-import { createTypes } from 'vue-types';
+import { createTypes, VueTypeValidableDef, VueTypesInterface } from 'vue-types';
 const PropTypes = createTypes({
   func: undefined,
   bool: undefined,
@@ -8,6 +8,7 @@ const PropTypes = createTypes({
   object: undefined,
   integer: undefined,
 });
+
 PropTypes.extend([
   {
     name: 'looseBool',
@@ -16,9 +17,14 @@ PropTypes.extend([
     default: undefined,
   },
 ]);
+
 export function withUndefined(type: any) {
   type.default = undefined;
   return type;
 }
 
-export default PropTypes;
+export default PropTypes as VueTypesInterface & {
+  readonly looseBool: VueTypeValidableDef<boolean> & {
+    default: boolean;
+  };
+};

@@ -1,4 +1,4 @@
-import { nextTick, inject } from 'vue';
+import { nextTick, inject, defineComponent } from 'vue';
 import TransitionEvents from './css-animation/Event';
 import raf from './raf';
 import { defaultConfigProvider } from '../config-provider';
@@ -20,7 +20,7 @@ function isNotGrey(color) {
   }
   return true;
 }
-export default {
+export default defineComponent({
   name: 'Wave',
   props: ['insertExtraNode'],
   mounted() {
@@ -171,4 +171,4 @@ export default {
     }
     return this.$slots.default && this.$slots.default()[0];
   },
-};
+});

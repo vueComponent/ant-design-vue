@@ -1,4 +1,4 @@
-import { Component, CSSProperties, defineComponent, inject, PropType, VNodeTypes } from 'vue';
+import { CSSProperties, defineComponent, inject, PropType, VNodeTypes, computed } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 import { getComponentFromSetup } from '../_util/props-util';
 import StatisticNumber from './Number';
@@ -19,44 +19,48 @@ export const StatisticProps = {
   valueRender: { type: Function as PropType<(node: VNodeTypes) => VNodeTypes> },
 };
 
+export type StatisticPropsType = Parameters<typeof Statistic['setup']>['0'];
+
 const Statistic = defineComponent({
   name: 'AStatistic',
   props: StatisticProps,
   setup(props, { slots }) {
     const configProvider = inject('configProvider', defaultConfigProvider);
-    const { prefixCls: customizePrefixCls, value, valueStyle } = props;
-    const getPrefixCls = configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('statistic', customizePrefixCls);
 
-    const title = getComponentFromSetup(props, slots, 'title') as VNodeTypes;
-    const prefix = getComponentFromSetup(props, slots, 'prefix') as VNodeTypes;
-    const suffix = getComponentFromSetup(props, slots, 'suffix') as VNodeTypes;
+    const getPrefixCls = configProvider.getPrefixCls;
+    const prefixCls = computed(() => getPrefixCls('statistic', props.prefixCls));
+    const title = computed(() => getComponentFromSetup(props, slots, 'title') as VNodeTypes);
+    const prefix = computed(() => getComponentFromSetup(props, slots, 'prefix') as VNodeTypes);
+    const suffix = computed(() => getComponentFromSetup(props, slots, 'suffix') as VNodeTypes);
 
     let formatter: VNodeTypes = undefined;
     if (typeof props.formatter === 'function') {
-      formatter = props.formatter({ value });
+      formatter = props.formatter({ value: props.value });
     } else if (typeof slots['formatter'] === 'function') {
-      formatter = slots['formatter']({ value });
+      formatter = slots['formatter']({ value: props.value });
     }
 
-    // const formatter = getComponentFromSetup(props, slots, 'formatter', { value }) as VNodeTypes;
+    return () => {
+      const valueNode = (
+        <StatisticNumber {...{ ...props, prefixCls: prefixCls.value, formatter }} />
+      );
 
-    let valueNode = <StatisticNumber {...{ ...props, prefixCls, value, formatter }} />;
-    if (props.valueRender) {
-      valueNode = props.valueRender(valueNode);
-    }
-    return () => (
-      <div class={prefixCls}>
-        {title && <div class={`${prefixCls}-title`}>{title}</div>}
-        <div style={valueStyle} class={`${prefixCls}-content`}>
-          {prefix && <span class={`${prefixCls}-content-prefix`}>{prefix}</span>}
-          {valueNode}
-          {suffix && <span class={`${prefixCls}-content-suffix`}>{suffix}</span>}
+      return (
+        <div class={prefixCls.value}>
+          {title.value && <div class={`${prefixCls.value}-title`}>{title.value}</div>}
+          <div style={props.valueStyle} class={`${prefixCls.value}-content`}>
+            {prefix.value && (
+              <span class={`${prefixCls.value}-content-prefix`}>{prefix.value}</span>
+            )}
+            {props.valueRender ? props.valueRender(valueNode) : valueNode}
+            {suffix.value && (
+              <span class={`${prefixCls.value}-content-suffix`}>{suffix.value}</span>
+            )}
+          </div>
         </div>
-      </div>
-    );
+      );
+    };
   },
 });
-export default Statistic;
 
-export type StatisticPropsType = Parameters<typeof Statistic['setup']>['0'];
+export default Statistic;

@@ -1,16 +1,15 @@
 import padEnd from 'lodash-es/padEnd';
-import { SetupContext, VNodeTypes } from 'vue';
-import { isFunction } from '../_util/util';
+import { VNodeTypes } from 'vue';
 import { StatisticPropsType } from './Statistic';
 export interface StatisticNumberProps extends StatisticPropsType {}
 
 const StatisticNumber = (
-  props: Omit<StatisticNumberProps, 'formatter'> & { formatter?: VNodeTypes },
-  { attrs }: SetupContext,
+  props: Omit<StatisticNumberProps, 'formatter'> & {
+    formatter?: VNodeTypes;
+  },
 ) => {
-  let valueNode: VNodeTypes;
-
   const { formatter, value, groupSeparator, precision, decimalSeparator, prefixCls } = props;
+  let valueNode: VNodeTypes;
 
   if (formatter) {
     valueNode = formatter;

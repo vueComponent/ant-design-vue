@@ -125,7 +125,7 @@
     "html-webpack-plugin": "^3.2.0",
     "husky": "^4.0.0",
     "istanbul-instrumenter-loader": "^3.0.0",
-    "jest": "^25.4.0",
+    "jest": "^26.0.0",
     "jest-environment-jsdom-fifteen": "^1.0.2",
     "jest-serializer-vue": "^2.0.0",
     "jest-transform-stub": "^2.0.0",

@@ -128,7 +128,7 @@ export const getLabeledValue: GetLabeledValue<FlattenOptionData[]> = (
   };
 
   let prevValItem: LabelValueType;
-  const prevValues = toArray<RawValueType | LabelValueType>(prevValue);
+  const prevValues = toArray<LabelValueType>(prevValue as LabelValueType);
   if (labelInValue) {
     prevValItem = prevValues.find((prevItem: LabelValueType) => {
       if (typeof prevItem === 'object' && 'value' in prevItem) {

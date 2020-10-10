@@ -27,7 +27,7 @@ interface InputProps {
   onCompositionend: EventHandlerNonNull;
 }
 
-const Input = defineComponent<InputProps>({
+const Input = defineComponent<InputProps, { VCSelectContainerEvent: any }>({
   name: 'Input',
   inheritAttrs: false,
   setup() {

@@ -113,7 +113,7 @@ export interface SelectProps<OptionsType extends object[], ValueType> {
   dropdownClassName?: string;
   dropdownMatchSelectWidth?: boolean | number;
   virtual?: boolean;
-  dropdownRender?: (menu: VNodeChild) => VNodeChild;
+  dropdownRender?: (menu: VNodeChild | JSX.Element) => VNodeChild;
   dropdownAlign?: any;
   animation?: string;
   transitionName?: string;

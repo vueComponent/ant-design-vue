@@ -37,7 +37,7 @@ const DateTBody = {
     selectedValue: PropTypes.oneOfType([PropTypes.any, PropTypes.arrayOf(PropTypes.any)]),
     value: PropTypes.object,
     hoverValue: PropTypes.any.def([]),
-    showWeekNumber: PropTypes.bool,
+    showWeekNumber: PropTypes.looseBool,
   },
 
   render() {

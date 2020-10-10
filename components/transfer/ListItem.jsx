@@ -12,10 +12,10 @@ export default {
     renderedText: PropTypes.any,
     renderedEl: PropTypes.any,
     item: PropTypes.any,
-    lazy: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-    checked: PropTypes.bool,
+    lazy: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
+    checked: PropTypes.looseBool,
     prefixCls: PropTypes.string,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     onClick: PropTypes.func,
   },
   render() {

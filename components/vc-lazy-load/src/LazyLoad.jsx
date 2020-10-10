@@ -10,7 +10,7 @@ import inViewport from './utils/inViewport';
 import { watchEffect } from 'vue';
 
 const lazyLoadProps = {
-  debounce: PropTypes.bool,
+  debounce: PropTypes.looseBool,
   elementType: PropTypes.string,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   offset: PropTypes.number,

@@ -11,9 +11,9 @@ const ListBody = {
   props: {
     prefixCls: PropTypes.string,
     filteredRenderItems: PropTypes.array.def([]),
-    lazy: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    lazy: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
     selectedKeys: PropTypes.array,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     onItemSelect: PropTypes.func,
     onItemSelectAll: PropTypes.func,
     onScroll: PropTypes.func,

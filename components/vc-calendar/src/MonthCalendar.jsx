@@ -13,7 +13,7 @@ const MonthCalendar = {
   props: {
     locale: PropTypes.object.def(enUs),
     format: PropTypes.string,
-    visible: PropTypes.bool.def(true),
+    visible: PropTypes.looseBool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     monthCellRender: PropTypes.func,
     value: PropTypes.object,

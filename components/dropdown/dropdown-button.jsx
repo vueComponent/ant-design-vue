@@ -20,7 +20,7 @@ const DropdownButtonProps = {
   size: PropTypes.oneOf(['small', 'large', 'default']).def('default'),
   htmlType: ButtonTypesProps.htmlType,
   href: PropTypes.string,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   placement: DropdownProps.placement.def('bottomRight'),
   icon: PropTypes.any,

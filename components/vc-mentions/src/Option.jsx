@@ -2,7 +2,7 @@ import PropTypes from '../../_util/vue-types';
 
 export const OptionProps = {
   value: PropTypes.string,
-  disabled: PropTypes.boolean,
+  disabled: PropTypes.looseBoolean,
   children: PropTypes.any,
 };
 

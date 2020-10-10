@@ -5,9 +5,9 @@ export default {
   name: 'PanelContent',
   props: {
     prefixCls: PropTypes.string,
-    isActive: PropTypes.bool,
-    destroyInactivePanel: PropTypes.bool,
-    forceRender: PropTypes.bool,
+    isActive: PropTypes.looseBool,
+    destroyInactivePanel: PropTypes.looseBool,
+    forceRender: PropTypes.looseBool,
     role: PropTypes.any,
   },
   data() {

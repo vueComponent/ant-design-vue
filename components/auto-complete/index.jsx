@@ -31,7 +31,7 @@ const AutoCompleteProps = {
   dataSource: PropTypes.array,
   dropdownMenuStyle: PropTypes.object,
   optionLabelProp: String,
-  dropdownMatchSelectWidth: PropTypes.bool,
+  dropdownMatchSelectWidth: PropTypes.looseBool,
   // onChange?: (value: SelectValue) => void;
   // onSelect?: (value: SelectValue, option: Object) => any;
 };
@@ -42,14 +42,14 @@ const AutoComplete = {
   props: {
     ...AutoCompleteProps,
     prefixCls: PropTypes.string.def('ant-select'),
-    showSearch: PropTypes.bool.def(false),
+    showSearch: PropTypes.looseBool.def(false),
     transitionName: PropTypes.string.def('slide-up'),
     choiceTransitionName: PropTypes.string.def('zoom'),
-    autofocus: PropTypes.bool,
-    backfill: PropTypes.bool,
+    autofocus: PropTypes.looseBool,
+    backfill: PropTypes.looseBool,
     optionLabelProp: PropTypes.string.def('children'),
-    filterOption: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]).def(false),
-    defaultActiveFirstOption: PropTypes.bool.def(true),
+    filterOption: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]).def(false),
+    defaultActiveFirstOption: PropTypes.looseBool.def(true),
   },
   Option: { ...Option, name: 'AAutoCompleteOption' },
   OptGroup: { ...OptGroup, name: 'AAutoCompleteOptGroup' },

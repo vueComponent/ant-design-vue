@@ -8,13 +8,13 @@ import Title, { SkeletonTitleProps } from './Title';
 import Paragraph, { SkeletonParagraphProps } from './Paragraph';
 
 export const SkeletonProps = {
-  active: PropTypes.bool,
-  loading: PropTypes.bool,
+  active: PropTypes.looseBool,
+  loading: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   children: PropTypes.any,
-  avatar: PropTypes.oneOfType([PropTypes.string, SkeletonAvatarProps, PropTypes.bool]),
-  title: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, SkeletonTitleProps]),
-  paragraph: PropTypes.oneOfType([PropTypes.bool, PropTypes.string, SkeletonParagraphProps]),
+  avatar: PropTypes.oneOfType([PropTypes.string, SkeletonAvatarProps, PropTypes.looseBool]),
+  title: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.string, SkeletonTitleProps]),
+  paragraph: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.string, SkeletonParagraphProps]),
 };
 
 function getComponentProps(prop) {

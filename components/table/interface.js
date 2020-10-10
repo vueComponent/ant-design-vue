@@ -21,24 +21,24 @@ export const ColumnProps = {
   customCell: PropTypes.func,
   customHeaderCell: PropTypes.func,
   align: PropTypes.oneOf(['left', 'right', 'center']),
-  ellipsis: PropTypes.bool,
+  ellipsis: PropTypes.looseBool,
   filters: PropTypes.arrayOf(ColumnFilterItem),
-  // onFilter: (value: any, record: T) => PropTypes.bool,
-  filterMultiple: PropTypes.bool,
+  // onFilter: (value: any, record: T) => PropTypes.looseBool,
+  filterMultiple: PropTypes.looseBool,
   filterDropdown: PropTypes.any,
-  filterDropdownVisible: PropTypes.bool,
+  filterDropdownVisible: PropTypes.looseBool,
   // onFilterDropdownVisibleChange?: (visible: boolean) => void;
-  sorter: PropTypes.oneOfType([PropTypes.boolean, PropTypes.func]),
+  sorter: PropTypes.oneOfType([PropTypes.looseBoolean, PropTypes.func]),
   defaultSortOrder: PropTypes.oneOf(['ascend', 'descend']),
   colSpan: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
-  fixed: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['left', 'right'])]),
+  fixed: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.oneOf(['left', 'right'])]),
   filterIcon: PropTypes.any,
   filteredValue: PropTypes.array,
-  filtered: PropTypes.bool,
+  filtered: PropTypes.looseBool,
   defaultFilteredValue: PropTypes.array,
-  sortOrder: PropTypes.oneOfType([PropTypes.bool, PropTypes.oneOf(['ascend', 'descend'])]),
+  sortOrder: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.oneOf(['ascend', 'descend'])]),
   sortDirections: PropTypes.array,
   // children?: ColumnProps<T>[];
   // onCellClick?: (record: T, event: any) => void;
@@ -83,9 +83,9 @@ export const TableRowSelection = {
   // onSelect?: SelectionSelectFn<T>;
   // onSelectAll?: (selected: boolean, selectedRows: Object[], changeRows: Object[]) => any;
   // onSelectInvert?: (selectedRows: Object[]) => any;
-  selections: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
-  hideDefaultSelections: PropTypes.bool,
-  fixed: PropTypes.bool,
+  selections: PropTypes.oneOfType([PropTypes.array, PropTypes.looseBool]),
+  hideDefaultSelections: PropTypes.looseBool,
+  fixed: PropTypes.looseBool,
   columnWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   selectWay: PropTypes.oneOf(['onSelect', 'onSelectMultiple', 'onSelectAll', 'onSelectInvert']),
   columnTitle: PropTypes.any,
@@ -100,7 +100,7 @@ export const TableProps = {
       ...PaginationProps,
       position: PropTypes.oneOf(['top', 'bottom', 'both']),
     }).loose,
-    PropTypes.bool,
+    PropTypes.looseBool,
   ]),
   size: PropTypes.oneOf(['default', 'middle', 'small', 'large']),
   dataSource: PropTypes.array,
@@ -109,20 +109,20 @@ export const TableProps = {
   rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   rowClassName: PropTypes.func,
   expandedRowRender: PropTypes.any,
-  defaultExpandAllRows: PropTypes.bool,
+  defaultExpandAllRows: PropTypes.looseBool,
   defaultExpandedRowKeys: PropTypes.array,
   expandedRowKeys: PropTypes.array,
-  expandIconAsCell: PropTypes.bool,
+  expandIconAsCell: PropTypes.looseBool,
   expandIconColumnIndex: PropTypes.number,
-  expandRowByClick: PropTypes.bool,
-  loading: PropTypes.oneOfType([PropTypes.shape(SpinProps).loose, PropTypes.bool]),
+  expandRowByClick: PropTypes.looseBool,
+  loading: PropTypes.oneOfType([PropTypes.shape(SpinProps).loose, PropTypes.looseBool]),
   locale: TableLocale,
   indentSize: PropTypes.number,
   customRow: PropTypes.func,
   customHeaderRow: PropTypes.func,
-  useFixedHeader: PropTypes.bool,
-  bordered: PropTypes.bool,
-  showHeader: PropTypes.bool,
+  useFixedHeader: PropTypes.looseBool,
+  bordered: PropTypes.looseBool,
+  showHeader: PropTypes.looseBool,
   footer: PropTypes.func,
   title: PropTypes.func,
   scroll: PropTypes.object,
@@ -163,20 +163,20 @@ export const TableProps = {
 export const SelectionCheckboxAllProps = {
   store: Store,
   locale: PropTypes.any,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   getCheckboxPropsByItem: PropTypes.func,
   getRecordKey: PropTypes.func,
   data: PropTypes.array,
   prefixCls: PropTypes.string,
-  hideDefaultSelections: PropTypes.bool,
-  selections: PropTypes.oneOfType([PropTypes.array, PropTypes.bool]),
+  hideDefaultSelections: PropTypes.looseBool,
+  selections: PropTypes.oneOfType([PropTypes.array, PropTypes.looseBool]),
   getPopupContainer: PropTypes.func,
   onSelect: PropTypes.func,
 };
 
 // export interface SelectionCheckboxAllState {
-//   checked: PropTypes.bool,
-//   indeterminate: PropTypes.bool,
+//   checked: PropTypes.looseBool,
+//   indeterminate: PropTypes.looseBool,
 // }
 
 export const SelectionBoxProps = {
@@ -185,13 +185,13 @@ export const SelectionBoxProps = {
   defaultSelection: PropTypes.arrayOf([PropTypes.string, PropTypes.number]),
   rowIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   name: PropTypes.string,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   id: PropTypes.string,
   // onChange: React.ChangeEventHandler<HTMLInputElement>;
 };
 
 // export interface SelectionBoxState {
-//   checked?: PropTypes.bool,
+//   checked?: PropTypes.looseBool,
 // }
 
 export const FilterMenuProps = {
@@ -208,5 +208,5 @@ export const FilterMenuProps = {
 // export interface FilterMenuState {
 //   selectedKeys: string[];
 //   keyPathOfSelectedItem: { [key: string]: string };
-//   visible?: PropTypes.bool,
+//   visible?: PropTypes.looseBool,
 // }

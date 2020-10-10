@@ -17,7 +17,7 @@ export const TimelineProps = {
   /** 指定最后一个幽灵节点是否存在或内容 */
   pending: PropTypes.any,
   pendingDot: PropTypes.string,
-  reverse: PropTypes.bool,
+  reverse: PropTypes.looseBool,
   mode: PropTypes.oneOf(['left', 'alternate', 'right', '']),
 };
 

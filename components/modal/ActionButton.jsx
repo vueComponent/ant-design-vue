@@ -8,7 +8,7 @@ const ActionButtonProps = {
   type: ButtonType,
   actionFn: PropTypes.func,
   closeModal: PropTypes.func,
-  autofocus: PropTypes.bool,
+  autofocus: PropTypes.looseBool,
   buttonProps: PropTypes.object,
 };
 

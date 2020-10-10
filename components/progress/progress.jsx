@@ -22,7 +22,7 @@ export const ProgressProps = {
   successPercent: PropTypes.number,
   format: PropTypes.func,
   status: PropTypes.oneOf(ProgressStatuses),
-  showInfo: PropTypes.bool,
+  showInfo: PropTypes.looseBool,
   strokeWidth: PropTypes.number,
   strokeLinecap: PropTypes.oneOf(['butt', 'round', 'square']),
   strokeColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),

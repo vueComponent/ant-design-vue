@@ -10,13 +10,13 @@ export default {
   name: 'TabContent',
   inheritAttrs: false,
   props: {
-    animated: PropTypes.bool.def(true),
-    animatedWithMargin: PropTypes.bool.def(true),
+    animated: PropTypes.looseBool.def(true),
+    animatedWithMargin: PropTypes.looseBool.def(true),
     prefixCls: PropTypes.string.def('ant-tabs'),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     tabBarPosition: PropTypes.string,
     direction: PropTypes.string,
-    destroyInactiveTabPane: PropTypes.bool,
+    destroyInactiveTabPane: PropTypes.looseBool,
     children: PropTypes.any,
   },
   computed: {

@@ -37,7 +37,7 @@ export const AlertProps = {
    */
   type: PropTypes.oneOf(['success', 'info', 'warning', 'error']),
   /** Whether Alert can be closed */
-  closable: PropTypes.bool,
+  closable: PropTypes.looseBool,
   /** Close text to show */
   closeText: PropTypes.any,
   /** Content of Alert */
@@ -49,9 +49,9 @@ export const AlertProps = {
   /** Trigger when animation ending of Alert */
   afterClose: PropTypes.func.def(noop),
   /** Whether to show icon */
-  showIcon: PropTypes.bool,
+  showIcon: PropTypes.looseBool,
   prefixCls: PropTypes.string,
-  banner: PropTypes.bool,
+  banner: PropTypes.looseBool,
   icon: PropTypes.any,
   onClose: PropTypes.func,
 };

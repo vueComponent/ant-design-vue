@@ -7,7 +7,7 @@ const CheckableTag = defineComponent({
   name: 'ACheckableTag',
   props: {
     prefixCls: PropTypes.string,
-    checked: PropTypes.bool,
+    checked: PropTypes.looseBool,
     onChange: {
       type: Function as PropType<(checked: boolean) => void>,
     },

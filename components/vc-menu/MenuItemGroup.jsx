@@ -11,7 +11,7 @@ const MenuItemGroup = {
     className: PropTypes.string,
     subMenuKey: PropTypes.string,
     rootPrefixCls: PropTypes.string,
-    disabled: PropTypes.bool.def(true),
+    disabled: PropTypes.looseBool.def(true),
     title: PropTypes.any,
   },
   isMenuItemGroup: true,

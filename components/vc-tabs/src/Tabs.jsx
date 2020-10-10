@@ -30,7 +30,7 @@ export default {
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
-    destroyInactiveTabPane: PropTypes.bool,
+    destroyInactiveTabPane: PropTypes.looseBool,
     renderTabBar: PropTypes.func.isRequired,
     renderTabContent: PropTypes.func.isRequired,
     navWrapper: PropTypes.func.def(arg => arg),

@@ -12,10 +12,10 @@ const Slider = {
   props: {
     defaultValue: PropTypes.number,
     value: PropTypes.number,
-    disabled: PropTypes.bool,
-    autofocus: PropTypes.bool,
+    disabled: PropTypes.looseBool,
+    autofocus: PropTypes.looseBool,
     tabindex: PropTypes.number,
-    reverse: PropTypes.bool,
+    reverse: PropTypes.looseBool,
     min: PropTypes.number,
     max: PropTypes.number,
   },

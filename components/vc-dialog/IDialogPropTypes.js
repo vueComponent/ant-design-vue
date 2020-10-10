@@ -2,14 +2,14 @@ import PropTypes from '../_util/vue-types';
 
 function IDialogPropTypes() {
   return {
-    keyboard: PropTypes.bool,
-    mask: PropTypes.bool,
+    keyboard: PropTypes.looseBool,
+    mask: PropTypes.looseBool,
     afterClose: PropTypes.func,
     // onClose: PropTypes. (e: SyntheticEvent<HTMLDivElement>) =>any,
-    closable: PropTypes.bool,
-    maskClosable: PropTypes.bool,
-    visible: PropTypes.bool,
-    destroyOnClose: PropTypes.bool,
+    closable: PropTypes.looseBool,
+    maskClosable: PropTypes.looseBool,
+    visible: PropTypes.looseBool,
+    destroyOnClose: PropTypes.looseBool,
     mousePosition: PropTypes.shape({
       x: PropTypes.number,
       y: PropTypes.number,
@@ -35,11 +35,11 @@ function IDialogPropTypes() {
     dialogStyle: PropTypes.object.def(() => ({})),
     dialogClass: PropTypes.string.def(''),
     closeIcon: PropTypes.any,
-    forceRender: PropTypes.bool,
+    forceRender: PropTypes.looseBool,
     getOpenCount: PropTypes.func,
     // https://github.com/ant-design/ant-design/issues/19771
     // https://github.com/react-component/dialog/issues/95
-    focusTriggerAfterClose: PropTypes.bool,
+    focusTriggerAfterClose: PropTypes.looseBool,
     onClose: PropTypes.func,
   };
 }

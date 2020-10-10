@@ -24,8 +24,8 @@ export default {
     align: PropTypes.object.isRequired,
     target: PropTypes.oneOfType([PropTypes.func, PropTypes.object]).def(() => window),
     monitorBufferTime: PropTypes.number.def(50),
-    monitorWindowResize: PropTypes.bool.def(false),
-    disabled: PropTypes.bool.def(false),
+    monitorWindowResize: PropTypes.looseBool.def(false),
+    disabled: PropTypes.looseBool.def(false),
   },
   data() {
     this.aligned = false;

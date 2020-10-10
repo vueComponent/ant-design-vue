@@ -27,7 +27,7 @@ import { defaultConfigProvider } from '../config-provider';
 const CascaderOptionType = PropTypes.shape({
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   label: PropTypes.any,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   children: PropTypes.array,
   key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }).loose;
@@ -44,7 +44,7 @@ const ShowSearchType = PropTypes.shape({
   filter: PropTypes.func,
   render: PropTypes.func,
   sort: PropTypes.func,
-  matchInputWidth: PropTypes.bool,
+  matchInputWidth: PropTypes.looseBool,
   limit: PropTypes.oneOfType([Boolean, Number]),
 }).loose;
 function noop() {}
@@ -73,24 +73,24 @@ const CascaderProps = {
   /** 输入框大小，可选 `large` `default` `small` */
   size: PropTypes.oneOf(['large', 'default', 'small']),
   /** 禁用*/
-  disabled: PropTypes.bool.def(false),
+  disabled: PropTypes.looseBool.def(false),
   /** 是否支持清除*/
-  allowClear: PropTypes.bool.def(true),
+  allowClear: PropTypes.looseBool.def(true),
   showSearch: PropTypes.oneOfType([Boolean, ShowSearchType]),
   notFoundContent: PropTypes.any,
   loadData: PropTypes.func,
   /** 次级菜单的展开方式，可选 'click' 和 'hover' */
   expandTrigger: CascaderExpandTrigger,
   /** 当此项为 true 时，点选每级菜单选项值都会发生变化 */
-  changeOnSelect: PropTypes.bool,
+  changeOnSelect: PropTypes.looseBool,
   /** 浮层可见变化时回调 */
   // onPopupVisibleChange?: (popupVisible: boolean) => void;
   prefixCls: PropTypes.string,
   inputPrefixCls: PropTypes.string,
   getPopupContainer: PropTypes.func,
-  popupVisible: PropTypes.bool,
+  popupVisible: PropTypes.looseBool,
   fieldNames: FieldNamesType,
-  autofocus: PropTypes.bool,
+  autofocus: PropTypes.looseBool,
   suffixIcon: PropTypes.any,
   showSearchRender: PropTypes.any,
   onChange: PropTypes.func,

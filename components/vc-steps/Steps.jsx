@@ -16,14 +16,14 @@ export default {
     labelPlacement: PropTypes.string.def('horizontal'),
     status: PropTypes.string.def('process'),
     size: PropTypes.string.def(''),
-    progressDot: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    progressDot: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]),
     initial: PropTypes.number.def(0),
     current: PropTypes.number.def(0),
     icons: PropTypes.shape({
       finish: PropTypes.any,
       error: PropTypes.any,
     }).loose,
-    canClick: PropTypes.bool,
+    canClick: PropTypes.looseBool,
   },
   data() {
     this.calcStepOffsetWidth = debounce(this.calcStepOffsetWidth, 150);

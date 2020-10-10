@@ -19,7 +19,7 @@ const TransferItem = {
   key: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
 };
 
 function isRenderResultPlainObject(result) {
@@ -42,7 +42,7 @@ export const TransferListProps = {
   handleSelectAll: PropTypes.func,
   handleClear: PropTypes.func,
   renderItem: PropTypes.func,
-  showSearch: PropTypes.bool,
+  showSearch: PropTypes.looseBool,
   searchPlaceholder: PropTypes.string,
   notFoundContent: PropTypes.any,
   itemUnit: PropTypes.string,
@@ -50,10 +50,10 @@ export const TransferListProps = {
   body: PropTypes.any,
   renderList: PropTypes.any,
   footer: PropTypes.any,
-  lazy: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-  disabled: PropTypes.bool,
+  lazy: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
+  disabled: PropTypes.looseBool,
   direction: PropTypes.string,
-  showSelectAll: PropTypes.bool,
+  showSelectAll: PropTypes.looseBool,
   onItemSelect: PropTypes.func,
   onItemSelectAll: PropTypes.func,
   onScroll: PropTypes.func,

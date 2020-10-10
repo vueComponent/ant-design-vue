@@ -6,14 +6,14 @@ import Sentinel from './Sentinel';
 export default {
   name: 'TabPane',
   props: {
-    active: PropTypes.bool,
-    destroyInactiveTabPane: PropTypes.bool,
-    forceRender: PropTypes.bool,
+    active: PropTypes.looseBool,
+    destroyInactiveTabPane: PropTypes.looseBool,
+    forceRender: PropTypes.looseBool,
     placeholder: PropTypes.any,
     rootPrefixCls: PropTypes.string,
     tab: PropTypes.any,
-    closable: PropTypes.bool,
-    disabled: PropTypes.bool,
+    closable: PropTypes.looseBool,
+    disabled: PropTypes.looseBool,
   },
   setup() {
     return {

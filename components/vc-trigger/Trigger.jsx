@@ -63,18 +63,18 @@ export default defineComponent({
     blurDelay: PropTypes.number.def(0.15),
     getPopupContainer: PropTypes.func,
     getDocument: PropTypes.func.def(returnDocument),
-    forceRender: PropTypes.bool,
-    destroyPopupOnHide: PropTypes.bool.def(false),
-    mask: PropTypes.bool.def(false),
-    maskClosable: PropTypes.bool.def(true),
+    forceRender: PropTypes.looseBool,
+    destroyPopupOnHide: PropTypes.looseBool.def(false),
+    mask: PropTypes.looseBool.def(false),
+    maskClosable: PropTypes.looseBool.def(true),
     // onPopupAlign: PropTypes.func.def(noop),
     popupAlign: PropTypes.object.def(() => ({})),
-    popupVisible: PropTypes.bool,
-    defaultPopupVisible: PropTypes.bool.def(false),
+    popupVisible: PropTypes.looseBool,
+    defaultPopupVisible: PropTypes.looseBool.def(false),
     maskTransitionName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     maskAnimation: PropTypes.string,
     stretch: PropTypes.string,
-    alignPoint: PropTypes.bool, // Maybe we can support user pass position in the future
+    alignPoint: PropTypes.looseBool, // Maybe we can support user pass position in the future
   },
   data() {
     const props = this.$props;

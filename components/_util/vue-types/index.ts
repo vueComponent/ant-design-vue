@@ -8,5 +8,17 @@ const PropTypes = createTypes({
   object: undefined,
   integer: undefined,
 });
+PropTypes.extend([
+  {
+    name: 'looseBool',
+    getter: true,
+    type: Boolean,
+    default: undefined,
+  },
+]);
+export function withUndefined(type: any) {
+  type.default = undefined;
+  return type;
+}
 
 export default PropTypes;

@@ -90,7 +90,7 @@ const ConfigProvider = defineComponent({
     csp: {
       type: Object as PropType<CSPConfig>,
     },
-    autoInsertSpaceInButton: PropTypes.bool,
+    autoInsertSpaceInButton: PropTypes.looseBool,
     locale: {
       type: Object as PropType<Locale>,
     },
@@ -106,8 +106,8 @@ const ConfigProvider = defineComponent({
     space: {
       type: [String, Number] as PropType<SizeType | number>,
     },
-    virtual: PropTypes.bool,
-    dropdownMatchSelectWidth: PropTypes.bool,
+    virtual: PropTypes.looseBool,
+    dropdownMatchSelectWidth: PropTypes.looseBool,
   },
   setup(props, { slots }) {
     const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {

@@ -15,14 +15,14 @@ const Switch = {
     prefixCls: PropTypes.string,
     // size=default and size=large are the same
     size: PropTypes.oneOf(['small', 'default', 'large']),
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     checkedChildren: PropTypes.any,
     unCheckedChildren: PropTypes.any,
     tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    checked: PropTypes.bool,
-    defaultChecked: PropTypes.bool,
-    autofocus: PropTypes.bool,
-    loading: PropTypes.bool,
+    checked: PropTypes.looseBool,
+    defaultChecked: PropTypes.looseBool,
+    autofocus: PropTypes.looseBool,
+    loading: PropTypes.looseBool,
   },
   setup() {
     return {

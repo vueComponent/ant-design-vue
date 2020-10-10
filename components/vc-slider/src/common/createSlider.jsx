@@ -18,13 +18,13 @@ export default function createSlider(Component) {
     max: PropTypes.number,
     step: PropTypes.number,
     marks: PropTypes.object,
-    included: PropTypes.bool,
+    included: PropTypes.looseBool,
     prefixCls: PropTypes.string,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     handle: PropTypes.func,
-    dots: PropTypes.bool,
-    vertical: PropTypes.bool,
-    reverse: PropTypes.bool,
+    dots: PropTypes.looseBool,
+    vertical: PropTypes.looseBool,
+    reverse: PropTypes.looseBool,
     minimumTrackStyle: PropTypes.object, // just for compatibility, will be deperecate
     maximumTrackStyle: PropTypes.object, // just for compatibility, will be deperecate
     handleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
@@ -32,7 +32,7 @@ export default function createSlider(Component) {
     railStyle: PropTypes.object,
     dotStyle: PropTypes.object,
     activeDotStyle: PropTypes.object,
-    autofocus: PropTypes.bool,
+    autofocus: PropTypes.looseBool,
   };
   return {
     name: 'createSlider',

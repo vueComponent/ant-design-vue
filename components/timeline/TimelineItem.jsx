@@ -8,7 +8,7 @@ export const TimeLineItemProps = {
   prefixCls: PropTypes.string,
   color: PropTypes.string,
   dot: PropTypes.any,
-  pending: PropTypes.bool,
+  pending: PropTypes.looseBool,
   position: PropTypes.oneOf(['left', 'right', '']).def(''),
 };
 

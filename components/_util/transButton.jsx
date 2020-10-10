@@ -17,7 +17,7 @@ const TransButton = {
   name: 'TransButton',
   inheritAttrs: false,
   props: {
-    noStyle: PropTypes.bool,
+    noStyle: PropTypes.looseBool,
     onClick: PropTypes.func,
   },
 

@@ -9,7 +9,7 @@ export const TransferSearchProps = {
   placeholder: PropTypes.string,
   value: PropTypes.any,
   handleClear: PropTypes.func,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   onChange: PropTypes.func,
 };
 

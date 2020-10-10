@@ -2,8 +2,8 @@ import PropTypes from '../_util/vue-types';
 export default () => ({
   trigger: PropTypes.array.def(['hover']),
   overlay: PropTypes.any,
-  visible: PropTypes.bool,
-  disabled: PropTypes.bool,
+  visible: PropTypes.looseBool,
+  disabled: PropTypes.looseBool,
   align: PropTypes.object,
   getPopupContainer: PropTypes.func,
   prefixCls: PropTypes.string,
@@ -18,9 +18,9 @@ export default () => ({
   ]),
   overlayClassName: PropTypes.string,
   overlayStyle: PropTypes.object,
-  forceRender: PropTypes.bool,
+  forceRender: PropTypes.looseBool,
   mouseEnterDelay: PropTypes.number,
   mouseLeaveDelay: PropTypes.number,
   openClassName: PropTypes.string,
-  minOverlayWidthMatchTrigger: PropTypes.bool,
+  minOverlayWidthMatchTrigger: PropTypes.looseBool,
 });

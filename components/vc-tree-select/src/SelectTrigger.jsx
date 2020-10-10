@@ -30,8 +30,8 @@ const SelectTrigger = {
   inheritAttrs: false,
   props: {
     // Pass by outside user props
-    disabled: PropTypes.bool,
-    showSearch: PropTypes.bool,
+    disabled: PropTypes.looseBool,
+    showSearch: PropTypes.looseBool,
     prefixCls: PropTypes.string,
     dropdownPopupAlign: PropTypes.object,
     dropdownClassName: PropTypes.string,
@@ -40,14 +40,14 @@ const SelectTrigger = {
     animation: PropTypes.string,
     getPopupContainer: PropTypes.func,
 
-    dropdownMatchSelectWidth: PropTypes.bool,
+    dropdownMatchSelectWidth: PropTypes.looseBool,
 
     // Pass by Select
-    isMultiple: PropTypes.bool,
+    isMultiple: PropTypes.looseBool,
     dropdownPrefixCls: PropTypes.string,
     dropdownVisibleChange: PropTypes.func,
     popupElement: PropTypes.node,
-    open: PropTypes.bool,
+    open: PropTypes.looseBool,
   },
   created() {
     this.triggerRef = createRef();

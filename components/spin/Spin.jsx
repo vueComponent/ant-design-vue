@@ -9,7 +9,7 @@ export const SpinSize = PropTypes.oneOf(['small', 'default', 'large']);
 
 export const SpinProps = () => ({
   prefixCls: PropTypes.string,
-  spinning: PropTypes.bool,
+  spinning: PropTypes.looseBool,
   size: SpinSize,
   wrapperClassName: PropTypes.string,
   tip: PropTypes.string,

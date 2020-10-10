@@ -17,10 +17,10 @@ export default {
   name: 'PortalWrapper',
   props: {
     wrapperClassName: PropTypes.string,
-    forceRender: PropTypes.bool,
+    forceRender: PropTypes.looseBool,
     getContainer: PropTypes.any,
     children: PropTypes.func,
-    visible: PropTypes.bool,
+    visible: PropTypes.looseBool,
   },
   data() {
     this._component = null;

@@ -16,7 +16,7 @@ const getStepsProps = (defaultProps = {}) => {
     status: PropTypes.oneOf(['wait', 'process', 'finish', 'error']),
     size: PropTypes.oneOf(['default', 'small']),
     direction: PropTypes.oneOf(['horizontal', 'vertical']),
-    progressDot: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    progressDot: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]),
     type: PropTypes.oneOf(['default', 'navigation']),
     onChange: PropTypes.func,
     'onUpdate:current': PropTypes.func,

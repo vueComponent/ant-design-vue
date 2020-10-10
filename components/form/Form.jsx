@@ -17,16 +17,16 @@ export const FormProps = {
   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
   labelCol: PropTypes.object,
   wrapperCol: PropTypes.object,
-  colon: PropTypes.bool,
+  colon: PropTypes.looseBool,
   labelAlign: PropTypes.oneOf(['left', 'right']),
   prefixCls: PropTypes.string,
-  hideRequiredMark: PropTypes.bool,
+  hideRequiredMark: PropTypes.looseBool,
   model: PropTypes.object,
   rules: PropTypes.object,
   validateMessages: PropTypes.any,
-  validateOnRuleChange: PropTypes.bool,
+  validateOnRuleChange: PropTypes.looseBool,
   // 提交失败自动滚动到第一个错误字段
-  scrollToFirstError: PropTypes.bool,
+  scrollToFirstError: PropTypes.looseBool,
   onFinish: PropTypes.func,
   onFinishFailed: PropTypes.func,
   name: PropTypes.name,
@@ -39,9 +39,9 @@ export const ValidationRule = {
   /** built-in validation type, available options: https://github.com/yiminghe/async-validator#type */
   type: PropTypes.string,
   /** indicates whether field is required */
-  required: PropTypes.boolean,
+  required: PropTypes.looseBoolean,
   /** treat required fields that only contain whitespace as errors */
-  whitespace: PropTypes.boolean,
+  whitespace: PropTypes.looseBoolean,
   /** validate the exact length of a field */
   len: PropTypes.number,
   /** validate the min length of a field */

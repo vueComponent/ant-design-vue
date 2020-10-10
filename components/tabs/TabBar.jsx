@@ -16,7 +16,7 @@ const TabBar = {
     tabPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('top'),
     tabBarPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
     size: PropTypes.oneOf(['default', 'small', 'large']),
-    animated: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    animated: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
     renderTabBar: PropTypes.func,
     panels: PropTypes.array.def([]),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

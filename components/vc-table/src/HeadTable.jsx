@@ -8,7 +8,7 @@ export default {
   name: 'HeadTable',
   inheritAttrs: false,
   props: {
-    fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.looseBool]),
     columns: PropTypes.array.isRequired,
     tableClassName: PropTypes.string.isRequired,
     handleBodyScrollLeft: PropTypes.func.isRequired,

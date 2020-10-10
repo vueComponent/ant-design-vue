@@ -8,7 +8,7 @@ export default {
   __ANT_CARD_GRID: true,
   props: {
     prefixCls: PropTypes.string,
-    hoverable: PropTypes.bool,
+    hoverable: PropTypes.looseBool,
   },
   setup() {
     return {

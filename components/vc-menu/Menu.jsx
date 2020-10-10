@@ -11,7 +11,7 @@ const Menu = {
   inheritAttrs: false,
   props: {
     ...commonPropsType,
-    selectable: PropTypes.bool.def(true),
+    selectable: PropTypes.looseBool.def(true),
   },
   mixins: [BaseMixin],
   data() {

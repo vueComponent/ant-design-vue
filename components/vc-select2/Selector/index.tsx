@@ -65,7 +65,7 @@ export interface SelectorProps {
   maxTagCount?: number;
   maxTagTextLength?: number;
   maxTagPlaceholder?: VNodeChild;
-  tagRender?: (props: CustomTagProps) => VNode;
+  tagRender?: (props: CustomTagProps) => VNodeChild;
 
   /** Check if `tokenSeparators` contains `\n` or `\r\n` */
   tokenWithEnter?: boolean;
@@ -225,7 +225,7 @@ const Selector = defineComponent<SelectorProps>({
       onInputChange,
       onInputCompositionStart,
       onInputCompositionEnd,
-    } = this;
+    } = this as any;
     const sharedProps = {
       inputRef,
       onInputKeyDown: onInternalInputKeyDown,

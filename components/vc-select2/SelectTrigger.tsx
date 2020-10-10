@@ -90,7 +90,7 @@ const SelectTrigger = defineComponent<SelectTriggerProps>({
       dropdownRender,
       animation,
       transitionName,
-    } = props;
+    } = props as SelectTriggerProps;
     const dropdownPrefixCls = `${prefixCls}-dropdown`;
 
     let popupNode = popupElement;

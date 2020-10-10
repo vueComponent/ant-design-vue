@@ -219,7 +219,7 @@ export default function generateSelector<
     key?: Key;
     disabled?: boolean;
   }[]
->(config: GenerateConfig<OptionsType>): DefineComponent {
+>(config: GenerateConfig<OptionsType>): DefineComponent<SelectProps<OptionsType, ValueType>> {
   const {
     prefixCls: defaultPrefixCls,
     components: { optionList: OptionList },
@@ -600,11 +600,7 @@ export default function generateSelector<
         }
       };
 
-      useSelectTriggerControl(
-        [containerRef.value, triggerRef.value && triggerRef.value.getPopupElement()],
-        triggerOpen,
-        onToggleOpen,
-      );
+      useSelectTriggerControl([containerRef, triggerRef], triggerOpen, onToggleOpen);
 
       // ============================= Search =============================
       const triggerSearch = (searchText: string, fromTyping: boolean, isCompositing: boolean) => {
@@ -923,6 +919,7 @@ export default function generateSelector<
         onSearchSubmit,
         containerRef,
         listRef,
+        triggerRef,
       };
     },
     methods: {
@@ -964,7 +961,7 @@ export default function generateSelector<
         displayValues,
         activeValue,
         onSearchSubmit,
-      } = this;
+      } = this as any;
       const {
         prefixCls = defaultPrefixCls,
         class: className,

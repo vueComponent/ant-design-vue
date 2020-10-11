@@ -1,6 +1,5 @@
-import { inject, defineComponent } from 'vue';
+import { inject, defineComponent, HTMLAttributes } from 'vue';
 import classNames from '../_util/classNames';
-import { getOptionProps, initDefaultProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
@@ -9,10 +8,12 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import Line from './line';
 import Circle from './circle';
 import { validProgress } from './utils';
+import { PresetColorType, PresetStatusColorType } from '../_util/colors';
+import { LiteralUnion } from '../_util/type';
 
 const ProgressStatuses = ['normal', 'exception', 'active', 'success'];
 
-export interface ProgressProps {
+export interface ProgressProps extends HTMLAttributes {
   prefixCls?: string;
   type?: 'line' | 'circle' | 'dashboard';
   percent?: number;
@@ -22,7 +23,7 @@ export interface ProgressProps {
   showInfo?: boolean;
   strokeWidth?: number;
   strokeLinecap?: 'butt' | 'round' | 'square';
-  strokeColor?: string | object;
+  strokeColor?: LiteralUnion<PresetColorType | PresetStatusColorType, string>;
   trailColor?: string;
   width?: number;
   gapDegree?: number;
@@ -32,8 +33,8 @@ export interface ProgressProps {
 
 export default defineComponent({
   name: 'AProgress',
-  setup(props: ProgressProps, { emit, attrs, slots }) {
-    const { configProvider } = inject('configProvider', ConfigConsumerProps);
+  setup(props: ProgressProps, { slots }) {
+    const { getPrefixCls } = inject('configProvider', ConfigConsumerProps);
 
     const getPercentNumber = () => {
       const { successPercent, percent = 0 } = props;
@@ -45,18 +46,19 @@ export default defineComponent({
 
     const getProgressStatus = () => {
       const { status } = props;
-      if (ProgressStatuses.indexOf(status) < 0 && getPercentNumber() >= 100) {
+      if (status && ProgressStatuses.indexOf(status) < 0 && getPercentNumber() >= 100) {
         return 'success';
       }
       return status || 'normal';
     };
 
-    const renderProcessInfo = (prefixCls, progressStatus) => {
-      const { showInfo, format, type, percent, successPercent } = props;
+    const renderProcessInfo = (prefixCls: string, progressStatus: string) => {
+      const { showInfo, format, type, percent = 0, successPercent = 0 } = props;
       if (!showInfo) return null;
 
       let text;
-      const textFormatter = format || slots.format || (percentNumber => `${percentNumber}%`);
+      const textFormatter =
+        format || slots.format || ((percentNumber: string) => `${percentNumber}%`);
       const isLineType = type === 'line';
       if (
         format ||
@@ -78,7 +80,6 @@ export default defineComponent({
 
     return () => {
       const { prefixCls: customizePrefixCls, size, type, showInfo } = props;
-      const getPrefixCls = configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('progress', customizePrefixCls);
       const progressStatus = getProgressStatus();
       const progressInfo = renderProcessInfo(prefixCls, progressStatus);

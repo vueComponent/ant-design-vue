@@ -1,4 +1,4 @@
-function enhancer(Component) {
+function enhancer(Component: any) {
   return {
     ...Component,
     updated() {

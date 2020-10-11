@@ -1,4 +1,17 @@
 import { validProgress } from './utils';
+import { SetupContext, HTMLAttributes } from 'vue';
+import { PresetColorType, PresetStatusColorType } from '../_util/colors';
+import { LiteralUnion } from '../_util/type';
+
+export interface LineProps extends HTMLAttributes {
+  prefixCls?: string;
+  percent?: number;
+  successPercent?: number;
+  strokeWidth?: number;
+  size?: string;
+  strokeColor?: LiteralUnion<PresetColorType | PresetStatusColorType, string>;
+  strokeLinecap?: string;
+}
 
 /**
  * {
@@ -9,7 +22,7 @@ import { validProgress } from './utils';
  *   '100%': '#ffffff'
  * }
  */
-export const sortGradient = gradients => {
+export const sortGradient = (gradients: string) => {
   let tempArr = [];
   // eslint-disable-next-line no-restricted-syntax
   for (const [key, value] of Object.entries(gradients)) {
@@ -41,7 +54,7 @@ export const sortGradient = gradients => {
  * And...
  * Besides women, there is the code.
  */
-export const handleGradient = strokeColor => {
+export const handleGradient = (strokeColor: any) => {
   const { from = '#1890ff', to = '#1890ff', direction = 'to right', ...rest } = strokeColor;
   if (Object.keys(rest).length !== 0) {
     const sortedGradients = sortGradient(rest);
@@ -50,22 +63,23 @@ export const handleGradient = strokeColor => {
   return { backgroundImage: `linear-gradient(${direction}, ${from}, ${to})` };
 };
 
-const Line = (_, { attrs, slots }) => {
+const Line = (_: LineProps, { slots, attrs }: SetupContext) => {
+  const props = attrs as LineProps;
   const {
     prefixCls,
-    percent,
-    successPercent,
+    percent = 0,
+    successPercent = 0,
     strokeWidth,
     size,
     strokeColor,
     strokeLinecap,
-  } = attrs;
+  } = props;
   let backgroundProps;
   if (strokeColor && typeof strokeColor !== 'string') {
     backgroundProps = handleGradient(strokeColor);
   } else {
     backgroundProps = {
-      background: strokeColor,
+      background: strokeColor ? strokeColor : '',
     };
   }
   const percentStyle = {
@@ -92,7 +106,7 @@ const Line = (_, { attrs, slots }) => {
           {successSegment}
         </div>
       </div>
-      {slots?.default()}
+      {slots?.default?.()}
     </div>
   );
 };

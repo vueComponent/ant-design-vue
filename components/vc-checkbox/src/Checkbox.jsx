@@ -1,6 +1,6 @@
 import { nextTick } from 'vue';
 import classNames from '../../_util/classNames';
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { getOptionProps, hasProp, initDefaultProps } from '../../_util/props-util';
 
@@ -14,8 +14,8 @@ export default {
       name: PropTypes.string,
       id: PropTypes.string,
       type: PropTypes.string,
-      defaultChecked: PropTypes.oneOfType([PropTypes.number, PropTypes.looseBool]),
-      checked: PropTypes.oneOfType([PropTypes.number, PropTypes.looseBool]),
+      defaultChecked: withUndefined(PropTypes.oneOfType([PropTypes.number, PropTypes.looseBool])),
+      checked: withUndefined(PropTypes.oneOfType([PropTypes.number, PropTypes.looseBool])),
       disabled: PropTypes.looseBool,
       // onFocus: PropTypes.func,
       // onBlur: PropTypes.func,

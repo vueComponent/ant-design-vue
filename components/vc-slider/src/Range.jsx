@@ -1,5 +1,5 @@
 import classNames from '../../_util/classNames';
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, hasProp } from '../../_util/props-util';
 import Track from './common/Track';
@@ -26,7 +26,7 @@ const rangeProps = {
   defaultValue: PropTypes.arrayOf(PropTypes.number),
   value: PropTypes.arrayOf(PropTypes.number),
   count: PropTypes.number,
-  pushable: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.number]),
+  pushable: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.number])),
   allowCross: PropTypes.looseBool,
   disabled: PropTypes.looseBool,
   reverse: PropTypes.looseBool,

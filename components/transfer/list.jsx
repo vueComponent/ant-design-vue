@@ -1,5 +1,5 @@
 import classNames from '../_util/classNames';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import {
   isValidElement,
   initDefaultProps,
@@ -50,7 +50,7 @@ export const TransferListProps = {
   body: PropTypes.any,
   renderList: PropTypes.any,
   footer: PropTypes.any,
-  lazy: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
+  lazy: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   disabled: PropTypes.looseBool,
   direction: PropTypes.string,
   showSelectAll: PropTypes.looseBool,

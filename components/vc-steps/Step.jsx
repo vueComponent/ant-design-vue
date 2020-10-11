@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 
@@ -24,7 +24,7 @@ export default {
     description: PropTypes.any,
     title: PropTypes.any,
     subTitle: PropTypes.any,
-    progressDot: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]),
+    progressDot: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
     tailContent: PropTypes.any,
     icons: PropTypes.shape({
       finish: PropTypes.any,

@@ -1,6 +1,6 @@
 import { inject } from 'vue';
 import classNames from '../_util/classNames';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import { initDefaultProps, hasProp } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import Avatar, { SkeletonAvatarProps } from './Avatar';
@@ -12,9 +12,15 @@ export const SkeletonProps = {
   loading: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   children: PropTypes.any,
-  avatar: PropTypes.oneOfType([PropTypes.string, SkeletonAvatarProps, PropTypes.looseBool]),
-  title: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.string, SkeletonTitleProps]),
-  paragraph: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.string, SkeletonParagraphProps]),
+  avatar: withUndefined(
+    PropTypes.oneOfType([PropTypes.string, SkeletonAvatarProps, PropTypes.looseBool]),
+  ),
+  title: withUndefined(
+    PropTypes.oneOfType([PropTypes.looseBool, PropTypes.string, SkeletonTitleProps]),
+  ),
+  paragraph: withUndefined(
+    PropTypes.oneOfType([PropTypes.looseBool, PropTypes.string, SkeletonParagraphProps]),
+  ),
 };
 
 function getComponentProps(prop) {

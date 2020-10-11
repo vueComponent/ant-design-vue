@@ -23,7 +23,7 @@ import shallowEqual from '../../_util/shallowequal';
 import raf from 'raf';
 import scrollIntoView from 'dom-scroll-into-view';
 import warning from 'warning';
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import KeyCode from '../../_util/KeyCode';
 
 import SelectTrigger from './SelectTrigger';
@@ -103,10 +103,12 @@ const Select = {
       dropdownVisibleChange: PropTypes.func,
       dropdownMatchSelectWidth: PropTypes.looseBool,
       treeData: PropTypes.array,
-      treeDataSimpleMode: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
+      treeDataSimpleMode: withUndefined(
+        PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
+      ),
       treeNodeFilterProp: PropTypes.string,
       treeNodeLabelProp: PropTypes.string,
-      treeCheckable: PropTypes.oneOfType([PropTypes.any, PropTypes.object, PropTypes.looseBool]),
+      treeCheckable: PropTypes.any,
       // treeCheckable: PropTypes.any,
       treeCheckStrictly: PropTypes.looseBool,
       treeIcon: PropTypes.looseBool,
@@ -115,7 +117,7 @@ const Select = {
       treeDefaultExpandedKeys: PropTypes.array,
       treeExpandedKeys: PropTypes.array,
       loadData: PropTypes.func,
-      filterTreeNode: PropTypes.oneOfType([PropTypes.func, PropTypes.looseBool]),
+      filterTreeNode: withUndefined(PropTypes.oneOfType([PropTypes.func, PropTypes.looseBool])),
 
       notFoundContent: PropTypes.any,
       getPopupContainer: PropTypes.func,

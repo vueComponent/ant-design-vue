@@ -1,5 +1,5 @@
 // import { TimePickerProps } from '../time-picker'
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import { TimesType, TimeType } from '../_util/moment-util';
 
 export const PickerProps = () => ({
@@ -50,7 +50,7 @@ export const SinglePickerProps = () => ({
 export const DatePickerProps = () => ({
   ...PickerProps(),
   ...SinglePickerProps(),
-  showTime: PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool]),
+  showTime: withUndefined(PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool])),
   open: PropTypes.looseBool,
   disabledTime: PropTypes.func,
   mode: PropTypes.oneOf(['time', 'date', 'month', 'year']),
@@ -74,7 +74,7 @@ export const RangePickerProps = () => ({
   defaultValue: TimesType,
   defaultPickerValue: TimesType,
   timePicker: PropTypes.any,
-  showTime: PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool]),
+  showTime: withUndefined(PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool])),
   ranges: PropTypes.object,
   placeholder: PropTypes.arrayOf(String),
   mode: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(String)]),

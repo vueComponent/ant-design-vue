@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import debounce from 'lodash-es/debounce';
 import isFlexSupported from '../_util/isFlexSupported';
@@ -16,7 +16,7 @@ export default {
     labelPlacement: PropTypes.string.def('horizontal'),
     status: PropTypes.string.def('process'),
     size: PropTypes.string.def(''),
-    progressDot: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]),
+    progressDot: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
     initial: PropTypes.number.def(0),
     current: PropTypes.number.def(0),
     icons: PropTypes.shape({

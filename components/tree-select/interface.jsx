@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import { AbstractSelectProps } from '../select';
 
 export const TreeData = PropTypes.shape({
@@ -13,7 +13,7 @@ export const TreeSelectProps = () => ({
   ...AbstractSelectProps(),
   autofocus: PropTypes.looseBool,
   dropdownStyle: PropTypes.object,
-  filterTreeNode: PropTypes.oneOfType([Function, Boolean]),
+  filterTreeNode: withUndefined(PropTypes.oneOfType([Function, Boolean])),
   getPopupContainer: PropTypes.func,
   labelInValue: PropTypes.looseBool,
   loadData: PropTypes.func,
@@ -37,10 +37,10 @@ export const TreeSelectProps = () => ({
   searchValue: PropTypes.string,
   showCheckedStrategy: PropTypes.oneOf(['SHOW_ALL', 'SHOW_PARENT', 'SHOW_CHILD']),
   suffixIcon: PropTypes.any,
-  treeCheckable: PropTypes.oneOfType([PropTypes.any, PropTypes.looseBool]),
+  treeCheckable: withUndefined(PropTypes.oneOfType([PropTypes.any, PropTypes.looseBool])),
   treeCheckStrictly: PropTypes.looseBool,
   treeData: PropTypes.arrayOf(Object),
-  treeDataSimpleMode: PropTypes.oneOfType([Boolean, Object]),
+  treeDataSimpleMode: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, Object])),
 
   dropdownClassName: PropTypes.string,
   dropdownMatchSelectWidth: PropTypes.looseBool,

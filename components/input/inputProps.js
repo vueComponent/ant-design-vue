@@ -24,8 +24,8 @@ export default {
   prefix: PropTypes.any,
   suffix: PropTypes.any,
   // spellCheck: Boolean,
-  autofocus: Boolean,
-  allowClear: Boolean,
+  autofocus: PropTypes.looseBool,
+  allowClear: PropTypes.looseBool,
   lazy: {
     default: true,
     type: Boolean,

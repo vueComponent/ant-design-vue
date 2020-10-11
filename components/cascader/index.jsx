@@ -1,5 +1,5 @@
 import { inject, provide } from 'vue';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import VcCascader from '../vc-cascader';
 import arrayTreeFilter from 'array-tree-filter';
 import classNames from '../_util/classNames';
@@ -45,7 +45,7 @@ const ShowSearchType = PropTypes.shape({
   render: PropTypes.func,
   sort: PropTypes.func,
   matchInputWidth: PropTypes.looseBool,
-  limit: PropTypes.oneOfType([Boolean, Number]),
+  limit: withUndefined(PropTypes.oneOfType([Boolean, Number])),
 }).loose;
 function noop() {}
 
@@ -76,7 +76,7 @@ const CascaderProps = {
   disabled: PropTypes.looseBool.def(false),
   /** 是否支持清除*/
   allowClear: PropTypes.looseBool.def(true),
-  showSearch: PropTypes.oneOfType([Boolean, ShowSearchType]),
+  showSearch: withUndefined(PropTypes.oneOfType([Boolean, ShowSearchType])),
   notFoundContent: PropTypes.any,
   loadData: PropTypes.func,
   /** 次级菜单的展开方式，可选 'click' 和 'hover' */

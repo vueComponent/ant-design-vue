@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import VcSteps from '../vc-steps';
 import { defaultConfigProvider } from '../config-provider';
@@ -16,7 +16,7 @@ const getStepsProps = (defaultProps = {}) => {
     status: PropTypes.oneOf(['wait', 'process', 'finish', 'error']),
     size: PropTypes.oneOf(['default', 'small']),
     direction: PropTypes.oneOf(['horizontal', 'vertical']),
-    progressDot: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]),
+    progressDot: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
     type: PropTypes.oneOf(['default', 'navigation']),
     onChange: PropTypes.func,
     'onUpdate:current': PropTypes.func,

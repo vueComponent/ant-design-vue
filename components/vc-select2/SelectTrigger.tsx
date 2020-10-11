@@ -137,11 +137,11 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
 });
 SelectTrigger.props = {
   dropdownAlign: PropTypes.object,
-  visible: { type: Boolean, default: undefined },
-  disabled: { type: Boolean, default: undefined },
+  visible: PropTypes.looseBool,
+  disabled: PropTypes.looseBool,
   dropdownClassName: PropTypes.string,
   dropdownStyle: PropTypes.object,
-  empty: { type: Boolean, default: undefined },
+  empty: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   popupClassName: PropTypes.string,
   animation: PropTypes.string,

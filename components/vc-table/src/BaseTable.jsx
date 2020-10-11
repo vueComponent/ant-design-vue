@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import classNames from '../../_util/classNames';
 import ColGroup from './ColGroup';
 import TableHeader from './TableHeader';
@@ -11,7 +11,7 @@ const BaseTable = {
   name: 'BaseTable',
   inheritAttrs: false,
   props: {
-    fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.looseBool]),
+    fixed: withUndefined(PropTypes.oneOfType([PropTypes.string, PropTypes.looseBool])),
     columns: PropTypes.array.isRequired,
     tableClassName: PropTypes.string.isRequired,
     hasHead: PropTypes.looseBool.isRequired,

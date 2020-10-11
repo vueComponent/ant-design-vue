@@ -252,20 +252,20 @@ Selector.inheritAttrs = false;
 Selector.props = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
-  showSearch: { type: Boolean, default: undefined },
-  open: { type: Boolean, default: undefined },
+  showSearch: PropTypes.looseBool,
+  open: PropTypes.looseBool,
   /** Display in the Selector value, it's not same as `value` prop */
   values: PropTypes.array,
-  multiple: { type: Boolean, default: undefined },
+  multiple: PropTypes.looseBool,
   mode: PropTypes.string,
   searchValue: PropTypes.string,
   activeValue: PropTypes.string,
   inputElement: PropTypes.any,
 
-  autofocus: { type: Boolean, default: undefined },
+  autofocus: PropTypes.looseBool,
   accessibilityIndex: PropTypes.number,
   tabindex: PropTypes.number,
-  disabled: { type: Boolean, default: undefined },
+  disabled: PropTypes.looseBool,
   placeholder: PropTypes.any,
   removeIcon: PropTypes.any,
 
@@ -276,7 +276,7 @@ Selector.props = {
   tagRender: PropTypes.func,
 
   /** Check if `tokenSeparators` contains `\n` or `\r\n` */
-  tokenWithEnter: { type: Boolean, default: undefined },
+  tokenWithEnter: PropTypes.looseBool,
 
   // Motion
   choiceTransitionName: PropTypes.string,

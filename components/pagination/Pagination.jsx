@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import VcSelect from '../select';
 import MiniSelect from './MiniSelect';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -25,7 +25,7 @@ export const PaginationProps = () => ({
   pageSizeOptions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
   buildOptionText: PropTypes.func,
   showSizeChange: PropTypes.func,
-  showQuickJumper: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
+  showQuickJumper: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   showTotal: PropTypes.any,
   size: PropTypes.string,
   simple: PropTypes.looseBool,

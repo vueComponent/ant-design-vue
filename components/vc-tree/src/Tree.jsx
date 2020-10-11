@@ -1,4 +1,4 @@
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import classNames from '../../_util/classNames';
 import warning from 'warning';
 import { hasProp, initDefaultProps, getOptionProps, getSlot } from '../../_util/props-util';
@@ -57,7 +57,7 @@ const Tree = {
       selectable: PropTypes.looseBool,
       disabled: PropTypes.looseBool,
       multiple: PropTypes.looseBool,
-      checkable: PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool]),
+      checkable: withUndefined(PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool])),
       checkStrictly: PropTypes.looseBool,
       draggable: PropTypes.looseBool,
       defaultExpandParent: PropTypes.looseBool,

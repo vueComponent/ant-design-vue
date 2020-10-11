@@ -1235,7 +1235,7 @@ export default function generateSelector<
     // Value
     value: PropTypes.any,
     defaultValue: PropTypes.any,
-    labelInValue: { type: Boolean, default: undefined },
+    labelInValue: PropTypes.looseBool,
 
     // Search
     inputValue: PropTypes.string,
@@ -1247,31 +1247,28 @@ export default function generateSelector<
      * It's by design.
      */
     filterOption: PropTypes.any,
-    showSearch: { type: Boolean, default: undefined },
-    autoClearSearchValue: { type: Boolean, default: undefined },
+    showSearch: PropTypes.looseBool,
+    autoClearSearchValue: PropTypes.looseBool,
     onSearch: PropTypes.func,
     onClear: PropTypes.func,
 
     // Icons
-    allowClear: { type: Boolean, default: undefined },
+    allowClear: PropTypes.looseBool,
     clearIcon: PropTypes.any,
-    showArrow: {
-      type: Boolean,
-      default: undefined,
-    },
+    showArrow: PropTypes.looseBool,
     inputIcon: PropTypes.any,
     removeIcon: PropTypes.any,
     menuItemSelectedIcon: PropTypes.func,
 
     // Dropdown
-    open: { type: Boolean, default: undefined },
-    defaultOpen: { type: Boolean, default: undefined },
+    open: PropTypes.looseBool,
+    defaultOpen: PropTypes.looseBool,
     listHeight: PropTypes.number.def(200),
     listItemHeight: PropTypes.number.def(20),
     dropdownStyle: PropTypes.object,
     dropdownClassName: PropTypes.string,
     dropdownMatchSelectWidth: PropTypes.oneOfType([Boolean, Number]).def(true),
-    virtual: { type: Boolean, default: undefined },
+    virtual: PropTypes.looseBool,
     dropdownRender: PropTypes.func,
     dropdownAlign: PropTypes.any,
     animation: PropTypes.string,
@@ -1280,13 +1277,13 @@ export default function generateSelector<
     direction: PropTypes.string,
 
     // Others
-    disabled: { type: Boolean, default: undefined },
-    loading: { type: Boolean, default: undefined },
-    autofocus: { type: Boolean, default: undefined },
-    defaultActiveFirstOption: { type: Boolean, default: undefined },
+    disabled: PropTypes.looseBool,
+    loading: PropTypes.looseBool,
+    autofocus: PropTypes.looseBool,
+    defaultActiveFirstOption: PropTypes.looseBool,
     notFoundContent: PropTypes.any.def('Not Found'),
     placeholder: PropTypes.any,
-    backfill: { type: Boolean, default: undefined },
+    backfill: PropTypes.looseBool,
     getInputElement: PropTypes.func,
     optionLabelProp: PropTypes.string,
     maxTagTextLength: PropTypes.number,

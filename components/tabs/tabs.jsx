@@ -4,7 +4,7 @@ import PlusOutlined from '@ant-design/icons-vue/PlusOutlined';
 import VcTabs, { TabPane } from '../vc-tabs/src';
 import TabContent from '../vc-tabs/src/TabContent';
 import { isFlexSupported } from '../_util/styleChecker';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import {
   getComponent,
   getOptionProps,
@@ -33,7 +33,7 @@ export default {
     type: PropTypes.oneOf(['line', 'card', 'editable-card']),
     tabPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('top'),
     size: PropTypes.oneOf(['default', 'small', 'large']),
-    animated: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
+    animated: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
     tabBarGutter: PropTypes.number,
     renderTabBar: PropTypes.func,
     onChange: PropTypes.func,

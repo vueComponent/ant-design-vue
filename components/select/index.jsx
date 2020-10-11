@@ -1,7 +1,7 @@
 import { provide, inject } from 'vue';
 import warning from '../_util/warning';
 import omit from 'omit.js';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import { Select as VcSelect, Option, OptGroup } from '../vc-select';
 import { defaultConfigProvider } from '../config-provider';
 import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
@@ -30,7 +30,7 @@ const AbstractSelectProps = () => ({
   dropdownMenuStyle: PropTypes.any,
   dropdownMatchSelectWidth: PropTypes.looseBool,
   // onSearch: (value: string) => any,
-  filterOption: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]),
+  filterOption: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
   autofocus: PropTypes.looseBool,
   backfill: PropTypes.looseBool,
   showArrow: PropTypes.looseBool,

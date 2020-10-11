@@ -5,12 +5,12 @@ import inputProps from './inputProps';
 import { hasProp, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import { fixControlledValue, resolveOnChange } from './Input';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 
 const TextAreaProps = {
   ...inputProps,
-  autosize: PropTypes.oneOfType([Object, Boolean]),
-  autoSize: PropTypes.oneOfType([Object, Boolean]),
+  autosize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
+  autoSize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
 };
 
 export default {

@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import { defaultConfigProvider } from '../config-provider';
@@ -37,9 +37,11 @@ export const ListProps = () => ({
   extra: PropTypes.any,
   grid: PropTypes.shape(ListGridType).loose,
   itemLayout: PropTypes.string,
-  loading: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
+  loading: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   loadMore: PropTypes.any,
-  pagination: PropTypes.oneOfType([PropTypes.shape(PaginationConfig()).loose, PropTypes.looseBool]),
+  pagination: withUndefined(
+    PropTypes.oneOfType([PropTypes.shape(PaginationConfig()).loose, PropTypes.looseBool]),
+  ),
   prefixCls: PropTypes.string,
   rowKey: PropTypes.any,
   renderItem: PropTypes.any,

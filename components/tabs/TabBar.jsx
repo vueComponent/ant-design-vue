@@ -3,7 +3,7 @@ import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import ScrollableInkTabBar from '../vc-tabs/src/ScrollableInkTabBar';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 
 const TabBar = {
   name: 'TabBar',
@@ -16,7 +16,7 @@ const TabBar = {
     tabPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('top'),
     tabBarPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
     size: PropTypes.oneOf(['default', 'small', 'large']),
-    animated: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
+    animated: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
     renderTabBar: PropTypes.func,
     panels: PropTypes.array.def([]),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

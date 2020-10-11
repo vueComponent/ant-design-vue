@@ -1,5 +1,5 @@
 import classNames from '../../_util/classNames';
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import { connect } from '../../_util/store';
 import TableCell from './TableCell';
 import { initDefaultProps, findDOMNode } from '../../_util/props-util';
@@ -32,7 +32,7 @@ const TableRow = {
       hovered: PropTypes.looseBool.isRequired,
       visible: PropTypes.looseBool.isRequired,
       store: PropTypes.object.isRequired,
-      fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.looseBool]),
+      fixed: withUndefined(PropTypes.oneOfType([PropTypes.string, PropTypes.looseBool])),
       renderExpandIcon: PropTypes.func,
       renderExpandIconCell: PropTypes.func,
       components: PropTypes.any,

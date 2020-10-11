@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import { PaginationProps as getPaginationProps } from '../pagination';
 import { SpinProps as getSpinProps } from '../spin';
 import { Store } from './createStore';
@@ -33,12 +33,16 @@ export const ColumnProps = {
   colSpan: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
-  fixed: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.oneOf(['left', 'right'])]),
+  fixed: withUndefined(
+    PropTypes.oneOfType([PropTypes.looseBool, PropTypes.oneOf(['left', 'right'])]),
+  ),
   filterIcon: PropTypes.any,
   filteredValue: PropTypes.array,
   filtered: PropTypes.looseBool,
   defaultFilteredValue: PropTypes.array,
-  sortOrder: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.oneOf(['ascend', 'descend'])]),
+  sortOrder: withUndefined(
+    PropTypes.oneOfType([PropTypes.looseBool, PropTypes.oneOf(['ascend', 'descend'])]),
+  ),
   sortDirections: PropTypes.array,
   // children?: ColumnProps<T>[];
   // onCellClick?: (record: T, event: any) => void;
@@ -83,7 +87,7 @@ export const TableRowSelection = {
   // onSelect?: SelectionSelectFn<T>;
   // onSelectAll?: (selected: boolean, selectedRows: Object[], changeRows: Object[]) => any;
   // onSelectInvert?: (selectedRows: Object[]) => any;
-  selections: PropTypes.oneOfType([PropTypes.array, PropTypes.looseBool]),
+  selections: withUndefined(PropTypes.oneOfType([PropTypes.array, PropTypes.looseBool])),
   hideDefaultSelections: PropTypes.looseBool,
   fixed: PropTypes.looseBool,
   columnWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

@@ -126,10 +126,7 @@ Tag.props = {
   color: PropTypes.string,
   closable: PropTypes.looseBool.def(false),
   closeIcon: PropTypes.any,
-  visible: {
-    type: Boolean,
-    default: undefined,
-  },
+  visible: PropTypes.looseBool,
   onClose: PropTypes.func,
   icon: PropTypes.any,
 };

@@ -8,6 +8,7 @@ import placements from './picker/placements';
 import Trigger from '../../vc-trigger';
 import moment from 'moment';
 import isNil from 'lodash-es/isNil';
+import { defineComponent } from 'vue';
 const TimeType = {
   validator(value) {
     if (Array.isArray(value)) {
@@ -24,7 +25,7 @@ function refFn(field, component) {
   this[field] = component;
 }
 
-const Picker = {
+const Picker = defineComponent({
   name: 'Picker',
   inheritAttrs: false,
   props: {
@@ -239,6 +240,6 @@ const Picker = {
       </Trigger>
     );
   },
-};
+});
 
 export default Picker;

@@ -1,5 +1,5 @@
 import classnames from '../../_util/classNames';
-import { cloneVNode, Teleport, nextTick } from 'vue';
+import { cloneVNode, Teleport, nextTick, defineComponent } from 'vue';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, getSlot } from '../../_util/props-util';
 import getScrollBarSize from '../../_util/getScrollBarSize';
@@ -24,7 +24,7 @@ const windowIsUndefined = !(
   window.document.createElement
 );
 
-const Drawer = {
+const Drawer = defineComponent({
   name: 'Drawer',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -598,6 +598,6 @@ const Drawer = {
     }
     return portal;
   },
-};
+});
 
 export default Drawer;

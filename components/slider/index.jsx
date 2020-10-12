@@ -17,7 +17,7 @@ export const SliderProps = () => ({
   reverse: PropTypes.looseBool,
   min: PropTypes.number,
   max: PropTypes.number,
-  step: PropTypes.oneOfType([PropTypes.number, PropTypes.any]),
+  step: PropTypes.any,
   marks: PropTypes.object,
   dots: PropTypes.looseBool,
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number)]),

@@ -4,8 +4,9 @@ import debounce from 'lodash-es/debounce';
 import isFlexSupported from '../_util/isFlexSupported';
 import { getSlot, getPropsData } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'Steps',
   mixins: [BaseMixin],
   props: {
@@ -166,4 +167,4 @@ export default {
       </div>
     );
   },
-};
+});

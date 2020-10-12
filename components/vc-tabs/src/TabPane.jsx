@@ -1,9 +1,9 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { getComponent, getSlot } from '../../_util/props-util';
 import Sentinel from './Sentinel';
 
-export default {
+export default defineComponent({
   name: 'TabPane',
   props: {
     active: PropTypes.looseBool,
@@ -54,4 +54,4 @@ export default {
       </div>
     );
   },
-};
+});

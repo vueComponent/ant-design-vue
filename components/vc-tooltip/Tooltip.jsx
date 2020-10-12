@@ -3,8 +3,9 @@ import Trigger from '../vc-trigger';
 import { placements } from './placements';
 import Content from './Content';
 import { hasProp, getComponent, getOptionProps, getSlot } from '../_util/props-util';
+import { defineComponent } from 'vue';
 function noop() {}
-export default {
+export default defineComponent({
   name: 'Tooltip',
   inheritAttrs: false,
   props: {
@@ -97,4 +98,4 @@ export default {
     };
     return <Trigger {...triggerProps}>{getSlot(this)[0]}</Trigger>;
   },
-};
+});

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { provide, markRaw } from 'vue';
+import { provide, markRaw, defineComponent } from 'vue';
 import shallowequal from '../../_util/shallowequal';
 import merge from 'lodash-es/merge';
 import classes from 'component-classes';
@@ -16,7 +16,7 @@ import ExpandableTable from './ExpandableTable';
 import { initDefaultProps, getOptionProps } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 
-export default {
+export default defineComponent({
   name: 'Table',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -590,4 +590,4 @@ export default {
       </Provider>
     );
   },
-};
+});

@@ -1,4 +1,4 @@
-import { Text } from 'vue';
+import { defineComponent, Text } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import Trigger from '../../vc-trigger';
 import placements from './placements';
@@ -12,7 +12,7 @@ import {
 import BaseMixin from '../../_util/BaseMixin';
 import { cloneElement } from '../../_util/vnode';
 
-export default {
+export default defineComponent({
   mixins: [BaseMixin],
   props: {
     minOverlayWidthMatchTrigger: PropTypes.looseBool,
@@ -198,4 +198,4 @@ export default {
     };
     return <Trigger {...triggerProps}>{this.renderChildren()}</Trigger>;
   },
-};
+});

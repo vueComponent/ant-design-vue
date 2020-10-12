@@ -34,7 +34,7 @@ const DateTBody = {
     dateRender: PropTypes.func,
     disabledDate: PropTypes.func,
     prefixCls: PropTypes.string,
-    selectedValue: PropTypes.oneOfType([PropTypes.any, PropTypes.arrayOf(PropTypes.any)]),
+    selectedValue: PropTypes.any,
     value: PropTypes.object,
     hoverValue: PropTypes.any.def([]),
     showWeekNumber: PropTypes.looseBool,

@@ -13,13 +13,14 @@ import { cloneElement } from '../_util/vnode';
 import Trigger from '../vc-trigger';
 import Panel from './Panel';
 import placements from './placements';
+import { defineComponent } from 'vue';
 
 function noop() {}
 function refFn(field, component) {
   this[field] = component;
 }
 
-export default {
+export default defineComponent({
   name: 'VcTimePicker',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -389,4 +390,4 @@ export default {
       </Trigger>
     );
   },
-};
+});

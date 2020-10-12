@@ -1,10 +1,10 @@
-import { nextTick } from 'vue';
+import { nextTick, defineComponent } from 'vue';
 import classNames from '../../_util/classNames';
 import PropTypes, { withUndefined } from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { getOptionProps, hasProp, initDefaultProps } from '../../_util/props-util';
 
-export default {
+export default defineComponent({
   name: 'Checkbox',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -146,4 +146,4 @@ export default {
       </span>
     );
   },
-};
+});

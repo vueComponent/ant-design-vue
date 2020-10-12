@@ -4,7 +4,7 @@ import { default as SubPopupMenu, getActiveKey } from './SubPopupMenu';
 import BaseMixin from '../_util/BaseMixin';
 import hasProp, { getOptionProps, getComponent, filterEmpty } from '../_util/props-util';
 import commonPropsType from './commonPropsType';
-import { provide } from 'vue';
+import { defineComponent, provide } from 'vue';
 
 const Menu = {
   name: 'Menu',
@@ -183,4 +183,4 @@ const Menu = {
   },
 };
 
-export default Menu;
+export default defineComponent(Menu);

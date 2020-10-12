@@ -6,7 +6,7 @@ import Options from './Options';
 import LOCALE from './locale/zh_CN';
 import KEYCODE from './KeyCode';
 import classNames from '../_util/classNames';
-import { withDirectives } from 'vue';
+import { defineComponent, withDirectives } from 'vue';
 import antInput from '../_util/antInputDirective';
 
 function noop() {}
@@ -28,7 +28,7 @@ function calculatePage(p, state, props) {
   return Math.floor((props.total - 1) / pageSize) + 1;
 }
 
-export default {
+export default defineComponent({
   name: 'Pagination',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -649,4 +649,4 @@ export default {
       </ul>
     );
   },
-};
+});

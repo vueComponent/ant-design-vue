@@ -1,6 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import { getComponent, getSlot } from '../_util/props-util';
 import { menuAllProps } from './util';
+import { defineComponent } from 'vue';
 
 const MenuItemGroup = {
   name: 'MenuItemGroup',
@@ -41,4 +42,4 @@ const MenuItemGroup = {
   },
 };
 
-export default MenuItemGroup;
+export default defineComponent(MenuItemGroup);

@@ -8,7 +8,8 @@ import CalendarMixin, { getNowByCurrentStateValue } from './mixin/CalendarMixin'
 import CommonMixin from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
 import enUs from './locale/en_US';
-const FullCalendar = {
+import { defineComponent } from 'vue';
+const FullCalendar = defineComponent({
   name: 'FullCalendar',
   inheritAttrs: false,
   props: {
@@ -158,6 +159,6 @@ const FullCalendar = {
       class: className.join(' '),
     });
   },
-};
+});
 
 export default FullCalendar;

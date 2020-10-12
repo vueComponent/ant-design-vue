@@ -1,6 +1,7 @@
+import { defineComponent } from 'vue';
 import PropTypes from '../../_util/vue-types';
 
-export default {
+export default defineComponent({
   name: 'ColumnGroup',
   props: {
     title: PropTypes.any,
@@ -9,4 +10,4 @@ export default {
   render() {
     return null;
   },
-};
+});

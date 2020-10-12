@@ -1,4 +1,4 @@
-import { inject, provide, Transition } from 'vue';
+import { defineComponent, inject, provide, Transition } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import classNames from '../../_util/classNames';
 import { getNodeChildren, mapChildren, warnOnlyTreeNode, getDataAndAria } from './util';
@@ -12,7 +12,7 @@ const ICON_CLOSE = 'close';
 
 const defaultTitle = '---';
 
-const TreeNode = {
+const TreeNode = defineComponent({
   name: 'TreeNode',
   inheritAttrs: false,
   mixins: [BaseMixin],
@@ -571,7 +571,7 @@ const TreeNode = {
       </li>
     );
   },
-};
+});
 
 TreeNode.isTreeNode = 1;
 

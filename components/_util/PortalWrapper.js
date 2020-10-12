@@ -2,6 +2,7 @@ import PropTypes from './vue-types';
 import switchScrollingEffect from './switchScrollingEffect';
 import setStyle from './setStyle';
 import Portal from './Portal';
+import { defineComponent } from 'vue';
 
 let openCount = 0;
 const windowIsUndefined = !(
@@ -13,7 +14,7 @@ const windowIsUndefined = !(
 // https://github.com/ant-design/ant-design/issues/19332
 let cacheOverflow = {};
 
-export default {
+export default defineComponent({
   name: 'PortalWrapper',
   props: {
     wrapperClassName: PropTypes.string,
@@ -147,4 +148,4 @@ export default {
     }
     return portal;
   },
-};
+});

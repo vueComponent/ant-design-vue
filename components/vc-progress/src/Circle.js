@@ -2,6 +2,7 @@ import PropTypes, { withUndefined } from '../../_util/vue-types';
 import { initDefaultProps } from '../../_util/props-util';
 import enhancer from './enhancer';
 import { propTypes, defaultProps } from './types';
+import { defineComponent } from 'vue';
 
 const circlePropTypes = {
   ...propTypes,
@@ -70,7 +71,7 @@ function getPathStyles(offset, percent, strokeColor, strokeWidth, gapDegree = 0,
   };
 }
 
-const Circle = {
+const Circle = defineComponent({
   name: 'Circle',
   props: initDefaultProps(circlePropTypes, circleDefaultProps),
   created() {
@@ -184,6 +185,6 @@ const Circle = {
       </svg>
     );
   },
-};
+});
 
 export default enhancer(Circle);

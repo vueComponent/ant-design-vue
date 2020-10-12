@@ -8,6 +8,7 @@ import shallowEqualArrays from 'shallow-equal/arrays';
 import { hasProp, getEvents } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
+import { defineComponent } from 'vue';
 
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {
@@ -44,7 +45,7 @@ const BUILT_IN_PLACEMENTS = {
   },
 };
 
-export default {
+export default defineComponent({
   name: 'Cascader',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -384,4 +385,4 @@ export default {
       </Trigger>
     );
   },
-};
+});

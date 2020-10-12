@@ -1,10 +1,10 @@
 import PanelContent from './PanelContent';
 import { initDefaultProps, getComponent, getSlot } from '../../_util/props-util';
 import { panelProps } from './commonProps';
-import { Transition } from 'vue';
+import { defineComponent, Transition } from 'vue';
 import BaseMixin from '../../_util/BaseMixin';
 
-export default {
+export default defineComponent({
   name: 'Panel',
   mixins: [BaseMixin],
   props: initDefaultProps(panelProps(), {
@@ -90,4 +90,4 @@ export default {
       </div>
     );
   },
-};
+});

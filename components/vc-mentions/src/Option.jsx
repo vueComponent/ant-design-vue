@@ -1,3 +1,4 @@
+import { defineComponent } from 'vue';
 import PropTypes from '../../_util/vue-types';
 
 export const OptionProps = {
@@ -6,10 +7,10 @@ export const OptionProps = {
   children: PropTypes.any,
 };
 
-export default {
+export default defineComponent({
   name: 'Option',
   props: OptionProps,
   render() {
     return null;
   },
-};
+});

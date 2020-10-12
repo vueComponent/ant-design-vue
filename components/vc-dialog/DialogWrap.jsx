@@ -2,8 +2,9 @@ import Dialog from './Dialog';
 import getDialogPropTypes from './IDialogPropTypes';
 import Portal from '../_util/PortalWrapper';
 import { getSlot } from '../_util/props-util';
+import { defineComponent } from 'vue';
 const IDialogPropTypes = getDialogPropTypes();
-const DialogWrap = {
+const DialogWrap = defineComponent({
   inheritAttrs: false,
   props: {
     ...IDialogPropTypes,
@@ -41,6 +42,6 @@ const DialogWrap = {
       />
     );
   },
-};
+});
 
 export default DialogWrap;

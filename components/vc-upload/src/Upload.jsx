@@ -3,7 +3,7 @@ import { initDefaultProps, getSlot } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import AjaxUpload from './AjaxUploader';
 import IframeUpload from './IframeUploader';
-import { nextTick } from 'vue';
+import { defineComponent, nextTick } from 'vue';
 
 function empty() {}
 
@@ -30,7 +30,7 @@ const uploadProps = {
   supportServerRender: PropTypes.looseBool,
   openFileDialogOnClick: PropTypes.looseBool,
 };
-export default {
+export default defineComponent({
   name: 'Upload',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -93,4 +93,4 @@ export default {
     const ComponentUploader = this.getComponent();
     return <ComponentUploader {...componentProps}>{getSlot(this)}</ComponentUploader>;
   },
-};
+});

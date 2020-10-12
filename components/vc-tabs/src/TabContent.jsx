@@ -6,7 +6,8 @@ import {
   getTransformPropValue,
   getMarginStyle,
 } from './utils';
-export default {
+import { defineComponent } from 'vue';
+export default defineComponent({
   name: 'TabContent',
   inheritAttrs: false,
   props: {
@@ -88,4 +89,4 @@ export default {
       </div>
     );
   },
-};
+});

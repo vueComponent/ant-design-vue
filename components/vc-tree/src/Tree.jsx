@@ -21,6 +21,7 @@ import {
   warnOnlyTreeNode,
   getDataAndAria,
 } from './util';
+import { defineComponent } from 'vue';
 
 /**
  * Thought we still use `cloneElement` to pass `key`,
@@ -40,7 +41,7 @@ function getWatch(keys = []) {
   return watch;
 }
 
-const Tree = {
+const Tree = defineComponent({
   name: 'Tree',
   inheritAttrs: false,
   mixins: [BaseMixin],
@@ -678,7 +679,7 @@ const Tree = {
       </ul>
     );
   },
-};
+});
 
 export { Tree };
 

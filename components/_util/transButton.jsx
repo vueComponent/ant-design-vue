@@ -1,3 +1,4 @@
+import { defineComponent } from 'vue';
 /**
  * Wrap of sub component which need use as Button capacity (like Icon component).
  * This helps accessibility reader to tread as a interactive button to operation.
@@ -13,7 +14,7 @@ const inlineStyle = {
   display: 'inline-block',
 };
 
-const TransButton = {
+const TransButton = defineComponent({
   name: 'TransButton',
   inheritAttrs: false,
   props: {
@@ -71,6 +72,6 @@ const TransButton = {
       </div>
     );
   },
-};
+});
 
 export default TransButton;

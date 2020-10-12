@@ -4,8 +4,9 @@ import { hasProp } from '../../_util/props-util';
 import Track from './common/Track';
 import createSlider from './common/createSlider';
 import * as utils from './utils';
+import { defineComponent } from 'vue';
 
-const Slider = {
+const Slider = defineComponent({
   name: 'Slider',
   inheritAttrs: false,
   mixins: [BaseMixin],
@@ -192,6 +193,6 @@ const Slider = {
       };
     },
   },
-};
+});
 
 export default createSlider(Slider);

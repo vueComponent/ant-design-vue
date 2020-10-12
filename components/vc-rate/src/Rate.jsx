@@ -11,6 +11,7 @@ import {
 import BaseMixin from '../../_util/BaseMixin';
 import { getOffsetLeft } from './util';
 import Star from './Star';
+import { defineComponent } from 'vue';
 
 const rateProps = {
   disabled: PropTypes.looseBool,
@@ -28,7 +29,7 @@ const rateProps = {
 
 function noop() {}
 
-export default {
+export default defineComponent({
   name: 'Rate',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -211,4 +212,4 @@ export default {
       </ul>
     );
   },
-};
+});

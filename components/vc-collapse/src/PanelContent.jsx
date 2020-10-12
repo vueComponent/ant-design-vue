@@ -1,7 +1,8 @@
 import PropTypes from '../../_util/vue-types';
 import { getSlot } from '../../_util/props-util';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'PanelContent',
   props: {
     prefixCls: PropTypes.string,
@@ -35,4 +36,4 @@ export default {
       </div>
     );
   },
-};
+});

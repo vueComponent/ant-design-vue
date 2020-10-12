@@ -7,7 +7,8 @@ import CalendarFooter from './calendar/CalendarFooter';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import enUs from './locale/en_US';
-const MonthCalendar = {
+import { defineComponent } from 'vue';
+const MonthCalendar = defineComponent({
   name: 'MonthCalendar',
   inheritAttrs: false,
   props: {
@@ -120,6 +121,6 @@ const MonthCalendar = {
       children,
     });
   },
-};
+});
 
 export default MonthCalendar;

@@ -1,12 +1,13 @@
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
+import { defineComponent } from 'vue';
 
 function isString(str) {
   return typeof str === 'string';
 }
 function noop() {}
-export default {
+export default defineComponent({
   name: 'Step',
   mixins: [BaseMixin],
   props: {
@@ -143,4 +144,4 @@ export default {
       </div>
     );
   },
-};
+});

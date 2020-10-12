@@ -7,7 +7,7 @@ import debounce from 'lodash-es/debounce';
 import throttle from 'lodash-es/throttle';
 import parentScroll from './utils/parentScroll';
 import inViewport from './utils/inViewport';
-import { watchEffect } from 'vue';
+import { watchEffect, defineComponent } from 'vue';
 
 const lazyLoadProps = {
   debounce: PropTypes.looseBool,
@@ -25,7 +25,7 @@ const lazyLoadProps = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-export default {
+export default defineComponent({
   name: 'LazyLoad',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -148,4 +148,4 @@ export default {
       </ElementType>
     );
   },
-};
+});

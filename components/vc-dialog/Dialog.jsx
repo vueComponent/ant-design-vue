@@ -1,4 +1,4 @@
-import { provide, Transition } from 'vue';
+import { defineComponent, provide, Transition } from 'vue';
 import { initDefaultProps, getSlot, findDOMNode } from '../_util/props-util';
 import KeyCode from '../_util/KeyCode';
 import contains from '../vc-util/Dom/contains';
@@ -48,7 +48,7 @@ function offset(el) {
 
 let cacheOverflow = {};
 
-export default {
+export default defineComponent({
   name: 'VcDialog',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -429,4 +429,4 @@ export default {
       </div>
     );
   },
-};
+});

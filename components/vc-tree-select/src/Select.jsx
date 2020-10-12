@@ -18,7 +18,7 @@
  * In single mode, we should focus on the `span`
  * In multiple mode, we should focus on the `input`
  */
-import { provide } from 'vue';
+import { defineComponent, provide } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
 import raf from 'raf';
 import scrollIntoView from 'dom-scroll-into-view';
@@ -67,7 +67,7 @@ function getWatch(keys = []) {
   });
   return watch;
 }
-const Select = {
+const Select = defineComponent({
   name: 'Select',
   inheritAttrs: false,
   mixins: [BaseMixin],
@@ -95,7 +95,7 @@ const Select = {
       children: PropTypes.any,
       labelInValue: PropTypes.looseBool,
       maxTagCount: PropTypes.number,
-      maxTagPlaceholder: PropTypes.oneOfType([PropTypes.any, PropTypes.func]),
+      maxTagPlaceholder: PropTypes.any,
       maxTagTextLength: PropTypes.number,
       showCheckedStrategy: PropTypes.oneOf([SHOW_ALL, SHOW_PARENT, SHOW_CHILD]),
       dropdownClassName: PropTypes.string,
@@ -1105,7 +1105,7 @@ const Select = {
     };
     return <SelectTrigger {...selectTriggerProps}>{$selector}</SelectTrigger>;
   },
-};
+});
 
 Select.TreeNode = SelectNode;
 Select.SHOW_ALL = SHOW_ALL;

@@ -11,6 +11,7 @@ import CommonMixin from './mixin/CommonMixin';
 import enUs from './locale/en_US';
 import { syncTime, getTodayTime, isAllowedDate } from './util/';
 import { goTime, goStartMonth, goEndMonth, includesTime } from './util/toTime';
+import { defineComponent } from 'vue';
 
 function noop() {}
 
@@ -79,7 +80,7 @@ function onInputSelect(direction, value, cause) {
   this.fireSelectValueChange(selectedValue, null, cause || { source: 'dateInput' });
 }
 
-const RangeCalendar = {
+const RangeCalendar = defineComponent({
   name: 'RangeCalendar',
   inheritAttrs: false,
   props: {
@@ -832,6 +833,6 @@ const RangeCalendar = {
       </div>
     );
   },
-};
+});
 
 export default RangeCalendar;

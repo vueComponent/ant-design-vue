@@ -13,6 +13,7 @@ import DateInput from './date/DateInput';
 import enUs from './locale/en_US';
 import { getTimeConfig, getTodayTime, syncTime } from './util';
 import { goStartMonth, goEndMonth, goTime } from './util/toTime';
+import { defineComponent } from 'vue';
 
 const getMomentObjectIfValid = date => {
   if (moment.isMoment(date) && date.isValid()) {
@@ -21,7 +22,7 @@ const getMomentObjectIfValid = date => {
   return false;
 };
 
-const Calendar = {
+const Calendar = defineComponent({
   name: 'Calendar',
   inheritAttrs: false,
   props: {
@@ -383,6 +384,6 @@ const Calendar = {
       class: props.showWeekNumber ? `${prefixCls}-week-number` : '',
     });
   },
-};
+});
 
 export default Calendar;

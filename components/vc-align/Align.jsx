@@ -1,4 +1,4 @@
-import { nextTick } from 'vue';
+import { nextTick, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { alignElement, alignPoint } from 'dom-align';
 import addEventListener from '../vc-util/Dom/addEventListener';
@@ -18,7 +18,7 @@ function getPoint(point) {
   return point;
 }
 
-export default {
+export default defineComponent({
   props: {
     childrenProps: PropTypes.object,
     align: PropTypes.object.isRequired,
@@ -167,4 +167,4 @@ export default {
     }
     return child && child[0];
   },
-};
+});

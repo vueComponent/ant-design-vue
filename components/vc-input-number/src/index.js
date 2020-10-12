@@ -5,6 +5,7 @@ import { initDefaultProps, hasProp, getOptionProps } from '../../_util/props-uti
 import classNames from '../../_util/classNames';
 import KeyCode from '../../_util/KeyCode';
 import InputHandler from './InputHandler';
+import { defineComponent } from 'vue';
 
 function preventDefault(e) {
   e.preventDefault();
@@ -78,7 +79,7 @@ const inputNumberProps = {
   maxlength: PropTypes.any,
 };
 
-export default {
+export default defineComponent({
   name: 'VCInputNumber',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -800,4 +801,4 @@ export default {
       </div>
     );
   },
-};
+});

@@ -37,7 +37,7 @@ export const TreeSelectProps = () => ({
   searchValue: PropTypes.string,
   showCheckedStrategy: PropTypes.oneOf(['SHOW_ALL', 'SHOW_PARENT', 'SHOW_CHILD']),
   suffixIcon: PropTypes.any,
-  treeCheckable: withUndefined(PropTypes.oneOfType([PropTypes.any, PropTypes.looseBool])),
+  treeCheckable: PropTypes.any,
   treeCheckStrictly: PropTypes.looseBool,
   treeData: PropTypes.arrayOf(Object),
   treeDataSimpleMode: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, Object])),

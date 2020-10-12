@@ -1,22 +1,21 @@
-import { inject } from 'vue';
+import { ComponentPublicInstance, defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getComponent } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider } from '../config-provider';
-function noop() {}
+import { AntAnchor } from './Anchor';
+function noop(..._any: any[]): any {}
 
-export const AnchorLinkProps = {
+const AnchorLinkProps = {
   prefixCls: PropTypes.string,
-  href: PropTypes.string,
+  href: PropTypes.string.def('#'),
   title: PropTypes.any,
   target: PropTypes.string,
 };
 
-export default {
+export default defineComponent({
   name: 'AAnchorLink',
-  props: initDefaultProps(AnchorLinkProps, {
-    href: '#',
-  }),
+  props: AnchorLinkProps,
   setup() {
     return {
       antAnchor: inject('antAnchor', {
@@ -24,8 +23,8 @@ export default {
         unregisterLink: noop,
         scrollTo: noop,
         $data: {},
-      }),
-      antAnchorContext: inject('antAnchorContext', {}),
+      } as AntAnchor),
+      antAnchorContext: inject('antAnchorContext', {}) as ComponentPublicInstance,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
@@ -46,7 +45,7 @@ export default {
     this.antAnchor.unregisterLink(this.href);
   },
   methods: {
-    handleClick(e) {
+    handleClick(e: Event) {
       this.antAnchor.scrollTo(this.href);
       const { scrollTo } = this.antAnchor;
       const { href, title } = this.$props;
@@ -85,4 +84,4 @@ export default {
       </div>
     );
   },
-};
+});

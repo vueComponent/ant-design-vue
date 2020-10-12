@@ -1,11 +1,11 @@
-import { inject, provide } from 'vue';
+import { defineComponent, inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import Affix from '../affix';
 import scrollTo from '../_util/scrollTo';
 import getScroll from '../_util/getScroll';
-import { initDefaultProps, findDOMNode } from '../_util/props-util';
+import { findDOMNode } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { defaultConfigProvider } from '../config-provider';
 
@@ -13,7 +13,7 @@ function getDefaultContainer() {
   return window;
 }
 
-function getOffsetTop(element, container) {
+function getOffsetTop(element: HTMLElement, container: AnchorContainer): number {
   if (!element) {
     return 0;
   }
@@ -29,61 +29,28 @@ function getOffsetTop(element, container) {
       container = element.ownerDocument.documentElement;
       return rect.top - container.clientTop;
     }
-    return rect.top - container.getBoundingClientRect().top;
+    return rect.top - (container as HTMLElement).getBoundingClientRect().top;
   }
 
   return rect.top;
 }
 
-// function easeInOutCubic(t, b, c, d) {
-//   const cc = c - b;
-//   t /= d / 2;
-//   if (t < 1) {
-//     return (cc / 2) * t * t * t + b;
-//   }
-//   return (cc / 2) * ((t -= 2) * t * t + 2) + b;
-// }
-
 const sharpMatcherRegx = /#([^#]+)$/;
-// function scrollTo(href, offsetTop = 0, getContainer, callback = () => {}) {
-//   const container = getContainer();
-//   const scrollTop = getScroll(container, true);
-//   const sharpLinkMatch = sharpMatcherRegx.exec(href);
-//   if (!sharpLinkMatch) {
-//     return;
-//   }
-//   const targetElement = document.getElementById(sharpLinkMatch[1]);
-//   if (!targetElement) {
-//     return;
-//   }
-//   const eleOffsetTop = getOffsetTop(targetElement, container);
-//   const targetScrollTop = scrollTop + eleOffsetTop - offsetTop;
-//   const startTime = Date.now();
-//   const frameFunc = () => {
-//     const timestamp = Date.now();
-//     const time = timestamp - startTime;
-//     const nextScrollTop = easeInOutCubic(time, scrollTop, targetScrollTop, 450);
-//     if (container === window) {
-//       window.scrollTo(window.pageXOffset, nextScrollTop);
-//     } else {
-//       container.scrollTop = nextScrollTop;
-//     }
-//     if (time < 450) {
-//       raf(frameFunc);
-//     } else {
-//       callback();
-//     }
-//   };
-//   raf(frameFunc);
-// }
 
-export const AnchorProps = {
+type Section = {
+  link: string;
+  top: number;
+};
+
+export type AnchorContainer = HTMLElement | Window;
+
+const AnchorProps = {
   prefixCls: PropTypes.string,
   offsetTop: PropTypes.number,
   bounds: PropTypes.number,
-  affix: PropTypes.looseBool,
-  showInkInFixed: PropTypes.looseBool,
-  getContainer: PropTypes.func,
+  affix: PropTypes.looseBool.def(true),
+  showInkInFixed: PropTypes.looseBool.def(false),
+  getContainer: PropTypes.func.def(getDefaultContainer),
   wrapperClass: PropTypes.string,
   wrapperStyle: PropTypes.object,
   getCurrentAnchor: PropTypes.func,
@@ -92,30 +59,48 @@ export const AnchorProps = {
   onClick: PropTypes.func,
 };
 
-export default {
+export interface AntAnchor {
+  registerLink: (link: string) => void;
+  unregisterLink: (link: string) => void;
+  $data: AnchorState;
+  scrollTo: (link: string) => void;
+  $emit?: Function
+}
+interface AnchorState {
+    activeLink: null | string;
+    scrollContainer: HTMLElement | Window;
+    links: string[];
+    scrollEvent: any;
+    animating: boolean;
+    sPrefixCls?: string;
+}
+
+export default defineComponent({
   name: 'AAnchor',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: initDefaultProps(AnchorProps, {
-    affix: true,
-    showInkInFixed: false,
-    getContainer: getDefaultContainer,
-  }),
+  props: AnchorProps,
+  emits: ['change', 'click'],
   data() {
-    this.links = [];
-    this._sPrefixCls = '';
+    // this.links = [];
+    // this.sPrefixCls = '';
     return {
       activeLink: null,
-    };
+      links: [],
+      sPrefixCls: '',
+      scrollContainer: null,
+      scrollEvent: null,
+      animating: false,
+    } as AnchorState;
   },
   created() {
     provide('antAnchor', {
-      registerLink: link => {
+      registerLink: (link: string) => {
         if (!this.links.includes(link)) {
           this.links.push(link);
         }
       },
-      unregisterLink: link => {
+      unregisterLink: (link: string) => {
         const index = this.links.indexOf(link);
         if (index !== -1) {
           this.links.splice(index, 1);
@@ -123,7 +108,7 @@ export default {
       },
       $data: this.$data,
       scrollTo: this.handleScrollTo,
-    });
+    } as AntAnchor);
     provide('antAnchorContext', this);
   },
   setup() {
@@ -171,7 +156,7 @@ export default {
         return activeLink;
       }
 
-      const linkSections = [];
+      const linkSections: Array<Section> = [];
       const { getContainer } = this;
       const container = getContainer();
       this.links.forEach(link => {
@@ -225,7 +210,7 @@ export default {
         getContainer,
       });
     },
-    setCurrentActiveLink(link) {
+    setCurrentActiveLink(link: string) {
       const { activeLink } = this;
 
       if (activeLink !== link) {
@@ -252,12 +237,12 @@ export default {
       if (typeof document === 'undefined') {
         return;
       }
-      const { _sPrefixCls } = this;
+      const { sPrefixCls } = this;
       const linkNode = findDOMNode(this).getElementsByClassName(
-        `${_sPrefixCls}-link-title-active`,
+        `${sPrefixCls}-link-title-active`,
       )[0];
       if (linkNode) {
-        this.$refs.inkNode.style.top = `${linkNode.offsetTop + linkNode.clientHeight / 2 - 4.5}px`;
+        (this.$refs.inkNode as HTMLElement).style.top = `${linkNode.offsetTop + linkNode.clientHeight / 2 - 4.5}px`;
       }
     },
   },
@@ -274,7 +259,7 @@ export default {
     } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('anchor', customizePrefixCls);
-    this._sPrefixCls = prefixCls;
+    this.sPrefixCls = prefixCls;
 
     const inkClass = classNames(`${prefixCls}-ink-ball`, {
       visible: activeLink,
@@ -309,4 +294,4 @@ export default {
       </Affix>
     );
   },
-};
+});

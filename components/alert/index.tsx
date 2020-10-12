@@ -1,4 +1,4 @@
-import { Transition, inject, cloneVNode } from 'vue';
+import { Transition, inject, cloneVNode, defineComponent, App } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -56,10 +56,11 @@ export const AlertProps = {
   onClose: PropTypes.func,
 };
 
-const Alert = {
+const Alert = defineComponent({
   name: 'AAlert',
   props: AlertProps,
   mixins: [BaseMixin],
+  emits: ['close'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -72,7 +73,7 @@ const Alert = {
     };
   },
   methods: {
-    handleClose(e) {
+    handleClose(e: Event) {
       e.preventDefault();
       const dom = findDOMNode(this);
       dom.style.height = `${dom.offsetHeight}px`;
@@ -156,10 +157,10 @@ const Alert = {
       </Transition>
     );
   },
-};
+});
 
 /* istanbul ignore next */
-Alert.install = function(app) {
+Alert.install = function(app: App) {
   app.component(Alert.name, Alert);
 };
 

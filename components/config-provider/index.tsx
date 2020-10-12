@@ -1,6 +1,5 @@
 import { reactive, provide, VNodeTypes, PropType, defineComponent, App } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponentFromSetup } from '../_util/props-util';
 import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
 import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
 
@@ -117,7 +116,8 @@ const ConfigProvider = defineComponent({
     };
 
     const renderEmptyComponent = (name?: string) => {
-      const renderEmpty = (getComponentFromSetup(props, slots, 'renderEmpty') ||
+      const renderEmpty = (props.renderEmpty ||
+        slots.renderEmpty ||
         defaultRenderEmpty) as RenderEmptyHandler;
       return renderEmpty(name);
     };

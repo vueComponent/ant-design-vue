@@ -27,7 +27,7 @@ const RenderEmpty = (props: RenderEmptyProps) => {
         return <Empty />;
     }
   };
-  return () => renderHtml(props.componentName);
+  return renderHtml(props.componentName);
 };
 
 function renderEmpty(componentName?: string) {

@@ -2,8 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "ant-design-vue": ["components/index.tsx"],
-      "ant-design-vue/es/*": ["components/*"]
+      "ant-design-vue": ["components/index.tsx"]
     },
     "strictNullChecks": false,
     "strict": true,

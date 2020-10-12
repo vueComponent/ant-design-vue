@@ -16,15 +16,22 @@ const circleDefaultProps = {
 
 let gradientSeed = 0;
 
-function stripPercentToNumber(percent) {
+function stripPercentToNumber(percent: string) {
   return +percent.replace('%', '');
 }
 
-function toArray(symArray) {
+function toArray(symArray: any) {
   return Array.isArray(symArray) ? symArray : [symArray];
 }
 
-function getPathStyles(offset, percent, strokeColor, strokeWidth, gapDegree = 0, gapPosition) {
+function getPathStyles(
+  offset: number,
+  percent: number,
+  strokeColor: string,
+  strokeWidth: number,
+  gapDegree = 0,
+  gapPosition: string,
+) {
   const radius = 50 - strokeWidth / 2;
   let beginPositionX = 0;
   let beginPositionY = -radius;

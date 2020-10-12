@@ -1,13 +1,31 @@
 import { Circle as VCCircle } from '../vc-progress';
 import { validProgress } from './utils';
+import { HTMLAttributes, SetupContext } from 'vue';
+import { PresetColorType, PresetStatusColorType } from '../_util/colors';
+import { LiteralUnion } from '../_util/type';
 
-const statusColorMap = {
+const statusColorMap: any = {
   normal: '#108ee9',
   exception: '#ff5500',
   success: '#87d068',
 };
 
-function getPercentage({ percent, successPercent }) {
+export interface CircleProps extends HTMLAttributes {
+  prefixCls?: string;
+  width?: number;
+  strokeWidth?: number;
+  trailColor?: LiteralUnion<PresetColorType | PresetStatusColorType, string>;
+  strokeLinecap?: string;
+  gapPosition?: string;
+  gapDegree?: number;
+  type?: string;
+  progressStatus?: string | 'normal' | 'exception' | 'active' | 'success';
+  successPercent?: number;
+  percent?: number;
+  strokeColor?: string;
+}
+
+function getPercentage({ percent, successPercent }: { percent?: number; successPercent?: number }) {
   const ptg = validProgress(percent);
   if (!successPercent) return ptg;
 
@@ -15,13 +33,22 @@ function getPercentage({ percent, successPercent }) {
   return [successPercent, validProgress(ptg - successPtg)];
 }
 
-function getStrokeColor({ progressStatus, successPercent, strokeColor }) {
-  const color = strokeColor || statusColorMap[progressStatus];
+function getStrokeColor({
+  progressStatus,
+  successPercent,
+  strokeColor,
+}: {
+  progressStatus?: string;
+  successPercent?: number;
+  strokeColor?: string;
+}) {
+  const color = strokeColor || (progressStatus && statusColorMap[progressStatus]);
   if (!successPercent) return color;
   return [statusColorMap.success, color];
 }
 
-const Circle = (_, { attrs, slots }) => {
+const Circle = (_: CircleProps, { attrs, slots }: SetupContext) => {
+  const props = attrs as CircleProps;
   const {
     prefixCls,
     width,
@@ -31,7 +58,7 @@ const Circle = (_, { attrs, slots }) => {
     gapPosition,
     gapDegree,
     type,
-  } = attrs;
+  } = props;
   const circleSize = width || 120;
   const circleStyle = {
     width: typeof circleSize === 'number' ? `${circleSize}px` : circleSize,
@@ -41,7 +68,7 @@ const Circle = (_, { attrs, slots }) => {
   const circleWidth = strokeWidth || 6;
   const gapPos = gapPosition || (type === 'dashboard' && 'bottom') || 'top';
   const gapDeg = gapDegree || (type === 'dashboard' && 75);
-  const strokeColor = getStrokeColor(attrs);
+  const strokeColor = getStrokeColor(props);
   const isGradient = Object.prototype.toString.call(strokeColor) === '[object Object]';
 
   const wrapperClassName = {
@@ -52,7 +79,7 @@ const Circle = (_, { attrs, slots }) => {
   return (
     <div class={wrapperClassName} style={circleStyle}>
       <VCCircle
-        percent={getPercentage(attrs)}
+        percent={getPercentage(props)}
         strokeWidth={circleWidth}
         trailWidth={circleWidth}
         strokeColor={strokeColor}
@@ -62,7 +89,7 @@ const Circle = (_, { attrs, slots }) => {
         gapDegree={gapDeg}
         gapPosition={gapPos}
       />
-      {slots?.default()}
+      {slots?.default?.()}
     </div>
   );
 };

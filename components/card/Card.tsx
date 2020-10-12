@@ -1,4 +1,5 @@
-import { inject, isVNode } from 'vue';
+import { inject, isVNode, defineComponent, VNodeTypes, PropType, VNode } from 'vue';
+import { tuple } from '../_util/type';
 import Tabs from '../tabs';
 import Row from '../row';
 import Col from '../col';
@@ -8,28 +9,47 @@ import BaseMixin from '../_util/BaseMixin';
 import { defaultConfigProvider } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
 
+export interface CardTabListType {
+  key: string;
+  tab: VNodeTypes;
+  slots?: { tab: string };
+  disabled?: boolean;
+}
+
+export type CardType = 'inner';
+const CardSize = tuple('default', 'small');
+export type CardSizeType = typeof CardSize[number];
+
 const { TabPane } = Tabs;
-export default {
+
+const Card = defineComponent({
   name: 'ACard',
   mixins: [BaseMixin],
   props: {
     prefixCls: PropTypes.string,
-    title: PropTypes.any,
-    extra: PropTypes.any,
+    title: PropTypes.VNodeChild,
+    extra: PropTypes.VNodeChild,
     bordered: PropTypes.looseBool.def(true),
-    bodyStyle: PropTypes.object,
-    headStyle: PropTypes.object,
+    bodyStyle: PropTypes.style,
+    headStyle: PropTypes.style,
     loading: PropTypes.looseBool.def(false),
     hoverable: PropTypes.looseBool.def(false),
     type: PropTypes.string,
-    size: PropTypes.oneOf(['default', 'small']),
-    actions: PropTypes.any,
-    tabList: PropTypes.array,
-    tabBarExtraContent: PropTypes.any,
+    size: {
+      type: String as PropType<CardSizeType>,
+      validator: (val: CardSizeType) => CardSize.includes(val),
+    },
+    actions: PropTypes.VNodeChild,
+    tabList: {
+      type: Array as PropType<CardTabListType[]>,
+    },
+    tabBarExtraContent: PropTypes.VNodeChild,
     activeTabKey: PropTypes.string,
     defaultActiveTabKey: PropTypes.string,
-    cover: PropTypes.any,
-    onTabChange: PropTypes.func,
+    cover: PropTypes.VNodeChild,
+    onTabChange: {
+      type: Function as PropType<(key: string) => void>,
+    },
   },
   setup() {
     return {
@@ -42,7 +62,7 @@ export default {
     };
   },
   methods: {
-    getAction(actions) {
+    getAction(actions: VNodeTypes[]) {
       const actionList = actions.map((action, index) =>
         (isVNode(action) && !isEmptyElement(action)) || !isVNode(action) ? (
           <li style={{ width: `${100 / actions.length}%` }} key={`action-${index}`}>
@@ -52,13 +72,13 @@ export default {
       );
       return actionList;
     },
-    triggerTabChange(key) {
+    triggerTabChange(key: string) {
       this.$emit('tabChange', key);
     },
-    isContainGrid(obj = []) {
+    isContainGrid(obj: VNode[] = []) {
       let containGrid;
       obj.forEach(element => {
-        if (element && isPlainObject(element.type) && element.type.__ANT_CARD_GRID) {
+        if (element && isPlainObject(element.type) && (element.type as any).__ANT_CARD_GRID) {
           containGrid = true;
         }
       });
@@ -160,8 +180,8 @@ export default {
       tabList && tabList.length ? (
         <Tabs {...tabsProps}>
           {tabList.map(item => {
-            const { tab: temp, scopedSlots = {}, slots = {} } = item;
-            const name = slots.tab || scopedSlots.tab;
+            const { tab: temp, slots } = item as CardTabListType;
+            const name = slots?.tab;
             const tab = temp !== undefined ? temp : $slots[name] ? $slots[name](item) : null;
             return <TabPane tab={tab} key={item.key} disabled={item.disabled} />;
           })}
@@ -203,4 +223,6 @@ export default {
       </div>
     );
   },
-};
+});
+
+export default Card;

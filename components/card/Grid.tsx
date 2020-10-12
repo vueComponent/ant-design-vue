@@ -1,9 +1,9 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
 import { getSlot } from '../_util/props-util';
 
-export default {
+export default defineComponent({
   name: 'ACardGrid',
   __ANT_CARD_GRID: true,
   props: {
@@ -18,7 +18,7 @@ export default {
   render() {
     const { prefixCls: customizePrefixCls, hoverable = true } = this.$props;
 
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
     const classString = {
@@ -27,4 +27,4 @@ export default {
     };
     return <div class={classString}>{getSlot(this)}</div>;
   },
-};
+});

@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import PlusOutlined from '@ant-design/icons-vue/PlusOutlined';
 import VcTabs, { TabPane } from '../vc-tabs/src';
@@ -18,7 +18,7 @@ import isValid from '../_util/isValid';
 import { defaultConfigProvider } from '../config-provider';
 import TabBar from './TabBar';
 
-export default {
+export default defineComponent({
   TabPane,
   name: 'ATabs',
   inheritAttrs: false,
@@ -174,4 +174,4 @@ export default {
     };
     return <VcTabs {...tabsProps} />;
   },
-};
+});

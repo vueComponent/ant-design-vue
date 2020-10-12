@@ -1,4 +1,4 @@
-import { TransitionGroup, withDirectives } from 'vue';
+import { defineComponent, TransitionGroup, withDirectives } from 'vue';
 import KeyCode from '../_util/KeyCode';
 import PropTypes from '../_util/vue-types';
 import classnames from '../_util/classNames';
@@ -71,7 +71,7 @@ function chaining(...fns) {
     }
   };
 }
-const Select = {
+const Select = defineComponent({
   inheritAttrs: false,
   Option,
   OptGroup,
@@ -1599,6 +1599,6 @@ const Select = {
       </SelectTrigger>
     );
   },
-};
+});
 export { Select };
 export default Select;

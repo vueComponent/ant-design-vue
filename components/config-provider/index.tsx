@@ -160,7 +160,7 @@ export const defaultConfigProvider = {
     return `ant-${suffixCls}`;
   },
   renderEmpty: defaultRenderEmpty,
-};
+} as any;
 
 /* istanbul ignore next */
 ConfigProvider.install = function(app: App) {

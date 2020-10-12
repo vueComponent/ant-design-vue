@@ -39,9 +39,9 @@ export const ValidationRule = {
   /** built-in validation type, available options: https://github.com/yiminghe/async-validator#type */
   type: PropTypes.string,
   /** indicates whether field is required */
-  required: PropTypes.looseBoolean,
+  required: PropTypes.looseBool,
   /** treat required fields that only contain whitespace as errors */
-  whitespace: PropTypes.looseBoolean,
+  whitespace: PropTypes.looseBool,
   /** validate the exact length of a field */
   len: PropTypes.number,
   /** validate the min length of a field */

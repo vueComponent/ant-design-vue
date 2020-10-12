@@ -6,7 +6,7 @@ import { defaultConfigProvider } from '../config-provider';
 
 export const BasicProps = {
   prefixCls: PropTypes.string,
-  hasSider: PropTypes.looseBoolean,
+  hasSider: PropTypes.looseBool,
   tagName: PropTypes.string,
 };
 

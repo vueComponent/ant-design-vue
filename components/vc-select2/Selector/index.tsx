@@ -14,9 +14,9 @@ import SingleSelector from './SingleSelector';
 import { LabelValueType, RawValueType, CustomTagProps } from '../interface/generator';
 import { RenderNode, Mode } from '../interface';
 import useLock from '../hooks/useLock';
-import { defineComponent, VNode, VNodeChild } from 'vue';
+import { defineComponent, VNodeChild } from 'vue';
 import createRef, { RefObject } from '../../_util/createRef';
-import PropTypes from '../../_util/vue-types copy';
+import PropTypes from '../../_util/vue-types';
 
 export interface InnerSelectorProps {
   prefixCls: string;

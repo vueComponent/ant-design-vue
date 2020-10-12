@@ -21,7 +21,7 @@ function getMonthsLocale(value) {
 export const HeaderProps = {
   prefixCls: PropTypes.string,
   locale: PropTypes.any,
-  fullscreen: PropTypes.looseBoolean,
+  fullscreen: PropTypes.looseBool,
   yearSelectOffset: PropTypes.number,
   yearSelectTotal: PropTypes.number,
   type: PropTypes.string,

@@ -21,7 +21,7 @@ export const TransferItem = {
 export const TransferProps = {
   prefixCls: PropTypes.string,
   dataSource: PropTypes.arrayOf(PropTypes.shape(TransferItem).loose),
-  disabled: PropTypes.looseBoolean,
+  disabled: PropTypes.looseBool,
   targetKeys: PropTypes.arrayOf(PropTypes.string),
   selectedKeys: PropTypes.arrayOf(PropTypes.string),
   render: PropTypes.func,

@@ -1,4 +1,4 @@
-import { inject, provide } from 'vue';
+import { App, defineComponent, inject, provide } from 'vue';
 import { Option, OptGroup } from '../vc-select';
 import Select, { AbstractSelectProps, SelectValue } from '../select';
 import Input from '../input';
@@ -7,20 +7,7 @@ import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
 import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
 
-// const DataSourceItemObject = PropTypes.shape({
-//   value: String,
-//   text: String,
-// }).loose
-// const DataSourceItemType = PropTypes.oneOfType([
-//   PropTypes.string,
-//   DataSourceItemObject,
-// ]).isRequired
-
-// export interface AutoCompleteInputProps {
-//   onChange?: React.FormEventHandler<any>;
-//   value: any;
-// }
-function isSelectOptionOrSelectOptGroup(child) {
+function isSelectOptionOrSelectOptGroup(child: any): Boolean {
   return child && child.type && (child.type.isSelectOption || child.type.isSelectOptGroup);
 }
 
@@ -30,15 +17,16 @@ const AutoCompleteProps = {
   defaultValue: SelectValue,
   dataSource: PropTypes.array,
   dropdownMenuStyle: PropTypes.object,
-  optionLabelProp: String,
+  optionLabelProp: PropTypes.string,
   dropdownMatchSelectWidth: PropTypes.looseBool,
   // onChange?: (value: SelectValue) => void;
   // onSelect?: (value: SelectValue, option: Object) => any;
 };
 
-const AutoComplete = {
+const AutoComplete = defineComponent({
   name: 'AAutoComplete',
   inheritAttrs: false,
+  emits: ['change', 'select', 'focus', 'blur'],
   props: {
     ...AutoCompleteProps,
     prefixCls: PropTypes.string.def('ant-select'),
@@ -53,23 +41,21 @@ const AutoComplete = {
   },
   Option: { ...Option, name: 'AAutoCompleteOption' },
   OptGroup: { ...OptGroup, name: 'AAutoCompleteOptGroup' },
-  // model: {
-  //   prop: 'value',
-  //   event: 'change',
-  // },
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      popupRef: null,
+      select: null
     };
   },
   created() {
     provide('savePopupRef', this.savePopupRef);
   },
   methods: {
-    savePopupRef(ref) {
+    savePopupRef(ref: any) {
       this.popupRef = ref;
     },
-    saveSelect(node) {
+    saveSelect(node: any) {
       this.select = node;
     },
     getInputElement() {
@@ -100,7 +86,7 @@ const AutoComplete = {
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
-    const { class: className } = this.$attrs;
+    const { class: className} = this.$attrs as any;
     const cls = {
       [className]: !!className,
       [`${prefixCls}-lg`]: size === 'large',
@@ -115,7 +101,7 @@ const AutoComplete = {
       options = childArray;
     } else {
       options = dataSource
-        ? dataSource.map(item => {
+        ? dataSource.map((item: any) => {
             if (isValidElement(item)) {
               return item;
             }
@@ -145,10 +131,10 @@ const AutoComplete = {
     };
     return <Select {...selectProps}>{options}</Select>;
   },
-};
+});
 
 /* istanbul ignore next */
-AutoComplete.install = function(app) {
+AutoComplete.install = function(app: App) {
   app.component(AutoComplete.name, AutoComplete);
   app.component(AutoComplete.Option.name, AutoComplete.Option);
   app.component(AutoComplete.OptGroup.name, AutoComplete.OptGroup);

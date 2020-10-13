@@ -107,7 +107,7 @@
     "commander": "^4.0.0",
     "compare-versions": "^3.3.0",
     "cross-env": "^7.0.0",
-    "css-loader": "^3.0.0",
+    "css-loader": "^5.0.0",
     "deep-assign": "^2.0.0",
     "docsearch.js": "^2.6.3",
     "enquire-js": "^0.2.1",

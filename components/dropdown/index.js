@@ -10,6 +10,7 @@ Dropdown.Button = DropdownButton;
 Dropdown.install = function(app) {
   app.component(Dropdown.name, Dropdown);
   app.component(DropdownButton.name, DropdownButton);
+  return app;
 };
 
 export default Dropdown;

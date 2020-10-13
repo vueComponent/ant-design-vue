@@ -62,5 +62,6 @@ const Rate = {
 /* istanbul ignore next */
 Rate.install = function(app) {
   app.component(Rate.name, Rate);
+  return app;
 };
 export default Rate;

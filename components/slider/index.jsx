@@ -148,6 +148,7 @@ const Slider = {
 /* istanbul ignore next */
 Slider.install = function(app) {
   app.component(Slider.name, Slider);
+  return app;
 };
 
 export default Slider;

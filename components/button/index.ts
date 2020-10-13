@@ -8,6 +8,7 @@ Button.Group = ButtonGroup;
 Button.install = function(app: App) {
   app.component(Button.name, Button);
   app.component(ButtonGroup.name, ButtonGroup);
+  return app;
 };
 
 export default Button;

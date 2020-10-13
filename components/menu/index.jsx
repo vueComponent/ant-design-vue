@@ -303,5 +303,6 @@ Menu.install = function(app) {
   app.component(Menu.SubMenu.name, Menu.SubMenu);
   app.component(Menu.Divider.name, Menu.Divider);
   app.component(Menu.ItemGroup.name, Menu.ItemGroup);
+  return app;
 };
 export default Menu;

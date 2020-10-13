@@ -85,6 +85,7 @@ Table.install = function(app) {
   app.component(Table.name, Table);
   app.component(Table.Column.name, Table.Column);
   app.component(Table.ColumnGroup.name, Table.ColumnGroup);
+  return app;
 };
 
 export default Table;

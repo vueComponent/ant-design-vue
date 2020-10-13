@@ -283,6 +283,7 @@ List.install = function(app) {
   app.component(List.name, List);
   app.component(List.Item.name, List.Item);
   app.component(List.Item.Meta.displayName, List.Item.Meta);
+  return app;
 };
 
 export default List;

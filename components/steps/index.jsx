@@ -71,6 +71,7 @@ const Steps = {
 Steps.install = function(app) {
   app.component(Steps.name, Steps);
   app.component(Steps.Step.name, Steps.Step);
+  return app;
 };
 
 export default Steps;

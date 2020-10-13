@@ -47,6 +47,7 @@ const Divider = defineComponent({
 /* istanbul ignore next */
 Divider.install = function(app: App) {
   app.component(Divider.name, Divider);
+  return app;
 };
 
 export default Divider;

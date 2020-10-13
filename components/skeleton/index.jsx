@@ -165,5 +165,6 @@ const Skeleton = {
 /* istanbul ignore next */
 Skeleton.install = function(app) {
   app.component(Skeleton.name, Skeleton);
+  return app;
 };
 export default Skeleton;

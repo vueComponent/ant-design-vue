@@ -224,6 +224,7 @@ const install = function(app: App) {
   app.config.globalProperties.$warning = Modal.warning;
   app.config.globalProperties.$confirm = Modal.confirm;
   app.config.globalProperties.$destroyAll = Modal.destroyAll;
+  return app;
 };
 
 /* istanbul ignore if */

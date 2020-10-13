@@ -11,6 +11,7 @@ Card.install = function(app: App) {
   app.component(Card.name, Card);
   app.component(Meta.name, Meta);
   app.component(Grid.name, Grid);
+  return app;
 };
 
 export default Card;

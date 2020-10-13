@@ -255,6 +255,7 @@ const Calendar = defineComponent({
 /* istanbul ignore next */
 Calendar.install = function(app: App) {
   app.component(Calendar.name, Calendar);
+  return app;
 };
 export { HeaderProps } from './Header';
 export default Calendar;

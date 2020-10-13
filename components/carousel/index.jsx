@@ -165,6 +165,7 @@ const Carousel = {
 /* istanbul ignore next */
 Carousel.install = function(app) {
   app.component(Carousel.name, Carousel);
+  return app;
 };
 
 export default Carousel;

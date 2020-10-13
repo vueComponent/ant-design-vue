@@ -165,6 +165,7 @@ export const defaultConfigProvider: ConfigConsumerProps = {
 /* istanbul ignore next */
 ConfigProvider.install = function(app: App) {
   app.component(ConfigProvider.name, ConfigProvider);
+  return app;
 };
 
 export default ConfigProvider;

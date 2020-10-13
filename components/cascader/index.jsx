@@ -555,6 +555,7 @@ const Cascader = {
 
 Cascader.install = function(app) {
   app.component(Cascader.name, Cascader);
+  return app;
 };
 
 export default Cascader;

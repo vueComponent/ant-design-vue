@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { App, defineComponent, inject, VNodeTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps } from '../_util/props-util';
@@ -8,6 +8,21 @@ import VcHandle from '../vc-slider/src/Handle';
 import Tooltip from '../tooltip';
 import { defaultConfigProvider } from '../config-provider';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
+
+export type SliderValue = number | [number, number];
+
+interface HandleGeneratorInfo {
+  value: number;
+  dragging: boolean;
+  index: number;
+  rest: any[];
+}
+
+export type HandleGeneratorFn = (config: {
+  tooltipPrefixCls?: string;
+  prefixCls?: string;
+  info: HandleGeneratorInfo;
+}) => VNodeTypes;
 
 const tooltipProps = abstractTooltipProps();
 export const SliderProps = () => ({
@@ -30,22 +45,19 @@ export const SliderProps = () => ({
   tooltipPlacement: tooltipProps.placement,
   getTooltipPopupContainer: PropTypes.func,
   onChange: PropTypes.func,
-  'onUpdate:value': PropTypes.func,
   onAfterChange: PropTypes.func,
 });
 
-const defaultTipFormatter = value => value.toString();
+const defaultTipFormatter = (value: number) => value.toString();
 
-const Slider = {
+const Slider = defineComponent({
   name: 'ASlider',
   inheritAttrs: false,
-  // model: {
-  //   prop: 'value',
-  //   event: 'change',
-  // },
+  emits: ['update:value', 'change'],
   mixins: [BaseMixin],
   setup() {
     return {
+      vcSlider: null,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
@@ -58,7 +70,7 @@ const Slider = {
     };
   },
   methods: {
-    toggleTooltipVisible(index, visible) {
+    toggleTooltipVisible(index: number, visible: boolean) {
       this.setState(({ visibles }) => ({
         visibles: {
           ...visibles,
@@ -66,7 +78,11 @@ const Slider = {
         },
       }));
     },
-    handleWithTooltip(tooltipPrefixCls, prefixCls, { value, dragging, index, ...restProps }) {
+    handleWithTooltip(
+      tooltipPrefixCls: string,
+      prefixCls: string,
+      { value, dragging, index, ...restProps }: HandleGeneratorInfo,
+    ): VNodeTypes {
       const {
         tipFormatter = defaultTipFormatter,
         tooltipVisible,
@@ -98,7 +114,7 @@ const Slider = {
         </Tooltip>
       );
     },
-    saveSlider(node) {
+    saveSlider(node: any) {
       this.vcSlider = node;
     },
     focus() {
@@ -107,7 +123,7 @@ const Slider = {
     blur() {
       this.vcSlider.blur();
     },
-    handleChange(val) {
+    handleChange(val: SliderValue) {
       this.$emit('update:value', val);
       this.$emit('change', val);
     },
@@ -118,8 +134,8 @@ const Slider = {
       prefixCls: customizePrefixCls,
       tooltipPrefixCls: customizeTooltipPrefixCls,
       ...restProps
-    } = { ...getOptionProps(this), ...this.$attrs };
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    } = { ...getOptionProps(this), ...this.$attrs } as any;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('slider', customizePrefixCls);
     const tooltipPrefixCls = getPrefixCls('tooltip', customizeTooltipPrefixCls);
     if (range) {
@@ -127,7 +143,8 @@ const Slider = {
         ...restProps,
         prefixCls,
         tooltipPrefixCls,
-        handle: info => this.handleWithTooltip(tooltipPrefixCls, prefixCls, info),
+        handle: (info: HandleGeneratorInfo) =>
+          this.handleWithTooltip(tooltipPrefixCls, prefixCls, info),
         ref: this.saveSlider,
         onChange: this.handleChange,
       };
@@ -137,16 +154,17 @@ const Slider = {
       ...restProps,
       prefixCls,
       tooltipPrefixCls,
-      handle: info => this.handleWithTooltip(tooltipPrefixCls, prefixCls, info),
+      handle: (info: HandleGeneratorInfo) =>
+        this.handleWithTooltip(tooltipPrefixCls, prefixCls, info),
       ref: this.saveSlider,
       onChange: this.handleChange,
     };
     return <VcSlider {...vcSliderProps} />;
   },
-};
+});
 
 /* istanbul ignore next */
-Slider.install = function(app) {
+Slider.install = function(app: App) {
   app.component(Slider.name, Slider);
   return app;
 };

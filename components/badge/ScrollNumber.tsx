@@ -6,7 +6,7 @@ import { cloneElement } from '../_util/vnode';
 import { defaultConfigProvider } from '../config-provider';
 import { CSSProperties, defineComponent, inject } from 'vue';
 
-function getNumberArray(num) {
+function getNumberArray(num: string | number | undefined | null) {
   return num
     ? num
         .toString()
@@ -33,6 +33,7 @@ export default defineComponent({
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: ScrollNumberProps,
+  emits: ['animated'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -81,12 +82,12 @@ export default defineComponent({
         this.timeout = undefined;
       }
     },
-    getPositionByNum(num, i) {
+    getPositionByNum(num: number, i: number) {
       const { sCount } = this;
       const currentCount = Math.abs(Number(sCount));
       const lastCount = Math.abs(Number(this.lastCount));
-      const currentDigit = Math.abs(getNumberArray(sCount)[i]);
-      const lastDigit = Math.abs(getNumberArray(this.lastCount)[i]);
+      const currentDigit = Math.abs(getNumberArray(sCount)[i] as number);
+      const lastDigit = Math.abs(getNumberArray(this.lastCount)[i] as number);
 
       if (this.animateStarted) {
         return 10 + num;
@@ -107,7 +108,7 @@ export default defineComponent({
       this.$emit('animated');
     },
 
-    renderNumberList(position, className) {
+    renderNumberList(position: number, className: string) {
       const childrenToReturn = [];
       for (let i = 0; i < 30; i++) {
         childrenToReturn.push(
@@ -124,7 +125,7 @@ export default defineComponent({
 
       return childrenToReturn;
     },
-    renderCurrentNumber(prefixCls, num, i) {
+    renderCurrentNumber(prefixCls: string, num: number | string, i: number) {
       if (typeof num === 'number') {
         const position = this.getPositionByNum(num, i);
         const removeTransition =
@@ -148,7 +149,7 @@ export default defineComponent({
       );
     },
 
-    renderNumberElement(prefixCls) {
+    renderNumberElement(prefixCls: string) {
       const { sCount } = this;
       if (sCount && Number(sCount) % 1 === 0) {
         return getNumberArray(sCount)

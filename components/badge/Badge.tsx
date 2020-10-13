@@ -79,7 +79,7 @@ export default defineComponent({
           }
         : { ...numberStyle };
     },
-    getBadgeClassName(prefixCls, children) {
+    getBadgeClassName(prefixCls: string, children: any[]) {
       const hasStatus = this.hasStatus();
       return classNames(prefixCls, {
         [`${prefixCls}-status`]: hasStatus,
@@ -111,7 +111,7 @@ export default defineComponent({
       return (isEmpty || (isZero && !showZero)) && !isDot;
     },
 
-    renderStatusText(prefixCls) {
+    renderStatusText(prefixCls: string) {
       const text = getComponent(this, 'text');
       const hidden = this.isHidden();
       return hidden || !text ? null : <span class={`${prefixCls}-status-text`}>{text}</span>;
@@ -132,7 +132,7 @@ export default defineComponent({
       );
     },
 
-    renderBadgeNumber(prefixCls, scrollNumberPrefixCls) {
+    renderBadgeNumber(prefixCls: string, scrollNumberPrefixCls: string) {
       const { status, color } = this.$props;
       const count = this.badgeCount;
       const displayCount = this.getDispayCount();

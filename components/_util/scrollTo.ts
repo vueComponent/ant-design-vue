@@ -2,16 +2,16 @@ import raf from 'raf';
 import getScroll from './getScroll';
 import { easeInOutCubic } from './easings';
 
-// interface ScrollToOptions {
-//   /** Scroll container, default as window */
-//   getContainer?: () => HTMLElement | Window;
-//   /** Scroll end callback */
-//   callback?: () => any;
-//   /** Animation duration, default as 450 */
-//   duration?: number;
-// }
+interface ScrollToOptions {
+  /** Scroll container, default as window */
+  getContainer?: () => HTMLElement | Window;
+  /** Scroll end callback */
+  callback?: () => any;
+  /** Animation duration, default as 450 */
+  duration?: number;
+}
 
-export default function scrollTo(y, options = {}) {
+export default function scrollTo(y: number, options: ScrollToOptions = {}) {
   const { getContainer = () => window, callback, duration = 450 } = options;
 
   const container = getContainer();
@@ -25,7 +25,7 @@ export default function scrollTo(y, options = {}) {
     if (container === window) {
       window.scrollTo(window.pageXOffset, nextScrollTop);
     } else {
-      container.scrollTop = nextScrollTop;
+      (container as HTMLElement).scrollTop = nextScrollTop;
     }
     if (time < duration) {
       raf(frameFunc);

@@ -1,10 +1,9 @@
 import padEnd from 'lodash-es/padEnd';
 import { VNodeTypes } from 'vue';
 import { StatisticPropsType } from './Statistic';
-export interface StatisticNumberProps extends StatisticPropsType {}
 
 const StatisticNumber = (
-  props: Omit<StatisticNumberProps, 'formatter'> & {
+  props: Omit<StatisticPropsType, 'formatter'> & {
     formatter?: VNodeTypes;
   },
 ) => {

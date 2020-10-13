@@ -1,22 +1,22 @@
-import { CSSProperties, defineComponent, inject, PropType, VNodeTypes, computed } from 'vue';
+import { defineComponent, inject, VNodeTypes, computed } from 'vue';
+import { VueTypeValidableDef } from 'vue-types';
 import { defaultConfigProvider } from '../config-provider';
-import { getComponentFromSetup } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
+import PropTypes from '../_util/vue-types';
 import StatisticNumber from './Number';
 
 export const StatisticProps = {
-  decimalSeparator: { type: String, default: '.' },
-  formatter: {
-    type: Function as PropType<(params: { value: string | number | object }) => VNodeTypes>,
-  },
-  groupSeparator: { type: String, default: ',' },
-  precision: { type: Number },
-  prefix: { type: String },
-  suffix: { type: String },
-  title: { type: String },
-  value: { type: [String, Number, Object], default: 0 },
-  valueStyle: { type: Object as PropType<CSSProperties> },
-  prefixCls: { type: String },
-  valueRender: { type: Function as PropType<(node: VNodeTypes) => VNodeTypes> },
+  decimalSeparator: PropTypes.string.def('.'),
+  formatter: PropTypes.func as VueTypeValidableDef<(params: { value: unknown }) => VNodeTypes>,
+  groupSeparator: PropTypes.string.def(','),
+  precision: PropTypes.number,
+  prefix: PropTypes.VNodeChild,
+  suffix: PropTypes.VNodeChild,
+  title: PropTypes.VNodeChild,
+  value: PropTypes.any,
+  valueStyle: PropTypes.style,
+  prefixCls: PropTypes.string,
+  valueRender: PropTypes.func as VueTypeValidableDef<(node: VNodeTypes) => VNodeTypes>,
 };
 
 export type StatisticPropsType = Parameters<typeof Statistic['setup']>['0'];
@@ -24,42 +24,39 @@ export type StatisticPropsType = Parameters<typeof Statistic['setup']>['0'];
 const Statistic = defineComponent({
   name: 'AStatistic',
   props: StatisticProps,
-  setup(props, { slots }) {
+  setup(props) {
     const configProvider = inject('configProvider', defaultConfigProvider);
-
     const getPrefixCls = configProvider.getPrefixCls;
     const prefixCls = computed(() => getPrefixCls('statistic', props.prefixCls));
-    const title = computed(() => getComponentFromSetup(props, slots, 'title') as VNodeTypes);
-    const prefix = computed(() => getComponentFromSetup(props, slots, 'prefix') as VNodeTypes);
-    const suffix = computed(() => getComponentFromSetup(props, slots, 'suffix') as VNodeTypes);
+    return { prefixCls };
+  },
+  render() {
+    const { prefixCls, valueStyle, valueRender, value } = this;
 
-    let formatter: VNodeTypes = undefined;
-    if (typeof props.formatter === 'function') {
-      formatter = props.formatter({ value: props.value });
-    } else if (typeof slots['formatter'] === 'function') {
-      formatter = slots['formatter']({ value: props.value });
-    }
+    const valueNode = (
+      <StatisticNumber
+        {...{
+          ...this.$props,
+          prefixCls: this.prefixCls,
+          formatter: getComponent(this, 'formatter', { value }),
+        }}
+      />
+    );
 
-    return () => {
-      const valueNode = (
-        <StatisticNumber {...{ ...props, prefixCls: prefixCls.value, formatter }} />
-      );
+    const title = getComponent(this, 'title');
+    const prefix = getComponent(this, 'prefix');
+    const suffix = getComponent(this, 'suffix');
 
-      return (
-        <div class={prefixCls.value}>
-          {title.value && <div class={`${prefixCls.value}-title`}>{title.value}</div>}
-          <div style={props.valueStyle} class={`${prefixCls.value}-content`}>
-            {prefix.value && (
-              <span class={`${prefixCls.value}-content-prefix`}>{prefix.value}</span>
-            )}
-            {props.valueRender ? props.valueRender(valueNode) : valueNode}
-            {suffix.value && (
-              <span class={`${prefixCls.value}-content-suffix`}>{suffix.value}</span>
-            )}
-          </div>
+    return (
+      <div class={prefixCls}>
+        {title && <div class={`${prefixCls}-title`}>{title}</div>}
+        <div style={valueStyle} class={`${prefixCls}-content`}>
+          {prefix && <span class={`${prefixCls}-content-prefix`}>{prefix}</span>}
+          {valueRender ? valueRender(valueNode) : valueNode}
+          {suffix && <span class={`${prefixCls}-content-suffix`}>{suffix}</span>}
         </div>
-      );
-    };
+      </div>
+    );
   },
 });
 

@@ -3,6 +3,7 @@ import interopDefault from '../_util/interopDefault';
 import Statistic, { StatisticProps } from './Statistic';
 import { formatCountdown } from './utils';
 import { defineComponent, ref, onMounted, onUpdated, onBeforeUnmount } from 'vue';
+import PropTypes from '../_util/vue-types/index';
 
 const REFRESH_INTERVAL = 1000 / 30;
 function getTime(value) {
@@ -13,7 +14,7 @@ const StatisticCountdown = defineComponent({
   name: 'AStatisticCountdown',
   props: {
     ...StatisticProps,
-    format: { type: String, default: 'HH:mm:ss' },
+    format: PropTypes.string.def('HH:mm:ss'),
   },
   emits: ['finish'],
   setup(props, { emit }) {
@@ -63,7 +64,7 @@ const StatisticCountdown = defineComponent({
 
     return () => (
       <Statistic
-        key={renderKey.value}
+        data-key={renderKey.value}
         ref="statistic"
         {...{
           ...props,

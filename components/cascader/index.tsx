@@ -1,4 +1,4 @@
-import { inject, provide } from 'vue';
+import { App, defineComponent, inject, provide, PropType } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import VcCascader from '../vc-cascader';
 import arrayTreeFilter from 'array-tree-filter';
@@ -23,35 +23,74 @@ import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
 import warning from '../_util/warning';
 import { defaultConfigProvider } from '../config-provider';
+import { tuple, VueNode } from 'components/_util/type';
 
-const CascaderOptionType = PropTypes.shape({
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  label: PropTypes.any,
-  disabled: PropTypes.looseBool,
-  children: PropTypes.array,
-  key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-}).loose;
+export interface CascaderOptionType {
+  value?: string | number;
+  label?: VueNode;
+  disabled?: boolean;
+  isLeaf?: boolean;
+  loading?: boolean;
+  children?: Array<CascaderOptionType>;
+  [key: string]: any;
+}
 
-const FieldNamesType = PropTypes.shape({
-  value: PropTypes.string.isRequired,
-  label: PropTypes.string.isRequired,
-  children: PropTypes.string,
-}).loose;
+export interface FieldNamesType {
+  value?: string;
+  label?: string;
+  children?: string;
+}
 
-const CascaderExpandTrigger = PropTypes.oneOf(['click', 'hover']);
+export interface FilledFieldNamesType {
+  value: string;
+  label: string;
+  children: string;
+}
 
-const ShowSearchType = PropTypes.shape({
-  filter: PropTypes.func,
-  render: PropTypes.func,
-  sort: PropTypes.func,
-  matchInputWidth: PropTypes.looseBool,
-  limit: withUndefined(PropTypes.oneOfType([Boolean, Number])),
-}).loose;
+// const CascaderOptionType = PropTypes.shape({
+//   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+//   label: PropTypes.any,
+//   disabled: PropTypes.looseBool,
+//   children: PropTypes.array,
+//   key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+// }).loose;
+
+// const FieldNamesType = PropTypes.shape({
+//   value: PropTypes.string.isRequired,
+//   label: PropTypes.string.isRequired,
+//   children: PropTypes.string,
+// }).loose;
+
+export interface ShowSearchType {
+  filter?: (inputValue: string, path: CascaderOptionType[], names: FilledFieldNamesType) => boolean;
+  render?: (
+    inputValue: string,
+    path: CascaderOptionType[],
+    prefixCls: string | undefined,
+    names: FilledFieldNamesType,
+  ) => VueNode;
+  sort?: (
+    a: CascaderOptionType[],
+    b: CascaderOptionType[],
+    inputValue: string,
+    names: FilledFieldNamesType,
+  ) => number;
+  matchInputWidth?: boolean;
+  limit?: number | false;
+}
+
+// const ShowSearchType = PropTypes.shape({
+//   filter: PropTypes.func,
+//   render: PropTypes.func,
+//   sort: PropTypes.func,
+//   matchInputWidth: PropTypes.looseBool,
+//   limit: withUndefined(PropTypes.oneOfType([Boolean, Number])),
+// }).loose;
 function noop() {}
 
 const CascaderProps = {
   /** 可选项数据源 */
-  options: PropTypes.arrayOf(CascaderOptionType).def([]),
+  options: { type: Array as PropType<CascaderOptionType>, default: [] },
   /** 默认的选中项 */
   defaultValue: PropTypes.array,
   /** 指定选中项 */
@@ -65,22 +104,25 @@ const CascaderProps = {
   /** 自定义浮层类名 */
   popupClassName: PropTypes.string,
   /** 浮层预设位置：`bottomLeft` `bottomRight` `topLeft` `topRight` */
-  popupPlacement: PropTypes.oneOf(['bottomLeft', 'bottomRight', 'topLeft', 'topRight']).def(
+  popupPlacement: PropTypes.oneOf(tuple('bottomLeft', 'bottomRight', 'topLeft', 'topRight')).def(
     'bottomLeft',
   ),
   /** 输入框占位文本*/
   placeholder: PropTypes.string.def('Please select'),
   /** 输入框大小，可选 `large` `default` `small` */
-  size: PropTypes.oneOf(['large', 'default', 'small']),
+  size: PropTypes.oneOf(tuple('large', 'default', 'small')),
   /** 禁用*/
   disabled: PropTypes.looseBool.def(false),
   /** 是否支持清除*/
   allowClear: PropTypes.looseBool.def(true),
-  showSearch: withUndefined(PropTypes.oneOfType([Boolean, ShowSearchType])),
-  notFoundContent: PropTypes.any,
+  showSearch: {
+    type: [Boolean, Object] as PropType<ShowSearchType>,
+    default: undefined,
+  },
+  notFoundContent: PropTypes.VNodeChild,
   loadData: PropTypes.func,
   /** 次级菜单的展开方式，可选 'click' 和 'hover' */
-  expandTrigger: CascaderExpandTrigger,
+  expandTrigger: PropTypes.oneOf(tuple('click', 'hover')),
   /** 当此项为 true 时，点选每级菜单选项值都会发生变化 */
   changeOnSelect: PropTypes.looseBool,
   /** 浮层可见变化时回调 */
@@ -89,9 +131,9 @@ const CascaderProps = {
   inputPrefixCls: PropTypes.string,
   getPopupContainer: PropTypes.func,
   popupVisible: PropTypes.looseBool,
-  fieldNames: FieldNamesType,
+  fieldNames: { type: Object as PropType<FieldNamesType> },
   autofocus: PropTypes.looseBool,
-  suffixIcon: PropTypes.any,
+  suffixIcon: PropTypes.VNodeChild,
   showSearchRender: PropTypes.any,
   onChange: PropTypes.func,
   onPopupVisibleChange: PropTypes.func,
@@ -101,14 +143,25 @@ const CascaderProps = {
   'onUpdate:value': PropTypes.func,
 };
 
+type CascaderPropsTypes = typeof CascaderProps;
+
 // We limit the filtered item count by default
 const defaultLimit = 50;
 
-function defaultFilterOption(inputValue, path, names) {
+function defaultFilterOption(
+  inputValue: string,
+  path: CascaderOptionType[],
+  names: FilledFieldNamesType,
+) {
   return path.some(option => option[names.label].indexOf(inputValue) > -1);
 }
 
-function defaultSortFilteredOption(a, b, inputValue, names) {
+function defaultSortFilteredOption(
+  a: CascaderOptionType[],
+  b: CascaderOptionType[],
+  inputValue: string,
+  names: FilledFieldNamesType,
+) {
   function callback(elem) {
     return elem[names.label].indexOf(inputValue) > -1;
   }
@@ -116,8 +169,9 @@ function defaultSortFilteredOption(a, b, inputValue, names) {
   return a.findIndex(callback) - b.findIndex(callback);
 }
 
-function getFilledFieldNames({ fieldNames = {} }) {
-  const names = {
+function getFilledFieldNames(props: CascaderPropsTypes) {
+  const fieldNames = (props.fieldNames || {}) as FieldNamesType;
+  const names: FilledFieldNamesType = {
     children: fieldNames.children || 'children',
     label: fieldNames.label || 'label',
     value: fieldNames.value || 'value',
@@ -125,8 +179,12 @@ function getFilledFieldNames({ fieldNames = {} }) {
   return names;
 }
 
-function flattenTree(options = [], props, ancestor = []) {
-  const names = getFilledFieldNames(props);
+function flattenTree(
+  options: CascaderOptionType[],
+  props: CascaderPropsTypes,
+  ancestor: CascaderOptionType[] = [],
+) {
+  const names: FilledFieldNamesType = getFilledFieldNames(props);
   let flattenOptions = [];
   const childrenName = names.children;
   options.forEach(option => {
@@ -163,7 +221,7 @@ const Cascader = {
   },
   data() {
     this.cachedOptions = [];
-    const { value, defaultValue, popupVisible, showSearch, options } = this;
+    const { value, defaultValue, popupVisible, showSearch, options } = this.$props;
     return {
       sValue: value || defaultValue || [],
       inputValue: '',
@@ -553,7 +611,7 @@ const Cascader = {
   },
 };
 
-Cascader.install = function(app) {
+Cascader.install = function(app: App) {
   app.component(Cascader.name, Cascader);
   return app;
 };

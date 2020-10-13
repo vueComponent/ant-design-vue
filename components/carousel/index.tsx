@@ -1,17 +1,17 @@
-import { inject } from 'vue';
+import { App, defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import debounce from 'lodash-es/debounce';
-import hasProp, { initDefaultProps, getComponent } from '../_util/props-util';
+import hasProp, { getComponent } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 import classNames from '../_util/classNames';
 import SlickCarousel from '../vc-slick/src';
+import { tuple } from '../_util/type';
 
-export const CarouselEffect = PropTypes.oneOf(['scrollx', 'fade']);
 // Carousel
 export const CarouselProps = {
-  effect: CarouselEffect,
-  dots: PropTypes.looseBool,
+  effect: PropTypes.oneOf(tuple('scrollx', 'fade')),
+  dots: PropTypes.looseBool.def(true),
   vertical: PropTypes.looseBool,
   autoplay: PropTypes.looseBool,
   easing: PropTypes.string,
@@ -20,18 +20,18 @@ export const CarouselProps = {
   // style: PropTypes.React.CSSProperties,
   prefixCls: PropTypes.string,
   accessibility: PropTypes.looseBool,
-  nextArrow: PropTypes.any,
-  prevArrow: PropTypes.any,
+  nextArrow: PropTypes.VNodeChild,
+  prevArrow: PropTypes.VNodeChild,
   pauseOnHover: PropTypes.looseBool,
   // className: PropTypes.string,
   adaptiveHeight: PropTypes.looseBool,
-  arrows: PropTypes.looseBool,
+  arrows: PropTypes.looseBool.def(false),
   autoplaySpeed: PropTypes.number,
   centerMode: PropTypes.looseBool,
   centerPadding: PropTypes.string,
   cssEase: PropTypes.string,
   dotsClass: PropTypes.string,
-  draggable: PropTypes.looseBool,
+  draggable: PropTypes.looseBool.def(false),
   fade: PropTypes.looseBool,
   focusOnSelect: PropTypes.looseBool,
   infinite: PropTypes.looseBool,
@@ -50,20 +50,18 @@ export const CarouselProps = {
   useCSS: PropTypes.looseBool,
   slickGoTo: PropTypes.number,
   responsive: PropTypes.array,
-  dotPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  dotPosition: PropTypes.oneOf(tuple('top', 'bottom', 'left', 'right')),
 };
 
-const Carousel = {
+const Carousel = defineComponent({
   name: 'ACarousel',
   inheritAttrs: false,
-  props: initDefaultProps(CarouselProps, {
-    dots: true,
-    arrows: false,
-    draggable: false,
-  }),
+  props: CarouselProps,
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      slick: undefined,
+      innerSlider: undefined,
     };
   },
   beforeMount() {
@@ -90,7 +88,7 @@ const Carousel = {
     const { autoplay } = this;
     if (autoplay) {
       window.removeEventListener('resize', this.onWindowResized);
-      this.onWindowResized.cancel();
+      (this.onWindowResized as any).cancel();
     }
   },
   methods: {
@@ -103,7 +101,7 @@ const Carousel = {
       }
       return 'bottom';
     },
-    saveSlick(node) {
+    saveSlick(node: HTMLElement) {
       this.slick = node;
     },
     onWindowResized() {
@@ -122,7 +120,7 @@ const Carousel = {
       this.slick.slickPrev();
     },
 
-    goTo(slide, dontAnimate = false) {
+    goTo(slide: number, dontAnimate = false) {
       this.slick.slickGoTo(slide, dontAnimate);
     },
   },
@@ -134,7 +132,7 @@ const Carousel = {
     if (props.effect === 'fade') {
       props.fade = true;
     }
-    const { class: cls, style, ...restAttrs } = this.$attrs;
+    const { class: cls, style, ...restAttrs } = this.$attrs as any;
     const getPrefixCls = this.configProvider.getPrefixCls;
     let className = getPrefixCls('carousel', props.prefixCls);
     const dotsClass = 'slick-dots';
@@ -156,14 +154,18 @@ const Carousel = {
     };
     return (
       <div class={className} style={style}>
-        <SlickCarousel ref={this.saveSlick} {...SlickCarouselProps} vSlots={$slots}></SlickCarousel>
+        <SlickCarousel
+          ref={this.saveSlick}
+          {...SlickCarouselProps}
+          v-slots={$slots}
+        ></SlickCarousel>
       </div>
     );
   },
-};
+});
 
 /* istanbul ignore next */
-Carousel.install = function(app) {
+Carousel.install = function(app: App) {
   app.component(Carousel.name, Carousel);
   return app;
 };

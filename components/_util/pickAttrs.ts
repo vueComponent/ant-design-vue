@@ -25,8 +25,14 @@ const propList = `${attributes} ${eventsName}`.split(/[\s\n]+/);
 const ariaPrefix = 'aria-';
 const dataPrefix = 'data-';
 
-function match(key, prefix) {
+function match(key: string, prefix: string) {
   return key.indexOf(prefix) === 0;
+}
+
+export interface PickConfig {
+  aria?: boolean;
+  data?: boolean;
+  attr?: boolean;
 }
 
 /**
@@ -34,7 +40,7 @@ function match(key, prefix) {
  * @param props Passed props
  * @param ariaOnly boolean | { aria?: boolean; data?: boolean; attr?: boolean; } filter config
  */
-export default function pickAttrs(props, ariaOnly = false) {
+export default function pickAttrs(props: object, ariaOnly: boolean | PickConfig = false) {
   let mergedConfig;
   if (ariaOnly === false) {
     mergedConfig = {

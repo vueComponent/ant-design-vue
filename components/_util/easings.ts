@@ -1,4 +1,4 @@
-export function easeInOutCubic(t, b, c, d) {
+export function easeInOutCubic(t: number, b: number, c: number, d: number) {
   const cc = c - b;
   t /= d / 2;
   if (t < 1) {

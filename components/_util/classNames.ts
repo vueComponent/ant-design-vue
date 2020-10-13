@@ -1,8 +1,8 @@
 import { isArray, isString, isObject } from './util';
-function classNames() {
-  let classes = [];
-  for (let i = 0; i < arguments.length; i++) {
-    const value = arguments[i];
+function classNames(...args: any[]) {
+  const classes = [];
+  for (let i = 0; i < args.length; i++) {
+    const value = args[i];
     if (!value) continue;
     if (isString(value)) {
       classes.push(value);

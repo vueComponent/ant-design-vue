@@ -1,4 +1,4 @@
-import { provide, inject, cloneVNode } from 'vue';
+import { provide, inject, cloneVNode, defineComponent } from 'vue';
 import RcDropdown from '../vc-dropdown/src/index';
 import DropdownButton from './dropdown-button';
 import PropTypes from '../_util/vue-types';
@@ -16,7 +16,7 @@ import { defaultConfigProvider } from '../config-provider';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 
 const DropdownProps = getDropdownProps();
-const Dropdown = {
+const Dropdown = defineComponent({
   name: 'ADropdown',
   inheritAttrs: false,
   props: {
@@ -107,7 +107,7 @@ const Dropdown = {
     };
     return <RcDropdown {...dropdownProps}>{dropdownTrigger}</RcDropdown>;
   },
-};
+});
 
 Dropdown.Button = DropdownButton;
 export default Dropdown;

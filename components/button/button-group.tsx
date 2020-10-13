@@ -1,18 +1,15 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { filterEmpty, getSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
+import { tuple } from '../_util/type';
 
 const ButtonGroupProps = {
   prefixCls: PropTypes.string,
-  size: {
-    validator(value) {
-      return ['small', 'large', 'default'].includes(value);
-    },
-  },
+  size: PropTypes.oneOf(tuple('small', 'large', 'default')),
 };
 export { ButtonGroupProps };
-export default {
+export default defineComponent({
   name: 'AButtonGroup',
   props: ButtonGroupProps,
   setup() {
@@ -53,4 +50,4 @@ export default {
     };
     return <div class={classes}>{filterEmpty(getSlot(this))}</div>;
   },
-};
+});

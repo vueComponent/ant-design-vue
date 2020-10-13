@@ -45,7 +45,7 @@ const AutoComplete = defineComponent({
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
       popupRef: null,
-      select: null
+      select: null,
     };
   },
   created() {
@@ -86,7 +86,7 @@ const AutoComplete = defineComponent({
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
-    const { class: className} = this.$attrs as any;
+    const { class: className } = this.$attrs as any;
     const cls = {
       [className]: !!className,
       [`${prefixCls}-lg`]: size === 'large',

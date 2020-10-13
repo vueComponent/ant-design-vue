@@ -1,4 +1,4 @@
-import { provide, App, defineComponent, VNode } from 'vue';
+import { provide, App, defineComponent, VNode, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
@@ -39,7 +39,7 @@ const LocaleProvider = defineComponent({
   name: 'ALocaleProvider',
   props: {
     locale: {
-      type: Object,
+      type: Object as PropType<Locale>,
     },
     _ANT_MARK__: PropTypes.string,
   },

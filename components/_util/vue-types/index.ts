@@ -30,7 +30,7 @@ PropTypes.extend([
   },
 ]);
 
-export function withUndefined(type: any) {
+export function withUndefined<T extends { default?: any }>(type: T): T {
   type.default = undefined;
   return type;
 }

@@ -14,6 +14,7 @@ if (
   );
 }
 /* @remove-on-es-build-end */
+import { App } from 'vue';
 
 import { default as Affix } from './affix';
 
@@ -210,9 +211,9 @@ const components = [
   Space,
 ];
 
-const install = function(app) {
-  components.map(component => {
-    app.use(component);
+const install = function(app: App) {
+  components.forEach(component => {
+    app.use(component as { install: () => any });
   });
 
   app.config.globalProperties.$message = message;

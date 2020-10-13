@@ -1,4 +1,4 @@
-import { inject, Transition } from 'vue';
+import { App, defineComponent, inject, Transition } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import backTopTypes from './backTopTypes';
@@ -15,7 +15,7 @@ function getDefaultTarget() {
 
 const props = backTopTypes();
 
-const BackTop = {
+const BackTop = defineComponent({
   name: 'ABackTop',
   inheritAttrs: false,
   mixins: [BaseMixin],
@@ -29,9 +29,9 @@ const BackTop = {
     };
   },
   data() {
-    this.scrollEvent = null;
     return {
       visible: false,
+      scrollEvent: null,
     };
   },
   mounted() {
@@ -97,10 +97,10 @@ const BackTop = {
     const transitionProps = getTransitionProps('fade');
     return <Transition {...transitionProps}>{backTopBtn}</Transition>;
   },
-};
+});
 
 /* istanbul ignore next */
-BackTop.install = function(app) {
+BackTop.install = function(app: App) {
   app.component(BackTop.name, BackTop);
 };
 

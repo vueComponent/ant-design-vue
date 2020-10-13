@@ -7,11 +7,12 @@ import { cloneElement } from '../_util/vnode';
 import getTransitionProps from '../_util/getTransitionProps';
 import isNumeric from '../_util/isNumeric';
 import { defaultConfigProvider } from '../config-provider';
-import { inject, Transition } from 'vue';
+import { inject, Transition, defineComponent, CSSProperties } from 'vue';
+import { tuple } from '../_util/type';
 
 const BadgeProps = {
   /** Number to show in badge */
-  count: PropTypes.any,
+  count: PropTypes.VNodeChild,
   showZero: PropTypes.looseBool,
   /** Max count to show */
   overflowCount: PropTypes.number,
@@ -19,26 +20,27 @@ const BadgeProps = {
   dot: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   scrollNumberPrefixCls: PropTypes.string,
-  status: PropTypes.oneOf(['success', 'processing', 'default', 'error', 'warning']),
+  status: PropTypes.oneOf(tuple('success', 'processing', 'default', 'error', 'warning')),
   color: PropTypes.string,
-  text: PropTypes.any,
-  offset: PropTypes.array,
-  numberStyle: PropTypes.object.def(() => ({})),
+  text: PropTypes.VNodeChild,
+  offset: PropTypes.arrayOf(PropTypes.oneOfType([String, Number])),
+  numberStyle: PropTypes.style,
   title: PropTypes.string,
 };
-function isPresetColor(color) {
-  return PresetColorTypes.indexOf(color) !== -1;
+function isPresetColor(color?: string): boolean {
+  return (PresetColorTypes as any[]).indexOf(color) !== -1;
 }
-export default {
+export default defineComponent({
   name: 'ABadge',
   props: initDefaultProps(BadgeProps, {
     showZero: false,
     dot: false,
     overflowCount: 99,
-  }),
+  }) as typeof BadgeProps,
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      badgeCount: undefined
     };
   },
   methods: {
@@ -71,7 +73,7 @@ export default {
       const { offset, numberStyle } = this.$props;
       return offset
         ? {
-            right: `${-parseInt(offset[0], 10)}px`,
+            right: `${-parseInt(offset[0] as string, 10)}px`,
             marginTop: isNumeric(offset[1]) ? `${offset[1]}px` : offset[1],
             ...numberStyle,
           }
@@ -156,7 +158,7 @@ export default {
         <ScrollNumber
           prefixCls={scrollNumberPrefixCls}
           data-show={!hidden}
-          vShow={!hidden}
+          v-show={!hidden}
           class={scrollNumberCls}
           count={displayCount}
           displayComponent={this.renderDispayComponent()}
@@ -194,7 +196,7 @@ export default {
       [`${prefixCls}-status-${status}`]: !!status,
       [`${prefixCls}-status-${color}`]: isPresetColor(color),
     });
-    const statusStyle = {};
+    const statusStyle: CSSProperties = {};
     if (color && !isPresetColor(color)) {
       statusStyle.background = color;
     }
@@ -222,4 +224,4 @@ export default {
       </span>
     );
   },
-};
+});

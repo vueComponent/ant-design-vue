@@ -1,11 +1,13 @@
-import { inject, cloneVNode, isVNode } from 'vue';
+import { inject, cloneVNode, isVNode, defineComponent, VNode } from 'vue';
 import debounce from 'lodash-es/debounce';
+import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
+import { getComponent, getSlot } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
 
-export const SpinSize = PropTypes.oneOf(['small', 'default', 'large']);
+export const SpinSize = PropTypes.oneOf(tuple('small', 'default', 'large'));
 
 export const SpinProps = () => ({
   prefixCls: PropTypes.string,
@@ -18,23 +20,18 @@ export const SpinProps = () => ({
 });
 
 // Render indicator
-let defaultIndicator;
+let defaultIndicator: () => VNode = null;
 
-function shouldDelay(spinning, delay) {
+function shouldDelay(spinning?: boolean, delay?: number): boolean {
   return !!spinning && !!delay && !isNaN(Number(delay));
 }
 
-export function setDefaultIndicator(Content) {
+export function setDefaultIndicator(Content: any) {
   const Indicator = Content.indicator;
-  defaultIndicator =
-    typeof Indicator === 'function'
-      ? Indicator
-      : () => {
-          return <Indicator />;
-        };
+  defaultIndicator = typeof Indicator === 'function' ? Indicator : () => <Indicator />;
 }
 
-export default {
+export default defineComponent({
   name: 'ASpin',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -45,14 +42,17 @@ export default {
   }),
   setup() {
     return {
+      originalUpdateSpinning: null,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
+  },
+  created() {
+    this.originalUpdateSpinning = this.updateSpinning;
+    this.debouncifyUpdateSpinning(this.$props);
   },
   data() {
     const { spinning, delay } = this;
     const shouldBeDelayed = shouldDelay(spinning, delay);
-    this.originalUpdateSpinning = this.updateSpinning;
-    this.debouncifyUpdateSpinning(this.$props);
     return {
       sSpinning: spinning && !shouldBeDelayed,
     };
@@ -70,7 +70,7 @@ export default {
     this.cancelExistingSpin();
   },
   methods: {
-    debouncifyUpdateSpinning(props) {
+    debouncifyUpdateSpinning(props?: any) {
       const { delay } = props || this.$props;
       if (delay) {
         this.cancelExistingSpin();
@@ -85,11 +85,11 @@ export default {
     },
     cancelExistingSpin() {
       const { updateSpinning } = this;
-      if (updateSpinning && updateSpinning.cancel) {
-        updateSpinning.cancel();
+      if (updateSpinning && (updateSpinning as any).cancel) {
+        (updateSpinning as any).cancel();
       }
     },
-    renderIndicator(prefixCls) {
+    renderIndicator(prefixCls: string) {
       const dotClassName = `${prefixCls}-dot`;
       let indicator = getComponent(this, 'indicator');
       // should not be render default indicator when indicator value is null
@@ -120,7 +120,7 @@ export default {
   render() {
     const { size, prefixCls: customizePrefixCls, tip, wrapperClassName } = this.$props;
     const { class: cls, style, ...divProps } = this.$attrs;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('spin', customizePrefixCls);
 
     const { sSpinning } = this;
@@ -130,7 +130,7 @@ export default {
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-spinning`]: sSpinning,
       [`${prefixCls}-show-text`]: !!tip,
-      [cls]: !!cls,
+      [cls as string]: !!cls,
     };
 
     const spinElement = (
@@ -157,4 +157,4 @@ export default {
     }
     return spinElement;
   },
-};
+});

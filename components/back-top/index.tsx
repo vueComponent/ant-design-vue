@@ -19,6 +19,7 @@ const BackTop = defineComponent({
   name: 'ABackTop',
   inheritAttrs: false,
   mixins: [BaseMixin],
+  emits: ['click'],
   props: {
     ...props,
     visibilityHeight: PropTypes.number.def(400),
@@ -57,7 +58,7 @@ const BackTop = defineComponent({
       return targetNode.scrollTop;
     },
 
-    scrollToTop(e) {
+    scrollToTop(e: Event) {
       const { target = getDefaultTarget } = this;
       scrollTo(0, {
         getContainer: target,

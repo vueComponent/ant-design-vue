@@ -1,4 +1,5 @@
-import { createTypes } from 'vue-types';
+import { CSSProperties, VNodeTypes } from 'vue';
+import { createTypes, VueTypeValidableDef, VueTypesInterface } from 'vue-types';
 const PropTypes = createTypes({
   func: undefined,
   bool: undefined,
@@ -9,4 +10,35 @@ const PropTypes = createTypes({
   integer: undefined,
 });
 
-export default PropTypes;
+PropTypes.extend([
+  {
+    name: 'looseBool',
+    getter: true,
+    type: Boolean,
+    default: undefined,
+  },
+  {
+    name: 'style',
+    getter: true,
+    type: [String, Object],
+    default: undefined,
+  },
+  {
+    name: 'VNodeChild',
+    getter: true,
+    type: null,
+  },
+]);
+
+export function withUndefined(type: any) {
+  type.default = undefined;
+  return type;
+}
+
+export default PropTypes as VueTypesInterface & {
+  readonly looseBool: VueTypeValidableDef<boolean> & {
+    default: undefined;
+  };
+  readonly style: VueTypeValidableDef<CSSProperties>;
+  readonly VNodeChild: VueTypeValidableDef<VNodeTypes>;
+};

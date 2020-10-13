@@ -57,13 +57,13 @@ export interface SelectTriggerProps {
   dropdownClassName: string;
   direction: string;
   dropdownMatchSelectWidth?: boolean | number;
-  dropdownRender?: (menu: VNodeChild) => VNodeChild;
+  dropdownRender?: (menu: VNodeChild | JSX.Element) => VNodeChild;
   getPopupContainer?: RenderDOMFunc;
   dropdownAlign: object;
   empty: boolean;
   getTriggerDOMNode: () => any;
 }
-const SelectTrigger = defineComponent<SelectTriggerProps>({
+const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
   name: 'SelectTrigger',
   inheritAttrs: false,
   created() {
@@ -90,7 +90,9 @@ const SelectTrigger = defineComponent<SelectTriggerProps>({
       dropdownRender,
       animation,
       transitionName,
-    } = props;
+      direction,
+      getPopupContainer,
+    } = props as SelectTriggerProps;
     const dropdownPrefixCls = `${prefixCls}-dropdown`;
 
     let popupNode = popupElement;
@@ -114,20 +116,19 @@ const SelectTrigger = defineComponent<SelectTriggerProps>({
         {...props}
         showAction={[]}
         hideAction={[]}
-        popupPlacement={this.direction === 'rtl' ? 'bottomRight' : 'bottomLeft'}
+        popupPlacement={direction === 'rtl' ? 'bottomRight' : 'bottomLeft'}
         builtinPlacements={builtInPlacements}
         prefixCls={dropdownPrefixCls}
         popupTransitionName={mergedTransitionName}
-        onPopupVisibleChange={props.onDropdownVisibleChange}
         popup={<div ref={this.popupRef}>{popupNode}</div>}
         popupAlign={dropdownAlign}
         popupVisible={visible}
-        getPopupContainer={props.getPopupContainer}
+        getPopupContainer={getPopupContainer}
         popupClassName={classNames(dropdownClassName, {
           [`${dropdownPrefixCls}-empty`]: empty,
         })}
         popupStyle={popupStyle}
-        getTriggerDOMNode={this.getTriggerDOMNode}
+        // getTriggerDOMNode={getTriggerDOMNode}
       >
         {getSlot(this)[0]}
       </Trigger>
@@ -136,11 +137,11 @@ const SelectTrigger = defineComponent<SelectTriggerProps>({
 });
 SelectTrigger.props = {
   dropdownAlign: PropTypes.object,
-  visible: { type: Boolean, default: undefined },
-  disabled: { type: Boolean, default: undefined },
+  visible: PropTypes.looseBool,
+  disabled: PropTypes.looseBool,
   dropdownClassName: PropTypes.string,
   dropdownStyle: PropTypes.object,
-  empty: { type: Boolean, default: undefined },
+  empty: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   popupClassName: PropTypes.string,
   animation: PropTypes.string,

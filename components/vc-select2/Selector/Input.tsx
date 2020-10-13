@@ -27,7 +27,7 @@ interface InputProps {
   onCompositionend: EventHandlerNonNull;
 }
 
-const Input = defineComponent<InputProps>({
+const Input = defineComponent<InputProps, { VCSelectContainerEvent: any }>({
   name: 'Input',
   inheritAttrs: false,
   setup() {
@@ -143,13 +143,13 @@ Input.props = {
   prefixCls: PropTypes.string,
   id: PropTypes.string,
   inputElement: PropTypes.any,
-  disabled: { type: Boolean, default: undefined },
-  autofocus: { type: Boolean, default: undefined },
+  disabled: PropTypes.looseBool,
+  autofocus: PropTypes.looseBool,
   autocomplete: PropTypes.string,
-  editable: { type: Boolean, default: undefined },
+  editable: PropTypes.looseBool,
   accessibilityIndex: PropTypes.number,
   value: PropTypes.string,
-  open: { type: Boolean, default: undefined },
+  open: PropTypes.looseBool,
   tabindex: PropTypes.number,
   /** Pass accessibility props to input */
   attrs: PropTypes.object,

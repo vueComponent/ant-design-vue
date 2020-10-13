@@ -1,7 +1,7 @@
 import PropTypes from './vue-types';
-import { Teleport } from 'vue';
+import { defineComponent, Teleport } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'Portal',
   props: {
     getContainer: PropTypes.func.isRequired,
@@ -45,4 +45,4 @@ export default {
     }
     return null;
   },
-};
+});

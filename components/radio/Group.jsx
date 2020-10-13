@@ -21,7 +21,7 @@ export default {
       default: () => [],
       type: Array,
     },
-    disabled: Boolean,
+    disabled: PropTypes.looseBool,
     name: String,
     buttonStyle: PropTypes.string.def('outline'),
     onChange: PropTypes.func,

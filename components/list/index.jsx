@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import { defaultConfigProvider } from '../config-provider';
@@ -32,19 +32,21 @@ export const ListGridType = {
 export const ListSize = ['small', 'default', 'large'];
 
 export const ListProps = () => ({
-  bordered: PropTypes.bool,
+  bordered: PropTypes.looseBool,
   dataSource: PropTypes.array,
   extra: PropTypes.any,
   grid: PropTypes.shape(ListGridType).loose,
   itemLayout: PropTypes.string,
-  loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  loading: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   loadMore: PropTypes.any,
-  pagination: PropTypes.oneOfType([PropTypes.shape(PaginationConfig()).loose, PropTypes.bool]),
+  pagination: withUndefined(
+    PropTypes.oneOfType([PropTypes.shape(PaginationConfig()).loose, PropTypes.looseBool]),
+  ),
   prefixCls: PropTypes.string,
   rowKey: PropTypes.any,
   renderItem: PropTypes.any,
   size: PropTypes.oneOf(ListSize),
-  split: PropTypes.bool,
+  split: PropTypes.looseBool,
   header: PropTypes.any,
   footer: PropTypes.any,
   locale: PropTypes.object,

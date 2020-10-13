@@ -1,10 +1,10 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import PlusOutlined from '@ant-design/icons-vue/PlusOutlined';
 import VcTabs, { TabPane } from '../vc-tabs/src';
 import TabContent from '../vc-tabs/src/TabContent';
 import { isFlexSupported } from '../_util/styleChecker';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import {
   getComponent,
   getOptionProps,
@@ -18,7 +18,7 @@ import isValid from '../_util/isValid';
 import { defaultConfigProvider } from '../config-provider';
 import TabBar from './TabBar';
 
-export default {
+export default defineComponent({
   TabPane,
   name: 'ATabs',
   inheritAttrs: false,
@@ -26,14 +26,14 @@ export default {
     prefixCls: PropTypes.string,
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    hideAdd: PropTypes.bool.def(false),
+    hideAdd: PropTypes.looseBool.def(false),
     tabBarStyle: PropTypes.object,
     tabBarExtraContent: PropTypes.any,
-    destroyInactiveTabPane: PropTypes.bool.def(false),
+    destroyInactiveTabPane: PropTypes.looseBool.def(false),
     type: PropTypes.oneOf(['line', 'card', 'editable-card']),
     tabPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('top'),
     size: PropTypes.oneOf(['default', 'small', 'large']),
-    animated: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    animated: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
     tabBarGutter: PropTypes.number,
     renderTabBar: PropTypes.func,
     onChange: PropTypes.func,
@@ -174,4 +174,4 @@ export default {
     };
     return <VcTabs {...tabsProps} />;
   },
-};
+});

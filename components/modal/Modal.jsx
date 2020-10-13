@@ -35,13 +35,13 @@ const modalProps = (defaultProps = {}) => {
   const props = {
     prefixCls: PropTypes.string,
     /** 对话框是否可见*/
-    visible: PropTypes.bool,
+    visible: PropTypes.looseBool,
     /** 确定按钮 loading*/
-    confirmLoading: PropTypes.bool,
+    confirmLoading: PropTypes.looseBool,
     /** 标题*/
     title: PropTypes.any,
     /** 是否显示右上角的关闭按钮*/
-    closable: PropTypes.bool,
+    closable: PropTypes.looseBool,
     closeIcon: PropTypes.any,
     /** 点击确定回调*/
     // onOk: (e: React.MouseEvent<any>) => void,
@@ -49,7 +49,7 @@ const modalProps = (defaultProps = {}) => {
     // onCancel: (e: React.MouseEvent<any>) => void,
     afterClose: PropTypes.func.def(noop),
     /** 垂直居中 */
-    centered: PropTypes.bool,
+    centered: PropTypes.looseBool,
     /** 宽度*/
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /** 底部内容*/
@@ -62,12 +62,12 @@ const modalProps = (defaultProps = {}) => {
     cancelText: PropTypes.any,
     icon: PropTypes.any,
     /** 点击蒙层是否允许关闭*/
-    maskClosable: PropTypes.bool,
+    maskClosable: PropTypes.looseBool,
     /** 强制渲染 Modal*/
-    forceRender: PropTypes.bool,
+    forceRender: PropTypes.looseBool,
     okButtonProps: PropTypes.object,
     cancelButtonProps: PropTypes.object,
-    destroyOnClose: PropTypes.bool,
+    destroyOnClose: PropTypes.looseBool,
     wrapClassName: PropTypes.string,
     maskTransitionName: PropTypes.string,
     transitionName: PropTypes.string,
@@ -75,10 +75,10 @@ const modalProps = (defaultProps = {}) => {
     zIndex: PropTypes.number,
     bodyStyle: PropTypes.object,
     maskStyle: PropTypes.object,
-    mask: PropTypes.bool,
-    keyboard: PropTypes.bool,
+    mask: PropTypes.looseBool,
+    keyboard: PropTypes.looseBool,
     wrapProps: PropTypes.object,
-    focusTriggerAfterClose: PropTypes.bool,
+    focusTriggerAfterClose: PropTypes.looseBool,
   };
   return initDefaultProps(props, defaultProps);
 };

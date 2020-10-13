@@ -16,7 +16,7 @@ const CalendarHeader = {
     Select: PropTypes.object,
     prefixCls: PropTypes.string,
     type: PropTypes.string,
-    showTypeSwitch: PropTypes.bool,
+    showTypeSwitch: PropTypes.looseBool,
     headerComponents: PropTypes.array,
   },
   methods: {

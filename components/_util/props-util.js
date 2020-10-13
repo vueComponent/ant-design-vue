@@ -40,10 +40,6 @@ const parseStyleText = (cssText = '', camel) => {
   return res;
 };
 
-const getComponentFromSetup = (props, slots, name, options) => {
-  return props[name] ? props[name] : slots[name]?.(options);
-};
-
 const hasProp = (instance, prop) => {
   return prop in getOptionProps(instance);
 };
@@ -394,7 +390,6 @@ function isValidElement(element) {
 }
 
 export {
-  getComponentFromSetup,
   splitAttrs,
   hasProp,
   getOptionProps,

@@ -5,7 +5,7 @@ export default {
   props: {
     hiddenClassName: PropTypes.string.def(''),
     prefixCls: PropTypes.string,
-    visible: PropTypes.bool,
+    visible: PropTypes.looseBool,
   },
   render() {
     const { prefixCls, visible, hiddenClassName } = this.$props;

@@ -4,18 +4,19 @@ import { hasProp } from '../../_util/props-util';
 import Track from './common/Track';
 import createSlider from './common/createSlider';
 import * as utils from './utils';
+import { defineComponent } from 'vue';
 
-const Slider = {
+const Slider = defineComponent({
   name: 'Slider',
   inheritAttrs: false,
   mixins: [BaseMixin],
   props: {
     defaultValue: PropTypes.number,
     value: PropTypes.number,
-    disabled: PropTypes.bool,
-    autofocus: PropTypes.bool,
+    disabled: PropTypes.looseBool,
+    autofocus: PropTypes.looseBool,
     tabindex: PropTypes.number,
-    reverse: PropTypes.bool,
+    reverse: PropTypes.looseBool,
     min: PropTypes.number,
     max: PropTypes.number,
   },
@@ -192,6 +193,6 @@ const Slider = {
       };
     },
   },
-};
+});
 
 export default createSlider(Slider);

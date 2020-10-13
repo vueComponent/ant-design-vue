@@ -7,12 +7,12 @@ import {
 import { PlaceMent } from './placement';
 
 export const mentionsProps = {
-  autofocus: PropTypes.bool,
+  autofocus: PropTypes.looseBool,
   prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   prefixCls: PropTypes.string,
   value: PropTypes.string,
   defaultValue: PropTypes.string,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   notFoundContent: PropTypes.any,
   split: PropTypes.string,
   transitionName: PropTypes.string,

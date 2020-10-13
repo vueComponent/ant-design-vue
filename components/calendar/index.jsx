@@ -35,7 +35,7 @@ export const CalendarProps = () => ({
   value: TimeType,
   defaultValue: TimeType,
   mode: CalendarMode,
-  fullscreen: PropTypes.bool,
+  fullscreen: PropTypes.looseBool,
   locale: PropTypes.object,
   disabledDate: PropTypes.func,
   validRange: PropTypes.custom(isMomentArray),

@@ -1,5 +1,5 @@
 import shallowEqual from '../shallowequal';
-import { inject, createVNode, watchEffect } from 'vue';
+import { inject, createVNode, watchEffect, defineComponent } from 'vue';
 import omit from 'omit.js';
 import { getOptionProps } from '../props-util';
 
@@ -95,6 +95,6 @@ export default function connect(mapStateToProps) {
         return createVNode(WrappedComponent, wrapProps, $slots);
       },
     };
-    return Connect;
+    return defineComponent(Connect);
   };
 }

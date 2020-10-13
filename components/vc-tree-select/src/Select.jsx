@@ -18,12 +18,12 @@
  * In single mode, we should focus on the `span`
  * In multiple mode, we should focus on the `input`
  */
-import { provide } from 'vue';
+import { defineComponent, provide } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
 import raf from 'raf';
 import scrollIntoView from 'dom-scroll-into-view';
 import warning from 'warning';
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import KeyCode from '../../_util/KeyCode';
 
 import SelectTrigger from './SelectTrigger';
@@ -67,7 +67,7 @@ function getWatch(keys = []) {
   });
   return watch;
 }
-const Select = {
+const Select = defineComponent({
   name: 'Select',
   inheritAttrs: false,
   mixins: [BaseMixin],
@@ -75,47 +75,49 @@ const Select = {
     {
       prefixCls: PropTypes.string,
       prefixAria: PropTypes.string,
-      multiple: PropTypes.bool,
-      showArrow: PropTypes.bool,
-      open: PropTypes.bool,
+      multiple: PropTypes.looseBool,
+      showArrow: PropTypes.looseBool,
+      open: PropTypes.looseBool,
       value: PropTypes.any,
 
-      autofocus: PropTypes.bool,
+      autofocus: PropTypes.looseBool,
 
-      defaultOpen: PropTypes.bool,
+      defaultOpen: PropTypes.looseBool,
       defaultValue: PropTypes.any,
 
-      showSearch: PropTypes.bool,
+      showSearch: PropTypes.looseBool,
       placeholder: PropTypes.any,
       inputValue: PropTypes.string, // [Legacy] Deprecated. Use `searchValue` instead.
       searchValue: PropTypes.string,
-      autoClearSearchValue: PropTypes.bool,
+      autoClearSearchValue: PropTypes.looseBool,
       searchPlaceholder: PropTypes.any, // [Legacy] Confuse with placeholder
-      disabled: PropTypes.bool,
+      disabled: PropTypes.looseBool,
       children: PropTypes.any,
-      labelInValue: PropTypes.bool,
+      labelInValue: PropTypes.looseBool,
       maxTagCount: PropTypes.number,
-      maxTagPlaceholder: PropTypes.oneOfType([PropTypes.any, PropTypes.func]),
+      maxTagPlaceholder: PropTypes.any,
       maxTagTextLength: PropTypes.number,
       showCheckedStrategy: PropTypes.oneOf([SHOW_ALL, SHOW_PARENT, SHOW_CHILD]),
       dropdownClassName: PropTypes.string,
       dropdownStyle: PropTypes.object,
       dropdownVisibleChange: PropTypes.func,
-      dropdownMatchSelectWidth: PropTypes.bool,
+      dropdownMatchSelectWidth: PropTypes.looseBool,
       treeData: PropTypes.array,
-      treeDataSimpleMode: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+      treeDataSimpleMode: withUndefined(
+        PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
+      ),
       treeNodeFilterProp: PropTypes.string,
       treeNodeLabelProp: PropTypes.string,
-      treeCheckable: PropTypes.oneOfType([PropTypes.any, PropTypes.object, PropTypes.bool]),
+      treeCheckable: PropTypes.any,
       // treeCheckable: PropTypes.any,
-      treeCheckStrictly: PropTypes.bool,
-      treeIcon: PropTypes.bool,
-      treeLine: PropTypes.bool,
-      treeDefaultExpandAll: PropTypes.bool,
+      treeCheckStrictly: PropTypes.looseBool,
+      treeIcon: PropTypes.looseBool,
+      treeLine: PropTypes.looseBool,
+      treeDefaultExpandAll: PropTypes.looseBool,
       treeDefaultExpandedKeys: PropTypes.array,
       treeExpandedKeys: PropTypes.array,
       loadData: PropTypes.func,
-      filterTreeNode: PropTypes.oneOfType([PropTypes.func, PropTypes.bool]),
+      filterTreeNode: withUndefined(PropTypes.oneOfType([PropTypes.func, PropTypes.looseBool])),
 
       notFoundContent: PropTypes.any,
       getPopupContainer: PropTypes.func,
@@ -127,7 +129,7 @@ const Select = {
       // onDropdownVisibleChange: PropTypes.func,
 
       // onTreeExpand: PropTypes.func,
-      allowClear: PropTypes.bool,
+      allowClear: PropTypes.looseBool,
       transitionName: PropTypes.string,
       animation: PropTypes.string,
       choiceTransitionName: PropTypes.string,
@@ -1103,7 +1105,7 @@ const Select = {
     };
     return <SelectTrigger {...selectTriggerProps}>{$selector}</SelectTrigger>;
   },
-};
+});
 
 Select.TreeNode = SelectNode;
 Select.SHOW_ALL = SHOW_ALL;

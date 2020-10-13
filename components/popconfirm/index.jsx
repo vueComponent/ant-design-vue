@@ -24,7 +24,7 @@ const Popconfirm = {
     title: PropTypes.any,
     trigger: tooltipProps.trigger.def('click'),
     okType: btnProps.type.def('primary'),
-    disabled: PropTypes.bool.def(false),
+    disabled: PropTypes.looseBool.def(false),
     okText: PropTypes.any,
     cancelText: PropTypes.any,
     icon: PropTypes.any,

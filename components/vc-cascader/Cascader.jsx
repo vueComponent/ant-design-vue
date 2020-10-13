@@ -8,6 +8,7 @@ import shallowEqualArrays from 'shallow-equal/arrays';
 import { hasProp, getEvents } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
+import { defineComponent } from 'vue';
 
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {
@@ -44,7 +45,7 @@ const BUILT_IN_PLACEMENTS = {
   },
 };
 
-export default {
+export default defineComponent({
   name: 'Cascader',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -58,8 +59,8 @@ export default {
     options: PropTypes.array,
     // onChange: PropTypes.func,
     // onPopupVisibleChange: PropTypes.func,
-    popupVisible: PropTypes.bool,
-    disabled: PropTypes.bool.def(false),
+    popupVisible: PropTypes.looseBool,
+    disabled: PropTypes.looseBool.def(false),
     transitionName: PropTypes.string.def(''),
     popupClassName: PropTypes.string.def(''),
     popupStyle: PropTypes.object.def(() => ({})),
@@ -68,7 +69,7 @@ export default {
     dropdownMenuColumnStyle: PropTypes.object,
     builtinPlacements: PropTypes.object.def(BUILT_IN_PLACEMENTS),
     loadData: PropTypes.func,
-    changeOnSelect: PropTypes.bool,
+    changeOnSelect: PropTypes.looseBool,
     // onKeyDown: PropTypes.func,
     expandTrigger: PropTypes.string.def('click'),
     fieldNames: PropTypes.object.def(() => ({
@@ -384,4 +385,4 @@ export default {
       </Trigger>
     );
   },
-};
+});

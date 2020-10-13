@@ -17,7 +17,7 @@ import {
 import classNames from '../../_util/classNames';
 import pickAttrs from '../../_util/pickAttrs';
 import PropTypes from '../../_util/vue-types';
-import getTransitionProps from '../../_util/getTransitionProps';
+import getTransitionGroupProps from '../../_util/getTransitionGroupProps';
 
 const REST_TAG_KEY = '__RC_SELECT_MAX_REST_COUNT__';
 
@@ -43,19 +43,19 @@ const props = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
   values: PropTypes.array,
-  open: { type: Boolean, default: undefined },
+  open: PropTypes.looseBool,
   searchValue: PropTypes.string,
   inputRef: PropTypes.any,
   placeholder: PropTypes.any,
-  disabled: { type: Boolean, default: undefined },
+  disabled: PropTypes.looseBool,
   mode: PropTypes.string,
-  showSearch: { type: Boolean, default: undefined },
-  autofocus: { type: Boolean, default: undefined },
+  showSearch: PropTypes.looseBool,
+  autofocus: PropTypes.looseBool,
   autocomplete: PropTypes.string,
   accessibilityIndex: PropTypes.number,
   tabindex: PropTypes.number,
 
-  removeIcon: { type: Boolean, default: undefined },
+  removeIcon: PropTypes.looseBool,
   choiceTransitionName: PropTypes.string,
 
   maxTagCount: PropTypes.number,
@@ -158,12 +158,12 @@ const SelectSelector = defineComponent<SelectorProps>({
               : maxTagPlaceholder,
         });
       }
-      const transitionProps = getTransitionProps(choiceTransitionName, {
+      const transitionProps = getTransitionGroupProps(choiceTransitionName, {
         appear: motionAppear,
       });
       selectionNode.value = (
         <TransitionGroup {...transitionProps}>
-          {displayValues.map(
+          {...displayValues.map(
             ({ key, label, value, disabled: itemDisabled, class: className, style }) => {
               const mergedKey = key || value;
               const closable = key !== REST_TAG_KEY && !itemDisabled;
@@ -180,7 +180,7 @@ const SelectSelector = defineComponent<SelectorProps>({
                 <span
                   key={mergedKey as string}
                   onMousedown={onMousedown}
-                  class={className}
+                  class={classNames(className)}
                   style={style}
                 >
                   {tagRender({
@@ -214,7 +214,6 @@ const SelectSelector = defineComponent<SelectorProps>({
               );
             },
           )}
-          {}
         </TransitionGroup>
       );
     });
@@ -238,6 +237,7 @@ const SelectSelector = defineComponent<SelectorProps>({
         onInputMouseDown,
         onInputCompositionStart,
         onInputCompositionEnd,
+        choiceTransitionName,
       } = props;
       return (
         <>

@@ -25,10 +25,10 @@ export default {
     colorRounded: PropTypes.number, //颜色数值保留几位小数
     size: PropTypes.oneOf(['default', 'small', 'large']).def('default'), //尺寸
     getPopupContainer: PropTypes.func, //指定渲染容器
-    disabled: PropTypes.bool.def(false), //是否禁用
+    disabled: PropTypes.looseBool.def(false), //是否禁用
     format: PropTypes.string, //颜色格式设置
-    alpha: PropTypes.bool.def(false), //是否开启透明通道
-    hue: PropTypes.bool.def(true), //是否开启色彩预选
+    alpha: PropTypes.looseBool.def(false), //是否开启透明通道
+    hue: PropTypes.looseBool.def(true), //是否开启色彩预选
   },
   inject: {
     configProvider: { default: () => defaultConfigProvider },

@@ -10,7 +10,7 @@ import { inject } from 'vue';
 export const ListItemProps = {
   prefixCls: PropTypes.string,
   extra: PropTypes.any,
-  actions: PropTypes.arrayOf(PropTypes.any),
+  actions: PropTypes.array,
   grid: ListGridType,
 };
 

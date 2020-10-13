@@ -15,21 +15,21 @@ import { defaultConfigProvider } from '../config-provider';
 const TreeNode = VcTree.TreeNode;
 function TreeProps() {
   return {
-    showLine: PropTypes.bool,
+    showLine: PropTypes.looseBool,
     /** 是否支持多选 */
-    multiple: PropTypes.bool,
+    multiple: PropTypes.looseBool,
     /** 是否自动展开父节点 */
-    autoExpandParent: PropTypes.bool,
+    autoExpandParent: PropTypes.looseBool,
     /** checkable状态下节点选择完全受控（父子节点选中状态不再关联）*/
-    checkStrictly: PropTypes.bool,
+    checkStrictly: PropTypes.looseBool,
     /** 是否支持选中 */
-    checkable: PropTypes.bool,
+    checkable: PropTypes.looseBool,
     /** 是否禁用树 */
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     /** 默认展开所有树节点 */
-    defaultExpandAll: PropTypes.bool,
+    defaultExpandAll: PropTypes.looseBool,
     /** 默认展开对应树节点 */
-    defaultExpandParent: PropTypes.bool,
+    defaultExpandParent: PropTypes.looseBool,
     /** 默认展开指定的树节点 */
     defaultExpandedKeys: PropTypes.array,
     /** （受控）展开指定的树节点 */
@@ -48,7 +48,7 @@ function TreeProps() {
     selectedKeys: PropTypes.array,
     /** 默认选中的树节点 */
     defaultSelectedKeys: PropTypes.array,
-    selectable: PropTypes.bool,
+    selectable: PropTypes.looseBool,
 
     /** filter some AntTreeNodes as you need. it should return true */
     filterAntTreeNode: PropTypes.func,
@@ -59,7 +59,7 @@ function TreeProps() {
     /** 响应右键点击 */
     // onRightClick: (options: AntTreeNodeMouseEvent) => void,
     /** 设置节点可拖拽（IE>8）*/
-    draggable: PropTypes.bool,
+    draggable: PropTypes.looseBool,
     // /** 开始拖拽时调用 */
     // onDragStart: (options: AntTreeNodeMouseEvent) => void,
     // /** dragenter 触发时调用 */
@@ -70,7 +70,7 @@ function TreeProps() {
     // onDragLeave: (options: AntTreeNodeMouseEvent) => void,
     // /** drop 触发时调用 */
     // onDrop: (options: AntTreeNodeMouseEvent) => void,
-    showIcon: PropTypes.bool,
+    showIcon: PropTypes.looseBool,
     icon: PropTypes.func,
     switcherIcon: PropTypes.any,
     prefixCls: PropTypes.string,
@@ -82,7 +82,7 @@ function TreeProps() {
      * 替换treeNode中 title,key,children字段为treeData中对应的字段
      */
     replaceFields: PropTypes.object,
-    blockNode: PropTypes.bool,
+    blockNode: PropTypes.looseBool,
     /** 展开/收起节点时触发 */
     onExpand: PropTypes.func,
     /** 点击复选框触发 */

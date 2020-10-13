@@ -49,14 +49,14 @@ const OptionListProps = {
   height: PropTypes.number,
   itemHeight: PropTypes.number,
   values: PropTypes.any,
-  multiple: { type: Boolean, default: undefined },
-  open: { type: Boolean, default: undefined },
-  defaultActiveFirstOption: { type: Boolean, default: undefined },
+  multiple: PropTypes.looseBool,
+  open: PropTypes.looseBool,
+  defaultActiveFirstOption: PropTypes.looseBool,
   notFoundContent: PropTypes.any,
   menuItemSelectedIcon: PropTypes.any,
-  childrenAsData: { type: Boolean, default: undefined },
+  childrenAsData: PropTypes.looseBool,
   searchValue: PropTypes.string,
-  virtual: { type: Boolean, default: undefined },
+  virtual: PropTypes.looseBool,
 
   onSelect: PropTypes.func,
   onToggleOpen: PropTypes.func,
@@ -72,7 +72,7 @@ const OptionListProps = {
  * Using virtual list of option display.
  * Will fallback to dom if use customize render.
  */
-const OptionList = defineComponent<OptionListProps>({
+const OptionList = defineComponent<OptionListProps, { state: any }>({
   name: 'OptionList',
   inheritAttrs: false,
   setup(props) {
@@ -251,7 +251,14 @@ const OptionList = defineComponent<OptionListProps>({
     };
   },
   render() {
-    const { renderItem, listRef, onListMouseDown, itemPrefixCls, setActive, onSelectValue } = this;
+    const {
+      renderItem,
+      listRef,
+      onListMouseDown,
+      itemPrefixCls,
+      setActive,
+      onSelectValue,
+    } = this as any;
     const {
       id,
       childrenAsData,
@@ -264,7 +271,7 @@ const OptionList = defineComponent<OptionListProps>({
       virtual,
       onScroll,
       onMouseenter,
-    } = this.$props;
+    } = this.$props as OptionListProps;
     const { activeIndex } = this.state;
     // ========================== Render ==========================
     if (flattenOptions.length === 0) {

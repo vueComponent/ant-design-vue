@@ -12,12 +12,12 @@ export const RateProps = {
   count: PropTypes.number,
   value: PropTypes.value,
   defaultValue: PropTypes.value,
-  allowHalf: PropTypes.bool,
-  allowClear: PropTypes.bool,
+  allowHalf: PropTypes.looseBool,
+  allowClear: PropTypes.looseBool,
   tooltips: PropTypes.arrayOf(PropTypes.string),
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   character: PropTypes.any,
-  autofocus: PropTypes.bool,
+  autofocus: PropTypes.looseBool,
 };
 
 const Rate = {

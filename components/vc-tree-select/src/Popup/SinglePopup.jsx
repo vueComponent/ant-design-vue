@@ -10,9 +10,9 @@ const SinglePopup = {
     ...BasePopup.props,
     ...SearchInput.props,
     searchValue: PropTypes.string,
-    showSearch: PropTypes.bool,
+    showSearch: PropTypes.looseBool,
     dropdownPrefixCls: PropTypes.string,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     searchPlaceholder: PropTypes.string,
   },
   created() {

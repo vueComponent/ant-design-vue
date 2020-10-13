@@ -7,13 +7,14 @@ import CalendarFooter from './calendar/CalendarFooter';
 import CalendarMixin from './mixin/CalendarMixin';
 import CommonMixin from './mixin/CommonMixin';
 import enUs from './locale/en_US';
-const MonthCalendar = {
+import { defineComponent } from 'vue';
+const MonthCalendar = defineComponent({
   name: 'MonthCalendar',
   inheritAttrs: false,
   props: {
     locale: PropTypes.object.def(enUs),
     format: PropTypes.string,
-    visible: PropTypes.bool.def(true),
+    visible: PropTypes.looseBool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     monthCellRender: PropTypes.func,
     value: PropTypes.object,
@@ -120,6 +121,6 @@ const MonthCalendar = {
       children,
     });
   },
-};
+});
 
 export default MonthCalendar;

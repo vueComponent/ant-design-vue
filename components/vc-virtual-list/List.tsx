@@ -67,7 +67,7 @@ const List = defineComponent({
     height: PropTypes.number,
     itemHeight: PropTypes.number,
     /** If not match virtual scroll condition, Set List still use height of container. */
-    fullHeight: PropTypes.bool,
+    fullHeight: PropTypes.looseBool,
     itemKey: {
       type: [String, Number, Function] as PropType<Key | ((item: object) => Key)>,
       required: true,
@@ -76,7 +76,7 @@ const List = defineComponent({
       type: [String, Object] as PropType<string | Component>,
     },
     /** Set `false` will always use real scroll instead of virtual one */
-    virtual: PropTypes.bool,
+    virtual: PropTypes.looseBool,
     children: PropTypes.func,
     onScroll: PropTypes.func,
     onMousedown: PropTypes.func,

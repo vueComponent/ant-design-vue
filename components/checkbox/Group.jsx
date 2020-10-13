@@ -13,7 +13,7 @@ export default {
     defaultValue: PropTypes.array,
     value: PropTypes.array,
     options: PropTypes.array.def([]),
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     onChange: PropTypes.func,
   },
 

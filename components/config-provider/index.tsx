@@ -1,6 +1,5 @@
 import { reactive, provide, VNodeTypes, PropType, defineComponent, App } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponentFromSetup } from '../_util/props-util';
 import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
 import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
 
@@ -90,7 +89,7 @@ const ConfigProvider = defineComponent({
     csp: {
       type: Object as PropType<CSPConfig>,
     },
-    autoInsertSpaceInButton: PropTypes.bool,
+    autoInsertSpaceInButton: PropTypes.looseBool,
     locale: {
       type: Object as PropType<Locale>,
     },
@@ -106,8 +105,8 @@ const ConfigProvider = defineComponent({
     space: {
       type: [String, Number] as PropType<SizeType | number>,
     },
-    virtual: PropTypes.bool,
-    dropdownMatchSelectWidth: PropTypes.bool,
+    virtual: PropTypes.looseBool,
+    dropdownMatchSelectWidth: PropTypes.looseBool,
   },
   setup(props, { slots }) {
     const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
@@ -117,7 +116,8 @@ const ConfigProvider = defineComponent({
     };
 
     const renderEmptyComponent = (name?: string) => {
-      const renderEmpty = (getComponentFromSetup(props, slots, 'renderEmpty') ||
+      const renderEmpty = (props.renderEmpty ||
+        slots.renderEmpty ||
         defaultRenderEmpty) as RenderEmptyHandler;
       return renderEmpty(name);
     };
@@ -154,7 +154,7 @@ const ConfigProvider = defineComponent({
   },
 });
 
-export const defaultConfigProvider = {
+export const defaultConfigProvider: ConfigConsumerProps = {
   getPrefixCls: (suffixCls: string, customizePrefixCls?: string) => {
     if (customizePrefixCls) return customizePrefixCls;
     return `ant-${suffixCls}`;

@@ -5,5 +5,5 @@ export default () => ({
   target: PropTypes.func,
   prefixCls: PropTypes.string,
   onClick: PropTypes.func,
-  // visible: PropTypes.bool, // Only for test. Don't use it.
+  // visible: PropTypes.looseBool, // Only for test. Don't use it.
 });

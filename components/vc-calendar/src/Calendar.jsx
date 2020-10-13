@@ -13,6 +13,7 @@ import DateInput from './date/DateInput';
 import enUs from './locale/en_US';
 import { getTimeConfig, getTodayTime, syncTime } from './util';
 import { goStartMonth, goEndMonth, goTime } from './util/toTime';
+import { defineComponent } from 'vue';
 
 const getMomentObjectIfValid = date => {
   if (moment.isMoment(date) && date.isValid()) {
@@ -21,7 +22,7 @@ const getMomentObjectIfValid = date => {
   return false;
 };
 
-const Calendar = {
+const Calendar = defineComponent({
   name: 'Calendar',
   inheritAttrs: false,
   props: {
@@ -31,7 +32,7 @@ const Calendar = {
       PropTypes.arrayOf(PropTypes.string),
       PropTypes.func,
     ]),
-    visible: PropTypes.bool.def(true),
+    visible: PropTypes.looseBool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     // prefixCls: PropTypes.string,
     defaultValue: PropTypes.object,
@@ -40,10 +41,10 @@ const Calendar = {
     defaultSelectedValue: PropTypes.object,
     mode: PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade']),
     // locale: PropTypes.object,
-    showDateInput: PropTypes.bool.def(true),
-    showWeekNumber: PropTypes.bool,
-    showToday: PropTypes.bool.def(true),
-    showOk: PropTypes.bool,
+    showDateInput: PropTypes.looseBool.def(true),
+    showWeekNumber: PropTypes.looseBool,
+    showToday: PropTypes.looseBool.def(true),
+    showOk: PropTypes.looseBool,
     // onSelect: PropTypes.func,
     // onOk: PropTypes.func,
     // onKeyDown: PropTypes.func,
@@ -58,9 +59,9 @@ const Calendar = {
     renderFooter: PropTypes.func.def(() => null),
     renderSidebar: PropTypes.func.def(() => null),
     clearIcon: PropTypes.any,
-    focusablePanel: PropTypes.bool.def(true),
+    focusablePanel: PropTypes.looseBool.def(true),
     inputMode: PropTypes.string,
-    inputReadOnly: PropTypes.bool,
+    inputReadOnly: PropTypes.looseBool,
     monthCellRender: PropTypes.func,
     monthCellContentRender: PropTypes.func,
   },
@@ -383,6 +384,6 @@ const Calendar = {
       class: props.showWeekNumber ? `${prefixCls}-week-number` : '',
     });
   },
-};
+});
 
 export default Calendar;

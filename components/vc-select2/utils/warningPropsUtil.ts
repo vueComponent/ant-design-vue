@@ -1,7 +1,7 @@
 import warning, { noteOnce } from '../../vc-util/warning';
 import { SelectProps } from '..';
 import { convertChildrenToData } from './legacyUtil';
-import { OptionData, OptionGroupData } from '../interface';
+import { OptionData } from '../interface';
 import { toArray } from './commonUtil';
 import { RawValueType, LabelValueType } from '../interface/generator';
 import { isValidElement } from '../../_util/props-util';
@@ -32,8 +32,7 @@ function warningProps(props: SelectProps) {
 
   // `tags` should not set option as disabled
   warning(
-    mode !== 'tags' ||
-      mergedOptions.every((opt: { disabled?: boolean } & OptionGroupData) => !opt.disabled),
+    mode !== 'tags' || mergedOptions.every((opt: any) => !opt.disabled),
     'Please avoid setting option to disabled in tags mode since user can always type text as tag.',
   );
 
@@ -102,44 +101,38 @@ function warningProps(props: SelectProps) {
   // Syntactic sugar should use correct children type
   if (children) {
     let invalidateChildType = null;
-    children.some(
-      (
-        node: VNode & {
-          children: { default?: () => any };
-        },
-      ) => {
-        if (!isValidElement(node) || !node.type) {
-          return false;
-        }
+    children.some((node: any) => {
+      if (!isValidElement(node) || !node.type) {
+        return false;
+      }
 
-        const { type } = node as { type: { isSelectOption?: boolean; isSelectOptGroup?: boolean } };
+      const { type } = node as { type: { isSelectOption?: boolean; isSelectOptGroup?: boolean } };
 
-        if (type.isSelectOption) {
-          return false;
-        }
-        if (type.isSelectOptGroup) {
-          const childs = node.children?.default() || [];
-          const allChildrenValid = childs.every((subNode: VNode) => {
-            if (
-              !isValidElement(subNode) ||
-              !node.type ||
-              (subNode.type as { isSelectOption?: boolean }).isSelectOption
-            ) {
-              return true;
-            }
-            invalidateChildType = subNode.type;
-            return false;
-          });
-
-          if (allChildrenValid) {
-            return false;
+      if (type.isSelectOption) {
+        return false;
+      }
+      if (type.isSelectOptGroup) {
+        const childs = node.children?.default() || [];
+        const allChildrenValid = childs.every((subNode: VNode) => {
+          if (
+            !isValidElement(subNode) ||
+            !node.type ||
+            (subNode.type as { isSelectOption?: boolean }).isSelectOption
+          ) {
+            return true;
           }
-          return true;
+          invalidateChildType = subNode.type;
+          return false;
+        });
+
+        if (allChildrenValid) {
+          return false;
         }
-        invalidateChildType = type;
         return true;
-      },
-    );
+      }
+      invalidateChildType = type;
+      return true;
+    });
 
     if (invalidateChildType) {
       warning(

@@ -1,4 +1,4 @@
-import { Transition, inject, cloneVNode } from 'vue';
+import { Transition, inject, cloneVNode, defineComponent, App } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -37,29 +37,30 @@ export const AlertProps = {
    */
   type: PropTypes.oneOf(['success', 'info', 'warning', 'error']),
   /** Whether Alert can be closed */
-  closable: PropTypes.bool,
+  closable: PropTypes.looseBool,
   /** Close text to show */
-  closeText: PropTypes.any,
+  closeText: PropTypes.VNodeChild,
   /** Content of Alert */
-  message: PropTypes.any,
+  message: PropTypes.VNodeChild,
   /** Additional content of Alert */
-  description: PropTypes.any,
+  description: PropTypes.VNodeChild,
   /** Callback when close Alert */
   // onClose?: React.MouseEventHandler<HTMLAnchorElement>;
   /** Trigger when animation ending of Alert */
   afterClose: PropTypes.func.def(noop),
   /** Whether to show icon */
-  showIcon: PropTypes.bool,
+  showIcon: PropTypes.looseBool,
   prefixCls: PropTypes.string,
-  banner: PropTypes.bool,
-  icon: PropTypes.any,
-  onClose: PropTypes.func,
+  banner: PropTypes.looseBool,
+  icon: PropTypes.VNodeChild,
+  onClose: PropTypes.VNodeChild,
 };
 
-const Alert = {
+const Alert = defineComponent({
   name: 'AAlert',
   props: AlertProps,
   mixins: [BaseMixin],
+  emits: ['close'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -72,7 +73,7 @@ const Alert = {
     };
   },
   methods: {
-    handleClose(e) {
+    handleClose(e: Event) {
       e.preventDefault();
       const dom = findDOMNode(this);
       dom.style.height = `${dom.offsetHeight}px`;
@@ -156,10 +157,10 @@ const Alert = {
       </Transition>
     );
   },
-};
+});
 
 /* istanbul ignore next */
-Alert.install = function(app) {
+Alert.install = function(app: App) {
   app.component(Alert.name, Alert);
 };
 

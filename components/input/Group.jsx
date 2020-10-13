@@ -12,7 +12,7 @@ export default {
         return ['small', 'large', 'default'].includes(value);
       },
     },
-    compact: Boolean,
+    compact: PropTypes.looseBool,
   },
   setup() {
     return {

@@ -1,15 +1,21 @@
-import { inject } from 'vue';
+import { defineComponent, inject, PropType, VNodeTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 
-export default {
+export default defineComponent({
   name: 'ACardMeta',
   props: {
     prefixCls: PropTypes.string,
-    title: PropTypes.any,
-    description: PropTypes.any,
-    avatar: PropTypes.any,
+    title: {
+      type: Object as PropType<VNodeTypes>,
+    },
+    description: {
+      type: Object as PropType<VNodeTypes>,
+    },
+    avatar: {
+      type: Object as PropType<VNodeTypes>,
+    },
   },
   setup() {
     return {
@@ -19,7 +25,7 @@ export default {
   render() {
     const { prefixCls: customizePrefixCls } = this.$props;
 
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
     const classString = {
@@ -49,4 +55,4 @@ export default {
       </div>
     );
   },
-};
+});

@@ -52,7 +52,7 @@ const Mentions = {
   getMentions,
   props: {
     ...mentionsProps,
-    loading: PropTypes.bool,
+    loading: PropTypes.looseBool,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
     onSelect: PropTypes.func,

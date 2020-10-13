@@ -1,7 +1,7 @@
-import { provide, inject } from 'vue';
+import { provide, inject, defineComponent, App } from 'vue';
 import warning from '../_util/warning';
 import omit from 'omit.js';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import { Select as VcSelect, Option, OptGroup } from '../vc-select';
 import { defaultConfigProvider } from '../config-provider';
 import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
@@ -16,30 +16,30 @@ const AbstractSelectProps = () => ({
   prefixCls: PropTypes.string,
   size: PropTypes.oneOf(['small', 'large', 'default']),
   showAction: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(String)]),
-  notFoundContent: PropTypes.any,
+  notFoundContent: PropTypes.VNodeChild,
   transitionName: PropTypes.string,
   choiceTransitionName: PropTypes.string,
-  showSearch: PropTypes.bool,
-  allowClear: PropTypes.bool,
-  disabled: PropTypes.bool,
+  showSearch: PropTypes.looseBool,
+  allowClear: PropTypes.looseBool,
+  disabled: PropTypes.looseBool,
   tabindex: PropTypes.number,
-  placeholder: PropTypes.any,
-  defaultActiveFirstOption: PropTypes.bool,
+  placeholder: PropTypes.VNodeChild,
+  defaultActiveFirstOption: PropTypes.looseBool,
   dropdownClassName: PropTypes.string,
-  dropdownStyle: PropTypes.any,
-  dropdownMenuStyle: PropTypes.any,
-  dropdownMatchSelectWidth: PropTypes.bool,
+  dropdownStyle: PropTypes.style,
+  dropdownMenuStyle: PropTypes.style,
+  dropdownMatchSelectWidth: PropTypes.looseBool,
   // onSearch: (value: string) => any,
-  filterOption: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
-  autofocus: PropTypes.bool,
-  backfill: PropTypes.bool,
-  showArrow: PropTypes.bool,
+  filterOption: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
+  autofocus: PropTypes.looseBool,
+  backfill: PropTypes.looseBool,
+  showArrow: PropTypes.looseBool,
   getPopupContainer: PropTypes.func,
-  open: PropTypes.bool,
-  defaultOpen: PropTypes.bool,
-  autoClearSearchValue: PropTypes.bool,
+  open: PropTypes.looseBool,
+  defaultOpen: PropTypes.looseBool,
+  autoClearSearchValue: PropTypes.looseBool,
   dropdownRender: PropTypes.func,
-  loading: PropTypes.bool,
+  loading: PropTypes.looseBool,
 });
 const Value = PropTypes.shape({
   key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -63,9 +63,9 @@ const SelectProps = {
   maxTagCount: PropTypes.number,
   maxTagPlaceholder: PropTypes.any,
   maxTagTextLength: PropTypes.number,
-  dropdownMatchSelectWidth: PropTypes.bool,
+  dropdownMatchSelectWidth: PropTypes.looseBool,
   optionFilterProp: PropTypes.string,
-  labelInValue: PropTypes.boolean,
+  labelInValue: PropTypes.looseBool,
   getPopupContainer: PropTypes.func,
   tokenSeparators: PropTypes.arrayOf(PropTypes.string),
   getInputElement: PropTypes.func,
@@ -79,9 +79,9 @@ const SelectProps = {
 const SelectPropTypes = {
   prefixCls: PropTypes.string,
   size: PropTypes.oneOf(['default', 'large', 'small']),
-  // combobox: PropTypes.bool,
+  // combobox: PropTypes.looseBool,
   notFoundContent: PropTypes.any,
-  showSearch: PropTypes.bool,
+  showSearch: PropTypes.looseBool,
   optionLabelProp: PropTypes.string,
   transitionName: PropTypes.string,
   choiceTransitionName: PropTypes.string,
@@ -89,14 +89,14 @@ const SelectPropTypes = {
 
 export { AbstractSelectProps, SelectValue, SelectProps };
 const SECRET_COMBOBOX_MODE_DO_NOT_USE = 'SECRET_COMBOBOX_MODE_DO_NOT_USE';
-const Select = {
+const Select = defineComponent({
   SECRET_COMBOBOX_MODE_DO_NOT_USE,
   Option: { ...Option, name: 'ASelectOption' },
   OptGroup: { ...OptGroup, name: 'ASelectOptGroup' },
   name: 'ASelect',
   props: {
     ...SelectProps,
-    showSearch: PropTypes.bool.def(false),
+    showSearch: PropTypes.looseBool.def(false),
     transitionName: PropTypes.string.def('slide-up'),
     choiceTransitionName: PropTypes.string.def('zoom'),
   },
@@ -104,6 +104,7 @@ const Select = {
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      popupRef: null,
     };
   },
   created() {
@@ -117,7 +118,7 @@ const Select = {
     );
   },
   methods: {
-    getNotFoundContent(renderEmpty) {
+    getNotFoundContent(renderEmpty: any) {
       const notFoundContent = getComponent(this, 'notFoundContent');
       if (notFoundContent !== undefined) {
         return notFoundContent;
@@ -131,10 +132,10 @@ const Select = {
       this.popupRef = ref;
     },
     focus() {
-      this.$refs.vcSelect.focus();
+      (this.$refs.vcSelect as any).focus();
     },
     blur() {
-      this.$refs.vcSelect.blur();
+      (this.$refs.vcSelect as any).blur();
     },
 
     isCombobox() {
@@ -167,7 +168,7 @@ const Select = {
       showArrow,
       ...restProps
     } = getOptionProps(this);
-    const { class: className } = this.$attrs;
+    const { class: className } = this.$attrs as any;
 
     const getPrefixCls = this.configProvider.getPrefixCls;
     const renderEmpty = this.configProvider.renderEmpty;
@@ -182,7 +183,7 @@ const Select = {
     menuItemSelectedIcon = Array.isArray(menuItemSelectedIcon)
       ? menuItemSelectedIcon[0]
       : menuItemSelectedIcon;
-    const rest = omit(restProps, [
+    const rest = omit(restProps as any, [
       'inputIcon',
       'removeIcon',
       'clearIcon',
@@ -254,10 +255,10 @@ const Select = {
     };
     return <VcSelect {...selectProps} __propsSymbol__={[]} />;
   },
-};
+});
 
 /* istanbul ignore next */
-Select.install = function(app) {
+Select.install = function(app: App) {
   app.component(Select.name, Select);
   app.component(Select.Option.name, Select.Option);
   app.component(Select.OptGroup.name, Select.OptGroup);

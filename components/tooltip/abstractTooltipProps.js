@@ -2,8 +2,8 @@ import PropTypes from '../_util/vue-types';
 const triggerType = PropTypes.oneOf(['hover', 'focus', 'click', 'contextmenu']);
 export default () => ({
   trigger: PropTypes.oneOfType([triggerType, PropTypes.arrayOf(triggerType)]).def('hover'),
-  visible: PropTypes.bool,
-  defaultVisible: PropTypes.bool,
+  visible: PropTypes.looseBool,
+  defaultVisible: PropTypes.looseBool,
   placement: PropTypes.oneOf([
     'top',
     'left',
@@ -26,9 +26,9 @@ export default () => ({
   mouseEnterDelay: PropTypes.number.def(0.1),
   mouseLeaveDelay: PropTypes.number.def(0.1),
   getPopupContainer: PropTypes.func,
-  arrowPointAtCenter: PropTypes.bool.def(false),
-  autoAdjustOverflow: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).def(true),
-  destroyTooltipOnHide: PropTypes.bool.def(false),
+  arrowPointAtCenter: PropTypes.looseBool.def(false),
+  autoAdjustOverflow: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]).def(true),
+  destroyTooltipOnHide: PropTypes.looseBool.def(false),
   align: PropTypes.object.def(() => ({})),
   builtinPlacements: PropTypes.object,
   children: PropTypes.any,

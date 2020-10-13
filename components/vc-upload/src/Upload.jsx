@@ -3,7 +3,7 @@ import { initDefaultProps, getSlot } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import AjaxUpload from './AjaxUploader';
 import IframeUpload from './IframeUploader';
-import { nextTick } from 'vue';
+import { defineComponent, nextTick } from 'vue';
 
 function empty() {}
 
@@ -12,8 +12,8 @@ const uploadProps = {
   prefixCls: PropTypes.string,
   action: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   name: PropTypes.string,
-  multipart: PropTypes.bool,
-  directory: PropTypes.bool,
+  multipart: PropTypes.looseBool,
+  directory: PropTypes.looseBool,
   onError: PropTypes.func,
   onSuccess: PropTypes.func,
   onProgress: PropTypes.func,
@@ -21,16 +21,16 @@ const uploadProps = {
   data: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   headers: PropTypes.object,
   accept: PropTypes.string,
-  multiple: PropTypes.bool,
-  disabled: PropTypes.bool,
+  multiple: PropTypes.looseBool,
+  disabled: PropTypes.looseBool,
   beforeUpload: PropTypes.func,
   customRequest: PropTypes.func,
   onReady: PropTypes.func,
-  withCredentials: PropTypes.bool,
-  supportServerRender: PropTypes.bool,
-  openFileDialogOnClick: PropTypes.bool,
+  withCredentials: PropTypes.looseBool,
+  supportServerRender: PropTypes.looseBool,
+  openFileDialogOnClick: PropTypes.looseBool,
 };
-export default {
+export default defineComponent({
   name: 'Upload',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -93,4 +93,4 @@ export default {
     const ComponentUploader = this.getComponent();
     return <ComponentUploader {...componentProps}>{getSlot(this)}</ComponentUploader>;
   },
-};
+});

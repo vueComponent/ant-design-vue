@@ -12,11 +12,11 @@ import { inject, Transition } from 'vue';
 const BadgeProps = {
   /** Number to show in badge */
   count: PropTypes.any,
-  showZero: PropTypes.bool,
+  showZero: PropTypes.looseBool,
   /** Max count to show */
   overflowCount: PropTypes.number,
   /** whether to show red dot without number */
-  dot: PropTypes.bool,
+  dot: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   scrollNumberPrefixCls: PropTypes.string,
   status: PropTypes.oneOf(['success', 'processing', 'default', 'error', 'warning']),

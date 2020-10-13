@@ -8,7 +8,7 @@
 //     title: PropTypes.any,
 //     dataIndex: PropTypes.string,
 //     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-//     ellipsis: PropTypes.bool,
+//     ellipsis: PropTypes.looseBool,
 //     fixed: PropTypes.oneOf([true, 'left', 'right']),
 //     align: PropTypes.oneOf(['left', 'center', 'right']),
 //     customRender: PropTypes.func,

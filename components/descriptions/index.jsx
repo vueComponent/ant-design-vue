@@ -39,12 +39,12 @@ export const DescriptionsItem = {
 
 export const DescriptionsProps = {
   prefixCls: PropTypes.string,
-  bordered: PropTypes.bool,
+  bordered: PropTypes.looseBool,
   size: PropTypes.oneOf(['default', 'middle', 'small']).def('default'),
   title: PropTypes.any,
   column: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
   layout: PropTypes.oneOf(['horizontal', 'vertical']),
-  colon: PropTypes.bool,
+  colon: PropTypes.looseBool,
 };
 
 /**

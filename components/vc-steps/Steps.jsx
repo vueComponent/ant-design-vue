@@ -1,11 +1,12 @@
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import debounce from 'lodash-es/debounce';
 import isFlexSupported from '../_util/isFlexSupported';
 import { getSlot, getPropsData } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'Steps',
   mixins: [BaseMixin],
   props: {
@@ -16,14 +17,14 @@ export default {
     labelPlacement: PropTypes.string.def('horizontal'),
     status: PropTypes.string.def('process'),
     size: PropTypes.string.def(''),
-    progressDot: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    progressDot: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
     initial: PropTypes.number.def(0),
     current: PropTypes.number.def(0),
     icons: PropTypes.shape({
       finish: PropTypes.any,
       error: PropTypes.any,
     }).loose,
-    canClick: PropTypes.bool,
+    canClick: PropTypes.looseBool,
   },
   data() {
     this.calcStepOffsetWidth = debounce(this.calcStepOffsetWidth, 150);
@@ -166,4 +167,4 @@ export default {
       </div>
     );
   },
-};
+});

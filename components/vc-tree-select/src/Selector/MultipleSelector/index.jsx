@@ -23,9 +23,9 @@ const MultipleSelector = {
     ...selectorPropTypes(),
     ...SearchInput.props,
     selectorValueList: PropTypes.array,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     searchValue: PropTypes.string,
-    labelInValue: PropTypes.bool,
+    labelInValue: PropTypes.looseBool,
     maxTagCount: PropTypes.number,
     maxTagPlaceholder: PropTypes.any,
 

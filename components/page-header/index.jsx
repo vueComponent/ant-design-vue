@@ -18,7 +18,7 @@ export const PageHeaderProps = {
   footer: PropTypes.any,
   extra: PropTypes.any,
   avatar: PropTypes.object,
-  ghost: PropTypes.bool,
+  ghost: PropTypes.looseBool,
   onBack: PropTypes.func,
 };
 

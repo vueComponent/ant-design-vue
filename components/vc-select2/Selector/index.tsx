@@ -14,9 +14,9 @@ import SingleSelector from './SingleSelector';
 import { LabelValueType, RawValueType, CustomTagProps } from '../interface/generator';
 import { RenderNode, Mode } from '../interface';
 import useLock from '../hooks/useLock';
-import { defineComponent, VNode, VNodeChild } from 'vue';
+import { defineComponent, VNodeChild } from 'vue';
 import createRef, { RefObject } from '../../_util/createRef';
-import PropTypes from '../../_util/vue-types copy';
+import PropTypes from '../../_util/vue-types';
 
 export interface InnerSelectorProps {
   prefixCls: string;
@@ -65,7 +65,7 @@ export interface SelectorProps {
   maxTagCount?: number;
   maxTagTextLength?: number;
   maxTagPlaceholder?: VNodeChild;
-  tagRender?: (props: CustomTagProps) => VNode;
+  tagRender?: (props: CustomTagProps) => VNodeChild;
 
   /** Check if `tokenSeparators` contains `\n` or `\r\n` */
   tokenWithEnter?: boolean;
@@ -225,7 +225,7 @@ const Selector = defineComponent<SelectorProps>({
       onInputChange,
       onInputCompositionStart,
       onInputCompositionEnd,
-    } = this;
+    } = this as any;
     const sharedProps = {
       inputRef,
       onInputKeyDown: onInternalInputKeyDown,
@@ -252,20 +252,20 @@ Selector.inheritAttrs = false;
 Selector.props = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
-  showSearch: { type: Boolean, default: undefined },
-  open: { type: Boolean, default: undefined },
+  showSearch: PropTypes.looseBool,
+  open: PropTypes.looseBool,
   /** Display in the Selector value, it's not same as `value` prop */
   values: PropTypes.array,
-  multiple: { type: Boolean, default: undefined },
+  multiple: PropTypes.looseBool,
   mode: PropTypes.string,
   searchValue: PropTypes.string,
   activeValue: PropTypes.string,
   inputElement: PropTypes.any,
 
-  autofocus: { type: Boolean, default: undefined },
+  autofocus: PropTypes.looseBool,
   accessibilityIndex: PropTypes.number,
   tabindex: PropTypes.number,
-  disabled: { type: Boolean, default: undefined },
+  disabled: PropTypes.looseBool,
   placeholder: PropTypes.any,
   removeIcon: PropTypes.any,
 
@@ -276,7 +276,7 @@ Selector.props = {
   tagRender: PropTypes.func,
 
   /** Check if `tokenSeparators` contains `\n` or `\r\n` */
-  tokenWithEnter: { type: Boolean, default: undefined },
+  tokenWithEnter: PropTypes.looseBool,
 
   // Motion
   choiceTransitionName: PropTypes.string,

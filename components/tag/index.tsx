@@ -124,12 +124,9 @@ const Tag = defineComponent({
 Tag.props = {
   prefixCls: PropTypes.string,
   color: PropTypes.string,
-  closable: PropTypes.bool.def(false),
+  closable: PropTypes.looseBool.def(false),
   closeIcon: PropTypes.any,
-  visible: {
-    type: Boolean,
-    default: undefined,
-  },
+  visible: PropTypes.looseBool,
   onClose: PropTypes.func,
   icon: PropTypes.any,
 };

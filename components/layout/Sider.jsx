@@ -29,10 +29,10 @@ const dimensionMaxMap = {
 
 export const SiderProps = {
   prefixCls: PropTypes.string,
-  collapsible: PropTypes.bool,
-  collapsed: PropTypes.bool,
-  defaultCollapsed: PropTypes.bool,
-  reverseArrow: PropTypes.bool,
+  collapsible: PropTypes.looseBool,
+  collapsed: PropTypes.looseBool,
+  defaultCollapsed: PropTypes.looseBool,
+  reverseArrow: PropTypes.looseBool,
   // onCollapse?: (collapsed: boolean, type: CollapseType) => void;
   zeroWidthTriggerStyle: PropTypes.object,
   trigger: PropTypes.any,

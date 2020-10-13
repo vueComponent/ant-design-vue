@@ -15,7 +15,7 @@ export const InputNumberProps = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   tabindex: PropTypes.number,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   size: PropTypes.oneOf(['large', 'small', 'default']),
   formatter: PropTypes.func,
   parser: PropTypes.func,
@@ -24,7 +24,7 @@ export const InputNumberProps = {
   name: PropTypes.string,
   id: PropTypes.string,
   precision: PropTypes.number,
-  autofocus: PropTypes.bool,
+  autofocus: PropTypes.looseBool,
 };
 
 const InputNumber = {

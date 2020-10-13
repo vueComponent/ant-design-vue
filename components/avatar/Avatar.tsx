@@ -1,31 +1,28 @@
-import { inject } from 'vue';
+import { tuple, VueNode } from '../_util/type';
+import { CSSProperties, defineComponent, inject, PropType } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 import { getComponent } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 
-export default {
+export default defineComponent({
   name: 'AAvatar',
   props: {
-    prefixCls: {
-      type: String,
-      default: undefined,
-    },
-    shape: {
-      validator: val => ['circle', 'square'].includes(val),
-      default: 'circle',
-    },
+    prefixCls: PropTypes.string,
+    shape: PropTypes.oneOf(tuple('circle', 'square')),
     size: {
-      validator: val => {
-        return typeof val === 'number' || ['small', 'large', 'default'].includes(val);
-      },
-      default: 'default',
+      type: [Number, String] as PropType<'large' | 'small' | 'default' | number>,
+      default: 'default'
     },
-    src: String,
+    src: PropTypes.string,
     /** Srcset of image avatar */
-    srcSet: String,
-    icon: PropTypes.any,
-    alt: String,
-    loadError: Function,
+    srcset: PropTypes.string,
+    /** @deprecated please use `srcset` instead `srcSet` */
+    srcSet: PropTypes.string,
+    icon: PropTypes.VNodeChild,
+    alt: PropTypes.string,
+    loadError:  {
+      type: Function as PropType<()=>boolean>
+    },
   },
   setup() {
     return {
@@ -37,6 +34,8 @@ export default {
       isImgExist: true,
       isMounted: false,
       scale: 1,
+      lastChildrenWidth: undefined,
+      lastNodeWidth: undefined
     };
   },
   watch: {
@@ -65,8 +64,8 @@ export default {
       if (!this.$refs.avatarChildren || !this.$refs.avatarNode) {
         return;
       }
-      const childrenWidth = this.$refs.avatarChildren.offsetWidth; // offsetWidth avoid affecting be transform scale
-      const nodeWidth = this.$refs.avatarNode.offsetWidth;
+      const childrenWidth = (this.$refs.avatarChildren as HTMLElement).offsetWidth; // offsetWidth avoid affecting be transform scale
+      const nodeWidth = (this.$refs.avatarNode as HTMLElement).offsetWidth;
       // denominator is 0 is no meaning
       if (
         childrenWidth === 0 ||
@@ -89,7 +88,7 @@ export default {
     },
   },
   render() {
-    const { prefixCls: customizePrefixCls, shape, size, src, alt, srcSet } = this.$props;
+    const { prefixCls: customizePrefixCls, shape, size, src, alt, srcset, srcSet } = this.$props;
     const icon = getComponent(this, 'icon');
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('avatar', customizePrefixCls);
@@ -109,7 +108,7 @@ export default {
       [`${prefixCls}-icon`]: icon,
     };
 
-    const sizeStyle =
+    const sizeStyle: CSSProperties =
       typeof size === 'number'
         ? {
             width: `${size}px`,
@@ -119,16 +118,16 @@ export default {
           }
         : {};
 
-    let children = this.$slots.default && this.$slots.default();
+    let children: VueNode = this.$slots.default && this.$slots.default();
     if (src && isImgExist) {
-      children = <img src={src} srcSet={srcSet} onError={this.handleImgLoadError} alt={alt} />;
+      children = <img src={src} srcset={srcset || srcSet} onError={this.handleImgLoadError} alt={alt} />;
     } else if (icon) {
       children = icon;
     } else {
       const childrenNode = this.$refs.avatarChildren;
       if (childrenNode || scale !== 1) {
         const transformString = `scale(${scale}) translateX(-50%)`;
-        const childrenStyle = {
+        const childrenStyle: CSSProperties = {
           msTransform: transformString,
           WebkitTransform: transformString,
           transform: transformString,
@@ -149,7 +148,7 @@ export default {
           </span>
         );
       } else {
-        const childrenStyle = {};
+        const childrenStyle: CSSProperties = {};
         if (!isMounted) {
           childrenStyle.opacity = 0;
         }
@@ -166,4 +165,4 @@ export default {
       </span>
     );
   },
-};
+});

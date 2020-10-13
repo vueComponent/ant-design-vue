@@ -1,4 +1,4 @@
-import { PropType } from 'vue';
+import { PropType, VNodeChild } from 'vue';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 // https://stackoverflow.com/questions/46176165/ways-to-get-string-literal-type-of-array-values-without-enum-overhead
@@ -29,3 +29,5 @@ export interface PropOptions<T = any, D = T> {
   default?: D | DefaultFactory<D> | null | undefined | object;
   validator?(value: unknown): boolean;
 }
+
+export type VueNode = VNodeChild | JSX.Element;

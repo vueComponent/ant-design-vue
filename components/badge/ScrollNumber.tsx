@@ -4,7 +4,7 @@ import BaseMixin from '../_util/BaseMixin';
 import omit from 'omit.js';
 import { cloneElement } from '../_util/vnode';
 import { defaultConfigProvider } from '../config-provider';
-import { inject } from 'vue';
+import { CSSProperties, defineComponent, inject } from 'vue';
 
 function getNumberArray(num) {
   return num
@@ -28,7 +28,7 @@ const ScrollNumberProps = {
   onAnimated: PropTypes.func,
 };
 
-export default {
+export default defineComponent({
   name: 'ScrollNumber',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -36,10 +36,11 @@ export default {
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      lastCount: undefined,
+      timeout: undefined,
     };
   },
   data() {
-    this.lastCount = undefined;
     return {
       animateStarted: true,
       sCount: this.count,
@@ -159,10 +160,10 @@ export default {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, title, component: Tag = 'sup', displayComponent } = this;
+    const { prefixCls: customizePrefixCls, title, component: Tag = 'sup' as any, displayComponent } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('scroll-number', customizePrefixCls);
-    const { class: className, style = {} } = this.$attrs;
+    const { class: className, style = {} } = this.$attrs as {class?: string, style?: CSSProperties};
     if (displayComponent) {
       return cloneElement(displayComponent, {
         class: classNames(
@@ -195,4 +196,4 @@ export default {
 
     return <Tag {...newProps}>{this.renderNumberElement(prefixCls)}</Tag>;
   },
-};
+});

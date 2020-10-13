@@ -198,7 +198,6 @@ const Affix = defineComponent({
       this.setState(newState);
     },
 
-    // @ts-ignore TS6133
     prepareMeasure() {
       this.setState({
         status: AffixStatus.Prepare,

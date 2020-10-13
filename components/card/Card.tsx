@@ -17,8 +17,6 @@ export interface CardTabListType {
 }
 
 export type CardType = 'inner';
-const CardSize = tuple('default', 'small');
-export type CardSizeType = typeof CardSize[number];
 
 const { TabPane } = Tabs;
 
@@ -35,10 +33,7 @@ const Card = defineComponent({
     loading: PropTypes.looseBool.def(false),
     hoverable: PropTypes.looseBool.def(false),
     type: PropTypes.string,
-    size: {
-      type: String as PropType<CardSizeType>,
-      validator: (val: CardSizeType) => CardSize.includes(val),
-    },
+    size: PropTypes.oneOf(tuple('default', 'small')),
     actions: PropTypes.VNodeChild,
     tabList: {
       type: Array as PropType<CardTabListType[]>,

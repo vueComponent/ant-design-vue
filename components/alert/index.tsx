@@ -39,11 +39,11 @@ export const AlertProps = {
   /** Whether Alert can be closed */
   closable: PropTypes.looseBool,
   /** Close text to show */
-  closeText: PropTypes.any,
+  closeText: PropTypes.VNodeChild,
   /** Content of Alert */
-  message: PropTypes.any,
+  message: PropTypes.VNodeChild,
   /** Additional content of Alert */
-  description: PropTypes.any,
+  description: PropTypes.VNodeChild,
   /** Callback when close Alert */
   // onClose?: React.MouseEventHandler<HTMLAnchorElement>;
   /** Trigger when animation ending of Alert */
@@ -52,8 +52,8 @@ export const AlertProps = {
   showIcon: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   banner: PropTypes.looseBool,
-  icon: PropTypes.any,
-  onClose: PropTypes.func,
+  icon: PropTypes.VNodeChild,
+  onClose: PropTypes.VNodeChild,
 };
 
 const Alert = defineComponent({

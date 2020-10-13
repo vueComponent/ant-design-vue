@@ -9,7 +9,7 @@ function noop(..._any: any[]): any {}
 const AnchorLinkProps = {
   prefixCls: PropTypes.string,
   href: PropTypes.string.def('#'),
-  title: PropTypes.any,
+  title: PropTypes.VNodeChild,
   target: PropTypes.string,
 };
 

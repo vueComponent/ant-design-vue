@@ -154,13 +154,13 @@ const ConfigProvider = defineComponent({
   },
 });
 
-export const defaultConfigProvider = {
+export const defaultConfigProvider: ConfigConsumerProps = {
   getPrefixCls: (suffixCls: string, customizePrefixCls?: string) => {
     if (customizePrefixCls) return customizePrefixCls;
     return `ant-${suffixCls}`;
   },
   renderEmpty: defaultRenderEmpty,
-} as any;
+};
 
 /* istanbul ignore next */
 ConfigProvider.install = function(app: App) {

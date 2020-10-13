@@ -52,7 +52,7 @@ const AnchorProps = {
   showInkInFixed: PropTypes.looseBool.def(false),
   getContainer: PropTypes.func.def(getDefaultContainer),
   wrapperClass: PropTypes.string,
-  wrapperStyle: PropTypes.object,
+  wrapperStyle: PropTypes.style,
   getCurrentAnchor: PropTypes.func,
   targetOffset: PropTypes.number,
   onChange: PropTypes.func,

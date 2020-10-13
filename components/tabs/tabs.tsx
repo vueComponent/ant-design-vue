@@ -1,4 +1,5 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, PropType } from 'vue';
+import { tuple } from '../_util/type';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import PlusOutlined from '@ant-design/icons-vue/PlusOutlined';
 import VcTabs, { TabPane } from '../vc-tabs/src';
@@ -30,19 +31,29 @@ export default defineComponent({
     tabBarStyle: PropTypes.object,
     tabBarExtraContent: PropTypes.any,
     destroyInactiveTabPane: PropTypes.looseBool.def(false),
-    type: PropTypes.oneOf(['line', 'card', 'editable-card']),
+    type: PropTypes.oneOf(tuple('line', 'card', 'editable-card')),
     tabPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('top'),
     size: PropTypes.oneOf(['default', 'small', 'large']),
     animated: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
     tabBarGutter: PropTypes.number,
     renderTabBar: PropTypes.func,
-    onChange: PropTypes.func,
+    onChange: {
+      type: Function as PropType<(activeKey: string) => void>,
+    },
     onTabClick: PropTypes.func,
-    onPrevClick: PropTypes.func,
-    onNextClick: PropTypes.func,
-    onEdit: PropTypes.func,
-    'onUpdate:activeKey': PropTypes.func,
+    onPrevClick: {
+      type: Function as PropType<(e: MouseEvent) => void>,
+    },
+    onNextClick: {
+      type: Function as PropType<(e: MouseEvent) => void>,
+    },
+    onEdit: {
+      type: Function as PropType<
+        (targetKey: string | MouseEvent, action: 'add' | 'remove') => void
+      >,
+    },
   },
+  emits: ['update:activeKey', 'edit', 'change'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -56,17 +67,17 @@ export default defineComponent({
     }
   },
   methods: {
-    removeTab(targetKey, e) {
+    removeTab(targetKey: string, e: MouseEvent) {
       e.stopPropagation();
       if (isValid(targetKey)) {
         this.$emit('edit', targetKey, 'remove');
       }
     },
-    handleChange(activeKey) {
+    handleChange(activeKey: string) {
       this.$emit('update:activeKey', activeKey);
       this.$emit('change', activeKey);
     },
-    createNewTab(targetKey) {
+    createNewTab(targetKey: MouseEvent) {
       this.$emit('edit', targetKey, 'add');
     },
   },
@@ -95,7 +106,7 @@ export default defineComponent({
       tabPaneAnimated = 'animated' in props ? tabPaneAnimated : false;
     }
     const cls = {
-      [className]: className,
+      [className as string]: className,
       [`${prefixCls}-vertical`]: tabPosition === 'left' || tabPosition === 'right',
       [`${prefixCls}-${size}`]: !!size,
       [`${prefixCls}-card`]: type.indexOf('card') >= 0,
@@ -107,7 +118,7 @@ export default defineComponent({
     if (type === 'editable-card') {
       childrenWithClose = [];
       children.forEach((child, index) => {
-        const props = getPropsData(child);
+        const props = getPropsData(child) as any;
         let closable = props.closable;
         closable = typeof closable === 'undefined' ? true : closable;
         const closeIcon = closable ? (

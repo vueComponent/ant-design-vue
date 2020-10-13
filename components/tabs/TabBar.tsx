@@ -1,22 +1,27 @@
+import { defineComponent, PropType } from 'vue';
+import { tuple } from '../_util/type';
 import UpOutlined from '@ant-design/icons-vue/UpOutlined';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import ScrollableInkTabBar from '../vc-tabs/src/ScrollableInkTabBar';
-import PropTypes, { withUndefined } from '../_util/vue-types';
+import PropTypes from '../_util/vue-types';
 
-const TabBar = {
+const TabBar = defineComponent({
   name: 'TabBar',
   inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
-    tabBarStyle: PropTypes.object,
-    tabBarExtraContent: PropTypes.any,
-    type: PropTypes.oneOf(['line', 'card', 'editable-card']),
-    tabPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('top'),
-    tabBarPosition: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-    size: PropTypes.oneOf(['default', 'small', 'large']),
-    animated: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
+    tabBarStyle: PropTypes.style,
+    tabBarExtraContent: PropTypes.VNodeChild,
+    type: PropTypes.oneOf(tuple('line', 'card', 'editable-card')),
+    tabPosition: PropTypes.oneOf(tuple('top', 'right', 'bottom', 'left')).def('top'),
+    tabBarPosition: PropTypes.oneOf(tuple('top', 'right', 'bottom', 'left')),
+    size: PropTypes.oneOf(tuple('default', 'small', 'large')),
+    animated: {
+      type: [Boolean, Object] as PropType<boolean | { inkBar: boolean; tabPane: boolean }>,
+      default: undefined,
+    },
     renderTabBar: PropTypes.func,
     panels: PropTypes.array.def([]),
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -56,7 +61,7 @@ const TabBar = {
     );
     // Additional className for style usage
     const cls = {
-      [this.$attrs.class]: this.$attrs.class,
+      [this.$attrs.class as string]: this.$attrs.class,
       [`${prefixCls}-${tabPosition}-bar`]: true,
       [`${prefixCls}-${size}-bar`]: !!size,
       [`${prefixCls}-card-bar`]: type && type.indexOf('card') >= 0,
@@ -80,6 +85,6 @@ const TabBar = {
       return <ScrollableInkTabBar {...renderProps} />;
     }
   },
-};
+});
 
 export default TabBar;

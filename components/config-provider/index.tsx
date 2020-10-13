@@ -142,7 +142,7 @@ const ConfigProvider = defineComponent({
 
     const renderProvider = (legacyLocale: Locale) => {
       return (
-        <LocaleProvider locale={props.locale || legacyLocale} _ANT_MARK__={ANT_MARK}>
+        <LocaleProvider locale={props.locale || legacyLocale} ANT_MARK__={ANT_MARK}>
           {slots.default?.()}
         </LocaleProvider>
       );

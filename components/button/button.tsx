@@ -1,4 +1,4 @@
-import { inject, Text } from 'vue';
+import { defineComponent, inject, Text, VNode } from 'vue';
 import Wave from '../_util/wave';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';
@@ -8,7 +8,7 @@ import { defaultConfigProvider } from '../config-provider';
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
 const props = buttonTypes();
-export default {
+export default defineComponent({
   name: 'AButton',
   inheritAttrs: false,
   __ANT_BUTTON: true,
@@ -16,11 +16,12 @@ export default {
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      children: [],
+      iconCom: undefined,
+      delayTimeout: undefined
     };
   },
   data() {
-    this.children = [];
-    this.iconCom = undefined;
     return {
       sizeMap: {
         large: 'lg',
@@ -67,7 +68,7 @@ export default {
         ghost,
         block,
         $attrs,
-      } = this;
+      } = this
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('btn', customizePrefixCls);
       const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
@@ -87,7 +88,7 @@ export default {
       }
       const iconType = sLoading ? 'loading' : this.iconCom;
       return {
-        [$attrs.class]: $attrs.class,
+        [$attrs.class as string]: $attrs.class,
         [`${prefixCls}`]: true,
         [`${prefixCls}-${type}`]: type,
         [`${prefixCls}-${shape}`]: shape,
@@ -101,7 +102,7 @@ export default {
     },
     fixTwoCNChar() {
       // Fix for HOC usage like <FormatMessage />
-      const node = this.$refs.buttonNode;
+      const node = this.$refs.buttonNode as HTMLElement;
       if (!node) {
         return;
       }
@@ -114,17 +115,17 @@ export default {
         this.hasTwoCNChar = false;
       }
     },
-    handleClick(event) {
+    handleClick(event: Event) {
       const { sLoading } = this.$data;
       if (sLoading) {
         return;
       }
       this.$emit('click', event);
     },
-    insertSpace(child, needInserted) {
+    insertSpace(child: VNode, needInserted: boolean) {
       const SPACE = needInserted ? ' ' : '';
       if (child.type === Text) {
-        let text = child.children.trim();
+        let text = (child.children as string).trim();
         if (isTwoCNChar(text)) {
           text = text.split('').join(SPACE);
         }
@@ -179,4 +180,4 @@ export default {
 
     return <Wave ref="wave">{buttonNode}</Wave>;
   },
-};
+});

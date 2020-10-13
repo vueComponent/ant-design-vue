@@ -1,9 +1,9 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 import PropTypes from '../_util/vue-types';
 import { getSlot } from '../_util/props-util';
 
-export default {
+export default defineComponent({
   name: 'ABreadcrumbSeparator',
   __ANT_BREADCRUMB_SEPARATOR: true,
   props: {
@@ -22,4 +22,4 @@ export default {
     const children = getSlot(this);
     return <span class={`${prefixCls}-separator`}>{children || '/'}</span>;
   },
-};
+});

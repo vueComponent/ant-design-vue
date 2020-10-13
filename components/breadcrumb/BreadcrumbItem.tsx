@@ -1,18 +1,18 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { hasProp, getComponent, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import DropDown from '../dropdown/dropdown';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 
-export default {
+export default defineComponent({
   name: 'ABreadcrumbItem',
   __ANT_BREADCRUMB_ITEM: true,
   props: {
     prefixCls: PropTypes.string,
     href: PropTypes.string,
-    separator: PropTypes.any.def('/'),
-    overlay: PropTypes.any,
+    separator: PropTypes.VNodeChild.def('/'),
+    overlay: PropTypes.VNodeChild,
   },
   setup() {
     return {
@@ -24,7 +24,7 @@ export default {
      * if overlay is have
      * Wrap a DropDown
      */
-    renderBreadcrumbNode(breadcrumbItem, prefixCls) {
+    renderBreadcrumbNode(breadcrumbItem: any, prefixCls: string) {
       const overlay = getComponent(this, 'overlay');
       if (overlay) {
         return (
@@ -65,4 +65,4 @@ export default {
     }
     return null;
   },
-};
+});

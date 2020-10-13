@@ -1,4 +1,4 @@
-import { inject, provide, toRef } from 'vue';
+import { defineComponent, inject, provide, toRef } from 'vue';
 import omit from 'omit.js';
 import VcMenu, { Divider, ItemGroup } from '../vc-menu';
 import SubMenu from './SubMenu';
@@ -47,7 +47,7 @@ export const menuProps = {
   'onUpdate:openKeys': PropTypes.func,
 };
 
-const Menu = {
+const Menu = defineComponent({
   name: 'AMenu',
   inheritAttrs: false,
   props: menuProps,
@@ -294,7 +294,7 @@ const Menu = {
 
     return <VcMenu {...menuProps} class={menuClassName} />;
   },
-};
+});
 
 /* istanbul ignore next */
 Menu.install = function(app) {

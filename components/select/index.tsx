@@ -39,6 +39,7 @@ const AbstractSelectProps = () => ({
   defaultOpen: PropTypes.looseBool,
   autoClearSearchValue: PropTypes.looseBool,
   dropdownRender: PropTypes.func,
+  onChange: PropTypes.func,
   loading: PropTypes.looseBool,
 });
 const Value = PropTypes.shape({

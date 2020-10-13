@@ -254,7 +254,7 @@ export default function generateSelector<
       const mergedId = computed(() => props.id || `rc_select_${getUUID()}`);
 
       // optionLabelProp
-      let mergedOptionLabelProp = computed(() => {
+      const mergedOptionLabelProp = computed(() => {
         let mergedOptionLabelProp = props.optionLabelProp;
         if (mergedOptionLabelProp === undefined) {
           mergedOptionLabelProp = props.options ? 'label' : 'children';
@@ -554,7 +554,7 @@ export default function generateSelector<
       // ============================== Open ==============================
 
       const innerOpen = ref(undefined);
-      let mergedOpen = ref(undefined);
+      const mergedOpen = ref(undefined);
       const setInnerOpen = (val: boolean) => {
         innerOpen.value = val;
         mergedOpen.value = innerOpen.value;

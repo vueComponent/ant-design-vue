@@ -64,15 +64,15 @@ export interface AntAnchor {
   unregisterLink: (link: string) => void;
   $data: AnchorState;
   scrollTo: (link: string) => void;
-  $emit?: Function
+  $emit?: Function;
 }
 interface AnchorState {
-    activeLink: null | string;
-    scrollContainer: HTMLElement | Window;
-    links: string[];
-    scrollEvent: any;
-    animating: boolean;
-    sPrefixCls?: string;
+  activeLink: null | string;
+  scrollContainer: HTMLElement | Window;
+  links: string[];
+  scrollEvent: any;
+  animating: boolean;
+  sPrefixCls?: string;
 }
 
 export default defineComponent({
@@ -242,7 +242,9 @@ export default defineComponent({
         `${sPrefixCls}-link-title-active`,
       )[0];
       if (linkNode) {
-        (this.$refs.inkNode as HTMLElement).style.top = `${linkNode.offsetTop + linkNode.clientHeight / 2 - 4.5}px`;
+        (this.$refs.inkNode as HTMLElement).style.top = `${linkNode.offsetTop +
+          linkNode.clientHeight / 2 -
+          4.5}px`;
       }
     },
   },

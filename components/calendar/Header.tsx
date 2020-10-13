@@ -1,9 +1,9 @@
-import { inject } from 'vue';
+import { defineComponent, inject, PropType } from 'vue';
 import Select from '../select';
 import { Group, Button } from '../radio';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
+import { VueNode } from 'components/_util/type';
 
 const { Option } = Select;
 
@@ -17,7 +17,13 @@ function getMonthsLocale(value) {
   }
   return months;
 }
-
+export interface RenderHeader {
+  value: moment.Moment;
+  onChange?: (value: moment.Moment) => void;
+  type: string;
+  onTypeChange: (type: string) => void;
+}
+export type HeaderRender = (headerRender: RenderHeader) => VueNode;
 export const HeaderProps = {
   prefixCls: PropTypes.string,
   locale: PropTypes.any,
@@ -25,28 +31,34 @@ export const HeaderProps = {
   yearSelectOffset: PropTypes.number,
   yearSelectTotal: PropTypes.number,
   type: PropTypes.string,
-  value: PropTypes.any,
-  validRange: PropTypes.array,
+  value: {
+    type: Object as PropType<moment.Moment>
+  },
+  validRange: {
+    type: Array as PropType<moment.Moment[]>
+  },
   headerRender: PropTypes.func,
   onValueChange: PropTypes.func,
   onTypeChange: PropTypes.func,
 };
 
-export default {
+export default defineComponent({
   name: 'CalendarHeader',
   inheritAttrs: false,
-  props: initDefaultProps(HeaderProps, {
-    yearSelectOffset: 10,
-    yearSelectTotal: 20,
-  }),
+  props: {
+    ...HeaderProps,
+    yearSelectOffset: PropTypes.number.def(10),
+    yearSelectTotal: PropTypes.number.def(20),
+  },
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      calendarHeaderNode: undefined
     };
   },
   // private calendarHeaderNode: HTMLDivElement;
   methods: {
-    getYearSelectElement(prefixCls, year) {
+    getYearSelectElement(prefixCls: string, year: number) {
       const { yearSelectOffset, yearSelectTotal, locale = {}, fullscreen, validRange } = this;
       let start = year - yearSelectOffset;
       let end = start + yearSelectTotal;
@@ -74,7 +86,7 @@ export default {
       );
     },
 
-    getMonthSelectElement(prefixCls, month, months) {
+    getMonthSelectElement(prefixCls: string, month: number, months: number[]) {
       const { fullscreen, validRange, value } = this;
       const options = [];
       let start = 0;
@@ -167,10 +179,10 @@ export default {
     triggerValueChange() {
       this.$emit('valueChange', ...arguments);
     },
-    saveCalendarHeaderNode(node) {
+    saveCalendarHeaderNode(node: HTMLElement) {
       this.calendarHeaderNode = node;
     },
-    headerRenderCustom(headerRender) {
+    headerRenderCustom(headerRender: HeaderRender) {
       const { type, value } = this.$props;
       return headerRender({
         value,
@@ -190,11 +202,11 @@ export default {
     return headerRender ? (
       this.headerRenderCustom(headerRender)
     ) : (
-      <div class={`${prefixCls}-header`} ref={this.saveCalendarHeaderNode}>
+      <div class={`${prefixCls}-header`} ref={this.saveCalendarHeaderNode as any}>
         {yearReactNode}
         {monthReactNode}
         {typeSwitch}
       </div>
     );
   },
-};
+});

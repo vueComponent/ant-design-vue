@@ -1,9 +1,9 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import Radio from './Radio';
 import { getOptionProps, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 
-export default {
+export default defineComponent({
   name: 'ARadioButton',
   props: {
     ...Radio.props,
@@ -31,4 +31,4 @@ export default {
     }
     return <Radio {...radioProps}>{getSlot(this)}</Radio>;
   },
-};
+});

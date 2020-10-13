@@ -13,12 +13,6 @@ export interface Route {
   children?: Omit<Route, 'children'>[];
 }
 
-const Route = PropTypes.shape({
-  path: PropTypes.string,
-  breadcrumbName: PropTypes.string,
-  children: PropTypes.array,
-}).loose;
-
 const BreadcrumbProps = {
   prefixCls: PropTypes.string,
   routes: {type: Array as PropType<Route[]>},

@@ -88,6 +88,7 @@ Comment.displayName = 'AComment';
 /* istanbul ignore next */
 Comment.install = function(app: App) {
   app.component(Comment.name, Comment);
+  return app;
 };
 
 export default Comment;

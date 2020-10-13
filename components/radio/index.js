@@ -10,6 +10,7 @@ Radio.install = function(app) {
   app.component(Radio.name, Radio);
   app.component(Radio.Group.name, Radio.Group);
   app.component(Radio.Button.name, Radio.Button);
+  return app;
 };
 
 export { Button, Group };

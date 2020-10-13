@@ -138,6 +138,7 @@ const PageHeader = {
 /* istanbul ignore next */
 PageHeader.install = function(app) {
   app.component(PageHeader.name, PageHeader);
+  return app;
 };
 
 export default PageHeader;

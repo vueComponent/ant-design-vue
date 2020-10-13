@@ -162,6 +162,7 @@ const Alert = defineComponent({
 /* istanbul ignore next */
 Alert.install = function(app: App) {
   app.component(Alert.name, Alert);
+  return app;
 };
 
 export default Alert;

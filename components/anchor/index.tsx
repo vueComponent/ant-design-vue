@@ -8,5 +8,6 @@ Anchor.Link = AnchorLink;
 Anchor.install = function(app: App) {
   app.component(Anchor.name, Anchor);
   app.component(Anchor.Link.name, Anchor.Link);
+  return app;
 };
 export default Anchor;

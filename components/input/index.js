@@ -16,6 +16,7 @@ Input.install = function(app) {
   app.component(Input.Search.name, Input.Search);
   app.component(Input.TextArea.name, Input.TextArea);
   app.component(Input.Password.name, Input.Password);
+  return app;
 };
 
 export default Input;

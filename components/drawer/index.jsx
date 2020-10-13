@@ -254,6 +254,7 @@ const Drawer = {
 /* istanbul ignore next */
 Drawer.install = function(app) {
   app.component(Drawer.name, Drawer);
+  return app;
 };
 
 export default Drawer;

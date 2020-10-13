@@ -81,6 +81,7 @@ const Switch = {
 /* istanbul ignore next */
 Switch.install = function(app) {
   app.component(Switch.name, Switch);
+  return app;
 };
 
 export default Switch;

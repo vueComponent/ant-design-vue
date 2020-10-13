@@ -136,6 +136,7 @@ Tag.CheckableTag = CheckableTag;
 Tag.install = (app: App) => {
   app.component(Tag.name, Tag);
   app.component(CheckableTag.name, CheckableTag);
+  return app;
 };
 
 export default Tag;

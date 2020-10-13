@@ -69,6 +69,7 @@ Space.displayName = 'ASpace';
 /* istanbul ignore next */
 Space.install = function(app: App) {
   app.component(Space.displayName, Space);
+  return app;
 };
 
 export default Space;

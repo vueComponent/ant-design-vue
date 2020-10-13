@@ -267,6 +267,7 @@ const TimePicker = {
 /* istanbul ignore next */
 TimePicker.install = function(app) {
   app.component(TimePicker.name, TimePicker);
+  return app;
 };
 
 export default TimePicker;

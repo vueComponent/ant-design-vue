@@ -7,6 +7,7 @@ Checkbox.Group = CheckboxGroup;
 Checkbox.install = function(app) {
   app.component(Checkbox.name, Checkbox);
   app.component(CheckboxGroup.name, CheckboxGroup);
+  return app;
 };
 
 export default Checkbox;

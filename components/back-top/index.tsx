@@ -103,6 +103,7 @@ const BackTop = defineComponent({
 /* istanbul ignore next */
 BackTop.install = function(app: App) {
   app.component(BackTop.name, BackTop);
+  return app;
 };
 
 export default BackTop;

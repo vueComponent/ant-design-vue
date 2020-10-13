@@ -91,6 +91,7 @@ const InputNumber = {
 /* istanbul ignore next */
 InputNumber.install = function(app) {
   app.component(InputNumber.name, InputNumber);
+  return app;
 };
 
 export default InputNumber;

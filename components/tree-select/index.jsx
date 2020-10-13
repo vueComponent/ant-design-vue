@@ -202,6 +202,7 @@ const TreeSelect = {
 TreeSelect.install = function(app) {
   app.component(TreeSelect.name, TreeSelect);
   app.component('ATreeSelectNode', TreeSelect.TreeNode);
+  return app;
 };
 
 export default TreeSelect;

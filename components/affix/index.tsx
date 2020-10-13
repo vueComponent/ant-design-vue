@@ -268,6 +268,7 @@ const Affix = defineComponent({
 /* istanbul ignore next */
 Affix.install = function(app: App) {
   app.component(Affix.name, Affix);
+  return app;
 };
 
 export default Affix;

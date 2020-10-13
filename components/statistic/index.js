@@ -6,6 +6,7 @@ Statistic.Countdown = Countdown;
 Statistic.install = function(app) {
   app.component(Statistic.name, Statistic);
   app.component(Statistic.Countdown.name, Statistic.Countdown);
+  return app;
 };
 
 export default Statistic;

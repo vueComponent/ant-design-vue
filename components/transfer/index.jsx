@@ -483,6 +483,7 @@ const Transfer = {
 /* istanbul ignore next */
 Transfer.install = function(app) {
   app.component(Transfer.name, Transfer);
+  return app;
 };
 
 export default Transfer;

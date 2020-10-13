@@ -9,6 +9,7 @@ Upload.Dragger = Dragger;
 Upload.install = function(app) {
   app.component(Upload.name, Upload);
   app.component(Dragger.name, Dragger);
+  return app;
 };
 
 export default Upload;

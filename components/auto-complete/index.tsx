@@ -138,6 +138,7 @@ AutoComplete.install = function(app: App) {
   app.component(AutoComplete.name, AutoComplete);
   app.component(AutoComplete.Option.name, AutoComplete.Option);
   app.component(AutoComplete.OptGroup.name, AutoComplete.OptGroup);
+  return app;
 };
 
 export default AutoComplete;

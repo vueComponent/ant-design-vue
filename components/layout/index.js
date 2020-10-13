@@ -10,5 +10,6 @@ Layout.install = function(app) {
   app.component(Layout.Footer.name, Layout.Footer);
   app.component(Layout.Sider.name, Layout.Sider);
   app.component(Layout.Content.name, Layout.Content);
+  return app;
 };
 export default Layout;

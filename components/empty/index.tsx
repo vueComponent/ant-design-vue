@@ -94,6 +94,7 @@ Empty.props = {
 /* istanbul ignore next */
 Empty.install = function(app: App) {
   app.component(Empty.displayName, Empty);
+  return app;
 };
 
 export default Empty;

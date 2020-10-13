@@ -89,5 +89,6 @@ Result.PRESENTED_IMAGE_500 = ExceptionMap[500];
 /* istanbul ignore next */
 Result.install = function(app) {
   app.component(Result.name, Result);
+  return app;
 };
 export default Result;

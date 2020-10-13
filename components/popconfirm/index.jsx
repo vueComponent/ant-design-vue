@@ -153,6 +153,7 @@ const Popconfirm = {
 /* istanbul ignore next */
 Popconfirm.install = function(app) {
   app.component(Popconfirm.name, Popconfirm);
+  return app;
 };
 
 export default Popconfirm;

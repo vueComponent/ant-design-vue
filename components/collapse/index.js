@@ -7,6 +7,7 @@ Collapse.Panel = CollapsePanel;
 Collapse.install = function(app) {
   app.component(Collapse.name, Collapse);
   app.component(CollapsePanel.name, CollapsePanel);
+  return app;
 };
 
 export default Collapse;

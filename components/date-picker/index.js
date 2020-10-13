@@ -30,6 +30,7 @@ DatePicker.install = function(app) {
   app.component(DatePicker.RangePicker.name, DatePicker.RangePicker);
   app.component(DatePicker.MonthPicker.name, DatePicker.MonthPicker);
   app.component(DatePicker.WeekPicker.name, DatePicker.WeekPicker);
+  return app;
 };
 
 export default DatePicker;

@@ -264,6 +264,7 @@ const Descriptions = {
 Descriptions.install = function(app) {
   app.component(Descriptions.name, Descriptions);
   app.component(Descriptions.Item.name, Descriptions.Item);
+  return app;
 };
 
 export default Descriptions;

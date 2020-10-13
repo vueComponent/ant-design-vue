@@ -54,6 +54,7 @@ const Popover = {
 /* istanbul ignore next */
 Popover.install = function(app) {
   app.component(Popover.name, Popover);
+  return app;
 };
 
 export default Popover;

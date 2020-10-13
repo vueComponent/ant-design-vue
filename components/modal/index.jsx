@@ -76,6 +76,7 @@ Modal.destroyAll = function destroyAllFn() {
 /* istanbul ignore next */
 Modal.install = function(app) {
   app.component(Modal.name, Modal);
+  return app;
 };
 
 export default Modal;

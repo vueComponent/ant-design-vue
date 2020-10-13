@@ -180,6 +180,7 @@ const Mentions = {
 Mentions.install = function(app) {
   app.component(Mentions.name, Mentions);
   app.component(Mentions.Option.name, Mentions.Option);
+  return app;
 };
 
 export default Mentions;

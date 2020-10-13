@@ -11,6 +11,7 @@ Tabs.install = function(app: App) {
   app.component(Tabs.name, Tabs);
   app.component(Tabs.TabPane.name, Tabs.TabPane);
   app.component(Tabs.TabContent.name, Tabs.TabContent);
+  return app;
 };
 
 export default Tabs;

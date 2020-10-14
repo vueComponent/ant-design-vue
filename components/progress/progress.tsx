@@ -118,7 +118,6 @@ export default defineComponent({
           prefixCls,
           progressStatus,
         };
-        console.log(circleProps);
         progress = <Circle {...circleProps}>{progressInfo}</Circle>;
       }
 

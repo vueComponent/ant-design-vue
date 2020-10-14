@@ -1,8 +1,8 @@
 import isPlainObject from 'lodash-es/isPlainObject';
-import classNames from './classNames';
+import classNames from '../classNames';
 import { isVNode, Fragment, Comment, Text, h } from 'vue';
-import { camelize, hyphenate, isOn, resolvePropValue } from './util';
-import isValid from './isValid';
+import { camelize, hyphenate, isOn, resolvePropValue } from '../util';
+import isValid from '../isValid';
 // function getType(fn) {
 //   const match = fn && fn.toString().match(/^\s*function (\w+)/);
 //   return match ? match[1] : '';

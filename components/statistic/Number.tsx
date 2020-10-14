@@ -1,12 +1,10 @@
 import padEnd from 'lodash-es/padEnd';
-import { VNodeTypes } from 'vue';
-import { StatisticPropsType } from './Statistic';
+import { FunctionalComponent, VNodeTypes } from 'vue';
+import { StatisticProps, StatisticPropsType } from './Statistic';
 
-const StatisticNumber = (
-  props: Omit<StatisticPropsType, 'formatter'> & {
-    formatter?: VNodeTypes;
-  },
-) => {
+const StatisticNumber: FunctionalComponent<Omit<StatisticPropsType, 'formatter'> & {
+  formatter?: VNodeTypes;
+}> = props => {
   const { formatter, value, groupSeparator, precision, decimalSeparator, prefixCls } = props;
   let valueNode: VNodeTypes;
 
@@ -48,5 +46,7 @@ const StatisticNumber = (
 
   return <span class={`${prefixCls}-content-value`}>{valueNode}</span>;
 };
+
+StatisticNumber.props = StatisticProps;
 
 export default StatisticNumber;

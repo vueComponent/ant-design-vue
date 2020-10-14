@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { CSSProperties, defineComponent, inject } from 'vue';
 import moment from 'moment';
 import RangeCalendar from '../vc-calendar/src/RangeCalendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
@@ -9,26 +9,40 @@ import Tag from '../tag';
 import { defaultConfigProvider } from '../config-provider';
 import interopDefault from '../_util/interopDefault';
 import { RangePickerProps } from './interface';
-import { hasProp, getOptionProps, initDefaultProps, getComponent } from '../_util/props-util';
+import { hasProp, getOptionProps, getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { formatDate } from './utils';
 import InputIcon from './InputIcon';
 import { getDataAndAriaProps } from '../_util/util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 
-function getShowDateFromValue(value, mode) {
+type RangePickerValue =
+  | undefined[]
+  | null[]
+  | [moment.Moment]
+  | [undefined, moment.Moment]
+  | [moment.Moment, undefined]
+  | [null, moment.Moment]
+  | [moment.Moment, null]
+  | [moment.Moment, moment.Moment];
+
+export type RangePickerPresetRange = RangePickerValue | (() => RangePickerValue);
+function getShowDateFromValue(value: RangePickerValue, mode?: string | string[]) {
   const [start, end] = value;
   // value could be an empty array, then we should not reset showDate
   if (!start && !end) {
     return;
   }
   if (mode && mode[0] === 'month') {
-    return [start, end];
+    return [start, end] as RangePickerValue;
   }
   const newEnd = end && end.isSame(start, 'month') ? end.clone().add(1, 'month') : end;
-  return [start, newEnd];
+  return [start, newEnd] as RangePickerValue;
 }
 
-function pickerValueAdapter(value) {
+function pickerValueAdapter(
+  value?: moment.Moment | RangePickerValue,
+): RangePickerValue | undefined {
   if (!value) {
     return;
   }
@@ -38,14 +52,14 @@ function pickerValueAdapter(value) {
   return [value, value.clone().add(1, 'month')];
 }
 
-function isEmptyArray(arr) {
+function isEmptyArray(arr: any) {
   if (Array.isArray(arr)) {
     return arr.length === 0 || arr.every(i => !i);
   }
   return false;
 }
 
-function fixLocale(value, localeCode) {
+function fixLocale(value: RangePickerValue | undefined, localeCode: string | undefined) {
   if (!localeCode) {
     return;
   }
@@ -61,11 +75,18 @@ function fixLocale(value, localeCode) {
   }
 }
 
-export default {
+export interface RangePickerState {
+  sValue?: RangePickerValue;
+  sShowDate?: RangePickerValue;
+  sOpen?: boolean;
+  sHoverValue?: RangePickerValue;
+}
+
+export default defineComponent({
   name: 'ARangePicker',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: initDefaultProps(RangePickerProps(), {
+  props: initDefaultProps(RangePickerProps, {
     allowClear: true,
     showToday: false,
     separator: '~',
@@ -73,9 +94,12 @@ export default {
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      picker: null,
+      sTagPrefixCls: undefined,
+      sPrefixCls: '',
     };
   },
-  data() {
+  data(): RangePickerState {
     const value = this.value || this.defaultValue || [];
     const [start, end] = value;
     if (
@@ -89,7 +113,7 @@ export default {
     }
     const pickerValue = !value || isEmptyArray(value) ? this.defaultPickerValue : value;
     return {
-      sValue: value,
+      sValue: value as RangePickerValue,
       sShowDate: pickerValueAdapter(pickerValue || interopDefault(moment)()),
       sOpen: this.open,
       sHoverValue: [],
@@ -98,7 +122,7 @@ export default {
   watch: {
     value(val) {
       const value = val || [];
-      let state = { sValue: value };
+      let state: RangePickerState = { sValue: value };
       if (!shallowequal(val, this.sValue)) {
         state = {
           ...state,
@@ -120,14 +144,14 @@ export default {
     },
   },
   methods: {
-    setValue(value, hidePanel) {
+    setValue(value: RangePickerValue, hidePanel?: boolean) {
       this.handleChange(value);
       if ((hidePanel || !this.showTime) && !hasProp(this, 'open')) {
         this.setState({ sOpen: false });
       }
     },
 
-    savePicker(node) {
+    savePicker(node: any) {
       this.picker = node;
     },
     clearSelection(e) {
@@ -141,7 +165,7 @@ export default {
       this.setState({ sHoverValue: [] });
     },
 
-    handleChange(value) {
+    handleChange(value: RangePickerValue) {
       if (!hasProp(this, 'value')) {
         this.setState(({ sShowDate }) => ({
           sValue: value,
@@ -155,7 +179,7 @@ export default {
       this.$emit('change', value, [formatDate(start, this.format), formatDate(end, this.format)]);
     },
 
-    handleOpenChange(open) {
+    handleOpenChange(open: boolean) {
       if (!hasProp(this, 'open')) {
         this.setState({ sOpen: open });
       }
@@ -166,11 +190,11 @@ export default {
       this.$emit('openChange', open);
     },
 
-    handleShowDateChange(showDate) {
+    handleShowDateChange(showDate: boolean) {
       this.setState({ sShowDate: showDate });
     },
 
-    handleHoverChange(hoverValue) {
+    handleHoverChange(hoverValue: any) {
       this.setState({ sHoverValue: hoverValue });
     },
 
@@ -180,7 +204,7 @@ export default {
       }
     },
 
-    handleCalendarInputSelect(value) {
+    handleCalendarInputSelect(value: RangePickerValue) {
       const [start] = value;
       if (!start) {
         return;
@@ -191,7 +215,7 @@ export default {
       }));
     },
 
-    handleRangeClick(value) {
+    handleRangeClick(value: RangePickerPresetRange) {
       if (typeof value === 'function') {
         value = value();
       }
@@ -201,10 +225,10 @@ export default {
       this.$emit('openChange', false);
     },
 
-    onMouseEnter(e) {
+    onMouseEnter(e: MouseEvent) {
       this.$emit('mouseenter', e);
     },
-    onMouseLeave(e) {
+    onMouseLeave(e: MouseEvent) {
       this.$emit('mouseleave', e);
     },
 
@@ -218,7 +242,7 @@ export default {
 
     renderFooter() {
       const { ranges, $slots } = this;
-      const { _prefixCls: prefixCls, _tagPrefixCls: tagPrefixCls } = this;
+      const { sPrefixCls: prefixCls, sTagPrefixCls: tagPrefixCls } = this;
       const renderExtraFooter = this.renderExtraFooter || $slots.renderExtraFooter;
       if (!ranges && !renderExtraFooter) {
         return null;
@@ -257,7 +281,7 @@ export default {
   },
 
   render() {
-    const props = { ...getOptionProps(this), ...this.$attrs };
+    const props: any = { ...getOptionProps(this), ...this.$attrs };
     let suffixIcon = getComponent(this, 'suffixIcon');
     suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
     const {
@@ -291,8 +315,8 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('calendar', customizePrefixCls);
     const tagPrefixCls = getPrefixCls('tag', customizeTagPrefixCls);
-    this._prefixCls = prefixCls;
-    this._tagPrefixCls = tagPrefixCls;
+    this.sPrefixCls = prefixCls;
+    this.sTagPrefixCls = tagPrefixCls;
 
     const dateRender = props.dateRender || $slots.dateRender;
     fixLocale(value, localeCode);
@@ -307,7 +331,7 @@ export default {
     const pickerChangeHandler = {
       onChange: this.handleChange,
     };
-    let calendarProps = {
+    let calendarProps: any = {
       onOk: this.handleChange,
     };
     if (props.timePicker) {
@@ -353,7 +377,7 @@ export default {
     const calendar = <RangeCalendar {...rangeCalendarProps} vSlots={$slots} />;
 
     // default width for showTime
-    const pickerStyle = {};
+    const pickerStyle: CSSProperties = {};
     if (props.showTime) {
       pickerStyle.width = '350px';
     }
@@ -407,8 +431,6 @@ export default {
         id={props.id}
         class={classNames(props.class, props.pickerClass)}
         style={{ ...style, ...pickerStyle }}
-        class={props.pickerClass}
-        style={pickerStyle}
         tabindex={props.disabled ? -1 : 0}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -420,4 +442,4 @@ export default {
       </span>
     );
   },
-};
+});

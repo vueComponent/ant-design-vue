@@ -1,8 +1,19 @@
 // import { TimePickerProps } from '../time-picker'
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import { TimesType, TimeType } from '../_util/moment-util';
-
-export const PickerProps = () => ({
+import { tuple } from 'components/_util/type';
+import { PropType } from 'vue';
+export type PickerValue = moment.Moment | undefined | null | string;
+export type RangePickerValue =
+  | undefined[]
+  | null[]
+  | [moment.Moment | string]
+  | [undefined, moment.Moment | string]
+  | [moment.Moment | string, undefined]
+  | [null, moment.Moment | string]
+  | [moment.Moment | string, null]
+  | [moment.Moment, moment.Moment]
+  | [string, string];
+export const PickerProps = {
   name: PropTypes.string,
   transitionName: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -15,7 +26,7 @@ export const PickerProps = () => ({
   dropdownClassName: PropTypes.string,
   locale: PropTypes.any,
   localeCode: PropTypes.string,
-  size: PropTypes.oneOf(['large', 'small', 'default']),
+  size: PropTypes.oneOf(tuple('large', 'small', 'default')),
   getCalendarContainer: PropTypes.func,
   open: PropTypes.looseBool,
   disabledDate: PropTypes.func,
@@ -36,43 +47,43 @@ export const PickerProps = () => ({
   'onUpdate:value': PropTypes.func,
   onMouseenter: PropTypes.func,
   onMouseleave: PropTypes.func,
-});
+};
 
-export const SinglePickerProps = () => ({
-  value: TimeType,
-  defaultValue: TimeType,
-  defaultPickerValue: TimeType,
+export const SinglePickerProps = {
+  value: { type: [String, Object] as PropType<PickerValue> },
+  defaultValue: { type: [String, Object] as PropType<PickerValue> },
+  defaultPickerValue: { type: [String, Object] as PropType<PickerValue> },
   renderExtraFooter: PropTypes.any,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
-});
+};
 
-export const DatePickerProps = () => ({
-  ...PickerProps(),
-  ...SinglePickerProps(),
+export const DatePickerProps = {
+  ...PickerProps,
+  ...SinglePickerProps,
   showTime: withUndefined(PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool])),
   open: PropTypes.looseBool,
   disabledTime: PropTypes.func,
-  mode: PropTypes.oneOf(['time', 'date', 'month', 'year']),
+  mode: PropTypes.oneOf(tuple('time', 'date', 'month', 'year')),
   onOpenChange: PropTypes.func,
   onPanelChange: PropTypes.func,
   onOk: PropTypes.func,
-});
+};
 
-export const MonthPickerProps = () => ({
-  ...PickerProps(),
-  ...SinglePickerProps(),
+export const MonthPickerProps = {
+  ...PickerProps,
+  ...SinglePickerProps,
   placeholder: PropTypes.string,
   monthCellContentRender: PropTypes.func,
-});
+};
 // export const RangePickerPresetRange = PropTypes.oneOfType([TimesType, PropTypes.func])
 
-export const RangePickerProps = () => ({
-  ...PickerProps(),
+export const RangePickerProps = {
+  ...PickerProps,
   tagPrefixCls: PropTypes.string,
-  value: TimesType,
-  defaultValue: TimesType,
-  defaultPickerValue: TimesType,
+  value: { type: Array as PropType<RangePickerValue> },
+  defaultValue: { type: Array as PropType<RangePickerValue> },
+  defaultPickerValue: { type: Array as PropType<RangePickerValue> },
   timePicker: PropTypes.any,
   showTime: withUndefined(PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool])),
   ranges: PropTypes.object,
@@ -88,13 +99,13 @@ export const RangePickerProps = () => ({
   onPanelChange: PropTypes.func,
   onMouseenter: PropTypes.func,
   onMouseleave: PropTypes.func,
-});
+};
 
-export const WeekPickerProps = () => ({
-  ...PickerProps(),
-  ...SinglePickerProps(),
+export const WeekPickerProps = {
+  ...PickerProps,
+  ...SinglePickerProps,
   placeholder: PropTypes.string,
-});
+};
 
 // export interface DatePickerDecorator extends React.ClassicComponentClass<DatePickerProps> {
 //   RangePicker: React.ClassicComponentClass<RangePickerProps>;

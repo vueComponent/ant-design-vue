@@ -3,7 +3,7 @@ import { isValidElement } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import classNames from '../_util/classNames';
 
-const InputIcon = (_, { attrs }) => {
+const InputIcon = (_: any, { attrs }) => {
   const { suffixIcon, prefixCls } = attrs;
   return (
     (suffixIcon && isValidElement(suffixIcon) ? (

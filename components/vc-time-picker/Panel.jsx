@@ -5,6 +5,7 @@ import BaseMixin from '../_util/BaseMixin';
 import Header from './Header';
 import Combobox from './Combobox';
 import { getComponent } from '../_util/props-util';
+import { defineComponent } from 'vue';
 
 function noop() {}
 
@@ -31,7 +32,7 @@ function toNearestValidTime(time, hourOptions, minuteOptions, secondOptions) {
   return moment(`${hour}:${minute}:${second}`, 'HH:mm:ss');
 }
 
-const Panel = {
+const Panel = defineComponent({
   name: 'Panel',
   inheritAttrs: false,
   mixins: [BaseMixin],
@@ -223,6 +224,6 @@ const Panel = {
       </div>
     );
   },
-};
+});
 
 export default Panel;

@@ -1,28 +1,34 @@
-import { provide, inject } from 'vue';
+import { provide, inject, defineComponent, DefineComponent } from 'vue';
 import TimePickerPanel from '../vc-time-picker/Panel';
 import classNames from '../_util/classNames';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { generateShowHourMinuteSecond } from '../time-picker';
 import enUS from './locale/en_US';
-import { getOptionProps, initDefaultProps } from '../_util/props-util';
+import PropTypes from '../_util/vue-types';
+import { getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import { checkValidate, stringToMoment, momentToString } from '../_util/moment-util';
 
-const DEFAULT_FORMAT = {
+type PickerType = 'date' | 'week' | 'month';
+
+interface PickerMap {
+  [name: string]: string;
+}
+const DEFAULT_FORMAT: PickerMap = {
   date: 'YYYY-MM-DD',
   dateTime: 'YYYY-MM-DD HH:mm:ss',
   week: 'gggg-wo',
   month: 'YYYY-MM',
 };
 
-const LOCALE_FORMAT_MAPPING = {
+const LOCALE_FORMAT_MAPPING: PickerMap = {
   date: 'dateFormat',
   dateTime: 'dateTimeFormat',
   week: 'weekFormat',
   month: 'monthFormat',
 };
 
-function getColumns({ showHour, showMinute, showSecond, use12Hours }) {
+function getColumns({ showHour, showMinute, showSecond, use12Hours }: any) {
   let column = 0;
   if (showHour) {
     column += 1;
@@ -38,23 +44,25 @@ function getColumns({ showHour, showMinute, showSecond, use12Hours }) {
   }
   return column;
 }
-
-export default function wrapPicker(Picker, props, pickerType) {
-  return {
+export default function wrapPicker(
+  Picker: DefineComponent<any>,
+  props: any,
+  pickerType: PickerType,
+) {
+  return defineComponent({
     name: Picker.name,
     inheritAttrs: false,
-    props: initDefaultProps(props, {
-      transitionName: 'slide-up',
-      popupStyle: {},
-      locale: {},
-    }),
-    // model: {
-    //   prop: 'value',
-    //   event: 'change',
-    // },
+    props: {
+      ...props,
+      transitionName: PropTypes.string.def('slide-up'),
+      popupStyle: PropTypes.style,
+      locale: PropTypes.any.def({}),
+    },
     setup() {
       return {
         configProvider: inject('configProvider', defaultConfigProvider),
+        picker: undefined,
+        popupRef: undefined,
       };
     },
     created() {
@@ -76,7 +84,7 @@ export default function wrapPicker(Picker, props, pickerType) {
       },
     },
     methods: {
-      savePicker(node) {
+      savePicker(node: any) {
         this.picker = node;
       },
       getDefaultLocale() {
@@ -91,37 +99,37 @@ export default function wrapPicker(Picker, props, pickerType) {
         return result;
       },
 
-      savePopupRef(ref) {
+      savePopupRef(ref: any) {
         this.popupRef = ref;
       },
-      handleOpenChange(open) {
+      handleOpenChange(open: boolean) {
         this.$emit('openChange', open);
       },
 
-      handleFocus(e) {
+      handleFocus(e: FocusEvent) {
         this.$emit('focus', e);
       },
 
-      handleBlur(e) {
+      handleBlur(e: FocusEvent) {
         this.$emit('blur', e);
       },
 
-      handleMouseEnter(e) {
+      handleMouseEnter(e: MouseEvent) {
         this.$emit('mouseenter', e);
       },
 
-      handleMouseLeave(e) {
+      handleMouseLeave(e: MouseEvent) {
         this.$emit('mouseleave', e);
       },
-      handleChange(date, dateString) {
+      handleChange(date: any, dateString: string) {
         const value = this.valueFormat ? momentToString(date, this.valueFormat) : date;
         this.$emit('update:value', value);
         this.$emit('change', value, dateString);
       },
-      handleOk(val) {
+      handleOk(val: any) {
         this.$emit('ok', this.valueFormat ? momentToString(val, this.valueFormat) : val);
       },
-      handleCalendarChange(date, dateString) {
+      handleCalendarChange(date: any, dateString: string) {
         this.$emit(
           'calendarChange',
           this.valueFormat ? momentToString(date, this.valueFormat) : date,
@@ -148,8 +156,8 @@ export default function wrapPicker(Picker, props, pickerType) {
         }
       },
 
-      renderPicker(locale, localeCode) {
-        const props = { ...getOptionProps(this), ...this.$attrs };
+      renderPicker(locale: any, localeCode: string) {
+        const props: any = { ...getOptionProps(this), ...this.$attrs };
         this.transformValue(props);
         const {
           prefixCls: customizePrefixCls,
@@ -230,5 +238,5 @@ export default function wrapPicker(Picker, props, pickerType) {
         />
       );
     },
-  };
+  });
 }

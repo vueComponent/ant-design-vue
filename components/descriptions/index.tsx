@@ -1,17 +1,17 @@
-import { inject, cloneVNode } from 'vue';
+import { inject, cloneVNode, App, defineComponent, PropType, VNode } from 'vue';
 import warning from '../_util/warning';
-import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
+import ResponsiveObserve, { Breakpoint, responsiveArray } from '../_util/responsiveObserve';
 import { defaultConfigProvider } from '../config-provider';
 import Col from './Col';
 import PropTypes from '../_util/vue-types';
 import {
-  initDefaultProps,
   getOptionProps,
   getComponent,
   isValidElement,
   getSlot,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
+import { tuple, VueNode } from '../_util/type';
 
 export const DescriptionsItemProps = {
   prefixCls: PropTypes.string,
@@ -19,7 +19,7 @@ export const DescriptionsItemProps = {
   span: PropTypes.number,
 };
 
-function toArray(value) {
+function toArray(value: any) {
   let ret = value;
   if (value === undefined) {
     ret = [];
@@ -31,19 +31,35 @@ function toArray(value) {
 
 export const DescriptionsItem = {
   name: 'ADescriptionsItem',
-  props: initDefaultProps(DescriptionsItemProps, { span: 1 }),
+  props: {
+    prefixCls: PropTypes.string,
+    label: PropTypes.VNodeChild,
+    span: PropTypes.number.def(1),
+  },
   render() {
     return null;
   },
 };
 
+const defaultColumnMap = {
+  xxl: 3,
+  xl: 3,
+  lg: 3,
+  md: 3,
+  sm: 2,
+  xs: 1,
+};
+
 export const DescriptionsProps = {
   prefixCls: PropTypes.string,
   bordered: PropTypes.looseBool,
-  size: PropTypes.oneOf(['default', 'middle', 'small']).def('default'),
-  title: PropTypes.any,
-  column: PropTypes.oneOfType([PropTypes.number, PropTypes.object]),
-  layout: PropTypes.oneOf(['horizontal', 'vertical']),
+  size: PropTypes.oneOf(tuple('default', 'middle', 'small')).def('default'),
+  title: PropTypes.VNodeChild,
+  column: {
+    type: [Number, Object] as PropType<number | Partial<Record<Breakpoint, number>>>,
+    default: () => defaultColumnMap
+  },
+  layout: PropTypes.oneOf(tuple('horizontal', 'vertical')),
   colon: PropTypes.looseBool,
 };
 
@@ -52,13 +68,13 @@ export const DescriptionsProps = {
  * @param children: DescriptionsItem
  * @param column: number
  */
-const generateChildrenRows = (children, column) => {
+const generateChildrenRows = (children: VueNode, column: number) => {
   const rows = [];
   let columns = null;
-  let leftSpans;
+  let leftSpans: number;
 
   const itemNodes = toArray(children);
-  itemNodes.forEach((node, index) => {
+  itemNodes.forEach((node: VNode, index: number) => {
     const itemProps = getOptionProps(node);
     let itemNode = node;
 
@@ -97,22 +113,11 @@ const generateChildrenRows = (children, column) => {
   return rows;
 };
 
-const defaultColumnMap = {
-  xxl: 3,
-  xl: 3,
-  lg: 3,
-  md: 3,
-  sm: 2,
-  xs: 1,
-};
-
-const Descriptions = {
+const Descriptions = defineComponent({
   name: 'ADescriptions',
   Item: DescriptionsItem,
   mixins: [BaseMixin],
-  props: initDefaultProps(DescriptionsProps, {
-    column: defaultColumnMap,
-  }),
+  props: DescriptionsProps,
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -143,8 +148,19 @@ const Descriptions = {
       // Maybe there are some strange environments
       return 3;
     },
-    renderRow(children, index, { prefixCls }, bordered, layout, colon) {
-      const renderCol = (colItem, type, idx) => {
+    renderRow(
+      children: VNode[],
+      index: number,
+      { prefixCls }: { prefixCls: string },
+      bordered: boolean,
+      layout: 'horizontal' | 'vertical',
+      colon: boolean
+    ) {
+      const renderCol = (
+        colItem: VNode,
+        type: 'label' | 'content',
+        idx: number
+      ) => {
         return (
           <Col
             child={colItem}
@@ -160,7 +176,7 @@ const Descriptions = {
 
       const cloneChildren = [];
       const cloneContentChildren = [];
-      toArray(children).forEach((childrenItem, idx) => {
+      toArray(children).forEach((childrenItem: VNode, idx: number) => {
         cloneChildren.push(renderCol(childrenItem, 'label', idx));
         if (layout === 'vertical') {
           cloneContentChildren.push(renderCol(childrenItem, 'content', idx));
@@ -216,7 +232,7 @@ const Descriptions = {
     const column = this.getColumn();
     const children = getSlot(this);
     const cloneChildren = toArray(children)
-      .map(child => {
+      .map((child: VNode) => {
         if (isValidElement(child)) {
           return cloneVNode(child, {
             prefixCls,
@@ -259,9 +275,9 @@ const Descriptions = {
       </div>
     );
   },
-};
+});
 
-Descriptions.install = function(app) {
+Descriptions.install = function(app: App) {
   app.component(Descriptions.name, Descriptions);
   app.component(Descriptions.Item.name, Descriptions.Item);
   return app;

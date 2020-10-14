@@ -1,13 +1,26 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
-import VcCollapse, { panelProps } from '../vc-collapse';
+import VcCollapse from '../vc-collapse';
 import { defaultConfigProvider } from '../config-provider';
+import PropTypes from '../_util/vue-types';
 
-export default {
+export default defineComponent({
   name: 'ACollapsePanel',
   inheritAttrs: false,
   props: {
-    ...panelProps(),
+    openAnimation: PropTypes.object,
+    prefixCls: PropTypes.string,
+    header: PropTypes.VNodeChild,
+    headerClass: PropTypes.string,
+    showArrow: PropTypes.looseBool,
+    isActive: PropTypes.looseBool,
+    destroyInactivePanel: PropTypes.looseBool,
+    disabled: PropTypes.looseBool,
+    accordion: PropTypes.looseBool,
+    forceRender: PropTypes.looseBool,
+    expandIcon: PropTypes.func,
+    extra: PropTypes.VNodeChild,
+    panelKey: PropTypes.VNodeChild,
   },
   setup() {
     return {
@@ -18,7 +31,7 @@ export default {
     const { prefixCls: customizePrefixCls, showArrow = true } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('collapse', customizePrefixCls);
-    const { class: className, ...restAttrs } = this.$attrs;
+    const { class: className, ...restAttrs } = this.$attrs as any;
     const collapsePanelClassName = {
       [className]: className,
       [`${prefixCls}-no-arrow`]: !showArrow,
@@ -34,4 +47,4 @@ export default {
     };
     return <VcCollapse.Panel {...rcCollapePanelProps}>{getSlot(this)}</VcCollapse.Panel>;
   },
-};
+});

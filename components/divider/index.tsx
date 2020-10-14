@@ -1,4 +1,4 @@
-import { App, computed, defineComponent, inject, PropType, unref } from 'vue';
+import { App, computed, defineComponent, inject, PropType } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 
 const Divider = defineComponent({
@@ -25,7 +25,7 @@ const Divider = defineComponent({
     const classString = computed(() => {
       const { type, dashed, orientation } = props;
       const orientationPrefix = orientation.length > 0 ? '-' + orientation : orientation;
-      const prefixClsRef = unref(prefixCls);
+      const prefixClsRef = prefixCls.value;
       return {
         [prefixClsRef]: true,
         [`${prefixClsRef}-${type}`]: true,

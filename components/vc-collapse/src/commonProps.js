@@ -18,7 +18,6 @@ const collapseProps = () => ({
   expandIcon: PropTypes.func,
   openAnimation: PropTypes.object,
   expandIconPosition: PropTypes.oneOf(['left', 'right']),
-  'onUpdate:change': PropTypes.func,
   onChange: PropTypes.func,
 });
 

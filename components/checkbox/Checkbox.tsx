@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import VcCheckbox from '../vc-checkbox';
@@ -7,7 +7,7 @@ import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 function noop() {}
 
-export default {
+export default defineComponent({
   name: 'ACheckbox',
   inheritAttrs: false,
   __ANT_CHECKBOX: true,
@@ -65,17 +65,17 @@ export default {
     }
   },
   methods: {
-    handleChange(event) {
-      const targetChecked = event.target.checked;
+    handleChange(event: Event) {
+      const targetChecked = (event.target as any).checked;
       this.$emit('update:checked', targetChecked);
       // this.$emit('input', targetChecked);
       this.$emit('change', event);
     },
     focus() {
-      this.$refs.vcCheckbox.focus();
+      (this.$refs.vcCheckbox as any).focus();
     },
     blur() {
-      this.$refs.vcCheckbox.blur();
+      (this.$refs.vcCheckbox as any).blur();
     },
   },
 
@@ -93,8 +93,8 @@ export default {
       class: className,
       style,
       ...restAttrs
-    } = $attrs;
-    const checkboxProps = {
+    } = $attrs as any;
+    const checkboxProps: any = {
       ...restProps,
       prefixCls,
       ...restAttrs,
@@ -126,12 +126,12 @@ export default {
       <label
         class={classString}
         style={style}
-        onMouseenter={onMouseenter}
-        onMouseenter={onMouseleave}
+        onMouseenter={onMouseenter as EventHandlerNonNull}
+        onMouseleave={onMouseleave as EventHandlerNonNull}
       >
         <VcCheckbox {...checkboxProps} class={checkboxClass} ref="vcCheckbox" />
         {children.length ? <span>{children}</span> : null}
       </label>
     );
   },
-};
+});

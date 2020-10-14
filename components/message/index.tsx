@@ -1,3 +1,4 @@
+import { VNodeTypes } from 'vue';
 import Notification from '../vc-notification';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
@@ -6,15 +7,15 @@ import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
 
 let defaultDuration = 3;
-let defaultTop;
-let messageInstance;
+let defaultTop: number;
+let messageInstance: any;
 let key = 1;
 let prefixCls = 'ant-message';
 let transitionName = 'move-up';
 let getContainer = () => document.body;
-let maxCount;
+let maxCount: number;
 
-function getMessageInstance(callback) {
+function getMessageInstance(callback: (i: any) => void) {
   if (messageInstance) {
     callback(messageInstance);
     return;
@@ -27,7 +28,7 @@ function getMessageInstance(callback) {
       getContainer,
       maxCount,
     },
-    instance => {
+    (instance: any) => {
       if (messageInstance) {
         callback(messageInstance);
         return;
@@ -38,6 +39,12 @@ function getMessageInstance(callback) {
   );
 }
 
+type NoticeType = 'info' | 'success' | 'error' | 'warning' | 'loading';
+
+export interface ThenableArgument {
+  (val: any): void;
+}
+
 const iconMap = {
   info: InfoCircleFilled,
   success: CheckCircleFilled,
@@ -46,7 +53,22 @@ const iconMap = {
   loading: LoadingOutlined,
 };
 
-function notice(args) {
+export interface MessageType {
+  (): void;
+  then: (fill: ThenableArgument, reject: ThenableArgument) => Promise<void>;
+  promise: Promise<void>;
+}
+
+export interface ArgsProps {
+  content: VNodeTypes;
+  duration: number | null;
+  type: NoticeType;
+  onClose?: () => void;
+  icon?: VNodeTypes;
+  key?: string | number;
+}
+
+function notice(args: ArgsProps): MessageType {
   const duration = args.duration !== undefined ? args.duration : defaultDuration;
   const Icon = iconMap[args.type];
   const iconNode = Icon ? <Icon /> : '';
@@ -69,8 +91,8 @@ function notice(args) {
             <div
               class={`${prefixCls}-custom-content${args.type ? ` ${prefixCls}-${args.type}` : ''}`}
             >
-              {args.icon ? (typeof args.icon === 'function' ? args.icon() : args.icon) : iconNode}
-              <span>{typeof args.content === 'function' ? args.content() : args.content}</span>
+              {args.icon || iconNode}
+              <span>{args.content}</span>
             </div>
           );
         },
@@ -78,35 +100,40 @@ function notice(args) {
       });
     });
   });
-  const result = () => {
+  const result: any = () => {
     if (messageInstance) {
       messageInstance.removeNotice(target);
     }
   };
-  result.then = (filled, rejected) => closePromise.then(filled, rejected);
+  result.then = (filled: ThenableArgument, rejected: ThenableArgument) =>
+    closePromise.then(filled, rejected);
   result.promise = closePromise;
   return result;
 }
 
-// type ConfigContent = React.ReactNode | string;
-// type ConfigDuration = number | (() => void);
-// export type ConfigOnClose = () => void;
+type ConfigDuration = number | (() => void);
+type JointContent = VNodeTypes | ArgsProps;
+export type ConfigOnClose = () => void;
 
-function isArgsProps(content) {
-  return Object.prototype.toString.call(content) === '[object Object]' && !!content.content;
+function isArgsProps(content: JointContent): content is ArgsProps {
+  return (
+    Object.prototype.toString.call(content) === '[object Object]' &&
+    !!(content as ArgsProps).content
+  );
 }
 
-// export interface ConfigOptions {
-//   top?: number;
-//   duration?: number;
-//   prefixCls?: string;
-//   getContainer?: () => HTMLElement;
-//   transitionName?: string;
-// }
+export interface ConfigOptions {
+  top?: number;
+  duration?: number;
+  prefixCls?: string;
+  getContainer?: () => HTMLElement;
+  transitionName?: string;
+  maxCount?: number;
+}
 
-const api = {
+const api: any = {
   open: notice,
-  config(options) {
+  config(options: ConfigOptions) {
     if (options.top !== undefined) {
       defaultTop = options.top;
       messageInstance = null; // delete messageInstance for new defaultTop
@@ -138,7 +165,7 @@ const api = {
 };
 
 ['success', 'info', 'warning', 'error', 'loading'].forEach(type => {
-  api[type] = (content, duration, onClose) => {
+  api[type] = (content: JointContent, duration: ConfigDuration, onClose?: ConfigOnClose) => {
     if (isArgsProps(content)) {
       return api.open({ ...content, type });
     }
@@ -151,5 +178,17 @@ const api = {
 });
 
 api.warn = api.warning;
+
+export interface MessageApi {
+  info(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  success(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  error(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  warn(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  warning(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  loading(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
+  open(args: ArgsProps): MessageType;
+  config(options: ConfigOptions): void;
+  destroy(): void;
+}
 
 export default api;

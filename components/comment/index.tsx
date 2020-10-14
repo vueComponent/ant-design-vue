@@ -1,94 +1,101 @@
-import { inject, VNodeTypes, CSSProperties, App, SetupContext } from 'vue';
-import classNames from '../_util/classNames';
+import { App, defineComponent, inject } from 'vue';
+import PropsTypes from '../_util/vue-types';
+import { getComponent, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
-
-export interface CommentProps {
-  /** List of action items rendered below the comment content */
-  actions?: Array<VNodeTypes>;
+import { VueNode } from '../_util/type';
+export const CommentProps = {
+  actions: PropsTypes.array,
   /** The element to display as the comment author. */
-  author?: VNodeTypes;
+  author: PropsTypes.VNodeChild,
   /** The element to display as the comment avatar - generally an antd Avatar */
-  avatar?: VNodeTypes;
+  avatar: PropsTypes.VNodeChild,
   /** The main content of the comment */
-  content: VNodeTypes;
+  content: PropsTypes.VNodeChild,
   /** Comment prefix defaults to '.ant-comment' */
-  prefixCls?: string;
-  /** Additional style for the comment */
-  style?: CSSProperties;
+  prefixCls: PropsTypes.string,
   /** A datetime element containing the time to be displayed */
-  datetime?: VNodeTypes;
-}
+  datetime: PropsTypes.VNodeChild,
+};
 
-const Comment = (
-  {
-    actions,
-    author,
-    avatar,
-    content,
-    prefixCls: customizePrefixCls,
-    datetime,
-    ...otherProps
-  }: CommentProps,
-  { slots }: SetupContext,
-) => {
-  const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
+const Comment = defineComponent({
+  name: 'AComment',
+  props: CommentProps,
+  setup() {
+    return {
+      configProvider: inject('configProvider', defaultConfigProvider),
+    };
+  },
+  methods: {
+    getAction(actions: VueNode[]) {
+      if (!actions || !actions.length) {
+        return null;
+      }
+      const actionList = actions.map((action, index) => <li key={`action-${index}`}>{action}</li>);
+      return actionList;
+    },
+    renderNested(prefixCls: string, children: VueNode) {
+      return <div class={`${prefixCls}-nested`}>{children}</div>;
+    },
+  },
 
-  const renderNested = (prefixCls: string, nestedChildren: any) => {
-    return <div class={classNames(`${prefixCls}-nested`)}>{nestedChildren}</div>;
-  };
+  render() {
+    const { prefixCls: customizePrefixCls } = this.$props;
 
-  const prefixCls = getPrefixCls('comment', customizePrefixCls);
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const prefixCls = getPrefixCls('comment', customizePrefixCls);
 
-  const avatarDom = avatar ? (
-    <div class={`${prefixCls}-avatar`}>
-      {typeof avatar === 'string' ? <img src={avatar} alt="comment-avatar" /> : avatar}
-    </div>
-  ) : null;
+    const actions = getComponent(this, 'actions');
+    const author = getComponent(this, 'author');
+    const avatar = getComponent(this, 'avatar');
+    const content = getComponent(this, 'content');
+    const datetime = getComponent(this, 'datetime');
 
-  const actionDom =
-    actions && actions.length ? (
+    const avatarDom = (
+      <div class={`${prefixCls}-avatar`}>
+        {typeof avatar === 'string' ? <img src={avatar} alt="comment-avatar" /> : avatar}
+      </div>
+    );
+
+    const actionDom = actions ? (
       <ul class={`${prefixCls}-actions`}>
-        {actions.map((action, index) => (
-          <li key={`action-${index}`}>{action}</li>
-        ))}
+        {this.getAction(Array.isArray(actions) ? actions : [actions])}
       </ul>
     ) : null;
 
-  const authorContent = (author || datetime) && (
-    <div class={`${prefixCls}-content-author`}>
-      {author && <span class={`${prefixCls}-content-author-name`}>{author}</span>}
-      {datetime && <span class={`${prefixCls}-content-author-time`}>{datetime}</span>}
-    </div>
-  );
+    const authorContent = (
+      <div class={`${prefixCls}-content-author`}>
+        {author && <span class={`${prefixCls}-content-author-name`}>{author}</span>}
+        {datetime && <span class={`${prefixCls}-content-author-time`}>{datetime}</span>}
+      </div>
+    );
 
-  const contentDom = (
-    <div class={`${prefixCls}-content`}>
-      {authorContent}
-      <div class={`${prefixCls}-content-detail`}>{content}</div>
-      {actionDom}
-    </div>
-  );
-  const cls = classNames(prefixCls);
+    const contentDom = (
+      <div class={`${prefixCls}-content`}>
+        {authorContent}
+        <div class={`${prefixCls}-content-detail`}>{content}</div>
+        {actionDom}
+      </div>
+    );
 
-  const children = slots.default?.();
-
-  return (
-    <div {...otherProps} class={cls}>
+    const comment = (
       <div class={`${prefixCls}-inner`}>
         {avatarDom}
         {contentDom}
       </div>
-      {children ? renderNested(prefixCls, children) : null}
-    </div>
-  );
-};
-
-Comment.displayName = 'AComment';
+    );
+    const children = getSlot(this);
+    return (
+      <div class={prefixCls}>
+        {comment}
+        {children && children.length ? this.renderNested(prefixCls, children) : null}
+      </div>
+    );
+  },
+});
 
 /* istanbul ignore next */
 Comment.install = function(app: App) {
   app.component(Comment.name, Comment);
   return app;
 };
-
 export default Comment;

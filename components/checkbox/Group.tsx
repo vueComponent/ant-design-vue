@@ -1,18 +1,27 @@
-import { inject, provide } from 'vue';
+import { defineComponent, inject, PropType, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Checkbox from './Checkbox';
 import hasProp, { getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
+import { VueNode } from '../_util/type';
 
+export type CheckboxValueType = string | number | boolean;
+export interface CheckboxOptionType {
+  label: VueNode;
+  value: CheckboxValueType;
+  disabled?: boolean;
+  indeterminate?: boolean;
+  onChange?: (e: Event) => void;
+}
 function noop() {}
-export default {
+export default defineComponent({
   name: 'ACheckboxGroup',
   props: {
     name: PropTypes.string,
     prefixCls: PropTypes.string,
-    defaultValue: PropTypes.array,
-    value: PropTypes.array,
-    options: PropTypes.array.def([]),
+    defaultValue: { type: Array as PropType<Array<CheckboxValueType>>},
+    value: { type: Array as PropType<Array<CheckboxValueType>>},
+    options: {type: Array as PropType<Array<CheckboxOptionType | string>>},
     disabled: PropTypes.looseBool,
     onChange: PropTypes.func,
   },
@@ -54,14 +63,14 @@ export default {
         return { ...option, label };
       });
     },
-    cancelValue(value) {
+    cancelValue(value: CheckboxValueType) {
       this.registeredValues = this.registeredValues.filter(val => val !== value);
     },
 
-    registerValue(value) {
+    registerValue(value: CheckboxValueType) {
       this.registeredValues = [...this.registeredValues, value];
     },
-    toggleOption(option) {
+    toggleOption(option: CheckboxOptionType) {
       const { registeredValues } = this;
       const optionIndex = this.sValue.indexOf(option.value);
       const value = [...this.sValue];
@@ -111,4 +120,4 @@ export default {
     }
     return <div class={groupPrefixCls}>{children}</div>;
   },
-};
+});

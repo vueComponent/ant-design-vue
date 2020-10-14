@@ -1,5 +1,5 @@
-import { App, defineComponent, inject, provide, PropType } from 'vue';
-import PropTypes, { withUndefined } from '../_util/vue-types';
+import { App, inject, provide, PropType, defineComponent, CSSProperties } from 'vue';
+import PropTypes from '../_util/vue-types';
 import VcCascader from '../vc-cascader';
 import arrayTreeFilter from 'array-tree-filter';
 import classNames from '../_util/classNames';
@@ -23,7 +23,8 @@ import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
 import warning from '../_util/warning';
 import { defaultConfigProvider } from '../config-provider';
-import { tuple, VueNode } from 'components/_util/type';
+import { tuple, VueNode } from '../_util/type';
+import { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
 export interface CascaderOptionType {
   value?: string | number;
@@ -31,7 +32,7 @@ export interface CascaderOptionType {
   disabled?: boolean;
   isLeaf?: boolean;
   loading?: boolean;
-  children?: Array<CascaderOptionType>;
+  children?: CascaderOptionType[];
   [key: string]: any;
 }
 
@@ -90,7 +91,7 @@ function noop() {}
 
 const CascaderProps = {
   /** 可选项数据源 */
-  options: { type: Array as PropType<CascaderOptionType>, default: [] },
+  options: { type: Array as PropType<CascaderOptionType[]>, default: [] },
   /** 默认的选中项 */
   defaultValue: PropTypes.array,
   /** 指定选中项 */
@@ -116,8 +117,8 @@ const CascaderProps = {
   /** 是否支持清除*/
   allowClear: PropTypes.looseBool.def(true),
   showSearch: {
-    type: [Boolean, Object] as PropType<ShowSearchType>,
-    default: undefined,
+    type: [Boolean, Object] as PropType<boolean | ShowSearchType | undefined>,
+    default: undefined as PropType<boolean | ShowSearchType | undefined>,
   },
   notFoundContent: PropTypes.VNodeChild,
   loadData: PropTypes.func,
@@ -143,8 +144,6 @@ const CascaderProps = {
   'onUpdate:value': PropTypes.func,
 };
 
-type CascaderPropsTypes = typeof CascaderProps;
-
 // We limit the filtered item count by default
 const defaultLimit = 50;
 
@@ -169,7 +168,7 @@ function defaultSortFilteredOption(
   return a.findIndex(callback) - b.findIndex(callback);
 }
 
-function getFilledFieldNames(props: CascaderPropsTypes) {
+function getFilledFieldNames(props: any) {
   const fieldNames = (props.fieldNames || {}) as FieldNamesType;
   const names: FilledFieldNamesType = {
     children: fieldNames.children || 'children',
@@ -181,7 +180,7 @@ function getFilledFieldNames(props: CascaderPropsTypes) {
 
 function flattenTree(
   options: CascaderOptionType[],
-  props: CascaderPropsTypes,
+  props: any,
   ancestor: CascaderOptionType[] = [],
 ) {
   const names: FilledFieldNamesType = getFilledFieldNames(props);
@@ -201,7 +200,7 @@ function flattenTree(
 
 const defaultDisplayRender = ({ labels }) => labels.join(' / ');
 
-const Cascader = {
+const Cascader = defineComponent({
   inheritAttrs: false,
   name: 'ACascader',
   mixins: [BaseMixin],
@@ -216,11 +215,13 @@ const Cascader = {
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
-      localeData: inject('localeData', {}),
+      localeData: inject('localeData', {} as any),
+      cachedOptions: [],
+      popupRef: undefined,
+      input: undefined,
     };
   },
   data() {
-    this.cachedOptions = [];
     const { value, defaultValue, popupVisible, showSearch, options } = this.$props;
     return {
       sValue: value || defaultValue || [],
@@ -246,15 +247,15 @@ const Cascader = {
     },
     options(val) {
       if (this.showSearch) {
-        this.setState({ flattenOptions: flattenTree(val, this.$props) });
+        this.setState({ flattenOptions: flattenTree(val, this.$props as any) });
       }
     },
   },
   methods: {
-    savePopupRef(ref) {
+    savePopupRef(ref: any) {
       this.popupRef = ref;
     },
-    highlightKeyword(str, keyword, prefixCls) {
+    highlightKeyword(str: string, keyword: string, prefixCls: string | undefined) {
       return str
         .split(keyword)
         .map((node, index) =>
@@ -264,7 +265,13 @@ const Cascader = {
         );
     },
 
-    defaultRenderFilteredOption({ inputValue, path, prefixCls, names }) {
+    defaultRenderFilteredOption(opt: {
+      inputValue: string,
+      path: CascaderOptionType[],
+      prefixCls: string | undefined,
+      names: FilledFieldNamesType,
+    }) {
+      const { inputValue, path, prefixCls, names } = opt
       return path.map((option, index) => {
         const label = option[names.label];
         const node =
@@ -274,10 +281,10 @@ const Cascader = {
         return index === 0 ? node : [' / ', node];
       });
     },
-    saveInput(node) {
+    saveInput(node: any) {
       this.input = node;
     },
-    handleChange(value, selectedOptions) {
+    handleChange(value: any, selectedOptions: CascaderOptionType[]) {
       this.setState({ inputValue: '' });
       if (selectedOptions[0].__IS_FILTERED_OPTION) {
         const unwrappedValue = value[0];
@@ -288,9 +295,9 @@ const Cascader = {
       this.setValue(value, selectedOptions);
     },
 
-    handlePopupVisibleChange(popupVisible) {
+    handlePopupVisibleChange(popupVisible: boolean) {
       if (!hasProp(this, 'popupVisible')) {
-        this.setState(state => ({
+        this.setState((state: any) => ({
           sPopupVisible: popupVisible,
           inputFocused: popupVisible,
           inputValue: popupVisible ? state.inputValue : '',
@@ -298,18 +305,18 @@ const Cascader = {
       }
       this.$emit('popupVisibleChange', popupVisible);
     },
-    handleInputFocus(e) {
+    handleInputFocus(e: InputEvent) {
       this.$emit('focus', e);
     },
 
-    handleInputBlur(e) {
+    handleInputBlur(e: InputEvent) {
       this.setState({
         inputFocused: false,
       });
       this.$emit('blur', e);
     },
 
-    handleInputClick(e) {
+    handleInputClick(e: MouseEvent & {nativeEvent?: any}) {
       const { inputFocused, sPopupVisible } = this;
       // Prevent `Trigger` behaviour.
       if (inputFocused || sPopupVisible) {
@@ -320,19 +327,19 @@ const Cascader = {
       }
     },
 
-    handleKeyDown(e) {
+    handleKeyDown(e: KeyboardEvent) {
       if (e.keyCode === KeyCode.BACKSPACE || e.keyCode === KeyCode.SPACE) {
         e.stopPropagation();
       }
     },
 
-    handleInputChange(e) {
-      const inputValue = e.target.value;
+    handleInputChange(e: Event) {
+      const inputValue = (e.target as any).value;
       this.setState({ inputValue });
       this.$emit('search', inputValue);
     },
 
-    setValue(value, selectedOptions) {
+    setValue(value: string[] | number[], selectedOptions: CascaderOptionType[] = []) {
       if (!hasProp(this, 'value')) {
         this.setState({ sValue: value });
       }
@@ -355,7 +362,7 @@ const Cascader = {
       return displayRender({ labels, selectedOptions });
     },
 
-    clearSelection(e) {
+    clearSelection(e: MouseEvent) {
       e.preventDefault();
       e.stopPropagation();
       if (!this.inputValue) {
@@ -366,23 +373,23 @@ const Cascader = {
       }
     },
 
-    generateFilteredOptions(prefixCls, renderEmpty) {
+    generateFilteredOptions(prefixCls: string | undefined, renderEmpty: RenderEmptyHandler) {
       const { showSearch, notFoundContent } = this;
-      const names = getFilledFieldNames(this.$props);
+      const names: FilledFieldNamesType = getFilledFieldNames(this.$props);
       const {
         filter = defaultFilterOption,
         // render = this.defaultRenderFilteredOption,
         sort = defaultSortFilteredOption,
         limit = defaultLimit,
-      } = showSearch;
+      } = showSearch as ShowSearchType;
       const render =
-        showSearch.render ||
+        (showSearch as ShowSearchType).render ||
         getComponent(this, 'showSearchRender') ||
         this.defaultRenderFilteredOption;
       const { flattenOptions = [], inputValue } = this.$data;
 
       // Limit the filter if needed
-      let filtered;
+      let filtered: Array<CascaderOptionType[]>
       if (limit > 0) {
         filtered = [];
         let matchCount = 0;
@@ -453,7 +460,7 @@ const Cascader = {
       showSearch = false,
       notFoundContent,
       ...otherProps
-    } = props;
+    } = props as any;
     const { onEvents, extraAttrs } = splitAttrs(this.$attrs);
     const { class: className, style, ...restAttrs } = extraAttrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -536,7 +543,7 @@ const Cascader = {
       this.cachedOptions = options;
     }
 
-    const dropdownMenuColumnStyle = {};
+    const dropdownMenuColumnStyle: CSSProperties = {};
     const isNotFound =
       (options || []).length === 1 && options[0].value === 'ANT_CASCADER_NOT_FOUND';
     if (isNotFound) {
@@ -609,7 +616,7 @@ const Cascader = {
     };
     return <VcCascader {...cascaderProps}>{input}</VcCascader>;
   },
-};
+});
 
 Cascader.install = function(app: App) {
   app.component(Cascader.name, Cascader);

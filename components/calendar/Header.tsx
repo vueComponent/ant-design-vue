@@ -3,7 +3,7 @@ import Select from '../select';
 import { Group, Button } from '../radio';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
-import { VueNode } from 'components/_util/type';
+import { VueNode } from '../_util/type';
 
 const { Option } = Select;
 

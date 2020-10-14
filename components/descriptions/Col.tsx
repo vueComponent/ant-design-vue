@@ -1,13 +1,22 @@
+import { SetupContext, VNode } from 'vue';
 import { getOptionProps } from '../_util/props-util';
 
-const Col = (_, { attrs }) => {
-  const { child = {}, bordered, colon, type, layout, colKey: key } = attrs;
+interface ColProps {
+  child: VNode;
+  bordered: boolean;
+  colon: boolean;
+  type?: 'label' | 'content';
+  layout?: 'horizontal' | 'vertical';
+  colKey?: string
+}
+const Col = (_props: ColProps, { attrs }: SetupContext) => {
+  const { child = {} as VNode, bordered, colon, type, layout, colKey: key } = attrs as unknown as ColProps;
   const { prefixCls, span = 1 } = getOptionProps(child);
-  const { children = {}, props = {} } = child;
+  const { children = {} as any, props = {} } = child;
   const label = props.label || (children.label && children.label());
   const defaultSlot = children.default && children.default();
 
-  const labelProps = {
+  const labelProps: any = {
     class: [
       `${prefixCls}-item-label`,
       {

@@ -1,37 +1,46 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import moment from 'moment';
 import Calendar from '../vc-calendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import { defaultConfigProvider } from '../config-provider';
-import { hasProp, getOptionProps, initDefaultProps, getComponent } from '../_util/props-util';
+import { hasProp, getOptionProps, getComponent } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import BaseMixin from '../_util/BaseMixin';
 import { WeekPickerProps } from './interface';
 import interopDefault from '../_util/interopDefault';
 import InputIcon from './InputIcon';
 import { getDataAndAriaProps } from '../_util/util';
+import initDefaultProps from 'components/_util/props-util/initDefaultProps';
 
-function formatValue(value, format) {
+function formatValue(value: moment.Moment | null, format: string): string {
   return (value && value.format(format)) || '';
+}
+
+interface WeekPickerState {
+  _open?: boolean;
+  _value?: moment.Moment | null;
 }
 function noop() {}
 
-export default {
+export default defineComponent({
   name: 'AWeekPicker',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: initDefaultProps(WeekPickerProps(), {
+  props: initDefaultProps(WeekPickerProps, {
     format: 'gggg-wo',
     allowClear: true,
   }),
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      prevState: {} as WeekPickerState,
+      input: undefined,
+      sPrefixCls: undefined,
     };
   },
-  data() {
-    const value = this.value || this.defaultValue;
+  data(): WeekPickerState {
+    const value: any = this.value || this.defaultValue;
     if (value && !interopDefault(moment).isMoment(value)) {
       throw new Error(
         'The value/defaultValue of WeekPicker or MonthPicker must be ' + 'a moment object',
@@ -72,12 +81,12 @@ export default {
     });
   },
   methods: {
-    saveInput(node) {
+    saveInput(node: any) {
       this.input = node;
     },
     weekDateRender({ current }) {
       const selectedValue = this.$data._value;
-      const { _prefixCls: prefixCls, $slots } = this;
+      const { sPrefixCls: prefixCls, $slots } = this;
       const dateRender = this.dateRender || $slots.dateRender;
       const dateNode = dateRender ? dateRender({ current }) : current.date();
       if (
@@ -93,19 +102,19 @@ export default {
       }
       return <div class={`${prefixCls}-date`}>{dateNode}</div>;
     },
-    handleChange(value) {
+    handleChange(value: moment.Moment | null) {
       if (!hasProp(this, 'value')) {
         this.setState({ _value: value });
       }
       this.$emit('change', value, formatValue(value, this.format));
     },
-    handleOpenChange(open) {
+    handleOpenChange(open: boolean) {
       if (!hasProp(this, 'open')) {
         this.setState({ _open: open });
       }
       this.$emit('openChange', open);
     },
-    clearSelection(e) {
+    clearSelection(e: MouseEvent) {
       e.preventDefault();
       e.stopPropagation();
       this.handleChange(null);
@@ -117,8 +126,8 @@ export default {
     blur() {
       this.input.blur();
     },
-    renderFooter(...args) {
-      const { _prefixCls: prefixCls, $slots } = this;
+    renderFooter(...args: any[]) {
+      const { sPrefixCls: prefixCls, $slots } = this;
       const renderExtraFooter = this.renderExtraFooter || $slots.renderExtraFooter;
       return renderExtraFooter ? (
         <div class={`${prefixCls}-footer-extra`}>{renderExtraFooter(...args)}</div>
@@ -147,10 +156,10 @@ export default {
     } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('calendar', customizePrefixCls);
-    this._prefixCls = prefixCls;
+    this.sPrefixCls = prefixCls;
 
     const { _value: pickerValue, _open: open } = $data;
-    const { class: className, style, id, onFocus = noop, onBlur = noop } = props;
+    const { class: className, style, id, onFocus = noop, onBlur = noop } = props as any;
 
     if (pickerValue && localeCode) {
       pickerValue.locale(localeCode);
@@ -169,7 +178,7 @@ export default {
         showToday={false}
         disabledDate={disabledDate}
         renderFooter={this.renderFooter}
-        defaultValue={defaultPickerValue}
+        defaultValue={defaultPickerValue as any}
       />
     );
     const clearIcon =
@@ -214,8 +223,8 @@ export default {
         id={id}
         {...getDataAndAriaProps(props)}
       >
-        <VcDatePicker {...vcDatePickerProps} vSlots={{ default: input, ...$slots }}></VcDatePicker>
+        <VcDatePicker {...vcDatePickerProps} v-slots={{ default: input, ...$slots }}></VcDatePicker>
       </span>
     );
   },
-};
+});

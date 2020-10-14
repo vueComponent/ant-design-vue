@@ -46,11 +46,7 @@ export interface ProgressProps extends HTMLAttributes {
 export default defineComponent({
   name: 'AProgress',
   setup(_: ProgressProps, { slots, attrs }: SetupContext) {
-    const progressProps = attrs as ProgressProps;
-    const props = {
-      ...initDefaultProps,
-      ...progressProps,
-    };
+    const props = attrs as ProgressProps;
     const { getPrefixCls } = inject('configProvider', ConfigConsumerProps);
     const getPercentNumber = () => {
       const { successPercent, percent = 0 } = props;
@@ -69,7 +65,7 @@ export default defineComponent({
     };
 
     const renderProcessInfo = (prefixCls: string, progressStatus: string) => {
-      const { showInfo, format, type, percent, successPercent } = props;
+      const { showInfo = true, format, type = 'line', percent = 0, successPercent } = props;
       if (!showInfo) return null;
 
       let text;
@@ -95,7 +91,12 @@ export default defineComponent({
     };
 
     return () => {
-      const { prefixCls: customizePrefixCls, size, type, showInfo } = props;
+      const {
+        prefixCls: customizePrefixCls,
+        size = 'default',
+        type = 'line',
+        showInfo = true,
+      } = props;
       const prefixCls = getPrefixCls('progress', customizePrefixCls);
       const progressStatus = getProgressStatus();
       const progressInfo = renderProcessInfo(prefixCls, progressStatus);
@@ -105,16 +106,19 @@ export default defineComponent({
       // Render progress shape
       if (type === 'line') {
         const lineProps = {
+          ...initDefaultProps,
           ...props,
           prefixCls,
         };
         progress = <Line {...lineProps}>{progressInfo}</Line>;
       } else if (type === 'circle' || type === 'dashboard') {
         const circleProps = {
+          ...initDefaultProps,
           ...props,
           prefixCls,
           progressStatus,
         };
+        console.log(circleProps);
         progress = <Circle {...circleProps}>{progressInfo}</Circle>;
       }
 

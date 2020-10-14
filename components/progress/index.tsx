@@ -1,6 +1,6 @@
 import Progress from './progress';
 import { App } from 'vue';
-// export { ProgressProps } from './progress';
+export { ProgressProps } from './progress';
 
 /* istanbul ignore next */
 Progress.install = function(app: App) {

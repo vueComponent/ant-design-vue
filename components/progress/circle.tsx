@@ -27,7 +27,6 @@ export interface CircleProps extends HTMLAttributes {
 
 function getPercentage({ percent, successPercent }: { percent?: number; successPercent?: number }) {
   const ptg = validProgress(percent);
-  debugger;
 
   if (!successPercent) return ptg;
 

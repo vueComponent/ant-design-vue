@@ -11,4 +11,6 @@ Checkbox.install = function(app: App) {
   return app;
 };
 
-export default Checkbox;
+export default Checkbox as typeof Checkbox & {
+  readonly Group: typeof CheckboxGroup;
+};

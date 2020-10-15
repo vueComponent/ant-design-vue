@@ -1,4 +1,4 @@
-import Empty from '../components/date-picker';
+import Empty from '../components/input-number';
 import '../components/empty/style';
 
 export default {

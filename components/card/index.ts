@@ -14,4 +14,7 @@ Card.install = function(app: App) {
   return app;
 };
 
-export default Card;
+export default Card as typeof Card & {
+  readonly Meta: typeof Meta;
+  readonly Grid: typeof Grid;
+};

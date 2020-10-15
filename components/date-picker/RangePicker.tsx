@@ -8,7 +8,7 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import Tag from '../tag';
 import { defaultConfigProvider } from '../config-provider';
 import interopDefault from '../_util/interopDefault';
-import { RangePickerProps } from './interface';
+import { RangePickerProps } from './props';
 import { hasProp, getOptionProps, getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { formatDate } from './utils';

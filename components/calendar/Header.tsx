@@ -7,7 +7,7 @@ import { VueNode } from '../_util/type';
 
 const { Option } = Select;
 
-function getMonthsLocale(value) {
+function getMonthsLocale(value: moment.Moment) {
   const current = value.clone();
   const localeData = value.localeData();
   const months = [];

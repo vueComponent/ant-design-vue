@@ -44,7 +44,7 @@ export const PickerProps = {
   onOpenChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
-  'onUpdate:value': PropTypes.func,
+  //'onUpdate:value': PropTypes.func,
   onMouseenter: PropTypes.func,
   onMouseleave: PropTypes.func,
 };

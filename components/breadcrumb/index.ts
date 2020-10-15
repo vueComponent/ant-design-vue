@@ -14,4 +14,7 @@ Breadcrumb.install = function(app: App) {
   return app;
 };
 
-export default Breadcrumb;
+export default Breadcrumb as typeof Breadcrumb & {
+  readonly Item: typeof BreadcrumbItem;
+  readonly Separator: typeof BreadcrumbSeparator;
+};

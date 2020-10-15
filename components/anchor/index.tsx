@@ -10,4 +10,6 @@ Anchor.install = function(app: App) {
   app.component(Anchor.Link.name, Anchor.Link);
   return app;
 };
-export default Anchor;
+export default Anchor as typeof Anchor & {
+  readonly Link: typeof AnchorLink;
+};

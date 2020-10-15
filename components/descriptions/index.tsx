@@ -4,12 +4,7 @@ import ResponsiveObserve, { Breakpoint, responsiveArray } from '../_util/respons
 import { defaultConfigProvider } from '../config-provider';
 import Col from './Col';
 import PropTypes from '../_util/vue-types';
-import {
-  getOptionProps,
-  getComponent,
-  isValidElement,
-  getSlot,
-} from '../_util/props-util';
+import { getOptionProps, getComponent, isValidElement, getSlot } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { tuple, VueNode } from '../_util/type';
 
@@ -57,7 +52,7 @@ export const DescriptionsProps = {
   title: PropTypes.VNodeChild,
   column: {
     type: [Number, Object] as PropType<number | Partial<Record<Breakpoint, number>>>,
-    default: () => defaultColumnMap
+    default: () => defaultColumnMap,
   },
   layout: PropTypes.oneOf(tuple('horizontal', 'vertical')),
   colon: PropTypes.looseBool,
@@ -154,13 +149,9 @@ const Descriptions = defineComponent({
       { prefixCls }: { prefixCls: string },
       bordered: boolean,
       layout: 'horizontal' | 'vertical',
-      colon: boolean
+      colon: boolean,
     ) {
-      const renderCol = (
-        colItem: VNode,
-        type: 'label' | 'content',
-        idx: number
-      ) => {
+      const renderCol = (colItem: VNode, type: 'label' | 'content', idx: number) => {
         return (
           <Col
             child={colItem}
@@ -283,4 +274,6 @@ Descriptions.install = function(app: App) {
   return app;
 };
 
-export default Descriptions;
+export default Descriptions as typeof Descriptions & {
+  readonly Item: typeof DescriptionsItem;
+};

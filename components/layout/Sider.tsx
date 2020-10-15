@@ -69,7 +69,7 @@ export default defineComponent({
     width: 200,
     collapsedWidth: 80,
   }),
-  emits: ['onUpdate:collapsed', 'breakpoint', 'update:collapsed', 'collapse'],
+  emits: ['breakpoint', 'update:collapsed', 'collapse'],
   data() {
     const uniqueId = generateId('ant-sider-');
     let matchMedia: typeof window.matchMedia;

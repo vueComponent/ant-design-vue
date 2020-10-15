@@ -9,12 +9,6 @@ export const BasicProps = {
   tagName: PropTypes.string,
 };
 
-export interface BasicProps {
-  prefixCls?: string;
-  hasSider?: boolean;
-  tagName?: string;
-}
-
 export interface SiderHookProvider {
   addSider?: (id: string) => void;
   removeSider?: (id: string) => void;
@@ -28,9 +22,9 @@ type GeneratorArgument = {
 
 function generator({ suffixCls, tagName, name }: GeneratorArgument) {
   return (BasicComponent: typeof Basic) => {
-    return defineComponent<BasicProps>({
+    return defineComponent({
       name,
-      props: BasicComponent.props,
+      props: BasicProps,
       setup(props, { slots }) {
         const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
         return () => {

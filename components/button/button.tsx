@@ -140,13 +140,14 @@ export default defineComponent({
   },
   render() {
     this.iconCom = getComponent(this, 'icon');
-    const { type, htmlType, iconCom, disabled, handleClick, sLoading, $attrs } = this;
+    const { type, htmlType, iconCom, disabled, handleClick, sLoading,href,title, $attrs } = this;
     const children = getSlot(this);
     this.children = children;
     const classes = this.getClasses();
 
     const buttonProps = {
       ...$attrs,
+      title,
       disabled,
       class: classes,
       onClick: handleClick,
@@ -158,9 +159,9 @@ export default defineComponent({
       this.insertSpace(child, this.isNeedInserted() && autoInsertSpace),
     );
 
-    if ($attrs.href !== undefined) {
+    if (href !== undefined) {
       return (
-        <a {...buttonProps} ref="buttonNode">
+        <a {...buttonProps} href={href} ref="buttonNode">
           {iconNode}
           {kids}
         </a>

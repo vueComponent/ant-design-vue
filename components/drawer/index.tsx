@@ -1,4 +1,4 @@
-import { inject, provide, nextTick } from 'vue';
+import { inject, provide, nextTick, defineComponent, App, CSSProperties } from 'vue';
 import classnames from '../_util/classNames';
 import omit from 'omit.js';
 import VcDrawer from '../vc-drawer/src';
@@ -7,8 +7,11 @@ import BaseMixin from '../_util/BaseMixin';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import { getComponent, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
+import { tuple } from '../_util/type';
 
-const Drawer = {
+const PlacementTypes = tuple('top', 'right', 'bottom', 'left');
+type placementType = typeof PlacementTypes[number];
+const Drawer = defineComponent({
   name: 'ADrawer',
   inheritAttrs: false,
   props: {
@@ -22,16 +25,16 @@ const Drawer = {
     bodyStyle: PropTypes.object,
     headerStyle: PropTypes.object,
     drawerStyle: PropTypes.object,
-    title: PropTypes.any,
+    title: PropTypes.VNodeChild,
     visible: PropTypes.looseBool,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(256),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(256),
     zIndex: PropTypes.number,
     prefixCls: PropTypes.string,
-    placement: PropTypes.oneOf(['top', 'right', 'bottom', 'left']).def('right'),
+    placement: PropTypes.oneOf(PlacementTypes).def('right'),
     level: PropTypes.any.def(null),
     wrapClassName: PropTypes.string, // not use class like react, vue will add class to root dom
-    handle: PropTypes.any,
+    handle: PropTypes.VNodeChild,
     afterVisibleChange: PropTypes.func,
     keyboard: PropTypes.looseBool.def(true),
     onClose: PropTypes.func,
@@ -39,22 +42,21 @@ const Drawer = {
   },
   mixins: [BaseMixin],
   data() {
-    this.destroyClose = false;
-    this.preVisible = this.$props.visible;
     return {
-      _push: false,
+      sPush: false,
     };
   },
-  setup() {
+  setup(props) {
     const configProvider = inject('configProvider', defaultConfigProvider);
     return {
       configProvider,
+      destroyClose: false,
+      preVisible: props.visible,
+      parentDrawer: inject('parentDrawer', null)
     };
   },
   beforeCreate() {
-    const parentDrawer = inject('parentDrawer', null);
     provide('parentDrawer', this);
-    this.parentDrawer = parentDrawer;
   },
   mounted() {
     // fix: delete drawer in child and re-render, no push started.
@@ -83,7 +85,7 @@ const Drawer = {
     }
   },
   methods: {
-    close(e) {
+    close(e: Event) {
       this.$emit('update:visible', false);
       this.$emit('close', e);
     },
@@ -95,12 +97,12 @@ const Drawer = {
     // },
     push() {
       this.setState({
-        _push: true,
+        sPush: true,
       });
     },
     pull() {
       this.setState({
-        _push: false,
+        sPush: false,
       });
     },
     onDestroyTransitionEnd() {
@@ -118,7 +120,7 @@ const Drawer = {
       return this.destroyOnClose && !this.visible;
     },
     // get drawar push width or height
-    getPushTransform(placement) {
+    getPushTransform(placement?: placementType) {
       if (placement === 'left' || placement === 'right') {
         return `translateX(${placement === 'left' ? 180 : -180}px)`;
       }
@@ -128,14 +130,14 @@ const Drawer = {
     },
     getRcDrawerStyle() {
       const { zIndex, placement, wrapStyle } = this.$props;
-      const { _push: push } = this.$data;
+      const { sPush: push } = this.$data;
       return {
         zIndex,
         transform: push ? this.getPushTransform(placement) : undefined,
         ...wrapStyle,
       };
     },
-    renderHeader(prefixCls) {
+    renderHeader(prefixCls: string) {
       const { closable, headerStyle } = this.$props;
       const title = getComponent(this, 'title');
       if (!title && !closable) {
@@ -150,7 +152,7 @@ const Drawer = {
         </div>
       );
     },
-    renderCloseIcon(prefixCls) {
+    renderCloseIcon(prefixCls: string) {
       const { closable } = this;
       return (
         closable && (
@@ -161,14 +163,14 @@ const Drawer = {
       );
     },
     // render drawer body dom
-    renderBody(prefixCls) {
+    renderBody(prefixCls: string) {
       if (this.destroyClose && !this.visible) {
         return null;
       }
       this.destroyClose = false;
       const { bodyStyle, drawerStyle } = this.$props;
 
-      const containerStyle = {};
+      const containerStyle: CSSProperties = {};
 
       const isDestroyOnClose = this.getDestroyOnClose();
       if (isDestroyOnClose) {
@@ -192,7 +194,7 @@ const Drawer = {
     },
   },
   render() {
-    const props = getOptionProps(this);
+    const props: any = getOptionProps(this);
     const {
       prefixCls: customizePrefixCls,
       width,
@@ -204,7 +206,7 @@ const Drawer = {
       ...rest
     } = props;
     const haveMask = mask ? '' : 'no-mask';
-    const offsetStyle = {};
+    const offsetStyle: CSSProperties = {};
     if (placement === 'left' || placement === 'right') {
       offsetStyle.width = typeof width === 'number' ? `${width}px` : width;
     } else {
@@ -213,8 +215,8 @@ const Drawer = {
     const handler = getComponent(this, 'handle') || false;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('drawer', customizePrefixCls);
-    const { class: className } = this.$attrs;
-    const vcDrawerProps = {
+    const { class: className } = this.$attrs as any;
+    const vcDrawerProps: any = {
       ...this.$attrs,
       ...omit(rest, [
         'closable',
@@ -249,10 +251,10 @@ const Drawer = {
     };
     return <VcDrawer {...vcDrawerProps}>{this.renderBody(prefixCls)}</VcDrawer>;
   },
-};
+});
 
 /* istanbul ignore next */
-Drawer.install = function(app) {
+Drawer.install = function(app: App) {
   app.component(Drawer.name, Drawer);
   return app;
 };

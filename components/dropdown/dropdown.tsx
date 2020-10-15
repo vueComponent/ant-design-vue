@@ -30,13 +30,14 @@ const Dropdown = defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      popupRef: null,
     };
   },
   created() {
     provide('savePopupRef', this.savePopupRef);
   },
   methods: {
-    savePopupRef(ref) {
+    savePopupRef(ref: any) {
       this.popupRef = ref;
     },
     getTransitionName() {
@@ -49,13 +50,13 @@ const Dropdown = defineComponent({
       }
       return 'slide-up';
     },
-    renderOverlay(prefixCls) {
+    renderOverlay(prefixCls: string) {
       const overlay = getComponent(this, 'overlay');
       const overlayNode = Array.isArray(overlay) ? overlay[0] : overlay;
       // menu cannot be selectable in dropdown defaultly
       // menu should be focusable in dropdown defaultly
       const overlayProps = overlayNode && getPropsData(overlayNode);
-      const { selectable = false, focusable = true } = overlayProps || {};
+      const { selectable = false, focusable = true } = (overlayProps || {}) as any;
       const expandIcon = (
         <span class={`${prefixCls}-menu-submenu-arrow`}>
           <RightOutlined class={`${prefixCls}-menu-submenu-arrow-icon`} />
@@ -72,7 +73,7 @@ const Dropdown = defineComponent({
         : overlay;
       return fixedModeOverlay;
     },
-    handleVisibleChange(val) {
+    handleVisibleChange(val: boolean) {
       this.$emit('update:visible', val);
       this.$emit('visibleChange', val);
     },

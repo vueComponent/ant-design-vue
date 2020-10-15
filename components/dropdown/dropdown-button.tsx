@@ -1,4 +1,4 @@
-import { provide, inject } from 'vue';
+import { provide, inject, defineComponent } from 'vue';
 import Button from '../button';
 import classNames from '../_util/classNames';
 import buttonTypes from '../button/buttonTypes';
@@ -9,6 +9,7 @@ import { hasProp, getComponent, getSlot } from '../_util/props-util';
 import getDropdownProps from './getDropdownProps';
 import { defaultConfigProvider } from '../config-provider';
 import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
+import { tuple } from '../_util/type';
 
 const ButtonTypesProps = buttonTypes();
 const DropdownProps = getDropdownProps();
@@ -16,8 +17,8 @@ const ButtonGroup = Button.Group;
 const DropdownButtonProps = {
   ...ButtonGroupProps,
   ...DropdownProps,
-  type: PropTypes.oneOf(['primary', 'ghost', 'dashed', 'danger', 'default']).def('default'),
-  size: PropTypes.oneOf(['small', 'large', 'default']).def('default'),
+  type: PropTypes.oneOf(tuple('primary', 'ghost', 'dashed', 'danger', 'default')).def('default'),
+  size: PropTypes.oneOf(tuple('small', 'large', 'default')).def('default'),
   htmlType: ButtonTypesProps.htmlType,
   href: PropTypes.string,
   disabled: PropTypes.looseBool,
@@ -30,20 +31,21 @@ const DropdownButtonProps = {
   'onUpdate:visible': PropTypes.func,
 };
 export { DropdownButtonProps };
-export default {
+export default defineComponent({
   name: 'ADropdownButton',
   inheritAttrs: false,
   props: DropdownButtonProps,
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      popupRef: null
     };
   },
   created() {
     provide('savePopupRef', this.savePopupRef);
   },
   methods: {
-    savePopupRef(ref) {
+    savePopupRef(ref: any) {
       this.popupRef = ref;
     },
     handleClick(e) {
@@ -72,12 +74,12 @@ export default {
       href,
       title,
       ...restProps
-    } = { ...this.$props, ...this.$attrs };
+    } = { ...this.$props, ...this.$attrs } as any;
     const icon = getComponent(this, 'icon') || <EllipsisOutlined />;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('dropdown-button', customizePrefixCls);
-    const dropdownProps = {
+    const dropdownProps: any = {
       align,
       disabled,
       trigger: disabled ? [] : trigger,
@@ -112,4 +114,4 @@ export default {
       </ButtonGroup>
     );
   },
-};
+});

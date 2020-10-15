@@ -7,7 +7,7 @@ import { defaultConfigProvider } from '../config-provider';
 import { hasProp, getOptionProps, getComponent } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import BaseMixin from '../_util/BaseMixin';
-import { WeekPickerProps } from './interface';
+import { WeekPickerProps } from './props';
 import interopDefault from '../_util/interopDefault';
 import InputIcon from './InputIcon';
 import { getDataAndAriaProps } from '../_util/util';

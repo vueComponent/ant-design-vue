@@ -4,11 +4,17 @@ import createPicker from './createPicker';
 import wrapPicker from './wrapPicker';
 import RangePicker from './RangePicker';
 import WeekPicker from './WeekPicker';
-import { DatePickerProps, MonthPickerProps, WeekPickerProps, RangePickerProps } from './interface';
-import { App, DefineComponent, defineComponent } from 'vue';
-type DatePickerPropstypes = typeof DatePickerProps;
+import { DatePickerProps, MonthPickerProps, WeekPickerProps, RangePickerProps } from './props';
+import { App, defineComponent } from 'vue';
+import {
+  DatePickerDecorator,
+  DatePickerPropsTypes,
+  RangePickerPropsTypes,
+  MonthPickerPropsTypes,
+  WeekPickerPropsTypes,
+} from './interface';
 
-const DatePicker: DefineComponent<DatePickerPropstypes> = defineComponent<DatePickerPropstypes>(
+const DatePicker = defineComponent<DatePickerPropsTypes>(
   wrapPicker(
     {
       ...createPicker(VcCalendar as any, DatePickerProps),
@@ -16,19 +22,25 @@ const DatePicker: DefineComponent<DatePickerPropstypes> = defineComponent<DatePi
     } as any,
     DatePickerProps,
     'date',
-  ) as any,
+  ),
 );
 
-const MonthPicker = wrapPicker(
-  { ...createPicker(MonthCalendar as any, MonthPickerProps), name: 'AMonthPicker' } as any,
-  MonthPickerProps,
-  'month',
+const MonthPicker = defineComponent<MonthPickerPropsTypes>(
+  wrapPicker(
+    { ...createPicker(MonthCalendar as any, MonthPickerProps), name: 'AMonthPicker' } as any,
+    MonthPickerProps,
+    'month',
+  ),
 );
 
 Object.assign(DatePicker, {
-  RangePicker: wrapPicker(RangePicker as any, RangePickerProps, 'date'),
+  RangePicker: defineComponent<RangePickerPropsTypes>(
+    wrapPicker(RangePicker as any, RangePickerProps, 'date'),
+  ),
   MonthPicker,
-  WeekPicker: wrapPicker(WeekPicker as any, WeekPickerProps, 'week'),
+  WeekPicker: defineComponent<WeekPickerPropsTypes>(
+    wrapPicker(WeekPicker as any, WeekPickerProps, 'week'),
+  ),
 });
 
 /* istanbul ignore next */
@@ -40,4 +52,4 @@ DatePicker.install = function(app: App) {
   return app;
 };
 
-export default DatePicker;
+export default DatePicker as DatePickerDecorator;

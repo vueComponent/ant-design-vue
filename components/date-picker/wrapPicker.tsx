@@ -44,6 +44,7 @@ function getColumns({ showHour, showMinute, showSecond, use12Hours }: any) {
   }
   return column;
 }
+
 export default function wrapPicker(
   Picker: DefineComponent<any>,
   props: any,

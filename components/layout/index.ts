@@ -13,4 +13,6 @@ Layout.install = function(app: App) {
   app.component(Layout.Content.name, Layout.Content);
   return app;
 };
-export default Layout;
+export default Layout as typeof Layout & {
+  readonly Sider: typeof Sider;
+};

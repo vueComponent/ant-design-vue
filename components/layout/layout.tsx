@@ -103,4 +103,8 @@ Layout.Header = Header;
 Layout.Footer = Footer;
 Layout.Content = Content;
 
-export default Layout;
+export default Layout as typeof Layout & {
+  readonly Header: typeof Header;
+  readonly Footer: typeof Footer;
+  readonly Content: typeof Content;
+};

@@ -1,10 +1,11 @@
+import { App } from 'vue';
 import Layout from './layout';
 import Sider from './Sider';
 
 Layout.Sider = Sider;
 
 /* istanbul ignore next */
-Layout.install = function(app) {
+Layout.install = function(app: App) {
   app.component(Layout.name, Layout);
   app.component(Layout.Header.name, Layout.Header);
   app.component(Layout.Footer.name, Layout.Footer);
@@ -12,4 +13,6 @@ Layout.install = function(app) {
   app.component(Layout.Content.name, Layout.Content);
   return app;
 };
-export default Layout;
+export default Layout as typeof Layout & {
+  readonly Sider: typeof Sider;
+};

@@ -1,5 +1,6 @@
+import { PropType } from 'vue';
 import PropTypes from '../../_util/vue-types';
-import { initDefaultProps } from '../../_util/props-util';
+import initDefaultProps from '../../_util/props-util/initDefaultProps';
 import {
   filterOption as defaultFilterOption,
   validateSearch as defaultValidateSearch,
@@ -13,15 +14,21 @@ export const mentionsProps = {
   value: PropTypes.string,
   defaultValue: PropTypes.string,
   disabled: PropTypes.looseBool,
-  notFoundContent: PropTypes.any,
+  notFoundContent: PropTypes.VNodeChild,
   split: PropTypes.string,
   transitionName: PropTypes.string,
   placement: PropTypes.oneOf(PlaceMent),
   character: PropTypes.any,
   characterRender: PropTypes.func,
-  filterOption: PropTypes.func,
-  validateSearch: PropTypes.func,
-  getPopupContainer: PropTypes.func,
+  filterOption: {
+    type: [Boolean, Function] as PropType<false | typeof defaultFilterOption>,
+  },
+  validateSearch: {
+    type: Function as PropType<typeof defaultValidateSearch>,
+  },
+  getPopupContainer: {
+    type: Function as PropType<() => HTMLElement>,
+  },
 };
 
 export const vcMentionsProps = {

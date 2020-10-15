@@ -31,3 +31,5 @@ export interface PropOptions<T = any, D = T> {
 }
 
 export type VueNode = VNodeChild | JSX.Element;
+
+export type Writeable<T> = { -readonly [P in keyof T]: T[P] };

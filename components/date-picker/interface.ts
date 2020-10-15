@@ -1,6 +1,6 @@
 // import { TimePickerProps } from '../time-picker'
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import { tuple } from 'components/_util/type';
+import { tuple } from '../_util/type';
 import { PropType } from 'vue';
 export type PickerValue = moment.Moment | undefined | null | string;
 export type RangePickerValue =

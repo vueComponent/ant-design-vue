@@ -11,7 +11,7 @@ import { WeekPickerProps } from './interface';
 import interopDefault from '../_util/interopDefault';
 import InputIcon from './InputIcon';
 import { getDataAndAriaProps } from '../_util/util';
-import initDefaultProps from 'components/_util/props-util/initDefaultProps';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 
 function formatValue(value: moment.Moment | null, format: string): string {
   return (value && value.format(format)) || '';

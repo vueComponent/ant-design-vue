@@ -2,13 +2,8 @@ import classNames from '../_util/classNames';
 import { inject, provide, PropType, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
-import {
-  initDefaultProps,
-  getOptionProps,
-  hasProp,
-  getComponent,
-  getSlot,
-} from '../_util/props-util';
+import { getOptionProps, hasProp, getComponent, getSlot } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import BaseMixin from '../_util/BaseMixin';
 import isNumeric from '../_util/isNumeric';
 import { defaultConfigProvider } from '../config-provider';

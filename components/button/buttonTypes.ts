@@ -22,5 +22,7 @@ export default () => ({
   ghost: PropTypes.looseBool,
   block: PropTypes.looseBool,
   icon: PropTypes.VNodeChild,
+  href: PropTypes.string,
+  title: PropTypes.string,
   onClick: PropTypes.func,
 });

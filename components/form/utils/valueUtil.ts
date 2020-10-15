@@ -1,4 +1,5 @@
 import { toArray } from './typeUtil';
+import { InternalNamePath, NamePath } from '../interface';
 
 /**
  * Convert name to internal supported format.
@@ -7,35 +8,15 @@ import { toArray } from './typeUtil';
  * 123 => [123]
  * ['a', 123] => ['a', 123]
  */
-export function getNamePath(path) {
+export function getNamePath(path: NamePath | null): InternalNamePath {
   return toArray(path);
 }
 
-// export function getValue(store: Store, namePath: InternalNamePath) {
-//   const value = get(store, namePath);
-//   return value;
-// }
-
-// export function setValue(store: Store, namePath: InternalNamePath, value: StoreValue): Store {
-//   const newStore = set(store, namePath, value);
-//   return newStore;
-// }
-
-// export function cloneByNamePathList(store: Store, namePathList: InternalNamePath[]): Store {
-//   let newStore = {};
-//   namePathList.forEach(namePath => {
-//     const value = getValue(store, namePath);
-//     newStore = setValue(newStore, namePath, value);
-//   });
-
-//   return newStore;
-// }
-
-export function containsNamePath(namePathList, namePath) {
+export function containsNamePath(namePathList: InternalNamePath[], namePath: InternalNamePath) {
   return namePathList && namePathList.some(path => matchNamePath(path, namePath));
 }
 
-function isObject(obj) {
+function isObject(obj: any) {
   return typeof obj === 'object' && obj !== null && Object.getPrototypeOf(obj) === Object.prototype;
 }
 
@@ -43,8 +24,8 @@ function isObject(obj) {
  * Copy values into store and return a new values object
  * ({ a: 1, b: { c: 2 } }, { a: 4, b: { d: 5 } }) => { a: 4, b: { c: 2, d: 5 } }
  */
-function internalSetValues(store, values) {
-  const newStore = Array.isArray(store) ? [...store] : { ...store };
+function internalSetValues<T>(store: T, values: T): T {
+  const newStore: T = (Array.isArray(store) ? [...store] : { ...store }) as T;
 
   if (!values) {
     return newStore;
@@ -62,11 +43,17 @@ function internalSetValues(store, values) {
   return newStore;
 }
 
-export function setValues(store, ...restValues) {
-  return restValues.reduce((current, newStore) => internalSetValues(current, newStore), store);
+export function setValues<T>(store: T, ...restValues: T[]): T {
+  return restValues.reduce(
+    (current: T, newStore: T) => internalSetValues(current, newStore),
+    store,
+  );
 }
 
-export function matchNamePath(namePath, changedNamePath) {
+export function matchNamePath(
+  namePath: InternalNamePath,
+  changedNamePath: InternalNamePath | null,
+) {
   if (!namePath || !changedNamePath || namePath.length !== changedNamePath.length) {
     return false;
   }

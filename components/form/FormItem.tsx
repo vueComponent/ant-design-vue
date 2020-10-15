@@ -1,4 +1,4 @@
-import { inject, provide, Transition } from 'vue';
+import { inject, provide, Transition, PropType, defineComponent, computed } from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
@@ -6,7 +6,6 @@ import getTransitionProps from '../_util/getTransitionProps';
 import Row from '../grid/Row';
 import Col from '../grid/Col';
 import hasProp, {
-  initDefaultProps,
   findDOMNode,
   getComponent,
   getOptionProps,
@@ -26,6 +25,9 @@ import { getNamePath } from './utils/valueUtil';
 import { toArray } from './utils/typeUtil';
 import { warning } from '../vc-util/warning';
 import find from 'lodash-es/find';
+import { ColProps } from '../grid/col';
+import { tuple, VueNode } from '../_util/type';
+import { ValidateOptions } from './interface';
 
 const iconMap = {
   success: CheckCircleFilled,
@@ -34,7 +36,7 @@ const iconMap = {
   validating: LoadingOutlined,
 };
 
-function getPropByPath(obj, namePathList, strict) {
+function getPropByPath(obj: any, namePathList: any, strict?: boolean) {
   let tempObj = obj;
 
   const keyArr = namePathList;
@@ -69,38 +71,106 @@ export const FormItemProps = {
   id: PropTypes.string,
   htmlFor: PropTypes.string,
   prefixCls: PropTypes.string,
-  label: PropTypes.any,
-  help: PropTypes.any,
-  extra: PropTypes.any,
-  labelCol: PropTypes.object,
-  wrapperCol: PropTypes.object,
-  hasFeedback: PropTypes.looseBool,
+  label: PropTypes.VNodeChild,
+  help: PropTypes.VNodeChild,
+  extra: PropTypes.VNodeChild,
+  labelCol: {type: Object as PropType<ColProps>},
+  wrapperCol: {type: Object as PropType<ColProps>},
+  hasFeedback: PropTypes.looseBool.def(false),
   colon: PropTypes.looseBool,
-  labelAlign: PropTypes.oneOf(['left', 'right']),
-  prop: PropTypes.oneOfType([Array, String, Number]),
-  name: PropTypes.oneOfType([Array, String, Number]),
+  labelAlign: PropTypes.oneOf(tuple('left', 'right')),
+  prop: {type: [String, Number, Array] as PropType<string | number | string[] | number[]>},
+  name: {type: [String, Number, Array] as PropType<string | number | string[] | number[]>},
   rules: PropTypes.oneOfType([Array, Object]),
-  autoLink: PropTypes.looseBool,
+  autoLink: PropTypes.looseBool.def(true),
   required: PropTypes.looseBool,
   validateFirst: PropTypes.looseBool,
-  validateStatus: PropTypes.oneOf(['', 'success', 'warning', 'error', 'validating']),
-  validateTrigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  validateStatus: PropTypes.oneOf(tuple('', 'success', 'warning', 'error', 'validating')),
+  validateTrigger: {type: [String, Array] as PropType<string | string[]>},
+  messageVariables: {type: Object as PropType<Record<string, string>>},
 };
 
-export default {
+export default defineComponent({
   name: 'AFormItem',
   mixins: [BaseMixin],
   inheritAttrs: false,
   __ANT_NEW_FORM_ITEM: true,
-  props: initDefaultProps(FormItemProps, {
-    hasFeedback: false,
-    autoLink: true,
-  }),
-  setup() {
+  props: FormItemProps,
+  setup(props) {
+    const FormContext = inject('FormContext', {}) as any
+    const fieldName = computed(()=>props.name || props.prop);
+    const namePath = computed(()=>{
+      const val = fieldName.value
+      return getNamePath(val)
+    })
+    const fieldId = computed(()=>{
+      const {id} = props;
+      if (id) {
+        return id;
+      } else if (!namePath.value.length) {
+        return undefined;
+      } else {
+        const formName = FormContext.name;
+        const mergedId = namePath.value.join('_');
+        return formName ? `${formName}_${mergedId}` : mergedId;
+      }
+    })
+    const fieldValue = computed(()=> {
+      const model = FormContext.model;
+      if (!model || !fieldName.value) {
+        return;
+      }
+      return getPropByPath(model, namePath.value, true).v;
+    })
+    const mergedValidateTrigger = computed(() => {
+      let validateTrigger =
+        props.validateTrigger !== undefined
+          ? props.validateTrigger
+          : FormContext.validateTrigger;
+      validateTrigger = validateTrigger === undefined ? 'change' : validateTrigger;
+      return toArray(validateTrigger);
+    });
+    const getRules = () => {
+      let formRules = FormContext.rules;
+      const selfRules = props.rules;
+      const requiredRule =
+      props.required !== undefined
+          ? { required: !!props.required, trigger: mergedValidateTrigger.value }
+          : [];
+      const prop = getPropByPath(formRules, namePath.value);
+      formRules = formRules ? prop.o[prop.k] || prop.v : [];
+      const rules = [].concat(selfRules || formRules || []);
+      if (find(rules, rule => rule.required)) {
+        return rules;
+      } else {
+        return rules.concat(requiredRule);
+      }
+    };
+    const isRequired = computed(() => {
+      let rules = getRules();
+      let isRequired = false;
+      if (rules && rules.length) {
+        rules.every(rule => {
+          if (rule.required) {
+            isRequired = true;
+            return false;
+          }
+          return true;
+        });
+      }
+      return isRequired || props.required;
+    });
     return {
       isFormItemChildren: inject('isFormItemChildren', false),
       configProvider: inject('configProvider', defaultConfigProvider),
-      FormContext: inject('FormContext', {}),
+      FormContext,
+      fieldId,
+      fieldName,
+      namePath,
+      isRequired,
+      getRules,
+      fieldValue,
+      mergedValidateTrigger
     };
   },
   data() {
@@ -112,55 +182,8 @@ export default {
       validator: {},
       helpShow: false,
       errors: [],
+      initialValue: undefined
     };
-  },
-  computed: {
-    fieldName() {
-      return this.name || this.prop;
-    },
-    namePath() {
-      return getNamePath(this.fieldName);
-    },
-    fieldId() {
-      if (this.id) {
-        return this.id;
-      } else if (!this.namePath.length) {
-        return undefined;
-      } else {
-        const formName = this.FormContext.name;
-        const mergedId = this.namePath.join('_');
-        return formName ? `${formName}_${mergedId}` : mergedId;
-      }
-    },
-    fieldValue() {
-      const model = this.FormContext.model;
-      if (!model || !this.fieldName) {
-        return;
-      }
-      return getPropByPath(model, this.namePath, true).v;
-    },
-    isRequired() {
-      let rules = this.getRules();
-      let isRequired = false;
-      if (rules && rules.length) {
-        rules.every(rule => {
-          if (rule.required) {
-            isRequired = true;
-            return false;
-          }
-          return true;
-        });
-      }
-      return isRequired || this.required;
-    },
-    mergedValidateTrigger() {
-      let validateTrigger =
-        this.validateTrigger !== undefined
-          ? this.validateTrigger
-          : this.FormContext.validateTrigger;
-      validateTrigger = validateTrigger === undefined ? 'change' : validateTrigger;
-      return toArray(validateTrigger);
-    },
   },
   watch: {
     validateStatus(val) {
@@ -188,7 +211,7 @@ export default {
 
       return fieldName !== undefined ? [...prefixName, ...this.namePath] : [];
     },
-    validateRules(options) {
+    validateRules(options: ValidateOptions) {
       const { validateFirst = false, messageVariables } = this.$props;
       const { triggerName } = options || {};
       const namePath = this.getNamePath();
@@ -296,14 +319,14 @@ export default {
       }
     },
 
-    onHelpAnimEnd(_key, helpShow) {
+    onHelpAnimEnd(_key: string, helpShow: boolean) {
       this.helpShow = helpShow;
       if (!helpShow) {
         this.$forceUpdate();
       }
     },
 
-    renderHelp(prefixCls) {
+    renderHelp(prefixCls: string) {
       const help = this.getHelpMessage();
       const children = help ? (
         <div class={`${prefixCls}-explain`} key="help">
@@ -324,12 +347,12 @@ export default {
       );
     },
 
-    renderExtra(prefixCls) {
+    renderExtra(prefixCls: string) {
       const extra = getComponent(this, 'extra');
       return extra ? <div class={`${prefixCls}-extra`}>{extra}</div> : null;
     },
 
-    renderValidateWrapper(prefixCls, c1, c2, c3) {
+    renderValidateWrapper(prefixCls: string, c1: VueNode, c2: VueNode, c3: VueNode) {
       const validateStatus = this.validateState;
 
       let classes = `${prefixCls}-item-control`;
@@ -362,8 +385,8 @@ export default {
       );
     },
 
-    renderWrapper(prefixCls, children) {
-      const { wrapperCol: contextWrapperCol } = this.isFormItemChildren ? {} : this.FormContext;
+    renderWrapper(prefixCls: string, children: VueNode) {
+      const { wrapperCol: contextWrapperCol } = (this.isFormItemChildren ? {} : this.FormContext) as any;
       const { wrapperCol } = this;
       const mergedWrapperCol = wrapperCol || contextWrapperCol || {};
       const { style, id, ...restProps } = mergedWrapperCol;
@@ -378,7 +401,7 @@ export default {
       return <Col {...colProps}>{children}</Col>;
     },
 
-    renderLabel(prefixCls) {
+    renderLabel(prefixCls: string) {
       const {
         vertical,
         labelAlign: contextLabelAlign,
@@ -437,7 +460,7 @@ export default {
         </Col>
       ) : null;
     },
-    renderChildren(prefixCls, child) {
+    renderChildren(prefixCls: string, child: VueNode) {
       return [
         this.renderLabel(prefixCls),
         this.renderWrapper(
@@ -451,9 +474,9 @@ export default {
         ),
       ];
     },
-    renderFormItem(child) {
+    renderFormItem(child: any[]) {
       const { prefixCls: customizePrefixCls } = this.$props;
-      const { class: className, ...restProps } = this.$attrs;
+      const { class: className, ...restProps } = this.$attrs as any;
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('form', customizePrefixCls);
       const children = this.renderChildren(prefixCls, child);
@@ -480,11 +503,11 @@ export default {
       const originalChange = originalEvents.onChange;
       firstChildren = cloneElement(firstChildren, {
         ...(this.fieldId ? { id: this.fieldId } : undefined),
-        onBlur: (...args) => {
+        onBlur: (...args: any[]) => {
           originalBlur && originalBlur(...args);
           this.onFieldBlur();
         },
-        onChange: (...args) => {
+        onChange: (...args: any[]) => {
           if (Array.isArray(originalChange)) {
             for (let i = 0, l = originalChange.length; i < l; i++) {
               originalChange[i](...args);
@@ -498,4 +521,4 @@ export default {
     }
     return this.renderFormItem([firstChildren, children.slice(1)]);
   },
-};
+});

@@ -1,10 +1,9 @@
-import { inject, provide } from 'vue';
+import { defineComponent, inject, provide, PropType, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import isRegExp from 'lodash-es/isRegExp';
 import warning from '../_util/warning';
 import FormItem from './FormItem';
-import { initDefaultProps, getSlot } from '../_util/props-util';
+import { getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import { getNamePath, containsNamePath } from './utils/valueUtil';
 import { defaultValidateMessages } from './utils/messages';
@@ -12,57 +11,65 @@ import { allPromiseFinish } from './utils/asyncUtil';
 import { toArray } from './utils/typeUtil';
 import isEqual from 'lodash-es/isEqual';
 import scrollIntoView from 'scroll-into-view-if-needed';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
+import { tuple, VueNode } from '../_util/type';
+import { ColProps } from '../grid/col';
+import { InternalNamePath, NamePath, ValidateOptions } from './interface';
+
+export type ValidationRule = {
+  /** validation error message */
+  message?: VueNode;
+  /** built-in validation type, available options: https://github.com/yiminghe/async-validator#type */
+  type?: string;
+  /** indicates whether field is required */
+  required?: boolean;
+  /** treat required fields that only contain whitespace as errors */
+  whitespace?: boolean;
+  /** validate the exact length of a field */
+  len?: number;
+  /** validate the min length of a field */
+  min?: number;
+  /** validate the max length of a field */
+  max?: number;
+  /** validate the value from a list of possible values */
+  enum?: string | string[];
+  /** validate from a regular expression */
+  pattern?: RegExp;
+  /** transform a value before validation */
+  transform?: (value: any) => any;
+  /** custom validate function (Note: callback must be called) */
+  validator?: (rule: any, value: any, callback: any, source?: any, options?: any) => any;
+
+  trigger?: string
+};
 
 export const FormProps = {
-  layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),
-  labelCol: PropTypes.object,
-  wrapperCol: PropTypes.object,
+  layout: PropTypes.oneOf(tuple('horizontal', 'inline', 'vertical')),
+  labelCol: {type: Object as PropType<ColProps>},
+  wrapperCol: {type: Object as PropType<ColProps>},
   colon: PropTypes.looseBool,
-  labelAlign: PropTypes.oneOf(['left', 'right']),
+  labelAlign: PropTypes.oneOf(tuple('left', 'right')),
   prefixCls: PropTypes.string,
   hideRequiredMark: PropTypes.looseBool,
   model: PropTypes.object,
-  rules: PropTypes.object,
-  validateMessages: PropTypes.any,
+  rules: {type: Object as PropType<ValidationRule[]>},
+  validateMessages: PropTypes.object,
   validateOnRuleChange: PropTypes.looseBool,
   // 提交失败自动滚动到第一个错误字段
   scrollToFirstError: PropTypes.looseBool,
   onFinish: PropTypes.func,
   onFinishFailed: PropTypes.func,
-  name: PropTypes.name,
-  validateTrigger: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  name: PropTypes.string,
+  validateTrigger: {type: [String, Array] as PropType<string | string[]>}
 };
 
-export const ValidationRule = {
-  /** validation error message */
-  message: PropTypes.string,
-  /** built-in validation type, available options: https://github.com/yiminghe/async-validator#type */
-  type: PropTypes.string,
-  /** indicates whether field is required */
-  required: PropTypes.looseBool,
-  /** treat required fields that only contain whitespace as errors */
-  whitespace: PropTypes.looseBool,
-  /** validate the exact length of a field */
-  len: PropTypes.number,
-  /** validate the min length of a field */
-  min: PropTypes.number,
-  /** validate the max length of a field */
-  max: PropTypes.number,
-  /** validate the value from a list of possible values */
-  enum: PropTypes.oneOfType([String, PropTypes.arrayOf(String)]),
-  /** validate from a regular expression */
-  pattern: PropTypes.custom(isRegExp),
-  /** transform a value before validation */
-  transform: PropTypes.func,
-  /** custom validate function (Note: callback must be called) */
-  validator: PropTypes.func,
-};
 
-function isEqualName(name1, name2) {
+
+function isEqualName(name1: any, name2: any) {
   return isEqual(toArray(name1), toArray(name2));
 }
 
-const Form = {
+const Form = defineComponent({
   name: 'AForm',
   inheritAttrs: false,
   props: initDefaultProps(FormProps, {
@@ -72,14 +79,15 @@ const Form = {
   }),
   Item: FormItem,
   created() {
-    this.fields = [];
-    this.form = undefined;
-    this.lastValidatePromise = null;
     provide('FormContext', this);
   },
-  setup() {
+  setup(props) {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      fields: [],
+      form: undefined,
+      lastValidatePromise: null,
+      vertical: computed(()=>props.layout === 'vertical')
     };
   },
   watch: {
@@ -89,23 +97,18 @@ const Form = {
       }
     },
   },
-  computed: {
-    vertical() {
-      return this.layout === 'vertical';
-    },
-  },
   methods: {
-    addField(field) {
+    addField(field: any) {
       if (field) {
         this.fields.push(field);
       }
     },
-    removeField(field) {
+    removeField(field: any) {
       if (field.fieldName) {
         this.fields.splice(this.fields.indexOf(field), 1);
       }
     },
-    handleSubmit(e) {
+    handleSubmit(e: Event) {
       e.preventDefault();
       e.stopPropagation();
       this.$emit('submit', e);
@@ -129,7 +132,7 @@ const Form = {
         );
       }
     },
-    resetFields(name) {
+    resetFields(name: NamePath) {
       if (!this.model) {
         warning(false, 'Form', 'model is required for resetFields to work.');
         return;
@@ -150,10 +153,10 @@ const Form = {
         this.scrollToField(errorInfo.errorFields[0].name);
       }
     },
-    validate() {
-      return this.validateField(...arguments);
+    validate(...args: any[]) {
+      return this.validateField(...args);
     },
-    scrollToField(name, options = {}) {
+    scrollToField(name: string | number , options = {}) {
       const fields = this.getFieldsByNameList([name]);
       if (fields.length) {
         const fieldId = fields[0].fieldId;
@@ -169,20 +172,20 @@ const Form = {
       }
     },
     // eslint-disable-next-line no-unused-vars
-    getFieldsValue(nameList = true) {
-      const values = {};
+    getFieldsValue(nameList: NamePath[] | true = true) {
+      const values: any = {};
       this.fields.forEach(({ fieldName, fieldValue }) => {
         values[fieldName] = fieldValue;
       });
       if (nameList === true) {
         return values;
       } else {
-        const res = {};
-        toArray(nameList).forEach(namePath => (res[namePath] = values[namePath]));
+        const res: any = {};
+        toArray(nameList as NamePath[]).forEach((namePath) => (res[namePath as string] = values[namePath as string]));
         return res;
       }
     },
-    validateFields(nameList, options) {
+    validateFields(nameList?: NamePath[], options?: ValidateOptions) {
       warning(
         !(nameList instanceof Function),
         'Form',
@@ -193,10 +196,13 @@ const Form = {
         return Promise.reject('Form `model` is required for validateFields to work.');
       }
       const provideNameList = !!nameList;
-      const namePathList = provideNameList ? toArray(nameList).map(getNamePath) : [];
+      const namePathList: InternalNamePath[] = provideNameList ? toArray(nameList).map(getNamePath) : [];
 
       // Collect result in promise list
-      const promiseList = [];
+      const promiseList: Promise<{
+        name: InternalNamePath;
+        errors: string[];
+      }>[] = [];
 
       this.fields.forEach(field => {
         // Add field if not provide `nameList`
@@ -225,7 +231,7 @@ const Form = {
           promiseList.push(
             promise
               .then(() => ({ name: fieldNamePath, errors: [] }))
-              .catch(errors =>
+              .catch((errors: any) =>
                 Promise.reject({
                   name: fieldNamePath,
                   errors,
@@ -259,8 +265,8 @@ const Form = {
 
       return returnPromise;
     },
-    validateField() {
-      return this.validateFields(...arguments);
+    validateField(...args: any[]) {
+      return this.validateFields(...args);
     },
   },
 
@@ -282,6 +288,8 @@ const Form = {
       </form>
     );
   },
-};
+});
 
-export default Form;
+export default Form as typeof Form & {
+  readonly Item: typeof FormItem
+};

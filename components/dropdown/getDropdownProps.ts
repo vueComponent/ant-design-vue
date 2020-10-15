@@ -1,6 +1,11 @@
+import { tuple } from '../_util/type';
+import { PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 export default () => ({
-  trigger: PropTypes.array.def(['hover']),
+  trigger: {
+    type: Array as PropType<('click' | 'hover' | 'contextMenu')[]>,
+    default: () => ['hover'],
+  },
   overlay: PropTypes.any,
   visible: PropTypes.looseBool,
   disabled: PropTypes.looseBool,
@@ -8,16 +13,11 @@ export default () => ({
   getPopupContainer: PropTypes.func,
   prefixCls: PropTypes.string,
   transitionName: PropTypes.string,
-  placement: PropTypes.oneOf([
-    'topLeft',
-    'topCenter',
-    'topRight',
-    'bottomLeft',
-    'bottomCenter',
-    'bottomRight',
-  ]),
+  placement: PropTypes.oneOf(
+    tuple('topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter', 'bottomRight'),
+  ),
   overlayClassName: PropTypes.string,
-  overlayStyle: PropTypes.object,
+  overlayStyle: PropTypes.style,
   forceRender: PropTypes.looseBool,
   mouseEnterDelay: PropTypes.number,
   mouseLeaveDelay: PropTypes.number,

@@ -1,7 +1,6 @@
 import Form from './Form';
 
-export { FormProps, ValidationRule } from './Form';
-export { FormItemProps } from './FormItem';
+export { FormProps } from './Form';
 
 /* istanbul ignore next */
 Form.install = function(app) {

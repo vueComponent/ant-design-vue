@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { App, defineComponent, inject, PropType, VNodeTypes } from 'vue';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
@@ -8,14 +8,27 @@ import Spin from '../spin';
 import BaseMixin from '../_util/BaseMixin';
 import { defaultConfigProvider } from '../config-provider';
 import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
+import { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
 const { Option } = VcMentions;
+
+interface MentionsConfig {
+  prefix?: string | string[];
+  split?: string;
+}
+
+export interface OptionProps {
+  value: string;
+  disabled: boolean;
+  children: VNodeTypes;
+  [key: string]: any;
+}
 
 function loadingFilterOption() {
   return true;
 }
 
-function getMentions(value = '', config) {
+function getMentions(value: string = '', config: MentionsConfig) {
   const { prefix = '@', split = ' ' } = config || {};
   const prefixList = Array.isArray(prefix) ? prefix : [prefix];
 
@@ -44,7 +57,7 @@ function getMentions(value = '', config) {
     .filter(entity => !!entity && !!entity.value);
 }
 
-const Mentions = {
+const Mentions = defineComponent({
   name: 'AMentions',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -53,12 +66,20 @@ const Mentions = {
   props: {
     ...mentionsProps,
     loading: PropTypes.looseBool,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onSelect: PropTypes.func,
-    onChange: PropTypes.func,
-    'onUpdate:value': PropTypes.func,
+    onFocus: {
+      type: Function as PropType<(e: FocusEvent) => void>,
+    },
+    onBlur: {
+      type: Function as PropType<(e: FocusEvent) => void>,
+    },
+    onSelect: {
+      type: Function as PropType<(option: OptionProps, prefix: string) => void>,
+    },
+    onChange: {
+      type: Function as PropType<(text: string) => void>,
+    },
   },
+  emits: ['update:value', 'change', 'focus', 'blur', 'select'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -79,29 +100,29 @@ const Mentions = {
     });
   },
   methods: {
-    handleFocus(...args) {
-      this.$emit('focus', ...args);
+    handleFocus(e: FocusEvent) {
+      this.$emit('focus', e);
       this.setState({
         focused: true,
       });
     },
-    handleBlur(...args) {
-      this.$emit('blur', ...args);
+    handleBlur(e: FocusEvent) {
+      this.$emit('blur', e);
       this.setState({
         focused: false,
       });
     },
-    handleSelect(...args) {
+    handleSelect(...args: [OptionProps, string]) {
       this.$emit('select', ...args);
       this.setState({
         focused: true,
       });
     },
-    handleChange(val) {
+    handleChange(val: string) {
       this.$emit('update:value', val);
       this.$emit('change', val);
     },
-    getNotFoundContent(renderEmpty) {
+    getNotFoundContent(renderEmpty: RenderEmptyHandler) {
       const notFoundContent = getComponent(this, 'notFoundContent');
       if (notFoundContent !== undefined) {
         return notFoundContent;
@@ -130,10 +151,10 @@ const Mentions = {
       return filterOption;
     },
     focus() {
-      this.$refs.vcMentions.focus();
+      (this.$refs.vcMentions as any).focus();
     },
     blur() {
-      this.$refs.vcMentions.blur();
+      (this.$refs.vcMentions as any).blur();
     },
   },
   render() {
@@ -144,7 +165,7 @@ const Mentions = {
       disabled,
       getPopupContainer,
       ...restProps
-    } = getOptionProps(this);
+    } = getOptionProps(this) as any;
     const { class: className, ...otherAttrs } = this.$attrs;
     const prefixCls = getPrefixCls('mentions', customizePrefixCls);
     const otherProps = omit(restProps, ['loading', 'onUpdate:value']);
@@ -174,10 +195,10 @@ const Mentions = {
 
     return <VcMentions {...mentionsProps} />;
   },
-};
+});
 
 /* istanbul ignore next */
-Mentions.install = function(app) {
+Mentions.install = function(app: App) {
   app.component(Mentions.name, Mentions);
   app.component(Mentions.Option.name, Mentions.Option);
   return app;

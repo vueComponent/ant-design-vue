@@ -1,6 +1,7 @@
 import classNames from '../_util/classNames';
 import { inject, provide, PropType, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
+import { tuple } from '../_util/type';
 import {
   initDefaultProps,
   getOptionProps,
@@ -15,7 +16,7 @@ import BarsOutlined from '@ant-design/icons-vue/BarsOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import omit from 'omit.js';
-import { siderHookProvider } from './layout';
+import { SiderHookProvider } from './layout';
 
 const dimensionMaxMap = {
   xs: '479.98px',
@@ -38,8 +39,8 @@ export const SiderProps = {
   trigger: PropTypes.VNodeChild,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   collapsedWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  breakpoint: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', 'xxl']),
-  theme: PropTypes.oneOf(['light', 'dark']).def('dark'),
+  breakpoint: PropTypes.oneOf(tuple('xs', 'sm', 'md', 'lg', 'xl', 'xxl')),
+  theme: PropTypes.oneOf(tuple('light', 'dark')).def('dark'),
   onBreakpoint: Function as PropType<(broken: boolean) => void>,
   onCollapse: Function as PropType<(collapsed: boolean, type: CollapseType) => void>,
 };
@@ -111,9 +112,8 @@ export default defineComponent({
   },
   setup() {
     return {
-      siderHook: inject<siderHookProvider>('siderHook', {}),
+      siderHook: inject<SiderHookProvider>('siderHook', {}),
       configProvider: inject('configProvider', defaultConfigProvider),
-      uniqueId: '',
     };
   },
 

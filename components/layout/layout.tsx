@@ -15,7 +15,7 @@ export interface BasicProps {
   tagName?: string;
 }
 
-export interface siderHookProvider {
+export interface SiderHookProvider {
   addSider?: (id: string) => void;
   removeSider?: (id: string) => void;
 }
@@ -62,7 +62,7 @@ Basic.props = BasicProps;
 const BasicLayout = defineComponent<BasicProps>({
   setup(props, { slots }) {
     const siders = ref<string[]>([]);
-    const siderHookProvider: siderHookProvider = {
+    const siderHookProvider: SiderHookProvider = {
       addSider: id => {
         siders.value = [...siders.value, id];
       },

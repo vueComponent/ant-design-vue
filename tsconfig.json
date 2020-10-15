@@ -2,20 +2,22 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "ant-design-vue": ["components/index.tsx"],
-      "ant-design-vue/es/*": ["components/*"]
+      "ant-design-vue": ["components/index.tsx"]
     },
-    "strictNullChecks": true,
+    "strictNullChecks": false,
+    "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "jsx": "preserve",
     "noUnusedParameters": true,
     "noUnusedLocals": true,
-    "noImplicitAny": true,
+    "noImplicitAny": false,
+    "module": "esnext",
     "target": "es6",
     "lib": ["dom", "es2017"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "allowJs": true
   },
   "exclude": ["node_modules", "lib", "es"]
 }

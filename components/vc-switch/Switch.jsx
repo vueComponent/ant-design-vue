@@ -2,10 +2,11 @@ import { switchPropTypes } from './PropTypes';
 import BaseMixin from '../_util/BaseMixin';
 import { hasProp, getOptionProps, getComponent } from '../_util/props-util';
 import Omit from 'omit.js';
+import { defineComponent } from 'vue';
 
 // function noop () {
 // }
-export default {
+export default defineComponent({
   name: 'VcSwitch',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -120,4 +121,4 @@ export default {
       </button>
     );
   },
-};
+});

@@ -1,4 +1,4 @@
-import { createApp, TransitionGroup } from 'vue';
+import { createApp, defineComponent, TransitionGroup } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
@@ -15,7 +15,7 @@ function getUuid() {
   return `rcNotification_${now}_${seed++}`;
 }
 
-const Notification = {
+const Notification = defineComponent({
   mixins: [BaseMixin],
   props: {
     prefixCls: PropTypes.string.def('rc-notification'),
@@ -117,7 +117,7 @@ const Notification = {
       </div>
     );
   },
-};
+});
 
 Notification.newInstance = function newNotificationInstance(properties, callback) {
   const { getContainer, style, class: className, ...props } = properties || {};
@@ -161,5 +161,4 @@ Notification.newInstance = function newNotificationInstance(properties, callback
   });
   app.mount(div);
 };
-
 export default Notification;

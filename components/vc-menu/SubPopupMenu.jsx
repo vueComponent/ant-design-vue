@@ -88,14 +88,14 @@ const SubPopupMenu = {
       openTransitionName: PropTypes.string,
       openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
       openKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-      visible: PropTypes.bool,
+      visible: PropTypes.looseBool,
       eventKey: PropTypes.string,
       store: PropTypes.object,
 
       // adding in refactor
-      focusable: PropTypes.bool,
-      multiple: PropTypes.bool,
-      defaultActiveFirst: PropTypes.bool,
+      focusable: PropTypes.looseBool,
+      multiple: PropTypes.looseBool,
+      defaultActiveFirst: PropTypes.looseBool,
       activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
       defaultSelectedKeys: PropTypes.arrayOf(

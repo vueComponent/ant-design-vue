@@ -8,6 +8,7 @@ Tree.install = function(app) {
   app.component(Tree.name, Tree);
   app.component(Tree.TreeNode.name, Tree.TreeNode);
   app.component(DirectoryTree.name, DirectoryTree);
+  return app;
 };
 
 export default Tree;

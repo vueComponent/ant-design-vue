@@ -18,9 +18,9 @@ const CalendarPart = {
     selectedValue: PropTypes.any,
     direction: PropTypes.any,
     locale: PropTypes.any,
-    showDateInput: PropTypes.bool,
-    showTimePicker: PropTypes.bool,
-    showWeekNumber: PropTypes.bool,
+    showDateInput: PropTypes.looseBool,
+    showTimePicker: PropTypes.looseBool,
+    showWeekNumber: PropTypes.looseBool,
     format: PropTypes.any,
     placeholder: PropTypes.any,
     disabledDate: PropTypes.any,
@@ -35,7 +35,7 @@ const CalendarPart = {
     clearIcon: PropTypes.any,
     dateRender: PropTypes.func,
     inputMode: PropTypes.string,
-    inputReadOnly: PropTypes.bool,
+    inputReadOnly: PropTypes.looseBool,
   },
   render() {
     const { $props: props } = this;

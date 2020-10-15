@@ -2,7 +2,7 @@ import { inject } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import VcRate from '../vc-rate';
 import StarFilled from '@ant-design/icons-vue/StarFilled';
 import Tooltip from '../tooltip';
@@ -12,12 +12,12 @@ export const RateProps = {
   count: PropTypes.number,
   value: PropTypes.value,
   defaultValue: PropTypes.value,
-  allowHalf: PropTypes.bool,
-  allowClear: PropTypes.bool,
+  allowHalf: PropTypes.looseBool,
+  allowClear: PropTypes.looseBool,
   tooltips: PropTypes.arrayOf(PropTypes.string),
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   character: PropTypes.any,
-  autofocus: PropTypes.bool,
+  autofocus: PropTypes.looseBool,
 };
 
 const Rate = {
@@ -25,7 +25,7 @@ const Rate = {
   props: RateProps,
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   methods: {
@@ -62,5 +62,6 @@ const Rate = {
 /* istanbul ignore next */
 Rate.install = function(app) {
   app.component(Rate.name, Rate);
+  return app;
 };
 export default Rate;

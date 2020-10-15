@@ -1,7 +1,7 @@
 import { TransitionGroup } from 'vue';
 import raf from '../_util/raf';
 import ListItem from './ListItem';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import getTransitionProps from '../_util/getTransitionProps';
 import { findDOMNode } from '../_util/props-util';
 function noop() {}
@@ -11,9 +11,9 @@ const ListBody = {
   props: {
     prefixCls: PropTypes.string,
     filteredRenderItems: PropTypes.array.def([]),
-    lazy: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+    lazy: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
     selectedKeys: PropTypes.array,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     onItemSelect: PropTypes.func,
     onItemSelectAll: PropTypes.func,
     onScroll: PropTypes.func,

@@ -13,10 +13,10 @@ import { initDefaultProps, getComponent } from '../../../_util/props-util';
 import BaseMixin from '../../../_util/BaseMixin';
 export const selectorPropTypes = () => ({
   prefixCls: PropTypes.string,
-  open: PropTypes.bool,
+  open: PropTypes.looseBool,
   selectorValueList: PropTypes.array,
-  allowClear: PropTypes.bool,
-  showArrow: PropTypes.bool,
+  allowClear: PropTypes.looseBool,
+  showArrow: PropTypes.looseBool,
   // onClick: PropTypes.func,
   // onBlur: PropTypes.func,
   // onFocus: PropTypes.func,
@@ -28,8 +28,8 @@ export const selectorPropTypes = () => ({
   clearIcon: PropTypes.any,
   removeIcon: PropTypes.any,
   placeholder: PropTypes.any,
-  disabled: PropTypes.bool,
-  focused: PropTypes.bool,
+  disabled: PropTypes.looseBool,
+  focused: PropTypes.looseBool,
 });
 
 function noop() {}

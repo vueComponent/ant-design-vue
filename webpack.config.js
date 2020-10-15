@@ -33,7 +33,7 @@ const babelConfig = {
         style: true,
       },
     ],
-    ['@vue/babel-plugin-jsx', { optimize: true }],
+    ['@vue/babel-plugin-jsx', { mergeProps: false }],
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-transform-object-assign',
     '@babel/plugin-proposal-object-rest-spread',
@@ -136,7 +136,7 @@ module.exports = {
     hot: true,
     open: true,
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'cheap-module-source-map',
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',

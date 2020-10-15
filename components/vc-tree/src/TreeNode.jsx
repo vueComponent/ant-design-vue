@@ -1,4 +1,4 @@
-import { inject, provide, Transition } from 'vue';
+import { defineComponent, inject, provide, Transition } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import classNames from '../../_util/classNames';
 import { getNodeChildren, mapChildren, warnOnlyTreeNode, getDataAndAria } from './util';
@@ -12,7 +12,7 @@ const ICON_CLOSE = 'close';
 
 const defaultTitle = '---';
 
-const TreeNode = {
+const TreeNode = defineComponent({
   name: 'TreeNode',
   inheritAttrs: false,
   mixins: [BaseMixin],
@@ -26,24 +26,24 @@ const TreeNode = {
       // onSelect: PropTypes.func,
 
       // By parent
-      expanded: PropTypes.bool,
-      selected: PropTypes.bool,
-      checked: PropTypes.bool,
-      loaded: PropTypes.bool,
-      loading: PropTypes.bool,
-      halfChecked: PropTypes.bool,
+      expanded: PropTypes.looseBool,
+      selected: PropTypes.looseBool,
+      checked: PropTypes.looseBool,
+      loaded: PropTypes.looseBool,
+      loading: PropTypes.looseBool,
+      halfChecked: PropTypes.looseBool,
       title: PropTypes.any,
       pos: PropTypes.string,
-      dragOver: PropTypes.bool,
-      dragOverGapTop: PropTypes.bool,
-      dragOverGapBottom: PropTypes.bool,
+      dragOver: PropTypes.looseBool,
+      dragOverGapTop: PropTypes.looseBool,
+      dragOverGapBottom: PropTypes.looseBool,
 
       // By user
-      isLeaf: PropTypes.bool,
-      checkable: PropTypes.bool,
-      selectable: PropTypes.bool,
-      disabled: PropTypes.bool,
-      disableCheckbox: PropTypes.bool,
+      isLeaf: PropTypes.looseBool,
+      checkable: PropTypes.looseBool,
+      selectable: PropTypes.looseBool,
+      disabled: PropTypes.looseBool,
+      disableCheckbox: PropTypes.looseBool,
       icon: PropTypes.any,
       dataRef: PropTypes.object,
       switcherIcon: PropTypes.any,
@@ -571,7 +571,7 @@ const TreeNode = {
       </li>
     );
   },
-};
+});
 
 TreeNode.isTreeNode = 1;
 

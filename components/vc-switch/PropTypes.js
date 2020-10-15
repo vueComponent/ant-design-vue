@@ -2,15 +2,15 @@ import PropTypes from '../_util/vue-types';
 
 export const switchPropTypes = {
   prefixCls: PropTypes.string,
-  disabled: PropTypes.bool.def(false),
+  disabled: PropTypes.looseBool.def(false),
   checkedChildren: PropTypes.any,
   unCheckedChildren: PropTypes.any,
   // onChange: PropTypes.func,
   // onMouseUp: PropTypes.func,
   // onClick: PropTypes.func,
   tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  checked: PropTypes.bool,
-  defaultChecked: PropTypes.bool.def(false),
-  autofocus: PropTypes.bool.def(false),
+  checked: PropTypes.looseBool,
+  defaultChecked: PropTypes.looseBool.def(false),
+  autofocus: PropTypes.looseBool.def(false),
   loadingIcon: PropTypes.any,
 };

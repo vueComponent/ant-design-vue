@@ -11,6 +11,7 @@ Icon.displayName = 'AIcon';
 /* istanbul ignore next */
 Icon.install = function(app: App) {
   app.component(Icon.displayName, Icon);
+  return app;
 };
 
 export default Icon;

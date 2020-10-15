@@ -16,7 +16,7 @@ import {
   isValidElement,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import {
   checkValidate,
   stringToMoment,
@@ -37,24 +37,24 @@ export const TimePickerProps = () => ({
   size: PropTypes.oneOf(['large', 'default', 'small']),
   value: TimeOrTimesType,
   defaultValue: TimeOrTimesType,
-  open: PropTypes.bool,
+  open: PropTypes.looseBool,
   format: PropTypes.string,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   placeholder: PropTypes.string,
   prefixCls: PropTypes.string,
-  hideDisabledOptions: PropTypes.bool,
+  hideDisabledOptions: PropTypes.looseBool,
   disabledHours: PropTypes.func,
   disabledMinutes: PropTypes.func,
   disabledSeconds: PropTypes.func,
   getPopupContainer: PropTypes.func,
-  use12Hours: PropTypes.bool,
-  focusOnOpen: PropTypes.bool,
+  use12Hours: PropTypes.looseBool,
+  focusOnOpen: PropTypes.looseBool,
   hourStep: PropTypes.number,
   minuteStep: PropTypes.number,
   secondStep: PropTypes.number,
-  allowEmpty: PropTypes.bool,
-  allowClear: PropTypes.bool,
-  inputReadOnly: PropTypes.bool,
+  allowEmpty: PropTypes.looseBool,
+  allowClear: PropTypes.looseBool,
+  inputReadOnly: PropTypes.looseBool,
   clearText: PropTypes.string,
   defaultOpenValue: PropTypes.object,
   popupClassName: PropTypes.string,
@@ -63,7 +63,7 @@ export const TimePickerProps = () => ({
   align: PropTypes.object,
   placement: PropTypes.any,
   transitionName: PropTypes.string,
-  autofocus: PropTypes.bool,
+  autofocus: PropTypes.looseBool,
   addon: PropTypes.any,
   clearIcon: PropTypes.any,
   locale: PropTypes.object,
@@ -103,7 +103,7 @@ const TimePicker = {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
 
@@ -267,6 +267,7 @@ const TimePicker = {
 /* istanbul ignore next */
 TimePicker.install = function(app) {
   app.component(TimePicker.name, TimePicker);
+  return app;
 };
 
 export default TimePicker;

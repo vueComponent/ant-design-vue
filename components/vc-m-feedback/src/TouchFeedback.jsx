@@ -4,8 +4,9 @@ import { cloneElement } from '../../_util/vnode';
 import warning from '../../_util/warning';
 import BaseMixin from '../../_util/BaseMixin';
 import { ITouchProps } from './PropTypes';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'TouchFeedback',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -104,4 +105,4 @@ export default {
 
     return cloneElement(child, events);
   },
-};
+});

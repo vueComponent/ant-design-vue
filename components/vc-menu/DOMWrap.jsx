@@ -287,7 +287,7 @@ DOMWrap.props = {
   level: PropTypes.number,
   theme: PropTypes.string,
   overflowedIndicator: PropTypes.node,
-  visible: PropTypes.bool,
+  visible: PropTypes.looseBool,
   hiddenClassName: PropTypes.string,
   tag: PropTypes.string.def('div'),
 };

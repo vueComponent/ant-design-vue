@@ -10,7 +10,7 @@ import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFill
 import Button from '../button';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 const tooltipProps = abstractTooltipProps();
 const btnProps = buttonTypes();
@@ -24,7 +24,7 @@ const Popconfirm = {
     title: PropTypes.any,
     trigger: tooltipProps.trigger.def('click'),
     okType: btnProps.type.def('primary'),
-    disabled: PropTypes.bool.def(false),
+    disabled: PropTypes.looseBool.def(false),
     okText: PropTypes.any,
     cancelText: PropTypes.any,
     icon: PropTypes.any,
@@ -43,7 +43,7 @@ const Popconfirm = {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {
@@ -153,6 +153,7 @@ const Popconfirm = {
 /* istanbul ignore next */
 Popconfirm.install = function(app) {
   app.component(Popconfirm.name, Popconfirm);
+  return app;
 };
 
 export default Popconfirm;

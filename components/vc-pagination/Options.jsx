@@ -7,7 +7,7 @@ import antInput from '../_util/antInputDirective';
 export default {
   mixins: [BaseMixin],
   props: {
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     changeSize: PropTypes.func,
     quickGo: PropTypes.func,
     selectComponentClass: PropTypes.any,

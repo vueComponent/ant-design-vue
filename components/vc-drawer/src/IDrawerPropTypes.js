@@ -3,9 +3,9 @@ import PropTypes from '../../_util/vue-types';
 const IProps = {
   width: PropTypes.any,
   height: PropTypes.any,
-  defaultOpen: PropTypes.bool,
-  firstEnter: PropTypes.bool,
-  open: PropTypes.bool,
+  defaultOpen: PropTypes.looseBool,
+  firstEnter: PropTypes.looseBool,
+  open: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   placement: PropTypes.string,
   level: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
@@ -13,24 +13,24 @@ const IProps = {
   ease: PropTypes.string,
   duration: PropTypes.string,
   handler: PropTypes.any,
-  showMask: PropTypes.bool,
+  showMask: PropTypes.looseBool,
   maskStyle: PropTypes.object,
   className: PropTypes.string,
   wrapStyle: PropTypes.object,
-  maskClosable: PropTypes.bool,
+  maskClosable: PropTypes.looseBool,
   afterVisibleChange: PropTypes.func,
-  keyboard: PropTypes.bool,
+  keyboard: PropTypes.looseBool,
 };
 
 const IDrawerProps = {
   ...IProps,
   wrapperClassName: PropTypes.string,
-  forceRender: PropTypes.bool,
+  forceRender: PropTypes.looseBool,
   getContainer: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.func,
     PropTypes.object,
-    PropTypes.bool,
+    PropTypes.looseBool,
   ]),
 };
 

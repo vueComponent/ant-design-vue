@@ -3,7 +3,7 @@ import PropTypes from '../_util/vue-types';
 import VcCheckbox from '../vc-checkbox';
 import classNames from '../_util/classNames';
 import { getOptionProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export default {
   name: 'ARadio',
@@ -12,14 +12,14 @@ export default {
   },
   props: {
     prefixCls: PropTypes.string,
-    defaultChecked: Boolean,
-    checked: { type: Boolean, default: undefined },
-    disabled: Boolean,
-    isGroup: Boolean,
+    defaultChecked: PropTypes.looseBool,
+    checked: PropTypes.looseBool,
+    disabled: PropTypes.looseBool,
+    isGroup: PropTypes.looseBool,
     value: PropTypes.any,
     name: String,
     id: String,
-    autofocus: Boolean,
+    autofocus: PropTypes.looseBool,
     type: PropTypes.string.def('radio'),
     onChange: PropTypes.func,
     onFocus: PropTypes.func,
@@ -29,7 +29,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
       radioGroupContext: inject('radioGroupContext', null),
     };
   },

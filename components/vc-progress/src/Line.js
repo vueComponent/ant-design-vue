@@ -1,8 +1,9 @@
+import { defineComponent } from 'vue';
 import { initDefaultProps } from '../../_util/props-util';
 import enhancer from './enhancer';
 import { propTypes, defaultProps } from './types';
 
-const Line = {
+const Line = defineComponent({
   name: 'Line',
   props: initDefaultProps(propTypes, defaultProps),
   created() {
@@ -78,6 +79,6 @@ const Line = {
       </svg>
     );
   },
-};
+});
 
 export default enhancer(Line);

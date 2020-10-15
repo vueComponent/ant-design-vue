@@ -1,7 +1,7 @@
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 import Spin from '../spin';
 import Pagination, { PaginationConfig } from '../pagination';
@@ -32,19 +32,21 @@ export const ListGridType = {
 export const ListSize = ['small', 'default', 'large'];
 
 export const ListProps = () => ({
-  bordered: PropTypes.bool,
+  bordered: PropTypes.looseBool,
   dataSource: PropTypes.array,
   extra: PropTypes.any,
   grid: PropTypes.shape(ListGridType).loose,
   itemLayout: PropTypes.string,
-  loading: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  loading: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   loadMore: PropTypes.any,
-  pagination: PropTypes.oneOfType([PropTypes.shape(PaginationConfig()).loose, PropTypes.bool]),
+  pagination: withUndefined(
+    PropTypes.oneOfType([PropTypes.shape(PaginationConfig()).loose, PropTypes.looseBool]),
+  ),
   prefixCls: PropTypes.string,
   rowKey: PropTypes.any,
   renderItem: PropTypes.any,
   size: PropTypes.oneOf(ListSize),
-  split: PropTypes.bool,
+  split: PropTypes.looseBool,
   header: PropTypes.any,
   footer: PropTypes.any,
   locale: PropTypes.object,
@@ -66,7 +68,7 @@ const List = {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
 
@@ -281,6 +283,7 @@ List.install = function(app) {
   app.component(List.name, List);
   app.component(List.Item.name, List.Item);
   app.component(List.Item.Meta.displayName, List.Item.Meta);
+  return app;
 };
 
 export default List;

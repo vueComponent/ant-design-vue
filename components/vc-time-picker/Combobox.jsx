@@ -30,9 +30,9 @@ const Combobox = {
     value: PropTypes.object,
     // onChange: PropTypes.func,
     // onAmPmChange: PropTypes.func,
-    showHour: PropTypes.bool,
-    showMinute: PropTypes.bool,
-    showSecond: PropTypes.bool,
+    showHour: PropTypes.looseBool,
+    showMinute: PropTypes.looseBool,
+    showSecond: PropTypes.looseBool,
     hourOptions: PropTypes.array,
     minuteOptions: PropTypes.array,
     secondOptions: PropTypes.array,
@@ -40,8 +40,8 @@ const Combobox = {
     disabledMinutes: PropTypes.func,
     disabledSeconds: PropTypes.func,
     // onCurrentSelectPanelChange: PropTypes.func,
-    use12Hours: PropTypes.bool,
-    isAM: PropTypes.bool,
+    use12Hours: PropTypes.looseBool,
+    isAM: PropTypes.looseBool,
   },
   methods: {
     onItemChange(type, itemValue) {

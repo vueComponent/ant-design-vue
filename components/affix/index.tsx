@@ -1,11 +1,11 @@
-import { inject } from 'vue';
+import { App, CSSProperties, defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import ResizeObserver from '../vc-resize-observer';
 import BaseMixin from '../_util/BaseMixin';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 import {
   addObserveTarget,
@@ -17,6 +17,17 @@ import {
 
 function getDefaultTarget() {
   return typeof window !== 'undefined' ? window : null;
+}
+enum AffixStatus {
+  None,
+  Prepare,
+}
+export interface AffixState {
+  affixStyle?: CSSProperties;
+  placeholderStyle?: CSSProperties;
+  status: AffixStatus;
+  lastAffix: boolean;
+  prevTarget: Window | HTMLElement | null;
 }
 
 // Affix
@@ -36,19 +47,16 @@ const AffixProps = {
   onChange: PropTypes.func,
   onTestUpdatePosition: PropTypes.func,
 };
-const AffixStatus = {
-  None: 'none',
-  Prepare: 'Prepare',
-};
-const Affix = {
+const Affix = defineComponent({
   name: 'AAffix',
   props: AffixProps,
   mixins: [BaseMixin],
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
+  emits: ['change', 'testUpdatePosition'],
   data() {
     return {
       affixStyle: undefined,
@@ -56,6 +64,7 @@ const Affix = {
       status: AffixStatus.None,
       lastAffix: false,
       prevTarget: null,
+      timeout: null,
     };
   },
   beforeMount() {
@@ -103,9 +112,9 @@ const Affix = {
   beforeUnmount() {
     clearTimeout(this.timeout);
     removeObserveTarget(this);
-    this.updatePosition.cancel();
+    (this.updatePosition as any).cancel();
     // https://github.com/ant-design/ant-design/issues/22683
-    this.lazyUpdatePosition.cancel();
+    (this.lazyUpdatePosition as any).cancel();
   },
   methods: {
     getOffsetTop() {
@@ -152,9 +161,9 @@ const Affix = {
 
       const newState = {
         status: AffixStatus.None,
-      };
+      } as AffixState;
       const targetRect = getTargetRect(targetNode);
-      const placeholderReact = getTargetRect(this.$refs.placeholderNode);
+      const placeholderReact = getTargetRect(this.$refs.placeholderNode as HTMLElement);
       const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
       const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
       if (fixedTop !== undefined) {
@@ -189,7 +198,6 @@ const Affix = {
       this.setState(newState);
     },
 
-    // @ts-ignore TS6133
     prepareMeasure() {
       this.setState({
         status: AffixStatus.Prepare,
@@ -218,7 +226,7 @@ const Affix = {
         const targetNode = target();
         if (targetNode && this.$refs.placeholderNode) {
           const targetRect = getTargetRect(targetNode);
-          const placeholderReact = getTargetRect(this.$refs.placeholderNode);
+          const placeholderReact = getTargetRect(this.$refs.placeholderNode as HTMLElement);
           const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
           const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
 
@@ -256,11 +264,11 @@ const Affix = {
       </ResizeObserver>
     );
   },
-};
-
+});
 /* istanbul ignore next */
-Affix.install = function(app) {
+Affix.install = function(app: App) {
   app.component(Affix.name, Affix);
+  return app;
 };
 
 export default Affix;

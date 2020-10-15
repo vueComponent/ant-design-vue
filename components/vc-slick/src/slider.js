@@ -5,8 +5,9 @@ import InnerSlider from './inner-slider';
 import defaultProps from './default-props';
 import { canUseDOM } from './utils/innerSliderUtils';
 import { getSlot } from '../../_util/props-util';
+import { defineComponent } from 'vue';
 
-export default {
+export default defineComponent({
   name: 'Slider',
   props: {
     ...defaultProps,
@@ -196,4 +197,4 @@ export default {
     };
     return <InnerSlider {...sliderProps} vSlots={this.$slots} __propsSymbol__={[]} />;
   },
-};
+});

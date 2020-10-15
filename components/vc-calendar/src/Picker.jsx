@@ -8,6 +8,7 @@ import placements from './picker/placements';
 import Trigger from '../../vc-trigger';
 import moment from 'moment';
 import isNil from 'lodash-es/isNil';
+import { defineComponent } from 'vue';
 const TimeType = {
   validator(value) {
     if (Array.isArray(value)) {
@@ -24,20 +25,20 @@ function refFn(field, component) {
   this[field] = component;
 }
 
-const Picker = {
+const Picker = defineComponent({
   name: 'Picker',
   inheritAttrs: false,
   props: {
     animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     transitionName: PropTypes.string,
     format: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.func]),
     // onChange: PropTypes.func,
     // onOpenChange: PropTypes.func,
     getCalendarContainer: PropTypes.func,
     calendar: PropTypes.any,
-    open: PropTypes.bool,
-    defaultOpen: PropTypes.bool.def(false),
+    open: PropTypes.looseBool,
+    defaultOpen: PropTypes.looseBool.def(false),
     prefixCls: PropTypes.string.def('rc-calendar-picker'),
     placement: PropTypes.any.def('bottomLeft'),
     value: TimeType,
@@ -239,6 +240,6 @@ const Picker = {
       </Trigger>
     );
   },
-};
+});
 
 export default Picker;

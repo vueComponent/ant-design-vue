@@ -1,4 +1,4 @@
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import ExpandIcon from './ExpandIcon';
 import BaseMixin from '../../_util/BaseMixin';
 import { connect } from '../../_util/store';
@@ -11,13 +11,13 @@ const ExpandableRow = {
   props: {
     prefixCls: PropTypes.string.isRequired,
     rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-    fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    fixed: withUndefined(PropTypes.oneOfType([PropTypes.string, PropTypes.looseBool])),
     record: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
     indentSize: PropTypes.number,
-    needIndentSpaced: PropTypes.bool.isRequired,
-    expandRowByClick: PropTypes.bool,
-    expanded: PropTypes.bool.isRequired,
-    expandIconAsCell: PropTypes.bool,
+    needIndentSpaced: PropTypes.looseBool.isRequired,
+    expandRowByClick: PropTypes.looseBool,
+    expanded: PropTypes.looseBool.isRequired,
+    expandIconAsCell: PropTypes.looseBool,
     expandIconColumnIndex: PropTypes.number,
     childrenColumnName: PropTypes.string,
     expandedRowRender: PropTypes.func,

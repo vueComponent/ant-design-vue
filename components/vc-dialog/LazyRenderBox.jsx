@@ -2,9 +2,9 @@ import PropTypes from '../_util/vue-types';
 import { getSlot } from '../_util/props-util';
 
 const ILazyRenderBoxPropTypes = {
-  visible: PropTypes.bool,
+  visible: PropTypes.looseBool,
   hiddenClassName: PropTypes.string,
-  forceRender: PropTypes.bool,
+  forceRender: PropTypes.looseBool,
 };
 
 export default {

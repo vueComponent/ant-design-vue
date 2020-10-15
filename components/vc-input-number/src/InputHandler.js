@@ -7,7 +7,7 @@ const InputHandler = {
   inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
   },
   render() {
     const { prefixCls, disabled } = this.$props;

@@ -2,7 +2,7 @@ import { inject, Transition, TransitionGroup } from 'vue';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { previewImage, isImageUrl } from './utils';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PaperClipOutlined from '@ant-design/icons-vue/PaperClipOutlined';
@@ -32,7 +32,7 @@ export default {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   updated() {

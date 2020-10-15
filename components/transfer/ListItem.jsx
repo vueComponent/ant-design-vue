@@ -1,4 +1,4 @@
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import Lazyload from '../vc-lazy-load';
 import Checkbox from '../checkbox';
@@ -12,10 +12,10 @@ export default {
     renderedText: PropTypes.any,
     renderedEl: PropTypes.any,
     item: PropTypes.any,
-    lazy: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
-    checked: PropTypes.bool,
+    lazy: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
+    checked: PropTypes.looseBool,
     prefixCls: PropTypes.string,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     onClick: PropTypes.func,
   },
   render() {

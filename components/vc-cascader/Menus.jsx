@@ -14,7 +14,7 @@ export default {
     prefixCls: PropTypes.string.def('rc-cascader-menus'),
     expandTrigger: PropTypes.string.def('click'),
     // onSelect: PropTypes.func,
-    visible: PropTypes.bool.def(false),
+    visible: PropTypes.looseBool.def(false),
     dropdownMenuColumnStyle: PropTypes.object,
     defaultFieldNames: PropTypes.object,
     fieldNames: PropTypes.object,

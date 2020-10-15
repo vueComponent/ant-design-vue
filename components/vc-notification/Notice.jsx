@@ -6,9 +6,9 @@ export default {
   mixins: [BaseMixin],
   props: {
     duration: PropTypes.number.def(1.5),
-    closable: PropTypes.bool,
+    closable: PropTypes.looseBool,
     prefixCls: PropTypes.string,
-    update: PropTypes.bool,
+    update: PropTypes.looseBool,
     closeIcon: PropTypes.any,
     onClose: PropTypes.func,
   },

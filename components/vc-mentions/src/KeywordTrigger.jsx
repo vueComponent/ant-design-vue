@@ -26,11 +26,11 @@ const BUILT_IN_PLACEMENTS = {
 export default {
   name: 'KeywordTrigger',
   props: {
-    loading: PropTypes.bool,
+    loading: PropTypes.looseBool,
     options: PropTypes.arrayOf(OptionProps),
     prefixCls: PropTypes.string,
     placement: PropTypes.oneOf(PlaceMent),
-    visible: PropTypes.bool,
+    visible: PropTypes.looseBool,
     transitionName: PropTypes.string,
     getPopupContainer: PropTypes.func,
   },

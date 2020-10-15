@@ -34,9 +34,9 @@ const DateInput = {
     selectedValue: PropTypes.object,
     clearIcon: PropTypes.any,
     inputMode: PropTypes.string,
-    inputReadOnly: PropTypes.bool,
-    disabled: PropTypes.bool,
-    showClear: PropTypes.bool,
+    inputReadOnly: PropTypes.looseBool,
+    disabled: PropTypes.looseBool,
+    showClear: PropTypes.looseBool,
   },
 
   data() {

@@ -1,4 +1,5 @@
 import { inject, defineComponent, VNodeTypes, PropType } from 'vue';
+import PropTypes from '../_util/vue-types';
 import defaultLocaleData from './default';
 import { Locale } from '.';
 
@@ -12,24 +13,26 @@ interface LocaleInterface {
   [key: string]: any;
 }
 
+export interface LocaleReceiverContext {
+  antLocale?: LocaleInterface;
+}
+
 export default defineComponent({
   name: 'LocaleReceiver',
   props: {
-    componentName: {
-      type: String,
-    },
+    componentName: PropTypes.string,
     defaultLocale: {
       type: [Object, Function],
     },
     children: {
       type: Function as PropType<
-        (locale: Locale, localeCode?: string, fullLocale?: Locale) => VNodeTypes
+        (locale: object, localeCode?: string, fullLocale?: object) => VNodeTypes
       >,
     },
   },
   setup() {
     return {
-      localeData: inject('localeData', {}),
+      localeData: inject<LocaleReceiverContext>('localeData', {}),
     };
   },
   methods: {

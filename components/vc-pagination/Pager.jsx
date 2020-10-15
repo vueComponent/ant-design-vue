@@ -9,10 +9,10 @@ export default {
   props: {
     rootPrefixCls: PropTypes.string,
     page: PropTypes.number,
-    active: PropTypes.bool,
-    last: PropTypes.bool,
+    active: PropTypes.looseBool,
+    last: PropTypes.looseBool,
     locale: PropTypes.object,
-    showTitle: PropTypes.bool,
+    showTitle: PropTypes.looseBool,
     itemRender: {
       type: Function,
       default: () => {},

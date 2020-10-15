@@ -1,11 +1,11 @@
-import { provide, inject, nextTick } from 'vue';
+import { provide, inject, nextTick, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
 import { getOptionProps, filterEmpty, hasProp, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
-export default {
+export default defineComponent({
   name: 'ARadioGroup',
   props: {
     prefixCls: PropTypes.string,
@@ -21,7 +21,7 @@ export default {
       default: () => [],
       type: Array,
     },
-    disabled: Boolean,
+    disabled: PropTypes.looseBool,
     name: String,
     buttonStyle: PropTypes.string.def('outline'),
     onChange: PropTypes.func,
@@ -36,7 +36,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   computed: {
@@ -121,4 +121,4 @@ export default {
 
     return <div class={classString}>{children}</div>;
   },
-};
+});

@@ -11,24 +11,25 @@ import {
 import BaseMixin from '../../_util/BaseMixin';
 import { getOffsetLeft } from './util';
 import Star from './Star';
+import { defineComponent } from 'vue';
 
 const rateProps = {
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   value: PropTypes.number,
   defaultValue: PropTypes.number,
   count: PropTypes.number,
-  allowHalf: PropTypes.bool,
-  allowClear: PropTypes.bool,
+  allowHalf: PropTypes.looseBool,
+  allowClear: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   character: PropTypes.any,
   characterRender: PropTypes.func,
   tabindex: PropTypes.number,
-  autofocus: PropTypes.bool,
+  autofocus: PropTypes.looseBool,
 };
 
 function noop() {}
 
-export default {
+export default defineComponent({
   name: 'Rate',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -211,4 +212,4 @@ export default {
       </ul>
     );
   },
-};
+});

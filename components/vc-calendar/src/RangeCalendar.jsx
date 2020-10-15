@@ -11,6 +11,7 @@ import CommonMixin from './mixin/CommonMixin';
 import enUs from './locale/en_US';
 import { syncTime, getTodayTime, isAllowedDate } from './util/';
 import { goTime, goStartMonth, goEndMonth, includesTime } from './util/toTime';
+import { defineComponent } from 'vue';
 
 function noop() {}
 
@@ -79,12 +80,12 @@ function onInputSelect(direction, value, cause) {
   this.fireSelectValueChange(selectedValue, null, cause || { source: 'dateInput' });
 }
 
-const RangeCalendar = {
+const RangeCalendar = defineComponent({
   name: 'RangeCalendar',
   inheritAttrs: false,
   props: {
     locale: PropTypes.object.def(enUs),
-    visible: PropTypes.bool.def(true),
+    visible: PropTypes.looseBool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     dateInputPlaceholder: PropTypes.any,
     seperator: PropTypes.string.def('~'),
@@ -92,14 +93,14 @@ const RangeCalendar = {
     value: PropTypes.any,
     hoverValue: PropTypes.any,
     mode: PropTypes.arrayOf(PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade'])),
-    showDateInput: PropTypes.bool.def(true),
+    showDateInput: PropTypes.looseBool.def(true),
     timePicker: PropTypes.any,
-    showOk: PropTypes.bool,
-    showToday: PropTypes.bool.def(true),
+    showOk: PropTypes.looseBool,
+    showToday: PropTypes.looseBool.def(true),
     defaultSelectedValue: PropTypes.array.def([]),
     selectedValue: PropTypes.array,
-    showClear: PropTypes.bool,
-    showWeekNumber: PropTypes.bool,
+    showClear: PropTypes.looseBool,
+    showWeekNumber: PropTypes.looseBool,
     // locale: PropTypes.object,
     // onChange: PropTypes.func,
     // onSelect: PropTypes.func,
@@ -119,7 +120,7 @@ const RangeCalendar = {
     renderSidebar: PropTypes.func.def(() => null),
     dateRender: PropTypes.func,
     clearIcon: PropTypes.any,
-    inputReadOnly: PropTypes.bool,
+    inputReadOnly: PropTypes.looseBool,
   },
 
   mixins: [BaseMixin, CommonMixin],
@@ -832,6 +833,6 @@ const RangeCalendar = {
       </div>
     );
   },
-};
+});
 
 export default RangeCalendar;

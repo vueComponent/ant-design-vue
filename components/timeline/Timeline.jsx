@@ -10,14 +10,14 @@ import {
 } from '../_util/props-util';
 import TimelineItem from './TimelineItem';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export const TimelineProps = {
   prefixCls: PropTypes.string,
   /** 指定最后一个幽灵节点是否存在或内容 */
   pending: PropTypes.any,
   pendingDot: PropTypes.string,
-  reverse: PropTypes.bool,
+  reverse: PropTypes.looseBool,
   mode: PropTypes.oneOf(['left', 'alternate', 'right', '']),
 };
 
@@ -28,7 +28,7 @@ export default {
     mode: '',
   }),
   setup() {
-    const configProvider = inject('configProvider', ConfigConsumerProps);
+    const configProvider = inject('configProvider', defaultConfigProvider);
     return {
       configProvider,
     };

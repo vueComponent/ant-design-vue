@@ -6,7 +6,7 @@ import raf from '../_util/raf';
 import warning from '../_util/warning';
 import BaseMixin from '../_util/BaseMixin';
 import inputProps from './inputProps';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
 import { withDirectives } from 'vue';
 import antInput from '../_util/antInputDirective';
@@ -17,8 +17,8 @@ const RESIZE_STATUS_RESIZED = 2;
 
 const TextAreaProps = {
   ...inputProps,
-  autosize: PropTypes.oneOfType([Object, Boolean]),
-  autoSize: PropTypes.oneOfType([Object, Boolean]),
+  autosize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
+  autoSize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
   onResize: PropTypes.func,
 };
 const ResizableTextArea = {

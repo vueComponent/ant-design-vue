@@ -1,5 +1,5 @@
 import classNames from '../_util/classNames';
-import { inject, provide } from 'vue';
+import { inject, provide, PropType, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import {
   initDefaultProps,
@@ -15,6 +15,7 @@ import BarsOutlined from '@ant-design/icons-vue/BarsOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import omit from 'omit.js';
+import { siderHookProvider } from './layout';
 
 const dimensionMaxMap = {
   xs: '479.98px',
@@ -25,7 +26,7 @@ const dimensionMaxMap = {
   xxl: '1599.98px',
 };
 
-// export type CollapseType = 'clickTrigger' | 'responsive';
+export type CollapseType = 'clickTrigger' | 'responsive';
 
 export const SiderProps = {
   prefixCls: PropTypes.string,
@@ -33,16 +34,14 @@ export const SiderProps = {
   collapsed: PropTypes.looseBool,
   defaultCollapsed: PropTypes.looseBool,
   reverseArrow: PropTypes.looseBool,
-  // onCollapse?: (collapsed: boolean, type: CollapseType) => void;
-  zeroWidthTriggerStyle: PropTypes.object,
-  trigger: PropTypes.any,
+  zeroWidthTriggerStyle: PropTypes.style,
+  trigger: PropTypes.VNodeChild,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   collapsedWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   breakpoint: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', 'xxl']),
   theme: PropTypes.oneOf(['light', 'dark']).def('dark'),
-  onBreakpoint: PropTypes.func,
-  onCollapse: PropTypes.func,
-  'onUpdate:collapsed': PropTypes.func,
+  onBreakpoint: Function as PropType<(broken: boolean) => void>,
+  onCollapse: Function as PropType<(collapsed: boolean, type: CollapseType) => void>,
 };
 
 // export interface SiderState {
@@ -63,7 +62,7 @@ const generateId = (() => {
   };
 })();
 
-export default {
+export default defineComponent({
   name: 'ALayoutSider',
   __ANT_LAYOUT_SIDER: true,
   mixins: [BaseMixin],
@@ -74,17 +73,19 @@ export default {
     width: 200,
     collapsedWidth: 80,
   }),
+  emits: ['onUpdate:collapsed', 'breakpoint', 'update:collapsed', 'collapse'],
   data() {
-    this.uniqueId = generateId('ant-sider-');
-    let matchMedia;
+    const uniqueId = generateId('ant-sider-');
+    let matchMedia: typeof window.matchMedia;
     if (typeof window !== 'undefined') {
       matchMedia = window.matchMedia;
     }
-    const props = getOptionProps(this);
+    const props = getOptionProps(this) as any;
+    let mql: MediaQueryList;
     if (matchMedia && props.breakpoint && props.breakpoint in dimensionMaxMap) {
-      this.mql = matchMedia(`(max-width: ${dimensionMaxMap[props.breakpoint]})`);
+      mql = matchMedia(`(max-width: ${dimensionMaxMap[props.breakpoint]})`);
     }
-    let sCollapsed;
+    let sCollapsed: boolean;
     if ('collapsed' in props) {
       sCollapsed = props.collapsed;
     } else {
@@ -94,6 +95,8 @@ export default {
       sCollapsed,
       below: false,
       belowShow: false,
+      uniqueId,
+      mql,
     };
   },
   watch: {
@@ -108,8 +111,9 @@ export default {
   },
   setup() {
     return {
-      siderHook: inject('siderHook', {}),
+      siderHook: inject<siderHookProvider>('siderHook', {}),
       configProvider: inject('configProvider', defaultConfigProvider),
+      uniqueId: '',
     };
   },
 
@@ -136,7 +140,7 @@ export default {
     }
   },
   methods: {
-    responsiveHandler(mql) {
+    responsiveHandler(mql: MediaQueryListEvent | MediaQueryList) {
       this.setState({ below: mql.matches });
       this.$emit('breakpoint', mql.matches);
       if (this.sCollapsed !== mql.matches) {
@@ -144,7 +148,7 @@ export default {
       }
     },
 
-    setCollapsed(collapsed, type) {
+    setCollapsed(collapsed: boolean, type: CollapseType) {
       if (!hasProp(this, 'collapsed')) {
         this.setState({
           sCollapsed: collapsed,
@@ -176,7 +180,7 @@ export default {
       collapsedWidth,
       zeroWidthTriggerStyle,
       ...others
-    } = { ...getOptionProps(this), ...this.$attrs };
+    } = { ...getOptionProps(this), ...this.$attrs } as any;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('layout-sider', customizePrefixCls);
     const divProps = omit(others, [
@@ -188,7 +192,6 @@ export default {
       'siderHook',
       'zeroWidthTriggerStyle',
       'trigger',
-      'onUpdate:collapse',
     ]);
     const trigger = getComponent(this, 'trigger');
     const rawWidth = this.sCollapsed ? collapsedWidth : width;
@@ -241,4 +244,4 @@ export default {
       </aside>
     );
   },
-};
+});

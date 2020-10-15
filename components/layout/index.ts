@@ -1,10 +1,11 @@
+import { App } from 'vue';
 import Layout from './layout';
 import Sider from './Sider';
 
 Layout.Sider = Sider;
 
 /* istanbul ignore next */
-Layout.install = function(app) {
+Layout.install = function(app: App) {
   app.component(Layout.name, Layout);
   app.component(Layout.Header.name, Layout.Header);
   app.component(Layout.Footer.name, Layout.Footer);

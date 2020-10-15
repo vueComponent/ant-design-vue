@@ -6,13 +6,15 @@ import EyeInvisibleOutlined from '@ant-design/icons-vue/EyeInvisibleOutlined';
 import inputProps from './inputProps';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
+import { defineComponent } from 'vue';
+import { tuple } from '../_util/type';
 
 const ActionMap = {
   click: 'onClick',
   hover: 'onMouseover',
 };
 
-export default {
+export default defineComponent({
   name: 'AInputPassword',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -20,16 +22,17 @@ export default {
     ...inputProps,
     prefixCls: PropTypes.string.def('ant-input-password'),
     inputPrefixCls: PropTypes.string.def('ant-input'),
-    action: PropTypes.string.def('click'),
+    action: PropTypes.oneOf(tuple('click', 'hover')).def('click'),
     visibilityToggle: PropTypes.looseBool.def(true),
   },
   data() {
     return {
       visible: false,
+      input: undefined,
     };
   },
   methods: {
-    saveInput(node) {
+    saveInput(node: any) {
       this.input = node;
     },
     focus() {
@@ -51,12 +54,12 @@ export default {
       const iconTrigger = ActionMap[action] || '';
       const iconProps = {
         [iconTrigger]: this.onVisibleChange,
-        onMousedown: e => {
+        onMousedown: (e: MouseEvent) => {
           // Prevent focused state lost
           // https://github.com/ant-design/ant-design/issues/15173
           e.preventDefault();
         },
-        onMouseup: e => {
+        onMouseup: (e: MouseEvent) => {
           // Prevent focused state lost
           // https://github.com/ant-design/ant-design/pull/23633/files
           e.preventDefault();
@@ -95,10 +98,10 @@ export default {
       addonAfter: getComponent(this, 'addonAfter'),
       addonBefore: getComponent(this, 'addonBefore'),
       ...this.$attrs,
-      type: this.visible ? 'text' : 'password',
+      type: this.visible ? ('text' as const) : ('password' as const),
       class: inputClassName,
       ref: 'input',
     };
     return <Input {...inputProps} ref={this.saveInput} />;
   },
-};
+});

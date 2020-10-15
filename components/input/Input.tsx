@@ -1,4 +1,4 @@
-import { defineComponent, inject, withDirectives } from 'vue';
+import { defineComponent, inject, VNodeTypes, withDirectives } from 'vue';
 import antInputDirective from '../_util/antInputDirective';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
@@ -6,15 +6,21 @@ import inputProps from './inputProps';
 import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
+import { Writeable } from 'components/_util/type';
+import { tuple } from 'types/type';
 
-export function fixControlledValue(value) {
+export function fixControlledValue(value: string | number) {
   if (typeof value === 'undefined' || value === null) {
     return '';
   }
   return value;
 }
 
-export function resolveOnChange(target, e, onChange) {
+export function resolveOnChange(
+  target: HTMLInputElement | HTMLTextAreaElement,
+  e: Writeable<Event>,
+  onChange: (e: any) => void,
+) {
   if (onChange) {
     let event = e;
     if (e.type === 'click') {
@@ -39,8 +45,12 @@ export function resolveOnChange(target, e, onChange) {
     onChange(event);
   }
 }
-
-export function getInputClassName(prefixCls, size, disabled) {
+export const InputSizeType = tuple('small', 'large', 'default');
+export function getInputClassName(
+  prefixCls: string,
+  size: typeof InputSizeType[number],
+  disabled: boolean,
+) {
   return classNames(prefixCls, {
     [`${prefixCls}-sm`]: size === 'small',
     [`${prefixCls}-lg`]: size === 'large',
@@ -54,6 +64,7 @@ export default defineComponent({
   props: {
     ...inputProps,
   },
+  emits: ['update:value', 'change', 'input', 'pressEnter', 'keydown'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -64,10 +75,13 @@ export default defineComponent({
     const value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
     return {
       stateValue: typeof value === 'undefined' ? '' : value,
+      removePasswordTimeout: undefined,
+      input: undefined,
+      clearableInput: undefined,
     };
   },
   watch: {
-    value(val) {
+    value(val: string | number) {
       this.stateValue = val;
     },
   },
@@ -98,15 +112,15 @@ export default defineComponent({
       this.input.select();
     },
 
-    saveClearableInput(input) {
+    saveClearableInput(input: any) {
       this.clearableInput = input;
     },
 
-    saveInput(input) {
+    saveInput(input: any) {
       this.input = input;
     },
 
-    setValue(value, callback) {
+    setValue(value: string | number, callback: () => void) {
       if (this.stateValue === value) {
         return;
       }
@@ -119,18 +133,21 @@ export default defineComponent({
         callback && callback();
       });
     },
-    triggerChange(e) {
-      this.$emit('update:value', e.target.value);
+    triggerChange(e: Event) {
+      this.$emit('update:value', (e.target as any).value);
       this.$emit('change', e);
       this.$emit('input', e);
     },
-    handleReset(e) {
+    handleReset(e: MouseEvent) {
       this.setValue('', () => {
         this.focus();
       });
       resolveOnChange(this.input, e, this.triggerChange);
     },
-    renderInput(prefixCls, { addonBefore, addonAfter }) {
+    renderInput(
+      prefixCls: string,
+      { addonBefore, addonAfter }: { addonBefore: VNodeTypes; addonAfter: VNodeTypes },
+    ) {
       const otherProps = omit(this.$props, [
         'prefixCls',
         'onPressEnter',
@@ -142,8 +159,6 @@ export default defineComponent({
         'defaultValue',
         'lazy',
         'size',
-        'inputType',
-        'className',
         'inputPrefixCls',
         'loading',
       ]);
@@ -154,7 +169,7 @@ export default defineComponent({
         ...$attrs,
         onKeydown: handleKeyDown,
         class: classNames(getInputClassName(prefixCls, size, disabled), {
-          [$attrs.class]: $attrs.class && !addonBefore && !addonAfter,
+          [$attrs.class as string]: $attrs.class && !addonBefore && !addonAfter,
         }),
         ref: this.saveInput,
         key: 'ant-input',
@@ -164,7 +179,7 @@ export default defineComponent({
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }
-      return withDirectives(<input {...inputProps} />, [[antInputDirective]]);
+      return withDirectives<any>(<input {...inputProps} />, [[antInputDirective]]);
     },
     clearPasswordValueAttribute() {
       // https://github.com/ant-design/ant-design/issues/20541
@@ -179,14 +194,14 @@ export default defineComponent({
         }
       });
     },
-    handleChange(e) {
+    handleChange(e: any) {
       const { value, composing } = e.target;
       // https://github.com/vueComponent/ant-design-vue/issues/2203
       if (((e.isComposing || composing) && this.lazy) || this.stateValue === value) return;
       this.setValue(value, this.clearPasswordValueAttribute);
       resolveOnChange(this.input, e, this.triggerChange);
     },
-    handleKeyDown(e) {
+    handleKeyDown(e: KeyboardEvent) {
       if (e.keyCode === 13) {
         this.$emit('pressEnter', e);
       }
@@ -216,7 +231,7 @@ export default defineComponent({
       ...this.$attrs,
       ...getOptionProps(this),
       prefixCls,
-      inputType: 'input',
+      inputType: 'input' as const,
       value: fixControlledValue(stateValue),
       element: this.renderInput(prefixCls, { addonAfter, addonBefore }),
       handleReset: this.handleReset,

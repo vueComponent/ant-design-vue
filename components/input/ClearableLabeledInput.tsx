@@ -1,11 +1,13 @@
 import classNames from '../_util/classNames';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
-import { getInputClassName } from './Input';
+import { getInputClassName, InputSizeType } from './Input';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import { getComponent } from '../_util/props-util';
+import { tuple } from '../_util/type';
+import { defineComponent, PropType, VNodeTypes } from 'vue';
 
-export function hasPrefixSuffix(instance) {
+export function hasPrefixSuffix(instance: any) {
   return !!(
     getComponent(instance, 'prefix') ||
     getComponent(instance, 'suffix') ||
@@ -13,29 +15,30 @@ export function hasPrefixSuffix(instance) {
   );
 }
 
-const ClearableInputType = ['text', 'input'];
+const ClearableInputType = tuple('text', 'input');
 
-const ClearableLabeledInput = {
+const ClearableLabeledInput = defineComponent({
   name: 'ClearableLabeledInput',
   inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
     inputType: PropTypes.oneOf(ClearableInputType),
-    value: PropTypes.any,
-    defaultValue: PropTypes.any,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     allowClear: PropTypes.looseBool,
-    element: PropTypes.any,
-    handleReset: PropTypes.func,
+    element: PropTypes.VNodeChild,
+    handleReset: Function as PropType<(e: MouseEvent) => void>,
     disabled: PropTypes.looseBool,
-    size: PropTypes.oneOf(['small', 'large', 'default']),
-    suffix: PropTypes.any,
-    prefix: PropTypes.any,
-    addonBefore: PropTypes.any,
-    addonAfter: PropTypes.any,
+    size: PropTypes.oneOf(InputSizeType),
+    suffix: PropTypes.VNodeChild,
+    prefix: PropTypes.VNodeChild,
+    addonBefore: PropTypes.VNodeChild,
+    addonAfter: PropTypes.VNodeChild,
     readonly: PropTypes.looseBool,
+    style: PropTypes.style,
   },
   methods: {
-    renderClearIcon(prefixCls) {
+    renderClearIcon(prefixCls: string) {
       const { allowClear, value, disabled, readonly, inputType, handleReset } = this.$props;
       if (
         !allowClear ||
@@ -54,7 +57,7 @@ const ClearableLabeledInput = {
       return <CloseCircleFilled onClick={handleReset} class={className} role="button" />;
     },
 
-    renderSuffix(prefixCls) {
+    renderSuffix(prefixCls: string) {
       const { suffix, allowClear } = this.$props;
       if (suffix || allowClear) {
         return (
@@ -67,7 +70,7 @@ const ClearableLabeledInput = {
       return null;
     },
 
-    renderLabeledIcon(prefixCls, element) {
+    renderLabeledIcon(prefixCls: string, element: VNodeTypes) {
       const props = this.$props;
       const suffix = this.renderSuffix(prefixCls);
       if (!hasPrefixSuffix(this)) {
@@ -100,7 +103,7 @@ const ClearableLabeledInput = {
       );
     },
 
-    renderInputWithLabel(prefixCls, labeledElement) {
+    renderInputWithLabel(prefixCls: string, labeledElement: VNodeTypes) {
       const { addonBefore, addonAfter, size } = this.$props;
       const { style, class: className } = this.$attrs;
       // Not wrap when there is not addons
@@ -137,7 +140,7 @@ const ClearableLabeledInput = {
       );
     },
 
-    renderTextAreaWithClearIcon(prefixCls, element) {
+    renderTextAreaWithClearIcon(prefixCls: string, element: VNodeTypes) {
       const { value, allowClear } = this.$props;
       const { style, class: className } = this.$attrs;
       if (!allowClear) {
@@ -170,6 +173,6 @@ const ClearableLabeledInput = {
   render() {
     return this.renderClearableLabeledInput();
   },
-};
+});
 
 export default ClearableLabeledInput;

@@ -8,8 +8,8 @@ export default {
     record: PropTypes.object,
     prefixCls: PropTypes.string,
     expandable: PropTypes.any,
-    expanded: PropTypes.bool,
-    needIndentSpaced: PropTypes.bool,
+    expanded: PropTypes.looseBool,
+    needIndentSpaced: PropTypes.looseBool,
   },
   methods: {
     onExpand(e) {

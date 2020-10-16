@@ -1,4 +1,4 @@
-import { provide, withDirectives } from 'vue';
+import { defineComponent, provide, withDirectives } from 'vue';
 import classNames from '../../_util/classNames';
 import omit from 'omit.js';
 import KeyCode from '../../_util/KeyCode';
@@ -309,4 +309,4 @@ const Mentions = {
   },
 };
 
-export default Mentions;
+export default defineComponent(Mentions);

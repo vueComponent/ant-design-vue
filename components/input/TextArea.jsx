@@ -3,14 +3,14 @@ import ClearableLabeledInput from './ClearableLabeledInput';
 import ResizableTextArea from './ResizableTextArea';
 import inputProps from './inputProps';
 import { hasProp, getOptionProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { fixControlledValue, resolveOnChange } from './Input';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 
 const TextAreaProps = {
   ...inputProps,
-  autosize: PropTypes.oneOfType([Object, Boolean]),
-  autoSize: PropTypes.oneOfType([Object, Boolean]),
+  autosize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
+  autoSize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
 };
 
 export default {
@@ -21,7 +21,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {

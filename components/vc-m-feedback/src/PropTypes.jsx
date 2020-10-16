@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 
 export const ITouchProps = {
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   activeClassName: PropTypes.string,
   activeStyle: PropTypes.any,
   // onTouchStart: PropTypes.func,

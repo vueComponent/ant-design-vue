@@ -1,4 +1,4 @@
-import { provide, App, defineComponent, VNode } from 'vue';
+import { provide, App, defineComponent, VNode, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
@@ -22,7 +22,7 @@ export interface Locale {
 export interface LocaleProviderProps {
   locale: Locale;
   children?: VNode | VNode[];
-  _ANT_MARK__?: string;
+  ANT_MARK__?: string;
 }
 
 export const ANT_MARK = 'internalMark';
@@ -39,13 +39,13 @@ const LocaleProvider = defineComponent({
   name: 'ALocaleProvider',
   props: {
     locale: {
-      type: Object,
+      type: Object as PropType<Locale>,
     },
-    _ANT_MARK__: PropTypes.string,
+    ANT_MARK__: PropTypes.string,
   },
   data() {
     warning(
-      this._ANT_MARK__ === ANT_MARK,
+      this.ANT_MARK__ === ANT_MARK,
       'LocaleProvider',
       '`LocaleProvider` is deprecated. Please use `locale` with `ConfigProvider` instead',
     );
@@ -58,7 +58,7 @@ const LocaleProvider = defineComponent({
   },
   setup(props) {
     warning(
-      props._ANT_MARK__ === ANT_MARK,
+      props.ANT_MARK__ === ANT_MARK,
       'LocaleProvider',
       '`LocaleProvider` is deprecated. Please use `locale` with `ConfigProvider` instead',
     );
@@ -67,7 +67,7 @@ const LocaleProvider = defineComponent({
         ...props.locale,
         exist: true,
       },
-      _ANT_MARK__: ANT_MARK,
+      ANT_MARK__: ANT_MARK,
     };
     provide('localeData', data);
     return data;
@@ -98,6 +98,7 @@ const LocaleProvider = defineComponent({
 /* istanbul ignore next */
 LocaleProvider.install = function(app: App) {
   app.component(LocaleProvider.name, LocaleProvider);
+  return app;
 };
 
 export default LocaleProvider;

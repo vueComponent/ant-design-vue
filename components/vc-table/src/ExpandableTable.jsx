@@ -7,11 +7,11 @@ import { remove } from './utils';
 import { initDefaultProps, getOptionProps, getSlot } from '../../_util/props-util';
 
 export const ExpandableTableProps = () => ({
-  expandIconAsCell: PropTypes.bool,
-  expandRowByClick: PropTypes.bool,
+  expandIconAsCell: PropTypes.looseBool,
+  expandRowByClick: PropTypes.looseBool,
   expandedRowKeys: PropTypes.array,
   expandedRowClassName: PropTypes.func,
-  defaultExpandAllRows: PropTypes.bool,
+  defaultExpandAllRows: PropTypes.looseBool,
   defaultExpandedRowKeys: PropTypes.array,
   expandIconColumnIndex: PropTypes.number,
   expandedRowRender: PropTypes.func,

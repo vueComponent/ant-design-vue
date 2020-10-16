@@ -4,7 +4,7 @@ import PropTypes from '../_util/vue-types';
 import hasProp, { getOptionProps, getComponent } from '../_util/props-util';
 import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 
 const Switch = {
@@ -15,18 +15,18 @@ const Switch = {
     prefixCls: PropTypes.string,
     // size=default and size=large are the same
     size: PropTypes.oneOf(['small', 'default', 'large']),
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     checkedChildren: PropTypes.any,
     unCheckedChildren: PropTypes.any,
     tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    checked: PropTypes.bool,
-    defaultChecked: PropTypes.bool,
-    autofocus: PropTypes.bool,
-    loading: PropTypes.bool,
+    checked: PropTypes.looseBool,
+    defaultChecked: PropTypes.looseBool,
+    autofocus: PropTypes.looseBool,
+    loading: PropTypes.looseBool,
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   methods: {
@@ -81,6 +81,7 @@ const Switch = {
 /* istanbul ignore next */
 Switch.install = function(app) {
   app.component(Switch.name, Switch);
+  return app;
 };
 
 export default Switch;

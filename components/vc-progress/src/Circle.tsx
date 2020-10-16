@@ -1,12 +1,15 @@
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import { initDefaultProps } from '../../_util/props-util';
 import enhancer from './enhancer';
 import { propTypes, defaultProps } from './types';
+import { defineComponent } from 'vue';
 
 const circlePropTypes = {
   ...propTypes,
   gapPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-  gapDegree: PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.bool]),
+  gapDegree: withUndefined(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string, PropTypes.looseBool]),
+  ),
 };
 
 const circleDefaultProps = {
@@ -75,7 +78,7 @@ function getPathStyles(
   };
 }
 
-const Circle = {
+const Circle = defineComponent({
   name: 'Circle',
   props: initDefaultProps(circlePropTypes, circleDefaultProps),
   created() {
@@ -189,6 +192,6 @@ const Circle = {
       </svg>
     );
   },
-};
+});
 
 export default enhancer(Circle);

@@ -10,6 +10,7 @@ import { cloneElement } from '../../_util/vnode';
 import openAnimationFactory from './openAnimationFactory';
 import { collapseProps } from './commonProps';
 import { getDataAndAriaProps } from '../../_util/util';
+import { defineComponent } from 'vue';
 
 function _toArray(activeKey) {
   let currentActiveKey = activeKey;
@@ -18,7 +19,7 @@ function _toArray(activeKey) {
   }
   return currentActiveKey.map(key => String(key));
 }
-export default {
+export default defineComponent({
   name: 'Collapse',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -142,4 +143,4 @@ export default {
       </div>
     );
   },
-};
+});

@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { provide, markRaw } from 'vue';
+import { provide, markRaw, defineComponent } from 'vue';
 import shallowequal from '../../_util/shallowequal';
 import merge from 'lodash-es/merge';
 import classes from 'component-classes';
@@ -16,14 +16,14 @@ import ExpandableTable from './ExpandableTable';
 import { initDefaultProps, getOptionProps } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 
-export default {
+export default defineComponent({
   name: 'Table',
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: initDefaultProps(
     {
       data: PropTypes.array,
-      useFixedHeader: PropTypes.bool,
+      useFixedHeader: PropTypes.looseBool,
       columns: PropTypes.array,
       prefixCls: PropTypes.string,
       bodyStyle: PropTypes.object,
@@ -36,7 +36,7 @@ export default {
       // onRowContextMenu: PropTypes.func,
       // onRowMouseEnter: PropTypes.func,
       // onRowMouseLeave: PropTypes.func,
-      showHeader: PropTypes.bool,
+      showHeader: PropTypes.looseBool,
       title: PropTypes.func,
       id: PropTypes.string,
       footer: PropTypes.func,
@@ -57,16 +57,16 @@ export default {
           cell: PropTypes.any,
         }),
       }),
-      expandIconAsCell: PropTypes.bool,
+      expandIconAsCell: PropTypes.looseBool,
       expandedRowKeys: PropTypes.array,
       expandedRowClassName: PropTypes.func,
-      defaultExpandAllRows: PropTypes.bool,
+      defaultExpandAllRows: PropTypes.looseBool,
       defaultExpandedRowKeys: PropTypes.array,
       expandIconColumnIndex: PropTypes.number,
       expandedRowRender: PropTypes.func,
       childrenColumnName: PropTypes.string,
       indentSize: PropTypes.number,
-      expandRowByClick: PropTypes.bool,
+      expandRowByClick: PropTypes.looseBool,
       expandIcon: PropTypes.func,
       tableLayout: PropTypes.string,
       transformCellText: PropTypes.func,
@@ -590,4 +590,4 @@ export default {
       </Provider>
     );
   },
-};
+});

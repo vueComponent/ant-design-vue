@@ -1,4 +1,4 @@
-import { TransitionGroup, withDirectives } from 'vue';
+import { defineComponent, TransitionGroup, withDirectives } from 'vue';
 import KeyCode from '../_util/KeyCode';
 import PropTypes from '../_util/vue-types';
 import classnames from '../_util/classNames';
@@ -71,7 +71,7 @@ function chaining(...fns) {
     }
   };
 }
-const Select = {
+const Select = defineComponent({
   inheritAttrs: false,
   Option,
   OptGroup,
@@ -81,24 +81,24 @@ const Select = {
   props: {
     ...SelectPropTypes,
     prefixCls: SelectPropTypes.prefixCls.def('rc-select'),
-    defaultOpen: PropTypes.bool.def(false),
+    defaultOpen: PropTypes.looseBool.def(false),
     labelInValue: SelectPropTypes.labelInValue.def(false),
     defaultActiveFirstOption: SelectPropTypes.defaultActiveFirstOption.def(true),
     showSearch: SelectPropTypes.showSearch.def(true),
     allowClear: SelectPropTypes.allowClear.def(false),
     placeholder: SelectPropTypes.placeholder.def(''),
     // showArrow: SelectPropTypes.showArrow.def(true),
-    dropdownMatchSelectWidth: PropTypes.bool.def(true),
+    dropdownMatchSelectWidth: PropTypes.looseBool.def(true),
     dropdownStyle: SelectPropTypes.dropdownStyle.def(() => ({})),
     dropdownMenuStyle: PropTypes.object.def(() => ({})),
     optionFilterProp: SelectPropTypes.optionFilterProp.def('value'),
     optionLabelProp: SelectPropTypes.optionLabelProp.def('value'),
     notFoundContent: PropTypes.any.def('Not Found'),
-    backfill: PropTypes.bool.def(false),
+    backfill: PropTypes.looseBool.def(false),
     showAction: SelectPropTypes.showAction.def(['click']),
-    combobox: PropTypes.bool.def(false),
+    combobox: PropTypes.looseBool.def(false),
     tokenSeparators: PropTypes.arrayOf(PropTypes.string).def([]),
-    autoClearSearchValue: PropTypes.bool.def(true),
+    autoClearSearchValue: PropTypes.looseBool.def(true),
     tabindex: PropTypes.any.def(0),
     dropdownRender: PropTypes.func.def(({ menuNode }) => menuNode),
     // onChange: noop,
@@ -1599,6 +1599,6 @@ const Select = {
       </SelectTrigger>
     );
   },
-};
+});
 export { Select };
 export default Select;

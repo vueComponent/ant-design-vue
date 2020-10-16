@@ -1,20 +1,21 @@
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
+import { defineComponent } from 'vue';
 
 function isString(str) {
   return typeof str === 'string';
 }
 function noop() {}
-export default {
+export default defineComponent({
   name: 'Step',
   mixins: [BaseMixin],
   props: {
     prefixCls: PropTypes.string,
     wrapperStyle: PropTypes.object,
     itemWidth: PropTypes.string,
-    active: PropTypes.bool,
-    disabled: PropTypes.bool,
+    active: PropTypes.looseBool,
+    disabled: PropTypes.looseBool,
     status: PropTypes.string,
     iconPrefix: PropTypes.string,
     icon: PropTypes.any,
@@ -24,7 +25,7 @@ export default {
     description: PropTypes.any,
     title: PropTypes.any,
     subTitle: PropTypes.any,
-    progressDot: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    progressDot: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
     tailContent: PropTypes.any,
     icons: PropTypes.shape({
       finish: PropTypes.any,
@@ -143,4 +144,4 @@ export default {
       </div>
     );
   },
-};
+});

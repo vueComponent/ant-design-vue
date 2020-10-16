@@ -1,4 +1,4 @@
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import classNames from '../../_util/classNames';
 import warning from 'warning';
 import { hasProp, initDefaultProps, getOptionProps, getSlot } from '../../_util/props-util';
@@ -21,6 +21,7 @@ import {
   warnOnlyTreeNode,
   getDataAndAria,
 } from './util';
+import { defineComponent } from 'vue';
 
 /**
  * Thought we still use `cloneElement` to pass `key`,
@@ -40,7 +41,7 @@ function getWatch(keys = []) {
   return watch;
 }
 
-const Tree = {
+const Tree = defineComponent({
   name: 'Tree',
   inheritAttrs: false,
   mixins: [BaseMixin],
@@ -50,19 +51,19 @@ const Tree = {
       tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       children: PropTypes.any,
       treeData: PropTypes.array, // Generate treeNode by children
-      showLine: PropTypes.bool,
-      showIcon: PropTypes.bool,
+      showLine: PropTypes.looseBool,
+      showIcon: PropTypes.looseBool,
       icon: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
-      focusable: PropTypes.bool,
-      selectable: PropTypes.bool,
-      disabled: PropTypes.bool,
-      multiple: PropTypes.bool,
-      checkable: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-      checkStrictly: PropTypes.bool,
-      draggable: PropTypes.bool,
-      defaultExpandParent: PropTypes.bool,
-      autoExpandParent: PropTypes.bool,
-      defaultExpandAll: PropTypes.bool,
+      focusable: PropTypes.looseBool,
+      selectable: PropTypes.looseBool,
+      disabled: PropTypes.looseBool,
+      multiple: PropTypes.looseBool,
+      checkable: withUndefined(PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool])),
+      checkStrictly: PropTypes.looseBool,
+      draggable: PropTypes.looseBool,
+      defaultExpandParent: PropTypes.looseBool,
+      autoExpandParent: PropTypes.looseBool,
+      defaultExpandAll: PropTypes.looseBool,
       defaultExpandedKeys: PropTypes.array,
       expandedKeys: PropTypes.array,
       defaultCheckedKeys: PropTypes.array,
@@ -678,7 +679,7 @@ const Tree = {
       </ul>
     );
   },
-};
+});
 
 export { Tree };
 

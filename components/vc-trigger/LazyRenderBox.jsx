@@ -5,7 +5,7 @@ import { getSlot } from '../_util/props-util';
 export default {
   name: 'LazyRenderBox',
   props: {
-    visible: PropTypes.bool,
+    visible: PropTypes.looseBool,
     hiddenClassName: PropTypes.string,
   },
   render() {

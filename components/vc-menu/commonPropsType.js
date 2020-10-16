@@ -1,10 +1,10 @@
 import PropTypes from '../_util/vue-types';
 export default {
   prefixCls: PropTypes.string.def('rc-menu'),
-  focusable: PropTypes.bool.def(true),
-  multiple: PropTypes.bool,
-  defaultActiveFirst: PropTypes.bool,
-  visible: PropTypes.bool.def(true),
+  focusable: PropTypes.looseBool.def(true),
+  multiple: PropTypes.looseBool,
+  defaultActiveFirst: PropTypes.looseBool,
+  visible: PropTypes.looseBool.def(true),
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   defaultSelectedKeys: PropTypes.arrayOf(
@@ -30,9 +30,9 @@ export default {
   theme: PropTypes.oneOf(['light', 'dark']).def('light'),
   getPopupContainer: PropTypes.func,
   openTransitionName: PropTypes.string,
-  forceSubMenuRender: PropTypes.bool,
-  selectable: PropTypes.bool,
-  isRootMenu: PropTypes.bool.def(true),
+  forceSubMenuRender: PropTypes.looseBool,
+  selectable: PropTypes.looseBool,
+  isRootMenu: PropTypes.looseBool.def(true),
   builtinPlacements: PropTypes.object.def(() => ({})),
   itemIcon: PropTypes.any,
   expandIcon: PropTypes.any,

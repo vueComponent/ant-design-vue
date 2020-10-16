@@ -7,7 +7,7 @@ import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export const TransferDirection = 'left' | 'right';
 
@@ -15,13 +15,13 @@ export const TransferItem = {
   key: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
 };
 
 export const TransferProps = {
   prefixCls: PropTypes.string,
   dataSource: PropTypes.arrayOf(PropTypes.shape(TransferItem).loose),
-  disabled: PropTypes.boolean,
+  disabled: PropTypes.looseBool,
   targetKeys: PropTypes.arrayOf(PropTypes.string),
   selectedKeys: PropTypes.arrayOf(PropTypes.string),
   render: PropTypes.func,
@@ -29,14 +29,14 @@ export const TransferProps = {
   operationStyle: PropTypes.object,
   titles: PropTypes.arrayOf(PropTypes.string),
   operations: PropTypes.arrayOf(PropTypes.string),
-  showSearch: PropTypes.bool,
+  showSearch: PropTypes.looseBool,
   filterOption: PropTypes.func,
   searchPlaceholder: PropTypes.string,
   notFoundContent: PropTypes.any,
   locale: PropTypes.object,
   rowKey: PropTypes.func,
-  lazy: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
-  showSelectAll: PropTypes.bool,
+  lazy: PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool]),
+  showSelectAll: PropTypes.looseBool,
   children: PropTypes.any,
   onChange: PropTypes.func,
   onSelectChange: PropTypes.func,
@@ -64,7 +64,7 @@ const Transfer = {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {
@@ -483,6 +483,7 @@ const Transfer = {
 /* istanbul ignore next */
 Transfer.install = function(app) {
   app.component(Transfer.name, Transfer);
+  return app;
 };
 
 export default Transfer;

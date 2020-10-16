@@ -1,10 +1,10 @@
 import { inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
 import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import VcSteps from '../vc-steps';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 const getStepsProps = (defaultProps = {}) => {
   const props = {
@@ -16,7 +16,7 @@ const getStepsProps = (defaultProps = {}) => {
     status: PropTypes.oneOf(['wait', 'process', 'finish', 'error']),
     size: PropTypes.oneOf(['default', 'small']),
     direction: PropTypes.oneOf(['horizontal', 'vertical']),
-    progressDot: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+    progressDot: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
     type: PropTypes.oneOf(['default', 'navigation']),
     onChange: PropTypes.func,
     'onUpdate:current': PropTypes.func,
@@ -32,7 +32,7 @@ const Steps = {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   Step: { ...VcSteps.Step, name: 'AStep' },
@@ -71,6 +71,7 @@ const Steps = {
 Steps.install = function(app) {
   app.component(Steps.name, Steps);
   app.component(Steps.Step.name, Steps.Step);
+  return app;
 };
 
 export default Steps;

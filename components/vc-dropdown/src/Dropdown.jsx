@@ -1,4 +1,4 @@
-import { Text } from 'vue';
+import { defineComponent, Text } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import Trigger from '../../vc-trigger';
 import placements from './placements';
@@ -12,10 +12,10 @@ import {
 import BaseMixin from '../../_util/BaseMixin';
 import { cloneElement } from '../../_util/vnode';
 
-export default {
+export default defineComponent({
   mixins: [BaseMixin],
   props: {
-    minOverlayWidthMatchTrigger: PropTypes.bool,
+    minOverlayWidthMatchTrigger: PropTypes.looseBool,
     prefixCls: PropTypes.string.def('rc-dropdown'),
     transitionName: PropTypes.string,
     overlayClassName: PropTypes.string.def(''),
@@ -26,12 +26,12 @@ export default {
     placement: PropTypes.string.def('bottomLeft'),
     overlay: PropTypes.any,
     trigger: PropTypes.array.def(['hover']),
-    alignPoint: PropTypes.bool,
+    alignPoint: PropTypes.looseBool,
     showAction: PropTypes.array.def([]),
     hideAction: PropTypes.array.def([]),
     getPopupContainer: PropTypes.func,
-    visible: PropTypes.bool,
-    defaultVisible: PropTypes.bool.def(false),
+    visible: PropTypes.looseBool,
+    defaultVisible: PropTypes.looseBool.def(false),
     mouseEnterDelay: PropTypes.number.def(0.15),
     mouseLeaveDelay: PropTypes.number.def(0.1),
   },
@@ -198,4 +198,4 @@ export default {
     };
     return <Trigger {...triggerProps}>{this.renderChildren()}</Trigger>;
   },
-};
+});

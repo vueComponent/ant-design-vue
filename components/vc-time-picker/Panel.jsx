@@ -5,6 +5,7 @@ import BaseMixin from '../_util/BaseMixin';
 import Header from './Header';
 import Combobox from './Combobox';
 import { getComponent } from '../_util/props-util';
+import { defineComponent } from 'vue';
 
 function noop() {}
 
@@ -31,7 +32,7 @@ function toNearestValidTime(time, hourOptions, minuteOptions, secondOptions) {
   return moment(`${hour}:${minute}:${second}`, 'HH:mm:ss');
 }
 
-const Panel = {
+const Panel = defineComponent({
   name: 'Panel',
   inheritAttrs: false,
   mixins: [BaseMixin],
@@ -48,24 +49,24 @@ const Panel = {
     defaultValue: PropTypes.any,
     placeholder: PropTypes.string,
     format: PropTypes.string,
-    inputReadOnly: PropTypes.bool.def(false),
+    inputReadOnly: PropTypes.looseBool.def(false),
     disabledHours: PropTypes.func.def(noop),
     disabledMinutes: PropTypes.func.def(noop),
     disabledSeconds: PropTypes.func.def(noop),
-    hideDisabledOptions: PropTypes.bool,
+    hideDisabledOptions: PropTypes.looseBool,
     // onChange: PropTypes.func,
     // onEsc: PropTypes.func,
-    allowEmpty: PropTypes.bool,
-    showHour: PropTypes.bool,
-    showMinute: PropTypes.bool,
-    showSecond: PropTypes.bool,
+    allowEmpty: PropTypes.looseBool,
+    showHour: PropTypes.looseBool,
+    showMinute: PropTypes.looseBool,
+    showSecond: PropTypes.looseBool,
     // onClear: PropTypes.func,
-    use12Hours: PropTypes.bool.def(false),
+    use12Hours: PropTypes.looseBool.def(false),
     hourStep: PropTypes.number,
     minuteStep: PropTypes.number,
     secondStep: PropTypes.number,
     addon: PropTypes.func.def(noop),
-    focusOnOpen: PropTypes.bool,
+    focusOnOpen: PropTypes.looseBool,
     // onKeydown: PropTypes.func,
     clearIcon: PropTypes.any,
   },
@@ -223,6 +224,6 @@ const Panel = {
       </div>
     );
   },
-};
+});
 
 export default Panel;

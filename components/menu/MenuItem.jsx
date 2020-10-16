@@ -1,9 +1,9 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { Item, itemProps } from '../vc-menu';
 import { getOptionProps, getSlot } from '../_util/props-util';
 import Tooltip from '../tooltip';
 function noop() {}
-export default {
+export default defineComponent({
   name: 'MenuItem',
   inheritAttrs: false,
   props: itemProps,
@@ -56,4 +56,4 @@ export default {
     const item = <Item {...itemProps}>{children}</Item>;
     return <Tooltip {...toolTipProps}>{item}</Tooltip>;
   },
-};
+});

@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import { getComponent, isStringElement, isEmptyElement, getSlot } from '../_util/props-util';
 import { Col } from '../grid';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { ListGridType } from './index';
 import { cloneElement } from '../_util/vnode';
 import { inject } from 'vue';
@@ -10,7 +10,7 @@ import { inject } from 'vue';
 export const ListItemProps = {
   prefixCls: PropTypes.string,
   extra: PropTypes.any,
-  actions: PropTypes.arrayOf(PropTypes.any),
+  actions: PropTypes.array,
   grid: ListGridType,
 };
 
@@ -22,7 +22,7 @@ export const ListItemMetaProps = {
 };
 
 export const ListItemMeta = (props, { slots }) => {
-  const configProvider = inject('configProvider', ConfigConsumerProps);
+  const configProvider = inject('configProvider', defaultConfigProvider);
   const getPrefixCls = configProvider.getPrefixCls;
   const { prefixCls: customizePrefixCls } = props;
   const prefixCls = getPrefixCls('list', customizePrefixCls);
@@ -60,7 +60,7 @@ export default {
   props: ListItemProps,
   setup() {
     const listContext = inject('listContext', {});
-    const configProvider = inject('configProvider', ConfigConsumerProps);
+    const configProvider = inject('configProvider', defaultConfigProvider);
     return {
       listContext,
       configProvider,

@@ -29,7 +29,7 @@ const CalendarHeader = {
     prefixCls: PropTypes.string,
     value: PropTypes.object,
     // onValueChange: PropTypes.func,
-    showTimePicker: PropTypes.bool,
+    showTimePicker: PropTypes.looseBool,
     // onPanelChange: PropTypes.func,
     locale: PropTypes.object,
     enablePrev: PropTypes.any.def(1),

@@ -3,28 +3,28 @@ import PropTypes from '../_util/vue-types';
 import Align from '../vc-align';
 import PopupInner from './PopupInner';
 import LazyRenderBox from './LazyRenderBox';
-import animate from '../_util/css-animation';
 import BaseMixin from '../_util/BaseMixin';
 import { saveRef } from './utils';
 import { splitAttrs, findDOMNode } from '../_util/props-util';
+import getTransitionProps from '../_util/getTransitionProps';
 
 export default {
   name: 'VCTriggerPopup',
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
-    visible: PropTypes.bool,
+    visible: PropTypes.looseBool,
     getClassNameFromAlign: PropTypes.func,
     getRootDomNode: PropTypes.func,
     align: PropTypes.any,
-    destroyPopupOnHide: PropTypes.bool,
+    destroyPopupOnHide: PropTypes.looseBool,
     prefixCls: PropTypes.string,
     getContainer: PropTypes.func,
     transitionName: PropTypes.string,
     animation: PropTypes.any,
     maskAnimation: PropTypes.string,
     maskTransitionName: PropTypes.string,
-    mask: PropTypes.bool,
+    mask: PropTypes.looseBool,
     zIndex: PropTypes.number,
     popupClassName: PropTypes.any,
     popupStyle: PropTypes.object.def(() => ({})),
@@ -37,6 +37,7 @@ export default {
   data() {
     this.domEl = null;
     this.currentAlignClassName = undefined;
+    this.transitionProps = {};
     this.savePopupRef = saveRef.bind(this, 'popupInstance');
     this.saveAlignRef = saveRef.bind(this, 'alignInstance');
     return {
@@ -73,7 +74,7 @@ export default {
       // FIX: https://github.com/react-component/tooltip/issues/79
       if (this.currentAlignClassName !== currentAlignClassName) {
         this.currentAlignClassName = currentAlignClassName;
-        popupDomNode.className = this.getClassName(currentAlignClassName);
+        popupDomNode.className = this.getClassName(currentAlignClassName, popupDomNode.className);
       }
       const { onaAlign } = this.$attrs;
       onaAlign && onaAlign(popupDomNode, align);
@@ -148,10 +149,23 @@ export default {
       return transitionName;
     },
 
-    getClassName(currentAlignClassName) {
+    getClassName(currentAlignClassName, originClassName = '') {
+      // 保留动画 class
+      const enterActiveClass = [];
+      if (this.transitionProps) {
+        Object.keys(this.transitionProps).forEach(k => {
+          if (typeof this.transitionProps[k] === 'string') {
+            enterActiveClass.push(...this.transitionProps[k].split(' '));
+          }
+        });
+      }
+      const classNames = originClassName
+        .split(' ')
+        .filter(c => enterActiveClass.indexOf(c) !== -1)
+        .join(' ');
       return `${this.$props.prefixCls} ${this.$attrs.class || ''} ${
         this.$props.popupClassName
-      } ${currentAlignClassName}`;
+      } ${currentAlignClassName} ${classNames}`;
     },
     getPopupElement() {
       const { savePopupRef } = this;
@@ -209,38 +223,10 @@ export default {
         ref: savePopupRef,
         style: { ...sizeStyle, ...popupStyle, ...style, ...this.getZIndexStyle() },
       };
-      let transitionProps = {
-        appear: true,
-        css: false,
-      };
+
       const transitionName = getTransitionName();
       let useTransition = !!transitionName;
-      const transitionEvent = {
-        onBeforeEnter: () => {
-          // el.style.display = el.__vOriginalDisplay
-          // this.alignInstance.forceAlign();
-        },
-        onEnter: (el, done) => {
-          // render 后 vue 会移除通过animate动态添加的 class导致动画闪动，延迟两帧添加动画class，可以进一步定位或者重写 transition 组件
-          this.$nextTick(() => {
-            if (this.alignInstance) {
-              this.alignInstance.$nextTick(() => {
-                this.domEl = el;
-                animate(el, `${transitionName}-enter`, done);
-              });
-            } else {
-              done();
-            }
-          });
-        },
-        onBeforeLeave: () => {
-          this.domEl = null;
-        },
-        onLeave: (el, done) => {
-          animate(el, `${transitionName}-leave`, done);
-        },
-      };
-      transitionProps = { ...transitionProps, ...transitionEvent };
+      let transitionProps = getTransitionProps(transitionName);
       if (typeof animation === 'object') {
         useTransition = true;
         transitionProps = { ...transitionProps, ...animation };
@@ -248,6 +234,7 @@ export default {
       if (!useTransition) {
         transitionProps = {};
       }
+      this.transitionProps = transitionProps;
       if (destroyPopupOnHide) {
         return (
           <Transition {...transitionProps}>

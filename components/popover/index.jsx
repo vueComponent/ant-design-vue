@@ -3,7 +3,7 @@ import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 const props = abstractTooltipProps();
 const Popover = {
@@ -17,7 +17,7 @@ const Popover = {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   methods: {
@@ -54,6 +54,7 @@ const Popover = {
 /* istanbul ignore next */
 Popover.install = function(app) {
   app.component(Popover.name, Popover);
+  return app;
 };
 
 export default Popover;

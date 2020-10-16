@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import { measureScrollbar } from './utils';
 import BaseTable from './BaseTable';
 
@@ -7,14 +7,14 @@ export default {
   name: 'BodyTable',
   inheritAttrs: false,
   props: {
-    fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+    fixed: withUndefined(PropTypes.oneOfType([PropTypes.string, PropTypes.looseBool])),
     columns: PropTypes.array.isRequired,
     tableClassName: PropTypes.string.isRequired,
     handleBodyScroll: PropTypes.func.isRequired,
     handleWheel: PropTypes.func.isRequired,
     getRowKey: PropTypes.func.isRequired,
     expander: PropTypes.object.isRequired,
-    isAnyColumnsFixed: PropTypes.bool,
+    isAnyColumnsFixed: PropTypes.looseBool,
   },
   setup() {
     return {

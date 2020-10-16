@@ -13,12 +13,12 @@ const SearchInput = {
   name: 'SearchInput',
   inheritAttrs: false,
   props: {
-    open: PropTypes.bool,
+    open: PropTypes.looseBool,
     searchValue: PropTypes.string,
     prefixCls: PropTypes.string,
-    disabled: PropTypes.bool,
+    disabled: PropTypes.looseBool,
     renderPlaceholder: PropTypes.func,
-    needAlign: PropTypes.bool,
+    needAlign: PropTypes.looseBool,
     ariaId: PropTypes.string,
   },
   setup() {

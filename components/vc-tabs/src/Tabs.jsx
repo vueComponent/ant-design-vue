@@ -1,4 +1,4 @@
-import { provide, reactive, watchEffect } from 'vue';
+import { defineComponent, provide, reactive, watchEffect } from 'vue';
 import BaseMixin from '../../_util/BaseMixin';
 import PropTypes from '../../_util/vue-types';
 import raf from 'raf';
@@ -25,12 +25,12 @@ function activeKeyIsValid(props, key) {
   return keys.indexOf(key) >= 0;
 }
 
-export default {
+export default defineComponent({
   name: 'Tabs',
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
-    destroyInactiveTabPane: PropTypes.bool,
+    destroyInactiveTabPane: PropTypes.looseBool,
     renderTabBar: PropTypes.func.isRequired,
     renderTabContent: PropTypes.func.isRequired,
     navWrapper: PropTypes.func.def(arg => arg),
@@ -250,4 +250,4 @@ export default {
     };
     return <div {...p}>{contents}</div>;
   },
-};
+});

@@ -1,4 +1,4 @@
-import { inject, provide, toRef } from 'vue';
+import { defineComponent, inject, provide, toRef } from 'vue';
 import omit from 'omit.js';
 import VcMenu, { Divider, ItemGroup } from '../vc-menu';
 import SubMenu from './SubMenu';
@@ -9,7 +9,7 @@ import Item from './MenuItem';
 import { hasProp, getOptionProps, getSlot } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import commonPropsType from '../vc-menu/commonPropsType';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 // import raf from '../_util/raf';
 
 export const MenuMode = PropTypes.oneOf([
@@ -24,7 +24,7 @@ export const menuProps = {
   ...commonPropsType,
   theme: PropTypes.oneOf(['light', 'dark']).def('light'),
   mode: MenuMode.def('vertical'),
-  selectable: PropTypes.bool,
+  selectable: PropTypes.looseBool,
   selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   defaultSelectedKeys: PropTypes.array,
   openKeys: PropTypes.array,
@@ -32,11 +32,11 @@ export const menuProps = {
   openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   openTransitionName: PropTypes.string,
   prefixCls: PropTypes.string,
-  multiple: PropTypes.bool,
+  multiple: PropTypes.looseBool,
   inlineIndent: PropTypes.number.def(24),
-  inlineCollapsed: PropTypes.bool,
-  isRootMenu: PropTypes.bool.def(true),
-  focusable: PropTypes.bool.def(false),
+  inlineCollapsed: PropTypes.looseBool,
+  isRootMenu: PropTypes.looseBool.def(true),
+  focusable: PropTypes.looseBool.def(false),
   onOpenChange: PropTypes.func,
   onSelect: PropTypes.func,
   onDeselect: PropTypes.func,
@@ -47,7 +47,7 @@ export const menuProps = {
   'onUpdate:openKeys': PropTypes.func,
 };
 
-const Menu = {
+const Menu = defineComponent({
   name: 'AMenu',
   inheritAttrs: false,
   props: menuProps,
@@ -64,7 +64,7 @@ const Menu = {
     const layoutSiderContext = inject('layoutSiderContext', {});
     const layoutSiderCollapsed = toRef(layoutSiderContext, 'sCollapsed');
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
       layoutSiderContext,
       layoutSiderCollapsed,
     };
@@ -294,7 +294,7 @@ const Menu = {
 
     return <VcMenu {...menuProps} class={menuClassName} />;
   },
-};
+});
 
 /* istanbul ignore next */
 Menu.install = function(app) {
@@ -303,5 +303,6 @@ Menu.install = function(app) {
   app.component(Menu.SubMenu.name, Menu.SubMenu);
   app.component(Menu.Divider.name, Menu.Divider);
   app.component(Menu.ItemGroup.name, Menu.ItemGroup);
+  return app;
 };
 export default Menu;

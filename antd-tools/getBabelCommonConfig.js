@@ -2,7 +2,7 @@
 
 module.exports = function(modules) {
   const plugins = [
-    require.resolve('@vue/babel-plugin-jsx'),
+    [require.resolve('@vue/babel-plugin-jsx'), { mergeProps: false }],
     require.resolve('@babel/plugin-proposal-optional-chaining'),
     require.resolve('@babel/plugin-transform-object-assign'),
     require.resolve('@babel/plugin-proposal-object-rest-spread'),

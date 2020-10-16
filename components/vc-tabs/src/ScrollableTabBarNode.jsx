@@ -15,7 +15,7 @@ export default {
     saveRef: PropTypes.func.def(() => {}),
     tabBarPosition: PropTypes.oneOf(['left', 'right', 'top', 'bottom']).def('left'),
     prefixCls: PropTypes.string.def(''),
-    scrollAnimated: PropTypes.bool.def(true),
+    scrollAnimated: PropTypes.looseBool.def(true),
     navWrapper: PropTypes.func.def(arg => arg),
     prevIcon: PropTypes.any,
     nextIcon: PropTypes.any,

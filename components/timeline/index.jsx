@@ -10,6 +10,7 @@ Timeline.Item = TimelineItem;
 Timeline.install = function(app) {
   app.component(Timeline.name, Timeline);
   app.component(TimelineItem.name, TimelineItem);
+  return app;
 };
 
 export default Timeline;

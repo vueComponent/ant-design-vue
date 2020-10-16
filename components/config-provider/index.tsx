@@ -1,13 +1,38 @@
 import { reactive, provide, VNodeTypes, PropType, defineComponent, App } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponentFromSetup } from '../_util/props-util';
 import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
-import { CSPConfig } from './context';
 import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
 
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
+
+export interface CSPConfig {
+  nonce?: string;
+}
+
+export interface ConfigConsumerProps {
+  getTargetContainer?: () => HTMLElement;
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+  rootPrefixCls?: string;
+  getPrefixCls: (suffixCls?: string, customizePrefixCls?: string) => string;
+  renderEmpty: RenderEmptyHandler;
+  csp?: CSPConfig;
+  autoInsertSpaceInButton?: boolean;
+  input?: {
+    autoComplete?: string;
+  };
+  locale?: Locale;
+  pageHeader?: {
+    ghost: boolean;
+  };
+  direction?: 'ltr' | 'rtl';
+  space?: {
+    size?: SizeType | number;
+  };
+  virtual?: boolean;
+  dropdownMatchSelectWidth?: boolean;
+}
 
 export const configConsumerProps = [
   'getTargetContainer',
@@ -64,7 +89,7 @@ const ConfigProvider = defineComponent({
     csp: {
       type: Object as PropType<CSPConfig>,
     },
-    autoInsertSpaceInButton: PropTypes.bool,
+    autoInsertSpaceInButton: PropTypes.looseBool,
     locale: {
       type: Object as PropType<Locale>,
     },
@@ -80,8 +105,8 @@ const ConfigProvider = defineComponent({
     space: {
       type: [String, Number] as PropType<SizeType | number>,
     },
-    virtual: PropTypes.bool,
-    dropdownMatchSelectWidth: PropTypes.bool,
+    virtual: PropTypes.looseBool,
+    dropdownMatchSelectWidth: PropTypes.looseBool,
   },
   setup(props, { slots }) {
     const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
@@ -91,7 +116,8 @@ const ConfigProvider = defineComponent({
     };
 
     const renderEmptyComponent = (name?: string) => {
-      const renderEmpty = (getComponentFromSetup(props, slots, 'renderEmpty') ||
+      const renderEmpty = (props.renderEmpty ||
+        slots.renderEmpty ||
         defaultRenderEmpty) as RenderEmptyHandler;
       return renderEmpty(name);
     };
@@ -116,7 +142,7 @@ const ConfigProvider = defineComponent({
 
     const renderProvider = (legacyLocale: Locale) => {
       return (
-        <LocaleProvider locale={props.locale || legacyLocale} _ANT_MARK__={ANT_MARK}>
+        <LocaleProvider locale={props.locale || legacyLocale} ANT_MARK__={ANT_MARK}>
           {slots.default?.()}
         </LocaleProvider>
       );
@@ -128,7 +154,7 @@ const ConfigProvider = defineComponent({
   },
 });
 
-export const ConfigConsumerProps = {
+export const defaultConfigProvider: ConfigConsumerProps = {
   getPrefixCls: (suffixCls: string, customizePrefixCls?: string) => {
     if (customizePrefixCls) return customizePrefixCls;
     return `ant-${suffixCls}`;
@@ -139,6 +165,7 @@ export const ConfigConsumerProps = {
 /* istanbul ignore next */
 ConfigProvider.install = function(app: App) {
   app.component(ConfigProvider.name, ConfigProvider);
+  return app;
 };
 
 export default ConfigProvider;

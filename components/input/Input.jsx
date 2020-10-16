@@ -1,10 +1,10 @@
-import { inject, withDirectives } from 'vue';
+import { defineComponent, inject, withDirectives } from 'vue';
 import antInputDirective from '../_util/antInputDirective';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import inputProps from './inputProps';
 import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
 
 export function fixControlledValue(value) {
@@ -48,7 +48,7 @@ export function getInputClassName(prefixCls, size, disabled) {
   });
 }
 
-export default {
+export default defineComponent({
   name: 'AInput',
   inheritAttrs: false,
   props: {
@@ -56,7 +56,7 @@ export default {
   },
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {
@@ -227,4 +227,4 @@ export default {
     };
     return <ClearableLabeledInput {...props} ref={this.saveClearableInput} />;
   },
-};
+});

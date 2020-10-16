@@ -1,7 +1,7 @@
 import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent, getOptionProps, getSlot } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import ArrowLeftOutlined from '@ant-design/icons-vue/ArrowLeftOutlined';
 import Breadcrumb from '../breadcrumb';
 import Avatar from '../avatar';
@@ -18,7 +18,7 @@ export const PageHeaderProps = {
   footer: PropTypes.any,
   extra: PropTypes.any,
   avatar: PropTypes.object,
-  ghost: PropTypes.bool,
+  ghost: PropTypes.looseBool,
   onBack: PropTypes.func,
 };
 
@@ -96,7 +96,7 @@ const PageHeader = {
   props: PageHeaderProps,
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   render() {
@@ -138,6 +138,7 @@ const PageHeader = {
 /* istanbul ignore next */
 PageHeader.install = function(app) {
   app.component(PageHeader.name, PageHeader);
+  return app;
 };
 
 export default PageHeader;

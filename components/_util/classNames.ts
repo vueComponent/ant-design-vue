@@ -1,27 +1,9 @@
 import { isArray, isString, isObject } from './util';
-
-export type ClassArray = ClassValue[];
-
-export interface ClassDictionary {
-  [id: string]: any;
-}
-
-export type ClassValue =
-  | string
-  | number
-  | ClassDictionary
-  | ClassArray
-  | undefined
-  | null
-  | boolean;
-
-function classNames(...args: ClassValue[]): string {
+function classNames(...args: any[]) {
   const classes = [];
   for (let i = 0; i < args.length; i++) {
     const value = args[i];
-    if (!value) {
-      continue;
-    }
+    if (!value) continue;
     if (isString(value)) {
       classes.push(value);
     } else if (isArray(value)) {

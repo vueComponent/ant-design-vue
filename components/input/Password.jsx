@@ -21,7 +21,7 @@ export default {
     prefixCls: PropTypes.string.def('ant-input-password'),
     inputPrefixCls: PropTypes.string.def('ant-input'),
     action: PropTypes.string.def('click'),
-    visibilityToggle: PropTypes.bool.def(true),
+    visibilityToggle: PropTypes.looseBool.def(true),
   },
   data() {
     return {

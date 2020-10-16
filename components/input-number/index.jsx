@@ -5,7 +5,7 @@ import classNames from '../_util/classNames';
 import UpOutlined from '@ant-design/icons-vue/UpOutlined';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import VcInputNumber from '../vc-input-number/src';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 
 export const InputNumberProps = {
   prefixCls: PropTypes.string,
@@ -15,7 +15,7 @@ export const InputNumberProps = {
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   tabindex: PropTypes.number,
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   size: PropTypes.oneOf(['large', 'small', 'default']),
   formatter: PropTypes.func,
   parser: PropTypes.func,
@@ -24,7 +24,7 @@ export const InputNumberProps = {
   name: PropTypes.string,
   id: PropTypes.string,
   precision: PropTypes.number,
-  autofocus: PropTypes.bool,
+  autofocus: PropTypes.looseBool,
 };
 
 const InputNumber = {
@@ -35,7 +35,7 @@ const InputNumber = {
   }),
   setup() {
     return {
-      configProvider: inject('configProvider', ConfigConsumerProps),
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   mounted() {
@@ -91,6 +91,7 @@ const InputNumber = {
 /* istanbul ignore next */
 InputNumber.install = function(app) {
   app.component(InputNumber.name, InputNumber);
+  return app;
 };
 
 export default InputNumber;

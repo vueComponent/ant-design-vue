@@ -8,25 +8,26 @@ import CalendarMixin, { getNowByCurrentStateValue } from './mixin/CalendarMixin'
 import CommonMixin from './mixin/CommonMixin';
 import CalendarHeader from './full-calendar/CalendarHeader';
 import enUs from './locale/en_US';
-const FullCalendar = {
+import { defineComponent } from 'vue';
+const FullCalendar = defineComponent({
   name: 'FullCalendar',
   inheritAttrs: false,
   props: {
     locale: PropTypes.object.def(enUs),
     format: PropTypes.oneOfType([PropTypes.string, PropTypes.array, PropTypes.func]),
-    visible: PropTypes.bool.def(true),
+    visible: PropTypes.looseBool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     defaultType: PropTypes.string.def('date'),
     type: PropTypes.string,
-    fullscreen: PropTypes.bool.def(false),
+    fullscreen: PropTypes.looseBool.def(false),
     monthCellRender: PropTypes.func,
     dateCellRender: PropTypes.func,
-    showTypeSwitch: PropTypes.bool.def(true),
+    showTypeSwitch: PropTypes.looseBool.def(true),
     Select: PropTypes.object.isRequired,
     headerComponents: PropTypes.array,
     headerComponent: PropTypes.object, // The whole header component
     headerRender: PropTypes.func,
-    showHeader: PropTypes.bool.def(true),
+    showHeader: PropTypes.looseBool.def(true),
     disabledDate: PropTypes.func,
     value: PropTypes.object,
     defaultValue: PropTypes.object,
@@ -158,6 +159,6 @@ const FullCalendar = {
       class: className.join(' '),
     });
   },
-};
+});
 
 export default FullCalendar;

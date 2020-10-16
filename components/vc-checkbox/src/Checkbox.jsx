@@ -1,10 +1,10 @@
-import { nextTick } from 'vue';
+import { nextTick, defineComponent } from 'vue';
 import classNames from '../../_util/classNames';
-import PropTypes from '../../_util/vue-types';
+import PropTypes, { withUndefined } from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { getOptionProps, hasProp, initDefaultProps } from '../../_util/props-util';
 
-export default {
+export default defineComponent({
   name: 'Checkbox',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -14,16 +14,16 @@ export default {
       name: PropTypes.string,
       id: PropTypes.string,
       type: PropTypes.string,
-      defaultChecked: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-      checked: PropTypes.oneOfType([PropTypes.number, PropTypes.bool]),
-      disabled: PropTypes.bool,
+      defaultChecked: withUndefined(PropTypes.oneOfType([PropTypes.number, PropTypes.looseBool])),
+      checked: withUndefined(PropTypes.oneOfType([PropTypes.number, PropTypes.looseBool])),
+      disabled: PropTypes.looseBool,
       // onFocus: PropTypes.func,
       // onBlur: PropTypes.func,
       // onChange: PropTypes.func,
       // onClick: PropTypes.func,
       tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      readonly: PropTypes.bool,
-      autofocus: PropTypes.bool,
+      readonly: PropTypes.looseBool,
+      autofocus: PropTypes.looseBool,
       value: PropTypes.any,
     },
     {
@@ -146,4 +146,4 @@ export default {
       </span>
     );
   },
-};
+});

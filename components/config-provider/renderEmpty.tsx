@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { inject, VNodeChild } from 'vue';
 import Empty from '../empty';
 import { defaultConfigProvider } from '.';
 
@@ -30,7 +30,7 @@ const RenderEmpty = (props: RenderEmptyProps) => {
   return renderHtml(props.componentName);
 };
 
-function renderEmpty(componentName?: string) {
+function renderEmpty(componentName?: string): VNodeChild | JSX.Element{
   return <RenderEmpty componentName={componentName} />;
 }
 

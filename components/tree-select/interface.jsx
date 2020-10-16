@@ -1,5 +1,5 @@
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import { AbstractSelectProps } from '../select';
+import { SelectProps } from '../select';
 
 export const TreeData = PropTypes.shape({
   key: PropTypes.string,
@@ -10,7 +10,7 @@ export const TreeData = PropTypes.shape({
 }).loose;
 
 export const TreeSelectProps = () => ({
-  ...AbstractSelectProps(),
+  ...SelectProps,
   autofocus: PropTypes.looseBool,
   dropdownStyle: PropTypes.object,
   filterTreeNode: withUndefined(PropTypes.oneOfType([Function, Boolean])),

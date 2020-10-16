@@ -1,4 +1,4 @@
-import * as Vue from 'vue';
+import { VNodeChild } from 'vue';
 
 export type SelectSource = 'option' | 'selection' | 'input';
 
@@ -12,7 +12,7 @@ export type RawValueType = string | number | null;
 export interface LabelValueType extends Record<string, any> {
   key?: Key;
   value?: RawValueType;
-  label?: Vue.VNodeChild;
+  label?: VNodeChild;
 }
 export type DefaultValueType = RawValueType | RawValueType[] | LabelValueType | LabelValueType[];
 

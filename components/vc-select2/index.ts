@@ -1,7 +1,7 @@
-import Select, { ExportedSelectProps } from './Select';
+import Select, { ExportedSelectProps as SelectProps } from './Select';
 import Option from './Option';
 import OptGroup from './OptGroup';
-type SelectProps = ExportedSelectProps;
-export { Option, OptGroup, SelectProps };
+import { props } from './generate';
+export { Option, OptGroup, SelectProps, props };
 
 export default Select;

@@ -1,6 +1,6 @@
 import { App, defineComponent, inject, provide } from 'vue';
 import { Option, OptGroup } from '../vc-select';
-import Select, { AbstractSelectProps, SelectValue } from '../select';
+import Select, { SelectProps } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';
 import PropTypes from '../_util/vue-types';
@@ -12,9 +12,7 @@ function isSelectOptionOrSelectOptGroup(child: any): Boolean {
 }
 
 const AutoCompleteProps = {
-  ...AbstractSelectProps(),
-  value: SelectValue,
-  defaultValue: SelectValue,
+  ...SelectProps,
   dataSource: PropTypes.array,
   dropdownMenuStyle: PropTypes.style,
   optionLabelProp: PropTypes.string,

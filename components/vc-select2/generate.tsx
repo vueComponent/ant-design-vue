@@ -65,6 +65,106 @@ const DEFAULT_OMIT_PROPS = [
   'onInputKeyDown',
 ];
 
+export const props = {
+  prefixCls: PropTypes.string,
+  id: PropTypes.string,
+  class: PropTypes.string,
+  style: PropTypes.any,
+
+  // Options
+  options: PropTypes.array,
+  children: PropTypes.array.def([]),
+  mode: PropTypes.string,
+
+  // Value
+  value: PropTypes.any,
+  defaultValue: PropTypes.any,
+  labelInValue: PropTypes.looseBool,
+
+  // Search
+  inputValue: PropTypes.string,
+  searchValue: PropTypes.string,
+  optionFilterProp: PropTypes.string.def('value'),
+  /**
+   * In Select, `false` means do nothing.
+   * In TreeSelect, `false` will highlight match item.
+   * It's by design.
+   */
+  filterOption: PropTypes.any,
+  showSearch: PropTypes.looseBool,
+  autoClearSearchValue: PropTypes.looseBool,
+  onSearch: PropTypes.func,
+  onClear: PropTypes.func,
+
+  // Icons
+  allowClear: PropTypes.looseBool,
+  clearIcon: PropTypes.any,
+  showArrow: PropTypes.looseBool,
+  inputIcon: PropTypes.any,
+  removeIcon: PropTypes.any,
+  menuItemSelectedIcon: PropTypes.func,
+
+  // Dropdown
+  open: PropTypes.looseBool,
+  defaultOpen: PropTypes.looseBool,
+  listHeight: PropTypes.number.def(200),
+  listItemHeight: PropTypes.number.def(20),
+  dropdownStyle: PropTypes.object,
+  dropdownClassName: PropTypes.string,
+  dropdownMatchSelectWidth: PropTypes.oneOfType([Boolean, Number]).def(true),
+  virtual: PropTypes.looseBool,
+  dropdownRender: PropTypes.func,
+  dropdownAlign: PropTypes.any,
+  animation: PropTypes.string,
+  transitionName: PropTypes.string,
+  getPopupContainer: PropTypes.func,
+  direction: PropTypes.string,
+
+  // Others
+  disabled: PropTypes.looseBool,
+  loading: PropTypes.looseBool,
+  autofocus: PropTypes.looseBool,
+  defaultActiveFirstOption: PropTypes.looseBool,
+  notFoundContent: PropTypes.any.def('Not Found'),
+  placeholder: PropTypes.any,
+  backfill: PropTypes.looseBool,
+  getInputElement: PropTypes.func,
+  optionLabelProp: PropTypes.string,
+  maxTagTextLength: PropTypes.number,
+  maxTagCount: PropTypes.number,
+  maxTagPlaceholder: PropTypes.any,
+  tokenSeparators: PropTypes.array,
+  tagRender: PropTypes.func,
+  showAction: PropTypes.array.def([]),
+  tabindex: PropTypes.number,
+
+  // Events
+  onKeyup: PropTypes.func,
+  onKeydown: PropTypes.func,
+  onPopupScroll: PropTypes.func,
+  onDropdownVisibleChange: PropTypes.func,
+  onSelect: PropTypes.func,
+  onDeselect: PropTypes.func,
+  onInputKeyDown: PropTypes.func,
+  onClick: PropTypes.func,
+  onChange: PropTypes.func,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  onMousedown: PropTypes.func,
+  onMouseenter: PropTypes.func,
+  onMouseleave: PropTypes.func,
+
+  // Motion
+  choiceTransitionName: PropTypes.string,
+
+  // Internal props
+  /**
+   * Only used in current version for internal event process.
+   * Do not use in production environment.
+   */
+  internalProps: PropTypes.object.def({}),
+}
+
 export interface SelectProps<OptionsType extends object[], ValueType> {
   prefixCls?: string;
   id?: string;
@@ -1221,104 +1321,6 @@ export default function generateSelector<
     },
   });
   Select.inheritAttrs = false;
-  Select.props = {
-    prefixCls: PropTypes.string,
-    id: PropTypes.string,
-    class: PropTypes.string,
-    style: PropTypes.any,
-
-    // Options
-    options: PropTypes.array,
-    children: PropTypes.array.def([]),
-    mode: PropTypes.string,
-
-    // Value
-    value: PropTypes.any,
-    defaultValue: PropTypes.any,
-    labelInValue: PropTypes.looseBool,
-
-    // Search
-    inputValue: PropTypes.string,
-    searchValue: PropTypes.string,
-    optionFilterProp: PropTypes.string.def('value'),
-    /**
-     * In Select, `false` means do nothing.
-     * In TreeSelect, `false` will highlight match item.
-     * It's by design.
-     */
-    filterOption: PropTypes.any,
-    showSearch: PropTypes.looseBool,
-    autoClearSearchValue: PropTypes.looseBool,
-    onSearch: PropTypes.func,
-    onClear: PropTypes.func,
-
-    // Icons
-    allowClear: PropTypes.looseBool,
-    clearIcon: PropTypes.any,
-    showArrow: PropTypes.looseBool,
-    inputIcon: PropTypes.any,
-    removeIcon: PropTypes.any,
-    menuItemSelectedIcon: PropTypes.func,
-
-    // Dropdown
-    open: PropTypes.looseBool,
-    defaultOpen: PropTypes.looseBool,
-    listHeight: PropTypes.number.def(200),
-    listItemHeight: PropTypes.number.def(20),
-    dropdownStyle: PropTypes.object,
-    dropdownClassName: PropTypes.string,
-    dropdownMatchSelectWidth: PropTypes.oneOfType([Boolean, Number]).def(true),
-    virtual: PropTypes.looseBool,
-    dropdownRender: PropTypes.func,
-    dropdownAlign: PropTypes.any,
-    animation: PropTypes.string,
-    transitionName: PropTypes.string,
-    getPopupContainer: PropTypes.func,
-    direction: PropTypes.string,
-
-    // Others
-    disabled: PropTypes.looseBool,
-    loading: PropTypes.looseBool,
-    autofocus: PropTypes.looseBool,
-    defaultActiveFirstOption: PropTypes.looseBool,
-    notFoundContent: PropTypes.any.def('Not Found'),
-    placeholder: PropTypes.any,
-    backfill: PropTypes.looseBool,
-    getInputElement: PropTypes.func,
-    optionLabelProp: PropTypes.string,
-    maxTagTextLength: PropTypes.number,
-    maxTagCount: PropTypes.number,
-    maxTagPlaceholder: PropTypes.any,
-    tokenSeparators: PropTypes.array,
-    tagRender: PropTypes.func,
-    showAction: PropTypes.array.def([]),
-    tabindex: PropTypes.number,
-
-    // Events
-    onKeyup: PropTypes.func,
-    onKeydown: PropTypes.func,
-    onPopupScroll: PropTypes.func,
-    onDropdownVisibleChange: PropTypes.func,
-    onSelect: PropTypes.func,
-    onDeselect: PropTypes.func,
-    onInputKeyDown: PropTypes.func,
-    onClick: PropTypes.func,
-    onChange: PropTypes.func,
-    onBlur: PropTypes.func,
-    onFocus: PropTypes.func,
-    onMousedown: PropTypes.func,
-    onMouseenter: PropTypes.func,
-    onMouseleave: PropTypes.func,
-
-    // Motion
-    choiceTransitionName: PropTypes.string,
-
-    // Internal props
-    /**
-     * Only used in current version for internal event process.
-     * Do not use in production environment.
-     */
-    internalProps: PropTypes.object.def({}),
-  };
+  Select.props = props;
   return Select;
 }

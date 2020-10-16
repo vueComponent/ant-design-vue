@@ -1,4 +1,4 @@
-import { defineComponent, inject, withDirectives } from 'vue';
+import { defineComponent, inject, VNode, withDirectives } from 'vue';
 import antInputDirective from '../_util/antInputDirective';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
@@ -57,6 +57,9 @@ export default defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      removePasswordTimeout: undefined,
+      input: null,
+      clearableInput: null
     };
   },
   data() {
@@ -98,15 +101,15 @@ export default defineComponent({
       this.input.select();
     },
 
-    saveClearableInput(input) {
+    saveClearableInput(input: any) {
       this.clearableInput = input;
     },
 
-    saveInput(input) {
+    saveInput(input: any) {
       this.input = input;
     },
 
-    setValue(value, callback) {
+    setValue(value: any, callback?: Function) {
       if (this.stateValue === value) {
         return;
       }
@@ -119,18 +122,18 @@ export default defineComponent({
         callback && callback();
       });
     },
-    triggerChange(e) {
-      this.$emit('update:value', e.target.value);
+    triggerChange(e: Event) {
+      this.$emit('update:value', (e.target as any).value);
       this.$emit('change', e);
       this.$emit('input', e);
     },
-    handleReset(e) {
+    handleReset(e: Event) {
       this.setValue('', () => {
         this.focus();
       });
       resolveOnChange(this.input, e, this.triggerChange);
     },
-    renderInput(prefixCls, { addonBefore, addonAfter }) {
+    renderInput(prefixCls: string, { addonBefore, addonAfter }) {
       const otherProps = omit(this.$props, [
         'prefixCls',
         'onPressEnter',
@@ -142,19 +145,17 @@ export default defineComponent({
         'defaultValue',
         'lazy',
         'size',
-        'inputType',
-        'className',
         'inputPrefixCls',
         'loading',
       ]);
       const { handleKeyDown, handleChange, size, disabled, $attrs } = this;
 
-      const inputProps = {
+      const inputProps: any = {
         ...otherProps,
         ...$attrs,
         onKeydown: handleKeyDown,
         class: classNames(getInputClassName(prefixCls, size, disabled), {
-          [$attrs.class]: $attrs.class && !addonBefore && !addonAfter,
+          [$attrs.class as string]: $attrs.class && !addonBefore && !addonAfter,
         }),
         ref: this.saveInput,
         key: 'ant-input',
@@ -164,7 +165,8 @@ export default defineComponent({
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }
-      return withDirectives(<input {...inputProps} />, [[antInputDirective]]);
+      const inputNode = <input {...inputProps} />
+      return withDirectives(inputNode as VNode, [[antInputDirective]]);
     },
     clearPasswordValueAttribute() {
       // https://github.com/ant-design/ant-design/issues/20541
@@ -179,14 +181,14 @@ export default defineComponent({
         }
       });
     },
-    handleChange(e) {
-      const { value, composing } = e.target;
+    handleChange(e: Event) {
+      const { value, composing, isComposing } = e.target as any;
       // https://github.com/vueComponent/ant-design-vue/issues/2203
-      if (((e.isComposing || composing) && this.lazy) || this.stateValue === value) return;
+      if (((isComposing || composing) && this.lazy) || this.stateValue === value) return;
       this.setValue(value, this.clearPasswordValueAttribute);
       resolveOnChange(this.input, e, this.triggerChange);
     },
-    handleKeyDown(e) {
+    handleKeyDown(e: KeyboardEvent) {
       if (e.keyCode === 13) {
         this.$emit('pressEnter', e);
       }
@@ -194,16 +196,6 @@ export default defineComponent({
     },
   },
   render() {
-    // if (this.$props.type === 'textarea') {
-    //   const textareaProps = {
-    //     ...this.$props,
-    //     ...this.$attrs,
-    //     onInput: this.handleChange,
-    //     onKeydown: this.handleKeyDown,
-    //     onChange: noop,
-    //   };
-    //   return <TextArea {...textareaProps} ref="input" />;
-    // }
     const { prefixCls: customizePrefixCls } = this.$props;
     const { stateValue } = this.$data;
     const getPrefixCls = this.configProvider.getPrefixCls;
@@ -212,7 +204,7 @@ export default defineComponent({
     const addonBefore = getComponent(this, 'addonBefore');
     const suffix = getComponent(this, 'suffix');
     const prefix = getComponent(this, 'prefix');
-    const props = {
+    const props: any = {
       ...this.$attrs,
       ...getOptionProps(this),
       prefixCls,

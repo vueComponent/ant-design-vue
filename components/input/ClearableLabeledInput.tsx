@@ -4,8 +4,10 @@ import { getInputClassName } from './Input';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import { getComponent } from '../_util/props-util';
+import { defineComponent, VNode } from 'vue';
+import { tuple } from '../_util/type';
 
-export function hasPrefixSuffix(instance) {
+export function hasPrefixSuffix(instance: any) {
   return !!(
     getComponent(instance, 'prefix') ||
     getComponent(instance, 'suffix') ||
@@ -15,27 +17,27 @@ export function hasPrefixSuffix(instance) {
 
 const ClearableInputType = ['text', 'input'];
 
-const ClearableLabeledInput = {
+const ClearableLabeledInput = defineComponent({
   name: 'ClearableLabeledInput',
   inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
-    inputType: PropTypes.oneOf(ClearableInputType),
+    inputType: PropTypes.oneOf(tuple('text', 'input')),
     value: PropTypes.any,
     defaultValue: PropTypes.any,
     allowClear: PropTypes.looseBool,
-    element: PropTypes.any,
+    element: PropTypes.VNodeChild,
     handleReset: PropTypes.func,
     disabled: PropTypes.looseBool,
-    size: PropTypes.oneOf(['small', 'large', 'default']),
-    suffix: PropTypes.any,
-    prefix: PropTypes.any,
-    addonBefore: PropTypes.any,
-    addonAfter: PropTypes.any,
+    size: PropTypes.oneOf(tuple('small', 'large', 'default')),
+    suffix: PropTypes.VNodeChild,
+    prefix: PropTypes.VNodeChild,
+    addonBefore: PropTypes.VNodeChild,
+    addonAfter: PropTypes.VNodeChild,
     readonly: PropTypes.looseBool,
   },
   methods: {
-    renderClearIcon(prefixCls) {
+    renderClearIcon(prefixCls: string) {
       const { allowClear, value, disabled, readonly, inputType, handleReset } = this.$props;
       if (
         !allowClear ||
@@ -54,7 +56,7 @@ const ClearableLabeledInput = {
       return <CloseCircleFilled onClick={handleReset} class={className} role="button" />;
     },
 
-    renderSuffix(prefixCls) {
+    renderSuffix(prefixCls: string) {
       const { suffix, allowClear } = this.$props;
       if (suffix || allowClear) {
         return (
@@ -67,7 +69,7 @@ const ClearableLabeledInput = {
       return null;
     },
 
-    renderLabeledIcon(prefixCls, element) {
+    renderLabeledIcon(prefixCls: string, element: VNode): VNode {
       const props = this.$props;
       const suffix = this.renderSuffix(prefixCls);
       if (!hasPrefixSuffix(this)) {
@@ -88,7 +90,7 @@ const ClearableLabeledInput = {
       });
 
       return (
-        <span class={affixWrapperCls} style={props.style}>
+        <span class={affixWrapperCls} style={this.$attrs?.style}>
           {prefix}
           {cloneElement(element, {
             style: null,
@@ -97,10 +99,10 @@ const ClearableLabeledInput = {
           })}
           {suffix}
         </span>
-      );
+      ) as VNode;
     },
 
-    renderInputWithLabel(prefixCls, labeledElement) {
+    renderInputWithLabel(prefixCls: string, labeledElement: VNode) {
       const { addonBefore, addonAfter, size } = this.$props;
       const { style, class: className } = this.$attrs;
       // Not wrap when there is not addons
@@ -137,7 +139,7 @@ const ClearableLabeledInput = {
       );
     },
 
-    renderTextAreaWithClearIcon(prefixCls, element) {
+    renderTextAreaWithClearIcon(prefixCls: string, element: VNode) {
       const { value, allowClear } = this.$props;
       const { style, class: className } = this.$attrs;
       if (!allowClear) {
@@ -160,7 +162,7 @@ const ClearableLabeledInput = {
     },
 
     renderClearableLabeledInput() {
-      const { prefixCls, inputType, element } = this.$props;
+      const { prefixCls, inputType, element } = this.$props as any;
       if (inputType === ClearableInputType[0]) {
         return this.renderTextAreaWithClearIcon(prefixCls, element);
       }
@@ -170,6 +172,6 @@ const ClearableLabeledInput = {
   render() {
     return this.renderClearableLabeledInput();
   },
-};
+});
 
 export default ClearableLabeledInput;

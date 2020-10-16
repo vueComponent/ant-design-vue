@@ -1,17 +1,14 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
+import { tuple } from '../_util/type';
 
-export default {
+export default defineComponent({
   name: 'AInputGroup',
   props: {
     prefixCls: PropTypes.string,
-    size: {
-      validator(value) {
-        return ['small', 'large', 'default'].includes(value);
-      },
-    },
+    size: PropTypes.oneOf(tuple('small', 'large', 'default')),
     compact: PropTypes.looseBool,
   },
   setup() {
@@ -21,8 +18,8 @@ export default {
   },
   computed: {
     classes() {
-      const { prefixCls: customizePrefixCls, size, compact = false } = this;
-      const getPrefixCls = this.configProvider.getPrefixCls;
+      const { prefixCls: customizePrefixCls, size, compact = false, configProvider } = this as any;
+      const getPrefixCls = configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('input-group', customizePrefixCls);
 
       return {
@@ -36,4 +33,4 @@ export default {
   render() {
     return <span class={this.classes}>{getSlot(this)}</span>;
   },
-};
+});

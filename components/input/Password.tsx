@@ -6,13 +6,14 @@ import EyeInvisibleOutlined from '@ant-design/icons-vue/EyeInvisibleOutlined';
 import inputProps from './inputProps';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
+import { defineComponent } from 'vue';
 
 const ActionMap = {
   click: 'onClick',
   hover: 'onMouseover',
 };
 
-export default {
+export default defineComponent({
   name: 'AInputPassword',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -23,13 +24,18 @@ export default {
     action: PropTypes.string.def('click'),
     visibilityToggle: PropTypes.looseBool.def(true),
   },
+  setup() {
+    return {
+      input: null,
+    }
+  },
   data() {
     return {
       visible: false,
     };
   },
   methods: {
-    saveInput(node) {
+    saveInput(node: any) {
       this.input = node;
     },
     focus() {
@@ -101,4 +107,4 @@ export default {
     };
     return <Input {...inputProps} ref={this.saveInput} />;
   },
-};
+});

@@ -1,3 +1,4 @@
+import {PropType, VNode} from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import omit from 'omit.js';
 import classNames from '../_util/classNames';
@@ -6,22 +7,28 @@ import raf from '../_util/raf';
 import warning from '../_util/warning';
 import BaseMixin from '../_util/BaseMixin';
 import inputProps from './inputProps';
-import PropTypes, { withUndefined } from '../_util/vue-types';
+import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
-import { withDirectives } from 'vue';
+import { defineComponent, withDirectives } from 'vue';
 import antInput from '../_util/antInputDirective';
 
 const RESIZE_STATUS_NONE = 0;
 const RESIZE_STATUS_RESIZING = 1;
 const RESIZE_STATUS_RESIZED = 2;
 
+export interface AutoSizeType {
+  minRows?: number;
+  maxRows?: number;
+}
+
 const TextAreaProps = {
   ...inputProps,
-  autosize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
-  autoSize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
+  autosize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined},
+  autoSize: {type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined},
   onResize: PropTypes.func,
 };
-const ResizableTextArea = {
+
+const ResizableTextArea = defineComponent({
   name: 'ResizableTextArea',
   inheritAttrs: false,
   props: TextAreaProps,
@@ -39,6 +46,13 @@ const ResizableTextArea = {
     raf.cancel(this.nextFrameActionId);
     raf.cancel(this.resizeFrameId);
   },
+  setup() {
+    return {
+      nextFrameActionId: undefined,
+      textArea: null,
+      resizeFrameId: undefined,
+    }
+  },
   watch: {
     value() {
       this.$nextTick(() => {
@@ -47,10 +61,10 @@ const ResizableTextArea = {
     },
   },
   methods: {
-    saveTextArea(textArea) {
+    saveTextArea(textArea: any) {
       this.textArea = textArea;
     },
-    handleResize(size) {
+    handleResize(size: any) {
       const { resizeStatus } = this.$data;
 
       if (resizeStatus !== RESIZE_STATUS_NONE) {
@@ -98,7 +112,7 @@ const ResizableTextArea = {
     },
 
     renderTextArea() {
-      const props = { ...getOptionProps(this), ...this.$attrs };
+      const props: any = { ...getOptionProps(this), ...this.$attrs };
       const { prefixCls, autoSize, autosize, disabled, class: className } = props;
       const { textareaStyles, resizeStatus } = this.$data;
       warning(
@@ -131,7 +145,7 @@ const ResizableTextArea = {
           ? { overflowX: 'hidden', overflowY: 'hidden' }
           : null),
       };
-      const textareaProps = {
+      const textareaProps: any = {
         ...otherProps,
         style,
         class: cls,
@@ -141,7 +155,7 @@ const ResizableTextArea = {
       }
       return (
         <ResizeObserver onResize={this.handleResize} disabled={!(autoSize || autosize)}>
-          {withDirectives(<textarea {...textareaProps} ref={this.saveTextArea} />, [[antInput]])}
+          {withDirectives(<textarea {...textareaProps} ref={this.saveTextArea} /> as VNode, [[antInput]])}
         </ResizeObserver>
       );
     },
@@ -150,6 +164,6 @@ const ResizableTextArea = {
   render() {
     return this.renderTextArea();
   },
-};
+});
 
 export default ResizableTextArea;

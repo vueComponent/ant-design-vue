@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import { isMobile } from 'is-mobile';
 import Input from './Input';
@@ -12,22 +12,23 @@ import { getOptionProps, getComponent } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
 
-export default {
+export default defineComponent({
   name: 'AInputSearch',
   inheritAttrs: false,
   props: {
     ...inputProps,
     // 不能设置默认值 https://github.com/vueComponent/ant-design-vue/issues/1916
-    enterButton: PropTypes.any,
+    enterButton: PropTypes.VNodeChild,
     onSearch: PropTypes.func,
   },
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      input: null,
     };
   },
   methods: {
-    saveInput(node) {
+    saveInput(node: any) {
       this.input = node;
     },
     handleChange(e) {
@@ -53,7 +54,7 @@ export default {
     blur() {
       this.input.blur();
     },
-    renderLoading(prefixCls) {
+    renderLoading(prefixCls: string) {
       const { size } = this.$props;
       let enterButton = getComponent(this, 'enterButton');
       // 兼容 <a-input-search enterButton />， 因enterButton类型为 any，此类写法 enterButton 为空字符串
@@ -67,7 +68,7 @@ export default {
       }
       return <LoadingOutlined class={`${prefixCls}-icon`} key="loadingIcon" />;
     },
-    renderSuffix(prefixCls) {
+    renderSuffix(prefixCls: string) {
       const { loading } = this;
       const suffix = getComponent(this, 'suffix');
       let enterButton = getComponent(this, 'enterButton');
@@ -95,7 +96,7 @@ export default {
 
       return icon;
     },
-    renderAddonAfter(prefixCls) {
+    renderAddonAfter(prefixCls: string) {
       const { size, disabled, loading } = this;
       const btnClassName = `${prefixCls}-button`;
       let enterButton = getComponent(this, 'enterButton');
@@ -106,7 +107,7 @@ export default {
       }
       if (!enterButton) return addonAfter;
       const enterButtonAsElement = Array.isArray(enterButton) ? enterButton[0] : enterButton;
-      let button;
+      let button: any;
       const isAntdButton =
         enterButtonAsElement.type &&
         isPlainObject(enterButtonAsElement.type) &&
@@ -146,7 +147,7 @@ export default {
       size,
       class: className,
       ...restProps
-    } = { ...getOptionProps(this), ...this.$attrs };
+    } = { ...getOptionProps(this), ...this.$attrs } as any;
     delete restProps.onSearch;
     delete restProps.loading;
     delete restProps.enterButton;
@@ -159,7 +160,7 @@ export default {
     let enterButton = getComponent(this, 'enterButton');
     const addonBefore = getComponent(this, 'addonBefore');
     enterButton = enterButton || enterButton === '';
-    let inputClassName;
+    let inputClassName: string;
     if (enterButton) {
       inputClassName = classNames(prefixCls, className, {
         [`${prefixCls}-enter-button`]: !!enterButton,
@@ -183,4 +184,4 @@ export default {
     };
     return <Input {...inputProps} ref={this.saveInput} />;
   },
-};
+});

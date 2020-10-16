@@ -1,35 +1,26 @@
+import { tuple } from '../_util/type';
+import { PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 export default {
   prefixCls: PropTypes.string,
   inputPrefixCls: PropTypes.string,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  placeholder: [String, Number],
-  type: {
-    default: 'text',
-    type: String,
+  placeholder: {
+    type: [String, Number] as PropType<string | number>,
   },
-  name: String,
-  size: PropTypes.oneOf(['small', 'large', 'default']),
+  type: PropTypes.string.def('text'),
+  name: PropTypes.string,
+  size: PropTypes.oneOf(tuple('small', 'large', 'default')),
   disabled: PropTypes.looseBool,
   readonly: PropTypes.looseBool,
-  addonBefore: PropTypes.any,
-  addonAfter: PropTypes.any,
-  // onPressEnter?: React.FormEventHandler<any>;
-  // onKeyDown?: React.FormEventHandler<any>;
-  // onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  // onClick?: React.FormEventHandler<any>;
-  // onFocus?: React.FormEventHandler<any>;
-  // onBlur?: React.FormEventHandler<any>;
-  prefix: PropTypes.any,
-  suffix: PropTypes.any,
-  // spellCheck: Boolean,
+  addonBefore: PropTypes.VNodeChild,
+  addonAfter: PropTypes.VNodeChild,
+  prefix: PropTypes.VNodeChild,
+  suffix: PropTypes.VNodeChild,
   autofocus: PropTypes.looseBool,
   allowClear: PropTypes.looseBool,
-  lazy: {
-    default: true,
-    type: Boolean,
-  },
+  lazy: PropTypes.looseBool.def(true),
   maxlength: PropTypes.number,
   loading: PropTypes.looseBool,
   onPressEnter: PropTypes.func,

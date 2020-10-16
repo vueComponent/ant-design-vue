@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import ClearableLabeledInput from './ClearableLabeledInput';
 import ResizableTextArea from './ResizableTextArea';
 import inputProps from './inputProps';
@@ -13,7 +13,7 @@ const TextAreaProps = {
   autoSize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
 };
 
-export default {
+export default defineComponent({
   name: 'ATextarea',
   inheritAttrs: false,
   props: {
@@ -22,6 +22,8 @@ export default {
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      resizableTextArea: null,
+      clearableInput: null,
     };
   },
   data() {
@@ -45,7 +47,7 @@ export default {
     });
   },
   methods: {
-    setValue(value, callback) {
+    setValue(value: any, callback?: Function) {
       if (!hasProp(this, 'value')) {
         this.stateValue = value;
       } else {
@@ -55,22 +57,22 @@ export default {
         callback && callback();
       });
     },
-    handleKeyDown(e) {
+    handleKeyDown(e: KeyboardEvent) {
       if (e.keyCode === 13) {
         this.$emit('pressEnter', e);
       }
       this.$emit('keydown', e);
     },
-    triggerChange(e) {
-      this.$emit('update:value', e.target.value);
+    triggerChange(e: Event) {
+      this.$emit('update:value', (e.target as any).value);
       this.$emit('change', e);
       this.$emit('input', e);
     },
-    handleChange(e) {
-      const { value, composing } = e.target;
-      if (((e.isComposing || composing) && this.lazy) || this.stateValue === value) return;
+    handleChange(e: Event) {
+      const { value, composing, isComposing } = e.target as any;
+      if (((isComposing || composing) && this.lazy) || this.stateValue === value) return;
 
-      this.setValue(e.target.value, () => {
+      this.setValue((e.target as any).value, () => {
         this.resizableTextArea.resizeTextarea();
       });
       resolveOnChange(this.resizableTextArea.textArea, e, this.triggerChange);
@@ -83,14 +85,14 @@ export default {
     blur() {
       this.resizableTextArea.textArea.blur();
     },
-    saveTextArea(resizableTextArea) {
+    saveTextArea(resizableTextArea: any) {
       this.resizableTextArea = resizableTextArea;
     },
 
-    saveClearableInput(clearableInput) {
+    saveClearableInput(clearableInput: any) {
       this.clearableInput = clearableInput;
     },
-    handleReset(e) {
+    handleReset(e: Event) {
       this.setValue('', () => {
         this.resizableTextArea.renderTextArea();
         this.focus();
@@ -98,7 +100,7 @@ export default {
       resolveOnChange(this.resizableTextArea.textArea, e, this.triggerChange);
     },
 
-    renderTextArea(prefixCls) {
+    renderTextArea(prefixCls: string) {
       const props = getOptionProps(this);
       const resizeProps = {
         ...props,
@@ -116,7 +118,7 @@ export default {
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
 
-    const props = {
+    const props: any = {
       ...getOptionProps(this),
       ...this.$attrs,
       prefixCls,
@@ -127,4 +129,4 @@ export default {
     };
     return <ClearableLabeledInput {...props} ref={this.saveClearableInput} />;
   },
-};
+});

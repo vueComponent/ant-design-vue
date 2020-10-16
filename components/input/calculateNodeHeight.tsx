@@ -35,12 +35,20 @@ const SIZING_STYLE = [
   'box-sizing',
 ];
 
-const computedStyleCache = {};
-let hiddenTextarea;
+export interface NodeType {
+  sizingStyle: string;
+  paddingSize: number;
+  borderSize: number;
+  boxSizing: string;
+}
 
-export function calculateNodeStyling(node, useCache = false) {
-  const nodeRef =
-    node.getAttribute('id') || node.getAttribute('data-reactid') || node.getAttribute('name');
+const computedStyleCache: { [key: string]: NodeType } = {};
+let hiddenTextarea: HTMLTextAreaElement;
+
+export function calculateNodeStyling(node: HTMLElement, useCache = false) {
+  const nodeRef = (node.getAttribute('id') ||
+    node.getAttribute('data-reactid') ||
+    node.getAttribute('name')) as string;
 
   if (useCache && computedStyleCache[nodeRef]) {
     return computedStyleCache[nodeRef];
@@ -63,7 +71,7 @@ export function calculateNodeStyling(node, useCache = false) {
 
   const sizingStyle = SIZING_STYLE.map(name => `${name}:${style.getPropertyValue(name)}`).join(';');
 
-  const nodeInfo = {
+  const nodeInfo: NodeType = {
     sizingStyle,
     paddingSize,
     borderSize,
@@ -78,10 +86,10 @@ export function calculateNodeStyling(node, useCache = false) {
 }
 
 export default function calculateNodeHeight(
-  uiTextNode,
+  uiTextNode: HTMLTextAreaElement,
   useCache = false,
-  minRows = null,
-  maxRows = null,
+  minRows: number | null = null,
+  maxRows: number | null = null,
 ) {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
@@ -91,7 +99,7 @@ export default function calculateNodeHeight(
   // Fix wrap="off" issue
   // https://github.com/ant-design/ant-design/issues/6577
   if (uiTextNode.getAttribute('wrap')) {
-    hiddenTextarea.setAttribute('wrap', uiTextNode.getAttribute('wrap'));
+    hiddenTextarea.setAttribute('wrap', uiTextNode.getAttribute('wrap') as string);
   } else {
     hiddenTextarea.removeAttribute('wrap');
   }
@@ -112,7 +120,7 @@ export default function calculateNodeHeight(
   let minHeight = Number.MIN_SAFE_INTEGER;
   let maxHeight = Number.MAX_SAFE_INTEGER;
   let height = hiddenTextarea.scrollHeight;
-  let overflowY;
+  let overflowY: any;
 
   if (boxSizing === 'border-box') {
     // border-box: add border, since height = content + padding + border

@@ -1,7 +1,7 @@
 import { computed, defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
-import { InputSizeType } from './Input';
+import { InputSizeType } from './inputProps';
 
 export default defineComponent({
   name: 'AInputGroup',

@@ -1,6 +1,7 @@
 import classNames from '../_util/classNames';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
-import { getInputClassName, InputSizeType } from './Input';
+import { getInputClassName } from './Input';
+import { InputSizeType } from './inputProps';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import { getComponent } from '../_util/props-util';

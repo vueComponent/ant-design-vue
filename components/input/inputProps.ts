@@ -2,6 +2,8 @@ import { InputHTMLAttributes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 
+export const InputSizeType = tuple('small', 'large', 'default');
+
 const InputType = tuple(
   'button',
   'checkbox',

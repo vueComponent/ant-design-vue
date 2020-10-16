@@ -2,12 +2,11 @@ import { defineComponent, inject, VNodeTypes, withDirectives } from 'vue';
 import antInputDirective from '../_util/antInputDirective';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
-import inputProps from './inputProps';
+import inputProps, { InputSizeType } from './inputProps';
 import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
-import { Writeable } from 'components/_util/type';
-import { tuple } from 'types/type';
+import { Writeable } from '../_util/type';
 
 export function fixControlledValue(value: string | number) {
   if (typeof value === 'undefined' || value === null) {
@@ -45,7 +44,6 @@ export function resolveOnChange(
     onChange(event);
   }
 }
-export const InputSizeType = tuple('small', 'large', 'default');
 export function getInputClassName(
   prefixCls: string,
   size: typeof InputSizeType[number],

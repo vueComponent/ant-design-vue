@@ -25,12 +25,14 @@ export interface PickerState {
   sValue?: moment.Moment | null;
   showDate?: moment.Moment | null;
 }
-export default function createPicker(
-  TheCalendar: DefineComponent<any>,
+export default function createPicker<P>(
+  TheCalendar: DefineComponent<P>,
   props: any,
+  name: string,
 ): DefineComponent<any> {
   return defineComponent({
     inheritAttrs: false,
+    name,
     props: {
       ...props,
       allowClear: PropTypes.looseBool.def(true),

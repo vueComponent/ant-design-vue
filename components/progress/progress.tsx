@@ -1,6 +1,6 @@
 import { inject, HTMLAttributes, defineComponent, SetupContext } from 'vue';
 import classNames from '../_util/classNames';
-import { ConfigConsumerProps } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
@@ -47,7 +47,7 @@ export default defineComponent({
   name: 'AProgress',
   setup(_: ProgressProps, { slots, attrs }: SetupContext) {
     const props = attrs as ProgressProps;
-    const { getPrefixCls } = inject('configProvider', ConfigConsumerProps);
+    const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
     const getPercentNumber = () => {
       const { successPercent, percent = 0 } = props;
       return parseInt(

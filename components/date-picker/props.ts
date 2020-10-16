@@ -1,8 +1,9 @@
-// import { TimePickerProps } from '../time-picker'
+import { PropType } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { tuple } from '../_util/type';
-import { PropType } from 'vue';
+
 export type PickerValue = moment.Moment | undefined | null | string;
+
 export type RangePickerValue =
   | undefined[]
   | null[]
@@ -13,6 +14,7 @@ export type RangePickerValue =
   | [moment.Moment | string, null]
   | [moment.Moment, moment.Moment]
   | [string, string];
+
 export const PickerProps = {
   name: PropTypes.string,
   transitionName: PropTypes.string,

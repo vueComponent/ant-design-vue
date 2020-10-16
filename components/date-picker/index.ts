@@ -1,3 +1,4 @@
+import { App, DefineComponent } from 'vue';
 import VcCalendar from '../vc-calendar';
 import MonthCalendar from '../vc-calendar/src/MonthCalendar';
 import createPicker from './createPicker';
@@ -5,42 +6,45 @@ import wrapPicker from './wrapPicker';
 import RangePicker from './RangePicker';
 import WeekPicker from './WeekPicker';
 import { DatePickerProps, MonthPickerProps, WeekPickerProps, RangePickerProps } from './props';
-import { App, defineComponent } from 'vue';
 import {
-  DatePickerDecorator,
   DatePickerPropsTypes,
   RangePickerPropsTypes,
   MonthPickerPropsTypes,
   WeekPickerPropsTypes,
 } from './interface';
 
-const DatePicker = defineComponent<DatePickerPropsTypes>(
-  wrapPicker(
-    {
-      ...createPicker(VcCalendar as any, DatePickerProps),
-      name: 'ADatePicker',
-    } as any,
-    DatePickerProps,
-    'date',
-  ),
-);
+const WrappedRangePicker = (wrapPicker(
+  RangePicker,
+  RangePickerProps,
+  'date',
+) as unknown) as DefineComponent<RangePickerPropsTypes>;
 
-const MonthPicker = defineComponent<MonthPickerPropsTypes>(
-  wrapPicker(
-    { ...createPicker(MonthCalendar as any, MonthPickerProps), name: 'AMonthPicker' } as any,
-    MonthPickerProps,
-    'month',
-  ),
-);
+const WrappedWeekPicker = (wrapPicker(
+  WeekPicker,
+  WeekPickerProps,
+  'week',
+) as unknown) as DefineComponent<WeekPickerPropsTypes>;
+
+const DatePicker = (wrapPicker(
+  createPicker(VcCalendar, DatePickerProps, 'ADatePicker'),
+  DatePickerProps,
+  'date',
+) as unknown) as DefineComponent<DatePickerPropsTypes> & {
+  readonly RangePicker: typeof WrappedRangePicker;
+  readonly MonthPicker: typeof MonthPicker;
+  readonly WeekPicker: typeof WrappedWeekPicker;
+};
+
+const MonthPicker = (wrapPicker(
+  createPicker(MonthCalendar, MonthPickerProps, 'AMonthPicker'),
+  MonthPickerProps,
+  'month',
+) as unknown) as DefineComponent<MonthPickerPropsTypes>;
 
 Object.assign(DatePicker, {
-  RangePicker: defineComponent<RangePickerPropsTypes>(
-    wrapPicker(RangePicker as any, RangePickerProps, 'date'),
-  ),
+  RangePicker: WrappedRangePicker,
   MonthPicker,
-  WeekPicker: defineComponent<WeekPickerPropsTypes>(
-    wrapPicker(WeekPicker as any, WeekPickerProps, 'week'),
-  ),
+  WeekPicker: WrappedWeekPicker,
 });
 
 /* istanbul ignore next */
@@ -52,4 +56,4 @@ DatePicker.install = function(app: App) {
   return app;
 };
 
-export default DatePicker as DatePickerDecorator;
+export default DatePicker;

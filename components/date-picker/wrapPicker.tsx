@@ -45,8 +45,8 @@ function getColumns({ showHour, showMinute, showSecond, use12Hours }: any) {
   return column;
 }
 
-export default function wrapPicker(
-  Picker: DefineComponent<any>,
+export default function wrapPicker<P>(
+  Picker: DefineComponent<P>,
   props: any,
   pickerType: PickerType,
 ) {
@@ -70,7 +70,7 @@ export default function wrapPicker(
       provide('savePopupRef', this.savePopupRef);
     },
     mounted() {
-      const { autofocus, disabled, value, defaultValue, valueFormat } = this;
+      const { autofocus, disabled, value, defaultValue, valueFormat } = this.$props;
       checkValidate('DatePicker', defaultValue, 'defaultValue', valueFormat);
       checkValidate('DatePicker', value, 'value', valueFormat);
       if (autofocus && !disabled) {

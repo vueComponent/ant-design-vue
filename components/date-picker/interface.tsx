@@ -1,4 +1,3 @@
-
 import moment from 'moment';
 import { CSSProperties, DefineComponent } from 'vue';
 import { tuple, VueNode } from '../_util/type';
@@ -28,17 +27,17 @@ export interface PickerProps {
   popupStyle?: CSSProperties;
   dropdownClassName?: string;
   locale?: any;
-  localeCode?: string,
+  localeCode?: string;
   size?: 'large' | 'small' | 'default';
   getCalendarContainer?: (triggerNode: Element) => HTMLElement;
   open?: boolean;
-  valueFormat?: string,
+  valueFormat?: string;
   onOpenChange?: (status: boolean) => void;
   disabledDate?: (current: moment.Moment | null) => boolean;
   dateRender?: (current: moment.Moment, today: moment.Moment) => any;
   autofocus?: boolean;
   onFocus?: EventHandlerNonNull;
-  onBlur?: EventHandlerNonNull
+  onBlur?: EventHandlerNonNull;
 }
 
 export interface SinglePickerProps {
@@ -109,10 +108,4 @@ export interface RangePickerPropsTypes extends PickerProps {
 
 export interface WeekPickerPropsTypes extends PickerProps, SinglePickerProps {
   // - currently no own props -
-}
-
-export interface DatePickerDecorator extends DefineComponent<DatePickerPropsTypes> {
-  RangePicker: DefineComponent<RangePickerPropsTypes>;
-  MonthPicker: DefineComponent<MonthPickerPropsTypes>;
-  WeekPicker: DefineComponent<WeekPickerPropsTypes>;
 }

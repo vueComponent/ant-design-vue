@@ -164,6 +164,7 @@ export const BaseProps = () => ({
    * Do not use in production environment.
    */
   internalProps: PropTypes.object,
+  children: PropTypes.array,
 });
 
 export interface SelectProps<OptionsType extends object[], ValueType> {

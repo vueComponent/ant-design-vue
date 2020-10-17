@@ -1,63 +1,71 @@
-import { defineComponent, inject, VNodeTypes, computed } from 'vue';
-import { VueTypeValidableDef } from 'vue-types';
-import { defaultConfigProvider } from '../config-provider';
-import { getComponent } from '../_util/props-util';
+import { defineComponent, inject, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
+import { getComponent } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
+import { defaultConfigProvider } from '../config-provider';
 import StatisticNumber from './Number';
+import { countdownValueType } from './utils';
 
 export const StatisticProps = {
-  decimalSeparator: PropTypes.string.def('.'),
-  formatter: PropTypes.func as VueTypeValidableDef<(params: { value: unknown }) => VNodeTypes>,
-  groupSeparator: PropTypes.string.def(','),
+  prefixCls: PropTypes.string,
+  decimalSeparator: PropTypes.string,
+  groupSeparator: PropTypes.string,
+  format: PropTypes.string,
+  value: {
+    type: [String, Number, Object] as PropType<countdownValueType>,
+  },
+  valueStyle: PropTypes.style,
+  valueRender: PropTypes.any,
+  formatter: PropTypes.any,
   precision: PropTypes.number,
   prefix: PropTypes.VNodeChild,
   suffix: PropTypes.VNodeChild,
   title: PropTypes.VNodeChild,
-  value: PropTypes.any,
-  valueStyle: PropTypes.style,
-  prefixCls: PropTypes.string,
-  valueRender: PropTypes.func as VueTypeValidableDef<(node: VNodeTypes) => VNodeTypes>,
+  onFinish: PropTypes.func,
 };
 
-export type StatisticPropsType = Parameters<typeof Statistic['setup']>['0'];
-
-const Statistic = defineComponent({
+export default defineComponent({
   name: 'AStatistic',
-  props: StatisticProps,
-  setup(props) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
-    const getPrefixCls = configProvider.getPrefixCls;
-    const prefixCls = computed(() => getPrefixCls('statistic', props.prefixCls));
-    return { prefixCls };
-  },
-  render() {
-    const { prefixCls, valueStyle, valueRender, value } = this;
+  props: initDefaultProps(StatisticProps, {
+    decimalSeparator: '.',
+    groupSeparator: ',',
+  }),
 
-    const valueNode = (
-      <StatisticNumber
-        {...{
-          ...this.$props,
-          prefixCls: this.prefixCls,
-          formatter: getComponent(this, 'formatter', { value }),
-        }}
-      />
-    );
+  setup() {
+    return {
+      configProvider: inject('configProvider', defaultConfigProvider),
+    };
+  },
+
+  render() {
+    const { prefixCls: customizePrefixCls, value = 0, valueStyle, valueRender } = this.$props;
+    const { getPrefixCls } = this.configProvider;
+    const prefixCls = getPrefixCls('statistic', customizePrefixCls);
 
     const title = getComponent(this, 'title');
-    const prefix = getComponent(this, 'prefix');
-    const suffix = getComponent(this, 'suffix');
+    let prefix = getComponent(this, 'prefix');
+    let suffix = getComponent(this, 'suffix');
+    const formatter = getComponent(this, 'formatter', {}, false);
+    const props = {
+      ...this.$props,
+      prefixCls,
+      value,
+      formatter,
+    };
+    let valueNode = <StatisticNumber {...props} />;
+    if (valueRender) {
+      valueNode = valueRender(valueNode);
+    }
 
     return (
       <div class={prefixCls}>
         {title && <div class={`${prefixCls}-title`}>{title}</div>}
         <div style={valueStyle} class={`${prefixCls}-content`}>
           {prefix && <span class={`${prefixCls}-content-prefix`}>{prefix}</span>}
-          {valueRender ? valueRender(valueNode) : valueNode}
+          {valueNode}
           {suffix && <span class={`${prefixCls}-content-suffix`}>{suffix}</span>}
         </div>
       </div>
     );
   },
 });
-
-export default Statistic;

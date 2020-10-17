@@ -1,19 +1,23 @@
 import padEnd from 'lodash-es/padEnd';
 import { FunctionalComponent, VNodeTypes } from 'vue';
-import { StatisticProps, StatisticPropsType } from './Statistic';
-import PropTypes from '../_util/vue-types/index';
+import { FormatConfig, valueType } from './utils';
 
-const StatisticNumber: FunctionalComponent<Omit<StatisticPropsType, 'formatter'> & {
-  formatter?: VNodeTypes;
-}> = props => {
-  const { formatter, value, groupSeparator, precision, decimalSeparator, prefixCls } = props;
+interface NumberProps extends FormatConfig {
+  value: valueType;
+}
+
+const Number: FunctionalComponent<NumberProps> = props => {
+  const { value, formatter, precision, decimalSeparator, groupSeparator = '', prefixCls } = props;
   let valueNode: VNodeTypes;
 
-  if (formatter) {
-    valueNode = formatter;
+  if (typeof formatter === 'function') {
+    // Customize formatter
+    valueNode = formatter({ value });
   } else {
+    // Internal formatter
     const val = String(value);
     const cells = val.match(/^(-?)(\d*)(\.(\d+))?$/);
+    // Process if illegal number
     if (!cells) {
       valueNode = val;
     } else {
@@ -29,25 +33,21 @@ const StatisticNumber: FunctionalComponent<Omit<StatisticPropsType, 'formatter'>
       if (decimal) {
         decimal = `${decimalSeparator}${decimal}`;
       }
-      valueNode = (
-        <>
-          <span key="int" class={`${prefixCls}-content-value-int`}>
-            {negative}
-            {int}
+
+      valueNode = [
+        <span key="int" class={`${prefixCls}-content-value-int`}>
+          {negative}
+          {int}
+        </span>,
+        decimal && (
+          <span key="decimal" class={`${prefixCls}-content-value-decimal`}>
+            {decimal}
           </span>
-          {decimal && (
-            <span key="decimal" class={`${prefixCls}-content-value-decimal`}>
-              {decimal}
-            </span>
-          )}
-        </>
-      );
+        ),
+      ];
     }
   }
 
   return <span class={`${prefixCls}-content-value`}>{valueNode}</span>;
 };
-
-StatisticNumber.props = { ...StatisticProps, formatter: PropTypes.VNodeChild };
-
-export default StatisticNumber;
+export default Number;

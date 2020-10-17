@@ -1,6 +1,6 @@
-import { App } from 'vue';
 import Statistic from './Statistic';
 import Countdown from './Countdown';
+import { App } from 'vue';
 
 Statistic.Countdown = Countdown;
 /* istanbul ignore next */

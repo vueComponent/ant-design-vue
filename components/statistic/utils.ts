@@ -1,10 +1,32 @@
+import { VNodeTypes } from 'vue';
 import moment from 'moment';
 import padStart from 'lodash-es/padStart';
 
 import interopDefault from '../_util/interopDefault';
 
+export type valueType = number | string;
+export type countdownValueType = valueType | string;
+
+export type Formatter =
+  | false
+  | 'number'
+  | 'countdown'
+  | (({ value, config }: { value: valueType; config?: FormatConfig }) => VNodeTypes);
+
+export interface FormatConfig {
+  formatter?: Formatter;
+  decimalSeparator?: string;
+  groupSeparator?: string;
+  precision?: number;
+  prefixCls?: string;
+}
+
+export interface CountdownFormatConfig extends FormatConfig {
+  format?: string;
+}
+
 // Countdown
-const timeUnits = [
+const timeUnits: [string, number][] = [
   ['Y', 1000 * 60 * 60 * 24 * 365], // years
   ['M', 1000 * 60 * 60 * 24 * 30], // months
   ['D', 1000 * 60 * 60 * 24], // days
@@ -12,10 +34,10 @@ const timeUnits = [
   ['m', 1000 * 60], // minutes
   ['s', 1000], // seconds
   ['S', 1], // million seconds
-] as const;
+];
 
-export function formatTimeStr(duration, format) {
-  let leftDuration = duration;
+export function formatTimeStr(duration: number, format: string) {
+  let leftDuration: number = duration;
 
   const escapeRegex = /\[[^\]]*\]/g;
   const keepList = (format.match(escapeRegex) || []).map(str => str.slice(1, -1));
@@ -41,7 +63,7 @@ export function formatTimeStr(duration, format) {
   });
 }
 
-export function formatCountdown(value, config) {
+export function formatCountdown(value: countdownValueType, config: CountdownFormatConfig) {
   const { format = '' } = config;
   const target = interopDefault(moment)(value).valueOf();
   const current = interopDefault(moment)().valueOf();

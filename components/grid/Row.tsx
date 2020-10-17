@@ -104,16 +104,16 @@ const ARow = defineComponent<RowProps>({
         [`${prefixCls}-${align}`]: align,
       });
       const rowStyle = {
-        ...(gutter[0]! > 0
+        ...(gutter[0] > 0
           ? {
-              marginLeft: gutter[0]! / -2,
-              marginRight: gutter[0]! / -2,
+              marginLeft: `${gutter[0] / -2}px`,
+              marginRight: `${gutter[0] / -2}px`,
             }
           : {}),
-        ...(gutter[1]! > 0
+        ...(gutter[1] > 0
           ? {
-              marginTop: gutter[1]! / -2,
-              marginBottom: gutter[1]! / 2,
+              marginTop: `${gutter[1] / -2}px`,
+              marginBottom: `${gutter[1] / -2}px`,
             }
           : {}),
       };

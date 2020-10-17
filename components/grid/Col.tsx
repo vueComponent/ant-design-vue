@@ -89,16 +89,16 @@ const ACol = defineComponent<ColProps>({
       let mergedStyle: CSSProperties = {};
       if (gutter) {
         mergedStyle = {
-          ...(gutter[0]! > 0
+          ...(gutter[0] > 0
             ? {
-                paddingLeft: gutter[0]! / 2,
-                paddingRight: gutter[0]! / 2,
+                paddingLeft: `${gutter[0] / 2}px`,
+                paddingRight: `${gutter[0] / 2}px`,
               }
             : {}),
-          ...(gutter[1]! > 0
+          ...(gutter[1] > 0
             ? {
-                paddingTop: gutter[1]! / 2,
-                paddingBottom: gutter[1]! / 2,
+                paddingTop: `${gutter[1] / 2}px`,
+                paddingBottom: `${gutter[1] / 2}px`,
               }
             : {}),
           ...mergedStyle,
@@ -109,7 +109,7 @@ const ACol = defineComponent<ColProps>({
       }
 
       return (
-        <div style={mergedStyle} class={classes}>
+        <div class={classes} style={mergedStyle}>
           {slots.default?.()}
         </div>
       );

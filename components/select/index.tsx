@@ -31,26 +31,29 @@ export interface InternalSelectProps<VT> extends Omit<RcSelectProps<VT>, 'mode'>
 }
 
 export interface SelectPropsTypes<VT>
-  extends Omit<InternalSelectProps<VT>, 'inputIcon' | 'mode' | 'getInputElement' | 'backfill' | 'class' | 'style'> {
+  extends Omit<
+    InternalSelectProps<VT>,
+    'inputIcon' | 'mode' | 'getInputElement' | 'backfill' | 'class' | 'style'
+  > {
   mode?: 'multiple' | 'tags';
 }
-export type SelectTypes = SelectPropsTypes<SelectValue>
+export type SelectTypes = SelectPropsTypes<SelectValue>;
 export const SelectProps = {
-  ...omit(props, ['inputIcon' ,'mode' ,'getInputElement' ,'backfill' ,'class' ,'style']),
+  ...omit(props, ['inputIcon', 'mode', 'getInputElement', 'backfill', 'class', 'style']),
   value: {
-    type: [Array, Object, String, Number] as PropType<SelectValue>
+    type: [Array, Object, String, Number] as PropType<SelectValue>,
   },
   defaultValue: {
-    type: [Array, Object, String, Number] as PropType<SelectValue>
+    type: [Array, Object, String, Number] as PropType<SelectValue>,
   },
   suffixIcon: PropTypes.VNodeChild,
   itemIcon: PropTypes.VNodeChild,
   size: PropTypes.oneOf(tuple('small', 'middle', 'large', undefined, 'default')),
-  mode: PropTypes.oneOf(tuple('multiple', 'tags')),
+  mode: PropTypes.oneOf(tuple('multiple', 'tags', 'SECRET_COMBOBOX_MODE_DO_NOT_USE')),
   bordered: PropTypes.looseBool.def(true),
   transitionName: PropTypes.string.def('slide-up'),
   choiceTransitionName: PropTypes.string.def(''),
-}
+};
 
 const Select = defineComponent({
   name: 'ASelect',
@@ -60,7 +63,7 @@ const Select = defineComponent({
   props: SelectProps,
   SECRET_COMBOBOX_MODE_DO_NOT_USE: 'SECRET_COMBOBOX_MODE_DO_NOT_USE',
   emits: ['change', 'update:value'],
-  setup(props: any, {attrs, emit}) {
+  setup(props: any, { attrs, emit }) {
     const selectRef = ref(null);
 
     const configProvider = inject('configProvider', defaultConfigProvider);
@@ -77,8 +80,8 @@ const Select = defineComponent({
       }
     };
 
-    const mode = computed(()=>{
-      const { mode } = props
+    const mode = computed(() => {
+      const { mode } = props;
 
       if ((mode as any) === 'combobox') {
         return undefined;
@@ -91,32 +94,41 @@ const Select = defineComponent({
       return mode;
     });
 
-    const mergedClassName = computed(()=> classNames(
-      {
-        [`${props.prefixCls}-lg`]: props.size === 'large',
-        [`${props.prefixCls}-sm`]: props.size === 'small',
-        [`${props.prefixCls}-rtl`]: props.direction === 'rtl',
-        [`${props.prefixCls}-borderless`]: !props.bordered,
-      },
-      attrs.class,
-    ));
-    const triggerChange=(...args: any[])=>{
-      console.log(args)
-      emit('update:value', ...args)
-      emit('change', ...args)
-    }
+    const mergedClassName = computed(() =>
+      classNames(
+        {
+          [`${props.prefixCls}-lg`]: props.size === 'large',
+          [`${props.prefixCls}-sm`]: props.size === 'small',
+          [`${props.prefixCls}-rtl`]: props.direction === 'rtl',
+          [`${props.prefixCls}-borderless`]: !props.bordered,
+        },
+        attrs.class,
+      ),
+    );
+    const triggerChange = (...args: any[]) => {
+      console.log(args);
+      emit('update:value', ...args);
+      emit('change', ...args);
+    };
     return {
       mergedClassName,
       mode,
       focus,
       blur,
       configProvider,
-      triggerChange
-    }
+      triggerChange,
+    };
   },
   render() {
-    const {configProvider, mode, mergedClassName,triggerChange, $slots: slots, $props} = this as any;
-    const props: SelectTypes = $props
+    const {
+      configProvider,
+      mode,
+      mergedClassName,
+      triggerChange,
+      $slots: slots,
+      $props,
+    } = this as any;
+    const props: SelectTypes = $props;
     const {
       prefixCls: customizePrefixCls,
       notFoundContent,
@@ -126,10 +138,14 @@ const Select = defineComponent({
       dropdownClassName,
       direction,
       virtual,
-      dropdownMatchSelectWidth
+      dropdownMatchSelectWidth,
     } = props;
 
-    const { getPrefixCls, renderEmpty, getPopupContainer: getContextPopupContainer } = configProvider
+    const {
+      getPrefixCls,
+      renderEmpty,
+      getPopupContainer: getContextPopupContainer,
+    } = configProvider;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
 
     const isMultiple = mode === 'multiple' || mode === 'tags';
@@ -138,8 +154,8 @@ const Select = defineComponent({
     let mergedNotFound: VNodeChild;
     if (notFoundContent !== undefined) {
       mergedNotFound = notFoundContent;
-    } else if(slots.notFoundContent){
-      mergedNotFound = slots.notFoundContent()
+    } else if (slots.notFoundContent) {
+      mergedNotFound = slots.notFoundContent();
     } else if (mode === 'combobox') {
       mergedNotFound = null;
     } else {
@@ -147,11 +163,14 @@ const Select = defineComponent({
     }
 
     // ===================== Icons =====================
-    const { suffixIcon, itemIcon, removeIcon, clearIcon } = getIcons({
-      ...this.$props,
-      multiple: isMultiple,
-      prefixCls,
-    }, slots);
+    const { suffixIcon, itemIcon, removeIcon, clearIcon } = getIcons(
+      {
+        ...this.$props,
+        multiple: isMultiple,
+        prefixCls,
+      },
+      slots,
+    );
 
     const selectProps = omit(props, [
       'prefixCls',
@@ -187,9 +206,9 @@ const Select = defineComponent({
       onChange={triggerChange}
     >
       {slots?.default()}
-    </RcSelect>
-  }
-})
+    </RcSelect>;
+  },
+});
 /* istanbul ignore next */
 Select.install = function(app: App) {
   app.component(Select.name, Select);

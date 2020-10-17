@@ -73,7 +73,6 @@ export const props = {
 
   // Options
   options: PropTypes.array,
-  children: PropTypes.array.def([]),
   mode: PropTypes.string,
 
   // Value
@@ -163,7 +162,7 @@ export const props = {
    * Do not use in production environment.
    */
   internalProps: PropTypes.object.def({}),
-}
+};
 
 export interface SelectProps<OptionsType extends object[], ValueType> {
   prefixCls?: string;

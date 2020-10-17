@@ -19,17 +19,10 @@ const AffixMounter = {
 
   render() {
     return (
-      <div>
-        <div ref="container" class="container">
-          <Affix
-            class="fixed"
-            target={() => this.$refs.container}
-            ref="affix"
-            {...{ props: this.$props }}
-          >
-            <Button type="primary">Fixed at the top of container</Button>
-          </Affix>
-        </div>
+      <div ref="container" class="container">
+        <Affix class="fixed" target={() => this.$refs.container} ref="affix">
+          <Button type="primary">Fixed at the top of container</Button>
+        </Affix>
       </div>
     );
   },

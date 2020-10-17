@@ -1,6 +1,8 @@
-import { inject, App, CSSProperties, SetupContext } from 'vue';
+import { inject, App, defineComponent, PropType } from 'vue';
+import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import { defaultConfigProvider, SizeType } from '../config-provider';
+import { tuple } from '../_util/type';
 
 const spaceSize = {
   small: 8,
@@ -8,67 +10,74 @@ const spaceSize = {
   large: 24,
 };
 
-export interface SpaceProps {
-  prefixCls?: string;
-  className?: string;
-  style?: CSSProperties;
-  size?: SizeType | number;
-  direction?: 'horizontal' | 'vertical';
-  // No `stretch` since many components do not support that.
-  align?: 'start' | 'end' | 'center' | 'baseline';
-}
+const Space = defineComponent({
+  name: 'ASpace',
+  props: {
+    prefixCls: PropTypes.string,
+    size: {
+      type: [String, Number] as PropType<number | SizeType>,
+    },
+    direction: PropTypes.oneOf(tuple('horizontal', 'vertical')),
+    align: PropTypes.oneOf(tuple('start', 'end', 'center', 'baseline')),
+  },
+  setup(props, { slots }) {
+    const configProvider = inject('configProvider', defaultConfigProvider);
+    const {
+      align,
+      size = 'small',
+      direction = 'horizontal',
+      prefixCls: customizePrefixCls,
+    } = props;
 
-const Space = (props: SpaceProps, { slots }: SetupContext) => {
-  const configProvider = inject('configProvider', defaultConfigProvider);
-  const { align, size = 'small', direction = 'horizontal', prefixCls: customizePrefixCls } = props;
+    const { getPrefixCls } = configProvider;
 
-  const { getPrefixCls } = configProvider;
-  const prefixCls = getPrefixCls('space', customizePrefixCls);
-  const items = filterEmpty(slots.default?.());
-  const len = items.length;
+    return () => {
+      const prefixCls = getPrefixCls('space', customizePrefixCls);
+      const items = filterEmpty(slots.default?.());
+      const len = items.length;
 
-  if (len === 0) {
-    return null;
-  }
+      if (len === 0) {
+        return null;
+      }
 
-  const mergedAlign = align === undefined && direction === 'horizontal' ? 'center' : align;
+      const mergedAlign = align === undefined && direction === 'horizontal' ? 'center' : align;
 
-  const someSpaceClass = {
-    [prefixCls]: true,
-    [`${prefixCls}-${direction}`]: true,
-    [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
-  };
+      const someSpaceClass = {
+        [prefixCls]: true,
+        [`${prefixCls}-${direction}`]: true,
+        [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
+      };
 
-  const itemClassName = `${prefixCls}-item`;
-  const marginDirection = 'marginRight'; // directionConfig === 'rtl' ? 'marginLeft' : 'marginRight';
+      const itemClassName = `${prefixCls}-item`;
+      const marginDirection = 'marginRight'; // directionConfig === 'rtl' ? 'marginLeft' : 'marginRight';
 
-  return (
-    <div class={someSpaceClass}>
-      {items.map((child, i) => (
-        <div
-          class={itemClassName}
-          key={`${itemClassName}-${i}`}
-          style={
-            i === len - 1
-              ? {}
-              : {
-                  [direction === 'vertical' ? 'marginBottom' : marginDirection]:
-                    typeof size === 'string' ? `${spaceSize[size]}px` : `${size}px`,
-                }
-          }
-        >
-          {child}
+      return (
+        <div class={someSpaceClass}>
+          {items.map((child, i) => (
+            <div
+              class={itemClassName}
+              key={`${itemClassName}-${i}`}
+              style={
+                i === len - 1
+                  ? {}
+                  : {
+                      [direction === 'vertical' ? 'marginBottom' : marginDirection]:
+                        typeof size === 'string' ? `${spaceSize[size]}px` : `${size}px`,
+                    }
+              }
+            >
+              {child}
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
-  );
-};
-
-Space.displayName = 'ASpace';
+      );
+    };
+  },
+});
 
 /* istanbul ignore next */
 Space.install = function(app: App) {
-  app.component(Space.displayName, Space);
+  app.component(Space.name, Space);
   return app;
 };
 

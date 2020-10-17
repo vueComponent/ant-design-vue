@@ -1,7 +1,7 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
-import PropTypes from '../_util/vue-types';
-import { getOptionProps, initDefaultProps } from '../_util/props-util';
+import { getOptionProps } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
@@ -10,30 +10,9 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import Line from './line';
 import Circle from './circle';
 import { validProgress } from './utils';
+import { ProgressProps, ProgressStatuses } from './props';
 
-const ProgressStatuses = ['normal', 'exception', 'active', 'success'];
-export const ProgressType = PropTypes.oneOf(['line', 'circle', 'dashboard']);
-export const ProgressSize = PropTypes.oneOf(['default', 'small']);
-
-export const ProgressProps = {
-  prefixCls: PropTypes.string,
-  type: ProgressType,
-  percent: PropTypes.number,
-  successPercent: PropTypes.number,
-  format: PropTypes.func,
-  status: PropTypes.oneOf(ProgressStatuses),
-  showInfo: PropTypes.looseBool,
-  strokeWidth: PropTypes.number,
-  strokeLinecap: PropTypes.oneOf(['butt', 'round', 'square']),
-  strokeColor: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  trailColor: PropTypes.string,
-  width: PropTypes.number,
-  gapDegree: PropTypes.number,
-  gapPosition: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
-  size: ProgressSize,
-};
-
-export default {
+export default defineComponent({
   name: 'AProgress',
   props: initDefaultProps(ProgressProps, {
     type: 'line',
@@ -65,7 +44,7 @@ export default {
       }
       return status || 'normal';
     },
-    renderProcessInfo(prefixCls, progressStatus) {
+    renderProcessInfo(prefixCls: string, progressStatus: typeof ProgressStatuses[number]) {
       const { showInfo, format, type, percent, successPercent } = this.$props;
       if (!showInfo) return null;
 
@@ -93,7 +72,7 @@ export default {
   render() {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, size, type, showInfo } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('progress', customizePrefixCls);
     const progressStatus = this.getProgressStatus();
     const progressInfo = this.renderProcessInfo(prefixCls, progressStatus);
@@ -128,4 +107,4 @@ export default {
     };
     return <div {...progressProps}>{progress}</div>;
   },
-};
+});

@@ -150,6 +150,6 @@ AutoComplete.install = function(app: App) {
 };
 
 export default AutoComplete as typeof AutoComplete & {
-  readonly Option: typeof AutoComplete.Option;
-  readonly OptGroup: typeof AutoComplete.OptGroup;
+  readonly Option: typeof Option;
+  readonly OptGroup: typeof OptGroup;
 };

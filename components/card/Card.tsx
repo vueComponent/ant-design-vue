@@ -96,7 +96,7 @@ const Card = defineComponent({
     } = this.$props;
     const { $slots } = this;
     const children = getSlot(this);
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
     const tabBarExtraContent = getComponent(this, 'tabBarExtraContent');

@@ -19,9 +19,9 @@ export default defineComponent({
   props: {
     name: PropTypes.string,
     prefixCls: PropTypes.string,
-    defaultValue: { type: Array as PropType<Array<CheckboxValueType>>},
-    value: { type: Array as PropType<Array<CheckboxValueType>>},
-    options: {type: Array as PropType<Array<CheckboxOptionType | string>>},
+    defaultValue: { type: Array as PropType<Array<CheckboxValueType>> },
+    value: { type: Array as PropType<Array<CheckboxValueType>> },
+    options: { type: Array as PropType<Array<CheckboxOptionType | string>> },
     disabled: PropTypes.looseBool,
     onChange: PropTypes.func,
   },
@@ -48,7 +48,7 @@ export default defineComponent({
   },
   methods: {
     getOptions() {
-      const { options, $slots } = this;
+      const { options = [], $slots } = this;
       return options.map(option => {
         if (typeof option === 'string') {
           return {

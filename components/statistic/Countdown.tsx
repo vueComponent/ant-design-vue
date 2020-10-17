@@ -1,25 +1,26 @@
+import { defineComponent } from 'vue';
 import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
-import { initDefaultProps } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import Statistic, { StatisticProps } from './Statistic';
-import { formatCountdown } from './utils';
+import { formatCountdown, countdownValueType, FormatConfig } from './utils';
 
 const REFRESH_INTERVAL = 1000 / 30;
 
-function getTime(value) {
+function getTime(value?: countdownValueType) {
   return interopDefault(moment)(value).valueOf();
 }
 
-export default {
+export default defineComponent({
   name: 'AStatisticCountdown',
   props: initDefaultProps(StatisticProps, {
     format: 'HH:mm:ss',
   }),
-
-  created() {
-    this.countdownId = undefined;
+  setup() {
+    return {
+      countdownId: undefined,
+    } as { countdownId: number };
   },
-
   mounted() {
     this.syncTimer();
   },
@@ -46,7 +47,7 @@ export default {
     startTimer() {
       if (this.countdownId) return;
       this.countdownId = window.setInterval(() => {
-        this.$refs.statistic.$forceUpdate();
+        (this.$refs.statistic as any).$forceUpdate();
         this.syncTimer();
       }, REFRESH_INTERVAL);
     },
@@ -64,7 +65,7 @@ export default {
       }
     },
 
-    formatCountdown({ value, config }) {
+    formatCountdown({ value, config }: { value: countdownValueType; config: FormatConfig }) {
       const { format } = this.$props;
       return formatCountdown(value, { ...config, format });
     },
@@ -84,4 +85,4 @@ export default {
       />
     );
   },
-};
+});

@@ -1,13 +1,18 @@
 import padEnd from 'lodash-es/padEnd';
-import { createVNode } from 'vue';
+import { FunctionalComponent, VNodeTypes } from 'vue';
+import { FormatConfig, valueType } from './utils';
 
-const Number = (_, { attrs }) => {
-  const { value, formatter, precision, decimalSeparator, groupSeparator = '', prefixCls } = attrs;
-  let valueNode;
+interface NumberProps extends FormatConfig {
+  value: valueType;
+}
+
+const Number: FunctionalComponent<NumberProps> = props => {
+  const { value, formatter, precision, decimalSeparator, groupSeparator = '', prefixCls } = props;
+  let valueNode: VNodeTypes;
 
   if (typeof formatter === 'function') {
     // Customize formatter
-    valueNode = formatter({ value, h: createVNode });
+    valueNode = formatter({ value });
   } else {
     // Internal formatter
     const val = String(value);

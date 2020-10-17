@@ -121,7 +121,7 @@ describe('message', () => {
     }, 0);
   });
   it('should allow custom icon', async () => {
-    message.open({ content: 'Message', icon: () => <SmileOutlined /> }); // eslint-disable-line
+    message.open({ content: 'Message', icon: <SmileOutlined /> });
     await asyncExpect(() => {
       expect(document.querySelectorAll('.anticon-smile').length).toBe(1);
     }, 0);

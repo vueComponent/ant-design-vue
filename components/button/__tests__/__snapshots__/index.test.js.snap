@@ -59,7 +59,7 @@ exports[`Button should not render as link button when href is undefined 1`] = `
 `;
 
 exports[`Button should support link button 1`] = `
-<a target="_blank" href="http://ant.design" class="ant-btn">
+<a target="_blank" class="ant-btn" href="http://ant.design">
   <!----><span>link button</span>
 </a>
 `;

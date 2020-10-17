@@ -45,7 +45,7 @@ function renderChildren<T>(
     });
     const key = getKey(item);
     return (
-      <Item key={key} setRef={ele => setNodeRef(item, ele)}>
+      <Item key={key} setRef={ele => setNodeRef(item, ele as HTMLElement)}>
         {node}
       </Item>
     );
@@ -102,7 +102,7 @@ const List = defineComponent({
       mergedData: computed(() => props.data || EMPTY_DATA) as any,
     });
 
-    const componentRef = ref<Element>();
+    const componentRef = ref<HTMLDivElement>();
 
     // =============================== Item Key ===============================
     const getKey = (item: Record<string, any>) => {
@@ -257,8 +257,8 @@ const List = defineComponent({
     const removeEventListener = () => {
       if (componentRef.value) {
         componentRef.value.removeEventListener('wheel', onRawWheel);
-        componentRef.value.removeEventListener('DOMMouseScroll' as any, onFireFoxScroll);
-        componentRef.value.removeEventListener('MozMousePixelScroll', onMozMousePixelScroll);
+        componentRef.value.removeEventListener('DOMMouseScroll', onFireFoxScroll as any);
+        componentRef.value.removeEventListener('MozMousePixelScroll', onMozMousePixelScroll as any);
       }
     };
     watchEffect(() => {
@@ -266,8 +266,8 @@ const List = defineComponent({
         if (componentRef.value) {
           removeEventListener();
           componentRef.value.addEventListener('wheel', onRawWheel);
-          componentRef.value.addEventListener('DOMMouseScroll' as any, onFireFoxScroll);
-          componentRef.value.addEventListener('MozMousePixelScroll', onMozMousePixelScroll);
+          componentRef.value.addEventListener('DOMMouseScroll', onFireFoxScroll as any);
+          componentRef.value.addEventListener('MozMousePixelScroll', onMozMousePixelScroll as any);
         }
       });
     });

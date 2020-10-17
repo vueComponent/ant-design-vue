@@ -1,4 +1,4 @@
-export function validProgress(progress) {
+export function validProgress(progress?: number) {
   if (!progress || progress < 0) {
     return 0;
   }

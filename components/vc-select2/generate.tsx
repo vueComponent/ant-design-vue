@@ -75,7 +75,6 @@ export const BaseProps = () => ({
 
   // Options
   options: PropTypes.array,
-  children: PropTypes.array.def([]),
   mode: PropTypes.string,
 
   // Value

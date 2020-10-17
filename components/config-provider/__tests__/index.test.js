@@ -8,11 +8,11 @@ describe('ConfigProvider', () => {
   mountTest({
     render() {
       return (
-        <div>
+        <>
           <ConfigProvider>
             <div />
           </ConfigProvider>
-        </div>
+        </>
       );
     },
   });

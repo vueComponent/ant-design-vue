@@ -9,7 +9,7 @@ const Item: FunctionalComponent<ItemProps> = ({ setRef }, { slots }) => {
 
   return children && children.length
     ? cloneVNode(children[0], {
-        ref: setRef,
+        ref: setRef as any,
       })
     : children;
 };
@@ -19,4 +19,5 @@ Item.props = {
     default: () => {},
   },
 };
+
 export default Item;

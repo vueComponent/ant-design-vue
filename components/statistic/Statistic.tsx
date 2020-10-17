@@ -1,26 +1,30 @@
-import { inject } from 'vue';
+import { defineComponent, inject, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponent, initDefaultProps } from '../_util/props-util';
+import { getComponent } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
 import StatisticNumber from './Number';
+import { countdownValueType } from './utils';
 
 export const StatisticProps = {
   prefixCls: PropTypes.string,
   decimalSeparator: PropTypes.string,
   groupSeparator: PropTypes.string,
   format: PropTypes.string,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
-  valueStyle: PropTypes.any,
+  value: {
+    type: [String, Number, Object] as PropType<countdownValueType>,
+  },
+  valueStyle: PropTypes.style,
   valueRender: PropTypes.any,
   formatter: PropTypes.any,
   precision: PropTypes.number,
-  prefix: PropTypes.any,
-  suffix: PropTypes.any,
-  title: PropTypes.any,
+  prefix: PropTypes.VNodeChild,
+  suffix: PropTypes.VNodeChild,
+  title: PropTypes.VNodeChild,
   onFinish: PropTypes.func,
 };
 
-export default {
+export default defineComponent({
   name: 'AStatistic',
   props: initDefaultProps(StatisticProps, {
     decimalSeparator: '.',
@@ -35,7 +39,7 @@ export default {
 
   render() {
     const { prefixCls: customizePrefixCls, value = 0, valueStyle, valueRender } = this.$props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('statistic', customizePrefixCls);
 
     const title = getComponent(this, 'title');
@@ -64,4 +68,4 @@ export default {
       </div>
     );
   },
-};
+});

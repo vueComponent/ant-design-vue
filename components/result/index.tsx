@@ -1,5 +1,6 @@
-import { inject } from 'vue';
+import { App, defineComponent, inject, VNodeTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
+import { tuple } from '../_util/type';
 import { getComponent } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
@@ -29,13 +30,15 @@ const ExceptionStatus = Object.keys(ExceptionMap);
 export const ResultProps = {
   prefixCls: PropTypes.string,
   icon: PropTypes.any,
-  status: PropTypes.oneOf(['success', 'error', 'info', 'warning', '404', '403', '500']).def('info'),
+  status: PropTypes.oneOf(tuple('success', 'error', 'info', 'warning', '404', '403', '500')).def(
+    'info',
+  ),
   title: PropTypes.any,
   subTitle: PropTypes.any,
   extra: PropTypes.any,
 };
 
-const renderIcon = (prefixCls, { status, icon }) => {
+const renderIcon = (prefixCls: string, { status, icon }) => {
   if (ExceptionStatus.includes(`${status}`)) {
     const SVGComponent = ExceptionMap[status];
     return (
@@ -49,9 +52,10 @@ const renderIcon = (prefixCls, { status, icon }) => {
   return <div class={`${prefixCls}-icon`}>{iconNode}</div>;
 };
 
-const renderExtra = (prefixCls, extra) => extra && <div class={`${prefixCls}-extra`}>{extra}</div>;
+const renderExtra = (prefixCls: string, extra: VNodeTypes) =>
+  extra && <div class={`${prefixCls}-extra`}>{extra}</div>;
 
-const Result = {
+const Result = defineComponent({
   name: 'AResult',
   props: ResultProps,
   setup() {
@@ -59,7 +63,7 @@ const Result = {
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
-  render(h) {
+  render() {
     const { prefixCls: customizePrefixCls, status } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('result', customizePrefixCls);
@@ -79,7 +83,7 @@ const Result = {
       </div>
     );
   },
-};
+});
 
 /* add resource */
 Result.PRESENTED_IMAGE_403 = ExceptionMap[403];
@@ -87,8 +91,9 @@ Result.PRESENTED_IMAGE_404 = ExceptionMap[404];
 Result.PRESENTED_IMAGE_500 = ExceptionMap[500];
 
 /* istanbul ignore next */
-Result.install = function(app) {
+Result.install = function(app: App) {
   app.component(Result.name, Result);
   return app;
 };
+
 export default Result;

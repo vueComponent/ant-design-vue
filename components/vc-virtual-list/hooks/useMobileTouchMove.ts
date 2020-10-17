@@ -4,7 +4,7 @@ const SMOOTH_PTG = 14 / 15;
 
 export default function useMobileTouchMove(
   inVirtual: Ref<boolean>,
-  listRef: Ref<Element | undefined>,
+  listRef: Ref<HTMLDivElement | undefined>,
   callback: (offsetY: number, smoothOffset?: boolean) => boolean,
 ) {
   let touched = false;

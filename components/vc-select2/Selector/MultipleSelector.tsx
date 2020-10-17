@@ -237,7 +237,6 @@ const SelectSelector = defineComponent<SelectorProps>({
         onInputMouseDown,
         onInputCompositionStart,
         onInputCompositionEnd,
-        choiceTransitionName,
       } = props;
       return (
         <>

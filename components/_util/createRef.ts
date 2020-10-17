@@ -2,7 +2,7 @@ export interface RefObject extends Function {
   current?: any;
 }
 
-function createRef(): RefObject {
+function createRef(): any {
   const func: RefObject = (node: any) => {
     func.current = node;
   };

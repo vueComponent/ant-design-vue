@@ -371,8 +371,16 @@ function createBaseForm(option = {}, mixins = []) {
           }
           const formContext = templateContext || this;
           let allUpdate = false;
-          Object.keys(changedFields).forEach(key => {
-            let formItem = this.formItems[key];
+          var findName = root => {
+            if(Object.keys(root).length==1){
+              return findName(root[Object.keys(root)[0]])
+            }else{
+              return root.name
+            }
+          }
+          Object.keys(changedFields).forEach(function (key) {
+            var name = findName(changedFields)
+            var formItem = _this4.formItems[name];
             formItem = typeof formItem === 'function' ? formItem() : formItem;
             if (formItem && formItem.itemSelfUpdate) {
               formItem.$forceUpdate();

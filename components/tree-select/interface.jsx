@@ -10,7 +10,7 @@ export const TreeData = PropTypes.shape({
 }).loose;
 
 export const TreeSelectProps = () => ({
-  ...SelectProps,
+  ...SelectProps(),
   autofocus: PropTypes.looseBool,
   dropdownStyle: PropTypes.object,
   filterTreeNode: withUndefined(PropTypes.oneOfType([Function, Boolean])),

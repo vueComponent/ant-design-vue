@@ -55,7 +55,7 @@ const props = {
   accessibilityIndex: PropTypes.number,
   tabindex: PropTypes.number,
 
-  removeIcon: PropTypes.looseBool,
+  removeIcon: PropTypes.VNodeChild,
   choiceTransitionName: PropTypes.string,
 
   maxTagCount: PropTypes.number,
@@ -158,9 +158,11 @@ const SelectSelector = defineComponent<SelectorProps>({
               : maxTagPlaceholder,
         });
       }
-      const transitionProps = getTransitionGroupProps(choiceTransitionName, {
-        appear: motionAppear,
-      });
+      const transitionProps = choiceTransitionName
+        ? getTransitionGroupProps(choiceTransitionName, {
+            appear: motionAppear,
+          })
+        : { css: false };
       selectionNode.value = (
         <TransitionGroup {...transitionProps}>
           {...displayValues.map(
@@ -237,7 +239,6 @@ const SelectSelector = defineComponent<SelectorProps>({
         onInputMouseDown,
         onInputCompositionStart,
         onInputCompositionEnd,
-        choiceTransitionName,
       } = props;
       return (
         <>

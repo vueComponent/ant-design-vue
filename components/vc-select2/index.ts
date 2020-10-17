@@ -1,7 +1,11 @@
-import Select, { ExportedSelectProps as SelectProps } from './Select';
+import Select from './Select';
 import Option from './Option';
 import OptGroup from './OptGroup';
-import { props } from './generate';
-export { Option, OptGroup, SelectProps, props };
+import { BaseProps } from './generate';
+
+// eslint-disable-next-line prettier/prettier
+export type { ExportedSelectProps as SelectProps } from './Select';
+
+export { Option, OptGroup, BaseProps };
 
 export default Select;

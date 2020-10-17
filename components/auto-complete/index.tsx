@@ -1,18 +1,21 @@
 import { App, defineComponent, inject, provide } from 'vue';
-import { Option, OptGroup } from '../vc-select';
 import Select, { SelectProps } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
 import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
+import Omit from 'omit.js';
+import warning from '../_util/warning';
+
+const { Option, OptGroup } = Select;
 
 function isSelectOptionOrSelectOptGroup(child: any): Boolean {
   return child && child.type && (child.type.isSelectOption || child.type.isSelectOptGroup);
 }
 
 const AutoCompleteProps = {
-  ...SelectProps,
+  ...SelectProps(),
   dataSource: PropTypes.array,
   dropdownMenuStyle: PropTypes.style,
   optionLabelProp: PropTypes.string,
@@ -39,7 +42,12 @@ const AutoComplete = defineComponent({
   },
   Option: { ...Option, name: 'AAutoCompleteOption' },
   OptGroup: { ...OptGroup, name: 'AAutoCompleteOptGroup' },
-  setup() {
+  setup(props, { slots }) {
+    warning(
+      !('dataSource' in props || 'dataSource' in slots),
+      'AutoComplete',
+      '`dataSource` is deprecated, please use `options` instead.',
+    );
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
       popupRef: null,
@@ -59,11 +67,7 @@ const AutoComplete = defineComponent({
     getInputElement() {
       const children = getSlot(this);
       const element = children.length ? children[0] : <Input lazy={false} />;
-      return (
-        <InputElement placeholder={this.placeholder} {...element.props}>
-          {element}
-        </InputElement>
-      );
+      return <InputElement {...element.props}>{element}</InputElement>;
     },
 
     focus() {
@@ -80,8 +84,8 @@ const AutoComplete = defineComponent({
   },
 
   render() {
-    const { size, prefixCls: customizePrefixCls, optionLabelProp, dataSource } = this;
-
+    const { size, prefixCls: customizePrefixCls, dataSource } = this;
+    let optionChildren: any;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
     const { class: className } = this.$attrs as any;
@@ -92,22 +96,28 @@ const AutoComplete = defineComponent({
       [`${prefixCls}-show-search`]: true,
       [`${prefixCls}-auto-complete`]: true,
     };
-
-    let options;
     const childArray = getSlot(this, 'dataSource');
     if (childArray.length && isSelectOptionOrSelectOptGroup(childArray[0])) {
-      options = childArray;
+      optionChildren = childArray;
     } else {
-      options = dataSource
+      optionChildren = dataSource
         ? dataSource.map((item: any) => {
             if (isValidElement(item)) {
               return item;
             }
             switch (typeof item) {
               case 'string':
-                return <Option key={item}>{item}</Option>;
+                return (
+                  <Option key={item} value={item}>
+                    {item}
+                  </Option>
+                );
               case 'object':
-                return <Option key={item.value}>{item.text}</Option>;
+                return (
+                  <Option key={item.value} value={item.value}>
+                    {item.text}
+                  </Option>
+                );
               default:
                 throw new Error(
                   'AutoComplete[dataSource] only supports type `string[] | Object[]`.',
@@ -117,17 +127,17 @@ const AutoComplete = defineComponent({
         : [];
     }
     const selectProps = {
-      ...getOptionProps(this),
+      ...Omit(getOptionProps(this), ['dataSource', 'optionLabelProp'] as any),
       ...this.$attrs,
       mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
-      optionLabelProp,
+      // optionLabelProp,
       getInputElement: this.getInputElement,
       notFoundContent: getComponent(this, 'notFoundContent'),
-      placeholder: '',
+      // placeholder: '',
       class: cls,
       ref: this.saveSelect,
     };
-    return <Select {...selectProps}>{options}</Select>;
+    return <Select {...selectProps}>{optionChildren}</Select>;
   },
 });
 

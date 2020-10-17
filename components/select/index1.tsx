@@ -99,7 +99,7 @@ const Select = defineComponent({
     ...SelectProps,
     showSearch: PropTypes.looseBool.def(false),
     transitionName: PropTypes.string.def('slide-up'),
-    choiceTransitionName: PropTypes.string.def('zoom'),
+    choiceTransitionName: PropTypes.string.def(''),
   },
   propTypes: SelectPropTypes,
   setup() {

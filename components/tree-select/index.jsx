@@ -23,7 +23,7 @@ const TreeSelect = {
   name: 'ATreeSelect',
   props: initDefaultProps(TreeSelectProps(), {
     transitionName: 'slide-up',
-    choiceTransitionName: 'zoom',
+    choiceTransitionName: '',
     showSearch: false,
   }),
   setup() {

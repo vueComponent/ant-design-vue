@@ -4,7 +4,7 @@ import { getOptionProps, getSlot } from '../_util/props-util';
 export default {
   inheritAttrs: false,
   props: {
-    ...SelectProps,
+    ...SelectProps(),
   },
   Option: VcSelect.Option,
   render() {

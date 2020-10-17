@@ -49,9 +49,11 @@ import {
   VNode,
   VNodeChild,
   watch,
+  watchEffect,
 } from 'vue';
 import createRef from '../_util/createRef';
-import PropTypes from '../_util/vue-types';
+import PropTypes, { withUndefined } from '../_util/vue-types';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 
 const DEFAULT_OMIT_PROPS = [
   'children',
@@ -65,7 +67,7 @@ const DEFAULT_OMIT_PROPS = [
   'onInputKeyDown',
 ];
 
-export const props = {
+export const BaseProps = () => ({
   prefixCls: PropTypes.string,
   id: PropTypes.string,
   class: PropTypes.string,
@@ -84,7 +86,7 @@ export const props = {
   // Search
   inputValue: PropTypes.string,
   searchValue: PropTypes.string,
-  optionFilterProp: PropTypes.string.def('value'),
+  optionFilterProp: PropTypes.string,
   /**
    * In Select, `false` means do nothing.
    * In TreeSelect, `false` will highlight match item.
@@ -98,20 +100,20 @@ export const props = {
 
   // Icons
   allowClear: PropTypes.looseBool,
-  clearIcon: PropTypes.any,
+  clearIcon: PropTypes.VNodeChild,
   showArrow: PropTypes.looseBool,
-  inputIcon: PropTypes.any,
-  removeIcon: PropTypes.any,
-  menuItemSelectedIcon: PropTypes.func,
+  inputIcon: PropTypes.VNodeChild,
+  removeIcon: PropTypes.VNodeChild,
+  menuItemSelectedIcon: PropTypes.VNodeChild,
 
   // Dropdown
   open: PropTypes.looseBool,
   defaultOpen: PropTypes.looseBool,
-  listHeight: PropTypes.number.def(200),
-  listItemHeight: PropTypes.number.def(20),
+  listHeight: PropTypes.number,
+  listItemHeight: PropTypes.number,
   dropdownStyle: PropTypes.object,
   dropdownClassName: PropTypes.string,
-  dropdownMatchSelectWidth: PropTypes.oneOfType([Boolean, Number]).def(true),
+  dropdownMatchSelectWidth: withUndefined(PropTypes.oneOfType([Boolean, Number])),
   virtual: PropTypes.looseBool,
   dropdownRender: PropTypes.func,
   dropdownAlign: PropTypes.any,
@@ -125,8 +127,8 @@ export const props = {
   loading: PropTypes.looseBool,
   autofocus: PropTypes.looseBool,
   defaultActiveFirstOption: PropTypes.looseBool,
-  notFoundContent: PropTypes.any.def('Not Found'),
-  placeholder: PropTypes.any,
+  notFoundContent: PropTypes.VNodeChild,
+  placeholder: PropTypes.VNodeChild,
   backfill: PropTypes.looseBool,
   getInputElement: PropTypes.func,
   optionLabelProp: PropTypes.string,
@@ -135,7 +137,7 @@ export const props = {
   maxTagPlaceholder: PropTypes.any,
   tokenSeparators: PropTypes.array,
   tagRender: PropTypes.func,
-  showAction: PropTypes.array.def([]),
+  showAction: PropTypes.array,
   tabindex: PropTypes.number,
 
   // Events
@@ -162,8 +164,8 @@ export const props = {
    * Only used in current version for internal event process.
    * Do not use in production environment.
    */
-  internalProps: PropTypes.object.def({}),
-}
+  internalProps: PropTypes.object,
+});
 
 export interface SelectProps<OptionsType extends object[], ValueType> {
   prefixCls?: string;
@@ -336,7 +338,9 @@ export default function generateSelector<
   const Select = defineComponent<SelectProps<OptionsType, ValueType>>({
     name: 'Select',
     setup(props: SelectProps<OptionsType, ValueType>) {
-      const useInternalProps = computed(() => props.internalProps.mark === INTERNAL_PROPS_MARK);
+      const useInternalProps = computed(
+        () => props.internalProps && props.internalProps.mark === INTERNAL_PROPS_MARK,
+      );
 
       const containerRef = ref(null);
       const triggerRef = ref(null);
@@ -526,8 +530,8 @@ export default function generateSelector<
       const triggerSelect = (newValue: RawValueType, isSelect: boolean, source: SelectSource) => {
         const newValueOption = getValueOption([newValue]);
         const outOption = findValueOption([newValue], newValueOption)[0];
-
-        if (!props.internalProps.skipTriggerSelect) {
+        const { internalProps = {} } = props;
+        if (!internalProps.skipTriggerSelect) {
           // Skip trigger `onSelect` or `onDeselect` if configured
           const selectValue = (mergedLabelInValue.value
             ? getLabeledValue(newValue, {
@@ -547,10 +551,10 @@ export default function generateSelector<
 
         // Trigger internal event
         if (useInternalProps.value) {
-          if (isSelect && props.internalProps.onRawSelect) {
-            props.internalProps.onRawSelect(newValue, outOption, source);
-          } else if (!isSelect && props.internalProps.onRawDeselect) {
-            props.internalProps.onRawDeselect(newValue, outOption, source);
+          if (isSelect && internalProps.onRawSelect) {
+            internalProps.onRawSelect(newValue, outOption, source);
+          } else if (!isSelect && internalProps.onRawDeselect) {
+            internalProps.onRawDeselect(newValue, outOption, source);
           }
         }
       };
@@ -561,7 +565,11 @@ export default function generateSelector<
         prevValueOptions.value = val;
       };
       const triggerChange = (newRawValues: RawValueType[]) => {
-        if (useInternalProps.value && props.internalProps.skipTriggerChange) {
+        if (
+          useInternalProps.value &&
+          props.internalProps &&
+          props.internalProps.skipTriggerChange
+        ) {
           return;
         }
         const newRawValuesOptions = getValueOption(newRawValues);
@@ -656,8 +664,10 @@ export default function generateSelector<
       const innerOpen = ref(undefined);
       const mergedOpen = ref(undefined);
       const setInnerOpen = (val: boolean) => {
-        innerOpen.value = val;
-        mergedOpen.value = innerOpen.value;
+        setTimeout(() => {
+          innerOpen.value = val;
+          mergedOpen.value = innerOpen.value;
+        });
       };
       watch(
         computed(() => [props.defaultOpen, props.open]),
@@ -671,21 +681,16 @@ export default function generateSelector<
       const emptyListContent = computed(
         () => !props.notFoundContent && !displayOptions.value.length,
       );
-      watch(
-        computed(
-          () =>
-            props.disabled ||
-            (emptyListContent.value && innerOpen.value && props.mode === 'combobox'),
-        ),
-        val => {
-          if (val) {
-            mergedOpen.value = false;
-          } else {
-            mergedOpen.value = innerOpen.value;
-          }
-        },
-        { immediate: true },
-      );
+
+      watchEffect(() => {
+        mergedOpen.value = innerOpen.value;
+        if (
+          props.disabled ||
+          (emptyListContent.value && mergedOpen.value && props.mode === 'combobox')
+        ) {
+          mergedOpen.value = false;
+        }
+      });
 
       const triggerOpen = computed(() => (emptyListContent.value ? false : mergedOpen.value));
 
@@ -706,6 +711,7 @@ export default function generateSelector<
       const triggerSearch = (searchText: string, fromTyping: boolean, isCompositing: boolean) => {
         let ret = true;
         let newSearchText = searchText;
+        const preSearchValue = mergedSearchValue.value;
         setActiveValue(null);
 
         // Check if match the `tokenSeparators`
@@ -750,7 +756,7 @@ export default function generateSelector<
 
         setInnerSearchValue(newSearchText);
 
-        if (props.onSearch && mergedSearchValue.value !== newSearchText) {
+        if (props.onSearch && preSearchValue !== newSearchText) {
           props.onSearch(newSearchText);
         }
 
@@ -806,7 +812,6 @@ export default function generateSelector<
       const onInternalKeyDown = (event: KeyboardEvent) => {
         const clearLock = getClearLock();
         const { which } = event;
-
         // We only manage open state here, close logic should handle by list component
         if (!mergedOpen.value && which === KeyCode.ENTER) {
           onToggleOpen(true);
@@ -863,7 +868,7 @@ export default function generateSelector<
           }
 
           // `showAction` should handle `focus` if set
-          if (props.showAction.includes('focus')) {
+          if (props.showAction && props.showAction.includes('focus')) {
             onToggleOpen(true);
           }
         }
@@ -1321,6 +1326,6 @@ export default function generateSelector<
     },
   });
   Select.inheritAttrs = false;
-  Select.props = props;
+  Select.props = initDefaultProps(BaseProps(), {});
   return Select;
 }

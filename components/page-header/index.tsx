@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { App, defineComponent, inject, VNodeTypes, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent, getOptionProps, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
@@ -9,27 +9,32 @@ import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 
 export const PageHeaderProps = {
-  backIcon: PropTypes.any,
+  backIcon: PropTypes.VNodeChild,
   prefixCls: PropTypes.string,
-  title: PropTypes.any,
-  subTitle: PropTypes.any,
+  title: PropTypes.VNodeChild,
+  subTitle: PropTypes.VNodeChild,
   breadcrumb: PropTypes.object,
   tags: PropTypes.any,
-  footer: PropTypes.any,
-  extra: PropTypes.any,
+  footer: PropTypes.VNodeChild,
+  extra: PropTypes.VNodeChild,
   avatar: PropTypes.object,
   ghost: PropTypes.looseBool,
   onBack: PropTypes.func,
 };
 
-const renderBack = (instance, prefixCls, backIcon, onBack) => {
+const renderBack = (
+  instance: any,
+  prefixCls: string,
+  backIcon: VNodeTypes,
+  onBack: (e: HTMLElement) => void,
+) => {
   if (!backIcon || !onBack) {
     return null;
   }
   return (
     <LocaleReceiver
       componentName="PageHeader"
-      children={({ back }) => (
+      children={({ back }: any) => (
         <div class={`${prefixCls}-back`}>
           <TransButton
             onClick={e => {
@@ -50,7 +55,7 @@ const renderBreadcrumb = breadcrumb => {
   return <Breadcrumb {...breadcrumb} />;
 };
 
-const renderTitle = (prefixCls, instance) => {
+const renderTitle = (prefixCls: string, instance: any) => {
   const { avatar } = instance;
   const title = getComponent(instance, 'title');
   const subTitle = getComponent(instance, 'subTitle');
@@ -80,18 +85,18 @@ const renderTitle = (prefixCls, instance) => {
   return null;
 };
 
-const renderFooter = (prefixCls, footer) => {
+const renderFooter = (prefixCls: string, footer: VNodeTypes) => {
   if (footer) {
     return <div class={`${prefixCls}-footer`}>{footer}</div>;
   }
   return null;
 };
 
-const renderChildren = (prefixCls, children) => {
+const renderChildren = (prefixCls: string, children: VNodeTypes) => {
   return <div class={`${prefixCls}-content`}>{children}</div>;
 };
 
-const PageHeader = {
+const PageHeader = defineComponent({
   name: 'APageHeader',
   props: PageHeaderProps,
   setup() {
@@ -101,7 +106,7 @@ const PageHeader = {
   },
   render() {
     const { getPrefixCls, pageHeader } = this.configProvider;
-    const props = getOptionProps(this);
+    const props = getOptionProps(this) as ExtractPropTypes<typeof PageHeaderProps>;
     const { prefixCls: customizePrefixCls, breadcrumb } = props;
     const footer = getComponent(this, 'footer');
     const children = getSlot(this);
@@ -133,10 +138,10 @@ const PageHeader = {
       </div>
     );
   },
-};
+});
 
 /* istanbul ignore next */
-PageHeader.install = function(app) {
+PageHeader.install = function(app: App) {
   app.component(PageHeader.name, PageHeader);
   return app;
 };

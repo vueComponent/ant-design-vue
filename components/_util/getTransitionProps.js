@@ -4,10 +4,10 @@ const getTransitionProps = (transitionName, opt = {}) => {
   }
   const transitionProps = {
     appear: true,
-    appearFromClass: `${transitionName}-appear`,
+    appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
     // appearActiveClass: `antdv-base-transtion`,
     appearToClass: `${transitionName}-appear ${transitionName}-appear-active`,
-    enterFromClass: `${transitionName}-enter`,
+    enterFromClass: `${transitionName}-enter ${transitionName}-enter-prepare`,
     // enterActiveClass: `antdv-base-transtion`,
     enterToClass: `${transitionName}-enter ${transitionName}-enter-active`,
     leaveFromClass: ` ${transitionName}-leave`,

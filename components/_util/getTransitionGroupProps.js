@@ -5,10 +5,10 @@ const getTransitionGroupProps = (transitionName, opt = {}) => {
   }
   const transitionProps = {
     appear: true,
-    appearFromClass: `${transitionName}-appear`,
+    appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
     appearActiveClass: `${transitionName}`,
     appearToClass: `${transitionName}-appear-active`,
-    enterFromClass: `${transitionName}-appear ${transitionName}-enter`,
+    enterFromClass: `${transitionName}-appear ${transitionName}-enter ${transitionName}-appear-prepare ${transitionName}-enter-prepare`,
     enterActiveClass: `${transitionName}`,
     enterToClass: `${transitionName}-appear-active ${transitionName}-enter-active`,
     leaveActiveClass: `${transitionName} ${transitionName}-leave`,

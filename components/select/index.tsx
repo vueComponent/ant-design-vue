@@ -4,7 +4,7 @@ import RcSelect, { Option, OptGroup, SelectProps as RcSelectProps, BaseProps } f
 import { OptionProps as OptionPropsType } from '../vc-select2/Option';
 import { defaultConfigProvider } from '../config-provider';
 import getIcons from './utils/iconUtil';
-import { computed, defineComponent, inject, ref, VNodeChild, App, PropType } from 'vue';
+import { computed, defineComponent, inject, ref, VNodeChild, App, PropType, reactive } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 
@@ -109,7 +109,6 @@ const Select = defineComponent({
       ),
     );
     const triggerChange = (...args: any[]) => {
-      console.log(args);
       emit('update:value', ...args);
       emit('change', ...args);
     };
@@ -158,7 +157,6 @@ const Select = defineComponent({
     } else if (mode === 'combobox') {
       mergedNotFound = null;
     } else {
-      console.log(111);
       mergedNotFound = renderEmpty('Select') as any;
     }
 
@@ -207,7 +205,7 @@ const Select = defineComponent({
         dropdownClassName={rcSelectRtlDropDownClassName}
         onChange={triggerChange}
       >
-        {slots?.default()}
+        {slots.default && slots.default()}
       </RcSelect>
     );
   },

@@ -130,12 +130,11 @@ const List = defineComponent({
       if (componentRef.value) {
         componentRef.value.scrollTop = alignedTop;
       }
-
       state.scrollTop = alignedTop;
     }
 
     // ================================ Height ================================
-    const [setInstance, collectHeight, heights] = useHeights(getKey, null, null);
+    const [setInstance, collectHeight, heights, heightUpdatedMark] = useHeights(getKey, null, null);
 
     // ========================== Visible Calculation =========================
     const calRes = computed(() => {
@@ -186,6 +185,7 @@ const List = defineComponent({
       // Give cache to improve scroll experience
       endIndex = Math.min(endIndex + 1, state.mergedData.length);
       return {
+        heightUpdatedMark,
         scrollHeight: itemTop,
         start: startIndex,
         end: endIndex,
@@ -218,7 +218,7 @@ const List = defineComponent({
     // But we still need a sync if some special escape
     function onFallbackScroll(e: UIEvent) {
       const { scrollTop: newScrollTop } = e.currentTarget as Element;
-      if (newScrollTop !== state.scrollTop) {
+      if (Math.abs(newScrollTop - state.scrollTop) >= 1) {
         syncScrollTop(newScrollTop);
       }
 

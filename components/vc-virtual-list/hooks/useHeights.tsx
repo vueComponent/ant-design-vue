@@ -1,4 +1,4 @@
-import { reactive, Ref, ref, VNodeProps } from 'vue';
+import { Ref, ref, VNodeProps } from 'vue';
 import { GetKey } from '../interface';
 
 type CacheMap = Record<string, number>;
@@ -9,7 +9,7 @@ export default function useHeights<T>(
   onItemRemove?: ((item: T) => void) | null,
 ): [(item: T, instance: HTMLElement) => void, () => void, CacheMap, Ref<number>] {
   const instance = new Map<VNodeProps['key'], HTMLElement>();
-  const heights = reactive<CacheMap>({});
+  const heights = {};
   const updatedMark = ref(0);
   let heightUpdateId = 0;
   function collectHeight() {
@@ -18,19 +18,17 @@ export default function useHeights<T>(
     Promise.resolve().then(() => {
       // Only collect when it's latest call
       if (currentId !== heightUpdateId) return;
-      let changed = false;
+      // let changed = false;
       instance.forEach((element, key) => {
         if (element && element.offsetParent) {
           const { offsetHeight } = element;
           if (heights[key!] !== offsetHeight) {
-            changed = true;
+            //changed = true;
             heights[key!] = element.offsetHeight;
           }
         }
       });
-      if (changed) {
-        updatedMark.value++;
-      }
+      updatedMark.value++;
     });
   }
 

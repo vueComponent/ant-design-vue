@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import classNames from '../_util/classNames';
 import getPlacements from './placements';
@@ -15,7 +15,7 @@ import { cloneElement } from '../_util/vnode';
 import { defaultConfigProvider } from '../config-provider';
 import abstractTooltipProps from './abstractTooltipProps';
 
-const splitObject = (obj, keys) => {
+const splitObject = (obj: any, keys: string[]) => {
   const picked = {};
   const omitted = { ...obj };
   keys.forEach(key => {
@@ -27,13 +27,14 @@ const splitObject = (obj, keys) => {
   return { picked, omitted };
 };
 const props = abstractTooltipProps();
-export default {
+export default defineComponent({
   name: 'ATooltip',
   inheritAttrs: false,
   props: {
     ...props,
-    title: PropTypes.any,
+    title: PropTypes.VNodeChild,
   },
+  emits: ['update:visible', 'visibleChange'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -61,7 +62,7 @@ export default {
     },
 
     getPopupDomNode() {
-      return this.$refs.tooltip.getPopupDomNode();
+      return (this.$refs.tooltip as any).getPopupDomNode();
     },
 
     getPlacements() {
@@ -209,4 +210,4 @@ export default {
       </VcTooltip>
     );
   },
-};
+});

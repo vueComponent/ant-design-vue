@@ -22,16 +22,16 @@ const Space = defineComponent({
   },
   setup(props, { slots }) {
     const configProvider = inject('configProvider', defaultConfigProvider);
-    const {
-      align,
-      size = 'small',
-      direction = 'horizontal',
-      prefixCls: customizePrefixCls,
-    } = props;
-
-    const { getPrefixCls } = configProvider;
 
     return () => {
+      const {
+        align,
+        size = 'small',
+        direction = 'horizontal',
+        prefixCls: customizePrefixCls,
+      } = props;
+
+      const { getPrefixCls } = configProvider;
       const prefixCls = getPrefixCls('space', customizePrefixCls);
       const items = filterEmpty(slots.default?.());
       const len = items.length;

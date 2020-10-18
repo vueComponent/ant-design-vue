@@ -1,3 +1,4 @@
+import { defineComponent } from 'vue';
 import classNames from '../../../_util/classNames';
 import PropTypes from '../../../_util/vue-types';
 import addEventListener from '../../../vc-util/Dom/addEventListener';
@@ -34,7 +35,7 @@ export default function createSlider(Component) {
     activeDotStyle: PropTypes.object,
     autofocus: PropTypes.looseBool,
   };
-  return {
+  return defineComponent({
     name: 'createSlider',
     inheritAttrs: false,
     mixins: [BaseMixin, Component],
@@ -337,5 +338,5 @@ export default function createSlider(Component) {
         </div>
       );
     },
-  };
+  });
 }

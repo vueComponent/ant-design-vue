@@ -1,3 +1,4 @@
+import ResizeObserver from 'resize-observer-polyfill';
 import contains from '../vc-util/Dom/contains';
 export function buffer(fn, ms) {
   let timer;

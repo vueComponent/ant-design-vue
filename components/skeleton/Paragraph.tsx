@@ -1,3 +1,4 @@
+import { defineComponent, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 
 const widthUnit = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
@@ -10,10 +11,12 @@ const skeletonParagraphProps = {
 
 export const SkeletonParagraphProps = PropTypes.shape(skeletonParagraphProps);
 
-const Paragraph = {
+export type ISkeletonParagraphProps = Partial<ExtractPropTypes<typeof skeletonParagraphProps>>;
+
+const Paragraph = defineComponent({
   props: skeletonParagraphProps,
   methods: {
-    getWidth(index) {
+    getWidth(index: number) {
       const { width, rows = 2 } = this;
       if (Array.isArray(width)) {
         return width[index];
@@ -33,6 +36,6 @@ const Paragraph = {
     });
     return <ul class={prefixCls}>{rowList}</ul>;
   },
-};
+});
 
 export default Paragraph;

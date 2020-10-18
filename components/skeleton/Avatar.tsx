@@ -1,16 +1,23 @@
+import { defineComponent, ExtractPropTypes } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps } from '../_util/props-util';
+import { tuple } from '../_util/type';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 
 const skeletonAvatarProps = {
   prefixCls: PropTypes.string,
-  size: PropTypes.oneOfType([PropTypes.oneOf(['large', 'small', 'default']), PropTypes.number]),
-  shape: PropTypes.oneOf(['circle', 'square']),
+  size: PropTypes.oneOfType([
+    PropTypes.oneOf(tuple('large', 'small', 'default')),
+    PropTypes.number,
+  ]),
+  shape: PropTypes.oneOf(tuple('circle', 'square')),
 };
 
 export const SkeletonAvatarProps = PropTypes.shape(skeletonAvatarProps).loose;
 
-const Avatar = {
+export type ISkeletonAvatarProps = Partial<ExtractPropTypes<typeof skeletonAvatarProps>>;
+
+const Avatar = defineComponent({
   props: initDefaultProps(skeletonAvatarProps, {
     size: 'large',
   }),
@@ -38,6 +45,6 @@ const Avatar = {
 
     return <span class={classNames(prefixCls, sizeCls, shapeCls)} style={sizeStyle} />;
   },
-};
+});
 
 export default Avatar;

@@ -1,11 +1,11 @@
-import { inject } from 'vue';
+import { defineComponent, inject, App } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { initDefaultProps, hasProp } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
-import Avatar, { SkeletonAvatarProps } from './Avatar';
-import Title, { SkeletonTitleProps } from './Title';
-import Paragraph, { SkeletonParagraphProps } from './Paragraph';
+import Avatar, { SkeletonAvatarProps, ISkeletonAvatarProps } from './Avatar';
+import Title, { SkeletonTitleProps, ISkeletonTitleProps } from './Title';
+import Paragraph, { SkeletonParagraphProps, ISkeletonParagraphProps } from './Paragraph';
 
 export const SkeletonProps = {
   active: PropTypes.looseBool,
@@ -23,14 +23,14 @@ export const SkeletonProps = {
   ),
 };
 
-function getComponentProps(prop) {
+function getComponentProps<T>(prop: T | boolean | undefined): T | {} {
   if (prop && typeof prop === 'object') {
     return prop;
   }
   return {};
 }
 
-function getAvatarBasicProps(hasTitle, hasParagraph) {
+function getAvatarBasicProps(hasTitle: boolean, hasParagraph: boolean): ISkeletonAvatarProps {
   if (hasTitle && !hasParagraph) {
     return { shape: 'square' };
   }
@@ -38,7 +38,7 @@ function getAvatarBasicProps(hasTitle, hasParagraph) {
   return { shape: 'circle' };
 }
 
-function getTitleBasicProps(hasAvatar, hasParagraph) {
+function getTitleBasicProps(hasAvatar: boolean, hasParagraph: boolean): ISkeletonTitleProps {
   if (!hasAvatar && hasParagraph) {
     return { width: '38%' };
   }
@@ -50,8 +50,8 @@ function getTitleBasicProps(hasAvatar, hasParagraph) {
   return {};
 }
 
-function getParagraphBasicProps(hasAvatar, hasTitle) {
-  const basicProps = {};
+function getParagraphBasicProps(hasAvatar: boolean, hasTitle: boolean): ISkeletonParagraphProps {
+  const basicProps: ISkeletonParagraphProps = {};
 
   // Width
   if (!hasAvatar || !hasTitle) {
@@ -68,7 +68,7 @@ function getParagraphBasicProps(hasAvatar, hasTitle) {
   return basicProps;
 }
 
-const Skeleton = {
+const Skeleton = defineComponent({
   name: 'ASkeleton',
   props: initDefaultProps(SkeletonProps, {
     avatar: false,
@@ -89,7 +89,7 @@ const Skeleton = {
       paragraph,
       active,
     } = this.$props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('skeleton', customizePrefixCls);
 
     if (loading || !hasProp(this, 'loading')) {
@@ -159,12 +159,13 @@ const Skeleton = {
         </div>
       );
     }
-    return this.$slots.default && this.$slots.default();
+    return this.$slots.default?.();
   },
-};
+});
 /* istanbul ignore next */
-Skeleton.install = function(app) {
+Skeleton.install = function(app: App) {
   app.component(Skeleton.name, Skeleton);
   return app;
 };
+
 export default Skeleton;

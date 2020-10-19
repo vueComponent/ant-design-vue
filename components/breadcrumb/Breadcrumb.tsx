@@ -15,16 +15,13 @@ export interface Route {
 
 const BreadcrumbProps = {
   prefixCls: PropTypes.string,
-  routes: {type: Array as PropType<Route[]>},
+  routes: { type: Array as PropType<Route[]> },
   params: PropTypes.any,
   separator: PropTypes.VNodeChild,
   itemRender: {
-    type: Function as PropType<(
-      route: Route,
-      params: any,
-      routes: Array<Route>,
-      paths: Array<string>,
-    ) => VueNode>
+    type: Function as PropType<
+      (route: Route, params: any, routes: Array<Route>, paths: Array<string>) => VueNode
+    >,
   },
 };
 
@@ -39,8 +36,13 @@ function getBreadcrumbName(route: Route, params: any) {
   );
   return name;
 }
-function defaultItemRender(opt: {route: Route, params: any, routes: Route[], paths: string[]}): VueNode {
-  const { route, params, routes, paths } = opt
+function defaultItemRender(opt: {
+  route: Route;
+  params: any;
+  routes: Route[];
+  paths: string[];
+}): VueNode {
+  const { route, params, routes, paths } = opt;
   const isLastItem = routes.indexOf(route) === routes.length - 1;
   const name = getBreadcrumbName(route, params);
   return isLastItem ? <span>{name}</span> : <a href={`#/${paths.join('/')}`}>{name}</a>;
@@ -63,7 +65,7 @@ export default defineComponent({
       return path;
     },
 
-    addChildPath(paths: string[], childPath: string = '', params: any) {
+    addChildPath(paths: string[], childPath = '', params: any) {
       const originalPaths = [...paths];
       const path = this.getPath(childPath, params);
       if (path) {

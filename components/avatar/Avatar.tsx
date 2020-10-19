@@ -11,7 +11,7 @@ export default defineComponent({
     shape: PropTypes.oneOf(tuple('circle', 'square')),
     size: {
       type: [Number, String] as PropType<'large' | 'small' | 'default' | number>,
-      default: 'default'
+      default: 'default',
     },
     src: PropTypes.string,
     /** Srcset of image avatar */
@@ -20,8 +20,8 @@ export default defineComponent({
     srcSet: PropTypes.string,
     icon: PropTypes.VNodeChild,
     alt: PropTypes.string,
-    loadError:  {
-      type: Function as PropType<()=>boolean>
+    loadError: {
+      type: Function as PropType<() => boolean>,
     },
   },
   setup() {
@@ -35,7 +35,7 @@ export default defineComponent({
       isMounted: false,
       scale: 1,
       lastChildrenWidth: undefined,
-      lastNodeWidth: undefined
+      lastNodeWidth: undefined,
     };
   },
   watch: {
@@ -120,7 +120,9 @@ export default defineComponent({
 
     let children: VueNode = this.$slots.default && this.$slots.default();
     if (src && isImgExist) {
-      children = <img src={src} srcset={srcset || srcSet} onError={this.handleImgLoadError} alt={alt} />;
+      children = (
+        <img src={src} srcset={srcset || srcSet} onError={this.handleImgLoadError} alt={alt} />
+      );
     } else if (icon) {
       children = icon;
     } else {

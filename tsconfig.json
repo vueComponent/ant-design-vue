@@ -2,7 +2,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "ant-design-vue": ["components/index.tsx"]
+      "ant-design-vue": ["components/index.tsx"],
+      "ant-design-vue/es/*": ["components/*"]
     },
     "strictNullChecks": false,
     "strict": true,
@@ -18,5 +19,5 @@
     "skipLibCheck": true,
     "allowJs": true
   },
-  "exclude": ["node_modules", "lib", "es"]
+  "exclude": ["node_modules", "lib", "es", "antd-tools", "dist"]
 }

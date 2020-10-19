@@ -27,7 +27,7 @@ export default defineComponent({
   setup() {
     return {
       input: null,
-    }
+    };
   },
   data() {
     return {

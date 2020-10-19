@@ -44,7 +44,7 @@ function getPropByPath(obj: any, namePathList: any, strict?: boolean) {
   try {
     for (let len = keyArr.length; i < len - 1; ++i) {
       if (!tempObj && !strict) break;
-      let key = keyArr[i];
+      const key = keyArr[i];
       if (key in tempObj) {
         tempObj = tempObj[key];
       } else {
@@ -74,20 +74,20 @@ export const FormItemProps = {
   label: PropTypes.VNodeChild,
   help: PropTypes.VNodeChild,
   extra: PropTypes.VNodeChild,
-  labelCol: {type: Object as PropType<ColProps>},
-  wrapperCol: {type: Object as PropType<ColProps>},
+  labelCol: { type: Object as PropType<ColProps> },
+  wrapperCol: { type: Object as PropType<ColProps> },
   hasFeedback: PropTypes.looseBool.def(false),
   colon: PropTypes.looseBool,
   labelAlign: PropTypes.oneOf(tuple('left', 'right')),
-  prop: {type: [String, Number, Array] as PropType<string | number | string[] | number[]>},
-  name: {type: [String, Number, Array] as PropType<string | number | string[] | number[]>},
+  prop: { type: [String, Number, Array] as PropType<string | number | string[] | number[]> },
+  name: { type: [String, Number, Array] as PropType<string | number | string[] | number[]> },
   rules: PropTypes.oneOfType([Array, Object]),
   autoLink: PropTypes.looseBool.def(true),
   required: PropTypes.looseBool,
   validateFirst: PropTypes.looseBool,
   validateStatus: PropTypes.oneOf(tuple('', 'success', 'warning', 'error', 'validating')),
-  validateTrigger: {type: [String, Array] as PropType<string | string[]>},
-  messageVariables: {type: Object as PropType<Record<string, string>>},
+  validateTrigger: { type: [String, Array] as PropType<string | string[]> },
+  messageVariables: { type: Object as PropType<Record<string, string>> },
 };
 
 export default defineComponent({
@@ -97,14 +97,14 @@ export default defineComponent({
   __ANT_NEW_FORM_ITEM: true,
   props: FormItemProps,
   setup(props) {
-    const FormContext = inject('FormContext', {}) as any
-    const fieldName = computed(()=>props.name || props.prop);
-    const namePath = computed(()=>{
-      const val = fieldName.value
-      return getNamePath(val)
-    })
-    const fieldId = computed(()=>{
-      const {id} = props;
+    const FormContext = inject('FormContext', {}) as any;
+    const fieldName = computed(() => props.name || props.prop);
+    const namePath = computed(() => {
+      const val = fieldName.value;
+      return getNamePath(val);
+    });
+    const fieldId = computed(() => {
+      const { id } = props;
       if (id) {
         return id;
       } else if (!namePath.value.length) {
@@ -114,19 +114,17 @@ export default defineComponent({
         const mergedId = namePath.value.join('_');
         return formName ? `${formName}_${mergedId}` : mergedId;
       }
-    })
-    const fieldValue = computed(()=> {
+    });
+    const fieldValue = computed(() => {
       const model = FormContext.model;
       if (!model || !fieldName.value) {
         return;
       }
       return getPropByPath(model, namePath.value, true).v;
-    })
+    });
     const mergedValidateTrigger = computed(() => {
       let validateTrigger =
-        props.validateTrigger !== undefined
-          ? props.validateTrigger
-          : FormContext.validateTrigger;
+        props.validateTrigger !== undefined ? props.validateTrigger : FormContext.validateTrigger;
       validateTrigger = validateTrigger === undefined ? 'change' : validateTrigger;
       return toArray(validateTrigger);
     });
@@ -134,7 +132,7 @@ export default defineComponent({
       let formRules = FormContext.rules;
       const selfRules = props.rules;
       const requiredRule =
-      props.required !== undefined
+        props.required !== undefined
           ? { required: !!props.required, trigger: mergedValidateTrigger.value }
           : [];
       const prop = getPropByPath(formRules, namePath.value);
@@ -147,7 +145,7 @@ export default defineComponent({
       }
     };
     const isRequired = computed(() => {
-      let rules = getRules();
+      const rules = getRules();
       let isRequired = false;
       if (rules && rules.length) {
         rules.every(rule => {
@@ -170,7 +168,7 @@ export default defineComponent({
       isRequired,
       getRules,
       fieldValue,
-      mergedValidateTrigger
+      mergedValidateTrigger,
     };
   },
   data() {
@@ -182,7 +180,7 @@ export default defineComponent({
       validator: {},
       helpShow: false,
       errors: [],
-      initialValue: undefined
+      initialValue: undefined,
     };
   },
   watch: {
@@ -386,7 +384,9 @@ export default defineComponent({
     },
 
     renderWrapper(prefixCls: string, children: VueNode) {
-      const { wrapperCol: contextWrapperCol } = (this.isFormItemChildren ? {} : this.FormContext) as any;
+      const { wrapperCol: contextWrapperCol } = (this.isFormItemChildren
+        ? {}
+        : this.FormContext) as any;
       const { wrapperCol } = this;
       const mergedWrapperCol = wrapperCol || contextWrapperCol || {};
       const { style, id, ...restProps } = mergedWrapperCol;

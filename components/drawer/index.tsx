@@ -52,7 +52,7 @@ const Drawer = defineComponent({
       configProvider,
       destroyClose: false,
       preVisible: props.visible,
-      parentDrawer: inject('parentDrawer', null)
+      parentDrawer: inject('parentDrawer', null),
     };
   },
   beforeCreate() {

@@ -43,8 +43,8 @@ export default defineComponent({
     const prefixCls = getPrefixCls('statistic', customizePrefixCls);
 
     const title = getComponent(this, 'title');
-    let prefix = getComponent(this, 'prefix');
-    let suffix = getComponent(this, 'suffix');
+    const prefix = getComponent(this, 'prefix');
+    const suffix = getComponent(this, 'suffix');
     const formatter = getComponent(this, 'formatter', {}, false);
     const props = {
       ...this.$props,

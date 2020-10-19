@@ -32,10 +32,10 @@ export const HeaderProps = {
   yearSelectTotal: PropTypes.number,
   type: PropTypes.string,
   value: {
-    type: Object as PropType<moment.Moment>
+    type: Object as PropType<moment.Moment>,
   },
   validRange: {
-    type: Array as PropType<moment.Moment[]>
+    type: Array as PropType<moment.Moment[]>,
   },
   headerRender: PropTypes.func,
   onValueChange: PropTypes.func,
@@ -53,7 +53,7 @@ export default defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
-      calendarHeaderNode: undefined
+      calendarHeaderNode: undefined,
     };
   },
   // private calendarHeaderNode: HTMLDivElement;
@@ -119,7 +119,7 @@ export default defineComponent({
       );
     },
 
-    onYearChange(year) {
+    onYearChange(year: string) {
       const { value, validRange } = this;
       const newValue = value.clone();
       newValue.year(parseInt(year, 10));
@@ -138,17 +138,17 @@ export default defineComponent({
       this.$emit('valueChange', newValue);
     },
 
-    onMonthChange(month) {
+    onMonthChange(month: string) {
       const newValue = this.value.clone();
       newValue.month(parseInt(month, 10));
       this.$emit('valueChange', newValue);
     },
 
-    onInternalTypeChange(e) {
-      this.triggerTypeChange(e.target.value);
+    onInternalTypeChange(e: Event) {
+      this.triggerTypeChange((e.target as any).value);
     },
 
-    triggerTypeChange(val) {
+    triggerTypeChange(val: string) {
       this.$emit('typeChange', val);
     },
     getMonthYearSelections(getPrefixCls) {
@@ -176,8 +176,8 @@ export default defineComponent({
         </Group>
       );
     },
-    triggerValueChange() {
-      this.$emit('valueChange', ...arguments);
+    triggerValueChange(...args: any[]) {
+      this.$emit('valueChange', ...args);
     },
     saveCalendarHeaderNode(node: HTMLElement) {
       this.calendarHeaderNode = node;

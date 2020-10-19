@@ -18,7 +18,7 @@ export default defineComponent({
       configProvider: inject('configProvider', defaultConfigProvider),
       children: [],
       iconCom: undefined,
-      delayTimeout: undefined
+      delayTimeout: undefined,
     };
   },
   data() {
@@ -68,7 +68,7 @@ export default defineComponent({
         ghost,
         block,
         $attrs,
-      } = this
+      } = this;
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('btn', customizePrefixCls);
       const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
@@ -140,7 +140,7 @@ export default defineComponent({
   },
   render() {
     this.iconCom = getComponent(this, 'icon');
-    const { type, htmlType, iconCom, disabled, handleClick, sLoading,href,title, $attrs } = this;
+    const { type, htmlType, iconCom, disabled, handleClick, sLoading, href, title, $attrs } = this;
     const children = getSlot(this);
     this.children = children;
     const classes = this.getClasses();

@@ -1087,8 +1087,8 @@ export default function generateSelector<
         inputValue,
         searchValue,
         filterOption,
-        optionFilterProp = 'value',
-        autoClearSearchValue = true,
+        optionFilterProp,
+        autoClearSearchValue,
         onSearch,
 
         // Icons
@@ -1119,7 +1119,7 @@ export default function generateSelector<
         dropdownMatchSelectWidth,
         dropdownRender,
         dropdownAlign,
-        showAction = [],
+        showAction,
         direction,
 
         // Tags

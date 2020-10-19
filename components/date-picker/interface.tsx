@@ -1,5 +1,5 @@
 import moment from 'moment';
-import { CSSProperties, DefineComponent } from 'vue';
+import { CSSProperties } from 'vue';
 import { tuple, VueNode } from '../_util/type';
 
 export type RangePickerValue =

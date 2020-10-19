@@ -40,19 +40,19 @@ export type ValidationRule = {
   /** custom validate function (Note: callback must be called) */
   validator?: (rule: any, value: any, callback: any, source?: any, options?: any) => any;
 
-  trigger?: string
+  trigger?: string;
 };
 
 export const FormProps = {
   layout: PropTypes.oneOf(tuple('horizontal', 'inline', 'vertical')),
-  labelCol: {type: Object as PropType<ColProps>},
-  wrapperCol: {type: Object as PropType<ColProps>},
+  labelCol: { type: Object as PropType<ColProps> },
+  wrapperCol: { type: Object as PropType<ColProps> },
   colon: PropTypes.looseBool,
   labelAlign: PropTypes.oneOf(tuple('left', 'right')),
   prefixCls: PropTypes.string,
   hideRequiredMark: PropTypes.looseBool,
   model: PropTypes.object,
-  rules: {type: Object as PropType<ValidationRule[]>},
+  rules: { type: Object as PropType<ValidationRule[]> },
   validateMessages: PropTypes.object,
   validateOnRuleChange: PropTypes.looseBool,
   // 提交失败自动滚动到第一个错误字段
@@ -60,10 +60,8 @@ export const FormProps = {
   onFinish: PropTypes.func,
   onFinishFailed: PropTypes.func,
   name: PropTypes.string,
-  validateTrigger: {type: [String, Array] as PropType<string | string[]>}
+  validateTrigger: { type: [String, Array] as PropType<string | string[]> },
 };
-
-
 
 function isEqualName(name1: any, name2: any) {
   return isEqual(toArray(name1), toArray(name2));
@@ -87,7 +85,7 @@ const Form = defineComponent({
       fields: [],
       form: undefined,
       lastValidatePromise: null,
-      vertical: computed(()=>props.layout === 'vertical')
+      vertical: computed(() => props.layout === 'vertical'),
     };
   },
   watch: {
@@ -156,7 +154,7 @@ const Form = defineComponent({
     validate(...args: any[]) {
       return this.validateField(...args);
     },
-    scrollToField(name: string | number , options = {}) {
+    scrollToField(name: string | number, options = {}) {
       const fields = this.getFieldsByNameList([name]);
       if (fields.length) {
         const fieldId = fields[0].fieldId;
@@ -181,7 +179,9 @@ const Form = defineComponent({
         return values;
       } else {
         const res: any = {};
-        toArray(nameList as NamePath[]).forEach((namePath) => (res[namePath as string] = values[namePath as string]));
+        toArray(nameList as NamePath[]).forEach(
+          namePath => (res[namePath as string] = values[namePath as string]),
+        );
         return res;
       }
     },
@@ -196,7 +196,9 @@ const Form = defineComponent({
         return Promise.reject('Form `model` is required for validateFields to work.');
       }
       const provideNameList = !!nameList;
-      const namePathList: InternalNamePath[] = provideNameList ? toArray(nameList).map(getNamePath) : [];
+      const namePathList: InternalNamePath[] = provideNameList
+        ? toArray(nameList).map(getNamePath)
+        : [];
 
       // Collect result in promise list
       const promiseList: Promise<{
@@ -291,5 +293,5 @@ const Form = defineComponent({
 });
 
 export default Form as typeof Form & {
-  readonly Item: typeof FormItem
+  readonly Item: typeof FormItem;
 };

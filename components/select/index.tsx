@@ -4,7 +4,7 @@ import RcSelect, { Option, OptGroup, SelectProps as RcSelectProps, BaseProps } f
 import { OptionProps as OptionPropsType } from '../vc-select2/Option';
 import { defaultConfigProvider } from '../config-provider';
 import getIcons from './utils/iconUtil';
-import { computed, defineComponent, inject, ref, VNodeChild, App, PropType, reactive } from 'vue';
+import { computed, defineComponent, inject, ref, VNodeChild, App, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 

@@ -57,7 +57,7 @@ const Calendar = defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
-      sPrefixCls: undefined
+      sPrefixCls: undefined,
     };
   },
   data() {
@@ -124,7 +124,7 @@ const Calendar = defineComponent({
     getDateRange(
       validRange: [moment.Moment, moment.Moment],
       disabledDate?: (current: moment.Moment) => boolean,
-      ) {
+    ) {
       return (current: moment.Moment) => {
         if (!current) {
           return false;

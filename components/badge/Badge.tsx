@@ -40,7 +40,7 @@ export default defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
-      badgeCount: undefined
+      badgeCount: undefined,
     };
   },
   methods: {

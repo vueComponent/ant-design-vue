@@ -1,25 +1,31 @@
-'use strict';
+const { resolve } = require('./utils/projectHelper');
 
 module.exports = function(modules) {
   const plugins = [
-    [require.resolve('@vue/babel-plugin-jsx'), { mergeProps: false }],
-    require.resolve('@babel/plugin-proposal-optional-chaining'),
-    require.resolve('@babel/plugin-transform-object-assign'),
-    require.resolve('@babel/plugin-proposal-object-rest-spread'),
-    require.resolve('@babel/plugin-proposal-export-default-from'),
-    require.resolve('@babel/plugin-proposal-class-properties'),
-    require.resolve('@babel/plugin-syntax-dynamic-import'),
-    // require.resolve('babel-plugin-inline-import-data-uri'),
-    // require.resolve('@babel/plugin-transform-member-expression-literals'),
-    // require.resolve('@babel/plugin-transform-property-literals'),
-    // require.resolve('@babel/plugin-proposal-export-default-from'),
-    // require.resolve('@babel/plugin-transform-object-assign'),
-    // require.resolve('@babel/plugin-transform-template-literals'),
-    // require.resolve('@babel/plugin-proposal-object-rest-spread'),
-    // require.resolve('@babel/plugin-proposal-class-properties'),
+    [
+      resolve('@babel/plugin-transform-typescript'),
+      {
+        isTSX: true,
+      },
+    ],
+    [resolve('@vue/babel-plugin-jsx'), { mergeProps: false }],
+    resolve('@babel/plugin-proposal-optional-chaining'),
+    resolve('@babel/plugin-transform-object-assign'),
+    resolve('@babel/plugin-proposal-object-rest-spread'),
+    resolve('@babel/plugin-proposal-export-default-from'),
+    resolve('@babel/plugin-proposal-class-properties'),
+    resolve('@babel/plugin-syntax-dynamic-import'),
+    // resolve('babel-plugin-inline-import-data-uri'),
+    // resolve('@babel/plugin-transform-member-expression-literals'),
+    // resolve('@babel/plugin-transform-property-literals'),
+    // resolve('@babel/plugin-proposal-export-default-from'),
+    // resolve('@babel/plugin-transform-object-assign'),
+    // resolve('@babel/plugin-transform-template-literals'),
+    // resolve('@babel/plugin-proposal-object-rest-spread'),
+    // resolve('@babel/plugin-proposal-class-properties'),
   ];
   plugins.push([
-    require.resolve('@babel/plugin-transform-runtime'),
+    resolve('@babel/plugin-transform-runtime'),
     {
       helpers: false,
     },
@@ -27,7 +33,7 @@ module.exports = function(modules) {
   return {
     presets: [
       [
-        require.resolve('@babel/preset-env'),
+        resolve('@babel/preset-env'),
         {
           modules,
           targets: {
@@ -46,7 +52,7 @@ module.exports = function(modules) {
     plugins,
     env: {
       test: {
-        plugins: [require.resolve('babel-plugin-istanbul')],
+        plugins: [resolve('babel-plugin-istanbul')],
       },
     },
   };

@@ -16,7 +16,7 @@ export function fixControlledValue(value) {
 
 export function resolveOnChange(target, e, onChange) {
   if (onChange) {
-    let event = e;
+    const event = e;
     if (e.type === 'click') {
       // click clear icon
       //event = Object.create(e);
@@ -59,7 +59,7 @@ export default defineComponent({
       configProvider: inject('configProvider', defaultConfigProvider),
       removePasswordTimeout: undefined,
       input: null,
-      clearableInput: null
+      clearableInput: null,
     };
   },
   data() {
@@ -165,7 +165,7 @@ export default defineComponent({
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }
-      const inputNode = <input {...inputProps} />
+      const inputNode = <input {...inputProps} />;
       return withDirectives(inputNode as VNode, [[antInputDirective]]);
     },
     clearPasswordValueAttribute() {

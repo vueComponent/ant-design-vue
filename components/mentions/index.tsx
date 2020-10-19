@@ -28,7 +28,7 @@ function loadingFilterOption() {
   return true;
 }
 
-function getMentions(value: string = '', config: MentionsConfig) {
+function getMentions(value = '', config: MentionsConfig) {
   const { prefix = '@', split = ' ' } = config || {};
   const prefixList = Array.isArray(prefix) ? prefix : [prefix];
 

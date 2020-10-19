@@ -3,12 +3,6 @@
 import Select, { Option } from '..';
 import '../assets/index.less';
 
-interface ControlledState {
-  destroy: boolean;
-  value: string | number;
-  open: boolean;
-}
-
 const Controlled = {
   data: () => ({
     destroy: false,

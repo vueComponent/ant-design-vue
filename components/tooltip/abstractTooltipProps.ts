@@ -35,6 +35,6 @@ export default () => ({
   destroyTooltipOnHide: PropTypes.looseBool.def(false),
   align: PropTypes.object.def(() => ({})),
   builtinPlacements: PropTypes.object,
-  children: PropTypes.VNodeChild,
+  children: PropTypes.array,
   onVisibleChange: PropTypes.func,
 });

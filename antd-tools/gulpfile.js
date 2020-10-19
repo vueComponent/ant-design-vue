@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
-'use strict';
+const { getProjectPath, injectRequire } = require('./utils/projectHelper');
+
+injectRequire();
 
 // const install = require('./install')
 const runCmd = require('./runCmd');
@@ -13,7 +15,6 @@ const babel = require('gulp-babel');
 const argv = require('minimist')(process.argv.slice(2));
 const { Octokit } = require('@octokit/rest');
 
-const packageJson = require(`${process.cwd()}/package.json`);
 // const getNpm = require('./getNpm')
 // const selfPackage = require('../package.json')
 const chalk = require('chalk');
@@ -21,21 +22,25 @@ const getNpmArgs = require('./utils/get-npm-args');
 const getChangelog = require('./utils/getChangelog');
 const path = require('path');
 // const watch = require('gulp-watch')
+const ts = require('gulp-typescript');
 const gulp = require('gulp');
 const fs = require('fs');
 const rimraf = require('rimraf');
+const tsConfig = require('./getTSCommonConfig')();
 const replaceLib = require('./replaceLib');
 const stripCode = require('gulp-strip-code');
 const compareVersions = require('compare-versions');
 
+const packageJson = require(getProjectPath('package.json'));
+const tsDefaultReporter = ts.reporter.defaultReporter();
 const cwd = process.cwd();
-const libDir = path.join(cwd, 'lib');
-const esDir = path.join(cwd, 'es');
+const libDir = getProjectPath('lib');
+const esDir = getProjectPath('es');
 
 function dist(done) {
   rimraf.sync(path.join(cwd, 'dist'));
   process.env.RUN_ENV = 'PRODUCTION';
-  const webpackConfig = require(path.join(cwd, 'webpack.build.conf.js'));
+  const webpackConfig = require(getProjectPath('webpack.build.conf.js'));
   webpack(webpackConfig, (err, stats) => {
     if (err) {
       console.error(err.stack || err);
@@ -68,6 +73,30 @@ function dist(done) {
     done(0);
   });
 }
+
+const tsFiles = ['**/*.ts', '**/*.tsx', '!node_modules/**/*.*', 'typings/**/*.d.ts'];
+
+function compileTs(stream) {
+  return stream
+    .pipe(ts(tsConfig))
+    .js.pipe(
+      through2.obj(function(file, encoding, next) {
+        // console.log(file.path, file.base);
+        file.path = file.path.replace(/\.[jt]sx$/, '.js');
+        this.push(file);
+        next();
+      }),
+    )
+    .pipe(gulp.dest(process.cwd()));
+}
+
+gulp.task('tsc', () =>
+  compileTs(
+    gulp.src(tsFiles, {
+      base: cwd,
+    }),
+  ),
+);
 
 function babelify(js, modules) {
   const babelConfig = getBabelCommonConfig(modules);
@@ -133,10 +162,37 @@ function compile(modules) {
   const assets = gulp
     .src(['components/**/*.@(png|svg)'])
     .pipe(gulp.dest(modules === false ? esDir : libDir));
+  let error = 0;
+  const source = [
+    'components/**/*.js',
+    'components/**/*.jsx',
+    'components/**/*.tsx',
+    'components/**/*.ts',
+    'typings/**/*.d.ts',
+    '!components/*/__tests__/*',
+  ];
 
-  const source = ['components/**/*.js', 'components/**/*.jsx', '!components/*/__tests__/*'];
-  const jsFilesStream = babelify(gulp.src(source), modules);
-  return merge2([less, jsFilesStream, assets]);
+  const tsResult = gulp.src(source).pipe(
+    ts(tsConfig, {
+      error(e) {
+        tsDefaultReporter.error(e);
+        error = 1;
+      },
+      finish: tsDefaultReporter.finish,
+    }),
+  );
+
+  function check() {
+    if (error && !argv['ignore-error']) {
+      process.exit(1);
+    }
+  }
+
+  tsResult.on('finish', check);
+  tsResult.on('end', check);
+  const tsFilesStream = babelify(tsResult.js, modules);
+  const tsd = tsResult.dts.pipe(gulp.dest(modules === false ? esDir : libDir));
+  return merge2([less, tsFilesStream, tsd, assets]);
 }
 
 function tag() {

@@ -136,7 +136,7 @@ module.exports = {
     hot: true,
     open: true,
   },
-  devtool: 'cheap-module-source-map',
+  devtool: 'cheap-module-eval-source-map',
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',

@@ -66,7 +66,7 @@ export interface AntAnchor {
   scrollTo: (link: string) => void;
   $emit?: Function;
 }
-interface AnchorState {
+export interface AnchorState {
   activeLink: null | string;
   scrollContainer: HTMLElement | Window;
   links: string[];

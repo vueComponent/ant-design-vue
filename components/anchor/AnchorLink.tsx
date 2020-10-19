@@ -4,6 +4,8 @@ import { getComponent } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider } from '../config-provider';
 import { AntAnchor } from './Anchor';
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function noop(..._any: any[]): any {}
 
 const AnchorLinkProps = {

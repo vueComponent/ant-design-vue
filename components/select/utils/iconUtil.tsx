@@ -1,4 +1,3 @@
-
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
@@ -7,15 +6,12 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 
 export default function getIcons(props: any, slots: any = {}) {
-  const {
-    loading,
-    multiple,
-    prefixCls,
-  } = props;
-  const suffixIcon = props.suffixIcon || slots.suffixIcon && slots.suffixIcon();
-  const clearIcon = props.clearIcon || slots.clearIcon && slots.clearIcon();
-  const menuItemSelectedIcon = props.menuItemSelectedIcon || slots.menuItemSelectedIcon && slots.menuItemSelectedIcon();
-  const removeIcon = props.removeIcon || slots.removeIcon && slots.removeIcon();
+  const { loading, multiple, prefixCls } = props;
+  const suffixIcon = props.suffixIcon || (slots.suffixIcon && slots.suffixIcon());
+  const clearIcon = props.clearIcon || (slots.clearIcon && slots.clearIcon());
+  const menuItemSelectedIcon =
+    props.menuItemSelectedIcon || (slots.menuItemSelectedIcon && slots.menuItemSelectedIcon());
+  const removeIcon = props.removeIcon || (slots.removeIcon && slots.removeIcon());
   // Clear Icon
   let mergedClearIcon = clearIcon;
   if (!clearIcon) {

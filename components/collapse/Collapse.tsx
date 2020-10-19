@@ -1,11 +1,6 @@
 import { CSSProperties, defineComponent, inject, PropType } from 'vue';
 import animation from '../_util/openAnimation';
-import {
-  getOptionProps,
-  getComponent,
-  isValidElement,
-  getSlot,
-} from '../_util/props-util';
+import { getOptionProps, getComponent, isValidElement, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import VcCollapse from '../vc-collapse';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
@@ -13,7 +8,7 @@ import { defaultConfigProvider } from '../config-provider';
 import PropTypes from '../_util/vue-types';
 import { tuple, VueNode } from '../_util/type';
 
-interface PanelProps {
+export interface PanelProps {
   isActive?: boolean;
   header?: VueNode;
   className?: string;
@@ -30,8 +25,8 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
-    activeKey: {type: [Array, Number, String] as PropType<ActiveKeyType>},
-    defaultActiveKey: {type: [Array, Number, String] as PropType<ActiveKeyType>},
+    activeKey: { type: [Array, Number, String] as PropType<ActiveKeyType> },
+    defaultActiveKey: { type: [Array, Number, String] as PropType<ActiveKeyType> },
     accordion: PropTypes.looseBool,
     destroyInactivePanel: PropTypes.looseBool,
     bordered: PropTypes.looseBool.def(true),
@@ -47,7 +42,7 @@ export default defineComponent({
     };
   },
   methods: {
-    renderExpandIcon(panelProps: PanelProps={}, prefixCls: string) {
+    renderExpandIcon(panelProps: PanelProps = {}, prefixCls: string) {
       const expandIcon = getComponent(this, 'expandIcon', panelProps);
       const icon = expandIcon || <RightOutlined rotate={panelProps.isActive ? 90 : undefined} />;
       return isValidElement(Array.isArray(expandIcon) ? icon[0] : icon)

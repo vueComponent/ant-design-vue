@@ -38,7 +38,7 @@ export default defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
-      popupRef: null
+      popupRef: null,
     };
   },
   created() {

@@ -161,10 +161,18 @@ export default defineComponent({
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, title, component: Tag = 'sup' as any, displayComponent } = this;
+    const {
+      prefixCls: customizePrefixCls,
+      title,
+      component: Tag = 'sup' as any,
+      displayComponent,
+    } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('scroll-number', customizePrefixCls);
-    const { class: className, style = {} } = this.$attrs as {class?: string, style?: CSSProperties};
+    const { class: className, style = {} } = this.$attrs as {
+      class?: string;
+      style?: CSSProperties;
+    };
     if (displayComponent) {
       return cloneElement(displayComponent, {
         class: classNames(

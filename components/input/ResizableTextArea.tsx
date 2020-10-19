@@ -1,4 +1,4 @@
-import {PropType, VNode} from 'vue';
+import { PropType, VNode } from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import omit from 'omit.js';
 import classNames from '../_util/classNames';
@@ -23,8 +23,8 @@ export interface AutoSizeType {
 
 const TextAreaProps = {
   ...inputProps,
-  autosize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined},
-  autoSize: {type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined},
+  autosize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
+  autoSize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
   onResize: PropTypes.func,
 };
 
@@ -51,7 +51,7 @@ const ResizableTextArea = defineComponent({
       nextFrameActionId: undefined,
       textArea: null,
       resizeFrameId: undefined,
-    }
+    };
   },
   watch: {
     value() {
@@ -155,7 +155,9 @@ const ResizableTextArea = defineComponent({
       }
       return (
         <ResizeObserver onResize={this.handleResize} disabled={!(autoSize || autosize)}>
-          {withDirectives(<textarea {...textareaProps} ref={this.saveTextArea} /> as VNode, [[antInput]])}
+          {withDirectives((<textarea {...textareaProps} ref={this.saveTextArea} />) as VNode, [
+            [antInput],
+          ])}
         </ResizeObserver>
       );
     },

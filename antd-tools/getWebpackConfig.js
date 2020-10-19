@@ -1,3 +1,5 @@
+const { getProjectPath, resolve, injectRequire } = require('./utils/projectHelper');
+injectRequire();
 const path = require('path');
 const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
@@ -23,7 +25,7 @@ const imageOptions = {
 };
 
 function getWebpackConfig(modules) {
-  const pkg = require(path.join(process.cwd(), 'package.json'));
+  const pkg = require(getProjectPath('package.json'));
   const babelConfig = require('./getBabelCommonConfig')(modules || false);
 
   const pluginImportOptions = {
@@ -31,7 +33,7 @@ function getWebpackConfig(modules) {
     libraryName: distFileBaseName,
     libraryDirectory: 'components',
   };
-  babelConfig.plugins.push([require.resolve('babel-plugin-import'), pluginImportOptions]);
+  babelConfig.plugins.push([resolve('babel-plugin-import'), pluginImportOptions]);
 
   if (modules === false) {
     babelConfig.plugins.push(require.resolve('./replaceLib'));
@@ -41,13 +43,25 @@ function getWebpackConfig(modules) {
     devtool: 'source-map',
 
     output: {
-      path: path.join(process.cwd(), './dist/'),
+      path: getProjectPath('./dist/'),
       filename: '[name].js',
     },
 
     resolve: {
       modules: ['node_modules', path.join(__dirname, '../node_modules')],
-      extensions: ['.js', '.jsx', '.vue', '.md', '.json'],
+      extensions: [
+        '.web.tsx',
+        '.web.ts',
+        '.web.jsx',
+        '.web.js',
+        '.ts',
+        '.tsx',
+        '.js',
+        '.jsx',
+        '.vue',
+        '.md',
+        '.json',
+      ],
       alias: {
         '@': process.cwd(),
       },
@@ -81,10 +95,10 @@ function getWebpackConfig(modules) {
                     {
                       loader: 'babel-loader',
                       options: {
-                        presets: [require.resolve('@babel/preset-env')],
+                        presets: [resolve('@babel/preset-env')],
                         plugins: [
-                          [require.resolve('@vue/babel-plugin-jsx'), { mergeProps: false }],
-                          require.resolve('@babel/plugin-proposal-object-rest-spread'),
+                          [resolve('@vue/babel-plugin-jsx'), { mergeProps: false }],
+                          resolve('@babel/plugin-proposal-object-rest-spread'),
                         ],
                       },
                     },
@@ -99,6 +113,21 @@ function getWebpackConfig(modules) {
           loader: 'babel-loader',
           exclude: /node_modules/,
           options: babelConfig,
+        },
+        {
+          test: /\.tsx?$/,
+          use: [
+            {
+              loader: 'babel-loader',
+              options: babelConfig,
+            },
+            {
+              loader: 'ts-loader',
+              options: {
+                transpileOnly: true,
+              },
+            },
+          ],
         },
         {
           test: /\.css$/,
@@ -231,6 +260,7 @@ All rights reserved.
   return config;
 }
 
+getWebpackConfig.webpack = webpack;
 getWebpackConfig.svgRegex = svgRegex;
 getWebpackConfig.svgOptions = svgOptions;
 getWebpackConfig.imageOptions = imageOptions;

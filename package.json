@@ -18,14 +18,12 @@
   ],
   "main": "lib/index.js",
   "module": "es/index.js",
-  "typings": "types/index.d.ts",
+  "unpkg": "dist/antd.min.js",
+  "typings": "lib/index.d.ts",
   "files": [
-    "components",
     "dist",
     "lib",
-    "es",
-    "types",
-    "scripts"
+    "es"
   ],
   "scripts": {
     "dev": "webpack-dev-server",
@@ -55,6 +53,10 @@
     "url": "git+https://github.com/vueComponent/ant-design-vue.git"
   },
   "license": "MIT",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/ant-design-vue"
+  },
   "bugs": {
     "url": "https://github.com/vueComponent/ant-design-vue/issues"
   },
@@ -76,6 +78,7 @@
     "@babel/plugin-transform-property-literals": "^7.8.3",
     "@babel/plugin-transform-runtime": "^7.10.5",
     "@babel/plugin-transform-template-literals": "^7.8.3",
+    "@babel/plugin-transform-typescript": "^7.12.1",
     "@babel/polyfill": "^7.8.7",
     "@babel/preset-env": "^7.9.6",
     "@babel/preset-typescript": "^7.10.4",
@@ -127,7 +130,8 @@
     "gulp": "^4.0.1",
     "gulp-babel": "^8.0.0",
     "gulp-strip-code": "^0.1.4",
-    "html-webpack-plugin": "^4.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "html-webpack-plugin": "^3.2.0",
     "husky": "^4.0.0",
     "istanbul-instrumenter-loader": "^3.0.0",
     "jest": "^26.0.0",
@@ -188,7 +192,7 @@
     "vue-style-loader": "^4.1.2",
     "vue-virtual-scroller": "^1.0.0",
     "vuex": "^4.0.0-beta.2",
-    "webpack": "^5.0.0",
+    "webpack": "^4.28.4",
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.2.1",
     "webpack-dev-server": "^3.1.14",

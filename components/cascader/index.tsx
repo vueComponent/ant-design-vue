@@ -266,12 +266,12 @@ const Cascader = defineComponent({
     },
 
     defaultRenderFilteredOption(opt: {
-      inputValue: string,
-      path: CascaderOptionType[],
-      prefixCls: string | undefined,
-      names: FilledFieldNamesType,
+      inputValue: string;
+      path: CascaderOptionType[];
+      prefixCls: string | undefined;
+      names: FilledFieldNamesType;
     }) {
-      const { inputValue, path, prefixCls, names } = opt
+      const { inputValue, path, prefixCls, names } = opt;
       return path.map((option, index) => {
         const label = option[names.label];
         const node =
@@ -316,7 +316,7 @@ const Cascader = defineComponent({
       this.$emit('blur', e);
     },
 
-    handleInputClick(e: MouseEvent & {nativeEvent?: any}) {
+    handleInputClick(e: MouseEvent & { nativeEvent?: any }) {
       const { inputFocused, sPopupVisible } = this;
       // Prevent `Trigger` behaviour.
       if (inputFocused || sPopupVisible) {
@@ -389,7 +389,7 @@ const Cascader = defineComponent({
       const { flattenOptions = [], inputValue } = this.$data;
 
       // Limit the filter if needed
-      let filtered: Array<CascaderOptionType[]>
+      let filtered: Array<CascaderOptionType[]>;
       if (limit > 0) {
         filtered = [];
         let matchCount = 0;

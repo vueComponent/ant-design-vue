@@ -39,7 +39,7 @@ const Combobox = {
       console.log('onSelect', v, option);
     },
 
-    onSearch(text: string) {
+    onSearch(text) {
       console.log('onSearch:', text);
     },
 

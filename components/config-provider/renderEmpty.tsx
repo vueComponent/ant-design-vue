@@ -30,7 +30,7 @@ const RenderEmpty = (props: RenderEmptyProps) => {
   return renderHtml(props.componentName);
 };
 
-function renderEmpty(componentName?: string): VNodeChild | JSX.Element{
+function renderEmpty(componentName?: string): VNodeChild | JSX.Element {
   return <RenderEmpty componentName={componentName} />;
 }
 

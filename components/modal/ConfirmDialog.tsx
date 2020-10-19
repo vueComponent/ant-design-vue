@@ -1,9 +1,16 @@
 import classNames from '../_util/classNames';
-import Dialog from './Modal';
+import Dialog, { ModalFuncProps } from './Modal';
 import ActionButton from './ActionButton';
 import { getConfirmLocale } from './locale';
+import { FunctionalComponent } from 'vue';
 
-const ConfirmDialog = (_, { attrs }) => {
+interface ConfirmDialogProps extends ModalFuncProps {
+  afterClose?: () => void;
+  close: (...args: any[]) => void;
+  autoFocusButton?: null | 'ok' | 'cancel';
+}
+
+const ConfirmDialog: FunctionalComponent<ConfirmDialogProps> = props => {
   const {
     icon,
     onCancel,
@@ -18,30 +25,30 @@ const ConfirmDialog = (_, { attrs }) => {
     maskStyle,
     okButtonProps,
     cancelButtonProps,
-    closable = false,
-  } = attrs;
-  const okType = attrs.okType || 'primary';
-  const prefixCls = attrs.prefixCls || 'ant-modal';
+    // closable = false,
+  } = props;
+  const okType = props.okType || 'primary';
+  const prefixCls = props.prefixCls || 'ant-modal';
   const contentPrefixCls = `${prefixCls}-confirm`;
   // 默认为 true，保持向下兼容
-  const okCancel = 'okCancel' in attrs ? attrs.okCancel : true;
-  const width = attrs.width || 416;
-  const style = attrs.style || {};
-  const mask = attrs.mask === undefined ? true : attrs.mask;
+  const okCancel = 'okCancel' in props ? props.okCancel : true;
+  const width = props.width || 416;
+  const style = props.style || {};
+  const mask = props.mask === undefined ? true : props.mask;
   // 默认为 false，保持旧版默认行为
-  const maskClosable = attrs.maskClosable === undefined ? false : attrs.maskClosable;
+  const maskClosable = props.maskClosable === undefined ? false : props.maskClosable;
   const runtimeLocale = getConfirmLocale();
-  const okText = attrs.okText || (okCancel ? runtimeLocale.okText : runtimeLocale.justOkText);
-  const cancelText = attrs.cancelText || runtimeLocale.cancelText;
-  const autoFocusButton = attrs.autoFocusButton === null ? false : attrs.autoFocusButton || 'ok';
-  const transitionName = attrs.transitionName || 'zoom';
-  const maskTransitionName = attrs.maskTransitionName || 'fade';
+  const okText = props.okText || (okCancel ? runtimeLocale.okText : runtimeLocale.justOkText);
+  const cancelText = props.cancelText || runtimeLocale.cancelText;
+  const autoFocusButton = props.autoFocusButton === null ? false : props.autoFocusButton || 'ok';
+  const transitionName = props.transitionName || 'zoom';
+  const maskTransitionName = props.maskTransitionName || 'fade';
 
   const classString = classNames(
     contentPrefixCls,
-    `${contentPrefixCls}-${attrs.type}`,
-    `${prefixCls}-${attrs.type}`,
-    attrs.class,
+    `${contentPrefixCls}-${props.type}`,
+    `${prefixCls}-${props.type}`,
+    props.class,
   );
 
   const cancelButton = okCancel && (
@@ -62,7 +69,6 @@ const ConfirmDialog = (_, { attrs }) => {
       wrapClassName={classNames({ [`${contentPrefixCls}-centered`]: !!centered })}
       onCancel={e => close({ triggerCancel: true }, e)}
       visible={visible}
-      closable={closable}
       title=""
       transitionName={transitionName}
       footer=""
@@ -80,13 +86,11 @@ const ConfirmDialog = (_, { attrs }) => {
     >
       <div class={`${contentPrefixCls}-body-wrapper`}>
         <div class={`${contentPrefixCls}-body`}>
-          {typeof icon === 'function' ? icon() : icon}
-          {attrs.title === undefined ? null : (
-            <span class={`${contentPrefixCls}-title`}>{attrs.title}</span>
+          {icon}
+          {props.title === undefined ? null : (
+            <span class={`${contentPrefixCls}-title`}>{props.title}</span>
           )}
-          <div class={`${contentPrefixCls}-content`}>
-            {typeof attrs.content === 'function' ? attrs.content() : attrs.content}
-          </div>
+          <div class={`${contentPrefixCls}-content`}>{props.content}</div>
         </div>
         <div class={`${contentPrefixCls}-btns`}>
           {cancelButton}
@@ -104,5 +108,7 @@ const ConfirmDialog = (_, { attrs }) => {
     </Dialog>
   );
 };
+
 ConfirmDialog.inheritAttrs = false;
+
 export default ConfirmDialog;

@@ -1,4 +1,11 @@
-import { inject } from 'vue';
+import {
+  defineComponent,
+  ExtractPropTypes,
+  inject,
+  VNodeTypes,
+  CSSProperties,
+  PropType,
+} from 'vue';
 import classNames from '../_util/classNames';
 import Dialog from '../vc-dialog';
 import PropTypes from '../_util/vue-types';
@@ -6,15 +13,18 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 import { getConfirmLocale } from './locale';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Button from '../button';
-import buttonTypes from '../button/buttonTypes';
-const ButtonType = buttonTypes().type;
+import buttonTypes, { ButtonType, ButtonProps } from '../button/buttonTypes';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
+import { getComponent, getSlot } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
 
-let mousePosition = null;
+const ButtonProps = buttonTypes();
+const ButtonType = ButtonProps.type;
+
+let mousePosition: { x: number; y: number } | null = null;
 // ref: https://github.com/ant-design/ant-design/issues/15795
-const getClickPosition = e => {
+const getClickPosition = (e: MouseEvent) => {
   mousePosition = {
     x: e.pageX,
     y: e.pageY,
@@ -31,68 +41,121 @@ if (typeof window !== 'undefined' && window.document && window.document.document
 }
 
 function noop() {}
-const modalProps = (defaultProps = {}) => {
-  const props = {
-    prefixCls: PropTypes.string,
-    /** 对话框是否可见*/
-    visible: PropTypes.looseBool,
-    /** 确定按钮 loading*/
-    confirmLoading: PropTypes.looseBool,
-    /** 标题*/
-    title: PropTypes.any,
-    /** 是否显示右上角的关闭按钮*/
-    closable: PropTypes.looseBool,
-    closeIcon: PropTypes.any,
-    /** 点击确定回调*/
-    // onOk: (e: React.MouseEvent<any>) => void,
-    /** 点击模态框右上角叉、取消按钮、Props.maskClosable 值为 true 时的遮罩层或键盘按下 Esc 时的回调*/
-    // onCancel: (e: React.MouseEvent<any>) => void,
-    afterClose: PropTypes.func.def(noop),
-    /** 垂直居中 */
-    centered: PropTypes.looseBool,
-    /** 宽度*/
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    /** 底部内容*/
-    footer: PropTypes.any,
-    /** 确认按钮文字*/
-    okText: PropTypes.any,
-    /** 确认按钮类型*/
-    okType: ButtonType,
-    /** 取消按钮文字*/
-    cancelText: PropTypes.any,
-    icon: PropTypes.any,
-    /** 点击蒙层是否允许关闭*/
-    maskClosable: PropTypes.looseBool,
-    /** 强制渲染 Modal*/
-    forceRender: PropTypes.looseBool,
-    okButtonProps: PropTypes.object,
-    cancelButtonProps: PropTypes.object,
-    destroyOnClose: PropTypes.looseBool,
-    wrapClassName: PropTypes.string,
-    maskTransitionName: PropTypes.string,
-    transitionName: PropTypes.string,
-    getContainer: PropTypes.func,
-    zIndex: PropTypes.number,
-    bodyStyle: PropTypes.object,
-    maskStyle: PropTypes.object,
-    mask: PropTypes.looseBool,
-    keyboard: PropTypes.looseBool,
-    wrapProps: PropTypes.object,
-    focusTriggerAfterClose: PropTypes.looseBool,
-  };
-  return initDefaultProps(props, defaultProps);
+
+const modalProps = {
+  prefixCls: PropTypes.string,
+  /** 对话框是否可见*/
+  visible: PropTypes.looseBool,
+  /** 确定按钮 loading*/
+  confirmLoading: PropTypes.looseBool,
+  /** 标题*/
+  title: PropTypes.any,
+  /** 是否显示右上角的关闭按钮*/
+  closable: PropTypes.looseBool,
+  closeIcon: PropTypes.any,
+  /** 点击确定回调*/
+  onOk: {
+    type: Function as PropType<(e: MouseEvent) => void>,
+  },
+  /** 点击模态框右上角叉、取消按钮、Props.maskClosable 值为 true 时的遮罩层或键盘按下 Esc 时的回调*/
+  onCancel: {
+    type: Function as PropType<(e: MouseEvent) => void>,
+  },
+  afterClose: PropTypes.func.def(noop),
+  /** 垂直居中 */
+  centered: PropTypes.looseBool,
+  /** 宽度*/
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /** 底部内容*/
+  footer: PropTypes.any,
+  /** 确认按钮文字*/
+  okText: PropTypes.any,
+  /** 确认按钮类型*/
+  okType: ButtonType,
+  /** 取消按钮文字*/
+  cancelText: PropTypes.any,
+  icon: PropTypes.any,
+  /** 点击蒙层是否允许关闭*/
+  maskClosable: PropTypes.looseBool,
+  /** 强制渲染 Modal*/
+  forceRender: PropTypes.looseBool,
+  okButtonProps: PropTypes.shape(ButtonProps),
+  cancelButtonProps: PropTypes.shape(ButtonProps),
+  destroyOnClose: PropTypes.looseBool,
+  wrapClassName: PropTypes.string,
+  maskTransitionName: PropTypes.string,
+  transitionName: PropTypes.string,
+  getContainer: PropTypes.func,
+  zIndex: PropTypes.number,
+  bodyStyle: PropTypes.style,
+  maskStyle: PropTypes.style,
+  mask: PropTypes.looseBool,
+  keyboard: PropTypes.looseBool,
+  wrapProps: PropTypes.object,
+  focusTriggerAfterClose: PropTypes.looseBool,
 };
+
+export type ModalProps = ExtractPropTypes<typeof modalProps>;
+
+export interface ModalFuncProps {
+  prefixCls?: string;
+  class?: string;
+  visible?: boolean;
+  title?: VNodeTypes;
+  content?: VNodeTypes;
+  // TODO: find out exact types
+  onOk?: (...args: any[]) => any;
+  onCancel?: (...args: any[]) => any;
+  okButtonProps?: ButtonProps;
+  cancelButtonProps?: ButtonProps;
+  centered?: boolean;
+  width?: string | number;
+  okText?: VNodeTypes;
+  okType?: ButtonType;
+  cancelText?: VNodeTypes;
+  icon?: VNodeTypes;
+  /* Deprecated */
+  iconType?: string;
+  mask?: boolean;
+  maskClosable?: boolean;
+  zIndex?: number;
+  okCancel?: boolean;
+  style?: CSSProperties | string;
+  maskStyle?: CSSProperties;
+  type?: string;
+  keyboard?: boolean;
+  getContainer?: getContainerFunc;
+  autoFocusButton?: null | 'ok' | 'cancel';
+  transitionName?: string;
+  maskTransitionName?: string;
+}
+
+type getContainerFunc = () => HTMLElement;
+
+export type ModalFunc = (
+  props: ModalFuncProps,
+) => {
+  destroy: () => void;
+  update: (newConfig: ModalFuncProps) => void;
+};
+
+export interface ModalLocale {
+  okText: string;
+  cancelText: string;
+  justOkText: string;
+}
 
 export const destroyFns = [];
 
-export default {
+export default defineComponent({
   name: 'AModal',
   inheritAttrs: false,
   model: {
     prop: 'visible',
     event: 'change',
   },
-  props: modalProps({
+  emits: ['update:visible', 'cancel', 'change', 'ok'],
+  props: initDefaultProps(modalProps, {
     width: 520,
     transitionName: 'zoom',
     maskTransitionName: 'fade',
@@ -115,23 +178,17 @@ export default {
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
-  // static info: ModalFunc;
-  // static success: ModalFunc;
-  // static error: ModalFunc;
-  // static warn: ModalFunc;
-  // static warning: ModalFunc;
-  // static confirm: ModalFunc;
   methods: {
-    handleCancel(e) {
+    handleCancel(e: MouseEvent) {
       this.$emit('update:visible', false);
       this.$emit('cancel', e);
       this.$emit('change', false);
     },
 
-    handleOk(e) {
+    handleOk(e: MouseEvent) {
       this.$emit('ok', e);
     },
-    renderFooter(locale) {
+    renderFooter(locale: ModalLocale) {
       const { okType, confirmLoading } = this;
       const cancelBtnProps = { onClick: this.handleCancel, ...(this.cancelButtonProps || {}) };
       const okBtnProps = {
@@ -194,4 +251,4 @@ export default {
     };
     return <Dialog {...dialogProps}>{children}</Dialog>;
   },
-};
+});

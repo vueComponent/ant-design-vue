@@ -1,9 +1,11 @@
+import { defineComponent, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Button from '../button';
 import BaseMixin from '../_util/BaseMixin';
 import buttonTypes from '../button/buttonTypes';
 import { getSlot, findDOMNode } from '../_util/props-util';
 const ButtonType = buttonTypes().type;
+
 const ActionButtonProps = {
   type: ButtonType,
   actionFn: PropTypes.func,
@@ -12,12 +14,19 @@ const ActionButtonProps = {
   buttonProps: PropTypes.object,
 };
 
-export default {
+export type IActionButtonProps = ExtractPropTypes<typeof ActionButtonProps>;
+
+export default defineComponent({
   mixins: [BaseMixin],
   props: ActionButtonProps,
   data() {
     return {
       loading: false,
+    };
+  },
+  setup() {
+    return {
+      timeoutId: undefined,
     };
   },
   mounted() {
@@ -74,4 +83,4 @@ export default {
     };
     return <Button {...props}>{getSlot(this)}</Button>;
   },
-};
+});

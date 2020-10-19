@@ -1,17 +1,17 @@
 import { createApp } from 'vue';
 import ConfirmDialog from './ConfirmDialog';
-import { destroyFns } from './Modal';
+import { destroyFns, ModalFuncProps } from './Modal';
 
 import Omit from 'omit.js';
 
-export default function confirm(config) {
+export default function confirm(config: ModalFuncProps) {
   const div = document.createElement('div');
   document.body.appendChild(div);
   let currentConfig = { ...Omit(config, ['parentContext']), close, visible: true };
 
   let confirmDialogInstance = null;
   let confirmDialogProps = {};
-  function close(...args) {
+  function close(this: typeof close, ...args: any[]) {
     currentConfig = {
       ...currentConfig,
       visible: false,
@@ -19,7 +19,7 @@ export default function confirm(config) {
     };
     update(currentConfig);
   }
-  function update(newConfig) {
+  function update(newConfig: ModalFuncProps) {
     currentConfig = {
       ...currentConfig,
       ...newConfig,
@@ -27,7 +27,7 @@ export default function confirm(config) {
     confirmDialogInstance &&
       Object.assign(confirmDialogInstance, { confirmDialogProps: currentConfig });
   }
-  function destroy(...args) {
+  function destroy(...args: any[]) {
     if (confirmDialogInstance && div.parentNode) {
       confirmDialogInstance.vIf = false; // hack destroy
       confirmDialogInstance = null;
@@ -46,10 +46,10 @@ export default function confirm(config) {
     }
   }
 
-  function render(props) {
+  function render(props: ModalFuncProps) {
     confirmDialogProps = props;
     return createApp({
-      parent: config.parentContext,
+      parent: (config as any).parentContext,
       data() {
         return { confirmDialogProps, vIf: true };
       },

@@ -1,7 +1,7 @@
 import omit from 'omit.js';
 import classNames from '../_util/classNames';
-import RcSelect, { Option, OptGroup, SelectProps as RcSelectProps, BaseProps } from '../vc-select2';
-import { OptionProps as OptionPropsType } from '../vc-select2/Option';
+import RcSelect, { Option, OptGroup, SelectProps as RcSelectProps, BaseProps } from '../vc-select';
+import { OptionProps as OptionPropsType } from '../vc-select/Option';
 import { defaultConfigProvider } from '../config-provider';
 import getIcons from './utils/iconUtil';
 import { computed, defineComponent, inject, ref, VNodeChild, App, PropType } from 'vue';

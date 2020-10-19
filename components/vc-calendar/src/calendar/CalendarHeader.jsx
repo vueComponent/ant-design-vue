@@ -6,14 +6,12 @@ import YearPanel from '../year/YearPanel';
 import DecadePanel from '../decade/DecadePanel';
 function noop() {}
 function goMonth(direction) {
-  const next = this.value.clone();
-  next.add(direction, 'months');
+  const next = this.value.clone().add(direction, 'months');
   this.__emit('valueChange', next);
 }
 
 function goYear(direction) {
-  const next = this.value.clone();
-  next.add(direction, 'years');
+  const next = this.value.clone().add(direction, 'years');
   this.__emit('valueChange', next);
 }
 

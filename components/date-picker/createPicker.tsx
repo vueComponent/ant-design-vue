@@ -143,7 +143,7 @@ export default function createPicker<P>(
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
       const props: any = omit({ ...getOptionProps(this), ...this.$attrs }, ['onChange']);
 
-      const { prefixCls: customizePrefixCls, locale, localeCode, inputReadOnly } = props;
+      const { prefixCls: customizePrefixCls, locale, inputReadOnly } = props;
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('calendar', customizePrefixCls);
       this.sPrefixCls = prefixCls;
@@ -158,10 +158,6 @@ export default function createPicker<P>(
         [`${prefixCls}-time`]: props.showTime,
         [`${prefixCls}-month`]: (MonthCalendar as any) === TheCalendar,
       });
-
-      if (value && localeCode) {
-        value.locale(localeCode);
-      }
 
       const pickerProps: any = {};
       const calendarProps: any = {};

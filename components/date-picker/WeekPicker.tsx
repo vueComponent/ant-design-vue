@@ -148,7 +148,6 @@ export default defineComponent({
       format,
       allowClear,
       locale,
-      localeCode,
       disabledDate,
       defaultPickerValue,
       $data,
@@ -160,10 +159,6 @@ export default defineComponent({
 
     const { _value: pickerValue, _open: open } = $data;
     const { class: className, style, id, onFocus = noop, onBlur = noop } = props as any;
-
-    if (pickerValue && localeCode) {
-      pickerValue.locale(localeCode);
-    }
 
     const placeholder = hasProp(this, 'placeholder') ? this.placeholder : locale.lang.placeholder;
     const weekDateRender = this.dateRender || $slots.dateRender || this.weekDateRender;

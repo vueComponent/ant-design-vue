@@ -45,27 +45,23 @@ const MonthCalendar = defineComponent({
       let value = stateValue;
       switch (keyCode) {
         case KeyCode.DOWN:
-          value = stateValue.clone();
-          value.add(3, 'months');
+          value = stateValue.clone().add(3, 'months');
           break;
         case KeyCode.UP:
-          value = stateValue.clone();
-          value.add(-3, 'months');
+          value = stateValue.clone().add(-3, 'months');
           break;
         case KeyCode.LEFT:
-          value = stateValue.clone();
           if (ctrlKey) {
-            value.add(-1, 'years');
+            value = stateValue.clone().add(-1, 'years');
           } else {
-            value.add(-1, 'months');
+            value = stateValue.clone().add(-1, 'months');
           }
           break;
         case KeyCode.RIGHT:
-          value = stateValue.clone();
           if (ctrlKey) {
-            value.add(1, 'years');
+            value = stateValue.clone().add(1, 'years');
           } else {
-            value.add(1, 'months');
+            value = stateValue.clone().add(1, 'months');
           }
           break;
         case KeyCode.ENTER:

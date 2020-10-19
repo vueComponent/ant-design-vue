@@ -157,7 +157,7 @@ export default function wrapPicker<P>(
         }
       },
 
-      renderPicker(locale: any, localeCode: string) {
+      renderPicker(locale: any) {
         const props: any = { ...getOptionProps(this), ...this.$attrs };
         this.transformValue(props);
         const {
@@ -214,7 +214,6 @@ export default function wrapPicker<P>(
           pickerClass,
           pickerInputClass,
           locale,
-          localeCode,
           timePicker,
           onOpenChange: this.handleOpenChange,
           onFocus: this.handleFocus,

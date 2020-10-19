@@ -78,15 +78,13 @@ const DateTBody = {
     const day = month1.day();
     const lastMonthDiffDay = (day + 7 - value.localeData().firstDayOfWeek()) % 7;
     // calculate last month
-    const lastMonth1 = month1.clone();
-    lastMonth1.add(0 - lastMonthDiffDay, 'days');
+    const lastMonth1 = month1.clone().add(0 - lastMonthDiffDay, 'days');
     let passed = 0;
     for (iIndex = 0; iIndex < DateConstants.DATE_ROW_COUNT; iIndex++) {
       for (jIndex = 0; jIndex < DateConstants.DATE_COL_COUNT; jIndex++) {
         current = lastMonth1;
         if (passed) {
-          current = current.clone();
-          current.add(passed, 'days');
+          current = current.clone().add(passed, 'days');
         }
         dateTable.push(current);
         passed++;

@@ -13,8 +13,9 @@ const defaultDisabledTime = {
 };
 
 export function getTodayTime(value) {
-  const today = moment();
-  today.locale(value.locale()).utcOffset(value.utcOffset());
+  const today = moment()
+    .locale(value.locale())
+    .utcOffset(value.utcOffset());
   return today;
 }
 

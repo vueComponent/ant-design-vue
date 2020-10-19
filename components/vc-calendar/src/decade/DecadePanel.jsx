@@ -4,8 +4,7 @@ const ROW = 4;
 const COL = 3;
 function noop() {}
 function goYear(direction) {
-  const next = this.sValue.clone();
-  next.add(direction, 'years');
+  const next = this.sValue.clone().add(direction, 'years');
   this.setState({
     sValue: next,
   });

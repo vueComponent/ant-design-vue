@@ -59,22 +59,6 @@ function isEmptyArray(arr: any) {
   return false;
 }
 
-function fixLocale(value: RangePickerValue | undefined, localeCode: string | undefined) {
-  if (!localeCode) {
-    return;
-  }
-  if (!value || value.length === 0) {
-    return;
-  }
-  const [start, end] = value;
-  if (start) {
-    start.locale(localeCode);
-  }
-  if (end) {
-    end.locale(localeCode);
-  }
-}
-
 export interface RangePickerState {
   sValue?: RangePickerValue;
   sShowDate?: RangePickerValue;
@@ -301,7 +285,6 @@ export default defineComponent({
       showToday,
       ranges,
       locale,
-      localeCode,
       format,
       separator,
       inputReadOnly,
@@ -319,8 +302,6 @@ export default defineComponent({
     this.sTagPrefixCls = tagPrefixCls;
 
     const dateRender = props.dateRender || $slots.dateRender;
-    fixLocale(value, localeCode);
-    fixLocale(showDate, localeCode);
 
     const calendarClassName = classNames({
       [`${prefixCls}-time`]: showTime,

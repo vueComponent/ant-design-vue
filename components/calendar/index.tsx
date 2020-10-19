@@ -170,12 +170,9 @@ const Calendar = defineComponent({
       );
     },
 
-    renderCalendar(locale: any, localeCode: string) {
+    renderCalendar(locale: any) {
       const props: any = { ...getOptionProps(this), ...this.$attrs };
       const { sValue: value, sMode: mode, $slots } = this;
-      if (value && localeCode) {
-        value.locale(localeCode);
-      }
       const {
         prefixCls: customizePrefixCls,
         fullscreen,

@@ -1,3 +1,4 @@
+import { VNodeTypes, CSSProperties } from 'vue';
 import Notification from '../vc-notification';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
@@ -5,15 +6,28 @@ import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 
-const notificationInstance = {};
+export type NotificationPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
+
+export type IconType = 'success' | 'info' | 'error' | 'warning';
+
+export interface ConfigProps {
+  top?: string | number;
+  bottom?: string | number;
+  duration?: number;
+  placement?: NotificationPlacement;
+  getContainer?: () => HTMLElement;
+  closeIcon?: VNodeTypes;
+}
+
+const notificationInstance: { [key: string]: any } = {};
 let defaultDuration = 4.5;
 let defaultTop = '24px';
 let defaultBottom = '24px';
-let defaultPlacement = 'topRight';
+let defaultPlacement: NotificationPlacement = 'topRight';
 let defaultGetContainer = () => document.body;
 let defaultCloseIcon = null;
 
-function setNotificationConfig(options) {
+function setNotificationConfig(options: ConfigProps) {
   const { duration, placement, bottom, top, getContainer, closeIcon } = options;
   if (duration !== undefined) {
     defaultDuration = duration;
@@ -35,7 +49,11 @@ function setNotificationConfig(options) {
   }
 }
 
-function getPlacementStyle(placement, top = defaultTop, bottom = defaultBottom) {
+function getPlacementStyle(
+  placement: NotificationPlacement,
+  top: string | number = defaultTop,
+  bottom: string | number = defaultBottom,
+) {
   let style;
   switch (placement) {
     case 'topLeft':
@@ -70,6 +88,15 @@ function getPlacementStyle(placement, top = defaultTop, bottom = defaultBottom) 
   return style;
 }
 
+type NotificationInstanceProps = {
+  prefixCls: string;
+  placement?: NotificationPlacement;
+  getContainer?: () => HTMLElement;
+  top?: string | number;
+  bottom?: string | number;
+  closeIcon?: VNodeTypes;
+};
+
 function getNotificationInstance(
   {
     prefixCls,
@@ -78,8 +105,8 @@ function getNotificationInstance(
     top,
     bottom,
     closeIcon = defaultCloseIcon,
-  },
-  callback,
+  }: NotificationInstanceProps,
+  callback: (n: any) => void,
 ) {
   const cacheKey = `${prefixCls}-${placement}`;
   if (notificationInstance[cacheKey]) {
@@ -93,16 +120,15 @@ function getNotificationInstance(
       style: getPlacementStyle(placement, top, bottom),
       getContainer,
       closeIcon: () => {
-        const icon = typeof closeIcon === 'function' ? closeIcon() : closeIcon;
         const closeIconToRender = (
           <span class={`${prefixCls}-close-x`}>
-            {icon || <CloseOutlined class={`${prefixCls}-close-icon`} />}
+            {closeIcon || <CloseOutlined class={`${prefixCls}-close-icon`} />}
           </span>
         );
         return closeIconToRender;
       },
     },
-    notification => {
+    (notification: any) => {
       notificationInstance[cacheKey] = notification;
       callback(notification);
     },
@@ -116,7 +142,27 @@ const typeToIcon = {
   warning: ExclamationCircleOutlined,
 };
 
-function notice(args) {
+export interface ArgsProps {
+  message: VNodeTypes;
+  description?: VNodeTypes;
+  btn?: VNodeTypes;
+  key?: string;
+  onClose?: () => void;
+  duration?: number | null;
+  icon?: VNodeTypes;
+  placement?: NotificationPlacement;
+  style?: CSSProperties;
+  prefixCls?: string;
+  class?: string;
+  readonly type?: IconType;
+  onClick?: () => void;
+  top?: number;
+  bottom?: number;
+  getContainer?: () => HTMLElement;
+  closeIcon?: VNodeTypes;
+}
+
+function notice(args: ArgsProps) {
   const { icon, type, description, message, btn } = args;
   const outerPrefixCls = args.prefixCls || 'ant-notification';
   const prefixCls = `${outerPrefixCls}-notice`;
@@ -124,9 +170,7 @@ function notice(args) {
 
   let iconNode = null;
   if (icon) {
-    iconNode = () => (
-      <span class={`${prefixCls}-icon`}>{typeof icon === 'function' ? icon() : icon}</span>
-    );
+    iconNode = () => <span class={`${prefixCls}-icon`}>{icon}</span>;
   } else if (type) {
     const Icon = typeToIcon[type];
     iconNode = () => <Icon class={`${prefixCls}-icon ${prefixCls}-icon-${type}`} />;
@@ -150,14 +194,10 @@ function notice(args) {
               {!description && iconNode ? (
                 <span class={`${prefixCls}-message-single-line-auto-margin`} />
               ) : null}
-              {typeof message === 'function' ? message() : message}
+              {message}
             </div>
-            <div class={`${prefixCls}-description`}>
-              {typeof description === 'function' ? description() : description}
-            </div>
-            {btn ? (
-              <span class={`${prefixCls}-btn`}>{typeof btn === 'function' ? btn() : btn}</span>
-            ) : null}
+            <div class={`${prefixCls}-description`}>{description}</div>
+            {btn ? <span class={`${prefixCls}-btn`}>{btn}</span> : null}
           </div>
         ),
         duration,
@@ -172,9 +212,9 @@ function notice(args) {
   );
 }
 
-const api = {
+const api: any = {
   open: notice,
-  close(key) {
+  close(key: string) {
     Object.keys(notificationInstance).forEach(cacheKey =>
       notificationInstance[cacheKey].removeNotice(key),
     );

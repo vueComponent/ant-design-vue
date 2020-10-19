@@ -175,7 +175,7 @@ export interface SelectProps<OptionsType extends object[], ValueType> {
 
   // Options
   options?: OptionsType;
-  children?: VNode[] | JSX.Element[];
+  children?: any[];
   mode?: Mode;
 
   // Value

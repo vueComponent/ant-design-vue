@@ -5,9 +5,7 @@ import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
 import { VueNode } from '../_util/type';
 
-const { Option } = Select;
-
-function getMonthsLocale(value: moment.Moment) {
+function getMonthsLocale(value: moment.Moment): string[] {
   const current = value.clone();
   const localeData = value.localeData();
   const months = [];
@@ -66,29 +64,26 @@ export default defineComponent({
         start = validRange[0].get('year');
         end = validRange[1].get('year') + 1;
       }
-      const suffix = locale.year === '年' ? '年' : '';
-
-      const options = [];
+      const suffix = locale && locale.year === '年' ? '年' : '';
+      const options: { label: string; value: number }[] = [];
       for (let index = start; index < end; index++) {
-        options.push(<Option key={`${index}`}>{(() => index + suffix)()}</Option>);
+        options.push({ label: `${index}${suffix}`, value: index });
       }
       return (
         <Select
-          size={fullscreen ? 'default' : 'small'}
+          size={fullscreen ? undefined : 'small'}
           dropdownMatchSelectWidth={false}
           class={`${prefixCls}-year-select`}
           onChange={this.onYearChange}
           value={String(year)}
+          options={options}
           getPopupContainer={() => this.calendarHeaderNode}
-        >
-          {options}
-        </Select>
+        ></Select>
       );
     },
 
-    getMonthSelectElement(prefixCls: string, month: number, months: number[]) {
+    getMonthSelectElement(prefixCls: string, month: number, months: string[]) {
       const { fullscreen, validRange, value } = this;
-      const options = [];
       let start = 0;
       let end = 12;
       if (validRange) {
@@ -101,21 +96,24 @@ export default defineComponent({
           start = rangeStart.get('month');
         }
       }
-      for (let index = start; index < end; index++) {
-        options.push(<Option key={`${index}`}>{(() => months[index])()}</Option>);
+      const options: { label: string; value: number }[] = [];
+      for (let index = start; index <= end; index += 1) {
+        options.push({
+          label: months[index],
+          value: index,
+        });
       }
 
       return (
         <Select
-          size={fullscreen ? 'default' : 'small'}
+          size={fullscreen ? undefined : 'small'}
           dropdownMatchSelectWidth={false}
           class={`${prefixCls}-month-select`}
-          value={String(month)}
+          value={month}
+          options={options}
           onChange={this.onMonthChange}
           getPopupContainer={() => this.calendarHeaderNode}
-        >
-          {options}
-        </Select>
+        ></Select>
       );
     },
 

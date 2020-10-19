@@ -10,8 +10,9 @@ import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
 import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
 import { defaultConfigProvider } from '../config-provider';
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
+import { tuple } from '../_util/type';
 
 export const PaginationProps = () => ({
   total: PropTypes.number,
@@ -39,10 +40,10 @@ export const PaginationProps = () => ({
 
 export const PaginationConfig = () => ({
   ...PaginationProps(),
-  position: PropTypes.oneOf(['top', 'bottom', 'both']),
+  position: PropTypes.oneOf(tuple('top', 'bottom', 'both')),
 });
 
-export default {
+export default defineComponent({
   name: 'APagination',
   inheritAttrs: false,
   props: {
@@ -56,7 +57,7 @@ export default {
   },
 
   methods: {
-    getIconsProps(prefixCls) {
+    getIconsProps(prefixCls: string) {
       const prevIcon = (
         <a class={`${prefixCls}-item-link`}>
           <LeftOutlined />
@@ -92,7 +93,7 @@ export default {
         jumpNextIcon,
       };
     },
-    renderPagination(contextLocale) {
+    renderPagination(contextLocale: object) {
       const {
         prefixCls: customizePrefixCls,
         selectPrefixCls: customizeSelectPrefixCls,
@@ -131,4 +132,4 @@ export default {
       ></LocaleReceiver>
     );
   },
-};
+});

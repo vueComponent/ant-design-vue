@@ -1,3 +1,9 @@
+import { defineComponent, inject } from 'vue';
+import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
+import RightOutlined from '@ant-design/icons-vue/RightOutlined';
+import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
+import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
+import { tuple } from '../_util/type';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import VcSelect from '../select';
 import MiniSelect from './MiniSelect';
@@ -5,12 +11,7 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getOptionProps } from '../_util/props-util';
 import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
-import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
-import RightOutlined from '@ant-design/icons-vue/RightOutlined';
-import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
-import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
 import { defaultConfigProvider } from '../config-provider';
-import { inject } from 'vue';
 import classNames from '../_util/classNames';
 
 export const PaginationProps = () => ({
@@ -39,10 +40,10 @@ export const PaginationProps = () => ({
 
 export const PaginationConfig = () => ({
   ...PaginationProps(),
-  position: PropTypes.oneOf(['top', 'bottom', 'both']),
+  position: PropTypes.oneOf(tuple('top', 'bottom', 'both')),
 });
 
-export default {
+export default defineComponent({
   name: 'APagination',
   inheritAttrs: false,
   props: {
@@ -56,7 +57,7 @@ export default {
   },
 
   methods: {
-    getIconsProps(prefixCls) {
+    getIconsProps(prefixCls: string) {
       const prevIcon = (
         <a class={`${prefixCls}-item-link`}>
           <LeftOutlined />
@@ -128,7 +129,7 @@ export default {
         componentName="Pagination"
         defaultLocale={enUS}
         children={this.renderPagination}
-      ></LocaleReceiver>
+      />
     );
   },
-};
+});

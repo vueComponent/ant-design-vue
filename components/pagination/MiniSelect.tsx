@@ -1,7 +1,8 @@
+import { defineComponent } from 'vue';
 import VcSelect, { SelectProps } from '../select';
 import { getOptionProps, getSlot } from '../_util/props-util';
 
-export default {
+export default defineComponent({
   inheritAttrs: false,
   props: {
     ...SelectProps(),
@@ -16,4 +17,4 @@ export default {
     };
     return <VcSelect {...selelctProps}>{getSlot(this)}</VcSelect>;
   },
-};
+});

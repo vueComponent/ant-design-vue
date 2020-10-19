@@ -1,3 +1,9 @@
+import { defineComponent, inject } from 'vue';
+import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
+import RightOutlined from '@ant-design/icons-vue/RightOutlined';
+import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
+import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
+import { tuple } from '../_util/type';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import VcSelect from '../select';
 import MiniSelect from './MiniSelect';
@@ -5,14 +11,8 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getOptionProps } from '../_util/props-util';
 import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
-import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
-import RightOutlined from '@ant-design/icons-vue/RightOutlined';
-import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
-import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
 import { defaultConfigProvider } from '../config-provider';
-import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
-import { tuple } from '../_util/type';
 
 export const PaginationProps = () => ({
   total: PropTypes.number,
@@ -129,7 +129,7 @@ export default defineComponent({
         componentName="Pagination"
         defaultLocale={enUS}
         children={this.renderPagination}
-      ></LocaleReceiver>
+      />
     );
   },
 });

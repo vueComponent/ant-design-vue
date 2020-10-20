@@ -11,6 +11,8 @@ export interface CSPConfig {
   nonce?: string;
 }
 
+export { RenderEmptyHandler };
+
 export interface ConfigConsumerProps {
   getTargetContainer?: () => HTMLElement;
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;

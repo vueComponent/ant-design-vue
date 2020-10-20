@@ -1,35 +1,36 @@
-import { inject } from 'vue';
+import { App, defineComponent, ExtractPropTypes, inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
+import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import VcSteps from '../vc-steps';
 import { defaultConfigProvider } from '../config-provider';
+import { tuple } from '../_util/type';
 
-const getStepsProps = (defaultProps = {}) => {
-  const props = {
-    prefixCls: PropTypes.string,
-    iconPrefix: PropTypes.string,
-    current: PropTypes.number,
-    initial: PropTypes.number,
-    labelPlacement: PropTypes.oneOf(['horizontal', 'vertical']).def('horizontal'),
-    status: PropTypes.oneOf(['wait', 'process', 'finish', 'error']),
-    size: PropTypes.oneOf(['default', 'small']),
-    direction: PropTypes.oneOf(['horizontal', 'vertical']),
-    progressDot: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
-    type: PropTypes.oneOf(['default', 'navigation']),
-    onChange: PropTypes.func,
-    'onUpdate:current': PropTypes.func,
-  };
-  return initDefaultProps(props, defaultProps);
+const stepsProps = {
+  prefixCls: PropTypes.string,
+  iconPrefix: PropTypes.string,
+  current: PropTypes.number,
+  initial: PropTypes.number,
+  labelPlacement: PropTypes.oneOf(tuple('horizontal', 'vertical')).def('horizontal'),
+  status: PropTypes.oneOf(tuple('wait', 'process', 'finish', 'error')),
+  size: PropTypes.oneOf(tuple('default', 'small')),
+  direction: PropTypes.oneOf(tuple('horizontal', 'vertical')),
+  progressDot: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
+  type: PropTypes.oneOf(tuple('default', 'navigation')),
+  onChange: PropTypes.func,
 };
 
-const Steps = {
+export type StepsProps = Partial<ExtractPropTypes<typeof stepsProps>>;
+
+const Steps = defineComponent({
   name: 'ASteps',
   inheritAttrs: false,
-  props: getStepsProps({
+  props: initDefaultProps(stepsProps, {
     current: 0,
   }),
+  emits: ['update:current', 'change'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -43,7 +44,7 @@ const Steps = {
     },
   },
   render() {
-    const props = { ...getOptionProps(this), ...this.$attrs };
+    const props: StepsProps = { ...getOptionProps(this), ...this.$attrs };
     const { prefixCls: customizePrefixCls, iconPrefix: customizeIconPrefixCls } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('steps', customizePrefixCls);
@@ -65,10 +66,10 @@ const Steps = {
     };
     return <VcSteps {...stepsProps}>{getSlot(this)}</VcSteps>;
   },
-};
+});
 
 /* istanbul ignore next */
-Steps.install = function(app) {
+Steps.install = function(app: App) {
   app.component(Steps.name, Steps);
   app.component(Steps.Step.name, Steps.Step);
   return app;

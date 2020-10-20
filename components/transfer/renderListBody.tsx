@@ -3,7 +3,7 @@ import raf from '../_util/raf';
 import ListItem from './ListItem';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { findDOMNode } from '../_util/props-util';
-import getTransitionGroupProps from 'components/_util/getTransitionGroupProps';
+import getTransitionGroupProps from '../_util/getTransitionGroupProps';
 const ListBody = defineComponent({
   name: 'ListBody',
   inheritAttrs: false,

@@ -1,11 +1,10 @@
-import { inject, TransitionGroup } from 'vue';
+import { inject } from 'vue';
 import PropTypes from '../../../../_util/vue-types';
 import { createRef } from '../../util';
 import generateSelector, { selectorPropTypes } from '../../Base/BaseSelector';
 import SearchInput from '../../SearchInput';
 import Selection from './Selection';
 import { getComponent, getSlot } from '../../../../_util/props-util';
-import getTransitionProps from '../../../../_util/getTransitionProps';
 import BaseMixin from '../../../../_util/BaseMixin';
 const TREE_SELECT_EMPTY_VALUE_KEY = 'RC_TREE_SELECT_EMPTY_VALUE_KEY';
 
@@ -73,7 +72,7 @@ const MultipleSelector = {
             display: hidden ? 'none' : 'block',
           }}
           onClick={this.onPlaceholderClick}
-          class={`${prefixCls}-search__field__placeholder`}
+          class={`${prefixCls}-selection-placeholder`}
         >
           {currentPlaceholder}
         </span>
@@ -85,8 +84,6 @@ const MultipleSelector = {
     renderSelection() {
       const {
         selectorValueList,
-        choiceTransitionName,
-        prefixCls,
         labelInValue,
         maxTagCount,
       } = this.$props;
@@ -144,7 +141,6 @@ const MultipleSelector = {
       }
 
       selectedValueNodes.push(
-        <li class={`${prefixCls}-search ${prefixCls}-search--inline`} key="__input">
           <SearchInput
             {...{
               ...this.$props,
@@ -154,26 +150,10 @@ const MultipleSelector = {
             ref={this.inputRef}
           >
             {children}
-          </SearchInput>
-        </li>,
+          </SearchInput>,
       );
-      const className = `${prefixCls}-selection__rendered`;
-      if (choiceTransitionName) {
-        const transitionProps = getTransitionProps(choiceTransitionName, {
-          tag: 'ul',
-          onAfterLeave: this.onChoiceAnimationLeave,
-        });
-        return (
-          <TransitionGroup class={className} {...transitionProps}>
-            {selectedValueNodes}
-          </TransitionGroup>
-        );
-      }
-      return (
-        <ul class={className} role="menubar">
-          {selectedValueNodes}
-        </ul>
-      );
+
+      return selectedValueNodes;
     },
   },
 

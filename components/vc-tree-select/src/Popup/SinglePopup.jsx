@@ -40,7 +40,7 @@ const SinglePopup = {
             display: searchValue ? 'none' : 'block',
           }}
           onClick={this.onPlaceholderClick}
-          class={`${prefixCls}-search__field__placeholder`}
+          class={`${prefixCls}-selection-placeholder`}
         >
           {searchPlaceholder}
         </span>

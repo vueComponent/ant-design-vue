@@ -1096,7 +1096,7 @@ const Select = defineComponent({
     const $popup = <Popup {...popupProps} __propsSymbol__={[]} />;
 
     const Selector = isMultiple ? MultipleSelector : SingleSelector;
-    const $selector = <Selector {...passProps} ref={this.selectorRef} />;
+    const $selector = <Selector {...passProps} isMultiple={isMultiple} ref={this.selectorRef} />;
     const selectTriggerProps = {
       ...passProps,
       popupElement: $popup,

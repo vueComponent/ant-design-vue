@@ -1,17 +1,13 @@
 import classNames from '../_util/classNames';
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import {
-  isValidElement,
-  initDefaultProps,
-  splitAttrs,
-  findDOMNode,
-  filterEmpty,
-} from '../_util/props-util';
+import { isValidElement, splitAttrs, findDOMNode, filterEmpty } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import BaseMixin from '../_util/BaseMixin';
 import Checkbox from '../checkbox';
 import Search from './search';
 import defaultRenderList from './renderListBody';
 import triggerEvent from '../_util/triggerEvent';
+import { defineComponent } from 'vue';
 
 const defaultRender = () => null;
 
@@ -71,7 +67,7 @@ function renderListNode(renderList, props) {
   };
 }
 
-export default {
+export default defineComponent({
   name: 'TransferList',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -81,9 +77,14 @@ export default {
     showSearch: false,
     lazy: {},
   }),
+  setup() {
+    return {
+      timer: null,
+      triggerScrollTimer: null,
+      scrollEvent: null,
+    };
+  },
   data() {
-    this.timer = null;
-    this.triggerScrollTimer = null;
     return {
       filterValue: '',
     };
@@ -345,4 +346,4 @@ export default {
       </div>
     );
   },
-};
+});

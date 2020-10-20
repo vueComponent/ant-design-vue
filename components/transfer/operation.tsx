@@ -1,10 +1,23 @@
+import { CSSProperties, FunctionalComponent } from 'vue';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import Button from '../button';
 
 function noop() {}
 
-const Operation = (_, { attrs }) => {
+export interface TransferOperationProps {
+  class?: any;
+  leftArrowText?: string;
+  rightArrowText?: string;
+  moveToLeft?: (e: MouseEvent) => void;
+  moveToRight?: (e: MouseEvent) => void;
+  leftActive?: boolean;
+  rightActive?: boolean;
+  style?: CSSProperties | string;
+  disabled?: boolean;
+}
+
+const Operation: FunctionalComponent<TransferOperationProps> = props => {
   const {
     disabled,
     moveToLeft = noop,
@@ -15,7 +28,7 @@ const Operation = (_, { attrs }) => {
     rightActive,
     class: className,
     style,
-  } = attrs;
+  } = props;
 
   return (
     <div class={className} style={style}>
@@ -40,6 +53,7 @@ const Operation = (_, { attrs }) => {
     </div>
   );
 };
+
 Operation.inheritAttrs = false;
 
 export default Operation;

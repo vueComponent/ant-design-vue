@@ -2,10 +2,11 @@ import PropTypes, { withUndefined } from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import Lazyload from '../vc-lazy-load';
 import Checkbox from '../checkbox';
+import { defineComponent } from 'vue';
 
 function noop() {}
 
-export default {
+export default defineComponent({
   name: 'ListItem',
   inheritAttrs: false,
   props: {
@@ -54,7 +55,7 @@ export default {
         offset: 500,
         throttle: 0,
         debounce: false,
-        ...lazy,
+        ...(lazy as any),
       };
       children = <Lazyload {...lazyProps}>{listItem}</Lazyload>;
     } else {
@@ -62,4 +63,4 @@ export default {
     }
     return children;
   },
-};
+});

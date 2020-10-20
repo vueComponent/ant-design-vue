@@ -1,32 +1,36 @@
-import { inject } from 'vue';
+import { defineComponent, ExtractPropTypes, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import VcCheckbox from '../vc-checkbox';
 import classNames from '../_util/classNames';
 import { getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
+import { RadioChangeEvent } from './interface';
 
-export default {
+export const radioProps = {
+  prefixCls: PropTypes.string,
+  defaultChecked: PropTypes.looseBool,
+  checked: PropTypes.looseBool,
+  disabled: PropTypes.looseBool,
+  isGroup: PropTypes.looseBool,
+  value: PropTypes.any,
+  name: PropTypes.string,
+  id: PropTypes.string,
+  autofocus: PropTypes.looseBool,
+  type: PropTypes.string.def('radio'),
+  onChange: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+};
+
+export type RadioProps = Partial<ExtractPropTypes<typeof radioProps>>;
+
+export default defineComponent({
   name: 'ARadio',
   model: {
     prop: 'checked',
   },
-  props: {
-    prefixCls: PropTypes.string,
-    defaultChecked: PropTypes.looseBool,
-    checked: PropTypes.looseBool,
-    disabled: PropTypes.looseBool,
-    isGroup: PropTypes.looseBool,
-    value: PropTypes.any,
-    name: String,
-    id: String,
-    autofocus: PropTypes.looseBool,
-    type: PropTypes.string.def('radio'),
-    onChange: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    'onUpdate:checked': PropTypes.func,
-    'onUpdate:value': PropTypes.func,
-  },
+  props: radioProps,
+  emits: ['update:checked', 'update:value', 'change', 'blur', 'focus'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -35,18 +39,18 @@ export default {
   },
   methods: {
     focus() {
-      this.$refs.vcCheckbox.focus();
+      (this.$refs.vcCheckbox as any).focus();
     },
     blur() {
-      this.$refs.vcCheckbox.blur();
+      (this.$refs.vcCheckbox as any).blur();
     },
-    handleChange(event) {
+    handleChange(event: RadioChangeEvent) {
       const targetChecked = event.target.checked;
       this.$emit('update:checked', targetChecked);
       this.$emit('update:value', targetChecked);
       this.$emit('change', event);
     },
-    onChange2(e) {
+    onChange2(e: RadioChangeEvent) {
       this.$emit('change', e);
       if (this.radioGroupContext && this.radioGroupContext.onRadioChange) {
         this.radioGroupContext.onRadioChange(e);
@@ -58,33 +62,33 @@ export default {
     const { $slots, radioGroupContext: radioGroup } = this;
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, ...restProps } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
-    const radioProps = {
+    const rProps: RadioProps = {
       prefixCls,
       ...restProps,
     };
 
     if (radioGroup) {
-      radioProps.name = radioGroup.name;
-      radioProps.onChange = this.onChange2;
-      radioProps.checked = props.value === radioGroup.stateValue;
-      radioProps.disabled = props.disabled || radioGroup.disabled;
+      rProps.name = radioGroup.name;
+      rProps.onChange = this.onChange2;
+      rProps.checked = props.value === radioGroup.stateValue;
+      rProps.disabled = props.disabled || radioGroup.disabled;
     } else {
-      radioProps.onChange = this.handleChange;
+      rProps.onChange = this.handleChange;
     }
     const wrapperClassString = classNames({
       [`${prefixCls}-wrapper`]: true,
-      [`${prefixCls}-wrapper-checked`]: radioProps.checked,
-      [`${prefixCls}-wrapper-disabled`]: radioProps.disabled,
+      [`${prefixCls}-wrapper-checked`]: rProps.checked,
+      [`${prefixCls}-wrapper-disabled`]: rProps.disabled,
     });
 
     return (
       <label class={wrapperClassString}>
-        <VcCheckbox {...radioProps} ref="vcCheckbox" />
+        <VcCheckbox {...rProps} ref="vcCheckbox" />
         {$slots.default && <span>{$slots.default()}</span>}
       </label>
     );
   },
-};
+});

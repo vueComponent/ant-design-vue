@@ -4,6 +4,8 @@ import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
 import { getOptionProps, filterEmpty, hasProp, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
+import { tuple } from '../_util/type';
+import { RadioChangeEvent } from './interface';
 
 export default defineComponent({
   name: 'ARadioGroup',
@@ -11,43 +13,39 @@ export default defineComponent({
     prefixCls: PropTypes.string,
     defaultValue: PropTypes.any,
     value: PropTypes.any,
-    size: {
-      default: 'default',
-      validator(value) {
-        return ['large', 'default', 'small'].includes(value);
-      },
-    },
-    options: {
-      default: () => [],
-      type: Array,
-    },
+    size: PropTypes.oneOf(tuple('large', 'default', 'small')).def('default'),
+    options: PropTypes.array,
     disabled: PropTypes.looseBool,
-    name: String,
+    name: PropTypes.string,
     buttonStyle: PropTypes.string.def('outline'),
     onChange: PropTypes.func,
-    'onUpdate:value': PropTypes.func,
   },
+  emits: ['update:value', 'change'],
   data() {
     const { value, defaultValue } = this;
-    this.updatingValue = false;
     return {
       stateValue: value === undefined ? defaultValue : value,
     };
   },
   setup() {
     return {
+      updatingValue: false,
       configProvider: inject('configProvider', defaultConfigProvider),
+      radioGroupContext: null,
     };
   },
-  computed: {
-    radioOptions() {
-      const { disabled } = this;
-      return this.options.map(option => {
-        return typeof option === 'string'
-          ? { label: option, value: option }
-          : { ...option, disabled: option.disabled === undefined ? disabled : option.disabled };
-      });
-    },
+  // computed: {
+  //   radioOptions() {
+  //     const { disabled } = this;
+  //     return this.options.map(option => {
+  //       return typeof option === 'string'
+  //         ? { label: option, value: option }
+  //         : { ...option, disabled: option.disabled === undefined ? disabled : option.disabled };
+  //     });
+  //   },
+  // },
+  created() {
+    this.radioGroupContext = provide('radioGroupContext', this);
   },
   watch: {
     value(val) {
@@ -55,11 +53,8 @@ export default defineComponent({
       this.stateValue = val;
     },
   },
-  created() {
-    this.radioGroupContext = provide('radioGroupContext', this);
-  },
   methods: {
-    onRadioChange(ev) {
+    onRadioChange(ev: RadioChangeEvent) {
       const lastValue = this.stateValue;
       const { value } = ev.target;
       if (!hasProp(this, 'value')) {
@@ -79,7 +74,7 @@ export default defineComponent({
   render() {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls, options, buttonStyle } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
     const groupPrefixCls = `${prefixCls}-group`;

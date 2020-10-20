@@ -13,7 +13,7 @@ import { noop, loopMenuItemRecursively, getMenuIdFromSubMenuEventKey } from './u
 import getTransitionProps from '../_util/getTransitionProps';
 
 let guid = 0;
-
+const injectExtraPropsKey = 'ANT_MENU_PROVIDER_PROPS_KEY';
 const popupPlacementMap = {
   horizontal: 'bottomLeft',
   vertical: 'rightTop',
@@ -337,6 +337,7 @@ const SubMenu = {
     },
     renderChildren(children) {
       const props = { ...this.$props, ...this.$attrs };
+
       const subPopupMenuProps = {
         mode: props.mode === 'horizontal' ? 'vertical' : props.mode,
         visible: props.isOpen,
@@ -541,7 +542,7 @@ const connected = connect(({ openKeys, activeKey, selectedKeys }, { eventKey, su
     active: activeKey[subMenuKey] === eventKey,
     selectedKeys,
   };
-})(SubMenu);
+}, injectExtraPropsKey)(SubMenu);
 
 connected.isSubMenu = true;
 

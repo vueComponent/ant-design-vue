@@ -8,7 +8,7 @@ function getDisplayName(WrappedComponent) {
 }
 
 const defaultMapStateToProps = () => ({});
-export default function connect(mapStateToProps) {
+export default function connect(mapStateToProps, injectExtraPropsKey) {
   const shouldSubscribe = !!mapStateToProps;
   const finalMapStateToProps = mapStateToProps || defaultMapStateToProps;
   return function wrapWithConnect(WrappedComponent) {
@@ -24,18 +24,25 @@ export default function connect(mapStateToProps) {
       setup() {
         return {
           storeContext: inject('storeContext', {}),
+          injectExtraProps: injectExtraPropsKey ? inject(injectExtraPropsKey, () => ({})) : {},
         };
       },
       data() {
         this.store = this.storeContext.store;
-        this.preProps = getOptionProps(this);
+        this.preProps = { ...getOptionProps(this), ...this.injectExtraProps };
         watchEffect(() => {
           if (mapStateToProps && mapStateToProps.length === 2) {
-            this.subscribed = finalMapStateToProps(this.store.getState(), this.$props);
+            this.subscribed = finalMapStateToProps(this.store.getState(), {
+              ...this.$props,
+              ...this.injectExtraProps,
+            });
           }
         });
         return {
-          subscribed: finalMapStateToProps(this.store.getState(), this.$props),
+          subscribed: finalMapStateToProps(this.store.getState(), {
+            ...this.$props,
+            ...this.injectExtraProps,
+          }),
         };
       },
       mounted() {
@@ -50,7 +57,7 @@ export default function connect(mapStateToProps) {
           if (!this.unsubscribe) {
             return;
           }
-          const props = getOptionProps(this);
+          const props = { ...getOptionProps(this), ...this.injectExtraProps };
           const nextSubscribed = finalMapStateToProps(this.store.getState(), props);
           if (
             !shallowEqual(this.preProps, props) ||
@@ -79,12 +86,12 @@ export default function connect(mapStateToProps) {
       },
       render() {
         const { $slots = {}, subscribed, store, $attrs } = this;
-        const props = getOptionProps(this);
+        const props = { ...getOptionProps(this), ...this.injectExtraProps };
         this.preProps = { ...props };
         const wrapProps = {
+          ...$attrs,
           ...props,
           ...subscribed,
-          ...$attrs,
           store,
           ref: 'wrappedInstance',
         };

@@ -6,7 +6,6 @@ import KeyCode from '../_util/KeyCode';
 import classNames from '../_util/classNames';
 import { getKeyFromChildrenIndex, loopMenuItem, noop, isMobileDevice, menuAllProps } from './util';
 import DOMWrap from './DOMWrap';
-import { cloneElement } from '../_util/vnode';
 import {
   initDefaultProps,
   getOptionProps,
@@ -14,7 +13,8 @@ import {
   splitAttrs,
   getPropsData,
 } from '../_util/props-util';
-
+import FunctionProvider from './FunctionProvider';
+const injectExtraPropsKey = 'ANT_MENU_PROVIDER_PROPS_KEY';
 function allDisabled(arr) {
   if (!arr.length) {
     return true;
@@ -323,7 +323,11 @@ const SubPopupMenu = {
       if (props.mode === 'inline' || isMobileDevice()) {
         newChildProps.triggerSubMenuAction = 'click';
       }
-      return cloneElement(child, newChildProps);
+      return (
+        <FunctionProvider injectExtraPropsKey={injectExtraPropsKey} {...newChildProps}>
+          {child}
+        </FunctionProvider>
+      );
     },
 
     renderMenuItem(c, i, subMenuKey) {
@@ -389,4 +393,4 @@ const SubPopupMenu = {
   },
 };
 
-export default connect()(SubPopupMenu);
+export default connect(undefined)(SubPopupMenu);

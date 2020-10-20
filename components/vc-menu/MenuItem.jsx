@@ -6,7 +6,7 @@ import { connect } from '../_util/store';
 import { noop, menuAllProps } from './util';
 import { getComponent, getSlot, findDOMNode } from '../_util/props-util';
 import { inject } from 'vue';
-
+const injectExtraPropsKey = 'ANT_MENU_PROVIDER_PROPS_KEY';
 const props = {
   attribute: PropTypes.object,
   rootPrefixCls: PropTypes.string,
@@ -199,10 +199,13 @@ const MenuItem = {
   },
 };
 
-const connected = connect(({ activeKey, selectedKeys }, { eventKey, subMenuKey }) => ({
-  active: activeKey[subMenuKey] === eventKey,
-  isSelected: selectedKeys.indexOf(eventKey) !== -1,
-}))(MenuItem);
+const connected = connect(
+  ({ activeKey, selectedKeys }, { eventKey, subMenuKey }) => ({
+    active: activeKey[subMenuKey] === eventKey,
+    isSelected: selectedKeys.indexOf(eventKey) !== -1,
+  }),
+  injectExtraPropsKey,
+)(MenuItem);
 
 export default connected;
 export { props as menuItemProps };

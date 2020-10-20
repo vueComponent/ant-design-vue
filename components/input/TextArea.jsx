@@ -6,11 +6,13 @@ import { hasProp, getOptionProps } from '../_util/props-util';
 import { ConfigConsumerProps } from '../config-provider';
 import { fixControlledValue, resolveOnChange } from './Input';
 import PropTypes from '../_util/vue-types';
+import classNames from '../_util/classNames';
 
 const TextAreaProps = {
   ...inputProps,
   autosize: PropTypes.oneOfType([Object, Boolean]),
   autoSize: PropTypes.oneOfType([Object, Boolean]),
+  showCount: PropTypes.bool,
 };
 
 export default {
@@ -100,9 +102,13 @@ export default {
 
     renderTextArea(prefixCls) {
       const props = getOptionProps(this);
+      const { style, class: customClass } = this.$attrs;
       const resizeProps = {
         ...props,
         ...this.$attrs,
+        style: style && !props.showCount,
+        class: customClass && !props.showCount,
+        showCount: null,
         prefixCls,
         onInput: this.handleChange,
         onChange: this.handleChange,
@@ -112,19 +118,44 @@ export default {
     },
   },
   render() {
-    const { stateValue, prefixCls: customizePrefixCls } = this;
+    const { stateValue, prefixCls: customizePrefixCls, maxlength, showCount } = this;
+    const { style, class: customClass } = this.$attrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
-
+    let value = fixControlledValue(stateValue);
+    // Max length value
+    const hasMaxlength = Number(maxlength) > 0;
+    value = hasMaxlength ? value.slice(0, maxlength) : value;
     const props = {
       ...getOptionProps(this),
       ...this.$attrs,
       prefixCls,
       inputType: 'text',
-      value: fixControlledValue(stateValue),
       element: this.renderTextArea(prefixCls),
       handleReset: this.handleReset,
     };
-    return <ClearableLabeledInput {...props} ref={this.saveClearableInput} />;
+
+    let textareaNode = (
+      <ClearableLabeledInput {...props} value={value} ref={this.saveClearableInput} />
+    );
+
+    if (showCount) {
+      const valueLength = [...value].length;
+      const dataCount = `${valueLength}${hasMaxlength ? ` / ${maxlength}` : ''}`;
+      textareaNode = (
+        <div
+          className={classNames(
+            `${prefixCls}-textarea`,
+            `${prefixCls}-textarea-show-count`,
+            customClass,
+          )}
+          style={style}
+          data-count={dataCount}
+        >
+          {textareaNode}
+        </div>
+      );
+    }
+    return textareaNode;
   },
 };

@@ -29,7 +29,7 @@ describe('Input', () => {
       props: { allowClear: true, defaultValue: '111', disabled: true },
       sync: false,
     });
-    expect(wrapper.findAll('.ant-input-clear-icon').length).toBe(0);
+    expect(wrapper.findAll('.ant-input-clear-icon-hidden').length).toBeTruthy();
   });
 });
 
@@ -64,6 +64,17 @@ describe('TextArea', () => {
 
   it('should support maxlength', async () => {
     const wrapper = mount(TextArea, { attrs: { maxlength: 10 }, sync: false });
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
+
+  it('should support showCount', async () => {
+    const wrapper = mount(TextArea, {
+      props: { showCount: true, defaultValue: '111', maxlength: 10 },
+      sync: false,
+    });
+    expect(wrapper.find('.ant-input-textarea-show-count')).toBeTruthy();
     await asyncExpect(() => {
       expect(wrapper.html()).toMatchSnapshot();
     });

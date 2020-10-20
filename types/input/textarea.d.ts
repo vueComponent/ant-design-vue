@@ -31,5 +31,6 @@ export declare class TextArea extends AntdComponent {
        * @type boolean
        */
       allowClear?: boolean;
+      showCount?: boolean;
     };
 }

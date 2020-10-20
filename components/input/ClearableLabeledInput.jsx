@@ -34,7 +34,6 @@ const ClearableLabeledInput = {
     addonAfter: PropTypes.any,
     readonly: PropTypes.bool,
     isFocused: PropTypes.bool,
-    style: PropTypes.object,
   },
   methods: {
     renderClearIcon(prefixCls) {
@@ -74,6 +73,7 @@ const ClearableLabeledInput = {
 
     renderLabeledIcon(prefixCls, element) {
       const props = this.$props;
+      const { style } = this.$attrs;
       const suffix = this.renderSuffix(prefixCls);
       if (!hasPrefixSuffix(this)) {
         return cloneElement(element, {
@@ -94,7 +94,7 @@ const ClearableLabeledInput = {
           props.suffix && props.allowClear && this.$props.value,
       });
       return (
-        <span class={affixWrapperCls} style={props.style}>
+        <span class={affixWrapperCls} style={style}>
           {prefix}
           {cloneElement(element, {
             style: null,

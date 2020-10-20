@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { defineComponent, inject, App } from 'vue';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PropTypes from '../_util/vue-types';
 import hasProp, { getOptionProps, getComponent } from '../_util/props-util';
@@ -6,15 +6,16 @@ import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
 import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
+import { tuple } from '../_util/type';
 
-const Switch = {
+const Switch = defineComponent({
   name: 'ASwitch',
   __ANT_SWITCH: true,
   inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
     // size=default and size=large are the same
-    size: PropTypes.oneOf(['small', 'default', 'large']),
+    size: PropTypes.oneOf(tuple('small', 'default', 'large')),
     disabled: PropTypes.looseBool,
     checkedChildren: PropTypes.any,
     unCheckedChildren: PropTypes.any,
@@ -26,6 +27,7 @@ const Switch = {
   },
   setup() {
     return {
+      refSwitchNode: undefined,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
@@ -52,12 +54,12 @@ const Switch = {
     const { prefixCls: customizePrefixCls, size, loading, disabled, ...restProps } = getOptionProps(
       this,
     );
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('switch', customizePrefixCls);
     const { $attrs } = this;
 
     const classes = {
-      [$attrs.class]: $attrs.class,
+      [$attrs.class as string]: $attrs.class,
       [`${prefixCls}-small`]: size === 'small',
       [`${prefixCls}-loading`]: loading,
     };
@@ -73,13 +75,16 @@ const Switch = {
       class: classes,
       ref: this.saveRef,
     };
-    const comp = <VcSwitch {...switchProps} />;
-    return <Wave insertExtraNode>{comp}</Wave>;
+    return (
+      <Wave insertExtraNode>
+        <VcSwitch {...switchProps} />
+      </Wave>
+    );
   },
-};
+});
 
 /* istanbul ignore next */
-Switch.install = function(app) {
+Switch.install = function(app: App) {
   app.component(Switch.name, Switch);
   return app;
 };

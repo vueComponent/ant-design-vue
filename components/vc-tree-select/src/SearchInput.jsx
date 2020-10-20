@@ -4,7 +4,7 @@
  * - multiple: in the selector
  * Move the code as a SearchInput for easy management.
  */
-import { inject, withDirectives } from 'vue';
+import { inject, withDirectives, ref, onMounted, computed, watch } from 'vue';
 import antInput from '../../_util/antInputDirective';
 import PropTypes from '../../_util/vue-types';
 import { createRef } from './util';
@@ -21,8 +21,22 @@ const SearchInput = {
     needAlign: PropTypes.looseBool,
     ariaId: PropTypes.string,
   },
-  setup() {
+  setup(props) {
+    const measureRef = ref();
+    const inputWidth = ref(0);
+    // We measure width and set to the input immediately
+    onMounted(() => {
+      watch(
+        computed(()=>props.searchValue),
+        () => {
+          inputWidth.value = measureRef.value.scrollWidth;
+        },
+        { flush: 'post' },
+      );
+    });
     return {
+      measureRef,
+      inputWidth,
       vcTreeSelect: inject('vcTreeSelect', {}),
     };
   },
@@ -38,7 +52,7 @@ const SearchInput = {
   },
   created() {
     this.inputRef = createRef();
-    this.mirrorInputRef = createRef();
+    // this.mirrorInputRef = createRef();
     this.prevProps = { ...this.$props };
   },
   mounted() {
@@ -55,15 +69,15 @@ const SearchInput = {
   },
 
   updated() {
-    const { open, searchValue, needAlign } = this.$props;
+    const { open } = this.$props;
     const { prevProps } = this;
     this.$nextTick(() => {
       if (open && prevProps.open !== open) {
         this.focus();
       }
-      if (needAlign && searchValue !== prevProps.searchValue) {
-        this.alignInputWidth();
-      }
+      // if (needAlign && searchValue !== prevProps.searchValue) {
+      //   this.alignInputWidth();
+      // }
       this.prevProps = { ...this.$props };
     });
   },
@@ -73,10 +87,10 @@ const SearchInput = {
      * ref: https://github.com/react-component/tree-select/issues/65
      *  clientWidth 0 when mounted in vue. why?
      */
-    alignInputWidth() {
-      this.inputRef.current.style.width = `${this.mirrorInputRef.current.clientWidth ||
-        this.mirrorInputRef.current.offsetWidth}px`;
-    },
+    // alignInputWidth() {
+    //   this.inputRef.current.style.width = `${this.mirrorInputRef.current.clientWidth ||
+    //     this.mirrorInputRef.current.offsetWidth}px`;
+    // },
 
     /**
      * Need additional timeout for focus cause parent dom is not ready when didMount trigger
@@ -116,31 +130,34 @@ const SearchInput = {
       vcTreeSelect: { onSearchInputKeyDown },
       handleInputChange,
       mirrorSearchValue,
+      inputWidth,
     } = this;
     return (
-      <span class={`${prefixCls}-search__field__wrap`}>
-        {withDirectives(
-          <input
-            type="text"
-            ref={this.inputRef}
-            onInput={handleInputChange}
-            onChange={handleInputChange}
-            onKeydown={onSearchInputKeyDown}
-            value={searchValue}
-            disabled={disabled}
-            class={`${prefixCls}-search__field`}
-            aria-label="filter select"
-            aria-autocomplete="list"
-            aria-controls={open ? ariaId : undefined}
-            aria-multiline="false"
-          />,
-          [[antInput]],
-        )}
-        <span ref={this.mirrorInputRef} class={`${prefixCls}-search__field__mirror`}>
-          {mirrorSearchValue}&nbsp;
+      <>
+        <span class={`${prefixCls}-selection-search`} style={{ width: inputWidth + 'px' }}>
+          {withDirectives(
+            <input
+              type="text"
+              ref={this.inputRef}
+              onInput={handleInputChange}
+              onChange={handleInputChange}
+              onKeydown={onSearchInputKeyDown}
+              value={searchValue}
+              disabled={disabled}
+              class={`${prefixCls}-selection-search-input`}
+              aria-label="filter select"
+              aria-autocomplete="list"
+              aria-controls={open ? ariaId : undefined}
+              aria-multiline="false"
+            />,
+            [[antInput]],
+          )}
+          <span ref="measureRef" class={`${prefixCls}-selection-search-mirror`} aria-hidden>
+            {mirrorSearchValue}&nbsp;
+          </span>
         </span>
         {renderPlaceholder && !mirrorSearchValue ? renderPlaceholder() : null}
-      </span>
+      </>
     );
   },
 };

@@ -30,10 +30,12 @@ export const selectorPropTypes = () => ({
   placeholder: PropTypes.any,
   disabled: PropTypes.looseBool,
   focused: PropTypes.looseBool,
+  isMultiple: PropTypes.looseBool,
+  showSearch: PropTypes.looseBool,
 });
 
 function noop() {}
-export default function(modeName) {
+export default function() {
   const BaseSelector = {
     name: 'BaseSelector',
     inheritAttrs: false,
@@ -101,7 +103,7 @@ export default function(modeName) {
         }
         const clearIcon = getComponent(this, 'clearIcon');
         return (
-          <span key="clear" class={`${prefixCls}-selection__clear`} onClick={onSelectorClear}>
+          <span key="clear" unselectable="on" aria-hidden="true" style="user-select: none;" class={`${prefixCls}-clear`} onClick={onSelectorClear}>
             {clearIcon}
           </span>
         );
@@ -114,7 +116,7 @@ export default function(modeName) {
         }
         const inputIcon = getComponent(this, 'inputIcon');
         return (
-          <span key="arrow" class={`${prefixCls}-arrow`} style={{ outline: 'none' }}>
+          <span key="arrow" class={`${prefixCls}-arrow`} style={{ outline: 'none', userSelect: 'none' }}>
             {inputIcon}
           </span>
         );
@@ -132,6 +134,9 @@ export default function(modeName) {
         renderSelection,
         renderPlaceholder,
         tabindex,
+        isMultiple,
+        showArrow,
+        showSearch,
       } = this.$props;
       const { class: className, style, onClick = noop } = this.$attrs;
       const {
@@ -142,18 +147,21 @@ export default function(modeName) {
       if (disabled) {
         myTabIndex = null;
       }
-
+      const mergedClassName = classNames(prefixCls, className, {
+        [`${prefixCls}-focused`]: open || focused,
+        [`${prefixCls}-multiple`]: isMultiple,
+        [`${prefixCls}-single`]: !isMultiple,
+        [`${prefixCls}-allow-clear`]: allowClear,
+        [`${prefixCls}-show-arrow`]: showArrow,
+        [`${prefixCls}-disabled`]: disabled,
+        [`${prefixCls}-open`]: open,
+        [`${prefixCls}-show-search`]: showSearch,
+      });
       return (
-        <span
+        <div
           style={style}
           onClick={onClick}
-          class={classNames(className, prefixCls, {
-            [`${prefixCls}-open`]: open,
-            [`${prefixCls}-focused`]: open || focused,
-            [`${prefixCls}-disabled`]: disabled,
-            [`${prefixCls}-enabled`]: !disabled,
-            [`${prefixCls}-allow-clear`]: allowClear,
-          })}
+          class={mergedClassName}
           ref={this.domRef}
           role="combobox"
           aria-expanded={open}
@@ -166,17 +174,13 @@ export default function(modeName) {
           onBlur={this.onBlur}
           onKeydown={onSelectorKeyDown}
         >
-          <span
-            key="selection"
-            class={classNames(`${prefixCls}-selection`, `${prefixCls}-selection--${modeName}`)}
-          >
+          <span class={`${prefixCls}-selector`}>
             {renderSelection()}
-            {this.renderClear()}
-            {this.renderArrow()}
-
             {renderPlaceholder && renderPlaceholder()}
           </span>
-        </span>
+          {this.renderArrow()}
+          {this.renderClear()}
+        </div>
       );
     },
   };

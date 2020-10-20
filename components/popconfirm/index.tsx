@@ -1,5 +1,5 @@
 import omit from 'omit.js';
-import { inject } from 'vue';
+import { App, defineComponent, inject } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
@@ -14,7 +14,8 @@ import { defaultConfigProvider } from '../config-provider';
 
 const tooltipProps = abstractTooltipProps();
 const btnProps = buttonTypes();
-const Popconfirm = {
+
+const Popconfirm = defineComponent({
   name: 'APopconfirm',
   props: {
     ...tooltipProps,
@@ -33,9 +34,9 @@ const Popconfirm = {
     onConfirm: PropTypes.func,
     onCancel: PropTypes.func,
     onVisibleChange: PropTypes.func,
-    'onUpdate:visible': PropTypes.func,
   },
   mixins: [BaseMixin],
+  emits: ['update:visible', 'confirm', 'cancel', 'visibleChange'],
   watch: {
     visible(val) {
       this.sVisible = val;
@@ -47,7 +48,7 @@ const Popconfirm = {
     };
   },
   data() {
-    const props = getOptionProps(this);
+    const props = getOptionProps(this) as any;
     const state = { sVisible: false };
     if ('visible' in props) {
       state.sVisible = props.visible;
@@ -76,7 +77,7 @@ const Popconfirm = {
       this.setVisible(sVisible);
     },
 
-    setVisible(sVisible, e) {
+    setVisible(sVisible: boolean, e?: Event) {
       if (!hasProp(this, 'visible')) {
         this.setState({ sVisible });
       }
@@ -84,9 +85,9 @@ const Popconfirm = {
       this.$emit('visibleChange', sVisible, e);
     },
     getPopupDomNode() {
-      return this.$refs.tooltip.getPopupDomNode();
+      return (this.$refs.tooltip as any).getPopupDomNode();
     },
-    renderOverlay(prefixCls, popconfirmLocale) {
+    renderOverlay(prefixCls: string, popconfirmLocale) {
       const { okType, okButtonProps, cancelButtonProps } = this;
       const icon = getComponent(this, 'icon') || <ExclamationCircleFilled />;
       const cancelBtnProps = mergeProps({
@@ -121,7 +122,7 @@ const Popconfirm = {
   render() {
     const props = getOptionProps(this);
     const { prefixCls: customizePrefixCls } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('popover', customizePrefixCls);
 
     const otherProps = omit(props, [
@@ -148,10 +149,10 @@ const Popconfirm = {
     };
     return <Tooltip {...tooltipProps}>{this.$slots?.default()}</Tooltip>;
   },
-};
+});
 
 /* istanbul ignore next */
-Popconfirm.install = function(app) {
+Popconfirm.install = function(app: App) {
   app.component(Popconfirm.name, Popconfirm);
   return app;
 };

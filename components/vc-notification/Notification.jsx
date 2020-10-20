@@ -3,8 +3,8 @@ import PropTypes from '../_util/vue-types';
 import { getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import createChainedFunction from '../_util/createChainedFunction';
-import getTransitionProps from '../_util/getTransitionProps';
 import Notice from './Notice';
+import getTransitionGroupProps from '../_util/getTransitionGroupProps';
 
 function noop() {}
 
@@ -75,7 +75,7 @@ const Notification = defineComponent({
 
   render() {
     const { prefixCls, notices, remove, getTransitionName, $attrs } = this;
-    const transitionProps = getTransitionProps(getTransitionName());
+    const transitionProps = getTransitionGroupProps(getTransitionName());
     const noticeNodes = notices.map((notice, index) => {
       const update = Boolean(index === notices.length - 1 && notice.updateKey);
       const key = notice.updateKey ? notice.updateKey : notice.key;

@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { App, defineComponent, inject } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
@@ -6,7 +6,7 @@ import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 
 const props = abstractTooltipProps();
-const Popover = {
+const Popover = defineComponent({
   name: 'APopover',
   props: {
     ...props,
@@ -22,13 +22,13 @@ const Popover = {
   },
   methods: {
     getPopupDomNode() {
-      return this.$refs.tooltip.getPopupDomNode();
+      return (this.$refs.tooltip as any).getPopupDomNode();
     },
   },
 
   render() {
     const { title, prefixCls: customizePrefixCls, $slots } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('popover', customizePrefixCls);
 
     const props = getOptionProps(this);
@@ -49,10 +49,10 @@ const Popover = {
     };
     return <Tooltip {...tooltipProps}>{getSlot(this)}</Tooltip>;
   },
-};
+});
 
 /* istanbul ignore next */
-Popover.install = function(app) {
+Popover.install = function(app: App) {
   app.component(Popover.name, Popover);
   return app;
 };

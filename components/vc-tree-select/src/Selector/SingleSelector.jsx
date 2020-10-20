@@ -21,24 +21,20 @@ const SingleSelector = {
     renderSelection() {
       const { selectorValueList, placeholder, prefixCls } = this.$props;
 
-      let innerNode;
-
       if (selectorValueList.length) {
         const { label, value } = selectorValueList[0];
-        innerNode = (
-          <span key="value" title={toTitle(label)} class={`${prefixCls}-selection-selected-value`}>
+        return (
+          <span key="value" title={toTitle(label)} class={`${prefixCls}-selection-item`}>
             {label || value}
           </span>
         );
       } else {
-        innerNode = (
-          <span key="placeholder" class={`${prefixCls}-selection__placeholder`}>
+        return (
+          <span key="placeholder" class={`${prefixCls}-selection-placeholder`}>
             {placeholder}
           </span>
         );
       }
-
-      return <span class={`${prefixCls}-selection__rendered`}>{innerNode}</span>;
     },
   },
 

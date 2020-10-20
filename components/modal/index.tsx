@@ -1,14 +1,15 @@
-import Modal, { destroyFns } from './Modal';
+import { App } from 'vue';
+import Modal, { destroyFns, ModalFuncProps } from './Modal';
 import modalConfirm from './confirm';
 import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
 
-// export { ActionButtonProps } from './ActionButton'
-// export { ModalProps, ModalFuncProps } from './Modal'
+export { IActionButtonProps as ActionButtonProps } from './ActionButton';
+export { ModalProps, ModalFuncProps } from './Modal';
 
-const info = function(props) {
+const info = function(props: ModalFuncProps) {
   const config = {
     type: 'info',
     icon: <InfoCircleOutlined />,
@@ -18,7 +19,7 @@ const info = function(props) {
   return modalConfirm(config);
 };
 
-const success = function(props) {
+const success = function(props: ModalFuncProps) {
   const config = {
     type: 'success',
     icon: <CheckCircleOutlined />,
@@ -28,7 +29,7 @@ const success = function(props) {
   return modalConfirm(config);
 };
 
-const error = function(props) {
+const error = function(props: ModalFuncProps) {
   const config = {
     type: 'error',
     icon: <CloseCircleOutlined />,
@@ -38,7 +39,7 @@ const error = function(props) {
   return modalConfirm(config);
 };
 
-const warning = function(props) {
+const warning = function(props: ModalFuncProps) {
   const config = {
     type: 'warning',
     icon: <ExclamationCircleOutlined />,
@@ -49,7 +50,7 @@ const warning = function(props) {
 };
 const warn = warning;
 
-const confirm = function confirmFn(props) {
+const confirm = function confirmFn(props: ModalFuncProps) {
   const config = {
     type: 'confirm',
     okCancel: true,
@@ -74,7 +75,7 @@ Modal.destroyAll = function destroyAllFn() {
 };
 
 /* istanbul ignore next */
-Modal.install = function(app) {
+Modal.install = function(app: App) {
   app.component(Modal.name, Modal);
   return app;
 };

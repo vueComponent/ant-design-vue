@@ -1,5 +1,5 @@
 import omit from 'omit.js';
-import { inject, provide } from 'vue';
+import { App, defineComponent, inject, provide } from 'vue';
 import VcTimePicker from '../vc-time-picker';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import BaseMixin from '../_util/BaseMixin';
@@ -8,13 +8,8 @@ import warning from '../_util/warning';
 import ClockCircleOutlined from '@ant-design/icons-vue/ClockCircleOutlined';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import enUS from './locale/en_US';
-import {
-  initDefaultProps,
-  hasProp,
-  getOptionProps,
-  getComponent,
-  isValidElement,
-} from '../_util/props-util';
+import { hasProp, getOptionProps, getComponent, isValidElement } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { cloneElement } from '../_util/vnode';
 import { defaultConfigProvider } from '../config-provider';
 import {
@@ -23,8 +18,9 @@ import {
   momentToString,
   TimeOrTimesType,
 } from '../_util/moment-util';
+import { tuple } from '../_util/type';
 
-export function generateShowHourMinuteSecond(format) {
+export function generateShowHourMinuteSecond(format: string) {
   // Ref: http://momentjs.com/docs/#/parsing/string-format/
   return {
     showHour: format.indexOf('H') > -1 || format.indexOf('h') > -1 || format.indexOf('k') > -1,
@@ -34,7 +30,7 @@ export function generateShowHourMinuteSecond(format) {
 }
 
 export const TimePickerProps = () => ({
-  size: PropTypes.oneOf(['large', 'default', 'small']),
+  size: PropTypes.oneOf(tuple('large', 'default', 'small')),
   value: TimeOrTimesType,
   defaultValue: TimeOrTimesType,
   open: PropTypes.looseBool,
@@ -58,7 +54,7 @@ export const TimePickerProps = () => ({
   clearText: PropTypes.string,
   defaultOpenValue: PropTypes.object,
   popupClassName: PropTypes.string,
-  popupStyle: PropTypes.object,
+  popupStyle: PropTypes.style,
   suffixIcon: PropTypes.any,
   align: PropTypes.object,
   placement: PropTypes.any,
@@ -76,14 +72,13 @@ export const TimePickerProps = () => ({
   onBlur: PropTypes.func,
   onKeydown: PropTypes.func,
   onOpenChange: PropTypes.func,
-  'onUpdate:value': PropTypes.func,
-  'onUpdate:open': PropTypes.func,
 });
 
-const TimePicker = {
+const TimePicker = defineComponent({
   name: 'ATimePicker',
   inheritAttrs: false,
   mixins: [BaseMixin],
+  emits: ['update:value', 'update:open', 'change', 'openChange', 'focus', 'blur', 'keydown'],
   props: initDefaultProps(TimePickerProps(), {
     align: {
       offset: [0, -2],
@@ -103,6 +98,8 @@ const TimePicker = {
   },
   setup() {
     return {
+      popupRef: null,
+      timePickerRef: null,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
@@ -174,14 +171,14 @@ const TimePicker = {
     },
 
     focus() {
-      this.timePickerRef.focus();
+      (this.timePickerRef as any).focus();
     },
 
     blur() {
-      this.timePickerRef.blur();
+      (this.timePickerRef as any).blur();
     },
 
-    renderInputIcon(prefixCls) {
+    renderInputIcon(prefixCls: string) {
       let suffixIcon = getComponent(this, 'suffixIcon');
       suffixIcon = Array.isArray(suffixIcon) ? suffixIcon[0] : suffixIcon;
       const clockIcon = (suffixIcon &&
@@ -193,7 +190,7 @@ const TimePicker = {
       return <span class={`${prefixCls}-icon`}>{clockIcon}</span>;
     },
 
-    renderClearIcon(prefixCls) {
+    renderClearIcon(prefixCls: string) {
       const clearIcon = getComponent(this, 'clearIcon');
       const clearIconPrefixCls = `${prefixCls}-clear`;
 
@@ -216,7 +213,7 @@ const TimePicker = {
 
       const format = this.getDefaultFormat();
       const pickerClassName = {
-        [className]: className,
+        [className as string]: className,
         [`${prefixCls}-${size}`]: !!size,
       };
       const tempAddon = getComponent(this, 'addon', {}, false);
@@ -262,10 +259,10 @@ const TimePicker = {
       />
     );
   },
-};
+});
 
 /* istanbul ignore next */
-TimePicker.install = function(app) {
+TimePicker.install = function(app: App) {
   app.component(TimePicker.name, TimePicker);
   return app;
 };

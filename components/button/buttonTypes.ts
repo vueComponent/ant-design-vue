@@ -1,3 +1,4 @@
+import { ExtractPropTypes } from 'vue';
 import { tuple } from '../_util/type';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 
@@ -10,7 +11,7 @@ export type ButtonSize = typeof ButtonSizes[number];
 const ButtonHTMLTypes = tuple('submit', 'button', 'reset');
 export type ButtonHTMLType = typeof ButtonHTMLTypes[number];
 
-export default () => ({
+const buttonProps = () => ({
   prefixCls: PropTypes.string,
   type: PropTypes.oneOf(ButtonTypes),
   htmlType: PropTypes.oneOf(ButtonHTMLTypes).def('button'),
@@ -26,3 +27,7 @@ export default () => ({
   title: PropTypes.string,
   onClick: PropTypes.func,
 });
+
+export type ButtonProps = ExtractPropTypes<ExtractPropTypes<ReturnType<typeof buttonProps>>>;
+
+export default buttonProps;

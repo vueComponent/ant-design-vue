@@ -1,8 +1,10 @@
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getOptionProps } from '../_util/props-util';
+import { getOptionProps } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 import Input from '../input';
+import { defineComponent } from 'vue';
 
 export const TransferSearchProps = {
   prefixCls: PropTypes.string,
@@ -13,7 +15,7 @@ export const TransferSearchProps = {
   onChange: PropTypes.func,
 };
 
-export default {
+export default defineComponent({
   name: 'Search',
   inheritAttrs: false,
   props: initDefaultProps(TransferSearchProps, {
@@ -45,7 +47,7 @@ export default {
       );
 
     return (
-      <div>
+      <>
         <Input
           placeholder={placeholder}
           class={prefixCls}
@@ -54,7 +56,7 @@ export default {
           disabled={disabled}
         />
         {icon}
-      </div>
+      </>
     );
   },
-};
+});

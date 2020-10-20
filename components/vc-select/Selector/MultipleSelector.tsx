@@ -158,11 +158,9 @@ const SelectSelector = defineComponent<SelectorProps>({
               : maxTagPlaceholder,
         });
       }
-      const transitionProps = choiceTransitionName
-        ? getTransitionGroupProps(choiceTransitionName, {
-            appear: motionAppear,
-          })
-        : { css: false };
+      const transitionProps = getTransitionGroupProps(choiceTransitionName, {
+        appear: motionAppear,
+      })
       selectionNode.value = (
         <TransitionGroup {...transitionProps}>
           {...displayValues.map(

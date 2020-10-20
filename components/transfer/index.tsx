@@ -1,15 +1,16 @@
-import { inject } from 'vue';
+import { App, defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { hasProp, initDefaultProps, getOptionProps, getComponent } from '../_util/props-util';
+import { hasProp, getOptionProps, getComponent } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import BaseMixin from '../_util/BaseMixin';
 import classNames from '../_util/classNames';
 import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
-import { defaultConfigProvider } from '../config-provider';
+import { defaultConfigProvider, RenderEmptyHandler } from '../config-provider';
 
-export const TransferDirection = 'left' | 'right';
+export type TransferDirection = 'left' | 'right';
 
 export const TransferItem = {
   key: PropTypes.string.isRequired,
@@ -45,14 +46,15 @@ export const TransferProps = {
   onScroll: PropTypes.func,
 };
 
-export const TransferLocale = {
-  titles: PropTypes.arrayOf(PropTypes.string),
-  notFoundContent: PropTypes.string,
-  itemUnit: PropTypes.string,
-  itemsUnit: PropTypes.string,
-};
+export interface TransferLocale {
+  titles: string[];
+  notFoundContent: string;
+  searchPlaceholder: string;
+  itemUnit: string;
+  itemsUnit: string;
+}
 
-const Transfer = {
+const Transfer = defineComponent({
   name: 'ATransfer',
   inheritAttrs: false,
   mixins: [BaseMixin],
@@ -64,6 +66,9 @@ const Transfer = {
   }),
   setup() {
     return {
+      selectedKeys: [],
+      targetKeys: [],
+      separatedDataSource: null,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
@@ -114,16 +119,16 @@ const Transfer = {
       return direction === 'left' ? 'sourceSelectedKeys' : 'targetSelectedKeys';
     },
 
-    getTitles(transferLocale) {
+    getTitles(transferLocale: TransferLocale) {
       if (this.titles) {
         return this.titles;
       }
       return transferLocale.titles || ['', ''];
     },
 
-    getLocale(transferLocale, renderEmpty) {
+    getLocale(transferLocale: TransferLocale, renderEmpty: RenderEmptyHandler) {
       // Keep old locale props still working.
-      const oldLocale = {
+      const oldLocale: { notFoundContent?: any; searchPlaceholder?: string } = {
         notFoundContent: renderEmpty('Transfer'),
       };
       const notFoundContent = getComponent(this, 'notFoundContent');
@@ -161,7 +166,7 @@ const Transfer = {
       }
     },
 
-    moveTo(direction) {
+    moveTo(direction: TransferDirection) {
       const { targetKeys = [], dataSource = [] } = this.$props;
       const { sourceSelectedKeys, targetSelectedKeys } = this;
       const moveKeys = direction === 'right' ? sourceSelectedKeys : targetSelectedKeys;
@@ -191,7 +196,7 @@ const Transfer = {
       this.moveTo('right');
     },
 
-    onItemSelectAll(direction, selectedKeys, checkAll) {
+    onItemSelectAll(direction: TransferDirection, selectedKeys: string[], checkAll: boolean) {
       const originalSelectedKeys = this.$data[this.getSelectedKeysName(direction)] || [];
 
       let mergedCheckedKeys = [];
@@ -319,7 +324,7 @@ const Transfer = {
       this.handleScroll('right', e);
     },
 
-    handleSelectChange(direction, holder) {
+    handleSelectChange(direction: TransferDirection, holder: string[]) {
       const { sourceSelectedKeys, targetSelectedKeys } = this;
 
       if (direction === 'left') {
@@ -361,7 +366,7 @@ const Transfer = {
       };
     },
 
-    renderTransfer(transferLocale) {
+    renderTransfer(transferLocale: TransferLocale) {
       const props = getOptionProps(this);
       const {
         prefixCls: customizePrefixCls,
@@ -478,10 +483,10 @@ const Transfer = {
       />
     );
   },
-};
+});
 
 /* istanbul ignore next */
-Transfer.install = function(app) {
+Transfer.install = function(app: App) {
   app.component(Transfer.name, Transfer);
   return app;
 };

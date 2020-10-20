@@ -32,20 +32,20 @@ const Selection = {
     }
     const { class: className, style, onRemove } = this.$attrs;
     return (
-      <li
+      <span
         style={{ ...UNSELECTABLE_STYLE, ...style }}
         {...UNSELECTABLE_ATTRIBUTE}
         role="menuitem"
-        class={classNames(`${prefixCls}-selection__choice`, className)}
+        class={classNames(`${prefixCls}-selection-item`, className)}
         title={toTitle(label)}
       >
+        <span class={`${prefixCls}-selection-item-content`}>{content}</span>
         {onRemove && (
-          <span class={`${prefixCls}-selection__choice__remove`} onClick={this.onRemove}>
+          <span class={`${prefixCls}-selection-item-remove`} onClick={this.onRemove}>
             {getComponent(this, 'removeIcon')}
           </span>
         )}
-        <span class={`${prefixCls}-selection__choice__content`}>{content}</span>
-      </li>
+      </span>
     );
   },
 };

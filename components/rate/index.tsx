@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { inject, defineComponent } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
@@ -10,8 +10,8 @@ import Tooltip from '../tooltip';
 export const RateProps = {
   prefixCls: PropTypes.string,
   count: PropTypes.number,
-  value: PropTypes.value,
-  defaultValue: PropTypes.value,
+  value: PropTypes.number,
+  defaultValue: PropTypes.number,
   allowHalf: PropTypes.looseBool,
   allowClear: PropTypes.looseBool,
   tooltips: PropTypes.arrayOf(PropTypes.string),
@@ -20,7 +20,7 @@ export const RateProps = {
   autofocus: PropTypes.looseBool,
 };
 
-const Rate = {
+const Rate = defineComponent({
   name: 'ARate',
   props: RateProps,
   setup() {
@@ -35,15 +35,15 @@ const Rate = {
       return <Tooltip title={tooltips[index]}>{node}</Tooltip>;
     },
     focus() {
-      this.$refs.refRate.focus();
+      (this.$refs.refRate as any).focus();
     },
     blur() {
-      this.$refs.refRate.blur();
+      (this.$refs.refRate as any).blur();
     },
   },
   render() {
     const { prefixCls: customizePrefixCls, ...restProps } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('rate', customizePrefixCls);
 
     const character = getComponent(this, 'character') || <StarFilled />;
@@ -57,7 +57,7 @@ const Rate = {
     };
     return <VcRate {...rateProps} />;
   },
-};
+});
 
 /* istanbul ignore next */
 Rate.install = function(app) {

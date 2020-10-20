@@ -1,32 +1,35 @@
-import { inject } from 'vue';
+import { defineComponent, ExtractPropTypes, inject } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, initDefaultProps, getComponent } from '../_util/props-util';
+import { getOptionProps, getComponent } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
+import { tuple } from '../_util/type';
 
-export const TimeLineItemProps = {
+export const timeLineItemProps = {
   prefixCls: PropTypes.string,
   color: PropTypes.string,
   dot: PropTypes.any,
   pending: PropTypes.looseBool,
-  position: PropTypes.oneOf(['left', 'right', '']).def(''),
+  position: PropTypes.oneOf(tuple('left', 'right', '')).def(''),
 };
 
-export default {
+export type TimeLineItemProps = Partial<ExtractPropTypes<typeof timeLineItemProps>>;
+
+export default defineComponent({
   name: 'ATimelineItem',
-  props: initDefaultProps(TimeLineItemProps, {
+  props: initDefaultProps(timeLineItemProps, {
     color: 'blue',
     pending: false,
   }),
   setup() {
-    const configProvider = inject('configProvider', defaultConfigProvider);
     return {
-      configProvider,
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   render() {
     const { prefixCls: customizePrefixCls, color = '', pending } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('timeline', customizePrefixCls);
 
     const dot = getComponent(this, 'dot');
@@ -55,4 +58,4 @@ export default {
       </li>
     );
   },
-};
+});

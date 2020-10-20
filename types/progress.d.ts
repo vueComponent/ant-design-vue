@@ -98,6 +98,6 @@ export declare class Progress extends AntdComponent {
      * @default 'default'
      * @type string
      */
-    size?: 'default' | 'middle';
+    size?: 'default' | 'small';
   };
 }

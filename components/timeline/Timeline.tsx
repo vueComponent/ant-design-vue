@@ -1,41 +1,38 @@
-import { inject, cloneVNode } from 'vue';
+import { inject, cloneVNode, defineComponent, ExtractPropTypes } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import {
-  getOptionProps,
-  getPropsData,
-  initDefaultProps,
-  filterEmpty,
-  getComponent,
-} from '../_util/props-util';
-import TimelineItem from './TimelineItem';
+import { getOptionProps, getPropsData, filterEmpty, getComponent } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
+import TimelineItem, { TimeLineItemProps } from './TimelineItem';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import { defaultConfigProvider } from '../config-provider';
+import { tuple } from '../_util/type';
 
-export const TimelineProps = {
+export const timelineProps = {
   prefixCls: PropTypes.string,
   /** 指定最后一个幽灵节点是否存在或内容 */
   pending: PropTypes.any,
   pendingDot: PropTypes.string,
   reverse: PropTypes.looseBool,
-  mode: PropTypes.oneOf(['left', 'alternate', 'right', '']),
+  mode: PropTypes.oneOf(tuple('left', 'alternate', 'right', '')),
 };
 
-export default {
+export type TimelineProps = Partial<ExtractPropTypes<typeof timelineProps>>;
+
+export default defineComponent({
   name: 'ATimeline',
-  props: initDefaultProps(TimelineProps, {
+  props: initDefaultProps(timelineProps, {
     reverse: false,
     mode: '',
   }),
   setup() {
-    const configProvider = inject('configProvider', defaultConfigProvider);
     return {
-      configProvider,
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   render() {
     const { prefixCls: customizePrefixCls, reverse, mode } = getOptionProps(this);
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('timeline', customizePrefixCls);
 
     const pendingDot = getComponent(this, 'pendingDot');
@@ -66,8 +63,8 @@ export default {
       ? [pendingItem, ...children.reverse()]
       : [...children, pendingItem];
 
-    const getPositionCls = (ele, idx) => {
-      const eleProps = getPropsData(ele);
+    const getPositionCls = (ele, idx: number) => {
+      const eleProps = getPropsData(ele) as TimeLineItemProps;
       if (mode === 'alternate') {
         if (eleProps.position === 'right') return `${prefixCls}-item-right`;
         if (eleProps.position === 'left') return `${prefixCls}-item-left`;
@@ -94,9 +91,6 @@ export default {
       });
     });
 
-    const timelineProps = {
-      class: classString,
-    };
-    return <ul {...timelineProps}>{items}</ul>;
+    return <ul class={classString}>{items}</ul>;
   },
-};
+});

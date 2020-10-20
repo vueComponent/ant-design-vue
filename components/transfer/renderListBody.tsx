@@ -2,9 +2,8 @@ import { defineComponent, TransitionGroup } from 'vue';
 import raf from '../_util/raf';
 import ListItem from './ListItem';
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import getTransitionProps from '../_util/getTransitionProps';
 import { findDOMNode } from '../_util/props-util';
-function noop() {}
+import getTransitionGroupProps from 'components/_util/getTransitionGroupProps';
 const ListBody = defineComponent({
   name: 'ListBody',
   inheritAttrs: false,
@@ -98,12 +97,11 @@ const ListBody = defineComponent({
         />
       );
     });
-    const transitionProps = getTransitionProps(
+    const transitionProps = getTransitionGroupProps(
       mounted ? `${prefixCls}-content-item-highlight` : '',
       {
         tag: 'ul',
         onScroll: this.handleScroll,
-        onLeave: noop,
       },
     );
     return (

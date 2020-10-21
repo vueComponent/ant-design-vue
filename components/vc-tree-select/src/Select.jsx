@@ -29,8 +29,6 @@ import KeyCode from '../../_util/KeyCode';
 import SelectTrigger from './SelectTrigger';
 import SingleSelector from './Selector/SingleSelector';
 import MultipleSelector from './Selector/MultipleSelector';
-import SinglePopup from './Popup/SinglePopup';
-import MultiplePopup from './Popup/MultiplePopup';
 
 import { SHOW_ALL, SHOW_PARENT, SHOW_CHILD } from './strategies';
 import BaseMixin from '../../_util/BaseMixin';
@@ -58,6 +56,7 @@ import {
   getPropsData,
   findDOMNode,
 } from '../../_util/props-util';
+import BasePopup from './Popup/MultiplePopup';
 function getWatch(keys = []) {
   const watch = {};
   keys.forEach(k => {
@@ -1092,8 +1091,7 @@ const Select = defineComponent({
       ref: this.setPopupRef,
     };
 
-    const Popup = isMultiple ? MultiplePopup : SinglePopup;
-    const $popup = <Popup {...popupProps} __propsSymbol__={[]} />;
+    const $popup = <BasePopup {...popupProps} __propsSymbol__={[]} />;
 
     const Selector = isMultiple ? MultipleSelector : SingleSelector;
     const $selector = <Selector {...passProps} isMultiple={isMultiple} ref={this.selectorRef} />;

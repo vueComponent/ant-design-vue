@@ -32,6 +32,7 @@ export const selectorPropTypes = () => ({
   focused: PropTypes.looseBool,
   isMultiple: PropTypes.looseBool,
   showSearch: PropTypes.looseBool,
+  searchValue: PropTypes.string,
 });
 
 function noop() {}

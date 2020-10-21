@@ -20,19 +20,23 @@ const SearchInput = {
     renderPlaceholder: PropTypes.func,
     needAlign: PropTypes.looseBool,
     ariaId: PropTypes.string,
+    isMultiple: PropTypes.looseBool.def(true),
   },
   setup(props) {
     const measureRef = ref();
     const inputWidth = ref(0);
     // We measure width and set to the input immediately
     onMounted(() => {
-      watch(
-        computed(()=>props.searchValue),
-        () => {
-          inputWidth.value = measureRef.value.scrollWidth;
-        },
-        { flush: 'post' },
-      );
+      if(props.isMultiple) {
+        watch(
+          computed(()=>props.searchValue),
+          () => {
+            inputWidth.value = measureRef.value.scrollWidth;
+          },
+          { flush: 'post', immediate: true },
+        );
+      }
+
     });
     return {
       measureRef,
@@ -52,15 +56,11 @@ const SearchInput = {
   },
   created() {
     this.inputRef = createRef();
-    // this.mirrorInputRef = createRef();
     this.prevProps = { ...this.$props };
   },
   mounted() {
     this.$nextTick(() => {
-      const { open, needAlign } = this.$props;
-      if (needAlign) {
-        this.alignInputWidth();
-      }
+      const { open } = this.$props;
 
       if (open) {
         this.focus(true);
@@ -75,22 +75,11 @@ const SearchInput = {
       if (open && prevProps.open !== open) {
         this.focus();
       }
-      // if (needAlign && searchValue !== prevProps.searchValue) {
-      //   this.alignInputWidth();
-      // }
+
       this.prevProps = { ...this.$props };
     });
   },
   methods: {
-    /**
-     * `scrollWidth` is not correct in IE, do the workaround.
-     * ref: https://github.com/react-component/tree-select/issues/65
-     *  clientWidth 0 when mounted in vue. why?
-     */
-    // alignInputWidth() {
-    //   this.inputRef.current.style.width = `${this.mirrorInputRef.current.clientWidth ||
-    //     this.mirrorInputRef.current.offsetWidth}px`;
-    // },
 
     /**
      * Need additional timeout for focus cause parent dom is not ready when didMount trigger
@@ -125,7 +114,7 @@ const SearchInput = {
   },
 
   render() {
-    const { searchValue, prefixCls, disabled, renderPlaceholder, open, ariaId } = this.$props;
+    const { searchValue, prefixCls, disabled, renderPlaceholder, open, ariaId, isMultiple } = this.$props;
     const {
       vcTreeSelect: { onSearchInputKeyDown },
       handleInputChange,
@@ -134,7 +123,7 @@ const SearchInput = {
     } = this;
     return (
       <>
-        <span class={`${prefixCls}-selection-search`} style={{ width: inputWidth + 'px' }}>
+        <span class={`${prefixCls}-selection-search`} style={isMultiple ? { width: inputWidth + 'px' }:{}}>
           {withDirectives(
             <input
               type="text"
@@ -152,9 +141,9 @@ const SearchInput = {
             />,
             [[antInput]],
           )}
-          <span ref="measureRef" class={`${prefixCls}-selection-search-mirror`} aria-hidden>
+          {isMultiple ? <span ref="measureRef" class={`${prefixCls}-selection-search-mirror`} aria-hidden>
             {mirrorSearchValue}&nbsp;
-          </span>
+          </span> : null}
         </span>
         {renderPlaceholder && !mirrorSearchValue ? renderPlaceholder() : null}
       </>

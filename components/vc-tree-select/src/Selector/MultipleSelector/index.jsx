@@ -23,7 +23,6 @@ const MultipleSelector = {
     ...SearchInput.props,
     selectorValueList: PropTypes.array,
     disabled: PropTypes.looseBool,
-    searchValue: PropTypes.string,
     labelInValue: PropTypes.looseBool,
     maxTagCount: PropTypes.number,
     maxTagPlaceholder: PropTypes.any,
@@ -142,11 +141,9 @@ const MultipleSelector = {
 
       selectedValueNodes.push(
           <SearchInput
-            {...{
-              ...this.$props,
-              ...this.$attrs,
-              needAlign: true,
-            }}
+            key="SearchInput"
+            {...this.$props}
+            {...this.$attrs}
             ref={this.inputRef}
           >
             {children}

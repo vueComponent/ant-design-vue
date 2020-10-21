@@ -66,8 +66,6 @@ const Transfer = defineComponent({
   }),
   setup() {
     return {
-      selectedKeys: [],
-      targetKeys: [],
       separatedDataSource: null,
       configProvider: inject('configProvider', defaultConfigProvider),
     };

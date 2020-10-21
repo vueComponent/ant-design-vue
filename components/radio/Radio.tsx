@@ -26,9 +26,6 @@ export type RadioProps = Partial<ExtractPropTypes<typeof radioProps>>;
 
 export default defineComponent({
   name: 'ARadio',
-  model: {
-    prop: 'checked',
-  },
   props: radioProps,
   emits: ['update:checked', 'update:value', 'change', 'blur', 'focus'],
   setup() {

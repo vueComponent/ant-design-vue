@@ -101,11 +101,12 @@ const ListBody = defineComponent({
       mounted ? `${prefixCls}-content-item-highlight` : '',
       {
         tag: 'ul',
+        class: `${prefixCls}-content`,
         onScroll: this.handleScroll,
       },
     );
     return (
-      <TransitionGroup moveClass={`${prefixCls}-content`} {...transitionProps}>
+      <TransitionGroup {...transitionProps}>
         {items}
       </TransitionGroup>
     );

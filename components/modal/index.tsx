@@ -1,5 +1,5 @@
 import { App } from 'vue';
-import Modal, { destroyFns, ModalFuncProps } from './Modal';
+import Modal, { destroyFns, ModalFunc, ModalFuncProps } from './Modal';
 import modalConfirm from './confirm';
 import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
@@ -80,4 +80,18 @@ Modal.install = function(app: App) {
   return app;
 };
 
-export default Modal;
+export default Modal as typeof Modal & {
+  readonly info: ModalFunc;
+
+  readonly success: ModalFunc;
+
+  readonly error: ModalFunc;
+
+  readonly warn: ModalFunc;
+
+  readonly warning: ModalFunc;
+
+  readonly confirm: ModalFunc;
+
+  readonly destroyAll: () => void;
+};

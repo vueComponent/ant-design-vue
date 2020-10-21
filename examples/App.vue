@@ -5,7 +5,7 @@
 </template>
 <script>
 import { defineComponent } from 'vue';
-import demo from '../antdv-demo/docs/select/demo';
+import demo from '../antdv-demo/docs/tree-select/demo';
 // import Affix from '../components/affix';
 export default defineComponent({
   components: {

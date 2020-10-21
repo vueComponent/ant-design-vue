@@ -13,6 +13,16 @@ const SingleSelector = {
     this.selectorRef = createRef();
     this.inputRef = createRef();
   },
+  data() {
+    return {
+      mirrorSearchValue: this.searchValue,
+    };
+  },
+  watch: {
+    searchValue(val) {
+      this.mirrorSearchValue = val;
+    },
+  },
   methods: {
     onPlaceholderClick() {
       this.inputRef.current.focus();
@@ -24,19 +34,13 @@ const SingleSelector = {
       this.selectorRef.current.blur();
     },
     _renderPlaceholder() {
-      const {
-        prefixCls,
-        placeholder,
-        searchPlaceholder,
-        searchValue,
-        selectorValueList,
-      } = this.$props;
+      const { prefixCls, placeholder, searchPlaceholder, selectorValueList } = this.$props;
 
       const currentPlaceholder = placeholder || searchPlaceholder;
 
       if (!currentPlaceholder) return null;
 
-      const hidden = searchValue || selectorValueList.length;
+      const hidden = this.mirrorSearchValue || selectorValueList.length;
 
       // [Legacy] Not remove the placeholder
       return (
@@ -51,12 +55,19 @@ const SingleSelector = {
         </span>
       );
     },
+    onMirrorSearchValueChange(value) {
+      this.mirrorSearchValue = value;
+    },
     renderSelection() {
       const { selectorValueList, prefixCls } = this.$props;
       const selectedValueNodes = [];
-      if (selectorValueList.length) {
+      if (selectorValueList.length && !this.mirrorSearchValue) {
         const { label, value } = selectorValueList[0];
-        selectedValueNodes.push(<span key="value" title={toTitle(label)} class={`${prefixCls}-selection-item`}>{label || value}</span>);
+        selectedValueNodes.push(
+          <span key="value" title={toTitle(label)} class={`${prefixCls}-selection-item`}>
+            {label || value}
+          </span>,
+        );
       }
       selectedValueNodes.push(
         <SearchInput
@@ -64,7 +75,9 @@ const SingleSelector = {
           {...this.$attrs}
           ref={this.inputRef}
           isMultiple={false}
-        />);
+          onMirrorSearchValueChange={this.onMirrorSearchValueChange}
+        />,
+      );
       return selectedValueNodes;
     },
   },

@@ -216,13 +216,19 @@ const Select = defineComponent({
       this.setState(state);
       this.needSyncKeys = {};
     },
-    '$data._valueList'() {
+    _valueList() {
       this.$nextTick(() => {
         this.forcePopupAlign();
       });
     },
-    '$data._open'(open) {
+    _open(open) {
       this.$nextTick(() => {
+        if (!open && !this.isSearchValueControlled()) {
+          this.setState({ _searchValue: '' });
+        }
+        if (open && !this.$data._searchValue) {
+          this.setState({ _filteredTreeNodes: null });
+        }
         const { prefixCls } = this.$props;
         const { _selectorValueList: selectorValueList, _valueEntities: valueEntities } = this.$data;
         const isMultiple = this.isMultiple();
@@ -489,7 +495,6 @@ const Select = defineComponent({
             newState._valueEntities || prevState._valueEntities,
           );
       });
-
       return newState;
     },
     // ==================== Selector ====================
@@ -637,7 +642,6 @@ const Select = defineComponent({
         disabled,
         inputValue,
         treeNodeLabelProp,
-        multiple,
         treeCheckable,
         treeCheckStrictly,
         autoClearSearchValue,
@@ -697,7 +701,7 @@ const Select = defineComponent({
       // Clean up `searchValue` when this prop is set
       if (autoClearSearchValue || inputValue === null) {
         // Clean state `searchValue` if uncontrolled
-        if (!this.isSearchValueControlled() && (multiple || treeCheckable)) {
+        if (!this.isSearchValueControlled()) {
           this.setUncontrolledState({
             _searchValue: '',
             _filteredTreeNodes: null,
@@ -848,7 +852,6 @@ const Select = defineComponent({
       if (isSet) {
         // Do the search logic
         const upperSearchValue = String(value).toUpperCase();
-
         let filterTreeNodeFn = filterTreeNode;
         if (filterTreeNode === false) {
           filterTreeNodeFn = () => true;

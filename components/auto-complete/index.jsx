@@ -136,6 +136,7 @@ const AutoComplete = {
         getInputElement: this.getInputElement,
         notFoundContent: getComponentFromProp(this, 'notFoundContent'),
         placeholder: '',
+        tabIndex: -1,
       },
       class: cls,
       ref: 'select',

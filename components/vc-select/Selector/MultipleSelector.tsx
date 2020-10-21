@@ -160,7 +160,7 @@ const SelectSelector = defineComponent<SelectorProps>({
       }
       const transitionProps = getTransitionGroupProps(choiceTransitionName, {
         appear: motionAppear,
-      })
+      });
       selectionNode.value = (
         <TransitionGroup {...transitionProps}>
           {...displayValues.map(

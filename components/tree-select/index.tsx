@@ -1,9 +1,10 @@
 import VcTreeSelect, { TreeNode, SHOW_ALL, SHOW_PARENT, SHOW_CHILD } from '../vc-tree-select';
-import { inject } from 'vue';
+import { App, defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import { TreeSelectProps } from './interface';
 import warning from '../_util/warning';
-import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
+import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
 
 export { TreeData, TreeSelectProps } from './interface';
@@ -14,7 +15,7 @@ import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
 import omit from 'omit.js';
 
-const TreeSelect = {
+const TreeSelect = defineComponent({
   TreeNode,
   SHOW_ALL,
   SHOW_PARENT,
@@ -28,6 +29,7 @@ const TreeSelect = {
   }),
   setup() {
     return {
+      vcTreeSelect: null,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
@@ -111,7 +113,7 @@ const TreeSelect = {
   },
 
   render() {
-    const props = getOptionProps(this);
+    const props: any = getOptionProps(this);
     const {
       prefixCls: customizePrefixCls,
       size,
@@ -121,10 +123,9 @@ const TreeSelect = {
       ...restProps
     } = props;
     const { class: className } = this.$attrs;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { renderEmpty, getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
 
-    const renderEmpty = this.configProvider.renderEmpty;
     const notFoundContent = getComponent(this, 'notFoundContent');
     const removeIcon = getComponent(this, 'removeIcon');
     const clearIcon = getComponent(this, 'clearIcon');
@@ -145,7 +146,7 @@ const TreeSelect = {
     const cls = {
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-sm`]: size === 'small',
-      [className]: className,
+      [className as string]: className,
     };
 
     // showSearch: single - false, multiple - true
@@ -196,10 +197,10 @@ const TreeSelect = {
       />
     );
   },
-};
+});
 
 /* istanbul ignore next */
-TreeSelect.install = function(app) {
+TreeSelect.install = function(app: App) {
   app.component(TreeSelect.name, TreeSelect);
   app.component('ATreeSelectNode', TreeSelect.TreeNode);
   return app;

@@ -39,7 +39,17 @@ export interface SelectPropsTypes<VT>
 }
 export type SelectTypes = SelectPropsTypes<SelectValue>;
 export const SelectProps = () => ({
-  ...omit(BaseProps(), ['inputIcon', 'mode', 'getInputElement', 'backfill', 'class', 'style']),
+  ...(omit(BaseProps(), [
+    'inputIcon',
+    'mode',
+    'getInputElement',
+    'backfill',
+    'class',
+    'style',
+  ]) as Omit<
+    ReturnType<typeof BaseProps>,
+    'inputIcon' | 'mode' | 'getInputElement' | 'backfill' | 'class' | 'style'
+  >),
   value: {
     type: [Array, Object, String, Number] as PropType<SelectValue>,
   },

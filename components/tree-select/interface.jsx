@@ -1,5 +1,6 @@
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { SelectProps } from '../select';
+import { tuple } from '../_util/type';
 
 export const TreeData = PropTypes.shape({
   key: PropTypes.string,
@@ -35,7 +36,7 @@ export const TreeSelectProps = () => ({
   notFoundContent: PropTypes.any,
   searchPlaceholder: PropTypes.string,
   searchValue: PropTypes.string,
-  showCheckedStrategy: PropTypes.oneOf(['SHOW_ALL', 'SHOW_PARENT', 'SHOW_CHILD']),
+  showCheckedStrategy: PropTypes.oneOf(tuple('SHOW_ALL', 'SHOW_PARENT', 'SHOW_CHILD')),
   suffixIcon: PropTypes.any,
   treeCheckable: PropTypes.looseBool,
   treeCheckStrictly: PropTypes.looseBool,

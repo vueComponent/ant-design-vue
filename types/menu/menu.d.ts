@@ -117,5 +117,28 @@ export declare class Menu extends AntdComponent {
       item: any;
       domEvent: MouseEvent;
     }) => void;
+
+    /**
+     * callback executed when a menu item is deselected, only supported for multiple mode
+     * @param params
+     */
+    onDeselect?: (params: { key: string | number; item: any; selectedKeys: string[] }) => void;
+
+    /**
+     * called when open/close sub menu
+     * @param params
+     */
+    onOpenChange?: (params: { openKeys: string[] }) => void;
+
+    /**
+     * callback executed when a menu item is selected
+     * @param params
+     */
+    onSelect?: (params: {
+      key: string | number;
+      item: any;
+      selectedKeys: string[];
+      domEvent: MouseEvent;
+    }) => void;
   };
 }

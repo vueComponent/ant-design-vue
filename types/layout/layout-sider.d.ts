@@ -65,6 +65,18 @@ export interface LayoutSiderProps {
    * @type string
    */
   theme?: 'light' | 'dark';
+
+  /**
+   * the callback function, executed by clicking the trigger or activating the responsive layout
+   * @param params
+   */
+  onCollapse?: (params: { collapsed: boolean; type: string }) => void;
+
+  /**
+   * the callback function, executed when breakpoints changed
+   * @param params
+   */
+  onBreakpoint?: (params: { broken: string }) => void;
 }
 
 export declare class LayoutSider extends AntdComponent {

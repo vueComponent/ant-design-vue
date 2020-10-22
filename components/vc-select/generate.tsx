@@ -1025,6 +1025,7 @@ export default function generateSelector<
         containerRef,
         listRef,
         triggerRef,
+        selectorRef,
       };
     },
     methods: {

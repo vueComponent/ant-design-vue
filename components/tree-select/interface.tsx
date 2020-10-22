@@ -5,8 +5,8 @@ import { tuple } from '../_util/type';
 export const TreeData = PropTypes.shape({
   key: PropTypes.string,
   value: PropTypes.string,
-  label: PropTypes.any,
-  scopedSlots: PropTypes.object,
+  label: PropTypes.VNodeChild,
+  slots: PropTypes.object,
   children: PropTypes.array,
 }).loose;
 
@@ -19,7 +19,7 @@ export const TreeSelectProps = () => ({
   labelInValue: PropTypes.looseBool,
   loadData: PropTypes.func,
   maxTagCount: PropTypes.number,
-  maxTagPlaceholder: PropTypes.any,
+  maxTagPlaceholder: PropTypes.VNodeChild,
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
@@ -33,11 +33,11 @@ export const TreeSelectProps = () => ({
     PropTypes.number,
   ]),
   multiple: PropTypes.looseBool,
-  notFoundContent: PropTypes.any,
+  notFoundContent: PropTypes.VNodeChild,
   searchPlaceholder: PropTypes.string,
   searchValue: PropTypes.string,
   showCheckedStrategy: PropTypes.oneOf(tuple('SHOW_ALL', 'SHOW_PARENT', 'SHOW_CHILD')),
-  suffixIcon: PropTypes.any,
+  suffixIcon: PropTypes.VNodeChild,
   treeCheckable: PropTypes.looseBool,
   treeCheckStrictly: PropTypes.looseBool,
   treeData: PropTypes.arrayOf(Object),
@@ -52,8 +52,8 @@ export const TreeSelectProps = () => ({
   treeNodeFilterProp: PropTypes.string,
   treeNodeLabelProp: PropTypes.string,
   replaceFields: PropTypes.object.def({}),
-  clearIcon: PropTypes.any,
-  removeIcon: PropTypes.any,
+  clearIcon: PropTypes.VNodeChild,
+  removeIcon: PropTypes.VNodeChild,
 
   onSelect: PropTypes.func,
   onChange: PropTypes.func,

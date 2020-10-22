@@ -245,12 +245,11 @@ const Select = defineComponent({
             raf(() => {
               const popupNode = findDOMNode(this.popup);
               const triggerContainer = findPopupContainer(popupNode, `${prefixCls}-dropdown`);
-              const searchNode = this.popup.searchRef.current;
 
-              if (domNode && triggerContainer && searchNode) {
+              if (domNode && triggerContainer) {
                 scrollIntoView(domNode, triggerContainer, {
                   onlyScrollIfNeeded: true,
-                  offsetTop: searchNode.offsetHeight,
+                  offsetTop: 0,
                 });
               }
             });

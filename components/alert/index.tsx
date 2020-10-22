@@ -58,6 +58,7 @@ export const AlertProps = {
 
 const Alert = defineComponent({
   name: 'AAlert',
+  inheritAttrs: false,
   props: AlertProps,
   mixins: [BaseMixin],
   emits: ['close'],
@@ -96,7 +97,7 @@ const Alert = defineComponent({
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, banner, closing, closed } = this;
+    const { prefixCls: customizePrefixCls, banner, closing, closed, $attrs } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('alert', customizePrefixCls);
 
@@ -148,7 +149,7 @@ const Alert = defineComponent({
     });
     return closed ? null : (
       <Transition {...transitionProps}>
-        <div v-show={!closing} class={alertCls} data-show={!closing}>
+        <div {...$attrs} v-show={!closing} class={alertCls} data-show={!closing}>
           {showIcon ? iconNode : null}
           <span class={`${prefixCls}-message`}>{message}</span>
           <span class={`${prefixCls}-description`}>{description}</span>

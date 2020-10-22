@@ -1,6 +1,9 @@
 import { defineComponent, Fragment, Transition as T, TransitionGroup as TG } from 'vue';
 
 export const getTransitionProps = (transitionName: string, opt: object = {}) => {
+  if (process.env.NODE_ENV === 'test') {
+    return {};
+  }
   const transitionProps = transitionName
     ? {
         appear: true,
@@ -44,7 +47,6 @@ if (process.env.NODE_ENV === 'test') {
   Transition = (_, { slots }) => {
     return slots.default?.();
   };
-  Transition.inheritAttrs = false;
   TransitionGroup = defineComponent({
     inheritAttrs: false,
     props: ['tag', 'class'],

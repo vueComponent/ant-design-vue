@@ -5,14 +5,18 @@ import Anchor from '..';
 
 const { Link } = Anchor;
 
+let idCounter = 0;
+const getHashUrl = () => `Anchor-API-${idCounter++}`;
+
 describe('Anchor Render', () => {
   it('Anchor render perfectly', done => {
+    const hash = getHashUrl();
     const wrapper = mount(
       {
         render() {
           return (
             <Anchor ref="anchor">
-              <Link href="#API" title="API" />
+              <Link href={`#${hash}`} title={hash} />
             </Anchor>
           );
         },
@@ -20,7 +24,7 @@ describe('Anchor Render', () => {
       { sync: false },
     );
     Vue.nextTick(() => {
-      wrapper.find('a[href="#API"]').trigger('click');
+      wrapper.find(`a[href="#${hash}`).trigger('click');
       wrapper.vm.$refs.anchor.handleScroll();
       setTimeout(() => {
         expect(wrapper.vm.$refs.anchor.$data.activeLink).not.toBe(null);

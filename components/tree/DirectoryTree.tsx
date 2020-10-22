@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import omit from 'omit.js';
 import debounce from 'lodash-es/debounce';
 import FolderOpenOutlined from '@ant-design/icons-vue/FolderOpenOutlined';
@@ -15,13 +15,19 @@ import {
   getFullKeyListByTreeData,
 } from './util';
 import BaseMixin from '../_util/BaseMixin';
-import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
+import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
 
 // export type ExpandAction = false | 'click' | 'dblclick'; export interface
 // DirectoryTreeProps extends TreeProps {   expandAction?: ExpandAction; }
 // export interface DirectoryTreeState {   expandedKeys?: string[];
 // selectedKeys?: string[]; }
+
+export interface DirectoryTreeState {
+  _expandedKeys?: string[];
+  _selectedKeys?: string[];
+}
 
 function getIcon(props) {
   const { isLeaf, expanded } = props;
@@ -31,14 +37,10 @@ function getIcon(props) {
   return expanded ? <FolderOpenOutlined /> : <FolderOutlined />;
 }
 
-export default {
+export default defineComponent({
   name: 'ADirectoryTree',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  // model: {
-  //   prop: 'checkedKeys',
-  //   event: 'check',
-  // },
   props: initDefaultProps(
     {
       ...TreeProps(),
@@ -51,6 +53,11 @@ export default {
   ),
   setup() {
     return {
+      children: null,
+      onDebounceExpand: null,
+      tree: null,
+      lastSelectedKey: [],
+      cachedSelectedKeys: [],
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
@@ -59,7 +66,7 @@ export default {
     const { defaultExpandAll, defaultExpandParent, expandedKeys, defaultExpandedKeys } = props;
     const children = getSlot(this);
     const { keyEntities } = convertTreeToEntities(children);
-    const state = {};
+    const state: DirectoryTreeState = {};
     // Selected keys
     state._selectedKeys = props.selectedKeys || props.defaultSelectedKeys || [];
 
@@ -75,14 +82,14 @@ export default {
     } else {
       state._expandedKeys = expandedKeys || defaultExpandedKeys;
     }
-
-    this.onDebounceExpand = debounce(this.expandFolderNode, 200, { leading: true });
-    this.children = null;
     return {
       _selectedKeys: [],
       _expandedKeys: [],
       ...state,
     };
+  },
+  created() {
+    this.onDebounceExpand = debounce(this.expandFolderNode, 200, { leading: true });
   },
   watch: {
     expandedKeys(val) {
@@ -130,7 +137,7 @@ export default {
       const { node, nativeEvent } = event;
       const { eventKey = '' } = node;
 
-      const newState = {};
+      const newState: DirectoryTreeState = {};
 
       // We need wrap this event since some value is not same
       const newEvent = {
@@ -235,4 +242,4 @@ export default {
     };
     return <Tree {...treeProps}>{this.children}</Tree>;
   },
-};
+});

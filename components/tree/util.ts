@@ -1,11 +1,11 @@
 import { getNodeChildren, convertTreeToEntities } from '../vc-tree/src/util';
 import { getSlot } from '../_util/props-util';
 
-const Record = {
-  None: 'node',
-  Start: 'start',
-  End: 'end',
-};
+enum Record {
+  None,
+  Start,
+  End,
+}
 
 // TODO: Move this logic into `rc-tree`
 function traverseNodesKey(rootChildren, callback) {
@@ -88,7 +88,7 @@ export function convertDirectoryKeysToNodes(rootChildren, keys) {
   return nodes;
 }
 
-export function getFullKeyListByTreeData(treeData, replaceFields = {}) {
+export function getFullKeyListByTreeData(treeData: any, replaceFields: any = {}) {
   let keys = [];
   const { key = 'key', children = 'children' } = replaceFields(treeData || []).forEach(item => {
     keys.push(item[key]);

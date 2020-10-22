@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import FileOutlined from '@ant-design/icons-vue/FileOutlined';
@@ -8,7 +8,8 @@ import PlusSquareOutlined from '@ant-design/icons-vue/PlusSquareOutlined';
 import VcTree from '../vc-tree';
 import animation from '../_util/openAnimation';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps, getOptionProps, getComponent, getSlot } from '../_util/props-util';
+import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { cloneElement } from '../_util/vnode';
 import { defaultConfigProvider } from '../config-provider';
 
@@ -102,7 +103,7 @@ function TreeProps() {
 
 export { TreeProps };
 
-export default {
+export default defineComponent({
   name: 'ATree',
   inheritAttrs: false,
   props: initDefaultProps(TreeProps(), {
@@ -116,12 +117,13 @@ export default {
   }),
   setup() {
     return {
+      tree: null,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   TreeNode,
   methods: {
-    renderSwitcherIcon(prefixCls, switcherIcon, { isLeaf, loading, expanded }) {
+    renderSwitcherIcon(prefixCls: string, switcherIcon, { isLeaf, loading, expanded }) {
       const { showLine } = this.$props;
       if (loading) {
         return <LoadingOutlined class={`${prefixCls}-switcher-loading-icon`} />;
@@ -184,7 +186,7 @@ export default {
       this.$emit('update:expandedKeys', expandedKeys);
       this.$emit('expand', expandedKeys, eventObj);
     },
-    handleSelect(selectedKeys, eventObj) {
+    handleSelect(selectedKeys: string[], eventObj) {
       this.$emit('update:selectedKeys', selectedKeys);
       this.$emit('select', selectedKeys, eventObj);
     },
@@ -216,10 +218,10 @@ export default {
       onCheck: this.handleCheck,
       onExpand: this.handleExpand,
       onSelect: this.handleSelect,
-    };
+    } as any;
     if (treeData) {
       vcTreeProps.treeData = treeData;
     }
     return <VcTree {...vcTreeProps} __propsSymbol__={[]} />;
   },
-};
+});

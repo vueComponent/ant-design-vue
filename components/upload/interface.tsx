@@ -1,16 +1,19 @@
+import { tuple } from '../_util/type';
 import PropsTypes from '../_util/vue-types';
 
-export const UploadFileStatus = PropsTypes.oneOf([
-  'error',
-  'success',
-  'done',
-  'uploading',
-  'removed',
-]);
+export const UploadFileStatus = PropsTypes.oneOf(
+  tuple('error', 'success', 'done', 'uploading', 'removed'),
+);
 
-// export const HttpRequestHeader {
-//   [key: string]: string;
-// }
+export interface HttpRequestHeader {
+  [key: string]: string;
+}
+
+export interface VcFile extends File {
+  uid: string;
+  readonly lastModifiedDate: Date;
+  readonly webkitRelativePath: string;
+}
 
 // export const UploadFile = PropsTypes.shape({
 //   uid: PropsTypes.oneOfType([
@@ -60,20 +63,20 @@ export const UploadLocale = PropsTypes.shape({
 }).loose;
 
 export const UploadProps = {
-  type: PropsTypes.oneOf(['drag', 'select']),
+  type: PropsTypes.oneOf(tuple('drag', 'select')),
   name: PropsTypes.string,
   defaultFileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
   fileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
   action: PropsTypes.oneOfType([PropsTypes.string, PropsTypes.func]),
   directory: PropsTypes.looseBool,
   data: PropsTypes.oneOfType([PropsTypes.object, PropsTypes.func]),
-  method: PropsTypes.oneOf(['POST', 'PUT', 'post', 'put']),
+  method: PropsTypes.oneOf(tuple('POST', 'PUT', 'post', 'put')),
   headers: PropsTypes.object,
   showUploadList: PropsTypes.oneOfType([PropsTypes.looseBool, ShowUploadListInterface]),
   multiple: PropsTypes.looseBool,
   accept: PropsTypes.string,
   beforeUpload: PropsTypes.func,
-  listType: PropsTypes.oneOf(['text', 'picture', 'picture-card']),
+  listType: PropsTypes.oneOf(tuple('text', 'picture', 'picture-card')),
   // className: PropsTypes.string,
   remove: PropsTypes.func,
   supportServerRender: PropsTypes.looseBool,
@@ -101,7 +104,7 @@ export const UploadState = {
 };
 
 export const UploadListProps = {
-  listType: PropsTypes.oneOf(['text', 'picture', 'picture-card']),
+  listType: PropsTypes.oneOf(tuple('text', 'picture', 'picture-card')),
   // items: PropsTypes.arrayOf(UploadFile),
   items: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
   // items: PropsTypes.any,

@@ -3,7 +3,8 @@ import uniqBy from 'lodash-es/uniqBy';
 import findIndex from 'lodash-es/findIndex';
 import VcUpload from '../vc-upload';
 import BaseMixin from '../_util/BaseMixin';
-import { getOptionProps, initDefaultProps, hasProp, getSlot } from '../_util/props-util';
+import { getOptionProps, hasProp, getSlot } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
 import { defaultConfigProvider } from '../config-provider';
@@ -11,12 +12,10 @@ import Dragger from './Dragger';
 import UploadList from './UploadList';
 import { UploadProps } from './interface';
 import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './utils';
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { getDataAndAria } from '../vc-tree/src/util';
 
-export { UploadProps };
-
-export default {
+export default defineComponent({
   name: 'AUpload',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -35,12 +34,13 @@ export default {
   }),
   setup() {
     return {
+      upload: null,
+      progressTimer: null,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   // recentUploadStatus: boolean | PromiseLike<any>;
   data() {
-    this.progressTimer = null;
     return {
       sFileList: this.fileList || this.defaultFileList || [],
       dragState: 'drop',
@@ -159,7 +159,7 @@ export default {
     },
     handleManualRemove(file) {
       if (this.$refs.uploadRef) {
-        this.$refs.uploadRef.abort(file);
+        (this.$refs.uploadRef as any).abort(file);
       }
       this.handleRemove(file);
     },
@@ -275,7 +275,7 @@ export default {
     if (type === 'drag') {
       const dragCls = classNames(prefixCls, {
         [`${prefixCls}-drag`]: true,
-        [`${prefixCls}-drag-uploading`]: fileList.some(file => file.status === 'uploading'),
+        [`${prefixCls}-drag-uploading`]: fileList.some((file: any) => file.status === 'uploading'),
         [`${prefixCls}-drag-hover`]: dragState === 'dragover',
         [`${prefixCls}-disabled`]: disabled,
       });
@@ -330,4 +330,4 @@ export default {
       </span>
     );
   },
-};
+});

@@ -1,4 +1,4 @@
-import { inject, Transition, TransitionGroup } from 'vue';
+import { defineComponent, inject, Transition, TransitionGroup, CSSProperties } from 'vue';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
@@ -17,7 +17,7 @@ import classNames from '../_util/classNames';
 import { UploadListProps } from './interface';
 import getTransitionGroupProps from '../_util/getTransitionGroupProps';
 
-export default {
+export default defineComponent({
   name: 'AUploadList',
   mixins: [BaseMixin],
   props: initDefaultProps(UploadListProps, {
@@ -206,7 +206,7 @@ export default {
             </span>,
             downloadOrDelete,
           ];
-      const style =
+      const style: CSSProperties | undefined =
         file.url || file.thumbUrl
           ? undefined
           : {
@@ -266,11 +266,14 @@ export default {
       [`${prefixCls}-list-${listType}`]: true,
     });
     const animationDirection = listType === 'picture-card' ? 'animate-inline' : 'animate';
-    const transitionGroupProps = getTransitionGroupProps(`${prefixCls}-${animationDirection}`);
+    const transitionGroupProps = {
+      ...getTransitionGroupProps(`${prefixCls}-${animationDirection}`),
+      class: listClassNames,
+    };
     return (
-      <TransitionGroup {...transitionGroupProps} tag="div" class={listClassNames}>
+      <TransitionGroup {...transitionGroupProps} tag="div">
         {list}
       </TransitionGroup>
     );
   },
-};
+});

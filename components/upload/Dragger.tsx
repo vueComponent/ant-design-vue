@@ -1,8 +1,9 @@
+import { defineComponent } from 'vue';
 import { getOptionProps, getSlot } from '../_util/props-util';
 import Upload from './Upload';
 import { UploadProps } from './interface';
 
-export default {
+export default defineComponent({
   name: 'AUploadDragger',
   inheritAttrs: false,
   props: UploadProps,
@@ -14,8 +15,8 @@ export default {
       ...restProps,
       ...restAttrs,
       type: 'drag',
-      style: { ...style, height },
-    };
+      style: { ...(style as any), height },
+    } as any;
     return <Upload {...draggerProps}>{getSlot(this)}</Upload>;
   },
-};
+});

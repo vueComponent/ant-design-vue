@@ -125,6 +125,9 @@ export default {
         //   tdProps.attrs.title = textProps.children;
         // }
       }
+      // https://github.com/vueComponent/ant-design-vue/issues/2916
+      let width = typeof column.width === 'number' ? `${column.width}px` : column.width;
+      text = h('div', { class: 'cell', style: { width } }, [text]);
     }
 
     return (

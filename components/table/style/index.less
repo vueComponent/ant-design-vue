@@ -333,6 +333,16 @@
   &-tbody > tr > td {
     padding: @table-padding-vertical @table-padding-horizontal;
     overflow-wrap: break-word;
+    // https://github.com/vueComponent/ant-design-vue/issues/2916
+    & > div.cell {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-break: break-all;
+      margin-left: 0 - @table-padding-horizontal;
+      margin-right: -1 - @table-padding-horizontal;
+      padding: 0 @table-padding-horizontal;
+    }
   }
 
   &-expand-icon-th,

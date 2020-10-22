@@ -26,6 +26,12 @@
       > .@{table-prefix-cls}-thead > tr > th,
       > .@{table-prefix-cls}-tbody > tr > td {
         padding: @table-padding-vertical-md @table-padding-horizontal-md;
+        // https://github.com/vueComponent/ant-design-vue/issues/2916
+        > div.cell {
+          margin-left: 0 - @table-padding-horizontal-md;
+          margin-right: -1 - @table-padding-horizontal-md;
+          padding: 0 @table-padding-horizontal-md;
+        }
       }
     }
   }
@@ -81,6 +87,12 @@
       > .@{table-prefix-cls}-thead > tr > th,
       > .@{table-prefix-cls}-tbody > tr > td {
         padding: @table-padding-vertical-sm @table-padding-horizontal-sm;
+        // https://github.com/vueComponent/ant-design-vue/issues/2916
+        > div.cell {
+          margin-left: 0 - @table-padding-horizontal-sm;
+          margin-right: -1 - @table-padding-horizontal-sm;
+          padding: 0 @table-padding-horizontal-sm;
+        }
       }
       > .@{table-prefix-cls}-thead > tr > th {
         background-color: @table-header-bg-sm;

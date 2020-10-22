@@ -44,7 +44,9 @@ if (process.env.NODE_ENV === 'test') {
   Transition = (_, { slots }) => {
     return slots.default?.();
   };
+  Transition.inheritAttrs = false;
   TransitionGroup = defineComponent({
+    inheritAttrs: false,
     props: ['tag', 'class'],
     setup(props, { slots }) {
       const { tag: Tag = Fragment, ...rest } = props;

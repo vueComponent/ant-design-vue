@@ -4,10 +4,10 @@ import { PresetColorTypes } from '../_util/colors';
 import classNames from '../_util/classNames';
 import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import getTransitionProps from '../_util/getTransitionProps';
+import { getTransitionProps, Transition } from '../_util/transition';
 import isNumeric from '../_util/isNumeric';
 import { defaultConfigProvider } from '../config-provider';
-import { inject, Transition, defineComponent, CSSProperties } from 'vue';
+import { inject, defineComponent, CSSProperties } from 'vue';
 import { tuple } from '../_util/type';
 
 const BadgeProps = {

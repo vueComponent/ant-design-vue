@@ -1,11 +1,11 @@
-import { App, defineComponent, inject, Transition } from 'vue';
+import { App, defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import backTopTypes from './backTopTypes';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import getScroll from '../_util/getScroll';
 import BaseMixin from '../_util/BaseMixin';
-import getTransitionProps from '../_util/getTransitionProps';
+import { getTransitionProps, Transition } from '../_util/transition';
 import { defaultConfigProvider } from '../config-provider';
 import scrollTo from '../_util/scrollTo';
 

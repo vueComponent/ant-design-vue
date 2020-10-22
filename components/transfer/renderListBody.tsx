@@ -1,9 +1,9 @@
-import { defineComponent, TransitionGroup } from 'vue';
+import { defineComponent } from 'vue';
 import raf from '../_util/raf';
 import ListItem from './ListItem';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { findDOMNode } from '../_util/props-util';
-import getTransitionGroupProps from '../_util/getTransitionGroupProps';
+import { getTransitionGroupProps, TransitionGroup } from '../_util/transition';
 const ListBody = defineComponent({
   name: 'ListBody',
   inheritAttrs: false,
@@ -105,11 +105,7 @@ const ListBody = defineComponent({
         onScroll: this.handleScroll,
       },
     );
-    return (
-      <TransitionGroup {...transitionProps}>
-        {items}
-      </TransitionGroup>
-    );
+    return <TransitionGroup {...transitionProps}>{items}</TransitionGroup>;
   },
 });
 

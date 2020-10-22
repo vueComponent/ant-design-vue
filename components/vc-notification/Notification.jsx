@@ -1,10 +1,10 @@
-import { createApp, defineComponent, TransitionGroup } from 'vue';
+import { createApp, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import createChainedFunction from '../_util/createChainedFunction';
 import Notice from './Notice';
-import getTransitionGroupProps from '../_util/getTransitionGroupProps';
+import { getTransitionGroupProps, TransitionGroup } from '../_util/transition';
 
 function noop() {}
 

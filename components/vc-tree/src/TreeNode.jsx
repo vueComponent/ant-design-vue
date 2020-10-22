@@ -1,10 +1,10 @@
-import { defineComponent, inject, provide, Transition } from 'vue';
+import { defineComponent, inject, provide } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import classNames from '../../_util/classNames';
 import { getNodeChildren, mapChildren, warnOnlyTreeNode, getDataAndAria } from './util';
 import { initDefaultProps, getComponent, getSlot } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
-import getTransitionProps from '../../_util/getTransitionProps';
+import { getTransitionProps, Transition } from '../../_util/transition';
 
 function noop() {}
 const ICON_OPEN = 'open';

@@ -1,4 +1,4 @@
-import { Transition, inject, cloneVNode, defineComponent, App } from 'vue';
+import { inject, cloneVNode, defineComponent, App } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -11,7 +11,7 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import classNames from '../_util/classNames';
 import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
-import getTransitionProps from '../_util/getTransitionProps';
+import { getTransitionProps, Transition } from '../_util/transition';
 import { getComponent, isValidElement, findDOMNode } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 

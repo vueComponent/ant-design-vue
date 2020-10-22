@@ -1,10 +1,10 @@
-import { defineComponent, provide, Transition } from 'vue';
+import { defineComponent, provide } from 'vue';
 import { initDefaultProps, getSlot, findDOMNode } from '../_util/props-util';
 import KeyCode from '../_util/KeyCode';
 import contains from '../vc-util/Dom/contains';
 import LazyRenderBox from './LazyRenderBox';
 import BaseMixin from '../_util/BaseMixin';
-import getTransitionProps from '../_util/getTransitionProps';
+import { getTransitionProps, Transition } from '../_util/transition';
 import switchScrollingEffect from '../_util/switchScrollingEffect';
 import getDialogPropTypes from './IDialogPropTypes';
 const IDialogPropTypes = getDialogPropTypes();

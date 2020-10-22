@@ -1,4 +1,4 @@
-import { Transition, inject, provide } from 'vue';
+import { inject, provide } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
@@ -10,7 +10,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { getComponent, filterEmpty, getSlot, splitAttrs, findDOMNode } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import { noop, loopMenuItemRecursively, getMenuIdFromSubMenuEventKey } from './util';
-import getTransitionProps from '../_util/getTransitionProps';
+import { getTransitionProps, Transition } from '../_util/transition';
 
 let guid = 0;
 const injectExtraPropsKey = 'ANT_MENU_PROVIDER_PROPS_KEY';

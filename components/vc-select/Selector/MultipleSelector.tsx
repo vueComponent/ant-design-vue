@@ -8,7 +8,6 @@ import {
   defineComponent,
   onMounted,
   ref,
-  TransitionGroup,
   VNodeChild,
   watch,
   watchEffect,
@@ -17,7 +16,7 @@ import {
 import classNames from '../../_util/classNames';
 import pickAttrs from '../../_util/pickAttrs';
 import PropTypes from '../../_util/vue-types';
-import getTransitionGroupProps from '../../_util/getTransitionGroupProps';
+import { getTransitionGroupProps, TransitionGroup } from '../../_util/transition';
 
 const REST_TAG_KEY = '__RC_SELECT_MAX_REST_COUNT__';
 

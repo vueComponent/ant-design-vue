@@ -1,7 +1,12 @@
-import { defineComponent, inject, Transition, TransitionGroup, CSSProperties } from 'vue';
+import { defineComponent, inject, CSSProperties } from 'vue';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps } from '../_util/props-util';
-import getTransitionProps from '../_util/getTransitionProps';
+import {
+  getTransitionProps,
+  Transition,
+  getTransitionGroupProps,
+  TransitionGroup,
+} from '../_util/transition';
 import { defaultConfigProvider } from '../config-provider';
 import { previewImage, isImageUrl } from './utils';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
@@ -15,7 +20,6 @@ import Tooltip from '../tooltip';
 import Progress from '../progress';
 import classNames from '../_util/classNames';
 import { UploadListProps } from './interface';
-import getTransitionGroupProps from '../_util/getTransitionGroupProps';
 
 export default defineComponent({
   name: 'AUploadList',

@@ -1,4 +1,3 @@
-import { Transition } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Align from '../vc-align';
 import PopupInner from './PopupInner';
@@ -6,7 +5,7 @@ import LazyRenderBox from './LazyRenderBox';
 import BaseMixin from '../_util/BaseMixin';
 import { saveRef } from './utils';
 import { splitAttrs, findDOMNode } from '../_util/props-util';
-import getTransitionProps from '../_util/getTransitionProps';
+import { getTransitionProps, Transition } from '../_util/transition';
 
 export default {
   name: 'VCTriggerPopup',

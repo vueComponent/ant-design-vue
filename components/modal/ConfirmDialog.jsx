@@ -94,7 +94,9 @@ export default {
           <div class={`${contentPrefixCls}-body`}>
             {iconNode}
             {props.title === undefined ? null : (
-              <span class={`${contentPrefixCls}-title`}>{props.title}</span>
+              <span class={`${contentPrefixCls}-title`}>
+                {typeof props.title === 'function' ? props.title(h) : props.title}
+              </span>
             )}
             <div class={`${contentPrefixCls}-content`}>
               {typeof props.content === 'function' ? props.content(h) : props.content}

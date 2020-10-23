@@ -2,6 +2,8 @@ import PropTypes, { withUndefined } from '../_util/vue-types';
 import { PaginationProps as getPaginationProps } from '../pagination';
 import { SpinProps as getSpinProps } from '../spin';
 import { Store } from './createStore';
+import { tuple } from '../_util/type';
+import { ExtractPropTypes } from 'vue';
 
 const PaginationProps = getPaginationProps();
 const SpinProps = getSpinProps();
@@ -14,13 +16,13 @@ export const ColumnFilterItem = PropTypes.shape({
 }).loose;
 
 export const ColumnProps = {
-  title: PropTypes.any,
-  // key?: React.Key;
+  title: PropTypes.VNodeChild,
+  key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   dataIndex: PropTypes.string,
   customRender: PropTypes.func,
   customCell: PropTypes.func,
   customHeaderCell: PropTypes.func,
-  align: PropTypes.oneOf(['left', 'right', 'center']),
+  align: PropTypes.oneOf(tuple('left', 'right', 'center')),
   ellipsis: PropTypes.looseBool,
   filters: PropTypes.arrayOf(ColumnFilterItem),
   // onFilter: (value: any, record: T) => PropTypes.looseBool,
@@ -29,19 +31,19 @@ export const ColumnProps = {
   filterDropdownVisible: PropTypes.looseBool,
   // onFilterDropdownVisibleChange?: (visible: boolean) => void;
   sorter: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]),
-  defaultSortOrder: PropTypes.oneOf(['ascend', 'descend']),
+  defaultSortOrder: PropTypes.oneOf(tuple('ascend', 'descend')),
   colSpan: PropTypes.number,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string,
   fixed: withUndefined(
-    PropTypes.oneOfType([PropTypes.looseBool, PropTypes.oneOf(['left', 'right'])]),
+    PropTypes.oneOfType([PropTypes.looseBool, PropTypes.oneOf(tuple('left', 'right'))]),
   ),
   filterIcon: PropTypes.any,
   filteredValue: PropTypes.array,
   filtered: PropTypes.looseBool,
   defaultFilteredValue: PropTypes.array,
   sortOrder: withUndefined(
-    PropTypes.oneOfType([PropTypes.looseBool, PropTypes.oneOf(['ascend', 'descend'])]),
+    PropTypes.oneOfType([PropTypes.looseBool, PropTypes.oneOf(tuple('ascend', 'descend'))]),
   ),
   sortDirections: PropTypes.array,
   // children?: ColumnProps<T>[];
@@ -50,19 +52,21 @@ export const ColumnProps = {
   // onHeaderCell?: (props: ColumnProps<T>) => any;
 };
 
-// export interface TableComponents {
-//   table?: any;
-//   header?: {
-//     wrapper?: any;
-//     row?: any;
-//     cell?: any;
-//   };
-//   body?: {
-//     wrapper?: any;
-//     row?: any;
-//     cell?: any;
-//   };
-// }
+export type IColumnProps = Partial<ExtractPropTypes<typeof ColumnProps>>;
+
+export interface TableComponents {
+  table?: any;
+  header?: {
+    wrapper?: any;
+    row?: any;
+    cell?: any;
+  };
+  body?: {
+    wrapper?: any;
+    row?: any;
+    cell?: any;
+  };
+}
 
 export const TableLocale = PropTypes.shape({
   filterTitle: PropTypes.string,
@@ -91,7 +95,9 @@ export const TableRowSelection = {
   hideDefaultSelections: PropTypes.looseBool,
   fixed: PropTypes.looseBool,
   columnWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  selectWay: PropTypes.oneOf(['onSelect', 'onSelectMultiple', 'onSelectAll', 'onSelectInvert']),
+  selectWay: PropTypes.oneOf(
+    tuple('onSelect', 'onSelectMultiple', 'onSelectAll', 'onSelectInvert'),
+  ),
   columnTitle: PropTypes.any,
 };
 
@@ -102,11 +108,11 @@ export const TableProps = {
   pagination: PropTypes.oneOfType([
     PropTypes.shape({
       ...PaginationProps,
-      position: PropTypes.oneOf(['top', 'bottom', 'both']),
+      position: PropTypes.oneOf(tuple('top', 'bottom', 'both')),
     }).loose,
     PropTypes.looseBool,
   ]),
-  size: PropTypes.oneOf(['default', 'middle', 'small', 'large']),
+  size: PropTypes.oneOf(tuple('default', 'middle', 'small', 'large')),
   dataSource: PropTypes.array,
   components: PropTypes.object,
   columns: PropTypes.array,
@@ -145,16 +151,21 @@ export const TableProps = {
   // children?: React.ReactNode;
 };
 
-// export interface TableStateFilters {
-//   [key: string]: string[];
-// }
+export type ITableRowSelection = Partial<ExtractPropTypes<typeof TableRowSelection>>;
 
-// export interface TableState<T> {
-//   pagination: PaginationProps;
-//   filters: TableStateFilters;
-//   sortColumn: ColumnProps<T> | null;
-//   sortOrder: PropTypes.string,
-// }
+export type ITableProps = Partial<ExtractPropTypes<typeof TableProps>>;
+
+export interface TableStateFilters {
+  [key: string]: string[];
+}
+
+export interface TableState {
+  pagination?: Partial<ExtractPropTypes<typeof PaginationProps>>;
+  filters?: TableStateFilters;
+  sortColumn?: Partial<ExtractPropTypes<typeof ColumnProps>> | null;
+  sortOrder?: string;
+  columns?: IColumnProps[];
+}
 
 // export type SelectionItemSelectFn = (key: string[]) => any;
 

@@ -1,8 +1,8 @@
 import PropTypes from '../_util/vue-types';
-
+import { defineComponent } from 'vue';
 import { Store } from './createStore';
 import { getSlot } from '../_util/props-util';
-import Omit from 'omit.js';
+import omit from 'omit.js';
 
 const BodyRowProps = {
   store: Store,
@@ -11,7 +11,7 @@ const BodyRowProps = {
 };
 
 export default function createBodyRow(Component = 'tr') {
-  const BodyRow = {
+  const BodyRow = defineComponent({
     name: 'BodyRow',
     inheritAttrs: false,
     props: BodyRowProps,
@@ -22,7 +22,11 @@ export default function createBodyRow(Component = 'tr') {
         selected: selectedRowKeys.indexOf(this.rowKey) >= 0,
       };
     },
-
+    setup() {
+      return {
+        unsubscribe: null,
+      };
+    },
     mounted() {
       this.subscribe();
     },
@@ -46,7 +50,7 @@ export default function createBodyRow(Component = 'tr') {
     },
 
     render() {
-      const rowProps = Omit({ ...this.$props, ...this.$attrs }, [
+      const rowProps = omit({ ...this.$props, ...this.$attrs }, [
         'prefixCls',
         'rowKey',
         'store',
@@ -54,7 +58,7 @@ export default function createBodyRow(Component = 'tr') {
       ]);
       const className = {
         [`${this.prefixCls}-row-selected`]: this.selected,
-        [this.$attrs.class]: !!this.$attrs.class,
+        [this.$attrs.class as string]: !!this.$attrs.class,
       };
 
       return (
@@ -63,7 +67,7 @@ export default function createBodyRow(Component = 'tr') {
         </Component>
       );
     },
-  };
+  });
 
   return BodyRow;
 }

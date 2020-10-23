@@ -5,6 +5,7 @@ import Menu from '../menu';
 import classNames from '../_util/classNames';
 import { SelectionCheckboxAllProps } from './interface';
 import BaseMixin from '../_util/BaseMixin';
+import { defineComponent } from 'vue';
 
 function checkSelection({
   store,
@@ -87,12 +88,28 @@ function getCheckState(props) {
   );
 }
 
-export default {
+export default defineComponent({
   name: 'SelectionCheckboxAll',
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: SelectionCheckboxAllProps,
   data() {
+    const { $props: props } = this;
+
+    return {
+      checked: getCheckState(props),
+      indeterminate: getIndeterminateState(props),
+    };
+  },
+
+  setup() {
+    return {
+      defaultSelections: [],
+      unsubscribe: null,
+    };
+  },
+
+  created() {
     const { $props: props } = this;
     this.defaultSelections = props.hideDefaultSelections
       ? []
@@ -106,11 +123,6 @@ export default {
             text: props.locale.selectInvert,
           },
         ];
-
-    return {
-      checked: getCheckState(props),
-      indeterminate: getIndeterminateState(props),
-    };
   },
 
   watch: {
@@ -149,7 +161,7 @@ export default {
       const checked = getCheckState(props);
       const indeterminate = getIndeterminateState(props);
       this.setState(prevState => {
-        const newState = {};
+        const newState: any = {};
         if (indeterminate !== prevState.indeterminate) {
           newState.indeterminate = indeterminate;
         }
@@ -229,4 +241,4 @@ export default {
       </div>
     );
   },
-};
+});

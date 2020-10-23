@@ -1,7 +1,9 @@
+import { defineComponent } from 'vue';
 import T from './Table';
+import {} from './interface';
 import { getOptionProps, getKey, getPropsData, getSlot } from '../_util/props-util';
 
-const Table = {
+const Table = defineComponent({
   name: 'ATable',
   Column: T.Column,
   ColumnGroup: T.ColumnGroup,
@@ -79,7 +81,7 @@ const Table = {
     };
     return <T {...tProps} ref="table" />;
   },
-};
+});
 /* istanbul ignore next */
 Table.install = function(app) {
   app.component(Table.name, Table);

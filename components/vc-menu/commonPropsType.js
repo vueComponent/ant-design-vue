@@ -37,4 +37,8 @@ export default {
   itemIcon: PropTypes.any,
   expandIcon: PropTypes.any,
   overflowedIndicator: PropTypes.any,
+  onClick: PropTypes.func,
+  onSelect: PropTypes.func,
+  onDeselect: PropTypes.func,
+  children: PropTypes.VNodeChild,
 };

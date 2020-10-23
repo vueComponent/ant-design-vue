@@ -1,3 +1,4 @@
+import { watchEffect, reactive, defineComponent } from 'vue';
 import FilterFilled from '@ant-design/icons-vue/FilterFilled';
 import Menu, { SubMenu, Item as MenuItem } from '../vc-menu';
 import closest from 'dom-closest';
@@ -8,17 +9,18 @@ import Checkbox from '../checkbox';
 import Radio from '../radio';
 import FilterDropdownMenuWrapper from './FilterDropdownMenuWrapper';
 import { FilterMenuProps } from './interface';
-import { initDefaultProps, isValidElement, findDOMNode } from '../_util/props-util';
+import { isValidElement, findDOMNode } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { cloneElement } from '../_util/vnode';
 import BaseMixin2 from '../_util/BaseMixin2';
 import { generateValueMaps } from './util';
-import { watchEffect, reactive } from 'vue';
+import { Key } from '../_util/type';
 
 function stopPropagation(e) {
   e.stopPropagation();
 }
 
-export default {
+export default defineComponent({
   name: 'FilterMenu',
   mixins: [BaseMixin2],
   inheritAttrs: false,
@@ -86,7 +88,7 @@ export default {
       this.setState({ sSelectedKeys: selectedKeys });
     },
 
-    setVisible(visible) {
+    setVisible(visible: boolean) {
       const { column } = this;
       if (!('filterDropdownVisible' in column)) {
         this.setState({ sVisible: visible });
@@ -113,7 +115,7 @@ export default {
       this.$nextTick(this.confirmFilter2);
     },
 
-    onVisibleChange(visible) {
+    onVisibleChange(visible: boolean) {
       this.setVisible(visible);
       const { column } = this.$props;
       // https://github.com/ant-design/ant-design/issues/17833
@@ -121,7 +123,7 @@ export default {
         this.confirmFilter2();
       }
     },
-    handleMenuItemClick(info) {
+    handleMenuItemClick(info: { keyPath: Key[]; key: Key }) {
       const { sSelectedKeys: selectedKeys } = this;
       if (!info.keyPath || info.keyPath.length <= 1) {
         return;
@@ -297,4 +299,4 @@ export default {
       </Dropdown>
     );
   },
-};
+});

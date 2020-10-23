@@ -1,4 +1,4 @@
-import { inject, markRaw } from 'vue';
+import { defineComponent, inject, markRaw } from 'vue';
 import CaretUpFilled from '@ant-design/icons-vue/CaretUpFilled';
 import CaretDownFilled from '@ant-design/icons-vue/CaretDownFilled';
 import VcTable, { INTERNAL_COL_DEFINE } from '../vc-table';
@@ -12,10 +12,18 @@ import Column from './Column';
 import ColumnGroup from './ColumnGroup';
 import createBodyRow from './createBodyRow';
 import { flatArray, treeMap, flatFilter } from './util';
-import { initDefaultProps, getOptionProps } from '../_util/props-util';
+import { getOptionProps } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import BaseMixin from '../_util/BaseMixin';
 import { defaultConfigProvider } from '../config-provider';
-import { TableProps } from './interface';
+import {
+  TableProps,
+  TableComponents,
+  TableState,
+  ITableProps,
+  IColumnProps,
+  TableStateFilters,
+} from './interface';
 import Pagination from '../pagination';
 import Spin from '../spin';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -30,15 +38,15 @@ function stopPropagation(e) {
   e.stopPropagation();
 }
 
-function getRowSelection(props) {
+function getRowSelection(props: ITableProps) {
   return props.rowSelection || {};
 }
 
-function getColumnKey(column, index) {
+function getColumnKey(column: IColumnProps, index?: number) {
   return column.key || column.dataIndex || index;
 }
 
-function isSameColumn(a, b) {
+function isSameColumn(a: IColumnProps, b: IColumnProps): boolean {
   if (a && b && a.key && a.key === b.key) {
     return true;
   }
@@ -68,7 +76,7 @@ const defaultPagination = {
  */
 const emptyObject = {};
 
-const createComponents = (components = {}) => {
+const createComponents = (components: TableComponents = {}) => {
   const bodyRow = components && components.body && components.body.row;
   return {
     ...components,
@@ -79,37 +87,37 @@ const createComponents = (components = {}) => {
   };
 };
 
-function isTheSameComponents(components1 = {}, components2 = {}) {
+function isTheSameComponents(components1: TableComponents = {}, components2: TableComponents = {}) {
   return (
     components1 === components2 ||
     ['table', 'header', 'body'].every(key => shallowEqual(components1[key], components2[key]))
   );
 }
 
-function getFilteredValueColumns(state, columns) {
+function getFilteredValueColumns(state: TableState, columns?: IColumnProps) {
   return flatFilter(
     columns || (state || {}).columns || [],
-    column => typeof column.filteredValue !== 'undefined',
+    (column: IColumnProps) => typeof column.filteredValue !== 'undefined',
   );
 }
 
-function getFiltersFromColumns(state, columns) {
+function getFiltersFromColumns(state: TableState, columns: IColumnProps) {
   const filters = {};
-  getFilteredValueColumns(state, columns).forEach(col => {
+  getFilteredValueColumns(state, columns).forEach((col: IColumnProps) => {
     const colKey = getColumnKey(col);
     filters[colKey] = col.filteredValue;
   });
   return filters;
 }
 
-function isFiltersChanged(state, filters) {
+function isFiltersChanged(state: TableState, filters: TableStateFilters[]) {
   if (Object.keys(filters).length !== Object.keys(state.filters).length) {
     return true;
   }
   return Object.keys(filters).some(columnKey => filters[columnKey] !== state.filters[columnKey]);
 }
 
-export default {
+export default defineComponent({
   name: 'Table',
   mixins: [BaseMixin],
   inheritAttrs: false,
@@ -132,24 +140,19 @@ export default {
 
   setup() {
     return {
+      vcTable: null,
+      checkboxPropsCache: {},
+      store: null,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
 
   data() {
-    this.vcTable = null;
-    // this.columns = props.columns || normalizeColumns(props.children)
     const props = getOptionProps(this);
     warning(
       !props.expandedRowRender || !('scroll' in props),
       '`expandedRowRender` and `scroll` are not compatible. Please use one of them at one time.',
     );
-    this.checkboxPropsCache = {};
-
-    this.store = createStore({
-      selectedRowKeys: getRowSelection(this.$props).selectedRowKeys || [],
-      selectionDirty: false,
-    });
     return {
       ...this.getDefaultSortOrder(props.columns || []),
       // 减少状态
@@ -159,6 +162,13 @@ export default {
       sComponents: markRaw(createComponents(this.components)),
       filterDataCnt: 0,
     };
+  },
+  created() {
+    const props = getOptionProps(this);
+    this.store = createStore({
+      selectedRowKeys: getRowSelection(props).selectedRowKeys || [],
+      selectionDirty: false,
+    });
   },
   watch: {
     pagination: {
@@ -847,7 +857,7 @@ export default {
       delete pagination.onChange;
       delete pagination.onShowSizeChange;
       const filters = state.sFilters;
-      const sorter = {};
+      const sorter: any = {};
       let currentColumn = column;
       if (state.sSortColumn && state.sSortOrder) {
         currentColumn = state.sSortColumn;
@@ -1088,7 +1098,7 @@ export default {
             </div>
           );
           customHeaderCell = col => {
-            let colProps = {};
+            let colProps: any = {};
             // Get original first
             if (column.customHeaderCell) {
               colProps = {
@@ -1153,7 +1163,7 @@ export default {
       const { showHeader, locale, getPopupContainer, ...restProps } = {
         ...getOptionProps(this),
         ...this.$attrs,
-      };
+      } as any;
       const data = this.getCurrentPageData();
       const expandIconAsCell = this.expandedRowRender && this.expandIconAsCell !== false;
 
@@ -1278,4 +1288,4 @@ export default {
       </div>
     );
   },
-};
+});

@@ -11,6 +11,7 @@ const Menu = {
   inheritAttrs: false,
   props: {
     ...commonPropsType,
+    onClick: PropTypes.func,
     selectable: PropTypes.looseBool.def(true),
   },
   mixins: [BaseMixin],

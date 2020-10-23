@@ -1,18 +1,29 @@
+import { defineComponent } from 'vue';
 import Checkbox from '../checkbox';
 import Radio from '../radio';
 import { SelectionBoxProps } from './interface';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps } from '../_util/props-util';
 
-export default {
+export default defineComponent({
   name: 'SelectionBox',
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: SelectionBoxProps,
   data() {
     return {
-      checked: this.getCheckState(this.$props),
+      checked: false,
     };
+  },
+
+  setup() {
+    return {
+      unsubscribe: null,
+    };
+  },
+
+  created() {
+    this.checked = this.getCheckState(this.$props);
   },
 
   mounted() {
@@ -25,7 +36,7 @@ export default {
     }
   },
   methods: {
-    getCheckState(props) {
+    getCheckState(props): boolean {
       const { store, defaultSelection, rowIndex } = props;
       let checked = false;
       if (store.getState().selectionDirty) {
@@ -47,7 +58,7 @@ export default {
   },
 
   render() {
-    const { type, rowIndex, ...rest } = { ...getOptionProps(this), ...this.$attrs };
+    const { type, rowIndex, ...rest } = { ...getOptionProps(this), ...this.$attrs } as any;
     const { checked } = this;
     const checkboxProps = {
       checked,
@@ -59,4 +70,4 @@ export default {
     }
     return <Checkbox {...checkboxProps} />;
   },
-};
+});

@@ -5,6 +5,8 @@ import { VNodeChild } from 'vue';
 
 import { AntdComponent, AntdProps } from '../component';
 
+export type CollapseType = 'clickTrigger' | 'responsive';
+
 export interface LayoutSiderProps {
   /**
    * whether can be collapsed
@@ -68,15 +70,16 @@ export interface LayoutSiderProps {
 
   /**
    * the callback function, executed by clicking the trigger or activating the responsive layout
-   * @param params
+   * @param collapsed
+   * @param type
    */
-  onCollapse?: (params: { collapsed: boolean; type: string }) => void;
+  onCollapse?: (collapsed: boolean, type: CollapseType) => void;
 
   /**
    * the callback function, executed when breakpoints changed
-   * @param params
+   * @param broken
    */
-  onBreakpoint?: (params: { broken: string }) => void;
+  onBreakpoint?: (broken: boolean) => void;
 }
 
 export declare class LayoutSider extends AntdComponent {

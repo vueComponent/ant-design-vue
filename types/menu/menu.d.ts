@@ -126,9 +126,9 @@ export declare class Menu extends AntdComponent {
 
     /**
      * called when open/close sub menu
-     * @param params
+     * @param openKeys
      */
-    onOpenChange?: (params: { openKeys: string[] }) => void;
+    onOpenChange?: (openKeys: string[]) => void;
 
     /**
      * callback executed when a menu item is selected

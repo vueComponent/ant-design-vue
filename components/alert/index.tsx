@@ -14,6 +14,7 @@ import PropTypes from '../_util/vue-types';
 import { getTransitionProps, Transition } from '../_util/transition';
 import { getComponent, isValidElement, findDOMNode } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
+import { tuple } from '../_util/type';
 
 function noop() {}
 
@@ -35,7 +36,7 @@ export const AlertProps = {
   /**
    * Type of Alert styles, options:`success`, `info`, `warning`, `error`
    */
-  type: PropTypes.oneOf(['success', 'info', 'warning', 'error']),
+  type: PropTypes.oneOf(tuple('success', 'info', 'warning', 'error')),
   /** Whether Alert can be closed */
   closable: PropTypes.looseBool,
   /** Close text to show */
@@ -98,7 +99,7 @@ const Alert = defineComponent({
 
   render() {
     const { prefixCls: customizePrefixCls, banner, closing, closed, $attrs } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('alert', customizePrefixCls);
 
     let { closable, type, showIcon } = this;

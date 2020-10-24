@@ -187,7 +187,7 @@ const Drawer = defineComponent({
         >
           {this.renderHeader(prefixCls)}
           <div key="body" class={`${prefixCls}-body`} style={bodyStyle}>
-            {this.$slots.default && this.$slots.default()}
+            {this.$slots.default?.()}
           </div>
         </div>
       );

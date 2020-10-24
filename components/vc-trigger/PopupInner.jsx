@@ -13,7 +13,7 @@ export default {
     return (
       <div class={!visible ? hiddenClassName : ''}>
         <LazyRenderBox class={`${prefixCls}-content`} visible={visible}>
-          {this.$slots.default && this.$slots.default()}
+          {this.$slots.default?.()}
         </LazyRenderBox>
       </div>
     );

@@ -40,7 +40,7 @@ const TransBtn = (props: TransBtnProps, { slots }: SetupContext) => {
         icon
       ) : (
         <span class={className.split(/\s+/).map((cls: any) => `${cls}-icon`)}>
-          {slots.default && slots.default()}
+          {slots.default?.()}
         </span>
       )}
     </span>

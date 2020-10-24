@@ -1,4 +1,4 @@
-import { reactive, provide, VNodeTypes, PropType, defineComponent, App } from 'vue';
+import { reactive, provide, VNodeTypes, PropType, defineComponent, App, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
 import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
@@ -81,7 +81,7 @@ const ConfigProvider = defineComponent({
     getPopupContainer: {
       type: Function as PropType<(triggerNode: HTMLElement) => HTMLElement>,
     },
-    prefixCls: PropTypes.string,
+    prefixCls: String,
     getPrefixCls: {
       type: Function as PropType<(suffixCls?: string, customizePrefixCls?: string) => string>,
     },
@@ -138,6 +138,10 @@ const ConfigProvider = defineComponent({
       ...props,
       getPrefixCls: getPrefixClsWrapper,
       renderEmpty: renderEmptyComponent,
+    });
+
+    watch(props, () => {
+      Object.assign(configProvider, props);
     });
 
     provide('configProvider', configProvider);

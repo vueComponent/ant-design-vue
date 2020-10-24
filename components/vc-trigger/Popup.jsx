@@ -246,7 +246,7 @@ export default {
                 align={align}
                 onAlign={this.onAlign}
               >
-                <PopupInner {...popupInnerProps}>{$slots.default && $slots.default()}</PopupInner>
+                <PopupInner {...popupInnerProps}>{$slots.default?.()}</PopupInner>
               </Align>
             ) : null}
           </Transition>

@@ -9,7 +9,7 @@ exports[`Comment Comment can be used as editor, user can customize the editor co
       <!---->
       <div class="ant-spin-container">
         <ul class="ant-list-items">
-          <li class="ant-list-item">
+          <li class="ant-list-item ">
             <div class="ant-comment">
               <div class="ant-comment-inner">
                 <div class="ant-comment-avatar"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="comment-avatar"></div>
@@ -43,6 +43,7 @@ exports[`Comment Comment can be used as editor, user can customize the editor co
         <div class="ant-comment-content-detail">
           <div>
             <div class="ant-row ant-form-item">
+              <!---->
               <div class="ant-col ant-form-item-control-wrapper">
                 <div class="ant-form-item-control"><span class="ant-form-item-children"><textarea rows="4" class="ant-input"></textarea><!----></span>
                   <!---->
@@ -51,6 +52,7 @@ exports[`Comment Comment can be used as editor, user can customize the editor co
               </div>
             </div>
             <div class="ant-row ant-form-item">
+              <!---->
               <div class="ant-col ant-form-item-control-wrapper">
                 <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="submit" ant-click-animating-without-extra-node="true"><!----><span>Add Comment</span></button>
                   <!----></span>

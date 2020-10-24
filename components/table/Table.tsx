@@ -147,14 +147,13 @@ export default defineComponent({
     };
   },
 
-  data() {
+  data(this) {
     const props = getOptionProps(this);
     warning(
       !props.expandedRowRender || !('scroll' in props),
       '`expandedRowRender` and `scroll` are not compatible. Please use one of them at one time.',
     );
-    const self = this;
-    const { getDefaultSortOrder, getDefaultFilters, getDefaultPagination } = self as typeof self & {
+    const { getDefaultSortOrder, getDefaultFilters, getDefaultPagination } = this as typeof this & {
       getDefaultSortOrder: Function;
       getDefaultFilters: Function;
       getDefaultPagination: Function;

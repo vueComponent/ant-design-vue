@@ -1,4 +1,4 @@
-import { defineComponent, inject, provide, toRef } from 'vue';
+import { defineComponent, inject, provide, toRef, App, ExtractPropTypes } from 'vue';
 import omit from 'omit.js';
 import VcMenu, { Divider, ItemGroup } from '../vc-menu';
 import SubMenu from './SubMenu';
@@ -10,6 +10,8 @@ import { hasProp, getOptionProps, getSlot } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import commonPropsType from '../vc-menu/commonPropsType';
 import { defaultConfigProvider } from '../config-provider';
+import { SiderContextProps } from '../layout/Sider';
+import { tuple } from '../_util/type';
 // import raf from '../_util/raf';
 
 export const MenuMode = PropTypes.oneOf([
@@ -22,7 +24,7 @@ export const MenuMode = PropTypes.oneOf([
 
 export const menuProps = {
   ...commonPropsType,
-  theme: PropTypes.oneOf(['light', 'dark']).def('light'),
+  theme: PropTypes.oneOf(tuple('light', 'dark')).def('light'),
   mode: MenuMode.def('vertical'),
   selectable: PropTypes.looseBool,
   selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
@@ -43,9 +45,9 @@ export const menuProps = {
   onClick: PropTypes.func,
   onMouseenter: PropTypes.func,
   onSelectChange: PropTypes.func,
-  'onUpdate:selectedKeys': PropTypes.func,
-  'onUpdate:openKeys': PropTypes.func,
 };
+
+export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
 
 const Menu = defineComponent({
   name: 'AMenu',
@@ -56,23 +58,33 @@ const Menu = defineComponent({
   SubMenu: { ...SubMenu, name: 'ASubMenu' },
   ItemGroup: { ...ItemGroup, name: 'AMenuItemGroup' },
   mixins: [BaseMixin],
+  emits: [
+    'update:selectedKeys',
+    'update:openKeys',
+    'mouseenter',
+    'openChange',
+    'click',
+    'selectChange',
+    'select',
+    'deselect',
+  ],
   created() {
     provide('getInlineCollapsed', this.getInlineCollapsed);
     provide('menuPropsContext', this.$props);
   },
   setup() {
-    const layoutSiderContext = inject('layoutSiderContext', {});
+    const layoutSiderContext = inject<SiderContextProps>('layoutSiderContext', {});
     const layoutSiderCollapsed = toRef(layoutSiderContext, 'sCollapsed');
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
       layoutSiderContext,
       layoutSiderCollapsed,
+      propsUpdating: false,
+      switchingModeFromInline: false,
+      leaveAnimationExecutedWhenInlineCollapsed: false,
+      inlineOpenKeys: [],
     };
   },
-  // model: {
-  //   prop: 'selectedKeys',
-  //   event: 'selectChange',
-  // },
   updated() {
     this.propsUpdating = false;
   },
@@ -96,15 +108,12 @@ const Menu = defineComponent({
     },
   },
   data() {
-    const props = getOptionProps(this);
+    const props: MenuProps = getOptionProps(this);
     warning(
       !('inlineCollapsed' in props && props.mode !== 'inline'),
       'Menu',
       "`inlineCollapsed` should only be used when Menu's `mode` is inline.",
     );
-    this.switchingModeFromInline = false;
-    this.leaveAnimationExecutedWhenInlineCollapsed = false;
-    this.inlineOpenKeys = [];
     let sOpenKeys;
 
     if ('openKeys' in props) {
@@ -244,7 +253,7 @@ const Menu = defineComponent({
     const menuOpenAnimation = this.getMenuOpenAnimation(menuMode);
     const { class: className, ...otherAttrs } = this.$attrs;
     const menuClassName = {
-      [className]: className,
+      [className as string]: className,
       [`${prefixCls}-${theme}`]: true,
       [`${prefixCls}-inline-collapsed`]: this.getInlineCollapsed(),
     };
@@ -297,7 +306,7 @@ const Menu = defineComponent({
 });
 
 /* istanbul ignore next */
-Menu.install = function(app) {
+Menu.install = function(app: App) {
   app.component(Menu.name, Menu);
   app.component(Menu.Item.name, Menu.Item);
   app.component(Menu.SubMenu.name, Menu.SubMenu);

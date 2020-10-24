@@ -156,7 +156,7 @@ export default defineComponent({
           column,
           filterDropdown
             ? selectedKeys
-            : selectedKeys.map(key => valueKeys[key]).filter(key => key !== undefined),
+            : selectedKeys.map((key: any) => valueKeys[key]).filter(key => key !== undefined),
         );
       }
     },

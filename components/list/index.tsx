@@ -8,9 +8,11 @@ import Pagination, { PaginationConfig } from '../pagination';
 import { Row } from '../grid';
 
 import Item from './Item';
-import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
+import { getComponent, getSlot } from '../_util/props-util';
+import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { cloneElement } from '../_util/vnode';
-import { provide, inject } from 'vue';
+import { provide, inject, defineComponent, App } from 'vue';
+import { tuple } from '../_util/type';
 
 export { ListItemProps, ListItemMetaProps } from './Item';
 
@@ -29,7 +31,7 @@ export const ListGridType = {
   xxl: PropTypes.oneOf(ColumnCount),
 };
 
-export const ListSize = ['small', 'default', 'large'];
+export const ListSize = tuple('small', 'default', 'large');
 
 export const ListProps = () => ({
   bordered: PropTypes.looseBool,
@@ -52,7 +54,7 @@ export const ListProps = () => ({
   locale: PropTypes.object,
 });
 
-const List = {
+const List = defineComponent({
   inheritAttrs: false,
   Item,
   name: 'AList',
@@ -65,31 +67,35 @@ const List = {
   }),
   created() {
     provide('listContext', this);
-  },
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-
-  data() {
-    this.keys = [];
     this.defaultPaginationProps = {
       current: 1,
       pageSize: 10,
-      onChange: (page, pageSize) => {
+      onChange: (page: number, pageSize: number) => {
         const { pagination } = this;
         this.paginationCurrent = page;
-        if (pagination && pagination.onChange) {
-          pagination.onChange(page, pageSize);
+        if (pagination && (pagination as any).onChange) {
+          (pagination as any).onChange(page, pageSize);
         }
       },
       total: 0,
     };
     this.onPaginationChange = this.triggerPaginationEvent('onChange');
     this.onPaginationShowSizeChange = this.triggerPaginationEvent('onShowSizeChange');
+  },
+  setup() {
+    return {
+      keys: [],
+      defaultPaginationProps: {},
+      onPaginationChange: null,
+      onPaginationShowSizeChange: null,
+      configProvider: inject('configProvider', defaultConfigProvider),
+    };
+  },
+
+  data() {
     const { pagination } = this.$props;
-    const paginationObj = pagination && typeof pagination === 'object' ? pagination : {};
+    const paginationObj: Partial<typeof pagination> =
+      pagination && typeof pagination === 'object' ? pagination : {};
     return {
       paginationCurrent: paginationObj.defaultCurrent || 1,
       paginationSize: paginationObj.defaultPageSize || 10,
@@ -163,7 +169,7 @@ const List = {
       paginationSize,
       $attrs,
     } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('list', customizePrefixCls);
     const { class: className, ...restAttrs } = $attrs;
     const loadMore = getComponent(this, 'loadMore');
@@ -209,7 +215,7 @@ const List = {
       total: dataSource.length,
       current: paginationCurrent,
       pageSize: paginationSize,
-      ...(pagination || {}),
+      ...((pagination as any) || {}),
     };
     classString;
     const largestPage = Math.ceil(paginationProps.total / paginationProps.pageSize);
@@ -276,10 +282,10 @@ const List = {
       </div>
     );
   },
-};
+});
 
 /* istanbul ignore next */
-List.install = function(app) {
+List.install = function(app: App) {
   app.component(List.name, List);
   app.component(List.Item.name, List.Item);
   app.component(List.Item.Meta.displayName, List.Item.Meta);

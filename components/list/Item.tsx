@@ -3,15 +3,14 @@ import classNames from '../_util/classNames';
 import { getComponent, isStringElement, isEmptyElement, getSlot } from '../_util/props-util';
 import { Col } from '../grid';
 import { defaultConfigProvider } from '../config-provider';
-import { ListGridType } from './index';
 import { cloneElement } from '../_util/vnode';
-import { inject } from 'vue';
+import { defineComponent, ExtractPropTypes, FunctionalComponent, inject } from 'vue';
 
 export const ListItemProps = {
   prefixCls: PropTypes.string,
   extra: PropTypes.any,
   actions: PropTypes.array,
-  grid: ListGridType,
+  grid: PropTypes.any,
 };
 
 export const ListItemMetaProps = {
@@ -21,9 +20,11 @@ export const ListItemMetaProps = {
   title: PropTypes.any,
 };
 
-export const ListItemMeta = (props, { slots }) => {
+export const ListItemMeta: FunctionalComponent<Partial<
+  ExtractPropTypes<typeof ListItemMetaProps>
+>> = (props, { slots }) => {
   const configProvider = inject('configProvider', defaultConfigProvider);
-  const getPrefixCls = configProvider.getPrefixCls;
+  const { getPrefixCls } = configProvider;
   const { prefixCls: customizePrefixCls } = props;
   const prefixCls = getPrefixCls('list', customizePrefixCls);
   const avatar = props.avatar || slots.avatar?.();
@@ -53,13 +54,18 @@ function getGrid(grid, t) {
   return grid[t] && Math.floor(24 / grid[t]);
 }
 
-export default {
+export interface ListContext {
+  grid?: any;
+  itemLayout?: string;
+}
+
+export default defineComponent({
   name: 'AListItem',
   inheritAttrs: false,
   Meta: ListItemMeta,
   props: ListItemProps,
   setup() {
-    const listContext = inject('listContext', {});
+    const listContext = inject<ListContext>('listContext', {});
     const configProvider = inject('configProvider', defaultConfigProvider);
     return {
       listContext,
@@ -147,4 +153,4 @@ export default {
 
     return mainContent;
   },
-};
+});

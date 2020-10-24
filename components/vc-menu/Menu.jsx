@@ -47,7 +47,7 @@ const Menu = {
     this.updateMiniStore();
   },
   methods: {
-    onSelect(selectInfo) {
+    handleSelect(selectInfo) {
       const props = this.$props;
       if (props.selectable) {
         // root menu
@@ -70,7 +70,7 @@ const Menu = {
       }
     },
 
-    onClick(e) {
+    handleClick(e) {
       this.__emit('click', e);
     },
     // onKeyDown needs to be exposed as a instance method
@@ -112,7 +112,7 @@ const Menu = {
       }
     },
 
-    onDeselect(selectInfo) {
+    handleDeselect(selectInfo) {
       const props = this.$props;
       if (props.selectable) {
         const selectedKeys = this.store.getState().selectedKeys.concat();
@@ -172,10 +172,10 @@ const Menu = {
       overflowedIndicator: getComponent(this, 'overflowedIndicator', props) || <span>···</span>,
       openTransitionName: this.getOpenTransitionName(),
       children: filterEmpty(props.children),
-      onClick: this.onClick,
+      onClick: this.handleClick,
       onOpenChange: this.onOpenChange,
-      onDeselect: this.onDeselect,
-      onSelect: this.onSelect,
+      onDeselect: this.handleDeselect,
+      onSelect: this.handleSelect,
       ref: this.saveInnerMenu,
     };
 

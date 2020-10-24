@@ -1,8 +1,9 @@
 import { defineComponent, inject } from 'vue';
 import { Item, itemProps } from '../vc-menu';
 import { getOptionProps, getSlot } from '../_util/props-util';
-import Tooltip from '../tooltip';
-function noop() {}
+import Tooltip, { TooltipProps } from '../tooltip';
+import { SiderContextProps } from '../layout/Sider';
+
 export default defineComponent({
   name: 'MenuItem',
   inheritAttrs: false,
@@ -10,13 +11,13 @@ export default defineComponent({
   isMenuItem: true,
   setup() {
     return {
-      getInlineCollapsed: inject('getInlineCollapsed', noop),
-      layoutSiderContext: inject('layoutSiderContext', {}),
+      getInlineCollapsed: inject<() => boolean>('getInlineCollapsed', () => false),
+      layoutSiderContext: inject<SiderContextProps>('layoutSiderContext', {}),
     };
   },
   methods: {
-    onKeyDown(e) {
-      this.$refs.menuItem.onKeyDown(e);
+    onKeyDown(e: HTMLElement) {
+      (this.$refs.menuItem as any).onKeyDown(e);
     },
   },
   render() {
@@ -31,7 +32,7 @@ export default defineComponent({
     } else if (title === false) {
       tooltipTitle = '';
     }
-    const tooltipProps = {
+    const tooltipProps: TooltipProps = {
       title: tooltipTitle,
     };
     const siderCollapsed = this.layoutSiderContext.sCollapsed;
@@ -48,7 +49,7 @@ export default defineComponent({
       ...attrs,
       ref: 'menuItem',
     };
-    const toolTipProps = {
+    const toolTipProps: TooltipProps = {
       ...tooltipProps,
       placement: 'right',
       overlayClassName: `${rootPrefixCls}-inline-collapsed-tooltip`,

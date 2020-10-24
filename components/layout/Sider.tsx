@@ -46,9 +46,10 @@ export const SiderProps = {
 //   belowShow?: boolean;
 // }
 
-// export interface SiderContext {
-//   siderCollapsed: boolean;
-// }
+export interface SiderContextProps {
+  sCollapsed?: boolean;
+  collapsedWidth?: string | number;
+}
 
 const generateId = (() => {
   let i = 0;

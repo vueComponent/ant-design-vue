@@ -1,22 +1,29 @@
-import { inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { SubMenu as VcSubMenu } from '../vc-menu';
 import classNames from '../_util/classNames';
 import Omit from 'omit.js';
 import { getSlot } from '../_util/props-util';
 
-export default {
+export type MenuTheme = 'light' | 'dark';
+
+export interface MenuContextProps {
+  inlineCollapsed?: boolean;
+  theme?: MenuTheme;
+}
+
+export default defineComponent({
   name: 'ASubMenu',
   isSubMenu: true,
   inheritAttrs: false,
   props: { ...VcSubMenu.props },
   setup() {
     return {
-      menuPropsContext: inject('menuPropsContext', {}),
+      menuPropsContext: inject<MenuContextProps>('menuPropsContext', {}),
     };
   },
   methods: {
     onKeyDown(e) {
-      this.$refs.subMenu.onKeyDown(e);
+      (this.$refs.subMenu as any).onKeyDown(e);
     },
   },
 
@@ -33,4 +40,4 @@ export default {
     };
     return <VcSubMenu {...props}>{getSlot(this)}</VcSubMenu>;
   },
-};
+});

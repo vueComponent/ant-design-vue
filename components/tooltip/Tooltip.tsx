@@ -1,4 +1,4 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, ExtractPropTypes, inject } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import classNames from '../_util/classNames';
 import getPlacements from './placements';
@@ -27,13 +27,18 @@ const splitObject = (obj: any, keys: string[]) => {
   return { picked, omitted };
 };
 const props = abstractTooltipProps();
+
+const tooltipProps = {
+  ...props,
+  title: PropTypes.VNodeChild,
+};
+
+export type TooltipProps = Partial<ExtractPropTypes<typeof tooltipProps>>;
+
 export default defineComponent({
   name: 'ATooltip',
   inheritAttrs: false,
-  props: {
-    ...props,
-    title: PropTypes.VNodeChild,
-  },
+  props: tooltipProps,
   emits: ['update:visible', 'visibleChange'],
   setup() {
     return {
@@ -192,7 +197,7 @@ export default defineComponent({
       [openClassName || `${prefixCls}-open`]: sVisible,
       [child.props && child.props.class]: child.props && child.props.class,
     });
-    const tooltipProps = {
+    const vcTooltipProps = {
       ...$attrs,
       ...$props,
       prefixCls,
@@ -205,7 +210,7 @@ export default defineComponent({
       onPopupAlign: this.onPopupAlign,
     };
     return (
-      <VcTooltip {...tooltipProps}>
+      <VcTooltip {...vcTooltipProps}>
         {sVisible ? cloneElement(child, { class: childCls }) : child}
       </VcTooltip>
     );

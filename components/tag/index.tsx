@@ -1,4 +1,13 @@
-import { inject, ref, HTMLAttributes, defineComponent, App, VNodeTypes, watchEffect } from 'vue';
+import {
+  inject,
+  ref,
+  HTMLAttributes,
+  defineComponent,
+  App,
+  watchEffect,
+  PropType,
+  ExtractPropTypes,
+} from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
@@ -16,15 +25,21 @@ import CheckableTag from './CheckableTag';
 const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 const PresetStatusColorRegex = new RegExp(`^(${PresetStatusColorTypes.join('|')})$`);
 
-export interface TagProps extends HTMLAttributes {
-  prefixCls?: string;
-  color?: LiteralUnion<PresetColorType | PresetStatusColorType, string>;
-  closable?: boolean;
-  closeIcon?: VNodeTypes;
-  visible?: boolean;
-  onClose?: (e: MouseEvent) => void;
-  icon?: VNodeTypes;
-}
+const tagProps = {
+  prefixCls: PropTypes.string,
+  color: {
+    type: String as PropType<LiteralUnion<PresetColorType | PresetStatusColorType, string>>,
+  },
+  closable: PropTypes.looseBool.def(false),
+  closeIcon: PropTypes.VNodeChild,
+  visible: PropTypes.looseBool,
+  onClose: {
+    type: Function as PropType<(e: MouseEvent) => void>,
+  },
+  icon: PropTypes.VNodeChild,
+};
+
+export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<typeof tagProps>>;
 
 const Tag = defineComponent({
   name: 'ATag',
@@ -110,7 +125,7 @@ const Tag = defineComponent({
       const isNeedWave = 'onClick' in attrs;
 
       const tagNode = (
-        <span v-show={visible.value} class={tagClassName} style={tagStyle}>
+        <span class={tagClassName} style={tagStyle}>
           {kids}
           {renderCloseIcon()}
         </span>
@@ -121,22 +136,16 @@ const Tag = defineComponent({
   },
 });
 
-Tag.props = {
-  prefixCls: PropTypes.string,
-  color: PropTypes.string,
-  closable: PropTypes.looseBool.def(false),
-  closeIcon: PropTypes.any,
-  visible: PropTypes.looseBool,
-  onClose: PropTypes.func,
-  icon: PropTypes.any,
-};
+Tag.props = tagProps;
 
 Tag.CheckableTag = CheckableTag;
 
-Tag.install = (app: App) => {
+Tag.install = function(app: App) {
   app.component(Tag.name, Tag);
   app.component(CheckableTag.name, CheckableTag);
   return app;
 };
 
-export default Tag;
+export default Tag as typeof Tag & {
+  readonly CheckableTag: typeof CheckableTag;
+};

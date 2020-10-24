@@ -19,21 +19,17 @@ describe('Tag', () => {
     await asyncExpect(() => {
       expect(wrapper.findAll('.anticon-close').length).toBe(1);
       expect(
-        wrapper.findAll('.ant-tag').filter(w => {
-          const style = window.getComputedStyle(w.element, null);
-          return style.display !== 'none';
-        }).length,
-      ).toBe(1);
+        wrapper.findAll('.ant-tag').filter(w => w.element.classList.contains('ant-tag-hidden'))
+          .length,
+      ).toBe(0);
       wrapper.find('.anticon-close').trigger('click');
       expect(onClose).toBeCalled();
     });
     await asyncExpect(() => {
       expect(
-        wrapper.findAll('.ant-tag').filter(w => {
-          const style = window.getComputedStyle(w.element, null);
-          return style.display !== 'none';
-        }).length,
-      ).toBe(0);
+        wrapper.findAll('.ant-tag').filter(w => w.element.classList.contains('ant-tag-hidden'))
+          .length,
+      ).toBe(1);
     });
   });
 
@@ -52,11 +48,9 @@ describe('Tag', () => {
     await asyncExpect(() => {
       expect(wrapper.findAll('.anticon-close').length).toBe(1);
       expect(
-        wrapper.findAll('.ant-tag').filter(w => {
-          const style = window.getComputedStyle(w.element, null);
-          return style.display !== 'none';
-        }).length,
-      ).toBe(1);
+        wrapper.findAll('.ant-tag').filter(w => w.element.classList.contains('ant-tag-hidden'))
+          .length,
+      ).toBe(0);
       wrapper.find('.anticon-close').trigger('click');
     });
     // await asyncExpect(() => {

@@ -1,3 +1,4 @@
+import { flattenChildren } from '../_util/props-util';
 import { App, computed, defineComponent, inject, PropType } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 
@@ -35,9 +36,10 @@ const Divider = defineComponent({
     });
 
     return () => {
+      const children = flattenChildren(slots.default?.());
       return (
         <div class={classString.value} role="separator">
-          <span class={`${prefixCls.value}-inner-text`}>{slots.default?.()}</span>
+          {children.length ? <span class={`${prefixCls.value}-inner-text`}>{children}</span> : null}
         </div>
       );
     };

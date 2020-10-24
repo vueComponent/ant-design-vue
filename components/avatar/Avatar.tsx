@@ -118,7 +118,7 @@ export default defineComponent({
           }
         : {};
 
-    let children: VueNode = this.$slots.default && this.$slots.default();
+    let children: VueNode = this.$slots.default?.();
     if (src && isImgExist) {
       children = (
         <img src={src} srcset={srcset || srcSet} onError={this.handleImgLoadError} alt={alt} />

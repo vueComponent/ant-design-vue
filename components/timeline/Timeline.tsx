@@ -43,7 +43,7 @@ export default defineComponent({
       [`${prefixCls}-reverse`]: !!reverse,
       [`${prefixCls}-${mode}`]: !!mode,
     });
-    const children = filterEmpty(this.$slots.default && this.$slots.default());
+    const children = filterEmpty(this.$slots.default?.());
     // // Remove falsy items
     // const falsylessItems = filterEmpty(this.$slots.default)
     // const items = falsylessItems.map((item, idx) => {

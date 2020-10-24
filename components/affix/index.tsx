@@ -258,7 +258,7 @@ const Affix = defineComponent({
       >
         <div {...props} style={placeholderStyle} ref="placeholderNode">
           <div class={className} ref="fixedNode" style={affixStyle}>
-            {$slots.default && $slots.default()}
+            {$slots.default?.()}
           </div>
         </div>
       </ResizeObserver>

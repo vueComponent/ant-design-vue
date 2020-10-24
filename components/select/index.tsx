@@ -216,7 +216,7 @@ const Select = defineComponent({
         dropdownClassName={rcSelectRtlDropDownClassName}
         onChange={triggerChange}
       >
-        {slots.default && slots.default()}
+        {slots.default?.()}
       </RcSelect>
     );
   },

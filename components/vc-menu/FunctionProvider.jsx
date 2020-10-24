@@ -10,7 +10,7 @@ const FunctionProvider = {
     if (props.injectExtraPropsKey) {
       provide(props.injectExtraPropsKey, reactive(attrs));
     }
-    return () => slots.default && slots.default();
+    return () => slots.default?.();
   },
 };
 

@@ -68,7 +68,7 @@ const TransButton = defineComponent({
         onKeyup={this.onKeyUp}
         style={{ ...(!noStyle ? inlineStyle : null) }}
       >
-        {this.$slots.default && this.$slots.default()}
+        {this.$slots.default?.()}
       </div>
     );
   },

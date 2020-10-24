@@ -82,7 +82,7 @@ export default defineComponent({
         >
           {title}
         </a>
-        {$slots.default && $slots.default()}
+        {$slots.default?.()}
       </div>
     );
   },

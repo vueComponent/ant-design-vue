@@ -52,9 +52,7 @@ export default defineComponent({
         >
           {dot}
         </div>
-        <div class={`${prefixCls}-item-content`}>
-          {this.$slots.default && this.$slots.default()}
-        </div>
+        <div class={`${prefixCls}-item-content`}>{this.$slots.default?.()}</div>
       </li>
     );
   },

@@ -283,7 +283,7 @@ export default defineComponent({
           <div class={`${prefixCls}-ink`}>
             <span class={inkClass} ref="inkNode" />
           </div>
-          {$slots.default && $slots.default()}
+          {$slots.default?.()}
         </div>
       </div>
     );

@@ -169,6 +169,6 @@ export default defineComponent({
     if (csp) {
       this.csp = csp;
     }
-    return this.$slots.default && this.$slots.default()[0];
+    return this.$slots.default?.()[0];
   },
 });

@@ -74,7 +74,7 @@ export default defineComponent({
           size={fullscreen ? undefined : 'small'}
           class={`${prefixCls}-year-select`}
           onChange={this.onYearChange}
-          value={String(year)}
+          value={year}
           options={options}
           getPopupContainer={() => this.calendarHeaderNode}
         ></Select>

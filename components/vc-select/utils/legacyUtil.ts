@@ -6,12 +6,18 @@ function convertNodeToOption(node: VNode): OptionData {
   const {
     key,
     children,
-    props: { value, ...restProps },
+    props: { value, disabled, ...restProps },
   } = node as VNode & {
     children: { default?: () => any };
   };
   const child = children.default ? children.default() : undefined;
-  return { key, value: value !== undefined ? value : key, children: child, ...restProps };
+  return {
+    key,
+    value: value !== undefined ? value : key,
+    children: child,
+    disabled: disabled || disabled === '', // support <a-select-option disabled />
+    ...restProps,
+  };
 }
 
 export function convertChildrenToData(

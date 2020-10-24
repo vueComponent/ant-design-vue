@@ -88,7 +88,7 @@ describe('Modal.confirm triggers callbacks correctly', () => {
     expect($$('.ant-btn')[1].disabled).toBe(true);
   });
 
-  fit('trigger onCancel once when click on cancel button', async () => {
+  it('trigger onCancel once when click on cancel button', async () => {
     const arr = ['info', 'success', 'warning', 'error'];
     for (let type of arr) {
       Modal[type]({
@@ -101,5 +101,13 @@ describe('Modal.confirm triggers callbacks correctly', () => {
       await sleep();
       expect($$(`.ant-modal-confirm-${type}`)).toHaveLength(0);
     }
+  });
+
+  it('should render title', async () => {
+    open({
+      title: h => <span>title</span>,
+    });
+    await sleep();
+    expect($$('.ant-modal-confirm-title')[0].innerHTML).toBe('<span>title</span>');
   });
 });

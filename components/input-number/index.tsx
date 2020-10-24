@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, nextTick, onMounted, ref } from 'vue';
+import { App, defineComponent, inject, nextTick, onMounted, ref, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
 import classNames from '../_util/classNames';
@@ -7,28 +7,6 @@ import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import VcInputNumber from '../vc-input-number/src';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple } from '../_util/type';
-
-export interface InputNumberPropsTypes {
-  prefixCls?: string;
-  min?: number;
-  max?: number;
-  value?: number;
-  step?: number | string;
-  defaultValue?: number;
-  tabindex?: number;
-  onChange?: (value: number | undefined) => void;
-  disabled?: boolean;
-  size?: 'large' | 'small' | 'default';
-  formatter?: (value: number | string | undefined) => string;
-  parser?: (displayValue: string | undefined) => number | string;
-  decimalSeparator?: string;
-  placeholder?: string;
-  name?: string;
-  id?: string;
-  precision?: number;
-  onPressEnter?: EventHandlerNonNull;
-  autofocus?: boolean;
-}
 
 const InputNumberProps = {
   prefixCls: PropTypes.string,
@@ -48,12 +26,15 @@ const InputNumberProps = {
   id: PropTypes.string,
   precision: PropTypes.number,
   autofocus: PropTypes.looseBool,
+  onPressEnter: {
+    type: Function as PropType<EventHandlerNonNull>,
+  },
 };
 
-const InputNumber = defineComponent<InputNumberPropsTypes>({
+const InputNumber = defineComponent({
   name: 'AInputNumber',
   inheritAttrs: false,
-  props: InputNumberProps as any,
+  props: InputNumberProps,
   setup(props) {
     const inputNumberRef = ref(null);
     const focus = () => {
@@ -84,7 +65,7 @@ const InputNumber = defineComponent<InputNumberPropsTypes>({
       ...getOptionProps(this),
       ...this.$attrs,
     } as any;
-    const getPrefixCls = (this as any).configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('input-number', customizePrefixCls);
 
     const inputNumberClass = classNames(
@@ -104,7 +85,7 @@ const InputNumber = defineComponent<InputNumberPropsTypes>({
       ...others,
       class: inputNumberClass,
     };
-    return <VcInputNumber {...vcInputNumberprops} ref="saveInputNumber" />;
+    return <VcInputNumber {...vcInputNumberprops} ref="inputNumberRef" />;
   },
 });
 

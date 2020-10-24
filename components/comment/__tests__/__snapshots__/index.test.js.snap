@@ -9,7 +9,7 @@ exports[`Comment Comment can be used as editor, user can customize the editor co
       <!---->
       <div class="ant-spin-container">
         <ul class="ant-list-items">
-          <li class="ant-list-item ">
+          <li class="ant-list-item">
             <div class="ant-comment">
               <div class="ant-comment-inner">
                 <div class="ant-comment-avatar"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="comment-avatar"></div>

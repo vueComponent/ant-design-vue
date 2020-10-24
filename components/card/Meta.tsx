@@ -1,4 +1,4 @@
-import { defineComponent, inject, PropType, VNodeTypes } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
@@ -7,15 +7,9 @@ export default defineComponent({
   name: 'ACardMeta',
   props: {
     prefixCls: PropTypes.string,
-    title: {
-      type: Object as PropType<VNodeTypes>,
-    },
-    description: {
-      type: Object as PropType<VNodeTypes>,
-    },
-    avatar: {
-      type: Object as PropType<VNodeTypes>,
-    },
+    title: PropTypes.VNodeChild,
+    description: PropTypes.VNodeChild,
+    avatar: PropTypes.VNodeChild,
   },
   setup() {
     return {

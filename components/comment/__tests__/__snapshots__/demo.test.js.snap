@@ -3,7 +3,7 @@
 exports[`renders ./antdv-demo/docs/comment/demo/basic.md correctly 1`] = `
 <div class="ant-comment">
   <div class="ant-comment-inner">
-    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
+    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
     <div class="ant-comment-content">
       <div class="ant-comment-content-author"><span class="ant-comment-content-author-name"><a>Han Solo</a></span><span class="ant-comment-content-author-time"><!----><span>a few seconds ago</span></span></div>
       <div class="ant-comment-content-detail">
@@ -24,7 +24,7 @@ exports[`renders ./antdv-demo/docs/comment/demo/editor.md correctly 1`] = `
 <!--v-if-->
 <div class="ant-comment">
   <div class="ant-comment-inner">
-    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
+    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
     <div class="ant-comment-content">
       <div class="ant-comment-content-author">
         <!---->
@@ -32,6 +32,7 @@ exports[`renders ./antdv-demo/docs/comment/demo/editor.md correctly 1`] = `
       </div>
       <div class="ant-comment-content-detail">
         <div class="ant-row ant-form-item">
+          <!---->
           <div class="ant-col ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><textarea rows="4" class="ant-input"></textarea><!----></span>
               <!---->
@@ -40,6 +41,7 @@ exports[`renders ./antdv-demo/docs/comment/demo/editor.md correctly 1`] = `
           </div>
         </div>
         <div class="ant-row ant-form-item">
+          <!---->
           <div class="ant-col ant-form-item-control-wrapper">
             <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="submit"><!----><span>Add Comment</span></button>
               <!----></span>
@@ -113,7 +115,7 @@ exports[`renders ./antdv-demo/docs/comment/demo/list.md correctly 1`] = `
 exports[`renders ./antdv-demo/docs/comment/demo/nested.md correctly 1`] = `
 <div class="ant-comment">
   <div class="ant-comment-inner">
-    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
+    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
     <div class="ant-comment-content">
       <div class="ant-comment-content-author"><span class="ant-comment-content-author-name"><a>Han Solo</a></span>
         <!---->
@@ -129,7 +131,7 @@ exports[`renders ./antdv-demo/docs/comment/demo/nested.md correctly 1`] = `
   <div class="ant-comment-nested">
     <div class="ant-comment">
       <div class="ant-comment-inner">
-        <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
+        <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
         <div class="ant-comment-content">
           <div class="ant-comment-content-author"><span class="ant-comment-content-author-name"><a>Han Solo</a></span>
             <!---->
@@ -145,7 +147,7 @@ exports[`renders ./antdv-demo/docs/comment/demo/nested.md correctly 1`] = `
       <div class="ant-comment-nested">
         <div class="ant-comment">
           <div class="ant-comment-inner">
-            <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
+            <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
             <div class="ant-comment-content">
               <div class="ant-comment-content-author"><span class="ant-comment-content-author-name"><a>Han Solo</a></span>
                 <!---->
@@ -162,7 +164,7 @@ exports[`renders ./antdv-demo/docs/comment/demo/nested.md correctly 1`] = `
         </div>
         <div class="ant-comment">
           <div class="ant-comment-inner">
-            <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
+            <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-image"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="Han Solo"></span></div>
             <div class="ant-comment-content">
               <div class="ant-comment-content-author"><span class="ant-comment-content-author-name"><a>Han Solo</a></span>
                 <!---->

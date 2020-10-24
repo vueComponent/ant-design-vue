@@ -111,7 +111,7 @@ export default {
     const itemChildren = (
       <Tag
         {...restAttrs}
-        class={classNames(`${prefixCls}-item `, _className, {
+        class={classNames(`${prefixCls}-item`, _className, {
           [`${prefixCls}-item-no-flex`]: !this.isFlexMode(),
         })}
       >

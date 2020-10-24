@@ -63,7 +63,7 @@ export default {
           aria-disabled={disabled ? 'true' : 'false'}
           aria-selected={activeKey === key ? 'true' : 'false'}
           {...events}
-          class={cls}
+          class={cls.trim()}
           key={key}
           style={style}
           ref={activeKey === key ? saveRef('activeTab') : noop}

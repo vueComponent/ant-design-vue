@@ -26,7 +26,7 @@ describe('AutoComplete with Custom Input Element Render', () => {
     input.element.value = '123';
     input.trigger('input');
     Vue.nextTick(() => {
-      expect($$('.ant-select-dropdown-menu-item').length).toBe(3);
+      expect($$('.ant-select-item-option').length).toBe(3);
       done();
     });
   });

@@ -20,8 +20,6 @@ const AutoCompleteProps = {
   dropdownMenuStyle: PropTypes.style,
   optionLabelProp: PropTypes.string,
   dropdownMatchSelectWidth: PropTypes.looseBool,
-  // onChange?: (value: SelectValue) => void;
-  // onSelect?: (value: SelectValue, option: Object) => any;
 };
 
 const AutoComplete = defineComponent({
@@ -86,7 +84,7 @@ const AutoComplete = defineComponent({
   render() {
     const { size, prefixCls: customizePrefixCls, dataSource } = this;
     let optionChildren: any;
-    const getPrefixCls = this.configProvider.getPrefixCls;
+    const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
     const { class: className } = this.$attrs as any;
     const cls = {

@@ -204,4 +204,6 @@ Mentions.install = function(app: App) {
   return app;
 };
 
-export default Mentions;
+export default Mentions as typeof Mentions & {
+  readonly Option: typeof Option;
+};

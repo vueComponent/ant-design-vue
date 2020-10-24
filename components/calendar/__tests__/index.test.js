@@ -122,6 +122,7 @@ describe('Calendar', () => {
   it('months other than in valid range should not be shown in header', async () => {
     document.body.innerHTML = '';
     const validRange = [Moment('2017-02-02'), Moment('2018-05-18')];
+    // eslint-disable-next-line no-unused-vars
     const wrapper = mount(
       {
         render() {
@@ -131,11 +132,13 @@ describe('Calendar', () => {
       { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
-      wrapper.find('.ant-fullcalendar-year-select').trigger('click');
+      wrapper
+        .findAll('.ant-fullcalendar-year-select .ant-select-selector')[0]
+        .element.dispatchEvent(new MouseEvent('mousedown'));
     });
     await asyncExpect(() => {
-      $$('.ant-select-dropdown-menu-item')[0].click();
-    }, 0);
+      expect($$('.ant-select-item-option').length).toBe(2);
+    }, 100);
   });
 
   it('getDateRange should returns a disabledDate function', async () => {
@@ -263,9 +266,9 @@ describe('Calendar', () => {
       },
     );
     await sleep(50);
-    wrapper.findAll('.ant-fullcalendar-year-select')[0].trigger('click');
+    wrapper.findAll('.ant-select-selector')[0].element.dispatchEvent(new MouseEvent('mousedown'));
     await sleep(50);
-    $$('.ant-select-dropdown-menu-item')[0].click();
+    $$('.ant-select-item-option')[0].click();
     await sleep(50);
   };
 
@@ -320,9 +323,11 @@ describe('Calendar', () => {
       },
     );
     await sleep(50);
-    wrapper.findAll('.ant-fullcalendar-month-select')[0].trigger('click');
+    wrapper
+      .findAll('.ant-fullcalendar-month-select .ant-select-selector')[0]
+      .element.dispatchEvent(new MouseEvent('mousedown'));
     await sleep(50);
-    wrapper.findAll('.ant-select-dropdown-menu-item')[0].trigger('click');
+    wrapper.findAll('.ant-select-item-option')[0].trigger('click');
     await sleep(50);
     expect(onValueChange).toHaveBeenCalledWith(value.month(10));
   });
@@ -342,7 +347,8 @@ describe('Calendar', () => {
         );
       },
     });
-    wrapper.findAll('input')[1].trigger('change');
+    const buttons = wrapper.findAll('.ant-radio-button-input');
+    buttons[buttons.length - 1].trigger('change');
     expect(onTypeChange).toHaveBeenCalledWith('year');
   });
 });

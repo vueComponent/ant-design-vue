@@ -107,7 +107,6 @@ export default {
           showSearch={false}
           class={`${prefixCls}-size-changer`}
           optionLabelProp="children"
-          dropdownMatchSelectWidth={false}
           value={(pageSize || pageSizeOptions[0]).toString()}
           onChange={value => this.changeSize(Number(value))}
           getPopupContainer={triggerNode => triggerNode.parentNode}

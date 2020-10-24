@@ -72,7 +72,6 @@ export default defineComponent({
       return (
         <Select
           size={fullscreen ? undefined : 'small'}
-          dropdownMatchSelectWidth={false}
           class={`${prefixCls}-year-select`}
           onChange={this.onYearChange}
           value={String(year)}
@@ -107,7 +106,6 @@ export default defineComponent({
       return (
         <Select
           size={fullscreen ? undefined : 'small'}
-          dropdownMatchSelectWidth={false}
           class={`${prefixCls}-month-select`}
           value={month}
           options={options}

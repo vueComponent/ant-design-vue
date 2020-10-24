@@ -102,4 +102,12 @@ describe('Modal.confirm triggers callbacks correctly', () => {
       expect($$(`.ant-modal-confirm-${type}`)).toHaveLength(0);
     }
   });
+
+  it('should render title', async () => {
+    open({
+      title: h => <span>title</span>,
+    });
+    await sleep();
+    expect($$('.ant-modal-confirm-title')[0].innerHTML).toBe('<span>title</span>');
+  });
 });

@@ -82,7 +82,9 @@ const ConfirmDialog = (_, { attrs }) => {
         <div class={`${contentPrefixCls}-body`}>
           {typeof icon === 'function' ? icon() : icon}
           {attrs.title === undefined ? null : (
-            <span class={`${contentPrefixCls}-title`}>{attrs.title}</span>
+            <span class={`${contentPrefixCls}-title`}>
+              {typeof attrs.title === 'function' ? attrs.title() : attrs.title}
+            </span>
           )}
           <div class={`${contentPrefixCls}-content`}>
             {typeof attrs.content === 'function' ? attrs.content() : attrs.content}

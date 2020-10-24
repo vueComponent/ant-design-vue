@@ -22,6 +22,7 @@ const SearchInput = {
     ariaId: PropTypes.string,
     isMultiple: PropTypes.looseBool.def(true),
   },
+  emits: ['mirrorSearchValueChange'],
   setup(props, { emit }) {
     const measureRef = ref();
     const inputWidth = ref(0);

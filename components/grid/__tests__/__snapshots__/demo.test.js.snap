@@ -20,35 +20,35 @@ exports[`renders ./antdv-demo/docs/grid/demo/basic.md correctly 1`] = `
 
 exports[`renders ./antdv-demo/docs/grid/demo/flex.md correctly 1`] = `
 <p>sub-element align left</p>
-<div class="ant-row-flex ant-row-flex-start">
+<div class="ant-row ant-row-start">
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
 </div>
 <p>sub-element align center</p>
-<div class="ant-row-flex ant-row-flex-center">
+<div class="ant-row ant-row-center">
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
 </div>
 <p>sub-element align right</p>
-<div class="ant-row-flex ant-row-flex-end">
+<div class="ant-row ant-row-end">
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
 </div>
 <p>sub-element monospaced arrangement</p>
-<div class="ant-row-flex ant-row-flex-space-between">
+<div class="ant-row ant-row-space-between">
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
 </div>
 <p>sub-element align full</p>
-<div class="ant-row-flex ant-row-flex-space-around">
+<div class="ant-row ant-row-space-around">
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
   <div class="ant-col ant-col-4"> col-4 </div>
@@ -58,7 +58,7 @@ exports[`renders ./antdv-demo/docs/grid/demo/flex.md correctly 1`] = `
 
 exports[`renders ./antdv-demo/docs/grid/demo/flex-align.md correctly 1`] = `
 <p>Align Top</p>
-<div class="ant-row-flex ant-row-flex-center ant-row-flex-top">
+<div class="ant-row ant-row-center ant-row-top">
   <div class="ant-col ant-col-4">
     <p class="height-100"> col-4 </p>
   </div>
@@ -73,7 +73,7 @@ exports[`renders ./antdv-demo/docs/grid/demo/flex-align.md correctly 1`] = `
   </div>
 </div>
 <p>Align Center</p>
-<div class="ant-row-flex ant-row-flex-space-around ant-row-flex-middle">
+<div class="ant-row ant-row-space-around ant-row-middle">
   <div class="ant-col ant-col-4">
     <p class="height-100"> col-4 </p>
   </div>
@@ -88,7 +88,7 @@ exports[`renders ./antdv-demo/docs/grid/demo/flex-align.md correctly 1`] = `
   </div>
 </div>
 <p>Align Bottom</p>
-<div class="ant-row-flex ant-row-flex-space-between ant-row-flex-bottom">
+<div class="ant-row ant-row-space-between ant-row-bottom">
   <div class="ant-col ant-col-4">
     <p class="height-100"> col-4 </p>
   </div>
@@ -106,24 +106,24 @@ exports[`renders ./antdv-demo/docs/grid/demo/flex-align.md correctly 1`] = `
 
 exports[`renders ./antdv-demo/docs/grid/demo/flex-fill.md correctly 1`] = `
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text"> Percentage columns </span></div>
-<div class="ant-row-flex">
+<div class="ant-row">
   <div class="ant-col" style="flex: 2 2 auto;">2 / 5</div>
   <div class="ant-col" style="flex: 3 3 auto;">3 / 5</div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text"> Fill rest </span></div>
-<div class="ant-row-flex">
+<div class="ant-row">
   <div class="ant-col" style="flex: 0 0 100px;">100px</div>
   <div class="ant-col" style="flex-basis: auto;">auto</div>
 </div>
 <div class="ant-divider ant-divider-horizontal ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text"> Raw flex style </span></div>
-<div class="ant-row-flex">
+<div class="ant-row">
   <div class="ant-col" style="flex: 1 1 200px;">1 1 200px</div>
   <div class="ant-col" style="flex: 0 1 300px;">0 1 300px</div>
 </div>
 `;
 
 exports[`renders ./antdv-demo/docs/grid/demo/flex-order.md correctly 1`] = `
-<div class="ant-row-flex">
+<div class="ant-row">
   <div class="ant-col ant-col-6 ant-col-order-4"> 1 col-order-4 </div>
   <div class="ant-col ant-col-6 ant-col-order-3"> 2 col-order-3 </div>
   <div class="ant-col ant-col-6 ant-col-order-2"> 3 col-order-2 </div>

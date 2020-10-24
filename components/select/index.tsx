@@ -123,6 +123,7 @@ const Select = defineComponent({
       emit('change', ...args);
     };
     return {
+      selectRef,
       mergedClassName,
       mode,
       focus,

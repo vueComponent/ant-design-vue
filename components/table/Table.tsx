@@ -153,11 +153,17 @@ export default defineComponent({
       !props.expandedRowRender || !('scroll' in props),
       '`expandedRowRender` and `scroll` are not compatible. Please use one of them at one time.',
     );
+    const self = this;
+    const { getDefaultSortOrder, getDefaultFilters, getDefaultPagination } = self as typeof self & {
+      getDefaultSortOrder: Function;
+      getDefaultFilters: Function;
+      getDefaultPagination: Function;
+    };
     return {
-      ...this.getDefaultSortOrder(props.columns || []),
+      ...getDefaultSortOrder(props.columns || []),
       // 减少状态
-      sFilters: this.getDefaultFilters(props.columns),
-      sPagination: this.getDefaultPagination(this.$props),
+      sFilters: getDefaultFilters(props.columns),
+      sPagination: getDefaultPagination(this.$props),
       pivot: undefined,
       sComponents: markRaw(createComponents(this.components)),
       filterDataCnt: 0,
@@ -905,7 +911,7 @@ export default defineComponent({
             <LocaleReceiver
               componentName="Table"
               defaultLocale={defaultLocale.Table}
-              children={locale => (
+              children={(locale: any) => (
                 <TransButton
                   class={classNames(`${prefixCls}-row-expand-icon`, {
                     [`${prefixCls}-row-collapsed`]: !expanded,

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import * as Vue from 'vue';
+import { sleep } from '../../../tests/utils';
 import AutoComplete from '..';
 import focusTest from '../../../tests/shared/focusTest';
 
@@ -8,7 +8,7 @@ describe('AutoComplete with Custom Input Element Render', () => {
   function $$(className) {
     return document.body.querySelectorAll(className);
   }
-  it('AutoComplete with custom Input render perfectly', done => {
+  it('AutoComplete with custom Input render perfectly', async () => {
     const wrapper = mount(
       {
         render() {
@@ -25,9 +25,7 @@ describe('AutoComplete with Custom Input Element Render', () => {
     const input = wrapper.find('input');
     input.element.value = '123';
     input.trigger('input');
-    Vue.nextTick(() => {
-      expect($$('.ant-select-item-option').length).toBe(3);
-      done();
-    });
+    await sleep();
+    expect($$('.ant-select-item-option').length).toBe(3);
   });
 });

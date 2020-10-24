@@ -62,7 +62,7 @@ const Table = defineComponent({
   },
   render() {
     const { normalize, $slots } = this;
-    const props = { ...getOptionProps(this), ...this.$attrs };
+    const props: any = { ...getOptionProps(this), ...this.$attrs };
     const columns = props.columns ? this.updateColumns(props.columns) : normalize(getSlot(this));
     let { title, footer } = props;
     const {

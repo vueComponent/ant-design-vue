@@ -77,6 +77,7 @@ describe('Mentions', () => {
   });
 
   it('notExist', async () => {
+    jest.useFakeTimers();
     const wrapper = mount({
       render() {
         return (

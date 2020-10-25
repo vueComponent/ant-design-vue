@@ -33,6 +33,7 @@ exports[`renders ./antdv-demo/docs/mentions/demo/form.md correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
+    <!---->
     <div class="ant-col ant-col-12 ant-col-offset-5 ant-form-item-control-wrapper">
       <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="button"><!----><span>Submit</span></button><button style="margin-left: 8px;" class="ant-btn" type="button">
           <!----><span>Reset</span>

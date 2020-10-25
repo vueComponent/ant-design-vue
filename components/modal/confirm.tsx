@@ -4,10 +4,10 @@ import { destroyFns, ModalFuncProps } from './Modal';
 
 import Omit from 'omit.js';
 
-export default function confirm(config: ModalFuncProps) {
+export default function confirm(config: ModalFuncProps & { parentContext?: any }) {
   const div = document.createElement('div');
   document.body.appendChild(div);
-  let currentConfig = { ...Omit(config, ['parentContext']), close, visible: true };
+  let currentConfig = { ...Omit(config, ['parentContext']), close, visible: true } as any;
 
   let confirmDialogInstance = null;
   let confirmDialogProps = {};

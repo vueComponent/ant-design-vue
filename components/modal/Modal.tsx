@@ -150,10 +150,6 @@ export const destroyFns = [];
 export default defineComponent({
   name: 'AModal',
   inheritAttrs: false,
-  model: {
-    prop: 'visible',
-    event: 'change',
-  },
   emits: ['update:visible', 'cancel', 'change', 'ok'],
   props: initDefaultProps(modalProps, {
     width: 520,

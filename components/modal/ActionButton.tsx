@@ -41,7 +41,7 @@ export default defineComponent({
     onClick() {
       const { actionFn, closeModal } = this;
       if (actionFn) {
-        let ret;
+        let ret: any;
         if (actionFn.length) {
           ret = actionFn(closeModal);
         } else {
@@ -53,12 +53,12 @@ export default defineComponent({
         if (ret && ret.then) {
           this.setState({ loading: true });
           ret.then(
-            (...args) => {
+            (...args: any[]) => {
               // It's unnecessary to set loading=false, for the Modal will be unmounted after close.
               // this.setState({ loading: false });
               closeModal(...args);
             },
-            e => {
+            (e: Event) => {
               // Emit error when catch promise reject
               // eslint-disable-next-line no-console
               console.error(e);

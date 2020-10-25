@@ -1,11 +1,17 @@
 import PropTypes from '../_util/vue-types';
 import { getComponent, getSlot } from '../_util/props-util';
 import { menuAllProps } from './util';
-import { defineComponent } from 'vue';
-
+import { defineComponent, inject } from 'vue';
+import classNames from '../_util/classNames';
+const injectExtraPropsKey = 'ANT_MENU_PROVIDER_PROPS_KEY';
 const MenuItemGroup = {
   name: 'MenuItemGroup',
   inheritAttrs: false,
+  setup() {
+    return {
+      injectExtraProps: inject(injectExtraPropsKey, () => ({})),
+    };
+  },
   props: {
     renderMenuItem: PropTypes.func,
     index: PropTypes.number,
@@ -18,12 +24,12 @@ const MenuItemGroup = {
   isMenuItemGroup: true,
   methods: {
     renderInnerMenuItem(item) {
-      const { renderMenuItem, index, subMenuKey } = this.$props;
+      const { renderMenuItem, index, subMenuKey } = { ...this.$props, ...this.injectExtraProps };
       return renderMenuItem(item, index, subMenuKey);
     },
   },
   render() {
-    const props = { ...this.$props, ...this.$attrs };
+    const props = { ...this.$props, ...this.injectExtraProps, ...this.$attrs };
     const { class: cls = '', rootPrefixCls, title } = props;
     const titleClassName = `${rootPrefixCls}-item-group-title`;
     const listClassName = `${rootPrefixCls}-item-group-list`;
@@ -32,7 +38,7 @@ const MenuItemGroup = {
     delete props.onClick;
     const children = getSlot(this);
     return (
-      <li {...props} class={`${cls} ${rootPrefixCls}-item-group`}>
+      <li {...props} class={classNames(cls, `${rootPrefixCls}-item-group`)}>
         <div class={titleClassName} title={typeof title === 'string' ? title : undefined}>
           {getComponent(this, 'title')}
         </div>

@@ -2,6 +2,7 @@ import { createVNode, defineComponent, inject, provide, toRefs, ref } from 'vue'
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider } from '../config-provider';
+import { flattenChildren } from '../_util/props-util';
 
 export const BasicProps = {
   prefixCls: PropTypes.string,
@@ -35,7 +36,11 @@ function generator({ suffixCls, tagName, name }: GeneratorArgument) {
             ...props,
             tagName,
           };
-          return <BasicComponent {...basicComponentProps}>{slots.default?.()}</BasicComponent>;
+          return (
+            <BasicComponent {...basicComponentProps}>
+              {flattenChildren(slots.default?.())}
+            </BasicComponent>
+          );
         };
       },
     });

@@ -7,6 +7,7 @@ import { cloneElement } from '../_util/vnode';
 import clonedeep from 'lodash-es/cloneDeep';
 import { getSlot, findDOMNode } from '../_util/props-util';
 import useBuffer from './hooks/useBuffer';
+import isVisible from '../vc-util/Dom/isVisible';
 
 function getElement(func) {
   if (typeof func !== 'function' || !func) return null;
@@ -144,8 +145,7 @@ export default defineComponent({
         // IE lose focus after element realign
         // We should record activeElement and restore later
         const activeElement = document.activeElement;
-
-        if (element) {
+        if (element && isVisible(element)) {
           result = alignElement(source, element, align);
         } else if (point) {
           result = alignPoint(source, point, align);

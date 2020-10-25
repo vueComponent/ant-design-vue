@@ -104,7 +104,7 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
 
     const mergedTransitionName = animation ? `${dropdownPrefixCls}-${animation}` : transitionName;
 
-    const popupStyle = { minWidth: containerWidth, ...dropdownStyle };
+    const popupStyle = { minWidth: `${containerWidth}px`, ...dropdownStyle };
 
     if (typeof dropdownMatchSelectWidth === 'number') {
       popupStyle.width = `${dropdownMatchSelectWidth}px`;

@@ -37,4 +37,5 @@ export default () => ({
   builtinPlacements: PropTypes.object,
   children: PropTypes.array,
   onVisibleChange: PropTypes.func,
+  'onUpdate:visible': PropTypes.func,
 });

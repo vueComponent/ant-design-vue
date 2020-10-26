@@ -20,6 +20,7 @@ const stepsProps = {
   progressDot: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
   type: PropTypes.oneOf(tuple('default', 'navigation')),
   onChange: PropTypes.func,
+  'onUpdate:current': PropTypes.func,
 };
 
 export type StepsProps = Partial<ExtractPropTypes<typeof stepsProps>>;
@@ -38,7 +39,7 @@ const Steps = defineComponent({
   },
   Step: { ...VcSteps.Step, name: 'AStep' },
   methods: {
-    handleChange(current) {
+    handleChange(current: number) {
       this.$emit('update:current', current);
       this.$emit('change', current);
     },

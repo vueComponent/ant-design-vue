@@ -1,4 +1,4 @@
-import { defineComponent, Fragment, nextTick, Transition as T, TransitionGroup as TG } from 'vue';
+import { defineComponent, nextTick, Transition as T, TransitionGroup as TG } from 'vue';
 import { findDOMNode } from './props-util';
 
 export const getTransitionProps = (transitionName: string, opt: object = {}) => {
@@ -60,14 +60,21 @@ if (process.env.NODE_ENV === 'test') {
     }
     return slots.default?.();
   };
+  Transition.displayName = 'TransitionForTest'
   Transition.inheritAttrs = false;
   TransitionGroup = defineComponent({
+    name: 'TransitionGroupForTest',
     inheritAttrs: false,
     props: ['tag', 'class'],
     setup(props, { slots }) {
-      const { tag: Tag = Fragment, ...rest } = props;
+      const { tag: Tag, ...rest } = props;
       return () => {
-        return <Tag {...rest}>{slots.default?.()}</Tag>;
+        const children = slots.default?.() || [];
+        if(Tag) {
+        return <Tag {...rest}>{children}</Tag>
+        } else {
+          return children;
+        }
       };
     },
   });

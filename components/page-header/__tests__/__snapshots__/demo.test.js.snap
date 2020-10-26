@@ -327,7 +327,7 @@ exports[`renders ./antdv-demo/docs/page-header/demo/actions.md correctly 1`] = `
         </button>
       </template>
       <div
-        class="ant-row-flex"
+        class="ant-row"
       >
         
         <div

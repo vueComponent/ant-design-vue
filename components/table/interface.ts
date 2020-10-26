@@ -105,13 +105,15 @@ export const TableProps = {
   prefixCls: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
   rowSelection: PropTypes.oneOfType([PropTypes.shape(TableRowSelection).loose, Object]),
-  pagination: PropTypes.oneOfType([
-    PropTypes.shape({
-      ...PaginationProps,
-      position: PropTypes.oneOf(tuple('top', 'bottom', 'both')),
-    }).loose,
-    PropTypes.looseBool,
-  ]),
+  pagination: withUndefined(
+    PropTypes.oneOfType([
+      PropTypes.shape({
+        ...PaginationProps,
+        position: PropTypes.oneOf(tuple('top', 'bottom', 'both')),
+      }).loose,
+      PropTypes.looseBool,
+    ]),
+  ),
   size: PropTypes.oneOf(tuple('default', 'middle', 'small', 'large')),
   dataSource: PropTypes.array,
   components: PropTypes.object,

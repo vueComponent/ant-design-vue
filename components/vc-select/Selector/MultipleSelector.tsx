@@ -74,7 +74,7 @@ const props = {
 };
 
 const SelectSelector = defineComponent<SelectorProps>({
-  name: 'SelectSelector',
+  name: 'MultipleSelectSelector',
   setup(props) {
     let motionAppear = false; // not need use ref, because not need trigger watchEffect
     const measureRef = ref();

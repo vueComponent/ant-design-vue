@@ -65,7 +65,7 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/list.md correctly 1`] = `
       <!---->
       <div class="ant-spin-container">
         <ul class="ant-list-items">
-          <li class="ant-list-item  ant-list-item-no-flex">
+          <li class="ant-list-item ant-list-item-no-flex">
             <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
               <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
               <div class="ant-skeleton-content">
@@ -79,7 +79,7 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/list.md correctly 1`] = `
             <!---->
             <!---->
           </li>
-          <li class="ant-list-item  ant-list-item-no-flex">
+          <li class="ant-list-item ant-list-item-no-flex">
             <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
               <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
               <div class="ant-skeleton-content">
@@ -93,7 +93,7 @@ exports[`renders ./antdv-demo/docs/skeleton/demo/list.md correctly 1`] = `
             <!---->
             <!---->
           </li>
-          <li class="ant-list-item  ant-list-item-no-flex">
+          <li class="ant-list-item ant-list-item-no-flex">
             <div class="ant-skeleton ant-skeleton-with-avatar ant-skeleton-active">
               <div class="ant-skeleton-header"><span class="ant-skeleton-avatar ant-skeleton-avatar-lg ant-skeleton-avatar-circle"></span></div>
               <div class="ant-skeleton-content">

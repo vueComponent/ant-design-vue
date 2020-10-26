@@ -10,5 +10,3 @@ exports[`Select Select Custom Icons should support customized icons 1`] = `
   <!---->
 </div>
 `;
-
-exports[`Select should not have notFoundContent when mode is combobox and notFoundContent is set 1`] = `"not at all<!---->"`;

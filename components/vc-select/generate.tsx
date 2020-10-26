@@ -660,21 +660,18 @@ export default function generateSelector<
       };
 
       // ============================== Open ==============================
-
-      const innerOpen = ref(undefined);
-      const mergedOpen = ref(undefined);
+      const initOpen = props.open !== undefined ? props.open : props.defaultOpen;
+      const innerOpen = ref(initOpen);
+      const mergedOpen = ref(initOpen);
       const setInnerOpen = (val: boolean) => {
-        setTimeout(() => {
-          innerOpen.value = val;
-          mergedOpen.value = innerOpen.value;
-        });
+        innerOpen.value = props.open !== undefined ? props.open : val;
+        mergedOpen.value = innerOpen.value;
       };
       watch(
-        computed(() => [props.defaultOpen, props.open]),
+        () => props.open,
         () => {
-          setInnerOpen(props.open !== undefined ? props.open : props.defaultOpen);
+          setInnerOpen(props.open);
         },
-        { immediate: true },
       );
 
       // Not trigger `open` in `combobox` when `notFoundContent` is empty

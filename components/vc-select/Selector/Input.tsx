@@ -1,5 +1,13 @@
 import { cloneElement } from '../../_util/vnode';
-import { defineComponent, inject, VNode, VNodeChild, withDirectives } from 'vue';
+import {
+  defineComponent,
+  getCurrentInstance,
+  inject,
+  onMounted,
+  VNode,
+  VNodeChild,
+  withDirectives,
+} from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { RefObject } from '../../_util/createRef';
 import antInput from '../../_util/antInputDirective';
@@ -30,7 +38,17 @@ interface InputProps {
 const Input = defineComponent<InputProps, { VCSelectContainerEvent: any }>({
   name: 'Input',
   inheritAttrs: false,
-  setup() {
+  setup(props) {
+    if (process.env.NODE_ENV === 'test') {
+      onMounted(() => {
+        const ins = getCurrentInstance();
+        if (props.autofocus) {
+          if (ins.vnode && ins.vnode.el) {
+            ins.vnode.el.focus();
+          }
+        }
+      });
+    }
     return {
       VCSelectContainerEvent: inject('VCSelectContainerEvent'),
     };

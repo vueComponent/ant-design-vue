@@ -6,7 +6,7 @@ const path = require('path');
 
 const owner = 'ant-design';
 const repo = 'ant-design';
-const tag = '3.26.13';
+const tag = '3.26.19';
 const clientId = '5f6ccfdc4cdc69f8ba12';
 const clientSecret = process.env.CLIENT_SECRET;
 

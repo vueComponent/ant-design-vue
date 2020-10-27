@@ -261,9 +261,15 @@ export default {
         reject: this.onReject,
       },
       ref: 'uploadRef',
-      attrs: this.$attrs,
+      attrs: {...this.$attrs},
     };
-
+    const children = this.$slots.default;
+    // Remove id to avoid open by label when trigger is hidden
+    // https://github.com/ant-design/ant-design/issues/14298
+    if (!children || disabled) {
+      delete vcUploadProps.props.id;
+      delete vcUploadProps.attrs.id;
+    }
     const uploadList = showUploadList ? (
       <LocaleReceiver
         componentName="Upload"
@@ -271,8 +277,6 @@ export default {
         scopedSlots={{ default: this.renderUploadList }}
       />
     ) : null;
-
-    const children = this.$slots.default;
 
     if (type === 'drag') {
       const dragCls = classNames(prefixCls, {
@@ -304,11 +308,7 @@ export default {
       [`${prefixCls}-disabled`]: disabled,
     });
 
-    // Remove id to avoid open by label when trigger is hidden
-    // https://github.com/ant-design/ant-design/issues/14298
-    if (!children || disabled) {
-      delete vcUploadProps.props.id;
-    }
+
 
     const uploadButton = (
       <div class={uploadButtonCls} style={children ? undefined : { display: 'none' }}>

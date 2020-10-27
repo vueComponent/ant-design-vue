@@ -24,6 +24,7 @@
 
 <h2 align="center">Backers</h2>
 <p align="center">
+  <a href="https://github.com/chuzhixin/vue-admin-beautiful" target="_blank"><img width="64" style="border-radius: 50%;" src="https://gitee.com/chu1204505056/image/raw/master/vue-admin-beautiful.png" title="vue-admin-beautiful"></a>
   <a href="https://github.com/limichange" target="_blank"><img width="64" style="border-radius: 50%;" src="https://avatars0.githubusercontent.com/u/1947344?s=400&v=4" title="limichange donation total 24$ by qq from 2018.9"></a>
   <a href="https://opencollective.com/ant-design-vue/backer/0/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/0/avatar.svg"></a>
   <a href="https://opencollective.com/ant-design-vue/backer/1/website" target="_blank"><img src="https://opencollective.com/ant-design-vue/backer/1/avatar.svg"></a>

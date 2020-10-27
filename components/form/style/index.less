@@ -136,22 +136,10 @@
 
 form {
   .has-feedback {
-    .@{ant-prefix}-input {
-      padding-right: @input-padding-horizontal-base + @input-affix-width;
-    }
-
     // https://github.com/ant-design/ant-design/issues/19884
     .@{ant-prefix}-input-affix-wrapper {
       .@{ant-prefix}-input-suffix {
         padding-right: 18px;
-      }
-      .@{ant-prefix}-input {
-        padding-right: @input-padding-horizontal-base + @input-affix-width * 2;
-      }
-      &.@{ant-prefix}-input-affix-wrapper-input-with-clear-btn {
-        .@{ant-prefix}-input {
-          padding-right: @input-padding-horizontal-base + @input-affix-width * 3;
-        }
       }
     }
 

@@ -41,12 +41,29 @@
   vertical-align: 0;
 }
 
+.@{ant-prefix}-input-clear-icon-hidden {
+  visibility: hidden;
+}
+
+.@{ant-prefix}-input-textarea-clear-icon-hidden {
+  visibility: hidden;
+}
+
 .@{ant-prefix}-input-textarea-clear-icon {
   .clear-icon;
   position: absolute;
   top: 0;
   right: 0;
   margin: 8px 8px 0 0;
+}
+
+.@{ant-prefix}-input-textarea {
+  &-show-count::after {
+    display: block;
+    color: @text-color-secondary;
+    text-align: right;
+    content: attr(data-count);
+  }
 }
 
 @import './search-input';

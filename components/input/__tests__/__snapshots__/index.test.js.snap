@@ -7,3 +7,5 @@ exports[`Input.Search should support suffix 1`] = `<span class="ant-input-search
 exports[`TextArea should support disabled 1`] = `<textarea disabled="" class="ant-input ant-input-disabled"></textarea>`;
 
 exports[`TextArea should support maxlength 1`] = `<textarea maxlength="10" class="ant-input"></textarea>`;
+
+exports[`TextArea should support showCount 1`] = `<div class="ant-input-textarea ant-input-textarea-show-count" data-count="3 / 10"><textarea maxlength="10" class="ant-input"></textarea></div>`;

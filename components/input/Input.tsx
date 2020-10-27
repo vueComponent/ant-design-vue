@@ -67,6 +67,7 @@ export default defineComponent({
     const value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
     return {
       stateValue: typeof value === 'undefined' ? '' : value,
+      isFocused: false,
     };
   },
   watch: {
@@ -90,6 +91,16 @@ export default defineComponent({
     }
   },
   methods: {
+    handleInputFocus(e) {
+      this.isFocused = true;
+      this.onFocus && this.onFocus(e);
+    },
+
+    handleInputBlur(e) {
+      this.isFocused = false;
+      this.onBlur && this.onBlur(e);
+    },
+
     focus() {
       this.input.focus();
     },
@@ -148,7 +159,15 @@ export default defineComponent({
         'inputPrefixCls',
         'loading',
       ]);
-      const { handleKeyDown, handleChange, size, disabled, $attrs } = this;
+      const {
+        handleKeyDown,
+        handleChange,
+        handleInputFocus,
+        handleInputBlur,
+        size,
+        disabled,
+        $attrs,
+      } = this;
 
       const inputProps: any = {
         ...otherProps,
@@ -161,6 +180,8 @@ export default defineComponent({
         key: 'ant-input',
         onInput: handleChange,
         onChange: handleChange,
+        onFocus: handleInputFocus,
+        onBlur: handleInputBlur,
       };
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
@@ -197,7 +218,7 @@ export default defineComponent({
   },
   render() {
     const { prefixCls: customizePrefixCls } = this.$props;
-    const { stateValue } = this.$data;
+    const { stateValue, isFocused } = this.$data;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
     const addonAfter = getComponent(this, 'addonAfter');
@@ -216,6 +237,7 @@ export default defineComponent({
       addonBefore,
       suffix,
       prefix,
+      isFocused,
     };
     return <ClearableLabeledInput {...props} ref={this.saveClearableInput} />;
   },

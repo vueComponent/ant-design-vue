@@ -5,12 +5,14 @@ import inputProps from './inputProps';
 import { hasProp, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import { fixControlledValue, resolveOnChange } from './Input';
+import classNames from '../_util/classNames';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 
 const TextAreaProps = {
   ...inputProps,
   autosize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
   autoSize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
+  showCount: PropTypes.looseBool,
 };
 
 export default defineComponent({
@@ -102,9 +104,13 @@ export default defineComponent({
 
     renderTextArea(prefixCls: string) {
       const props = getOptionProps(this);
+      const { style, class: customClass } = this.$attrs;
       const resizeProps = {
         ...props,
         ...this.$attrs,
+        style: style && !props.showCount,
+        class: customClass && !props.showCount,
+        showCount: null,
         prefixCls,
         onInput: this.handleChange,
         onChange: this.handleChange,
@@ -114,19 +120,44 @@ export default defineComponent({
     },
   },
   render() {
-    const { stateValue, prefixCls: customizePrefixCls } = this;
+    const { stateValue, prefixCls: customizePrefixCls, maxlength, showCount } = this;
+    const { style, class: customClass } = this.$attrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
-
+    let value = fixControlledValue(stateValue);
+    // Max length value
+    const hasMaxlength = Number(maxlength) > 0;
+    value = hasMaxlength ? value.slice(0, maxlength) : value;
     const props: any = {
       ...getOptionProps(this),
       ...this.$attrs,
       prefixCls,
       inputType: 'text',
-      value: fixControlledValue(stateValue),
       element: this.renderTextArea(prefixCls),
       handleReset: this.handleReset,
     };
-    return <ClearableLabeledInput {...props} ref={this.saveClearableInput} />;
+
+    let textareaNode = (
+      <ClearableLabeledInput {...props} value={value} ref={this.saveClearableInput} />
+    );
+
+    if (showCount) {
+      const valueLength = [...value].length;
+      const dataCount = `${valueLength}${hasMaxlength ? ` / ${maxlength}` : ''}`;
+      textareaNode = (
+        <div
+          class={classNames(
+            `${prefixCls}-textarea`,
+            `${prefixCls}-textarea-show-count`,
+            customClass,
+          )}
+          style={style}
+          data-count={dataCount}
+        >
+          {textareaNode}
+        </div>
+      );
+    }
+    return textareaNode;
   },
 });

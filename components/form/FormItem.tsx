@@ -356,7 +356,7 @@ export default defineComponent({
       let classes = `${prefixCls}-item-control`;
       if (validateStatus) {
         classes = classNames(`${prefixCls}-item-control`, {
-          'has-feedback': this.hasFeedback || validateStatus === 'validating',
+          'has-feedback': validateStatus && this.hasFeedback,
           'has-success': validateStatus === 'success',
           'has-warning': validateStatus === 'warning',
           'has-error': validateStatus === 'error',

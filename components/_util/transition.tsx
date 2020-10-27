@@ -46,7 +46,7 @@ let TransitionGroup = TG;
 
 if (process.env.NODE_ENV === 'test') {
   Transition = (props, { slots }) => {
-    let child = slots.default?.()[0];
+    const child = slots.default?.()[0];
     if (child && child.dirs && child.dirs[0]) {
       const value = child.dirs[0].value;
       const oldValue = child.dirs[0].oldValue;
@@ -60,7 +60,7 @@ if (process.env.NODE_ENV === 'test') {
     }
     return slots.default?.();
   };
-  Transition.displayName = 'TransitionForTest'
+  Transition.displayName = 'TransitionForTest';
   Transition.inheritAttrs = false;
   TransitionGroup = defineComponent({
     name: 'TransitionGroupForTest',
@@ -70,8 +70,8 @@ if (process.env.NODE_ENV === 'test') {
       const { tag: Tag, ...rest } = props;
       return () => {
         const children = slots.default?.() || [];
-        if(Tag) {
-        return <Tag {...rest}>{children}</Tag>
+        if (Tag) {
+          return <Tag {...rest}>{children}</Tag>;
         } else {
           return children;
         }

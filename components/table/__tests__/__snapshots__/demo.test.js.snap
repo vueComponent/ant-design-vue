@@ -1504,7 +1504,7 @@ exports[`renders ./antdv-demo/docs/table/demo/fixed-columns.md correctly 1`] = `
   <!---->
   <div class="ant-table-body-outer">
     <div class="ant-table-body-inner">
-      <table class="ant-table-fixed">
+      <table class="ant-table-fixed" style="width: 200px;">
         <colgroup>
           <col style="width: 100px; min-width: 100px;">
           <col style="width: 100px; min-width: 100px;">
@@ -1551,7 +1551,7 @@ exports[`renders ./antdv-demo/docs/table/demo/fixed-columns.md correctly 1`] = `
   <!---->
   <div class="ant-table-body-outer">
     <div class="ant-table-body-inner">
-      <table class="ant-table-fixed">
+      <table class="ant-table-fixed" style="width: 100px;">
         <colgroup>
           <col style="width: 100px; min-width: 100px;">
         </colgroup>
@@ -2151,7 +2151,7 @@ exports[`renders ./antdv-demo/docs/table/demo/fixed-columns-header.md correctly 
 </div>
 <div class="ant-table-fixed-left">
   <div class="ant-table-header">
-    <table class="ant-table-fixed">
+    <table class="ant-table-fixed" style="width: 200px;">
       <colgroup>
         <col style="width: 100px; min-width: 100px;">
         <col style="width: 100px; min-width: 100px;">
@@ -2173,7 +2173,7 @@ exports[`renders ./antdv-demo/docs/table/demo/fixed-columns-header.md correctly 
 </div>
 <div class="ant-table-body-outer">
   <div class="ant-table-body-inner" style="max-height: 300px; overflow-y: scroll;">
-    <table class="ant-table-fixed">
+    <table class="ant-table-fixed" style="width: 200px;">
       <colgroup>
         <col style="width: 100px; min-width: 100px;">
         <col style="width: 100px; min-width: 100px;">
@@ -2287,7 +2287,7 @@ exports[`renders ./antdv-demo/docs/table/demo/fixed-columns-header.md correctly 
 </div>
 <div class="ant-table-fixed-right">
   <div class="ant-table-header">
-    <table class="ant-table-fixed">
+    <table class="ant-table-fixed" style="width: 100px;">
       <colgroup>
         <col style="width: 100px; min-width: 100px;">
       </colgroup>
@@ -2304,7 +2304,7 @@ exports[`renders ./antdv-demo/docs/table/demo/fixed-columns-header.md correctly 
 </div>
 <div class="ant-table-body-outer">
   <div class="ant-table-body-inner" style="max-height: 300px; overflow-y: scroll;">
-    <table class="ant-table-fixed">
+    <table class="ant-table-fixed" style="width: 100px;">
       <colgroup>
         <col style="width: 100px; min-width: 100px;">
       </colgroup>
@@ -3603,7 +3603,7 @@ exports[`renders ./antdv-demo/docs/table/demo/grouping-columns.md correctly 1`] 
 </div>
 <div class="ant-table-fixed-left">
   <div class="ant-table-header">
-    <table class="ant-table-fixed">
+    <table class="ant-table-fixed" style="width: 100px;">
       <colgroup>
         <col style="width: 100px; min-width: 100px;">
       </colgroup>
@@ -3620,7 +3620,7 @@ exports[`renders ./antdv-demo/docs/table/demo/grouping-columns.md correctly 1`] 
 </div>
 <div class="ant-table-body-outer">
   <div class="ant-table-body-inner" style="max-height: 240px; overflow-y: scroll;">
-    <table class="ant-table-fixed">
+    <table class="ant-table-fixed" style="width: 100px;">
       <colgroup>
         <col style="width: 100px; min-width: 100px;">
       </colgroup>
@@ -3693,7 +3693,7 @@ exports[`renders ./antdv-demo/docs/table/demo/grouping-columns.md correctly 1`] 
 </div>
 <div class="ant-table-fixed-right">
   <div class="ant-table-header">
-    <table class="ant-table-fixed">
+    <table class="ant-table-fixed" style="width: 80px;">
       <colgroup>
         <col style="width: 80px; min-width: 80px;">
       </colgroup>
@@ -3710,7 +3710,7 @@ exports[`renders ./antdv-demo/docs/table/demo/grouping-columns.md correctly 1`] 
 </div>
 <div class="ant-table-body-outer">
   <div class="ant-table-body-inner" style="max-height: 240px; overflow-y: scroll;">
-    <table class="ant-table-fixed">
+    <table class="ant-table-fixed" style="width: 80px;">
       <colgroup>
         <col style="width: 80px; min-width: 80px;">
       </colgroup>

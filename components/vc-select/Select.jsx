@@ -1624,6 +1624,10 @@ const Select = {
     // selectionProps.on.blur = this.selectionRefBlur;
     // selectionProps.attrs.tabIndex = props.disabled ? -1 : props.tabIndex;
     //}
+    let extraSelectionProps = { attrs: { tabIndex: -1 } };
+    if (!isMultipleOrTagsOrCombobox(props)) {
+      extraSelectionProps.attrs.tabIndex = props.disabled ? -1 : props.tabIndex;
+    }
     const rootCls = {
       [prefixCls]: true,
       [`${prefixCls}-open`]: open,
@@ -1692,7 +1696,7 @@ const Select = {
           onMousedown={this.markMouseDown}
           onMouseup={this.markMouseLeave}
           onMouseout={this.markMouseLeave}
-          tabIndex={props.disabled ? -1 : props.tabIndex}
+          {...extraSelectionProps}
           onBlur={this.selectionRefBlur}
           onFocus={this.selectionRefFocus}
           onClick={this.selectionRefClick}

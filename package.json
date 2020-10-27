@@ -41,7 +41,6 @@
     "pretty-quick": "pretty-quick",
     "dist": "node antd-tools/cli/run.js dist",
     "lint": "eslint -c ./.eslintrc --fix --ext .jsx,.js,.vue,.ts,.tsx ./components",
-    "lint:types": "eslint -c ./.eslintrc --fix --ext .ts ./types",
     "lint:site": "eslint -c ./.eslintrc --fix --ext .jsx,.js,.vue ./antdv-demo",
     "lint:docs": "eslint -c ./.eslintrc --fix --ext .jsx,.js,.vue,.md ./antdv-demo/docs/**/demo/**",
     "lint:style": "stylelint \"{site,components}/**/*.less\" --syntax less",

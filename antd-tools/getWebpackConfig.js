@@ -123,9 +123,6 @@ function getWebpackConfig(modules) {
             },
             {
               loader: 'ts-loader',
-              options: {
-                transpileOnly: true,
-              },
             },
           ],
         },

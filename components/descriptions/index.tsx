@@ -143,11 +143,10 @@ const descriptionsProps = {
 export type DescriptionsProps = HTMLAttributes &
   Partial<ExtractPropTypes<typeof descriptionsProps>>;
 
-const Descriptions = defineComponent({
+const Descriptions = defineComponent<DescriptionsProps>({
   name: 'ADescriptions',
   Item: DescriptionsItem,
   mixins: [BaseMixin],
-  props: descriptionsProps,
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -228,6 +227,8 @@ const Descriptions = defineComponent({
     );
   },
 });
+    
+Descriptions.props = descriptionsProps;
 
 Descriptions.install = function(app: App) {
   app.component(Descriptions.name, Descriptions);

@@ -19,9 +19,9 @@ export declare class Dropdown extends AntdComponent {
 
     /**
      * the dropdown menu
-     * @type () => Menu
+     * @type () => Menu | JSX.Element
      */
-    overlay?: () => Menu;
+    overlay?: (() => Menu) | JSX.Element;
 
     /**
      * Class name of the dropdown root element

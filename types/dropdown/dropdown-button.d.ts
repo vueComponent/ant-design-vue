@@ -16,9 +16,9 @@ export declare class DropdownButton extends AntdComponent {
 
     /**
      * the dropdown menu
-     * @type () => Menu
+     * @type () => Menu | JSX.Element
      */
-    overlay?: () => Menu;
+    overlay?: (() => Menu) | JSX.Element;
 
     /**
      * placement of pop menu: bottomLeft bottomCenter bottomRight topLeft topCenter topRight

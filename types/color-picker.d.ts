@@ -6,13 +6,13 @@ import Pickr from '@simonwep/pickr';
 
 export declare class ColorPicker extends AntdComponent {
   /** simonwep/pickr's options */
-  config?:Pickr.Options
+  config?: Pickr.Options;
   /**prefix class name */
-  prefixCls?: string
+  prefixCls?: string;
   /** default color value */
-  defaultValue?: string
+  defaultValue?: string;
   /** color value */
-  value?: string
+  value?: string;
   /**
    * language package setting
    * @type object
@@ -23,7 +23,7 @@ export declare class ColorPicker extends AntdComponent {
    * @default 0
    * @type number
    * */
-  colorRounded?:number
+  colorRounded?: number;
   /**
    * descriptions size type
    * @default 'default'
@@ -42,10 +42,10 @@ export declare class ColorPicker extends AntdComponent {
    * @default false
    * @type boolean
    */
-  disabled: boolean
+  disabled: boolean;
   /**
    * to set the color format
    * @default "HEXA"
    */
-  format: Pickr.Representation
+  format: Pickr.Representation;
 }

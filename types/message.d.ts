@@ -2,7 +2,7 @@
 // Definitions by: akki-jat <https://github.com/akki-jat>
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
-import { VNode, CreateElement } from 'vue'
+import { VNode, CreateElement } from 'vue';
 
 export interface ThenableArgument {
   (val: any): void;
@@ -12,7 +12,7 @@ export interface MessageType {
   then: (fill: ThenableArgument, reject: ThenableArgument) => Promise<void>;
   promise: Promise<void>;
 }
-export type ConfigType =  string | VNode | ((h: CreateElement) => VNode);
+export type ConfigType = string | VNode | ((h: CreateElement) => VNode);
 export type ConfigDuration = number | (() => void);
 export type ConfigOnClose = () => void;
 

@@ -49,7 +49,7 @@ export default {
   methods: {
     removeTab(targetKey, e) {
       e.stopPropagation();
-      if(isValid(targetKey)) {
+      if (isValid(targetKey)) {
         this.$emit('edit', targetKey, 'remove');
       }
     },

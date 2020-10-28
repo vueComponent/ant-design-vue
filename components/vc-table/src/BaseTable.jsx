@@ -158,11 +158,11 @@ const BaseTable = {
       tableStyle.width =
         typeof tableStyle.width === 'number' ? `${tableStyle.width}px` : tableStyle.width;
     }
-    if(fixed) {
-      const width = columns.reduce((sum, {width: w})=>{
+    if (fixed) {
+      const width = columns.reduce((sum, { width: w }) => {
         return sum + parseFloat(w, 10);
       }, 0);
-      if(width > 0) {
+      if (width > 0) {
         tableStyle.width = width + 'px';
       }
     }

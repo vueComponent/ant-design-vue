@@ -16,7 +16,11 @@ const DateInput = {
     timePicker: PropTypes.object,
     value: PropTypes.object,
     disabledTime: PropTypes.any,
-    format: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string), PropTypes.func]),
+    format: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.arrayOf(PropTypes.string),
+      PropTypes.func,
+    ]),
     locale: PropTypes.object,
     disabledDate: PropTypes.func,
     // onChange: PropTypes.func,

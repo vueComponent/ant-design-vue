@@ -10,6 +10,20 @@
 
 ---
 
+## 1.7.0
+
+`2020-10-28`
+
+- 🌟 递归 Menu 组件，支持任意嵌套其他元素 [#1452](https://github.com/vueComponent/ant-design-vue/issues/1452)
+- 🇮🇪 添加爱尔兰语国际化支持
+- 🐞 修复 webpack 5 兼容问题。
+- 🐞 修复 Upload method 属性不生效问题 [#2837](https://github.com/vueComponent/ant-design-vue/issues/2837)
+- 🐞 修复 Space 未声明属性，不挂载根结点上问题 [#2902](https://github.com/vueComponent/ant-design-vue/issues/2902)
+- 🐞 修复 Table 组件 filter 不支持 number 类型问题 [#3052](https://github.com/vueComponent/ant-design-vue/issues/3052)
+- 🐞 修复 Table 固定列 ellipsis 不生效问题 [#2916](https://github.com/vueComponent/ant-design-vue/issues/2916)
+- 🐞 修复 AutoComplete 组件，需要两次 tab 键才可 focus 问题 [#1438](https://github.com/vueComponent/ant-design-vue/issues/1438)
+- 🐞 修复 TreeSelect 不能自定义 slot 问题 [#2827](https://github.com/vueComponent/ant-design-vue/issues/2827)
+
 ## 1.6.5
 
 `2020-08-25`

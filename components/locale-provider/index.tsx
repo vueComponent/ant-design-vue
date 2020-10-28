@@ -1,4 +1,4 @@
-import { provide, App, defineComponent, VNode, PropType } from 'vue';
+import { provide, App, defineComponent, VNode, PropType, reactive } from 'vue';
 import PropTypes from '../_util/vue-types';
 import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
@@ -43,38 +43,25 @@ const LocaleProvider = defineComponent({
     },
     ANT_MARK__: PropTypes.string,
   },
-  data() {
-    warning(
-      this.ANT_MARK__ === ANT_MARK,
-      'LocaleProvider',
-      '`LocaleProvider` is deprecated. Please use `locale` with `ConfigProvider` instead',
-    );
-    return {
-      antLocale: {
-        ...this.locale,
-        exist: true,
-      },
-    };
-  },
   setup(props) {
     warning(
       props.ANT_MARK__ === ANT_MARK,
       'LocaleProvider',
       '`LocaleProvider` is deprecated. Please use `locale` with `ConfigProvider` instead',
     );
-    const data = {
+    const state = reactive({
       antLocale: {
         ...props.locale,
         exist: true,
       },
       ANT_MARK__: ANT_MARK,
-    };
-    provide('localeData', data);
-    return data;
+    });
+    provide('localeData', state);
+    return { state };
   },
   watch: {
     locale(val) {
-      this.antLocale = {
+      this.state.antLocale = {
         ...val,
         exist: true,
       };

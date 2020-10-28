@@ -199,7 +199,7 @@ export default {
             [`${dropdownPrefixCls}-submenu-contain-selected`]: containSelected,
           });
           return (
-            <SubMenu title={item.text} popupClassName={subMenuCls} key={item.value.toString()}>
+            <SubMenu title={item.text} popupClassName={subMenuCls} key={item.value}>
               {this.renderMenus(item.children)}
             </SubMenu>
           );
@@ -246,13 +246,10 @@ export default {
       const { sSelectedKeys: selectedKeys } = this.$data;
       const multiple = 'filterMultiple' in column ? column.filterMultiple : true;
 
-      // We still need trade key as string since Menu render need string
-      // const internalSelectedKeys = (selectedKeys || []).map(key => key.toString());
-
       const input = multiple ? (
-        <Checkbox checked={selectedKeys && selectedKeys.indexOf(item.value.toString()) >= 0} />
+        <Checkbox checked={selectedKeys && selectedKeys.indexOf(item.value) >= 0} />
       ) : (
-        <Radio checked={selectedKeys && selectedKeys.indexOf(item.value.toString()) >= 0} />
+        <Radio checked={selectedKeys && selectedKeys.indexOf(item.value) >= 0} />
       );
 
       return (
@@ -299,7 +296,7 @@ export default {
           class={dropdownMenuClass}
           onSelect={this.setSelectedKeys}
           onDeselect={this.setSelectedKeys}
-          selectedKeys={originSelectedKeys && originSelectedKeys.map(val => val.toString())}
+          selectedKeys={originSelectedKeys && originSelectedKeys.map(val => val)}
           getPopupContainer={getPopupContainer}
         >
           {this.renderMenus(column.filters)}

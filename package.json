@@ -201,7 +201,6 @@
   },
   "dependencies": {
     "@ant-design-vue/use": "^0.0.1-0",
-    "@ant-design/css-animation": "^1.7.3",
     "@ant-design/icons-vue": "^5.1.5",
     "@babel/runtime": "^7.10.5",
     "@simonwep/pickr": "~1.7.0",

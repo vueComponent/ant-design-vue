@@ -13,7 +13,7 @@ import isEqual from 'lodash-es/isEqual';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { tuple, VueNode } from '../_util/type';
-import { ColProps } from '../grid/col';
+import { ColProps } from '../grid/Col';
 import { InternalNamePath, NamePath, ValidateOptions } from './interface';
 
 export type ValidationRule = {

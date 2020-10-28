@@ -4,7 +4,7 @@ import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import { getTransitionProps, Transition } from '../_util/transition';
 import Row from '../grid/Row';
-import Col from '../grid/Col';
+import Col, { ColProps } from '../grid/Col';
 import hasProp, {
   findDOMNode,
   getComponent,
@@ -25,7 +25,6 @@ import { getNamePath } from './utils/valueUtil';
 import { toArray } from './utils/typeUtil';
 import { warning } from '../vc-util/warning';
 import find from 'lodash-es/find';
-import { ColProps } from '../grid/col';
 import { tuple, VueNode } from '../_util/type';
 import { ValidateOptions } from './interface';
 

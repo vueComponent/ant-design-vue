@@ -37,16 +37,12 @@ describe('Select', () => {
       attachTo: 'body',
     });
     await asyncExpect(() => {
-      wrapper
-        .findAll('.ant-select-selector')[0]
-        .element.dispatchEvent(new MouseEvent('mousedown'));
+      wrapper.findAll('.ant-select-selector')[0].element.dispatchEvent(new MouseEvent('mousedown'));
     });
 
     await asyncExpect(() => {
       expect($$('.ant-select-item-option').length).toBe(0);
-      expect($$('.ant-empty-description')[0].innerHTML).toBe(
-        'No Data',
-      );
+      expect($$('.ant-empty-description')[0].innerHTML).toBe('No Data');
     }, 100);
   });
 
@@ -60,9 +56,7 @@ describe('Select', () => {
       attachTo: 'body',
     });
     await asyncExpect(() => {
-      wrapper
-        .findAll('.ant-select-selector')[0]
-        .element.dispatchEvent(new MouseEvent('mousedown'));
+      wrapper.findAll('.ant-select-selector')[0].element.dispatchEvent(new MouseEvent('mousedown'));
     });
 
     await asyncExpect(() => {
@@ -79,9 +73,7 @@ describe('Select', () => {
       attachTo: 'body',
     });
     await asyncExpect(() => {
-      wrapper
-        .findAll('.ant-select-selector')[0]
-        .element.dispatchEvent(new MouseEvent('mousedown'));
+      wrapper.findAll('.ant-select-selector')[0].element.dispatchEvent(new MouseEvent('mousedown'));
     });
 
     await asyncExpect(() => {
@@ -98,9 +90,7 @@ describe('Select', () => {
       sync: false,
     });
     await asyncExpect(() => {
-      wrapper
-        .findAll('.ant-select-selector')[0]
-        .element.dispatchEvent(new MouseEvent('mousedown'));
+      wrapper.findAll('.ant-select-selector')[0].element.dispatchEvent(new MouseEvent('mousedown'));
     });
 
     await asyncExpect(() => {
@@ -135,11 +125,9 @@ describe('Select', () => {
       expect(getStyle($$('.ant-select-dropdown')[0], 'display')).toBe('block');
     }, 100);
     await asyncExpect(() => {
-      wrapper
-        .findAll('.ant-select-selector')[0]
-        .element.dispatchEvent(new MouseEvent('mousedown'));
+      wrapper.findAll('.ant-select-selector')[0].element.dispatchEvent(new MouseEvent('mousedown'));
     });
-    await asyncExpect(()=>{
+    await asyncExpect(() => {
       expect(onDropdownVisibleChange).toHaveBeenLastCalledWith(false);
     });
     await asyncExpect(() => {
@@ -149,9 +137,7 @@ describe('Select', () => {
 
     await asyncExpect(() => {
       expect(getStyle($$('.ant-select-dropdown')[0], 'display')).toBe('none');
-      wrapper
-        .findAll('.ant-select-selector')[0]
-        .element.dispatchEvent(new MouseEvent('mousedown'));
+      wrapper.findAll('.ant-select-selector')[0].element.dispatchEvent(new MouseEvent('mousedown'));
       expect(onDropdownVisibleChange).toHaveBeenLastCalledWith(true);
       expect(getStyle($$('.ant-select-dropdown')[0], 'display')).toBe('none');
     }, 500);

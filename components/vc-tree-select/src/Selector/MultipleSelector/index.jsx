@@ -81,11 +81,7 @@ const MultipleSelector = {
       this.__emit('choiceAnimationLeave', ...args);
     },
     renderSelection() {
-      const {
-        selectorValueList,
-        labelInValue,
-        maxTagCount,
-      } = this.$props;
+      const { selectorValueList, labelInValue, maxTagCount } = this.$props;
       const children = getSlot(this);
       const {
         vcTreeSelect: { onMultipleSelectorRemove },
@@ -140,14 +136,9 @@ const MultipleSelector = {
       }
 
       selectedValueNodes.push(
-          <SearchInput
-            key="SearchInput"
-            {...this.$props}
-            {...this.$attrs}
-            ref={this.inputRef}
-          >
-            {children}
-          </SearchInput>,
+        <SearchInput key="SearchInput" {...this.$props} {...this.$attrs} ref={this.inputRef}>
+          {children}
+        </SearchInput>,
       );
 
       return selectedValueNodes;

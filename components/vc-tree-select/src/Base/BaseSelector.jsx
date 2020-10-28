@@ -104,7 +104,14 @@ export default function() {
         }
         const clearIcon = getComponent(this, 'clearIcon');
         return (
-          <span key="clear" unselectable="on" aria-hidden="true" style="user-select: none;" class={`${prefixCls}-clear`} onClick={onSelectorClear}>
+          <span
+            key="clear"
+            unselectable="on"
+            aria-hidden="true"
+            style="user-select: none;"
+            class={`${prefixCls}-clear`}
+            onClick={onSelectorClear}
+          >
             {clearIcon}
           </span>
         );
@@ -117,7 +124,11 @@ export default function() {
         }
         const inputIcon = getComponent(this, 'inputIcon');
         return (
-          <span key="arrow" class={`${prefixCls}-arrow`} style={{ outline: 'none', userSelect: 'none' }}>
+          <span
+            key="arrow"
+            class={`${prefixCls}-arrow`}
+            style={{ outline: 'none', userSelect: 'none' }}
+          >
             {inputIcon}
           </span>
         );

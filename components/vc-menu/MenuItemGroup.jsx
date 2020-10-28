@@ -1,7 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp, getListeners } from '../_util/props-util';
-
-// import { menuAllProps } from './util'
+import { injectExtraPropsKey } from './FunctionProvider';
 
 const MenuItemGroup = {
   name: 'MenuItemGroup',
@@ -16,19 +15,28 @@ const MenuItemGroup = {
     title: PropTypes.any,
   },
   isMenuItemGroup: true,
+  inject: {
+    injectExtraProps: {
+      from: injectExtraPropsKey,
+      default: () => ({}),
+    },
+  },
   methods: {
     renderInnerMenuItem(item) {
-      const { renderMenuItem, index, subMenuKey } = this.$props;
+      const { renderMenuItem, index, subMenuKey } = {
+        ...this.$props,
+        ...this.injectExtraProps.$attrs,
+      };
       return renderMenuItem(item, index, subMenuKey);
     },
   },
   render() {
-    const props = { ...this.$props };
+    const props = { ...this.$props, ...this.injectExtraProps.$attrs, ...this.$attrs };
     const { rootPrefixCls, title } = props;
     const titleClassName = `${rootPrefixCls}-item-group-title`;
     const listClassName = `${rootPrefixCls}-item-group-list`;
     // menuAllProps.props.forEach(key => delete props[key])
-    const listeners = { ...getListeners(this) };
+    const listeners = { ...getListeners(this), ...this.injectExtraProps.$listeners };
     delete listeners.click;
 
     return (

@@ -6,7 +6,6 @@ import KeyCode from '../_util/KeyCode';
 import classNames from 'classnames';
 import { getKeyFromChildrenIndex, loopMenuItem, noop, isMobileDevice } from './util';
 import DOMWrap from './DOMWrap';
-import { cloneElement } from '../_util/vnode';
 import {
   initDefaultProps,
   getOptionProps,
@@ -15,7 +14,7 @@ import {
   getComponentFromProp,
   getListeners,
 } from '../_util/props-util';
-
+import FunctionProvider from './FunctionProvider';
 function allDisabled(arr) {
   if (!arr.length) {
     return true;
@@ -312,7 +311,7 @@ const SubPopupMenu = {
       }
       const childListeners = getEvents(child);
       const newChildProps = {
-        props: {
+        attrs: {
           mode: childProps.mode || props.mode,
           level: props.level,
           inlineIndent: props.inlineIndent,
@@ -349,9 +348,9 @@ const SubPopupMenu = {
       };
       // ref: https://github.com/ant-design/ant-design/issues/13943
       if (props.mode === 'inline' || isMobileDevice()) {
-        newChildProps.props.triggerSubMenuAction = 'click';
+        newChildProps.attrs.triggerSubMenuAction = 'click';
       }
-      return cloneElement(child, newChildProps);
+      return <FunctionProvider {...newChildProps}>{child}</FunctionProvider>;
     },
 
     renderMenuItem(c, i, subMenuKey) {

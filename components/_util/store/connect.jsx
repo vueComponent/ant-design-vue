@@ -9,7 +9,7 @@ function getDisplayName(WrappedComponent) {
 }
 
 const defaultMapStateToProps = () => ({});
-export default function connect(mapStateToProps) {
+export default function connect(mapStateToProps, injectExtraPropsKey) {
   const shouldSubscribe = !!mapStateToProps;
   const finalMapStateToProps = mapStateToProps || defaultMapStateToProps;
   return function wrapWithConnect(WrappedComponent) {
@@ -25,18 +25,43 @@ export default function connect(mapStateToProps) {
       props,
       inject: {
         storeContext: { default: () => ({}) },
+        ...(injectExtraPropsKey
+          ? {
+              injectExtraContext: {
+                from: injectExtraPropsKey,
+                default: () => ({}),
+              },
+            }
+          : {}),
+      },
+      computed: {
+        injectExtraProps() {
+          return this.injectExtraContext ? this.injectExtraContext.$attrs : {};
+        },
+        injectExtraListeners() {
+          return this.injectExtraContext ? this.injectExtraContext.$listeners : {};
+        },
       },
       data() {
         this.store = this.storeContext.store;
-        this.preProps = omit(getOptionProps(this), ['__propsSymbol__']);
+        this.preProps = {
+          ...omit(getOptionProps(this), ['__propsSymbol__']),
+          ...this.injectExtraProps,
+        };
         return {
-          subscribed: finalMapStateToProps(this.store.getState(), this.$props),
+          subscribed: finalMapStateToProps(this.store.getState(), {
+            ...this.$props,
+            ...this.injectExtraProps,
+          }),
         };
       },
       watch: {
         __propsSymbol__() {
           if (mapStateToProps && mapStateToProps.length === 2) {
-            this.subscribed = finalMapStateToProps(this.store.getState(), this.$props);
+            this.subscribed = finalMapStateToProps(this.store.getState(), {
+              ...this.$props,
+              ...this.injectExtraProps,
+            });
           }
         },
       },
@@ -52,7 +77,10 @@ export default function connect(mapStateToProps) {
           if (!this.unsubscribe) {
             return;
           }
-          const props = omit(getOptionProps(this), ['__propsSymbol__']);
+          const props = {
+            ...omit(getOptionProps(this), ['__propsSymbol__']),
+            ...this.injectExtraProps,
+          };
           const nextSubscribed = finalMapStateToProps(this.store.getState(), props);
           if (
             !shallowEqual(this.preProps, props) ||
@@ -81,7 +109,7 @@ export default function connect(mapStateToProps) {
       },
       render() {
         const { $slots = {}, $scopedSlots, subscribed, store } = this;
-        const props = getOptionProps(this);
+        const props = { ...getOptionProps(this), ...this.injectExtraProps };
         this.preProps = { ...omit(props, ['__propsSymbol__']) };
         const wrapProps = {
           props: {
@@ -89,7 +117,7 @@ export default function connect(mapStateToProps) {
             ...subscribed,
             store,
           },
-          on: getListeners(this),
+          on: { ...getListeners(this), ...this.injectExtraListeners },
           scopedSlots: $scopedSlots,
         };
         return (

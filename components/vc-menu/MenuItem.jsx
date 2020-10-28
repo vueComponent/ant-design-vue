@@ -6,7 +6,7 @@ import { connect } from '../_util/store';
 import { noop, menuAllProps } from './util';
 import { getComponent, getSlot, findDOMNode } from '../_util/props-util';
 import { inject } from 'vue';
-const injectExtraPropsKey = 'ANT_MENU_PROVIDER_PROPS_KEY';
+import { injectExtraPropsKey } from './FunctionProvider';
 const props = {
   attribute: PropTypes.object,
   rootPrefixCls: PropTypes.string,

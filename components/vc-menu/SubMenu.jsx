@@ -11,9 +11,9 @@ import { getComponent, filterEmpty, getSlot, splitAttrs, findDOMNode } from '../
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import { noop, loopMenuItemRecursively, getMenuIdFromSubMenuEventKey } from './util';
 import { getTransitionProps, Transition } from '../_util/transition';
+import { injectExtraPropsKey } from './FunctionProvider';
 
 let guid = 0;
-const injectExtraPropsKey = 'ANT_MENU_PROVIDER_PROPS_KEY';
 const popupPlacementMap = {
   horizontal: 'bottomLeft',
   vertical: 'rightTop',

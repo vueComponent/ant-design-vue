@@ -3,7 +3,7 @@ import { getComponent, getSlot } from '../_util/props-util';
 import { menuAllProps } from './util';
 import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
-const injectExtraPropsKey = 'ANT_MENU_PROVIDER_PROPS_KEY';
+import { injectExtraPropsKey } from './FunctionProvider';
 const MenuItemGroup = {
   name: 'MenuItemGroup',
   inheritAttrs: false,

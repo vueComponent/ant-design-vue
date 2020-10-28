@@ -14,7 +14,6 @@ import {
   getPropsData,
 } from '../_util/props-util';
 import FunctionProvider from './FunctionProvider';
-const injectExtraPropsKey = 'ANT_MENU_PROVIDER_PROPS_KEY';
 function allDisabled(arr) {
   if (!arr.length) {
     return true;
@@ -323,11 +322,7 @@ const SubPopupMenu = {
       if (props.mode === 'inline' || isMobileDevice()) {
         newChildProps.triggerSubMenuAction = 'click';
       }
-      return (
-        <FunctionProvider injectExtraPropsKey={injectExtraPropsKey} {...newChildProps}>
-          {child}
-        </FunctionProvider>
-      );
+      return <FunctionProvider {...newChildProps}>{child}</FunctionProvider>;
     },
 
     renderMenuItem(c, i, subMenuKey) {

@@ -1,15 +1,10 @@
-import PropTypes from '../_util/vue-types';
+// import PropTypes from '../_util/vue-types';
 import { provide, reactive } from 'vue';
-
+export const injectExtraPropsKey = Symbol();
 const FunctionProvider = {
   inheritAttrs: false,
-  props: {
-    injectExtraPropsKey: PropTypes.string,
-  },
   setup(props, { slots, attrs }) {
-    if (props.injectExtraPropsKey) {
-      provide(props.injectExtraPropsKey, reactive(attrs));
-    }
+    provide(injectExtraPropsKey, reactive(attrs));
     return () => slots.default?.();
   },
 };

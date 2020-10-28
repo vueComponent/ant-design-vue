@@ -3,7 +3,7 @@ import { Item, itemProps } from '../vc-menu';
 import { getOptionProps, getSlot } from '../_util/props-util';
 import Tooltip, { TooltipProps } from '../tooltip';
 import { SiderContextProps } from '../layout/Sider';
-
+import { injectExtraPropsKey } from '../vc-menu/FunctionProvider';
 export default defineComponent({
   name: 'MenuItem',
   inheritAttrs: false,
@@ -13,6 +13,7 @@ export default defineComponent({
     return {
       getInlineCollapsed: inject<() => boolean>('getInlineCollapsed', () => false),
       layoutSiderContext: inject<SiderContextProps>('layoutSiderContext', {}),
+      injectExtraProps: inject(injectExtraPropsKey, () => ({})),
     };
   },
   methods: {
@@ -22,7 +23,7 @@ export default defineComponent({
   },
   render() {
     const props = getOptionProps(this);
-    const { level, title, rootPrefixCls } = props;
+    const { level, title, rootPrefixCls } = { ...props, ...this.injectExtraProps } as any;
     const { getInlineCollapsed, $attrs: attrs } = this;
     const inlineCollapsed = getInlineCollapsed();
     let tooltipTitle = title;

@@ -41,7 +41,7 @@ exports[`renders ./antdv-demo/docs/select/demo/basic.md correctly 1`] = `
 
 exports[`renders ./antdv-demo/docs/select/demo/big-data.md correctly 1`] = `
 <div>
-  <h2>100000 Items</h2>
+  <h2>10000 Items</h2>
   <div class="ant-select ant-select-multiple ant-select-show-search" style="width: 100%;">
     <!---->
     <!---->

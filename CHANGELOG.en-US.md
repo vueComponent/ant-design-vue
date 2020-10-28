@@ -10,6 +10,12 @@
 
 ---
 
+## 1.7.1
+
+`2020-10-28`
+
+- 🐞 Fix Menu component, wrong display Tooltip prompt problem
+
 ## 1.7.0
 
 `2020-10-28`

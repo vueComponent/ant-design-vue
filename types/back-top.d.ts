@@ -11,7 +11,7 @@ export declare class BackTop extends AntdComponent {
      * @default () => window
      * @type Function
      */
-    target?: () => HTMLElement;
+    target?: () => HTMLElement | null;
 
     /**
      * the BackTop button will not show until the scroll height reaches this value

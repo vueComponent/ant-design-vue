@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Slider should show tooltip when hovering slider handler 1`] = `
-<div id="app" data-v-app=""></div>
-<div id="app" data-v-app="">
+<div data-v-app=""></div>
+<div data-v-app="">
   <div tabindex="-1" class="ant-slider">
     <div class="ant-slider-rail"></div>
     <div class="ant-slider-track" style="left: 0%; width: 30%;"></div>
@@ -29,8 +29,8 @@ exports[`Slider should show tooltip when hovering slider handler 1`] = `
 `;
 
 exports[`Slider should show tooltip when hovering slider handler 2`] = `
-<div id="app" data-v-app=""></div>
-<div id="app" data-v-app="">
+<div data-v-app=""></div>
+<div data-v-app="">
   <div tabindex="-1" class="ant-slider">
     <div class="ant-slider-rail"></div>
     <div class="ant-slider-track" style="left: 0%; width: 30%;"></div>

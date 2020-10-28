@@ -1,4 +1,4 @@
-import { PropType, VNode } from 'vue';
+import { nextTick, PropType, VNode } from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import omit from 'omit.js';
 import classNames from '../_util/classNames';
@@ -55,7 +55,7 @@ const ResizableTextArea = defineComponent({
   },
   watch: {
     value() {
-      this.$nextTick(() => {
+      nextTick(() => {
         this.resizeTextarea();
       });
     },

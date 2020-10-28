@@ -7,7 +7,7 @@ import Checkbox from '../checkbox';
 import Search from './search';
 import defaultRenderList from './renderListBody';
 import triggerEvent from '../_util/triggerEvent';
-import { defineComponent } from 'vue';
+import { defineComponent, nextTick } from 'vue';
 
 const defaultRender = () => null;
 
@@ -96,7 +96,7 @@ export default defineComponent({
     // }
   },
   updated() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (this.scrollEvent) {
         this.scrollEvent.remove();
       }

@@ -1,4 +1,4 @@
-import { defineComponent, inject, CSSProperties } from 'vue';
+import { defineComponent, inject, CSSProperties, nextTick } from 'vue';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps } from '../_util/props-util';
 import {
@@ -41,7 +41,7 @@ export default defineComponent({
     };
   },
   updated() {
-    this.$nextTick(() => {
+    nextTick(() => {
       const { listType, items, previewFile } = this.$props;
       if (listType !== 'picture' && listType !== 'picture-card') {
         return;

@@ -1,4 +1,4 @@
-import { defineComponent, inject, VNode, withDirectives } from 'vue';
+import { defineComponent, inject, nextTick, VNode, withDirectives } from 'vue';
 import antInputDirective from '../_util/antInputDirective';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
@@ -76,7 +76,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (process.env.NODE_ENV === 'test') {
         if (this.autofocus) {
           this.focus();
@@ -129,7 +129,7 @@ export default defineComponent({
       } else {
         this.$forceUpdate();
       }
-      this.$nextTick(() => {
+      nextTick(() => {
         callback && callback();
       });
     },

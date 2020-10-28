@@ -1,5 +1,5 @@
 import classNames from '../_util/classNames';
-import { inject, provide, PropType, defineComponent } from 'vue';
+import { inject, provide, PropType, defineComponent, nextTick } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import { getOptionProps, hasProp, getComponent, getSlot } from '../_util/props-util';
@@ -114,7 +114,7 @@ export default defineComponent({
   },
 
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (this.mql) {
         this.mql.addListener(this.responsiveHandler);
         this.responsiveHandler(this.mql);

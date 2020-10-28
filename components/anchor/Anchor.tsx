@@ -1,4 +1,4 @@
-import { defineComponent, inject, provide } from 'vue';
+import { defineComponent, inject, nextTick, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import addEventListener from '../vc-util/Dom/addEventListener';
@@ -117,7 +117,7 @@ export default defineComponent({
     };
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       const { getContainer } = this;
       this.scrollContainer = getContainer();
       this.scrollEvent = addEventListener(this.scrollContainer, 'scroll', this.handleScroll);
@@ -125,7 +125,7 @@ export default defineComponent({
     });
   },
   updated() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (this.scrollEvent) {
         const { getContainer } = this;
         const currentContainer = getContainer();

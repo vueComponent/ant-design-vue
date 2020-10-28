@@ -72,7 +72,7 @@ const OptionListProps = {
  * Using virtual list of option display.
  * Will fallback to dom if use customize render.
  */
-const OptionList = defineComponent<OptionListProps, { state: any }>({
+const OptionList = defineComponent<OptionListProps, { state?: any }>({
   name: 'OptionList',
   inheritAttrs: false,
   setup(props) {

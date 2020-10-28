@@ -10434,7 +10434,7 @@ exports[`Locale Provider should display the text as hu 1`] = `
     <div class="ant-select ant-select-sm ant-fullcalendar-month-select ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
-      <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span><span class="ant-select-selection-item" title="szept">szept</span>
+      <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span><span class="ant-select-selection-item" title="szept.">szept.</span>
         <!---->
       </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
       <!---->
@@ -10976,7 +10976,7 @@ exports[`Locale Provider should display the text as hy 1`] = `
     <div class="ant-select ant-select-sm ant-fullcalendar-month-select ant-select-single ant-select-show-arrow">
       <!---->
       <!---->
-      <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span><span class="ant-select-selection-item" title="szept">szept</span>
+      <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span><span class="ant-select-selection-item" title="szept.">szept.</span>
         <!---->
       </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
       <!---->
@@ -23468,7 +23468,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
         <tbody class="ant-fullcalendar-tbody">
           <tr role="row" class="">
             <!---->
-            <td role="gridcell" title="28. avgust 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="28. avgust 2017." class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">28</div>
                 <div class="ant-fullcalendar-content">
@@ -23476,7 +23476,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="29. avgust 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="29. avgust 2017." class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">29</div>
                 <div class="ant-fullcalendar-content">
@@ -23484,7 +23484,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="30. avgust 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
+            <td role="gridcell" title="30. avgust 2017." class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">30</div>
                 <div class="ant-fullcalendar-content">
@@ -23492,7 +23492,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="31. avgust 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
+            <td role="gridcell" title="31. avgust 2017." class="ant-fullcalendar-cell ant-fullcalendar-last-month-cell ant-fullcalendar-last-day-of-month">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">31</div>
                 <div class="ant-fullcalendar-content">
@@ -23500,7 +23500,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="1. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="1. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">01</div>
                 <div class="ant-fullcalendar-content">
@@ -23508,7 +23508,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="2. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="2. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">02</div>
                 <div class="ant-fullcalendar-content">
@@ -23516,7 +23516,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="3. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="3. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">03</div>
                 <div class="ant-fullcalendar-content">
@@ -23527,7 +23527,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
           </tr>
           <tr role="row" class="">
             <!---->
-            <td role="gridcell" title="4. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="4. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">04</div>
                 <div class="ant-fullcalendar-content">
@@ -23535,7 +23535,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="5. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="5. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">05</div>
                 <div class="ant-fullcalendar-content">
@@ -23543,7 +23543,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="6. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="6. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">06</div>
                 <div class="ant-fullcalendar-content">
@@ -23551,7 +23551,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="7. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="7. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">07</div>
                 <div class="ant-fullcalendar-content">
@@ -23559,7 +23559,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="8. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="8. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">08</div>
                 <div class="ant-fullcalendar-content">
@@ -23567,7 +23567,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="9. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="9. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">09</div>
                 <div class="ant-fullcalendar-content">
@@ -23575,7 +23575,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="10. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="10. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">10</div>
                 <div class="ant-fullcalendar-content">
@@ -23586,7 +23586,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
           </tr>
           <tr role="row" class="">
             <!---->
-            <td role="gridcell" title="11. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="11. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">11</div>
                 <div class="ant-fullcalendar-content">
@@ -23594,7 +23594,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="12. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="12. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">12</div>
                 <div class="ant-fullcalendar-content">
@@ -23602,7 +23602,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="13. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="13. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">13</div>
                 <div class="ant-fullcalendar-content">
@@ -23610,7 +23610,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="14. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="14. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">14</div>
                 <div class="ant-fullcalendar-content">
@@ -23618,7 +23618,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="15. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="15. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">15</div>
                 <div class="ant-fullcalendar-content">
@@ -23626,7 +23626,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="16. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="16. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">16</div>
                 <div class="ant-fullcalendar-content">
@@ -23634,7 +23634,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="17. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="17. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">17</div>
                 <div class="ant-fullcalendar-content">
@@ -23645,7 +23645,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
           </tr>
           <tr role="row" class="ant-fullcalendar-current-week ant-fullcalendar-active-week">
             <!---->
-            <td role="gridcell" title="18. septembar 2017" class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
+            <td role="gridcell" title="18. septembar 2017." class="ant-fullcalendar-cell ant-fullcalendar-today ant-fullcalendar-selected-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">18</div>
                 <div class="ant-fullcalendar-content">
@@ -23653,7 +23653,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="19. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="19. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">19</div>
                 <div class="ant-fullcalendar-content">
@@ -23661,7 +23661,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="20. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="20. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">20</div>
                 <div class="ant-fullcalendar-content">
@@ -23669,7 +23669,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="21. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="21. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">21</div>
                 <div class="ant-fullcalendar-content">
@@ -23677,7 +23677,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="22. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="22. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">22</div>
                 <div class="ant-fullcalendar-content">
@@ -23685,7 +23685,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="23. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="23. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">23</div>
                 <div class="ant-fullcalendar-content">
@@ -23693,7 +23693,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="24. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="24. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">24</div>
                 <div class="ant-fullcalendar-content">
@@ -23704,7 +23704,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
           </tr>
           <tr role="row" class="">
             <!---->
-            <td role="gridcell" title="25. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="25. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">25</div>
                 <div class="ant-fullcalendar-content">
@@ -23712,7 +23712,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="26. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="26. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">26</div>
                 <div class="ant-fullcalendar-content">
@@ -23720,7 +23720,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="27. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="27. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">27</div>
                 <div class="ant-fullcalendar-content">
@@ -23728,7 +23728,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="28. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="28. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">28</div>
                 <div class="ant-fullcalendar-content">
@@ -23736,7 +23736,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="29. septembar 2017" class="ant-fullcalendar-cell">
+            <td role="gridcell" title="29. septembar 2017." class="ant-fullcalendar-cell">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">29</div>
                 <div class="ant-fullcalendar-content">
@@ -23744,7 +23744,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="30. septembar 2017" class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
+            <td role="gridcell" title="30. septembar 2017." class="ant-fullcalendar-cell ant-fullcalendar-last-day-of-month">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">30</div>
                 <div class="ant-fullcalendar-content">
@@ -23752,7 +23752,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="1. oktobar 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="1. oktobar 2017." class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">01</div>
                 <div class="ant-fullcalendar-content">
@@ -23763,7 +23763,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
           </tr>
           <tr role="row" class="">
             <!---->
-            <td role="gridcell" title="2. oktobar 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="2. oktobar 2017." class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">02</div>
                 <div class="ant-fullcalendar-content">
@@ -23771,7 +23771,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="3. oktobar 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="3. oktobar 2017." class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">03</div>
                 <div class="ant-fullcalendar-content">
@@ -23779,7 +23779,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="4. oktobar 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="4. oktobar 2017." class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">04</div>
                 <div class="ant-fullcalendar-content">
@@ -23787,7 +23787,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="5. oktobar 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="5. oktobar 2017." class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">05</div>
                 <div class="ant-fullcalendar-content">
@@ -23795,7 +23795,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="6. oktobar 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="6. oktobar 2017." class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">06</div>
                 <div class="ant-fullcalendar-content">
@@ -23803,7 +23803,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="7. oktobar 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="7. oktobar 2017." class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">07</div>
                 <div class="ant-fullcalendar-content">
@@ -23811,7 +23811,7 @@ exports[`Locale Provider should display the text as sr 1`] = `
                 </div>
               </div>
             </td>
-            <td role="gridcell" title="8. oktobar 2017" class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
+            <td role="gridcell" title="8. oktobar 2017." class="ant-fullcalendar-cell ant-fullcalendar-next-month-btn-day">
               <div class="ant-fullcalendar-date">
                 <div class="ant-fullcalendar-value">08</div>
                 <div class="ant-fullcalendar-content">

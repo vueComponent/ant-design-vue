@@ -1,5 +1,5 @@
 import { tuple, VueNode } from '../_util/type';
-import { CSSProperties, defineComponent, inject, PropType } from 'vue';
+import { CSSProperties, defineComponent, inject, nextTick, PropType } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 import { getComponent } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
@@ -40,7 +40,7 @@ export default defineComponent({
   },
   watch: {
     src() {
-      this.$nextTick(() => {
+      nextTick(() => {
         this.isImgExist = true;
         this.scale = 1;
         // force uodate for position
@@ -49,13 +49,13 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       this.setScale();
       this.isMounted = true;
     });
   },
   updated() {
-    this.$nextTick(() => {
+    nextTick(() => {
       this.setScale();
     });
   },

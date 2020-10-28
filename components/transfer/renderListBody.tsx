@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue';
+import { defineComponent, nextTick } from 'vue';
 import raf from '../_util/raf';
 import ListItem from './ListItem';
 import PropTypes, { withUndefined } from '../_util/vue-types';
@@ -35,7 +35,7 @@ const ListBody = defineComponent({
   },
   watch: {
     itemsLength() {
-      this.$nextTick(() => {
+      nextTick(() => {
         const { lazy } = this.$props;
         if (lazy !== false) {
           const container = findDOMNode(this);

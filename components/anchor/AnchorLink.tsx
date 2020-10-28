@@ -1,4 +1,4 @@
-import { ComponentPublicInstance, defineComponent, inject } from 'vue';
+import { ComponentPublicInstance, defineComponent, inject, nextTick } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent } from '../_util/props-util';
 import classNames from '../_util/classNames';
@@ -32,7 +32,7 @@ export default defineComponent({
   },
   watch: {
     href(val, oldVal) {
-      this.$nextTick(() => {
+      nextTick(() => {
         this.antAnchor.unregisterLink(oldVal);
         this.antAnchor.registerLink(val);
       });

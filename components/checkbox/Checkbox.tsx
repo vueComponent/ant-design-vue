@@ -1,4 +1,4 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, nextTick } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import VcCheckbox from '../vc-checkbox';
@@ -36,7 +36,7 @@ export default defineComponent({
 
   watch: {
     value(value, prevValue) {
-      this.$nextTick(() => {
+      nextTick(() => {
         const { checkboxGroupContext: checkboxGroup = {} } = this;
         if (checkboxGroup.registerValue && checkboxGroup.cancelValue) {
           checkboxGroup.cancelValue(prevValue);

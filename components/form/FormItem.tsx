@@ -1,4 +1,4 @@
-import { inject, provide, PropType, defineComponent, computed } from 'vue';
+import { inject, provide, PropType, defineComponent, computed, nextTick } from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
@@ -295,7 +295,7 @@ export default defineComponent({
         prop.o[prop.k] = this.initialValue;
       }
       // reset validateDisabled after onFieldChange triggered
-      this.$nextTick(() => {
+      nextTick(() => {
         this.validateDisabled = false;
       });
     },

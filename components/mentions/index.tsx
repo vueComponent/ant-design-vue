@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, PropType, VNodeTypes } from 'vue';
+import { App, defineComponent, inject, nextTick, PropType, VNodeTypes } from 'vue';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
@@ -91,7 +91,7 @@ const Mentions = defineComponent({
     };
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (process.env.NODE_ENV === 'test') {
         if (this.autofocus) {
           this.focus();

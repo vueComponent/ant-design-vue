@@ -1,4 +1,4 @@
-import { App, defineComponent, inject } from 'vue';
+import { App, defineComponent, inject, nextTick } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import backTopTypes from './backTopTypes';
@@ -36,7 +36,7 @@ const BackTop = defineComponent({
     };
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       const getTarget = this.target || getDefaultTarget;
       this.scrollEvent = addEventListener(getTarget(), 'scroll', this.handleScroll);
       this.handleScroll();

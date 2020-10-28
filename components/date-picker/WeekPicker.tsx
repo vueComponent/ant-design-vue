@@ -1,4 +1,4 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, nextTick } from 'vue';
 import moment from 'moment';
 import Calendar from '../vc-calendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
@@ -63,7 +63,7 @@ export default defineComponent({
       this.prevState = { ...this.$data, ...state };
     },
     _open(val, oldVal) {
-      this.$nextTick(() => {
+      nextTick(() => {
         if (!hasProp(this, 'open') && oldVal && !val) {
           this.focus();
         }
@@ -74,7 +74,7 @@ export default defineComponent({
     this.prevState = { ...this.$data };
   },
   updated() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (!hasProp(this, 'open') && this.prevState._open && !this._open) {
         this.focus();
       }

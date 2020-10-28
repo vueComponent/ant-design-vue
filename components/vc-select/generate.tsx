@@ -281,7 +281,7 @@ export interface SelectProps<OptionsType extends object[], ValueType> {
 export interface GenerateConfig<OptionsType extends object[]> {
   prefixCls: string;
   components: {
-    optionList: DefineComponent<Omit<OptionListProps, 'options'> & { options: OptionsType }>;
+    optionList: DefineComponent<Omit<OptionListProps, 'options'> & { options?: OptionsType }>;
   };
   /** Convert jsx tree into `OptionsType` */
   convertChildrenToData: (children: VNodeChild | JSX.Element) => OptionsType;
@@ -321,7 +321,7 @@ export default function generateSelector<
     key?: Key;
     disabled?: boolean;
   }[]
->(config: GenerateConfig<OptionsType>): DefineComponent<SelectProps<OptionsType, ValueType>> {
+>(config: GenerateConfig<OptionsType>) {
   const {
     prefixCls: defaultPrefixCls,
     components: { optionList: OptionList },
@@ -334,7 +334,7 @@ export default function generateSelector<
     warningProps,
     fillOptionsWithMissingValue,
     omitDOMProps,
-  } = config;
+  } = config as any;
   const Select = defineComponent<SelectProps<OptionsType, ValueType>>({
     name: 'Select',
     setup(props: SelectProps<OptionsType, ValueType>) {

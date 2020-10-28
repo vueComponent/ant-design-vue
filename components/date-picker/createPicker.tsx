@@ -1,4 +1,4 @@
-import { CSSProperties, DefineComponent, defineComponent, inject } from 'vue';
+import { CSSProperties, DefineComponent, defineComponent, inject, nextTick } from 'vue';
 import moment from 'moment';
 import omit from 'lodash-es/omit';
 import MonthCalendar from '../vc-calendar/src/MonthCalendar';
@@ -73,7 +73,7 @@ export default function createPicker<P>(
         this.setState(state);
       },
       sOpen(val, oldVal) {
-        this.$nextTick(() => {
+        nextTick(() => {
           if (!hasProp(this, 'open') && oldVal && !val) {
             this.focus();
           }

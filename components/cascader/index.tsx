@@ -231,13 +231,6 @@ const Cascader = defineComponent({
       flattenOptions: showSearch ? flattenTree(options, this.$props) : undefined,
     };
   },
-  // mounted() {
-  //   this.$nextTick(() => {
-  //     if (this.autofocus && !this.showSearch && !this.disabled) {
-  //       this.$refs.picker.focus();
-  //     }
-  //   });
-  // },
   watch: {
     value(val) {
       this.setState({ sValue: val || [] });

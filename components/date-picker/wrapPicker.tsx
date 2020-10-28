@@ -1,4 +1,4 @@
-import { provide, inject, defineComponent, DefineComponent } from 'vue';
+import { provide, inject, defineComponent, DefineComponent, nextTick } from 'vue';
 import TimePickerPanel from '../vc-time-picker/Panel';
 import classNames from '../_util/classNames';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -74,7 +74,7 @@ export default function wrapPicker<P>(
       checkValidate('DatePicker', defaultValue, 'defaultValue', valueFormat);
       checkValidate('DatePicker', value, 'value', valueFormat);
       if (autofocus && !disabled) {
-        this.$nextTick(() => {
+        nextTick(() => {
           this.focus();
         });
       }

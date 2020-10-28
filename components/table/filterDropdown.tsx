@@ -1,4 +1,4 @@
-import { watchEffect, reactive, defineComponent } from 'vue';
+import { watchEffect, reactive, defineComponent, nextTick } from 'vue';
 import FilterFilled from '@ant-design/icons-vue/FilterFilled';
 import Menu, { SubMenu, Item as MenuItem } from '../vc-menu';
 import closest from 'dom-closest';
@@ -58,13 +58,13 @@ export default defineComponent({
 
   mounted() {
     const { column } = this;
-    this.$nextTick(() => {
+    nextTick(() => {
       this.setNeverShown(column);
     });
   },
   updated() {
     const { column } = this;
-    this.$nextTick(() => {
+    nextTick(() => {
       this.setNeverShown(column);
     });
   },
@@ -112,7 +112,7 @@ export default defineComponent({
       // Call `setSelectedKeys` & `confirm` in the same time will make filter data not up to date
       // https://github.com/ant-design/ant-design/issues/12284
       this.$forceUpdate();
-      this.$nextTick(this.confirmFilter2);
+      nextTick(this.confirmFilter2);
     },
 
     onVisibleChange(visible: boolean) {
@@ -233,7 +233,7 @@ export default defineComponent({
   },
 
   render() {
-    const { sSelectedKeys: originSelectedKeys } = this;
+    const { sSelectedKeys: originSelectedKeys } = this as any;
     const { column, locale, prefixCls, dropdownPrefixCls, getPopupContainer } = this;
     // default multiple selection in filter dropdown
     const multiple = 'filterMultiple' in column ? column.filterMultiple : true;
@@ -267,7 +267,7 @@ export default defineComponent({
           class={dropdownMenuClass}
           onSelect={this.setSelectedKeys}
           onDeselect={this.setSelectedKeys}
-          selectedKeys={originSelectedKeys && originSelectedKeys.map(val => val)}
+          selectedKeys={originSelectedKeys}
           getPopupContainer={getPopupContainer}
           children={this.renderMenus(column.filters)}
         ></Menu>

@@ -52,7 +52,7 @@ import omit from 'lodash-es/omit';
 const RefSelect = generateSelector<SelectOptionsType>({
   prefixCls: 'rc-select',
   components: {
-    optionList: SelectOptionList,
+    optionList: SelectOptionList as any,
   },
   convertChildrenToData: convertSelectChildrenToData,
   flattenOptions,

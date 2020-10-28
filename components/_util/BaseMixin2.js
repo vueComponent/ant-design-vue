@@ -1,3 +1,4 @@
+import { nextTick } from 'vue';
 import { getOptionProps } from './props-util';
 
 export default {
@@ -19,7 +20,7 @@ export default {
       if (this._.isMounted) {
         this.$forceUpdate();
       }
-      this.$nextTick(() => {
+      nextTick(() => {
         callback && callback();
       });
     },

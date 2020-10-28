@@ -1,4 +1,4 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, nextTick } from 'vue';
 import ClearableLabeledInput from './ClearableLabeledInput';
 import ResizableTextArea from './ResizableTextArea';
 import inputProps from './inputProps';
@@ -40,7 +40,7 @@ export default defineComponent({
     },
   },
   mounted() {
-    this.$nextTick(() => {
+    nextTick(() => {
       if (process.env.NODE_ENV === 'test') {
         if (this.autofocus) {
           this.focus();
@@ -55,7 +55,7 @@ export default defineComponent({
       } else {
         this.$forceUpdate();
       }
-      this.$nextTick(() => {
+      nextTick(() => {
         callback && callback();
       });
     },

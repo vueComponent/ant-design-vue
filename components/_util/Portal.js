@@ -1,5 +1,5 @@
 import PropTypes from './vue-types';
-import { defineComponent, Teleport } from 'vue';
+import { defineComponent, nextTick, Teleport } from 'vue';
 
 export default defineComponent({
   name: 'Portal',
@@ -18,7 +18,7 @@ export default defineComponent({
   updated() {
     const { didUpdate } = this.$props;
     if (didUpdate) {
-      this.$nextTick(() => {
+      nextTick(() => {
         didUpdate(this.$props);
       });
     }

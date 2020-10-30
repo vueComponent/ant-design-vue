@@ -150,7 +150,7 @@ const Alert = defineComponent({
     });
     return closed ? null : (
       <Transition {...transitionProps}>
-        <div {...$attrs} v-show={!closing} class={alertCls} data-show={!closing}>
+        <div {...$attrs} v-show={!closing} class={[$attrs.class, alertCls]} data-show={!closing}>
           {showIcon ? iconNode : null}
           <span class={`${prefixCls}-message`}>{message}</span>
           <span class={`${prefixCls}-description`}>{description}</span>

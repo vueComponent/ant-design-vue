@@ -69,6 +69,7 @@ const Table = defineComponent({
       title: slotTitle,
       footer: slotFooter,
       expandedRowRender = props.expandedRowRender,
+      expandIcon,
     } = $slots;
     title = title || slotTitle;
     footer = footer || slotFooter;
@@ -78,6 +79,7 @@ const Table = defineComponent({
       title,
       footer,
       expandedRowRender,
+      expandIcon: this.$props.expandIcon || expandIcon,
     };
     return <T {...tProps} ref="table" />;
   },

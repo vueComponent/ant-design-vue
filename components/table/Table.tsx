@@ -903,7 +903,10 @@ export default defineComponent({
           : item,
       );
     },
-    renderExpandIcon(prefixCls) {
+    renderExpandIcon(prefixCls: string) {
+      if (this.expandIcon) {
+        return this.expandIcon;
+      }
       return ({ expandable, expanded, needIndentSpaced, record, onExpand }) => {
         if (expandable) {
           return (
@@ -916,7 +919,7 @@ export default defineComponent({
                     [`${prefixCls}-row-collapsed`]: !expanded,
                     [`${prefixCls}-row-expanded`]: expanded,
                   })}
-                  onClick={event => {
+                  onClick={(event: Event) => {
                     onExpand(record, event);
                   }}
                   aria-label={expanded ? locale.collapse : locale.expand}

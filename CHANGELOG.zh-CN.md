@@ -10,6 +10,24 @@
 
 ---
 
+## 2.0.0-beta.11
+
+`2020-10-30`
+
+- 🎉🎉🎉 重构 Select、AutoComplete 组件，支持虚拟列表，性能大幅提升
+- 🔥🔥🔥 使用 Typescript 重构所有组件，类型支持更加友好
+- 🔥 优化底层动画组件，性能更好，更流畅
+- 🌟 Textarea 组件添加 showCount 支持统计字数功能
+- 🌟 递归 Menu 组件，支持任意嵌套其他元素 [#1452](https://github.com/vueComponent/ant-design-vue/issues/1452)
+- 🇮🇪 添加爱尔兰语国际化支持
+- 🐞 修复 webpack 5 兼容问题。
+- 🐞 修复 Upload method 属性不生效问题 [#2837](https://github.com/vueComponent/ant-design-vue/issues/2837)
+- 🐞 修复 Table 组件 filter 不支持 number 类型问题 [#3052](https://github.com/vueComponent/ant-design-vue/issues/3052)
+- 🐞 修复 Table 固定列 ellipsis 不生效问题 [#2916](https://github.com/vueComponent/ant-design-vue/issues/2916)
+- 🐞 修复 Table 自定义 expandIcon 不生效问题 [#3013](https://github.com/vueComponent/ant-design-vue/issues/3013)
+- 🐞 修复 TreeSelect 不能自定义 slot 问题 [#2827](https://github.com/vueComponent/ant-design-vue/issues/2827)
+- 🛎 更改 Avatar 的 srcSet 为 srcset
+
 ## 2.0.0-beta.10
 
 `2020-09-24`

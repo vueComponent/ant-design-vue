@@ -10,6 +10,24 @@
 
 ---
 
+## 2.0.0-beta.11
+
+`2020-10-30`
+
+- 🎉🎉🎉 Refactored Select and AutoComplete components, supports virtual lists, and greatly improves performance
+- 🔥🔥🔥 Use Typescript to refactor all components, type support is more friendly
+- 🔥 Optimize the underlying animation components, with better performance and smoother
+- 🌟 Textarea component added showCount to support word count function
+- 🌟 Recursive Menu component, supports arbitrary nesting of other elements [#1452](https://github.com/vueComponent/ant-design-vue/issues/1452)
+- 🇮🇪 Add Irish language internationalization support
+- 🐞 Fix webpack 5 compatibility issues.
+- 🐞 Fix the problem that the Upload method attribute does not take effect [#2837](https://github.com/vueComponent/ant-design-vue/issues/2837)
+- 🐞 Fix Table component filter not supporting number type problem [#3052](https://github.com/vueComponent/ant-design-vue/issues/3052)
+- 🐞 Fix Table fixed column ellipsis not working issue [#2916](https://github.com/vueComponent/ant-design-vue/issues/2916)
+- 🐞 Fix Table custom expandIcon not taking effect [#3013](https://github.com/vueComponent/ant-design-vue/issues/3013)
+- 🐞 Fix the problem that TreeSelect cannot customize slot [#2827](https://github.com/vueComponent/ant-design-vue/issues/2827)
+- 🛎 Change Avatar's srcSet to srcset
+
 ## 2.0.0-beta.10
 
 `2020-09-24`

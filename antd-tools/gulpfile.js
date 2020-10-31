@@ -108,12 +108,12 @@ function babelify(js, modules) {
   let stream = js.pipe(babel(babelConfig)).pipe(
     through2.obj(function z(file, encoding, next) {
       this.push(file.clone());
-      if (file.path.match(/\/style\/index\.(js|jsx)$/)) {
+      if (file.path.match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
         const content = file.contents.toString(encoding);
         file.contents = Buffer.from(
           content.replace(/\/style\/?'/g, "/style/css'").replace(/\.less/g, '.css'),
         );
-        file.path = file.path.replace(/index\.(js|jsx)$/, 'css.js');
+        file.path = file.path.replace(/index\.(js|jsx|ts|tsx)$/, 'css.js');
         this.push(file);
         next();
       } else {

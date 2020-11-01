@@ -1,12 +1,6 @@
-import { App } from 'vue';
+import { withInstall } from '../_util/type';
 import ToolTip from './Tooltip';
 
 export { TooltipProps } from './Tooltip';
 
-/* istanbul ignore next */
-ToolTip.install = function(app: App) {
-  app.component(ToolTip.name, ToolTip);
-  return app;
-};
-
-export default ToolTip;
+export default withInstall(ToolTip);

@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Radio from './Radio';
 import Group from './Group';
 import Button from './RadioButton';
@@ -15,4 +15,8 @@ Radio.install = function(app: App) {
 };
 
 export { Button, Group };
-export default Radio;
+export default Radio as typeof Radio &
+  Plugin & {
+    readonly Group: typeof Group;
+    readonly Button: typeof Button;
+  };

@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, nextTick, onMounted, ref, PropType } from 'vue';
+import { defineComponent, inject, nextTick, onMounted, ref, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
 import classNames from '../_util/classNames';
@@ -6,7 +6,7 @@ import UpOutlined from '@ant-design/icons-vue/UpOutlined';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import VcInputNumber from '../vc-input-number/src';
 import { defaultConfigProvider } from '../config-provider';
-import { tuple } from '../_util/type';
+import { tuple, withInstall } from '../_util/type';
 
 const InputNumberProps = {
   prefixCls: PropTypes.string,
@@ -89,10 +89,4 @@ const InputNumber = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-InputNumber.install = function(app: App) {
-  app.component(InputNumber.name, InputNumber);
-  return app;
-};
-
-export default InputNumber;
+export default withInstall(InputNumber);

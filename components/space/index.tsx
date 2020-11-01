@@ -1,8 +1,8 @@
-import { inject, App, defineComponent, PropType } from 'vue';
+import { inject, defineComponent, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import { defaultConfigProvider, SizeType } from '../config-provider';
-import { tuple } from '../_util/type';
+import { tuple, withInstall } from '../_util/type';
 
 const spaceSize = {
   small: 8,
@@ -75,10 +75,4 @@ const Space = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Space.install = function(app: App) {
-  app.component(Space.name, Space);
-  return app;
-};
-
-export default Space;
+export default withInstall(Space);

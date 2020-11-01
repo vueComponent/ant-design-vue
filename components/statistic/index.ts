@@ -1,6 +1,6 @@
+import { App, Plugin } from 'vue';
 import Statistic from './Statistic';
 import Countdown from './Countdown';
-import { App } from 'vue';
 
 Statistic.Countdown = Countdown;
 /* istanbul ignore next */
@@ -10,4 +10,7 @@ Statistic.install = function(app: App) {
   return app;
 };
 
-export default Statistic;
+export default Statistic as typeof Statistic &
+  Plugin & {
+    readonly Countdown: typeof Countdown;
+  };

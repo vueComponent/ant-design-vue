@@ -7,6 +7,7 @@ import {
   watchEffect,
   PropType,
   ExtractPropTypes,
+  Plugin,
 } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
@@ -146,6 +147,7 @@ Tag.install = function(app: App) {
   return app;
 };
 
-export default Tag as typeof Tag & {
-  readonly CheckableTag: typeof CheckableTag;
-};
+export default Tag as typeof Tag &
+  Plugin & {
+    readonly CheckableTag: typeof CheckableTag;
+  };

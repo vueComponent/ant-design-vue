@@ -1,4 +1,4 @@
-import { inject, cloneVNode, App, defineComponent, PropType, VNode } from 'vue';
+import { inject, cloneVNode, App, defineComponent, PropType, VNode, Plugin } from 'vue';
 import warning from '../_util/warning';
 import ResponsiveObserve, { Breakpoint, responsiveArray } from '../_util/responsiveObserve';
 import { defaultConfigProvider } from '../config-provider';
@@ -274,6 +274,7 @@ Descriptions.install = function(app: App) {
   return app;
 };
 
-export default Descriptions as typeof Descriptions & {
-  readonly Item: typeof DescriptionsItem;
-};
+export default Descriptions as typeof Descriptions &
+  Plugin & {
+    readonly Item: typeof DescriptionsItem;
+  };

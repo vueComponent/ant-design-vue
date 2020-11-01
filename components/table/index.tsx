@@ -1,5 +1,7 @@
-import { defineComponent } from 'vue';
+import { App, defineComponent } from 'vue';
 import T from './Table';
+import Column from './Column';
+import ColumnGroup from './ColumnGroup';
 import {} from './interface';
 import { getOptionProps, getKey, getPropsData, getSlot } from '../_util/props-util';
 
@@ -85,11 +87,14 @@ const Table = defineComponent({
   },
 });
 /* istanbul ignore next */
-Table.install = function(app) {
+Table.install = function(app: App) {
   app.component(Table.name, Table);
   app.component(Table.Column.name, Table.Column);
   app.component(Table.ColumnGroup.name, Table.ColumnGroup);
   return app;
 };
 
-export default Table;
+export default Table as typeof Table & {
+  readonly Column: typeof Column;
+  readonly ColumnGroup: typeof ColumnGroup;
+};

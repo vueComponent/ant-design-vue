@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, PropType } from 'vue';
+import { defineComponent, inject, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, hasProp } from '../_util/props-util';
@@ -10,7 +10,7 @@ import interopDefault from '../_util/interopDefault';
 import { defaultConfigProvider } from '../config-provider';
 import enUS from './locale/en_US';
 import { checkValidate, stringToMoment, momentToString, TimeType } from '../_util/moment-util';
-import { tuple } from '../_util/type';
+import { tuple, withInstall } from '../_util/type';
 
 function noop() {
   return null;
@@ -252,10 +252,6 @@ const Calendar = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Calendar.install = function(app: App) {
-  app.component(Calendar.name, Calendar);
-  return app;
-};
 export { HeaderProps } from './Header';
-export default Calendar;
+
+export default withInstall(Calendar);

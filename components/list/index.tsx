@@ -1,20 +1,20 @@
+import { provide, inject, defineComponent, App, Plugin } from 'vue';
+import omit from 'omit.js';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import omit from 'omit.js';
 import { defaultConfigProvider } from '../config-provider';
 
 import Spin from '../spin';
 import Pagination, { PaginationConfig } from '../pagination';
 import { Row } from '../grid';
 
-import Item from './Item';
+import Item, { ListItemMeta } from './Item';
 import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { cloneElement } from '../_util/vnode';
-import { provide, inject, defineComponent, App } from 'vue';
 import { tuple } from '../_util/type';
 
-export { ListItemProps, ListItemMetaProps } from './Item';
+export { ListItemProps, ListItemMetaProps, ListItemMeta } from './Item';
 
 export const ColumnCount = ['', 1, 2, 3, 4, 6, 8, 12, 24];
 
@@ -292,4 +292,9 @@ List.install = function(app: App) {
   return app;
 };
 
-export default List;
+export default List as typeof List &
+  Plugin & {
+    readonly Item: typeof Item & {
+      readonly Meta: typeof ListItemMeta;
+    };
+  };

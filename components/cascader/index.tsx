@@ -1,4 +1,4 @@
-import { App, inject, provide, PropType, defineComponent, CSSProperties } from 'vue';
+import { inject, provide, PropType, defineComponent, CSSProperties } from 'vue';
 import PropTypes from '../_util/vue-types';
 import VcCascader from '../vc-cascader';
 import arrayTreeFilter from 'array-tree-filter';
@@ -23,7 +23,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
 import warning from '../_util/warning';
 import { defaultConfigProvider } from '../config-provider';
-import { tuple, VueNode } from '../_util/type';
+import { tuple, VueNode, withInstall } from '../_util/type';
 import { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
 export interface CascaderOptionType {
@@ -611,9 +611,4 @@ const Cascader = defineComponent({
   },
 });
 
-Cascader.install = function(app: App) {
-  app.component(Cascader.name, Cascader);
-  return app;
-};
-
-export default Cascader;
+export default withInstall(Cascader);

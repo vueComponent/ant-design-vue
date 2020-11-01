@@ -1,12 +1,6 @@
-import { App } from 'vue';
 import Pagination from './Pagination';
+import { withInstall } from '../_util/type';
 
 export { PaginationProps, PaginationConfig } from './Pagination';
 
-/* istanbul ignore next */
-Pagination.install = function(app: App) {
-  app.component(Pagination.name, Pagination);
-  return app;
-};
-
-export default Pagination;
+export default withInstall(Pagination);

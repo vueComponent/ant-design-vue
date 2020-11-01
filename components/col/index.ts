@@ -1,9 +1,4 @@
-import { App } from 'vue';
 import { Col } from '../grid';
-/* istanbul ignore next */
-Col.install = function(app: App) {
-  app.component(Col.name, Col);
-  return app;
-};
+import { withInstall } from '../_util/type';
 
-export default Col;
+export default withInstall(Col);

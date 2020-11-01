@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, nextTick } from 'vue';
+import { defineComponent, inject, nextTick } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import backTopTypes from './backTopTypes';
@@ -8,6 +8,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { getTransitionProps, Transition } from '../_util/transition';
 import { defaultConfigProvider } from '../config-provider';
 import scrollTo from '../_util/scrollTo';
+import { withInstall } from '../_util/type';
 
 function getDefaultTarget() {
   return window;
@@ -100,10 +101,4 @@ const BackTop = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-BackTop.install = function(app: App) {
-  app.component(BackTop.name, BackTop);
-  return app;
-};
-
-export default BackTop;
+export default withInstall(BackTop);

@@ -1,10 +1,10 @@
+import { computed, defineComponent, inject, ref, VNodeChild, App, PropType, Plugin } from 'vue';
 import omit from 'omit.js';
 import classNames from '../_util/classNames';
 import RcSelect, { Option, OptGroup, SelectProps as RcSelectProps, BaseProps } from '../vc-select';
 import { OptionProps as OptionPropsType } from '../vc-select/Option';
 import { defaultConfigProvider } from '../config-provider';
 import getIcons from './utils/iconUtil';
-import { computed, defineComponent, inject, ref, VNodeChild, App, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 
@@ -228,8 +228,9 @@ Select.install = function(app: App) {
   app.component('ASelectOptGroup', Select.OptGroup);
   return app;
 };
-export default Select as typeof Select & {
-  readonly Option: typeof Option;
-  readonly OptGroup: typeof OptGroup;
-  SECRET_COMBOBOX_MODE_DO_NOT_USE: 'SECRET_COMBOBOX_MODE_DO_NOT_USE';
-};
+export default Select as typeof Select &
+  Plugin & {
+    readonly Option: typeof Option;
+    readonly OptGroup: typeof OptGroup;
+    readonly SECRET_COMBOBOX_MODE_DO_NOT_USE: 'SECRET_COMBOBOX_MODE_DO_NOT_USE';
+  };

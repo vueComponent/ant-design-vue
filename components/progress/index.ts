@@ -1,12 +1,6 @@
-import { App } from 'vue';
 import Progress from './progress';
+import { withInstall } from '../_util/type';
 
 export { ProgressProps } from './props';
 
-/* istanbul ignore next */
-Progress.install = function(app: App) {
-  app.component(Progress.name, Progress);
-  return app;
-};
-
-export default Progress;
+export default withInstall(Progress);

@@ -1,4 +1,4 @@
-import { App, defineComponent, inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import debounce from 'lodash-es/debounce';
 import hasProp, { getComponent } from '../_util/props-util';
@@ -6,7 +6,7 @@ import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 import classNames from '../_util/classNames';
 import SlickCarousel from '../vc-slick/src';
-import { tuple } from '../_util/type';
+import { tuple, withInstall } from '../_util/type';
 
 // Carousel
 export const CarouselProps = {
@@ -164,10 +164,4 @@ const Carousel = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Carousel.install = function(app: App) {
-  app.component(Carousel.name, Carousel);
-  return app;
-};
-
-export default Carousel;
+export default withInstall(Carousel);

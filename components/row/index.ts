@@ -1,10 +1,4 @@
-import { App } from 'vue';
 import { Row } from '../grid';
+import { withInstall } from '../_util/type';
 
-/* istanbul ignore next */
-Row.install = function(app: App) {
-  app.component(Row.name, Row);
-  return app;
-};
-
-export default Row;
+export default withInstall(Row);

@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Tree from './Tree';
 import DirectoryTree from './DirectoryTree';
 
@@ -12,4 +12,8 @@ Tree.install = function(app: App) {
   return app;
 };
 
-export default Tree;
+export default Tree as typeof Tree &
+  Plugin & {
+    readonly TreeNode: any;
+    readonly DirectoryTree: typeof DirectoryTree;
+  };

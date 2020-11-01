@@ -1,4 +1,4 @@
-import { inject, cloneVNode, defineComponent, App } from 'vue';
+import { inject, cloneVNode, defineComponent } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -14,7 +14,7 @@ import PropTypes from '../_util/vue-types';
 import { getTransitionProps, Transition } from '../_util/transition';
 import { getComponent, isValidElement, findDOMNode } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
-import { tuple } from '../_util/type';
+import { tuple, withInstall } from '../_util/type';
 
 function noop() {}
 
@@ -161,10 +161,4 @@ const Alert = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Alert.install = function(app: App) {
-  app.component(Alert.name, Alert);
-  return app;
-};
-
-export default Alert;
+export default withInstall(Alert);

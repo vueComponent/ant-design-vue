@@ -1,4 +1,4 @@
-import { inject, provide, nextTick, defineComponent, App, CSSProperties } from 'vue';
+import { inject, provide, nextTick, defineComponent, CSSProperties } from 'vue';
 import classnames from '../_util/classNames';
 import omit from 'omit.js';
 import VcDrawer from '../vc-drawer/src';
@@ -7,7 +7,7 @@ import BaseMixin from '../_util/BaseMixin';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import { getComponent, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
-import { tuple } from '../_util/type';
+import { tuple, withInstall } from '../_util/type';
 
 const PlacementTypes = tuple('top', 'right', 'bottom', 'left');
 type placementType = typeof PlacementTypes[number];
@@ -253,10 +253,4 @@ const Drawer = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Drawer.install = function(app: App) {
-  app.component(Drawer.name, Drawer);
-  return app;
-};
-
-export default Drawer;
+export default withInstall(Drawer);

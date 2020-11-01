@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, VNodeTypes, ExtractPropTypes } from 'vue';
+import { defineComponent, inject, VNodeTypes, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent, getOptionProps, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
@@ -7,6 +7,7 @@ import Breadcrumb from '../breadcrumb';
 import Avatar from '../avatar';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import { withInstall } from '../_util/type';
 
 export const PageHeaderProps = {
   backIcon: PropTypes.VNodeChild,
@@ -140,10 +141,4 @@ const PageHeader = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-PageHeader.install = function(app: App) {
-  app.component(PageHeader.name, PageHeader);
-  return app;
-};
-
-export default PageHeader;
+export default withInstall(PageHeader);

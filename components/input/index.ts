@@ -1,9 +1,9 @@
+import { App, Plugin } from 'vue';
 import Input from './Input';
 import Group from './Group';
 import Search from './Search';
 import TextArea from './TextArea';
 import Password from './Password';
-import { App } from 'vue';
 
 Input.Group = Group;
 Input.Search = Search;
@@ -20,9 +20,10 @@ Input.install = function(app: App) {
   return app;
 };
 
-export default Input as typeof Input & {
-  readonly Group: typeof Group;
-  readonly Search: typeof Search;
-  readonly TextArea: typeof TextArea;
-  readonly Password: typeof Password;
-};
+export default Input as typeof Input &
+  Plugin & {
+    readonly Group: typeof Group;
+    readonly Search: typeof Search;
+    readonly TextArea: typeof TextArea;
+    readonly Password: typeof Password;
+  };

@@ -1,5 +1,5 @@
 import omit from 'omit.js';
-import { App, defineComponent, inject, provide } from 'vue';
+import { defineComponent, inject, provide } from 'vue';
 import VcTimePicker from '../vc-time-picker';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import BaseMixin from '../_util/BaseMixin';
@@ -18,7 +18,7 @@ import {
   momentToString,
   TimeOrTimesType,
 } from '../_util/moment-util';
-import { tuple } from '../_util/type';
+import { tuple, withInstall } from '../_util/type';
 
 export function generateShowHourMinuteSecond(format: string) {
   // Ref: http://momentjs.com/docs/#/parsing/string-format/
@@ -261,10 +261,4 @@ const TimePicker = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-TimePicker.install = function(app: App) {
-  app.component(TimePicker.name, TimePicker);
-  return app;
-};
-
-export default TimePicker;
+export default withInstall(TimePicker);

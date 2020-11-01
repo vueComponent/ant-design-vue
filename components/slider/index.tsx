@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, VNodeTypes } from 'vue';
+import { defineComponent, inject, VNodeTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps } from '../_util/props-util';
@@ -8,6 +8,7 @@ import VcHandle from '../vc-slider/src/Handle';
 import Tooltip from '../tooltip';
 import { defaultConfigProvider } from '../config-provider';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
+import { withInstall } from '../_util/type';
 
 export type SliderValue = number | [number, number];
 
@@ -163,10 +164,4 @@ const Slider = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Slider.install = function(app: App) {
-  app.component(Slider.name, Slider);
-  return app;
-};
-
-export default Slider;
+export default withInstall(Slider);

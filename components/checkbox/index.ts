@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Checkbox from './Checkbox';
 import CheckboxGroup from './Group';
 
@@ -11,6 +11,7 @@ Checkbox.install = function(app: App) {
   return app;
 };
 
-export default Checkbox as typeof Checkbox & {
-  readonly Group: typeof CheckboxGroup;
-};
+export default Checkbox as typeof Checkbox &
+  Plugin & {
+    readonly Group: typeof CheckboxGroup;
+  };

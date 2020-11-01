@@ -1,5 +1,5 @@
 import omit from 'omit.js';
-import { App, defineComponent, inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
@@ -11,6 +11,7 @@ import Button from '../button';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
 import { defaultConfigProvider } from '../config-provider';
+import { withInstall } from '../_util/type';
 
 const tooltipProps = abstractTooltipProps();
 const btnProps = buttonTypes();
@@ -151,10 +152,4 @@ const Popconfirm = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Popconfirm.install = function(app: App) {
-  app.component(Popconfirm.name, Popconfirm);
-  return app;
-};
-
-export default Popconfirm;
+export default withInstall(Popconfirm);

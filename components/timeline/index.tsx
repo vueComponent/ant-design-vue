@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Timeline from './Timeline';
 import TimelineItem from './TimelineItem';
 
@@ -14,6 +14,7 @@ Timeline.install = function(app: App) {
   return app;
 };
 
-export default Timeline as typeof Timeline & {
-  readonly Item: typeof TimelineItem;
-};
+export default Timeline as typeof Timeline &
+  Plugin & {
+    readonly Item: typeof TimelineItem;
+  };

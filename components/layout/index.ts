@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Layout from './layout';
 import Sider from './Sider';
 
@@ -13,6 +13,7 @@ Layout.install = function(app: App) {
   app.component(Layout.Content.name, Layout.Content);
   return app;
 };
-export default Layout as typeof Layout & {
-  readonly Sider: typeof Sider;
-};
+export default Layout as typeof Layout &
+  Plugin & {
+    readonly Sider: typeof Sider;
+  };

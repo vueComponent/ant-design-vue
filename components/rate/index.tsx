@@ -6,6 +6,7 @@ import { defaultConfigProvider } from '../config-provider';
 import VcRate from '../vc-rate';
 import StarFilled from '@ant-design/icons-vue/StarFilled';
 import Tooltip from '../tooltip';
+import { withInstall } from '../_util/type';
 
 export const RateProps = {
   prefixCls: PropTypes.string,
@@ -59,9 +60,4 @@ const Rate = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Rate.install = function(app) {
-  app.component(Rate.name, Rate);
-  return app;
-};
-export default Rate;
+export default withInstall(Rate);

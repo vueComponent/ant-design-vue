@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Spin, { setDefaultIndicator } from './Spin';
 
 export { SpinProps } from './Spin';
@@ -11,4 +11,7 @@ Spin.install = function(app: App) {
   return app;
 };
 
-export default Spin;
+export default Spin as typeof Spin &
+  Plugin & {
+    readonly setDefaultIndicator: typeof setDefaultIndicator;
+  };

@@ -1,5 +1,5 @@
 import omit from 'omit.js';
-import { App, defineComponent, inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';

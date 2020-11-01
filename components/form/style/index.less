@@ -290,6 +290,16 @@ form {
   }
 }
 
+.@{form-prefix-cls}-vertical {
+  .@{form-prefix-cls}-item {
+    flex-direction: column;
+
+    &-label > label {
+      height: auto;
+    }
+  }
+}
+
 .@{form-prefix-cls}-vertical .@{form-prefix-cls}-item-label,
   // when labelCol is 24, it is a vertical form
 .@{ant-prefix}-col-24.@{form-prefix-cls}-item-label,

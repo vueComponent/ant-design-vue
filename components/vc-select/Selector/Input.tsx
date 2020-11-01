@@ -35,7 +35,7 @@ interface InputProps {
   onCompositionend: EventHandlerNonNull;
 }
 
-const Input = defineComponent<InputProps, { VCSelectContainerEvent: any }>({
+const Input = defineComponent<InputProps, { VCSelectContainerEvent: any; blurTimeout: any }>({
   name: 'Input',
   inheritAttrs: false,
   setup(props) {
@@ -50,6 +50,7 @@ const Input = defineComponent<InputProps, { VCSelectContainerEvent: any }>({
       });
     }
     return {
+      blurTimeout: null,
       VCSelectContainerEvent: inject('VCSelectContainerEvent'),
     };
   },
@@ -141,10 +142,13 @@ const Input = defineComponent<InputProps, { VCSelectContainerEvent: any }>({
           },
           onPaste,
           onFocus: (...args: any[]) => {
+            clearTimeout(this.blurTimeout);
             this.VCSelectContainerEvent?.focus(args[0]);
           },
           onBlur: (...args: any[]) => {
-            this.VCSelectContainerEvent?.blur(args[0]);
+            this.blurTimeout = setTimeout(() => {
+              this.VCSelectContainerEvent?.blur(args[0]);
+            }, 200);
           },
         },
         inputNode.type === 'textarea' ? {} : { type: 'search' },

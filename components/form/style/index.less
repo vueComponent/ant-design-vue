@@ -464,7 +464,8 @@ form {
   }
 }
 
-.has-error {
+.has-error,
+&-has-error {
   .form-control-validation(@error-color; @error-color; @form-error-input-bg;);
 
   &.has-feedback .@{form-prefix-cls}-item-children-icon {
@@ -473,15 +474,12 @@ form {
   }
 
   //select
-  .@{ant-prefix}-select {
-    &-selection {
-      border-color: @error-color;
-      &:hover {
-        border-color: @error-color;
-      }
+  .@{ant-prefix}-select:not(.@{ant-prefix}-select-borderless) {
+    .@{ant-prefix}-select-selector {
+      border-color: @error-color !important;
     }
-    &-open .@{ant-prefix}-select-selection,
-    &-focused .@{ant-prefix}-select-selection {
+    &.@{ant-prefix}-select-open .@{ant-prefix}-select-selector,
+    &.@{ant-prefix}-select-focused .@{ant-prefix}-select-selector {
       .active(@error-color);
     }
   }
@@ -497,15 +495,6 @@ form {
       border-color: transparent;
       box-shadow: none;
     }
-  }
-
-  // arrow and icon
-  .@{ant-prefix}-calendar-picker-icon::after,
-  .@{ant-prefix}-time-picker-icon::after,
-  .@{ant-prefix}-picker-icon::after,
-  .@{ant-prefix}-select-arrow,
-  .@{ant-prefix}-cascader-picker-arrow {
-    color: @error-color;
   }
 
   //input-number, timepicker

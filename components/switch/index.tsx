@@ -1,4 +1,4 @@
-import { defineComponent, inject, App } from 'vue';
+import { defineComponent, inject } from 'vue';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PropTypes from '../_util/vue-types';
 import hasProp, { getOptionProps, getComponent } from '../_util/props-util';
@@ -6,7 +6,7 @@ import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
 import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
-import { tuple } from '../_util/type';
+import { tuple, withInstall } from '../_util/type';
 
 const Switch = defineComponent({
   name: 'ASwitch',
@@ -83,10 +83,4 @@ const Switch = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Switch.install = function(app: App) {
-  app.component(Switch.name, Switch);
-  return app;
-};
-
-export default Switch;
+export default withInstall(Switch);

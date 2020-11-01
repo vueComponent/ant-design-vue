@@ -1,4 +1,4 @@
-import { App, DefineComponent } from 'vue';
+import { App, DefineComponent, Plugin } from 'vue';
 import VcCalendar from '../vc-calendar';
 import MonthCalendar from '../vc-calendar/src/MonthCalendar';
 import createPicker from './createPicker';
@@ -56,4 +56,9 @@ DatePicker.install = function(app: App) {
   return app;
 };
 
-export default DatePicker;
+export default DatePicker as typeof DatePicker &
+  Plugin & {
+    readonly RangePicker: typeof RangePicker;
+    readonly MonthPicker: typeof MonthPicker;
+    readonly WeekPicker: typeof WeekPicker;
+  };

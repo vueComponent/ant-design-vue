@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Button from './button';
 import ButtonGroup from './button-group';
 
@@ -11,6 +11,7 @@ Button.install = function(app: App) {
   return app;
 };
 
-export default Button as typeof Button & {
-  readonly Group: typeof ButtonGroup;
-};
+export default Button as typeof Button &
+  Plugin & {
+    readonly Group: typeof ButtonGroup;
+  };

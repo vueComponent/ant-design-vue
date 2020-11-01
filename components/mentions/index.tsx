@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, nextTick, PropType, VNodeTypes } from 'vue';
+import { App, defineComponent, inject, nextTick, PropType, VNodeTypes, Plugin } from 'vue';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
@@ -204,6 +204,7 @@ Mentions.install = function(app: App) {
   return app;
 };
 
-export default Mentions as typeof Mentions & {
-  readonly Option: typeof Option;
-};
+export default Mentions as typeof Mentions &
+  Plugin & {
+    readonly Option: typeof Option;
+  };

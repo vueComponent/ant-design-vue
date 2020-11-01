@@ -1,4 +1,4 @@
-import { App, defineComponent, inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { hasProp, getOptionProps, getComponent } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
@@ -9,6 +9,7 @@ import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
 import { defaultConfigProvider, RenderEmptyHandler } from '../config-provider';
+import { withInstall } from '../_util/type';
 
 export type TransferDirection = 'left' | 'right';
 
@@ -483,10 +484,4 @@ const Transfer = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Transfer.install = function(app: App) {
-  app.component(Transfer.name, Transfer);
-  return app;
-};
-
-export default Transfer;
+export default withInstall(Transfer);

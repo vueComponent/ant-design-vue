@@ -1,4 +1,4 @@
-import { defineComponent, inject, App } from 'vue';
+import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { initDefaultProps, hasProp } from '../_util/props-util';
@@ -6,6 +6,7 @@ import { defaultConfigProvider } from '../config-provider';
 import Avatar, { SkeletonAvatarProps, ISkeletonAvatarProps } from './Avatar';
 import Title, { SkeletonTitleProps, ISkeletonTitleProps } from './Title';
 import Paragraph, { SkeletonParagraphProps, ISkeletonParagraphProps } from './Paragraph';
+import { withInstall } from '../_util/type';
 
 export const SkeletonProps = {
   active: PropTypes.looseBool,
@@ -162,10 +163,5 @@ const Skeleton = defineComponent({
     return this.$slots.default?.();
   },
 });
-/* istanbul ignore next */
-Skeleton.install = function(app: App) {
-  app.component(Skeleton.name, Skeleton);
-  return app;
-};
 
-export default Skeleton;
+export default withInstall(Skeleton);

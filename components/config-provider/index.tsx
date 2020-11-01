@@ -1,9 +1,10 @@
-import { reactive, provide, VNodeTypes, PropType, defineComponent, App, watch } from 'vue';
+import { reactive, provide, VNodeTypes, PropType, defineComponent, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
 import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
 
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import { withInstall } from '../_util/type';
 
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
 
@@ -168,10 +169,4 @@ export const defaultConfigProvider: ConfigConsumerProps = {
   renderEmpty: defaultRenderEmpty,
 };
 
-/* istanbul ignore next */
-ConfigProvider.install = function(app: App) {
-  app.component(ConfigProvider.name, ConfigProvider);
-  return app;
-};
-
-export default ConfigProvider;
+export default withInstall(ConfigProvider);

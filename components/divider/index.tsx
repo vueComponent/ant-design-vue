@@ -1,6 +1,7 @@
 import { flattenChildren } from '../_util/props-util';
-import { App, computed, defineComponent, inject, PropType } from 'vue';
+import { computed, defineComponent, inject, PropType } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
+import { withInstall } from '../_util/type';
 
 const Divider = defineComponent({
   name: 'ADivider',
@@ -46,10 +47,4 @@ const Divider = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Divider.install = function(app: App) {
-  app.component(Divider.name, Divider);
-  return app;
-};
-
-export default Divider;
+export default withInstall(Divider);

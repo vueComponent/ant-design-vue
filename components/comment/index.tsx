@@ -1,8 +1,8 @@
-import { App, defineComponent, inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropsTypes from '../_util/vue-types';
 import { getComponent, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
-import { VueNode } from '../_util/type';
+import { VueNode, withInstall } from '../_util/type';
 export const CommentProps = {
   actions: PropsTypes.array,
   /** The element to display as the comment author. */
@@ -93,9 +93,4 @@ const Comment = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Comment.install = function(app: App) {
-  app.component(Comment.name, Comment);
-  return app;
-};
-export default Comment;
+export default withInstall(Comment);

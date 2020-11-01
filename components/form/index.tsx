@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Form from './Form';
 
 export { FormProps } from './Form';
@@ -10,6 +10,7 @@ Form.install = function(app: App) {
   return app;
 };
 
-export default Form as typeof Form & {
-  readonly Item: typeof Form.Item;
-};
+export default Form as typeof Form &
+  Plugin & {
+    readonly Item: typeof Form.Item;
+  };

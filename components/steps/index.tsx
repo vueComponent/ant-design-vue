@@ -76,4 +76,7 @@ Steps.install = function(app: App) {
   return app;
 };
 
-export default Steps;
+export default Steps as typeof Steps &
+  Plugin & {
+    readonly Step: typeof VcSteps.Step;
+  };

@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Breadcrumb from './Breadcrumb';
 import BreadcrumbItem from './BreadcrumbItem';
 import BreadcrumbSeparator from './BreadcrumbSeparator';
@@ -14,7 +14,8 @@ Breadcrumb.install = function(app: App) {
   return app;
 };
 
-export default Breadcrumb as typeof Breadcrumb & {
-  readonly Item: typeof BreadcrumbItem;
-  readonly Separator: typeof BreadcrumbSeparator;
-};
+export default Breadcrumb as typeof Breadcrumb &
+  Plugin & {
+    readonly Item: typeof BreadcrumbItem;
+    readonly Separator: typeof BreadcrumbSeparator;
+  };

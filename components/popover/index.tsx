@@ -1,9 +1,10 @@
-import { App, defineComponent, inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
+import { withInstall } from '../_util/type';
 
 const props = abstractTooltipProps();
 const Popover = defineComponent({
@@ -51,10 +52,4 @@ const Popover = defineComponent({
   },
 });
 
-/* istanbul ignore next */
-Popover.install = function(app: App) {
-  app.component(Popover.name, Popover);
-  return app;
-};
-
-export default Popover;
+export default withInstall(Popover);

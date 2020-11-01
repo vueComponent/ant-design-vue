@@ -1,10 +1,4 @@
-import { App } from 'vue';
 import Avatar from './Avatar';
+import { withInstall } from '../_util/type';
 
-/* istanbul ignore next */
-Avatar.install = function(app: App) {
-  app.component(Avatar.name, Avatar);
-  return app;
-};
-
-export default Avatar;
+export default withInstall(Avatar);

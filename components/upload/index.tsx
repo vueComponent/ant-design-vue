@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Upload from './Upload';
 import Dragger from './Dragger';
 
@@ -13,6 +13,7 @@ Upload.install = function(app: App) {
   return app;
 };
 
-export default Upload as typeof Upload & {
-  readonly Dragger: typeof Dragger;
-};
+export default Upload as typeof Upload &
+  Plugin & {
+    readonly Dragger: typeof Dragger;
+  };

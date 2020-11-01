@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Tabs from './tabs';
 import TabPane from '../vc-tabs/src/TabPane';
 import TabContent from '../vc-tabs/src/TabContent';
@@ -14,5 +14,10 @@ Tabs.install = function(app: App) {
   return app;
 };
 
-export default Tabs;
+export default Tabs as typeof Tabs &
+  Plugin & {
+    readonly TabPane: typeof TabPane;
+    readonly TabContent: typeof TabContent;
+  };
+
 export { TabPane, TabContent };

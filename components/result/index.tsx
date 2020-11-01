@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, VNodeTypes } from 'vue';
+import { App, defineComponent, inject, VNodeTypes, Plugin } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import { getComponent } from '../_util/props-util';
@@ -96,4 +96,9 @@ Result.install = function(app: App) {
   return app;
 };
 
-export default Result;
+export default Result as typeof Result &
+  Plugin & {
+    readonly PRESENTED_IMAGE_403: typeof unauthorized;
+    readonly PRESENTED_IMAGE_404: typeof noFound;
+    readonly PRESENTED_IMAGE_500: typeof serverError;
+  };

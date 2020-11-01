@@ -1,14 +1,9 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Dropdown from './dropdown';
 import DropdownButton from './dropdown-button';
 
 export { DropdownProps } from './dropdown';
 export { DropdownButtonProps } from './dropdown-button';
-
-type Types = typeof Dropdown;
-interface DropdownTypes extends Types {
-  Button: typeof DropdownButton;
-}
 
 Dropdown.Button = DropdownButton;
 
@@ -19,4 +14,7 @@ Dropdown.install = function(app: App) {
   return app;
 };
 
-export default Dropdown as DropdownTypes;
+export default Dropdown as typeof Dropdown &
+  Plugin & {
+    readonly Button: typeof DropdownButton;
+  };

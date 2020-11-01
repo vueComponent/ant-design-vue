@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, provide } from 'vue';
+import { App, defineComponent, inject, provide, Plugin } from 'vue';
 import Select, { SelectProps } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';
@@ -147,7 +147,8 @@ AutoComplete.install = function(app: App) {
   return app;
 };
 
-export default AutoComplete as typeof AutoComplete & {
-  readonly Option: typeof Option;
-  readonly OptGroup: typeof OptGroup;
-};
+export default AutoComplete as typeof AutoComplete &
+  Plugin & {
+    readonly Option: typeof Option;
+    readonly OptGroup: typeof OptGroup;
+  };

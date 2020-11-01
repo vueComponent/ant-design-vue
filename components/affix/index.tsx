@@ -1,4 +1,4 @@
-import { App, CSSProperties, defineComponent, inject } from 'vue';
+import { CSSProperties, defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
@@ -7,6 +7,7 @@ import BaseMixin from '../_util/BaseMixin';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
+import { withInstall } from '../_util/type';
 import {
   addObserveTarget,
   removeObserveTarget,
@@ -265,10 +266,5 @@ const Affix = defineComponent({
     );
   },
 });
-/* istanbul ignore next */
-Affix.install = function(app: App) {
-  app.component(Affix.name, Affix);
-  return app;
-};
 
-export default Affix;
+export default withInstall(Affix);

@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Card from './Card';
 import Meta from './Meta';
 import Grid from './Grid';
@@ -14,7 +14,8 @@ Card.install = function(app: App) {
   return app;
 };
 
-export default Card as typeof Card & {
-  readonly Meta: typeof Meta;
-  readonly Grid: typeof Grid;
-};
+export default Card as typeof Card &
+  Plugin & {
+    readonly Meta: typeof Meta;
+    readonly Grid: typeof Grid;
+  };

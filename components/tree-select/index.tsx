@@ -1,5 +1,5 @@
+import { App, defineComponent, inject, Plugin } from 'vue';
 import VcTreeSelect, { TreeNode, SHOW_ALL, SHOW_PARENT, SHOW_CHILD } from '../vc-tree-select';
-import { App, defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import { TreeSelectProps } from './interface';
 import warning from '../_util/warning';
@@ -204,12 +204,13 @@ TreeSelect.install = function(app: App) {
   return app;
 };
 
-export default TreeSelect as typeof TreeSelect & {
-  readonly TreeNode: typeof TreeNode;
+export default TreeSelect as typeof TreeSelect &
+  Plugin & {
+    readonly TreeNode: typeof TreeNode;
 
-  readonly SHOW_ALL: typeof SHOW_ALL;
+    readonly SHOW_ALL: typeof SHOW_ALL;
 
-  readonly SHOW_PARENT: typeof SHOW_PARENT;
+    readonly SHOW_PARENT: typeof SHOW_PARENT;
 
-  readonly SHOW_CHILD: typeof SHOW_CHILD;
-};
+    readonly SHOW_CHILD: typeof SHOW_CHILD;
+  };

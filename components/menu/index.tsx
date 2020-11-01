@@ -1,4 +1,4 @@
-import { defineComponent, inject, provide, toRef, App, ExtractPropTypes } from 'vue';
+import { defineComponent, inject, provide, toRef, App, ExtractPropTypes, Plugin } from 'vue';
 import omit from 'omit.js';
 import VcMenu, { Divider, ItemGroup } from '../vc-menu';
 import SubMenu from './SubMenu';
@@ -314,4 +314,11 @@ Menu.install = function(app: App) {
   app.component(Menu.ItemGroup.name, Menu.ItemGroup);
   return app;
 };
-export default Menu;
+
+export default Menu as typeof Menu &
+  Plugin & {
+    readonly Item: typeof Item;
+    readonly SubMenu: typeof SubMenu;
+    readonly Divider: typeof Divider;
+    readonly ItemGroup: typeof ItemGroup;
+  };

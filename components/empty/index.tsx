@@ -1,4 +1,4 @@
-import { CSSProperties, VNodeTypes, inject, App, SetupContext, FunctionalComponent } from 'vue';
+import { CSSProperties, VNodeTypes, inject, SetupContext, FunctionalComponent } from 'vue';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider } from '../config-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -6,6 +6,7 @@ import DefaultEmptyImg from './empty';
 import SimpleEmptyImg from './simple';
 import { filterEmpty } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
+import { withInstall } from '../_util/type';
 
 const defaultEmptyImg = <DefaultEmptyImg />;
 const simpleEmptyImg = <SimpleEmptyImg />;
@@ -27,7 +28,6 @@ interface EmptyType extends FunctionalComponent<EmptyProps> {
   displayName: string;
   PRESENTED_IMAGE_DEFAULT: VNodeTypes;
   PRESENTED_IMAGE_SIMPLE: VNodeTypes;
-  install: (app: App) => void;
 }
 
 const Empty: EmptyType = (props: EmptyProps, { slots = {}, attrs }: SetupContext) => {
@@ -91,10 +91,4 @@ Empty.props = {
   imageStyle: PropTypes.object,
 };
 
-/* istanbul ignore next */
-Empty.install = function(app: App) {
-  app.component(Empty.displayName, Empty);
-  return app;
-};
-
-export default Empty;
+export default withInstall(Empty);

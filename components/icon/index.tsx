@@ -1,5 +1,5 @@
-import { App } from 'vue';
 import warning from '../_util/warning';
+import { withInstall } from '../_util/type';
 
 const Icon = () => {
   warning(false, 'Icon', 'Empty Icon');
@@ -8,10 +8,4 @@ const Icon = () => {
 
 Icon.displayName = 'AIcon';
 
-/* istanbul ignore next */
-Icon.install = function(app: App) {
-  app.component(Icon.displayName, Icon);
-  return app;
-};
-
-export default Icon;
+export default withInstall(Icon);

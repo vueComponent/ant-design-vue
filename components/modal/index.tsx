@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Modal, { destroyFns, ModalFunc, ModalFuncProps } from './Modal';
 import modalConfirm from './confirm';
 import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
@@ -80,18 +80,19 @@ Modal.install = function(app: App) {
   return app;
 };
 
-export default Modal as typeof Modal & {
-  readonly info: ModalFunc;
+export default Modal as typeof Modal &
+  Plugin & {
+    readonly info: ModalFunc;
 
-  readonly success: ModalFunc;
+    readonly success: ModalFunc;
 
-  readonly error: ModalFunc;
+    readonly error: ModalFunc;
 
-  readonly warn: ModalFunc;
+    readonly warn: ModalFunc;
 
-  readonly warning: ModalFunc;
+    readonly warning: ModalFunc;
 
-  readonly confirm: ModalFunc;
+    readonly confirm: ModalFunc;
 
-  readonly destroyAll: () => void;
-};
+    readonly destroyAll: () => void;
+  };

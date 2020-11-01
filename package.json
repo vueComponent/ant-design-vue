@@ -231,7 +231,7 @@
   },
   "sideEffects": [
     "site/*",
-    "components/style.js",
+    "components/style.ts",
     "components/**/style/*",
     "*.vue",
     "*.md",

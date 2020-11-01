@@ -10,6 +10,15 @@
 
 ---
 
+## 2.0.0-beta.12
+
+`2020-11-01`
+
+- 🐞 Fix dist/antd.css missing component style issue [#3069](https://github.com/vueComponent/ant-design-vue/issues/3069)
+- 🐞 Fix Input style issue [#3074](https://github.com/vueComponent/ant-design-vue/issues/3074)
+- 🐞 Fix Form layout="vertical" style issue [#3075](https://github.com/vueComponent/ant-design-vue/issues/3075)
+- 🐞 Fix Select cannot open popup problem [#3070](https://github.com/vueComponent/ant-design-vue/issues/3070)
+
 ## 2.0.0-beta.11
 
 `2020-10-30`

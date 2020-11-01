@@ -10,6 +10,15 @@
 
 ---
 
+## 2.0.0-beta.12
+
+`2020-11-01`
+
+- 🐞 修复 dist/antd.css 缺失组件样式问题 [#3069](https://github.com/vueComponent/ant-design-vue/issues/3069)
+- 🐞 修复 Input 样式问题 [#3074](https://github.com/vueComponent/ant-design-vue/issues/3074)
+- 🐞 修复 Form layout="vertical" 样式问题 [#3075](https://github.com/vueComponent/ant-design-vue/issues/3075)
+- 🐞 修复 Select 无法打开弹窗问题 [#3070](https://github.com/vueComponent/ant-design-vue/issues/3070)
+
 ## 2.0.0-beta.11
 
 `2020-10-30`

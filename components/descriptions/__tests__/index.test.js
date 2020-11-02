@@ -33,7 +33,9 @@ describe('Descriptions', () => {
       { sync: false, attachTo: 'body' },
     );
     await asyncExpect(() => {
-      expect(wrapper.vm.$refs.descriptions.getColumn()).toBe(8);
+      expect(
+        wrapper.findAll('td').reduce((total, td) => total + parseInt(td.attributes().colspan), 0),
+      ).toBe(8);
     }, 100);
     wrapper.unmount();
   });
@@ -74,7 +76,7 @@ describe('Descriptions', () => {
       },
     });
     expect(errorSpy).toHaveBeenCalledWith(
-      'Warning: [antdv: Descriptions] Sum of column `span` in a line exceeds `column` of Descriptions.',
+      'Warning: [antdv: Descriptions] Sum of column `span` in a line not match `column` of Descriptions.',
     );
   });
 
@@ -120,7 +122,7 @@ describe('Descriptions', () => {
       render() {
         return (
           <Descriptions>
-            <Descriptions.Item label="Product" className="my-class">
+            <Descriptions.Item label="Product" class="my-class">
               Cloud Database
             </Descriptions.Item>
           </Descriptions>
@@ -176,7 +178,7 @@ describe('Descriptions', () => {
     );
     await asyncExpect(() => {
       expect(wrapper.findAll('tr')).toHaveLength(5);
-      expect(wrapper.findAll('.ant-descriptions-item-no-label')).toHaveLength(1);
+      expect(wrapper.findAll('.ant-descriptions-item-label')).toHaveLength(4);
     });
 
     wrapper.unmount();
@@ -198,8 +200,86 @@ describe('Descriptions', () => {
       },
       { sync: false, attachTo: 'body' },
     );
-    await asyncExpect(() => {});
-    expect(wrapper.findAll('tr')).toHaveLength(2);
+    await asyncExpect(() => {
+      expect(wrapper.findAll('tr')).toHaveLength(2);
+    });
     wrapper.unmount();
+  });
+
+  it('columns 5 with customize', () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <Descriptions layout="vertical" column={4}>
+            {/* 1 1 1 1 */}
+            <Descriptions.Item label="bamboo">bamboo</Descriptions.Item>
+            <Descriptions.Item label="bamboo">bamboo</Descriptions.Item>
+            <Descriptions.Item label="bamboo">bamboo</Descriptions.Item>
+            <Descriptions.Item label="bamboo">bamboo</Descriptions.Item>
+            {/* 2 2 */}
+            <Descriptions.Item label="bamboo" span={2}>
+              bamboo
+            </Descriptions.Item>
+            <Descriptions.Item label="bamboo" span={2}>
+              bamboo
+            </Descriptions.Item>
+            {/* 3 1 */}
+            <Descriptions.Item label="bamboo" span={3}>
+              bamboo
+            </Descriptions.Item>
+            <Descriptions.Item label="bamboo">bamboo</Descriptions.Item>
+          </Descriptions>
+        );
+      },
+    });
+
+    function matchSpan(rowIndex, spans) {
+      const tr = wrapper.findAll('tr')[rowIndex];
+      const tds = tr.findAll('th');
+      expect(tds.length).toEqual(spans.length);
+      tds.forEach((td, index) => {
+        expect(parseInt(td.attributes().colspan)).toEqual(spans[index]);
+      });
+    }
+
+    matchSpan(0, [1, 1, 1, 1]);
+    matchSpan(2, [2, 2]);
+    matchSpan(4, [3, 1]);
+  });
+
+  it('number value should render correct', () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <Descriptions bordered>
+            <Descriptions.Item label={0}>{0}</Descriptions.Item>
+          </Descriptions>
+        );
+      },
+    });
+
+    expect(wrapper.find('th').classes()).toContain('ant-descriptions-item-label');
+    expect(wrapper.find('td').classes()).toContain('ant-descriptions-item-content');
+  });
+
+  it('Descriptions support extra', async () => {
+    const wrapper = mount({
+      render() {
+        return (
+          <Descriptions extra="Edit">
+            <Descriptions.Item label="UserName">Zhou Maomao</Descriptions.Item>
+          </Descriptions>
+        );
+      },
+    });
+
+    await asyncExpect(() => {
+      expect(wrapper.find('.ant-descriptions-extra').exists()).toBe(true);
+      wrapper.setProps({ extra: undefined });
+    });
+
+    await asyncExpect(() => {
+      expect(wrapper.find('.ant-descriptions-extra').exists()).toBe(false);
+    });
   });
 });

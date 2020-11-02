@@ -147,13 +147,11 @@ export const tableProps = {
       y?: boolean | number | string;
       scrollToFirstRowOnChange?: boolean;
     }>,
-    default: () => ({}),
   },
   childrenColumnName: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   bodyStyle: PropTypes.style,
   sortDirections: {
     type: Array as PropType<SortOrder[]>,
-    default: () => [],
   },
   tableLayout: PropTypes.string,
   getPopupContainer: PropTypes.func,

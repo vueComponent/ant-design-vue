@@ -121,7 +121,6 @@ export const tableProps = {
   components: PropTypes.object,
   columns: {
     type: Array as PropType<ColumnProps>,
-    default: () => [],
   },
   rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   rowClassName: PropTypes.func,

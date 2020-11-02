@@ -4,7 +4,6 @@ import { alignElement, alignPoint } from 'dom-align';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import { isWindow, buffer, isSamePoint, restoreFocus, monitorResize } from './util';
 import { cloneElement } from '../_util/vnode';
-import clonedeep from 'lodash-es/cloneDeep';
 import { getSlot, findDOMNode } from '../_util/props-util';
 import useBuffer from './hooks/useBuffer';
 import isVisible from '../vc-util/Dom/isVisible';
@@ -28,10 +27,15 @@ export default defineComponent({
     monitorWindowResize: PropTypes.looseBool.def(false),
     disabled: PropTypes.looseBool.def(false),
   },
+  setup() {
+    return {
+      aligned: false,
+      sourceResizeMonitor: { cancel: () => {} },
+      resizeMonitor: { cancel: () => {} },
+      cacheInfo: {},
+    };
+  },
   data() {
-    this.aligned = false;
-    this.sourceResizeMonitor = { cancel: () => {} };
-    this.resizeMonitor = { cancel: () => {} };
     this.prevProps = { ...this.$props };
     const [forceAlign, cancelForceAlign] = useBuffer(this.goAlign, 0);
     return {
@@ -48,6 +52,7 @@ export default defineComponent({
         this.startMonitorWindowResize();
       }
       this.startMonitorElementResize();
+      this.updateCache();
     });
   },
   updated() {
@@ -59,9 +64,8 @@ export default defineComponent({
         if (prevProps.disabled) {
           reAlign = true;
         } else {
-          const lastElement = getElement(prevProps.target);
+          const { element: lastElement, point: lastPoint } = this.cacheInfo;
           const currentElement = getElement(props.target);
-          const lastPoint = getPoint(prevProps.target);
           const currentPoint = getPoint(props.target);
           if (isWindow(lastElement) && isWindow(currentElement)) {
             // Skip if is window
@@ -86,7 +90,8 @@ export default defineComponent({
       } else {
         this.stopMonitorWindowResize();
       }
-      this.prevProps = { ...this.$props, align: clonedeep(this.$props.align) };
+      this.prevProps = { ...this.$props };
+      this.updateCache();
     });
   },
   beforeUnmount() {
@@ -96,12 +101,18 @@ export default defineComponent({
     this.cancelForceAlign();
   },
   methods: {
+    updateCache() {
+      const element = getElement(this.$props.target);
+      const point = getPoint(this.$props.target);
+      this.cacheInfo = {
+        element,
+        point,
+      };
+    },
     startMonitorElementResize() {
-      const prevProps = this.prevProps;
       const props = this.$props;
-      const lastElement = getElement(prevProps.target);
+      const { element: lastElement, point: lastPoint } = this.cacheInfo;
       const currentElement = getElement(props.target);
-      const lastPoint = getPoint(prevProps.target);
       const currentPoint = getPoint(props.target);
       const source = findDOMNode(this);
       const { sourceResizeMonitor, resizeMonitor } = this;
@@ -111,7 +122,7 @@ export default defineComponent({
         sourceResizeMonitor.cancel = monitorResize(source, this.forceAlign);
       }
       if (lastElement !== currentElement || !isSamePoint(lastPoint, currentPoint)) {
-        //this.forceAlign();
+        this.forceAlign();
         // Add resize observer
         if (resizeMonitor.element !== currentElement) {
           resizeMonitor?.cancel();

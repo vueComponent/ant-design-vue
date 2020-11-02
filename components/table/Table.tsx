@@ -17,10 +17,10 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import BaseMixin from '../_util/BaseMixin';
 import { defaultConfigProvider } from '../config-provider';
 import {
-  TableProps,
+  tableProps,
   TableComponents,
   TableState,
-  ITableProps,
+  TableProps,
   IColumnProps,
   TableStateFilters,
 } from './interface';
@@ -38,7 +38,7 @@ function stopPropagation(e) {
   e.stopPropagation();
 }
 
-function getRowSelection(props: ITableProps) {
+function getRowSelection(props: TableProps) {
   return props.rowSelection || {};
 }
 
@@ -117,26 +117,28 @@ function isFiltersChanged(state: TableState, filters: TableStateFilters[]) {
   return Object.keys(filters).some(columnKey => filters[columnKey] !== state.filters[columnKey]);
 }
 
+export const defaultTableProps = initDefaultProps(tableProps, {
+  dataSource: [],
+  useFixedHeader: false,
+  // rowSelection: null,
+  size: 'default',
+  loading: false,
+  bordered: false,
+  indentSize: 20,
+  locale: {},
+  rowKey: 'key',
+  showHeader: true,
+  sortDirections: ['ascend', 'descend'],
+  childrenColumnName: 'children',
+});
+
 export default defineComponent({
   name: 'Table',
   mixins: [BaseMixin],
   inheritAttrs: false,
   Column,
   ColumnGroup,
-  props: initDefaultProps(TableProps, {
-    dataSource: [],
-    useFixedHeader: false,
-    // rowSelection: null,
-    size: 'default',
-    loading: false,
-    bordered: false,
-    indentSize: 20,
-    locale: {},
-    rowKey: 'key',
-    showHeader: true,
-    sortDirections: ['ascend', 'descend'],
-    childrenColumnName: 'children',
-  }),
+  props: defaultTableProps,
 
   setup() {
     return {

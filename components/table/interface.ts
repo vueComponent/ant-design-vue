@@ -101,7 +101,7 @@ export const TableRowSelection = {
   columnTitle: PropTypes.any,
 };
 
-export const TableProps = {
+export const tableProps = {
   prefixCls: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
   rowSelection: PropTypes.oneOfType([PropTypes.shape(TableRowSelection).loose, Object]),
@@ -155,7 +155,7 @@ export const TableProps = {
 
 export type ITableRowSelection = Partial<ExtractPropTypes<typeof TableRowSelection>>;
 
-export type ITableProps = Partial<ExtractPropTypes<typeof TableProps>>;
+export type TableProps = Partial<ExtractPropTypes<typeof tableProps>>;
 
 export interface TableStateFilters {
   [key: string]: string[];

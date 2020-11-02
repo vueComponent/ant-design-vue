@@ -80,7 +80,7 @@ export const TableLocale = PropTypes.shape({
   collapse: PropTypes.string,
 }).loose;
 
-export const RowSelectionType = PropTypes.oneOf(['checkbox', 'radio']);
+export const RowSelectionType = PropTypes.oneOf(tuple('checkbox', 'radio'));
 // export type SelectionSelectFn<T> = (record: T, selected: boolean, selectedRows: Object[]) => any;
 
 export const tableRowSelection = {

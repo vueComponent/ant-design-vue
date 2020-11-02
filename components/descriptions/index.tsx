@@ -138,6 +138,8 @@ const Descriptions = defineComponent<DescriptionsProps>({
   name: 'ADescriptions',
   Item: DescriptionsItem,
   setup(props, { slots }) {
+    const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
+
     let token: number;
 
     const screens = ref<ScreenMap>({});
@@ -164,11 +166,10 @@ const Descriptions = defineComponent<DescriptionsProps>({
         bordered = false,
         layout = 'horizontal',
         colon = true,
-        title = slots.title?.() || undefined,
-        extra = slots.extra?.() || undefined,
+        title = slots.title?.(),
+        extra = slots.extra?.(),
       } = props;
 
-      const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
       const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
       const mergeColumn = getColumn(column, screens.value);
       const children = slots.default?.();

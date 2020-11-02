@@ -1,9 +1,9 @@
+import { ExtractPropTypes, PropType } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { PaginationProps as getPaginationProps } from '../pagination';
 import { SpinProps as getSpinProps } from '../spin';
 import { Store } from './createStore';
 import { tuple } from '../_util/type';
-import { ExtractPropTypes } from 'vue';
 
 const PaginationProps = getPaginationProps();
 const SpinProps = getSpinProps();
@@ -15,7 +15,7 @@ export const ColumnFilterItem = PropTypes.shape({
   children: PropTypes.array,
 }).loose;
 
-export const ColumnProps = {
+export const columnProps = {
   title: PropTypes.VNodeChild,
   key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   dataIndex: PropTypes.string,
@@ -52,7 +52,7 @@ export const ColumnProps = {
   // onHeaderCell?: (props: ColumnProps<T>) => any;
 };
 
-export type IColumnProps = Partial<ExtractPropTypes<typeof ColumnProps>>;
+export type ColumnProps = Partial<ExtractPropTypes<typeof columnProps>>;
 
 export interface TableComponents {
   table?: any;
@@ -83,7 +83,7 @@ export const TableLocale = PropTypes.shape({
 export const RowSelectionType = PropTypes.oneOf(['checkbox', 'radio']);
 // export type SelectionSelectFn<T> = (record: T, selected: boolean, selectedRows: Object[]) => any;
 
-export const TableRowSelection = {
+export const tableRowSelection = {
   type: RowSelectionType,
   selectedRowKeys: PropTypes.array,
   // onChange?: (selectedRowKeys: string[] | number[], selectedRows: Object[]) => any;
@@ -104,7 +104,7 @@ export const TableRowSelection = {
 export const tableProps = {
   prefixCls: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
-  rowSelection: PropTypes.oneOfType([PropTypes.shape(TableRowSelection).loose, Object]),
+  rowSelection: PropTypes.oneOfType([PropTypes.shape(tableRowSelection).loose, Object]),
   pagination: withUndefined(
     PropTypes.oneOfType([
       PropTypes.shape({
@@ -117,7 +117,10 @@ export const tableProps = {
   size: PropTypes.oneOf(tuple('default', 'middle', 'small', 'large')),
   dataSource: PropTypes.array,
   components: PropTypes.object,
-  columns: PropTypes.array,
+  columns: {
+    type: Array as PropType<ColumnProps>,
+    default: () => [],
+  },
   rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   rowClassName: PropTypes.func,
   expandedRowRender: PropTypes.any,
@@ -153,7 +156,7 @@ export const tableProps = {
   // children?: React.ReactNode;
 };
 
-export type ITableRowSelection = Partial<ExtractPropTypes<typeof TableRowSelection>>;
+export type TableRowSelection = Partial<ExtractPropTypes<typeof tableRowSelection>>;
 
 export type TableProps = Partial<ExtractPropTypes<typeof tableProps>>;
 
@@ -164,9 +167,9 @@ export interface TableStateFilters {
 export interface TableState {
   pagination?: Partial<ExtractPropTypes<typeof PaginationProps>>;
   filters?: TableStateFilters;
-  sortColumn?: Partial<ExtractPropTypes<typeof ColumnProps>> | null;
+  sortColumn?: ColumnProps | null;
   sortOrder?: string;
-  columns?: IColumnProps[];
+  columns?: ColumnProps[];
 }
 
 // export type SelectionItemSelectFn = (key: string[]) => any;

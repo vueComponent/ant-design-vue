@@ -6,6 +6,7 @@ import {
   getStyle,
   getComponentFromProp,
 } from '../_util/props-util';
+import { FunctionalComponent } from 'vue';
 
 interface CellConfig {
   component: string | [string, string];
@@ -23,7 +24,7 @@ export interface RowProps {
   index: number;
 }
 
-const Row = props => {
+const Row: FunctionalComponent<RowProps> = props => {
   const renderCells = (
     items,
     { colon, prefixCls, bordered },

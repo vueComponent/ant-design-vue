@@ -1,4 +1,4 @@
-import { VNodeTypes, HTMLAttributes } from 'vue';
+import { VNodeTypes, HTMLAttributes, FunctionalComponent } from 'vue';
 
 function notEmpty(val: any) {
   return val !== undefined && val !== null;
@@ -14,7 +14,7 @@ interface CellProps extends HTMLAttributes {
   colon?: boolean;
 }
 
-const Cell = (props: CellProps) => {
+const Cell: FunctionalComponent<CellProps> = props => {
   const { itemPrefixCls, component, span, bordered, label, content, colon } = props;
   const Component = component as any;
   if (bordered) {

@@ -21,7 +21,7 @@ import {
   TableComponents,
   TableState,
   TableProps,
-  IColumnProps,
+  ColumnProps,
   TableStateFilters,
 } from './interface';
 import Pagination from '../pagination';
@@ -42,11 +42,11 @@ function getRowSelection(props: TableProps) {
   return props.rowSelection || {};
 }
 
-function getColumnKey(column: IColumnProps, index?: number) {
+function getColumnKey(column: ColumnProps, index?: number) {
   return column.key || column.dataIndex || index;
 }
 
-function isSameColumn(a: IColumnProps, b: IColumnProps): boolean {
+function isSameColumn(a: ColumnProps, b: ColumnProps): boolean {
   if (a && b && a.key && a.key === b.key) {
     return true;
   }
@@ -94,16 +94,16 @@ function isTheSameComponents(components1: TableComponents = {}, components2: Tab
   );
 }
 
-function getFilteredValueColumns(state: TableState, columns?: IColumnProps) {
+function getFilteredValueColumns(state: TableState, columns?: ColumnProps) {
   return flatFilter(
     columns || (state || {}).columns || [],
-    (column: IColumnProps) => typeof column.filteredValue !== 'undefined',
+    (column: ColumnProps) => typeof column.filteredValue !== 'undefined',
   );
 }
 
-function getFiltersFromColumns(state: TableState, columns: IColumnProps) {
+function getFiltersFromColumns(state: TableState, columns: ColumnProps) {
   const filters = {};
-  getFilteredValueColumns(state, columns).forEach((col: IColumnProps) => {
+  getFilteredValueColumns(state, columns).forEach((col: ColumnProps) => {
     const colKey = getColumnKey(col);
     filters[colKey] = col.filteredValue;
   });

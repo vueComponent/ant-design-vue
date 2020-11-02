@@ -8,7 +8,7 @@ import { tuple } from '../_util/type';
 const PaginationProps = getPaginationProps();
 const SpinProps = getSpinProps();
 
-// export type CompareFn<T> = ((a: T, b: T) => number);
+export type CompareFn<T> = (a: T, b: T, sortOrder?: SortOrder) => number;
 export const ColumnFilterItem = PropTypes.shape({
   text: PropTypes.string,
   value: PropTypes.string,
@@ -101,6 +101,8 @@ export const tableRowSelection = {
   columnTitle: PropTypes.any,
 };
 
+export type SortOrder = 'descend' | 'ascend';
+
 export const tableProps = {
   prefixCls: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
@@ -140,10 +142,20 @@ export const tableProps = {
   showHeader: PropTypes.looseBool,
   footer: PropTypes.func,
   title: PropTypes.func,
-  scroll: PropTypes.object,
+  scroll: {
+    type: Object as PropType<{
+      x?: boolean | number | string;
+      y?: boolean | number | string;
+      scrollToFirstRowOnChange?: boolean;
+    }>,
+    default: () => ({}),
+  },
   childrenColumnName: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
-  bodyStyle: PropTypes.any,
-  sortDirections: PropTypes.array,
+  bodyStyle: PropTypes.style,
+  sortDirections: {
+    type: Array as PropType<SortOrder[]>,
+    default: () => [],
+  },
   tableLayout: PropTypes.string,
   getPopupContainer: PropTypes.func,
   expandIcon: PropTypes.func,

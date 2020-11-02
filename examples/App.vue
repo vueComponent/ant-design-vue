@@ -1,24 +1,81 @@
 <template>
-  <div>
-    <a-collapse :accordion="true" default-active-key="2" :bordered="false">
-      <a-collapse-panel key="1" header="This is panel header 1">
-        <p>{{ text }}</p>
-      </a-collapse-panel>
-      <a-collapse-panel key="2" header="This is panel header 2" :disabled="false">
-        <p>{{ text }}</p>
-      </a-collapse-panel>
-      <a-collapse-panel key="3" header="This is panel header 3">
-        <p>{{ text }}</p>
-      </a-collapse-panel>
-    </a-collapse>
-  </div>
+  <a-upload
+    :action="action"
+    :list-type="listType"
+    :file-list="defaultFileList"
+    :dirName="dirName"
+    @select="handleSelect"
+    @change="handleChange"
+  />
 </template>
 <script>
 export default {
   data() {
     return {
-      text: `A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.`,
+      action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+      listType: 'picture-card',
+      dirName: '',
+      select: '0',
+      defaultFileList: [
+        {
+          uid: '-1',
+          name: 'image.png',
+          status: 'done',
+          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        },
+        {
+          uid: '-2',
+          name: 'image.png',
+          status: 'done',
+          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        },
+        {
+          uid: '-3',
+          name: 'image.png',
+          status: 'done',
+          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        },
+        {
+          uid: '-4',
+          name: 'image.png',
+          status: 'done',
+          url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+        },
+        {
+          uid: '-5',
+          name: 'image.png',
+          status: 'error',
+        },
+      ],
     };
+  },
+  methods: {
+    close() {
+      this.visible = false;
+    },
+    handleCancel(e) {
+      this.visible = false;
+    },
+    handleSelect(file) {
+      if (file.uid && file.status === 'done') {
+        console.log('file.uid==>', file.uid, '==file==>', file);
+        this.select = file.uid;
+        this.defaultFileList.map(item => {
+          if (item.uid === this.select) {
+            if (item.select === 'select') {
+              this.$set(item, 'select', 'UnSelect');
+              this.select = '0';
+            } else this.$set(item, 'select', 'select');
+          } else {
+            item.select === 'select' && this.$set(item, 'select', 'UnSelect');
+          }
+        });
+        console.log('this.select==>', this.select);
+      }
+    },
+    handleChange(info) {
+      this.defaultFileList = info.fileList;
+    },
   },
 };
 </script>

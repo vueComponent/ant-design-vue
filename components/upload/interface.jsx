@@ -9,7 +9,7 @@ export const UploadFileStatus = PropsTypes.oneOf([
 ]);
 
 // export const HttpRequestHeader {
-//   [key: string]: string;
+//   [key: string]: string
 // }
 
 // export const UploadFile = PropsTypes.shape({
@@ -89,6 +89,7 @@ export const UploadProps = {
   height: PropsTypes.number,
   id: PropsTypes.string,
   previewFile: PropsTypes.func,
+  dirName: PropsTypes.string,
   transformFile: PropsTypes.func,
 };
 

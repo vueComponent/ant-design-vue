@@ -57,12 +57,23 @@ export default {
   },
   methods: {
     handlePreview(file, e) {
+      // 改
       const { preview } = getListeners(this);
+      window.event ? (window.event.cancelBubble = true) : e.stopPropagation();
       if (!preview) {
         return;
       }
       e.preventDefault();
       return this.$emit('preview', file);
+    },
+    handleSelect(file, e) {
+      // 新增
+      const { select } = getListeners(this);
+      if (!select) {
+        return;
+      }
+      e.preventDefault();
+      return this.$emit('select', file);
     },
     handleDownload(file) {
       const { download } = getListeners(this);
@@ -72,8 +83,9 @@ export default {
         window.open(file.url);
       }
     },
-
     handleClose(file) {
+      // 改写
+      window.event ? (window.event.cancelBubble = true) : e.stopPropagation();
       this.$emit('remove', file);
     },
   },
@@ -241,8 +253,14 @@ export default {
         </span>
       );
       const transitionProps = getTransitionProps('fade');
+      // 修改
       const dom = (
-        <div class={infoUploadingClass} key={file.uid}>
+        <div
+          class={infoUploadingClass}
+          key={file.uid}
+          onClick={e => this.handleSelect(file, e)}
+          style={file.select === 'select' ? 'border-color:#1890ff;' : ''}
+        >
           <div class={`${prefixCls}-list-item-info`}>{iconAndPreview}</div>
           {actions}
           <transition {...transitionProps}>{progress}</transition>

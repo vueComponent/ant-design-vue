@@ -178,6 +178,7 @@ export interface TableState {
 // }
 
 export const SelectionCheckboxAllProps = {
+  propsSymbol: PropTypes.any,
   store: Store,
   locale: PropTypes.any,
   disabled: PropTypes.looseBool,

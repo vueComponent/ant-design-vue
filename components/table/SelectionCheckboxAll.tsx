@@ -126,11 +126,10 @@ export default defineComponent({
   },
 
   watch: {
-    $props: {
+    propsSymbol: {
       handler() {
         this.setCheckState(this.$props);
       },
-      deep: true,
     },
   },
 

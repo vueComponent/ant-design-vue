@@ -1034,6 +1034,7 @@ export default defineComponent({
               selections={rowSelection.selections}
               hideDefaultSelections={rowSelection.hideDefaultSelections}
               getPopupContainer={this.generatePopupContainerFunc(getPopupContainer)}
+              propsSymbol={Symbol()}
             />
           );
         }

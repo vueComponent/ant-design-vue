@@ -1,11 +1,5 @@
 import Cell from './Cell';
-import {
-  getOptionProps,
-  getSlot,
-  getClass,
-  getStyle,
-  getComponentFromProp,
-} from '../_util/props-util';
+import { getOptionProps, getSlot, getClass, getStyle, getComponent } from '../_util/props-util';
 import { FunctionalComponent } from 'vue';
 
 interface CellConfig {
@@ -32,7 +26,7 @@ const Row: FunctionalComponent<RowProps> = props => {
   ) => {
     return items.map((item, index) => {
       const { prefixCls: itemPrefixCls = prefixCls, span = 1 } = getOptionProps(item);
-      const label = getComponentFromProp(item, 'label');
+      const label = getComponent(item, 'label');
 
       const children = getSlot(item);
       const className = getClass(item);

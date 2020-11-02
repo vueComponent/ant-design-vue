@@ -10,6 +10,16 @@
 
 ---
 
+## 2.0.0-beta.13
+
+`2020-11-02`
+
+- 🐞 Fix npm install error report [#3080](https://github.com/vueComponent/ant-design-vue/issues/3080)
+- 🐞 Fix Select maxPlaceHolder display error problem [#3085](https://github.com/vueComponent/ant-design-vue/issues/3085)
+- 🐞 Fix the pop-up component, the pop-up position is not updated [#3085](https://github.com/vueComponent/ant-design-vue/issues/3085)
+- 🐞 Fix the warning problem when Table data is empty [#3082](https://github.com/vueComponent/ant-design-vue/issues/3082)
+- 🐞 Fix Input display multiple borders in Form [#3084](https://github.com/vueComponent/ant-design-vue/issues/3084)
+
 ## 2.0.0-beta.12
 
 `2020-11-01`

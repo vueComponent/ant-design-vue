@@ -10,6 +10,16 @@
 
 ---
 
+## 2.0.0-beta.13
+
+`2020-11-02`
+
+- 🐞 修复 npm install 报错问题 [#3080](https://github.com/vueComponent/ant-design-vue/issues/3080)
+- 🐞 修复 Select maxPlaceHolder 显示错误问题 [#3085](https://github.com/vueComponent/ant-design-vue/issues/3085)
+- 🐞 修复弹窗类组件，弹出位置不更新问题 [#3085](https://github.com/vueComponent/ant-design-vue/issues/3085)
+- 🐞 修复 Table 数据为空时的 warning 问题 [#3082](https://github.com/vueComponent/ant-design-vue/issues/3082)
+- 🐞 修复 Input 在 Form 中显示多个边框问题 [#3084](https://github.com/vueComponent/ant-design-vue/issues/3084)
+
 ## 2.0.0-beta.12
 
 `2020-11-01`

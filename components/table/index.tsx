@@ -1,5 +1,5 @@
 import { App, defineComponent } from 'vue';
-import T from './Table';
+import T, { defaultTableProps } from './Table';
 import Column from './Column';
 import ColumnGroup from './ColumnGroup';
 import {} from './interface';
@@ -9,7 +9,7 @@ const Table = defineComponent({
   name: 'ATable',
   Column: T.Column,
   ColumnGroup: T.ColumnGroup,
-  props: T.props,
+  props: defaultTableProps,
   inheritAttrs: false,
   methods: {
     normalize(elements = []) {

@@ -17,11 +17,11 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import BaseMixin from '../_util/BaseMixin';
 import { defaultConfigProvider } from '../config-provider';
 import {
-  TableProps,
+  tableProps,
   TableComponents,
   TableState,
-  ITableProps,
-  IColumnProps,
+  TableProps,
+  ColumnProps,
   TableStateFilters,
 } from './interface';
 import Pagination from '../pagination';
@@ -38,15 +38,15 @@ function stopPropagation(e) {
   e.stopPropagation();
 }
 
-function getRowSelection(props: ITableProps) {
+function getRowSelection(props: TableProps) {
   return props.rowSelection || {};
 }
 
-function getColumnKey(column: IColumnProps, index?: number) {
+function getColumnKey(column: ColumnProps, index?: number) {
   return column.key || column.dataIndex || index;
 }
 
-function isSameColumn(a: IColumnProps, b: IColumnProps): boolean {
+function isSameColumn(a: ColumnProps, b: ColumnProps): boolean {
   if (a && b && a.key && a.key === b.key) {
     return true;
   }
@@ -94,16 +94,16 @@ function isTheSameComponents(components1: TableComponents = {}, components2: Tab
   );
 }
 
-function getFilteredValueColumns(state: TableState, columns?: IColumnProps) {
+function getFilteredValueColumns(state: TableState, columns?: ColumnProps) {
   return flatFilter(
     columns || (state || {}).columns || [],
-    (column: IColumnProps) => typeof column.filteredValue !== 'undefined',
+    (column: ColumnProps) => typeof column.filteredValue !== 'undefined',
   );
 }
 
-function getFiltersFromColumns(state: TableState, columns: IColumnProps) {
+function getFiltersFromColumns(state: TableState, columns: ColumnProps) {
   const filters = {};
-  getFilteredValueColumns(state, columns).forEach((col: IColumnProps) => {
+  getFilteredValueColumns(state, columns).forEach((col: ColumnProps) => {
     const colKey = getColumnKey(col);
     filters[colKey] = col.filteredValue;
   });
@@ -117,26 +117,28 @@ function isFiltersChanged(state: TableState, filters: TableStateFilters[]) {
   return Object.keys(filters).some(columnKey => filters[columnKey] !== state.filters[columnKey]);
 }
 
+export const defaultTableProps = initDefaultProps(tableProps, {
+  dataSource: [],
+  useFixedHeader: false,
+  // rowSelection: null,
+  size: 'default',
+  loading: false,
+  bordered: false,
+  indentSize: 20,
+  locale: {},
+  rowKey: 'key',
+  showHeader: true,
+  sortDirections: ['ascend', 'descend'],
+  childrenColumnName: 'children',
+});
+
 export default defineComponent({
   name: 'Table',
   mixins: [BaseMixin],
   inheritAttrs: false,
   Column,
   ColumnGroup,
-  props: initDefaultProps(TableProps, {
-    dataSource: [],
-    useFixedHeader: false,
-    // rowSelection: null,
-    size: 'default',
-    loading: false,
-    bordered: false,
-    indentSize: 20,
-    locale: {},
-    rowKey: 'key',
-    showHeader: true,
-    sortDirections: ['ascend', 'descend'],
-    childrenColumnName: 'children',
-  }),
+  props: defaultTableProps,
 
   setup() {
     return {

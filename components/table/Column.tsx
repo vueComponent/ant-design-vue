@@ -1,9 +1,9 @@
 import { defineComponent } from 'vue';
-import { ColumnProps } from './interface';
+import { columnProps } from './interface';
 
 export default defineComponent({
   name: 'ATableColumn',
-  props: ColumnProps,
+  props: columnProps,
   render() {
     return null;
   },

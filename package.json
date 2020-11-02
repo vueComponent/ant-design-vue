@@ -23,7 +23,8 @@
   "files": [
     "dist",
     "lib",
-    "es"
+    "es",
+    "scripts"
   ],
   "scripts": {
     "dev": "webpack-dev-server",

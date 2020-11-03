@@ -162,7 +162,7 @@ export default {
     },
     // new added
     handleSelect(file) {
-      this.$emit('select', file);
+      this.$emit('selectPreview', file);
     },
     onChange(info) {
       if (!hasProp(this, 'fileList')) {
@@ -234,7 +234,7 @@ export default {
         on: {
           remove: this.handleManualRemove,
           ...pick(getListeners(this), ['download', 'preview']), // 如果没有配置该事件，不要传递， uploadlist 会有相应逻辑
-          select: this.handleSelect, // 自定义1
+          selectPreview: this.handleSelect, // 自定义1
         },
       };
       return <UploadList {...uploadListProps} />;

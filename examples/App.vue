@@ -4,7 +4,7 @@
     :list-type="listType"
     :file-list="defaultFileList"
     :dirName="dirName"
-    @select="handleSelect"
+    @selectPreview="handleSelect"
     @change="handleChange"
   />
 </template>

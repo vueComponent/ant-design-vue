@@ -73,7 +73,7 @@ export default {
         return;
       }
       e.preventDefault();
-      return this.$emit('select', file);
+      return this.$emit('selectPreview', file);
     },
     handleDownload(file) {
       const { download } = getListeners(this);

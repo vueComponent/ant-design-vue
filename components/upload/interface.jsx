@@ -89,7 +89,6 @@ export const UploadProps = {
   height: PropsTypes.number,
   id: PropsTypes.string,
   previewFile: PropsTypes.func,
-  dirName: PropsTypes.string,
   transformFile: PropsTypes.func,
 };
 

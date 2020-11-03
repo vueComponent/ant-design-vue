@@ -6,6 +6,7 @@ export default {
   inputPrefixCls: PropTypes.string,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  modelValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   placeholder: {
     type: [String, Number] as PropType<string | number>,
   },
@@ -31,4 +32,5 @@ export default {
   onChange: PropTypes.func,
   onInput: PropTypes.func,
   'onUpdate:value': PropTypes.func,
+  'onUpdate:modelValue': PropTypes.func,
 };

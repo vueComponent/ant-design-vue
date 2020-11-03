@@ -64,7 +64,12 @@ export default defineComponent({
   },
   data() {
     const props = this.$props;
-    const value = typeof props.value === 'undefined' ? props.defaultValue : props.value;
+    const value =
+      typeof props.value === 'undefined'
+        ? typeof props.modelValue === 'undefined'
+          ? props.defaultValue
+          : props.modelValue
+        : props.value;
     return {
       stateValue: typeof value === 'undefined' ? '' : value,
       isFocused: false,
@@ -134,7 +139,8 @@ export default defineComponent({
       });
     },
     triggerChange(e: Event) {
-      this.$emit('update:value', (e.target as any).value);
+      this.$emit('update:value', (e.target as HTMLInputElement).value);
+      this.$emit('update:modelValue', (e.target as HTMLInputElement).value);
       this.$emit('change', e);
       this.$emit('input', e);
     },

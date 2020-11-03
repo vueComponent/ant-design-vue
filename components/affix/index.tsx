@@ -1,4 +1,4 @@
-import { CSSProperties, defineComponent, inject } from 'vue';
+import { CSSProperties, defineComponent, ExtractPropTypes, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
@@ -19,6 +19,7 @@ import {
 function getDefaultTarget() {
   return typeof window !== 'undefined' ? window : null;
 }
+
 enum AffixStatus {
   None,
   Prepare,
@@ -32,7 +33,7 @@ export interface AffixState {
 }
 
 // Affix
-const AffixProps = {
+export const affixProps = {
   /**
    * 距离窗口顶部达到指定偏移量后触发
    */
@@ -48,9 +49,12 @@ const AffixProps = {
   onChange: PropTypes.func,
   onTestUpdatePosition: PropTypes.func,
 };
+
+export type AffixProps = Partial<ExtractPropTypes<typeof affixProps>>;
+
 const Affix = defineComponent({
   name: 'AAffix',
-  props: AffixProps,
+  props: affixProps,
   mixins: [BaseMixin],
   setup() {
     return {

@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, provide, Plugin } from 'vue';
+import { App, defineComponent, inject, provide, Plugin, ExtractPropTypes } from 'vue';
 import Select, { SelectProps } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';
@@ -14,30 +14,29 @@ function isSelectOptionOrSelectOptGroup(child: any): Boolean {
   return child && child.type && (child.type.isSelectOption || child.type.isSelectOptGroup);
 }
 
-const AutoCompleteProps = {
+export const autoCompleteProps = {
   ...SelectProps(),
   dataSource: PropTypes.array,
   dropdownMenuStyle: PropTypes.style,
-  optionLabelProp: PropTypes.string,
   dropdownMatchSelectWidth: PropTypes.looseBool,
+  prefixCls: PropTypes.string.def('ant-select'),
+  showSearch: PropTypes.looseBool.def(false),
+  transitionName: PropTypes.string.def('slide-up'),
+  choiceTransitionName: PropTypes.string.def('zoom'),
+  autofocus: PropTypes.looseBool,
+  backfill: PropTypes.looseBool,
+  optionLabelProp: PropTypes.string.def('children'),
+  filterOption: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]).def(false),
+  defaultActiveFirstOption: PropTypes.looseBool.def(true),
 };
+
+export type AutoCompleteProps = Partial<ExtractPropTypes<typeof autoCompleteProps>>;
 
 const AutoComplete = defineComponent({
   name: 'AAutoComplete',
   inheritAttrs: false,
   emits: ['change', 'select', 'focus', 'blur'],
-  props: {
-    ...AutoCompleteProps,
-    prefixCls: PropTypes.string.def('ant-select'),
-    showSearch: PropTypes.looseBool.def(false),
-    transitionName: PropTypes.string.def('slide-up'),
-    choiceTransitionName: PropTypes.string.def('zoom'),
-    autofocus: PropTypes.looseBool,
-    backfill: PropTypes.looseBool,
-    optionLabelProp: PropTypes.string.def('children'),
-    filterOption: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]).def(false),
-    defaultActiveFirstOption: PropTypes.looseBool.def(true),
-  },
+  props: autoCompleteProps,
   Option: { ...Option, name: 'AAutoCompleteOption' },
   OptGroup: { ...OptGroup, name: 'AAutoCompleteOptGroup' },
   setup(props, { slots }) {

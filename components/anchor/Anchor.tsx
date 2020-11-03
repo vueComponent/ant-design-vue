@@ -1,4 +1,4 @@
-import { defineComponent, inject, nextTick, provide } from 'vue';
+import { defineComponent, ExtractPropTypes, inject, nextTick, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import addEventListener from '../vc-util/Dom/addEventListener';
@@ -44,7 +44,7 @@ type Section = {
 
 export type AnchorContainer = HTMLElement | Window;
 
-const AnchorProps = {
+export const anchorProps = {
   prefixCls: PropTypes.string,
   offsetTop: PropTypes.number,
   bounds: PropTypes.number,
@@ -75,11 +75,13 @@ export interface AnchorState {
   sPrefixCls?: string;
 }
 
+export type AnchorProps = Partial<ExtractPropTypes<typeof anchorProps>>;
+
 export default defineComponent({
   name: 'AAnchor',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: AnchorProps,
+  props: anchorProps,
   emits: ['change', 'click'],
   data() {
     // this.links = [];

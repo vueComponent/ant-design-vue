@@ -1,4 +1,4 @@
-import { inject, cloneVNode, defineComponent } from 'vue';
+import { inject, cloneVNode, defineComponent, ExtractPropTypes } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -32,7 +32,7 @@ const iconMapOutlined = {
   warning: ExclamationCircleOutlined,
 };
 
-export const AlertProps = {
+export const alertProps = {
   /**
    * Type of Alert styles, options:`success`, `info`, `warning`, `error`
    */
@@ -57,10 +57,12 @@ export const AlertProps = {
   onClose: PropTypes.VNodeChild,
 };
 
+export type AlertProps = Partial<ExtractPropTypes<typeof alertProps>>;
+
 const Alert = defineComponent({
   name: 'AAlert',
   inheritAttrs: false,
-  props: AlertProps,
+  props: alertProps,
   mixins: [BaseMixin],
   emits: ['close'],
   setup() {

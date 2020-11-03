@@ -46,7 +46,7 @@ const SelectTrigger = {
     isMultiple: PropTypes.looseBool,
     dropdownPrefixCls: PropTypes.string,
     dropdownVisibleChange: PropTypes.func,
-    popupElement: PropTypes.node,
+    popupElement: PropTypes.any,
     open: PropTypes.looseBool,
   },
   created() {

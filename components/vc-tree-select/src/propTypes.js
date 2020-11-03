@@ -18,7 +18,7 @@ export function valueProp(...args) {
   if (isLabelInValue(props)) {
     const err = genArrProps(
       PropTypes.shape({
-        label: PropTypes.node,
+        label: PropTypes.any,
         value: internalValProp,
       }).loose,
     )(...args);

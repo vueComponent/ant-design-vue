@@ -134,7 +134,7 @@ export default defineComponent({
       });
     },
     triggerChange(e: Event) {
-      this.$emit('update:value', (e.target as any).value);
+      this.$emit('update:value', (e.target as HTMLInputElement).value);
       this.$emit('change', e);
       this.$emit('input', e);
     },

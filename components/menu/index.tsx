@@ -301,7 +301,7 @@ const Menu = defineComponent({
       menuProps.openKeys = [];
     }
 
-    return <VcMenu {...menuProps} class={menuClassName} />;
+    return <VcMenu {...menuProps} class={menuClassName} vSlots={omit(this.$slots, ['defalut'])} />;
   },
 });
 

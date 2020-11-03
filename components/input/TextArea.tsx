@@ -124,7 +124,7 @@ export default defineComponent({
     const { style, class: customClass } = this.$attrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
-    let value = fixControlledValue(stateValue);
+    let value = fixControlledValue(stateValue) as string;
     // Max length value
     const hasMaxlength = Number(maxlength) > 0;
     value = hasMaxlength ? value.slice(0, maxlength) : value;

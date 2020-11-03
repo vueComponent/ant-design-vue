@@ -1,4 +1,5 @@
 import { PropType } from 'vue';
+import moment from 'moment';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { tuple } from '../_util/type';
 

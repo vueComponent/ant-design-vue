@@ -28,7 +28,6 @@ export default defineComponent({
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: initDefaultProps(WeekPickerProps, {
-    format: 'gggg-wo',
     allowClear: true,
   }),
   setup() {

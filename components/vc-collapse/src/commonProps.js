@@ -24,7 +24,7 @@ const collapseProps = () => ({
 const panelProps = () => ({
   openAnimation: PropTypes.object,
   prefixCls: PropTypes.string,
-  header: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.node]),
+  header: PropTypes.any,
   headerClass: PropTypes.string,
   showArrow: PropTypes.looseBool,
   isActive: PropTypes.looseBool,

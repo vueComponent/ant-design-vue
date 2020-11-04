@@ -882,12 +882,12 @@ export default function generateSelector<
         if (props.disabled) {
           return;
         }
-
-        if (mergedSearchValue.value) {
+        const serachVal = mergedSearchValue.value;
+        if (serachVal) {
           // `tags` mode should move `searchValue` into values
           if (props.mode === 'tags') {
             triggerSearch('', false, false);
-            triggerChange(Array.from(new Set([...mergedRawValue.value, mergedSearchValue.value])));
+            triggerChange(Array.from(new Set([...mergedRawValue.value, serachVal])));
           } else if (props.mode === 'multiple') {
             // `multiple` mode only clean the search value but not trigger event
             setInnerSearchValue('');

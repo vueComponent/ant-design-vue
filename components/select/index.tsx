@@ -215,6 +215,7 @@ const Select = defineComponent({
         getPopupContainer={getPopupContainer || getContextPopupContainer}
         dropdownClassName={rcSelectRtlDropDownClassName}
         onChange={triggerChange}
+        dropdownRender={selectProps.dropdownRender || this.$slots.dropdownRender}
       >
         {slots.default?.()}
       </RcSelect>

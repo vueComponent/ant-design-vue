@@ -4,6 +4,7 @@ import { Group, Button } from '../radio';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
 import { VueNode } from '../_util/type';
+import moment from 'moment';
 
 function getMonthsLocale(value: moment.Moment): string[] {
   const current = value.clone();

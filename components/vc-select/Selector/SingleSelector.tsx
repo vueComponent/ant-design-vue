@@ -1,7 +1,7 @@
 import pickAttrs from '../../_util/pickAttrs';
 import Input from './Input';
 import { InnerSelectorProps } from '.';
-import { computed, defineComponent, ref, VNodeChild, watch } from 'vue';
+import { computed, defineComponent, Fragment, ref, VNodeChild, watch } from 'vue';
 import PropTypes from '../../_util/vue-types';
 
 interface SelectorProps extends InnerSelectorProps {
@@ -125,7 +125,9 @@ const SingleSelector = defineComponent<SelectorProps>({
           {/* Display value */}
           {!combobox.value && item && !hasTextInput.value && (
             <span class={`${prefixCls}-selection-item`} title={title.value}>
-              {Array.isArray(item.label) ? item.label.map(la => la) : item.label}
+              <Fragment key={item.key || item.value}>
+                {item.label}
+              </Fragment>
             </span>
           )}
 

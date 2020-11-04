@@ -12,10 +12,18 @@ export default function useScrollTo(
   getKey: GetKey,
   collectHeight: () => void,
   syncScrollTop: (newTop: number) => void,
+  triggerFlash: () => void,
 ) {
   let scroll: number | null = null;
 
-  return (arg: any) => {
+  return (arg?: any) => {
+    // When not argument provided, we think dev may want to show the scrollbar
+    if (arg === null || arg === undefined) {
+      triggerFlash();
+      return;
+    }
+
+    // Normal scroll logic
     raf.cancel(scroll!);
     const data = state.mergedData;
     const itemHeight = props.itemHeight;

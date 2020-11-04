@@ -137,7 +137,7 @@ export default defineComponent({
         const enableScrollRange = this.getEnableScrollRange();
         const enableHeightRange = this.getEnableHeightRange();
 
-        const ptg = newTop / enableHeightRange;
+        const ptg = enableHeightRange ? newTop / enableHeightRange : 0;
         const newScrollTop = Math.ceil(ptg * enableScrollRange);
         this.moveRaf = raf(() => {
           onScroll(newScrollTop);
@@ -164,30 +164,45 @@ export default defineComponent({
 
     getEnableScrollRange() {
       const { scrollHeight, height } = this.$props;
-      return scrollHeight - height;
+      return scrollHeight - height || 0;
     },
 
     getEnableHeightRange() {
       const { height } = this.$props;
       const spinHeight = this.getSpinHeight();
-      return height - spinHeight;
+      return height - spinHeight || 0;
     },
 
     getTop() {
       const { scrollTop } = this.$props;
       const enableScrollRange = this.getEnableScrollRange();
       const enableHeightRange = this.getEnableHeightRange();
+      if (scrollTop === 0 || enableScrollRange === 0) {
+        return 0;
+      }
       const ptg = scrollTop / enableScrollRange;
       return ptg * enableHeightRange;
+    },
+    // Not show scrollbar when height is large thane scrollHeight
+    getVisible () {
+      const { visible } = this.state;
+      const { height, scrollHeight } = this.$props;
+
+      if (height >= scrollHeight) {
+        return false;
+      }
+
+      return visible;
     },
   },
 
   render() {
     // eslint-disable-next-line no-unused-vars
-    const { visible, dragging } = this.state;
+    const { dragging } = this.state;
     const { prefixCls } = this.$props;
     const spinHeight = this.getSpinHeight() + 'px';
     const top = this.getTop() + 'px';
+    const visible = this.getVisible();
     return (
       <div
         ref={this.scrollbarRef}

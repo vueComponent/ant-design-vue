@@ -84,16 +84,13 @@ const List = defineComponent({
   },
   setup(props) {
     // ================================= MISC =================================
-
+    const useVirtual = computed(()=>{
+      const { height, itemHeight, virtual } = props;
+      return !!(virtual !== false && height && itemHeight);
+    })
     const inVirtual = computed(() => {
-      const { height, itemHeight, data, virtual } = props;
-      return !!(
-        virtual !== false &&
-        height &&
-        itemHeight &&
-        data &&
-        itemHeight * data.length > height
-      );
+      const { height, itemHeight, data } = props;
+      return useVirtual.value && data && itemHeight * data.length > height;
     });
 
     const state = reactive<ListState>({
@@ -103,7 +100,8 @@ const List = defineComponent({
     });
 
     const componentRef = ref<HTMLDivElement>();
-
+    const fillerInnerRef = ref<HTMLDivElement>();
+    const scrollBarRef = ref<any>(); // Hack on scrollbar to enable flash call
     // =============================== Item Key ===============================
     const getKey = (item: Record<string, any>) => {
       if (typeof props.itemKey === 'function') {
@@ -135,10 +133,9 @@ const List = defineComponent({
 
     // ================================ Height ================================
     const [setInstance, collectHeight, heights, heightUpdatedMark] = useHeights(getKey, null, null);
-
     // ========================== Visible Calculation =========================
     const calRes = computed(() => {
-      if (!inVirtual.value) {
+      if (!useVirtual.value) {
         return {
           scrollHeight: undefined,
           start: 0,
@@ -146,6 +143,17 @@ const List = defineComponent({
           offset: undefined,
         };
       }
+
+       // Always use virtual scroll bar in avoid shaking
+      if (!inVirtual.value) {
+        return {
+          scrollHeight: fillerInnerRef.value?.offsetHeight || 0,
+          start: 0,
+          end: state.mergedData.length - 1,
+          offset: undefined,
+        };
+      }
+
       let itemTop = 0;
       let startIndex: number | undefined;
       let startOffset: number | undefined;
@@ -228,7 +236,7 @@ const List = defineComponent({
 
     // Since this added in global,should use ref to keep update
     const [onRawWheel, onFireFoxScroll] = useFrameWheel(
-      inVirtual,
+      useVirtual,
       isScrollAtTop,
       isScrollAtBottom,
       offsetY => {
@@ -240,7 +248,7 @@ const List = defineComponent({
     );
 
     // Mobile touch move
-    useMobileTouchMove(inVirtual, componentRef, (deltaY, smoothOffset) => {
+    useMobileTouchMove(useVirtual, componentRef, (deltaY, smoothOffset) => {
       if (originScroll(deltaY, smoothOffset)) {
         return false;
       }
@@ -250,7 +258,7 @@ const List = defineComponent({
     });
     // Firefox only
     function onMozMousePixelScroll(e: MouseEvent) {
-      if (inVirtual.value) {
+      if (useVirtual.value) {
         e.preventDefault();
       }
     }
@@ -285,6 +293,9 @@ const List = defineComponent({
       getKey,
       collectHeight,
       syncScrollTop,
+      () => {
+        scrollBarRef.value?.delayHidden();
+      },
     );
 
     const componentStyle = computed(() => {
@@ -292,7 +303,7 @@ const List = defineComponent({
       if (props.height) {
         cs = { [props.fullHeight ? 'height' : 'maxHeight']: props.height + 'px', ...ScrollStyle };
 
-        if (inVirtual.value) {
+        if (useVirtual.value) {
           cs!.overflowY = 'hidden';
 
           if (state.scrollMoving) {
@@ -310,11 +321,13 @@ const List = defineComponent({
       onFallbackScroll,
       onScrollBar,
       componentRef,
-      inVirtual,
+      useVirtual,
       calRes,
       collectHeight,
       setInstance,
       sharedConfig,
+      scrollBarRef,
+      fillerInnerRef
     };
   },
   render() {
@@ -341,7 +354,7 @@ const List = defineComponent({
       componentStyle,
       onFallbackScroll,
       onScrollBar,
-      inVirtual,
+      useVirtual,
       collectHeight,
       sharedConfig,
       setInstance,
@@ -375,13 +388,15 @@ const List = defineComponent({
             height={scrollHeight}
             offset={offset}
             onInnerResize={collectHeight}
+            ref="fillerInnerRef"
           >
             {listChildren}
           </Filler>
         </Component>
 
-        {inVirtual && (
+        {useVirtual && (
           <ScrollBar
+            ref="scrollBarRef"
             prefixCls={prefixCls}
             scrollTop={scrollTop}
             height={height}

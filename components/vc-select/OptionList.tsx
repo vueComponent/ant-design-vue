@@ -5,7 +5,7 @@ import classNames from '../_util/classNames';
 import pickAttrs from '../_util/pickAttrs';
 import { isValidElement } from '../_util/props-util';
 import createRef from '../_util/createRef';
-import { computed, defineComponent, reactive, VNodeChild, watch } from 'vue';
+import { computed, defineComponent, nextTick, reactive, VNodeChild, watch } from 'vue';
 import List from '../vc-virtual-list/List';
 import {
   OptionsType as SelectOptionsType,
@@ -153,8 +153,14 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
             scrollIntoView(index);
           }
         });
+        // Force trigger scrollbar visible when open
+        if (props.open) {
+          nextTick(()=>{
+            listRef.current?.scrollTo(undefined);
+          })
+        }
       },
-      { immediate: true, flush: 'post' },
+      { immediate: true },
     );
 
     // ========================== Values ==========================

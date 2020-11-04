@@ -1,4 +1,4 @@
-import { App, defineComponent } from 'vue';
+import { App, defineComponent, Plugin } from 'vue';
 import T, { defaultTableProps } from './Table';
 import Column from './Column';
 import ColumnGroup from './ColumnGroup';
@@ -94,7 +94,8 @@ Table.install = function(app: App) {
   return app;
 };
 
-export default Table as typeof Table & {
-  readonly Column: typeof Column;
-  readonly ColumnGroup: typeof ColumnGroup;
-};
+export default Table as typeof Table &
+  Plugin & {
+    readonly Column: typeof Column;
+    readonly ColumnGroup: typeof ColumnGroup;
+  };

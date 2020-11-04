@@ -1,5 +1,5 @@
 import { warning } from '../../vc-util/warning';
-import { VNodeChild } from 'vue';
+import { isVNode, VNodeChild } from 'vue';
 import {
   OptionsType as SelectOptionsType,
   OptionData,
@@ -163,7 +163,15 @@ export const getLabeledValue: GetLabeledValue<FlattenOptionData[]> = (
 };
 
 function toRawString(content: VNodeChild): string {
-  return toArray(content).join('');
+  return toArray(content)
+    .map(item => {
+      if (isVNode(item)) {
+        return item?.el?.innerText || item?.el?.wholeText;
+      } else {
+        return '';
+      }
+    })
+    .join('');
 }
 
 /** Filter single option if match the search text */
@@ -177,7 +185,6 @@ function getFilterFunction(optionFilterProp: string) {
         .toLowerCase()
         .includes(lowerSearchText);
     }
-
     // Option value search
     const rawValue = option[optionFilterProp];
     const value = toRawString(rawValue).toLowerCase();

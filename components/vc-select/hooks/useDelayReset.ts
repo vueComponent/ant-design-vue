@@ -1,4 +1,4 @@
-import { onBeforeUpdate, Ref, ref } from 'vue';
+import { onMounted, Ref, ref } from 'vue';
 
 /**
  * Similar with `useLock`, but this hook will always execute last value.
@@ -14,12 +14,11 @@ export default function useDelayReset(
     window.clearTimeout(delay);
   };
 
-  onBeforeUpdate(() => {
+  onMounted(() => {
     cancelLatest();
   });
   const delaySetBool = (value: boolean, callback: () => void) => {
     cancelLatest();
-
     delay = window.setTimeout(() => {
       bool.value = value;
       if (callback) {

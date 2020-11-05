@@ -248,19 +248,19 @@ const TableRow = {
       ...rowProps,
       style,
       onClick: e => {
-        this.onRowClick(e, rowProps.click);
+        this.onRowClick(e, rowProps.onClick);
       },
       onDblclick: e => {
-        this.onRowDoubleClick(e, rowProps.dblclick);
+        this.onRowDoubleClick(e, rowProps.onDblclick);
       },
       onMouseenter: e => {
-        this.onMouseEnter(e, rowProps.mouseenter);
+        this.onMouseEnter(e, rowProps.onMouseenter);
       },
       onMouseleave: e => {
-        this.onMouseLeave(e, rowProps.mouseleave);
+        this.onMouseLeave(e, rowProps.onMouseleave);
       },
       onContextmenu: e => {
-        this.onContextMenu(e, rowProps.contextmenu);
+        this.onContextMenu(e, rowProps.onContextmenu);
       },
       class: rowClassName,
       'data-row-key': rowKey,

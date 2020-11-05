@@ -135,32 +135,23 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
     );
     // Auto scroll to item position in single mode
 
-    let timeoutId: number;
     watch(
       computed(() => props.open),
       () => {
-        /**
-         * React will skip `onChange` when component update.
-         * `setActive` function will call root accessibility state update which makes re-render.
-         * So we need to delay to let Input component trigger onChange first.
-         */
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-          if (!props.multiple && props.open && props.values.size === 1) {
-            const value = Array.from(props.values)[0];
-            const index = props.flattenOptions.findIndex(({ data }) => data.value === value);
-            setActive(index);
-            scrollIntoView(index);
-          }
-        });
+        if (!props.multiple && props.open && props.values.size === 1) {
+          const value = Array.from(props.values)[0];
+          const index = props.flattenOptions.findIndex(({ data }) => data.value === value);
+          // setActive(index);
+          scrollIntoView(index);
+        }
         // Force trigger scrollbar visible when open
         if (props.open) {
-          nextTick(()=>{
+          nextTick(() => {
             listRef.current?.scrollTo(undefined);
-          })
+          });
         }
       },
-      { immediate: true },
+      { immediate: true, flush: 'post' },
     );
 
     // ========================== Values ==========================

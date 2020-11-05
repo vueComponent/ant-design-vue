@@ -225,7 +225,7 @@ const Select = {
       });
     },
     '$data._open'(open) {
-      this.$nextTick(() => {
+      setTimeout(() => {
         const { prefixCls } = this.$props;
         const { _selectorValueList: selectorValueList, _valueEntities: valueEntities } = this.$data;
         const isMultiple = this.isMultiple();

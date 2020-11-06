@@ -4,6 +4,7 @@ import MockDate from 'mockdate';
 import moment from 'moment';
 import Vue from 'vue';
 import antd from 'ant-design-vue';
+import { sleep } from '../utils';
 Vue.use(antd);
 
 export default function demoTest(component, options = {}) {
@@ -15,22 +16,20 @@ export default function demoTest(component, options = {}) {
     if (Array.isArray(options.skip) && options.skip.some(c => file.includes(c))) {
       testMethod = test.skip;
     }
-    testMethod(`renders ${file} correctly`, done => {
+    testMethod(`renders ${file} correctly`, async () => {
       MockDate.set(moment('2016-11-22'));
       const demo = require(`../.${file}`).default || require(`../.${file}`);
       document.body.innerHTML = '';
       const wrapper = mount(demo, { sync: false, attachToDocument: true });
-      Vue.nextTick(() => {
-        // should get dom from element
-        // snap files copy from antd does not need to change
-        // or just change a little
-        const dom = options.getDomFromElement ? wrapper.element : wrapper.html();
-        expect(dom).toMatchSnapshot();
-        MockDate.reset();
-        wrapper.destroy();
-        document.body.innerHTML = '';
-        done();
-      });
+      await sleep();
+      // should get dom from element
+      // snap files copy from antd does not need to change
+      // or just change a little
+      const dom = options.getDomFromElement ? wrapper.element : wrapper.html();
+      expect(dom).toMatchSnapshot();
+      MockDate.reset();
+      wrapper.destroy();
+      document.body.innerHTML = '';
     });
   });
 }

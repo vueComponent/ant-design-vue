@@ -1,5 +1,5 @@
 import shallowEqual from '../shallowequal';
-import { inject, createVNode, watchEffect, defineComponent } from 'vue';
+import { inject, createVNode, watchEffect, defineComponent, provide } from 'vue';
 import omit from 'omit.js';
 import { getOptionProps } from '../props-util';
 
@@ -22,6 +22,7 @@ export default function connect(mapStateToProps, injectExtraPropsKey) {
       inheritAttrs: false,
       props,
       setup() {
+        provide(injectExtraPropsKey, undefined); // 断掉 injectExtraPropsKey 的依赖
         return {
           storeContext: inject('storeContext', {}),
           injectExtraProps: injectExtraPropsKey ? inject(injectExtraPropsKey, () => ({})) : {},

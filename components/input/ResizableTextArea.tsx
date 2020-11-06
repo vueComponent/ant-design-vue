@@ -61,7 +61,7 @@ const ResizableTextArea = defineComponent({
     },
   },
   methods: {
-    saveTextArea(textArea: any) {
+    saveTextArea(textArea: HTMLTextAreaElement) {
       this.textArea = textArea;
     },
     handleResize(size: any) {

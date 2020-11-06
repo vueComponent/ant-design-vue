@@ -29,7 +29,9 @@ const ResizableTextArea = {
   },
   mixins: [BaseMixin],
   mounted() {
-    this.resizeTextarea();
+    this.$nextTick(() => {
+      this.resizeTextarea();
+    });
   },
   beforeDestroy() {
     raf.cancel(this.nextFrameActionId);

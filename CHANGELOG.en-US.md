@@ -10,6 +10,14 @@
 
 ---
 
+## 1.7.2
+
+`2020-11-06`
+
+- 🐞 Fix the problem of incorrect height of Textarea component [#2974](https://github.com/vueComponent/ant-design-vue/issues/2974)
+- 🐞 Roll back Menu component to version 1.6.5 to be consistent [#3112](https://github.com/vueComponent/ant-design-vue/issues/3112)
+- 🐞 Fix TreeSelect throw error [#3126](https://github.com/vueComponent/ant-design-vue/issues/3126)
+
 ## 1.7.1
 
 `2020-10-28`

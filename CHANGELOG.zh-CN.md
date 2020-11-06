@@ -10,6 +10,14 @@
 
 ---
 
+## 1.7.2
+
+`2020-11-06`
+
+- 🐞 修复 Textarea 组件高度不正确问题 [#2974](https://github.com/vueComponent/ant-design-vue/issues/2974)
+- 🐞 回滚 Menu 组件到 1.6.5 版本一致 [#3112](https://github.com/vueComponent/ant-design-vue/issues/3112)
+- 🐞 修复 TreeSelect throw error [#3126](https://github.com/vueComponent/ant-design-vue/issues/3126)
+
 ## 1.7.1
 
 `2020-10-28`

@@ -5,7 +5,7 @@ import scrollIntoView from 'dom-scroll-into-view';
 import { connect } from '../_util/store';
 import { noop, menuAllProps } from './util';
 import { getComponentFromProp, getListeners } from '../_util/props-util';
-import { injectExtraPropsKey } from './FunctionProvider';
+
 const props = {
   attribute: PropTypes.object,
   rootPrefixCls: PropTypes.string,
@@ -202,13 +202,10 @@ const MenuItem = {
   },
 };
 
-const connected = connect(
-  ({ activeKey, selectedKeys }, { eventKey, subMenuKey }) => ({
-    active: activeKey[subMenuKey] === eventKey,
-    isSelected: selectedKeys.indexOf(eventKey) !== -1,
-  }),
-  injectExtraPropsKey,
-)(MenuItem);
+const connected = connect(({ activeKey, selectedKeys }, { eventKey, subMenuKey }) => ({
+  active: activeKey[subMenuKey] === eventKey,
+  isSelected: selectedKeys.indexOf(eventKey) !== -1,
+}))(MenuItem);
 
 export default connected;
 export { props as menuItemProps };

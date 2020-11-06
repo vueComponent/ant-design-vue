@@ -1,7 +1,6 @@
 import { Item, itemProps } from '../vc-menu';
 import { getOptionProps, getListeners } from '../_util/props-util';
 import Tooltip from '../tooltip';
-import { injectExtraPropsKey } from '../vc-menu/FunctionProvider';
 function noop() {}
 export default {
   name: 'MenuItem',
@@ -10,10 +9,6 @@ export default {
   inject: {
     getInlineCollapsed: { default: () => noop },
     layoutSiderContext: { default: () => ({}) },
-    injectExtraProps: {
-      from: injectExtraPropsKey,
-      default: () => ({}),
-    },
   },
   isMenuItem: true,
   methods: {
@@ -23,7 +18,7 @@ export default {
   },
   render() {
     const props = getOptionProps(this);
-    const { level, title, rootPrefixCls } = { ...props, ...this.injectExtraProps.$attrs };
+    const { level, title, rootPrefixCls } = props;
     const { getInlineCollapsed, $slots, $attrs: attrs } = this;
     const inlineCollapsed = getInlineCollapsed();
     let tooltipTitle = title;

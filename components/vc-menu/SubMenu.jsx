@@ -10,7 +10,6 @@ import { getComponentFromProp, filterEmpty, getListeners } from '../_util/props-
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import { noop, loopMenuItemRecursively, getMenuIdFromSubMenuEventKey } from './util';
 import getTransitionProps from '../_util/getTransitionProps';
-import { injectExtraPropsKey } from './FunctionProvider';
 
 let guid = 0;
 
@@ -543,14 +542,12 @@ const SubMenu = {
     );
   },
 };
-const connected = connect(
-  ({ openKeys, activeKey, selectedKeys }, { eventKey, subMenuKey }) => ({
-    isOpen: openKeys.indexOf(eventKey) > -1,
-    active: activeKey[subMenuKey] === eventKey,
-    selectedKeys,
-  }),
-  injectExtraPropsKey,
-)(SubMenu);
+
+const connected = connect(({ openKeys, activeKey, selectedKeys }, { eventKey, subMenuKey }) => ({
+  isOpen: openKeys.indexOf(eventKey) > -1,
+  active: activeKey[subMenuKey] === eventKey,
+  selectedKeys,
+}))(SubMenu);
 
 connected.isSubMenu = true;
 

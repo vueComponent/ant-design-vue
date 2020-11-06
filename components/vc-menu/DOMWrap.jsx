@@ -4,7 +4,7 @@ import SubMenu from './SubMenu';
 import BaseMixin from '../_util/BaseMixin';
 import { getWidth, setStyle, menuAllProps } from './util';
 import { cloneElement } from '../_util/vnode';
-import { getClass, getPropsData as getProps, getEvents, getListeners } from '../_util/props-util';
+import { getClass, getPropsData, getEvents, getListeners } from '../_util/props-util';
 
 const canUseDOM = !!(
   typeof window !== 'undefined' &&
@@ -19,11 +19,6 @@ const FLOAT_PRECISION_ADJUST = 0.5;
 if (canUseDOM) {
   require('mutationobserver-shim');
 }
-
-const getPropsData = vnode => {
-  const { data: { attrs } = {} } = vnode;
-  return { ...getProps(vnode), ...attrs };
-};
 
 const DOMWrap = {
   name: 'DOMWrap',

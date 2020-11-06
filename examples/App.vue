@@ -3,9 +3,9 @@
     :action="action"
     :list-type="listType"
     :file-list="defaultFileList"
-    :dirName="dirName"
     @selectPreview="handleSelect"
     @change="handleChange"
+    :itemRender="itemRender"
   />
 </template>
 <script>
@@ -50,15 +50,26 @@ export default {
     };
   },
   methods: {
+    itemRender(file) {
+      return (
+        <div
+          onClick={e => this.handleSelect(file, e)}
+          style={file.select === 'select' ? 'border-color:#1890ff;' : ''}
+        >
+          <template slot="action">
+            <div>action</div>
+          </template>
+        </div>
+      );
+    },
     close() {
       this.visible = false;
     },
-    handleCancel(e) {
+    handleCancel() {
       this.visible = false;
     },
     handleSelect(file) {
       if (file.uid && file.status === 'done') {
-        console.log('file.uid==>', file.uid, '==file==>', file);
         this.select = file.uid;
         this.defaultFileList.map(item => {
           if (item.uid === this.select) {
@@ -70,7 +81,7 @@ export default {
             item.select === 'select' && this.$set(item, 'select', 'UnSelect');
           }
         });
-        console.log('this.select==>', this.select);
+        // console.log('this.select==>', this.select);
       }
     },
     handleChange(info) {

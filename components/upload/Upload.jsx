@@ -31,6 +31,9 @@ export default {
     listType: 'text', // or pictrue
     disabled: false,
     supportServerRender: true,
+    itemRender() {
+      return <div></div>;
+    },
   }),
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -71,7 +74,6 @@ export default {
         this.autoUpdateProgress(0, targetItem);
       }
     },
-
     onSuccess(response, file, xhr) {
       this.clearProgressTimer();
       try {
@@ -160,10 +162,6 @@ export default {
       }
       this.handleRemove(file);
     },
-    // new added
-    handleSelect(file) {
-      this.$emit('selectPreview', file);
-    },
     onChange(info) {
       if (!hasProp(this, 'fileList')) {
         this.setState({ sFileList: info.fileList });
@@ -218,6 +216,7 @@ export default {
         previewFile,
         disabled,
         locale: propLocale,
+        itemRender,
       } = getOptionProps(this);
       const { showRemoveIcon, showPreviewIcon, showDownloadIcon } = showUploadList;
       const { sFileList: fileList } = this.$data;
@@ -230,11 +229,11 @@ export default {
           showPreviewIcon,
           showDownloadIcon,
           locale: { ...locale, ...propLocale },
+          itemRender,
         },
         on: {
           remove: this.handleManualRemove,
           ...pick(getListeners(this), ['download', 'preview']), // 如果没有配置该事件，不要传递， uploadlist 会有相应逻辑
-          selectPreview: this.handleSelect, // 自定义1
         },
       };
       return <UploadList {...uploadListProps} />;
@@ -278,6 +277,7 @@ export default {
     ) : null;
 
     const children = this.$slots.default;
+    // const item = this.$slots.item;
 
     if (type === 'drag') {
       const dragCls = classNames(prefixCls, {

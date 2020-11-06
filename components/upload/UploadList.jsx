@@ -8,10 +8,14 @@ import Tooltip from '../tooltip';
 import Progress from '../progress';
 import classNames from 'classnames';
 import { UploadListProps } from './interface';
+import UploadListItem from './UploadListItem';
 
 export default {
   name: 'AUploadList',
   mixins: [BaseMixin],
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   props: initDefaultProps(UploadListProps, {
     listType: 'text', // or picture
     progressAttr: {
@@ -22,10 +26,10 @@ export default {
     showDownloadIcon: false,
     showPreviewIcon: true,
     previewFile: previewImage,
+    itemRender() {
+      return <div></div>;
+    },
   }),
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-  },
   updated() {
     this.$nextTick(() => {
       const { listType, items, previewFile } = this.$props;
@@ -66,15 +70,6 @@ export default {
       e.preventDefault();
       return this.$emit('preview', file);
     },
-    handleSelect(file, e) {
-      // 新增
-      const { select } = getListeners(this);
-      if (!select) {
-        return;
-      }
-      e.preventDefault();
-      return this.$emit('selectPreview', file);
-    },
     handleDownload(file) {
       const { download } = getListeners(this);
       if (typeof download === 'function') {
@@ -99,6 +94,7 @@ export default {
       showDownloadIcon,
       locale,
       progressAttr,
+      itemRender,
     } = getOptionProps(this);
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('upload', customizePrefixCls);
@@ -254,27 +250,44 @@ export default {
       );
       const transitionProps = getTransitionProps('fade');
       // 修改
-      const dom = (
-        <div
-          class={infoUploadingClass}
-          key={file.uid}
-          onClick={e => this.handleSelect(file, e)}
-          style={file.select === 'select' ? 'border-color:#1890ff;' : ''}
-        >
-          <div class={`${prefixCls}-list-item-info`}>{iconAndPreview}</div>
-          {actions}
-          <transition {...transitionProps}>{progress}</transition>
-        </div>
-      );
+      const {
+        data: { on: events, style: itemStyle },
+        children,
+      } = itemRender(file);
+      // console.log('listItemRender(file)==>', listItemRender(file))
+      const uploadListItemProps = {
+        props: {
+          file,
+          infoUploadingClass,
+          iconAndPreview,
+          transitionProps,
+          progress,
+          actions,
+          prefixCls,
+          children,
+          on: events,
+          itemStyle,
+        },
+      };
+      // console.log('listItemRender==>uploadListItemProps==>', uploadListItemProps.on.click)
+      const vdom = <UploadListItem {...uploadListItemProps}></UploadListItem>;
+
       const listContainerNameClass = classNames({
         [`${prefixCls}-list-picture-card-container`]: listType === 'picture-card',
       });
       return (
         <div key={file.uid} class={listContainerNameClass}>
-          {file.status === 'error' ? <Tooltip title={message}>{dom}</Tooltip> : <span>{dom}</span>}
+          {file.status === 'error' ? (
+            <Tooltip title={message}>
+              {<UploadListItem {...uploadListItemProps}></UploadListItem>}
+            </Tooltip>
+          ) : (
+            <span>{<UploadListItem {...uploadListItemProps}></UploadListItem>}</span>
+          )}
         </div>
       );
     });
+
     const listClassNames = classNames({
       [`${prefixCls}-list`]: true,
       [`${prefixCls}-list-${listType}`]: true,

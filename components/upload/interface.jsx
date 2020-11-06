@@ -90,6 +90,8 @@ export const UploadProps = {
   id: PropsTypes.string,
   previewFile: PropsTypes.func,
   transformFile: PropsTypes.func,
+  itemRender: PropsTypes.oneOfType([PropsTypes.object, PropsTypes.func]),
+  listItemRender: PropsTypes.oneOfType([PropsTypes.object, PropsTypes.func]),
 };
 
 export const UploadState = {
@@ -111,4 +113,6 @@ export const UploadListProps = {
   showPreviewIcon: PropsTypes.bool,
   locale: UploadLocale,
   previewFile: PropsTypes.func,
+  itemRender: PropsTypes.oneOfType([PropsTypes.object, PropsTypes.func]),
+  listItemRender: PropsTypes.oneOfType([PropsTypes.object, PropsTypes.func]),
 };

@@ -55,15 +55,15 @@ const Slider = defineComponent({
   name: 'ASlider',
   mixins: [BaseMixin],
   inheritAttrs: false,
+  props: {
+    ...SliderProps(),
+  },
   emits: ['update:value', 'change'],
   setup() {
     return {
       vcSlider: null,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
-  },
-  props: {
-    ...SliderProps(),
   },
   data() {
     return {

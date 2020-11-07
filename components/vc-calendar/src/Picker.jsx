@@ -27,6 +27,7 @@ function refFn(field, component) {
 
 const Picker = defineComponent({
   name: 'Picker',
+  mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
     animation: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
@@ -48,7 +49,6 @@ const Picker = defineComponent({
     dateRender: PropTypes.func,
     children: PropTypes.func,
   },
-  mixins: [BaseMixin],
 
   data() {
     const props = this.$props;

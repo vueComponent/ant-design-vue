@@ -11,6 +11,7 @@ import enUs from './locale/en_US';
 import { defineComponent } from 'vue';
 const FullCalendar = defineComponent({
   name: 'FullCalendar',
+  mixins: [BaseMixin, CommonMixin, CalendarMixin],
   inheritAttrs: false,
   props: {
     locale: PropTypes.object.def(enUs),
@@ -36,7 +37,6 @@ const FullCalendar = defineComponent({
     renderFooter: PropTypes.func.def(() => null),
     renderSidebar: PropTypes.func.def(() => null),
   },
-  mixins: [BaseMixin, CommonMixin, CalendarMixin],
   data() {
     let type;
     if (hasProp(this, 'type')) {

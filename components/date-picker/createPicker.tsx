@@ -32,13 +32,13 @@ export default function createPicker<P>(
 ): DefineComponent<any> {
   return defineComponent({
     name,
+    mixins: [BaseMixin],
     inheritAttrs: false,
     props: {
       ...props,
       allowClear: PropTypes.looseBool.def(true),
       showToday: PropTypes.looseBool.def(true),
     },
-    mixins: [BaseMixin],
     setup() {
       return {
         configProvider: inject('configProvider', defaultConfigProvider),

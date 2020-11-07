@@ -10,6 +10,7 @@ import enUs from './locale/en_US';
 import { defineComponent } from 'vue';
 const MonthCalendar = defineComponent({
   name: 'MonthCalendar',
+  mixins: [BaseMixin, CommonMixin, CalendarMixin],
   inheritAttrs: false,
   props: {
     locale: PropTypes.object.def(enUs),
@@ -26,7 +27,6 @@ const MonthCalendar = defineComponent({
     renderFooter: PropTypes.func.def(() => null),
     renderSidebar: PropTypes.func.def(() => null),
   },
-  mixins: [BaseMixin, CommonMixin, CalendarMixin],
 
   data() {
     const props = this.$props;

@@ -193,22 +193,7 @@ const Select = defineComponent({
       ...newState,
     };
   },
-  created() {
-    provide('vcTreeSelect', {
-      onSelectorFocus: this.onSelectorFocus,
-      onSelectorBlur: this.onSelectorBlur,
-      onSelectorKeyDown: this.onComponentKeyDown,
-      onSelectorClear: this.onSelectorClear,
-      onMultipleSelectorRemove: this.onMultipleSelectorRemove,
 
-      onTreeNodeSelect: this.onTreeNodeSelect,
-      onTreeNodeCheck: this.onTreeNodeCheck,
-      onPopupKeyDown: this.onComponentKeyDown,
-
-      onSearchInputChange: this.onSearchInputChange,
-      onSearchInputKeyDown: this.onSearchInputKeyDown,
-    });
-  },
   watch: {
     ...getWatch(['treeData', 'defaultValue', 'value']),
     __propsSymbol__() {
@@ -257,6 +242,22 @@ const Select = defineComponent({
         }
       });
     },
+  },
+  created() {
+    provide('vcTreeSelect', {
+      onSelectorFocus: this.onSelectorFocus,
+      onSelectorBlur: this.onSelectorBlur,
+      onSelectorKeyDown: this.onComponentKeyDown,
+      onSelectorClear: this.onSelectorClear,
+      onMultipleSelectorRemove: this.onMultipleSelectorRemove,
+
+      onTreeNodeSelect: this.onTreeNodeSelect,
+      onTreeNodeCheck: this.onTreeNodeCheck,
+      onPopupKeyDown: this.onComponentKeyDown,
+
+      onSearchInputChange: this.onSearchInputChange,
+      onSearchInputKeyDown: this.onSearchInputKeyDown,
+    });
   },
   mounted() {
     this.$nextTick(() => {

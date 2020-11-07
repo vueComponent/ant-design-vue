@@ -9,11 +9,11 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'Slider',
+  mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     ...defaultProps,
   },
-  mixins: [BaseMixin],
-  inheritAttrs: false,
   data() {
     this._responsiveMediaHandlers = [];
     return {

@@ -13,6 +13,7 @@ const PlacementTypes = tuple('top', 'right', 'bottom', 'left');
 type placementType = typeof PlacementTypes[number];
 const Drawer = defineComponent({
   name: 'ADrawer',
+  mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
     closable: PropTypes.looseBool.def(true),
@@ -40,7 +41,6 @@ const Drawer = defineComponent({
     onClose: PropTypes.func,
     'onUpdate:visible': PropTypes.func,
   },
-  mixins: [BaseMixin],
   setup(props) {
     const configProvider = inject('configProvider', defaultConfigProvider);
     return {

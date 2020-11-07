@@ -78,7 +78,6 @@ const TimePicker = defineComponent({
   name: 'ATimePicker',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  emits: ['update:value', 'update:open', 'change', 'openChange', 'focus', 'blur', 'keydown'],
   props: initDefaultProps(TimePickerProps(), {
     align: {
       offset: [0, -2],
@@ -93,6 +92,7 @@ const TimePicker = defineComponent({
     focusOnOpen: true,
     allowClear: true,
   }),
+  emits: ['update:value', 'update:open', 'change', 'openChange', 'focus', 'blur', 'keydown'],
   setup() {
     return {
       popupRef: null,

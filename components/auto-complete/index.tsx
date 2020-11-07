@@ -25,7 +25,6 @@ const AutoCompleteProps = {
 const AutoComplete = defineComponent({
   name: 'AAutoComplete',
   inheritAttrs: false,
-  emits: ['change', 'select', 'focus', 'blur'],
   props: {
     ...AutoCompleteProps,
     prefixCls: PropTypes.string.def('ant-select'),
@@ -38,6 +37,7 @@ const AutoComplete = defineComponent({
     filterOption: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]).def(false),
     defaultActiveFirstOption: PropTypes.looseBool.def(true),
   },
+  emits: ['change', 'select', 'focus', 'blur'],
   Option: { ...Option, name: 'AAutoCompleteOption' },
   OptGroup: { ...OptGroup, name: 'AAutoCompleteOptGroup' },
   setup(props, { slots }) {

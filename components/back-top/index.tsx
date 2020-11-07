@@ -20,11 +20,11 @@ const BackTop = defineComponent({
   name: 'ABackTop',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  emits: ['click'],
   props: {
     ...props,
     visibilityHeight: PropTypes.number.def(400),
   },
+  emits: ['click'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

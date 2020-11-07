@@ -150,7 +150,6 @@ export const destroyFns = [];
 export default defineComponent({
   name: 'AModal',
   inheritAttrs: false,
-  emits: ['update:visible', 'cancel', 'change', 'ok'],
   props: initDefaultProps(modalProps, {
     width: 520,
     transitionName: 'zoom',
@@ -159,6 +158,7 @@ export default defineComponent({
     visible: false,
     okType: 'primary',
   }),
+  emits: ['update:visible', 'cancel', 'change', 'ok'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

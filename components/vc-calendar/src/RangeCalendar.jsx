@@ -82,6 +82,7 @@ function onInputSelect(direction, value, cause) {
 
 const RangeCalendar = defineComponent({
   name: 'RangeCalendar',
+  mixins: [BaseMixin, CommonMixin],
   inheritAttrs: false,
   props: {
     locale: PropTypes.object.def(enUs),
@@ -122,8 +123,6 @@ const RangeCalendar = defineComponent({
     clearIcon: PropTypes.any,
     inputReadOnly: PropTypes.looseBool,
   },
-
-  mixins: [BaseMixin, CommonMixin],
 
   data() {
     const props = this.$props;

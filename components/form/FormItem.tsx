@@ -250,22 +250,6 @@ export default defineComponent({
 
       return promise;
     },
-    getRules() {
-      let formRules = this.FormContext.rules;
-      const selfRules = this.rules;
-      const requiredRule =
-        this.required !== undefined
-          ? { required: !!this.required, trigger: this.mergedValidateTrigger }
-          : [];
-      const prop = getPropByPath(formRules, this.namePath);
-      formRules = formRules ? prop.o[prop.k] || prop.v : [];
-      const rules = [].concat(selfRules || formRules || []);
-      if (find(rules, rule => rule.required)) {
-        return rules;
-      } else {
-        return rules.concat(requiredRule);
-      }
-    },
     onFieldBlur() {
       this.validateRules({ triggerName: 'blur' });
     },

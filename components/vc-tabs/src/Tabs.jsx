@@ -45,8 +45,10 @@ export default defineComponent({
   setup(props) {
     let activeKey;
     if (props.activeKey !== undefined) {
+      // eslint-disable-next-line vue/no-setup-props-destructure
       activeKey = props.activeKey;
     } else if (props.defaultActiveKey !== undefined) {
+      // eslint-disable-next-line vue/no-setup-props-destructure
       activeKey = props.defaultActiveKey;
     } else {
       activeKey = getDefaultActiveKey(props);

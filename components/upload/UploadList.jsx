@@ -27,7 +27,9 @@ export default {
     showPreviewIcon: true,
     previewFile: previewImage,
     itemRender() {
-      return <div></div>;
+      return () => {
+        return <div></div>;
+      };
     },
   }),
   updated() {
@@ -79,9 +81,38 @@ export default {
       }
     },
     handleClose(file) {
-      // 改写
       window.event ? (window.event.cancelBubble = true) : e.stopPropagation();
       this.$emit('remove', file);
+    },
+    listItemRender(
+      file,
+      infoUploadingClass,
+      iconAndPreview,
+      transitionProps,
+      progress,
+      actions,
+      prefixCls,
+      itemRender,
+    ) {
+      const uploadListItemProps = {
+        props: {
+          file,
+          infoUploadingClass,
+          iconAndPreview,
+          transitionProps,
+          progress,
+          actions,
+          prefixCls,
+        },
+      };
+      const mediator = itemRender(file);
+      mediator.data && mediator.data.on && (uploadListItemProps.props.on = mediator.data.on);
+      mediator.children && (uploadListItemProps.props.children = mediator.children);
+      mediator.data &&
+        mediator.data.style &&
+        (uploadListItemProps.props.itemStyle = mediator.data.style);
+
+      return <UploadListItem {...uploadListItemProps}></UploadListItem>;
     },
   },
   render() {
@@ -250,40 +281,24 @@ export default {
       );
       const transitionProps = getTransitionProps('fade');
       // 修改
-      const {
-        data: { on: events, style: itemStyle },
-        children,
-      } = itemRender(file);
-      // console.log('listItemRender(file)==>', listItemRender(file))
-      const uploadListItemProps = {
-        props: {
-          file,
-          infoUploadingClass,
-          iconAndPreview,
-          transitionProps,
-          progress,
-          actions,
-          prefixCls,
-          children,
-          on: events,
-          itemStyle,
-        },
-      };
-      // console.log('listItemRender==>uploadListItemProps==>', uploadListItemProps.on.click)
-      const vdom = <UploadListItem {...uploadListItemProps}></UploadListItem>;
+      // console.log('itemRender(file)==>on==>', itemRender(file))
 
+      const dom = this.listItemRender(
+        file,
+        infoUploadingClass,
+        iconAndPreview,
+        transitionProps,
+        progress,
+        actions,
+        prefixCls,
+        itemRender,
+      );
       const listContainerNameClass = classNames({
         [`${prefixCls}-list-picture-card-container`]: listType === 'picture-card',
       });
       return (
         <div key={file.uid} class={listContainerNameClass}>
-          {file.status === 'error' ? (
-            <Tooltip title={message}>
-              {<UploadListItem {...uploadListItemProps}></UploadListItem>}
-            </Tooltip>
-          ) : (
-            <span>{<UploadListItem {...uploadListItemProps}></UploadListItem>}</span>
-          )}
+          {file.status === 'error' ? <Tooltip title={message}>{dom}</Tooltip> : <span>{dom}</span>}
         </div>
       );
     });

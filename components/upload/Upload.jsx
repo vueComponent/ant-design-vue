@@ -32,7 +32,9 @@ export default {
     disabled: false,
     supportServerRender: true,
     itemRender() {
-      return <div></div>;
+      return () => {
+        return <div></div>;
+      };
     },
   }),
   inject: {

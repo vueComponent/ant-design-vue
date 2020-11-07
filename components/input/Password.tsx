@@ -57,12 +57,12 @@ export default defineComponent({
       const iconTrigger = ActionMap[action] || '';
       const iconProps = {
         [iconTrigger]: this.onVisibleChange,
-        onMousedown: e => {
+        onMousedown: (e: Event) => {
           // Prevent focused state lost
           // https://github.com/ant-design/ant-design/issues/15173
           e.preventDefault();
         },
-        onMouseup: e => {
+        onMouseup: (e: Event) => {
           // Prevent focused state lost
           // https://github.com/ant-design/ant-design/pull/23633/files
           e.preventDefault();

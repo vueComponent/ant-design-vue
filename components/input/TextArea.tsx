@@ -35,7 +35,7 @@ export default defineComponent({
     };
   },
   watch: {
-    value(val) {
+    value(val: string) {
       this.stateValue = val;
     },
   },
@@ -49,7 +49,7 @@ export default defineComponent({
     });
   },
   methods: {
-    setValue(value: any, callback?: Function) {
+    setValue(value: string, callback?: Function) {
       if (!hasProp(this, 'value')) {
         this.stateValue = value;
       } else {
@@ -74,7 +74,7 @@ export default defineComponent({
       const { value, composing, isComposing } = e.target as any;
       if (((isComposing || composing) && this.lazy) || this.stateValue === value) return;
 
-      this.setValue((e.target as any).value, () => {
+      this.setValue((e.target as HTMLTextAreaElement).value, () => {
         this.resizableTextArea.resizeTextarea();
       });
       resolveOnChange(this.resizableTextArea.textArea, e, this.triggerChange);
@@ -91,7 +91,7 @@ export default defineComponent({
       this.resizableTextArea = resizableTextArea;
     },
 
-    saveClearableInput(clearableInput: any) {
+    saveClearableInput(clearableInput: HTMLTextAreaElement) {
       this.clearableInput = clearableInput;
     },
     handleReset(e: Event) {
@@ -124,7 +124,7 @@ export default defineComponent({
     const { style, class: customClass } = this.$attrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
-    let value = fixControlledValue(stateValue);
+    let value = fixControlledValue(stateValue) as string;
     // Max length value
     const hasMaxlength = Number(maxlength) > 0;
     value = hasMaxlength ? value.slice(0, maxlength) : value;

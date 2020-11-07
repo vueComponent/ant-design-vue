@@ -28,17 +28,17 @@ export default defineComponent({
     };
   },
   methods: {
-    saveInput(node: any) {
+    saveInput(node: HTMLInputElement) {
       this.input = node;
     },
-    handleChange(e) {
+    handleChange(e: Event) {
       if (e && e.target && e.type === 'click') {
-        this.$emit('search', e.target.value, e);
+        this.$emit('search', (e.target as HTMLInputElement).value, e);
       }
-      this.$emit('update:value', e.target.value);
+      this.$emit('update:value', (e.target as HTMLInputElement).value);
       this.$emit('change', e);
     },
-    handleSearch(e) {
+    handleSearch(e: Event) {
       if (this.loading || this.disabled) {
         return;
       }

@@ -75,6 +75,12 @@ async function validateRule(
     subRuleField = cloneRule.defaultField;
     delete cloneRule.defaultField;
   }
+  if (!rule.type && typeof rule.validator !== 'function' && typeof value !== 'string') {
+    warning(
+      false,
+      `Form rules must provide type property when validating a value which is not string type`,
+    );
+  }
 
   const validator = new AsyncValidator({
     [name]: [cloneRule],

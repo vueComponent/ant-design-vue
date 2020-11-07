@@ -55,9 +55,9 @@ export const ListProps = () => ({
 });
 
 const List = defineComponent({
+  name: 'AList',
   inheritAttrs: false,
   Item,
-  name: 'AList',
   props: initDefaultProps(ListProps(), {
     dataSource: [],
     bordered: false,
@@ -65,23 +65,6 @@ const List = defineComponent({
     loading: false,
     pagination: false,
   }),
-  created() {
-    provide('listContext', this);
-    this.defaultPaginationProps = {
-      current: 1,
-      pageSize: 10,
-      onChange: (page: number, pageSize: number) => {
-        const { pagination } = this;
-        this.paginationCurrent = page;
-        if (pagination && (pagination as any).onChange) {
-          (pagination as any).onChange(page, pageSize);
-        }
-      },
-      total: 0,
-    };
-    this.onPaginationChange = this.triggerPaginationEvent('onChange');
-    this.onPaginationShowSizeChange = this.triggerPaginationEvent('onShowSizeChange');
-  },
   setup() {
     return {
       keys: [],
@@ -100,6 +83,23 @@ const List = defineComponent({
       paginationCurrent: paginationObj.defaultCurrent || 1,
       paginationSize: paginationObj.defaultPageSize || 10,
     };
+  },
+  created() {
+    provide('listContext', this);
+    this.defaultPaginationProps = {
+      current: 1,
+      pageSize: 10,
+      onChange: (page: number, pageSize: number) => {
+        const { pagination } = this;
+        this.paginationCurrent = page;
+        if (pagination && (pagination as any).onChange) {
+          (pagination as any).onChange(page, pageSize);
+        }
+      },
+      total: 0,
+    };
+    this.onPaginationChange = this.triggerPaginationEvent('onChange');
+    this.onPaginationShowSizeChange = this.triggerPaginationEvent('onShowSizeChange');
   },
   methods: {
     triggerPaginationEvent(eventName) {

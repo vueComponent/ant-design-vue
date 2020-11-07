@@ -24,6 +24,7 @@ const getMomentObjectIfValid = date => {
 
 const Calendar = defineComponent({
   name: 'Calendar',
+  mixins: [BaseMixin, CommonMixin, CalendarMixin],
   inheritAttrs: false,
   props: {
     locale: PropTypes.object.def(enUs),
@@ -65,8 +66,6 @@ const Calendar = defineComponent({
     monthCellRender: PropTypes.func,
     monthCellContentRender: PropTypes.func,
   },
-
-  mixins: [BaseMixin, CommonMixin, CalendarMixin],
 
   data() {
     const props = this.$props;

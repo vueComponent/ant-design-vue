@@ -5,6 +5,7 @@ import interopDefault from '../_util/interopDefault';
 import { ModalLocale, changeConfirmLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { getSlot } from '../_util/props-util';
+import { withInstall } from '../_util/type';
 export interface Locale {
   locale: string;
   Pagination?: Object;
@@ -88,4 +89,4 @@ LocaleProvider.install = function(app: App) {
   return app;
 };
 
-export default LocaleProvider;
+export default withInstall(LocaleProvider);

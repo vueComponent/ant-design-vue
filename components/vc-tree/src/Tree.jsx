@@ -43,8 +43,13 @@ function getWatch(keys = []) {
 
 const Tree = defineComponent({
   name: 'Tree',
-  inheritAttrs: false,
   mixins: [BaseMixin],
+  provide() {
+    return {
+      vcTree: this,
+    };
+  },
+  inheritAttrs: false,
   props: initDefaultProps(
     {
       prefixCls: PropTypes.string,
@@ -134,11 +139,6 @@ const Tree = defineComponent({
     return {
       ...state,
       ...this.getDerivedState(getOptionProps(this), state),
-    };
-  },
-  provide() {
-    return {
-      vcTree: this,
     };
   },
 

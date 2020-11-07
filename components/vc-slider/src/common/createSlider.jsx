@@ -36,9 +36,9 @@ export default function createSlider(Component) {
     autofocus: PropTypes.looseBool,
   };
   return defineComponent({
-    name: 'createSlider',
-    inheritAttrs: false,
+    name: 'CreateSlider',
     mixins: [BaseMixin, Component],
+    inheritAttrs: false,
     // model: {
     //   prop: 'value',
     //   event: 'change',

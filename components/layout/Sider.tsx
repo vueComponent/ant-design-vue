@@ -71,6 +71,12 @@ export default defineComponent({
     collapsedWidth: 80,
   }),
   emits: ['breakpoint', 'update:collapsed', 'collapse'],
+  setup() {
+    return {
+      siderHook: inject<SiderHookProvider>('siderHook', {}),
+      configProvider: inject('configProvider', defaultConfigProvider),
+    };
+  },
   data() {
     const uniqueId = generateId('ant-sider-');
     let matchMedia: typeof window.matchMedia;
@@ -105,12 +111,6 @@ export default defineComponent({
   },
   created() {
     provide('layoutSiderContext', this); // menu组件中使用
-  },
-  setup() {
-    return {
-      siderHook: inject<SiderHookProvider>('siderHook', {}),
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
   },
 
   mounted() {

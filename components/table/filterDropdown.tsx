@@ -1,4 +1,4 @@
-import { watchEffect, reactive, defineComponent, nextTick } from 'vue';
+import { reactive, defineComponent, nextTick, computed, watch } from 'vue';
 import FilterFilled from '@ant-design/icons-vue/FilterFilled';
 import Menu, { SubMenu, Item as MenuItem } from '../vc-menu';
 import closest from 'dom-closest';
@@ -27,32 +27,44 @@ export default defineComponent({
   props: initDefaultProps(FilterMenuProps, {
     column: {},
   }),
-  setup(nextProps) {
-    let preProps = { ...nextProps };
-    const { selectedKeys, column } = nextProps;
+  setup(props) {
+    const sSelectedKeys = computed(() => props.selectedKeys);
+    const sVisible = computed(() => {
+      return 'filterDropdownVisible' in props.column ? props.column.filterDropdownVisible : false;
+    });
+    const sValueKeys = computed(() => generateValueMaps(props.column.filters));
     const state = reactive({
       neverShown: false,
-      sSelectedKeys: selectedKeys,
+      sSelectedKeys: sSelectedKeys.value,
       sKeyPathOfSelectedItem: {}, // 记录所有有选中子菜单的祖先菜单
-      sVisible: 'filterDropdownVisible' in column ? column.filterDropdownVisible : false,
-      sValueKeys: generateValueMaps(column.filters),
+      sVisible: sVisible.value,
+      sValueKeys: sValueKeys.value,
     });
-    watchEffect(
-      () => {
-        const { column } = nextProps;
-        if (!shallowequal(preProps.selectedKeys, nextProps.selectedKeys)) {
-          state.sSelectedKeys = nextProps.selectedKeys;
-        }
-        if (!shallowequal((preProps.column || {}).filters, (nextProps.column || {}).filters)) {
-          state.sValueKeys = generateValueMaps(nextProps.column.filters);
-        }
-        if ('filterDropdownVisible' in column) {
-          state.sVisible = column.filterDropdownVisible;
-        }
-        preProps = { ...nextProps };
-      },
-      { flush: 'sync' },
-    );
+    watch(sSelectedKeys, () => {
+      state.sSelectedKeys = sSelectedKeys.value;
+    });
+    watch(sVisible, () => {
+      state.sVisible = sVisible.value;
+    });
+    watch(sValueKeys, () => {
+      state.sValueKeys = sValueKeys.value;
+    });
+    // watchEffect(
+    //   () => {
+    //     const { column } = nextProps;
+    //     if (!shallowequal(preProps.selectedKeys, nextProps.selectedKeys)) {
+    //       state.sSelectedKeys = nextProps.selectedKeys;
+    //     }
+    //     if (!shallowequal((preProps.column || {}).filters, (nextProps.column || {}).filters)) {
+    //       state.sValueKeys = generateValueMaps(nextProps.column.filters);
+    //     }
+    //     if ('filterDropdownVisible' in column) {
+    //       state.sVisible = column.filterDropdownVisible;
+    //     }
+    //     preProps = { ...nextProps };
+    //   },
+    //   { flush: 'sync' },
+    // );
     return state;
   },
 

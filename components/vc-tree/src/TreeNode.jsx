@@ -14,8 +14,8 @@ const defaultTitle = '---';
 
 const TreeNode = defineComponent({
   name: 'TreeNode',
-  inheritAttrs: false,
   mixins: [BaseMixin],
+  inheritAttrs: false,
   __ANT_TREE_NODE: true,
   props: initDefaultProps(
     {
@@ -52,17 +52,17 @@ const TreeNode = defineComponent({
     },
     {},
   ),
+  setup() {
+    return {
+      vcTree: inject('vcTree', {}),
+      vcTreeNode: inject('vcTreeNode', {}),
+    };
+  },
 
   data() {
     this.children = null;
     return {
       dragNodeHighlight: false,
-    };
-  },
-  setup() {
-    return {
-      vcTree: inject('vcTree', {}),
-      vcTreeNode: inject('vcTreeNode', {}),
     };
   },
   created() {

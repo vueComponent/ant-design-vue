@@ -25,6 +25,11 @@ export default defineComponent({
     disabled: PropTypes.looseBool,
     onChange: PropTypes.func,
   },
+  setup() {
+    return {
+      configProvider: inject('configProvider', defaultConfigProvider),
+    };
+  },
 
   data() {
     const { value, defaultValue } = this;
@@ -37,11 +42,6 @@ export default defineComponent({
     value(val) {
       this.sValue = val || [];
     },
-  },
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
   },
   created() {
     provide('checkboxGroupContext', this);

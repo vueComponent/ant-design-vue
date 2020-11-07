@@ -455,7 +455,7 @@ export default function generateSelector<
 
       // Display options for OptionList
       const displayOptions = computed<OptionsType>(() => {
-        if (!mergedSearchValue.value || !mergedShowSearch) {
+        if (!mergedSearchValue.value || !mergedShowSearch.value) {
           return [...mergedOptions.value] as OptionsType;
         }
         const { optionFilterProp = 'value', mode, filterOption } = props;
@@ -969,7 +969,7 @@ export default function generateSelector<
           () => {
             if (triggerOpen.value) {
               const newWidth = Math.ceil(containerRef.value.offsetWidth);
-              if (containerWidth !== newWidth) {
+              if (containerWidth.value !== newWidth) {
                 containerWidth.value = newWidth;
               }
             }

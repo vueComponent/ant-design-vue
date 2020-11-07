@@ -81,6 +81,11 @@ export default defineComponent({
   inheritAttrs: false,
   props: AnchorProps,
   emits: ['change', 'click'],
+  setup() {
+    return {
+      configProvider: inject('configProvider', defaultConfigProvider),
+    };
+  },
   data() {
     // this.links = [];
     // this.sPrefixCls = '';
@@ -110,11 +115,6 @@ export default defineComponent({
       scrollTo: this.handleScrollTo,
     } as AntAnchor);
     provide('antAnchorContext', this);
-  },
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
   },
   mounted() {
     nextTick(() => {

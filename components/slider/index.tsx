@@ -53,17 +53,17 @@ const defaultTipFormatter = (value: number) => value.toString();
 
 const Slider = defineComponent({
   name: 'ASlider',
-  inheritAttrs: false,
-  emits: ['update:value', 'change'],
   mixins: [BaseMixin],
+  inheritAttrs: false,
+  props: {
+    ...SliderProps(),
+  },
+  emits: ['update:value', 'change'],
   setup() {
     return {
       vcSlider: null,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
-  },
-  props: {
-    ...SliderProps(),
   },
   data() {
     return {

@@ -2,15 +2,14 @@ import { App, defineComponent, Plugin } from 'vue';
 import T, { defaultTableProps } from './Table';
 import Column from './Column';
 import ColumnGroup from './ColumnGroup';
-import {} from './interface';
 import { getOptionProps, getKey, getPropsData, getSlot } from '../_util/props-util';
 
 const Table = defineComponent({
   name: 'ATable',
   Column: T.Column,
   ColumnGroup: T.ColumnGroup,
-  props: defaultTableProps,
   inheritAttrs: false,
+  props: defaultTableProps,
   methods: {
     normalize(elements = []) {
       const columns = [];

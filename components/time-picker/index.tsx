@@ -76,9 +76,8 @@ export const TimePickerProps = () => ({
 
 const TimePicker = defineComponent({
   name: 'ATimePicker',
-  inheritAttrs: false,
   mixins: [BaseMixin],
-  emits: ['update:value', 'update:open', 'change', 'openChange', 'focus', 'blur', 'keydown'],
+  inheritAttrs: false,
   props: initDefaultProps(TimePickerProps(), {
     align: {
       offset: [0, -2],
@@ -93,9 +92,7 @@ const TimePicker = defineComponent({
     focusOnOpen: true,
     allowClear: true,
   }),
-  created() {
-    provide('savePopupRef', this.savePopupRef);
-  },
+  emits: ['update:value', 'update:open', 'change', 'openChange', 'focus', 'blur', 'keydown'],
   setup() {
     return {
       popupRef: null,
@@ -123,6 +120,9 @@ const TimePicker = defineComponent({
       checkValidate('TimePicker', val, 'value', this.valueFormat);
       this.setState({ sValue: stringToMoment(val, this.valueFormat) });
     },
+  },
+  created() {
+    provide('savePopupRef', this.savePopupRef);
   },
   methods: {
     getDefaultFormat() {

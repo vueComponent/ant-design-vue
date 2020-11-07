@@ -213,7 +213,7 @@ const components = [
 
 const install = function(app: App) {
   components.forEach(component => {
-    app.use(component as typeof component & { install: () => void });
+    app.use(component);
   });
 
   app.config.globalProperties.$message = message;

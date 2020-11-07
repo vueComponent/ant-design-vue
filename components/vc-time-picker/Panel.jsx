@@ -34,8 +34,8 @@ function toNearestValidTime(time, hourOptions, minuteOptions, secondOptions) {
 
 const Panel = defineComponent({
   name: 'Panel',
-  inheritAttrs: false,
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     clearText: PropTypes.string,
     prefixCls: PropTypes.string.def('rc-time-picker-panel'),

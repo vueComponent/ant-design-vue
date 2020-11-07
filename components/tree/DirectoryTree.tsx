@@ -88,9 +88,6 @@ export default defineComponent({
       ...state,
     };
   },
-  created() {
-    this.onDebounceExpand = debounce(this.expandFolderNode, 200, { leading: true });
-  },
   watch: {
     expandedKeys(val) {
       this.setState({ _expandedKeys: val });
@@ -98,6 +95,9 @@ export default defineComponent({
     selectedKeys(val) {
       this.setState({ _selectedKeys: val });
     },
+  },
+  created() {
+    this.onDebounceExpand = debounce(this.expandFolderNode, 200, { leading: true });
   },
   methods: {
     handleExpand(expandedKeys, info) {

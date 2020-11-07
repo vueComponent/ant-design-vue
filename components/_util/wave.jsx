@@ -23,6 +23,12 @@ function isNotGrey(color) {
 export default defineComponent({
   name: 'Wave',
   props: ['insertExtraNode'],
+  setup() {
+    const configProvider = inject('configProvider', defaultConfigProvider);
+    return {
+      configProvider,
+    };
+  },
   mounted() {
     nextTick(() => {
       const node = findDOMNode(this);
@@ -31,12 +37,6 @@ export default defineComponent({
       }
       this.instance = this.bindAnimationEvent(node);
     });
-  },
-  setup() {
-    const configProvider = inject('configProvider', defaultConfigProvider);
-    return {
-      configProvider,
-    };
   },
   beforeUnmount() {
     if (this.instance) {

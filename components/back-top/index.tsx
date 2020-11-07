@@ -18,13 +18,13 @@ const props = backTopTypes();
 
 const BackTop = defineComponent({
   name: 'ABackTop',
-  inheritAttrs: false,
   mixins: [BaseMixin],
-  emits: ['click'],
+  inheritAttrs: false,
   props: {
     ...props,
     visibilityHeight: PropTypes.number.def(400),
   },
+  emits: ['click'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

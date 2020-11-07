@@ -19,14 +19,14 @@ export type IActionButtonProps = ExtractPropTypes<typeof ActionButtonProps>;
 export default defineComponent({
   mixins: [BaseMixin],
   props: ActionButtonProps,
-  data() {
-    return {
-      loading: false,
-    };
-  },
   setup() {
     return {
       timeoutId: undefined,
+    };
+  },
+  data() {
+    return {
+      loading: false,
     };
   },
   mounted() {

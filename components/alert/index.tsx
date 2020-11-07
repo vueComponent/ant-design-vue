@@ -59,9 +59,9 @@ export const AlertProps = {
 
 const Alert = defineComponent({
   name: 'AAlert',
+  mixins: [BaseMixin],
   inheritAttrs: false,
   props: AlertProps,
-  mixins: [BaseMixin],
   emits: ['close'],
   setup() {
     return {

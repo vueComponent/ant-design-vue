@@ -50,14 +50,14 @@ const AffixProps = {
 };
 const Affix = defineComponent({
   name: 'AAffix',
-  props: AffixProps,
   mixins: [BaseMixin],
+  props: AffixProps,
+  emits: ['change', 'testUpdatePosition'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
-  emits: ['change', 'testUpdatePosition'],
   data() {
     return {
       affixStyle: undefined,
@@ -67,25 +67,6 @@ const Affix = defineComponent({
       prevTarget: null,
       timeout: null,
     };
-  },
-  beforeMount() {
-    this.updatePosition = throttleByAnimationFrame(this.updatePosition);
-    this.lazyUpdatePosition = throttleByAnimationFrame(this.lazyUpdatePosition);
-  },
-  mounted() {
-    const { target } = this;
-    if (target) {
-      // [Legacy] Wait for parent component ref has its value.
-      // We should use target as directly element instead of function which makes element check hard.
-      this.timeout = setTimeout(() => {
-        addObserveTarget(target(), this);
-        // Mock Event object.
-        this.updatePosition();
-      });
-    }
-  },
-  updated() {
-    this.measure();
   },
   watch: {
     target(val) {
@@ -109,6 +90,25 @@ const Affix = defineComponent({
     offsetBottom() {
       this.updatePosition();
     },
+  },
+  beforeMount() {
+    this.updatePosition = throttleByAnimationFrame(this.updatePosition);
+    this.lazyUpdatePosition = throttleByAnimationFrame(this.lazyUpdatePosition);
+  },
+  mounted() {
+    const { target } = this;
+    if (target) {
+      // [Legacy] Wait for parent component ref has its value.
+      // We should use target as directly element instead of function which makes element check hard.
+      this.timeout = setTimeout(() => {
+        addObserveTarget(target(), this);
+        // Mock Event object.
+        this.updatePosition();
+      });
+    }
+  },
+  updated() {
+    this.measure();
   },
   beforeUnmount() {
     clearTimeout(this.timeout);

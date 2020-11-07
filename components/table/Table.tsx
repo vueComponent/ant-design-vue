@@ -170,13 +170,6 @@ export default defineComponent({
       filterDataCnt: 0,
     };
   },
-  created() {
-    const props = getOptionProps(this);
-    this.store = createStore({
-      selectedRowKeys: getRowSelection(props).selectedRowKeys || [],
-      selectionDirty: false,
-    });
-  },
   watch: {
     pagination: {
       handler(val) {
@@ -241,6 +234,13 @@ export default defineComponent({
       },
       deep: true,
     },
+  },
+  created() {
+    const props = getOptionProps(this);
+    this.store = createStore({
+      selectedRowKeys: getRowSelection(props).selectedRowKeys || [],
+      selectionDirty: false,
+    });
   },
   updated() {
     const { columns, sSortColumn: sortColumn, sSortOrder: sortOrder } = this;

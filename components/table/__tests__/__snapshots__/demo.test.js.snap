@@ -3,8 +3,12 @@
 exports[`renders ./antdv-demo/docs/table/demo/ajax.md correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
-    <!---->
-    <div class="ant-spin-container">
+    <div>
+      <div class="ant-spin ant-spin-spinning ant-table-without-pagination ant-table-spin-holder"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
+        <!---->
+      </div>
+    </div>
+    <div class="ant-spin-container ant-spin-blur">
       <div class="ant-table ant-table-default ant-table-empty ant-table-scroll-position-left">
         <!---->
         <div class="ant-table-content">

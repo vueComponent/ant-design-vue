@@ -31,14 +31,14 @@ export default function createPicker<P>(
   name: string,
 ): DefineComponent<any> {
   return defineComponent({
-    inheritAttrs: false,
     name,
+    mixins: [BaseMixin],
+    inheritAttrs: false,
     props: {
       ...props,
       allowClear: PropTypes.looseBool.def(true),
       showToday: PropTypes.looseBool.def(true),
     },
-    mixins: [BaseMixin],
     setup() {
       return {
         configProvider: inject('configProvider', defaultConfigProvider),

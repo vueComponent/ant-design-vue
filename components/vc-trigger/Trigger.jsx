@@ -76,6 +76,13 @@ export default defineComponent({
     stretch: PropTypes.string,
     alignPoint: PropTypes.looseBool, // Maybe we can support user pass position in the future
   },
+  setup() {
+    return {
+      vcTriggerContext: inject('vcTriggerContext', {}),
+      savePopupRef: inject('savePopupRef', noop),
+      dialogContext: inject('dialogContext', null),
+    };
+  },
   data() {
     const props = this.$props;
     let popupVisible;
@@ -111,13 +118,6 @@ export default defineComponent({
   },
   created() {
     provide('vcTriggerContext', this);
-  },
-  setup() {
-    return {
-      vcTriggerContext: inject('vcTriggerContext', {}),
-      savePopupRef: inject('savePopupRef', noop),
-      dialogContext: inject('dialogContext', null),
-    };
   },
   deactivated() {
     this.setPopupVisible(false);

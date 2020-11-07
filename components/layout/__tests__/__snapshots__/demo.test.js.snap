@@ -9,8 +9,8 @@ exports[`renders ./antdv-demo/docs/layout/demo/basic.md correctly 1`] = `
   </section>
   <section class="ant-layout">
     <header class="ant-layout-header">Header</header>
-    <section class="ant-layout">
-      <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
+    <section class="ant-layout ant-layout-has-sider">
+      <aside class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; flex: 0 0 200px;">
         <div class="ant-layout-sider-children">Sider</div>
         <!---->
       </aside>
@@ -20,17 +20,17 @@ exports[`renders ./antdv-demo/docs/layout/demo/basic.md correctly 1`] = `
   </section>
   <section class="ant-layout">
     <header class="ant-layout-header">Header</header>
-    <section class="ant-layout">
+    <section class="ant-layout ant-layout-has-sider">
       <main class="ant-layout-content">Content</main>
-      <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
+      <aside class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; flex: 0 0 200px;">
         <div class="ant-layout-sider-children">Sider</div>
         <!---->
       </aside>
     </section>
     <footer class="ant-layout-footer">Footer</footer>
   </section>
-  <section class="ant-layout">
-    <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
+  <section class="ant-layout ant-layout-has-sider">
+    <aside class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; flex: 0 0 200px;">
       <div class="ant-layout-sider-children">Sider</div>
       <!---->
     </aside>
@@ -44,8 +44,8 @@ exports[`renders ./antdv-demo/docs/layout/demo/basic.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/layout/demo/custom-trigger.md correctly 1`] = `
-<section class="ant-layout" id="components-layout-demo-custom-trigger">
-  <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
+<section class="ant-layout ant-layout-has-sider" id="components-layout-demo-custom-trigger">
+  <aside class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; flex: 0 0 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul role="menu" class="ant-menu-dark ant-menu-root ant-menu ant-menu-inline">
@@ -66,8 +66,8 @@ exports[`renders ./antdv-demo/docs/layout/demo/custom-trigger.md correctly 1`] =
     <!---->
   </aside>
   <section class="ant-layout">
-    <header class="ant-layout-header" style="background: rgb(255, 255, 255); padding: 0px;"><span tabindex="-1" role="img" aria-label="menu-fold" class="anticon anticon-menu-fold trigger"><svg class="" data-icon="menu-fold" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 000 13.8z"></path></svg></span></header>
-    <main class="ant-layout-content" style="margin: 24px 16px; padding: 24px; background: rgb(255, 255, 255); min-height: 280px;"> Content </main>
+    <header class="ant-layout-header" style="padding: 0px; background: rgb(255, 255, 255);"><span tabindex="-1" role="img" aria-label="menu-fold" class="anticon anticon-menu-fold trigger"><svg class="" data-icon="menu-fold" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 000 13.8z"></path></svg></span></header>
+    <main class="ant-layout-content" style="margin: 24px 16px; padding: 24px; min-height: 280px; background: rgb(255, 255, 255);"> Content </main>
   </section>
 </section>
 `;
@@ -124,8 +124,8 @@ exports[`renders ./antdv-demo/docs/layout/demo/fixed.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/layout/demo/fixed-sider.md correctly 1`] = `
-<section class="ant-layout" id="components-layout-demo-fixed-sider">
-  <aside class="ant-layout-sider ant-layout-sider-dark" style="overflow: auto; height: 100vh; position: fixed; left: 0px; flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
+<section class="ant-layout ant-layout-has-sider" id="components-layout-demo-fixed-sider">
+  <aside class="ant-layout-sider ant-layout-sider-dark" style="overflow: auto; height: 100vh; position: fixed; left: 0px; max-width: 200px; min-width: 200px; width: 200px; flex: 0 0 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul role="menu" class="ant-menu-dark ant-menu-root ant-menu ant-menu-inline">
@@ -166,7 +166,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/fixed-sider.md correctly 1`] = `
     <!---->
   </aside>
   <section class="ant-layout" style="margin-left: 200px;">
-    <header class="ant-layout-header" style="background: rgb(255, 255, 255); padding: 0px;"></header>
+    <header class="ant-layout-header" style="padding: 0px; background: rgb(255, 255, 255);"></header>
     <main class="ant-layout-content" style="margin: 24px 16px 0px; overflow: initial;">
       <div style="padding: 24px; background: rgb(255, 255, 255); text-align: center;"> ... <br> Really <br>...<br>...<br>...<br> long <br>...<br>...<br>...<br>...<br>...<br>... <br>...<br>...<br>...<br>...<br>...<br>... <br>...<br>...<br>...<br>...<br>...<br>... <br>...<br>...<br>...<br>...<br>...<br>... <br>...<br>...<br>...<br>...<br>...<br>... <br>...<br>...<br>...<br>...<br>...<br>... <br>...<br>...<br>...<br>...<br>...<br> content </div>
     </main>
@@ -176,11 +176,11 @@ exports[`renders ./antdv-demo/docs/layout/demo/fixed-sider.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/layout/demo/responsive.md correctly 1`] = `
-<section class="ant-layout" id="components-layout-demo-responsive">
-  <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
+<section class="ant-layout ant-layout-has-sider" id="components-layout-demo-responsive">
+  <aside class="ant-layout-sider ant-layout-sider-dark ant-layout-sider-collapsed ant-layout-sider-below ant-layout-sider-zero-width" style="max-width: 0px; min-width: 0px; width: 0px; flex: 0 0 0px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
-      <ul role="menu" class="ant-menu-dark ant-menu-root ant-menu ant-menu-inline">
+      <ul role="menu" class="ant-menu-dark ant-menu-inline-collapsed ant-menu-root ant-menu ant-menu-inline">
         <!---->
         <li role="menuitem" style="padding-left: 24px;" class="ant-menu-item"><span role="img" aria-label="user" class="anticon anticon-user"><svg class="" data-icon="user" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></path></svg></span><span class="nav-text">nav 1</span>
           <!---->
@@ -198,11 +198,10 @@ exports[`renders ./antdv-demo/docs/layout/demo/responsive.md correctly 1`] = `
           <!---->
         </li>
       </ul>
-    </div>
-    <!---->
+    </div><span class="ant-layout-sider-zero-width-trigger ant-layout-sider-zero-width-trigger-left"><span role="img" aria-label="bars" class="anticon anticon-bars"><svg class="" data-icon="bars" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024" focusable="false"><path d="M912 192H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 284H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 284H328c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h584c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM104 228a56 56 0 10112 0 56 56 0 10-112 0zm0 284a56 56 0 10112 0 56 56 0 10-112 0zm0 284a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span></span>
   </aside>
   <section class="ant-layout">
-    <header class="ant-layout-header" style="background: rgb(255, 255, 255); padding: 0px;"></header>
+    <header class="ant-layout-header" style="padding: 0px; background: rgb(255, 255, 255);"></header>
     <main class="ant-layout-content" style="margin: 24px 16px 0px;">
       <div style="padding: 24px; background: rgb(255, 255, 255); min-height: 360px;"> content </div>
     </main>
@@ -212,8 +211,8 @@ exports[`renders ./antdv-demo/docs/layout/demo/responsive.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/layout/demo/side.md correctly 1`] = `
-<section class="ant-layout" id="components-layout-demo-side" style="min-height: 100vh;">
-  <aside class="ant-layout-sider ant-layout-sider-dark ant-layout-sider-has-trigger" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
+<section class="ant-layout ant-layout-has-sider" id="components-layout-demo-side" style="min-height: 100vh;">
+  <aside class="ant-layout-sider ant-layout-sider-dark ant-layout-sider-has-trigger" style="max-width: 200px; min-width: 200px; width: 200px; flex: 0 0 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul role="menu" class="ant-menu-dark ant-menu-root ant-menu ant-menu-inline">
@@ -244,7 +243,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/side.md correctly 1`] = `
     <div class="ant-layout-sider-trigger" style="width: 200px;"><span role="img" aria-label="left" class="anticon anticon-left"><svg class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></div>
   </aside>
   <section class="ant-layout">
-    <header class="ant-layout-header" style="background: rgb(255, 255, 255); padding: 0px;"></header>
+    <header class="ant-layout-header" style="padding: 0px; background: rgb(255, 255, 255);"></header>
     <main class="ant-layout-content" style="margin: 0px 16px;">
       <div class="ant-breadcrumb" style="margin: 16px 0px;"><span><span class="ant-breadcrumb-link">User</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">Bill</span><span class="ant-breadcrumb-separator">/</span></span></div>
       <div style="padding: 24px; background: rgb(255, 255, 255); min-height: 360px;"> Bill is a cat. </div>
@@ -350,8 +349,8 @@ exports[`renders ./antdv-demo/docs/layout/demo/top-side.md correctly 1`] = `
   </header>
   <main class="ant-layout-content" style="padding: 0px 50px;">
     <div class="ant-breadcrumb" style="margin: 16px 0px;"><span><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></span></div>
-    <section class="ant-layout" style="padding: 24px 0px; background: rgb(255, 255, 255);">
-      <aside class="ant-layout-sider ant-layout-sider-dark" style="background: rgb(255, 255, 255); flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
+    <section class="ant-layout ant-layout-has-sider" style="padding: 24px 0px; background: rgb(255, 255, 255);">
+      <aside class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; background: rgb(255, 255, 255); flex: 0 0 200px;">
         <div class="ant-layout-sider-children">
           <ul role="menu" class="ant-menu-light ant-menu-root ant-menu ant-menu-inline" style="height: 100%;">
             <li class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu-selected" role="menuitem">
@@ -440,8 +439,8 @@ exports[`renders ./antdv-demo/docs/layout/demo/top-side-2.md correctly 1`] = `
       </li>
     </ul>
   </header>
-  <section class="ant-layout">
-    <aside class="ant-layout-sider ant-layout-sider-dark" style="background: rgb(255, 255, 255); flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
+  <section class="ant-layout ant-layout-has-sider">
+    <aside class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; background: rgb(255, 255, 255); flex: 0 0 200px;">
       <div class="ant-layout-sider-children">
         <ul role="menu" class="ant-menu-light ant-menu-root ant-menu ant-menu-inline" style="height: 100%; border-right: 0;">
           <li class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu-selected" role="menuitem">
@@ -482,7 +481,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/top-side-2.md correctly 1`] = `
     </aside>
     <section class="ant-layout" style="padding: 0px 24px 24px;">
       <div class="ant-breadcrumb" style="margin: 16px 0px;"><span><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></span></div>
-      <main class="ant-layout-content" style="background: rgb(255, 255, 255); padding: 24px; margin: 0px; min-height: 280px;"> Content </main>
+      <main class="ant-layout-content" style="padding: 24px; margin: 0px; min-height: 280px; background: rgb(255, 255, 255);"> Content </main>
     </section>
   </section>
 </section>

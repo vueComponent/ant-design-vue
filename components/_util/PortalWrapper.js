@@ -29,9 +29,6 @@ export default defineComponent({
     openCount = visible ? openCount + 1 : openCount;
     return {};
   },
-  updated() {
-    this.setWrapperClassName();
-  },
   watch: {
     visible(val) {
       openCount = val ? openCount + 1 : openCount - 1;
@@ -47,6 +44,9 @@ export default defineComponent({
         this.removeCurrentContainer(false);
       }
     },
+  },
+  updated() {
+    this.setWrapperClassName();
   },
   beforeUnmount() {
     const { visible } = this.$props;

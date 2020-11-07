@@ -47,7 +47,7 @@ const ARow = defineComponent<RowProps>({
 
     onMounted(() => {
       token = ResponsiveObserve.subscribe(screen => {
-        const currentGutter = gutterRef.value || 0;
+        const currentGutter = props.gutter || 0;
         if (
           (!Array.isArray(currentGutter) && typeof currentGutter === 'object') ||
           (Array.isArray(currentGutter) &&
@@ -70,8 +70,6 @@ const ARow = defineComponent<RowProps>({
       xl: true,
       xxl: true,
     });
-    const gutterRef = ref<Gutter | [Gutter, Gutter]>();
-    gutterRef.value = props.gutter;
 
     const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
 

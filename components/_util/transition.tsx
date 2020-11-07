@@ -67,8 +67,8 @@ if (process.env.NODE_ENV === 'test') {
     inheritAttrs: false,
     props: ['tag', 'class'],
     setup(props, { slots }) {
-      const { tag: Tag, ...rest } = props;
       return () => {
+        const { tag: Tag, ...rest } = props;
         const children = slots.default?.() || [];
         if (Tag) {
           return <Tag {...rest}>{children}</Tag>;

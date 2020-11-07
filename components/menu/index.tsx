@@ -51,13 +51,13 @@ export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
 
 const Menu = defineComponent({
   name: 'AMenu',
+  mixins: [BaseMixin],
   inheritAttrs: false,
   props: menuProps,
   Divider: { ...Divider, name: 'AMenuDivider' },
   Item: { ...Item, name: 'AMenuItem' },
   SubMenu: { ...SubMenu, name: 'ASubMenu' },
   ItemGroup: { ...ItemGroup, name: 'AMenuItemGroup' },
-  mixins: [BaseMixin],
   emits: [
     'update:selectedKeys',
     'update:openKeys',
@@ -68,10 +68,6 @@ const Menu = defineComponent({
     'select',
     'deselect',
   ],
-  created() {
-    provide('getInlineCollapsed', this.getInlineCollapsed);
-    provide('menuPropsContext', this.$props);
-  },
   setup() {
     const layoutSiderContext = inject<SiderContextProps>('layoutSiderContext', {});
     const layoutSiderCollapsed = toRef(layoutSiderContext, 'sCollapsed');
@@ -85,8 +81,23 @@ const Menu = defineComponent({
       inlineOpenKeys: [],
     };
   },
-  updated() {
-    this.propsUpdating = false;
+  data() {
+    const props: MenuProps = getOptionProps(this);
+    warning(
+      !('inlineCollapsed' in props && props.mode !== 'inline'),
+      'Menu',
+      "`inlineCollapsed` should only be used when Menu's `mode` is inline.",
+    );
+    let sOpenKeys;
+
+    if ('openKeys' in props) {
+      sOpenKeys = props.openKeys;
+    } else if ('defaultOpenKeys' in props) {
+      sOpenKeys = props.defaultOpenKeys;
+    }
+    return {
+      sOpenKeys,
+    };
   },
   // beforeUnmount() {
   //   raf.cancel(this.mountRafId);
@@ -107,23 +118,12 @@ const Menu = defineComponent({
       this.collapsedChange(val);
     },
   },
-  data() {
-    const props: MenuProps = getOptionProps(this);
-    warning(
-      !('inlineCollapsed' in props && props.mode !== 'inline'),
-      'Menu',
-      "`inlineCollapsed` should only be used when Menu's `mode` is inline.",
-    );
-    let sOpenKeys;
-
-    if ('openKeys' in props) {
-      sOpenKeys = props.openKeys;
-    } else if ('defaultOpenKeys' in props) {
-      sOpenKeys = props.defaultOpenKeys;
-    }
-    return {
-      sOpenKeys,
-    };
+  created() {
+    provide('getInlineCollapsed', this.getInlineCollapsed);
+    provide('menuPropsContext', this.$props);
+  },
+  updated() {
+    this.propsUpdating = false;
   },
   methods: {
     collapsedChange(val) {

@@ -18,6 +18,7 @@ const btnProps = buttonTypes();
 
 const Popconfirm = defineComponent({
   name: 'APopconfirm',
+  mixins: [BaseMixin],
   props: {
     ...tooltipProps,
     prefixCls: PropTypes.string,
@@ -36,13 +37,7 @@ const Popconfirm = defineComponent({
     onCancel: PropTypes.func,
     onVisibleChange: PropTypes.func,
   },
-  mixins: [BaseMixin],
   emits: ['update:visible', 'confirm', 'cancel', 'visibleChange'],
-  watch: {
-    visible(val) {
-      this.sVisible = val;
-    },
-  },
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -58,6 +53,11 @@ const Popconfirm = defineComponent({
       state.sVisible = props.defaultVisible;
     }
     return state;
+  },
+  watch: {
+    visible(val) {
+      this.sVisible = val;
+    },
   },
   methods: {
     onConfirmHandle(e) {

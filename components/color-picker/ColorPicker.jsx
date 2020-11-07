@@ -1,3 +1,4 @@
+/* eslint-disable */
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
 import BaseMixin from '../_util/BaseMixin';
@@ -12,6 +13,9 @@ let colors = '#194d33';
 export default {
   name: 'AColorPicker',
   mixins: [BaseMixin],
+  inject: {
+    configProvider: { default: () => defaultConfigProvider },
+  },
   model: {
     prop: 'value',
     event: 'change.value', //为了支持v-model直接返回颜色字符串 所以用了自定义的事件,与pickr自带change事件进行区分
@@ -30,9 +34,7 @@ export default {
     alpha: PropTypes.looseBool.def(false), //是否开启透明通道
     hue: PropTypes.looseBool.def(true), //是否开启色彩预选
   },
-  inject: {
-    configProvider: { default: () => defaultConfigProvider },
-  },
+
   data() {
     return {
       colors,
@@ -82,7 +84,7 @@ export default {
     this.createPickr();
     this.eventsBinding();
   },
-  destroyed() {
+  unmounted() {
     this.pickr.destroyAndRemove();
   },
   methods: {

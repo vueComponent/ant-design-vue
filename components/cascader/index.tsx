@@ -201,17 +201,10 @@ function flattenTree(
 const defaultDisplayRender = ({ labels }) => labels.join(' / ');
 
 const Cascader = defineComponent({
-  inheritAttrs: false,
   name: 'ACascader',
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: CascaderProps,
-  // model: {
-  //   prop: 'value',
-  //   event: 'change',
-  // },
-  created() {
-    provide('savePopupRef', this.savePopupRef);
-  },
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -243,6 +236,13 @@ const Cascader = defineComponent({
         this.setState({ flattenOptions: flattenTree(val, this.$props as any) });
       }
     },
+  },
+  // model: {
+  //   prop: 'value',
+  //   event: 'change',
+  // },
+  created() {
+    provide('savePopupRef', this.savePopupRef);
   },
   methods: {
     savePopupRef(ref: any) {

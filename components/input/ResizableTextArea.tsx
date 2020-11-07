@@ -61,7 +61,7 @@ const ResizableTextArea = defineComponent({
     raf.cancel(this.resizeFrameId);
   },
   methods: {
-    saveTextArea(textArea: any) {
+    saveTextArea(textArea: HTMLTextAreaElement) {
       this.textArea = textArea;
     },
     handleResize(size: any) {

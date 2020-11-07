@@ -7,16 +7,16 @@ import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
 
-export function fixControlledValue(value) {
+export function fixControlledValue(value: string | number) {
   if (typeof value === 'undefined' || value === null) {
     return '';
   }
   return value;
 }
 
-export function resolveOnChange(target, e, onChange) {
+export function resolveOnChange(target: HTMLInputElement, e: Event, onChange?: Function) {
   if (onChange) {
-    const event = e;
+    const event = e as any;
     if (e.type === 'click') {
       // click clear icon
       //event = Object.create(e);
@@ -40,7 +40,7 @@ export function resolveOnChange(target, e, onChange) {
   }
 }
 
-export function getInputClassName(prefixCls, size, disabled) {
+export function getInputClassName(prefixCls: string, size: string, disabled: boolean) {
   return classNames(prefixCls, {
     [`${prefixCls}-sm`]: size === 'small',
     [`${prefixCls}-lg`]: size === 'large',
@@ -91,12 +91,12 @@ export default defineComponent({
     }
   },
   methods: {
-    handleInputFocus(e) {
+    handleInputFocus(e: Event) {
       this.isFocused = true;
       this.onFocus && this.onFocus(e);
     },
 
-    handleInputBlur(e) {
+    handleInputBlur(e: Event) {
       this.isFocused = false;
       this.onBlur && this.onBlur(e);
     },
@@ -112,15 +112,15 @@ export default defineComponent({
       this.input.select();
     },
 
-    saveClearableInput(input: any) {
+    saveClearableInput(input: HTMLInputElement) {
       this.clearableInput = input;
     },
 
-    saveInput(input: any) {
+    saveInput(input: HTMLInputElement) {
       this.input = input;
     },
 
-    setValue(value: any, callback?: Function) {
+    setValue(value: string | number, callback?: Function) {
       if (this.stateValue === value) {
         return;
       }
@@ -134,7 +134,7 @@ export default defineComponent({
       });
     },
     triggerChange(e: Event) {
-      this.$emit('update:value', (e.target as any).value);
+      this.$emit('update:value', (e.target as HTMLInputElement).value);
       this.$emit('change', e);
       this.$emit('input', e);
     },

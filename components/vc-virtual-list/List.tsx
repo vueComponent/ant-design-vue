@@ -84,10 +84,10 @@ const List = defineComponent({
   },
   setup(props) {
     // ================================= MISC =================================
-    const useVirtual = computed(()=>{
+    const useVirtual = computed(() => {
       const { height, itemHeight, virtual } = props;
       return !!(virtual !== false && height && itemHeight);
-    })
+    });
     const inVirtual = computed(() => {
       const { height, itemHeight, data } = props;
       return useVirtual.value && data && itemHeight * data.length > height;
@@ -144,7 +144,7 @@ const List = defineComponent({
         };
       }
 
-       // Always use virtual scroll bar in avoid shaking
+      // Always use virtual scroll bar in avoid shaking
       if (!inVirtual.value) {
         return {
           scrollHeight: fillerInnerRef.value?.offsetHeight || 0,
@@ -327,7 +327,7 @@ const List = defineComponent({
       setInstance,
       sharedConfig,
       scrollBarRef,
-      fillerInnerRef
+      fillerInnerRef,
     };
   },
   render() {

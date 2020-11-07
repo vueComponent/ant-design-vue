@@ -125,9 +125,7 @@ const SingleSelector = defineComponent<SelectorProps>({
           {/* Display value */}
           {!combobox.value && item && !hasTextInput.value && (
             <span class={`${prefixCls}-selection-item`} title={title.value}>
-              <Fragment key={item.key || item.value}>
-                {item.label}
-              </Fragment>
+              <Fragment key={item.key || item.value}>{item.label}</Fragment>
             </span>
           )}
 

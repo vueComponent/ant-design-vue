@@ -184,7 +184,7 @@ export default defineComponent({
       return ptg * enableHeightRange;
     },
     // Not show scrollbar when height is large thane scrollHeight
-    getVisible () {
+    getVisible() {
       const { visible } = this.state;
       const { height, scrollHeight } = this.$props;
 

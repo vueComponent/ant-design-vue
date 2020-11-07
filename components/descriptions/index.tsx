@@ -9,6 +9,7 @@ import {
   ExtractPropTypes,
   onMounted,
   onBeforeUnmount,
+  Plugin,
 } from 'vue';
 import warning from '../_util/warning';
 import ResponsiveObserve, {

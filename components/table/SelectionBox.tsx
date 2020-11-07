@@ -10,15 +10,15 @@ export default defineComponent({
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: SelectionBoxProps,
-  data() {
-    return {
-      checked: false,
-    };
-  },
 
   setup() {
     return {
       unsubscribe: null,
+    };
+  },
+  data() {
+    return {
+      checked: false,
     };
   },
 

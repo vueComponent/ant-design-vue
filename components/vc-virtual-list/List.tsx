@@ -59,8 +59,8 @@ export interface ListState<T = object> {
 }
 
 const List = defineComponent({
-  inheritAttrs: false,
   name: 'List',
+  inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
     data: PropTypes.array,

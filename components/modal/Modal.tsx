@@ -159,6 +159,11 @@ export default defineComponent({
     visible: false,
     okType: 'primary',
   }),
+  setup() {
+    return {
+      configProvider: inject('configProvider', defaultConfigProvider),
+    };
+  },
   data() {
     return {
       sVisible: !!this.visible,
@@ -168,11 +173,6 @@ export default defineComponent({
     visible(val) {
       this.sVisible = val;
     },
-  },
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
   },
   methods: {
     handleCancel(e: MouseEvent) {

@@ -43,8 +43,8 @@ function getWatch(keys = []) {
 
 const Tree = defineComponent({
   name: 'Tree',
-  inheritAttrs: false,
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps(
     {
       prefixCls: PropTypes.string,

@@ -76,9 +76,6 @@ const Form = defineComponent({
     colon: true,
   }),
   Item: FormItem,
-  created() {
-    provide('FormContext', this);
-  },
   setup(props) {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -94,6 +91,9 @@ const Form = defineComponent({
         this.validateFields();
       }
     },
+  },
+  created() {
+    provide('FormContext', this);
   },
   methods: {
     addField(field: any) {

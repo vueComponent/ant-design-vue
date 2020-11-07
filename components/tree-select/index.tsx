@@ -21,8 +21,8 @@ const TreeSelect = defineComponent({
   SHOW_ALL,
   SHOW_PARENT,
   SHOW_CHILD,
-  inheritAttrs: false,
   name: 'ATreeSelect',
+  inheritAttrs: false,
   props: initDefaultProps(TreeSelectProps(), {
     transitionName: 'slide-up',
     choiceTransitionName: '',

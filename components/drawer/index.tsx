@@ -41,11 +41,6 @@ const Drawer = defineComponent({
     'onUpdate:visible': PropTypes.func,
   },
   mixins: [BaseMixin],
-  data() {
-    return {
-      sPush: false,
-    };
-  },
   setup(props) {
     const configProvider = inject('configProvider', defaultConfigProvider);
     return {
@@ -53,6 +48,11 @@ const Drawer = defineComponent({
       destroyClose: false,
       preVisible: props.visible,
       parentDrawer: inject('parentDrawer', null),
+    };
+  },
+  data() {
+    return {
+      sPush: false,
     };
   },
   beforeCreate() {

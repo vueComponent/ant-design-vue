@@ -66,6 +66,11 @@ export default function wrapPicker<P>(
         popupRef: undefined,
       };
     },
+    watch: {
+      value(val) {
+        checkValidate('DatePicker', val, 'value', this.valueFormat);
+      },
+    },
     created() {
       provide('savePopupRef', this.savePopupRef);
     },
@@ -78,11 +83,6 @@ export default function wrapPicker<P>(
           this.focus();
         });
       }
-    },
-    watch: {
-      value(val) {
-        checkValidate('DatePicker', val, 'value', this.valueFormat);
-      },
     },
     methods: {
       savePicker(node: any) {

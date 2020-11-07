@@ -21,18 +21,24 @@ export default defineComponent({
     onChange: PropTypes.func,
   },
   emits: ['update:value', 'change'],
-  data() {
-    const { value, defaultValue } = this;
-    return {
-      stateValue: value === undefined ? defaultValue : value,
-    };
-  },
   setup() {
     return {
       updatingValue: false,
       configProvider: inject('configProvider', defaultConfigProvider),
       radioGroupContext: null,
     };
+  },
+  data() {
+    const { value, defaultValue } = this;
+    return {
+      stateValue: value === undefined ? defaultValue : value,
+    };
+  },
+  watch: {
+    value(val) {
+      this.updatingValue = false;
+      this.stateValue = val;
+    },
   },
   // computed: {
   //   radioOptions() {
@@ -46,12 +52,6 @@ export default defineComponent({
   // },
   created() {
     this.radioGroupContext = provide('radioGroupContext', this);
-  },
-  watch: {
-    value(val) {
-      this.updatingValue = false;
-      this.stateValue = val;
-    },
   },
   methods: {
     onRadioChange(ev: RadioChangeEvent) {

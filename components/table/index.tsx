@@ -8,8 +8,8 @@ const Table = defineComponent({
   name: 'ATable',
   Column: T.Column,
   ColumnGroup: T.ColumnGroup,
-  props: defaultTableProps,
   inheritAttrs: false,
+  props: defaultTableProps,
   methods: {
     normalize(elements = []) {
       const columns = [];

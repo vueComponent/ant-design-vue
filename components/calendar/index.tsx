@@ -51,8 +51,8 @@ export const CalendarProps = {
 
 const Calendar = defineComponent({
   name: 'ACalendar',
-  inheritAttrs: false,
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: CalendarProps,
   setup() {
     return {

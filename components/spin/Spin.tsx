@@ -46,16 +46,16 @@ export default defineComponent({
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
-  created() {
-    this.originalUpdateSpinning = this.updateSpinning;
-    this.debouncifyUpdateSpinning(this.$props);
-  },
   data() {
     const { spinning, delay } = this;
     const shouldBeDelayed = shouldDelay(spinning, delay);
     return {
       sSpinning: spinning && !shouldBeDelayed,
     };
+  },
+  created() {
+    this.originalUpdateSpinning = this.updateSpinning;
+    this.debouncifyUpdateSpinning(this.$props);
   },
   mounted() {
     this.updateSpinning();

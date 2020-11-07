@@ -30,27 +30,20 @@ const TextAreaProps = {
 
 const ResizableTextArea = defineComponent({
   name: 'ResizableTextArea',
+  mixins: [BaseMixin],
   inheritAttrs: false,
   props: TextAreaProps,
-  data() {
-    return {
-      textareaStyles: {},
-      resizeStatus: RESIZE_STATUS_NONE,
-    };
-  },
-  mixins: [BaseMixin],
-  mounted() {
-    this.resizeTextarea();
-  },
-  beforeUnmount() {
-    raf.cancel(this.nextFrameActionId);
-    raf.cancel(this.resizeFrameId);
-  },
   setup() {
     return {
       nextFrameActionId: undefined,
       textArea: null,
       resizeFrameId: undefined,
+    };
+  },
+  data() {
+    return {
+      textareaStyles: {},
+      resizeStatus: RESIZE_STATUS_NONE,
     };
   },
   watch: {
@@ -59,6 +52,13 @@ const ResizableTextArea = defineComponent({
         this.resizeTextarea();
       });
     },
+  },
+  mounted() {
+    this.resizeTextarea();
+  },
+  beforeUnmount() {
+    raf.cancel(this.nextFrameActionId);
+    raf.cancel(this.resizeFrameId);
   },
   methods: {
     saveTextArea(textArea: any) {

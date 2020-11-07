@@ -68,8 +68,8 @@ function getWatch(keys = []) {
 }
 const Select = defineComponent({
   name: 'Select',
-  inheritAttrs: false,
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps(
     {
       prefixCls: PropTypes.string,

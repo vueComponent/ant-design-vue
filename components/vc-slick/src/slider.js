@@ -12,45 +12,13 @@ export default defineComponent({
   props: {
     ...defaultProps,
   },
-  inheritAttrs: false,
   mixins: [BaseMixin],
+  inheritAttrs: false,
   data() {
     this._responsiveMediaHandlers = [];
     return {
       breakpoint: null,
     };
-  },
-  methods: {
-    innerSliderRefHandler(ref) {
-      this.innerSlider = ref;
-    },
-    media(query, handler) {
-      // javascript handler for  css media query
-      const mql = window.matchMedia(query);
-      const listener = ({ matches }) => {
-        if (matches) {
-          handler();
-        }
-      };
-      mql.addListener(listener);
-      listener(mql);
-      this._responsiveMediaHandlers.push({ mql, query, listener });
-    },
-    slickPrev() {
-      this.innerSlider.slickPrev();
-    },
-    slickNext() {
-      this.innerSlider.slickNext();
-    },
-    slickGoTo(slide, dontAnimate = false) {
-      this.innerSlider.slickGoTo(slide, dontAnimate);
-    },
-    slickPause() {
-      this.innerSlider.pause('paused');
-    },
-    slickPlay() {
-      this.innerSlider.handleAutoPlay('play');
-    },
   },
   // handles responsive breakpoints
   beforeMount() {
@@ -91,6 +59,38 @@ export default defineComponent({
     this._responsiveMediaHandlers.forEach(function(obj) {
       obj.mql.removeListener(obj.listener);
     });
+  },
+  methods: {
+    innerSliderRefHandler(ref) {
+      this.innerSlider = ref;
+    },
+    media(query, handler) {
+      // javascript handler for  css media query
+      const mql = window.matchMedia(query);
+      const listener = ({ matches }) => {
+        if (matches) {
+          handler();
+        }
+      };
+      mql.addListener(listener);
+      listener(mql);
+      this._responsiveMediaHandlers.push({ mql, query, listener });
+    },
+    slickPrev() {
+      this.innerSlider.slickPrev();
+    },
+    slickNext() {
+      this.innerSlider.slickNext();
+    },
+    slickGoTo(slide, dontAnimate = false) {
+      this.innerSlider.slickGoTo(slide, dontAnimate);
+    },
+    slickPause() {
+      this.innerSlider.pause('paused');
+    },
+    slickPlay() {
+      this.innerSlider.handleAutoPlay('play');
+    },
   },
 
   render() {

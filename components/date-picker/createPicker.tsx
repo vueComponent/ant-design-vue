@@ -31,8 +31,8 @@ export default function createPicker<P>(
   name: string,
 ): DefineComponent<any> {
   return defineComponent({
-    inheritAttrs: false,
     name,
+    inheritAttrs: false,
     props: {
       ...props,
       allowClear: PropTypes.looseBool.def(true),

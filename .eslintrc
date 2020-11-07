@@ -10,7 +10,7 @@
   "parserOptions": {
     "parser": "babel-eslint"
   },
-  "extends": ["plugin:vue/recommended", "prettier"],
+  "extends": ["plugin:vue/vue3-recommended", "prettier"],
   "plugins": ["markdown"],
   "overrides": [
     {

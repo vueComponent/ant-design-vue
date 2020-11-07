@@ -57,8 +57,8 @@ export interface TransferLocale {
 
 const Transfer = defineComponent({
   name: 'ATransfer',
-  inheritAttrs: false,
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: initDefaultProps(TransferProps, {
     dataSource: [],
     locale: {},
@@ -86,9 +86,6 @@ const Transfer = defineComponent({
       targetSelectedKeys: selectedKeys.filter(key => targetKeys.indexOf(key) > -1),
     };
   },
-  mounted() {
-    // this.currentProps = { ...this.$props }
-  },
   watch: {
     targetKeys() {
       this.updateState();
@@ -112,6 +109,9 @@ const Transfer = defineComponent({
         });
       }
     },
+  },
+  mounted() {
+    // this.currentProps = { ...this.$props }
   },
   methods: {
     getSelectedKeysName(direction) {

@@ -93,6 +93,13 @@ export default defineComponent({
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: SelectionCheckboxAllProps,
+
+  setup() {
+    return {
+      defaultSelections: [],
+      unsubscribe: null,
+    };
+  },
   data() {
     const { $props: props } = this;
 
@@ -102,11 +109,12 @@ export default defineComponent({
     };
   },
 
-  setup() {
-    return {
-      defaultSelections: [],
-      unsubscribe: null,
-    };
+  watch: {
+    propsSymbol: {
+      handler() {
+        this.setCheckState(this.$props);
+      },
+    },
   },
 
   created() {
@@ -123,14 +131,6 @@ export default defineComponent({
             text: props.locale.selectInvert,
           },
         ];
-  },
-
-  watch: {
-    propsSymbol: {
-      handler() {
-        this.setCheckState(this.$props);
-      },
-    },
   },
 
   mounted() {

@@ -64,32 +64,6 @@ const Drawer = defineComponent({
       container: undefined,
     };
   },
-  mounted() {
-    nextTick(() => {
-      if (!windowIsUndefined) {
-        let passiveSupported = false;
-        window.addEventListener(
-          'test',
-          null,
-          Object.defineProperty({}, 'passive', {
-            get: () => {
-              passiveSupported = true;
-              return null;
-            },
-          }),
-        );
-        this.passive = passiveSupported ? { passive: false } : false;
-      }
-      const open = this.getOpen();
-      if (this.handler || open || this.sFirstEnter) {
-        this.getDefault(this.$props);
-        if (open) {
-          this.isOpenChange = true;
-        }
-        this.$forceUpdate();
-      }
-    });
-  },
   watch: {
     open(val) {
       if (val !== undefined && val !== this.preProps.open) {
@@ -117,6 +91,32 @@ const Drawer = defineComponent({
       }
       this.preProps.level = val;
     },
+  },
+  mounted() {
+    nextTick(() => {
+      if (!windowIsUndefined) {
+        let passiveSupported = false;
+        window.addEventListener(
+          'test',
+          null,
+          Object.defineProperty({}, 'passive', {
+            get: () => {
+              passiveSupported = true;
+              return null;
+            },
+          }),
+        );
+        this.passive = passiveSupported ? { passive: false } : false;
+      }
+      const open = this.getOpen();
+      if (this.handler || open || this.sFirstEnter) {
+        this.getDefault(this.$props);
+        if (open) {
+          this.isOpenChange = true;
+        }
+        this.$forceUpdate();
+      }
+    });
   },
   updated() {
     nextTick(() => {

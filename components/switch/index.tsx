@@ -31,6 +31,13 @@ const Switch = defineComponent({
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
+  created() {
+    warning(
+      hasProp(this, 'checked') || !('value' in this.$attrs),
+      'Switch',
+      '`value` is not validate prop, do you mean `checked`?',
+    );
+  },
   methods: {
     focus() {
       this.refSwitchNode?.focus();
@@ -41,13 +48,6 @@ const Switch = defineComponent({
     saveRef(c) {
       this.refSwitchNode = c;
     },
-  },
-  created() {
-    warning(
-      hasProp(this, 'checked') || !('value' in this.$attrs),
-      'Switch',
-      '`value` is not validate prop, do you mean `checked`?',
-    );
   },
 
   render() {

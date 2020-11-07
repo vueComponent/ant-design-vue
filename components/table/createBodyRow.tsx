@@ -15,16 +15,16 @@ export default function createBodyRow(Component = 'tr') {
     name: 'BodyRow',
     inheritAttrs: false,
     props: BodyRowProps,
+    setup() {
+      return {
+        unsubscribe: null,
+      };
+    },
     data() {
       const { selectedRowKeys } = this.store.getState();
 
       return {
         selected: selectedRowKeys.indexOf(this.rowKey) >= 0,
-      };
-    },
-    setup() {
-      return {
-        unsubscribe: null,
       };
     },
     mounted() {

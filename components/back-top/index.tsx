@@ -18,8 +18,8 @@ const props = backTopTypes();
 
 const BackTop = defineComponent({
   name: 'ABackTop',
-  inheritAttrs: false,
   mixins: [BaseMixin],
+  inheritAttrs: false,
   emits: ['click'],
   props: {
     ...props,

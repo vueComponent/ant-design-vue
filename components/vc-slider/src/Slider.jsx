@@ -8,8 +8,8 @@ import { defineComponent } from 'vue';
 
 const Slider = defineComponent({
   name: 'Slider',
-  inheritAttrs: false,
   mixins: [BaseMixin],
+  inheritAttrs: false,
   props: {
     defaultValue: PropTypes.number,
     value: PropTypes.number,

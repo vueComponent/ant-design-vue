@@ -260,13 +260,21 @@ export default {
           <Icon type="eye-o" />
         </a>
       ) : null;
-      const actions = listType === 'picture-card' && file.status !== 'uploading' && (
-        <span class={`${prefixCls}-list-item-actions`}>
-          {previewIcon}
-          {file.status === 'done' && downloadIcon}
-          {removeIcon}
-        </span>
-      );
+      const actions =
+        listType === 'picture-card' &&
+        file.status !== 'uploading' &&
+        (children => {
+          return (
+            <span class={`${prefixCls}-list-item-actions`}>
+              {previewIcon}
+              {file.status === 'done' && downloadIcon}
+              {children && children[0] && children[0] ? children[0] : null}
+              {children && children[1] && children[1] ? children[1] : null}
+              {children && children[2] && children[2] ? children[2] : null}
+              {removeIcon}
+            </span>
+          );
+        });
       let message;
       if (file.response && typeof file.response === 'string') {
         message = file.response;

@@ -9,6 +9,7 @@
   />
 </template>
 <script>
+import Icon from '../components/icon';
 export default {
   data() {
     return {
@@ -56,10 +57,14 @@ export default {
           onClick={e => this.handleSelect(file, e)}
           style={file.select === 'select' ? 'border-color:#1890ff;' : ''}
         >
-          <template slot="action">
-            <div>action</div>
-          </template>
+          <Icon type="delete" title="随便" onClick={() => this.handleAction(file)} />
+          <Icon type="delete" title="随便" onClick={() => this.handleAction(file)} />
         </div>
+        // <div
+        //   onClick={e => this.handleSelect(file, e)}
+        //   style={file.select === 'select' ? 'border-color:#1890ff;' : ''}
+        // >
+        // </div>
       );
     },
     close() {
@@ -86,6 +91,9 @@ export default {
     },
     handleChange(info) {
       this.defaultFileList = info.fileList;
+    },
+    handleAction(file) {
+      console.log('actions works==>', file);
     },
   },
 };

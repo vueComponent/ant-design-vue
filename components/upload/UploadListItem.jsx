@@ -24,12 +24,9 @@ export default {
     configProvider: { default: () => ConfigConsumerProps },
   },
   methods: {
-    actionsRender(actions, children, prefixCls) {
-      if (children) {
-        return children;
-      }
-      if (actions === undefined) return null;
-      return actions;
+    actionsRender(actions, children) {
+      if (!actions) throw new Error('you need use listType api with picture-card moudle');
+      return actions(children);
     },
   },
   render() {
@@ -45,8 +42,6 @@ export default {
       on,
       itemStyle,
     } = getOptionProps(this);
-    // console.log('uploadListItem==>children==>', children)
-    const child = 0;
     const itemProps = {
       class: infoUploadingClass,
       key: file.uid,
@@ -56,7 +51,7 @@ export default {
     return (
       <div {...itemProps}>
         <div class={`${prefixCls}-list-item-info`}>{iconAndPreview}</div>
-        {child !== 0 ? this.actionsRender(actions, child) : actions}
+        {children !== undefined ? this.actionsRender(actions, children) : actions(children)}
         <transition {...transitionProps}>{progress}</transition>
       </div>
     );

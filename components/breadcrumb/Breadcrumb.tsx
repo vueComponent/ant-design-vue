@@ -20,7 +20,7 @@ const BreadcrumbProps = {
   separator: PropTypes.VNodeChild,
   itemRender: {
     type: Function as PropType<
-      (route: Route, params: any, routes: Array<Route>, paths: Array<string>) => VueNode
+      (opt: { route: Route; params: any; routes: Route[]; paths: string[] }) => VueNode
     >,
   },
 };

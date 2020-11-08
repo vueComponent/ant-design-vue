@@ -10,6 +10,23 @@
 
 ---
 
+## 2.0.0-beta.15
+
+`2020-11-08`
+
+- 🌟 Optimize the Menu animation to make it smoother [#3095](https://github.com/vueComponent/ant-design-vue/issues/3095)
+- 🌟 Optimize VirtualList to avoid invalid render [#2e61e9](https://github.com/vueComponent/ant-design-vue/commit/2e61e9cb502f2bb6910f59abfb483fd2517e594f)
+- 🐞 Fix Menu overflowedIndicator not taking effect [#689113](https://github.com/vueComponent/ant-design-vue/commit/689113b3c9c19e929607567a4c8252c6511bff5c)
+- 🐞 Select
+  - Fix the issue that dropdownRender does not support slot [#3098](https://github.com/vueComponent/ant-design-vue/issues/3098)
+  - Fix the issue of abnormal empty values ​​in tag mode [#3100](https://github.com/vueComponent/ant-design-vue/issues/3100)
+  - Fix the problem that the selected item is not updated in single selection mode [#3099](https://github.com/vueComponent/ant-design-vue/issues/3099)
+  - Fix foucs status not taking effect in special scenarios [#3099](https://github.com/vueComponent/ant-design-vue/issues/3099)
+- 🐞 Fix DatePicker default formatting invalid problem [#3091](https://github.com/vueComponent/ant-design-vue/issues/3091)
+- 🐞 Fix Table customRow configuration event not taking effect [#3121](https://github.com/vueComponent/ant-design-vue/issues/3121)
+- 🐞 Fix the style of TreeSelect search box [ee4cd3c](https://github.com/vueComponent/ant-design-vue/commit/ ee4cd3c35a84658cbbb148ce368bc247a927d528)
+- 🐞 Fix Ts type error or missing problem
+
 ## 2.0.0-beta.13
 
 `2020-11-02`

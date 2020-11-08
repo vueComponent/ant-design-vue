@@ -10,6 +10,23 @@
 
 ---
 
+## 2.0.0-beta.15
+
+`2020-11-08`
+
+- 🌟 优化 Menu 动画，更加流畅 [#3095](https://github.com/vueComponent/ant-design-vue/issues/3095)
+- 🌟 优化 VirtualList，避免无效 render [#2e61e9](https://github.com/vueComponent/ant-design-vue/commit/2e61e9cb502f2bb6910f59abfb483fd2517e594f)
+- 🐞 修复 Menu overflowedIndicator 未生效问题 [#689113](https://github.com/vueComponent/ant-design-vue/commit/689113b3c9c19e929607567a4c8252c6511bff5c)
+- 🐞 Select
+  - 修复 dropdownRender 不支持 slot 问题 [#3098](https://github.com/vueComponent/ant-design-vue/issues/3098)
+  - 修复 tag 模式下，空值异常问题 [#3100](https://github.com/vueComponent/ant-design-vue/issues/3100)
+  - 修复单选模式下选择项不更新问题 [#3099](https://github.com/vueComponent/ant-design-vue/issues/3099)
+  - 修复特殊场景下 foucs 状态不生效问题 [#3099](https://github.com/vueComponent/ant-design-vue/issues/3099)
+- 🐞 修复 DatePicker 默认格式化失效问题 [#3091](https://github.com/vueComponent/ant-design-vue/issues/3091)
+- 🐞 修复 Table customRow 配置事件不生效问题 [#3121](https://github.com/vueComponent/ant-design-vue/issues/3121)
+- 🐞 修复 TreeSelect 搜索框样式错乱问题 [ee4cd3c](https://github.com/vueComponent/ant-design-vue/commit/ ee4cd3c35a84658cbbb148ce368bc247a927d528)
+- 🐞 修复 Ts 类型错误或缺失问题
+
 ## 2.0.0-beta.13
 
 `2020-11-02`

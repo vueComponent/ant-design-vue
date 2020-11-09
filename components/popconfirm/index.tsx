@@ -60,17 +60,17 @@ const Popconfirm = defineComponent({
     },
   },
   methods: {
-    onConfirmHandle(e) {
+    onConfirmHandle(e: Event) {
       this.setVisible(false, e);
       this.$emit('confirm', e);
     },
 
-    onCancelHandle(e) {
+    onCancelHandle(e: Event) {
       this.setVisible(false, e);
       this.$emit('cancel', e);
     },
 
-    onVisibleChangeHandle(sVisible) {
+    onVisibleChangeHandle(sVisible: boolean) {
       const { disabled } = this.$props;
       if (disabled) {
         return;

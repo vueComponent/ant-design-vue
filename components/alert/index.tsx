@@ -34,7 +34,7 @@ const iconMapOutlined = {
 
 export const AlertProps = {
   /**
-   * Type of Alert styles, options:`success`, `info`, `warning`, `error`
+   * Type of Alert styles, options: `success`, `info`, `warning`, `error`
    */
   type: PropTypes.oneOf(tuple('success', 'info', 'warning', 'error')),
   /** Whether Alert can be closed */

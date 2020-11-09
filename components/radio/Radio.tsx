@@ -36,10 +36,10 @@ export default defineComponent({
   },
   methods: {
     focus() {
-      (this.$refs.vcCheckbox as any).focus();
+      (this.$refs.vcCheckbox as HTMLInputElement).focus();
     },
     blur() {
-      (this.$refs.vcCheckbox as any).blur();
+      (this.$refs.vcCheckbox as HTMLInputElement).blur();
     },
     handleChange(event: RadioChangeEvent) {
       const targetChecked = event.target.checked;

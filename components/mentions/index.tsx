@@ -151,10 +151,10 @@ const Mentions = defineComponent({
       return filterOption;
     },
     focus() {
-      (this.$refs.vcMentions as any).focus();
+      (this.$refs.vcMentions as HTMLTextAreaElement).focus();
     },
     blur() {
-      (this.$refs.vcMentions as any).blur();
+      (this.$refs.vcMentions as HTMLTextAreaElement).blur();
     },
   },
   render() {

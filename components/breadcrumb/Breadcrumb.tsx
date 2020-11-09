@@ -20,12 +20,12 @@ const BreadcrumbProps = {
   separator: PropTypes.VNodeChild,
   itemRender: {
     type: Function as PropType<
-      (opt: { route: Route; params: any; routes: Route[]; paths: string[] }) => VueNode
+      (opt: { route: Route; params: unknown; routes: Route[]; paths: string[] }) => VueNode
     >,
   },
 };
 
-function getBreadcrumbName(route: Route, params: any) {
+function getBreadcrumbName(route: Route, params: unknown) {
   if (!route.breadcrumbName) {
     return null;
   }
@@ -38,7 +38,7 @@ function getBreadcrumbName(route: Route, params: any) {
 }
 function defaultItemRender(opt: {
   route: Route;
-  params: any;
+  params: unknown;
   routes: Route[];
   paths: string[];
 }): VueNode {
@@ -57,7 +57,7 @@ export default defineComponent({
     };
   },
   methods: {
-    getPath(path: string, params: any) {
+    getPath(path: string, params: unknown) {
       path = (path || '').replace(/^\//, '');
       Object.keys(params).forEach(key => {
         path = path.replace(`:${key}`, params[key]);
@@ -65,7 +65,7 @@ export default defineComponent({
       return path;
     },
 
-    addChildPath(paths: string[], childPath = '', params: any) {
+    addChildPath(paths: string[], childPath = '', params: unknown) {
       const originalPaths = [...paths];
       const path = this.getPath(childPath, params);
       if (path) {

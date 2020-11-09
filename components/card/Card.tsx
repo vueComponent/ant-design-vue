@@ -71,7 +71,7 @@ const Card = defineComponent({
       this.$emit('tabChange', key);
     },
     isContainGrid(obj: VNode[] = []) {
-      let containGrid;
+      let containGrid: boolean;
       obj.forEach(element => {
         if (element && isPlainObject(element.type) && (element.type as any).__ANT_CARD_GRID) {
           containGrid = true;

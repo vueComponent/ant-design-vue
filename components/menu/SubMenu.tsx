@@ -22,7 +22,7 @@ export default defineComponent({
     };
   },
   methods: {
-    onKeyDown(e) {
+    onKeyDown(e: Event) {
       (this.$refs.subMenu as any).onKeyDown(e);
     },
   },

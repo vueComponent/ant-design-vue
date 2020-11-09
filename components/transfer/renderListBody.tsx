@@ -4,6 +4,7 @@ import ListItem from './ListItem';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { findDOMNode } from '../_util/props-util';
 import { getTransitionGroupProps, TransitionGroup } from '../_util/transition';
+import { DataSourceItem } from './list';
 const ListBody = defineComponent({
   name: 'ListBody',
   inheritAttrs: false,
@@ -61,12 +62,12 @@ const ListBody = defineComponent({
     raf.cancel(this.lazyId);
   },
   methods: {
-    handleItemSelect(item) {
+    handleItemSelect(item: DataSourceItem) {
       const { selectedKeys } = this.$props;
       const checked = selectedKeys.indexOf(item.key) >= 0;
       this.$emit('itemSelect', item.key, !checked);
     },
-    handleScroll(e) {
+    handleScroll(e: Event) {
       this.$emit('scroll', e);
     },
   },

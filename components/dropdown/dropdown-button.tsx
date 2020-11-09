@@ -1,4 +1,4 @@
-import { provide, inject, defineComponent } from 'vue';
+import { provide, inject, defineComponent, VNode } from 'vue';
 import Button from '../button';
 import classNames from '../_util/classNames';
 import buttonTypes from '../button/buttonTypes';
@@ -45,13 +45,13 @@ export default defineComponent({
     provide('savePopupRef', this.savePopupRef);
   },
   methods: {
-    savePopupRef(ref: any) {
+    savePopupRef(ref: VNode) {
       this.popupRef = ref;
     },
-    handleClick(e) {
+    handleClick(e: Event) {
       this.$emit('click', e);
     },
-    handleVisibleChange(val) {
+    handleVisibleChange(val: boolean) {
       this.$emit('update:visible', val);
       this.$emit('visibleChange', val);
     },

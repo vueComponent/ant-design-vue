@@ -4,64 +4,64 @@ exports[`renders ./antdv-demo/docs/carousel/demo/autoplay.md correctly 1`] = `
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized">
     <div class="slick-list">
-      <div class="slick-track" style="width: 900%; left: -100%;">
-        <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+      <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+        <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>4</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>1</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>2</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>3</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>4</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>1</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>2</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>3</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>4</h3>
@@ -84,64 +84,64 @@ exports[`renders ./antdv-demo/docs/carousel/demo/basic.md correctly 1`] = `
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized">
     <div class="slick-list">
-      <div class="slick-track" style="width: 900%; left: -100%;">
-        <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+      <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+        <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>4</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>1</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>2</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>3</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>4</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>1</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>2</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>3</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>4</h3>
@@ -168,64 +168,64 @@ exports[`renders ./antdv-demo/docs/carousel/demo/customArrows.md correctly 1`] =
           <path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path>
         </svg></i></div>
     <div class="slick-list">
-      <div class="slick-track" style="width: 900%; left: -100%;">
-        <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+      <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+        <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>4</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>1</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>2</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>3</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>4</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>1</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>2</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>3</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>4</h3>
@@ -252,48 +252,48 @@ exports[`renders ./antdv-demo/docs/carousel/demo/customPaging.md correctly 1`] =
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized"><button type="button" class="slick-arrow slick-prev" style="display: block;"> Previous</button>
     <div class="slick-list">
-      <div class="slick-track" style="width: 900%; left: -100%;">
-        <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+      <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+        <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
           </div>
         </div>
-        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg"></div>
           </div>
         </div>
-        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg"></div>
           </div>
         </div>
-        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract03.jpg"></div>
           </div>
         </div>
-        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
           </div>
         </div>
-        <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg"></div>
           </div>
         </div>
-        <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg"></div>
           </div>
         </div>
-        <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract03.jpg"></div>
           </div>
         </div>
-        <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
           </div>
@@ -314,29 +314,29 @@ exports[`renders ./antdv-demo/docs/carousel/demo/fade.md correctly 1`] = `
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized">
     <div class="slick-list">
-      <div class="slick-track" style="width: 900%; left: -100%;">
-        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 11.11111111111111%; position: relative; left: 0px; opacity: 1; transition: opacity 500ms ease, visibility 500ms ease;">
+      <div class="slick-track" style="opacity: 1;">
+        <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 0px; position: relative; left: 0px; opacity: 1; transition: opacity 500ms ease, visibility 500ms ease;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>1</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%; position: relative; left: -11px; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease;">
+        <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px; position: relative; left: 0px; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>2</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%; position: relative; left: -22px; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease;">
+        <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px; position: relative; left: 0px; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>3</h3>
             </div>
           </div>
         </div>
-        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%; position: relative; left: -33px; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease;">
+        <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px; position: relative; left: 0px; opacity: 0; transition: opacity 500ms ease, visibility 500ms ease;">
           <div>
             <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
               <h3>4</h3>
@@ -369,64 +369,64 @@ exports[`renders ./antdv-demo/docs/carousel/demo/position.md correctly 1`] = `
   <div class="ant-carousel">
     <div class="slick-slider slick-initialized">
       <div class="slick-list">
-        <div class="slick-track" style="width: 900%; left: -100%;">
-          <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+        <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
+          <div tabindex="-1" data-index="-1" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
             <div>
               <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
                 <h3>4</h3>
               </div>
             </div>
           </div>
-          <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 11.11111111111111%;">
+          <div tabindex="-1" data-index="0" class="slick-slide slick-active slick-current" style="outline: none; width: 0px;">
             <div>
               <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
                 <h3>1</h3>
               </div>
             </div>
           </div>
-          <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+          <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
             <div>
               <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
                 <h3>2</h3>
               </div>
             </div>
           </div>
-          <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+          <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
             <div>
               <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
                 <h3>3</h3>
               </div>
             </div>
           </div>
-          <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 11.11111111111111%;">
+          <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
             <div>
               <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
                 <h3>4</h3>
               </div>
             </div>
           </div>
-          <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+          <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
             <div>
               <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
                 <h3>1</h3>
               </div>
             </div>
           </div>
-          <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+          <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
             <div>
               <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
                 <h3>2</h3>
               </div>
             </div>
           </div>
-          <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+          <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
             <div>
               <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
                 <h3>3</h3>
               </div>
             </div>
           </div>
-          <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 11.11111111111111%;">
+          <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
             <div>
               <div tabindex="-1" class="" style="width: 100%; display: inline-block;">
                 <h3>4</h3>

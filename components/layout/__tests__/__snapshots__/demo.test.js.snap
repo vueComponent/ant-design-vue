@@ -9,7 +9,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/basic.md correctly 1`] = `
   </section>
   <section class="ant-layout">
     <header class="ant-layout-header">Header</header>
-    <section class="ant-layout">
+    <section class="ant-layout ant-layout-has-sider">
       <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
         <div class="ant-layout-sider-children">Sider</div>
       </aside>
@@ -19,7 +19,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/basic.md correctly 1`] = `
   </section>
   <section class="ant-layout">
     <header class="ant-layout-header">Header</header>
-    <section class="ant-layout">
+    <section class="ant-layout ant-layout-has-sider">
       <main class="ant-layout-content">Content</main>
       <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
         <div class="ant-layout-sider-children">Sider</div>
@@ -27,7 +27,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/basic.md correctly 1`] = `
     </section>
     <footer class="ant-layout-footer">Footer</footer>
   </section>
-  <section class="ant-layout">
+  <section class="ant-layout ant-layout-has-sider">
     <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
       <div class="ant-layout-sider-children">Sider</div>
     </aside>
@@ -41,7 +41,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/basic.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/layout/demo/custom-trigger.md correctly 1`] = `
-<section class="ant-layout" id="components-layout-demo-custom-trigger">
+<section class="ant-layout ant-layout-has-sider" id="components-layout-demo-custom-trigger">
   <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
@@ -110,7 +110,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/fixed.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/layout/demo/fixed-sider.md correctly 1`] = `
-<section class="ant-layout" id="components-layout-demo-fixed-sider">
+<section class="ant-layout ant-layout-has-sider" id="components-layout-demo-fixed-sider">
   <aside class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; overflow: auto; height: 100vh; position: fixed; left: 0px; flex: 0 0 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
@@ -169,7 +169,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/fixed-sider.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/layout/demo/responsive.md correctly 1`] = `
-<section class="ant-layout" id="components-layout-demo-responsive">
+<section class="ant-layout ant-layout-has-sider" id="components-layout-demo-responsive">
   <aside class="ant-layout-sider ant-layout-sider-dark" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
@@ -204,7 +204,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/responsive.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/layout/demo/side.md correctly 1`] = `
-<section class="ant-layout" id="components-layout-demo-side" style="min-height: 100vh;">
+<section class="ant-layout ant-layout-has-sider" id="components-layout-demo-side" style="min-height: 100vh;">
   <aside class="ant-layout-sider ant-layout-sider-dark ant-layout-sider-has-trigger" style="flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
@@ -317,7 +317,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/top-side.md correctly 1`] = `
   </header>
   <main class="ant-layout-content" style="padding: 0px 50px;">
     <div class="ant-breadcrumb" style="margin: 16px 0px;"><span class=""><span class="ant-breadcrumb-link">Home</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">List</span><span class="ant-breadcrumb-separator">/</span></span><span class=""><span class="ant-breadcrumb-link">App</span><span class="ant-breadcrumb-separator">/</span></span></div>
-    <section class="ant-layout" style="padding: 24px 0px; background: rgb(255, 255, 255);">
+    <section class="ant-layout ant-layout-has-sider" style="padding: 24px 0px; background: rgb(255, 255, 255);">
       <aside class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; flex: 0 0 200px; background: rgb(255, 255, 255);">
         <div class="ant-layout-sider-children">
           <ul role="menu" class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" style="height: 100%;">
@@ -388,7 +388,7 @@ exports[`renders ./antdv-demo/docs/layout/demo/top-side-2.md correctly 1`] = `
       </li>
     </ul>
   </header>
-  <section class="ant-layout">
+  <section class="ant-layout ant-layout-has-sider">
     <aside class="ant-layout-sider ant-layout-sider-dark" style="max-width: 200px; min-width: 200px; width: 200px; flex: 0 0 200px; background: rgb(255, 255, 255);">
       <div class="ant-layout-sider-children">
         <ul role="menu" class="ant-menu ant-menu-inline ant-menu-root ant-menu-light" style="height: 100%; border-right: 0;">

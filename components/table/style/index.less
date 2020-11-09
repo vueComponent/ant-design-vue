@@ -226,12 +226,11 @@
 
   &-tbody > tr > td {
     border-bottom: @border-width-base @border-style-base @border-color-split;
-    transition: all 0.3s, border 0s;
+    transition: background 0.3s;
   }
 
   &-thead > tr,
   &-tbody > tr {
-    transition: all 0.3s, height 0s;
     &.@{table-prefix-cls}-row-hover,
     &:hover {
       &:not(.@{table-prefix-cls}-expanded-row):not(.@{table-prefix-cls}-row-selected) > td {

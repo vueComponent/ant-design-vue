@@ -49,18 +49,24 @@ const Space = {
 
     const mergedAlign = align === undefined && direction === 'horizontal' ? 'center' : align;
 
-    const someSpaceClass = {
-      [prefixCls]: true,
-      [`${prefixCls}-${direction}`]: true,
-      // [`${prefixCls}-rtl`]: directionConfig === 'rtl',
-      [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
-    };
+    const someSpaceClass = [
+      {
+        [prefixCls]: true,
+        [`${prefixCls}-${direction}`]: true,
+        // [`${prefixCls}-rtl`]: directionConfig === 'rtl',
+        [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
+      },
+    ];
+
+    if (content.data.class) {
+      someSpaceClass.push(content.data.class);
+    }
 
     const itemClassName = `${prefixCls}-item`;
     const marginDirection = 'marginRight'; // directionConfig === 'rtl' ? 'marginLeft' : 'marginRight';
 
     return (
-      <div class={someSpaceClass}>
+      <div {...content.data} class={someSpaceClass}>
         {items.map((child, i) => (
           <div
             class={itemClassName}

@@ -40,6 +40,7 @@ English | [简体中文](./README-zh_CN.md)
 - An enterprise-class UI design system for desktop applications.
 - A set of high-quality Vue components out of the box.
 - Shared [Ant Design of React](https://ant.design/docs/spec/introduce) design resources.
+- Support Vue 3 from [2.x](https://2x.antdv.com/)
 
 ## Environment Support
 

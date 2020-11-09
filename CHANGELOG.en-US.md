@@ -10,6 +10,45 @@
 
 ---
 
+## 1.7.2
+
+`2020-11-06`
+
+- 🐞 Fix the problem of incorrect height of Textarea component [#2974](https://github.com/vueComponent/ant-design-vue/issues/2974)
+- 🐞 Roll back Menu component to version 1.6.5 to be consistent [#3112](https://github.com/vueComponent/ant-design-vue/issues/3112)
+- 🐞 Fix TreeSelect throw error [#3126](https://github.com/vueComponent/ant-design-vue/issues/3126)
+
+## 1.7.1
+
+`2020-10-28`
+
+- 🐞 Fix Menu component, wrong display Tooltip prompt problem
+
+## 1.7.0
+
+`2020-10-28`
+
+- 🌟 Recursive Menu component, supports arbitrary nesting of other elements [#1452](https://github.com/vueComponent/ant-design-vue/issues/1452)
+- 🇮🇪 Add Irish language internationalization support
+- 🐞 Fix webpack 5 compatibility issues.
+- 🐞 Fix the problem that the Upload method attribute does not take effect [#2837](https://github.com/vueComponent/ant-design-vue/issues/2837)
+- 🐞 Fix the problem that Space does not declare properties and does not mount the root node [#2902](https://github.com/vueComponent/ant-design-vue/issues/2902)
+- 🐞 Fix the problem that Table component filter does not support number type [#3052](https://github.com/vueComponent/ant-design-vue/issues/3052)
+- 🐞 Fix Table fixed column ellipsis not working issue [#2916](https://github.com/vueComponent/ant-design-vue/issues/2916)
+- 🐞 Fix AutoComplete component, need two tab keys to focus issue [#1438](https://github.com/vueComponent/ant-design-vue/issues/1438)
+- 🐞 Fix the problem that TreeSelect cannot customize slot [#2827](https://github.com/vueComponent/ant-design-vue/issues/2827)
+
+## 1.6.5
+
+`2020-08-25`
+
+- 🔥🔥🔥 Vue 3 compatible [2.0.0-beta.3](https://2x.antdv.com/)
+- 🔥 Add Space component [#2669](https://github.com/vueComponent/ant-design-vue/pull/2669)
+- 🌟 Optimize zh_TW language pack [#2679](https://github.com/vueComponent/ant-design-vue/pull/2679)
+- 🐞 Fix breadcrumb `Breadcrumb` repeated key problem [#2505](https://github.com/vueComponent/ant-design-vue/issues/2505)
+- 🐞 Fix the problem of misalignment in the fixed column of Table [#1493](https://github.com/vueComponent/ant-design-vue/issues/1493)
+- 🐞 Fix the problem that the Enter key will report an error when the Mentions component is empty [#2662](https://github.com/vueComponent/ant-design-vue/pull/2662)
+
 ## 1.6.4
 
 `2020-07-21`

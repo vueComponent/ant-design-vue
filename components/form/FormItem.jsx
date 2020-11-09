@@ -312,7 +312,7 @@ export default {
       let classes = `${prefixCls}-item-control`;
       if (validateStatus) {
         classes = classNames(`${prefixCls}-item-control`, {
-          'has-feedback': props.hasFeedback || validateStatus === 'validating',
+          'has-feedback': validateStatus && props.hasFeedback,
           'has-success': validateStatus === 'success',
           'has-warning': validateStatus === 'warning',
           'has-error': validateStatus === 'error',

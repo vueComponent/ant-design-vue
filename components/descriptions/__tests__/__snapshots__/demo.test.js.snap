@@ -92,7 +92,8 @@ exports[`renders ./antdv-demo/docs/descriptions/demo/border.md correctly 1`] = `
             <br>
             Replication factor: 3
             <br>
-            Region: East China 1<br></td>
+            Region: East China 1<br>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -213,7 +214,8 @@ exports[`renders ./antdv-demo/docs/descriptions/demo/size.md correctly 1`] = `
               <br>
               Replication factor: 3
               <br>
-              Region: East China 1<br></td>
+              Region: East China 1<br>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -364,7 +366,8 @@ exports[`renders ./antdv-demo/docs/descriptions/demo/vertical-border.md correctl
             <br>
             Replication factor: 3
             <br>
-            Region: East China 1<br></td>
+            Region: East China 1<br>
+          </td>
         </tr>
       </tbody>
     </table>

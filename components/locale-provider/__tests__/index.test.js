@@ -198,7 +198,7 @@ describe('Locale Provider', () => {
     });
   });
 
-  it('should change locale of Modal.xxx', async () => {
+  fit('should change locale of Modal.xxx', async () => {
     const ModalDemo = {
       mounted() {
         Modal.confirm({
@@ -231,7 +231,7 @@ describe('Locale Provider', () => {
         '.ant-btn:not(.ant-btn-primary) span',
       )[0].innerHTML;
       let okButtonText = currentConfirmNode.querySelectorAll('.ant-btn-primary span')[0].innerHTML;
-      if (locale.locale === 'zh-cn') {
+      if (locale.locale === 'zh-cn' || locale.locale === 'zh-tw') {
         cancelButtonText = cancelButtonText.replace(' ', '');
         okButtonText = okButtonText.replace(' ', '');
       }

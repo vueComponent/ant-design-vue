@@ -23,7 +23,7 @@ function transformLess(lessFile, config = {}) {
     .render(data, lessOpts)
     .then(result => {
       const source = result.css;
-      return postcss(postcssConfig.plugins).process(source);
+      return postcss(postcssConfig.plugins).process(source, { from: undefined });
     })
     .then(r => {
       return r.css;

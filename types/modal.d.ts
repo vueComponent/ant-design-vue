@@ -3,9 +3,6 @@
 // Definitions: https://github.com/vueComponent/ant-design-vue/types
 
 import { AntdComponent } from './component';
-import { VNode } from 'vue';
-import { TreeNode } from './tree-node';
-import { Button } from './button/button';
 
 export interface ModalOptions {
   /**
@@ -84,13 +81,13 @@ export interface ModalOptions {
    * The ok button props
    * @type object
    */
-  okButtonProps?: Button;
+  okButtonProps?: Record<string, any>;
 
   /**
    * The cancel button props
    * @type object
    */
-  cancelButtonProps?: Button;
+  cancelButtonProps?: Record<string, any>;
 
   /**
    * Title
@@ -251,13 +248,13 @@ export declare class Modal extends AntdComponent {
    * The ok button props, follow jsx rules
    * @type object
    */
-  okButtonProps: { props: Button; on: {} };
+  okButtonProps: Record<string, any>;
 
   /**
    * The cancel button props, follow jsx rules
    * @type object
    */
-  cancelButtonProps: { props: Button; on: {} };
+  cancelButtonProps: Record<string, any>;
 
   /**
    * The modal dialog's title

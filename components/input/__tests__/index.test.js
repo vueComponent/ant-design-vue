@@ -39,20 +39,21 @@ describe('TextArea', () => {
       propsData: { value: '', readOnly: true, autoSize: true },
       sync: false,
     });
-
     const mockFunc = jest.spyOn(wrapper.vm.$refs.resizableTextArea, 'resizeTextarea');
+
     await asyncExpect(() => {
+      expect(mockFunc).toHaveBeenCalledTimes(1);
       wrapper.setProps({ value: '1111\n2222\n3333' });
     });
     await asyncExpect(() => {
-      expect(mockFunc).toHaveBeenCalledTimes(1);
+      expect(mockFunc).toHaveBeenCalledTimes(2);
     });
     await asyncExpect(() => {
       wrapper.setProps({ value: '1111' });
     });
 
     await asyncExpect(() => {
-      expect(mockFunc).toHaveBeenCalledTimes(2);
+      expect(mockFunc).toHaveBeenCalledTimes(3);
     }, 100);
   });
 

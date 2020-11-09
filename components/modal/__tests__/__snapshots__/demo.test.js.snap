@@ -34,7 +34,8 @@ exports[`renders ./antdv-demo/docs/modal/demo/info.md correctly 1`] = `<div><but
 
 exports[`renders ./antdv-demo/docs/modal/demo/locale.md correctly 1`] = `
 <div><button type="button" class="ant-btn ant-btn-primary"><span>Modal</span></button>
-  <!----> <br> <br> <button type="button" class="ant-btn"><span>Confirm</span></button></div>
+  <!----> <br> <br> <button type="button" class="ant-btn"><span>Confirm</span></button>
+</div>
 `;
 
 exports[`renders ./antdv-demo/docs/modal/demo/manual.md correctly 1`] = `<button type="button" class="ant-btn"><span>Open modal to close in 5s</span></button>`;

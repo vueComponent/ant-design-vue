@@ -146,7 +146,7 @@ const BaseTable = {
   render() {
     const { sComponents: components, prefixCls, scroll, data, getBodyWrapper } = this.table;
     const { expander, tableClassName, hasHead, hasBody, fixed, isAnyColumnsFixed } = this.$props;
-
+    const columns = this.getColumns();
     const tableStyle = {};
 
     if (!fixed && scroll.x) {
@@ -157,6 +157,14 @@ const BaseTable = {
       tableStyle.width = scroll.x === true ? tableWidthScrollX : scroll.x;
       tableStyle.width =
         typeof tableStyle.width === 'number' ? `${tableStyle.width}px` : tableStyle.width;
+    }
+    if (fixed) {
+      const width = columns.reduce((sum, { width: w }) => {
+        return sum + parseFloat(w, 10);
+      }, 0);
+      if (width > 0) {
+        tableStyle.width = width + 'px';
+      }
     }
 
     const Table = hasBody ? components.table : 'table';
@@ -169,7 +177,6 @@ const BaseTable = {
         body = getBodyWrapper(body);
       }
     }
-    const columns = this.getColumns();
     return (
       <Table class={tableClassName} style={tableStyle} key="table">
         <ColGroup columns={columns} fixed={fixed} />

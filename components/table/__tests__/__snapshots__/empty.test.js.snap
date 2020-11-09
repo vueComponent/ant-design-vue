@@ -176,7 +176,7 @@ exports[`Table renders empty table with fixed columns 1`] = `
   <!---->
   <div class="ant-table-body-outer">
     <div class="ant-table-body-inner">
-      <table class="ant-table-fixed">
+      <table class="ant-table-fixed" style="width: 200px;">
         <colgroup>
           <col style="width: 100px; min-width: 100px;">
           <col style="width: 100px; min-width: 100px;">
@@ -198,7 +198,7 @@ exports[`Table renders empty table with fixed columns 1`] = `
   <!---->
   <div class="ant-table-body-outer">
     <div class="ant-table-body-inner">
-      <table class="ant-table-fixed">
+      <table class="ant-table-fixed" style="width: 100px;">
         <colgroup>
           <col style="width: 100px; min-width: 100px;">
         </colgroup>

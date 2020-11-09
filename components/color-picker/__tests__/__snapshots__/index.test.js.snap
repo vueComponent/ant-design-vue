@@ -70,7 +70,7 @@ exports[`ColorPicker save event should works 1`] = `
         <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
       </svg></i>
   </div>
-  <div class="pcr-app visible" data-theme="monolith" aria-label="color picker dialog" role="window" style="left: 512px; top: 384px;">
+  <div class="pcr-app visible" data-theme="monolith" aria-label="color picker dialog" role="window" style="top: 384px; left: 512px;">
     <div class="pcr-selection">
       <div class="pcr-color-preview">
         <button type="button" class="pcr-last-color" aria-label="use previous color" style="color: rgb(0, 0, 0);"></button>
@@ -225,7 +225,7 @@ exports[`ColorPicker should support disabled 1`] = `
 `;
 
 exports[`ColorPicker should support format 1`] = `
-<div tabindex="0" class="ant-color-picker ant-color-picker-open">
+<div tabindex="0" class="ant-color-picker">
   <div class="ant-color-picker-selection">
     <div id="color-picker-box19">
       <div class="pickr">
@@ -238,7 +238,7 @@ exports[`ColorPicker should support format 1`] = `
         <path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path>
       </svg></i>
   </div>
-  <div class="pcr-app visible" data-theme="monolith" aria-label="color picker dialog" role="window" style="left: 512px; top: 384px;">
+  <div class="pcr-app" data-theme="monolith" aria-label="color picker dialog" role="window">
     <div class="pcr-selection">
       <div class="pcr-color-preview">
         <button type="button" class="pcr-last-color" aria-label="use previous color" style="color: rgb(0, 0, 0);"></button>

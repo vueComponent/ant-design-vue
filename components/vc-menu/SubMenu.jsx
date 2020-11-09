@@ -310,9 +310,9 @@ const SubMenu = {
       }
     },
 
-    isChildrenSelected() {
+    isChildrenSelected(children) {
       const ret = { find: false };
-      loopMenuItemRecursively(getSlot(this), this.$props.selectedKeys, ret);
+      loopMenuItemRecursively(children, this.$props.selectedKeys, ret);
       return ret.find;
     },
     // isOpen () {
@@ -412,10 +412,12 @@ const SubMenu = {
   render() {
     const props = { ...this.$props, ...this.$attrs };
     const { onEvents } = splitAttrs(props);
-    const { rootPrefixCls, parentMenu } = this;
+    const { rootPrefixCls } = this;
     const isOpen = props.isOpen;
     const prefixCls = this.getPrefixCls();
     const isInlineMode = props.mode === 'inline';
+    const childrenTemp = filterEmpty(getSlot(this));
+    const children = this.renderChildren(childrenTemp);
     const className = {
       [prefixCls]: true,
       [`${prefixCls}-${props.mode}`]: true,
@@ -423,7 +425,7 @@ const SubMenu = {
       [this.getOpenClassName()]: isOpen,
       [this.getActiveClassName()]: props.active || (isOpen && !isInlineMode),
       [this.getDisabledClassName()]: props.disabled,
-      [this.getSelectedClassName()]: this.isChildrenSelected(),
+      [this.getSelectedClassName()]: this.isChildrenSelected(childrenTemp),
     };
 
     if (!this.internalMenuId) {
@@ -489,7 +491,6 @@ const SubMenu = {
         {icon || <i class={`${prefixCls}-arrow`} />}
       </div>
     );
-    const children = this.renderChildren(filterEmpty(getSlot(this)));
 
     const getPopupContainer = this.parentMenu.isRootMenu
       ? this.parentMenu.getPopupContainer
@@ -497,7 +498,7 @@ const SubMenu = {
     const popupPlacement = popupPlacementMap[props.mode];
     const popupAlign = props.popupOffset ? { offset: props.popupOffset } : {};
     let popupClassName = props.mode === 'inline' ? '' : props.popupClassName || '';
-    popupClassName = `${prefixCls}-popup ${rootPrefixCls}-${parentMenu.theme} ${popupClassName}`;
+    popupClassName = `${prefixCls}-popup ${rootPrefixCls} ${popupClassName}`;
     const liProps = {
       ...omit(onEvents, ['onClick']),
       ...mouseEvents,

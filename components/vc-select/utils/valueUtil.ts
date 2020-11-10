@@ -168,7 +168,7 @@ function toRawString(content: VNodeChild): string {
       if (isVNode(item)) {
         return item?.el?.innerText || item?.el?.wholeText;
       } else {
-        return '';
+        return item;
       }
     })
     .join('');

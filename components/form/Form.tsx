@@ -52,7 +52,7 @@ export const FormProps = {
   prefixCls: PropTypes.string,
   hideRequiredMark: PropTypes.looseBool,
   model: PropTypes.object,
-  rules: { type: Object as PropType<ValidationRule[]> },
+  rules: { type: Object as PropType<{[k: string]: ValidationRule[] | ValidationRule}> },
   validateMessages: PropTypes.object,
   validateOnRuleChange: PropTypes.looseBool,
   // 提交失败自动滚动到第一个错误字段

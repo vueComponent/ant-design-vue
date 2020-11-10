@@ -48,8 +48,13 @@
 }
 
 @keyframes antZoomBigIn {
+  // 计算popover位置时，有可能处于 active 状态，通过这种方式 hack 待改进
   0% {
-    transform: scale(0.8);
+    transform: none;
+    opacity: 0;
+  }
+  5% {
+    transform: scale(0.2);
     opacity: 0;
   }
   100% {

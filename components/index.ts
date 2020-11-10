@@ -146,6 +146,8 @@ import { default as Descriptions } from './descriptions';
 import { default as PageHeader } from './page-header';
 import { default as Space } from './space';
 
+import { default as Typography } from './typography';
+
 const components = [
   Affix,
   Anchor,
@@ -210,6 +212,7 @@ const components = [
   PageHeader,
   Space,
   Image,
+  Typography,
 ];
 
 const install = function(app: App) {
@@ -298,6 +301,7 @@ export {
   PageHeader,
   Space,
   Image,
+  Typography,
 };
 
 export default {

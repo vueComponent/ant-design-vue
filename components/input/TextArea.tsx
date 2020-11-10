@@ -13,6 +13,8 @@ const TextAreaProps = {
   autosize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
   autoSize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
   showCount: PropTypes.looseBool,
+  onCompositionstart: PropTypes.func,
+  onCompositionend: PropTypes.func,
 };
 
 export default defineComponent({

@@ -31,7 +31,7 @@ export default defineComponent({
 
   render() {
     const { $slots, $attrs } = this;
-    const { rootPrefixCls, popupClassName } = {...this.$props, ...this.injectExtraProps} as any;
+    const { rootPrefixCls, popupClassName } = { ...this.$props, ...this.injectExtraProps } as any;
     const { theme: antdMenuTheme } = this.menuPropsContext;
     const props = {
       ...this.$props,

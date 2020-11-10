@@ -77,6 +77,11 @@ const Drawer = defineComponent({
         });
       }
       this.preProps.open = val;
+      if (val) {
+        nextTick(() => {
+          this.domFocus();
+        });
+      }
     },
     placement(val) {
       if (val !== this.preProps.placement) {
@@ -113,6 +118,9 @@ const Drawer = defineComponent({
         this.getDefault(this.$props);
         if (open) {
           this.isOpenChange = true;
+          nextTick(() => {
+            this.domFocus();
+          });
         }
         this.$forceUpdate();
       }
@@ -140,6 +148,11 @@ const Drawer = defineComponent({
     clearTimeout(this.timeout);
   },
   methods: {
+    domFocus() {
+      if (this.dom) {
+        this.dom.focus();
+      }
+    },
     onKeyDown(e) {
       if (e.keyCode === KeyCode.ESC) {
         e.stopPropagation();

@@ -116,6 +116,7 @@ const SubPopupMenu = {
       expandIcon: PropTypes.any,
       overflowedIndicator: PropTypes.any,
       children: PropTypes.any.def([]),
+      forceSubMenuRender: PropTypes.looseBool,
     },
     {
       prefixCls: 'rc-menu',
@@ -303,7 +304,6 @@ const SubPopupMenu = {
         openAnimation: props.openAnimation,
         subMenuOpenDelay: props.subMenuOpenDelay,
         subMenuCloseDelay: props.subMenuCloseDelay,
-        forceSubMenuRender: props.forceSubMenuRender,
         builtinPlacements: props.builtinPlacements,
         itemIcon: this.getIcon(child, 'itemIcon') || this.getIcon(this, 'itemIcon'),
         expandIcon: this.getIcon(child, 'expandIcon') || this.getIcon(this, 'expandIcon'),
@@ -318,6 +318,9 @@ const SubPopupMenu = {
         // destroy: this.onDestroy,
         onSelect: this.onSelect,
       };
+      if (props.forceSubMenuRender !== undefined) {
+        newChildProps.forceSubMenuRender = props.forceSubMenuRender;
+      }
       // ref: https://github.com/ant-design/ant-design/issues/13943
       if (props.mode === 'inline' || isMobileDevice()) {
         newChildProps.triggerSubMenuAction = 'click';

@@ -1,3 +1,5 @@
+import { inject } from 'vue';
+import { injectExtraPropsKey } from './FunctionProvider';
 export default {
   name: 'MenuDivider',
   inheritAttrs: false,
@@ -8,9 +10,14 @@ export default {
     },
     rootPrefixCls: String,
   },
+  setup() {
+    return {
+      injectExtraProps: inject(injectExtraPropsKey, () => ({})),
+    };
+  },
   render() {
-    const { rootPrefixCls } = this.$props;
+    const { rootPrefixCls } = {...this.$props, ...this.injectExtraProps};
     const { class: className = '', style } = this.$attrs;
-    return <li class={`${className} ${rootPrefixCls}-item-divider`} style={style} />;
+    return <li class={[className, `${rootPrefixCls}-item-divider`]} style={style} />;
   },
 };

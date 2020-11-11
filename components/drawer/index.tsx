@@ -85,6 +85,11 @@ const Drawer = defineComponent({
     }
   },
   methods: {
+    domFocus() {
+      if (this.$refs.vcDrawer) {
+        (this.$refs.vcDrawer as any).domFocus();
+      }
+    },
     close(e: Event) {
       this.$emit('update:visible', false);
       this.$emit('close', e);
@@ -101,9 +106,14 @@ const Drawer = defineComponent({
       });
     },
     pull() {
-      this.setState({
-        sPush: false,
-      });
+      this.setState(
+        {
+          sPush: false,
+        },
+        () => {
+          this.domFocus();
+        },
+      );
     },
     onDestroyTransitionEnd() {
       const isDestroyOnClose = this.getDestroyOnClose();
@@ -248,6 +258,7 @@ const Drawer = defineComponent({
         [haveMask]: !!haveMask,
       }),
       wrapStyle: this.getRcDrawerStyle(),
+      ref: 'vcDrawer',
     };
     return <VcDrawer {...vcDrawerProps}>{this.renderBody(prefixCls)}</VcDrawer>;
   },

@@ -1,4 +1,5 @@
 import { ExtractPropTypes } from 'vue';
+
 import { tuple } from '../_util/type';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 
@@ -28,6 +29,6 @@ const buttonProps = () => ({
   onClick: PropTypes.func,
 });
 
-export type ButtonProps = ExtractPropTypes<ExtractPropTypes<ReturnType<typeof buttonProps>>>;
+export type ButtonProps = Partial<ExtractPropTypes<ReturnType<typeof buttonProps>>>;
 
 export default buttonProps;

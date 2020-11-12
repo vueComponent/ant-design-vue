@@ -29,8 +29,8 @@ export const menuProps = {
   selectable: PropTypes.looseBool,
   selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   defaultSelectedKeys: PropTypes.array,
-  openKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string])),
-  defaultOpenKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string])),
+  openKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  defaultOpenKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   openTransitionName: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -88,7 +88,7 @@ const Menu = defineComponent({
       'Menu',
       "`inlineCollapsed` should only be used when Menu's `mode` is inline.",
     );
-    let sOpenKeys: string[];
+    let sOpenKeys: (number | string)[];
 
     if ('openKeys' in props) {
       sOpenKeys = props.openKeys;

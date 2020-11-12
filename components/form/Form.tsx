@@ -154,7 +154,7 @@ const Form = defineComponent({
     validate(...args: any[]) {
       return this.validateField(...args);
     },
-    scrollToField(name: InternalNamePath, options = {}) {
+    scrollToField(name: NamePath, options = {}) {
       const fields = this.getFieldsByNameList(name);
       if (fields.length) {
         const fieldId = fields[0].fieldId;

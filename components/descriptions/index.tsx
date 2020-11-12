@@ -30,7 +30,7 @@ export const DescriptionsItemProps = {
   span: PropTypes.number,
 };
 
-export const DescriptionsItem = {
+export const DescriptionsItem = defineComponent({
   name: 'ADescriptionsItem',
   props: {
     prefixCls: PropTypes.string,
@@ -40,7 +40,7 @@ export const DescriptionsItem = {
   render() {
     return null;
   },
-};
+});
 
 const DEFAULT_COLUMN_MAP: Record<Breakpoint, number> = {
   xxl: 3,

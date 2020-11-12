@@ -7,6 +7,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { getTransitionProps, Transition } from '../_util/transition';
 import switchScrollingEffect from '../_util/switchScrollingEffect';
 import getDialogPropTypes from './IDialogPropTypes';
+import warning from '../_util/warning';
 const IDialogPropTypes = getDialogPropTypes();
 
 let uuid = 0;
@@ -64,6 +65,8 @@ export default defineComponent({
     focusTriggerAfterClose: true,
   }),
   data() {
+    warning(!this.dialogClass, 'Modal', 'dialogClass is deprecated, please use class instead.');
+    warning(!this.dialogStyle, 'Modal', 'dialogStyle is deprecated, please use style instead.');
     return {
       inTransition: false,
       titleId: `rcDialogTitle${uuid++}`,

@@ -194,12 +194,12 @@ const Menu = defineComponent({
       this.$emit('deselect', info);
       this.$emit('selectChange', info.selectedKeys);
     },
-    handleOpenChange(openKeys: string[]) {
+    handleOpenChange(openKeys: (number | string)[]) {
       this.setOpenKeys(openKeys);
       this.$emit('update:openKeys', openKeys);
       this.$emit('openChange', openKeys);
     },
-    setOpenKeys(openKeys: string[]) {
+    setOpenKeys(openKeys: (number | string)[]) {
       if (!hasProp(this, 'openKeys')) {
         this.setState({ sOpenKeys: openKeys });
       }

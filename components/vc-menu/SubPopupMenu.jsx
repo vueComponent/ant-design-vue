@@ -116,7 +116,7 @@ const SubPopupMenu = {
       expandIcon: PropTypes.any,
       overflowedIndicator: PropTypes.any,
       children: PropTypes.any.def([]),
-      forceSubMenuRender: PropTypes.looseBool,
+      forceSubMenuRender: PropTypes.looseBool.def(true),
     },
     {
       prefixCls: 'rc-menu',

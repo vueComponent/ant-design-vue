@@ -30,7 +30,7 @@ export default {
   theme: PropTypes.oneOf(['light', 'dark']).def('light'),
   getPopupContainer: PropTypes.func,
   openTransitionName: PropTypes.string,
-  forceSubMenuRender: PropTypes.looseBool,
+  forceSubMenuRender: PropTypes.looseBool.def(true),
   selectable: PropTypes.looseBool,
   isRootMenu: PropTypes.looseBool.def(true),
   builtinPlacements: PropTypes.object.def(() => ({})),

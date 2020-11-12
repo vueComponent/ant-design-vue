@@ -276,7 +276,6 @@ const Menu = defineComponent({
       onMouseenter: this.handleMouseEnter,
       onTransitionend: this.handleTransitionEnd,
       children: getSlot(this),
-      openTransitionName: '', //issue解决后可去掉openTransitionName https://github.com/vuejs/vue-next/issues/1412
     };
     if (!hasProp(this, 'selectedKeys')) {
       delete menuProps.selectedKeys;

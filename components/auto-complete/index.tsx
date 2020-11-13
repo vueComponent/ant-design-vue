@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, provide, Plugin } from 'vue';
+import { App, defineComponent, inject, provide, Plugin, VNode } from 'vue';
 import Select, { SelectProps } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';
@@ -56,10 +56,10 @@ const AutoComplete = defineComponent({
     provide('savePopupRef', this.savePopupRef);
   },
   methods: {
-    savePopupRef(ref: any) {
+    savePopupRef(ref: VNode) {
       this.popupRef = ref;
     },
-    saveSelect(node: any) {
+    saveSelect(node: VNode) {
       this.select = node;
     },
     getInputElement() {
@@ -125,7 +125,7 @@ const AutoComplete = defineComponent({
         : [];
     }
     const selectProps = {
-      ...Omit(getOptionProps(this), ['dataSource', 'optionLabelProp'] as any),
+      ...Omit(getOptionProps(this), ['dataSource', 'optionLabelProp']),
       ...this.$attrs,
       mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
       // optionLabelProp,

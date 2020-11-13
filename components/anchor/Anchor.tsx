@@ -183,7 +183,7 @@ export default defineComponent({
       return '';
     },
 
-    handleScrollTo(link) {
+    handleScrollTo(link: string) {
       const { offsetTop, getContainer, targetOffset } = this;
 
       this.setCurrentActiveLink(link);

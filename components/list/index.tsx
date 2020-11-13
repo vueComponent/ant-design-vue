@@ -1,4 +1,4 @@
-import { provide, inject, defineComponent, App, Plugin } from 'vue';
+import { provide, inject, defineComponent, App, Plugin, ExtractPropTypes } from 'vue';
 import omit from 'omit.js';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import classNames from '../_util/classNames';
@@ -33,6 +33,8 @@ export const ListGridType = {
 
 export const ListSize = tuple('small', 'default', 'large');
 
+const paginationProps = PaginationConfig();
+
 export const ListProps = () => ({
   bordered: PropTypes.looseBool,
   dataSource: PropTypes.array,
@@ -42,7 +44,10 @@ export const ListProps = () => ({
   loading: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   loadMore: PropTypes.any,
   pagination: withUndefined(
-    PropTypes.oneOfType([PropTypes.shape(PaginationConfig()).loose, PropTypes.looseBool]),
+    PropTypes.oneOfType([
+      PropTypes.shape<Partial<ExtractPropTypes<typeof paginationProps>>>(paginationProps).loose,
+      PropTypes.looseBool,
+    ]),
   ),
   prefixCls: PropTypes.string,
   rowKey: PropTypes.any,

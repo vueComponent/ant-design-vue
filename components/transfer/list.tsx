@@ -7,7 +7,8 @@ import Checkbox from '../checkbox';
 import Search from './search';
 import defaultRenderList from './renderListBody';
 import triggerEvent from '../_util/triggerEvent';
-import { defineComponent, nextTick } from 'vue';
+import { defineComponent, HTMLAttributes, nextTick, VNode } from 'vue';
+import { RadioChangeEvent } from '../radio/interface';
 
 const defaultRender = () => null;
 
@@ -18,7 +19,14 @@ const TransferItem = {
   disabled: PropTypes.looseBool,
 };
 
-function isRenderResultPlainObject(result) {
+export interface DataSourceItem {
+  key: string;
+  title: string;
+  description?: string;
+  disabled?: boolean;
+}
+
+function isRenderResultPlainObject(result: VNode) {
   return (
     result &&
     !isValidElement(result) &&
@@ -55,7 +63,7 @@ export const TransferListProps = {
   onScroll: PropTypes.func,
 };
 
-function renderListNode(renderList, props) {
+function renderListNode(renderList: Function, props: any) {
   let bodyContent = renderList ? renderList(props) : null;
   const customize = !!bodyContent && filterEmpty(bodyContent).length > 0;
   if (!customize) {
@@ -103,10 +111,10 @@ export default defineComponent({
     });
   },
   methods: {
-    handleScroll(e) {
+    handleScroll(e: Event) {
       this.$emit('scroll', e);
     },
-    getCheckStatus(filteredItems) {
+    getCheckStatus(filteredItems: DataSourceItem[]) {
       const { checkedKeys } = this.$props;
       if (checkedKeys.length === 0) {
         return 'none';
@@ -117,7 +125,7 @@ export default defineComponent({
       return 'part';
     },
 
-    getFilteredItems(dataSource, filterValue) {
+    getFilteredItems(dataSource: DataSourceItem[], filterValue: string) {
       const filteredItems = [];
       const filteredRenderItems = [];
 
@@ -138,17 +146,17 @@ export default defineComponent({
     },
 
     getListBody(
-      prefixCls,
-      searchPlaceholder,
-      filterValue,
-      filteredItems,
-      notFoundContent,
-      bodyDom,
-      filteredRenderItems,
-      checkedKeys,
-      renderList,
-      showSearch,
-      disabled,
+      prefixCls: string,
+      searchPlaceholder: string,
+      filterValue: string,
+      filteredItems: DataSourceItem[],
+      notFoundContent: unknown,
+      bodyDom: unknown,
+      filteredRenderItems: unknown,
+      checkedKeys: string[],
+      renderList: Function,
+      showSearch: boolean,
+      disabled: boolean,
     ) {
       const search = showSearch ? (
         <div class={`${prefixCls}-body-search-wrapper`}>
@@ -165,7 +173,7 @@ export default defineComponent({
 
       let listBody = bodyDom;
       if (!listBody) {
-        let bodyNode;
+        let bodyNode: HTMLAttributes;
         const { onEvents } = splitAttrs(this.$attrs);
         const { bodyContent, customize } = renderListNode(renderList, {
           ...this.$props,
@@ -200,7 +208,7 @@ export default defineComponent({
       return listBody;
     },
 
-    getCheckBox(filteredItems, showSelectAll, disabled) {
+    getCheckBox(filteredItems: DataSourceItem[], showSelectAll: boolean, disabled: boolean) {
       const checkStatus = this.getCheckStatus(filteredItems);
       const checkedAll = checkStatus === 'all';
       const checkAllCheckbox = showSelectAll !== false && (
@@ -222,12 +230,12 @@ export default defineComponent({
       return checkAllCheckbox;
     },
 
-    _handleSelect(selectedItem) {
+    _handleSelect(selectedItem: DataSourceItem) {
       const { checkedKeys } = this.$props;
       const result = checkedKeys.some(key => key === selectedItem.key);
       this.handleSelect(selectedItem, !result);
     },
-    _handleFilter(e) {
+    _handleFilter(e: RadioChangeEvent) {
       const { handleFilter } = this.$props;
       const {
         target: { value: filterValue },
@@ -247,11 +255,11 @@ export default defineComponent({
         }
       }, 0);
     },
-    _handleClear(e) {
+    _handleClear(e: Event) {
       this.setState({ filterValue: '' });
       this.handleClear(e);
     },
-    matchFilter(text, item) {
+    matchFilter(text: string, item: DataSourceItem) {
       const { filterValue } = this.$data;
       const { filterOption } = this.$props;
       if (filterOption) {
@@ -259,7 +267,7 @@ export default defineComponent({
       }
       return text.indexOf(filterValue) >= 0;
     },
-    renderItemHtml(item) {
+    renderItemHtml(item: DataSourceItem) {
       const { renderItem = defaultRender } = this.$props;
       const renderResult = renderItem(item);
       const isRenderResultPlain = isRenderResultPlainObject(renderResult);
@@ -269,7 +277,7 @@ export default defineComponent({
         item,
       };
     },
-    filterNull(arr) {
+    filterNull(arr: unknown[]) {
       return arr.filter(item => {
         return item !== null;
       });

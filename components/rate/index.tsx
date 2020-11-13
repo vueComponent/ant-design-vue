@@ -1,4 +1,4 @@
-import { inject, defineComponent } from 'vue';
+import { inject, defineComponent, VNode } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
@@ -30,16 +30,16 @@ const Rate = defineComponent({
     };
   },
   methods: {
-    characterRender(node, { index }) {
+    characterRender(node: VNode, { index }) {
       const { tooltips } = this.$props;
       if (!tooltips) return node;
       return <Tooltip title={tooltips[index]}>{node}</Tooltip>;
     },
     focus() {
-      (this.$refs.refRate as any).focus();
+      (this.$refs.refRate as HTMLUListElement).focus();
     },
     blur() {
-      (this.$refs.refRate as any).blur();
+      (this.$refs.refRate as HTMLUListElement).blur();
     },
   },
   render() {

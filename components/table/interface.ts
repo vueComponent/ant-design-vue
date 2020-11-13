@@ -1,6 +1,6 @@
 import { ExtractPropTypes, PropType } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import { PaginationProps as getPaginationProps } from '../pagination';
+import { PaginationProps as getPaginationProps, PaginationConfig } from '../pagination';
 import { SpinProps as getSpinProps } from '../spin';
 import { Store } from './createStore';
 import { tuple } from '../_util/type';
@@ -103,16 +103,15 @@ export const tableRowSelection = {
 
 export type SortOrder = 'descend' | 'ascend';
 
+const paginationProps = PaginationConfig();
+
 export const tableProps = {
   prefixCls: PropTypes.string,
   dropdownPrefixCls: PropTypes.string,
   rowSelection: PropTypes.oneOfType([PropTypes.shape(tableRowSelection).loose, Object]),
   pagination: withUndefined(
     PropTypes.oneOfType([
-      PropTypes.shape({
-        ...PaginationProps,
-        position: PropTypes.oneOf(tuple('top', 'bottom', 'both')),
-      }).loose,
+      PropTypes.shape<Partial<ExtractPropTypes<typeof paginationProps>>>(paginationProps).loose,
       PropTypes.looseBool,
     ]),
   ),

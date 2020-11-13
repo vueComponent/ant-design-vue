@@ -1,4 +1,4 @@
-import { provide, inject, cloneVNode, defineComponent } from 'vue';
+import { provide, inject, cloneVNode, defineComponent, VNode } from 'vue';
 import RcDropdown from '../vc-dropdown/src/index';
 import DropdownButton from './dropdown-button';
 import PropTypes from '../_util/vue-types';
@@ -37,7 +37,7 @@ const Dropdown = defineComponent({
     provide('savePopupRef', this.savePopupRef);
   },
   methods: {
-    savePopupRef(ref: any) {
+    savePopupRef(ref: VNode) {
       this.popupRef = ref;
     },
     getTransitionName() {

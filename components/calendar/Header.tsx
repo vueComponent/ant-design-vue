@@ -5,6 +5,7 @@ import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
 import { VueNode } from '../_util/type';
 import moment from 'moment';
+import { RadioChangeEvent } from '../radio/interface';
 
 function getMonthsLocale(value: moment.Moment): string[] {
   const current = value.clone();
@@ -141,8 +142,8 @@ export default defineComponent({
       this.$emit('valueChange', newValue);
     },
 
-    onInternalTypeChange(e: Event) {
-      this.triggerTypeChange((e.target as any).value);
+    onInternalTypeChange(e: RadioChangeEvent) {
+      this.triggerTypeChange(e.target.value);
     },
 
     triggerTypeChange(val: string) {

@@ -22,10 +22,10 @@ export default defineComponent({
     placeholder: '',
   }),
   methods: {
-    handleChange(e) {
+    handleChange(e: Event) {
       this.$emit('change', e);
     },
-    handleClear2(e) {
+    handleClear2(e: Event) {
       e.preventDefault();
       const { handleClear, disabled } = this.$props;
       if (!disabled && handleClear) {

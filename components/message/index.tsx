@@ -191,4 +191,4 @@ export interface MessageApi {
   destroy(): void;
 }
 
-export default api;
+export default api as MessageApi;

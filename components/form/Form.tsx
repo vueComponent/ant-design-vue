@@ -14,7 +14,7 @@ import scrollIntoView from 'scroll-into-view-if-needed';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { tuple, VueNode } from '../_util/type';
 import { ColProps } from '../grid/Col';
-import { InternalNamePath, NamePath, ValidateOptions } from './interface';
+import { InternalNamePath, NamePath, ValidateErrorEntity, ValidateOptions } from './interface';
 
 export type ValidationRule = {
   /** validation error message */
@@ -119,7 +119,7 @@ const Form = defineComponent({
           this.handleFinishFailed(errors);
         });
     },
-    getFieldsByNameList(nameList) {
+    getFieldsByNameList(nameList: NamePath) {
       const provideNameList = !!nameList;
       const namePathList = provideNameList ? toArray(nameList).map(getNamePath) : [];
       if (!provideNameList) {
@@ -139,12 +139,12 @@ const Form = defineComponent({
         field.resetField();
       });
     },
-    clearValidate(name) {
+    clearValidate(name: NamePath) {
       this.getFieldsByNameList(name).forEach(field => {
         field.clearValidate();
       });
     },
-    handleFinishFailed(errorInfo) {
+    handleFinishFailed(errorInfo: ValidateErrorEntity) {
       const { scrollToFirstError } = this;
       this.$emit('finishFailed', errorInfo);
       if (scrollToFirstError && errorInfo.errorFields.length) {
@@ -154,8 +154,8 @@ const Form = defineComponent({
     validate(...args: any[]) {
       return this.validateField(...args);
     },
-    scrollToField(name: string | number, options = {}) {
-      const fields = this.getFieldsByNameList([name]);
+    scrollToField(name: NamePath, options = {}) {
+      const fields = this.getFieldsByNameList(name);
       if (fields.length) {
         const fieldId = fields[0].fieldId;
         const node = fieldId ? document.getElementById(fieldId) : null;

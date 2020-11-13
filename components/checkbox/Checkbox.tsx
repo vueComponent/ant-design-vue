@@ -5,6 +5,7 @@ import VcCheckbox from '../vc-checkbox';
 import hasProp, { getOptionProps, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
+import { RadioChangeEvent } from '../radio/interface';
 function noop() {}
 
 export default defineComponent({
@@ -65,17 +66,17 @@ export default defineComponent({
     }
   },
   methods: {
-    handleChange(event: Event) {
-      const targetChecked = (event.target as any).checked;
+    handleChange(event: RadioChangeEvent) {
+      const targetChecked = event.target.checked;
       this.$emit('update:checked', targetChecked);
       // this.$emit('input', targetChecked);
       this.$emit('change', event);
     },
     focus() {
-      (this.$refs.vcCheckbox as any).focus();
+      (this.$refs.vcCheckbox as HTMLInputElement).focus();
     },
     blur() {
-      (this.$refs.vcCheckbox as any).blur();
+      (this.$refs.vcCheckbox as HTMLInputElement).blur();
     },
   },
 
@@ -93,7 +94,7 @@ export default defineComponent({
       class: className,
       style,
       ...restAttrs
-    } = $attrs as any;
+    } = $attrs;
     const checkboxProps: any = {
       ...restProps,
       prefixCls,

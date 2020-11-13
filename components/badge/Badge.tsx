@@ -7,7 +7,7 @@ import { cloneElement } from '../_util/vnode';
 import { getTransitionProps, Transition } from '../_util/transition';
 import isNumeric from '../_util/isNumeric';
 import { defaultConfigProvider } from '../config-provider';
-import { inject, defineComponent, CSSProperties } from 'vue';
+import { inject, defineComponent, CSSProperties, VNode } from 'vue';
 import { tuple } from '../_util/type';
 
 const BadgeProps = {
@@ -28,7 +28,7 @@ const BadgeProps = {
   title: PropTypes.string,
 };
 function isPresetColor(color?: string): boolean {
-  return (PresetColorTypes as any[]).indexOf(color) !== -1;
+  return (PresetColorTypes as string[]).indexOf(color) !== -1;
 }
 export default defineComponent({
   name: 'ABadge',
@@ -79,7 +79,7 @@ export default defineComponent({
           }
         : { ...numberStyle };
     },
-    getBadgeClassName(prefixCls: string, children: any[]) {
+    getBadgeClassName(prefixCls: string, children: VNode[]) {
       const hasStatus = this.hasStatus();
       return classNames(prefixCls, {
         [`${prefixCls}-status`]: hasStatus,

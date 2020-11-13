@@ -29,8 +29,8 @@ export const menuProps = {
   selectable: PropTypes.looseBool,
   selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   defaultSelectedKeys: PropTypes.array,
-  openKeys: PropTypes.array,
-  defaultOpenKeys: PropTypes.array,
+  openKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+  defaultOpenKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   openTransitionName: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -88,7 +88,7 @@ const Menu = defineComponent({
       'Menu',
       "`inlineCollapsed` should only be used when Menu's `mode` is inline.",
     );
-    let sOpenKeys;
+    let sOpenKeys: (number | string)[];
 
     if ('openKeys' in props) {
       sOpenKeys = props.openKeys;
@@ -126,7 +126,7 @@ const Menu = defineComponent({
     this.propsUpdating = false;
   },
   methods: {
-    collapsedChange(val) {
+    collapsedChange(val: unknown) {
       if (this.propsUpdating) {
         return;
       }
@@ -154,7 +154,7 @@ const Menu = defineComponent({
     // Restore vertical mode when menu is collapsed responsively when mounted
     // https://github.com/ant-design/ant-design/issues/13104
     // TODO: not a perfect solution, looking a new way to avoid setting switchingModeFromInline in this situation
-    handleMouseEnter(e) {
+    handleMouseEnter(e: Event) {
       this.restoreModeVerticalFromInline();
       this.$emit('mouseenter', e);
     },
@@ -180,7 +180,7 @@ const Menu = defineComponent({
         this.restoreModeVerticalFromInline();
       }
     },
-    handleClick(e) {
+    handleClick(e: Event) {
       this.handleOpenChange([]);
       this.$emit('click', e);
     },
@@ -194,12 +194,12 @@ const Menu = defineComponent({
       this.$emit('deselect', info);
       this.$emit('selectChange', info.selectedKeys);
     },
-    handleOpenChange(openKeys) {
+    handleOpenChange(openKeys: (number | string)[]) {
       this.setOpenKeys(openKeys);
       this.$emit('update:openKeys', openKeys);
       this.$emit('openChange', openKeys);
     },
-    setOpenKeys(openKeys) {
+    setOpenKeys(openKeys: (number | string)[]) {
       if (!hasProp(this, 'openKeys')) {
         this.setState({ sOpenKeys: openKeys });
       }
@@ -219,7 +219,7 @@ const Menu = defineComponent({
       }
       return inlineCollapsed;
     },
-    getMenuOpenAnimation(menuMode) {
+    getMenuOpenAnimation(menuMode: string) {
       const { openAnimation, openTransitionName } = this.$props;
       let menuOpenAnimation = openAnimation || openTransitionName;
       if (openAnimation === undefined && openTransitionName === undefined) {
@@ -287,7 +287,7 @@ const Menu = defineComponent({
       menuProps.onClick = this.handleClick;
       menuProps.openTransitionName = menuOpenAnimation;
     } else {
-      menuProps.onClick = e => {
+      menuProps.onClick = (e: Event) => {
         this.$emit('click', e);
       };
       menuProps.openAnimation = menuOpenAnimation;

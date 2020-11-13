@@ -36,7 +36,9 @@ export default defineComponent({
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
-
+  updated() {
+    (this.$refs.statisticNumber as any).$forceUpdate();
+  },
   render() {
     const { prefixCls: customizePrefixCls, value = 0, valueStyle, valueRender } = this.$props;
     const { getPrefixCls } = this.configProvider;
@@ -52,7 +54,7 @@ export default defineComponent({
       value,
       formatter,
     };
-    let valueNode = <StatisticNumber {...props} />;
+    let valueNode = <StatisticNumber ref="statisticNumber" {...props} />;
     if (valueRender) {
       valueNode = valueRender(valueNode);
     }

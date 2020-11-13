@@ -51,9 +51,9 @@ export type ValidateFieldsOptions = {
 declare interface ValidationRule {
   /**
    * validation error message
-   * @type string
+   * @type string | Function
    */
-  message?: string;
+  message?: string | (() => string)
 
   /**
    * built-in validation type, available options: https://github.com/yiminghe/async-validator#type

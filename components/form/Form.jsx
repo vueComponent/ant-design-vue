@@ -75,7 +75,7 @@ export const FormProps = {
 
 export const ValidationRule = {
   /** validation error message */
-  message: PropTypes.string,
+  message: PropTypes.oneOfType([PropTypes.string, PropTypes.func]),
   /** built-in validation type, available options: https://github.com/yiminghe/async-validator#type */
   type: PropTypes.string,
   /** indicates whether field is required */

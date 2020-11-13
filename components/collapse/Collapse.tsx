@@ -60,9 +60,9 @@ export default defineComponent({
     const { prefixCls: customizePrefixCls, bordered, expandIconPosition } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('collapse', customizePrefixCls);
-    const { class: className, ...restAttrs } = this.$attrs as any;
+    const { class: className, ...restAttrs } = this.$attrs;
     const collapseClassName = {
-      [className]: className,
+      [className as string]: className,
       [`${prefixCls}-borderless`]: !bordered,
       [`${prefixCls}-icon-position-${expandIconPosition}`]: true,
     };

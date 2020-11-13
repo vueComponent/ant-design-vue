@@ -22,6 +22,7 @@ export const NumberProps = {
   precision: PropTypes.number,
 };
 const StatisticNumber = defineComponent({
+  inheritAttrs: false,
   props: initDefaultProps(NumberProps, {}),
   render() {
     const {

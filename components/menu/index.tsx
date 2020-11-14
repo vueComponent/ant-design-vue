@@ -28,7 +28,7 @@ export const menuProps = {
   mode: MenuMode.def('vertical'),
   selectable: PropTypes.looseBool,
   selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-  defaultSelectedKeys: PropTypes.array,
+  defaultSelectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   openKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   defaultOpenKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
   openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
@@ -158,14 +158,14 @@ const Menu = defineComponent({
       this.restoreModeVerticalFromInline();
       this.$emit('mouseenter', e);
     },
-    handleTransitionEnd(e) {
+    handleTransitionEnd(e: TransitionEvent) {
       // when inlineCollapsed menu width animation finished
       // https://github.com/ant-design/ant-design/issues/12864
       const widthCollapsed = e.propertyName === 'width' && e.target === e.currentTarget;
 
       // Fix SVGElement e.target.className.indexOf is not a function
       // https://github.com/ant-design/ant-design/issues/15699
-      const { className } = e.target;
+      const { className } = e.target as (SVGAnimationElement | HTMLElement);
       // SVGAnimatedString.animVal should be identical to SVGAnimatedString.baseVal, unless during an animation.
       const classNameValue =
         Object.prototype.toString.call(className) === '[object SVGAnimatedString]'

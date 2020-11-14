@@ -31,9 +31,9 @@ export default defineComponent({
     const { prefixCls: customizePrefixCls, showArrow = true } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('collapse', customizePrefixCls);
-    const { class: className, ...restAttrs } = this.$attrs as any;
+    const { class: className, ...restAttrs } = this.$attrs;
     const collapsePanelClassName = {
-      [className]: className,
+      [className as string]: className,
       [`${prefixCls}-no-arrow`]: !showArrow,
     };
 

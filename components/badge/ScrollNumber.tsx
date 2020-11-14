@@ -161,12 +161,7 @@ export default defineComponent({
   },
 
   render() {
-    const {
-      prefixCls: customizePrefixCls,
-      title,
-      component: Tag = 'sup' as any,
-      displayComponent,
-    } = this;
+    const { prefixCls: customizePrefixCls, title, component: Tag = 'sup', displayComponent } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('scroll-number', customizePrefixCls);
     const { class: className, style = {} } = this.$attrs as {

@@ -120,7 +120,7 @@ export default function calculateNodeHeight(
   let minHeight = Number.MIN_SAFE_INTEGER;
   let maxHeight = Number.MAX_SAFE_INTEGER;
   let height = hiddenTextarea.scrollHeight;
-  let overflowY: any;
+  let overflowY: string;
 
   if (boxSizing === 'border-box') {
     // border-box: add border, since height = content + padding + border

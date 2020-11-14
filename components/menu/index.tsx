@@ -185,7 +185,6 @@ const Menu = defineComponent({
       this.$emit('click', e);
     },
     handleSelect(info) {
-      console.log('info',info)
       this.$emit('update:selectedKeys', info.selectedKeys);
       this.$emit('select', info);
       this.$emit('selectChange', info.selectedKeys);

@@ -36,8 +36,10 @@ export default defineComponent({
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
-  updated() {
-    (this.$refs.statisticNumber as any).$forceUpdate();
+  methods: {
+    updateStatisticNumber() {
+      (this.$refs.statisticNumber as any).$forceUpdate();
+    },
   },
   render() {
     const { prefixCls: customizePrefixCls, value = 0, valueStyle, valueRender } = this.$props;

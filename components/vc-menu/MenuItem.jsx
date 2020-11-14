@@ -42,7 +42,11 @@ const MenuItem = {
     // invoke customized ref to expose component to mixin
     this.callRef();
   },
+  mounted() {
+    this.updateParentMenuSelectedStatus();
+  },
   updated() {
+    this.updateParentMenuSelectedStatus();
     this.$nextTick(() => {
       const { active, parentMenu, eventKey } = this;
       if (!this.prevActive && active && (!parentMenu || !parentMenu[`scrolled-${eventKey}`])) {
@@ -58,10 +62,16 @@ const MenuItem = {
     this.callRef();
   },
   beforeUnmount() {
+    this.updateParentMenuSelectedStatus(false);
     const props = this.$props;
     this.__emit('destroy', props.eventKey);
   },
   methods: {
+    updateParentMenuSelectedStatus(status = this.isSelected) {
+      if (this.parentMenu && this.parentMenu.setChildrenSelectedStatus) {
+        this.parentMenu.setChildrenSelectedStatus(this.eventKey, status);
+      }
+    },
     onKeyDown(e) {
       const keyCode = e.keyCode;
       if (keyCode === KeyCode.ENTER) {
@@ -99,7 +109,7 @@ const MenuItem = {
       const info = {
         key: eventKey,
         keyPath: [eventKey],
-        item: this,
+        item: { ...this.$props },
         domEvent: e,
       };
 

@@ -9,7 +9,7 @@ import placements from './placements';
 import BaseMixin from '../_util/BaseMixin';
 import { getComponent, filterEmpty, getSlot, splitAttrs, findDOMNode } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
-import { noop, loopMenuItemRecursively, getMenuIdFromSubMenuEventKey } from './util';
+import { noop, getMenuIdFromSubMenuEventKey } from './util';
 import { getTransitionProps, Transition } from '../_util/transition';
 import { injectExtraPropsKey } from './FunctionProvider';
 
@@ -49,7 +49,7 @@ const SubMenu = {
     triggerSubMenuAction: PropTypes.string,
     popupClassName: PropTypes.string,
     getPopupContainer: PropTypes.func,
-    forceSubMenuRender: PropTypes.looseBool,
+    forceSubMenuRender: PropTypes.looseBool.def(true),
     openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     disabled: PropTypes.looseBool,
     subMenuOpenDelay: PropTypes.number.def(0.1),
@@ -100,21 +100,30 @@ const SubMenu = {
     this.subMenuTitle = undefined;
     return {
       // defaultActiveFirst: false,
+      childrenSelectedStatus: {},
     };
+  },
+  computed: {
+    isChildrenSelected() {
+      return Object.values(this.childrenSelectedStatus).find(status => status);
+    },
   },
   mounted() {
     this.$nextTick(() => {
       this.handleUpdated();
     });
+    this.updateParentMenuSelectedStatus();
   },
 
   updated() {
     this.$nextTick(() => {
       this.handleUpdated();
     });
+    this.updateParentMenuSelectedStatus();
   },
 
   beforeUnmount() {
+    this.updateParentMenuSelectedStatus(false);
     const { eventKey } = this;
     this.__emit('destroy', eventKey);
 
@@ -131,6 +140,18 @@ const SubMenu = {
     }
   },
   methods: {
+    updateParentMenuSelectedStatus(status = this.isChildrenSelected) {
+      if (this.parentMenu && this.parentMenu.setChildrenSelectedStatus) {
+        this.parentMenu.setChildrenSelectedStatus(this.eventKey, status);
+      }
+    },
+    setChildrenSelectedStatus(key, status) {
+      if (!status) {
+        delete this.childrenSelectedStatus[key];
+      } else {
+        this.childrenSelectedStatus[key] = status;
+      }
+    },
     handleUpdated() {
       const { mode, parentMenu, manualRef } = this;
 
@@ -310,11 +331,11 @@ const SubMenu = {
       }
     },
 
-    isChildrenSelected(children) {
-      const ret = { find: false };
-      loopMenuItemRecursively(children, this.$props.selectedKeys, ret);
-      return ret.find;
-    },
+    // isChildrenSelected(children) {
+    //   const ret = { find: false };
+    //   loopMenuItemRecursively(children, this.$props.selectedKeys, ret);
+    //   return ret.find;
+    // },
     // isOpen () {
     //   return this.$props.openKeys.indexOf(this.$props.eventKey) !== -1
     // },
@@ -412,7 +433,6 @@ const SubMenu = {
   render() {
     const props = { ...this.$props, ...this.$attrs };
     const { onEvents } = splitAttrs(props);
-    const { rootPrefixCls } = this;
     const isOpen = props.isOpen;
     const prefixCls = this.getPrefixCls();
     const isInlineMode = props.mode === 'inline';
@@ -425,7 +445,7 @@ const SubMenu = {
       [this.getOpenClassName()]: isOpen,
       [this.getActiveClassName()]: props.active || (isOpen && !isInlineMode),
       [this.getDisabledClassName()]: props.disabled,
-      [this.getSelectedClassName()]: this.isChildrenSelected(childrenTemp),
+      [this.getSelectedClassName()]: this.isChildrenSelected,
     };
 
     if (!this.internalMenuId) {
@@ -498,7 +518,7 @@ const SubMenu = {
     const popupPlacement = popupPlacementMap[props.mode];
     const popupAlign = props.popupOffset ? { offset: props.popupOffset } : {};
     let popupClassName = props.mode === 'inline' ? '' : props.popupClassName || '';
-    popupClassName = `${prefixCls}-popup ${rootPrefixCls} ${popupClassName}`;
+    popupClassName = `${prefixCls}-popup ${popupClassName}`;
     const liProps = {
       ...omit(onEvents, ['onClick']),
       ...mouseEvents,

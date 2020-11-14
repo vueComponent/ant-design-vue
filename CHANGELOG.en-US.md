@@ -10,6 +10,18 @@
 
 ---
 
+## 2.0.0-rc.1
+
+`2020-11-14`
+
+- 🎉🎉🎉
+- 🌟 Menu cancel the default lazy loading, improve the first animation effect, optimize the Bezier curve function, and make it smoother [#3177](https://github.com/vueComponent/ant-design-vue/pull/3177)
+- 🐞 Fix Select search function failure problem [#3144](https://github.com/vueComponent/ant-design-vue/issues/3144)
+- 🐞 Fix the Drawer component does not have automatic focus, which can not be closed directly by the ESC button [#3148](https://github.com/vueComponent/ant-design-vue/issues/3148)
+- 🐞 Fix the incorrect position of popover elements in Popover [#3147](https://github.com/vueComponent/ant-design-vue/issues/3147)
+- 🐞 Fix CountDown not updating problem [#3170](https://github.com/vueComponent/ant-design-vue/pull/3170)
+- 🐞 Fix multiple errors or missing Ts types
+
 ## 2.0.0-beta.15
 
 `2020-11-08`

@@ -10,6 +10,19 @@
 
 ---
 
+
+## 2.0.0-rc.1
+
+`2020-11-14`
+
+- 🎉🎉🎉
+- 🌟 Menu 取消默认懒加载，提升首次动画效果，优化贝塞尔曲线函数，更加流畅 [#3177](https://github.com/vueComponent/ant-design-vue/pull/3177)
+- 🐞 修复 Select 搜索功能失效问题 [#3144](https://github.com/vueComponent/ant-design-vue/issues/3144)
+- 🐞 修复 Drawer 组件没有自动 focus，导致不能直接通过 ESC 按键关闭 [#3148](https://github.com/vueComponent/ant-design-vue/issues/3148)
+- 🐞 修复 Popover 弹出元素位置不正确问题 [#3147](https://github.com/vueComponent/ant-design-vue/issues/3147)
+- 🐞 修复 CountDown 不更新问题 [#3170](https://github.com/vueComponent/ant-design-vue/pull/3170)
+- 🐞 修复多处 Ts 类型错误或缺失问题
+
 ## 2.0.0-beta.15
 
 `2020-11-08`

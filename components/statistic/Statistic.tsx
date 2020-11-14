@@ -52,7 +52,9 @@ export default defineComponent({
       value,
       formatter,
     };
-    let valueNode = <StatisticNumber {...props} />;
+    // data-for-update just for update component
+    // https://github.com/vueComponent/ant-design-vue/pull/3170
+    let valueNode = <StatisticNumber data-for-update={Date.now()} {...props} />;
     if (valueRender) {
       valueNode = valueRender(valueNode);
     }

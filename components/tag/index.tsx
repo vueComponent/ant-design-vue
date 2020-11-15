@@ -80,7 +80,7 @@ const Tag = defineComponent({
     return () => {
       const {
         prefixCls: customizePrefixCls,
-        icon,
+        icon = slots.icon?.(),
         color,
         closeIcon = slots.closeIcon?.(),
         closable = false,

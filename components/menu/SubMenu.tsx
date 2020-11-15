@@ -31,15 +31,16 @@ export default defineComponent({
 
   render() {
     const { $slots, $attrs } = this;
-    const { rootPrefixCls, popupClassName } = { ...this.$props, ...this.injectExtraProps } as any;
+    const props: any = { ...this.$props, ...this.injectExtraProps };
+    const { rootPrefixCls, popupClassName } = props;
     const { theme: antdMenuTheme } = this.menuPropsContext;
-    const props = {
-      ...this.$props,
+    const subMenuProps = {
+      ...props,
       popupClassName: classNames(`${rootPrefixCls}-${antdMenuTheme}`, popupClassName),
       ref: 'subMenu',
       ...$attrs,
       ...Omit($slots, ['default']),
     };
-    return <VcSubMenu {...props}>{getSlot(this)}</VcSubMenu>;
+    return <VcSubMenu {...subMenuProps}>{getSlot(this)}</VcSubMenu>;
   },
 });

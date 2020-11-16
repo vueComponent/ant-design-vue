@@ -51,8 +51,8 @@ function setNotificationConfig(options: ConfigProps) {
 
 function getPlacementStyle(
   placement: NotificationPlacement,
-  top: string | number = defaultTop,
-  bottom: string | number = defaultBottom,
+  top: string = defaultTop,
+  bottom: string = defaultBottom,
 ) {
   let style;
   switch (placement) {
@@ -92,8 +92,8 @@ type NotificationInstanceProps = {
   prefixCls: string;
   placement?: NotificationPlacement;
   getContainer?: () => HTMLElement;
-  top?: string | number;
-  bottom?: string | number;
+  top?: string;
+  bottom?: string;
   closeIcon?: VNodeTypes;
 };
 
@@ -156,8 +156,8 @@ export interface ArgsProps {
   class?: string;
   readonly type?: IconType;
   onClick?: () => void;
-  top?: number;
-  bottom?: number;
+  top?: string;
+  bottom?: string;
   getContainer?: () => HTMLElement;
   closeIcon?: VNodeTypes;
 }

@@ -16,42 +16,42 @@ import { defaultConfigProvider } from '../config-provider';
 const TreeNode = VcTree.TreeNode;
 
 export interface TreeDataItem {
-  key: string | number,
-  title: string,
-  isLeaf: boolean,
-  selectable: boolean,
-  disableCheckbox: boolean,
-  disabled: boolean,
-  class?: string,
-  style?: any,
-  checkable?: boolean,
-  icon?: any,
-  slots?: any,
-  scopedSlots?: any,
-  switcherIcon?: any,
+  key: string | number;
+  title: string;
+  isLeaf: boolean;
+  selectable: boolean;
+  disableCheckbox: boolean;
+  disabled: boolean;
+  class?: string;
+  style?: any;
+  checkable?: boolean;
+  icon?: any;
+  slots?: any;
+  scopedSlots?: any;
+  switcherIcon?: any;
 }
 
 interface DefaultEvent {
-  nativeEvent: MouseEvent,
-  node: any,
+  nativeEvent: MouseEvent;
+  node: any;
 }
 
 export interface CheckEvent extends DefaultEvent {
-  checked: boolean,
-  checkedNodes: VNode[],
-  checkedNodesPositions: {node: VNode,pos: string | number}[],
-  event: string,
-  halfCheckedKeys: (string | number)[],
+  checked: boolean;
+  checkedNodes: VNode[];
+  checkedNodesPositions: { node: VNode; pos: string | number }[];
+  event: string;
+  halfCheckedKeys: (string | number)[];
 }
 
 export interface ExpendEvent extends DefaultEvent {
-  expanded: boolean,
+  expanded: boolean;
 }
 
 export interface SelectEvent extends DefaultEvent {
-  event: string,
-  selected: boolean,
-  selectedNodes: VNode[]
+  event: string;
+  selected: boolean;
+  selectedNodes: VNode[];
 }
 
 function TreeProps() {
@@ -72,7 +72,9 @@ function TreeProps() {
     /** 默认展开对应树节点 */
     defaultExpandParent: PropTypes.looseBool,
     /** 默认展开指定的树节点 */
-    defaultExpandedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+    defaultExpandedKeys: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    ),
     /** （受控）展开指定的树节点 */
     expandedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
     /** （受控）选中复选框的树节点 */
@@ -84,11 +86,15 @@ function TreeProps() {
       }).loose,
     ]),
     /** 默认选中复选框的树节点 */
-    defaultCheckedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+    defaultCheckedKeys: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    ),
     /** （受控）设置选中的树节点 */
     selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
     /** 默认选中的树节点 */
-    defaultSelectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+    defaultSelectedKeys: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    ),
     selectable: PropTypes.looseBool,
 
     /** filter some AntTreeNodes as you need. it should return true */

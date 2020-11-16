@@ -29,7 +29,7 @@ export interface DirectoryTreeState {
   _selectedKeys?: (string | number)[];
 }
 
-function getIcon(props: {isLeaf:boolean, expanded:boolean} & VNode) {
+function getIcon(props: { isLeaf: boolean; expanded: boolean } & VNode) {
   const { isLeaf, expanded } = props;
   if (isLeaf) {
     return <FileOutlined />;
@@ -184,7 +184,7 @@ export default defineComponent({
       this.tree = node;
     },
 
-    expandFolderNode(event: MouseEvent, node: {isLeaf: boolean} & VNode) {
+    expandFolderNode(event: MouseEvent, node: { isLeaf: boolean } & VNode) {
       const { isLeaf } = node;
 
       if (isLeaf || event.shiftKey || event.metaKey || event.ctrlKey) {

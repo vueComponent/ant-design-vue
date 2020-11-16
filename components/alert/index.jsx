@@ -125,13 +125,18 @@ const Alert = {
     });
 
     const closeIcon = closable ? (
-      <a type="button" onClick={this.handleClose} class={`${prefixCls}-close-icon`} tabIndex={0}>
+      <button
+        type="button"
+        onClick={this.handleClose}
+        class={`${prefixCls}-close-icon`}
+        tabIndex={0}
+      >
         {closeText ? (
           <span class={`${prefixCls}-close-text`}>{closeText}</span>
         ) : (
           <Icon type="close" />
         )}
-      </a>
+      </button>
     ) : null;
 
     const iconNode = (icon &&

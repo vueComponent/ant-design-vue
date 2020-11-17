@@ -16,12 +16,13 @@ import { defaultConfigProvider } from '../config-provider';
 const TreeNode = VcTree.TreeNode;
 
 export interface TreeDataItem {
-  key: string | number;
-  title: string;
-  isLeaf: boolean;
-  selectable: boolean;
-  disableCheckbox: boolean;
-  disabled: boolean;
+  key?: string | number;
+  title?: string;
+  isLeaf?: boolean;
+  selectable?: boolean;
+  children?: TreeDataItem[];
+  disableCheckbox?: boolean;
+  disabled?: boolean;
   class?: string;
   style?: any;
   checkable?: boolean;

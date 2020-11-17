@@ -27,22 +27,25 @@ export default defineComponent({
         large: 'lg',
         small: 'sm',
       },
-      sLoading: !!this.loading,
+      sLoading: false,
       hasTwoCNChar: false,
     };
   },
   watch: {
-    loading(val, preVal) {
-      if (preVal && typeof preVal !== 'boolean') {
-        clearTimeout(this.delayTimeout);
-      }
-      if (val && typeof val !== 'boolean' && val.delay) {
-        this.delayTimeout = setTimeout(() => {
+    loading: {
+      handler(val, preVal) {
+        if (preVal && typeof preVal !== 'boolean') {
+          clearTimeout(this.delayTimeout);
+        }
+        if (val && typeof val !== 'boolean' && val.delay) {
+          this.delayTimeout = setTimeout(() => {
+            this.sLoading = !!val;
+          }, val.delay);
+        } else {
           this.sLoading = !!val;
-        }, val.delay);
-      } else {
-        this.sLoading = !!val;
-      }
+        }
+      },
+      immediate: true,
     },
   },
   mounted() {

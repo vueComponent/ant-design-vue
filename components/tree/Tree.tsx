@@ -28,7 +28,6 @@ export interface TreeDataItem {
   checkable?: boolean;
   icon?: any;
   slots?: any;
-  scopedSlots?: any;
   switcherIcon?: any;
 }
 
@@ -202,16 +201,14 @@ export default defineComponent({
       return treeData.map(item => {
         const key = item[replaceFields.key];
         const children = item[replaceFields.children];
-        const { slots = {}, scopedSlots = {}, class: cls, style, ...restProps } = item;
+        const { slots = {}, class: cls, style, ...restProps } = item;
         const treeNodeProps = {
           ...restProps,
-          icon: $slots[scopedSlots.icon] || $slots[slots.icon] || restProps.icon,
+          icon: $slots[slots.icon] || restProps.icon,
           switcherIcon:
-            $slots[scopedSlots.switcherIcon] ||
             $slots[slots.switcherIcon] ||
             restProps.switcherIcon,
           title:
-            $slots[scopedSlots.title] ||
             $slots[slots.title] ||
             $slots.title ||
             restProps[replaceFields.title],

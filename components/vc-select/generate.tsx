@@ -54,6 +54,7 @@ import {
 import createRef from '../_util/createRef';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
+import warning from '../_util/warning';
 
 const DEFAULT_OMIT_PROPS = [
   'children',
@@ -341,7 +342,11 @@ export default function generateSelector<
       const useInternalProps = computed(
         () => props.internalProps && props.internalProps.mark === INTERNAL_PROPS_MARK,
       );
-
+      warning(
+        props.optionFilterProp !== 'children',
+        'Select',
+        'optionFilterProp not support children, please use label instead',
+      );
       const containerRef = ref(null);
       const triggerRef = ref(null);
       const selectorRef = ref(null);

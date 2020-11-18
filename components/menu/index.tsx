@@ -165,7 +165,7 @@ const Menu = defineComponent({
 
       // Fix SVGElement e.target.className.indexOf is not a function
       // https://github.com/ant-design/ant-design/issues/15699
-      const { className } = e.target as (SVGAnimationElement | HTMLElement);
+      const { className } = e.target as SVGAnimationElement | HTMLElement;
       // SVGAnimatedString.animVal should be identical to SVGAnimatedString.baseVal, unless during an animation.
       const classNameValue =
         Object.prototype.toString.call(className) === '[object SVGAnimatedString]'

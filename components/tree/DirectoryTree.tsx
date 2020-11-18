@@ -1,4 +1,4 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, VNode } from 'vue';
 import omit from 'omit.js';
 import debounce from 'lodash-es/debounce';
 import FolderOpenOutlined from '@ant-design/icons-vue/FolderOpenOutlined';
@@ -7,7 +7,7 @@ import FileOutlined from '@ant-design/icons-vue/FileOutlined';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import { conductExpandParent, convertTreeToEntities } from '../vc-tree/src/util';
-import Tree, { TreeProps } from './Tree';
+import Tree, { CheckEvent, ExpendEvent, SelectEvent, TreeProps } from './Tree';
 import {
   calcRangeKeys,
   getFullKeyList,
@@ -25,11 +25,11 @@ import { defaultConfigProvider } from '../config-provider';
 // selectedKeys?: string[]; }
 
 export interface DirectoryTreeState {
-  _expandedKeys?: string[];
-  _selectedKeys?: string[];
+  _expandedKeys?: (string | number)[];
+  _selectedKeys?: (string | number)[];
 }
 
-function getIcon(props) {
+function getIcon(props: { isLeaf: boolean; expanded: boolean } & VNode) {
   const { isLeaf, expanded } = props;
   if (isLeaf) {
     return <FileOutlined />;
@@ -56,7 +56,7 @@ export default defineComponent({
       children: null,
       onDebounceExpand: null,
       tree: null,
-      lastSelectedKey: [],
+      lastSelectedKey: '',
       cachedSelectedKeys: [],
       configProvider: inject('configProvider', defaultConfigProvider),
     };
@@ -100,7 +100,7 @@ export default defineComponent({
     this.onDebounceExpand = debounce(this.expandFolderNode, 200, { leading: true });
   },
   methods: {
-    handleExpand(expandedKeys, info) {
+    handleExpand(expandedKeys: (string | number)[], info: ExpendEvent) {
       this.setUncontrolledState({ _expandedKeys: expandedKeys });
       this.$emit('update:expandedKeys', expandedKeys);
       this.$emit('expand', expandedKeys, info);
@@ -108,7 +108,7 @@ export default defineComponent({
       return undefined;
     },
 
-    handleClick(event, node) {
+    handleClick(event: MouseEvent, node: VNode) {
       const { expandAction } = this.$props;
 
       // Expand the tree
@@ -118,7 +118,7 @@ export default defineComponent({
       this.$emit('click', event, node);
     },
 
-    handleDoubleClick(event, node) {
+    handleDoubleClick(event: MouseEvent, node: VNode) {
       const { expandAction } = this.$props;
 
       // Expand the tree
@@ -130,7 +130,7 @@ export default defineComponent({
       this.$emit('dblclick', event, node);
     },
 
-    hanldeSelect(keys, event) {
+    hanldeSelect(keys: (string | number)[], event: SelectEvent) {
       const { multiple } = this.$props;
       const children = this.children || [];
       const { _expandedKeys: expandedKeys = [] } = this.$data;
@@ -150,7 +150,7 @@ export default defineComponent({
       const shiftPick = nativeEvent.shiftKey;
 
       // Generate new selected keys
-      let newSelectedKeys;
+      let newSelectedKeys: (string | number)[];
       if (multiple && ctrlPick) {
         // Control click
         newSelectedKeys = keys;
@@ -180,11 +180,11 @@ export default defineComponent({
 
       this.setUncontrolledState(newState);
     },
-    setTreeRef(node) {
+    setTreeRef(node: VNode) {
       this.tree = node;
     },
 
-    expandFolderNode(event, node) {
+    expandFolderNode(event: MouseEvent, node: { isLeaf: boolean } & VNode) {
       const { isLeaf } = node;
 
       if (isLeaf || event.shiftKey || event.metaKey || event.ctrlKey) {
@@ -201,7 +201,7 @@ export default defineComponent({
       }
     },
 
-    setUncontrolledState(state) {
+    setUncontrolledState(state: unknown) {
       const newState = omit(
         state,
         Object.keys(getOptionProps(this)).map(p => `_${p}`),
@@ -210,7 +210,7 @@ export default defineComponent({
         this.setState(newState);
       }
     },
-    handleCheck(checkedObj, eventObj) {
+    handleCheck(checkedObj: (string | number)[], eventObj: CheckEvent) {
       this.$emit('update:checkedKeys', checkedObj);
       this.$emit('check', checkedObj, eventObj);
     },

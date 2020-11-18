@@ -57,7 +57,6 @@ export default defineComponent({
   },
   methods: {
     handleVisibleChange(visible: boolean) {
-      console.log(visible);
       if (!hasProp(this, 'visible')) {
         this.sVisible = this.isNoTitle() ? false : visible;
       }

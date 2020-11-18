@@ -125,10 +125,13 @@ export default defineComponent({
         }
         this.resetEffect(node);
         // Get wave color from target
-        const waveColor =
-          getComputedStyle(node).getPropertyValue('border-top-color') || // Firefox Compatible
-          getComputedStyle(node).getPropertyValue('border-color') ||
-          getComputedStyle(node).getPropertyValue('background-color');
+        let waveColor = getComputedStyle(node).getPropertyValue('background-color');
+        if (getComputedStyle(node).getPropertyValue('border-width') !== '0px') {
+          waveColor =
+            getComputedStyle(node).getPropertyValue('border-top-color') || // Firefox Compatible
+            getComputedStyle(node).getPropertyValue('border-color') ||
+            waveColor;
+        }
         this.clickWaveTimeoutId = window.setTimeout(() => this.onClick(node, waveColor), 0);
         raf.cancel(this.animationStartId);
         this.animationStart = true;

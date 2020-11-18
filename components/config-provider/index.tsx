@@ -2,7 +2,7 @@ import { reactive, provide, VNodeTypes, PropType, defineComponent, watch } from 
 import PropTypes from '../_util/vue-types';
 import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
 import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
-
+import { TransformCellTextProps } from '../table/interface';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { withInstall } from '../_util/type';
 
@@ -20,6 +20,7 @@ export interface ConfigConsumerProps {
   rootPrefixCls?: string;
   getPrefixCls: (suffixCls?: string, customizePrefixCls?: string) => string;
   renderEmpty: RenderEmptyHandler;
+  transformCellText?: (tableProps: TransformCellTextProps) => any;
   csp?: CSPConfig;
   autoInsertSpaceInButton?: boolean;
   input?: {
@@ -55,6 +56,7 @@ export interface ConfigProviderProps {
   prefixCls?: string;
   children?: VNodeTypes;
   renderEmpty?: RenderEmptyHandler;
+  transformCellText?: (tableProps: TransformCellTextProps) => any;
   csp?: CSPConfig;
   autoInsertSpaceInButton?: boolean;
   input?: {
@@ -88,6 +90,9 @@ const ConfigProvider = defineComponent({
     },
     renderEmpty: {
       type: Function as PropType<RenderEmptyHandler>,
+    },
+    transformCellText: {
+      type: Function as PropType<(tableProps: TransformCellTextProps) => any>,
     },
     csp: {
       type: Object as PropType<CSPConfig>,

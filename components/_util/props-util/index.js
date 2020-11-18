@@ -2,6 +2,7 @@ import isPlainObject from 'lodash-es/isPlainObject';
 import classNames from '../classNames';
 import { isVNode, Fragment, Comment, Text, h } from 'vue';
 import { camelize, hyphenate, isOn, resolvePropValue } from '../util';
+import * as Icons from '@ant-design/icons-vue';
 import isValid from '../isValid';
 // function getType(fn) {
 //   const match = fn && fn.toString().match(/^\s*function (\w+)/);
@@ -150,11 +151,27 @@ const getOptionProps = instance => {
   return res;
 };
 const getComponent = (instance, prop = 'default', options = instance, execute = true) => {
+  const mapper = {
+    function: ({ execute, propValue, options }) =>
+      execute ? propValue.call(this, options) : propValue,
+    string: ({ propValue }) => {
+      const iconCom = Icons[propValue];
+      return iconCom ? <iconCom /> : propValue;
+    },
+  };
+
+  const emitMapper = ({ propValue, ...args }) => {
+    const propValueType = typeof propValue;
+    return Object.keys(mapper).includes(propValueType)
+      ? mapper[propValueType].call(this, { propValue, ...args })
+      : propValue;
+  };
+
   let com = undefined;
   if (instance.$) {
     const temp = instance[prop];
     if (temp !== undefined) {
-      return typeof temp === 'function' && execute ? temp(options) : temp;
+      return emitMapper({ execute, propValue: temp, options });
     } else {
       com = instance.$slots[prop];
       com = execute && com ? com(options) : com;
@@ -162,7 +179,7 @@ const getComponent = (instance, prop = 'default', options = instance, execute = 
   } else if (isVNode(instance)) {
     const temp = instance.props && instance.props[prop];
     if (temp !== undefined && instance.props !== null) {
-      return typeof temp === 'function' && execute ? temp(options) : temp;
+      return emitMapper({ execute, propValue: temp, options });
     } else if (instance.type === Fragment) {
       com = instance.children;
     } else if (instance.children && instance.children[prop]) {

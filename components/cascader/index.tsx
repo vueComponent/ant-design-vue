@@ -161,7 +161,7 @@ function defaultSortFilteredOption(
   inputValue: string,
   names: FilledFieldNamesType,
 ) {
-  function callback(elem) {
+  function callback(elem: CascaderOptionType) {
     return elem[names.label].indexOf(inputValue) > -1;
   }
 
@@ -327,7 +327,7 @@ const Cascader = defineComponent({
     },
 
     handleInputChange(e: Event) {
-      const inputValue = (e.target as any).value;
+      const inputValue = (e.target as HTMLInputElement).value;
       this.setState({ inputValue });
       this.$emit('search', inputValue);
     },

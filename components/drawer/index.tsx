@@ -225,7 +225,7 @@ const Drawer = defineComponent({
     const handler = getComponent(this, 'handle') || false;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('drawer', customizePrefixCls);
-    const { class: className } = this.$attrs as any;
+    const { class: className } = this.$attrs;
     const vcDrawerProps: any = {
       ...this.$attrs,
       ...omit(rest, [
@@ -253,7 +253,7 @@ const Drawer = defineComponent({
       showMask: mask,
       placement,
       class: classnames({
-        [className]: !!className,
+        [className as string]: !!className,
         [wrapClassName]: !!wrapClassName,
         [haveMask]: !!haveMask,
       }),

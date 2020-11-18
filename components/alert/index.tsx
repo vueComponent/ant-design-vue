@@ -129,9 +129,14 @@ const Alert = defineComponent({
     });
 
     const closeIcon = closable ? (
-      <a type="button" onClick={this.handleClose} class={`${prefixCls}-close-icon`} tabindex={0}>
+      <button
+        type="button"
+        onClick={this.handleClose}
+        class={`${prefixCls}-close-icon`}
+        tabindex={0}
+      >
         {closeText ? <span class={`${prefixCls}-close-text`}>{closeText}</span> : <CloseOutlined />}
-      </a>
+      </button>
     ) : null;
 
     const iconNode = (icon &&

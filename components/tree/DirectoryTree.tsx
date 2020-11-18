@@ -240,6 +240,10 @@ export default defineComponent({
       onExpand: this.handleExpand,
       onCheck: this.handleCheck,
     };
-    return <Tree {...treeProps}>{this.children}</Tree>;
+    return (
+      <Tree {...treeProps} v-slots={omit(this.$slots, ['default'])}>
+        {this.children}
+      </Tree>
+    );
   },
 });

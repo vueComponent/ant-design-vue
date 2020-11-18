@@ -6,7 +6,7 @@ interface NumberProps extends FormatConfig {
   value: valueType;
 }
 
-const Number: FunctionalComponent<NumberProps> = props => {
+const StatisticNumber: FunctionalComponent<NumberProps> = props => {
   const { value, formatter, precision, decimalSeparator, groupSeparator = '', prefixCls } = props;
   let valueNode: VNodeTypes;
 
@@ -50,4 +50,5 @@ const Number: FunctionalComponent<NumberProps> = props => {
 
   return <span class={`${prefixCls}-content-value`}>{valueNode}</span>;
 };
-export default Number;
+StatisticNumber.displayName = 'StatisticNumber';
+export default StatisticNumber;

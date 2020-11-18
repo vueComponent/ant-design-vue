@@ -52,7 +52,7 @@ export const FormProps = {
   prefixCls: PropTypes.string,
   hideRequiredMark: PropTypes.looseBool,
   model: PropTypes.object,
-  rules: { type: Object as PropType<{[k: string]: ValidationRule[] | ValidationRule}> },
+  rules: { type: Object as PropType<{ [k: string]: ValidationRule[] | ValidationRule }> },
   validateMessages: PropTypes.object,
   validateOnRuleChange: PropTypes.looseBool,
   // 提交失败自动滚动到第一个错误字段
@@ -63,7 +63,7 @@ export const FormProps = {
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
 };
 
-function isEqualName(name1: any, name2: any) {
+function isEqualName(name1: NamePath, name2: NamePath) {
   return isEqual(toArray(name1), toArray(name2));
 }
 

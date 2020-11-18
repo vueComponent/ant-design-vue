@@ -10,8 +10,8 @@ import warning from '../_util/warning';
 
 const { Option, OptGroup } = Select;
 
-function isSelectOptionOrSelectOptGroup(child: any): Boolean {
-  return child && child.type && (child.type.isSelectOption || child.type.isSelectOptGroup);
+function isSelectOptionOrSelectOptGroup(child: any): boolean {
+  return child?.type?.isSelectOption || child?.type?.isSelectOptGroup;
 }
 
 const AutoCompleteProps = {
@@ -83,12 +83,12 @@ const AutoComplete = defineComponent({
 
   render() {
     const { size, prefixCls: customizePrefixCls, dataSource } = this;
-    let optionChildren: any;
+    let optionChildren: VNode[];
     const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('select', customizePrefixCls);
-    const { class: className } = this.$attrs as any;
+    const { class: className } = this.$attrs;
     const cls = {
-      [className]: !!className,
+      [className as string]: !!className,
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-sm`]: size === 'small',
       [`${prefixCls}-show-search`]: true,

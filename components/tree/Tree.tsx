@@ -1,4 +1,4 @@
-import { defineComponent, inject, VNode } from 'vue';
+import { defineComponent, inject, VNode, PropType } from 'vue';
 import classNames from '../_util/classNames';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import FileOutlined from '@ant-design/icons-vue/FileOutlined';
@@ -123,7 +123,9 @@ function TreeProps() {
     prefixCls: PropTypes.string,
     filterTreeNode: PropTypes.func,
     openAnimation: PropTypes.any,
-    treeData: PropTypes.array,
+    treeData: {
+      type: Array as PropType<TreeDataItem[]>,
+    },
     /**
      * @default{title,key,children}
      * 替换treeNode中 title,key,children字段为treeData中对应的字段
@@ -205,13 +207,8 @@ export default defineComponent({
         const treeNodeProps = {
           ...restProps,
           icon: $slots[slots.icon] || restProps.icon,
-          switcherIcon:
-            $slots[slots.switcherIcon] ||
-            restProps.switcherIcon,
-          title:
-            $slots[slots.title] ||
-            $slots.title ||
-            restProps[replaceFields.title],
+          switcherIcon: $slots[slots.switcherIcon] || restProps.switcherIcon,
+          title: $slots[slots.title] || $slots.title || restProps[replaceFields.title],
           dataRef: item,
           key,
           class: cls,

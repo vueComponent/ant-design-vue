@@ -31,7 +31,7 @@ export default () => ({
   mouseLeaveDelay: PropTypes.number.def(0.1),
   getPopupContainer: PropTypes.func,
   arrowPointAtCenter: PropTypes.looseBool.def(false),
-  autoAdjustOverflow: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]).def(true),
+  autoAdjustOverflow: PropTypes.looseBool.def(true),
   destroyTooltipOnHide: PropTypes.looseBool.def(false),
   align: PropTypes.object.def(() => ({})),
   builtinPlacements: PropTypes.object,

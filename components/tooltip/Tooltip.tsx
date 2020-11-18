@@ -15,7 +15,7 @@ import { cloneElement } from '../_util/vnode';
 import { defaultConfigProvider } from '../config-provider';
 import abstractTooltipProps from './abstractTooltipProps';
 
-const splitObject = (obj: any, keys: string[]) => {
+const splitObject = (obj: { [key: string]: string }, keys: string[]) => {
   const picked = {};
   const omitted = { ...obj };
   keys.forEach(key => {
@@ -56,7 +56,8 @@ export default defineComponent({
     },
   },
   methods: {
-    handleVisibleChange(visible) {
+    handleVisibleChange(visible: boolean) {
+      console.log(visible);
       if (!hasProp(this, 'visible')) {
         this.sVisible = this.isNoTitle() ? false : visible;
       }
@@ -85,7 +86,7 @@ export default defineComponent({
     // Fix Tooltip won't hide at disabled button
     // mouse events don't trigger at disabled button in Chrome
     // https://github.com/react-component/tooltip/issues/18
-    getDisabledCompatibleChildren(ele) {
+    getDisabledCompatibleChildren(ele: any) {
       if (
         ((typeof ele.type === 'object' &&
           (ele.type.__ANT_BUTTON === true ||
@@ -143,7 +144,7 @@ export default defineComponent({
     },
 
     // 动态设置动画点
-    onPopupAlign(domNode, align) {
+    onPopupAlign(domNode: HTMLElement, align: any) {
       const placements = this.getPlacements();
       // 当前返回的位置
       const placement = Object.keys(placements).filter(

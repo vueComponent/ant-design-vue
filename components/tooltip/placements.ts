@@ -12,21 +12,29 @@ const autoAdjustOverflowDisabled = {
 
 const targetOffset = [0, 0];
 
-export function getOverflowOptions(autoAdjustOverflow) {
+interface PlacementsConfig {
+  arrowPointAtCenter: boolean;
+  arrowWidth?: number;
+  verticalArrowShift: number;
+  horizontalArrowShift?: number;
+  autoAdjustOverflow: boolean;
+}
+
+export function getOverflowOptions(autoAdjustOverflow: boolean) {
   if (typeof autoAdjustOverflow === 'boolean') {
     return autoAdjustOverflow ? autoAdjustOverflowEnabled : autoAdjustOverflowDisabled;
   }
   return {
     ...autoAdjustOverflowDisabled,
-    ...autoAdjustOverflow,
+    autoAdjustOverflow,
   };
 }
 
-export default function getPlacements(config) {
+export default function getPlacements(config: PlacementsConfig) {
   const {
     arrowWidth = 5,
     horizontalArrowShift = 16,
-    verticalArrowShift = 12,
+    verticalArrowShift,
     autoAdjustOverflow = true,
   } = config;
   const placementMap = {

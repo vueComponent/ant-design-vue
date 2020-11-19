@@ -180,6 +180,13 @@ export interface TableState {
   columns?: ColumnProps[];
 }
 
+export interface TransformCellTextProps {
+  text: any,
+  column: ColumnProps,
+  record: any,
+  index: number
+}
+
 // export type SelectionItemSelectFn = (key: string[]) => any;
 
 // export interface SelectionItem {

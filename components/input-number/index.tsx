@@ -29,6 +29,7 @@ const InputNumberProps = {
   onPressEnter: {
     type: Function as PropType<EventHandlerNonNull>,
   },
+  onChange: Function as PropType<(num: number) => void>,
 };
 
 const InputNumber = defineComponent({
@@ -78,14 +79,14 @@ const InputNumber = defineComponent({
     const upIcon = <UpOutlined class={`${prefixCls}-handler-up-inner`} />;
     const downIcon = <DownOutlined class={`${prefixCls}-handler-down-inner`} />;
 
-    const vcInputNumberprops = {
+    const vcInputNumberProps = {
       prefixCls,
       upHandler: upIcon,
       downHandler: downIcon,
       ...others,
       class: inputNumberClass,
     };
-    return <VcInputNumber {...vcInputNumberprops} ref="inputNumberRef" />;
+    return <VcInputNumber {...vcInputNumberProps} ref="inputNumberRef" />;
   },
 });
 

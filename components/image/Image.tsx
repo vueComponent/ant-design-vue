@@ -16,6 +16,7 @@ import PropTypes from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import BaseMixin from '../_util/BaseMixin';
+import { isNumber } from 'lodash-es';
 
 export interface ImagePreviewType {
   visible?: boolean;
@@ -86,6 +87,7 @@ const ImageInternal = defineComponent({
       srcset,
       usemap,
     } = attrs as ImgHTMLAttributes;
+
     const isCustomPlaceholder =
       (props.placeholder && props.placeholder !== true) || slots.placeholder;
     const { visible = undefined, getContainer = undefined } =
@@ -175,13 +177,17 @@ const ImageInternal = defineComponent({
         mousePosition.value = null;
       }
     };
+    const toSizePx = (l: number | string) => {
+      if (isNumber(l)) return l + 'px';
+      return l;
+    };
     return () => (
       <div
         class={wrappperClass}
         onClick={preview && !isError.value ? onPreview : onClick}
         style={{
-          width: width,
-          height: height,
+          width: toSizePx(width),
+          height: toSizePx(height),
           ...wrapperStyle,
         }}
         {...otherProps}

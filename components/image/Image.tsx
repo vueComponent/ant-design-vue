@@ -7,11 +7,10 @@ import {
   ImgHTMLAttributes,
   CSSProperties,
   ref,
-  watchEffect,
   watch,
-  unref,
   defineComponent,
   inject,
+  computed,
 } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
@@ -46,7 +45,7 @@ export const ImageProps = {
   wrapperStyle: PropTypes.style,
   prefixCls: PropTypes.string,
   previewPrefixCls: PropTypes.string,
-  placeholder: PropTypes.oneOf([PropTypes.looseBool, PropTypes.any]),
+  placeholder: PropTypes.oneOf([PropTypes.looseBool, PropTypes.VNodeChild]),
   fallback: PropTypes.string,
   preview: PropTypes.looseBool.def(true),
   /**
@@ -61,20 +60,14 @@ const ImageInternal = defineComponent({
   name: 'AImage',
   mixins: [BaseMixin],
   props: initDefaultProps(ImageProps, {}),
-  setup(props, { attrs }) {
+  setup(props, { attrs, slots }) {
     const {
-      src,
-
       onPreviewClose: onInitialPreviewClose,
-      placeholder,
       fallback,
-
       preview,
-
       onClick,
       wrapperClassName,
       wrapperStyle,
-
       ...otherProps
     } = props;
 
@@ -99,17 +92,15 @@ const ImageInternal = defineComponent({
       srcset,
       usemap,
     } = attrs as ImgHTMLAttributes;
-    const isCustomPlaceholder = placeholder && placeholder !== true;
+    const isCustomPlaceholder =
+      (props.placeholder && props.placeholder !== true) || slots.placeholder;
     const {
       visible = undefined,
       onVisibleChange = onInitialPreviewClose,
       getContainer = undefined,
     } = typeof preview === 'object' ? preview : {};
     const isControlled = visible !== undefined;
-    // const [isShowPreview, setShowPreview] = useMergedState(!!visible, {
-    //     value: visible,
-    //     onChange: onVisibleChange,
-    // });
+
     const isShowPreview = ref(visible);
     watch(
       () => visible,
@@ -120,7 +111,7 @@ const ImageInternal = defineComponent({
     const status = ref<ImageStatus>(isCustomPlaceholder ? 'loading' : 'normal');
 
     const mousePosition = ref<null | { x: number; y: number }>(null);
-    const isError = status.value === 'error';
+    const isError = computed(() => status.value === 'error');
 
     const onLoad = () => {
       status.value = 'normal';
@@ -160,9 +151,12 @@ const ImageInternal = defineComponent({
       },
     );
 
-    watchEffect(() => {
-      if (isCustomPlaceholder) status.value = 'loading';
-    });
+    watch(
+      () => props.src,
+      (val, old) => {
+        if (isCustomPlaceholder && val != old) status.value = 'loading';
+      },
+    );
     // React.useEffect(() => {
     //     if (isCustomPlaceholder) {
     //         setStatus('loading');
@@ -170,10 +164,10 @@ const ImageInternal = defineComponent({
     // }, [src]);
 
     const wrappperClass = cn(prefixCls, wrapperClassName, {
-      [`${prefixCls}-error`]: isError,
+      [`${prefixCls}-error`]: isError.value,
     });
 
-    const mergedSrc = isError && fallback ? fallback : src;
+    //const mergedSrc = computed(() => isError.value && fallback ? fallback : props.src);
     const imgCommonProps = {
       crossorigin,
       decoding,
@@ -186,7 +180,7 @@ const ImageInternal = defineComponent({
       className: cn(
         `${prefixCls}-img`,
         {
-          [`${prefixCls}-img-placeholder`]: placeholder === true,
+          [`${prefixCls}-img-placeholder`]: props.placeholder === true,
         },
         props.class,
       ),
@@ -198,7 +192,7 @@ const ImageInternal = defineComponent({
     return () => (
       <div
         class={wrappperClass}
-        onClick={preview && !isError ? onPreview : onClick}
+        onClick={preview && !isError.value ? onPreview : onClick}
         style={{
           width: width,
           height: height,
@@ -206,32 +200,32 @@ const ImageInternal = defineComponent({
         }}
         {...otherProps}
       >
-        {isError && fallback ? (
+        {isError.value && fallback ? (
           <img {...imgCommonProps} src={fallback} />
         ) : (
-          <img {...imgCommonProps} onLoad={onLoad} onError={onError} src={src} ref={img} />
+          <img {...imgCommonProps} onLoad={onLoad} onError={onError} src={props.src} ref={img} />
         )}
 
         {status.value === 'loading' && (
+          //此处缺少一种 placeholder ===true的逻辑
           <div aria-hidden="true" class={`${prefixCls}-placeholder`}>
-            {placeholder}
+            {slots.placeholder
+              ? slots.placeholder()
+              : props.placeholder !== true && props.placeholder()}
           </div>
         )}
 
-        {preview && !isError && (
-          <>
-            <span>{unref(isShowPreview)}</span>
-            <Preview
-              aria-hidden={!isShowPreview.value}
-              visible={isShowPreview.value}
-              prefixCls={previewPrefixCls}
-              onClose={onPreviewClose}
-              mousePosition={mousePosition.value}
-              src={mergedSrc}
-              alt={alt}
-              getContainer={getContainer}
-            />
-          </>
+        {preview && !isError.value && (
+          <Preview
+            aria-hidden={!isShowPreview.value}
+            visible={isShowPreview.value}
+            prefixCls={previewPrefixCls}
+            onClose={onPreviewClose}
+            mousePosition={mousePosition.value}
+            src={props.src}
+            alt={alt}
+            getContainer={getContainer}
+          />
         )}
       </div>
     );

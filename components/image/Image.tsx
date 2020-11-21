@@ -33,10 +33,7 @@ export interface ImagePropsType extends Omit<ImgHTMLAttributes, 'placeholder' | 
   placeholder?: VNode | boolean;
   fallback?: string;
   preview?: boolean | ImagePreviewType;
-  /**
-   * @deprecated since version 3.2.1
-   */
-  onPreviewClose?: (value: boolean, prevValue: boolean) => void;
+
   onClick?: (e: MouseEvent) => void;
 }
 export const ImageProps = {
@@ -48,10 +45,7 @@ export const ImageProps = {
   placeholder: PropTypes.oneOf([PropTypes.looseBool, PropTypes.VNodeChild]),
   fallback: PropTypes.string,
   preview: PropTypes.looseBool.def(true),
-  /**
-   * @deprecated since version 3.2.1
-   */
-  onPreviewClose: PropTypes.func,
+
   onClick: PropTypes.func,
 };
 type ImageStatus = 'normal' | 'error' | 'loading';
@@ -60,9 +54,9 @@ const ImageInternal = defineComponent({
   name: 'AImage',
   mixins: [BaseMixin],
   props: initDefaultProps(ImageProps, {}),
-  setup(props, { attrs, slots }) {
+  setup(props: ImagePropsType, { attrs, slots }) {
     const {
-      onPreviewClose: onInitialPreviewClose,
+      placeholder,
       fallback,
       preview,
       onClick,
@@ -94,20 +88,12 @@ const ImageInternal = defineComponent({
     } = attrs as ImgHTMLAttributes;
     const isCustomPlaceholder =
       (props.placeholder && props.placeholder !== true) || slots.placeholder;
-    const {
-      visible = undefined,
-      onVisibleChange = onInitialPreviewClose,
-      getContainer = undefined,
-    } = typeof preview === 'object' ? preview : {};
+    const { visible = undefined, getContainer = undefined } =
+      typeof preview === 'object' ? preview : {};
     const isControlled = visible !== undefined;
 
     const isShowPreview = ref(visible);
-    watch(
-      () => visible,
-      (val, old) => {
-        onVisibleChange(val, old);
-      },
-    );
+
     const status = ref<ImageStatus>(isCustomPlaceholder ? 'loading' : 'normal');
 
     const mousePosition = ref<null | { x: number; y: number }>(null);
@@ -134,12 +120,6 @@ const ImageInternal = defineComponent({
       if (onClick) onClick(e);
     };
 
-    const onPreviewClose = () => {
-      isShowPreview.value = false;
-      if (!isControlled) {
-        mousePosition.value = null;
-      }
-    };
     const img = ref<HTMLImageElement>(null);
     watch(
       () => img,
@@ -189,6 +169,12 @@ const ImageInternal = defineComponent({
         ...(style as CSSProperties),
       },
     };
+    const onPreviewClose = () => {
+      isShowPreview.value = false;
+      if (!isControlled) {
+        mousePosition.value = null;
+      }
+    };
     return () => (
       <div
         class={wrappperClass}
@@ -211,7 +197,7 @@ const ImageInternal = defineComponent({
           <div aria-hidden="true" class={`${prefixCls}-placeholder`}>
             {slots.placeholder
               ? slots.placeholder()
-              : props.placeholder !== true && props.placeholder()}
+              : props.placeholder !== true && props.placeholder}
           </div>
         )}
 

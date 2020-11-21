@@ -39,9 +39,8 @@ const PreviewType = {
 const Preview = defineComponent<PreviewProps>({
   name: 'Preview',
   props: initDefaultProps(PreviewType, {}),
-  emits: ['close'],
+  emits: ['close', 'afterClose'],
   setup(props, { emit }) {
-    const { prefixCls, src, alt, afterClose, ...restProps } = props;
     const scale = ref(1);
     const rotate = ref(0);
     const position = ref<{
@@ -68,6 +67,7 @@ const Preview = defineComponent<PreviewProps>({
       scale.value = 1;
       rotate.value = 0;
       position.value = initialPosition;
+      emit('afterClose');
     };
 
     const onZoomIn = () => {
@@ -91,10 +91,10 @@ const Preview = defineComponent<PreviewProps>({
     };
 
     const wrapClassName = classnames({
-      [`${prefixCls}-moving`]: isMoving.value,
+      [`${props.prefixCls}-moving`]: isMoving.value,
     });
-    const toolClassName = `${prefixCls}-operations-operation`;
-    const iconClassName = `${prefixCls}-operations-icon`;
+    const toolClassName = `${props.prefixCls}-operations-operation`;
+    const iconClassName = `${props.prefixCls}-operations-icon`;
     const tools = [
       {
         icon: CloseOutlined,
@@ -198,22 +198,21 @@ const Preview = defineComponent<PreviewProps>({
 
     return () => (
       <Dialog
-        {...restProps}
         transitionName="zoom"
         maskTransitionName="fade"
         closable={false}
         keyboard
-        prefixCls={prefixCls}
+        prefixCls={props.prefixCls}
         onClose={onClose}
         afterClose={onAfterClose}
         visible={props.visible}
         wrapClassName={wrapClassName}
       >
-        <ul class={`${prefixCls}-operations`}>
+        <ul class={`${props.prefixCls}-operations`}>
           {tools.map(({ icon: IconType, onClick, type, disabled }) => (
             <li
               class={classnames(toolClassName, {
-                [`${prefixCls}-operations-operation-disabled`]: disabled && disabled?.value,
+                [`${props.prefixCls}-operations-operation-disabled`]: disabled && disabled?.value,
               })}
               onClick={onClick}
               key={type}
@@ -223,7 +222,7 @@ const Preview = defineComponent<PreviewProps>({
           ))}
         </ul>
         <div
-          class={`${prefixCls}-img-wrapper`}
+          class={`${props.prefixCls}-img-wrapper`}
           style={{
             transform: `translate3d(${position.value.x}px, ${position.value.y}px, 0)`,
           }}
@@ -231,9 +230,9 @@ const Preview = defineComponent<PreviewProps>({
           <img
             onMousedown={onMouseDown}
             ref={imgRef}
-            class={`${prefixCls}-img`}
-            src={src}
-            alt={alt}
+            class={`${props.prefixCls}-img`}
+            src={props.src}
+            alt={props.alt}
             style={{
               transform: `scale3d(${scale.value}, ${scale.value}, 1) rotate(${rotate.value}deg)`,
             }}

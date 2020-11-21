@@ -35,7 +35,7 @@ export interface ImagePropsType extends Omit<ImgHTMLAttributes, 'placeholder' | 
   fallback?: string;
   preview?: boolean | ImagePreviewType;
 
-  onClick?: (e: MouseEvent) => void;
+  //  onClick?: (e: MouseEvent) => void;
 }
 export const ImageProps = {
   src: PropTypes.string,
@@ -47,7 +47,7 @@ export const ImageProps = {
   fallback: PropTypes.string,
   preview: PropTypes.looseBool.def(true),
 
-  onClick: PropTypes.func,
+  //onClick: PropTypes.func,
 };
 type ImageStatus = 'normal' | 'error' | 'loading';
 //
@@ -55,17 +55,8 @@ const ImageInternal = defineComponent({
   name: 'AImage',
   mixins: [BaseMixin],
   props: initDefaultProps(ImageProps, {}),
-  setup(props: ImagePropsType, { attrs, slots }) {
-    const {
-      placeholder,
-      fallback,
-      preview,
-      onClick,
-      wrapperClassName,
-      wrapperStyle,
-      ...otherProps
-    } = props;
-
+  emits: ['click'],
+  setup(props: ImagePropsType, { attrs, slots, emit }) {
     const configProvider = inject('configProvider', defaultConfigProvider);
 
     const { getPrefixCls } = configProvider;
@@ -91,7 +82,7 @@ const ImageInternal = defineComponent({
     const isCustomPlaceholder =
       (props.placeholder && props.placeholder !== true) || slots.placeholder;
     const { visible = undefined, getContainer = undefined } =
-      typeof preview === 'object' ? preview : {};
+      typeof props.preview === 'object' ? props.preview : {};
     const isControlled = visible !== undefined;
 
     const isShowPreview = ref(visible);
@@ -119,7 +110,7 @@ const ImageInternal = defineComponent({
         };
       }
       isShowPreview.value = true;
-      if (onClick) onClick(e);
+      emit('click', e);
     };
 
     const img = ref<HTMLImageElement>(null);
@@ -145,7 +136,7 @@ const ImageInternal = defineComponent({
     //     }
     // }, [src]);
 
-    const wrappperClass = cn(prefixCls, wrapperClassName, {
+    const wrappperClass = cn(prefixCls, props.wrapperClassName, {
       [`${prefixCls}-error`]: isError.value,
     });
 
@@ -184,16 +175,21 @@ const ImageInternal = defineComponent({
     return () => (
       <div
         class={wrappperClass}
-        onClick={preview && !isError.value ? onPreview : onClick}
+        onClick={
+          props.preview && !isError.value
+            ? onPreview
+            : e => {
+                emit('click', e);
+              }
+        }
         style={{
           width: toSizePx(width),
           height: toSizePx(height),
-          ...wrapperStyle,
+          ...props.wrapperStyle,
         }}
-        {...otherProps}
       >
-        {isError.value && fallback ? (
-          <img {...imgCommonProps} src={fallback} />
+        {isError.value && props.fallback ? (
+          <img {...imgCommonProps} src={props.fallback} />
         ) : (
           <img {...imgCommonProps} onLoad={onLoad} onError={onError} src={props.src} ref={img} />
         )}
@@ -207,7 +203,7 @@ const ImageInternal = defineComponent({
           </div>
         )}
 
-        {preview && !isError.value && (
+        {props.preview && !isError.value && (
           <Preview
             aria-hidden={!isShowPreview.value}
             visible={isShowPreview.value}

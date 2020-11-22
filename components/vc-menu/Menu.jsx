@@ -3,7 +3,16 @@ import { default as SubPopupMenu } from './SubPopupMenu';
 import BaseMixin from '../_util/BaseMixin';
 import hasProp, { getOptionProps, getComponent } from '../_util/props-util';
 import commonPropsType from './commonPropsType';
-import { computed, defineComponent, getCurrentInstance, provide, reactive, ref, toRaw, watch } from 'vue';
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  provide,
+  reactive,
+  ref,
+  toRaw,
+  watch,
+} from 'vue';
 
 const Menu = {
   name: 'Menu',
@@ -16,12 +25,23 @@ const Menu = {
   mixins: [BaseMixin],
   setup(props) {
     const menuChildrenInfo = reactive({});
-    const selectedKeys = computed(() => {
-      return props.selectedKeys || props.defaultSelectedKeys || [];
-    });
-    const openKeys = computed(() => {
-      return props.openKeys || props.defaultOpenKeys || [];
-    });
+    const selectedKeys = ref(props.selectedKeys || props.defaultSelectedKeys || []);
+    const openKeys = ref(props.openKeys || props.defaultOpenKeys || []);
+    //  computed(() => {
+    //   return props.openKeys || props.defaultOpenKeys || [];
+    // });
+    watch(
+      () => props.selectedKeys,
+      () => {
+        selectedKeys.value = props.selectedKeys;
+      },
+    );
+    watch(
+      () => props.openKeys,
+      () => {
+        openKeys.value = props.openKeys;
+      },
+    );
     const activeKey = reactive({
       '0-menu-': props.activeKey,
     });
@@ -56,15 +76,18 @@ const Menu = {
       getActiveKey,
     });
     const ins = getCurrentInstance();
-    const getEl = () =>{
+    const getEl = () => {
       return ins.vnode.el;
     };
     provide('menuStore', store);
-    provide('parentMenu', reactive({
-      isRootMenu: computed(()=>props.isRootMenu),
-      getPopupContainer: computed(()=>props.getPopupContainer),
-      getEl,
-    }));
+    provide(
+      'parentMenu',
+      reactive({
+        isRootMenu: computed(() => props.isRootMenu),
+        getPopupContainer: computed(() => props.getPopupContainer),
+        getEl,
+      }),
+    );
     return {
       store,
     };

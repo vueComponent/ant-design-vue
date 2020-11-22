@@ -114,11 +114,12 @@ const MenuItem = defineComponent({
     },
 
     onClick(e) {
-      const { eventKey, multiple, isSelected } = this.$props;
+      const { eventKey, multiple } = this.$props;
+      const { isSelected } = this;
       const info = {
         key: eventKey,
         keyPath: [eventKey],
-        item: { ...this.$props },
+        item: this,
         domEvent: e,
       };
 

@@ -317,7 +317,7 @@ const SubPopupMenu = {
       if (props.mode === 'inline' || isMobileDevice()) {
         newChildProps.triggerSubMenuAction = 'click';
       }
-      return <FunctionProvider {...newChildProps}>{child}</FunctionProvider>;
+      return <FunctionProvider extraProps={newChildProps}>{child}</FunctionProvider>;
     },
 
     renderMenuItem(c, i, subMenuKey) {

@@ -1,4 +1,13 @@
-import { computed, defineComponent, getCurrentInstance, inject, onBeforeUnmount, onMounted, provide, reactive } from 'vue';
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  inject,
+  onBeforeUnmount,
+  onMounted,
+  provide,
+  reactive,
+} from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
@@ -90,14 +99,17 @@ const SubMenu = defineComponent({
       return store.selectedParentUniKeys.indexOf(uniKey) !== -1;
     });
     const ins = getCurrentInstance();
-    const getEl = () =>{
+    const getEl = () => {
       return ins.vnode.el;
     };
-    provide('parentMenu', reactive({
-      isRootMenu: computed(()=>props.isRootMenu),
-      getPopupContainer: props.getPopupContainer,
-      getEl,
-    }));
+    provide(
+      'parentMenu',
+      reactive({
+        isRootMenu: computed(() => props.isRootMenu),
+        getPopupContainer: props.getPopupContainer,
+        getEl,
+      }),
+    );
     return {
       parentMenu: inject('parentMenu', undefined),
       store,
@@ -124,8 +136,7 @@ const SubMenu = defineComponent({
     this.haveRendered = undefined;
     this.haveOpened = undefined;
     this.subMenuTitle = undefined;
-    return {
-    };
+    return {};
   },
   mounted() {
     this.$nextTick(() => {
@@ -162,7 +173,7 @@ const SubMenu = defineComponent({
       if (manualRef) {
         manualRef(this);
       }
-      if (mode !== 'horizontal' || !this.parentMenu.isRootMenu?.value || !this.isOpen) {
+      if (mode !== 'horizontal' || !this.parentMenu.isRootMenu || !this.isOpen) {
         return;
       }
       this.minWidthTimeout = requestAnimationTimeout(() => this.adjustWidth(), 0);
@@ -486,7 +497,7 @@ const SubMenu = defineComponent({
         {icon || <i class={`${prefixCls}-arrow`} />}
       </div>
     );
-    const getPopupContainer = this.parentMenu.isRootMenu?.value
+    const getPopupContainer = this.parentMenu.isRootMenu
       ? this.parentMenu.getPopupContainer?.value
       : triggerNode => triggerNode.parentNode;
     const popupPlacement = popupPlacementMap[props.mode];

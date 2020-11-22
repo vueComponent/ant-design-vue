@@ -100,7 +100,8 @@ const DOMWrap = {
       // put all the overflowed item inside a submenu
       // with a title of overflow indicator ('...')
       const copy = getSlot(this)[0];
-      const { title, ...rest } = getAllProps(copy); // eslint-disable-line no-unused-vars
+      const allProps = getAllProps(copy) || {};
+      const { title, extraProps, ...rest } = { ...allProps, ...allProps.extraProps }; // eslint-disable-line no-unused-vars
       let style = {};
       let key = `${keyPrefix}-overflowed-indicator`;
       let eventKey = `${keyPrefix}-overflowed-indicator`;
@@ -136,7 +137,6 @@ const DOMWrap = {
         key,
         style,
       };
-
       return <SubMenu {...subMenuProps}>{overflowedItems}</SubMenu>;
     },
 

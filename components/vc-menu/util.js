@@ -87,6 +87,8 @@ export const menuAllProps = [
   'slots',
   'ref',
   'isRootMenu',
+  'parentUniKeys',
+  'parentUniKey',
 ];
 
 // ref: https://github.com/ant-design/ant-design/issues/14007

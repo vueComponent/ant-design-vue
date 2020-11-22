@@ -1,9 +1,8 @@
-import { inject, provide } from 'vue';
+import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
 import KeyCode from '../_util/KeyCode';
-import { connect } from '../_util/store';
 import SubPopupMenu from './SubPopupMenu';
 import placements from './placements';
 import BaseMixin from '../_util/BaseMixin';
@@ -11,7 +10,7 @@ import { getComponent, filterEmpty, getSlot, splitAttrs, findDOMNode } from '../
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import { noop, getMenuIdFromSubMenuEventKey } from './util';
 import { getTransitionProps, Transition } from '../_util/transition';
-import { injectExtraPropsKey } from './FunctionProvider';
+import InjectExtraProps from './InjectExtraProps';
 
 let guid = 0;
 const popupPlacementMap = {
@@ -23,27 +22,21 @@ const popupPlacementMap = {
 
 const updateDefaultActiveFirst = (store, eventKey, defaultActiveFirst) => {
   const menuId = getMenuIdFromSubMenuEventKey(eventKey);
-  const state = store.getState();
-  store.setState({
-    defaultActiveFirst: {
-      ...state.defaultActiveFirst,
-      [menuId]: defaultActiveFirst,
-    },
-  });
+  store.defaultActiveFirst[menuId] = defaultActiveFirst;
 };
-
-const SubMenu = {
+let indexGuid = 0;
+const SubMenu = defineComponent({
   name: 'SubMenu',
+  mixins: [BaseMixin],
   inheritAttrs: false,
+  isSubMenu: true,
   props: {
     title: PropTypes.any,
-    selectedKeys: PropTypes.array.def([]),
     openKeys: PropTypes.array.def([]),
     openChange: PropTypes.func.def(noop),
     rootPrefixCls: PropTypes.string,
     eventKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     multiple: PropTypes.looseBool,
-    active: PropTypes.looseBool, // TODO: remove
     isRootMenu: PropTypes.looseBool.def(false),
     index: PropTypes.number,
     triggerSubMenuAction: PropTypes.string,
@@ -58,8 +51,6 @@ const SubMenu = {
     inlineIndent: PropTypes.number.def(24),
     openTransitionName: PropTypes.string,
     popupOffset: PropTypes.array,
-    isOpen: PropTypes.looseBool,
-    store: PropTypes.object,
     mode: PropTypes.oneOf([
       'horizontal',
       'vertical',
@@ -73,20 +64,42 @@ const SubMenu = {
     expandIcon: PropTypes.any,
     subMenuKey: PropTypes.string,
     theme: PropTypes.string,
+    parentUniKeys: PropTypes.array.def(() => []),
   },
-  mixins: [BaseMixin],
+
   isSubMenu: true,
-  setup() {
-    return { parentMenu: inject('parentMenu', undefined) };
-  },
-  created() {
-    provide('parentMenu', this);
+  setup(props) {
+    const uniKey = `sub_menu_${++indexGuid}`;
+    const store = inject('menuStore', () => ({}));
+    onMounted(() => {
+      store.addChildrenInfo(
+        uniKey,
+        computed(() => ({
+          parentUniKeys: props.parentUniKeys,
+          eventKey: props.eventKey,
+        })),
+      );
+    });
+    onBeforeUnmount(() => {
+      store.removeChildrenInfo(uniKey);
+    });
+    const isChildrenSelected = computed(() => {
+      return store.selectedParentUniKeys.indexOf(uniKey) !== -1;
+    });
+    return {
+      parentMenu: inject('parentMenu', undefined),
+      store,
+      isChildrenSelected,
+      childrenUniKeys: [...props.parentUniKeys, uniKey],
+      isOpen: computed(() => store.openKeys.indexOf(props.eventKey) > -1),
+      active: computed(() => store.activeKey[props.subMenuKey] === props.eventKey),
+    };
   },
   data() {
     const props = this.$props;
-    const store = props.store;
+    const store = this.store;
     const eventKey = props.eventKey;
-    const defaultActiveFirst = store.getState().defaultActiveFirst;
+    const defaultActiveFirst = store.defaultActiveFirst;
     let value = false;
 
     if (defaultActiveFirst) {
@@ -103,27 +116,22 @@ const SubMenu = {
       childrenSelectedStatus: {},
     };
   },
-  computed: {
-    isChildrenSelected() {
-      return Object.values(this.childrenSelectedStatus).find(status => status);
-    },
+  created() {
+    provide('parentMenu', this);
   },
   mounted() {
     this.$nextTick(() => {
       this.handleUpdated();
     });
-    this.updateParentMenuSelectedStatus();
   },
 
   updated() {
     this.$nextTick(() => {
       this.handleUpdated();
     });
-    this.updateParentMenuSelectedStatus();
   },
 
   beforeUnmount() {
-    this.updateParentMenuSelectedStatus(false);
     const { eventKey } = this;
     this.__emit('destroy', eventKey);
 
@@ -140,51 +148,34 @@ const SubMenu = {
     }
   },
   methods: {
-    updateParentMenuSelectedStatus(status = this.isChildrenSelected) {
-      if (this.parentMenu && this.parentMenu.setChildrenSelectedStatus) {
-        this.parentMenu.setChildrenSelectedStatus(this.eventKey, status);
-      }
-    },
-    setChildrenSelectedStatus(key, status) {
-      if (!status) {
-        delete this.childrenSelectedStatus[key];
-      } else {
-        this.childrenSelectedStatus[key] = status;
-      }
-    },
     handleUpdated() {
-      const { mode, parentMenu, manualRef } = this;
-
+      const { mode, manualRef } = this.$props;
       // invoke customized ref to expose component to mixin
       if (manualRef) {
         manualRef(this);
       }
-
-      if (mode !== 'horizontal' || !parentMenu.isRootMenu || !this.isOpen) {
+      if (mode !== 'horizontal' || !this.parentMenu.isRootMenu || !this.isOpen) {
         return;
       }
-
       this.minWidthTimeout = requestAnimationTimeout(() => this.adjustWidth(), 0);
     },
 
     onKeyDown(e) {
       const keyCode = e.keyCode;
       const menu = this.menuInstance;
-      const { store, isOpen } = this.$props;
-
+      const { isOpen } = this;
       if (keyCode === KeyCode.ENTER) {
         this.onTitleClick(e);
-        updateDefaultActiveFirst(store, this.eventKey, true);
+        updateDefaultActiveFirst(this.store, this.$props.eventKey, true);
         return true;
       }
-
       if (keyCode === KeyCode.RIGHT) {
         if (isOpen) {
           menu.onKeyDown(e);
         } else {
           this.triggerOpenChange(true);
           // need to update current menu's defaultActiveFirst value
-          updateDefaultActiveFirst(store, this.eventKey, true);
+          updateDefaultActiveFirst(this.store, this.$props.eventKey, true);
         }
         return true;
       }
@@ -213,8 +204,8 @@ const SubMenu = {
     },
 
     onMouseEnter(e) {
-      const { eventKey: key, store } = this.$props;
-      updateDefaultActiveFirst(store, key, false);
+      const { eventKey: key } = this.$props;
+      updateDefaultActiveFirst(this.store, key, false);
       this.__emit('mouseenter', {
         key,
         domEvent: e,
@@ -222,7 +213,7 @@ const SubMenu = {
     },
 
     onMouseLeave(e) {
-      const { eventKey } = this;
+      const { eventKey } = this.$props;
       this.__emit('mouseleave', {
         key: eventKey,
         domEvent: e,
@@ -242,7 +233,7 @@ const SubMenu = {
     },
 
     onTitleMouseLeave(e) {
-      const { eventKey } = this;
+      const { eventKey } = this.$props;
       this.__emit('itemHover', {
         key: eventKey,
         hover: false,
@@ -254,7 +245,7 @@ const SubMenu = {
     },
 
     onTitleClick(e) {
-      const { triggerSubMenuAction, eventKey, isOpen, store } = this.$props;
+      const { triggerSubMenuAction, eventKey } = this.$props;
       this.__emit('titleClick', {
         key: eventKey,
         domEvent: e,
@@ -262,8 +253,8 @@ const SubMenu = {
       if (triggerSubMenuAction === 'hover') {
         return;
       }
-      this.triggerOpenChange(!isOpen, 'click');
-      updateDefaultActiveFirst(store, eventKey, false);
+      this.triggerOpenChange(!this.isOpen, 'click');
+      updateDefaultActiveFirst(this.store, eventKey, false);
     },
 
     onSubMenuClick(info) {
@@ -301,22 +292,12 @@ const SubMenu = {
         keyPath: (info.keyPath || []).concat(this.$props.eventKey),
       };
     },
-
-    // triggerOpenChange (open, type) {
-    //   const key = this.$props.eventKey
-    //   this.__emit('openChange', {
-    //     key,
-    //     item: this,
-    //     trigger: type,
-    //     open,
-    //   })
-    // },
     triggerOpenChange(open, type) {
       const key = this.$props.eventKey;
       const openChange = () => {
         this.__emit('openChange', {
           key,
-          item: this,
+          item: this.$props,
           trigger: type,
           open,
         });
@@ -330,16 +311,6 @@ const SubMenu = {
         openChange();
       }
     },
-
-    // isChildrenSelected(children) {
-    //   const ret = { find: false };
-    //   loopMenuItemRecursively(children, this.$props.selectedKeys, ret);
-    //   return ret.find;
-    // },
-    // isOpen () {
-    //   return this.$props.openKeys.indexOf(this.$props.eventKey) !== -1
-    // },
-
     adjustWidth() {
       /* istanbul ignore if */
       if (!this.subMenuTitle || !this.menuInstance) {
@@ -356,16 +327,15 @@ const SubMenu = {
     saveSubMenuTitle(subMenuTitle) {
       this.subMenuTitle = subMenuTitle;
     },
-    renderChildren(children) {
+    renderChildren() {
       const props = { ...this.$props, ...this.$attrs };
 
       const subPopupMenuProps = {
         mode: props.mode === 'horizontal' ? 'vertical' : props.mode,
-        visible: props.isOpen,
+        visible: this.isOpen,
         level: props.level + 1,
         inlineIndent: props.inlineIndent,
         focusable: false,
-        selectedKeys: props.selectedKeys,
         eventKey: `${props.eventKey}-menu-`,
         openKeys: props.openKeys,
         openTransitionName: props.openTransitionName,
@@ -375,20 +345,17 @@ const SubMenu = {
         forceSubMenuRender: props.forceSubMenuRender,
         triggerSubMenuAction: props.triggerSubMenuAction,
         builtinPlacements: props.builtinPlacements,
-        defaultActiveFirst: props.store.getState().defaultActiveFirst[
-          getMenuIdFromSubMenuEventKey(props.eventKey)
-        ],
         multiple: props.multiple,
         prefixCls: props.rootPrefixCls,
         manualRef: this.saveMenuInstance,
         itemIcon: getComponent(this, 'itemIcon'),
         expandIcon: getComponent(this, 'expandIcon'),
-        children,
         onClick: this.onSubMenuClick,
         onSelect: props.onSelect || noop,
         onDeselect: props.onDeselect || noop,
         onOpenChange: props.onOpenChange || noop,
         id: this.internalMenuId,
+        parentUniKeys: this.childrenUniKeys,
       };
       const haveRendered = this.haveRendered;
       this.haveRendered = true;
@@ -424,7 +391,7 @@ const SubMenu = {
       }
       return (
         <Transition {...transitionProps}>
-          <SubPopupMenu v-show={props.isOpen} {...subPopupMenuProps} />
+          <SubPopupMenu v-show={this.isOpen} {...subPopupMenuProps} v-slots={this.$slots} />
         </Transition>
       );
     },
@@ -433,17 +400,16 @@ const SubMenu = {
   render() {
     const props = { ...this.$props, ...this.$attrs };
     const { onEvents } = splitAttrs(props);
-    const isOpen = props.isOpen;
+    const isOpen = this.isOpen;
     const prefixCls = this.getPrefixCls();
     const isInlineMode = props.mode === 'inline';
-    const childrenTemp = filterEmpty(getSlot(this));
-    const children = this.renderChildren(childrenTemp);
+    const children = this.renderChildren();
     const className = {
       [prefixCls]: true,
       [`${prefixCls}-${props.mode}`]: true,
       [props.class]: !!props.class,
       [this.getOpenClassName()]: isOpen,
-      [this.getActiveClassName()]: props.active || (isOpen && !isInlineMode),
+      [this.getActiveClassName()]: this.active || (isOpen && !isInlineMode),
       [this.getDisabledClassName()]: props.disabled,
       [this.getSelectedClassName()]: this.isChildrenSelected,
     };
@@ -555,16 +521,6 @@ const SubMenu = {
       </li>
     );
   },
-};
+});
 
-const connected = connect(({ openKeys, activeKey, selectedKeys }, { eventKey, subMenuKey }) => {
-  return {
-    isOpen: openKeys.indexOf(eventKey) > -1,
-    active: activeKey[subMenuKey] === eventKey,
-    selectedKeys,
-  };
-}, injectExtraPropsKey)(SubMenu);
-
-connected.isSubMenu = true;
-
-export default connected;
+export default InjectExtraProps(SubMenu);

@@ -1,19 +1,19 @@
 import { Comment, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { connect } from '../_util/store';
 import BaseMixin from '../_util/BaseMixin';
 import KeyCode from '../_util/KeyCode';
 import classNames from '../_util/classNames';
-import { getKeyFromChildrenIndex, loopMenuItem, noop, isMobileDevice, menuAllProps } from './util';
+import { getKeyFromChildrenIndex, noop, isMobileDevice, menuAllProps } from './util';
 import DOMWrap from './DOMWrap';
 import {
   initDefaultProps,
   getOptionProps,
   getComponent,
   splitAttrs,
-  getPropsData,
+  getSlot,
 } from '../_util/props-util';
 import FunctionProvider from './FunctionProvider';
+// import { getActiveKey } from '../vc-tabs/src/utils';
 function allDisabled(arr) {
   if (!arr.length) {
     return true;
@@ -24,13 +24,7 @@ function allDisabled(arr) {
 }
 
 function updateActiveKey(store, menuId, activeKey) {
-  const state = store.getState();
-  store.setState({
-    activeKey: {
-      ...state.activeKey,
-      [menuId]: activeKey,
-    },
-  });
+  store.activeKey[menuId] = activeKey;
 }
 
 function getEventKey(props) {
@@ -44,34 +38,34 @@ export function saveRef(key, c) {
     this.instanceArray[index] = c;
   }
 }
-export function getActiveKey(props, originalActiveKey) {
-  let activeKey = originalActiveKey;
-  const { eventKey, defaultActiveFirst, children } = props;
-  if (activeKey !== undefined && activeKey !== null) {
-    let found;
-    loopMenuItem(children, (c, i) => {
-      const propsData = getPropsData(c);
-      if (c && !propsData.disabled && activeKey === getKeyFromChildrenIndex(c, eventKey, i)) {
-        found = true;
-      }
-    });
-    if (found) {
-      return activeKey;
-    }
-  }
-  activeKey = null;
-  if (defaultActiveFirst) {
-    loopMenuItem(children, (c, i) => {
-      const propsData = getPropsData(c);
-      const noActiveKey = activeKey === null || activeKey === undefined;
-      if (noActiveKey && c && !propsData.disabled) {
-        activeKey = getKeyFromChildrenIndex(c, eventKey, i);
-      }
-    });
-    return activeKey;
-  }
-  return activeKey;
-}
+// export function getActiveKey(props, originalActiveKey) {
+//   let activeKey = originalActiveKey;
+//   const { eventKey, defaultActiveFirst, children } = props;
+//   if (activeKey !== undefined && activeKey !== null) {
+//     let found;
+//     loopMenuItem(children, (c, i) => {
+//       const propsData = getPropsData(c);
+//       if (c && !propsData.disabled && activeKey === getKeyFromChildrenIndex(c, eventKey, i)) {
+//         found = true;
+//       }
+//     });
+//     if (found) {
+//       return activeKey;
+//     }
+//   }
+//   activeKey = null;
+//   if (defaultActiveFirst) {
+//     loopMenuItem(children, (c, i) => {
+//       const propsData = getPropsData(c);
+//       const noActiveKey = activeKey === null || activeKey === undefined;
+//       if (noActiveKey && c && !propsData.disabled) {
+//         activeKey = getKeyFromChildrenIndex(c, eventKey, i);
+//       }
+//     });
+//     return activeKey;
+//   }
+//   return activeKey;
+// }
 
 const SubPopupMenu = {
   name: 'SubPopupMenu',
@@ -89,14 +83,12 @@ const SubPopupMenu = {
       openKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
       visible: PropTypes.looseBool,
       eventKey: PropTypes.string,
-      store: PropTypes.object,
 
       // adding in refactor
       focusable: PropTypes.looseBool,
       multiple: PropTypes.looseBool,
       defaultActiveFirst: PropTypes.looseBool,
       activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-      selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
       defaultSelectedKeys: PropTypes.arrayOf(
         PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       ),
@@ -117,6 +109,7 @@ const SubPopupMenu = {
       overflowedIndicator: PropTypes.any,
       children: PropTypes.any.def([]),
       forceSubMenuRender: PropTypes.looseBool.def(true),
+      parentUniKeys: PropTypes.array.def(() => []),
     },
     {
       prefixCls: 'rc-menu',
@@ -131,17 +124,13 @@ const SubPopupMenu = {
 
   mixins: [BaseMixin],
   setup() {
-    return { parentMenu: inject('parentMenu', undefined) };
+    const store = inject('menuStore', () => ({}));
+    return { parentMenu: inject('parentMenu', undefined), store };
   },
   created() {
     const props = getOptionProps(this);
     this.prevProps = { ...props };
-    props.store.setState({
-      activeKey: {
-        ...props.store.getState().activeKey,
-        [props.eventKey]: getActiveKey(props, props.activeKey),
-      },
-    });
+    this.store.activeKey[props.eventKey] = this.store.getActiveKey(props.activeKey);
     this.instanceArray = [];
   },
   mounted() {
@@ -154,16 +143,16 @@ const SubPopupMenu = {
     const props = getOptionProps(this);
     const prevProps = this.prevProps;
     const originalActiveKey =
-      'activeKey' in props ? props.activeKey : props.store.getState().activeKey[getEventKey(props)];
-    const activeKey = getActiveKey(props, originalActiveKey);
+      'activeKey' in props ? props.activeKey : this.store.activeKey[getEventKey(props)];
+    const activeKey = this.store.getActiveKey(originalActiveKey);
     if (activeKey !== originalActiveKey) {
-      updateActiveKey(props.store, getEventKey(props), activeKey);
+      updateActiveKey(this.store, getEventKey(props), activeKey);
     } else if ('activeKey' in prevProps) {
       // If prev activeKey is not same as current activeKey,
       // we should set it.
-      const prevActiveKey = getActiveKey(prevProps, prevProps.activeKey);
+      const prevActiveKey = this.store.getActiveKey(prevProps.activeKey);
       if (activeKey !== prevActiveKey) {
-        updateActiveKey(props.store, getEventKey(props), activeKey);
+        updateActiveKey(this.store, getEventKey(props), activeKey);
       }
     }
     this.prevProps = { ...props };
@@ -187,7 +176,7 @@ const SubPopupMenu = {
       }
       if (activeItem) {
         e.preventDefault();
-        updateActiveKey(this.$props.store, getEventKey(this.$props), activeItem.eventKey);
+        updateActiveKey(this.store, getEventKey(this.$props), activeItem.eventKey);
 
         if (typeof callback === 'function') {
           callback(activeItem);
@@ -200,7 +189,7 @@ const SubPopupMenu = {
 
     onItemHover(e) {
       const { key, hover } = e;
-      updateActiveKey(this.$props.store, getEventKey(this.$props), hover ? key : null);
+      updateActiveKey(this.store, getEventKey(this.$props), hover ? key : null);
     },
 
     onDeselect(selectInfo) {
@@ -233,7 +222,7 @@ const SubPopupMenu = {
 
     step(direction) {
       let children = this.getFlatInstanceArray();
-      const activeKey = this.$props.store.getState().activeKey[getEventKey(this.$props)];
+      const activeKey = this.store.activeKey[getEventKey(this.$props)];
       const len = children.length;
       if (!len) {
         return null;
@@ -278,7 +267,7 @@ const SubPopupMenu = {
       if (child.type === Comment) {
         return child;
       }
-      const state = this.$props.store.getState();
+      const state = this.store;
       const props = this.$props;
       const key = getKeyFromChildrenIndex(child, props.eventKey, i);
       const childProps = child.props || {}; // child.props 包含事件
@@ -317,6 +306,7 @@ const SubPopupMenu = {
         onDeselect: this.onDeselect,
         // destroy: this.onDestroy,
         onSelect: this.onSelect,
+        parentUniKeys: this.parentUniKeys,
       };
       if (props.forceSubMenuRender !== undefined) {
         newChildProps.forceSubMenuRender = props.forceSubMenuRender;
@@ -332,7 +322,7 @@ const SubPopupMenu = {
       if (!c) {
         return null;
       }
-      const state = this.$props.store.getState();
+      const state = this.store;
       const extraProps = {
         openKeys: state.openKeys,
         selectedKeys: state.selectedKeys,
@@ -384,11 +374,11 @@ const SubPopupMenu = {
       // ESLint is not smart enough to know that the type of `children` was checked.
       /* eslint-disable */
       <DOMWrap {...domWrapProps}>
-        {props.children.map((c, i) => this.renderMenuItem(c, i, eventKey || '0-menu-'))}
+        {getSlot(this).map((c, i) => this.renderMenuItem(c, i, eventKey || '0-menu-'))}
       </DOMWrap>
       /*eslint -enable */
     );
   },
 };
 
-export default connect(undefined)(SubPopupMenu);
+export default SubPopupMenu;

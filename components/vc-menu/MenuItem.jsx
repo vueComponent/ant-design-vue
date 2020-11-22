@@ -2,11 +2,10 @@ import PropTypes from '../_util/vue-types';
 import KeyCode from '../_util/KeyCode';
 import BaseMixin from '../_util/BaseMixin';
 import scrollIntoView from 'dom-scroll-into-view';
-import { connect } from '../_util/store';
 import { noop, menuAllProps } from './util';
 import { getComponent, getSlot, findDOMNode } from '../_util/props-util';
-import { inject } from 'vue';
-import { injectExtraPropsKey } from './FunctionProvider';
+import { computed, defineComponent, inject, onBeforeUnmount, onMounted } from 'vue';
+import InjectExtraProps from './InjectExtraProps';
 const props = {
   attribute: PropTypes.object,
   rootPrefixCls: PropTypes.string,
@@ -21,32 +20,50 @@ const props = {
   mode: PropTypes.oneOf(['horizontal', 'vertical', 'vertical-left', 'vertical-right', 'inline']),
   multiple: PropTypes.looseBool,
   value: PropTypes.any,
-  isSelected: PropTypes.looseBool,
   manualRef: PropTypes.func.def(noop),
   role: PropTypes.any,
   subMenuKey: PropTypes.string,
   itemIcon: PropTypes.any,
+  parentUniKeys: PropTypes.array.def(() => []),
   // clearSubMenuTimers: PropTypes.func.def(noop),
 };
-const MenuItem = {
+let indexGuid = 0;
+const MenuItem = defineComponent({
   name: 'AMenuItem',
+  mixins: [BaseMixin],
   inheritAttrs: false,
   props,
-  mixins: [BaseMixin],
   isMenuItem: true,
-  setup() {
-    return { parentMenu: inject('parentMenu', undefined) };
+  setup(props) {
+    const uniKey = `menu_item_${++indexGuid}`;
+    const store = inject('menuStore', () => ({}));
+    const isSelected = computed(() => store.selectedKeys.indexOf(props.eventKey) !== -1);
+    onMounted(() => {
+      store.addChildrenInfo(
+        uniKey,
+        computed(() => ({
+          parentUniKeys: props.parentUniKeys,
+          eventKey: props.eventKey,
+          isSelected: isSelected.value,
+        })),
+      );
+    });
+    onBeforeUnmount(() => {
+      store.removeChildrenInfo(uniKey);
+    });
+
+    return {
+      parentMenu: inject('parentMenu', undefined),
+      isSelected,
+    };
   },
   created() {
     this.prevActive = this.active;
     // invoke customized ref to expose component to mixin
     this.callRef();
   },
-  mounted() {
-    this.updateParentMenuSelectedStatus();
-  },
   updated() {
-    this.updateParentMenuSelectedStatus();
+    console.log('upda');
     this.$nextTick(() => {
       const { active, parentMenu, eventKey } = this;
       if (!this.prevActive && active && (!parentMenu || !parentMenu[`scrolled-${eventKey}`])) {
@@ -61,17 +78,7 @@ const MenuItem = {
     });
     this.callRef();
   },
-  beforeUnmount() {
-    this.updateParentMenuSelectedStatus(false);
-    const props = this.$props;
-    this.__emit('destroy', props.eventKey);
-  },
   methods: {
-    updateParentMenuSelectedStatus(status = this.isSelected) {
-      if (this.parentMenu && this.parentMenu.setChildrenSelectedStatus) {
-        this.parentMenu.setChildrenSelectedStatus(this.eventKey, status);
-      }
-    },
     onKeyDown(e) {
       const keyCode = e.keyCode;
       if (keyCode === KeyCode.ENTER) {
@@ -156,8 +163,8 @@ const MenuItem = {
     const className = {
       [cls]: !!cls,
       [this.getPrefixCls()]: true,
-      [this.getActiveClassName()]: !props.disabled && props.active,
-      [this.getSelectedClassName()]: props.isSelected,
+      [this.getActiveClassName()]: !props.disabled && this.active,
+      [this.getSelectedClassName()]: this.isSelected,
       [this.getDisabledClassName()]: props.disabled,
     };
     let attrs = {
@@ -171,7 +178,7 @@ const MenuItem = {
       attrs = {
         ...attrs,
         role: 'option',
-        'aria-selected': props.isSelected,
+        'aria-selected': this.isSelected,
       };
     } else if (props.role === null || props.role === 'none') {
       // sometimes we want to specify role inside <li/> element
@@ -199,7 +206,6 @@ const MenuItem = {
       ...mouseEvent,
       ref: this.saveNode,
     };
-    delete liProps.children;
     return (
       <li {...liProps} style={styles} class={className}>
         {getSlot(this)}
@@ -207,15 +213,7 @@ const MenuItem = {
       </li>
     );
   },
-};
+});
 
-const connected = connect(
-  ({ activeKey, selectedKeys }, { eventKey, subMenuKey }) => ({
-    active: activeKey[subMenuKey] === eventKey,
-    isSelected: selectedKeys.indexOf(eventKey) !== -1,
-  }),
-  injectExtraPropsKey,
-)(MenuItem);
-
-export default connected;
+export default InjectExtraProps(MenuItem);
 export { props as menuItemProps };

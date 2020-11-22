@@ -1,5 +1,4 @@
 import isMobile from './utils/isMobile';
-import isObject from 'lodash-es/isObject';
 
 export function noop() {}
 
@@ -12,46 +11,21 @@ export function getMenuIdFromSubMenuEventKey(eventKey) {
   return `${eventKey}-menu-`;
 }
 
-export function loopMenuItem(children, cb) {
-  let index = -1;
-  children.forEach(c => {
-    index++;
-    if (c && c.type && c.type.isMenuItemGroup) {
-      c.children.default &&
-        c.children.default().forEach(c2 => {
-          index++;
-          cb(c2, index);
-        });
-    } else {
-      cb(c, index);
-    }
-  });
-}
-
-export function loopMenuItemRecursively(children, keys, ret) {
-  if (!children || ret.find) {
-    return;
-  }
-  children.forEach(c => {
-    if (ret.find) {
-      return;
-    }
-    const construct = c.type;
-    if (construct && isObject(construct)) {
-      if (
-        !construct ||
-        !(construct.isSubMenu || construct.isMenuItem || construct.isMenuItemGroup)
-      ) {
-        return;
-      }
-      if (keys.indexOf(c.key) !== -1) {
-        ret.find = true;
-      } else if (c.children && c.children.default) {
-        loopMenuItemRecursively(c.children.default(), keys, ret);
-      }
-    }
-  });
-}
+// export function loopMenuItem(children, cb) {
+//   let index = -1;
+//   children.forEach(c => {
+//     index++;
+//     if (c && c.type && c.type.isMenuItemGroup) {
+//       c.children.default &&
+//         c.children.default().forEach(c2 => {
+//           index++;
+//           cb(c2, index);
+//         });
+//     } else {
+//       cb(c, index);
+//     }
+//   });
+// }
 
 export const menuAllProps = [
   'defaultSelectedKeys',

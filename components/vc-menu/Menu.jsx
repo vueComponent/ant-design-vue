@@ -1,10 +1,9 @@
 import PropTypes from '../_util/vue-types';
-import { Provider, create } from '../_util/store';
-import { default as SubPopupMenu, getActiveKey } from './SubPopupMenu';
+import { default as SubPopupMenu } from './SubPopupMenu';
 import BaseMixin from '../_util/BaseMixin';
 import hasProp, { getOptionProps, getComponent, filterEmpty } from '../_util/props-util';
 import commonPropsType from './commonPropsType';
-import { defineComponent, provide } from 'vue';
+import { computed, defineComponent, provide, reactive, ref, toRaw, watch } from 'vue';
 
 const Menu = {
   name: 'Menu',
@@ -15,43 +14,63 @@ const Menu = {
     selectable: PropTypes.looseBool.def(true),
   },
   mixins: [BaseMixin],
-  data() {
-    const props = getOptionProps(this);
-    let selectedKeys = props.defaultSelectedKeys;
-    let openKeys = props.defaultOpenKeys;
-    if ('selectedKeys' in props) {
-      selectedKeys = props.selectedKeys || [];
-    }
-    if ('openKeys' in props) {
-      openKeys = props.openKeys || [];
-    }
-
-    this.store = create({
+  setup(props) {
+    const menuChildrenInfo = reactive({});
+    const selectedKeys = computed(() => {
+      return props.selectedKeys || props.defaultSelectedKeys || [];
+    });
+    const openKeys = computed(() => {
+      return props.openKeys || props.defaultOpenKeys || [];
+    });
+    const activeKey = reactive({
+      '0-menu-': props.activeKey,
+    });
+    const defaultActiveFirst = reactive({});
+    const addChildrenInfo = (key, info) => {
+      menuChildrenInfo[key] = info;
+    };
+    const removeChildrenInfo = key => {
+      delete menuChildrenInfo[key];
+    };
+    window.menuChildrenInfo = menuChildrenInfo;
+    const getActiveKey = key => {
+      return key;
+    }; // TODO
+    const selectedParentUniKeys = ref([]);
+    watch(menuChildrenInfo, () => {
+      const keys = Object.values(menuChildrenInfo)
+        .filter(info => info.isSelected)
+        .reduce((allKeys, { parentUniKeys = [] }) => {
+          return [...allKeys, ...toRaw(parentUniKeys)];
+        }, []);
+      // selectedParentUniKeys.value.length = 0;
+      selectedParentUniKeys.value = keys || [];
+    });
+    const store = reactive({
       selectedKeys,
       openKeys,
-      activeKey: {
-        '0-menu-': getActiveKey({ ...props, children: props.children || [] }, props.activeKey),
-      },
+      activeKey,
+      defaultActiveFirst,
+      menuChildrenInfo,
+      selectedParentUniKeys,
+      addChildrenInfo,
+      removeChildrenInfo,
+      getActiveKey,
     });
-
-    // this.isRootMenu = true // 声明在props上
-    return {};
+    provide('menuStore', store);
+    return {
+      store,
+    };
   },
   created() {
     provide('parentMenu', this);
-  },
-  mounted() {
-    this.updateMiniStore();
-  },
-  updated() {
-    this.updateMiniStore();
   },
   methods: {
     handleSelect(selectInfo) {
       const props = this.$props;
       if (props.selectable) {
         // root menu
-        let selectedKeys = this.store.getState().selectedKeys;
+        let selectedKeys = this.store.selectedKeys;
         const selectedKey = selectInfo.key;
         if (props.multiple) {
           selectedKeys = selectedKeys.concat([selectedKey]);
@@ -59,9 +78,7 @@ const Menu = {
           selectedKeys = [selectedKey];
         }
         if (!hasProp(this, 'selectedKeys')) {
-          this.store.setState({
-            selectedKeys,
-          });
+          this.store.selectedKeys = selectedKeys;
         }
         this.__emit('select', {
           ...selectInfo,
@@ -80,7 +97,7 @@ const Menu = {
       this.innerMenu.getWrappedInstance().onKeyDown(e, callback);
     },
     onOpenChange(event) {
-      const openKeys = this.store.getState().openKeys.concat();
+      const openKeys = this.store.openKeys.concat();
       let changed = false;
       const processSingle = e => {
         let oneChanged = false;
@@ -106,7 +123,7 @@ const Menu = {
       }
       if (changed) {
         if (!hasProp(this, 'openKeys')) {
-          this.store.setState({ openKeys });
+          this.store.openKeys = openKeys;
         }
         this.__emit('openChange', openKeys);
       }
@@ -115,16 +132,14 @@ const Menu = {
     handleDeselect(selectInfo) {
       const props = this.$props;
       if (props.selectable) {
-        const selectedKeys = this.store.getState().selectedKeys.concat();
+        const selectedKeys = this.store.selectedKeys.concat();
         const selectedKey = selectInfo.key;
         const index = selectedKeys.indexOf(selectedKey);
         if (index !== -1) {
           selectedKeys.splice(index, 1);
         }
         if (!hasProp(this, 'selectedKeys')) {
-          this.store.setState({
-            selectedKeys,
-          });
+          this.store.selectedKeys = selectedKeys;
         }
         this.__emit('deselect', {
           ...selectInfo,
@@ -142,19 +157,6 @@ const Menu = {
       }
       return transitionName;
     },
-    updateMiniStore() {
-      const props = getOptionProps(this);
-      if ('selectedKeys' in props) {
-        this.store.setState({
-          selectedKeys: props.selectedKeys || [],
-        });
-      }
-      if ('openKeys' in props) {
-        this.store.setState({
-          openKeys: props.openKeys || [],
-        });
-      }
-    },
     saveInnerMenu(ref) {
       this.innerMenu = ref;
     },
@@ -171,16 +173,14 @@ const Menu = {
       expandIcon: getComponent(this, 'expandIcon', props),
       overflowedIndicator: getComponent(this, 'overflowedIndicator', props) || <span>···</span>,
       openTransitionName: this.getOpenTransitionName(),
-      children: filterEmpty(props.children),
       onClick: this.handleClick,
       onOpenChange: this.onOpenChange,
       onDeselect: this.handleDeselect,
       onSelect: this.handleSelect,
       ref: this.saveInnerMenu,
+      store: this.store,
     };
-
-    const subPopupMenu = <SubPopupMenu {...subPopupMenuProps} />;
-    return <Provider store={this.store}>{subPopupMenu}</Provider>;
+    return <SubPopupMenu {...subPopupMenuProps} v-slots={this.$slots} />;
   },
 };
 

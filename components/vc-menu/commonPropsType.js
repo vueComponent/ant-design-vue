@@ -3,7 +3,6 @@ export default {
   prefixCls: PropTypes.string.def('rc-menu'),
   focusable: PropTypes.looseBool.def(true),
   multiple: PropTypes.looseBool,
-  defaultActiveFirst: PropTypes.looseBool,
   visible: PropTypes.looseBool.def(true),
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
@@ -40,5 +39,4 @@ export default {
   onClick: PropTypes.func,
   onSelect: PropTypes.func,
   onDeselect: PropTypes.func,
-  children: PropTypes.VNodeChild,
 };

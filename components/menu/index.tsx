@@ -6,7 +6,7 @@ import PropTypes from '../_util/vue-types';
 import animation from '../_util/openAnimation';
 import warning from '../_util/warning';
 import Item from './MenuItem';
-import { hasProp, getOptionProps, getSlot } from '../_util/props-util';
+import { hasProp, getOptionProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import commonPropsType from '../vc-menu/commonPropsType';
 import { defaultConfigProvider } from '../config-provider';
@@ -275,7 +275,7 @@ const Menu = defineComponent({
       onOpenChange: this.handleOpenChange,
       onMouseenter: this.handleMouseEnter,
       onTransitionend: this.handleTransitionEnd,
-      children: getSlot(this),
+      // children: getSlot(this),
     };
     if (!hasProp(this, 'selectedKeys')) {
       delete menuProps.selectedKeys;
@@ -300,7 +300,7 @@ const Menu = defineComponent({
       menuProps.openKeys = [];
     }
 
-    return <VcMenu {...menuProps} class={menuClassName} vSlots={omit(this.$slots, ['defalut'])} />;
+    return <VcMenu {...menuProps} class={menuClassName} v-slots={this.$slots} />;
   },
 });
 

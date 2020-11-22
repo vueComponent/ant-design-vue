@@ -498,7 +498,7 @@ const SubMenu = defineComponent({
       </div>
     );
     const getPopupContainer = this.parentMenu.isRootMenu
-      ? this.parentMenu.getPopupContainer?.value
+      ? this.parentMenu.getPopupContainer
       : triggerNode => triggerNode.parentNode;
     const popupPlacement = popupPlacementMap[props.mode];
     const popupAlign = props.popupOffset ? { offset: props.popupOffset } : {};

@@ -181,10 +181,10 @@ export interface TableState {
 }
 
 export interface TransformCellTextProps {
-  text: any,
-  column: ColumnProps,
-  record: any,
-  index: number
+  text: any;
+  column: ColumnProps;
+  record: any;
+  index: number;
 }
 
 // export type SelectionItemSelectFn = (key: string[]) => any;

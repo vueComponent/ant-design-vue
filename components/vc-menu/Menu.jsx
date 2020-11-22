@@ -3,7 +3,7 @@ import { default as SubPopupMenu } from './SubPopupMenu';
 import BaseMixin from '../_util/BaseMixin';
 import hasProp, { getOptionProps, getComponent } from '../_util/props-util';
 import commonPropsType from './commonPropsType';
-import { computed, defineComponent, provide, reactive, ref, toRaw, watch } from 'vue';
+import { computed, defineComponent, getCurrentInstance, provide, reactive, ref, toRaw, watch } from 'vue';
 
 const Menu = {
   name: 'Menu',
@@ -55,13 +55,19 @@ const Menu = {
       removeChildrenInfo,
       getActiveKey,
     });
+    const ins = getCurrentInstance();
+    const getEl = () =>{
+      return ins.vnode.el;
+    };
     provide('menuStore', store);
+    provide('parentMenu', reactive({
+      isRootMenu: computed(()=>props.isRootMenu),
+      getPopupContainer: computed(()=>props.getPopupContainer),
+      getEl,
+    }));
     return {
       store,
     };
-  },
-  created() {
-    provide('parentMenu', this);
   },
   methods: {
     handleSelect(selectInfo) {

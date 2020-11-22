@@ -69,7 +69,7 @@ const MenuItem = defineComponent({
     this.$nextTick(() => {
       const { active, parentMenu, eventKey } = this;
       if (!this.prevActive && active && (!parentMenu || !parentMenu[`scrolled-${eventKey}`])) {
-        scrollIntoView(findDOMNode(this.node), findDOMNode(parentMenu), {
+        scrollIntoView(findDOMNode(this.node), parentMenu.getEl(), {
           onlyScrollIfNeeded: true,
         });
         parentMenu[`scrolled-${eventKey}`] = true;

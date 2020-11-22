@@ -1,4 +1,4 @@
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted, provide } from 'vue';
+import { computed, defineComponent, getCurrentInstance, inject, onBeforeUnmount, onMounted, provide, reactive } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
@@ -42,7 +42,7 @@ const SubMenu = defineComponent({
     triggerSubMenuAction: PropTypes.string,
     popupClassName: PropTypes.string,
     getPopupContainer: PropTypes.func,
-    forceSubMenuRender: PropTypes.looseBool.def(true),
+    forceSubMenuRender: PropTypes.looseBool.def(false),
     openAnimation: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
     disabled: PropTypes.looseBool,
     subMenuOpenDelay: PropTypes.number.def(0.1),
@@ -89,6 +89,15 @@ const SubMenu = defineComponent({
     const isChildrenSelected = computed(() => {
       return store.selectedParentUniKeys.indexOf(uniKey) !== -1;
     });
+    const ins = getCurrentInstance();
+    const getEl = () =>{
+      return ins.vnode.el;
+    };
+    provide('parentMenu', reactive({
+      isRootMenu: computed(()=>props.isRootMenu),
+      getPopupContainer: props.getPopupContainer,
+      getEl,
+    }));
     return {
       parentMenu: inject('parentMenu', undefined),
       store,
@@ -117,9 +126,6 @@ const SubMenu = defineComponent({
     this.subMenuTitle = undefined;
     return {
     };
-  },
-  created() {
-    provide('parentMenu', this);
   },
   mounted() {
     this.$nextTick(() => {
@@ -156,7 +162,7 @@ const SubMenu = defineComponent({
       if (manualRef) {
         manualRef(this);
       }
-      if (mode !== 'horizontal' || !this.parentMenu.isRootMenu || !this.isOpen) {
+      if (mode !== 'horizontal' || !this.parentMenu.isRootMenu?.value || !this.isOpen) {
         return;
       }
       this.minWidthTimeout = requestAnimationTimeout(() => this.adjustWidth(), 0);
@@ -480,9 +486,8 @@ const SubMenu = defineComponent({
         {icon || <i class={`${prefixCls}-arrow`} />}
       </div>
     );
-
-    const getPopupContainer = this.parentMenu.isRootMenu
-      ? this.parentMenu.getPopupContainer
+    const getPopupContainer = this.parentMenu.isRootMenu?.value
+      ? this.parentMenu.getPopupContainer?.value
       : triggerNode => triggerNode.parentNode;
     const popupPlacement = popupPlacementMap[props.mode];
     const popupAlign = props.popupOffset ? { offset: props.popupOffset } : {};

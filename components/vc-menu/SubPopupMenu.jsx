@@ -108,7 +108,7 @@ const SubPopupMenu = {
       expandIcon: PropTypes.any,
       overflowedIndicator: PropTypes.any,
       children: PropTypes.any.def([]),
-      forceSubMenuRender: PropTypes.looseBool.def(true),
+      forceSubMenuRender: PropTypes.looseBool.def(false),
       parentUniKeys: PropTypes.array.def(() => []),
       parentUniKey: PropTypes.string,
     },
@@ -126,7 +126,7 @@ const SubPopupMenu = {
   mixins: [BaseMixin],
   setup() {
     const store = inject('menuStore', () => ({}));
-    return { parentMenu: inject('parentMenu', undefined), store };
+    return { store };
   },
   created() {
     const props = getOptionProps(this);

@@ -110,6 +110,7 @@ const SubPopupMenu = {
       children: PropTypes.any.def([]),
       forceSubMenuRender: PropTypes.looseBool.def(true),
       parentUniKeys: PropTypes.array.def(() => []),
+      parentUniKey: PropTypes.string,
     },
     {
       prefixCls: 'rc-menu',
@@ -307,6 +308,7 @@ const SubPopupMenu = {
         // destroy: this.onDestroy,
         onSelect: this.onSelect,
         parentUniKeys: this.parentUniKeys,
+        parentUniKey: this.parentUniKey,
       };
       if (props.forceSubMenuRender !== undefined) {
         newChildProps.forceSubMenuRender = props.forceSubMenuRender;

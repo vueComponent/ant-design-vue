@@ -25,6 +25,7 @@ const props = {
   subMenuKey: PropTypes.string,
   itemIcon: PropTypes.any,
   parentUniKeys: PropTypes.array.def(() => []),
+  parentUniKey: PropTypes.string,
   // clearSubMenuTimers: PropTypes.func.def(noop),
 };
 let indexGuid = 0;
@@ -43,8 +44,10 @@ const MenuItem = defineComponent({
         uniKey,
         computed(() => ({
           parentUniKeys: props.parentUniKeys,
+          parentUniKey: props.parentUniKey,
           eventKey: props.eventKey,
           isSelected: isSelected.value,
+          disabled: props.disabled,
         })),
       );
     });
@@ -63,7 +66,6 @@ const MenuItem = defineComponent({
     this.callRef();
   },
   updated() {
-    console.log('upda');
     this.$nextTick(() => {
       const { active, parentMenu, eventKey } = this;
       if (!this.prevActive && active && (!parentMenu || !parentMenu[`scrolled-${eventKey}`])) {

@@ -6,7 +6,7 @@ import KeyCode from '../_util/KeyCode';
 import SubPopupMenu from './SubPopupMenu';
 import placements from './placements';
 import BaseMixin from '../_util/BaseMixin';
-import { getComponent, filterEmpty, getSlot, splitAttrs, findDOMNode } from '../_util/props-util';
+import { getComponent, splitAttrs, findDOMNode } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import { noop, getMenuIdFromSubMenuEventKey } from './util';
 import { getTransitionProps, Transition } from '../_util/transition';
@@ -65,6 +65,7 @@ const SubMenu = defineComponent({
     subMenuKey: PropTypes.string,
     theme: PropTypes.string,
     parentUniKeys: PropTypes.array.def(() => []),
+    parentUniKey: PropTypes.string,
   },
 
   isSubMenu: true,
@@ -76,7 +77,9 @@ const SubMenu = defineComponent({
         uniKey,
         computed(() => ({
           parentUniKeys: props.parentUniKeys,
+          parentUniKey: props.parentUniKey,
           eventKey: props.eventKey,
+          disabled: props.disabled,
         })),
       );
     });
@@ -91,6 +94,7 @@ const SubMenu = defineComponent({
       store,
       isChildrenSelected,
       childrenUniKeys: [...props.parentUniKeys, uniKey],
+      uniKey,
       isOpen: computed(() => store.openKeys.indexOf(props.eventKey) > -1),
       active: computed(() => store.activeKey[props.subMenuKey] === props.eventKey),
     };
@@ -112,8 +116,6 @@ const SubMenu = defineComponent({
     this.haveOpened = undefined;
     this.subMenuTitle = undefined;
     return {
-      // defaultActiveFirst: false,
-      childrenSelectedStatus: {},
     };
   },
   created() {
@@ -356,6 +358,7 @@ const SubMenu = defineComponent({
         onOpenChange: props.onOpenChange || noop,
         id: this.internalMenuId,
         parentUniKeys: this.childrenUniKeys,
+        parentUniKey: this.uniKey,
       };
       const haveRendered = this.haveRendered;
       this.haveRendered = true;

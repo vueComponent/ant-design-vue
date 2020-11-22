@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import { default as SubPopupMenu } from './SubPopupMenu';
 import BaseMixin from '../_util/BaseMixin';
-import hasProp, { getOptionProps, getComponent, filterEmpty } from '../_util/props-util';
+import hasProp, { getOptionProps, getComponent } from '../_util/props-util';
 import commonPropsType from './commonPropsType';
 import { computed, defineComponent, provide, reactive, ref, toRaw, watch } from 'vue';
 
@@ -32,7 +32,6 @@ const Menu = {
     const removeChildrenInfo = key => {
       delete menuChildrenInfo[key];
     };
-    window.menuChildrenInfo = menuChildrenInfo;
     const getActiveKey = key => {
       return key;
     }; // TODO
@@ -43,7 +42,6 @@ const Menu = {
         .reduce((allKeys, { parentUniKeys = [] }) => {
           return [...allKeys, ...toRaw(parentUniKeys)];
         }, []);
-      // selectedParentUniKeys.value.length = 0;
       selectedParentUniKeys.value = keys || [];
     });
     const store = reactive({

@@ -1,30 +1,39 @@
 <template>
-  <a-dropdown>
-    <a class="ant-dropdown-link" @click="e => e.preventDefault()">
-      Cascading menu <DownOutlined />
-    </a>
-    <template #overlay>
-      <a-menu>
-        <a-menu-item>1st menu item</a-menu-item>
-        <a-menu-item>2nd menu item</a-menu-item>
-        <a-sub-menu key="test" title="sub menu">
-          <a-menu-item>3rd menu item</a-menu-item>
-          <a-menu-item>4th menu item</a-menu-item>
-        </a-sub-menu>
-        <a-sub-menu title="disabled sub menu" disabled>
-          <a-menu-item>5d menu item</a-menu-item>
-          <a-menu-item>6th menu item</a-menu-item>
-        </a-sub-menu>
-      </a-menu>
-    </template>
-  </a-dropdown>
+  <div>
+    <demo />
+  </div>
 </template>
 <script>
-import { DownOutlined } from '@ant-design/icons-vue';
-
-export default {
+import { defineComponent } from 'vue';
+import demo from '../antdv-demo/docs/affix/demo';
+// import Affix from '../components/affix';
+export default defineComponent({
   components: {
-    DownOutlined,
+    demo,
+    // Affix,
   },
-};
+  data() {
+    return {
+      visible: false,
+      pStyle: {
+        fontSize: '16px',
+        color: 'rgba(0,0,0,0.85)',
+        lineHeight: '24px',
+        display: 'block',
+        marginBottom: '16px',
+      },
+      pStyle2: {
+        marginBottom: '24px',
+      },
+    };
+  },
+  methods: {
+    showDrawer() {
+      this.visible = true;
+    },
+    onClose() {
+      this.visible = false;
+    },
+  },
+});
 </script>

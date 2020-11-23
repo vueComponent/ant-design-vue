@@ -19,7 +19,7 @@ export default function demoTest(component, options = {}) {
       const demo = require(`../.${file}`).default || require(`../.${file}`);
       document.body.innerHTML = '';
       const wrapper = mount(demo, { global: { plugins: [antd] }, attachTo: document.body });
-      await sleep();
+      await sleep(100);
       // should get dom from element
       // snap files copy from antd does not need to change
       // or just change a little

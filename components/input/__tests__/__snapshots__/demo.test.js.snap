@@ -23,8 +23,8 @@ exports[`renders ./antdv-demo/docs/input/demo/allowClear.md correctly 1`] = `
 `;
 
 exports[`renders ./antdv-demo/docs/input/demo/autosize-textarea.md correctly 1`] = `
-<div><textarea placeholder="Autosize height based on content lines" class="ant-input" style="height: 0px; min-height: -9007199254740991px; max-height: 9007199254740991px; overflow-y: hidden; overflow-x: hidden;"></textarea>
-  <div style="margin: 24px 0px;"></div><textarea placeholder="Autosize height with minimum and maximum number of lines" class="ant-input" style="height: -20px; min-height: -8px; max-height: -20px; overflow-y: hidden; overflow-x: hidden;"></textarea>
+<div><textarea placeholder="Autosize height based on content lines" class="ant-input" style="height: 0px; min-height: -9007199254740991px; max-height: 9007199254740991px;"></textarea>
+  <div style="margin: 24px 0px;"></div><textarea placeholder="Autosize height with minimum and maximum number of lines" class="ant-input" style="height: -20px; min-height: -8px; max-height: -20px;"></textarea>
 </div>
 `;
 

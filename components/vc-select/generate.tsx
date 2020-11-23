@@ -27,6 +27,7 @@ import {
   INTERNAL_PROPS_MARK,
   SelectSource,
   CustomTagProps,
+  DropdownRender,
 } from './interface/generator';
 import { OptionListProps } from './OptionList';
 import { toInnerValue, toOuterValues, removeLastEnabledValue, getUUID } from './utils/commonUtil';
@@ -216,7 +217,7 @@ export interface SelectProps<OptionsType extends object[], ValueType> {
   dropdownClassName?: string;
   dropdownMatchSelectWidth?: boolean | number;
   virtual?: boolean;
-  dropdownRender?: (menu: VNodeChild | JSX.Element) => VNodeChild;
+  dropdownRender?: DropdownRender;
   dropdownAlign?: any;
   animation?: string;
   transitionName?: string;

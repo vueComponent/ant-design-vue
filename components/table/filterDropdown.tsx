@@ -228,7 +228,6 @@ export default defineComponent({
       const { column } = this;
       const { sSelectedKeys: selectedKeys } = this;
       const multiple = 'filterMultiple' in column ? column.filterMultiple : true;
-
       const input = multiple ? (
         <Checkbox checked={selectedKeys && selectedKeys.indexOf(item.value) >= 0} />
       ) : (
@@ -281,8 +280,9 @@ export default defineComponent({
           onDeselect={this.setSelectedKeys}
           selectedKeys={originSelectedKeys}
           getPopupContainer={getPopupContainer}
-          children={this.renderMenus(column.filters)}
-        ></Menu>
+        >
+          {this.renderMenus(column.filters)}
+        </Menu>
         <div class={`${prefixCls}-dropdown-btns`}>
           <a class={`${prefixCls}-dropdown-link confirm`} onClick={this.handleConfirm}>
             {locale.filterConfirm}

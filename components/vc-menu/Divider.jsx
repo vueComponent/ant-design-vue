@@ -16,7 +16,7 @@ export default {
     };
   },
   render() {
-    const { rootPrefixCls } = {...this.$props, ...this.injectExtraProps};
+    const { rootPrefixCls } = { ...this.$props, ...this.injectExtraProps };
     const { class: className = '', style } = this.$attrs;
     return <li class={[className, `${rootPrefixCls}-item-divider`]} style={style} />;
   },

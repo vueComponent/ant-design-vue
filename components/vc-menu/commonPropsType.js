@@ -3,7 +3,6 @@ export default {
   prefixCls: PropTypes.string.def('rc-menu'),
   focusable: PropTypes.looseBool.def(true),
   multiple: PropTypes.looseBool,
-  defaultActiveFirst: PropTypes.looseBool,
   visible: PropTypes.looseBool.def(true),
   activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
@@ -30,7 +29,7 @@ export default {
   theme: PropTypes.oneOf(['light', 'dark']).def('light'),
   getPopupContainer: PropTypes.func,
   openTransitionName: PropTypes.string,
-  forceSubMenuRender: PropTypes.looseBool.def(true),
+  forceSubMenuRender: PropTypes.looseBool.def(false),
   selectable: PropTypes.looseBool,
   isRootMenu: PropTypes.looseBool.def(true),
   builtinPlacements: PropTypes.object.def(() => ({})),
@@ -40,5 +39,4 @@ export default {
   onClick: PropTypes.func,
   onSelect: PropTypes.func,
   onDeselect: PropTypes.func,
-  children: PropTypes.VNodeChild,
 };

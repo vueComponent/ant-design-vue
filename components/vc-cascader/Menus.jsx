@@ -170,11 +170,15 @@ export default {
     const { prefixCls, dropdownMenuColumnStyle } = this;
     return (
       <div>
-        {this.getShowOptions().map((options, menuIndex) => (
-          <ul class={`${prefixCls}-menu`} key={menuIndex} style={dropdownMenuColumnStyle}>
-            {options.map(option => this.getOption(option, menuIndex))}
-          </ul>
-        ))}
+        {this.getShowOptions().map((options, menuIndex) => {
+          if (options.length > 0) {
+            return (
+              <ul class={`${prefixCls}-menu`} key={menuIndex} style={dropdownMenuColumnStyle}>
+                {options.map(option => this.getOption(option, menuIndex))}
+              </ul>
+            );
+          }
+        })}
       </div>
     );
   },

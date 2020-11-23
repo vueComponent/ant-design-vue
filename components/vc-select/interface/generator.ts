@@ -1,3 +1,4 @@
+import { VueNode } from '../../_util/type';
 import { VNodeChild } from 'vue';
 
 export type SelectSource = 'option' | 'selection' | 'input';
@@ -61,3 +62,10 @@ export type FlattenOptionsType<OptionsType extends object[] = object[]> = {
   /** Used for customize data */
   [name: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }[];
+
+export type DropdownObject = {
+  menuNode?: VueNode;
+  props?: Record<string, any>;
+};
+
+export type DropdownRender = (opt?: DropdownObject) => VueNode;

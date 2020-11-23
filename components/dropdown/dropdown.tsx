@@ -26,7 +26,9 @@ const Dropdown = defineComponent({
     mouseLeaveDelay: PropTypes.number.def(0.1),
     placement: DropdownProps.placement.def('bottomLeft'),
     onVisibleChange: PropTypes.func,
+    'onUpdate:visible': PropTypes.func,
   },
+  emits: ['visibleChange', 'update:visible'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

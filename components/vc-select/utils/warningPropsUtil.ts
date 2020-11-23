@@ -89,7 +89,7 @@ function warningProps(props: SelectProps) {
     warning(
       !labelInValue ||
         values.every(val => typeof val === 'object' && ('key' in val || 'value' in val)),
-      '`value` should in shape of `{ value: string | number, label?: ReactNode }` when you set `labelInValue` to `true`',
+      '`value` should in shape of `{ value: string | number, label?: any }` when you set `labelInValue` to `true`',
     );
 
     warning(

@@ -62,7 +62,7 @@ export default defineComponent({
 
     const panelContent = (
       <PanelContent
-        vShow={isActive}
+        v-show={isActive}
         prefixCls={prefixCls}
         isActive={isActive}
         destroyInactivePanel={destroyInactivePanel}

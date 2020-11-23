@@ -15,9 +15,9 @@ import KeyCode from '../_util/KeyCode';
 import SubPopupMenu from './SubPopupMenu';
 import placements from './placements';
 import BaseMixin from '../_util/BaseMixin';
-import { getComponent, splitAttrs, findDOMNode } from '../_util/props-util';
+import { getComponent, splitAttrs, findDOMNode, getSlot } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
-import { noop, getMenuIdFromSubMenuEventKey } from './util';
+import { noop, getMenuIdFromSubMenuEventKey, loopMenuItemRecursively } from './util';
 import { getTransitionProps, Transition } from '../_util/transition';
 import InjectExtraProps from './InjectExtraProps';
 
@@ -167,6 +167,12 @@ const SubMenu = defineComponent({
     }
   },
   methods: {
+    isChildrenSelected2() {
+      if (this.haveOpened) return this.isChildrenSelected;
+      const ret = { find: false };
+      loopMenuItemRecursively(getSlot(this), this.store.selectedKeys, ret);
+      return ret.find;
+    },
     handleUpdated() {
       const { mode, manualRef } = this.$props;
       // invoke customized ref to expose component to mixin
@@ -431,7 +437,7 @@ const SubMenu = defineComponent({
       [this.getOpenClassName()]: isOpen,
       [this.getActiveClassName()]: this.active || (isOpen && !isInlineMode),
       [this.getDisabledClassName()]: props.disabled,
-      [this.getSelectedClassName()]: this.isChildrenSelected,
+      [this.getSelectedClassName()]: this.isChildrenSelected || this.isChildrenSelected2(),
     };
 
     if (!this.internalMenuId) {

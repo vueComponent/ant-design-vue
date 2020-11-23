@@ -1,4 +1,5 @@
 import isMobile from './utils/isMobile';
+import isObject from 'lodash-es/isObject';
 
 export function noop() {}
 
@@ -26,6 +27,31 @@ export function getMenuIdFromSubMenuEventKey(eventKey) {
 //     }
 //   });
 // }
+
+export function loopMenuItemRecursively(children, keys, ret) {
+  if (!children || ret.find) {
+    return;
+  }
+  children.forEach(c => {
+    if (ret.find) {
+      return;
+    }
+    const construct = c.type;
+    if (construct && isObject(construct)) {
+      if (
+        !construct ||
+        !(construct.isSubMenu || construct.isMenuItem || construct.isMenuItemGroup)
+      ) {
+        return;
+      }
+      if (keys.indexOf(c.key) !== -1) {
+        ret.find = true;
+      } else if (c.children && c.children.default) {
+        loopMenuItemRecursively(c.children.default(), keys, ret);
+      }
+    }
+  });
+}
 
 export const menuAllProps = [
   'defaultSelectedKeys',

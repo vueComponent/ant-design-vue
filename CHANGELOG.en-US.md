@@ -10,6 +10,25 @@
 
 ---
 
+## 2.0.0-rc.2
+
+`2020-11-24`
+
+- 🌟 Optimize Menu performance, enable lazy loading by default [#3243](https://github.com/vueComponent/ant-design-vue/pull/3243)
+- 🌟 Tag supports defining icon via slot [#3185](https://github.com/vueComponent/ant-design-vue/pull/3185)
+- 🌟 Small type table changed to borderless [#3221](https://github.com/vueComponent/ant-design-vue/issues/3221)
+- 🌟 @ant-design/icons-vue upgraded to 5.1.6, support SSR, support spin attribute shorthand
+- 🐞 Fix the style problem of Alert's close button in Safari [#3184](https://github.com/vueComponent/ant-design-vue/issues/3184)
+- 🐞 Fix the problem of Notification top attribute type error [#3187](https://github.com/vueComponent/ant-design-vue/issues/3187)
+- 🐞 Fix DirectoryTree custom icon does not take effect [#3183](https://github.com/vueComponent/ant-design-vue/issues/3183)
+- 🐞 Fix Button loading delay not taking effect [#3194](https://github.com/vueComponent/ant-design-vue/issues/3194)
+- 💄 Select optionFilterProp no longer supports filtering by children [#3204](https://github.com/vueComponent/ant-design-vue/issues/3204)
+- 🐞 Fix Select labelInValue error when reporting [#3216](https://github.com/vueComponent/ant-design-vue/issues/3216)
+- 🐞 Fix ConfigProvider transformCellText missing issue [#3206](https://github.com/vueComponent/ant-design-vue/issues/3206)
+- 🐞 Fix the style disorder problem when Dropdown Button is mixed together [#3244](https://github.com/vueComponent/ant-design-vue/issues/3244)
+- 🐞 Fix RangePicker custom width invalidation issue [#3244](https://github.com/vueComponent/ant-design-vue/issues/3245)
+- 🐞 Fix multiple errors or missing Ts types
+
 ## 2.0.0-rc.1
 
 `2020-11-14`

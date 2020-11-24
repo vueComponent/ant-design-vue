@@ -195,6 +195,6 @@ export default defineComponent({
       children: newChildren,
       ref: this.innerSliderRefHandler,
     };
-    return <InnerSlider {...sliderProps} vSlots={this.$slots} __propsSymbol__={[]} />;
+    return <InnerSlider {...sliderProps} v-slots={this.$slots} __propsSymbol__={[]} />;
   },
 });

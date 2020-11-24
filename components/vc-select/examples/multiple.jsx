@@ -10,7 +10,7 @@ for (let i = 10; i < 36; i += 1) {
       key={i.toString(36) + i}
       disabled={i === 10}
       title={`中文${i}`}
-      vSlots={{ default: () => `中文${i}` }}
+      v-slots={{ default: () => `中文${i}` }}
     ></Option>,
   );
 }

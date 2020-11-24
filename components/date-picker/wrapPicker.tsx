@@ -226,7 +226,7 @@ export default function wrapPicker<P>(
           onCalendarChange: this.handleCalendarChange,
           ref: this.savePicker,
         };
-        return <Picker {...pickerProps} vSlots={this.$slots} />;
+        return <Picker {...pickerProps} v-slots={this.$slots} />;
       },
     },
 

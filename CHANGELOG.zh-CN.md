@@ -10,6 +10,26 @@
 
 ---
 
+
+## 2.0.0-rc.2
+
+`2020-11-24`
+
+- 🌟 优化 Menu 性能，默认开启懒加载 [#3243](https://github.com/vueComponent/ant-design-vue/pull/3243)
+- 🌟 Tag 支持通过 slot 定义 icon [#3185](https://github.com/vueComponent/ant-design-vue/pull/3185)
+- 🌟 small 类型的 table 改成无边框 [#3221](https://github.com/vueComponent/ant-design-vue/issues/3221)
+- 🌟 @ant-design/icons-vue 升级到 5.1.6，支持 SSR，支持 spin 属性简写
+- 🐞 修复 Alert 的关闭按钮在 Safari 下样式问题 [#3184](https://github.com/vueComponent/ant-design-vue/issues/3184)
+- 🐞 修复 Notification top 属性类型错误问题 [#3187](https://github.com/vueComponent/ant-design-vue/issues/3187)
+- 🐞 修复 DirectoryTree 自定义图标不生效问题 [#3183](https://github.com/vueComponent/ant-design-vue/issues/3183)
+- 🐞 修复 Button loading delay 不生效问题 [#3194](https://github.com/vueComponent/ant-design-vue/issues/3194)
+- 💄 Select optionFilterProp 不在支持按照 children 来过滤 [#3204](https://github.com/vueComponent/ant-design-vue/issues/3204)
+- 🐞 修复 Select labelInValue 时报错问题 [#3216](https://github.com/vueComponent/ant-design-vue/issues/3216)
+- 🐞 修复 ConfigProvider transformCellText 丢失问题 [#3206](https://github.com/vueComponent/ant-design-vue/issues/3206)
+- 🐞 修复 Dropdown Button 混合使用时，样式错乱问题 [#3244](https://github.com/vueComponent/ant-design-vue/issues/3244)
+- 🐞 修复 RangePicker 自定义宽度失效问题 [#3244](https://github.com/vueComponent/ant-design-vue/issues/3245)
+- 🐞 修复多处 Ts 类型错误或缺失问题
+
 ## 2.0.0-rc.1
 
 `2020-11-14`

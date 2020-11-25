@@ -190,7 +190,7 @@ const TreeSelect = defineComponent({
     return (
       <VcTreeSelect
         {...VcTreeSelectProps}
-        vSlots={omit(this.$slots, ['default'])}
+        v-slots={omit(this.$slots, ['default'])}
         __propsSymbol__={[]}
       />
     );

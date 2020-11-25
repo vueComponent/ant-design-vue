@@ -1,14 +1,25 @@
-import { createVNode, defineComponent, inject, provide, toRefs, ref } from 'vue';
+import {
+  createVNode,
+  defineComponent,
+  inject,
+  provide,
+  toRefs,
+  ref,
+  ExtractPropTypes,
+  HTMLAttributes,
+} from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider } from '../config-provider';
 import { flattenChildren } from '../_util/props-util';
 
-export const BasicProps = {
+export const basicProps = {
   prefixCls: PropTypes.string,
   hasSider: PropTypes.looseBool,
   tagName: PropTypes.string,
 };
+
+export type BasicProps = Partial<ExtractPropTypes<typeof basicProps>> & HTMLAttributes;
 
 export interface SiderHookProvider {
   addSider?: (id: string) => void;
@@ -23,9 +34,8 @@ type GeneratorArgument = {
 
 function generator({ suffixCls, tagName, name }: GeneratorArgument) {
   return (BasicComponent: typeof Basic) => {
-    return defineComponent({
+    const Adapter = defineComponent<BasicProps>({
       name,
-      props: BasicProps,
       setup(props, { slots }) {
         const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
         return () => {
@@ -44,11 +54,13 @@ function generator({ suffixCls, tagName, name }: GeneratorArgument) {
         };
       },
     });
+    Adapter.props = basicProps;
+    return Adapter;
   };
 }
 
 const Basic = defineComponent({
-  props: BasicProps,
+  props: basicProps,
   setup(props, { slots }) {
     const { prefixCls, tagName } = toRefs(props);
     return () => createVNode(tagName.value, { class: prefixCls.value }, slots.default?.());
@@ -56,7 +68,7 @@ const Basic = defineComponent({
 });
 
 const BasicLayout = defineComponent({
-  props: BasicProps,
+  props: basicProps,
   setup(props, { slots }) {
     const siders = ref<string[]>([]);
     const siderHookProvider: SiderHookProvider = {

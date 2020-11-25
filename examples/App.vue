@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-cascader :options="options"></a-cascader>
+    <a-cascader :options="options"/>
   </div>
 </template>
 <script>

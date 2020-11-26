@@ -75,11 +75,14 @@ const SubMenu = defineComponent({
     theme: PropTypes.string,
     parentUniKeys: PropTypes.array.def(() => []),
     parentUniKey: PropTypes.string,
+    isOverflowedSubMenu: PropTypes.looseBool.def(false),
   },
 
   isSubMenu: true,
   setup(props) {
-    const uniKey = `sub_menu_${++indexGuid}`;
+    const uniKey = props.isOverflowedSubMenu
+      ? 'MENUITEM_OVERFLOWED_UNI_KEY'
+      : `sub_menu_${++indexGuid}`;
     const store = inject('menuStore', () => ({}));
     onMounted(() => {
       store.addChildrenInfo(
@@ -439,7 +442,6 @@ const SubMenu = defineComponent({
       [this.getDisabledClassName()]: props.disabled,
       [this.getSelectedClassName()]: this.isChildrenSelected || this.isChildrenSelected2(),
     };
-
     if (!this.internalMenuId) {
       if (props.eventKey) {
         this.internalMenuId = `${props.eventKey}$Menu`;

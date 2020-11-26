@@ -4,6 +4,7 @@ import { propTypes } from '../vc-progress/src/types';
 export const injectExtraPropsKey = Symbol();
 const FunctionProvider = {
   inheritAttrs: false,
+  isMenuProvider: true,
   props: {
     extraProps: propTypes.object,
   },

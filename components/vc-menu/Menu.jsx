@@ -13,6 +13,7 @@ import {
   toRaw,
   watch,
 } from 'vue';
+import { isEqual } from 'lodash-es';
 
 const Menu = {
   name: 'Menu',
@@ -62,7 +63,9 @@ const Menu = {
         .reduce((allKeys, { parentUniKeys = [] }) => {
           return [...allKeys, ...toRaw(parentUniKeys)];
         }, []);
-      selectedParentUniKeys.value = keys || [];
+      if (!isEqual(selectedParentUniKeys.value, keys)) {
+        selectedParentUniKeys.value = keys || [];
+      }
     });
     const store = reactive({
       selectedKeys,

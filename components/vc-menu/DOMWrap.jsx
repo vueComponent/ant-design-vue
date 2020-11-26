@@ -4,10 +4,12 @@ import SubMenu from './SubMenu';
 import BaseMixin from '../_util/BaseMixin';
 import { getWidth, setStyle, menuAllProps } from './util';
 import { cloneElement } from '../_util/vnode';
-import { getPropsData, getAllProps, getSlot, findDOMNode } from '../_util/props-util';
+import { getAllProps, getSlot, findDOMNode } from '../_util/props-util';
 
 const MENUITEM_OVERFLOWED_CLASSNAME = 'menuitem-overflowed';
 const FLOAT_PRECISION_ADJUST = 0.5;
+const MENUITEM_OVERFLOWED_UNI_KEY = 'MENUITEM_OVERFLOWED_UNI_KEY';
+const MENUITEM_OVERFLOWED_UNI_KEYS = [MENUITEM_OVERFLOWED_UNI_KEY];
 
 const DOMWrap = {
   name: 'DOMWrap',
@@ -136,6 +138,7 @@ const DOMWrap = {
         class: `${prefixCls}-overflowed-submenu`,
         key,
         style,
+        isOverflowedSubMenu: true,
       };
       return <SubMenu {...subMenuProps}>{overflowedItems}</SubMenu>;
     },
@@ -227,7 +230,8 @@ const DOMWrap = {
       const className = this.$attrs.class || '';
       return (children || []).reduce((acc, childNode, index) => {
         let item = childNode;
-        const eventKey = getPropsData(childNode).eventKey;
+        const { extraProps = {} } = item.props || {};
+        const { eventKey } = extraProps;
         if (this.mode === 'horizontal') {
           let overflowed = this.getOverflowedSubMenuItem(eventKey, []);
           if (
@@ -239,21 +243,33 @@ const DOMWrap = {
                 childNode,
                 // 这里修改 eventKey 是为了防止隐藏状态下还会触发 openkeys 事件
                 {
-                  style: { display: 'none' },
-                  eventKey: `${eventKey}-hidden`,
-                  class: MENUITEM_OVERFLOWED_CLASSNAME,
+                  extraProps: {
+                    ...extraProps,
+                    style: { display: 'none' },
+                    eventKey: `${eventKey}-hidden`,
+                    class: MENUITEM_OVERFLOWED_CLASSNAME,
+                    parentUniKey: MENUITEM_OVERFLOWED_UNI_KEY,
+                    parentUniKeys: MENUITEM_OVERFLOWED_UNI_KEYS,
+                  },
                 },
               );
             }
             if (index === lastVisibleIndex + 1) {
               this.overflowedItems = children.slice(lastVisibleIndex + 1).map(c => {
+                const { extraProps = {} } = c.props || {};
+                const { eventKey } = extraProps;
                 return cloneElement(
                   c,
                   // children[index].key will become '.$key' in clone by default,
                   // we have to overwrite with the correct key explicitly
                   {
-                    key: getPropsData(c).eventKey,
-                    mode: 'vertical-left',
+                    extraProps: {
+                      ...extraProps,
+                      key: eventKey,
+                      mode: 'vertical-left',
+                      parentUniKey: MENUITEM_OVERFLOWED_UNI_KEY,
+                      parentUniKeys: MENUITEM_OVERFLOWED_UNI_KEYS,
+                    },
                   },
                 );
               });

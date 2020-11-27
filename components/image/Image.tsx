@@ -1,7 +1,3 @@
-import cn from '../_util/classNames';
-import { getOffset } from '../vc-util/Dom/css';
-export type GetContainer = string | HTMLElement | (() => HTMLElement);
-import Preview, { MouseEventHandler } from './Preview';
 import {
   VNode,
   ImgHTMLAttributes,
@@ -12,12 +8,18 @@ import {
   inject,
   computed,
 } from 'vue';
-import PropTypes from '../_util/vue-types';
-import { initDefaultProps } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
-import BaseMixin from '../_util/BaseMixin';
 import { isNumber } from 'lodash-es';
 
+import BaseMixin from '../_util/BaseMixin';
+import cn from '../_util/classNames';
+import PropTypes from '../_util/vue-types';
+import { initDefaultProps } from '../_util/props-util';
+import { getOffset } from '../vc-util/Dom/css';
+
+import { defaultConfigProvider } from '../config-provider';
+import Preview, { MouseEventHandler } from './Preview';
+
+export type GetContainer = string | HTMLElement | (() => HTMLElement);
 export interface ImagePreviewType {
   visible?: boolean;
   onVisibleChange?: (value: boolean, prevValue: boolean) => void;
@@ -34,8 +36,6 @@ export interface ImagePropsType extends Omit<ImgHTMLAttributes, 'placeholder' | 
   placeholder?: VNode | boolean;
   fallback?: string;
   preview?: boolean | ImagePreviewType;
-
-  //  onClick?: (e: MouseEvent) => void;
 }
 export const ImageProps = {
   src: PropTypes.string,
@@ -46,11 +46,9 @@ export const ImageProps = {
   placeholder: PropTypes.oneOf([PropTypes.looseBool, PropTypes.VNodeChild]),
   fallback: PropTypes.string,
   preview: PropTypes.looseBool.def(true),
-
-  //onClick: PropTypes.func,
 };
 type ImageStatus = 'normal' | 'error' | 'loading';
-//
+
 const ImageInternal = defineComponent({
   name: 'AImage',
   mixins: [BaseMixin],
@@ -58,22 +56,16 @@ const ImageInternal = defineComponent({
   emits: ['click'],
   setup(props: ImagePropsType, { attrs, slots, emit }) {
     const configProvider = inject('configProvider', defaultConfigProvider);
-
     const { getPrefixCls } = configProvider;
     const prefixCls = getPrefixCls('image', props.prefixCls);
     const previewPrefixCls = `${prefixCls}-preview`;
-
     const {
       width,
       height,
       style,
       crossorigin,
-      // Img
       decoding,
-      // loading,
       alt,
-      // referrerPolicy,
-
       sizes,
       srcset,
       usemap,
@@ -84,18 +76,13 @@ const ImageInternal = defineComponent({
     const { visible = undefined, getContainer = undefined } =
       typeof props.preview === 'object' ? props.preview : {};
     const isControlled = visible !== undefined;
-
     const isShowPreview = ref(visible);
-
     const status = ref<ImageStatus>(isCustomPlaceholder ? 'loading' : 'normal');
-
     const mousePosition = ref<null | { x: number; y: number }>(null);
     const isError = computed(() => status.value === 'error');
-
     const onLoad = () => {
       status.value = 'normal';
     };
-
     const onError = () => {
       status.value = 'error';
     };
@@ -130,22 +117,13 @@ const ImageInternal = defineComponent({
         if (isCustomPlaceholder && val != old) status.value = 'loading';
       },
     );
-    // React.useEffect(() => {
-    //     if (isCustomPlaceholder) {
-    //         setStatus('loading');
-    //     }
-    // }, [src]);
-
     const wrappperClass = cn(prefixCls, props.wrapperClassName, {
       [`${prefixCls}-error`]: isError.value,
     });
 
-    //const mergedSrc = computed(() => isError.value && fallback ? fallback : props.src);
     const imgCommonProps = {
       crossorigin,
       decoding,
-      //  loading,
-      // referrerPolicy,
       alt,
       sizes,
       srcset,
@@ -195,7 +173,7 @@ const ImageInternal = defineComponent({
         )}
 
         {status.value === 'loading' && (
-          //此处缺少一种 placeholder ===true的逻辑
+          //此处缺少一种 placeholder ===true的逻辑,原 ant.design 中也缺少，此处待添加
           <div aria-hidden="true" class={`${prefixCls}-placeholder`}>
             {slots.placeholder
               ? slots.placeholder()

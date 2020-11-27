@@ -1,6 +1,4 @@
-import Dialog from '../vc-dialog';
-import getIDialogPropTypes from '../vc-dialog/IDialogPropTypes';
-import PropTypes from '../_util/vue-types';
+import { computed, defineComponent, reactive, ref, watchEffect } from 'vue';
 import {
   RotateLeftOutlined,
   RotateRightOutlined,
@@ -10,13 +8,15 @@ import {
 } from '@ant-design/icons-vue';
 
 import classnames from '../_util/classNames';
-import addEventListener from '../vc-util/Dom/addEventListener';
+import { initDefaultProps } from '../_util/props-util';
+import PropTypes from '../_util/vue-types';
+import Dialog from '../vc-dialog';
+import getIDialogPropTypes from '../vc-dialog/IDialogPropTypes';
 import { getOffset } from '../vc-util/Dom/css';
+import addEventListener from '../vc-util/Dom/addEventListener';
 import { warning } from '../vc-util/warning';
 
 import getFixScaleEleTransPosition from './getFixScaleEleTransPosition';
-import { computed, defineComponent, reactive, ref, watchEffect } from 'vue';
-import { initDefaultProps } from '../_util/props-util';
 
 const IDialogPropTypes = getIDialogPropTypes();
 export type MouseEventHandler = (payload: MouseEvent) => void;

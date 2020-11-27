@@ -40,7 +40,12 @@ export function loopMenuItemRecursively(children, keys, ret) {
     if (construct && isObject(construct)) {
       if (
         !construct ||
-        !(construct.isSubMenu || construct.isMenuItem || construct.isMenuItemGroup)
+        !(
+          construct.isSubMenu ||
+          construct.isMenuItem ||
+          construct.isMenuItemGroup ||
+          construct.isMenuProvider
+        )
       ) {
         return;
       }

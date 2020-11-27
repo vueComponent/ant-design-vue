@@ -477,7 +477,7 @@ describe('Menu', () => {
       }, 500);
     });
 
-    fit('horizontal', async () => {
+    it('horizontal', async () => {
       const wrapper = mount(
         {
           render() {

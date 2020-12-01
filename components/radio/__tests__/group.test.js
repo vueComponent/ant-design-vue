@@ -230,4 +230,41 @@ describe('Radio', () => {
     });
     expect(wrapper.html()).toMatchSnapshot();
   });
+
+  it('when onChange do not change the value, change event can be also triggered.', async () => {
+    const onChange = jest.fn();
+    const onChangeRadioGroup = () => {
+      onChange();
+      wrapper.setProps({ value: 'A' });
+    };
+
+    const wrapper = mount(
+      {
+        props: ['value'],
+        render() {
+          const value = this.value || 'A';
+          return (
+            <RadioGroup ref="radioGroup" value={value} onChange={onChangeRadioGroup}>
+              <Radio value="A">A</Radio>
+              <Radio value="B">B</Radio>
+              <Radio value="C">C</Radio>
+            </RadioGroup>
+          );
+        },
+      },
+      { sync: false },
+    );
+
+    const radios = wrapper.findAll('input');
+
+    await asyncExpect(() => {
+      radios.at(1).trigger('click');
+      expect(onChange.mock.calls.length).toBe(1);
+    });
+
+    await asyncExpect(() => {
+      radios.at(1).trigger('click');
+      expect(onChange.mock.calls.length).toBe(2);
+    });
+  });
 });

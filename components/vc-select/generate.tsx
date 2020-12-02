@@ -27,6 +27,7 @@ import {
   INTERNAL_PROPS_MARK,
   SelectSource,
   CustomTagProps,
+  DropdownRender,
 } from './interface/generator';
 import { OptionListProps } from './OptionList';
 import { toInnerValue, toOuterValues, removeLastEnabledValue, getUUID } from './utils/commonUtil';
@@ -54,6 +55,7 @@ import {
 import createRef from '../_util/createRef';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
+import warning from '../_util/warning';
 
 const DEFAULT_OMIT_PROPS = [
   'children',
@@ -215,7 +217,7 @@ export interface SelectProps<OptionsType extends object[], ValueType> {
   dropdownClassName?: string;
   dropdownMatchSelectWidth?: boolean | number;
   virtual?: boolean;
-  dropdownRender?: (menu: VNodeChild | JSX.Element) => VNodeChild;
+  dropdownRender?: DropdownRender;
   dropdownAlign?: any;
   animation?: string;
   transitionName?: string;
@@ -341,7 +343,11 @@ export default function generateSelector<
       const useInternalProps = computed(
         () => props.internalProps && props.internalProps.mark === INTERNAL_PROPS_MARK,
       );
-
+      warning(
+        props.optionFilterProp !== 'children',
+        'Select',
+        'optionFilterProp not support children, please use label instead',
+      );
       const containerRef = ref(null);
       const triggerRef = ref(null);
       const selectorRef = ref(null);

@@ -5,6 +5,7 @@ import classNames from '../_util/classNames';
 import createRef from '../_util/createRef';
 import { CSSProperties, defineComponent, VNodeChild } from 'vue';
 import { RenderDOMFunc } from './interface';
+import { DropdownRender } from './interface/generator';
 
 const getBuiltInPlacements = (dropdownMatchSelectWidth: number | boolean) => {
   // Enable horizontal overflow auto-adjustment when a custom dropdown width is provided
@@ -57,7 +58,7 @@ export interface SelectTriggerProps {
   dropdownClassName: string;
   direction: string;
   dropdownMatchSelectWidth?: boolean | number;
-  dropdownRender?: (menu: VNodeChild | JSX.Element) => VNodeChild;
+  dropdownRender?: DropdownRender;
   getPopupContainer?: RenderDOMFunc;
   dropdownAlign: object;
   empty: boolean;

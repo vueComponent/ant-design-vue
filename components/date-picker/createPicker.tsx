@@ -197,7 +197,7 @@ export default function createPicker<P>(
         onChange: this.handleCalendarChange,
         class: calendarClassName,
       };
-      const calendar = <TheCalendar {...theCalendarProps} vSlots={$slots} />;
+      const calendar = <TheCalendar {...theCalendarProps} v-slots={$slots} />;
 
       const clearIcon =
         !props.disabled && props.allowClear && value ? (

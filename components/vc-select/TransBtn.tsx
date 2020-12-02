@@ -1,4 +1,4 @@
-import { SetupContext, VNodeChild } from 'vue';
+import { FunctionalComponent, VNodeChild } from 'vue';
 import PropTypes from '../_util/vue-types';
 
 export interface TransBtnProps {
@@ -9,7 +9,11 @@ export interface TransBtnProps {
   onClick?: (payload: MouseEvent) => void;
 }
 
-const TransBtn = (props: TransBtnProps, { slots }: SetupContext) => {
+export interface TransBtnType extends FunctionalComponent<TransBtnProps> {
+  displayName: string;
+}
+
+const TransBtn: TransBtnType = (props, { slots }) => {
   const { class: className, customizeIcon, customizeIconProps, onMousedown, onClick } = props;
   let icon: VNodeChild;
 
@@ -48,6 +52,7 @@ const TransBtn = (props: TransBtnProps, { slots }: SetupContext) => {
 };
 
 TransBtn.inheritAttrs = false;
+TransBtn.displayName = 'TransBtn';
 TransBtn.props = {
   class: PropTypes.string,
   customizeIcon: PropTypes.any,

@@ -35,6 +35,7 @@ export default defineComponent({
   name: 'ADropdownButton',
   inheritAttrs: false,
   props: DropdownButtonProps,
+  emits: ['click', 'visibleChange', 'update:visible'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

@@ -101,7 +101,7 @@ const BaseTable = {
         const row = (
           <ExpandableRow
             {...expandableRowProps}
-            vSlots={{
+            v-slots={{
               default: expandableRow => {
                 const tableRowProps = {
                   fixed,

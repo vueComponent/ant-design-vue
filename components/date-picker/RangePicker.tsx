@@ -374,7 +374,7 @@ export default defineComponent({
       onInputSelect: this.handleCalendarInputSelect,
       class: calendarClassName,
     };
-    const calendar = <RangeCalendar {...rangeCalendarProps} vSlots={$slots} />;
+    const calendar = <RangeCalendar {...rangeCalendarProps} v-slots={$slots} />;
 
     // default width for showTime
     const pickerStyle: CSSProperties = {};
@@ -430,7 +430,7 @@ export default defineComponent({
         ref={this.savePicker}
         id={props.id}
         class={classNames(props.class, props.pickerClass)}
-        style={{ ...style, ...pickerStyle }}
+        style={{ ...pickerStyle, ...style }}
         tabindex={props.disabled ? -1 : 0}
         onFocus={onFocus}
         onBlur={onBlur}
@@ -438,7 +438,7 @@ export default defineComponent({
         onMouseleave={this.onMouseLeave}
         {...getDataAndAriaProps(props)}
       >
-        <VcDatePicker {...vcDatePickerProps} vSlots={{ default: input, ...$slots }}></VcDatePicker>
+        <VcDatePicker {...vcDatePickerProps} v-slots={{ default: input, ...$slots }}></VcDatePicker>
       </span>
     );
   },

@@ -7,7 +7,7 @@ import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
 
 let defaultDuration = 3;
-let defaultTop: number;
+let defaultTop: string;
 let messageInstance: any;
 let key = 1;
 let prefixCls = 'ant-message';
@@ -123,7 +123,7 @@ function isArgsProps(content: JointContent): content is ArgsProps {
 }
 
 export interface ConfigOptions {
-  top?: number;
+  top?: string;
   duration?: number;
   prefixCls?: string;
   getContainer?: () => HTMLElement;

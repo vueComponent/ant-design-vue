@@ -565,7 +565,7 @@ export default defineComponent({
       <Provider store={this.store}>
         <ExpandableTable
           {...expandableTableProps}
-          vSlots={{
+          v-slots={{
             default: expander => {
               this.expander = expander;
               return (

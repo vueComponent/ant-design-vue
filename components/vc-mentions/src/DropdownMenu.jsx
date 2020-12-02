@@ -37,7 +37,8 @@ export default {
         }}
         onBlur={onBlur}
         onFocus={onFocus}
-        children={[
+      >
+        {[
           ...options.map((option, index) => {
             const { value, disabled, children } = option;
             return (
@@ -58,7 +59,7 @@ export default {
             </MenuItem>
           ),
         ].filter(Boolean)}
-      />
+      </Menu>
     );
   },
 };

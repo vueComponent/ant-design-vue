@@ -1,8 +1,9 @@
 import PanelContent from './PanelContent';
 import { initDefaultProps, getComponent, getSlot } from '../../_util/props-util';
 import { panelProps } from './commonProps';
-import { defineComponent, Transition } from 'vue';
+import { defineComponent } from 'vue';
 import BaseMixin from '../../_util/BaseMixin';
+import Transition from '../../_util/transition';
 
 export default defineComponent({
   name: 'Panel',
@@ -62,7 +63,7 @@ export default defineComponent({
 
     const panelContent = (
       <PanelContent
-        vShow={isActive}
+        v-show={isActive}
         prefixCls={prefixCls}
         isActive={isActive}
         destroyInactivePanel={destroyInactivePanel}

@@ -140,9 +140,9 @@ exports[`renders ./antdv-demo/docs/descriptions/demo/size.md correctly 1`] = `
   <div class="ant-descriptions ant-descriptions-bordered">
     <div class="ant-descriptions-header">
       <div class="ant-descriptions-title">Custom Size</div>
-      <div class="ant-descriptions-extra">
-        <!---->
-      </div>
+      <div class="ant-descriptions-extra"><button class="ant-btn ant-btn-primary" type="button">
+          <!----><span>Edit</span>
+        </button></div>
     </div>
     <div class="ant-descriptions-view">
       <table>
@@ -182,9 +182,9 @@ exports[`renders ./antdv-demo/docs/descriptions/demo/size.md correctly 1`] = `
   <div class="ant-descriptions">
     <div class="ant-descriptions-header">
       <div class="ant-descriptions-title">Custom Size</div>
-      <div class="ant-descriptions-extra">
-        <!---->
-      </div>
+      <div class="ant-descriptions-extra"><button class="ant-btn ant-btn-primary" type="button">
+          <!----><span>Edit</span>
+        </button></div>
     </div>
     <div class="ant-descriptions-view">
       <table>

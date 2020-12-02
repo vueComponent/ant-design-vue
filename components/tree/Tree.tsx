@@ -1,4 +1,4 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, VNode, PropType } from 'vue';
 import classNames from '../_util/classNames';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import FileOutlined from '@ant-design/icons-vue/FileOutlined';
@@ -14,6 +14,46 @@ import { cloneElement } from '../_util/vnode';
 import { defaultConfigProvider } from '../config-provider';
 
 const TreeNode = VcTree.TreeNode;
+
+export interface TreeDataItem {
+  key?: string | number;
+  title?: string;
+  isLeaf?: boolean;
+  selectable?: boolean;
+  children?: TreeDataItem[];
+  disableCheckbox?: boolean;
+  disabled?: boolean;
+  class?: string;
+  style?: any;
+  checkable?: boolean;
+  icon?: any;
+  slots?: any;
+  switcherIcon?: any;
+}
+
+interface DefaultEvent {
+  nativeEvent: MouseEvent;
+  node: any;
+}
+
+export interface CheckEvent extends DefaultEvent {
+  checked: boolean;
+  checkedNodes: VNode[];
+  checkedNodesPositions: { node: VNode; pos: string | number }[];
+  event: string;
+  halfCheckedKeys: (string | number)[];
+}
+
+export interface ExpendEvent extends DefaultEvent {
+  expanded: boolean;
+}
+
+export interface SelectEvent extends DefaultEvent {
+  event: string;
+  selected: boolean;
+  selectedNodes: VNode[];
+}
+
 function TreeProps() {
   return {
     showLine: PropTypes.looseBool,
@@ -32,30 +72,36 @@ function TreeProps() {
     /** 默认展开对应树节点 */
     defaultExpandParent: PropTypes.looseBool,
     /** 默认展开指定的树节点 */
-    defaultExpandedKeys: PropTypes.array,
+    defaultExpandedKeys: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    ),
     /** （受控）展开指定的树节点 */
-    expandedKeys: PropTypes.array,
+    expandedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
     /** （受控）选中复选框的树节点 */
     checkedKeys: PropTypes.oneOfType([
-      PropTypes.array,
+      PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
       PropTypes.shape({
-        checked: PropTypes.array,
-        halfChecked: PropTypes.array,
+        checked: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+        halfChecked: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
       }).loose,
     ]),
     /** 默认选中复选框的树节点 */
-    defaultCheckedKeys: PropTypes.array,
+    defaultCheckedKeys: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    ),
     /** （受控）设置选中的树节点 */
-    selectedKeys: PropTypes.array,
+    selectedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
     /** 默认选中的树节点 */
-    defaultSelectedKeys: PropTypes.array,
+    defaultSelectedKeys: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    ),
     selectable: PropTypes.looseBool,
 
     /** filter some AntTreeNodes as you need. it should return true */
     filterAntTreeNode: PropTypes.func,
     /** 异步加载数据 */
     loadData: PropTypes.func,
-    loadedKeys: PropTypes.array,
+    loadedKeys: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
     // onLoaded: (loadedKeys: string[], info: { event: 'load', node: AntTreeNode; }) => void,
     /** 响应右键点击 */
     // onRightClick: (options: AntTreeNodeMouseEvent) => void,
@@ -77,7 +123,9 @@ function TreeProps() {
     prefixCls: PropTypes.string,
     filterTreeNode: PropTypes.func,
     openAnimation: PropTypes.any,
-    treeData: PropTypes.array,
+    treeData: {
+      type: Array as PropType<TreeDataItem[]>,
+    },
     /**
      * @default{title,key,children}
      * 替换treeNode中 title,key,children字段为treeData中对应的字段
@@ -123,7 +171,7 @@ export default defineComponent({
   },
   TreeNode,
   methods: {
-    renderSwitcherIcon(prefixCls: string, switcherIcon, { isLeaf, loading, expanded }) {
+    renderSwitcherIcon(prefixCls: string, switcherIcon: VNode, { isLeaf, loading, expanded }) {
       const { showLine } = this.$props;
       if (loading) {
         return <LoadingOutlined class={`${prefixCls}-switcher-loading-icon`} />;
@@ -148,26 +196,19 @@ export default defineComponent({
         <CaretDownFilled class={switcherCls} />
       );
     },
-    updateTreeData(treeData) {
+    updateTreeData(treeData: TreeDataItem[]) {
       const { $slots } = this;
       const defaultFields = { children: 'children', title: 'title', key: 'key' };
       const replaceFields = { ...defaultFields, ...this.$props.replaceFields };
       return treeData.map(item => {
         const key = item[replaceFields.key];
         const children = item[replaceFields.children];
-        const { slots = {}, scopedSlots = {}, class: cls, style, ...restProps } = item;
+        const { slots = {}, class: cls, style, ...restProps } = item;
         const treeNodeProps = {
           ...restProps,
-          icon: $slots[scopedSlots.icon] || $slots[slots.icon] || restProps.icon,
-          switcherIcon:
-            $slots[scopedSlots.switcherIcon] ||
-            $slots[slots.switcherIcon] ||
-            restProps.switcherIcon,
-          title:
-            $slots[scopedSlots.title] ||
-            $slots[slots.title] ||
-            $slots.title ||
-            restProps[replaceFields.title],
+          icon: $slots[slots.icon] || restProps.icon,
+          switcherIcon: $slots[slots.switcherIcon] || restProps.switcherIcon,
+          title: $slots[slots.title] || $slots.title || restProps[replaceFields.title],
           dataRef: item,
           key,
           class: cls,
@@ -179,18 +220,18 @@ export default defineComponent({
         return treeNodeProps;
       });
     },
-    setTreeRef(node) {
+    setTreeRef(node: VNode) {
       this.tree = node;
     },
-    handleCheck(checkedObj, eventObj) {
+    handleCheck(checkedObj: (number | string)[], eventObj: CheckEvent) {
       this.$emit('update:checkedKeys', checkedObj);
       this.$emit('check', checkedObj, eventObj);
     },
-    handleExpand(expandedKeys, eventObj) {
+    handleExpand(expandedKeys: (number | string)[], eventObj: ExpendEvent) {
       this.$emit('update:expandedKeys', expandedKeys);
       this.$emit('expand', expandedKeys, eventObj);
     },
-    handleSelect(selectedKeys: string[], eventObj) {
+    handleSelect(selectedKeys: (number | string)[], eventObj: SelectEvent) {
       this.$emit('update:selectedKeys', selectedKeys);
       this.$emit('select', selectedKeys, eventObj);
     },

@@ -93,10 +93,10 @@ const TreeSelect = defineComponent({
         let newLabel = typeof label === 'function' ? label() : label;
         let newTitle = typeof title === 'function' ? title() : title;
         if (!newLabel && slots.label && $slots[slots.label]) {
-          newLabel = $slots.label(item);
+          newLabel = <>{$slots.label(item)}</>;
         }
         if (!newTitle && slots.title && $slots[slots.title]) {
-          newTitle = $slots.title(item);
+          newTitle = <>{$slots.title(item)}</>;
         }
         const treeNodeProps = {
           ...item,
@@ -190,7 +190,7 @@ const TreeSelect = defineComponent({
     return (
       <VcTreeSelect
         {...VcTreeSelectProps}
-        vSlots={omit(this.$slots, ['default'])}
+        v-slots={omit(this.$slots, ['default'])}
         __propsSymbol__={[]}
       />
     );

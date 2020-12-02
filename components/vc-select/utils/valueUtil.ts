@@ -1,5 +1,5 @@
 import { warning } from '../../vc-util/warning';
-import { isVNode, VNodeChild } from 'vue';
+import { cloneVNode, isVNode, VNodeChild } from 'vue';
 import {
   OptionsType as SelectOptionsType,
   OptionData,
@@ -151,7 +151,13 @@ export const getLabeledValue: GetLabeledValue<FlattenOptionData[]> = (
       warning(false, '`label` of `value` is not same as `label` in Select options.');
     }
   } else if (item && optionLabelProp in item) {
-    result.label = item[optionLabelProp];
+    if (Array.isArray(item[optionLabelProp])) {
+      result.label = isVNode(item[optionLabelProp][0])
+        ? cloneVNode(item[optionLabelProp][0])
+        : item[optionLabelProp];
+    } else {
+      result.label = item[optionLabelProp];
+    }
   } else {
     result.label = value;
   }

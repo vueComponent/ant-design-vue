@@ -6,7 +6,7 @@ import VcTree from '../../vc-tree';
  */
 const TreeNode = VcTree.TreeNode;
 function SelectNode(_, { attrs, slots }) {
-  return <TreeNode {...attrs} vSlots={slots} />;
+  return <TreeNode {...attrs} v-slots={slots} />;
 }
 
 SelectNode.isTreeNode = true;

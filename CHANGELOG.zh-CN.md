@@ -10,7 +10,6 @@
 
 ---
 
-
 ## 2.0.0-rc.2
 
 `2020-11-24`
@@ -199,7 +198,7 @@
   </a-buttom>
 </template>
 <script>
-import SmileOutlined from '@ant-design/icons/SmileOutlined';
+import SmileOutlined from '@ant-design/icons-vue/SmileOutlined';
 export default {
   components: {
     SmileOutlined

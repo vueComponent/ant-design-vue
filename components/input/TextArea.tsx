@@ -108,8 +108,8 @@ export default defineComponent({
       const resizeProps = {
         ...props,
         ...this.$attrs,
-        style: style && !props.showCount,
-        class: customClass && !props.showCount,
+        style: !props.showCount && style,
+        class: !props.showCount && customClass,
         showCount: null,
         prefixCls,
         onInput: this.handleChange,

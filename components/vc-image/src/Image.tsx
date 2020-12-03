@@ -10,13 +10,13 @@ import {
 } from 'vue';
 import { isNumber } from 'lodash-es';
 
-import BaseMixin from '../_util/BaseMixin';
-import cn from '../_util/classNames';
-import PropTypes from '../_util/vue-types';
-import { initDefaultProps } from '../_util/props-util';
-import { getOffset } from '../vc-util/Dom/css';
+import BaseMixin from '../../_util/BaseMixin';
+import cn from '../../_util/classNames';
+import PropTypes from '../../_util/vue-types';
+import { initDefaultProps } from '../../_util/props-util';
+import { getOffset } from '../../vc-util/Dom/css';
 
-import { defaultConfigProvider } from '../config-provider';
+import { defaultConfigProvider } from '../../config-provider';
 import Preview, { MouseEventHandler } from './Preview';
 
 export type GetContainer = string | HTMLElement | (() => HTMLElement);
@@ -49,8 +49,8 @@ export const ImageProps = {
 };
 type ImageStatus = 'normal' | 'error' | 'loading';
 
-const ImageInternal = defineComponent({
-  name: 'AImage',
+const Image = defineComponent({
+  name: 'Image',
   mixins: [BaseMixin],
   props: initDefaultProps(ImageProps, {}),
   emits: ['click'],
@@ -198,4 +198,4 @@ const ImageInternal = defineComponent({
   },
 });
 
-export default ImageInternal;
+export default Image;

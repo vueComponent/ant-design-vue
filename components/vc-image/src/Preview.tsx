@@ -7,14 +7,14 @@ import {
   CloseOutlined,
 } from '@ant-design/icons-vue';
 
-import classnames from '../_util/classNames';
-import { initDefaultProps } from '../_util/props-util';
-import PropTypes from '../_util/vue-types';
-import Dialog from '../vc-dialog';
-import getIDialogPropTypes from '../vc-dialog/IDialogPropTypes';
-import { getOffset } from '../vc-util/Dom/css';
-import addEventListener from '../vc-util/Dom/addEventListener';
-import { warning } from '../vc-util/warning';
+import classnames from '../../_util/classNames';
+import { initDefaultProps } from '../../_util/props-util';
+import PropTypes from '../../_util/vue-types';
+import Dialog from '../../vc-dialog';
+import getIDialogPropTypes from '../../vc-dialog/IDialogPropTypes';
+import { getOffset } from '../../vc-util/Dom/css';
+import addEventListener from '../../vc-util/Dom/addEventListener';
+import { warning } from '../../vc-util/warning';
 
 import getFixScaleEleTransPosition from './getFixScaleEleTransPosition';
 

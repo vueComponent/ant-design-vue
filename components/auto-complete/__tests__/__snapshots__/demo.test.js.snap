@@ -30,7 +30,7 @@ exports[`renders ./antdv-demo/docs/auto-complete/demo/custom.md correctly 1`] = 
 <div class="ant-select ant-select-show-search ant-select-auto-complete ant-select-single ant-select-customize-input" style="width: 200px;">
   <!---->
   <!---->
-  <div class="ant-select-selector"><span class="ant-select-selection-search"><textarea placeholder="input here" class="ant-input" id="rc_select_TEST_OR_SSR" autocomplete="off" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></textarea></span>
+  <div class="ant-select-selector"><span class="ant-select-selection-search"><textarea placeholder="input here" class="ant-input ant-select-selection-search-input" style="height: 50px;" id="rc_select_TEST_OR_SSR" autocomplete="off" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></textarea></span>
     <!----><span class="ant-select-selection-placeholder"><!----></span>
   </div>
   <!---->

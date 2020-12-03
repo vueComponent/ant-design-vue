@@ -5,7 +5,7 @@ import { ImageProps, ImagePropsType } from '../vc-image/src/Image';
 import { initDefaultProps } from '../_util/props-util';
 
 import PreviewGroup from './PreviewGroup';
-const Image = defineComponent({
+const Image = defineComponent<ImagePropsType>({
   name: 'AImage',
   props: initDefaultProps(ImageProps, {}),
   emits: ['click'],

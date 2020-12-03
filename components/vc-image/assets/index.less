@@ -147,6 +147,62 @@
         font-size: 18px;
       }
     }
+    
+    &-switch-left {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      width: 44px;
+      height: 44px;
+      margin-top: -22px;
+      background: fade(@text-color, 45%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      pointer-events: auto;
+      color: @text-color;
+      &-disabled {
+        background: fade(@text-color, 30%);
+        color: @text-color-disabled;
+        cursor: not-allowed;
+        > .anticon {
+          cursor: not-allowed;
+        }
+      }
+      > .anticon {
+        font-size: 24px;
+      }
+    }
+
+    &-switch-right {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      width: 44px;
+      height: 44px;
+      margin-top: -22px;
+      background: fade(@text-color, 45%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      pointer-events: auto;
+      color: @text-color;
+      &-disabled {
+        background: fade(@text-color, 20%);
+        color: @text-color-disabled;
+        cursor: not-allowed;
+        > .anticon {
+          cursor: not-allowed;
+        }
+      }
+      > .anticon {
+        font-size: 24px;
+      } 
+    }
   }
 }
 

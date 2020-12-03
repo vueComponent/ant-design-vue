@@ -19,6 +19,8 @@ import { getOffset } from '../../vc-util/Dom/css';
 import { defaultConfigProvider } from '../../config-provider';
 import Preview, { MouseEventHandler } from './Preview';
 
+import PreviewGroup, { context } from './PreviewGroup';
+
 export type GetContainer = string | HTMLElement | (() => HTMLElement);
 export interface ImagePreviewType {
   visible?: boolean;
@@ -49,7 +51,7 @@ export const ImageProps = {
 };
 type ImageStatus = 'normal' | 'error' | 'loading';
 
-const Image = defineComponent({
+const ImageInternal = defineComponent({
   name: 'Image',
   mixins: [BaseMixin],
   props: initDefaultProps(ImageProps, {}),
@@ -80,23 +82,49 @@ const Image = defineComponent({
     const status = ref<ImageStatus>(isCustomPlaceholder ? 'loading' : 'normal');
     const mousePosition = ref<null | { x: number; y: number }>(null);
     const isError = computed(() => status.value === 'error');
+    const groupContext = context.inject();
+    const {
+      isPreviewGroup,
+      previewUrls,
+      setPreviewUrls,
+      setCurrent,
+      setShowPreview: setGroupShowPreview,
+      setMousePosition: setGroupMousePosition,
+    } = groupContext;
+    const groupIndexRef = ref(0);
+    previewUrls.push(props.src);
     const onLoad = () => {
       status.value = 'normal';
     };
     const onError = () => {
       status.value = 'error';
+      if (isPreviewGroup) {
+        previewUrls.splice(groupIndexRef.value);
+        setPreviewUrls(previewUrls);
+      }
     };
 
     const onPreview: MouseEventHandler = e => {
       if (!isControlled) {
         const { left, top } = getOffset(e.target);
-
-        mousePosition.value = {
-          x: left,
-          y: top,
-        };
+        if (isPreviewGroup) {
+          setCurrent(props.src);
+          setGroupMousePosition({
+            x: left,
+            y: top,
+          });
+        } else {
+          mousePosition.value = {
+            x: left,
+            y: top,
+          };
+        }
       }
-      isShowPreview.value = true;
+      if (isPreviewGroup) {
+        setGroupShowPreview(true);
+      } else {
+        isShowPreview.value = true;
+      }
       emit('click', e);
     };
 
@@ -115,6 +143,19 @@ const Image = defineComponent({
       () => props.src,
       (val, old) => {
         if (isCustomPlaceholder && val != old) status.value = 'loading';
+
+        return () => setPreviewUrls(previewUrls.filter(url => url !== props.src));
+      },
+    );
+
+    watch(
+      () => previewUrls,
+      () => {
+        if (isPreviewGroup && previewUrls.indexOf(props.src) < 0) {
+          groupIndexRef.value = previewUrls.length;
+          previewUrls.push(props.src);
+          setPreviewUrls(previewUrls);
+        }
       },
     );
     const wrappperClass = cn(prefixCls, props.wrapperClassName, {
@@ -181,7 +222,7 @@ const Image = defineComponent({
           </div>
         )}
 
-        {props.preview && !isError.value && (
+        {!isPreviewGroup && props.preview && !isError.value && (
           <Preview
             aria-hidden={!isShowPreview.value}
             visible={isShowPreview.value}
@@ -197,5 +238,8 @@ const Image = defineComponent({
     );
   },
 });
+ImageInternal.PreviewGroup = PreviewGroup;
 
-export default Image;
+export default ImageInternal as typeof ImageInternal & {
+  readonly PreviewGroup: typeof PreviewGroup;
+};

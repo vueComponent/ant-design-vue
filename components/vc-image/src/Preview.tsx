@@ -1,10 +1,12 @@
-import { computed, defineComponent, reactive, ref, watchEffect } from 'vue';
+import { computed, defineComponent, reactive, ref, watch, watchEffect } from 'vue';
 import {
   RotateLeftOutlined,
   RotateRightOutlined,
   ZoomInOutlined,
   ZoomOutOutlined,
   CloseOutlined,
+  LeftOutlined,
+  RightOutlined,
 } from '@ant-design/icons-vue';
 
 import classnames from '../../_util/classNames';
@@ -17,6 +19,8 @@ import addEventListener from '../../vc-util/Dom/addEventListener';
 import { warning } from '../../vc-util/warning';
 
 import getFixScaleEleTransPosition from './getFixScaleEleTransPosition';
+
+import { context } from './PreviewGroup';
 
 const IDialogPropTypes = getIDialogPropTypes();
 export type MouseEventHandler = (payload: MouseEvent) => void;
@@ -62,7 +66,19 @@ const Preview = defineComponent<PreviewProps>({
       deltaY: 0,
     });
     const isMoving = ref(false);
+    const groupContext = context.inject();
+    const previewUrls = groupContext.previewUrls;
 
+    const urls = previewUrls && previewUrls.length ? previewUrls : [props.src];
+    const index = ref<number>(urls.indexOf(props.src));
+    watch(
+      () => props.src,
+      () => {
+        if (index.value !== urls.indexOf(props.src)) {
+          index.value = urls.indexOf(props.src);
+        }
+      },
+    );
     const onAfterClose = () => {
       scale.value = 1;
       rotate.value = 0;
@@ -88,6 +104,25 @@ const Preview = defineComponent<PreviewProps>({
 
     const onRotateLeft = () => {
       rotate.value -= 90;
+    };
+    const onSwitchLeft: MouseEventHandler = event => {
+      event.preventDefault();
+      // Without this mask close will abnormal
+      event.stopPropagation();
+      if (index.value > 0) {
+        onAfterClose();
+        index.value = index.value - 1;
+      }
+    };
+
+    const onSwitchRight: MouseEventHandler = event => {
+      event.preventDefault();
+      // Without this mask close will abnormal
+      event.stopPropagation();
+      if (index.value < urls.length - 1) {
+        onAfterClose();
+        index.value = index.value + 1;
+      }
     };
 
     const wrapClassName = classnames({
@@ -193,6 +228,9 @@ const Preview = defineComponent<PreviewProps>({
         if (onTopMouseUpListener) onTopMouseUpListener.remove();
         /* istanbul ignore next */
         if (onTopMouseMoveListener) onTopMouseMoveListener.remove();
+        if (!props.visible) {
+          index.value = urls.indexOf(props.src);
+        }
       };
     });
 
@@ -231,13 +269,33 @@ const Preview = defineComponent<PreviewProps>({
             onMousedown={onMouseDown}
             ref={imgRef}
             class={`${props.prefixCls}-img`}
-            src={props.src}
+            src={urls[index.value]}
             alt={props.alt}
             style={{
               transform: `scale3d(${scale.value}, ${scale.value}, 1) rotate(${rotate.value}deg)`,
             }}
           />
         </div>
+        {urls.length > 1 && (
+          <div
+            class={classnames(`${props.prefixCls}-switch-left`, {
+              [`${props.prefixCls}-switch-left-disabled`]: index.value <= 0,
+            })}
+            onClick={onSwitchLeft}
+          >
+            <LeftOutlined />
+          </div>
+        )}
+        {urls.length > 1 && (
+          <div
+            class={classnames(`${props.prefixCls}-switch-right`, {
+              [`${props.prefixCls}-switch-right-disabled`]: index.value >= urls.length - 1,
+            })}
+            onClick={onSwitchRight}
+          >
+            <RightOutlined />
+          </div>
+        )}
       </Dialog>
     );
   },

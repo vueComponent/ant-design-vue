@@ -1,10 +1,10 @@
-import { withInstall } from '../_util/type';
+import { App, defineComponent, Plugin } from 'vue';
 import ImageInternal from '../vc-image';
 import { ImageProps, ImagePropsType } from '../vc-image/src/Image';
 
 import { initDefaultProps } from '../_util/props-util';
-import { defineComponent } from 'vue';
 
+import PreviewGroup from './PreviewGroup';
 const Image = defineComponent({
   name: 'AImage',
   props: initDefaultProps(ImageProps, {}),
@@ -20,4 +20,16 @@ const Image = defineComponent({
 });
 
 export { ImageProps, ImagePropsType };
-export default withInstall(Image);
+
+Image.PreviewGroup = PreviewGroup;
+
+Image.install = function(app: App) {
+  app.component(Image.name, Image);
+  app.component(Image.PreviewGroup.name, Image.PreviewGroup);
+  return app;
+};
+
+export default Image as typeof Image &
+  Plugin & {
+    readonly PreviewGroup: typeof PreviewGroup;
+  };

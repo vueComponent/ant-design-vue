@@ -148,7 +148,7 @@ export default defineComponent({
 
       // Trigger onChange when max or min change
       // https://github.com/ant-design/ant-design/issues/11574
-      const nextValue = 'value' in props ? value : this.sValue;
+      const nextValue = 'value' in props ? value : this.$data.sValue;
       // ref: null < 20 === true
       // https://github.com/ant-design/ant-design/issues/14277
       if (
@@ -187,14 +187,14 @@ export default defineComponent({
         // This caused that if an input didn't init with the selection,
         // set will cause cursor not correct when first focus.
         // Safari will focus input if set selection. We need skip this.
-        if (this.cursorStart !== undefined && this.focused) {
+        if (this.cursorStart !== undefined && this.$data.focused) {
           // In most cases, the string after cursor is stable.
           // We can move the cursor before it
 
           if (
             // If not match full str, try to match part of str
             !this.partRestoreByAfter(this.cursorAfter) &&
-            this.sValue !== this.value
+            this.$data.sValue !== this.value
           ) {
             // If not match any of then, let's just keep the position
             // TODO: Logic should not reach here, need check if happens
@@ -233,7 +233,7 @@ export default defineComponent({
       if (!this.pressingUpOrDown) {
         return;
       }
-      if (this.focusOnUpDown && this.focused) {
+      if (this.focusOnUpDown && this.$data.focused) {
         if (document.activeElement !== inputElem) {
           this.focus();
         }
@@ -266,7 +266,7 @@ export default defineComponent({
       this.__emit('keyup', e, ...args);
     },
     onChange(e) {
-      if (this.focused) {
+      if (this.$data.focused) {
         this.inputting = true;
       }
       this.rawInput = this.parser(this.getValueFromEvent(e));
@@ -286,7 +286,7 @@ export default defineComponent({
       this.setState({
         focused: false,
       });
-      const value = this.getCurrentValidValue(this.inputValue);
+      const value = this.getCurrentValidValue(this.$data.inputValue);
       const newValue = this.setValue(value);
       if (this.$attrs.onBlur) {
         const originValue = this.inputRef.value;
@@ -303,7 +303,7 @@ export default defineComponent({
       } else if (!this.isNotCompleteNumber(parseFloat(val, 10))) {
         val = this.getValidValue(val);
       } else {
-        val = this.sValue;
+        val = this.$data.sValue;
       }
       return this.toNumber(val);
     },
@@ -363,7 +363,7 @@ export default defineComponent({
         // always set input value same as value
         this.setState(
           {
-            inputValue: this.toPrecisionAsStep(this.sValue),
+            inputValue: this.toPrecisionAsStep(this.$data.sValue),
           },
           callback,
         );
@@ -538,7 +538,7 @@ export default defineComponent({
     },
     toNumber(num) {
       const { precision, autofocus } = this.$props;
-      const { focused = autofocus } = this;
+      const { focused = autofocus } = this.$data;
       // num.length > 16 => This is to prevent input of large numbers
       const numberIsTooLarge = num && num.length > 16 && focused;
       if (this.isNotCompleteNumber(num) || numberIsTooLarge) {
@@ -579,7 +579,7 @@ export default defineComponent({
         return;
       }
       const { max, min } = this;
-      const value = this.getCurrentValidValue(this.inputValue) || 0;
+      const value = this.getCurrentValidValue(this.$data.inputValue) || 0;
       if (this.isNotCompleteNumber(value)) {
         return;
       }
@@ -648,11 +648,11 @@ export default defineComponent({
       [className]: className,
       [prefixCls]: true,
       [`${prefixCls}-disabled`]: disabled,
-      [`${prefixCls}-focused`]: this.focused,
+      [`${prefixCls}-focused`]: this.$data.focused,
     });
     let upDisabledClass = '';
     let downDisabledClass = '';
-    const { sValue } = this;
+    const { sValue } = this.$data;
     if (sValue || sValue === 0) {
       if (!isNaN(sValue)) {
         const val = Number(sValue);

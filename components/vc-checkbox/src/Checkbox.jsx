@@ -94,7 +94,7 @@ export default {
       this.eventShiftKey = false;
       // fix https://github.com/vueComponent/ant-design-vue/issues/3047
       if ('checked' in props) {
-        this.$refs.input.checked = !e.target.checked;
+        this.$refs.input.checked = props.checked;
       }
     },
     onClick(e) {

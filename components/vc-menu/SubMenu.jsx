@@ -432,6 +432,13 @@ const SubMenu = defineComponent({
     const isOpen = this.isOpen;
     const prefixCls = this.getPrefixCls();
     const isInlineMode = props.mode === 'inline';
+    if (!this.internalMenuId) {
+      if (props.eventKey) {
+        this.internalMenuId = `${props.eventKey}$Menu`;
+      } else {
+        this.internalMenuId = `$__$${++guid}$Menu`;
+      }
+    }
     const children = this.renderChildren();
     const className = {
       [prefixCls]: true,
@@ -442,14 +449,6 @@ const SubMenu = defineComponent({
       [this.getDisabledClassName()]: props.disabled,
       [this.getSelectedClassName()]: this.isChildrenSelected || this.isChildrenSelected2(),
     };
-    if (!this.internalMenuId) {
-      if (props.eventKey) {
-        this.internalMenuId = `${props.eventKey}$Menu`;
-      } else {
-        this.internalMenuId = `$__$${++guid}$Menu`;
-      }
-    }
-
     let mouseEvents = {};
     let titleClickEvents = {};
     let titleMouseEvents = {};

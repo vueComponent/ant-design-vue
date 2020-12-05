@@ -108,6 +108,8 @@ const SubPopupMenu = {
       expandIcon: PropTypes.any,
       overflowedIndicator: PropTypes.any,
       children: PropTypes.any.def([]),
+      subMenuOpenDelay: PropTypes.number.def(0.1),
+      subMenuCloseDelay: PropTypes.number.def(0.1),
       forceSubMenuRender: PropTypes.looseBool.def(false),
       parentUniKeys: PropTypes.array.def(() => []),
       parentUniKey: PropTypes.string,

@@ -10,6 +10,16 @@
 
 ---
 
+## 2.0.0-rc.3
+
+`2020-12-05`
+
+- 🐞 修复函数式组件在 Vue 3.0.3 下报类型错误问题 [#f5cf7e](https://github.com/vueComponent/ant-design-vue/commit/f5cf7e0920a51f0ac024046996c99260aa41becf)
+- 🐞 修复 Menu 查出宽度后显示错误问题 [#3262](https://github.com/vueComponent/ant-design-vue/issues/3262)
+- 🐞 修复 Menu subMenuOpenDelay subMenuCloseDelay 不生效问题 [#3291](https://github.com/vueComponent/ant-design-vue/pull/3291)
+- 🐞 修复 TreeSelect 堆栈溢出问题 [#28aeea](https://github.com/vueComponent/ant-design-vue/commit/28aeea6f0b142ed68950a3738f7cf2c1581a7a5b)
+- 🐞 修复 Input 自定义 style class 被覆盖问题 [#3273](https://github.com/vueComponent/ant-design-vue/issues/3273)
+- 🐞 修复 InputNumber 在生产环境下 parse 错误 [#3249](https://github.com/vueComponent/ant-design-vue/issues/3249)
 
 ## 2.0.0-rc.2
 

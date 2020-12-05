@@ -10,6 +10,17 @@
 
 ---
 
+## 2.0.0-rc.3
+
+`2020-12-05`
+
+- 🐞 Fix the problem of functional components reporting type errors in Vue 3.0.3 [#f5cf7e](https://github.com/vueComponent/ant-design-vue/commit/f5cf7e0920a51f0ac024046996c99260aa41becf)
+- 🐞 Fix Menu display error after detecting width [#3262](https://github.com/vueComponent/ant-design-vue/issues/3262)
+- 🐞 Fix Menu subMenuOpenDelay subMenuCloseDelay not working problem [#3291](https://github.com/vueComponent/ant-design-vue/pull/3291)
+- 🐞 Fix TreeSelect stack overflow problem [#28aeea](https://github.com/vueComponent/ant-design-vue/commit/28aeea6f0b142ed68950a3738f7cf2c1581a7a5b)
+- 🐞 Fix Input custom style class being overwritten [#3273](https://github.com/vueComponent/ant-design-vue/issues/3273)
+- 🐞 Fix InputNumber parse error in production environment [#3249](https://github.com/vueComponent/ant-design-vue/issues/3249)
+
 ## 2.0.0-rc.2
 
 `2020-11-24`

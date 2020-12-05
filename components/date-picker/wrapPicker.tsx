@@ -59,6 +59,17 @@ export default function wrapPicker<P>(
       popupStyle: PropTypes.style,
       locale: PropTypes.any.def({}),
     },
+    emits: [
+      'update:value',
+      'openChange',
+      'focus',
+      'blur',
+      'mouseenter',
+      'mouseleave',
+      'change',
+      'ok',
+      'calendarChange',
+    ],
     setup() {
       return {
         configProvider: inject('configProvider', defaultConfigProvider),

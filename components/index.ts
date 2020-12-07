@@ -16,135 +16,135 @@ if (
 /* @remove-on-es-build-end */
 import { App } from 'vue';
 
-import { default as Affix } from './affix';
+import { default as Affix, default as AAffix } from './affix';
 
-import { default as Anchor } from './anchor';
+import { default as Anchor, default as AAnchor } from './anchor';
 
-import { default as AutoComplete } from './auto-complete';
+import { default as AutoComplete, default as AAutoComplete } from './auto-complete';
 
-import { default as Alert } from './alert';
+import { default as Alert, default as AAlert } from './alert';
 
-import { default as Avatar } from './avatar';
+import { default as Avatar, default as AAvatar } from './avatar';
 
-import { default as BackTop } from './back-top';
+import { default as BackTop, default as ABackTop } from './back-top';
 
-import { default as Badge } from './badge';
+import { default as Badge, default as ABadge } from './badge';
 
-import { default as Breadcrumb } from './breadcrumb';
+import { default as Breadcrumb, default as ABreadcrumb } from './breadcrumb';
 
-import { default as Button } from './button';
+import { default as Button, default as AButton } from './button';
 
-import { default as Calendar } from './calendar';
+import { default as Calendar, default as ACalendar } from './calendar';
 
-import { default as Card } from './card';
+import { default as Card, default as ACard } from './card';
 
-import { default as Collapse } from './collapse';
+import { default as Collapse, default as ACollapse } from './collapse';
 
-import { default as Carousel } from './carousel';
+import { default as Carousel, default as ACarousel } from './carousel';
 
-import { default as Cascader } from './cascader';
+import { default as Cascader, default as ACascader } from './cascader';
 
-import { default as Checkbox } from './checkbox';
+import { default as Checkbox, default as ACheckbox } from './checkbox';
 
-import { default as Col } from './col';
+import { default as Col, default as ACol } from './col';
 
-import { default as DatePicker } from './date-picker';
+import { default as DatePicker, default as ADatePicker } from './date-picker';
 
-import { default as Divider } from './divider';
+import { default as Divider, default as ADivider } from './divider';
 
-import { default as Dropdown } from './dropdown';
+import { default as Dropdown, default as ADropdown } from './dropdown';
 
-import { default as Form } from './form';
+import { default as Form, default as AForm } from './form';
 
-import { default as Icon } from './icon';
+import { default as Icon, default as AIcon } from './icon';
 
-import { default as Input } from './input';
+import { default as Input, default as AInput } from './input';
 
-import { default as InputNumber } from './input-number';
+import { default as InputNumber, default as AInputNumber } from './input-number';
 
-import { default as Layout } from './layout';
+import { default as Layout, default as ALayout } from './layout';
 
-import { default as List } from './list';
+import { default as List, default as AList } from './list';
 
-import { default as LocaleProvider } from './locale-provider';
+import { default as LocaleProvider, default as ALocaleProvider } from './locale-provider';
 
 import { default as message } from './message';
 
-import { default as Menu } from './menu';
+import { default as Menu, default as AMenu } from './menu';
 
-import { default as Mentions } from './mentions';
+import { default as Mentions, default as AMentions } from './mentions';
 
-import { default as Modal } from './modal';
+import { default as Modal, default as AModal } from './modal';
 
 import { default as notification } from './notification';
 
-import { default as Pagination } from './pagination';
+import { default as Pagination, default as APagination } from './pagination';
 
-import { default as Popconfirm } from './popconfirm';
+import { default as Popconfirm, default as APopconfirm } from './popconfirm';
 
-import { default as Popover } from './popover';
+import { default as Popover, default as APopover } from './popover';
 
-import { default as Progress } from './progress';
+import { default as Progress, default as AProgress } from './progress';
 
-import { default as Radio } from './radio';
+import { default as Radio, default as ARadio } from './radio';
 
-import { default as Rate } from './rate';
+import { default as Rate, default as ARate } from './rate';
 
-import { default as Row } from './row';
+import { default as Row, default as ARow } from './row';
 
-import { default as Select } from './select';
+import { default as Select, default as ASelect } from './select';
 
-import { default as Slider } from './slider';
+import { default as Slider, default as ASlider } from './slider';
 
-import { default as Spin } from './spin';
+import { default as Spin, default as ASpin } from './spin';
 
-import { default as Statistic } from './statistic';
+import { default as Statistic, default as AStatistic } from './statistic';
 
-import { default as Steps } from './steps';
+import { default as Steps, default as ASteps } from './steps';
 
-import { default as Switch } from './switch';
+import { default as Switch, default as ASwitch } from './switch';
 
-import { default as Table } from './table';
+import { default as Table, default as ATable } from './table';
 
-import { default as Transfer } from './transfer';
+import { default as Transfer, default as ATransfer } from './transfer';
 
-import { default as Tree } from './tree';
+import { default as Tree, default as ATree } from './tree';
 
-import { default as TreeSelect } from './tree-select';
+import { default as TreeSelect, default as ATreeSelect } from './tree-select';
 
-import { default as Tabs } from './tabs';
+import { default as Tabs, default as ATabs } from './tabs';
 
-import { default as Tag } from './tag';
+import { default as Tag, default as ATag } from './tag';
 
-import { default as TimePicker } from './time-picker';
+import { default as TimePicker, default as ATimePicker } from './time-picker';
 
-import { default as Timeline } from './timeline';
+import { default as Timeline, default as ATimeline } from './timeline';
 
-import { default as Tooltip } from './tooltip';
+import { default as Tooltip, default as ATooltip } from './tooltip';
 
-// import { default as Mention } from './mention'
+// import { default as Mention, default as AMention } from './mention'
 
-import { default as Upload } from './upload';
+import { default as Upload, default as AUpload } from './upload';
 
 import { default as version } from './version';
 
-import { default as Drawer } from './drawer';
+import { default as Drawer, default as ADrawer } from './drawer';
 
-import { default as Skeleton } from './skeleton';
+import { default as Skeleton, default as ASkeleton } from './skeleton';
 
-import { default as Comment } from './comment';
+import { default as Comment, default as AComment } from './comment';
 
-// import { default as ColorPicker } from './color-picker';
+// import { default as ColorPicker, default as AColorPicker } from './color-picker';
 
-import { default as ConfigProvider } from './config-provider';
+import { default as ConfigProvider, default as AConfigProvider } from './config-provider';
 
-import { default as Empty } from './empty';
+import { default as Empty, default as AEmpty } from './empty';
 
-import { default as Result } from './result';
+import { default as Result, default as AResult } from './result';
 
-import { default as Descriptions } from './descriptions';
-import { default as PageHeader } from './page-header';
-import { default as Space } from './space';
+import { default as Descriptions, default as ADescriptions } from './descriptions';
+import { default as PageHeader, default as APageHeader } from './page-header';
+import { default as Space, default as ASpace } from './space';
 
 const components = [
   Affix,
@@ -296,6 +296,68 @@ export {
   Descriptions,
   PageHeader,
   Space,
+  AAffix,
+  AAnchor,
+  AAutoComplete,
+  AAlert,
+  AAvatar,
+  ABackTop,
+  ABadge,
+  ABreadcrumb,
+  AButton,
+  ACalendar,
+  ACard,
+  ACollapse,
+  ACarousel,
+  ACascader,
+  ACheckbox,
+  ACol,
+  ADatePicker,
+  ADivider,
+  ADropdown,
+  AForm,
+  AIcon,
+  AInput,
+  AInputNumber,
+  ALayout,
+  AList,
+  ALocaleProvider,
+  AMenu,
+  AMentions,
+  AModal,
+  APagination,
+  APopconfirm,
+  APopover,
+  AProgress,
+  ARadio,
+  ARate,
+  ARow,
+  ASelect,
+  ASlider,
+  ASpin,
+  AStatistic,
+  ASteps,
+  ASwitch,
+  ATable,
+  ATransfer,
+  ATree,
+  ATreeSelect,
+  ATabs,
+  ATag,
+  ATimePicker,
+  ATimeline,
+  ATooltip,
+  AUpload,
+  ADrawer,
+  ASkeleton,
+  AComment,
+  // AColorPicker,
+  AConfigProvider,
+  AEmpty,
+  AResult,
+  ADescriptions,
+  APageHeader,
+  ASpace,
 };
 
 export default {

@@ -4,7 +4,7 @@ import BaseMixin from '../_util/BaseMixin';
 import scrollIntoView from 'dom-scroll-into-view';
 import { noop, menuAllProps } from './util';
 import { getComponent, getSlot, findDOMNode } from '../_util/props-util';
-import { computed, defineComponent, inject, onBeforeUnmount, onMounted } from 'vue';
+import { computed, defineComponent, inject, onBeforeUnmount, onMounted, toRaw } from 'vue';
 import InjectExtraProps from './InjectExtraProps';
 const props = {
   attribute: PropTypes.object,
@@ -119,7 +119,7 @@ const MenuItem = defineComponent({
       const info = {
         key: eventKey,
         keyPath: [eventKey],
-        item: this,
+        item: { ...toRaw(this.$props), isSelected },
         domEvent: e,
       };
 

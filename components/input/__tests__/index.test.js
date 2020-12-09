@@ -3,6 +3,7 @@ import { asyncExpect } from '@/tests/utils';
 import Input from '..';
 // import Form from '../../form';
 import focusTest from '../../../tests/shared/focusTest';
+import { WifiOutlined, SyncOutlined } from '@ant-design/icons-vue';
 
 const { TextArea, Password } = Input;
 
@@ -128,6 +129,38 @@ describe('Input.Search', () => {
     const wrapper = mount(Input.Search, { props: { suffix: 'suffix' }, sync: false });
     await asyncExpect(() => {
       expect(wrapper.html()).toMatchSnapshot();
+    }, 100);
+  });
+});
+
+describe('Input.Password', () => {
+  it('should support iconRender', async () => {
+    const wrapper = mount(Input.Password, {
+      props: { iconRender: visible => (visible ? <SyncOutlined /> : <WifiOutlined />) },
+      sync: false,
+    });
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.anticon-wifi').length).toBe(1);
+      wrapper.find('.anticon-wifi').trigger('click');
+    }, 100);
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.anticon-sync').length).toBe(1);
+    }, 100);
+  });
+
+  it('should support slot iconRender', async () => {
+    const wrapper = mount(Input.Password, {
+      slots: {
+        iconRender: visible => (visible ? <SyncOutlined /> : <WifiOutlined />),
+      },
+      sync: false,
+    });
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.anticon-wifi').length).toBe(1);
+      wrapper.find('.anticon-wifi').trigger('click');
+    }, 100);
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.anticon-sync').length).toBe(1);
     }, 100);
   });
 });

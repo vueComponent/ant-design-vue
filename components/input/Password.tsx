@@ -1,5 +1,6 @@
 import classNames from '../_util/classNames';
 import { getComponent, getOptionProps } from '../_util/props-util';
+import { cloneElement } from '../_util/vnode';
 import Input from './Input';
 import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import EyeInvisibleOutlined from '@ant-design/icons-vue/EyeInvisibleOutlined';
@@ -23,6 +24,9 @@ export default defineComponent({
     inputPrefixCls: PropTypes.string.def('ant-input'),
     action: PropTypes.string.def('click'),
     visibilityToggle: PropTypes.looseBool.def(true),
+    iconRender: PropTypes.func.def((visible: boolean) =>
+      visible ? <EyeOutlined /> : <EyeInvisibleOutlined />,
+    ),
   },
   setup() {
     return {
@@ -55,6 +59,8 @@ export default defineComponent({
     getIcon() {
       const { prefixCls, action } = this.$props;
       const iconTrigger = ActionMap[action] || '';
+      const iconRender = this.$slots.iconRender || this.$props.iconRender;
+      const icon = iconRender(this.visible);
       const iconProps = {
         [iconTrigger]: this.onVisibleChange,
         onMousedown: (e: Event) => {
@@ -70,11 +76,7 @@ export default defineComponent({
         class: `${prefixCls}-icon`,
         key: 'passwordIcon',
       };
-      return this.visible ? (
-        <EyeOutlined {...iconProps} />
-      ) : (
-        <EyeInvisibleOutlined {...iconProps} />
-      );
+      return cloneElement(icon, iconProps);
     },
   },
   render() {

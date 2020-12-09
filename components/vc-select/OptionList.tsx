@@ -356,15 +356,21 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
                 aria-selected={selected}
                 class={optionClassName}
                 title={optionTitle}
-                onMousemove={() => {
+                onMousemove={e => {
+                  if (otherProps.onMousemove) {
+                    otherProps.onMousemove(e);
+                  }
                   if (activeIndex === itemIndex || disabled) {
                     return;
                   }
                   setActive(itemIndex);
                 }}
-                onClick={() => {
+                onClick={e => {
                   if (!disabled) {
                     onSelectValue(value);
+                  }
+                  if (otherProps.onClick) {
+                    otherProps.onClick(e);
                   }
                 }}
                 style={style}

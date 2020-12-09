@@ -10,7 +10,7 @@ function convertNodeToOption(node: VNode): OptionData {
   } = node as VNode & {
     children: { default?: () => any };
   };
-  const child = children.default ? children.default() : undefined;
+  const child = children && children.default ? children.default() : undefined;
   return {
     key,
     value: value !== undefined ? value : key,
@@ -43,7 +43,7 @@ export function convertChildrenToData(
       if (optionOnly || !isSelectOptGroup) {
         return convertNodeToOption(node);
       }
-      const child = children.default ? children.default() : undefined;
+      const child = children && children.default ? children.default() : undefined;
       return {
         key: `__RC_SELECT_GRP__${key === null ? index : key}__`,
         label: key,

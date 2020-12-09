@@ -113,6 +113,7 @@ const SubPopupMenu = {
       forceSubMenuRender: PropTypes.looseBool.def(false),
       parentUniKeys: PropTypes.array.def(() => []),
       parentUniKey: PropTypes.string,
+      theme: PropTypes.string,
     },
     {
       prefixCls: 'rc-menu',

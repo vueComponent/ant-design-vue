@@ -214,6 +214,7 @@ export default {
           this.setState({ sFilters: newFilters });
         }
       }
+      this.$forceUpdate();
     },
     components: {
       handler(val, oldVal) {

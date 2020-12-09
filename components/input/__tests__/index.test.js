@@ -147,4 +147,20 @@ describe('Input.Password', () => {
       expect(wrapper.findAll('.anticon-sync').length).toBe(1);
     }, 100);
   });
+
+  it('should support slot iconRender', async () => {
+    const wrapper = mount(Input.Password, {
+      slots: {
+        iconRender: visible => (visible ? <SyncOutlined /> : <WifiOutlined />),
+      },
+      sync: false,
+    });
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.anticon-wifi').length).toBe(1);
+      wrapper.find('.anticon-wifi').trigger('click');
+    }, 100);
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.anticon-sync').length).toBe(1);
+    }, 100);
+  });
 });

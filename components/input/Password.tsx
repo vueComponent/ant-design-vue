@@ -57,8 +57,9 @@ export default defineComponent({
       });
     },
     getIcon() {
-      const { prefixCls, action, iconRender = () => null } = this.$props;
+      const { prefixCls, action } = this.$props;
       const iconTrigger = ActionMap[action] || '';
+      const iconRender = this.$slots.iconRender || this.$props.iconRender;
       const icon = iconRender(this.visible);
       const iconProps = {
         [iconTrigger]: this.onVisibleChange,

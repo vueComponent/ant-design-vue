@@ -40,7 +40,7 @@ const Menu = {
     watch(
       () => props.openKeys,
       () => {
-        openKeys.value = props.openKeys;
+        openKeys.value = props.openKeys || [];
       },
     );
     const activeKey = reactive({

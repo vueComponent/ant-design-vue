@@ -10,12 +10,22 @@
 
 ---
 
+## 2.0.0-rc.4
+
+`2020-12-10`
+
+- 🌟 Input.Password 支持自定义图标 [#3320](https://github.com/vueComponent/ant-design-vue/issues/3320)
+- 🐞 修复 Select Option click 事件不触发问题 [#4ea00d](https://github.com/vueComponent/ant-design-vue/commit/4ea00d3a70d0afd7bea07f814df03ab7d0b25ebd)
+- 🐞 修复 Menu 超出宽度后 dark 主题不生效问题 [#10f35a](https://github.com/vueComponent/ant-design-vue/commit/10f35a1fa510de91e9484b07fcfff253920cee29)
+- 🐞 修复 Menu 控制台 vue key some waring [#520d6a](https://github.com/vueComponent/ant-design-vue/commit/520d6a5e85eb391e5294211c9d7b2ea598c59119)
+- 🐞 移除控制台 passive 提示日志 [#8d1669](https://github.com/vueComponent/ant-design-vue/commit/8d1669b8896d84a67c61d3a00d0b13c42d70f30f)
+
 ## 2.0.0-rc.3
 
 `2020-12-05`
 
 - 🐞 修复函数式组件在 Vue 3.0.3 下报类型错误问题 [#f5cf7e](https://github.com/vueComponent/ant-design-vue/commit/f5cf7e0920a51f0ac024046996c99260aa41becf)
-- 🐞 修复 Menu 查出宽度后显示错误问题 [#3262](https://github.com/vueComponent/ant-design-vue/issues/3262)
+- 🐞 修复 Menu 超出宽度后显示错误问题 [#3262](https://github.com/vueComponent/ant-design-vue/issues/3262)
 - 🐞 修复 Menu subMenuOpenDelay subMenuCloseDelay 不生效问题 [#3291](https://github.com/vueComponent/ant-design-vue/pull/3291)
 - 🐞 修复 TreeSelect 堆栈溢出问题 [#28aeea](https://github.com/vueComponent/ant-design-vue/commit/28aeea6f0b142ed68950a3738f7cf2c1581a7a5b)
 - 🐞 修复 Input 自定义 style class 被覆盖问题 [#3273](https://github.com/vueComponent/ant-design-vue/issues/3273)

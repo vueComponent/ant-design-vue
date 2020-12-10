@@ -10,6 +10,16 @@
 
 ---
 
+## 2.0.0-rc.4
+
+`2020-12-10`
+
+- 🌟 Input.Password supports custom icons [#3320](https://github.com/vueComponent/ant-design-vue/issues/3320)
+- 🐞 Fix the issue that the Select Option click event does not trigger [#4ea00d](https://github.com/vueComponent/ant-design-vue/commit/4ea00d3a70d0afd7bea07f814df03ab7d0b25ebd)
+- 🐞 Fix the problem that the dark theme does not work after the Menu exceeds the width [#10f35a](https://github.com/vueComponent/ant-design-vue/commit/10f35a1fa510de91e9484b07fcfff253920cee29)
+- 🐞 Fix Menu console vue key some waring [#520d6a](https://github.com/vueComponent/ant-design-vue/commit/520d6a5e85eb391e5294211c9d7b2ea598c59119)
+- 🐞 Remove console passive prompt log [#8d1669](https://github.com/vueComponent/ant-design-vue/commit/8d1669b8896d84a67c61d3a00d0b13c42d70f30f)
+
 ## 2.0.0-rc.3
 
 `2020-12-05`

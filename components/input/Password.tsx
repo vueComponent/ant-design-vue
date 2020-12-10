@@ -87,6 +87,7 @@ export default defineComponent({
       suffix,
       action,
       visibilityToggle,
+      iconRender,
       ...restProps
     } = getOptionProps(this);
     const { class: className } = this.$attrs;

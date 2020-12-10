@@ -1,6 +1,6 @@
 {
   "name": "ant-design-vue",
-  "version": "2.0.0-rc.3",
+  "version": "2.0.0-rc.4",
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation",
   "keywords": [
@@ -202,7 +202,7 @@
   },
   "dependencies": {
     "@ant-design-vue/use": "^0.0.1-0",
-    "@ant-design/icons-vue": "^5.1.6",
+    "@ant-design/icons-vue": "^5.1.7",
     "@babel/runtime": "^7.10.5",
     "@simonwep/pickr": "~1.7.0",
     "add-dom-event-listener": "^1.0.2",

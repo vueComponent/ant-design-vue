@@ -18,6 +18,7 @@ import BaseMixin from '../_util/BaseMixin';
 import Portal from '../_util/Portal';
 import classNames from '../_util/classNames';
 import { cloneElement } from '../_util/vnode';
+import supportsPassive from '../_util/supportsPassive';
 
 function returnEmptyString() {
   return '';
@@ -165,6 +166,7 @@ export default defineComponent({
             currentDocument,
             'touchstart',
             this.onDocumentClick,
+            supportsPassive ? { passive: true } : false,
           );
         }
         // close popup when trigger type contains 'onContextmenu' and document is scrolling.
@@ -378,7 +380,7 @@ export default defineComponent({
         mouseProps.onMouseleave = self.onPopupMouseleave;
       }
       mouseProps.onMousedown = this.onPopupMouseDown;
-      mouseProps.onTouchstart = this.onPopupMouseDown;
+      mouseProps[supportsPassive ? 'onTouchstartPassive' : 'onTouchstart'] = this.onPopupMouseDown;
       const { handleGetPopupClassFromAlign, getRootDomNode, getContainer, $attrs } = self;
       const {
         prefixCls,
@@ -603,11 +605,13 @@ export default defineComponent({
     if (this.isClickToHide() || this.isClickToShow()) {
       newChildProps.onClick = this.onClick;
       newChildProps.onMousedown = this.onMousedown;
-      newChildProps.onTouchstart = this.onTouchstart;
+      newChildProps[supportsPassive ? 'onTouchstartPassive' : 'onTouchstart'] = this.onTouchstart;
     } else {
       newChildProps.onClick = this.createTwoChains('onClick');
       newChildProps.onMousedown = this.createTwoChains('onMousedown');
-      newChildProps.onTouchstart = this.createTwoChains('onTouchstart');
+      newChildProps[
+        supportsPassive ? 'onTouchstartPassive' : 'onTouchstart'
+      ] = this.createTwoChains('onTouchstart');
     }
     if (this.isMouseEnterToShow()) {
       newChildProps.onMouseenter = this.onMouseenter;

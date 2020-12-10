@@ -22,6 +22,7 @@ import useOriginScroll from './hooks/useOriginScroll';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import { RenderFunc, SharedConfig } from './interface';
+import supportsPassive from '../_util/supportsPassive';
 
 const EMPTY_DATA = [];
 
@@ -264,7 +265,11 @@ const List = defineComponent({
     }
     const removeEventListener = () => {
       if (componentRef.value) {
-        componentRef.value.removeEventListener('wheel', onRawWheel);
+        componentRef.value.removeEventListener(
+          'wheel',
+          onRawWheel,
+          supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+        );
         componentRef.value.removeEventListener('DOMMouseScroll', onFireFoxScroll as any);
         componentRef.value.removeEventListener('MozMousePixelScroll', onMozMousePixelScroll as any);
       }
@@ -273,7 +278,11 @@ const List = defineComponent({
       nextTick(() => {
         if (componentRef.value) {
           removeEventListener();
-          componentRef.value.addEventListener('wheel', onRawWheel);
+          componentRef.value.addEventListener(
+            'wheel',
+            onRawWheel,
+            supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+          );
           componentRef.value.addEventListener('DOMMouseScroll', onFireFoxScroll as any);
           componentRef.value.addEventListener('MozMousePixelScroll', onMozMousePixelScroll as any);
         }

@@ -2,6 +2,7 @@ import { defineComponent, PropType, reactive } from 'vue';
 import classNames from '../_util/classNames';
 import createRef from '../_util/createRef';
 import raf from '../_util/raf';
+import supportsPassive from '../_util/supportsPassive';
 import PropTypes from '../_util/vue-types';
 
 const MIN_SIZE = 20;
@@ -60,8 +61,16 @@ export default defineComponent({
   },
 
   mounted() {
-    this.scrollbarRef.current.addEventListener('touchstart', this.onScrollbarTouchStart);
-    this.thumbRef.current.addEventListener('touchstart', this.onMouseDown);
+    this.scrollbarRef.current.addEventListener(
+      'touchstart',
+      this.onScrollbarTouchStart,
+      supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+    );
+    this.thumbRef.current.addEventListener(
+      'touchstart',
+      this.onMouseDown,
+      supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+    );
   },
 
   beforeUnmount() {
@@ -92,7 +101,11 @@ export default defineComponent({
       window.addEventListener('mousemove', this.onMouseMove);
       window.addEventListener('mouseup', this.onMouseUp);
 
-      this.thumbRef.current.addEventListener('touchmove', this.onMouseMove);
+      this.thumbRef.current.addEventListener(
+        'touchmove',
+        this.onMouseMove,
+        supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+      );
       this.thumbRef.current.addEventListener('touchend', this.onMouseUp);
     },
 
@@ -100,9 +113,21 @@ export default defineComponent({
       window.removeEventListener('mousemove', this.onMouseMove);
       window.removeEventListener('mouseup', this.onMouseUp);
 
-      this.scrollbarRef.current.removeEventListener('touchstart', this.onScrollbarTouchStart);
-      this.thumbRef.current.removeEventListener('touchstart', this.onMouseDown);
-      this.thumbRef.current.removeEventListener('touchmove', this.onMouseMove);
+      this.scrollbarRef.current.removeEventListener(
+        'touchstart',
+        this.onScrollbarTouchStart,
+        supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+      );
+      this.thumbRef.current.removeEventListener(
+        'touchstart',
+        this.onMouseDown,
+        supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+      );
+      this.thumbRef.current.removeEventListener(
+        'touchmove',
+        this.onMouseMove,
+        supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+      );
       this.thumbRef.current.removeEventListener('touchend', this.onMouseUp);
 
       raf.cancel(this.moveRaf);

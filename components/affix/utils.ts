@@ -1,5 +1,6 @@
 import addEventListener from '../vc-util/Dom/addEventListener';
 import { ComponentPublicInstance } from 'vue';
+import supportsPassive from '../_util/supportsPassive';
 
 export type BindElement = HTMLElement | Window | null | undefined;
 export type Rect = ClientRect | DOMRect;
@@ -78,9 +79,14 @@ export function addObserveTarget(
     // Add listener
     TRIGGER_EVENTS.forEach(eventName => {
       entity!.eventHandlers[eventName] = addEventListener(target, eventName, () => {
-        entity!.affixList.forEach(targetAffix => {
-          (targetAffix as any).lazyUpdatePosition();
-        });
+        entity!.affixList.forEach(
+          targetAffix => {
+            (targetAffix as any).lazyUpdatePosition();
+          },
+          (eventName === 'touchstart' || eventName === 'touchmove') && supportsPassive
+            ? ({ passive: true } as EventListenerOptions)
+            : false,
+        );
       });
     });
   }

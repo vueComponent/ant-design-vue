@@ -1,3 +1,4 @@
+import supportsPassive from '../../_util/supportsPassive';
 import { watch, Ref } from 'vue';
 
 const SMOOTH_PTG = 14 / 15;
@@ -17,7 +18,15 @@ export default function useMobileTouchMove(
 
   const cleanUpEvents = () => {
     if (element) {
-      element.removeEventListener('touchmove', onTouchMove);
+      element.removeEventListener(
+        'touchmove',
+        onTouchMove,
+        supportsPassive
+          ? ({
+              passive: true,
+            } as EventListenerOptions)
+          : false,
+      );
       element.removeEventListener('touchend', onTouchEnd);
     }
   };
@@ -58,17 +67,41 @@ export default function useMobileTouchMove(
       touchY = Math.ceil(e.touches[0].pageY);
 
       element = e.target as HTMLElement;
-      element!.addEventListener('touchmove', onTouchMove);
+      element!.addEventListener(
+        'touchmove',
+        onTouchMove,
+        supportsPassive
+          ? ({
+              passive: true,
+            } as EventListenerOptions)
+          : false,
+      );
       element!.addEventListener('touchend', onTouchEnd);
     }
   };
 
   watch(inVirtual, val => {
-    listRef.value.removeEventListener('touchstart', onTouchStart);
+    listRef.value.removeEventListener(
+      'touchstart',
+      onTouchStart,
+      supportsPassive
+        ? ({
+            passive: true,
+          } as EventListenerOptions)
+        : false,
+    );
     cleanUpEvents();
     clearInterval(interval);
     if (val) {
-      listRef.value.addEventListener('touchstart', onTouchStart);
+      listRef.value.addEventListener(
+        'touchstart',
+        onTouchStart,
+        supportsPassive
+          ? ({
+              passive: true,
+            } as EventListenerOptions)
+          : false,
+      );
     }
   });
 }

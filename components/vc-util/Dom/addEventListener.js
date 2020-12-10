@@ -1,6 +1,16 @@
+import supportsPassive from '../../_util/supportsPassive';
+
 export default function addEventListenerWrap(target, eventType, cb, option) {
   if (target.addEventListener) {
-    target.addEventListener(eventType, cb, option);
+    let opt = option;
+    if (
+      opt === undefined &&
+      supportsPassive &&
+      (eventType === 'touchstart' || eventType === 'touchmove' || eventType === 'wheel')
+    ) {
+      opt = { passive: true };
+    }
+    target.addEventListener(eventType, cb, opt);
   }
   return {
     remove: () => {

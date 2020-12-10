@@ -14,6 +14,7 @@ import {
   transformArguments,
   isNumeric,
 } from './utils';
+import supportsPassive from '../../_util/supportsPassive';
 
 function noop() {}
 
@@ -100,18 +101,7 @@ const Drawer = defineComponent({
   mounted() {
     nextTick(() => {
       if (!windowIsUndefined) {
-        let passiveSupported = false;
-        window.addEventListener(
-          'test',
-          null,
-          Object.defineProperty({}, 'passive', {
-            get: () => {
-              passiveSupported = true;
-              return null;
-            },
-          }),
-        );
-        this.passive = passiveSupported ? { passive: false } : false;
+        this.passive = supportsPassive ? { passive: false } : false;
       }
       const open = this.getOpen();
       if (this.handler || open || this.sFirstEnter) {

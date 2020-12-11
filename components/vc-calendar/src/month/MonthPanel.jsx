@@ -67,7 +67,7 @@ const MonthPanel = {
       disabledDate,
       renderFooter,
     } = this;
-    const year = sValue.year();
+    const year = locale.shortYear ? sValue.format(locale.shortYear) : sValue.year();
     const prefixCls = `${rootPrefixCls}-month-panel`;
 
     const footer = renderFooter && renderFooter('month');

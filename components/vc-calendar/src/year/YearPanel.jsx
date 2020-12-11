@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
 import { getListeners } from '../../../_util/props-util';
@@ -53,7 +54,7 @@ export default {
         years[rowIndex] = [];
         for (let colIndex = 0; colIndex < COL; colIndex++) {
           const year = previousYear + index;
-          const content = String(year);
+          const content = this.shortYear(String(year));
           years[rowIndex][colIndex] = {
             content,
             year,
@@ -63,6 +64,10 @@ export default {
         }
       }
       return years;
+    },
+    shortYear(year) {
+      const { locale } = this;
+      return locale.shortYear ? moment(year).format(locale.shortYear) : year;
     },
   },
 
@@ -127,7 +132,7 @@ export default {
               title={locale.decadeSelect}
             >
               <span class={`${prefixCls}-decade-select-content`}>
-                {startYear}-{endYear}
+                {this.shortYear(String(startYear))}-{this.shortYear(String(endYear))}
               </span>
               <span class={`${prefixCls}-decade-select-arrow`}>x</span>
             </a>

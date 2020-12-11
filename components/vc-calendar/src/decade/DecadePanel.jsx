@@ -1,3 +1,4 @@
+import moment from 'moment';
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
 const ROW = 4;
@@ -40,6 +41,12 @@ export default {
       this.sValue = val;
     },
   },
+  methods: {
+    shortYear(year) {
+      const { locale } = this;
+      return locale.shortYear ? moment(year).format(locale.shortYear) : year;
+    },
+  },
   render() {
     const value = this.sValue;
     const { locale, renderFooter } = this.$props;
@@ -77,7 +84,9 @@ export default {
           [`${prefixCls}-last-century-cell`]: isLast,
           [`${prefixCls}-next-century-cell`]: isNext,
         };
-        const content = `${dStartDecade}-${dEndDecade}`;
+        const content = `${this.shortYear(String(dStartDecade))}-${this.shortYear(
+          String(dEndDecade),
+        )}`;
         let clickHandler = noop;
         if (isLast) {
           clickHandler = this.previousCentury;
@@ -110,7 +119,7 @@ export default {
           />
 
           <div class={`${prefixCls}-century`}>
-            {startYear}-{endYear}
+            {this.shortYear(String(startYear))}-{this.shortYear(String(endYear))}
           </div>
           <a
             class={`${prefixCls}-next-century-btn`}

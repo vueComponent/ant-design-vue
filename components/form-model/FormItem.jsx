@@ -163,9 +163,8 @@ export default {
         this.required !== undefined ? { required: !!this.required, trigger: 'change' } : [];
       // FIX: deep nested verification of data sources
       const propArray = !!this.prop ? this.prop.split('.') : this.prop;
-      const propArrayLength = propArray.length;
       const propTemp =
-        propArray && propArrayLength > 1 ? propArray[propArrayLength - 1] : this.prop;
+        propArray && propArray.length > 1 ? propArray[propArray.length - 1] : this.prop;
       const prop = getPropByPath(formRules, propTemp || '');
       formRules = formRules ? prop.o[propTemp || ''] || prop.v : [];
       return [].concat(selfRules || formRules || []).concat(requiredRule);

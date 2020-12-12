@@ -51,6 +51,7 @@ const Drawer = defineComponent({
     this.sFirstEnter = this.firstEnter;
     this.timeout = null;
     this.children = null;
+    this.dom = null;
     this.drawerId = Number(
       (Date.now() + Math.random()).toString().replace('.', Math.round(Math.random() * 9)),
     ).toString(16);

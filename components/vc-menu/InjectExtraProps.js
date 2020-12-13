@@ -1,4 +1,4 @@
-import { createVNode, defineComponent, inject, provide } from 'vue';
+import { createVNode, defineComponent, inject, provide, watch } from 'vue';
 import { injectExtraPropsKey } from './FunctionProvider';
 
 export default function wrapWithConnect(WrappedComponent) {
@@ -13,9 +13,13 @@ export default function wrapWithConnect(WrappedComponent) {
     props,
     setup(props) {
       provide(injectExtraPropsKey, undefined); // 断掉 injectExtraPropsKey 的依赖
+      const injectExtraProps = injectExtraPropsKey ? inject(injectExtraPropsKey, () => ({})) : {};
+      watch(injectExtraProps, ()=>{
+        // 神奇的问题，vue 3.0.3 之后，没能正确响应式，暂时加个 watch hack 一下
+      });
       return {
         props,
-        injectExtraProps: injectExtraPropsKey ? inject(injectExtraPropsKey, () => ({})) : {},
+        injectExtraProps,
       };
     },
     methods: {

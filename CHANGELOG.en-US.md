@@ -10,6 +10,13 @@
 
 ---
 
+## 2.0.0-rc.5
+
+`2020-12-13`
+
+- 🐞 Fix the undefined warning problem of this.dom output in the Drawer component console
+- 🐞 Fix Menu in Vue 3.0.3 and above versions, display confusion problem [#3354](https://github.com/vueComponent/ant-design-vue/issues/3354)
+
 ## 2.0.0-rc.4
 
 `2020-12-10`

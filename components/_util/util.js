@@ -42,10 +42,10 @@ function resolvePropValue(options, props, key, value) {
       value = opt.type !== Function && isFunction(defaultValue) ? defaultValue() : defaultValue;
     }
     // boolean casting
-    if (opt[0 /* shouldCast */]) {
+    if (opt.type === Boolean) {
       if (!hasOwn(props, key) && !hasDefault) {
         value = false;
-      } else if (opt[1 /* shouldCastTrue */] && (value === '' || value === hyphenate(key))) {
+      } else if (value === '') {
         value = true;
       }
     }

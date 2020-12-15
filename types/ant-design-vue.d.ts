@@ -67,6 +67,7 @@ import { Upload } from './upload';
 import { Result } from './result';
 import { Descriptions } from './descriptions/descriptions';
 import { PageHeader } from './page-header';
+import { Space } from './space';
 
 /**
  * Install all ant-design-vue components into Vue.
@@ -142,4 +143,5 @@ export {
   Result,
   Descriptions,
   PageHeader,
+  Space,
 };

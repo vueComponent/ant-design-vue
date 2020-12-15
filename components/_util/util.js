@@ -31,6 +31,30 @@ const capitalize = cacheStringFunction(str => {
 const hasOwnProperty = Object.prototype.hasOwnProperty;
 const hasOwn = (val, key) => hasOwnProperty.call(val, key);
 
+// use function string name to check type constructors
+// so that it works across vms / iframes.
+function getType(ctor) {
+  const match = ctor && ctor.toString().match(/^\s*function (\w+)/);
+  return match ? match[1] : '';
+}
+
+function isSameType(a, b) {
+  return getType(a) === getType(b);
+}
+
+function getTypeIndex(type, expectedTypes) {
+  if (isArray(expectedTypes)) {
+    for (let i = 0, len = expectedTypes.length; i < len; i++) {
+      if (isSameType(expectedTypes[i], type)) {
+        return i;
+      }
+    }
+  } else if (isFunction(expectedTypes)) {
+    return isSameType(expectedTypes, type) ? 0 : -1;
+  }
+  return -1;
+}
+
 // change from vue sourcecode
 function resolvePropValue(options, props, key, value) {
   const opt = options[key];
@@ -41,6 +65,14 @@ function resolvePropValue(options, props, key, value) {
       const defaultValue = opt.default;
       value = opt.type !== Function && isFunction(defaultValue) ? defaultValue() : defaultValue;
     }
+
+    if (typeof opt[0] === 'undefined') {
+      const booleanIndex = getTypeIndex(Boolean, opt.type);
+      const stringIndex = getTypeIndex(String, opt.type);
+      opt[0] = booleanIndex > -1;
+      opt[1] = stringIndex < 0 || booleanIndex < stringIndex;
+    }
+
     // boolean casting
     if (opt[0 /* shouldCast */]) {
       if (!hasOwn(props, key) && !hasDefault) {

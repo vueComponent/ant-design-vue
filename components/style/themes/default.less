@@ -41,6 +41,8 @@
 @body-background: #fff;
 // Base background color for most components
 @component-background: #fff;
+// Popover background color
+@popover-background: @component-background;
 @font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
   'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
   'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -188,6 +190,7 @@
 @checkbox-size: 16px;
 @checkbox-color: @primary-color;
 @checkbox-check-color: #fff;
+@checkbox-check-bg: @checkbox-check-color;
 @checkbox-border-width: @border-width-base;
 
 // Descriptions
@@ -204,13 +207,19 @@
 
 // Dropdown
 @dropdown-selected-color: @primary-color;
+@dropdown-menu-submenu-disabled-bg: @component-background;
 
 // Empty
 @empty-font-size: @font-size-base;
 
 // Radio
 @radio-size: 16px;
+@radio-top: 0px;
+@radio-border-width: 1px;
+@radio-dot-size: @radio-size - 8px;
 @radio-dot-color: @primary-color;
+@radio-dot-disabled-color: fade(@black, 20%);
+@radio-solid-checked-color: @component-background;
 
 // Radio buttons
 @radio-button-bg: @btn-default-bg;
@@ -218,6 +227,9 @@
 @radio-button-color: @btn-default-color;
 @radio-button-hover-color: @primary-5;
 @radio-button-active-color: @primary-7;
+@radio-disabled-button-checked-bg: tint(@black, 90%);
+@radio-disabled-button-checked-color: @disabled-color;
+@radio-wrapper-margin-right: 8px;
 
 // Media queries breakpoints
 // Extra small screen / phone
@@ -299,6 +311,7 @@
 @collapse-panel-border-radius: @border-radius-base;
 
 //Dropdown
+@dropdown-menu-bg: @component-background;
 @dropdown-vertical-padding: 5px;
 @dropdown-edge-child-vertical-padding: 4px;
 @dropdown-font-size: @font-size-base;
@@ -416,6 +429,7 @@
 @modal-body-padding: 24px;
 @modal-header-bg: @component-background;
 @modal-header-border-color-split: @border-color-split;
+@modal-content-bg: @component-background;
 @modal-heading-color: @heading-color;
 @modal-footer-bg: transparent;
 @modal-footer-border-color-split: @border-color-split;
@@ -588,6 +602,7 @@
 @switch-sm-checked-margin-left: -(@switch-sm-height - 3px);
 @switch-disabled-opacity: 0.4;
 @switch-color: @primary-color;
+@switch-bg: @component-background;
 @switch-shadow-color: fade(#00230b, 20%);
 
 // Pagination

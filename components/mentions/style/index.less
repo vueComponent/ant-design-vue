@@ -60,6 +60,9 @@
     border: none;
     outline: none;
     resize: none;
+    & when (@theme = dark) {
+      background-color: transparent;
+    }
     .placeholder();
 
     &:read-only {

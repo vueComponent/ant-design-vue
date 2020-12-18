@@ -133,7 +133,7 @@ import { default as Drawer } from './drawer';
 import { default as Skeleton } from './skeleton';
 
 import { default as Comment } from './comment';
-
+import { default as Image } from './image';
 // import { default as ColorPicker } from './color-picker';
 
 import { default as ConfigProvider } from './config-provider';
@@ -209,6 +209,7 @@ const components = [
   Descriptions,
   PageHeader,
   Space,
+  Image,
 ];
 
 const install = function(app: App) {
@@ -296,6 +297,7 @@ export {
   Descriptions,
   PageHeader,
   Space,
+  Image,
 };
 
 export default {

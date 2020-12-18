@@ -60,6 +60,7 @@ Array [
   "Drawer",
   "Skeleton",
   "Comment",
+  "Image",
   "ConfigProvider",
   "Empty",
   "Result",

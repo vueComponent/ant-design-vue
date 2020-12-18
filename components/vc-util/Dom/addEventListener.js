@@ -8,7 +8,7 @@ export default function addEventListenerWrap(target, eventType, cb, option) {
       supportsPassive &&
       (eventType === 'touchstart' || eventType === 'touchmove' || eventType === 'wheel')
     ) {
-      opt = { passive: true };
+      opt = { passive: false };
     }
     target.addEventListener(eventType, cb, opt);
   }

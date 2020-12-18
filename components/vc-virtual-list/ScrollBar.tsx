@@ -64,12 +64,12 @@ export default defineComponent({
     this.scrollbarRef.current.addEventListener(
       'touchstart',
       this.onScrollbarTouchStart,
-      supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+      supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
     );
     this.thumbRef.current.addEventListener(
       'touchstart',
       this.onMouseDown,
-      supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+      supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
     );
   },
 
@@ -104,7 +104,7 @@ export default defineComponent({
       this.thumbRef.current.addEventListener(
         'touchmove',
         this.onMouseMove,
-        supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+        supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
       );
       this.thumbRef.current.addEventListener('touchend', this.onMouseUp);
     },
@@ -116,17 +116,17 @@ export default defineComponent({
       this.scrollbarRef.current.removeEventListener(
         'touchstart',
         this.onScrollbarTouchStart,
-        supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+        supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
       );
       this.thumbRef.current.removeEventListener(
         'touchstart',
         this.onMouseDown,
-        supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+        supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
       );
       this.thumbRef.current.removeEventListener(
         'touchmove',
         this.onMouseMove,
-        supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+        supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
       );
       this.thumbRef.current.removeEventListener('touchend', this.onMouseUp);
 

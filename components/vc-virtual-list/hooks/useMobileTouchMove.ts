@@ -23,7 +23,7 @@ export default function useMobileTouchMove(
         onTouchMove,
         supportsPassive
           ? ({
-              passive: true,
+              passive: false,
             } as EventListenerOptions)
           : false,
       );
@@ -72,7 +72,7 @@ export default function useMobileTouchMove(
         onTouchMove,
         supportsPassive
           ? ({
-              passive: true,
+              passive: false,
             } as EventListenerOptions)
           : false,
       );
@@ -86,7 +86,7 @@ export default function useMobileTouchMove(
       onTouchStart,
       supportsPassive
         ? ({
-            passive: true,
+            passive: false,
           } as EventListenerOptions)
         : false,
     );
@@ -98,7 +98,7 @@ export default function useMobileTouchMove(
         onTouchStart,
         supportsPassive
           ? ({
-              passive: true,
+              passive: false,
             } as EventListenerOptions)
           : false,
       );

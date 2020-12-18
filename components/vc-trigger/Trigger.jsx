@@ -166,7 +166,7 @@ export default defineComponent({
             currentDocument,
             'touchstart',
             this.onDocumentClick,
-            supportsPassive ? { passive: true } : false,
+            supportsPassive ? { passive: false } : false,
           );
         }
         // close popup when trigger type contains 'onContextmenu' and document is scrolling.

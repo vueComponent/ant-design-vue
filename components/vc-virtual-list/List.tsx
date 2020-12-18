@@ -268,7 +268,7 @@ const List = defineComponent({
         componentRef.value.removeEventListener(
           'wheel',
           onRawWheel,
-          supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+          supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
         );
         componentRef.value.removeEventListener('DOMMouseScroll', onFireFoxScroll as any);
         componentRef.value.removeEventListener('MozMousePixelScroll', onMozMousePixelScroll as any);
@@ -281,7 +281,7 @@ const List = defineComponent({
           componentRef.value.addEventListener(
             'wheel',
             onRawWheel,
-            supportsPassive ? ({ passive: true } as EventListenerOptions) : false,
+            supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
           );
           componentRef.value.addEventListener('DOMMouseScroll', onFireFoxScroll as any);
           componentRef.value.addEventListener('MozMousePixelScroll', onMozMousePixelScroll as any);

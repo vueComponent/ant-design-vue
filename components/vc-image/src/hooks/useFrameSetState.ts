@@ -6,7 +6,7 @@ export default function useFrameSetState<T extends object>(
   initial: T,
 ): [Record<string, any>, (newState: SetActionType<T>) => void] {
   const frame = ref(null);
-  const state = reactive(initial);
+  const state = reactive({ ...initial });
   const queue = ref<SetActionType<T>[]>([]);
 
   const setFrameState = (newState: SetActionType<T>) => {

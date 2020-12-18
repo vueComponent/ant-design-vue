@@ -35,8 +35,8 @@ export const context = {
 
 const Group = defineComponent({
   name: 'PreviewGroup',
-  props: { previewPrefixCls: String },
   inheritAttrs: false,
+  props: { previewPrefixCls: String },
   setup(props, { slots }) {
     const previewUrls = reactive<Record<number, string>>({});
     const current = ref<number>();

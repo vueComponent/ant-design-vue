@@ -16,7 +16,7 @@ import getIDialogPropTypes from '../../vc-dialog/IDialogPropTypes';
 import { getOffset } from '../../vc-util/Dom/css';
 import addEventListener from '../../vc-util/Dom/addEventListener';
 import { warning } from '../../vc-util/warning';
-
+import useFrameSetState from './hooks/useFrameSetState';
 import getFixScaleEleTransPosition from './getFixScaleEleTransPosition';
 
 import { context } from './PreviewGroup';
@@ -41,13 +41,13 @@ const PreviewType = {
 };
 const Preview = defineComponent({
   name: 'Preview',
-  props: PreviewType,
   inheritAttrs: false,
+  props: PreviewType,
   emits: ['close', 'afterClose'],
   setup(props, { emit, attrs }) {
     const scale = ref(1);
     const rotate = ref(0);
-    const position = ref<{
+    const [position, setPosition] = useFrameSetState<{
       x: number;
       y: number;
     }>(initialPosition);
@@ -83,19 +83,18 @@ const Preview = defineComponent({
     const onAfterClose = () => {
       scale.value = 1;
       rotate.value = 0;
-      position.value = initialPosition;
+      setPosition(initialPosition);
     };
 
     const onZoomIn = () => {
       scale.value++;
-
-      position.value = initialPosition;
+      setPosition(initialPosition);
     };
     const onZoomOut = () => {
       if (scale.value > 1) {
         scale.value--;
       }
-      position.value = initialPosition;
+      setPosition(initialPosition);
     };
 
     const onRotateRight = () => {
@@ -172,9 +171,8 @@ const Preview = defineComponent({
           left,
           top,
         );
-
         if (fixState) {
-          position.value = { ...fixState };
+          setPosition({ ...fixState });
         }
       }
     };
@@ -183,19 +181,20 @@ const Preview = defineComponent({
       event.preventDefault();
       // Without this mask close will abnormal
       event.stopPropagation();
-      originPositionRef.deltaX = event.pageX - position.value.x;
-      originPositionRef.deltaY = event.pageY - position.value.y;
-      originPositionRef.originX = position.value.x;
-      originPositionRef.originY = position.value.y;
+      originPositionRef.deltaX = event.pageX - position.x;
+      originPositionRef.deltaY = event.pageY - position.y;
+      originPositionRef.originX = position.x;
+      originPositionRef.originY = position.y;
       isMoving.value = true;
     };
 
     const onMouseMove: MouseEventHandler = event => {
       if (props.visible && isMoving.value) {
-        position.value = {
+        setPosition({
           x: event.pageX - originPositionRef.deltaX,
           y: event.pageY - originPositionRef.deltaY,
-        };
+        });
+        //console.log(event.pageX, originPositionRef.deltaX, position);
       }
     };
     let removeListeners = () => {};
@@ -273,7 +272,7 @@ const Preview = defineComponent({
         <div
           class={`${props.prefixCls}-img-wrapper`}
           style={{
-            transform: `translate3d(${position.value.x}px, ${position.value.y}px, 0)`,
+            transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
           }}
         >
           <img

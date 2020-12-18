@@ -6,8 +6,8 @@ import { ImageProps, ImagePropsType } from '../vc-image/src/Image';
 import PreviewGroup from './PreviewGroup';
 const Image = defineComponent({
   name: 'AImage',
-  props: ImageProps,
   inheritAttrs: false,
+  props: ImageProps,
   setup(props, ctx) {
     const { slots, attrs } = ctx;
     const configProvider = inject('configProvider', defaultConfigProvider);

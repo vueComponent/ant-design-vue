@@ -63,8 +63,8 @@ let uuid = 0;
 const ImageInternal = defineComponent({
   name: 'Image',
   mixins: [BaseMixin],
-  props: ImageProps,
   inheritAttrs: false,
+  props: ImageProps,
   emits: ['click'],
   setup(props, { attrs, slots, emit }) {
     const prefixCls = computed(() => props.prefixCls);
@@ -89,7 +89,7 @@ const ImageInternal = defineComponent({
     const isControlled = computed(() => previewVisible.value !== undefined);
     const isShowPreview = ref(!!previewVisible.value);
     watch(previewVisible, () => {
-      isShowPreview.value = !!previewVisible;
+      isShowPreview.value = !!previewVisible.value;
     });
     watch(isShowPreview, (val, preVal) => {
       onPreviewVisibleChange.value(val, preVal);
@@ -173,7 +173,7 @@ const ImageInternal = defineComponent({
 
           unRegister = registerImage(currentId.value, props.src);
 
-          if (!canPreview) {
+          if (!canPreview.value) {
             unRegister();
           }
         },

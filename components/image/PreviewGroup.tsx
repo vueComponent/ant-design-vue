@@ -5,8 +5,8 @@ import PropTypes from '../_util/vue-types';
 
 const InternalPreviewGroup = defineComponent({
   name: 'AImagePreviewGroup',
-  props: { previewPrefixCls: PropTypes.string },
   inheritAttrs: false,
+  props: { previewPrefixCls: PropTypes.string },
   setup(props, { attrs, slots }) {
     const configProvider = inject('configProvider', defaultConfigProvider);
     return () => {

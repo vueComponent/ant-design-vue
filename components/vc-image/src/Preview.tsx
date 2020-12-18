@@ -194,7 +194,6 @@ const Preview = defineComponent({
           x: event.pageX - originPositionRef.deltaX,
           y: event.pageY - originPositionRef.deltaY,
         });
-        //console.log(event.pageX, originPositionRef.deltaX, position);
       }
     };
     let removeListeners = () => {};

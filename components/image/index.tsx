@@ -1,21 +1,21 @@
-import { App, defineComponent, Plugin } from 'vue';
+import { App, defineComponent, inject, Plugin } from 'vue';
+import { defaultConfigProvider } from '../config-provider';
 import ImageInternal from '../vc-image';
 import { ImageProps, ImagePropsType } from '../vc-image/src/Image';
 
-import { initDefaultProps } from '../_util/props-util';
-
 import PreviewGroup from './PreviewGroup';
-const Image = defineComponent<ImagePropsType>({
+const Image = defineComponent({
   name: 'AImage',
-  props: initDefaultProps(ImageProps, {}),
-  emits: ['click'],
-  render() {
-    return (
-      <ImageInternal
-        {...{ ...this.$attrs, ...this.$props, ...this.$emit }}
-        v-slots={this.$slots}
-      ></ImageInternal>
-    );
+  props: ImageProps,
+  inheritAttrs: false,
+  setup(props, ctx) {
+    const { slots, attrs } = ctx;
+    const configProvider = inject('configProvider', defaultConfigProvider);
+    return () => {
+      const { getPrefixCls } = configProvider;
+      const prefixCls = getPrefixCls('image', props.prefixCls);
+      return <ImageInternal {...{ ...attrs, ...props, prefixCls }} v-slots={slots}></ImageInternal>;
+    };
   },
 });
 

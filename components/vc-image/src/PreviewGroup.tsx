@@ -1,49 +1,82 @@
-import { ref, provide, defineComponent, inject } from 'vue';
+import { ref, provide, defineComponent, inject, Ref, reactive } from 'vue';
 import Preview from './Preview';
 
 export interface GroupConsumerProps {
   previewPrefixCls?: string;
 }
 export interface GroupConsumerValue extends GroupConsumerProps {
-  isPreviewGroup?: boolean | undefined;
-  previewUrls: string[];
-  setPreviewUrls: (previewUrls: string[]) => void;
-  setCurrent: (current: string) => void;
+  isPreviewGroup?: Ref<boolean | undefined>;
+  previewUrls: Record<number, string>;
+  setPreviewUrls: (previewUrls: Record<number, string>) => void;
+  current: Ref<number>;
+  setCurrent: (current: number) => void;
   setShowPreview: (isShowPreview: boolean) => void;
   setMousePosition: (mousePosition: null | { x: number; y: number }) => void;
+  registerImage: (id: number, url: string) => () => void;
 }
-const previewGroupContext: string = 'previewGroupContext';
+const previewGroupContext = Symbol('previewGroupContext');
 export const context = {
-  provide: e => {
-    provide(previewGroupContext, e);
+  provide: (val: GroupConsumerValue) => {
+    provide(previewGroupContext, val);
   },
   inject: () => {
     return inject<GroupConsumerValue>(previewGroupContext, {
-      isPreviewGroup: false,
-      previewUrls: [],
+      isPreviewGroup: ref(false),
+      previewUrls: reactive({}),
       setPreviewUrls: () => {},
+      current: ref(null),
       setCurrent: () => {},
       setShowPreview: () => {},
       setMousePosition: () => {},
+      registerImage: null,
     });
   },
 };
 
 const Group = defineComponent({
+  name: 'PreviewGroup',
   props: { previewPrefixCls: String },
+  inheritAttrs: false,
   setup(props, { slots }) {
-    const previewUrls = ref<string[]>([]);
-    const current = ref();
+    const previewUrls = reactive<Record<number, string>>({});
+    const current = ref<number>();
     const isShowPreview = ref<boolean>(false);
     const mousePosition = ref<{ x: number; y: number }>(null);
+    const setPreviewUrls = (val: Record<number, string>) => {
+      Object.assign(previewUrls, val);
+    };
+    const setCurrent = (val: number) => {
+      current.value = val;
+    };
+    const setMousePosition = (val: null | { x: number; y: number }) => {
+      mousePosition.value = val;
+    };
+    const setShowPreview = (val: boolean) => {
+      isShowPreview.value = val;
+    };
+    const registerImage = (id: number, url: string) => {
+      previewUrls[id] = url;
+
+      return () => {
+        delete previewUrls[id];
+      };
+    };
     const onPreviewClose = (e: any) => {
       e?.stopPropagation();
       isShowPreview.value = false;
       mousePosition.value = null;
     };
-    const previewGroupContext = ref<GroupConsumerValue>();
-
-    const renderComponent = () => {
+    context.provide({
+      isPreviewGroup: ref(true),
+      previewUrls,
+      setPreviewUrls,
+      current,
+      setCurrent,
+      setShowPreview,
+      setMousePosition,
+      registerImage,
+    });
+    return () => {
       return (
         <>
           {slots.default && slots.default()}
@@ -53,41 +86,11 @@ const Group = defineComponent({
             prefixCls={props.previewPrefixCls}
             onClose={onPreviewClose}
             mousePosition={mousePosition.value}
-            src={current.value}
+            src={previewUrls[current.value]}
           />
         </>
       );
     };
-    return {
-      isPreviewGroup: true,
-      previewGroupContext,
-      isShowPreview,
-      current,
-      previewUrls,
-      mousePosition,
-      onPreviewClose,
-      renderComponent,
-    };
-  },
-  created() {
-    context.provide(this);
-  },
-  methods: {
-    setPreviewUrls(previewUrls: string[]) {
-      this.previewUrls = previewUrls;
-    },
-    setCurrent(current: string) {
-      this.current = current;
-    },
-    setMousePosition(mousePosition: null | { x: number; y: number }) {
-      this.mousePosition = mousePosition;
-    },
-    setShowPreview(isShowPreview: boolean) {
-      this.isShowPreview = isShowPreview;
-    },
-  },
-  render() {
-    return this.renderComponent();
   },
 });
 

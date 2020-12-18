@@ -10,11 +10,11 @@ const floatMap = {
   float: 1,
 };
 
-function getComputedStyle(node) {
+function getComputedStyle(node: HTMLElement) {
   return node.nodeType === 1 ? node.ownerDocument.defaultView.getComputedStyle(node, null) : {};
 }
 
-function getStyleValue(node, type, value) {
+function getStyleValue(node: HTMLElement, type: string, value: string) {
   type = type.toLowerCase();
   if (value === 'auto') {
     if (type === 'height') {
@@ -30,7 +30,7 @@ function getStyleValue(node, type, value) {
   return removePixel[type] ? parseFloat(value) || 0 : value;
 }
 
-export function get(node, name) {
+export function get(node: HTMLElement, name: any) {
   const length = arguments.length;
   const style = getComputedStyle(node);
 
@@ -39,14 +39,14 @@ export function get(node, name) {
   return length === 1 ? style : getStyleValue(node, name, style[name] || node.style[name]);
 }
 
-export function set(node, name, value) {
+export function set(node: HTMLElement, name: any, value: string | number) {
   const length = arguments.length;
   name = floatMap[name] ? ('cssFloat' in node.style ? 'cssFloat' : 'styleFloat') : name;
   if (length === 3) {
     if (typeof value === 'number' && PIXEL_PATTERN.test(name)) {
       value = `${value}px`;
     }
-    node.style[name] = value; // Number
+    node.style[name as string] = value; // Number
     return value;
   }
   for (const x in name) {
@@ -57,14 +57,14 @@ export function set(node, name, value) {
   return getComputedStyle(node);
 }
 
-export function getOuterWidth(el) {
+export function getOuterWidth(el: HTMLElement) {
   if (el === document.body) {
     return document.documentElement.clientWidth;
   }
   return el.offsetWidth;
 }
 
-export function getOuterHeight(el) {
+export function getOuterHeight(el: HTMLElement) {
   if (el === document.body) {
     return window.innerHeight || document.documentElement.clientHeight;
   }
@@ -97,7 +97,7 @@ export function getScroll() {
   };
 }
 
-export function getOffset(node) {
+export function getOffset(node: any) {
   const box = node.getBoundingClientRect();
   const docElem = document.documentElement;
 

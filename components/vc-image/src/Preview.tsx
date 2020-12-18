@@ -1,4 +1,4 @@
-import { computed, defineComponent, reactive, ref, watch, watchEffect } from 'vue';
+import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import {
   RotateLeftOutlined,
   RotateRightOutlined,
@@ -10,7 +10,6 @@ import {
 } from '@ant-design/icons-vue';
 
 import classnames from '../../_util/classNames';
-import { initDefaultProps } from '../../_util/props-util';
 import PropTypes from '../../_util/vue-types';
 import Dialog from '../../vc-dialog';
 import getIDialogPropTypes from '../../vc-dialog/IDialogPropTypes';
@@ -26,7 +25,7 @@ const IDialogPropTypes = getIDialogPropTypes();
 export type MouseEventHandler = (payload: MouseEvent) => void;
 
 export interface PreviewProps extends Omit<typeof IDialogPropTypes, 'onClose'> {
-  onClose?: (e) => void;
+  onClose?: (e: Element) => void;
   src?: string;
   alt?: string;
 }
@@ -40,11 +39,12 @@ const PreviewType = {
   alt: PropTypes.string,
   ...IDialogPropTypes,
 };
-const Preview = defineComponent<PreviewProps>({
+const Preview = defineComponent({
   name: 'Preview',
-  props: initDefaultProps(PreviewType, {}),
+  props: PreviewType,
+  inheritAttrs: false,
   emits: ['close', 'afterClose'],
-  setup(props, { emit }) {
+  setup(props, { emit, attrs }) {
     const scale = ref(1);
     const rotate = ref(0);
     const position = ref<{
@@ -67,23 +67,23 @@ const Preview = defineComponent<PreviewProps>({
     });
     const isMoving = ref(false);
     const groupContext = context.inject();
-    const previewUrls = groupContext.previewUrls;
-
-    const urls = previewUrls && previewUrls.length ? previewUrls : [props.src];
-    const index = ref<number>(urls.indexOf(props.src));
-    watch(
-      () => props.src,
-      () => {
-        if (index.value !== urls.indexOf(props.src)) {
-          index.value = urls.indexOf(props.src);
-        }
-      },
+    const { previewUrls, current, isPreviewGroup, setCurrent } = groupContext;
+    const previewGroupCount = computed(() => Object.keys(previewUrls).length);
+    const previewUrlsKeys = computed(() => Object.keys(previewUrls));
+    const currentPreviewIndex = computed(() =>
+      previewUrlsKeys.value.indexOf(String(current.value)),
     );
+    const combinationSrc = computed(() =>
+      isPreviewGroup.value ? previewUrls[current.value] : props.src,
+    );
+    const showLeftOrRightSwitches = computed(
+      () => isPreviewGroup.value && previewGroupCount.value > 1,
+    );
+
     const onAfterClose = () => {
       scale.value = 1;
       rotate.value = 0;
       position.value = initialPosition;
-      emit('afterClose');
     };
 
     const onZoomIn = () => {
@@ -109,9 +109,8 @@ const Preview = defineComponent<PreviewProps>({
       event.preventDefault();
       // Without this mask close will abnormal
       event.stopPropagation();
-      if (index.value > 0) {
-        onAfterClose();
-        index.value = index.value - 1;
+      if (currentPreviewIndex.value > 0) {
+        setCurrent(previewUrlsKeys.value[String(currentPreviewIndex.value - 1)]);
       }
     };
 
@@ -119,9 +118,8 @@ const Preview = defineComponent<PreviewProps>({
       event.preventDefault();
       // Without this mask close will abnormal
       event.stopPropagation();
-      if (index.value < urls.length - 1) {
-        onAfterClose();
-        index.value = index.value + 1;
+      if (currentPreviewIndex.value < previewGroupCount.value - 1) {
+        setCurrent(previewUrlsKeys.value[String(currentPreviewIndex.value + 1)]);
       }
     };
 
@@ -200,42 +198,55 @@ const Preview = defineComponent<PreviewProps>({
         };
       }
     };
+    let removeListeners = () => {};
+    onMounted(() => {
+      watch(
+        [() => props.visible, isMoving],
+        () => {
+          removeListeners();
+          let onTopMouseUpListener: { remove: any };
+          let onTopMouseMoveListener: { remove: any };
 
-    watchEffect(function() {
-      let onTopMouseUpListener;
-      let onTopMouseMoveListener;
+          const onMouseUpListener = addEventListener(window, 'mouseup', onMouseUp, false);
+          const onMouseMoveListener = addEventListener(window, 'mousemove', onMouseMove, false);
 
-      const onMouseUpListener = addEventListener(window, 'mouseup', onMouseUp, false);
-      const onMouseMoveListener = addEventListener(window, 'mousemove', onMouseMove, false);
+          try {
+            // Resolve if in iframe lost event
+            /* istanbul ignore next */
+            if (window.top !== window.self) {
+              onTopMouseUpListener = addEventListener(window.top, 'mouseup', onMouseUp, false);
+              onTopMouseMoveListener = addEventListener(
+                window.top,
+                'mousemove',
+                onMouseMove,
+                false,
+              );
+            }
+          } catch (error) {
+            /* istanbul ignore next */
+            warning(false, `[vc-image] ${error}`);
+          }
 
-      try {
-        // Resolve if in iframe lost event
-        /* istanbul ignore next */
-        if (window.top !== window.self) {
-          onTopMouseUpListener = addEventListener(window.top, 'mouseup', onMouseUp, false);
-          onTopMouseMoveListener = addEventListener(window.top, 'mousemove', onMouseMove, false);
-        }
-      } catch (error) {
-        /* istanbul ignore next */
-        warning(false, `[rc-image] ${error}`);
-      }
+          removeListeners = () => {
+            onMouseUpListener.remove();
+            onMouseMoveListener.remove();
 
-      return () => {
-        onMouseUpListener.remove();
-        onMouseMoveListener.remove();
-
-        /* istanbul ignore next */
-        if (onTopMouseUpListener) onTopMouseUpListener.remove();
-        /* istanbul ignore next */
-        if (onTopMouseMoveListener) onTopMouseMoveListener.remove();
-        if (!props.visible) {
-          index.value = urls.indexOf(props.src);
-        }
-      };
+            /* istanbul ignore next */
+            if (onTopMouseUpListener) onTopMouseUpListener.remove();
+            /* istanbul ignore next */
+            if (onTopMouseMoveListener) onTopMouseMoveListener.remove();
+          };
+        },
+        { flush: 'post', immediate: true },
+      );
+    });
+    onUnmounted(() => {
+      removeListeners();
     });
 
     return () => (
       <Dialog
+        {...attrs}
         transitionName="zoom"
         maskTransitionName="fade"
         closable={false}
@@ -269,27 +280,28 @@ const Preview = defineComponent<PreviewProps>({
             onMousedown={onMouseDown}
             ref={imgRef}
             class={`${props.prefixCls}-img`}
-            src={urls[index.value]}
+            src={combinationSrc.value}
             alt={props.alt}
             style={{
               transform: `scale3d(${scale.value}, ${scale.value}, 1) rotate(${rotate.value}deg)`,
             }}
           />
         </div>
-        {urls.length > 1 && (
+        {showLeftOrRightSwitches.value && (
           <div
             class={classnames(`${props.prefixCls}-switch-left`, {
-              [`${props.prefixCls}-switch-left-disabled`]: index.value <= 0,
+              [`${props.prefixCls}-switch-left-disabled`]: currentPreviewIndex.value <= 0,
             })}
             onClick={onSwitchLeft}
           >
             <LeftOutlined />
           </div>
         )}
-        {urls.length > 1 && (
+        {showLeftOrRightSwitches.value && (
           <div
             class={classnames(`${props.prefixCls}-switch-right`, {
-              [`${props.prefixCls}-switch-right-disabled`]: index.value >= urls.length - 1,
+              [`${props.prefixCls}-switch-right-disabled`]:
+                currentPreviewIndex.value >= previewGroupCount.value - 1,
             })}
             onClick={onSwitchRight}
           >

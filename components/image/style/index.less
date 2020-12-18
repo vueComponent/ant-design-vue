@@ -1,6 +1,6 @@
 @import '../../style/themes/index';
 @import '../../style/mixins/index';
-@import '../../vc-image/assets/index.less';
+
 @image-prefix-cls: ~'@{ant-prefix}-image';
 @image-preview-prefix-cls: ~'@{image-prefix-cls}-preview';
 
@@ -24,6 +24,8 @@
   }
 
   &-preview {
+    .modal-mask;
+
     height: 100%;
     text-align: center;
 
@@ -97,6 +99,43 @@
       &-icon {
         font-size: @image-preview-operation-size;
       }
+    }
+
+    &-switch-left,
+    &-switch-right {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      margin-top: -22px;
+      color: @image-preview-operation-color;
+      background: fade(@modal-mask-bg, 10%);
+      border-radius: 50%;
+      cursor: pointer;
+      pointer-events: auto;
+      &-disabled {
+        color: @image-preview-operation-disabled-color;
+        cursor: not-allowed;
+        > .anticon {
+          cursor: not-allowed;
+        }
+      }
+      > .anticon {
+        font-size: 18px;
+      }
+    }
+
+    &-switch-left {
+      left: 10px;
+    }
+
+    &-switch-right {
+      right: 10px;
     }
   }
 }

@@ -154,7 +154,7 @@ const DateInput = {
       if (keyCode === KeyCode.ENTER) {
         const validateDate = !disabledDate || !disabledDate(value);
         if (validateDate) {
-          this.__emit('select', value.clone());
+          this.__emit('select', moment(event.target.value));
         }
         event.preventDefault();
       }

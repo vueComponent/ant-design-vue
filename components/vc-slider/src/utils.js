@@ -21,7 +21,8 @@ export function isNotTouchEvent(e) {
 export function getClosestPoint(val, { marks, step, min, max }) {
   const points = Object.keys(marks).map(parseFloat);
   if (step !== null) {
-    const maxSteps = Math.floor((max - min) / step);
+    const base = 10 ** getPrecision(step);
+    const maxSteps = Math.floor((max * base - min * base) / (step * base));
     const steps = Math.min((val - min) / step, maxSteps);
     const closestStep = Math.round(steps) * step + min;
     points.push(closestStep);

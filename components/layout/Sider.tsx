@@ -61,6 +61,7 @@ const generateId = (() => {
 
 export default defineComponent({
   name: 'ALayoutSider',
+  inheritAttrs: false,
   __ANT_LAYOUT_SIDER: true,
   mixins: [BaseMixin],
   props: initDefaultProps(SiderProps, {

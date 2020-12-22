@@ -133,7 +133,7 @@ const List = defineComponent({
     }
 
     // ================================ Height ================================
-    const [setInstance, collectHeight, heights, heightUpdatedMark] = useHeights(getKey, null, null);
+    const [setInstance, collectHeight, heights] = useHeights(getKey, null, null);
     // ========================== Visible Calculation =========================
     const calRes = computed(() => {
       if (!useVirtual.value) {
@@ -194,7 +194,6 @@ const List = defineComponent({
       // Give cache to improve scroll experience
       endIndex = Math.min(endIndex + 1, state.mergedData.length);
       return {
-        heightUpdatedMark,
         scrollHeight: itemTop,
         start: startIndex,
         end: endIndex,

@@ -1,4 +1,4 @@
-import { Ref, ref, VNodeProps } from 'vue';
+import { reactive, VNodeProps } from 'vue';
 import { GetKey } from '../interface';
 
 type CacheMap = Record<string, number>;
@@ -7,10 +7,9 @@ export default function useHeights<T>(
   getKey: GetKey<T>,
   onItemAdd?: ((item: T) => void) | null,
   onItemRemove?: ((item: T) => void) | null,
-): [(item: T, instance: HTMLElement) => void, () => void, CacheMap, Ref<number>] {
+): [(item: T, instance: HTMLElement) => void, () => void, CacheMap] {
   const instance = new Map<VNodeProps['key'], HTMLElement>();
-  const heights = {};
-  const updatedMark = ref(0);
+  const heights = reactive({});
   let heightUpdateId = 0;
   function collectHeight() {
     heightUpdateId += 1;
@@ -28,7 +27,6 @@ export default function useHeights<T>(
           }
         }
       });
-      updatedMark.value++;
     });
   }
 
@@ -53,5 +51,5 @@ export default function useHeights<T>(
     }
   }
 
-  return [setInstance, collectHeight, heights, updatedMark];
+  return [setInstance, collectHeight, heights];
 }

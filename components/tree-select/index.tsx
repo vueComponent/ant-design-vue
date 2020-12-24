@@ -200,7 +200,7 @@ const TreeSelect = defineComponent({
 /* istanbul ignore next */
 TreeSelect.install = function(app: App) {
   app.component(TreeSelect.name, TreeSelect);
-  app.component('ATreeSelectNode', TreeSelect.TreeNode);
+  app.component(TreeSelect.TreeNode.displayName, TreeSelect.TreeNode);
   return app;
 };
 

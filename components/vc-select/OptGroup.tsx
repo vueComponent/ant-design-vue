@@ -11,4 +11,5 @@ export interface OptionGroupFC extends FunctionalComponent<OptGroupProps> {
 
 const OptGroup: OptionGroupFC = () => null;
 OptGroup.isSelectOptGroup = true;
+OptGroup.displayName = 'ASelectOptGroup';
 export default OptGroup;

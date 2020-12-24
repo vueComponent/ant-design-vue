@@ -1,15 +1,15 @@
-name: Add need reproduce
+name: Issue Reply
 
 on:
   issues:
     types: [labeled]
 
 jobs:
-  add-need-reproduce:
+  issue-reply:
     runs-on: ubuntu-latest
-    if: github.event.label.name == '🤔 Need Reproduce'
     steps:
-      - name: Create comment
+      - name: Need Reproduce
+        if: github.event.label.name == '🤔 Need Reproduce'
         uses: actions-cool/issues-helper@v1
         with:
           actions: 'create-comment'

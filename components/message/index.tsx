@@ -1,4 +1,4 @@
-import { VNodeTypes } from 'vue';
+import { CSSProperties, VNodeTypes } from 'vue';
 import Notification from '../vc-notification';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
@@ -66,6 +66,8 @@ export interface ArgsProps {
   onClose?: () => void;
   icon?: VNodeTypes;
   key?: string | number;
+  style?: CSSProperties;
+  class?: string;
 }
 
 function notice(args: ArgsProps): MessageType {
@@ -85,7 +87,8 @@ function notice(args: ArgsProps): MessageType {
       instance.notice({
         key: target,
         duration,
-        style: {},
+        style: args.style || {},
+        class: args.class,
         content: () => {
           return (
             <div

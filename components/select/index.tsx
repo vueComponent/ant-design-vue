@@ -225,8 +225,8 @@ const Select = defineComponent({
 /* istanbul ignore next */
 Select.install = function(app: App) {
   app.component(Select.name, Select);
-  app.component('ASelectOption', Select.Option);
-  app.component('ASelectOptGroup', Select.OptGroup);
+  app.component(Select.Option.displayName, Select.Option);
+  app.component(Select.OptGroup.displayName, Select.OptGroup);
   return app;
 };
 export default Select as typeof Select &

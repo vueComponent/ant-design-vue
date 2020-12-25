@@ -11,4 +11,5 @@ function SelectNode(_, { attrs, slots }) {
 
 SelectNode.isTreeNode = true;
 SelectNode.inheritAttrs = false;
+SelectNode.displayName = 'ATreeSelectNode';
 export default SelectNode;

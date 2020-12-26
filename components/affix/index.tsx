@@ -60,7 +60,6 @@ const AffixProps = {
 };
 const Affix = defineComponent({
   name: 'AAffix',
-  // mixins: [BaseMixin],
   props: AffixProps,
   emits: ['change', 'testUpdatePosition'],
   setup(props, { slots, emit, expose }) {
@@ -80,10 +79,10 @@ const Affix = defineComponent({
     const getOffsetTop = () => {
       const { offset, offsetBottom } = props;
       let { offsetTop } = props;
-      if (typeof offsetTop === 'undefined') {
+      if (offsetTop === undefined) {
         offsetTop = offset;
         warning(
-          typeof offset === 'undefined',
+          offset === undefined,
           'Affix',
           '`offset` is deprecated. Please use `offsetTop` instead.',
         );
@@ -247,7 +246,7 @@ const Affix = defineComponent({
     return () => {
       const { prefixCls } = props;
       const { affixStyle, placeholderStyle } = state;
-      const getPrefixCls = configProvider.getPrefixCls;
+      const { getPrefixCls } = configProvider;
       const className = classNames({
         [getPrefixCls('affix', prefixCls)]: affixStyle,
       });

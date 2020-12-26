@@ -135,31 +135,3 @@
     }
   }
 }
-
-.@{empty-img-prefix-cls}-simple {
-  // not support the definition because the less variables have no meaning
-  & when (@theme = dark) {
-    &-ellipse {
-      fill: @white;
-      fill-opacity: 0.08;
-    }
-    &-g {
-      stroke: #434343;
-    }
-    &-path {
-      fill: #262626;
-      stroke: #434343;
-    }
-  }
-  & when not (@theme = dark) {
-    &-ellipse {
-      fill: #f5f5f5;
-    }
-    &-g {
-      stroke: #d9d9d9;
-    }
-    &-path {
-      fill: #fafafa;
-    }
-  }
-}

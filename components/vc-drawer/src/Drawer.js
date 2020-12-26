@@ -1,5 +1,5 @@
 import classnames from '../../_util/classNames';
-import { cloneVNode, Teleport, nextTick, defineComponent } from 'vue';
+import { Teleport, nextTick, defineComponent } from 'vue';
 import BaseMixin from '../../_util/BaseMixin';
 import { initDefaultProps, getSlot } from '../../_util/props-util';
 import getScrollBarSize from '../../_util/getScrollBarSize';
@@ -15,6 +15,7 @@ import {
   isNumeric,
 } from './utils';
 import supportsPassive from '../../_util/supportsPassive';
+import { cloneElement } from 'ant-design-vue/es/_util/vnode';
 
 function noop() {}
 
@@ -417,9 +418,9 @@ const Drawer = defineComponent({
         const { handler: handlerSlot } = this;
         const handlerSlotVnode = handlerSlot || handlerDefalut;
         const handleIconClick = handlerSlotVnode.props && handlerSlotVnode.props.onClick;
-        handlerChildren = cloneVNode(handlerSlotVnode, {
+        handlerChildren = cloneElement(handlerSlotVnode, {
           onClick: e => {
-            handleIconClick && handleIconClick();
+            handleIconClick && handleIconClick(e);
             this.onIconTouchEnd(e);
           },
           ref: c => {

@@ -27,7 +27,7 @@ export default defineComponent({
     onChange: PropTypes.func,
     'onUpdate:checked': PropTypes.func,
   },
-
+  emits: ['change', 'update:checked'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

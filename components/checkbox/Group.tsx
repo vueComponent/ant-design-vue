@@ -25,6 +25,7 @@ export default defineComponent({
     disabled: PropTypes.looseBool,
     onChange: PropTypes.func,
   },
+  emits: ['change', 'update:value'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

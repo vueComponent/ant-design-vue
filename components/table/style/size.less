@@ -1,7 +1,7 @@
-@table-padding-vertical-md: @table-padding-vertical * 3 / 4;
-@table-padding-horizontal-md: @table-padding-horizontal / 2;
-@table-padding-vertical-sm: @table-padding-vertical / 2;
-@table-padding-horizontal-sm: @table-padding-horizontal / 2;
+@table-padding-vertical-md: (@table-padding-vertical * 3 / 4);
+@table-padding-horizontal-md: (@table-padding-horizontal / 2);
+@table-padding-vertical-sm: (@table-padding-vertical / 2);
+@table-padding-horizontal-sm: (@table-padding-horizontal / 2);
 
 .table-size(@size, @padding-vertical, @padding-horizontal) {
   .@{table-prefix-cls}.@{table-prefix-cls}-@{size} {
@@ -32,7 +32,7 @@
     }
 
     tr.@{table-prefix-cls}-expanded-row td > .@{table-prefix-cls}-wrapper {
-      margin: -@padding-vertical -@table-padding-horizontal / 2 -@padding-vertical - 1px;
+      margin: -@padding-vertical (-@table-padding-horizontal / 2) -@padding-vertical - 1px;
     }
   }
 }

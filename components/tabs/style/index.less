@@ -17,11 +17,11 @@
 }
 
 .@{tab-prefix-cls} {
-  .reset-component;
+  .reset-component();
 
   position: relative;
   overflow: hidden;
-  .clearfix;
+  .clearfix();
 
   &-ink-bar {
     position: absolute;
@@ -51,7 +51,7 @@
     line-height: @line-height-base;
     white-space: nowrap;
     transition: padding 0.3s @ease-in-out;
-    .clearfix;
+    .clearfix();
 
     &-scrolling {
       padding-right: @tabs-scrolling-size;

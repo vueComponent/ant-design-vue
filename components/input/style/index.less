@@ -5,13 +5,13 @@
 
 // Input styles
 .@{ant-prefix}-input {
-  .reset-component;
-  .input;
+  .reset-component();
+  .input();
 }
 
 //== Style for input-group: input with label, with button or dropdown...
 .@{ant-prefix}-input-group {
-  .reset-component;
+  .reset-component();
   .input-group(~'@{ant-prefix}-input');
   &-wrapper {
     display: inline-block;
@@ -23,7 +23,7 @@
 
 // Input with affix: prefix or suffix
 .@{ant-prefix}-input-affix-wrapper {
-  .reset-component;
+  .reset-component();
   .input-affix-wrapper(~'@{ant-prefix}-input');
 }
 
@@ -38,7 +38,7 @@
 }
 
 .@{ant-prefix}-input-clear-icon {
-  .clear-icon;
+  .clear-icon();
   vertical-align: 0;
 }
 
@@ -51,7 +51,7 @@
 }
 
 .@{ant-prefix}-input-textarea-clear-icon {
-  .clear-icon;
+  .clear-icon();
   position: absolute;
   top: 0;
   right: 0;

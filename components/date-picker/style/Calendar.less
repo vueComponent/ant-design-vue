@@ -28,7 +28,7 @@
 }
 
 .calendarLeftDoubleArrow() {
-  .calendarLeftArrow;
+  .calendarLeftArrow();
 
   &::after {
     position: relative;
@@ -38,7 +38,7 @@
 }
 
 .calendarRightArrow() {
-  .calendarLeftArrow;
+  .calendarLeftArrow();
 
   &::before,
   &::after {
@@ -47,7 +47,7 @@
 }
 
 .calendarRightDoubleArrow() {
-  .calendarRightArrow;
+  .calendarRightArrow();
 
   &::before {
     position: relative;
@@ -110,24 +110,24 @@
   .@{calendar-prefix-cls}-prev-decade-btn,
   .@{calendar-prefix-cls}-prev-year-btn {
     left: 7px;
-    .calendarLeftDoubleArrow;
+    .calendarLeftDoubleArrow();
   }
 
   .@{calendar-prefix-cls}-next-century-btn,
   .@{calendar-prefix-cls}-next-decade-btn,
   .@{calendar-prefix-cls}-next-year-btn {
     right: 7px;
-    .calendarRightDoubleArrow;
+    .calendarRightDoubleArrow();
   }
 
   .@{calendar-prefix-cls}-prev-month-btn {
     left: 29px;
-    .calendarLeftArrow;
+    .calendarLeftArrow();
   }
 
   .@{calendar-prefix-cls}-next-month-btn {
     right: 29px;
-    .calendarRightArrow;
+    .calendarRightArrow();
   }
 }
 
@@ -171,7 +171,7 @@
     border: 0;
     outline: 0;
     cursor: auto;
-    .placeholder;
+    .placeholder();
   }
 
   &-week-number {
@@ -391,8 +391,8 @@
   }
 
   .@{calendar-prefix-cls}-ok-btn {
-    .btn;
-    .btn-primary;
+    .btn();
+    .btn-primary();
     .button-size(@btn-height-sm; @btn-padding-sm; @font-size-base; @border-radius-base);
 
     line-height: @btn-height-sm - 2px;

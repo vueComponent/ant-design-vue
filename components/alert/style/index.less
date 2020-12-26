@@ -9,7 +9,7 @@
 @alert-close-hover-color: @icon-color-hover;
 
 .@{alert-prefix-cls} {
-  .reset-component;
+  .reset-component();
 
   position: relative;
   padding: 8px 15px 8px 37px;
@@ -26,7 +26,7 @@
 
   &-icon {
     position: absolute;
-    top: 8px + @font-size-base * @line-height-base / 2 - @font-size-base / 2;
+    top: 8px + (@font-size-base * @line-height-base / 2) - (@font-size-base / 2);
     left: 16px;
   }
 

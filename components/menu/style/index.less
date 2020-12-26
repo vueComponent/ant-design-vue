@@ -5,7 +5,7 @@
 
 // default theme
 .@{menu-prefix-cls} {
-  .reset-component;
+  .reset-component();
 
   margin-bottom: 0;
   padding-left: 0; // Override default ul/ol
@@ -16,7 +16,7 @@
   outline: none;
   box-shadow: @box-shadow-base;
   transition: background 0.3s, width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s;
-  .clearfix;
+  .clearfix();
 
   ul,
   ol {
@@ -419,7 +419,7 @@
       > .@{menu-prefix-cls}-submenu-title,
     > .@{menu-prefix-cls}-submenu > .@{menu-prefix-cls}-submenu-title {
       left: 0;
-      padding: 0 (@menu-collapsed-width - @menu-icon-size-lg) / 2 !important;
+      padding: 0 ((@menu-collapsed-width - @menu-icon-size-lg) / 2) !important;
       text-overflow: clip;
       .@{menu-prefix-cls}-submenu-arrow {
         display: none;

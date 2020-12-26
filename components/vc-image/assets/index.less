@@ -37,7 +37,7 @@
   }
 
   &-placeholder {
-    .box;
+    .box();
   }
 
   &-preview {
@@ -46,7 +46,7 @@
     pointer-events: none;
 
     &-body {
-      .box;
+      .box();
       overflow: hidden;
     }
 
@@ -83,7 +83,7 @@
       max-height: 100%;
       pointer-events: auto;
       &-wrapper {
-        .box;
+        .box();
         transition: transform 0.3s cubic-bezier(0, 0, 0.25, 1) 0s;
         &::before {
           content: '';
@@ -117,7 +117,7 @@
     }
 
     &-operations {
-      .reset;
+      .reset();
       pointer-events: auto;
       list-style: none;
       position: absolute;
@@ -147,7 +147,7 @@
         font-size: 18px;
       }
     }
-    
+
     &-switch-left {
       position: absolute;
       left: 10px;
@@ -201,7 +201,7 @@
       }
       > .anticon {
         font-size: 24px;
-      } 
+      }
     }
   }
 }

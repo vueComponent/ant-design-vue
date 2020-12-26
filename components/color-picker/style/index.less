@@ -75,7 +75,7 @@
     height: @input-height-base;
     cursor: inherit;
     &:hover {
-      .hover;
+      .hover();
     }
   }
   &-icon {
@@ -83,7 +83,7 @@
     position: absolute;
     top: 50%;
     right: @control-padding-horizontal - 4px;
-    margin-top: -@font-size-sm / 2;
+    margin-top: (-@font-size-sm / 2);
     color: @disabled-color;
     font-size: @font-size-sm;
     line-height: 1;
@@ -99,7 +99,7 @@
       height: @input-height-lg;
     }
     .@{color-picker-prefix-cls}-icon {
-      top: @input-height-lg / 2;
+      top: (@input-height-lg / 2);
     }
   }
 
@@ -114,7 +114,7 @@
     }
     .@{color-picker-prefix-cls}-icon {
       right: @control-padding-horizontal - 2px;
-      top: @input-height-sm / 2;
+      top: (@input-height-sm / 2);
       font-size: 10px;
     }
   }

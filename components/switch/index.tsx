@@ -24,7 +24,11 @@ const Switch = defineComponent({
     defaultChecked: PropTypes.looseBool,
     autofocus: PropTypes.looseBool,
     loading: PropTypes.looseBool,
+    change: PropTypes.func,
+    click: PropTypes.func,
+    'onUpdate:checked': PropTypes.func
   },
+  emits: ['change', 'click', 'update:checked'],
   setup() {
     return {
       refSwitchNode: undefined,

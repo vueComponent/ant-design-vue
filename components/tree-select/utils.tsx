@@ -20,7 +20,7 @@ export function convertChildrenToData(nodes: any[]): any[] {
       };
       Object.keys(restSlot).forEach(p => {
         if (typeof restSlot[p] === 'function') {
-          data[p] = restSlot[p]();
+          data[p] = <>{restSlot[p]()}</>;
         }
       });
       const childData = convertChildrenToData(children);

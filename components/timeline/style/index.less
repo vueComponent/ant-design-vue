@@ -4,7 +4,7 @@
 @timeline-prefix-cls: ~'@{ant-prefix}-timeline';
 
 .@{timeline-prefix-cls} {
-  .reset-component;
+  .reset-component();
 
   margin: 0;
   padding: 0;
@@ -80,7 +80,7 @@
 
     &-content {
       position: relative;
-      top: -(@font-size-base * @line-height-base - @font-size-base) + 1px;
+      top: -((@font-size-base * @line-height-base) - @font-size-base) + 1px;
       margin: 0 0 0 18px;
       word-break: break-word;
     }

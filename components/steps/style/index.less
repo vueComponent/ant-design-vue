@@ -31,7 +31,7 @@
 @steps-nav-content-max-width: auto;
 
 .@{steps-prefix-cls} {
-  .reset-component;
+  .reset-component();
 
   display: flex;
   width: 100%;
@@ -108,7 +108,7 @@
     line-height: @steps-icon-size;
     &::after {
       position: absolute;
-      top: @steps-icon-size / 2;
+      top: (@steps-icon-size / 2);
       left: 100%;
       display: block;
       width: 9999px;

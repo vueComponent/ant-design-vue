@@ -60,10 +60,10 @@
 @font-size-base: 14px;
 @font-size-lg: @font-size-base + 2px;
 @font-size-sm: 12px;
-@heading-1-size: ceil(@font-size-base * 2.71);
-@heading-2-size: ceil(@font-size-base * 2.14);
-@heading-3-size: ceil(@font-size-base * 1.71);
-@heading-4-size: ceil(@font-size-base * 1.42);
+@heading-1-size: ceil((@font-size-base * 2.71));
+@heading-2-size: ceil((@font-size-base * 2.14));
+@heading-3-size: ceil((@font-size-base * 1.71));
+@heading-4-size: ceil((@font-size-base * 1.42));
 @line-height-base: 1.5715;
 @border-radius-base: 2px;
 @border-radius-sm: @border-radius-base;
@@ -362,7 +362,7 @@
 @select-single-item-height-lg: 40px;
 @select-multiple-item-height: @input-height-base - @input-padding-vertical-base * 2; // Normal 24px
 @select-multiple-item-height-lg: 32px;
-@select-multiple-item-spacing-half: ceil(@input-padding-vertical-base / 2);
+@select-multiple-item-spacing-half: ceil((@input-padding-vertical-base / 2));
 @select-multiple-disabled-background: @input-disabled-bg;
 @select-multiple-item-disabled-color: #bfbfbf;
 @select-multiple-item-disabled-border-color: @select-border-color;

@@ -10,7 +10,7 @@
 @gradient-max: fade(@card-skeleton-bg, 40%);
 
 .@{card-prefix-cls} {
-  .reset-component;
+  .reset-component();
 
   position: relative;
   background: @card-background;
@@ -39,7 +39,7 @@
     background: @card-head-background;
     border-bottom: @border-width-base @border-style-base @border-color-split;
     border-radius: @card-radius @card-radius 0 0;
-    .clearfix;
+    .clearfix();
 
     &-wrapper {
       display: flex;
@@ -80,7 +80,7 @@
 
   &-body {
     padding: @card-padding-base;
-    .clearfix;
+    .clearfix();
   }
 
   &-contain-grid:not(&-loading) &-body {
@@ -132,7 +132,7 @@
     list-style: none;
     background: @card-actions-background;
     border-top: @border-width-base @border-style-base @border-color-split;
-    .clearfix;
+    .clearfix();
 
     & > li {
       float: left;
@@ -198,7 +198,7 @@
 
   &-meta {
     margin: -4px 0;
-    .clearfix;
+    .clearfix();
 
     &-avatar {
       float: left;

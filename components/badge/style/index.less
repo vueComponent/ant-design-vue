@@ -5,7 +5,7 @@
 @number-prefix-cls: ~'@{ant-prefix}-scroll-number';
 
 .@{badge-prefix-cls} {
-  .reset-component;
+  .reset-component();
 
   position: relative;
   display: inline-block;
@@ -23,7 +23,7 @@
     white-space: nowrap;
     text-align: center;
     background: @highlight-color;
-    border-radius: @badge-height / 2;
+    border-radius: (@badge-height / 2);
     box-shadow: 0 0 0 1px @shadow-color-inverse;
     a,
     a:hover {

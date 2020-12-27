@@ -6,7 +6,7 @@
 @timepicker-item-height: 32px;
 
 .@{timepicker-prefix-cls}-panel {
-  .reset-component;
+  .reset-component();
 
   position: absolute;
   z-index: @zindex-picker;
@@ -35,7 +35,7 @@
     outline: 0;
     cursor: auto;
 
-    .placeholder;
+    .placeholder();
 
     &-wrap {
       position: relative;
@@ -132,7 +132,7 @@
   }
 
   &-combobox {
-    .clearfix;
+    .clearfix();
   }
 
   &-addon {
@@ -166,7 +166,7 @@
 }
 
 .@{timepicker-prefix-cls} {
-  .reset-component;
+  .reset-component();
 
   position: relative;
   display: inline-block;
@@ -176,9 +176,9 @@
   transition: opacity 0.3s;
 
   &-input {
-    .input;
+    .input();
     &[disabled] {
-      .disabled;
+      .disabled();
     }
   }
 
@@ -221,11 +221,11 @@
   }
 
   &-large &-input {
-    .input-lg;
+    .input-lg();
   }
 
   &-small &-input {
-    .input-sm;
+    .input-sm();
   }
 
   &-small &-icon,

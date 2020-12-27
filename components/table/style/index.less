@@ -8,11 +8,11 @@
 @table-selection-column-width: 60px;
 
 .@{table-prefix-cls}-wrapper {
-  .clearfix;
+  .clearfix();
 }
 
 .@{table-prefix-cls} {
-  .reset-component;
+  .reset-component();
 
   position: relative;
   clear: both;
@@ -71,8 +71,8 @@
         position: absolute;
         top: 50%;
         left: 50%;
-        margin-top: -@font-size-sm / 2 + 1px;
-        margin-left: -@font-size-sm / 2;
+        margin-top: (-@font-size-sm / 2) + 1px;
+        margin-left: (-@font-size-sm / 2);
       }
     }
 

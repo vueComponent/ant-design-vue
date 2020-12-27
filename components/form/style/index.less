@@ -9,7 +9,7 @@
 @form-component-height: @input-height-base;
 @form-component-max-height: @input-height-lg;
 @form-feedback-icon-size: @font-size-base;
-@form-help-margin-top: (@form-component-height - @form-component-max-height) / 2 + 2px;
+@form-help-margin-top: ((@form-component-height - @form-component-max-height) / 2) + 2px;
 @form-explain-font-size: @font-size-base;
 // Extends additional 1px to fix precision issue.
 // https://github.com/ant-design/ant-design/issues/12803
@@ -18,8 +18,8 @@
 @form-explain-height: floor(@form-explain-font-size * @line-height-base);
 
 .@{form-prefix-cls} {
-  .reset-component;
-  .reset-form;
+  .reset-component();
+  .reset-form();
 }
 
 .@{form-prefix-cls}-item-required::before {
@@ -68,7 +68,7 @@
     }
   }
 
-  .reset-component;
+  .reset-component();
 
   margin-bottom: @form-item-margin-bottom;
   vertical-align: top;
@@ -76,7 +76,7 @@
   &-control {
     position: relative;
     line-height: @form-component-max-height;
-    .clearfix;
+    .clearfix();
   }
 
   &-children {

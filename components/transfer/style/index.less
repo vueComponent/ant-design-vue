@@ -6,11 +6,11 @@
 @transfer-prefix-cls: ~'@{ant-prefix}-transfer';
 
 @transfer-header-vertical-padding: (
-    @transfer-header-height - 1px - @font-size-base * @line-height-base
-  ) / 2;
+  (@transfer-header-height - 1px - (@font-size-base * @line-height-base)) / 2
+);
 
 .@{transfer-prefix-cls} {
-  .reset-component;
+  .reset-component();
 
   position: relative;
 
@@ -148,7 +148,7 @@
 
       // with filter should offset the search box height
       .@{transfer-prefix-cls}-list-body-with-search & {
-        margin-top: @input-height-base / 2;
+        margin-top: (@input-height-base / 2);
       }
     }
 

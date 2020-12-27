@@ -15,7 +15,7 @@ import {
   isNumeric,
 } from './utils';
 import supportsPassive from '../../_util/supportsPassive';
-import { cloneElement } from 'ant-design-vue/es/_util/vnode';
+import { cloneElement } from '../../_util/vnode';
 
 function noop() {}
 

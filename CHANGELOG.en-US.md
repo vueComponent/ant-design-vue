@@ -10,6 +10,23 @@
 
 ---
 
+## 2.0.0-rc.6
+
+`2020-12-27`
+
+- 🌟 Support Less 4 [#3449](https://github.com/vueComponent/ant-design-vue/issues/3449)
+- 🌟 Added Image component [#3235](https://github.com/vueComponent/ant-design-vue/issues/3235)
+- 🌟 Functional component, add displayName attribute [#3445](https://github.com/vueComponent/ant-design-vue/issues/3445)
+- 🐞 Message adds custom class style function [#3443](https://github.com/vueComponent/ant-design-vue/issues/3443)
+- 🐞 Fix the initial disabled state of the Tabs component does not take effect [#3366](https://github.com/vueComponent/ant-design-vue/issues/3366)
+- 🐞 Fix Slider accuracy issue [#3346](https://github.com/vueComponent/ant-design-vue/issues/3346)
+- 🐞 Fix the incorrect scroll height of Select [#3419](https://github.com/vueComponent/ant-design-vue/issues/3419)
+- 🐞 Fix the problem that Input small is too small and the height is 2px [#3396](https://github.com/vueComponent/ant-design-vue/issues/3396)
+- 🐞 Fix the problem that TreeSelect triggers two change events
+- 🐞 Fix the endless loop problem of TreeSelect defining title through slot
+- 🐞 Fix the problem that Drawer handle slot triggers two click events
+- 🌟 Added Checkbox and Switch event declaration
+
 ## 2.0.0-rc.5
 
 `2020-12-13`

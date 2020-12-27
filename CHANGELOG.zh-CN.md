@@ -10,6 +10,23 @@
 
 ---
 
+## 2.0.0-rc.6
+
+`2020-12-27`
+
+- 🌟 支持 Less 4 [#3449](https://github.com/vueComponent/ant-design-vue/issues/3449)
+- 🌟 新增 Image 组件  [#3235](https://github.com/vueComponent/ant-design-vue/issues/3235)
+- 🌟 函数式组件，添加 displayName 属性 [#3445](https://github.com/vueComponent/ant-design-vue/issues/3445)
+- 🐞 Message 新增自定义 class style 功能 [#3443](https://github.com/vueComponent/ant-design-vue/issues/3443)
+- 🐞 修复 Tabs 组件初始 disabled 状态没生效 [#3366](https://github.com/vueComponent/ant-design-vue/issues/3366)
+- 🐞 修复 Slider 精准度问题 [#3346](https://github.com/vueComponent/ant-design-vue/issues/3346)
+- 🐞 修复 Select 滚动高度不正确问题 [#3419](https://github.com/vueComponent/ant-design-vue/issues/3419)
+- 🐞 修复 Input small 大小时，高度偏大 2px 问题 [#3396](https://github.com/vueComponent/ant-design-vue/issues/3396)
+- 🐞 修复 TreeSelect 触发两次 change 事件问题
+- 🐞 修复 TreeSelect 通过 slot 定义 title 死循环问题
+- 🐞 修复 Drawer handle slot 触发两次 click 事件问题
+- 🌟 新增 Checkbox、Switch 事件声明
+
 ## 2.0.0-rc.5
 
 `2020-12-13`

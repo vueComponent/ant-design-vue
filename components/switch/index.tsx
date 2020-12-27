@@ -26,7 +26,7 @@ const Switch = defineComponent({
     loading: PropTypes.looseBool,
     change: PropTypes.func,
     click: PropTypes.func,
-    'onUpdate:checked': PropTypes.func
+    'onUpdate:checked': PropTypes.func,
   },
   emits: ['change', 'click', 'update:checked'],
   setup() {

@@ -10,6 +10,12 @@
 
 ---
 
+## 2.0.0-rc.7
+
+`2020-12-28`
+
+- 🐞 Fix Switch `change`、`click` not work [#3453](https://github.com/vueComponent/ant-design-vue/issues/3453)
+
 ## 2.0.0-rc.6
 
 `2020-12-27`

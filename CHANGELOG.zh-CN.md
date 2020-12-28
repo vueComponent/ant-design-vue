@@ -10,12 +10,18 @@
 
 ---
 
+## 2.0.0-rc.7
+
+`2020-12-28`
+
+- 🐞 修复 Switch `change`、`click` 不生效问题 [#3453](https://github.com/vueComponent/ant-design-vue/issues/3453)
+
 ## 2.0.0-rc.6
 
 `2020-12-27`
 
 - 🌟 支持 Less 4 [#3449](https://github.com/vueComponent/ant-design-vue/issues/3449)
-- 🌟 新增 Image 组件  [#3235](https://github.com/vueComponent/ant-design-vue/issues/3235)
+- 🌟 新增 Image 组件 [#3235](https://github.com/vueComponent/ant-design-vue/issues/3235)
 - 🌟 函数式组件，添加 displayName 属性 [#3445](https://github.com/vueComponent/ant-design-vue/issues/3445)
 - 🐞 Message 新增自定义 class style 功能 [#3443](https://github.com/vueComponent/ant-design-vue/issues/3443)
 - 🐞 修复 Tabs 组件初始 disabled 状态没生效 [#3366](https://github.com/vueComponent/ant-design-vue/issues/3366)
@@ -32,7 +38,7 @@
 `2020-12-13`
 
 - 🐞 修复 Drawer 组件控制台输出 this.dom 未定义的 warning 问题
-- 🐞 修复 Menu 在 Vue 3.0.3及以上版本，出现显示错乱问题 [#3354](https://github.com/vueComponent/ant-design-vue/issues/3354)
+- 🐞 修复 Menu 在 Vue 3.0.3 及以上版本，出现显示错乱问题 [#3354](https://github.com/vueComponent/ant-design-vue/issues/3354)
 
 ## 2.0.0-rc.4
 

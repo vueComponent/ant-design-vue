@@ -29,10 +29,11 @@ export function getMenuIdFromSubMenuEventKey(eventKey) {
 // }
 
 export function loopMenuItemRecursively(children, keys, ret) {
-  if (!children || ret.find) {
+  // fix: children.forEach is not a function
+  if (!children || ret.find || !Array.isArray(children)) {
     return;
   }
-  children.forEach(c => {
+  children.forEach((c) => {
     if (ret.find) {
       return;
     }

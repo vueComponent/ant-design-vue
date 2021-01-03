@@ -124,8 +124,7 @@ function getThemeVariables(options = {}) {
   }
   if(options.compact){
     themeVar = {
-      ...themeVar,
-      ...compactThemeSingle
+      ...themeVar
     }
   }
   return themeVar;
@@ -133,7 +132,6 @@ function getThemeVariables(options = {}) {
 
 module.exports = {
   darkThemeSingle,
-  compactThemeSingle,
   getThemeVariables
 }`,
       {

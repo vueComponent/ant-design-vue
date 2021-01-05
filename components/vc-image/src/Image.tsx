@@ -44,9 +44,14 @@ export const ImageProps = {
   previewPrefixCls: PropTypes.string,
   placeholder: PropTypes.VNodeChild,
   fallback: PropTypes.string,
-  preview: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.shape<ImagePreviewType>({})]).def(
-    true,
-  ),
+  preview: PropTypes.oneOfType([
+    PropTypes.looseBool,
+    PropTypes.shape({
+      visible: PropTypes.bool,
+      onVisibleChange: PropTypes.func,
+      getContainer: PropTypes.oneOf([PropTypes.func, PropTypes.bool]),
+    }),
+  ]).def(true),
 };
 type ImageStatus = 'normal' | 'error' | 'loading';
 

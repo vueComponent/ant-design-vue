@@ -20,7 +20,6 @@
  */
 import { defineComponent, provide } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
-import raf from 'raf';
 import scrollIntoView from 'dom-scroll-into-view';
 import warning from 'warning';
 import PropTypes, { withUndefined } from '../../_util/vue-types';
@@ -227,7 +226,7 @@ const Select = defineComponent({
 
           if (treeNode) {
             const domNode = findDOMNode(treeNode);
-            raf(() => {
+            requestAnimationFrame(() => {
               const popupNode = findDOMNode(this.popup);
               const triggerContainer = findPopupContainer(popupNode, `${prefixCls}-dropdown`);
 
@@ -886,7 +885,7 @@ const Select = defineComponent({
     },
 
     onChoiceAnimationLeave() {
-      raf(() => {
+      requestAnimationFrame(() => {
         this.forcePopupAlign();
       });
     },
@@ -963,8 +962,8 @@ const Select = defineComponent({
     delayForcePopupAlign() {
       // Wait 2 frame to avoid dom update & dom algin in the same time
       // https://github.com/ant-design/ant-design/issues/12031
-      raf(() => {
-        raf(this.forcePopupAlign);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(this.forcePopupAlign);
       });
     },
 

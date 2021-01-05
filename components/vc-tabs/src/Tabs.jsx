@@ -1,7 +1,6 @@
 import { defineComponent, provide, reactive, watchEffect } from 'vue';
 import BaseMixin from '../../_util/BaseMixin';
 import PropTypes from '../../_util/vue-types';
-import raf from 'raf';
 import KeyCode from './KeyCode';
 import { cloneElement } from '../../_util/vnode';
 import Sentinel from './Sentinel';
@@ -80,7 +79,7 @@ export default defineComponent({
   },
   beforeUnmount() {
     this.destroy = true;
-    raf.cancel(this.sentinelId);
+    cancelAnimationFrame(this.sentinelId);
   },
   methods: {
     onTabClick(activeKey, e) {
@@ -171,8 +170,8 @@ export default defineComponent({
     updateSentinelContext() {
       if (this.destroy) return;
 
-      raf.cancel(this.sentinelId);
-      this.sentinelId = raf(() => {
+      cancelAnimationFrame(this.sentinelId);
+      this.sentinelId = requestAnimationFrame(() => {
         if (this.destroy) return;
         this.$forceUpdate();
       });

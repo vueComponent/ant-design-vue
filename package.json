@@ -202,12 +202,12 @@
     "webpack-merge": "^4.1.1",
     "webpackbar": "^4.0.0",
     "xhr-mock": "^2.5.1",
-    "node-emoji": "^1.10.0",
-    "@babel/runtime": "^7.10.5"
+    "node-emoji": "^1.10.0"
   },
   "dependencies": {
     "@ant-design-vue/use": "^0.0.1-0",
     "@ant-design/icons-vue": "^5.1.7",
+    "@babel/runtime": "^7.10.5",
     "@simonwep/pickr": "~1.7.0",
     "array-tree-filter": "^2.1.0",
     "async-validator": "^3.3.0",

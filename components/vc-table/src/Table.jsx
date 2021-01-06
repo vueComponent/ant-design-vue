@@ -2,6 +2,7 @@
 import { provide, markRaw, defineComponent } from 'vue';
 import shallowequal from '../../_util/shallowequal';
 import merge from 'lodash-es/merge';
+import classes from '../../_util/component-classes';
 import classNames from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
 import { debounce, getDataAndAriaProps } from './utils';
@@ -227,12 +228,12 @@ export default defineComponent({
       if (this.tableNode) {
         const { prefixCls } = this;
         if (position === 'both') {
-          this.tableNode
+          classes(this.tableNode)
             .remove(new RegExp(`^${prefixCls}-scroll-position-.+$`))
             .add(`${prefixCls}-scroll-position-left`)
             .add(`${prefixCls}-scroll-position-right`);
         } else {
-          this.tableNode
+          classes(this.tableNode)
             .remove(new RegExp(`^${prefixCls}-scroll-position-.+$`))
             .add(`${prefixCls}-scroll-position-${position}`);
         }

@@ -1,4 +1,4 @@
-import json2mq from 'json2mq';
+import json2mq from '../../_util/json2mq';
 import BaseMixin from '../../_util/BaseMixin';
 import { cloneElement } from '../../_util/vnode';
 import InnerSlider from './inner-slider';

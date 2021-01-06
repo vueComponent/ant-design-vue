@@ -1,6 +1,7 @@
 // https://github.com/yiminghe/css-animation 1.5.0
 
 import Event from './Event';
+import classes from '../component-classes';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../requestAnimationTimeout';
 
 const isCssAnimationSupported = Event.endEvents.length !== 0;
@@ -57,6 +58,7 @@ const cssAnimation = (node, transitionName, endCallback) => {
   let end = endCallback;
   let start;
   let active;
+  const nodeClasses = classes(node);
 
   if (endCallback && Object.prototype.toString.call(endCallback) === '[object Object]') {
     end = endCallback.end;
@@ -80,8 +82,8 @@ const cssAnimation = (node, transitionName, endCallback) => {
 
     clearBrowserBugTimeout(node);
 
-    node.remove(className);
-    node.remove(activeClassName);
+    nodeClasses.remove(className);
+    nodeClasses.remove(activeClassName);
 
     Event.removeEndEventListener(node, node.rcEndListener);
     node.rcEndListener = null;
@@ -98,13 +100,13 @@ const cssAnimation = (node, transitionName, endCallback) => {
   if (start) {
     start();
   }
-  node.add(className);
+  nodeClasses.add(className);
 
   node.rcAnimTimeout = requestAnimationTimeout(() => {
     node.rcAnimTimeout = null;
 
-    node.add(className);
-    node.add(activeClassName);
+    nodeClasses.add(className);
+    nodeClasses.add(activeClassName);
 
     if (active) {
       requestAnimationTimeout(active, 0);

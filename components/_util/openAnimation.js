@@ -8,7 +8,7 @@ function animate(node, show, done) {
   return cssAnimation(node, 'ant-motion-collapse-legacy', {
     start() {
       if (appearRequestAnimationFrameId) {
-        raf.cancel(appearRequestAnimationFrameId);
+        cancelAnimationFrame(appearRequestAnimationFrameId);
       }
       if (!show) {
         node.style.height = `${node.offsetHeight}px`;

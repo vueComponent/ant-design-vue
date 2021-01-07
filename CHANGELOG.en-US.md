@@ -10,6 +10,17 @@
 
 ---
 
+## 2.0.0-rc.8
+
+`2021-01-07`
+
+- 🌟 Support Vite 2 [#3490](https://github.com/vueComponent/ant-design-vue/issues/3490)
+- 🌟 Use Composition API to refactor Affix component [#3447](https://github.com/vueComponent/ant-design-vue/issues/3447)
+- 🐞 Fix Image component type definition error [#3488](https://github.com/vueComponent/ant-design-vue/issues/3488)
+- 🐞 Upgrade icons-vue Fix IconFont component type error [#3474](https://github.com/vueComponent/ant-design-vue/issues/3474)
+- 🐞 Fix Tooltip arrow style error in less 4 [#3477](https://github.com/vueComponent/ant-design-vue/issues/3477)
+- 🐞 Fix DatePicker type definition parsing error under Vue 3.0.5 [#bf7c62](https://github.com/vueComponent/ant-design-vue/commit/bf7c62f457fc14624881f69c5baf9a62219383f7)
+
 ## 2.0.0-rc.7
 
 `2020-12-28`

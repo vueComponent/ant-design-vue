@@ -1,6 +1,6 @@
 {
   "name": "ant-design-vue",
-  "version": "2.0.0-rc.7",
+  "version": "2.0.0-rc.8",
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation",
   "keywords": [
@@ -205,7 +205,7 @@
   },
   "dependencies": {
     "@ant-design-vue/use": "^0.0.1-0",
-    "@ant-design/icons-vue": "^5.1.7",
+    "@ant-design/icons-vue": "^5.1.9",
     "@babel/runtime": "^7.10.5",
     "@simonwep/pickr": "~1.7.0",
     "array-tree-filter": "^2.1.0",

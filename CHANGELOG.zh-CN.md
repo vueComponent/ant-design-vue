@@ -10,6 +10,17 @@
 
 ---
 
+## 2.0.0-rc.8
+
+`2021-01-07`
+
+- 🌟 支持 Vite 2 [#3490](https://github.com/vueComponent/ant-design-vue/issues/3490)
+- 🌟 使用 Composition API 重构 Affix 组件 [#3447](https://github.com/vueComponent/ant-design-vue/issues/3447)
+- 🐞 修复 Image 组件类型定义错误 [#3488](https://github.com/vueComponent/ant-design-vue/issues/3488)
+- 🐞 升级 icons-vue 修复 IconFont 组件类型错误 [#3474](https://github.com/vueComponent/ant-design-vue/issues/3474)
+- 🐞 修复 less 4 下 Tooltip 箭头样式错误问题 [#3477](https://github.com/vueComponent/ant-design-vue/issues/3477)
+- 🐞 修复 Vue 3.0.5 下 DatePicker 类型定义解析错误问题 [#bf7c62](https://github.com/vueComponent/ant-design-vue/commit/bf7c62f457fc14624881f69c5baf9a62219383f7)
+
 ## 2.0.0-rc.7
 
 `2020-12-28`

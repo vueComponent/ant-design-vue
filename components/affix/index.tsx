@@ -1,9 +1,19 @@
-import { CSSProperties, defineComponent, inject } from 'vue';
+import {
+  CSSProperties,
+  defineComponent,
+  inject,
+  ref,
+  reactive,
+  watch,
+  onMounted,
+  getCurrentInstance,
+  onUnmounted,
+} from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import ResizeObserver from '../vc-resize-observer';
-import BaseMixin from '../_util/BaseMixin';
+// import BaseMixin from '../_util/BaseMixin';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
@@ -50,81 +60,29 @@ const AffixProps = {
 };
 const Affix = defineComponent({
   name: 'AAffix',
-  mixins: [BaseMixin],
   props: AffixProps,
   emits: ['change', 'testUpdatePosition'],
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-  data() {
-    return {
+  setup(props, { slots, emit, expose }) {
+    const configProvider = inject('configProvider', defaultConfigProvider);
+    const placeholderNode = ref();
+    const fixedNode = ref();
+    const state = reactive({
       affixStyle: undefined,
       placeholderStyle: undefined,
       status: AffixStatus.None,
       lastAffix: false,
       prevTarget: null,
       timeout: null,
-    };
-  },
-  watch: {
-    target(val) {
-      let newTarget = null;
-      if (val) {
-        newTarget = val() || null;
-      }
-      if (this.prevTarget !== newTarget) {
-        removeObserveTarget(this);
-        if (newTarget) {
-          addObserveTarget(newTarget, this);
-          // Mock Event object.
-          this.updatePosition();
-        }
-        this.prevTarget = newTarget;
-      }
-    },
-    offsetTop() {
-      this.updatePosition();
-    },
-    offsetBottom() {
-      this.updatePosition();
-    },
-  },
-  beforeMount() {
-    this.updatePosition = throttleByAnimationFrame(this.updatePosition);
-    this.lazyUpdatePosition = throttleByAnimationFrame(this.lazyUpdatePosition);
-  },
-  mounted() {
-    const { target } = this;
-    if (target) {
-      // [Legacy] Wait for parent component ref has its value.
-      // We should use target as directly element instead of function which makes element check hard.
-      this.timeout = setTimeout(() => {
-        addObserveTarget(target(), this);
-        // Mock Event object.
-        this.updatePosition();
-      });
-    }
-  },
-  updated() {
-    this.measure();
-  },
-  beforeUnmount() {
-    clearTimeout(this.timeout);
-    removeObserveTarget(this);
-    (this.updatePosition as any).cancel();
-    // https://github.com/ant-design/ant-design/issues/22683
-    (this.lazyUpdatePosition as any).cancel();
-  },
-  methods: {
-    getOffsetTop() {
-      const { offset, offsetBottom } = this;
-      let { offsetTop } = this;
-      if (typeof offsetTop === 'undefined') {
+    });
+    const currentInstance = getCurrentInstance();
+
+    const getOffsetTop = () => {
+      const { offset, offsetBottom } = props;
+      let { offsetTop } = props;
+      if (offsetTop === undefined) {
         offsetTop = offset;
         warning(
-          typeof offset === 'undefined',
+          offset === undefined,
           'Affix',
           '`offset` is deprecated. Please use `offsetTop` instead.',
         );
@@ -134,26 +92,19 @@ const Affix = defineComponent({
         offsetTop = 0;
       }
       return offsetTop;
-    },
-
-    getOffsetBottom() {
-      return this.offsetBottom;
-    },
-    // =================== Measure ===================
-    measure() {
-      const { status, lastAffix } = this;
-      const { target } = this;
-      if (
-        status !== AffixStatus.Prepare ||
-        !this.$refs.fixedNode ||
-        !this.$refs.placeholderNode ||
-        !target
-      ) {
+    };
+    const getOffsetBottom = () => {
+      return props.offsetBottom;
+    };
+    const measure = () => {
+      const { status, lastAffix } = state;
+      const { target } = props;
+      if (status !== AffixStatus.Prepare || !fixedNode.value || !placeholderNode.value || !target) {
         return;
       }
 
-      const offsetTop = this.getOffsetTop();
-      const offsetBottom = this.getOffsetBottom();
+      const offsetTop = getOffsetTop();
+      const offsetBottom = getOffsetBottom();
 
       const targetNode = target();
       if (!targetNode) {
@@ -164,7 +115,7 @@ const Affix = defineComponent({
         status: AffixStatus.None,
       } as AffixState;
       const targetRect = getTargetRect(targetNode);
-      const placeholderReact = getTargetRect(this.$refs.placeholderNode as HTMLElement);
+      const placeholderReact = getTargetRect(placeholderNode.value as HTMLElement);
       const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
       const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
       if (fixedTop !== undefined) {
@@ -193,41 +144,39 @@ const Affix = defineComponent({
 
       newState.lastAffix = !!newState.affixStyle;
       if (lastAffix !== newState.lastAffix) {
-        this.$emit('change', newState.lastAffix);
+        emit('change', newState.lastAffix);
       }
-
-      this.setState(newState);
-    },
-
-    prepareMeasure() {
-      this.setState({
+      // update state
+      Object.assign(state, newState);
+    };
+    const prepareMeasure = () => {
+      Object.assign(state, {
         status: AffixStatus.Prepare,
         affixStyle: undefined,
         placeholderStyle: undefined,
       });
-      this.$forceUpdate();
-
       // Test if `updatePosition` called
       if (process.env.NODE_ENV === 'test') {
-        this.$emit('testUpdatePosition');
+        emit('testUpdatePosition');
       }
-    },
-    updatePosition() {
-      this.prepareMeasure();
-    },
-    lazyUpdatePosition() {
-      const { target } = this;
-      const { affixStyle } = this;
+    };
+
+    const updatePosition = throttleByAnimationFrame(() => {
+      prepareMeasure();
+    });
+    const lazyUpdatePosition = throttleByAnimationFrame(() => {
+      const { target } = props;
+      const { affixStyle } = state;
 
       // Check position change before measure to make Safari smooth
       if (target && affixStyle) {
-        const offsetTop = this.getOffsetTop();
-        const offsetBottom = this.getOffsetBottom();
+        const offsetTop = getOffsetTop();
+        const offsetBottom = getOffsetBottom();
 
         const targetNode = target();
-        if (targetNode && this.$refs.placeholderNode) {
+        if (targetNode && placeholderNode.value) {
           const targetRect = getTargetRect(targetNode);
-          const placeholderReact = getTargetRect(this.$refs.placeholderNode as HTMLElement);
+          const placeholderReact = getTargetRect(placeholderNode.value as HTMLElement);
           const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
           const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
 
@@ -240,30 +189,78 @@ const Affix = defineComponent({
         }
       }
       // Directly call prepare measure since it's already throttled.
-      this.prepareMeasure();
-    },
-  },
-
-  render() {
-    const { prefixCls, affixStyle, placeholderStyle, $slots, $props } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const className = classNames({
-      [getPrefixCls('affix', prefixCls)]: affixStyle,
+      prepareMeasure();
     });
-    const props = omit($props, ['prefixCls', 'offsetTop', 'offsetBottom', 'target']);
-    return (
-      <ResizeObserver
-        onResize={() => {
-          this.updatePosition();
-        }}
-      >
-        <div {...props} style={placeholderStyle} ref="placeholderNode">
-          <div class={className} ref="fixedNode" style={affixStyle}>
-            {$slots.default?.()}
-          </div>
-        </div>
-      </ResizeObserver>
+
+    expose({
+      updatePosition,
+      lazyUpdatePosition,
+    });
+    watch(
+      () => props.target,
+      val => {
+        let newTarget = null;
+        if (val) {
+          newTarget = val() || null;
+        }
+        if (state.prevTarget !== newTarget) {
+          removeObserveTarget(currentInstance);
+          if (newTarget) {
+            addObserveTarget(newTarget, currentInstance);
+            // Mock Event object.
+            updatePosition();
+          }
+          state.prevTarget = newTarget;
+        }
+      },
     );
+    watch(() => [props.offsetTop, props.offsetBottom], updatePosition);
+    watch(
+      () => state.status,
+      () => {
+        measure();
+      },
+    );
+
+    onMounted(() => {
+      const { target } = props;
+      if (target) {
+        // [Legacy] Wait for parent component ref has its value.
+        // We should use target as directly element instead of function which makes element check hard.
+        state.timeout = setTimeout(() => {
+          addObserveTarget(target(), currentInstance);
+          // Mock Event object.
+          updatePosition();
+        });
+      }
+    });
+
+    onUnmounted(() => {
+      clearTimeout(state.timeout);
+      removeObserveTarget(currentInstance);
+      (updatePosition as any).cancel();
+      // https://github.com/ant-design/ant-design/issues/22683
+      (lazyUpdatePosition as any).cancel();
+    });
+
+    return () => {
+      const { prefixCls } = props;
+      const { affixStyle, placeholderStyle } = state;
+      const { getPrefixCls } = configProvider;
+      const className = classNames({
+        [getPrefixCls('affix', prefixCls)]: affixStyle,
+      });
+      const restProps = omit(props, ['prefixCls', 'offsetTop', 'offsetBottom', 'target']);
+      return (
+        <ResizeObserver onResize={updatePosition}>
+          <div {...restProps} style={placeholderStyle} ref={placeholderNode}>
+            <div class={className} ref={fixedNode} style={affixStyle}>
+              {slots.default?.()}
+            </div>
+          </div>
+        </ResizeObserver>
+      );
+    };
   },
 });
 

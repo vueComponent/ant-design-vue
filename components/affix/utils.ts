@@ -81,7 +81,8 @@ export function addObserveTarget(
       entity!.eventHandlers[eventName] = addEventListener(target, eventName, () => {
         entity!.affixList.forEach(
           targetAffix => {
-            (targetAffix as any).lazyUpdatePosition();
+            const { lazyUpdatePosition } = (targetAffix as any).exposed;
+            lazyUpdatePosition();
           },
           (eventName === 'touchstart' || eventName === 'touchmove') && supportsPassive
             ? ({ passive: true } as EventListenerOptions)

@@ -1,5 +1,3 @@
-import raf from 'raf';
-
 interface RafMap {
   [id: number]: number;
 }
@@ -19,11 +17,11 @@ export default function wrapperRaf(callback: () => void, delayFrames = 1): numbe
       callback();
       delete ids[myId];
     } else {
-      ids[myId] = raf(internalCallback);
+      ids[myId] = requestAnimationFrame(internalCallback);
     }
   }
 
-  ids[myId] = raf(internalCallback);
+  ids[myId] = requestAnimationFrame(internalCallback);
 
   return myId;
 }
@@ -31,7 +29,7 @@ export default function wrapperRaf(callback: () => void, delayFrames = 1): numbe
 wrapperRaf.cancel = function cancel(pid?: number) {
   if (pid === undefined) return;
 
-  raf.cancel(ids[pid]);
+  cancelAnimationFrame(ids[pid]);
   delete ids[pid];
 };
 

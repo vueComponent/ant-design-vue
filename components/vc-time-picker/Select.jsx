@@ -1,14 +1,13 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import classnames from '../_util/classNames';
-import raf from 'raf';
 import { findDOMNode } from '../_util/props-util';
 
 function noop() {}
 const scrollTo = (element, to, duration) => {
   // jump to target if duration zero
   if (duration <= 0) {
-    raf(() => {
+    requestAnimationFrame(() => {
       element.scrollTop = to;
     });
     return;
@@ -16,7 +15,7 @@ const scrollTo = (element, to, duration) => {
   const difference = to - element.scrollTop;
   const perTick = (difference / duration) * 10;
 
-  raf(() => {
+  requestAnimationFrame(() => {
     element.scrollTop += perTick;
     if (element.scrollTop === to) return;
     scrollTo(element, to, duration - 10);

@@ -1,7 +1,7 @@
 // https://github.com/yiminghe/css-animation 1.5.0
 
 import Event from './Event';
-import classes from 'component-classes';
+import classes from '../component-classes';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../requestAnimationTimeout';
 
 const isCssAnimationSupported = Event.endEvents.length !== 0;

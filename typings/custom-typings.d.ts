@@ -1,4 +1,3 @@
-declare module 'component-classes';
 declare module 'omit.js';
 
 declare module '*.json' {

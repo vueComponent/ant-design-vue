@@ -7,16 +7,16 @@ import {
   watch,
   onMounted,
   getCurrentInstance,
+  computed,
   onUnmounted,
+  onUpdated,
 } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import ResizeObserver from '../vc-resize-observer';
-// import BaseMixin from '../_util/BaseMixin';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import { defaultConfigProvider } from '../config-provider';
-import warning from '../_util/warning';
 import { withInstall } from '../_util/type';
 import {
   addObserveTarget,
@@ -76,35 +76,18 @@ const Affix = defineComponent({
     });
     const currentInstance = getCurrentInstance();
 
-    const getOffsetTop = () => {
-      const { offset, offsetBottom } = props;
-      let { offsetTop } = props;
-      if (offsetTop === undefined) {
-        offsetTop = offset;
-        warning(
-          offset === undefined,
-          'Affix',
-          '`offset` is deprecated. Please use `offsetTop` instead.',
-        );
-      }
-
-      if (offsetBottom === undefined && offsetTop === undefined) {
-        offsetTop = 0;
-      }
-      return offsetTop;
-    };
-    const getOffsetBottom = () => {
-      return props.offsetBottom;
-    };
+    const offsetTop = computed(() => {
+      return props.offsetBottom === undefined && props.offsetTop === undefined
+        ? 0
+        : props.offsetTop;
+    });
+    const offsetBottom = computed(() => props.offsetBottom);
     const measure = () => {
       const { status, lastAffix } = state;
       const { target } = props;
       if (status !== AffixStatus.Prepare || !fixedNode.value || !placeholderNode.value || !target) {
         return;
       }
-
-      const offsetTop = getOffsetTop();
-      const offsetBottom = getOffsetBottom();
 
       const targetNode = target();
       if (!targetNode) {
@@ -116,8 +99,8 @@ const Affix = defineComponent({
       } as AffixState;
       const targetRect = getTargetRect(targetNode);
       const placeholderReact = getTargetRect(placeholderNode.value as HTMLElement);
-      const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
-      const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
+      const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop.value);
+      const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom.value);
       if (fixedTop !== undefined) {
         newState.affixStyle = {
           position: 'fixed',
@@ -155,6 +138,7 @@ const Affix = defineComponent({
         affixStyle: undefined,
         placeholderStyle: undefined,
       });
+      currentInstance.update();
       // Test if `updatePosition` called
       if (process.env.NODE_ENV === 'test') {
         emit('testUpdatePosition');
@@ -170,16 +154,12 @@ const Affix = defineComponent({
 
       // Check position change before measure to make Safari smooth
       if (target && affixStyle) {
-        const offsetTop = getOffsetTop();
-        const offsetBottom = getOffsetBottom();
-
         const targetNode = target();
         if (targetNode && placeholderNode.value) {
           const targetRect = getTargetRect(targetNode);
           const placeholderReact = getTargetRect(placeholderNode.value as HTMLElement);
-          const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop);
-          const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom);
-
+          const fixedTop = getFixedTop(placeholderReact, targetRect, offsetTop.value);
+          const fixedBottom = getFixedBottom(placeholderReact, targetRect, offsetBottom.value);
           if (
             (fixedTop !== undefined && affixStyle.top === fixedTop) ||
             (fixedBottom !== undefined && affixStyle.bottom === fixedBottom)
@@ -215,13 +195,6 @@ const Affix = defineComponent({
       },
     );
     watch(() => [props.offsetTop, props.offsetBottom], updatePosition);
-    watch(
-      () => state.status,
-      () => {
-        measure();
-      },
-    );
-
     onMounted(() => {
       const { target } = props;
       if (target) {
@@ -234,7 +207,9 @@ const Affix = defineComponent({
         });
       }
     });
-
+    onUpdated(() => {
+      measure();
+    });
     onUnmounted(() => {
       clearTimeout(state.timeout);
       removeObserveTarget(currentInstance);

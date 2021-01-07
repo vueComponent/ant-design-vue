@@ -94,7 +94,7 @@
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/compiler-sfc": "^3.0.4",
     "@vue/eslint-config-prettier": "^6.0.0",
-    "@vue/eslint-config-typescript": "^5.1.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^2.0.0-beta.2",
     "acorn": "^7.0.0",
     "autoprefixer": "^9.6.0",
@@ -152,6 +152,7 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "mockdate": "^2.0.2",
+    "node-emoji": "^1.10.0",
     "nprogress": "^0.2.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss": "^7.0.6",
@@ -193,7 +194,6 @@
     "vue-router": "^4.0.0",
     "vue-server-renderer": "^2.6.11",
     "vue-style-loader": "^4.1.2",
-    "vue-virtual-scroller": "^1.0.0",
     "vuex": "^4.0.0-beta.2",
     "webpack": "^4.28.4",
     "webpack-bundle-analyzer": "^3.8.0",
@@ -201,8 +201,7 @@
     "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.1.1",
     "webpackbar": "^4.0.0",
-    "xhr-mock": "^2.5.1",
-    "node-emoji": "^1.10.0"
+    "xhr-mock": "^2.5.1"
   },
   "dependencies": {
     "@ant-design-vue/use": "^0.0.1-0",

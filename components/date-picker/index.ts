@@ -14,19 +14,19 @@ import {
 } from './interface';
 
 const WrappedRangePicker = (wrapPicker(
-  RangePicker,
+  RangePicker as any,
   RangePickerProps,
   'date',
 ) as unknown) as DefineComponent<RangePickerPropsTypes>;
 
 const WrappedWeekPicker = (wrapPicker(
-  WeekPicker,
+  WeekPicker as any,
   WeekPickerProps,
   'week',
 ) as unknown) as DefineComponent<WeekPickerPropsTypes>;
 
 const DatePicker = (wrapPicker(
-  createPicker(VcCalendar, DatePickerProps, 'ADatePicker'),
+  createPicker(VcCalendar as any, DatePickerProps, 'ADatePicker'),
   DatePickerProps,
   'date',
 ) as unknown) as DefineComponent<DatePickerPropsTypes> & {
@@ -36,7 +36,7 @@ const DatePicker = (wrapPicker(
 };
 
 const MonthPicker = (wrapPicker(
-  createPicker(MonthCalendar, MonthPickerProps, 'AMonthPicker'),
+  createPicker(MonthCalendar as any, MonthPickerProps, 'AMonthPicker'),
   MonthPickerProps,
   'month',
 ) as unknown) as DefineComponent<MonthPickerPropsTypes>;

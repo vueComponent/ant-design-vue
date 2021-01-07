@@ -29,7 +29,7 @@ export default function createPicker<P>(
   TheCalendar: DefineComponent<P>,
   props: any,
   name: string,
-): DefineComponent<any> {
+): any {
   return defineComponent({
     name,
     mixins: [BaseMixin],

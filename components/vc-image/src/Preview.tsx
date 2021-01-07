@@ -1,13 +1,11 @@
 import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
-import {
-  RotateLeftOutlined,
-  RotateRightOutlined,
-  ZoomInOutlined,
-  ZoomOutOutlined,
-  CloseOutlined,
-  LeftOutlined,
-  RightOutlined,
-} from '@ant-design/icons-vue';
+import RotateLeftOutlined from '@ant-design/icons-vue/RotateLeftOutlined';
+import RotateRightOutlined from '@ant-design/icons-vue/RotateRightOutlined';
+import ZoomInOutlined from '@ant-design/icons-vue/ZoomInOutlined';
+import ZoomOutOutlined from '@ant-design/icons-vue/ZoomOutOutlined';
+import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
+import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
+import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 
 import classnames from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';

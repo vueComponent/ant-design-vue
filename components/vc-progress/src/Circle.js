@@ -62,7 +62,7 @@ function getPathStyles(offset, percent, strokeColor, strokeWidth, gapDegree = 0,
     strokeDasharray: `${(percent / 100) * (len - gapDegree)}px ${len}px`,
     strokeDashoffset: `-${gapDegree / 2 + (offset / 100) * (len - gapDegree)}px`,
     transition:
-      'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s', // eslint-disable-line
+      'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s', // eslint-disable-line
   };
 
   return {
@@ -116,7 +116,8 @@ const Circle = defineComponent({
           d: pathString,
           stroke,
           'stroke-linecap': strokeLinecap,
-          'stroke-width': ptg === 0 ? 0 : strokeWidth,
+          'stroke-width': strokeWidth,
+          opacity: ptg === 0 ? 0 : 1,
           'fill-opacity': '0',
           class: `${prefixCls}-circle-path`,
           style: pathStyle,

@@ -18,7 +18,8 @@ export default defineComponent({
     type: 'line',
     percent: 0,
     showInfo: true,
-    trailColor: '#f3f3f3',
+    // null for different theme definition
+    trailColor: null,
     size: 'default',
     gapDegree: 0,
     strokeLinecap: 'round',

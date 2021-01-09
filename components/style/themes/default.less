@@ -94,6 +94,8 @@
 @link-active-color: color(~`colorPalette('@{link-color}', 7) `);
 @link-decoration: none;
 @link-hover-decoration: none;
+@link-focus-decoration: none;
+@link-focus-outline: 0;
 
 // Animation
 @ease-base-out: cubic-bezier(0.7, 0.3, 0.1, 1);
@@ -166,6 +168,10 @@
 @btn-disable-bg: @disabled-bg;
 @btn-disable-border: @border-color-base;
 
+@btn-default-ghost-color: @component-background;
+@btn-default-ghost-bg: transparent;
+@btn-default-ghost-border: @component-background;
+
 @btn-padding-base: 0 @padding-md - 1px;
 @btn-font-size-lg: @font-size-lg;
 @btn-font-size-sm: @font-size-base;
@@ -186,6 +192,8 @@
 
 @btn-group-border: @primary-5;
 
+@btn-text-hover-bg: rgba(0, 0, 0, 0.018);
+
 // Checkbox
 @checkbox-size: 16px;
 @checkbox-color: @primary-color;
@@ -204,6 +212,11 @@
 @descriptions-item-label-colon-margin-right: 8px;
 @descriptions-item-label-colon-margin-left: 2px;
 @descriptions-extra-color: @text-color;
+
+// Divider
+@divider-text-padding: 1em;
+@divider-orientation-margin: 5%;
+@divider-color: rgba(0, 0, 0, 6%);
 
 // Dropdown
 @dropdown-selected-color: @primary-color;
@@ -344,6 +357,7 @@
 @input-padding-vertical-lg: 6.5px;
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-color: @text-color;
+@input-icon-color: @input-color;
 @input-border-color: @border-color-base;
 @input-bg: @component-background;
 @input-number-hover-border-color: @input-hover-border-color;
@@ -355,6 +369,12 @@
 @input-hover-border-color: @primary-5;
 @input-disabled-bg: @disabled-bg;
 @input-outline-offset: 0 0;
+@input-icon-hover-color: fade(@black, 85%);
+
+// Mentions
+// ---
+@mentions-dropdown-bg: @component-background;
+@mentions-dropdown-menu-item-hover-bg: @mentions-dropdown-bg;
 
 // Select
 // ---
@@ -379,6 +399,13 @@
 @select-multiple-disabled-background: @input-disabled-bg;
 @select-multiple-item-disabled-color: #bfbfbf;
 @select-multiple-item-disabled-border-color: @select-border-color;
+
+// Cascader
+// ---
+@cascader-bg: @component-background;
+@cascader-item-selected-bg: @primary-1;
+@cascader-menu-bg: @component-background;
+@cascader-menu-border-color-split: @border-color-split;
 
 // Cascader
 // ----
@@ -545,6 +572,7 @@
 
 // Comment
 // ---
+@comment-bg: inherit;
 @comment-padding-base: 16px 0;
 @comment-nest-indent: 44px;
 @comment-font-size-base: @font-size-base;
@@ -607,11 +635,16 @@
 
 // Pagination
 // ---
+@pagination-item-bg: @component-background;
 @pagination-item-size: 32px;
 @pagination-item-size-sm: 24px;
 @pagination-font-family: Arial;
 @pagination-font-weight-active: 500;
 @pagination-item-bg-active: @component-background;
+@pagination-item-link-bg: @component-background;
+@pagination-item-disabled-color-active: @white;
+@pagination-item-disabled-bg-active: darken(@disabled-bg, 10%);
+@pagination-item-input-bg: @component-background;
 
 // PageHeader
 // ---
@@ -671,16 +704,19 @@
 // Skeleton
 // ---
 @skeleton-color: #f2f2f2;
+@skeleton-to-color: shade(@skeleton-color, 5%);
 
 // Transfer
 // ---
 @transfer-header-height: 40px;
 @transfer-disabled-bg: @disabled-bg;
 @transfer-list-height: 200px;
+@transfer-item-hover-bg: @item-hover-bg;
 
 // Message
 // ---
 @message-notice-content-padding: 10px 16px;
+@message-notice-content-bg: @component-background;
 
 // Motion
 // ---
@@ -722,6 +758,7 @@
 // ---
 @drawer-header-padding: 16px 24px;
 @drawer-body-padding: 24px;
+@drawer-bg: @component-background;
 
 // Timeline
 // ---
@@ -746,3 +783,13 @@
 @image-preview-operation-size: 18px;
 @image-preview-operation-color: @text-color-dark;
 @image-preview-operation-disabled-color: fade(@image-preview-operation-color, 45%);
+
+// Steps
+@steps-nav-arrow-color: fade(@black, 25%);
+@steps-background: @component-background;
+
+// Notification
+// ---
+@notification-bg: @component-background;
+@notification-padding-vertical: 16px;
+@notification-padding-horizontal: 24px;

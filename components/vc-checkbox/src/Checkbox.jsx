@@ -87,6 +87,10 @@ export default defineComponent({
       this.__emit('update:checked', eventObj);
       this.__emit('change', eventObj);
       this.eventShiftKey = false;
+      // fix https://github.com/vueComponent/ant-design-vue/issues/3047
+      if ('checked' in props) {
+        this.$refs.input.checked = props.checked;
+      }
     },
     onClick(e) {
       this.__emit('click', e);

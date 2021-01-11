@@ -635,7 +635,7 @@ export default {
       dotProps = {
         ...dotProps,
         clickHandler: this.changeSlide,
-        onMouseenter: pauseOnDotsHover ? this.onDotsLeave : noop,
+        onMouseenter: pauseOnDotsHover ? this.onDotsOver : noop,
         onMouseover: pauseOnDotsHover ? this.onDotsOver : noop,
         onMouseleave: pauseOnDotsHover ? this.onDotsLeave : noop,
       };

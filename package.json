@@ -152,7 +152,6 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "mockdate": "^2.0.2",
-    "node-emoji": "^1.10.0",
     "nprogress": "^0.2.0",
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "postcss": "^7.0.6",

@@ -191,6 +191,9 @@ export default {
     const child = this.getDisabledCompatibleChildren(
       isValidElement(children) ? children : <span>{children}</span>,
     );
+    if ($props.disabled) {
+      return child;
+    }
     const childCls = {
       [openClassName || `${prefixCls}-open`]: true,
     };

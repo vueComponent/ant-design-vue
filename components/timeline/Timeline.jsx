@@ -11,7 +11,7 @@ import {
 import { cloneElement } from '../_util/vnode';
 import TimelineItem from './TimelineItem';
 import Icon from '../icon';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 export const TimelineProps = {
   prefixCls: PropTypes.string,

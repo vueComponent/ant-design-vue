@@ -5,7 +5,7 @@ import isRegExp from 'lodash/isRegExp';
 import warning from '../_util/warning';
 import FormItem from './FormItem';
 import { initDefaultProps, getListeners } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 export const FormProps = {
   layout: PropTypes.oneOf(['horizontal', 'inline', 'vertical']),

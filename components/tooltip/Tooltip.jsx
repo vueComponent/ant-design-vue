@@ -10,7 +10,7 @@ import {
   isValidElement,
   getListeners,
 } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import abstractTooltipProps from './abstractTooltipProps';
 
 const splitObject = (obj, keys) => {

@@ -1,6 +1,6 @@
 import PropsTypes from '../_util/vue-types';
 import { getComponentFromProp, getListeners } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Base from '../base';
 export const CommentProps = {
   actions: PropsTypes.array,

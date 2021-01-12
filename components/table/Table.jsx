@@ -11,7 +11,7 @@ import createBodyRow from './createBodyRow';
 import { flatArray, treeMap, flatFilter } from './util';
 import { initDefaultProps, mergeProps, getOptionProps, getListeners } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import { TableProps } from './interface';
 import Pagination from '../pagination';
 import Icon from '../icon';

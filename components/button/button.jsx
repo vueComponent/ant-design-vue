@@ -2,7 +2,7 @@ import Wave from '../_util/wave';
 import Icon from '../icon';
 import buttonTypes from './buttonTypes';
 import { filterEmpty, getListeners, getComponentFromProp } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);

@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import omit from 'omit.js';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 import Spin from '../spin';
 import Pagination, { PaginationConfig } from '../pagination';

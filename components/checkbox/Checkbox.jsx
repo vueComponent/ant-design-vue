@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import classNames from 'classnames';
 import VcCheckbox from '../vc-checkbox';
 import hasProp, { getOptionProps, getAttrs, getListeners } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import warning from '../_util/warning';
 function noop() {}
 

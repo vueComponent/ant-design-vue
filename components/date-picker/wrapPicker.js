@@ -4,7 +4,7 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { generateShowHourMinuteSecond } from '../time-picker';
 import enUS from './locale/en_US';
 import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import { checkValidate, stringToMoment, momentToString } from '../_util/moment-util';
 
 const DEFAULT_FORMAT = {

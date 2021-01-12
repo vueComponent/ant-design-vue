@@ -3,7 +3,7 @@ import { initDefaultProps, getOptionProps, getListeners } from '../_util/props-u
 import classNames from 'classnames';
 import Icon from '../icon';
 import VcInputNumber from '../vc-input-number/src';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Base from '../base';
 
 export const InputNumberProps = {

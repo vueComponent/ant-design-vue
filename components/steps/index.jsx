@@ -2,7 +2,7 @@ import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getOptionProps, getListeners } from '../_util/props-util';
 import VcSteps from '../vc-steps';
 import Icon from '../icon';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Base from '../base';
 
 const getStepsProps = (defaultProps = {}) => {

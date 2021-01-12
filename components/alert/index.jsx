@@ -5,7 +5,7 @@ import PropTypes from '../_util/vue-types';
 import getTransitionProps from '../_util/getTransitionProps';
 import { getComponentFromProp, isValidElement } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Base from '../base';
 
 function noop() {}

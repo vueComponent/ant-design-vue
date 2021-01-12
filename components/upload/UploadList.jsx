@@ -1,7 +1,7 @@
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
 import getTransitionProps from '../_util/getTransitionProps';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import { previewImage, isImageUrl } from './utils';
 import Icon from '../icon';
 import Tooltip from '../tooltip';

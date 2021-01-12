@@ -1,6 +1,6 @@
 import { filterEmpty } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 const ButtonGroupProps = {
   prefixCls: PropTypes.string,

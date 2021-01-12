@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, hasProp } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Avatar, { SkeletonAvatarProps } from './Avatar';
 import Title, { SkeletonTitleProps } from './Title';
 import Paragraph, { SkeletonParagraphProps } from './Paragraph';

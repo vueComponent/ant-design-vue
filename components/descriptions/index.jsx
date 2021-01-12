@@ -1,6 +1,6 @@
 import warning from '../_util/warning';
 import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Col from './Col';
 import PropTypes from '../_util/vue-types';
 import {

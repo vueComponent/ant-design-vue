@@ -3,7 +3,7 @@ import TextArea from './TextArea';
 import omit from 'omit.js';
 import inputProps from './inputProps';
 import { hasProp, getComponentFromProp, getListeners, getOptionProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import ClearableLabeledInput from './ClearableLabeledInput';
 
 function noop() {}

@@ -1,4 +1,4 @@
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import PropTypes from '../_util/vue-types';
 
 export default {

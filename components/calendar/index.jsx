@@ -6,7 +6,7 @@ import FullCalendar from '../vc-calendar/src/FullCalendar';
 import Header from './Header';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import interopDefault from '../_util/interopDefault';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import enUS from './locale/en_US';
 import Base from '../base';
 import { checkValidate, stringToMoment, momentToString, TimeType } from '../_util/moment-util';

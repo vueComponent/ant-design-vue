@@ -6,7 +6,7 @@ import { mentionsProps } from '../vc-mentions/src/mentionsProps';
 import Base from '../base';
 import Spin from '../spin';
 import BaseMixin from '../_util/BaseMixin';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import {
   getOptionProps,
   getComponentFromProp,

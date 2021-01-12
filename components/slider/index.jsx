@@ -6,7 +6,7 @@ import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
 import Tooltip from '../tooltip';
 import Base from '../base';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 
 // export interface SliderMarks {

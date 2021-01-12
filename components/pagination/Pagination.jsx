@@ -6,7 +6,7 @@ import { getOptionProps, getListeners } from '../_util/props-util';
 import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
 import Icon from '../icon';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 export const PaginationProps = () => ({
   total: PropTypes.number,

@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import Empty from '../empty';
-import { ConfigConsumerProps } from './';
+import { ConfigConsumerProps } from './configConsumerProps';
 
 const RenderEmpty = {
   functional: true,

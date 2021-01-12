@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import BaseMixin from '../_util/BaseMixin';
 import Pickr from '@simonwep/pickr/dist/pickr.es5.min';
 import Icon from '../icon';

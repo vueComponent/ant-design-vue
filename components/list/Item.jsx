@@ -7,7 +7,7 @@ import {
   isEmptyElement,
 } from '../_util/props-util';
 import { Col } from '../grid';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import { ListGridType } from './index';
 import { cloneElement } from '../_util/vnode';
 

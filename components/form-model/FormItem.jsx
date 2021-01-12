@@ -11,7 +11,7 @@ import {
   isValidElement,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import FormItem from '../form/FormItem';
 import { cloneElement } from '../_util/vnode';
 

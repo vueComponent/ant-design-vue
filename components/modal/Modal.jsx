@@ -16,7 +16,7 @@ import {
   mergeProps,
   getListeners,
 } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 let mousePosition = null;
 // ref: https://github.com/ant-design/ant-design/issues/15795

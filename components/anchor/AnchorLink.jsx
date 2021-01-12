@@ -1,7 +1,7 @@
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps, getComponentFromProp } from '../_util/props-util';
 import classNames from 'classnames';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 export const AnchorLinkProps = {
   prefixCls: PropTypes.string,

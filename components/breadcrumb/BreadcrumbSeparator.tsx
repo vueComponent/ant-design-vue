@@ -24,7 +24,7 @@ export default defineComponent({
     const children = getSlot(this);
     return (
       <span class={[`${prefixCls}-separator`, className]} {...restAttrs}>
-        {(children.length > 0 && children) || '/'}
+        {children.length > 0 ? children : '/'}
       </span>
     );
   },

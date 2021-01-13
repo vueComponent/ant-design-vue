@@ -67,7 +67,7 @@ export const DatePickerProps = {
   showTime: withUndefined(PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool])),
   open: PropTypes.looseBool,
   disabledTime: PropTypes.func,
-  mode: PropTypes.oneOf(tuple('time', 'date', 'month', 'year')),
+  mode: PropTypes.oneOf(tuple('time', 'date', 'month', 'year', 'decade')),
   onOpenChange: PropTypes.func,
   onPanelChange: PropTypes.func,
   onOk: PropTypes.func,

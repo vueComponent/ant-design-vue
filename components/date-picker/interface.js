@@ -50,7 +50,7 @@ export const DatePickerProps = () => ({
   disabledTime: PropTypes.func,
   // onOpenChange?: (status: bool) => void;
   // onOk?: (selectedTime: moment.Moment) => void;
-  mode: PropTypes.oneOf(['time', 'date', 'month', 'year']),
+  mode: PropTypes.oneOf(['time', 'date', 'month', 'year', 'decade']),
 });
 
 export const MonthPickerProps = () => ({

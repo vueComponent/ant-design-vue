@@ -1,6 +1,6 @@
 import { getOptionProps, getComponentFromProp, getListeners } from '../_util/props-util';
 import VcCollapse, { panelProps } from '../vc-collapse';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 export default {
   name: 'ACollapsePanel',

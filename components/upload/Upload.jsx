@@ -7,7 +7,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps, hasProp, getListeners } from '../_util/props-util';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Dragger from './Dragger';
 import UploadList from './UploadList';
 import { UploadProps } from './interface';

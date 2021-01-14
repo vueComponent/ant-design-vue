@@ -6,7 +6,7 @@ import scrollTo from '../_util/scrollTo';
 import getScroll from '../_util/getScroll';
 import { initDefaultProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 function getDefaultContainer() {
   return window;

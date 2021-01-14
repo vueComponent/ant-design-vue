@@ -8,7 +8,7 @@ import Item from './MenuItem';
 import { hasProp, getListeners, getOptionProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import commonPropsType from '../vc-menu/commonPropsType';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Base from '../base';
 // import raf from '../_util/raf';
 

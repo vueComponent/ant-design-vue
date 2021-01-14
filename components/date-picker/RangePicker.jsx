@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import shallowequal from 'shallowequal';
 import Icon from '../icon';
 import Tag from '../tag';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import interopDefault from '../_util/interopDefault';
 import { RangePickerProps } from './interface';
 import {

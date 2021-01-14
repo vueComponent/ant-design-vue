@@ -9,7 +9,7 @@ import {
   getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 export const SpinSize = PropTypes.oneOf(['small', 'default', 'large']);
 

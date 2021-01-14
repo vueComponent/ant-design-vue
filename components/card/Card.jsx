@@ -10,7 +10,7 @@ import {
   getListeners,
 } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 const { TabPane } = Tabs;
 export default {

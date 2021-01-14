@@ -5,7 +5,7 @@ import omit from 'omit.js';
 import Wave from '../_util/wave';
 import { hasProp, getListeners, getOptionProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import warning from '../_util/warning';
 
 const PresetColorTypes = [

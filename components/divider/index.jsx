@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Base from '../base';
 
 const Divider = {

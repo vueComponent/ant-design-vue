@@ -4,7 +4,7 @@ import MonthCalendar from '../vc-calendar/src/MonthCalendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
 import classNames from 'classnames';
 import Icon from '../icon';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import interopDefault from '../_util/interopDefault';
 import BaseMixin from '../_util/BaseMixin';
 import {

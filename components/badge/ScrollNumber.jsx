@@ -4,7 +4,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { getStyle } from '../_util/props-util';
 import omit from 'omit.js';
 import { cloneElement } from '../_util/vnode';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 function getNumberArray(num) {
   return num

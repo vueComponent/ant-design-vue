@@ -6,7 +6,7 @@ import hasProp, {
   filterEmpty,
   getListeners,
 } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Base from '../base';
 import warning from '../_util/warning';
 import classNames from 'classnames';

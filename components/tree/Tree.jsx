@@ -10,7 +10,7 @@ import {
   getListeners,
 } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Icon from '../icon';
 
 function TreeProps() {

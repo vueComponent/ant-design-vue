@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Icon from '../icon';
 import Base from '../base';
 import noFound from './noFound';

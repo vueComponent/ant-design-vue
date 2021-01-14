@@ -6,7 +6,7 @@ import {
   getComponentFromProp,
   getListeners,
 } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 export const TimeLineItemProps = {
   prefixCls: PropTypes.string,

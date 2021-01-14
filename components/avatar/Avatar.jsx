@@ -1,4 +1,4 @@
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Icon from '../icon';
 import { getListeners, getComponentFromProp } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';

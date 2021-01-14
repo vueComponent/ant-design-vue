@@ -1,6 +1,6 @@
 import Radio from './Radio';
 import { getOptionProps, getListeners } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 export default {
   name: 'ARadioButton',

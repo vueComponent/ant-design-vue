@@ -3,7 +3,7 @@ import hasProp, { getOptionProps, getComponentFromProp, getListeners } from '../
 import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
 import Icon from '../icon';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Base from '../base';
 import warning from '../_util/warning';
 

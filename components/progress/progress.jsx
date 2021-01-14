@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, initDefaultProps, getListeners } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Icon from '../icon';
 import Line from './line';
 import Circle from './circle';

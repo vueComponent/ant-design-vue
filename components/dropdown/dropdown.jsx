@@ -9,7 +9,7 @@ import {
   getListeners,
 } from '../_util/props-util';
 import getDropdownProps from './getDropdownProps';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import Icon from '../icon';
 
 const DropdownProps = getDropdownProps();

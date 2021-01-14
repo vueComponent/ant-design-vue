@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, initDefaultProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 export const SpaceSizeType = PropTypes.oneOfType([
   PropTypes.number,

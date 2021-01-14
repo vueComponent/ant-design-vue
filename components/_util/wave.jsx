@@ -1,6 +1,6 @@
 import TransitionEvents from './css-animation/Event';
 import raf from './raf';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 let styleForPesudo;
 
 // Where el is the DOM element you'd like to test for visibility

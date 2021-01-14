@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { getComponentFromProp, initDefaultProps } from '../_util/props-util';
-import { ConfigConsumerProps } from '../config-provider';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 import StatisticNumber from './Number';
 
 export const StatisticProps = {

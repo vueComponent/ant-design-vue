@@ -153,6 +153,9 @@
   background-color: @component-background;
   background-clip: padding-box;
   border: @border-width-base @border-style-base @border-color-inverse;
+  & when (@theme = dark) {
+    border-color: @black;
+  }
   border-radius: @border-radius-base;
   outline: none;
   box-shadow: @box-shadow-base;

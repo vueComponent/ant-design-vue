@@ -3,7 +3,7 @@ import { defaultConfigProvider } from '../config-provider';
 
 const Simple = () => {
   const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
-  const prefixCls = getPrefixCls('empty-img-default');
+  const prefixCls = getPrefixCls('empty-img-simple');
 
   return (
     <svg class={prefixCls} width="64" height="41" viewBox="0 0 64 41">

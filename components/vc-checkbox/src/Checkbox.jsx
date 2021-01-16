@@ -69,6 +69,10 @@ export default defineComponent({
       if (!('checked' in props)) {
         this.sChecked = e.target.checked;
       }
+      // fix https://github.com/vueComponent/ant-design-vue/issues/3047
+      if ('checked' in props) {
+        this.$refs.input.checked = props.checked;
+      }
       this.$forceUpdate(); // change前，维持现有状态
       e.shiftKey = this.eventShiftKey;
       const eventObj = {

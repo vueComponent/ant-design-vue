@@ -604,7 +604,6 @@ export default {
       ...trackProps,
       focusOnSelect: this.focusOnSelect ? this.selectHandler : null,
       ref: this.trackRefHandler,
-      onMouseenter: pauseOnHover ? this.onTrackOver : noop,
       onMouseleave: pauseOnHover ? this.onTrackLeave : noop,
       onMouseover: pauseOnHover ? this.onTrackOver : noop,
     };
@@ -635,7 +634,6 @@ export default {
       dotProps = {
         ...dotProps,
         clickHandler: this.changeSlide,
-        onMouseenter: pauseOnDotsHover ? this.onDotsLeave : noop,
         onMouseover: pauseOnDotsHover ? this.onDotsOver : noop,
         onMouseleave: pauseOnDotsHover ? this.onDotsLeave : noop,
       };

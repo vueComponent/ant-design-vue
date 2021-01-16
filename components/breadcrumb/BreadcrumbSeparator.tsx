@@ -6,6 +6,7 @@ import { getSlot } from '../_util/props-util';
 export default defineComponent({
   name: 'ABreadcrumbSeparator',
   __ANT_BREADCRUMB_SEPARATOR: true,
+  inheritAttrs: false,
   props: {
     prefixCls: PropTypes.string,
   },
@@ -16,10 +17,15 @@ export default defineComponent({
   },
   render() {
     const { prefixCls: customizePrefixCls } = this;
+    const { separator, class: className, ...restAttrs } = this.$attrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
 
     const children = getSlot(this);
-    return <span class={`${prefixCls}-separator`}>{children || '/'}</span>;
+    return (
+      <span class={[`${prefixCls}-separator`, className]} {...restAttrs}>
+        {children.length > 0 ? children : '/'}
+      </span>
+    );
   },
 });

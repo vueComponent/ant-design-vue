@@ -41,6 +41,8 @@
 @body-background: #fff;
 // Base background color for most components
 @component-background: #fff;
+// Popover background color
+@popover-background: @component-background;
 @font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
   'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif, 'Apple Color Emoji',
   'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -92,6 +94,8 @@
 @link-active-color: color(~`colorPalette('@{link-color}', 7) `);
 @link-decoration: none;
 @link-hover-decoration: none;
+@link-focus-decoration: none;
+@link-focus-outline: 0;
 
 // Animation
 @ease-base-out: cubic-bezier(0.7, 0.3, 0.1, 1);
@@ -164,6 +168,10 @@
 @btn-disable-bg: @disabled-bg;
 @btn-disable-border: @border-color-base;
 
+@btn-default-ghost-color: @component-background;
+@btn-default-ghost-bg: transparent;
+@btn-default-ghost-border: @component-background;
+
 @btn-padding-base: 0 @padding-md - 1px;
 @btn-font-size-lg: @font-size-lg;
 @btn-font-size-sm: @font-size-base;
@@ -184,10 +192,13 @@
 
 @btn-group-border: @primary-5;
 
+@btn-text-hover-bg: rgba(0, 0, 0, 0.018);
+
 // Checkbox
 @checkbox-size: 16px;
 @checkbox-color: @primary-color;
 @checkbox-check-color: #fff;
+@checkbox-check-bg: @checkbox-check-color;
 @checkbox-border-width: @border-width-base;
 
 // Descriptions
@@ -202,15 +213,26 @@
 @descriptions-item-label-colon-margin-left: 2px;
 @descriptions-extra-color: @text-color;
 
+// Divider
+@divider-text-padding: 1em;
+@divider-orientation-margin: 5%;
+@divider-color: rgba(0, 0, 0, 6%);
+
 // Dropdown
 @dropdown-selected-color: @primary-color;
+@dropdown-menu-submenu-disabled-bg: @component-background;
 
 // Empty
 @empty-font-size: @font-size-base;
 
 // Radio
 @radio-size: 16px;
+@radio-top: 0px;
+@radio-border-width: 1px;
+@radio-dot-size: @radio-size - 8px;
 @radio-dot-color: @primary-color;
+@radio-dot-disabled-color: fade(@black, 20%);
+@radio-solid-checked-color: @component-background;
 
 // Radio buttons
 @radio-button-bg: @btn-default-bg;
@@ -218,6 +240,9 @@
 @radio-button-color: @btn-default-color;
 @radio-button-hover-color: @primary-5;
 @radio-button-active-color: @primary-7;
+@radio-disabled-button-checked-bg: tint(@black, 90%);
+@radio-disabled-button-checked-color: @disabled-color;
+@radio-wrapper-margin-right: 8px;
 
 // Media queries breakpoints
 // Extra small screen / phone
@@ -299,6 +324,7 @@
 @collapse-panel-border-radius: @border-radius-base;
 
 //Dropdown
+@dropdown-menu-bg: @component-background;
 @dropdown-vertical-padding: 5px;
 @dropdown-edge-child-vertical-padding: 4px;
 @dropdown-font-size: @font-size-base;
@@ -331,6 +357,7 @@
 @input-padding-vertical-lg: 6.5px;
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-color: @text-color;
+@input-icon-color: @input-color;
 @input-border-color: @border-color-base;
 @input-bg: @component-background;
 @input-number-hover-border-color: @input-hover-border-color;
@@ -342,6 +369,12 @@
 @input-hover-border-color: @primary-5;
 @input-disabled-bg: @disabled-bg;
 @input-outline-offset: 0 0;
+@input-icon-hover-color: fade(@black, 85%);
+
+// Mentions
+// ---
+@mentions-dropdown-bg: @component-background;
+@mentions-dropdown-menu-item-hover-bg: @mentions-dropdown-bg;
 
 // Select
 // ---
@@ -366,6 +399,13 @@
 @select-multiple-disabled-background: @input-disabled-bg;
 @select-multiple-item-disabled-color: #bfbfbf;
 @select-multiple-item-disabled-border-color: @select-border-color;
+
+// Cascader
+// ---
+@cascader-bg: @component-background;
+@cascader-item-selected-bg: @primary-1;
+@cascader-menu-bg: @component-background;
+@cascader-menu-border-color-split: @border-color-split;
 
 // Cascader
 // ----
@@ -416,6 +456,7 @@
 @modal-body-padding: 24px;
 @modal-header-bg: @component-background;
 @modal-header-border-color-split: @border-color-split;
+@modal-content-bg: @component-background;
 @modal-heading-color: @heading-color;
 @modal-footer-bg: transparent;
 @modal-footer-border-color-split: @border-color-split;
@@ -531,6 +572,7 @@
 
 // Comment
 // ---
+@comment-bg: inherit;
 @comment-padding-base: 16px 0;
 @comment-nest-indent: 44px;
 @comment-font-size-base: @font-size-base;
@@ -588,15 +630,21 @@
 @switch-sm-checked-margin-left: -(@switch-sm-height - 3px);
 @switch-disabled-opacity: 0.4;
 @switch-color: @primary-color;
+@switch-bg: @component-background;
 @switch-shadow-color: fade(#00230b, 20%);
 
 // Pagination
 // ---
+@pagination-item-bg: @component-background;
 @pagination-item-size: 32px;
 @pagination-item-size-sm: 24px;
 @pagination-font-family: Arial;
 @pagination-font-weight-active: 500;
 @pagination-item-bg-active: @component-background;
+@pagination-item-link-bg: @component-background;
+@pagination-item-disabled-color-active: @white;
+@pagination-item-disabled-bg-active: darken(@disabled-bg, 10%);
+@pagination-item-input-bg: @component-background;
 
 // PageHeader
 // ---
@@ -656,16 +704,19 @@
 // Skeleton
 // ---
 @skeleton-color: #f2f2f2;
+@skeleton-to-color: shade(@skeleton-color, 5%);
 
 // Transfer
 // ---
 @transfer-header-height: 40px;
 @transfer-disabled-bg: @disabled-bg;
 @transfer-list-height: 200px;
+@transfer-item-hover-bg: @item-hover-bg;
 
 // Message
 // ---
 @message-notice-content-padding: 10px 16px;
+@message-notice-content-bg: @component-background;
 
 // Motion
 // ---
@@ -707,6 +758,7 @@
 // ---
 @drawer-header-padding: 16px 24px;
 @drawer-body-padding: 24px;
+@drawer-bg: @component-background;
 
 // Timeline
 // ---
@@ -731,3 +783,13 @@
 @image-preview-operation-size: 18px;
 @image-preview-operation-color: @text-color-dark;
 @image-preview-operation-disabled-color: fade(@image-preview-operation-color, 45%);
+
+// Steps
+@steps-nav-arrow-color: fade(@black, 25%);
+@steps-background: @component-background;
+
+// Notification
+// ---
+@notification-bg: @component-background;
+@notification-padding-vertical: 16px;
+@notification-padding-horizontal: 24px;

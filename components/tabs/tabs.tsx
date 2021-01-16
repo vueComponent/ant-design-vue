@@ -28,6 +28,7 @@ export default defineComponent({
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     hideAdd: PropTypes.looseBool.def(false),
+    centered: PropTypes.looseBool.def(false),
     tabBarStyle: PropTypes.object,
     tabBarExtraContent: PropTypes.any,
     destroyInactiveTabPane: PropTypes.looseBool.def(false),

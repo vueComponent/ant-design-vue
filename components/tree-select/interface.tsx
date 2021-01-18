@@ -35,7 +35,10 @@ export const TreeSelectProps = () => ({
   multiple: PropTypes.looseBool,
   notFoundContent: PropTypes.VNodeChild,
   searchPlaceholder: PropTypes.string,
-  searchValue: PropTypes.string,
+  searchValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.looseBool,
+  ]),
   showCheckedStrategy: PropTypes.oneOf(tuple('SHOW_ALL', 'SHOW_PARENT', 'SHOW_CHILD')),
   suffixIcon: PropTypes.VNodeChild,
   treeCheckable: PropTypes.looseBool,

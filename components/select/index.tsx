@@ -8,7 +8,7 @@ import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 
-type RawValue = string | number;
+type RawValue = string | number | boolean;
 
 export type OptionProps = OptionPropsType;
 
@@ -51,10 +51,10 @@ export const SelectProps = () => ({
     'inputIcon' | 'mode' | 'getInputElement' | 'backfill' | 'class' | 'style'
   >),
   value: {
-    type: [Array, Object, String, Number] as PropType<SelectValue>,
+    type: [Array, Object, String, Number, Boolean] as PropType<SelectValue>,
   },
   defaultValue: {
-    type: [Array, Object, String, Number] as PropType<SelectValue>,
+    type: [Array, Object, String, Number, Boolean] as PropType<SelectValue>,
   },
   notFoundContent: PropTypes.VNodeChild,
   suffixIcon: PropTypes.VNodeChild,
@@ -80,13 +80,13 @@ const Select = defineComponent({
     const configProvider = inject('configProvider', defaultConfigProvider);
 
     const focus = () => {
-      if (selectRef.value) {
+      if (selectRef.value !== undefined && selectRef.value !== null) {
         selectRef.value.focus();
       }
     };
 
     const blur = () => {
-      if (selectRef.value) {
+      if (selectRef.value !== undefined && selectRef.value !== null) {
         selectRef.value.blur();
       }
     };

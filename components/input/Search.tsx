@@ -167,7 +167,7 @@ export default defineComponent({
         [`${prefixCls}-${size}`]: !!size,
       });
     } else {
-      inputClassName = prefixCls;
+      inputClassName = classNames(prefixCls, className);
     }
 
     const inputProps = {

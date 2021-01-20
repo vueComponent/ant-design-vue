@@ -366,7 +366,15 @@ const Cascader = defineComponent({
       }
     },
 
-    generateFilteredOptions(prefixCls: string | undefined, renderEmpty: RenderEmptyHandler) {
+    generateFilteredOptions(
+      prefixCls: string | undefined,
+      renderEmpty: RenderEmptyHandler,
+    ): {
+      [x: string]: any;
+      __IS_FILTERED_OPTION?: boolean;
+      path?: CascaderOptionType[];
+      disabled: boolean;
+    }[] {
       const { showSearch, notFoundContent } = this;
       const names: FilledFieldNamesType = getFilledFieldNames(this.$props);
       const {

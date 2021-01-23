@@ -28,7 +28,7 @@ const Switch = defineComponent({
     onClick: PropTypes.func,
     'onUpdate:checked': PropTypes.func,
   },
-  emits: ['change', 'click', 'update:checked'],
+  // emits: ['change', 'click', 'update:checked'],
   setup() {
     return {
       refSwitchNode: undefined,
@@ -61,7 +61,7 @@ const Switch = defineComponent({
     const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('switch', customizePrefixCls);
     const { $attrs } = this;
-
+      console.log(restProps, $attrs)
     const classes = {
       [$attrs.class as string]: $attrs.class,
       [`${prefixCls}-small`]: size === 'small',

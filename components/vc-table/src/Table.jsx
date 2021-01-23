@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { provide, markRaw, defineComponent } from 'vue';
+import { provide, markRaw, defineComponent, nextTick } from 'vue';
 import shallowequal from '../../_util/shallowequal';
 import merge from 'lodash-es/merge';
 import classes from '../../_util/component-classes';
@@ -109,6 +109,11 @@ export default defineComponent({
       ),
     };
   },
+  computed: {
+    dataLen() {
+      return this.$props.data.length;
+    },
+  },
   watch: {
     components() {
       this._components = merge(
@@ -133,9 +138,9 @@ export default defineComponent({
         this.columnManager.reset(val);
       }
     },
-    data(val) {
-      if (val.length === 0 && this.hasScrollX()) {
-        this.$nextTick(() => {
+    dataLen(val, preVal) {
+      if ((val === 0 || preVal === 0) && this.hasScrollX()) {
+        nextTick(() => {
           this.resetScrollX();
         });
       }
@@ -146,7 +151,6 @@ export default defineComponent({
   //   table: PropTypes.any,
   //   components: PropTypes.any,
   // },
-
   created() {
     provide('table', this);
     // ['rowClick', 'rowDoubleclick', 'rowContextmenu', 'rowMouseenter', 'rowMouseleave'].forEach(

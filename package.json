@@ -90,7 +90,7 @@
     "@types/raf": "^3.4.0",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
-    "@vue/babel-plugin-jsx": "^1.0.0-rc.5",
+    "@vue/babel-plugin-jsx": "^1.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/compiler-sfc": "^3.0.4",
     "@vue/eslint-config-prettier": "^6.0.0",

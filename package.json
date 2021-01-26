@@ -1,6 +1,6 @@
 {
   "name": "ant-design-vue",
-  "version": "2.0.0-rc.8",
+  "version": "2.0.0-rc.9",
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation",
   "keywords": [
@@ -90,7 +90,7 @@
     "@types/raf": "^3.4.0",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
-    "@vue/babel-plugin-jsx": "^1.0.0-rc.5",
+    "@vue/babel-plugin-jsx": "^1.0.0",
     "@vue/cli-plugin-eslint": "^4.0.0",
     "@vue/compiler-sfc": "^3.0.4",
     "@vue/eslint-config-prettier": "^6.0.0",
@@ -206,7 +206,7 @@
   },
   "dependencies": {
     "@ant-design-vue/use": "^0.0.1-0",
-    "@ant-design/icons-vue": "^5.1.9",
+    "@ant-design/icons-vue": "^6.0.0",
     "@babel/runtime": "^7.10.5",
     "@simonwep/pickr": "~1.8.0",
     "array-tree-filter": "^2.1.0",

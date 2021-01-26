@@ -4,7 +4,8 @@ const transformIgnorePatterns = [
   '/dist/',
   // Ignore modules without es dir.
   // Update: @babel/runtime should also be transformed
-  'node_modules/(?!.*(@babel|lodash-es))[^/]+?/(?!(es|node_modules)/)',
+  // 'node_modules/(?!.*(@babel|lodash-es))',
+  'node_modules/(?!@ant-design/icons-vue|@ant-design/icons-svg|lodash-es)/',
 ];
 const testPathIgnorePatterns = ['/node_modules/', 'node'];
 if (process.env.WORKFLOW === 'true') {

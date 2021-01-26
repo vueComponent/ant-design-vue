@@ -52,7 +52,9 @@ export const columnProps = {
   // onHeaderCell?: (props: ColumnProps<T>) => any;
 };
 
-export type ColumnProps = Partial<ExtractPropTypes<typeof columnProps>>;
+export type ColumnProps = Partial<ExtractPropTypes<typeof columnProps>> & {
+  slots?: Record<string, string>;
+};
 
 export interface TableComponents {
   table?: any;

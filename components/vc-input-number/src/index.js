@@ -265,6 +265,10 @@ export default defineComponent({
 
       this.__emit('keyup', e, ...args);
     },
+    onTrigger(e) {
+      if (e.target.composing) return false;
+      this.onChange(e);
+    },
     onChange(e) {
       if (this.$data.focused) {
         this.inputting = true;
@@ -631,6 +635,13 @@ export default defineComponent({
     saveInput(node) {
       this.inputRef = node;
     },
+    onCompositionstart(e) {
+      e.target.composing = true;
+    },
+    onCompositionend(e) {
+      this.onChange(e);
+      e.target.composing = false;
+    },
   },
   render() {
     const props = { ...this.$props, ...this.$attrs };
@@ -791,7 +802,9 @@ export default defineComponent({
             name={this.name}
             title={this.title}
             id={this.id}
-            onInput={this.onChange}
+            onInput={this.onTrigger}
+            onCompositionstart={this.onCompositionstart}
+            onCompositionend={this.onCompositionend}
             ref={this.saveInput}
             value={inputDisplayValue}
             pattern={this.pattern}

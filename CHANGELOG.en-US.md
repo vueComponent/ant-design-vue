@@ -10,6 +10,23 @@
 
 ---
 
+## 2.0.0-rc.9
+
+`2021-01-24`
+
+- 🌟 `@ant-design/icons-vue` upgrade to 6.0, use es module by default
+- 🌟 `Tabs` adds `centered` centered mode [#3501](https://github.com/vueComponent/ant-design-vue/issues/3501)
+- 🐞 `Progress` Add opacity animation [#3505](https://github.com/vueComponent/ant-design-vue/issues/3505)
+- 🐞 Fix an error when installing npm [#3515](https://github.com/vueComponent/ant-design-vue/issues/3515)
+- 🐞 Fix the problem of `Breadcrumn` split line not displaying [#3522](https://github.com/vueComponent/ant-design-vue/issues/3522)
+- 🐞 Fix `Radio` uncontrolled issue [#3517](https://github.com/vueComponent/ant-design-vue/issues/3517)
+- 🐞 Fix `FormItem` not wrapping issue [#3538](https://github.com/vueComponent/ant-design-vue/issues/3538)
+- 🐞 Fix `Carousel` `pauseOnDotsHover` not working problem [#3519](https://github.com/vueComponent/ant-design-vue/issues/3519)
+- 🐞 Fix `Input.Search` `class` not working issue [#3541](https://github.com/vueComponent/ant-design-vue/issues/3541)
+- 🐞 Fix the issue that `InputNumber` triggers the change event multiple times under Microsoft input method [#3550](https://github.com/vueComponent/ant-design-vue/issues/3550)
+- 🐞 Fix the problem that the keyboard can still be switched in the disabled state of `Tabs` [#3575](https://github.com/vueComponent/ant-design-vue/issues/3575)
+- 🐞 Fix the issue that `Switch` does not take effect in the table [#3512](https://github.com/vueComponent/ant-design-vue/issues/3512)
+
 ## 2.0.0-rc.8
 
 `2021-01-07`

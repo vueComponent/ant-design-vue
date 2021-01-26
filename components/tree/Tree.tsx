@@ -1,4 +1,4 @@
-import { defineComponent, inject, VNode, PropType } from 'vue';
+import { defineComponent, inject, VNode, PropType, CSSProperties } from 'vue';
 import classNames from '../_util/classNames';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import FileOutlined from '@ant-design/icons-vue/FileOutlined';
@@ -24,22 +24,22 @@ export interface TreeDataItem {
   disableCheckbox?: boolean;
   disabled?: boolean;
   class?: string;
-  style?: any;
+  style?: CSSProperties;
   checkable?: boolean;
-  icon?: any;
-  slots?: any;
-  switcherIcon?: any;
+  icon?: VNode;
+  slots?: Record<string, string>;
+  switcherIcon?: VNode;
 }
 
 interface DefaultEvent {
   nativeEvent: MouseEvent;
-  node: any;
+  node: Record<string, any>;
 }
 
 export interface CheckEvent extends DefaultEvent {
   checked: boolean;
-  checkedNodes: VNode[];
-  checkedNodesPositions: { node: VNode; pos: string | number }[];
+  checkedNodes: Array<Record<string, any>>;
+  checkedNodesPositions: { node: Record<string, any>; pos: string | number }[];
   event: string;
   halfCheckedKeys: (string | number)[];
 }
@@ -51,7 +51,22 @@ export interface ExpendEvent extends DefaultEvent {
 export interface SelectEvent extends DefaultEvent {
   event: string;
   selected: boolean;
-  selectedNodes: VNode[];
+  selectedNodes: Array<Record<string, any>>;
+}
+
+export interface TreeDragEvent {
+  event: DragEvent;
+  expandedKeys: (string | number)[];
+  node: Record<string, any>;
+}
+
+export interface DropEvent {
+  dragNode: Record<string, any>;
+  dragNodesKeys: (string | number)[];
+  dropPosition: number;
+  dropToGap: boolean;
+  event: DragEvent;
+  node: Record<string, any>;
 }
 
 function TreeProps() {
@@ -263,7 +278,7 @@ export default defineComponent({
       onCheck: this.handleCheck,
       onExpand: this.handleExpand,
       onSelect: this.handleSelect,
-    } as any;
+    } as Record<string, any>;
     if (treeData) {
       vcTreeProps.treeData = treeData;
     }

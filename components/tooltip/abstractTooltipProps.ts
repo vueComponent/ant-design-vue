@@ -22,6 +22,7 @@ export default () => ({
       'rightBottom',
     ),
   ).def('top'),
+  color: PropTypes.string,
   transitionName: PropTypes.string.def('zoom-big-fast'),
   overlayStyle: PropTypes.object.def(() => ({})),
   overlayClassName: PropTypes.string,

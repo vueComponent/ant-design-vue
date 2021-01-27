@@ -1,8 +1,9 @@
-import { defineComponent, ExtractPropTypes, inject } from 'vue';
+import { defineComponent, ExtractPropTypes, inject, CSSProperties } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import classNames from '../_util/classNames';
 import getPlacements from './placements';
 import PropTypes from '../_util/vue-types';
+import { PresetColorTypes } from '../_util/colors';
 import {
   hasProp,
   getComponent,
@@ -27,6 +28,8 @@ const splitObject = (obj: any, keys: string[]) => {
   return { picked, omitted };
 };
 const props = abstractTooltipProps();
+
+const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 
 const tooltipProps = {
   ...props,
@@ -176,7 +179,13 @@ export default defineComponent({
 
   render() {
     const { $props, $data, $attrs } = this;
-    const { prefixCls: customizePrefixCls, openClassName, getPopupContainer } = $props;
+    const {
+      prefixCls: customizePrefixCls,
+      openClassName,
+      getPopupContainer,
+      color,
+      overlayClassName,
+    } = $props;
     const { getPopupContainer: getContextPopupContainer } = this.configProvider;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
@@ -197,6 +206,16 @@ export default defineComponent({
       [openClassName || `${prefixCls}-open`]: sVisible,
       [child.props && child.props.class]: child.props && child.props.class,
     });
+    const customOverlayClassName = classNames(overlayClassName, {
+      [`${prefixCls}-${color}`]: color && PresetColorRegex.test(color),
+    });
+    let formattedOverlayInnerStyle: CSSProperties;
+    let arrowContentStyle: CSSProperties;
+    if (color && !PresetColorRegex.test(color)) {
+      formattedOverlayInnerStyle = { backgroundColor: color };
+      arrowContentStyle = { backgroundColor: color };
+    }
+
     const vcTooltipProps = {
       ...$attrs,
       ...$props,
@@ -206,6 +225,9 @@ export default defineComponent({
       overlay: this.getOverlay(),
       visible: sVisible,
       ref: 'tooltip',
+      overlayClassName: customOverlayClassName,
+      overlayInnerStyle: formattedOverlayInnerStyle,
+      arrowContent: <span class={`${prefixCls}-arrow-content`} style={arrowContentStyle}></span>,
       onVisibleChange: this.handleVisibleChange,
       onPopupAlign: this.onPopupAlign,
     };

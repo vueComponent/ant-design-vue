@@ -28,10 +28,11 @@ export default defineComponent({
     arrowContent: PropTypes.any.def(null),
     tipId: PropTypes.string,
     builtinPlacements: PropTypes.object,
+    overlayInnerStyle: PropTypes.style,
   },
   methods: {
     getPopupElement() {
-      const { prefixCls, tipId } = this.$props;
+      const { prefixCls, tipId, overlayInnerStyle } = this.$props;
       return [
         <div class={`${prefixCls}-arrow`} key="arrow">
           {getComponent(this, 'arrowContent')}
@@ -42,6 +43,7 @@ export default defineComponent({
           prefixCls={prefixCls}
           id={tipId}
           overlay={getComponent(this, 'overlay')}
+          overlayInnerStyle={overlayInnerStyle}
         />,
       ];
     },

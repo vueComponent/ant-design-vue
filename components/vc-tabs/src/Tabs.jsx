@@ -3,7 +3,7 @@ import BaseMixin from '../../_util/BaseMixin';
 import PropTypes from '../../_util/vue-types';
 import raf from 'raf';
 import KeyCode from './KeyCode';
-import { getOptionProps, getListeners } from '../../_util/props-util';
+import { getOptionProps, getListeners, getValueByProp } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import Sentinel from './Sentinel';
 import isValid from '../../_util/isValid';
@@ -154,7 +154,8 @@ export default {
       const activeKey = this.$data._activeKey;
       const children = [];
       this.$props.children.forEach(c => {
-        if (c && !c.disabled && c.disabled !== '') {
+        const disabled = getValueByProp(c, 'disabled');
+        if (c && !disabled && disabled !== '') {
           if (next) {
             children.push(c);
           } else {

@@ -92,6 +92,7 @@ const SubPopupMenu = {
       parentMenu: PropTypes.object,
       eventKey: PropTypes.string,
       store: PropTypes.object,
+      forceSubMenuRender: PropTypes.bool,
 
       // adding in refactor
       focusable: PropTypes.bool,

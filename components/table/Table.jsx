@@ -141,7 +141,7 @@ export default {
     // this.columns = props.columns || normalizeColumns(props.children)
     const props = getOptionProps(this);
     warning(
-      !props.expandedRowRender || !('scroll' in props),
+      !props.expandedRowRender || !('scroll' in props) || !props.scroll.x,
       '`expandedRowRender` and `scroll` are not compatible. Please use one of them at one time.',
     );
     this.CheckboxPropsCache = {};

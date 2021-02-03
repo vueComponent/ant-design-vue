@@ -75,10 +75,15 @@ async function validateRule(
     subRuleField = cloneRule.defaultField;
     delete cloneRule.defaultField;
   }
-  if (!rule.type && typeof rule.validator !== 'function' && typeof value !== 'string') {
+  if (
+    !rule.type &&
+    typeof rule.validator !== 'function' &&
+    typeof value !== 'string' &&
+    typeof value !== 'undefined'
+  ) {
     warning(
       false,
-      `Form rules must provide type property when validating a value which is not string type`,
+      `Form rules must provide type property when validating the form item named [${name}] which is not string type`,
     );
   }
 

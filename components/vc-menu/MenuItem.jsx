@@ -38,7 +38,9 @@ const MenuItem = defineComponent({
   setup(props) {
     const uniKey = `menu_item_${++indexGuid}`;
     const store = inject('menuStore', () => ({}));
-    const isSelected = computed(() => store.selectedKeys.indexOf(props.eventKey) !== -1);
+    const isSelected = computed(
+      () => store.selectedKeys && store.selectedKeys.indexOf(props.eventKey) !== -1,
+    );
     onMounted(() => {
       store.addChildrenInfo(
         uniKey,

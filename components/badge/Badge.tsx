@@ -7,8 +7,9 @@ import { cloneElement } from '../_util/vnode';
 import { getTransitionProps, Transition } from '../_util/transition';
 import isNumeric from '../_util/isNumeric';
 import { defaultConfigProvider } from '../config-provider';
-import { inject, defineComponent, CSSProperties, VNode } from 'vue';
+import { inject, defineComponent, CSSProperties, VNode, App, Plugin } from 'vue';
 import { tuple } from '../_util/type';
+import Ribbon from './Ribbon';
 
 const BadgeProps = {
   /** Number to show in badge */
@@ -30,8 +31,10 @@ const BadgeProps = {
 function isPresetColor(color?: string): boolean {
   return (PresetColorTypes as string[]).indexOf(color) !== -1;
 }
-export default defineComponent({
+
+const Badge = defineComponent({
   name: 'ABadge',
+  Ribbon: Ribbon,
   props: initDefaultProps(BadgeProps, {
     showZero: false,
     dot: false,
@@ -225,3 +228,14 @@ export default defineComponent({
     );
   },
 });
+
+Badge.install = function(app: App) {
+  app.component(Badge.name, Badge);
+  app.component(Badge.Ribbon.displayName, Badge.Ribbon);
+  return app;
+};
+
+export default Badge as typeof Badge &
+  Plugin & {
+    readonly Ribbon: typeof Ribbon;
+  };

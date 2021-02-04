@@ -57,6 +57,7 @@ export const FormProps = {
   validateOnRuleChange: PropTypes.looseBool,
   // 提交失败自动滚动到第一个错误字段
   scrollToFirstError: PropTypes.looseBool,
+  onSubmit: PropTypes.func,
   onFinish: PropTypes.func,
   onFinishFailed: PropTypes.func,
   name: PropTypes.string,
@@ -276,7 +277,7 @@ const Form = defineComponent({
     const { prefixCls: customizePrefixCls, hideRequiredMark, layout, handleSubmit } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('form', customizePrefixCls);
-    const { class: className, onSubmit: originSubmit, ...restProps } = this.$attrs;
+    const { class: className, ...restProps } = this.$attrs;
 
     const formClassName = classNames(prefixCls, className, {
       [`${prefixCls}-horizontal`]: layout === 'horizontal',

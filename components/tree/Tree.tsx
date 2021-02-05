@@ -29,6 +29,8 @@ export interface TreeDataItem {
   icon?: VNode;
   slots?: Record<string, string>;
   switcherIcon?: VNode;
+  // support custom field
+  [key: string]: any;
 }
 
 interface DefaultEvent {

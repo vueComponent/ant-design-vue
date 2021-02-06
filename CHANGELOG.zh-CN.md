@@ -10,6 +10,17 @@
 
 ---
 
+## 2.0.0
+
+`2021-02-06`
+
+- 🎉🎉🎉 2.0 正式版发布
+- 🎉🎉🎉 支持暗黑主题 [#3410](https://github.com/vueComponent/ant-design-vue/issues/3410)
+- 🎉🎉🎉 新版文档上线，使用 Composition API 完全重构文档示例，提供 TS、JS 双版本源码
+- 🌟 使用 Composition API 重构 `Alert` 组件 [#3654](https://github.com/vueComponent/ant-design-vue/pull/3654)
+- 🌟 `Tooltip` 支持自定义颜色 [#3603](https://github.com/vueComponent/ant-design-vue/issues/3603)
+- 🐞 修复 `TimePicker` 没有自动滚动到已选位置问题 [#ab7537](https://github.com/vueComponent/ant-design-vue/commit/ab75379f0c2f5e54ab7c348284a7391939ab5aaf)
+
 ## 2.0.0-rc.9
 
 `2021-01-24`

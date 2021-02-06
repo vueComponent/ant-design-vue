@@ -10,6 +10,17 @@
 
 ---
 
+## 2.0.0
+
+`2021-02-06`
+
+- 🎉🎉🎉 2.0 official version released
+- 🎉🎉🎉 support dark theme [#3410](https://github.com/vueComponent/ant-design-vue/issues/3410)
+- 🎉🎉🎉 The new version of the document is online, use the Composition API to completely reconstruct the document example, and provide the TS and JS dual version source code
+- 🌟 Refactor the `Alert` component using Composition API [#3654](https://github.com/vueComponent/ant-design-vue/pull/3654)
+- 🌟 `Tooltip` supports custom colors [#3603](https://github.com/vueComponent/ant-design-vue/issues/3603)
+- 🐞 Fix the problem that `TimePicker` does not automatically scroll to the selected position [#ab7537](https://github.com/vueComponent/ant-design-vue/commit/ab75379f0c2f5e54ab7c348284a7391939ab5aaf)
+
 ## 2.0.0-rc.9
 
 `2021-01-24`

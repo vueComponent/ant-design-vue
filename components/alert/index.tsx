@@ -68,10 +68,10 @@ export type AlertProps = Partial<ExtractPropTypes<ReturnType<typeof alertProps>>
 
 const Alert = defineComponent({
   name: 'AAlert',
-  props: alertProps(),
   inheritAttrs: false,
+  props: alertProps(),
   emits: ['close'],
-  setup(props, { slots, emit, attrs }) {
+  setup(props, { slots, emit, attrs, expose }) {
     const configProvider = inject('configProvider', defaultConfigProvider);
     const closing = ref(false);
     const closed = ref(false);
@@ -96,6 +96,8 @@ const Alert = defineComponent({
       closed.value = true;
       props.afterClose?.();
     };
+
+    expose({ animationEnd });
 
     return () => {
       const { prefixCls: customizePrefixCls, banner } = props;

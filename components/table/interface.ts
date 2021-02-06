@@ -178,7 +178,7 @@ export interface TableState {
   pagination?: Partial<ExtractPropTypes<typeof PaginationProps>>;
   filters?: TableStateFilters;
   sortColumn?: ColumnProps | null;
-  sortOrder?: string;
+  sortOrder?: SortOrder;
   columns?: ColumnProps[];
 }
 

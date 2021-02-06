@@ -1,4 +1,4 @@
-import { inject, cloneVNode, defineComponent } from 'vue';
+import { inject, cloneVNode, defineComponent, ref, ExtractPropTypes } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -9,14 +9,17 @@ import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFill
 import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import classNames from '../_util/classNames';
-import BaseMixin from '../_util/BaseMixin';
 import PropTypes from '../_util/vue-types';
 import { getTransitionProps, Transition } from '../_util/transition';
-import { getComponent, isValidElement, findDOMNode } from '../_util/props-util';
+import { isValidElement } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
 
 function noop() {}
+
+function getDefaultSlot(slots: Record<string, any>, props: Record<string, any>, prop: string) {
+  return slots[prop]?.() ?? props[prop];
+}
 
 const iconMapFilled = {
   success: CheckCircleFilled,
@@ -32,11 +35,15 @@ const iconMapOutlined = {
   warning: ExclamationCircleOutlined,
 };
 
-export const AlertProps = {
+const AlertTypes = tuple('success', 'info', 'warning', 'error');
+
+export type AlertType = typeof AlertTypes[number];
+
+const alertProps = () => ({
   /**
    * Type of Alert styles, options: `success`, `info`, `warning`, `error`
    */
-  type: PropTypes.oneOf(tuple('success', 'info', 'warning', 'error')),
+  type: PropTypes.oneOf(AlertTypes),
   /** Whether Alert can be closed */
   closable: PropTypes.looseBool,
   /** Close text to show */
@@ -55,114 +62,114 @@ export const AlertProps = {
   banner: PropTypes.looseBool,
   icon: PropTypes.VNodeChild,
   onClose: PropTypes.VNodeChild,
-};
+});
+
+export type AlertProps = Partial<ExtractPropTypes<ReturnType<typeof alertProps>>>;
 
 const Alert = defineComponent({
   name: 'AAlert',
-  mixins: [BaseMixin],
+  props: alertProps(),
   inheritAttrs: false,
-  props: AlertProps,
   emits: ['close'],
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-  data() {
-    return {
-      closing: false,
-      closed: false,
-    };
-  },
-  methods: {
-    handleClose(e: Event) {
+  setup(props, { slots, emit, attrs }) {
+    const configProvider = inject('configProvider', defaultConfigProvider);
+    const closing = ref(false);
+    const closed = ref(false);
+    const alertNode = ref();
+
+    const handleClose = (e: MouseEvent) => {
       e.preventDefault();
-      const dom = findDOMNode(this);
+
+      const dom = alertNode.value;
+
       dom.style.height = `${dom.offsetHeight}px`;
       // Magic code
       // 重复一次后才能正确设置 height
       dom.style.height = `${dom.offsetHeight}px`;
 
-      this.setState({
-        closing: true,
+      closing.value = true;
+      emit('close', e);
+    };
+
+    const animationEnd = () => {
+      closing.value = false;
+      closed.value = true;
+      props.afterClose?.();
+    };
+
+    return () => {
+      const { prefixCls: customizePrefixCls, banner } = props;
+      const { getPrefixCls } = configProvider;
+      const prefixCls = getPrefixCls('alert', customizePrefixCls);
+
+      let { closable, type, showIcon } = props;
+
+      const closeText = getDefaultSlot(slots, props, 'closeText');
+      const description = getDefaultSlot(slots, props, 'description');
+      const message = getDefaultSlot(slots, props, 'message');
+      const icon = getDefaultSlot(slots, props, 'icon');
+
+      // banner模式默认有 Icon
+      showIcon = banner && showIcon === undefined ? true : showIcon;
+      // banner模式默认为警告
+      type = banner && type === undefined ? 'warning' : type || 'info';
+
+      const IconType = (description ? iconMapOutlined : iconMapFilled)[type] || null;
+
+      // closeable when closeText is assigned
+      if (closeText) {
+        closable = true;
+      }
+
+      const alertCls = classNames(prefixCls, {
+        [`${prefixCls}-${type}`]: true,
+        [`${prefixCls}-closing`]: closing.value,
+        [`${prefixCls}-with-description`]: !!description,
+        [`${prefixCls}-no-icon`]: !showIcon,
+        [`${prefixCls}-banner`]: !!banner,
+        [`${prefixCls}-closable`]: closable,
       });
-      this.$emit('close', e);
-    },
-    animationEnd() {
-      this.setState({
-        closing: false,
-        closed: true,
+
+      const closeIcon = closable ? (
+        <button type="button" onClick={handleClose} class={`${prefixCls}-close-icon`} tabindex={0}>
+          {closeText ? (
+            <span class={`${prefixCls}-close-text`}>{closeText}</span>
+          ) : (
+            <CloseOutlined />
+          )}
+        </button>
+      ) : null;
+
+      const iconNode = (icon &&
+        (isValidElement(icon) ? (
+          cloneVNode(icon, {
+            class: `${prefixCls}-icon`,
+          })
+        ) : (
+          <span class={`${prefixCls}-icon`}>{icon}</span>
+        ))) || <IconType class={`${prefixCls}-icon`} />;
+
+      const transitionProps = getTransitionProps(`${prefixCls}-slide-up`, {
+        appear: false,
+        onAfterLeave: animationEnd,
       });
-      this.afterClose();
-    },
-  },
-
-  render() {
-    const { prefixCls: customizePrefixCls, banner, closing, closed, $attrs } = this;
-    const { getPrefixCls } = this.configProvider;
-    const prefixCls = getPrefixCls('alert', customizePrefixCls);
-
-    let { closable, type, showIcon } = this;
-    const closeText = getComponent(this, 'closeText');
-    const description = getComponent(this, 'description');
-    const message = getComponent(this, 'message');
-    const icon = getComponent(this, 'icon');
-    // banner模式默认有 Icon
-    showIcon = banner && showIcon === undefined ? true : showIcon;
-    // banner模式默认为警告
-    type = banner && type === undefined ? 'warning' : type || 'info';
-
-    const IconType = (description ? iconMapOutlined : iconMapFilled)[type] || null;
-
-    // closeable when closeText is assigned
-    if (closeText) {
-      closable = true;
-    }
-
-    const alertCls = classNames(prefixCls, {
-      [`${prefixCls}-${type}`]: true,
-      [`${prefixCls}-closing`]: closing,
-      [`${prefixCls}-with-description`]: !!description,
-      [`${prefixCls}-no-icon`]: !showIcon,
-      [`${prefixCls}-banner`]: !!banner,
-      [`${prefixCls}-closable`]: closable,
-    });
-
-    const closeIcon = closable ? (
-      <button
-        type="button"
-        onClick={this.handleClose}
-        class={`${prefixCls}-close-icon`}
-        tabindex={0}
-      >
-        {closeText ? <span class={`${prefixCls}-close-text`}>{closeText}</span> : <CloseOutlined />}
-      </button>
-    ) : null;
-
-    const iconNode = (icon &&
-      (isValidElement(icon) ? (
-        cloneVNode(icon, {
-          class: `${prefixCls}-icon`,
-        })
-      ) : (
-        <span class={`${prefixCls}-icon`}>{icon}</span>
-      ))) || <IconType class={`${prefixCls}-icon`} />;
-    // h(iconType, { class: `${prefixCls}-icon` });
-
-    const transitionProps = getTransitionProps(`${prefixCls}-slide-up`, {
-      appear: false,
-      onAfterLeave: this.animationEnd,
-    });
-    return closed ? null : (
-      <Transition {...transitionProps}>
-        <div {...$attrs} v-show={!closing} class={[$attrs.class, alertCls]} data-show={!closing}>
-          {showIcon ? iconNode : null}
-          <span class={`${prefixCls}-message`}>{message}</span>
-          <span class={`${prefixCls}-description`}>{description}</span>
-          {closeIcon}
-        </div>
-      </Transition>
-    );
+      return closed.value ? null : (
+        <Transition {...transitionProps}>
+          <div
+            {...attrs}
+            v-show={!closing.value}
+            class={[attrs.class, alertCls]}
+            data-show={!closing.value}
+            ref={alertNode}
+          >
+            {showIcon ? iconNode : null}
+            <span class={`${prefixCls}-message`}>{message}</span>
+            <span class={`${prefixCls}-description`}>{description}</span>
+            {closeIcon}
+          </div>
+        </Transition>
+      );
+    };
   },
 });
 

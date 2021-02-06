@@ -103,10 +103,6 @@ const Select = {
       this.setState({ active: false });
     },
 
-    saveList(node) {
-      this.list = node;
-    },
-
     scrollToSelected(duration) {
       // move to selected item
       const select = findDOMNode(this);
@@ -137,7 +133,7 @@ const Select = {
 
     return (
       <div class={cls} onMouseenter={this.handleMouseEnter} onMouseleave={this.handleMouseLeave}>
-        <ul ref={this.saveList}>{this.getOptions()}</ul>
+        <ul ref="list">{this.getOptions()}</ul>
       </div>
     );
   },

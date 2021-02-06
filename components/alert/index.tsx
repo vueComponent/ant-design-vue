@@ -1,4 +1,4 @@
-import { inject, cloneVNode, defineComponent, ref } from 'vue';
+import { inject, cloneVNode, defineComponent, ref, ExtractPropTypes } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -35,11 +35,15 @@ const iconMapOutlined = {
   warning: ExclamationCircleOutlined,
 };
 
-export const AlertProps = {
+const AlertTypes = tuple('success', 'info', 'warning', 'error');
+
+export type AlertType = typeof AlertTypes[number];
+
+const alertProps = () => ({
   /**
    * Type of Alert styles, options: `success`, `info`, `warning`, `error`
    */
-  type: PropTypes.oneOf(tuple('success', 'info', 'warning', 'error')),
+  type: PropTypes.oneOf(AlertTypes),
   /** Whether Alert can be closed */
   closable: PropTypes.looseBool,
   /** Close text to show */
@@ -58,11 +62,14 @@ export const AlertProps = {
   banner: PropTypes.looseBool,
   icon: PropTypes.VNodeChild,
   onClose: PropTypes.VNodeChild,
-};
+});
+
+export type AlertProps = Partial<ExtractPropTypes<ReturnType<typeof alertProps>>>;
 
 const Alert = defineComponent({
   name: 'AAlert',
-  props: AlertProps,
+  props: alertProps(),
+  inheritAttrs: false,
   emits: ['close'],
   setup(props, { slots, emit, attrs }) {
     const configProvider = inject('configProvider', defaultConfigProvider);

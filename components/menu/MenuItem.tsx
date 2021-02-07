@@ -4,10 +4,15 @@ import { getOptionProps, getSlot } from '../_util/props-util';
 import Tooltip, { TooltipProps } from '../tooltip';
 import { SiderContextProps } from '../layout/Sider';
 import { injectExtraPropsKey } from '../vc-menu/FunctionProvider';
+import PropTypes from '../_util/vue-types';
+
 export default defineComponent({
   name: 'MenuItem',
   inheritAttrs: false,
-  props: itemProps,
+  props: {
+    ...itemProps,
+    onClick: PropTypes.func,
+  },
   isMenuItem: true,
   setup() {
     return {

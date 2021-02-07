@@ -1,4 +1,12 @@
-import { inject, provide, PropType, defineComponent, computed, nextTick } from 'vue';
+import {
+  inject,
+  provide,
+  PropType,
+  defineComponent,
+  computed,
+  nextTick,
+  ExtractPropTypes,
+} from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
@@ -66,7 +74,7 @@ function getPropByPath(obj: any, namePathList: any, strict?: boolean) {
     v: tempObj ? tempObj[keyArr[i]] : undefined,
   };
 }
-export const FormItemProps = {
+export const formItemProps = {
   id: PropTypes.string,
   htmlFor: PropTypes.string,
   prefixCls: PropTypes.string,
@@ -89,12 +97,14 @@ export const FormItemProps = {
   messageVariables: { type: Object as PropType<Record<string, string>> },
 };
 
+export type FormItemProps = Partial<ExtractPropTypes<typeof formItemProps>>;
+
 export default defineComponent({
   name: 'AFormItem',
   mixins: [BaseMixin],
   inheritAttrs: false,
   __ANT_NEW_FORM_ITEM: true,
-  props: FormItemProps,
+  props: formItemProps,
   setup(props) {
     const FormContext = inject('FormContext', {}) as any;
     const fieldName = computed(() => props.name || props.prop);

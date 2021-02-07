@@ -1,4 +1,4 @@
-import { defineComponent, inject, provide, PropType, computed } from 'vue';
+import { defineComponent, inject, provide, PropType, computed, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import warning from '../_util/warning';
@@ -43,7 +43,7 @@ export type ValidationRule = {
   trigger?: string;
 };
 
-export const FormProps = {
+export const formProps = {
   layout: PropTypes.oneOf(tuple('horizontal', 'inline', 'vertical')),
   labelCol: { type: Object as PropType<ColProps> },
   wrapperCol: { type: Object as PropType<ColProps> },
@@ -64,6 +64,8 @@ export const FormProps = {
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
 };
 
+export type FormProps = Partial<ExtractPropTypes<typeof formProps>>;
+
 function isEqualName(name1: NamePath, name2: NamePath) {
   return isEqual(toArray(name1), toArray(name2));
 }
@@ -71,7 +73,7 @@ function isEqualName(name1: NamePath, name2: NamePath) {
 const Form = defineComponent({
   name: 'AForm',
   inheritAttrs: false,
-  props: initDefaultProps(FormProps, {
+  props: initDefaultProps(formProps, {
     layout: 'horizontal',
     hideRequiredMark: false,
     colon: true,

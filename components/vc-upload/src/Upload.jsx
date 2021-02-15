@@ -28,6 +28,7 @@ const uploadProps = {
   withCredentials: PropTypes.bool,
   supportServerRender: PropTypes.bool,
   openFileDialogOnClick: PropTypes.bool,
+  transformFile: PropTypes.func,
 };
 export default {
   name: 'Upload',

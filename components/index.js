@@ -124,8 +124,6 @@ import { default as Timeline } from './timeline';
 
 import { default as Tooltip } from './tooltip';
 
-// import { default as Mention } from './mention'
-
 import { default as Upload } from './upload';
 
 import { default as version } from './version';
@@ -135,8 +133,6 @@ import { default as Drawer } from './drawer';
 import { default as Skeleton } from './skeleton';
 
 import { default as Comment } from './comment';
-
-// import { default as ColorPicker } from './color-picker';
 
 import { default as ConfigProvider } from './config-provider';
 

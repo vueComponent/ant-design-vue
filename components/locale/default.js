@@ -2,7 +2,6 @@ import Pagination from '../vc-pagination/locale/en_US';
 import DatePicker from '../date-picker/locale/en_US';
 import TimePicker from '../time-picker/locale/en_US';
 import Calendar from '../calendar/locale/en_US';
-import ColorPicker from '../color-picker/locale/en_US';
 
 export default {
   locale: 'en',
@@ -10,7 +9,6 @@ export default {
   DatePicker,
   TimePicker,
   Calendar,
-  ColorPicker,
   global: {
     placeholder: 'Please select',
   },

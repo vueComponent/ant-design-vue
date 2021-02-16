@@ -15,7 +15,7 @@
 `2021-02-16`
 
 - 🌟 `Modal` api method call supports defining close icon [#3642](https://github.com/vueComponent/ant-design-vue/issues/3642)
-- 🌟 `Form` message support function [#3163](https://github.com/vueComponent/ant-design-vue/issues/3143)
+- 🌟 `Form` message support function [#3163](https://github.com/vueComponent/ant-design-vue/issues/3163)
 - 🌟 Optimize the animation effect of `Progress` [#3510](https://github.com/vueComponent/ant-design-vue/issues/3510)
 - 🐞 Fix the background color problem when `AutoComplete` is disabled [#3143](https://github.com/vueComponent/ant-design-vue/issues/3143)
 - 🐞 Fix the issue that the `Alert` close button is displayed abnormally under safari [#3184](https://github.com/vueComponent/ant-design-vue/issues/3184)

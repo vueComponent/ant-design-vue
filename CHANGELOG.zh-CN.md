@@ -15,7 +15,7 @@
 `2021-02-16`
 
 - 🌟 `Modal` api 方式调用支持定义关闭图标 [#3642](https://github.com/vueComponent/ant-design-vue/issues/3642)
-- 🌟 `Form` message 支持函数 [#3163](https://github.com/vueComponent/ant-design-vue/issues/3143)
+- 🌟 `Form` message 支持函数 [#3163](https://github.com/vueComponent/ant-design-vue/issues/3163)
 - 🌟 优化 `Progress` 动画效果 [#3510](https://github.com/vueComponent/ant-design-vue/issues/3510)
 - 🐞 修复 `AutoComplete` disabled 时背景颜色异常问题 [#3143](https://github.com/vueComponent/ant-design-vue/issues/3143)
 - 🐞 修复 `Alert` 关闭按钮在 safari 下显示异常问题 [#3184](https://github.com/vueComponent/ant-design-vue/issues/3184)

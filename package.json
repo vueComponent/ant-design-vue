@@ -29,8 +29,6 @@
   "scripts": {
     "dev": "webpack-dev-server",
     "start": "cross-env NODE_ENV=development webpack-dev-server --config webpack.config.js",
-    "dev:demo": "node --max_old_space_size=4096 antdv-demo/build/dev.js",
-    "dev:site": "cross-env PORT=3001 NODE_ENV=development --max_old_space_size=4096 webpack-dev-server --config antdv-demo/build/webpack.dev.conf.js",
     "test": "cross-env NODE_ENV=test WORKFLOW=true jest --config .jest.js",
     "test:dev": "cross-env NODE_ENV=test jest --config .jest.js",
     "compile": "node antd-tools/cli/run.js compile",
@@ -42,8 +40,6 @@
     "pretty-quick": "pretty-quick",
     "dist": "node --max_old_space_size=6144 antd-tools/cli/run.js dist",
     "lint": "eslint -c ./.eslintrc --fix --ext .jsx,.js,.vue,.ts,.tsx ./components",
-    "lint:site": "eslint -c ./.eslintrc --fix --ext .jsx,.js,.vue ./antdv-demo",
-    "lint:docs": "eslint -c ./.eslintrc --fix --ext .jsx,.js,.vue,.md ./antdv-demo/docs/**/demo/**",
     "lint:style": "stylelint \"{site,components}/**/*.less\" --syntax less",
     "codecov": "codecov",
     "postinstall": "node scripts/postinstall || echo \"ignore\""

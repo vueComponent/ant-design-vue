@@ -10,6 +10,25 @@
 
 ---
 
+## 1.7.3
+
+`2021-02-16`
+
+- 🌟 `Modal` api method call supports defining close icon [#3642](https://github.com/vueComponent/ant-design-vue/issues/3642)
+- 🌟 `Form` message support function [#3163](https://github.com/vueComponent/ant-design-vue/issues/3143)
+- 🌟 Optimize the animation effect of `Progress` [#3510](https://github.com/vueComponent/ant-design-vue/issues/3510)
+- 🐞 Fix the background color problem when `AutoComplete` is disabled [#3143](https://github.com/vueComponent/ant-design-vue/issues/3143)
+- 🐞 Fix the issue that the `Alert` close button is displayed abnormally under safari [#3184](https://github.com/vueComponent/ant-design-vue/issues/3184)
+- 🐞 Fix the problem that `Dropdown` shows the wrong position under `ButtonGroup` [#2995](https://github.com/vueComponent/ant-design-vue/issues/2995)
+- 🐞 Fix the issue that the change event will no longer be triggered after `RadioGroup` is blocked from being selected [#3047](https://github.com/vueComponent/ant-design-vue/issues/3047)
+- 🐞 Fix the problem that `Table` cannot be sorted [#3327](https://github.com/vueComponent/ant-design-vue/issues/3327)
+- 🐞 Fix missing `Space` component type file issue [#3340](https://github.com/vueComponent/ant-design-vue/issues/3340)
+- 🐞 Fix `Slider`'s position calculation error under decimal precision [#3386](https://github.com/vueComponent/ant-design-vue/issues/3386)
+- 🐞 Fix `DatePicker` mode="decade" invalidation issue [#3536](https://github.com/vueComponent/ant-design-vue/issues/3536)
+- 🐞 Fix the problem that the keyboard can still be switched in the diabled state of `Tabs` [#3575](https://github.com/vueComponent/ant-design-vue/issues/3575)
+- 🐞 Fix the issue that `Menu` `forceSubMenuRender` does not take effect [#3615](https://github.com/vueComponent/ant-design-vue/issues/3615)
+- 🐞 Fix `Upload` `transformFile` not executing issue [#3636](https://github.com/vueComponent/ant-design-vue/issues/3636)
+
 ## 1.7.2
 
 `2020-11-06`

@@ -10,6 +10,25 @@
 
 ---
 
+## 1.7.3
+
+`2021-02-16`
+
+- 🌟 `Modal` api 方式调用支持定义关闭图标 [#3642](https://github.com/vueComponent/ant-design-vue/issues/3642)
+- 🌟 `Form` message 支持函数 [#3163](https://github.com/vueComponent/ant-design-vue/issues/3143)
+- 🌟 优化 `Progress` 动画效果 [#3510](https://github.com/vueComponent/ant-design-vue/issues/3510)
+- 🐞 修复 `AutoComplete` disabled 时背景颜色异常问题 [#3143](https://github.com/vueComponent/ant-design-vue/issues/3143)
+- 🐞 修复 `Alert` 关闭按钮在 safari 下显示异常问题 [#3184](https://github.com/vueComponent/ant-design-vue/issues/3184)
+- 🐞 修复 `Dropdown` 在 `ButtonGroup` 下显示位置错误问题 [#2995](https://github.com/vueComponent/ant-design-vue/issues/2995)
+- 🐞 修复 `RadioGroup` 阻止选中后，不再触发 change 事件问题 [#3047](https://github.com/vueComponent/ant-design-vue/issues/3047)
+- 🐞 修复 `Table` 无法排序的问题 [#3327](https://github.com/vueComponent/ant-design-vue/issues/3327)
+- 🐞 修复缺失 `Space` 组件类型文件问题 [#3340](https://github.com/vueComponent/ant-design-vue/issues/3340)
+- 🐞 修复 `Slider` 在小数精度下位置计算错误问题 [#3386](https://github.com/vueComponent/ant-design-vue/issues/3386)
+- 🐞 修复 `DatePicker` mode="decade" 失效问题 [#3536](https://github.com/vueComponent/ant-design-vue/issues/3536)
+- 🐞 修复 `Tabs` diabled 状态下依然可以通过键盘切换问题 [#3575](https://github.com/vueComponent/ant-design-vue/issues/3575)
+- 🐞 修复 `Menu` `forceSubMenuRender` 不生效问题 [#3615](https://github.com/vueComponent/ant-design-vue/issues/3615)
+- 🐞 修复 `Upload` `transformFile` 不执行问题 [#3636](https://github.com/vueComponent/ant-design-vue/issues/3636)
+
 ## 1.7.2
 
 `2020-11-06`

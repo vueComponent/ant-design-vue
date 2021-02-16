@@ -1,6 +1,6 @@
 {
   "name": "ant-design-vue",
-  "version": "1.7.2",
+  "version": "1.7.3",
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation",
   "keywords": [
@@ -54,8 +54,8 @@
   },
   "homepage": "https://www.antdv.com/",
   "peerDependencies": {
-    "vue": ">=2.6.0",
-    "vue-template-compiler": ">=2.6.0"
+    "vue": "^2.6.0",
+    "vue-template-compiler": "^2.6.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.0.0",

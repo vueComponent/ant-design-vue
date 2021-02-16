@@ -118,7 +118,7 @@ const Circle = {
             stroke,
             'stroke-linecap': strokeLinecap,
             'stroke-width': strokeWidth,
-            'opacity': ptg === 0 ? 0 : 1,
+            opacity: ptg === 0 ? 0 : 1,
             'fill-opacity': '0',
           },
           class: `${prefixCls}-circle-path`,

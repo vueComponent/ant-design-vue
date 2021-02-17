@@ -111,7 +111,10 @@ function babelify(js, modules) {
       if (file.path.match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
         const content = file.contents.toString(encoding);
         file.contents = Buffer.from(
-          content.replace(/\/style\/?'/g, "/style/css'").replace(/\.less/g, '.css'),
+          content
+            .replace(/\/style\/?'/g, "/style/css'")
+            .replace(/\/style\/?"/g, '/style/css"')
+            .replace(/\.less/g, '.css'),
         );
         file.path = file.path.replace(/index\.(js|jsx|ts|tsx)$/, 'css.js');
         this.push(file);

@@ -1,8 +1,9 @@
-import { LiteralUnion } from '../_util/type';
+import { LiteralUnion, tuple } from '../_util/type';
 import { PresetColorType } from '../_util/colors';
 import { isPresetColor } from './utils';
 import { defaultConfigProvider } from '../config-provider';
 import { HTMLAttributes, FunctionalComponent, VNodeTypes, inject, CSSProperties } from 'vue';
+import PropTypes from '../_util/vue-types';
 
 type RibbonPlacement = 'start' | 'end';
 
@@ -14,7 +15,7 @@ export interface RibbonProps extends HTMLAttributes {
 }
 
 const Ribbon: FunctionalComponent<RibbonProps> = (props, { attrs, slots }) => {
-  const { prefixCls: customizePrefixCls, color, text, placement = 'end' } = props;
+  const { prefixCls: customizePrefixCls, color, text = slots.text?.(), placement = 'end' } = props;
   const { class: className, style } = attrs;
   const children = slots.default?.();
   const { getPrefixCls, direction } = inject('configProvider', defaultConfigProvider);
@@ -48,5 +49,12 @@ const Ribbon: FunctionalComponent<RibbonProps> = (props, { attrs, slots }) => {
 };
 
 Ribbon.displayName = 'ABadgeRibbon';
+Ribbon.inheritAttrs = false;
+Ribbon.props = {
+  prefix: PropTypes.string,
+  color: PropTypes.string,
+  text: PropTypes.any,
+  placement: PropTypes.oneOf(tuple('start', 'end')),
+};
 
 export default Ribbon;

@@ -10,4 +10,12 @@ jobs:
   translate:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions-cool/translation-helper@v1.0.0
+      - name: issue
+        if: github.event_name == 'issues'
+        uses: actions-cool/translation-helper@v1.1.0
+
+      - name: pr
+        if: github.event_name == 'pull_request_target'
+        uses: actions-cool/translation-helper@v1.1.0
+        with: 
+          translate-body: false

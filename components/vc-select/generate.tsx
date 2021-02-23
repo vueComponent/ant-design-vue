@@ -908,7 +908,7 @@ export default function generateSelector<
         focus: onContainerFocus,
         blur: onContainerBlur,
       });
-      const activeTimeoutIds: number[] = [];
+      const activeTimeoutIds: ReturnType<typeof setTimeout>[] = [];
 
       onMounted(() => {
         activeTimeoutIds.forEach(timeoutId => clearTimeout(timeoutId));

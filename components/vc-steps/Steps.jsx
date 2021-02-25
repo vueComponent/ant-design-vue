@@ -27,7 +27,6 @@ export default defineComponent({
     canClick: PropTypes.looseBool,
   },
   data() {
-    this.calcStepOffsetWidth = debounce(this.calcStepOffsetWidth, 150);
     return {
       flexSupported: true,
       lastStepOffsetWidth: 0,
@@ -63,7 +62,7 @@ export default defineComponent({
         this.__emit('change', next);
       }
     },
-    calcStepOffsetWidth() {
+    calcStepOffsetWidth: debounce(function() {
       if (isFlexSupported()) {
         return;
       }
@@ -87,7 +86,7 @@ export default defineComponent({
           this.setState({ lastStepOffsetWidth: offsetWidth });
         });
       }
-    },
+    }, 150),
   },
   render() {
     const {

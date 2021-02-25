@@ -925,7 +925,7 @@ export default function generateSelector<
 
         // We should give focus back to selector if clicked item is not focusable
         if (popupElement && popupElement.contains(target as HTMLElement)) {
-          const timeoutId = setTimeout(() => {
+          const timeoutId = window.setTimeout(() => {
             const index = activeTimeoutIds.indexOf(timeoutId);
             if (index !== -1) {
               activeTimeoutIds.splice(index, 1);

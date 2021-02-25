@@ -12,10 +12,10 @@ jobs:
     steps:
       - name: issue
         if: github.event_name == 'issues'
-        uses: actions-cool/translation-helper@v1.1.0
+        uses: actions-cool/translation-helper@v1.1.1
 
       - name: pr
         if: github.event_name == 'pull_request_target'
-        uses: actions-cool/translation-helper@v1.1.0
+        uses: actions-cool/translation-helper@v1.1.1
         with: 
           translate-body: false

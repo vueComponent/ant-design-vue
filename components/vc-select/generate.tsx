@@ -911,11 +911,11 @@ export default function generateSelector<
       const activeTimeoutIds: number[] = [];
 
       onMounted(() => {
-        activeTimeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
+        activeTimeoutIds.forEach(timeoutId => window.clearTimeout(timeoutId));
         activeTimeoutIds.splice(0, activeTimeoutIds.length);
       });
       onBeforeUnmount(() => {
-        activeTimeoutIds.forEach(timeoutId => clearTimeout(timeoutId));
+        activeTimeoutIds.forEach(timeoutId => window.clearTimeout(timeoutId));
         activeTimeoutIds.splice(0, activeTimeoutIds.length);
       });
 

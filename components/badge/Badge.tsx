@@ -34,7 +34,7 @@ function isPresetColor(color?: string): boolean {
 
 const Badge = defineComponent({
   name: 'ABadge',
-  Ribbon: Ribbon,
+  Ribbon,
   props: initDefaultProps(BadgeProps, {
     showZero: false,
     dot: false,

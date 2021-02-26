@@ -237,10 +237,10 @@ export default defineComponent({
         }
       }
       this.__emit('update:pageSize', size);
-      this.__emit('showSizeChange', current, size);
       if (current !== preCurrent) {
         this.__emit('update:current', current);
       }
+      this.__emit('showSizeChange', current, size);
     },
     handleChange(p) {
       const { disabled } = this.$props;

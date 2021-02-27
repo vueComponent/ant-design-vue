@@ -13,6 +13,8 @@ jobs:
       - name: issue
         if: github.event_name == 'issues'
         uses: actions-cool/translation-helper@v1.1.1
+        with: 
+          translate-body: false
 
       - name: pr
         if: github.event_name == 'pull_request_target'

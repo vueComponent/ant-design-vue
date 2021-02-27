@@ -32,10 +32,10 @@ export default defineComponent({
       this.input = node;
     },
     handleChange(e: Event) {
+      this.$emit('update:value', (e.target as HTMLInputElement).value);
       if (e && e.target && e.type === 'click') {
         this.$emit('search', (e.target as HTMLInputElement).value, e);
       }
-      this.$emit('update:value', (e.target as HTMLInputElement).value);
       this.$emit('change', e);
     },
     handleSearch(e: Event) {

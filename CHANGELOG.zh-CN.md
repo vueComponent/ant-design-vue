@@ -10,6 +10,15 @@
 
 ---
 
+## 2.0.1
+
+`2021-02-27`
+
+- 🌟 `Badge` 新增 `Ribbon` [#3681](https://github.com/vueComponent/ant-design-vue/issues/3681)
+- 🌟 调整 `SearchInput` search 事件触发顺序 [#3725](https://github.com/vueComponent/ant-design-vue/issues/3725)
+- 🐞 修复 `Table` 销毁时卡死问题 [#3531](https://github.com/vueComponent/ant-design-vue/issues/3531)
+- 🐞 修复 `Menu` css 中引入了 less 文件问题 [#3678](https://github.com/vueComponent/ant-design-vue/issues/3678)
+- 🐞 修复 `Alert` 自定义图标错位问题 [#3712](https://github.com/vueComponent/ant-design-vue/issues/3712)
 ## 2.0.0
 
 `2021-02-06`

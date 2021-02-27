@@ -10,6 +10,16 @@
 
 ---
 
+## 2.0.1
+
+`2021-02-27`
+
+- 🌟 `Badge` adds `Ribbon` [#3681](https://github.com/vueComponent/ant-design-vue/issues/3681)
+- 🌟 Adjust the trigger order of `SearchInput` search event [#3725](https://github.com/vueComponent/ant-design-vue/issues/3725)
+- 🐞 Fix the stuck problem when `Table` is destroyed [#3531](https://github.com/vueComponent/ant-design-vue/issues/3531)
+- 🐞 Fix the issue of less file introduced in `Menu` css [#3678](https://github.com/vueComponent/ant-design-vue/issues/3678)
+- 🐞 Fix the problem of `Alert` custom icon misalignment [#3712](https://github.com/vueComponent/ant-design-vue/issues/3712)
+
 ## 2.0.0
 
 `2021-02-06`

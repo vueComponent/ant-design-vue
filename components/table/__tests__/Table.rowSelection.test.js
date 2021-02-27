@@ -46,7 +46,7 @@ describe('Table.rowSelection', () => {
     checkboxAll.element.checked = true;
     checkboxAll.trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [0, 1, 2, 3],
         selectionDirty: true,
       });
@@ -54,7 +54,7 @@ describe('Table.rowSelection', () => {
     checkboxes[1].element.checked = false;
     checkboxes[1].trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [1, 2, 3],
         selectionDirty: true,
       });
@@ -62,7 +62,7 @@ describe('Table.rowSelection', () => {
     checkboxes[1].element.checked = true;
     checkboxes[1].trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [1, 2, 3, 0],
         selectionDirty: true,
       });
@@ -77,7 +77,7 @@ describe('Table.rowSelection', () => {
     radios[0].element.checked = true;
     radios[0].trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [0],
         selectionDirty: true,
       });
@@ -85,7 +85,7 @@ describe('Table.rowSelection', () => {
     radios[radios.length - 1].element.checked = true;
     radios[radios.length - 1].trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [3],
         selectionDirty: true,
       });
@@ -163,14 +163,14 @@ describe('Table.rowSelection', () => {
   it('can be controlled', async () => {
     const wrapper = mount(Table, getTableOptions({ rowSelection: { selectedRowKeys: [0] } }));
 
-    expect(getStore(wrapper).getState()).toEqual({
+    expect(getStore(wrapper)).toEqual({
       selectedRowKeys: [0],
       selectionDirty: false,
     });
 
     wrapper.setProps({ rowSelection: { selectedRowKeys: [1] } });
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [1],
         selectionDirty: false,
       });

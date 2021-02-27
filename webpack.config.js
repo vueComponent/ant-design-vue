@@ -51,16 +51,15 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(vue|md)$/,
+        test: /\.md$/,
+        loader: 'raw-loader',
+      },
+      {
+        test: /\.(vue)$/,
         loader: 'vue-loader',
-        exclude: /\.(en-US.md|zh-CN.md)$/,
       },
       {
-        test: /\.(en-US.md|zh-CN.md)$/,
-        use: [{ loader: 'vue-loader' }, { loader: './loader.js' }],
-      },
-      {
-        test: /\.tsx?$/,
+        test: /\.(ts|tsx)?$/,
         use: [
           {
             loader: 'babel-loader',
@@ -68,6 +67,11 @@ module.exports = {
           },
           {
             loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              appendTsSuffixTo: ['\\.vue$'],
+              happyPackMode: false,
+            },
           },
         ],
         exclude: /node_modules/,

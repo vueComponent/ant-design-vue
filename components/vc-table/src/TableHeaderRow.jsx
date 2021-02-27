@@ -1,6 +1,6 @@
 import classNames from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
-import { connect } from '../../_util/store';
+import { computed, inject } from 'vue';
 
 const TableHeaderRow = {
   name: 'TableHeaderRow',
@@ -12,9 +12,30 @@ const TableHeaderRow = {
     rows: PropTypes.array,
     row: PropTypes.array,
     components: PropTypes.object,
-    height: PropTypes.any,
     customHeaderRow: PropTypes.func,
     prefixCls: PropTypes.prefixCls,
+  },
+  setup(props) {
+    const store = inject('table-store', () => ({}));
+    return {
+      height: computed(() => {
+        const { fixedColumnsHeadRowsHeight } = store;
+        const { columns, rows, fixed } = props;
+        const headerHeight = fixedColumnsHeadRowsHeight[0];
+
+        if (!fixed) {
+          return null;
+        }
+
+        if (headerHeight && columns) {
+          if (headerHeight === 'auto') {
+            return 'auto';
+          }
+          return `${headerHeight / rows.length}px`;
+        }
+        return null;
+      }),
+    };
   },
   render() {
     const { row, index, height, components, customHeaderRow, prefixCls } = this;
@@ -67,26 +88,4 @@ const TableHeaderRow = {
   },
 };
 
-function getRowHeight(state, props) {
-  const { fixedColumnsHeadRowsHeight } = state;
-  const { columns, rows, fixed } = props;
-  const headerHeight = fixedColumnsHeadRowsHeight[0];
-
-  if (!fixed) {
-    return null;
-  }
-
-  if (headerHeight && columns) {
-    if (headerHeight === 'auto') {
-      return 'auto';
-    }
-    return `${headerHeight / rows.length}px`;
-  }
-  return null;
-}
-
-export default connect((state, props) => {
-  return {
-    height: getRowHeight(state, props),
-  };
-})(TableHeaderRow);
+export default TableHeaderRow;

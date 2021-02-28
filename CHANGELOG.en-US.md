@@ -10,6 +10,12 @@
 
 ---
 
+## 1.7.4
+
+`2021-02-28`
+
+- 🌟 Optimize the performance of `Table` [#3531](https://github.com/vueComponent/ant-design-vue/issues/3531)
+
 ## 1.7.3
 
 `2021-02-16`

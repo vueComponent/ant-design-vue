@@ -10,6 +10,11 @@
 
 ---
 
+## 1.7.4
+
+`2021-02-28`
+
+- 🌟 优化 `Table` 性能 [#3531](https://github.com/vueComponent/ant-design-vue/issues/3531)
 ## 1.7.3
 
 `2021-02-16`

@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
-import { connect } from '../../_util/store';
 import TableCell from './TableCell';
 import { initDefaultProps, mergeProps, getStyle } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
@@ -9,6 +8,9 @@ function noop() {}
 const TableRow = {
   name: 'TableRow',
   mixins: [BaseMixin],
+  inject: {
+    store: { from: 'table-store', default: () => ({}) },
+  },
   props: initDefaultProps(
     {
       customRow: PropTypes.func,
@@ -21,16 +23,12 @@ const TableRow = {
       prefixCls: PropTypes.string,
       // onHover: PropTypes.func,
       columns: PropTypes.array,
-      height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       index: PropTypes.number,
       rowKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
       className: PropTypes.string,
       indent: PropTypes.number,
       indentSize: PropTypes.number,
       hasExpandIcon: PropTypes.func,
-      hovered: PropTypes.bool.isRequired,
-      visible: PropTypes.bool.isRequired,
-      store: PropTypes.object.isRequired,
       fixed: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
       renderExpandIcon: PropTypes.func,
       renderExpandIconCell: PropTypes.func,
@@ -53,6 +51,37 @@ const TableRow = {
     },
   ),
 
+  computed: {
+    visible() {
+      const { expandedRowKeys } = this.store;
+      const { ancestorKeys } = this.$props;
+      return !!(ancestorKeys.length === 0 || ancestorKeys.every(k => expandedRowKeys.includes(k)));
+    },
+    height() {
+      const { expandedRowsHeight, fixedColumnsBodyRowsHeight } = this.store;
+      const { fixed, rowKey } = this.$props;
+
+      if (!fixed) {
+        return null;
+      }
+
+      if (expandedRowsHeight[rowKey]) {
+        return expandedRowsHeight[rowKey];
+      }
+
+      if (fixedColumnsBodyRowsHeight[rowKey]) {
+        return fixedColumnsBodyRowsHeight[rowKey];
+      }
+
+      return null;
+    },
+    hovered() {
+      const { currentHoverKey } = this.store;
+      const { rowKey } = this.$props;
+      return currentHoverKey === rowKey;
+    },
+  },
+
   data() {
     // this.shouldRender = this.visible
     return {
@@ -68,10 +97,13 @@ const TableRow = {
     }
   },
   watch: {
-    visible(val) {
-      if (val) {
-        this.shouldRender = true;
-      }
+    visible: {
+      handler(val) {
+        if (val) {
+          this.shouldRender = true;
+        }
+      },
+      immediate: true,
     },
   },
 
@@ -117,25 +149,23 @@ const TableRow = {
 
     setExpandedRowHeight() {
       const { store, rowKey } = this;
-      let { expandedRowsHeight } = store.getState();
+      let { expandedRowsHeight } = store;
       const height = this.rowRef.getBoundingClientRect().height;
       expandedRowsHeight = {
         ...expandedRowsHeight,
         [rowKey]: height,
       };
-      store.setState({ expandedRowsHeight });
+      store.expandedRowsHeight = expandedRowsHeight;
     },
 
     setRowHeight() {
       const { store, rowKey } = this;
-      const { fixedColumnsBodyRowsHeight } = store.getState();
+      const { fixedColumnsBodyRowsHeight } = store;
       const height = this.rowRef.getBoundingClientRect().height;
-      store.setState({
-        fixedColumnsBodyRowsHeight: {
-          ...fixedColumnsBodyRowsHeight,
-          [rowKey]: height,
-        },
-      });
+      store.fixedColumnsBodyRowsHeight = {
+        ...fixedColumnsBodyRowsHeight,
+        [rowKey]: height,
+      };
     },
 
     getStyle() {
@@ -279,33 +309,4 @@ const TableRow = {
   },
 };
 
-function getRowHeight(state, props) {
-  const { expandedRowsHeight, fixedColumnsBodyRowsHeight } = state;
-  const { fixed, rowKey } = props;
-
-  if (!fixed) {
-    return null;
-  }
-
-  if (expandedRowsHeight[rowKey]) {
-    return expandedRowsHeight[rowKey];
-  }
-
-  if (fixedColumnsBodyRowsHeight[rowKey]) {
-    return fixedColumnsBodyRowsHeight[rowKey];
-  }
-
-  return null;
-}
-
-export default connect((state, props) => {
-  const { currentHoverKey, expandedRowKeys } = state;
-  const { rowKey, ancestorKeys } = props;
-  const visible = ancestorKeys.length === 0 || ancestorKeys.every(k => expandedRowKeys.includes(k));
-
-  return {
-    visible,
-    hovered: currentHoverKey === rowKey,
-    height: getRowHeight(state, props),
-  };
-})(TableRow);
+export default TableRow;

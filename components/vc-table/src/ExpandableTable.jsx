@@ -1,6 +1,5 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { connect } from '../../_util/store';
 import shallowEqual from 'shallowequal';
 import TableRow from './TableRow';
 import { remove } from './utils';
@@ -21,7 +20,6 @@ export const ExpandableTableProps = () => ({
   // onExpand: PropTypes.func,
   // onExpandedRowsChange: PropTypes.func,
   columnManager: PropTypes.object.isRequired,
-  store: PropTypes.object.isRequired,
   prefixCls: PropTypes.string.isRequired,
   data: PropTypes.array,
   getRowKey: PropTypes.func,
@@ -39,7 +37,9 @@ const ExpandableTable = {
     childrenColumnName: 'children',
     indentSize: 15,
   }),
-
+  inject: {
+    store: { from: 'table-store', default: () => ({}) },
+  },
   data() {
     const {
       data,
@@ -66,10 +66,8 @@ const ExpandableTable = {
     // this.columnManager = props.columnManager
     // this.store = props.store
 
-    this.store.setState({
-      expandedRowsHeight: {},
-      expandedRowKeys: finalExpandedRowKeys,
-    });
+    this.store.expandedRowsHeight = {};
+    this.store.expandedRowKeys = finalExpandedRowKeys;
     return {};
   },
   mounted() {
@@ -81,9 +79,7 @@ const ExpandableTable = {
   watch: {
     expandedRowKeys(val) {
       this.$nextTick(() => {
-        this.store.setState({
-          expandedRowKeys: val,
-        });
+        this.store.expandedRowKeys = val;
       });
     },
   },
@@ -98,7 +94,7 @@ const ExpandableTable = {
         event.stopPropagation();
       }
 
-      let { expandedRowKeys } = this.store.getState();
+      let { expandedRowKeys } = this.store;
 
       if (expanded) {
         // row was expaned
@@ -112,7 +108,7 @@ const ExpandableTable = {
       }
 
       if (!this.expandedRowKeys) {
-        this.store.setState({ expandedRowKeys });
+        this.store.expandedRowKeys = expandedRowKeys;
       }
       // De-dup of repeat call
       if (!this.latestExpandedRows || !shallowEqual(this.latestExpandedRows, expandedRowKeys)) {
@@ -163,7 +159,7 @@ const ExpandableTable = {
         {
           key: 'extra-row',
           customRender: () => {
-            const { expandedRowKeys } = this.store.getState();
+            const { expandedRowKeys } = this.store;
             const expanded = expandedRowKeys.includes(parentKey);
             return {
               attrs: {
@@ -245,4 +241,4 @@ const ExpandableTable = {
   },
 };
 
-export default connect()(ExpandableTable);
+export default ExpandableTable;

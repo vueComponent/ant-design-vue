@@ -7,17 +7,20 @@ import PropTypes from '../../_util/vue-types';
 import { debounce } from './utils';
 import warning from '../../_util/warning';
 import addEventListener from '../../vc-util/Dom/addEventListener';
-import { Provider, create } from '../../_util/store';
 import ColumnManager from './ColumnManager';
 import HeadTable from './HeadTable';
 import BodyTable from './BodyTable';
 import ExpandableTable from './ExpandableTable';
 import { initDefaultProps, getOptionProps, getListeners } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
+import Vue from 'vue';
 
 export default {
   name: 'Table',
   mixins: [BaseMixin],
+  provide() {
+    return { 'table-store': this.store, table: this };
+  },
   props: initDefaultProps(
     {
       data: PropTypes.array,
@@ -85,6 +88,13 @@ export default {
   ),
   data() {
     this.preData = [...this.data];
+    this.store = Vue.observable({
+      currentHoverKey: null,
+      fixedColumnsHeadRowsHeight: [],
+      fixedColumnsBodyRowsHeight: {},
+      expandedRowsHeight: {},
+      expandedRowKeys: [],
+    });
     return {
       columnManager: new ColumnManager(this.columns),
       sComponents: merge(
@@ -158,22 +168,9 @@ export default {
       'getBodyWrapper is deprecated, please use custom components instead.',
     );
 
-    // this.columnManager = new ColumnManager(this.columns, this.$slots.default)
-
-    this.store = create({
-      currentHoverKey: null,
-      fixedColumnsHeadRowsHeight: [],
-      fixedColumnsBodyRowsHeight: {},
-    });
-
     this.setScrollPosition('left');
 
     this.debouncedWindowResize = debounce(this.handleWindowResize, 150);
-  },
-  provide() {
-    return {
-      table: this,
-    };
   },
 
   mounted() {
@@ -298,7 +295,7 @@ export default {
       const fixedColumnsHeadRowsHeight = [].map.call(headRows, row =>
         row.getBoundingClientRect().height ? row.getBoundingClientRect().height - 0.5 : 'auto',
       );
-      const state = this.store.getState();
+      const state = this.store;
       const fixedColumnsBodyRowsHeight = [].reduce.call(
         bodyRows,
         (acc, row) => {
@@ -318,10 +315,8 @@ export default {
       ) {
         return;
       }
-      this.store.setState({
-        fixedColumnsHeadRowsHeight,
-        fixedColumnsBodyRowsHeight,
-      });
+      this.store.fixedColumnsHeadRowsHeight = fixedColumnsHeadRowsHeight;
+      this.store.fixedColumnsBodyRowsHeight = fixedColumnsBodyRowsHeight;
     },
 
     resetScrollX() {
@@ -591,10 +586,6 @@ export default {
         },
       },
     };
-    return (
-      <Provider store={this.store}>
-        <ExpandableTable {...expandableTableProps} />
-      </Provider>
-    );
+    return <ExpandableTable {...expandableTableProps} />;
   },
 };

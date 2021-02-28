@@ -2,7 +2,6 @@ import VcTable, { INTERNAL_COL_DEFINE } from '../vc-table';
 import classNames from 'classnames';
 import shallowEqual from 'shallowequal';
 import FilterDropdown from './filterDropdown';
-import createStore from './createStore';
 import SelectionBox from './SelectionBox';
 import SelectionCheckboxAll from './SelectionCheckboxAll';
 import Column from './Column';
@@ -21,6 +20,7 @@ import defaultLocale from '../locale-provider/default';
 import warning from '../_util/warning';
 import scrollTo from '../_util/scrollTo';
 import TransButton from '../_util/transButton';
+import Vue from 'vue';
 
 function noop() {}
 
@@ -112,6 +112,14 @@ export default {
   Column,
   ColumnGroup,
   mixins: [BaseMixin],
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
+  provide() {
+    return {
+      store: this.store,
+    };
+  },
   props: initDefaultProps(TableProps, {
     dataSource: [],
     useFixedHeader: false,
@@ -127,18 +135,7 @@ export default {
     childrenColumnName: 'children',
   }),
 
-  inject: {
-    configProvider: { default: () => ConfigConsumerProps },
-  },
-  // CheckboxPropsCache: {
-  //   [key: string]: any;
-  // };
-  // store: Store;
-  // columns: ColumnProps<T>[];
-  // components: TableComponents;
-
   data() {
-    // this.columns = props.columns || normalizeColumns(props.children)
     const props = getOptionProps(this);
     warning(
       !props.expandedRowRender || !('scroll' in props) || !props.scroll.x,
@@ -146,7 +143,7 @@ export default {
     );
     this.CheckboxPropsCache = {};
 
-    this.store = createStore({
+    this.store = Vue.observable({
       selectedRowKeys: getRowSelection(this.$props).selectedRowKeys || [],
       selectionDirty: false,
     });
@@ -179,26 +176,20 @@ export default {
     rowSelection: {
       handler(val, oldVal) {
         if (val && 'selectedRowKeys' in val) {
-          this.store.setState({
-            selectedRowKeys: val.selectedRowKeys || [],
-          });
+          this.store.selectedRowKeys = val.selectedRowKeys || [];
           const { rowSelection } = this;
           if (rowSelection && val.getCheckboxProps !== rowSelection.getCheckboxProps) {
             this.CheckboxPropsCache = {};
           }
         } else if (oldVal && !val) {
-          this.store.setState({
-            selectedRowKeys: [],
-          });
+          this.store.selectedRowKeys = [];
         }
       },
       deep: true,
     },
 
     dataSource() {
-      this.store.setState({
-        selectionDirty: false,
-      });
+      this.store.selectionDirty = false;
       this.CheckboxPropsCache = {};
     },
 
@@ -460,7 +451,7 @@ export default {
       const { selectWay, record, checked, changeRowKeys, nativeEvent } = selectionInfo;
       const rowSelection = getRowSelection(this.$props);
       if (rowSelection && !('selectedRowKeys' in rowSelection)) {
-        this.store.setState({ selectedRowKeys });
+        this.store.selectedRowKeys = selectedRowKeys;
       }
       const data = this.getFlatData();
       if (!rowSelection.onChange && !rowSelection[selectWay]) {
@@ -573,9 +564,7 @@ export default {
 
       this.setState(newState, () => {
         this.scrollToFirstRow();
-        this.store.setState({
-          selectionDirty: false,
-        });
+        this.store.selectionDirty = false;
         this.$emit(
           'change',
           ...this.prepareParamsArguments({
@@ -591,10 +580,8 @@ export default {
     handleSelect(record, rowIndex, e) {
       const checked = e.target.checked;
       const nativeEvent = e.nativeEvent;
-      const defaultSelection = this.store.getState().selectionDirty
-        ? []
-        : this.getDefaultSelection();
-      let selectedRowKeys = this.store.getState().selectedRowKeys.concat(defaultSelection);
+      const defaultSelection = this.store.selectionDirty ? [] : this.getDefaultSelection();
+      let selectedRowKeys = this.store.selectedRowKeys.concat(defaultSelection);
       const key = this.getRecordKey(record, rowIndex);
       const { pivot } = this.$data;
       const rows = this.getFlatCurrentPageData();
@@ -627,9 +614,7 @@ export default {
         }
 
         this.setState({ pivot: realIndex });
-        this.store.setState({
-          selectionDirty: true,
-        });
+        this.store.selectionDirty = true;
         this.setSelectedRowKeys(selectedRowKeys, {
           selectWay: 'onSelectMultiple',
           record,
@@ -644,9 +629,7 @@ export default {
           selectedRowKeys = selectedRowKeys.filter(i => key !== i);
         }
         this.setState({ pivot: realIndex });
-        this.store.setState({
-          selectionDirty: true,
-        });
+        this.store.selectionDirty = true;
         this.setSelectedRowKeys(selectedRowKeys, {
           selectWay: 'onSelect',
           record,
@@ -662,9 +645,7 @@ export default {
       const nativeEvent = e.nativeEvent;
       const key = this.getRecordKey(record, rowIndex);
       const selectedRowKeys = [key];
-      this.store.setState({
-        selectionDirty: true,
-      });
+      this.store.selectionDirty = true;
       this.setSelectedRowKeys(selectedRowKeys, {
         selectWay: 'onSelect',
         record,
@@ -676,10 +657,8 @@ export default {
 
     handleSelectRow(selectionKey, index, onSelectFunc) {
       const data = this.getFlatCurrentPageData();
-      const defaultSelection = this.store.getState().selectionDirty
-        ? []
-        : this.getDefaultSelection();
-      const selectedRowKeys = this.store.getState().selectedRowKeys.concat(defaultSelection);
+      const defaultSelection = this.store.selectionDirty ? [] : this.getDefaultSelection();
+      const selectedRowKeys = this.store.selectedRowKeys.concat(defaultSelection);
       const changeableRowKeys = data
         .filter((item, i) => !this.getCheckboxPropsByItem(item, i).props.disabled)
         .map((item, i) => this.getRecordKey(item, i));
@@ -724,9 +703,7 @@ export default {
           break;
       }
 
-      this.store.setState({
-        selectionDirty: true,
-      });
+      this.store.selectionDirty = true;
       // when select custom selection, callback selections[n].onSelect
       const { rowSelection } = this;
       let customSelectionStartIndex = 2;
@@ -769,9 +746,7 @@ export default {
       }
       this.setState(newState, this.scrollToFirstRow);
 
-      this.store.setState({
-        selectionDirty: false,
-      });
+      this.store.selectionDirty = false;
       this.$emit(
         'change',
         ...this.prepareParamsArguments({

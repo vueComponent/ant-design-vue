@@ -1,7 +1,6 @@
 import PropTypes from '../../_util/vue-types';
 import ExpandIcon from './ExpandIcon';
 import BaseMixin from '../../_util/BaseMixin';
-import { connect } from '../../_util/store';
 
 const ExpandableRow = {
   mixins: [BaseMixin],
@@ -14,7 +13,6 @@ const ExpandableRow = {
     indentSize: PropTypes.number,
     needIndentSpaced: PropTypes.bool.isRequired,
     expandRowByClick: PropTypes.bool,
-    expanded: PropTypes.bool.isRequired,
     expandIconAsCell: PropTypes.bool,
     expandIconColumnIndex: PropTypes.number,
     childrenColumnName: PropTypes.string,
@@ -24,7 +22,14 @@ const ExpandableRow = {
     // onRowClick: PropTypes.func,
     // children: PropTypes.func.isRequired,
   },
-
+  inject: {
+    store: { from: 'table-store', default: () => ({}) },
+  },
+  computed: {
+    expanded() {
+      return this.store.expandedRowKeys.includes(this.$props.rowKey);
+    },
+  },
   beforeDestroy() {
     this.handleDestroy();
   },
@@ -128,6 +133,4 @@ const ExpandableRow = {
   },
 };
 
-export default connect(({ expandedRowKeys }, { rowKey }) => ({
-  expanded: expandedRowKeys.includes(rowKey),
-}))(ExpandableRow);
+export default ExpandableRow;

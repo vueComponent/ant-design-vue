@@ -1,7 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { PaginationProps as getPaginationProps } from '../pagination';
 import { SpinProps as getSpinProps } from '../spin';
-import { Store } from './createStore';
 
 const PaginationProps = getPaginationProps();
 const SpinProps = getSpinProps();
@@ -162,7 +161,7 @@ export const TableProps = {
 // }
 
 export const SelectionCheckboxAllProps = {
-  store: Store,
+  store: PropTypes.any,
   locale: PropTypes.any,
   disabled: PropTypes.bool,
   getCheckboxPropsByItem: PropTypes.func,
@@ -181,7 +180,7 @@ export const SelectionCheckboxAllProps = {
 // }
 
 export const SelectionBoxProps = {
-  store: Store,
+  store: PropTypes.any,
   type: RowSelectionType,
   defaultSelection: PropTypes.arrayOf([PropTypes.string, PropTypes.number]),
   rowIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

@@ -1,10 +1,9 @@
 import Vue from 'vue';
 import { mount } from '@vue/test-utils';
-import createStore from '../createStore';
 import SelectionBox from '../SelectionBox';
 
 const getDefaultStore = selectedRowKeys => {
-  return createStore({
+  return Vue.observable({
     selectedRowKeys: selectedRowKeys || [],
     selectionDirty: false,
   });
@@ -26,7 +25,7 @@ describe('SelectionBox', () => {
       sync: false,
     });
 
-    expect(wrapper.vm.$data).toEqual({ checked: false });
+    expect(wrapper.vm.checked).toEqual(false);
   });
 
   it('checked by selectedRowKeys ', () => {
@@ -44,7 +43,7 @@ describe('SelectionBox', () => {
       sync: false,
     });
 
-    expect(wrapper.vm.$data).toEqual({ checked: true });
+    expect(wrapper.vm.checked).toEqual(true);
   });
 
   it('checked by defaultSelection', () => {
@@ -62,7 +61,7 @@ describe('SelectionBox', () => {
       sync: false,
     });
 
-    expect(wrapper.vm.$data).toEqual({ checked: true });
+    expect(wrapper.vm.checked).toEqual(true);
   });
 
   it('checked when store change', () => {
@@ -80,12 +79,10 @@ describe('SelectionBox', () => {
       sync: false,
     });
 
-    store.setState({
-      selectedRowKeys: ['1'],
-      selectionDirty: true,
-    });
+    store.selectedRowKeys = ['1'];
+    store.selectionDirty = true;
 
-    expect(wrapper.vm.$data).toEqual({ checked: true });
+    expect(wrapper.vm.checked).toEqual(true);
   });
 
   it('passes props to Checkbox', done => {

@@ -8,43 +8,19 @@ export default {
   name: 'SelectionBox',
   mixins: [BaseMixin],
   props: SelectionBoxProps,
-  data() {
-    return {
-      checked: this.getCheckState(this.$props),
-    };
-  },
-
-  mounted() {
-    this.subscribe();
-  },
-
-  beforeDestroy() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-  },
-  methods: {
-    getCheckState(props) {
-      const { store, defaultSelection, rowIndex } = props;
+  computed: {
+    checked() {
+      const { store, defaultSelection, rowIndex } = this.$props;
       let checked = false;
-      if (store.getState().selectionDirty) {
-        checked = store.getState().selectedRowKeys.indexOf(rowIndex) >= 0;
+      if (store.selectionDirty) {
+        checked = store.selectedRowKeys.indexOf(rowIndex) >= 0;
       } else {
         checked =
-          store.getState().selectedRowKeys.indexOf(rowIndex) >= 0 ||
-          defaultSelection.indexOf(rowIndex) >= 0;
+          store.selectedRowKeys.indexOf(rowIndex) >= 0 || defaultSelection.indexOf(rowIndex) >= 0;
       }
       return checked;
     },
-    subscribe() {
-      const { store } = this;
-      this.unsubscribe = store.subscribe(() => {
-        const checked = this.getCheckState(this.$props);
-        this.setState({ checked });
-      });
-    },
   },
-
   render() {
     const { type, rowIndex, ...rest } = getOptionProps(this);
     const { checked } = this;

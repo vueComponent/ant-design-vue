@@ -5,7 +5,6 @@ import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 import ExpandableRow from './ExpandableRow';
 import { mergeProps, getListeners } from '../../_util/props-util';
-import { connect } from '../../_util/store';
 function noop() {}
 const BaseTable = {
   name: 'BaseTable',
@@ -15,13 +14,13 @@ const BaseTable = {
     tableClassName: PropTypes.string.isRequired,
     hasHead: PropTypes.bool.isRequired,
     hasBody: PropTypes.bool.isRequired,
-    store: PropTypes.object.isRequired,
     expander: PropTypes.object.isRequired,
     getRowKey: PropTypes.func,
     isAnyColumnsFixed: PropTypes.bool,
   },
   inject: {
     table: { default: () => ({}) },
+    store: { from: 'table-store', default: () => ({}) },
   },
   methods: {
     getColumns(cols) {
@@ -37,9 +36,7 @@ const BaseTable = {
       }));
     },
     handleRowHover(isHover, key) {
-      this.store.setState({
-        currentHoverKey: isHover ? key : null,
-      });
+      this.store.currentHoverKey = isHover ? key : null;
     },
 
     renderRows(renderData, indent, ancestorKeys = []) {
@@ -187,4 +184,4 @@ const BaseTable = {
   },
 };
 
-export default connect()(BaseTable);
+export default BaseTable;

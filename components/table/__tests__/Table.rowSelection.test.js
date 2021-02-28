@@ -48,7 +48,7 @@ describe('Table.rowSelection', () => {
     checkboxAll.element.checked = true;
     checkboxAll.trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [0, 1, 2, 3],
         selectionDirty: true,
       });
@@ -56,7 +56,7 @@ describe('Table.rowSelection', () => {
     checkboxes.at(1).element.checked = false;
     checkboxes.at(1).trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [1, 2, 3],
         selectionDirty: true,
       });
@@ -64,7 +64,7 @@ describe('Table.rowSelection', () => {
     checkboxes.at(1).element.checked = true;
     checkboxes.at(1).trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [1, 2, 3, 0],
         selectionDirty: true,
       });
@@ -79,7 +79,7 @@ describe('Table.rowSelection', () => {
     radios.at(0).element.checked = true;
     radios.at(0).trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [0],
         selectionDirty: true,
       });
@@ -87,7 +87,7 @@ describe('Table.rowSelection', () => {
     radios.at(radios.length - 1).element.checked = true;
     radios.at(radios.length - 1).trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [3],
         selectionDirty: true,
       });
@@ -164,14 +164,14 @@ describe('Table.rowSelection', () => {
   it('can be controlled', async () => {
     const wrapper = mount(Table, getTableOptions({ rowSelection: { selectedRowKeys: [0] } }));
 
-    expect(getStore(wrapper).getState()).toEqual({
+    expect(getStore(wrapper)).toEqual({
       selectedRowKeys: [0],
       selectionDirty: false,
     });
 
     wrapper.setProps({ rowSelection: { selectedRowKeys: [1] } });
     await asyncExpect(() => {
-      expect(getStore(wrapper).getState()).toEqual({
+      expect(getStore(wrapper)).toEqual({
         selectedRowKeys: [1],
         selectionDirty: false,
       });
@@ -705,7 +705,9 @@ describe('Table.rowSelection', () => {
 
     checkboxes.at(1).element.checked = true;
     checkboxes.at(1).trigger('change');
-    expect(checkboxAll.vm.$data).toEqual({ indeterminate: true, checked: false });
+    await asyncExpect(() => {
+      expect(checkboxAll.vm.$data).toEqual({ indeterminate: true, checked: false });
+    });
 
     checkboxes.at(2).element.checked = true;
     checkboxes.at(2).trigger('change');

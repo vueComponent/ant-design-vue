@@ -165,8 +165,10 @@ const Alert = defineComponent({
             ref={alertNode}
           >
             {showIcon ? iconNode : null}
-            <span class={`${prefixCls}-message`}>{message}</span>
-            <span class={`${prefixCls}-description`}>{description}</span>
+            <div class={`${prefixCls}-content`}>
+              <div class={`${prefixCls}-message`}>{message}</div>
+              <div class={`${prefixCls}-description`}>{description}</div>
+            </div>
             {closeIcon}
           </div>
         </Transition>

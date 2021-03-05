@@ -10,6 +10,15 @@
 
 ---
 
+## 2.0.1
+
+`2021-02-27`
+
+- 🌟 `Badge` 新增 `Ribbon` [#3681](https://github.com/vueComponent/ant-design-vue/issues/3681)
+- 🌟 调整 `SearchInput` search 事件触发顺序 [#3725](https://github.com/vueComponent/ant-design-vue/issues/3725)
+- 🐞 修复 `Table` 销毁时卡死问题 [#3531](https://github.com/vueComponent/ant-design-vue/issues/3531)
+- 🐞 修复 `Menu` css 中引入了 less 文件问题 [#3678](https://github.com/vueComponent/ant-design-vue/issues/3678)
+- 🐞 修复 `Alert` 自定义图标错位问题 [#3712](https://github.com/vueComponent/ant-design-vue/issues/3712)
 ## 2.0.0
 
 `2021-02-06`
@@ -31,9 +40,9 @@
 - 🐞 修复 npm 安装时报错问题 [#3515](https://github.com/vueComponent/ant-design-vue/issues/3515)
 - 🐞 修复 `Breadcrumn` 分割线不显示问题 [#3522](https://github.com/vueComponent/ant-design-vue/issues/3522)
 - 🐞 修复 `Radio` 不受控问题 [#3517](https://github.com/vueComponent/ant-design-vue/issues/3517)
-- 🐞 修复 `FormItem` 不换行问题  [#3538](https://github.com/vueComponent/ant-design-vue/issues/3538)
+- 🐞 修复 `FormItem` 不换行问题 [#3538](https://github.com/vueComponent/ant-design-vue/issues/3538)
 - 🐞 修复 `Carousel` `pauseOnDotsHover` 不生效问题 [#3519](https://github.com/vueComponent/ant-design-vue/issues/3519)
-- 🐞 修复 `Input.Search` `class` 不生效问题  [#3541](https://github.com/vueComponent/ant-design-vue/issues/3541)
+- 🐞 修复 `Input.Search` `class` 不生效问题 [#3541](https://github.com/vueComponent/ant-design-vue/issues/3541)
 - 🐞 修复 `InputNumber` 在微软输入法下多次触发 change 事件问题 [#3550](https://github.com/vueComponent/ant-design-vue/issues/3550)
 - 🐞 修复 `Tabs` disabled 状态下依然可以通过键盘切换问题 [#3575](https://github.com/vueComponent/ant-design-vue/issues/3575)
 - 🐞 修复 `Switch` 在 table 中切换不生效问题 [#3512](https://github.com/vueComponent/ant-design-vue/issues/3512)

@@ -6,8 +6,8 @@ import antd from 'ant-design-vue';
 import { sleep } from '../utils';
 
 export default function demoTest(component, options = {}) {
-  const suffix = options.suffix || 'md';
-  const files = glob.sync(`./antdv-demo/docs/${component}/demo/*.${suffix}`);
+  const suffix = options.suffix || 'vue';
+  const files = glob.sync(`./v2-doc/src/docs/${component}/demo/*.${suffix}`);
 
   files.forEach(file => {
     let testMethod = options.skip === true ? test.skip : test;

@@ -1,16 +1,37 @@
 <template>
   <div>
-    <a-collapse :accordion="true" default-active-key="2" :bordered="false">
-      <a-collapse-panel key="1" header="This is panel header 1">
-        <p>{{ text }}</p>
-      </a-collapse-panel>
-      <a-collapse-panel key="2" header="This is panel header 2" :disabled="false">
-        <p>{{ text }}</p>
-      </a-collapse-panel>
-      <a-collapse-panel key="3" header="This is panel header 3">
-        <p>{{ text }}</p>
-      </a-collapse-panel>
-    </a-collapse>
+    <a-card
+      title="测试"
+      :tab-props="{ size: 'small' }"
+      :tab-list="[
+        { key: 'tab1', tab: 'tab1' },
+        { key: 'tab2', tab: 'tab2' },
+      ]"
+    />
+    <a-card
+      title="测试"
+      :tab-props="{ size: 'large' }"
+      :tab-list="[
+        { key: 'tab1', tab: 'tab1' },
+        { key: 'tab2', tab: 'tab2' },
+      ]"
+    />
+    <a-card
+      title="测试"
+      :tab-props="{}"
+      :tab-list="[
+        { key: 'tab1', tab: 'tab1' },
+        { key: 'tab2', tab: 'tab2' },
+      ]"
+    />
+    <a-card
+      title="测试"
+      :tab-props="{ size: 'default' }"
+      :tab-list="[
+        { key: 'tab1', tab: 'tab1' },
+        { key: 'tab2', tab: 'tab2' },
+      ]"
+    />
   </div>
 </template>
 <script>

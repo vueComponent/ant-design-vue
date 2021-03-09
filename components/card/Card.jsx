@@ -29,6 +29,7 @@ export default {
     size: PropTypes.oneOf(['default', 'small']),
     actions: PropTypes.any,
     tabList: PropTypes.array,
+    tabProps: PropTypes.object,
     tabBarExtraContent: PropTypes.any,
     activeTabKey: PropTypes.string,
     defaultActiveTabKey: PropTypes.string,
@@ -73,6 +74,7 @@ export default {
       size = 'default',
       type,
       tabList,
+      tabProps = {},
       hoverable,
       activeTabKey,
       defaultActiveTabKey,
@@ -145,7 +147,7 @@ export default {
     const hasActiveTabKey = activeTabKey !== undefined;
     const tabsProps = {
       props: {
-        size: 'large',
+        ...tabProps,
         [hasActiveTabKey ? 'activeKey' : 'defaultActiveKey']: hasActiveTabKey
           ? activeTabKey
           : defaultActiveTabKey,

@@ -1,8 +1,9 @@
 import { defineComponent, inject } from 'vue';
 import { Item, itemProps } from '../vc-menu';
 import { getOptionProps, getSlot } from '../_util/props-util';
-import Tooltip, { TooltipProps } from '../tooltip';
-import { SiderContextProps } from '../layout/Sider';
+import type { TooltipProps } from '../tooltip';
+import Tooltip from '../tooltip';
+import type { SiderContextProps } from '../layout/Sider';
 import { injectExtraPropsKey } from '../vc-menu/FunctionProvider';
 import PropTypes from '../_util/vue-types';
 

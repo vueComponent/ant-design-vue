@@ -1,8 +1,10 @@
-import { LiteralUnion, tuple } from '../_util/type';
-import { PresetColorType } from '../_util/colors';
+import type { LiteralUnion } from '../_util/type';
+import { tuple } from '../_util/type';
+import type { PresetColorType } from '../_util/colors';
 import { isPresetColor } from './utils';
 import { defaultConfigProvider } from '../config-provider';
-import { HTMLAttributes, FunctionalComponent, VNodeTypes, inject, CSSProperties } from 'vue';
+import type { HTMLAttributes, FunctionalComponent, VNodeTypes, CSSProperties } from 'vue';
+import { inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 
 type RibbonPlacement = 'start' | 'end';

@@ -1,22 +1,8 @@
-import {
-  inject,
-  ref,
-  App,
-  defineComponent,
-  PropType,
-  VNode,
-  HTMLAttributes,
-  ExtractPropTypes,
-  onMounted,
-  onBeforeUnmount,
-  Plugin,
-} from 'vue';
+import type { App, PropType, VNode, HTMLAttributes, ExtractPropTypes, Plugin } from 'vue';
+import { inject, ref, defineComponent, onMounted, onBeforeUnmount } from 'vue';
 import warning from '../_util/warning';
-import ResponsiveObserve, {
-  Breakpoint,
-  responsiveArray,
-  ScreenMap,
-} from '../_util/responsiveObserve';
+import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
+import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import { defaultConfigProvider } from '../config-provider';
 import Row from './Row';
 import PropTypes from '../_util/vue-types';
@@ -217,7 +203,7 @@ const Descriptions = defineComponent<DescriptionsProps>({
 
 Descriptions.props = descriptionsProps;
 
-Descriptions.install = function(app: App) {
+Descriptions.install = function (app: App) {
   app.component(Descriptions.name, Descriptions);
   app.component(Descriptions.Item.name, Descriptions.Item);
   return app;

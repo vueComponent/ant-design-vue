@@ -1,4 +1,5 @@
-import { CSSProperties, VNodeTypes, inject, FunctionalComponent } from 'vue';
+import type { CSSProperties, VNodeTypes, FunctionalComponent } from 'vue';
+import { inject } from 'vue';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider } from '../config-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';

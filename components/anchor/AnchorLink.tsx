@@ -1,9 +1,10 @@
-import { ComponentPublicInstance, defineComponent, inject, nextTick } from 'vue';
+import type { ComponentPublicInstance } from 'vue';
+import { defineComponent, inject, nextTick } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider } from '../config-provider';
-import { AntAnchor } from './Anchor';
+import type { AntAnchor } from './Anchor';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function noop(..._any: any[]): any {}

@@ -1,9 +1,11 @@
-import { inject, cloneVNode, defineComponent, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { inject, cloneVNode, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getPropsData, filterEmpty, getComponent } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import TimelineItem, { TimeLineItemProps } from './TimelineItem';
+import type { TimeLineItemProps } from './TimelineItem';
+import TimelineItem from './TimelineItem';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple } from '../_util/type';

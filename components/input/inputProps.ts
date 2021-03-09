@@ -1,5 +1,5 @@
 import { tuple } from '../_util/type';
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 export default {
   prefixCls: PropTypes.string,

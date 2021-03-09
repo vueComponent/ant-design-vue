@@ -1,8 +1,9 @@
-import { inject, defineComponent, HTMLAttributes, CSSProperties } from 'vue';
+import type { HTMLAttributes, CSSProperties } from 'vue';
+import { inject, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
-import { rowContextState } from './Row';
+import type { rowContextState } from './Row';
 
 type ColSpanType = number | string;
 

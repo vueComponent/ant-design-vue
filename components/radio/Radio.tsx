@@ -1,10 +1,11 @@
-import { defineComponent, ExtractPropTypes, inject } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import VcCheckbox from '../vc-checkbox';
 import classNames from '../_util/classNames';
 import { getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
-import { RadioChangeEvent } from './interface';
+import type { RadioChangeEvent } from './interface';
 
 export const radioProps = {
   prefixCls: PropTypes.string,

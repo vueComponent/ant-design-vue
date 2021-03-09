@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Card from './Card';
 import Meta from './Meta';
 import Grid from './Grid';
@@ -7,7 +7,7 @@ Card.Meta = Meta;
 Card.Grid = Grid;
 
 /* istanbul ignore next */
-Card.install = function(app: App) {
+Card.install = function (app: App) {
   app.component(Card.name, Card);
   app.component(Meta.name, Meta);
   app.component(Grid.name, Grid);

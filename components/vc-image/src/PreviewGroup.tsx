@@ -1,4 +1,5 @@
-import { ref, provide, defineComponent, inject, Ref, reactive } from 'vue';
+import type { Ref } from 'vue';
+import { ref, provide, defineComponent, inject, reactive } from 'vue';
 import Preview from './Preview';
 
 export interface GroupConsumerProps {

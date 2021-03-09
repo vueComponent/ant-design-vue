@@ -3,9 +3,10 @@ import PropTypes from '../_util/vue-types';
 import { getSlot } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import createRef from '../_util/createRef';
-import { CSSProperties, defineComponent, VNodeChild } from 'vue';
-import { RenderDOMFunc } from './interface';
-import { DropdownRender } from './interface/generator';
+import type { CSSProperties, VNodeChild } from 'vue';
+import { defineComponent } from 'vue';
+import type { RenderDOMFunc } from './interface';
+import type { DropdownRender } from './interface/generator';
 
 const getBuiltInPlacements = (dropdownMatchSelectWidth: number | boolean) => {
   // Enable horizontal overflow auto-adjustment when a custom dropdown width is provided

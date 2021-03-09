@@ -1,6 +1,6 @@
-import { FunctionalComponent } from 'vue';
+import type { FunctionalComponent } from 'vue';
 
-import { OptionGroupData } from './interface';
+import type { OptionGroupData } from './interface';
 
 export type OptGroupProps = Omit<OptionGroupData, 'options'>;
 

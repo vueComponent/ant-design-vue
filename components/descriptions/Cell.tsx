@@ -1,4 +1,4 @@
-import { VNodeTypes, HTMLAttributes, FunctionalComponent } from 'vue';
+import type { VNodeTypes, HTMLAttributes, FunctionalComponent } from 'vue';
 
 function notEmpty(val: any) {
   return val !== undefined && val !== null;

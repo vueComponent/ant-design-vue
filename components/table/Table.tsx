@@ -15,14 +15,14 @@ import { getOptionProps } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import BaseMixin from '../_util/BaseMixin';
 import { defaultConfigProvider } from '../config-provider';
-import {
-  tableProps,
+import type {
   TableComponents,
   TableState,
   TableProps,
   ColumnProps,
   TableStateFilters,
 } from './interface';
+import { tableProps } from './interface';
 import Pagination from '../pagination';
 import Spin from '../spin';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';

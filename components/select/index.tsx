@@ -1,8 +1,10 @@
-import { computed, defineComponent, inject, ref, VNodeChild, App, PropType, Plugin } from 'vue';
+import type { VNodeChild, App, PropType, Plugin } from 'vue';
+import { computed, defineComponent, inject, ref } from 'vue';
 import omit from 'omit.js';
 import classNames from '../_util/classNames';
-import RcSelect, { Option, OptGroup, SelectProps as RcSelectProps, BaseProps } from '../vc-select';
-import { OptionProps as OptionPropsType } from '../vc-select/Option';
+import type { SelectProps as RcSelectProps } from '../vc-select';
+import RcSelect, { Option, OptGroup, BaseProps } from '../vc-select';
+import type { OptionProps as OptionPropsType } from '../vc-select/Option';
 import { defaultConfigProvider } from '../config-provider';
 import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
@@ -223,7 +225,7 @@ const Select = defineComponent({
   },
 });
 /* istanbul ignore next */
-Select.install = function(app: App) {
+Select.install = function (app: App) {
   app.component(Select.name, Select);
   app.component(Select.Option.displayName, Select.Option);
   app.component(Select.OptGroup.displayName, Select.OptGroup);

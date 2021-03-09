@@ -1,8 +1,11 @@
-import { reactive, provide, VNodeTypes, PropType, defineComponent, watch } from 'vue';
+import type { VNodeTypes, PropType } from 'vue';
+import { reactive, provide, defineComponent, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
-import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
-import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
-import { TransformCellTextProps } from '../table/interface';
+import type { RenderEmptyHandler } from './renderEmpty';
+import defaultRenderEmpty from './renderEmpty';
+import type { Locale } from '../locale-provider';
+import LocaleProvider, { ANT_MARK } from '../locale-provider';
+import type { TransformCellTextProps } from '../table/interface';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { withInstall } from '../_util/type';
 

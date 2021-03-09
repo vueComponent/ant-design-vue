@@ -1,4 +1,5 @@
-import { provide, inject, defineComponent, VNode } from 'vue';
+import type { VNode } from 'vue';
+import { provide, inject, defineComponent } from 'vue';
 import Button from '../button';
 import classNames from '../_util/classNames';
 import buttonTypes from '../button/buttonTypes';

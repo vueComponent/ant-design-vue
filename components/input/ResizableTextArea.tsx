@@ -1,4 +1,5 @@
-import { nextTick, PropType, VNode } from 'vue';
+import type { PropType, VNode } from 'vue';
+import { nextTick } from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import omit from 'omit.js';
 import classNames from '../_util/classNames';

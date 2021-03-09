@@ -1,6 +1,6 @@
 import { flattenChildren, isValidElement } from '../../_util/props-util';
-import { VNode, VNodeChild } from 'vue';
-import { OptionData, OptionGroupData, OptionsType } from '../interface';
+import type { VNode, VNodeChild } from 'vue';
+import type { OptionData, OptionGroupData, OptionsType } from '../interface';
 
 function convertNodeToOption(node: VNode): OptionData {
   const {

@@ -1,5 +1,6 @@
 import classNames from '../_util/classNames';
-import { inject, provide, PropType, defineComponent, nextTick } from 'vue';
+import type { PropType } from 'vue';
+import { inject, provide, defineComponent, nextTick } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import { getOptionProps, hasProp, getComponent, getSlot } from '../_util/props-util';
@@ -11,7 +12,7 @@ import BarsOutlined from '@ant-design/icons-vue/BarsOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import omit from 'omit.js';
-import { SiderHookProvider } from './layout';
+import type { SiderHookProvider } from './layout';
 
 const dimensionMaxMap = {
   xs: '479.98px',

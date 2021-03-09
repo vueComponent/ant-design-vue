@@ -1,4 +1,4 @@
-import {
+import type {
   RawValueType,
   GetLabeledValue,
   LabelValueType,

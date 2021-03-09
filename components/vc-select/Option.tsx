@@ -1,6 +1,6 @@
-import { FunctionalComponent } from 'vue';
+import type { FunctionalComponent } from 'vue';
 
-import { OptionCoreData } from './interface';
+import type { OptionCoreData } from './interface';
 
 export interface OptionProps extends Omit<OptionCoreData, 'label'> {
   /** Save for customize data */

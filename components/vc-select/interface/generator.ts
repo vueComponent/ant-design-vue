@@ -1,5 +1,5 @@
-import { VueNode } from '../../_util/type';
-import { VNodeChild } from 'vue';
+import type { VueNode } from '../../_util/type';
+import type { VNodeChild } from 'vue';
 
 export type SelectSource = 'option' | 'selection' | 'input';
 

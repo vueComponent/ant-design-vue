@@ -4,7 +4,8 @@ import { getInputClassName } from './Input';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import { getComponent } from '../_util/props-util';
-import { defineComponent, VNode } from 'vue';
+import type { VNode } from 'vue';
+import { defineComponent } from 'vue';
 import { tuple } from '../_util/type';
 
 export function hasPrefixSuffix(instance: any) {

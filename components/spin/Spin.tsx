@@ -1,4 +1,5 @@
-import { inject, cloneVNode, isVNode, defineComponent, VNode, nextTick } from 'vue';
+import type { VNode } from 'vue';
+import { inject, cloneVNode, isVNode, defineComponent, nextTick } from 'vue';
 import debounce from 'lodash-es/debounce';
 import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';

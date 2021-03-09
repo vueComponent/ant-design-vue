@@ -1,10 +1,11 @@
-import { defineComponent, inject, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
 import StatisticNumber from './Number';
-import { countdownValueType } from './utils';
+import type { countdownValueType } from './utils';
 
 export const StatisticProps = {
   prefixCls: PropTypes.string,

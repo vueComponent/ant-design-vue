@@ -1,18 +1,12 @@
-import {
-  inject,
-  provide,
-  PropType,
-  defineComponent,
-  computed,
-  nextTick,
-  ExtractPropTypes,
-} from 'vue';
+import type { PropType, ExtractPropTypes } from 'vue';
+import { inject, provide, defineComponent, computed, nextTick } from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import { getTransitionProps, Transition } from '../_util/transition';
 import Row from '../grid/Row';
-import Col, { ColProps } from '../grid/Col';
+import type { ColProps } from '../grid/Col';
+import Col from '../grid/Col';
 import hasProp, {
   findDOMNode,
   getComponent,
@@ -33,8 +27,9 @@ import { getNamePath } from './utils/valueUtil';
 import { toArray } from './utils/typeUtil';
 import { warning } from '../vc-util/warning';
 import find from 'lodash-es/find';
-import { tuple, VueNode } from '../_util/type';
-import { ValidateOptions } from './interface';
+import type { VueNode } from '../_util/type';
+import { tuple } from '../_util/type';
+import type { ValidateOptions } from './interface';
 
 const iconMap = {
   success: CheckCircleFilled,

@@ -1,7 +1,9 @@
-import { App, defineComponent, inject, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 import ImageInternal from '../vc-image';
-import { ImageProps, ImagePropsType } from '../vc-image/src/Image';
+import type { ImagePropsType } from '../vc-image/src/Image';
+import { ImageProps } from '../vc-image/src/Image';
 
 import PreviewGroup from './PreviewGroup';
 const Image = defineComponent({
@@ -19,11 +21,13 @@ const Image = defineComponent({
   },
 });
 
-export { ImageProps, ImagePropsType };
+export type { ImagePropsType };
+
+export { ImageProps };
 
 Image.PreviewGroup = PreviewGroup;
 
-Image.install = function(app: App) {
+Image.install = function (app: App) {
   app.component(Image.name, Image);
   app.component(Image.PreviewGroup.name, Image.PreviewGroup);
   return app;

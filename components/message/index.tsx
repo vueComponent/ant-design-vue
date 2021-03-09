@@ -1,4 +1,4 @@
-import { CSSProperties, VNodeTypes } from 'vue';
+import type { CSSProperties, VNodeTypes } from 'vue';
 import Notification from '../vc-notification';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';

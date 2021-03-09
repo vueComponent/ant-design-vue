@@ -1,4 +1,5 @@
-import { defineComponent, HTMLAttributes, inject } from 'vue';
+import type { HTMLAttributes } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { hasProp, getComponent, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';

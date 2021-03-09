@@ -1,4 +1,4 @@
-import { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
 
 import { tuple } from '../_util/type';
 import PropTypes, { withUndefined } from '../_util/vue-types';

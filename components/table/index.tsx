@@ -1,7 +1,8 @@
-import { App, defineComponent, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
+import { defineComponent } from 'vue';
 import T, { defaultTableProps } from './Table';
-import Column from './Column';
-import ColumnGroup from './ColumnGroup';
+import type Column from './Column';
+import type ColumnGroup from './ColumnGroup';
 import { getOptionProps, getKey, getPropsData, getSlot } from '../_util/props-util';
 
 const Table = defineComponent({
@@ -86,7 +87,7 @@ const Table = defineComponent({
   },
 });
 /* istanbul ignore next */
-Table.install = function(app: App) {
+Table.install = function (app: App) {
   app.component(Table.name, Table);
   app.component(Table.Column.name, Table.Column);
   app.component(Table.ColumnGroup.name, Table.ColumnGroup);

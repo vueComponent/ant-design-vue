@@ -1,4 +1,5 @@
-import { defineComponent, inject, Text, VNode } from 'vue';
+import type { VNode } from 'vue';
+import { defineComponent, inject, Text } from 'vue';
 import Wave from '../_util/wave';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';

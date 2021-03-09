@@ -1,4 +1,5 @@
-import { inject, cloneVNode, defineComponent, ref, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { inject, cloneVNode, defineComponent, ref } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';

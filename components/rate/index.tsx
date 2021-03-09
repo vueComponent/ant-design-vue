@@ -1,4 +1,5 @@
-import { inject, defineComponent, VNode } from 'vue';
+import type { VNode } from 'vue';
+import { inject, defineComponent } from 'vue';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';

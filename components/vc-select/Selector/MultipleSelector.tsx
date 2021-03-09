@@ -1,18 +1,10 @@
 import TransBtn from '../TransBtn';
-import { LabelValueType, RawValueType, CustomTagProps } from '../interface/generator';
-import { RenderNode } from '../interface';
-import { InnerSelectorProps } from '.';
+import type { LabelValueType, RawValueType, CustomTagProps } from '../interface/generator';
+import type { RenderNode } from '../interface';
+import type { InnerSelectorProps } from '.';
 import Input from './Input';
-import {
-  computed,
-  defineComponent,
-  onMounted,
-  ref,
-  VNodeChild,
-  watch,
-  watchEffect,
-  Ref,
-} from 'vue';
+import type { VNodeChild, Ref } from 'vue';
+import { computed, defineComponent, onMounted, ref, watch, watchEffect } from 'vue';
 import classNames from '../../_util/classNames';
 import pickAttrs from '../../_util/pickAttrs';
 import PropTypes from '../../_util/vue-types';

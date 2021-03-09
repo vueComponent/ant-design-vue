@@ -1,11 +1,5 @@
-import {
-  defineComponent,
-  ExtractPropTypes,
-  inject,
-  VNodeTypes,
-  CSSProperties,
-  PropType,
-} from 'vue';
+import type { ExtractPropTypes, VNodeTypes, CSSProperties, PropType } from 'vue';
+import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import Dialog from '../vc-dialog';
 import PropTypes from '../_util/vue-types';

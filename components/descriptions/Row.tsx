@@ -1,6 +1,6 @@
 import Cell from './Cell';
 import { getOptionProps, getSlot, getClass, getStyle, getComponent } from '../_util/props-util';
-import { FunctionalComponent, VNode } from 'vue';
+import type { FunctionalComponent, VNode } from 'vue';
 
 interface CellConfig {
   component: string | [string, string];

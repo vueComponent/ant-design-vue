@@ -1,4 +1,5 @@
-import { defineComponent, inject, CSSProperties, nextTick } from 'vue';
+import type { CSSProperties } from 'vue';
+import { defineComponent, inject, nextTick } from 'vue';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps, initDefaultProps } from '../_util/props-util';
 import {

@@ -1,11 +1,12 @@
-import { defineComponent, inject, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, inject } from 'vue';
 import Select from '../select';
 import { Group, Button } from '../radio';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
-import { VueNode } from '../_util/type';
-import moment from 'moment';
-import { RadioChangeEvent } from '../radio/interface';
+import type { VueNode } from '../_util/type';
+import type moment from 'moment';
+import type { RadioChangeEvent } from '../radio/interface';
 
 function getMonthsLocale(value: moment.Moment): string[] {
   const current = value.clone();

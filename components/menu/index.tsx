@@ -1,4 +1,5 @@
-import { defineComponent, inject, provide, toRef, App, ExtractPropTypes, Plugin } from 'vue';
+import type { App, ExtractPropTypes, Plugin } from 'vue';
+import { defineComponent, inject, provide, toRef } from 'vue';
 import omit from 'omit.js';
 import VcMenu, { Divider, ItemGroup } from '../vc-menu';
 import SubMenu from './SubMenu';
@@ -10,7 +11,7 @@ import { hasProp, getOptionProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import commonPropsType from '../vc-menu/commonPropsType';
 import { defaultConfigProvider } from '../config-provider';
-import { SiderContextProps } from '../layout/Sider';
+import type { SiderContextProps } from '../layout/Sider';
 import { tuple } from '../_util/type';
 // import raf from '../_util/raf';
 
@@ -305,7 +306,7 @@ const Menu = defineComponent({
 });
 
 /* istanbul ignore next */
-Menu.install = function(app: App) {
+Menu.install = function (app: App) {
   app.component(Menu.name, Menu);
   app.component(Menu.Item.name, Menu.Item);
   app.component(Menu.SubMenu.name, Menu.SubMenu);

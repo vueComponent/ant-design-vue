@@ -1,4 +1,5 @@
-import { App, defineComponent, inject, VNodeTypes, Plugin } from 'vue';
+import type { App, VNodeTypes, Plugin } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import { getComponent } from '../_util/props-util';
@@ -91,7 +92,7 @@ Result.PRESENTED_IMAGE_404 = ExceptionMap[404];
 Result.PRESENTED_IMAGE_500 = ExceptionMap[500];
 
 /* istanbul ignore next */
-Result.install = function(app: App) {
+Result.install = function (app: App) {
   app.component(Result.name, Result);
   return app;
 };

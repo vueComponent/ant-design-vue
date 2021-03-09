@@ -1,4 +1,4 @@
-import { VueNode } from '../_util/type';
+import type { VueNode } from '../_util/type';
 
 export type InternalNamePath = (string | number)[];
 export type NamePath = string | number | InternalNamePath;

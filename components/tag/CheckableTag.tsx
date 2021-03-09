@@ -1,4 +1,5 @@
-import { inject, defineComponent, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { inject, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider } from '../config-provider';
 import PropTypes from '../_util/vue-types';

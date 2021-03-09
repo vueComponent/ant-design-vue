@@ -1,4 +1,4 @@
-import { FunctionalComponent } from 'vue';
+import type { FunctionalComponent } from 'vue';
 
 export interface FilterDropdownMenuWrapperProps {
   class?: string;

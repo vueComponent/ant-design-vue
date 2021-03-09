@@ -1,4 +1,5 @@
-import { App, defineComponent, inject, nextTick, PropType, VNodeTypes, Plugin } from 'vue';
+import type { App, PropType, VNodeTypes, Plugin } from 'vue';
+import { defineComponent, inject, nextTick } from 'vue';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
@@ -8,7 +9,7 @@ import Spin from '../spin';
 import BaseMixin from '../_util/BaseMixin';
 import { defaultConfigProvider } from '../config-provider';
 import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
-import { RenderEmptyHandler } from '../config-provider/renderEmpty';
+import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
 const { Option } = VcMentions;
 
@@ -198,7 +199,7 @@ const Mentions = defineComponent({
 });
 
 /* istanbul ignore next */
-Mentions.install = function(app: App) {
+Mentions.install = function (app: App) {
   app.component(Mentions.name, Mentions);
   app.component(Mentions.Option.name, Mentions.Option);
   return app;

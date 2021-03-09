@@ -4,7 +4,8 @@ import BaseMixin from '../_util/BaseMixin';
 import omit from 'omit.js';
 import { cloneElement } from '../_util/vnode';
 import { defaultConfigProvider } from '../config-provider';
-import { CSSProperties, defineComponent, inject } from 'vue';
+import type { CSSProperties } from 'vue';
+import { defineComponent, inject } from 'vue';
 
 function getNumberArray(num: string | number | undefined | null) {
   return num

@@ -2,7 +2,8 @@ import { defineComponent, inject } from 'vue';
 import PropsTypes from '../_util/vue-types';
 import { getComponent, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
-import { VueNode, withInstall } from '../_util/type';
+import type { VueNode } from '../_util/type';
+import { withInstall } from '../_util/type';
 export const CommentProps = {
   actions: PropsTypes.array,
   /** The element to display as the comment author. */

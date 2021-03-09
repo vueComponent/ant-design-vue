@@ -7,7 +7,8 @@ import { cloneElement } from '../_util/vnode';
 import { getTransitionProps, Transition } from '../_util/transition';
 import isNumeric from '../_util/isNumeric';
 import { defaultConfigProvider } from '../config-provider';
-import { inject, defineComponent, CSSProperties, VNode, App, Plugin } from 'vue';
+import type { CSSProperties, VNode, App, Plugin } from 'vue';
+import { inject, defineComponent } from 'vue';
 import { tuple } from '../_util/type';
 import Ribbon from './Ribbon';
 
@@ -229,7 +230,7 @@ const Badge = defineComponent({
   },
 });
 
-Badge.install = function(app: App) {
+Badge.install = function (app: App) {
   app.component(Badge.name, Badge);
   app.component(Badge.Ribbon.displayName, Badge.Ribbon);
   return app;

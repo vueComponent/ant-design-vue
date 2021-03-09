@@ -14,7 +14,7 @@ if (
   );
 }
 /* @remove-on-es-build-end */
-import { App } from 'vue';
+import type { App } from 'vue';
 
 import { default as Affix } from './affix';
 
@@ -212,7 +212,7 @@ const components = [
   Image,
 ];
 
-const install = function(app: App) {
+const install = function (app: App) {
   components.forEach(component => {
     app.use(component);
   });

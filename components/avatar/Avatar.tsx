@@ -1,5 +1,7 @@
-import { tuple, VueNode } from '../_util/type';
-import { CSSProperties, defineComponent, inject, nextTick, PropType } from 'vue';
+import type { VueNode } from '../_util/type';
+import { tuple } from '../_util/type';
+import type { CSSProperties, PropType } from 'vue';
+import { defineComponent, inject, nextTick } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 import { getComponent } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';

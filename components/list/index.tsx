@@ -1,4 +1,5 @@
-import { provide, inject, defineComponent, App, Plugin, ExtractPropTypes } from 'vue';
+import type { App, Plugin, ExtractPropTypes } from 'vue';
+import { provide, inject, defineComponent } from 'vue';
 import omit from 'omit.js';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import classNames from '../_util/classNames';
@@ -8,7 +9,8 @@ import Spin from '../spin';
 import Pagination, { PaginationConfig } from '../pagination';
 import { Row } from '../grid';
 
-import Item, { ListItemMeta } from './Item';
+import type { ListItemMeta } from './Item';
+import Item from './Item';
 import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { cloneElement } from '../_util/vnode';
@@ -290,7 +292,7 @@ const List = defineComponent({
 });
 
 /* istanbul ignore next */
-List.install = function(app: App) {
+List.install = function (app: App) {
   app.component(List.name, List);
   app.component(List.Item.name, List.Item);
   app.component(List.Item.Meta.displayName, List.Item.Meta);

@@ -3,7 +3,8 @@ import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import Statistic, { StatisticProps } from './Statistic';
-import { formatCountdown, countdownValueType, FormatConfig } from './utils';
+import type { countdownValueType, FormatConfig } from './utils';
+import { formatCountdown } from './utils';
 
 const REFRESH_INTERVAL = 1000 / 30;
 

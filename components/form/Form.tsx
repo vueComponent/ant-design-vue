@@ -1,4 +1,5 @@
-import { defineComponent, inject, provide, PropType, computed, ExtractPropTypes } from 'vue';
+import type { PropType, ExtractPropTypes } from 'vue';
+import { defineComponent, inject, provide, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import warning from '../_util/warning';
@@ -12,9 +13,10 @@ import { toArray } from './utils/typeUtil';
 import isEqual from 'lodash-es/isEqual';
 import scrollIntoView from 'scroll-into-view-if-needed';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { tuple, VueNode } from '../_util/type';
-import { ColProps } from '../grid/Col';
-import { InternalNamePath, NamePath, ValidateErrorEntity, ValidateOptions } from './interface';
+import type { VueNode } from '../_util/type';
+import { tuple } from '../_util/type';
+import type { ColProps } from '../grid/Col';
+import type { InternalNamePath, NamePath, ValidateErrorEntity, ValidateOptions } from './interface';
 
 export type ValidationRule = {
   /** validation error message */

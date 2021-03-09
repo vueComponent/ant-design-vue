@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes, inject } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';

@@ -1,7 +1,9 @@
-import { inject, defineComponent, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { inject, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
-import { defaultConfigProvider, SizeType } from '../config-provider';
+import type { SizeType } from '../config-provider';
+import { defaultConfigProvider } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
 
 const spaceSize = {

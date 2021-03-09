@@ -1,4 +1,5 @@
-import { CSSProperties, DefineComponent, defineComponent, inject, nextTick } from 'vue';
+import type { CSSProperties, DefineComponent } from 'vue';
+import { defineComponent, inject, nextTick } from 'vue';
 import moment from 'moment';
 import omit from 'lodash-es/omit';
 import MonthCalendar from '../vc-calendar/src/MonthCalendar';

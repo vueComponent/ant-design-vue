@@ -1,4 +1,5 @@
-import { defineComponent, PropType, provide } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, provide } from 'vue';
 
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
 

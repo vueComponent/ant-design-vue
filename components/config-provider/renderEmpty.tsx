@@ -1,4 +1,5 @@
-import { inject, VNodeChild } from 'vue';
+import type { VNodeChild } from 'vue';
+import { inject } from 'vue';
 import Empty from '../empty';
 import { defaultConfigProvider } from '.';
 

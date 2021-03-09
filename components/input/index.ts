@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Input from './Input';
 import Group from './Group';
 import Search from './Search';
@@ -11,7 +11,7 @@ Input.TextArea = TextArea;
 Input.Password = Password;
 
 /* istanbul ignore next */
-Input.install = function(app: App) {
+Input.install = function (app: App) {
   app.component(Input.name, Input);
   app.component(Input.Group.name, Input.Group);
   app.component(Input.Search.name, Input.Search);

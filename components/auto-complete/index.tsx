@@ -1,4 +1,5 @@
-import { App, defineComponent, inject, provide, Plugin, VNode } from 'vue';
+import type { App, Plugin, VNode } from 'vue';
+import { defineComponent, inject, provide } from 'vue';
 import Select, { SelectProps } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';
@@ -140,7 +141,7 @@ const AutoComplete = defineComponent({
 });
 
 /* istanbul ignore next */
-AutoComplete.install = function(app: App) {
+AutoComplete.install = function (app: App) {
   app.component(AutoComplete.name, AutoComplete);
   app.component(AutoComplete.Option.name, AutoComplete.Option);
   app.component(AutoComplete.OptGroup.name, AutoComplete.OptGroup);

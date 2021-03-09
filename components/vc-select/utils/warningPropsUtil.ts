@@ -1,11 +1,11 @@
 import warning, { noteOnce } from '../../vc-util/warning';
-import { SelectProps } from '..';
+import type { SelectProps } from '..';
 import { convertChildrenToData } from './legacyUtil';
-import { OptionData } from '../interface';
+import type { OptionData } from '../interface';
 import { toArray } from './commonUtil';
-import { RawValueType, LabelValueType } from '../interface/generator';
+import type { RawValueType, LabelValueType } from '../interface/generator';
 import { isValidElement } from '../../_util/props-util';
-import { VNode } from 'vue';
+import type { VNode } from 'vue';
 
 function warningProps(props: SelectProps) {
   const {
@@ -137,9 +137,9 @@ function warningProps(props: SelectProps) {
     if (invalidateChildType) {
       warning(
         false,
-        `\`children\` should be \`Select.Option\` or \`Select.OptGroup\` instead of \`${invalidateChildType.displayName ||
-          invalidateChildType.name ||
-          invalidateChildType}\`.`,
+        `\`children\` should be \`Select.Option\` or \`Select.OptGroup\` instead of \`${
+          invalidateChildType.displayName || invalidateChildType.name || invalidateChildType
+        }\`.`,
       );
     }
 

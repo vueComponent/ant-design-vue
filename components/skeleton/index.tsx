@@ -3,9 +3,12 @@ import classNames from '../_util/classNames';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { initDefaultProps, hasProp } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
-import Avatar, { SkeletonAvatarProps, ISkeletonAvatarProps } from './Avatar';
-import Title, { SkeletonTitleProps, ISkeletonTitleProps } from './Title';
-import Paragraph, { SkeletonParagraphProps, ISkeletonParagraphProps } from './Paragraph';
+import type { ISkeletonAvatarProps } from './Avatar';
+import Avatar, { SkeletonAvatarProps } from './Avatar';
+import type { ISkeletonTitleProps } from './Title';
+import Title, { SkeletonTitleProps } from './Title';
+import type { ISkeletonParagraphProps } from './Paragraph';
+import Paragraph, { SkeletonParagraphProps } from './Paragraph';
 import { withInstall } from '../_util/type';
 
 export const SkeletonProps = {

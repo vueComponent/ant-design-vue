@@ -1,15 +1,15 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Radio from './Radio';
 import Group from './Group';
 import Button from './RadioButton';
 
-export { RadioChangeEventTarget, RadioChangeEvent } from './interface';
+export type { RadioChangeEventTarget, RadioChangeEvent } from './interface';
 
 Radio.Group = Group;
 Radio.Button = Button;
 
 /* istanbul ignore next */
-Radio.install = function(app: App) {
+Radio.install = function (app: App) {
   app.component(Radio.name, Radio);
   app.component(Radio.Group.name, Radio.Group);
   app.component(Radio.Button.name, Radio.Button);

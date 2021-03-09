@@ -11,8 +11,8 @@ import KeyCode from '../_util/KeyCode';
 import classNames from '../_util/classNames';
 import Selector from './Selector';
 import SelectTrigger from './SelectTrigger';
-import { RenderNode, Mode, RenderDOMFunc, OnActiveValue } from './interface';
-import {
+import type { RenderNode, Mode, RenderDOMFunc, OnActiveValue } from './interface';
+import type {
   GetLabeledValue,
   FilterOptions,
   FilterFunc,
@@ -24,12 +24,12 @@ import {
   FlattenOptionsType,
   SingleType,
   OnClear,
-  INTERNAL_PROPS_MARK,
   SelectSource,
   CustomTagProps,
   DropdownRender,
 } from './interface/generator';
-import { OptionListProps } from './OptionList';
+import { INTERNAL_PROPS_MARK } from './interface/generator';
+import type { OptionListProps } from './OptionList';
 import { toInnerValue, toOuterValues, removeLastEnabledValue, getUUID } from './utils/commonUtil';
 import TransBtn from './TransBtn';
 import useLock from './hooks/useLock';
@@ -38,17 +38,14 @@ import { getSeparatedContent } from './utils/valueUtil';
 import useSelectTriggerControl from './hooks/useSelectTriggerControl';
 import useCacheDisplayValue from './hooks/useCacheDisplayValue';
 import useCacheOptions from './hooks/useCacheOptions';
+import type { CSSProperties, DefineComponent, VNode, VNodeChild } from 'vue';
 import {
   computed,
-  CSSProperties,
-  DefineComponent,
   defineComponent,
   onBeforeUnmount,
   onMounted,
   provide,
   ref,
-  VNode,
-  VNodeChild,
   watch,
   watchEffect,
 } from 'vue';

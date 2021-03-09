@@ -1,4 +1,5 @@
-import { defineComponent, inject, VNodeTypes } from 'vue';
+import type { VNodeTypes } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
 import { getOptionProps } from '../_util/props-util';

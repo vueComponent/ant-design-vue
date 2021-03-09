@@ -1,5 +1,5 @@
+import type { CSSProperties } from 'vue';
 import {
-  CSSProperties,
   defineComponent,
   inject,
   ref,

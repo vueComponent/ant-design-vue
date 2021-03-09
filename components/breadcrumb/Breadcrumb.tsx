@@ -1,11 +1,12 @@
-import { inject, cloneVNode, defineComponent, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { inject, cloneVNode, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, getComponent, getSlot } from '../_util/props-util';
 import warning from '../_util/warning';
 import { defaultConfigProvider } from '../config-provider';
 import BreadcrumbItem from './BreadcrumbItem';
 import Menu from '../menu';
-import { Omit, VueNode } from '../_util/type';
+import type { Omit, VueNode } from '../_util/type';
 
 export interface Route {
   path: string;

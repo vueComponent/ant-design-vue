@@ -1,13 +1,5 @@
-import {
-  createVNode,
-  defineComponent,
-  inject,
-  provide,
-  toRefs,
-  ref,
-  ExtractPropTypes,
-  HTMLAttributes,
-} from 'vue';
+import type { ExtractPropTypes, HTMLAttributes } from 'vue';
+import { createVNode, defineComponent, inject, provide, toRefs, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider } from '../config-provider';

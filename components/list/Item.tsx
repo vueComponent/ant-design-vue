@@ -4,7 +4,8 @@ import { getComponent, isStringElement, isEmptyElement, getSlot } from '../_util
 import { Col } from '../grid';
 import { defaultConfigProvider } from '../config-provider';
 import { cloneElement } from '../_util/vnode';
-import { defineComponent, ExtractPropTypes, FunctionalComponent, inject } from 'vue';
+import type { ExtractPropTypes, FunctionalComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
 
 export const ListItemProps = {
   prefixCls: PropTypes.string,
@@ -20,9 +21,9 @@ export const ListItemMetaProps = {
   title: PropTypes.any,
 };
 
-export const ListItemMeta: FunctionalComponent<Partial<
-  ExtractPropTypes<typeof ListItemMetaProps>
->> = (props, { slots }) => {
+export const ListItemMeta: FunctionalComponent<
+  Partial<ExtractPropTypes<typeof ListItemMetaProps>>
+> = (props, { slots }) => {
   const configProvider = inject('configProvider', defaultConfigProvider);
   const { getPrefixCls } = configProvider;
   const { prefixCls: customizePrefixCls } = props;

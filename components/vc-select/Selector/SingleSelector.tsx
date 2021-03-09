@@ -1,7 +1,8 @@
 import pickAttrs from '../../_util/pickAttrs';
 import Input from './Input';
-import { InnerSelectorProps } from '.';
-import { computed, defineComponent, Fragment, ref, VNodeChild, watch } from 'vue';
+import type { InnerSelectorProps } from '.';
+import type { VNodeChild } from 'vue';
+import { computed, defineComponent, Fragment, ref, watch } from 'vue';
 import PropTypes from '../../_util/vue-types';
 
 interface SelectorProps extends InnerSelectorProps {

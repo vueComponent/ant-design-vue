@@ -1,4 +1,5 @@
-import { defineComponent, inject, VNodeTypes, ExtractPropTypes } from 'vue';
+import type { VNodeTypes, ExtractPropTypes } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent, getOptionProps, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';

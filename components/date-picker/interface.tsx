@@ -1,6 +1,7 @@
-import moment from 'moment';
-import { CSSProperties } from 'vue';
-import { tuple, VueNode } from '../_util/type';
+import type moment from 'moment';
+import type { CSSProperties } from 'vue';
+import type { VueNode } from '../_util/type';
+import { tuple } from '../_util/type';
 
 export type RangePickerValue =
   | undefined[]

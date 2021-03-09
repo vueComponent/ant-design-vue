@@ -1,8 +1,10 @@
-import { provide, App, defineComponent, VNode, PropType, reactive } from 'vue';
+import type { App, VNode, PropType } from 'vue';
+import { provide, defineComponent, reactive } from 'vue';
 import PropTypes from '../_util/vue-types';
 import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
-import { ModalLocale, changeConfirmLocale } from '../modal/locale';
+import type { ModalLocale } from '../modal/locale';
+import { changeConfirmLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { getSlot } from '../_util/props-util';
 import { withInstall } from '../_util/type';
@@ -84,7 +86,7 @@ const LocaleProvider = defineComponent({
 });
 
 /* istanbul ignore next */
-LocaleProvider.install = function(app: App) {
+LocaleProvider.install = function (app: App) {
   app.component(LocaleProvider.name, LocaleProvider);
   return app;
 };

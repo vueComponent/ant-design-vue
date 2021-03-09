@@ -69,7 +69,7 @@ export function formatter(articals: Articals, componentName: string, tagPrefix: 
       return;
     }
 
-    if (tableTitle.includes('事件') && !tableTitle.includes(componentName)) {
+    if (tableTitle.includes('events') && !tableTitle.includes(componentName)) {
       table.body.forEach(line => {
         const [name, desc] = line;
         tag.events!.push({
@@ -81,7 +81,7 @@ export function formatter(articals: Articals, componentName: string, tagPrefix: 
     }
 
     // 额外的子组件
-    if (tableTitle.includes(componentName) && !tableTitle.includes('事件')) {
+    if (tableTitle.includes(componentName) && !tableTitle.includes('events')) {
       const childTag: VueTag = {
         name: getComponentName(tableTitle.replace('.', ''), tagPrefix),
         slots: [],
@@ -95,9 +95,9 @@ export function formatter(articals: Articals, componentName: string, tagPrefix: 
       return;
     }
     // 额外的子组件事件
-    if (tableTitle.includes(componentName) && tableTitle.includes('事件')) {
+    if (tableTitle.includes(componentName) && tableTitle.includes('events')) {
       const childTagName = getComponentName(
-        tableTitle.replace('.', '').replace('事件', ''),
+        tableTitle.replace('.', '').replace('events', ''),
         tagPrefix,
       );
       const childTag: VueTag | undefined = tags.find(item => item.name === childTagName.trim());

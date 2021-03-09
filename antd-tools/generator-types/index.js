@@ -8,7 +8,8 @@ try {
     version: pkg.version,
     name: 'types',
     path: path.resolve(rootPath, './v2-doc/src/docs'),
-    test: /zh-CN\.md/,
+    // default match lang
+    test: /en-US\.md/,
     outputDir: path.resolve(rootPath, './vetur'),
     tagPrefix: 'a-',
   });

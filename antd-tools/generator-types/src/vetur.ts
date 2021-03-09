@@ -20,7 +20,7 @@ export function genVeturAttributes(tags: VueTag[]) {
       tag.attributes.forEach(attr => {
         veturAttributes[`${tag.name}/${attr.name}`] = {
           type: attr.value.type,
-          description: `${attr.description}, 默认值: ${attr.default}`,
+          description: `${attr.description}, Default: ${attr.default}`,
         };
       });
     }

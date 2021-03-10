@@ -61,4 +61,5 @@ import './page-header/style';
 import './form/style';
 import './space/style';
 import './image/style';
+import './color-text/style';
 // import './color-picker/style';

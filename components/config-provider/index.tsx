@@ -5,6 +5,7 @@ import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
 import { TransformCellTextProps } from '../table/interface';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { withInstall } from '../_util/type';
+import { ColorTextConfig } from '../color-text/index';
 
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
 
@@ -26,6 +27,7 @@ export interface ConfigConsumerProps {
   input?: {
     autoComplete?: string;
   };
+  colorText?: ColorTextConfig;
   locale?: Locale;
   pageHeader?: {
     ghost: boolean;
@@ -62,6 +64,7 @@ export interface ConfigProviderProps {
   input?: {
     autoComplete?: string;
   };
+  colorText?: ColorTextConfig;
   locale?: Locale;
   pageHeader?: {
     ghost: boolean;
@@ -80,6 +83,9 @@ const ConfigProvider = defineComponent({
   props: {
     getTargetContainer: {
       type: Function as PropType<() => HTMLElement>,
+    },
+    colorText: {
+      type: Object as PropType<ColorTextConfig>,
     },
     getPopupContainer: {
       type: Function as PropType<(triggerNode: HTMLElement) => HTMLElement>,

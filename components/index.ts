@@ -48,6 +48,8 @@ import { default as Checkbox } from './checkbox';
 
 import { default as Col } from './col';
 
+import { default as ColorText } from './color-text';
+
 import { default as DatePicker } from './date-picker';
 
 import { default as Divider } from './divider';
@@ -163,6 +165,7 @@ const components = [
   Cascader,
   Checkbox,
   Col,
+  ColorText,
   DatePicker,
   Divider,
   Dropdown,
@@ -251,6 +254,7 @@ export {
   Cascader,
   Checkbox,
   Col,
+  ColorText,
   DatePicker,
   Divider,
   Dropdown,

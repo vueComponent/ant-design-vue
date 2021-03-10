@@ -147,6 +147,7 @@ export default {
     const hasActiveTabKey = activeTabKey !== undefined;
     const tabsProps = {
       props: {
+        size: 'large',
         ...tabProps,
         [hasActiveTabKey ? 'activeKey' : 'defaultActiveKey']: hasActiveTabKey
           ? activeTabKey

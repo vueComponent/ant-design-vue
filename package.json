@@ -46,11 +46,6 @@
     "codecov": "codecov",
     "postinstall": "node scripts/postinstall || echo \"ignore\""
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "pretty-quick --staged"
-    }
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vueComponent/ant-design-vue.git"

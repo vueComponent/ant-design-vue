@@ -10,7 +10,7 @@ import PropTypes from '../_util/vue-types';
 import Typography, { TypographyProps } from './Typography';
 import ResizeObserver from '../vc-resize-observer';
 import Tooltip from '../tooltip';
-import copy from 'copy-to-clipboard';
+import copy from '../_util/copy-to-clipboard';
 import { defaultConfigProvider } from '../config-provider';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import CopyOutlined from '@ant-design/icons-vue/CopyOutlined';
@@ -40,7 +40,7 @@ export type BaseType = 'secondary' | 'success' | 'warning' | 'danger';
 const isLineClampSupport = isStyleSupport('webkitLineClamp');
 const isTextOverflowSupport = isStyleSupport('textOverflow');
 
-function toArray(value) {
+function toArray(value: any) {
   let ret = value;
   if (value === undefined) {
     ret = [];
@@ -67,13 +67,14 @@ interface EditConfig {
   autoSize?: boolean | AutoSizeType;
 }
 
-interface EllipsisConfig {
+export interface EllipsisConfig {
   rows?: number;
   expandable?: boolean;
   suffix?: string;
   symbol?: VNodeTypes;
   onExpand?: EventHandlerNonNull;
   onEllipsis?: (ellipsis: boolean) => void;
+  tooltip?: VNodeTypes;
 }
 
 export interface BlockProps extends TypographyProps {

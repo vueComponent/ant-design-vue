@@ -210,7 +210,6 @@
     "@simonwep/pickr": "~1.8.0",
     "array-tree-filter": "^2.1.0",
     "async-validator": "^3.3.0",
-    "copy-to-clipboard": "^3.3.1",
     "dom-align": "^1.10.4",
     "dom-scroll-into-view": "^2.0.0",
     "is-mobile": "^2.2.1",

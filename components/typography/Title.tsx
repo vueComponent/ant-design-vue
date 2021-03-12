@@ -7,7 +7,7 @@ const TITLE_ELE_LIST = tupleNum(1, 2, 3, 4, 5);
 
 export type TitleProps = Omit<BlockProps & { level?: typeof TITLE_ELE_LIST[number] }, 'strong'>;
 
-const Title: FunctionalComponent<TitleProps> = (props, { slots }) => {
+const Title: FunctionalComponent<TitleProps> = (props, { slots, attrs }) => {
   const { level = 1, ...restProps } = props;
   let component: string;
   if (TITLE_ELE_LIST.indexOf(level) !== -1) {
@@ -20,11 +20,13 @@ const Title: FunctionalComponent<TitleProps> = (props, { slots }) => {
   const titleProps = {
     ...restProps,
     component,
+    attrs,
   };
 
   return <Base {...titleProps}>{slots.default?.()}</Base>;
 };
 
 Title.displayName = 'ATypographyTitle';
+Title.inheritAttrs = false;
 
 export default Title;

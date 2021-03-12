@@ -85,6 +85,7 @@ const modalProps = (defaultProps = {}) => {
     keyboard: PropTypes.bool,
     wrapProps: PropTypes.object,
     focusTriggerAfterClose: PropTypes.bool,
+    dialogStyle: PropTypes.object.def(() => ({})),
   };
   return initDefaultProps(props, defaultProps);
 };

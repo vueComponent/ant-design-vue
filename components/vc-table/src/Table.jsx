@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { provide, markRaw, defineComponent } from 'vue';
+import { provide, markRaw, defineComponent, nextTick, reactive } from 'vue';
 import shallowequal from '../../_util/shallowequal';
 import merge from 'lodash-es/merge';
 import classes from '../../_util/component-classes';
@@ -8,7 +8,6 @@ import PropTypes from '../../_util/vue-types';
 import { debounce, getDataAndAriaProps } from './utils';
 import warning from '../../_util/warning';
 import addEventListener from '../../vc-util/Dom/addEventListener';
-import { Provider, create } from '../../_util/store';
 import ColumnManager from './ColumnManager';
 import HeadTable from './HeadTable';
 import BodyTable from './BodyTable';
@@ -85,6 +84,19 @@ export default defineComponent({
       customHeaderRow: () => {},
     },
   ),
+  setup() {
+    const store = reactive({
+      currentHoverKey: null,
+      fixedColumnsHeadRowsHeight: [],
+      fixedColumnsBodyRowsHeight: {},
+      expandedRowsHeight: {},
+      expandedRowKeys: [],
+    });
+    provide('table-store', store);
+    return {
+      store,
+    };
+  },
   data() {
     this.preData = [...this.data];
     return {
@@ -108,6 +120,11 @@ export default defineComponent({
         ),
       ),
     };
+  },
+  computed: {
+    dataLen() {
+      return this.$props.data.length;
+    },
   },
   watch: {
     components() {
@@ -133,20 +150,14 @@ export default defineComponent({
         this.columnManager.reset(val);
       }
     },
-    data(val) {
-      if (val.length === 0 && this.hasScrollX()) {
-        this.$nextTick(() => {
+    dataLen(val, preVal) {
+      if ((val === 0 || preVal === 0) && this.hasScrollX()) {
+        nextTick(() => {
           this.resetScrollX();
         });
       }
     },
   },
-
-  // static childContextTypes = {
-  //   table: PropTypes.any,
-  //   components: PropTypes.any,
-  // },
-
   created() {
     provide('table', this);
     // ['rowClick', 'rowDoubleclick', 'rowContextmenu', 'rowMouseenter', 'rowMouseleave'].forEach(
@@ -164,12 +175,6 @@ export default defineComponent({
     // );
 
     // this.columnManager = new ColumnManager(this.columns, this.$slots.default)
-
-    this.store = create({
-      currentHoverKey: null,
-      fixedColumnsHeadRowsHeight: [],
-      fixedColumnsBodyRowsHeight: {},
-    });
 
     this.setScrollPosition('left');
 
@@ -295,10 +300,12 @@ export default defineComponent({
         ? this.ref_headTable.querySelectorAll('thead')
         : this.ref_bodyTable.querySelectorAll('thead');
       const bodyRows = this.ref_bodyTable.querySelectorAll(`.${prefixCls}-row`) || [];
-      const fixedColumnsHeadRowsHeight = [].map.call(headRows, row =>
-        row.getBoundingClientRect().height ? row.getBoundingClientRect().height - 0.5 : 'auto',
-      );
-      const state = this.store.getState();
+      const fixedColumnsHeadRowsHeight = [].map.call(headRows, row => {
+        return row.getBoundingClientRect().height
+          ? row.getBoundingClientRect().height - 0.5
+          : 'auto';
+      });
+      const state = this.store;
       const fixedColumnsBodyRowsHeight = [].reduce.call(
         bodyRows,
         (acc, row) => {
@@ -318,10 +325,8 @@ export default defineComponent({
       ) {
         return;
       }
-      this.store.setState({
-        fixedColumnsHeadRowsHeight,
-        fixedColumnsBodyRowsHeight,
-      });
+      this.store.fixedColumnsHeadRowsHeight = fixedColumnsHeadRowsHeight;
+      this.store.fixedColumnsBodyRowsHeight = fixedColumnsBodyRowsHeight;
     },
 
     resetScrollX() {
@@ -339,10 +344,6 @@ export default defineComponent({
     },
 
     handleBodyScrollLeft(e) {
-      // Fix https://github.com/ant-design/ant-design/issues/7635
-      if (e.currentTarget !== e.target) {
-        return;
-      }
       const target = e.target;
       const { scroll = {} } = this;
       const { ref_headTable, ref_bodyTable } = this;
@@ -562,32 +563,30 @@ export default defineComponent({
       getRowKey,
     };
     return (
-      <Provider store={this.store}>
-        <ExpandableTable
-          {...expandableTableProps}
-          v-slots={{
-            default: expander => {
-              this.expander = expander;
-              return (
-                <div
-                  ref={this.saveTableNodeRef}
-                  class={tableClassName}
-                  style={props.style}
-                  id={props.id}
-                  {...dataAndAriaProps}
-                >
-                  {this.renderTitle()}
-                  <div class={`${prefixCls}-content`}>
-                    {this.renderMainTable()}
-                    {hasLeftFixed && this.renderLeftFixedTable()}
-                    {hasRightFixed && this.renderRightFixedTable()}
-                  </div>
+      <ExpandableTable
+        {...expandableTableProps}
+        v-slots={{
+          default: expander => {
+            this.expander = expander;
+            return (
+              <div
+                ref={this.saveTableNodeRef}
+                class={tableClassName}
+                style={props.style}
+                id={props.id}
+                {...dataAndAriaProps}
+              >
+                {this.renderTitle()}
+                <div class={`${prefixCls}-content`}>
+                  {this.renderMainTable()}
+                  {hasLeftFixed && this.renderLeftFixedTable()}
+                  {hasRightFixed && this.renderRightFixedTable()}
                 </div>
-              );
-            },
-          }}
-        />
-      </Provider>
+              </div>
+            );
+          },
+        }}
+      />
     );
   },
 });

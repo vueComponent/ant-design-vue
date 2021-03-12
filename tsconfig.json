@@ -19,5 +19,5 @@
     "skipLibCheck": true,
     "allowJs": true
   },
-  "exclude": ["node_modules", "lib", "es", "antd-tools", "dist"]
+  "exclude": ["node_modules", "lib", "es", "antd-tools", "dist", "v2-doc"]
 }

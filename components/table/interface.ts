@@ -1,8 +1,7 @@
-import { ExtractPropTypes, PropType } from 'vue';
+import { ExtractPropTypes, PropType, UnwrapRef } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { PaginationProps as getPaginationProps, PaginationConfig } from '../pagination';
 import { SpinProps as getSpinProps } from '../spin';
-import { Store } from './createStore';
 import { tuple } from '../_util/type';
 
 const PaginationProps = getPaginationProps();
@@ -52,7 +51,9 @@ export const columnProps = {
   // onHeaderCell?: (props: ColumnProps<T>) => any;
 };
 
-export type ColumnProps = Partial<ExtractPropTypes<typeof columnProps>>;
+export type ColumnProps = Partial<ExtractPropTypes<typeof columnProps>> & {
+  slots?: Record<string, string>;
+};
 
 export interface TableComponents {
   table?: any;
@@ -176,7 +177,7 @@ export interface TableState {
   pagination?: Partial<ExtractPropTypes<typeof PaginationProps>>;
   filters?: TableStateFilters;
   sortColumn?: ColumnProps | null;
-  sortOrder?: string;
+  sortOrder?: SortOrder;
   columns?: ColumnProps[];
 }
 
@@ -194,10 +195,13 @@ export interface TransformCellTextProps {
 //   text: PropTypes.any,
 //   onSelect: SelectionItemSelectFn;
 // }
-
+export type TableStore = UnwrapRef<{
+  selectedRowKeys: any[];
+  selectionDirty: boolean;
+}>;
 export const SelectionCheckboxAllProps = {
   propsSymbol: PropTypes.any,
-  store: Store,
+  store: PropTypes.any,
   locale: PropTypes.any,
   disabled: PropTypes.looseBool,
   getCheckboxPropsByItem: PropTypes.func,
@@ -216,7 +220,7 @@ export const SelectionCheckboxAllProps = {
 // }
 
 export const SelectionBoxProps = {
-  store: Store,
+  store: PropTypes.any,
   type: RowSelectionType,
   defaultSelection: PropTypes.array,
   rowIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

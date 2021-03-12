@@ -6,6 +6,7 @@ export default {
     prefixCls: PropTypes.string,
     overlay: PropTypes.any,
     trigger: PropTypes.any,
+    overlayInnerStyle: PropTypes.any,
   },
   updated() {
     const { trigger } = this;
@@ -14,9 +15,9 @@ export default {
     }
   },
   render() {
-    const { overlay, prefixCls } = this;
+    const { overlay, prefixCls, overlayInnerStyle } = this;
     return (
-      <div class={`${prefixCls}-inner`} role="tooltip">
+      <div class={`${prefixCls}-inner`} role="tooltip" style={overlayInnerStyle}>
         {typeof overlay === 'function' ? overlay() : overlay}
       </div>
     );

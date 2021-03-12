@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import Badge from '../index';
+import mountTest from '../../../tests/shared/mountTest';
 
 import { asyncExpect } from '@/tests/utils';
 describe('Badge', () => {
@@ -145,5 +146,78 @@ describe('Badge', () => {
     });
 
     expect(wrapper.html()).toMatchSnapshot();
+  });
+});
+
+describe('Ribbon', () => {
+  mountTest(Badge.Ribbon);
+
+  describe('placement', () => {
+    it('works with `start` & `end` placement', () => {
+      const wrapperStart = mount({
+        render() {
+          return (
+            <Badge.Ribbon placement="start">
+              <div />
+            </Badge.Ribbon>
+          );
+        },
+      });
+
+      expect(wrapperStart.findAll('.ant-ribbon-placement-start').length).toEqual(1);
+
+      const wrapperEnd = mount({
+        render() {
+          return (
+            <Badge.Ribbon placement="end">
+              <div />
+            </Badge.Ribbon>
+          );
+        },
+      });
+      expect(wrapperEnd.findAll('.ant-ribbon-placement-end').length).toEqual(1);
+    });
+  });
+
+  describe('color', () => {
+    it('works with preset color', () => {
+      const wrapper = mount({
+        render() {
+          return (
+            <Badge.Ribbon color="green">
+              <div />
+            </Badge.Ribbon>
+          );
+        },
+      });
+      expect(wrapper.findAll('.ant-ribbon-color-green').length).toEqual(1);
+    });
+  });
+
+  describe('text', () => {
+    it('works with string', () => {
+      const wrapper = mount({
+        render() {
+          return (
+            <Badge.Ribbon text="cool">
+              <div />
+            </Badge.Ribbon>
+          );
+        },
+      });
+      expect(wrapper.find('.ant-ribbon').text()).toEqual('cool');
+    });
+    it('works with element', () => {
+      const wrapper = mount({
+        render() {
+          return (
+            <Badge.Ribbon text={<span class="cool" />}>
+              <div />
+            </Badge.Ribbon>
+          );
+        },
+      });
+      expect(wrapper.findAll('.cool').length).toEqual(1);
+    });
   });
 });

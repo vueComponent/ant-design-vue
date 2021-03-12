@@ -10,6 +10,44 @@
 
 ---
 
+## 2.0.1
+
+`2021-02-27`
+
+- 🌟 `Badge` adds `Ribbon` [#3681](https://github.com/vueComponent/ant-design-vue/issues/3681)
+- 🌟 Adjust the trigger order of `SearchInput` search event [#3725](https://github.com/vueComponent/ant-design-vue/issues/3725)
+- 🐞 Fix the stuck problem when `Table` is destroyed [#3531](https://github.com/vueComponent/ant-design-vue/issues/3531)
+- 🐞 Fix the issue of less file introduced in `Menu` css [#3678](https://github.com/vueComponent/ant-design-vue/issues/3678)
+- 🐞 Fix the problem of `Alert` custom icon misalignment [#3712](https://github.com/vueComponent/ant-design-vue/issues/3712)
+
+## 2.0.0
+
+`2021-02-06`
+
+- 🎉🎉🎉 2.0 official version released
+- 🎉🎉🎉 support dark theme [#3410](https://github.com/vueComponent/ant-design-vue/issues/3410)
+- 🎉🎉🎉 The new version of the document is online, use the Composition API to completely reconstruct the document example, and provide the TS and JS dual version source code
+- 🌟 Refactor the `Alert` component using Composition API [#3654](https://github.com/vueComponent/ant-design-vue/pull/3654)
+- 🌟 `Tooltip` supports custom colors [#3603](https://github.com/vueComponent/ant-design-vue/issues/3603)
+- 🐞 Fix the problem that `TimePicker` does not automatically scroll to the selected position [#ab7537](https://github.com/vueComponent/ant-design-vue/commit/ab75379f0c2f5e54ab7c348284a7391939ab5aaf)
+
+## 2.0.0-rc.9
+
+`2021-01-24`
+
+- 🌟 `@ant-design/icons-vue` upgrade to 6.0, use es module by default
+- 🌟 `Tabs` adds `centered` centered mode [#3501](https://github.com/vueComponent/ant-design-vue/issues/3501)
+- 🐞 `Progress` Add opacity animation [#3505](https://github.com/vueComponent/ant-design-vue/issues/3505)
+- 🐞 Fix an error when installing npm [#3515](https://github.com/vueComponent/ant-design-vue/issues/3515)
+- 🐞 Fix the problem of `Breadcrumn` split line not displaying [#3522](https://github.com/vueComponent/ant-design-vue/issues/3522)
+- 🐞 Fix `Radio` uncontrolled issue [#3517](https://github.com/vueComponent/ant-design-vue/issues/3517)
+- 🐞 Fix `FormItem` not wrapping issue [#3538](https://github.com/vueComponent/ant-design-vue/issues/3538)
+- 🐞 Fix `Carousel` `pauseOnDotsHover` not working problem [#3519](https://github.com/vueComponent/ant-design-vue/issues/3519)
+- 🐞 Fix `Input.Search` `class` not working issue [#3541](https://github.com/vueComponent/ant-design-vue/issues/3541)
+- 🐞 Fix the issue that `InputNumber` triggers the change event multiple times under Microsoft input method [#3550](https://github.com/vueComponent/ant-design-vue/issues/3550)
+- 🐞 Fix the problem that the keyboard can still be switched in the disabled state of `Tabs` [#3575](https://github.com/vueComponent/ant-design-vue/issues/3575)
+- 🐞 Fix the issue that `Switch` does not take effect in the table [#3512](https://github.com/vueComponent/ant-design-vue/issues/3512)
+
 ## 2.0.0-rc.8
 
 `2021-01-07`

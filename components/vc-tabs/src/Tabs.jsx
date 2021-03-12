@@ -146,7 +146,7 @@ export default defineComponent({
       const activeKey = this.state._activeKey;
       const children = [];
       this.$props.children.forEach(c => {
-        if (c && !c.disabled && c.disabled !== '') {
+        if (c && !c.props?.disabled && c.props?.disabled !== '') {
           if (next) {
             children.push(c);
           } else {

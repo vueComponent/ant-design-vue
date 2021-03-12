@@ -3,6 +3,8 @@ import Radio from './Radio';
 import Group from './Group';
 import Button from './RadioButton';
 
+export { RadioChangeEventTarget, RadioChangeEvent } from './interface';
+
 Radio.Group = Group;
 Radio.Button = Button;
 

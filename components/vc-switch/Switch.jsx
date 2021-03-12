@@ -51,8 +51,8 @@ export default defineComponent({
       if (!hasProp(this, 'checked')) {
         this.stateChecked = checked;
       }
-      this.__emit('change', checked, e);
       this.__emit('update:checked', checked);
+      this.__emit('change', checked, e);
     },
     handleClick(e) {
       const checked = !this.stateChecked;

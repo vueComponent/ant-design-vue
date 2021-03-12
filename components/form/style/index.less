@@ -298,6 +298,11 @@ form {
       height: auto;
     }
   }
+
+  // fix https://github.com/vueComponent/ant-design-vue/issues/3319
+  .@{form-prefix-cls}-item-control-wrapper {
+    width: 100%;
+  }
 }
 
 .@{form-prefix-cls}-vertical .@{form-prefix-cls}-item-label,
@@ -430,14 +435,14 @@ form {
 
   //select
   .@{ant-prefix}-select {
-    &-selection {
+    &-selector {
       border-color: @warning-color;
       &:hover {
         border-color: @warning-color;
       }
     }
-    &-open .@{ant-prefix}-select-selection,
-    &-focused .@{ant-prefix}-select-selection {
+    &-open .@{ant-prefix}-select-selector,
+    &-focused .@{ant-prefix}-select-selector {
       .active(@warning-color);
     }
   }

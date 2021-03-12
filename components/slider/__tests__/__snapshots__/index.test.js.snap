@@ -18,9 +18,7 @@ exports[`Slider should show tooltip when hovering slider handler 1`] = `
     <!---->
     <div class="ant-tooltip  ant-slider-tooltip ant-tooltip-placement-top">
       <div class="ant-tooltip-content">
-        <div class="ant-tooltip-arrow">
-          <!---->
-        </div>
+        <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
         <div class="ant-tooltip-inner" role="tooltip">30</div>
       </div>
     </div>
@@ -46,9 +44,7 @@ exports[`Slider should show tooltip when hovering slider handler 2`] = `
     <!---->
     <div class="ant-tooltip  ant-slider-tooltip ant-tooltip-placement-top" style="display: none;">
       <div class="ant-tooltip-content">
-        <div class="ant-tooltip-arrow">
-          <!---->
-        </div>
+        <div class="ant-tooltip-arrow"><span class="ant-tooltip-arrow-content"></span></div>
         <div class="ant-tooltip-inner" role="tooltip">30</div>
       </div>
     </div>

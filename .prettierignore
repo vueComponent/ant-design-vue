@@ -28,4 +28,5 @@ components/style/color/*.less
 .huskyrc
 .gitmodules
 *.png
+v2-doc/
 

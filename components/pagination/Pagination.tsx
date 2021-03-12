@@ -36,6 +36,10 @@ export const PaginationProps = () => ({
   itemRender: PropTypes.func,
   role: PropTypes.string,
   showLessItems: PropTypes.looseBool,
+  onChange: PropTypes.func,
+  onShowSizeChange: PropTypes.func,
+  'onUpdate:current': PropTypes.func,
+  'onUpdate:pageSize': PropTypes.func,
 });
 
 export const PaginationConfig = () => ({
@@ -49,7 +53,7 @@ export default defineComponent({
   props: {
     ...PaginationProps(),
   },
-
+  emits: ['change', 'showSizeChange', 'update:current', 'update:pageSize'],
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

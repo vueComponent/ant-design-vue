@@ -5,7 +5,7 @@ import Menu from '../menu';
 import classNames from '../_util/classNames';
 import { SelectionCheckboxAllProps } from './interface';
 import BaseMixin from '../_util/BaseMixin';
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 
 function checkSelection({
   store,
@@ -17,7 +17,7 @@ function checkSelection({
 }) {
   return byDefaultChecked
     ? data[type]((item, i) => getCheckboxPropsByItem(item, i).defaultChecked)
-    : data[type]((item, i) => store.getState().selectedRowKeys.indexOf(getRecordKey(item, i)) >= 0);
+    : data[type]((item, i) => store.selectedRowKeys.indexOf(getRecordKey(item, i)) >= 0);
 }
 
 function getIndeterminateState(props) {
@@ -53,7 +53,7 @@ function getIndeterminateState(props) {
       byDefaultChecked: true,
     });
 
-  if (store.getState().selectionDirty) {
+  if (store.selectionDirty) {
     return someCheckedNotByDefaultChecked;
   }
   return someCheckedNotByDefaultChecked || someCheckedByDefaultChecked;
@@ -64,7 +64,7 @@ function getCheckState(props) {
   if (!data.length) {
     return false;
   }
-  if (store.getState().selectionDirty) {
+  if (store.selectionDirty) {
     return checkSelection({
       ...props,
       data,
@@ -94,27 +94,16 @@ export default defineComponent({
   inheritAttrs: false,
   props: SelectionCheckboxAllProps,
 
-  setup() {
+  setup(props) {
     return {
       defaultSelections: [],
-      unsubscribe: null,
+      checked: computed(() => {
+        return getCheckState(props);
+      }),
+      indeterminate: computed(() => {
+        return getIndeterminateState(props);
+      }),
     };
-  },
-  data() {
-    const { $props: props } = this;
-
-    return {
-      checked: getCheckState(props),
-      indeterminate: getIndeterminateState(props),
-    };
-  },
-
-  watch: {
-    propsSymbol: {
-      handler() {
-        this.setCheckState(this.$props);
-      },
-    },
   },
 
   created() {
@@ -132,54 +121,10 @@ export default defineComponent({
           },
         ];
   },
-
-  mounted() {
-    this.subscribe();
-  },
-
-  beforeUnmount() {
-    if (this.unsubscribe) {
-      this.unsubscribe();
-    }
-  },
   methods: {
-    checkSelection(props, data, type, byDefaultChecked) {
-      const { store, getCheckboxPropsByItem, getRecordKey } = props || this.$props;
-      // type should be 'every' | 'some'
-      if (type === 'every' || type === 'some') {
-        return byDefaultChecked
-          ? data[type]((item, i) => getCheckboxPropsByItem(item, i).defaultChecked)
-          : data[type](
-              (item, i) => store.getState().selectedRowKeys.indexOf(getRecordKey(item, i)) >= 0,
-            );
-      }
-      return false;
-    },
-
-    setCheckState(props) {
-      const checked = getCheckState(props);
-      const indeterminate = getIndeterminateState(props);
-      this.setState(prevState => {
-        const newState: any = {};
-        if (indeterminate !== prevState.indeterminate) {
-          newState.indeterminate = indeterminate;
-        }
-        if (checked !== prevState.checked) {
-          newState.checked = checked;
-        }
-        return newState;
-      });
-    },
-
     handleSelectAllChange(e) {
       const { checked } = e.target;
       this.$emit('select', checked ? 'all' : 'removeAll', 0, null);
-    },
-    subscribe() {
-      const { store } = this;
-      this.unsubscribe = store.subscribe(() => {
-        this.setCheckState(this.$props);
-      });
     },
 
     renderMenus(selections) {

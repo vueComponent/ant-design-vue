@@ -1,4 +1,4 @@
-import { defineComponent, inject, provide, PropType, computed } from 'vue';
+import { defineComponent, inject, provide, PropType, computed, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import warning from '../_util/warning';
@@ -43,7 +43,7 @@ export type ValidationRule = {
   trigger?: string;
 };
 
-export const FormProps = {
+export const formProps = {
   layout: PropTypes.oneOf(tuple('horizontal', 'inline', 'vertical')),
   labelCol: { type: Object as PropType<ColProps> },
   wrapperCol: { type: Object as PropType<ColProps> },
@@ -57,11 +57,14 @@ export const FormProps = {
   validateOnRuleChange: PropTypes.looseBool,
   // 提交失败自动滚动到第一个错误字段
   scrollToFirstError: PropTypes.looseBool,
+  onSubmit: PropTypes.func,
   onFinish: PropTypes.func,
   onFinishFailed: PropTypes.func,
   name: PropTypes.string,
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
 };
+
+export type FormProps = Partial<ExtractPropTypes<typeof formProps>>;
 
 function isEqualName(name1: NamePath, name2: NamePath) {
   return isEqual(toArray(name1), toArray(name2));
@@ -70,7 +73,7 @@ function isEqualName(name1: NamePath, name2: NamePath) {
 const Form = defineComponent({
   name: 'AForm',
   inheritAttrs: false,
-  props: initDefaultProps(FormProps, {
+  props: initDefaultProps(formProps, {
     layout: 'horizontal',
     hideRequiredMark: false,
     colon: true,
@@ -276,7 +279,7 @@ const Form = defineComponent({
     const { prefixCls: customizePrefixCls, hideRequiredMark, layout, handleSubmit } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('form', customizePrefixCls);
-    const { class: className, onSubmit: originSubmit, ...restProps } = this.$attrs;
+    const { class: className, ...restProps } = this.$attrs;
 
     const formClassName = classNames(prefixCls, className, {
       [`${prefixCls}-horizontal`]: layout === 'horizontal',

@@ -10,7 +10,7 @@ if (
 ) {
   console.warn(
     'You are using a whole package of antd, ' +
-      'please use https://www.npmjs.com/package/babel-plugin-import to reduce app bundle size.',
+      'please use https://www.npmjs.com/package/babel-plugin-import to reduce app bundle size. Not support Vite !!!',
   );
 }
 /* @remove-on-es-build-end */

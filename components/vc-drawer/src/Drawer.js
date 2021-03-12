@@ -242,7 +242,7 @@ const Drawer = defineComponent({
       const { placement, levelMove, duration, ease, getContainer } = this.$props;
       if (!windowIsUndefined) {
         this.levelDom.forEach(dom => {
-          if (this.isOpenChange || openTransition) {
+          if (dom && (this.isOpenChange || openTransition)) {
             /* eslint no-param-reassign: "error" */
             dom.style.transition = `transform ${duration} ${ease}`;
             addEventListener(dom, transitionEnd, this.trnasitionEnd);
@@ -275,27 +275,29 @@ const Drawer = defineComponent({
             if (right) {
               document.body.style.position = 'relative';
               document.body.style.width = `calc(100% - ${right}px)`;
-              this.dom.style.transition = 'none';
-              switch (placement) {
-                case 'right':
-                  this.dom.style.transform = `translateX(-${right}px)`;
-                  this.dom.style.msTransform = `translateX(-${right}px)`;
-                  break;
-                case 'top':
-                case 'bottom':
-                  this.dom.style.width = `calc(100% - ${right}px)`;
-                  this.dom.style.transform = 'translateZ(0)';
-                  break;
-                default:
-                  break;
-              }
               clearTimeout(this.timeout);
-              this.timeout = setTimeout(() => {
-                this.dom.style.transition = `${trannsformTransition},${widthTransition}`;
-                this.dom.style.width = '';
-                this.dom.style.transform = '';
-                this.dom.style.msTransform = '';
-              });
+              if (this.dom) {
+                this.dom.style.transition = 'none';
+                switch (placement) {
+                  case 'right':
+                    this.dom.style.transform = `translateX(-${right}px)`;
+                    this.dom.style.msTransform = `translateX(-${right}px)`;
+                    break;
+                  case 'top':
+                  case 'bottom':
+                    this.dom.style.width = `calc(100% - ${right}px)`;
+                    this.dom.style.transform = 'translateZ(0)';
+                    break;
+                  default:
+                    break;
+                }
+                this.timeout = setTimeout(() => {
+                  this.dom.style.transition = `${trannsformTransition},${widthTransition}`;
+                  this.dom.style.width = '';
+                  this.dom.style.transform = '';
+                  this.dom.style.msTransform = '';
+                });
+              }
             }
             // 手机禁滚
             domArray.forEach((item, i) => {
@@ -317,41 +319,43 @@ const Drawer = defineComponent({
               if (transitionStr) {
                 document.body.style.overflowX = 'hidden';
               }
-              this.dom.style.transition = 'none';
-              let heightTransition;
-              switch (placement) {
-                case 'right': {
-                  this.dom.style.transform = `translateX(${right}px)`;
-                  this.dom.style.msTransform = `translateX(${right}px)`;
-                  this.dom.style.width = '100%';
-                  widthTransition = `width 0s ${ease} ${duration}`;
-                  if (this.maskDom) {
-                    this.maskDom.style.left = `-${right}px`;
-                    this.maskDom.style.width = `calc(100% + ${right}px)`;
-                  }
-                  break;
-                }
-                case 'top':
-                case 'bottom': {
-                  this.dom.style.width = `calc(100% + ${right}px)`;
-                  this.dom.style.height = '100%';
-                  this.dom.style.transform = 'translateZ(0)';
-                  heightTransition = `height 0s ${ease} ${duration}`;
-                  break;
-                }
-                default:
-                  break;
+              if (placement === 'right' && this.maskDom) {
+                this.maskDom.style.left = `-${right}px`;
+                this.maskDom.style.width = `calc(100% + ${right}px)`;
               }
               clearTimeout(this.timeout);
-              this.timeout = setTimeout(() => {
-                this.dom.style.transition = `${trannsformTransition},${
-                  heightTransition ? `${heightTransition},` : ''
-                }${widthTransition}`;
-                this.dom.style.transform = '';
-                this.dom.style.msTransform = '';
-                this.dom.style.width = '';
-                this.dom.style.height = '';
-              });
+              if (this.dom) {
+                this.dom.style.transition = 'none';
+                let heightTransition;
+                switch (placement) {
+                  case 'right': {
+                    this.dom.style.transform = `translateX(${right}px)`;
+                    this.dom.style.msTransform = `translateX(${right}px)`;
+                    this.dom.style.width = '100%';
+                    widthTransition = `width 0s ${ease} ${duration}`;
+                    break;
+                  }
+                  case 'top':
+                  case 'bottom': {
+                    this.dom.style.width = `calc(100% + ${right}px)`;
+                    this.dom.style.height = '100%';
+                    this.dom.style.transform = 'translateZ(0)';
+                    heightTransition = `height 0s ${ease} ${duration}`;
+                    break;
+                  }
+                  default:
+                    break;
+                }
+                this.timeout = setTimeout(() => {
+                  this.dom.style.transition = `${trannsformTransition},${
+                    heightTransition ? `${heightTransition},` : ''
+                  }${widthTransition}`;
+                  this.dom.style.transform = '';
+                  this.dom.style.msTransform = '';
+                  this.dom.style.width = '';
+                  this.dom.style.height = '';
+                });
+              }
             }
             domArray.forEach((item, i) => {
               if (!item) {

@@ -24,7 +24,8 @@
     "dist",
     "lib",
     "es",
-    "scripts"
+    "scripts",
+    "vetur"
   ],
   "scripts": {
     "dev": "webpack-dev-server",
@@ -32,6 +33,7 @@
     "test": "cross-env NODE_ENV=test WORKFLOW=true jest --config .jest.js",
     "test:dev": "cross-env NODE_ENV=test jest --config .jest.js",
     "compile": "node antd-tools/cli/run.js compile",
+    "generator-webtypes": "tsc -p antd-tools/generator-types/tsconfig.json && node antd-tools/generator-types/index.js",
     "pub": "node antd-tools/cli/run.js pub",
     "pub-with-ci": "node antd-tools/cli/run.js pub-with-ci",
     "prepublish": "node antd-tools/cli/run.js guard",
@@ -82,6 +84,7 @@
     "@commitlint/cli": "^8.0.0",
     "@commitlint/config-conventional": "^8.0.0",
     "@octokit/rest": "^16.0.0",
+    "@types/fs-extra": "^9.0.8",
     "@types/lodash-es": "^4.17.3",
     "@types/raf": "^3.4.0",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
@@ -229,5 +232,10 @@
     "es/**/style/*",
     "lib/**/style/*",
     "*.less"
-  ]
+  ],
+  "vetur": {
+    "tags": "vetur/tags.json",
+    "attributes": "vetur/attributes.json"
+  },
+  "web-types": "vetur/web-types.json"
 }

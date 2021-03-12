@@ -1,0 +1,8 @@
+node_modules/
+**/*.spec.*
+**/style/
+*.html
+/components/test/*
+_site/
+dist/
+package.json

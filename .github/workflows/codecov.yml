@@ -44,14 +44,6 @@ jobs:
         with:
           token: ${{ secrets.ACCESS_TOKEN }}
 
-      - name: Checkout submodules
-        uses: actions/checkout@v2
-        with:
-          repository: tangjinzhou/antdv-demo
-          token: ${{ secrets.ACCESS_TOKEN }}
-          path: antdv-demo
-          submodules: true
-
       - name: restore cache from package-lock.json
         uses: actions/cache@v1
         with:

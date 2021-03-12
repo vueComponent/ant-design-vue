@@ -1,7 +1,9 @@
+import Omit from 'omit.js';
 import { FunctionalComponent } from 'vue';
 import { tupleNum } from '../_util/type';
+import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
-import Base, { BlockProps } from './Base';
+import Base, { baseProps, BlockProps } from './Base';
 
 const TITLE_ELE_LIST = tupleNum(1, 2, 3, 4, 5);
 
@@ -20,7 +22,7 @@ const Title: FunctionalComponent<TitleProps> = (props, { slots, attrs }) => {
   const titleProps = {
     ...restProps,
     component,
-    attrs,
+    ...attrs,
   };
 
   return <Base {...titleProps}>{slots.default?.()}</Base>;
@@ -28,5 +30,6 @@ const Title: FunctionalComponent<TitleProps> = (props, { slots, attrs }) => {
 
 Title.displayName = 'ATypographyTitle';
 Title.inheritAttrs = false;
+Title.props = Omit({ ...baseProps(), level: PropTypes.number }, ['component', 'strong']);
 
 export default Title;

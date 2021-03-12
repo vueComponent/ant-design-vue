@@ -1,7 +1,8 @@
 import { FunctionalComponent } from 'vue';
 import omit from 'omit.js';
 import warning from '../_util/warning';
-import Base, { BlockProps, EllipsisConfig } from './Base';
+import Base, { baseProps, BlockProps, EllipsisConfig } from './Base';
+import Omit from 'omit.js';
 
 export interface TextProps extends BlockProps {
   ellipsis?: boolean | Omit<EllipsisConfig, 'expandable' | 'rows' | 'onExpand'>;
@@ -31,5 +32,6 @@ const Text: FunctionalComponent<TextProps> = (props, { slots, attrs }) => {
 
 Text.displayName = 'ATypographyText';
 Text.inheritAttrs = false;
+Text.props = Omit(baseProps(), ['component']);
 
 export default Text;

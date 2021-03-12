@@ -34,14 +34,16 @@ const Editable = defineComponent({
     const textArea = ref();
 
     onMounted(() => {
-      const resizableTextArea = textArea.value?.resizableTextArea;
-      const innerTextArea = resizableTextArea?.textArea;
-      innerTextArea.focus();
-      const { length } = innerTextArea.value;
-      innerTextArea.setSelectionRange(length, length);
+      if (textArea.value) {
+        const resizableTextArea = textArea.value?.resizableTextArea;
+        const innerTextArea = resizableTextArea?.textArea;
+        innerTextArea.focus();
+        const { length } = innerTextArea.value;
+        innerTextArea.setSelectionRange(length, length);
+      }
     });
 
-    function saveTextAreaRef(node) {
+    function saveTextAreaRef(node: any) {
       textArea.value = node;
     }
 
@@ -61,10 +63,6 @@ const Editable = defineComponent({
       const { keyCode } = e;
       // We don't record keyCode when IME is using
       if (state.inComposition) return;
-
-      if (keyCode === KeyCode.ENTER) {
-        e.preventDefault();
-      }
 
       state.lastKeyCode = keyCode;
     }

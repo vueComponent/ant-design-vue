@@ -1,4 +1,5 @@
 import { createApp, CSSProperties, VNodeTypes } from 'vue';
+import toArray from '../vc-util/Children/toArray';
 
 interface MeasureResult {
   finished: boolean;
@@ -14,19 +15,7 @@ const ELEMENT_NODE = 1;
 const TEXT_NODE = 3;
 const COMMENT_NODE = 8;
 
-export function toArray(children) {
-  const c = [];
-  children.forEach(child => {
-    if (child.text) {
-      c.push(child);
-    } else {
-      c.push(child);
-    }
-  });
-  return c;
-}
-
-let ellipsisContainer = null;
+let ellipsisContainer: HTMLParagraphElement;
 
 const wrapperStyle: CSSProperties = {
   padding: 0,
@@ -109,7 +98,7 @@ export default (
   ellipsisContainer.style.webkitLineClamp = 'none';
 
   // Render in the fake container
-  const contentList: VNodeTypes[] = mergeChildren(toArray(content));
+  const contentList: VNodeTypes[] = mergeChildren(toArray(content as []));
   const vm = createApp({
     render() {
       return (
@@ -133,7 +122,7 @@ export default (
 
   // Skip ellipsis if already match
   if (inRange()) {
-    vm.unmount(ellipsisContainer);
+    vm.unmount();
     return { content, text: ellipsisContainer.innerHTML, ellipsis: false };
   }
 
@@ -145,7 +134,7 @@ export default (
     ellipsisContainer.childNodes[0].childNodes[1].cloneNode(true).childNodes,
   );
 
-  vm.unmount(ellipsisContainer);
+  vm.unmount();
 
   // ========================= Find match ellipsis content =========================
   const ellipsisChildren = [];
@@ -200,9 +189,8 @@ export default (
 
     if (inRange()) {
       return measureText(textNode, fullText, midLoc, endLoc, midLoc);
-    } else {
-      return measureText(textNode, fullText, startLoc, midLoc, lastSuccessLoc);
     }
+    return measureText(textNode, fullText, startLoc, midLoc, lastSuccessLoc);
   }
 
   function measureNode(childNode: ChildNode, index: number): MeasureResult {
@@ -224,7 +212,8 @@ export default (
         finished: true,
         vNode: null,
       };
-    } else if (type === TEXT_NODE) {
+    }
+    if (type === TEXT_NODE) {
       const fullText = childNode.textContent || '';
       const textNode = document.createTextNode(fullText);
       appendChildNode(textNode);

@@ -577,20 +577,22 @@ const Base = defineComponent<InternalBlockProps>({
   },
 });
 
-Base.props = {
+export const baseProps = () => ({
   editable: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
   copyable: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
   prefixCls: PropTypes.string,
   component: PropTypes.string,
   type: PropTypes.oneOf(['secondary', 'danger', 'warning']),
-  disabled: PropTypes.bool,
+  disabled: PropTypes.looseBool,
   ellipsis: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
-  code: PropTypes.bool,
-  mark: PropTypes.bool,
-  underline: PropTypes.bool,
-  delete: PropTypes.bool,
-  strong: PropTypes.bool,
-  keyboard: PropTypes.bool,
-};
+  code: PropTypes.looseBool,
+  mark: PropTypes.looseBool,
+  underline: PropTypes.looseBool,
+  delete: PropTypes.looseBool,
+  strong: PropTypes.looseBool,
+  keyboard: PropTypes.looseBool,
+});
+
+Base.props = baseProps();
 
 export default Base;

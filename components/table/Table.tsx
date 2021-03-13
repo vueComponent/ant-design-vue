@@ -149,7 +149,7 @@ export default defineComponent({
       checkboxPropsCache: {},
       store,
       configProvider: inject('configProvider', defaultConfigProvider),
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
 
@@ -1161,7 +1161,7 @@ export default defineComponent({
         mergedLocale.emptyText = renderEmpty('Table');
       }
 
-      const mergeSize = customizeSize || this.size;
+      const mergeSize = customizeSize || this.contextSize;
 
       const classString = classNames({
         [`${prefixCls}-${mergeSize}`]: !!mergeSize,

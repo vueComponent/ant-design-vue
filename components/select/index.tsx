@@ -1,14 +1,4 @@
-import {
-  computed,
-  defineComponent,
-  inject,
-  ref,
-  VNodeChild,
-  App,
-  PropType,
-  Plugin,
-  watch,
-} from 'vue';
+import { computed, defineComponent, inject, ref, VNodeChild, App, PropType, Plugin } from 'vue';
 import omit from 'omit.js';
 import classNames from '../_util/classNames';
 import RcSelect, { Option, OptGroup, SelectProps as RcSelectProps, BaseProps } from '../vc-select';
@@ -90,7 +80,7 @@ const Select = defineComponent({
 
     const configProvider = inject('configProvider', defaultConfigProvider);
 
-    const size = useSizeContext();
+    const contextSize = useSizeContext();
 
     const focus = () => {
       if (selectRef.value) {
@@ -120,11 +110,12 @@ const Select = defineComponent({
     const prefixCls = computed(() => {
       return configProvider.getPrefixCls('select', props.prefixCls);
     });
+
     const mergedClassName = computed(() =>
       classNames(
         {
-          [`${prefixCls.value}-lg`]: props.size === 'large' || size.value === 'large',
-          [`${prefixCls.value}-sm`]: props.size === 'small' || size.value === 'small',
+          [`${prefixCls.value}-lg`]: props.size === 'large' || contextSize.value === 'large',
+          [`${prefixCls.value}-sm`]: props.size === 'small' || contextSize.value === 'small',
           [`${prefixCls.value}-rtl`]: props.direction === 'rtl',
           [`${prefixCls.value}-borderless`]: !props.bordered,
         },

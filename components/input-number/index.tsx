@@ -59,7 +59,7 @@ const InputNumber = defineComponent({
       inputNumberRef,
       focus,
       blur,
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
 
@@ -71,7 +71,7 @@ const InputNumber = defineComponent({
     const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('input-number', customizePrefixCls);
 
-    const mergeSize = customizeSize || this.size;
+    const mergeSize = customizeSize || this.contextSize;
     const inputNumberClass = classNames(
       {
         [`${prefixCls}-lg`]: mergeSize === 'large',

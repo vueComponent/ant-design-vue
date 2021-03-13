@@ -21,7 +21,7 @@ export default defineComponent({
       children: [],
       iconCom: undefined,
       delayTimeout: undefined,
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
   data() {
@@ -82,7 +82,7 @@ export default defineComponent({
       // large => lg
       // small => sm
       let sizeCls = '';
-      switch (customizeSize || this.size) {
+      switch (customizeSize || this.contextSize) {
         case 'large':
           sizeCls = 'lg';
           break;

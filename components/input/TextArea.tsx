@@ -27,7 +27,7 @@ export default defineComponent({
       configProvider: inject('configProvider', defaultConfigProvider),
       resizableTextArea: null,
       clearableInput: null,
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
   data() {
@@ -106,7 +106,7 @@ export default defineComponent({
 
     renderTextArea(prefixCls: string) {
       const props = getOptionProps(this);
-      const size = props.size || this.size;
+      const size = props.size || this.contextSize;
       const { style, class: customClass } = this.$attrs;
       const resizeProps = {
         ...props,

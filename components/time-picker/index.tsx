@@ -99,7 +99,7 @@ const TimePicker = defineComponent({
       popupRef: null,
       timePickerRef: null,
       configProvider: inject('configProvider', defaultConfigProvider),
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
 
@@ -218,7 +218,7 @@ const TimePicker = defineComponent({
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('time-picker', customizePrefixCls);
 
-      const mergeSize = customizeSize || this.size;
+      const mergeSize = customizeSize || this.contextSize;
       const format = this.getDefaultFormat();
       const pickerClassName = {
         [className as string]: className,

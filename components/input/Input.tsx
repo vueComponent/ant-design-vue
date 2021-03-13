@@ -61,7 +61,7 @@ export default defineComponent({
       removePasswordTimeout: undefined,
       input: null,
       clearableInput: null,
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
   data() {
@@ -166,16 +166,18 @@ export default defineComponent({
         handleChange,
         handleInputFocus,
         handleInputBlur,
-        size,
+        size: customizeSize,
         disabled,
         $attrs,
       } = this;
+
+      const mergeSize = customizeSize || this.contextSize;
 
       const inputProps: any = {
         ...otherProps,
         ...$attrs,
         onKeydown: handleKeyDown,
-        class: classNames(getInputClassName(prefixCls, size, disabled), {
+        class: classNames(getInputClassName(prefixCls, mergeSize, disabled), {
           [$attrs.class as string]: $attrs.class && !addonBefore && !addonAfter,
         }),
         ref: this.saveInput,
@@ -231,7 +233,7 @@ export default defineComponent({
       ...this.$attrs,
       ...getOptionProps(this),
       prefixCls,
-      size: customizeSize || this.size,
+      size: customizeSize || this.contextSize,
       inputType: 'input',
       value: fixControlledValue(stateValue),
       element: this.renderInput(prefixCls, { addonAfter, addonBefore }),

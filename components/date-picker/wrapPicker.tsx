@@ -76,7 +76,7 @@ export default function wrapPicker<P>(
         configProvider: inject('configProvider', defaultConfigProvider),
         picker: undefined,
         popupRef: undefined,
-        size: useSizeContext(),
+        contextSize: useSizeContext(),
       };
     },
     watch: {
@@ -187,7 +187,7 @@ export default function wrapPicker<P>(
           format ||
           locale[LOCALE_FORMAT_MAPPING[mergedPickerType]] ||
           DEFAULT_FORMAT[mergedPickerType];
-        const mergedSize = customizeSize || this.size;
+        const mergedSize = customizeSize || this.contextSize;
 
         const { getPrefixCls, getPopupContainer: getContextPopupContainer } = this.configProvider;
         const getPopupContainer = getCalendarContainer || getContextPopupContainer;

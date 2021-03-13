@@ -78,7 +78,7 @@ const List = defineComponent({
       onPaginationChange: null,
       onPaginationShowSizeChange: null,
       configProvider: inject('configProvider', defaultConfigProvider),
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
 
@@ -191,7 +191,7 @@ const List = defineComponent({
     }
     const isLoading = loadingProp && loadingProp.spinning;
 
-    const mergeSize = customizeSize || this.size;
+    const mergeSize = customizeSize || this.contextSize;
     // large => lg
     // small => sm
     let sizeCls = '';

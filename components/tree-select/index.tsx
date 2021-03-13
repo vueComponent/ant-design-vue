@@ -33,7 +33,7 @@ const TreeSelect = defineComponent({
     return {
       vcTreeSelect: null,
       configProvider: inject('configProvider', defaultConfigProvider),
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
   created() {
@@ -147,7 +147,7 @@ const TreeSelect = defineComponent({
       treeData = this.updateTreeData(treeData);
     }
 
-    const mergeSize = customizeSize || this.size;
+    const mergeSize = customizeSize || this.contextSize;
     const cls = {
       [`${prefixCls}-lg`]: mergeSize === 'large',
       [`${prefixCls}-sm`]: mergeSize === 'small',

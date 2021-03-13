@@ -58,7 +58,7 @@ export default defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
 
@@ -112,7 +112,7 @@ export default defineComponent({
       const prefixCls = getPrefixCls('pagination', customizePrefixCls);
       const selectPrefixCls = getPrefixCls('select', customizeSelectPrefixCls);
 
-      const mergeSize = customizeSize || this.size;
+      const mergeSize = customizeSize || this.contextSize;
       const isSmall = mergeSize === 'small';
       const paginationProps = {
         prefixCls,

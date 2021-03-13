@@ -50,7 +50,7 @@ const Card = defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
   data() {
@@ -101,7 +101,7 @@ const Card = defineComponent({
     const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
-    const mergeSize = customizeSize || this.size;
+    const mergeSize = customizeSize || this.contextSize;
 
     const tabBarExtraContent = getComponent(this, 'tabBarExtraContent');
     const classString = {

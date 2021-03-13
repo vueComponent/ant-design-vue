@@ -213,7 +213,7 @@ const Cascader = defineComponent({
       cachedOptions: [],
       popupRef: undefined,
       input: undefined,
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
   data() {
@@ -462,7 +462,7 @@ const Cascader = defineComponent({
     const renderEmpty = this.configProvider.renderEmpty;
     const prefixCls = getPrefixCls('cascader', customizePrefixCls);
     const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
-    const mergedSize = customizeSize || this.size;
+    const mergedSize = customizeSize || this.contextSize;
 
     const sizeCls = classNames({
       [`${inputPrefixCls}-lg`]: mergedSize === 'large',

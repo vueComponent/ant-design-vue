@@ -34,7 +34,7 @@ const Switch = defineComponent({
     return {
       refSwitchNode: undefined,
       configProvider: inject('configProvider', defaultConfigProvider),
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
   created() {
@@ -67,7 +67,7 @@ const Switch = defineComponent({
     const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('switch', customizePrefixCls);
     const { $attrs } = this;
-    const mergeSize = customizeSize || this.size;
+    const mergeSize = customizeSize || this.contextSize;
     const classes = {
       [$attrs.class as string]: $attrs.class,
       [`${prefixCls}-small`]: mergeSize === 'small',

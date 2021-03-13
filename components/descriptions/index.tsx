@@ -142,7 +142,7 @@ const Descriptions = defineComponent<DescriptionsProps>({
   setup(props, { slots }) {
     const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
 
-    const size = useSizeContext();
+    const contextSize = useSizeContext();
 
     let token: number;
 
@@ -178,7 +178,7 @@ const Descriptions = defineComponent<DescriptionsProps>({
       const mergeColumn = getColumn(column, screens.value);
       const children = slots.default?.();
       const rows = getRows(children, mergeColumn);
-      const mergeSize = customizeSize || size.value;
+      const mergeSize = customizeSize || contextSize.value;
 
       return (
         <div

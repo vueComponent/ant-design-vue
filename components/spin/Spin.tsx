@@ -44,7 +44,7 @@ export default defineComponent({
     return {
       originalUpdateSpinning: null,
       configProvider: inject('configProvider', defaultConfigProvider),
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
   data() {
@@ -130,7 +130,7 @@ export default defineComponent({
     const prefixCls = getPrefixCls('spin', customizePrefixCls);
 
     const { sSpinning } = this;
-    const mergeSize = customizeSize || this.size;
+    const mergeSize = customizeSize || this.contextSize;
     const spinClassName = {
       [prefixCls]: true,
       [`${prefixCls}-sm`]: mergeSize === 'small',

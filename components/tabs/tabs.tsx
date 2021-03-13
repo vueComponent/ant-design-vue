@@ -59,7 +59,7 @@ export default defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
-      size: useSizeContext(),
+      contextSize: useSizeContext(),
     };
   },
   mounted() {
@@ -109,7 +109,7 @@ export default defineComponent({
       tabPaneAnimated = 'animated' in props ? tabPaneAnimated : false;
     }
 
-    const mergeSize = customizeSize || this.size;
+    const mergeSize = customizeSize || this.contextSize;
     const cls = {
       [className as string]: className,
       [`${prefixCls}-vertical`]: tabPosition === 'left' || tabPosition === 'right',

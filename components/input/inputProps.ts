@@ -11,7 +11,7 @@ export default {
   },
   type: PropTypes.string.def('text'),
   name: PropTypes.string,
-  size: PropTypes.oneOf(tuple('small', 'large', 'default')),
+  size: PropTypes.oneOf(tuple('small', 'large', 'middle')),
   disabled: PropTypes.looseBool,
   readonly: PropTypes.looseBool,
   addonBefore: PropTypes.VNodeChild,

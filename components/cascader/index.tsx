@@ -23,6 +23,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
 import warning from '../_util/warning';
 import { defaultConfigProvider } from '../config-provider';
+import { useSizeContext } from '../config-provider/SizeContext';
 import { tuple, VueNode, withInstall } from '../_util/type';
 import { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
@@ -111,7 +112,7 @@ const CascaderProps = {
   /** 输入框占位文本*/
   placeholder: PropTypes.string.def('Please select'),
   /** 输入框大小，可选 `large` `default` `small` */
-  size: PropTypes.oneOf(tuple('large', 'default', 'small')),
+  size: PropTypes.oneOf(tuple('large', 'middle', 'small')),
   /** 禁用*/
   disabled: PropTypes.looseBool.def(false),
   /** 是否支持清除*/
@@ -212,6 +213,7 @@ const Cascader = defineComponent({
       cachedOptions: [],
       popupRef: undefined,
       input: undefined,
+      size: useSizeContext(),
     };
   },
   data() {
@@ -447,7 +449,7 @@ const Cascader = defineComponent({
       prefixCls: customizePrefixCls,
       inputPrefixCls: customizeInputPrefixCls,
       placeholder = localeData.placeholder,
-      size,
+      size: customizeSize,
       disabled,
       allowClear,
       showSearch = false,
@@ -460,10 +462,11 @@ const Cascader = defineComponent({
     const renderEmpty = this.configProvider.renderEmpty;
     const prefixCls = getPrefixCls('cascader', customizePrefixCls);
     const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
+    const mergedSize = customizeSize || this.size;
 
     const sizeCls = classNames({
-      [`${inputPrefixCls}-lg`]: size === 'large',
-      [`${inputPrefixCls}-sm`]: size === 'small',
+      [`${inputPrefixCls}-lg`]: mergedSize === 'large',
+      [`${inputPrefixCls}-sm`]: mergedSize === 'small',
     });
     const clearIcon =
       (allowClear && !disabled && value.length > 0) || inputValue ? (
@@ -480,7 +483,7 @@ const Cascader = defineComponent({
     const pickerCls = classNames(className, `${prefixCls}-picker`, {
       [`${prefixCls}-picker-with-value`]: inputValue,
       [`${prefixCls}-picker-disabled`]: disabled,
-      [`${prefixCls}-picker-${size}`]: !!size,
+      [`${prefixCls}-picker-${mergedSize}`]: !!mergedSize,
       [`${prefixCls}-picker-show-search`]: !!showSearch,
       [`${prefixCls}-picker-focused`]: inputFocused,
     });

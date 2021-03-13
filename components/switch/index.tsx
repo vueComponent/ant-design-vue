@@ -7,6 +7,7 @@ import Wave from '../_util/wave';
 import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 import { tuple, withInstall } from '../_util/type';
+import { useSizeContext } from '../config-provider/SizeContext';
 
 const Switch = defineComponent({
   name: 'ASwitch',
@@ -15,7 +16,7 @@ const Switch = defineComponent({
   props: {
     prefixCls: PropTypes.string,
     // size=default and size=large are the same
-    size: PropTypes.oneOf(tuple('small', 'default', 'large')),
+    size: PropTypes.oneOf(tuple('small', 'default')),
     disabled: PropTypes.looseBool,
     checkedChildren: PropTypes.any,
     unCheckedChildren: PropTypes.any,
@@ -33,6 +34,7 @@ const Switch = defineComponent({
     return {
       refSwitchNode: undefined,
       configProvider: inject('configProvider', defaultConfigProvider),
+      size: useSizeContext(),
     };
   },
   created() {
@@ -55,15 +57,20 @@ const Switch = defineComponent({
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, size, loading, disabled, ...restProps } = getOptionProps(
-      this,
-    );
+    const {
+      prefixCls: customizePrefixCls,
+      size: customizeSize,
+      loading,
+      disabled,
+      ...restProps
+    } = getOptionProps(this);
     const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('switch', customizePrefixCls);
     const { $attrs } = this;
+    const mergeSize = customizeSize || this.size;
     const classes = {
       [$attrs.class as string]: $attrs.class,
-      [`${prefixCls}-small`]: size === 'small',
+      [`${prefixCls}-small`]: mergeSize === 'small',
       [`${prefixCls}-loading`]: loading,
     };
     const loadingIcon = loading ? <LoadingOutlined class={`${prefixCls}-loading-icon`} /> : null;

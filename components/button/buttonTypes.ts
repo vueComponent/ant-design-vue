@@ -7,7 +7,7 @@ const ButtonTypes = tuple('default', 'primary', 'ghost', 'dashed', 'danger', 'li
 export type ButtonType = typeof ButtonTypes[number];
 const ButtonShapes = tuple('circle', 'circle-outline', 'round');
 export type ButtonShape = typeof ButtonShapes[number];
-const ButtonSizes = tuple('large', 'default', 'small');
+const ButtonSizes = tuple('large', 'middle', 'small');
 export type ButtonSize = typeof ButtonSizes[number];
 const ButtonHTMLTypes = tuple('submit', 'button', 'reset');
 export type ButtonHTMLType = typeof ButtonHTMLTypes[number];
@@ -18,7 +18,7 @@ const buttonProps = () => ({
   htmlType: PropTypes.oneOf(ButtonHTMLTypes).def('button'),
   // icon: PropTypes.string,
   shape: PropTypes.oneOf(ButtonShapes),
-  size: PropTypes.oneOf(ButtonSizes).def('default'),
+  size: PropTypes.oneOf(ButtonSizes),
   loading: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   disabled: PropTypes.looseBool,
   ghost: PropTypes.looseBool,

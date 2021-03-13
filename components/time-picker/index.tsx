@@ -19,6 +19,7 @@ import {
   TimeOrTimesType,
 } from '../_util/moment-util';
 import { tuple, withInstall } from '../_util/type';
+import { useSizeContext } from '../config-provider/SizeContext';
 
 export function generateShowHourMinuteSecond(format: string) {
   // Ref: http://momentjs.com/docs/#/parsing/string-format/
@@ -98,6 +99,7 @@ const TimePicker = defineComponent({
       popupRef: null,
       timePickerRef: null,
       configProvider: inject('configProvider', defaultConfigProvider),
+      size: useSizeContext(),
     };
   },
 
@@ -207,14 +209,20 @@ const TimePicker = defineComponent({
       let props = getOptionProps(this);
       props = omit(props, ['defaultValue', 'suffixIcon', 'allowEmpty', 'allowClear']);
       const { class: className } = this.$attrs;
-      const { prefixCls: customizePrefixCls, getPopupContainer, placeholder, size } = props;
+      const {
+        prefixCls: customizePrefixCls,
+        getPopupContainer,
+        placeholder,
+        size: customizeSize,
+      } = props;
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('time-picker', customizePrefixCls);
 
+      const mergeSize = customizeSize || this.size;
       const format = this.getDefaultFormat();
       const pickerClassName = {
         [className as string]: className,
-        [`${prefixCls}-${size}`]: !!size,
+        [`${prefixCls}-${mergeSize}`]: !!mergeSize,
       };
       const tempAddon = getComponent(this, 'addon', {}, false);
       const pickerAddon = panel => {

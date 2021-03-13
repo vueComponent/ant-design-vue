@@ -8,6 +8,7 @@ import { getComponent, getSlot, isEmptyElement } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { defaultConfigProvider } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
+import { useSizeContext } from '../config-provider/SizeContext';
 
 export interface CardTabListType {
   key: string;
@@ -49,6 +50,7 @@ const Card = defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      size: useSizeContext(),
     };
   },
   data() {
@@ -87,7 +89,7 @@ const Card = defineComponent({
       bodyStyle = {},
       loading,
       bordered = true,
-      size = 'default',
+      size: customizeSize,
       type,
       tabList,
       hoverable,
@@ -99,6 +101,8 @@ const Card = defineComponent({
     const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('card', customizePrefixCls);
 
+    const mergeSize = customizeSize || this.size;
+
     const tabBarExtraContent = getComponent(this, 'tabBarExtraContent');
     const classString = {
       [`${prefixCls}`]: true,
@@ -107,7 +111,7 @@ const Card = defineComponent({
       [`${prefixCls}-hoverable`]: !!hoverable,
       [`${prefixCls}-contain-grid`]: this.isContainGrid(children),
       [`${prefixCls}-contain-tabs`]: tabList && tabList.length,
-      [`${prefixCls}-${size}`]: size !== 'default',
+      [`${prefixCls}-${mergeSize}`]: mergeSize !== 'default',
       [`${prefixCls}-type-${type}`]: !!type,
     };
 

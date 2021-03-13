@@ -5,6 +5,7 @@ import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
 import { TransformCellTextProps } from '../table/interface';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { withInstall } from '../_util/type';
+import { SizeContextProvider } from './SizeContext';
 
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
 
@@ -105,7 +106,7 @@ const ConfigProvider = defineComponent({
       type: Object as PropType<{ ghost: boolean }>,
     },
     componentSize: {
-      type: Object as PropType<SizeType>,
+      type: String as PropType<SizeType>,
     },
     direction: {
       type: String as PropType<'ltr' | 'rtl'>,
@@ -155,7 +156,7 @@ const ConfigProvider = defineComponent({
     const renderProvider = (legacyLocale: Locale) => {
       return (
         <LocaleProvider locale={props.locale || legacyLocale} ANT_MARK__={ANT_MARK}>
-          {slots.default?.()}
+          <SizeContextProvider size={props.componentSize}>{slots.default?.()}</SizeContextProvider>
         </LocaleProvider>
       );
     };

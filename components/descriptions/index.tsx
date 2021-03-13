@@ -23,6 +23,7 @@ import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import { cloneElement } from '../_util/vnode';
 import { filterEmpty } from '../_util/props-util';
+import { useSizeContext } from '../config-provider/SizeContext';
 
 export const DescriptionsItemProps = {
   prefixCls: PropTypes.string,
@@ -121,7 +122,7 @@ function getRows(children: VNode[], column: number) {
 const descriptionsProps = {
   prefixCls: PropTypes.string,
   bordered: PropTypes.looseBool,
-  size: PropTypes.oneOf(tuple('default', 'middle', 'small')).def('default'),
+  size: PropTypes.oneOf(tuple('default', 'middle', 'small')),
   title: PropTypes.VNodeChild,
   extra: PropTypes.VNodeChild,
   column: {
@@ -140,6 +141,8 @@ const Descriptions = defineComponent<DescriptionsProps>({
   Item: DescriptionsItem,
   setup(props, { slots }) {
     const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
+
+    const size = useSizeContext();
 
     let token: number;
 
@@ -163,7 +166,7 @@ const Descriptions = defineComponent<DescriptionsProps>({
       const {
         prefixCls: customizePrefixCls,
         column,
-        size,
+        size: customizeSize,
         bordered = false,
         layout = 'horizontal',
         colon = true,
@@ -175,13 +178,14 @@ const Descriptions = defineComponent<DescriptionsProps>({
       const mergeColumn = getColumn(column, screens.value);
       const children = slots.default?.();
       const rows = getRows(children, mergeColumn);
+      const mergeSize = customizeSize || size.value;
 
       return (
         <div
           class={[
             prefixCls,
             {
-              [`${prefixCls}-${size}`]: size !== 'default',
+              [`${prefixCls}-${mergeSize}`]: mergeSize !== 'default',
               [`${prefixCls}-bordered`]: !!bordered,
             },
           ]}

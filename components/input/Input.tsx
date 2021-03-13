@@ -6,6 +6,7 @@ import inputProps from './inputProps';
 import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
+import { useSizeContext } from '../config-provider/SizeContext';
 
 export function fixControlledValue(value: string | number) {
   if (typeof value === 'undefined' || value === null) {
@@ -60,6 +61,7 @@ export default defineComponent({
       removePasswordTimeout: undefined,
       input: null,
       clearableInput: null,
+      size: useSizeContext(),
     };
   },
   data() {
@@ -217,7 +219,7 @@ export default defineComponent({
     },
   },
   render() {
-    const { prefixCls: customizePrefixCls } = this.$props;
+    const { prefixCls: customizePrefixCls, size: customizeSize } = this.$props;
     const { stateValue, isFocused } = this.$data;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input', customizePrefixCls);
@@ -229,6 +231,7 @@ export default defineComponent({
       ...this.$attrs,
       ...getOptionProps(this),
       prefixCls,
+      size: customizeSize || this.size,
       inputType: 'input',
       value: fixControlledValue(stateValue),
       element: this.renderInput(prefixCls, { addonAfter, addonBefore }),

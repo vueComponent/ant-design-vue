@@ -4,6 +4,7 @@ import ResizableTextArea from './ResizableTextArea';
 import inputProps from './inputProps';
 import { hasProp, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
+import { useSizeContext } from '../config-provider/SizeContext';
 import { fixControlledValue, resolveOnChange } from './Input';
 import classNames from '../_util/classNames';
 import PropTypes, { withUndefined } from '../_util/vue-types';
@@ -26,6 +27,7 @@ export default defineComponent({
       configProvider: inject('configProvider', defaultConfigProvider),
       resizableTextArea: null,
       clearableInput: null,
+      size: useSizeContext(),
     };
   },
   data() {
@@ -104,12 +106,19 @@ export default defineComponent({
 
     renderTextArea(prefixCls: string) {
       const props = getOptionProps(this);
+      const size = props.size || this.size;
       const { style, class: customClass } = this.$attrs;
       const resizeProps = {
         ...props,
         ...this.$attrs,
         style: !props.showCount && style,
-        class: !props.showCount && customClass,
+        class: classNames([
+          {
+            [customClass as string]: !props.showCount && customClass,
+            [`${prefixCls}-sm`]: size === 'small',
+            [`${prefixCls}-lg`]: size === 'large',
+          },
+        ]),
         showCount: null,
         prefixCls,
         onInput: this.handleChange,

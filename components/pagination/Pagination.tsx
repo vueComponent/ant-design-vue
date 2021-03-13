@@ -13,6 +13,7 @@ import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
 import { defaultConfigProvider } from '../config-provider';
 import classNames from '../_util/classNames';
+import { useSizeContext } from '../config-provider/SizeContext';
 
 export const PaginationProps = () => ({
   total: PropTypes.number,
@@ -28,7 +29,7 @@ export const PaginationProps = () => ({
   showSizeChange: PropTypes.func,
   showQuickJumper: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   showTotal: PropTypes.any,
-  size: PropTypes.string,
+  size: PropTypes.oneOf(tuple('small', 'default')),
   simple: PropTypes.looseBool,
   locale: PropTypes.object,
   prefixCls: PropTypes.string,
@@ -57,6 +58,7 @@ export default defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      size: useSizeContext(),
     };
   },
 
@@ -102,7 +104,7 @@ export default defineComponent({
         prefixCls: customizePrefixCls,
         selectPrefixCls: customizeSelectPrefixCls,
         buildOptionText,
-        size,
+        size: customizeSize,
         locale: customLocale,
         ...restProps
       } = getOptionProps(this);
@@ -110,7 +112,8 @@ export default defineComponent({
       const prefixCls = getPrefixCls('pagination', customizePrefixCls);
       const selectPrefixCls = getPrefixCls('select', customizeSelectPrefixCls);
 
-      const isSmall = size === 'small';
+      const mergeSize = customizeSize || this.size;
+      const isSmall = mergeSize === 'small';
       const paginationProps = {
         prefixCls,
         selectPrefixCls,

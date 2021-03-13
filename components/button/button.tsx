@@ -4,6 +4,8 @@ import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';
 import { getSlot, getComponent } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
+import { useSizeContext } from '../config-provider/SizeContext';
+
 // eslint-disable-next-line no-console
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
@@ -19,6 +21,7 @@ export default defineComponent({
       children: [],
       iconCom: undefined,
       delayTimeout: undefined,
+      size: useSizeContext(),
     };
   },
   data() {
@@ -65,7 +68,7 @@ export default defineComponent({
         prefixCls: customizePrefixCls,
         type,
         shape,
-        size,
+        size: customizeSize,
         hasTwoCNChar,
         sLoading,
         ghost,
@@ -79,7 +82,7 @@ export default defineComponent({
       // large => lg
       // small => sm
       let sizeCls = '';
-      switch (size) {
+      switch (customizeSize || this.size) {
         case 'large':
           sizeCls = 'lg';
           break;

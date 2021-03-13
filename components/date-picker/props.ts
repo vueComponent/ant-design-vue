@@ -29,7 +29,7 @@ export const PickerProps = {
   dropdownClassName: PropTypes.string,
   locale: PropTypes.any,
   localeCode: PropTypes.string,
-  size: PropTypes.oneOf(tuple('large', 'small', 'default')),
+  size: PropTypes.oneOf(tuple('large', 'small', 'middle')),
   getCalendarContainer: PropTypes.func,
   open: PropTypes.looseBool,
   disabledDate: PropTypes.func,

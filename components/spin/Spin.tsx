@@ -6,6 +6,7 @@ import BaseMixin from '../_util/BaseMixin';
 import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
+import { useSizeContext } from '../config-provider/SizeContext';
 
 export const SpinSize = PropTypes.oneOf(tuple('small', 'default', 'large'));
 
@@ -36,7 +37,6 @@ export default defineComponent({
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: initDefaultProps(SpinProps(), {
-    size: 'default',
     spinning: true,
     wrapperClassName: '',
   }),
@@ -44,6 +44,7 @@ export default defineComponent({
     return {
       originalUpdateSpinning: null,
       configProvider: inject('configProvider', defaultConfigProvider),
+      size: useSizeContext(),
     };
   },
   data() {
@@ -118,16 +119,22 @@ export default defineComponent({
     },
   },
   render() {
-    const { size, prefixCls: customizePrefixCls, tip, wrapperClassName } = this.$props;
+    const {
+      size: customizeSize,
+      prefixCls: customizePrefixCls,
+      tip,
+      wrapperClassName,
+    } = this.$props;
     const { class: cls, style, ...divProps } = this.$attrs;
     const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('spin', customizePrefixCls);
 
     const { sSpinning } = this;
+    const mergeSize = customizeSize || this.size;
     const spinClassName = {
       [prefixCls]: true,
-      [`${prefixCls}-sm`]: size === 'small',
-      [`${prefixCls}-lg`]: size === 'large',
+      [`${prefixCls}-sm`]: mergeSize === 'small',
+      [`${prefixCls}-lg`]: mergeSize === 'large',
       [`${prefixCls}-spinning`]: sSpinning,
       [`${prefixCls}-show-text`]: !!tip,
       [cls as string]: !!cls,

@@ -15,6 +15,7 @@ import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import omit from 'omit.js';
 import { convertChildrenToData } from './utils';
+import { useSizeContext } from '../config-provider/SizeContext';
 
 const TreeSelect = defineComponent({
   TreeNode,
@@ -32,6 +33,7 @@ const TreeSelect = defineComponent({
     return {
       vcTreeSelect: null,
       configProvider: inject('configProvider', defaultConfigProvider),
+      size: useSizeContext(),
     };
   },
   created() {
@@ -117,7 +119,7 @@ const TreeSelect = defineComponent({
     const props: any = getOptionProps(this);
     const {
       prefixCls: customizePrefixCls,
-      size,
+      size: customizeSize,
       dropdownStyle,
       dropdownClassName,
       getPopupContainer,
@@ -144,9 +146,11 @@ const TreeSelect = defineComponent({
     if (treeData) {
       treeData = this.updateTreeData(treeData);
     }
+
+    const mergeSize = customizeSize || this.size;
     const cls = {
-      [`${prefixCls}-lg`]: size === 'large',
-      [`${prefixCls}-sm`]: size === 'small',
+      [`${prefixCls}-lg`]: mergeSize === 'large',
+      [`${prefixCls}-sm`]: mergeSize === 'small',
       [className as string]: className,
     };
 

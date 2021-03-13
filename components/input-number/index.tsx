@@ -6,6 +6,7 @@ import UpOutlined from '@ant-design/icons-vue/UpOutlined';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import VcInputNumber from '../vc-input-number/src';
 import { defaultConfigProvider } from '../config-provider';
+import { useSizeContext } from '../config-provider/SizeContext';
 import { tuple, withInstall } from '../_util/type';
 
 const InputNumberProps = {
@@ -58,21 +59,23 @@ const InputNumber = defineComponent({
       inputNumberRef,
       focus,
       blur,
+      size: useSizeContext(),
     };
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, size, class: className, ...others } = {
+    const { prefixCls: customizePrefixCls, size: customizeSize, class: className, ...others } = {
       ...getOptionProps(this),
       ...this.$attrs,
     } as any;
     const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('input-number', customizePrefixCls);
 
+    const mergeSize = customizeSize || this.size;
     const inputNumberClass = classNames(
       {
-        [`${prefixCls}-lg`]: size === 'large',
-        [`${prefixCls}-sm`]: size === 'small',
+        [`${prefixCls}-lg`]: mergeSize === 'large',
+        [`${prefixCls}-sm`]: mergeSize === 'small',
       },
       className,
     );

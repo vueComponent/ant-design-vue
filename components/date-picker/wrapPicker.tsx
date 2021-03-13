@@ -7,6 +7,7 @@ import enUS from './locale/en_US';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
+import { useSizeContext } from '../config-provider/SizeContext';
 import { checkValidate, stringToMoment, momentToString } from '../_util/moment-util';
 
 type PickerType = 'date' | 'week' | 'month';
@@ -75,6 +76,7 @@ export default function wrapPicker<P>(
         configProvider: inject('configProvider', defaultConfigProvider),
         picker: undefined,
         popupRef: undefined,
+        size: useSizeContext(),
       };
     },
     watch: {
@@ -175,7 +177,7 @@ export default function wrapPicker<P>(
           prefixCls: customizePrefixCls,
           inputPrefixCls: customizeInputPrefixCls,
           getCalendarContainer,
-          size,
+          size: customizeSize,
           showTime,
           disabled,
           format,
@@ -185,6 +187,7 @@ export default function wrapPicker<P>(
           format ||
           locale[LOCALE_FORMAT_MAPPING[mergedPickerType]] ||
           DEFAULT_FORMAT[mergedPickerType];
+        const mergedSize = customizeSize || this.size;
 
         const { getPrefixCls, getPopupContainer: getContextPopupContainer } = this.configProvider;
         const getPopupContainer = getCalendarContainer || getContextPopupContainer;
@@ -192,11 +195,11 @@ export default function wrapPicker<P>(
         const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
 
         const pickerClass = classNames(`${prefixCls}-picker`, {
-          [`${prefixCls}-picker-${size}`]: !!size,
+          [`${prefixCls}-picker-${mergedSize}`]: !!mergedSize,
         });
         const pickerInputClass = classNames(`${prefixCls}-picker-input`, inputPrefixCls, {
-          [`${inputPrefixCls}-lg`]: size === 'large',
-          [`${inputPrefixCls}-sm`]: size === 'small',
+          [`${inputPrefixCls}-lg`]: mergedSize === 'large',
+          [`${inputPrefixCls}-sm`]: mergedSize === 'small',
           [`${inputPrefixCls}-disabled`]: disabled,
         });
 

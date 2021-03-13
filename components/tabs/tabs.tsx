@@ -18,6 +18,7 @@ import { cloneElement } from '../_util/vnode';
 import isValid from '../_util/isValid';
 import { defaultConfigProvider } from '../config-provider';
 import TabBar from './TabBar';
+import { useSizeContext } from '../config-provider/SizeContext';
 
 export default defineComponent({
   TabPane,
@@ -58,6 +59,7 @@ export default defineComponent({
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
+      size: useSizeContext(),
     };
   },
   mounted() {
@@ -87,7 +89,7 @@ export default defineComponent({
     const props = getOptionProps(this);
     const {
       prefixCls: customizePrefixCls,
-      size,
+      size: customizeSize,
       type = 'line',
       tabPosition,
       animated = true,
@@ -106,10 +108,12 @@ export default defineComponent({
     if (type !== 'line') {
       tabPaneAnimated = 'animated' in props ? tabPaneAnimated : false;
     }
+
+    const mergeSize = customizeSize || this.size;
     const cls = {
       [className as string]: className,
       [`${prefixCls}-vertical`]: tabPosition === 'left' || tabPosition === 'right',
-      [`${prefixCls}-${size}`]: !!size,
+      [`${prefixCls}-${mergeSize}`]: !!mergeSize,
       [`${prefixCls}-card`]: type.indexOf('card') >= 0,
       [`${prefixCls}-${type}`]: true,
       [`${prefixCls}-no-animation`]: !tabPaneAnimated,

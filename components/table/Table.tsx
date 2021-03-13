@@ -30,6 +30,7 @@ import defaultLocale from '../locale-provider/default';
 import warning from '../_util/warning';
 import scrollTo from '../_util/scrollTo';
 import TransButton from '../_util/transButton';
+import { useSizeContext } from '../config-provider/SizeContext';
 
 function noop() {}
 
@@ -120,7 +121,6 @@ export const defaultTableProps = initDefaultProps(tableProps, {
   dataSource: [],
   useFixedHeader: false,
   // rowSelection: null,
-  size: 'default',
   loading: false,
   bordered: false,
   indentSize: 20,
@@ -149,6 +149,7 @@ export default defineComponent({
       checkboxPropsCache: {},
       store,
       configProvider: inject('configProvider', defaultConfigProvider),
+      size: useSizeContext(),
     };
   },
 
@@ -1144,7 +1145,7 @@ export default defineComponent({
       getPopupContainer: contextGetPopupContainer,
       transformCellText,
     }) {
-      const { showHeader, locale, getPopupContainer, ...restProps } = {
+      const { showHeader, locale, getPopupContainer, size: customizeSize, ...restProps } = {
         ...getOptionProps(this),
         ...this.$attrs,
       } as any;
@@ -1160,8 +1161,10 @@ export default defineComponent({
         mergedLocale.emptyText = renderEmpty('Table');
       }
 
+      const mergeSize = customizeSize || this.size;
+
       const classString = classNames({
-        [`${prefixCls}-${this.size}`]: true,
+        [`${prefixCls}-${mergeSize}`]: !!mergeSize,
         [`${prefixCls}-bordered`]: this.bordered,
         [`${prefixCls}-empty`]: !data.length,
         [`${prefixCls}-without-column-header`]: !showHeader,

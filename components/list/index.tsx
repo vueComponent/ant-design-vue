@@ -13,6 +13,7 @@ import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { cloneElement } from '../_util/vnode';
 import { tuple } from '../_util/type';
+import { useSizeContext } from '../config-provider/SizeContext';
 
 export { ListItemProps, ListItemMetaProps, ListItemMeta } from './Item';
 
@@ -77,6 +78,7 @@ const List = defineComponent({
       onPaginationChange: null,
       onPaginationShowSizeChange: null,
       configProvider: inject('configProvider', defaultConfigProvider),
+      size: useSizeContext(),
     };
   },
 
@@ -168,7 +170,7 @@ const List = defineComponent({
       pagination,
       grid,
       dataSource = [],
-      size,
+      size: customizeSize,
       loading,
       paginationCurrent,
       paginationSize,
@@ -189,10 +191,11 @@ const List = defineComponent({
     }
     const isLoading = loadingProp && loadingProp.spinning;
 
+    const mergeSize = customizeSize || this.size;
     // large => lg
     // small => sm
     let sizeCls = '';
-    switch (size) {
+    switch (mergeSize) {
       case 'large':
         sizeCls = 'lg';
         break;

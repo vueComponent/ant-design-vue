@@ -29,7 +29,7 @@ const ClearableLabeledInput = defineComponent({
     element: PropTypes.VNodeChild,
     handleReset: PropTypes.func,
     disabled: PropTypes.looseBool,
-    size: PropTypes.oneOf(tuple('small', 'large', 'default')),
+    size: PropTypes.oneOf(tuple('small', 'large', 'middle')),
     suffix: PropTypes.VNodeChild,
     prefix: PropTypes.VNodeChild,
     addonBefore: PropTypes.VNodeChild,

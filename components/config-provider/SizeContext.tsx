@@ -5,7 +5,7 @@ export type SizeType = 'small' | 'middle' | 'large' | undefined;
 const injectSizeKey = 'sizeProvider';
 
 export const useSizeContext = () => {
-  const size = inject<Ref<SizeType>>(injectSizeKey);
+  const size = inject<Ref<SizeType>>(injectSizeKey, undefined);
   if (!!size) {
     provide(injectSizeKey, size);
   }

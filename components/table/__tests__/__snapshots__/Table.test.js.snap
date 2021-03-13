@@ -5,7 +5,7 @@ exports[`Table align column should not override cell style 1`] = `
   <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-default ant-table-scroll-position-left">
+      <div class="ant-table ant-table-scroll-position-left">
         <!---->
         <div class="ant-table-content">
           <!---->
@@ -76,7 +76,7 @@ exports[`Table renders JSX correctly 1`] = `
   <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-default ant-table-scroll-position-left">
+      <div class="ant-table ant-table-scroll-position-left">
         <!---->
         <div class="ant-table-content">
           <!---->

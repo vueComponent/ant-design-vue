@@ -5,7 +5,7 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
   <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-default ant-table-scroll-position-left ant-table-scroll-position-right">
+      <div class="ant-table ant-table-scroll-position-left ant-table-scroll-position-right">
         <!---->
         <div class="ant-table-content">
           <div class="ant-table-scroll">

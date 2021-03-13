@@ -10,6 +10,7 @@ import {
   onMounted,
   onBeforeUnmount,
   Plugin,
+  unref
 } from 'vue';
 import warning from '../_util/warning';
 import ResponsiveObserve, {
@@ -178,14 +179,14 @@ const Descriptions = defineComponent<DescriptionsProps>({
       const mergeColumn = getColumn(column, screens.value);
       const children = slots.default?.();
       const rows = getRows(children, mergeColumn);
-      const mergeSize = customizeSize || contextSize.value;
+      const mergeSize = customizeSize || unref(contextSize);
 
       return (
         <div
           class={[
             prefixCls,
             {
-              [`${prefixCls}-${mergeSize}`]: mergeSize !== 'default',
+              [`${prefixCls}-${mergeSize}`]: mergeSize && mergeSize !== 'default',
               [`${prefixCls}-bordered`]: !!bordered,
             },
           ]}

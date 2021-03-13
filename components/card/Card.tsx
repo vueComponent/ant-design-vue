@@ -111,7 +111,7 @@ const Card = defineComponent({
       [`${prefixCls}-hoverable`]: !!hoverable,
       [`${prefixCls}-contain-grid`]: this.isContainGrid(children),
       [`${prefixCls}-contain-tabs`]: tabList && tabList.length,
-      [`${prefixCls}-${mergeSize}`]: mergeSize !== 'default',
+      [`${prefixCls}-${mergeSize}`]: mergeSize && mergeSize !== 'default',
       [`${prefixCls}-type-${type}`]: !!type,
     };
 

@@ -5,7 +5,7 @@
 </template>
 <script>
 import { defineComponent } from 'vue';
-import demo from '../v2-doc/src/docs/affix/demo/basic.vue';
+import demo from '../v2-doc/src/docs/typography/demo/text.vue';
 // import Affix from '../components/affix';
 export default defineComponent({
   components: {

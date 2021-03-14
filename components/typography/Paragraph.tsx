@@ -9,7 +9,7 @@ const Paragraph: FunctionalComponent<BlockProps> = (props, { slots, attrs }) => 
     ...attrs,
   };
 
-  return <Base {...paragraphProps}>{slots.default?.()}</Base>;
+  return <Base {...paragraphProps} v-slots={slots}></Base>;
 };
 
 Paragraph.displayName = 'ATypographyParagraph';

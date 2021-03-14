@@ -27,7 +27,7 @@ const Text: FunctionalComponent<TextProps> = (props, { slots, attrs }) => {
     ...attrs,
   };
 
-  return <Base {...textProps}>{slots.default?.()}</Base>;
+  return <Base {...textProps} v-slots={slots}></Base>;
 };
 
 Text.displayName = 'ATypographyText';

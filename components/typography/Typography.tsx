@@ -1,9 +1,11 @@
-import { defaultConfigProvider } from '../config-provider';
 import Text from './Text';
 import Title from './Title';
 import Paragraph from './Paragraph';
 import PropTypes from '../_util/vue-types';
-import { defineComponent, HTMLAttributes, inject, App, Plugin } from 'vue';
+import { defineComponent, HTMLAttributes, App, Plugin, computed } from 'vue';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import Link from './Link';
+import classNames from '../_util/classNames';
 
 export interface TypographyProps extends HTMLAttributes {
   prefixCls?: string;
@@ -18,14 +20,22 @@ const Typography = defineComponent<InternalTypographyProps>({
   Text: Text,
   Title: Title,
   Paragraph: Paragraph,
-  setup(props, { slots }) {
-    const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
-
+  Link: Link,
+  inheritAttrs: false,
+  setup(props, { slots, attrs }) {
+    const { prefixCls } = useConfigInject('typography', props);
     return () => {
-      const { prefixCls: customizePrefixCls, component: Component = 'article' as any } = props;
-      const prefixCls = getPrefixCls('typography', customizePrefixCls);
-
-      return <Component class={prefixCls}>{slots.default?.()}</Component>;
+      const {
+        prefixCls: _prefixCls,
+        class: _className,
+        component: Component = 'article' as any,
+        ...restProps
+      } = { ...props, ...attrs };
+      return (
+        <Component class={classNames(prefixCls.value, attrs.class)} {...restProps}>
+          {slots.default?.()}
+        </Component>
+      );
     };
   },
 });
@@ -40,6 +50,7 @@ Typography.install = function(app: App) {
   app.component(Typography.Text.displayName, Text);
   app.component(Typography.Title.displayName, Title);
   app.component(Typography.Paragraph.displayName, Paragraph);
+  app.component(Typography.Link.displayName, Link);
   return app;
 };
 
@@ -48,4 +59,5 @@ export default Typography as typeof Typography &
     readonly Text: typeof Text;
     readonly Title: typeof Title;
     readonly Paragraph: typeof Paragraph;
+    readonly Link: typeof Link;
   };

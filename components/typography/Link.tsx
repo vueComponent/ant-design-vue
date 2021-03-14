@@ -25,10 +25,10 @@ const Link: FunctionalComponent<LinkProps> = (props, { slots, attrs }) => {
   // @ts-ignore
   delete mergedProps.navigate;
 
-  return <Base {...mergedProps}>{slots.default?.()}</Base>;
+  return <Base {...mergedProps} v-slots={slots}></Base>;
 };
 
-Link.displayName = 'ATypographyText';
+Link.displayName = 'ATypographyLink';
 Link.inheritAttrs = false;
 Link.props = Omit({ ...baseProps(), ellipsis: PropTypes.looseBool }, ['component']);
 

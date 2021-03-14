@@ -25,7 +25,7 @@ const Title: FunctionalComponent<TitleProps> = (props, { slots, attrs }) => {
     ...attrs,
   };
 
-  return <Base {...titleProps}>{slots.default?.()}</Base>;
+  return <Base {...titleProps} v-slots={slots}></Base>;
 };
 
 Title.displayName = 'ATypographyTitle';

@@ -11,29 +11,26 @@ import Typography, { TypographyProps } from './Typography';
 import ResizeObserver from '../vc-resize-observer';
 import Tooltip from '../tooltip';
 import copy from '../_util/copy-to-clipboard';
-import { defaultConfigProvider } from '../config-provider';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import CopyOutlined from '@ant-design/icons-vue/CopyOutlined';
 import EditOutlined from '@ant-design/icons-vue/EditOutlined';
 import {
   defineComponent,
-  inject,
   VNodeTypes,
-  Text,
   VNode,
   reactive,
   ref,
   onMounted,
-  onUpdated,
   onBeforeUnmount,
   watch,
   watchEffect,
   nextTick,
   CSSProperties,
   toRaw,
+  computed,
 } from 'vue';
-import { filterEmpty } from '../_util/props-util';
 import { AutoSizeType } from '../input/ResizableTextArea';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 export type BaseType = 'secondary' | 'success' | 'warning' | 'danger';
 
@@ -63,7 +60,7 @@ interface EditConfig {
   tooltip?: boolean | VNodeTypes;
   onStart?: () => void;
   onChange?: (value: string) => void;
-  maxLength?: number;
+  maxlength?: number;
   autoSize?: boolean | AutoSizeType;
 }
 
@@ -74,7 +71,7 @@ export interface EllipsisConfig {
   symbol?: VNodeTypes;
   onExpand?: EventHandlerNonNull;
   onEllipsis?: (ellipsis: boolean) => void;
-  tooltip?: VNodeTypes;
+  tooltip?: boolean | VNodeTypes;
 }
 
 export interface BlockProps extends TypographyProps {
@@ -91,6 +88,7 @@ export interface BlockProps extends TypographyProps {
   delete?: boolean;
   strong?: boolean;
   keyboard?: boolean;
+  content?: string;
 }
 
 interface Locale {
@@ -110,7 +108,7 @@ const Base = defineComponent<InternalBlockProps>({
   name: 'Base',
   inheritAttrs: false,
   setup(props, { slots, attrs }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
+    const { prefixCls } = useConfigInject('typography', props);
 
     const state = reactive({
       edit: false,
@@ -133,25 +131,20 @@ const Base = defineComponent<InternalBlockProps>({
 
     const contentRef = ref();
     const editIcon = ref();
+    const ellipsis = computed(
+      (): EllipsisConfig => {
+        const ellipsis = props.ellipsis;
+        if (!ellipsis) return {};
 
+        return {
+          rows: 1,
+          expandable: false,
+          ...(typeof ellipsis === 'object' ? ellipsis : null),
+        };
+      },
+    );
     onMounted(() => {
-      state.prevProps = { ...props, children: getChildren() };
       state.clientRendered = true;
-      resizeOnNextFrame();
-    });
-
-    onUpdated(() => {
-      const ellipsis = getEllipsis();
-      const prevEllipsis = getEllipsis(state.prevProps);
-      const children = getChildren();
-
-      if (
-        JSON.stringify(children) !== JSON.stringify(toRaw(state.prevProps.children)) ||
-        ellipsis.rows !== prevEllipsis.rows
-      ) {
-        resizeOnNextFrame();
-      }
-      state.prevProps = { ...props, children };
     });
 
     onBeforeUnmount(() => {
@@ -160,25 +153,29 @@ const Base = defineComponent<InternalBlockProps>({
     });
 
     watch(
-      () => props.ellipsis,
+      [() => ellipsis.value.rows, () => props.content],
       () => {
-        resizeOnNextFrame();
+        nextTick(() => {
+          resizeOnNextFrame();
+        });
       },
+      { flush: 'post', deep: true, immediate: true },
     );
 
     watchEffect(() => {
-      const children = getChildren();
-
-      warning(
-        !props.editable || children.every(item => item.type === Text),
-        'Typography',
-        'When `editable` is enabled, the `children` should use string.',
-      );
+      if (!('content' in props)) {
+        warning(
+          !props.editable,
+          'Typography',
+          'When `editable` is enabled, please use `content` instead of children',
+        );
+        warning(
+          !props.ellipsis,
+          'Typography',
+          'When `ellipsis` is enabled, please use `content` instead of children',
+        );
+      }
     });
-
-    function getChildren() {
-      return filterEmpty(slots.default?.());
-    }
 
     function saveTypographyRef(node: VNode) {
       contentRef.value = node;
@@ -189,23 +186,14 @@ const Base = defineComponent<InternalBlockProps>({
     }
 
     function getChildrenText(): string {
-      const children = getChildren();
-      return children.length !== 0
-        ? children
-            .filter(item => item.type === Text)
-            .map(item => item.children)
-            .reduce((cur, prev) => cur + prev, '')
-        : '';
+      return props.ellipsis || props.editable ? props.content : contentRef.value.text;
     }
 
     // =============== Expand ===============
     function onExpandClick(e: MouseEvent) {
-      const { onExpand } = getEllipsis();
+      const { onExpand } = ellipsis.value;
       state.expanded = true;
-
-      if (onExpand) {
-        onExpand(e);
-      }
+      onExpand?.(e);
     }
     // ================ Edit ================
     function onEditClick() {
@@ -213,10 +201,8 @@ const Base = defineComponent<InternalBlockProps>({
     }
 
     function onEditChange(value: string) {
-      const { onChange } = getEditable();
-      if (onChange) {
-        onChange(value);
-      }
+      const { onChange } = editable.value;
+      onChange?.(value);
 
       triggerEdit(false);
     }
@@ -226,7 +212,8 @@ const Base = defineComponent<InternalBlockProps>({
     }
 
     // ================ Copy ================
-    function onCopyClick() {
+    function onCopyClick(e: MouseEvent) {
+      e.preventDefault();
       const { copyable } = props;
 
       const copyConfig = {
@@ -250,30 +237,18 @@ const Base = defineComponent<InternalBlockProps>({
         }, 3000);
       });
     }
-
-    function getEditable($props?: BlockProps): EditConfig {
-      const editable = ($props || props).editable;
+    const editable = computed(() => {
+      const editable = props.editable;
       if (!editable) return { editing: state.edit };
 
       return {
         editing: state.edit,
         ...(typeof editable === 'object' ? editable : null),
       };
-    }
-
-    function getEllipsis($props?: BlockProps): EllipsisConfig {
-      const ellipsis = ($props || props).ellipsis;
-      if (!ellipsis) return {};
-
-      return {
-        rows: 1,
-        expandable: false,
-        ...(typeof ellipsis === 'object' ? ellipsis : null),
-      };
-    }
+    });
 
     function triggerEdit(edit: boolean) {
-      const { onStart } = getEditable();
+      const { onStart } = editable.value;
       if (edit && onStart) {
         onStart();
       }
@@ -295,13 +270,13 @@ const Base = defineComponent<InternalBlockProps>({
       });
     }
 
-    function canUseCSSEllipsis(): boolean {
-      const { rows, expandable, suffix } = getEllipsis();
+    const canUseCSSEllipsis = computed(() => {
+      const { rows, expandable, suffix, onEllipsis, tooltip } = ellipsis.value;
 
-      if (suffix) return false;
+      if (suffix || tooltip) return false;
 
       // Can't use css ellipsis since we need to provide the place for button
-      if (props.editable || props.copyable || expandable || !state.clientRendered) {
+      if (props.editable || props.copyable || expandable || onEllipsis) {
         return false;
       }
 
@@ -310,40 +285,33 @@ const Base = defineComponent<InternalBlockProps>({
       }
 
       return isLineClampSupport;
-    }
+    });
 
-    function syncEllipsis() {
+    const syncEllipsis = () => {
       const { ellipsisText, isEllipsis } = state;
-      const children = getChildren();
-      const { rows, suffix, onEllipsis } = getEllipsis();
+      const { rows, suffix, onEllipsis } = ellipsis.value;
       if (!rows || rows < 0 || !contentRef.value?.$el || state.expanded) return;
 
       // Do not measure if css already support ellipsis
-      if (canUseCSSEllipsis()) return;
+      if (canUseCSSEllipsis.value) return;
 
-      warning(
-        children.every(item => item.type === Text),
-        'Typography',
-        '`ellipsis` should use string as children only.',
-      );
-
-      const { content, text, ellipsis } = measure(
+      const { content, text, ellipsis: ell } = measure(
         contentRef.value?.$el,
         { rows, suffix },
-        children,
+        props.content,
         renderOperations(true),
         ELLIPSIS_STR,
       );
 
-      if (ellipsisText !== text || state.isEllipsis !== ellipsis) {
+      if (ellipsisText !== text || state.isEllipsis !== ell) {
         state.ellipsisText = text;
         state.ellipsisContent = content;
-        state.isEllipsis = ellipsis;
-        if (isEllipsis !== ellipsis && onEllipsis) {
-          onEllipsis(ellipsis);
+        state.isEllipsis = ell;
+        if (isEllipsis !== ell && onEllipsis) {
+          onEllipsis(ell);
         }
       }
-    }
+    };
 
     function wrapperDecorations(
       { mark, code, underline, delete: del, strong, keyboard }: BlockProps,
@@ -368,8 +336,7 @@ const Base = defineComponent<InternalBlockProps>({
     }
 
     function renderExpand(forceRender?: boolean) {
-      const { expandable, symbol } = getEllipsis();
-      const prefixCls = getPrefixCls();
+      const { expandable, symbol } = ellipsis.value;
 
       if (!expandable) return null;
 
@@ -386,7 +353,7 @@ const Base = defineComponent<InternalBlockProps>({
       return (
         <a
           key="expand"
-          class={`${prefixCls}-expand`}
+          class={`${prefixCls.value}-expand`}
           onClick={onExpandClick}
           aria-label={state.expandStr}
         >
@@ -398,7 +365,6 @@ const Base = defineComponent<InternalBlockProps>({
     function renderEdit() {
       if (!props.editable) return;
 
-      const prefixCls = getPrefixCls();
       const { icon, tooltip } = props.editable as EditConfig;
 
       const title = tooltip || state.editStr;
@@ -408,7 +374,7 @@ const Base = defineComponent<InternalBlockProps>({
         <Tooltip key="edit" title={tooltip === false ? '' : title}>
           <TransButton
             ref={saveEditIconRef}
-            class={`${prefixCls}-edit`}
+            class={`${prefixCls.value}-edit`}
             onClick={onEditClick}
             aria-label={ariaLabel}
           >
@@ -420,8 +386,6 @@ const Base = defineComponent<InternalBlockProps>({
 
     function renderCopy() {
       if (!props.copyable) return;
-
-      const prefixCls = getPrefixCls();
 
       const { tooltips } = props.copyable as CopyConfig;
       let tooltipNodes = toArray(tooltips) as VNodeTypes[];
@@ -435,7 +399,10 @@ const Base = defineComponent<InternalBlockProps>({
       return (
         <Tooltip key="copy" title={tooltips === false ? '' : title}>
           <TransButton
-            class={[`${prefixCls}-copy`, { [`${prefixCls}-copy-success`]: state.copied }]}
+            class={[
+              `${prefixCls.value}-copy`,
+              { [`${prefixCls.value}-copy-success`]: state.copied },
+            ]}
             onClick={onCopyClick}
             aria-label={ariaLabel}
           >
@@ -446,19 +413,16 @@ const Base = defineComponent<InternalBlockProps>({
     }
 
     function renderEditInput() {
-      const prefixCls = getPrefixCls();
       const { class: className, style } = attrs;
-      const { maxLength, autoSize } = getEditable();
-
-      const value = getChildrenText();
+      const { maxlength, autoSize } = editable.value;
 
       return (
         <Editable
           class={className}
           style={style}
-          prefixCls={prefixCls}
-          value={value}
-          maxlength={maxLength}
+          prefixCls={prefixCls.value}
+          value={props.content}
+          maxlength={maxlength}
           autoSize={autoSize}
           onSave={onEditChange}
           onCancel={onEditCancel}
@@ -470,14 +434,14 @@ const Base = defineComponent<InternalBlockProps>({
       return [renderExpand(forceRenderExpanded), renderEdit(), renderCopy()].filter(node => node);
     }
 
-    function getPrefixCls() {
-      const getPrefixCls = configProvider.getPrefixCls;
-      return getPrefixCls('typography', props.prefixCls);
-    }
-
     return () => {
-      const { editing } = getEditable();
-      const children = filterEmpty(slots.default?.());
+      const { editing } = editable.value;
+      const children =
+        props.ellipsis || props.editable
+          ? props.content
+          : slots.default
+          ? slots.default()
+          : props.content;
 
       if (editing) {
         return renderEditInput();
@@ -486,9 +450,11 @@ const Base = defineComponent<InternalBlockProps>({
         <LocaleReceiver
           componentName="Text"
           children={(locale: Locale) => {
-            const { type, disabled, title, ...restProps } = props;
-            const { class: className, style } = attrs;
-            const { rows, suffix } = getEllipsis();
+            const { type, disabled, title, content, class: className, style, ...restProps } = {
+              ...props,
+              ...attrs,
+            };
+            const { rows, suffix, tooltip } = ellipsis.value;
 
             const { edit, copy: copyStr, copied, expand } = locale;
 
@@ -510,7 +476,7 @@ const Base = defineComponent<InternalBlockProps>({
               'keyboard',
             ]);
 
-            const cssEllipsis = canUseCSSEllipsis();
+            const cssEllipsis = canUseCSSEllipsis.value;
             const cssTextOverflow = rows === 1 && cssEllipsis;
             const cssLineClamp = rows && rows > 1 && cssEllipsis;
 
@@ -520,10 +486,8 @@ const Base = defineComponent<InternalBlockProps>({
             // Only use js ellipsis when css ellipsis not support
             if (rows && state.isEllipsis && !state.expanded && !cssEllipsis) {
               ariaLabel = title;
-              if (!title && children.every(item => item.type === Text)) {
-                ariaLabel = children
-                  .map(item => item.children)
-                  .reduce((cur, prev) => cur + prev, '');
+              if (!title) {
+                ariaLabel = content;
               }
               // We move full content to outer element to avoid repeat read the content by accessibility
               textNode = (
@@ -533,6 +497,14 @@ const Base = defineComponent<InternalBlockProps>({
                   {suffix}
                 </span>
               );
+              // If provided tooltip, we need wrap with span to let Tooltip inject events
+              if (tooltip) {
+                textNode = (
+                  <Tooltip title={tooltip === true ? children : tooltip}>
+                    <span>{textNode}</span>
+                  </Tooltip>
+                );
+              }
             } else {
               textNode = (
                 <>
@@ -544,23 +516,21 @@ const Base = defineComponent<InternalBlockProps>({
 
             textNode = wrapperDecorations(props, textNode);
 
-            const prefixCls = getPrefixCls();
-
             return (
               <ResizeObserver onResize={resizeOnNextFrame} disabled={!rows}>
                 <Typography
                   ref={saveTypographyRef}
                   class={[
-                    { [`${prefixCls}-${type}`]: type },
-                    { [`${prefixCls}-disabled`]: disabled },
-                    { [`${prefixCls}-ellipsis`]: rows },
-                    { [`${prefixCls}-ellipsis-single-line`]: cssTextOverflow },
-                    { [`${prefixCls}-ellipsis-multiple-line`]: cssLineClamp },
+                    { [`${prefixCls.value}-${type}`]: type },
+                    { [`${prefixCls.value}-disabled`]: disabled },
+                    { [`${prefixCls.value}-ellipsis`]: rows },
+                    { [`${prefixCls.value}-ellipsis-single-line`]: cssTextOverflow },
+                    { [`${prefixCls.value}-ellipsis-multiple-line`]: cssLineClamp },
                     className,
                   ]}
                   style={{
                     ...(style as CSSProperties),
-                    WebkitLineClamp: cssLineClamp ? rows : null,
+                    WebkitLineClamp: cssLineClamp ? rows : undefined,
                   }}
                   aria-label={ariaLabel}
                   {...textProps}
@@ -582,7 +552,7 @@ export const baseProps = () => ({
   copyable: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
   prefixCls: PropTypes.string,
   component: PropTypes.string,
-  type: PropTypes.oneOf(['secondary', 'danger', 'warning']),
+  type: PropTypes.oneOf(['secondary', 'success', 'danger', 'warning']),
   disabled: PropTypes.looseBool,
   ellipsis: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
   code: PropTypes.looseBool,
@@ -591,6 +561,7 @@ export const baseProps = () => ({
   delete: PropTypes.looseBool,
   strong: PropTypes.looseBool,
   keyboard: PropTypes.looseBool,
+  content: PropTypes.string,
 });
 
 Base.props = baseProps();

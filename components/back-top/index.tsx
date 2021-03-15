@@ -44,6 +44,11 @@ const BackTop = defineComponent({
     });
   },
 
+  activated() {
+    nextTick(() => {
+      this.handleScroll();
+    });
+  },
   beforeUnmount() {
     if (this.scrollEvent) {
       this.scrollEvent.remove();

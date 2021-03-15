@@ -1,5 +1,4 @@
 import { FunctionalComponent } from 'vue';
-import omit from 'omit.js';
 import warning from '../_util/warning';
 import Base, { baseProps, BlockProps, EllipsisConfig } from './Base';
 import Omit from 'omit.js';
@@ -21,7 +20,7 @@ const Text: FunctionalComponent<TextProps> = (props, { slots, attrs }) => {
     ...props,
     ellipsis:
       ellipsis && typeof ellipsis === 'object'
-        ? omit(ellipsis as any, ['expandable', 'rows'])
+        ? Omit(ellipsis as any, ['expandable', 'rows'])
         : ellipsis,
     component: 'span',
     ...attrs,

@@ -1,9 +1,10 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect, sleep } from '@/tests/utils';
 import KeyCode from '../../_util/KeyCode';
-import copy from '../_util/copy-to-clipboard';
+import copy from '../../_util/copy-to-clipboard';
 import Title from '../Title';
-import AParagraph from '../Paragraph';
+import Paragraph from '../Paragraph';
+import Link from '../Link';
 import Base from '../Base';
 import mountTest from '../../../tests/shared/mountTest';
 import { nextTick, createTextVNode, createVNode } from 'vue';
@@ -11,9 +12,10 @@ import { nextTick, createTextVNode, createVNode } from 'vue';
 jest.mock('copy-to-clipboard');
 
 describe('Typography', () => {
-  mountTest(AParagraph);
+  mountTest(Paragraph);
   mountTest(Base);
   mountTest(Title);
+  mountTest(Link);
 
   const LINE_STR_COUNT = 20;
   const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
@@ -272,7 +274,7 @@ describe('Typography', () => {
           const wrapper = mount(Component, {
             global: {
               components: {
-                AParagraph,
+                Paragraph,
               },
             },
             props: {
@@ -335,8 +337,8 @@ describe('Typography', () => {
       });
     });
 
-    it('should focus at the end of textarea', async () => {
-      const wrapper = mount(AParagraph, {
+    fit('should focus at the end of textarea', async () => {
+      const wrapper = mount(Paragraph, {
         props: {
           editable: true,
         },

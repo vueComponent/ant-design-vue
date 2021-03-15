@@ -37,13 +37,13 @@ export type BaseType = 'secondary' | 'success' | 'warning' | 'danger';
 const isLineClampSupport = isStyleSupport('webkitLineClamp');
 const isTextOverflowSupport = isStyleSupport('textOverflow');
 
-interface CopyConfig {
+export interface CopyConfig {
   text?: string;
   onCopy?: () => void;
   tooltip?: boolean;
 }
 
-interface EditConfig {
+export interface EditConfig {
   editing?: boolean;
   tooltip?: boolean;
   onStart?: () => void;
@@ -58,7 +58,7 @@ export interface EllipsisConfig {
   rows?: number;
   expandable?: boolean;
   suffix?: string;
-  symbol?: VNodeTypes;
+  symbol?: string;
   onExpand?: EventHandlerNonNull;
   onEllipsis?: (ellipsis: boolean) => void;
   tooltip?: boolean;
@@ -348,13 +348,8 @@ const Base = defineComponent<InternalBlockProps>({
 
       // force render expand icon for measure usage or it will cause dead loop
       if (!forceRender && (state.expanded || !state.isEllipsis)) return null;
-
-      let expandContent;
-      if (symbol) {
-        expandContent = symbol;
-      } else {
-        expandContent = state.expandStr;
-      }
+      const expandContent =
+        (slots.ellipsisSymbol ? slots.ellipsisSymbol() : symbol) || state.expandStr;
 
       return (
         <a
@@ -585,5 +580,4 @@ export const baseProps = () => ({
 });
 
 Base.props = baseProps();
-
 export default Base;

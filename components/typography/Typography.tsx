@@ -2,7 +2,7 @@ import Text from './Text';
 import Title from './Title';
 import Paragraph from './Paragraph';
 import PropTypes from '../_util/vue-types';
-import { defineComponent, HTMLAttributes, App, Plugin, computed } from 'vue';
+import { defineComponent, HTMLAttributes, App, Plugin } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import Link from './Link';
 import classNames from '../_util/classNames';
@@ -17,10 +17,10 @@ interface InternalTypographyProps extends TypographyProps {
 
 const Typography = defineComponent<InternalTypographyProps>({
   name: 'ATypography',
-  Text: Text,
-  Title: Title,
-  Paragraph: Paragraph,
-  Link: Link,
+  Text,
+  Title,
+  Paragraph,
+  Link,
   inheritAttrs: false,
   setup(props, { slots, attrs }) {
     const { prefixCls } = useConfigInject('typography', props);

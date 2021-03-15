@@ -44,6 +44,11 @@ const BackTop = {
     });
   },
 
+  activated() {
+    this.$nextTick(() => {
+      this.handleScroll();
+    });
+  },
   beforeDestroy() {
     if (this.scrollEvent) {
       this.scrollEvent.remove();

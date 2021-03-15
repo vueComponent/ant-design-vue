@@ -26,7 +26,6 @@ const Text: FunctionalComponent<TextProps> = (props, { slots, attrs }) => {
     component: 'span',
     ...attrs,
   };
-
   return <Base {...textProps} v-slots={slots}></Base>;
 };
 

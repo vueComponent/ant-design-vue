@@ -26,8 +26,8 @@ import {
   watchEffect,
   nextTick,
   CSSProperties,
-  toRaw,
   computed,
+  toRaw,
 } from 'vue';
 import { AutoSizeType } from '../input/ResizableTextArea';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -37,29 +37,19 @@ export type BaseType = 'secondary' | 'success' | 'warning' | 'danger';
 const isLineClampSupport = isStyleSupport('webkitLineClamp');
 const isTextOverflowSupport = isStyleSupport('textOverflow');
 
-function toArray(value: any) {
-  let ret = value;
-  if (value === undefined) {
-    ret = [];
-  } else if (!Array.isArray(value)) {
-    ret = [value];
-  }
-  return ret;
-}
-
 interface CopyConfig {
   text?: string;
   onCopy?: () => void;
-  icon?: VNodeTypes;
-  tooltips?: boolean | VNodeTypes;
+  tooltip?: boolean;
 }
 
 interface EditConfig {
   editing?: boolean;
-  icon?: VNodeTypes;
-  tooltip?: boolean | VNodeTypes;
+  tooltip?: boolean;
   onStart?: () => void;
   onChange?: (value: string) => void;
+  onCancel?: () => void;
+  onEnd?: () => void;
   maxlength?: number;
   autoSize?: boolean | AutoSizeType;
 }
@@ -71,7 +61,7 @@ export interface EllipsisConfig {
   symbol?: VNodeTypes;
   onExpand?: EventHandlerNonNull;
   onEllipsis?: (ellipsis: boolean) => void;
-  tooltip?: boolean | VNodeTypes;
+  tooltip?: boolean;
 }
 
 export interface BlockProps extends TypographyProps {
@@ -107,7 +97,8 @@ const ELLIPSIS_STR = '...';
 const Base = defineComponent<InternalBlockProps>({
   name: 'Base',
   inheritAttrs: false,
-  setup(props, { slots, attrs }) {
+  emits: ['update:content'],
+  setup(props, { slots, attrs, emit }) {
     const { prefixCls } = useConfigInject('typography', props);
 
     const state = reactive({
@@ -127,6 +118,8 @@ const Base = defineComponent<InternalBlockProps>({
       copyId: undefined,
       rafId: undefined,
       prevProps: undefined,
+
+      originContent: '',
     });
 
     const contentRef = ref();
@@ -186,7 +179,7 @@ const Base = defineComponent<InternalBlockProps>({
     }
 
     function getChildrenText(): string {
-      return props.ellipsis || props.editable ? props.content : contentRef.value.text;
+      return props.ellipsis || props.editable ? props.content : contentRef.value?.$el?.innerText;
     }
 
     // =============== Expand ===============
@@ -197,14 +190,20 @@ const Base = defineComponent<InternalBlockProps>({
     }
     // ================ Edit ================
     function onEditClick() {
+      state.originContent = props.content;
       triggerEdit(true);
     }
 
     function onEditChange(value: string) {
-      const { onChange } = editable.value;
-      onChange?.(value);
-
+      onContentChange(value);
       triggerEdit(false);
+    }
+    function onContentChange(value: string) {
+      const { onChange } = editable.value;
+      if (value !== props.content) {
+        onChange?.(value);
+        emit('update:content', value);
+      }
     }
 
     function onEditCancel() {
@@ -290,7 +289,14 @@ const Base = defineComponent<InternalBlockProps>({
     const syncEllipsis = () => {
       const { ellipsisText, isEllipsis } = state;
       const { rows, suffix, onEllipsis } = ellipsis.value;
-      if (!rows || rows < 0 || !contentRef.value?.$el || state.expanded) return;
+      if (
+        !rows ||
+        rows < 0 ||
+        !contentRef.value?.$el ||
+        state.expanded ||
+        props.content === undefined
+      )
+        return;
 
       // Do not measure if css already support ellipsis
       if (canUseCSSEllipsis.value) return;
@@ -365,9 +371,9 @@ const Base = defineComponent<InternalBlockProps>({
     function renderEdit() {
       if (!props.editable) return;
 
-      const { icon, tooltip } = props.editable as EditConfig;
-
-      const title = tooltip || state.editStr;
+      const { tooltip } = props.editable as EditConfig;
+      const icon = slots.editableIcon ? slots.editableIcon() : <EditOutlined role="button" />;
+      const title = slots.editableTooltip ? slots.editableTooltip() : state.editStr;
       const ariaLabel = typeof title === 'string' ? title : '';
 
       return (
@@ -378,7 +384,7 @@ const Base = defineComponent<InternalBlockProps>({
             onClick={onEditClick}
             aria-label={ariaLabel}
           >
-            {icon || <EditOutlined role="button" />}
+            {icon}
           </TransButton>
         </Tooltip>
       );
@@ -387,17 +393,19 @@ const Base = defineComponent<InternalBlockProps>({
     function renderCopy() {
       if (!props.copyable) return;
 
-      const { tooltips } = props.copyable as CopyConfig;
-      let tooltipNodes = toArray(tooltips) as VNodeTypes[];
-      if (tooltipNodes.length === 0) {
-        tooltipNodes = [state.copyStr, state.copiedStr];
-      }
-      const title = state.copied ? tooltipNodes[1] : tooltipNodes[0];
+      const { tooltip } = props.copyable as CopyConfig;
+      const defaultTitle = state.copied ? state.copiedStr : state.copyStr;
+      const title = slots.copyableTooltip
+        ? slots.copyableTooltip({ copied: state.copied })
+        : defaultTitle;
       const ariaLabel = typeof title === 'string' ? title : '';
-      const icons = toArray((props.copyable as CopyConfig).icon);
+      const defaultIcon = state.copied ? <CheckOutlined /> : <CopyOutlined />;
+      const icon = slots.copyableIcon
+        ? slots.copyableIcon({ copied: !!state.copied })
+        : defaultIcon;
 
       return (
-        <Tooltip key="copy" title={tooltips === false ? '' : title}>
+        <Tooltip key="copy" title={tooltip === false ? '' : title}>
           <TransButton
             class={[
               `${prefixCls.value}-copy`,
@@ -406,7 +414,7 @@ const Base = defineComponent<InternalBlockProps>({
             onClick={onCopyClick}
             aria-label={ariaLabel}
           >
-            {state.copied ? icons[1] || <CheckOutlined /> : icons[0] || <CopyOutlined />}
+            {icon}
           </TransButton>
         </Tooltip>
       );
@@ -422,9 +430,11 @@ const Base = defineComponent<InternalBlockProps>({
           style={style}
           prefixCls={prefixCls.value}
           value={props.content}
+          originContent={state.originContent}
           maxlength={maxlength}
           autoSize={autoSize}
           onSave={onEditChange}
+          onChange={onContentChange}
           onCancel={onEditCancel}
         />
       );
@@ -438,7 +448,9 @@ const Base = defineComponent<InternalBlockProps>({
       const { editing } = editable.value;
       const children =
         props.ellipsis || props.editable
-          ? props.content
+          ? 'content' in props
+            ? props.content
+            : slots.default?.()
           : slots.default
           ? slots.default()
           : props.content;
@@ -450,7 +462,7 @@ const Base = defineComponent<InternalBlockProps>({
         <LocaleReceiver
           componentName="Text"
           children={(locale: Locale) => {
-            const { type, disabled, title, content, class: className, style, ...restProps } = {
+            const { type, disabled, content, class: className, style, ...restProps } = {
               ...props,
               ...attrs,
             };
@@ -485,26 +497,25 @@ const Base = defineComponent<InternalBlockProps>({
 
             // Only use js ellipsis when css ellipsis not support
             if (rows && state.isEllipsis && !state.expanded && !cssEllipsis) {
-              ariaLabel = title;
-              if (!title) {
-                ariaLabel = content;
+              const { title } = restProps;
+              let restContent = title || '';
+
+              if (!title && (typeof children === 'string' || typeof children === 'number')) {
+                restContent = String(children);
               }
+
+              // show rest content as title on symbol
+              restContent = restContent?.slice(String(state.ellipsisContent || '').length);
               // We move full content to outer element to avoid repeat read the content by accessibility
               textNode = (
-                <span title={ariaLabel} aria-hidden="true">
+                <>
                   {toRaw(state.ellipsisContent)}
-                  {ELLIPSIS_STR}
+                  <span title={restContent} aria-hidden="true">
+                    {ELLIPSIS_STR}
+                  </span>
                   {suffix}
-                </span>
+                </>
               );
-              // If provided tooltip, we need wrap with span to let Tooltip inject events
-              if (tooltip) {
-                textNode = (
-                  <Tooltip title={tooltip === true ? children : tooltip}>
-                    <span>{textNode}</span>
-                  </Tooltip>
-                );
-              }
             } else {
               textNode = (
                 <>
@@ -516,6 +527,9 @@ const Base = defineComponent<InternalBlockProps>({
 
             textNode = wrapperDecorations(props, textNode);
 
+            const showTooltip =
+              tooltip && rows && state.isEllipsis && !state.expanded && !cssEllipsis;
+            const title = slots.ellipsisTooltip ? slots.ellipsisTooltip() : tooltip;
             return (
               <ResizeObserver onResize={resizeOnNextFrame} disabled={!rows}>
                 <Typography
@@ -535,7 +549,13 @@ const Base = defineComponent<InternalBlockProps>({
                   aria-label={ariaLabel}
                   {...textProps}
                 >
-                  {textNode}
+                  {showTooltip ? (
+                    <Tooltip title={tooltip === true ? children : title}>
+                      <span>{textNode}</span>
+                    </Tooltip>
+                  ) : (
+                    textNode
+                  )}
                   {renderOperations()}
                 </Typography>
               </ResizeObserver>

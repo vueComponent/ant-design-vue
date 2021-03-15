@@ -1,5 +1,4 @@
 import { createApp, CSSProperties, VNodeTypes } from 'vue';
-import toArray from '../vc-util/Children/toArray';
 
 interface MeasureResult {
   finished: boolean;
@@ -11,7 +10,6 @@ interface Option {
 }
 
 // We only handle element & text node.
-const ELEMENT_NODE = 1;
 const TEXT_NODE = 3;
 const COMMENT_NODE = 8;
 
@@ -39,25 +37,10 @@ function styleToString(style: CSSStyleDeclaration) {
   return styleNames.map(name => `${name}: ${style.getPropertyValue(name)};`).join('');
 }
 
-function mergeChildren(children: VNodeTypes[]) {
-  const childList = [];
-
-  children.forEach(child => {
-    const prevChild = childList[childList.length - 1];
-    if (typeof child === 'string' && typeof prevChild === 'string') {
-      childList[childList.length - 1] += child;
-    } else {
-      childList.push(child);
-    }
-  });
-
-  return childList;
-}
-
 export default (
   originEle: HTMLElement,
   option: Option,
-  content: VNodeTypes,
+  content: string,
   fixedContent: VNodeTypes[],
   ellipsisStr: string,
 ): {
@@ -98,13 +81,12 @@ export default (
   ellipsisContainer.style.webkitLineClamp = 'none';
 
   // Render in the fake container
-  const contentList: VNodeTypes[] = mergeChildren(toArray(content as []));
   const vm = createApp({
     render() {
       return (
         <div style={wrapperStyle}>
           <span style={wrapperStyle}>
-            {contentList}
+            {content}
             {suffix}
           </span>
           <span style={wrapperStyle}>{fixedContent}</span>
@@ -125,8 +107,6 @@ export default (
     vm.unmount();
     return { content, text: ellipsisContainer.innerHTML, ellipsis: false };
   }
-
-  // We should clone the childNode since they're controlled by React and we can't reuse it without warning
   const childNodes = Array.prototype.slice
     .apply(ellipsisContainer.childNodes[0].childNodes[0].cloneNode(true).childNodes)
     .filter(({ nodeType, data }) => nodeType !== COMMENT_NODE && data !== '');
@@ -193,26 +173,26 @@ export default (
     return measureText(textNode, fullText, startLoc, midLoc, lastSuccessLoc);
   }
 
-  function measureNode(childNode: ChildNode, index: number): MeasureResult {
+  function measureNode(childNode: ChildNode): MeasureResult {
     const type = childNode.nodeType;
+    // console.log('type', type);
+    // if (type === ELEMENT_NODE) {
+    //   // We don't split element, it will keep if whole element can be displayed.
+    //   appendChildNode(childNode);
+    //   if (inRange()) {
+    //     return {
+    //       finished: false,
+    //       vNode: contentList[index],
+    //     };
+    //   }
 
-    if (type === ELEMENT_NODE) {
-      // We don't split element, it will keep if whole element can be displayed.
-      appendChildNode(childNode);
-      if (inRange()) {
-        return {
-          finished: false,
-          vNode: contentList[index],
-        };
-      }
-
-      // Clean up if can not pull in
-      ellipsisContentHolder.removeChild(childNode);
-      return {
-        finished: true,
-        vNode: null,
-      };
-    }
+    //   // Clean up if can not pull in
+    //   ellipsisContentHolder.removeChild(childNode);
+    //   return {
+    //     finished: true,
+    //     vNode: null,
+    //   };
+    // }
     if (type === TEXT_NODE) {
       const fullText = childNode.textContent || '';
       const textNode = document.createTextNode(fullText);
@@ -227,8 +207,8 @@ export default (
     };
   }
 
-  childNodes.some((childNode, index) => {
-    const { finished, vNode } = measureNode(childNode, index);
+  childNodes.some(childNode => {
+    const { finished, vNode } = measureNode(childNode);
     if (vNode) {
       ellipsisChildren.push(vNode);
     }

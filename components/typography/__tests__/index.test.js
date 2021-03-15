@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect, sleep } from '@/tests/utils';
 import KeyCode from '../../_util/KeyCode';
-import copy from 'copy-to-clipboard';
+import copy from '../_util/copy-to-clipboard';
 import Title from '../Title';
 import AParagraph from '../Paragraph';
 import Base from '../Base';

@@ -155,5 +155,6 @@ export default function calculateNodeHeight(
     minHeight: `${minHeight}px`,
     maxHeight: `${maxHeight}px`,
     overflowY,
+    resize: 'none',
   };
 }

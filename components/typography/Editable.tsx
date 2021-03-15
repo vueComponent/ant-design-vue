@@ -12,8 +12,11 @@ const Editable = defineComponent({
     autoSize: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
     onSave: PropTypes.func,
     onCancel: PropTypes.func,
+    onEnd: PropTypes.func,
+    onChange: PropTypes.func,
+    originContent: PropTypes.string,
   },
-  emits: ['save', 'cancel'],
+  emits: ['save', 'cancel', 'end', 'change'],
   setup(props, { emit }) {
     const state = reactive({
       current: props.value || '',
@@ -21,9 +24,6 @@ const Editable = defineComponent({
       inComposition: false,
       cancelFlag: false,
     });
-
-    let cancelFlag: boolean = false;
-
     watch(
       () => props.value,
       current => {
@@ -49,6 +49,7 @@ const Editable = defineComponent({
 
     function onChange({ target: { value } }) {
       state.current = value.replace(/[\r\n]/g, '');
+      emit('change', state.current);
     }
 
     function onCompositionStart() {
@@ -61,6 +62,9 @@ const Editable = defineComponent({
 
     function onKeyDown(e: KeyboardEvent) {
       const { keyCode } = e;
+      if (keyCode === KeyCode.ENTER) {
+        e.preventDefault();
+      }
       // We don't record keyCode when IME is using
       if (state.inComposition) return;
 
@@ -81,18 +85,16 @@ const Editable = defineComponent({
       ) {
         if (keyCode === KeyCode.ENTER) {
           confirmChange();
+          emit('end');
         } else if (keyCode === KeyCode.ESC) {
-          // avoid chrome trigger blur
-          cancelFlag = true;
+          state.current = props.originContent;
           emit('cancel');
         }
       }
     }
 
     function onBlur() {
-      if (!cancelFlag) {
-        confirmChange();
-      }
+      confirmChange();
     }
 
     function confirmChange() {
@@ -100,7 +102,7 @@ const Editable = defineComponent({
     }
 
     return () => (
-      <div class={[`${props.prefixCls}, ${props.prefixCls}-edit-content`]}>
+      <div class={`${props.prefixCls} ${props.prefixCls}-edit-content`}>
         <TextArea
           ref={saveTextAreaRef}
           maxlength={props.maxlength}

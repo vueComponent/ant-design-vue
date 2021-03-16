@@ -1,11 +1,11 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect, sleep } from '@/tests/utils';
 import Checkbox from '../index';
 import mountTest from '../../../tests/shared/mountTest';
 
 describe('CheckboxGroup', () => {
   mountTest(Checkbox.Group);
-  it('should work basically', () => {
+  it('should work basically', async () => {
     const onChange = jest.fn();
     const wrapper = mount(
       {
@@ -18,12 +18,16 @@ describe('CheckboxGroup', () => {
       },
     );
     wrapper.findAll('.ant-checkbox-input')[0].trigger('change');
+    await sleep();
     expect(onChange).toHaveBeenCalledWith(['Apple']);
     wrapper.findAll('.ant-checkbox-input')[1].trigger('change');
+    await sleep();
     expect(onChange).toHaveBeenCalledWith(['Apple', 'Pear']);
     wrapper.findAll('.ant-checkbox-input')[2].trigger('change');
+    await sleep();
     expect(onChange).toHaveBeenCalledWith(['Apple', 'Pear', 'Orange']);
     wrapper.findAll('.ant-checkbox-input')[1].trigger('change');
+    await sleep();
     expect(onChange).toHaveBeenCalledWith(['Apple', 'Orange']);
   });
 

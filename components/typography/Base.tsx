@@ -201,8 +201,8 @@ const Base = defineComponent<InternalBlockProps>({
     function onContentChange(value: string) {
       const { onChange } = editable.value;
       if (value !== props.content) {
-        onChange?.(value);
         emit('update:content', value);
+        onChange?.(value);
       }
     }
 

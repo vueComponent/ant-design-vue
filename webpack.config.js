@@ -48,6 +48,9 @@ module.exports = {
   entry: {
     app: './examples/index.js',
   },
+  stats: {
+    warningsFilter: /export .* was not found in/,
+  },
   module: {
     rules: [
       {

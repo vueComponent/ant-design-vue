@@ -94,7 +94,7 @@
     "@vue/compiler-sfc": "^3.0.4",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^7.0.0",
-    "@vue/test-utils": "^2.0.0-beta.2",
+    "@vue/test-utils": "^2.0.0-0",
     "acorn": "^7.0.0",
     "autoprefixer": "^9.6.0",
     "axios": "^0.21.0",

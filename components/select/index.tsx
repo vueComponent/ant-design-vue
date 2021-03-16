@@ -119,7 +119,7 @@ const Select = defineComponent({
       ),
     );
     const triggerChange = (...args: any[]) => {
-      emit('update:value', ...args);
+      emit('update:value', args[0]);
       emit('change', ...args);
     };
     return {

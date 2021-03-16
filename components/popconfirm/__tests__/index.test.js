@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect, sleep } from '@/tests/utils';
+import { asyncExpect } from '@/tests/utils';
 import Popconfirm from '..';
 function $$(className) {
   return document.body.querySelectorAll(className);

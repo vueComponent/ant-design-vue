@@ -5,6 +5,7 @@ import PropTypes from '../_util/vue-types';
 import { defineComponent, HTMLAttributes, App, Plugin } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import Link from './Link';
+import Base from './Base';
 import classNames from '../_util/classNames';
 
 export interface TypographyProps extends HTMLAttributes {
@@ -17,6 +18,7 @@ interface InternalTypographyProps extends TypographyProps {
 
 const Typography = defineComponent<InternalTypographyProps>({
   name: 'ATypography',
+  Base,
   Text,
   Title,
   Paragraph,
@@ -60,4 +62,5 @@ export default Typography as typeof Typography &
     readonly Title: typeof Title;
     readonly Paragraph: typeof Paragraph;
     readonly Link: typeof Link;
+    readonly Base: typeof Base;
   };

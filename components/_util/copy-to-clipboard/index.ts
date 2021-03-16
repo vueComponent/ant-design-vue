@@ -21,8 +21,7 @@ function format(message: string) {
 }
 
 function copy(text: string, options?: Options): boolean {
-  let debug,
-    message,
+  let message,
     reselectPrevious,
     range,
     selection,
@@ -31,7 +30,7 @@ function copy(text: string, options?: Options): boolean {
   if (!options) {
     options = {};
   }
-  debug = options.debug || false;
+  const debug = options.debug || false;
   try {
     reselectPrevious = deselectCurrent();
 

@@ -115,6 +115,10 @@ export default {
       }
     },
     onChange(e) {
+      // fix this isssue: https://github.com/vueComponent/ant-design-vue/issues/3816
+      // reference: https://github.com/vuejs/vue/issues/5847 and https://github.com/vuejs/vue/issues/8431
+      this.$forceUpdate();
+
       this.$emit('change.value', e.target.value);
       this.$emit('change', e);
       this.$emit('input', e);

@@ -543,7 +543,7 @@ const TreeNode = defineComponent({
     return (
       <li
         class={{
-          className,
+          [className]: className,
           [`${prefixCls}-treenode-disabled`]: disabled,
           [`${prefixCls}-treenode-switcher-${expanded ? 'open' : 'close'}`]: !isLeaf,
           [`${prefixCls}-treenode-checkbox-checked`]: checked,

@@ -1,4 +1,4 @@
-import { inject } from 'vue';
+import { inject, toRaw } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import get from 'lodash-es/get';
 import classNames from '../../_util/classNames';
@@ -127,7 +127,7 @@ export default {
       <BodyCell class={cellClassName} {...tdProps}>
         {indentText}
         {expandIcon}
-        {text}
+        {toRaw(text)}
       </BodyCell>
     );
   },

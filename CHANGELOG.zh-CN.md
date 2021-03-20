@@ -10,6 +10,20 @@
 
 ---
 
+## 2.1.0
+
+`2021-03-20`
+
+- 🎉🎉🎉 新增 `Typography` 组件 [#3807](https://github.com/vueComponent/ant-design-vue/issues/3807)
+- 🌟 Modal 方法新增关闭图标定制 [#3753](https://github.com/vueComponent/ant-design-vue/issues/3753)
+- 🐞 修复缺失包含国际化的构建文件 [#3684](https://github.com/vueComponent/ant-design-vue/issues/3684)
+- 🐞 修复 Drawer 销毁后报错问题 [#848d64](https://github.com/vueComponent/ant-design-vue/commit/848d6497e68c87566790dfa889a1913199a6699a)
+- 🐞 修复 BackTop 在 KeepAlive 激活时，位置不对的问题 [#3803](https://github.com/vueComponent/ant-design-vue/issues/3803)
+- 🐞 修复 TreeNode class 不生效问题 [#3822](https://github.com/vueComponent/ant-design-vue/issues/3822)
+- 🐞 修复 Table tags 为数组是报错问题 [#3812](https://github.com/vueComponent/ant-design-vue/issues/3812)
+- 🐞 修复 Table 自定义 filterIcon 时，触发排序问题 [#3819](https://github.com/vueComponent/ant-design-vue/issues/3819)
+- 🐞 修复 Select 样式在 Form 下错位问题 [#3781](https://github.com/vueComponent/ant-design-vue/issues/3781)
+
 ## 2.0.1
 
 `2021-02-27`

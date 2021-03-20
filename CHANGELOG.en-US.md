@@ -10,6 +10,20 @@
 
 ---
 
+## 2.1.0
+
+`2021-03-20`
+
+- 🎉🎉🎉 Added `Typography` component [#3807](https://github.com/vueComponent/ant-design-vue/issues/3807)
+- 🌟 Modal method adds close icon customization [#3753](https://github.com/vueComponent/ant-design-vue/issues/3753)
+- 🐞 Fix missing build files containing internationalization [#3684](https://github.com/vueComponent/ant-design-vue/issues/3684)
+- 🐞 Fix Drawer error after destruction [#848d64](https://github.com/vueComponent/ant-design-vue/commit/848d6497e68c87566790dfa889a1913199a6699a)
+- 🐞 Fix BackTop incorrect position when KeepAlive is activated [#3803](https://github.com/vueComponent/ant-design-vue/issues/3803)
+- 🐞 Fix the problem that the TreeNode class does not take effect [#3822](https://github.com/vueComponent/ant-design-vue/issues/3822)
+- 🐞 Fix Table tags being an array error issue [#3812](https://github.com/vueComponent/ant-design-vue/issues/3812)
+- 🐞 Fix the sorting issue when Table custom filterIcon is triggered [#3819](https://github.com/vueComponent/ant-design-vue/issues/3819)
+- 🐞 Fix Select style misalignment under Form [#3781](https://github.com/vueComponent/ant-design-vue/issues/3781)
+
 ## 2.0.1
 
 `2021-02-27`

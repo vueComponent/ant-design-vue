@@ -221,7 +221,11 @@ export default defineComponent({
           class: classNames(`${prefixCls}-icon`, dropdownIconClass, filterIcon.props?.class),
         });
       }
-      return <span class={classNames(`${prefixCls}-icon`, dropdownIconClass)}>{filterIcon}</span>;
+      return (
+        <span class={classNames(`${prefixCls}-icon`, dropdownIconClass)} onClick={stopPropagation}>
+          {filterIcon}
+        </span>
+      );
     },
 
     renderMenuItem(item) {

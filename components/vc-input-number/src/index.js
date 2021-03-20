@@ -264,6 +264,10 @@ export default {
 
       this.$emit('keyup', e, ...args);
     },
+    onTrigger(e) {
+      if (e.target.composing) return false;
+      this.onChange(e);
+    },
     onChange(e) {
       if (this.focused) {
         this.inputting = true;
@@ -621,6 +625,13 @@ export default {
     handleInputClick() {
       this.$emit('click');
     },
+    onCompositionstart(e) {
+      e.target.composing = true;
+    },
+    onCompositionend(e) {
+      this.onChange(e);
+      e.target.composing = false;
+    },
   },
   render() {
     const {
@@ -775,7 +786,9 @@ export default {
             name={this.name}
             title={this.title}
             id={this.id}
-            onInput={this.onChange}
+            onInput={this.onTrigger}
+            onCompositionstart={this.onCompositionstart}
+            onCompositionend={this.onCompositionend}
             ref="inputRef"
             value={inputDisplayValue}
             pattern={this.pattern}

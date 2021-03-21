@@ -278,7 +278,33 @@ const Tree = defineComponent({
       const { _expandedKeys: expandedKeys } = this.$data;
       const { pos, eventKey } = node;
 
-      if (!this.dragNode || !node.selectHandle) return;
+      if (!node.selectHandle) {
+        return;
+      }
+
+      const emitEvent = () => {
+        // Side effect for delay drag
+        if (!this.delayedDragEnterLogic) {
+          this.delayedDragEnterLogic = {};
+        }
+        Object.keys(this.delayedDragEnterLogic).forEach(key => {
+          clearTimeout(this.delayedDragEnterLogic[key]);
+        });
+        this.delayedDragEnterLogic[pos] = setTimeout(() => {
+          const newExpandedKeys = arrAdd(expandedKeys, eventKey);
+          if (!hasProp(this, 'expandedKeys')) {
+            this.setState({
+              _expandedKeys: newExpandedKeys,
+            });
+          }
+          this.__emit('dragenter', { event, node, expandedKeys: newExpandedKeys });
+        }, 400);
+      };
+
+      if (!this.dragNode) {
+        setTimeout(emitEvent, 0);
+        return;
+      }
 
       const dropPosition = calcDropPosition(event, node);
 
@@ -302,23 +328,7 @@ const Tree = defineComponent({
           _dragOverNodeKey: eventKey,
           _dropPosition: dropPosition,
         });
-
-        // Side effect for delay drag
-        if (!this.delayedDragEnterLogic) {
-          this.delayedDragEnterLogic = {};
-        }
-        Object.keys(this.delayedDragEnterLogic).forEach(key => {
-          clearTimeout(this.delayedDragEnterLogic[key]);
-        });
-        this.delayedDragEnterLogic[pos] = setTimeout(() => {
-          const newExpandedKeys = arrAdd(expandedKeys, eventKey);
-          if (!hasProp(this, 'expandedKeys')) {
-            this.setState({
-              _expandedKeys: newExpandedKeys,
-            });
-          }
-          this.__emit('dragenter', { event, node, expandedKeys: newExpandedKeys });
-        }, 400);
+        emitEvent();
       }, 0);
     },
     onNodeDragOver(event, node) {

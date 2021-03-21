@@ -63,7 +63,7 @@ export interface TreeDragEvent {
 }
 
 export interface DropEvent {
-  dragNode: Record<string, any>;
+  dragNode?: Record<string, any>;
   dragNodesKeys: (string | number)[];
   dropPosition: number;
   dropToGap: boolean;

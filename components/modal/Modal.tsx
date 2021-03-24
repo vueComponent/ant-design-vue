@@ -102,6 +102,7 @@ export interface ModalFuncProps {
   class?: string;
   visible?: boolean;
   title?: VNodeTypes;
+  closable?: boolean;
   content?: VNodeTypes;
   // TODO: find out exact types
   onOk?: (...args: any[]) => any;

@@ -10,6 +10,14 @@
 
 ---
 
+## 2.1.1
+
+`2021-03-27`
+
+- 🌟 兼容 Vue 3.0.8，注意：由于 3.0.8 的破坏性更新，2.1.1 无法兼容 3.0.7 以下版本 [vue#3493](https://github.com/vuejs/vue-next/issues/3493)
+- 🐞 修复 Modal.confirm 缺失 closable ts 类型 [#3684](https://github.com/vueComponent/ant-design-vue/issues/3845)
+- 🐞 修复 Upload 自定义 method 不生效问题 [#3843](https://github.com/vueComponent/ant-design-vue/issues/3843)
+
 ## 2.1.0
 
 `2021-03-20`

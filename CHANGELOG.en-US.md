@@ -10,6 +10,14 @@
 
 ---
 
+## 2.1.1
+
+`2021-03-27`
+
+- 🌟 Compatible with Vue 3.0.8, note: Due to the destructive update of 3.0.8, 2.1.1 is not compatible with versions below 3.0.7 [vue#3493](https://github.com/vuejs/vue-next/issues /3493)
+- 🐞 Fix Modal.confirm missing closable ts type [#3684](https://github.com/vueComponent/ant-design-vue/issues/3845)
+- 🐞 Fix upload custom method not working issue [#3843](https://github.com/vueComponent/ant-design-vue/issues/3843)
+
 ## 2.1.0
 
 `2021-03-20`

@@ -29,6 +29,7 @@ const uploadProps = {
   withCredentials: PropTypes.looseBool,
   supportServerRender: PropTypes.looseBool,
   openFileDialogOnClick: PropTypes.looseBool,
+  method: PropTypes.string,
 };
 export default defineComponent({
   name: 'Upload',

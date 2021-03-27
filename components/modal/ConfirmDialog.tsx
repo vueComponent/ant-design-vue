@@ -16,6 +16,7 @@ const ConfirmDialog: FunctionalComponent<ConfirmDialogProps> = props => {
     onCancel,
     onOk,
     close,
+    closable = false,
     zIndex,
     afterClose,
     visible,
@@ -83,6 +84,7 @@ const ConfirmDialog: FunctionalComponent<ConfirmDialogProps> = props => {
       keyboard={keyboard}
       centered={centered}
       getContainer={getContainer}
+      closable={closable}
     >
       <div class={`${contentPrefixCls}-body-wrapper`}>
         <div class={`${contentPrefixCls}-body`}>

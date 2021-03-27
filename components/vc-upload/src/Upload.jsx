@@ -25,6 +25,7 @@ const uploadProps = {
   beforeUpload: PropTypes.func,
   customRequest: PropTypes.func,
   // onReady: PropTypes.func,
+  method: PropTypes.string,
   withCredentials: PropTypes.bool,
   supportServerRender: PropTypes.bool,
   openFileDialogOnClick: PropTypes.bool,

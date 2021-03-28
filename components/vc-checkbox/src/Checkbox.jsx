@@ -89,7 +89,6 @@ export default defineComponent({
       if ('checked' in props) {
         this.$refs.input.checked = props.checked;
       }
-      this.__emit('update:checked', eventObj);
       this.__emit('change', eventObj);
       this.eventShiftKey = false;
     },

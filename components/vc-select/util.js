@@ -156,7 +156,7 @@ export function findFirstMenuItem(children) {
       if (found) {
         return found;
       }
-    } else if (!props.disabled) {
+    } else if (!(props.disabled || props.disabled === '')) {
       return child;
     }
   }

@@ -10,6 +10,12 @@
 
 ---
 
+## 2.1.2
+
+`2021-03-28`
+
+- 🌟 Recompile with Vue 3.0.9, compatible with 3.0.7 and below
+
 ## 2.1.1
 
 `2021-03-27`

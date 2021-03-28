@@ -37,17 +37,18 @@ export function convertChildrenToData(
         props,
       } = node as VNode & {
         type: { isSelectOptGroup?: boolean };
-        children: { default?: () => any };
+        children: { default?: () => any; label?: () => any };
       };
 
       if (optionOnly || !isSelectOptGroup) {
         return convertNodeToOption(node);
       }
       const child = children && children.default ? children.default() : undefined;
+      const label = props?.label || children.label?.() || key;
       return {
         key: `__RC_SELECT_GRP__${key === null ? index : key}__`,
-        label: key,
         ...props,
+        label,
         options: convertChildrenToData(child || []),
       } as any;
     })

@@ -141,7 +141,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
         if (!props.multiple && props.open && props.values.size === 1) {
           const value = Array.from(props.values)[0];
           const index = props.flattenOptions.findIndex(({ data }) => data.value === value);
-          // setActive(index);
+          setActive(index);
           scrollIntoView(index);
         }
         // Force trigger scrollbar visible when open

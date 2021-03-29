@@ -18,11 +18,42 @@ Using template style API
       <a-table-column key="firstName" data-index="firstName">
         <span slot="title" style="color: #1890ff">First Name</span>
       </a-table-column>
-      <a-table-column key="lastName" title="Last Name" data-index="lastName" />
+      <a-table-column
+        key="lastName"
+        title="Last Name"
+        data-index="lastName"
+        :filters="[
+          { text: 'Brown', value: 'Brown' },
+          { text: 'Green', value: 'Green' },
+          { text: 'Black', value: 'Black' },
+        ]"
+        :defaultFilteredValue="['Brown', 'Green', 'Black']"
+        :onFilter="(value, record) => record.lastName == value"
+      />
     </a-table-column-group>
     <a-table-column key="age" title="Age" data-index="age" />
     <a-table-column key="address" title="Address" data-index="address" />
-    <a-table-column key="tags" title="Tags" data-index="tags">
+    <a-table-column
+      key="tags"
+      data-index="tags"
+      :filteredValue="filteredTags"
+      :onFilter="(value, record) => record.tags.includes(value)"
+      :filterDropdownVisible="tagsFilterDropdownVisible"
+      :onFilterDropdownVisibleChange="visible => (tagsFilterDropdownVisible = visible)"
+    >
+      <span slot="title"> Tags {{ tagsFilterDropdownVisible ? 'filtering' : '' }} </span>
+      <template slot="filterDropdown" slot-scope="{ setSelectedKeys, selectedKeys }">
+        <div style="background-color: white; border: solid;">
+          <a-checkbox
+            v-for="tag in knownTags"
+            :key="tag"
+            :checked="filteredTags.includes(tag)"
+            @change="filteredTags = toggleSelectedKeys(filteredTags, tag, $event.target.checked)"
+          >
+            {{ tag }}
+          </a-checkbox>
+        </div>
+      </template>
       <template slot-scope="tags">
         <span>
           <a-tag v-for="tag in tags" :key="tag" color="blue">{{ tag }}</a-tag>
@@ -72,7 +103,21 @@ export default {
   data() {
     return {
       data,
+      knownTags: ['nice', 'cool', 'loser'],
+      filteredTags: [],
+      tagsFilterDropdownVisible: false,
     };
+  },
+  methods: {
+    toggleSelectedKeys(selectedKeys, tag, checked) {
+      let newKeys = [...selectedKeys];
+      if (checked) {
+        newKeys.push(tag);
+      } else {
+        newKeys = newKeys.filter(sk => sk != tag);
+      }
+      return newKeys;
+    },
   },
 };
 </script>

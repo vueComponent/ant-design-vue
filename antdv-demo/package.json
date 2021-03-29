@@ -138,7 +138,7 @@
     "@ant-design/icons": "^2.1.1",
     "@ant-design/icons-vue": "^2.0.0",
     "add-dom-event-listener": "^1.0.2",
-    "ant-design-vue": "^1.7.2",
+    "ant-design-vue": "..",
     "array-tree-filter": "^2.1.0",
     "async-validator": "^3.2.4",
     "babel-helper-vue-jsx-merge-props": "^2.0.3",

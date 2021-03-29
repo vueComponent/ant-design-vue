@@ -22,11 +22,11 @@ export const ColumnProps = {
   align: PropTypes.oneOf(['left', 'right', 'center']),
   ellipsis: PropTypes.bool,
   filters: PropTypes.arrayOf(ColumnFilterItem),
-  // onFilter: (value: any, record: T) => PropTypes.bool,
+  onFilter: PropTypes.func,
   filterMultiple: PropTypes.bool,
   filterDropdown: PropTypes.any,
   filterDropdownVisible: PropTypes.bool,
-  // onFilterDropdownVisibleChange?: (visible: boolean) => void;
+  onFilterDropdownVisibleChange: PropTypes.func,
   sorter: PropTypes.oneOfType([PropTypes.boolean, PropTypes.func]),
   defaultSortOrder: PropTypes.oneOf(['ascend', 'descend']),
   colSpan: PropTypes.number,

@@ -12,7 +12,7 @@
 | dataSource | 数据数组 | any\[] |  |  |
 | defaultExpandAllRows | 初始时，是否展开所有行 | boolean | false |  |
 | defaultExpandedRowKeys | 默认展开的行 | string\[] | - |  |
-| expandedRowKeys | 展开的行，控制属性 | string\[] | - |  |
+| expandedRowKeys | 展开的行，控制属性。可用 `.sync` 后缀, 参见 [`update:expandedRowKeys`](#事件) | string\[] | - |  |
 | expandedRowRender | 额外的展开行 | Function(record, index, indent, expanded):VNode \| slot="expandedRowRender" slot-scope="record, index, indent, expanded" | - |  |
 | expandIcon | 自定义展开图标 | Function(props):VNode \| slot="expandIcon" slot-scope="props" | - |  |
 | expandRowByClick | 通过点击行来展开子行 | boolean | `false` |  |
@@ -38,9 +38,9 @@
 
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
-| expandedRowsChange | 展开的行变化时触发 | Function(expandedRows) |
 | change | 分页、排序、筛选变化时触发 | Function(pagination, filters, sorter, { currentDataSource }) |
 | expand | 点击展开图标时触发 | Function(expanded, record) |
+| expandedRowsChange <br> update:expandedRowKeys | 展开的行变化时触发 | Function(expandedRowKeys) |
 
 #### customRow 用法
 

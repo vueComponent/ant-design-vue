@@ -114,6 +114,7 @@ const ExpandableTable = {
       if (!this.latestExpandedRows || !shallowEqual(this.latestExpandedRows, expandedRowKeys)) {
         this.latestExpandedRows = expandedRowKeys;
         this.__emit('expandedRowsChange', expandedRowKeys);
+        this.__emit('update:expandedRowKeys', expandedRowKeys);
       }
 
       if (!destroy) {

@@ -35,7 +35,25 @@ const Table = {
         const events = getEvents(element);
         const listeners = {};
         Object.keys(events).forEach(e => {
-          const k = `on-${e}`;
+          /*
+          Convert events on template Column to function props onPropAbcChange in Table.columns prop.
+          If you write template code like below:
+          <Column @prop-abc-change="f1" @update:prop-abc="f2" :prop-abc.sync="dataAbc" />
+          You will get these events:
+          {
+            'prop-abc-change': this.f1,
+            'update:prop-abc': [this.f2, e => this.dataAbc = e],
+            'update:propAbc': e => this.dataAbc = e,
+          }
+          All of these events would be treat as column.onPropAbcChange,
+          but only one of them will be valid, which can not be determined.
+          */
+          let k;
+          if (e.startsWith('update:')) {
+            k = `on-${e.substr('update:'.length)}-change`;
+          } else {
+            k = `on-${e}`;
+          }
           listeners[camelize(k)] = events[e];
         });
         const { default: children, ...restSlots } = getSlots(element);

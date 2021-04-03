@@ -85,7 +85,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | defaultFilteredValue | Default filtered values | string\[] | - | 1.5.0 |
 | defaultSortOrder | Default order of sorted values: `'ascend'` `'descend'` `null` | string | - |  |
 | filterDropdown | Customized filter overlay | slot \| slot-scope | - |  |
-| filterDropdownVisible | Whether `filterDropdown` is visible | boolean | - |  |
+| filterDropdownVisible | Whether `filterDropdown` is visible. Can be used with `.sync` in template, see `update:filterDropdownVisible` | boolean | - |  |
 | filtered | Whether the `dataSource` is filtered | boolean | `false` |  |
 | filteredValue | Controlled filtered value, filter icon will highlight | string\[] | - |  |
 | filterIcon | Customized filter icon | slot \| slot-scope \| (filtered: boolean, column: Column) | `false` |  |
@@ -102,7 +102,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | customCell | Set props on per cell | Function(record, rowIndex) | - |  |
 | customHeaderCell | Set props on per header cell | Function(column) | - |  |
 | onFilter | Callback executed when the confirm filter button is clicked, Use as a `filter` event when using template or jsx | Function | - |  |
-| onFilterDropdownVisibleChange | Callback executed when `filterDropdownVisible` is changed, Use as a `filterDropdownVisible` event when using template or jsx | function(visible) {} | - |  |
+| onFilterDropdownVisibleChange <br> @filterDropdownVisibleChange <br> @update:filterDropdownVisible | Callback executed when `filterDropdownVisible` is changed, Use as a `filterDropdownVisibleChange` or `update:filterDropdownVisible` event when using template or jsx | function(visible) {} | - |  |
 | slots | When using columns, you can use this property to configure the properties that support the slot, such as `slots: { filterIcon: 'XXX'}` | object | - |  |
 | scopedSlots | When using columns, you can use this property to configure the properties that support the slot-scope, such as `scopedSlots: { customRender: 'XXX'}` | object | - |  |
 

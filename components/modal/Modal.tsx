@@ -13,7 +13,7 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 import { getConfirmLocale } from './locale';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Button from '../button';
-import buttonTypes, { ButtonType, ButtonProps } from '../button/buttonTypes';
+import buttonTypes, { ButtonType, ButtonProps as ButtonPropsType } from '../button/buttonTypes';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
@@ -79,8 +79,8 @@ const modalProps = {
   maskClosable: PropTypes.looseBool,
   /** 强制渲染 Modal*/
   forceRender: PropTypes.looseBool,
-  okButtonProps: PropTypes.shape(ButtonProps),
-  cancelButtonProps: PropTypes.shape(ButtonProps),
+  okButtonProps: PropTypes.shape(buttonTypes),
+  cancelButtonProps: PropTypes.shape(buttonTypes),
   destroyOnClose: PropTypes.looseBool,
   wrapClassName: PropTypes.string,
   maskTransitionName: PropTypes.string,
@@ -107,8 +107,8 @@ export interface ModalFuncProps {
   // TODO: find out exact types
   onOk?: (...args: any[]) => any;
   onCancel?: (...args: any[]) => any;
-  okButtonProps?: ButtonProps;
-  cancelButtonProps?: ButtonProps;
+  okButtonProps?: ButtonPropsType;
+  cancelButtonProps?: ButtonPropsType;
   centered?: boolean;
   width?: string | number;
   okText?: VNodeTypes;
@@ -194,6 +194,7 @@ export default defineComponent({
         loading: confirmLoading,
         ...(this.okButtonProps || {}),
       };
+
       return (
         <div>
           <Button {...cancelBtnProps}>

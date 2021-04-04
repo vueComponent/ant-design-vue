@@ -7,7 +7,7 @@ import Checkbox from '../checkbox';
 import Search from './search';
 import defaultRenderList from './renderListBody';
 import triggerEvent from '../_util/triggerEvent';
-import { defineComponent, HTMLAttributes, nextTick, VNode } from 'vue';
+import { defineComponent, nextTick, VNode, VNodeTypes } from 'vue';
 import { RadioChangeEvent } from '../radio/interface';
 
 const defaultRender = () => null;
@@ -173,7 +173,7 @@ export default defineComponent({
 
       let listBody = bodyDom;
       if (!listBody) {
-        let bodyNode: HTMLAttributes;
+        let bodyNode: VNodeTypes;
         const { onEvents } = splitAttrs(this.$attrs);
         const { bodyContent, customize } = renderListNode(renderList, {
           ...this.$props,

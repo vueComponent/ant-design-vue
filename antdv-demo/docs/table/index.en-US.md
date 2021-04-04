@@ -12,7 +12,7 @@
 | dataSource | Data record array to be displayed | any\[] | - |  |
 | defaultExpandAllRows | Expand all rows initially | boolean | `false` |  |
 | defaultExpandedRowKeys | Initial expanded row keys | string\[] | - |  |
-| expandedRowKeys | Current expanded row keys | string\[] | - |  |
+| expandedRowKeys | Current expanded row keys. Can be used with `.sync`, see [`update:expandedRowKeys`](#Events). | string\[] | - |  |
 | expandedRowRender | Expanded container render for each row | Function(record, index, indent, expanded):VNode\|slot-scope | - |  |
 | expandIcon | Customize row expand Icon. | Function(props):VNode \| slot="expandIcon" slot-scope="props" | - |  |
 | expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |  |
@@ -40,7 +40,7 @@
 | --- | --- | --- |
 | change | Callback executed when pagination, filters or sorter is changed | Function(pagination, filters, sorter, { currentDataSource }) |  |
 | expand | Callback executed when the row expand icon is clicked | Function(expanded, record) |  |
-| expandedRowsChange | Callback executed when the expanded rows change | Function(expandedRows) |  |
+| expandedRowsChange <br> update:expandedRowKeys | Callback executed when the expanded rows change | Function(expandedRowKeys) |  |
 
 #### customRow usage
 

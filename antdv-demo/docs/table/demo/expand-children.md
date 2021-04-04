@@ -2,6 +2,7 @@
 #### 树形数据展示
 表格支持树形数据的展示，当数据中有 `children` 字段时会自动展示为树形表格，如果不需要或配置为其他字段可以用 `childrenColumnName` 进行配置。
 可以通过设置 `indentSize` 以控制每一层的缩进宽度。
+事件 `expandedRowsChange` 与 `update:expandedRowKeys` 功能相同，用于接收展开行的 key 的列表。Vue 2.3.0 以上版本，属性 `expandedRowKeys` 可以和事件 `update:expandedRowKeys` 配合使用，简写为 `:expandedRowKeys.sync="expandedRowKeys"`。
 > 注：暂不支持父子数据递归关联选择。
 </cn>
 
@@ -9,12 +10,18 @@
 #### Tree data
 Display tree structure data in Table when there is field key `children` in dataSource, try to customize `childrenColumnName` property to avoid tree table structure.
 You can control the indent width by setting `indentSize`.
+Events `expandedRowsChange` and `update:expandedRowKeys` are the same, which are callbacks executed when the expanded rows change. With Vue 2.3.0 or above vesion, prop `expandedRowKeys` can be used with event `update:expandedRowKeys`, and can be written as `:expandedRowKeys.sync="expandedRowKeys"` for short.
 > Note, no support for recursive selection of tree structure data table yet.
 </us>
 
 ```vue
 <template>
-  <a-table :columns="columns" :data-source="data" :row-selection="rowSelection" />
+  <a-table
+    :columns="columns"
+    :data-source="data"
+    :row-selection="rowSelection"
+    :expanded-row-keys.sync="expandedRowKeys"
+  />
 </template>
 <script>
 const columns = [
@@ -120,6 +127,7 @@ export default {
       data,
       columns,
       rowSelection,
+      expandedRowKeys: [],
     };
   },
 };

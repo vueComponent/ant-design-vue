@@ -85,7 +85,7 @@
 | dataIndex | 列数据在数据项中对应的 key，支持 `a.b.c` 的嵌套写法 | string | - |  |
 | defaultFilteredValue | 默认筛选值 | string\[] | - | 1.5.0 |
 | filterDropdown | 可以自定义筛选菜单，此函数只负责渲染图层，需要自行编写各种交互 | VNode \| slot-scope | - |  |
-| filterDropdownVisible | 用于控制自定义筛选菜单是否可见 | boolean | - |  |
+| filterDropdownVisible | 用于控制自定义筛选菜单是否可见。在 template 中可用 `.sync` 后缀, 参见 `update:filterDropdownVisible` | boolean | - |  |
 | filtered | 标识数据是否经过过滤，筛选图标会高亮 | boolean | false |  |
 | filteredValue | 筛选的受控属性，外界可用此控制列的筛选状态，值为已筛选的 value 数组 | string\[] | - |  |
 | filterIcon | 自定义 filter 图标。 | VNode \| (filtered: boolean, column: Column) => vNode \|slot \|slot-scope | false |  |
@@ -102,7 +102,7 @@
 | customCell | 设置单元格属性 | Function(record, rowIndex) | - |  |
 | customHeaderCell | 设置头部单元格属性 | Function(column) | - |  |
 | onFilter | 本地模式下，确定筛选的运行函数, 使用 template 或 jsx 时作为`filter`事件使用 | Function | - |  |
-| onFilterDropdownVisibleChange | 自定义筛选菜单可见变化时调用，使用 template 或 jsx 时作为`filterDropdownVisibleChange`事件使用 | function(visible) {} | - |  |
+| onFilterDropdownVisibleChange <br> @filterDropdownVisibleChange <br> @update:filterDropdownVisible | 自定义筛选菜单可见`filterDropdownVisible`变化时调用，使用 template 或 jsx 时作为`filterDropdownVisibleChange`或`update:filterDropdownVisible`事件使用 | function(visible) {} | - |  |
 | slots | 使用 columns 时，可以通过该属性配置支持 slot 的属性，如 `slots: { filterIcon: 'XXX'}` | object | - |  |
 | scopedSlots | 使用 columns 时，可以通过该属性配置支持 slot-scope 的属性，如 `scopedSlots: { customRender: 'XXX'}` | object | - |  |
 

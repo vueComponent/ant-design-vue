@@ -44,7 +44,7 @@
 | value(v-model) | Current selected option. | string\|number\|string\[]\|number\[] | - |
 | options | Data of the selectOption, manual construction work is no longer needed if this property has been set | array&lt;{value, label, [disabled, key, title]}> | \[] |
 | defaultOpen | Initial open state of dropdown | boolean | - |
-| open | Controlled open state of dropdown | boolean | - |
+| open(.sync) | Controlled open state of dropdown | boolean | - |
 | loading | indicate loading state | Boolean | false |
 
 ### events
@@ -61,7 +61,7 @@
 | popupScroll | Called when dropdown scrolls | function |
 | search | Callback function that is fired when input changed. | function(value: string) |
 | select | Called when a option is selected, the params are option's value (or key) and option instance. | function(value, option:Option) |
-| dropdownVisibleChange | Call when dropdown open | function(open) |
+| dropdownVisibleChange<br>update:open | Call when dropdown open | function(open) |
 
 ### Select Methods
 

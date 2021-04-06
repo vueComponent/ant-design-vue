@@ -63,7 +63,7 @@
 | getCalendarContainer | 定义浮层的容器，默认为 body 上新建 div | function(trigger) | 无 | - |
 | locale | 国际化配置 | object | [默认配置](https://github.com/vueComponent/ant-design-vue/blob/master/components/date-picker/locale/example.json) | - |
 | mode | 日期面板的状态（[设置后无法选择年份/月份？](/docs/vue/faq#当我指定了-DatePicker/RangePicker-的-mode-属性后，点击后无法选择年份/月份？)） | `time|date|month|year|decade` | 'date' | - |
-| open | 控制弹层是否展开 | boolean | - | - |
+| open(.sync) | 控制弹层是否展开 | boolean | - | - |
 | placeholder | 输入框提示文字 | string\|RangePicker\[] | - | - |
 | popupStyle | 额外的弹出日历样式 | object | {} | - |
 | dropdownClassName | 额外的弹出日历 className | string | - | - |
@@ -75,10 +75,10 @@
 
 ### 共有的事件
 
-| 事件名称    | 说明                     | 回调参数              |
-| ----------- | ------------------------ | --------------------- |
-| openChange  | 弹出日历和关闭日历的回调 | function(status)      |
-| panelChange | 日期面板变化时的回调     | function(value, mode) | - |
+| 事件名称                  | 说明                     | 回调参数              |
+| ------------------------- | ------------------------ | --------------------- |
+| openChange<br>update:open | 弹出日历和关闭日历的回调 | function(status)      |
+| panelChange               | 日期面板变化时的回调     | function(value, mode) | - |
 
 ### 共同的方法
 

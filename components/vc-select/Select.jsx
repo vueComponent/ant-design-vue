@@ -890,6 +890,7 @@ const Select = {
         return;
       }
       this.__emit('dropdownVisibleChange', open);
+      this.__emit('update:open', open);
       const nextState = {
         _open: open,
         _backfillValue: '',

@@ -103,6 +103,7 @@ export default function createPicker(TheCalendar, props) {
           this.setState({ _open: open });
         }
         this.$emit('openChange', open);
+        this.$emit('update:open', open);
       },
       focus() {
         this.$refs.input.focus();

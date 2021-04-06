@@ -228,6 +228,7 @@ const Cascader = {
         }));
       }
       this.$emit('popupVisibleChange', popupVisible);
+      this.$emit('update:popupVisible', popupVisible);
     },
     handleInputFocus(e) {
       this.$emit('focus', e);

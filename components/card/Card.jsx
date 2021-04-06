@@ -53,6 +53,7 @@ export default {
     },
     onTabChange(key) {
       this.$emit('tabChange', key);
+      this.$emit('update:activeTabKey', key);
     },
     isContainGrid(obj = []) {
       let containGrid;

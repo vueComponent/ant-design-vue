@@ -22,7 +22,7 @@
 | popupClassName | additional className of popup overlay | string | - |
 | popupStyle | additional style of popup overlay | object | {} |
 | popupPlacement | use preset popup align config from builtinPlacements：`bottomLeft` `bottomRight` `topLeft` `topRight` | string | `bottomLeft` |
-| popupVisible | set visible of cascader popup | boolean | - |
+| popupVisible(.sync) | set visible of cascader popup | boolean | - |
 | showSearch | Whether show search input in single mode. | boolean\|object | false |
 | size | input size, one of `large` `default` `small` | string | `default` |
 | suffixIcon | The custom suffix icon | string \| VNode \| slot | - |
@@ -43,7 +43,7 @@ Fields in `showSearch`:
 | Events Name | Description | Arguments | version |
 | --- | --- | --- | --- |
 | change | callback when finishing cascader select | `(value, selectedOptions) => void` | - |  |
-| popupVisibleChange | callback when popup shown or hidden | `(value) => void` | - |  |
+| popupVisibleChange<br>update:popupVisible | callback when popup shown or hidden | `(value) => void` | - |  |
 | search | callback when input value change | `(value) => void` | - | 1.5.4 |
 
 ## Methods

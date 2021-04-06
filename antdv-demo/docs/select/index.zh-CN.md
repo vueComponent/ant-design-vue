@@ -44,7 +44,7 @@
 | value(v-model) | 指定当前选中的条目 | string\|string\[]\|number\|number\[] | - |
 | options | options 数据，如果设置则不需要手动构造 selectOption 节点 | array&lt;{value, label, [disabled, key, title]}> | \[] |
 | defaultOpen | 是否默认展开下拉菜单 | boolean | - |
-| open | 是否展开下拉菜单 | boolean | - |
+| open(.sync) | 是否展开下拉菜单 | boolean | - |
 
 > 注意，如果发现下拉菜单跟随页面滚动，或者需要在其他弹层中触发 Select，请尝试使用 `getPopupContainer={triggerNode => triggerNode.parentNode}` 将下拉弹层渲染节点固定在触发器的父元素中。
 
@@ -62,7 +62,7 @@
 | popupScroll | 下拉列表滚动时的回调 | function |
 | search | 文本框值变化时回调 | function(value: string) |
 | select | 被选中时调用，参数为选中项的 value (或 key) 值 | function(value, option:Option) |
-| dropdownVisibleChange | 展开下拉菜单的回调 | function(open) |
+| dropdownVisibleChange<br>update:open | 展开下拉菜单的回调 | function(open) |
 
 ### Select Methods
 

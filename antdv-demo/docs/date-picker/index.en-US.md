@@ -63,7 +63,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 | getCalendarContainer | to set the container of the floating layer, while the default is to create a `div` element in `body` | function(trigger) | - |  |
 | locale | localization configuration | object | [default](https://github.com/vueComponent/ant-design-vue/blob/master/components/date-picker/locale/example.json) |  |
 | mode | picker panel mode（[Cannot select year or month anymore?](/docs/vue/faq#When-set-mode-to-DatePicker/RangePicker,-cannot-select-year-or-month-anymore?) | `time|date|month|year` | 'date' |  |
-| open | open state of picker | boolean | - |  |
+| open(.sync) | open state of picker | boolean | - |  |
 | placeholder | placeholder of date input | string\|RangePicker\[] | - |  |
 | popupStyle | to customize the style of the popup calendar | object | {} |  |
 | dropdownClassName | to customize the className of the popup calendar | string | - |  |
@@ -77,7 +77,7 @@ The following APIs are shared by DatePicker, MonthPicker, RangePicker, WeekPicke
 
 | Events Name | Description | Arguments | Version |
 | --- | --- | --- | --- |
-| openChange | a callback function, can be executed whether the popup calendar is popped up or closed | function(status) |  |
+| openChange<br>update:open | a callback function, can be executed whether the popup calendar is popped up or closed | function(status) |  |
 | panelChange | callback when picker panel mode is changed | function(value, mode) |  |
 
 ### Common Methods

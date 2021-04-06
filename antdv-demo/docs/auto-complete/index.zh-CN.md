@@ -20,7 +20,7 @@
 | placeholder | 输入框提示 | string \| slot | - |  |
 | value(v-model) | 指定当前选中的条目 | string\|string\[]\|{ key: string, label: string\|vNodes }\|Array&lt;{ key: string, label: string\|vNodes }> | 无 |  |
 | defaultOpen | 是否默认展开下拉菜单 | boolean | - |  |
-| open | 是否展开下拉菜单 | boolean | - |  |
+| open(.sync) | 是否展开下拉菜单 | boolean | - |  |
 
 ### 事件
 
@@ -31,7 +31,7 @@
 | focus | 获得焦点时的回调 | function() |
 | search | 搜索补全项的时候调用 | function(value) |
 | select | 被选中时调用，参数为选中项的 value 值 | function(value, option) |
-| dropdownVisibleChange | 展开下拉菜单的回调 | function(open) |
+| dropdownVisibleChange<br>update:open | 展开下拉菜单的回调 | function(open) |
 
 ## 方法
 

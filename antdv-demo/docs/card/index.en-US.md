@@ -5,7 +5,7 @@
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | actions | The action list, shows at the bottom of the Card. | slots | - |  |
-| activeTabKey | Current TabPane's key | string | - |  |
+| activeTabKey(.sync) | Current TabPane's key | string | - |  |
 | headStyle | Inline style to apply to the card head | object | - |  |
 | bodyStyle | Inline style to apply to the card content | object | - |  |
 | bordered | Toggles rendering of the border around the card | boolean | `true` |  |
@@ -22,9 +22,9 @@
 
 ### events
 
-| Events Name | Description                   | Arguments     | Version |
-| ----------- | ----------------------------- | ------------- | ------- |
-| tabChange   | Callback when tab is switched | (key) => void | -       |  |
+| Events Name                      | Description                   | Arguments     | Version |
+| -------------------------------- | ----------------------------- | ------------- | ------- |
+| tabChange<br>update:activeTabKey | Callback when tab is switched | (key) => void | -       |  |
 
 ### Card.Grid
 

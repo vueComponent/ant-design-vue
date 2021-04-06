@@ -5,7 +5,7 @@
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | actions | 卡片操作组，位置在卡片底部 | slots | - |  |
-| activeTabKey | 当前激活页签的 key | string | - |  |
+| activeTabKey(.sync) | 当前激活页签的 key | string | - |  |
 | headStyle | 自定义标题区域样式 | object | - |  |
 | bodyStyle | 内容区域自定义样式 | object | - |  |
 | bordered | 是否有边框 | boolean | true |  |
@@ -22,9 +22,9 @@
 
 ### 事件
 
-| 事件名称  | 说明           | 回调参数      | 版本 |
-| --------- | -------------- | ------------- | ---- |
-| tabChange | 页签切换的回调 | (key) => void | -    |  |
+| 事件名称                         | 说明           | 回调参数      | 版本 |
+| -------------------------------- | -------------- | ------------- | ---- |
+| tabChange<br>update:activeTabKey | 页签切换的回调 | (key) => void | -    |  |
 
 ### Card.Grid
 

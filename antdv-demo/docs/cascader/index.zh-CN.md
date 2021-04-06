@@ -22,7 +22,7 @@
 | popupClassName | 自定义浮层类名 | string | - |
 | popupStyle | 自定义浮层样式 | object | {} |
 | popupPlacement | 浮层预设位置：`bottomLeft` `bottomRight` `topLeft` `topRight` | Enum | `bottomLeft` |
-| popupVisible | 控制浮层显隐 | boolean | - |
+| popupVisible(.sync) | 控制浮层显隐 | boolean | - |
 | showSearch | 在选择框中显示搜索框 | boolean | false |
 | size | 输入框大小，可选 `large` `default` `small` | string | `default` |
 | suffixIcon | 自定义的选择框后缀图标 | string \| VNode \| slot | - |
@@ -40,11 +40,11 @@
 
 ### 事件
 
-| 事件名称           | 说明                | 回调参数                           | 版本 |
-| ------------------ | ------------------- | ---------------------------------- | ---- |
-| change             | 选择完成后的回调    | `(value, selectedOptions) => void` | -    |  |
-| popupVisibleChange | 显示/隐藏浮层的回调 | `(value) => void`                  | -    |  |
-| search             | 输入框变化时的回调  | `(value) => void`                  | -    | 1.5.4 |
+| 事件名称 | 说明 | 回调参数 | 版本 |
+| --- | --- | --- | --- |
+| change | 选择完成后的回调 | `(value, selectedOptions) => void` | - |  |
+| popupVisibleChange<br>update:popupVisible | 显示/隐藏浮层的回调 | `(value) => void` | - |  |
+| search | 输入框变化时的回调 | `(value) => void` | - | 1.5.4 |
 
 ## 方法
 

@@ -60,7 +60,7 @@ export const SelectProps = () => ({
   suffixIcon: PropTypes.VNodeChild,
   itemIcon: PropTypes.VNodeChild,
   size: PropTypes.oneOf(tuple('small', 'middle', 'large', 'default')),
-  mode: PropTypes.oneOf(tuple('multiple', 'tags', 'SECRET_COMBOBOX_MODE_DO_NOT_USE')),
+  mode: PropTypes.oneOf(tuple('multiple', 'tags', 'SECRET_COMBOBOX_MODE_DO_NOT_USE', 'default')),
   bordered: PropTypes.looseBool.def(true),
   transitionName: PropTypes.string.def('slide-up'),
   choiceTransitionName: PropTypes.string.def(''),

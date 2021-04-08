@@ -86,7 +86,7 @@ export default defineComponent({
     getMonthSelectElement(prefixCls: string, month: number, months: string[]) {
       const { fullscreen, validRange, value } = this;
       let start = 0;
-      let end = 12;
+      let end = 11;
       if (validRange) {
         const [rangeStart, rangeEnd] = validRange;
         const currentYear = value.get('year');

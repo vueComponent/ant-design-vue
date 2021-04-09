@@ -34,7 +34,7 @@
 - 🐞 修复 Drawer 销毁后报错问题 [#848d64](https://github.com/vueComponent/ant-design-vue/commit/848d6497e68c87566790dfa889a1913199a6699a)
 - 🐞 修复 BackTop 在 KeepAlive 激活时，位置不对的问题 [#3803](https://github.com/vueComponent/ant-design-vue/issues/3803)
 - 🐞 修复 TreeNode class 不生效问题 [#3822](https://github.com/vueComponent/ant-design-vue/issues/3822)
-- 🐞 修复 Table tags 为数组是报错问题 [#3812](https://github.com/vueComponent/ant-design-vue/issues/3812)
+- 🐞 修复 Table tags 为数组时报错问题 [#3812](https://github.com/vueComponent/ant-design-vue/issues/3812)
 - 🐞 修复 Table 自定义 filterIcon 时，触发排序问题 [#3819](https://github.com/vueComponent/ant-design-vue/issues/3819)
 - 🐞 修复 Select 样式在 Form 下错位问题 [#3781](https://github.com/vueComponent/ant-design-vue/issues/3781)
 

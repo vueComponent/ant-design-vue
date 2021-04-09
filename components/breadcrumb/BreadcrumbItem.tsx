@@ -1,4 +1,4 @@
-import { defineComponent, HTMLAttributes, inject } from 'vue';
+import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { hasProp, getComponent, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
@@ -24,7 +24,7 @@ export default defineComponent({
      * if overlay is have
      * Wrap a DropDown
      */
-    renderBreadcrumbNode(breadcrumbItem: HTMLAttributes, prefixCls: string) {
+    renderBreadcrumbNode(breadcrumbItem: JSX.Element, prefixCls: string) {
       const overlay = getComponent(this, 'overlay');
       if (overlay) {
         return (
@@ -45,7 +45,7 @@ export default defineComponent({
     const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
     const separator = getComponent(this, 'separator');
     const children = getSlot(this);
-    let link: HTMLAttributes;
+    let link: JSX.Element;
     if (hasProp(this, 'href')) {
       link = <a class={`${prefixCls}-link`}>{children}</a>;
     } else {

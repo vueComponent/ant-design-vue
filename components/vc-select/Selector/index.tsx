@@ -17,6 +17,7 @@ import useLock from '../hooks/useLock';
 import { defineComponent, VNodeChild } from 'vue';
 import createRef, { RefObject } from '../../_util/createRef';
 import PropTypes from '../../_util/vue-types';
+import { VueNode } from 'ant-design-vue/es/_util/type';
 
 export interface InnerSelectorProps {
   prefixCls: string;
@@ -52,7 +53,7 @@ export interface SelectorProps {
   mode: Mode;
   searchValue: string;
   activeValue: string;
-  inputElement: JSX.Element;
+  inputElement: VueNode;
 
   autofocus?: boolean;
   accessibilityIndex: number;

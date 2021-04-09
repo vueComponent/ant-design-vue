@@ -64,6 +64,7 @@ export interface SelectTriggerProps {
   empty: boolean;
   getTriggerDOMNode: () => any;
 }
+
 const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
   name: 'SelectTrigger',
   inheritAttrs: false,
@@ -136,6 +137,7 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
     );
   },
 });
+
 SelectTrigger.props = {
   dropdownAlign: PropTypes.object,
   visible: PropTypes.looseBool,
@@ -155,4 +157,5 @@ SelectTrigger.props = {
   direction: PropTypes.string,
   getTriggerDOMNode: PropTypes.func,
 };
+
 export default SelectTrigger;

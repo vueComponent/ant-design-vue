@@ -1293,11 +1293,11 @@ export default function generateSelector<
             dropdownClassName={dropdownClassName}
             direction={direction}
             dropdownMatchSelectWidth={dropdownMatchSelectWidth}
-            dropdownRender={dropdownRender}
+            dropdownRender={dropdownRender as any}
             dropdownAlign={dropdownAlign}
             getPopupContainer={getPopupContainer}
             empty={!mergedOptions.length}
-            getTriggerDOMNode={() => selectorDomRef.current as any}
+            getTriggerDOMNode={() => selectorDomRef.current}
           >
             <Selector
               {...this.$props}

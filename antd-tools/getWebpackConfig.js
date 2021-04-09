@@ -3,7 +3,7 @@ injectRequire();
 const path = require('path');
 const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
-const webpackMerge = require('webpack-merge');
+const { merge } = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -39,6 +39,7 @@ function getWebpackConfig(modules) {
     babelConfig.plugins.push(require.resolve('./replaceLib'));
   }
 
+  /** @type {import('webpack').Configuration} */
   const config = {
     devtool: 'source-map',
 
@@ -65,20 +66,19 @@ function getWebpackConfig(modules) {
       alias: {
         '@': process.cwd(),
       },
+      fallback: [
+        'child_process',
+        'cluster',
+        'dgram',
+        'dns',
+        'fs',
+        'module',
+        'net',
+        'readline',
+        'repl',
+        'tls',
+      ].reduce((acc, name) => Object.assign({}, acc, { [name]: false }), {}),
     },
-
-    node: [
-      'child_process',
-      'cluster',
-      'dgram',
-      'dns',
-      'fs',
-      'module',
-      'net',
-      'readline',
-      'repl',
-      'tls',
-    ].reduce((acc, name) => Object.assign({}, acc, { [name]: 'empty' }), {}),
 
     module: {
       noParse: [/moment.js/],
@@ -219,7 +219,7 @@ All rights reserved.
     };
 
     // Development
-    const uncompressedConfig = webpackMerge({}, config, {
+    const uncompressedConfig = merge({}, config, {
       entry: {
         [distFileBaseName]: entry,
       },
@@ -232,7 +232,7 @@ All rights reserved.
     });
 
     // Production
-    const prodConfig = webpackMerge({}, config, {
+    const prodConfig = merge({}, config, {
       entry: {
         [`${distFileBaseName}.min`]: entry,
       },

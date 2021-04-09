@@ -43,6 +43,8 @@ const babelConfig = {
   ],
 };
 
+/** @type {import('webpack').Configuration} */
+
 module.exports = {
   mode: 'development',
   entry: {
@@ -141,7 +143,7 @@ module.exports = {
     hot: true,
     open: true,
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'inline-cheap-module-source-map',
   plugins: [
     new MiniCssExtractPlugin({
       filename: '[name].css',

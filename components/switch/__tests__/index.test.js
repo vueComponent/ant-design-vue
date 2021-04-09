@@ -28,7 +28,6 @@ describe('Switch', () => {
         return <Switch value="" />;
       },
     });
-    console.log(errorSpy);
     expect(errorSpy).toHaveBeenCalledWith(
       'Warning: [antdv: Switch] `value` is not validate prop, do you mean `checked`?',
     );

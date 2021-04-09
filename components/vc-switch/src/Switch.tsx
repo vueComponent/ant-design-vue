@@ -2,10 +2,7 @@ import { switchPropTypes } from './PropTypes';
 import Omit from 'omit.js';
 import { defineComponent, nextTick, onMounted, ref } from 'vue';
 import KeyCode from '../../_util/KeyCode';
-
-function getComponent(slots: Record<string, any>, props: Record<string, any>, prop: string) {
-  return slots[prop]?.() ?? props[prop];
-}
+import { getPropsSlot } from '../../_util/props-util';
 
 export default defineComponent({
   name: 'VcSwitch',
@@ -92,8 +89,8 @@ export default defineComponent({
         {props.loadingIcon}
         <span class={`${props.prefixCls}-inner`}>
           {checked.value
-            ? getComponent(slots, props, 'checkedChildren')
-            : getComponent(slots, props, 'unCheckedChildren')}
+            ? getPropsSlot(slots, props, 'checkedChildren')
+            : getPropsSlot(slots, props, 'unCheckedChildren')}
         </span>
       </button>
     );

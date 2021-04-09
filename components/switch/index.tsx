@@ -51,7 +51,7 @@ const Switch = defineComponent({
         );
       }
       warning(
-        'checked' in props || !('value' in attrs),
+        !('value' in attrs),
         'Switch',
         '`value` is not validate prop, do you mean `checked`?',
       );

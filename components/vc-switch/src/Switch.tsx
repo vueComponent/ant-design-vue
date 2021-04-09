@@ -66,6 +66,7 @@ export default defineComponent({
     return () => (
       <button
         {...Omit(props, [
+          'prefixCls',
           'checkedChildren',
           'unCheckedChildren',
           'checked',

@@ -80,6 +80,16 @@ export interface ShowSearchType {
   limit?: number | false;
 }
 
+export interface EmptyFilteredOptionsType {
+  disabled: boolean;
+  [key: string]: any;
+}
+
+export interface FilteredOptionsType extends EmptyFilteredOptionsType {
+  __IS_FILTERED_OPTION: boolean;
+  path: CascaderOptionType[];
+}
+
 // const ShowSearchType = PropTypes.shape({
 //   filter: PropTypes.func,
 //   render: PropTypes.func,
@@ -217,11 +227,13 @@ const Cascader = defineComponent({
   data() {
     const { value, defaultValue, popupVisible, showSearch, options } = this.$props;
     return {
-      sValue: value || defaultValue || [],
+      sValue: (value || defaultValue || []) as any[],
       inputValue: '',
       inputFocused: false,
-      sPopupVisible: popupVisible,
-      flattenOptions: showSearch ? flattenTree(options, this.$props) : undefined,
+      sPopupVisible: popupVisible as boolean,
+      flattenOptions: showSearch
+        ? flattenTree(options as CascaderOptionType[], this.$props)
+        : undefined,
     };
   },
   watch: {
@@ -311,7 +323,7 @@ const Cascader = defineComponent({
 
     handleInputClick(e: MouseEvent & { nativeEvent?: any }) {
       const { inputFocused, sPopupVisible } = this;
-      // Prevent `Trigger` behaviour.
+      // Prevent `Trigger` behavior.
       if (inputFocused || sPopupVisible) {
         e.stopPropagation();
         if (e.nativeEvent && e.nativeEvent.stopImmediatePropagation) {
@@ -346,8 +358,8 @@ const Cascader = defineComponent({
       const displayRender = getComponent(this, 'displayRender', {}, false) || defaultDisplayRender;
       const value = this.sValue;
       const unwrappedValue = Array.isArray(value[0]) ? value[0] : value;
-      const selectedOptions = arrayTreeFilter(
-        options,
+      const selectedOptions = arrayTreeFilter<CascaderOptionType>(
+        options as CascaderOptionType[],
         (o, level) => o[names.value] === unwrappedValue[level],
         { childrenKeyName: names.children },
       );
@@ -366,7 +378,10 @@ const Cascader = defineComponent({
       }
     },
 
-    generateFilteredOptions(prefixCls: string | undefined, renderEmpty: RenderEmptyHandler) {
+    generateFilteredOptions(
+      prefixCls: string | undefined,
+      renderEmpty: RenderEmptyHandler,
+    ): EmptyFilteredOptionsType[] | FilteredOptionsType[] {
       const { showSearch, notFoundContent } = this;
       const names: FilledFieldNamesType = getFilledFieldNames(this.$props);
       const {

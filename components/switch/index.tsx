@@ -1,4 +1,4 @@
-import { defineComponent, inject, onBeforeMount, ref, ExtractPropTypes } from 'vue';
+import { defineComponent, inject, onBeforeMount, ref, ExtractPropTypes, computed } from 'vue';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PropTypes from '../_util/vue-types';
 import VcSwitch from '../vc-switch';
@@ -57,25 +57,26 @@ const Switch = defineComponent({
       );
     });
     const { getPrefixCls } = configProvider;
+    const prefixCls = computed(() => {
+      return getPrefixCls('switch', props.prefixCls);
+    });
     return () => (
       <Wave insertExtraNode>
         <VcSwitch
           {...Omit(props, ['prefixCls', 'size', 'loading', 'disabled'])}
           {...attrs}
           checked={props.checked}
-          prefixCls={getPrefixCls('switch', props.prefixCls)}
+          prefixCls={prefixCls.value}
           loadingIcon={
-            props.loading ? (
-              <LoadingOutlined class={`${getPrefixCls('switch', props.prefixCls)}-loading-icon`} />
-            ) : null
+            props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null
           }
           checkedChildren={getPropsSlot(slots, props, 'checkedChildren')}
           unCheckedChildren={getPropsSlot(slots, props, 'unCheckedChildren')}
           disabled={props.disabled || props.loading}
           class={{
             [attrs.class as string]: attrs.class,
-            [`${getPrefixCls('switch', props.prefixCls)}-small`]: props.size === 'small',
-            [`${getPrefixCls('switch', props.prefixCls)}-loading`]: props.loading,
+            [`${prefixCls.value}-small`]: props.size === 'small',
+            [`${prefixCls.value}-loading`]: props.loading,
           }}
           ref={refSwitchNode}
         />

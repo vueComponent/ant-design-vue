@@ -11,6 +11,7 @@ export default defineComponent({
     ...switchPropTypes,
     prefixCls: switchPropTypes.prefixCls.def('rc-switch'),
   },
+  emits: ['update:checked', 'mouseup', 'change', 'click'],
   setup(props, { attrs, slots, emit, expose }) {
     const checked = ref('checked' in props ? !!props.checked : !!props.defaultChecked);
 

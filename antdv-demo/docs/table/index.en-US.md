@@ -111,6 +111,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | title | Title of the column group | string\|slot | - |
+| fixed | Set column group to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |  |
 | slots | When using columns, you can use this property to configure the properties that support the slot, such as `slots: { title: 'XXX'}` | object | - |
 
 ### pagination

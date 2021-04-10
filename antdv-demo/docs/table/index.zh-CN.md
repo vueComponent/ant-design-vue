@@ -111,6 +111,7 @@
 | 参数 | 说明 | 类型 | 默认值 |
 | --- | --- | --- | --- |
 | title | 列头显示文字 | string\|slot | - |
+| fixed | 列是否固定，可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string | false |  |
 | slots | 使用 columns 时，可以通过该属性配置支持 slot 的属性，如 `slots: { title: 'XXX'}` | object | - |
 
 ### pagination

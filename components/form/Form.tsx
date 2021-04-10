@@ -10,7 +10,7 @@ import { defaultValidateMessages } from './utils/messages';
 import { allPromiseFinish } from './utils/asyncUtil';
 import { toArray } from './utils/typeUtil';
 import isEqual from 'lodash-es/isEqual';
-import scrollIntoView from 'scroll-into-view-if-needed';
+import scrollIntoView, { Options } from 'scroll-into-view-if-needed';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { tuple, VueNode } from '../_util/type';
 import { ColProps } from '../grid/Col';
@@ -56,7 +56,7 @@ export const formProps = {
   validateMessages: PropTypes.object,
   validateOnRuleChange: PropTypes.looseBool,
   // 提交失败自动滚动到第一个错误字段
-  scrollToFirstError: PropTypes.looseBool,
+  scrollToFirstError: { type: [Boolean, Object] as PropType<boolean | Options> },
   onSubmit: PropTypes.func,
   onFinish: PropTypes.func,
   onFinishFailed: PropTypes.func,
@@ -151,7 +151,11 @@ const Form = defineComponent({
       const { scrollToFirstError } = this;
       this.$emit('finishFailed', errorInfo);
       if (scrollToFirstError && errorInfo.errorFields.length) {
-        this.scrollToField(errorInfo.errorFields[0].name);
+        let scrollToFieldOptions: Options = {};
+        if (typeof scrollToFirstError === 'object') {
+          scrollToFieldOptions = scrollToFirstError;
+        }
+        this.scrollToField(errorInfo.errorFields[0].name, scrollToFieldOptions);
       }
     },
     validate(...args: any[]) {

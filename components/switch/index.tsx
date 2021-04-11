@@ -1,86 +1,85 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, onBeforeMount, ref, ExtractPropTypes, computed } from 'vue';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PropTypes from '../_util/vue-types';
-import hasProp, { getOptionProps, getComponent } from '../_util/props-util';
 import VcSwitch from '../vc-switch';
 import Wave from '../_util/wave';
 import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 import { tuple, withInstall } from '../_util/type';
+import { getPropsSlot } from '../_util/props-util';
+import Omit from 'omit.js';
+
+export const SwitchSizes = tuple('small', 'default', 'large');
+
+const switchProps = {
+  prefixCls: PropTypes.string,
+  size: PropTypes.oneOf(SwitchSizes),
+  disabled: PropTypes.looseBool,
+  checkedChildren: PropTypes.any,
+  unCheckedChildren: PropTypes.any,
+  tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  // defaultChecked: PropTypes.looseBool,
+  autofocus: PropTypes.looseBool,
+  loading: PropTypes.looseBool,
+  checked: PropTypes.looseBool,
+};
+
+export type SwitchProps = Partial<ExtractPropTypes<typeof switchProps>>;
 
 const Switch = defineComponent({
   name: 'ASwitch',
   __ANT_SWITCH: true,
   inheritAttrs: false,
-  props: {
-    prefixCls: PropTypes.string,
-    // size=default and size=large are the same
-    size: PropTypes.oneOf(tuple('small', 'default', 'large')),
-    disabled: PropTypes.looseBool,
-    checkedChildren: PropTypes.any,
-    unCheckedChildren: PropTypes.any,
-    tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    checked: PropTypes.looseBool,
-    defaultChecked: PropTypes.looseBool,
-    autofocus: PropTypes.looseBool,
-    loading: PropTypes.looseBool,
-    onChange: PropTypes.func,
-    onClick: PropTypes.func,
-    'onUpdate:checked': PropTypes.func,
-  },
-  // emits: ['change', 'click', 'update:checked'],
-  setup() {
-    return {
-      refSwitchNode: undefined,
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-  created() {
-    warning(
-      hasProp(this, 'checked') || !('value' in this.$attrs),
-      'Switch',
-      '`value` is not validate prop, do you mean `checked`?',
-    );
-  },
-  methods: {
-    focus() {
-      this.refSwitchNode?.focus();
-    },
-    blur() {
-      this.refSwitchNode?.blur();
-    },
-    saveRef(c) {
-      this.refSwitchNode = c;
-    },
-  },
+  props: switchProps,
+  setup(props: SwitchProps, { attrs, slots, expose }) {
+    const configProvider = inject('configProvider', defaultConfigProvider);
+    const refSwitchNode = ref();
 
-  render() {
-    const { prefixCls: customizePrefixCls, size, loading, disabled, ...restProps } = getOptionProps(
-      this,
-    );
-    const { getPrefixCls } = this.configProvider;
-    const prefixCls = getPrefixCls('switch', customizePrefixCls);
-    const { $attrs } = this;
-    const classes = {
-      [$attrs.class as string]: $attrs.class,
-      [`${prefixCls}-small`]: size === 'small',
-      [`${prefixCls}-loading`]: loading,
+    const focus = () => {
+      refSwitchNode.value?.focus();
     };
-    const loadingIcon = loading ? <LoadingOutlined class={`${prefixCls}-loading-icon`} /> : null;
-    const switchProps = {
-      ...restProps,
-      ...$attrs,
-      prefixCls,
-      loadingIcon,
-      checkedChildren: getComponent(this, 'checkedChildren'),
-      unCheckedChildren: getComponent(this, 'unCheckedChildren'),
-      disabled: disabled || loading,
-      class: classes,
-      ref: this.saveRef,
+    const blur = () => {
+      refSwitchNode.value?.blur();
     };
-    return (
+
+    expose({ focus, blur });
+
+    onBeforeMount(() => {
+      if ('defaultChecked' in attrs) {
+        console.warn(
+          `[antdv: Switch]: 'defaultChecked' will be obsolete, please use 'v-model:checked'`,
+        );
+      }
+      warning(
+        !('value' in attrs),
+        'Switch',
+        '`value` is not validate prop, do you mean `checked`?',
+      );
+    });
+    const { getPrefixCls } = configProvider;
+    const prefixCls = computed(() => {
+      return getPrefixCls('switch', props.prefixCls);
+    });
+    return () => (
       <Wave insertExtraNode>
-        <VcSwitch {...switchProps} />
+        <VcSwitch
+          {...Omit(props, ['prefixCls', 'size', 'loading', 'disabled'])}
+          {...attrs}
+          checked={props.checked}
+          prefixCls={prefixCls.value}
+          loadingIcon={
+            props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null
+          }
+          checkedChildren={getPropsSlot(slots, props, 'checkedChildren')}
+          unCheckedChildren={getPropsSlot(slots, props, 'unCheckedChildren')}
+          disabled={props.disabled || props.loading}
+          class={{
+            [attrs.class as string]: attrs.class,
+            [`${prefixCls.value}-small`]: props.size === 'small',
+            [`${prefixCls.value}-loading`]: props.loading,
+          }}
+          ref={refSwitchNode}
+        />
       </Wave>
     );
   },

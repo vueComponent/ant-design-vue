@@ -88,6 +88,15 @@ export default {
     }
   },
   methods: {
+    onBlur(e) {
+      // fix this isssue: https://github.com/vueComponent/ant-design-vue/issues/3816
+      // reference: https://github.com/vuejs/vue/issues/5847 and https://github.com/vuejs/vue/issues/8431
+      this.$forceUpdate();
+
+      const { blur } = getListeners(this);
+      blur && blur(e);
+    },
+
     focus() {
       this.$refs.input.focus();
     },
@@ -152,6 +161,7 @@ export default {
           keydown: handleKeyDown,
           input: handleChange,
           change: noop,
+          blur: this.onBlur,
         },
         class: getInputClassName(prefixCls, size, disabled),
         ref: 'input',
@@ -196,6 +206,7 @@ export default {
           input: this.handleChange,
           keydown: this.handleKeyDown,
           change: noop,
+          blur: this.onBlur,
         },
       };
       return <TextArea {...textareaProps} ref="input" />;

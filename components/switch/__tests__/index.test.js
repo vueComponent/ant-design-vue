@@ -9,7 +9,11 @@ describe('Switch', () => {
   mountTest(Switch);
 
   it('should has click wave effect', async () => {
-    const wrapper = mount(Switch);
+    const wrapper = mount({
+      render() {
+        return <Switch />;
+      },
+    });
     wrapper.find('.ant-switch').trigger('click');
     await new Promise(resolve => setTimeout(resolve, 0));
     expect(wrapper.html()).toMatchSnapshot();
@@ -19,7 +23,11 @@ describe('Switch', () => {
     resetWarned();
 
     const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-    mount(Switch, { props: { value: '' } });
+    mount({
+      render() {
+        return <Switch value="" />;
+      },
+    });
     expect(errorSpy).toHaveBeenCalledWith(
       'Warning: [antdv: Switch] `value` is not validate prop, do you mean `checked`?',
     );

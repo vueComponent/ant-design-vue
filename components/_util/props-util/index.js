@@ -389,6 +389,10 @@ function isValidElement(element) {
   return element && element.__v_isVNode && typeof element.type !== 'symbol'; // remove text node
 }
 
+function getPropsSlot(slots, props, prop = 'default') {
+  return slots[prop]?.() ?? props[prop];
+}
+
 export {
   splitAttrs,
   hasProp,
@@ -411,5 +415,6 @@ export {
   getAllChildren,
   findDOMNode,
   flattenChildren,
+  getPropsSlot,
 };
 export default hasProp;

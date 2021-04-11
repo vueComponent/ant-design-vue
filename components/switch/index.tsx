@@ -1,7 +1,16 @@
-import { defineComponent, inject, onBeforeMount, ref, ExtractPropTypes, computed } from 'vue';
+import {
+  defineComponent,
+  inject,
+  onBeforeMount,
+  ref,
+  ExtractPropTypes,
+  computed,
+  onMounted,
+  nextTick,
+} from 'vue';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PropTypes from '../_util/vue-types';
-import VcSwitch from '../vc-switch';
+import KeyCode from '../_util/KeyCode';
 import Wave from '../_util/wave';
 import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
@@ -18,7 +27,7 @@ const switchProps = {
   checkedChildren: PropTypes.any,
   unCheckedChildren: PropTypes.any,
   tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  // defaultChecked: PropTypes.looseBool,
+  defaultChecked: PropTypes.looseBool,
   autofocus: PropTypes.looseBool,
   loading: PropTypes.looseBool,
   checked: PropTypes.looseBool,
@@ -31,10 +40,24 @@ const Switch = defineComponent({
   __ANT_SWITCH: true,
   inheritAttrs: false,
   props: switchProps,
-  setup(props: SwitchProps, { attrs, slots, expose }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
-    const refSwitchNode = ref();
+  emits: ['update:checked', 'mouseup', 'change', 'click', 'keydown'],
+  setup(props: SwitchProps, { attrs, slots, expose, emit }) {
+    onBeforeMount(() => {
+      warning(
+        !('defaultChecked' in attrs),
+        'Switch',
+        `'defaultChecked' is deprecated, please use 'v-model:checked'`,
+      );
+      warning(
+        !('value' in attrs),
+        'Switch',
+        '`value` is not validate prop, do you mean `checked`?',
+      );
+    });
 
+    const configProvider = inject('configProvider', defaultConfigProvider);
+    const { getPrefixCls } = configProvider;
+    const refSwitchNode = ref();
     const focus = () => {
       refSwitchNode.value?.focus();
     };
@@ -44,42 +67,85 @@ const Switch = defineComponent({
 
     expose({ focus, blur });
 
-    onBeforeMount(() => {
-      if ('defaultChecked' in attrs) {
-        console.warn(
-          `[antdv: Switch]: 'defaultChecked' will be obsolete, please use 'v-model:checked'`,
-        );
-      }
-      warning(
-        !('value' in attrs),
-        'Switch',
-        '`value` is not validate prop, do you mean `checked`?',
-      );
-    });
-    const { getPrefixCls } = configProvider;
     const prefixCls = computed(() => {
       return getPrefixCls('switch', props.prefixCls);
     });
+    const checked = computed(() => {
+      return 'checked' in props ? !!props.checked : !!props.defaultChecked;
+    });
+
+    onMounted(() => {
+      nextTick(() => {
+        if (props.autofocus && !props.disabled) {
+          refSwitchNode.value.focus();
+        }
+      });
+    });
+
+    const setChecked = (check: boolean, e: MouseEvent | KeyboardEvent) => {
+      if (props.disabled) {
+        return;
+      }
+      emit('update:checked', check);
+      emit('change', check, e);
+    };
+
+    const handleClick = (e: MouseEvent) => {
+      focus();
+      const newChecked = !checked.value;
+      setChecked(newChecked, e);
+      emit('click', newChecked, e);
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.keyCode === KeyCode.LEFT) {
+        setChecked(false, e);
+      } else if (e.keyCode === KeyCode.RIGHT) {
+        setChecked(true, e);
+      }
+      emit('keydown', e);
+    };
+
+    const handleMouseUp = (e: MouseEvent) => {
+      refSwitchNode.value?.blur();
+      emit('mouseup', e);
+    };
     return () => (
       <Wave insertExtraNode>
-        <VcSwitch
-          {...Omit(props, ['prefixCls', 'size', 'loading', 'disabled'])}
+        <button
+          {...Omit(props, [
+            'prefixCls',
+            'checkedChildren',
+            'unCheckedChildren',
+            'checked',
+            'autofocus',
+            'defaultChecked',
+          ])}
           {...attrs}
-          checked={props.checked}
-          prefixCls={prefixCls.value}
-          loadingIcon={
-            props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null
-          }
-          checkedChildren={getPropsSlot(slots, props, 'checkedChildren')}
-          unCheckedChildren={getPropsSlot(slots, props, 'unCheckedChildren')}
+          onKeydown={handleKeyDown}
+          onClick={handleClick}
+          onMouseup={handleMouseUp}
+          type="button"
+          role="switch"
+          aria-checked={checked.value}
           disabled={props.disabled || props.loading}
           class={{
             [attrs.class as string]: attrs.class,
+            [prefixCls.value]: true,
             [`${prefixCls.value}-small`]: props.size === 'small',
             [`${prefixCls.value}-loading`]: props.loading,
+            [`${prefixCls.value}-checked`]: checked.value,
+            [`${prefixCls.value}-disabled`]: props.disabled,
           }}
           ref={refSwitchNode}
-        />
+        >
+          {props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null}
+          <span class={`${prefixCls.value}-inner`}>
+            {checked.value
+              ? getPropsSlot(slots, props, 'checkedChildren')
+              : getPropsSlot(slots, props, 'unCheckedChildren')}
+          </span>
+        </button>
       </Wave>
     );
   },

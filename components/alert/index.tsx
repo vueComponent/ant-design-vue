@@ -11,15 +11,11 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { getTransitionProps, Transition } from '../_util/transition';
-import { isValidElement } from '../_util/props-util';
+import { isValidElement, getPropsSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
 
 function noop() {}
-
-function getDefaultSlot(slots: Record<string, any>, props: Record<string, any>, prop: string) {
-  return slots[prop]?.() ?? props[prop];
-}
 
 const iconMapFilled = {
   success: CheckCircleFilled,
@@ -39,7 +35,7 @@ const AlertTypes = tuple('success', 'info', 'warning', 'error');
 
 export type AlertType = typeof AlertTypes[number];
 
-const alertProps = () => ({
+const alertProps = {
   /**
    * Type of Alert styles, options: `success`, `info`, `warning`, `error`
    */
@@ -52,8 +48,6 @@ const alertProps = () => ({
   message: PropTypes.VNodeChild,
   /** Additional content of Alert */
   description: PropTypes.VNodeChild,
-  /** Callback when close Alert */
-  // onClose?: React.MouseEventHandler<HTMLAnchorElement>;
   /** Trigger when animation ending of Alert */
   afterClose: PropTypes.func.def(noop),
   /** Whether to show icon */
@@ -62,14 +56,14 @@ const alertProps = () => ({
   banner: PropTypes.looseBool,
   icon: PropTypes.VNodeChild,
   onClose: PropTypes.VNodeChild,
-});
+};
 
-export type AlertProps = Partial<ExtractPropTypes<ReturnType<typeof alertProps>>>;
+export type AlertProps = Partial<ExtractPropTypes<typeof alertProps>>;
 
 const Alert = defineComponent({
   name: 'AAlert',
   inheritAttrs: false,
-  props: alertProps(),
+  props: alertProps,
   emits: ['close'],
   setup(props, { slots, emit, attrs, expose }) {
     const configProvider = inject('configProvider', defaultConfigProvider);
@@ -106,10 +100,10 @@ const Alert = defineComponent({
 
       let { closable, type, showIcon } = props;
 
-      const closeText = getDefaultSlot(slots, props, 'closeText');
-      const description = getDefaultSlot(slots, props, 'description');
-      const message = getDefaultSlot(slots, props, 'message');
-      const icon = getDefaultSlot(slots, props, 'icon');
+      const closeText = getPropsSlot(slots, props, 'closeText');
+      const description = getPropsSlot(slots, props, 'description');
+      const message = getPropsSlot(slots, props, 'message');
+      const icon = getPropsSlot(slots, props, 'icon');
 
       // banner模式默认有 Icon
       showIcon = banner && showIcon === undefined ? true : showIcon;

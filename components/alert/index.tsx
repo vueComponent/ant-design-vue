@@ -31,7 +31,7 @@ const iconMapOutlined = {
   warning: ExclamationCircleOutlined,
 };
 
-export const AlertTypes = tuple('success', 'info', 'warning', 'error');
+const AlertTypes = tuple('success', 'info', 'warning', 'error');
 
 export type AlertType = typeof AlertTypes[number];
 

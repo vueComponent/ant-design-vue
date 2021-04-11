@@ -1,6 +1,5 @@
 import PropTypes from '../_util/vue-types';
 import ScrollNumber from './ScrollNumber';
-import { PresetColorTypes } from '../_util/colors';
 import classNames from '../_util/classNames';
 import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
@@ -10,6 +9,7 @@ import { defaultConfigProvider } from '../config-provider';
 import { inject, defineComponent, CSSProperties, VNode, App, Plugin } from 'vue';
 import { tuple } from '../_util/type';
 import Ribbon from './Ribbon';
+import { isPresetColor } from './utils';
 
 const BadgeProps = {
   /** Number to show in badge */
@@ -28,9 +28,6 @@ const BadgeProps = {
   numberStyle: PropTypes.style,
   title: PropTypes.string,
 };
-function isPresetColor(color?: string): boolean {
-  return (PresetColorTypes as string[]).indexOf(color) !== -1;
-}
 
 const Badge = defineComponent({
   name: 'ABadge',

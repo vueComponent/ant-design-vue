@@ -64,6 +64,9 @@ export default {
       this.value = val;
     },
     closeTopBanner() {},
+    changeVersion() {
+      location.href = `https://2x.antdv.com${this.$route.fullPath}`;
+    },
   },
   render() {
     const name = this.name;
@@ -179,7 +182,7 @@ export default {
             </a-button>
             <a-select size="small" defaultValue={packageInfo.version} class="version">
               <a-select-option value={packageInfo.version}>{packageInfo.version}</a-select-option>
-              <a-select-option value="2.x" onClick={() => (location.href = 'https://2x.antdv.com')}>
+              <a-select-option value="2.x" onClick={this.changeVersion}>
                 2.x
               </a-select-option>
             </a-select>

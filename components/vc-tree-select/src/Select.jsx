@@ -879,7 +879,37 @@ const Select = defineComponent({
       const { keyCode } = event;
 
       if (KeyCode.BACKSPACE === keyCode && this.isMultiple() && !searchValue && valueList.length) {
-        const lastValue = valueList[valueList.length - 1].value;
+        // cache result
+        let tempMap = new WeakMap();
+        // if childrens‘s status is select all, then remove parent 
+        let lastValue = valueList[valueList.length - 1].value;
+        const lastValueParent = valueEntities[lastValue].parent;
+        //every children include node's value or node's disabled is true
+        function dfs (children) {
+          if(tempMap.get(children)) return true;
+          for(let i = 0; i < children.length; i++){
+            const item = children[i];
+            if(item.children && item.children.length) {
+              if(!dfs(item.children)){
+                return false;
+              }
+            }
+            if(!valueList.some( j => j.value === item.value || item.disabled === true)) {
+              return false;
+            }
+          }
+          tempMap.set(children, true);
+          return true;
+        }
+        const isAllChoise = dfs(lastValueParent.children);
+        if (isAllChoise) {
+          let cur = lastValueParent.parent;
+          lastValue = lastValueParent.value;
+          while(cur) {
+            dfs(cur.children) && (lastValue = cur.value);
+            cur = cur.parent;
+          }
+        }
         this.onMultipleSelectorRemove(event, lastValue);
       }
     },

@@ -56,6 +56,7 @@ export function traverseTreeNodes(treeNodes, callback) {
   function processNode(node, index, parent) {
     const children = node ? getSlot(node) : treeNodes;
     const pos = node ? getPosition(parent.pos, index) : 0;
+    const disabled = node ? node.props.disabled : false
 
     // Filter children
     const childList = getNodeChildren(children);
@@ -71,6 +72,7 @@ export function traverseTreeNodes(treeNodes, callback) {
         index,
         pos,
         key,
+        disabled,
         parentPos: parent.node ? parent.pos : null,
       };
       callback(data);

@@ -194,8 +194,8 @@ export function convertTreeToEntities(
   }
 
   traverseTreeNodes(treeNodes, item => {
-    const { node, index, pos, key, parentPos } = item;
-    const entity = { node, index, key, pos };
+    const { node, index, pos, key, parentPos, disabled } = item;
+    const entity = { node, index, key, pos, disabled };
 
     posEntities.set(pos, entity);
     keyEntities.set(key, entity);

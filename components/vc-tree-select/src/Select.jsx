@@ -901,7 +901,7 @@ const Select = defineComponent({
           tempMap.set(children, true);
           return true;
         }
-        const isAllChoise = dfs(lastValueParent.children);
+        const isAllChoise = lastValueParent && dfs(lastValueParent.children);
         if (isAllChoise) {
           let cur = lastValueParent.parent;
           lastValue = lastValueParent.value;

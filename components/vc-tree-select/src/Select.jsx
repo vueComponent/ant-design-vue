@@ -874,7 +874,7 @@ const Select = defineComponent({
     },
 
     onSearchInputKeyDown(event) {
-      const { _searchValue: searchValue, _valueList: valueList } = this.$data;
+      const { _searchValue: searchValue, _valueList: valueList, _valueEntities: valueEntities } = this.$data;
 
       const { keyCode } = event;
 

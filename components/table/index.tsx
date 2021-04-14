@@ -2,7 +2,7 @@ import { App, defineComponent, Plugin } from 'vue';
 import T, { defaultTableProps } from './Table';
 import Column from './Column';
 import ColumnGroup from './ColumnGroup';
-import { getOptionProps, getKey, getPropsData, getSlot } from '../_util/props-util';
+import { getOptionProps, getKey, getPropsData, getSlot, flattenChildren } from '../_util/props-util';
 
 const Table = defineComponent({
   name: 'ATable',
@@ -12,8 +12,9 @@ const Table = defineComponent({
   props: defaultTableProps,
   methods: {
     normalize(elements = []) {
+      const flattenElements = flattenChildren(elements)
       const columns = [];
-      elements.forEach(element => {
+      flattenElements.forEach(element => {
         if (!element) {
           return;
         }

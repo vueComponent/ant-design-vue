@@ -70,7 +70,7 @@ export default defineComponent({
         fileList: nextFileList,
       });
       // fix ie progress
-      if (!window.File || process.env.TEST_IE) {
+      if (!window.File || (typeof process === 'object' && process.env.TEST_IE)) {
         this.autoUpdateProgress(0, targetItem);
       }
     },

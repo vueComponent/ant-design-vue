@@ -1,6 +1,6 @@
 import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
-import { isMobile } from 'is-mobile';
+import isMobile from '../vc-menu/utils/isMobile';
 import Input from './Input';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
@@ -43,7 +43,7 @@ export default defineComponent({
         return;
       }
       this.$emit('search', this.input.stateValue, e);
-      if (!isMobile({ tablet: true })) {
+      if (!isMobile.tablet) {
         this.input.focus();
       }
     },

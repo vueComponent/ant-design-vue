@@ -252,6 +252,7 @@ const Preview = defineComponent({
         afterClose={onAfterClose}
         visible={props.visible}
         wrapClassName={wrapClassName}
+        getContainer={props.getContainer}
       >
         <ul class={`${props.prefixCls}-operations`}>
           {tools.map(({ icon: IconType, onClick, type, disabled }) => (

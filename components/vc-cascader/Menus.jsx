@@ -2,6 +2,7 @@ import { getComponent, findDOMNode } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import arrayTreeFilter from 'array-tree-filter';
 import BaseMixin from '../_util/BaseMixin';
+import isEqual from 'lodash-es/isEqual';
 
 export default {
   name: 'CascaderMenus',
@@ -116,7 +117,7 @@ export default {
       const options = this.options;
       return arrayTreeFilter(
         options,
-        (o, level) => o[this.getFieldName('value')] === activeValue[level],
+        (o, level) => isEqual(o[this.getFieldName('value')], activeValue[level]),
         { childrenKeyName: this.getFieldName('children') },
       );
     },
@@ -157,7 +158,7 @@ export default {
 
     isActiveOption(option, menuIndex) {
       const { activeValue = [] } = this;
-      return activeValue[menuIndex] === option[this.getFieldName('value')];
+      return isEqual(activeValue[menuIndex], option[this.getFieldName('value')]);
     },
     saveMenuItem(index) {
       return node => {

@@ -213,7 +213,6 @@
     "lodash-es": "^4.17.15",
     "moment": "^2.27.0",
     "omit.js": "^2.0.0",
-    "resize-observer-polyfill": "^1.5.1",
     "scroll-into-view-if-needed": "^2.2.25",
     "shallow-equal": "^1.0.0",
     "vue-types": "^3.0.0",

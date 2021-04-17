@@ -1,5 +1,4 @@
 import PropTypes from '../_util/vue-types';
-import ResizeObserver from 'resize-observer-polyfill';
 import SubMenu from './SubMenu';
 import BaseMixin from '../_util/BaseMixin';
 import { getWidth, setStyle, menuAllProps } from './util';

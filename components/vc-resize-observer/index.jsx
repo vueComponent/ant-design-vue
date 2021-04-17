@@ -1,5 +1,4 @@
 // based on rc-resize-observer 0.1.3
-import ResizeObserver from 'resize-observer-polyfill';
 import { defineComponent } from 'vue';
 import BaseMixin from '../_util/BaseMixin';
 import { findDOMNode } from '../_util/props-util';

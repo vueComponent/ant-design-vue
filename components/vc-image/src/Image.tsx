@@ -281,7 +281,7 @@ const ImageInternal = defineComponent({
               mousePosition={mousePosition.value}
               src={mergedSrc}
               alt={alt}
-              getContainer={getPreviewContainer}
+              getContainer={getPreviewContainer.value}
             />
           )}
         </>

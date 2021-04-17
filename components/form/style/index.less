@@ -362,8 +362,11 @@ form {
 
 //== Inline Form
 .@{form-prefix-cls}-inline {
+  display: flex;
+  flex-wrap: wrap;
   .@{form-prefix-cls}-item {
-    display: inline-block;
+    flex: none;
+    flex-wrap: nowrap;
     margin-right: 16px;
     margin-bottom: 0;
 
@@ -375,6 +378,9 @@ form {
     > .@{form-prefix-cls}-item-label {
       display: inline-block;
       vertical-align: top;
+    }
+    > .@{form-prefix-cls}-item-label {
+      flex: none;
     }
   }
 

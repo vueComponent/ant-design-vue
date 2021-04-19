@@ -5,7 +5,7 @@ const triggerType = PropTypes.oneOf(tuple('hover', 'focus', 'click', 'contextmen
 export default () => ({
   trigger: PropTypes.oneOfType([triggerType, PropTypes.arrayOf(triggerType)]).def('hover'),
   visible: PropTypes.looseBool,
-  defaultVisible: PropTypes.looseBool,
+  // defaultVisible: PropTypes.looseBool,
   placement: PropTypes.oneOf(
     tuple(
       'top',

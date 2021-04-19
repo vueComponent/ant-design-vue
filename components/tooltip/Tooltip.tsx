@@ -54,7 +54,7 @@ export default defineComponent({
 
     const handleVisibleChange = (bool: boolean) => {
       visible.value = isNoTitle() ? false : bool;
-      if (isNoTitle()) {
+      if (!isNoTitle()) {
         emit('update:visible', bool);
         emit('visibleChange', bool);
       }
@@ -62,7 +62,6 @@ export default defineComponent({
 
     const isNoTitle = () => {
       const title = getPropsSlot(slots, props, 'title');
-      console.log(title);
       return !title && title !== 0;
     };
 
@@ -70,7 +69,11 @@ export default defineComponent({
       return tooltip.value.getPopupDomNode();
     };
 
-    expose({ getPopupDomNode });
+    const getVisible = () => {
+      return !!visible.value;
+    };
+
+    expose({ getPopupDomNode, getVisible });
 
     const getTooltipPlacements = () => {
       const { builtinPlacements, arrowPointAtCenter, autoAdjustOverflow } = props;
@@ -210,12 +213,12 @@ export default defineComponent({
         builtinPlacements: getTooltipPlacements(),
         overlay: getOverlay(),
         visible: visible.value,
-        ref: tooltip.value,
+        ref: tooltip,
         overlayClassName: customOverlayClassName,
         overlayInnerStyle: formattedOverlayInnerStyle,
         arrowContent: <span class={`${prefixCls}-arrow-content`} style={arrowContentStyle}></span>,
         onVisibleChange: handleVisibleChange,
-        onPopupAlign: onPopupAlign,
+        onPopupAlign,
       };
       return (
         <VcTooltip {...vcTooltipProps}>

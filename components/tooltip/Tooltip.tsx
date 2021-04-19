@@ -183,7 +183,7 @@ export default defineComponent({
       const { getPopupContainer: getContextPopupContainer } = configProvider;
       const getPrefixCls = configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
-      let children = filterEmpty(slots?.default?.());
+      let children = filterEmpty(slots.default?.()) ?? null;
       children = children.length === 1 ? children[0] : children;
       // Hide tooltip when there is no title
       if (!('visible' in props) && isNoTitle()) {

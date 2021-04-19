@@ -1,4 +1,4 @@
-import { placements as rcPlacements } from '../vc-tooltip/placements';
+import { placements as rcPlacements } from '../vc-tooltip/src/placements';
 
 const autoAdjustOverflowEnabled = {
   adjustX: 1,

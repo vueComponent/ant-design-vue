@@ -8,7 +8,7 @@ import warning from '../_util/warning';
 import { getPropsSlot, getStyle, filterEmpty, isValidElement } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { defaultConfigProvider } from '../config-provider';
-import abstractTooltipProps from './abstractTooltipProps';
+import abstractTooltipProps, { triggerTypes, placementTypes } from './abstractTooltipProps';
 
 const splitObject = (obj: any, keys: string[]) => {
   const picked = {};
@@ -29,6 +29,10 @@ const tooltipProps = {
   ...props,
   title: PropTypes.VNodeChild,
 };
+
+export type TriggerTypes = typeof triggerTypes[number];
+
+export type PlacementTypes = typeof placementTypes[number];
 
 export type TooltipProps = Partial<ExtractPropTypes<typeof tooltipProps>>;
 

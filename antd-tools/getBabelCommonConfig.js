@@ -8,7 +8,7 @@ module.exports = function(modules) {
         isTSX: true,
       },
     ],
-    [resolve('@vue/babel-plugin-jsx'), { mergeProps: false }],
+    [resolve('@vue/babel-plugin-jsx'), { mergeProps: false, enableObjectSlots: false }],
     resolve('@babel/plugin-proposal-optional-chaining'),
     resolve('@babel/plugin-transform-object-assign'),
     resolve('@babel/plugin-proposal-object-rest-spread'),

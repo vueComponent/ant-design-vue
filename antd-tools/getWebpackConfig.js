@@ -97,7 +97,10 @@ function getWebpackConfig(modules) {
                       options: {
                         presets: [resolve('@babel/preset-env')],
                         plugins: [
-                          [resolve('@vue/babel-plugin-jsx'), { mergeProps: false }],
+                          [
+                            resolve('@vue/babel-plugin-jsx'),
+                            { mergeProps: false, enableObjectSlots: false },
+                          ],
                           resolve('@babel/plugin-proposal-object-rest-spread'),
                         ],
                       },

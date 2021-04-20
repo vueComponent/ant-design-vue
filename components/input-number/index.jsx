@@ -48,7 +48,10 @@ const InputNumber = {
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, size, ...others } = getOptionProps(this);
+    const { prefixCls: customizePrefixCls, size, ...others } = {
+      ...getOptionProps(this),
+      ...this.$attrs,
+    };
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('input-number', customizePrefixCls);
 

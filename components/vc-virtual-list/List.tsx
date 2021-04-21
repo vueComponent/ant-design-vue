@@ -134,10 +134,11 @@ const List = defineComponent({
 
     // ================================ Height ================================
     const [setInstance, collectHeight, heights] = useHeights(getKey, null, null);
-    // ========================== Visible Calculation =========================
-    const calRes = computed(() => {
+
+    const calRes = ref();
+    watchEffect(() => {
       if (!useVirtual.value) {
-        return {
+        calRes.value = {
           scrollHeight: undefined,
           start: 0,
           end: state.mergedData.length - 1,
@@ -147,7 +148,7 @@ const List = defineComponent({
 
       // Always use virtual scroll bar in avoid shaking
       if (!inVirtual.value) {
-        return {
+        calRes.value = {
           scrollHeight: fillerInnerRef.value?.offsetHeight || 0,
           start: 0,
           end: state.mergedData.length - 1,
@@ -193,13 +194,14 @@ const List = defineComponent({
 
       // Give cache to improve scroll experience
       endIndex = Math.min(endIndex + 1, state.mergedData.length);
-      return {
+      calRes.value = {
         scrollHeight: itemTop,
         start: startIndex,
         end: endIndex,
         offset: startOffset,
       };
     });
+
     // =============================== In Range ===============================
     const maxScrollHeight = computed(() => calRes.value.scrollHeight! - props.height!);
 

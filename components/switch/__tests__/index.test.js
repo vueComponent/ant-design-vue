@@ -3,6 +3,7 @@ import { mount } from '@vue/test-utils';
 import focusTest from '../../../tests/shared/focusTest';
 import { resetWarned } from '../../_util/warning';
 import mountTest from '../../../tests/shared/mountTest';
+import { ref } from 'vue';
 
 describe('Switch', () => {
   focusTest(Switch);
@@ -10,8 +11,16 @@ describe('Switch', () => {
 
   it('should has click wave effect', async () => {
     const wrapper = mount({
-      render() {
-        return <Switch />;
+      setup() {
+        const checked = ref(false);
+        return () => {
+          return (
+            <Switch
+              checked={checked.value}
+              onChange={() => (checked.value = !checked.value)}
+            ></Switch>
+          );
+        };
       },
     });
     wrapper.find('.ant-switch').trigger('click');

@@ -253,7 +253,7 @@ describe('Typography', () => {
 
     describe('editable', async () => {
       function testStep(name, submitFunc, expectFunc) {
-        it(name, async () => {
+        fit(name, async () => {
           const onStart = jest.fn();
           const onChange = jest.fn();
 
@@ -286,7 +286,7 @@ describe('Typography', () => {
 
           await sleep(20);
           wrapper.find('textarea').element.value = 'Bamboo';
-          wrapper.find('textarea').trigger('change');
+          //wrapper.find('textarea').trigger('change');
 
           if (submitFunc) {
             submitFunc(wrapper);

@@ -42,7 +42,7 @@ export const DescriptionsItem = defineComponent({
   },
 });
 
-const DEFAULT_COLUMN_MAP: Record<Breakpoint, number> = {
+const DEFAULT_COLUMN_MAP: Partial<Record<Breakpoint, number>> = {
   xxl: 3,
   xl: 3,
   lg: 3,

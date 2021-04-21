@@ -1144,7 +1144,7 @@ export default defineComponent({
       getPopupContainer: contextGetPopupContainer,
       transformCellText,
     }) {
-      const { showHeader, locale, getPopupContainer, ...restProps } = {
+      const { showHeader, locale, getPopupContainer, style, ...restProps } = {
         ...getOptionProps(this),
         ...this.$attrs,
       } as any;

@@ -38,7 +38,7 @@ export default {
     const innerBodyStyle = {};
 
     if (scroll.x || fixed) {
-      bodyStyle.overflowX = bodyStyle.overflowX || 'scroll';
+      bodyStyle.overflowX = bodyStyle.overflowX || 'auto';
       // Fix weired webkit render bug
       // https://github.com/ant-design/ant-design/issues/7783
       bodyStyle.WebkitTransform = 'translate3d (0, 0, 0)';

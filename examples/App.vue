@@ -32,14 +32,27 @@
         { key: 'tab2', tab: 'tab2' },
       ]"
     />
+    <a-date-picker :disabledDate="disabled"></a-date-picker>
+    <a-date-picker mode="year"></a-date-picker>
+    <a-date-picker mode="month" :disabledDate="disabledMonth"></a-date-picker>
   </div>
 </template>
 <script>
+import moment from 'moment';
+
 export default {
   data() {
     return {
       text: `A dog is a type of domesticated animal. Known for its loyalty and faithfulness, it can be found as a welcome guest in many households across the world.`,
     };
+  },
+  methods: {
+    disabled(current) {
+      return current && current > moment().endOf('day');
+    },
+    disabledMonth(current) {
+      return current && current > moment().endOf('month');
+    },
   },
 };
 </script>

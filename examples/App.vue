@@ -32,9 +32,9 @@
         { key: 'tab2', tab: 'tab2' },
       ]"
     />
-    <a-date-picker :disabledDate="disabled"></a-date-picker>
-    <a-date-picker mode="year"></a-date-picker>
-    <a-date-picker mode="month" :disabledDate="disabledMonth"></a-date-picker>
+    <a-date-picker :disabled-date="disabled" />
+    <a-date-picker mode="year" />
+    <a-date-picker mode="month" :disabled-date="disabledMonth" />
   </div>
 </template>
 <script>

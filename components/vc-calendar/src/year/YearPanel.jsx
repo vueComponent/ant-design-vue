@@ -28,6 +28,7 @@ export default {
     defaultValue: PropTypes.object,
     locale: PropTypes.object,
     renderFooter: PropTypes.func,
+    disabledDate: PropTypes.func,
   },
   data() {
     this.nextDecade = goYear.bind(this, 10);
@@ -67,18 +68,26 @@ export default {
   },
 
   render() {
-    const { sValue: value, locale, renderFooter } = this;
+    const { sValue: value, locale, renderFooter, $props } = this;
     const decadePanelShow = getListeners(this).decadePanelShow || noop;
     const years = this.years();
     const currentYear = value.year();
     const startYear = parseInt(currentYear / 10, 10) * 10;
     const endYear = startYear + 9;
     const prefixCls = `${this.rootPrefixCls}-year-panel`;
+    const { disabledDate } = $props;
 
     const yeasEls = years.map((row, index) => {
       const tds = row.map(yearData => {
+        let disabled = false;
+        if (disabledDate) {
+          const testValue = value.clone();
+          testValue.year(yearData.year);
+          disabled = disabledDate(testValue);
+        }
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
+          [`${prefixCls}-cell-disabled`]: disabled,
           [`${prefixCls}-selected-cell`]: yearData.year === currentYear,
           [`${prefixCls}-last-decade-cell`]: yearData.year < startYear,
           [`${prefixCls}-next-decade-cell`]: yearData.year > endYear,
@@ -96,7 +105,7 @@ export default {
             role="gridcell"
             title={yearData.title}
             key={yearData.content}
-            onClick={clickHandler}
+            onClick={disabled ? noop : clickHandler}
             class={classNameMap}
           >
             <a class={`${prefixCls}-year`}>{yearData.content}</a>

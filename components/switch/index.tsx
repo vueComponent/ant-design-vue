@@ -31,10 +31,10 @@ const switchProps = {
   autofocus: PropTypes.looseBool,
   loading: PropTypes.looseBool,
   checked: PropTypes.looseBool,
-  change: PropTypes.func,
-  click: PropTypes.func,
-  keydown: PropTypes.func,
-  mouseup: PropTypes.func,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  onKeydown: PropTypes.func,
+  onMouseup: PropTypes.func,
   'onUpdate:checked': PropTypes.func
 };
 

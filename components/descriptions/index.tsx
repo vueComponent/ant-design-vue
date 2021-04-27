@@ -126,7 +126,7 @@ const descriptionsProps = {
   extra: PropTypes.VNodeChild,
   column: {
     type: [Number, Object] as PropType<number | Partial<Record<Breakpoint, number>>>,
-    default: () => DEFAULT_COLUMN_MAP,
+    default: (): number | Partial<Record<Breakpoint, number>> => DEFAULT_COLUMN_MAP,
   },
   layout: PropTypes.oneOf(tuple('horizontal', 'vertical')),
   colon: PropTypes.looseBool,
@@ -135,8 +135,9 @@ const descriptionsProps = {
 export type DescriptionsProps = HTMLAttributes &
   Partial<ExtractPropTypes<typeof descriptionsProps>>;
 
-const Descriptions = defineComponent<DescriptionsProps>({
+const Descriptions = defineComponent({
   name: 'ADescriptions',
+  props: descriptionsProps,
   Item: DescriptionsItem,
   setup(props, { slots }) {
     const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
@@ -214,8 +215,6 @@ const Descriptions = defineComponent<DescriptionsProps>({
     };
   },
 });
-
-Descriptions.props = descriptionsProps;
 
 Descriptions.install = function(app: App) {
   app.component(Descriptions.name, Descriptions);

@@ -31,6 +31,11 @@ const switchProps = {
   autofocus: PropTypes.looseBool,
   loading: PropTypes.looseBool,
   checked: PropTypes.looseBool,
+  onChange: PropTypes.func,
+  onClick: PropTypes.func,
+  onKeydown: PropTypes.func,
+  onMouseup: PropTypes.func,
+  'onUpdate:checked': PropTypes.func
 };
 
 export type SwitchProps = Partial<ExtractPropTypes<typeof switchProps>>;

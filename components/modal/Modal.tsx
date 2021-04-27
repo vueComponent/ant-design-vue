@@ -79,8 +79,8 @@ const modalProps = {
   maskClosable: PropTypes.looseBool,
   /** 强制渲染 Modal*/
   forceRender: PropTypes.looseBool,
-  okButtonProps: PropTypes.shape(buttonTypes),
-  cancelButtonProps: PropTypes.shape(buttonTypes),
+  okButtonProps: PropTypes.shape(buttonTypes).loose,
+  cancelButtonProps: PropTypes.shape(buttonTypes).loose,
   destroyOnClose: PropTypes.looseBool,
   wrapClassName: PropTypes.string,
   maskTransitionName: PropTypes.string,

@@ -9,7 +9,7 @@ const skeletonParagraphProps = {
   rows: PropTypes.number,
 };
 
-export const SkeletonParagraphProps = PropTypes.shape(skeletonParagraphProps);
+export const SkeletonParagraphProps = PropTypes.shape(skeletonParagraphProps).loose;
 
 export type ISkeletonParagraphProps = Partial<ExtractPropTypes<typeof skeletonParagraphProps>>;
 

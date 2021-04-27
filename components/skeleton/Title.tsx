@@ -6,7 +6,7 @@ const skeletonTitleProps = {
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-export const SkeletonTitleProps = PropTypes.shape(skeletonTitleProps);
+export const SkeletonTitleProps = PropTypes.shape(skeletonTitleProps).loose;
 
 export type ISkeletonTitleProps = Partial<ExtractPropTypes<typeof skeletonTitleProps>>;
 

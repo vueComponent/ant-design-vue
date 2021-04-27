@@ -155,7 +155,7 @@ export default defineComponent({
       for (let j = i; j < i + settings.rows * settings.slidesPerRow; j += settings.slidesPerRow) {
         const row = [];
         for (let k = j; k < j + settings.slidesPerRow; k += 1) {
-          if (settings.variableWidth && children[k].props.style) {
+          if (settings.variableWidth && children[k].props?.style) {
             currentWidth = children[k].props.style.width;
           }
           if (k >= children.length) break;

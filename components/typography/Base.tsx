@@ -189,7 +189,8 @@ const Base = defineComponent<InternalBlockProps>({
       onExpand?.(e);
     }
     // ================ Edit ================
-    function onEditClick() {
+    function onEditClick(e: MouseEvent) {
+      e.preventDefault();
       state.originContent = props.content;
       triggerEdit(true);
     }

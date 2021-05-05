@@ -180,8 +180,7 @@ export default defineComponent({
         color,
         overlayClassName,
       } = props;
-      const { getPopupContainer: getContextPopupContainer } = configProvider;
-      const getPrefixCls = configProvider.getPrefixCls;
+      const { getPopupContainer: getContextPopupContainer, getPrefixCls } = configProvider;
       const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
       let children = filterEmpty(slots.default?.()) ?? null;
       children = children.length === 1 ? children[0] : children;

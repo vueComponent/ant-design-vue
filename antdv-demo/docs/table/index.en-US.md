@@ -92,7 +92,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | filterMultiple | Whether multiple filters can be selected | boolean | `true` |  |
 | filters | Filter menu config | object\[] | - |  |
 | fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |  |
-| key | Unique key of this column, you can ignore this prop if you've set a unique `dataIndex` | string | - |  |
+| key | Unique key of this column, you can ignore this prop if you're not using [template style api](#components-table-demo-template-style-api) and you've set a unique `dataIndex` | string | - |  |
 | customRender | Renderer of the table cell. The return value should be a VNode, or an object for colSpan/rowSpan config | Function(text, record, index) {}\|slot-scope | - |  |
 | sorter | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction. If you need sort buttons only, set to `true` | Function\|boolean | - |  |
 | sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |  |

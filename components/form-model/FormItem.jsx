@@ -59,6 +59,7 @@ export const FormItemProps = {
   autoLink: PropTypes.bool,
   required: PropTypes.bool,
   validateStatus: PropTypes.oneOf(['', 'success', 'warning', 'error', 'validating']),
+  validateOnRuleChange: PropTypes.bool,
 };
 
 export default {
@@ -68,6 +69,7 @@ export default {
   props: initDefaultProps(FormItemProps, {
     hasFeedback: false,
     autoLink: true,
+    validateOnRuleChange: false,
   }),
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -108,10 +110,31 @@ export default {
       }
       return isRequired;
     },
+    fieldRules() {
+      return this.getRules();
+    },
   },
   watch: {
     validateStatus(val) {
       this.validateState = val;
+    },
+    validateOnRuleChange: {
+      handler(newVal) {
+        if (newVal) {
+          this.fileRulesUnWatch = this.$watch(
+            'fieldRules',
+            () => {
+              this.validate('');
+            },
+            { deep: true },
+          );
+        } else {
+          if (typeof this.fileRulesUnWatch === 'function') {
+            this.fileRulesUnWatch();
+          }
+        }
+      },
+      immediate: true,
     },
   },
   mounted() {
@@ -124,6 +147,9 @@ export default {
   beforeDestroy() {
     const { removeField } = this.FormContext;
     removeField && removeField(this);
+    if (typeof this.fileRulesUnWatch === 'function') {
+      this.fileRulesUnWatch();
+    }
   },
   methods: {
     validate(trigger, callback = noop) {
@@ -131,6 +157,8 @@ export default {
       const rules = this.getFilteredRule(trigger);
       if (!rules || rules.length === 0) {
         callback();
+        this.validateState = '';
+        this.validateMessage = '';
         return true;
       }
       this.validateState = 'validating';

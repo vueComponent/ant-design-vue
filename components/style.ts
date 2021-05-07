@@ -47,7 +47,6 @@ import './upload/style';
 import './layout/style';
 import './anchor/style';
 import './list/style';
-import './carousel/style';
 import './tree-select/style';
 import './drawer/style';
 import './skeleton/style';

@@ -38,6 +38,8 @@ According to the different value selected in the dropdown, the other two fields 
 </template>
 
 <script>
+import cloneDeep from 'lodash/cloneDeep';
+
 const formRules = {
   name: [
     {
@@ -60,7 +62,7 @@ export default {
         ctrl: 'opt1',
         desc: 'description for Activity form',
       },
-      rules: JSON.parse(JSON.stringify(formRules)),
+      rules: cloneDeep(formRules),
     };
   },
   methods: {
@@ -79,7 +81,7 @@ export default {
       this.nameRuleChange = false;
       this.descRuleChange = false;
       this.$nextTick(() => {
-        this.rules = JSON.parse(JSON.stringify(formRules));
+        this.rules = cloneDeep(formRules);
         this.$refs.ruleForm.resetFields();
         this.nameRuleChange = true;
         this.descRuleChange = true;

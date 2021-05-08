@@ -120,7 +120,7 @@ export default {
     },
     validateOnRuleChange: {
       handler(newVal) {
-        if (newVal && !this.FormContext.validateOnRuleChange) {
+        if (newVal) {
           this.fileRulesUnWatch = this.$watch(
             'fieldRules',
             function() {
@@ -155,8 +155,10 @@ export default {
       const rules = this.getFilteredRule(trigger);
       if (!rules || rules.length === 0) {
         callback();
-        this.validateState = '';
-        this.validateMessage = '';
+        if (trigger === '') {
+          this.validateState = '';
+          this.validateMessage = '';
+        }
         return true;
       }
       this.validateState = 'validating';

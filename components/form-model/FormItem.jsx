@@ -120,18 +120,16 @@ export default {
     },
     validateOnRuleChange: {
       handler(newVal) {
-        if (newVal) {
+        if (newVal && !this.FormContext.validateOnRuleChange) {
           this.fileRulesUnWatch = this.$watch(
             'fieldRules',
-            () => {
+            function() {
               this.validate('');
             },
             { deep: true },
           );
-        } else {
-          if (typeof this.fileRulesUnWatch === 'function') {
-            this.fileRulesUnWatch();
-          }
+        } else if (typeof this.fileRulesUnWatch === 'function') {
+          this.fileRulesUnWatch();
         }
       },
       immediate: true,

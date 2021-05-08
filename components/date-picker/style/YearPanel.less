@@ -46,6 +46,14 @@
 
 .@{calendar-prefix-cls}-year-panel-cell {
   text-align: center;
+  &-disabled .@{calendar-prefix-cls}-year-panel-year {
+    &,
+    &:hover {
+      color: @disabled-color;
+      background: @disabled-bg;
+      cursor: not-allowed;
+    }
+  }
 }
 
 .@{calendar-prefix-cls}-year-panel-year {

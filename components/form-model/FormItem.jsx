@@ -154,11 +154,11 @@ export default {
       this.validateDisabled = false;
       const rules = this.getFilteredRule(trigger);
       if (!rules || rules.length === 0) {
-        callback();
         if (trigger === '') {
           this.validateState = '';
           this.validateMessage = '';
         }
+        callback();
         return true;
       }
       this.validateState = 'validating';

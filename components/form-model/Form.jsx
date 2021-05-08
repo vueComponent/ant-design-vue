@@ -52,6 +52,7 @@ const Form = {
     layout: 'horizontal',
     hideRequiredMark: false,
     colon: true,
+    validateOnRuleChange: false,
   }),
   Item: FormItem,
   created() {

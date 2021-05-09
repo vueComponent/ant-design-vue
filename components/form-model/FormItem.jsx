@@ -1,5 +1,5 @@
 import AsyncValidator from 'async-validator';
-import cloneDeep from 'lodash/cloneDeep';
+import { cloneDeep, isEqual } from 'lodash';
 import PropTypes from '../_util/vue-types';
 import { ColProps } from '../grid/Col';
 import {
@@ -121,12 +121,14 @@ export default {
     validateOnRuleChange: {
       handler(newVal) {
         if (newVal) {
+          let oldRule = null;
           this.fileRulesUnWatch = this.$watch(
             'fieldRules',
-            function() {
-              this.validate('');
+            function(newRule) {
+              oldRule !== null && !isEqual(newRule, oldRule) && this.validate('');
+              oldRule = cloneDeep(newRule);
             },
-            { deep: true },
+            { deep: true, immediate: true },
           );
         } else if (typeof this.fileRulesUnWatch === 'function') {
           this.fileRulesUnWatch();

@@ -874,21 +874,25 @@ const Select = defineComponent({
     },
 
     onSearchInputKeyDown(event) {
-      const { _searchValue: searchValue, _valueList: valueList, _valueEntities: valueEntities } = this.$data;
+      const {
+        _searchValue: searchValue,
+        _valueList: valueList,
+        _valueEntities: valueEntities,
+      } = this.$data;
 
       const { keyCode } = event;
 
       if (KeyCode.BACKSPACE === keyCode && this.isMultiple() && !searchValue && valueList.length) {
         let lastValue = valueList[valueList.length - 1].value;
         const { treeCheckStrictly } = this.$props;
-        if(!treeCheckStrictly) {
+        if (!treeCheckStrictly) {
           let cur = valueEntities[lastValue];
-          while(cur) {
-            if(valueList.some(j => j.value === cur.value)) {
+          while (cur) {
+            if (valueList.some(j => j.value === cur.value)) {
               lastValue = cur.value;
               cur = cur.parent;
-            }else{
-              cur = null
+            } else {
+              cur = null;
             }
           }
         }

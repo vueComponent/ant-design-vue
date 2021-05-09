@@ -10,6 +10,16 @@
 
 ---
 
+## 2.1.4
+
+`2021-05-09`
+
+- 🐞 修复 `Table` 滚动错位问题 [#4045](https://github.com/vueComponent/ant-design-vue/issues/4045)
+- 🐞 修复 `Typography` editable 模式触发链接跳转问题 [#4105](https://github.com/vueComponent/ant-design-vue/issues/4105)
+- 🐞 修复 `Carousel` variableWidth 不生效问题 [#3977](https://github.com/vueComponent/ant-design-vue/issues/3977)
+- 🐞 修复 `TreeSelect` 无法通过键盘同时删除父子节点问题 [#3508](https://github.com/vueComponent/ant-design-vue/issues/3508)
+- 🐞 修复若干类型错误问题
+
 ## 2.1.3
 
 `2021-04-25`

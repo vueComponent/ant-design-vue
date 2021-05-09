@@ -27,7 +27,7 @@ This example shows how to fetch and present data from a remote server, and how t
 <script>
 import axios from 'axios';
 
-const queryData = (params) => {
+const queryData = params => {
   return axios.get('https://randomuser.me/api', { params: params });
 };
 const columns = [

@@ -41,15 +41,7 @@ describe('Avatar Render', () => {
       props: {
         src: 'http://error.url',
       },
-      sync: false,
       attachTo: 'body',
-    });
-    wrapper.vm.setScale = jest.fn(() => {
-      if (wrapper.vm.scale === 0.5) {
-        return;
-      }
-      wrapper.vm.scale = 0.5;
-      wrapper.vm.$forceUpdate();
     });
     await asyncExpect(() => {
       wrapper.find('img').trigger('error');
@@ -58,14 +50,7 @@ describe('Avatar Render', () => {
       const children = wrapper.findAll('.ant-avatar-string');
       expect(children.length).toBe(1);
       expect(children[0].text()).toBe('Fallback');
-      expect(wrapper.vm.setScale).toHaveBeenCalled();
     });
-    await asyncExpect(() => {
-      expect(global.document.body.querySelector('.ant-avatar-string').style.transform).toContain(
-        'scale(0.5)',
-      );
-      global.document.body.innerHTML = '';
-    }, 1000);
   });
   it('should handle onError correctly', async () => {
     global.document.body.innerHTML = '';
@@ -91,17 +76,17 @@ describe('Avatar Render', () => {
       },
     };
 
-    const wrapper = mount(Foo, { sync: false, attachTo: 'body' });
+    const wrapper = mount(Foo, { attachTo: 'body' });
     await asyncExpect(() => {
       // mock img load Error, since jsdom do not load resource by default
       // https://github.com/jsdom/jsdom/issues/1816
       wrapper.find('img').trigger('error');
     }, 0);
     await asyncExpect(() => {
-      expect(wrapper.findComponent({ name: 'AAvatar' }).vm.isImgExist).toBe(true);
+      expect(wrapper.find('img')).not.toBeNull();
     }, 0);
     await asyncExpect(() => {
-      expect(global.document.body.querySelector('img').getAttribute('src')).toBe(LOAD_SUCCESS_SRC);
+      expect(wrapper.find('img').attributes('src')).toBe(LOAD_SUCCESS_SRC);
     }, 0);
   });
 
@@ -126,9 +111,8 @@ describe('Avatar Render', () => {
     await asyncExpect(() => {
       wrapper.find('img').trigger('error');
     }, 0);
-
     await asyncExpect(() => {
-      expect(wrapper.findComponent({ name: 'AAvatar' }).vm.isImgExist).toBe(false);
+      expect(wrapper.findComponent({ name: 'AAvatar' }).findAll('img').length).toBe(0);
       expect(wrapper.findAll('.ant-avatar-string').length).toBe(1);
     }, 0);
 
@@ -136,7 +120,7 @@ describe('Avatar Render', () => {
       wrapper.vm.src = LOAD_SUCCESS_SRC;
     });
     await asyncExpect(() => {
-      expect(wrapper.findComponent({ name: 'AAvatar' }).vm.isImgExist).toBe(true);
+      expect(wrapper.findComponent({ name: 'AAvatar' }).findAll('img').length).toBe(1);
       expect(wrapper.findAll('.ant-avatar-image').length).toBe(1);
     }, 0);
   });

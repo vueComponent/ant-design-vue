@@ -207,7 +207,7 @@
     "@simonwep/pickr": "~1.8.0",
     "array-tree-filter": "^2.1.0",
     "async-validator": "^3.3.0",
-    "dom-align": "^1.10.4",
+    "dom-align": "^1.12.1",
     "dom-scroll-into-view": "^2.0.0",
     "lodash-es": "^4.17.15",
     "moment": "^2.27.0",

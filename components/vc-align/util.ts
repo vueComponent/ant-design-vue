@@ -1,25 +1,7 @@
 import contains from '../vc-util/Dom/contains';
-export function buffer(fn, ms) {
-  let timer;
+import { TargetPoint } from './interface';
 
-  function clear() {
-    if (timer) {
-      clearTimeout(timer);
-      timer = null;
-    }
-  }
-
-  function bufferFn() {
-    clear();
-    timer = setTimeout(fn, ms);
-  }
-
-  bufferFn.clear = clear;
-
-  return bufferFn;
-}
-
-export function isSamePoint(prev, next) {
+export function isSamePoint(prev: TargetPoint, next: TargetPoint) {
   if (prev === next) return true;
   if (!prev || !next) return false;
 
@@ -34,27 +16,22 @@ export function isSamePoint(prev, next) {
   return false;
 }
 
-export function isWindow(obj) {
-  return obj && typeof obj === 'object' && obj.window === obj;
-}
-
-export function isSimilarValue(val1, val2) {
-  const int1 = Math.floor(val1);
-  const int2 = Math.floor(val2);
-  return Math.abs(int1 - int2) <= 1;
-}
-
 export function restoreFocus(activeElement, container) {
   // Focus back if is in the container
-  if (activeElement !== document.activeElement && contains(container, activeElement)) {
+  if (
+    activeElement !== document.activeElement &&
+    contains(container, activeElement) &&
+    typeof activeElement.focus === 'function'
+  ) {
     activeElement.focus();
   }
 }
-export function monitorResize(element, callback) {
-  let prevWidth = null;
-  let prevHeight = null;
 
-  function onResize([{ target }]) {
+export function monitorResize(element: HTMLElement, callback: Function) {
+  let prevWidth: number = null;
+  let prevHeight: number = null;
+
+  function onResize([{ target }]: ResizeObserverEntry[]) {
     if (!document.documentElement.contains(target)) return;
     const { width, height } = target.getBoundingClientRect();
     const fixedWidth = Math.floor(width);

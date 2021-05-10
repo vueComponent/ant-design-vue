@@ -1,4 +1,6 @@
-export default (callback: () => boolean, buffer: number) => {
+import { ComputedRef } from '@vue/reactivity';
+
+export default (callback: () => boolean, buffer: ComputedRef<number>) => {
   let called = false;
   let timeout = null;
 
@@ -17,13 +19,13 @@ export default (callback: () => boolean, buffer: number) => {
       cancelTrigger();
       timeout = window.setTimeout(() => {
         called = false;
-      }, buffer);
+      }, buffer.value);
     } else {
       cancelTrigger();
       timeout = window.setTimeout(() => {
         called = false;
         trigger();
-      }, buffer);
+      }, buffer.value);
     }
   }
 

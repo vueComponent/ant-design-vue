@@ -179,6 +179,7 @@ const CalendarHeader = {
           onSelect={this.onYearSelect}
           onDecadePanelShow={this.showDecadePanel}
           renderFooter={renderFooter}
+          disabledDate={disabledMonth}
         />
       );
     }

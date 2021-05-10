@@ -10,11 +10,30 @@
 
 ---
 
+## 1.7.5
+
+`2021-05-09`
+
+- 🌟 `Card` 新增 tab 属性配置 [#3762](https://github.com/vueComponent/ant-design-vue/issues/3762)
+- 🌟 `Table`
+  - 新增 `v-model:expandedRowKeys` 支持 [#3892](https://github.com/vueComponent/ant-design-vue/issues/3892)
+  - 分组表头支持 fixed [#3896](https://github.com/vueComponent/ant-design-vue/issues/3896)
+- 🌟 `Modal` 新增 dialogStyle 属性配置 [#3794](https://github.com/vueComponent/ant-design-vue/issues/3794)
+- 🐞 修复 `Drawer` `esc` 无法关闭抽屉问题 [#3790](https://github.com/vueComponent/ant-design-vue/issues/3790)
+- 🐞 修复 `BackTop` 在 keepAlive 下显示问题 [#3802](https://github.com/vueComponent/ant-design-vue/issues/3802)
+- 🐞 修复 `Input` 在微软输入法下触发两次 change 事件问题 [#3825](https://github.com/vueComponent/ant-design-vue/issues/3825)
+- 🐞 修复 `Upload` 自定义 method 不生效问题 [#3843](https://github.com/vueComponent/ant-design-vue/issues/3843)
+- 🐞 修复 `Select` 选中 disabled 选项问题 [#3867](https://github.com/vueComponent/ant-design-vue/issues/3867)
+- 🐞 修复 `Menu` 闪动问题 [#3951](https://github.com/vueComponent/ant-design-vue/issues/3951)
+- 🐞 修复 `InputNumber` `readonly` 不生效问题 [#2971](https://github.com/vueComponent/ant-design-vue/issues/2971)
+- 🐞 修复 `DatePicker` 在 mode="month" 时， disabledDate 不生效问题 [#3988](https://github.com/vueComponent/ant-design-vue/issues/3988)
+
 ## 1.7.4
 
 `2021-02-28`
 
 - 🌟 优化 `Table` 性能 [#3531](https://github.com/vueComponent/ant-design-vue/issues/3531)
+
 ## 1.7.3
 
 `2021-02-16`

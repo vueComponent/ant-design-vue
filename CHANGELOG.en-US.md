@@ -10,6 +10,24 @@
 
 ---
 
+## 1.7.5
+
+`2021-05-09`
+
+- 🌟 `Card` adds tab property configuration [#3762](https://github.com/vueComponent/ant-design-vue/issues/3762)
+- 🌟 `Table`
+  - Added `v-model:expandedRowKeys` support [#3892](https://github.com/vueComponent/ant-design-vue/issues/3892)
+  - The group header supports fixed [#3896](https://github.com/vueComponent/ant-design-vue/issues/3896)
+- 🌟 `Modal` adds dialogStyle property configuration [#3794](https://github.com/vueComponent/ant-design-vue/issues/3794)
+- 🐞 Fix the problem that `Drawer` `esc` cannot close the drawer [#3790](https://github.com/vueComponent/ant-design-vue/issues/3790)
+- 🐞 Fix `BackTop` display problem under keepAlive [#3802](https://github.com/vueComponent/ant-design-vue/issues/3802)
+- 🐞 Fix the issue that `Input` triggers two change events under Microsoft input method [#3825](https://github.com/vueComponent/ant-design-vue/issues/3825)
+- 🐞 Fix the issue that the `Upload` custom method does not take effect [#3843](https://github.com/vueComponent/ant-design-vue/issues/3843)
+- 🐞 Fix the problem of selecting the disabled option in `Select` [#3867](https://github.com/vueComponent/ant-design-vue/issues/3867)
+- 🐞 Fix `Menu` flickering problem [#3951](https://github.com/vueComponent/ant-design-vue/issues/3951)
+- 🐞 Fix `InputNumber` `readonly` not valid issue [#2971](https://github.com/vueComponent/ant-design-vue/issues/2971)
+- 🐞 Fix the issue that disabledDate does not take effect when `DatePicker` is in mode="month" [#3988](https://github.com/vueComponent/ant-design-vue/issues/3988)
+
 ## 1.7.4
 
 `2021-02-28`

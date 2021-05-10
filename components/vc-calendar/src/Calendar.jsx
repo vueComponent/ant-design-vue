@@ -325,6 +325,7 @@ const Calendar = {
             locale={locale}
             mode={sMode}
             value={sValue}
+            disabledMonth={disabledDate}
             onValueChange={this.setValue}
             onPanelChange={this.onPanelChange}
             renderFooter={renderFooter}

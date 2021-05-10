@@ -1,10 +1,12 @@
 <script>
+import moment from 'moment';
 export default {
   props: {
     isCN: Boolean,
   },
   render() {
     const isCN = this.isCN;
+    const showPpy = moment().isBefore(moment('2021-06-15'));
     return (
       <footer id="footer">
         <div class="footer-wrap">
@@ -88,11 +90,13 @@ export default {
                     Vue CLI
                   </a>
                 </div>
-                <div>
-                  <a href="http://www.jeecg.com/" rel="noopener noreferrer" target="_blank">
-                    Jeecg Boot
-                  </a>
-                </div>
+                {showPpy && (
+                  <div>
+                    <a href="https://www.pengpengyu.com/" target="_blank">
+                      砰砰鱼
+                    </a>
+                  </div>
+                )}
               </div>
             </a-col>
             <a-col md={6} sm={24} xs={24}>

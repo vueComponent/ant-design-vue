@@ -121,7 +121,9 @@ export default {
     },
     validateOnRuleChange: {
       handler(newVal) {
-        typeof this.fieldRulesUnWatch === 'function' && this.fieldRulesUnWatch();
+        if (typeof this.fieldRulesUnWatch === 'function') {
+          this.fieldRulesUnWatch();
+        }
         if (newVal) {
           let oldRules = null;
           this.fieldRulesUnWatch = this.$watch(

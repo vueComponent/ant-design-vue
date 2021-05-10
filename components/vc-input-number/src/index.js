@@ -75,6 +75,7 @@ const inputNumberProps = {
   autoComplete: PropTypes.string,
   title: PropTypes.string,
   name: PropTypes.string,
+  type: PropTypes.string,
   id: PropTypes.string,
 };
 

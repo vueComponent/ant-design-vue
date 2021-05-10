@@ -17,7 +17,7 @@ import useLock from '../hooks/useLock';
 import { defineComponent, VNodeChild } from 'vue';
 import createRef, { RefObject } from '../../_util/createRef';
 import PropTypes from '../../_util/vue-types';
-import { VueNode } from 'ant-design-vue/es/_util/type';
+import { VueNode } from '../../_util/type';
 
 export interface InnerSelectorProps {
   prefixCls: string;

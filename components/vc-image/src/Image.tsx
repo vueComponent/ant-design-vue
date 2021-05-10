@@ -50,7 +50,7 @@ export const ImageProps = {
       visible: PropTypes.bool,
       onVisibleChange: PropTypes.func,
       getContainer: PropTypes.oneOf([PropTypes.func, PropTypes.bool]),
-    }),
+    }).loose,
   ]).def(true),
 };
 type ImageStatus = 'normal' | 'error' | 'loading';

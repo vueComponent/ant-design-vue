@@ -34,7 +34,7 @@ const Menu = {
     watch(
       () => props.selectedKeys,
       () => {
-        selectedKeys.value = props.selectedKeys;
+        selectedKeys.value = props.selectedKeys || [];
       },
     );
     watch(

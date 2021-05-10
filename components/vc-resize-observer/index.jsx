@@ -57,6 +57,7 @@ const VueResizeObserver = defineComponent({
     handleResize(entries) {
       const { target } = entries[0];
       const { width, height } = target.getBoundingClientRect();
+      const { offsetWidth, offsetHeight } = target;
       /**
        * Resize observer trigger when content size changed.
        * In most case we just care about element size,
@@ -66,7 +67,7 @@ const VueResizeObserver = defineComponent({
       const fixedHeight = Math.floor(height);
 
       if (this.width !== fixedWidth || this.height !== fixedHeight) {
-        const size = { width: fixedWidth, height: fixedHeight };
+        const size = { width: fixedWidth, height: fixedHeight, offsetWidth, offsetHeight };
         this.width = fixedWidth;
         this.height = fixedHeight;
         this.__emit('resize', size);

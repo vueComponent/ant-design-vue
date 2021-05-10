@@ -31,7 +31,7 @@ export default {
     point: PropTypes.shape({
       pageX: PropTypes.number,
       pageY: PropTypes.number,
-    }),
+    }).loose,
   },
   data() {
     this.domEl = null;

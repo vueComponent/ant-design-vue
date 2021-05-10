@@ -10,6 +10,39 @@
 
 ---
 
+## 2.1.4
+
+`2021-05-09`
+
+- 🐞 修复 `Table` 滚动错位问题 [#4045](https://github.com/vueComponent/ant-design-vue/issues/4045)
+- 🐞 修复 `Typography` editable 模式触发链接跳转问题 [#4105](https://github.com/vueComponent/ant-design-vue/issues/4105)
+- 🐞 修复 `Carousel` variableWidth 不生效问题 [#3977](https://github.com/vueComponent/ant-design-vue/issues/3977)
+- 🐞 修复 `TreeSelect` 无法通过键盘同时删除父子节点问题 [#3508](https://github.com/vueComponent/ant-design-vue/issues/3508)
+- 🐞 修复若干类型错误问题
+
+## 2.1.3
+
+`2021-04-25`
+
+- 🎉🎉🎉 移除 npm 安装时的广告
+- 🐞 `Select`
+  - 修复默认激活第一项问题 [#3842](https://github.com/vueComponent/ant-design-vue/issues/3842)
+  - 修复分组显示异常问题 [#3841](https://github.com/vueComponent/ant-design-vue/issues/3841)
+  - 修复动态更新选择项后滚动异常问题 [#3972](https://github.com/vueComponent/ant-design-vue/issues/3972)
+- 🐞 修复 `Checkbox` 触发两次 `update:checked` 问题 [#3838](https://github.com/vueComponent/ant-design-vue/issues/3838)
+- 🌟 `Table` column group 支持 fixed [#3882](https://github.com/vueComponent/ant-design-vue/issues/3882)
+- 🌟 `Table` column 支持 v-for [#3934](https://github.com/vueComponent/ant-design-vue/issues/3934)
+- 🐞 修复 `Table` 在 windows 显示横向滚动条问题 [6d33d6](https://github.com/vueComponent/ant-design-vue/commit/6d33d60d2bca98825f274e48bcc3badd1857f742)
+- 🌟 `Form` scrollToFirstError 支持选项参数传递 [#3918](https://github.com/vueComponent/ant-design-vue/issues/3918)
+- 🐞 修复 `Calendar` 月份选择器显示错误字符问题 [#3915](https://github.com/vueComponent/ant-design-vue/issues/3915)
+- 🌟 重构 `Switch` 组件，移除 defaultChecked 属性 [#3885](https://github.com/vueComponent/ant-design-vue/issues/3885)
+- 🐞 修复使用 Vite 时，抛出 process 异常问题 [#3930](https://github.com/vueComponent/ant-design-vue/issues/3930)
+- 🐞 修复 `Radio` 阴影遮挡问题 [#3955](https://github.com/vueComponent/ant-design-vue/issues/3955)
+- 🐞 修复 `Form` inline 模式下， span 不生效问题 [#3862](https://github.com/vueComponent/ant-design-vue/issues/3862)
+- 🐞 修复 `Cascader` keydown 选择不生效问题 [#958](https://github.com/vueComponent/ant-design-vue/issues/958)
+- 🐞 修复 `Image` 预览功能失败问题 [#3701](https://github.com/vueComponent/ant-design-vue/issues/3701)
+- 🐞 修复一些 TS 类型问题
+
 ## 2.1.2
 
 `2021-03-28`

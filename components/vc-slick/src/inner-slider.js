@@ -115,7 +115,7 @@ export default {
           slideCount: children.length,
         });
         children.forEach(child => {
-          const childWidth = child.props.width.split('px')[0];
+          const childWidth = child.props.style?.width?.split('px')[0] || 0;
           childrenWidths.push(childWidth);
           trackWidth += childWidth;
         });

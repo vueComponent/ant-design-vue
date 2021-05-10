@@ -3,7 +3,7 @@ const { readFileSync } = require('fs');
 const path = require('path');
 const postcss = require('postcss');
 const NpmImportPlugin = require('less-plugin-npm-import');
-const postcssConfig = require('./postcssConfig');
+const autoprefixer = require('autoprefixer');
 
 function transformLess(lessFile, config = {}) {
   const { cwd = process.cwd() } = config;
@@ -21,10 +21,7 @@ function transformLess(lessFile, config = {}) {
   };
   return less
     .render(data, lessOpts)
-    .then(result => {
-      const source = result.css;
-      return postcss(postcssConfig.plugins).process(source, { from: undefined });
-    })
+    .then(result => postcss([autoprefixer]).process(result.css, { from: undefined }))
     .then(r => {
       return r.css;
     });

@@ -4,11 +4,9 @@ const path = require('path');
 const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
 const { merge } = require('webpack-merge');
-const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
-const postcssConfig = require('./postcssConfig');
 const CleanUpStatsPlugin = require('./utils/CleanUpStatsPlugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -97,7 +95,10 @@ function getWebpackConfig(modules) {
                       options: {
                         presets: [resolve('@babel/preset-env')],
                         plugins: [
-                          [resolve('@vue/babel-plugin-jsx'), { mergeProps: false }],
+                          [
+                            resolve('@vue/babel-plugin-jsx'),
+                            { mergeProps: false, enableObjectSlots: false },
+                          ],
                           resolve('@babel/plugin-proposal-object-rest-spread'),
                         ],
                       },
@@ -138,7 +139,12 @@ function getWebpackConfig(modules) {
             },
             {
               loader: 'postcss-loader',
-              options: Object.assign({}, postcssConfig, { sourceMap: true }),
+              options: {
+                postcssOptions: {
+                  plugins: ['autoprefixer'],
+                },
+                sourceMap: true,
+              },
             },
           ],
         },
@@ -154,7 +160,12 @@ function getWebpackConfig(modules) {
             },
             {
               loader: 'postcss-loader',
-              options: Object.assign({}, postcssConfig, { sourceMap: true }),
+              options: {
+                postcssOptions: {
+                  plugins: ['autoprefixer'],
+                },
+                sourceMap: true,
+              },
             },
             {
               loader: 'less-loader',
@@ -212,9 +223,17 @@ All rights reserved.
     config.output.libraryTarget = 'umd';
     config.optimization = {
       minimizer: [
-        new TerserPlugin({
-          sourceMap: true,
-        }),
+        // eslint-disable-next-line no-unused-vars
+        compiler => {
+          return () => {
+            return {
+              parallel: true,
+              terserOptions: {
+                warnings: false,
+              },
+            };
+          };
+        },
       ],
     };
 

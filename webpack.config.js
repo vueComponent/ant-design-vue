@@ -33,7 +33,7 @@ const babelConfig = {
         style: true,
       },
     ],
-    ['@vue/babel-plugin-jsx', { mergeProps: false }],
+    ['@vue/babel-plugin-jsx', { mergeProps: false, enableObjectSlots: false }],
     '@babel/plugin-proposal-optional-chaining',
     '@babel/plugin-transform-object-assign',
     '@babel/plugin-proposal-object-rest-spread',
@@ -118,9 +118,7 @@ module.exports = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: true,
-            },
+            options: {},
           },
           'css-loader',
         ],

@@ -1,5 +1,6 @@
 import AsyncValidator from 'async-validator';
-import { cloneDeep, isEqual } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import isEqual from 'lodash/isEqual';
 import PropTypes from '../_util/vue-types';
 import { ColProps } from '../grid/Col';
 import {
@@ -120,18 +121,19 @@ export default {
     },
     validateOnRuleChange: {
       handler(newVal) {
+        typeof this.fieldRulesUnWatch === 'function' && this.fieldRulesUnWatch();
         if (newVal) {
-          let oldRule = null;
-          this.fileRulesUnWatch = this.$watch(
+          let oldRules = null;
+          this.fieldRulesUnWatch = this.$watch(
             'fieldRules',
-            function(newRule) {
-              oldRule !== null && !isEqual(newRule, oldRule) && this.validate('');
-              oldRule = cloneDeep(newRule);
+            function(newRules) {
+              if (!isEqual(newRules, oldRules)) {
+                oldRules !== null && this.validate('');
+                oldRules = cloneDeep(newRules);
+              }
             },
             { deep: true, immediate: true },
           );
-        } else if (typeof this.fileRulesUnWatch === 'function') {
-          this.fileRulesUnWatch();
         }
       },
       immediate: true,
@@ -147,9 +149,6 @@ export default {
   beforeDestroy() {
     const { removeField } = this.FormContext;
     removeField && removeField(this);
-    if (typeof this.fileRulesUnWatch === 'function') {
-      this.fileRulesUnWatch();
-    }
   },
   methods: {
     validate(trigger, callback = noop) {

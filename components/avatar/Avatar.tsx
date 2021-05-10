@@ -27,6 +27,7 @@ const avatarProps = {
   srcset: PropTypes.string,
   icon: PropTypes.VNodeChild,
   alt: PropTypes.string,
+  gap: Number,
   loadError: {
     type: Function as PropType<() => boolean>,
   },
@@ -41,8 +42,6 @@ const Avatar = defineComponent({
     const isImgExist = ref(true);
     const isMounted = ref(false);
     const scale = ref(1);
-    const lastChildrenWidth = ref<number>(undefined);
-    const lastNodeWidth = ref<number>(undefined);
 
     const avatarChildrenRef = ref<HTMLElement>(null);
     const avatarNodeRef = ref<HTMLElement>(null);
@@ -56,17 +55,13 @@ const Avatar = defineComponent({
       const childrenWidth = avatarChildrenRef.value.offsetWidth; // offsetWidth avoid affecting be transform scale
       const nodeWidth = avatarNodeRef.value.offsetWidth;
       // denominator is 0 is no meaning
-      if (
-        childrenWidth === 0 ||
-        nodeWidth === 0 ||
-        (lastChildrenWidth.value === childrenWidth && lastNodeWidth.value === nodeWidth)
-      ) {
-        return;
+      if (childrenWidth !== 0 && nodeWidth !== 0) {
+        const { gap = 4 } = props;
+        if (gap * 2 < nodeWidth) {
+          scale.value =
+            nodeWidth - gap * 2 < childrenWidth ? (nodeWidth - gap * 2) / childrenWidth : 1;
+        }
       }
-      lastChildrenWidth.value = childrenWidth;
-      lastNodeWidth.value = nodeWidth;
-      // add 4px gap for each side to get better performance
-      scale.value = nodeWidth - 8 < childrenWidth ? (nodeWidth - 8) / childrenWidth : 1;
     };
 
     const handleImgLoadError = () => {

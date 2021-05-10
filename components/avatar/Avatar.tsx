@@ -2,6 +2,7 @@ import { tuple, VueNode } from '../_util/type';
 import {
   CSSProperties,
   defineComponent,
+  ExtractPropTypes,
   inject,
   nextTick,
   onMounted,
@@ -14,19 +15,28 @@ import { defaultConfigProvider } from '../config-provider';
 import { getPropsSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 
-export interface AvatarProps {
-  prefixCls?: string;
-  shape?: 'circle' | 'square';
-  size?: 'large' | 'small' | 'default' | number;
-  src?: string;
-  srcset?: string;
-  icon?: typeof PropTypes.VNodeChild;
-  alt?: string;
-  loadError?: () => boolean;
-}
+const avatarProps = {
+  prefixCls: PropTypes.string,
+  shape: PropTypes.oneOf(tuple('circle', 'square')),
+  size: {
+    type: [Number, String] as PropType<'large' | 'small' | 'default' | number>,
+    default: 'default',
+  },
+  src: PropTypes.string,
+  /** Srcset of image avatar */
+  srcset: PropTypes.string,
+  icon: PropTypes.VNodeChild,
+  alt: PropTypes.string,
+  loadError: {
+    type: Function as PropType<() => boolean>,
+  },
+};
 
-const Avatar = defineComponent<AvatarProps>({
+export type AvatarProps = Partial<ExtractPropTypes<typeof avatarProps>>;
+
+const Avatar = defineComponent({
   name: 'AAvatar',
+  props: avatarProps,
   setup(props, { slots }) {
     const isImgExist = ref(true);
     const isMounted = ref(false);
@@ -73,7 +83,6 @@ const Avatar = defineComponent<AvatarProps>({
         nextTick(() => {
           isImgExist.value = true;
           scale.value = 1;
-          // this.$forceUpdate();
         });
       },
     );
@@ -162,22 +171,5 @@ const Avatar = defineComponent<AvatarProps>({
     };
   },
 });
-
-Avatar.props = {
-  prefixCls: PropTypes.string,
-  shape: PropTypes.oneOf(tuple('circle', 'square')),
-  size: {
-    type: [Number, String] as PropType<'large' | 'small' | 'default' | number>,
-    default: 'default',
-  },
-  src: PropTypes.string,
-  /** Srcset of image avatar */
-  srcset: PropTypes.string,
-  icon: PropTypes.VNodeChild,
-  alt: PropTypes.string,
-  loadError: {
-    type: Function as PropType<() => boolean>,
-  },
-};
 
 export default Avatar;

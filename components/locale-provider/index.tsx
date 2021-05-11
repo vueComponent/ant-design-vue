@@ -1,10 +1,9 @@
-import { provide, App, defineComponent, VNode, PropType, reactive } from 'vue';
+import { provide, App, defineComponent, VNode, PropType, reactive, watch, onUnmounted } from 'vue';
 import PropTypes from '../_util/vue-types';
 import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
 import { ModalLocale, changeConfirmLocale } from '../modal/locale';
 import warning from '../_util/warning';
-import { getSlot } from '../_util/props-util';
 import { withInstall } from '../_util/type';
 export interface Locale {
   locale: string;
@@ -44,7 +43,7 @@ const LocaleProvider = defineComponent({
     },
     ANT_MARK__: PropTypes.string,
   },
-  setup(props) {
+  setup(props, { slots }) {
     warning(
       props.ANT_MARK__ === ANT_MARK,
       'LocaleProvider',
@@ -58,28 +57,25 @@ const LocaleProvider = defineComponent({
       ANT_MARK__: ANT_MARK,
     });
     provide('localeData', state);
-    return { state };
-  },
-  watch: {
-    locale(val) {
-      this.state.antLocale = {
-        ...val,
-        exist: true,
-      };
-      setMomentLocale(val);
-      changeConfirmLocale(val && val.Modal);
-    },
-  },
-  created() {
-    const { locale } = this;
-    setMomentLocale(locale);
-    changeConfirmLocale(locale && locale.Modal);
-  },
-  beforeUnmount() {
-    changeConfirmLocale();
-  },
-  render() {
-    return getSlot(this);
+    watch(
+      () => props.locale,
+      val => {
+        state.antLocale = {
+          ...val,
+          exist: true,
+        };
+        setMomentLocale(val);
+        changeConfirmLocale(val && val.Modal);
+      },
+      { immediate: true },
+    );
+    onUnmounted(() => {
+      changeConfirmLocale();
+    });
+
+    return () => {
+      return slots.default?.();
+    };
   },
 });
 

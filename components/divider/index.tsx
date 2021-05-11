@@ -22,7 +22,7 @@ export const dividerProps = {
     default: false,
   },
 };
-export type DividerProps = ExtractPropTypes<typeof dividerProps>;
+export type DividerProps = Partial<ExtractPropTypes<typeof dividerProps>>;
 
 const Divider = defineComponent({
   name: 'ADivider',

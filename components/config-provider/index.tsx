@@ -66,7 +66,7 @@ export const configProviderProps = {
   dropdownMatchSelectWidth: PropTypes.looseBool,
 };
 
-export type ConfigProviderProps = ExtractPropTypes<typeof configProviderProps>;
+export type ConfigProviderProps = Partial<ExtractPropTypes<typeof configProviderProps>>;
 
 const ConfigProvider = defineComponent({
   name: 'AConfigProvider',

@@ -236,7 +236,8 @@ const Tree = defineComponent({
           let { checkedKeys = [], halfCheckedKeys = [] } = checkedKeyEntity;
 
           if (!props.checkStrictly) {
-            const conductKeys = conductCheck(checkedKeys, true, keyEntities);
+            const isDynamicCheckUp = props.loadData ? true : false;
+            const conductKeys = conductCheck(checkedKeys, true, keyEntities, {}, isDynamicCheckUp);
             ({ checkedKeys, halfCheckedKeys } = conductKeys);
           }
 
@@ -461,7 +462,6 @@ const Tree = defineComponent({
           checkedKeys: oriCheckedKeys,
           halfCheckedKeys: oriHalfCheckedKeys,
         });
-
         checkedObj = checkedKeys;
 
         // [Legacy] This is used for `rc-tree-select`
@@ -503,11 +503,12 @@ const Tree = defineComponent({
 
           // Process load data
           const promise = loadData(treeNode);
+          const props = this.$props;
+
           promise.then(() => {
             const { _loadedKeys: currentLoadedKeys, _loadingKeys: currentLoadingKeys } = this.$data;
             const newLoadedKeys = arrAdd(currentLoadedKeys, eventKey);
             const newLoadingKeys = arrDel(currentLoadingKeys, eventKey);
-
             // onLoad should trigger before internal setState to avoid `loadData` trigger twice.
             // https://github.com/ant-design/ant-design/issues/12464
             this.__emit('load', newLoadedKeys, {
@@ -639,7 +640,6 @@ const Tree = defineComponent({
         warnOnlyTreeNode();
         return null;
       }
-
       return cloneElement(child, {
         eventKey: key,
         expanded: expandedKeys.indexOf(key) !== -1,

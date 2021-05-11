@@ -206,6 +206,18 @@
       border-color: @disabled-color;
     }
   }
+  // 半选 + disabled
+  .@{checkbox-prefix-cls}-disabled-indeterminate {
+    cursor: not-allowed;
+    &:hover .@{checkbox-prefix-cls}-inner {
+      border-color: @disabled-color;
+    }
+    .@{checkbox-inner-prefix-cls} {
+      &::after {
+        background-color: @disabled-color;
+      }
+    }
+  }
 }
 
 @keyframes antCheckboxEffect {

@@ -381,6 +381,7 @@ const TreeNode = defineComponent({
       // [Legacy] Custom element should be separate with `checkable` in future
       const $custom = typeof checkable !== 'boolean' ? checkable : null;
 
+      const isIdtAndDis = !checked && halfChecked && (disabled || disableCheckbox);
       return (
         <span
           key="checkbox"
@@ -388,7 +389,8 @@ const TreeNode = defineComponent({
             `${prefixCls}-checkbox`,
             checked && `${prefixCls}-checkbox-checked`,
             !checked && halfChecked && `${prefixCls}-checkbox-indeterminate`,
-            (disabled || disableCheckbox) && `${prefixCls}-checkbox-disabled`,
+            isIdtAndDis && `${prefixCls}-checkbox-disabled-indeterminate`,
+            !isIdtAndDis && (disabled || disableCheckbox) && `${prefixCls}-checkbox-disabled`,
           )}
           onClick={this.onCheck}
         >

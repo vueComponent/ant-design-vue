@@ -258,9 +258,16 @@ export function parseCheckedKeys(keys) {
  * @param isCheck       is check the node or not
  * @param keyEntities   parsed by `convertTreeToEntities` function in Tree
  * @param checkStatus   Can pass current checked status for process (usually for uncheck operation)
+ * @param isDynamicCheckConductUp  props 'loadData' can change the children, should check again checkStatus
  * @returns {{checkedKeys: [], halfCheckedKeys: []}}
  */
-export function conductCheck(keyList, isCheck, keyEntities, checkStatus = {}) {
+export function conductCheck(
+  keyList,
+  isCheck,
+  keyEntities,
+  checkStatus = {},
+  isDynamicCheckConductUp,
+) {
   const checkedKeys = new Map();
   const halfCheckedKeys = new Map(); // Record the key has some child checked (include child half checked)
 
@@ -273,22 +280,21 @@ export function conductCheck(keyList, isCheck, keyEntities, checkStatus = {}) {
   });
 
   // Conduct up
-  function conductUp(key) {
-    if (checkedKeys.get(key) === isCheck) return;
-
+  function conductUp(key, loadData) {
+    if (checkedKeys.get(key) === isCheck && !isDynamicCheckConductUp) return;
     const entity = keyEntities.get(key);
     if (!entity) return;
 
     const { children, parent, node } = entity;
 
-    if (isCheckDisabled(node)) return;
+    // if (isCheckDisabled(node)) return; //should check disabled node
 
     // Check child node checked status
     let everyChildChecked = true;
     let someChildChecked = false; // Child checked or half checked
 
     (children || [])
-      .filter(child => !isCheckDisabled(child.node))
+      // .filter(child => !isCheckDisabled(child.node)) //should check disabled node
       .forEach(({ key: childKey }) => {
         const childChecked = checkedKeys.get(childKey);
         const childHalfChecked = halfCheckedKeys.get(childKey);
@@ -338,7 +344,7 @@ export function conductCheck(keyList, isCheck, keyEntities, checkStatus = {}) {
     const { children, parent, node } = entity;
     checkedKeys.set(key, isCheck);
 
-    if (isCheckDisabled(node)) return;
+    // if (isCheckDisabled(node)) return; //should check disabled node
 
     // Conduct down
     (children || [])

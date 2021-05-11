@@ -1,5 +1,6 @@
 import { tuple, VueNode } from '../_util/type';
 import {
+  computed,
   CSSProperties,
   defineComponent,
   ExtractPropTypes,
@@ -9,25 +10,31 @@ import {
   onUpdated,
   PropType,
   ref,
+  unref,
   watch,
 } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 import { getPropsSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
+import useBreakpoint from '../_util/hooks/useBreakpoint';
+import { Breakpoint, responsiveArray, ScreenSizeMap } from '../_util/responsiveObserve';
 
-const avatarProps = {
+export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
+
+export const avatarProps = {
   prefixCls: PropTypes.string,
   shape: PropTypes.oneOf(tuple('circle', 'square')),
   size: {
-    type: [Number, String] as PropType<'large' | 'small' | 'default' | number>,
-    default: 'default',
+    type: [Number, String, Object] as PropType<AvatarSize>,
+    default: (): AvatarSize => 'default',
   },
   src: PropTypes.string,
   /** Srcset of image avatar */
   srcset: PropTypes.string,
   icon: PropTypes.VNodeChild,
   alt: PropTypes.string,
-  gap: Number,
+  gap: PropTypes.number,
+  draggable: PropTypes.bool,
   loadError: {
     type: Function as PropType<() => boolean>,
   },
@@ -38,7 +45,7 @@ export type AvatarProps = Partial<ExtractPropTypes<typeof avatarProps>>;
 const Avatar = defineComponent({
   name: 'AAvatar',
   props: avatarProps,
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const isImgExist = ref(true);
     const isMounted = ref(false);
     const scale = ref(1);
@@ -47,6 +54,27 @@ const Avatar = defineComponent({
     const avatarNodeRef = ref<HTMLElement>(null);
 
     const configProvider = inject('configProvider', defaultConfigProvider);
+
+    const groupSize = inject('SizeProvider', 'default');
+
+    const screens = useBreakpoint();
+    const responsiveSizeStyle = computed(() => {
+      if (typeof props.size !== 'object') {
+        return {};
+      }
+      const currentBreakpoint: Breakpoint = responsiveArray.find(screen => screens.value[screen])!;
+      const currentSize = props.size[currentBreakpoint];
+
+      const hasIcon = !!getPropsSlot(slots, props, 'icon');
+      return currentSize
+        ? {
+            width: `${currentSize}px`,
+            height: `${currentSize}px`,
+            lineHeight: `${currentSize}px`,
+            fontSize: `${hasIcon ? currentSize / 2 : 18}px`,
+          }
+        : {};
+    });
 
     const setScale = () => {
       if (!avatarChildrenRef.value || !avatarNodeRef.value) {
@@ -96,11 +124,19 @@ const Avatar = defineComponent({
     });
 
     return () => {
-      const { prefixCls: customizePrefixCls, shape, size, src, alt, srcset } = props;
+      const {
+        prefixCls: customizePrefixCls,
+        shape,
+        size: customSize,
+        src,
+        alt,
+        srcset,
+        draggable,
+      } = props;
       const icon = getPropsSlot(slots, props, 'icon');
       const getPrefixCls = configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('avatar', customizePrefixCls);
-
+      const size = customSize === 'default' ? unref(groupSize) : customSize;
       const classString = {
         [prefixCls]: true,
         [`${prefixCls}-lg`]: size === 'large',
@@ -122,7 +158,15 @@ const Avatar = defineComponent({
 
       let children: VueNode = slots.default?.();
       if (src && isImgExist.value) {
-        children = <img src={src} srcset={srcset} onError={handleImgLoadError} alt={alt} />;
+        children = (
+          <img
+            draggable={draggable}
+            src={src}
+            srcset={srcset}
+            onError={handleImgLoadError}
+            alt={alt}
+          />
+        );
       } else if (icon) {
         children = icon;
       } else {
@@ -159,7 +203,11 @@ const Avatar = defineComponent({
         }
       }
       return (
-        <span ref={avatarNodeRef} class={classString} style={sizeStyle}>
+        <span
+          ref={avatarNodeRef}
+          class={classString}
+          style={{ ...sizeStyle, ...responsiveSizeStyle.value, ...(attrs.style as CSSProperties) }}
+        >
           {children}
         </span>
       );

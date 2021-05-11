@@ -14,23 +14,16 @@ import {
 } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
+import { tuple } from '../_util/type';
 
 const groupProps = {
-  children: PropTypes.VNodeChild,
-  style: {
-    type: Object as PropType<CSSProperties>,
-    default: () => ({} as CSSProperties),
-  },
-  prefixCls: String,
-  maxCount: Number,
+  prefixCls: PropTypes.string,
+  maxCount: PropTypes.number,
   maxStyle: {
     type: Object as PropType<CSSProperties>,
     default: () => ({} as CSSProperties),
   },
-  maxPopoverPlacement: {
-    type: String as PropType<'top' | 'bottom'>,
-    default: 'top',
-  },
+  maxPopoverPlacement: PropTypes.oneOf(tuple('top', 'bottom')).def('top'),
   /*
    * Size of avatar, options: `large`, `small`, `default`
    * or a custom number size
@@ -53,17 +46,16 @@ const Group = defineComponent({
     );
 
     return () => {
-      const getPrefixCls = configProvider.getPrefixCls;
-
       const {
         prefixCls: customizePrefixCls,
         maxPopoverPlacement = 'top',
         maxCount,
         maxStyle,
       } = props;
-      const className = attrs.class as string;
 
+      const { getPrefixCls } = configProvider;
       const prefixCls = getPrefixCls('avatar-group', customizePrefixCls);
+      const className = attrs.class as string;
 
       const cls = {
         [prefixCls]: true,
@@ -94,14 +86,14 @@ const Group = defineComponent({
           </Popover>,
         );
         return (
-          <div class={cls} style={props.style}>
+          <div class={cls} style={attrs.style}>
             {childrenShow}
           </div>
         );
       }
 
       return (
-        <div class={cls} style={props.style}>
+        <div class={cls} style={attrs.style}>
           {childrenWithProps}
         </div>
       );

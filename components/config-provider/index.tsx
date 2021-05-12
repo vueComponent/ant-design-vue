@@ -30,6 +30,7 @@ export interface ConfigConsumerProps {
   pageHeader?: {
     ghost: boolean;
   };
+  componentSize?: SizeType;
   direction?: 'ltr' | 'rtl';
   space?: {
     size?: SizeType | number;

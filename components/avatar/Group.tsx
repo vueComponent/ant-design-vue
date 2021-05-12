@@ -42,7 +42,7 @@ const Group = defineComponent({
 
     provide(
       'SizeProvider',
-      computed(() => props.size),
+      computed(() => props.size || configProvider.componentSize),
     );
 
     return () => {

@@ -10,7 +10,6 @@ import {
   onUpdated,
   PropType,
   ref,
-  unref,
   watch,
 } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
@@ -55,26 +54,33 @@ const Avatar = defineComponent({
 
     const configProvider = inject('configProvider', defaultConfigProvider);
 
-    const groupSize = inject('SizeProvider', 'default');
+    const groupSize = inject(
+      'SizeProvider',
+      computed(() => 'default'),
+    );
 
     const screens = useBreakpoint();
-    const responsiveSizeStyle = computed(() => {
+    const responsiveSize = computed(() => {
       if (typeof props.size !== 'object') {
-        return {};
+        return undefined;
       }
       const currentBreakpoint: Breakpoint = responsiveArray.find(screen => screens.value[screen])!;
       const currentSize = props.size[currentBreakpoint];
 
-      const hasIcon = !!getPropsSlot(slots, props, 'icon');
-      return currentSize
-        ? {
-            width: `${currentSize}px`,
-            height: `${currentSize}px`,
-            lineHeight: `${currentSize}px`,
-            fontSize: `${hasIcon ? currentSize / 2 : 18}px`,
-          }
-        : {};
+      return currentSize;
     });
+
+    const responsiveSizeStyle = (hasIcon: boolean) => {
+      if (responsiveSize.value) {
+        return {
+          width: `${responsiveSize.value}px`,
+          height: `${responsiveSize.value}px`,
+          lineHeight: `${responsiveSize.value}px`,
+          fontSize: `${hasIcon ? responsiveSize.value / 2 : 18}px`,
+        };
+      }
+      return {};
+    };
 
     const setScale = () => {
       if (!avatarChildrenRef.value || !avatarNodeRef.value) {
@@ -136,7 +142,7 @@ const Avatar = defineComponent({
       const icon = getPropsSlot(slots, props, 'icon');
       const getPrefixCls = configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('avatar', customizePrefixCls);
-      const size = customSize === 'default' ? unref(groupSize) : customSize;
+      const size = customSize === 'default' ? groupSize.value : customSize;
       const classString = {
         [prefixCls]: true,
         [`${prefixCls}-lg`]: size === 'large',
@@ -206,7 +212,11 @@ const Avatar = defineComponent({
         <span
           ref={avatarNodeRef}
           class={classString}
-          style={{ ...sizeStyle, ...responsiveSizeStyle.value, ...(attrs.style as CSSProperties) }}
+          style={{
+            ...sizeStyle,
+            ...responsiveSizeStyle(!!icon),
+            ...(attrs.style as CSSProperties),
+          }}
         >
           {children}
         </span>

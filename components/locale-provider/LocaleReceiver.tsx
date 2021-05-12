@@ -1,4 +1,4 @@
-import { inject, defineComponent, VNodeTypes, PropType } from 'vue';
+import { inject, defineComponent, VNodeTypes, PropType, computed, ComputedRef } from 'vue';
 import PropTypes from '../_util/vue-types';
 import defaultLocaleData from './default';
 import { Locale } from '.';
@@ -30,39 +30,54 @@ export default defineComponent({
       >,
     },
   },
-  setup() {
-    return {
-      localeData: inject<LocaleReceiverContext>('localeData', {}),
-    };
-  },
-  methods: {
-    getLocale() {
-      const { componentName = 'global', defaultLocale } = this;
+  setup(props, { slots }) {
+    const localeData = inject<LocaleReceiverContext>('localeData', {});
+    const locale = computed(() => {
+      const { componentName = 'global', defaultLocale } = props;
       const locale =
         defaultLocale || (defaultLocaleData as LocaleInterface)[componentName || 'global'];
-      const { antLocale } = this.localeData;
+      const { antLocale } = localeData;
 
       const localeFromContext = componentName && antLocale ? antLocale[componentName] : {};
       return {
         ...(typeof locale === 'function' ? locale() : locale),
         ...(localeFromContext || {}),
       };
-    },
-
-    getLocaleCode() {
-      const { antLocale } = this.localeData;
+    });
+    const localeCode = computed(() => {
+      const { antLocale } = localeData;
       const localeCode = antLocale && antLocale.locale;
       // Had use LocaleProvide but didn't set locale
       if (antLocale && antLocale.exist && !localeCode) {
         return defaultLocaleData.locale;
       }
       return localeCode;
-    },
-  },
-  render() {
-    const { $slots } = this;
-    const children = this.children || $slots.default;
-    const { antLocale } = this.localeData;
-    return children?.(this.getLocale(), this.getLocaleCode(), antLocale);
+    });
+    return () => {
+      const children = props.children || slots.default;
+      const { antLocale } = localeData;
+      return children?.(locale.value, localeCode.value, antLocale);
+    };
   },
 });
+
+type LocaleComponent = keyof Locale;
+
+export function useLocaleReceiver<T extends LocaleComponent>(
+  componentName: T,
+  defaultLocale?: Locale[T] | Function,
+): [ComputedRef<Locale[T]>] {
+  const localeData = inject<LocaleReceiverContext>('localeData', {} as LocaleReceiverContext);
+  const componentLocale = computed(() => {
+    const { antLocale } = localeData;
+    const locale =
+      defaultLocale || (defaultLocaleData as LocaleInterface)[componentName || 'global'];
+    const localeFromContext = componentName && antLocale ? antLocale[componentName] : {};
+
+    return {
+      ...(typeof locale === 'function' ? (locale as Function)() : locale),
+      ...(localeFromContext || {}),
+    };
+  });
+  return [componentLocale];
+}

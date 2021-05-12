@@ -7,7 +7,7 @@ import {
   computed,
   onMounted,
 } from 'vue';
-import { isNumber } from 'lodash-es';
+import isNumber from 'lodash-es/isNumber';
 
 import BaseMixin from '../../_util/BaseMixin';
 import cn from '../../_util/classNames';

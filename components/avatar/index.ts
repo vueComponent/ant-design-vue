@@ -1,6 +1,20 @@
+import { App } from 'vue';
 import Avatar from './Avatar';
-import { withInstall } from '../_util/type';
+import Group from './Group';
 
-export { AvatarProps } from './Avatar';
+export { AvatarProps, AvatarSize } from './Avatar';
+export { AvatarGroupProps } from './Group';
 
-export default withInstall(Avatar);
+Avatar.Group = Group;
+
+/* istanbul ignore next */
+Avatar.install = function(app: App) {
+  app.component(Avatar.name, Avatar);
+  app.component(Group.name, Group);
+  return app;
+};
+
+export default Avatar as typeof Avatar &
+  Plugin & {
+    readonly Group: typeof Group;
+  };

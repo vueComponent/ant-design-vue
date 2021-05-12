@@ -14,6 +14,31 @@ export interface CSPConfig {
 
 export { RenderEmptyHandler };
 
+export interface ConfigConsumerProps {
+  getTargetContainer?: () => HTMLElement;
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+  rootPrefixCls?: string;
+  getPrefixCls: (suffixCls?: string, customizePrefixCls?: string) => string;
+  renderEmpty: RenderEmptyHandler;
+  transformCellText?: (tableProps: TransformCellTextProps) => any;
+  csp?: CSPConfig;
+  autoInsertSpaceInButton?: boolean;
+  input?: {
+    autoComplete?: string;
+  };
+  locale?: Locale;
+  pageHeader?: {
+    ghost: boolean;
+  };
+  componentSize?: SizeType;
+  direction?: 'ltr' | 'rtl';
+  space?: {
+    size?: SizeType | number;
+  };
+  virtual?: boolean;
+  dropdownMatchSelectWidth?: boolean;
+}
+
 export const configConsumerProps = [
   'getTargetContainer',
   'getPopupContainer',

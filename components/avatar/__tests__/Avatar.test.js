@@ -1,9 +1,14 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import Avatar from '..';
+import useBreakpoint from '../../_util/hooks/useBreakpoint';
+
+jest.mock('../../_util/hooks/useBreakpoint');
 
 describe('Avatar Render', () => {
   let originOffsetWidth;
+  const sizes = { xs: 24, sm: 32, md: 40, lg: 64, xl: 80, xxl: 100 };
+
   beforeAll(() => {
     // Mock offsetHeight
     originOffsetWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'offsetWidth').get;
@@ -122,6 +127,85 @@ describe('Avatar Render', () => {
     await asyncExpect(() => {
       expect(wrapper.findComponent({ name: 'AAvatar' }).findAll('img').length).toBe(1);
       expect(wrapper.findAll('.ant-avatar-image').length).toBe(1);
+    }, 0);
+  });
+
+  it('should calculate scale of avatar children correctly', async () => {
+    let wrapper = mount({
+      render() {
+        return <Avatar>Avatar</Avatar>;
+      },
+    });
+
+    await asyncExpect(() => {
+      expect(wrapper.find('.ant-avatar-string')).toMatchSnapshot();
+    }, 0);
+
+    Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
+      get() {
+        if (this.className === 'ant-avatar-string') {
+          return 100;
+        }
+        return 40;
+      },
+    });
+    wrapper = mount({
+      render() {
+        return <Avatar>xx</Avatar>;
+      },
+    });
+    await asyncExpect(() => {
+      expect(wrapper.find('.ant-avatar-string')).toMatchSnapshot();
+    }, 0);
+  });
+
+  it('should calculate scale of avatar children correctly with gap', async () => {
+    const wrapper = mount({
+      render() {
+        return <Avatar gap={2}>Avatar</Avatar>;
+      },
+    });
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot();
+    }, 0);
+  });
+
+  Object.entries(sizes).forEach(([key, value]) => {
+    it(`adjusts component size to ${value} when window size is ${key}`, async () => {
+      useBreakpoint.mockReturnValue({ value: { [key]: true } });
+
+      const wrapper = mount({
+        render() {
+          return <Avatar size={sizes} />;
+        },
+      });
+
+      await asyncExpect(() => {
+        expect(wrapper.html()).toMatchSnapshot();
+      }, 0);
+    });
+  });
+
+  it('fallback', async () => {
+    const div = global.document.createElement('div');
+    global.document.body.appendChild(div);
+    const wrapper = mount(
+      {
+        render() {
+          return (
+            <Avatar shape="circle" src="http://error.url">
+              A
+            </Avatar>
+          );
+        },
+      },
+      { attachTo: div },
+    );
+    await asyncExpect(async () => {
+      await wrapper.find('img').trigger('error');
+      expect(wrapper.html()).toMatchSnapshot();
+      wrapper.unmount();
+      global.document.body.removeChild(div);
     }, 0);
   });
 });

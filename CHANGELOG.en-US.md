@@ -10,6 +10,12 @@
 
 ---
 
+## 2.1.5
+
+`2021-05-12`
+
+- 🐞 Fix SSR time reporting error [#3983](https://github.com/vueComponent/ant-design-vue/issues/3983)
+
 ## 2.1.4
 
 `2021-05-09`

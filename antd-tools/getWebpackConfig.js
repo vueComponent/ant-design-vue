@@ -4,8 +4,9 @@ const path = require('path');
 const webpack = require('webpack');
 const WebpackBar = require('webpackbar');
 const { merge } = require('webpack-merge');
+const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CleanUpStatsPlugin = require('./utils/CleanUpStatsPlugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
@@ -207,6 +208,9 @@ All rights reserved.
       }),
       new CleanUpStatsPlugin(),
     ],
+    performance: {
+      hints: false,
+    },
   };
 
   if (process.env.RUN_ENV === 'PRODUCTION') {
@@ -223,17 +227,12 @@ All rights reserved.
     config.output.libraryTarget = 'umd';
     config.optimization = {
       minimizer: [
-        // eslint-disable-next-line no-unused-vars
-        compiler => {
-          return () => {
-            return {
-              parallel: true,
-              terserOptions: {
-                warnings: false,
-              },
-            };
-          };
-        },
+        new TerserPlugin({
+          parallel: true,
+          terserOptions: {
+            warnings: false,
+          },
+        }),
       ],
     };
 
@@ -266,7 +265,8 @@ All rights reserved.
         }),
       ],
       optimization: {
-        minimizer: [new OptimizeCSSAssetsPlugin({})],
+        minimize: true,
+        minimizer: [new CssMinimizerPlugin({})],
       },
     });
 

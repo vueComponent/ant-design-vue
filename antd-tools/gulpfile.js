@@ -118,10 +118,16 @@ function babelify(js, modules) {
         );
         file.path = file.path.replace(/index\.(js|jsx|ts|tsx)$/, 'css.js');
         this.push(file);
-        next();
-      } else {
-        next();
+      } else if (modules !== false) {
+        const content = file.contents.toString(encoding);
+        file.contents = Buffer.from(
+          content
+            .replace(/lodash-es/g, 'lodash')
+            .replace(/@ant-design\/icons-vue/g, '@ant-design/icons-vue/lib/icons'),
+        );
+        this.push(file);
       }
+      next();
     }),
   );
   if (modules === false) {
@@ -302,61 +308,54 @@ function publish(tagString, done) {
 }
 
 function pub(done) {
-  dist(code => {
-    if (code) {
-      done(code);
-      return;
-    }
-    const notOk = !packageJson.version.match(/^\d+\.\d+\.\d+$/);
-    let tagString;
-    if (argv['npm-tag']) {
-      tagString = argv['npm-tag'];
-    }
-    if (!tagString && notOk) {
-      tagString = 'next';
-    }
-    if (packageJson.scripts['pre-publish']) {
-      runCmd('npm', ['run', 'pre-publish'], code2 => {
-        if (code2) {
-          done(code2);
-          return;
-        }
-        publish(tagString, done);
-      });
-    } else {
+  const notOk = !packageJson.version.match(/^\d+\.\d+\.\d+$/);
+  let tagString;
+  if (argv['npm-tag']) {
+    tagString = argv['npm-tag'];
+  }
+  if (!tagString && notOk) {
+    tagString = 'next';
+  }
+  if (packageJson.scripts['pre-publish']) {
+    runCmd('npm', ['run', 'pre-publish'], code2 => {
+      if (code2) {
+        done(code2);
+        return;
+      }
       publish(tagString, done);
-    }
-  });
+    });
+  } else {
+    publish(tagString, done);
+  }
 }
 
-gulp.task(
-  'compile-with-es',
-  gulp.series(done => {
-    compile(false).on('finish', function() {
-      done();
-    });
-  }),
-);
+gulp.task('compile-with-es', done => {
+  console.log('[Parallel] Compile to es...');
+  compile(false).on('finish', done);
+});
+
+gulp.task('compile-with-lib', done => {
+  console.log('[Parallel] Compile to js...');
+  compile().on('finish', done);
+});
 
 gulp.task(
   'compile',
-  gulp.series('compile-with-es', done => {
-    compile().on('finish', function() {
-      done();
-    });
+  gulp.series(gulp.parallel('compile-with-es', 'compile-with-lib'), done => {
+    done();
   }),
 );
 
 gulp.task(
   'dist',
-  gulp.series('compile', done => {
+  gulp.series(done => {
     dist(done);
   }),
 );
 
 gulp.task(
   'pub',
-  gulp.series('check-git', 'compile', done => {
+  gulp.series('check-git', 'compile', 'dist', done => {
     // if (!process.env.GITHUB_TOKEN) {
     //   console.log('no GitHub token found, skip');
     // } else {

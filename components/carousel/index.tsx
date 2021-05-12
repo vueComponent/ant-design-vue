@@ -51,6 +51,7 @@ export const CarouselProps = {
   slickGoTo: PropTypes.number,
   responsive: PropTypes.array,
   dotPosition: PropTypes.oneOf(tuple('top', 'bottom', 'left', 'right')),
+  verticalSwiping: PropTypes.looseBool.def(false),
 };
 
 const Carousel = defineComponent({

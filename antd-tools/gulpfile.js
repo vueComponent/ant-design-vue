@@ -118,10 +118,16 @@ function babelify(js, modules) {
         );
         file.path = file.path.replace(/index\.(js|jsx|ts|tsx)$/, 'css.js');
         this.push(file);
-        next();
-      } else {
-        next();
+      } else if (modules !== false) {
+        const content = file.contents.toString(encoding);
+        file.contents = Buffer.from(
+          content
+            .replace(/lodash-es/g, 'lodash')
+            .replace(/@ant-design\/icons-vue/g, '@ant-design/icons-vue/lib/icons'),
+        );
+        this.push(file);
       }
+      next();
     }),
   );
   if (modules === false) {

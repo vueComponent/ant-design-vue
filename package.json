@@ -1,6 +1,6 @@
 {
   "name": "ant-design-vue",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation",
   "keywords": [
@@ -209,6 +209,7 @@
     "async-validator": "^3.3.0",
     "dom-align": "^1.10.4",
     "dom-scroll-into-view": "^2.0.0",
+    "lodash": "^4.17.21",
     "lodash-es": "^4.17.15",
     "moment": "^2.27.0",
     "omit.js": "^2.0.0",

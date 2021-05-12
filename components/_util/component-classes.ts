@@ -3,7 +3,7 @@
  * https://github.com/component/classes.git
  */
 
-import { indexOf } from 'lodash-es';
+import indexOf from 'lodash-es/indexOf';
 
 /**
  * Whitespace regexp.

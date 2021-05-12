@@ -13,7 +13,7 @@ import {
   toRaw,
   watch,
 } from 'vue';
-import { isEqual } from 'lodash-es';
+import isEqual from 'lodash-es/isEqual';
 
 const Menu = {
   name: 'Menu',

@@ -22,7 +22,7 @@ export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 
 export const avatarProps = {
   prefixCls: PropTypes.string,
-  shape: PropTypes.oneOf(tuple('circle', 'square')),
+  shape: PropTypes.oneOf(tuple('circle', 'square')).def('circle'),
   size: {
     type: [Number, String, Object] as PropType<AvatarSize>,
     default: (): AvatarSize => 'default',

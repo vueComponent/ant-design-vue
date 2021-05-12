@@ -1,20 +1,11 @@
-import toArray from 'lodash/toArray';
 import { cloneElement } from '../_util/vnode';
-import { defaultConfigProvider } from '../config-provider';
-import Avatar, { avatarProps } from './Avatar';
+import Avatar, { avatarProps, AvatarSize } from './Avatar';
 import Popover from '../popover';
-import {
-  computed,
-  defineComponent,
-  inject,
-  provide,
-  PropType,
-  ExtractPropTypes,
-  CSSProperties,
-} from 'vue';
+import { defineComponent, provide, PropType, ExtractPropTypes, CSSProperties } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getPropsSlot } from '../_util/props-util';
+import { flattenChildren, getPropsSlot } from '../_util/props-util';
 import { tuple } from '../_util/type';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 const groupProps = {
   prefixCls: PropTypes.string,
@@ -31,39 +22,30 @@ const groupProps = {
   size: avatarProps.size,
 };
 
-export type AvatarGroupProps = Partial<ExtractPropTypes<typeof groupProps>>;
+export type AvatarGroupProps = Partial<ExtractPropTypes<typeof groupProps>> & {
+  size?: AvatarSize;
+};
 
 const Group = defineComponent({
   name: 'AAvatarGroup',
   props: groupProps,
   inheritAttrs: false,
   setup(props, { slots, attrs }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
+    const { prefixCls, direction, size } = useConfigInject('avatar-group', props);
 
-    provide(
-      'SizeProvider',
-      computed(() => props.size || configProvider.componentSize),
-    );
+    provide('SizeProvider', size);
 
     return () => {
-      const {
-        prefixCls: customizePrefixCls,
-        maxPopoverPlacement = 'top',
-        maxCount,
-        maxStyle,
-      } = props;
-
-      const { getPrefixCls } = configProvider;
-      const prefixCls = getPrefixCls('avatar-group', customizePrefixCls);
-      const className = attrs.class as string;
+      const { maxPopoverPlacement = 'top', maxCount, maxStyle } = props;
 
       const cls = {
-        [prefixCls]: true,
-        [className]: className !== undefined,
+        [prefixCls.value]: true,
+        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        [`${attrs.class}`]: !!attrs.class,
       };
 
       const children = getPropsSlot(slots, props);
-      const childrenWithProps = toArray(children).map((child, index) =>
+      const childrenWithProps = flattenChildren(children).map((child, index) =>
         cloneElement(child, {
           key: `avatar-key-${index}`,
         }),
@@ -80,20 +62,20 @@ const Group = defineComponent({
             content={childrenHidden}
             trigger="hover"
             placement={maxPopoverPlacement}
-            overlayClassName={`${prefixCls}-popover`}
+            overlayClassName={`${prefixCls.value}-popover`}
           >
             <Avatar style={maxStyle}>{`+${numOfChildren - maxCount}`}</Avatar>
           </Popover>,
         );
         return (
-          <div class={cls} style={attrs.style}>
+          <div {...attrs} class={cls} style={attrs.style}>
             {childrenShow}
           </div>
         );
       }
 
       return (
-        <div class={cls} style={attrs.style}>
+        <div {...attrs} class={cls} style={attrs.style}>
           {childrenWithProps}
         </div>
       );

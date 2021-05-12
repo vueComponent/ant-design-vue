@@ -1,4 +1,12 @@
-import { reactive, provide, PropType, defineComponent, watch, ExtractPropTypes } from 'vue';
+import {
+  reactive,
+  provide,
+  PropType,
+  defineComponent,
+  watch,
+  ExtractPropTypes,
+  UnwrapRef,
+} from 'vue';
 import PropTypes from '../_util/vue-types';
 import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
 import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
@@ -13,6 +21,8 @@ export interface CSPConfig {
 }
 
 export { RenderEmptyHandler };
+
+export type Direction = 'ltr' | 'rtl';
 
 export interface ConfigConsumerProps {
   getTargetContainer?: () => HTMLElement;
@@ -146,13 +156,13 @@ const ConfigProvider = defineComponent({
   },
 });
 
-export const defaultConfigProvider: ConfigProviderProps = {
+export const defaultConfigProvider: UnwrapRef<ConfigProviderProps> = reactive({
   getPrefixCls: (suffixCls: string, customizePrefixCls?: string) => {
     if (customizePrefixCls) return customizePrefixCls;
     return `ant-${suffixCls}`;
   },
   renderEmpty: defaultRenderEmpty,
   direction: 'ltr',
-};
+});
 
 export default withInstall(ConfigProvider);

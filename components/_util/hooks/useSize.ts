@@ -3,7 +3,7 @@ import { ConfigProviderProps, defaultConfigProvider, SizeType } from '../../conf
 
 const sizeProvider = Symbol('SizeProvider');
 
-const useProviderSize = <T = SizeType>(props: Record<any, any>): ComputedRef<T> => {
+const useProvideSize = <T = SizeType>(props: Record<any, any>): ComputedRef<T> => {
   const configProvider = inject<UnwrapRef<ConfigProviderProps>>(
     'configProvider',
     defaultConfigProvider,
@@ -21,6 +21,6 @@ const useInjectSize = <T = SizeType>(): ComputedRef<T> => {
   return size;
 };
 
-export { useInjectSize, sizeProvider, useProviderSize };
+export { useInjectSize, sizeProvider, useProvideSize };
 
-export default useProviderSize;
+export default useProvideSize;

@@ -4,7 +4,6 @@ import {
   CSSProperties,
   defineComponent,
   ExtractPropTypes,
-  inject,
   nextTick,
   onMounted,
   PropType,

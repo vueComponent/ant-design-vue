@@ -10,6 +10,12 @@
 
 ---
 
+## 2.1.6
+
+`2021-05-13`
+
+- 🐞 Use vue@3.0.10 to rebuild to avoid console warning [#3998](https://github.com/vueComponent/ant-design-vue/issues/3998)
+
 ## 2.1.5
 
 `2021-05-12`

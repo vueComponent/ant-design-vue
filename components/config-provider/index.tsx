@@ -89,7 +89,7 @@ export const configProviderProps = {
     type: Object as PropType<{ ghost: boolean }>,
   },
   componentSize: {
-    type: Object as PropType<SizeType>,
+    type: String as PropType<SizeType>,
   },
   direction: {
     type: String as PropType<'ltr' | 'rtl'>,

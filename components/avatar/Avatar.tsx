@@ -7,16 +7,17 @@ import {
   inject,
   nextTick,
   onMounted,
-  onUpdated,
   PropType,
   ref,
   watch,
 } from 'vue';
-import { defaultConfigProvider } from '../config-provider';
 import { getPropsSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import { Breakpoint, responsiveArray, ScreenSizeMap } from '../_util/responsiveObserve';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import ResizeObserver from '../vc-resize-observer';
+import { useInjectSize } from '../_util/hooks/useSize';
 
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 
@@ -44,6 +45,8 @@ export type AvatarProps = Partial<ExtractPropTypes<typeof avatarProps>>;
 const Avatar = defineComponent({
   name: 'AAvatar',
   props: avatarProps,
+  inheritAttrs: false,
+  slots: ['icon'],
   setup(props, { slots, attrs }) {
     const isImgExist = ref(true);
     const isMounted = ref(false);
@@ -52,12 +55,9 @@ const Avatar = defineComponent({
     const avatarChildrenRef = ref<HTMLElement>(null);
     const avatarNodeRef = ref<HTMLElement>(null);
 
-    const configProvider = inject('configProvider', defaultConfigProvider);
+    const { prefixCls } = useConfigInject('avatar', props);
 
-    const groupSize = inject(
-      'SizeProvider',
-      computed(() => 'default'),
-    );
+    const groupSize = useInjectSize();
 
     const screens = useBreakpoint();
     const responsiveSize = computed(() => {
@@ -82,7 +82,7 @@ const Avatar = defineComponent({
       return {};
     };
 
-    const setScale = () => {
+    const setScaleParam = () => {
       if (!avatarChildrenRef.value || !avatarNodeRef.value) {
         return;
       }
@@ -116,40 +116,35 @@ const Avatar = defineComponent({
       },
     );
 
+    watch(
+      () => props.gap,
+      () => {
+        nextTick(() => {
+          setScaleParam();
+        });
+      },
+    );
+
     onMounted(() => {
       nextTick(() => {
-        setScale();
+        setScaleParam();
         isMounted.value = true;
       });
     });
 
-    onUpdated(() => {
-      nextTick(() => {
-        setScale();
-      });
-    });
-
     return () => {
-      const {
-        prefixCls: customizePrefixCls,
-        shape,
-        size: customSize,
-        src,
-        alt,
-        srcset,
-        draggable,
-      } = props;
+      const { shape, size: customSize, src, alt, srcset, draggable } = props;
       const icon = getPropsSlot(slots, props, 'icon');
-      const getPrefixCls = configProvider.getPrefixCls;
-      const prefixCls = getPrefixCls('avatar', customizePrefixCls);
+      const pre = prefixCls.value;
       const size = customSize === 'default' ? groupSize.value : customSize;
       const classString = {
-        [prefixCls]: true,
-        [`${prefixCls}-lg`]: size === 'large',
-        [`${prefixCls}-sm`]: size === 'small',
-        [`${prefixCls}-${shape}`]: shape,
-        [`${prefixCls}-image`]: src && isImgExist.value,
-        [`${prefixCls}-icon`]: icon,
+        [`${attrs.class}`]: !!attrs.class,
+        [pre]: true,
+        [`${pre}-lg`]: size === 'large',
+        [`${pre}-sm`]: size === 'small',
+        [`${pre}-${shape}`]: shape,
+        [`${pre}-image`]: src && isImgExist.value,
+        [`${pre}-icon`]: icon,
       };
 
       const sizeStyle: CSSProperties =
@@ -162,9 +157,10 @@ const Avatar = defineComponent({
             }
           : {};
 
-      let children: VueNode = slots.default?.();
+      const children: VueNode = slots.default?.();
+      let childrenToRender;
       if (src && isImgExist.value) {
-        children = (
+        childrenToRender = (
           <img
             draggable={draggable}
             src={src}
@@ -174,42 +170,41 @@ const Avatar = defineComponent({
           />
         );
       } else if (icon) {
-        children = icon;
-      } else {
-        const childrenNode = avatarChildrenRef.value;
-
-        if (childrenNode || scale.value !== 1) {
-          const transformString = `scale(${scale.value}) translateX(-50%)`;
-          const childrenStyle: CSSProperties = {
-            msTransform: transformString,
-            WebkitTransform: transformString,
-            transform: transformString,
-          };
-          const sizeChildrenStyle =
-            typeof size === 'number'
-              ? {
-                  lineHeight: `${size}px`,
-                }
-              : {};
-          children = (
+        childrenToRender = icon;
+      } else if (isMounted.value || scale.value !== 1) {
+        const transformString = `scale(${scale.value}) translateX(-50%)`;
+        const childrenStyle: CSSProperties = {
+          msTransform: transformString,
+          WebkitTransform: transformString,
+          transform: transformString,
+        };
+        const sizeChildrenStyle =
+          typeof size === 'number'
+            ? {
+                lineHeight: `${size}px`,
+              }
+            : {};
+        childrenToRender = (
+          <ResizeObserver onResize={setScaleParam}>
             <span
-              class={`${prefixCls}-string`}
+              class={`${pre}-string`}
               ref={avatarChildrenRef}
               style={{ ...sizeChildrenStyle, ...childrenStyle }}
             >
               {children}
             </span>
-          );
-        } else {
-          children = (
-            <span class={`${prefixCls}-string`} ref={avatarChildrenRef} style={{ opacity: 0 }}>
-              {children}
-            </span>
-          );
-        }
+          </ResizeObserver>
+        );
+      } else {
+        childrenToRender = (
+          <span class={`${pre}-string`} ref={avatarChildrenRef} style={{ opacity: 0 }}>
+            {children}
+          </span>
+        );
       }
       return (
         <span
+          {...attrs}
           ref={avatarNodeRef}
           class={classString}
           style={{
@@ -218,7 +213,7 @@ const Avatar = defineComponent({
             ...(attrs.style as CSSProperties),
           }}
         >
-          {children}
+          {childrenToRender}
         </span>
       );
     };

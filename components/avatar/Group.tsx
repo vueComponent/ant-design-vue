@@ -6,6 +6,7 @@ import PropTypes from '../_util/vue-types';
 import { flattenChildren, getPropsSlot } from '../_util/props-util';
 import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import useProviderSize from '../_util/hooks/useSize';
 
 const groupProps = {
   prefixCls: PropTypes.string,
@@ -31,10 +32,8 @@ const Group = defineComponent({
   props: groupProps,
   inheritAttrs: false,
   setup(props, { slots, attrs }) {
-    const { prefixCls, direction, size } = useConfigInject('avatar-group', props);
-
-    provide('SizeProvider', size);
-
+    const { prefixCls, direction } = useConfigInject('avatar-group', props);
+    useProviderSize<AvatarSize>(props);
     return () => {
       const { maxPopoverPlacement = 'top', maxCount, maxStyle } = props;
 

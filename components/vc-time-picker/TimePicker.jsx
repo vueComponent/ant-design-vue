@@ -326,6 +326,11 @@ export default defineComponent({
         </a>
       );
     },
+    onInput() {
+      // input value is always synchronized with sValue
+      // ref: https://github.com/vueComponent/ant-design-vue/issues/4084
+      this.picker.value = (this.sValue && this.sValue.format(this.getFormat())) || '';
+    },
   },
 
   render() {
@@ -378,6 +383,7 @@ export default defineComponent({
             disabled={disabled}
             value={(sValue && sValue.format(this.getFormat())) || ''}
             autocomplete={autocomplete}
+            onInput={this.onInput}
             onFocus={onFocus}
             onBlur={onBlur}
             autofocus={autofocus}

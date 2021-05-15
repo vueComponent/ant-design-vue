@@ -1,4 +1,5 @@
-import { computed, ComputedRef, inject, InjectionKey, provide } from 'vue';
+import { Key } from '../../../_util/type';
+import { ComputedRef, inject, InjectionKey, provide, Ref } from 'vue';
 
 // import {
 //   BuiltinPlacements,
@@ -10,19 +11,21 @@ import { computed, ComputedRef, inject, InjectionKey, provide } from 'vue';
 
 export interface MenuContextProps {
   prefixCls: ComputedRef<string>;
-  // openKeys: string[];
+  openKeys: Ref<Key[]>;
+  selectedKeys: Ref<Key[]>;
   // rtl?: boolean;
 
   // // Mode
   // mode: MenuMode;
 
   // // Disabled
-  // disabled?: boolean;
+  disabled?: ComputedRef<boolean>;
   // // Used for overflow only. Prevent hidden node trigger open
   // overflowDisabled?: boolean;
 
   // // Active
-  // activeKey: string;
+  activeKeys: Ref<Key[]>;
+  changeActiveKeys: (keys: Key[]) => void;
   // onActive: (key: string) => void;
   // onInactive: (key: string) => void;
 
@@ -60,9 +63,7 @@ const useProvideMenu = (props: MenuContextProps) => {
 };
 
 const useInjectMenu = () => {
-  return inject(MenuContextKey, {
-    prefixCls: computed(() => 'ant'),
-  });
+  return inject(MenuContextKey);
 };
 
 export { useProvideMenu, MenuContextKey, useInjectMenu };

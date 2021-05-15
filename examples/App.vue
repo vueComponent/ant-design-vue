@@ -7,6 +7,7 @@
     mode="inline"
     @click="handleClick"
   >
+    <a-menu-item key="0">Option 0</a-menu-item>
     <a-sub-menu key="sub1" @titleClick="titleClick">
       <template #title>
         <span>

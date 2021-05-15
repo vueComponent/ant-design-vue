@@ -1,3 +1,5 @@
+export type MenuTheme = 'light' | 'dark';
+
 // ========================== Basic ==========================
 export type MenuMode = 'horizontal' | 'vertical' | 'inline';
 

@@ -8,13 +8,14 @@ export default defineComponent({
   props: {
     title: PropTypes.VNodeChild,
   },
+  inheritAttrs: false,
   slots: ['title'],
-  setup(props, { slots }) {
+  setup(props, { slots, attrs }) {
     const { prefixCls } = useInjectMenu();
     const groupPrefixCls = computed(() => `${prefixCls.value}-item-group`);
     return () => {
       return (
-        <li onClick={e => e.stopPropagation()} class={groupPrefixCls.value}>
+        <li {...attrs} onClick={e => e.stopPropagation()} class={groupPrefixCls.value}>
           <div
             title={typeof props.title === 'string' ? props.title : undefined}
             class={`${groupPrefixCls.value}-title`}

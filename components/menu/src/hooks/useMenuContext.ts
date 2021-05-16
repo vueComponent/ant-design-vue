@@ -1,22 +1,22 @@
 import { Key } from '../../../_util/type';
-import { ComputedRef, inject, InjectionKey, provide, Ref } from 'vue';
-
-// import {
-//   BuiltinPlacements,
-//   MenuClickEventHandler,
-//   MenuMode,
-//   RenderIconType,
-//   TriggerSubMenuAction,
-// } from '../interface';
+import { ComputedRef, FunctionalComponent, inject, InjectionKey, provide, Ref } from 'vue';
+import { BuiltinPlacements, MenuMode, MenuTheme, TriggerSubMenuAction } from '../interface';
 
 export interface MenuContextProps {
   prefixCls: ComputedRef<string>;
   openKeys: Ref<Key[]>;
   selectedKeys: Ref<Key[]>;
-  // rtl?: boolean;
+  rtl?: ComputedRef<boolean>;
+
+  locked?: Ref<boolean>;
+
+  inlineCollapsed: Ref<boolean>;
+  antdMenuTheme?: ComputedRef<MenuTheme>;
+
+  siderCollapsed?: ComputedRef<boolean>;
 
   // // Mode
-  // mode: MenuMode;
+  mode: Ref<MenuMode>;
 
   // // Disabled
   disabled?: ComputedRef<boolean>;
@@ -33,18 +33,18 @@ export interface MenuContextProps {
   // selectedKeys: string[];
 
   // // Level
-  // inlineIndent: number;
+  inlineIndent: ComputedRef<number>;
 
   // // Motion
-  // // motion?: CSSMotionProps;
-  // // defaultMotions?: Partial<{ [key in MenuMode | 'other']: CSSMotionProps }>;
+  motion?: any;
+  defaultMotions?: Partial<{ [key in MenuMode | 'other']: any }>;
 
   // // Popup
-  // subMenuOpenDelay: number;
-  // subMenuCloseDelay: number;
+  subMenuOpenDelay: ComputedRef<number>;
+  subMenuCloseDelay: ComputedRef<number>;
   // forceSubMenuRender?: boolean;
-  // builtinPlacements?: BuiltinPlacements;
-  // triggerSubMenuAction?: TriggerSubMenuAction;
+  builtinPlacements?: ComputedRef<BuiltinPlacements>;
+  triggerSubMenuAction?: ComputedRef<TriggerSubMenuAction>;
 
   // // Icon
   // itemIcon?: RenderIconType;
@@ -53,7 +53,7 @@ export interface MenuContextProps {
   // // Function
   // onItemClick: MenuClickEventHandler;
   // onOpenChange: (key: string, open: boolean) => void;
-  // getPopupContainer: (node: HTMLElement) => HTMLElement;
+  getPopupContainer: ComputedRef<(node: HTMLElement) => HTMLElement>;
 }
 
 const MenuContextKey: InjectionKey<MenuContextProps> = Symbol('menuContextKey');
@@ -66,6 +66,34 @@ const useInjectMenu = () => {
   return inject(MenuContextKey);
 };
 
-export { useProvideMenu, MenuContextKey, useInjectMenu };
+const MenuFirstLevelContextKey: InjectionKey<Boolean> = Symbol('menuFirstLevelContextKey');
+const useProvideFirstLevel = (firstLevel: Boolean) => {
+  provide(MenuFirstLevelContextKey, firstLevel);
+};
+
+const useInjectFirstLevel = () => {
+  return inject(MenuFirstLevelContextKey, true);
+};
+
+const MenuContextProvider: FunctionalComponent<{ props: Record<string, any> }> = (
+  props,
+  { slots },
+) => {
+  useProvideMenu({ ...useInjectMenu(), ...props });
+  return slots.default?.();
+};
+MenuContextProvider.props = { props: Object };
+MenuContextProvider.inheritAttrs = false;
+MenuContextProvider.displayName = 'MenuContextProvider';
+
+export {
+  useProvideMenu,
+  MenuContextKey,
+  useInjectMenu,
+  MenuFirstLevelContextKey,
+  useProvideFirstLevel,
+  useInjectFirstLevel,
+  MenuContextProvider,
+};
 
 export default useProvideMenu;

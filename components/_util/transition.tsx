@@ -1,4 +1,11 @@
-import { defineComponent, nextTick, Transition as T, TransitionGroup as TG } from 'vue';
+import {
+  BaseTransitionProps,
+  CSSProperties,
+  defineComponent,
+  nextTick,
+  Transition as T,
+  TransitionGroup as TG,
+} from 'vue';
 import { findDOMNode } from './props-util';
 
 export const getTransitionProps = (transitionName: string, opt: object = {}) => {
@@ -80,6 +87,37 @@ if (process.env.NODE_ENV === 'test') {
   });
 }
 
-export { Transition, TransitionGroup };
+export declare type MotionEvent = (TransitionEvent | AnimationEvent) & {
+  deadline?: boolean;
+};
+
+export declare type MotionEventHandler = (
+  element: HTMLElement,
+  done?: () => void,
+) => CSSProperties | void;
+
+export declare type MotionEndEventHandler = (
+  element: HTMLElement,
+  done?: () => void,
+) => boolean | void;
+
+// ================== Collapse Motion ==================
+const getCollapsedHeight: MotionEventHandler = () => ({ height: 0, opacity: 0 });
+const getRealHeight: MotionEventHandler = node => ({ height: node.scrollHeight, opacity: 1 });
+const getCurrentHeight: MotionEventHandler = node => ({ height: node.offsetHeight });
+// const skipOpacityTransition: MotionEndEventHandler = (_, event) =>
+//   (event as TransitionEvent).propertyName === 'height';
+
+const collapseMotion: BaseTransitionProps<HTMLElement> = {
+  // motionName: 'ant-motion-collapse',
+  appear: true,
+  // onAppearStart: getCollapsedHeight,
+  onBeforeEnter: getCollapsedHeight,
+  onEnter: getRealHeight,
+  onBeforeLeave: getCurrentHeight,
+  onLeave: getCollapsedHeight,
+};
+
+export { Transition, TransitionGroup, collapseMotion };
 
 export default Transition;

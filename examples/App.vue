@@ -15,14 +15,11 @@
           <span>Navigation One</span>
         </span>
       </template>
-      <a-menu-item-group key="g1">
-        <template #title>
-          <QqOutlined />
-          <span>Item 1</span>
-        </template>
-        <a-menu-item key="1">Option 1</a-menu-item>
-        <a-menu-item key="2">Option 2</a-menu-item>
-      </a-menu-item-group>
+      <a-menu-item key="1">
+        <template #icon><QqOutlined /></template>
+        Option 1
+      </a-menu-item>
+      <a-menu-item key="2">Option 2</a-menu-item>
       <a-menu-item-group key="g2" title="Item 2">
         <a-menu-item key="3">Option 3</a-menu-item>
         <a-menu-item key="4">Option 4</a-menu-item>

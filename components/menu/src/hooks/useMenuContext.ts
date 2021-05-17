@@ -1,5 +1,5 @@
 import { Key } from '../../../_util/type';
-import { ComputedRef, FunctionalComponent, inject, InjectionKey, provide, Ref } from 'vue';
+import { ComputedRef, defineComponent, inject, InjectionKey, provide, Ref } from 'vue';
 import { BuiltinPlacements, MenuMode, MenuTheme, TriggerSubMenuAction } from '../interface';
 
 export interface MenuContextProps {
@@ -21,7 +21,7 @@ export interface MenuContextProps {
   // // Disabled
   disabled?: ComputedRef<boolean>;
   // // Used for overflow only. Prevent hidden node trigger open
-  // overflowDisabled?: boolean;
+  overflowDisabled?: ComputedRef<boolean>;
 
   // // Active
   activeKeys: Ref<Key[]>;
@@ -52,7 +52,7 @@ export interface MenuContextProps {
 
   // // Function
   // onItemClick: MenuClickEventHandler;
-  // onOpenChange: (key: string, open: boolean) => void;
+  onOpenChange: (key: Key, open: boolean) => void;
   getPopupContainer: ComputedRef<(node: HTMLElement) => HTMLElement>;
 }
 
@@ -75,16 +75,17 @@ const useInjectFirstLevel = () => {
   return inject(MenuFirstLevelContextKey, true);
 };
 
-const MenuContextProvider: FunctionalComponent<{ props: Record<string, any> }> = (
-  props,
-  { slots },
-) => {
-  useProvideMenu({ ...useInjectMenu(), ...props });
-  return slots.default?.();
-};
-MenuContextProvider.props = { props: Object };
-MenuContextProvider.inheritAttrs = false;
-MenuContextProvider.displayName = 'MenuContextProvider';
+const MenuContextProvider = defineComponent({
+  name: 'MenuContextProvider',
+  inheritAttrs: false,
+  props: {
+    props: Object,
+  },
+  setup(props, { slots }) {
+    useProvideMenu({ ...useInjectMenu(), ...props });
+    return () => slots.default?.();
+  },
+});
 
 export {
   useProvideMenu,

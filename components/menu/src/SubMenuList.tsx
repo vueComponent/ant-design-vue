@@ -7,9 +7,9 @@ const InternalSubMenuList: FunctionalComponent<any> = (_props, { slots, attrs })
     <ul
       {...attrs}
       class={classNames(
-        prefixCls,
-        `${prefixCls}-sub`,
-        `${prefixCls}-${mode.value === 'inline' ? 'inline' : 'vertical'}`,
+        prefixCls.value,
+        `${prefixCls.value}-sub`,
+        `${prefixCls.value}-${mode.value === 'inline' ? 'inline' : 'vertical'}`,
       )}
       data-menu-list
     >

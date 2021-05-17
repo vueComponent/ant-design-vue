@@ -18,6 +18,7 @@ export const menuProps = {
   prefixCls: String,
   disabled: Boolean,
   inlineCollapsed: Boolean,
+  overflowDisabled: Boolean,
 
   theme: { type: String as PropType<MenuTheme>, default: 'light' },
   mode: { type: String as PropType<MenuMode>, default: 'vertical' },
@@ -38,7 +39,8 @@ export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
 export default defineComponent({
   name: 'AMenu',
   props: menuProps,
-  setup(props, { slots }) {
+  emits: ['update:openKeys', 'openChange'],
+  setup(props, { slots, emit }) {
     const { prefixCls, direction } = useConfigInject('menu', props);
 
     const siderCollapsed = inject(
@@ -105,6 +107,11 @@ export default defineComponent({
 
     useProvideFirstLevel(true);
 
+    const onOpenChange = (key: Key, open: boolean) => {
+      // emit('update:openKeys', openKeys);
+      emit('openChange', open);
+    };
+
     useProvideMenu({
       prefixCls,
       activeKeys,
@@ -124,6 +131,8 @@ export default defineComponent({
       antdMenuTheme: computed(() => props.theme),
       siderCollapsed,
       defaultMotions,
+      overflowDisabled: computed(() => props.overflowDisabled),
+      onOpenChange,
     });
     return () => {
       return <ul class={className.value}>{slots.default?.()}</ul>;

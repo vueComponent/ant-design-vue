@@ -1,9 +1,13 @@
 import PropTypes from '../../_util/vue-types';
-import { computed, defineComponent, getCurrentInstance, ref } from 'vue';
+import { computed, defineComponent, getCurrentInstance, ref, watch, PropType } from 'vue';
 import useProvideKeyPath, { useInjectKeyPath } from './hooks/useKeyPath';
-import { useInjectMenu, useProvideFirstLevel } from './hooks/useMenuContext';
+import { useInjectMenu, useProvideFirstLevel, MenuContextProvider } from './hooks/useMenuContext';
 import { getPropsSlot, isValidElement } from 'ant-design-vue/es/_util/props-util';
 import classNames from 'ant-design-vue/es/_util/classNames';
+import useDirectionStyle from './hooks/useDirectionStyle';
+import PopupTrigger from './PopupTrigger';
+import SubMenuList from './SubMenuList';
+import InlineSubMenuList from './InlineSubMenuList';
 
 export default defineComponent({
   name: 'ASubMenu',
@@ -13,30 +17,32 @@ export default defineComponent({
     disabled: Boolean,
     level: Number,
     popupClassName: String,
-    popupOffset: [Number, Number],
+    popupOffset: Array as PropType<number[]>,
+    internalPopupClose: Boolean,
   },
   slots: ['icon', 'title'],
+  emits: ['titleClick', 'titleMouseenter', 'titleMouseleave'],
   inheritAttrs: false,
-  setup(props, { slots, attrs }) {
+  setup(props, { slots, attrs, emit }) {
     useProvideKeyPath();
     useProvideFirstLevel(false);
     const instance = getCurrentInstance();
     const key = instance.vnode.key;
-    const keyPath = useInjectKeyPath();
+    const parentKeys = useInjectKeyPath();
     const {
       prefixCls,
       activeKeys,
       disabled: contextDisabled,
       changeActiveKeys,
-      rtl,
       mode,
       inlineCollapsed,
       antdMenuTheme,
       openKeys,
       overflowDisabled,
+      onOpenChange,
     } = useInjectMenu();
 
-    const subMenuPrefixCls = computed(() => `${prefixCls}-submenu`);
+    const subMenuPrefixCls = computed(() => `${prefixCls.value}-submenu`);
     const mergedDisabled = computed(() => contextDisabled.value || props.disabled);
     const elementRef = ref();
     const popupRef = ref();
@@ -49,8 +55,73 @@ export default defineComponent({
     const originOpen = computed(() => openKeys.value.includes(key));
     const open = computed(() => !overflowDisabled.value && originOpen.value);
 
+    // =============================== Select ===============================
+    const childrenSelected = ref(true); // isSubPathKey(selectedKeys, eventKey);
+
+    const isActive = ref(false);
+    watch(
+      activeKeys,
+      () => {
+        isActive.value = !!activeKeys.value.find(val => val === key);
+      },
+      { immediate: true },
+    );
+
+    // =============================== Events ===============================
+    // >>>> Title click
+    const onInternalTitleClick = (e: Event) => {
+      // Skip if disabled
+      if (mergedDisabled) {
+        return;
+      }
+      emit('titleClick', e, key);
+
+      // Trigger open by click when mode is `inline`
+      if (mode.value === 'inline') {
+        onOpenChange(key, !originOpen);
+      }
+    };
+
+    const onMouseEnter = (event: MouseEvent) => {
+      if (!mergedDisabled.value) {
+        changeActiveKeys([...parentKeys.value, key]);
+        emit('titleMouseenter', event);
+      }
+    };
+    const onMouseLeave = (event: MouseEvent) => {
+      if (!mergedDisabled.value) {
+        changeActiveKeys([]);
+        emit('titleMouseleave', event);
+      }
+    };
+
+    // ========================== DirectionStyle ==========================
+    const directionStyle = useDirectionStyle(computed(() => parentKeys.value.length));
+
+    // >>>>> Visible change
+    const onPopupVisibleChange = (newVisible: boolean) => {
+      if (mode.value !== 'inline') {
+        onOpenChange(key, newVisible);
+      }
+    };
+
+    /**
+     * Used for accessibility. Helper will focus element without key board.
+     * We should manually trigger an active
+     */
+    const onInternalFocus = () => {
+      changeActiveKeys([...parentKeys.value, key]);
+    };
+
+    // =============================== Render ===============================
+    const popupId = key && `${key}-popup`;
+
     const popupClassName = computed(() =>
-      classNames(prefixCls, `${prefixCls.value}-${antdMenuTheme.value}`, props.popupClassName),
+      classNames(
+        prefixCls.value,
+        `${prefixCls.value}-${antdMenuTheme.value}`,
+        props.popupClassName,
+      ),
     );
     const renderTitle = (title: any, icon: any) => {
       if (!icon) {
@@ -78,13 +149,103 @@ export default defineComponent({
         `${prefixCls.value}-${mode.value === 'inline' ? 'inline' : 'vertical'}`,
       ),
     );
+
+    // Cache mode if it change to `inline` which do not have popup motion
+    const triggerModeRef = computed(() => {
+      return mode.value !== 'inline' && parentKeys.value.length > 1 ? 'vertical' : mode.value;
+    });
+
+    const renderMode = computed(() => (mode.value === 'horizontal' ? 'vertical' : mode.value));
+
     return () => {
       const icon = getPropsSlot(slots, props, 'icon');
       const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);
+      const subMenuPrefixClsValue = subMenuPrefixCls.value;
+      let titleNode = (
+        <div
+          role="menuitem"
+          style={directionStyle.value}
+          class={`${subMenuPrefixClsValue}-title`}
+          tabindex={mergedDisabled.value ? null : -1}
+          ref={elementRef}
+          title={typeof title === 'string' ? title : null}
+          data-menu-id={key}
+          aria-expanded={open.value}
+          aria-haspopup
+          aria-controls={popupId}
+          aria-disabled={mergedDisabled.value}
+          onClick={onInternalTitleClick}
+          onFocus={onInternalFocus}
+          onMouseenter={onMouseEnter}
+          onMouseleave={onMouseLeave}
+        >
+          {title}
+
+          {/* Only non-horizontal mode shows the icon */}
+          {mode.value !== 'horizontal' && slots.expandIcon ? (
+            slots.expandIcon({ ...props, isOpen: open.value })
+          ) : (
+            <i class={`${subMenuPrefixClsValue}-arrow`} />
+          )}
+        </div>
+      );
+
+      if (!overflowDisabled.value) {
+        const triggerMode = triggerModeRef.value;
+
+        // Still wrap with Trigger here since we need avoid react re-mount dom node
+        // Which makes motion failed
+        titleNode = (
+          <PopupTrigger
+            mode={triggerMode}
+            prefixCls={subMenuPrefixClsValue}
+            visible={!props.internalPopupClose && open.value && mode.value !== 'inline'}
+            popupClassName={popupClassName.value}
+            popupOffset={props.popupOffset}
+            disabled={mergedDisabled.value}
+            onVisibleChange={onPopupVisibleChange}
+            v-slots={{
+              popup: () => (
+                <MenuContextProvider props={{ mode: triggerModeRef }}>
+                  <SubMenuList id={popupId} ref={popupRef}>
+                    {slots.default?.()}
+                  </SubMenuList>
+                </MenuContextProvider>
+              ),
+            }}
+          >
+            {titleNode}
+          </PopupTrigger>
+        );
+      }
       return (
-        <ul {...attrs} class={[className.value, attrs.class]} data-menu-list>
-          {slots.default?.()}
-        </ul>
+        <MenuContextProvider props={{ mode: renderMode }}>
+          <li
+            {...attrs}
+            role="none"
+            class={classNames(
+              subMenuPrefixClsValue,
+              `${subMenuPrefixClsValue}-${mode.value}`,
+              className.value,
+              attrs.class,
+              {
+                [`${subMenuPrefixClsValue}-open`]: open.value,
+                [`${subMenuPrefixClsValue}-active`]: isActive.value,
+                [`${subMenuPrefixClsValue}-selected`]: childrenSelected.value,
+                [`${subMenuPrefixClsValue}-disabled`]: mergedDisabled.value,
+              },
+            )}
+          >
+            {titleNode}
+
+            {/* Inline mode */}
+            {!overflowDisabled.value && (
+              <InlineSubMenuList id={popupId} open={open.value} keyPath={parentKeys.value}>
+                {slots.default?.()}
+              </InlineSubMenuList>
+            )}
+          </li>
+        </MenuContextProvider>
       );
     };
   },

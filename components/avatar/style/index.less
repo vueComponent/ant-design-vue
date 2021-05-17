@@ -7,13 +7,14 @@
   .reset-component();
 
   position: relative;
-  display: inline-block;
+  display: inline-flex;
   overflow: hidden;
   color: @avatar-color;
   white-space: nowrap;
-  text-align: center;
   vertical-align: middle;
   background: @avatar-bg;
+  justify-content: center;
+  align-items: center;
 
   &-image {
     background: transparent;
@@ -44,7 +45,6 @@
 .avatar-size(@size, @font-size) {
   width: @size;
   height: @size;
-  line-height: @size;
   border-radius: 50%;
 
   &-string {
@@ -55,5 +55,8 @@
 
   &.@{avatar-prefix-cls}-icon {
     font-size: @font-size;
+    .@{iconfont-css-prefix} {
+      margin: 0;
+    }
   }
 }

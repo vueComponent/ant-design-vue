@@ -1,5 +1,5 @@
 import PropTypes from '../../_util/vue-types';
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, getCurrentInstance, ref } from 'vue';
 import useProvideKeyPath, { useInjectKeyPath } from './hooks/useKeyPath';
 import { useInjectMenu, useProvideFirstLevel } from './hooks/useMenuContext';
 import { getPropsSlot, isValidElement } from 'ant-design-vue/es/_util/props-util';
@@ -20,17 +20,34 @@ export default defineComponent({
   setup(props, { slots, attrs }) {
     useProvideKeyPath();
     useProvideFirstLevel(false);
+    const instance = getCurrentInstance();
+    const key = instance.vnode.key;
     const keyPath = useInjectKeyPath();
     const {
       prefixCls,
       activeKeys,
-      disabled,
+      disabled: contextDisabled,
       changeActiveKeys,
       rtl,
       mode,
       inlineCollapsed,
       antdMenuTheme,
+      openKeys,
+      overflowDisabled,
     } = useInjectMenu();
+
+    const subMenuPrefixCls = computed(() => `${prefixCls}-submenu`);
+    const mergedDisabled = computed(() => contextDisabled.value || props.disabled);
+    const elementRef = ref();
+    const popupRef = ref();
+
+    // // ================================ Icon ================================
+    // const mergedItemIcon = itemIcon || contextItemIcon;
+    // const mergedExpandIcon = expandIcon || contextExpandIcon;
+
+    // ================================ Open ================================
+    const originOpen = computed(() => openKeys.value.includes(key));
+    const open = computed(() => !overflowDisabled.value && originOpen.value);
 
     const popupClassName = computed(() =>
       classNames(prefixCls, `${prefixCls.value}-${antdMenuTheme.value}`, props.popupClassName),

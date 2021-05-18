@@ -1,7 +1,9 @@
 import { computed, defineComponent, ref, watch } from '@vue/runtime-core';
+import Transition from 'ant-design-vue/es/_util/transition';
 import { useInjectMenu, MenuContextProvider } from './hooks/useMenuContext';
 import { MenuMode } from './interface';
 import SubMenuList from './SubMenuList';
+
 export default defineComponent({
   name: 'InlineSubMenuList',
   inheritAttrs: false,
@@ -12,9 +14,11 @@ export default defineComponent({
   },
   setup(props, { slots }) {
     const fixedMode: MenuMode = 'inline';
-    const { prefixCls, forceSubMenuRender, motion, mode } = useInjectMenu();
+    const { prefixCls, forceSubMenuRender, motion, mode, defaultMotions } = useInjectMenu();
     const sameModeRef = computed(() => mode.value === fixedMode);
     const destroy = ref(!sameModeRef.value);
+
+    const mergedOpen = computed(() => (sameModeRef.value ? props.open : false));
 
     // ================================= Effect =================================
     // Reset destroy state when mode change back
@@ -27,9 +31,11 @@ export default defineComponent({
       },
       { flush: 'post' },
     );
-    let transitionProps = computed(() => {
-      return { appear: props.keyPath.length > 1, css: false };
-    });
+
+    const mergedMotion = computed(() => ({
+      ...(motion.value || defaultMotions.value?.[fixedMode]),
+      appear: props.keyPath.length <= 1,
+    }));
 
     return () => {
       if (destroy.value) {
@@ -42,7 +48,11 @@ export default defineComponent({
             locked: !sameModeRef.value,
           }}
         >
-          <SubMenuList id={props.id}>{slots.default?.()}</SubMenuList>
+          <Transition {...mergedMotion.value}>
+            <SubMenuList v-show={mergedOpen.value} id={props.id}>
+              {slots.default?.()}
+            </SubMenuList>
+          </Transition>
         </MenuContextProvider>
       );
     };

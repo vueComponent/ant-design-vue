@@ -92,23 +92,20 @@ export declare type MotionEvent = (TransitionEvent | AnimationEvent) & {
 };
 
 export declare type MotionEventHandler = (
-  element: HTMLElement,
+  element: Element,
   done?: () => void,
 ) => CSSProperties | void;
 
-export declare type MotionEndEventHandler = (
-  element: HTMLElement,
-  done?: () => void,
-) => boolean | void;
+export declare type MotionEndEventHandler = (element: Element, done?: () => void) => boolean | void;
 
 // ================== Collapse Motion ==================
 const getCollapsedHeight: MotionEventHandler = () => ({ height: 0, opacity: 0 });
 const getRealHeight: MotionEventHandler = node => ({ height: node.scrollHeight, opacity: 1 });
-const getCurrentHeight: MotionEventHandler = node => ({ height: node.offsetHeight });
+const getCurrentHeight: MotionEventHandler = (node: any) => ({ height: node.offsetHeight });
 // const skipOpacityTransition: MotionEndEventHandler = (_, event) =>
 //   (event as TransitionEvent).propertyName === 'height';
 
-export interface CSSMotionProps extends Partial<BaseTransitionProps<HTMLElement>> {
+export interface CSSMotionProps extends Partial<BaseTransitionProps<Element>> {
   name?: string;
   css?: boolean;
 }
@@ -116,7 +113,6 @@ export interface CSSMotionProps extends Partial<BaseTransitionProps<HTMLElement>
 const collapseMotion: CSSMotionProps = {
   name: 'ant-motion-collapse',
   appear: true,
-  css: false,
   // onAppearStart: getCollapsedHeight,
   onBeforeEnter: getCollapsedHeight,
   onEnter: getRealHeight,

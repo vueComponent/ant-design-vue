@@ -1,6 +1,7 @@
 import { Key } from '../../../_util/type';
 import { ComputedRef, defineComponent, inject, InjectionKey, provide, Ref, UnwrapRef } from 'vue';
 import { BuiltinPlacements, MenuMode, MenuTheme, TriggerSubMenuAction } from '../interface';
+import { CSSMotionProps } from '../../../_util/transition';
 
 export interface StoreMenuInfo {
   eventKey: string;
@@ -46,8 +47,8 @@ export interface MenuContextProps {
   inlineIndent: ComputedRef<number>;
 
   // // Motion
-  motion?: any;
-  defaultMotions?: Partial<{ [key in MenuMode | 'other']: any }>;
+  motion?: ComputedRef<CSSMotionProps | null>;
+  defaultMotions?: ComputedRef<Partial<{ [key in MenuMode | 'other']: CSSMotionProps }> | null>;
 
   // // Popup
   subMenuOpenDelay: ComputedRef<number>;

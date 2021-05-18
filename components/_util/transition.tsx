@@ -108,9 +108,15 @@ const getCurrentHeight: MotionEventHandler = node => ({ height: node.offsetHeigh
 // const skipOpacityTransition: MotionEndEventHandler = (_, event) =>
 //   (event as TransitionEvent).propertyName === 'height';
 
-const collapseMotion: BaseTransitionProps<HTMLElement> = {
-  // motionName: 'ant-motion-collapse',
+export interface CSSMotionProps extends Partial<BaseTransitionProps<HTMLElement>> {
+  name?: string;
+  css?: boolean;
+}
+
+const collapseMotion: CSSMotionProps = {
+  name: 'ant-motion-collapse',
   appear: true,
+  css: false,
   // onAppearStart: getCollapsedHeight,
   onBeforeEnter: getCollapsedHeight,
   onEnter: getRealHeight,

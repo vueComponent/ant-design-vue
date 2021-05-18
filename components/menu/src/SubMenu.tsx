@@ -182,14 +182,6 @@ export default defineComponent({
       );
     };
 
-    const className = computed(() =>
-      classNames(
-        prefixCls.value,
-        `${prefixCls.value}-sub`,
-        `${prefixCls.value}-${mode.value === 'inline' ? 'inline' : 'vertical'}`,
-      ),
-    );
-
     // Cache mode if it change to `inline` which do not have popup motion
     const triggerModeRef = computed(() => {
       return mode.value !== 'inline' && keysPath.value.length > 1 ? 'vertical' : mode.value;
@@ -266,7 +258,6 @@ export default defineComponent({
             class={classNames(
               subMenuPrefixClsValue,
               `${subMenuPrefixClsValue}-${mode.value}`,
-              className.value,
               attrs.class,
               {
                 [`${subMenuPrefixClsValue}-open`]: open.value,

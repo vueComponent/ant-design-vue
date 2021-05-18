@@ -9,13 +9,14 @@ import {
   watchEffect,
   watch,
   reactive,
+  onMounted,
 } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
 import useProvideMenu, { StoreMenuInfo, useProvideFirstLevel } from './hooks/useMenuContext';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import { MenuTheme, MenuMode, BuiltinPlacements, TriggerSubMenuAction } from './interface';
 import devWarning from 'ant-design-vue/es/vc-util/devWarning';
-import { collapseMotion } from 'ant-design-vue/es/_util/transition';
+import { collapseMotion, CSSMotionProps } from 'ant-design-vue/es/_util/transition';
 
 export const menuProps = {
   prefixCls: String,
@@ -23,6 +24,8 @@ export const menuProps = {
   inlineCollapsed: Boolean,
   overflowDisabled: Boolean,
   openKeys: Array,
+
+  motion: Object as PropType<CSSMotionProps>,
 
   theme: { type: String as PropType<MenuTheme>, default: 'light' },
   mode: { type: String as PropType<MenuMode>, default: 'vertical' },
@@ -59,6 +62,10 @@ export default defineComponent({
       return inlineCollapsed;
     });
 
+    const isMounted = ref(false);
+    onMounted(() => {
+      isMounted.value = true;
+    });
     watchEffect(() => {
       devWarning(
         !('inlineCollapsed' in props && props.mode !== 'inline'),
@@ -115,9 +122,9 @@ export default defineComponent({
     });
 
     const defaultMotions = {
-      horizontal: { motionName: `ant-slide-up` },
+      horizontal: { name: `ant-slide-up` },
       inline: collapseMotion,
-      other: { motionName: `ant-zoom-big` },
+      other: { name: `ant-zoom-big` },
     };
 
     useProvideFirstLevel(true);
@@ -176,7 +183,8 @@ export default defineComponent({
       inlineCollapsed: mergedInlineCollapsed,
       antdMenuTheme: computed(() => props.theme),
       siderCollapsed,
-      defaultMotions,
+      defaultMotions: computed(() => (isMounted.value ? defaultMotions : null)),
+      motion: computed(() => (isMounted.value ? props.motion : null)),
       overflowDisabled: computed(() => props.overflowDisabled),
       onOpenChange: onInternalOpenChange,
       registerMenuInfo,

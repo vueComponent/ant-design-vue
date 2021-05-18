@@ -1,8 +1,18 @@
 import { Key } from '../../../_util/type';
-import { ComputedRef, defineComponent, inject, InjectionKey, provide, Ref } from 'vue';
+import { ComputedRef, defineComponent, inject, InjectionKey, provide, Ref, UnwrapRef } from 'vue';
 import { BuiltinPlacements, MenuMode, MenuTheme, TriggerSubMenuAction } from '../interface';
 
+export interface StoreMenuInfo {
+  eventKey: string;
+  key: Key;
+  parentEventKeys: ComputedRef<Key[]>;
+  childrenEventKeys: Ref<Key[]>;
+  isLeaf?: boolean;
+}
 export interface MenuContextProps {
+  store: UnwrapRef<Record<string, StoreMenuInfo>>;
+  registerMenuInfo: (key: string, info: StoreMenuInfo) => void;
+  unRegisterMenuInfo: (key: string) => void;
   prefixCls: ComputedRef<string>;
   openKeys: Ref<Key[]>;
   selectedKeys: Ref<Key[]>;

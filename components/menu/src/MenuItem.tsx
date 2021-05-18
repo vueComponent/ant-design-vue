@@ -23,9 +23,9 @@ export default defineComponent({
   setup(props, { slots, emit, attrs }) {
     const instance = getCurrentInstance();
     const key = instance.vnode.key;
-    const uniKey = `menu_item_${++indexGuid}`;
-    const parentKeys = useInjectKeyPath();
-    console.log(parentKeys.value);
+    const eventKey = `menu_item_${++indexGuid}_$$_${key}`;
+    const { parentEventKeys } = useInjectKeyPath();
+    console.log(parentEventKeys.value);
     const {
       prefixCls,
       activeKeys,
@@ -58,7 +58,7 @@ export default defineComponent({
     });
     const onMouseEnter = (event: MouseEvent) => {
       if (!mergedDisabled.value) {
-        changeActiveKeys([...parentKeys.value, key]);
+        changeActiveKeys([...parentEventKeys.value, key]);
         emit('mouseenter', event);
       }
     };

@@ -7,8 +7,11 @@ import {
   PropType,
   inject,
   watchEffect,
+  watch,
+  reactive,
 } from 'vue';
-import useProvideMenu, { useProvideFirstLevel } from './hooks/useMenuContext';
+import shallowEqual from '../../_util/shallowequal';
+import useProvideMenu, { StoreMenuInfo, useProvideFirstLevel } from './hooks/useMenuContext';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import { MenuTheme, MenuMode, BuiltinPlacements, TriggerSubMenuAction } from './interface';
 import devWarning from 'ant-design-vue/es/vc-util/devWarning';
@@ -19,6 +22,7 @@ export const menuProps = {
   disabled: Boolean,
   inlineCollapsed: Boolean,
   overflowDisabled: Boolean,
+  openKeys: Array,
 
   theme: { type: String as PropType<MenuTheme>, default: 'light' },
   mode: { type: String as PropType<MenuMode>, default: 'vertical' },
@@ -42,7 +46,7 @@ export default defineComponent({
   emits: ['update:openKeys', 'openChange'],
   setup(props, { slots, emit }) {
     const { prefixCls, direction } = useConfigInject('menu', props);
-
+    const store = reactive<Record<string, StoreMenuInfo>>({});
     const siderCollapsed = inject(
       'layoutSiderCollapsed',
       computed(() => undefined),
@@ -70,8 +74,19 @@ export default defineComponent({
     });
 
     const activeKeys = ref([]);
-    const openKeys = ref([]);
     const selectedKeys = ref([]);
+
+    const mergedOpenKeys = ref([]);
+
+    watch(
+      () => props.openKeys,
+      (openKeys = mergedOpenKeys.value) => {
+        console.log('mergedOpenKeys', openKeys);
+        mergedOpenKeys.value = openKeys;
+      },
+      { immediate: true },
+    );
+
     const changeActiveKeys = (keys: Key[]) => {
       activeKeys.value = keys;
     };
@@ -107,15 +122,46 @@ export default defineComponent({
 
     useProvideFirstLevel(true);
 
-    const onOpenChange = (key: Key, open: boolean) => {
-      // emit('update:openKeys', openKeys);
-      emit('openChange', open);
+    const getChildrenKeys = (eventKeys: string[]): Key[] => {
+      const keys = [];
+      eventKeys.forEach(eventKey => {
+        const { key, childrenEventKeys } = store[eventKey] as any;
+        keys.push(key, ...getChildrenKeys(childrenEventKeys.value));
+      });
+      return keys;
+    };
+
+    const onInternalOpenChange = (eventKey: Key, open: boolean) => {
+      const { key, childrenEventKeys } = store[eventKey] as any;
+      let newOpenKeys = mergedOpenKeys.value.filter(k => k !== key);
+
+      if (open) {
+        newOpenKeys.push(key);
+      } else if (mergedMode.value !== 'inline') {
+        // We need find all related popup to close
+        const subPathKeys = getChildrenKeys(childrenEventKeys.value);
+        newOpenKeys = newOpenKeys.filter(k => !subPathKeys.includes(k));
+      }
+
+      if (!shallowEqual(mergedOpenKeys, newOpenKeys)) {
+        mergedOpenKeys.value = newOpenKeys;
+        emit('update:openKeys', newOpenKeys);
+        emit('openChange', key, open);
+      }
+    };
+
+    const registerMenuInfo = (key: string, info: StoreMenuInfo) => {
+      store[key] = info as any;
+    };
+    const unRegisterMenuInfo = (key: string) => {
+      delete store[key];
     };
 
     useProvideMenu({
+      store,
       prefixCls,
       activeKeys,
-      openKeys,
+      openKeys: mergedOpenKeys,
       selectedKeys,
       changeActiveKeys,
       disabled,
@@ -132,7 +178,9 @@ export default defineComponent({
       siderCollapsed,
       defaultMotions,
       overflowDisabled: computed(() => props.overflowDisabled),
-      onOpenChange,
+      onOpenChange: onInternalOpenChange,
+      registerMenuInfo,
+      unRegisterMenuInfo,
     });
     return () => {
       return <ul class={className.value}>{slots.default?.()}</ul>;

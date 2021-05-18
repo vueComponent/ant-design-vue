@@ -1,5 +1,13 @@
 import PropTypes from '../../_util/vue-types';
-import { computed, defineComponent, getCurrentInstance, ref, watch, PropType } from 'vue';
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  ref,
+  watch,
+  PropType,
+  onBeforeUnmount,
+} from 'vue';
 import useProvideKeyPath, { useInjectKeyPath } from './hooks/useKeyPath';
 import { useInjectMenu, useProvideFirstLevel, MenuContextProvider } from './hooks/useMenuContext';
 import { getPropsSlot, isValidElement } from 'ant-design-vue/es/_util/props-util';
@@ -9,6 +17,7 @@ import PopupTrigger from './PopupTrigger';
 import SubMenuList from './SubMenuList';
 import InlineSubMenuList from './InlineSubMenuList';
 
+let indexGuid = 0;
 export default defineComponent({
   name: 'ASubMenu',
   props: {
@@ -24,11 +33,34 @@ export default defineComponent({
   emits: ['titleClick', 'titleMouseenter', 'titleMouseleave'],
   inheritAttrs: false,
   setup(props, { slots, attrs, emit }) {
-    useProvideKeyPath();
     useProvideFirstLevel(false);
+
     const instance = getCurrentInstance();
     const key = instance.vnode.key;
-    const parentKeys = useInjectKeyPath();
+
+    const eventKey = `sub_menu_${++indexGuid}_$$_${key}`;
+    const { parentEventKeys, parentInfo } = useInjectKeyPath();
+    const keysPath = computed(() => [...parentEventKeys.value, eventKey]);
+
+    const childrenEventKeys = ref([]);
+    const menuInfo = {
+      eventKey,
+      key,
+      parentEventKeys,
+      childrenEventKeys,
+    };
+
+    parentInfo.childrenEventKeys?.value.push(eventKey);
+    onBeforeUnmount(() => {
+      if (parentInfo.childrenEventKeys) {
+        parentInfo.childrenEventKeys.value = parentInfo.childrenEventKeys?.value.filter(
+          k => k != eventKey,
+        );
+      }
+    });
+
+    useProvideKeyPath(eventKey, menuInfo);
+
     const {
       prefixCls,
       activeKeys,
@@ -40,7 +72,15 @@ export default defineComponent({
       openKeys,
       overflowDisabled,
       onOpenChange,
+      registerMenuInfo,
+      unRegisterMenuInfo,
     } = useInjectMenu();
+
+    registerMenuInfo(eventKey, menuInfo);
+
+    onBeforeUnmount(() => {
+      unRegisterMenuInfo(eventKey);
+    });
 
     const subMenuPrefixCls = computed(() => `${prefixCls.value}-submenu`);
     const mergedDisabled = computed(() => contextDisabled.value || props.disabled);
@@ -71,20 +111,20 @@ export default defineComponent({
     // >>>> Title click
     const onInternalTitleClick = (e: Event) => {
       // Skip if disabled
-      if (mergedDisabled) {
+      if (mergedDisabled.value) {
         return;
       }
       emit('titleClick', e, key);
 
       // Trigger open by click when mode is `inline`
       if (mode.value === 'inline') {
-        onOpenChange(key, !originOpen);
+        onOpenChange(eventKey, !originOpen.value);
       }
     };
 
     const onMouseEnter = (event: MouseEvent) => {
       if (!mergedDisabled.value) {
-        changeActiveKeys([...parentKeys.value, key]);
+        changeActiveKeys(keysPath.value);
         emit('titleMouseenter', event);
       }
     };
@@ -96,12 +136,12 @@ export default defineComponent({
     };
 
     // ========================== DirectionStyle ==========================
-    const directionStyle = useDirectionStyle(computed(() => parentKeys.value.length));
+    const directionStyle = useDirectionStyle(computed(() => keysPath.value.length));
 
     // >>>>> Visible change
     const onPopupVisibleChange = (newVisible: boolean) => {
       if (mode.value !== 'inline') {
-        onOpenChange(key, newVisible);
+        onOpenChange(eventKey, newVisible);
       }
     };
 
@@ -110,11 +150,11 @@ export default defineComponent({
      * We should manually trigger an active
      */
     const onInternalFocus = () => {
-      changeActiveKeys([...parentKeys.value, key]);
+      changeActiveKeys(keysPath.value);
     };
 
     // =============================== Render ===============================
-    const popupId = key && `${key}-popup`;
+    const popupId = eventKey && `${eventKey}-popup`;
 
     const popupClassName = computed(() =>
       classNames(
@@ -152,7 +192,7 @@ export default defineComponent({
 
     // Cache mode if it change to `inline` which do not have popup motion
     const triggerModeRef = computed(() => {
-      return mode.value !== 'inline' && parentKeys.value.length > 1 ? 'vertical' : mode.value;
+      return mode.value !== 'inline' && keysPath.value.length > 1 ? 'vertical' : mode.value;
     });
 
     const renderMode = computed(() => (mode.value === 'horizontal' ? 'vertical' : mode.value));
@@ -240,7 +280,7 @@ export default defineComponent({
 
             {/* Inline mode */}
             {!overflowDisabled.value && (
-              <InlineSubMenuList id={popupId} open={open.value} keyPath={parentKeys.value}>
+              <InlineSubMenuList id={popupId} open={open.value} keyPath={keysPath.value}>
                 {slots.default?.()}
               </InlineSubMenuList>
             )}

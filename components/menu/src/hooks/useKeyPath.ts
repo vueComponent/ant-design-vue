@@ -1,20 +1,23 @@
 import { Key } from '../../../_util/type';
-import { computed, ComputedRef, getCurrentInstance, inject, InjectionKey, provide } from 'vue';
+import { computed, ComputedRef, inject, InjectionKey, provide } from 'vue';
+import { StoreMenuInfo } from './useMenuContext';
 
-const KeyPathContext: InjectionKey<ComputedRef<Key[]>> = Symbol('KeyPathContext');
+const KeyPathContext: InjectionKey<{
+  parentEventKeys: ComputedRef<Key[]>;
+  parentInfo: StoreMenuInfo;
+}> = Symbol('KeyPathContext');
 
 const useInjectKeyPath = () => {
-  return inject(
-    KeyPathContext,
-    computed(() => []),
-  );
+  return inject(KeyPathContext, {
+    parentEventKeys: computed(() => []),
+    parentInfo: {} as StoreMenuInfo,
+  });
 };
 
-const useProvideKeyPath = () => {
-  const parentKeys = useInjectKeyPath();
-  const key = getCurrentInstance().vnode.key;
-  const keys = computed(() => [...parentKeys.value, key]);
-  provide(KeyPathContext, keys);
+const useProvideKeyPath = (eventKey: string, menuInfo: StoreMenuInfo) => {
+  const { parentEventKeys } = useInjectKeyPath();
+  const keys = computed(() => [...parentEventKeys.value, eventKey]);
+  provide(KeyPathContext, { parentEventKeys: keys, parentInfo: menuInfo });
   return keys;
 };
 

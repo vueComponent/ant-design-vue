@@ -5,6 +5,7 @@ import { useInjectKeyPath } from './hooks/useKeyPath';
 import { useInjectFirstLevel, useInjectMenu } from './hooks/useMenuContext';
 import { cloneElement } from '../../_util/vnode';
 import Tooltip from '../../tooltip';
+import { MenuInfo } from './interface';
 
 let indexGuid = 0;
 
@@ -17,7 +18,7 @@ export default defineComponent({
     title: { type: [String, Boolean] },
     icon: PropTypes.VNodeChild,
   },
-  emits: ['mouseenter', 'mouseleave'],
+  emits: ['mouseenter', 'mouseleave', 'click'],
   slots: ['icon'],
   inheritAttrs: false,
   setup(props, { slots, emit, attrs }) {
@@ -34,6 +35,7 @@ export default defineComponent({
       rtl,
       inlineCollapsed,
       siderCollapsed,
+      onItemClick,
     } = useInjectMenu();
     const firstLevel = useInjectFirstLevel();
     const isActive = ref(false);
@@ -56,6 +58,27 @@ export default defineComponent({
         [`${itemCls}-disabled`]: mergedDisabled.value,
       };
     });
+
+    const getEventInfo = (e: MouseEvent): MenuInfo => {
+      return {
+        key: key,
+        eventKey: eventKey,
+        eventKeyPath: [...parentEventKeys.value, key],
+        domEvent: e,
+      };
+    };
+
+    // ============================ Events ============================
+    const onInternalClick = (e: MouseEvent) => {
+      if (mergedDisabled.value) {
+        return;
+      }
+
+      const info = getEventInfo(e);
+      emit('click', e);
+      onItemClick(info);
+    };
+
     const onMouseEnter = (event: MouseEvent) => {
       if (!mergedDisabled.value) {
         changeActiveKeys([...parentEventKeys.value, key]);
@@ -135,6 +158,7 @@ export default defineComponent({
             {...optionRoleProps}
             onMouseenter={onMouseEnter}
             onMouseleave={onMouseLeave}
+            onClick={onInternalClick}
             title={typeof title === 'string' ? title : undefined}
           >
             {cloneElement(icon, {

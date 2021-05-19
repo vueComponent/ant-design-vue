@@ -14,7 +14,14 @@ import {
 import shallowEqual from '../../_util/shallowequal';
 import useProvideMenu, { StoreMenuInfo, useProvideFirstLevel } from './hooks/useMenuContext';
 import useConfigInject from '../../_util/hooks/useConfigInject';
-import { MenuTheme, MenuMode, BuiltinPlacements, TriggerSubMenuAction } from './interface';
+import {
+  MenuTheme,
+  MenuMode,
+  BuiltinPlacements,
+  TriggerSubMenuAction,
+  MenuInfo,
+  SelectInfo,
+} from './interface';
 import devWarning from 'ant-design-vue/es/vc-util/devWarning';
 import { collapseMotion, CSSMotionProps } from 'ant-design-vue/es/_util/transition';
 
@@ -24,6 +31,9 @@ export const menuProps = {
   inlineCollapsed: Boolean,
   overflowDisabled: Boolean,
   openKeys: Array,
+  selectedKeys: Array,
+  selectable: Boolean,
+  multiple: Boolean,
 
   motion: Object as PropType<CSSMotionProps>,
 
@@ -46,7 +56,7 @@ export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
 export default defineComponent({
   name: 'AMenu',
   props: menuProps,
-  emits: ['update:openKeys', 'openChange'],
+  emits: ['update:openKeys', 'openChange', 'select', 'deselect', 'update:selectedKeys'],
   setup(props, { slots, emit }) {
     const { prefixCls, direction } = useConfigInject('menu', props);
     const store = reactive<Record<string, StoreMenuInfo>>({});
@@ -81,7 +91,48 @@ export default defineComponent({
     });
 
     const activeKeys = ref([]);
-    const selectedKeys = ref([]);
+    const mergedSelectedKeys = ref([]);
+
+    watch(
+      () => props.selectedKeys,
+      (selectedKeys = mergedSelectedKeys.value) => {
+        mergedSelectedKeys.value = selectedKeys;
+      },
+      { immediate: true },
+    );
+
+    // >>>>> Trigger select
+    const triggerSelection = (info: MenuInfo) => {
+      if (!props.selectable) {
+        return;
+      }
+
+      // Insert or Remove
+      const { key: targetKey } = info;
+      const exist = mergedSelectedKeys.value.includes(targetKey);
+      let newSelectedKeys: Key[];
+
+      if (exist) {
+        newSelectedKeys = mergedSelectedKeys.value.filter(key => key !== targetKey);
+      } else if (props.multiple) {
+        newSelectedKeys = [...mergedSelectedKeys.value, targetKey];
+      } else {
+        newSelectedKeys = [targetKey];
+      }
+
+      mergedSelectedKeys.value = newSelectedKeys;
+      // Trigger event
+      const selectInfo: SelectInfo = {
+        ...info,
+        selectedKeys: newSelectedKeys,
+      };
+
+      if (exist) {
+        emit('deselect', selectInfo);
+      } else {
+        emit('select', selectInfo);
+      }
+    };
 
     const mergedOpenKeys = ref([]);
 
@@ -201,7 +252,7 @@ export default defineComponent({
       prefixCls,
       activeKeys,
       openKeys: mergedOpenKeys,
-      selectedKeys,
+      selectedKeys: mergedSelectedKeys,
       changeActiveKeys,
       disabled,
       rtl: isRtl,
@@ -219,6 +270,7 @@ export default defineComponent({
       motion: computed(() => (isMounted.value ? props.motion : null)),
       overflowDisabled: computed(() => props.overflowDisabled),
       onOpenChange: onInternalOpenChange,
+      onItemClick: triggerSelection,
       registerMenuInfo,
       unRegisterMenuInfo,
     });

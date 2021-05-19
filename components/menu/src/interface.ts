@@ -1,3 +1,5 @@
+import { Key } from 'ant-design-vue/es/_util/type';
+
 export type MenuTheme = 'light' | 'dark';
 
 // ========================== Basic ==========================
@@ -17,22 +19,24 @@ export interface RenderIconInfo {
 export type RenderIconType = (props: RenderIconInfo) => any;
 
 export interface MenuInfo {
-  key: string;
-  keyPath: string[];
+  key: Key;
+  eventKey: string;
+  keyPath?: string[];
+  eventKeyPath: Key[];
   domEvent: MouseEvent | KeyboardEvent;
 }
 
 export interface MenuTitleInfo {
-  key: string;
+  key: Key;
   domEvent: MouseEvent | KeyboardEvent;
 }
 
 // ========================== Hover ==========================
-export type MenuHoverEventHandler = (info: { key: string; domEvent: MouseEvent }) => void;
+export type MenuHoverEventHandler = (info: { key: Key; domEvent: MouseEvent }) => void;
 
 // ======================== Selection ========================
 export interface SelectInfo extends MenuInfo {
-  selectedKeys: string[];
+  selectedKeys: Key[];
 }
 
 export type SelectEventHandler = (info: SelectInfo) => void;

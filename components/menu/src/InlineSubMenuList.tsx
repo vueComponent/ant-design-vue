@@ -1,4 +1,4 @@
-import { computed, defineComponent, reactive, ref, watch } from '@vue/runtime-core';
+import { computed, defineComponent, ref, watch } from '@vue/runtime-core';
 import Transition from 'ant-design-vue/es/_util/transition';
 import { useInjectMenu, MenuContextProvider } from './hooks/useMenuContext';
 import { MenuMode } from './interface';
@@ -14,7 +14,7 @@ export default defineComponent({
   },
   setup(props, { slots }) {
     const fixedMode: MenuMode = 'inline';
-    const { prefixCls, forceSubMenuRender, motion, mode, defaultMotions } = useInjectMenu();
+    const { forceSubMenuRender, motion, mode, defaultMotions } = useInjectMenu();
     const sameModeRef = computed(() => mode.value === fixedMode);
     const destroy = ref(!sameModeRef.value);
 

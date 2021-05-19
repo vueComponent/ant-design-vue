@@ -9,7 +9,13 @@ import {
   Ref,
   UnwrapRef,
 } from 'vue';
-import { BuiltinPlacements, MenuMode, MenuTheme, TriggerSubMenuAction } from '../interface';
+import {
+  BuiltinPlacements,
+  MenuClickEventHandler,
+  MenuMode,
+  MenuTheme,
+  TriggerSubMenuAction,
+} from '../interface';
 import { CSSMotionProps } from '../../../_util/transition';
 
 export interface StoreMenuInfo {
@@ -77,7 +83,7 @@ export interface MenuContextProps {
   // expandIcon?: RenderIconType;
 
   // // Function
-  // onItemClick: MenuClickEventHandler;
+  onItemClick: MenuClickEventHandler;
   onOpenChange: (key: Key, open: boolean) => void;
   getPopupContainer: ComputedRef<(node: HTMLElement) => HTMLElement>;
 }

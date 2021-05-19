@@ -100,6 +100,39 @@ export default defineComponent({
     const isRtl = computed(() => direction.value === 'rtl');
     const mergedMode = ref<MenuMode>('vertical');
     const mergedInlineCollapsed = ref(false);
+
+    const isInlineMode = computed(() => mergedMode.value === 'inline');
+
+    // >>>>> Cache & Reset open keys when inlineCollapsed changed
+    const inlineCacheOpenKeys = ref([]);
+
+    // Cache
+    watchEffect(() => {
+      if (isInlineMode.value) {
+        inlineCacheOpenKeys.value = mergedOpenKeys.value;
+      }
+    });
+
+    const mountRef = ref(false);
+
+    // Restore
+    watch(isInlineMode, () => {
+      if (!mountRef.value) {
+        mountRef.value = true;
+        return;
+      }
+
+      if (isInlineMode.value) {
+        mergedOpenKeys.value = inlineCacheOpenKeys.value;
+      } else {
+        const empty = [];
+        mergedOpenKeys.value = empty;
+        // Trigger open event in case its in control
+        emit('update:openKeys', empty);
+        emit('openChange', empty);
+      }
+    });
+
     watchEffect(() => {
       if (props.mode === 'inline' && inlineCollapsed.value) {
         mergedMode.value = 'vertical';
@@ -152,7 +185,7 @@ export default defineComponent({
       if (!shallowEqual(mergedOpenKeys, newOpenKeys)) {
         mergedOpenKeys.value = newOpenKeys;
         emit('update:openKeys', newOpenKeys);
-        emit('openChange', key, open);
+        emit('openChange', newOpenKeys);
       }
     };
 

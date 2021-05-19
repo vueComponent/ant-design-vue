@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, watch } from '@vue/runtime-core';
+import { computed, defineComponent, reactive, ref, watch } from '@vue/runtime-core';
 import Transition from 'ant-design-vue/es/_util/transition';
 import { useInjectMenu, MenuContextProvider } from './hooks/useMenuContext';
 import { MenuMode } from './interface';
@@ -31,12 +31,13 @@ export default defineComponent({
       },
       { flush: 'post' },
     );
-
-    const mergedMotion = computed(() => ({
-      ...(motion.value || defaultMotions.value?.[fixedMode]),
-      appear: props.keyPath.length <= 1,
-    }));
-
+    const style = ref({});
+    const className = ref('');
+    const mergedMotion = computed(() => {
+      const m = motion.value || defaultMotions.value?.[fixedMode];
+      const res = typeof m === 'function' ? m(style, className) : m;
+      return { ...res, appear: props.keyPath.length <= 1 };
+    });
     return () => {
       if (destroy.value) {
         return null;
@@ -49,7 +50,12 @@ export default defineComponent({
           }}
         >
           <Transition {...mergedMotion.value}>
-            <SubMenuList v-show={mergedOpen.value} id={props.id}>
+            <SubMenuList
+              v-show={mergedOpen.value}
+              id={props.id}
+              style={style.value}
+              class={className.value}
+            >
               {slots.default?.()}
             </SubMenuList>
           </Transition>

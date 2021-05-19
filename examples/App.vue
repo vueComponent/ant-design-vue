@@ -67,15 +67,15 @@ export default defineComponent({
     const selectedKeys = ref<string[]>(['1']);
     const openKeys = ref<string[]>(['sub1']);
     const handleClick = (e: Event) => {
-      console.log('click', e);
+      // console.log('click', e);
     };
     const titleClick = (e: Event) => {
-      console.log('titleClick', e);
+      // console.log('titleClick', e);
     };
     watch(
       () => openKeys,
       val => {
-        console.log('openKeys', val);
+        // console.log('openKeys', val);
       },
     );
     return {

@@ -88,7 +88,6 @@ export default defineComponent({
     watch(
       () => props.openKeys,
       (openKeys = mergedOpenKeys.value) => {
-        console.log('mergedOpenKeys', openKeys);
         mergedOpenKeys.value = openKeys;
       },
       { immediate: true },

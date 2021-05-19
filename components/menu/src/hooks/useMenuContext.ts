@@ -1,5 +1,14 @@
 import { Key } from '../../../_util/type';
-import { ComputedRef, defineComponent, inject, InjectionKey, provide, Ref, UnwrapRef } from 'vue';
+import {
+  ComputedRef,
+  CSSProperties,
+  defineComponent,
+  inject,
+  InjectionKey,
+  provide,
+  Ref,
+  UnwrapRef,
+} from 'vue';
 import { BuiltinPlacements, MenuMode, MenuTheme, TriggerSubMenuAction } from '../interface';
 import { CSSMotionProps } from '../../../_util/transition';
 
@@ -48,7 +57,13 @@ export interface MenuContextProps {
 
   // // Motion
   motion?: ComputedRef<CSSMotionProps | null>;
-  defaultMotions?: ComputedRef<Partial<{ [key in MenuMode | 'other']: CSSMotionProps }> | null>;
+  defaultMotions?: ComputedRef<Partial<
+    {
+      [key in MenuMode | 'other']:
+        | CSSMotionProps
+        | ((style: Ref<CSSProperties>, className: Ref<string>) => CSSMotionProps);
+    }
+  > | null>;
 
   // // Popup
   subMenuOpenDelay: ComputedRef<number>;

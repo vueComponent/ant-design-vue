@@ -3,6 +3,7 @@ import {
   CSSProperties,
   defineComponent,
   nextTick,
+  Ref,
   Transition as T,
   TransitionGroup as TG,
 } from 'vue';
@@ -91,17 +92,17 @@ export declare type MotionEvent = (TransitionEvent | AnimationEvent) & {
   deadline?: boolean;
 };
 
-export declare type MotionEventHandler = (
-  element: Element,
-  done?: () => void,
-) => CSSProperties | void;
+export declare type MotionEventHandler = (element: Element, done?: () => void) => CSSProperties;
 
 export declare type MotionEndEventHandler = (element: Element, done?: () => void) => boolean | void;
 
 // ================== Collapse Motion ==================
 const getCollapsedHeight: MotionEventHandler = () => ({ height: 0, opacity: 0 });
-const getRealHeight: MotionEventHandler = node => ({ height: node.scrollHeight, opacity: 1 });
-const getCurrentHeight: MotionEventHandler = (node: any) => ({ height: node.offsetHeight });
+const getRealHeight: MotionEventHandler = node => ({
+  height: `${node.scrollHeight}px`,
+  opacity: 1,
+});
+const getCurrentHeight: MotionEventHandler = (node: any) => ({ height: `${node.offsetHeight}px` });
 // const skipOpacityTransition: MotionEndEventHandler = (_, event) =>
 //   (event as TransitionEvent).propertyName === 'height';
 
@@ -110,14 +111,38 @@ export interface CSSMotionProps extends Partial<BaseTransitionProps<Element>> {
   css?: boolean;
 }
 
-const collapseMotion: CSSMotionProps = {
-  name: 'ant-motion-collapse',
-  appear: true,
-  // onAppearStart: getCollapsedHeight,
-  onBeforeEnter: getCollapsedHeight,
-  onEnter: getRealHeight,
-  onBeforeLeave: getCurrentHeight,
-  onLeave: getCollapsedHeight,
+const collapseMotion = (style: Ref<CSSProperties>, className: Ref<string>): CSSMotionProps => {
+  return {
+    name: 'ant-motion-collapse',
+    appear: true,
+    css: true,
+    onBeforeEnter: node => {
+      className.value = 'ant-motion-collapse';
+      style.value = getCollapsedHeight(node);
+    },
+    onEnter: node => {
+      nextTick(() => {
+        style.value = getRealHeight(node);
+      });
+    },
+    onAfterEnter: () => {
+      className.value = '';
+      style.value = {};
+    },
+    onBeforeLeave: node => {
+      className.value = 'ant-motion-collapse';
+      style.value = getCurrentHeight(node);
+    },
+    onLeave: node => {
+      window.setTimeout(() => {
+        style.value = getCollapsedHeight(node);
+      });
+    },
+    onAfterLeave: () => {
+      className.value = '';
+      style.value = {};
+    },
+  };
 };
 
 export { Transition, TransitionGroup, collapseMotion };

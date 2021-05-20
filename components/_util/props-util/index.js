@@ -341,6 +341,10 @@ export function isEmptyElement(c) {
   );
 }
 
+export function isEmptySlot(c) {
+  return !c || c().every(isEmptyElement);
+}
+
 export function isStringElement(c) {
   return c && c.type === Text;
 }

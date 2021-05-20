@@ -67,11 +67,11 @@ export default defineComponent({
       computed(() => undefined),
     );
     const inlineCollapsed = computed(() => {
-      const { inlineCollapsed } = props;
+      console.log('siderCollapsed.value', siderCollapsed.value);
       if (siderCollapsed.value !== undefined) {
         return siderCollapsed.value;
       }
-      return inlineCollapsed;
+      return props.inlineCollapsed;
     });
 
     const isMounted = ref(false);
@@ -164,7 +164,9 @@ export default defineComponent({
     watch(
       () => props.openKeys,
       (openKeys = mergedOpenKeys.value) => {
-        mergedOpenKeys.value = openKeys;
+        if (!shallowEqual(mergedOpenKeys.value, openKeys)) {
+          mergedOpenKeys.value = openKeys;
+        }
       },
       { immediate: true },
     );
@@ -177,46 +179,55 @@ export default defineComponent({
     const mergedMode = ref<MenuMode>('vertical');
     const mergedInlineCollapsed = ref(false);
 
-    const isInlineMode = computed(() => mergedMode.value === 'inline');
-
-    // >>>>> Cache & Reset open keys when inlineCollapsed changed
-    const inlineCacheOpenKeys = ref([]);
-
-    // Cache
-    watchEffect(() => {
-      if (isInlineMode.value) {
-        inlineCacheOpenKeys.value = mergedOpenKeys.value;
-      }
-    });
-
-    const mountRef = ref(false);
-
-    // Restore
-    watch(isInlineMode, () => {
-      if (!mountRef.value) {
-        mountRef.value = true;
-        return;
-      }
-
-      if (isInlineMode.value) {
-        mergedOpenKeys.value = inlineCacheOpenKeys.value;
-      } else {
-        const empty = [];
-        mergedOpenKeys.value = empty;
-        // Trigger open event in case its in control
-        emit('update:openKeys', empty);
-        emit('openChange', empty);
-      }
-    });
-
     watchEffect(() => {
       if (props.mode === 'inline' && inlineCollapsed.value) {
         mergedMode.value = 'vertical';
         mergedInlineCollapsed.value = inlineCollapsed.value;
+      } else {
+        mergedMode.value = props.mode;
+        mergedInlineCollapsed.value = false;
       }
-      mergedMode.value = props.mode;
-      mergedInlineCollapsed.value = false;
     });
+
+    const isInlineMode = computed(() => mergedMode.value === 'inline');
+
+    // >>>>> Cache & Reset open keys when inlineCollapsed changed
+    const inlineCacheOpenKeys = ref(mergedOpenKeys.value);
+
+    const mountRef = ref(false);
+
+    // Cache
+    watch(
+      mergedOpenKeys,
+      () => {
+        if (isInlineMode.value) {
+          inlineCacheOpenKeys.value = mergedOpenKeys.value;
+        }
+      },
+      { immediate: true },
+    );
+
+    // Restore
+    watch(
+      isInlineMode,
+      () => {
+        if (!mountRef.value) {
+          mountRef.value = true;
+          return;
+        }
+
+        if (isInlineMode.value) {
+          mergedOpenKeys.value = inlineCacheOpenKeys.value;
+        } else {
+          const empty = [];
+          mergedOpenKeys.value = empty;
+          // Trigger open event in case its in control
+          emit('update:openKeys', empty);
+          emit('openChange', empty);
+        }
+      },
+      { immediate: true },
+    );
 
     const className = computed(() => {
       return {

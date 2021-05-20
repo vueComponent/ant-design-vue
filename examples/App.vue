@@ -89,7 +89,7 @@ export default defineComponent({
     );
     const toggleCollapsed = () => {
       state.collapsed = !state.collapsed;
-      state.openKeys = state.collapsed ? [] : state.preOpenKeys;
+      // state.openKeys = state.collapsed ? [] : state.preOpenKeys;
     };
 
     return {

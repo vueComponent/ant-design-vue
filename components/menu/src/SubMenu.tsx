@@ -16,6 +16,7 @@ import useDirectionStyle from './hooks/useDirectionStyle';
 import PopupTrigger from './PopupTrigger';
 import SubMenuList from './SubMenuList';
 import InlineSubMenuList from './InlineSubMenuList';
+import Transition, { getTransitionProps } from 'ant-design-vue/es/_util/transition';
 
 let indexGuid = 0;
 export default defineComponent({
@@ -75,6 +76,8 @@ export default defineComponent({
       registerMenuInfo,
       unRegisterMenuInfo,
       selectedSubMenuEventKeys,
+      motion,
+      defaultMotions,
     } = useInjectMenu();
 
     registerMenuInfo(eventKey, menuInfo);
@@ -227,7 +230,13 @@ export default defineComponent({
 
       if (!overflowDisabled.value) {
         const triggerMode = triggerModeRef.value;
-
+        const style = ref({});
+        const className = ref('');
+        const mergedMotion = computed(() => {
+          const m = motion.value || defaultMotions.value?.[mode.value];
+          const res = typeof m === 'function' ? m(style, className) : m;
+          return res ? getTransitionProps(res.name) : undefined;
+        });
         titleNode = (
           <PopupTrigger
             mode={triggerMode}
@@ -238,11 +247,13 @@ export default defineComponent({
             disabled={mergedDisabled.value}
             onVisibleChange={onPopupVisibleChange}
             v-slots={{
-              popup: () => (
+              popup: ({ visible }) => (
                 <MenuContextProvider props={{ mode: triggerModeRef }}>
-                  <SubMenuList id={popupId} ref={popupRef}>
-                    {slots.default?.()}
-                  </SubMenuList>
+                  <Transition {...mergedMotion.value}>
+                    <SubMenuList v-show={visible} id={popupId} ref={popupRef}>
+                      {slots.default?.()}
+                    </SubMenuList>
+                  </Transition>
                 </MenuContextProvider>
               ),
             }}

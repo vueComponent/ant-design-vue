@@ -87,8 +87,12 @@ export default defineComponent({
           mouseLeaveDelay={subMenuCloseDelay.value}
           onPopupVisibleChange={onVisibleChange}
           // forceRender={forceSubMenuRender}
-          // popupMotion={mergedMotion}
-          v-slots={{ popup: slots.popup, default: slots.default }}
+          v-slots={{
+            popup: () => {
+              return slots.popup?.({ visible: innerVisible.value });
+            },
+            default: slots.default,
+          }}
         ></Trigger>
       );
     };

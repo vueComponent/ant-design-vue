@@ -14,7 +14,7 @@ export default defineComponent({
   },
   setup(props, { slots }) {
     const fixedMode: MenuMode = 'inline';
-    const { forceSubMenuRender, motion, mode, defaultMotions } = useInjectMenu();
+    const { motion, mode, defaultMotions } = useInjectMenu();
     const sameModeRef = computed(() => mode.value === fixedMode);
     const destroy = ref(!sameModeRef.value);
 

@@ -22,7 +22,7 @@ export interface StoreMenuInfo {
   eventKey: string;
   key: Key;
   parentEventKeys: ComputedRef<Key[]>;
-  childrenEventKeys: Ref<Key[]>;
+  childrenEventKeys?: Ref<Key[]>;
   isLeaf?: boolean;
 }
 export interface MenuContextProps {
@@ -32,6 +32,8 @@ export interface MenuContextProps {
   prefixCls: ComputedRef<string>;
   openKeys: Ref<Key[]>;
   selectedKeys: Ref<Key[]>;
+
+  selectedSubMenuEventKeys: Ref<string[]>;
   rtl?: ComputedRef<boolean>;
 
   locked?: Ref<boolean>;

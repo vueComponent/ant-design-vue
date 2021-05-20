@@ -74,6 +74,7 @@ export default defineComponent({
       onOpenChange,
       registerMenuInfo,
       unRegisterMenuInfo,
+      selectedSubMenuEventKeys,
     } = useInjectMenu();
 
     registerMenuInfo(eventKey, menuInfo);
@@ -96,7 +97,9 @@ export default defineComponent({
     const open = computed(() => !overflowDisabled.value && originOpen.value);
 
     // =============================== Select ===============================
-    const childrenSelected = ref(true); // isSubPathKey(selectedKeys, eventKey);
+    const childrenSelected = computed(() => {
+      return selectedSubMenuEventKeys.value.includes(eventKey);
+    });
 
     const isActive = ref(false);
     watch(
@@ -225,8 +228,6 @@ export default defineComponent({
       if (!overflowDisabled.value) {
         const triggerMode = triggerModeRef.value;
 
-        // Still wrap with Trigger here since we need avoid react re-mount dom node
-        // Which makes motion failed
         titleNode = (
           <PopupTrigger
             mode={triggerMode}

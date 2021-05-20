@@ -10,6 +10,7 @@ import {
   watch,
   reactive,
   onMounted,
+  toRaw,
 } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
 import useProvideMenu, { StoreMenuInfo, useProvideFirstLevel } from './hooks/useMenuContext';
@@ -24,6 +25,7 @@ import {
 } from './interface';
 import devWarning from 'ant-design-vue/es/vc-util/devWarning';
 import { collapseMotion, CSSMotionProps } from 'ant-design-vue/es/_util/transition';
+import uniq from 'lodash-es/uniq';
 
 export const menuProps = {
   prefixCls: String,
@@ -32,8 +34,8 @@ export const menuProps = {
   overflowDisabled: Boolean,
   openKeys: Array,
   selectedKeys: Array,
-  selectable: Boolean,
-  multiple: Boolean,
+  selectable: { type: Boolean, default: true },
+  multiple: { type: Boolean, default: false },
 
   motion: Object as PropType<CSSMotionProps>,
 
@@ -56,7 +58,7 @@ export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
 export default defineComponent({
   name: 'AMenu',
   props: menuProps,
-  emits: ['update:openKeys', 'openChange', 'select', 'deselect', 'update:selectedKeys'],
+  emits: ['update:openKeys', 'openChange', 'select', 'deselect', 'update:selectedKeys', 'click'],
   setup(props, { slots, emit }) {
     const { prefixCls, direction } = useConfigInject('menu', props);
     const store = reactive<Record<string, StoreMenuInfo>>({});
@@ -78,13 +80,13 @@ export default defineComponent({
     });
     watchEffect(() => {
       devWarning(
-        !('inlineCollapsed' in props && props.mode !== 'inline'),
+        !(props.inlineCollapsed === true && props.mode !== 'inline'),
         'Menu',
         '`inlineCollapsed` should only be used when `mode` is inline.',
       );
 
       devWarning(
-        !(siderCollapsed.value !== undefined && 'inlineCollapsed' in props),
+        !(siderCollapsed.value !== undefined && props.inlineCollapsed === true),
         'Menu',
         '`inlineCollapsed` not control Menu under Sider. Should set `collapsed` on Sider instead.',
       );
@@ -101,18 +103,37 @@ export default defineComponent({
       { immediate: true },
     );
 
+    const selectedSubMenuEventKeys = ref([]);
+
+    watch(
+      [store, mergedSelectedKeys],
+      () => {
+        let subMenuParentEventKeys = [];
+        (Object.values(toRaw(store)) as any).forEach((menuInfo: StoreMenuInfo) => {
+          if (mergedSelectedKeys.value.includes(menuInfo.key)) {
+            subMenuParentEventKeys.push(...menuInfo.parentEventKeys.value);
+          }
+        });
+
+        subMenuParentEventKeys = uniq(subMenuParentEventKeys);
+        if (!shallowEqual(selectedSubMenuEventKeys.value, subMenuParentEventKeys)) {
+          selectedSubMenuEventKeys.value = subMenuParentEventKeys;
+        }
+      },
+      { immediate: true },
+    );
+
     // >>>>> Trigger select
     const triggerSelection = (info: MenuInfo) => {
       if (!props.selectable) {
         return;
       }
-
       // Insert or Remove
       const { key: targetKey } = info;
       const exist = mergedSelectedKeys.value.includes(targetKey);
       let newSelectedKeys: Key[];
 
-      if (exist) {
+      if (exist && props.multiple) {
         newSelectedKeys = mergedSelectedKeys.value.filter(key => key !== targetKey);
       } else if (props.multiple) {
         newSelectedKeys = [...mergedSelectedKeys.value, targetKey];
@@ -120,17 +141,21 @@ export default defineComponent({
         newSelectedKeys = [targetKey];
       }
 
-      mergedSelectedKeys.value = newSelectedKeys;
       // Trigger event
       const selectInfo: SelectInfo = {
         ...info,
         selectedKeys: newSelectedKeys,
       };
-
-      if (exist) {
-        emit('deselect', selectInfo);
-      } else {
-        emit('select', selectInfo);
+      if (!('selectedKeys' in props)) {
+        mergedSelectedKeys.value = newSelectedKeys;
+      }
+      if (!shallowEqual(newSelectedKeys, mergedSelectedKeys.value)) {
+        emit('update:selectedKeys', newSelectedKeys);
+        if (exist && props.multiple) {
+          emit('deselect', selectInfo);
+        } else {
+          emit('select', selectInfo);
+        }
       }
     };
 
@@ -212,13 +237,22 @@ export default defineComponent({
 
     useProvideFirstLevel(true);
 
-    const getChildrenKeys = (eventKeys: string[]): Key[] => {
+    const getChildrenKeys = (eventKeys: string[] = []): Key[] => {
       const keys = [];
       eventKeys.forEach(eventKey => {
         const { key, childrenEventKeys } = store[eventKey] as any;
         keys.push(key, ...getChildrenKeys(childrenEventKeys.value));
       });
       return keys;
+    };
+
+    // ========================= Open =========================
+    /**
+     * Click for item. SubMenu do not have selection status
+     */
+    const onInternalClick = (info: MenuInfo) => {
+      emit('click', info);
+      triggerSelection(info);
     };
 
     const onInternalOpenChange = (eventKey: Key, open: boolean) => {
@@ -270,9 +304,10 @@ export default defineComponent({
       motion: computed(() => (isMounted.value ? props.motion : null)),
       overflowDisabled: computed(() => props.overflowDisabled),
       onOpenChange: onInternalOpenChange,
-      onItemClick: triggerSelection,
+      onItemClick: onInternalClick,
       registerMenuInfo,
       unRegisterMenuInfo,
+      selectedSubMenuEventKeys,
     });
     return () => {
       return <ul class={className.value}>{slots.default?.()}</ul>;

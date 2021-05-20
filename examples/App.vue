@@ -1,89 +1,49 @@
 <template>
-  <a-menu
-    id="dddddd"
-    v-model:openKeys="openKeys"
-    v-model:selectedKeys="selectedKeys"
-    style="width: 256px"
-    mode="inline"
-    @click="handleClick"
-  >
-    <a-menu-item key="0">Option 0</a-menu-item>
-    <a-sub-menu key="sub1" @titleClick="titleClick">
+  <a-menu v-model:selectedKeys="current" mode="horizontal">
+    <a-menu-item key="mail">
+      <mail-outlined />
+      Navigation One
+    </a-menu-item>
+    <a-menu-item key="app" disabled>
+      <appstore-outlined />
+      Navigation Two
+    </a-menu-item>
+    <a-sub-menu>
       <template #title>
-        <span>
-          <MailOutlined />
-          <span>Navigation One</span>
+        <span class="submenu-title-wrapper">
+          <setting-outlined />
+          Navigation Three - Submenu
         </span>
       </template>
-      <a-menu-item key="1">
-        <template #icon><QqOutlined /></template>
-        Option 1
-      </a-menu-item>
-      <a-menu-item key="2">Option 2</a-menu-item>
-      <a-menu-item-group key="g2" title="Item 2">
-        <a-menu-item key="3">Option 3</a-menu-item>
-        <a-menu-item key="4">Option 4</a-menu-item>
+      <a-menu-item-group title="Item 1">
+        <a-menu-item key="setting:1">Option 1</a-menu-item>
+        <a-menu-item key="setting:2">Option 2</a-menu-item>
+      </a-menu-item-group>
+      <a-menu-item-group title="Item 2">
+        <a-menu-item key="setting:3">Option 3</a-menu-item>
+        <a-menu-item key="setting:4">Option 4</a-menu-item>
       </a-menu-item-group>
     </a-sub-menu>
-    <!-- <a-sub-menu key="sub2" @titleClick="titleClick">
-      <template #title>
-        <span>
-          <AppstoreOutlined />
-          <span>Navigation Two</span>
-        </span>
-      </template>
-      <a-menu-item key="5">Option 5</a-menu-item>
-      <a-menu-item key="6">Option 6</a-menu-item>
-      <a-sub-menu key="sub3" title="Submenu">
-        <a-menu-item key="7">Option 7</a-menu-item>
-        <a-menu-item key="8">Option 8</a-menu-item>
-      </a-sub-menu>
-    </a-sub-menu>
-    <a-sub-menu key="sub4">
-      <template #title>
-        <span>
-          <SettingOutlined />
-          <span>Navigation Three</span>
-        </span>
-      </template>
-      <a-menu-item key="9">Option 9</a-menu-item>
-      <a-menu-item key="10">Option 10</a-menu-item>
-      <a-menu-item key="11">Option 11</a-menu-item>
-      <a-menu-item key="12">Option 12</a-menu-item>
-    </a-sub-menu> -->
+    <a-menu-item key="alipay">
+      <a href="https://antdv.com" target="_blank" rel="noopener noreferrer">
+        Navigation Four - Link
+      </a>
+    </a-menu-item>
   </a-menu>
 </template>
-<script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
-import { MailOutlined, QqOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
+<script>
+import { defineComponent, ref } from 'vue';
+import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
 export default defineComponent({
   components: {
     MailOutlined,
-    QqOutlined,
     AppstoreOutlined,
     SettingOutlined,
   },
   setup() {
-    const selectedKeys = ref<string[]>(['1']);
-    const openKeys = ref<string[]>(['sub1']);
-    const handleClick = (e: Event) => {
-      // console.log('click', e);
-    };
-    const titleClick = (e: Event) => {
-      // console.log('titleClick', e);
-    };
-    watch(
-      () => openKeys,
-      val => {
-        // console.log('openKeys', val);
-      },
-    );
+    const current = ref(['mail']);
     return {
-      selectedKeys,
-      openKeys,
-
-      handleClick,
-      titleClick,
+      current,
     };
   },
 });

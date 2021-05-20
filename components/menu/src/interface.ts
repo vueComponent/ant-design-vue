@@ -21,7 +21,7 @@ export type RenderIconType = (props: RenderIconInfo) => any;
 export interface MenuInfo {
   key: Key;
   eventKey: string;
-  keyPath?: string[];
+  keyPath?: Key[];
   eventKeyPath: Key[];
   domEvent: MouseEvent | KeyboardEvent;
 }

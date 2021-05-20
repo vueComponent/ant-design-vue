@@ -1,6 +1,6 @@
 import { flattenChildren, getPropsSlot, isValidElement } from '../../_util/props-util';
 import PropTypes from '../../_util/vue-types';
-import { computed, defineComponent, getCurrentInstance, ref, watch } from 'vue';
+import { computed, defineComponent, getCurrentInstance, onBeforeUnmount, ref, watch } from 'vue';
 import { useInjectKeyPath } from './hooks/useKeyPath';
 import { useInjectFirstLevel, useInjectMenu } from './hooks/useMenuContext';
 import { cloneElement } from '../../_util/vnode';
@@ -26,7 +26,6 @@ export default defineComponent({
     const key = instance.vnode.key;
     const eventKey = `menu_item_${++indexGuid}_$$_${key}`;
     const { parentEventKeys } = useInjectKeyPath();
-    console.log(parentEventKeys.value);
     const {
       prefixCls,
       activeKeys,
@@ -36,9 +35,30 @@ export default defineComponent({
       inlineCollapsed,
       siderCollapsed,
       onItemClick,
+      selectedKeys,
+      store,
+      registerMenuInfo,
+      unRegisterMenuInfo,
     } = useInjectMenu();
     const firstLevel = useInjectFirstLevel();
     const isActive = ref(false);
+    const keyPath = computed(() => {
+      return [...parentEventKeys.value.map(eK => store[eK].key), key];
+    });
+
+    const menuInfo = {
+      eventKey,
+      key,
+      parentEventKeys,
+      isLeaf: true,
+    };
+
+    registerMenuInfo(eventKey, menuInfo);
+
+    onBeforeUnmount(() => {
+      unRegisterMenuInfo(eventKey);
+    });
+
     watch(
       activeKeys,
       () => {
@@ -47,7 +67,7 @@ export default defineComponent({
       { immediate: true },
     );
     const mergedDisabled = computed(() => disabled.value || props.disabled);
-    const selected = computed(() => false);
+    const selected = computed(() => selectedKeys.value.includes(key));
     const classNames = computed(() => {
       const itemCls = `${prefixCls.value}-item`;
       return {
@@ -63,7 +83,8 @@ export default defineComponent({
       return {
         key: key,
         eventKey: eventKey,
-        eventKeyPath: [...parentEventKeys.value, key],
+        keyPath: keyPath.value,
+        eventKeyPath: [...parentEventKeys.value, eventKey],
         domEvent: e,
       };
     };

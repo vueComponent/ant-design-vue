@@ -251,8 +251,8 @@ export default defineComponent({
     const getChildrenKeys = (eventKeys: string[] = []): Key[] => {
       const keys = [];
       eventKeys.forEach(eventKey => {
-        const { key, childrenEventKeys } = store[eventKey] as any;
-        keys.push(key, ...getChildrenKeys(childrenEventKeys.value));
+        const { key, childrenEventKeys } = store[eventKey];
+        keys.push(key, ...getChildrenKeys(childrenEventKeys));
       });
       return keys;
     };
@@ -267,14 +267,15 @@ export default defineComponent({
     };
 
     const onInternalOpenChange = (eventKey: Key, open: boolean) => {
-      const { key, childrenEventKeys } = store[eventKey] as any;
+      const { key, childrenEventKeys } = store[eventKey];
       let newOpenKeys = mergedOpenKeys.value.filter(k => k !== key);
 
       if (open) {
         newOpenKeys.push(key);
       } else if (mergedMode.value !== 'inline') {
         // We need find all related popup to close
-        const subPathKeys = getChildrenKeys(childrenEventKeys.value);
+        const subPathKeys = getChildrenKeys(childrenEventKeys);
+        console.log('subPathKeys', eventKey, childrenEventKeys, subPathKeys);
         newOpenKeys = newOpenKeys.filter(k => !subPathKeys.includes(k));
       }
 

@@ -1,7 +1,6 @@
 import { computed, defineComponent, ref, watch } from '@vue/runtime-core';
 import Transition from 'ant-design-vue/es/_util/transition';
 import { useInjectMenu, MenuContextProvider } from './hooks/useMenuContext';
-import { MenuMode } from './interface';
 import SubMenuList from './SubMenuList';
 
 export default defineComponent({
@@ -13,9 +12,9 @@ export default defineComponent({
     keyPath: Array,
   },
   setup(props, { slots }) {
-    const fixedMode: MenuMode = 'inline';
+    const fixedMode = computed(() => 'inline');
     const { motion, mode, defaultMotions } = useInjectMenu();
-    const sameModeRef = computed(() => mode.value === fixedMode);
+    const sameModeRef = computed(() => mode.value === fixedMode.value);
     const destroy = ref(!sameModeRef.value);
 
     const mergedOpen = computed(() => (sameModeRef.value ? props.open : false));
@@ -34,7 +33,8 @@ export default defineComponent({
     const style = ref({});
     const className = ref('');
     const mergedMotion = computed(() => {
-      const m = motion.value || defaultMotions.value?.[fixedMode];
+      const m =
+        motion.value || defaultMotions.value?.[fixedMode.value] || defaultMotions.value?.other;
       const res = typeof m === 'function' ? m(style, className) : m;
       return { ...res, appear: props.keyPath.length <= 1 };
     });

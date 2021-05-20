@@ -21,8 +21,8 @@ import { CSSMotionProps } from '../../../_util/transition';
 export interface StoreMenuInfo {
   eventKey: string;
   key: Key;
-  parentEventKeys: ComputedRef<Key[]>;
-  childrenEventKeys?: Ref<Key[]>;
+  parentEventKeys: ComputedRef<string[]>;
+  childrenEventKeys?: Ref<string[]>;
   isLeaf?: boolean;
 }
 export interface MenuContextProps {

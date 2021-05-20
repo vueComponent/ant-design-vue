@@ -50,7 +50,6 @@ export default defineComponent({
       parentEventKeys,
       childrenEventKeys,
     };
-
     parentInfo.childrenEventKeys?.value.push(eventKey);
     onBeforeUnmount(() => {
       if (parentInfo.childrenEventKeys) {
@@ -195,13 +194,20 @@ export default defineComponent({
 
     const renderMode = computed(() => (mode.value === 'horizontal' ? 'vertical' : mode.value));
 
+    const style = ref({});
+    const className = ref('');
+    const mergedMotion = computed(() => {
+      const m = motion.value || defaultMotions.value?.[mode.value] || defaultMotions.value?.other;
+      const res = typeof m === 'function' ? m(style, className) : m;
+      return res ? getTransitionProps(res.name) : undefined;
+    });
+
     return () => {
       const icon = getPropsSlot(slots, props, 'icon');
       const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
       let titleNode = (
         <div
-          role="menuitem"
           style={directionStyle.value}
           class={`${subMenuPrefixClsValue}-title`}
           tabindex={mergedDisabled.value ? null : -1}
@@ -214,8 +220,6 @@ export default defineComponent({
           aria-disabled={mergedDisabled.value}
           onClick={onInternalTitleClick}
           onFocus={onInternalFocus}
-          onMouseenter={onMouseEnter}
-          onMouseleave={onMouseLeave}
         >
           {title}
 
@@ -230,13 +234,6 @@ export default defineComponent({
 
       if (!overflowDisabled.value) {
         const triggerMode = triggerModeRef.value;
-        const style = ref({});
-        const className = ref('');
-        const mergedMotion = computed(() => {
-          const m = motion.value || defaultMotions.value?.[mode.value];
-          const res = typeof m === 'function' ? m(style, className) : m;
-          return res ? getTransitionProps(res.name) : undefined;
-        });
         titleNode = (
           <PopupTrigger
             mode={triggerMode}
@@ -278,11 +275,13 @@ export default defineComponent({
                 [`${subMenuPrefixClsValue}-disabled`]: mergedDisabled.value,
               },
             )}
+            onMouseenter={onMouseEnter}
+            onMouseleave={onMouseLeave}
           >
             {titleNode}
 
             {/* Inline mode */}
-            {!overflowDisabled.value && (
+            {!overflowDisabled.value && mode.value !== 'vertical' && (
               <InlineSubMenuList id={popupId} open={open.value} keyPath={keysPath.value}>
                 {slots.default?.()}
               </InlineSubMenuList>

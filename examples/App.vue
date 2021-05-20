@@ -11,16 +11,22 @@
       theme="dark"
       :inline-collapsed="collapsed"
     >
-      <a-menu-item key="1">
-        <PieChartOutlined />
+      <!-- <a-menu-item key="1">
+        <template #icon>
+          <PieChartOutlined />
+        </template>
         <span>Option 1</span>
       </a-menu-item>
       <a-menu-item key="2">
-        <DesktopOutlined />
+        <template #icon>
+          <DesktopOutlined />
+        </template>
         <span>Option 2</span>
       </a-menu-item>
       <a-menu-item key="3">
-        <InboxOutlined />
+        <template #icon>
+          <InboxOutlined />
+        </template>
         <span>Option 3</span>
       </a-menu-item>
       <a-sub-menu key="sub1">
@@ -34,7 +40,7 @@
         <a-menu-item key="6">Option 6</a-menu-item>
         <a-menu-item key="7">Option 7</a-menu-item>
         <a-menu-item key="8">Option 8</a-menu-item>
-      </a-sub-menu>
+      </a-sub-menu> -->
       <a-sub-menu key="sub2">
         <template #title>
           <span>

@@ -15,7 +15,7 @@ export default defineComponent({
     role: String,
     disabled: Boolean,
     danger: Boolean,
-    title: { type: [String, Boolean] },
+    title: { type: [String, Boolean], default: undefined },
     icon: PropTypes.VNodeChild,
   },
   emits: ['mouseenter', 'mouseleave', 'click'],
@@ -46,6 +46,7 @@ export default defineComponent({
       return [...parentEventKeys.value.map(eK => store[eK].key), key];
     });
 
+    const keysPath = computed(() => [...parentEventKeys.value, eventKey]);
     const menuInfo = {
       eventKey,
       key,
@@ -102,7 +103,8 @@ export default defineComponent({
 
     const onMouseEnter = (event: MouseEvent) => {
       if (!mergedDisabled.value) {
-        changeActiveKeys([...parentEventKeys.value, key]);
+        changeActiveKeys(keysPath.value);
+        console.log('item mouseenter', keysPath.value);
         emit('mouseenter', event);
       }
     };

@@ -36,6 +36,7 @@ export default defineComponent({
       subMenuCloseDelay,
       builtinPlacements,
       triggerSubMenuAction,
+      isRootMenu,
     } = useInjectMenu();
 
     const placement = computed(() =>
@@ -77,7 +78,9 @@ export default defineComponent({
             popupClassName,
           )}
           stretch={mode === 'horizontal' ? 'minWidth' : null}
-          getPopupContainer={getPopupContainer.value}
+          getPopupContainer={
+            isRootMenu ? getPopupContainer.value : triggerNode => triggerNode.parentNode
+          }
           builtinPlacements={placement.value}
           popupPlacement={popupPlacement.value}
           popupVisible={innerVisible.value}

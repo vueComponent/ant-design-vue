@@ -26,6 +26,8 @@ export interface StoreMenuInfo {
   isLeaf?: boolean;
 }
 export interface MenuContextProps {
+  isRootMenu: boolean;
+
   store: UnwrapRef<Record<string, StoreMenuInfo>>;
   registerMenuInfo: (key: string, info: StoreMenuInfo) => void;
   unRegisterMenuInfo: (key: string) => void;
@@ -116,7 +118,7 @@ const MenuContextProvider = defineComponent({
     props: Object,
   },
   setup(props, { slots }) {
-    useProvideMenu({ ...useInjectMenu(), ...props });
+    useProvideMenu({ ...useInjectMenu(), ...props.props });
     return () => slots.default?.();
   },
 });

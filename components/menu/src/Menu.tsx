@@ -320,6 +320,7 @@ export default defineComponent({
       registerMenuInfo,
       unRegisterMenuInfo,
       selectedSubMenuEventKeys,
+      isRootMenu: true,
     });
     return () => {
       return <ul class={className.value}>{slots.default?.()}</ul>;

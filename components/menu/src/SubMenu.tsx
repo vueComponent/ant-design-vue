@@ -31,7 +31,7 @@ export default defineComponent({
     internalPopupClose: Boolean,
   },
   slots: ['icon', 'title'],
-  emits: ['titleClick', 'titleMouseenter', 'titleMouseleave'],
+  emits: ['titleClick', 'mouseenter', 'mouseleave'],
   inheritAttrs: false,
   setup(props, { slots, attrs, emit }) {
     useProvideFirstLevel(false);
@@ -130,13 +130,13 @@ export default defineComponent({
     const onMouseEnter = (event: MouseEvent) => {
       if (!mergedDisabled.value) {
         changeActiveKeys(keysPath.value);
-        emit('titleMouseenter', event);
+        emit('mouseenter', event);
       }
     };
     const onMouseLeave = (event: MouseEvent) => {
       if (!mergedDisabled.value) {
         changeActiveKeys([]);
-        emit('titleMouseleave', event);
+        emit('mouseleave', event);
       }
     };
 
@@ -245,7 +245,7 @@ export default defineComponent({
             onVisibleChange={onPopupVisibleChange}
             v-slots={{
               popup: ({ visible }) => (
-                <MenuContextProvider props={{ mode: triggerModeRef }}>
+                <MenuContextProvider props={{ mode: triggerModeRef, isRootMenu: false }}>
                   <Transition {...mergedMotion.value}>
                     <SubMenuList v-show={visible} id={popupId} ref={popupRef}>
                       {slots.default?.()}

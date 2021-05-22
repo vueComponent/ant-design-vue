@@ -1,10 +1,13 @@
 // based on rc-input-number 4.5.5
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { initDefaultProps, hasProp, getOptionProps, getListeners } from '../../_util/props-util';
+import { initDefaultProps, getOptionProps, getListeners } from '../../_util/props-util';
 import classNames from 'classnames';
 import KeyCode from '../../_util/KeyCode';
 import InputHandler from './InputHandler';
+import fill from 'lodash/fill';
+import endsWith from 'lodash/endsWith';
+import startsWith from 'lodash/startsWith';
 
 function noop() {}
 
@@ -35,18 +38,11 @@ const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1;
 /**
  * When onKeyDown triggered, it is necessary to recognize type of e.keyCode
  */
-const NUMBER_KEY = Symbol('NumberalKey');
-const DECIMAIL_SP = Symbol('DecimlSeparator');
-const FORMATTER_CASE = Symbol('FormatterCase');
+const NUMBER_KEY = 'NUMBER_KEY';
+const DECIMAIL_SP = 'DECIMAIL_SP';
+const FORMATTER_CASE = 'FORMATTER_CASE';
 
 const isValidProps = value => value !== undefined && value !== null;
-
-const isEqual = (oldValue, newValue) =>
-  newValue === oldValue ||
-  (typeof newValue === 'number' &&
-    typeof oldValue === 'number' &&
-    isNaN(newValue) &&
-    isNaN(oldValue));
 
 const isNumeralCharacterKey = keyCode => {
   if (keyCode >= KeyCode.ZERO && keyCode <= KeyCode.NINE) {
@@ -55,7 +51,7 @@ const isNumeralCharacterKey = keyCode => {
 };
 
 const isComposingNumKey = (keyCode, code) => {
-  const numKeyEventCode = new Array(10).fill('Digit').map((v, i) => v + i);
+  const numKeyEventCode = fill(new Array(10), 'Digit').map((v, i) => v + i);
   return keyCode === 229 && numKeyEventCode.includes(code);
 };
 
@@ -290,7 +286,58 @@ export default {
           this.fixCaretSync(this.cursorStart() - 1, this.cursorEnd() - 1);
         }
       }
-
+      this.processCaseOnKeydown(e, eKeyCode, enterChar, preValue);
+      // Trigger user key down
+      this.lastKeyCode = e.keyCode;
+      e.target.value = this.inputValue;
+      this.$emit('keydown', e, ...args);
+    },
+    onKeyUp(e, ...args) {
+      this.stop();
+      this.$emit('keyup', e, ...args);
+    },
+    onTrigger(e) {
+      if (e.target.composing) return false;
+      this.onChange(e);
+    },
+    onChange(e) {
+      if (this.focused) {
+        this.inputting = true;
+      }
+      if (this.formatter && this.parser) {
+        const value = String(e.target.value);
+        // use setInputValue instead of formatAndUpdate
+        this.setInputValue(this.formatWrapper(this.parser(value)));
+        this.$nextTick(() => {
+          this.updatedFunc();
+        });
+      } else if (e.target.value === '') {
+        // just for test input-number/__tests__/index.test.js
+        // common logic should never run into here for preventDefault on keydown
+        // composing case on safari will trigger onInput before keydown, but it need to be ignored
+        this.setInputValue('');
+      }
+    },
+    onFocus(...args) {
+      this.setState({
+        focused: true,
+      });
+      this.$emit('focus', ...args);
+    },
+    onBlur(...args) {
+      this.onbluring = true;
+      this.inputting = false;
+      this.setState({
+        focused: false,
+      });
+      this.formatAndUpdate(this.$refs.inputRef.value);
+      this.$refs.inputRef.value = this.inputValue; // inputValue will be always same as value
+      if (this.$listeners.blur) {
+        this.$emit('blur', ...args);
+      }
+      this.onbluring = false;
+    },
+    processCaseOnKeydown(e, eKeyCode, enterChar, preValue) {
       switch (eKeyCode) {
         case FORMATTER_CASE:
         case KeyCode.DELETE:
@@ -322,11 +369,11 @@ export default {
             isValidProps(this.precision) &&
             !selectMutiChar
           ) {
-            this.$nextTick(_ => (e.target.value = preValue)); // this line just for ComposingNum
+            this.$nextTick(() => (e.target.value = preValue)); // this line just for ComposingNum
             break;
           }
           // replace the next char
-          const firstZero = curStart === 0 && curAfter.startsWith('0');
+          const firstZero = curStart === 0 && startsWith(curAfter, '0');
           const replaceNext = selectMutiChar ? 0 : isCursorRightOfPeriod || firstZero ? 1 : 0;
           tempStr = this.spliceText(preValue, enterChar, curStart, curEnd + replaceNext);
           this.formatAndUpdate(tempStr);
@@ -350,7 +397,7 @@ export default {
 
         case DECIMAIL_SP:
           if (selectMutiChar) break;
-          if (curAfter.startsWith(this.decimalSeparator)) {
+          if (startsWith(curAfter, this.decimalSeparator)) {
             // just move the cursor right for one step
             this.fixCaret(curStart + 1, curStart + 1);
             break;
@@ -358,12 +405,12 @@ export default {
           if (
             !isValidProps(this.precision) &&
             !preValue.includes(this.decimalSeparator) &&
-            !curAfter.startsWith(this.groupSeparator) &&
+            !startsWith(curAfter, this.groupSeparator) &&
             curStart !== 0
           ) {
             tempStr = this.spliceText(preValue, enterChar, curStart, curEnd);
             this.formatAndUpdate(tempStr);
-            if (tempStr.endsWith(this.decimalSeparator)) {
+            if (endsWith(tempStr, this.decimalSeparator)) {
               this.setInputValue(this.inputValue + this.decimalSeparator);
             }
 
@@ -380,21 +427,21 @@ export default {
             break;
           }
           let justMoveLeft =
-            curBefore.endsWith(this.groupSeparator) ||
-            (curBefore.endsWith(this.decimalSeparator) && isValidProps(this.precision));
+            endsWith(curBefore, this.groupSeparator) ||
+            (endsWith(curBefore, this.decimalSeparator) && isValidProps(this.precision));
           if (selectMutiChar) justMoveLeft = false;
           tempStr = this.spliceText(preValue, '', curStart - (selectMutiChar ? 0 : 1), curEnd);
           if (justMoveLeft) tempStr = preValue;
           this.formatAndUpdate(tempStr);
 
           // move the cursor left
-          const noInteger = tempStr.startsWith(this.decimalSeparator);
-          const onlyMinus = tempStr.startsWith(`-${this.decimalSeparator}`);
+          const noInteger = startsWith(tempStr, this.decimalSeparator);
+          const onlyMinus = startsWith(tempStr, `-${this.decimalSeparator}`);
           let moveLeft = isCursorRightOfPeriod || justMoveLeft || noInteger || onlyMinus ? 1 : 0;
           if (selectMutiChar) moveLeft = 0;
           if (!isValidProps(this.precision)) {
             isCursorRightOfPeriod && (moveLeft = 0);
-            if (tempStr.endsWith(this.decimalSeparator)) {
+            if (endsWith(tempStr, this.decimalSeparator)) {
               this.setInputValue(this.inputValue + this.decimalSeparator);
             }
           }
@@ -419,54 +466,6 @@ export default {
         case FORMATTER_CASE:
           break;
       }
-      // Trigger user key down
-      this.lastKeyCode = e.keyCode;
-      this.$emit('keydown', e, ...args);
-    },
-    onKeyUp(e, ...args) {
-      this.stop();
-      this.$emit('keyup', e, ...args);
-    },
-    onTrigger(e) {
-      if (e.target.composing) return false;
-      this.onChange(e);
-    },
-    onChange(e) {
-      if (this.focused) {
-        this.inputting = true;
-      }
-      if (this.formatter && this.parser) {
-        const value = String(e.target.value);
-        // use setInputValue instead of formatAndUpdate
-        this.setInputValue(this.formatWrapper(this.parser(value)));
-        this.$nextTick(_ => {
-          this.updatedFunc();
-        });
-      } else if (e.target.value === '') {
-        // just for test input-number/__tests__/index.test.js
-        // common logic should never run into here for preventDefault on keydown
-        // composing case on safari will trigger onInput before keydown, but it need to be ignored
-        this.setInputValue('');
-      }
-    },
-    onFocus(...args) {
-      this.setState({
-        focused: true,
-      });
-      this.$emit('focus', ...args);
-    },
-    onBlur(...args) {
-      this.onbluring = true;
-      this.inputting = false;
-      this.setState({
-        focused: false,
-      });
-      this.formatAndUpdate(this.$refs.inputRef.value);
-      this.$refs.inputRef.value = this.inputValue; // inputValue will be always same as value
-      if (this.$listeners.blur) {
-        this.$emit('blur', ...args);
-      }
-      this.onbluring = false;
     },
     getCurrentValidValue(value) {
       // promise to return correct num or ''
@@ -566,7 +565,7 @@ export default {
     },
     fixCaret(start, end) {
       // avoid rerending causes cursor back to the end
-      this.$nextTick(_ => {
+      this.$nextTick(() => {
         this.fixCaretSync(start, end);
       });
     },

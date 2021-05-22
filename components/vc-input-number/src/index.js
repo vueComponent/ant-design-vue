@@ -289,7 +289,6 @@ export default {
       this.processCaseOnKeydown(e, eKeyCode, enterChar, preValue);
       // Trigger user key down
       this.lastKeyCode = e.keyCode;
-      e.target.value = this.inputValue;
       this.$emit('keydown', e, ...args);
     },
     onKeyUp(e, ...args) {

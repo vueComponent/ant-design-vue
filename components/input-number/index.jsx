@@ -24,6 +24,8 @@ export const InputNumberProps = {
   id: PropTypes.string,
   precision: PropTypes.number,
   autoFocus: PropTypes.bool,
+  useGrouping: PropTypes.bool,
+  groupSeparator: PropTypes.string,
 };
 
 const InputNumber = {

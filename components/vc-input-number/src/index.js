@@ -44,6 +44,13 @@ const FORMATTER_CASE = 'FORMATTER_CASE';
 
 const isValidProps = value => value !== undefined && value !== null;
 
+const isEqual = (oldValue, newValue) =>
+  newValue === oldValue ||
+  (typeof newValue === 'number' &&
+    typeof oldValue === 'number' &&
+    isNaN(newValue) &&
+    isNaN(oldValue));
+
 const isNumeralCharacterKey = keyCode => {
   if (keyCode >= KeyCode.ZERO && keyCode <= KeyCode.NINE) {
     return true;
@@ -134,20 +141,29 @@ export default {
       if (this.autoFocus && !this.disabled) {
         this.focus();
       }
-      // this.formatAndUpdate(this.inputValue);
+      // this.formatAndUpdate(this.inputValue); // TODO
     });
   },
   watch: {
-    max() {
+    max(newVal, oldVal) {
       const value = this.inputValue;
-      if (value || value === 0) {
+      const oldValid = this.getCurrentValidValue(value, oldVal);
+      const newValid = this.getCurrentValidValue(value, newVal);
+      if ((value || value === 0) && Number(oldValid) !== Number(newValid)) {
         this.formatAndUpdate(value);
       }
     },
-    min() {
+    min(newVal, oldVal) {
       const value = this.inputValue;
-      if (value || value === 0) {
+      const oldValid = this.getCurrentValidValue(value, this.max, oldVal);
+      const newValid = this.getCurrentValidValue(value, this.max, newVal);
+      if ((value || value === 0) && Number(oldValid) !== Number(newValid)) {
         this.formatAndUpdate(value);
+      }
+    },
+    value(newVal, oldVal) {
+      if (!isEqual(newVal, oldVal)) {
+        this.formatAndUpdate(newVal);
       }
     },
   },
@@ -466,7 +482,7 @@ export default {
           break;
       }
     },
-    getCurrentValidValue(value) {
+    getCurrentValidValue(value, max = this.max, min = this.min) {
       // promise to return correct num or ''
       // typeof ret is string
       // avoid to clear decimal digit such as 1.000 when precision is undefined
@@ -483,11 +499,11 @@ export default {
         value = parseFloat(value);
       }
       if (isNaN(value) || value === '') return '';
-      if (isValidProps(this.min)) {
-        value = value < this.min ? this.min : value;
+      if (isValidProps(min) && !isNaN(min)) {
+        value = value < min ? min : value;
       }
-      if (isValidProps(this.max)) {
-        value = value > this.max ? this.max : value;
+      if (isValidProps(max) && !isNaN(max)) {
+        value = value > max ? max : value;
       }
       return value;
     },

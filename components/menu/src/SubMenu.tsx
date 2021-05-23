@@ -10,13 +10,13 @@ import {
 } from 'vue';
 import useProvideKeyPath, { useInjectKeyPath } from './hooks/useKeyPath';
 import { useInjectMenu, useProvideFirstLevel, MenuContextProvider } from './hooks/useMenuContext';
-import { getPropsSlot, isValidElement } from 'ant-design-vue/es/_util/props-util';
-import classNames from 'ant-design-vue/es/_util/classNames';
+import { getPropsSlot, isValidElement } from '../../_util/props-util';
+import classNames from '../../_util/classNames';
 import useDirectionStyle from './hooks/useDirectionStyle';
 import PopupTrigger from './PopupTrigger';
 import SubMenuList from './SubMenuList';
 import InlineSubMenuList from './InlineSubMenuList';
-import Transition, { getTransitionProps } from 'ant-design-vue/es/_util/transition';
+import Transition, { getTransitionProps } from '../../_util/transition';
 
 let indexGuid = 0;
 export default defineComponent({
@@ -281,7 +281,7 @@ export default defineComponent({
             {titleNode}
 
             {/* Inline mode */}
-            {!overflowDisabled.value && mode.value !== 'vertical' && (
+            {!overflowDisabled.value && (
               <InlineSubMenuList id={popupId} open={open.value} keyPath={keysPath.value}>
                 {slots.default?.()}
               </InlineSubMenuList>

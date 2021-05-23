@@ -11,6 +11,7 @@ import {
   reactive,
   onMounted,
   toRaw,
+  unref,
 } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
 import useProvideMenu, { StoreMenuInfo, useProvideFirstLevel } from './hooks/useMenuContext';
@@ -23,8 +24,8 @@ import {
   MenuInfo,
   SelectInfo,
 } from './interface';
-import devWarning from 'ant-design-vue/es/vc-util/devWarning';
-import { collapseMotion, CSSMotionProps } from 'ant-design-vue/es/_util/transition';
+import devWarning from '../../vc-util/devWarning';
+import { collapseMotion, CSSMotionProps } from '../../_util/transition';
 import uniq from 'lodash-es/uniq';
 
 export const menuProps = {
@@ -67,7 +68,6 @@ export default defineComponent({
       computed(() => undefined),
     );
     const inlineCollapsed = computed(() => {
-      console.log('siderCollapsed.value', siderCollapsed.value);
       if (siderCollapsed.value !== undefined) {
         return siderCollapsed.value;
       }
@@ -111,7 +111,7 @@ export default defineComponent({
         let subMenuParentEventKeys = [];
         (Object.values(toRaw(store)) as any).forEach((menuInfo: StoreMenuInfo) => {
           if (mergedSelectedKeys.value.includes(menuInfo.key)) {
-            subMenuParentEventKeys.push(...menuInfo.parentEventKeys.value);
+            subMenuParentEventKeys.push(...unref(menuInfo.parentEventKeys));
           }
         });
 
@@ -275,7 +275,6 @@ export default defineComponent({
       } else if (mergedMode.value !== 'inline') {
         // We need find all related popup to close
         const subPathKeys = getChildrenKeys(childrenEventKeys);
-        console.log('subPathKeys', eventKey, childrenEventKeys, subPathKeys);
         newOpenKeys = newOpenKeys.filter(k => !subPathKeys.includes(k));
       }
 

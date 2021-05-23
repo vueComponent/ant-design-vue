@@ -1,4 +1,4 @@
-import { Key } from 'ant-design-vue/es/_util/type';
+import { Key } from '../../_util/type';
 
 export type MenuTheme = 'light' | 'dark';
 

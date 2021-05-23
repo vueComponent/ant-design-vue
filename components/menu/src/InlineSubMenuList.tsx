@@ -1,5 +1,5 @@
 import { computed, defineComponent, ref, watch } from '@vue/runtime-core';
-import Transition from 'ant-design-vue/es/_util/transition';
+import Transition from '../../_util/transition';
 import { useInjectMenu, MenuContextProvider } from './hooks/useMenuContext';
 import SubMenuList from './SubMenuList';
 

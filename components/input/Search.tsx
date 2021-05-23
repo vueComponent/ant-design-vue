@@ -1,6 +1,6 @@
 import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
-import isMobile from '../vc-menu/utils/isMobile';
+import isMobile from '../_util/isMobile';
 import Input from './Input';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';

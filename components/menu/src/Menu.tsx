@@ -146,10 +146,10 @@ export default defineComponent({
         ...info,
         selectedKeys: newSelectedKeys,
       };
-      if (!('selectedKeys' in props)) {
-        mergedSelectedKeys.value = newSelectedKeys;
-      }
       if (!shallowEqual(newSelectedKeys, mergedSelectedKeys.value)) {
+        if (!('selectedKeys' in props)) {
+          mergedSelectedKeys.value = newSelectedKeys;
+        }
         emit('update:selectedKeys', newSelectedKeys);
         if (exist && props.multiple) {
           emit('deselect', selectInfo);
@@ -266,6 +266,10 @@ export default defineComponent({
       triggerSelection(info);
     };
 
+    const onInternalKeyDown = (e: KeyboardEvent) => {
+      console.log('onInternalKeyDown', e);
+    };
+
     const onInternalOpenChange = (eventKey: Key, open: boolean) => {
       const { key, childrenEventKeys } = store[eventKey];
       let newOpenKeys = mergedOpenKeys.value.filter(k => k !== key);
@@ -322,7 +326,11 @@ export default defineComponent({
       isRootMenu: true,
     });
     return () => {
-      return <ul class={className.value}>{slots.default?.()}</ul>;
+      return (
+        <ul class={className.value} tabindex="0" onKeydown={onInternalKeyDown}>
+          {slots.default?.()}
+        </ul>
+      );
     };
   },
 });

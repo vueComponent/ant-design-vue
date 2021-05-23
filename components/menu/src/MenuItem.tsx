@@ -6,6 +6,7 @@ import { useInjectFirstLevel, useInjectMenu } from './hooks/useMenuContext';
 import { cloneElement } from '../../_util/vnode';
 import Tooltip from '../../tooltip';
 import { MenuInfo } from './interface';
+import KeyCode from 'ant-design-vue/es/_util/KeyCode';
 
 let indexGuid = 0;
 
@@ -18,7 +19,7 @@ export default defineComponent({
     title: { type: [String, Boolean], default: undefined },
     icon: PropTypes.VNodeChild,
   },
-  emits: ['mouseenter', 'mouseleave', 'click'],
+  emits: ['mouseenter', 'mouseleave', 'click', 'keydown', 'focus'],
   slots: ['icon'],
   inheritAttrs: false,
   setup(props, { slots, emit, attrs }) {
@@ -80,7 +81,7 @@ export default defineComponent({
       };
     });
 
-    const getEventInfo = (e: MouseEvent): MenuInfo => {
+    const getEventInfo = (e: MouseEvent | KeyboardEvent): MenuInfo => {
       return {
         key: key,
         eventKey: eventKey,
@@ -104,7 +105,6 @@ export default defineComponent({
     const onMouseEnter = (event: MouseEvent) => {
       if (!mergedDisabled.value) {
         changeActiveKeys(keysPath.value);
-        console.log('item mouseenter', keysPath.value);
         emit('mouseenter', event);
       }
     };
@@ -113,6 +113,27 @@ export default defineComponent({
         changeActiveKeys([]);
         emit('mouseleave', event);
       }
+    };
+
+    const onInternalKeyDown = (e: KeyboardEvent) => {
+      emit('keydown', e);
+
+      if (e.which === KeyCode.ENTER) {
+        const info = getEventInfo(e);
+
+        // Legacy. Key will also trigger click event
+        emit('click', e);
+        onItemClick(info);
+      }
+    };
+
+    /**
+     * Used for accessibility. Helper will focus element without key board.
+     * We should manually trigger an active
+     */
+    const onInternalFocus = (e: FocusEvent) => {
+      changeActiveKeys(keysPath.value);
+      emit('focus', e);
     };
 
     const renderItemChildren = (icon: any, children: any) => {
@@ -182,6 +203,8 @@ export default defineComponent({
             onMouseenter={onMouseEnter}
             onMouseleave={onMouseLeave}
             onClick={onInternalClick}
+            onKeydown={onInternalKeyDown}
+            onFocus={onInternalFocus}
             title={typeof title === 'string' ? title : undefined}
           >
             {cloneElement(icon, {

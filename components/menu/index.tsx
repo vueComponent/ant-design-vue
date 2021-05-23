@@ -14,6 +14,11 @@ Menu.install = function(app: App) {
   return app;
 };
 
+Menu.Item = MenuItem;
+Menu.Divider = Divider;
+Menu.SubMenu = SubMenu;
+Menu.ItemGroup = ItemGroup;
+
 export default Menu as typeof Menu &
   Plugin & {
     readonly Item: typeof MenuItem;

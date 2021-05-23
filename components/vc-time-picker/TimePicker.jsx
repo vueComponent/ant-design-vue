@@ -375,7 +375,7 @@ export default {
             onFocus={onFocus}
             onBlur={onBlur}
             autoFocus={autoFocus}
-            readOnly={!!inputReadOnly}
+            readOnly
             id={id}
           />
           {inputIcon || <span class={`${prefixCls}-icon`} />}

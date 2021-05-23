@@ -14,6 +14,7 @@ import { hasProp, getOptionProps, getComponent, isValidElement } from '../_util/
 import { cloneElement } from '../_util/vnode';
 import { formatDate } from './utils';
 import { getDataAndAriaProps } from '../_util/util';
+import { isEmptySlot } from '../_util/props-util';
 
 export interface PickerProps {
   value?: moment.Moment;
@@ -255,7 +256,7 @@ export default function createPicker<P>(
         >
           <VcDatePicker
             {...vcDatePickerProps}
-            v-slots={{ default: input, ...$slots }}
+            v-slots={{ ...$slots, default: isEmptySlot($slots.default) ? input : $slots.default }}
           ></VcDatePicker>
         </span>
       );

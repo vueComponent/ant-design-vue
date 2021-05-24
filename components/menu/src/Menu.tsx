@@ -134,8 +134,8 @@ export default defineComponent({
 
     watch(
       () => props.selectedKeys,
-      (selectedKeys = mergedSelectedKeys.value) => {
-        mergedSelectedKeys.value = selectedKeys;
+      selectedKeys => {
+        mergedSelectedKeys.value = selectedKeys || mergedSelectedKeys.value;
       },
       { immediate: true },
     );

@@ -22,7 +22,7 @@ export interface MenuInfo {
   key: Key;
   eventKey: string;
   keyPath?: Key[];
-  eventKeyPath: Key[];
+  eventKeyPath: string[];
   domEvent: MouseEvent | KeyboardEvent;
 }
 

@@ -24,6 +24,7 @@ export interface StoreMenuInfo {
   parentEventKeys: ComputedRef<string[]>;
   childrenEventKeys?: Ref<string[]>;
   isLeaf?: boolean;
+  parentKeys: ComputedRef<Key[]>;
 }
 export interface MenuContextProps {
   isRootMenu: boolean;

@@ -7,6 +7,7 @@ import {
   watch,
   PropType,
   onBeforeUnmount,
+  ExtractPropTypes,
 } from 'vue';
 import useProvideKeyPath, { useInjectKeyPath } from './hooks/useKeyPath';
 import { useInjectMenu, useProvideFirstLevel, MenuContextProvider } from './hooks/useMenuContext';
@@ -19,17 +20,22 @@ import InlineSubMenuList from './InlineSubMenuList';
 import Transition, { getTransitionProps } from '../../_util/transition';
 
 let indexGuid = 0;
+
+const subMenuProps = {
+  icon: PropTypes.VNodeChild,
+  title: PropTypes.VNodeChild,
+  disabled: Boolean,
+  level: Number,
+  popupClassName: String,
+  popupOffset: Array as PropType<number[]>,
+  internalPopupClose: Boolean,
+};
+
+export type SubMenuProps = Partial<ExtractPropTypes<typeof subMenuProps>>;
+
 export default defineComponent({
   name: 'ASubMenu',
-  props: {
-    icon: PropTypes.VNodeChild,
-    title: PropTypes.VNodeChild,
-    disabled: Boolean,
-    level: Number,
-    popupClassName: String,
-    popupOffset: Array as PropType<number[]>,
-    internalPopupClose: Boolean,
-  },
+  props: subMenuProps,
   slots: ['icon', 'title'],
   emits: ['titleClick', 'mouseenter', 'mouseleave'],
   inheritAttrs: false,
@@ -40,15 +46,16 @@ export default defineComponent({
     const key = instance.vnode.key;
 
     const eventKey = `sub_menu_${++indexGuid}_$$_${key}`;
-    const { parentEventKeys, parentInfo } = useInjectKeyPath();
-    const keysPath = computed(() => [...parentEventKeys.value, eventKey]);
-
+    const { parentEventKeys, parentInfo, parentKeys } = useInjectKeyPath();
+    const keysPath = computed(() => [...parentKeys.value, key]);
+    const eventKeysPath = computed(() => [...parentEventKeys.value, eventKey]);
     const childrenEventKeys = ref([]);
     const menuInfo = {
       eventKey,
       key,
       parentEventKeys,
       childrenEventKeys,
+      parentKeys,
     };
     parentInfo.childrenEventKeys?.value.push(eventKey);
     onBeforeUnmount(() => {
@@ -59,7 +66,7 @@ export default defineComponent({
       }
     });
 
-    useProvideKeyPath(eventKey, menuInfo);
+    useProvideKeyPath(eventKey, key, menuInfo);
 
     const {
       prefixCls,
@@ -141,7 +148,7 @@ export default defineComponent({
     };
 
     // ========================== DirectionStyle ==========================
-    const directionStyle = useDirectionStyle(computed(() => keysPath.value.length));
+    const directionStyle = useDirectionStyle(computed(() => eventKeysPath.value.length));
 
     // >>>>> Visible change
     const onPopupVisibleChange = (newVisible: boolean) => {
@@ -189,7 +196,7 @@ export default defineComponent({
 
     // Cache mode if it change to `inline` which do not have popup motion
     const triggerModeRef = computed(() => {
-      return mode.value !== 'inline' && keysPath.value.length > 1 ? 'vertical' : mode.value;
+      return mode.value !== 'inline' && eventKeysPath.value.length > 1 ? 'vertical' : mode.value;
     });
 
     const renderMode = computed(() => (mode.value === 'horizontal' ? 'vertical' : mode.value));

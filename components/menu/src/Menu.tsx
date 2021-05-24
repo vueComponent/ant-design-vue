@@ -10,8 +10,8 @@ import {
   watch,
   reactive,
   onMounted,
-  toRaw,
   unref,
+  UnwrapRef,
 } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
 import useProvideMenu, { StoreMenuInfo, useProvideFirstLevel } from './hooks/useMenuContext';
@@ -35,6 +35,7 @@ export const menuProps = {
   overflowDisabled: Boolean,
   openKeys: Array,
   selectedKeys: Array,
+  activeKey: String, // 内部组件使用
   selectable: { type: Boolean, default: true },
   multiple: { type: Boolean, default: false },
 
@@ -59,7 +60,15 @@ export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
 export default defineComponent({
   name: 'AMenu',
   props: menuProps,
-  emits: ['update:openKeys', 'openChange', 'select', 'deselect', 'update:selectedKeys', 'click'],
+  emits: [
+    'update:openKeys',
+    'openChange',
+    'select',
+    'deselect',
+    'update:selectedKeys',
+    'click',
+    'update:activeKey',
+  ],
   setup(props, { slots, emit }) {
     const { prefixCls, direction } = useConfigInject('menu', props);
     const store = reactive<Record<string, StoreMenuInfo>>({});
@@ -94,6 +103,34 @@ export default defineComponent({
 
     const activeKeys = ref([]);
     const mergedSelectedKeys = ref([]);
+    const keyMapStore = ref({});
+    watch(
+      store,
+      () => {
+        const newKeyMapStore = {};
+        for (let [_eventKey, menuInfo] of Object.entries(store)) {
+          newKeyMapStore[menuInfo.key] = menuInfo;
+        }
+        keyMapStore.value = newKeyMapStore;
+      },
+      { immediate: true },
+    );
+    watchEffect(() => {
+      if ('activeKey' in props) {
+        let keys = [];
+        const menuInfo = props.activeKey
+          ? (keyMapStore.value[props.activeKey] as UnwrapRef<StoreMenuInfo>)
+          : undefined;
+        if (menuInfo && props.activeKey !== undefined) {
+          keys = [...menuInfo.parentKeys, props.activeKey];
+        } else {
+          keys = [];
+        }
+        if (!shallowEqual(activeKeys.value, keys)) {
+          activeKeys.value = keys;
+        }
+      }
+    });
 
     watch(
       () => props.selectedKeys,
@@ -106,11 +143,12 @@ export default defineComponent({
     const selectedSubMenuEventKeys = ref([]);
 
     watch(
-      [store, mergedSelectedKeys],
+      [keyMapStore, mergedSelectedKeys],
       () => {
         let subMenuParentEventKeys = [];
-        (Object.values(toRaw(store)) as any).forEach((menuInfo: StoreMenuInfo) => {
-          if (mergedSelectedKeys.value.includes(menuInfo.key)) {
+        mergedSelectedKeys.value.forEach(key => {
+          const menuInfo = keyMapStore.value[key];
+          if (menuInfo) {
             subMenuParentEventKeys.push(...unref(menuInfo.parentEventKeys));
           }
         });
@@ -172,7 +210,11 @@ export default defineComponent({
     );
 
     const changeActiveKeys = (keys: Key[]) => {
-      activeKeys.value = keys;
+      if ('activeKey' in props) {
+        emit('update:activeKey', keys[keys.length - 1]);
+      } else {
+        activeKeys.value = keys;
+      }
     };
     const disabled = computed(() => !!props.disabled);
     const isRtl = computed(() => direction.value === 'rtl');

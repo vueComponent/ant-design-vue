@@ -1,7 +1,7 @@
-import Menu from './src/Menu';
-import MenuItem from './src/MenuItem';
-import SubMenu from './src/SubMenu';
-import ItemGroup from './src/ItemGroup';
+import Menu, { MenuProps } from './src/Menu';
+import MenuItem, { MenuItemProps } from './src/MenuItem';
+import SubMenu, { SubMenuProps } from './src/SubMenu';
+import ItemGroup, { MenuItemGroupProps } from './src/ItemGroup';
 import Divider from './src/Divider';
 import { App } from 'vue';
 /* istanbul ignore next */
@@ -18,6 +18,18 @@ Menu.Item = MenuItem;
 Menu.Divider = Divider;
 Menu.SubMenu = SubMenu;
 Menu.ItemGroup = ItemGroup;
+
+export {
+  SubMenu,
+  MenuItem as Item,
+  MenuItem,
+  ItemGroup,
+  Divider,
+  MenuProps,
+  SubMenuProps,
+  MenuItemProps,
+  MenuItemGroupProps,
+};
 
 export default Menu as typeof Menu &
   Plugin & {

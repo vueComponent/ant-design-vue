@@ -1,13 +1,17 @@
 import { getPropsSlot } from '../../_util/props-util';
-import { computed, defineComponent } from 'vue';
+import { computed, defineComponent, ExtractPropTypes } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { useInjectMenu } from './hooks/useMenuContext';
 
+const menuItemGroupProps = {
+  title: PropTypes.VNodeChild,
+};
+
+export type MenuItemGroupProps = Partial<ExtractPropTypes<typeof menuItemGroupProps>>;
+
 export default defineComponent({
   name: 'AMenuItemGroup',
-  props: {
-    title: PropTypes.VNodeChild,
-  },
+  props: menuItemGroupProps,
   inheritAttrs: false,
   slots: ['title'],
   setup(props, { slots, attrs }) {

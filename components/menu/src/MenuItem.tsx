@@ -1,24 +1,36 @@
 import { flattenChildren, getPropsSlot, isValidElement } from '../../_util/props-util';
 import PropTypes from '../../_util/vue-types';
-import { computed, defineComponent, getCurrentInstance, onBeforeUnmount, ref, watch } from 'vue';
+import {
+  computed,
+  defineComponent,
+  ExtractPropTypes,
+  getCurrentInstance,
+  onBeforeUnmount,
+  ref,
+  watch,
+} from 'vue';
 import { useInjectKeyPath } from './hooks/useKeyPath';
 import { useInjectFirstLevel, useInjectMenu } from './hooks/useMenuContext';
 import { cloneElement } from '../../_util/vnode';
 import Tooltip from '../../tooltip';
 import { MenuInfo } from './interface';
 import KeyCode from 'ant-design-vue/es/_util/KeyCode';
+import useDirectionStyle from './hooks/useDirectionStyle';
 
 let indexGuid = 0;
+const menuItemProps = {
+  role: String,
+  disabled: Boolean,
+  danger: Boolean,
+  title: { type: [String, Boolean], default: undefined },
+  icon: PropTypes.VNodeChild,
+};
+
+export type MenuItemProps = Partial<ExtractPropTypes<typeof menuItemProps>>;
 
 export default defineComponent({
   name: 'AMenuItem',
-  props: {
-    role: String,
-    disabled: Boolean,
-    danger: Boolean,
-    title: { type: [String, Boolean], default: undefined },
-    icon: PropTypes.VNodeChild,
-  },
+  props: menuItemProps,
   emits: ['mouseenter', 'mouseleave', 'click', 'keydown', 'focus'],
   slots: ['icon'],
   inheritAttrs: false,
@@ -26,7 +38,7 @@ export default defineComponent({
     const instance = getCurrentInstance();
     const key = instance.vnode.key;
     const eventKey = `menu_item_${++indexGuid}_$$_${key}`;
-    const { parentEventKeys } = useInjectKeyPath();
+    const { parentEventKeys, parentKeys } = useInjectKeyPath();
     const {
       prefixCls,
       activeKeys,
@@ -37,21 +49,21 @@ export default defineComponent({
       siderCollapsed,
       onItemClick,
       selectedKeys,
-      store,
       registerMenuInfo,
       unRegisterMenuInfo,
     } = useInjectMenu();
     const firstLevel = useInjectFirstLevel();
     const isActive = ref(false);
-    const keyPath = computed(() => {
-      return [...parentEventKeys.value.map(eK => store[eK].key), key];
+    const keysPath = computed(() => {
+      return [...parentKeys.value, key];
     });
 
-    const keysPath = computed(() => [...parentEventKeys.value, eventKey]);
+    // const keysPath = computed(() => [...parentEventKeys.value, eventKey]);
     const menuInfo = {
       eventKey,
       key,
       parentEventKeys,
+      parentKeys,
       isLeaf: true,
     };
 
@@ -85,7 +97,7 @@ export default defineComponent({
       return {
         key: key,
         eventKey: eventKey,
-        keyPath: keyPath.value,
+        keyPath: keysPath.value,
         eventKeyPath: [...parentEventKeys.value, eventKey],
         domEvent: e,
       };
@@ -150,6 +162,9 @@ export default defineComponent({
       return <span class={`${prefixCls.value}-title-content`}>{children}</span>;
     };
 
+    // ========================== DirectionStyle ==========================
+    const directionStyle = useDirectionStyle(computed(() => keysPath.value.length));
+
     return () => {
       const { title } = props;
       const children = flattenChildren(slots.default?.());
@@ -187,6 +202,7 @@ export default defineComponent({
         >
           <li
             {...attrs}
+            style={{ ...((attrs.style as any) || {}), ...directionStyle.value }}
             class={[
               classNames.value,
               {

@@ -40,7 +40,7 @@ export default defineComponent({
     } = useInjectMenu();
 
     const placement = computed(() =>
-      rtl
+      rtl.value
         ? { ...placementsRtl, ...builtinPlacements.value }
         : { ...placements, ...builtinPlacements.value },
     );
@@ -73,7 +73,7 @@ export default defineComponent({
           popupClassName={classNames(
             `${prefixCls}-popup`,
             {
-              [`${prefixCls}-rtl`]: rtl,
+              [`${prefixCls}-rtl`]: rtl.value,
             },
             popupClassName,
           )}

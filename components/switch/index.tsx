@@ -35,7 +35,7 @@ const switchProps = {
   onClick: PropTypes.func,
   onKeydown: PropTypes.func,
   onMouseup: PropTypes.func,
-  'onUpdate:checked': PropTypes.func
+  'onUpdate:checked': PropTypes.func,
 };
 
 export type SwitchProps = Partial<ExtractPropTypes<typeof switchProps>>;

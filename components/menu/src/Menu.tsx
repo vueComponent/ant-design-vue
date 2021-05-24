@@ -108,7 +108,7 @@ export default defineComponent({
       store,
       () => {
         const newKeyMapStore = {};
-        for (let [_eventKey, menuInfo] of Object.entries(store)) {
+        for (const [, menuInfo] of Object.entries(store)) {
           newKeyMapStore[menuInfo.key] = menuInfo;
         }
         keyMapStore.value = newKeyMapStore;
@@ -308,10 +308,6 @@ export default defineComponent({
       triggerSelection(info);
     };
 
-    const onInternalKeyDown = (e: KeyboardEvent) => {
-      console.log('onInternalKeyDown', e);
-    };
-
     const onInternalOpenChange = (eventKey: Key, open: boolean) => {
       const { key, childrenEventKeys } = store[eventKey];
       let newOpenKeys = mergedOpenKeys.value.filter(k => k !== key);
@@ -369,7 +365,7 @@ export default defineComponent({
     });
     return () => {
       return (
-        <ul class={className.value} tabindex="0" onKeydown={onInternalKeyDown}>
+        <ul class={className.value} tabindex="0">
           {slots.default?.()}
         </ul>
       );

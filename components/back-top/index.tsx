@@ -130,7 +130,7 @@ const BackTop = defineComponent({
         class: {
           [`${prefixCls.value}`]: true,
           [`${attrs.class}`]: attrs.class,
-          [`${prefixCls}-rtl`]: configProvider.direction === 'rtl',
+          [`${prefixCls.value}-rtl`]: configProvider.direction === 'rtl',
         },
       };
 

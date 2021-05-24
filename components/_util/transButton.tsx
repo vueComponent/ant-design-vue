@@ -62,21 +62,20 @@ const TransButton = defineComponent({
       focus,
       blur,
     });
-    const { noStyle, disabled, ...restProps } = props;
-
-    let mergedStyle: CSSProperties = {};
-
-    if (!noStyle) {
-      mergedStyle = {
-        ...inlineStyle,
-      };
-    }
-
-    if (disabled) {
-      mergedStyle.pointerEvents = 'none';
-    }
-
     return () => {
+      const { noStyle, disabled, ...restProps } = props;
+
+      let mergedStyle: CSSProperties = {};
+
+      if (!noStyle) {
+        mergedStyle = {
+          ...inlineStyle,
+        };
+      }
+
+      if (disabled) {
+        mergedStyle.pointerEvents = 'none';
+      }
       return (
         <div
           role="button"

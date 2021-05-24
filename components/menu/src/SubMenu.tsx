@@ -35,10 +35,10 @@ export type SubMenuProps = Partial<ExtractPropTypes<typeof subMenuProps>>;
 
 export default defineComponent({
   name: 'ASubMenu',
+  inheritAttrs: false,
   props: subMenuProps,
   slots: ['icon', 'title'],
   emits: ['titleClick', 'mouseenter', 'mouseleave'],
-  inheritAttrs: false,
   setup(props, { slots, attrs, emit }) {
     useProvideFirstLevel(false);
 

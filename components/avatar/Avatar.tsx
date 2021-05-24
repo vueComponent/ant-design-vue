@@ -43,8 +43,8 @@ export type AvatarProps = Partial<ExtractPropTypes<typeof avatarProps>>;
 
 const Avatar = defineComponent({
   name: 'AAvatar',
-  props: avatarProps,
   inheritAttrs: false,
+  props: avatarProps,
   slots: ['icon'],
   setup(props, { slots, attrs }) {
     const isImgExist = ref(true);

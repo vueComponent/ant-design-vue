@@ -29,8 +29,8 @@ export type AvatarGroupProps = Partial<ExtractPropTypes<typeof groupProps>> & {
 
 const Group = defineComponent({
   name: 'AAvatarGroup',
-  props: groupProps,
   inheritAttrs: false,
+  props: groupProps,
   setup(props, { slots, attrs }) {
     const { prefixCls, direction } = useConfigInject('avatar-group', props);
     useProvideSize<AvatarSize>(props);

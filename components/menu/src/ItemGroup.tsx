@@ -11,8 +11,8 @@ export type MenuItemGroupProps = Partial<ExtractPropTypes<typeof menuItemGroupPr
 
 export default defineComponent({
   name: 'AMenuItemGroup',
-  props: menuItemGroupProps,
   inheritAttrs: false,
+  props: menuItemGroupProps,
   slots: ['title'],
   setup(props, { slots, attrs }) {
     const { prefixCls } = useInjectMenu();

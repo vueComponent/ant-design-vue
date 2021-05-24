@@ -14,6 +14,7 @@ const popupPlacementMap = {
 };
 export default defineComponent({
   name: 'PopupTrigger',
+  inheritAttrs: false,
   props: {
     prefixCls: String,
     mode: String as PropType<MenuMode>,
@@ -26,7 +27,6 @@ export default defineComponent({
   },
   slots: ['popup'],
   emits: ['visibleChange'],
-  inheritAttrs: false,
   setup(props, { slots, emit }) {
     const innerVisible = ref(false);
     const {

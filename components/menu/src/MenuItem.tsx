@@ -30,10 +30,10 @@ export type MenuItemProps = Partial<ExtractPropTypes<typeof menuItemProps>>;
 
 export default defineComponent({
   name: 'AMenuItem',
+  inheritAttrs: false,
   props: menuItemProps,
   emits: ['mouseenter', 'mouseleave', 'click', 'keydown', 'focus'],
   slots: ['icon'],
-  inheritAttrs: false,
   setup(props, { slots, emit, attrs }) {
     const instance = getCurrentInstance();
     const key = instance.vnode.key;
@@ -95,8 +95,8 @@ export default defineComponent({
 
     const getEventInfo = (e: MouseEvent | KeyboardEvent): MenuInfo => {
       return {
-        key: key,
-        eventKey: eventKey,
+        key,
+        eventKey,
         keyPath: keysPath.value,
         eventKeyPath: [...parentEventKeys.value, eventKey],
         domEvent: e,

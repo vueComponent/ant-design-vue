@@ -12,9 +12,6 @@ import classNames from '../_util/classNames';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectAnchor } from './context';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function noop(..._any: any[]): any {}
-
 const anchorLinkProps = {
   prefixCls: PropTypes.string,
   href: PropTypes.string.def('#'),
@@ -27,7 +24,9 @@ export type AnchorLinkProps = Partial<ExtractPropTypes<typeof anchorLinkProps>>;
 export default defineComponent({
   name: 'AAnchorLink',
   props: anchorLinkProps,
+  slots: ['title'],
   setup(props, { slots }) {
+    let mergedTitle = null;
     const {
       handleClick: contextHandleClick,
       scrollTo,
@@ -38,9 +37,8 @@ export default defineComponent({
     const { prefixCls } = useConfigInject('anchor', props);
 
     const handleClick = (e: Event) => {
-      // antAnchor.scrollTo(props.href);
-      const { href, title } = props;
-      contextHandleClick(e, { title, href });
+      const { href } = props;
+      contextHandleClick(e, { title: mergedTitle, href });
       scrollTo(href);
     };
 
@@ -66,6 +64,7 @@ export default defineComponent({
       const { href, target } = props;
       const pre = prefixCls.value;
       const title = getPropsSlot(slots, props, 'title');
+      mergedTitle = title;
       const active = activeLink.value === href;
       const wrapperClassName = classNames(`${pre}-link`, {
         [`${pre}-link-active`]: active,

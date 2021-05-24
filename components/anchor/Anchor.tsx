@@ -78,7 +78,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: anchorProps,
   emits: ['change', 'click'],
-  setup(props, { emit, attrs, slots }) {
+  setup(props, { emit, attrs, slots, expose }) {
     const { prefixCls, getTargetContainer, direction } = useConfigInject('anchor', props);
     const inkNodeRef = ref();
     const anchorRef = ref();
@@ -159,6 +159,9 @@ export default defineComponent({
         getContainer,
       });
     };
+    expose({
+      scrollTo: handleScrollTo,
+    });
     const handleScroll = () => {
       if (state.animating) {
         return;

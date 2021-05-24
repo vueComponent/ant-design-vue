@@ -1,6 +1,7 @@
 import {
   ComponentInternalInstance,
   defineComponent,
+  ExtractPropTypes,
   inject,
   nextTick,
   onBeforeUnmount,
@@ -10,22 +11,24 @@ import {
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import classNames from '../_util/classNames';
-import { defaultConfigProvider } from '../config-provider';
 import { AntAnchor } from './Anchor';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function noop(..._any: any[]): any {}
 
-const AnchorLinkProps = {
+const anchorLinkProps = {
   prefixCls: PropTypes.string,
   href: PropTypes.string.def('#'),
   title: PropTypes.VNodeChild,
   target: PropTypes.string,
 };
 
+export type AnchorLinkProps = Partial<ExtractPropTypes<typeof anchorLinkProps>>;
+
 export default defineComponent({
   name: 'AAnchorLink',
-  props: AnchorLinkProps,
+  props: anchorLinkProps,
   setup(props, { slots }) {
     const antAnchor = inject('antAnchor', {
       registerLink: noop,
@@ -34,7 +37,7 @@ export default defineComponent({
       $data: {},
     } as AntAnchor);
     const antAnchorContext = inject('antAnchorContext', {}) as ComponentInternalInstance;
-    const configProvider = inject('configProvider', defaultConfigProvider);
+    const { prefixCls } = useConfigInject('anchor', props);
 
     const handleClick = (e: Event) => {
       // antAnchor.scrollTo(props.href);
@@ -65,18 +68,15 @@ export default defineComponent({
     });
 
     return () => {
-      const { prefixCls: customizePrefixCls, href, target } = props;
-
-      const getPrefixCls = configProvider.getPrefixCls;
-      const prefixCls = getPrefixCls('anchor', customizePrefixCls);
-
+      const { href, target } = props;
+      const pre = prefixCls.value;
       const title = getPropsSlot(slots, props, 'title');
       const active = antAnchor.$data.activeLink === href;
-      const wrapperClassName = classNames(`${prefixCls}-link`, {
-        [`${prefixCls}-link-active`]: active,
+      const wrapperClassName = classNames(`${pre}-link`, {
+        [`${pre}-link-active`]: active,
       });
-      const titleClassName = classNames(`${prefixCls}-link-title`, {
-        [`${prefixCls}-link-title-active`]: active,
+      const titleClassName = classNames(`${pre}-link-title`, {
+        [`${pre}-link-title-active`]: active,
       });
       return (
         <div class={wrapperClassName}>

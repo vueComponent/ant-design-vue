@@ -1,6 +1,5 @@
 import {
   defineComponent,
-  inject,
   nextTick,
   onBeforeUnmount,
   onMounted,
@@ -9,6 +8,8 @@ import {
   reactive,
   ref,
   getCurrentInstance,
+  ExtractPropTypes,
+  computed,
 } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
@@ -16,17 +17,13 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 import Affix from '../affix';
 import scrollTo from '../_util/scrollTo';
 import getScroll from '../_util/getScroll';
-import { defaultConfigProvider } from '../config-provider';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 function getDefaultContainer() {
   return window;
 }
 
 function getOffsetTop(element: HTMLElement, container: AnchorContainer): number {
-  if (!element) {
-    return 0;
-  }
-
   if (!element.getClientRects().length) {
     return 0;
   }
@@ -35,7 +32,7 @@ function getOffsetTop(element: HTMLElement, container: AnchorContainer): number 
 
   if (rect.width || rect.height) {
     if (container === window) {
-      container = element.ownerDocument.documentElement;
+      container = element.ownerDocument!.documentElement!;
       return rect.top - container.clientTop;
     }
     return rect.top - (container as HTMLElement).getBoundingClientRect().top;
@@ -44,7 +41,7 @@ function getOffsetTop(element: HTMLElement, container: AnchorContainer): number 
   return rect.top;
 }
 
-const sharpMatcherRegx = /#([^#]+)$/;
+const sharpMatcherRegx = /#(\S+)$/;
 
 type Section = {
   link: string;
@@ -53,7 +50,7 @@ type Section = {
 
 export type AnchorContainer = HTMLElement | Window;
 
-const AnchorProps = {
+const anchorProps = {
   prefixCls: PropTypes.string,
   offsetTop: PropTypes.number,
   bounds: PropTypes.number,
@@ -68,6 +65,8 @@ const AnchorProps = {
   onClick: PropTypes.func,
 };
 
+export type AnchorProps = Partial<ExtractPropTypes<typeof anchorProps>>;
+
 export interface AntAnchor {
   registerLink: (link: string) => void;
   unregisterLink: (link: string) => void;
@@ -81,28 +80,32 @@ export interface AnchorState {
   links: string[];
   scrollEvent: any;
   animating: boolean;
-  sPrefixCls?: string;
 }
 
 export default defineComponent({
   name: 'AAnchor',
   inheritAttrs: false,
-  props: AnchorProps,
+  props: anchorProps,
   emits: ['change', 'click'],
   setup(props, { emit, attrs, slots }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
+    const { prefixCls, getTargetContainer, direction } = useConfigInject('anchor', props);
     const instance = getCurrentInstance();
     const inkNodeRef = ref();
     const anchorRef = ref();
     const state = reactive<AnchorState>({
       activeLink: null,
       links: [],
-      sPrefixCls: '',
       scrollContainer: null,
       scrollEvent: null,
       animating: false,
     });
+    const getContainer = computed(() => {
+      const { getContainer } = props;
 
+      const getFunc = getContainer || getTargetContainer.value || getDefaultContainer;
+
+      return getFunc();
+    });
     // func...
     const getCurrentActiveLink = (offsetTop = 0, bounds = 5) => {
       const { getCurrentAnchor } = props;
@@ -110,14 +113,9 @@ export default defineComponent({
       if (typeof getCurrentAnchor === 'function') {
         return getCurrentAnchor();
       }
-      const activeLink = '';
-      if (typeof document === 'undefined') {
-        return activeLink;
-      }
 
       const linkSections: Array<Section> = [];
-      const { getContainer } = props;
-      const container = getContainer();
+      const container = getContainer.value();
       state.links.forEach(link => {
         const sharpLinkMatch = sharpMatcherRegx.exec(link.toString());
         if (!sharpLinkMatch) {
@@ -188,11 +186,9 @@ export default defineComponent({
     };
 
     const updateInk = () => {
-      if (typeof document === 'undefined') {
-        return;
-      }
-      const { sPrefixCls } = state;
-      const linkNode = anchorRef.value.getElementsByClassName(`${sPrefixCls}-link-title-active`)[0];
+      const linkNode = anchorRef.value.getElementsByClassName(
+        `${prefixCls.value}-link-title-active`,
+      )[0];
       if (linkNode) {
         (inkNodeRef.value as HTMLElement).style.top = `${linkNode.offsetTop +
           linkNode.clientHeight / 2 -
@@ -220,8 +216,8 @@ export default defineComponent({
 
     onMounted(() => {
       nextTick(() => {
-        const { getContainer } = props;
-        state.scrollContainer = getContainer();
+        const container = getContainer.value();
+        state.scrollContainer = container;
         state.scrollEvent = addEventListener(state.scrollContainer, 'scroll', handleScroll);
         handleScroll();
       });
@@ -233,8 +229,7 @@ export default defineComponent({
     });
     onUpdated(() => {
       if (state.scrollEvent) {
-        const { getContainer } = props;
-        const currentContainer = getContainer();
+        const currentContainer = getContainer.value();
         if (state.scrollContainer !== currentContainer) {
           state.scrollContainer = currentContainer;
           state.scrollEvent.remove();
@@ -246,24 +241,17 @@ export default defineComponent({
     });
 
     return () => {
-      const {
-        prefixCls: customizePrefixCls,
-        offsetTop,
-        affix,
-        showInkInFixed,
-        getContainer,
-      } = props;
-      const getPrefixCls = configProvider.getPrefixCls;
-      const prefixCls = getPrefixCls('anchor', customizePrefixCls);
-      state.sPrefixCls = prefixCls;
-
-      const inkClass = classNames(`${prefixCls}-ink-ball`, {
+      const { offsetTop, affix, showInkInFixed } = props;
+      const pre = prefixCls.value;
+      const inkClass = classNames(`${pre}-ink-ball`, {
         visible: state.activeLink,
       });
 
-      const wrapperClass = classNames(props.wrapperClass, `${prefixCls}-wrapper`);
+      const wrapperClass = classNames(props.wrapperClass, `${pre}-wrapper`, {
+        [`${pre}-rtl`]: direction.value === 'rtl',
+      });
 
-      const anchorClass = classNames(prefixCls, {
+      const anchorClass = classNames(pre, {
         fixed: !affix && !showInkInFixed,
       });
 
@@ -274,7 +262,7 @@ export default defineComponent({
       const anchorContent = (
         <div class={wrapperClass} style={wrapperStyle} ref={anchorRef}>
           <div class={anchorClass}>
-            <div class={`${prefixCls}-ink`}>
+            <div class={`${pre}-ink`}>
               <span class={inkClass} ref={inkNodeRef} />
             </div>
             {slots.default?.()}
@@ -285,7 +273,7 @@ export default defineComponent({
       return !affix ? (
         anchorContent
       ) : (
-        <Affix {...attrs} offsetTop={offsetTop} target={getContainer}>
+        <Affix {...attrs} offsetTop={offsetTop} target={getContainer.value}>
           {anchorContent}
         </Affix>
       );

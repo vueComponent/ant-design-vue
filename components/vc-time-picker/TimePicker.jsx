@@ -341,7 +341,6 @@ export default defineComponent({
       name,
       autocomplete,
       autofocus,
-      inputReadOnly,
       sOpen,
       sValue,
       onFocus,
@@ -381,7 +380,7 @@ export default defineComponent({
             onFocus={onFocus}
             onBlur={onBlur}
             autofocus={autofocus}
-            readonly={!!inputReadOnly}
+            readonly
             id={id}
           />
           {inputIcon || <span class={`${prefixCls}-icon`} />}

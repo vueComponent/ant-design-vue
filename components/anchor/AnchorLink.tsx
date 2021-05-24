@@ -1,8 +1,6 @@
 import {
-  ComponentInternalInstance,
   defineComponent,
   ExtractPropTypes,
-  inject,
   nextTick,
   onBeforeUnmount,
   onMounted,
@@ -11,8 +9,8 @@ import {
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import classNames from '../_util/classNames';
-import { AntAnchor } from './Anchor';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import { useInjectAnchor } from './context';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function noop(..._any: any[]): any {}
@@ -30,22 +28,19 @@ export default defineComponent({
   name: 'AAnchorLink',
   props: anchorLinkProps,
   setup(props, { slots }) {
-    const antAnchor = inject('antAnchor', {
-      registerLink: noop,
-      unregisterLink: noop,
-      scrollTo: noop,
-      $data: {},
-    } as AntAnchor);
-    const antAnchorContext = inject('antAnchorContext', {}) as ComponentInternalInstance;
+    const {
+      handleClick: contextHandleClick,
+      scrollTo,
+      unregisterLink,
+      registerLink,
+      activeLink,
+    } = useInjectAnchor();
     const { prefixCls } = useConfigInject('anchor', props);
 
     const handleClick = (e: Event) => {
       // antAnchor.scrollTo(props.href);
-      const { scrollTo } = antAnchor;
       const { href, title } = props;
-      if (antAnchorContext.emit) {
-        antAnchorContext.emit('click', e, { title, href });
-      }
+      contextHandleClick(e, { title, href });
       scrollTo(href);
     };
 
@@ -53,25 +48,25 @@ export default defineComponent({
       () => props.href,
       (val, oldVal) => {
         nextTick(() => {
-          antAnchor.unregisterLink(oldVal);
-          antAnchor.registerLink(val);
+          unregisterLink(oldVal);
+          registerLink(val);
         });
       },
     );
 
     onMounted(() => {
-      antAnchor.registerLink(props.href);
+      registerLink(props.href);
     });
 
     onBeforeUnmount(() => {
-      antAnchor.unregisterLink(props.href);
+      unregisterLink(props.href);
     });
 
     return () => {
       const { href, target } = props;
       const pre = prefixCls.value;
       const title = getPropsSlot(slots, props, 'title');
-      const active = antAnchor.$data.activeLink === href;
+      const active = activeLink.value === href;
       const wrapperClassName = classNames(`${pre}-link`, {
         [`${pre}-link-active`]: active,
       });

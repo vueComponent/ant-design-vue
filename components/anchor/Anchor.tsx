@@ -4,10 +4,8 @@ import {
   onBeforeUnmount,
   onMounted,
   onUpdated,
-  provide,
   reactive,
   ref,
-  getCurrentInstance,
   ExtractPropTypes,
   computed,
 } from 'vue';
@@ -18,6 +16,7 @@ import Affix from '../affix';
 import scrollTo from '../_util/scrollTo';
 import getScroll from '../_util/getScroll';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import useProvideAnchor from './context';
 
 function getDefaultContainer() {
   return window;
@@ -67,15 +66,7 @@ const anchorProps = {
 
 export type AnchorProps = Partial<ExtractPropTypes<typeof anchorProps>>;
 
-export interface AntAnchor {
-  registerLink: (link: string) => void;
-  unregisterLink: (link: string) => void;
-  $data: AnchorState;
-  scrollTo: (link: string) => void;
-  $emit?: Function;
-}
 export interface AnchorState {
-  activeLink: null | string;
   scrollContainer: HTMLElement | Window;
   links: string[];
   scrollEvent: any;
@@ -89,25 +80,21 @@ export default defineComponent({
   emits: ['change', 'click'],
   setup(props, { emit, attrs, slots }) {
     const { prefixCls, getTargetContainer, direction } = useConfigInject('anchor', props);
-    const instance = getCurrentInstance();
     const inkNodeRef = ref();
     const anchorRef = ref();
     const state = reactive<AnchorState>({
-      activeLink: null,
       links: [],
       scrollContainer: null,
       scrollEvent: null,
       animating: false,
     });
+    const activeLink = ref();
     const getContainer = computed(() => {
       const { getContainer } = props;
-
-      const getFunc = getContainer || getTargetContainer.value || getDefaultContainer;
-
-      return getFunc();
+      return getContainer || getTargetContainer.value || getDefaultContainer;
     });
     // func...
-    const getCurrentActiveLink = (offsetTop = 0, bounds = 5) => {
+    const getCurrentAnchor = (offsetTop = 0, bounds = 5) => {
       const { getCurrentAnchor } = props;
 
       if (typeof getCurrentAnchor === 'function') {
@@ -140,9 +127,8 @@ export default defineComponent({
       return '';
     };
     const setCurrentActiveLink = (link: string) => {
-      const { activeLink } = state;
-      if (activeLink !== link) {
-        state.activeLink = link;
+      if (activeLink.value !== link) {
+        activeLink.value = link;
         emit('change', link);
       }
     };
@@ -178,7 +164,7 @@ export default defineComponent({
         return;
       }
       const { offsetTop, bounds, targetOffset } = props;
-      const currentActiveLink = getCurrentActiveLink(
+      const currentActiveLink = getCurrentAnchor(
         targetOffset !== undefined ? targetOffset : offsetTop || 0,
         bounds,
       );
@@ -196,8 +182,7 @@ export default defineComponent({
       }
     };
 
-    // provide data
-    provide('antAnchor', {
+    useProvideAnchor({
       registerLink: (link: string) => {
         if (!state.links.includes(link)) {
           state.links.push(link);
@@ -209,10 +194,12 @@ export default defineComponent({
           state.links.splice(index, 1);
         }
       },
-      $data: state,
+      activeLink,
       scrollTo: handleScrollTo,
-    } as AntAnchor);
-    provide('antAnchorContext', instance);
+      handleClick: (e, info) => {
+        emit('click', e, info);
+      },
+    });
 
     onMounted(() => {
       nextTick(() => {
@@ -244,7 +231,7 @@ export default defineComponent({
       const { offsetTop, affix, showInkInFixed } = props;
       const pre = prefixCls.value;
       const inkClass = classNames(`${pre}-ink-ball`, {
-        visible: state.activeLink,
+        visible: activeLink.value,
       });
 
       const wrapperClass = classNames(props.wrapperClass, `${pre}-wrapper`, {

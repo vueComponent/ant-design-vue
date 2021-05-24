@@ -28,7 +28,7 @@ const AutoComplete = defineComponent({
   props: {
     ...AutoCompleteProps,
     prefixCls: PropTypes.string.def('ant-select'),
-    showSearch: PropTypes.looseBool.def(false),
+    showSearch: PropTypes.looseBool,
     transitionName: PropTypes.string.def('slide-up'),
     choiceTransitionName: PropTypes.string.def('zoom'),
     autofocus: PropTypes.looseBool,

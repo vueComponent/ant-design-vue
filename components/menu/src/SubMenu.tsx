@@ -192,9 +192,13 @@ export default defineComponent({
       const titleIsSpan = isValidElement(title) && title.type === 'span';
       return (
         <>
-          {cloneElement(icon, {
-            class: `${prefixCls.value}-item-icon`,
-          })}
+          {cloneElement(
+            icon,
+            {
+              class: `${prefixCls.value}-item-icon`,
+            },
+            false,
+          )}
           {titleIsSpan ? title : <span class={`${prefixCls.value}-title-content`}>{title}</span>}
         </>
       );

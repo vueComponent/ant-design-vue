@@ -36,6 +36,7 @@ export type BadgeProps = Partial<ExtractPropTypes<typeof badgeProps>>;
 export default defineComponent({
   name: 'ABadge',
   Ribbon,
+  inheritAttrs: false,
   props: badgeProps,
   slots: ['text', 'count'],
   setup(props, { slots, attrs }) {

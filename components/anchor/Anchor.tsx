@@ -95,12 +95,6 @@ export default defineComponent({
     });
     // func...
     const getCurrentAnchor = (offsetTop = 0, bounds = 5) => {
-      const { getCurrentAnchor } = props;
-
-      if (typeof getCurrentAnchor === 'function') {
-        return getCurrentAnchor();
-      }
-
       const linkSections: Array<Section> = [];
       const container = getContainer.value();
       state.links.forEach(link => {
@@ -127,10 +121,12 @@ export default defineComponent({
       return '';
     };
     const setCurrentActiveLink = (link: string) => {
+      const { getCurrentAnchor } = props;
       if (activeLink.value !== link) {
-        activeLink.value = link;
-        emit('change', link);
+        return;
       }
+      activeLink.value = typeof getCurrentAnchor === 'function' ? getCurrentAnchor() : link;
+      emit('change', link);
     };
     const handleScrollTo = (link: string) => {
       const { offsetTop, getContainer, targetOffset } = props;

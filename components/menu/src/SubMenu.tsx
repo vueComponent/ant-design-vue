@@ -18,6 +18,7 @@ import PopupTrigger from './PopupTrigger';
 import SubMenuList from './SubMenuList';
 import InlineSubMenuList from './InlineSubMenuList';
 import Transition, { getTransitionProps } from '../../_util/transition';
+import { cloneElement } from '../../_util/vnode';
 
 let indexGuid = 0;
 
@@ -177,7 +178,10 @@ export default defineComponent({
     );
     const renderTitle = (title: any, icon: any) => {
       if (!icon) {
-        return inlineCollapsed.value && props.level === 1 && title && typeof title === 'string' ? (
+        return inlineCollapsed.value &&
+          !parentEventKeys.value.length &&
+          title &&
+          typeof title === 'string' ? (
           <div class={`${prefixCls.value}-inline-collapsed-noicon`}>{title.charAt(0)}</div>
         ) : (
           title
@@ -188,7 +192,9 @@ export default defineComponent({
       const titleIsSpan = isValidElement(title) && title.type === 'span';
       return (
         <>
-          {icon}
+          {cloneElement(icon, {
+            class: `${prefixCls.value}-item-icon`,
+          })}
           {titleIsSpan ? title : <span class={`${prefixCls.value}-title-content`}>{title}</span>}
         </>
       );

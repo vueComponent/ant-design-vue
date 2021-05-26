@@ -1,9 +1,9 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, ExtractPropTypes } from 'vue';
 import PropsTypes from '../_util/vue-types';
-import { getComponent, getSlot } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
+import { flattenChildren } from '../_util/props-util';
 import { VueNode, withInstall } from '../_util/type';
-export const CommentProps = {
+import useConfigInject from '../_util/hooks/useConfigInject';
+export const commentProps = {
   actions: PropsTypes.array,
   /** The element to display as the comment author. */
   author: PropsTypes.VNodeChild,
@@ -17,79 +17,79 @@ export const CommentProps = {
   datetime: PropsTypes.VNodeChild,
 };
 
+export type CommentProps = Partial<ExtractPropTypes<typeof commentProps>>;
+
 const Comment = defineComponent({
   name: 'AComment',
-  props: CommentProps,
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
+  props: commentProps,
+  slots: ['actions', 'author', 'avatar', 'content', 'datetime'],
+  setup(props, { slots }) {
+    const { prefixCls, direction } = useConfigInject('comment', props);
+    const renderNested = (prefixCls: string, children: VueNode) => {
+      return <div class={`${prefixCls}-nested`}>{children}</div>;
     };
-  },
-  methods: {
-    getAction(actions: VueNode[]) {
+    const getAction = (actions: VueNode[]) => {
       if (!actions || !actions.length) {
         return null;
       }
       const actionList = actions.map((action, index) => <li key={`action-${index}`}>{action}</li>);
       return actionList;
-    },
-    renderNested(prefixCls: string, children: VueNode) {
-      return <div class={`${prefixCls}-nested`}>{children}</div>;
-    },
-  },
+    };
+    return () => {
+      const pre = prefixCls.value;
 
-  render() {
-    const { prefixCls: customizePrefixCls } = this.$props;
+      const actions = props.actions ?? slots.actions?.();
+      const author = props.author ?? slots.author?.();
+      const avatar = props.avatar ?? slots.avatar?.();
+      const content = props.content ?? slots.content?.();
+      const datetime = props.datetime ?? slots.datetime?.();
 
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('comment', customizePrefixCls);
+      const avatarDom = (
+        <div class={`${pre}-avatar`}>
+          {typeof avatar === 'string' ? <img src={avatar} alt="comment-avatar" /> : avatar}
+        </div>
+      );
 
-    const actions = getComponent(this, 'actions');
-    const author = getComponent(this, 'author');
-    const avatar = getComponent(this, 'avatar');
-    const content = getComponent(this, 'content');
-    const datetime = getComponent(this, 'datetime');
+      const actionDom = actions ? (
+        <ul class={`${pre}-actions`}>{getAction(Array.isArray(actions) ? actions : [actions])}</ul>
+      ) : null;
 
-    const avatarDom = (
-      <div class={`${prefixCls}-avatar`}>
-        {typeof avatar === 'string' ? <img src={avatar} alt="comment-avatar" /> : avatar}
-      </div>
-    );
+      const authorContent = (
+        <div class={`${pre}-content-author`}>
+          {author && <span class={`${pre}-content-author-name`}>{author}</span>}
+          {datetime && <span class={`${pre}-content-author-time`}>{datetime}</span>}
+        </div>
+      );
 
-    const actionDom = actions ? (
-      <ul class={`${prefixCls}-actions`}>
-        {this.getAction(Array.isArray(actions) ? actions : [actions])}
-      </ul>
-    ) : null;
+      const contentDom = (
+        <div class={`${pre}-content`}>
+          {authorContent}
+          <div class={`${pre}-content-detail`}>{content}</div>
+          {actionDom}
+        </div>
+      );
 
-    const authorContent = (
-      <div class={`${prefixCls}-content-author`}>
-        {author && <span class={`${prefixCls}-content-author-name`}>{author}</span>}
-        {datetime && <span class={`${prefixCls}-content-author-time`}>{datetime}</span>}
-      </div>
-    );
-
-    const contentDom = (
-      <div class={`${prefixCls}-content`}>
-        {authorContent}
-        <div class={`${prefixCls}-content-detail`}>{content}</div>
-        {actionDom}
-      </div>
-    );
-
-    const comment = (
-      <div class={`${prefixCls}-inner`}>
-        {avatarDom}
-        {contentDom}
-      </div>
-    );
-    const children = getSlot(this);
-    return (
-      <div class={prefixCls}>
-        {comment}
-        {children && children.length ? this.renderNested(prefixCls, children) : null}
-      </div>
-    );
+      const comment = (
+        <div class={`${pre}-inner`}>
+          {avatarDom}
+          {contentDom}
+        </div>
+      );
+      const children = flattenChildren(slots.default?.());
+      return (
+        <div
+          class={[
+            pre,
+            {
+              [`${pre}-rtl`]: direction.value === 'rtl',
+            },
+          ]}
+        >
+          {comment}
+          {children && children.length ? renderNested(pre, children) : null}
+        </div>
+      );
+    };
   },
 });
 

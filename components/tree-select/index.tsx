@@ -151,7 +151,6 @@ const TreeSelect = defineComponent({
 
     // showSearch: single - false, multiple - true
     let { showSearch } = restProps;
-    debugger;
     if (!('showSearch' in restProps)) {
       showSearch = !!(restProps.multiple || restProps.treeCheckable);
     }

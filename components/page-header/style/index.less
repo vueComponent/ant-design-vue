@@ -10,7 +10,7 @@
   background-color: @component-background;
 
   &-ghost {
-    background-color: inherit;
+    background-color: @page-header-ghost-bg;
   }
 
   &.has-breadcrumb {
@@ -22,11 +22,10 @@
   }
 
   &-back {
-    float: left;
-    margin: 8px 0;
-    margin-right: 16px;
+    margin-right: @margin-md;
     font-size: 16px;
     line-height: 1;
+
     &-button {
       .operation-unit();
       color: @page-header-back-color;
@@ -36,51 +35,60 @@
 
   .@{ant-prefix}-divider-vertical {
     height: 14px;
-    margin: 0 12px;
+    margin: 0 @margin-sm;
     vertical-align: middle;
   }
 
   .@{ant-prefix}-breadcrumb + &-heading {
-    margin-top: 8px;
+    margin-top: @margin-xs;
+  }
+
+  .text-overflow-ellipsis() {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   &-heading {
-    width: 100%;
-    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+
+    &-left {
+      display: flex;
+      align-items: center;
+      margin: (@margin-xs / 2) 0;
+      overflow: hidden;
+    }
+
     &-title {
-      display: block;
-      float: left;
+      margin-right: @margin-sm;
       margin-bottom: 0;
-      padding-right: 12px;
       color: @heading-color;
       font-weight: 600;
-      font-size: @heading-4-size;
+      font-size: @page-header-heading-title;
       line-height: 32px;
+      .text-overflow-ellipsis();
     }
 
     .@{ant-prefix}-avatar {
-      float: left;
-      margin-right: 12px;
+      margin-right: @margin-sm;
     }
 
     &-sub-title {
-      float: left;
-      margin: 5px 0;
-      margin-right: 12px;
+      margin-right: @margin-sm;
       color: @text-color-secondary;
-      font-size: 14px;
-      line-height: 22px;
-    }
-
-    &-tags {
-      float: left;
-      margin: 4px 0;
+      font-size: @page-header-heading-sub-title;
+      line-height: @line-height-base;
+      .text-overflow-ellipsis();
     }
 
     &-extra {
-      float: right;
+      margin: (@margin-xs / 2) 0;
+      white-space: nowrap;
+
       > * {
-        margin-left: 8px;
+        margin-left: @margin-sm;
+        white-space: unset;
       }
       > *:first-child {
         margin-left: 0;
@@ -89,31 +97,30 @@
   }
 
   &-content {
-    padding-top: 12px;
-    overflow: hidden;
+    padding-top: @page-header-content-padding-vertical;
   }
 
   &-footer {
-    margin-top: 16px;
-    .@{ant-prefix}-tabs-bar {
-      margin-bottom: 1px;
-      border-bottom: 0;
-      .@{ant-prefix}-tabs-nav .@{ant-prefix}-tabs-tab {
-        padding: 8px;
-        font-size: 16px;
+    margin-top: @margin-md;
+    .@{ant-prefix}-tabs {
+      > .@{ant-prefix}-tabs-nav {
+        margin: 0;
+        &::before {
+          border: none;
+        }
+      }
+
+      .@{ant-prefix}-tabs-tab {
+        padding-top: @padding-xs;
+        padding-bottom: @padding-xs;
+        font-size: @page-header-tabs-tab-font-size;
       }
     }
   }
 
-  @media (max-width: @screen-sm) {
-    &-heading {
-      &-extra {
-        display: block;
-        float: unset;
-        width: 100%;
-        padding-top: 12px;
-        overflow: hidden;
-      }
-    }
+  &-compact &-heading {
+    flex-wrap: wrap;
   }
 }
+
+@import './rtl';

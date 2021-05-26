@@ -52,7 +52,7 @@ const renderBack = (
   );
 };
 
-const renderBreadcrumb = breadcrumb => {
+const renderBreadcrumb = (breadcrumb: any) => {
   return <Breadcrumb {...breadcrumb} />;
 };
 

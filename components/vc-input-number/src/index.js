@@ -141,7 +141,7 @@ export default {
       if (this.autoFocus && !this.disabled) {
         this.focus();
       }
-      // this.formatAndUpdate(this.inputValue); // TODO
+      // this.formatAndUpdate(this.inputValue); // TODO to update modelValue for example max < value
     });
   },
   watch: {
@@ -163,7 +163,7 @@ export default {
     },
     value(newVal, oldVal) {
       if (!isEqual(newVal, oldVal)) {
-        this.formatAndUpdate(newVal);
+        this.formatAndUpdate(newVal, false); // avoid to emit twice
       }
     },
   },
@@ -233,7 +233,7 @@ export default {
 
       this.pressingUpOrDown = false;
     },
-    setInputValue(val) {
+    setInputValue(val, needEmit = true) {
       if (this.focused) {
         this.inputting = true;
       }
@@ -243,37 +243,33 @@ export default {
       this.setState({
         inputValue: String(val),
       });
-      const emitValue = this.getCurrentValidValue(this.inputValue);
-      if (this.onbluring) {
-        this.$emit('change', emitValue === '' ? null : Number(emitValue));
-      } else {
-        this.$emit('change', emitValue === '' ? '' : Number(emitValue));
+      let emitValue = this.getCurrentValidValue(this.inputValue);
+      if (this.onbluring && emitValue === '') {
+        emitValue = null;
+      } else if (emitValue !== '') {
+        emitValue = Number(emitValue); // if no Number() we can get 1.000
       }
+      if (needEmit) this.$emit('change', emitValue);
     },
-    formatAndUpdate(value) {
-      if (this.formatter && this.parser) {
-        value = this.formatWrapper(this.getCurrentValidValue(value));
-      } else {
-        value = this.formatNumber(value);
-      }
-      this.setInputValue(value);
+    formatAndUpdate(value, needEmit = true) {
+      value = this.formatNumber(value);
+      this.setInputValue(value, needEmit);
     },
     formatNumber(value) {
       if (String(value).length > 30) value = value.slice(0, 30);
       value = this.getCurrentValidValue(value);
-      if (value === '') {
-        return '';
-      } else {
-        return new Intl.NumberFormat(undefined, {
-          style: 'decimal',
-          useGrouping: this.useGrouping,
-          minimumFractionDigits: this.getMaxPrecision(value),
-          maximumFractionDigits: this.getMaxPrecision(value),
-        })
-          .format(value)
-          .replace(new RegExp('\\,', 'g'), this.groupSeparator)
-          .replace(new RegExp('\\.', 'g'), this.decimalSeparator);
-      }
+      if (this.formatter && this.parser) return this.formatWrapper(value);
+      if (value === '') return '';
+
+      return new Intl.NumberFormat(undefined, {
+        style: 'decimal',
+        useGrouping: this.useGrouping,
+        minimumFractionDigits: this.getMaxPrecision(value),
+        maximumFractionDigits: this.getMaxPrecision(value),
+      })
+        .format(value)
+        .replace(new RegExp('\\,', 'g'), this.groupSeparator)
+        .replace(new RegExp('\\.', 'g'), this.decimalSeparator);
     },
     spliceText(preValue, newChar, start, end) {
       const ret = preValue.slice(0, start) + newChar + preValue.slice(end);

@@ -146,6 +146,7 @@ const SearchInput = {
             onKeydown={onSearchInputKeyDown}
             value={searchValue}
             disabled={disabled}
+            readonly={!this.$attrs.showSearch}
             class={`${prefixCls}-selection-search-input`}
             aria-label="filter select"
             aria-autocomplete="list"

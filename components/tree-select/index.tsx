@@ -26,7 +26,6 @@ const TreeSelect = defineComponent({
   props: initDefaultProps(TreeSelectProps(), {
     transitionName: 'slide-up',
     choiceTransitionName: '',
-    showSearch: false,
   }),
   setup() {
     return {
@@ -152,10 +151,10 @@ const TreeSelect = defineComponent({
 
     // showSearch: single - false, multiple - true
     let { showSearch } = restProps;
+    debugger;
     if (!('showSearch' in restProps)) {
       showSearch = !!(restProps.multiple || restProps.treeCheckable);
     }
-
     let checkable = getComponent(this, 'treeCheckable');
     if (checkable) {
       checkable = <span class={`${prefixCls}-tree-checkbox-inner`} />;

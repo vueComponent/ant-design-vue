@@ -1,4 +1,4 @@
-import { defineComponent, inject, nextTick, onMounted, ref, PropType } from 'vue';
+import { defineComponent, inject, nextTick, onMounted, ref, PropType, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
 import classNames from '../_util/classNames';
@@ -8,7 +8,7 @@ import VcInputNumber from '../vc-input-number/src';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
 
-const InputNumberProps = {
+const inputNumberProps = {
   prefixCls: PropTypes.string,
   min: PropTypes.number,
   max: PropTypes.number,
@@ -32,10 +32,12 @@ const InputNumberProps = {
   onChange: Function as PropType<(num: number) => void>,
 };
 
+export type InputNumberProps = Partial<ExtractPropTypes<typeof inputNumberProps>>;
+
 const InputNumber = defineComponent({
   name: 'AInputNumber',
   inheritAttrs: false,
-  props: InputNumberProps,
+  props: inputNumberProps,
   setup(props) {
     const inputNumberRef = ref(null);
     const focus = () => {

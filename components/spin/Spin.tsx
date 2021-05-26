@@ -120,7 +120,7 @@ export default defineComponent({
   render() {
     const { size, prefixCls: customizePrefixCls, tip, wrapperClassName } = this.$props;
     const { class: cls, style, ...divProps } = this.$attrs;
-    const { getPrefixCls } = this.configProvider;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('spin', customizePrefixCls);
 
     const { sSpinning } = this;
@@ -130,6 +130,7 @@ export default defineComponent({
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-spinning`]: sSpinning,
       [`${prefixCls}-show-text`]: !!tip,
+      [`${prefixCls}-rtl`]: direction === 'rtl',
       [cls as string]: !!cls,
     };
 

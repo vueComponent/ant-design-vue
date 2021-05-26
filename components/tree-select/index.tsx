@@ -154,6 +154,7 @@ const TreeSelect = defineComponent({
     if (!('showSearch' in restProps)) {
       showSearch = !!(restProps.multiple || restProps.treeCheckable);
     }
+
     let checkable = getComponent(this, 'treeCheckable');
     if (checkable) {
       checkable = <span class={`${prefixCls}-tree-checkbox-inner`} />;

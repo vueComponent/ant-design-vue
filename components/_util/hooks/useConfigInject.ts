@@ -15,6 +15,7 @@ export default (
   direction: ComputedRef<Direction>;
   size: ComputedRef<SizeType>;
   getTargetContainer: ComputedRef<() => HTMLElement>;
+  space: ComputedRef<{ size: SizeType | number }>;
 } => {
   const configProvider = inject<UnwrapRef<ConfigProviderProps>>(
     'configProvider',
@@ -22,7 +23,8 @@ export default (
   );
   const prefixCls = computed(() => configProvider.getPrefixCls(name, props.prefixCls));
   const direction = computed(() => configProvider.direction);
+  const space = computed(() => configProvider.space);
   const size = computed(() => props.size || configProvider.componentSize);
   const getTargetContainer = computed(() => props.getTargetContainer);
-  return { configProvider, prefixCls, direction, size, getTargetContainer };
+  return { configProvider, prefixCls, direction, size, getTargetContainer, space };
 };

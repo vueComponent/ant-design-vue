@@ -95,7 +95,7 @@ export const configProviderProps = {
     type: String as PropType<'ltr' | 'rtl'>,
   },
   space: {
-    type: [String, Number] as PropType<SizeType | number>,
+    type: Object as PropType<{ size: SizeType | number }>,
   },
   virtual: PropTypes.looseBool,
   dropdownMatchSelectWidth: PropTypes.looseBool,

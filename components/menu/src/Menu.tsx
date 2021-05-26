@@ -27,6 +27,7 @@ import {
 import devWarning from '../../vc-util/devWarning';
 import { collapseMotion, CSSMotionProps } from '../../_util/transition';
 import uniq from 'lodash-es/uniq';
+import { SiderCollapsedKey } from '../../layout/injectionKey';
 
 export const menuProps = {
   prefixCls: String,
@@ -72,10 +73,7 @@ export default defineComponent({
   setup(props, { slots, emit }) {
     const { prefixCls, direction } = useConfigInject('menu', props);
     const store = reactive<Record<string, StoreMenuInfo>>({});
-    const siderCollapsed = inject(
-      'layoutSiderCollapsed',
-      computed(() => undefined),
-    );
+    const siderCollapsed = inject(SiderCollapsedKey, ref(undefined));
     const inlineCollapsed = computed(() => {
       if (siderCollapsed.value !== undefined) {
         return siderCollapsed.value;

@@ -4,7 +4,7 @@ import classNames from '../_util/classNames';
 import warning from '../_util/warning';
 import FormItem from './FormItem';
 import { getSlot } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
+import { defaultConfigProvider, SizeType } from '../config-provider';
 import { getNamePath, containsNamePath } from './utils/valueUtil';
 import { defaultValidateMessages } from './utils/messages';
 import { allPromiseFinish } from './utils/asyncUtil';
@@ -62,6 +62,7 @@ export const formProps = {
   onFinishFailed: PropTypes.func,
   name: PropTypes.string,
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
+  size: { type: String as PropType<SizeType> },
 };
 
 export type FormProps = Partial<ExtractPropTypes<typeof formProps>>;
@@ -280,15 +281,15 @@ const Form = defineComponent({
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, hideRequiredMark, layout, handleSubmit } = this;
+    const { prefixCls: customizePrefixCls, hideRequiredMark, layout, handleSubmit, size } = this;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('form', customizePrefixCls);
     const { class: className, ...restProps } = this.$attrs;
 
     const formClassName = classNames(prefixCls, className, {
-      [`${prefixCls}-horizontal`]: layout === 'horizontal',
-      [`${prefixCls}-vertical`]: layout === 'vertical',
-      [`${prefixCls}-inline`]: layout === 'inline',
+      [`${prefixCls}-${layout}`]: true,
+      // [`${prefixCls}-rtl`]: direction === 'rtl',
+      [`${prefixCls}-${size}`]: size,
       [`${prefixCls}-hide-required-mark`]: hideRequiredMark,
     });
     return (

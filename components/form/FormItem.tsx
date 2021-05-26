@@ -95,6 +95,7 @@ export const formItemProps = {
   validateStatus: PropTypes.oneOf(tuple('', 'success', 'warning', 'error', 'validating')),
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
   messageVariables: { type: Object as PropType<Record<string, string>> },
+  hidden: Boolean,
 };
 
 export type FormItemProps = Partial<ExtractPropTypes<typeof formItemProps>>;
@@ -383,7 +384,7 @@ export default defineComponent({
       const { wrapperCol } = this;
       const mergedWrapperCol = wrapperCol || contextWrapperCol || {};
       const { style, id, ...restProps } = mergedWrapperCol;
-      const className = classNames(`${prefixCls}-item-control-wrapper`, mergedWrapperCol.class);
+      const className = classNames(`${prefixCls}-item-control`, mergedWrapperCol.class);
       const colProps = {
         ...restProps,
         class: className,
@@ -468,7 +469,8 @@ export default defineComponent({
       ];
     },
     renderFormItem(child: any[]) {
-      const { prefixCls: customizePrefixCls } = this.$props;
+      const validateStatus = this.validateState;
+      const { prefixCls: customizePrefixCls, hidden, hasFeedback } = this.$props;
       const { class: className, ...restProps } = this.$attrs as any;
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('form', customizePrefixCls);
@@ -477,6 +479,14 @@ export default defineComponent({
         [className]: className,
         [`${prefixCls}-item`]: true,
         [`${prefixCls}-item-with-help`]: this.helpShow,
+
+        // Status
+        [`${prefixCls}-item-has-feedback`]: validateStatus && hasFeedback,
+        [`${prefixCls}-item-has-success`]: validateStatus === 'success',
+        [`${prefixCls}-item-has-warning`]: validateStatus === 'warning',
+        [`${prefixCls}-item-has-error`]: validateStatus === 'error',
+        [`${prefixCls}-item-is-validating`]: validateStatus === 'validating',
+        [`${prefixCls}-item-hidden`]: hidden,
       };
 
       return (

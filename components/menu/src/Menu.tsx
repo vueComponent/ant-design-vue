@@ -58,6 +58,7 @@ export const menuProps = {
 
 export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
 
+const EMPTY_LIST: string[] = [];
 export default defineComponent({
   name: 'AMenu',
   props: menuProps,
@@ -169,10 +170,12 @@ export default defineComponent({
       const exist = mergedSelectedKeys.value.includes(targetKey);
       let newSelectedKeys: Key[];
 
-      if (exist && props.multiple) {
-        newSelectedKeys = mergedSelectedKeys.value.filter(key => key !== targetKey);
-      } else if (props.multiple) {
-        newSelectedKeys = [...mergedSelectedKeys.value, targetKey];
+      if (props.multiple) {
+        if (exist) {
+          newSelectedKeys = mergedSelectedKeys.value.filter(key => key !== targetKey);
+        } else {
+          newSelectedKeys = [...mergedSelectedKeys.value, targetKey];
+        }
       } else {
         newSelectedKeys = [targetKey];
       }
@@ -192,6 +195,10 @@ export default defineComponent({
         } else {
           emit('select', selectInfo);
         }
+      }
+
+      if (mergedMode.value !== 'inline' && !props.multiple && mergedOpenKeys.value.length) {
+        triggerOpenKeys(EMPTY_LIST);
       }
     };
 
@@ -231,6 +238,12 @@ export default defineComponent({
 
     const isInlineMode = computed(() => mergedMode.value === 'inline');
 
+    const triggerOpenKeys = (keys: string[]) => {
+      mergedOpenKeys.value = keys;
+      emit('update:openKeys', keys);
+      emit('openChange', keys);
+    };
+
     // >>>>> Cache & Reset open keys when inlineCollapsed changed
     const inlineCacheOpenKeys = ref(mergedOpenKeys.value);
 
@@ -259,11 +272,8 @@ export default defineComponent({
         if (isInlineMode.value) {
           mergedOpenKeys.value = inlineCacheOpenKeys.value;
         } else {
-          const empty = [];
-          mergedOpenKeys.value = empty;
           // Trigger open event in case its in control
-          emit('update:openKeys', empty);
-          emit('openChange', empty);
+          triggerOpenKeys(EMPTY_LIST);
         }
       },
       { immediate: true },
@@ -319,9 +329,7 @@ export default defineComponent({
       }
 
       if (!shallowEqual(mergedOpenKeys, newOpenKeys)) {
-        mergedOpenKeys.value = newOpenKeys;
-        emit('update:openKeys', newOpenKeys);
-        emit('openChange', newOpenKeys);
+        triggerOpenKeys(newOpenKeys);
       }
     };
 

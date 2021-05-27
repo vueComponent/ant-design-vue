@@ -18,7 +18,7 @@ interface ResizeObserverState {
   offsetWidth: number;
 }
 
-const VueResizeObserver = defineComponent({
+const ResizeObserver = defineComponent({
   name: 'ResizeObserver',
   props: {
     disabled: Boolean,
@@ -110,7 +110,7 @@ const VueResizeObserver = defineComponent({
       }
 
       if (!resizeObserver && element) {
-        resizeObserver = new ResizeObserver(onResize);
+        resizeObserver = new window.ResizeObserver(onResize);
         resizeObserver.observe(element);
       }
     };
@@ -136,4 +136,4 @@ const VueResizeObserver = defineComponent({
   },
 });
 
-export default VueResizeObserver;
+export default ResizeObserver;

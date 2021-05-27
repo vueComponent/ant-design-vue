@@ -1,15 +1,18 @@
-import { defineComponent, inject, VNodeTypes, ExtractPropTypes } from 'vue';
+import { defineComponent, ExtractPropTypes, ref, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponent, getOptionProps, getSlot } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
+import { flattenChildren } from '../_util/props-util';
 import ArrowLeftOutlined from '@ant-design/icons-vue/ArrowLeftOutlined';
+import ArrowRightOutlined from '@ant-design/icons-vue/ArrowRightOutlined';
 import Breadcrumb from '../breadcrumb';
 import Avatar from '../avatar';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { withInstall } from '../_util/type';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import classNames from '../_util/classNames';
+import ResizeObserver from '../vc-resize-observer';
 
-export const PageHeaderProps = {
+export const pageHeaderProps = {
   backIcon: PropTypes.VNodeChild,
   prefixCls: PropTypes.string,
   title: PropTypes.VNodeChild,
@@ -23,121 +26,131 @@ export const PageHeaderProps = {
   onBack: PropTypes.func,
 };
 
-const renderBack = (
-  instance: any,
-  prefixCls: string,
-  backIcon: VNodeTypes,
-  onBack: (e: HTMLElement) => void,
-) => {
-  if (!backIcon || !onBack) {
-    return null;
-  }
-  return (
-    <LocaleReceiver
-      componentName="PageHeader"
-      children={({ back }: any) => (
-        <div class={`${prefixCls}-back`}>
-          <TransButton
-            onClick={e => {
-              instance.$emit('back', e);
-            }}
-            class={`${prefixCls}-back-button`}
-            aria-label={back}
-          >
-            {backIcon}
-          </TransButton>
-        </div>
-      )}
-    ></LocaleReceiver>
-  );
-};
-
-const renderBreadcrumb = (breadcrumb: any) => {
-  return <Breadcrumb {...breadcrumb} />;
-};
-
-const renderTitle = (prefixCls: string, instance: any) => {
-  const { avatar } = instance;
-  const title = getComponent(instance, 'title');
-  const subTitle = getComponent(instance, 'subTitle');
-  const tags = getComponent(instance, 'tags');
-  const extra = getComponent(instance, 'extra');
-  const backIcon =
-    getComponent(instance, 'backIcon') !== undefined ? (
-      getComponent(instance, 'backIcon')
-    ) : (
-      <ArrowLeftOutlined />
-    );
-  const onBack = instance.onBack;
-  const headingPrefixCls = `${prefixCls}-heading`;
-  if (title || subTitle || tags || extra) {
-    const backIconDom = renderBack(instance, prefixCls, backIcon, onBack);
-    return (
-      <div class={headingPrefixCls}>
-        {backIconDom}
-        {avatar && <Avatar {...avatar} />}
-        {title && <span class={`${headingPrefixCls}-title`}>{title}</span>}
-        {subTitle && <span class={`${headingPrefixCls}-sub-title`}>{subTitle}</span>}
-        {tags && <span class={`${headingPrefixCls}-tags`}>{tags}</span>}
-        {extra && <span class={`${headingPrefixCls}-extra`}>{extra}</span>}
-      </div>
-    );
-  }
-  return null;
-};
-
-const renderFooter = (prefixCls: string, footer: VNodeTypes) => {
-  if (footer) {
-    return <div class={`${prefixCls}-footer`}>{footer}</div>;
-  }
-  return null;
-};
-
-const renderChildren = (prefixCls: string, children: VNodeTypes) => {
-  return <div class={`${prefixCls}-content`}>{children}</div>;
-};
+export type PageHeaderProps = Partial<ExtractPropTypes<typeof pageHeaderProps>>;
 
 const PageHeader = defineComponent({
   name: 'APageHeader',
-  props: PageHeaderProps,
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
+  props: pageHeaderProps,
+  emits: ['back'],
+  slots: ['backIcon', 'avatar', 'breadcrumb', 'title', 'subTitle', 'tags', 'extra', 'footer'],
+  setup(props, { emit, slots }) {
+    const { prefixCls, direction, pageHeader } = useConfigInject('page-header', props);
+    const compact = ref(false);
+    const onResize = ({ width }: { width: number }) => {
+      compact.value = width < 768;
     };
-  },
-  render() {
-    const { getPrefixCls, pageHeader } = this.configProvider;
-    const props = getOptionProps(this) as ExtractPropTypes<typeof PageHeaderProps>;
-    const { prefixCls: customizePrefixCls, breadcrumb } = props;
-    const footer = getComponent(this, 'footer');
-    const children = getSlot(this);
-    let ghost = true;
+    const ghost = computed(() => props.ghost ?? pageHeader.value?.ghost ?? false);
 
-    // Use `ghost` from `props` or from `ConfigProvider` instead.
-    if ('ghost' in props) {
-      ghost = props.ghost;
-    } else if (pageHeader && 'ghost' in pageHeader) {
-      ghost = pageHeader.ghost;
-    }
-    const prefixCls = getPrefixCls('page-header', customizePrefixCls);
-    const breadcrumbDom = breadcrumb && breadcrumb.routes ? renderBreadcrumb(breadcrumb) : null;
-    const className = [
-      prefixCls,
-      {
-        'has-breadcrumb': breadcrumbDom,
-        'has-footer': footer,
-        [`${prefixCls}-ghost`]: ghost,
-      },
-    ];
+    const getBackIcon = () => {
+      return (
+        props.backIcon ??
+        slots.backIcon?.() ??
+        (direction.value === 'rtl' ? <ArrowRightOutlined /> : <ArrowLeftOutlined />)
+      );
+    };
 
-    return (
-      <div class={className}>
-        {breadcrumbDom}
-        {renderTitle(prefixCls, this)}
-        {children.length ? renderChildren(prefixCls, children) : null}
-        {renderFooter(prefixCls, footer)}
-      </div>
-    );
+    const renderBack = (backIcon: any) => {
+      if (!backIcon || !props.onBack) {
+        return null;
+      }
+      return (
+        <LocaleReceiver
+          componentName="PageHeader"
+          children={({ back }: any) => (
+            <div class={`${prefixCls.value}-back`}>
+              <TransButton
+                onClick={e => {
+                  emit('back', e);
+                }}
+                class={`${prefixCls.value}-back-button`}
+                aria-label={back}
+              >
+                {backIcon}
+              </TransButton>
+            </div>
+          )}
+        ></LocaleReceiver>
+      );
+    };
+
+    const renderBreadcrumb = () => {
+      return props.breadcrumb ? <Breadcrumb {...props.breadcrumb} /> : slots.breadcrumb?.();
+    };
+
+    const renderTitle = () => {
+      const { avatar } = props;
+      const title = props.title ?? slots.title?.();
+      const subTitle = props.subTitle ?? slots.subTitle?.();
+      const tags = props.tags ?? slots.tags?.();
+      const extra = props.extra ?? slots.extra?.();
+      const headingPrefixCls = `${prefixCls.value}-heading`;
+      const hasHeading = title || subTitle || tags || extra;
+      // If there is nothing, return a null
+      if (!hasHeading) {
+        return null;
+      }
+      const backIcon = getBackIcon();
+      const backIconDom = renderBack(backIcon);
+      const hasTitle = backIconDom || avatar || hasHeading;
+      return (
+        <div class={headingPrefixCls}>
+          {hasTitle && (
+            <div class={`${headingPrefixCls}-left`}>
+              {backIconDom}
+              {avatar ? <Avatar {...avatar} /> : slots.avatar?.()}
+              {title && (
+                <span
+                  class={`${headingPrefixCls}-title`}
+                  title={typeof title === 'string' ? title : undefined}
+                >
+                  {title}
+                </span>
+              )}
+              {subTitle && (
+                <span
+                  class={`${headingPrefixCls}-sub-title`}
+                  title={typeof subTitle === 'string' ? subTitle : undefined}
+                >
+                  {subTitle}
+                </span>
+              )}
+              {tags && <span class={`${headingPrefixCls}-tags`}>{tags}</span>}
+            </div>
+          )}
+          {extra && <span class={`${headingPrefixCls}-extra`}>{extra}</span>}
+        </div>
+      );
+    };
+
+    const renderFooter = () => {
+      return <div class={`${prefixCls.value}-footer`}>{props.footer ?? slots.footer?.()}</div>;
+    };
+
+    const renderChildren = (children: any) => {
+      return <div class={`${prefixCls.value}-content`}>{children}</div>;
+    };
+    return () => {
+      const hasBreadcrumb = props.breadcrumb?.routes || slots.breadcrumb;
+      const hasFooter = props.footer || slots.footer;
+      const children = flattenChildren(slots.default?.());
+      const className = classNames(prefixCls.value, {
+        'has-breadcrumb': hasBreadcrumb,
+        'has-footer': hasFooter,
+        [`${prefixCls.value}-ghost`]: ghost.value,
+        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        [`${prefixCls.value}-compact`]: compact.value,
+      });
+      return (
+        <ResizeObserver onResize={onResize}>
+          <div class={className}>
+            {renderBreadcrumb()}
+            {renderTitle()}
+            {children.length && renderChildren(children)}
+            {renderFooter()}
+          </div>
+        </ResizeObserver>
+      );
+    };
   },
 });
 

@@ -19,6 +19,7 @@ import Tooltip from '../tooltip';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 import Star from './Star';
+import { useRef } from '../_util/hooks/useRef';
 
 export const rateProps = {
   prefixCls: PropTypes.string,
@@ -52,22 +53,16 @@ const Rate = defineComponent({
   setup(props, { slots, attrs, emit, expose }) {
     const { prefixCls, direction } = useConfigInject('rate', props);
     const rateRef = ref();
-    const starRefs = ref([]);
+    const [setRef, starRefs] = useRef();
     const state = reactive({
       sValue: props.value,
       focused: false,
       cleanedValue: null,
       hoverValue: undefined,
     });
-    const saveRef = (el: any) => {
-      starRefs.value.push(el);
-    };
-    onBeforeUpdate(() => {
-      starRefs.value = [];
-    });
 
     const getStarDOM = index => {
-      return findDOMNode(starRefs.value[index]);
+      return findDOMNode(starRefs[index]);
     };
     const getStarValue = (index, x) => {
       const reverse = direction.value === 'rtl';
@@ -200,7 +195,7 @@ const Rate = defineComponent({
       for (let index = 0; index < count; index++) {
         stars.push(
           <Star
-            ref={saveRef}
+            ref={setRef}
             key={index}
             index={index}
             count={count}

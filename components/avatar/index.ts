@@ -2,7 +2,7 @@ import { App } from 'vue';
 import Avatar from './Avatar';
 import Group from './Group';
 
-export { AvatarProps, AvatarSize } from './Avatar';
+export { AvatarProps, AvatarSize, avatarProps } from './Avatar';
 export { AvatarGroupProps } from './Group';
 
 Avatar.Group = Group;

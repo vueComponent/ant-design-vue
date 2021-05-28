@@ -3,21 +3,20 @@ import PropTypes from '../_util/vue-types';
 
 const widthUnit = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
 
-const skeletonParagraphProps = {
+export const skeletonParagraphProps = {
   prefixCls: PropTypes.string,
   width: PropTypes.oneOfType([widthUnit, PropTypes.arrayOf(widthUnit)]),
   rows: PropTypes.number,
 };
 
-export const SkeletonParagraphProps = PropTypes.shape(skeletonParagraphProps).loose;
+export type SkeletonParagraphProps = Partial<ExtractPropTypes<typeof skeletonParagraphProps>>;
 
-export type ISkeletonParagraphProps = Partial<ExtractPropTypes<typeof skeletonParagraphProps>>;
-
-const Paragraph = defineComponent({
+const SkeletonParagraph = defineComponent({
   props: skeletonParagraphProps,
-  methods: {
-    getWidth(index: number) {
-      const { width, rows = 2 } = this;
+  name: 'SkeletonParagraph',
+  setup(props) {
+    const getWidth = (index: number) => {
+      const { width, rows = 2 } = props;
       if (Array.isArray(width)) {
         return width[index];
       }
@@ -26,16 +25,18 @@ const Paragraph = defineComponent({
         return width;
       }
       return undefined;
-    },
-  },
-  render() {
-    const { prefixCls, rows } = this.$props;
-    const rowList = [...Array(rows)].map((_, index) => {
-      const width = this.getWidth(index);
-      return <li key={index} style={{ width: typeof width === 'number' ? `${width}px` : width }} />;
-    });
-    return <ul class={prefixCls}>{rowList}</ul>;
+    };
+    return () => {
+      const { prefixCls, rows } = props;
+      const rowList = [...Array(rows)].map((_, index) => {
+        const width = getWidth(index);
+        return (
+          <li key={index} style={{ width: typeof width === 'number' ? `${width}px` : width }} />
+        );
+      });
+      return <ul class={prefixCls}>{rowList}</ul>;
+    };
   },
 });
 
-export default Paragraph;
+export default SkeletonParagraph;

@@ -5,6 +5,7 @@ import interopDefault from '../_util/interopDefault';
 import { ModalLocale, changeConfirmLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { withInstall } from '../_util/type';
+import { ValidateMessages } from '../form/interface';
 export interface Locale {
   locale: string;
   Pagination?: Object;
@@ -17,6 +18,14 @@ export interface Locale {
   Transfer?: Object;
   Select?: Object;
   Upload?: Object;
+
+  Form?: {
+    optional?: string;
+    defaultValidateMessages: ValidateMessages;
+  };
+  Image?: {
+    preview: string;
+  };
 }
 
 export interface LocaleProviderProps {

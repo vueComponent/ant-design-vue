@@ -1,5 +1,7 @@
 import { VueNode } from '../_util/type';
 
+export type FormLabelAlign = 'left' | 'right';
+
 export type InternalNamePath = (string | number)[];
 export type NamePath = string | number | InternalNamePath;
 

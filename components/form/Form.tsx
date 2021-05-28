@@ -1,4 +1,12 @@
-import { defineComponent, inject, provide, PropType, computed, ExtractPropTypes } from 'vue';
+import {
+  defineComponent,
+  inject,
+  provide,
+  PropType,
+  computed,
+  ExtractPropTypes,
+  HTMLAttributes,
+} from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import warning from '../_util/warning';
@@ -15,6 +23,9 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { tuple, VueNode } from '../_util/type';
 import { ColProps } from '../grid/Col';
 import { InternalNamePath, NamePath, ValidateErrorEntity, ValidateOptions } from './interface';
+
+export type RequiredMark = boolean | 'optional';
+export type FormLayout = 'horizontal' | 'inline' | 'vertical';
 
 export type ValidationRule = {
   /** validation error message */
@@ -45,11 +56,13 @@ export type ValidationRule = {
 
 export const formProps = {
   layout: PropTypes.oneOf(tuple('horizontal', 'inline', 'vertical')),
-  labelCol: { type: Object as PropType<ColProps> },
-  wrapperCol: { type: Object as PropType<ColProps> },
+  labelCol: { type: Object as PropType<ColProps & HTMLAttributes> },
+  wrapperCol: { type: Object as PropType<ColProps & HTMLAttributes> },
   colon: PropTypes.looseBool,
   labelAlign: PropTypes.oneOf(tuple('left', 'right')),
   prefixCls: PropTypes.string,
+  requiredMark: { type: [String, Boolean] as PropType<RequiredMark> },
+  /** @deprecated Will warning in future branch. Pls use `requiredMark` instead. */
   hideRequiredMark: PropTypes.looseBool,
   model: PropTypes.object,
   rules: { type: Object as PropType<{ [k: string]: ValidationRule[] | ValidationRule }> },

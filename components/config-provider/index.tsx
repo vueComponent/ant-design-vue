@@ -13,6 +13,7 @@ import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
 import { TransformCellTextProps } from '../table/interface';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { withInstall } from '../_util/type';
+import { RequiredMark } from '../form/Form';
 
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
 
@@ -99,6 +100,9 @@ export const configProviderProps = {
   },
   virtual: PropTypes.looseBool,
   dropdownMatchSelectWidth: PropTypes.looseBool,
+  form: {
+    type: Object as PropType<{ requiredMark?: RequiredMark }>,
+  },
 };
 
 export type ConfigProviderProps = Partial<ExtractPropTypes<typeof configProviderProps>>;
@@ -159,7 +163,7 @@ const ConfigProvider = defineComponent({
 export const defaultConfigProvider: UnwrapRef<ConfigProviderProps> = reactive({
   getPrefixCls: (suffixCls: string, customizePrefixCls?: string) => {
     if (customizePrefixCls) return customizePrefixCls;
-    return `ant-${suffixCls}`;
+    return suffixCls ? `ant-${suffixCls}` : 'ant';
   },
   renderEmpty: defaultRenderEmpty,
   direction: 'ltr',

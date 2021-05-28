@@ -36,6 +36,9 @@ import find from 'lodash-es/find';
 import { tuple, VueNode } from '../_util/type';
 import { ValidateOptions } from './interface';
 
+const ValidateStatuses = tuple('success', 'warning', 'error', 'validating', '');
+export type ValidateStatus = typeof ValidateStatuses[number];
+
 const iconMap = {
   success: CheckCircleFilled,
   warning: ExclamationCircleFilled,

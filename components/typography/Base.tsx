@@ -17,7 +17,6 @@ import EditOutlined from '@ant-design/icons-vue/EditOutlined';
 import {
   defineComponent,
   VNodeTypes,
-  VNode,
   reactive,
   ref,
   onMounted,
@@ -170,14 +169,6 @@ const Base = defineComponent<InternalBlockProps>({
       }
     });
 
-    function saveTypographyRef(node: VNode) {
-      contentRef.value = node;
-    }
-
-    function saveEditIconRef(node: VNode) {
-      editIcon.value = node;
-    }
-
     function getChildrenText(): string {
       return props.ellipsis || props.editable ? props.content : contentRef.value?.$el?.innerText;
     }
@@ -208,6 +199,7 @@ const Base = defineComponent<InternalBlockProps>({
     }
 
     function onEditCancel() {
+      editable.value.onCancel?.();
       triggerEdit(false);
     }
 
@@ -375,7 +367,7 @@ const Base = defineComponent<InternalBlockProps>({
       return (
         <Tooltip key="edit" title={tooltip === false ? '' : title}>
           <TransButton
-            ref={saveEditIconRef}
+            ref={editIcon}
             class={`${prefixCls.value}-edit`}
             onClick={onEditClick}
             aria-label={ariaLabel}
@@ -418,7 +410,7 @@ const Base = defineComponent<InternalBlockProps>({
 
     function renderEditInput() {
       const { class: className, style } = attrs;
-      const { maxlength, autoSize } = editable.value;
+      const { maxlength, autoSize, onEnd } = editable.value;
 
       return (
         <Editable
@@ -432,6 +424,7 @@ const Base = defineComponent<InternalBlockProps>({
           onSave={onEditChange}
           onChange={onContentChange}
           onCancel={onEditCancel}
+          onEnd={onEnd}
         />
       );
     }
@@ -529,13 +522,16 @@ const Base = defineComponent<InternalBlockProps>({
             return (
               <ResizeObserver onResize={resizeOnNextFrame} disabled={!rows}>
                 <Typography
-                  ref={saveTypographyRef}
+                  ref={contentRef}
                   class={[
-                    { [`${prefixCls.value}-${type}`]: type },
-                    { [`${prefixCls.value}-disabled`]: disabled },
-                    { [`${prefixCls.value}-ellipsis`]: rows },
-                    { [`${prefixCls.value}-ellipsis-single-line`]: cssTextOverflow },
-                    { [`${prefixCls.value}-ellipsis-multiple-line`]: cssLineClamp },
+                    {
+                      [`${prefixCls.value}-${type}`]: type,
+                      [`${prefixCls.value}-disabled`]: disabled,
+                      [`${prefixCls.value}-ellipsis`]: rows,
+                      [`${prefixCls.value}-single-line`]: rows === 1,
+                      [`${prefixCls.value}-ellipsis-single-line`]: cssTextOverflow,
+                      [`${prefixCls.value}-ellipsis-multiple-line`]: cssLineClamp,
+                    },
                     className,
                   ]}
                   style={{

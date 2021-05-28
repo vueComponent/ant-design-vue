@@ -8,7 +8,6 @@ import {
   inject,
   watchEffect,
   watch,
-  reactive,
   onMounted,
   unref,
   UnwrapRef,
@@ -73,7 +72,7 @@ export default defineComponent({
   ],
   setup(props, { slots, emit }) {
     const { prefixCls, direction } = useConfigInject('menu', props);
-    const store = reactive<Record<string, StoreMenuInfo>>({});
+    const store = ref<Record<string, StoreMenuInfo>>({});
     const siderCollapsed = inject(SiderCollapsedKey, ref(undefined));
     const inlineCollapsed = computed(() => {
       if (siderCollapsed.value !== undefined) {
@@ -107,7 +106,7 @@ export default defineComponent({
       store,
       () => {
         const newKeyMapStore = {};
-        for (const [, menuInfo] of Object.entries(store)) {
+        for (const menuInfo of Object.values(store.value)) {
           newKeyMapStore[menuInfo.key] = menuInfo;
         }
         keyMapStore.value = newKeyMapStore;
@@ -300,8 +299,9 @@ export default defineComponent({
 
     const getChildrenKeys = (eventKeys: string[] = []): Key[] => {
       const keys = [];
+      const storeValue = store.value;
       eventKeys.forEach(eventKey => {
-        const { key, childrenEventKeys } = store[eventKey];
+        const { key, childrenEventKeys } = storeValue[eventKey];
         keys.push(key, ...getChildrenKeys(childrenEventKeys));
       });
       return keys;
@@ -317,7 +317,7 @@ export default defineComponent({
     };
 
     const onInternalOpenChange = (eventKey: Key, open: boolean) => {
-      const { key, childrenEventKeys } = store[eventKey];
+      const { key, childrenEventKeys } = store.value[eventKey];
       let newOpenKeys = mergedOpenKeys.value.filter(k => k !== key);
 
       if (open) {
@@ -334,10 +334,11 @@ export default defineComponent({
     };
 
     const registerMenuInfo = (key: string, info: StoreMenuInfo) => {
-      store[key] = info as any;
+      store.value = { ...store.value, [key]: info as any };
     };
     const unRegisterMenuInfo = (key: string) => {
-      delete store[key];
+      delete store.value[key];
+      store.value = { ...store.value };
     };
 
     useProvideMenu({
@@ -370,8 +371,9 @@ export default defineComponent({
       isRootMenu: true,
     });
     return () => {
+      // data-hack-store-update 初步判断是 vue bug，先用hack方式
       return (
-        <ul class={className.value} tabindex="0">
+        <ul data-hack-store-update={store.value} class={className.value} tabindex="0">
           {slots.default?.()}
         </ul>
       );

@@ -29,7 +29,7 @@ export interface StoreMenuInfo {
 export interface MenuContextProps {
   isRootMenu: boolean;
 
-  store: UnwrapRef<Record<string, StoreMenuInfo>>;
+  store: Ref<Record<string, UnwrapRef<StoreMenuInfo>>>;
   registerMenuInfo: (key: string, info: StoreMenuInfo) => void;
   unRegisterMenuInfo: (key: string) => void;
   prefixCls: ComputedRef<string>;

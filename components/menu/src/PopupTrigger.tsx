@@ -89,7 +89,7 @@ export default defineComponent({
           mouseEnterDelay={subMenuOpenDelay.value}
           mouseLeaveDelay={subMenuCloseDelay.value}
           onPopupVisibleChange={onVisibleChange}
-          // forceRender={forceSubMenuRender}
+          forceRender={true}
           v-slots={{
             popup: () => {
               return slots.popup?.({ visible: innerVisible.value });

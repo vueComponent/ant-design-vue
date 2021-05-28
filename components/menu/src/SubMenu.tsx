@@ -44,9 +44,13 @@ export default defineComponent({
     useProvideFirstLevel(false);
 
     const instance = getCurrentInstance();
-    const key = instance.vnode.key;
+    const key =
+      instance.vnode.key !== null ? instance.vnode.key : `sub_menu_${++indexGuid}_$$_not_set_key`;
 
-    const eventKey = `sub_menu_${++indexGuid}_$$_${key}`;
+    const eventKey =
+      instance.vnode.key !== null
+        ? `sub_menu_${++indexGuid}_$$_${instance.vnode.key}`
+        : (key as string);
     const { parentEventKeys, parentInfo, parentKeys } = useInjectKeyPath();
     const keysPath = computed(() => [...parentKeys.value, key]);
     const eventKeysPath = computed(() => [...parentEventKeys.value, eventKey]);

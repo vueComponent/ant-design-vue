@@ -3,6 +3,10 @@ import Breadcrumb from './Breadcrumb';
 import BreadcrumbItem from './BreadcrumbItem';
 import BreadcrumbSeparator from './BreadcrumbSeparator';
 
+export { BreadcrumbProps } from './Breadcrumb';
+export { BreadcrumbItemProps } from './BreadcrumbItem';
+export { BreadcrumbSeparator } from './BreadcrumbSeparator';
+
 Breadcrumb.Item = BreadcrumbItem;
 Breadcrumb.Separator = BreadcrumbSeparator;
 

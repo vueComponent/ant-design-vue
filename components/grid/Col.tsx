@@ -1,7 +1,6 @@
-import { inject, defineComponent, CSSProperties, ExtractPropTypes, computed } from 'vue';
+import { defineComponent, CSSProperties, ExtractPropTypes, computed } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import { rowContextState } from './Row';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectRow } from './context';
 
@@ -102,7 +101,7 @@ export default defineComponent({
     const mergedStyle = computed(() => {
       const { flex } = props;
       const gutterVal = gutter.value;
-      let style: CSSProperties = {};
+      const style: CSSProperties = {};
       // Horizontal gutter use padding
       if (gutterVal && gutterVal[0] > 0) {
         const horizontalGutter = `${gutterVal[0] / 2}px`;

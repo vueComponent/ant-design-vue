@@ -12,8 +12,8 @@ export const skeletonParagraphProps = {
 export type SkeletonParagraphProps = Partial<ExtractPropTypes<typeof skeletonParagraphProps>>;
 
 const SkeletonParagraph = defineComponent({
-  props: skeletonParagraphProps,
   name: 'SkeletonParagraph',
+  props: skeletonParagraphProps,
   setup(props) {
     const getWidth = (index: number) => {
       const { width, rows = 2 } = props;

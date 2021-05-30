@@ -1,4 +1,4 @@
-import Col, { ColProps } from '../grid/col';
+import Col, { ColProps } from '../grid/Col';
 import { FormLabelAlign } from './interface';
 import { useInjectForm } from './context';
 import { RequiredMark } from './Form';
@@ -17,10 +17,14 @@ export interface FormItemLabelProps {
   requiredMark?: RequiredMark;
   required?: boolean;
   prefixCls: string;
+  onClick: Function;
 }
 
-const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots }) => {
-  const { prefixCls, htmlFor, labelCol, labelAlign, colon, required, requiredMark } = props;
+const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, emit, attrs }) => {
+  const { prefixCls, htmlFor, labelCol, labelAlign, colon, required, requiredMark } = {
+    ...props,
+    ...attrs,
+  };
   const [formLocale] = useLocaleReceiver('Form');
   const label = props.label ?? slots.label?.();
   if (!label) return null;
@@ -68,7 +72,6 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots }
       </>
     );
   }
-
   const labelClassName = classNames({
     [`${prefixCls}-item-required`]: required,
     [`${prefixCls}-item-required-mark-optional`]: requiredMark === 'optional',
@@ -80,6 +83,7 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots }
         html-for={htmlFor}
         class={labelClassName}
         title={typeof label === 'string' ? label : ''}
+        onClick={e => emit('click', e)}
       >
         {labelChildren}
       </label>
@@ -88,5 +92,6 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots }
 };
 
 FormItemLabel.displayName = 'FormItemLabel';
+FormItemLabel.inheritAttrs = false;
 
 export default FormItemLabel;

@@ -9,8 +9,8 @@ export const skeletonTitleProps = {
 export type SkeletonTitleProps = Partial<ExtractPropTypes<typeof skeletonTitleProps>>;
 
 const SkeletonTitle = defineComponent({
-  props: skeletonTitleProps,
   name: 'SkeletonTitle',
+  props: skeletonTitleProps,
   setup(props) {
     return () => {
       const { prefixCls, width } = props;

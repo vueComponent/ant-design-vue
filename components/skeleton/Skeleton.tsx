@@ -10,7 +10,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import Element from './Element';
 
 /* This only for skeleton internal. */
-interface SkeletonAvatarProps extends Omit<AvatarProps, 'active'> {}
+type SkeletonAvatarProps = Omit<AvatarProps, 'active'>;
 
 export const skeletonProps = {
   active: PropTypes.looseBool,

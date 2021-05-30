@@ -3,7 +3,7 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
 
-import Col, { ColProps } from '../grid/col';
+import Col, { ColProps } from '../grid/Col';
 import { useProvideForm, useInjectForm, useProvideFormItemPrefix } from './context';
 import ErrorList from './ErrorList';
 import classNames from '../_util/classNames';
@@ -11,7 +11,7 @@ import { ValidateStatus } from './FormItem';
 import { VueNode } from '../_util/type';
 import { computed, defineComponent, HTMLAttributes, onUnmounted } from 'vue';
 
-interface FormItemInputMiscProps {
+export interface FormItemInputMiscProps {
   prefixCls: string;
   errors: VueNode[];
   hasFeedback?: boolean;
@@ -32,8 +32,20 @@ const iconMap: { [key: string]: any } = {
   error: CloseCircleFilled,
   validating: LoadingOutlined,
 };
-const FormItemInput = defineComponent<FormItemInputProps & FormItemInputMiscProps>({
+const FormItemInput = defineComponent({
   slots: ['help', 'extra', 'errors'],
+  inheritAttrs: false,
+  props: [
+    'prefixCls',
+    'errors',
+    'hasFeedback',
+    'validateStatus',
+    'onDomErrorVisibleChange',
+    'wrapperCol',
+    'help',
+    'extra',
+    'status',
+  ],
   setup(props, { slots }) {
     const formContext = useInjectForm();
     const { wrapperCol: contextWrapperCol } = formContext;
@@ -43,10 +55,13 @@ const FormItemInput = defineComponent<FormItemInputProps & FormItemInputMiscProp
     delete subFormContext.labelCol;
     delete subFormContext.wrapperCol;
     useProvideForm(subFormContext);
-
     useProvideFormItemPrefix({
       prefixCls: computed(() => props.prefixCls),
       status: computed(() => props.status),
+    });
+
+    onUnmounted(() => {
+      props.onDomErrorVisibleChange(false);
     });
 
     return () => {
@@ -66,10 +81,6 @@ const FormItemInput = defineComponent<FormItemInputProps & FormItemInputMiscProp
         wrapperCol || contextWrapperCol?.value || {};
 
       const className = classNames(`${baseClassName}-control`, mergedWrapperCol.class);
-
-      onUnmounted(() => {
-        onDomErrorVisibleChange(false);
-      });
 
       // Should provides additional icon if `hasFeedback`
       const IconNode = validateStatus && iconMap[validateStatus];

@@ -23,7 +23,7 @@ export default defineComponent({
     const innerStatus = ref(status.value);
     let timeout = ref();
     const cacheErrors = ref([...props.errors]);
-    watch([() => [...props.errors], () => props.help], (newValues, prevValues) => {
+    watch([() => [...props.errors], () => props.help], newValues => {
       window.clearTimeout(timeout.value);
       if (props.help) {
         visible.value = !!(props.errors && props.errors.length);

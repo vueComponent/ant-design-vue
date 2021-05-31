@@ -129,7 +129,7 @@ module.exports = {
     alias: {
       'ant-design-vue/es': path.join(__dirname, './components'),
       'ant-design-vue': path.join(__dirname, './components'),
-      vue$: 'vue/dist/vue.esm-bundler.js',
+      vue$: 'vue/dist/vue.runtime.esm-bundler.js',
     },
     extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue', '.md'],
   },

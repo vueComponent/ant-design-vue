@@ -13,7 +13,7 @@ import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import Row from '../grid/Row';
 import { ColProps } from '../grid/Col';
-import { isValidElement, flattenChildren } from '../_util/props-util';
+import { isValidElement, flattenChildren, filterEmpty } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
 import { validateRules as validateRulesUtil } from './utils/validateUtil';
@@ -115,7 +115,6 @@ export default defineComponent({
     const formContext = useInjectForm();
     const fieldName = computed(() => props.name || props.prop);
     const errors = ref([]);
-    const validateMessage = ref('');
     const validateDisabled = ref(false);
     const domErrorVisible = ref(false);
     const inputRef = ref();
@@ -222,7 +221,6 @@ export default defineComponent({
         .then((ers = []) => {
           if (validateState.value === 'validating') {
             validateState.value = ers.length ? 'error' : 'success';
-            validateMessage.value = ers[0];
             errors.value = ers;
           }
         });
@@ -242,17 +240,17 @@ export default defineComponent({
     };
     const clearValidate = () => {
       validateState.value = '';
-      validateMessage.value = '';
       validateDisabled.value = false;
+      errors.value = [];
     };
 
     const resetField = () => {
       validateState.value = '';
-      validateMessage.value = '';
+      validateDisabled.value = true;
+      errors.value = [];
       const model = formContext.model.value || {};
       const value = fieldValue.value;
       const prop = getPropByPath(model, namePath.value, true);
-      validateDisabled.value = true;
       if (Array.isArray(value)) {
         prop.o[prop.k] = [].concat(initialValue.value);
       } else {
@@ -305,7 +303,7 @@ export default defineComponent({
       [`${prefixCls.value}-item-hidden`]: props.hidden,
     }));
     return () => {
-      const help = props.help ?? slots.help?.();
+      const help = props.help ?? (slots.help ? filterEmpty(slots.help()) : null);
       const children = flattenChildren(slots.default?.());
       let firstChildren = children[0];
       if (fieldName.value && props.autoLink && isValidElement(firstChildren)) {
@@ -357,7 +355,7 @@ export default defineComponent({
           {/* Input Group */}
           <FormItemInput
             {...props}
-            errors={errors.value}
+            errors={help !== undefined && help !== null ? toArray(help) : errors.value}
             prefixCls={prefixCls.value}
             status={validateState.value}
             onDomErrorVisibleChange={(v: boolean) => (domErrorVisible.value = v)}

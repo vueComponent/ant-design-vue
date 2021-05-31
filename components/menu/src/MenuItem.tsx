@@ -14,7 +14,7 @@ import { useInjectFirstLevel, useInjectMenu } from './hooks/useMenuContext';
 import { cloneElement } from '../../_util/vnode';
 import Tooltip from '../../tooltip';
 import { MenuInfo } from './interface';
-import KeyCode from 'ant-design-vue/es/_util/KeyCode';
+import KeyCode from '../../_util/KeyCode';
 import useDirectionStyle from './hooks/useDirectionStyle';
 
 let indexGuid = 0;

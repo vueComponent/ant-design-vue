@@ -1,6 +1,6 @@
 import { useInjectFormItemPrefix } from './context';
 import { VueNode } from '../_util/type';
-import { defineComponent, ref, watch } from '@vue/runtime-core';
+import { defineComponent, onBeforeUnmount, ref, watch } from '@vue/runtime-core';
 import classNames from '../_util/classNames';
 import Transition, { getTransitionProps } from '../_util/transition';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -22,15 +22,25 @@ export default defineComponent({
     const visible = ref(!!(props.errors && props.errors.length));
     const innerStatus = ref(status.value);
     let timeout = ref();
-    watch([() => props.errors, () => props.help], () => {
+    const cacheErrors = ref([...props.errors]);
+    watch([() => [...props.errors], () => props.help], (newValues, prevValues) => {
       window.clearTimeout(timeout.value);
       if (props.help) {
         visible.value = !!(props.errors && props.errors.length);
+        if (visible.value) {
+          cacheErrors.value = newValues[0];
+        }
       } else {
         timeout.value = window.setTimeout(() => {
           visible.value = !!(props.errors && props.errors.length);
+          if (visible.value) {
+            cacheErrors.value = newValues[0];
+          }
         });
       }
+    });
+    onBeforeUnmount(() => {
+      window.clearTimeout(timeout.value);
     });
     // Memo status in same visible
     watch([visible, status], () => {
@@ -63,8 +73,7 @@ export default defineComponent({
               })}
               key="help"
             >
-              {props.errors?.map((error: any, index: number) => (
-                // eslint-disable-next-line react/no-array-index-key
+              {cacheErrors.value?.map((error: any, index: number) => (
                 <div key={index} role="alert">
                   {error}
                 </div>

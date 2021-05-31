@@ -226,7 +226,7 @@ export default defineComponent({
     const mergedInlineCollapsed = ref(false);
 
     watchEffect(() => {
-      if (props.mode === 'inline' && inlineCollapsed.value) {
+      if ((props.mode === 'inline' || props.mode === 'vertical') && inlineCollapsed.value) {
         mergedMode.value = 'vertical';
         mergedInlineCollapsed.value = inlineCollapsed.value;
       } else {

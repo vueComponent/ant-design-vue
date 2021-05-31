@@ -266,7 +266,12 @@ export default defineComponent({
             onVisibleChange={onPopupVisibleChange}
             v-slots={{
               popup: ({ visible }) => (
-                <MenuContextProvider props={{ mode: triggerModeRef, isRootMenu: false }}>
+                <MenuContextProvider
+                  props={{
+                    mode: computed(() => (triggerMode === 'horizontal' ? 'vertical' : triggerMode)),
+                    isRootMenu: false,
+                  }}
+                >
                   <Transition {...mergedMotion.value}>
                     <SubMenuList v-show={visible} id={popupId} ref={popupRef}>
                       {slots.default?.()}

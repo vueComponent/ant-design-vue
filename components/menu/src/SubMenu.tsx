@@ -188,7 +188,7 @@ export default defineComponent({
           typeof title === 'string' ? (
           <div class={`${prefixCls.value}-inline-collapsed-noicon`}>{title.charAt(0)}</div>
         ) : (
-          title
+          <span class={`${prefixCls.value}-title-content`}>{title}</span>
         );
       }
       // inline-collapsed.md demo 依赖 span 来隐藏文字,有 icon 属性，则内部包裹一个 span
@@ -222,6 +222,10 @@ export default defineComponent({
       const res = typeof m === 'function' ? m(style, className) : m;
       return res ? getTransitionProps(res.name) : undefined;
     });
+
+    const subMenuTriggerModeRef = computed(() =>
+      triggerModeRef.value === 'horizontal' ? 'vertical' : triggerModeRef.value,
+    );
 
     return () => {
       const icon = getPropsSlot(slots, props, 'icon');
@@ -268,7 +272,7 @@ export default defineComponent({
               popup: ({ visible }) => (
                 <MenuContextProvider
                   props={{
-                    mode: computed(() => (triggerMode === 'horizontal' ? 'vertical' : triggerMode)),
+                    mode: subMenuTriggerModeRef,
                     isRootMenu: false,
                   }}
                 >

@@ -33,7 +33,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: menuItemProps,
   emits: ['mouseenter', 'mouseleave', 'click', 'keydown', 'focus'],
-  slots: ['icon'],
+  slots: ['icon', 'title'],
   setup(props, { slots, emit, attrs }) {
     const instance = getCurrentInstance();
     const key = instance.vnode.key;
@@ -149,6 +149,7 @@ export default defineComponent({
     };
 
     const renderItemChildren = (icon: any, children: any) => {
+      const wrapNode = <span class={`${prefixCls.value}-title-content`}>{children}</span>;
       // inline-collapsed.md demo 依赖 span 来隐藏文字,有 icon 属性，则内部包裹一个 span
       // ref: https://github.com/ant-design/ant-design/pull/23456
       if (!icon || (isValidElement(children) && children.type === 'span')) {
@@ -157,16 +158,15 @@ export default defineComponent({
             <div class={`${prefixCls.value}-inline-collapsed-noicon`}>{children.charAt(0)}</div>
           );
         }
-        return children;
       }
-      return <span class={`${prefixCls.value}-title-content`}>{children}</span>;
+      return wrapNode;
     };
 
     // ========================== DirectionStyle ==========================
     const directionStyle = useDirectionStyle(computed(() => keysPath.value.length));
 
     return () => {
-      const { title } = props;
+      const title = props.title ?? slots.title?.();
       const children = flattenChildren(slots.default?.());
       const childrenLength = children.length;
       let tooltipTitle: any = title;

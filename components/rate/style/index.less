@@ -10,7 +10,7 @@
   margin: 0;
   padding: 0;
   color: @rate-star-color;
-  font-size: 20px;
+  font-size: @rate-star-size;
   line-height: unset;
   list-style: none;
   outline: none;
@@ -25,24 +25,23 @@
   &-star {
     position: relative;
     display: inline-block;
-    margin: 0;
-    padding: 0;
     color: inherit;
     cursor: pointer;
-    transition: all 0.3s;
 
     &:not(:last-child) {
       margin-right: 8px;
     }
 
     > div {
-      &:focus {
-        outline: 0;
-      }
+      transition: all 0.3s;
 
       &:hover,
-      &:focus {
-        transform: scale(1.1);
+      &:focus-visible {
+        transform: @rate-star-hover-scale;
+      }
+
+      &:focus:not(:focus-visible) {
+        outline: 0;
       }
     }
 
@@ -79,7 +78,9 @@
 
   &-text {
     display: inline-block;
-    margin-left: 8px;
+    margin: 0 8px;
     font-size: @font-size-base;
   }
 }
+
+@import './rtl';

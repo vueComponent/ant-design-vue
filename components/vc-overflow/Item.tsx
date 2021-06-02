@@ -13,7 +13,7 @@ import { Key, VueNode } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 
 export default defineComponent({
-  name: 'InternalItem',
+  name: 'Item',
   props: {
     prefixCls: String,
     item: PropTypes.any,

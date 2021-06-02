@@ -1,5 +1,5 @@
-// import Overflow, { OverflowProps } from './Overflow';
+import Overflow, { OverflowProps } from './Overflow';
 
-// export { OverflowProps };
+export { OverflowProps };
 
-// export default Overflow;
+export default Overflow;

@@ -1,13 +1,4 @@
-import {
-  defineComponent,
-  ExtractPropTypes,
-  ref,
-  reactive,
-  VNode,
-  onUpdated,
-  onBeforeUpdate,
-  onMounted,
-} from 'vue';
+import { defineComponent, ExtractPropTypes, ref, reactive, VNode, onMounted } from 'vue';
 import { initDefaultProps, getPropsSlot, findDOMNode } from '../_util/props-util';
 import { withInstall } from '../_util/type';
 import { getOffsetLeft } from './util';
@@ -39,6 +30,7 @@ export type RateProps = Partial<ExtractPropTypes<typeof rateProps>>;
 
 const Rate = defineComponent({
   name: 'ARate',
+  inheritAttrs: false,
   props: initDefaultProps(rateProps, {
     value: 0,
     count: 5,
@@ -55,16 +47,16 @@ const Rate = defineComponent({
     const rateRef = ref();
     const [setRef, starRefs] = useRef();
     const state = reactive({
-      sValue: props.value,
+      value: props.value,
       focused: false,
       cleanedValue: null,
       hoverValue: undefined,
     });
 
-    const getStarDOM = index => {
-      return findDOMNode(starRefs[index]);
+    const getStarDOM = (index: number) => {
+      return findDOMNode(starRefs.value[index]);
     };
-    const getStarValue = (index, x) => {
+    const getStarValue = (index: number, x: number) => {
       const reverse = direction.value === 'rtl';
       let value = index + 1;
       if (props.allowHalf) {
@@ -80,12 +72,12 @@ const Rate = defineComponent({
       return value;
     };
     const changeValue = (value: number) => {
-      state.sValue = value;
+      state.value = value;
       emit('update:value', value);
       emit('change', value);
     };
 
-    const onHover = (e: MouseEvent, index) => {
+    const onHover = (e: MouseEvent, index: number) => {
       const hoverValue = getStarValue(index, e.pageX);
       if (hoverValue !== state.cleanedValue) {
         state.hoverValue = hoverValue;
@@ -98,12 +90,12 @@ const Rate = defineComponent({
       state.cleanedValue = null;
       emit('hoverChange', undefined);
     };
-    const onClick = (event: MouseEvent, index) => {
+    const onClick = (event: MouseEvent, index: number) => {
       const { allowClear } = props;
       const newValue = getStarValue(index, event.pageX);
       let isReset = false;
       if (allowClear) {
-        isReset = newValue === state.sValue;
+        isReset = newValue === state.value;
       }
       onMouseLeave();
       changeValue(isReset ? 0 : newValue);
@@ -117,41 +109,41 @@ const Rate = defineComponent({
       state.focused = false;
       emit('blur');
     };
-    const onKeyDown = event => {
+    const onKeyDown = (event: KeyboardEvent) => {
       const { keyCode } = event;
       const { count, allowHalf } = props;
       const reverse = direction.value === 'rtl';
-      if (keyCode === KeyCode.RIGHT && state.sValue < count && !reverse) {
+      if (keyCode === KeyCode.RIGHT && state.value < count && !reverse) {
         if (allowHalf) {
-          state.sValue += 0.5;
+          state.value += 0.5;
         } else {
-          state.sValue += 1;
+          state.value += 1;
         }
-        changeValue(state.sValue);
+        changeValue(state.value);
         event.preventDefault();
-      } else if (keyCode === KeyCode.LEFT && state.sValue > 0 && !reverse) {
+      } else if (keyCode === KeyCode.LEFT && state.value > 0 && !reverse) {
         if (allowHalf) {
-          state.sValue -= 0.5;
+          state.value -= 0.5;
         } else {
-          state.sValue -= 1;
+          state.value -= 1;
         }
-        changeValue(state.sValue);
+        changeValue(state.value);
         event.preventDefault();
-      } else if (keyCode === KeyCode.RIGHT && state.sValue > 0 && reverse) {
+      } else if (keyCode === KeyCode.RIGHT && state.value > 0 && reverse) {
         if (allowHalf) {
-          state.sValue -= 0.5;
+          state.value -= 0.5;
         } else {
-          state.sValue -= 1;
+          state.value -= 1;
         }
-        changeValue(state.sValue);
+        changeValue(state.value);
         event.preventDefault();
-      } else if (keyCode === KeyCode.LEFT && state.sValue < count && reverse) {
+      } else if (keyCode === KeyCode.LEFT && state.value < count && reverse) {
         if (allowHalf) {
-          state.sValue += 0.5;
+          state.value += 0.5;
         } else {
-          state.sValue += 1;
+          state.value += 1;
         }
-        changeValue(state.sValue);
+        changeValue(state.value);
         event.preventDefault();
       }
       emit('keydown', event);
@@ -174,8 +166,8 @@ const Rate = defineComponent({
     });
 
     onMounted(() => {
-      const { autoFocus, disabled } = props;
-      if (autoFocus && !disabled) {
+      const { autofocus, disabled } = props;
+      if (autofocus && !disabled) {
         focus();
       }
     });
@@ -195,14 +187,14 @@ const Rate = defineComponent({
       for (let index = 0; index < count; index++) {
         stars.push(
           <Star
-            ref={setRef}
+            ref={(r: any) => setRef(r, index)}
             key={index}
             index={index}
             count={count}
             disabled={disabled}
             prefixCls={`${prefixCls.value}-star`}
             allowHalf={allowHalf}
-            value={state.hoverValue === undefined ? state.sValue : state.hoverValue}
+            value={state.hoverValue === undefined ? state.value : state.hoverValue}
             onClick={onClick}
             onHover={onHover}
             character={character}

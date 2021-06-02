@@ -390,7 +390,7 @@ function isValidElement(element) {
 }
 
 function getPropsSlot(slots, props, prop = 'default') {
-  return slots[prop]?.() ?? props[prop];
+  return props[prop] ?? slots[prop]?.();
 }
 
 export {

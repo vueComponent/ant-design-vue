@@ -1,14 +1,14 @@
-import { onBeforeUpdate, readonly, ref, DeepReadonly, UnwrapRef } from 'vue';
+import { onBeforeUpdate, ref, Ref } from 'vue';
 
-export type UseRef = [(el: any) => void, DeepReadonly<UnwrapRef<any[]>>];
+export type UseRef = [(el: any, key: string | number) => void, Ref<any>];
 
 export const useRef = (): UseRef => {
-  const refs = ref<any>([]);
-  const setRef = (el: any) => {
-    refs.value.push(el);
+  const refs = ref<any>({});
+  const setRef = (el: any, key: string | number) => {
+    refs.value[key] = el;
   };
   onBeforeUpdate(() => {
-    refs.value = [];
+    refs.value = {};
   });
-  return [setRef, readonly(refs)];
+  return [setRef, refs];
 };

@@ -1,5 +1,3 @@
-/* eslint-disable import/prefer-default-export */
-
 function getScroll(w: Window) {
   let ret = w.pageXOffset;
   const method = 'scrollLeft';

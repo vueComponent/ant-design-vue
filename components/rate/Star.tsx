@@ -12,7 +12,6 @@ export const starProps = {
   characterRender: PropTypes.func,
   focused: PropTypes.looseBool,
   count: PropTypes.number,
-
   onClick: PropTypes.func,
   onHover: PropTypes.func,
 };
@@ -23,23 +22,24 @@ export default defineComponent({
   name: 'Star',
   inheritAttrs: false,
   props: starProps,
+  emits: ['hover', 'click'],
   setup(props, { slots, emit }) {
-    const onHover = e => {
+    const onHover = (e: MouseEvent) => {
       const { index } = props;
       emit('hover', e, index);
     };
-    const onClick = e => {
+    const onClick = (e: MouseEvent) => {
       const { index } = props;
       emit('click', e, index);
     };
-    const onKeyDown = e => {
+    const onKeyDown = (e: KeyboardEvent) => {
       const { index } = props;
       if (e.keyCode === 13) {
         emit('click', e, index);
       }
     };
 
-    const getClassName = computed(() => {
+    const cls = computed(() => {
       const { prefixCls, index, value, allowHalf, focused } = props;
       const starValue = index + 1;
       let className = prefixCls;
@@ -59,12 +59,11 @@ export default defineComponent({
       return className;
     });
 
-    const character = getPropsSlot(slots, props, 'character');
-
     return () => {
       const { disabled, prefixCls, characterRender, index, count, value } = props;
+      const character = getPropsSlot(slots, props, 'character');
       let star = (
-        <li class={getClassName.value}>
+        <li class={cls.value}>
           <div
             onClick={disabled ? null : onClick}
             onKeydown={disabled ? null : onKeyDown}

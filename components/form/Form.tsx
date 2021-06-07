@@ -96,7 +96,7 @@ const Form = defineComponent({
   }),
   Item: FormItem,
   emits: ['finishFailed', 'submit', 'finish'],
-  setup(props, { emit, slots, expose }) {
+  setup(props, { emit, slots, expose, attrs }) {
     const size = useInjectSize(props);
     const { prefixCls, direction, form: contextForm } = useConfigInject('form', props);
     const requiredMark = computed(() => props.requiredMark === '' || props.requiredMark);
@@ -339,7 +339,7 @@ const Form = defineComponent({
 
     return () => {
       return (
-        <form onSubmit={handleSubmit} class={formClassName.value}>
+        <form {...attrs} onSubmit={handleSubmit} class={[formClassName.value, attrs.class]}>
           {slots.default?.()}
         </form>
       );

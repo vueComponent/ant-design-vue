@@ -23,7 +23,7 @@ interface InputProps {
   accessibilityIndex: number;
   value: string;
   open: boolean;
-  tabindex: number;
+  tabindex: number | string;
   /** Pass accessibility props to input */
   attrs: object;
   inputRef: RefObject;
@@ -172,7 +172,7 @@ Input.props = {
   accessibilityIndex: PropTypes.number,
   value: PropTypes.string,
   open: PropTypes.looseBool,
-  tabindex: PropTypes.number,
+  tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   /** Pass accessibility props to input */
   attrs: PropTypes.object,
   onKeydown: PropTypes.func,

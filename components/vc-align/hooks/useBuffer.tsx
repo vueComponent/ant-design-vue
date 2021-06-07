@@ -1,4 +1,4 @@
-import { ComputedRef } from '@vue/reactivity';
+import { ComputedRef } from 'vue';
 
 export default (callback: () => boolean, buffer: ComputedRef<number>) => {
   let called = false;

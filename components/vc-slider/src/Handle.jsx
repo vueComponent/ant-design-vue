@@ -17,7 +17,7 @@ export default defineComponent({
     min: PropTypes.number,
     max: PropTypes.number,
     value: PropTypes.number,
-    tabindex: PropTypes.number,
+    tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     reverse: PropTypes.looseBool,
     // handleFocus: PropTypes.func.def(noop),
     // handleBlur: PropTypes.func.def(noop),

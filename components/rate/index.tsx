@@ -22,7 +22,7 @@ export const rateProps = {
   disabled: PropTypes.looseBool,
   character: PropTypes.any,
   autofocus: PropTypes.looseBool,
-  tabindex: PropTypes.number,
+  tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   direction: PropTypes.string,
 };
 

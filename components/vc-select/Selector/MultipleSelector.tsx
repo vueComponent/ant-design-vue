@@ -52,7 +52,7 @@ const props = {
   autofocus: PropTypes.looseBool,
   autocomplete: PropTypes.string,
   accessibilityIndex: PropTypes.number,
-  tabindex: PropTypes.number,
+  tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   removeIcon: PropTypes.VNodeChild,
   choiceTransitionName: PropTypes.string,

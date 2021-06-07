@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Avatar from './Avatar';
 import Group from './Group';
 

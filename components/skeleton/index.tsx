@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import { App, Plugin } from 'vue';
 import Skeleton from './Skeleton';
 import SkeletonButton from './Button';
 import SkeletonInput from './Input';

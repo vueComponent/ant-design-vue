@@ -24,7 +24,7 @@ const props = {
   autofocus: PropTypes.looseBool,
   autocomplete: PropTypes.string,
   accessibilityIndex: PropTypes.number,
-  tabindex: PropTypes.number,
+  tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   activeValue: PropTypes.string,
   backfill: PropTypes.looseBool,
   onInputChange: PropTypes.func,

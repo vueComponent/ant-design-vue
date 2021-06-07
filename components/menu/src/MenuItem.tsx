@@ -16,6 +16,7 @@ import Tooltip from '../../tooltip';
 import { MenuInfo } from './interface';
 import KeyCode from '../../_util/KeyCode';
 import useDirectionStyle from './hooks/useDirectionStyle';
+import Overflow from '../../vc-overflow';
 
 let indexGuid = 0;
 const menuItemProps = {
@@ -200,7 +201,8 @@ export default defineComponent({
           placement={rtl.value ? 'left' : 'right'}
           overlayClassName={`${prefixCls.value}-inline-collapsed-tooltip`}
         >
-          <li
+          <Overflow.Item
+            component="li"
             {...attrs}
             style={{ ...((attrs.style as any) || {}), ...directionStyle.value }}
             class={[
@@ -227,7 +229,7 @@ export default defineComponent({
               class: `${prefixCls.value}-item-icon`,
             })}
             {renderItemChildren(icon, children)}
-          </li>
+          </Overflow.Item>
         </Tooltip>
       );
     };

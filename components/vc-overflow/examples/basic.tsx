@@ -54,7 +54,7 @@ export default defineComponent({
           <button
             type="button"
             onClick={() => {
-              responsive.value != !responsive.value;
+              responsive.value = !responsive.value;
             }}
           >
             {responsive.value ? 'Responsive' : 'MaxCount: 6'}

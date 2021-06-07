@@ -12,6 +12,8 @@ import classNames from '../_util/classNames';
 import { Key, VueNode } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 
+const UNDEFINED = undefined;
+
 export default defineComponent({
   name: 'Item',
   props: {
@@ -57,16 +59,17 @@ export default defineComponent({
       } = props;
       const children = slots.default?.();
       // ================================ Render ================================
-      const childNode = renderItem && item !== undefined ? renderItem(item) : children;
+      const childNode = renderItem && item !== UNDEFINED ? renderItem(item) : children;
 
       let overflowStyle: CSSProperties | undefined;
       if (!invalidate) {
         overflowStyle = {
           opacity: mergedHidden.value ? 0 : 1,
-          height: mergedHidden.value ? 0 : undefined,
-          overflowY: mergedHidden.value ? 'hidden' : undefined,
-          order: responsive ? order : undefined,
-          pointerEvents: mergedHidden.value ? 'none' : undefined,
+          height: mergedHidden.value ? 0 : UNDEFINED,
+          overflowY: mergedHidden.value ? 'hidden' : UNDEFINED,
+          order: responsive ? order : UNDEFINED,
+          pointerEvents: mergedHidden.value ? 'none' : UNDEFINED,
+          position: mergedHidden.value ? 'absolute' : UNDEFINED,
         };
       }
 

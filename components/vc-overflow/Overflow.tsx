@@ -64,7 +64,7 @@ const Overflow = defineComponent({
     renderRawRest: Function as PropType<(items: any[]) => VueNode>,
     suffix: PropTypes.any,
     component: String,
-    itemComponent: String,
+    itemComponent: PropTypes.any,
     /** @private This API may be refactor since not well design */
     onVisibleChange: Function as PropType<(visibleCount: number) => void>,
     /** When set to `full`, ssr will render full items by default and remove at client side */

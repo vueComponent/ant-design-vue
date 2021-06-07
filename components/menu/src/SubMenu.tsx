@@ -19,6 +19,7 @@ import SubMenuList from './SubMenuList';
 import InlineSubMenuList from './InlineSubMenuList';
 import Transition, { getTransitionProps } from '../../_util/transition';
 import { cloneElement } from '../../_util/vnode';
+import Overflow from '../../vc-overflow';
 
 let indexGuid = 0;
 
@@ -30,6 +31,7 @@ const subMenuProps = {
   popupClassName: String,
   popupOffset: Array as PropType<number[]>,
   internalPopupClose: Boolean,
+  eventKey: String,
 };
 
 export type SubMenuProps = Partial<ExtractPropTypes<typeof subMenuProps>>;
@@ -48,9 +50,10 @@ export default defineComponent({
       instance.vnode.key !== null ? instance.vnode.key : `sub_menu_${++indexGuid}_$$_not_set_key`;
 
     const eventKey =
-      instance.vnode.key !== null
+      props.eventKey ??
+      (instance.vnode.key !== null
         ? `sub_menu_${++indexGuid}_$$_${instance.vnode.key}`
-        : (key as string);
+        : (key as string));
     const { parentEventKeys, parentInfo, parentKeys } = useInjectKeyPath();
     const keysPath = computed(() => [...parentKeys.value, key]);
     const eventKeysPath = computed(() => [...parentEventKeys.value, eventKey]);
@@ -291,7 +294,8 @@ export default defineComponent({
       }
       return (
         <MenuContextProvider props={{ mode: renderMode }}>
-          <li
+          <Overflow.Item
+            component="li"
             {...attrs}
             role="none"
             class={classNames(
@@ -316,7 +320,7 @@ export default defineComponent({
                 {slots.default?.()}
               </InlineSubMenuList>
             )}
-          </li>
+          </Overflow.Item>
         </MenuContextProvider>
       );
     };

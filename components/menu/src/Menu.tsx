@@ -13,7 +13,11 @@ import {
   UnwrapRef,
 } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
-import useProvideMenu, { StoreMenuInfo, useProvideFirstLevel } from './hooks/useMenuContext';
+import useProvideMenu, {
+  MenuContextProvider,
+  StoreMenuInfo,
+  useProvideFirstLevel,
+} from './hooks/useMenuContext';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import {
   MenuTheme,
@@ -27,12 +31,17 @@ import devWarning from '../../vc-util/devWarning';
 import { collapseMotion, CSSMotionProps } from '../../_util/transition';
 import uniq from 'lodash-es/uniq';
 import { SiderCollapsedKey } from '../../layout/injectionKey';
+import { flattenChildren } from '../../_util/props-util';
+import Overflow from '../../vc-overflow';
+import MenuItem from './MenuItem';
+import SubMenu from './SubMenu';
+import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 
 export const menuProps = {
   prefixCls: String,
   disabled: Boolean,
   inlineCollapsed: Boolean,
-  overflowDisabled: Boolean,
+  disabledOverflow: Boolean,
   openKeys: Array,
   selectedKeys: Array,
   activeKey: String, // 内部组件使用
@@ -341,6 +350,8 @@ export default defineComponent({
       store.value = { ...store.value };
     };
 
+    const lastVisibleIndex = ref(0);
+
     useProvideMenu({
       store,
       prefixCls,
@@ -362,7 +373,7 @@ export default defineComponent({
       siderCollapsed,
       defaultMotions: computed(() => (isMounted.value ? defaultMotions : null)),
       motion: computed(() => (isMounted.value ? props.motion : null)),
-      overflowDisabled: computed(() => props.overflowDisabled),
+      overflowDisabled: computed(() => props.disabledOverflow),
       onOpenChange: onInternalOpenChange,
       onItemClick: onInternalClick,
       registerMenuInfo,
@@ -371,11 +382,66 @@ export default defineComponent({
       isRootMenu: true,
     });
     return () => {
+      const childList = flattenChildren(slots.default?.());
+      const allVisible =
+        lastVisibleIndex.value >= childList.length - 1 ||
+        mergedMode.value !== 'horizontal' ||
+        props.disabledOverflow;
+      // >>>>> Children
+      const wrappedChildList =
+        mergedMode.value !== 'horizontal' || props.disabledOverflow
+          ? childList
+          : // Need wrap for overflow dropdown that do not response for open
+            childList.map((child, index) => (
+              // Always wrap provider to avoid sub node re-mount
+              <MenuContextProvider
+                key={child.key}
+                props={{ overflowDisabled: computed(() => index > lastVisibleIndex.value) }}
+              >
+                {child}
+              </MenuContextProvider>
+            ));
+      const overflowedIndicator = <EllipsisOutlined />;
+
       // data-hack-store-update 初步判断是 vue bug，先用hack方式
       return (
-        <ul data-hack-store-update={store.value} class={className.value} tabindex="0">
-          {slots.default?.()}
-        </ul>
+        <Overflow
+          data-hack-store-update={store.value}
+          prefixCls={`${prefixCls.value}-overflow`}
+          component="ul"
+          itemComponent={MenuItem}
+          class={className.value}
+          role="menu"
+          data={wrappedChildList}
+          renderRawItem={node => node}
+          renderRawRest={omitItems => {
+            // We use origin list since wrapped list use context to prevent open
+            const len = omitItems.length;
+
+            const originOmitItems = len ? childList.slice(-len) : null;
+
+            return (
+              <SubMenu
+                eventKey={Overflow.OVERFLOW_KEY}
+                title={overflowedIndicator}
+                disabled={allVisible}
+                internalPopupClose={len === 0}
+              >
+                {originOmitItems}
+              </SubMenu>
+            );
+          }}
+          maxCount={
+            mergedMode.value !== 'horizontal' || props.disabledOverflow
+              ? Overflow.INVALIDATE
+              : Overflow.RESPONSIVE
+          }
+          ssr="full"
+          data-menu-list
+          onVisibleChange={newLastIndex => {
+            lastVisibleIndex.value = newLastIndex;
+          }}
+        />
       );
     };
   },

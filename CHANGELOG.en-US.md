@@ -10,6 +10,35 @@
 
 ---
 
+## 2.2.0-beta.1
+
+`2021-06-17`
+
+- 🔥🔥🔥 Virtual Table independent library released https://www.npmjs.com/package/@surely-vue/table, this component is an independent library, the document example is not yet complete, it is a completely ts-developed component , There are good type hints, there are API documents on npm, those who are in a hurry can explore and use it, here is an online experience example, https://store.antdv.com/pro/preview/list/big- table-list
+- 🔥🔥🔥 Refactored a large number of components, the source code is more readable, the performance is better, and the ts type is more comprehensive -Refactored components in this version Anchor, Alert, Avatar, Badge, BackTop, Col, Form, Layout, Menu, Space, Spin, Switch, Row, Result, Rate
+- 🎉 Menu
+
+  - Better performance [#3300](https://github.com/vueComponent/ant-design-vue/issues/3300)
+  - Fix the problem of incorrect highlighting [#4053](https://github.com/vueComponent/ant-design-vue/issues/4053)
+  - Fix console invalid warning [#4169](https://github.com/vueComponent/ant-design-vue/issues/4169)
+  - Easier to use, simpler to use single file recursion [#4133](https://github.com/vueComponent/ant-design-vue/issues/4133)
+  - 💄 icon icon needs to be passed through slot
+
+- Skeleton
+
+  - 🌟 Support Skeleton.Avatar placeholder component.
+  - 🌟 Support Skeleton.Button placeholder component.
+  - 🌟 Support Skeleton.Input placeholder component.
+
+- 💄 Destructive update
+
+  - The `a-menu-item` and `a-sub-menu` icons need to be passed through the slot, and the icon is not automatically obtained through the sub-node
+  - row gutter supports row-wrap, no need to use multiple rows to divide col
+
+- 🐞 Fix AutoComplete filterOptions not taking effect [#4170](https://github.com/vueComponent/ant-design-vue/issues/4170)
+- 🐞 Fix Select automatic width invalidation problem [#4118](https://github.com/vueComponent/ant-design-vue/issues/4118)
+- 🐞 Fix the lack of internationalized files in dist [#3684](https://github.com/vueComponent/ant-design-vue/issues/3684)
+
 ## 2.1.6
 
 `2021-05-13`

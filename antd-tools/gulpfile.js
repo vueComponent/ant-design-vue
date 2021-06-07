@@ -294,7 +294,7 @@ gulp.task(
 
 function publish(tagString, done) {
   let args = ['publish', '--with-antd-tools'];
-  args = args.concat(['--tag', 'next']);
+  // args = args.concat(['--tag', 'next']);
   if (tagString) {
     args = args.concat(['--tag', tagString]);
   }

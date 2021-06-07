@@ -1,4 +1,12 @@
-import { inject, cloneVNode, isVNode, defineComponent, VNode, nextTick } from 'vue';
+import {
+  inject,
+  cloneVNode,
+  isVNode,
+  defineComponent,
+  VNode,
+  nextTick,
+  ExtractPropTypes,
+} from 'vue';
 import debounce from 'lodash-es/debounce';
 import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';
@@ -9,7 +17,7 @@ import { defaultConfigProvider } from '../config-provider';
 
 export const SpinSize = PropTypes.oneOf(tuple('small', 'default', 'large'));
 
-export const SpinProps = () => ({
+export const getSpinProps = () => ({
   prefixCls: PropTypes.string,
   spinning: PropTypes.looseBool,
   size: SpinSize,
@@ -18,6 +26,8 @@ export const SpinProps = () => ({
   delay: PropTypes.number,
   indicator: PropTypes.any,
 });
+
+export type SpinProps = Partial<ExtractPropTypes<ReturnType<typeof getSpinProps>>>;
 
 // Render indicator
 let defaultIndicator: () => VNode = null;
@@ -35,7 +45,7 @@ export default defineComponent({
   name: 'ASpin',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: initDefaultProps(SpinProps(), {
+  props: initDefaultProps(getSpinProps(), {
     size: 'default',
     spinning: true,
     wrapperClassName: '',
@@ -120,7 +130,7 @@ export default defineComponent({
   render() {
     const { size, prefixCls: customizePrefixCls, tip, wrapperClassName } = this.$props;
     const { class: cls, style, ...divProps } = this.$attrs;
-    const { getPrefixCls } = this.configProvider;
+    const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('spin', customizePrefixCls);
 
     const { sSpinning } = this;
@@ -130,6 +140,7 @@ export default defineComponent({
       [`${prefixCls}-lg`]: size === 'large',
       [`${prefixCls}-spinning`]: sSpinning,
       [`${prefixCls}-show-text`]: !!tip,
+      [`${prefixCls}-rtl`]: direction === 'rtl',
       [cls as string]: !!cls,
     };
 

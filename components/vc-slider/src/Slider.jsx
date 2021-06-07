@@ -15,7 +15,7 @@ const Slider = defineComponent({
     value: PropTypes.number,
     disabled: PropTypes.looseBool,
     autofocus: PropTypes.looseBool,
-    tabindex: PropTypes.number,
+    tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     reverse: PropTypes.looseBool,
     min: PropTypes.number,
     max: PropTypes.number,

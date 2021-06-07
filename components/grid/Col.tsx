@@ -1,8 +1,8 @@
-import { inject, defineComponent, HTMLAttributes, CSSProperties } from 'vue';
+import { defineComponent, CSSProperties, ExtractPropTypes, computed } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import { defaultConfigProvider } from '../config-provider';
-import { rowContextState } from './Row';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import { useInjectRow } from './context';
 
 type ColSpanType = number | string;
 
@@ -14,22 +14,6 @@ export interface ColSize {
   offset?: ColSpanType;
   push?: ColSpanType;
   pull?: ColSpanType;
-}
-
-export interface ColProps extends HTMLAttributes {
-  span?: ColSpanType;
-  order?: ColSpanType;
-  offset?: ColSpanType;
-  push?: ColSpanType;
-  pull?: ColSpanType;
-  xs?: ColSpanType | ColSize;
-  sm?: ColSpanType | ColSize;
-  md?: ColSpanType | ColSize;
-  lg?: ColSpanType | ColSize;
-  xl?: ColSpanType | ColSize;
-  xxl?: ColSpanType | ColSize;
-  prefixCls?: string;
-  flex?: FlexType;
 }
 
 function parseFlex(flex: FlexType): string {
@@ -44,92 +28,17 @@ function parseFlex(flex: FlexType): string {
   return flex;
 }
 
-const ACol = defineComponent<ColProps>({
-  name: 'ACol',
-  setup(props, { slots }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
-    const rowContext = inject<rowContextState>('rowContext', {});
-
-    return () => {
-      const { gutter } = rowContext;
-      const { prefixCls: customizePrefixCls, span, order, offset, push, pull, flex } = props;
-      const prefixCls = configProvider.getPrefixCls('col', customizePrefixCls);
-      let sizeClassObj = {};
-      ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
-        let sizeProps: ColSize = {};
-        const propSize = props[size];
-        if (typeof propSize === 'number') {
-          sizeProps.span = propSize;
-        } else if (typeof propSize === 'object') {
-          sizeProps = propSize || {};
-        }
-
-        sizeClassObj = {
-          ...sizeClassObj,
-          [`${prefixCls}-${size}-${sizeProps.span}`]: sizeProps.span !== undefined,
-          [`${prefixCls}-${size}-order-${sizeProps.order}`]:
-            sizeProps.order || sizeProps.order === 0,
-          [`${prefixCls}-${size}-offset-${sizeProps.offset}`]:
-            sizeProps.offset || sizeProps.offset === 0,
-          [`${prefixCls}-${size}-push-${sizeProps.push}`]: sizeProps.push || sizeProps.push === 0,
-          [`${prefixCls}-${size}-pull-${sizeProps.pull}`]: sizeProps.pull || sizeProps.pull === 0,
-        };
-      });
-      const classes = classNames(
-        prefixCls,
-        {
-          [`${prefixCls}-${span}`]: span !== undefined,
-          [`${prefixCls}-order-${order}`]: order,
-          [`${prefixCls}-offset-${offset}`]: offset,
-          [`${prefixCls}-push-${push}`]: push,
-          [`${prefixCls}-pull-${pull}`]: pull,
-        },
-        sizeClassObj,
-      );
-      let mergedStyle: CSSProperties = {};
-      if (gutter) {
-        mergedStyle = {
-          ...(gutter[0] > 0
-            ? {
-                paddingLeft: `${gutter[0] / 2}px`,
-                paddingRight: `${gutter[0] / 2}px`,
-              }
-            : {}),
-          ...(gutter[1] > 0
-            ? {
-                paddingTop: `${gutter[1] / 2}px`,
-                paddingBottom: `${gutter[1] / 2}px`,
-              }
-            : {}),
-          ...mergedStyle,
-        };
-      }
-      if (flex) {
-        mergedStyle.flex = parseFlex(flex);
-      }
-
-      return (
-        <div class={classes} style={mergedStyle}>
-          {slots.default?.()}
-        </div>
-      );
-    };
-  },
-});
-
 const stringOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
-
-export const ColSize = PropTypes.shape({
+export const colSize = PropTypes.shape({
   span: stringOrNumber,
   order: stringOrNumber,
   offset: stringOrNumber,
   push: stringOrNumber,
   pull: stringOrNumber,
 }).loose;
+const objectOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number, colSize]);
 
-const objectOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number, ColSize]);
-
-ACol.props = {
+const colProps = {
   span: stringOrNumber,
   order: stringOrNumber,
   offset: stringOrNumber,
@@ -145,4 +54,85 @@ ACol.props = {
   flex: stringOrNumber,
 };
 
-export default ACol;
+export type ColProps = Partial<ExtractPropTypes<typeof colProps>>;
+
+export default defineComponent({
+  name: 'ACol',
+  props: colProps,
+  setup(props, { slots }) {
+    const { gutter, supportFlexGap, wrap } = useInjectRow();
+    const { prefixCls, direction } = useConfigInject('col', props);
+    const classes = computed(() => {
+      const { span, order, offset, push, pull } = props;
+      const pre = prefixCls.value;
+      let sizeClassObj = {};
+      ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
+        let sizeProps: ColSize = {};
+        const propSize = props[size];
+        if (typeof propSize === 'number') {
+          sizeProps.span = propSize;
+        } else if (typeof propSize === 'object') {
+          sizeProps = propSize || {};
+        }
+
+        sizeClassObj = {
+          ...sizeClassObj,
+          [`${pre}-${size}-${sizeProps.span}`]: sizeProps.span !== undefined,
+          [`${pre}-${size}-order-${sizeProps.order}`]: sizeProps.order || sizeProps.order === 0,
+          [`${pre}-${size}-offset-${sizeProps.offset}`]: sizeProps.offset || sizeProps.offset === 0,
+          [`${pre}-${size}-push-${sizeProps.push}`]: sizeProps.push || sizeProps.push === 0,
+          [`${pre}-${size}-pull-${sizeProps.pull}`]: sizeProps.pull || sizeProps.pull === 0,
+          [`${pre}-rtl`]: direction.value === 'rtl',
+        };
+      });
+      return classNames(
+        pre,
+        {
+          [`${pre}-${span}`]: span !== undefined,
+          [`${pre}-order-${order}`]: order,
+          [`${pre}-offset-${offset}`]: offset,
+          [`${pre}-push-${push}`]: push,
+          [`${pre}-pull-${pull}`]: pull,
+        },
+        sizeClassObj,
+      );
+    });
+
+    const mergedStyle = computed(() => {
+      const { flex } = props;
+      const gutterVal = gutter.value;
+      const style: CSSProperties = {};
+      // Horizontal gutter use padding
+      if (gutterVal && gutterVal[0] > 0) {
+        const horizontalGutter = `${gutterVal[0] / 2}px`;
+        style.paddingLeft = horizontalGutter;
+        style.paddingRight = horizontalGutter;
+      }
+
+      // Vertical gutter use padding when gap not support
+      if (gutterVal && gutterVal[1] > 0 && !supportFlexGap.value) {
+        const verticalGutter = `${gutterVal[1] / 2}px`;
+        style.paddingTop = verticalGutter;
+        style.paddingBottom = verticalGutter;
+      }
+
+      if (flex) {
+        style.flex = parseFlex(flex);
+
+        // Hack for Firefox to avoid size issue
+        // https://github.com/ant-design/ant-design/pull/20023#issuecomment-564389553
+        if (flex === 'auto' && wrap.value === false && !style.minWidth) {
+          style.minWidth = 0;
+        }
+      }
+      return style;
+    });
+    return () => {
+      return (
+        <div class={classes.value} style={mergedStyle.value}>
+          {slots.default?.()}
+        </div>
+      );
+    };
+  },
+});

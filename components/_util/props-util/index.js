@@ -116,7 +116,7 @@ const getSlotOptions = () => {
   throw Error('使用 .type 直接取值');
 };
 const findDOMNode = instance => {
-  let node = instance && (instance.$el || instance);
+  let node = instance?.vnode?.el || (instance && (instance.$el || instance));
   while (node && !node.tagName) {
     node = node.nextSibling;
   }
@@ -394,7 +394,7 @@ function isValidElement(element) {
 }
 
 function getPropsSlot(slots, props, prop = 'default') {
-  return slots[prop]?.() ?? props[prop];
+  return props[prop] ?? slots[prop]?.();
 }
 
 export {

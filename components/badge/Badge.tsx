@@ -1,27 +1,29 @@
 import PropTypes from '../_util/vue-types';
 import ScrollNumber from './ScrollNumber';
 import classNames from '../_util/classNames';
-import { initDefaultProps, getComponent, getSlot } from '../_util/props-util';
+import { getPropsSlot, flattenChildren } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { getTransitionProps, Transition } from '../_util/transition';
-import isNumeric from '../_util/isNumeric';
-import { defaultConfigProvider } from '../config-provider';
-import { inject, defineComponent, CSSProperties, VNode, App, Plugin } from 'vue';
+import { defineComponent, ExtractPropTypes, CSSProperties, computed, ref, watch } from 'vue';
 import { tuple } from '../_util/type';
 import Ribbon from './Ribbon';
 import { isPresetColor } from './utils';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import isNumeric from '../_util/isNumeric';
 
-const BadgeProps = {
+export const badgeProps = {
   /** Number to show in badge */
-  count: PropTypes.VNodeChild,
+  count: PropTypes.any,
   showZero: PropTypes.looseBool,
   /** Max count to show */
-  overflowCount: PropTypes.number,
+  overflowCount: PropTypes.number.def(99),
   /** whether to show red dot without number */
   dot: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   scrollNumberPrefixCls: PropTypes.string,
   status: PropTypes.oneOf(tuple('success', 'processing', 'default', 'error', 'warning')),
+  // sync antd@4.6.0
+  size: PropTypes.oneOf(tuple('default', 'small')).def('default'),
   color: PropTypes.string,
   text: PropTypes.VNodeChild,
   offset: PropTypes.arrayOf(PropTypes.oneOfType([String, Number])),
@@ -29,210 +31,192 @@ const BadgeProps = {
   title: PropTypes.string,
 };
 
-const Badge = defineComponent({
+export type BadgeProps = Partial<ExtractPropTypes<typeof badgeProps>>;
+
+export default defineComponent({
   name: 'ABadge',
   Ribbon,
-  props: initDefaultProps(BadgeProps, {
-    showZero: false,
-    dot: false,
-    overflowCount: 99,
-  }) as typeof BadgeProps,
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-      badgeCount: undefined,
-    };
-  },
-  methods: {
-    getNumberedDispayCount() {
-      const { overflowCount } = this.$props;
-      const count = this.badgeCount;
-      const displayCount = count > overflowCount ? `${overflowCount}+` : count;
-      return displayCount;
-    },
+  inheritAttrs: false,
+  props: badgeProps,
+  slots: ['text', 'count'],
+  setup(props, { slots, attrs }) {
+    const { prefixCls, direction } = useConfigInject('badge', props);
 
-    getDispayCount() {
-      const isDot = this.isDot();
-      // dot mode don't need count
-      if (isDot) {
-        return '';
+    // ================================ Misc ================================
+    const numberedDisplayCount = computed(() => {
+      return ((props.count as number) > (props.overflowCount as number)
+        ? `${props.overflowCount}+`
+        : props.count) as string | number | null;
+    });
+
+    const hasStatus = computed(
+      () =>
+        (props.status !== null && props.status !== undefined) ||
+        (props.color !== null && props.color !== undefined),
+    );
+
+    const isZero = computed(
+      () => numberedDisplayCount.value === '0' || numberedDisplayCount.value === 0,
+    );
+
+    const showAsDot = computed(() => (props.dot && !isZero.value) || hasStatus.value);
+
+    const mergedCount = computed(() => (showAsDot.value ? '' : numberedDisplayCount.value));
+
+    const isHidden = computed(() => {
+      const isEmpty =
+        mergedCount.value === null || mergedCount.value === undefined || mergedCount.value === '';
+      return (isEmpty || (isZero.value && !props.showZero)) && !showAsDot.value;
+    });
+
+    // Count should be cache in case hidden change it
+    const livingCount = ref(props.count);
+
+    // We need cache count since remove motion should not change count display
+    const displayCount = ref(mergedCount.value);
+
+    // We will cache the dot status to avoid shaking on leaved motion
+    const isDotRef = ref(showAsDot.value);
+
+    watch(
+      [() => props.count, mergedCount, showAsDot],
+      () => {
+        if (!isHidden.value) {
+          livingCount.value = props.count;
+          displayCount.value = mergedCount.value;
+          isDotRef.value = showAsDot.value;
+        }
+      },
+      { immediate: true },
+    );
+
+    // Shared styles
+    const statusCls = computed(() => ({
+      [`${prefixCls.value}-status-dot`]: hasStatus.value,
+      [`${prefixCls.value}-status-${props.status}`]: !!props.status,
+      [`${prefixCls.value}-status-${props.color}`]: isPresetColor(props.color),
+    }));
+
+    const statusStyle = computed(() => {
+      if (props.color && !isPresetColor(props.color)) {
+        return { background: props.color };
+      } else {
+        return {};
       }
-      return this.getNumberedDispayCount();
-    },
+    });
 
-    getScrollNumberTitle() {
-      const { title } = this.$props;
-      const count = this.badgeCount;
-      if (title) {
-        return title;
-      }
-      return typeof count === 'string' || typeof count === 'number' ? count : undefined;
-    },
+    const scrollNumberCls = computed(() => ({
+      [`${prefixCls.value}-dot`]: isDotRef.value,
+      [`${prefixCls.value}-count`]: !isDotRef.value,
+      [`${prefixCls.value}-count-sm`]: props.size === 'small',
+      [`${prefixCls.value}-multiple-words`]:
+        !isDotRef.value && displayCount.value && displayCount.value.toString().length > 1,
+      [`${prefixCls.value}-status-${status}`]: !!status,
+      [`${prefixCls.value}-status-${props.color}`]: isPresetColor(props.color),
+    }));
 
-    getStyleWithOffset() {
-      const { offset, numberStyle } = this.$props;
-      return offset
-        ? {
-            right: `${-parseInt(offset[0] as string, 10)}px`,
-            marginTop: isNumeric(offset[1]) ? `${offset[1]}px` : offset[1],
-            ...numberStyle,
-          }
-        : { ...numberStyle };
-    },
-    getBadgeClassName(prefixCls: string, children: VNode[]) {
-      const hasStatus = this.hasStatus();
-      return classNames(prefixCls, {
-        [`${prefixCls}-status`]: hasStatus,
-        [`${prefixCls}-dot-status`]: hasStatus && this.dot && !this.isZero(),
-        [`${prefixCls}-not-a-wrapper`]: !children.length,
-      });
-    },
-    hasStatus() {
-      const { status, color } = this.$props;
-      return !!status || !!color;
-    },
-    isZero() {
-      const numberedDispayCount = this.getNumberedDispayCount();
-      return numberedDispayCount === '0' || numberedDispayCount === 0;
-    },
+    return () => {
+      const { offset, title, color } = props;
+      const style = attrs.style as CSSProperties;
+      const text = getPropsSlot(slots, props, 'text');
+      const pre = prefixCls.value;
+      const count = livingCount.value;
+      let children = flattenChildren(slots.default?.());
+      children = children.length ? children : null;
 
-    isDot() {
-      const { dot } = this.$props;
-      const isZero = this.isZero();
-      return (dot && !isZero) || this.hasStatus();
-    },
+      const visible = !!(!isHidden.value || slots.count);
 
-    isHidden() {
-      const { showZero } = this.$props;
-      const displayCount = this.getDispayCount();
-      const isZero = this.isZero();
-      const isDot = this.isDot();
-      const isEmpty = displayCount === null || displayCount === undefined || displayCount === '';
-      return (isEmpty || (isZero && !showZero)) && !isDot;
-    },
+      // =============================== Styles ===============================
+      const mergedStyle = (() => {
+        if (!offset) {
+          return { ...style };
+        }
 
-    renderStatusText(prefixCls: string) {
-      const text = getComponent(this, 'text');
-      const hidden = this.isHidden();
-      return hidden || !text ? null : <span class={`${prefixCls}-status-text`}>{text}</span>;
-    },
+        const offsetStyle: CSSProperties = {
+          marginTop: isNumeric(offset[1]) ? `${offset[1]}px` : offset[1],
+        };
+        if (direction.value === 'rtl') {
+          offsetStyle.left = `${parseInt(offset[0] as string, 10)}px`;
+        } else {
+          offsetStyle.right = `${-parseInt(offset[0] as string, 10)}px`;
+        }
 
-    renderDispayComponent() {
-      const count = this.badgeCount;
-      const customNode = count;
-      if (!customNode || typeof customNode !== 'object') {
-        return undefined;
-      }
-      return cloneElement(
-        customNode,
+        return {
+          ...offsetStyle,
+          ...style,
+        };
+      })();
+
+      // =============================== Render ===============================
+      // >>> Title
+      const titleNode =
+        title ?? (typeof count === 'string' || typeof count === 'number' ? count : undefined);
+
+      // >>> Status Text
+      const statusTextNode =
+        visible || !text ? null : <span class={`${pre}-status-text`}>{text}</span>;
+
+      // >>> Display Component
+      const displayNode = cloneElement(
+        slots.count?.(),
         {
-          style: this.getStyleWithOffset(),
+          style: mergedStyle,
         },
         false,
       );
-    },
 
-    renderBadgeNumber(prefixCls: string, scrollNumberPrefixCls: string) {
-      const { status, color } = this.$props;
-      const count = this.badgeCount;
-      const displayCount = this.getDispayCount();
-      const isDot = this.isDot();
-      const hidden = this.isHidden();
+      const badgeClassName = classNames(
+        pre,
+        {
+          [`${pre}-status`]: hasStatus.value,
+          [`${pre}-not-a-wrapper`]: !children,
+          [`${pre}-rtl`]: direction.value === 'rtl',
+        },
+        attrs.class,
+      );
 
-      const scrollNumberCls = {
-        [`${prefixCls}-dot`]: isDot,
-        [`${prefixCls}-count`]: !isDot,
-        [`${prefixCls}-multiple-words`]:
-          !isDot && count && count.toString && count.toString().length > 1,
-        [`${prefixCls}-status-${status}`]: !!status,
-        [`${prefixCls}-status-${color}`]: isPresetColor(color),
-      };
-
-      let statusStyle = this.getStyleWithOffset();
-      if (color && !isPresetColor(color)) {
-        statusStyle = statusStyle || {};
-        statusStyle.background = color;
+      // <Badge status="success" />
+      if (!children && hasStatus.value) {
+        const statusTextColor = mergedStyle.color;
+        return (
+          <span {...attrs} class={badgeClassName} style={mergedStyle}>
+            <span class={statusCls.value} style={statusStyle.value} />
+            <span style={{ color: statusTextColor }} class={`${pre}-status-text`}>
+              {text}
+            </span>
+          </span>
+        );
       }
 
-      return hidden ? null : (
-        <ScrollNumber
-          prefixCls={scrollNumberPrefixCls}
-          data-show={!hidden}
-          v-show={!hidden}
-          class={scrollNumberCls}
-          count={displayCount}
-          displayComponent={this.renderDispayComponent()}
-          title={this.getScrollNumberTitle()}
-          style={statusStyle}
-          key="scrollNumber"
-        />
-      );
-    },
-  },
+      const transitionProps = getTransitionProps(children ? `${pre}-zoom` : '', {
+        appear: false,
+      });
+      let scrollNumberStyle: CSSProperties = { ...mergedStyle, ...props.numberStyle };
+      if (color && !isPresetColor(color)) {
+        scrollNumberStyle = scrollNumberStyle || {};
+        scrollNumberStyle.background = color;
+      }
 
-  render() {
-    const {
-      prefixCls: customizePrefixCls,
-      scrollNumberPrefixCls: customizeScrollNumberPrefixCls,
-      status,
-      color,
-    } = this;
-
-    const text = getComponent(this, 'text');
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('badge', customizePrefixCls);
-    const scrollNumberPrefixCls = getPrefixCls('scroll-number', customizeScrollNumberPrefixCls);
-
-    const children = getSlot(this);
-    let count = getComponent(this, 'count');
-    if (Array.isArray(count)) {
-      count = count[0];
-    }
-    this.badgeCount = count;
-    const scrollNumber = this.renderBadgeNumber(prefixCls, scrollNumberPrefixCls);
-    const statusText = this.renderStatusText(prefixCls);
-    const statusCls = classNames({
-      [`${prefixCls}-status-dot`]: this.hasStatus(),
-      [`${prefixCls}-status-${status}`]: !!status,
-      [`${prefixCls}-status-${color}`]: isPresetColor(color),
-    });
-    const statusStyle: CSSProperties = {};
-    if (color && !isPresetColor(color)) {
-      statusStyle.background = color;
-    }
-    // <Badge status="success" />
-    if (!children.length && this.hasStatus()) {
-      const styleWithOffset = this.getStyleWithOffset();
-      const statusTextColor = styleWithOffset && styleWithOffset.color;
       return (
-        <span class={this.getBadgeClassName(prefixCls, children)} style={styleWithOffset}>
-          <span class={statusCls} style={statusStyle} />
-          <span style={{ color: statusTextColor }} class={`${prefixCls}-status-text`}>
-            {text}
-          </span>
+        <span {...attrs} class={badgeClassName}>
+          {children}
+          <Transition {...transitionProps}>
+            <ScrollNumber
+              v-show={visible}
+              prefixCls={props.scrollNumberPrefixCls}
+              show={visible}
+              class={scrollNumberCls.value}
+              count={displayCount.value}
+              title={titleNode}
+              style={scrollNumberStyle}
+              key="scrollNumber"
+            >
+              {displayNode}
+            </ScrollNumber>
+          </Transition>
+          {statusTextNode}
         </span>
       );
-    }
-
-    const transitionProps = getTransitionProps(children.length ? `${prefixCls}-zoom` : '');
-
-    return (
-      <span class={this.getBadgeClassName(prefixCls, children)}>
-        {children}
-        <Transition {...transitionProps}>{scrollNumber}</Transition>
-        {statusText}
-      </span>
-    );
+    };
   },
 });
-
-Badge.install = function(app: App) {
-  app.component(Badge.name, Badge);
-  app.component(Badge.Ribbon.displayName, Badge.Ribbon);
-  return app;
-};
-
-export default Badge as typeof Badge &
-  Plugin & {
-    readonly Ribbon: typeof Ribbon;
-  };

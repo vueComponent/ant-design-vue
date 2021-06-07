@@ -1,17 +1,8 @@
-import {
-  createVNode,
-  defineComponent,
-  inject,
-  provide,
-  toRefs,
-  ref,
-  ExtractPropTypes,
-  HTMLAttributes,
-} from 'vue';
+import { createVNode, defineComponent, provide, ref, ExtractPropTypes, HTMLAttributes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import { defaultConfigProvider } from '../config-provider';
-import { flattenChildren } from '../_util/props-util';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import { SiderHookProviderKey } from './injectionKey';
 
 export const basicProps = {
   prefixCls: PropTypes.string,
@@ -21,40 +12,29 @@ export const basicProps = {
 
 export type BasicProps = Partial<ExtractPropTypes<typeof basicProps>> & HTMLAttributes;
 
-export interface SiderHookProvider {
-  addSider?: (id: string) => void;
-  removeSider?: (id: string) => void;
-}
-
 type GeneratorArgument = {
   suffixCls: string;
-  tagName: string;
+  tagName: 'header' | 'footer' | 'main' | 'section';
   name: string;
 };
 
 function generator({ suffixCls, tagName, name }: GeneratorArgument) {
   return (BasicComponent: typeof Basic) => {
-    const Adapter = defineComponent<BasicProps>({
+    const Adapter = defineComponent({
       name,
+      props: basicProps,
       setup(props, { slots }) {
-        const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
+        const { prefixCls } = useConfigInject(suffixCls, props);
         return () => {
-          const { prefixCls: customizePrefixCls } = props;
-          const prefixCls = getPrefixCls(suffixCls, customizePrefixCls);
           const basicComponentProps = {
-            prefixCls,
-            ...props,
+            prefixCls: prefixCls.value,
             tagName,
+            ...props,
           };
-          return (
-            <BasicComponent {...basicComponentProps}>
-              {flattenChildren(slots.default?.())}
-            </BasicComponent>
-          );
+          return <BasicComponent {...basicComponentProps}>{slots.default?.()}</BasicComponent>;
         };
       },
     });
-    Adapter.props = basicProps;
     return Adapter;
   };
 }
@@ -62,30 +42,32 @@ function generator({ suffixCls, tagName, name }: GeneratorArgument) {
 const Basic = defineComponent({
   props: basicProps,
   setup(props, { slots }) {
-    const { prefixCls, tagName } = toRefs(props);
-    return () => createVNode(tagName.value, { class: prefixCls.value }, slots.default?.());
+    return () => createVNode(props.tagName, { class: props.prefixCls }, slots.default?.());
   },
 });
 
 const BasicLayout = defineComponent({
   props: basicProps,
   setup(props, { slots }) {
+    const { direction } = useConfigInject('', props);
     const siders = ref<string[]>([]);
-    const siderHookProvider: SiderHookProvider = {
-      addSider: id => {
+    const siderHookProvider = {
+      addSider: (id: string) => {
         siders.value = [...siders.value, id];
       },
-      removeSider: id => {
+      removeSider: (id: string) => {
         siders.value = siders.value.filter(currentId => currentId !== id);
       },
     };
-    provide('siderHook', siderHookProvider);
+
+    provide(SiderHookProviderKey, siderHookProvider);
 
     return () => {
       const { prefixCls, hasSider, tagName } = props;
       const divCls = classNames(prefixCls, {
         [`${prefixCls}-has-sider`]:
           typeof hasSider === 'boolean' ? hasSider : siders.value.length > 0,
+        [`${prefixCls}-rtl`]: direction.value === 'rtl',
       });
       return createVNode(tagName, { class: divCls }, slots.default?.());
     };

@@ -47,7 +47,7 @@ export default defineComponent({
     showAction: PropTypes.any.def([]),
     hideAction: PropTypes.any.def([]),
     getPopupClassNameFromAlign: PropTypes.any.def(returnEmptyString),
-    // onPopupVisibleChange: PropTypes.func.def(noop),
+    onPopupVisibleChange: PropTypes.func.def(noop),
     afterPopupVisibleChange: PropTypes.func.def(noop),
     popup: PropTypes.any,
     popupStyle: PropTypes.object.def(() => ({})),
@@ -443,7 +443,7 @@ export default defineComponent({
     },
 
     setPopupVisible(sPopupVisible, event) {
-      const { alignPoint, sPopupVisible: prevPopupVisible, $attrs } = this;
+      const { alignPoint, sPopupVisible: prevPopupVisible, onPopupVisibleChange } = this;
       this.clearDelayTimer();
       if (prevPopupVisible !== sPopupVisible) {
         if (!hasProp(this, 'popupVisible')) {
@@ -452,7 +452,7 @@ export default defineComponent({
             prevPopupVisible,
           });
         }
-        $attrs.onPopupVisibleChange && $attrs.onPopupVisibleChange(sPopupVisible);
+        onPopupVisibleChange && onPopupVisibleChange(sPopupVisible);
       }
       // Always record the point position since mouseEnterDelay will delay the show
       if (alignPoint && event) {

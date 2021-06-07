@@ -7,17 +7,20 @@
   .reset-component();
 
   position: relative;
-  display: inline-flex;
+  display: inline-block;
   overflow: hidden;
   color: @avatar-color;
   white-space: nowrap;
+  text-align: center;
   vertical-align: middle;
   background: @avatar-bg;
-  justify-content: center;
-  align-items: center;
 
   &-image {
     background: transparent;
+  }
+
+  .@{ant-prefix}-image-img {
+    display: block;
   }
 
   .avatar-size(@avatar-size-base, @avatar-font-size-base);
@@ -45,6 +48,7 @@
 .avatar-size(@size, @font-size) {
   width: @size;
   height: @size;
+  line-height: @size;
   border-radius: 50%;
 
   &-string {
@@ -55,8 +59,12 @@
 
   &.@{avatar-prefix-cls}-icon {
     font-size: @font-size;
-    .@{iconfont-css-prefix} {
+
+    > .@{iconfont-css-prefix} {
       margin: 0;
     }
   }
 }
+
+@import './group';
+@import './rtl';

@@ -300,10 +300,11 @@
 // Layout
 @layout-body-background: #f0f2f5;
 @layout-header-background: #001529;
-@layout-footer-background: @layout-body-background;
 @layout-header-height: 64px;
 @layout-header-padding: 0 50px;
+@layout-header-color: @text-color;
 @layout-footer-padding: 24px 50px;
+@layout-footer-background: @layout-body-background;
 @layout-sider-background: @layout-header-background;
 @layout-trigger-height: 48px;
 @layout-trigger-background: #002140;
@@ -356,6 +357,8 @@
 @form-item-trailing-colon: true;
 @form-vertical-label-padding: 0 0 8px;
 @form-vertical-label-margin: 0;
+@form-item-label-font-size: @font-size-base;
+@form-item-label-height: @input-height-base;
 @form-item-label-colon-margin-right: 8px;
 @form-item-label-colon-margin-left: 2px;
 @form-error-input-bg: @input-bg;
@@ -433,7 +436,11 @@
 
 // Anchor
 // ---
+@anchor-bg: transparent;
 @anchor-border-color: @border-color-split;
+@anchor-link-top: 7px;
+@anchor-link-left: 16px;
+@anchor-link-padding: @anchor-link-top 0 @anchor-link-top @anchor-link-left;
 
 // Tooltip
 // ---
@@ -490,28 +497,38 @@
 // ---
 @menu-inline-toplevel-item-height: 40px;
 @menu-item-height: 40px;
+@menu-item-group-height: @line-height-base;
 @menu-collapsed-width: 80px;
 @menu-bg: @component-background;
 @menu-popup-bg: @component-background;
 @menu-item-color: @text-color;
+@menu-inline-submenu-bg: @background-color-light;
 @menu-highlight-color: @primary-color;
-@menu-item-active-bg: @item-active-bg;
+@menu-highlight-danger-color: @error-color;
+@menu-item-active-bg: @primary-1;
+@menu-item-active-danger-bg: @red-1;
 @menu-item-active-border-width: 3px;
 @menu-item-group-title-color: @text-color-secondary;
-@menu-icon-size: @font-size-base;
-@menu-icon-size-lg: @font-size-lg;
-
 @menu-item-vertical-margin: 4px;
 @menu-item-font-size: @font-size-base;
 @menu-item-boundary-margin: 8px;
+@menu-item-padding-horizontal: 20px;
+@menu-item-padding: 0 @menu-item-padding-horizontal;
+@menu-horizontal-line-height: 46px;
+@menu-icon-margin-right: 10px;
+@menu-icon-size: @menu-item-font-size;
+@menu-icon-size-lg: @font-size-lg;
+@menu-item-group-title-font-size: @menu-item-font-size;
 
 // dark theme
 @menu-dark-color: @text-color-secondary-dark;
+@menu-dark-danger-color: @error-color;
 @menu-dark-bg: @layout-header-background;
 @menu-dark-arrow-color: #fff;
-@menu-dark-submenu-bg: #000c17;
+@menu-dark-inline-submenu-bg: #000c17;
 @menu-dark-highlight-color: #fff;
 @menu-dark-item-active-bg: @primary-color;
+@menu-dark-item-active-danger-bg: @error-color;
 @menu-dark-selected-item-icon-color: @white;
 @menu-dark-selected-item-text-color: @white;
 @menu-dark-item-hover-bg: transparent;
@@ -568,16 +585,21 @@
 // Badge
 // ---
 @badge-height: 20px;
+@badge-height-sm: 14px;
 @badge-dot-size: 6px;
 @badge-font-size: @font-size-sm;
+@badge-font-size-sm: @font-size-sm;
 @badge-font-weight: normal;
 @badge-status-size: 6px;
 @badge-text-color: @component-background;
+@badge-color: @highlight-color;
 
 // Rate
 // ---
 @rate-star-color: @yellow-6;
 @rate-star-bg: @border-color-split;
+@rate-star-size: 20px;
+@rate-star-hover-scale: scale(1.1);
 
 // Card
 // ---
@@ -595,7 +617,7 @@
 // Comment
 // ---
 @comment-bg: inherit;
-@comment-padding-base: 16px 0;
+@comment-padding-base: @padding-md 0;
 @comment-nest-indent: 44px;
 @comment-font-size-base: @font-size-base;
 @comment-font-size-sm: @font-size-sm;
@@ -603,6 +625,9 @@
 @comment-author-time-color: #ccc;
 @comment-action-color: @text-color-secondary;
 @comment-action-hover-color: #595959;
+@comment-actions-margin-bottom: inherit;
+@comment-actions-margin-top: @margin-sm;
+@comment-content-detail-p-margin-bottom: inherit;
 
 // Tabs
 // ---
@@ -644,6 +669,9 @@
 @avatar-bg: #ccc;
 @avatar-color: #fff;
 @avatar-border-radius: @border-radius-base;
+@avatar-group-overlapping: -8px;
+@avatar-group-space: 3px;
+@avatar-group-border-color: #fff;
 
 // Switch
 // ---
@@ -670,10 +698,15 @@
 
 // PageHeader
 // ---
-@page-header-padding: 24px;
-@page-header-padding-vertical: 16px;
-@page-header-padding-breadcrumb: 12px;
+@page-header-padding: @padding-lg;
+@page-header-padding-vertical: @padding-md;
+@page-header-padding-breadcrumb: @padding-sm;
+@page-header-content-padding-vertical: @padding-sm;
 @page-header-back-color: #000;
+@page-header-ghost-bg: inherit;
+@page-header-heading-title: @heading-4-size;
+@page-header-heading-sub-title: 14px;
+@page-header-tabs-tab-font-size: 16px;
 
 // Breadcrumb
 // ---
@@ -725,8 +758,13 @@
 
 // Skeleton
 // ---
-@skeleton-color: #f2f2f2;
+@skeleton-color: rgba(190, 190, 190, 0.2);
 @skeleton-to-color: shade(@skeleton-color, 5%);
+@skeleton-paragraph-margin-top: 28px;
+@skeleton-paragraph-li-margin-top: @margin-md;
+@skeleton-paragraph-li-height: 16px;
+@skeleton-title-height: 16px;
+@skeleton-title-paragraph-margin-top: @margin-lg;
 
 // Transfer
 // ---
@@ -815,3 +853,10 @@
 @notification-bg: @component-background;
 @notification-padding-vertical: 16px;
 @notification-padding-horizontal: 24px;
+
+//  Result
+// ---
+@result-title-font-size: 24px;
+@result-subtitle-font-size: @font-size-base;
+@result-icon-font-size: 72px;
+@result-extra-margin: 24px 0 0 0;

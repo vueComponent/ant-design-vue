@@ -1,11 +1,10 @@
 import { ExtractPropTypes, PropType, UnwrapRef } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { PaginationProps as getPaginationProps, PaginationConfig } from '../pagination';
-import { SpinProps as getSpinProps } from '../spin';
+import { getSpinProps } from '../spin';
 import { tuple } from '../_util/type';
 
 const PaginationProps = getPaginationProps();
-const SpinProps = getSpinProps();
 
 export type CompareFn<T> = (a: T, b: T, sortOrder?: SortOrder) => number;
 export const ColumnFilterItem = PropTypes.shape({
@@ -131,7 +130,7 @@ export const tableProps = {
   expandIconAsCell: PropTypes.looseBool,
   expandIconColumnIndex: PropTypes.number,
   expandRowByClick: PropTypes.looseBool,
-  loading: PropTypes.oneOfType([PropTypes.shape(SpinProps).loose, PropTypes.looseBool]),
+  loading: PropTypes.oneOfType([PropTypes.shape(getSpinProps()).loose, PropTypes.looseBool]),
   locale: TableLocale,
   indentSize: PropTypes.number,
   customRow: PropTypes.func,

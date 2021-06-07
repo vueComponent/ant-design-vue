@@ -15,7 +15,7 @@ const inputNumberProps = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).def(1),
   defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  tabindex: PropTypes.number,
+  tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   disabled: PropTypes.looseBool,
   size: PropTypes.oneOf(tuple('large', 'small', 'default')),
   formatter: PropTypes.func,

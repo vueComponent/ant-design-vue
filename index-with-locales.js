@@ -4,7 +4,7 @@ const req = require.context('./components', true, /^\.\/locale-provider\/(?!__te
 antd.locales = {};
 
 req.keys().forEach(mod => {
-  const match = mod.match(/\/([^/]+).js$/);
+  const match = mod.match(/\/([^/]+).ts$/);
   antd.locales[match[1]] = req(mod).default;
 });
 

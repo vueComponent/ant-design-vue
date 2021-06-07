@@ -6,19 +6,19 @@
 .@{result-prefix-cls} {
   padding: 48px 32px;
   // status color
-  &-success &-icon > .anticon {
+  &-success &-icon > .@{iconfont-css-prefix} {
     color: @success-color;
   }
 
-  &-error &-icon > .anticon {
+  &-error &-icon > .@{iconfont-css-prefix} {
     color: @error-color;
   }
 
-  &-info &-icon > .anticon {
+  &-info &-icon > .@{iconfont-css-prefix} {
     color: @info-color;
   }
 
-  &-warning &-icon > .anticon {
+  &-warning &-icon > .@{iconfont-css-prefix} {
     color: @warning-color;
   }
 
@@ -33,30 +33,31 @@
     margin-bottom: 24px;
     text-align: center;
 
-    > .anticon {
-      font-size: 72px;
+    > .@{iconfont-css-prefix} {
+      font-size: @result-icon-font-size;
     }
   }
 
   &-title {
     color: @heading-color;
-    font-size: 24px;
+    font-size: @result-title-font-size;
     line-height: 1.8;
     text-align: center;
   }
 
   &-subtitle {
     color: @text-color-secondary;
-    font-size: 14px;
+    font-size: @result-subtitle-font-size;
     line-height: 1.6;
     text-align: center;
   }
 
   &-extra {
-    margin-top: 32px;
+    margin: @result-extra-margin;
     text-align: center;
     > * {
       margin-right: 8px;
+
       &:last-child {
         margin-right: 0;
       }
@@ -69,3 +70,5 @@
     background-color: @background-color-light;
   }
 }
+
+@import './rtl';

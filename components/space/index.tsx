@@ -1,74 +1,131 @@
-import { inject, defineComponent, PropType } from 'vue';
+import {
+  defineComponent,
+  PropType,
+  ExtractPropTypes,
+  computed,
+  ref,
+  watch,
+  CSSProperties,
+} from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
-import { defaultConfigProvider, SizeType } from '../config-provider';
+import { SizeType } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
+import classNames from '../_util/classNames';
 
+export type SpaceSize = SizeType | number;
 const spaceSize = {
   small: 8,
   middle: 16,
   large: 24,
 };
+const spaceProps = {
+  prefixCls: PropTypes.string,
+  size: {
+    type: [String, Number, Array] as PropType<SpaceSize | [SpaceSize, SpaceSize]>,
+  },
+  direction: PropTypes.oneOf(tuple('horizontal', 'vertical')).def('horizontal'),
+  align: PropTypes.oneOf(tuple('start', 'end', 'center', 'baseline')),
+  wrap: PropTypes.looseBool,
+};
+
+export type SpaceProps = Partial<ExtractPropTypes<typeof spaceProps>>;
+
+function getNumberSize(size: SpaceSize) {
+  return typeof size === 'string' ? spaceSize[size] : size || 0;
+}
 
 const Space = defineComponent({
   name: 'ASpace',
-  props: {
-    prefixCls: PropTypes.string,
-    size: {
-      type: [String, Number] as PropType<number | SizeType>,
-    },
-    direction: PropTypes.oneOf(tuple('horizontal', 'vertical')),
-    align: PropTypes.oneOf(tuple('start', 'end', 'center', 'baseline')),
-  },
+  props: spaceProps,
+  slots: ['split'],
   setup(props, { slots }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
+    const { prefixCls, space, direction: directionConfig } = useConfigInject('space', props);
+    const supportFlexGap = useFlexGapSupport();
+    const size = computed(() => props.size || space.value?.size || 'small');
+    const horizontalSize = ref<number>();
+    const verticalSize = ref<number>();
+    watch(
+      size,
+      () => {
+        [horizontalSize.value, verticalSize.value] = ((Array.isArray(size.value)
+          ? size.value
+          : [size.value, size.value]) as [SpaceSize, SpaceSize]).map(item => getNumberSize(item));
+      },
+      { immediate: true },
+    );
 
+    const mergedAlign = computed(() =>
+      props.align === undefined && props.direction === 'horizontal' ? 'center' : props.align,
+    );
+    const cn = computed(() => {
+      return classNames(prefixCls.value, `${prefixCls.value}-${props.direction}`, {
+        [`${prefixCls.value}-rtl`]: directionConfig.value === 'rtl',
+        [`${prefixCls.value}-align-${mergedAlign.value}`]: mergedAlign.value,
+      });
+    });
+
+    const marginDirection = computed(() =>
+      directionConfig.value === 'rtl' ? 'marginLeft' : 'marginRight',
+    );
+    const style = computed(() => {
+      const gapStyle: CSSProperties = {};
+      if (supportFlexGap) {
+        gapStyle.columnGap = `${horizontalSize.value}px`;
+        gapStyle.rowGap = `${verticalSize.value}px`;
+      }
+      return {
+        ...gapStyle,
+        ...(props.wrap && { flexWrap: 'wrap', marginBottom: `${-verticalSize.value}px` }),
+      } as CSSProperties;
+    });
     return () => {
-      const {
-        align,
-        size = 'small',
-        direction = 'horizontal',
-        prefixCls: customizePrefixCls,
-      } = props;
+      const { wrap, direction = 'horizontal' } = props;
 
-      const { getPrefixCls } = configProvider;
-      const prefixCls = getPrefixCls('space', customizePrefixCls);
       const items = filterEmpty(slots.default?.());
       const len = items.length;
 
       if (len === 0) {
         return null;
       }
-
-      const mergedAlign = align === undefined && direction === 'horizontal' ? 'center' : align;
-
-      const someSpaceClass = {
-        [prefixCls]: true,
-        [`${prefixCls}-${direction}`]: true,
-        [`${prefixCls}-align-${mergedAlign}`]: mergedAlign,
-      };
-
-      const itemClassName = `${prefixCls}-item`;
-      const marginDirection = 'marginRight'; // directionConfig === 'rtl' ? 'marginLeft' : 'marginRight';
-
+      const split = slots.split?.();
+      const itemClassName = `${prefixCls.value}-item`;
+      const horizontalSizeVal = horizontalSize.value;
+      const latestIndex = len - 1;
       return (
-        <div class={someSpaceClass}>
-          {items.map((child, i) => (
-            <div
-              class={itemClassName}
-              key={`${itemClassName}-${i}`}
-              style={
-                i === len - 1
-                  ? {}
-                  : {
-                      [direction === 'vertical' ? 'marginBottom' : marginDirection]:
-                        typeof size === 'string' ? `${spaceSize[size]}px` : `${size}px`,
-                    }
+        <div class={cn.value} style={style.value}>
+          {items.map((child, index) => {
+            let itemStyle: CSSProperties = {};
+            if (!supportFlexGap) {
+              if (direction === 'vertical') {
+                if (index < latestIndex) {
+                  itemStyle = { marginBottom: `${horizontalSizeVal / (split ? 2 : 1)}px` };
+                }
+              } else {
+                itemStyle = {
+                  ...(index < latestIndex && {
+                    [marginDirection.value]: `${horizontalSizeVal / (split ? 2 : 1)}px`,
+                  }),
+                  ...(wrap && { paddingBottom: `${verticalSize.value}px` }),
+                };
               }
-            >
-              {child}
-            </div>
-          ))}
+            }
+
+            return (
+              <>
+                <div class={itemClassName} style={itemStyle}>
+                  {child}
+                </div>
+                {index < latestIndex && split && (
+                  <span class={`${itemClassName}-split`} style={itemStyle}>
+                    {split}
+                  </span>
+                )}
+              </>
+            );
+          })}
         </div>
       );
     };

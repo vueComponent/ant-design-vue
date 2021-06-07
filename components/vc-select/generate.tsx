@@ -139,7 +139,7 @@ export const BaseProps = () => ({
   tokenSeparators: PropTypes.array,
   tagRender: PropTypes.func,
   showAction: PropTypes.array,
-  tabindex: PropTypes.number,
+  tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   // Events
   onKeyup: PropTypes.func,
@@ -240,7 +240,7 @@ export interface SelectProps<OptionsType extends object[], ValueType> {
   tokenSeparators?: string[];
   tagRender?: (props: CustomTagProps) => VNodeChild;
   showAction?: ('focus' | 'click')[];
-  tabindex?: number;
+  tabindex?: number | string;
 
   // Events
   onKeyup?: EventHandlerNonNull;

@@ -1,22 +1,23 @@
 import { defineComponent, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 
-const skeletonTitleProps = {
+export const skeletonTitleProps = {
   prefixCls: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-export const SkeletonTitleProps = PropTypes.shape(skeletonTitleProps).loose;
+export type SkeletonTitleProps = Partial<ExtractPropTypes<typeof skeletonTitleProps>>;
 
-export type ISkeletonTitleProps = Partial<ExtractPropTypes<typeof skeletonTitleProps>>;
-
-const Title = defineComponent({
+const SkeletonTitle = defineComponent({
+  name: 'SkeletonTitle',
   props: skeletonTitleProps,
-  render() {
-    const { prefixCls, width } = this.$props;
-    const zWidth = typeof width === 'number' ? `${width}px` : width;
-    return <h3 class={prefixCls} style={{ width: zWidth }} />;
+  setup(props) {
+    return () => {
+      const { prefixCls, width } = props;
+      const zWidth = typeof width === 'number' ? `${width}px` : width;
+      return <h3 class={prefixCls} style={{ width: zWidth }} />;
+    };
   },
 });
 
-export default Title;
+export default SkeletonTitle;

@@ -1,6 +1,6 @@
 import { App, Plugin } from 'vue';
-import Anchor from './Anchor';
-import AnchorLink from './AnchorLink';
+import Anchor, { AnchorProps } from './Anchor';
+import AnchorLink, { AnchorLinkProps } from './AnchorLink';
 
 Anchor.Link = AnchorLink;
 
@@ -10,6 +10,8 @@ Anchor.install = function(app: App) {
   app.component(Anchor.Link.name, Anchor.Link);
   return app;
 };
+
+export { AnchorLinkProps, AnchorProps, AnchorLink, AnchorLink as Link };
 
 export default Anchor as typeof Anchor &
   Plugin & {

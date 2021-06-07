@@ -10,6 +10,38 @@
 
 ---
 
+## 2.2.0-beta.1
+
+`2021-06-17`
+
+- 🔥🔥🔥 虚拟 Table 独立库发布 https://www.npmjs.com/package/@surely-vue/table , 该组件是一个独立的库，目前文档示例尚未完善，他是一个完全 ts 开发的组件，有较好的类型提示，npm 上已有 API 文档，着急使用的的可以摸索着用起来了，这里有个在线体验示例，https://store.antdv.com/pro/preview/list/big-table-list
+- 🔥🔥🔥 重构大量组件，源码更加易读，性能更优，ts 类型更加全面
+  - 本版本重构组件 Anchor、Alert、Avatar、Badge、BackTop、Col、Form、Layout、Menu、Space、Spin、Switch、Row、Result、Rate
+- 🎉 Menu
+
+  - 性能更优 [#3300](https://github.com/vueComponent/ant-design-vue/issues/3300)
+  - 修复高亮不正确问题 [#4053](https://github.com/vueComponent/ant-design-vue/issues/4053)
+  - 修复控制台无效 warning [#4169](https://github.com/vueComponent/ant-design-vue/issues/4169)
+  - 更加易用，更加简单的使用单文件递归 [#4133](https://github.com/vueComponent/ant-design-vue/issues/4133)
+  - 💄 图标 icon 需要通过 slot 传递
+
+- Skeleton
+
+  - 🌟 支持 Skeleton.Avatar 占位组件。
+  - 🌟 支持 Skeleton.Button 占位组件。
+  - 🌟 支持 Skeleton.Input 占位组件。
+
+- 💄 破坏性更新
+
+  - `a-menu-item`、`a-sub-menu` 图标需要通过 slot 传递，不在通过子节点自动获取图标
+  - row gutter 支持 row-wrap， 无需使用多个 row 划分 col
+  - Menu 移除 defaultOpenKeys、defaultSelectedKeys; Switch 移除 defaultChecked; Rate 移除 defaultValue; 其它未重构组件的 defaultXxx 命名的属性请谨慎使用，在未来的版本中也会被移除。
+
+- 🌟 新增 Avatar.Group 组件
+- 🐞 修复 AutoComplete filterOptions 不生效问题 [#4170](https://github.com/vueComponent/ant-design-vue/issues/4170)
+- 🐞 修复 Select 自动宽度失效问题 [#4118](https://github.com/vueComponent/ant-design-vue/issues/4118)
+- 🐞 修复 dist 缺少国际化文件问题 [#3684](https://github.com/vueComponent/ant-design-vue/issues/3684)
+
 ## 2.1.6
 
 `2021-05-13`

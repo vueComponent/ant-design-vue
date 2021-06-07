@@ -1,7 +1,6 @@
 import {
   CSSProperties,
   defineComponent,
-  inject,
   ref,
   reactive,
   watch,
@@ -10,13 +9,13 @@ import {
   computed,
   onUnmounted,
   onUpdated,
+  ExtractPropTypes,
 } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import ResizeObserver from '../vc-resize-observer';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
-import { defaultConfigProvider } from '../config-provider';
 import { withInstall } from '../_util/type';
 import {
   addObserveTarget,
@@ -25,6 +24,7 @@ import {
   getFixedTop,
   getFixedBottom,
 } from './utils';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 function getDefaultTarget() {
   return typeof window !== 'undefined' ? window : null;
@@ -42,7 +42,7 @@ export interface AffixState {
 }
 
 // Affix
-const AffixProps = {
+const affixProps = {
   /**
    * 距离窗口顶部达到指定偏移量后触发
    */
@@ -58,12 +58,14 @@ const AffixProps = {
   onChange: PropTypes.func,
   onTestUpdatePosition: PropTypes.func,
 };
+
+export type AffixProps = Partial<ExtractPropTypes<typeof affixProps>>;
+
 const Affix = defineComponent({
   name: 'AAffix',
-  props: AffixProps,
+  props: affixProps,
   emits: ['change', 'testUpdatePosition'],
   setup(props, { slots, emit, expose }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
     const placeholderNode = ref();
     const fixedNode = ref();
     const state = reactive({
@@ -218,12 +220,12 @@ const Affix = defineComponent({
       (lazyUpdatePosition as any).cancel();
     });
 
+    const { prefixCls } = useConfigInject('affix', props);
+
     return () => {
-      const { prefixCls } = props;
       const { affixStyle, placeholderStyle } = state;
-      const { getPrefixCls } = configProvider;
       const className = classNames({
-        [getPrefixCls('affix', prefixCls)]: affixStyle,
+        [prefixCls.value]: affixStyle,
       });
       const restProps = omit(props, ['prefixCls', 'offsetTop', 'offsetBottom', 'target']);
       return (

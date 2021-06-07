@@ -48,7 +48,7 @@ export default function() {
         // Pass by HOC
         renderSelection: PropTypes.func.isRequired,
         renderPlaceholder: PropTypes.func,
-        tabindex: PropTypes.number,
+        tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
       },
       {
         tabindex: 0,

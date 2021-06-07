@@ -1,6 +1,6 @@
 import { reactive, defineComponent, nextTick, computed, watch } from 'vue';
 import FilterFilled from '@ant-design/icons-vue/FilterFilled';
-import Menu, { SubMenu, Item as MenuItem } from '../vc-menu';
+import Menu, { SubMenu, MenuItem } from '../menu';
 import closest from '../_util/dom-closest';
 import classNames from '../_util/classNames';
 import shallowequal from '../_util/shallowequal';

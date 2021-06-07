@@ -33,7 +33,7 @@ export interface InnerSelectorProps {
   searchValue: string;
   accessibilityIndex: number;
   open: boolean;
-  tabindex?: number;
+  tabindex?: number | string;
   onInputKeyDown: EventHandlerNonNull;
   onInputMouseDown: EventHandlerNonNull;
   onInputChange: EventHandlerNonNull;
@@ -57,7 +57,7 @@ export interface SelectorProps {
 
   autofocus?: boolean;
   accessibilityIndex: number;
-  tabindex?: number;
+  tabindex?: number | string;
   disabled?: boolean;
   placeholder?: VNodeChild;
   removeIcon?: RenderNode;
@@ -265,7 +265,7 @@ Selector.props = {
 
   autofocus: PropTypes.looseBool,
   accessibilityIndex: PropTypes.number,
-  tabindex: PropTypes.number,
+  tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   disabled: PropTypes.looseBool,
   placeholder: PropTypes.any,
   removeIcon: PropTypes.any,

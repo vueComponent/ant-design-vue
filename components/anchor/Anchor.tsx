@@ -1,23 +1,28 @@
-import { defineComponent, inject, nextTick, provide } from 'vue';
+import {
+  defineComponent,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  reactive,
+  ref,
+  ExtractPropTypes,
+  computed,
+} from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import Affix from '../affix';
 import scrollTo from '../_util/scrollTo';
 import getScroll from '../_util/getScroll';
-import { findDOMNode } from '../_util/props-util';
-import BaseMixin from '../_util/BaseMixin';
-import { defaultConfigProvider } from '../config-provider';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import useProvideAnchor from './context';
 
 function getDefaultContainer() {
   return window;
 }
 
 function getOffsetTop(element: HTMLElement, container: AnchorContainer): number {
-  if (!element) {
-    return 0;
-  }
-
   if (!element.getClientRects().length) {
     return 0;
   }
@@ -26,7 +31,7 @@ function getOffsetTop(element: HTMLElement, container: AnchorContainer): number 
 
   if (rect.width || rect.height) {
     if (container === window) {
-      container = element.ownerDocument.documentElement;
+      container = element.ownerDocument!.documentElement!;
       return rect.top - container.clientTop;
     }
     return rect.top - (container as HTMLElement).getBoundingClientRect().top;
@@ -35,7 +40,7 @@ function getOffsetTop(element: HTMLElement, container: AnchorContainer): number 
   return rect.top;
 }
 
-const sharpMatcherRegx = /#([^#]+)$/;
+const sharpMatcherRegx = /#(\S+)$/;
 
 type Section = {
   link: string;
@@ -44,7 +49,7 @@ type Section = {
 
 export type AnchorContainer = HTMLElement | Window;
 
-const AnchorProps = {
+const anchorProps = {
   prefixCls: PropTypes.string,
   offsetTop: PropTypes.number,
   bounds: PropTypes.number,
@@ -59,107 +64,40 @@ const AnchorProps = {
   onClick: PropTypes.func,
 };
 
-export interface AntAnchor {
-  registerLink: (link: string) => void;
-  unregisterLink: (link: string) => void;
-  $data: AnchorState;
-  scrollTo: (link: string) => void;
-  $emit?: Function;
-}
+export type AnchorProps = Partial<ExtractPropTypes<typeof anchorProps>>;
+
 export interface AnchorState {
-  activeLink: null | string;
   scrollContainer: HTMLElement | Window;
   links: string[];
   scrollEvent: any;
   animating: boolean;
-  sPrefixCls?: string;
 }
 
 export default defineComponent({
   name: 'AAnchor',
-  mixins: [BaseMixin],
   inheritAttrs: false,
-  props: AnchorProps,
+  props: anchorProps,
   emits: ['change', 'click'],
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-  data() {
-    // this.links = [];
-    // this.sPrefixCls = '';
-    return {
-      activeLink: null,
+  setup(props, { emit, attrs, slots, expose }) {
+    const { prefixCls, getTargetContainer, direction } = useConfigInject('anchor', props);
+    const inkNodeRef = ref();
+    const anchorRef = ref();
+    const state = reactive<AnchorState>({
       links: [],
-      sPrefixCls: '',
       scrollContainer: null,
       scrollEvent: null,
       animating: false,
-    } as AnchorState;
-  },
-  created() {
-    provide('antAnchor', {
-      registerLink: (link: string) => {
-        if (!this.links.includes(link)) {
-          this.links.push(link);
-        }
-      },
-      unregisterLink: (link: string) => {
-        const index = this.links.indexOf(link);
-        if (index !== -1) {
-          this.links.splice(index, 1);
-        }
-      },
-      $data: this.$data,
-      scrollTo: this.handleScrollTo,
-    } as AntAnchor);
-    provide('antAnchorContext', this);
-  },
-  mounted() {
-    nextTick(() => {
-      const { getContainer } = this;
-      this.scrollContainer = getContainer();
-      this.scrollEvent = addEventListener(this.scrollContainer, 'scroll', this.handleScroll);
-      this.handleScroll();
     });
-  },
-  updated() {
-    nextTick(() => {
-      if (this.scrollEvent) {
-        const { getContainer } = this;
-        const currentContainer = getContainer();
-        if (this.scrollContainer !== currentContainer) {
-          this.scrollContainer = currentContainer;
-          this.scrollEvent.remove();
-          this.scrollEvent = addEventListener(this.scrollContainer, 'scroll', this.handleScroll);
-          this.handleScroll();
-        }
-      }
-      this.updateInk();
+    const activeLink = ref();
+    const getContainer = computed(() => {
+      const { getContainer } = props;
+      return getContainer || getTargetContainer.value || getDefaultContainer;
     });
-  },
-  beforeUnmount() {
-    if (this.scrollEvent) {
-      this.scrollEvent.remove();
-    }
-  },
-  methods: {
-    getCurrentActiveLink(offsetTop = 0, bounds = 5) {
-      const { getCurrentAnchor } = this;
-
-      if (typeof getCurrentAnchor === 'function') {
-        return getCurrentAnchor();
-      }
-      const activeLink = '';
-      if (typeof document === 'undefined') {
-        return activeLink;
-      }
-
+    // func...
+    const getCurrentAnchor = (offsetTop = 0, bounds = 5) => {
       const linkSections: Array<Section> = [];
-      const { getContainer } = this;
-      const container = getContainer();
-      this.links.forEach(link => {
+      const container = getContainer.value();
+      state.links.forEach(link => {
         const sharpLinkMatch = sharpMatcherRegx.exec(link.toString());
         if (!sharpLinkMatch) {
           return;
@@ -181,12 +119,19 @@ export default defineComponent({
         return maxSection.link;
       }
       return '';
-    },
+    };
+    const setCurrentActiveLink = (link: string) => {
+      const { getCurrentAnchor } = props;
+      if (activeLink.value !== link) {
+        return;
+      }
+      activeLink.value = typeof getCurrentAnchor === 'function' ? getCurrentAnchor() : link;
+      emit('change', link);
+    };
+    const handleScrollTo = (link: string) => {
+      const { offsetTop, getContainer, targetOffset } = props;
 
-    handleScrollTo(link: string) {
-      const { offsetTop, getContainer, targetOffset } = this;
-
-      this.setCurrentActiveLink(link);
+      setCurrentActiveLink(link);
       const container = getContainer();
       const scrollTop = getScroll(container, true);
       const sharpLinkMatch = sharpMatcherRegx.exec(link);
@@ -201,99 +146,123 @@ export default defineComponent({
       const eleOffsetTop = getOffsetTop(targetElement, container);
       let y = scrollTop + eleOffsetTop;
       y -= targetOffset !== undefined ? targetOffset : offsetTop || 0;
-      this.animating = true;
+      state.animating = true;
 
       scrollTo(y, {
         callback: () => {
-          this.animating = false;
+          state.animating = false;
         },
         getContainer,
       });
-    },
-    setCurrentActiveLink(link: string) {
-      const { activeLink } = this;
-
-      if (activeLink !== link) {
-        this.setState({
-          activeLink: link,
-        });
-        this.$emit('change', link);
-      }
-    },
-
-    handleScroll() {
-      if (this.animating) {
+    };
+    expose({
+      scrollTo: handleScrollTo,
+    });
+    const handleScroll = () => {
+      if (state.animating) {
         return;
       }
-      const { offsetTop, bounds, targetOffset } = this;
-      const currentActiveLink = this.getCurrentActiveLink(
+      const { offsetTop, bounds, targetOffset } = props;
+      const currentActiveLink = getCurrentAnchor(
         targetOffset !== undefined ? targetOffset : offsetTop || 0,
         bounds,
       );
-      this.setCurrentActiveLink(currentActiveLink);
-    },
+      setCurrentActiveLink(currentActiveLink);
+    };
 
-    updateInk() {
-      if (typeof document === 'undefined') {
-        return;
-      }
-      const { sPrefixCls } = this;
-      const linkNode = findDOMNode(this).getElementsByClassName(
-        `${sPrefixCls}-link-title-active`,
+    const updateInk = () => {
+      const linkNode = anchorRef.value.getElementsByClassName(
+        `${prefixCls.value}-link-title-active`,
       )[0];
       if (linkNode) {
-        (this.$refs.inkNode as HTMLElement).style.top = `${linkNode.offsetTop +
+        (inkNodeRef.value as HTMLElement).style.top = `${linkNode.offsetTop +
           linkNode.clientHeight / 2 -
           4.5}px`;
       }
-    },
-  },
-
-  render() {
-    const {
-      prefixCls: customizePrefixCls,
-      offsetTop,
-      affix,
-      showInkInFixed,
-      activeLink,
-      $slots,
-      getContainer,
-    } = this;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('anchor', customizePrefixCls);
-    this.sPrefixCls = prefixCls;
-
-    const inkClass = classNames(`${prefixCls}-ink-ball`, {
-      visible: activeLink,
-    });
-
-    const wrapperClass = classNames(this.wrapperClass, `${prefixCls}-wrapper`);
-
-    const anchorClass = classNames(prefixCls, {
-      fixed: !affix && !showInkInFixed,
-    });
-
-    const wrapperStyle = {
-      maxHeight: offsetTop ? `calc(100vh - ${offsetTop}px)` : '100vh',
-      ...this.wrapperStyle,
     };
-    const anchorContent = (
-      <div class={wrapperClass} style={wrapperStyle}>
-        <div class={anchorClass}>
-          <div class={`${prefixCls}-ink`}>
-            <span class={inkClass} ref="inkNode" />
-          </div>
-          {$slots.default?.()}
-        </div>
-      </div>
-    );
 
-    return !affix ? (
-      anchorContent
-    ) : (
-      <Affix {...this.$attrs} offsetTop={offsetTop} target={getContainer}>
-        {anchorContent}
-      </Affix>
-    );
+    useProvideAnchor({
+      registerLink: (link: string) => {
+        if (!state.links.includes(link)) {
+          state.links.push(link);
+        }
+      },
+      unregisterLink: (link: string) => {
+        const index = state.links.indexOf(link);
+        if (index !== -1) {
+          state.links.splice(index, 1);
+        }
+      },
+      activeLink,
+      scrollTo: handleScrollTo,
+      handleClick: (e, info) => {
+        emit('click', e, info);
+      },
+    });
+
+    onMounted(() => {
+      nextTick(() => {
+        const container = getContainer.value();
+        state.scrollContainer = container;
+        state.scrollEvent = addEventListener(state.scrollContainer, 'scroll', handleScroll);
+        handleScroll();
+      });
+    });
+    onBeforeUnmount(() => {
+      if (state.scrollEvent) {
+        state.scrollEvent.remove();
+      }
+    });
+    onUpdated(() => {
+      if (state.scrollEvent) {
+        const currentContainer = getContainer.value();
+        if (state.scrollContainer !== currentContainer) {
+          state.scrollContainer = currentContainer;
+          state.scrollEvent.remove();
+          state.scrollEvent = addEventListener(state.scrollContainer, 'scroll', handleScroll);
+          handleScroll();
+        }
+      }
+      updateInk();
+    });
+
+    return () => {
+      const { offsetTop, affix, showInkInFixed } = props;
+      const pre = prefixCls.value;
+      const inkClass = classNames(`${pre}-ink-ball`, {
+        visible: activeLink.value,
+      });
+
+      const wrapperClass = classNames(props.wrapperClass, `${pre}-wrapper`, {
+        [`${pre}-rtl`]: direction.value === 'rtl',
+      });
+
+      const anchorClass = classNames(pre, {
+        fixed: !affix && !showInkInFixed,
+      });
+
+      const wrapperStyle = {
+        maxHeight: offsetTop ? `calc(100vh - ${offsetTop}px)` : '100vh',
+        ...props.wrapperStyle,
+      };
+      const anchorContent = (
+        <div class={wrapperClass} style={wrapperStyle} ref={anchorRef}>
+          <div class={anchorClass}>
+            <div class={`${pre}-ink`}>
+              <span class={inkClass} ref={inkNodeRef} />
+            </div>
+            {slots.default?.()}
+          </div>
+        </div>
+      );
+
+      return !affix ? (
+        anchorContent
+      ) : (
+        <Affix {...attrs} offsetTop={offsetTop} target={getContainer.value}>
+          {anchorContent}
+        </Affix>
+      );
+    };
   },
 });

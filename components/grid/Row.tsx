@@ -1,22 +1,23 @@
 import {
-  inject,
-  provide,
-  reactive,
   defineComponent,
-  HTMLAttributes,
   ref,
   onMounted,
   onBeforeUnmount,
+  ExtractPropTypes,
+  computed,
+  CSSProperties,
 } from 'vue';
 import classNames from '../_util/classNames';
 import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';
-import { defaultConfigProvider } from '../config-provider';
 import ResponsiveObserve, {
   Breakpoint,
   ScreenMap,
   responsiveArray,
 } from '../_util/responsiveObserve';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
+import useProvideRow from './context';
 
 const RowAligns = tuple('top', 'middle', 'bottom', 'stretch');
 const RowJustify = tuple('start', 'end', 'center', 'space-around', 'space-between');
@@ -27,23 +28,35 @@ export interface rowContextState {
   gutter?: [number, number];
 }
 
-export interface RowProps extends HTMLAttributes {
-  type?: 'flex';
-  gutter?: Gutter | [Gutter, Gutter];
-  align?: typeof RowAligns[number];
-  justify?: typeof RowJustify[number];
-  prefixCls?: string;
-}
+const rowProps = {
+  type: PropTypes.oneOf(['flex']),
+  align: PropTypes.oneOf(RowAligns),
+  justify: PropTypes.oneOf(RowJustify),
+  prefixCls: PropTypes.string,
+  gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]).def(0),
+  wrap: PropTypes.looseBool,
+};
 
-const ARow = defineComponent<RowProps>({
+export type RowProps = Partial<ExtractPropTypes<typeof rowProps>>;
+
+const ARow = defineComponent({
   name: 'ARow',
+  props: rowProps,
   setup(props, { slots }) {
-    const rowContext = reactive<rowContextState>({
-      gutter: undefined,
-    });
-    provide('rowContext', rowContext);
+    const { prefixCls, direction } = useConfigInject('row', props);
 
     let token: number;
+
+    const screens = ref<ScreenMap>({
+      xs: true,
+      sm: true,
+      md: true,
+      lg: true,
+      xl: true,
+      xxl: true,
+    });
+
+    const supportFlexGap = useFlexGapSupport();
 
     onMounted(() => {
       token = ResponsiveObserve.subscribe(screen => {
@@ -62,18 +75,7 @@ const ARow = defineComponent<RowProps>({
       ResponsiveObserve.unsubscribe(token);
     });
 
-    const screens = ref<ScreenMap>({
-      xs: true,
-      sm: true,
-      md: true,
-      lg: true,
-      xl: true,
-      xxl: true,
-    });
-
-    const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
-
-    const getGutter = (): [number, number] => {
+    const gutter = computed(() => {
       const results: [number, number] = [0, 0];
       const { gutter = 0 } = props;
       const normalizedGutter = Array.isArray(gutter) ? gutter : [gutter, 0];
@@ -91,47 +93,53 @@ const ARow = defineComponent<RowProps>({
         }
       });
       return results;
-    };
+    });
+
+    useProvideRow({
+      gutter,
+      supportFlexGap,
+      wrap: computed(() => props.wrap),
+    });
+
+    const classes = computed(() =>
+      classNames(prefixCls.value, {
+        [`${prefixCls.value}-no-wrap`]: props.wrap === false,
+        [`${prefixCls.value}-${props.justify}`]: props.justify,
+        [`${prefixCls.value}-${props.align}`]: props.align,
+        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+      }),
+    );
+
+    const rowStyle = computed(() => {
+      const gt = gutter.value;
+      // Add gutter related style
+      const style: CSSProperties = {};
+      const horizontalGutter = gt[0] > 0 ? `${gt[0] / -2}px` : undefined;
+      const verticalGutter = gt[1] > 0 ? `${gt[1] / -2}px` : undefined;
+
+      if (horizontalGutter) {
+        style.marginLeft = horizontalGutter;
+        style.marginRight = horizontalGutter;
+      }
+
+      if (supportFlexGap.value) {
+        // Set gap direct if flex gap support
+        style.rowGap = `${gt[1]}px`;
+      } else if (verticalGutter) {
+        style.marginTop = verticalGutter;
+        style.marginBottom = verticalGutter;
+      }
+      return style;
+    });
 
     return () => {
-      const { prefixCls: customizePrefixCls, justify, align } = props;
-      const prefixCls = getPrefixCls('row', customizePrefixCls);
-      const gutter = getGutter();
-      const classes = classNames(prefixCls, {
-        [`${prefixCls}-${justify}`]: justify,
-        [`${prefixCls}-${align}`]: align,
-      });
-      const rowStyle = {
-        ...(gutter[0] > 0
-          ? {
-              marginLeft: `${gutter[0] / -2}px`,
-              marginRight: `${gutter[0] / -2}px`,
-            }
-          : {}),
-        ...(gutter[1] > 0
-          ? {
-              marginTop: `${gutter[1] / -2}px`,
-              marginBottom: `${gutter[1] / -2}px`,
-            }
-          : {}),
-      };
-
-      rowContext.gutter = gutter;
       return (
-        <div class={classes} style={rowStyle}>
+        <div class={classes.value} style={rowStyle.value}>
           {slots.default?.()}
         </div>
       );
     };
   },
 });
-
-ARow.props = {
-  type: PropTypes.oneOf(['flex']),
-  align: PropTypes.oneOf(RowAligns),
-  justify: PropTypes.oneOf(RowJustify),
-  prefixCls: PropTypes.string,
-  gutter: PropTypes.oneOfType([PropTypes.object, PropTypes.number, PropTypes.array]).def(0),
-};
 
 export default ARow;

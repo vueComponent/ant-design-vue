@@ -1,7 +1,9 @@
-import Menu, { MenuItem } from '../../vc-menu';
+import Menu from '../../menu';
 import PropTypes from '../../_util/vue-types';
 import { OptionProps } from './Option';
 import { inject } from 'vue';
+
+const MenuItem = Menu.Item;
 
 function noop() {}
 export default {

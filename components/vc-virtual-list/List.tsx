@@ -144,6 +144,7 @@ const List = defineComponent({
           end: state.mergedData.length - 1,
           offset: undefined,
         };
+        return;
       }
 
       // Always use virtual scroll bar in avoid shaking
@@ -154,6 +155,7 @@ const List = defineComponent({
           end: state.mergedData.length - 1,
           offset: undefined,
         };
+        return;
       }
 
       let itemTop = 0;

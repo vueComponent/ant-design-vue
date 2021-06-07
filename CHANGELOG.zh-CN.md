@@ -33,8 +33,9 @@
 
 - 💄 破坏性更新
 
-  - a-menu-item、a-sub-menu 图标需要通过 slot 传递，不在通过子节点自动获取图标
+  - `a-menu-item`、`a-sub-menu` 图标需要通过 slot 传递，不在通过子节点自动获取图标
   - row gutter 支持 row-wrap， 无需使用多个 row 划分 col
+  - Menu 移除 defaultOpenKeys、defaultSelectedKeys; Switch 移除 defaultChecked; Rate 移除 defaultValue; 其它未重构组件的 defaultXxx 命名的属性请谨慎使用，在未来的版本中也会被移除。
 
 - 🌟 新增 Avatar.Group 组件
 - 🐞 修复 AutoComplete filterOptions 不生效问题 [#4170](https://github.com/vueComponent/ant-design-vue/issues/4170)

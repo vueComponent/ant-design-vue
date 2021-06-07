@@ -34,6 +34,7 @@
 
   - The `a-menu-item` and `a-sub-menu` icons need to be passed through the slot, and the icon is not automatically obtained through the sub-node
   - row gutter supports row-wrap, no need to use multiple rows to divide col
+  - `Menu` removes `defaultOpenKeys` and `defaultSelectedKeys`; `Switch` removes `defaultChecked`; `Rate` removes `defaultValue`; Please be cautious to use the defaultXxx-named attributes of other unrefactored components, and they will be removed in future versions.
 
 - 🌟 Added Avatar.Group component
 - 🐞 Fix AutoComplete filterOptions not taking effect [#4170](https://github.com/vueComponent/ant-design-vue/issues/4170)

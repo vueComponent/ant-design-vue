@@ -35,6 +35,7 @@
   - The `a-menu-item` and `a-sub-menu` icons need to be passed through the slot, and the icon is not automatically obtained through the sub-node
   - row gutter supports row-wrap, no need to use multiple rows to divide col
 
+- 🌟 Added Avatar.Group component
 - 🐞 Fix AutoComplete filterOptions not taking effect [#4170](https://github.com/vueComponent/ant-design-vue/issues/4170)
 - 🐞 Fix Select automatic width invalidation problem [#4118](https://github.com/vueComponent/ant-design-vue/issues/4118)
 - 🐞 Fix the lack of internationalized files in dist [#3684](https://github.com/vueComponent/ant-design-vue/issues/3684)

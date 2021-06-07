@@ -36,6 +36,7 @@
   - a-menu-item、a-sub-menu 图标需要通过 slot 传递，不在通过子节点自动获取图标
   - row gutter 支持 row-wrap， 无需使用多个 row 划分 col
 
+- 🌟 新增 Avatar.Group 组件
 - 🐞 修复 AutoComplete filterOptions 不生效问题 [#4170](https://github.com/vueComponent/ant-design-vue/issues/4170)
 - 🐞 修复 Select 自动宽度失效问题 [#4118](https://github.com/vueComponent/ant-design-vue/issues/4118)
 - 🐞 修复 dist 缺少国际化文件问题 [#3684](https://github.com/vueComponent/ant-design-vue/issues/3684)

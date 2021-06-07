@@ -26,7 +26,6 @@ const TreeSelect = defineComponent({
   props: initDefaultProps(TreeSelectProps(), {
     transitionName: 'slide-up',
     choiceTransitionName: '',
-    showSearch: false,
   }),
   setup() {
     return {

@@ -292,7 +292,7 @@ export default defineComponent({
       });
       const value = this.getCurrentValidValue(this.$data.inputValue);
       const newValue = this.setValue(value);
-      if (this.$attrs.onBlur) {
+      if (this.$attrs.onBlur && this.inputRef) {
         const originValue = this.inputRef.value;
         const inputValue = this.getInputDisplayValue({ focused: false, sValue: newValue });
         this.inputRef.value = inputValue;

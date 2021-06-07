@@ -21,6 +21,7 @@ const SearchInput = {
     needAlign: PropTypes.looseBool,
     ariaId: PropTypes.string,
     isMultiple: PropTypes.looseBool.def(true),
+    showSearch: PropTypes.looseBool,
   },
   emits: ['mirrorSearchValueChange'],
   setup(props, { emit }) {
@@ -126,6 +127,7 @@ const SearchInput = {
       open,
       ariaId,
       isMultiple,
+      showSearch,
     } = this.$props;
     const {
       vcTreeSelect: { onSearchInputKeyDown },
@@ -146,6 +148,7 @@ const SearchInput = {
             onKeydown={onSearchInputKeyDown}
             value={searchValue}
             disabled={disabled}
+            readonly={!showSearch}
             class={`${prefixCls}-selection-search-input`}
             aria-label="filter select"
             aria-autocomplete="list"

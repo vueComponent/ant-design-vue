@@ -1,31 +1,29 @@
-import { defineComponent, inject } from 'vue';
-import { defaultConfigProvider } from '../config-provider';
+import { defineComponent, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getSlot } from '../_util/props-util';
+import { flattenChildren } from '../_util/props-util';
+import useConfigInject from '../_util/hooks/useConfigInject';
+
+const breadcrumbSeparator = {
+  prefixCls: PropTypes.string,
+};
+export type BreadcrumbSeparator = Partial<ExtractPropTypes<typeof breadcrumbSeparator>>;
 
 export default defineComponent({
   name: 'ABreadcrumbSeparator',
   __ANT_BREADCRUMB_SEPARATOR: true,
   inheritAttrs: false,
-  props: {
-    prefixCls: PropTypes.string,
-  },
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-  render() {
-    const { prefixCls: customizePrefixCls } = this;
-    const { separator, class: className, ...restAttrs } = this.$attrs;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('breadcrumb', customizePrefixCls);
+  props: breadcrumbSeparator,
+  setup(props, { slots, attrs }) {
+    const { prefixCls } = useConfigInject('breadcrumb', props);
 
-    const children = getSlot(this);
-    return (
-      <span class={[`${prefixCls}-separator`, className]} {...restAttrs}>
-        {children.length > 0 ? children : '/'}
-      </span>
-    );
+    return () => {
+      const { separator, class: className, ...restAttrs } = attrs;
+      const children = flattenChildren(slots.default?.());
+      return (
+        <span class={[`${prefixCls.value}-separator`, className]} {...restAttrs}>
+          {children.length > 0 ? children : '/'}
+        </span>
+      );
+    };
   },
 });

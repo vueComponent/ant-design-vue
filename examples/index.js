@@ -1,6 +1,7 @@
 import '@babel/polyfill';
 import 'ant-design-vue/style';
 import { createApp, version } from 'vue';
+import { createRouter, createWebHistory } from 'vue-router';
 import App from './App.vue';
 import antd from 'ant-design-vue/index.ts';
 
@@ -9,9 +10,16 @@ console.log('Vue version: ', version);
 const basic = (_, { slots }) => {
   return slots && slots.default && slots.default();
 };
+
+const router = createRouter({
+  history: createWebHistory(),
+  fallback: false,
+  routes: [],
+});
 const app = createApp(App);
+app.use(router);
 app
-  .component('demo-sort', basic)
+  .component('DemoSort', basic)
   .component('md', basic)
   .component('api', basic)
   .component('CN', basic)

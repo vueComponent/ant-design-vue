@@ -27,9 +27,9 @@ function generator({ suffixCls, tagName, name }: GeneratorArgument) {
         const { prefixCls } = useConfigInject(suffixCls, props);
         return () => {
           const basicComponentProps = {
+            ...props,
             prefixCls: prefixCls.value,
             tagName,
-            ...props,
           };
           return <BasicComponent {...basicComponentProps}>{slots.default?.()}</BasicComponent>;
         };

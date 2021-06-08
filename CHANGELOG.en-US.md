@@ -10,6 +10,14 @@
 
 ---
 
+## 2.2.0-beta.2
+
+`2021-06-08`
+
+- 🐞 Fix PageHeader display extension problem [4de73](https://github.com/vueComponent/ant-design-vue/commit/4de7737907d485d3dd3be44b70e599cc53edb171)
+- 🐞 Fix the problem that some components cannot be rendered normally under Vue3.1[#4173](https://github.com/vueComponent/ant-design-vue/issues/4173)
+- 🐞 Fix Menu.Divider name error problem [6c5c84](https://github.com/vueComponent/ant-design-vue/commit/6c5c84a3fc4b8abcd7aed0922852a64e0ac293c7)
+
 ## 2.2.0-beta.1
 
 `2021-06-17`

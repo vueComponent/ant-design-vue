@@ -10,9 +10,17 @@
 
 ---
 
+## 2.2.0-beta.2
+
+`2021-06-08`
+
+- 🐞 修复 PageHeader 显示多余字符问题 [4de773](https://github.com/vueComponent/ant-design-vue/commit/4de7737907d485d3dd3be44b70e599cc53edb171)
+- 🐞 修复部分组件不能在 Vue3.1 下不能正常渲染问题 [#4173](https://github.com/vueComponent/ant-design-vue/issues/4173)
+- 🐞 修复 Menu.Divider 名称错误问题 [6c5c84](https://github.com/vueComponent/ant-design-vue/commit/6c5c84a3fc4b8abcd7aed0922852a64e0ac293c7)
+
 ## 2.2.0-beta.1
 
-`2021-06-17`
+`2021-06-07`
 
 - 🔥🔥🔥 虚拟 Table 独立库发布 https://www.npmjs.com/package/@surely-vue/table , 该组件是一个独立的库，目前文档示例尚未完善，他是一个完全 ts 开发的组件，有较好的类型提示，npm 上已有 API 文档，着急使用的的可以摸索着用起来了，这里有个在线体验示例，https://store.antdv.com/pro/preview/list/big-table-list
 - 🔥🔥🔥 重构大量组件，源码更加易读，性能更优，ts 类型更加全面

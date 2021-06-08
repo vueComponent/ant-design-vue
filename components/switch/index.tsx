@@ -7,6 +7,7 @@ import {
   computed,
   onMounted,
   nextTick,
+  watch,
 } from 'vue';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import PropTypes from '../_util/vue-types';
@@ -27,7 +28,6 @@ const switchProps = {
   checkedChildren: PropTypes.any,
   unCheckedChildren: PropTypes.any,
   tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  defaultChecked: PropTypes.looseBool,
   autofocus: PropTypes.looseBool,
   loading: PropTypes.looseBool,
   checked: PropTypes.looseBool,
@@ -59,6 +59,14 @@ const Switch = defineComponent({
         '`value` is not validate prop, do you mean `checked`?',
       );
     });
+    const checked = ref(props.checked !== undefined ? !!props.checked : !!attrs.defaultChecked);
+
+    watch(
+      () => props.checked,
+      () => {
+        checked.value = !!props.checked;
+      },
+    );
 
     const configProvider = inject('configProvider', defaultConfigProvider);
     const { getPrefixCls } = configProvider;
@@ -75,9 +83,6 @@ const Switch = defineComponent({
     const prefixCls = computed(() => {
       return getPrefixCls('switch', props.prefixCls);
     });
-    const checked = computed(() => {
-      return 'checked' in props ? !!props.checked : !!props.defaultChecked;
-    });
 
     onMounted(() => {
       nextTick(() => {
@@ -90,6 +95,9 @@ const Switch = defineComponent({
     const setChecked = (check: boolean, e: MouseEvent | KeyboardEvent) => {
       if (props.disabled) {
         return;
+      }
+      if (props.checked === undefined) {
+        checked.value = check;
       }
       emit('update:checked', check);
       emit('change', check, e);

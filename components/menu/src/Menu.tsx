@@ -123,7 +123,7 @@ export default defineComponent({
       { immediate: true },
     );
     watchEffect(() => {
-      if ('activeKey' in props) {
+      if (props.activeKey !== undefined) {
         let keys = [];
         const menuInfo = props.activeKey
           ? (keyMapStore.value[props.activeKey] as UnwrapRef<StoreMenuInfo>)
@@ -194,7 +194,7 @@ export default defineComponent({
         selectedKeys: newSelectedKeys,
       };
       if (!shallowEqual(newSelectedKeys, mergedSelectedKeys.value)) {
-        if (!('selectedKeys' in props)) {
+        if (props.selectedKeys === undefined) {
           mergedSelectedKeys.value = newSelectedKeys;
         }
         emit('update:selectedKeys', newSelectedKeys);
@@ -223,11 +223,10 @@ export default defineComponent({
     );
 
     const changeActiveKeys = (keys: Key[]) => {
-      if ('activeKey' in props) {
-        emit('update:activeKey', keys[keys.length - 1]);
-      } else {
+      if (props.activeKey === undefined) {
         activeKeys.value = keys;
       }
+      emit('update:activeKey', keys[keys.length - 1]);
     };
     const disabled = computed(() => !!props.disabled);
     const isRtl = computed(() => direction.value === 'rtl');

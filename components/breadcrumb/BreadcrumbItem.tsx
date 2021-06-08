@@ -8,8 +8,8 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 const breadcrumbItemProps = {
   prefixCls: PropTypes.string,
   href: PropTypes.string,
-  separator: PropTypes.VNodeChild.def('/'),
-  overlay: PropTypes.VNodeChild,
+  separator: PropTypes.any,
+  overlay: PropTypes.any,
 };
 
 export type BreadcrumbItemProps = Partial<ExtractPropTypes<typeof breadcrumbItemProps>>;
@@ -17,6 +17,7 @@ export default defineComponent({
   name: 'ABreadcrumbItem',
   __ANT_BREADCRUMB_ITEM: true,
   props: breadcrumbItemProps,
+  slots: ['separator', 'overlay'],
   setup(props, { slots }) {
     const { prefixCls } = useConfigInject('breadcrumb', props);
     /**
@@ -39,11 +40,11 @@ export default defineComponent({
     };
 
     return () => {
-      const separator = getPropsSlot(slots, props, 'separator');
+      const separator = getPropsSlot(slots, props, 'separator') ?? '/';
       const children = getPropsSlot(slots, props);
       let link: JSX.Element;
 
-      if ('href' in props) {
+      if (props.href !== undefined) {
         link = <a class={`${prefixCls.value}-link`}>{children}</a>;
       } else {
         link = <span class={`${prefixCls.value}-link`}>{children}</span>;
@@ -54,9 +55,7 @@ export default defineComponent({
         return (
           <span>
             {link}
-            {separator && separator !== '' && (
-              <span class={`${prefixCls.value}-separator`}>{separator}</span>
-            )}
+            {separator && <span class={`${prefixCls.value}-separator`}>{separator}</span>}
           </span>
         );
       }

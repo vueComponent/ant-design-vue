@@ -1,6 +1,6 @@
 import { defineComponent, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getPropsSlot } from '../_util/props-util';
+import { flattenChildren } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 const breadcrumbSeparator = {
@@ -18,8 +18,7 @@ export default defineComponent({
 
     return () => {
       const { separator, class: className, ...restAttrs } = attrs;
-      const children = getPropsSlot(slots, props) || [];
-
+      const children = flattenChildren(slots.default?.());
       return (
         <span class={[`${prefixCls.value}-separator`, className]} {...restAttrs}>
           {children.length > 0 ? children : '/'}

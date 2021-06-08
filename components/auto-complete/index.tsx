@@ -42,7 +42,7 @@ const AutoComplete = defineComponent({
   OptGroup: { ...OptGroup, name: 'AAutoCompleteOptGroup' },
   setup(props, { slots }) {
     warning(
-      !('dataSource' in props || 'dataSource' in slots),
+      !(props.dataSource !== undefined || 'dataSource' in slots),
       'AutoComplete',
       '`dataSource` is deprecated, please use `options` instead.',
     );

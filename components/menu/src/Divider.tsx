@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'Divider',
+  name: 'AMenuDivider',
   props: {
     prefixCls: String,
   },

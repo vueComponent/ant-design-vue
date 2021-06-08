@@ -155,7 +155,7 @@ const Base = defineComponent<InternalBlockProps>({
     );
 
     watchEffect(() => {
-      if (!('content' in props)) {
+      if (props.content === undefined) {
         warning(
           !props.editable,
           'Typography',
@@ -437,7 +437,7 @@ const Base = defineComponent<InternalBlockProps>({
       const { editing } = editable.value;
       const children =
         props.ellipsis || props.editable
-          ? 'content' in props
+          ? props.content !== undefined
             ? props.content
             : slots.default?.()
           : slots.default

@@ -44,6 +44,7 @@ export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<typeof tagProps
 
 const Tag = defineComponent({
   name: 'ATag',
+  props: tagProps,
   emits: ['update:visible', 'close'],
   setup(props: TagProps, { slots, emit, attrs }) {
     const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
@@ -136,8 +137,6 @@ const Tag = defineComponent({
     };
   },
 });
-
-Tag.props = tagProps;
 
 Tag.CheckableTag = CheckableTag;
 

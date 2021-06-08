@@ -145,7 +145,7 @@ const PageHeader = defineComponent({
           <div class={className}>
             {renderBreadcrumb()}
             {renderTitle()}
-            {children.length && renderChildren(children)}
+            {children.length ? renderChildren(children) : null}
             {renderFooter()}
           </div>
         </ResizeObserver>

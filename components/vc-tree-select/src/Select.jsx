@@ -885,7 +885,19 @@ const Select = {
       const { keyCode } = event;
 
       if (KeyCode.BACKSPACE === keyCode && this.isMultiple() && !searchValue && valueList.length) {
-        const lastValue = valueList[valueList.length - 1].value;
+        let lastValue = valueList[valueList.length - 1].value;
+        const { treeCheckStrictly } = this.$props;
+        if (!treeCheckStrictly) {
+          let cur = valueEntities[lastValue];
+          while (cur) {
+            if (valueList.some(j => j.value === cur.value)) {
+              lastValue = cur.value;
+              cur = cur.parent;
+            } else {
+              cur = null;
+            }
+          }
+        }
         this.onMultipleSelectorRemove(event, lastValue);
       }
     },

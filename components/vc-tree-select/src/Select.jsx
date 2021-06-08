@@ -880,12 +880,24 @@ const Select = {
     },
 
     onSearchInputKeyDown(event) {
-      const { _searchValue: searchValue, _valueList: valueList } = this.$data;
+      const { _searchValue: searchValue, _valueList: valueList, _valueEntities: valueEntities } = this.$data;
 
       const { keyCode } = event;
 
       if (KeyCode.BACKSPACE === keyCode && this.isMultiple() && !searchValue && valueList.length) {
-        const lastValue = valueList[valueList.length - 1].value;
+        let lastValue = valueList[valueList.length - 1].value;
+        const { showCheckedStrategy } = this.$props;
+        if (showCheckedStrategy === SHOW_PARENT) {
+          let cur = valueEntities[lastValue];
+          while (cur) {
+            if (valueList.some(j => j.value === cur.value)) {
+              lastValue = cur.value;
+              cur = cur.parent;
+            } else {
+              cur = null;
+            }
+          }
+        }
         this.onMultipleSelectorRemove(event, lastValue);
       }
     },

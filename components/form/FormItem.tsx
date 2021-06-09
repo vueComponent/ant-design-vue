@@ -108,7 +108,7 @@ export default defineComponent({
   __ANT_NEW_FORM_ITEM: true,
   props: formItemProps,
   slots: ['help', 'label', 'extra'],
-  setup(props, { slots, attrs }) {
+  setup(props, { slots, attrs, expose }) {
     warning(props.prop === undefined, `\`prop\` is deprecated. Please use \`name\` instead.`);
     const eventKey = `form-item-${++indexGuid}`;
     const { prefixCls } = useConfigInject('form', props);
@@ -272,6 +272,12 @@ export default defineComponent({
         control.focus();
       }
     };
+    expose({
+      onFieldBlur,
+      onFieldChange,
+      clearValidate,
+      resetField,
+    });
     formContext.addField(eventKey, {
       fieldValue,
       fieldId,

@@ -1,3 +1,4 @@
+import { computed } from 'vue';
 import { Ref, inject, InjectionKey, provide, ComputedRef } from 'vue';
 
 export interface RowContext {
@@ -13,7 +14,11 @@ const useProvideRow = (state: RowContext) => {
 };
 
 const useInjectRow = () => {
-  return inject(RowContextKey);
+  return inject(RowContextKey, {
+    gutter: computed(() => undefined),
+    wrap: computed(() => undefined),
+    supportFlexGap: computed(() => undefined),
+  });
 };
 
 export { useInjectRow, useProvideRow };

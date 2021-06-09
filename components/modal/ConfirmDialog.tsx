@@ -42,8 +42,8 @@ const ConfirmDialog: FunctionalComponent<ConfirmDialogProps> = props => {
   const okText = props.okText || (okCancel ? runtimeLocale.okText : runtimeLocale.justOkText);
   const cancelText = props.cancelText || runtimeLocale.cancelText;
   const autoFocusButton = props.autoFocusButton === null ? false : props.autoFocusButton || 'ok';
-  const transitionName = props.transitionName || 'zoom';
-  const maskTransitionName = props.maskTransitionName || 'fade';
+  const transitionName = props.transitionName || 'ant-zoom';
+  const maskTransitionName = props.maskTransitionName || 'ant-fade';
 
   const classString = classNames(
     contentPrefixCls,

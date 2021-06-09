@@ -153,8 +153,8 @@ export default defineComponent({
   inheritAttrs: false,
   props: initDefaultProps(modalProps, {
     width: 520,
-    transitionName: 'zoom',
-    maskTransitionName: 'fade',
+    transitionName: 'ant-zoom',
+    maskTransitionName: 'ant-fade',
     confirmLoading: false,
     visible: false,
     okType: 'primary',

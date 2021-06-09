@@ -260,13 +260,13 @@ export default defineComponent({
         </div>
       );
 
-      if (!overflowDisabled.value) {
+      if (!overflowDisabled.value && mode.value !== 'inline') {
         const triggerMode = triggerModeRef.value;
         titleNode = (
           <PopupTrigger
             mode={triggerMode}
             prefixCls={subMenuPrefixClsValue}
-            visible={!props.internalPopupClose && open.value && mode.value !== 'inline'}
+            visible={!props.internalPopupClose && open.value}
             popupClassName={popupClassName.value}
             popupOffset={props.popupOffset}
             disabled={mergedDisabled.value}

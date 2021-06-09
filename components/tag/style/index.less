@@ -16,13 +16,8 @@
   background: @tag-default-bg;
   border: @border-width-base @border-style-base @border-color-base;
   border-radius: @border-radius-base;
-  cursor: default;
   opacity: 1;
-  transition: all 0.3s @ease-in-out-circ;
-
-  &:hover {
-    opacity: 0.85;
-  }
+  transition: all 0.3s;
 
   &,
   a,
@@ -36,14 +31,12 @@
     padding: 0 8px;
   }
 
-  .@{iconfont-css-prefix}-close {
-    .iconfont-size-under-12px(10px);
-
+  &-close-icon {
     margin-left: 3px;
     color: @text-color-secondary;
-    font-weight: bold;
+    font-size: 10px;
     cursor: pointer;
-    transition: all 0.3s @ease-in-out-circ;
+    transition: all 0.3s;
 
     &:hover {
       color: @heading-color;
@@ -91,8 +84,9 @@
     @lightColor: '@{color}-1';
     @lightBorderColor: '@{color}-3';
     @darkColor: '@{color}-6';
+    @textColor: '@{color}-7';
     &-@{color} {
-      color: @@darkColor;
+      color: @@textColor;
       background: @@lightColor;
       border-color: @@lightBorderColor;
     }
@@ -127,3 +121,5 @@
     margin-left: 7px;
   }
 }
+
+@import './rtl';

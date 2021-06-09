@@ -1,7 +1,7 @@
-import { inject, defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, computed } from 'vue';
 import classNames from '../_util/classNames';
-import { defaultConfigProvider } from '../config-provider';
 import PropTypes from '../_util/vue-types';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 const CheckableTag = defineComponent({
   name: 'ACheckableTag',
@@ -17,7 +17,7 @@ const CheckableTag = defineComponent({
   },
   emits: ['update:checked', 'change', 'click'],
   setup(props, { slots, emit }) {
-    const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
+    const { prefixCls } = useConfigInject('tag', props);
     const handleClick = (e: MouseEvent) => {
       const { checked } = props;
       emit('update:checked', !checked);
@@ -25,16 +25,16 @@ const CheckableTag = defineComponent({
       emit('click', e);
     };
 
-    return () => {
-      const { checked, prefixCls: customizePrefixCls } = props;
-      const prefixCls = getPrefixCls('tag', customizePrefixCls);
-      const cls = classNames(prefixCls, {
-        [`${prefixCls}-checkable`]: true,
-        [`${prefixCls}-checkable-checked`]: checked,
-      });
+    const cls = computed(() =>
+      classNames(prefixCls.value, {
+        [`${prefixCls.value}-checkable`]: true,
+        [`${prefixCls.value}-checkable-checked`]: props.checked,
+      }),
+    );
 
+    return () => {
       return (
-        <span class={cls} onClick={handleClick}>
+        <span class={cls.value} onClick={handleClick}>
           {slots.default?.()}
         </span>
       );

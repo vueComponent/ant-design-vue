@@ -1,13 +1,16 @@
-import { App, defineComponent, inject, Plugin } from 'vue';
+import { App, defineComponent, ExtractPropTypes, ImgHTMLAttributes, inject, Plugin } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 import ImageInternal from '../vc-image';
-import { ImageProps, ImagePropsType } from '../vc-image/src/Image';
-
+import { imageProps } from '../vc-image/src/Image';
 import PreviewGroup from './PreviewGroup';
-const Image = defineComponent({
+
+export type ImageProps = Partial<
+  ExtractPropTypes<typeof imageProps> & Omit<ImgHTMLAttributes, 'placeholder' | 'onClick'>
+>;
+const Image = defineComponent<ImageProps>({
   name: 'AImage',
   inheritAttrs: false,
-  props: ImageProps,
+  props: imageProps as any,
   setup(props, ctx) {
     const { slots, attrs } = ctx;
     const configProvider = inject('configProvider', defaultConfigProvider);
@@ -19,7 +22,7 @@ const Image = defineComponent({
   },
 });
 
-export { ImageProps, ImagePropsType };
+export { imageProps };
 
 Image.PreviewGroup = PreviewGroup;
 

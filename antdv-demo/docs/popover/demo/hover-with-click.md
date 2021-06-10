@@ -11,7 +11,6 @@ The following example shows how to create a popover which can be hovered and cli
 ```vue
 <template>
   <a-popover
-    style="width: 500px"
     title="Hover title"
     trigger="hover"
     :visible="hovered"

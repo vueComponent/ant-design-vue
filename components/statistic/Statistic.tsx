@@ -1,10 +1,10 @@
-import { defineComponent, inject, PropType } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { getComponent } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { defaultConfigProvider } from '../config-provider';
 import StatisticNumber from './Number';
 import { countdownValueType } from './utils';
+import Skeleton from '../skeleton/Skeleton';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const StatisticProps = {
   prefixCls: PropTypes.string,
@@ -22,6 +22,7 @@ export const StatisticProps = {
   suffix: PropTypes.VNodeChild,
   title: PropTypes.VNodeChild,
   onFinish: PropTypes.func,
+  loading: PropTypes.looseBool,
 };
 
 export default defineComponent({
@@ -29,45 +30,41 @@ export default defineComponent({
   props: initDefaultProps(StatisticProps, {
     decimalSeparator: '.',
     groupSeparator: ',',
+    loading: false,
   }),
-
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-
-  render() {
-    const { prefixCls: customizePrefixCls, value = 0, valueStyle, valueRender } = this.$props;
-    const { getPrefixCls } = this.configProvider;
-    const prefixCls = getPrefixCls('statistic', customizePrefixCls);
-
-    const title = getComponent(this, 'title');
-    const prefix = getComponent(this, 'prefix');
-    const suffix = getComponent(this, 'suffix');
-    const formatter = getComponent(this, 'formatter', {}, false);
-    const props = {
-      ...this.$props,
-      prefixCls,
-      value,
-      formatter,
-    };
-    // data-for-update just for update component
-    // https://github.com/vueComponent/ant-design-vue/pull/3170
-    let valueNode = <StatisticNumber data-for-update={Date.now()} {...props} />;
-    if (valueRender) {
-      valueNode = valueRender(valueNode);
-    }
-
-    return (
-      <div class={prefixCls}>
-        {title && <div class={`${prefixCls}-title`}>{title}</div>}
-        <div style={valueStyle} class={`${prefixCls}-content`}>
-          {prefix && <span class={`${prefixCls}-content-prefix`}>{prefix}</span>}
-          {valueNode}
-          {suffix && <span class={`${prefixCls}-content-suffix`}>{suffix}</span>}
+  slots: ['title', 'prefix', 'suffix', 'formatter'],
+  setup(props, { slots }) {
+    const { prefixCls, direction } = useConfigInject('statistic', props);
+    return () => {
+      const { value = 0, valueStyle, valueRender } = props;
+      const pre = prefixCls.value;
+      const title = props.title ?? slots.title?.();
+      const prefix = props.prefix ?? slots.prefix?.();
+      const suffix = props.suffix ?? slots.suffix?.();
+      const formatter = props.formatter ?? slots.formatter;
+      // data-for-update just for update component
+      // https://github.com/vueComponent/ant-design-vue/pull/3170
+      let valueNode = (
+        <StatisticNumber
+          data-for-update={Date.now()}
+          {...{ ...props, prefixCls: pre, value, formatter }}
+        />
+      );
+      if (valueRender) {
+        valueNode = valueRender(valueNode);
+      }
+      return (
+        <div class={[pre, { [`${pre}-rtl`]: direction.value === 'rtl' }]}>
+          {title && <div class={`${pre}-title`}>{title}</div>}
+          <Skeleton paragraph={false} loading={props.loading}>
+            <div style={valueStyle} class={`${pre}-content`}>
+              {prefix && <span class={`${pre}-content-prefix`}>{prefix}</span>}
+              {valueNode}
+              {suffix && <span class={`${pre}-content-suffix`}>{suffix}</span>}
+            </div>
+          </Skeleton>
         </div>
-      </div>
-    );
+      );
+    };
   },
 });

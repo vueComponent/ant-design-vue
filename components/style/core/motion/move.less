@@ -9,6 +9,16 @@
   .@{name}-leave {
     animation-timing-function: @ease-in-circ;
   }
+
+  .make-motion(@className, @keyframeName);
+  .@{className}-enter,
+  .@{className}-appear {
+    opacity: 0;
+    animation-timing-function: @ease-out-circ;
+  }
+  .@{className}-leave {
+    animation-timing-function: @ease-in-circ;
+  }
 }
 
 .move-motion(move-up, antMoveUp);

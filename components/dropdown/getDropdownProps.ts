@@ -3,8 +3,10 @@ import { PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 export default () => ({
   trigger: {
-    type: Array as PropType<('click' | 'hover' | 'contextmenu')[]>,
-    default: () => ['hover'],
+    type: [Array, String] as PropType<
+      ('click' | 'hover' | 'contextmenu')[] | 'click' | 'hover' | 'contextmenu'
+    >,
+    default: 'hover',
   },
   overlay: PropTypes.any,
   visible: PropTypes.looseBool,

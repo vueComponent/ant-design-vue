@@ -43,7 +43,7 @@ export default defineComponent({
 
     const stopTimer = () => {
       const { value } = props;
-      if (countdownId) {
+      if (countdownId.value) {
         clearInterval(countdownId.value);
         countdownId.value = undefined;
 

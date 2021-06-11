@@ -29,8 +29,8 @@ export default defineComponent({
       'hover',
     ),
     alignPoint: PropTypes.looseBool,
-    showAction: PropTypes.array.def([]),
-    hideAction: PropTypes.array.def([]),
+    showAction: PropTypes.array,
+    hideAction: PropTypes.array,
     getPopupContainer: PropTypes.func,
     visible: PropTypes.looseBool,
     defaultVisible: PropTypes.looseBool.def(false),
@@ -177,7 +177,6 @@ export default defineComponent({
     if (!triggerHideAction && trigger.indexOf('contextmenu') !== -1) {
       triggerHideAction = ['click'];
     }
-
     const triggerProps = {
       ...otherProps,
       prefixCls,

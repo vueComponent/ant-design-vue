@@ -811,7 +811,7 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
             }
             return false;
           }}
-          className={classNames({
+          class={classNames({
             [`${prefixCls}-panel-focused`]:
               mergedActivePickerIndex === 0 ? !startTyping : !endTyping,
           })}
@@ -938,9 +938,9 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
 
     let mergedNodes: React.ReactNode = (
       <>
-        <div className={`${prefixCls}-panels`}>{panels}</div>
+        <div class={`${prefixCls}-panels`}>{panels}</div>
         {(extraNode || rangesNode) && (
-          <div className={`${prefixCls}-footer`}>
+          <div class={`${prefixCls}-footer`}>
             {extraNode}
             {rangesNode}
           </div>
@@ -954,7 +954,7 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
 
     return (
       <div
-        className={`${prefixCls}-panel-container`}
+        class={`${prefixCls}-panel-container`}
         style={{ marginLeft: panelLeft }}
         ref={panelDivRef}
         onMouseDown={e => {
@@ -968,10 +968,10 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
 
   const rangePanel = (
     <div
-      className={classNames(`${prefixCls}-range-wrapper`, `${prefixCls}-${picker}-range-wrapper`)}
+      class={classNames(`${prefixCls}-range-wrapper`, `${prefixCls}-${picker}-range-wrapper`)}
       style={{ minWidth: popupMinWidth }}
     >
-      <div className={`${prefixCls}-range-arrow`} style={arrowPositionStyle} />
+      <div class={`${prefixCls}-range-arrow`} style={arrowPositionStyle} />
 
       {renderPanels()}
     </div>
@@ -980,7 +980,7 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
   // ============================= Icons =============================
   let suffixNode: React.ReactNode;
   if (suffixIcon) {
-    suffixNode = <span className={`${prefixCls}-suffix`}>{suffixIcon}</span>;
+    suffixNode = <span class={`${prefixCls}-suffix`}>{suffixIcon}</span>;
   }
 
   let clearNode: React.ReactNode;
@@ -1010,9 +1010,9 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
           triggerChange(values, null);
           triggerOpen(false, mergedActivePickerIndex);
         }}
-        className={`${prefixCls}-clear`}
+        class={`${prefixCls}-clear`}
       >
-        {clearIcon || <span className={`${prefixCls}-clear-btn`} />}
+        {clearIcon || <span class={`${prefixCls}-clear-btn`} />}
       </span>
     );
   }
@@ -1077,7 +1077,7 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
       >
         <div
           ref={containerRef}
-          className={classNames(prefixCls, `${prefixCls}-range`, className, {
+          class={classNames(prefixCls, `${prefixCls}-range`, className, {
             [`${prefixCls}-disabled`]: mergedDisabled[0] && mergedDisabled[1],
             [`${prefixCls}-focused`]: mergedActivePickerIndex === 0 ? startFocused : endFocused,
             [`${prefixCls}-rtl`]: direction === 'rtl',
@@ -1090,7 +1090,7 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
           {...getDataOrAriaProps(props)}
         >
           <div
-            className={classNames(`${prefixCls}-input`, {
+            class={classNames(`${prefixCls}-input`, {
               [`${prefixCls}-input-active`]: mergedActivePickerIndex === 0,
               [`${prefixCls}-input-placeholder`]: !!startHoverValue,
             })}
@@ -1112,11 +1112,11 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
               autoComplete={autoComplete}
             />
           </div>
-          <div className={`${prefixCls}-range-separator`} ref={separatorRef}>
+          <div class={`${prefixCls}-range-separator`} ref={separatorRef}>
             {separator}
           </div>
           <div
-            className={classNames(`${prefixCls}-input`, {
+            class={classNames(`${prefixCls}-input`, {
               [`${prefixCls}-input-active`]: mergedActivePickerIndex === 1,
               [`${prefixCls}-input-placeholder`]: !!endHoverValue,
             })}
@@ -1137,7 +1137,7 @@ function InnerRangePicker<DateType>(props: RangePickerProps<DateType>) {
             />
           </div>
           <div
-            className={`${prefixCls}-active-bar`}
+            class={`${prefixCls}-active-bar`}
             style={{
               ...activeBarPositionStyle,
               width: activeBarWidth,

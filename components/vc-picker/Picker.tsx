@@ -381,7 +381,7 @@ function InnerPicker<DateType>(props: PickerProps<DateType>) {
     <PickerPanel<DateType>
       {...panelProps}
       generateConfig={generateConfig}
-      className={classNames({
+      class={classNames({
         [`${prefixCls}-panel-focused`]: !typing,
       })}
       value={selectedValue}
@@ -406,8 +406,8 @@ function InnerPicker<DateType>(props: PickerProps<DateType>) {
 
   const panel = (
     <div
-      className={`${prefixCls}-panel-container`}
-      onMouseDown={(e) => {
+      class={`${prefixCls}-panel-container`}
+      onMousedown={(e) => {
         e.preventDefault();
       }}
     >
@@ -417,27 +417,27 @@ function InnerPicker<DateType>(props: PickerProps<DateType>) {
 
   let suffixNode: React.ReactNode;
   if (suffixIcon) {
-    suffixNode = <span className={`${prefixCls}-suffix`}>{suffixIcon}</span>;
+    suffixNode = <span class={`${prefixCls}-suffix`}>{suffixIcon}</span>;
   }
 
   let clearNode: React.ReactNode;
   if (allowClear && mergedValue && !disabled) {
     clearNode = (
       <span
-        onMouseDown={(e) => {
+        onMousedown={(e) => {
           e.preventDefault();
           e.stopPropagation();
         }}
-        onMouseUp={(e) => {
+        onMouseup={(e) => {
           e.preventDefault();
           e.stopPropagation();
           triggerChange(null);
           triggerOpen(false);
         }}
-        className={`${prefixCls}-clear`}
+        class={`${prefixCls}-clear`}
         role="button"
       >
-        {clearIcon || <span className={`${prefixCls}-clear-btn`} />}
+        {clearIcon || <span class={`${prefixCls}-clear-btn`} />}
       </span>
     );
   }
@@ -486,21 +486,21 @@ function InnerPicker<DateType>(props: PickerProps<DateType>) {
         direction={direction}
       >
         <div
-          className={classNames(prefixCls, className, {
+          class={classNames(prefixCls, className, {
             [`${prefixCls}-disabled`]: disabled,
             [`${prefixCls}-focused`]: focused,
             [`${prefixCls}-rtl`]: direction === 'rtl',
           })}
           style={style}
-          onMouseDown={onMouseDown}
-          onMouseUp={onInternalMouseUp}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          onContextMenu={onContextMenu}
+          onMousedown={onMouseDown}
+          onMouseup={onInternalMouseUp}
+          onMouseenter={onMouseEnter}
+          onMouseleave={onMouseLeave}
+          onContextmenu={onContextMenu}
           onClick={onClick}
         >
           <div
-            className={classNames(`${prefixCls}-input`, {
+            class={classNames(`${prefixCls}-input`, {
               [`${prefixCls}-input-placeholder`]: !!hoverValue,
             })}
             ref={inputDivRef}
@@ -509,19 +509,19 @@ function InnerPicker<DateType>(props: PickerProps<DateType>) {
               id={id}
               tabIndex={tabIndex}
               disabled={disabled}
-              readOnly={inputReadOnly || typeof formatList[0] === 'function' || !typing}
+              readonly={inputReadOnly || typeof formatList[0] === 'function' || !typing}
               value={hoverValue || text}
               onChange={(e) => {
                 triggerTextChange(e.target.value);
               }}
-              autoFocus={autoFocus}
+              autofocus={autoFocus}
               placeholder={placeholder}
               ref={inputRef}
               title={text}
               {...inputProps}
               size={getInputSize(picker, formatList[0], generateConfig)}
               {...getDataOrAriaProps(props)}
-              autoComplete={autoComplete}
+              autocomplete={autoComplete}
             />
             {suffixNode}
             {clearNode}

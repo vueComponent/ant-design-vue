@@ -1,7 +1,8 @@
-import * as React from 'react';
-import classNames from 'classnames';
-import Trigger from 'rc-trigger';
-import type { AlignType } from 'rc-trigger/lib/interface';
+import { CSSProperties } from '@vue/runtime-dom';
+import { AlignType } from '../vc-align/interface';
+import Trigger from '../vc-trigger';
+import classNames from '../_util/classNames';
+import { VueNode } from '../_util/type';
 
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {
@@ -43,9 +44,9 @@ type Placement = 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
 export type PickerTriggerProps = {
   prefixCls: string;
   visible: boolean;
-  popupElement: React.ReactElement;
-  popupStyle?: React.CSSProperties;
-  children: React.ReactElement;
+  popupElement: VueNode;
+  popupStyle?: CSSProperties;
+  children: VueNode;
   dropdownClassName?: string;
   transitionName?: string;
   getPopupContainer?: (node: HTMLElement) => HTMLElement;
@@ -55,20 +56,22 @@ export type PickerTriggerProps = {
   direction?: 'ltr' | 'rtl';
 };
 
-function PickerTrigger({
-  prefixCls,
-  popupElement,
-  popupStyle,
-  visible,
-  dropdownClassName,
-  dropdownAlign,
-  transitionName,
-  getPopupContainer,
-  children,
-  range,
-  popupPlacement,
-  direction,
-}: PickerTriggerProps) {
+function PickerTrigger(
+  {
+    prefixCls,
+    popupElement,
+    popupStyle,
+    visible,
+    dropdownClassName,
+    dropdownAlign,
+    transitionName,
+    getPopupContainer,
+    range,
+    popupPlacement,
+    direction,
+  }: PickerTriggerProps,
+  { slots },
+) {
   const dropdownPrefixCls = `${prefixCls}-dropdown`;
 
   const getPopupPlacement = () => {
@@ -96,7 +99,7 @@ function PickerTrigger({
       popupStyle={popupStyle}
       getPopupContainer={getPopupContainer}
     >
-      {children}
+      {slots.default?.()}
     </Trigger>
   );
 }

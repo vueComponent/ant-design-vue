@@ -515,7 +515,7 @@ function PickerPanel<DateType>(props: PickerPanelProps<DateType>) {
     const disabled = disabledDate && disabledDate(now);
     todayNode = (
       <a
-        className={classNames(todayCls, disabled && `${todayCls}-disabled`)}
+        class={classNames(todayCls, disabled && `${todayCls}-disabled`)}
         aria-disabled={disabled}
         onClick={() => {
           if (!disabled) {
@@ -539,22 +539,22 @@ function PickerPanel<DateType>(props: PickerPanelProps<DateType>) {
       }}
     >
       <div
-        tabIndex={tabIndex}
-        className={classNames(`${prefixCls}-panel`, className, {
+        tabindex={tabIndex}
+        class={classNames(`${prefixCls}-panel`, className, {
           [`${prefixCls}-panel-has-range`]: rangedValue && rangedValue[0] && rangedValue[1],
           [`${prefixCls}-panel-has-range-hover`]:
             hoverRangedValue && hoverRangedValue[0] && hoverRangedValue[1],
           [`${prefixCls}-panel-rtl`]: direction === 'rtl',
         })}
         style={style}
-        onKeyDown={onInternalKeyDown}
+        onKeydown={onInternalKeyDown}
         onBlur={onInternalBlur}
-        onMouseDown={onMouseDown}
+        onMousedown={onMouseDown}
         ref={panelDivRef}
       >
         {panelNode}
         {extraFooter || rangesNode || todayNode ? (
-          <div className={`${prefixCls}-footer`}>
+          <div class={`${prefixCls}-footer`}>
             {extraFooter}
             {rangesNode}
             {todayNode}

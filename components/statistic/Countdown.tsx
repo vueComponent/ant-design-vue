@@ -38,6 +38,7 @@ export default defineComponent({
         if (timestamp > Date.now()) {
           emit('change', timestamp - Date.now());
         }
+        syncTimer();
       }, REFRESH_INTERVAL);
     };
 

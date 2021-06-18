@@ -196,7 +196,7 @@ export default defineComponent({
     return () => {
       const child = slots?.default();
       if (child) {
-        return cloneElement(child[0], { ref: nodeRef });
+        return cloneElement(child[0], { ref: nodeRef }, true, true);
       }
       return child && child[0];
     };

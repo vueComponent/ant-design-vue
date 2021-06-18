@@ -1,4 +1,4 @@
-import { VNodeTypes, HTMLAttributes, FunctionalComponent } from 'vue';
+import { VNodeTypes, HTMLAttributes, FunctionalComponent, CSSProperties } from 'vue';
 
 function notEmpty(val: any) {
   return val !== undefined && val !== null;
@@ -8,6 +8,8 @@ interface CellProps extends HTMLAttributes {
   itemPrefixCls: string;
   span: number;
   component: string;
+  labelStyle?: CSSProperties;
+  contentStyle?: CSSProperties;
   bordered?: boolean;
   label?: VNodeTypes;
   content?: VNodeTypes;
@@ -15,7 +17,17 @@ interface CellProps extends HTMLAttributes {
 }
 
 const Cell: FunctionalComponent<CellProps> = props => {
-  const { itemPrefixCls, component, span, bordered, label, content, colon } = props;
+  const {
+    itemPrefixCls,
+    component,
+    span,
+    labelStyle,
+    contentStyle,
+    bordered,
+    label,
+    content,
+    colon,
+  } = props;
   const Component = component as any;
   if (bordered) {
     return (
@@ -28,26 +40,34 @@ const Cell: FunctionalComponent<CellProps> = props => {
         ]}
         colSpan={span}
       >
-        {notEmpty(label) ? label : content}
+        {notEmpty(label) && <span style={labelStyle}>{label}</span>}
+        {notEmpty(content) && <span style={contentStyle}>{content}</span>}
       </Component>
     );
   }
 
   return (
     <Component class={[`${itemPrefixCls}-item`]} colSpan={span}>
-      {label && (
-        <span
-          class={[
-            `${itemPrefixCls}-item-label`,
-            {
-              [`${itemPrefixCls}-item-no-colon`]: !colon,
-            },
-          ]}
-        >
-          {label}
-        </span>
-      )}
-      {content && <span class={`${itemPrefixCls}-item-content`}>{content}</span>}
+      <div class={`${itemPrefixCls}-item-container`}>
+        {label && (
+          <span
+            class={[
+              `${itemPrefixCls}-item-label`,
+              {
+                [`${itemPrefixCls}-item-no-colon`]: !colon,
+              },
+            ]}
+            style={labelStyle}
+          >
+            {label}
+          </span>
+        )}
+        {content && (
+          <span class={`${itemPrefixCls}-item-content`} style={contentStyle}>
+            {content}
+          </span>
+        )}
+      </div>
     </Component>
   );
 };

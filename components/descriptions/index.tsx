@@ -1,6 +1,6 @@
 import {
-  inject,
   ref,
+  Ref,
   App,
   defineComponent,
   PropType,
@@ -10,6 +10,9 @@ import {
   onMounted,
   onBeforeUnmount,
   Plugin,
+  CSSProperties,
+  provide,
+  toRef,
 } from 'vue';
 import warning from '../_util/warning';
 import ResponsiveObserve, {
@@ -17,12 +20,12 @@ import ResponsiveObserve, {
   responsiveArray,
   ScreenMap,
 } from '../_util/responsiveObserve';
-import { defaultConfigProvider } from '../config-provider';
 import Row from './Row';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import { cloneElement } from '../_util/vnode';
 import { filterEmpty } from '../_util/props-util';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const DescriptionsItemProps = {
   prefixCls: PropTypes.string,
@@ -30,15 +33,21 @@ export const DescriptionsItemProps = {
   span: PropTypes.number,
 };
 
+const descriptionsItemProp = {
+  prefixCls: PropTypes.string,
+  label: PropTypes.VNodeChild,
+  labelStyle: PropTypes.style,
+  contentStyle: PropTypes.style,
+  span: PropTypes.number.def(1),
+};
+
+export type DescriptionsItemProp = Partial<ExtractPropTypes<typeof descriptionsItemProp>>;
+
 export const DescriptionsItem = defineComponent({
   name: 'ADescriptionsItem',
-  props: {
-    prefixCls: PropTypes.string,
-    label: PropTypes.VNodeChild,
-    span: PropTypes.number.def(1),
-  },
-  render() {
-    return null;
+  props: descriptionsItemProp,
+  setup() {
+    return () => null;
   },
 });
 
@@ -130,17 +139,26 @@ const descriptionsProps = {
   },
   layout: PropTypes.oneOf(tuple('horizontal', 'vertical')),
   colon: PropTypes.looseBool,
+  labelStyle: PropTypes.style,
+  contentStyle: PropTypes.style,
 };
 
 export type DescriptionsProps = HTMLAttributes &
   Partial<ExtractPropTypes<typeof descriptionsProps>>;
+
+export interface DescriptionsContextProp {
+  labelStyle?: Ref<CSSProperties>;
+  contentStyle?: Ref<CSSProperties>;
+}
+
+export const descriptionsContext = Symbol('descriptionsContext');
 
 const Descriptions = defineComponent({
   name: 'ADescriptions',
   props: descriptionsProps,
   Item: DescriptionsItem,
   setup(props, { slots }) {
-    const { getPrefixCls } = inject('configProvider', defaultConfigProvider);
+    const { prefixCls, direction } = useConfigInject('descriptions', props);
 
     let token: number;
 
@@ -160,9 +178,13 @@ const Descriptions = defineComponent({
       ResponsiveObserve.unsubscribe(token);
     });
 
+    provide(descriptionsContext, {
+      labelStyle: toRef(props, 'labelStyle'),
+      contentStyle: toRef(props, 'contentStyle'),
+    });
+
     return () => {
       const {
-        prefixCls: customizePrefixCls,
         column,
         size,
         bordered = false,
@@ -172,7 +194,6 @@ const Descriptions = defineComponent({
         extra = slots.extra?.(),
       } = props;
 
-      const prefixCls = getPrefixCls('descriptions', customizePrefixCls);
       const mergeColumn = getColumn(column, screens.value);
       const children = slots.default?.();
       const rows = getRows(children, mergeColumn);
@@ -180,20 +201,21 @@ const Descriptions = defineComponent({
       return (
         <div
           class={[
-            prefixCls,
+            prefixCls.value,
             {
-              [`${prefixCls}-${size}`]: size !== 'default',
-              [`${prefixCls}-bordered`]: !!bordered,
+              [`${prefixCls.value}-${size}`]: size !== 'default',
+              [`${prefixCls.value}-bordered`]: !!bordered,
+              [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
             },
           ]}
         >
           {(title || extra) && (
-            <div class={`${prefixCls}-header`}>
-              <div class={`${prefixCls}-title`}>{title}</div>
-              <div class={`${prefixCls}-extra`}>{extra}</div>
+            <div class={`${prefixCls.value}-header`}>
+              {title && <div class={`${prefixCls.value}-title`}>{title}</div>}
+              {extra && <div class={`${prefixCls.value}-extra`}>{extra}</div>}
             </div>
           )}
-          <div class={`${prefixCls}-view`}>
+          <div class={`${prefixCls.value}-view`}>
             <table>
               <tbody>
                 {rows.map((row, index) => (
@@ -201,7 +223,7 @@ const Descriptions = defineComponent({
                     key={index}
                     index={index}
                     colon={colon}
-                    prefixCls={prefixCls}
+                    prefixCls={prefixCls.value}
                     vertical={layout === 'vertical'}
                     bordered={bordered}
                     row={row}

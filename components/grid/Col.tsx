@@ -29,7 +29,7 @@ function parseFlex(flex: FlexType): string {
 }
 
 const stringOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
-export const colSize = PropTypes.shape({
+export const colSize = PropTypes.shape<ColSize>({
   span: stringOrNumber,
   order: stringOrNumber,
   offset: stringOrNumber,

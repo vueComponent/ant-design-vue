@@ -1,4 +1,4 @@
-@import '../../style/themes/default';
+@import '../../style/themes/index';
 @import '../../style/mixins/index';
 
 @descriptions-prefix-cls: ~'@{ant-prefix}-descriptions';
@@ -86,19 +86,22 @@
     color: @text-color;
     font-size: @font-size-base;
     line-height: @line-height-base;
+    word-break: break-word;
     overflow-wrap: break-word;
   }
 
   &-item {
     padding-bottom: 0;
     vertical-align: top;
-    > span {
-      display: inline-flex;
-      align-items: baseline;
-    }
 
     &-container {
       display: flex;
+
+      .@{descriptions-prefix-cls}-item-label,
+      .@{descriptions-prefix-cls}-item-content {
+        display: inline-flex;
+        align-items: baseline;
+      }
     }
   }
 
@@ -106,7 +109,7 @@
     .@{descriptions-prefix-cls}-row {
       > th,
       > td {
-        padding-bottom: 12px;
+        padding-bottom: @padding-sm;
       }
     }
   }
@@ -167,3 +170,5 @@
     }
   }
 }
+
+@import './rtl';

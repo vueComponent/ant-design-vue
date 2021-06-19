@@ -23,6 +23,8 @@ if (typeof window !== 'undefined') {
   }
 }
 
+global.ResizeObserver = require('resize-observer-polyfill');
+
 // The built-in requestAnimationFrame and cancelAnimationFrame not working with jest.runFakeTimes()
 // https://github.com/facebook/jest/issues/5147
 global.requestAnimationFrame = function(cb) {

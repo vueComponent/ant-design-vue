@@ -19,15 +19,20 @@ exports[`PageHeader pageHeader should support class 1`] = `
   <div
     class="ant-page-header-heading"
   >
-    <!---->
-    <!---->
-    <span
-      class="ant-page-header-heading-title"
+    <div
+      class="ant-page-header-heading-left"
     >
-      Page Title
-    </span>
-    <!---->
-    <!---->
+      <!---->
+      <!---->
+      <span
+        class="ant-page-header-heading-title"
+        title="Page Title"
+      >
+        Page Title
+      </span>
+      <!---->
+      <!---->
+    </div>
     <!---->
   </div>
   <!---->

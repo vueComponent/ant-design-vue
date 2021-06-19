@@ -333,6 +333,10 @@ export function isFragment(c) {
   return c.length === 1 && c[0].type === Fragment;
 }
 
+export function isEmptyContent(c) {
+  return c === undefined || c === null || c === '' || (Array.isArray(c) && c.length === 0);
+}
+
 export function isEmptyElement(c) {
   return (
     c.type === Comment ||

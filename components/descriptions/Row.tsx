@@ -1,6 +1,6 @@
 import Cell from './Cell';
-import { getOptionProps, getSlot, getClass, getStyle, getComponent } from '../_util/props-util';
-import { FunctionalComponent, VNode, inject } from 'vue';
+import { getSlot, getClass, getStyle } from '../_util/props-util';
+import { FunctionalComponent, VNode, inject, ref } from 'vue';
 import { descriptionsContext, DescriptionsContextProp } from './index';
 
 interface CellConfig {
@@ -38,9 +38,8 @@ const Row: FunctionalComponent<RowProps> = props => {
         span = 1,
         labelStyle,
         contentStyle,
-      } = getOptionProps(item);
-      const label = getComponent(item, 'label');
-
+        label = (item.children as any)?.label?.(),
+      } = item.props || {};
       const children = getSlot(item);
       const className = getClass(item);
       const style = getStyle(item);
@@ -52,8 +51,8 @@ const Row: FunctionalComponent<RowProps> = props => {
             key={`${type}-${key || index}`}
             class={className}
             style={style}
-            labelStyle={{ ...rootLabelStyle, ...labelStyle }}
-            contentStyle={{ ...rootContentStyle, ...contentStyle }}
+            labelStyle={{ ...rootLabelStyle.value, ...labelStyle }}
+            contentStyle={{ ...rootContentStyle.value, ...contentStyle }}
             span={span}
             colon={colon}
             component={component}
@@ -69,7 +68,7 @@ const Row: FunctionalComponent<RowProps> = props => {
         <Cell
           key={`label-${key || index}`}
           class={className}
-          style={{ ...rootLabelStyle, ...style, ...labelStyle }}
+          style={{ ...rootLabelStyle.value, ...style, ...labelStyle }}
           span={1}
           colon={colon}
           component={component[0]}
@@ -80,7 +79,7 @@ const Row: FunctionalComponent<RowProps> = props => {
         <Cell
           key={`content-${key || index}`}
           class={className}
-          style={{ ...rootContentStyle, ...style, ...contentStyle }}
+          style={{ ...rootContentStyle.value, ...style, ...contentStyle }}
           span={span * 2 - 1}
           component={component[1]}
           itemPrefixCls={itemPrefixCls}
@@ -93,8 +92,8 @@ const Row: FunctionalComponent<RowProps> = props => {
 
   const { prefixCls, vertical, row, index, bordered } = props;
   const { labelStyle, contentStyle } = inject(descriptionsContext, {
-    labelStyle: undefined,
-    contentStyle: undefined,
+    labelStyle: ref({}),
+    contentStyle: ref({}),
   });
   if (vertical) {
     return (
@@ -104,8 +103,8 @@ const Row: FunctionalComponent<RowProps> = props => {
             component: 'th',
             type: 'label',
             showLabel: true,
-            labelStyle: labelStyle.value,
-            contentStyle: contentStyle.value,
+            labelStyle,
+            contentStyle,
           })}
         </tr>
         <tr key={`content-${index}`} class={`${prefixCls}-row`}>
@@ -113,8 +112,8 @@ const Row: FunctionalComponent<RowProps> = props => {
             component: 'td',
             type: 'content',
             showContent: true,
-            labelStyle: labelStyle.value,
-            contentStyle: contentStyle.value,
+            labelStyle,
+            contentStyle,
           })}
         </tr>
       </>
@@ -128,8 +127,8 @@ const Row: FunctionalComponent<RowProps> = props => {
         type: 'item',
         showLabel: true,
         showContent: true,
-        labelStyle: labelStyle.value,
-        contentStyle: contentStyle.value,
+        labelStyle,
+        contentStyle,
       })}
     </tr>
   );

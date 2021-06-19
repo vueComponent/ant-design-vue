@@ -13,6 +13,8 @@ import {
   CSSProperties,
   provide,
   toRef,
+  InjectionKey,
+  computed,
 } from 'vue';
 import warning from '../_util/warning';
 import ResponsiveObserve, {
@@ -24,7 +26,7 @@ import Row from './Row';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import { cloneElement } from '../_util/vnode';
-import { filterEmpty } from '../_util/props-util';
+import { flattenChildren } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const DescriptionsItemProps = {
@@ -46,8 +48,9 @@ export type DescriptionsItemProp = Partial<ExtractPropTypes<typeof descriptionsI
 export const DescriptionsItem = defineComponent({
   name: 'ADescriptionsItem',
   props: descriptionsItemProp,
-  setup() {
-    return () => null;
+  slots: ['label'],
+  setup(_, { slots }) {
+    return () => slots.default?.();
   },
 });
 
@@ -96,7 +99,7 @@ function getFilledItem(node: VNode, span: number | undefined, rowRestCol: number
 }
 
 function getRows(children: VNode[], column: number) {
-  const childNodes = filterEmpty(children);
+  const childNodes = flattenChildren(children);
   const rows: VNode[][] = [];
 
   let tmpRow: VNode[] = [];
@@ -151,11 +154,14 @@ export interface DescriptionsContextProp {
   contentStyle?: Ref<CSSProperties>;
 }
 
-export const descriptionsContext = Symbol('descriptionsContext');
+export const descriptionsContext: InjectionKey<DescriptionsContextProp> = Symbol(
+  'descriptionsContext',
+);
 
 const Descriptions = defineComponent({
   name: 'ADescriptions',
   props: descriptionsProps,
+  slots: ['title', 'extra'],
   Item: DescriptionsItem,
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('descriptions', props);
@@ -183,9 +189,10 @@ const Descriptions = defineComponent({
       contentStyle: toRef(props, 'contentStyle'),
     });
 
+    const mergeColumn = computed(() => getColumn(props.column, screens.value));
+
     return () => {
       const {
-        column,
         size,
         bordered = false,
         layout = 'horizontal',
@@ -194,9 +201,8 @@ const Descriptions = defineComponent({
         extra = slots.extra?.(),
       } = props;
 
-      const mergeColumn = getColumn(column, screens.value);
       const children = slots.default?.();
-      const rows = getRows(children, mergeColumn);
+      const rows = getRows(children, mergeColumn.value);
 
       return (
         <div

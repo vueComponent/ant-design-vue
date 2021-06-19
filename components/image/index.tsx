@@ -1,7 +1,7 @@
-import { App, defineComponent, ExtractPropTypes, ImgHTMLAttributes, inject, Plugin } from 'vue';
-import { defaultConfigProvider } from '../config-provider';
+import { App, defineComponent, ExtractPropTypes, ImgHTMLAttributes, Plugin } from 'vue';
 import ImageInternal from '../vc-image';
 import { imageProps } from '../vc-image/src/Image';
+import useConfigInject from '../_util/hooks/useConfigInject';
 import PreviewGroup from './PreviewGroup';
 
 export type ImageProps = Partial<
@@ -11,13 +11,15 @@ const Image = defineComponent<ImageProps>({
   name: 'AImage',
   inheritAttrs: false,
   props: imageProps as any,
-  setup(props, ctx) {
-    const { slots, attrs } = ctx;
-    const configProvider = inject('configProvider', defaultConfigProvider);
+  setup(props, { slots, attrs }) {
+    const { prefixCls } = useConfigInject('image', props);
     return () => {
-      const { getPrefixCls } = configProvider;
-      const prefixCls = getPrefixCls('image', props.prefixCls);
-      return <ImageInternal {...{ ...attrs, ...props, prefixCls }} v-slots={slots}></ImageInternal>;
+      return (
+        <ImageInternal
+          {...{ ...attrs, ...props, prefixCls: prefixCls.value }}
+          v-slots={slots}
+        ></ImageInternal>
+      );
     };
   },
 });

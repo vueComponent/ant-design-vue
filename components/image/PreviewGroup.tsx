@@ -1,5 +1,5 @@
 import PreviewGroup from '../vc-image/src/PreviewGroup';
-import { defineComponent, inject } from 'vue';
+import { computed, defineComponent, inject } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 import PropTypes from '../_util/vue-types';
 
@@ -9,13 +9,14 @@ const InternalPreviewGroup = defineComponent({
   props: { previewPrefixCls: PropTypes.string },
   setup(props, { attrs, slots }) {
     const configProvider = inject('configProvider', defaultConfigProvider);
+    const prefixCls = computed(() =>
+      configProvider.getPrefixCls('image-preview', props.previewPrefixCls),
+    );
     return () => {
-      const { getPrefixCls } = configProvider;
-      const prefixCls = getPrefixCls('image-preview', props.previewPrefixCls);
       return (
         <PreviewGroup
-          previewPrefixCls={prefixCls}
           {...{ ...attrs, ...props }}
+          previewPrefixCls={prefixCls.value}
           v-slots={slots}
         ></PreviewGroup>
       );

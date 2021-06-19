@@ -10,6 +10,21 @@
 
 ---
 
+## 2.2.0-beta.3
+
+`2021-06-11`
+
+- 🎉 重构 Breadcrumb、Statistic、Tag 组件
+- 🌟 Statistic 支持 loading 属性
+- 🐞 修复 Menu 渲染多次子组件问题，提升性能 [6ae707](https://github.com/vueComponent/ant-design-vue/commit/6ae707edf508a9c5e8dca7dacf1410de5251bcf8)
+- 🐞 修复 FormItem 自定义 class 失效 [617e53](https://github.com/vueComponent/ant-design-vue/commit/617e534fda2ae6d468b5e9d3eb43370f8a4b0000)
+- 🐞 修复 MenuDivider class 错误问题 [#4195](https://github.com/vueComponent/ant-design-vue/issues/4195)
+- 🐞 修复 Tag、Image 类型错误
+- 🐞 修复 Modal 等组件动画丢失问题 [#4191](https://github.com/vueComponent/ant-design-vue/issues/4191)
+- 🐞 修复 Select class 不能动态更新问题 [#4194](https://github.com/vueComponent/ant-design-vue/issues/4194)
+- 🐞 修复 Dropdown 邮件展开，不能点击收起的问题 [#4198](https://github.com/vueComponent/ant-design-vue/issues/4198)
+- 🐞 修复 FormItem 缺少部分导出方法问题 [#4183](https://github.com/vueComponent/ant-design-vue/issues/4183)
+
 ## 2.2.0-beta.2
 
 `2021-06-08`

@@ -1,13 +1,12 @@
 import { defineComponent } from 'vue';
+import { useInjectMenu } from './hooks/useMenuContext';
 
 export default defineComponent({
   name: 'AMenuDivider',
-  props: {
-    prefixCls: String,
-  },
-  setup(props) {
+  setup() {
+    const { prefixCls } = useInjectMenu();
     return () => {
-      return <li class={`${props.prefixCls}-item-divider`} />;
+      return <li class={`${prefixCls.value}-item-divider`} />;
     };
   },
 });

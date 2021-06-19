@@ -372,7 +372,7 @@ export default defineComponent({
       siderCollapsed,
       defaultMotions: computed(() => (isMounted.value ? defaultMotions : null)),
       motion: computed(() => (isMounted.value ? props.motion : null)),
-      overflowDisabled: computed(() => props.disabledOverflow),
+      overflowDisabled: computed(() => undefined),
       onOpenChange: onInternalOpenChange,
       onItemClick: onInternalClick,
       registerMenuInfo,

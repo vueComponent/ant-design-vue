@@ -1,9 +1,9 @@
-import { defineComponent } from 'vue';
+import { defineComponent, onBeforeUnmount, onMounted, onUpdated, ref } from 'vue';
 import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import Statistic, { StatisticProps } from './Statistic';
-import { formatCountdown, countdownValueType, FormatConfig } from './utils';
+import { formatCountdown as formatCD, countdownValueType, FormatConfig } from './utils';
 
 const REFRESH_INTERVAL = 1000 / 30;
 
@@ -16,73 +16,77 @@ export default defineComponent({
   props: initDefaultProps(StatisticProps, {
     format: 'HH:mm:ss',
   }),
-  setup() {
-    return {
-      countdownId: undefined,
-    } as { countdownId: number };
-  },
-  mounted() {
-    this.syncTimer();
-  },
-
-  updated() {
-    this.syncTimer();
-  },
-
-  beforeUnmount() {
-    this.stopTimer();
-  },
-
-  methods: {
-    syncTimer() {
-      const { value } = this.$props;
+  emits: ['finish', 'change'],
+  setup(props, { emit }) {
+    const countdownId = ref<number>();
+    const statistic = ref();
+    const syncTimer = () => {
+      const { value } = props;
       const timestamp = getTime(value);
       if (timestamp >= Date.now()) {
-        this.startTimer();
+        startTimer();
       } else {
-        this.stopTimer();
+        stopTimer();
       }
-    },
+    };
 
-    startTimer() {
-      if (this.countdownId) return;
-      this.countdownId = window.setInterval(() => {
-        (this.$refs.statistic as any).$forceUpdate();
-        this.syncTimer();
+    const startTimer = () => {
+      if (countdownId.value) return;
+      const timestamp = getTime(props.value);
+      countdownId.value = window.setInterval(() => {
+        statistic.value.$forceUpdate();
+        if (timestamp > Date.now()) {
+          emit('change', timestamp - Date.now());
+        }
+        syncTimer();
       }, REFRESH_INTERVAL);
-    },
+    };
 
-    stopTimer() {
-      const { value } = this.$props;
-      if (this.countdownId) {
-        clearInterval(this.countdownId);
-        this.countdownId = undefined;
+    const stopTimer = () => {
+      const { value } = props;
+      if (countdownId.value) {
+        clearInterval(countdownId.value);
+        countdownId.value = undefined;
 
         const timestamp = getTime(value);
         if (timestamp < Date.now()) {
-          this.$emit('finish');
+          emit('finish');
         }
       }
-    },
+    };
 
-    formatCountdown({ value, config }: { value: countdownValueType; config: FormatConfig }) {
-      const { format } = this.$props;
-      return formatCountdown(value, { ...config, format });
-    },
+    const formatCountdown = ({
+      value,
+      config,
+    }: {
+      value: countdownValueType;
+      config: FormatConfig;
+    }) => {
+      const { format } = props;
+      return formatCD(value, { ...config, format });
+    };
 
-    valueRenderHtml: node => node,
-  },
-
-  render() {
-    return (
-      <Statistic
-        ref="statistic"
-        {...{
-          ...this.$props,
-          valueRender: this.valueRenderHtml,
-          formatter: this.formatCountdown,
-        }}
-      />
-    );
+    const valueRenderHtml = (node: any) => node;
+    onMounted(() => {
+      syncTimer();
+    });
+    onUpdated(() => {
+      syncTimer();
+    });
+    onBeforeUnmount(() => {
+      stopTimer();
+    });
+    return () => {
+      return (
+        <Statistic
+          ref={statistic}
+          {...{
+            ...props,
+            valueRender: valueRenderHtml,
+            formatter: formatCountdown,
+          }}
+        />
+      );
+    };
   },
 });

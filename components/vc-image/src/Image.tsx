@@ -36,7 +36,7 @@ export interface ImagePropsType extends Omit<ImgHTMLAttributes, 'placeholder' | 
   fallback?: string;
   preview?: boolean | ImagePreviewType;
 }
-export const ImageProps = {
+export const imageProps = {
   src: PropTypes.string,
   wrapperClassName: PropTypes.string,
   wrapperStyle: PropTypes.style,
@@ -69,7 +69,7 @@ const ImageInternal = defineComponent({
   name: 'Image',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: ImageProps,
+  props: imageProps,
   emits: ['click'],
   setup(props, { attrs, slots, emit }) {
     const prefixCls = computed(() => props.prefixCls);

@@ -108,7 +108,7 @@ export default defineComponent({
   __ANT_NEW_FORM_ITEM: true,
   props: formItemProps,
   slots: ['help', 'label', 'extra'],
-  setup(props, { slots }) {
+  setup(props, { slots, attrs, expose }) {
     warning(props.prop === undefined, `\`prop\` is deprecated. Please use \`name\` instead.`);
     const eventKey = `form-item-${++indexGuid}`;
     const { prefixCls } = useConfigInject('form', props);
@@ -272,6 +272,12 @@ export default defineComponent({
         control.focus();
       }
     };
+    expose({
+      onFieldBlur,
+      onFieldChange,
+      clearValidate,
+      resetField,
+    });
     formContext.addField(eventKey, {
       fieldValue,
       fieldId,
@@ -336,9 +342,11 @@ export default defineComponent({
       }
       return (
         <Row
+          {...attrs}
           class={[
             itemClassName.value,
             domErrorVisible.value || !!help ? `${prefixCls.value}-item-with-help` : '',
+            attrs.class,
           ]}
           key="row"
         >
@@ -370,44 +378,4 @@ export default defineComponent({
       );
     };
   },
-  // data() {
-  //   warning(!hasProp(this, 'prop'), `\`prop\` is deprecated. Please use \`name\` instead.`);
-  //   return {
-  //     validateState: this.validateStatus,
-  //     validateMessage: '',
-  //     validateDisabled: false,
-  //     validator: {},
-  //     helpShow: false,
-  //     errors: [],
-  //     initialValue: undefined,
-  //   };
-  // },
-  // render() {
-  //   const { autoLink } = getOptionProps(this);
-  //   const children = getSlot(this);
-  //   let firstChildren = children[0];
-  //   if (this.fieldName && autoLink && isValidElement(firstChildren)) {
-  //     const originalEvents = getEvents(firstChildren);
-  //     const originalBlur = originalEvents.onBlur;
-  //     const originalChange = originalEvents.onChange;
-  //     firstChildren = cloneElement(firstChildren, {
-  //       ...(this.fieldId ? { id: this.fieldId } : undefined),
-  //       onBlur: (...args: any[]) => {
-  //         originalBlur && originalBlur(...args);
-  //         this.onFieldBlur();
-  //       },
-  //       onChange: (...args: any[]) => {
-  //         if (Array.isArray(originalChange)) {
-  //           for (let i = 0, l = originalChange.length; i < l; i++) {
-  //             originalChange[i](...args);
-  //           }
-  //         } else if (originalChange) {
-  //           originalChange(...args);
-  //         }
-  //         this.onFieldChange();
-  //       },
-  //     });
-  //   }
-  //   return this.renderFormItem([firstChildren, children.slice(1)]);
-  // },
 });

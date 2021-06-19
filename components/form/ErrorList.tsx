@@ -21,7 +21,7 @@ export default defineComponent({
     const { prefixCls, status } = useInjectFormItemPrefix();
     const visible = ref(!!(props.errors && props.errors.length));
     const innerStatus = ref(status.value);
-    let timeout = ref();
+    const timeout = ref();
     const cacheErrors = ref([...props.errors]);
     watch([() => [...props.errors], () => props.help], newValues => {
       window.clearTimeout(timeout.value);

@@ -139,9 +139,13 @@ const ConfigProvider = defineComponent({
       getPrefixCls: getPrefixClsWrapper,
       renderEmpty: renderEmptyComponent,
     });
-
-    watch(props, () => {
-      Object.assign(configProvider, props);
+    Object.keys(props).forEach(key => {
+      watch(
+        () => props[key],
+        () => {
+          configProvider[key] = props[key];
+        },
+      );
     });
 
     provide('configProvider', configProvider);

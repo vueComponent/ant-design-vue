@@ -5,6 +5,7 @@ import EnterOutlined from '@ant-design/icons-vue/EnterOutlined';
 import { defineComponent, ref, reactive, watch, onMounted } from 'vue';
 
 const Editable = defineComponent({
+  name: 'Editable',
   props: {
     prefixCls: PropTypes.string,
     value: PropTypes.string,
@@ -95,6 +96,7 @@ const Editable = defineComponent({
 
     function onBlur() {
       confirmChange();
+      emit('end');
     }
 
     function confirmChange() {

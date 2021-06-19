@@ -10,6 +10,21 @@
 
 ---
 
+## 2.2.0-beta.3
+
+`2021-06-11`
+
+- 🎉 Refactor Breadcrumb, Statistic, Tag components
+- 🌟 Statistic supports loading attribute
+- 🐞 Fix the problem of Menu rendering multiple sub-components to improve performance [6ae707](https://github.com/vueComponent/ant-design-vue/commit/6ae707edf508a9c5e8dca7dacf1410de5251bcf8)
+- 🐞 Fix FormItem custom class invalidation [617e53](https://github.com/vueComponent/ant-design-vue/commit/617e534fda2ae6d468b5e9d3eb43370f8a4b0000)
+- 🐞 Fix MenuDivider class error [#4195](https://github.com/vueComponent/ant-design-vue/issues/4195)
+- 🐞 Fix Tag and Image type errors
+- 🐞 Fix the issue of missing component animations such as Modal [#4191](https://github.com/vueComponent/ant-design-vue/issues/4191)
+- 🐞 Fix the issue that Select class cannot be dynamically updated [#4194](https://github.com/vueComponent/ant-design-vue/issues/4194)
+- 🐞 Fix the problem that the Dropdown mail expands and cannot be collapsed by clicking [#4198](https://github.com/vueComponent/ant-design-vue/issues/4198)
+- 🐞 Fix the issue of missing some export methods of FormItem [#4183](https://github.com/vueComponent/ant-design-vue/issues/4183)
+
 ## 2.2.0-beta.2
 
 `2021-06-08`

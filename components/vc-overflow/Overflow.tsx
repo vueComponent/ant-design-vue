@@ -131,7 +131,7 @@ const Overflow = defineComponent({
     });
 
     const omittedItems = computed(() => {
-      if (isResponsive) {
+      if (isResponsive.value) {
         return props.data.slice(mergedDisplayCount.value + 1);
       }
       return props.data.slice(mergedData.value.length);
@@ -362,7 +362,7 @@ const Overflow = defineComponent({
             <Item
               {...itemSharedProps}
               order={mergedDisplayCount.value}
-              class={`${itemPrefixCls}-suffix`}
+              class={`${itemPrefixCls.value}-suffix`}
               registerSize={registerSuffixSize}
               display
               style={suffixStyle}

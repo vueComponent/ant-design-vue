@@ -1,8 +1,5 @@
 import { VNodeTypes } from 'vue';
-import moment from 'moment';
 import padStart from 'lodash-es/padStart';
-
-import interopDefault from '../_util/interopDefault';
 
 export type valueType = number | string;
 export type countdownValueType = valueType | string;
@@ -39,15 +36,15 @@ const timeUnits: [string, number][] = [
 export function formatTimeStr(duration: number, format: string) {
   let leftDuration: number = duration;
 
-  const escapeRegex = /\[[^\]]*\]/g;
-  const keepList = (format.match(escapeRegex) || []).map(str => str.slice(1, -1));
+  const escapeRegex = /\[[^\]]*]/g;
+  const keepList: string[] = (format.match(escapeRegex) || []).map(str => str.slice(1, -1));
   const templateText = format.replace(escapeRegex, '[]');
 
   const replacedText = timeUnits.reduce((current, [name, unit]) => {
     if (current.indexOf(name) !== -1) {
       const value = Math.floor(leftDuration / unit);
       leftDuration -= value * unit;
-      return current.replace(new RegExp(`${name}+`, 'g'), match => {
+      return current.replace(new RegExp(`${name}+`, 'g'), (match: string) => {
         const len = match.length;
         return padStart(value.toString(), len, '0');
       });
@@ -65,8 +62,9 @@ export function formatTimeStr(duration: number, format: string) {
 
 export function formatCountdown(value: countdownValueType, config: CountdownFormatConfig) {
   const { format = '' } = config;
-  const target = interopDefault(moment)(value).valueOf();
-  const current = interopDefault(moment)().valueOf();
+  const target = new Date(value).getTime();
+  const current = Date.now();
   const diff = Math.max(target - current, 0);
+
   return formatTimeStr(diff, format);
 }

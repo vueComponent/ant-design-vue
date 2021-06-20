@@ -81,7 +81,7 @@ export default defineComponent({
   emits: ['breakpoint', 'update:collapsed', 'collapse'],
   setup(props, { emit, attrs, slots }) {
     const { prefixCls } = useConfigInject('layout-sider', props);
-    const siderHook = inject(SiderHookProviderKey);
+    const siderHook = inject(SiderHookProviderKey, undefined);
     const collapsed = ref(
       !!(props.collapsed !== undefined ? props.collapsed : props.defaultCollapsed),
     );

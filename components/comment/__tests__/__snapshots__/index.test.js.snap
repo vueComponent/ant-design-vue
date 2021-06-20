@@ -44,21 +44,26 @@ exports[`Comment Comment can be used as editor, user can customize the editor co
           <div>
             <div class="ant-row ant-form-item">
               <!---->
-              <div class="ant-col ant-form-item-control-wrapper">
-                <div class="ant-form-item-control"><span class="ant-form-item-children"><textarea rows="4" class="ant-input"></textarea><!----></span>
-                  <!---->
+              <div class="ant-col ant-form-item-control">
+                <div class="ant-form-item-control-input">
+                  <div class="ant-form-item-control-input-content"><textarea rows="4" class="ant-input"></textarea></div>
                   <!---->
                 </div>
+                <!---->
+                <!---->
               </div>
             </div>
             <div class="ant-row ant-form-item">
               <!---->
-              <div class="ant-col ant-form-item-control-wrapper">
-                <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="submit" ant-click-animating-without-extra-node="true"><!----><span>Add Comment</span></button>
-                  <!----></span>
-                  <!---->
+              <div class="ant-col ant-form-item-control">
+                <div class="ant-form-item-control-input">
+                  <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="submit" ant-click-animating-without-extra-node="true">
+                      <!----><span>Add Comment</span>
+                    </button></div>
                   <!---->
                 </div>
+                <!---->
+                <!---->
               </div>
             </div>
           </div>

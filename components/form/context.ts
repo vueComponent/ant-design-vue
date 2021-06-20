@@ -34,6 +34,9 @@ export const useInjectForm = () => {
     addField: (_eventKey: string, _field: FieldExpose) => {},
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     removeField: (_eventKey: string) => {},
+    model: computed(() => undefined),
+    rules: computed(() => undefined),
+    requiredMark: computed(() => false),
   });
 };
 

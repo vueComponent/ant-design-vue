@@ -88,7 +88,7 @@ export default defineComponent({
       scrollEvent: null,
       animating: false,
     });
-    const activeLink = ref();
+    const activeLink = ref(null);
     const getContainer = computed(() => {
       const { getContainer } = props;
       return getContainer || getTargetContainer.value || getDefaultContainer;
@@ -122,7 +122,7 @@ export default defineComponent({
     };
     const setCurrentActiveLink = (link: string) => {
       const { getCurrentAnchor } = props;
-      if (activeLink.value !== link) {
+      if (activeLink.value === link) {
         return;
       }
       activeLink.value = typeof getCurrentAnchor === 'function' ? getCurrentAnchor() : link;

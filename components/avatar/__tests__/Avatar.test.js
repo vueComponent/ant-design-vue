@@ -186,7 +186,7 @@ describe('Avatar Render', () => {
     });
   });
 
-  it('fallback', async () => {
+  it('fallback', () => {
     const div = global.document.createElement('div');
     global.document.body.appendChild(div);
     const wrapper = mount(
@@ -201,11 +201,9 @@ describe('Avatar Render', () => {
       },
       { attachTo: div },
     );
-    await asyncExpect(async () => {
-      await wrapper.find('img').trigger('error');
-      expect(wrapper.html()).toMatchSnapshot();
-      wrapper.unmount();
-      global.document.body.removeChild(div);
-    }, 0);
+    wrapper.find('img').trigger('error');
+    expect(wrapper.html()).toMatchSnapshot();
+    wrapper.unmount();
+    global.document.body.removeChild(div);
   });
 });

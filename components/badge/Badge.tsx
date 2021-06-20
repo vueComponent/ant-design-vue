@@ -157,13 +157,16 @@ export default defineComponent({
         visible || !text ? null : <span class={`${pre}-status-text`}>{text}</span>;
 
       // >>> Display Component
-      const displayNode = cloneElement(
-        slots.count?.(),
-        {
-          style: mergedStyle,
-        },
-        false,
-      );
+      const displayNode =
+        typeof count === 'object' || (count === undefined && slots.count)
+          ? cloneElement(
+              count ?? slots.count?.(),
+              {
+                style: mergedStyle,
+              },
+              false,
+            )
+          : null;
 
       const badgeClassName = classNames(
         pre,

@@ -99,7 +99,7 @@ const Overflow = defineComponent({
     const mergedRestWidth = computed(() => Math.max(prevRestWidth.value, restWidth.value));
 
     // ================================= Data =================================
-    const isResponsive = computed(() => props.data.length && props.maxCount === RESPONSIVE);
+    const isResponsive = computed(() => !!(props.data.length && props.maxCount === RESPONSIVE));
     const invalidate = computed(() => props.maxCount === INVALIDATE);
 
     /**
@@ -183,7 +183,7 @@ const Overflow = defineComponent({
 
     // ================================ Effect ================================
     const getItemWidth = (index: number) => {
-      return itemWidths.value.get(getKey(mergedData[index], index));
+      return itemWidths.value.get(getKey(mergedData.value[index], index));
     };
 
     watch(
@@ -215,8 +215,11 @@ const Overflow = defineComponent({
             totalWidth += currentItemWidth;
 
             if (
-              i === lastIndex - 1 &&
-              totalWidth + getItemWidth(lastIndex)! <= mergedContainerWidth.value
+              // Only one means `totalWidth` is the final width
+              (lastIndex === 0 && totalWidth <= mergedContainerWidth.value) ||
+              // Last two width will be the final width
+              (i === lastIndex - 1 &&
+                totalWidth + getItemWidth(lastIndex)! <= mergedContainerWidth.value)
             ) {
               // Additional check if match the end
               updateDisplayCount(lastIndex);
@@ -227,11 +230,6 @@ const Overflow = defineComponent({
               updateDisplayCount(i - 1);
               suffixFixedStart.value =
                 totalWidth - currentItemWidth - suffixWidth.value + restWidth.value;
-              break;
-            } else if (i === lastIndex) {
-              // Reach the end
-              updateDisplayCount(lastIndex);
-              suffixFixedStart.value = totalWidth - suffixWidth.value;
               break;
             }
           }

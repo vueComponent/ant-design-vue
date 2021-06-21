@@ -138,7 +138,7 @@ describe('Avatar Render', () => {
     });
 
     await asyncExpect(() => {
-      expect(wrapper.find('.ant-avatar-string')).toMatchSnapshot();
+      expect(wrapper.find('.ant-avatar-string').html()).toMatchSnapshot();
     }, 0);
 
     Object.defineProperty(HTMLElement.prototype, 'offsetWidth', {
@@ -155,7 +155,7 @@ describe('Avatar Render', () => {
       },
     });
     await asyncExpect(() => {
-      expect(wrapper.find('.ant-avatar-string')).toMatchSnapshot();
+      expect(wrapper.find('.ant-avatar-string').html()).toMatchSnapshot();
     }, 0);
   });
 

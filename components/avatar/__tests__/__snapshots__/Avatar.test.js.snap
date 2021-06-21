@@ -14,30 +14,8 @@ exports[`Avatar Render adjusts component size to 100 when window size is xxl 1`]
 
 exports[`Avatar Render fallback 1`] = `<span class="ant-avatar ant-avatar-circle ant-avatar-image"><img draggable="false" src="http://error.url"></span>`;
 
-exports[`Avatar Render should calculate scale of avatar children correctly 1`] = `
-DOMWrapper {
-  "wrapperElement": <span
-    class="ant-avatar-string"
-    style="transform: scale(0.72) translateX(-50%);"
-  >
-    
-    Avatar
-    
-  </span>,
-}
-`;
+exports[`Avatar Render should calculate scale of avatar children correctly 1`] = `<span class="ant-avatar-string" style="transform: scale(0.72) translateX(-50%);">Avatar</span>`;
 
-exports[`Avatar Render should calculate scale of avatar children correctly 2`] = `
-DOMWrapper {
-  "wrapperElement": <span
-    class="ant-avatar-string"
-    style="transform: scale(0.32) translateX(-50%);"
-  >
-    
-    xx
-    
-  </span>,
-}
-`;
+exports[`Avatar Render should calculate scale of avatar children correctly 2`] = `<span class="ant-avatar-string" style="transform: scale(0.32) translateX(-50%);">xx</span>`;
 
 exports[`Avatar Render should calculate scale of avatar children correctly with gap 1`] = `<span class="ant-avatar ant-avatar-circle"><span class="ant-avatar-string" style="transform: scale(0.36) translateX(-50%);">Avatar</span></span>`;

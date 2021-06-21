@@ -311,6 +311,7 @@ export default defineComponent({
             )}
             onMouseenter={onMouseEnter}
             onMouseleave={onMouseLeave}
+            data-submenu-id={key}
           >
             {titleNode}
 

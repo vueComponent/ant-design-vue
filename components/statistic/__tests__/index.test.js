@@ -88,25 +88,6 @@ describe('Statistic', () => {
         expect(wrapper.find('.ant-statistic-content-value').text()).toEqual(value);
       });
     });
-
-    it('time going', async () => {
-      const now = Date.now() + 1000;
-      const props = {
-        props: {
-          value: now,
-        },
-      };
-      const wrapper = mount(Statistic.Countdown, props);
-
-      // setInterval should work
-      const instance = wrapper.vm;
-      expect(instance.countdownId).not.toBe(undefined);
-
-      // await delay(50);
-
-      // wrapper.unmount();
-      // expect(instance.countdownId).toBe(undefined);
-    });
   });
   describe('utils', () => {
     it('format should support escape', () => {

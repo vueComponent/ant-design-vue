@@ -10,6 +10,18 @@
 
 ---
 
+## 2.2.0-beta.4
+
+`2021-06-21`
+
+- 🎉 重构 Descriptions 组件 [#4219](https://github.com/vueComponent/ant-design-vue/issues/4219)
+- 🐞 修复 Countdown 不触发 finish 事件问题 [#4222](https://github.com/vueComponent/ant-design-vue/issues/4222)
+- 🐞 修复 ConfigProvider 在 vue 3.1 下报错问题 [#4225](https://github.com/vueComponent/ant-design-vue/issues/4225)
+- 🐞 修复 Dropdown 下使用 SubMenu 报错问题 [#4205](https://github.com/vueComponent/ant-design-vue/issues/4205)
+- 🐞 修复 Col 类型错误 [#4226](https://github.com/vueComponent/ant-design-vue/issues/4226)
+- 🐞 修复 Typography 失焦时不触发 onEnd 问题 [#4227](https://github.com/vueComponent/ant-design-vue/issues/4227)
+- 🐞 修复 ImagePreview 样式丢失问题 [#4231](https://github.com/vueComponent/ant-design-vue/issues/4231)
+
 ## 2.2.0-beta.3
 
 `2021-06-11`

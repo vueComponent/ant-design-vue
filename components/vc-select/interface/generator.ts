@@ -1,5 +1,4 @@
 import { VueNode } from '../../_util/type';
-import { VNodeChild } from 'vue';
 
 export type SelectSource = 'option' | 'selection' | 'input';
 
@@ -13,7 +12,8 @@ export type RawValueType = string | number | null;
 export interface LabelValueType extends Record<string, any> {
   key?: Key;
   value?: RawValueType;
-  label?: VNodeChild;
+  label?: VueNode;
+  isCacheable?: boolean;
 }
 export type DefaultValueType = RawValueType | RawValueType[] | LabelValueType | LabelValueType[];
 
@@ -23,10 +23,10 @@ export interface DisplayLabelValueType extends LabelValueType {
 
 export type SingleType<MixType> = MixType extends (infer Single)[] ? Single : MixType;
 
-export type OnClear = () => void;
+export type OnClear = () => any;
 
 export type CustomTagProps = {
-  label: DefaultValueType;
+  label: VueNode;
   value: DefaultValueType;
   disabled: boolean;
   onClose: (event?: MouseEvent) => void;
@@ -38,7 +38,7 @@ export type GetLabeledValue<FOT extends FlattenOptionsType> = (
   value: RawValueType,
   config: {
     options: FOT;
-    prevValue: DefaultValueType;
+    prevValueMap: Map<RawValueType, LabelValueType>;
     labelInValue: boolean;
     optionLabelProp: string;
   },

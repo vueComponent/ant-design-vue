@@ -11,6 +11,7 @@ import {
 import PropTypes from '../../_util/vue-types';
 import { RefObject } from '../../_util/createRef';
 import antInput from '../../_util/antInputDirective';
+import classNames from 'ant-design-vue/es/_util/classNames';
 
 interface InputProps {
   prefixCls: string;
@@ -33,6 +34,8 @@ interface InputProps {
   onPaste: EventHandlerNonNull;
   onCompositionstart: EventHandlerNonNull;
   onCompositionend: EventHandlerNonNull;
+  onFocus: EventHandlerNonNull;
+  onBlur: EventHandlerNonNull;
 }
 
 const Input = defineComponent<InputProps, { VCSelectContainerEvent: any; blurTimeout: any }>({
@@ -72,6 +75,8 @@ const Input = defineComponent<InputProps, { VCSelectContainerEvent: any; blurTim
       onPaste,
       onCompositionstart,
       onCompositionend,
+      onFocus,
+      onBlur,
       open,
       inputRef,
       attrs,
@@ -82,6 +87,8 @@ const Input = defineComponent<InputProps, { VCSelectContainerEvent: any; blurTim
     const {
       onKeydown: onOriginKeyDown,
       onInput: onOriginInput,
+      onFocus: onOriginFocus,
+      onBlur: onOriginBlur,
       onMousedown: onOriginMouseDown,
       onCompositionstart: onOriginCompositionStart,
       onCompositionend: onOriginCompositionEnd,
@@ -97,7 +104,7 @@ const Input = defineComponent<InputProps, { VCSelectContainerEvent: any; blurTim
           tabindex,
           autocomplete: autocomplete || 'off',
           autofocus,
-          class: `${prefixCls}-selection-search-input`,
+          class: classNames(`${prefixCls}-selection-search-input`, inputNode?.props?.className),
           style: { ...style, opacity: editable ? null : 0 },
           role: 'combobox',
           'aria-expanded': open,
@@ -143,10 +150,14 @@ const Input = defineComponent<InputProps, { VCSelectContainerEvent: any; blurTim
           onPaste,
           onFocus: (...args: any[]) => {
             clearTimeout(this.blurTimeout);
+            onOriginFocus && onOriginFocus(args[0]);
+            onFocus && onFocus(args[0]);
             this.VCSelectContainerEvent?.focus(args[0]);
           },
           onBlur: (...args: any[]) => {
             this.blurTimeout = setTimeout(() => {
+              onOriginBlur && onOriginBlur(args[0]);
+              onBlur && onBlur(args[0]);
               this.VCSelectContainerEvent?.blur(args[0]);
             }, 200);
           },
@@ -181,6 +192,8 @@ Input.props = {
   onPaste: PropTypes.func,
   onCompositionstart: PropTypes.func,
   onCompositionend: PropTypes.func,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
 };
 
 export default Input;

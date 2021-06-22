@@ -370,12 +370,12 @@ const Overflow = defineComponent({
           )}
         </Component>
       );
-
-      if (isResponsive.value) {
-        overflowNode = <ResizeObserver onResize={onOverflowResize}>{overflowNode}</ResizeObserver>;
-      }
-
-      return overflowNode;
+      // 使用 disabled  避免结构不一致 导致子组件 rerender
+      return (
+        <ResizeObserver disabled={!isResponsive.value} onResize={onOverflowResize}>
+          {overflowNode}
+        </ResizeObserver>
+      );
     };
   },
 });

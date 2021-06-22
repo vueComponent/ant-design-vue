@@ -20,7 +20,7 @@ export interface LabeledValue {
   label: VNodeChild;
 }
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
-export type SelectValue = RawValue | RawValue[] | LabeledValue | LabeledValue[];
+export type SelectValue = RawValue | RawValue[] | LabeledValue | LabeledValue[] | undefined;
 
 export interface InternalSelectProps<VT> extends Omit<RcSelectProps<VT>, 'mode'> {
   suffixIcon?: VNodeChild;

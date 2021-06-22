@@ -237,6 +237,9 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
           // >>> Close
           case KeyCode.ESC: {
             props.onToggleOpen(false);
+            if (props.open) {
+              event.stopPropagation();
+            }
           }
         }
       },

@@ -63,7 +63,7 @@ export interface SelectorProps {
   removeIcon?: RenderNode;
 
   // Tags
-  maxTagCount?: number;
+  maxTagCount?: number | 'responsive';
   maxTagTextLength?: number;
   maxTagPlaceholder?: VNodeChild;
   tagRender?: (props: CustomTagProps) => VNodeChild;
@@ -140,8 +140,12 @@ const Selector = defineComponent<SelectorProps>({
       compositionStatus = true;
     };
 
-    const onInputCompositionEnd = () => {
+    const onInputCompositionEnd = (e: InputEvent) => {
       compositionStatus = false;
+      // Trigger search again to support `tokenSeparators` with typewriting
+      if (props.mode !== 'combobox') {
+        triggerOnSearch((e.target as HTMLInputElement).value);
+      }
     };
 
     const onInputChange = (event: { target: { value: any } }) => {
@@ -152,7 +156,10 @@ const Selector = defineComponent<SelectorProps>({
       // Pasted text should replace back to origin content
       if (props.tokenWithEnter && pastedText && /[\r\n]/.test(pastedText)) {
         // CRLF will be treated as a single space for input element
-        const replacedText = pastedText.replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ');
+        const replacedText = pastedText
+          .replace(/[\r\n]+$/, '')
+          .replace(/\r\n/g, ' ')
+          .replace(/[\r\n]/g, ' ');
         value = value.replace(replacedText, pastedText);
       }
 
@@ -271,7 +278,7 @@ Selector.props = {
   removeIcon: PropTypes.any,
 
   // Tags
-  maxTagCount: PropTypes.number,
+  maxTagCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   maxTagTextLength: PropTypes.number,
   maxTagPlaceholder: PropTypes.any,
   tagRender: PropTypes.func,

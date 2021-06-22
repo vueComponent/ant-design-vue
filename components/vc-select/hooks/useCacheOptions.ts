@@ -8,7 +8,7 @@ export default function useCacheOptions<
     key?: Key;
     disabled?: boolean;
   }[]
->(_values: RawValueType[], options: Ref) {
+>(options: Ref) {
   const optionMap = computed(() => {
     const map: Map<RawValueType, FlattenOptionsType<OptionsType>[number]> = new Map();
     options.value.forEach((item: any) => {

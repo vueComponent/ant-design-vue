@@ -17,7 +17,7 @@ export default function useCacheDisplayValue(
 
     const resultValues = values.value.map(item => {
       const cacheLabel = valueLabels.get(item.value);
-      if (item.value === item.label && cacheLabel) {
+      if (item.isCacheable && cacheLabel) {
         return {
           ...item,
           label: cacheLabel,

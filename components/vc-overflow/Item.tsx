@@ -90,19 +90,17 @@ export default defineComponent({
         </Component>
       );
 
-      if (responsive) {
-        itemNode = (
-          <ResizeObserver
-            onResize={({ offsetWidth }) => {
-              internalRegisterSize(offsetWidth);
-            }}
-          >
-            {itemNode}
-          </ResizeObserver>
-        );
-      }
-
-      return itemNode;
+      // 使用 disabled  避免结构不一致 导致子组件 rerender
+      return (
+        <ResizeObserver
+          disabled={!responsive}
+          onResize={({ offsetWidth }) => {
+            internalRegisterSize(offsetWidth);
+          }}
+        >
+          {itemNode}
+        </ResizeObserver>
+      );
     };
   },
 });

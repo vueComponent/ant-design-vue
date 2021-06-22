@@ -120,24 +120,14 @@ export function findValueOption(
 
 export const getLabeledValue: GetLabeledValue<FlattenOptionData[]> = (
   value,
-  { options, prevValue, labelInValue, optionLabelProp },
+  { options, prevValueMap, labelInValue, optionLabelProp },
 ) => {
   const item = findValueOption([value], options)[0];
   const result: LabelValueType = {
     value,
   };
 
-  let prevValItem: LabelValueType;
-  const prevValues = toArray<LabelValueType>(prevValue as LabelValueType);
-  if (labelInValue) {
-    prevValItem = prevValues.find((prevItem: LabelValueType) => {
-      if (typeof prevItem === 'object' && 'value' in prevItem) {
-        return prevItem.value === value;
-      }
-      // [Legacy] Support `key` as `value`
-      return prevItem.key === value;
-    }) as LabelValueType;
-  }
+  const prevValItem: LabelValueType = labelInValue ? prevValueMap.get(value) : undefined;
 
   if (prevValItem && typeof prevValItem === 'object' && 'label' in prevValItem) {
     result.label = prevValItem.label;
@@ -160,6 +150,7 @@ export const getLabeledValue: GetLabeledValue<FlattenOptionData[]> = (
     }
   } else {
     result.label = value;
+    result.isCacheable = true;
   }
 
   // Used for motion control
@@ -211,7 +202,7 @@ export function filterOptions(
   let filterFunc: FilterFunc<SelectOptionsType[number]>;
 
   if (filterOption === false) {
-    return options;
+    return [...options];
   }
   if (typeof filterOption === 'function') {
     filterFunc = filterOption;

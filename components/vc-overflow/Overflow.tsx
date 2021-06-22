@@ -344,7 +344,7 @@ const Overflow = defineComponent({
         );
       }
 
-      let overflowNode = (
+      const overflowNode = (
         <Component
           class={classNames(!invalidate.value && prefixCls, className)}
           style={style}

@@ -78,7 +78,7 @@ export default defineComponent({
         overflowProps['aria-hidden'] = true;
       }
 
-      let itemNode = (
+      const itemNode = (
         <Component
           class={classNames(!invalidate && prefixCls)}
           style={overflowStyle}

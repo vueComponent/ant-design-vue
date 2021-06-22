@@ -397,9 +397,9 @@ export default function generateSelector<
       // ============================== Ref ===============================
       const selectorDomRef = createRef();
 
-      const mergedValue = ref(undefined);
+      const mergedValue = ref();
       watch(
-        computed(() => [props.value, props.defaultValue]),
+        () => props.value,
         () => {
           mergedValue.value = props.value !== undefined ? props.value : props.defaultValue;
         },
@@ -801,7 +801,7 @@ export default function generateSelector<
       // Close dropdown when disabled change
 
       watch(
-        computed(() => props.disabled),
+        () => props.disabled,
         () => {
           if (innerOpen.value && !!props.disabled) {
             setInnerOpen(false);
@@ -1355,7 +1355,6 @@ export default function generateSelector<
       );
     },
   });
-  Select.inheritAttrs = false;
   Select.props = initDefaultProps(BaseProps(), {});
   return Select;
 }

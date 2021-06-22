@@ -11,7 +11,7 @@ import {
 import PropTypes from '../../_util/vue-types';
 import { RefObject } from '../../_util/createRef';
 import antInput from '../../_util/antInputDirective';
-import classNames from 'ant-design-vue/es/_util/classNames';
+import classNames from '../../_util/classNames';
 
 interface InputProps {
   prefixCls: string;

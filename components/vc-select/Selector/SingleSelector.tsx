@@ -50,7 +50,7 @@ const SingleSelector = defineComponent<SelectorProps>({
       return inputValue;
     });
     watch(
-      computed(() => [combobox.value, props.activeValue]),
+      [combobox, () => props.activeValue],
       () => {
         if (combobox.value) {
           inputChanged.value = false;

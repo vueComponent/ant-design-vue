@@ -208,37 +208,34 @@ export default defineComponent({
       const ptg = scrollTop / enableScrollRange;
       return ptg * enableHeightRange;
     },
-    // Not show scrollbar when height is large thane scrollHeight
-    getVisible() {
-      const { visible } = this.state;
+    // Not show scrollbar when height is large than scrollHeight
+    showScroll() {
       const { height, scrollHeight } = this.$props;
-
-      if (height >= scrollHeight) {
-        return false;
-      }
-
-      return visible;
+      return scrollHeight > height;
     },
   },
 
   render() {
     // eslint-disable-next-line no-unused-vars
-    const { dragging } = this.state;
+    const { dragging, visible } = this.state;
     const { prefixCls } = this.$props;
     const spinHeight = this.getSpinHeight() + 'px';
     const top = this.getTop() + 'px';
-    const visible = this.getVisible();
+    const canScroll = this.showScroll();
+    const mergedVisible = canScroll && visible;
     return (
       <div
         ref={this.scrollbarRef}
-        class={`${prefixCls}-scrollbar`}
+        class={classNames(`${prefixCls}-scrollbar`, {
+          [`${prefixCls}-scrollbar-show`]: canScroll,
+        })}
         style={{
           width: '8px',
           top: 0,
           bottom: 0,
           right: 0,
           position: 'absolute',
-          display: visible ? undefined : 'none',
+          display: mergedVisible ? undefined : 'none',
         }}
         onMousedown={this.onContainerMouseDown}
         onMousemove={this.delayHidden}

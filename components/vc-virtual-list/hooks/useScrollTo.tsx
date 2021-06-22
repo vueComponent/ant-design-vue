@@ -1,12 +1,11 @@
 import { Data } from '../../_util/type';
-import { Ref } from 'vue';
+import { ComputedRef, Ref } from 'vue';
 import raf from '../../_util/raf';
 import { GetKey } from '../interface';
-import { ListState } from '../List';
 
 export default function useScrollTo(
   containerRef: Ref<Element | undefined>,
-  state: ListState,
+  mergedData: ComputedRef<any[]>,
   heights: Data,
   props,
   getKey: GetKey,
@@ -25,7 +24,7 @@ export default function useScrollTo(
 
     // Normal scroll logic
     raf.cancel(scroll!);
-    const data = state.mergedData;
+    const data = mergedData.value;
     const itemHeight = props.itemHeight;
     if (typeof arg === 'number') {
       syncScrollTop(arg);
@@ -58,7 +57,9 @@ export default function useScrollTo(
           let itemTop = 0;
           let itemBottom = 0;
 
-          for (let i = 0; i <= index; i += 1) {
+          const maxLen = Math.min(data.length, index);
+
+          for (let i = 0; i <= maxLen; i += 1) {
             const key = getKey(data[i]);
             itemTop = stackTop;
             const cacheHeight = heights[key!];

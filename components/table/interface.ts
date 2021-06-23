@@ -1,6 +1,6 @@
 import { ExtractPropTypes, PropType, UnwrapRef } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import { PaginationProps as getPaginationProps, PaginationConfig } from '../pagination';
+import { paginationProps as getPaginationProps, paginationConfig } from '../pagination';
 import { getSpinProps } from '../spin';
 import { tuple } from '../_util/type';
 
@@ -103,7 +103,7 @@ export const tableRowSelection = {
 
 export type SortOrder = 'descend' | 'ascend';
 
-const paginationProps = PaginationConfig();
+const paginationProps = paginationConfig();
 
 export const tableProps = {
   prefixCls: PropTypes.string,

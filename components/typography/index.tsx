@@ -6,16 +6,15 @@ import Text from './Text';
 import Title from './Title';
 import Typography from './Typography';
 
-export type {TypographyProps} from './Typography'
+export type { TypographyProps } from './Typography';
 
+Typography.Text = Text;
+Typography.Title = Title;
+Typography.Paragraph = Paragraph;
+Typography.Link = Link;
+Typography.Base = Base;
 
-Typography.Text = Text
-Typography.Title = Title
-Typography.Paragraph = Paragraph
-Typography.Link = Link
-Typography.Base = Base
-
-Typography.install = function(app: App) {
+Typography.install = function (app: App) {
   app.component(Typography.name, Typography);
   app.component(Typography.Text.displayName, Text);
   app.component(Typography.Title.displayName, Title);
@@ -29,7 +28,7 @@ export {
   Title as TypographyTitle,
   Paragraph as TypographyParagraph,
   Link as TypographyLink,
-}
+};
 
 export default Typography as typeof Typography &
   Plugin & {

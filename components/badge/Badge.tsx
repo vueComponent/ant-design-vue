@@ -44,9 +44,11 @@ export default defineComponent({
 
     // ================================ Misc ================================
     const numberedDisplayCount = computed(() => {
-      return ((props.count as number) > (props.overflowCount as number)
-        ? `${props.overflowCount}+`
-        : props.count) as string | number | null;
+      return (
+        (props.count as number) > (props.overflowCount as number)
+          ? `${props.overflowCount}+`
+          : props.count
+      ) as string | number | null;
     });
 
     const hasStatus = computed(

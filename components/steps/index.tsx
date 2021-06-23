@@ -70,7 +70,7 @@ const Steps = defineComponent({
 });
 
 /* istanbul ignore next */
-Steps.install = function(app: App) {
+Steps.install = function (app: App) {
   app.component(Steps.name, Steps);
   app.component(Steps.Step.name, Steps.Step);
   return app;

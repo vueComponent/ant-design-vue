@@ -178,9 +178,7 @@ function getFilterFunction(optionFilterProp: string) {
 
     // Group label search
     if ('options' in option) {
-      return toRawString(option.label)
-        .toLowerCase()
-        .includes(lowerSearchText);
+      return toRawString(option.label).toLowerCase().includes(lowerSearchText);
     }
     // Option value search
     const rawValue = option[optionFilterProp];
@@ -277,9 +275,7 @@ export function fillOptionsWithMissingValue(
   optionLabelProp: string,
   labelInValue: boolean,
 ): SelectOptionsType {
-  const values = toArray<RawValueType | LabelValueType>(value)
-    .slice()
-    .sort();
+  const values = toArray<RawValueType | LabelValueType>(value).slice().sort();
   const cloneOptions = [...options];
 
   // Convert options value to set

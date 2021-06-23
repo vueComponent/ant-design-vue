@@ -1,6 +1,6 @@
 const { resolve } = require('./utils/projectHelper');
 
-module.exports = function(modules) {
+module.exports = function (modules) {
   const plugins = [
     [
       resolve('@babel/plugin-transform-typescript'),

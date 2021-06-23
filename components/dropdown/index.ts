@@ -8,13 +8,13 @@ export type { DropdownButtonProps } from './dropdown-button';
 Dropdown.Button = DropdownButton;
 
 /* istanbul ignore next */
-Dropdown.install = function(app: App) {
+Dropdown.install = function (app: App) {
   app.component(Dropdown.name, Dropdown);
   app.component(DropdownButton.name, DropdownButton);
   return app;
 };
 
-export {DropdownButton}
+export { DropdownButton };
 
 export default Dropdown as typeof Dropdown &
   Plugin & {

@@ -50,9 +50,12 @@ const Space = defineComponent({
     watch(
       size,
       () => {
-        [horizontalSize.value, verticalSize.value] = ((Array.isArray(size.value)
-          ? size.value
-          : [size.value, size.value]) as [SpaceSize, SpaceSize]).map(item => getNumberSize(item));
+        [horizontalSize.value, verticalSize.value] = (
+          (Array.isArray(size.value) ? size.value : [size.value, size.value]) as [
+            SpaceSize,
+            SpaceSize,
+          ]
+        ).map(item => getNumberSize(item));
       },
       { immediate: true },
     );

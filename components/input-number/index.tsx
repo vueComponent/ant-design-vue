@@ -64,7 +64,12 @@ const InputNumber = defineComponent({
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, size, class: className, ...others } = {
+    const {
+      prefixCls: customizePrefixCls,
+      size,
+      class: className,
+      ...others
+    } = {
       ...getOptionProps(this),
       ...this.$attrs,
     } as any;

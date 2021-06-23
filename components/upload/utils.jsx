@@ -26,7 +26,7 @@ export function genPercentAdd() {
   let k = 0.1;
   const i = 0.01;
   const end = 0.98;
-  return function(s) {
+  return function (s) {
     let start = s;
     if (start >= end) {
       return start;

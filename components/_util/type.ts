@@ -34,7 +34,7 @@ export type VueNode = VNodeChild | JSX.Element;
 
 export const withInstall = <T>(comp: T) => {
   const c = comp as any;
-  c.install = function(app: App) {
+  c.install = function (app: App) {
     app.component(c.displayName || c.name, comp);
   };
 

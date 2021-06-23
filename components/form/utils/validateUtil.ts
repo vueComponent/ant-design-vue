@@ -211,9 +211,8 @@ export function validateRules(
       validateRule(name, value, rule, options, messageVariables),
     );
 
-    summaryPromise = (validateFirst
-      ? finishOnFirstFailed(rulePromises)
-      : finishOnAllFailed(rulePromises)
+    summaryPromise = (
+      validateFirst ? finishOnFirstFailed(rulePromises) : finishOnAllFailed(rulePromises)
     ).then((errors: string[]): string[] | Promise<string[]> => {
       if (!errors.length) {
         return [];

@@ -175,9 +175,9 @@ export default defineComponent({
         `${prefixCls.value}-link-title-active`,
       )[0];
       if (linkNode) {
-        (inkNodeRef.value as HTMLElement).style.top = `${linkNode.offsetTop +
-          linkNode.clientHeight / 2 -
-          4.5}px`;
+        (inkNodeRef.value as HTMLElement).style.top = `${
+          linkNode.offsetTop + linkNode.clientHeight / 2 - 4.5
+        }px`;
       }
     };
 

@@ -200,7 +200,7 @@ const Select = defineComponent({
   },
 });
 /* istanbul ignore next */
-Select.install = function(app: App) {
+Select.install = function (app: App) {
   app.component(Select.name, Select);
   app.component(Select.Option.displayName, Select.Option);
   app.component(Select.OptGroup.displayName, Select.OptGroup);

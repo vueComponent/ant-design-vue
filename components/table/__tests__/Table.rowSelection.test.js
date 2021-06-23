@@ -310,16 +310,10 @@ describe('Table.rowSelection', () => {
     );
     expect(dropdownWrapper.findAll('.ant-dropdown-menu-item').length).toBe(4);
 
-    dropdownWrapper
-      .findAll('.ant-dropdown-menu-item > div')
-      .at(2)
-      .trigger('click');
+    dropdownWrapper.findAll('.ant-dropdown-menu-item > div').at(2).trigger('click');
     expect(handleSelectOdd).toBeCalledWith([0, 1, 2, 3]);
 
-    dropdownWrapper
-      .findAll('.ant-dropdown-menu-item > div')
-      .at(3)
-      .trigger('click');
+    dropdownWrapper.findAll('.ant-dropdown-menu-item > div').at(3).trigger('click');
     expect(handleSelectEven).toBeCalledWith([0, 1, 2, 3]);
   });
 

@@ -13,33 +13,33 @@ import {
   WeekPickerPropsTypes,
 } from './interface';
 
-const WrappedRangePicker = (wrapPicker(
+const WrappedRangePicker = wrapPicker(
   RangePicker as any,
   RangePickerProps,
   'date',
-) as unknown) as DefineComponent<RangePickerPropsTypes>;
+) as unknown as DefineComponent<RangePickerPropsTypes>;
 
-const WrappedWeekPicker = (wrapPicker(
+const WrappedWeekPicker = wrapPicker(
   WeekPicker as any,
   WeekPickerProps,
   'week',
-) as unknown) as DefineComponent<WeekPickerPropsTypes>;
+) as unknown as DefineComponent<WeekPickerPropsTypes>;
 
-const DatePicker = (wrapPicker(
+const DatePicker = wrapPicker(
   createPicker(VcCalendar as any, DatePickerProps, 'ADatePicker'),
   DatePickerProps,
   'date',
-) as unknown) as DefineComponent<DatePickerPropsTypes> & {
+) as unknown as DefineComponent<DatePickerPropsTypes> & {
   readonly RangePicker: typeof WrappedRangePicker;
   readonly MonthPicker: typeof MonthPicker;
   readonly WeekPicker: typeof WrappedWeekPicker;
 };
 
-const MonthPicker = (wrapPicker(
+const MonthPicker = wrapPicker(
   createPicker(MonthCalendar as any, MonthPickerProps, 'AMonthPicker'),
   MonthPickerProps,
   'month',
-) as unknown) as DefineComponent<MonthPickerPropsTypes>;
+) as unknown as DefineComponent<MonthPickerPropsTypes>;
 
 Object.assign(DatePicker, {
   RangePicker: WrappedRangePicker,
@@ -48,7 +48,7 @@ Object.assign(DatePicker, {
 });
 
 /* istanbul ignore next */
-DatePicker.install = function(app: App) {
+DatePicker.install = function (app: App) {
   app.component(DatePicker.name, DatePicker);
   app.component(DatePicker.RangePicker.name, DatePicker.RangePicker);
   app.component(DatePicker.MonthPicker.name, DatePicker.MonthPicker);

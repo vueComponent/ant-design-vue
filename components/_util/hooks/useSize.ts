@@ -18,7 +18,7 @@ const useInjectSize = <T = SizeType>(props?: Record<any, any>): ComputedRef<T> =
     ? computed(() => props.size)
     : inject(
         sizeProvider,
-        computed(() => ('default' as unknown) as T),
+        computed(() => 'default' as unknown as T),
       );
   return size;
 };

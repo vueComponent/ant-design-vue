@@ -93,7 +93,7 @@ Result.PRESENTED_IMAGE_404 = ExceptionMap[404];
 Result.PRESENTED_IMAGE_500 = ExceptionMap[500];
 
 /* istanbul ignore next */
-Result.install = function(app: App) {
+Result.install = function (app: App) {
   app.component(Result.name, Result);
   return app;
 };

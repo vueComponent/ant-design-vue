@@ -59,15 +59,8 @@ const MonthPanel = {
   },
 
   render() {
-    const {
-      sValue,
-      cellRender,
-      contentRender,
-      locale,
-      rootPrefixCls,
-      disabledDate,
-      renderFooter,
-    } = this;
+    const { sValue, cellRender, contentRender, locale, rootPrefixCls, disabledDate, renderFooter } =
+      this;
     const year = sValue.year();
     const prefixCls = `${rootPrefixCls}-month-panel`;
 

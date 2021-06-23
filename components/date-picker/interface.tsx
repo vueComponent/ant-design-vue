@@ -56,9 +56,7 @@ export interface DatePickerPropsTypes extends PickerProps, SinglePickerProps {
   showTime?: Record<string, any> | boolean;
   showToday?: boolean;
   open?: boolean;
-  disabledTime?: (
-    current?: moment.Moment | null,
-  ) => {
+  disabledTime?: (current?: moment.Moment | null) => {
     disabledHours?: () => number[];
     disabledMinutes?: () => number[];
     disabledSeconds?: () => number[];

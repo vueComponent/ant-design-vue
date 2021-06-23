@@ -1,4 +1,3 @@
-
 export type { AffixProps } from './affix';
 export { default as Affix } from './affix';
 
@@ -6,7 +5,7 @@ export type { AnchorProps, AnchorLinkProps } from './anchor';
 export { default as Anchor, AnchorLink } from './anchor';
 
 export type { AutoCompleteProps } from './auto-complete';
-export {default as AutoComplete, AutoCompleteOptGroup, AutoCompleteOption } from './auto-complete'
+export { default as AutoComplete, AutoCompleteOptGroup, AutoCompleteOption } from './auto-complete';
 
 export type { AlertProps } from './alert';
 export { default as Alert } from './alert';
@@ -86,7 +85,7 @@ export { default as Layout, LayoutHeader, LayouSider, LayouFooter, LayouContent 
 export type { ListProps } from './list';
 export { default as List, ListItem, ListItemMeta } from './list';
 
-export type {  MessageArgsProps } from './message';
+export type { MessageArgsProps } from './message';
 export { default as message } from './message';
 
 export type { MenuProps, MenuTheme, SubMenuProps, MenuItemProps } from './menu';
@@ -131,7 +130,13 @@ export type { SelectProps } from './select';
 export { default as Select, SelectOptGroup, SelectOption } from './select';
 
 export type { SkeletonProps } from './skeleton';
-export { default as Skeleton, SkeletonButton, SkeletonAvatar, SkeletonInput, SkeletonImage } from './skeleton';
+export {
+  default as Skeleton,
+  SkeletonButton,
+  SkeletonAvatar,
+  SkeletonInput,
+  SkeletonImage,
+} from './skeleton';
 
 export { default as Slider } from './slider';
 
@@ -171,7 +176,13 @@ export type { TooltipProps } from './tooltip';
 export { default as Tooltip } from './tooltip';
 
 export type { TypographyProps } from './typography';
-export { default as Typography, TypographyLink, TypographyParagraph, TypographyText, TypographyTitle } from './typography';
+export {
+  default as Typography,
+  TypographyLink,
+  TypographyParagraph,
+  TypographyText,
+  TypographyTitle,
+} from './typography';
 
 export type { UploadProps } from './upload';
 

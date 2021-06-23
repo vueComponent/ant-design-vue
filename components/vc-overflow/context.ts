@@ -26,9 +26,9 @@ export interface OverflowContextProviderValueType {
   className?: string;
 }
 
-const OverflowContextProviderKey: InjectionKey<ComputedRef<OverflowContextProviderValueType | null>> = Symbol(
-  'OverflowContextProviderKey',
-);
+const OverflowContextProviderKey: InjectionKey<
+  ComputedRef<OverflowContextProviderValueType | null>
+> = Symbol('OverflowContextProviderKey');
 
 export const OverflowContextProvider = defineComponent({
   name: 'OverflowContextProvider',
@@ -45,9 +45,10 @@ export const OverflowContextProvider = defineComponent({
   },
 });
 
-export const useInjectOverflowContext = (): ComputedRef<OverflowContextProviderValueType | null> => {
-  return inject(
-    OverflowContextProviderKey,
-    computed(() => null),
-  );
-};
+export const useInjectOverflowContext =
+  (): ComputedRef<OverflowContextProviderValueType | null> => {
+    return inject(
+      OverflowContextProviderKey,
+      computed(() => null),
+    );
+  };

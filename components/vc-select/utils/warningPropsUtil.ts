@@ -137,9 +137,9 @@ function warningProps(props: SelectProps) {
     if (invalidateChildType) {
       warning(
         false,
-        `\`children\` should be \`Select.Option\` or \`Select.OptGroup\` instead of \`${invalidateChildType.displayName ||
-          invalidateChildType.name ||
-          invalidateChildType}\`.`,
+        `\`children\` should be \`Select.Option\` or \`Select.OptGroup\` instead of \`${
+          invalidateChildType.displayName || invalidateChildType.name || invalidateChildType
+        }\`.`,
       );
     }
 

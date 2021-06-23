@@ -9,7 +9,7 @@ import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOu
 export { IActionButtonProps as ActionButtonProps } from './ActionButton';
 export { ModalProps, ModalFuncProps } from './Modal';
 
-const info = function(props: ModalFuncProps) {
+const info = function (props: ModalFuncProps) {
   const config = {
     type: 'info',
     icon: <InfoCircleOutlined />,
@@ -19,7 +19,7 @@ const info = function(props: ModalFuncProps) {
   return modalConfirm(config);
 };
 
-const success = function(props: ModalFuncProps) {
+const success = function (props: ModalFuncProps) {
   const config = {
     type: 'success',
     icon: <CheckCircleOutlined />,
@@ -29,7 +29,7 @@ const success = function(props: ModalFuncProps) {
   return modalConfirm(config);
 };
 
-const error = function(props: ModalFuncProps) {
+const error = function (props: ModalFuncProps) {
   const config = {
     type: 'error',
     icon: <CloseCircleOutlined />,
@@ -39,7 +39,7 @@ const error = function(props: ModalFuncProps) {
   return modalConfirm(config);
 };
 
-const warning = function(props: ModalFuncProps) {
+const warning = function (props: ModalFuncProps) {
   const config = {
     type: 'warning',
     icon: <ExclamationCircleOutlined />,
@@ -75,7 +75,7 @@ Modal.destroyAll = function destroyAllFn() {
 };
 
 /* istanbul ignore next */
-Modal.install = function(app: App) {
+Modal.install = function (app: App) {
   app.component(Modal.name, Modal);
   return app;
 };

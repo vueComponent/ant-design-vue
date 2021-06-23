@@ -13,7 +13,7 @@ Skeleton.Input = SkeletonInput;
 Skeleton.Image = SkeletonImage;
 
 /* istanbul ignore next */
-Skeleton.install = function(app: App) {
+Skeleton.install = function (app: App) {
   app.component(Skeleton.name, Skeleton);
   app.component(Skeleton.Button.name, SkeletonButton);
   app.component(Skeleton.Avatar.name, SkeletonAvatar);

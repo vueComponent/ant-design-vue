@@ -211,7 +211,7 @@ const Mentions = defineComponent({
 });
 
 /* istanbul ignore next */
-Mentions.install = function(app: App) {
+Mentions.install = function (app: App) {
   app.component(Mentions.name, Mentions);
   app.component(Mentions.Option.name, Mentions.Option);
   return app;

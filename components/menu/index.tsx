@@ -6,7 +6,7 @@ import Divider from './src/Divider';
 import { App, Plugin } from 'vue';
 import { MenuTheme } from './src/interface';
 /* istanbul ignore next */
-Menu.install = function(app: App) {
+Menu.install = function (app: App) {
   app.component(Menu.name, Menu);
   app.component(MenuItem.name, MenuItem);
   app.component(SubMenu.name, SubMenu);

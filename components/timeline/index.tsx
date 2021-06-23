@@ -8,12 +8,12 @@ export type { TimelineItemProps } from './TimelineItem';
 Timeline.Item = TimelineItem;
 
 /* istanbul ignore next */
-Timeline.install = function(app: App) {
+Timeline.install = function (app: App) {
   app.component(Timeline.name, Timeline);
   app.component(TimelineItem.name, TimelineItem);
   return app;
 };
-export {TimelineItem}
+export { TimelineItem };
 export default Timeline as typeof Timeline &
   Plugin & {
     readonly Item: typeof TimelineItem;

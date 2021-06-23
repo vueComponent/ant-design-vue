@@ -154,9 +154,8 @@ export interface DescriptionsContextProp {
   contentStyle?: Ref<CSSProperties>;
 }
 
-export const descriptionsContext: InjectionKey<DescriptionsContextProp> = Symbol(
-  'descriptionsContext',
-);
+export const descriptionsContext: InjectionKey<DescriptionsContextProp> =
+  Symbol('descriptionsContext');
 
 const Descriptions = defineComponent({
   name: 'ADescriptions',
@@ -244,7 +243,7 @@ const Descriptions = defineComponent({
   },
 });
 
-Descriptions.install = function(app: App) {
+Descriptions.install = function (app: App) {
   app.component(Descriptions.name, Descriptions);
   app.component(Descriptions.Item.name, Descriptions.Item);
   return app;

@@ -1216,10 +1216,8 @@ export default defineComponent({
       transformCellText: customizeTransformCellText,
     } = this;
     const data = this.getCurrentPageData();
-    const {
-      getPopupContainer: getContextPopupContainer,
-      transformCellText: tct,
-    } = this.configProvider;
+    const { getPopupContainer: getContextPopupContainer, transformCellText: tct } =
+      this.configProvider;
     const getPopupContainer = this.getPopupContainer || getContextPopupContainer;
     const transformCellText = customizeTransformCellText || tct;
     let loading = this.loading;

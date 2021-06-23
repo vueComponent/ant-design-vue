@@ -11,7 +11,7 @@
     "parser": "babel-eslint"
   },
   "extends": ["plugin:vue/vue3-recommended", "prettier"],
-  "plugins": ["markdown"],
+  "plugins": ["markdown", "jest"],
   "overrides": [
     {
       "files": ["**/demo/*.md"],

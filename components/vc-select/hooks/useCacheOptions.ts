@@ -7,7 +7,7 @@ export default function useCacheOptions<
     label?: VNodeChild;
     key?: Key;
     disabled?: boolean;
-  }[]
+  }[],
 >(options: Ref) {
   const optionMap = computed(() => {
     const map: Map<RawValueType, FlattenOptionsType<OptionsType>[number]> = new Map();

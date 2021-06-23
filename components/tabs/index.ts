@@ -7,7 +7,7 @@ Tabs.TabPane = { ...TabPane, name: 'ATabPane', __ANT_TAB_PANE: true };
 Tabs.TabContent = { ...TabContent, name: 'ATabContent' };
 
 /* istanbul ignore next */
-Tabs.install = function(app: App) {
+Tabs.install = function (app: App) {
   app.component(Tabs.name, Tabs);
   app.component(Tabs.TabPane.name, Tabs.TabPane);
   app.component(Tabs.TabContent.name, Tabs.TabContent);

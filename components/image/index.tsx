@@ -28,7 +28,7 @@ export { imageProps };
 
 Image.PreviewGroup = PreviewGroup;
 
-Image.install = function(app: App) {
+Image.install = function (app: App) {
   app.component(Image.name, Image);
   app.component(Image.PreviewGroup.name, Image.PreviewGroup);
   return app;

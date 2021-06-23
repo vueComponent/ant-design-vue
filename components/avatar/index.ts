@@ -8,7 +8,7 @@ export { AvatarGroupProps } from './Group';
 Avatar.Group = Group;
 
 /* istanbul ignore next */
-Avatar.install = function(app: App) {
+Avatar.install = function (app: App) {
   app.component(Avatar.name, Avatar);
   app.component(Group.name, Group);
   return app;

@@ -56,8 +56,8 @@ const props = {
 
   maxTagCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   maxTagTextLength: PropTypes.number,
-  maxTagPlaceholder: PropTypes.any.def(() => (omittedValues: LabelValueType[]) =>
-    `+ ${omittedValues.length} ...`,
+  maxTagPlaceholder: PropTypes.any.def(
+    () => (omittedValues: LabelValueType[]) => `+ ${omittedValues.length} ...`,
   ),
   tagRender: PropTypes.func,
 

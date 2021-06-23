@@ -6,7 +6,7 @@ export { SpinProps, getSpinProps } from './Spin';
 Spin.setDefaultIndicator = setDefaultIndicator;
 
 /* istanbul ignore next */
-Spin.install = function(app: App) {
+Spin.install = function (app: App) {
   app.component(Spin.name, Spin);
   return app;
 };

@@ -146,7 +146,7 @@ const AutoComplete = defineComponent({
 });
 
 /* istanbul ignore next */
-AutoComplete.install = function(app: App) {
+AutoComplete.install = function (app: App) {
   app.component(AutoComplete.name, AutoComplete);
   app.component(AutoComplete.Option.displayName, AutoComplete.Option);
   app.component(AutoComplete.OptGroup.displayName, AutoComplete.OptGroup);

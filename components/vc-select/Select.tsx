@@ -63,9 +63,8 @@ const RefSelect = generateSelector<SelectOptionsType>({
   fillOptionsWithMissingValue,
 });
 
-export type ExportedSelectProps<
-  ValueType extends DefaultValueType = DefaultValueType
-> = SelectProps<SelectOptionsType, ValueType>;
+export type ExportedSelectProps<ValueType extends DefaultValueType = DefaultValueType> =
+  SelectProps<SelectOptionsType, ValueType>;
 
 const Select = defineComponent<Omit<ExportedSelectProps, 'children'>>({
   setup(props, { attrs, expose, slots }) {

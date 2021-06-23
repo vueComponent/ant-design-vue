@@ -90,10 +90,7 @@ const Header = {
           });
           return;
         }
-        value
-          .hour(parsed.hour())
-          .minute(parsed.minute())
-          .second(parsed.second());
+        value.hour(parsed.hour()).minute(parsed.minute()).second(parsed.second());
 
         // if time value not allowed, response warning.
         if (

@@ -190,15 +190,8 @@ const ImageInternal = defineComponent({
       return l;
     };
     return () => {
-      const {
-        prefixCls,
-        wrapperClassName,
-        fallback,
-        src,
-        preview,
-        placeholder,
-        wrapperStyle,
-      } = props;
+      const { prefixCls, wrapperClassName, fallback, src, preview, placeholder, wrapperStyle } =
+        props;
       const {
         width,
         height,

@@ -178,12 +178,7 @@ const DateTBody = {
           cls += ` ${nextMonthDayClass}`;
         }
 
-        if (
-          current
-            .clone()
-            .endOf('month')
-            .date() === current.date()
-        ) {
+        if (current.clone().endOf('month').date() === current.date()) {
           cls += ` ${lastDayOfMonthClass}`;
         }
 

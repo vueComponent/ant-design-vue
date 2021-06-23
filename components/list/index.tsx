@@ -322,7 +322,7 @@ const List = defineComponent({
 });
 
 /* istanbul ignore next */
-List.install = function(app: App) {
+List.install = function (app: App) {
   app.component(List.name, List);
   app.component(List.Item.name, List.Item);
   app.component(List.Item.Meta.name, List.Item.Meta);

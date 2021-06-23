@@ -3,7 +3,7 @@
 const deselectCurrent = (): (() => void) => {
   const selection = document.getSelection();
   if (!selection.rangeCount) {
-    return function() {};
+    return function () {};
   }
   let active = document.activeElement as any;
 
@@ -26,11 +26,11 @@ const deselectCurrent = (): (() => void) => {
   }
 
   selection.removeAllRanges();
-  return function() {
+  return function () {
     selection.type === 'Caret' && selection.removeAllRanges();
 
     if (!selection.rangeCount) {
-      ranges.forEach(function(range) {
+      ranges.forEach(function (range) {
         selection.addRange(range);
       });
     }

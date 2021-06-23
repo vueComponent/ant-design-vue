@@ -326,7 +326,7 @@ export default function generateSelector<
     label?: VNodeChild;
     key?: Key;
     disabled?: boolean;
-  }[]
+  }[],
 >(config: GenerateConfig<OptionsType>) {
   const {
     prefixCls: defaultPrefixCls,
@@ -442,29 +442,27 @@ export default function generateSelector<
         return mergedSearchValue;
       });
 
-      const mergedOptions = computed(
-        (): OptionsType => {
-          let newOptions = props.options;
-          if (newOptions === undefined) {
-            newOptions = convertChildrenToData(props.children);
-          }
+      const mergedOptions = computed((): OptionsType => {
+        let newOptions = props.options;
+        if (newOptions === undefined) {
+          newOptions = convertChildrenToData(props.children);
+        }
 
-          /**
-           * `tags` should fill un-list item.
-           * This is not cool here since TreeSelect do not need this
-           */
-          if (props.mode === 'tags' && fillOptionsWithMissingValue) {
-            newOptions = fillOptionsWithMissingValue(
-              newOptions,
-              mergedValue.value,
-              mergedOptionLabelProp.value,
-              props.labelInValue,
-            );
-          }
+        /**
+         * `tags` should fill un-list item.
+         * This is not cool here since TreeSelect do not need this
+         */
+        if (props.mode === 'tags' && fillOptionsWithMissingValue) {
+          newOptions = fillOptionsWithMissingValue(
+            newOptions,
+            mergedValue.value,
+            mergedOptionLabelProp.value,
+            props.labelInValue,
+          );
+        }
 
-          return newOptions || ([] as OptionsType);
-        },
-      );
+        return newOptions || ([] as OptionsType);
+      });
 
       const mergedFlattenOptions = computed(() => flattenOptions(mergedOptions.value, props));
 
@@ -553,14 +551,16 @@ export default function generateSelector<
         const { internalProps = {} } = props;
         if (!internalProps.skipTriggerSelect) {
           // Skip trigger `onSelect` or `onDeselect` if configured
-          const selectValue = (mergedLabelInValue.value
-            ? getLabeledValue(newValue, {
-                options: newValueOption,
-                prevValueMap: mergedValueMap.value,
-                labelInValue: mergedLabelInValue.value,
-                optionLabelProp: mergedOptionLabelProp.value,
-              })
-            : newValue) as SingleType<ValueType>;
+          const selectValue = (
+            mergedLabelInValue.value
+              ? getLabeledValue(newValue, {
+                  options: newValueOption,
+                  prevValueMap: mergedValueMap.value,
+                  labelInValue: mergedLabelInValue.value,
+                  optionLabelProp: mergedOptionLabelProp.value,
+                })
+              : newValue
+          ) as SingleType<ValueType>;
 
           if (isSelect && props.onSelect) {
             props.onSelect(selectValue, outOption);

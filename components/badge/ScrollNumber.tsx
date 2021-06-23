@@ -35,7 +35,7 @@ export default defineComponent({
         count,
         title,
         show,
-        component: Tag = ('sup' as unknown) as DefineComponent,
+        component: Tag = 'sup' as unknown as DefineComponent,
         class: className,
         style,
         ...restProps

@@ -93,7 +93,7 @@ const Table = defineComponent({
   },
 });
 /* istanbul ignore next */
-Table.install = function(app: App) {
+Table.install = function (app: App) {
   app.component(Table.name, Table);
   app.component(Table.Column.name, Table.Column);
   app.component(Table.ColumnGroup.name, Table.ColumnGroup);

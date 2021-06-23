@@ -11,7 +11,7 @@ import { withInstall } from '../_util/type';
 const defaultEmptyImg = <DefaultEmptyImg />;
 const simpleEmptyImg = <SimpleEmptyImg />;
 
-export interface TransferLocale {
+interface Locale {
   description?: string;
 }
 
@@ -45,7 +45,7 @@ const Empty: EmptyType = (props, { slots = {}, attrs }) => {
   return (
     <LocaleReceiver
       componentName="Empty"
-      children={(locale: TransferLocale) => {
+      children={(locale: Locale) => {
         const prefixCls = getPrefixCls('empty', customizePrefixCls);
         const des = typeof description !== 'undefined' ? description : locale.description;
         const alt = typeof des === 'string' ? des : 'empty';

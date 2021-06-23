@@ -1,5 +1,5 @@
 import omit from 'omit.js';
-import { defineComponent, inject, provide } from 'vue';
+import { defineComponent, ExtractPropTypes, inject, provide } from 'vue';
 import VcTimePicker from '../vc-time-picker';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import BaseMixin from '../_util/BaseMixin';
@@ -29,7 +29,7 @@ export function generateShowHourMinuteSecond(format: string) {
   };
 }
 
-export const TimePickerProps = () => ({
+export const timePickerProps = () => ({
   size: PropTypes.oneOf(tuple('large', 'default', 'small')),
   value: TimeOrTimesType,
   defaultValue: TimeOrTimesType,
@@ -74,11 +74,13 @@ export const TimePickerProps = () => ({
   onOpenChange: PropTypes.func,
 });
 
+export type TimePickerProps = Partial<ExtractPropTypes<ReturnType<typeof timePickerProps>>>;
+
 const TimePicker = defineComponent({
   name: 'ATimePicker',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: initDefaultProps(TimePickerProps(), {
+  props: initDefaultProps(timePickerProps(), {
     align: {
       offset: [0, -2],
     },

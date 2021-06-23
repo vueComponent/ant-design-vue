@@ -30,7 +30,6 @@ import { Breakpoint, responsiveArray } from '../_util/responsiveObserve';
 
 export { ListItemProps } from './Item';
 export { ListItemMetaProps } from './ItemMeta';
-export const ListItemMeta = ItemMeta;
 
 export type ColumnType = 'gutter' | 'column' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
@@ -329,6 +328,8 @@ List.install = function(app: App) {
   app.component(List.Item.Meta.name, List.Item.Meta);
   return app;
 };
+
+export { ItemMeta as ListItemMeta, Item as ListItem };
 
 export default List as typeof List &
   Plugin & {

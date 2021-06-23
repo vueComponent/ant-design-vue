@@ -142,7 +142,7 @@ const typeToIcon = {
   warning: ExclamationCircleOutlined,
 };
 
-export interface ArgsProps {
+export interface NotificationArgsProps {
   message: VNodeTypes;
   description?: VNodeTypes;
   btn?: VNodeTypes;
@@ -162,7 +162,7 @@ export interface ArgsProps {
   closeIcon?: VNodeTypes;
 }
 
-function notice(args: ArgsProps) {
+function notice(args: NotificationArgsProps) {
   const { icon, type, description, message, btn } = args;
   const outerPrefixCls = args.prefixCls || 'ant-notification';
   const prefixCls = `${outerPrefixCls}-notice`;

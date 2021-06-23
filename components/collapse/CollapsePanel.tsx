@@ -1,27 +1,30 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, ExtractPropTypes, inject } from 'vue';
 import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import VcCollapse from '../vc-collapse';
 import { defaultConfigProvider } from '../config-provider';
 import PropTypes from '../_util/vue-types';
 
+const collapsePanelProps = {
+  openAnimation: PropTypes.object,
+  prefixCls: PropTypes.string,
+  header: PropTypes.VNodeChild,
+  headerClass: PropTypes.string,
+  showArrow: PropTypes.looseBool,
+  isActive: PropTypes.looseBool,
+  destroyInactivePanel: PropTypes.looseBool,
+  disabled: PropTypes.looseBool,
+  accordion: PropTypes.looseBool,
+  forceRender: PropTypes.looseBool,
+  expandIcon: PropTypes.func,
+  extra: PropTypes.VNodeChild,
+  panelKey: PropTypes.VNodeChild,
+};
+
+export type CollapsePanelProps = Partial<ExtractPropTypes<typeof collapsePanelProps>>;
 export default defineComponent({
   name: 'ACollapsePanel',
   inheritAttrs: false,
-  props: {
-    openAnimation: PropTypes.object,
-    prefixCls: PropTypes.string,
-    header: PropTypes.VNodeChild,
-    headerClass: PropTypes.string,
-    showArrow: PropTypes.looseBool,
-    isActive: PropTypes.looseBool,
-    destroyInactivePanel: PropTypes.looseBool,
-    disabled: PropTypes.looseBool,
-    accordion: PropTypes.looseBool,
-    forceRender: PropTypes.looseBool,
-    expandIcon: PropTypes.func,
-    extra: PropTypes.VNodeChild,
-    panelKey: PropTypes.VNodeChild,
-  },
+  props: collapsePanelProps,
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

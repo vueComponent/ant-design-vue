@@ -203,6 +203,8 @@ TreeSelect.install = function(app: App) {
   return app;
 };
 
+export const TreeSelectNode = TreeSelect.TreeNode;
+
 export default TreeSelect as typeof TreeSelect &
   Plugin & {
     readonly TreeNode: typeof TreeNode;

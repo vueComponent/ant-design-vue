@@ -4,6 +4,7 @@ import SubMenu, { SubMenuProps } from './src/SubMenu';
 import ItemGroup, { MenuItemGroupProps } from './src/ItemGroup';
 import Divider from './src/Divider';
 import { App, Plugin } from 'vue';
+import { MenuTheme } from './src/interface';
 /* istanbul ignore next */
 Menu.install = function(app: App) {
   app.component(Menu.name, Menu);
@@ -24,11 +25,14 @@ export {
   MenuItem as Item,
   MenuItem,
   ItemGroup,
+  ItemGroup as MenuItemGroup,
   Divider,
+  Divider as MenuDivider,
   MenuProps,
   SubMenuProps,
   MenuItemProps,
   MenuItemGroupProps,
+  MenuTheme,
 };
 
 export default Menu as typeof Menu &

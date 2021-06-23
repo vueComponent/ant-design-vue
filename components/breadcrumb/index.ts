@@ -3,9 +3,9 @@ import Breadcrumb from './Breadcrumb';
 import BreadcrumbItem from './BreadcrumbItem';
 import BreadcrumbSeparator from './BreadcrumbSeparator';
 
-export { BreadcrumbProps } from './Breadcrumb';
-export { BreadcrumbItemProps } from './BreadcrumbItem';
-export { BreadcrumbSeparator } from './BreadcrumbSeparator';
+export type { BreadcrumbProps } from './Breadcrumb';
+export type  { BreadcrumbItemProps } from './BreadcrumbItem';
+export  type { BreadcrumbSeparatorProps } from './BreadcrumbSeparator';
 
 Breadcrumb.Item = BreadcrumbItem;
 Breadcrumb.Separator = BreadcrumbSeparator;
@@ -18,6 +18,7 @@ Breadcrumb.install = function(app: App) {
   return app;
 };
 
+export { BreadcrumbItem, BreadcrumbSeparator };
 export default Breadcrumb as typeof Breadcrumb &
   Plugin & {
     readonly Item: typeof BreadcrumbItem;

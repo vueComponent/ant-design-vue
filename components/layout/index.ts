@@ -16,6 +16,12 @@ Layout.install = function(app: App) {
   app.component(Layout.Content.name, Layout.Content);
   return app;
 };
+const LayoutHeader = Layout.Header;
+const LayouFooter = Layout.Footer;
+const LayouSider = Layout.Sider;
+const LayouContent = Layout.Content;
+
+export { LayoutHeader, LayouSider, LayouFooter, LayouContent };
 export default Layout as typeof Layout &
   Plugin & {
     readonly Sider: typeof Sider;

@@ -249,7 +249,6 @@ Descriptions.install = function(app: App) {
   app.component(Descriptions.Item.name, Descriptions.Item);
   return app;
 };
-
 export default Descriptions as typeof Descriptions &
   Plugin & {
     readonly Item: typeof DescriptionsItem;

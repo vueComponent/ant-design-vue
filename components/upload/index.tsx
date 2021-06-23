@@ -13,6 +13,8 @@ Upload.install = function(app: App) {
   return app;
 };
 
+export const UploadDragger = Dragger;
+
 export default Upload as typeof Upload &
   Plugin & {
     readonly Dragger: typeof Dragger;

@@ -2,7 +2,7 @@ import { defineComponent, onBeforeUnmount, onMounted, onUpdated, ref } from 'vue
 import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import Statistic, { StatisticProps } from './Statistic';
+import Statistic, { statisticProps } from './Statistic';
 import { formatCountdown as formatCD, countdownValueType, FormatConfig } from './utils';
 
 const REFRESH_INTERVAL = 1000 / 30;
@@ -13,7 +13,7 @@ function getTime(value?: countdownValueType) {
 
 export default defineComponent({
   name: 'AStatisticCountdown',
-  props: initDefaultProps(StatisticProps, {
+  props: initDefaultProps(statisticProps, {
     format: 'HH:mm:ss',
   }),
   emits: ['finish', 'change'],

@@ -13,7 +13,7 @@ Avatar.install = function(app: App) {
   app.component(Group.name, Group);
   return app;
 };
-
+export { Group as AvatarGroup };
 export default Avatar as typeof Avatar &
   Plugin & {
     readonly Group: typeof Group;

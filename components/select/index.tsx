@@ -7,6 +7,7 @@ import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import { SizeType } from '../config-provider';
 
 type RawValue = string | number;
 
@@ -19,7 +20,6 @@ export interface LabeledValue {
   value: RawValue;
   label: VNodeChild;
 }
-export type SizeType = 'small' | 'middle' | 'large' | undefined;
 export type SelectValue = RawValue | RawValue[] | LabeledValue | LabeledValue[] | undefined;
 
 export interface InternalSelectProps<VT> extends Omit<RcSelectProps<VT>, 'mode'> {
@@ -206,6 +206,9 @@ Select.install = function(app: App) {
   app.component(Select.OptGroup.displayName, Select.OptGroup);
   return app;
 };
+
+export const SelectOption = Select.Option;
+export const SelectOptGroup = Select.OptGroup;
 export default Select as typeof Select &
   Plugin & {
     readonly Option: typeof Option;

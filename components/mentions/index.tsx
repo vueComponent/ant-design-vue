@@ -1,9 +1,18 @@
-import { App, defineComponent, inject, nextTick, PropType, VNodeTypes, Plugin } from 'vue';
+import {
+  App,
+  defineComponent,
+  inject,
+  nextTick,
+  PropType,
+  VNodeTypes,
+  Plugin,
+  ExtractPropTypes,
+} from 'vue';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import VcMentions from '../vc-mentions';
-import { mentionsProps } from '../vc-mentions/src/mentionsProps';
+import { mentionsProps as baseMentionsProps } from '../vc-mentions/src/mentionsProps';
 import Spin from '../spin';
 import BaseMixin from '../_util/BaseMixin';
 import { defaultConfigProvider } from '../config-provider';
@@ -17,7 +26,7 @@ interface MentionsConfig {
   split?: string;
 }
 
-export interface OptionProps {
+export interface MentionsOptionProps {
   value: string;
   disabled: boolean;
   children: VNodeTypes;
@@ -57,28 +66,32 @@ function getMentions(value = '', config: MentionsConfig) {
     .filter(entity => !!entity && !!entity.value);
 }
 
+const mentionsProps = {
+  ...baseMentionsProps,
+  loading: PropTypes.looseBool,
+  onFocus: {
+    type: Function as PropType<(e: FocusEvent) => void>,
+  },
+  onBlur: {
+    type: Function as PropType<(e: FocusEvent) => void>,
+  },
+  onSelect: {
+    type: Function as PropType<(option: MentionsOptionProps, prefix: string) => void>,
+  },
+  onChange: {
+    type: Function as PropType<(text: string) => void>,
+  },
+};
+
+export type MentionsProps = Partial<ExtractPropTypes<typeof mentionsProps>>;
+
 const Mentions = defineComponent({
   name: 'AMentions',
   mixins: [BaseMixin],
   inheritAttrs: false,
   Option: { ...Option, name: 'AMentionsOption' },
   getMentions,
-  props: {
-    ...mentionsProps,
-    loading: PropTypes.looseBool,
-    onFocus: {
-      type: Function as PropType<(e: FocusEvent) => void>,
-    },
-    onBlur: {
-      type: Function as PropType<(e: FocusEvent) => void>,
-    },
-    onSelect: {
-      type: Function as PropType<(option: OptionProps, prefix: string) => void>,
-    },
-    onChange: {
-      type: Function as PropType<(text: string) => void>,
-    },
-  },
+  props: mentionsProps,
   emits: ['update:value', 'change', 'focus', 'blur', 'select'],
   setup() {
     return {
@@ -112,7 +125,7 @@ const Mentions = defineComponent({
         focused: false,
       });
     },
-    handleSelect(...args: [OptionProps, string]) {
+    handleSelect(...args: [MentionsOptionProps, string]) {
       this.$emit('select', ...args);
       this.setState({
         focused: true,
@@ -203,6 +216,8 @@ Mentions.install = function(app: App) {
   app.component(Mentions.Option.name, Mentions.Option);
   return app;
 };
+
+export const MentionsOption = Mentions.Option;
 
 export default Mentions as typeof Mentions &
   Plugin & {

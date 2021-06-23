@@ -3,16 +3,16 @@ import PropTypes from '../_util/vue-types';
 import { flattenChildren } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
-const breadcrumbSeparator = {
+const breadcrumbSeparatorProps = {
   prefixCls: PropTypes.string,
 };
-export type BreadcrumbSeparator = Partial<ExtractPropTypes<typeof breadcrumbSeparator>>;
+export type BreadcrumbSeparatorProps = Partial<ExtractPropTypes<typeof breadcrumbSeparatorProps>>;
 
 export default defineComponent({
   name: 'ABreadcrumbSeparator',
   __ANT_BREADCRUMB_SEPARATOR: true,
   inheritAttrs: false,
-  props: breadcrumbSeparator,
+  props: breadcrumbSeparatorProps,
   setup(props, { slots, attrs }) {
     const { prefixCls } = useConfigInject('breadcrumb', props);
 

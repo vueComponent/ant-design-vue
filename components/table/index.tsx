@@ -100,6 +100,9 @@ Table.install = function(app: App) {
   return app;
 };
 
+export const TableColumn = Table.Column;
+export const TableColumnGroup = Table.ColumnGroup;
+
 export default Table as typeof Table &
   Plugin & {
     readonly Column: typeof Column;

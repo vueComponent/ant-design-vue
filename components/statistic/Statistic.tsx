@@ -1,4 +1,4 @@
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, ExtractPropTypes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import StatisticNumber from './Number';
@@ -6,7 +6,7 @@ import { countdownValueType } from './utils';
 import Skeleton from '../skeleton/Skeleton';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
-export const StatisticProps = {
+export const statisticProps = {
   prefixCls: PropTypes.string,
   decimalSeparator: PropTypes.string,
   groupSeparator: PropTypes.string,
@@ -25,9 +25,11 @@ export const StatisticProps = {
   loading: PropTypes.looseBool,
 };
 
+export type StatisticProps = Partial<ExtractPropTypes<typeof statisticProps>>;
+
 export default defineComponent({
   name: 'AStatistic',
-  props: initDefaultProps(StatisticProps, {
+  props: initDefaultProps(statisticProps, {
     decimalSeparator: '.',
     groupSeparator: ',',
     loading: false,

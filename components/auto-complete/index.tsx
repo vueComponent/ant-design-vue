@@ -1,4 +1,4 @@
-import { App, defineComponent, inject, provide, Plugin, VNode } from 'vue';
+import { App, defineComponent, inject, provide, Plugin, VNode, ExtractPropTypes } from 'vue';
 import Select, { SelectProps } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';
@@ -7,14 +7,14 @@ import { defaultConfigProvider } from '../config-provider';
 import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
 import Omit from 'omit.js';
 import warning from '../_util/warning';
-
-const { Option, OptGroup } = Select;
+import Option from './Option';
+import OptGroup from './OptGroup';
 
 function isSelectOptionOrSelectOptGroup(child: any): boolean {
   return child?.type?.isSelectOption || child?.type?.isSelectOptGroup;
 }
 
-const AutoCompleteProps = {
+const autoCompleteProps = {
   ...SelectProps(),
   dataSource: PropTypes.array,
   dropdownMenuStyle: PropTypes.style,
@@ -22,11 +22,17 @@ const AutoCompleteProps = {
   dropdownMatchSelectWidth: PropTypes.looseBool,
 };
 
+export type AutoCompleteProps = Partial<ExtractPropTypes<typeof autoCompleteProps>>;
+
+export const AutoCompleteOption = Option;
+
+export const AutoCompleteOptGroup = OptGroup;
+
 const AutoComplete = defineComponent({
   name: 'AAutoComplete',
   inheritAttrs: false,
   props: {
-    ...AutoCompleteProps,
+    ...autoCompleteProps,
     prefixCls: PropTypes.string.def('ant-select'),
     showSearch: PropTypes.looseBool,
     transitionName: PropTypes.string.def('slide-up'),
@@ -38,8 +44,8 @@ const AutoComplete = defineComponent({
     defaultActiveFirstOption: PropTypes.looseBool.def(true),
   },
   emits: ['change', 'select', 'focus', 'blur'],
-  Option: { ...Option, name: 'AAutoCompleteOption' },
-  OptGroup: { ...OptGroup, name: 'AAutoCompleteOptGroup' },
+  Option,
+  OptGroup,
   setup(props, { slots }) {
     warning(
       !(props.dataSource !== undefined || 'dataSource' in slots),
@@ -142,8 +148,8 @@ const AutoComplete = defineComponent({
 /* istanbul ignore next */
 AutoComplete.install = function(app: App) {
   app.component(AutoComplete.name, AutoComplete);
-  app.component(AutoComplete.Option.name, AutoComplete.Option);
-  app.component(AutoComplete.OptGroup.name, AutoComplete.OptGroup);
+  app.component(AutoComplete.Option.displayName, AutoComplete.Option);
+  app.component(AutoComplete.OptGroup.displayName, AutoComplete.OptGroup);
   return app;
 };
 

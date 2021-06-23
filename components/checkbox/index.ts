@@ -10,7 +10,7 @@ Checkbox.install = function(app: App) {
   app.component(CheckboxGroup.name, CheckboxGroup);
   return app;
 };
-
+export { CheckboxGroup };
 export default Checkbox as typeof Checkbox &
   Plugin & {
     readonly Group: typeof CheckboxGroup;

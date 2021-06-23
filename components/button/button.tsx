@@ -1,4 +1,4 @@
-import { defineComponent, inject, Text, VNode } from 'vue';
+import { defineComponent, ExtractPropTypes, inject, Text, VNode } from 'vue';
 import Wave from '../_util/wave';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';
@@ -8,6 +8,9 @@ import { defaultConfigProvider } from '../config-provider';
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
 const props = buttonTypes();
+
+export type ButtonProps = Partial<ExtractPropTypes<ReturnType<typeof buttonTypes>>>;
+
 export default defineComponent({
   name: 'AButton',
   inheritAttrs: false,

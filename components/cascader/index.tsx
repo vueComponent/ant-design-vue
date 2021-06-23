@@ -1,4 +1,4 @@
-import { inject, provide, PropType, defineComponent, CSSProperties } from 'vue';
+import { inject, provide, PropType, defineComponent, CSSProperties, ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 import VcCascader from '../vc-cascader';
 import arrayTreeFilter from 'array-tree-filter';
@@ -99,7 +99,7 @@ export interface FilteredOptionsType extends EmptyFilteredOptionsType {
 // }).loose;
 function noop() {}
 
-const CascaderProps = {
+const cascaderProps = {
   /** 可选项数据源 */
   options: { type: Array as PropType<CascaderOptionType[]>, default: [] },
   /** 默认的选中项 */
@@ -153,6 +153,8 @@ const CascaderProps = {
   onSearch: PropTypes.func,
   'onUpdate:value': PropTypes.func,
 };
+
+export type CascaderProps = Partial<ExtractPropTypes<typeof cascaderProps>>;
 
 // We limit the filtered item count by default
 const defaultLimit = 50;
@@ -214,7 +216,7 @@ const Cascader = defineComponent({
   name: 'ACascader',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: CascaderProps,
+  props: cascaderProps,
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

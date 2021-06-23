@@ -34,6 +34,8 @@ Image.install = function(app: App) {
   return app;
 };
 
+export { PreviewGroup as ImagePreviewGroup };
+
 export default Image as typeof Image &
   Plugin & {
     readonly PreviewGroup: typeof PreviewGroup;

@@ -20,6 +20,8 @@ Input.install = function(app: App) {
   return app;
 };
 
+export { Group as InputGroup, Search as InputSearch, TextArea, Password as InputPassword };
+
 export default Input as typeof Input &
   Plugin & {
     readonly Group: typeof Group;

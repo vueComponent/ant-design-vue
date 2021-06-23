@@ -3,6 +3,8 @@ import Card from './Card';
 import Meta from './Meta';
 import Grid from './Grid';
 
+export type {CardProps} from './Card'
+
 Card.Meta = Meta;
 Card.Grid = Grid;
 
@@ -13,6 +15,8 @@ Card.install = function(app: App) {
   app.component(Grid.name, Grid);
   return app;
 };
+
+export {Meta as CardMeta, Grid as CardGrid}
 
 export default Card as typeof Card &
   Plugin & {

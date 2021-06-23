@@ -56,4 +56,6 @@ DatePicker.install = function(app: App) {
   return app;
 };
 
+export { RangePicker, MonthPicker, WeekPicker };
+
 export default DatePicker as typeof DatePicker & Plugin;

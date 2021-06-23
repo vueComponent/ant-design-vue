@@ -12,6 +12,8 @@ Tree.install = function(app: App) {
   return app;
 };
 
+export const TreeNode = Tree.TreeNode;
+export { DirectoryTree };
 export default Tree as typeof Tree &
   Plugin & {
     readonly TreeNode: any;

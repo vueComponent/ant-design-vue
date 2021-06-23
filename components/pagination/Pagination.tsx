@@ -1,4 +1,4 @@
-import { defineComponent, inject } from 'vue';
+import { defineComponent, ExtractPropTypes, inject } from 'vue';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
@@ -14,7 +14,7 @@ import enUS from '../vc-pagination/locale/en_US';
 import { defaultConfigProvider } from '../config-provider';
 import classNames from '../_util/classNames';
 
-export const PaginationProps = () => ({
+export const paginationProps = () => ({
   total: PropTypes.number,
   defaultCurrent: PropTypes.number,
   disabled: PropTypes.looseBool,
@@ -42,16 +42,19 @@ export const PaginationProps = () => ({
   'onUpdate:pageSize': PropTypes.func,
 });
 
-export const PaginationConfig = () => ({
-  ...PaginationProps(),
+export const paginationConfig = () => ({
+  ...paginationProps(),
   position: PropTypes.oneOf(tuple('top', 'bottom', 'both')),
 });
+
+export type PaginationProps = Partial<ExtractPropTypes<ReturnType<typeof paginationProps>>>;
+export type PaginationConfig = Partial<ExtractPropTypes<ReturnType<typeof paginationConfig>>>;
 
 export default defineComponent({
   name: 'APagination',
   inheritAttrs: false,
   props: {
-    ...PaginationProps(),
+    ...paginationProps(),
   },
   emits: ['change', 'showSizeChange', 'update:current', 'update:pageSize'],
   setup() {

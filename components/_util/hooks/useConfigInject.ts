@@ -1,5 +1,5 @@
 import { RequiredMark } from '../../form/Form';
-import { computed, ComputedRef, inject, UnwrapRef } from 'vue';
+import { computed, ComputedRef, inject, UnwrapRef, VNodeChild } from 'vue';
 import {
   ConfigProviderProps,
   defaultConfigProvider,
@@ -21,6 +21,7 @@ export default (
   form?: ComputedRef<{
     requiredMark?: RequiredMark;
   }>;
+  renderEmpty?: ComputedRef<(componentName?: string) => VNodeChild | JSX.Element>;
 } => {
   const configProvider = inject<UnwrapRef<ConfigProviderProps>>(
     'configProvider',
@@ -28,6 +29,7 @@ export default (
   );
   const prefixCls = computed(() => configProvider.getPrefixCls(name, props.prefixCls));
   const direction = computed(() => configProvider.direction);
+  const renderEmpty = computed(() => configProvider.renderEmpty);
   const space = computed(() => configProvider.space);
   const pageHeader = computed(() => configProvider.pageHeader);
   const form = computed(() => configProvider.form);
@@ -42,5 +44,6 @@ export default (
     space,
     pageHeader,
     form,
+    renderEmpty,
   };
 };

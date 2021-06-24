@@ -10,6 +10,17 @@
 
 ---
 
+## 2.2.0-beta.5
+
+`2021-06-24`
+
+- 🎉 支持 vite-plugin-components 按需加载
+- 🎉 重构 List 组件
+- 🌟 Select 新增响应式折叠选项 [656d14](https://github.com/vueComponent/ant-design-vue/commit/656d14fc4e4ef0f781324438f0d58cfb6816d583)
+- 🐞 修复 Select 动态更新选项时虚拟列表无法滚动问题 [b2aa49d](https://github.com/vueComponent/ant-design-vue/commit/b2aa49d064a83c6ce786a6bb4cd9fc5266a5964d)
+- 🐞 修复 Select 键盘事件位置不正确问题 [604372](https://github.com/vueComponent/ant-design-vue/commit/604372ff2da521dd580ad5229f7dbd445c1c6190)
+- 🐞 修复 AutoComplete 不支持 options slot 问题 [#4012](https://github.com/vueComponent/ant-design-vue/issues/4012)
+
 ## 2.2.0-beta.4
 
 `2021-06-21`

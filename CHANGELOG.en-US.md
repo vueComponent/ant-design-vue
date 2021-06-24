@@ -10,6 +10,17 @@
 
 ---
 
+## 2.2.0-beta.5
+
+`2021-06-24`
+
+- 🎉 Support vite-plugin-components to be loaded on demand
+- 🎉 Refactor the List component
+- 🌟 Select adds responsive folding option [656d14](https://github.com/vueComponent/ant-design-vue/commit/656d14fc4e4ef0f781324438f0d58cfb6816d583)
+- 🐞 Fix the problem that the virtual list cannot be scrolled when the Select dynamic update option [b2aa49d](https://github.com/vueComponent/ant-design-vue/commit/b2aa49d064a83c6ce786a6bb4cd9fc5266a5964d)
+- 🐞 Fix the incorrect location of Select keyboard events [604372](https://github.com/vueComponent/ant-design-vue/commit/604372ff2da521dd580ad5229f7dbd445c1c6190)
+- 🐞 Fix the issue that AutoComplete does not support options slot [#4012](https://github.com/vueComponent/ant-design-vue/issues/4012)
+
 ## 2.2.0-beta.4
 
 `2021-06-21`

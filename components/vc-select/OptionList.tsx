@@ -82,7 +82,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
     const memoFlattenOptions = useMemo(
       () => props.flattenOptions,
       [() => props.open, () => props.flattenOptions],
-      (prev, next) => next[0] && prev[1] !== next[1],
+      next => next[0],
     );
 
     // =========================== List ===========================

@@ -71,7 +71,7 @@ export { default as Form, FormItem } from './form';
 
 export { default as Grid } from './grid';
 
-export { default as Input, InputGroup, InputPassword, InputSearch, TextArea } from './input';
+export { default as Input, InputGroup, InputPassword, InputSearch, Textarea } from './input';
 
 export type { ImageProps } from './image';
 export { default as Image, ImagePreviewGroup } from './image';
@@ -80,7 +80,13 @@ export type { InputNumberProps } from './input-number';
 export { default as InputNumber } from './input-number';
 
 export type { LayoutProps } from './layout';
-export { default as Layout, LayoutHeader, LayouSider, LayouFooter, LayouContent } from './layout';
+export {
+  default as Layout,
+  LayoutHeader,
+  LayoutSider,
+  LayoutFooter,
+  LayoutContent,
+} from './layout';
 
 export type { ListProps } from './list';
 export { default as List, ListItem, ListItemMeta } from './list';

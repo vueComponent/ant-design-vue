@@ -35,7 +35,7 @@ const DatePicker = wrapPicker(
   readonly WeekPicker: typeof WrappedWeekPicker;
 };
 
-const MonthPicker = wrapPicker(
+export const MonthPicker = wrapPicker(
   createPicker(MonthCalendar as any, MonthPickerProps, 'AMonthPicker'),
   MonthPickerProps,
   'month',
@@ -56,6 +56,6 @@ DatePicker.install = function (app: App) {
   return app;
 };
 
-export { RangePicker, MonthPicker, WeekPicker };
+export { WrappedRangePicker as RangePicker, WrappedWeekPicker as WeekPicker };
 
 export default DatePicker as typeof DatePicker & Plugin;

@@ -172,7 +172,7 @@ export default defineComponent({
       const childrenLength = children.length;
       let tooltipTitle: any = title;
       if (typeof title === 'undefined') {
-        tooltipTitle = firstLevel ? children : '';
+        tooltipTitle = firstLevel && childrenLength ? children : '';
       } else if (title === false) {
         tooltipTitle = '';
       }

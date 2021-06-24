@@ -100,7 +100,10 @@ const AutoComplete = defineComponent({
       [`${prefixCls}-show-search`]: true,
       [`${prefixCls}-auto-complete`]: true,
     };
-    const childArray = getSlot(this, 'dataSource');
+    let childArray = getSlot(this, 'dataSource');
+    if ('options' in this.$slots) {
+      childArray = getSlot(this, 'options');
+    }
     if (childArray.length && isSelectOptionOrSelectOptGroup(childArray[0])) {
       optionChildren = childArray;
     } else {

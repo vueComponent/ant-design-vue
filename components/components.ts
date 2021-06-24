@@ -187,3 +187,5 @@ export {
 export type { UploadProps } from './upload';
 
 export { default as Upload } from './upload';
+
+export { default as LocaleProvider } from './locale-provider';

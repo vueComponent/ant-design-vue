@@ -3,7 +3,6 @@ import moment from 'moment';
 import MockDate from 'mockdate';
 import { sleep } from '../../../tests/utils';
 import {
-  LocaleProvider,
   Pagination,
   DatePicker,
   TimePicker,
@@ -14,6 +13,7 @@ import {
   Select,
   Transfer,
 } from '../..';
+import LocaleProvider from '..';
 import arEG from '../ar_EG';
 import bgBG from '../bg_BG';
 import caES from '../ca_ES';

@@ -3,7 +3,7 @@ import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getPropsData, filterEmpty, getComponent } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import TimelineItem, { TimeLineItemProps } from './TimelineItem';
+import TimelineItem, { TimelineItemProps } from './TimelineItem';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple } from '../_util/type';
@@ -64,7 +64,7 @@ export default defineComponent({
       : [...children, pendingItem];
 
     const getPositionCls = (ele, idx: number) => {
-      const eleProps = getPropsData(ele) as TimeLineItemProps;
+      const eleProps = getPropsData(ele) as TimelineItemProps;
       if (mode === 'alternate') {
         if (eleProps.position === 'right') return `${prefixCls}-item-right`;
         if (eleProps.position === 'left') return `${prefixCls}-item-left`;

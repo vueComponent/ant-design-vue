@@ -92,7 +92,6 @@ const Dropdown = defineComponent({
       class: classNames(child?.props?.class, `${prefixCls}-trigger`),
       disabled,
     });
-    console.log(disabled);
     const triggerActions = disabled ? [] : typeof trigger === 'string' ? [trigger] : trigger;
     let alignPoint;
     if (triggerActions && triggerActions.indexOf('contextmenu') !== -1) {

@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Statistic from './Statistic';
 import Countdown from './Countdown';
 

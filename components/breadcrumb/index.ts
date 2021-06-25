@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Breadcrumb from './Breadcrumb';
 import BreadcrumbItem from './BreadcrumbItem';
 import BreadcrumbSeparator from './BreadcrumbSeparator';

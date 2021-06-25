@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { flattenChildren } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';

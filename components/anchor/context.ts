@@ -1,4 +1,5 @@
-import { computed, Ref, inject, InjectionKey, provide } from 'vue';
+import type { Ref, InjectionKey } from 'vue';
+import { computed, inject, provide } from 'vue';
 
 export interface AnchorContext {
   registerLink: (link: string) => void;

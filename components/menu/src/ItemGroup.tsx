@@ -1,5 +1,6 @@
 import { getPropsSlot } from '../../_util/props-util';
-import { computed, defineComponent, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { computed, defineComponent } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { useInjectMenu } from './hooks/useMenuContext';
 

@@ -1,4 +1,4 @@
-import moment from 'moment';
+import type moment from 'moment';
 
 type Value = moment.Moment | undefined | null;
 type Format = string | string[] | undefined | ((val?: Value) => string | string[] | undefined);

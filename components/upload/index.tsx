@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Upload from './Upload';
 import Dragger from './Dragger';
 

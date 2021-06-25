@@ -1,12 +1,5 @@
-import {
-  BaseTransitionProps,
-  CSSProperties,
-  defineComponent,
-  nextTick,
-  Ref,
-  Transition as T,
-  TransitionGroup as TG,
-} from 'vue';
+import type { BaseTransitionProps, CSSProperties, Ref } from 'vue';
+import { defineComponent, nextTick, Transition as T, TransitionGroup as TG } from 'vue';
 import { findDOMNode } from './props-util';
 
 export const getTransitionProps = (transitionName: string, opt: object = {}) => {

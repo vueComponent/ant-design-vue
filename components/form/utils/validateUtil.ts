@@ -5,7 +5,7 @@ import { warning } from '../../vc-util/warning';
 import { setValues } from './valueUtil';
 import { defaultValidateMessages } from './messages';
 import { isValidElement } from '../../_util/props-util';
-import { InternalNamePath, RuleObject, ValidateMessages, ValidateOptions } from '../interface';
+import type { InternalNamePath, RuleObject, ValidateMessages, ValidateOptions } from '../interface';
 
 // Remove incorrect original ts define
 const AsyncValidator: any = RawAsyncValidator;

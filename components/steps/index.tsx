@@ -1,4 +1,5 @@
-import { App, defineComponent, ExtractPropTypes, inject, Plugin } from 'vue';
+import type { App, ExtractPropTypes, Plugin } from 'vue';
+import { defineComponent, inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import PropTypes, { withUndefined } from '../_util/vue-types';

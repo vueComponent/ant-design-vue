@@ -1,4 +1,4 @@
-import { VNodeTypes } from '@vue/runtime-core';
+import type { VNodeTypes } from '@vue/runtime-core';
 import { isFragment } from '../../_util/props-util';
 
 export interface Option {

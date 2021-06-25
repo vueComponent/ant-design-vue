@@ -1,11 +1,13 @@
-import { provide, App, defineComponent, VNode, PropType, reactive, watch, onUnmounted } from 'vue';
+import type { App, VNode, PropType } from 'vue';
+import { provide, defineComponent, reactive, watch, onUnmounted } from 'vue';
 import PropTypes from '../_util/vue-types';
 import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
-import { ModalLocale, changeConfirmLocale } from '../modal/locale';
+import type { ModalLocale } from '../modal/locale';
+import { changeConfirmLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { withInstall } from '../_util/type';
-import { ValidateMessages } from '../form/interface';
+import type { ValidateMessages } from '../form/interface';
 export interface Locale {
   locale: string;
   Pagination?: Object;

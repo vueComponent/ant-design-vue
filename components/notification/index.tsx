@@ -1,4 +1,4 @@
-import { VNodeTypes, CSSProperties } from 'vue';
+import type { VNodeTypes, CSSProperties } from 'vue';
 import Notification from '../vc-notification';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';

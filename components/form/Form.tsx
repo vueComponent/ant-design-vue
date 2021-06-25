@@ -1,30 +1,26 @@
-import {
-  defineComponent,
-  PropType,
-  computed,
-  ExtractPropTypes,
-  HTMLAttributes,
-  watch,
-  ref,
-} from 'vue';
+import type { PropType, ExtractPropTypes, HTMLAttributes } from 'vue';
+import { defineComponent, computed, watch, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import warning from '../_util/warning';
-import FormItem, { FieldExpose } from './FormItem';
+import type { FieldExpose } from './FormItem';
+import FormItem from './FormItem';
 import { getNamePath, containsNamePath } from './utils/valueUtil';
 import { defaultValidateMessages } from './utils/messages';
 import { allPromiseFinish } from './utils/asyncUtil';
 import { toArray } from './utils/typeUtil';
 import isEqual from 'lodash-es/isEqual';
-import scrollIntoView, { Options } from 'scroll-into-view-if-needed';
+import type { Options } from 'scroll-into-view-if-needed';
+import scrollIntoView from 'scroll-into-view-if-needed';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { tuple, VueNode } from '../_util/type';
-import { ColProps } from '../grid/Col';
-import { InternalNamePath, NamePath, ValidateErrorEntity, ValidateOptions } from './interface';
+import type { VueNode } from '../_util/type';
+import { tuple } from '../_util/type';
+import type { ColProps } from '../grid/Col';
+import type { InternalNamePath, NamePath, ValidateErrorEntity, ValidateOptions } from './interface';
 import { useInjectSize } from '../_util/hooks/useSize';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useProvideForm } from './context';
-import { SizeType } from '../config-provider';
+import type { SizeType } from '../config-provider';
 
 export type RequiredMark = boolean | 'optional';
 export type FormLayout = 'horizontal' | 'inline' | 'vertical';

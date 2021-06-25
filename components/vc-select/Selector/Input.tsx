@@ -1,15 +1,8 @@
 import { cloneElement } from '../../_util/vnode';
-import {
-  defineComponent,
-  getCurrentInstance,
-  inject,
-  onMounted,
-  VNode,
-  VNodeChild,
-  withDirectives,
-} from 'vue';
+import type { VNode, VNodeChild } from 'vue';
+import { defineComponent, getCurrentInstance, inject, onMounted, withDirectives } from 'vue';
 import PropTypes from '../../_util/vue-types';
-import { RefObject } from '../../_util/createRef';
+import type { RefObject } from '../../_util/createRef';
 import antInput from '../../_util/antInputDirective';
 import classNames from '../../_util/classNames';
 

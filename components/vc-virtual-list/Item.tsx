@@ -1,4 +1,5 @@
-import { cloneVNode, FunctionalComponent, PropType } from 'vue';
+import type { FunctionalComponent, PropType } from 'vue';
+import { cloneVNode } from 'vue';
 
 export interface ItemProps {
   setRef: (element: HTMLElement) => void;

@@ -3,7 +3,8 @@ import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
-import Element, { skeletonElementProps, SkeletonElementProps } from './Element';
+import type { SkeletonElementProps } from './Element';
+import Element, { skeletonElementProps } from './Element';
 import Omit from 'omit.js';
 
 export interface SkeletonInputProps extends Omit<SkeletonElementProps, 'size' | 'shape'> {

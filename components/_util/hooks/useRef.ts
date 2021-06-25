@@ -1,4 +1,5 @@
-import { onBeforeUpdate, ref, Ref } from 'vue';
+import type { Ref } from 'vue';
+import { onBeforeUpdate, ref } from 'vue';
 
 export type UseRef = [(el: any, key: string | number) => void, Ref<any>];
 

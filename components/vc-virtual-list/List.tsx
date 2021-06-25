@@ -1,17 +1,15 @@
+import type { PropType, Component, CSSProperties } from 'vue';
 import {
   ref,
   defineComponent,
-  PropType,
   watchEffect,
-  Component,
   computed,
   nextTick,
   onBeforeUnmount,
   reactive,
-  CSSProperties,
   watch,
 } from 'vue';
-import { Key } from '../_util/type';
+import type { Key } from '../_util/type';
 import Filler from './Filler';
 import Item from './Item';
 import ScrollBar from './ScrollBar';
@@ -22,7 +20,7 @@ import useMobileTouchMove from './hooks/useMobileTouchMove';
 import useOriginScroll from './hooks/useOriginScroll';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import { RenderFunc, SharedConfig } from './interface';
+import type { RenderFunc, SharedConfig } from './interface';
 import supportsPassive from '../_util/supportsPassive';
 
 const EMPTY_DATA = [];

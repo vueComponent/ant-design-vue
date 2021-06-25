@@ -4,7 +4,8 @@ import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
-import Element, { skeletonElementProps, SkeletonElementProps } from './Element';
+import type { SkeletonElementProps } from './Element';
+import Element, { skeletonElementProps } from './Element';
 
 export interface AvatarProps extends Omit<SkeletonElementProps, 'shape'> {
   shape?: 'circle' | 'square';

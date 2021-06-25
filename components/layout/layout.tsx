@@ -1,4 +1,5 @@
-import { createVNode, defineComponent, provide, ref, ExtractPropTypes, HTMLAttributes } from 'vue';
+import type { ExtractPropTypes, HTMLAttributes } from 'vue';
+import { createVNode, defineComponent, provide, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import useConfigInject from '../_util/hooks/useConfigInject';

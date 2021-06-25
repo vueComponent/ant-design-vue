@@ -1,4 +1,5 @@
-import { App, defineComponent, VNodeTypes, Plugin, ExtractPropTypes, computed } from 'vue';
+import type { App, VNodeTypes, Plugin, ExtractPropTypes } from 'vue';
+import { defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';

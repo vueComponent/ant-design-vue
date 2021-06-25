@@ -1,5 +1,6 @@
 import { defineComponent, inject } from 'vue';
-import Radio, { radioProps, RadioProps } from './Radio';
+import type { RadioProps } from './Radio';
+import Radio, { radioProps } from './Radio';
 import { getOptionProps, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 

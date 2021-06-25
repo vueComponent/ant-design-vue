@@ -1,4 +1,4 @@
-import { PropType } from 'vue';
+import type { PropType } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { initDefaultProps } from '../../_util/props-util';
 import {

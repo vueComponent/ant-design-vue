@@ -5,15 +5,16 @@ import classNames from '../_util/classNames';
 import pickAttrs from '../_util/pickAttrs';
 import { isValidElement } from '../_util/props-util';
 import createRef from '../_util/createRef';
-import { computed, defineComponent, nextTick, reactive, VNodeChild, watch } from 'vue';
+import type { VNodeChild } from 'vue';
+import { computed, defineComponent, nextTick, reactive, watch } from 'vue';
 import List from '../vc-virtual-list/List';
-import {
+import type {
   OptionsType as SelectOptionsType,
   OptionData,
   RenderNode,
   OnActiveValue,
 } from './interface';
-import { RawValueType, FlattenOptionsType } from './interface/generator';
+import type { RawValueType, FlattenOptionsType } from './interface/generator';
 import useMemo from '../_util/hooks/useMemo';
 export interface OptionListProps {
   prefixCls: string;

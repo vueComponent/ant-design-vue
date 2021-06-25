@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Timeline from './Timeline';
 import TimelineItem from './TimelineItem';
 

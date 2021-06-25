@@ -14,7 +14,7 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { cloneElement } from '../_util/vnode';
 import BaseMixin2 from '../_util/BaseMixin2';
 import { generateValueMaps } from './util';
-import { Key } from '../_util/type';
+import type { Key } from '../_util/type';
 
 function stopPropagation(e) {
   e.stopPropagation();

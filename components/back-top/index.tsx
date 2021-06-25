@@ -1,13 +1,12 @@
+import type { ExtractPropTypes, PropType } from 'vue';
 import {
   defineComponent,
-  ExtractPropTypes,
   inject,
   nextTick,
   onActivated,
   onBeforeUnmount,
   onMounted,
   reactive,
-  PropType,
   ref,
   watch,
   onDeactivated,

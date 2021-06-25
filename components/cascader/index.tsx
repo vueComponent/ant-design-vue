@@ -1,4 +1,5 @@
-import { inject, provide, PropType, defineComponent, CSSProperties, ExtractPropTypes } from 'vue';
+import type { PropType, CSSProperties, ExtractPropTypes } from 'vue';
+import { inject, provide, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import VcCascader from '../vc-cascader';
 import arrayTreeFilter from 'array-tree-filter';
@@ -23,8 +24,9 @@ import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
 import warning from '../_util/warning';
 import { defaultConfigProvider } from '../config-provider';
-import { tuple, VueNode, withInstall } from '../_util/type';
-import { RenderEmptyHandler } from '../config-provider/renderEmpty';
+import type { VueNode } from '../_util/type';
+import { tuple, withInstall } from '../_util/type';
+import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
 export interface CascaderOptionType {
   value?: string | number;

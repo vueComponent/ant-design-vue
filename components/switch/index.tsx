@@ -1,9 +1,9 @@
+import type { ExtractPropTypes } from 'vue';
 import {
   defineComponent,
   inject,
   onBeforeMount,
   ref,
-  ExtractPropTypes,
   computed,
   onMounted,
   nextTick,

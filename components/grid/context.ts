@@ -1,5 +1,6 @@
 import { computed } from 'vue';
-import { Ref, inject, InjectionKey, provide, ComputedRef } from 'vue';
+import type { Ref, InjectionKey, ComputedRef } from 'vue';
+import { inject, provide } from 'vue';
 
 export interface RowContext {
   gutter: ComputedRef<[number, number]>;

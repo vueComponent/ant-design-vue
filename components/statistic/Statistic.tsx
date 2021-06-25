@@ -1,8 +1,9 @@
-import { defineComponent, ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
+import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import StatisticNumber from './Number';
-import { countdownValueType } from './utils';
+import type { countdownValueType } from './utils';
 import Skeleton from '../skeleton/Skeleton';
 import useConfigInject from '../_util/hooks/useConfigInject';
 

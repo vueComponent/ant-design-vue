@@ -1,8 +1,9 @@
-import { inject, InjectionKey, provide, ComputedRef, computed } from 'vue';
-import { ColProps } from '../grid';
-import { RequiredMark, ValidationRule } from './Form';
-import { ValidateStatus, FieldExpose } from './FormItem';
-import { FormLabelAlign } from './interface';
+import type { InjectionKey, ComputedRef } from 'vue';
+import { inject, provide, computed } from 'vue';
+import type { ColProps } from '../grid';
+import type { RequiredMark, ValidationRule } from './Form';
+import type { ValidateStatus, FieldExpose } from './FormItem';
+import type { FormLabelAlign } from './interface';
 
 export interface FormContextProps {
   model?: ComputedRef<any>;

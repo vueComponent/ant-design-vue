@@ -1,4 +1,5 @@
-import { onMounted, Ref, ref } from 'vue';
+import type { Ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 /**
  * Similar with `useLock`, but this hook will always execute last value.

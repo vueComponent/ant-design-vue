@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Button from './button';
 import ButtonGroup from './button-group';
 export type { ButtonProps } from './button';

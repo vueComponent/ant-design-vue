@@ -3,7 +3,7 @@ import MenuItem, { MenuItemProps } from './src/MenuItem';
 import SubMenu, { SubMenuProps } from './src/SubMenu';
 import ItemGroup, { MenuItemGroupProps } from './src/ItemGroup';
 import Divider from './src/Divider';
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import { MenuTheme } from './src/interface';
 /* istanbul ignore next */
 Menu.install = function (app: App) {

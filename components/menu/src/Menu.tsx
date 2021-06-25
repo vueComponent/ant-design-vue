@@ -1,25 +1,11 @@
-import { Key } from '../../_util/type';
-import {
-  computed,
-  defineComponent,
-  ExtractPropTypes,
-  ref,
-  PropType,
-  inject,
-  watchEffect,
-  watch,
-  onMounted,
-  unref,
-  UnwrapRef,
-} from 'vue';
+import type { Key } from '../../_util/type';
+import type { ExtractPropTypes, PropType, UnwrapRef } from 'vue';
+import { computed, defineComponent, ref, inject, watchEffect, watch, onMounted, unref } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
-import useProvideMenu, {
-  MenuContextProvider,
-  StoreMenuInfo,
-  useProvideFirstLevel,
-} from './hooks/useMenuContext';
+import type { StoreMenuInfo } from './hooks/useMenuContext';
+import useProvideMenu, { MenuContextProvider, useProvideFirstLevel } from './hooks/useMenuContext';
 import useConfigInject from '../../_util/hooks/useConfigInject';
-import {
+import type {
   MenuTheme,
   MenuMode,
   BuiltinPlacements,
@@ -28,7 +14,8 @@ import {
   SelectInfo,
 } from './interface';
 import devWarning from '../../vc-util/devWarning';
-import { collapseMotion, CSSMotionProps } from '../../_util/transition';
+import type { CSSMotionProps } from '../../_util/transition';
+import { collapseMotion } from '../../_util/transition';
 import uniq from 'lodash-es/uniq';
 import { SiderCollapsedKey } from '../../layout/injectionKey';
 import { flattenChildren } from '../../_util/props-util';

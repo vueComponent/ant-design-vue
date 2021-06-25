@@ -1,5 +1,7 @@
-import { computed, ComputedRef, inject, provide, UnwrapRef } from 'vue';
-import { ConfigProviderProps, defaultConfigProvider, SizeType } from '../../config-provider';
+import type { ComputedRef, UnwrapRef } from 'vue';
+import { computed, inject, provide } from 'vue';
+import type { ConfigProviderProps, SizeType } from '../../config-provider';
+import { defaultConfigProvider } from '../../config-provider';
 
 const sizeProvider = Symbol('SizeProvider');
 

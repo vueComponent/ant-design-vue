@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Tabs from './tabs';
 import TabPane from '../vc-tabs/src/TabPane';
 import TabContent from '../vc-tabs/src/TabContent';

@@ -1,3 +1,4 @@
+import type { ExtractPropTypes } from 'vue';
 import {
   defineComponent,
   nextTick,
@@ -6,7 +7,6 @@ import {
   onUpdated,
   reactive,
   ref,
-  ExtractPropTypes,
   computed,
 } from 'vue';
 import PropTypes from '../_util/vue-types';

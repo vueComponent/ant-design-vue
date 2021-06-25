@@ -1,12 +1,13 @@
 import { warning } from '../../vc-util/warning';
-import { cloneVNode, isVNode, VNodeChild } from 'vue';
-import {
+import type { VNodeChild } from 'vue';
+import { cloneVNode, isVNode } from 'vue';
+import type {
   OptionsType as SelectOptionsType,
   OptionData,
   OptionGroupData,
   FlattenOptionData,
 } from '../interface';
-import {
+import type {
   LabelValueType,
   FilterFunc,
   RawValueType,

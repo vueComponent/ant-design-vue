@@ -1,7 +1,8 @@
-import { App, defineComponent, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
+import { defineComponent } from 'vue';
 import T, { defaultTableProps } from './Table';
-import Column from './Column';
-import ColumnGroup from './ColumnGroup';
+import type Column from './Column';
+import type ColumnGroup from './ColumnGroup';
 import {
   getOptionProps,
   getKey,

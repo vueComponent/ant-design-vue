@@ -1,27 +1,18 @@
-import {
-  ref,
+import type {
   Ref,
   App,
-  defineComponent,
   PropType,
   VNode,
   HTMLAttributes,
   ExtractPropTypes,
-  onMounted,
-  onBeforeUnmount,
   Plugin,
   CSSProperties,
-  provide,
-  toRef,
   InjectionKey,
-  computed,
 } from 'vue';
+import { ref, defineComponent, onMounted, onBeforeUnmount, provide, toRef, computed } from 'vue';
 import warning from '../_util/warning';
-import ResponsiveObserve, {
-  Breakpoint,
-  responsiveArray,
-  ScreenMap,
-} from '../_util/responsiveObserve';
+import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
+import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import Row from './Row';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';

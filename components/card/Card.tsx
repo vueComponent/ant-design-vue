@@ -1,12 +1,5 @@
-import {
-  inject,
-  isVNode,
-  defineComponent,
-  VNodeTypes,
-  PropType,
-  VNode,
-  ExtractPropTypes,
-} from 'vue';
+import type { VNodeTypes, PropType, VNode, ExtractPropTypes } from 'vue';
+import { inject, isVNode, defineComponent } from 'vue';
 import { tuple } from '../_util/type';
 import Tabs from '../tabs';
 import Row from '../row';

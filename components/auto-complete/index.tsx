@@ -1,4 +1,5 @@
-import { App, defineComponent, inject, provide, Plugin, VNode, ExtractPropTypes } from 'vue';
+import type { App, Plugin, VNode, ExtractPropTypes } from 'vue';
+import { defineComponent, inject, provide } from 'vue';
 import Select, { SelectProps } from '../select';
 import Input from '../input';
 import InputElement from './InputElement';

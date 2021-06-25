@@ -1,5 +1,6 @@
 import omit from 'omit.js';
-import { defineComponent, ExtractPropTypes, inject, provide } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, inject, provide } from 'vue';
 import VcTimePicker from '../vc-time-picker';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import BaseMixin from '../_util/BaseMixin';

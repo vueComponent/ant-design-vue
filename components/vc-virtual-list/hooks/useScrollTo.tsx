@@ -1,7 +1,7 @@
-import { Data } from '../../_util/type';
-import { ComputedRef, Ref } from 'vue';
+import type { Data } from '../../_util/type';
+import type { ComputedRef, Ref } from 'vue';
 import raf from '../../_util/raf';
-import { GetKey } from '../interface';
+import type { GetKey } from '../interface';
 
 export default function useScrollTo(
   containerRef: Ref<Element | undefined>,

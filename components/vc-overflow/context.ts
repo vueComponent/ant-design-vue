@@ -1,13 +1,6 @@
-import {
-  computed,
-  ComputedRef,
-  defineComponent,
-  inject,
-  InjectionKey,
-  PropType,
-  provide,
-} from 'vue';
-import { Key } from '../_util/type';
+import type { ComputedRef, InjectionKey, PropType } from 'vue';
+import { computed, defineComponent, inject, provide } from 'vue';
+import type { Key } from '../_util/type';
 
 export interface OverflowContextProviderValueType {
   prefixCls: string;

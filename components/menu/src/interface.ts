@@ -1,4 +1,4 @@
-import { Key } from '../../_util/type';
+import type { Key } from '../../_util/type';
 
 export type MenuTheme = 'light' | 'dark';
 

@@ -1,11 +1,5 @@
-import {
-  defineComponent,
-  ExtractPropTypes,
-  nextTick,
-  onBeforeUnmount,
-  onMounted,
-  watch,
-} from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, nextTick, onBeforeUnmount, onMounted, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import classNames from '../_util/classNames';

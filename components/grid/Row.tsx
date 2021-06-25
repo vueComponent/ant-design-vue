@@ -1,20 +1,10 @@
-import {
-  defineComponent,
-  ref,
-  onMounted,
-  onBeforeUnmount,
-  ExtractPropTypes,
-  computed,
-  CSSProperties,
-} from 'vue';
+import type { ExtractPropTypes, CSSProperties } from 'vue';
+import { defineComponent, ref, onMounted, onBeforeUnmount, computed } from 'vue';
 import classNames from '../_util/classNames';
 import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';
-import ResponsiveObserve, {
-  Breakpoint,
-  ScreenMap,
-  responsiveArray,
-} from '../_util/responsiveObserve';
+import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
+import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
 import useProvideRow from './context';

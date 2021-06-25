@@ -1,4 +1,4 @@
-import { FieldError } from '../interface';
+import type { FieldError } from '../interface';
 export function allPromiseFinish(promiseList: Promise<FieldError>[]): Promise<FieldError[]> {
   let hasError = false;
   let count = promiseList.length;

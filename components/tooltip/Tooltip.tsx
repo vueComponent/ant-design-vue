@@ -1,4 +1,4 @@
-import { defineComponent, ExtractPropTypes, inject, CSSProperties, onMounted, ref } from 'vue';
+import { defineComponent, ExtractPropTypes, CSSProperties, onMounted, ref } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import classNames from '../_util/classNames';
 import getPlacements from './placements';
@@ -7,7 +7,6 @@ import { PresetColorTypes } from '../_util/colors';
 import warning from '../_util/warning';
 import { getPropsSlot, getStyle, filterEmpty, isValidElement } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import { defaultConfigProvider } from '../config-provider';
 import abstractTooltipProps, { triggerTypes, placementTypes } from './abstractTooltipProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
 

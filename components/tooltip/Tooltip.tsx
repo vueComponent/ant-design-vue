@@ -9,6 +9,7 @@ import { getPropsSlot, getStyle, filterEmpty, isValidElement } from '../_util/pr
 import { cloneElement } from '../_util/vnode';
 import { defaultConfigProvider } from '../config-provider';
 import abstractTooltipProps, { triggerTypes, placementTypes } from './abstractTooltipProps';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 const splitObject = (obj: any, keys: string[]) => {
   const picked = {};
@@ -42,7 +43,7 @@ export default defineComponent({
   props: tooltipProps,
   emits: ['update:visible', 'visibleChange'],
   setup(props, { slots, emit, attrs, expose }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
+    const { prefixCls, getTargetContainer } = useConfigInject('tooltip', props);
 
     const visible = ref(props.visible);
 
@@ -173,15 +174,7 @@ export default defineComponent({
     };
 
     return () => {
-      const {
-        prefixCls: customizePrefixCls,
-        openClassName,
-        getPopupContainer,
-        color,
-        overlayClassName,
-      } = props;
-      const { getPopupContainer: getContextPopupContainer, getPrefixCls } = configProvider;
-      const prefixCls = getPrefixCls('tooltip', customizePrefixCls);
+      const { openClassName, getPopupContainer, color, overlayClassName } = props;
       let children = filterEmpty(slots.default?.()) ?? null;
       children = children.length === 1 ? children[0] : children;
       // Hide tooltip when there is no title
@@ -195,11 +188,11 @@ export default defineComponent({
         isValidElement(children) ? children : <span>{children}</span>,
       );
       const childCls = classNames({
-        [openClassName || `${prefixCls}-open`]: visible.value,
+        [openClassName || `${prefixCls.value}-open`]: visible.value,
         [child.props && child.props.class]: child.props && child.props.class,
       });
       const customOverlayClassName = classNames(overlayClassName, {
-        [`${prefixCls}-${color}`]: color && PresetColorRegex.test(color),
+        [`${prefixCls.value}-${color}`]: color && PresetColorRegex.test(color),
       });
       let formattedOverlayInnerStyle: CSSProperties;
       let arrowContentStyle: CSSProperties;
@@ -211,15 +204,17 @@ export default defineComponent({
       const vcTooltipProps = {
         ...attrs,
         ...props,
-        prefixCls,
-        getTooltipContainer: getPopupContainer || getContextPopupContainer,
+        prefixCls: prefixCls.value,
+        getTooltipContainer: getPopupContainer || getTargetContainer.value,
         builtinPlacements: getTooltipPlacements(),
         overlay: getOverlay(),
         visible: visible.value,
         ref: tooltip,
         overlayClassName: customOverlayClassName,
         overlayInnerStyle: formattedOverlayInnerStyle,
-        arrowContent: <span class={`${prefixCls}-arrow-content`} style={arrowContentStyle}></span>,
+        arrowContent: (
+          <span class={`${prefixCls.value}-arrow-content`} style={arrowContentStyle}></span>
+        ),
         onVisibleChange: handleVisibleChange,
         onPopupAlign,
       };

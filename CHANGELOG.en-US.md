@@ -10,6 +10,12 @@
 
 ---
 
+## 1.7.6
+
+`2021-06-26`
+
+- 🐞 Fix the problem that the height of the table is misplaced and the expansion does not take effect when the alias is not set [#4223](https://github.com/vueComponent/ant-design-vue/issues/4223)
+
 ## 1.7.5
 
 `2021-05-09`

@@ -1,4 +1,4 @@
-import { App } from 'vue';
+import type { App } from 'vue';
 
 import * as components from './components';
 import { default as version } from './version';

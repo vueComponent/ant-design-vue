@@ -29,7 +29,7 @@
  * - `combobox` mode not support `optionLabelProp`
  */
 
-import { OptionsType as SelectOptionsType } from './interface';
+import type { OptionsType as SelectOptionsType } from './interface';
 import SelectOptionList from './OptionList';
 import Option from './Option';
 import OptGroup from './OptGroup';
@@ -42,8 +42,9 @@ import {
   flattenOptions,
   fillOptionsWithMissingValue,
 } from './utils/valueUtil';
-import generateSelector, { SelectProps } from './generate';
-import { DefaultValueType } from './interface/generator';
+import type { SelectProps } from './generate';
+import generateSelector from './generate';
+import type { DefaultValueType } from './interface/generator';
 import warningProps from './utils/warningPropsUtil';
 import { defineComponent, ref } from 'vue';
 import omit from 'lodash-es/omit';

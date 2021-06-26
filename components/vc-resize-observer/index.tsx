@@ -1,11 +1,11 @@
 // based on rc-resize-observer 1.0.0
+import type { PropType } from 'vue';
 import {
   defineComponent,
   getCurrentInstance,
   onMounted,
   onUnmounted,
   onUpdated,
-  PropType,
   reactive,
   watch,
 } from 'vue';

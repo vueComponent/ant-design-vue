@@ -3,13 +3,15 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
 
-import Col, { ColProps } from '../grid/Col';
+import type { ColProps } from '../grid/Col';
+import Col from '../grid/Col';
 import { useProvideForm, useInjectForm, useProvideFormItemPrefix } from './context';
 import ErrorList from './ErrorList';
 import classNames from '../_util/classNames';
-import { ValidateStatus } from './FormItem';
-import { VueNode } from '../_util/type';
-import { computed, defineComponent, HTMLAttributes, onUnmounted } from 'vue';
+import type { ValidateStatus } from './FormItem';
+import type { VueNode } from '../_util/type';
+import type { HTMLAttributes } from 'vue';
+import { computed, defineComponent, onUnmounted } from 'vue';
 
 export interface FormItemInputMiscProps {
   prefixCls: string;

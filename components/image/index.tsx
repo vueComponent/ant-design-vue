@@ -1,4 +1,5 @@
-import { App, defineComponent, ExtractPropTypes, ImgHTMLAttributes, Plugin } from 'vue';
+import type { App, ExtractPropTypes, ImgHTMLAttributes, Plugin } from 'vue';
+import { defineComponent } from 'vue';
 import ImageInternal from '../vc-image';
 import { imageProps } from '../vc-image/src/Image';
 import useConfigInject from '../_util/hooks/useConfigInject';

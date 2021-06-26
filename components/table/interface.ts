@@ -1,4 +1,4 @@
-import { ExtractPropTypes, PropType, UnwrapRef } from 'vue';
+import type { ExtractPropTypes, PropType, UnwrapRef } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { paginationProps as getPaginationProps, paginationConfig } from '../pagination';
 import { getSpinProps } from '../spin';

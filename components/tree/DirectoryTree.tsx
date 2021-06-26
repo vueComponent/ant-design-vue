@@ -1,4 +1,5 @@
-import { defineComponent, inject, VNode } from 'vue';
+import type { VNode } from 'vue';
+import { defineComponent, inject } from 'vue';
 import omit from 'omit.js';
 import debounce from 'lodash-es/debounce';
 import FolderOpenOutlined from '@ant-design/icons-vue/FolderOpenOutlined';
@@ -7,7 +8,8 @@ import FileOutlined from '@ant-design/icons-vue/FileOutlined';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import { conductExpandParent, convertTreeToEntities } from '../vc-tree/src/util';
-import Tree, { CheckEvent, ExpendEvent, SelectEvent, TreeProps } from './Tree';
+import type { CheckEvent, ExpendEvent, SelectEvent } from './Tree';
+import Tree, { TreeProps } from './Tree';
 import {
   calcRangeKeys,
   getFullKeyList,

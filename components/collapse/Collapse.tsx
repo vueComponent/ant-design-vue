@@ -1,4 +1,5 @@
-import { CSSProperties, defineComponent, ExtractPropTypes, inject, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import { defineComponent, inject } from 'vue';
 import animation from '../_util/openAnimation';
 import { getOptionProps, getComponent, isValidElement, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
@@ -6,7 +7,8 @@ import VcCollapse from '../vc-collapse';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import { defaultConfigProvider } from '../config-provider';
 import PropTypes from '../_util/vue-types';
-import { tuple, VueNode } from '../_util/type';
+import type { VueNode } from '../_util/type';
+import { tuple } from '../_util/type';
 
 export interface PanelProps {
   isActive?: boolean;

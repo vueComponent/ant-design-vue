@@ -1,5 +1,5 @@
-import { CSSProperties, VNodeTypes } from 'vue';
-import { Key } from '../_util/type';
+import type { CSSProperties, VNodeTypes } from 'vue';
+import type { Key } from '../_util/type';
 
 export type RenderFunc<T> = (
   item: T,

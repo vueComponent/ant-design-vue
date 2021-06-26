@@ -1,13 +1,15 @@
-import { computed, defineComponent, ref, VNodeChild, App, PropType, Plugin } from 'vue';
+import type { VNodeChild, App, PropType, Plugin } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import omit from 'omit.js';
 import classNames from '../_util/classNames';
-import RcSelect, { Option, OptGroup, SelectProps as RcSelectProps, BaseProps } from '../vc-select';
-import { OptionProps as OptionPropsType } from '../vc-select/Option';
+import type { SelectProps as RcSelectProps } from '../vc-select';
+import RcSelect, { Option, OptGroup, BaseProps } from '../vc-select';
+import type { OptionProps as OptionPropsType } from '../vc-select/Option';
 import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
-import { SizeType } from '../config-provider';
+import type { SizeType } from '../config-provider';
 
 type RawValue = string | number;
 

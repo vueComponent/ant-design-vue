@@ -1,19 +1,12 @@
-import { tuple, VueNode } from '../_util/type';
-import {
-  computed,
-  CSSProperties,
-  defineComponent,
-  ExtractPropTypes,
-  nextTick,
-  onMounted,
-  PropType,
-  ref,
-  watch,
-} from 'vue';
+import type { VueNode } from '../_util/type';
+import { tuple } from '../_util/type';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import { computed, defineComponent, nextTick, onMounted, ref, watch } from 'vue';
 import { getPropsSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
-import { Breakpoint, responsiveArray, ScreenSizeMap } from '../_util/responsiveObserve';
+import type { Breakpoint, ScreenSizeMap } from '../_util/responsiveObserve';
+import { responsiveArray } from '../_util/responsiveObserve';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import ResizeObserver from '../vc-resize-observer';
 import { useInjectSize } from '../_util/hooks/useSize';

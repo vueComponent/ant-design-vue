@@ -1,11 +1,8 @@
-import { RequiredMark } from '../../form/Form';
-import { computed, ComputedRef, inject, UnwrapRef, VNodeChild } from 'vue';
-import {
-  ConfigProviderProps,
-  defaultConfigProvider,
-  Direction,
-  SizeType,
-} from '../../config-provider';
+import type { RequiredMark } from '../../form/Form';
+import type { ComputedRef, UnwrapRef, VNodeChild } from 'vue';
+import { computed, inject } from 'vue';
+import type { ConfigProviderProps, Direction, SizeType } from '../../config-provider';
+import { defaultConfigProvider } from '../../config-provider';
 
 export default (
   name: string,

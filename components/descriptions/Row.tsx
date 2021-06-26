@@ -1,7 +1,9 @@
 import Cell from './Cell';
 import { getSlot, getClass, getStyle } from '../_util/props-util';
-import { FunctionalComponent, VNode, inject, ref } from 'vue';
-import { descriptionsContext, DescriptionsContextProp } from './index';
+import type { FunctionalComponent, VNode } from 'vue';
+import { inject, ref } from 'vue';
+import type { DescriptionsContextProp } from './index';
+import { descriptionsContext } from './index';
 
 interface CellConfig {
   component: string | [string, string];

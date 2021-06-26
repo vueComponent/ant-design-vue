@@ -1,15 +1,8 @@
-import {
-  computed,
-  CSSProperties,
-  defineComponent,
-  HTMLAttributes,
-  PropType,
-  ref,
-  watch,
-} from 'vue';
+import type { CSSProperties, HTMLAttributes, PropType } from 'vue';
+import { computed, defineComponent, ref, watch } from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import classNames from '../_util/classNames';
-import { Key, VueNode } from '../_util/type';
+import type { Key, VueNode } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import { OverflowContextProvider } from './context';
 import Item from './Item';

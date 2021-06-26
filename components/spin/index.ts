@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Spin, { setDefaultIndicator } from './Spin';
 
 export { SpinProps, getSpinProps } from './Spin';

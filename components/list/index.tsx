@@ -1,22 +1,11 @@
-import {
-  provide,
-  defineComponent,
-  App,
-  Plugin,
-  ExtractPropTypes,
-  PropType,
-  ref,
-  watch,
-  computed,
-  InjectionKey,
-  toRef,
-  Ref,
-} from 'vue';
+import type { App, Plugin, ExtractPropTypes, PropType, InjectionKey, Ref } from 'vue';
+import { provide, defineComponent, ref, watch, computed, toRef } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import { RenderEmptyHandler } from '../config-provider';
+import type { RenderEmptyHandler } from '../config-provider';
 
 import Spin from '../spin';
-import Pagination, { PaginationConfig, paginationConfig } from '../pagination';
+import type { PaginationConfig } from '../pagination';
+import Pagination, { paginationConfig } from '../pagination';
 import { Row } from '../grid';
 
 import Item from './Item';
@@ -26,7 +15,8 @@ import { tuple } from '../_util/type';
 import ItemMeta from './ItemMeta';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
-import { Breakpoint, responsiveArray } from '../_util/responsiveObserve';
+import type { Breakpoint } from '../_util/responsiveObserve';
+import { responsiveArray } from '../_util/responsiveObserve';
 
 export { ListItemProps } from './Item';
 export { ListItemMetaProps } from './ItemMeta';

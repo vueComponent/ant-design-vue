@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes, ref, reactive, VNode, onMounted } from 'vue';
+import type { ExtractPropTypes, VNode } from 'vue';
+import { defineComponent, ref, reactive, onMounted } from 'vue';
 import { initDefaultProps, getPropsSlot, findDOMNode } from '../_util/props-util';
 import { withInstall } from '../_util/type';
 import { getOffsetLeft } from './util';

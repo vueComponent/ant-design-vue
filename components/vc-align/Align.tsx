@@ -1,20 +1,12 @@
-import {
-  defineComponent,
-  PropType,
-  ref,
-  computed,
-  onMounted,
-  onUpdated,
-  watch,
-  onUnmounted,
-} from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, ref, computed, onMounted, onUpdated, watch, onUnmounted } from 'vue';
 import { alignElement, alignPoint } from 'dom-align';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import { cloneElement } from '../_util/vnode';
 import isVisible from '../vc-util/Dom/isVisible';
 
 import { isSamePoint, restoreFocus, monitorResize } from './util';
-import { AlignType, AlignResult, TargetType, TargetPoint } from './interface';
+import type { AlignType, AlignResult, TargetType, TargetPoint } from './interface';
 import useBuffer from './hooks/useBuffer';
 
 type OnAlign = (source: HTMLElement, result: AlignResult) => void;

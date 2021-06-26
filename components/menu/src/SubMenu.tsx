@@ -1,14 +1,6 @@
 import PropTypes from '../../_util/vue-types';
-import {
-  computed,
-  defineComponent,
-  getCurrentInstance,
-  ref,
-  watch,
-  PropType,
-  onBeforeUnmount,
-  ExtractPropTypes,
-} from 'vue';
+import type { PropType, ExtractPropTypes } from 'vue';
+import { computed, defineComponent, getCurrentInstance, ref, watch, onBeforeUnmount } from 'vue';
 import useProvideKeyPath, { useInjectKeyPath } from './hooks/useKeyPath';
 import { useInjectMenu, useProvideFirstLevel, MenuContextProvider } from './hooks/useMenuContext';
 import { getPropsSlot, isValidElement } from '../../_util/props-util';

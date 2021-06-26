@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Card from './Card';
 import Meta from './Meta';
 import Grid from './Grid';

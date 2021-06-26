@@ -1,6 +1,7 @@
 import { createApp } from 'vue';
 import ConfirmDialog from './ConfirmDialog';
-import { destroyFns, ModalFuncProps } from './Modal';
+import type { ModalFuncProps } from './Modal';
+import { destroyFns } from './Modal';
 
 import Omit from 'omit.js';
 

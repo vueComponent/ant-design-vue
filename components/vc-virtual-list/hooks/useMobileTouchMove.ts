@@ -1,5 +1,6 @@
 import supportsPassive from '../../_util/supportsPassive';
-import { watch, Ref, onMounted } from 'vue';
+import type { Ref } from 'vue';
+import { watch, onMounted } from 'vue';
 
 const SMOOTH_PTG = 14 / 15;
 

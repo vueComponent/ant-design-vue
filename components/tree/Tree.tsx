@@ -1,4 +1,5 @@
-import { defineComponent, inject, VNode, PropType, CSSProperties } from 'vue';
+import type { VNode, PropType, CSSProperties } from 'vue';
+import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import FileOutlined from '@ant-design/icons-vue/FileOutlined';

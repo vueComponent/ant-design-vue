@@ -1,5 +1,6 @@
-import { computed, Ref, VNodeChild } from 'vue';
-import { RawValueType, FlattenOptionsType, Key } from '../interface/generator';
+import type { Ref, VNodeChild } from 'vue';
+import { computed } from 'vue';
+import type { RawValueType, FlattenOptionsType, Key } from '../interface/generator';
 
 export default function useCacheOptions<
   OptionsType extends {

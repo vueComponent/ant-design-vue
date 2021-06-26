@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Anchor, { AnchorProps } from './Anchor';
 import AnchorLink, { AnchorLinkProps } from './AnchorLink';
 

@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Base from './Base';
 import Link from './Link';
 import Paragraph from './Paragraph';

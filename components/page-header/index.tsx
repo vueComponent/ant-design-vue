@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes, ref, computed } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, flattenChildren, isEmptyContent } from '../_util/props-util';
 import ArrowLeftOutlined from '@ant-design/icons-vue/ArrowLeftOutlined';

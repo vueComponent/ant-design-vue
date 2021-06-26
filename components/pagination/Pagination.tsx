@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes, inject } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, inject } from 'vue';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';

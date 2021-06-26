@@ -1,4 +1,4 @@
-import { VueNode } from '../_util/type';
+import type { VueNode } from '../_util/type';
 
 export type FormLabelAlign = 'left' | 'right';
 

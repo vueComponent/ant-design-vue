@@ -1,4 +1,5 @@
-import { computed, ComputedRef, inject } from 'vue';
+import type { ComputedRef } from 'vue';
+import { computed, inject } from 'vue';
 import { defaultConfigProvider } from '../../config-provider';
 
 export default (name: string, props: Record<any, any>): ComputedRef<string> => {

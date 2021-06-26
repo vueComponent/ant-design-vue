@@ -1,5 +1,6 @@
-import { App, Plugin } from 'vue';
-import Modal, { destroyFns, ModalFunc, ModalFuncProps } from './Modal';
+import type { App, Plugin } from 'vue';
+import type { ModalFunc, ModalFuncProps } from './Modal';
+import Modal, { destroyFns } from './Modal';
 import modalConfirm from './confirm';
 import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';

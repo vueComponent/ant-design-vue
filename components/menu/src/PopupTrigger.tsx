@@ -1,6 +1,7 @@
 import Trigger from '../../vc-trigger';
-import { computed, defineComponent, onBeforeUnmount, PropType, ref, watch } from 'vue';
-import { MenuMode } from './interface';
+import type { PropType } from 'vue';
+import { computed, defineComponent, onBeforeUnmount, ref, watch } from 'vue';
+import type { MenuMode } from './interface';
 import { useInjectMenu } from './hooks/useMenuContext';
 import { placements, placementsRtl } from './placements';
 import raf from '../../_util/raf';

@@ -1,5 +1,5 @@
+import type { CSSProperties, ExtractPropTypes } from 'vue';
 import {
-  CSSProperties,
   defineComponent,
   ref,
   reactive,
@@ -9,7 +9,6 @@ import {
   computed,
   onUnmounted,
   onUpdated,
-  ExtractPropTypes,
 } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';

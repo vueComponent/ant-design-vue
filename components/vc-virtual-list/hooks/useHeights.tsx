@@ -1,5 +1,6 @@
-import { reactive, VNodeProps } from 'vue';
-import { GetKey } from '../interface';
+import type { VNodeProps } from 'vue';
+import { reactive } from 'vue';
+import type { GetKey } from '../interface';
 
 type CacheMap = Record<string, number>;
 

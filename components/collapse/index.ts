@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Collapse from './Collapse';
 import CollapsePanel from './CollapsePanel';
 export type { CollapseProps } from './Collapse';

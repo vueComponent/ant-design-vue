@@ -1,19 +1,20 @@
 import TransBtn from '../TransBtn';
-import {
+import type {
   LabelValueType,
   RawValueType,
   CustomTagProps,
   DefaultValueType,
   DisplayLabelValueType,
 } from '../interface/generator';
-import { RenderNode } from '../interface';
-import { InnerSelectorProps } from '.';
+import type { RenderNode } from '../interface';
+import type { InnerSelectorProps } from '.';
 import Input from './Input';
-import { computed, defineComponent, onMounted, ref, VNodeChild, watch, Ref } from 'vue';
+import type { VNodeChild, Ref } from 'vue';
+import { computed, defineComponent, onMounted, ref, watch } from 'vue';
 import classNames from '../../_util/classNames';
 import pickAttrs from '../../_util/pickAttrs';
 import PropTypes from '../../_util/vue-types';
-import { VueNode } from 'ant-design-vue/es/_util/type';
+import type { VueNode } from 'ant-design-vue/es/_util/type';
 import Overflow from '../../vc-overflow';
 
 interface SelectorProps extends InnerSelectorProps {

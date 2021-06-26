@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Badge from './Badge';
 import Ribbon from './Ribbon';
 export type { BadgeProps } from './Badge';

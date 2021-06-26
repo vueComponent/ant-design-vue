@@ -1,12 +1,5 @@
-import {
-  ImgHTMLAttributes,
-  CSSProperties,
-  ref,
-  watch,
-  defineComponent,
-  computed,
-  onMounted,
-} from 'vue';
+import type { ImgHTMLAttributes, CSSProperties } from 'vue';
+import { ref, watch, defineComponent, computed, onMounted } from 'vue';
 import isNumber from 'lodash-es/isNumber';
 
 import BaseMixin from '../../_util/BaseMixin';
@@ -14,7 +7,8 @@ import cn from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
 import { getOffset } from '../../vc-util/Dom/css';
 
-import Preview, { MouseEventHandler } from './Preview';
+import type { MouseEventHandler } from './Preview';
+import Preview from './Preview';
 
 import PreviewGroup, { context } from './PreviewGroup';
 

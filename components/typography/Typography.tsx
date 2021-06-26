@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
-import { defineComponent, HTMLAttributes } from 'vue';
+import type { HTMLAttributes } from 'vue';
+import { defineComponent } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 

@@ -1,4 +1,4 @@
-import { Ref } from 'vue';
+import type { Ref } from 'vue';
 
 export default (isScrollAtTop: Ref<boolean>, isScrollAtBottom: Ref<boolean>) => {
   // Do lock for a wheel when scrolling

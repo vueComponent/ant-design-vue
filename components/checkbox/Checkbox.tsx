@@ -5,7 +5,7 @@ import VcCheckbox from '../vc-checkbox';
 import hasProp, { getOptionProps, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
-import { RadioChangeEvent } from '../radio/interface';
+import type { RadioChangeEvent } from '../radio/interface';
 function noop() {}
 
 export default defineComponent({

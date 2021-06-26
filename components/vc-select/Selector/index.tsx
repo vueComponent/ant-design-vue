@@ -11,13 +11,15 @@
 import KeyCode from '../../_util/KeyCode';
 import MultipleSelector from './MultipleSelector';
 import SingleSelector from './SingleSelector';
-import { LabelValueType, RawValueType, CustomTagProps } from '../interface/generator';
-import { RenderNode, Mode } from '../interface';
+import type { LabelValueType, RawValueType, CustomTagProps } from '../interface/generator';
+import type { RenderNode, Mode } from '../interface';
 import useLock from '../hooks/useLock';
-import { defineComponent, VNodeChild } from 'vue';
-import createRef, { RefObject } from '../../_util/createRef';
+import type { VNodeChild } from 'vue';
+import { defineComponent } from 'vue';
+import type { RefObject } from '../../_util/createRef';
+import createRef from '../../_util/createRef';
 import PropTypes from '../../_util/vue-types';
-import { VueNode } from '../../_util/type';
+import type { VueNode } from '../../_util/type';
 
 export interface InnerSelectorProps {
   prefixCls: string;

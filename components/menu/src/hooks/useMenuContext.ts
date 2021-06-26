@@ -1,22 +1,14 @@
-import { Key } from '../../../_util/type';
-import {
-  ComputedRef,
-  CSSProperties,
-  defineComponent,
-  inject,
-  InjectionKey,
-  provide,
-  Ref,
-  UnwrapRef,
-} from 'vue';
-import {
+import type { Key } from '../../../_util/type';
+import type { ComputedRef, CSSProperties, InjectionKey, Ref, UnwrapRef } from 'vue';
+import { defineComponent, inject, provide } from 'vue';
+import type {
   BuiltinPlacements,
   MenuClickEventHandler,
   MenuMode,
   MenuTheme,
   TriggerSubMenuAction,
 } from '../interface';
-import { CSSMotionProps } from '../../../_util/transition';
+import type { CSSMotionProps } from '../../../_util/transition';
 
 export interface StoreMenuInfo {
   eventKey: string;

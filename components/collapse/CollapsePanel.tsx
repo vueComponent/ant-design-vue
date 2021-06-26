@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes, inject } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
 import VcCollapse from '../vc-collapse';
 import { defaultConfigProvider } from '../config-provider';

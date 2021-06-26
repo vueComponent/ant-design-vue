@@ -1,7 +1,9 @@
 import { cloneElement } from '../_util/vnode';
-import Avatar, { avatarProps, AvatarSize } from './Avatar';
+import type { AvatarSize } from './Avatar';
+import Avatar, { avatarProps } from './Avatar';
 import Popover from '../popover';
-import { defineComponent, PropType, ExtractPropTypes, CSSProperties } from 'vue';
+import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
+import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { flattenChildren, getPropsSlot } from '../_util/props-util';
 import { tuple } from '../_util/type';

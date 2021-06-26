@@ -1,11 +1,5 @@
-import {
-  defineComponent,
-  ExtractPropTypes,
-  inject,
-  VNodeTypes,
-  CSSProperties,
-  PropType,
-} from 'vue';
+import type { ExtractPropTypes, VNodeTypes, CSSProperties, PropType } from 'vue';
+import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import Dialog from '../vc-dialog';
 import PropTypes from '../_util/vue-types';
@@ -13,7 +7,8 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 import { getConfirmLocale } from './locale';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Button from '../button';
-import buttonTypes, { ButtonType, ButtonProps as ButtonPropsType } from '../button/buttonTypes';
+import type { ButtonProps as ButtonPropsType } from '../button/buttonTypes';
+import buttonTypes, { ButtonType } from '../button/buttonTypes';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';

@@ -1,10 +1,14 @@
-import { defineComponent, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
-import { AvatarProps, avatarProps } from './Avatar';
-import Title, { SkeletonTitleProps, skeletonTitleProps } from './Title';
-import Paragraph, { SkeletonParagraphProps, skeletonParagraphProps } from './Paragraph';
+import type { AvatarProps } from './Avatar';
+import { avatarProps } from './Avatar';
+import type { SkeletonTitleProps } from './Title';
+import Title, { skeletonTitleProps } from './Title';
+import type { SkeletonParagraphProps } from './Paragraph';
+import Paragraph, { skeletonParagraphProps } from './Paragraph';
 import Omit from 'omit.js';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import Element from './Element';

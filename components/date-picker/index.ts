@@ -1,4 +1,4 @@
-import { App, DefineComponent, Plugin } from 'vue';
+import type { App, DefineComponent, Plugin } from 'vue';
 import VcCalendar from '../vc-calendar';
 import MonthCalendar from '../vc-calendar/src/MonthCalendar';
 import createPicker from './createPicker';
@@ -6,7 +6,7 @@ import wrapPicker from './wrapPicker';
 import RangePicker from './RangePicker';
 import WeekPicker from './WeekPicker';
 import { DatePickerProps, MonthPickerProps, WeekPickerProps, RangePickerProps } from './props';
-import {
+import type {
   DatePickerPropsTypes,
   RangePickerPropsTypes,
   MonthPickerPropsTypes,

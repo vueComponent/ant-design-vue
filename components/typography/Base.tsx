@@ -7,16 +7,17 @@ import isStyleSupport from '../_util/styleChecker';
 import Editable from './Editable';
 import measure from './util';
 import PropTypes from '../_util/vue-types';
-import Typography, { TypographyProps } from './Typography';
+import type { TypographyProps } from './Typography';
+import Typography from './Typography';
 import ResizeObserver from '../vc-resize-observer';
 import Tooltip from '../tooltip';
 import copy from '../_util/copy-to-clipboard';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import CopyOutlined from '@ant-design/icons-vue/CopyOutlined';
 import EditOutlined from '@ant-design/icons-vue/EditOutlined';
+import type { VNodeTypes, CSSProperties } from 'vue';
 import {
   defineComponent,
-  VNodeTypes,
   reactive,
   ref,
   onMounted,
@@ -24,11 +25,10 @@ import {
   watch,
   watchEffect,
   nextTick,
-  CSSProperties,
   computed,
   toRaw,
 } from 'vue';
-import { AutoSizeType } from '../input/ResizableTextArea';
+import type { AutoSizeType } from '../input/ResizableTextArea';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export type BaseType = 'secondary' | 'success' | 'warning' | 'danger';

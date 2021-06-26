@@ -13,7 +13,6 @@ import BodyTable from './BodyTable';
 import ExpandableTable from './ExpandableTable';
 import { initDefaultProps, getOptionProps, getListeners } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
-import Vue from 'vue';
 
 export default {
   name: 'Table',
@@ -88,7 +87,7 @@ export default {
   ),
   data() {
     this.preData = [...this.data];
-    this.store = Vue.observable({
+    this.store = this.$root.constructor.observable({
       currentHoverKey: null,
       fixedColumnsHeadRowsHeight: [],
       fixedColumnsBodyRowsHeight: {},

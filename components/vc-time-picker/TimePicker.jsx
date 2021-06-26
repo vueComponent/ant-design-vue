@@ -336,7 +336,6 @@ export default {
       name,
       autoComplete,
       autoFocus,
-      inputReadOnly,
       sOpen,
       sValue,
       onFocus,

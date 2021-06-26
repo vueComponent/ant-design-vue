@@ -20,6 +20,7 @@ import defaultLocale from '../locale-provider/default';
 import warning from '../_util/warning';
 import scrollTo from '../_util/scrollTo';
 import TransButton from '../_util/transButton';
+import Vue from 'vue';
 
 function noop() {}
 
@@ -142,7 +143,7 @@ export default {
     );
     this.CheckboxPropsCache = {};
 
-    this.store = this.$root.constructor.observable({
+    this.store = (this.$root.constructor.observable || Vue.observable)({
       selectedRowKeys: getRowSelection(this.$props).selectedRowKeys || [],
       selectionDirty: false,
     });

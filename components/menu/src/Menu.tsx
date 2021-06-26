@@ -107,7 +107,7 @@ export default defineComponent({
         }
         keyMapStore.value = newKeyMapStore;
       },
-      { immediate: true },
+      { flush: 'post' },
     );
     watchEffect(() => {
       if (props.activeKey !== undefined) {
@@ -209,12 +209,17 @@ export default defineComponent({
       { immediate: true },
     );
 
+    let timeout: number;
     const changeActiveKeys = (keys: Key[]) => {
-      if (props.activeKey === undefined) {
-        activeKeys.value = keys;
-      }
-      emit('update:activeKey', keys[keys.length - 1]);
+      window.clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        if (props.activeKey === undefined) {
+          activeKeys.value = keys;
+        }
+        emit('update:activeKey', keys[keys.length - 1]);
+      });
     };
+
     const disabled = computed(() => !!props.disabled);
     const isRtl = computed(() => direction.value === 'rtl');
     const mergedMode = ref<MenuMode>('vertical');
@@ -389,10 +394,8 @@ export default defineComponent({
             ));
       const overflowedIndicator = <EllipsisOutlined />;
 
-      // data-hack-store-update 初步判断是 vue bug，先用hack方式
       return (
         <Overflow
-          data-hack-store-update={store.value}
           prefixCls={`${prefixCls.value}-overflow`}
           component="ul"
           itemComponent={MenuItem}

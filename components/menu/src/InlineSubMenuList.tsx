@@ -1,4 +1,4 @@
-import { computed, defineComponent, ref, watch } from '@vue/runtime-core';
+import { computed, defineComponent, ref, watch } from 'vue';
 import Transition from '../../_util/transition';
 import { useInjectMenu, MenuContextProvider } from './hooks/useMenuContext';
 import SubMenuList from './SubMenuList';

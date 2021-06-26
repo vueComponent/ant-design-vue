@@ -187,14 +187,14 @@ describe('Menu', () => {
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].style.display).not.toBe('none');
     }, 0);
-    // openKeys.value = [];
-    // await asyncExpect(() => {
-    // expect($$('.ant-menu-sub')[0].style.display).toBe('none');
-    // }, 100);
-    // wrapper.setProps({ openKeys: ['1'] });
-    // await asyncExpect(() => {
-    //   expect($$('.ant-menu-sub')[0].style.display).not.toBe('none');
-    // }, 0);
+    openKeys.value = [];
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].style.display).toBe('none');
+    }, 100);
+    openKeys.value = ['1'];
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none');
+    }, 100);
   });
 
   it('vertical', async () => {
@@ -376,28 +376,28 @@ describe('Menu', () => {
       { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
-      expect(wrapper.findAll('.ant-menu-sub').length).toBe(0);
+      expect(wrapper.findAll('.ant-menu-sub').length).toBe(1);
     });
     wrapper.setProps({ inlineCollapsed: true });
-    await asyncExpect(() => {
-      // 动画完成后的回调
-      wrapper.vm.$refs.menu.switchModeFromInline = false;
-      wrapper.vm.$forceUpdate();
-    });
+    // await asyncExpect(() => {
+    //   // 动画完成后的回调
+    //   wrapper.vm.$refs.menu.switchModeFromInline = false;
+    //   wrapper.vm.$forceUpdate();
+    // });
     // await asyncExpect(() => {
     //   wrapper.trigger('transitionend', { propertyName: 'width' });
     // });
-    // await asyncExpect(() => {
-    //   $$('.ant-menu-submenu-title')[0].dispatchEvent(new MouseEvent('mouseenter'));
-    // });
-    // await asyncExpect(() => {
-    //   expect(wrapper.findAll('.ant-menu-submenu')[0].classes()).toContain(
-    //     'ant-menu-submenu-vertical',
-    //   );
-    //   expect(wrapper.findAll('.ant-menu-submenu')[0].classes()).toContain('ant-menu-submenu-open');
-    //   expect($$('ul.ant-menu-sub')[0].className).toContain('ant-menu-vertical');
-    //   expect($$('ul.ant-menu-sub')[0].style.display).not.toBe('none');
-    // }, 500);
+    await asyncExpect(() => {
+      $$('.ant-menu-submenu-title')[0].dispatchEvent(new MouseEvent('mouseenter'));
+    });
+    await asyncExpect(() => {
+      expect(wrapper.findAll('.ant-menu-submenu')[0].classes()).toContain(
+        'ant-menu-submenu-vertical',
+      );
+      expect(wrapper.findAll('.ant-menu-submenu')[0].classes()).toContain('ant-menu-submenu-open');
+      expect($$('ul.ant-menu-sub')[0].className).toContain('ant-menu-vertical');
+      expect($$('ul.ant-menu-sub')[0].style.display).not.toBe('none');
+    }, 500);
   });
 
   // describe('open submenu when click submenu title', () => {
@@ -405,40 +405,40 @@ describe('Menu', () => {
   //     document.body.innerHTML = '';
   //   });
 
-  //   const toggleMenu = (wrapper, index, event) => {
-  //     wrapper.findAll('.ant-menu-submenu-title')[index].trigger(event);
-  //   };
+  const toggleMenu = (wrapper, index, event) => {
+    wrapper.findAll('.ant-menu-submenu-title')[index].trigger(event);
+  };
 
-  //   it('inline', async () => {
-  //     const wrapper = mount(
-  //       {
-  //         render() {
-  //           return (
-  //             <Menu mode="inline">
-  //               <SubMenu key="1" title="submenu1">
-  //                 <Menu.Item key="submenu1">Option 1</Menu.Item>
-  //                 <Menu.Item key="submenu2">Option 2</Menu.Item>
-  //               </SubMenu>
-  //               <Menu.Item key="2">menu2</Menu.Item>
-  //             </Menu>
-  //           );
-  //         },
-  //       },
-  //       { attachTo: 'body', sync: false },
-  //     );
-  //     await asyncExpect(() => {
-  //       expect($$('.ant-menu-sub').length).toBe(0);
-  //       toggleMenu(wrapper, 0, 'click');
-  //     }, 0);
-  //     await asyncExpect(() => {
-  //       expect($$('.ant-menu-sub').length).toBe(1);
-  //       expect($$('.ant-menu-sub')[0].style.display).not.toBe('none');
-  //       toggleMenu(wrapper, 0, 'click');
-  //     }, 500);
-  //     await asyncExpect(() => {
-  //       expect($$('.ant-menu-sub')[0].style.display).toBe('none');
-  //     }, 500);
-  //   });
+  it('inline', async () => {
+    const wrapper = mount(
+      {
+        render() {
+          return (
+            <Menu mode="inline">
+              <SubMenu key="1" title="submenu1">
+                <Menu.Item key="submenu1">Option 1</Menu.Item>
+                <Menu.Item key="submenu2">Option 2</Menu.Item>
+              </SubMenu>
+              <Menu.Item key="2">menu2</Menu.Item>
+            </Menu>
+          );
+        },
+      },
+      { attachTo: 'body', sync: false },
+    );
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub').length).toBe(1);
+      toggleMenu(wrapper, 0, 'click');
+    }, 0);
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub').length).toBe(1);
+      expect($$('.ant-menu-sub')[0].style.display).not.toBe('none');
+      toggleMenu(wrapper, 0, 'click');
+    }, 500);
+    await asyncExpect(() => {
+      expect($$('.ant-menu-sub')[0].style.display).toBe('none');
+    }, 500);
+  });
 
   //   it('vertical', async () => {
   //     const wrapper = mount(

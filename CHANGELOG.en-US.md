@@ -10,6 +10,13 @@
 
 ---
 
+## 2.2.0-beta.6
+
+`2021-06-26`
+
+- 🌟 Menu performance optimization [e8b957](https://github.com/vueComponent/ant-design-vue/commit/e8b95784eb1ee0554b0d6b17bdc14e18775f2ae6)
+- 🐞 Fix `Layout` `RangePicker` `WeekPicker` `Textarea` on-demand loading failure
+
 ## 2.2.0-beta.5
 
 `2021-06-24`

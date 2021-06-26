@@ -1,6 +1,5 @@
-import type { BaseTransitionProps, CSSProperties, Ref } from 'vue';
+import { BaseTransitionProps, CSSProperties, getCurrentInstance, onUpdated, Ref } from 'vue';
 import { defineComponent, nextTick, Transition as T, TransitionGroup as TG } from 'vue';
-import { findDOMNode } from './props-util';
 
 export const getTransitionProps = (transitionName: string, opt: object = {}) => {
   if (process.env.NODE_ENV === 'test') {
@@ -46,23 +45,30 @@ let Transition = T;
 let TransitionGroup = TG;
 
 if (process.env.NODE_ENV === 'test') {
-  Transition = (props, { slots }) => {
-    const child = slots.default?.()[0];
-    if (child && child.dirs && child.dirs[0]) {
-      const value = child.dirs[0].value;
-      const oldValue = child.dirs[0].oldValue;
-      if (!value && value !== oldValue) {
-        nextTick(() => {
-          if (props.onAfterLeave) {
-            props.onAfterLeave(findDOMNode(this));
+  Transition = defineComponent({
+    name: 'TransitionForTest',
+    inheritAttrs: false,
+    setup(_props, { slots, attrs }) {
+      const instance = getCurrentInstance();
+      onUpdated(() => {
+        const child = instance.subTree.children[0];
+        if (child && child.dirs && child.dirs[0]) {
+          const value = child.dirs[0].value;
+          const oldValue = child.dirs[0].oldValue;
+          if (!value && value !== oldValue) {
+            nextTick(() => {
+              if (attrs.onAfterLeave) {
+                (attrs as any).onAfterLeave(instance.vnode.el);
+              }
+            });
           }
-        });
-      }
-    }
-    return slots.default?.();
-  };
-  Transition.displayName = 'TransitionForTest';
-  Transition.inheritAttrs = false;
+        }
+      });
+      return () => {
+        return slots.default?.();
+      };
+    },
+  }) as any;
   TransitionGroup = defineComponent({
     name: 'TransitionGroupForTest',
     inheritAttrs: false,

@@ -153,7 +153,7 @@
     "mockdate": "^2.0.2",
     "nprogress": "^0.2.0",
     "postcss": "^8.2.12",
-    "postcss-loader": "^5.0.0",
+    "postcss-loader": "^6.0.0",
     "prettier": "^2.2.0",
     "pretty-quick": "^3.0.0",
     "prismjs": "^1.20.0",

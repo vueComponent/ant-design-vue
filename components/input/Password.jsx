@@ -50,8 +50,8 @@ export default {
         visible: !this.visible,
       });
     },
-    getIcon() {
-      const { prefixCls, action } = this.$props;
+    getIcon(prefixCls) {
+      const { action } = this.$props;
       const iconTrigger = ActionMap[action] || '';
       const iconProps = {
         props: {
@@ -90,7 +90,7 @@ export default {
     const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
     const prefixCls = getPrefixCls('input-password', customizePrefixCls);
 
-    const suffixIcon = visibilityToggle && this.getIcon();
+    const suffixIcon = visibilityToggle && this.getIcon(prefixCls);
     const inputClassName = classNames(prefixCls, {
       [`${prefixCls}-${size}`]: !!size,
     });

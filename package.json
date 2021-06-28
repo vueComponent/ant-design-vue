@@ -203,7 +203,6 @@
     "xhr-mock": "^2.5.1"
   },
   "dependencies": {
-    "@ant-design-vue/use": "^0.0.1-0",
     "@ant-design/icons-vue": "^6.0.0",
     "@babel/runtime": "^7.10.5",
     "@simonwep/pickr": "~1.8.0",

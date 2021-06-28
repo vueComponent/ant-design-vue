@@ -50,11 +50,13 @@ type Validator = (
 ) => Promise<void> | void;
 
 export interface ValidatorRule {
+  warningOnly?: boolean;
   message?: string | VueNode;
   validator: Validator;
 }
 
 interface BaseRule {
+  warningOnly?: boolean;
   enum?: StoreValue[];
   len?: number;
   max?: number;
@@ -90,6 +92,11 @@ export interface ValidateErrorEntity<Values = any> {
 export interface FieldError {
   name: InternalNamePath;
   errors: string[];
+}
+
+export interface RuleError {
+  errors: string[];
+  rule: RuleObject;
 }
 
 export interface ValidateOptions {

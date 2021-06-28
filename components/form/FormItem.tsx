@@ -13,7 +13,7 @@ import { toArray } from './utils/typeUtil';
 import { warning } from '../vc-util/warning';
 import find from 'lodash-es/find';
 import { tuple } from '../_util/type';
-import type { InternalNamePath, RuleObject, ValidateOptions } from './interface';
+import type { InternalNamePath, RuleError, RuleObject, ValidateOptions } from './interface';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectForm } from './context';
 import FormItemLabel from './FormItemLabel';
@@ -31,7 +31,7 @@ export interface FieldExpose {
   clearValidate: () => void;
   namePath: ComputedRef<InternalNamePath>;
   rules?: ComputedRef<ValidationRule[]>;
-  validateRules: (options: ValidateOptions) => Promise<void> | Promise<string[]>;
+  validateRules: (options: ValidateOptions) => Promise<void> | Promise<RuleError[]>;
 }
 
 function getPropByPath(obj: any, namePathList: any, strict?: boolean) {
@@ -209,10 +209,12 @@ export default defineComponent({
 
       promise
         .catch(e => e)
-        .then((ers = []) => {
+        .then((results: RuleError[] = []) => {
           if (validateState.value === 'validating') {
-            validateState.value = ers.length ? 'error' : 'success';
-            errors.value = ers;
+            const res = results.filter(result => result && result.errors.length);
+            validateState.value = res.length ? 'error' : 'success';
+
+            errors.value = res.map(r => r.errors);
           }
         });
 

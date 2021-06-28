@@ -16,7 +16,13 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { VueNode } from '../_util/type';
 import { tuple } from '../_util/type';
 import type { ColProps } from '../grid/Col';
-import type { InternalNamePath, NamePath, ValidateErrorEntity, ValidateOptions } from './interface';
+import type {
+  InternalNamePath,
+  NamePath,
+  RuleError,
+  ValidateErrorEntity,
+  ValidateOptions,
+} from './interface';
 import { useInjectSize } from '../_util/hooks/useSize';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useProvideForm } from './context';
@@ -247,13 +253,33 @@ const Form = defineComponent({
           // Wrap promise with field
           promiseList.push(
             promise
-              .then(() => ({ name: fieldNamePath, errors: [] }))
-              .catch((errors: any) =>
-                Promise.reject({
+              .then<any, RuleError>(() => ({ name: fieldNamePath, errors: [], warnings: [] }))
+              .catch((ruleErrors: RuleError[]) => {
+                const mergedErrors: string[] = [];
+                const mergedWarnings: string[] = [];
+
+                ruleErrors.forEach(({ rule: { warningOnly }, errors }) => {
+                  if (warningOnly) {
+                    mergedWarnings.push(...errors);
+                  } else {
+                    mergedErrors.push(...errors);
+                  }
+                });
+
+                if (mergedErrors.length) {
+                  return Promise.reject({
+                    name: fieldNamePath,
+                    errors: mergedErrors,
+                    warnings: mergedWarnings,
+                  });
+                }
+
+                return {
                   name: fieldNamePath,
-                  errors,
-                }),
-              ),
+                  errors: mergedErrors,
+                  warnings: mergedWarnings,
+                };
+              }),
           );
         }
       });

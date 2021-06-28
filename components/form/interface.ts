@@ -90,7 +90,7 @@ export interface ValidateErrorEntity<Values = any> {
 }
 
 export interface FieldError {
-  name: InternalNamePath;
+  name: InternalNamePath | string;
   errors: string[];
 }
 

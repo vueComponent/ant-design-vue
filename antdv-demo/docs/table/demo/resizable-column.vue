@@ -137,6 +137,7 @@ export default {
     right: -5px;
     cursor: col-resize;
     touch-action: none;
+    position: absolute;
   }
 }
 </style>

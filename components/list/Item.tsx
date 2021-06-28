@@ -6,7 +6,7 @@ import { cloneElement } from '../_util/vnode';
 import { defineComponent, inject, ref } from 'vue';
 import ItemMeta from './ItemMeta';
 import useConfigInject from '../_util/hooks/useConfigInject';
-import { ListContextKey } from '.';
+import { ListContextKey } from './contextKey';
 
 export const ListItemProps = {
   prefixCls: PropTypes.string,

@@ -1,4 +1,4 @@
-import type { App, Plugin, ExtractPropTypes, PropType, InjectionKey, Ref } from 'vue';
+import type { App, Plugin, ExtractPropTypes, PropType } from 'vue';
 import { provide, defineComponent, ref, watch, computed, toRef } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import type { RenderEmptyHandler } from '../config-provider';
@@ -70,12 +70,7 @@ export interface ListLocale {
 
 export type ListProps = Partial<ExtractPropTypes<typeof listProps>>;
 
-export interface ListContext {
-  grid?: Ref<any>;
-  itemLayout?: Ref<string>;
-}
-
-export const ListContextKey: InjectionKey<ListContext> = Symbol('ListContextKey');
+import { ListContextKey } from './contextKey';
 
 const List = defineComponent({
   name: 'AList',

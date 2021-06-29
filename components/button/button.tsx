@@ -8,12 +8,14 @@ import {
   Text,
   VNode,
   watch,
+  watchEffect,
 } from 'vue';
 import Wave from '../_util/wave';
 import buttonTypes, { ButtonType } from './buttonTypes';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import { flattenChildren, getPropsSlot } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import devWarning from '../vc-util/devWarning';
 
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
@@ -94,7 +96,7 @@ export default defineComponent({
     };
     const handleClick = (event: Event) => {
       // https://github.com/ant-design/ant-design/issues/30207
-      if (sLoading.value || attrs.disabled) {
+      if (sLoading.value || props.disabled) {
         event.preventDefault();
         return;
       }
@@ -115,6 +117,14 @@ export default defineComponent({
 
     const isNeedInserted = () =>
       children.value.length === 1 && !iconCom.value && !isUnborderedButtonType(props.type);
+
+    watchEffect(() => {
+      devWarning(
+        !(props.ghost && isUnborderedButtonType(props.type)),
+        'Button',
+        "`link` or `text` button can't be a `ghost` button.",
+      );
+    });
 
     watch(
       () => props.loading,
@@ -137,6 +147,7 @@ export default defineComponent({
 
     onMounted(fixTwoCNChar);
     onUpdated(fixTwoCNChar);
+
     onBeforeUnmount(() => {
       delayTimeout.value && clearTimeout(delayTimeout.value);
     });

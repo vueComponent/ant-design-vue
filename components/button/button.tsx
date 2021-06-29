@@ -11,12 +11,13 @@ import {
 import Wave from '../_util/wave';
 import buttonTypes from './buttonTypes';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
-import { getPropsSlot } from '../_util/props-util';
+import { flattenChildren, getPropsSlot } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
 const props = buttonTypes();
+
 export default defineComponent({
   name: 'AButton',
   inheritAttrs: false,
@@ -25,7 +26,7 @@ export default defineComponent({
   slots: ['icon'],
   emits: ['click'],
   setup(props, { slots, attrs, emit }) {
-    const { prefixCls, autoInsertSpaceInButton } = useConfigInject('btn', props);
+    const { prefixCls, autoInsertSpaceInButton, direction } = useConfigInject('btn', props);
 
     const buttonNodeRef = ref<HTMLElement>(null);
     let delayTimeout = undefined;
@@ -59,11 +60,12 @@ export default defineComponent({
         [`${prefixCls.value}-${type}`]: type,
         [`${prefixCls.value}-${shape}`]: shape,
         [`${prefixCls.value}-${sizeCls}`]: sizeCls,
-        [`${prefixCls.value}-icon-only`]: children.value?.length === 0 && iconType,
+        [`${prefixCls.value}-icon-only`]: children.value.length === 0 && iconType,
         [`${prefixCls.value}-loading`]: sLoading.value,
         [`${prefixCls.value}-background-ghost`]: ghost || type === 'ghost',
         [`${prefixCls.value}-two-chinese-chars`]: hasTwoCNChar.value && autoInsertSpace,
         [`${prefixCls.value}-block`]: block,
+        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       };
     };
 
@@ -104,7 +106,7 @@ export default defineComponent({
 
     const isNeedInserted = () => {
       const { type } = props;
-      return children.value?.length === 1 && !iconCom.value && type !== 'link';
+      return children.value.length === 1 && !iconCom.value && type !== 'link';
     };
 
     watch(
@@ -134,7 +136,7 @@ export default defineComponent({
 
     return () => {
       iconCom.value = getPropsSlot(slots, props, 'icon');
-      children.value = getPropsSlot(slots, props);
+      children.value = flattenChildren(getPropsSlot(slots, props));
 
       const { type, htmlType, disabled, href, title } = props;
       const classes = getClasses();
@@ -149,7 +151,7 @@ export default defineComponent({
       const iconNode = sLoading.value ? <LoadingOutlined /> : iconCom.value;
 
       const autoInsertSpace = autoInsertSpaceInButton.value !== false;
-      const kids = children.value?.map(child =>
+      const kids = children.value.map((child) =>
         insertSpace(child, isNeedInserted() && autoInsertSpace),
       );
 

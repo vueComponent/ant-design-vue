@@ -13,14 +13,15 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 import { getConfirmLocale } from './locale';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Button from '../button';
-import buttonTypes, { ButtonType, ButtonProps as ButtonPropsType } from '../button/buttonTypes';
+import buttonTypes, {
+  ButtonProps as ButtonPropsType,
+  convertLegacyProps,
+  LegacyButtonType,
+} from '../button/buttonTypes';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
-
-const ButtonProps = buttonTypes();
-const ButtonType = ButtonProps.type;
 
 let mousePosition: { x: number; y: number } | null = null;
 // ref: https://github.com/ant-design/ant-design/issues/15795
@@ -71,7 +72,9 @@ const modalProps = {
   /** 确认按钮文字*/
   okText: PropTypes.any,
   /** 确认按钮类型*/
-  okType: ButtonType,
+  okType: {
+    type: String as PropType<LegacyButtonType>,
+  },
   /** 取消按钮文字*/
   cancelText: PropTypes.any,
   icon: PropTypes.any,
@@ -112,7 +115,7 @@ export interface ModalFuncProps {
   centered?: boolean;
   width?: string | number;
   okText?: VNodeTypes;
-  okType?: ButtonType;
+  okType?: LegacyButtonType;
   cancelText?: VNodeTypes;
   icon?: VNodeTypes;
   /* Deprecated */
@@ -133,9 +136,7 @@ export interface ModalFuncProps {
 
 type getContainerFunc = () => HTMLElement;
 
-export type ModalFunc = (
-  props: ModalFuncProps,
-) => {
+export type ModalFunc = (props: ModalFuncProps) => {
   destroy: () => void;
   update: (newConfig: ModalFuncProps) => void;
 };
@@ -190,7 +191,7 @@ export default defineComponent({
       const cancelBtnProps = { onClick: this.handleCancel, ...(this.cancelButtonProps || {}) };
       const okBtnProps = {
         onClick: this.handleOk,
-        type: okType,
+        ...convertLegacyProps(okType),
         loading: confirmLoading,
         ...(this.okButtonProps || {}),
       };

@@ -10,6 +10,16 @@
 
 ---
 
+## 2.2.0-rc.1
+
+`2021-06-29`
+
+- 🌟 更改 babel 配置，较小构建包大小
+- 🌟 Form 原生提供 useForm 功能，废弃 @ant-design-vue/use 库
+- 🐞 修复 Form validateFirst 属性在多个校验规则时不触发 reject 问题 [#4273](https://github.com/vueComponent/ant-design-vue/issues/4273)
+- 🐞 修复 List 循环引用导致 Vite 下报错问题 [#4263](https://github.com/vueComponent/ant-design-vue/issues/4263)
+- 🐞 修复 Menu 事件回调缺少 item 属性问题 [#4290](https://github.com/vueComponent/ant-design-vue/issues/4290)
+
 ## 2.2.0-beta.6
 
 `2021-06-26`

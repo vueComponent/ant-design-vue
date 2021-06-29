@@ -10,6 +10,16 @@
 
 ---
 
+## 2.2.0-rc.1
+
+`2021-06-29`
+
+- 🌟 Change babel configuration, smaller build package size
+- 🌟 Form provides the useForm function natively, and we will deprecate the @ant-design-vue/use library
+- 🐞 Fix the issue that the Form validateFirst property does not trigger reject when there are multiple validation rules [#4273](https://github.com/vueComponent/ant-design-vue/issues/4273)
+- 🐞 Fix List circular references causing errors in Vite [#4263](https://github.com/vueComponent/ant-design-vue/issues/4263)
+- 🐞 Fix the missing item attribute problem in Menu event callback [#4290](https://github.com/vueComponent/ant-design-vue/issues/4290)
+
 ## 2.2.0-beta.6
 
 `2021-06-26`

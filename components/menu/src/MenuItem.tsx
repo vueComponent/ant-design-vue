@@ -94,6 +94,10 @@ export default defineComponent({
         keyPath: keysPath.value,
         eventKeyPath: [...parentEventKeys.value, eventKey],
         domEvent: e,
+        item: {
+          ...props,
+          ...attrs,
+        },
       };
     };
 

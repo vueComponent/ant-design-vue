@@ -23,11 +23,15 @@ export const columnProps = {
   align: PropTypes.oneOf(tuple('left', 'right', 'center')),
   ellipsis: PropTypes.looseBool,
   filters: PropTypes.arrayOf(ColumnFilterItem),
-  // onFilter: (value: any, record: T) => PropTypes.looseBool,
+  onFilter: {
+    type: Function as PropType<(value: any, record: any) => boolean>,
+  },
   filterMultiple: PropTypes.looseBool,
   filterDropdown: PropTypes.any,
   filterDropdownVisible: PropTypes.looseBool,
-  // onFilterDropdownVisibleChange?: (visible: boolean) => void;
+  onFilterDropdownVisibleChange: {
+    type: Function as PropType<(visible: boolean) => void>,
+  },
   sorter: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]),
   defaultSortOrder: PropTypes.oneOf(tuple('ascend', 'descend')),
   colSpan: PropTypes.number,
@@ -51,7 +55,13 @@ export const columnProps = {
 };
 
 export type ColumnProps = Partial<ExtractPropTypes<typeof columnProps>> & {
-  slots?: Record<string, string>;
+  slots?: {
+    title?: string;
+    filterIcon?: string;
+    filterDropdown?: string;
+    customRender?: string;
+    [key: string]: string;
+  };
 };
 
 export interface TableComponents {

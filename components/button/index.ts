@@ -1,6 +1,7 @@
 import { App, Plugin } from 'vue';
 import Button from './button';
 import ButtonGroup from './button-group';
+
 import type { ButtonProps, ButtonShape, ButtonType } from './buttonTypes';
 import type { ButtonGroupProps } from './button-group';
 import type { SizeType as ButtonSize } from '../config-provider';

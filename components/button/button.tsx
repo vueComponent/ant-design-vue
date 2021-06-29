@@ -6,16 +6,18 @@ import {
   onUpdated,
   ref,
   Text,
-  VNode,
   watch,
   watchEffect,
 } from 'vue';
 import Wave from '../_util/wave';
-import buttonTypes, { ButtonType } from './buttonTypes';
+import buttonTypes from './buttonTypes';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import { flattenChildren, getPropsSlot } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
+
+import type { ButtonType } from './buttonTypes';
+import type { VNode } from 'vue';
 
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);

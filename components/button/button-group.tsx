@@ -1,8 +1,10 @@
-import { defineComponent, ExtractPropTypes, PropType } from 'vue';
+import { defineComponent } from 'vue';
 import { flattenChildren } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
-import { SizeType } from '../config-provider';
+
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { SizeType } from '../config-provider';
 
 const buttonGroupProps = {
   prefixCls: PropTypes.string,

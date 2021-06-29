@@ -1,8 +1,8 @@
-import { ExtractPropTypes, PropType } from 'vue';
-
 import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';
-import { SizeType } from '../config-provider';
+
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { SizeType } from '../config-provider';
 
 const ButtonTypes = tuple('default', 'primary', 'ghost', 'dashed', 'link', 'text');
 export type ButtonType = typeof ButtonTypes[number];

@@ -99,13 +99,12 @@ export function convertDirectoryKeysToNodes(rootChildren: VNode[], keys: TreeKey
 
 export function getFullKeyListByTreeData(treeData: TreeDataItem[], replaceFields: any = {}) {
   let keys = [];
-  const { key = 'key', children = 'children' } = replaceFields(treeData || []).forEach(
-    (item: TreeDataItem) => {
-      keys.push(item[key]);
-      if (item[children]) {
-        keys = [...keys, ...getFullKeyListByTreeData(item[children], replaceFields)];
-      }
-    },
-  );
+  const { key = 'key', children = 'children' } = replaceFields;
+  (treeData || []).forEach((item: TreeDataItem) => {
+    keys.push(item[key]);
+    if (item[children]) {
+      keys = [...keys, ...getFullKeyListByTreeData(item[children], replaceFields)];
+    }
+  });
   return keys;
 }

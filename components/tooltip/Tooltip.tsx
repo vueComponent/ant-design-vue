@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes, CSSProperties, onMounted, ref } from 'vue';
+import type { ExtractPropTypes, CSSProperties } from 'vue';
+import { defineComponent, onMounted, ref } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import classNames from '../_util/classNames';
 import getPlacements from './placements';
@@ -7,7 +8,8 @@ import { PresetColorTypes } from '../_util/colors';
 import warning from '../_util/warning';
 import { getPropsSlot, getStyle, filterEmpty, isValidElement } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import abstractTooltipProps, { triggerTypes, placementTypes } from './abstractTooltipProps';
+import type { triggerTypes, placementTypes } from './abstractTooltipProps';
+import abstractTooltipProps from './abstractTooltipProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 const splitObject = (obj: any, keys: string[]) => {

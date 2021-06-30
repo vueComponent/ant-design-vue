@@ -3,7 +3,8 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 import Input from '../input';
-import { defineComponent, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent } from 'vue';
 
 export const transferSearchProps = {
   prefixCls: PropTypes.string,

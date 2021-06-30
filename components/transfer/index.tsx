@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes, ref, watch } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, ref, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
@@ -7,7 +8,7 @@ import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
-import { RenderEmptyHandler } from '../config-provider';
+import type { RenderEmptyHandler } from '../config-provider';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 

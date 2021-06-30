@@ -1,13 +1,14 @@
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import { TransferLocale } from '.';
+import type { TransferLocale } from '.';
 import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
 import defaultLocale from '../locale/default';
 import Lazyload from '../vc-lazy-load';
 import Checkbox from '../checkbox';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import { defineComponent, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent } from 'vue';
 
 function noop() {}
 

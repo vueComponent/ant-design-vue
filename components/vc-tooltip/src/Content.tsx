@@ -1,4 +1,5 @@
-import { onUpdated, ExtractPropTypes, defineComponent } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { onUpdated, defineComponent } from 'vue';
 import PropTypes from '../../_util/vue-types';
 
 const tooltipContentProps = {

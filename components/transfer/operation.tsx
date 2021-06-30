@@ -2,7 +2,7 @@ import type { CSSProperties, FunctionalComponent } from 'vue';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import Button from '../button';
-import { Direction } from '../config-provider';
+import type { Direction } from '../config-provider';
 
 function noop() {}
 

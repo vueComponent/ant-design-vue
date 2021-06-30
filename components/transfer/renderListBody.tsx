@@ -1,19 +1,11 @@
-import {
-  defineComponent,
-  ExtractPropTypes,
-  nextTick,
-  computed,
-  ref,
-  watch,
-  onMounted,
-  onBeforeMount,
-} from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, nextTick, computed, ref, watch, onMounted, onBeforeMount } from 'vue';
 import classNames from '../_util/classNames';
 import raf from '../_util/raf';
 import ListItem from './ListItem';
 import Pagination from '../pagination';
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import { DataSourceItem } from './list';
+import type { DataSourceItem } from './list';
 
 export const transferListBodyProps = {
   prefixCls: PropTypes.string,
@@ -121,7 +113,7 @@ const ListBody = defineComponent({
           if (lazy !== false) {
             raf.cancel(lazyId);
             lazyId.value = raf(() => {
-              if (container) {
+              if (container.value) {
                 const scrollEvent = new Event('scroll', { bubbles: true });
                 container.value.dispatchEvent(scrollEvent);
               }

@@ -1,113 +1,200 @@
-import { defineComponent, nextTick } from 'vue';
+import {
+  defineComponent,
+  ExtractPropTypes,
+  nextTick,
+  computed,
+  ref,
+  watch,
+  onMounted,
+  onBeforeMount,
+} from 'vue';
+import classNames from '../_util/classNames';
 import raf from '../_util/raf';
 import ListItem from './ListItem';
+import Pagination from '../pagination';
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import { findDOMNode } from '../_util/props-util';
-import { getTransitionGroupProps, TransitionGroup } from '../_util/transition';
 import { DataSourceItem } from './list';
+
+export const transferListBodyProps = {
+  prefixCls: PropTypes.string,
+  filteredRenderItems: PropTypes.array.def([]),
+  lazy: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
+  selectedKeys: PropTypes.array,
+  disabled: PropTypes.looseBool,
+  showRemove: PropTypes.looseBool,
+  pagination: PropTypes.any,
+  onItemSelect: PropTypes.func,
+  onItemSelectAll: PropTypes.func,
+  onScroll: PropTypes.func,
+  onItemRemove: PropTypes.func,
+};
+
+export type TransferListBodyProps = Partial<ExtractPropTypes<typeof transferListBodyProps>>;
+
+function parsePagination(pagination) {
+  if (!pagination) {
+    return null;
+  }
+
+  const defaultPagination = {
+    pageSize: 10,
+  };
+
+  if (typeof pagination === 'object') {
+    return {
+      ...defaultPagination,
+      ...pagination,
+    };
+  }
+
+  return defaultPagination;
+}
+
 const ListBody = defineComponent({
   name: 'ListBody',
   inheritAttrs: false,
-  props: {
-    prefixCls: PropTypes.string,
-    filteredRenderItems: PropTypes.array.def([]),
-    lazy: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
-    selectedKeys: PropTypes.array,
-    disabled: PropTypes.looseBool,
-    onItemSelect: PropTypes.func,
-    onItemSelectAll: PropTypes.func,
-    onScroll: PropTypes.func,
-  },
-  setup() {
-    return {
-      mountId: null,
-      lazyId: null,
+  props: transferListBodyProps,
+  emits: ['itemSelect', 'itemRemove', 'scroll'],
+  setup(props, { emit, expose }) {
+    const mounted = ref<boolean>(false);
+    const mountId = ref(null);
+    const lazyId = ref(null);
+    const container = ref(null);
+    const current = ref(1);
+    const itemsLength = computed(() => {
+      return props.filteredRenderItems ? props.filteredRenderItems.length : 0;
+    });
+
+    const handleItemSelect = (item: DataSourceItem) => {
+      const { selectedKeys } = props;
+      const checked = selectedKeys.indexOf(item.key) >= 0;
+      emit('itemSelect', item.key, !checked);
     };
-  },
-  data() {
-    return {
-      mounted: false,
+
+    const handleItemRemove = (item: DataSourceItem) => {
+      emit('itemRemove', item.key);
     };
-  },
-  computed: {
-    itemsLength(): number {
-      return this.filteredRenderItems ? this.filteredRenderItems.length : 0;
-    },
-  },
-  watch: {
-    itemsLength() {
-      nextTick(() => {
-        const { lazy } = this.$props;
-        if (lazy !== false) {
-          const container = findDOMNode(this);
-          raf.cancel(this.lazyId);
-          this.lazyId = raf(() => {
-            if (container) {
-              const scrollEvent = new Event('scroll', { bubbles: true });
-              container.dispatchEvent(scrollEvent);
-            }
-          });
-        }
+
+    const handleScroll = (e: Event) => {
+      emit('scroll', e);
+    };
+
+    const getItems = () => {
+      const { pagination, filteredRenderItems } = props;
+
+      const mergedPagination = parsePagination(pagination);
+
+      let displayItems = filteredRenderItems;
+
+      if (mergedPagination) {
+        displayItems = filteredRenderItems.slice(
+          (current.value - 1) * mergedPagination.pageSize,
+          current.value * mergedPagination.pageSize,
+        );
+      }
+
+      return displayItems;
+    };
+
+    const onPageChange = (cur: number) => {
+      current.value = cur;
+    };
+
+    expose({ getItems });
+
+    onMounted(() => {
+      mountId.value = raf(() => {
+        mounted.value = true;
       });
-    },
-  },
-  mounted() {
-    this.mountId = raf(() => {
-      this.mounted = true;
     });
-  },
 
-  beforeUnmount() {
-    raf.cancel(this.mountId);
-    raf.cancel(this.lazyId);
-  },
-  methods: {
-    handleItemSelect(item: DataSourceItem) {
-      const { selectedKeys } = this.$props;
-      const checked = selectedKeys.indexOf(item.key) >= 0;
-      this.$emit('itemSelect', item.key, !checked);
-    },
-    handleScroll(e: Event) {
-      this.$emit('scroll', e);
-    },
-  },
-  render() {
-    const { mounted } = this.$data;
-    const {
-      prefixCls,
-      filteredRenderItems,
-      lazy,
-      selectedKeys,
-      disabled: globalDisabled,
-    } = this.$props;
-    const items = filteredRenderItems.map(({ renderedEl, renderedText, item }: any) => {
-      const { disabled } = item;
-      const checked = selectedKeys.indexOf(item.key) >= 0;
-
-      return (
-        <ListItem
-          disabled={globalDisabled || disabled}
-          key={item.key}
-          item={item}
-          lazy={lazy}
-          renderedText={renderedText}
-          renderedEl={renderedEl}
-          checked={checked}
-          prefixCls={prefixCls}
-          onClick={this.handleItemSelect}
-        />
-      );
+    onBeforeMount(() => {
+      raf.cancel(mountId.value);
+      raf.cancel(lazyId.value);
     });
-    const transitionProps = getTransitionGroupProps(
-      mounted ? `${prefixCls}-content-item-highlight` : '',
-      {
-        tag: 'ul',
-        class: `${prefixCls}-content`,
-        onScroll: this.handleScroll,
+
+    watch(
+      () => itemsLength.value,
+      () => {
+        nextTick(() => {
+          const { lazy } = props;
+          if (lazy !== false) {
+            raf.cancel(lazyId);
+            lazyId.value = raf(() => {
+              if (container) {
+                const scrollEvent = new Event('scroll', { bubbles: true });
+                container.value.dispatchEvent(scrollEvent);
+              }
+            });
+          }
+        });
       },
     );
-    return <TransitionGroup {...transitionProps}>{items}</TransitionGroup>;
+
+    return () => {
+      const {
+        prefixCls,
+        filteredRenderItems,
+        lazy,
+        selectedKeys,
+        disabled: globalDisabled,
+        showRemove,
+        pagination,
+      } = props;
+
+      const mergedPagination = parsePagination(pagination);
+      let paginationNode = null;
+
+      if (mergedPagination) {
+        paginationNode = (
+          <Pagination
+            simple
+            size="small"
+            disabled={globalDisabled}
+            class={`${prefixCls}-pagination`}
+            total={filteredRenderItems.length}
+            pageSize={mergedPagination.pageSize}
+            current={current.value}
+            onChange={onPageChange}
+          />
+        );
+      }
+
+      const items = getItems().map(({ renderedEl, renderedText, item }: any) => {
+        const { disabled } = item;
+        const checked = selectedKeys.indexOf(item.key) >= 0;
+
+        return (
+          <ListItem
+            disabled={globalDisabled || disabled}
+            key={item.key}
+            item={item}
+            lazy={lazy}
+            renderedText={renderedText}
+            renderedEl={renderedEl}
+            checked={checked}
+            prefixCls={prefixCls}
+            onClick={handleItemSelect}
+            onRemove={handleItemRemove}
+            showRemove={showRemove}
+          />
+        );
+      });
+      return (
+        <>
+          <ul
+            class={classNames(`${prefixCls}-content`, {
+              [`${prefixCls}-content-show-remove`]: showRemove,
+            })}
+            onScroll={handleScroll}
+          >
+            {items}
+          </ul>
+          {paginationNode}
+        </>
+      );
+    };
   },
 });
 
-export default props => <ListBody {...props} />;
+export default (props: TransferListBodyProps, ref) => <ListBody {...props} ref={ref} />;

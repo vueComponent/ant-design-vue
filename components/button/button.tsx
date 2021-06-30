@@ -4,7 +4,6 @@ import {
   onBeforeUnmount,
   onMounted,
   onUpdated,
-  Ref,
   ref,
   Text,
   watch,
@@ -18,7 +17,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 
 import type { ButtonType } from './buttonTypes';
-import type { VNode } from 'vue';
+import type { VNode, Ref } from 'vue';
 
 type Loading = boolean | number;
 
@@ -58,7 +57,7 @@ export default defineComponent({
 
     watch(
       loadingOrDelay,
-      (val) => {
+      val => {
         clearTimeout(delayTimeoutRef.value);
         if (typeof loadingOrDelay.value === 'number') {
           delayTimeoutRef.value = window.setTimeout(() => {
@@ -90,7 +89,6 @@ export default defineComponent({
           break;
       }
       return {
-        [attrs.class as string]: attrs.class,
         [`${pre}`]: true,
         [`${pre}-${type}`]: type,
         [`${pre}-${shape}`]: shape,
@@ -178,15 +176,9 @@ export default defineComponent({
         onClick: handleClick,
       };
 
-      const iconNode = innerLoading.value ? (
-        <span class={`${prefixCls.value}-loading-icon`}>
-          <LoadingOutlined />
-        </span>
-      ) : (
-        icon
-      );
+      const iconNode = innerLoading.value ? <LoadingOutlined /> : icon;
 
-      const kids = children.map((child) =>
+      const kids = children.map(child =>
         insertSpace(child, isNeedInserted && autoInsertSpace.value),
       );
 

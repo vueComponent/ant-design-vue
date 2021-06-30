@@ -155,24 +155,38 @@
     }
   }
 
-  & > &-loading-icon {
-    transition: all 0.3s @ease-in-out;
-
-    .@{iconfont-css-prefix} {
-      padding-right: @padding-xs;
-      animation: none;
-      // for smooth button padding transition
-      svg {
-        animation: loadingCircle 1s infinite linear;
-      }
-    }
-
-    &:only-child {
-      .@{iconfont-css-prefix} {
-        padding-right: 0;
-      }
+  &&-loading:not(&-circle):not(&-circle-outline):not(&-icon-only) {
+    padding-left: 29px;
+    .@{iconfont-css-prefix}:not(:last-child) {
+      margin-left: -14px;
     }
   }
+
+  &-sm&-loading:not(&-circle):not(&-circle-outline):not(&-icon-only) {
+    padding-left: 24px;
+    .@{iconfont-css-prefix} {
+      margin-left: -17px;
+    }
+  }
+
+  // & > &-loading-icon {
+  //   transition: all 0.3s @ease-in-out;
+
+  //   .@{iconfont-css-prefix} {
+  //     padding-right: @padding-xs;
+  //     animation: none;
+  //     // for smooth button padding transition
+  //     svg {
+  //       animation: loadingCircle 1s infinite linear;
+  //     }
+  //   }
+
+  //   &:only-child {
+  //     .@{iconfont-css-prefix} {
+  //       padding-right: 0;
+  //     }
+  //   }
+  // }
 
   &-group {
     .btn-group(@btn-prefix-cls);

@@ -1,19 +1,13 @@
-import {
-  reactive,
-  provide,
-  PropType,
-  defineComponent,
-  watch,
-  ExtractPropTypes,
-  UnwrapRef,
-} from 'vue';
+import type { PropType, ExtractPropTypes, UnwrapRef } from 'vue';
+import { reactive, provide, defineComponent, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
-import LocaleProvider, { Locale, ANT_MARK } from '../locale-provider';
-import { TransformCellTextProps } from '../table/interface';
+import type { Locale } from '../locale-provider';
+import LocaleProvider, { ANT_MARK } from '../locale-provider';
+import type { TransformCellTextProps } from '../table/interface';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { withInstall } from '../_util/type';
-import { RequiredMark } from '../form/Form';
+import type { RequiredMark } from '../form/Form';
 
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
 

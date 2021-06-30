@@ -1,4 +1,5 @@
-import { inject, isVNode, defineComponent, VNodeTypes, PropType, VNode } from 'vue';
+import type { VNodeTypes, PropType, VNode, ExtractPropTypes } from 'vue';
+import { inject, isVNode, defineComponent } from 'vue';
 import { tuple } from '../_util/type';
 import Tabs from '../tabs';
 import Row from '../row';
@@ -20,32 +21,36 @@ export type CardType = 'inner';
 
 const { TabPane } = Tabs;
 
+const cardProps = {
+  prefixCls: PropTypes.string,
+  title: PropTypes.VNodeChild,
+  extra: PropTypes.VNodeChild,
+  bordered: PropTypes.looseBool.def(true),
+  bodyStyle: PropTypes.style,
+  headStyle: PropTypes.style,
+  loading: PropTypes.looseBool.def(false),
+  hoverable: PropTypes.looseBool.def(false),
+  type: PropTypes.string,
+  size: PropTypes.oneOf(tuple('default', 'small')),
+  actions: PropTypes.VNodeChild,
+  tabList: {
+    type: Array as PropType<CardTabListType[]>,
+  },
+  tabBarExtraContent: PropTypes.VNodeChild,
+  activeTabKey: PropTypes.string,
+  defaultActiveTabKey: PropTypes.string,
+  cover: PropTypes.VNodeChild,
+  onTabChange: {
+    type: Function as PropType<(key: string) => void>,
+  },
+};
+
+export type CardProps = Partial<ExtractPropTypes<typeof cardProps>>;
+
 const Card = defineComponent({
   name: 'ACard',
   mixins: [BaseMixin],
-  props: {
-    prefixCls: PropTypes.string,
-    title: PropTypes.VNodeChild,
-    extra: PropTypes.VNodeChild,
-    bordered: PropTypes.looseBool.def(true),
-    bodyStyle: PropTypes.style,
-    headStyle: PropTypes.style,
-    loading: PropTypes.looseBool.def(false),
-    hoverable: PropTypes.looseBool.def(false),
-    type: PropTypes.string,
-    size: PropTypes.oneOf(tuple('default', 'small')),
-    actions: PropTypes.VNodeChild,
-    tabList: {
-      type: Array as PropType<CardTabListType[]>,
-    },
-    tabBarExtraContent: PropTypes.VNodeChild,
-    activeTabKey: PropTypes.string,
-    defaultActiveTabKey: PropTypes.string,
-    cover: PropTypes.VNodeChild,
-    onTabChange: {
-      type: Function as PropType<(key: string) => void>,
-    },
-  },
+  props: cardProps,
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

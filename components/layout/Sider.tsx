@@ -1,16 +1,6 @@
 import classNames from '../_util/classNames';
-import {
-  inject,
-  PropType,
-  defineComponent,
-  ExtractPropTypes,
-  ref,
-  watch,
-  onMounted,
-  onBeforeUnmount,
-  CSSProperties,
-  provide,
-} from 'vue';
+import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
+import { inject, defineComponent, ref, watch, onMounted, onBeforeUnmount, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
@@ -81,7 +71,7 @@ export default defineComponent({
   emits: ['breakpoint', 'update:collapsed', 'collapse'],
   setup(props, { emit, attrs, slots }) {
     const { prefixCls } = useConfigInject('layout-sider', props);
-    const siderHook = inject(SiderHookProviderKey);
+    const siderHook = inject(SiderHookProviderKey, undefined);
     const collapsed = ref(
       !!(props.collapsed !== undefined ? props.collapsed : props.defaultCollapsed),
     );

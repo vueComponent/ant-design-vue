@@ -1,6 +1,7 @@
-import { CSSProperties } from 'vue';
-import { createTypes, VueTypeValidableDef, VueTypesInterface } from 'vue-types';
-import { VueNode } from '../type';
+import type { CSSProperties } from 'vue';
+import type { VueTypeValidableDef, VueTypesInterface } from 'vue-types';
+import { createTypes } from 'vue-types';
+import type { VueNode } from '../type';
 const PropTypes = createTypes({
   func: undefined,
   bool: undefined,

@@ -1,4 +1,4 @@
-import { Ref, InjectionKey } from 'vue';
+import type { Ref, InjectionKey } from 'vue';
 
 export type SiderCollapsed = Ref<boolean>;
 

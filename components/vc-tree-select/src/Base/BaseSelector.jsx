@@ -36,7 +36,7 @@ export const selectorPropTypes = () => ({
 });
 
 function noop() {}
-export default function() {
+export default function () {
   const BaseSelector = {
     name: 'BaseSelector',
     inheritAttrs: false,

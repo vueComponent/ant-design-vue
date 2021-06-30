@@ -1,12 +1,15 @@
-import { computed, defineComponent, ref, VNodeChild, App, PropType, Plugin } from 'vue';
+import type { VNodeChild, App, PropType, Plugin } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import omit from 'omit.js';
 import classNames from '../_util/classNames';
-import RcSelect, { Option, OptGroup, SelectProps as RcSelectProps, BaseProps } from '../vc-select';
-import { OptionProps as OptionPropsType } from '../vc-select/Option';
+import type { SelectProps as RcSelectProps } from '../vc-select';
+import RcSelect, { Option, OptGroup, BaseProps } from '../vc-select';
+import type { OptionProps as OptionPropsType } from '../vc-select/Option';
 import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import type { SizeType } from '../config-provider';
 
 type RawValue = string | number;
 
@@ -19,8 +22,7 @@ export interface LabeledValue {
   value: RawValue;
   label: VNodeChild;
 }
-export type SizeType = 'small' | 'middle' | 'large' | undefined;
-export type SelectValue = RawValue | RawValue[] | LabeledValue | LabeledValue[];
+export type SelectValue = RawValue | RawValue[] | LabeledValue | LabeledValue[] | undefined;
 
 export interface InternalSelectProps<VT> extends Omit<RcSelectProps<VT>, 'mode'> {
   suffixIcon?: VNodeChild;
@@ -200,12 +202,15 @@ const Select = defineComponent({
   },
 });
 /* istanbul ignore next */
-Select.install = function(app: App) {
+Select.install = function (app: App) {
   app.component(Select.name, Select);
   app.component(Select.Option.displayName, Select.Option);
   app.component(Select.OptGroup.displayName, Select.OptGroup);
   return app;
 };
+
+export const SelectOption = Select.Option;
+export const SelectOptGroup = Select.OptGroup;
 export default Select as typeof Select &
   Plugin & {
     readonly Option: typeof Option;

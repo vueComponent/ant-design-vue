@@ -1,4 +1,5 @@
-import { provide, inject, cloneVNode, defineComponent, VNode } from 'vue';
+import type { VNode, ExtractPropTypes } from 'vue';
+import { provide, inject, cloneVNode, defineComponent } from 'vue';
 import RcDropdown from '../vc-dropdown/src/index';
 import DropdownButton from './dropdown-button';
 import PropTypes from '../_util/vue-types';
@@ -15,16 +16,19 @@ import getDropdownProps from './getDropdownProps';
 import { defaultConfigProvider } from '../config-provider';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 
-const DropdownProps = getDropdownProps();
+const dropdownProps = getDropdownProps();
+
+export type DropdownProps = Partial<ExtractPropTypes<typeof dropdownProps>>;
+
 const Dropdown = defineComponent({
   name: 'ADropdown',
   inheritAttrs: false,
   props: {
-    ...DropdownProps,
+    ...dropdownProps,
     prefixCls: PropTypes.string,
     mouseEnterDelay: PropTypes.number.def(0.15),
     mouseLeaveDelay: PropTypes.number.def(0.1),
-    placement: DropdownProps.placement.def('bottomLeft'),
+    placement: dropdownProps.placement.def('bottomLeft'),
     onVisibleChange: PropTypes.func,
     'onUpdate:visible': PropTypes.func,
   },
@@ -114,4 +118,3 @@ const Dropdown = defineComponent({
 
 Dropdown.Button = DropdownButton;
 export default Dropdown;
-export { DropdownProps };

@@ -37,6 +37,10 @@
     background: @input-disabled-bg;
     cursor: not-allowed;
 
+    .@{select-prefix-cls}-multiple& {
+      background: @select-multiple-disabled-background;
+    }
+
     input {
       cursor: not-allowed;
     }
@@ -66,7 +70,12 @@
   display: inline-block;
   cursor: pointer;
 
-  &:not(.@{select-prefix-cls}-disabled):hover &-selector {
+  &:not(&-customize-input) &-selector {
+    .select-selector();
+    .select-search-input-without-border();
+  }
+
+  &:not(&-disabled):hover &-selector {
     .hover();
   }
 
@@ -93,6 +102,7 @@
     color: @input-placeholder-color;
     white-space: nowrap;
     text-overflow: ellipsis;
+    pointer-events: none;
 
     // IE11 css hack. `*::-ms-backdrop,` is a must have
     @media all and (-ms-high-contrast: none) {
@@ -189,21 +199,21 @@
     outline: none;
     box-shadow: @box-shadow-base;
 
-    &.slide-up-enter.slide-up-enter-active&-placement-bottomLeft,
-    &.slide-up-appear.slide-up-appear-active&-placement-bottomLeft {
+    &.@{ant-prefix}-slide-up-enter.@{ant-prefix}-slide-up-enter-active&-placement-bottomLeft,
+    &.@{ant-prefix}-slide-up-appear.@{ant-prefix}-slide-up-appear-active&-placement-bottomLeft {
       animation-name: antSlideUpIn;
     }
 
-    &.slide-up-enter.slide-up-enter-active&-placement-topLeft,
-    &.slide-up-appear.slide-up-appear-active&-placement-topLeft {
+    &.@{ant-prefix}-slide-up-enter.@{ant-prefix}-slide-up-enter-active&-placement-topLeft,
+    &.@{ant-prefix}-slide-up-appear.@{ant-prefix}-slide-up-appear-active&-placement-topLeft {
       animation-name: antSlideDownIn;
     }
 
-    &.slide-up-leave.slide-up-leave-active&-placement-bottomLeft {
+    &.@{ant-prefix}-slide-up-leave.@{ant-prefix}-slide-up-leave-active&-placement-bottomLeft {
       animation-name: antSlideUpOut;
     }
 
-    &.slide-up-leave.slide-up-leave-active&-placement-topLeft {
+    &.@{ant-prefix}-slide-up-leave.@{ant-prefix}-slide-up-leave-active&-placement-topLeft {
       animation-name: antSlideDownOut;
     }
 

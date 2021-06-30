@@ -29,7 +29,7 @@
  * - `combobox` mode not support `optionLabelProp`
  */
 
-import { OptionsType as SelectOptionsType } from './interface';
+import type { OptionsType as SelectOptionsType } from './interface';
 import SelectOptionList from './OptionList';
 import Option from './Option';
 import OptGroup from './OptGroup';
@@ -42,11 +42,11 @@ import {
   flattenOptions,
   fillOptionsWithMissingValue,
 } from './utils/valueUtil';
-import generateSelector, { SelectProps } from './generate';
-import { DefaultValueType } from './interface/generator';
+import type { SelectProps } from './generate';
+import generateSelector from './generate';
+import type { DefaultValueType } from './interface/generator';
 import warningProps from './utils/warningPropsUtil';
 import { defineComponent, ref } from 'vue';
-import { getSlot } from '../_util/props-util';
 import omit from 'lodash-es/omit';
 
 const RefSelect = generateSelector<SelectOptionsType>({
@@ -64,25 +64,30 @@ const RefSelect = generateSelector<SelectOptionsType>({
   fillOptionsWithMissingValue,
 });
 
-export type ExportedSelectProps<
-  ValueType extends DefaultValueType = DefaultValueType
-> = SelectProps<SelectOptionsType, ValueType>;
+export type ExportedSelectProps<ValueType extends DefaultValueType = DefaultValueType> =
+  SelectProps<SelectOptionsType, ValueType>;
 
 const Select = defineComponent<Omit<ExportedSelectProps, 'children'>>({
-  setup() {
+  setup(props, { attrs, expose, slots }) {
     const selectRef = ref(null);
-    return {
-      selectRef,
+    expose({
       focus: () => {
         selectRef.value?.focus();
       },
       blur: () => {
         selectRef.value?.blur();
       },
+    });
+    return () => {
+      return (
+        <RefSelect
+          ref={selectRef}
+          {...(props as any)}
+          {...attrs}
+          children={slots.default?.() || []}
+        />
+      );
     };
-  },
-  render() {
-    return <RefSelect ref="selectRef" {...this.$props} {...this.$attrs} children={getSlot(this)} />;
   },
 });
 Select.inheritAttrs = false;

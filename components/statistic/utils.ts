@@ -1,4 +1,4 @@
-import { VNodeTypes } from 'vue';
+import type { VNodeTypes } from 'vue';
 import padStart from 'lodash-es/padStart';
 
 export type valueType = number | string;

@@ -34,7 +34,7 @@ const getSlideClasses = spec => {
   };
 };
 
-const getSlideStyle = function(spec) {
+const getSlideStyle = function (spec) {
   const style = {};
 
   if (spec.variableWidth === undefined || spec.variableWidth === false) {
@@ -76,7 +76,7 @@ const getSlideStyle = function(spec) {
 
 const getKey = (child, fallbackKey) => child.key || (child.key === 0 && '0') || fallbackKey;
 
-const renderSlides = function(spec, children) {
+const renderSlides = function (spec, children) {
   let key;
   const slides = [];
   const preCloneSlides = [];

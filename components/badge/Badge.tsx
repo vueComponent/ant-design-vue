@@ -4,7 +4,8 @@ import classNames from '../_util/classNames';
 import { getPropsSlot, flattenChildren } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { getTransitionProps, Transition } from '../_util/transition';
-import { defineComponent, ExtractPropTypes, CSSProperties, computed, ref, watch } from 'vue';
+import type { ExtractPropTypes, CSSProperties } from 'vue';
+import { defineComponent, computed, ref, watch } from 'vue';
 import { tuple } from '../_util/type';
 import Ribbon from './Ribbon';
 import { isPresetColor } from './utils';
@@ -44,9 +45,11 @@ export default defineComponent({
 
     // ================================ Misc ================================
     const numberedDisplayCount = computed(() => {
-      return ((props.count as number) > (props.overflowCount as number)
-        ? `${props.overflowCount}+`
-        : props.count) as string | number | null;
+      return (
+        (props.count as number) > (props.overflowCount as number)
+          ? `${props.overflowCount}+`
+          : props.count
+      ) as string | number | null;
     });
 
     const hasStatus = computed(
@@ -157,13 +160,16 @@ export default defineComponent({
         visible || !text ? null : <span class={`${pre}-status-text`}>{text}</span>;
 
       // >>> Display Component
-      const displayNode = cloneElement(
-        slots.count?.(),
-        {
-          style: mergedStyle,
-        },
-        false,
-      );
+      const displayNode =
+        typeof count === 'object' || (count === undefined && slots.count)
+          ? cloneElement(
+              count ?? slots.count?.(),
+              {
+                style: mergedStyle,
+              },
+              false,
+            )
+          : null;
 
       const badgeClassName = classNames(
         pre,

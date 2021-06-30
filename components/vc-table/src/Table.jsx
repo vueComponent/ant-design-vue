@@ -366,12 +366,8 @@ export default defineComponent({
         return;
       }
       const { scroll = {} } = this;
-      const {
-        ref_headTable,
-        ref_bodyTable,
-        ref_fixedColumnsBodyLeft,
-        ref_fixedColumnsBodyRight,
-      } = this;
+      const { ref_headTable, ref_bodyTable, ref_fixedColumnsBodyLeft, ref_fixedColumnsBodyRight } =
+        this;
       if (target.scrollTop !== this.lastScrollTop && scroll.y && target !== ref_headTable) {
         const scrollTop = target.scrollTop;
         if (ref_fixedColumnsBodyLeft && target !== ref_fixedColumnsBodyLeft) {

@@ -13,7 +13,10 @@ describe('AutoComplete with Custom Input Element Render', () => {
       {
         render() {
           return (
-            <AutoComplete ref="component" dataSource={['12345', '23456', '34567']}>
+            <AutoComplete
+              ref="component"
+              options={[{ value: '12345' }, { value: '23456' }, { value: '34567' }]}
+            >
               <input />
             </AutoComplete>
           );

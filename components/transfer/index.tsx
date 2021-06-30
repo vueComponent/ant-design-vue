@@ -81,20 +81,20 @@ const Transfer = defineComponent({
   setup(props, { emit, attrs, slots, expose }) {
     const { configProvider, prefixCls, direction } = useConfigInject('transfer', props);
     const sourceSelectedKeys = ref(
-      props.selectedKeys?.filter((key) => props.targetKeys.indexOf(key) === -1) ?? [],
+      props.selectedKeys?.filter(key => props.targetKeys.indexOf(key) === -1) ?? [],
     );
     const targetSelectedKeys = ref(
-      props.selectedKeys?.filter((key) => props.targetKeys.indexOf(key) > -1) ?? [],
+      props.selectedKeys?.filter(key => props.targetKeys.indexOf(key) > -1) ?? [],
     );
 
     watch(
       () => props.selectedKeys,
       () => {
         sourceSelectedKeys.value = props.selectedKeys?.filter(
-          (key) => props.targetKeys.indexOf(key) === -1,
+          key => props.targetKeys.indexOf(key) === -1,
         );
         targetSelectedKeys.value = props.selectedKeys?.filter(
-          (key) => props.targetKeys.indexOf(key) > -1,
+          key => props.targetKeys.indexOf(key) > -1,
         );
       },
     );
@@ -124,13 +124,13 @@ const Transfer = defineComponent({
       const moveKeys = direction === 'right' ? sourceSelectedKeys.value : targetSelectedKeys.value;
       // filter the disabled options
       const newMoveKeys = moveKeys.filter(
-        (key) => !dataSource.some((data) => !!(key === data.key && data.disabled)),
+        key => !dataSource.some(data => !!(key === data.key && data.disabled)),
       );
       // move items to target box
       const newTargetKeys =
         direction === 'right'
           ? newMoveKeys.concat(targetKeys)
-          : targetKeys.filter((targetKey) => newMoveKeys.indexOf(targetKey) === -1);
+          : targetKeys.filter(targetKey => newMoveKeys.indexOf(targetKey) === -1);
 
       // empty checked keys
       const oppositeDirection = direction === 'right' ? 'left' : 'right';
@@ -161,7 +161,7 @@ const Transfer = defineComponent({
         mergedCheckedKeys = Array.from(new Set([...originalSelectedKeys, ...selectedKeys]));
       } else {
         // Remove current keys from origin keys
-        mergedCheckedKeys = originalSelectedKeys.filter((key) => selectedKeys.indexOf(key) === -1);
+        mergedCheckedKeys = originalSelectedKeys.filter(key => selectedKeys.indexOf(key) === -1);
       }
 
       handleSelectChange(direction, mergedCheckedKeys);
@@ -232,7 +232,7 @@ const Transfer = defineComponent({
     };
     const onRightItemRemove = (targetedKeys: string[]) => {
       const { targetKeys = [] } = props;
-      const newTargetKeys = targetKeys.filter((key) => !targetedKeys.includes(key));
+      const newTargetKeys = targetKeys.filter(key => !targetedKeys.includes(key));
       emit('update:targetKeys', newTargetKeys);
       emit('change', newTargetKeys, 'left', [...targetedKeys]);
     };
@@ -259,7 +259,7 @@ const Transfer = defineComponent({
 
       const leftDataSource = [];
       const rightDataSource = new Array(targetKeys.length);
-      dataSource.forEach((record) => {
+      dataSource.forEach(record => {
         if (rowKey) {
           record.key = rowKey(record);
         }

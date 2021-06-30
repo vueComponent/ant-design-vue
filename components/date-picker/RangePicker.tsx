@@ -1,4 +1,5 @@
-import { CSSProperties, defineComponent, inject, nextTick } from 'vue';
+import type { CSSProperties } from 'vue';
+import { defineComponent, inject, nextTick } from 'vue';
 import moment from 'moment';
 import RangeCalendar from '../vc-calendar/src/RangeCalendar';
 import VcDatePicker from '../vc-calendar/src/Picker';

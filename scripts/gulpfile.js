@@ -43,6 +43,7 @@ function dist(done) {
       hash: false,
       version: false,
     });
+    // eslint-disable-next-line no-console
     console.log(buildInfo);
     done(0);
   });
@@ -64,6 +65,7 @@ function copyHtml() {
   rl.on('line', line => {
     if (line.indexOf('path:') > -1) {
       const name = line.split("'")[1].split("'")[0];
+      // eslint-disable-next-line no-console
       console.log('create path:', name);
       const toPaths = [
         `_site/components/${name}`,
@@ -73,7 +75,7 @@ function copyHtml() {
       ];
       toPaths.forEach(toPath => {
         rimraf.sync(path.join(cwd, toPath));
-        mkdirp(path.join(cwd, toPath), function() {
+        mkdirp(path.join(cwd, toPath), function () {
           fs.writeFileSync(
             path.join(cwd, `${toPath}/index.html`),
             fs.readFileSync(path.join(cwd, '_site/index.html')),
@@ -98,7 +100,7 @@ function copyHtml() {
         `_site/docs/vue/${name}-cn`,
       ];
       toPaths.forEach(toPath => {
-        mkdirp(path.join(cwd, toPath), function() {
+        mkdirp(path.join(cwd, toPath), function () {
           fs.writeFileSync(
             path.join(cwd, `${toPath}/index.html`),
             fs.readFileSync(path.join(cwd, '_site/index.html')),

@@ -14,7 +14,7 @@ function handler(options, handle, e) {
 const PrevArrow = (_, { attrs }) => {
   const { clickHandler, infinite, currentSlide, slideCount, slidesToShow } = attrs;
   const prevClasses = { 'slick-arrow': true, 'slick-prev': true };
-  let prevHandler = function(e) {
+  let prevHandler = function (e) {
     handler({ message: 'previous' }, clickHandler, e);
   };
 
@@ -67,7 +67,7 @@ const NextArrow = (_, { attrs }) => {
   const { clickHandler, currentSlide, slideCount } = attrs;
 
   const nextClasses = { 'slick-arrow': true, 'slick-next': true };
-  let nextHandler = function(e) {
+  let nextHandler = function (e) {
     handler({ message: 'next' }, clickHandler, e);
   };
   if (!canGoNext(attrs)) {

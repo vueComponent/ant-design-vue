@@ -1,7 +1,9 @@
-import { LiteralUnion, tuple } from '../_util/type';
-import { PresetColorType } from '../_util/colors';
+import type { LiteralUnion } from '../_util/type';
+import { tuple } from '../_util/type';
+import type { PresetColorType } from '../_util/colors';
 import { isPresetColor } from './utils';
-import { CSSProperties, defineComponent, PropType, ExtractPropTypes, computed } from 'vue';
+import type { CSSProperties, PropType, ExtractPropTypes } from 'vue';
+import { defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
 

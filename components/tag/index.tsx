@@ -1,25 +1,12 @@
-import {
-  ref,
-  HTMLAttributes,
-  defineComponent,
-  App,
-  watchEffect,
-  PropType,
-  ExtractPropTypes,
-  Plugin,
-  computed,
-} from 'vue';
+import type { HTMLAttributes, App, PropType, ExtractPropTypes, Plugin } from 'vue';
+import { ref, defineComponent, watchEffect, computed } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Wave from '../_util/wave';
-import {
-  PresetColorTypes,
-  PresetStatusColorTypes,
-  PresetColorType,
-  PresetStatusColorType,
-} from '../_util/colors';
-import { LiteralUnion } from '../_util/type';
+import type { PresetColorType, PresetStatusColorType } from '../_util/colors';
+import { PresetColorTypes, PresetStatusColorTypes } from '../_util/colors';
+import type { LiteralUnion } from '../_util/type';
 import CheckableTag from './CheckableTag';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
@@ -140,11 +127,13 @@ const Tag = defineComponent({
 
 Tag.CheckableTag = CheckableTag;
 
-Tag.install = function(app: App) {
+Tag.install = function (app: App) {
   app.component(Tag.name, Tag);
   app.component(CheckableTag.name, CheckableTag);
   return app;
 };
+
+export { CheckableTag };
 
 export default Tag as typeof Tag &
   Plugin & {

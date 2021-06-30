@@ -1,4 +1,5 @@
-import { inject, provide, PropType, defineComponent, CSSProperties } from 'vue';
+import type { PropType, CSSProperties, ExtractPropTypes } from 'vue';
+import { inject, provide, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import VcCascader from '../vc-cascader';
 import arrayTreeFilter from 'array-tree-filter';
@@ -23,8 +24,9 @@ import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
 import warning from '../_util/warning';
 import { defaultConfigProvider } from '../config-provider';
-import { tuple, VueNode, withInstall } from '../_util/type';
-import { RenderEmptyHandler } from '../config-provider/renderEmpty';
+import type { VueNode } from '../_util/type';
+import { tuple, withInstall } from '../_util/type';
+import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
 export interface CascaderOptionType {
   value?: string | number;
@@ -99,7 +101,7 @@ export interface FilteredOptionsType extends EmptyFilteredOptionsType {
 // }).loose;
 function noop() {}
 
-const CascaderProps = {
+const cascaderProps = {
   /** 可选项数据源 */
   options: { type: Array as PropType<CascaderOptionType[]>, default: [] },
   /** 默认的选中项 */
@@ -153,6 +155,8 @@ const CascaderProps = {
   onSearch: PropTypes.func,
   'onUpdate:value': PropTypes.func,
 };
+
+export type CascaderProps = Partial<ExtractPropTypes<typeof cascaderProps>>;
 
 // We limit the filtered item count by default
 const defaultLimit = 50;
@@ -214,7 +218,7 @@ const Cascader = defineComponent({
   name: 'ACascader',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: CascaderProps,
+  props: cascaderProps,
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

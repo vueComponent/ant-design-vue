@@ -1,6 +1,7 @@
 import Omit from 'omit.js';
-import { FunctionalComponent } from 'vue';
-import Base, { BlockProps, baseProps } from './Base';
+import type { FunctionalComponent } from 'vue';
+import type { BlockProps } from './Base';
+import Base, { baseProps } from './Base';
 
 const Paragraph: FunctionalComponent<BlockProps> = (props, { slots, attrs }) => {
   const paragraphProps = {

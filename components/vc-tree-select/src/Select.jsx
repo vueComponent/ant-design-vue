@@ -59,7 +59,7 @@ import BasePopup from './Popup/MultiplePopup';
 function getWatch(keys = []) {
   const watch = {};
   keys.forEach(k => {
-    watch[k] = function() {
+    watch[k] = function () {
       this.needSyncKeys[k] = true;
     };
   });

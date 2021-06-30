@@ -45,6 +45,6 @@ function shallowEqual(objA, objB, compare, compareContext) {
   return true;
 }
 
-export default function(value, other, customizer, thisArg) {
+export default function (value, other, customizer, thisArg) {
   return shallowEqual(toRaw(value), toRaw(other), customizer, thisArg);
 }

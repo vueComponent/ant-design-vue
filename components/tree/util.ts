@@ -1,7 +1,7 @@
-import { VNode } from 'vue';
+import type { VNode } from 'vue';
 import { getNodeChildren, convertTreeToEntities } from '../vc-tree/src/util';
 import { getSlot } from '../_util/props-util';
-import { TreeDataItem } from './Tree';
+import type { TreeDataItem } from './Tree';
 
 enum Record {
   None,
@@ -99,13 +99,12 @@ export function convertDirectoryKeysToNodes(rootChildren: VNode[], keys: TreeKey
 
 export function getFullKeyListByTreeData(treeData: TreeDataItem[], replaceFields: any = {}) {
   let keys = [];
-  const { key = 'key', children = 'children' } = replaceFields(treeData || []).forEach(
-    (item: TreeDataItem) => {
-      keys.push(item[key]);
-      if (item[children]) {
-        keys = [...keys, ...getFullKeyListByTreeData(item[children], replaceFields)];
-      }
-    },
-  );
+  const { key = 'key', children = 'children' } = replaceFields;
+  (treeData || []).forEach((item: TreeDataItem) => {
+    keys.push(item[key]);
+    if (item[children]) {
+      keys = [...keys, ...getFullKeyListByTreeData(item[children], replaceFields)];
+    }
+  });
   return keys;
 }

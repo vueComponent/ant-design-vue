@@ -1,3 +1,4 @@
+import type { ExtractPropTypes } from 'vue';
 import {
   defineComponent,
   nextTick,
@@ -6,7 +7,6 @@ import {
   onUpdated,
   reactive,
   ref,
-  ExtractPropTypes,
   computed,
 } from 'vue';
 import PropTypes from '../_util/vue-types';
@@ -88,7 +88,7 @@ export default defineComponent({
       scrollEvent: null,
       animating: false,
     });
-    const activeLink = ref();
+    const activeLink = ref(null);
     const getContainer = computed(() => {
       const { getContainer } = props;
       return getContainer || getTargetContainer.value || getDefaultContainer;
@@ -122,7 +122,7 @@ export default defineComponent({
     };
     const setCurrentActiveLink = (link: string) => {
       const { getCurrentAnchor } = props;
-      if (activeLink.value !== link) {
+      if (activeLink.value === link) {
         return;
       }
       activeLink.value = typeof getCurrentAnchor === 'function' ? getCurrentAnchor() : link;
@@ -175,9 +175,9 @@ export default defineComponent({
         `${prefixCls.value}-link-title-active`,
       )[0];
       if (linkNode) {
-        (inkNodeRef.value as HTMLElement).style.top = `${linkNode.offsetTop +
-          linkNode.clientHeight / 2 -
-          4.5}px`;
+        (inkNodeRef.value as HTMLElement).style.top = `${
+          linkNode.offsetTop + linkNode.clientHeight / 2 - 4.5
+        }px`;
       }
     };
 

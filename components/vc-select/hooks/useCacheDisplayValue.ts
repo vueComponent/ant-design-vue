@@ -1,5 +1,6 @@
-import { computed, ComputedRef, Ref } from 'vue';
-import { DisplayLabelValueType } from '../interface/generator';
+import type { ComputedRef, Ref } from 'vue';
+import { computed } from 'vue';
+import type { DisplayLabelValueType } from '../interface/generator';
 
 export default function useCacheDisplayValue(
   values: Ref<DisplayLabelValueType[]>,
@@ -17,7 +18,7 @@ export default function useCacheDisplayValue(
 
     const resultValues = values.value.map(item => {
       const cacheLabel = valueLabels.get(item.value);
-      if (item.value === item.label && cacheLabel) {
+      if (item.isCacheable && cacheLabel) {
         return {
           ...item,
           label: cacheLabel,

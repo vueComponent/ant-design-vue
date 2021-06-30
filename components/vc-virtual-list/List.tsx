@@ -1,16 +1,15 @@
+import type { PropType, Component, CSSProperties } from 'vue';
 import {
   ref,
   defineComponent,
-  PropType,
   watchEffect,
-  Component,
   computed,
   nextTick,
   onBeforeUnmount,
   reactive,
-  CSSProperties,
+  watch,
 } from 'vue';
-import { Key } from '../_util/type';
+import type { Key } from '../_util/type';
 import Filler from './Filler';
 import Item from './Item';
 import ScrollBar from './ScrollBar';
@@ -21,7 +20,7 @@ import useMobileTouchMove from './hooks/useMobileTouchMove';
 import useOriginScroll from './hooks/useOriginScroll';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import { RenderFunc, SharedConfig } from './interface';
+import type { RenderFunc, SharedConfig } from './interface';
 import supportsPassive from '../_util/supportsPassive';
 
 const EMPTY_DATA = [];
@@ -53,10 +52,9 @@ function renderChildren<T>(
   });
 }
 
-export interface ListState<T = object> {
+export interface ListState {
   scrollTop: number;
   scrollMoving: boolean;
-  mergedData: T[];
 }
 
 const List = defineComponent({
@@ -97,7 +95,10 @@ const List = defineComponent({
     const state = reactive<ListState>({
       scrollTop: 0,
       scrollMoving: false,
-      mergedData: computed(() => props.data || EMPTY_DATA) as any,
+    });
+
+    const mergedData = computed(() => {
+      return props.data || EMPTY_DATA;
     });
 
     const componentRef = ref<HTMLDivElement>();
@@ -108,7 +109,7 @@ const List = defineComponent({
       if (typeof props.itemKey === 'function') {
         return props.itemKey(item);
       }
-      return item[props.itemKey];
+      return item?.[props.itemKey];
     };
 
     const sharedConfig = {
@@ -135,83 +136,94 @@ const List = defineComponent({
     // ================================ Height ================================
     const [setInstance, collectHeight, heights] = useHeights(getKey, null, null);
 
-    const calRes = ref();
-    watchEffect(() => {
-      if (!useVirtual.value) {
-        calRes.value = {
-          scrollHeight: undefined,
-          start: 0,
-          end: state.mergedData.length - 1,
-          offset: undefined,
-        };
-        return;
-      }
-
-      // Always use virtual scroll bar in avoid shaking
-      if (!inVirtual.value) {
-        calRes.value = {
-          scrollHeight: fillerInnerRef.value?.offsetHeight || 0,
-          start: 0,
-          end: state.mergedData.length - 1,
-          offset: undefined,
-        };
-        return;
-      }
-
-      let itemTop = 0;
-      let startIndex: number | undefined;
-      let startOffset: number | undefined;
-      let endIndex: number | undefined;
-      const dataLen = state.mergedData.length;
-      for (let i = 0; i < dataLen; i += 1) {
-        const item = state.mergedData[i];
-        const key = getKey(item);
-
-        const cacheHeight = heights[key];
-        const currentItemBottom =
-          itemTop + (cacheHeight === undefined ? props.itemHeight! : cacheHeight);
-
-        if (currentItemBottom >= state.scrollTop && startIndex === undefined) {
-          startIndex = i;
-          startOffset = itemTop;
+    const calRes = ref<{
+      scrollHeight?: number;
+      start?: number;
+      end?: number;
+      offset?: number;
+    }>({});
+    watch(
+      [inVirtual, useVirtual, () => state.scrollTop, mergedData, heights, () => props.height],
+      () => {
+        if (!useVirtual.value) {
+          calRes.value = {
+            scrollHeight: undefined,
+            start: 0,
+            end: mergedData.value.length - 1,
+            offset: undefined,
+          };
+          return;
         }
 
-        // Check item bottom in the range. We will render additional one item for motion usage
-        if (currentItemBottom > state.scrollTop + props.height! && endIndex === undefined) {
-          endIndex = i;
+        // Always use virtual scroll bar in avoid shaking
+        if (!inVirtual.value) {
+          calRes.value = {
+            scrollHeight: fillerInnerRef.value?.offsetHeight || 0,
+            start: 0,
+            end: mergedData.value.length - 1,
+            offset: undefined,
+          };
+          return;
         }
 
-        itemTop = currentItemBottom;
-      }
+        let itemTop = 0;
+        let startIndex: number | undefined;
+        let startOffset: number | undefined;
+        let endIndex: number | undefined;
+        const dataLen = mergedData.value.length;
+        const data = mergedData.value;
+        for (let i = 0; i < dataLen; i += 1) {
+          const item = data[i];
+          const key = getKey(item);
 
-      // Fallback to normal if not match. This code should never reach
-      /* istanbul ignore next */
-      if (startIndex === undefined) {
-        startIndex = 0;
-        startOffset = 0;
-      }
-      if (endIndex === undefined) {
-        endIndex = state.mergedData.length - 1;
-      }
+          const cacheHeight = heights[key];
+          const currentItemBottom =
+            itemTop + (cacheHeight === undefined ? props.itemHeight! : cacheHeight);
 
-      // Give cache to improve scroll experience
-      endIndex = Math.min(endIndex + 1, state.mergedData.length);
-      calRes.value = {
-        scrollHeight: itemTop,
-        start: startIndex,
-        end: endIndex,
-        offset: startOffset,
-      };
-    });
+          if (currentItemBottom >= state.scrollTop && startIndex === undefined) {
+            startIndex = i;
+            startOffset = itemTop;
+          }
+
+          // Check item bottom in the range. We will render additional one item for motion usage
+          if (currentItemBottom > state.scrollTop + props.height! && endIndex === undefined) {
+            endIndex = i;
+          }
+
+          itemTop = currentItemBottom;
+        }
+
+        // Fallback to normal if not match. This code should never reach
+        /* istanbul ignore next */
+        if (startIndex === undefined) {
+          startIndex = 0;
+          startOffset = 0;
+        }
+        if (endIndex === undefined) {
+          endIndex = dataLen - 1;
+        }
+
+        // Give cache to improve scroll experience
+        endIndex = Math.min(endIndex + 1, dataLen);
+        calRes.value = {
+          scrollHeight: itemTop,
+          start: startIndex,
+          end: endIndex,
+          offset: startOffset,
+        };
+      },
+      { immediate: true },
+    );
 
     // =============================== In Range ===============================
     const maxScrollHeight = computed(() => calRes.value.scrollHeight! - props.height!);
 
     function keepInRange(newScrollTop: number) {
-      let newTop = Math.max(newScrollTop, 0);
+      let newTop = newScrollTop;
       if (!Number.isNaN(maxScrollHeight.value)) {
         newTop = Math.min(newTop, maxScrollHeight.value);
       }
+      newTop = Math.max(newTop, 0);
       return newTop;
     }
 
@@ -226,8 +238,7 @@ const List = defineComponent({
       syncScrollTop(newTop);
     }
 
-    // This code may only trigger in test case.
-    // But we still need a sync if some special escape
+    // When data size reduce. It may trigger native scroll event back to fit scroll position
     function onFallbackScroll(e: UIEvent) {
       const { scrollTop: newScrollTop } = e.currentTarget as Element;
       if (Math.abs(newScrollTop - state.scrollTop) >= 1) {
@@ -299,7 +310,7 @@ const List = defineComponent({
     // ================================= Ref ==================================
     const scrollTo = useScrollTo(
       componentRef,
-      state,
+      mergedData,
       heights,
       props,
       getKey,
@@ -328,6 +339,7 @@ const List = defineComponent({
 
     return {
       state,
+      mergedData,
       componentStyle,
       scrollTo,
       onFallbackScroll,
@@ -360,7 +372,7 @@ const List = defineComponent({
       ...restProps
     } = { ...this.$props, ...this.$attrs } as any;
     const mergedClassName = classNames(prefixCls, className);
-    const { scrollTop, mergedData } = this.state;
+    const { scrollTop } = this.state;
     const { scrollHeight, offset, start, end } = this.calRes;
     const {
       componentStyle,
@@ -370,6 +382,7 @@ const List = defineComponent({
       collectHeight,
       sharedConfig,
       setInstance,
+      mergedData,
     } = this;
     const listChildren = renderChildren(
       mergedData,

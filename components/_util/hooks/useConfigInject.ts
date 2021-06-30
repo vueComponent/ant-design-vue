@@ -1,11 +1,8 @@
-import { RequiredMark } from '../../form/Form';
-import { computed, ComputedRef, inject, UnwrapRef } from 'vue';
-import {
-  ConfigProviderProps,
-  defaultConfigProvider,
-  Direction,
-  SizeType,
-} from '../../config-provider';
+import type { RequiredMark } from '../../form/Form';
+import type { ComputedRef, UnwrapRef, VNodeChild } from 'vue';
+import { computed, inject } from 'vue';
+import type { ConfigProviderProps, Direction, SizeType } from '../../config-provider';
+import { defaultConfigProvider } from '../../config-provider';
 
 export default (
   name: string,
@@ -22,6 +19,7 @@ export default (
     requiredMark?: RequiredMark;
   }>;
   autoInsertSpaceInButton: ComputedRef<Boolean>;
+  renderEmpty?: ComputedRef<(componentName?: string) => VNodeChild | JSX.Element>;
 } => {
   const configProvider = inject<UnwrapRef<ConfigProviderProps>>(
     'configProvider',
@@ -30,6 +28,7 @@ export default (
   const prefixCls = computed(() => configProvider.getPrefixCls(name, props.prefixCls));
   const direction = computed(() => configProvider.direction);
   const autoInsertSpaceInButton = computed(() => configProvider.autoInsertSpaceInButton);
+  const renderEmpty = computed(() => configProvider.renderEmpty);
   const space = computed(() => configProvider.space);
   const pageHeader = computed(() => configProvider.pageHeader);
   const form = computed(() => configProvider.form);
@@ -45,5 +44,6 @@ export default (
     pageHeader,
     form,
     autoInsertSpaceInButton,
+    renderEmpty,
   };
 };

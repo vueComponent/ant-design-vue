@@ -9,8 +9,9 @@ import Dropdown from '../dropdown';
 import Search from './search';
 import defaultRenderList from './renderListBody';
 import triggerEvent from '../_util/triggerEvent';
-import { defineComponent, ExtractPropTypes, onBeforeUnmount, ref, VNode, VNodeTypes } from 'vue';
-import { RadioChangeEvent } from '../radio/interface';
+import type { VNode, VNodeTypes, ExtractPropTypes } from 'vue';
+import { defineComponent, onBeforeUnmount, ref } from 'vue';
+import type { RadioChangeEvent } from '../radio/interface';
 
 const defaultRender = () => null;
 
@@ -37,7 +38,7 @@ function isRenderResultPlainObject(result: VNode) {
 }
 
 function getEnabledItemKeys<RecordType extends DataSourceItem>(items: RecordType[]) {
-  return items.filter((data) => !data.disabled).map((data) => data.key);
+  return items.filter(data => !data.disabled).map(data => data.key);
 }
 
 export const transferListProps = {
@@ -116,7 +117,7 @@ export default defineComponent({
       if (checkedKeys.length === 0) {
         return 'none';
       }
-      if (filteredItems.every((item) => checkedKeys.indexOf(item.key) >= 0 || !!item.disabled)) {
+      if (filteredItems.every(item => checkedKeys.indexOf(item.key) >= 0 || !!item.disabled)) {
         return 'all';
       }
       return 'part';
@@ -126,7 +127,7 @@ export default defineComponent({
       const filteredItems = [];
       const filteredRenderItems = [];
 
-      dataSource.forEach((item) => {
+      dataSource.forEach(item => {
         const renderedItem = renderItemHtml(item);
         const { renderedText } = renderedItem;
 
@@ -160,7 +161,7 @@ export default defineComponent({
             // Only select enabled items
             emit(
               'itemSelectAll',
-              filteredItems.filter((item) => !item.disabled).map(({ key }) => key),
+              filteredItems.filter(item => !item.disabled).map(({ key }) => key),
               !checkedAll,
             );
           }}
@@ -361,7 +362,7 @@ export default defineComponent({
               <Menu.Item
                 onClick={() => {
                   const pageKeys = getEnabledItemKeys(
-                    (defaultListBodyRef.value.getItems?.() || []).map((entity) => entity.item),
+                    (defaultListBodyRef.value.getItems?.() || []).map(entity => entity.item),
                   );
                   onItemRemove?.(pageKeys);
                 }}
@@ -395,7 +396,7 @@ export default defineComponent({
               <Menu.Item
                 onClick={() => {
                   const pageItems = defaultListBodyRef.value?.getItems() || [];
-                  onItemSelectAll(getEnabledItemKeys(pageItems.map((entity) => entity.item)), true);
+                  onItemSelectAll(getEnabledItemKeys(pageItems.map(entity => entity.item)), true);
                 }}
               >
                 {selectCurrent}
@@ -406,7 +407,7 @@ export default defineComponent({
                 let availableKeys: string[];
                 if (pagination) {
                   availableKeys = getEnabledItemKeys(
-                    (defaultListBodyRef.value?.getItems() || []).map((entity) => entity.item),
+                    (defaultListBodyRef.value?.getItems() || []).map(entity => entity.item),
                   );
                 } else {
                   availableKeys = getEnabledItemKeys(filteredItems);
@@ -416,7 +417,7 @@ export default defineComponent({
                 const newCheckedKeys: string[] = [];
                 const newUnCheckedKeys: string[] = [];
 
-                availableKeys.forEach((key) => {
+                availableKeys.forEach(key => {
                   if (checkedKeySet.has(key)) {
                     newUnCheckedKeys.push(key);
                   } else {

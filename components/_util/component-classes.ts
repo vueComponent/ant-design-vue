@@ -163,6 +163,6 @@ export class ClassList {
  * @return {ClassList}
  * @api public
  */
-export default function(el: Element): ClassList {
+export default function (el: Element): ClassList {
   return new ClassList(el);
 }

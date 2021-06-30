@@ -1,11 +1,13 @@
 import omit from 'omit.js';
-import { defineComponent, inject, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, inject } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, hasProp, getComponent, mergeProps } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { LegacyButtonType, convertLegacyProps } from '../button/buttonTypes';
+import type { LegacyButtonType } from '../button/buttonTypes';
+import { convertLegacyProps } from '../button/buttonTypes';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
 import Button from '../button';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';

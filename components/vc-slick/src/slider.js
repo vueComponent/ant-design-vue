@@ -56,7 +56,7 @@ export default defineComponent({
     }
   },
   beforeUnmount() {
-    this._responsiveMediaHandlers.forEach(function(obj) {
+    this._responsiveMediaHandlers.forEach(function (obj) {
       obj.mql.removeListener(obj.listener);
     });
   },

@@ -11,13 +11,15 @@
 import KeyCode from '../../_util/KeyCode';
 import MultipleSelector from './MultipleSelector';
 import SingleSelector from './SingleSelector';
-import { LabelValueType, RawValueType, CustomTagProps } from '../interface/generator';
-import { RenderNode, Mode } from '../interface';
+import type { LabelValueType, RawValueType, CustomTagProps } from '../interface/generator';
+import type { RenderNode, Mode } from '../interface';
 import useLock from '../hooks/useLock';
-import { defineComponent, VNodeChild } from 'vue';
-import createRef, { RefObject } from '../../_util/createRef';
+import type { VNodeChild } from 'vue';
+import { defineComponent } from 'vue';
+import type { RefObject } from '../../_util/createRef';
+import createRef from '../../_util/createRef';
 import PropTypes from '../../_util/vue-types';
-import { VueNode } from '../../_util/type';
+import type { VueNode } from '../../_util/type';
 
 export interface InnerSelectorProps {
   prefixCls: string;
@@ -63,7 +65,7 @@ export interface SelectorProps {
   removeIcon?: RenderNode;
 
   // Tags
-  maxTagCount?: number;
+  maxTagCount?: number | 'responsive';
   maxTagTextLength?: number;
   maxTagPlaceholder?: VNodeChild;
   tagRender?: (props: CustomTagProps) => VNodeChild;
@@ -140,8 +142,12 @@ const Selector = defineComponent<SelectorProps>({
       compositionStatus = true;
     };
 
-    const onInputCompositionEnd = () => {
+    const onInputCompositionEnd = (e: InputEvent) => {
       compositionStatus = false;
+      // Trigger search again to support `tokenSeparators` with typewriting
+      if (props.mode !== 'combobox') {
+        triggerOnSearch((e.target as HTMLInputElement).value);
+      }
     };
 
     const onInputChange = (event: { target: { value: any } }) => {
@@ -152,7 +158,10 @@ const Selector = defineComponent<SelectorProps>({
       // Pasted text should replace back to origin content
       if (props.tokenWithEnter && pastedText && /[\r\n]/.test(pastedText)) {
         // CRLF will be treated as a single space for input element
-        const replacedText = pastedText.replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ');
+        const replacedText = pastedText
+          .replace(/[\r\n]+$/, '')
+          .replace(/\r\n/g, ' ')
+          .replace(/[\r\n]/g, ' ');
         value = value.replace(replacedText, pastedText);
       }
 
@@ -271,7 +280,7 @@ Selector.props = {
   removeIcon: PropTypes.any,
 
   // Tags
-  maxTagCount: PropTypes.number,
+  maxTagCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   maxTagTextLength: PropTypes.number,
   maxTagPlaceholder: PropTypes.any,
   tagRender: PropTypes.func,

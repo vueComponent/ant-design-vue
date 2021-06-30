@@ -1,80 +1,36 @@
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import { getComponent, isStringElement, isEmptyElement, getSlot } from '../_util/props-util';
+import { isStringElement, isEmptyElement, flattenChildren } from '../_util/props-util';
 import { Col } from '../grid';
-import { defaultConfigProvider } from '../config-provider';
 import { cloneElement } from '../_util/vnode';
-import { defineComponent, ExtractPropTypes, FunctionalComponent, inject } from 'vue';
+import { defineComponent, inject, ref } from 'vue';
+import ItemMeta from './ItemMeta';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import { ListContextKey } from './contextKey';
 
 export const ListItemProps = {
   prefixCls: PropTypes.string,
   extra: PropTypes.any,
   actions: PropTypes.array,
   grid: PropTypes.any,
+  colStyle: PropTypes.style,
 };
-
-export const ListItemMetaProps = {
-  avatar: PropTypes.any,
-  description: PropTypes.any,
-  prefixCls: PropTypes.string,
-  title: PropTypes.any,
-};
-
-export const ListItemMeta: FunctionalComponent<Partial<
-  ExtractPropTypes<typeof ListItemMetaProps>
->> = (props, { slots }) => {
-  const configProvider = inject('configProvider', defaultConfigProvider);
-  const { getPrefixCls } = configProvider;
-  const { prefixCls: customizePrefixCls } = props;
-  const prefixCls = getPrefixCls('list', customizePrefixCls);
-  const avatar = props.avatar || slots.avatar?.();
-  const title = props.title || slots.title?.();
-  const description = props.description || slots.description?.();
-  const content = (
-    <div class={`${prefixCls}-item-meta-content`}>
-      {title && <h4 class={`${prefixCls}-item-meta-title`}>{title}</h4>}
-      {description && <div class={`${prefixCls}-item-meta-description`}>{description}</div>}
-    </div>
-  );
-  return (
-    <div class={`${prefixCls}-item-meta`}>
-      {avatar && <div class={`${prefixCls}-item-meta-avatar`}>{avatar}</div>}
-      {(title || description) && content}
-    </div>
-  );
-};
-
-Object.assign(ListItemMeta, {
-  props: ListItemMetaProps,
-  __ANT_LIST_ITEM_META: true,
-  displayName: 'AListItemMeta',
-});
-
-function getGrid(grid, t) {
-  return grid[t] && Math.floor(24 / grid[t]);
-}
-
-export interface ListContext {
-  grid?: any;
-  itemLayout?: string;
-}
 
 export default defineComponent({
   name: 'AListItem',
   inheritAttrs: false,
-  Meta: ListItemMeta,
+  Meta: ItemMeta,
   props: ListItemProps,
-  setup() {
-    const listContext = inject<ListContext>('listContext', {});
-    const configProvider = inject('configProvider', defaultConfigProvider);
-    return {
-      listContext,
-      configProvider,
-    };
-  },
-  methods: {
-    isItemContainsTextNodeAndNotSingular() {
-      const children = getSlot(this) || [];
+  slots: ['actions', 'extra'],
+  setup(props, { slots, attrs }) {
+    const { itemLayout, grid } = inject(ListContextKey, {
+      grid: ref(),
+      itemLayout: ref(),
+    });
+    const { prefixCls } = useConfigInject('list', props);
+
+    const isItemContainsTextNodeAndNotSingular = () => {
+      const children = slots.default?.() || [];
       let result;
       children.forEach(element => {
         if (isStringElement(element) && !isEmptyElement(element)) {
@@ -82,75 +38,65 @@ export default defineComponent({
         }
       });
       return result && children.length > 1;
-    },
+    };
 
-    isFlexMode() {
-      const extra = getComponent(this, 'extra');
-      const { itemLayout } = this.listContext;
-      if (itemLayout === 'vertical') {
+    const isFlexMode = () => {
+      const extra = props.extra ?? slots.extra?.();
+      if (itemLayout.value === 'vertical') {
         return !!extra;
       }
-      return !this.isItemContainsTextNodeAndNotSingular();
-    },
-  },
-  render() {
-    const { grid, itemLayout } = this.listContext;
-    const { prefixCls: customizePrefixCls, $attrs } = this;
-    const { class: _className, ...restAttrs } = $attrs;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('list', customizePrefixCls);
-    const extra = getComponent(this, 'extra');
-    let actions = getComponent(this, 'actions');
-    actions = actions && !Array.isArray(actions) ? [actions] : actions;
-    const actionsContent = actions && actions.length > 0 && (
-      <ul class={`${prefixCls}-item-action`} key="actions">
-        {actions.map((action, i) => (
-          <li key={`${prefixCls}-item-action-${i}`}>
-            {action}
-            {i !== actions.length - 1 && <em class={`${prefixCls}-item-action-split`} />}
-          </li>
-        ))}
-      </ul>
-    );
-    const children = getSlot(this);
-    const Tag = grid ? 'div' : 'li';
-    const itemChildren = (
-      <Tag
-        {...restAttrs}
-        class={classNames(`${prefixCls}-item`, _className, {
-          [`${prefixCls}-item-no-flex`]: !this.isFlexMode(),
-        })}
-      >
-        {itemLayout === 'vertical' && extra
-          ? [
-              <div class={`${prefixCls}-item-main`} key="content">
-                {children}
-                {actionsContent}
-              </div>,
-              <div class={`${prefixCls}-item-extra`} key="extra">
-                {extra}
-              </div>,
-            ]
-          : [children, actionsContent, cloneElement(extra, { key: 'extra' })]}
-      </Tag>
-    );
+      return !isItemContainsTextNodeAndNotSingular();
+    };
 
-    const mainContent = grid ? (
-      <Col
-        span={getGrid(grid, 'column')}
-        xs={getGrid(grid, 'xs')}
-        sm={getGrid(grid, 'sm')}
-        md={getGrid(grid, 'md')}
-        lg={getGrid(grid, 'lg')}
-        xl={getGrid(grid, 'xl')}
-        xxl={getGrid(grid, 'xxl')}
-      >
-        {itemChildren}
-      </Col>
-    ) : (
-      itemChildren
-    );
-
-    return mainContent;
+    return () => {
+      const { class: className, ...restAttrs } = attrs;
+      const pre = prefixCls.value;
+      const extra = props.extra ?? slots.extra?.();
+      const children = slots.default?.();
+      let actions = props.actions ?? flattenChildren(slots.actions?.());
+      actions = actions && !Array.isArray(actions) ? [actions] : actions;
+      const actionsContent = actions && actions.length > 0 && (
+        <ul class={`${pre}-item-action`} key="actions">
+          {actions.map((action, i) => (
+            <li key={`${pre}-item-action-${i}`}>
+              {action}
+              {i !== actions.length - 1 && <em class={`${pre}-item-action-split`} />}
+            </li>
+          ))}
+        </ul>
+      );
+      const Element = grid.value ? 'div' : 'li';
+      const itemChildren = (
+        <Element
+          {...(restAttrs as any)} // `li` element `onCopy` prop args is not same as `div`
+          class={classNames(
+            `${pre}-item`,
+            {
+              [`${pre}-item-no-flex`]: !isFlexMode(),
+            },
+            className,
+          )}
+        >
+          {itemLayout.value === 'vertical' && extra
+            ? [
+                <div class={`${pre}-item-main`} key="content">
+                  {children}
+                  {actionsContent}
+                </div>,
+                <div class={`${pre}-item-extra`} key="extra">
+                  {extra}
+                </div>,
+              ]
+            : [children, actionsContent, cloneElement(extra, { key: 'extra' })]}
+        </Element>
+      );
+      return grid.value ? (
+        <Col flex={1} style={props.colStyle}>
+          {itemChildren}
+        </Col>
+      ) : (
+        itemChildren
+      );
+    };
   },
 });

@@ -1,4 +1,4 @@
-import { Ref } from 'vue';
+import type { Ref } from 'vue';
 import raf from '../../_util/raf';
 import isFF from '../utils/isFirefox';
 import useOriginScroll from './useOriginScroll';

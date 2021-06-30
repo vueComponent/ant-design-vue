@@ -1,13 +1,8 @@
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
-import {
-  defineComponent,
-  ExtractPropTypes,
-  CSSProperties,
-  DefineComponent,
-  HTMLAttributes,
-} from 'vue';
+import type { ExtractPropTypes, CSSProperties, DefineComponent, HTMLAttributes } from 'vue';
+import { defineComponent } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import SingleNumber from './SingleNumber';
 import { filterEmpty } from '../_util/props-util';
@@ -35,7 +30,7 @@ export default defineComponent({
         count,
         title,
         show,
-        component: Tag = ('sup' as unknown) as DefineComponent,
+        component: Tag = 'sup' as unknown as DefineComponent,
         class: className,
         style,
         ...restProps

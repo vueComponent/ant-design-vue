@@ -1,4 +1,4 @@
-import { CSSProperties, FunctionalComponent } from 'vue';
+import type { CSSProperties, FunctionalComponent } from 'vue';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import Button from '../button';
@@ -20,7 +20,7 @@ export interface TransferOperationProps {
   oneWay?: boolean;
 }
 
-const Operation: FunctionalComponent<TransferOperationProps> = (props) => {
+const Operation: FunctionalComponent<TransferOperationProps> = props => {
   const {
     disabled,
     moveToLeft = noop,

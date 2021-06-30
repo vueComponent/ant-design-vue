@@ -1,13 +1,6 @@
-import {
-  computed,
-  ComputedRef,
-  defineComponent,
-  inject,
-  InjectionKey,
-  PropType,
-  provide,
-} from 'vue';
-import { Key } from '../_util/type';
+import type { ComputedRef, InjectionKey, PropType } from 'vue';
+import { computed, defineComponent, inject, provide } from 'vue';
+import type { Key } from '../_util/type';
 
 export interface OverflowContextProviderValueType {
   prefixCls: string;
@@ -26,9 +19,9 @@ export interface OverflowContextProviderValueType {
   className?: string;
 }
 
-const OverflowContextProviderKey: InjectionKey<ComputedRef<OverflowContextProviderValueType | null>> = Symbol(
-  'OverflowContextProviderKey',
-);
+const OverflowContextProviderKey: InjectionKey<
+  ComputedRef<OverflowContextProviderValueType | null>
+> = Symbol('OverflowContextProviderKey');
 
 export const OverflowContextProvider = defineComponent({
   name: 'OverflowContextProvider',
@@ -45,9 +38,10 @@ export const OverflowContextProvider = defineComponent({
   },
 });
 
-export const useInjectOverflowContext = (): ComputedRef<OverflowContextProviderValueType | null> => {
-  return inject(
-    OverflowContextProviderKey,
-    computed(() => null),
-  );
-};
+export const useInjectOverflowContext =
+  (): ComputedRef<OverflowContextProviderValueType | null> => {
+    return inject(
+      OverflowContextProviderKey,
+      computed(() => null),
+    );
+  };

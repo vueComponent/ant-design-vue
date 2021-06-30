@@ -7,16 +7,17 @@ import isStyleSupport from '../_util/styleChecker';
 import Editable from './Editable';
 import measure from './util';
 import PropTypes from '../_util/vue-types';
-import Typography, { TypographyProps } from './Typography';
+import type { TypographyProps } from './Typography';
+import Typography from './Typography';
 import ResizeObserver from '../vc-resize-observer';
 import Tooltip from '../tooltip';
 import copy from '../_util/copy-to-clipboard';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import CopyOutlined from '@ant-design/icons-vue/CopyOutlined';
 import EditOutlined from '@ant-design/icons-vue/EditOutlined';
+import type { VNodeTypes, CSSProperties } from 'vue';
 import {
   defineComponent,
-  VNodeTypes,
   reactive,
   ref,
   onMounted,
@@ -24,11 +25,10 @@ import {
   watch,
   watchEffect,
   nextTick,
-  CSSProperties,
   computed,
   toRaw,
 } from 'vue';
-import { AutoSizeType } from '../input/ResizableTextArea';
+import type { AutoSizeType } from '../input/ResizableTextArea';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export type BaseType = 'secondary' | 'success' | 'warning' | 'danger';
@@ -123,18 +123,16 @@ const Base = defineComponent<InternalBlockProps>({
 
     const contentRef = ref();
     const editIcon = ref();
-    const ellipsis = computed(
-      (): EllipsisConfig => {
-        const ellipsis = props.ellipsis;
-        if (!ellipsis) return {};
+    const ellipsis = computed((): EllipsisConfig => {
+      const ellipsis = props.ellipsis;
+      if (!ellipsis) return {};
 
-        return {
-          rows: 1,
-          expandable: false,
-          ...(typeof ellipsis === 'object' ? ellipsis : null),
-        };
-      },
-    );
+      return {
+        rows: 1,
+        expandable: false,
+        ...(typeof ellipsis === 'object' ? ellipsis : null),
+      };
+    });
     onMounted(() => {
       state.clientRendered = true;
     });
@@ -294,7 +292,11 @@ const Base = defineComponent<InternalBlockProps>({
       // Do not measure if css already support ellipsis
       if (canUseCSSEllipsis.value) return;
 
-      const { content, text, ellipsis: ell } = measure(
+      const {
+        content,
+        text,
+        ellipsis: ell,
+      } = measure(
         contentRef.value?.$el,
         { rows, suffix },
         props.content,
@@ -451,7 +453,14 @@ const Base = defineComponent<InternalBlockProps>({
         <LocaleReceiver
           componentName="Text"
           children={(locale: Locale) => {
-            const { type, disabled, content, class: className, style, ...restProps } = {
+            const {
+              type,
+              disabled,
+              content,
+              class: className,
+              style,
+              ...restProps
+            } = {
               ...props,
               ...attrs,
             };

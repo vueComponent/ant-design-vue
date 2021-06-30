@@ -609,9 +609,8 @@ export default defineComponent({
     } else {
       newChildProps.onClick = this.createTwoChains('onClick');
       newChildProps.onMousedown = this.createTwoChains('onMousedown');
-      newChildProps[
-        supportsPassive ? 'onTouchstartPassive' : 'onTouchstart'
-      ] = this.createTwoChains('onTouchstart');
+      newChildProps[supportsPassive ? 'onTouchstartPassive' : 'onTouchstart'] =
+        this.createTwoChains('onTouchstart');
     }
     if (this.isMouseEnterToShow()) {
       newChildProps.onMouseenter = this.onMouseenter;

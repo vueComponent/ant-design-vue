@@ -1,4 +1,5 @@
-import { defineComponent, inject, PropType } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, inject } from 'vue';
 import { tuple } from '../_util/type';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import PlusOutlined from '@ant-design/icons-vue/PlusOutlined';

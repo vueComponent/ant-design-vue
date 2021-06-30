@@ -1,7 +1,8 @@
-import { inject, defineComponent, VNodeTypes, PropType, computed, ComputedRef } from 'vue';
+import type { VNodeTypes, PropType, ComputedRef } from 'vue';
+import { inject, defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import defaultLocaleData from './default';
-import { Locale } from '.';
+import type { Locale } from '.';
 
 export interface LocaleReceiverProps {
   componentName?: string;

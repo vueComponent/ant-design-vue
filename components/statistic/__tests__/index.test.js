@@ -65,12 +65,7 @@ describe('Statistic', () => {
 
   describe('Countdown', () => {
     it('render correctly', () => {
-      const now = moment()
-        .add(2, 'd')
-        .add(11, 'h')
-        .add(28, 'm')
-        .add(9, 's')
-        .add(3, 'ms');
+      const now = moment().add(2, 'd').add(11, 'h').add(28, 'm').add(9, 's').add(3, 'ms');
 
       [
         ['H:m:s', '59:28:9'],
@@ -87,25 +82,6 @@ describe('Statistic', () => {
         const wrapper = mount(Statistic.Countdown, props);
         expect(wrapper.find('.ant-statistic-content-value').text()).toEqual(value);
       });
-    });
-
-    it('time going', async () => {
-      const now = Date.now() + 1000;
-      const props = {
-        props: {
-          value: now,
-        },
-      };
-      const wrapper = mount(Statistic.Countdown, props);
-
-      // setInterval should work
-      const instance = wrapper.vm;
-      expect(instance.countdownId).not.toBe(undefined);
-
-      // await delay(50);
-
-      // wrapper.unmount();
-      // expect(instance.countdownId).toBe(undefined);
     });
   });
   describe('utils', () => {

@@ -1,6 +1,6 @@
 import { useInjectFormItemPrefix } from './context';
-import { VueNode } from '../_util/type';
-import { defineComponent, onBeforeUnmount, ref, watch } from '@vue/runtime-core';
+import type { VueNode } from '../_util/type';
+import { defineComponent, onBeforeUnmount, ref, watch } from 'vue';
 import classNames from '../_util/classNames';
 import Transition, { getTransitionProps } from '../_util/transition';
 import useConfigInject from '../_util/hooks/useConfigInject';

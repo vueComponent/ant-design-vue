@@ -1,6 +1,7 @@
-import { FunctionalComponent } from 'vue';
+import type { FunctionalComponent } from 'vue';
 import warning from '../_util/warning';
-import Base, { baseProps, BlockProps, EllipsisConfig } from './Base';
+import type { BlockProps, EllipsisConfig } from './Base';
+import Base, { baseProps } from './Base';
 import Omit from 'omit.js';
 
 export interface TextProps extends BlockProps {

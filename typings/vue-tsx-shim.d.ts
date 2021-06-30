@@ -37,5 +37,6 @@ declare module 'vue' {
     onKeydown?: EventHandler;
     onKeyup?: EventHandler;
     onDeselect?: EventHandler;
+    onClear?: EventHandler;
   }
 }

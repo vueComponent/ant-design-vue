@@ -10,6 +10,46 @@
 
 ---
 
+## 2.2.0-rc.1
+
+`2021-06-29`
+
+- 🌟 更改 babel 配置，较小构建包大小
+- 🌟 Form 原生提供 useForm 功能，废弃 @ant-design-vue/use 库
+- 🐞 修复 Form validateFirst 属性在多个校验规则时不触发 reject 问题 [#4273](https://github.com/vueComponent/ant-design-vue/issues/4273)
+- 🐞 修复 List 循环引用导致 Vite 下报错问题 [#4263](https://github.com/vueComponent/ant-design-vue/issues/4263)
+- 🐞 修复 Menu 事件回调缺少 item 属性问题 [#4290](https://github.com/vueComponent/ant-design-vue/issues/4290)
+
+## 2.2.0-beta.6
+
+`2021-06-26`
+
+- 🌟 Menu 性能优化 [e8b957](https://github.com/vueComponent/ant-design-vue/commit/e8b95784eb1ee0554b0d6b17bdc14e18775f2ae6)
+- 🐞 修复 Layout、RangePicker、WeekPicker、Textarea 按需加载失效
+
+## 2.2.0-beta.5
+
+`2021-06-24`
+
+- 🎉 支持 vite-plugin-components 按需加载
+- 🎉 重构 List 组件
+- 🌟 Select 新增响应式折叠选项 [656d14](https://github.com/vueComponent/ant-design-vue/commit/656d14fc4e4ef0f781324438f0d58cfb6816d583)
+- 🐞 修复 Select 动态更新选项时虚拟列表无法滚动问题 [b2aa49d](https://github.com/vueComponent/ant-design-vue/commit/b2aa49d064a83c6ce786a6bb4cd9fc5266a5964d)
+- 🐞 修复 Select 键盘事件位置不正确问题 [604372](https://github.com/vueComponent/ant-design-vue/commit/604372ff2da521dd580ad5229f7dbd445c1c6190)
+- 🐞 修复 AutoComplete 不支持 options slot 问题 [#4012](https://github.com/vueComponent/ant-design-vue/issues/4012)
+
+## 2.2.0-beta.4
+
+`2021-06-21`
+
+- 🎉 重构 Descriptions 组件 [#4219](https://github.com/vueComponent/ant-design-vue/issues/4219)
+- 🐞 修复 Countdown 不触发 finish 事件问题 [#4222](https://github.com/vueComponent/ant-design-vue/issues/4222)
+- 🐞 修复 ConfigProvider 在 vue 3.1 下报错问题 [#4225](https://github.com/vueComponent/ant-design-vue/issues/4225)
+- 🐞 修复 Dropdown 下使用 SubMenu 报错问题 [#4205](https://github.com/vueComponent/ant-design-vue/issues/4205)
+- 🐞 修复 Col 类型错误 [#4226](https://github.com/vueComponent/ant-design-vue/issues/4226)
+- 🐞 修复 Typography 失焦时不触发 onEnd 问题 [#4227](https://github.com/vueComponent/ant-design-vue/issues/4227)
+- 🐞 修复 ImagePreview 样式丢失问题 [#4231](https://github.com/vueComponent/ant-design-vue/issues/4231)
+
 ## 2.2.0-beta.3
 
 `2021-06-11`

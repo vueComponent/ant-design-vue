@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent } from 'vue';
 import { Circle as VCCircle } from '../vc-progress';
 import PropTypes from '../_util/vue-types';
 import { validProgress } from './utils';

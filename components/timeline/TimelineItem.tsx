@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes, inject } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps, getComponent } from '../_util/props-util';
@@ -6,7 +7,7 @@ import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple } from '../_util/type';
 
-export const timeLineItemProps = {
+export const timelineItemProps = {
   prefixCls: PropTypes.string,
   color: PropTypes.string,
   dot: PropTypes.any,
@@ -14,11 +15,11 @@ export const timeLineItemProps = {
   position: PropTypes.oneOf(tuple('left', 'right', '')).def(''),
 };
 
-export type TimeLineItemProps = Partial<ExtractPropTypes<typeof timeLineItemProps>>;
+export type TimelineItemProps = Partial<ExtractPropTypes<typeof timelineItemProps>>;
 
 export default defineComponent({
   name: 'ATimelineItem',
-  props: initDefaultProps(timeLineItemProps, {
+  props: initDefaultProps(timelineItemProps, {
     color: 'blue',
     pending: false,
   }),

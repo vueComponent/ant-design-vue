@@ -1,4 +1,5 @@
-import { provide, inject, defineComponent, DefineComponent, nextTick } from 'vue';
+import type { DefineComponent } from 'vue';
+import { provide, inject, defineComponent, nextTick } from 'vue';
 import TimePickerPanel from '../vc-time-picker/Panel';
 import classNames from '../_util/classNames';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';

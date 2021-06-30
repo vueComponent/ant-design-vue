@@ -29,13 +29,17 @@ describe('Select', () => {
   });
 
   it('should have default notFoundContent', async () => {
-    const wrapper = mount(Select, {
-      props: {
-        mode: 'multiple',
+    const wrapper = mount(
+      {
+        render() {
+          return <Select mode="multiple" />;
+        },
       },
-      sync: false,
-      attachTo: 'body',
-    });
+      {
+        sync: false,
+        attachTo: 'body',
+      },
+    );
     await asyncExpect(() => {
       wrapper.findAll('.ant-select-selector')[0].element.dispatchEvent(new MouseEvent('mousedown'));
     });
@@ -47,14 +51,17 @@ describe('Select', () => {
   });
 
   it('should support set notFoundContent to null', async () => {
-    const wrapper = mount(Select, {
-      props: {
-        mode: 'multiple',
-        notFoundContent: null,
+    const wrapper = mount(
+      {
+        render() {
+          return <Select mode="multiple" notFoundContent={null} />;
+        },
       },
-      sync: false,
-      attachTo: 'body',
-    });
+      {
+        sync: false,
+        attachTo: 'body',
+      },
+    );
     await asyncExpect(() => {
       wrapper.findAll('.ant-select-selector')[0].element.dispatchEvent(new MouseEvent('mousedown'));
     });
@@ -65,13 +72,17 @@ describe('Select', () => {
   });
 
   it('should not have default notFoundContent when mode is combobox', async () => {
-    const wrapper = mount(Select, {
-      props: {
-        mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
+    const wrapper = mount(
+      {
+        render() {
+          return <Select mode={Select.SECRET_COMBOBOX_MODE_DO_NOT_USE} />;
+        },
       },
-      sync: false,
-      attachTo: 'body',
-    });
+      {
+        sync: false,
+        attachTo: 'body',
+      },
+    );
     await asyncExpect(() => {
       wrapper.findAll('.ant-select-selector')[0].element.dispatchEvent(new MouseEvent('mousedown'));
     });
@@ -82,13 +93,18 @@ describe('Select', () => {
   });
 
   it('should not have notFoundContent when mode is combobox and notFoundContent is set', async () => {
-    const wrapper = mount(Select, {
-      props: {
-        mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
-        notFoundContent: 'not at all',
+    const wrapper = mount(
+      {
+        render() {
+          return (
+            <Select mode={Select.SECRET_COMBOBOX_MODE_DO_NOT_USE} notFoundContent="not at all" />
+          );
+        },
       },
-      sync: false,
-    });
+      {
+        sync: false,
+      },
+    );
     await asyncExpect(() => {
       wrapper.findAll('.ant-select-selector')[0].element.dispatchEvent(new MouseEvent('mousedown'));
     });

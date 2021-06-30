@@ -1,6 +1,7 @@
-import { defineComponent, ExtractPropTypes, ref, computed } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, ref, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { flattenChildren } from '../_util/props-util';
+import { filterEmpty, flattenChildren, isEmptyContent } from '../_util/props-util';
 import ArrowLeftOutlined from '@ant-design/icons-vue/ArrowLeftOutlined';
 import ArrowRightOutlined from '@ant-design/icons-vue/ArrowRightOutlined';
 import Breadcrumb from '../breadcrumb';
@@ -39,7 +40,7 @@ const PageHeader = defineComponent({
     const onResize = ({ width }: { width: number }) => {
       compact.value = width < 768;
     };
-    const ghost = computed(() => props.ghost ?? pageHeader.value?.ghost ?? false);
+    const ghost = computed(() => props.ghost ?? pageHeader.value?.ghost ?? true);
 
     const getBackIcon = () => {
       return (
@@ -123,7 +124,10 @@ const PageHeader = defineComponent({
     };
 
     const renderFooter = () => {
-      return <div class={`${prefixCls.value}-footer`}>{props.footer ?? slots.footer?.()}</div>;
+      const footer = props.footer ?? filterEmpty(slots.footer?.());
+      return isEmptyContent(footer) ? null : (
+        <div class={`${prefixCls.value}-footer`}>{footer}</div>
+      );
     };
 
     const renderChildren = (children: any) => {

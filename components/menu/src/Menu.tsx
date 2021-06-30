@@ -1,25 +1,11 @@
-import { Key } from '../../_util/type';
-import {
-  computed,
-  defineComponent,
-  ExtractPropTypes,
-  ref,
-  PropType,
-  inject,
-  watchEffect,
-  watch,
-  onMounted,
-  unref,
-  UnwrapRef,
-} from 'vue';
+import type { Key } from '../../_util/type';
+import type { ExtractPropTypes, PropType, UnwrapRef } from 'vue';
+import { computed, defineComponent, ref, inject, watchEffect, watch, onMounted, unref } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
-import useProvideMenu, {
-  MenuContextProvider,
-  StoreMenuInfo,
-  useProvideFirstLevel,
-} from './hooks/useMenuContext';
+import type { StoreMenuInfo } from './hooks/useMenuContext';
+import useProvideMenu, { MenuContextProvider, useProvideFirstLevel } from './hooks/useMenuContext';
 import useConfigInject from '../../_util/hooks/useConfigInject';
-import {
+import type {
   MenuTheme,
   MenuMode,
   BuiltinPlacements,
@@ -28,7 +14,8 @@ import {
   SelectInfo,
 } from './interface';
 import devWarning from '../../vc-util/devWarning';
-import { collapseMotion, CSSMotionProps } from '../../_util/transition';
+import type { CSSMotionProps } from '../../_util/transition';
+import { collapseMotion } from '../../_util/transition';
 import uniq from 'lodash-es/uniq';
 import { SiderCollapsedKey } from '../../layout/injectionKey';
 import { flattenChildren } from '../../_util/props-util';
@@ -120,7 +107,7 @@ export default defineComponent({
         }
         keyMapStore.value = newKeyMapStore;
       },
-      { immediate: true },
+      { flush: 'post' },
     );
     watchEffect(() => {
       if (props.activeKey !== undefined) {
@@ -222,12 +209,17 @@ export default defineComponent({
       { immediate: true },
     );
 
+    let timeout: number;
     const changeActiveKeys = (keys: Key[]) => {
-      if (props.activeKey === undefined) {
-        activeKeys.value = keys;
-      }
-      emit('update:activeKey', keys[keys.length - 1]);
+      window.clearTimeout(timeout);
+      timeout = window.setTimeout(() => {
+        if (props.activeKey === undefined) {
+          activeKeys.value = keys;
+        }
+        emit('update:activeKey', keys[keys.length - 1]);
+      });
     };
+
     const disabled = computed(() => !!props.disabled);
     const isRtl = computed(() => direction.value === 'rtl');
     const mergedMode = ref<MenuMode>('vertical');
@@ -402,10 +394,8 @@ export default defineComponent({
             ));
       const overflowedIndicator = <EllipsisOutlined />;
 
-      // data-hack-store-update 初步判断是 vue bug，先用hack方式
       return (
         <Overflow
-          data-hack-store-update={store.value}
           prefixCls={`${prefixCls.value}-overflow`}
           component="ul"
           itemComponent={MenuItem}

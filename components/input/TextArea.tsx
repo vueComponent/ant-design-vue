@@ -77,7 +77,7 @@ export default defineComponent({
       if (((isComposing || composing) && this.lazy) || this.stateValue === value) return;
 
       this.setValue((e.target as HTMLTextAreaElement).value, () => {
-        this.resizableTextArea.resizeTextarea();
+        this.resizableTextArea?.resizeTextarea();
       });
       resolveOnChange(this.resizableTextArea.textArea, e, this.triggerChange);
     },

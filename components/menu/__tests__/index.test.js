@@ -121,7 +121,7 @@ describe('Menu', () => {
     );
     await asyncExpect(() => {
       expect($$('.ant-menu-sub')[0].parentElement.style.display).not.toBe('none');
-    }, 0);
+    }, 100);
   });
 
   it('horizontal', async () => {

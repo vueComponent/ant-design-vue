@@ -1,85 +1,81 @@
-import type { ExtractPropTypes, VNode } from 'vue';
-import { defineComponent, inject, Text } from 'vue';
+import {
+  computed,
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  Ref,
+  ref,
+  Text,
+  watch,
+  watchEffect,
+} from 'vue';
 import Wave from '../_util/wave';
-import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import buttonTypes from './buttonTypes';
-import { getSlot, getComponent } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
-// eslint-disable-next-line no-console
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
+import { flattenChildren, getPropsSlot } from '../_util/props-util';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import devWarning from '../vc-util/devWarning';
+
+import type { ButtonType } from './buttonTypes';
+import type { VNode } from 'vue';
+
+type Loading = boolean | number;
+
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
 const props = buttonTypes();
 
-export type ButtonProps = Partial<ExtractPropTypes<ReturnType<typeof buttonTypes>>>;
+function isUnborderedButtonType(type: ButtonType | undefined) {
+  return type === 'text' || type === 'link';
+}
 
 export default defineComponent({
   name: 'AButton',
   inheritAttrs: false,
   __ANT_BUTTON: true,
   props,
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-      children: [],
-      iconCom: undefined,
-      delayTimeout: undefined,
-    };
-  },
-  data() {
-    return {
-      sizeMap: {
-        large: 'lg',
-        small: 'sm',
-      },
-      sLoading: false,
-      hasTwoCNChar: false,
-    };
-  },
-  watch: {
-    loading: {
-      handler(val, preVal) {
-        if (preVal && typeof preVal !== 'boolean') {
-          clearTimeout(this.delayTimeout);
-        }
-        if (val && typeof val !== 'boolean' && val.delay) {
-          this.delayTimeout = setTimeout(() => {
-            this.sLoading = !!val;
-          }, val.delay);
-        } else {
-          this.sLoading = !!val;
-        }
-      },
-      immediate: true,
-    },
-  },
-  mounted() {
-    this.fixTwoCNChar();
-  },
-  updated() {
-    this.fixTwoCNChar();
-  },
-  beforeUnmount() {
-    if (this.delayTimeout) {
-      clearTimeout(this.delayTimeout);
-    }
-  },
-  methods: {
-    getClasses() {
-      const {
-        prefixCls: customizePrefixCls,
-        type,
-        shape,
-        size,
-        hasTwoCNChar,
-        sLoading,
-        ghost,
-        block,
-        $attrs,
-      } = this;
-      const getPrefixCls = this.configProvider.getPrefixCls;
-      const prefixCls = getPrefixCls('btn', customizePrefixCls);
-      const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
+  slots: ['icon'],
+  emits: ['click'],
+  setup(props, { slots, attrs, emit }) {
+    const { prefixCls, autoInsertSpaceInButton, direction } = useConfigInject('btn', props);
 
+    const buttonNodeRef = ref<HTMLElement>(null);
+    const delayTimeoutRef = ref(undefined);
+    let isNeedInserted = false;
+
+    const innerLoading: Ref<Loading> = ref(false);
+    const hasTwoCNChar = ref(false);
+
+    const autoInsertSpace = computed(() => autoInsertSpaceInButton.value !== false);
+
+    // =============== Update Loading ===============
+    const loadingOrDelay = computed(() =>
+      typeof props.loading === 'object' && props.loading.delay
+        ? props.loading.delay || true
+        : !!props.loading,
+    );
+
+    watch(
+      loadingOrDelay,
+      val => {
+        clearTimeout(delayTimeoutRef.value);
+        if (typeof loadingOrDelay.value === 'number') {
+          delayTimeoutRef.value = window.setTimeout(() => {
+            innerLoading.value = val;
+          }, loadingOrDelay.value);
+        } else {
+          innerLoading.value = val;
+        }
+      },
+      {
+        immediate: true,
+      },
+    );
+
+    const classes = computed(() => {
+      const { type, shape, size, ghost, block, danger } = props;
+      const pre = prefixCls.value;
       // large => lg
       // small => sm
       let sizeCls = '';
@@ -93,43 +89,46 @@ export default defineComponent({
         default:
           break;
       }
-      const iconType = sLoading ? 'loading' : this.iconCom;
       return {
-        [$attrs.class as string]: $attrs.class,
-        [`${prefixCls}`]: true,
-        [`${prefixCls}-${type}`]: type,
-        [`${prefixCls}-${shape}`]: shape,
-        [`${prefixCls}-${sizeCls}`]: sizeCls,
-        [`${prefixCls}-icon-only`]: this.children.length === 0 && iconType,
-        [`${prefixCls}-loading`]: sLoading,
-        [`${prefixCls}-background-ghost`]: ghost || type === 'ghost',
-        [`${prefixCls}-two-chinese-chars`]: hasTwoCNChar && autoInsertSpace,
-        [`${prefixCls}-block`]: block,
+        [`${pre}`]: true,
+        [`${pre}-${type}`]: type,
+        [`${pre}-${shape}`]: shape,
+        [`${pre}-${sizeCls}`]: sizeCls,
+        [`${pre}-loading`]: innerLoading.value,
+        [`${pre}-background-ghost`]: ghost && !isUnborderedButtonType(type),
+        [`${pre}-two-chinese-chars`]: hasTwoCNChar.value && autoInsertSpace.value,
+        [`${pre}-block`]: block,
+        [`${pre}-dangerous`]: !!danger,
+        [`${pre}-rtl`]: direction.value === 'rtl',
       };
-    },
-    fixTwoCNChar() {
+    });
+
+    const fixTwoCNChar = () => {
       // Fix for HOC usage like <FormatMessage />
-      const node = this.$refs.buttonNode as HTMLElement;
-      if (!node) {
+      const node = buttonNodeRef.value!;
+      if (!node || autoInsertSpaceInButton.value === false) {
         return;
       }
       const buttonText = node.textContent;
-      if (this.isNeedInserted() && isTwoCNChar(buttonText)) {
-        if (!this.hasTwoCNChar) {
-          this.hasTwoCNChar = true;
+
+      if (isNeedInserted && isTwoCNChar(buttonText)) {
+        if (!hasTwoCNChar.value) {
+          hasTwoCNChar.value = true;
         }
-      } else if (this.hasTwoCNChar) {
-        this.hasTwoCNChar = false;
+      } else if (hasTwoCNChar.value) {
+        hasTwoCNChar.value = false;
       }
-    },
-    handleClick(event: Event) {
-      const { sLoading } = this.$data;
-      if (sLoading) {
+    };
+    const handleClick = (event: Event) => {
+      // https://github.com/ant-design/ant-design/issues/30207
+      if (innerLoading.value || props.disabled) {
+        event.preventDefault();
         return;
       }
-      this.$emit('click', event);
-    },
-    insertSpace(child: VNode, needInserted: boolean) {
+      emit('click', event);
+    };
+
+    const insertSpace = (child: VNode, needInserted: boolean) => {
       const SPACE = needInserted ? ' ' : '';
       if (child.type === Text) {
         let text = (child.children as string).trim();
@@ -139,53 +138,78 @@ export default defineComponent({
         return <span>{text}</span>;
       }
       return child;
-    },
-    isNeedInserted() {
-      const { iconCom, type } = this;
-      return this.children.length === 1 && !iconCom && type !== 'link';
-    },
-  },
-  render() {
-    this.iconCom = getComponent(this, 'icon');
-    const { type, htmlType, iconCom, disabled, handleClick, sLoading, href, title, $attrs } = this;
-    const children = getSlot(this);
-    this.children = children;
-    const classes = this.getClasses();
-
-    const buttonProps = {
-      ...$attrs,
-      title,
-      disabled,
-      class: classes,
-      onClick: handleClick,
     };
-    const iconNode = sLoading ? <LoadingOutlined /> : iconCom;
 
-    const autoInsertSpace = this.configProvider.autoInsertSpaceInButton !== false;
-    const kids = children.map(child =>
-      this.insertSpace(child, this.isNeedInserted() && autoInsertSpace),
-    );
+    watchEffect(() => {
+      devWarning(
+        !(props.ghost && isUnborderedButtonType(props.type)),
+        'Button',
+        "`link` or `text` button can't be a `ghost` button.",
+      );
+    });
 
-    if (href !== undefined) {
-      return (
-        <a {...buttonProps} href={href} ref="buttonNode">
+    onMounted(fixTwoCNChar);
+    onUpdated(fixTwoCNChar);
+
+    onBeforeUnmount(() => {
+      delayTimeoutRef.value && clearTimeout(delayTimeoutRef.value);
+    });
+
+    return () => {
+      const children = flattenChildren(getPropsSlot(slots, props));
+
+      const icon = getPropsSlot(slots, props, 'icon');
+
+      isNeedInserted = children.length === 1 && !icon && !isUnborderedButtonType(props.type);
+
+      const { type, htmlType, disabled, href, title, target } = props;
+
+      const iconType = innerLoading.value ? 'loading' : icon;
+      const buttonProps = {
+        ...attrs,
+        title,
+        disabled,
+        class: [
+          classes.value,
+          attrs.class,
+          { [`${prefixCls.value}-icon-only`]: children.length === 0 && !!iconType },
+        ],
+        onClick: handleClick,
+      };
+
+      const iconNode = innerLoading.value ? (
+        <span class={`${prefixCls.value}-loading-icon`}>
+          <LoadingOutlined />
+        </span>
+      ) : (
+        icon
+      );
+
+      const kids = children.map(child =>
+        insertSpace(child, isNeedInserted && autoInsertSpace.value),
+      );
+
+      if (href !== undefined) {
+        return (
+          <a {...buttonProps} href={href} target={target} ref={buttonNodeRef}>
+            {iconNode}
+            {kids}
+          </a>
+        );
+      }
+
+      const buttonNode = (
+        <button {...buttonProps} ref={buttonNodeRef} type={htmlType}>
           {iconNode}
           {kids}
-        </a>
+        </button>
       );
-    }
 
-    const buttonNode = (
-      <button {...buttonProps} ref="buttonNode" type={htmlType || 'button'}>
-        {iconNode}
-        {kids}
-      </button>
-    );
+      if (isUnborderedButtonType(type)) {
+        return buttonNode;
+      }
 
-    if (type === 'link') {
-      return buttonNode;
-    }
-
-    return <Wave ref="wave">{buttonNode}</Wave>;
+      return <Wave ref="wave">{buttonNode}</Wave>;
+    };
   },
 });

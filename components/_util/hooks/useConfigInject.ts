@@ -18,6 +18,7 @@ export default (
   form?: ComputedRef<{
     requiredMark?: RequiredMark;
   }>;
+  autoInsertSpaceInButton: ComputedRef<Boolean>;
   renderEmpty?: ComputedRef<(componentName?: string) => VNodeChild | JSX.Element>;
 } => {
   const configProvider = inject<UnwrapRef<ConfigProviderProps>>(
@@ -26,6 +27,7 @@ export default (
   );
   const prefixCls = computed(() => configProvider.getPrefixCls(name, props.prefixCls));
   const direction = computed(() => configProvider.direction);
+  const autoInsertSpaceInButton = computed(() => configProvider.autoInsertSpaceInButton);
   const renderEmpty = computed(() => configProvider.renderEmpty);
   const space = computed(() => configProvider.space);
   const pageHeader = computed(() => configProvider.pageHeader);
@@ -41,6 +43,7 @@ export default (
     space,
     pageHeader,
     form,
+    autoInsertSpaceInButton,
     renderEmpty,
   };
 };

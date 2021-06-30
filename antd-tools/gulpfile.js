@@ -80,7 +80,7 @@ function compileTs(stream) {
   return stream
     .pipe(ts(tsConfig))
     .js.pipe(
-      through2.obj(function (file, encoding, next) {
+      through2.obj(function(file, encoding, next) {
         // console.log(file.path, file.base);
         file.path = file.path.replace(/\.[jt]sx$/, '.js');
         this.push(file);
@@ -146,7 +146,7 @@ function compile(modules) {
   const less = gulp
     .src(['components/**/*.less'])
     .pipe(
-      through2.obj(function (file, encoding, next) {
+      through2.obj(function(file, encoding, next) {
         this.push(file.clone());
         if (
           file.path.match(/\/style\/index\.less$/) ||

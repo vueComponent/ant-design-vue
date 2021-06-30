@@ -1,32 +1,48 @@
-import type { ExtractPropTypes } from 'vue';
-
 import { tuple } from '../_util/type';
-import PropTypes, { withUndefined } from '../_util/vue-types';
+import PropTypes from '../_util/vue-types';
 
-const ButtonTypes = tuple('default', 'primary', 'ghost', 'dashed', 'danger', 'link');
+import type { ExtractPropTypes, PropType } from 'vue';
+import type { SizeType } from '../config-provider';
+
+const ButtonTypes = tuple('default', 'primary', 'ghost', 'dashed', 'link', 'text');
 export type ButtonType = typeof ButtonTypes[number];
-const ButtonShapes = tuple('circle', 'circle-outline', 'round');
+const ButtonShapes = tuple('circle', 'round');
 export type ButtonShape = typeof ButtonShapes[number];
-const ButtonSizes = tuple('large', 'default', 'small');
-export type ButtonSize = typeof ButtonSizes[number];
+
 const ButtonHTMLTypes = tuple('submit', 'button', 'reset');
 export type ButtonHTMLType = typeof ButtonHTMLTypes[number];
+
+export type LegacyButtonType = ButtonType | 'danger';
+export function convertLegacyProps(type?: LegacyButtonType): ButtonProps {
+  if (type === 'danger') {
+    return { danger: true };
+  }
+  return { type };
+}
 
 const buttonProps = () => ({
   prefixCls: PropTypes.string,
   type: PropTypes.oneOf(ButtonTypes),
   htmlType: PropTypes.oneOf(ButtonHTMLTypes).def('button'),
-  // icon: PropTypes.string,
   shape: PropTypes.oneOf(ButtonShapes),
-  size: PropTypes.oneOf(ButtonSizes).def('default'),
-  loading: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
+  size: {
+    type: String as PropType<SizeType>,
+  },
+  loading: {
+    type: [Boolean, Object],
+    default: (): boolean | { delay?: number } => false,
+  },
   disabled: PropTypes.looseBool,
   ghost: PropTypes.looseBool,
   block: PropTypes.looseBool,
+  danger: PropTypes.looseBool,
   icon: PropTypes.VNodeChild,
   href: PropTypes.string,
+  target: PropTypes.string,
   title: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick: {
+    type: Function as PropType<(event: MouseEvent) => void>,
+  },
 });
 
 export type ButtonProps = Partial<ExtractPropTypes<ReturnType<typeof buttonProps>>>;

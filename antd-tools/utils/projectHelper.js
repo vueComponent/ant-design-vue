@@ -20,7 +20,7 @@ function injectRequire() {
   const Module = require('module');
 
   const oriRequire = Module.prototype.require;
-  Module.prototype.require = function (...args) {
+  Module.prototype.require = function(...args) {
     const moduleName = args[0];
     try {
       return oriRequire.apply(this, args);

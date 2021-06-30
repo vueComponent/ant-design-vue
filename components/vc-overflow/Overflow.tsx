@@ -1,15 +1,8 @@
-import {
-  computed,
-  CSSProperties,
-  defineComponent,
-  HTMLAttributes,
-  PropType,
-  ref,
-  watch,
-} from 'vue';
+import type { CSSProperties, HTMLAttributes, PropType } from 'vue';
+import { computed, defineComponent, ref, watch } from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import classNames from '../_util/classNames';
-import { Key, VueNode } from '../_util/type';
+import type { Key, VueNode } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import { OverflowContextProvider } from './context';
 import Item from './Item';
@@ -99,7 +92,7 @@ const Overflow = defineComponent({
     const mergedRestWidth = computed(() => Math.max(prevRestWidth.value, restWidth.value));
 
     // ================================= Data =================================
-    const isResponsive = computed(() => props.data.length && props.maxCount === RESPONSIVE);
+    const isResponsive = computed(() => !!(props.data.length && props.maxCount === RESPONSIVE));
     const invalidate = computed(() => props.maxCount === INVALIDATE);
 
     /**
@@ -183,7 +176,7 @@ const Overflow = defineComponent({
 
     // ================================ Effect ================================
     const getItemWidth = (index: number) => {
-      return itemWidths.value.get(getKey(mergedData[index], index));
+      return itemWidths.value.get(getKey(mergedData.value[index], index));
     };
 
     watch(
@@ -215,8 +208,11 @@ const Overflow = defineComponent({
             totalWidth += currentItemWidth;
 
             if (
-              i === lastIndex - 1 &&
-              totalWidth + getItemWidth(lastIndex)! <= mergedContainerWidth.value
+              // Only one means `totalWidth` is the final width
+              (lastIndex === 0 && totalWidth <= mergedContainerWidth.value) ||
+              // Last two width will be the final width
+              (i === lastIndex - 1 &&
+                totalWidth + getItemWidth(lastIndex)! <= mergedContainerWidth.value)
             ) {
               // Additional check if match the end
               updateDisplayCount(lastIndex);
@@ -227,11 +223,6 @@ const Overflow = defineComponent({
               updateDisplayCount(i - 1);
               suffixFixedStart.value =
                 totalWidth - currentItemWidth - suffixWidth.value + restWidth.value;
-              break;
-            } else if (i === lastIndex) {
-              // Reach the end
-              updateDisplayCount(lastIndex);
-              suffixFixedStart.value = totalWidth - suffixWidth.value;
               break;
             }
           }
@@ -346,7 +337,7 @@ const Overflow = defineComponent({
         );
       }
 
-      let overflowNode = (
+      const overflowNode = (
         <Component
           class={classNames(!invalidate.value && prefixCls, className)}
           style={style}
@@ -372,12 +363,12 @@ const Overflow = defineComponent({
           )}
         </Component>
       );
-
-      if (isResponsive.value) {
-        overflowNode = <ResizeObserver onResize={onOverflowResize}>{overflowNode}</ResizeObserver>;
-      }
-
-      return overflowNode;
+      // 使用 disabled  避免结构不一致 导致子组件 rerender
+      return (
+        <ResizeObserver disabled={!isResponsive.value} onResize={onOverflowResize}>
+          {overflowNode}
+        </ResizeObserver>
+      );
     };
   },
 });

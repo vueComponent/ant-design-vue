@@ -97,7 +97,7 @@ export default {
       this.createPickr();
       this.eventsBinding();
     },
-    setColor: debounce(function(val) {
+    setColor: debounce(function (val) {
       this.pickr.setColor(val);
     }, 1000),
     eventsBinding() {

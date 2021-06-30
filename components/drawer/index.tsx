@@ -1,4 +1,5 @@
-import { inject, provide, nextTick, defineComponent, CSSProperties } from 'vue';
+import type { CSSProperties } from 'vue';
+import { inject, provide, nextTick, defineComponent } from 'vue';
 import classnames from '../_util/classNames';
 import omit from 'omit.js';
 import VcDrawer from '../vc-drawer/src';

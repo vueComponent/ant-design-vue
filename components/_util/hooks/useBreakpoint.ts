@@ -1,5 +1,7 @@
-import { onMounted, onUnmounted, Ref, ref } from 'vue';
-import ResponsiveObserve, { ScreenMap } from '../../_util/responsiveObserve';
+import type { Ref } from 'vue';
+import { onMounted, onUnmounted, ref } from 'vue';
+import type { ScreenMap } from '../../_util/responsiveObserve';
+import ResponsiveObserve from '../../_util/responsiveObserve';
 
 function useBreakpoint(): Ref<ScreenMap> {
   const screens = ref<ScreenMap>({});

@@ -5,7 +5,7 @@ import Radio from './Radio';
 import { getOptionProps, filterEmpty, hasProp, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple } from '../_util/type';
-import { RadioChangeEvent } from './interface';
+import type { RadioChangeEvent } from './interface';
 
 export default defineComponent({
   name: 'ARadioGroup',

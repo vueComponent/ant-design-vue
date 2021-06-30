@@ -1,4 +1,5 @@
-import { defineComponent, CSSProperties, ExtractPropTypes, computed } from 'vue';
+import type { CSSProperties, ExtractPropTypes } from 'vue';
+import { defineComponent, computed } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';

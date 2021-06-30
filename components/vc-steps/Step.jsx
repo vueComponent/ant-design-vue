@@ -40,9 +40,8 @@ export default defineComponent({
       this.__emit('stepClick', this.stepIndex);
     },
     renderIconNode() {
-      const { prefixCls, stepNumber, status, iconPrefix, icons, progressDot } = getOptionProps(
-        this,
-      );
+      const { prefixCls, stepNumber, status, iconPrefix, icons, progressDot } =
+        getOptionProps(this);
       const icon = getComponent(this, 'icon');
       const title = getComponent(this, 'title');
       const description = getComponent(this, 'description');

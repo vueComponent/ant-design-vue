@@ -1,6 +1,7 @@
-import { AnchorHTMLAttributes, FunctionalComponent } from 'vue';
+import type { AnchorHTMLAttributes, FunctionalComponent } from 'vue';
 import warning from '../_util/warning';
-import Base, { baseProps, BlockProps } from './Base';
+import type { BlockProps } from './Base';
+import Base, { baseProps } from './Base';
 import Omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 

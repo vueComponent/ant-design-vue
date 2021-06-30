@@ -1,8 +1,9 @@
 import classNames from '../_util/classNames';
-import Dialog, { ModalFuncProps } from './Modal';
+import type { ModalFuncProps } from './Modal';
+import Dialog from './Modal';
 import ActionButton from './ActionButton';
 import { getConfirmLocale } from './locale';
-import { FunctionalComponent } from 'vue';
+import type { FunctionalComponent } from 'vue';
 
 interface ConfirmDialogProps extends ModalFuncProps {
   afterClose?: () => void;

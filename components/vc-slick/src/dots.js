@@ -1,7 +1,7 @@
 import classnames from '../../_util/classNames';
 import { cloneElement } from '../../_util/vnode';
 
-const getDotCount = function(spec) {
+const getDotCount = function (spec) {
   let dots;
 
   if (spec.infinite) {

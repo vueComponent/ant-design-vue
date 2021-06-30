@@ -15,14 +15,14 @@ import { getOptionProps } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import BaseMixin from '../_util/BaseMixin';
 import { defaultConfigProvider } from '../config-provider';
-import {
-  tableProps,
+import type {
   TableComponents,
   TableState,
   TableProps,
   ColumnProps,
   TableStateFilters,
 } from './interface';
+import { tableProps } from './interface';
 import Pagination from '../pagination';
 import Spin from '../spin';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -1216,10 +1216,8 @@ export default defineComponent({
       transformCellText: customizeTransformCellText,
     } = this;
     const data = this.getCurrentPageData();
-    const {
-      getPopupContainer: getContextPopupContainer,
-      transformCellText: tct,
-    } = this.configProvider;
+    const { getPopupContainer: getContextPopupContainer, transformCellText: tct } =
+      this.configProvider;
     const getPopupContainer = this.getPopupContainer || getContextPopupContainer;
     const transformCellText = customizeTransformCellText || tct;
     let loading = this.loading;

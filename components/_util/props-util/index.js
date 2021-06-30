@@ -28,7 +28,7 @@ const parseStyleText = (cssText = '', camel) => {
   const res = {};
   const listDelimiter = /;(?![^(]*\))/g;
   const propertyDelimiter = /:(.+)/;
-  cssText.split(listDelimiter).forEach(function(item) {
+  cssText.split(listDelimiter).forEach(function (item) {
     if (item) {
       const tmp = item.split(propertyDelimiter);
       if (tmp.length > 1) {
@@ -331,6 +331,10 @@ export function getComponentName(opts) {
 
 export function isFragment(c) {
   return c.length === 1 && c[0].type === Fragment;
+}
+
+export function isEmptyContent(c) {
+  return c === undefined || c === null || c === '' || (Array.isArray(c) && c.length === 0);
 }
 
 export function isEmptyElement(c) {

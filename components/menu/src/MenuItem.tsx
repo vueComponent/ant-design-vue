@@ -1,19 +1,12 @@
 import { flattenChildren, getPropsSlot, isValidElement } from '../../_util/props-util';
 import PropTypes from '../../_util/vue-types';
-import {
-  computed,
-  defineComponent,
-  ExtractPropTypes,
-  getCurrentInstance,
-  onBeforeUnmount,
-  ref,
-  watch,
-} from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { computed, defineComponent, getCurrentInstance, onBeforeUnmount, ref, watch } from 'vue';
 import { useInjectKeyPath } from './hooks/useKeyPath';
 import { useInjectFirstLevel, useInjectMenu } from './hooks/useMenuContext';
 import { cloneElement } from '../../_util/vnode';
 import Tooltip from '../../tooltip';
-import { MenuInfo } from './interface';
+import type { MenuInfo } from './interface';
 import KeyCode from '../../_util/KeyCode';
 import useDirectionStyle from './hooks/useDirectionStyle';
 import Overflow from '../../vc-overflow';
@@ -101,6 +94,10 @@ export default defineComponent({
         keyPath: keysPath.value,
         eventKeyPath: [...parentEventKeys.value, eventKey],
         domEvent: e,
+        item: {
+          ...props,
+          ...attrs,
+        },
       };
     };
 
@@ -172,7 +169,7 @@ export default defineComponent({
       const childrenLength = children.length;
       let tooltipTitle: any = title;
       if (typeof title === 'undefined') {
-        tooltipTitle = firstLevel ? children : '';
+        tooltipTitle = firstLevel && childrenLength ? children : '';
       } else if (title === false) {
         tooltipTitle = '';
       }

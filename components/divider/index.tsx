@@ -1,5 +1,6 @@
 import { flattenChildren } from '../_util/props-util';
-import { computed, defineComponent, ExtractPropTypes, inject, PropType } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
+import { computed, defineComponent, inject } from 'vue';
 import { defaultConfigProvider } from '../config-provider';
 import { withInstall } from '../_util/type';
 

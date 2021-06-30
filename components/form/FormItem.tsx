@@ -1,18 +1,9 @@
-import {
-  PropType,
-  defineComponent,
-  computed,
-  nextTick,
-  ExtractPropTypes,
-  ref,
-  watchEffect,
-  onBeforeUnmount,
-  ComputedRef,
-} from 'vue';
+import type { PropType, ExtractPropTypes, ComputedRef } from 'vue';
+import { defineComponent, computed, nextTick, ref, watchEffect, onBeforeUnmount } from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import Row from '../grid/Row';
-import { ColProps } from '../grid/Col';
+import type { ColProps } from '../grid/Col';
 import { isValidElement, flattenChildren, filterEmpty } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import { cloneElement } from '../_util/vnode';
@@ -22,12 +13,12 @@ import { toArray } from './utils/typeUtil';
 import { warning } from '../vc-util/warning';
 import find from 'lodash-es/find';
 import { tuple } from '../_util/type';
-import { InternalNamePath, RuleObject, ValidateOptions } from './interface';
+import type { InternalNamePath, RuleError, RuleObject, ValidateOptions } from './interface';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectForm } from './context';
 import FormItemLabel from './FormItemLabel';
 import FormItemInput from './FormItemInput';
-import { ValidationRule } from './Form';
+import type { ValidationRule } from './Form';
 
 const ValidateStatuses = tuple('success', 'warning', 'error', 'validating', '');
 export type ValidateStatus = typeof ValidateStatuses[number];
@@ -40,7 +31,7 @@ export interface FieldExpose {
   clearValidate: () => void;
   namePath: ComputedRef<InternalNamePath>;
   rules?: ComputedRef<ValidationRule[]>;
-  validateRules: (options: ValidateOptions) => Promise<void> | Promise<string[]>;
+  validateRules: (options: ValidateOptions) => Promise<void> | Promise<RuleError[]>;
 }
 
 function getPropByPath(obj: any, namePathList: any, strict?: boolean) {
@@ -218,10 +209,12 @@ export default defineComponent({
 
       promise
         .catch(e => e)
-        .then((ers = []) => {
+        .then((results: RuleError[] = []) => {
           if (validateState.value === 'validating') {
-            validateState.value = ers.length ? 'error' : 'success';
-            errors.value = ers;
+            const res = results.filter(result => result && result.errors.length);
+            validateState.value = res.length ? 'error' : 'success';
+
+            errors.value = res.map(r => r.errors);
           }
         });
 

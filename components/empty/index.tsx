@@ -1,4 +1,5 @@
-import { CSSProperties, VNodeTypes, inject, FunctionalComponent } from 'vue';
+import type { CSSProperties, VNodeTypes, FunctionalComponent } from 'vue';
+import { inject } from 'vue';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider } from '../config-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -11,7 +12,7 @@ import { withInstall } from '../_util/type';
 const defaultEmptyImg = <DefaultEmptyImg />;
 const simpleEmptyImg = <SimpleEmptyImg />;
 
-export interface TransferLocale {
+interface Locale {
   description?: string;
 }
 
@@ -45,7 +46,7 @@ const Empty: EmptyType = (props, { slots = {}, attrs }) => {
   return (
     <LocaleReceiver
       componentName="Empty"
-      children={(locale: TransferLocale) => {
+      children={(locale: Locale) => {
         const prefixCls = getPrefixCls('empty', customizePrefixCls);
         const des = typeof description !== 'undefined' ? description : locale.description;
         const alt = typeof des === 'string' ? des : 'empty';

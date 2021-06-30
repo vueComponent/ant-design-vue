@@ -34,12 +34,8 @@ export default defineComponent({
     };
     const isRender = destroyInactiveTabPane ? active : this.isActived;
     const shouldRender = isRender || forceRender;
-    const {
-      sentinelStart,
-      sentinelEnd,
-      setPanelSentinelStart,
-      setPanelSentinelEnd,
-    } = this.sentinelContext;
+    const { sentinelStart, sentinelEnd, setPanelSentinelStart, setPanelSentinelEnd } =
+      this.sentinelContext;
     let panelSentinelStart;
     let panelSentinelEnd;
     if (active && shouldRender) {

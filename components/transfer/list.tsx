@@ -7,8 +7,9 @@ import Checkbox from '../checkbox';
 import Search from './search';
 import defaultRenderList from './renderListBody';
 import triggerEvent from '../_util/triggerEvent';
-import { defineComponent, nextTick, VNode, VNodeTypes } from 'vue';
-import { RadioChangeEvent } from '../radio/interface';
+import type { VNode, VNodeTypes } from 'vue';
+import { defineComponent, nextTick } from 'vue';
+import type { RadioChangeEvent } from '../radio/interface';
 
 const defaultRender = () => null;
 

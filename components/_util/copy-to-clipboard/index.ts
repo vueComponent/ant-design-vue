@@ -52,7 +52,7 @@ function copy(text: string, options?: Options): boolean {
     mark.style.MozUserSelect = 'text';
     mark.style.msUserSelect = 'text';
     mark.style.userSelect = 'text';
-    mark.addEventListener('copy', function(e) {
+    mark.addEventListener('copy', function (e) {
       e.stopPropagation();
       if (options.format) {
         e.preventDefault();

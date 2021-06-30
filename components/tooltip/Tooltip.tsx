@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes, inject, CSSProperties } from 'vue';
+import type { ExtractPropTypes, CSSProperties } from 'vue';
+import { defineComponent, inject } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import classNames from '../_util/classNames';
 import getPlacements from './placements';

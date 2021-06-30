@@ -195,11 +195,9 @@ describe('RangePicker', () => {
       $$('.ant-calendar-picker-input')[0].click();
     });
     await asyncExpect(() => {
-      expect(
-        $$('.ant-calendar-cell')[23]
-          .getAttribute('class')
-          .split(' '),
-      ).toContain('ant-calendar-in-range-cell');
+      expect($$('.ant-calendar-cell')[23].getAttribute('class').split(' ')).toContain(
+        'ant-calendar-in-range-cell',
+      );
     });
   });
 

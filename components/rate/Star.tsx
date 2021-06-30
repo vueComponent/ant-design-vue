@@ -1,4 +1,5 @@
-import { defineComponent, computed, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, computed } from 'vue';
 import { getPropsSlot } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 

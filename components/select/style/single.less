@@ -1,6 +1,6 @@
 @import './index';
 
-@selection-item-padding: ceil((@font-size-base * 1.25));
+@selection-item-padding: ceil(@font-size-base * 1.25);
 
 .@{select-prefix-cls}-single {
   // ========================= Selector =========================
@@ -76,10 +76,7 @@
   // Not customize
   &:not(.@{select-prefix-cls}-customize-input) {
     .@{select-prefix-cls}-selector {
-      .select-selector();
-      .select-search-input-without-border();
       width: 100%;
-
       height: @input-height-base;
       padding: 0 @input-padding-horizontal-base;
 

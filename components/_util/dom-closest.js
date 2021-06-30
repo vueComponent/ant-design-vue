@@ -11,7 +11,7 @@ import matches from './dom-matches';
  * @param context {Element=}
  * @return {Element}
  */
-export default function(element, selector, context) {
+export default function (element, selector, context) {
   context = context || document;
   // guard against orphans
   element = { parentNode: element };

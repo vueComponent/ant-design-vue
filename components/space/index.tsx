@@ -1,15 +1,8 @@
-import {
-  defineComponent,
-  PropType,
-  ExtractPropTypes,
-  computed,
-  ref,
-  watch,
-  CSSProperties,
-} from 'vue';
+import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
+import { defineComponent, computed, ref, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
-import { SizeType } from '../config-provider';
+import type { SizeType } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
@@ -50,9 +43,12 @@ const Space = defineComponent({
     watch(
       size,
       () => {
-        [horizontalSize.value, verticalSize.value] = ((Array.isArray(size.value)
-          ? size.value
-          : [size.value, size.value]) as [SpaceSize, SpaceSize]).map(item => getNumberSize(item));
+        [horizontalSize.value, verticalSize.value] = (
+          (Array.isArray(size.value) ? size.value : [size.value, size.value]) as [
+            SpaceSize,
+            SpaceSize,
+          ]
+        ).map(item => getNumberSize(item));
       },
       { immediate: true },
     );

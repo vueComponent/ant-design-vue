@@ -1,5 +1,5 @@
 import addEventListener from '../vc-util/Dom/addEventListener';
-import { ComponentPublicInstance } from 'vue';
+import type { ComponentPublicInstance } from 'vue';
 import supportsPassive from '../_util/supportsPassive';
 
 export type BindElement = HTMLElement | Window | null | undefined;

@@ -1,5 +1,5 @@
 import { toArray } from './typeUtil';
-import { InternalNamePath, NamePath } from '../interface';
+import type { InternalNamePath, NamePath } from '../interface';
 
 /**
  * Convert name to internal supported format.

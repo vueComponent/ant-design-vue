@@ -1,4 +1,4 @@
-import { CSSProperties, ExtractPropTypes, FunctionalComponent } from '@vue/runtime-dom';
+import type { CSSProperties, ExtractPropTypes, FunctionalComponent } from 'vue';
 import classNames from '../_util/classNames';
 import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';

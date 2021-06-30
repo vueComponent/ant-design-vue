@@ -1,4 +1,5 @@
-import { CSSProperties, defineComponent, inject, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import { defineComponent, inject } from 'vue';
 import animation from '../_util/openAnimation';
 import { getOptionProps, getComponent, isValidElement, getSlot } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
@@ -6,7 +7,8 @@ import VcCollapse from '../vc-collapse';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import { defaultConfigProvider } from '../config-provider';
 import PropTypes from '../_util/vue-types';
-import { tuple, VueNode } from '../_util/type';
+import type { VueNode } from '../_util/type';
+import { tuple } from '../_util/type';
 
 export interface PanelProps {
   isActive?: boolean;
@@ -20,22 +22,27 @@ export interface PanelProps {
   extra?: VueNode;
 }
 type ActiveKeyType = Array<string | number> | string | number;
+
+const collapseProps = {
+  prefixCls: PropTypes.string,
+  activeKey: { type: [Array, Number, String] as PropType<ActiveKeyType> },
+  defaultActiveKey: { type: [Array, Number, String] as PropType<ActiveKeyType> },
+  accordion: PropTypes.looseBool,
+  destroyInactivePanel: PropTypes.looseBool,
+  bordered: PropTypes.looseBool.def(true),
+  expandIcon: PropTypes.func,
+  openAnimation: PropTypes.object.def(animation),
+  expandIconPosition: PropTypes.oneOf(tuple('left', 'right')).def('left'),
+  'onUpdate:activeKey': PropTypes.func,
+  onChange: PropTypes.func,
+};
+
+export type CollapseProps = Partial<ExtractPropTypes<typeof collapseProps>>;
+
 export default defineComponent({
   name: 'ACollapse',
   inheritAttrs: false,
-  props: {
-    prefixCls: PropTypes.string,
-    activeKey: { type: [Array, Number, String] as PropType<ActiveKeyType> },
-    defaultActiveKey: { type: [Array, Number, String] as PropType<ActiveKeyType> },
-    accordion: PropTypes.looseBool,
-    destroyInactivePanel: PropTypes.looseBool,
-    bordered: PropTypes.looseBool.def(true),
-    expandIcon: PropTypes.func,
-    openAnimation: PropTypes.object.def(animation),
-    expandIconPosition: PropTypes.oneOf(tuple('left', 'right')).def('left'),
-    'onUpdate:activeKey': PropTypes.func,
-    onChange: PropTypes.func,
-  },
+  props: collapseProps,
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

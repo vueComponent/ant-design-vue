@@ -93,10 +93,7 @@ describe('Upload List', () => {
     const wrapper = mount(Upload, props);
     setTimeout(async () => {
       expect(wrapper.findAll('.ant-upload-list-item').length).toBe(2);
-      wrapper
-        .findAll('.ant-upload-list-item')[0]
-        .find('.anticon-delete')
-        .trigger('click');
+      wrapper.findAll('.ant-upload-list-item')[0].find('.anticon-delete').trigger('click');
       await delay(400);
       // wrapper.update();
       expect(wrapper.findAll('.ant-upload-list-item').length).toBe(1);

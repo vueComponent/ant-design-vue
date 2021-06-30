@@ -100,18 +100,8 @@ export default defineComponent({
   },
 
   render() {
-    const {
-      prefixCls,
-      name,
-      id,
-      type,
-      disabled,
-      readonly,
-      tabindex,
-      autofocus,
-      value,
-      ...others
-    } = getOptionProps(this);
+    const { prefixCls, name, id, type, disabled, readonly, tabindex, autofocus, value, ...others } =
+      getOptionProps(this);
     const { class: className, onFocus, onBlur } = this.$attrs;
     const globalProps = Object.keys({ ...others, ...this.$attrs }).reduce((prev, key) => {
       if (key.substr(0, 5) === 'aria-' || key.substr(0, 5) === 'data-' || key === 'role') {

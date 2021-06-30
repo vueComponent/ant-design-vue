@@ -1,4 +1,5 @@
-import { onBeforeUnmount, onMounted, Ref } from 'vue';
+import type { Ref } from 'vue';
+import { onBeforeUnmount, onMounted } from 'vue';
 
 export default function useSelectTriggerControl(
   refs: Ref[],
@@ -6,7 +7,11 @@ export default function useSelectTriggerControl(
   triggerOpen: (open: boolean) => void,
 ) {
   function onGlobalMouseDown(event: MouseEvent) {
-    const target = event.target as HTMLElement;
+    let target = event.target as HTMLElement;
+
+    if (target.shadowRoot && event.composed) {
+      target = (event.composedPath()[0] || target) as HTMLElement;
+    }
     const elements = [refs[0]?.value, refs[1]?.value?.getPopupElement()];
     if (
       open.value &&

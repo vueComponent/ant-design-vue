@@ -50,13 +50,8 @@ const MultipleSelector = {
     },
 
     _renderPlaceholder() {
-      const {
-        prefixCls,
-        placeholder,
-        searchPlaceholder,
-        searchValue,
-        selectorValueList,
-      } = this.$props;
+      const { prefixCls, placeholder, searchPlaceholder, searchValue, selectorValueList } =
+        this.$props;
 
       const currentPlaceholder = placeholder || searchPlaceholder;
 

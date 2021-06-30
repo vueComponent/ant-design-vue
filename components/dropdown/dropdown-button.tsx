@@ -1,4 +1,5 @@
-import { provide, inject, defineComponent, VNode } from 'vue';
+import type { VNode, ExtractPropTypes } from 'vue';
+import { provide, inject, defineComponent } from 'vue';
 import Button from '../button';
 import classNames from '../_util/classNames';
 import buttonTypes from '../button/buttonTypes';
@@ -14,7 +15,7 @@ import { tuple } from '../_util/type';
 const ButtonTypesProps = buttonTypes();
 const DropdownProps = getDropdownProps();
 const ButtonGroup = Button.Group;
-const DropdownButtonProps = {
+const dropdownButtonProps = {
   ...ButtonGroupProps,
   ...DropdownProps,
   type: PropTypes.oneOf(tuple('primary', 'ghost', 'dashed', 'danger', 'default')).def('default'),
@@ -30,11 +31,11 @@ const DropdownButtonProps = {
   onVisibleChange: PropTypes.func,
   'onUpdate:visible': PropTypes.func,
 };
-export { DropdownButtonProps };
+export type DropdownButtonProps = Partial<ExtractPropTypes<typeof dropdownButtonProps>>;
 export default defineComponent({
   name: 'ADropdownButton',
   inheritAttrs: false,
-  props: DropdownButtonProps,
+  props: dropdownButtonProps,
   emits: ['click', 'visibleChange', 'update:visible'],
   setup() {
     return {

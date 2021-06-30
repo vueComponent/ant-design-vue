@@ -1,9 +1,10 @@
 import Omit from 'omit.js';
-import { FunctionalComponent } from 'vue';
+import type { FunctionalComponent } from 'vue';
 import { tupleNum } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
-import Base, { baseProps, BlockProps } from './Base';
+import type { BlockProps } from './Base';
+import Base, { baseProps } from './Base';
 
 const TITLE_ELE_LIST = tupleNum(1, 2, 3, 4, 5);
 

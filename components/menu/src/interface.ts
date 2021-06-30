@@ -1,4 +1,5 @@
-import { Key } from '../../_util/type';
+import type { Key } from '../../_util/type';
+import type { MenuItemProps } from './MenuItem';
 
 export type MenuTheme = 'light' | 'dark';
 
@@ -24,6 +25,7 @@ export interface MenuInfo {
   keyPath?: Key[];
   eventKeyPath: string[];
   domEvent: MouseEvent | KeyboardEvent;
+  item: MenuItemProps & { [key: string]: any };
 }
 
 export interface MenuTitleInfo {

@@ -1,5 +1,5 @@
-import { PropType } from 'vue';
-import { VueTypeValidableDef, VueTypeDef } from 'vue-types';
+import type { PropType } from 'vue';
+import type { VueTypeValidableDef, VueTypeDef } from 'vue-types';
 
 const initDefaultProps = <T>(
   types: T,

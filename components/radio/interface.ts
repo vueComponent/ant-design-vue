@@ -1,4 +1,4 @@
-import { RadioProps } from './Radio';
+import type { RadioProps } from './Radio';
 
 export interface RadioChangeEventTarget extends RadioProps {
   checked: boolean;

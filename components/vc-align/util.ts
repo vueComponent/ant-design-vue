@@ -1,5 +1,5 @@
 import contains from '../vc-util/Dom/contains';
-import { TargetPoint } from './interface';
+import type { TargetPoint } from './interface';
 
 export function isSamePoint(prev: TargetPoint, next: TargetPoint) {
   if (prev === next) return true;

@@ -1,12 +1,13 @@
 import { warning } from '../../vc-util/warning';
-import { cloneVNode, isVNode, VNodeChild } from 'vue';
-import {
+import type { VNodeChild } from 'vue';
+import { cloneVNode, isVNode } from 'vue';
+import type {
   OptionsType as SelectOptionsType,
   OptionData,
   OptionGroupData,
   FlattenOptionData,
 } from '../interface';
-import {
+import type {
   LabelValueType,
   FilterFunc,
   RawValueType,
@@ -120,24 +121,14 @@ export function findValueOption(
 
 export const getLabeledValue: GetLabeledValue<FlattenOptionData[]> = (
   value,
-  { options, prevValue, labelInValue, optionLabelProp },
+  { options, prevValueMap, labelInValue, optionLabelProp },
 ) => {
   const item = findValueOption([value], options)[0];
   const result: LabelValueType = {
     value,
   };
 
-  let prevValItem: LabelValueType;
-  const prevValues = toArray<LabelValueType>(prevValue as LabelValueType);
-  if (labelInValue) {
-    prevValItem = prevValues.find((prevItem: LabelValueType) => {
-      if (typeof prevItem === 'object' && 'value' in prevItem) {
-        return prevItem.value === value;
-      }
-      // [Legacy] Support `key` as `value`
-      return prevItem.key === value;
-    }) as LabelValueType;
-  }
+  const prevValItem: LabelValueType = labelInValue ? prevValueMap.get(value) : undefined;
 
   if (prevValItem && typeof prevValItem === 'object' && 'label' in prevValItem) {
     result.label = prevValItem.label;
@@ -160,6 +151,7 @@ export const getLabeledValue: GetLabeledValue<FlattenOptionData[]> = (
     }
   } else {
     result.label = value;
+    result.isCacheable = true;
   }
 
   // Used for motion control
@@ -187,9 +179,7 @@ function getFilterFunction(optionFilterProp: string) {
 
     // Group label search
     if ('options' in option) {
-      return toRawString(option.label)
-        .toLowerCase()
-        .includes(lowerSearchText);
+      return toRawString(option.label).toLowerCase().includes(lowerSearchText);
     }
     // Option value search
     const rawValue = option[optionFilterProp];
@@ -211,7 +201,7 @@ export function filterOptions(
   let filterFunc: FilterFunc<SelectOptionsType[number]>;
 
   if (filterOption === false) {
-    return options;
+    return [...options];
   }
   if (typeof filterOption === 'function') {
     filterFunc = filterOption;
@@ -286,9 +276,7 @@ export function fillOptionsWithMissingValue(
   optionLabelProp: string,
   labelInValue: boolean,
 ): SelectOptionsType {
-  const values = toArray<RawValueType | LabelValueType>(value)
-    .slice()
-    .sort();
+  const values = toArray<RawValueType | LabelValueType>(value).slice().sort();
   const cloneOptions = [...options];
 
   // Convert options value to set

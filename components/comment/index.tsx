@@ -1,7 +1,9 @@
-import { defineComponent, ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent } from 'vue';
 import PropsTypes from '../_util/vue-types';
 import { flattenChildren } from '../_util/props-util';
-import { VueNode, withInstall } from '../_util/type';
+import type { VueNode } from '../_util/type';
+import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 export const commentProps = {
   actions: PropsTypes.array,

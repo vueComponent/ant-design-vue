@@ -4,7 +4,7 @@ import ListItem from './ListItem';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { findDOMNode } from '../_util/props-util';
 import { getTransitionGroupProps, TransitionGroup } from '../_util/transition';
-import { DataSourceItem } from './list';
+import type { DataSourceItem } from './list';
 const ListBody = defineComponent({
   name: 'ListBody',
   inheritAttrs: false,

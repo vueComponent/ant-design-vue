@@ -1,4 +1,4 @@
-import { FunctionalComponent, VNodeChild } from 'vue';
+import type { FunctionalComponent, VNodeChild } from 'vue';
 import PropTypes from '../_util/vue-types';
 
 export interface TransBtnProps {

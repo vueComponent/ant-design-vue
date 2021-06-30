@@ -3,7 +3,6 @@ import moment from 'moment';
 import MockDate from 'mockdate';
 import { sleep } from '../../../tests/utils';
 import {
-  LocaleProvider,
   Pagination,
   DatePicker,
   TimePicker,
@@ -14,6 +13,7 @@ import {
   Select,
   Transfer,
 } from '../..';
+import LocaleProvider from '..';
 import arEG from '../ar_EG';
 import bgBG from '../bg_BG';
 import caES from '../ca_ES';
@@ -221,9 +221,10 @@ describe('Locale Provider', () => {
         { sync: false, attachTo: 'body' },
       );
       await sleep();
-      const currentConfirmNode = document.querySelectorAll('.ant-modal-confirm')[
-        document.querySelectorAll('.ant-modal-confirm').length - 1
-      ];
+      const currentConfirmNode =
+        document.querySelectorAll('.ant-modal-confirm')[
+          document.querySelectorAll('.ant-modal-confirm').length - 1
+        ];
       let cancelButtonText = currentConfirmNode.querySelectorAll(
         '.ant-btn:not(.ant-btn-primary) span',
       )[0].innerHTML;

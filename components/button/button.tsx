@@ -58,7 +58,7 @@ export default defineComponent({
 
     watch(
       loadingOrDelay,
-      (val) => {
+      val => {
         clearTimeout(delayTimeoutRef.value);
         if (typeof loadingOrDelay.value === 'number') {
           delayTimeoutRef.value = window.setTimeout(() => {
@@ -90,7 +90,6 @@ export default defineComponent({
           break;
       }
       return {
-        [attrs.class as string]: attrs.class,
         [`${pre}`]: true,
         [`${pre}-${type}`]: type,
         [`${pre}-${shape}`]: shape,
@@ -186,7 +185,7 @@ export default defineComponent({
         icon
       );
 
-      const kids = children.map((child) =>
+      const kids = children.map(child =>
         insertSpace(child, isNeedInserted && autoInsertSpace.value),
       );
 

@@ -1,4 +1,5 @@
-import { App, defineComponent, inject, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
+import { defineComponent, inject } from 'vue';
 import VcTreeSelect, { TreeNode, SHOW_ALL, SHOW_PARENT, SHOW_CHILD } from '../vc-tree-select';
 import classNames from '../_util/classNames';
 import { TreeSelectProps } from './interface';
@@ -197,11 +198,13 @@ const TreeSelect = defineComponent({
 });
 
 /* istanbul ignore next */
-TreeSelect.install = function(app: App) {
+TreeSelect.install = function (app: App) {
   app.component(TreeSelect.name, TreeSelect);
   app.component(TreeSelect.TreeNode.displayName, TreeSelect.TreeNode);
   return app;
 };
+
+export const TreeSelectNode = TreeSelect.TreeNode;
 
 export default TreeSelect as typeof TreeSelect &
   Plugin & {

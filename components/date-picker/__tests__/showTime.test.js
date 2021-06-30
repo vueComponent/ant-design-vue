@@ -124,30 +124,22 @@ describe('RangePicker with showTime', () => {
     );
 
     await asyncExpect(() => {
-      expect(
-        $$('.ant-calendar-time-picker-btn')[0]
-          .getAttribute('class')
-          .split(' '),
-      ).toContain('ant-calendar-time-picker-btn-disabled');
-      expect(
-        $$('.ant-calendar-ok-btn')[0]
-          .getAttribute('class')
-          .split(' '),
-      ).toContain('ant-calendar-ok-btn-disabled');
+      expect($$('.ant-calendar-time-picker-btn')[0].getAttribute('class').split(' ')).toContain(
+        'ant-calendar-time-picker-btn-disabled',
+      );
+      expect($$('.ant-calendar-ok-btn')[0].getAttribute('class').split(' ')).toContain(
+        'ant-calendar-ok-btn-disabled',
+      );
     });
     $$('.ant-calendar-date')[10].click();
     $$('.ant-calendar-date')[11].click();
     await asyncExpect(() => {
-      expect(
-        $$('.ant-calendar-time-picker-btn')[0]
-          .getAttribute('class')
-          .split(' '),
-      ).not.toContain('ant-calendar-time-picker-btn-disabled');
-      expect(
-        $$('.ant-calendar-ok-btn')[0]
-          .getAttribute('class')
-          .split(' '),
-      ).not.toContain('ant-calendar-ok-btn-disabled');
+      expect($$('.ant-calendar-time-picker-btn')[0].getAttribute('class').split(' ')).not.toContain(
+        'ant-calendar-time-picker-btn-disabled',
+      );
+      expect($$('.ant-calendar-ok-btn')[0].getAttribute('class').split(' ')).not.toContain(
+        'ant-calendar-ok-btn-disabled',
+      );
     });
     expect(onChangeFn).toHaveBeenCalled();
     expect(onOpenChangeFn).not.toHaveBeenCalled();

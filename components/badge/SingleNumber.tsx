@@ -1,4 +1,5 @@
-import { computed, CSSProperties, defineComponent, onUnmounted, reactive, ref, watch } from 'vue';
+import type { CSSProperties } from 'vue';
+import { computed, defineComponent, onUnmounted, reactive, ref, watch } from 'vue';
 import classNames from '../_util/classNames';
 
 export interface UnitNumberProps {

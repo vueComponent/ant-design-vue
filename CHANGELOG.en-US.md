@@ -10,6 +10,46 @@
 
 ---
 
+## 2.2.0-rc.1
+
+`2021-06-29`
+
+- 🌟 Change babel configuration, smaller build package size
+- 🌟 Form provides the useForm function natively, and we will deprecate the @ant-design-vue/use library
+- 🐞 Fix the issue that the Form validateFirst property does not trigger reject when there are multiple validation rules [#4273](https://github.com/vueComponent/ant-design-vue/issues/4273)
+- 🐞 Fix List circular references causing errors in Vite [#4263](https://github.com/vueComponent/ant-design-vue/issues/4263)
+- 🐞 Fix the missing item attribute problem in Menu event callback [#4290](https://github.com/vueComponent/ant-design-vue/issues/4290)
+
+## 2.2.0-beta.6
+
+`2021-06-26`
+
+- 🌟 Menu performance optimization [e8b957](https://github.com/vueComponent/ant-design-vue/commit/e8b95784eb1ee0554b0d6b17bdc14e18775f2ae6)
+- 🐞 Fix `Layout` `RangePicker` `WeekPicker` `Textarea` on-demand loading failure
+
+## 2.2.0-beta.5
+
+`2021-06-24`
+
+- 🎉 Support vite-plugin-components to be loaded on demand
+- 🎉 Refactor the List component
+- 🌟 Select adds responsive folding option [656d14](https://github.com/vueComponent/ant-design-vue/commit/656d14fc4e4ef0f781324438f0d58cfb6816d583)
+- 🐞 Fix the problem that the virtual list cannot be scrolled when the Select dynamic update option [b2aa49d](https://github.com/vueComponent/ant-design-vue/commit/b2aa49d064a83c6ce786a6bb4cd9fc5266a5964d)
+- 🐞 Fix the incorrect location of Select keyboard events [604372](https://github.com/vueComponent/ant-design-vue/commit/604372ff2da521dd580ad5229f7dbd445c1c6190)
+- 🐞 Fix the issue that AutoComplete does not support options slot [#4012](https://github.com/vueComponent/ant-design-vue/issues/4012)
+
+## 2.2.0-beta.4
+
+`2021-06-21`
+
+- 🎉 Refactor Descriptions component [#4219](https://github.com/vueComponent/ant-design-vue/issues/4219)
+- 🐞 Fix the issue that Countdown does not trigger the finish event [#4222](https://github.com/vueComponent/ant-design-vue/issues/4222)
+- 🐞 Fix ConfigProvider reporting errors under vue 3.1 [#4225](https://github.com/vueComponent/ant-design-vue/issues/4225)
+- 🐞 Fix the problem of using SubMenu under Dropdown to report an error [#4205](https://github.com/vueComponent/ant-design-vue/issues/4205)
+- 🐞 Fix Col type error [#4226](https://github.com/vueComponent/ant-design-vue/issues/4226)
+- 🐞 Fix the problem that onEnd is not triggered when Typography is out of focus [#4227](https://github.com/vueComponent/ant-design-vue/issues/4227)
+- 🐞 Fix ImagePreview style loss problem [#4231](https://github.com/vueComponent/ant-design-vue/issues/4231)
+
 ## 2.2.0-beta.3
 
 `2021-06-11`

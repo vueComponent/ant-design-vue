@@ -1,15 +1,8 @@
-import {
-  computed,
-  CSSProperties,
-  defineComponent,
-  HTMLAttributes,
-  onUnmounted,
-  PropType,
-  ref,
-} from 'vue';
+import type { CSSProperties, HTMLAttributes, PropType } from 'vue';
+import { computed, defineComponent, onUnmounted, ref } from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import classNames from '../_util/classNames';
-import { Key, VueNode } from '../_util/type';
+import type { Key, VueNode } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 
 const UNDEFINED = undefined;
@@ -78,7 +71,7 @@ export default defineComponent({
         overflowProps['aria-hidden'] = true;
       }
 
-      let itemNode = (
+      const itemNode = (
         <Component
           class={classNames(!invalidate && prefixCls)}
           style={overflowStyle}
@@ -90,19 +83,17 @@ export default defineComponent({
         </Component>
       );
 
-      if (responsive) {
-        itemNode = (
-          <ResizeObserver
-            onResize={({ offsetWidth }) => {
-              internalRegisterSize(offsetWidth);
-            }}
-          >
-            {itemNode}
-          </ResizeObserver>
-        );
-      }
-
-      return itemNode;
+      // 使用 disabled  避免结构不一致 导致子组件 rerender
+      return (
+        <ResizeObserver
+          disabled={!responsive}
+          onResize={({ offsetWidth }) => {
+            internalRegisterSize(offsetWidth);
+          }}
+        >
+          {itemNode}
+        </ResizeObserver>
+      );
     };
   },
 });

@@ -1,9 +1,10 @@
-import { defineComponent, inject, PropType, provide } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Checkbox from './Checkbox';
 import hasProp, { getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
-import { VueNode } from '../_util/type';
+import type { VueNode } from '../_util/type';
 
 export type CheckboxValueType = string | number | boolean;
 export interface CheckboxOptionType {

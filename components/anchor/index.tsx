@@ -1,11 +1,11 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Anchor, { AnchorProps } from './Anchor';
 import AnchorLink, { AnchorLinkProps } from './AnchorLink';
 
 Anchor.Link = AnchorLink;
 
 /* istanbul ignore next */
-Anchor.install = function(app: App) {
+Anchor.install = function (app: App) {
   app.component(Anchor.name, Anchor);
   app.component(Anchor.Link.name, Anchor.Link);
   return app;

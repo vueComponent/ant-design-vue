@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
+import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Button from '../button';
 import BaseMixin from '../_util/BaseMixin';

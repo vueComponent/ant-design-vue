@@ -69,10 +69,7 @@ export function getMarginStyle(index, tabBarPosition) {
 }
 
 export function getStyle(el, property) {
-  return +window
-    .getComputedStyle(el)
-    .getPropertyValue(property)
-    .replace('px', '');
+  return +window.getComputedStyle(el).getPropertyValue(property).replace('px', '');
 }
 
 export function setPxStyle(el, value, vertical) {

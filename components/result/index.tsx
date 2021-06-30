@@ -1,4 +1,5 @@
-import { App, defineComponent, VNodeTypes, Plugin, ExtractPropTypes, computed } from 'vue';
+import type { App, VNodeTypes, Plugin, ExtractPropTypes } from 'vue';
+import { defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
@@ -93,7 +94,7 @@ Result.PRESENTED_IMAGE_404 = ExceptionMap[404];
 Result.PRESENTED_IMAGE_500 = ExceptionMap[500];
 
 /* istanbul ignore next */
-Result.install = function(app: App) {
+Result.install = function (app: App) {
   app.component(Result.name, Result);
   return app;
 };

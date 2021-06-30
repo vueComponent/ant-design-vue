@@ -1,6 +1,6 @@
-import * as Vue from 'vue';
-import { VNode } from 'vue';
-import { Key, RawValueType } from './generator';
+import type * as Vue from 'vue';
+import type { VNode } from 'vue';
+import type { Key, RawValueType } from './generator';
 
 export type RenderDOMFunc = (props: any) => HTMLElement;
 

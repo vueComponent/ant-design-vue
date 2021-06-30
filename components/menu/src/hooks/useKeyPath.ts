@@ -1,6 +1,7 @@
-import { Key } from '../../../_util/type';
-import { computed, ComputedRef, inject, InjectionKey, provide } from 'vue';
-import { StoreMenuInfo } from './useMenuContext';
+import type { Key } from '../../../_util/type';
+import type { ComputedRef, InjectionKey } from 'vue';
+import { computed, inject, provide } from 'vue';
+import type { StoreMenuInfo } from './useMenuContext';
 
 const KeyPathContext: InjectionKey<{
   parentEventKeys: ComputedRef<string[]>;

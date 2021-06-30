@@ -1,4 +1,4 @@
-import { CSSProperties, VNodeTypes } from 'vue';
+import type { CSSProperties, VNodeTypes } from 'vue';
 import Notification from '../vc-notification';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
@@ -59,7 +59,7 @@ export interface MessageType {
   promise: Promise<void>;
 }
 
-export interface ArgsProps {
+export interface MessageArgsProps {
   content: VNodeTypes;
   duration: number | null;
   type: NoticeType;
@@ -70,7 +70,7 @@ export interface ArgsProps {
   class?: string;
 }
 
-function notice(args: ArgsProps): MessageType {
+function notice(args: MessageArgsProps): MessageType {
   const duration = args.duration !== undefined ? args.duration : defaultDuration;
   const Icon = iconMap[args.type];
   const iconNode = Icon ? <Icon /> : '';
@@ -115,13 +115,13 @@ function notice(args: ArgsProps): MessageType {
 }
 
 type ConfigDuration = number | (() => void);
-type JointContent = VNodeTypes | ArgsProps;
+type JointContent = VNodeTypes | MessageArgsProps;
 export type ConfigOnClose = () => void;
 
-function isArgsProps(content: JointContent): content is ArgsProps {
+function isArgsProps(content: JointContent): content is MessageArgsProps {
   return (
     Object.prototype.toString.call(content) === '[object Object]' &&
-    !!(content as ArgsProps).content
+    !!(content as MessageArgsProps).content
   );
 }
 
@@ -189,7 +189,7 @@ export interface MessageApi {
   warn(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
   warning(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
   loading(content: JointContent, duration?: ConfigDuration, onClose?: ConfigOnClose): MessageType;
-  open(args: ArgsProps): MessageType;
+  open(args: MessageArgsProps): MessageType;
   config(options: ConfigOptions): void;
   destroy(): void;
 }

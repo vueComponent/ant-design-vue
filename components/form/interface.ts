@@ -1,4 +1,4 @@
-import { VueNode } from '../_util/type';
+import type { VueNode } from '../_util/type';
 
 export type FormLabelAlign = 'left' | 'right';
 
@@ -50,11 +50,13 @@ type Validator = (
 ) => Promise<void> | void;
 
 export interface ValidatorRule {
+  warningOnly?: boolean;
   message?: string | VueNode;
   validator: Validator;
 }
 
 interface BaseRule {
+  warningOnly?: boolean;
   enum?: StoreValue[];
   len?: number;
   max?: number;
@@ -88,8 +90,13 @@ export interface ValidateErrorEntity<Values = any> {
 }
 
 export interface FieldError {
-  name: InternalNamePath;
+  name: InternalNamePath | string;
   errors: string[];
+}
+
+export interface RuleError {
+  errors: string[];
+  rule: RuleObject;
 }
 
 export interface ValidateOptions {

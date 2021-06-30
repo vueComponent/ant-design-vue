@@ -1,4 +1,5 @@
-import { App, defineComponent, ExtractPropTypes, inject, Plugin } from 'vue';
+import type { App, ExtractPropTypes, Plugin } from 'vue';
+import { defineComponent, inject } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import PropTypes, { withUndefined } from '../_util/vue-types';
@@ -70,11 +71,13 @@ const Steps = defineComponent({
 });
 
 /* istanbul ignore next */
-Steps.install = function(app: App) {
+Steps.install = function (app: App) {
   app.component(Steps.name, Steps);
   app.component(Steps.Step.name, Steps.Step);
   return app;
 };
+
+export const Step = Steps.Step;
 
 export default Steps as typeof Steps &
   Plugin & {

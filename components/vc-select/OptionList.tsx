@@ -5,15 +5,17 @@ import classNames from '../_util/classNames';
 import pickAttrs from '../_util/pickAttrs';
 import { isValidElement } from '../_util/props-util';
 import createRef from '../_util/createRef';
-import { computed, defineComponent, nextTick, reactive, VNodeChild, watch } from 'vue';
+import type { VNodeChild } from 'vue';
+import { computed, defineComponent, nextTick, reactive, watch } from 'vue';
 import List from '../vc-virtual-list/List';
-import {
+import type {
   OptionsType as SelectOptionsType,
   OptionData,
   RenderNode,
   OnActiveValue,
 } from './interface';
-import { RawValueType, FlattenOptionsType } from './interface/generator';
+import type { RawValueType, FlattenOptionsType } from './interface/generator';
+import useMemo from '../_util/hooks/useMemo';
 export interface OptionListProps {
   prefixCls: string;
   id: string;
@@ -78,6 +80,12 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
   setup(props) {
     const itemPrefixCls = computed(() => `${props.prefixCls}-item`);
 
+    const memoFlattenOptions = useMemo(
+      () => props.flattenOptions,
+      [() => props.open, () => props.flattenOptions],
+      next => next[0],
+    );
+
     // =========================== List ===========================
     const listRef = createRef();
 
@@ -93,12 +101,12 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
 
     // ========================== Active ==========================
     const getEnabledActiveIndex = (index: number, offset = 1) => {
-      const len = props.flattenOptions.length;
+      const len = memoFlattenOptions.value.length;
 
       for (let i = 0; i < len; i += 1) {
         const current = (index + i * offset + len) % len;
 
-        const { group, data } = props.flattenOptions[current];
+        const { group, data } = memoFlattenOptions.value[current];
         if (!group && !(data as OptionData).disabled) {
           return current;
         }
@@ -115,7 +123,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
       const info = { source: fromKeyboard ? ('keyboard' as const) : ('mouse' as const) };
 
       // Trigger active event
-      const flattenItem = props.flattenOptions[index];
+      const flattenItem = memoFlattenOptions.value[index];
       if (!flattenItem) {
         props.onActiveValue(null, -1, info);
         return;
@@ -127,7 +135,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
     // Auto active first item when list length or searchValue changed
 
     watch(
-      computed(() => [props.flattenOptions.length, props.searchValue]),
+      [() => memoFlattenOptions.value.length, () => props.searchValue],
       () => {
         setActive(props.defaultActiveFirstOption !== false ? getEnabledActiveIndex(0) : -1);
       },
@@ -136,11 +144,11 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
     // Auto scroll to item position in single mode
 
     watch(
-      computed(() => props.open),
+      () => props.open,
       () => {
         if (!props.multiple && props.open && props.values.size === 1) {
           const value = Array.from(props.values)[0];
-          const index = props.flattenOptions.findIndex(({ data }) => data.value === value);
+          const index = memoFlattenOptions.value.findIndex(({ data }) => data.value === value);
           setActive(index);
           scrollIntoView(index);
         }
@@ -167,7 +175,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
     };
 
     function renderItem(index: number) {
-      const item = props.flattenOptions[index];
+      const item = memoFlattenOptions.value[index];
       if (!item) return null;
 
       const itemData = (item.data || {}) as OptionData;
@@ -188,6 +196,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
       ) : null;
     }
     return {
+      memoFlattenOptions,
       renderItem,
       listRef,
       state,
@@ -220,7 +229,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
           // >>> Select
           case KeyCode.ENTER: {
             // value
-            const item = props.flattenOptions[state.activeIndex];
+            const item = memoFlattenOptions.value[state.activeIndex];
             if (item && !item.data.disabled) {
               onSelectValue(item.data.value);
             } else {
@@ -237,6 +246,9 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
           // >>> Close
           case KeyCode.ESC: {
             props.onToggleOpen(false);
+            if (props.open) {
+              event.stopPropagation();
+            }
           }
         }
       },
@@ -255,6 +267,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
       itemPrefixCls,
       setActive,
       onSelectValue,
+      memoFlattenOptions,
     } = this as any;
     const {
       id,
@@ -262,7 +275,6 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
       values,
       height,
       itemHeight,
-      flattenOptions,
       menuItemSelectedIcon,
       notFoundContent,
       virtual,
@@ -271,7 +283,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
     } = this.$props as OptionListProps;
     const { activeIndex } = this.state;
     // ========================== Render ==========================
-    if (flattenOptions.length === 0) {
+    if (memoFlattenOptions.length === 0) {
       return (
         <div
           role="listbox"
@@ -293,7 +305,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
         <List
           itemKey="key"
           ref={listRef}
-          data={flattenOptions}
+          data={memoFlattenOptions}
           height={height}
           itemHeight={itemHeight}
           fullHeight={false}

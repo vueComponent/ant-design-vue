@@ -1,4 +1,5 @@
-import { defineComponent, CSSProperties, ref, onMounted } from 'vue';
+import type { CSSProperties } from 'vue';
+import { defineComponent, ref, onMounted } from 'vue';
 /**
  * Wrap of sub component which need use as Button capacity (like Icon component).
  * This helps accessibility reader to tread as a interactive button to operation.

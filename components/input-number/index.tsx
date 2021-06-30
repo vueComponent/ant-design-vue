@@ -1,4 +1,5 @@
-import { defineComponent, inject, nextTick, onMounted, ref, PropType, ExtractPropTypes } from 'vue';
+import type { PropType, ExtractPropTypes } from 'vue';
+import { defineComponent, inject, nextTick, onMounted, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
 import classNames from '../_util/classNames';
@@ -64,7 +65,12 @@ const InputNumber = defineComponent({
   },
 
   render() {
-    const { prefixCls: customizePrefixCls, size, class: className, ...others } = {
+    const {
+      prefixCls: customizePrefixCls,
+      size,
+      class: className,
+      ...others
+    } = {
       ...getOptionProps(this),
       ...this.$attrs,
     } as any;

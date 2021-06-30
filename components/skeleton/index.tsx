@@ -1,4 +1,4 @@
-import { App, Plugin } from 'vue';
+import type { App, Plugin } from 'vue';
 import Skeleton from './Skeleton';
 import SkeletonButton from './Button';
 import SkeletonInput from './Input';
@@ -13,7 +13,7 @@ Skeleton.Input = SkeletonInput;
 Skeleton.Image = SkeletonImage;
 
 /* istanbul ignore next */
-Skeleton.install = function(app: App) {
+Skeleton.install = function (app: App) {
   app.component(Skeleton.name, Skeleton);
   app.component(Skeleton.Button.name, SkeletonButton);
   app.component(Skeleton.Avatar.name, SkeletonAvatar);
@@ -21,7 +21,7 @@ Skeleton.install = function(app: App) {
   app.component(Skeleton.Image.name, SkeletonImage);
   return app;
 };
-
+export { SkeletonButton, SkeletonAvatar, SkeletonInput, SkeletonImage };
 export default Skeleton as typeof Skeleton &
   Plugin & {
     readonly Button: typeof SkeletonButton;

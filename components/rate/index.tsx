@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, VNode } from 'vue';
+import { ExtractPropTypes, VNode, watch } from 'vue';
 import { defineComponent, ref, reactive, onMounted } from 'vue';
 import { initDefaultProps, getPropsSlot, findDOMNode } from '../_util/props-util';
 import { withInstall } from '../_util/type';
@@ -53,7 +53,12 @@ const Rate = defineComponent({
       cleanedValue: null,
       hoverValue: undefined,
     });
-
+    watch(
+      () => props.value,
+      () => {
+        state.value = props.value;
+      },
+    );
     const getStarDOM = (index: number) => {
       return findDOMNode(starRefs.value[index]);
     };
@@ -73,7 +78,9 @@ const Rate = defineComponent({
       return value;
     };
     const changeValue = (value: number) => {
-      state.value = value;
+      if (props.value === undefined) {
+        state.value = value;
+      }
       emit('update:value', value);
       emit('change', value);
     };

@@ -147,7 +147,7 @@
     "lint-staged": "^11.0.0",
     "marked": "0.3.18",
     "merge2": "^1.2.1",
-    "mini-css-extract-plugin": "^1.5.0",
+    "mini-css-extract-plugin": "^2.0.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "mockdate": "^2.0.2",

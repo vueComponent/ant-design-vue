@@ -2,9 +2,9 @@ import Button from '../index';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 import { mount } from '@vue/test-utils';
 import { nextTick } from 'vue';
-import { asyncExpect } from '@/tests/utils';
-import { sleep } from '../../../tests/utils';
-import mountTest from '../../../tests/shared/mountTest';
+import { asyncExpect, sleep } from '@/tests/utils';
+import mountTest from '@/tests/shared/mountTest';
+import { resetWarned } from '../../_util/warning';
 
 describe('Button', () => {
   mountTest(Button);
@@ -27,7 +27,7 @@ describe('Button', () => {
     expect(wrapper.find('.ant-btn-primary').exists()).toBe(true);
   });
 
-  it('renders Chinese characters correctly', done => {
+  it('renders Chinese characters correctly', (done) => {
     const wrapper = mount({
       render() {
         return <Button>按钮</Button>;
@@ -246,5 +246,52 @@ describe('Button', () => {
     expect(() => {
       wrapper.unmount();
     }).not.toThrow();
+  });
+
+  it('should warning when pass type=link and ghost=true', () => {
+    resetWarned();
+    const warnSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    mount({
+      render() {
+        return <Button type="link" ghost />;
+      },
+    });
+    expect(warnSpy).toHaveBeenCalledWith(
+      "Warning: [ant-design-vue: Button] `link` or `text` button can't be a `ghost` button.",
+    );
+    warnSpy.mockRestore();
+  });
+
+  it('should warning when pass type=text and ghost=true', () => {
+    resetWarned();
+    const warnSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    mount({
+      render() {
+        return <Button type="text" ghost />;
+      },
+    });
+    expect(warnSpy).toHaveBeenCalledWith(
+      "Warning: [ant-design-vue: Button] `link` or `text` button can't be a `ghost` button.",
+    );
+    warnSpy.mockRestore();
+  });
+
+  it('should not redirect when button is disabled', async () => {
+    const onClick = jest.fn();
+    const wrapper = mount({
+      render() {
+        return (
+          <Button href="https://ant.design" onClick={onClick} disabled>
+            click me
+          </Button>
+        );
+      },
+    });
+    await asyncExpect(() => {
+      wrapper.trigger('click');
+    });
+    await asyncExpect(() => {
+      expect(onClick).not.toHaveBeenCalled();
+    });
   });
 });

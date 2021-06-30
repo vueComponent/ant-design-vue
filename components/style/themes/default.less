@@ -189,15 +189,17 @@
 @btn-default-ghost-bg: transparent;
 @btn-default-ghost-border: @component-background;
 
-@btn-padding-base: 0 @padding-md - 1px;
 @btn-font-size-lg: @font-size-lg;
 @btn-font-size-sm: @font-size-base;
-@btn-padding-lg: @btn-padding-base;
-@btn-padding-sm: 0 @padding-xs - 1px;
+@btn-padding-horizontal-base: @padding-md - 1px;
+@btn-padding-horizontal-lg: @btn-padding-horizontal-base;
+@btn-padding-horizontal-sm: @padding-xs - 1px;
 
 @btn-height-base: 32px;
 @btn-height-lg: 40px;
 @btn-height-sm: 24px;
+
+@btn-line-height: @line-height-base;
 
 @btn-circle-size: @btn-height-base;
 @btn-circle-size-lg: @btn-height-lg;
@@ -206,9 +208,13 @@
 @btn-square-size: @btn-height-base;
 @btn-square-size-lg: @btn-height-lg;
 @btn-square-size-sm: @btn-height-sm;
+@btn-square-only-icon-size: @font-size-base + 2px;
+@btn-square-only-icon-size-sm: @font-size-base;
+@btn-square-only-icon-size-lg: @btn-font-size-lg + 2px;
 
 @btn-group-border: @primary-5;
 
+@btn-link-hover-bg: transparent;
 @btn-text-hover-bg: rgba(0, 0, 0, 0.018);
 
 // Checkbox

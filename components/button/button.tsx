@@ -176,13 +176,7 @@ export default defineComponent({
         onClick: handleClick,
       };
 
-      const iconNode = innerLoading.value ? (
-        <span class={`${prefixCls.value}-loading-icon`}>
-          <LoadingOutlined />
-        </span>
-      ) : (
-        icon
-      );
+      const iconNode = innerLoading.value ? <LoadingOutlined /> : icon;
 
       const kids = children.map(child =>
         insertSpace(child, isNeedInserted && autoInsertSpace.value),

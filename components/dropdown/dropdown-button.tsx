@@ -3,7 +3,6 @@ import { provide, inject, defineComponent } from 'vue';
 import Button from '../button';
 import classNames from '../_util/classNames';
 import buttonTypes from '../button/buttonTypes';
-import { ButtonGroupProps } from '../button/button-group';
 import Dropdown from './dropdown';
 import PropTypes from '../_util/vue-types';
 import { hasProp, getComponent, getSlot } from '../_util/props-util';
@@ -16,7 +15,6 @@ const ButtonTypesProps = buttonTypes();
 const DropdownProps = getDropdownProps();
 const ButtonGroup = Button.Group;
 const dropdownButtonProps = {
-  ...ButtonGroupProps,
   ...DropdownProps,
   type: PropTypes.oneOf(tuple('primary', 'ghost', 'dashed', 'danger', 'default')).def('default'),
   size: PropTypes.oneOf(tuple('small', 'large', 'default')).def('default'),

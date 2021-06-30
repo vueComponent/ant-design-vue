@@ -17,6 +17,8 @@ Button.install = function (app: App) {
   return app;
 };
 
+export { ButtonGroup };
+
 export default Button as typeof Button &
   Plugin & {
     readonly Group: typeof ButtonGroup;

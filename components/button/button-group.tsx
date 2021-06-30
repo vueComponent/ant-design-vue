@@ -1,4 +1,4 @@
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import { flattenChildren } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -21,10 +21,8 @@ export default defineComponent({
   props: buttonGroupProps,
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('btn-group', props);
-
-    return () => {
+    const classes = computed(() => {
       const { size } = props;
-
       // large => lg
       // small => sm
       let sizeCls = '';
@@ -38,12 +36,14 @@ export default defineComponent({
         default:
           break;
       }
-      const classes = {
+      return {
         [`${prefixCls.value}`]: true,
         [`${prefixCls.value}-${sizeCls}`]: sizeCls,
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       };
-      return <div class={classes}>{flattenChildren(slots.default?.())}</div>;
+    });
+    return () => {
+      return <div class={classes.value}>{flattenChildren(slots.default?.())}</div>;
     };
   },
 });

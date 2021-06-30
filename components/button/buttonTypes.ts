@@ -6,7 +6,7 @@ import type { SizeType } from '../config-provider';
 
 const ButtonTypes = tuple('default', 'primary', 'ghost', 'dashed', 'link', 'text');
 export type ButtonType = typeof ButtonTypes[number];
-const ButtonShapes = tuple('circle', 'circle-outline', 'round');
+const ButtonShapes = tuple('circle', 'round');
 export type ButtonShape = typeof ButtonShapes[number];
 
 const ButtonHTMLTypes = tuple('submit', 'button', 'reset');

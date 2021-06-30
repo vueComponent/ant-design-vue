@@ -136,7 +136,9 @@ export interface ModalFuncProps {
 
 type getContainerFunc = () => HTMLElement;
 
-export type ModalFunc = (props: ModalFuncProps) => {
+export type ModalFunc = (
+  props: ModalFuncProps,
+) => {
   destroy: () => void;
   update: (newConfig: ModalFuncProps) => void;
 };

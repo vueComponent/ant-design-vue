@@ -4,6 +4,7 @@ import {
   onBeforeUnmount,
   onMounted,
   onUpdated,
+  Ref,
   ref,
   Text,
   watch,
@@ -18,6 +19,8 @@ import devWarning from '../vc-util/devWarning';
 
 import type { ButtonType } from './buttonTypes';
 import type { VNode } from 'vue';
+
+type Loading = boolean | number;
 
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
@@ -38,18 +41,41 @@ export default defineComponent({
     const { prefixCls, autoInsertSpaceInButton, direction } = useConfigInject('btn', props);
 
     const buttonNodeRef = ref<HTMLElement>(null);
-    const delayTimeout = ref(undefined);
-    const iconCom = ref<VNode>(null);
-    const children = ref<VNode[]>([]);
+    const delayTimeoutRef = ref(undefined);
+    let isNeedInserted = false;
 
-    const sLoading = ref(props.loading);
+    const innerLoading: Ref<Loading> = ref(false);
     const hasTwoCNChar = ref(false);
 
     const autoInsertSpace = computed(() => autoInsertSpaceInButton.value !== false);
 
-    const getClasses = () => {
-      const { type, shape, size, ghost, block, danger } = props;
+    // =============== Update Loading ===============
+    const loadingOrDelay = computed(() =>
+      typeof props.loading === 'object' && props.loading.delay
+        ? props.loading.delay || true
+        : !!props.loading,
+    );
 
+    watch(
+      loadingOrDelay,
+      (val) => {
+        clearTimeout(delayTimeoutRef.value);
+        if (typeof loadingOrDelay.value === 'number') {
+          delayTimeoutRef.value = window.setTimeout(() => {
+            innerLoading.value = val;
+          }, loadingOrDelay.value);
+        } else {
+          innerLoading.value = val;
+        }
+      },
+      {
+        immediate: true,
+      },
+    );
+
+    const classes = computed(() => {
+      const { type, shape, size, ghost, block, danger } = props;
+      const pre = prefixCls.value;
       // large => lg
       // small => sm
       let sizeCls = '';
@@ -63,22 +89,20 @@ export default defineComponent({
         default:
           break;
       }
-      const iconType = sLoading.value ? 'loading' : iconCom.value;
       return {
         [attrs.class as string]: attrs.class,
-        [`${prefixCls.value}`]: true,
-        [`${prefixCls.value}-${type}`]: type,
-        [`${prefixCls.value}-${shape}`]: shape,
-        [`${prefixCls.value}-${sizeCls}`]: sizeCls,
-        [`${prefixCls.value}-icon-only`]: children.value.length === 0 && !!iconType,
-        [`${prefixCls.value}-loading`]: sLoading.value,
-        [`${prefixCls.value}-background-ghost`]: ghost && !isUnborderedButtonType(type),
-        [`${prefixCls.value}-two-chinese-chars`]: hasTwoCNChar.value && autoInsertSpace.value,
-        [`${prefixCls.value}-block`]: block,
-        [`${prefixCls.value}-dangerous`]: !!danger,
-        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        [`${pre}`]: true,
+        [`${pre}-${type}`]: type,
+        [`${pre}-${shape}`]: shape,
+        [`${pre}-${sizeCls}`]: sizeCls,
+        [`${pre}-loading`]: innerLoading.value,
+        [`${pre}-background-ghost`]: ghost && !isUnborderedButtonType(type),
+        [`${pre}-two-chinese-chars`]: hasTwoCNChar.value && autoInsertSpace.value,
+        [`${pre}-block`]: block,
+        [`${pre}-dangerous`]: !!danger,
+        [`${pre}-rtl`]: direction.value === 'rtl',
       };
-    };
+    });
 
     const fixTwoCNChar = () => {
       // Fix for HOC usage like <FormatMessage />
@@ -88,7 +112,7 @@ export default defineComponent({
       }
       const buttonText = node.textContent;
 
-      if (isNeedInserted() && isTwoCNChar(buttonText)) {
+      if (isNeedInserted && isTwoCNChar(buttonText)) {
         if (!hasTwoCNChar.value) {
           hasTwoCNChar.value = true;
         }
@@ -98,7 +122,7 @@ export default defineComponent({
     };
     const handleClick = (event: Event) => {
       // https://github.com/ant-design/ant-design/issues/30207
-      if (sLoading.value || props.disabled) {
+      if (innerLoading.value || props.disabled) {
         event.preventDefault();
         return;
       }
@@ -117,9 +141,6 @@ export default defineComponent({
       return child;
     };
 
-    const isNeedInserted = () =>
-      children.value.length === 1 && !iconCom.value && !isUnborderedButtonType(props.type);
-
     watchEffect(() => {
       devWarning(
         !(props.ghost && isUnborderedButtonType(props.type)),
@@ -128,50 +149,45 @@ export default defineComponent({
       );
     });
 
-    watch(
-      () => props.loading,
-      (val, preVal) => {
-        if (preVal && typeof preVal !== 'boolean') {
-          clearTimeout(delayTimeout.value);
-        }
-        if (val && typeof val !== 'boolean' && val.delay) {
-          delayTimeout.value = setTimeout(() => {
-            sLoading.value = !!val;
-          }, val.delay);
-        } else {
-          sLoading.value = !!val;
-        }
-      },
-      {
-        immediate: true,
-      },
-    );
-
     onMounted(fixTwoCNChar);
     onUpdated(fixTwoCNChar);
 
     onBeforeUnmount(() => {
-      delayTimeout.value && clearTimeout(delayTimeout.value);
+      delayTimeoutRef.value && clearTimeout(delayTimeoutRef.value);
     });
 
     return () => {
-      iconCom.value = getPropsSlot(slots, props, 'icon');
-      children.value = flattenChildren(getPropsSlot(slots, props));
+      const children = flattenChildren(getPropsSlot(slots, props));
+
+      const icon = getPropsSlot(slots, props, 'icon');
+
+      isNeedInserted = children.length === 1 && !icon && !isUnborderedButtonType(props.type);
 
       const { type, htmlType, disabled, href, title, target } = props;
-      const classes = getClasses();
 
+      const iconType = innerLoading.value ? 'loading' : icon;
       const buttonProps = {
         ...attrs,
         title,
         disabled,
-        class: classes,
+        class: [
+          classes.value,
+          attrs.class,
+          { [`${prefixCls.value}-icon-only`]: children.length === 0 && !!iconType },
+        ],
         onClick: handleClick,
       };
-      const iconNode = sLoading.value ? <LoadingOutlined /> : iconCom.value;
 
-      const kids = children.value.map((child) =>
-        insertSpace(child, isNeedInserted() && autoInsertSpace.value),
+      const iconNode = innerLoading.value ? (
+        <span class={`${prefixCls.value}-loading-icon`}>
+          <LoadingOutlined />
+        </span>
+      ) : (
+        icon
+      );
+
+      const kids = children.map((child) =>
+        insertSpace(child, isNeedInserted && autoInsertSpace.value),
       );
 
       if (href !== undefined) {

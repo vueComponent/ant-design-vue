@@ -9,6 +9,7 @@ import Search from './search';
 import Directory from './directory';
 import ReplaceFields from './replaceFields';
 import SwitcherIcon from './switcher-icon';
+import ContextMenu from './context-menu';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -48,6 +49,7 @@ export default {
           <Search />
           <Directory />
           <SwitcherIcon />
+          <ContextMenu />
         </demo-sort>
         <api>
           <template slot="cn">

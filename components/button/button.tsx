@@ -4,7 +4,6 @@ import {
   onBeforeUnmount,
   onMounted,
   onUpdated,
-  Ref,
   ref,
   Text,
   watch,
@@ -18,7 +17,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 
 import type { ButtonType } from './buttonTypes';
-import type { VNode } from 'vue';
+import type { VNode, Ref } from 'vue';
 
 type Loading = boolean | number;
 

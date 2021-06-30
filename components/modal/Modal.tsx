@@ -7,11 +7,8 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 import { getConfirmLocale } from './locale';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Button from '../button';
-import buttonTypes, {
-  ButtonProps as ButtonPropsType,
-  convertLegacyProps,
-  LegacyButtonType,
-} from '../button/buttonTypes';
+import type { ButtonProps as ButtonPropsType, LegacyButtonType } from '../button/buttonTypes';
+import buttonTypes, { convertLegacyProps } from '../button/buttonTypes';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';

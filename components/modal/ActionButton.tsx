@@ -3,7 +3,8 @@ import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Button from '../button';
 import BaseMixin from '../_util/BaseMixin';
-import { convertLegacyProps, LegacyButtonType } from '../button/buttonTypes';
+import type { LegacyButtonType } from '../button/buttonTypes';
+import { convertLegacyProps } from '../button/buttonTypes';
 import { getSlot, findDOMNode } from '../_util/props-util';
 
 const ActionButtonProps = {

@@ -3,7 +3,7 @@ import Trigger from '../../vc-trigger';
 import { placements } from './placements';
 import Content from './Content';
 import { getPropsSlot } from '../../_util/props-util';
-import { defineComponent, ref } from 'vue';
+import { defineComponent, ref, watchEffect } from 'vue';
 function noop() {}
 export default defineComponent({
   name: 'Tooltip',
@@ -29,7 +29,9 @@ export default defineComponent({
     tipId: PropTypes.string,
     builtinPlacements: PropTypes.object,
     overlayInnerStyle: PropTypes.style,
+    popupVisible: PropTypes.looseBool,
   },
+  slots: ['arrowContent', 'overlay'],
   setup(props, { slots, attrs, expose }) {
     const triggerDOM = ref();
 
@@ -41,7 +43,6 @@ export default defineComponent({
         </div>,
         <Content
           key="content"
-          trigger={triggerDOM}
           prefixCls={prefixCls}
           id={tipId}
           overlay={getPropsSlot(slots, props, 'overlay')}
@@ -54,7 +55,20 @@ export default defineComponent({
       return triggerDOM.value.getPopupDomNode();
     };
 
-    expose({ getPopupDomNode });
+    expose({ getPopupDomNode, triggerDOM });
+
+    const destroyTooltip = ref(false);
+    const autoDestroy = ref(false);
+    watchEffect(() => {
+      const { destroyTooltipOnHide } = props;
+      if (typeof destroyTooltipOnHide === 'boolean') {
+        destroyTooltip.value = destroyTooltipOnHide;
+      } else if (destroyTooltipOnHide && typeof destroyTooltipOnHide === 'object') {
+        const { keepParent } = destroyTooltipOnHide;
+        destroyTooltip.value = keepParent === true;
+        autoDestroy.value = keepParent === false;
+      }
+    });
 
     return () => {
       const {
@@ -75,6 +89,9 @@ export default defineComponent({
         ...restProps
       } = props;
       const extraProps = { ...restProps };
+      if (props.visible !== undefined) {
+        extraProps.popupVisible = props.visible;
+      }
 
       const triggerProps = {
         popupClassName: overlayClassName,
@@ -88,11 +105,11 @@ export default defineComponent({
         popupTransitionName: transitionName,
         popupAnimation: animation,
         defaultPopupVisible: defaultVisible,
-        destroyPopupOnHide: destroyTooltipOnHide,
+        destroyPopupOnHide: destroyTooltip.value,
+        autoDestroy: autoDestroy.value,
         mouseLeaveDelay,
         popupStyle: overlayStyle,
         mouseEnterDelay,
-        popupVisible: props.visible,
         ...extraProps,
         ...attrs,
         onPopupVisibleChange: (attrs.onVisibleChange as any) || noop,

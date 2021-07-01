@@ -1,4 +1,4 @@
-import { placements as rcPlacements } from '../vc-tooltip/src/placements';
+import { placements } from '../vc-tooltip/src/placements';
 
 const autoAdjustOverflowEnabled = {
   adjustX: 1,
@@ -18,14 +18,14 @@ export interface AdjustOverflow {
 }
 
 export interface PlacementsConfig {
-  arrowPointAtCenter?: boolean;
   arrowWidth?: number;
-  verticalArrowShift?: number;
   horizontalArrowShift?: number;
+  verticalArrowShift?: number;
+  arrowPointAtCenter?: boolean;
   autoAdjustOverflow?: boolean | AdjustOverflow;
 }
 
-export function getOverflowOptions(autoAdjustOverflow: boolean | AdjustOverflow) {
+export function getOverflowOptions(autoAdjustOverflow?: boolean | AdjustOverflow) {
   if (typeof autoAdjustOverflow === 'boolean') {
     return autoAdjustOverflow ? autoAdjustOverflowEnabled : autoAdjustOverflowDisabled;
   }
@@ -40,7 +40,7 @@ export default function getPlacements(config: PlacementsConfig) {
     arrowWidth = 5,
     horizontalArrowShift = 16,
     verticalArrowShift = 8,
-    autoAdjustOverflow = true,
+    autoAdjustOverflow,
   } = config;
   const placementMap = {
     left: {
@@ -100,9 +100,10 @@ export default function getPlacements(config: PlacementsConfig) {
           targetOffset,
         }
       : {
-          ...rcPlacements[key],
+          ...placements[key],
           overflow: getOverflowOptions(autoAdjustOverflow),
         };
+
     placementMap[key].ignoreShake = true;
   });
   return placementMap;

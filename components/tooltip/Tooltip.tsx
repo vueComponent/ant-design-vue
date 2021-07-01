@@ -1,8 +1,8 @@
 import type { ExtractPropTypes, CSSProperties } from 'vue';
+import { computed, watch } from 'vue';
 import { defineComponent, onMounted, ref } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import classNames from '../_util/classNames';
-import getPlacements from './placements';
 import PropTypes from '../_util/vue-types';
 import { PresetColorTypes } from '../_util/colors';
 import warning from '../_util/warning';
@@ -11,6 +11,23 @@ import { cloneElement } from '../_util/vnode';
 import type { triggerTypes, placementTypes } from './abstractTooltipProps';
 import abstractTooltipProps from './abstractTooltipProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import getPlacements, { AdjustOverflow, PlacementsConfig } from './placements';
+
+export { AdjustOverflow, PlacementsConfig };
+
+export type TooltipPlacement = typeof placementTypes;
+
+// https://github.com/react-component/tooltip
+// https://github.com/yiminghe/dom-align
+export interface TooltipAlignConfig {
+  points?: [string, string];
+  offset?: [number | string, number | string];
+  targetOffset?: [number | string, number | string];
+  overflow?: { adjustX: boolean; adjustY: boolean };
+  useCssRight?: boolean;
+  useCssBottom?: boolean;
+  useCssTransform?: boolean;
+}
 
 const splitObject = (obj: any, keys: string[]) => {
   const picked = {};
@@ -46,7 +63,7 @@ export default defineComponent({
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, getTargetContainer } = useConfigInject('tooltip', props);
 
-    const visible = ref(props.visible);
+    const visible = ref(false);
 
     const tooltip = ref();
 
@@ -57,31 +74,34 @@ export default defineComponent({
         `'defaultVisible' is deprecated, please use 'v-model:visible'`,
       );
     });
-
-    const handleVisibleChange = (bool: boolean) => {
-      visible.value = isNoTitle() ? false : bool;
-      if (!isNoTitle()) {
-        emit('update:visible', bool);
-        emit('visibleChange', bool);
-      }
-    };
+    watch(
+      () => props.visible,
+      val => {
+        visible.value = !!val;
+      },
+      { immediate: true },
+    );
 
     const isNoTitle = () => {
       const title = getPropsSlot(slots, props, 'title');
       return !title && title !== 0;
     };
 
+    const handleVisibleChange = (val: boolean) => {
+      visible.value = isNoTitle() ? false : val;
+      if (!isNoTitle()) {
+        emit('update:visible', val);
+        emit('visibleChange', val);
+      }
+    };
+
     const getPopupDomNode = () => {
       return tooltip.value.getPopupDomNode();
     };
 
-    const getVisible = () => {
-      return !!visible.value;
-    };
+    expose({ getPopupDomNode, visible });
 
-    expose({ getPopupDomNode, getVisible });
-
-    const getTooltipPlacements = () => {
+    const tooltipPlacements = computed(() => {
       const { builtinPlacements, arrowPointAtCenter, autoAdjustOverflow } = props;
       return (
         builtinPlacements ||
@@ -90,7 +110,7 @@ export default defineComponent({
           autoAdjustOverflow,
         })
       );
-    };
+    });
 
     const getDisabledCompatibleChildren = (ele: any) => {
       if (
@@ -131,21 +151,22 @@ export default defineComponent({
           },
           true,
         );
-        return <span style={spanStyle}>{child}</span>;
+        return (
+          <span style={spanStyle} class={`${prefixCls}-disabled-compatible-wrapper`}>
+            {child}
+          </span>
+        );
       }
       return ele;
     };
 
     const getOverlay = () => {
       const title = getPropsSlot(slots, props, 'title');
-      if (title === 0) {
-        return title;
-      }
-      return title || '';
+      return title ?? '';
     };
 
     const onPopupAlign = (domNode: HTMLElement, align: any) => {
-      const placements = getTooltipPlacements();
+      const placements = tooltipPlacements.value;
       // 当前返回的位置
       const placement = Object.keys(placements).filter(
         key =>
@@ -178,9 +199,11 @@ export default defineComponent({
       const { openClassName, getPopupContainer, color, overlayClassName } = props;
       let children = filterEmpty(slots.default?.()) ?? null;
       children = children.length === 1 ? children[0] : children;
+
+      let tempVisible = visible.value;
       // Hide tooltip when there is no title
-      if (!('visible' in props) && isNoTitle()) {
-        visible.value = false;
+      if (props.visible === undefined && isNoTitle()) {
+        tempVisible = false;
       }
       if (!children) {
         return null;
@@ -189,7 +212,7 @@ export default defineComponent({
         isValidElement(children) ? children : <span>{children}</span>,
       );
       const childCls = classNames({
-        [openClassName || `${prefixCls.value}-open`]: visible.value,
+        [openClassName || `${prefixCls.value}-open`]: true,
         [child.props && child.props.class]: child.props && child.props.class,
       });
       const customOverlayClassName = classNames(overlayClassName, {
@@ -207,20 +230,24 @@ export default defineComponent({
         ...props,
         prefixCls: prefixCls.value,
         getTooltipContainer: getPopupContainer || getTargetContainer.value,
-        builtinPlacements: getTooltipPlacements(),
+        builtinPlacements: tooltipPlacements.value,
         overlay: getOverlay(),
-        visible: visible.value,
+        visible: tempVisible,
         ref: tooltip,
         overlayClassName: customOverlayClassName,
         overlayInnerStyle: formattedOverlayInnerStyle,
-        arrowContent: (
-          <span class={`${prefixCls.value}-arrow-content`} style={arrowContentStyle}></span>
-        ),
         onVisibleChange: handleVisibleChange,
         onPopupAlign,
       };
       return (
-        <VcTooltip {...vcTooltipProps}>
+        <VcTooltip
+          {...vcTooltipProps}
+          v-slots={{
+            arrowContent: () => (
+              <span class={`${prefixCls.value}-arrow-content`} style={arrowContentStyle}></span>
+            ),
+          }}
+        >
           {visible.value ? cloneElement(child, { class: childCls }) : child}
         </VcTooltip>
       );

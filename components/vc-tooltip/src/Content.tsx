@@ -1,12 +1,11 @@
 import type { ExtractPropTypes } from 'vue';
-import { onUpdated, defineComponent } from 'vue';
+import { defineComponent } from 'vue';
 import PropTypes from '../../_util/vue-types';
 
 const tooltipContentProps = {
   prefixCls: PropTypes.string,
   overlay: PropTypes.any,
   id: PropTypes.string,
-  trigger: PropTypes.any,
   overlayInnerStyle: PropTypes.any,
 };
 
@@ -16,12 +15,6 @@ export default defineComponent({
   name: 'Content',
   props: tooltipContentProps,
   setup(props: TooltipContentProps) {
-    onUpdated(() => {
-      const { trigger } = props;
-      if (trigger.value) {
-        trigger.value.forcePopupAlign();
-      }
-    });
     return () => (
       <div
         class={`${props.prefixCls}-inner`}

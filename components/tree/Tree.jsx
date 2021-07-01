@@ -169,6 +169,7 @@ export default {
           title:
             $scopedSlots[scopedSlots.title] ||
             $slots[slots.title] ||
+            $scopedSlots.title ||
             restProps[replaceFields.title],
           dataRef: item,
           on,

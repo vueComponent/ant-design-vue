@@ -28,6 +28,7 @@
 | showIcon | Shows the icon before a TreeNode's title. There is no default style; you must set a custom style for it if set to `true` | boolean | false |  |
 | switcherIcon | customize collapse/expand icon of tree node | slot | - |  |
 | showLine | Shows a connecting line | boolean | false |  |
+| title | title | slot |  |  |
 
 ### Events
 

@@ -123,6 +123,7 @@ export interface ModalFuncProps {
   autoFocusButton?: null | 'ok' | 'cancel';
   transitionName?: string;
   maskTransitionName?: string;
+  parentContext?: any;
 }
 
 type getContainerFunc = () => HTMLElement;

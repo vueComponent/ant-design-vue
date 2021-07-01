@@ -1,33 +1,19 @@
 import classNames from '../_util/classNames';
-import PropTypes, { withUndefined } from '../_util/vue-types';
+import PropTypes from '../_util/vue-types';
 import { isValidElement, splitAttrs, filterEmpty } from '../_util/props-util';
-import initDefaultProps from '../_util/props-util/initDefaultProps';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import Checkbox from '../checkbox';
 import Menu from '../menu';
 import Dropdown from '../dropdown';
 import Search from './search';
-import defaultRenderList from './renderListBody';
-import triggerEvent from '../_util/triggerEvent';
-import type { VNode, VNodeTypes, ExtractPropTypes } from 'vue';
-import { defineComponent, onBeforeUnmount, ref } from 'vue';
+import ListBody from './ListBody';
+import type { VNode, VNodeTypes, ExtractPropTypes, PropType } from 'vue';
+import { watchEffect, computed } from 'vue';
+import { defineComponent, ref } from 'vue';
 import type { RadioChangeEvent } from '../radio/interface';
+import type { TransferItem } from './index';
 
 const defaultRender = () => null;
-
-const transferItem = {
-  key: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  disabled: PropTypes.looseBool,
-};
-
-export interface DataSourceItem {
-  key: string;
-  title: string;
-  description?: string;
-  disabled?: boolean;
-}
 
 function isRenderResultPlainObject(result: VNode) {
   return (
@@ -37,33 +23,28 @@ function isRenderResultPlainObject(result: VNode) {
   );
 }
 
-function getEnabledItemKeys<RecordType extends DataSourceItem>(items: RecordType[]) {
+function getEnabledItemKeys<RecordType extends TransferItem>(items: RecordType[]) {
   return items.filter(data => !data.disabled).map(data => data.key);
 }
 
 export const transferListProps = {
   prefixCls: PropTypes.string,
-  titleText: PropTypes.string,
-  dataSource: PropTypes.arrayOf(PropTypes.shape(transferItem).loose),
+  dataSource: { type: Array as PropType<TransferItem[]>, default: [] },
   filter: PropTypes.string,
   filterOption: PropTypes.func,
   checkedKeys: PropTypes.arrayOf(PropTypes.string),
   handleFilter: PropTypes.func,
   handleClear: PropTypes.func,
   renderItem: PropTypes.func,
-  showSearch: PropTypes.looseBool,
+  showSearch: PropTypes.looseBool.def(false),
   searchPlaceholder: PropTypes.string,
   notFoundContent: PropTypes.any,
   itemUnit: PropTypes.string,
   itemsUnit: PropTypes.string,
-  body: PropTypes.any,
   renderList: PropTypes.any,
-  footer: PropTypes.any,
-  lazy: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   disabled: PropTypes.looseBool,
   direction: PropTypes.string,
   showSelectAll: PropTypes.looseBool,
-  titles: PropTypes.any,
   remove: PropTypes.string,
   selectAll: PropTypes.string,
   selectCurrent: PropTypes.string,
@@ -84,27 +65,19 @@ export type TransferListProps = Partial<ExtractPropTypes<typeof transferListProp
 export default defineComponent({
   name: 'TransferList',
   inheritAttrs: false,
-  props: initDefaultProps(transferListProps, {
-    dataSource: [],
-    titleText: '',
-    showSearch: false,
-    lazy: {},
-  }),
-  emits: ['scroll', 'itemSelectAll'],
-  setup(props, { emit, attrs }) {
+  props: transferListProps,
+  emits: ['scroll', 'itemSelectAll', 'itemRemove', 'itemSelect'],
+  slots: ['footer', 'titleText'],
+  setup(props, { attrs, slots }) {
     const filterValue = ref('');
     const transferNode = ref();
     const defaultListBodyRef = ref();
-    const triggerScrollTimer = ref<number>();
-    onBeforeUnmount(() => {
-      window.clearTimeout(triggerScrollTimer.value);
-    });
 
-    const renderListNode = (renderList: any, props: any) => {
+    const renderListBody = (renderList: any, props: any) => {
       let bodyContent = renderList ? renderList(props) : null;
       const customize = !!bodyContent && filterEmpty(bodyContent).length > 0;
       if (!customize) {
-        bodyContent = defaultRenderList(props, defaultListBodyRef);
+        bodyContent = <ListBody {...props} ref={defaultListBodyRef} />;
       }
       return {
         customize,
@@ -112,96 +85,7 @@ export default defineComponent({
       };
     };
 
-    const getCheckStatus = (filteredItems: DataSourceItem[]) => {
-      const { checkedKeys } = props;
-      if (checkedKeys.length === 0) {
-        return 'none';
-      }
-      if (filteredItems.every(item => checkedKeys.indexOf(item.key) >= 0 || !!item.disabled)) {
-        return 'all';
-      }
-      return 'part';
-    };
-
-    const getFilteredItems = (dataSource: DataSourceItem[], filterValue: string) => {
-      const filteredItems = [];
-      const filteredRenderItems = [];
-
-      dataSource.forEach(item => {
-        const renderedItem = renderItemHtml(item);
-        const { renderedText } = renderedItem;
-
-        // Filter skip
-        if (filterValue && filterValue.trim() && !matchFilter(renderedText, item)) {
-          return null;
-        }
-
-        filteredItems.push(item);
-        filteredRenderItems.push(renderedItem);
-      });
-
-      return { filteredItems, filteredRenderItems };
-    };
-
-    const getCheckBox = (
-      filteredItems: DataSourceItem[],
-      showSelectAll: boolean,
-      disabled?: boolean,
-      prefixCls?: string,
-    ) => {
-      const checkStatus = getCheckStatus(filteredItems);
-      const checkedAll = checkStatus === 'all';
-      const checkAllCheckbox = showSelectAll !== false && (
-        <Checkbox
-          disabled={disabled}
-          checked={checkedAll}
-          indeterminate={checkStatus === 'part'}
-          class={`${prefixCls}-checkbox`}
-          onChange={() => {
-            // Only select enabled items
-            emit(
-              'itemSelectAll',
-              filteredItems.filter(item => !item.disabled).map(({ key }) => key),
-              !checkedAll,
-            );
-          }}
-        />
-      );
-
-      return checkAllCheckbox;
-    };
-
-    const _handleFilter = (e: RadioChangeEvent) => {
-      const { handleFilter } = props;
-      const {
-        target: { value: filter },
-      } = e;
-      handleFilter(e);
-      filterValue.value = filter;
-      if (!filter) {
-        return;
-      }
-      // Manually trigger scroll event for lazy search bug
-      // https://github.com/ant-design/ant-design/issues/5631
-      triggerScrollTimer.value = window.setTimeout(() => {
-        const listNode = transferNode.value.querySelectorAll('.ant-transfer-list-content')[0];
-        if (listNode) {
-          triggerEvent(listNode, 'scroll');
-        }
-      }, 0);
-    };
-    const _handleClear = (e: Event) => {
-      filterValue.value = '';
-      props?.handleClear(e);
-    };
-    const matchFilter = (text: string, item: DataSourceItem) => {
-      const { filterOption } = props;
-      if (filterOption) {
-        return filterOption(filterValue.value, item);
-      }
-      return text.indexOf(filterValue.value) >= 0;
-    };
-    const renderItemHtml = (item: DataSourceItem) => {
+    const renderItemHtml = (item: TransferItem) => {
       const { renderItem = defaultRender } = props;
       const renderResult = renderItem(item);
       const isRenderResultPlain = isRenderResultPlainObject(renderResult);
@@ -211,6 +95,94 @@ export default defineComponent({
         item,
       };
     };
+
+    const filteredItems = ref([]);
+    const filteredRenderItems = ref([]);
+
+    watchEffect(() => {
+      const fItems = [];
+      const fRenderItems = [];
+
+      props.dataSource.forEach(item => {
+        const renderedItem = renderItemHtml(item);
+        const { renderedText } = renderedItem;
+
+        // Filter skip
+        if (filterValue.value && filterValue.value.trim() && !matchFilter(renderedText, item)) {
+          return null;
+        }
+
+        fItems.push(item);
+        fRenderItems.push(renderedItem);
+      });
+      filteredItems.value = fItems;
+      filteredRenderItems.value = fRenderItems;
+    });
+
+    const checkStatus = computed(() => {
+      const { checkedKeys } = props;
+      if (checkedKeys.length === 0) {
+        return 'none';
+      }
+      if (
+        filteredItems.value.every(item => checkedKeys.indexOf(item.key) >= 0 || !!item.disabled)
+      ) {
+        return 'all';
+      }
+      return 'part';
+    });
+
+    const enabledItemKeys = computed(() => {
+      return getEnabledItemKeys(filteredItems.value);
+    });
+
+    const getNewSelectKeys = (keys, unCheckedKeys) => {
+      return Array.from(new Set([...keys, ...props.checkedKeys])).filter(
+        key => unCheckedKeys.indexOf(key) === -1,
+      );
+    };
+
+    const getCheckBox = (showSelectAll: boolean, disabled?: boolean, prefixCls?: string) => {
+      const checkedAll = checkStatus.value === 'all';
+      const checkAllCheckbox = showSelectAll !== false && (
+        <Checkbox
+          disabled={disabled}
+          checked={checkedAll}
+          indeterminate={checkStatus.value === 'part'}
+          class={`${prefixCls}-checkbox`}
+          onChange={() => {
+            // Only select enabled items
+
+            const keys = enabledItemKeys.value;
+            props.onItemSelectAll(
+              getNewSelectKeys(!checkedAll ? keys : [], checkedAll ? props.checkedKeys : []),
+            );
+          }}
+        />
+      );
+
+      return checkAllCheckbox;
+    };
+
+    const handleFilter = (e: RadioChangeEvent) => {
+      const {
+        target: { value: filter },
+      } = e;
+      filterValue.value = filter;
+      props.handleFilter?.(e);
+    };
+    const handleClear = (e: Event) => {
+      filterValue.value = '';
+      props.handleClear?.(e);
+    };
+    const matchFilter = (text: string, item: TransferItem) => {
+      const { filterOption } = props;
+      if (filterOption) {
+        return filterOption(filterValue.value, item);
+      }
+      return text.indexOf(filterValue.value) >= 0;
+    };
+
     const getSelectAllLabel = (selectedCount: number, totalCount: number) => {
       const { itemsUnit, itemUnit, selectAllLabel } = props;
       if (selectAllLabel) {
@@ -229,11 +201,6 @@ export default defineComponent({
     const getListBody = (
       prefixCls: string,
       searchPlaceholder: string,
-      filterValue: string,
-      filteredItems: DataSourceItem[],
-      notFoundContent: unknown,
-      bodyDom: unknown,
-      filteredRenderItems: unknown,
       checkedKeys: string[],
       renderList: Function,
       showSearch: boolean,
@@ -243,64 +210,56 @@ export default defineComponent({
         <div class={`${prefixCls}-body-search-wrapper`}>
           <Search
             prefixCls={`${prefixCls}-search`}
-            onChange={_handleFilter}
-            handleClear={_handleClear}
+            onChange={handleFilter}
+            handleClear={handleClear}
             placeholder={searchPlaceholder}
-            value={filterValue}
+            value={filterValue.value}
             disabled={disabled}
           />
         </div>
       ) : null;
 
-      let listBody = bodyDom;
-      if (!listBody) {
-        let bodyNode: VNodeTypes;
-        const { onEvents } = splitAttrs(attrs);
-        const { bodyContent, customize } = renderListNode(renderList, {
-          ...props,
-          filteredItems,
-          filteredRenderItems,
-          selectedKeys: checkedKeys,
-          ...onEvents,
-        });
+      let bodyNode: VNodeTypes;
+      const { onEvents } = splitAttrs(attrs);
+      const { bodyContent, customize } = renderListBody(renderList, {
+        ...props,
+        filteredItems: filteredItems.value,
+        filteredRenderItems: filteredRenderItems.value,
+        selectedKeys: checkedKeys,
+        ...onEvents,
+      });
 
-        // We should wrap customize list body in a classNamed div to use flex layout.
-        if (customize) {
-          bodyNode = <div class={`${prefixCls}-body-customize-wrapper`}>{bodyContent}</div>;
-        } else {
-          bodyNode = filteredItems.length ? (
-            bodyContent
-          ) : (
-            <div class={`${prefixCls}-body-not-found`}>{notFoundContent}</div>
-          );
-        }
-
-        listBody = (
-          <div
-            class={classNames(
-              showSearch ? `${prefixCls}-body ${prefixCls}-body-with-search` : `${prefixCls}-body`,
-            )}
-            ref={transferNode}
-          >
-            {search}
-            {bodyNode}
-          </div>
+      // We should wrap customize list body in a classNamed div to use flex layout.
+      if (customize) {
+        bodyNode = <div class={`${prefixCls}-body-customize-wrapper`}>{bodyContent}</div>;
+      } else {
+        bodyNode = filteredItems.value.length ? (
+          bodyContent
+        ) : (
+          <div class={`${prefixCls}-body-not-found`}>{props.notFoundContent}</div>
         );
       }
-      return listBody;
+
+      return (
+        <div
+          class={
+            showSearch ? `${prefixCls}-body ${prefixCls}-body-with-search` : `${prefixCls}-body`
+          }
+          ref={transferNode}
+        >
+          {search}
+          {bodyNode}
+        </div>
+      );
     };
+
     return () => {
       const {
         prefixCls,
-        dataSource,
-        titleText,
         checkedKeys,
         disabled,
-        body,
-        footer,
         showSearch,
         searchPlaceholder,
-        notFoundContent,
         selectAll,
         selectCurrent,
         selectInvert,
@@ -315,31 +274,18 @@ export default defineComponent({
       } = props;
 
       // Custom Layout
-      const footerDom = footer && footer({ ...props });
-      const bodyDom = body && body({ ...props });
+      const footerDom = slots.footer?.({ ...props });
 
       const listCls = classNames(prefixCls, {
         [`${prefixCls}-with-pagination`]: !!pagination,
         [`${prefixCls}-with-footer`]: !!footerDom,
       });
 
-      // ====================== Get filtered, checked item list ======================
-
-      const { filteredItems, filteredRenderItems } = getFilteredItems(
-        dataSource,
-        filterValue.value,
-      );
-
       // ================================= List Body =================================
 
       const listBody = getListBody(
         prefixCls,
         searchPlaceholder,
-        filterValue.value,
-        filteredItems,
-        notFoundContent,
-        bodyDom,
-        filteredRenderItems,
         checkedKeys,
         renderList,
         showSearch,
@@ -349,9 +295,7 @@ export default defineComponent({
       const listFooter = footerDom ? <div class={`${prefixCls}-footer`}>{footerDom}</div> : null;
 
       const checkAllCheckbox =
-        !showRemove &&
-        !pagination &&
-        getCheckBox(filteredItems, showSelectAll, disabled, prefixCls);
+        !showRemove && !pagination && getCheckBox(showSelectAll, disabled, prefixCls);
 
       let menu = null;
       if (showRemove) {
@@ -362,7 +306,7 @@ export default defineComponent({
               <Menu.Item
                 onClick={() => {
                   const pageKeys = getEnabledItemKeys(
-                    (defaultListBodyRef.value.getItems?.() || []).map(entity => entity.item),
+                    (defaultListBodyRef.value.items || []).map(entity => entity.item),
                   );
                   onItemRemove?.(pageKeys);
                 }}
@@ -374,7 +318,7 @@ export default defineComponent({
             {/* Remove All */}
             <Menu.Item
               onClick={() => {
-                onItemRemove?.(getEnabledItemKeys(filteredItems));
+                onItemRemove?.(enabledItemKeys.value);
               }}
             >
               {removeAll}
@@ -386,8 +330,8 @@ export default defineComponent({
           <Menu>
             <Menu.Item
               onClick={() => {
-                const keys = getEnabledItemKeys(filteredItems);
-                onItemSelectAll(keys, keys.length !== checkedKeys.length);
+                const keys = enabledItemKeys.value;
+                onItemSelectAll(getNewSelectKeys(keys, []));
               }}
             >
               {selectAll}
@@ -395,8 +339,10 @@ export default defineComponent({
             {pagination && (
               <Menu.Item
                 onClick={() => {
-                  const pageItems = defaultListBodyRef.value?.getItems() || [];
-                  onItemSelectAll(getEnabledItemKeys(pageItems.map(entity => entity.item)), true);
+                  const pageKeys = getEnabledItemKeys(
+                    (defaultListBodyRef.value.items || []).map(entity => entity.item),
+                  );
+                  onItemSelectAll(getNewSelectKeys(pageKeys, []));
                 }}
               >
                 {selectCurrent}
@@ -407,10 +353,10 @@ export default defineComponent({
                 let availableKeys: string[];
                 if (pagination) {
                   availableKeys = getEnabledItemKeys(
-                    (defaultListBodyRef.value?.getItems() || []).map(entity => entity.item),
+                    (defaultListBodyRef.value.items || []).map(entity => entity.item),
                   );
                 } else {
-                  availableKeys = getEnabledItemKeys(filteredItems);
+                  availableKeys = enabledItemKeys.value;
                 }
 
                 const checkedKeySet = new Set(checkedKeys);
@@ -424,9 +370,7 @@ export default defineComponent({
                     newCheckedKeys.push(key);
                   }
                 });
-
-                onItemSelectAll(newCheckedKeys, true);
-                onItemSelectAll(newUnCheckedKeys, false);
+                onItemSelectAll(getNewSelectKeys(newCheckedKeys, newUnCheckedKeys));
               }}
             >
               {selectInvert}
@@ -447,8 +391,8 @@ export default defineComponent({
             {checkAllCheckbox}
             {dropdown}
             <span class={`${prefixCls}-header-selected`}>
-              <span>{getSelectAllLabel(checkedKeys.length, filteredItems.length)}</span>
-              <span class={`${prefixCls}-header-title`}>{titleText}</span>
+              <span>{getSelectAllLabel(checkedKeys.length, filteredItems.value.length)}</span>
+              <span class={`${prefixCls}-header-title`}>{slots.titleText?.()}</span>
             </span>
           </div>
           {listBody}

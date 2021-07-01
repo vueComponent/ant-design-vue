@@ -40,7 +40,7 @@ export default defineComponent({
       const { placeholder, value, prefixCls, disabled } = props;
       const icon =
         value && value.length > 0 ? (
-          <a href="#" class={`${prefixCls}-action`} onClick={handleClearFn}>
+          <a class={`${prefixCls}-action`} onClick={handleClearFn}>
             <CloseCircleFilled />
           </a>
         ) : (

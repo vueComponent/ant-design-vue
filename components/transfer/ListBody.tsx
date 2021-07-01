@@ -1,22 +1,19 @@
 import type { ExtractPropTypes } from 'vue';
-import { defineComponent, nextTick, computed, ref, watch, onMounted, onBeforeMount } from 'vue';
+import { defineComponent, computed, ref, watch } from 'vue';
 import classNames from '../_util/classNames';
-import raf from '../_util/raf';
 import ListItem from './ListItem';
 import Pagination from '../pagination';
-import PropTypes, { withUndefined } from '../_util/vue-types';
-import type { DataSourceItem } from './list';
+import PropTypes from '../_util/vue-types';
+import type { TransferItem } from '.';
 
 export const transferListBodyProps = {
   prefixCls: PropTypes.string,
   filteredRenderItems: PropTypes.array.def([]),
-  lazy: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   selectedKeys: PropTypes.array,
   disabled: PropTypes.looseBool,
   showRemove: PropTypes.looseBool,
   pagination: PropTypes.any,
   onItemSelect: PropTypes.func,
-  onItemSelectAll: PropTypes.func,
   onScroll: PropTypes.func,
   onItemRemove: PropTypes.func,
 };
@@ -48,22 +45,15 @@ const ListBody = defineComponent({
   props: transferListBodyProps,
   emits: ['itemSelect', 'itemRemove', 'scroll'],
   setup(props, { emit, expose }) {
-    const mounted = ref<boolean>(false);
-    const mountId = ref(null);
-    const lazyId = ref(null);
-    const container = ref(null);
     const current = ref(1);
-    const itemsLength = computed(() => {
-      return props.filteredRenderItems ? props.filteredRenderItems.length : 0;
-    });
 
-    const handleItemSelect = (item: DataSourceItem) => {
+    const handleItemSelect = (item: TransferItem) => {
       const { selectedKeys } = props;
       const checked = selectedKeys.indexOf(item.key) >= 0;
       emit('itemSelect', item.key, !checked);
     };
 
-    const handleItemRemove = (item: DataSourceItem) => {
+    const handleItemRemove = (item: TransferItem) => {
       emit('itemRemove', item.key);
     };
 
@@ -71,73 +61,57 @@ const ListBody = defineComponent({
       emit('scroll', e);
     };
 
-    const getItems = () => {
-      const { pagination, filteredRenderItems } = props;
+    const mergedPagination = computed(() => parsePagination(props.pagination));
 
-      const mergedPagination = parsePagination(pagination);
+    watch(
+      [mergedPagination, () => props.filteredRenderItems],
+      () => {
+        if (mergedPagination.value) {
+          // Calculate the page number
+          const maxPageCount = Math.ceil(
+            props.filteredRenderItems.length / mergedPagination.value.pageSize,
+          );
+
+          if (current.value > maxPageCount) {
+            current.value = maxPageCount;
+          }
+        }
+      },
+      { immediate: true },
+    );
+    const items = computed(() => {
+      const { filteredRenderItems } = props;
 
       let displayItems = filteredRenderItems;
 
-      if (mergedPagination) {
+      if (mergedPagination.value) {
         displayItems = filteredRenderItems.slice(
-          (current.value - 1) * mergedPagination.pageSize,
-          current.value * mergedPagination.pageSize,
+          (current.value - 1) * mergedPagination.value.pageSize,
+          current.value * mergedPagination.value.pageSize,
         );
       }
 
       return displayItems;
-    };
+    });
 
     const onPageChange = (cur: number) => {
       current.value = cur;
     };
 
-    expose({ getItems });
-
-    onMounted(() => {
-      mountId.value = raf(() => {
-        mounted.value = true;
-      });
-    });
-
-    onBeforeMount(() => {
-      raf.cancel(mountId.value);
-      raf.cancel(lazyId.value);
-    });
-
-    watch(
-      () => itemsLength.value,
-      () => {
-        nextTick(() => {
-          const { lazy } = props;
-          if (lazy !== false) {
-            raf.cancel(lazyId);
-            lazyId.value = raf(() => {
-              if (container.value) {
-                const scrollEvent = new Event('scroll', { bubbles: true });
-                container.value.dispatchEvent(scrollEvent);
-              }
-            });
-          }
-        });
-      },
-    );
+    expose({ items });
 
     return () => {
       const {
         prefixCls,
         filteredRenderItems,
-        lazy,
         selectedKeys,
         disabled: globalDisabled,
         showRemove,
-        pagination,
       } = props;
 
-      const mergedPagination = parsePagination(pagination);
       let paginationNode = null;
 
-      if (mergedPagination) {
+      if (mergedPagination.value) {
         paginationNode = (
           <Pagination
             simple
@@ -145,14 +119,14 @@ const ListBody = defineComponent({
             disabled={globalDisabled}
             class={`${prefixCls}-pagination`}
             total={filteredRenderItems.length}
-            pageSize={mergedPagination.pageSize}
+            pageSize={mergedPagination.value.pageSize}
             current={current.value}
             onChange={onPageChange}
           />
         );
       }
 
-      const items = getItems().map(({ renderedEl, renderedText, item }: any) => {
+      const itemsList = items.value.map(({ renderedEl, renderedText, item }: any) => {
         const { disabled } = item;
         const checked = selectedKeys.indexOf(item.key) >= 0;
 
@@ -161,7 +135,6 @@ const ListBody = defineComponent({
             disabled={globalDisabled || disabled}
             key={item.key}
             item={item}
-            lazy={lazy}
             renderedText={renderedText}
             renderedEl={renderedEl}
             checked={checked}
@@ -180,7 +153,7 @@ const ListBody = defineComponent({
             })}
             onScroll={handleScroll}
           >
-            {items}
+            {itemsList}
           </ul>
           {paginationNode}
         </>
@@ -189,4 +162,4 @@ const ListBody = defineComponent({
   },
 });
 
-export default (props: TransferListBodyProps, ref) => <ListBody {...props} ref={ref} />;
+export default ListBody;

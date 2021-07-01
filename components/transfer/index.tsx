@@ -1,63 +1,58 @@
-import type { ExtractPropTypes } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import { watchEffect } from 'vue';
 import { defineComponent, ref, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
-import initDefaultProps from '../_util/props-util/initDefaultProps';
 import classNames from '../_util/classNames';
 import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
 import type { RenderEmptyHandler } from '../config-provider';
+import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import type { TransferListBodyProps } from './ListBody';
+import type { PaginationType } from './interface';
+
+export type { TransferListProps } from './list';
+export type { TransferOperationProps } from './operation';
+export type { TransferSearchProps } from './search';
 
 export type TransferDirection = 'left' | 'right';
 
-export const transferItem = {
-  key: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  description: PropTypes.string,
-  disabled: PropTypes.looseBool,
-};
+export interface RenderResultObject {
+  label: VueNode;
+  value: string;
+}
 
-export const transferProps = {
-  prefixCls: PropTypes.string,
-  dataSource: PropTypes.arrayOf(PropTypes.shape(transferItem).loose),
-  disabled: PropTypes.looseBool,
-  targetKeys: PropTypes.arrayOf(PropTypes.string),
-  selectedKeys: PropTypes.arrayOf(PropTypes.string),
-  render: PropTypes.func,
-  listStyle: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-  operationStyle: PropTypes.object,
-  titles: PropTypes.arrayOf(PropTypes.string),
-  operations: PropTypes.arrayOf(PropTypes.string),
-  showSearch: PropTypes.looseBool,
-  filterOption: PropTypes.func,
-  searchPlaceholder: PropTypes.string,
-  notFoundContent: PropTypes.any,
-  locale: PropTypes.object,
-  rowKey: PropTypes.func,
-  lazy: PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool]),
-  showSelectAll: PropTypes.looseBool,
-  selectAllLabels: PropTypes.any,
-  children: PropTypes.any,
-  oneWay: PropTypes.looseBool,
-  pagination: PropTypes.oneOfType([PropTypes.object, PropTypes.looseBool]),
-  onChange: PropTypes.func,
-  onSelectChange: PropTypes.func,
-  onSearchChange: PropTypes.func,
-  onSearch: PropTypes.func,
-  onScroll: PropTypes.func,
-  ['onUpdate:selectedKeys']: PropTypes.func,
-  ['onUpdate:targetKeys']: PropTypes.func,
-};
+export type RenderResult = VueNode | RenderResultObject | string | null;
 
-export type TransferProps = Partial<ExtractPropTypes<typeof transferProps>>;
+export interface TransferItem {
+  key?: string;
+  title?: string;
+  description?: string;
+  disabled?: boolean;
+  [name: string]: any;
+}
+
+export type KeyWise<T> = T & { key: string };
+
+export type KeyWiseTransferItem = KeyWise<TransferItem>;
+
+type TransferRender<RecordType> = (item: RecordType) => RenderResult;
+
+export interface ListStyle {
+  direction: TransferDirection;
+}
+
+export type SelectAllLabel =
+  | VueNode
+  | ((info: { selectedCount: number; totalCount: number }) => VueNode);
 
 export interface TransferLocale {
-  titles: any[];
-  notFoundContent?: any;
+  titles: VueNode[];
+  notFoundContent?: VueNode;
   searchPlaceholder: string;
   itemUnit: string;
   itemsUnit: string;
@@ -69,40 +64,71 @@ export interface TransferLocale {
   removeCurrent: string;
 }
 
+export const transferProps = {
+  prefixCls: String,
+  dataSource: { type: Array as PropType<TransferItem[]>, default: [] },
+  disabled: { type: Boolean, default: undefined },
+  targetKeys: { type: Array as PropType<string[]>, default: undefined },
+  selectedKeys: { type: Array as PropType<string[]>, default: undefined },
+  render: { type: Function as PropType<TransferRender<TransferItem>> },
+  listStyle: {
+    type: [Function, Object] as PropType<((style: ListStyle) => CSSProperties) | CSSProperties>,
+    default: () => ({}),
+  },
+  operationStyle: PropTypes.style,
+  titles: { type: Array as PropType<string[]> },
+  operations: { type: Array as PropType<string[]> },
+  showSearch: { type: Boolean, default: false },
+  filterOption: { type: Function as PropType<(inputValue: string, item: TransferItem) => boolean> },
+  searchPlaceholder: String,
+  notFoundContent: PropTypes.any,
+  locale: { type: Object as PropType<Partial<TransferLocale>>, default: () => ({}) },
+  rowKey: { type: Function as PropType<(record: TransferItem) => string> },
+  showSelectAll: { type: Boolean, default: undefined },
+  selectAllLabels: { type: Array as PropType<SelectAllLabel[]> },
+  children: { type: Function as PropType<(props: TransferListBodyProps) => VueNode> },
+  oneWay: { type: Boolean, default: undefined },
+  pagination: { type: [Object, Boolean] as PropType<PaginationType>, default: undefined },
+  onChange: PropTypes.func,
+  onSelectChange: PropTypes.func,
+  onSearchChange: PropTypes.func,
+  onSearch: PropTypes.func,
+  onScroll: PropTypes.func,
+  ['onUpdate:targetKeys']: PropTypes.func,
+};
+
+export type TransferProps = Partial<ExtractPropTypes<typeof transferProps>>;
+
 const Transfer = defineComponent({
   name: 'ATransfer',
   inheritAttrs: false,
-  props: initDefaultProps(transferProps, {
-    dataSource: [],
-    locale: {},
-    showSearch: false,
-    listStyle: () => {},
-  }),
-  emits: ['update:selectedKeys', 'update:targetKeys', 'change', 'search', 'scroll', 'selectChange'],
+  props: transferProps,
+  slots: [
+    'leftTitle',
+    'rightTitle',
+    'children',
+    'render',
+    'notFoundContent',
+    'leftSelectAllLabel',
+    'rightSelectAllLabel',
+    'footer',
+  ],
+  emits: ['update:targetKeys', 'change', 'search', 'scroll', 'selectChange', 'searchChange'],
   setup(props, { emit, attrs, slots, expose }) {
     const { configProvider, prefixCls, direction } = useConfigInject('transfer', props);
-    const sourceSelectedKeys = ref(
-      props.selectedKeys?.filter(key => props.targetKeys.indexOf(key) === -1) ?? [],
-    );
-    const targetSelectedKeys = ref(
-      props.selectedKeys?.filter(key => props.targetKeys.indexOf(key) > -1) ?? [],
-    );
+    const sourceSelectedKeys = ref([]);
+    const targetSelectedKeys = ref([]);
 
     watch(
       () => props.selectedKeys,
       () => {
-        sourceSelectedKeys.value = props.selectedKeys?.filter(
-          key => props.targetKeys.indexOf(key) === -1,
-        );
-        targetSelectedKeys.value = props.selectedKeys?.filter(
-          key => props.targetKeys.indexOf(key) > -1,
-        );
+        sourceSelectedKeys.value =
+          props.selectedKeys?.filter(key => props.targetKeys.indexOf(key) === -1) || [];
+        targetSelectedKeys.value =
+          props.selectedKeys?.filter(key => props.targetKeys.indexOf(key) > -1) || [];
       },
+      { immediate: true },
     );
-
-    const getTitles = (transferLocale: TransferLocale) => {
-      return props?.titles ?? (transferLocale.titles || ['', '']);
-    };
 
     const getLocale = (transferLocale: TransferLocale, renderEmpty: RenderEmptyHandler) => {
       // Keep old locale props still working.
@@ -113,7 +139,7 @@ const Transfer = defineComponent({
       if (notFoundContent) {
         oldLocale.notFoundContent = notFoundContent;
       }
-      if ('searchPlaceholder' in props) {
+      if (props.searchPlaceholder !== undefined) {
         oldLocale.searchPlaceholder = props.searchPlaceholder;
       }
 
@@ -148,43 +174,31 @@ const Transfer = defineComponent({
       moveTo('right');
     };
 
-    const onItemSelectAll = (
-      direction: TransferDirection,
-      selectedKeys: string[],
-      checkAll: boolean,
-    ) => {
-      const originalSelectedKeys =
-        (direction === 'left' ? sourceSelectedKeys.value : targetSelectedKeys.value) || [];
-
-      let mergedCheckedKeys = [];
-      if (checkAll) {
-        // Merge current keys with origin key
-        mergedCheckedKeys = Array.from(new Set([...originalSelectedKeys, ...selectedKeys]));
-      } else {
-        // Remove current keys from origin keys
-        mergedCheckedKeys = originalSelectedKeys.filter(key => selectedKeys.indexOf(key) === -1);
-      }
-
-      handleSelectChange(direction, mergedCheckedKeys);
+    const onItemSelectAll = (direction: TransferDirection, selectedKeys: string[]) => {
+      handleSelectChange(direction, selectedKeys);
     };
 
-    const onLeftItemSelectAll = (selectedKeys: string[], checkAll: boolean) => {
-      return onItemSelectAll('left', selectedKeys, checkAll);
+    const onLeftItemSelectAll = (selectedKeys: string[]) => {
+      return onItemSelectAll('left', selectedKeys);
     };
 
-    const onRightItemSelectAll = (selectedKeys: string[], checkAll: boolean) => {
-      return onItemSelectAll('right', selectedKeys, checkAll);
+    const onRightItemSelectAll = (selectedKeys: string[]) => {
+      return onItemSelectAll('right', selectedKeys);
     };
 
     const handleSelectChange = (direction: TransferDirection, holder: string[]) => {
       if (direction === 'left') {
-        sourceSelectedKeys.value = holder;
-        emit('update:selectedKeys', [...targetSelectedKeys.value, ...holder]);
-        emit('selectChange', holder, targetSelectedKeys);
+        if (!props.selectedKeys) {
+          sourceSelectedKeys.value = holder;
+        }
+
+        emit('selectChange', holder, targetSelectedKeys.value);
       } else {
-        targetSelectedKeys.value = holder;
-        emit('update:selectedKeys', [...sourceSelectedKeys.value, ...holder]);
-        emit('selectChange', sourceSelectedKeys, holder);
+        if (!props.selectedKeys) {
+          targetSelectedKeys.value = holder;
+        }
+
+        emit('selectChange', sourceSelectedKeys.value, holder);
       }
     };
 
@@ -248,18 +262,24 @@ const Transfer = defineComponent({
     const handleRightScroll = (e: Event) => {
       handleScroll('right', e);
     };
-    const handleListStyle = (listStyle, direction) => {
+    const handleListStyle = (
+      listStyle: ((style: ListStyle) => CSSProperties) | CSSProperties,
+      direction: TransferDirection,
+    ) => {
       if (typeof listStyle === 'function') {
         return listStyle({ direction });
       }
       return listStyle;
     };
 
-    const separateDataSource = () => {
+    const leftDataSource = ref([]);
+    const rightDataSource = ref([]);
+
+    watchEffect(() => {
       const { dataSource, rowKey, targetKeys = [] } = props;
 
-      const leftDataSource = [];
-      const rightDataSource = new Array(targetKeys.length);
+      const ld = [];
+      const rd = new Array(targetKeys.length);
       dataSource.forEach(record => {
         if (rowKey) {
           record.key = rowKey(record);
@@ -269,17 +289,15 @@ const Transfer = defineComponent({
         // leftDataSource should be ordered by dataSource
         const indexOfKey = targetKeys.indexOf(record.key);
         if (indexOfKey !== -1) {
-          rightDataSource[indexOfKey] = record;
+          rd[indexOfKey] = record;
         } else {
-          leftDataSource.push(record);
+          ld.push(record);
         }
       });
 
-      return {
-        leftDataSource,
-        rightDataSource,
-      };
-    };
+      leftDataSource.value = ld;
+      rightDataSource.value = rd;
+    });
 
     expose({ handleSelectChange });
 
@@ -291,7 +309,6 @@ const Transfer = defineComponent({
         listStyle,
         operationStyle,
         filterOption,
-        lazy,
         showSelectAll,
         selectAllLabels = [],
         oneWay,
@@ -304,9 +321,8 @@ const Transfer = defineComponent({
 
       const renderEmpty = configProvider.renderEmpty;
       const locale = getLocale(transferLocale, renderEmpty);
-      const { body, footer } = slots;
+      const { footer } = slots;
       const renderItem = props.render || slots.render;
-      const { leftDataSource, rightDataSource } = separateDataSource();
       const leftActive = targetSelectedKeys.value.length > 0;
       const rightActive = sourceSelectedKeys.value.length > 0;
 
@@ -314,15 +330,17 @@ const Transfer = defineComponent({
         [`${prefixCls.value}-disabled`]: disabled,
         [`${prefixCls.value}-customize-list`]: !!children,
       });
-      const titles = getTitles(locale);
-
+      const titles = props.titles;
+      const leftTitle =
+        (titles && titles[0]) ?? slots.leftTitle?.() ?? (locale.titles || ['', ''])[0];
+      const rightTitle =
+        (titles && titles[1]) ?? slots.rightTitle?.() ?? (locale.titles || ['', ''])[1];
       return (
         <div class={cls} style={style}>
           <List
             key="leftList"
             prefixCls={`${prefixCls.value}-list`}
-            titleText={titles[0]}
-            dataSource={leftDataSource}
+            dataSource={leftDataSource.value}
             filterOption={filterOption}
             style={handleListStyle(listStyle, 'left')}
             checkedKeys={sourceSelectedKeys.value}
@@ -332,17 +350,15 @@ const Transfer = defineComponent({
             onItemSelectAll={onLeftItemSelectAll}
             renderItem={renderItem}
             showSearch={showSearch}
-            body={body}
             renderList={children}
-            footer={footer}
-            lazy={lazy}
             onScroll={handleLeftScroll}
             disabled={disabled}
             direction="left"
             showSelectAll={showSelectAll}
-            selectAllLabel={selectAllLabels[0]}
+            selectAllLabel={selectAllLabels[0] || slots.leftSelectAllLabel}
             pagination={mergedPagination}
             {...locale}
+            v-slots={{ titleText: () => leftTitle, footer }}
           />
           <Operation
             key="operation"
@@ -361,8 +377,7 @@ const Transfer = defineComponent({
           <List
             key="rightList"
             prefixCls={`${prefixCls.value}-list`}
-            titleText={titles[1]}
-            dataSource={rightDataSource}
+            dataSource={rightDataSource.value}
             filterOption={filterOption}
             style={handleListStyle(listStyle, 'right')}
             checkedKeys={targetSelectedKeys.value}
@@ -373,17 +388,16 @@ const Transfer = defineComponent({
             onItemRemove={onRightItemRemove}
             renderItem={renderItem}
             showSearch={showSearch}
-            body={body}
             renderList={children}
-            footer={footer}
-            lazy={lazy}
             onScroll={handleRightScroll}
             disabled={disabled}
             direction="right"
             showSelectAll={showSelectAll}
+            selectAllLabel={selectAllLabels[1] || slots.rightSelectAllLabel}
             showRemove={oneWay}
             pagination={mergedPagination}
             {...locale}
+            v-slots={{ titleText: () => rightTitle, footer }}
           />
         </div>
       );

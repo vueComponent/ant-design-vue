@@ -1,9 +1,8 @@
-import PropTypes, { withUndefined } from '../_util/vue-types';
+import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import type { TransferLocale } from '.';
 import DeleteOutlined from '@ant-design/icons-vue/DeleteOutlined';
 import defaultLocale from '../locale/default';
-import Lazyload from '../vc-lazy-load';
 import Checkbox from '../checkbox';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
@@ -13,10 +12,9 @@ import { defineComponent } from 'vue';
 function noop() {}
 
 export const transferListItemProps = {
-  renderedText: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  renderedText: PropTypes.any,
   renderedEl: PropTypes.any,
   item: PropTypes.any,
-  lazy: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   checked: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   disabled: PropTypes.looseBool,
@@ -31,20 +29,10 @@ export default defineComponent({
   name: 'ListItem',
   inheritAttrs: false,
   props: transferListItemProps,
-  emits: ['click'],
+  emits: ['click', 'remove'],
   setup(props, { emit }) {
     return () => {
-      const {
-        renderedText,
-        renderedEl,
-        item,
-        lazy,
-        checked,
-        disabled,
-        prefixCls,
-        showRemove,
-        onRemove,
-      } = props;
+      const { renderedText, renderedEl, item, checked, disabled, prefixCls, showRemove } = props;
       const className = classNames({
         [`${prefixCls}-content-item`]: true,
         [`${prefixCls}-content-item-disabled`]: disabled || item.disabled,
@@ -55,24 +43,21 @@ export default defineComponent({
         title = String(renderedText);
       }
 
-      const listItem = (
+      return (
         <LocaleReceiver componentName="Transfer" defaultLocale={defaultLocale.Transfer}>
           {(transferLocale: TransferLocale) => {
             const labelNode = <span class={`${prefixCls}-content-item-text`}>{renderedEl}</span>;
             if (showRemove) {
               return (
-                <li
-                  class={className}
-                  title={title}
-                  onClick={() => {
-                    onRemove?.(item);
-                  }}
-                >
+                <li class={className} title={title}>
                   {labelNode}
                   <TransButton
                     disabled={disabled || item.disabled}
                     class={`${prefixCls}-content-item-remove`}
                     aria-label={transferLocale.remove}
+                    onClick={() => {
+                      emit('remove', item);
+                    }}
                   >
                     <DeleteOutlined />
                   </TransButton>
@@ -92,27 +77,17 @@ export default defineComponent({
                       }
                 }
               >
-                <Checkbox checked={checked} disabled={disabled || item.disabled} />
+                <Checkbox
+                  class={`${prefixCls}-checkbox`}
+                  checked={checked}
+                  disabled={disabled || item.disabled}
+                />
                 {labelNode}
               </li>
             );
           }}
         </LocaleReceiver>
       );
-      let children = null;
-      if (lazy) {
-        const lazyProps = {
-          height: 32,
-          offset: 500,
-          throttle: 0,
-          debounce: false,
-          ...(lazy as any),
-        };
-        children = <Lazyload {...lazyProps}>{listItem}</Lazyload>;
-      } else {
-        children = listItem;
-      }
-      return children;
     };
   },
 });

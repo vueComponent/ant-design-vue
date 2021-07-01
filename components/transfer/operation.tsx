@@ -60,7 +60,7 @@ const Operation: FunctionalComponent<TransferOperationProps> = props => {
     </div>
   );
 };
-
+Operation.displayName = 'Operation';
 Operation.inheritAttrs = false;
 
 export default Operation;

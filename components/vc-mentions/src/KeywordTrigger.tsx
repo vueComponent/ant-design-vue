@@ -1,8 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 import Trigger from '../../vc-trigger';
 import DropdownMenu from './DropdownMenu';
-import { OptionProps } from './Option';
-import { PlaceMent } from './placement';
+import { defineComponent } from 'vue';
 
 const BUILT_IN_PLACEMENTS = {
   bottomRight: {
@@ -23,13 +22,13 @@ const BUILT_IN_PLACEMENTS = {
   },
 };
 
-export default {
+export default defineComponent({
   name: 'KeywordTrigger',
   props: {
     loading: PropTypes.looseBool,
-    options: PropTypes.arrayOf(OptionProps),
+    options: PropTypes.array,
     prefixCls: PropTypes.string,
-    placement: PropTypes.oneOf(PlaceMent),
+    placement: PropTypes.string,
     visible: PropTypes.looseBool,
     transitionName: PropTypes.string,
     getPopupContainer: PropTypes.func,
@@ -67,4 +66,4 @@ export default {
       </Trigger>
     );
   },
-};
+});

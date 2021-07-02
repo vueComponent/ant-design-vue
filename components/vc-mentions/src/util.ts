@@ -1,20 +1,29 @@
+import type { MentionsProps } from './Mentions';
+
+interface MeasureConfig {
+  measureLocation: number;
+  prefix: string;
+  targetText: string;
+  selectionStart: number;
+  split: string;
+}
 /**
  * Cut input selection into 2 part and return text before selection start
  */
-export function getBeforeSelectionText(input) {
+export function getBeforeSelectionText(input: HTMLTextAreaElement) {
   const { selectionStart } = input;
   return input.value.slice(0, selectionStart);
 }
 
-function lower(char) {
+function lower(char: string | undefined): string {
   return (char || '').toLowerCase();
 }
 
 /**
  * Find the last match prefix index
  */
-export function getLastMeasureIndex(text, prefix = '') {
-  const prefixList = Array.isArray(prefix) ? prefix : [prefix];
+export function getLastMeasureIndex(text: string, prefix: string | string[] = '') {
+  const prefixList: string[] = Array.isArray(prefix) ? prefix : [prefix];
   return prefixList.reduce(
     (lastMatch, prefixStr) => {
       const lastIndex = text.lastIndexOf(prefixStr);
@@ -30,7 +39,7 @@ export function getLastMeasureIndex(text, prefix = '') {
   );
 }
 
-function reduceText(text, targetText, split) {
+function reduceText(text: string, targetText: string, split: string) {
   const firstChar = text[0];
   if (!firstChar || firstChar === split) {
     return text;
@@ -57,7 +66,7 @@ function reduceText(text, targetText, split) {
  *  targetText: light
  *  => little @light test
  */
-export function replaceWithMeasure(text, measureConfig) {
+export function replaceWithMeasure(text: string, measureConfig: MeasureConfig) {
   const { measureLocation, prefix, targetText, selectionStart, split } = measureConfig;
 
   // Before text will append one space if have other text
@@ -87,7 +96,7 @@ export function replaceWithMeasure(text, measureConfig) {
   };
 }
 
-export function setInputSelection(input, location) {
+export function setInputSelection(input: HTMLTextAreaElement, location: number) {
   input.setSelectionRange(location, location);
 
   /**
@@ -98,7 +107,7 @@ export function setInputSelection(input, location) {
   input.focus();
 }
 
-export function validateSearch(text = '', props = {}) {
+export function validateSearch(text: string, props: MentionsProps) {
   const { split } = props;
   return !split || text.indexOf(split) === -1;
 }

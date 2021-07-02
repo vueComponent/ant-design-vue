@@ -5,11 +5,13 @@ import {
   filterOption as defaultFilterOption,
   validateSearch as defaultValidateSearch,
 } from './util';
-import { PlaceMent } from './placement';
+import { tuple } from '../../_util/type';
+
+export const PlaceMent = tuple('top', 'bottom');
 
 export const mentionsProps = {
   autofocus: PropTypes.looseBool,
-  prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
+  prefix: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
   prefixCls: PropTypes.string,
   value: PropTypes.string,
   defaultValue: PropTypes.string,

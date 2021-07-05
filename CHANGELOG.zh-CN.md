@@ -10,6 +10,15 @@
 
 ---
 
+## 2.2.0
+
+`2021-07-06`
+
+- 🎉 重构 Button 组件，移除 type="danger"，新增 `danger` 属性 [#4291](https://github.com/vueComponent/ant-design-vue/issues/4291)
+- 🐞 修复 Rate 组件不更新问题 [#4294](https://github.com/vueComponent/ant-design-vue/issues/4294)
+- 🐞 修复 Tree replaceFields 报错问题 [#4298](https://github.com/vueComponent/ant-design-vue/issues/4298)
+- 🐞 修复 Modal 缺少 parentContext 类型问题 [#4305](https://github.com/vueComponent/ant-design-vue/issues/4305)
+
 ## 2.2.0-rc.1
 
 `2021-06-29`

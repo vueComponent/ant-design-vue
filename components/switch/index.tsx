@@ -31,6 +31,8 @@ const switchProps = {
   autofocus: PropTypes.looseBool,
   loading: PropTypes.looseBool,
   checked: PropTypes.looseBool,
+  trueValue: PropTypes.any.def(true),
+  falseValue: PropTypes.any.def(false),
   onChange: PropTypes.func,
   onClick: PropTypes.func,
   onKeydown: PropTypes.func,
@@ -59,12 +61,15 @@ const Switch = defineComponent({
         '`value` is not validate prop, do you mean `checked`?',
       );
     });
-    const checked = ref(props.checked !== undefined ? !!props.checked : !!attrs.defaultChecked);
+    const checked = ref(props.checked !== undefined ? props.checked : attrs.defaultChecked);
+    const checkedStatus = computed(() => {
+      return checked.value === props.trueValue;
+    });
 
     watch(
       () => props.checked,
       () => {
-        checked.value = !!props.checked;
+        checked.value = props.checked;
       },
     );
 
@@ -92,12 +97,9 @@ const Switch = defineComponent({
       });
     });
 
-    const setChecked = (check: boolean, e: MouseEvent | KeyboardEvent) => {
+    const setChecked = (check: any, e: MouseEvent | KeyboardEvent) => {
       if (props.disabled) {
         return;
-      }
-      if (props.checked === undefined) {
-        checked.value = check;
       }
       emit('update:checked', check);
       emit('change', check, e);
@@ -105,16 +107,16 @@ const Switch = defineComponent({
 
     const handleClick = (e: MouseEvent) => {
       focus();
-      const newChecked = !checked.value;
+      const newChecked = checkedStatus.value ? props.falseValue : props.trueValue;
       setChecked(newChecked, e);
       emit('click', newChecked, e);
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.keyCode === KeyCode.LEFT) {
-        setChecked(false, e);
+        setChecked(props.falseValue, e);
       } else if (e.keyCode === KeyCode.RIGHT) {
-        setChecked(true, e);
+        setChecked(props.trueValue, e);
       }
       emit('keydown', e);
     };
@@ -133,6 +135,8 @@ const Switch = defineComponent({
             'checked',
             'autofocus',
             'defaultChecked',
+            'trueValue',
+            'falseValue',
           ])}
           {...attrs}
           onKeydown={handleKeyDown}
@@ -147,7 +151,7 @@ const Switch = defineComponent({
             [prefixCls.value]: true,
             [`${prefixCls.value}-small`]: props.size === 'small',
             [`${prefixCls.value}-loading`]: props.loading,
-            [`${prefixCls.value}-checked`]: checked.value,
+            [`${prefixCls.value}-checked`]: checkedStatus.value,
             [`${prefixCls.value}-disabled`]: props.disabled,
           }}
           ref={refSwitchNode}

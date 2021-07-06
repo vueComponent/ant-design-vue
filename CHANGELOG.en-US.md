@@ -10,6 +10,13 @@
 
 ---
 
+## 2.2.1
+
+`2021-07-06`
+
+- 🐞 Fix the issue that the Space component does not take effect in browsers that do not support flex
+- 🐞 Fix the issue of DatePicker triggering scrolling under safari [#4323](https://github.com/vueComponent/ant-design-vue/issues/4323)
+
 ## 2.2.0
 
 `2021-07-06`

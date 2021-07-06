@@ -84,7 +84,7 @@ const Picker = defineComponent({
   updated() {
     if (!this.preSOpen && this.sOpen) {
       // setTimeout is for making sure saveCalendarRef happen before focusCalendar
-      this.focusTimeout = setTimeout(this.focusCalendar, 0);
+      this.focusTimeout = setTimeout(this.focusCalendar, 100);
     }
     this.preSOpen = this.sOpen;
   },

@@ -30,7 +30,7 @@ const switchProps = {
   tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   autofocus: PropTypes.looseBool,
   loading: PropTypes.looseBool,
-  checked: PropTypes.looseBool,
+  checked: PropTypes.any,
   trueValue: PropTypes.any.def(true),
   falseValue: PropTypes.any.def(false),
   onChange: PropTypes.func,
@@ -62,9 +62,7 @@ const Switch = defineComponent({
       );
     });
     const checked = ref(props.checked !== undefined ? props.checked : attrs.defaultChecked);
-    const checkedStatus = computed(() => {
-      return checked.value === props.trueValue;
-    });
+    const checkedStatus = computed(() => checked.value === props.trueValue);
 
     watch(
       () => props.checked,

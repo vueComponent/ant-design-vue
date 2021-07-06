@@ -20,6 +20,7 @@ import {
   TimeOrTimesType,
 } from '../_util/moment-util';
 import { tuple, withInstall } from '../_util/type';
+import classNames from '../_util/classNames';
 
 export function generateShowHourMinuteSecond(format: string) {
   // Ref: http://momentjs.com/docs/#/parsing/string-format/
@@ -213,6 +214,8 @@ const TimePicker = defineComponent({
       const { prefixCls: customizePrefixCls, getPopupContainer, placeholder, size } = props;
       const getPrefixCls = this.configProvider.getPrefixCls;
       const prefixCls = getPrefixCls('time-picker', customizePrefixCls);
+      const inputPrefixCls = getPrefixCls('input');
+      const pickerInputClass = classNames(`${prefixCls}-input`, inputPrefixCls);
 
       const format = this.getDefaultFormat();
       const pickerClassName = {
@@ -236,6 +239,7 @@ const TimePicker = defineComponent({
         ...this.$attrs,
         allowEmpty: this.getAllowClear(),
         prefixCls,
+        pickerInputClass,
         getPopupContainer: getPopupContainer || getContextPopupContainer,
         format,
         value: this.sValue,

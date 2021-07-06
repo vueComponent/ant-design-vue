@@ -283,6 +283,10 @@ export default defineComponent({
             {titleNode}
           </PopupTrigger>
         );
+      } else {
+        // 包裹一层，保持结构一致，防止动画丢失
+        // https://github.com/vueComponent/ant-design-vue/issues/4325
+        titleNode = <PopupTrigger>{titleNode}</PopupTrigger>;
       }
       return (
         <MenuContextProvider props={{ mode: renderMode }}>

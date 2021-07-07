@@ -19,7 +19,7 @@ import { tuple, withInstall } from '../_util/type';
 import { getPropsSlot } from '../_util/props-util';
 import Omit from 'omit.js';
 
-export const SwitchSizes = tuple('small', 'default', 'large');
+export const SwitchSizes = tuple('small', 'default');
 
 const switchProps = {
   prefixCls: PropTypes.string,
@@ -31,13 +31,23 @@ const switchProps = {
   autofocus: PropTypes.looseBool,
   loading: PropTypes.looseBool,
   checked: PropTypes.any,
-  trueValue: PropTypes.any.def(true),
-  falseValue: PropTypes.any.def(false),
-  onChange: PropTypes.func,
-  onClick: PropTypes.func,
-  onKeydown: PropTypes.func,
-  onMouseup: PropTypes.func,
-  'onUpdate:checked': PropTypes.func,
+  checkedValue: PropTypes.any.def(true),
+  uncheckedValue: PropTypes.any.def(false),
+  onChange: {
+    type: Function as PropType<(checked: any, e: Event) => void>,
+  },
+  onClick: {
+    type: Function as PropType<(checked: any, e: Event) => void>,
+  },
+  onKeydown: {
+    type: Function as PropType<(e: Event) => void>,
+  },
+  onMouseup: {
+    type: Function as PropType<(e: Event) => void>,
+  },
+  'onUpdate:checked': {
+    type: Function as PropType<(checked: any) => void>,
+  },
 };
 
 export type SwitchProps = Partial<ExtractPropTypes<typeof switchProps>>;
@@ -48,7 +58,7 @@ const Switch = defineComponent({
   inheritAttrs: false,
   props: switchProps,
   emits: ['update:checked', 'mouseup', 'change', 'click', 'keydown'],
-  setup(props: SwitchProps, { attrs, slots, expose, emit }) {
+  setup(props, { attrs, slots, expose, emit }) {
     onBeforeMount(() => {
       warning(
         !('defaultChecked' in attrs),

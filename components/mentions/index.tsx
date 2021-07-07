@@ -207,7 +207,7 @@ export const MentionsOption = {
 /* istanbul ignore next */
 Mentions.install = function (app: App) {
   app.component(Mentions.name, Mentions);
-  app.component('AMentionsOption', Option);
+  app.component(MentionsOption.name, MentionsOption);
   return app;
 };
 

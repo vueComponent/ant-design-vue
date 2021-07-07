@@ -1,12 +1,24 @@
 import type { MentionsProps } from './Mentions';
+import type { OptionProps } from './Option';
 
-interface MeasureConfig {
-  measureLocation: number;
-  prefix: string;
-  targetText: string;
-  selectionStart: number;
-  split: string;
-}
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+
+type OmitFunc = <T extends object, K extends [...(keyof T)[]]>(
+  obj: T,
+  ...keys: K
+) => { [K2 in Exclude<keyof T, K[number]>]: T[K2] };
+
+export const omit: OmitFunc = (obj, ...keys) => {
+  const clone = {
+    ...obj,
+  };
+  keys.forEach(key => {
+    delete clone[key];
+  });
+
+  return clone;
+};
+
 /**
  * Cut input selection into 2 part and return text before selection start
  */
@@ -15,17 +27,17 @@ export function getBeforeSelectionText(input: HTMLTextAreaElement) {
   return input.value.slice(0, selectionStart);
 }
 
-function lower(char: string | undefined): string {
-  return (char || '').toLowerCase();
+interface MeasureIndex {
+  location: number;
+  prefix: string;
 }
-
 /**
  * Find the last match prefix index
  */
-export function getLastMeasureIndex(text: string, prefix: string | string[] = '') {
+export function getLastMeasureIndex(text: string, prefix: string | string[] = ''): MeasureIndex {
   const prefixList: string[] = Array.isArray(prefix) ? prefix : [prefix];
   return prefixList.reduce(
-    (lastMatch, prefixStr) => {
+    (lastMatch: MeasureIndex, prefixStr): MeasureIndex => {
       const lastIndex = text.lastIndexOf(prefixStr);
       if (lastIndex > lastMatch.location) {
         return {
@@ -37,6 +49,18 @@ export function getLastMeasureIndex(text: string, prefix: string | string[] = ''
     },
     { location: -1, prefix: '' },
   );
+}
+
+interface MeasureConfig {
+  measureLocation: number;
+  prefix: string;
+  targetText: string;
+  selectionStart: number;
+  split: string;
+}
+
+function lower(char: string | undefined): string {
+  return (char || '').toLowerCase();
 }
 
 function reduceText(text: string, targetText: string, split: string) {
@@ -112,7 +136,7 @@ export function validateSearch(text: string, props: MentionsProps) {
   return !split || text.indexOf(split) === -1;
 }
 
-export function filterOption(input = '', { value = '' } = {}) {
+export function filterOption(input: string, { value = '' }: OptionProps): boolean {
   const lowerCase = input.toLowerCase();
   return value.toLowerCase().indexOf(lowerCase) !== -1;
 }

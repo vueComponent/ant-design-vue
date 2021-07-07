@@ -25,8 +25,8 @@ const switchProps = {
   prefixCls: PropTypes.string,
   size: PropTypes.oneOf(SwitchSizes),
   disabled: PropTypes.looseBool,
-  checkedChildren: PropTypes.any,
-  unCheckedChildren: PropTypes.any,
+  checkedChildren: PropTypes.VNodeChild,
+  unCheckedChildren: PropTypes.VNodeChild,
   tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   autofocus: PropTypes.looseBool,
   loading: PropTypes.looseBool,
@@ -133,6 +133,13 @@ const Switch = defineComponent({
       refSwitchNode.value?.blur();
       emit('mouseup', e);
     };
+
+    const classNames = computed(() => ({
+      [`${prefixCls.value}-small`]: props.size === 'small',
+      [`${prefixCls.value}-loading`]: props.loading,
+      [`${prefixCls.value}-checked`]: checkedStatus.value,
+      [`${prefixCls.value}-disabled`]: props.disabled,
+    }));
     return () => (
       <Wave insertExtraNode>
         <button
@@ -154,14 +161,13 @@ const Switch = defineComponent({
           role="switch"
           aria-checked={checked.value}
           disabled={props.disabled || props.loading}
-          class={{
-            [attrs.class as string]: attrs.class,
-            [prefixCls.value]: true,
-            [`${prefixCls.value}-small`]: props.size === 'small',
-            [`${prefixCls.value}-loading`]: props.loading,
-            [`${prefixCls.value}-checked`]: checkedStatus.value,
-            [`${prefixCls.value}-disabled`]: props.disabled,
-          }}
+          class={[
+            {
+              [attrs.class as string]: !!attrs.class,
+              [prefixCls.value]: true,
+            },
+            classNames.value,
+          ]}
           ref={refSwitchNode}
         >
           {props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null}

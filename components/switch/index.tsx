@@ -11,7 +11,7 @@ import Omit from 'omit.js';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const SwitchSizes = tuple('small', 'default');
-
+type CheckedType = boolean | string | number;
 const switchProps = {
   prefixCls: PropTypes.string,
   size: PropTypes.oneOf(SwitchSizes),
@@ -21,14 +21,20 @@ const switchProps = {
   tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   autofocus: PropTypes.looseBool,
   loading: PropTypes.looseBool,
-  checked: PropTypes.any,
-  checkedValue: PropTypes.any.def(true),
-  unCheckedValue: PropTypes.any.def(false),
+  checked: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.looseBool]),
+  checkedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.looseBool]).def(
+    true,
+  ),
+  unCheckedValue: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.looseBool,
+  ]).def(false),
   onChange: {
-    type: Function as PropType<(checked: any, e: Event) => void>,
+    type: Function as PropType<(checked: CheckedType, e: Event) => void>,
   },
   onClick: {
-    type: Function as PropType<(checked: any, e: Event) => void>,
+    type: Function as PropType<(checked: CheckedType, e: Event) => void>,
   },
   onKeydown: {
     type: Function as PropType<(e: Event) => void>,
@@ -37,7 +43,7 @@ const switchProps = {
     type: Function as PropType<(e: Event) => void>,
   },
   'onUpdate:checked': {
-    type: Function as PropType<(checked: any) => void>,
+    type: Function as PropType<(checked: CheckedType) => void>,
   },
 };
 
@@ -92,7 +98,7 @@ const Switch = defineComponent({
       });
     });
 
-    const setChecked = (check: any, e: MouseEvent | KeyboardEvent) => {
+    const setChecked = (check: CheckedType, e: MouseEvent | KeyboardEvent) => {
       if (props.disabled) {
         return;
       }

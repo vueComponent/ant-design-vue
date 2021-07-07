@@ -28,7 +28,7 @@ An enterprise-class UI components based on Ant Design and Vue 3.
 
 ## 支持环境
 
-- 现代浏览器和 IE11 及以上。1.x 版本支持 IE 9+（需要 [polyfills](https://www.antdv.com/docs/vue/getting-started-cn/#兼容性)）
+- 现代浏览器。1.x 版本支持 IE 9+（需要 [polyfills](https://www.antdv.com/docs/vue/getting-started-cn/#兼容性)）
 - 支持服务端渲染。
 - [Electron](https://electronjs.org/)
 - 支持 Vue 2 和 Vue 3

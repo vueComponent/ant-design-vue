@@ -54,7 +54,7 @@ describe('Switch', () => {
           <Switch
             {...{ 'onUpdate:checked': onUpdate }}
             checked={checked.value}
-            uncheckedValue={1}
+            unCheckedValue={1}
             checkedValue={2}
           />
         );

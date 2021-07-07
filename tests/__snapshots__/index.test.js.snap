@@ -126,6 +126,7 @@ Array [
   "TypographyText",
   "TypographyTitle",
   "Upload",
+  "UploadDragger",
   "LocaleProvider",
 ]
 `;

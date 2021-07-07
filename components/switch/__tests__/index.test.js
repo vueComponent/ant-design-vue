@@ -4,6 +4,7 @@ import focusTest from '../../../tests/shared/focusTest';
 import { resetWarned } from '../../_util/warning';
 import mountTest from '../../../tests/shared/mountTest';
 import { ref } from 'vue';
+import { asyncExpect } from '@/tests/utils';
 
 describe('Switch', () => {
   focusTest(Switch);
@@ -41,5 +42,32 @@ describe('Switch', () => {
       'Warning: [antdv: Switch] `value` is not validate prop, do you mean `checked`?',
     );
     errorSpy.mockRestore();
+  });
+
+  it('customize checked value should work', async () => {
+    resetWarned();
+    const checked = ref(1);
+    const onUpdate = val => (checked.value = val);
+    const wrapper = mount({
+      render() {
+        return (
+          <Switch
+            {...{ 'onUpdate:checked': onUpdate }}
+            checked={checked.value}
+            uncheckedValue={1}
+            checkedValue={2}
+          />
+        );
+      },
+    });
+    await asyncExpect(() => {
+      wrapper.find('button').trigger('click');
+    });
+    expect(checked.value).toBe(2);
+
+    await asyncExpect(() => {
+      wrapper.find('button').trigger('click');
+    });
+    expect(checked.value).toBe(1);
   });
 });

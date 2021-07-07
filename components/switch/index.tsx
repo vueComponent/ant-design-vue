@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import {
   defineComponent,
   inject,
@@ -62,7 +62,7 @@ const Switch = defineComponent({
       );
     });
     const checked = ref(props.checked !== undefined ? props.checked : attrs.defaultChecked);
-    const checkedStatus = computed(() => checked.value === props.trueValue);
+    const checkedStatus = computed(() => checked.value === props.checkedValue);
 
     watch(
       () => props.checked,
@@ -105,16 +105,16 @@ const Switch = defineComponent({
 
     const handleClick = (e: MouseEvent) => {
       focus();
-      const newChecked = checkedStatus.value ? props.falseValue : props.trueValue;
+      const newChecked = checkedStatus.value ? props.uncheckedValue : props.checkedValue;
       setChecked(newChecked, e);
       emit('click', newChecked, e);
     };
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.keyCode === KeyCode.LEFT) {
-        setChecked(props.falseValue, e);
+        setChecked(props.uncheckedValue, e);
       } else if (e.keyCode === KeyCode.RIGHT) {
-        setChecked(props.trueValue, e);
+        setChecked(props.checkedValue, e);
       }
       emit('keydown', e);
     };
@@ -133,8 +133,8 @@ const Switch = defineComponent({
             'checked',
             'autofocus',
             'defaultChecked',
-            'trueValue',
-            'falseValue',
+            'checkedValue',
+            'uncheckedValue',
           ])}
           {...attrs}
           onKeydown={handleKeyDown}

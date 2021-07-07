@@ -437,7 +437,6 @@
 
 ### Compatibility adjustment
 
-- The minimum supported version of IE is IE 11.
 - The minimum supported version of Vue is Vue 3.0.
 
 #### Adjusted API

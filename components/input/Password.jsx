@@ -5,6 +5,7 @@ import Icon from '../icon';
 import inputProps from './inputProps';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
+import { ConfigConsumerProps } from '../config-provider/configConsumerProps';
 
 const ActionMap = {
   click: 'click',
@@ -21,10 +22,13 @@ export default {
   },
   props: {
     ...inputProps,
-    prefixCls: PropTypes.string.def('ant-input-password'),
-    inputPrefixCls: PropTypes.string.def('ant-input'),
+    prefixCls: PropTypes.string,
+    inputPrefixCls: PropTypes.string,
     action: PropTypes.string.def('click'),
     visibilityToggle: PropTypes.bool.def(true),
+  },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
   },
   data() {
     return {
@@ -46,8 +50,8 @@ export default {
         visible: !this.visible,
       });
     },
-    getIcon() {
-      const { prefixCls, action } = this.$props;
+    getIcon(prefixCls) {
+      const { action } = this.$props;
       const iconTrigger = ActionMap[action] || '';
       const iconProps = {
         props: {
@@ -74,14 +78,19 @@ export default {
   },
   render() {
     const {
-      prefixCls,
-      inputPrefixCls,
+      prefixCls: customizePrefixCls,
+      inputPrefixCls: customizeInputPrefixCls,
       size,
       suffix,
       visibilityToggle,
       ...restProps
     } = getOptionProps(this);
-    const suffixIcon = visibilityToggle && this.getIcon();
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
+    const prefixCls = getPrefixCls('input-password', customizePrefixCls);
+
+    const suffixIcon = visibilityToggle && this.getIcon(prefixCls);
     const inputClassName = classNames(prefixCls, {
       [`${prefixCls}-${size}`]: !!size,
     });

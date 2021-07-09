@@ -339,6 +339,7 @@ export function isEmptyContent(c) {
 
 export function isEmptyElement(c) {
   return (
+    isEmptyContent(c) || 
     c.type === Comment ||
     (c.type === Fragment && c.children.length === 0) ||
     (c.type === Text && c.children.trim() === '')

@@ -1,10 +1,13 @@
 // based on rc-input-number 4.5.5
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { initDefaultProps, hasProp, getOptionProps, getListeners } from '../../_util/props-util';
+import { initDefaultProps, getOptionProps, getListeners } from '../../_util/props-util';
 import classNames from 'classnames';
 import KeyCode from '../../_util/KeyCode';
 import InputHandler from './InputHandler';
+import fill from 'lodash/fill';
+import endsWith from 'lodash/endsWith';
+import startsWith from 'lodash/startsWith';
 
 function noop() {}
 
@@ -19,7 +22,7 @@ function defaultParser(input) {
 /**
  * When click and hold on a button - the speed of auto changin the value.
  */
-const SPEED = 200;
+const SPEED = 100;
 
 /**
  * When click and hold on a button - the delay before auto changin the value.
@@ -32,6 +35,13 @@ const DELAY = 600;
  */
 const MAX_SAFE_INTEGER = Number.MAX_SAFE_INTEGER || Math.pow(2, 53) - 1;
 
+/**
+ * When onKeyDown triggered, it is necessary to recognize type of e.keyCode
+ */
+const NUMBER_KEY = 'NUMBER_KEY';
+const DECIMAIL_SP = 'DECIMAIL_SP';
+const FORMATTER_CASE = 'FORMATTER_CASE';
+
 const isValidProps = value => value !== undefined && value !== null;
 
 const isEqual = (oldValue, newValue) =>
@@ -40,6 +50,17 @@ const isEqual = (oldValue, newValue) =>
     typeof oldValue === 'number' &&
     isNaN(newValue) &&
     isNaN(oldValue));
+
+const isNumeralCharacterKey = keyCode => {
+  if (keyCode >= KeyCode.ZERO && keyCode <= KeyCode.NINE) {
+    return true;
+  }
+};
+
+const isComposingNumKey = (keyCode, code) => {
+  const numKeyEventCode = fill(new Array(10), 'Digit').map((v, i) => v + i);
+  return keyCode === 229 && numKeyEventCode.includes(code);
+};
 
 const inputNumberProps = {
   value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -77,6 +98,8 @@ const inputNumberProps = {
   name: PropTypes.string,
   type: PropTypes.string,
   id: PropTypes.string,
+  useGrouping: PropTypes.bool,
+  groupSeparator: PropTypes.string,
 };
 
 export default {
@@ -95,20 +118,21 @@ export default {
     parser: defaultParser,
     required: false,
     autoComplete: 'off',
+    useGrouping: false,
+    groupSeparator: ',',
+    decimalSeparator: '.',
   }),
   data() {
     const props = getOptionProps(this);
-    this.prevProps = { ...props };
     let value;
     if ('value' in props) {
       value = this.value;
     } else {
       value = this.defaultValue;
     }
-    const validValue = this.getValidValue(this.toNumber(value));
+    const validValue = this.getCurrentValidValue(value);
     return {
-      inputValue: this.toPrecisionAsStep(validValue),
-      sValue: validValue,
+      inputValue: validValue,
       focused: this.autoFocus,
     };
   },
@@ -117,63 +141,31 @@ export default {
       if (this.autoFocus && !this.disabled) {
         this.focus();
       }
-      this.updatedFunc();
+      // this.formatAndUpdate(this.inputValue); // TODO to update modelValue for example max < value
     });
   },
-  updated() {
-    const { value, max, min } = this.$props;
-    const { focused } = this.$data;
-    const { prevProps } = this;
-    const props = getOptionProps(this);
-    // Don't trigger in componentDidMount
-    if (prevProps) {
-      if (
-        !isEqual(prevProps.value, value) ||
-        !isEqual(prevProps.max, max) ||
-        !isEqual(prevProps.min, min)
-      ) {
-        const validValue = focused ? value : this.getValidValue(value);
-        let nextInputValue;
-        if (this.pressingUpOrDown) {
-          nextInputValue = validValue;
-        } else if (this.inputting) {
-          nextInputValue = this.rawInput;
-        } else {
-          nextInputValue = this.toPrecisionAsStep(validValue);
-        }
-        this.setState({
-          // eslint-disable-line
-          sValue: validValue,
-          inputValue: nextInputValue,
-        });
+  watch: {
+    max(newVal, oldVal) {
+      const value = this.inputValue;
+      const oldValid = this.getCurrentValidValue(value, oldVal);
+      const newValid = this.getCurrentValidValue(value, newVal);
+      if ((value || value === 0) && Number(oldValid) !== Number(newValid)) {
+        this.formatAndUpdate(value);
       }
-
-      // Trigger onChange when max or min change
-      // https://github.com/ant-design/ant-design/issues/11574
-      const nextValue = 'value' in props ? value : this.sValue;
-      // ref: null < 20 === true
-      // https://github.com/ant-design/ant-design/issues/14277
-      if (
-        'max' in props &&
-        prevProps.max !== max &&
-        typeof nextValue === 'number' &&
-        nextValue > max
-      ) {
-        this.$emit('change', max);
+    },
+    min(newVal, oldVal) {
+      const value = this.inputValue;
+      const oldValid = this.getCurrentValidValue(value, this.max, oldVal);
+      const newValid = this.getCurrentValidValue(value, this.max, newVal);
+      if ((value || value === 0) && Number(oldValid) !== Number(newValid)) {
+        this.formatAndUpdate(value);
       }
-      if (
-        'min' in props &&
-        prevProps.min !== min &&
-        typeof nextValue === 'number' &&
-        nextValue < min
-      ) {
-        this.$emit('change', min);
+    },
+    value(newVal, oldVal) {
+      if (!isEqual(newVal, oldVal)) {
+        this.formatAndUpdate(newVal, false); // avoid to emit twice
       }
-    }
-    this.prevProps = { ...props };
-    this.$nextTick(() => {
-      this.updatedFunc();
-    });
+    },
   },
   beforeDestroy() {
     this.stop();
@@ -187,36 +179,36 @@ export default {
         // This caused that if an input didn't init with the selection,
         // set will cause cursor not correct when first focus.
         // Safari will focus input if set selection. We need skip this.
-        if (this.cursorStart !== undefined && this.focused) {
+        if (this.cursorStart() !== undefined && this.focused) {
           // In most cases, the string after cursor is stable.
           // We can move the cursor before it
 
           if (
             // If not match full str, try to match part of str
-            !this.partRestoreByAfter(this.cursorAfter) &&
+            !this.partRestoreByAfter(this.cursorAfter()) &&
             this.sValue !== this.value
           ) {
             // If not match any of then, let's just keep the position
             // TODO: Logic should not reach here, need check if happens
-            let pos = this.cursorStart + 1;
+            let pos = this.cursorStart() + 1;
 
             // If not have last string, just position to the end
-            if (!this.cursorAfter) {
+            if (!this.cursorAfter()) {
               pos = inputElem.value.length;
             } else if (this.lastKeyCode === KeyCode.BACKSPACE) {
-              pos = this.cursorStart - 1;
+              pos = this.cursorStart() - 1;
             } else if (this.lastKeyCode === KeyCode.DELETE) {
-              pos = this.cursorStart;
+              pos = this.cursorStart();
             }
             this.fixCaret(pos, pos);
           } else if (this.currentValue === inputElem.value) {
             // Handle some special key code
             switch (this.lastKeyCode) {
               case KeyCode.BACKSPACE:
-                this.fixCaret(this.cursorStart - 1, this.cursorStart - 1);
+                this.fixCaret(this.cursorStart() - 1, this.cursorStart() - 1);
                 break;
               case KeyCode.DELETE:
-                this.fixCaret(this.cursorStart + 1, this.cursorStart + 1);
+                this.fixCaret(this.cursorStart() + 1, this.cursorStart() + 1);
                 break;
               default:
               // Do nothing
@@ -241,28 +233,78 @@ export default {
 
       this.pressingUpOrDown = false;
     },
-    onKeyDown(e, ...args) {
-      if (e.keyCode === KeyCode.UP) {
-        const ratio = this.getRatio(e);
-        this.up(e, ratio);
-        this.stop();
-      } else if (e.keyCode === KeyCode.DOWN) {
-        const ratio = this.getRatio(e);
-        this.down(e, ratio);
-        this.stop();
-      } else if (e.keyCode === KeyCode.ENTER) {
-        this.$emit('pressEnter', e);
+    setInputValue(val, needEmit = true) {
+      if (this.focused) {
+        this.inputting = true;
       }
+      if (val === null || val === undefined) {
+        val = '';
+      }
+      this.setState({
+        inputValue: String(val),
+      });
+      let emitValue = this.getCurrentValidValue(this.inputValue);
+      if (this.onbluring && emitValue === '') {
+        emitValue = null;
+      } else if (emitValue !== '') {
+        emitValue = Number(emitValue); // if no Number() we can get 1.000
+      }
+      if (needEmit) this.$emit('change', emitValue);
+    },
+    formatAndUpdate(value, needEmit = true) {
+      value = this.formatNumber(value);
+      this.setInputValue(value, needEmit);
+    },
+    formatNumber(value) {
+      if (String(value).length > 30) value = value.slice(0, 30);
+      value = this.getCurrentValidValue(value);
+      if (this.formatter && this.parser) return this.formatWrapper(value);
+      if (value === '') return '';
+
+      return new Intl.NumberFormat(undefined, {
+        style: 'decimal',
+        useGrouping: this.useGrouping,
+        minimumFractionDigits: this.getMaxPrecision(value),
+        maximumFractionDigits: this.getMaxPrecision(value),
+      })
+        .format(value)
+        .replace(new RegExp('\\,', 'g'), this.groupSeparator)
+        .replace(new RegExp('\\.', 'g'), this.decimalSeparator);
+    },
+    spliceText(preValue, newChar, start, end) {
+      const ret = preValue.slice(0, start) + newChar + preValue.slice(end);
+      return ret;
+    },
+    async onKeyDown(e, ...args) {
+      let eKeyCode = e.keyCode;
+      let enterChar = e.key;
+      let preValue = e.target.value;
+      if (this.formatter && this.parser && ![KeyCode.UP, KeyCode.DOWN].includes(eKeyCode)) {
+        eKeyCode = FORMATTER_CASE;
+      } else if (isNumeralCharacterKey(eKeyCode)) {
+        eKeyCode = NUMBER_KEY;
+      } else if (enterChar === this.decimalSeparator) {
+        eKeyCode = DECIMAIL_SP;
+      } else if (isComposingNumKey(eKeyCode, e.code)) {
+        eKeyCode = NUMBER_KEY;
+        enterChar = e.code.slice(-1);
+        e.preventDefault();
+        if (preValue === this.inputValue) {
+          // wait for browser repaint, otherwise duplicate value will be inserted
+          await new Promise(res => requestAnimationFrame(res)); // for windows chrome
+        } else {
+          // if preValue != this.inputValue, it means browser repaint done
+          preValue = this.inputValue; // actually for safari
+          this.fixCaretSync(this.cursorStart() - 1, this.cursorEnd() - 1);
+        }
+      }
+      this.processCaseOnKeydown(e, eKeyCode, enterChar, preValue);
       // Trigger user key down
-      this.recordCursorPosition();
       this.lastKeyCode = e.keyCode;
       this.$emit('keydown', e, ...args);
     },
     onKeyUp(e, ...args) {
       this.stop();
-
-      this.recordCursorPosition();
-
       this.$emit('keyup', e, ...args);
     },
     onTrigger(e) {
@@ -273,9 +315,19 @@ export default {
       if (this.focused) {
         this.inputting = true;
       }
-      this.rawInput = this.parser(this.getValueFromEvent(e));
-      this.setState({ inputValue: this.rawInput });
-      this.$emit('change', this.toNumber(this.rawInput)); // valid number or invalid string
+      if (this.formatter && this.parser) {
+        const value = String(e.target.value);
+        // use setInputValue instead of formatAndUpdate
+        this.setInputValue(this.formatWrapper(this.parser(value)));
+        this.$nextTick(() => {
+          this.updatedFunc();
+        });
+      } else if (e.target.value === '') {
+        // just for test input-number/__tests__/index.test.js
+        // common logic should never run into here for preventDefault on keydown
+        // composing case on safari will trigger onInput before keydown, but it need to be ignored
+        this.setInputValue('');
+      }
     },
     onFocus(...args) {
       this.setState({
@@ -284,30 +336,172 @@ export default {
       this.$emit('focus', ...args);
     },
     onBlur(...args) {
+      this.onbluring = true;
       this.inputting = false;
       this.setState({
         focused: false,
       });
-      const value = this.getCurrentValidValue(this.inputValue);
-      const newValue = this.setValue(value);
+      this.formatAndUpdate(this.$refs.inputRef.value);
+      this.$refs.inputRef.value = this.inputValue; // inputValue will be always same as value
       if (this.$listeners.blur) {
-        const originValue = this.$refs.inputRef.value;
-        const inputValue = this.getInputDisplayValue({ focused: false, sValue: newValue });
-        this.$refs.inputRef.value = inputValue;
         this.$emit('blur', ...args);
-        this.$refs.inputRef.value = originValue;
+      }
+      this.onbluring = false;
+    },
+    processCaseOnKeydown(e, eKeyCode, enterChar, preValue) {
+      switch (eKeyCode) {
+        case FORMATTER_CASE:
+        case KeyCode.DELETE:
+        case KeyCode.CTRL:
+        case KeyCode.LEFT:
+        case KeyCode.RIGHT:
+          break;
+        case KeyCode.A:
+        case KeyCode.C:
+        case KeyCode.V:
+          if ([KeyCode.CTRL, KeyCode.META].includes(this.lastKeyCode)) break;
+        default:
+          e.preventDefault();
+      }
+      let tempStr, toStart;
+      const curStart = this.cursorStart();
+      const curEnd = this.cursorEnd();
+      const curBefore = this.cursorBefore();
+      const curAfter = this.cursorAfter();
+      const originalRightCharCount = this.cursorRightCharCount();
+      const periodIndex = preValue.indexOf(this.decimalSeparator);
+      const isCursorRightOfPeriod = periodIndex != -1 && periodIndex < curStart;
+      const selectMutiChar = curEnd > curStart;
+      switch (eKeyCode) {
+        case NUMBER_KEY:
+          if (
+            isCursorRightOfPeriod &&
+            curStart === preValue.length &&
+            isValidProps(this.precision) &&
+            !selectMutiChar
+          ) {
+            this.$nextTick(() => (e.target.value = preValue)); // this line just for ComposingNum
+            break;
+          }
+          // replace the next char
+          const firstZero = curStart === 0 && startsWith(curAfter, '0');
+          const replaceNext = selectMutiChar ? 0 : isCursorRightOfPeriod || firstZero ? 1 : 0;
+          tempStr = this.spliceText(preValue, enterChar, curStart, curEnd + replaceNext);
+          this.formatAndUpdate(tempStr);
+
+          // move the cursor right
+          const moveRight = replaceNext;
+          toStart = this.inputValue.length - originalRightCharCount + moveRight;
+          if (preValue.length === 0) toStart = 1;
+          this.fixCaret(toStart, toStart);
+          break;
+
+        case KeyCode.DASH:
+          if (curStart !== 0 || preValue.includes('-') || selectMutiChar) break;
+          if (preValue.length === 0) {
+            this.setInputValue('-');
+          } else {
+            this.formatAndUpdate('-' + preValue);
+          }
+          this.fixCaret(1, 1);
+          break;
+
+        case DECIMAIL_SP:
+          if (selectMutiChar) break;
+          if (startsWith(curAfter, this.decimalSeparator)) {
+            // just move the cursor right for one step
+            this.fixCaret(curStart + 1, curStart + 1);
+            break;
+          }
+          if (
+            !isValidProps(this.precision) &&
+            !preValue.includes(this.decimalSeparator) &&
+            !startsWith(curAfter, this.groupSeparator) &&
+            curStart !== 0
+          ) {
+            tempStr = this.spliceText(preValue, enterChar, curStart, curEnd);
+            this.formatAndUpdate(tempStr);
+            if (endsWith(tempStr, this.decimalSeparator)) {
+              this.setInputValue(this.inputValue + this.decimalSeparator);
+            }
+
+            // always move the cursor to next of period
+            toStart = this.inputValue.indexOf(this.decimalSeparator) + 1;
+            this.fixCaret(toStart, toStart);
+          }
+          break;
+
+        case KeyCode.BACKSPACE:
+          if (curStart === 0) {
+            this.setInputValue('');
+            this.fixCaret(0, 0);
+            break;
+          }
+          let justMoveLeft =
+            endsWith(curBefore, this.groupSeparator) ||
+            (endsWith(curBefore, this.decimalSeparator) && isValidProps(this.precision));
+          if (selectMutiChar) justMoveLeft = false;
+          tempStr = this.spliceText(preValue, '', curStart - (selectMutiChar ? 0 : 1), curEnd);
+          if (justMoveLeft) tempStr = preValue;
+          this.formatAndUpdate(tempStr);
+
+          // move the cursor left
+          const noInteger = startsWith(tempStr, this.decimalSeparator);
+          const onlyMinus = startsWith(tempStr, `-${this.decimalSeparator}`);
+          let moveLeft = isCursorRightOfPeriod || justMoveLeft || noInteger || onlyMinus ? 1 : 0;
+          if (selectMutiChar) moveLeft = 0;
+          if (!isValidProps(this.precision)) {
+            isCursorRightOfPeriod && (moveLeft = 0);
+            if (endsWith(tempStr, this.decimalSeparator)) {
+              this.setInputValue(this.inputValue + this.decimalSeparator);
+            }
+          }
+          toStart = this.inputValue.length - originalRightCharCount - moveLeft;
+          this.fixCaret(toStart, toStart);
+          break;
+
+        case KeyCode.UP:
+          this.up(e, this.getRatio(e));
+          this.stop();
+          break;
+
+        case KeyCode.DOWN:
+          this.down(e, this.getRatio(e));
+          this.stop();
+          break;
+
+        case KeyCode.ENTER:
+          this.$emit('pressEnter', e);
+          break;
+
+        case FORMATTER_CASE:
+          break;
       }
     },
-    getCurrentValidValue(value) {
-      let val = value;
-      if (val === '') {
-        val = '';
-      } else if (!this.isNotCompleteNumber(parseFloat(val, 10))) {
-        val = this.getValidValue(val);
+    getCurrentValidValue(value, max = this.max, min = this.min) {
+      // promise to return correct num or ''
+      // typeof ret is string
+      // avoid to clear decimal digit such as 1.000 when precision is undefined
+      // should not use num.toString() / parseFloat / Number() directly
+      if (this.formatter && this.parser) {
+        value = this.parser(String(value));
       } else {
-        val = this.sValue;
+        value = String(value)
+          .replace(new RegExp('\\' + this.groupSeparator, 'g'), '')
+          .replace(new RegExp('\\' + this.decimalSeparator, 'g'), '.');
       }
-      return this.toNumber(val);
+      value = this.toPrecisionAsStep(value);
+      if (this.isNotCompleteNumber(value)) {
+        value = parseFloat(value);
+      }
+      if (isNaN(value) || value === '') return '';
+      if (isValidProps(min) && !isNaN(min)) {
+        value = value < min ? min : value;
+      }
+      if (isValidProps(max) && !isNaN(max)) {
+        value = value > max ? max : value;
+      }
+      return value;
     },
     getRatio(e) {
       let ratio = 1;
@@ -317,63 +511,6 @@ export default {
         ratio = 10;
       }
       return ratio;
-    },
-    getValueFromEvent(e) {
-      // optimize for chinese input expierence
-      // https://github.com/ant-design/ant-design/issues/8196
-      let value = e.target.value.trim().replace(/。/g, '.');
-
-      if (isValidProps(this.decimalSeparator)) {
-        value = value.replace(this.decimalSeparator, '.');
-      }
-
-      return value;
-    },
-    getValidValue(value, min = this.min, max = this.max) {
-      let val = parseFloat(value, 10);
-      // https://github.com/ant-design/ant-design/issues/7358
-      if (isNaN(val)) {
-        return value;
-      }
-      if (val < min) {
-        val = min;
-      }
-      if (val > max) {
-        val = max;
-      }
-      return val;
-    },
-    setValue(v, callback) {
-      // trigger onChange
-      const { precision } = this.$props;
-      const newValue = this.isNotCompleteNumber(parseFloat(v, 10)) ? null : parseFloat(v, 10);
-      const { sValue: value = null, inputValue = null } = this.$data;
-      // https://github.com/ant-design/ant-design/issues/7363
-      // https://github.com/ant-design/ant-design/issues/16622
-      const newValueInString =
-        typeof newValue === 'number' ? newValue.toFixed(precision) : `${newValue}`;
-      const changed = newValue !== value || newValueInString !== `${inputValue}`;
-      if (!hasProp(this, 'value')) {
-        this.setState(
-          {
-            sValue: newValue,
-            inputValue: this.toPrecisionAsStep(v),
-          },
-          callback,
-        );
-      } else {
-        // always set input value same as value
-        this.setState(
-          {
-            inputValue: this.toPrecisionAsStep(this.sValue),
-          },
-          callback,
-        );
-      }
-      if (changed) {
-        this.$emit('change', newValue);
-      }
-      return newValue;
     },
     getPrecision(value) {
       if (isValidProps(this.precision)) {
@@ -411,44 +548,39 @@ export default {
       const precision = this.getMaxPrecision(currentValue, ratio);
       return Math.pow(10, precision);
     },
-    getInputDisplayValue(state) {
-      const { focused, inputValue, sValue } = state || this.$data;
-      let inputDisplayValue;
-      if (focused) {
-        inputDisplayValue = inputValue;
-      } else {
-        inputDisplayValue = this.toPrecisionAsStep(sValue);
-      }
-
-      if (inputDisplayValue === undefined || inputDisplayValue === null) {
-        inputDisplayValue = '';
-      }
-
-      let inputDisplayValueFormat = this.formatWrapper(inputDisplayValue);
-      if (isValidProps(this.$props.decimalSeparator)) {
-        inputDisplayValueFormat = inputDisplayValueFormat
-          .toString()
-          .replace('.', this.$props.decimalSeparator);
-      }
-
-      return inputDisplayValueFormat;
-    },
-    recordCursorPosition() {
-      // Record position
+    cursorStart() {
       try {
-        const inputElem = this.$refs.inputRef;
-        this.cursorStart = inputElem.selectionStart;
-        this.cursorEnd = inputElem.selectionEnd;
-        this.currentValue = inputElem.value;
-        this.cursorBefore = inputElem.value.substring(0, this.cursorStart);
-        this.cursorAfter = inputElem.value.substring(this.cursorEnd);
-      } catch (e) {
+        return this.$refs.inputRef.selectionStart;
+      } catch (error) {
         // Fix error in Chrome:
         // Failed to read the 'selectionStart' property from 'HTMLInputElement'
         // http://stackoverflow.com/q/21177489/3040605
+        return 0;
       }
     },
+    cursorEnd() {
+      try {
+        return this.$refs.inputRef.selectionEnd;
+      } catch (error) {
+        return 0;
+      }
+    },
+    cursorBefore() {
+      return this.inputValue.substring(0, this.cursorStart());
+    },
+    cursorAfter() {
+      return this.inputValue.substring(this.cursorEnd());
+    },
+    cursorRightCharCount() {
+      return this.inputValue.length - this.cursorEnd();
+    },
     fixCaret(start, end) {
+      // avoid rerending causes cursor back to the end
+      this.$nextTick(() => {
+        this.fixCaretSync(start, end);
+      });
+    },
+    fixCaretSync(start, end) {
       if (
         start === undefined ||
         end === undefined ||
@@ -457,15 +589,8 @@ export default {
       ) {
         return;
       }
-
       try {
-        const inputElem = this.$refs.inputRef;
-        const currentStart = inputElem.selectionStart;
-        const currentEnd = inputElem.selectionEnd;
-
-        if (start !== currentStart || end !== currentEnd) {
-          inputElem.setSelectionRange(start, end);
-        }
+        this.$refs.inputRef.setSelectionRange(start, end);
       } catch (e) {
         // Fix error in Chrome:
         // Failed to read the 'selectionStart' property from 'HTMLInputElement'
@@ -480,10 +605,10 @@ export default {
 
       if (index === -1) return false;
 
-      const prevCursorPos = this.cursorBefore.length;
+      const prevCursorPos = this.cursorBefore().length;
       if (
         this.lastKeyCode === KeyCode.DELETE &&
-        this.cursorBefore.charAt(prevCursorPos - 1) === str[0]
+        this.cursorBefore().charAt(prevCursorPos - 1) === str[0]
       ) {
         this.fixCaret(prevCursorPos, prevCursorPos);
         return true;
@@ -510,7 +635,6 @@ export default {
     },
     focus() {
       this.$refs.inputRef.focus();
-      this.recordCursorPosition();
     },
     blur() {
       this.$refs.inputRef.blur();
@@ -531,7 +655,7 @@ export default {
       if (!isNaN(precision)) {
         return Number(num).toFixed(precision);
       }
-      return num.toString();
+      return num;
     },
     // '1.' '1x' 'xx' '' => are not complete numbers
     isNotCompleteNumber(num) {
@@ -584,25 +708,15 @@ export default {
       if (this.disabled) {
         return;
       }
-      const { max, min } = this;
       const value = this.getCurrentValidValue(this.inputValue) || 0;
-      if (this.isNotCompleteNumber(value)) {
-        return;
-      }
       let val = this[`${type}Step`](value, ratio);
-      const outOfRange = val > max || val < min;
-      if (val > max) {
-        val = max;
-      } else if (val < min) {
-        val = min;
-      }
-      this.setValue(val);
+      const originalRightCharCount = this.cursorRightCharCount();
+      this.formatAndUpdate(val);
+      const toStart = this.inputValue.length - originalRightCharCount;
+      this.fixCaret(toStart, toStart);
       this.setState({
         focused: true,
       });
-      if (outOfRange) {
-        return;
-      }
       this.autoStepTimer = setTimeout(
         () => {
           this[type](e, ratio, true);
@@ -628,10 +742,13 @@ export default {
     },
     onCompositionstart(e) {
       e.target.composing = true;
+      this.originalValue = e.target.value;
     },
     onCompositionend(e) {
-      this.onChange(e);
       e.target.composing = false;
+      if (!/^\d$/.test(e.data)) {
+        this.setInputValue(this.originalValue);
+      }
     },
   },
   render() {
@@ -651,18 +768,14 @@ export default {
     });
     let upDisabledClass = '';
     let downDisabledClass = '';
-    const { sValue } = this;
-    if (sValue || sValue === 0) {
-      if (!isNaN(sValue)) {
-        const val = Number(sValue);
-        if (val >= this.max) {
-          upDisabledClass = `${prefixCls}-handler-up-disabled`;
-        }
-        if (val <= this.min) {
-          downDisabledClass = `${prefixCls}-handler-down-disabled`;
-        }
-      } else {
+
+    let val = this.getCurrentValidValue(this.inputValue);
+    val = val === '' ? null : Number(val);
+    if (val || val === 0) {
+      if (isValidProps(this.max) && val >= this.max) {
         upDisabledClass = `${prefixCls}-handler-up-disabled`;
+      }
+      if (isValidProps(this.min) && val <= this.min) {
         downDisabledClass = `${prefixCls}-handler-down-disabled`;
       }
     }
@@ -671,7 +784,6 @@ export default {
 
     // focus state, show input value
     // unfocus state, show valid value
-    const inputDisplayValue = this.getInputDisplayValue();
 
     let upEvents;
     let downEvents;
@@ -767,7 +879,7 @@ export default {
             role="spinbutton"
             aria-valuemin={this.min}
             aria-valuemax={this.max}
-            aria-valuenow={sValue}
+            aria-valuenow={val}
             required={this.required}
             type={this.type}
             placeholder={this.placeholder}
@@ -791,7 +903,7 @@ export default {
             onCompositionstart={this.onCompositionstart}
             onCompositionend={this.onCompositionend}
             ref="inputRef"
-            value={inputDisplayValue}
+            value={this.inputValue}
             pattern={this.pattern}
           />
         </div>

@@ -63,7 +63,7 @@ const Dropdown = defineComponent({
       // menu should be focusable in dropdown defaultly
       const overlayProps = overlayNode && getPropsData(overlayNode);
       const { selectable = false, focusable = true } = (overlayProps || {}) as any;
-      const expandIcon = (
+      const expandIcon = () => (
         <span class={`${prefixCls}-menu-submenu-arrow`}>
           <RightOutlined class={`${prefixCls}-menu-submenu-arrow-icon`} />
         </span>

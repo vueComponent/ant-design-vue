@@ -68,6 +68,9 @@
     &-submenu-popup {
       position: absolute;
       z-index: @zindex-dropdown;
+      background: transparent;
+      box-shadow: none;
+      transform-origin: 0 0;
 
       > .@{dropdown-prefix-cls}-menu {
         transform-origin: 0 0;
@@ -81,7 +84,6 @@
       ul {
         margin-right: 0.3em;
         margin-left: 0.3em;
-        padding: 0;
       }
     }
 

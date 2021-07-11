@@ -24,6 +24,7 @@ const subMenuProps = {
   popupOffset: Array as PropType<number[]>,
   internalPopupClose: Boolean,
   eventKey: String,
+  expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
 };
 
 export type SubMenuProps = Partial<ExtractPropTypes<typeof subMenuProps>>;
@@ -32,7 +33,7 @@ export default defineComponent({
   name: 'ASubMenu',
   inheritAttrs: false,
   props: subMenuProps,
-  slots: ['icon', 'title'],
+  slots: ['icon', 'title', 'expandIcon'],
   emits: ['titleClick', 'mouseenter', 'mouseleave'],
   setup(props, { slots, attrs, emit }) {
     useProvideFirstLevel(false);
@@ -84,6 +85,7 @@ export default defineComponent({
       selectedSubMenuEventKeys,
       motion,
       defaultMotions,
+      expandIcon: menuExpandIcon,
     } = useInjectMenu();
 
     registerMenuInfo(eventKey, menuInfo);
@@ -226,6 +228,7 @@ export default defineComponent({
       const icon = getPropsSlot(slots, props, 'icon');
       const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
+      const expandIcon = props.expandIcon || slots.expandIcon || menuExpandIcon;
       let titleNode = (
         <div
           style={directionStyle.value}
@@ -244,8 +247,8 @@ export default defineComponent({
           {title}
 
           {/* Only non-horizontal mode shows the icon */}
-          {mode.value !== 'horizontal' && slots.expandIcon ? (
-            slots.expandIcon({ ...props, isOpen: open.value })
+          {mode.value !== 'horizontal' && expandIcon ? (
+            expandIcon({ ...props, isOpen: open.value })
           ) : (
             <i class={`${subMenuPrefixClsValue}-arrow`} />
           )}

@@ -162,6 +162,7 @@ export function parseSimpleTreeData(treeData, { id, pId, rootPId }) {
 /**
  * Detect if position has relation.
  * e.g. 1-2 related with 1-2-3
+ * e.g. 1-2-3 related with 1-2-4
  * e.g. 1-3-2 related with 1
  * e.g. 1-2 not related with 1-21
  */
@@ -169,7 +170,14 @@ export function isPosRelated(pos1, pos2) {
   const fields1 = pos1.split('-');
   const fields2 = pos2.split('-');
 
-  const minLen = Math.min(fields1.length, fields2.length);
+  let minLen;
+  if (fields1.length === fields2.length) {
+    //  e.g. 1-2-3 related with 1-2-4
+    minLen = Math.max(fields1.length - 1, 0);
+  } else {
+    minLen = Math.min(fields1.length, fields2.length);
+  }
+
   for (let i = 0; i < minLen; i += 1) {
     if (fields1[i] !== fields2[i]) {
       return false;

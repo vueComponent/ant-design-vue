@@ -61,6 +61,7 @@ const Form = {
   provide() {
     return {
       FormContext: this,
+      isFormItemChildren: false,
     };
   },
   inject: {

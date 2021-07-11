@@ -171,6 +171,7 @@ const Form = {
               }
             }
           : () => {},
+      isFormItemChildren: false,
     };
   },
   inject: {

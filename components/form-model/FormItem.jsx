@@ -1,5 +1,6 @@
 import AsyncValidator from 'async-validator';
 import cloneDeep from 'lodash/cloneDeep';
+import isEqual from 'lodash/isEqual';
 import PropTypes from '../_util/vue-types';
 import { ColProps } from '../grid/Col';
 import {
@@ -59,6 +60,7 @@ export const FormItemProps = {
   autoLink: PropTypes.bool,
   required: PropTypes.bool,
   validateStatus: PropTypes.oneOf(['', 'success', 'warning', 'error', 'validating']),
+  validateOnRuleChange: PropTypes.bool,
 };
 
 export default {
@@ -68,6 +70,7 @@ export default {
   props: initDefaultProps(FormItemProps, {
     hasFeedback: false,
     autoLink: true,
+    validateOnRuleChange: false,
   }),
   inject: {
     configProvider: { default: () => ConfigConsumerProps },
@@ -108,10 +111,34 @@ export default {
       }
       return isRequired;
     },
+    fieldRules() {
+      return this.getRules();
+    },
   },
   watch: {
     validateStatus(val) {
       this.validateState = val;
+    },
+    validateOnRuleChange: {
+      handler(newVal) {
+        if (typeof this.fieldRulesUnWatch === 'function') {
+          this.fieldRulesUnWatch();
+        }
+        if (newVal) {
+          let oldRules = null;
+          this.fieldRulesUnWatch = this.$watch(
+            'fieldRules',
+            function(newRules) {
+              if (!isEqual(newRules, oldRules)) {
+                oldRules !== null && this.validate('');
+                oldRules = cloneDeep(newRules);
+              }
+            },
+            { deep: true, immediate: true },
+          );
+        }
+      },
+      immediate: true,
     },
   },
   mounted() {
@@ -130,6 +157,10 @@ export default {
       this.validateDisabled = false;
       const rules = this.getFilteredRule(trigger);
       if (!rules || rules.length === 0) {
+        if (trigger === '') {
+          this.validateState = '';
+          this.validateMessage = '';
+        }
         callback();
         return true;
       }

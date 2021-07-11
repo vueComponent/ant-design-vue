@@ -48,6 +48,7 @@
 | required | 是否必填，如不设置，则会根据校验规则自动生成 | boolean | false |  |
 | validateStatus | 校验状态，如不设置，则会根据校验规则自动生成，可选：'success' 'warning' 'error' 'validating' | string |  |  |
 | wrapperCol | 需要为输入控件设置布局样式时，使用该属性，用法同 labelCol | [object](/components/grid-cn/#Col) |  |  |
+| validateOnRuleChange | 是否在 rules 属性或 form 中为此表单域配置的 rules 改变后立即触发一次验证 | boolean | false | 1.7.5 |
 
 #### 注意：
 

@@ -4,6 +4,7 @@ import CustomValidation from './custom-validation.md';
 import DynamicFormItem from './dynamic-form-item.md';
 import HorizontalLogin from './horizontal-login.md';
 import Layout from './layout.md';
+import UpdateValidation from './update-validation.md';
 import Validation from './validation.md';
 
 import CN from '../index.zh-CN';
@@ -86,6 +87,7 @@ export default {
           <HorizontalLogin />
           <Layout />
           <Validation />
+          <UpdateValidation />
           <CustomValidation />
           <DynamicFormItem />
         </demo-sort>

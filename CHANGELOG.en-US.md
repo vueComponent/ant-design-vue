@@ -10,6 +10,20 @@
 
 ---
 
+## 2.2.2
+
+`2021-07-11`
+
+- 🌟 Switch added checkedValue and unCheckedValue attributes to customize checked binding value [#4329](https://github.com/vueComponent/ant-design-vue/issues/4329)
+- 🐞 Fix the issue of missing SubMenu animation [#4325](https://github.com/vueComponent/ant-design-vue/issues/4325)
+- 🐞 Fix that there is no red box problem when TimePicker validates the error under Form [#4331](https://github.com/vueComponent/ant-design-vue/issues/4331)
+- 🐞 Fix UploadDragger does not support vite-plugin-components on-demand loading problem [#4334](https://github.com/vueComponent/ant-design-vue/issues/4334)
+- 🐞 Fix the error when TreeSelect customize title through slot [1152e8](https://github.com/vueComponent/ant-design-vue/commit/1152e8cd71cadf9e8fb4797916adca20c0e35974)
+- 🐞 Fix the dropdown submenu style loss issue [#4351](https://github.com/vueComponent/ant-design-vue/issues/4351)
+- TS
+  - Fix the type error of Table in ts 4.3.5 version [#4296](https://github.com/vueComponent/ant-design-vue/issues/4296)
+  - Improve notification type [#4346](https://github.com/vueComponent/ant-design-vue/issues/4346)
+
 ## 2.2.1
 
 `2021-07-06`

@@ -10,6 +10,20 @@
 
 ---
 
+## 2.2.2
+
+`2021-07-11`
+
+- 🌟 Switch 新增 checkedValue、unCheckedValue 属性用于自定义 checked 绑定值 [#4329](https://github.com/vueComponent/ant-design-vue/issues/4329)
+- 🐞 修复 SubMenu 动画丢失的问题 [#4325](https://github.com/vueComponent/ant-design-vue/issues/4325)
+- 🐞 修复 TimePicker 在 Form 下验证错误时没有红框问题 [#4331](https://github.com/vueComponent/ant-design-vue/issues/4331)
+- 🐞 修复 UploadDragger 不支持 vite-plugin-components 按需加载问题 [#4334](https://github.com/vueComponent/ant-design-vue/issues/4334)
+- 🐞 修复 TreeSelect 通过 slot 自定义 title 时报错问题 [1152e8](https://github.com/vueComponent/ant-design-vue/commit/1152e8cd71cadf9e8fb4797916adca20c0e35974)
+- 🐞 修复 Dropdown submenu 样式丢失问题 [#4351](https://github.com/vueComponent/ant-design-vue/issues/4351)
+- TS
+  - 修复 Table 在 ts 4.3.5 版本下类型报错问题 [#4296](https://github.com/vueComponent/ant-design-vue/issues/4296)
+  - 完善 notification 类型 [#4346](https://github.com/vueComponent/ant-design-vue/issues/4346)
+
 ## 2.2.1
 
 `2021-07-06`

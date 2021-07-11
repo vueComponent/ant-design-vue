@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/components',
     component: Layout,
-    props: route => {
+    props: (route) => {
       const name = route.path.split('/components/')[1].split('/')[0];
       return { name, showDemo: true };
     },
@@ -18,9 +18,9 @@ const routes = [
   {
     path: '/iframe',
     component: Iframe,
-    children: demoRoutes.map(item => ({
+    children: demoRoutes.map((item) => ({
       ...item,
-      props: route => {
+      props: (route) => {
         const hash = route.hash.replace('#', '');
         return { iframeName: hash };
       },
@@ -29,7 +29,7 @@ const routes = [
   {
     path: '/',
     component: Layout,
-    props: route => {
+    props: (route) => {
       const name = route.path.split('/docs/vue/')[1].split('/')[0];
       return { name, showApi: true };
     },
@@ -116,4 +116,11 @@ export default new VueRouter({
   mode: 'history',
   fallback: false,
   routes,
+  scrollBehavior: (to) => {
+    if (to.hash) {
+      return {
+        selector: to.hash,
+      };
+    }
+  },
 });

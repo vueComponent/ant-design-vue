@@ -212,7 +212,7 @@ function notice(args: NotificationArgsProps) {
   );
 }
 
-const api: any = {
+const apiBase = {
   open: notice,
   close(key: string) {
     Object.keys(notificationInstance).forEach(cacheKey =>
@@ -228,7 +228,11 @@ const api: any = {
   },
 };
 
-['success', 'info', 'warning', 'error'].forEach(type => {
+type NotificationApi = typeof apiBase &
+  Record<IconType | 'warn', (args: Omit<NotificationArgsProps, 'type'>) => void>;
+const api = apiBase as any as NotificationApi;
+const iconTypes: IconType[] = ['success', 'info', 'warning', 'error'];
+iconTypes.forEach(type => {
   api[type] = args =>
     api.open({
       ...args,

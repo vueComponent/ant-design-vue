@@ -27,6 +27,7 @@ import { useInjectSize } from '../_util/hooks/useSize';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useProvideForm } from './context';
 import type { SizeType } from '../config-provider';
+import useForm from './useForm';
 
 export type RequiredMark = boolean | 'optional';
 export type FormLayout = 'horizontal' | 'inline' | 'vertical';
@@ -97,6 +98,7 @@ const Form = defineComponent({
     colon: true,
   }),
   Item: FormItem,
+  useForm,
   emits: ['finishFailed', 'submit', 'finish'],
   setup(props, { emit, slots, expose, attrs }) {
     const size = useInjectSize(props);
@@ -371,4 +373,5 @@ const Form = defineComponent({
 
 export default Form as typeof Form & {
   readonly Item: typeof FormItem;
+  readonly useForm: typeof useForm;
 };

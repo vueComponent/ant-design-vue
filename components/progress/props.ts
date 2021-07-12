@@ -14,8 +14,6 @@ export type ProgressGradient = { direction?: string } & (StringGradients | FromT
 
 export interface SuccessProps {
   percent?: number;
-  /** @deprecated Use `percent` instead */
-  progress?: number;
   strokeColor?: string;
 }
 

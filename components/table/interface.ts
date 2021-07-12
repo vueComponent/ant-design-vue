@@ -60,7 +60,7 @@ export type ColumnProps = Partial<ExtractPropTypes<typeof columnProps>> & {
     filterIcon?: string;
     filterDropdown?: string;
     customRender?: string;
-    [key: string]: string;
+    [key: string]: string | undefined;
   };
 };
 

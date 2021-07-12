@@ -49,6 +49,8 @@ export const menuProps = {
   triggerSubMenuAction: { type: String as PropType<TriggerSubMenuAction>, default: 'hover' },
 
   getPopupContainer: Function as PropType<(node: HTMLElement) => HTMLElement>,
+
+  expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
 };
 
 export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
@@ -66,6 +68,7 @@ export default defineComponent({
     'click',
     'update:activeKey',
   ],
+  slots: ['expandIcon'],
   setup(props, { slots, emit }) {
     const { prefixCls, direction } = useConfigInject('menu', props);
     const store = ref<Record<string, StoreMenuInfo>>({});
@@ -371,6 +374,7 @@ export default defineComponent({
       unRegisterMenuInfo,
       selectedSubMenuEventKeys,
       isRootMenu: true,
+      expandIcon: props.expandIcon || slots.expandIcon,
     });
     return () => {
       const childList = flattenChildren(slots.default?.());

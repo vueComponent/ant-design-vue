@@ -64,7 +64,7 @@ const SingleSelector = {
       if (selectorValueList.length && !this.mirrorSearchValue) {
         const { label, value } = selectorValueList[0];
         selectedValueNodes.push(
-          <span key="value" title={toTitle(label)} class={`${prefixCls}-selection-item`}>
+          <span key={value} title={toTitle(label)} class={`${prefixCls}-selection-item`}>
             {label || value}
           </span>,
         );

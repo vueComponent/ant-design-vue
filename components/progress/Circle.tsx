@@ -1,5 +1,6 @@
 import type { CSSProperties, ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
+import { presetPrimaryColors } from '@ant-design/colors';
 import { Circle as VCCircle } from '../vc-progress';
 import { getSuccessPercent, validProgress } from './utils';
 import { progressProps } from './props';
@@ -12,39 +13,9 @@ const circleProps = {
 };
 export type CircleProps = Partial<ExtractPropTypes<typeof circleProps>>;
 
-const statusColorMap = {
-  normal: '#108ee9',
-  exception: '#ff5500',
-  success: '#87d068',
-};
-
-function getPercentage(
-  percent: CircleProps['percent'],
-  success: CircleProps['success'],
-  successPercent: CircleProps['successPercent'],
-) {
-  const ptg = validProgress(percent);
-  const realSuccessPercent = getSuccessPercent(success, successPercent);
-  if (!realSuccessPercent) {
-    return ptg;
-  }
-  return [
-    validProgress(realSuccessPercent),
-    validProgress(ptg - validProgress(realSuccessPercent)),
-  ];
-}
-
-function getStrokeColor(
-  success: CircleProps['success'],
-  strokeColor: CircleProps['strokeColor'],
-  successPercent: CircleProps['successPercent'],
-) {
-  const color = strokeColor || null;
-  const realSuccessPercent = getSuccessPercent(success, successPercent);
-  if (!realSuccessPercent) {
-    return color;
-  }
-  return [statusColorMap.success, color];
+function getPercentage({ percent, success, successPercent }: CircleProps) {
+  const realSuccessPercent = validProgress(getSuccessPercent({ success, successPercent }));
+  return [realSuccessPercent, validProgress(validProgress(percent) - realSuccessPercent)];
 }
 
 export default defineComponent({
@@ -77,14 +48,10 @@ export default defineComponent({
     );
 
     // using className to style stroke color
-    const strokeColor = computed(() =>
-      getStrokeColor(props.success, props.strokeColor, props.successPercent),
-    );
-    const percent = computed(() =>
-      getPercentage(props.percent, props.success, props.successPercent),
-    );
+    const strokeColor = computed(() => [presetPrimaryColors.green, props.strokeColor || null]);
+    const percent = computed(() => getPercentage(props));
     const isGradient = computed(
-      () => Object.prototype.toString.call(strokeColor.value) === '[object Object]',
+      () => Object.prototype.toString.call(props.strokeColor) === '[object Object]',
     );
 
     const wrapperClassName = computed(() => ({

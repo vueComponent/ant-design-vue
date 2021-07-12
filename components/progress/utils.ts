@@ -1,5 +1,4 @@
 import devWarning from '../vc-util/devWarning';
-import type { ProgressProps } from './props';
 
 export function validProgress(progress: number | undefined) {
   if (!progress || progress < 0) {
@@ -11,10 +10,16 @@ export function validProgress(progress: number | undefined) {
   return progress;
 }
 
-export function getSuccessPercent(
-  success?: ProgressProps['success'],
-  successPercent?: ProgressProps['successPercent'],
-) {
+export function getSuccessPercent({
+  success,
+  successPercent,
+}: {
+  success?: {
+    progress?: number;
+    percent?: number;
+  };
+  successPercent?: number;
+}) {
   let percent = successPercent;
   /** @deprecated Use `percent` instead */
   if (success && 'progress' in success) {

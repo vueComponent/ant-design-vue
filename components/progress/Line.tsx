@@ -69,6 +69,7 @@ export const handleGradient = (strokeColor: ProgressGradient, directionConfig: D
 
 export default defineComponent({
   props: lineProps,
+  name: 'Line',
   setup(props, { slots }) {
     const backgroundProps = computed(() => {
       const { strokeColor, direction } = props;
@@ -98,7 +99,7 @@ export default defineComponent({
     });
 
     const successPercent = computed(() => {
-      return getSuccessPercent(props.success, props.successPercent);
+      return getSuccessPercent(props);
     });
     const successPercentStyle = computed<CSSProperties>(() => {
       const { strokeWidth, size, strokeLinecap, success } = props;
@@ -110,18 +111,14 @@ export default defineComponent({
       };
     });
 
-    const successSegment = computed(() =>
-      successPercent.value !== undefined ? (
-        <div class={`${props.prefixCls}-success-bg`} style={successPercentStyle.value} />
-      ) : null,
-    );
-
     return () => (
       <>
         <div class={`${props.prefixCls}-outer`}>
           <div class={`${props.prefixCls}-inner`} style={trailStyle.value}>
             <div class={`${props.prefixCls}-bg`} style={percentStyle.value} />
-            {successSegment.value}
+            {successPercent.value !== undefined ? (
+              <div class={`${props.prefixCls}-success-bg`} style={successPercentStyle.value} />
+            ) : null}
           </div>
         </div>
         {slots.default?.()}

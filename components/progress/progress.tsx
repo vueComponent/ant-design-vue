@@ -11,7 +11,6 @@ import Steps from './Steps';
 import { getSuccessPercent, validProgress } from './utils';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
-import type { ProgressStatusesType } from './props';
 import { progressProps, progressStatuses } from './props';
 
 export default defineComponent({
@@ -26,9 +25,14 @@ export default defineComponent({
     gapDegree: 0,
     strokeLinecap: 'round',
   }),
+  slots: ['format'],
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('progress', props);
-
+    devWarning(
+      props.successPercent == undefined,
+      'Progress',
+      '`successPercent` is deprecated. Please use `success.percent` instead.',
+    );
     const classString = computed(() => {
       const { type, showInfo, size } = props;
       const pre = prefixCls.value;
@@ -41,44 +45,44 @@ export default defineComponent({
       };
     });
 
-    const getPercentNumber = () => {
+    const percentNumber = computed(() => {
       const { percent = 0 } = props;
-      const successPercent = getSuccessPercent(props.success, props.successPercent);
+      const successPercent = getSuccessPercent(props);
       return parseInt(
         successPercent !== undefined ? successPercent.toString() : percent.toString(),
         10,
       );
-    };
+    });
 
-    const getProgressStatus = () => {
+    const progressStatus = computed(() => {
       const { status } = props;
-      if (progressStatuses.indexOf(status) < 0 && getPercentNumber() >= 100) {
+      if (progressStatuses.indexOf(status) < 0 && percentNumber.value >= 100) {
         return 'success';
       }
       return status || 'normal';
-    };
+    });
 
-    const renderProcessInfo = (prefixCls: string, progressStatus: ProgressStatusesType) => {
+    const renderProcessInfo = () => {
       const { showInfo, format, type, percent } = props;
-      const successPercent = getSuccessPercent(props.success, props.successPercent);
+      const successPercent = getSuccessPercent(props);
       if (!showInfo) return null;
 
       let text: VNodeChild;
-      const textFormatter = format || slots?.format || (percentNumber => `${percentNumber}%`);
+      const textFormatter = format || slots?.format || ((val: number) => `${val}%`);
       const isLineType = type === 'line';
       if (
         format ||
         slots?.format ||
-        (progressStatus !== 'exception' && progressStatus !== 'success')
+        (progressStatus.value !== 'exception' && progressStatus.value !== 'success')
       ) {
         text = textFormatter(validProgress(percent), validProgress(successPercent));
-      } else if (progressStatus === 'exception') {
+      } else if (progressStatus.value === 'exception') {
         text = isLineType ? <CloseCircleFilled /> : <CloseOutlined />;
-      } else if (progressStatus === 'success') {
+      } else if (progressStatus.value === 'success') {
         text = isLineType ? <CheckCircleFilled /> : <CheckOutlined />;
       }
       return (
-        <span class={`${prefixCls}-text`} title={typeof text === 'string' ? text : undefined}>
+        <span class={`${prefixCls.value}-text`} title={typeof text === 'string' ? text : undefined}>
           {text}
         </span>
       );
@@ -86,14 +90,7 @@ export default defineComponent({
 
     return () => {
       const { type, steps, strokeColor } = props;
-      const progressStatus = getProgressStatus();
-      const progressInfo = renderProcessInfo(prefixCls.value, progressStatus);
-
-      devWarning(
-        props.successPercent == undefined,
-        'Progress',
-        '`successPercent` is deprecated. Please use `success.percent` instead.',
-      );
+      const progressInfo = renderProcessInfo();
 
       let progress: VNodeChild;
       // Render progress shape
@@ -122,7 +119,7 @@ export default defineComponent({
 
       const classNames = {
         ...classString.value,
-        [`${prefixCls.value}-status-${progressStatus}`]: true,
+        [`${prefixCls.value}-status-${progressStatus.value}`]: true,
       };
 
       return <div class={classNames}>{progress}</div>;

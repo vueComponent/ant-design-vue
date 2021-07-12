@@ -1,5 +1,5 @@
-import type { Ref } from 'vue';
-import { ref, onUpdated, computed } from 'vue';
+import type { Refs } from '../../_util/hooks/useRef';
+import { ref, onUpdated } from 'vue';
 import type { ProgressProps } from './types';
 
 export const defaultProps: Partial<ProgressProps> = {
@@ -12,8 +12,7 @@ export const defaultProps: Partial<ProgressProps> = {
   trailWidth: 1,
 };
 
-export const useTransitionDuration = (percentList: Ref<number[]>) => {
-  const paths = computed(() => percentList.value.map(() => ref()));
+export const useTransitionDuration = (paths: Refs) => {
   const prevTimeStamp = ref(null);
 
   onUpdated(() => {
@@ -21,7 +20,7 @@ export const useTransitionDuration = (percentList: Ref<number[]>) => {
     let updated = false;
 
     Object.keys(paths.value).forEach(key => {
-      const path = paths.value[key].value;
+      const path = paths.value[key];
       if (!path) {
         return;
       }

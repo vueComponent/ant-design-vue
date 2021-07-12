@@ -1,17 +1,12 @@
-import type { CSSProperties, ExtractPropTypes } from 'vue';
+import type { CSSProperties } from 'vue';
 import { computed, defineComponent } from 'vue';
 import { presetPrimaryColors } from '@ant-design/colors';
 import { Circle as VCCircle } from '../vc-progress';
 import { getSuccessPercent, validProgress } from './utils';
+import type { ProgressProps } from './props';
 import { progressProps } from './props';
-import PropTypes from '../_util/vue-types';
 
-const circleProps = {
-  ...progressProps,
-  prefixCls: PropTypes.string,
-  // progressStatus: PropTypes.string,
-};
-export type CircleProps = Partial<ExtractPropTypes<typeof circleProps>>;
+export type CircleProps = ProgressProps;
 
 function getPercentage({ percent, success, successPercent }: CircleProps) {
   const realSuccessPercent = validProgress(getSuccessPercent({ success, successPercent }));
@@ -19,8 +14,8 @@ function getPercentage({ percent, success, successPercent }: CircleProps) {
 }
 
 export default defineComponent({
-  props: progressProps,
   inheritAttrs: false,
+  props: progressProps(),
   setup(props, { slots }) {
     const gapDeg = computed(() => {
       // Support gapDeg = 0 when type = 'dashboard'

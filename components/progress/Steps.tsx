@@ -1,11 +1,12 @@
-import { computed, ExtractPropTypes, PropType, VNodeChild } from 'vue';
+import type { ExtractPropTypes, PropType, VNodeChild } from 'vue';
+import { computed } from 'vue';
 import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import type { ProgressSize } from './props';
 import { progressProps } from './props';
 
 const stepsProps = {
-  ...progressProps,
+  ...progressProps(),
   steps: PropTypes.number,
   size: {
     type: String as PropType<ProgressSize>,

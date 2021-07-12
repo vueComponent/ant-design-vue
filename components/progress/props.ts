@@ -17,7 +17,7 @@ export interface SuccessProps {
   strokeColor?: string;
 }
 
-export const progressProps = {
+export const progressProps = () => ({
   prefixCls: PropTypes.string,
   type: PropTypes.oneOf(ProgressType),
   percent: PropTypes.number,
@@ -41,6 +41,6 @@ export const progressProps = {
   steps: PropTypes.number,
   /** @deprecated Use `success` instead */
   successPercent: PropTypes.number,
-};
+});
 
-export type ProgressProps = Partial<ExtractPropTypes<typeof progressProps>>;
+export type ProgressProps = Partial<ExtractPropTypes<ReturnType<typeof progressProps>>>;

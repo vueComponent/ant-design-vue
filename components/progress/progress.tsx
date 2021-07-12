@@ -15,7 +15,7 @@ import { progressProps, progressStatuses } from './props';
 
 export default defineComponent({
   name: 'AProgress',
-  props: initDefaultProps(progressProps, {
+  props: initDefaultProps(progressProps(), {
     type: 'line',
     percent: 0,
     showInfo: true,

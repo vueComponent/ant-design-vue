@@ -1,5 +1,6 @@
 import { useTransitionDuration, defaultProps } from './common';
-import { propTypes, GapPositionType } from './types';
+import type { GapPositionType } from './types';
+import { propTypes } from './types';
 import { computed, defineComponent, ref } from 'vue';
 import initDefaultProps from '../../_util/props-util/initDefaultProps';
 import { useRef } from '../../_util/hooks/useRef';

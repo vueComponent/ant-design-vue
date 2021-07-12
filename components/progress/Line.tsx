@@ -7,7 +7,7 @@ import { progressProps } from './props';
 import { getSuccessPercent, validProgress } from './utils';
 
 const lineProps = {
-  ...progressProps,
+  ...progressProps(),
   prefixCls: PropTypes.string,
   direction: {
     type: String as PropType<Direction>,
@@ -68,8 +68,8 @@ export const handleGradient = (strokeColor: ProgressGradient, directionConfig: D
 };
 
 export default defineComponent({
-  props: lineProps,
   name: 'Line',
+  props: lineProps,
   setup(props, { slots }) {
     const backgroundProps = computed(() => {
       const { strokeColor, direction } = props;

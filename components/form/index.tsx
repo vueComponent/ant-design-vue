@@ -15,7 +15,6 @@ Form.install = function (app: App) {
 
 export { FormItem, formItemProps, formProps, useForm };
 
-Form.useForm = useForm;
 export default Form as typeof Form &
   Plugin & {
     readonly Item: typeof Form.Item;

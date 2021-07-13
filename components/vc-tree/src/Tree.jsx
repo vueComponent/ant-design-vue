@@ -345,6 +345,7 @@ const Tree = defineComponent({
     onNodeDragEnd(event, node) {
       this.setState({
         _dragOverNodeKey: '',
+        _dragNodesKeys: [],
       });
       this.__emit('dragend', { event, node });
       this.dragNode = null;
@@ -356,6 +357,7 @@ const Tree = defineComponent({
 
       this.setState({
         _dragOverNodeKey: '',
+        _dragNodesKeys: [],
       });
 
       if (_dragNodesKeys.indexOf(eventKey) !== -1) {

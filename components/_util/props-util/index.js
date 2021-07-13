@@ -339,9 +339,10 @@ export function isEmptyContent(c) {
 
 export function isEmptyElement(c) {
   return (
-    c.type === Comment ||
-    (c.type === Fragment && c.children.length === 0) ||
-    (c.type === Text && c.children.trim() === '')
+    c &&
+    (c.type === Comment ||
+      (c.type === Fragment && c.children.length === 0) ||
+      (c.type === Text && c.children.trim() === ''))
   );
 }
 

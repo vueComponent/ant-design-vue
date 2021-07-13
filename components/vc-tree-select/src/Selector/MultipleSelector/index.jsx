@@ -186,15 +186,16 @@ const MultipleSelector = {
   },
 
   render() {
-    const { $slots } = this;
+    const { $slots, $props } = this;
     const listeners = getListeners(this);
+    const { showArrow = false } = $props;
     return (
       <Selector
         {...{
           props: {
             ...this.$props,
+            showArrow,
             tabIndex: -1,
-            showArrow: false,
             renderSelection: this.renderSelection,
             renderPlaceholder: this._renderPlaceholder,
           },

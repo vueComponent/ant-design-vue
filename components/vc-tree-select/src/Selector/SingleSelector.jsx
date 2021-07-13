@@ -42,9 +42,11 @@ const SingleSelector = {
   },
 
   render() {
+    const { showArrow = true } = this.$props;
     const props = {
       props: {
         ...getOptionProps(this),
+        showArrow,
         renderSelection: this.renderSelection,
       },
       on: getListeners(this),

@@ -141,7 +141,6 @@ const Select = {
     {
       prefixCls: 'rc-tree-select',
       prefixAria: 'rc-tree-select',
-      showArrow: true,
       showSearch: true,
       autoClearSearchValue: true,
       showCheckedStrategy: SHOW_CHILD,

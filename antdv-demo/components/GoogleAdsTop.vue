@@ -22,11 +22,10 @@ export default {
       <div class="google-ads">
         <ins
           ref="ins"
-          style="display:block"
           class="adsbygoogle"
           data-ad-client="ca-pub-4801326429087140"
           data-ad-slot="2425414214"
-          data-ad-format="auto"
+          style="display: inline-block; width: 728px; height: 90px"
         ></ins>
       </div>
     );

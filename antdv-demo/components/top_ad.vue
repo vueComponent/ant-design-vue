@@ -4,7 +4,7 @@
       <a-carousel autoplay>
         <template v-for="ad in ads">
           <a :key="ad.href" :href="ad.href" target="_blank">
-            <img style="width: 100%; max-width: 1200px;" :alt="ad.alt || ''" :src="ad.img" />
+            <img style="width: 100%; max-width: 1200px" :alt="ad.alt || ''" :src="ad.img" />
           </a>
         </template>
       </a-carousel>
@@ -35,14 +35,14 @@ export default {
           href: 'https://yidengfe.com/launches/01/yd.html',
           visible: isEffective('2020-09-11 17:00:00', '2021-03-11 17:00:00'),
         },
-      ].filter(ad => ad.visible),
+      ].filter((ad) => ad.visible),
       enAds: [
         {
           img: 'https://qn.antdv.com/TheBigRichGroup.png',
           href: 'https://thebigrichgroup.com/',
-          visible: isEffective('2020-09-18 17:00:00', '2021-10-11 17:00:00'),
+          visible: isEffective('2020-09-18 17:00:00', '2021-07-11 17:00:00'),
         },
-      ].filter(ad => ad.visible),
+      ].filter((ad) => ad.visible),
     };
   },
   computed: {

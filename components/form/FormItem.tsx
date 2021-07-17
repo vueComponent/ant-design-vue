@@ -306,7 +306,7 @@ export default defineComponent({
       const children = flattenChildren(slots.default?.());
       let firstChildren = children[0];
       if (fieldName.value && props.autoLink && isValidElement(firstChildren)) {
-        const originalEvents = firstChildren.props;
+        const originalEvents = firstChildren.props || {};
         const originalBlur = originalEvents.onBlur;
         const originalChange = originalEvents.onChange;
         firstChildren = cloneElement(firstChildren, {

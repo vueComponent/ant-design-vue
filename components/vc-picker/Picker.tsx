@@ -11,11 +11,6 @@
  * Tips: Should add faq about `datetime` mode with `defaultValue`
  */
 
-import * as React from 'react';
-import classNames from 'classnames';
-import type { AlignType } from 'rc-trigger/lib/interface';
-import warning from 'rc-util/lib/warning';
-import useMergedState from 'rc-util/lib/hooks/useMergedState';
 import type {
   PickerPanelBaseProps,
   PickerPanelDateProps,
@@ -33,6 +28,22 @@ import usePickerInput from './hooks/usePickerInput';
 import useTextValueMapping from './hooks/useTextValueMapping';
 import useValueTexts from './hooks/useValueTexts';
 import useHoverValue from './hooks/useHoverValue';
+import {
+  computed,
+  CSSProperties,
+  defineComponent,
+  HtmlHTMLAttributes,
+  ref,
+  Ref,
+  toRef,
+  toRefs,
+} from 'vue';
+import { FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
+import { VueNode } from '../_util/type';
+import { AlignType } from '../vc-align/interface';
+import useMergedState from '../_util/hooks/useMergedState';
+import { locale } from 'dayjs';
+import { warning } from '../vc-util/warning';
 
 export type PickerRefConfig = {
   focus: () => void;
@@ -42,13 +53,13 @@ export type PickerRefConfig = {
 export type PickerSharedProps<DateType> = {
   dropdownClassName?: string;
   dropdownAlign?: AlignType;
-  popupStyle?: React.CSSProperties;
+  popupStyle?: CSSProperties;
   transitionName?: string;
   placeholder?: string;
   allowClear?: boolean;
-  autoFocus?: boolean;
+  autofocus?: boolean;
   disabled?: boolean;
-  tabIndex?: number;
+  tabindex?: number;
   open?: boolean;
   defaultOpen?: boolean;
   /** Make input readOnly to avoid popup keyboard in mobile */
@@ -59,39 +70,39 @@ export type PickerSharedProps<DateType> = {
   format?: string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[];
 
   // Render
-  suffixIcon?: React.ReactNode;
-  clearIcon?: React.ReactNode;
-  prevIcon?: React.ReactNode;
-  nextIcon?: React.ReactNode;
-  superPrevIcon?: React.ReactNode;
-  superNextIcon?: React.ReactNode;
+  suffixIcon?: VueNode;
+  clearIcon?: VueNode;
+  prevIcon?: VueNode;
+  nextIcon?: VueNode;
+  superPrevIcon?: VueNode;
+  superNextIcon?: VueNode;
   getPopupContainer?: (node: HTMLElement) => HTMLElement;
-  panelRender?: (originPanel: React.ReactNode) => React.ReactNode;
+  panelRender?: (originPanel: VueNode) => VueNode;
 
   // Events
   onChange?: (value: DateType | null, dateString: string) => void;
   onOpenChange?: (open: boolean) => void;
-  onFocus?: React.FocusEventHandler<HTMLInputElement>;
-  onBlur?: React.FocusEventHandler<HTMLInputElement>;
-  onMouseDown?: React.MouseEventHandler<HTMLDivElement>;
-  onMouseUp?: React.MouseEventHandler<HTMLDivElement>;
-  onMouseEnter?: React.MouseEventHandler<HTMLDivElement>;
-  onMouseLeave?: React.MouseEventHandler<HTMLDivElement>;
-  onClick?: React.MouseEventHandler<HTMLDivElement>;
-  onContextMenu?: React.MouseEventHandler<HTMLDivElement>;
-  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>, preventDefault: () => void) => void;
+  onFocus?: FocusEventHandler;
+  onBlur?: FocusEventHandler;
+  onMouseDown?: MouseEventHandler;
+  onMouseUp?: MouseEventHandler;
+  onMouseEnter?: MouseEventHandler;
+  onMouseLeave?: MouseEventHandler;
+  onClick?: MouseEventHandler;
+  onContextMenu?: MouseEventHandler;
+  onKeyDown?: (event: KeyboardEvent, preventDefault: () => void) => void;
 
   // Internal
   /** @private Internal usage, do not use in production mode!!! */
-  pickerRef?: React.MutableRefObject<PickerRefConfig>;
+  pickerRef?: Ref<PickerRefConfig>;
 
   // WAI-ARIA
   role?: string;
   name?: string;
 
-  autoComplete?: string;
+  autocomplete?: string;
   direction?: 'ltr' | 'rtl';
-} & React.AriaAttributes;
+} & HtmlHTMLAttributes;
 
 type OmitPanelProps<Props> = Omit<
   Props,
@@ -127,435 +138,224 @@ type MergedPickerProps<DateType> = {
   picker?: PickerMode;
 } & OmitType<DateType>;
 
-function InnerPicker<DateType>(props: PickerProps<DateType>) {
-  const {
-    prefixCls = 'rc-picker',
-    id,
-    tabIndex,
-    style,
-    className,
-    dropdownClassName,
-    dropdownAlign,
-    popupStyle,
-    transitionName,
-    generateConfig,
-    locale,
-    inputReadOnly,
-    allowClear,
-    autoFocus,
-    showTime,
-    picker = 'date',
-    format,
-    use12Hours,
-    value,
-    defaultValue,
-    open,
-    defaultOpen,
-    defaultOpenValue,
-    suffixIcon,
-    clearIcon,
-    disabled,
-    disabledDate,
-    placeholder,
-    getPopupContainer,
-    pickerRef,
-    panelRender,
-    onChange,
-    onOpenChange,
-    onFocus,
-    onBlur,
-    onMouseDown,
-    onMouseUp,
-    onMouseEnter,
-    onMouseLeave,
-    onContextMenu,
-    onClick,
-    onKeyDown,
-    onSelect,
-    direction,
-    autoComplete = 'off',
-  } = props as MergedPickerProps<DateType>;
+function Picker<DateType>() {
+  return defineComponent<MergedPickerProps<DateType>>({
+    name: 'Picker',
+    props: [
+      'prefixCls',
+      'id',
+      'tabindex',
+      'dropdownClassName',
+      'dropdownAlign',
+      'popupStyle',
+      'transitionName',
+      'generateConfig',
+      'locale',
+      'inputReadOnly',
+      'allowClear',
+      'autofocus',
+      'showTime',
+      'picker',
+      'format',
+      'use12Hours',
+      'value',
+      'defaultValue',
+      'open',
+      'defaultOpen',
+      'defaultOpenValue',
+      'suffixIcon',
+      'clearIcon',
+      'disabled',
+      'disabledDate',
+      'placeholder',
+      'getPopupContainer',
+      'pickerRef',
+      'panelRender',
+      'onChange',
+      'onOpenChange',
+      'onFocus',
+      'onBlur',
+      'onMouseDown',
+      'onMouseUp',
+      'onMouseEnter',
+      'onMouseLeave',
+      'onContextMenu',
+      'onClick',
+      'onKeyDown',
+      'onSelect',
+      'direction',
+      'autocomplete',
+    ] as any,
+    inheritAttrs: false,
+    slots: [
+      'suffixIcon',
+      'clearIcon',
+      'prevIcon',
+      'nextIcon',
+      'superPrevIcon',
+      'superNextIcon',
+      'panelRender',
+    ],
+    setup(props, { slots, attrs, expose }) {
+      const inputRef = ref(null);
+      const needConfirmButton = computed(
+        () => (props.picker === 'date' && !!props.showTime) || props.picker === 'time',
+      );
 
-  const inputRef = React.useRef<HTMLInputElement>(null);
+      // ============================= State =============================
+      const formatList = computed(() =>
+        toArray(getDefaultFormat(props.format, props.picker, props.showTime, props.use12Hours)),
+      );
 
-  const needConfirmButton: boolean = (picker === 'date' && !!showTime) || picker === 'time';
+      // Panel ref
+      const panelDivRef = ref(null);
+      const inputDivRef = ref(null);
 
-  // ============================= State =============================
-  const formatList = toArray(getDefaultFormat(format, picker, showTime, use12Hours));
-
-  // Panel ref
-  const panelDivRef = React.useRef<HTMLDivElement>(null);
-  const inputDivRef = React.useRef<HTMLDivElement>(null);
-
-  // Real value
-  const [mergedValue, setInnerValue] = useMergedState(null, {
-    value,
-    defaultValue,
-  });
-
-  // Selected value
-  const [selectedValue, setSelectedValue] = React.useState<DateType | null>(mergedValue);
-
-  // Operation ref
-  const operationRef: React.MutableRefObject<ContextOperationRefProps | null> =
-    React.useRef<ContextOperationRefProps>(null);
-
-  // Open
-  const [mergedOpen, triggerInnerOpen] = useMergedState(false, {
-    value: open,
-    defaultValue: defaultOpen,
-    postState: (postOpen) => (disabled ? false : postOpen),
-    onChange: (newOpen) => {
-      if (onOpenChange) {
-        onOpenChange(newOpen);
-      }
-
-      if (!newOpen && operationRef.current && operationRef.current.onClose) {
-        operationRef.current.onClose();
-      }
-    },
-  });
-
-  // ============================= Text ==============================
-  const [valueTexts, firstValueText] = useValueTexts(selectedValue, {
-    formatList,
-    generateConfig,
-    locale,
-  });
-
-  const [text, triggerTextChange, resetText] = useTextValueMapping({
-    valueTexts,
-    onTextChange: (newText) => {
-      const inputDate = parseValue(newText, {
-        locale,
-        formatList,
-        generateConfig,
+      // Real value
+      const [mergedValue, setInnerValue] = useMergedState<DateType>(null, {
+        value: toRef(props, 'value'),
+        defaultValue: props.defaultValue,
       });
-      if (inputDate && (!disabledDate || !disabledDate(inputDate))) {
-        setSelectedValue(inputDate);
-      }
-    },
-  });
 
-  // ============================ Trigger ============================
-  const triggerChange = (newValue: DateType | null) => {
-    setSelectedValue(newValue);
-    setInnerValue(newValue);
+      const selectedValue = ref(mergedValue.value) as Ref<DateType>;
+      const setSelectedValue = (val: DateType) => {
+        selectedValue.value = val;
+      };
 
-    if (onChange && !isEqual(generateConfig, mergedValue, newValue)) {
-      onChange(
-        newValue,
-        newValue ? formatValue(newValue, { generateConfig, locale, format: formatList[0] }) : '',
-      );
-    }
-  };
+      // Operation ref
+      const operationRef = ref<ContextOperationRefProps>(null);
 
-  const triggerOpen = (newOpen: boolean) => {
-    if (disabled && newOpen) {
-      return;
-    }
+      // Open
+      const [mergedOpen, triggerInnerOpen] = useMergedState(false, {
+        value: toRef(props, 'open'),
+        defaultValue: props.defaultOpen,
+        postState: postOpen => (props.disabled ? false : postOpen),
+        onChange: newOpen => {
+          if (props.onOpenChange) {
+            props.onOpenChange(newOpen);
+          }
 
-    triggerInnerOpen(newOpen);
-  };
+          if (!newOpen && operationRef.value && operationRef.value.onClose) {
+            operationRef.value.onClose();
+          }
+        },
+      });
 
-  const forwardKeyDown = (e: React.KeyboardEvent<HTMLElement>) => {
-    if (mergedOpen && operationRef.current && operationRef.current.onKeyDown) {
-      // Let popup panel handle keyboard
-      return operationRef.current.onKeyDown(e);
-    }
+      // ============================= Text ==============================
+      const texts = useValueTexts(selectedValue, {
+        formatList,
+        generateConfig: toRef(props, 'generateConfig'),
+        locale: toRef(props, 'locale'),
+      });
+      const valueTexts = computed(() => texts.value[0]);
+      const firstValueText = computed(() => texts.value[1]);
 
-    /* istanbul ignore next */
-    /* eslint-disable no-lone-blocks */
-    {
-      warning(
-        false,
-        'Picker not correct forward KeyDown operation. Please help to fire issue about this.',
-      );
-      return false;
-    }
-  };
+      const [text, triggerTextChange, resetText] = useTextValueMapping({
+        valueTexts,
+        onTextChange: newText => {
+          const inputDate = parseValue(newText, {
+            locale: props.locale,
+            formatList: formatList.value,
+            generateConfig: props.generateConfig,
+          });
+          if (inputDate && (!props.disabledDate || !props.disabledDate(inputDate))) {
+            setSelectedValue(inputDate);
+          }
+        },
+      });
 
-  const onInternalMouseUp: React.MouseEventHandler<HTMLDivElement> = (...args) => {
-    if (onMouseUp) {
-      onMouseUp(...args);
-    }
+      // ============================ Trigger ============================
+      const triggerChange = (newValue: DateType | null) => {
+        const { onChange, generateConfig, locale } = props;
+        setSelectedValue(newValue);
+        setInnerValue(newValue);
 
-    if (inputRef.current) {
-      inputRef.current.focus();
-      triggerOpen(true);
-    }
-  };
-
-  // ============================= Input =============================
-  const [inputProps, { focused, typing }] = usePickerInput({
-    blurToCancel: needConfirmButton,
-    open: mergedOpen,
-    value: text,
-    triggerOpen,
-    forwardKeyDown,
-    isClickOutside: (target) =>
-      !elementsContains([panelDivRef.current, inputDivRef.current], target as HTMLElement),
-    onSubmit: () => {
-      if (disabledDate && disabledDate(selectedValue)) {
-        return false;
-      }
-
-      triggerChange(selectedValue);
-      triggerOpen(false);
-      resetText();
-      return true;
-    },
-    onCancel: () => {
-      triggerOpen(false);
-      setSelectedValue(mergedValue);
-      resetText();
-    },
-    onKeyDown: (e, preventDefault) => {
-      onKeyDown?.(e, preventDefault);
-    },
-    onFocus,
-    onBlur,
-  });
-
-  // ============================= Sync ==============================
-  // Close should sync back with text value
-  React.useEffect(() => {
-    if (!mergedOpen) {
-      setSelectedValue(mergedValue);
-
-      if (!valueTexts.length || valueTexts[0] === '') {
-        triggerTextChange('');
-      } else if (firstValueText !== text) {
-        resetText();
-      }
-    }
-  }, [mergedOpen, valueTexts]);
-
-  // Change picker should sync back with text value
-  React.useEffect(() => {
-    if (!mergedOpen) {
-      resetText();
-    }
-  }, [picker]);
-
-  // Sync innerValue with control mode
-  React.useEffect(() => {
-    // Sync select value
-    setSelectedValue(mergedValue);
-  }, [mergedValue]);
-
-  // ============================ Private ============================
-  if (pickerRef) {
-    pickerRef.current = {
-      focus: () => {
-        if (inputRef.current) {
-          inputRef.current.focus();
+        if (onChange && !isEqual(generateConfig, mergedValue.value, newValue)) {
+          onChange(
+            newValue,
+            newValue
+              ? formatValue(newValue, { generateConfig, locale, format: formatList[0] })
+              : '',
+          );
         }
-      },
-      blur: () => {
-        if (inputRef.current) {
-          inputRef.current.blur();
+      };
+
+      const triggerOpen = (newOpen: boolean) => {
+        if (props.disabled && newOpen) {
+          return;
         }
-      },
-    };
-  }
 
-  const [hoverValue, onEnter, onLeave] = useHoverValue(text, {
-    formatList,
-    generateConfig,
-    locale,
-  });
+        triggerInnerOpen(newOpen);
+      };
 
-  // ============================= Panel =============================
-  const panelProps = {
-    // Remove `picker` & `format` here since TimePicker is little different with other panel
-    ...(props as Omit<MergedPickerProps<DateType>, 'picker' | 'format'>),
-    className: undefined,
-    style: undefined,
-    pickerValue: undefined,
-    onPickerValueChange: undefined,
-    onChange: null,
-  };
+      const forwardKeyDown = (e: KeyboardEvent) => {
+        if (mergedOpen && operationRef.value && operationRef.value.onKeyDown) {
+          // Let popup panel handle keyboard
+          return operationRef.value.onKeyDown(e);
+        }
 
-  let panelNode: React.ReactNode = (
-    <PickerPanel<DateType>
-      {...panelProps}
-      generateConfig={generateConfig}
-      class={classNames({
-        [`${prefixCls}-panel-focused`]: !typing,
-      })}
-      value={selectedValue}
-      locale={locale}
-      tabIndex={-1}
-      onSelect={(date) => {
-        onSelect?.(date);
-        setSelectedValue(date);
-      }}
-      direction={direction}
-      onPanelChange={(viewDate, mode) => {
-        const { onPanelChange } = props;
-        onLeave(true);
-        onPanelChange?.(viewDate, mode);
-      }}
-    />
-  );
+        /* istanbul ignore next */
+        /* eslint-disable no-lone-blocks */
+        {
+          warning(
+            false,
+            'Picker not correct forward KeyDown operation. Please help to fire issue about this.',
+          );
+          return false;
+        }
+      };
 
-  if (panelRender) {
-    panelNode = panelRender(panelNode);
-  }
+      const onInternalMouseUp: MouseEventHandler = (...args) => {
+        if (props.onMouseUp) {
+          props.onMouseUp(...args);
+        }
 
-  const panel = (
-    <div
-      class={`${prefixCls}-panel-container`}
-      onMousedown={(e) => {
-        e.preventDefault();
-      }}
-    >
-      {panelNode}
-    </div>
-  );
+        if (inputRef.value) {
+          inputRef.value.focus();
+          triggerOpen(true);
+        }
+      };
 
-  let suffixNode: React.ReactNode;
-  if (suffixIcon) {
-    suffixNode = <span class={`${prefixCls}-suffix`}>{suffixIcon}</span>;
-  }
-
-  let clearNode: React.ReactNode;
-  if (allowClear && mergedValue && !disabled) {
-    clearNode = (
-      <span
-        onMousedown={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-        }}
-        onMouseup={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          triggerChange(null);
-          triggerOpen(false);
-        }}
-        class={`${prefixCls}-clear`}
-        role="button"
-      >
-        {clearIcon || <span class={`${prefixCls}-clear-btn`} />}
-      </span>
-    );
-  }
-
-  // ============================ Warning ============================
-  if (process.env.NODE_ENV !== 'production') {
-    warning(
-      !defaultOpenValue,
-      '`defaultOpenValue` may confuse user for the current value status. Please use `defaultValue` instead.',
-    );
-  }
-
-  // ============================ Return =============================
-  const onContextSelect = (date: DateType, type: 'key' | 'mouse' | 'submit') => {
-    if (type === 'submit' || (type !== 'key' && !needConfirmButton)) {
-      // triggerChange will also update selected values
-      triggerChange(date);
-      triggerOpen(false);
-    }
-  };
-  const popupPlacement = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
-
-  return (
-    <PanelContext.Provider
-      value={{
-        operationRef,
-        hideHeader: picker === 'time',
-        panelRef: panelDivRef,
-        onSelect: onContextSelect,
+      // ============================= Input =============================
+      const [inputProps, { focused, typing }] = usePickerInput({
+        blurToCancel: needConfirmButton,
         open: mergedOpen,
-        defaultOpenValue,
-        onDateMouseEnter: onEnter,
-        onDateMouseLeave: onLeave,
-      }}
-    >
-      <PickerTrigger
-        visible={mergedOpen}
-        popupElement={panel}
-        popupStyle={popupStyle}
-        prefixCls={prefixCls}
-        dropdownClassName={dropdownClassName}
-        dropdownAlign={dropdownAlign}
-        getPopupContainer={getPopupContainer}
-        transitionName={transitionName}
-        popupPlacement={popupPlacement}
-        direction={direction}
-      >
-        <div
-          class={classNames(prefixCls, className, {
-            [`${prefixCls}-disabled`]: disabled,
-            [`${prefixCls}-focused`]: focused,
-            [`${prefixCls}-rtl`]: direction === 'rtl',
-          })}
-          style={style}
-          onMousedown={onMouseDown}
-          onMouseup={onInternalMouseUp}
-          onMouseenter={onMouseEnter}
-          onMouseleave={onMouseLeave}
-          onContextmenu={onContextMenu}
-          onClick={onClick}
-        >
-          <div
-            class={classNames(`${prefixCls}-input`, {
-              [`${prefixCls}-input-placeholder`]: !!hoverValue,
-            })}
-            ref={inputDivRef}
-          >
-            <input
-              id={id}
-              tabIndex={tabIndex}
-              disabled={disabled}
-              readonly={inputReadOnly || typeof formatList[0] === 'function' || !typing}
-              value={hoverValue || text}
-              onChange={(e) => {
-                triggerTextChange(e.target.value);
-              }}
-              autofocus={autoFocus}
-              placeholder={placeholder}
-              ref={inputRef}
-              title={text}
-              {...inputProps}
-              size={getInputSize(picker, formatList[0], generateConfig)}
-              {...getDataOrAriaProps(props)}
-              autocomplete={autoComplete}
-            />
-            {suffixNode}
-            {clearNode}
-          </div>
-        </div>
-      </PickerTrigger>
-    </PanelContext.Provider>
-  );
+        value: text,
+        triggerOpen,
+        forwardKeyDown,
+        isClickOutside: target =>
+          !elementsContains([panelDivRef.current, inputDivRef.current], target as HTMLElement),
+        onSubmit: () => {
+          if (props.disabledDate && props.disabledDate(selectedValue.value)) {
+            return false;
+          }
+
+          triggerChange(selectedValue.value);
+          triggerOpen(false);
+          resetText();
+          return true;
+        },
+        onCancel: () => {
+          triggerOpen(false);
+          setSelectedValue(mergedValue.value);
+          resetText();
+        },
+        onKeyDown: (e, preventDefault) => {
+          props.onKeyDown?.(e, preventDefault);
+        },
+        onFocus: (e: FocusEvent) => {
+          props.onFocus?.(e);
+        },
+        onBlur: (e: FocusEvent) => {
+          props.onBlur?.(e);
+        },
+      });
+
+      return () => {
+        return null;
+      };
+    },
+  });
 }
 
-// Wrap with class component to enable pass generic with instance method
-class Picker<DateType> extends React.Component<PickerProps<DateType>> {
-  pickerRef = React.createRef<PickerRefConfig>();
-
-  focus = () => {
-    if (this.pickerRef.current) {
-      this.pickerRef.current.focus();
-    }
-  };
-
-  blur = () => {
-    if (this.pickerRef.current) {
-      this.pickerRef.current.blur();
-    }
-  };
-
-  render() {
-    return (
-      <InnerPicker<DateType>
-        {...this.props}
-        pickerRef={this.pickerRef as React.MutableRefObject<PickerRefConfig>}
-      />
-    );
-  }
-}
-
-export default Picker;
+export default Picker();

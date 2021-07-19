@@ -1,6 +1,11 @@
-import type * as React from 'react';
-import { useState, useEffect, useRef } from 'react';
-import KeyCode from 'rc-util/lib/KeyCode';
+import type { ComputedRef, HTMLAttributes, Ref } from 'vue';
+import { onBeforeUnmount } from 'vue';
+import { watchEffect } from 'vue';
+import { watch } from 'vue';
+import { ref } from 'vue';
+import { computed } from 'vue';
+import type { FocusEventHandler } from '../../_util/EventInterface';
+import KeyCode from '../../_util/KeyCode';
 import { addGlobalMouseDownEvent, getTargetFromEvent } from '../utils/uiUtil';
 
 export default function usePickerInput({
@@ -16,51 +21,51 @@ export default function usePickerInput({
   onFocus,
   onBlur,
 }: {
-  open: boolean;
-  value: string;
+  open: Ref<boolean>;
+  value: Ref<string>;
   isClickOutside: (clickElement: EventTarget | null) => boolean;
   triggerOpen: (open: boolean) => void;
-  forwardKeyDown: (e: React.KeyboardEvent<HTMLInputElement>) => boolean;
-  onKeyDown: (e: React.KeyboardEvent<HTMLInputElement>, preventDefault: () => void) => void;
-  blurToCancel?: boolean;
+  forwardKeyDown: (e: KeyboardEvent) => boolean;
+  onKeyDown: (e: KeyboardEvent, preventDefault: () => void) => void;
+  blurToCancel?: ComputedRef<boolean>;
   onSubmit: () => void | boolean;
   onCancel: () => void;
-  onFocus?: React.FocusEventHandler<HTMLInputElement>;
-  onBlur?: React.FocusEventHandler<HTMLInputElement>;
-}): [React.DOMAttributes<HTMLInputElement>, { focused: boolean; typing: boolean }] {
-  const [typing, setTyping] = useState(false);
-  const [focused, setFocused] = useState(false);
+  onFocus?: FocusEventHandler;
+  onBlur?: FocusEventHandler;
+}): [ComputedRef<HTMLAttributes>, { focused: Ref<boolean>; typing: Ref<boolean> }] {
+  const typing = ref(false);
+  const focused = ref(false);
 
   /**
    * We will prevent blur to handle open event when user click outside,
    * since this will repeat trigger `onOpenChange` event.
    */
-  const preventBlurRef = useRef<boolean>(false);
+  const preventBlurRef = ref<boolean>(false);
 
-  const valueChangedRef = useRef<boolean>(false);
+  const valueChangedRef = ref<boolean>(false);
 
-  const preventDefaultRef = useRef<boolean>(false);
+  const preventDefaultRef = ref<boolean>(false);
 
-  const inputProps: React.DOMAttributes<HTMLInputElement> = {
-    onMouseDown: () => {
-      setTyping(true);
+  const inputProps = computed<HTMLAttributes>(() => ({
+    onMousedown: () => {
+      typing.value = true;
       triggerOpen(true);
     },
-    onKeyDown: (e) => {
+    onKeydown: e => {
       const preventDefault = (): void => {
-        preventDefaultRef.current = true;
+        preventDefaultRef.value = true;
       };
 
       onKeyDown(e, preventDefault);
 
-      if (preventDefaultRef.current) return;
+      if (preventDefaultRef.value) return;
 
       switch (e.which) {
         case KeyCode.ENTER: {
-          if (!open) {
+          if (!open.value) {
             triggerOpen(true);
           } else if (onSubmit() !== false) {
-            setTyping(true);
+            typing.value = true;
           }
 
           e.preventDefault();
@@ -68,12 +73,12 @@ export default function usePickerInput({
         }
 
         case KeyCode.TAB: {
-          if (typing && open && !e.shiftKey) {
-            setTyping(false);
+          if (typing.value && open.value && !e.shiftKey) {
+            typing.value = false;
             e.preventDefault();
-          } else if (!typing && open) {
+          } else if (!typing.value && open.value) {
             if (!forwardKeyDown(e) && e.shiftKey) {
-              setTyping(true);
+              typing.value = true;
               e.preventDefault();
             }
           }
@@ -81,32 +86,32 @@ export default function usePickerInput({
         }
 
         case KeyCode.ESC: {
-          setTyping(true);
+          typing.value = true;
           onCancel();
           return;
         }
       }
 
-      if (!open && ![KeyCode.SHIFT].includes(e.which)) {
+      if (!open.value && ![KeyCode.SHIFT].includes(e.which)) {
         triggerOpen(true);
-      } else if (!typing) {
+      } else if (!typing.value) {
         // Let popup panel handle keyboard
         forwardKeyDown(e);
       }
     },
 
-    onFocus: (e) => {
-      setTyping(true);
-      setFocused(true);
+    onFocus: e => {
+      typing.value = true;
+      focused.value = true;
 
       if (onFocus) {
         onFocus(e);
       }
     },
 
-    onBlur: (e) => {
-      if (preventBlurRef.current || !isClickOutside(document.activeElement)) {
-        preventBlurRef.current = false;
+    onBlur: e => {
+      if (preventBlurRef.value || !isClickOutside(document.activeElement)) {
+        preventBlurRef.value = false;
         return;
       }
 
@@ -121,51 +126,58 @@ export default function usePickerInput({
             onCancel();
           }
         }, 0);
-      } else if (open) {
+      } else if (open.value) {
         triggerOpen(false);
 
-        if (valueChangedRef.current) {
+        if (valueChangedRef.value) {
           onSubmit();
         }
       }
-      setFocused(false);
+      focused.value = false;
 
       if (onBlur) {
         onBlur(e);
       }
     },
-  };
+  }));
 
   // check if value changed
-  useEffect(() => {
-    valueChangedRef.current = false;
-  }, [open]);
+  watch(open, () => {
+    valueChangedRef.value = false;
+  });
 
-  useEffect(() => {
-    valueChangedRef.current = true;
-  }, [value]);
-
+  watch(value, () => {
+    valueChangedRef.value = true;
+  });
+  const globalMouseDownEvent = ref();
   // Global click handler
-  useEffect(() =>
-    addGlobalMouseDownEvent((e: MouseEvent) => {
-      const target = getTargetFromEvent(e);
+  watchEffect(
+    () =>
+      globalMouseDownEvent.value &&
+      globalMouseDownEvent.value()(
+        (globalMouseDownEvent.value = addGlobalMouseDownEvent((e: MouseEvent) => {
+          const target = getTargetFromEvent(e);
 
-      if (open) {
-        const clickedOutside = isClickOutside(target);
+          if (open) {
+            const clickedOutside = isClickOutside(target);
 
-        if (!clickedOutside) {
-          preventBlurRef.current = true;
+            if (!clickedOutside) {
+              preventBlurRef.value = true;
 
-          // Always set back in case `onBlur` prevented by user
-          requestAnimationFrame(() => {
-            preventBlurRef.current = false;
-          });
-        } else if (!focused || clickedOutside) {
-          triggerOpen(false);
-        }
-      }
-    }),
+              // Always set back in case `onBlur` prevented by user
+              requestAnimationFrame(() => {
+                preventBlurRef.value = false;
+              });
+            } else if (!focused.value || clickedOutside) {
+              triggerOpen(false);
+            }
+          }
+        })),
+      ),
   );
+  onBeforeUnmount(() => {
+    globalMouseDownEvent.value && globalMouseDownEvent.value();
+  });
 
   return [inputProps, { focused, typing }];
 }

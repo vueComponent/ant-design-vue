@@ -1,4 +1,3 @@
-
 import type { GenerateConfig } from '../../generate';
 import {
   WEEK_DAY_COUNT,
@@ -12,6 +11,7 @@ import useCellClassName from '../../hooks/useCellClassName';
 import PanelBody from '../PanelBody';
 import { VueNode } from '../../../_util/type';
 import { useInjectRange } from '../../RangeContext';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export type DateRender<DateType> = (currentDate: DateType, today: DateType) => VueNode;
 
@@ -34,19 +34,12 @@ export type DateBodyProps<DateType> = {
   onSelect: (value: DateType) => void;
 } & DateBodyPassProps<DateType>;
 
-function DateBody<DateType>(props: DateBodyProps<DateType>) {
-  const {
-    prefixCls,
-    generateConfig,
-    prefixColumn,
-    locale,
-    rowCount,
-    viewDate,
-    value,
-    dateRender,
-  } = props;
+function DateBody<DateType>(_props: DateBodyProps<DateType>) {
+  const props = useMergeProps(_props);
+  const { prefixCls, generateConfig, prefixColumn, locale, rowCount, viewDate, value, dateRender } =
+    props;
 
-  const { rangedValue, hoverRangedValue } =useInjectRange()
+  const { rangedValue, hoverRangedValue } = useInjectRange();
 
   const baseDate = getWeekStartDate(locale.locale, generateConfig, viewDate);
   const cellPrefixCls = `${prefixCls}-cell`;
@@ -74,8 +67,8 @@ function DateBody<DateType>(props: DateBodyProps<DateType>) {
     today,
     value,
     generateConfig,
-    rangedValue: prefixColumn ? null : rangedValue,
-    hoverRangedValue: prefixColumn ? null : hoverRangedValue,
+    rangedValue: prefixColumn ? null : rangedValue.value,
+    hoverRangedValue: prefixColumn ? null : hoverRangedValue.value,
     isSameCell: (current, target) => isSameDate(generateConfig, current, target),
     isInView: date => isSameMonth(generateConfig, date, viewDate),
     offsetCell: (date, offset) => generateConfig.addDate(date, offset),
@@ -105,7 +98,20 @@ function DateBody<DateType>(props: DateBodyProps<DateType>) {
   );
 }
 
-DateBody.displayName = 'DateBody'
+DateBody.displayName = 'DateBody';
 DateBody.inheritAttrs = false;
-
+DateBody.props = [
+  'prefixCls',
+  'generateConfig',
+  'value?',
+  'viewDate',
+  'locale',
+  'rowCount',
+  'onSelect',
+  'dateRender?',
+  'disabledDate?',
+  // Used for week panel
+  'prefixColumn?',
+  'rowClassName?',
+];
 export default DateBody;

@@ -1,4 +1,3 @@
-
 import { VueNode } from '../../_util/type';
 import type { Components, RangeList, Locale } from '../interface';
 

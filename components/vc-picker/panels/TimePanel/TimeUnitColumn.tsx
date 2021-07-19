@@ -32,7 +32,7 @@ function TimeUnitColumn(props: TimeUnitColumnProps) {
     () => props.value,
     () => {
       const li = liRefs.value.get(value!);
-      if (li && open !== false) {
+      if (li && open.value !== false) {
         scrollTo(ulRef.value!, li.offsetTop, 120);
       }
     },
@@ -43,7 +43,7 @@ function TimeUnitColumn(props: TimeUnitColumnProps) {
 
   watch(open, () => {
     scrollRef.value?.();
-    if (open) {
+    if (open.value) {
       const li = liRefs.value.get(value!);
       if (li) {
         scrollRef.value = waitElementReady(li, () => {

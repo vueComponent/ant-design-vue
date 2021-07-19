@@ -1,4 +1,3 @@
-
 import type { GenerateConfig } from '../../generate';
 import type { Locale } from '../../interface';
 import { formatValue, isSameMonth } from '../../utils/dateUtil';
@@ -6,6 +5,7 @@ import { useInjectRange } from '../../RangeContext';
 import useCellClassName from '../../hooks/useCellClassName';
 import PanelBody from '../PanelBody';
 import { VueNode } from '../../../_util/type';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export const MONTH_COL_COUNT = 3;
 const MONTH_ROW_COUNT = 4;
@@ -23,10 +23,11 @@ export type MonthBodyProps<DateType> = {
   onSelect: (value: DateType) => void;
 };
 
-function MonthBody<DateType>(props: MonthBodyProps<DateType>) {
+function MonthBody<DateType>(_props: MonthBodyProps<DateType>) {
+  const props = useMergeProps(_props);
   const { prefixCls, locale, value, viewDate, generateConfig, monthCellRender } = props;
 
-  const { rangedValue, hoverRangedValue } = useInjectRange()
+  const { rangedValue, hoverRangedValue } = useInjectRange();
 
   const cellPrefixCls = `${prefixCls}-cell`;
 
@@ -34,8 +35,8 @@ function MonthBody<DateType>(props: MonthBodyProps<DateType>) {
     cellPrefixCls,
     value,
     generateConfig,
-    rangedValue,
-    hoverRangedValue,
+    rangedValue: rangedValue.value,
+    hoverRangedValue: hoverRangedValue.value,
     isSameCell: (current, target) => isSameMonth(generateConfig, current, target),
     isInView: () => true,
     offsetCell: (date, offset) => generateConfig.addMonth(date, offset),
@@ -82,8 +83,7 @@ function MonthBody<DateType>(props: MonthBodyProps<DateType>) {
   );
 }
 
-
-MonthBody.displayName ='MonthBody'
+MonthBody.displayName = 'MonthBody';
 MonthBody.inheritAttrs = false;
 
 export default MonthBody;

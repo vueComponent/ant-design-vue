@@ -1,8 +1,8 @@
-
 import Header from '../Header';
 import type { GenerateConfig } from '../../generate';
 import { YEAR_DECADE_COUNT } from '.';
 import { useInjectPanel } from '../../PanelContext';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export type YearHeaderProps<DateType> = {
   prefixCls: string;
@@ -15,10 +15,11 @@ export type YearHeaderProps<DateType> = {
   onDecadeClick: () => void;
 };
 
-function YearHeader<DateType>(props: YearHeaderProps<DateType>) {
+function YearHeader<DateType>(_props: YearHeaderProps<DateType>) {
+  const props = useMergeProps(_props);
   const { prefixCls, generateConfig, viewDate, onPrevDecade, onNextDecade, onDecadeClick } = props;
-  const { hideHeader } = useInjectPanel()
-  if (hideHeader) {
+  const { hideHeader } = useInjectPanel();
+  if (hideHeader.value) {
     return null;
   }
 
@@ -41,8 +42,6 @@ function YearHeader<DateType>(props: YearHeaderProps<DateType>) {
     </Header>
   );
 }
-
-
 
 YearHeader.displayName = 'YearHeader';
 YearHeader.inheritAttrs = false;

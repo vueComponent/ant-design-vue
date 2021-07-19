@@ -16,10 +16,7 @@ export default function useCellClassName<DateType>({
 }: {
   cellPrefixCls: string;
   generateConfig: GenerateConfig<DateType>;
-  isSameCell: (
-    current: NullableDateType<DateType>,
-    target: NullableDateType<DateType>,
-  ) => boolean;
+  isSameCell: (current: NullableDateType<DateType>, target: NullableDateType<DateType>) => boolean;
   offsetCell: (date: DateType, offset: number) => DateType;
   isInView: (date: DateType) => boolean;
   rangedValue?: RangeValue<DateType>;
@@ -37,12 +34,7 @@ export default function useCellClassName<DateType>({
     const hoverStart = getValue(hoverRangedValue, 0);
     const hoverEnd = getValue(hoverRangedValue, 1);
 
-    const isRangeHovered = isInRange(
-      generateConfig,
-      hoverStart,
-      hoverEnd,
-      currentDate,
-    );
+    const isRangeHovered = isInRange(generateConfig, hoverStart, hoverEnd, currentDate);
 
     function isRangeStart(date: DateType) {
       return isSameCell(rangeStart, date);
@@ -54,11 +46,9 @@ export default function useCellClassName<DateType>({
     const isHoverEnd = isSameCell(hoverEnd, currentDate);
 
     const isHoverEdgeStart =
-      (isRangeHovered || isHoverEnd) &&
-      (!isInView(prevDate) || isRangeEnd(prevDate));
+      (isRangeHovered || isHoverEnd) && (!isInView(prevDate) || isRangeEnd(prevDate));
     const isHoverEdgeEnd =
-      (isRangeHovered || isHoverStart) &&
-      (!isInView(nextDate) || isRangeStart(nextDate));
+      (isRangeHovered || isHoverStart) && (!isInView(nextDate) || isRangeStart(nextDate));
 
     return {
       // In view
@@ -73,10 +63,8 @@ export default function useCellClassName<DateType>({
       ),
       [`${cellPrefixCls}-range-start`]: isRangeStart(currentDate),
       [`${cellPrefixCls}-range-end`]: isRangeEnd(currentDate),
-      [`${cellPrefixCls}-range-start-single`]:
-        isRangeStart(currentDate) && !rangeEnd,
-      [`${cellPrefixCls}-range-end-single`]:
-        isRangeEnd(currentDate) && !rangeStart,
+      [`${cellPrefixCls}-range-start-single`]: isRangeStart(currentDate) && !rangeEnd,
+      [`${cellPrefixCls}-range-end-single`]: isRangeEnd(currentDate) && !rangeStart,
       [`${cellPrefixCls}-range-start-near-hover`]:
         isRangeStart(currentDate) &&
         (isSameCell(prevDate, hoverStart) ||

@@ -201,7 +201,7 @@ export function addGlobalMouseDownEvent(callback: ClickEventHandler) {
   if (!globalClickFunc && typeof window !== 'undefined' && window.addEventListener) {
     globalClickFunc = (e: MouseEvent) => {
       // Clone a new list to avoid repeat trigger events
-      [...clickCallbacks].forEach((queueFunc) => {
+      [...clickCallbacks].forEach(queueFunc => {
         queueFunc(e);
       });
     };
@@ -272,5 +272,5 @@ export function elementsContains(
   elements: (HTMLElement | undefined | null)[],
   target: HTMLElement,
 ) {
-  return elements.some((ele) => ele && ele.contains(target));
+  return elements.some(ele => ele && ele.contains(target));
 }

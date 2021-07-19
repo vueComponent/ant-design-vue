@@ -1,9 +1,9 @@
-
 import Header from '../Header';
 import type { Locale } from '../../interface';
 import type { GenerateConfig } from '../../generate';
 import { useInjectPanel } from '../../PanelContext';
 import { formatValue } from '../../utils/dateUtil';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export type TimeHeaderProps<DateType> = {
   prefixCls: string;
@@ -13,9 +13,10 @@ export type TimeHeaderProps<DateType> = {
   format: string;
 };
 
-function TimeHeader<DateType>(props: TimeHeaderProps<DateType>) {
-  const { hideHeader } = useInjectPanel()
-  if (hideHeader) {
+function TimeHeader<DateType>(_props: TimeHeaderProps<DateType>) {
+  const props = useMergeProps(_props);
+  const { hideHeader } = useInjectPanel();
+  if (hideHeader.value) {
     return null;
   }
 
@@ -35,8 +36,7 @@ function TimeHeader<DateType>(props: TimeHeaderProps<DateType>) {
   );
 }
 
-
-TimeHeader.displayName ='TimeHeader'
+TimeHeader.displayName = 'TimeHeader';
 TimeHeader.inheritAttrs = false;
 
 export default TimeHeader;

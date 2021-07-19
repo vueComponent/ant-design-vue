@@ -1,10 +1,10 @@
-
 import type { GenerateConfig } from '../../generate';
 import type { Locale } from '../../interface';
 import { formatValue, isSameQuarter } from '../../utils/dateUtil';
 import RangeContext, { useInjectRange } from '../../RangeContext';
 import useCellClassName from '../../hooks/useCellClassName';
 import PanelBody from '../PanelBody';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export const QUARTER_COL_COUNT = 4;
 const QUARTER_ROW_COUNT = 1;
@@ -19,10 +19,11 @@ export type QuarterBodyProps<DateType> = {
   onSelect: (value: DateType) => void;
 };
 
-function QuarterBody<DateType>(props: QuarterBodyProps<DateType>) {
+function QuarterBody<DateType>(_props: QuarterBodyProps<DateType>) {
+  const props = useMergeProps(_props);
   const { prefixCls, locale, value, viewDate, generateConfig } = props;
 
-  const { rangedValue, hoverRangedValue } = useInjectRange()
+  const { rangedValue, hoverRangedValue } = useInjectRange();
 
   const cellPrefixCls = `${prefixCls}-cell`;
 
@@ -30,8 +31,8 @@ function QuarterBody<DateType>(props: QuarterBodyProps<DateType>) {
     cellPrefixCls,
     value,
     generateConfig,
-    rangedValue,
-    hoverRangedValue,
+    rangedValue: rangedValue.value,
+    hoverRangedValue: hoverRangedValue.value,
     isSameCell: (current, target) => isSameQuarter(generateConfig, current, target),
     isInView: () => true,
     offsetCell: (date, offset) => generateConfig.addMonth(date, offset * 3),
@@ -65,7 +66,6 @@ function QuarterBody<DateType>(props: QuarterBodyProps<DateType>) {
   );
 }
 
-
-QuarterBody.displayName ='QuarterBody'
+QuarterBody.displayName = 'QuarterBody';
 QuarterBody.inheritAttrs = false;
 export default QuarterBody;

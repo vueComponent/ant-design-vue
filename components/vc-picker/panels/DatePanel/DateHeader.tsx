@@ -1,10 +1,10 @@
-
 import Header from '../Header';
 import type { Locale } from '../../interface';
 import type { GenerateConfig } from '../../generate';
 import { useInjectPanel } from '../../PanelContext';
 import { formatValue } from '../../utils/dateUtil';
 import { VueNode } from '../../../_util/type';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export type DateHeaderProps<DateType> = {
   prefixCls: string;
@@ -21,7 +21,8 @@ export type DateHeaderProps<DateType> = {
   onMonthClick: () => void;
 };
 
-function DateHeader<DateType>(props: DateHeaderProps<DateType>) {
+function DateHeader<DateType>(_props: DateHeaderProps<DateType>) {
+  const props = useMergeProps(_props);
   const {
     prefixCls,
     generateConfig,
@@ -35,8 +36,8 @@ function DateHeader<DateType>(props: DateHeaderProps<DateType>) {
     onMonthClick,
   } = props;
 
-  const { hideHeader } = useInjectPanel()
-  if (hideHeader) {
+  const { hideHeader } = useInjectPanel();
+  if (hideHeader.value) {
     return null;
   }
 
@@ -100,6 +101,6 @@ function DateHeader<DateType>(props: DateHeaderProps<DateType>) {
   );
 }
 
-DateHeader.displayName = 'DateHeader'
+DateHeader.displayName = 'DateHeader';
 DateHeader.inheritAttrs = false;
 export default DateHeader;

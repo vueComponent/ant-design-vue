@@ -1,4 +1,3 @@
-
 import type { DateBodyPassProps, DateRender } from './DateBody';
 import DateBody from './DateBody';
 import DateHeader from './DateHeader';
@@ -8,6 +7,7 @@ import type { KeyboardConfig } from '../../utils/uiUtil';
 import { createKeyDownHandler } from '../../utils/uiUtil';
 import classNames from '../../../_util/classNames';
 import { ref } from '@vue/reactivity';
+import useMergeProps from '../../hooks/useMergeProps';
 
 const DATE_ROW_COUNT = 6;
 
@@ -18,14 +18,17 @@ export type DatePanelProps<DateType> = {
   // Used for week panel
   panelName?: string;
   keyboardConfig?: KeyboardConfig;
-} & PanelSharedProps<DateType> & DateBodyPassProps<DateType>;
+} & PanelSharedProps<DateType> &
+  DateBodyPassProps<DateType>;
 
-function DatePanel<DateType>(props: DatePanelProps<DateType>) {
+function DatePanel<DateType>(_props: DatePanelProps<DateType>) {
+  const props = useMergeProps(_props);
   const {
     prefixCls,
     panelName = 'date',
     keyboardConfig,
     active,
+    operationRef,
     generateConfig,
     value,
     viewDate,
@@ -34,10 +37,9 @@ function DatePanel<DateType>(props: DatePanelProps<DateType>) {
     onSelect,
   } = props;
   const panelPrefixCls = `${prefixCls}-${panelName}-panel`;
-  const operationRef = ref()
   // ======================= Keyboard =======================
   operationRef.value = {
-    onKeyDown: event =>
+    onKeyDown: (event: KeyboardEvent) =>
       createKeyDownHandler(event, {
         onLeftRight: diff => {
           onSelect(generateConfig.addDate(value || viewDate, diff), 'key');
@@ -110,7 +112,7 @@ function DatePanel<DateType>(props: DatePanelProps<DateType>) {
   );
 }
 
-DatePanel.displayName ='DatePanel'
+DatePanel.displayName = 'DatePanel';
 DatePanel.inheritAttrs = false;
 
 export default DatePanel;

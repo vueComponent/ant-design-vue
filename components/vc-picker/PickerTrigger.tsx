@@ -3,6 +3,7 @@ import { AlignType } from '../vc-align/interface';
 import Trigger from '../vc-trigger';
 import classNames from '../_util/classNames';
 import { VueNode } from '../_util/type';
+import useMergeProps from './hooks/useMergeProps';
 
 const BUILT_IN_PLACEMENTS = {
   bottomLeft: {
@@ -56,8 +57,8 @@ export type PickerTriggerProps = {
   direction?: 'ltr' | 'rtl';
 };
 
-function PickerTrigger(
-  {
+function PickerTrigger(props: PickerTriggerProps, { slots }) {
+  const {
     prefixCls,
     popupElement,
     popupStyle,
@@ -69,9 +70,7 @@ function PickerTrigger(
     range,
     popupPlacement,
     direction,
-  }: PickerTriggerProps,
-  { slots },
-) {
+  } = useMergeProps(props);
   const dropdownPrefixCls = `${prefixCls}-dropdown`;
 
   const getPopupPlacement = () => {

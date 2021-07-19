@@ -1,4 +1,3 @@
-
 import type { GenerateConfig } from '../../generate';
 import type { Locale, OnSelect } from '../../interface';
 import type { Unit } from './TimeUnitColumn';
@@ -8,17 +7,8 @@ import type { SharedTimeProps } from '.';
 import { setTime as utilSetTime } from '../../utils/timeUtil';
 import { cloneElement } from '../../../_util/vnode';
 import { VueNode } from '../../../_util/type';
-import { ref, Ref } from '@vue/reactivity';
-import { computed, defineComponent, watchEffect } from '@vue/runtime-core';
-
-function shouldUnitsUpdate(prevUnits: Unit[], nextUnits: Unit[]) {
-  if (prevUnits.length !== nextUnits.length) return true;
-  // if any unit's disabled status is different, the units should be re-evaluted
-  for (let i = 0; i < prevUnits.length; i += 1) {
-    if (prevUnits[i].disabled !== nextUnits[i].disabled) return true;
-  }
-  return false;
-}
+import type { Ref } from 'vue';
+import { computed, defineComponent } from 'vue';
 
 function generateUnits(
   start: number,
@@ -51,7 +41,6 @@ export type TimeBodyProps<DateType> = {
   operationRef: Ref<BodyOperationRef | undefined>;
 } & SharedTimeProps<DateType>;
 
-
 const TimeBody = defineComponent({
   name: 'TimeBody',
   inheritAttrs: false,
@@ -75,26 +64,26 @@ const TimeBody = defineComponent({
     'onSelect',
   ],
   setup(props) {
-    const originHour = computed(() => props.value ? props.generateConfig.getHour(props.value) : -1);
-    const isPM = computed(()=> {
+    const originHour = computed(() =>
+      props.value ? props.generateConfig.getHour(props.value) : -1,
+    );
+    const isPM = computed(() => {
       if (props.use12Hours) {
         return originHour.value >= 12; // -1 means should display AM
       } else {
-        return false
-      }
-    })
-    let hour = computed(()=> {
-      // Should additional logic to handle 12 hours
-      if (props.use12Hours) {
-        return originHour.value % 12
-      } else {
-        return originHour.value
+        return false;
       }
     });
-    const minute = computed(()=> props.value ? props.generateConfig.getMinute(props.value) : -1);
-    const second = computed(()=> props.value ? props.generateConfig.getSecond(props.value) : -1);
-
-
+    let hour = computed(() => {
+      // Should additional logic to handle 12 hours
+      if (props.use12Hours) {
+        return originHour.value % 12;
+      } else {
+        return originHour.value;
+      }
+    });
+    const minute = computed(() => (props.value ? props.generateConfig.getMinute(props.value) : -1));
+    const second = computed(() => (props.value ? props.generateConfig.getSecond(props.value) : -1));
 
     const setTime = (
       isNewPM: boolean | undefined,
@@ -120,7 +109,9 @@ const TimeBody = defineComponent({
     };
 
     // ========================= Unit =========================
-    const rawHours = computed(()=> generateUnits(0, 23, props.hourStep ?? 1, props.disabledHours && props.disabledHours()));
+    const rawHours = computed(() =>
+      generateUnits(0, 23, props.hourStep ?? 1, props.disabledHours && props.disabledHours()),
+    );
 
     // const memorizedRawHours = useMemo(() => rawHours, rawHours, shouldUnitsUpdate);
 
@@ -155,16 +146,25 @@ const TimeBody = defineComponent({
         });
     });
 
-    const minutes = computed(()=> generateUnits(0, 59, props.minuteStep ?? 1, props.disabledMinutes && props.disabledMinutes(originHour.value)));
+    const minutes = computed(() =>
+      generateUnits(
+        0,
+        59,
+        props.minuteStep ?? 1,
+        props.disabledMinutes && props.disabledMinutes(originHour.value),
+      ),
+    );
 
-    const seconds = computed(()=> generateUnits(
-      0,
-      59,
-      props.secondStep ?? 1,
-      props.disabledSeconds && props.disabledSeconds(originHour.value, minute),
-    ));
+    const seconds = computed(() =>
+      generateUnits(
+        0,
+        59,
+        props.secondStep ?? 1,
+        props.disabledSeconds && props.disabledSeconds(originHour.value, minute),
+      ),
+    );
 
-    return ()=> {
+    return () => {
       const {
         prefixCls,
         operationRef,
@@ -188,7 +188,7 @@ const TimeBody = defineComponent({
 
       // ====================== Operations ======================
       operationRef.value = {
-        onUpDown: diff => {
+        onUpDown: (diff: number) => {
           const column = columns[activeColumnIndex];
           if (column) {
             const valueIndex = column.units.findIndex(unit => unit.value === column.value);
@@ -237,14 +237,26 @@ const TimeBody = defineComponent({
       });
 
       // Minute
-      addColumnNode(showMinute, <TimeUnitColumn key="minute" />, minute.value, minutes.value, num => {
-        onSelect(setTime(isPM.value, hour.value, num, second.value), 'mouse');
-      });
+      addColumnNode(
+        showMinute,
+        <TimeUnitColumn key="minute" />,
+        minute.value,
+        minutes.value,
+        num => {
+          onSelect(setTime(isPM.value, hour.value, num, second.value), 'mouse');
+        },
+      );
 
       // Second
-      addColumnNode(showSecond, <TimeUnitColumn key="second" />, second.value, seconds.value, num => {
-        onSelect(setTime(isPM.value, hour.value, minute.value, num), 'mouse');
-      });
+      addColumnNode(
+        showSecond,
+        <TimeUnitColumn key="second" />,
+        second.value,
+        seconds.value,
+        num => {
+          onSelect(setTime(isPM.value, hour.value, minute.value, num), 'mouse');
+        },
+      );
 
       // 12 Hours
       let PMIndex = -1;
@@ -266,9 +278,8 @@ const TimeBody = defineComponent({
       );
 
       return <div class={contentPrefixCls}>{columns.map(({ node }) => node)}</div>;
-    }
-  }
-})
-
+    };
+  },
+});
 
 export default TimeBody;

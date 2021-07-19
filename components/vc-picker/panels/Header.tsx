@@ -1,5 +1,6 @@
-import { CSSProperties } from '@vue/runtime-dom';
+import { CSSProperties } from 'vue';
 import { VueNode } from '../../_util/type';
+import useMergeProps from '../hooks/useMergeProps';
 import { useInjectPanel } from '../PanelContext';
 
 const HIDDEN_STYLE: CSSProperties = {
@@ -27,8 +28,9 @@ export type HeaderProps = {
   children?: VueNode;
 };
 
-function Header(
-  {
+function Header(_props: HeaderProps, { slots }) {
+  const props = useMergeProps(_props);
+  const {
     prefixCls,
     prevIcon = '\u2039',
     nextIcon = '\u203A',
@@ -38,9 +40,7 @@ function Header(
     onSuperNext,
     onPrev,
     onNext,
-  }: HeaderProps,
-  { slots },
-) {
+  } = props;
   const { hideNextBtn, hidePrevBtn } = useInjectPanel();
 
   return (
@@ -51,7 +51,7 @@ function Header(
           onClick={onSuperPrev}
           tabindex={-1}
           class={`${prefixCls}-super-prev-btn`}
-          style={hidePrevBtn ? HIDDEN_STYLE : {}}
+          style={hidePrevBtn.value ? HIDDEN_STYLE : {}}
         >
           {superPrevIcon}
         </button>
@@ -62,7 +62,7 @@ function Header(
           onClick={onPrev}
           tabindex={-1}
           class={`${prefixCls}-prev-btn`}
-          style={hidePrevBtn ? HIDDEN_STYLE : {}}
+          style={hidePrevBtn.value ? HIDDEN_STYLE : {}}
         >
           {prevIcon}
         </button>
@@ -74,7 +74,7 @@ function Header(
           onClick={onNext}
           tabindex={-1}
           class={`${prefixCls}-next-btn`}
-          style={hideNextBtn ? HIDDEN_STYLE : {}}
+          style={hideNextBtn.value ? HIDDEN_STYLE : {}}
         >
           {nextIcon}
         </button>
@@ -85,7 +85,7 @@ function Header(
           onClick={onSuperNext}
           tabindex={-1}
           class={`${prefixCls}-super-next-btn`}
-          style={hideNextBtn ? HIDDEN_STYLE : {}}
+          style={hideNextBtn.value ? HIDDEN_STYLE : {}}
         >
           {superNextIcon}
         </button>

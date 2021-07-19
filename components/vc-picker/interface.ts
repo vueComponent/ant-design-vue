@@ -1,3 +1,4 @@
+import type { Ref } from 'vue';
 import type { GenerateConfig } from './generate';
 
 export type Locale = {
@@ -46,7 +47,7 @@ export type PickerMode = Exclude<PanelMode, 'datetime' | 'decade'>;
 
 export type PanelRefProps = {
   onKeyDown?: (e: KeyboardEvent) => boolean;
-  onBlur?: (e: FocusEvent)=> void;
+  onBlur?: (e: FocusEvent) => void;
   onClose?: () => void;
 };
 
@@ -74,7 +75,7 @@ export type PanelSharedProps<DateType> = {
   //  * Thus, move ref into operationRef.
   //  * This is little hack which should refactor after typescript support.
   //  */
-  // operationRef: React.MutableRefObject<PanelRefProps>;
+  operationRef: Ref<PanelRefProps>;
 
   onSelect: OnSelect<DateType>;
   onViewDateChange: (value: DateType) => void;

@@ -1,9 +1,9 @@
-
 import Header from '../Header';
 import type { Locale } from '../../interface';
 import type { GenerateConfig } from '../../generate';
 import { useInjectPanel } from '../../PanelContext';
 import { formatValue } from '../../utils/dateUtil';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export type QuarterHeaderProps<DateType> = {
   prefixCls: string;
@@ -16,18 +16,12 @@ export type QuarterHeaderProps<DateType> = {
   onYearClick: () => void;
 };
 
-function QuarterHeader<DateType>(props: QuarterHeaderProps<DateType>) {
-  const {
-    prefixCls,
-    generateConfig,
-    locale,
-    viewDate,
-    onNextYear,
-    onPrevYear,
-    onYearClick,
-  } = props;
-  const { hideHeader } =useInjectPanel()
-  if (hideHeader) {
+function QuarterHeader<DateType>(_props: QuarterHeaderProps<DateType>) {
+  const props = useMergeProps(_props);
+  const { prefixCls, generateConfig, locale, viewDate, onNextYear, onPrevYear, onYearClick } =
+    props;
+  const { hideHeader } = useInjectPanel();
+  if (hideHeader.value) {
     return null;
   }
 
@@ -50,8 +44,7 @@ function QuarterHeader<DateType>(props: QuarterHeaderProps<DateType>) {
   );
 }
 
-
-QuarterHeader.displayName ='QuarterHeader'
+QuarterHeader.displayName = 'QuarterHeader';
 QuarterHeader.inheritAttrs = false;
 
 export default QuarterHeader;

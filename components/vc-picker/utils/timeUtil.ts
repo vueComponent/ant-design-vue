@@ -24,21 +24,11 @@ export function setDateTime<DateType>(
   }
 
   let newDate = date;
-  newDate = generateConfig.setHour(
-    newDate,
-    generateConfig.getHour(defaultDate),
-  );
-  newDate = generateConfig.setMinute(
-    newDate,
-    generateConfig.getMinute(defaultDate),
-  );
-  newDate = generateConfig.setSecond(
-    newDate,
-    generateConfig.getSecond(defaultDate),
-  );
+  newDate = generateConfig.setHour(newDate, generateConfig.getHour(defaultDate));
+  newDate = generateConfig.setMinute(newDate, generateConfig.getMinute(defaultDate));
+  newDate = generateConfig.setSecond(newDate, generateConfig.getSecond(defaultDate));
   return newDate;
 }
-
 
 export function getLowerBoundTime(
   hour: number,

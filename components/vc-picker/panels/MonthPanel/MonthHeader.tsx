@@ -1,9 +1,9 @@
-
 import Header from '../Header';
 import type { Locale } from '../../interface';
 import type { GenerateConfig } from '../../generate';
 import { useInjectPanel } from '../../PanelContext';
 import { formatValue } from '../../utils/dateUtil';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export type MonthHeaderProps<DateType> = {
   prefixCls: string;
@@ -16,18 +16,12 @@ export type MonthHeaderProps<DateType> = {
   onYearClick: () => void;
 };
 
-function MonthHeader<DateType>(props: MonthHeaderProps<DateType>) {
-  const {
-    prefixCls,
-    generateConfig,
-    locale,
-    viewDate,
-    onNextYear,
-    onPrevYear,
-    onYearClick,
-  } = props;
-  const { hideHeader } = useInjectPanel()
-  if (hideHeader) {
+function MonthHeader<DateType>(_props: MonthHeaderProps<DateType>) {
+  const props = useMergeProps(_props);
+  const { prefixCls, generateConfig, locale, viewDate, onNextYear, onPrevYear, onYearClick } =
+    props;
+  const { hideHeader } = useInjectPanel();
+  if (hideHeader.value) {
     return null;
   }
 
@@ -51,8 +45,7 @@ function MonthHeader<DateType>(props: MonthHeaderProps<DateType>) {
   );
 }
 
-
-MonthHeader.displayName ='MonthHeader'
+MonthHeader.displayName = 'MonthHeader';
 MonthHeader.inheritAttrs = false;
 
 export default MonthHeader;

@@ -9,7 +9,7 @@ export default function useHoverValue<DateType>(
   const [value, internalSetValue] = useState<DateType>(null);
   const raf = useRef(null);
 
-  function setValue(val: DateType, immediately: boolean = false) {
+  function setValue(val: DateType, immediately = false) {
     cancelAnimationFrame(raf.current);
     if (immediately) {
       internalSetValue(val);
@@ -30,7 +30,7 @@ export default function useHoverValue<DateType>(
     setValue(date);
   }
 
-  function onLeave(immediately: boolean = false) {
+  function onLeave(immediately = false) {
     setValue(null, immediately);
   }
 

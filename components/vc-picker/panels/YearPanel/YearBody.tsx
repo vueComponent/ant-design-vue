@@ -1,11 +1,11 @@
-
 import type { GenerateConfig } from '../../generate';
 import { YEAR_DECADE_COUNT } from '.';
 import type { Locale, NullableDateType } from '../../interface';
 import useCellClassName from '../../hooks/useCellClassName';
 import { formatValue, isSameYear } from '../../utils/dateUtil';
-import RangeContext, { useInjectRange } from '../../RangeContext';
+import { useInjectRange } from '../../RangeContext';
 import PanelBody from '../PanelBody';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export const YEAR_COL_COUNT = 3;
 const YEAR_ROW_COUNT = 4;
@@ -20,9 +20,10 @@ export type YearBodyProps<DateType> = {
   onSelect: (value: DateType) => void;
 };
 
-function YearBody<DateType>(props: YearBodyProps<DateType>) {
+function YearBody<DateType>(_props: YearBodyProps<DateType>) {
+  const props = useMergeProps(_props);
   const { prefixCls, value, viewDate, locale, generateConfig } = props;
-  const { rangedValue, hoverRangedValue } = useInjectRange()
+  const { rangedValue, hoverRangedValue } = useInjectRange();
 
   const yearPrefixCls = `${prefixCls}-cell`;
 
@@ -44,8 +45,8 @@ function YearBody<DateType>(props: YearBodyProps<DateType>) {
     cellPrefixCls: yearPrefixCls,
     value,
     generateConfig,
-    rangedValue,
-    hoverRangedValue,
+    rangedValue: rangedValue.value,
+    hoverRangedValue: hoverRangedValue.value,
     isSameCell: (current, target) => isSameYear(generateConfig, current, target),
     isInView,
     offsetCell: (date, offset) => generateConfig.addYear(date, offset),
@@ -70,8 +71,6 @@ function YearBody<DateType>(props: YearBodyProps<DateType>) {
     />
   );
 }
-
-
 
 YearBody.displayName = 'YearBody';
 YearBody.inheritAttrs = false;

@@ -1,4 +1,3 @@
-
 import type { PanelMode } from '../interface';
 
 export default function getExtraFooter(
@@ -10,7 +9,5 @@ export default function getExtraFooter(
     return null;
   }
 
-  return (
-    <div class={`${prefixCls}-footer-extra`}>{renderExtraFooter(mode)}</div>
-  );
+  return <div class={`${prefixCls}-footer-extra`}>{renderExtraFooter(mode)}</div>;
 }

@@ -1,7 +1,7 @@
-
 import type { GenerateConfig } from '../../generate';
 import { DECADE_DISTANCE_COUNT, DECADE_UNIT_DIFF } from '.';
 import PanelBody from '../PanelBody';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export const DECADE_COL_COUNT = 3;
 const DECADE_ROW_COUNT = 4;
@@ -14,7 +14,8 @@ export type YearBodyProps<DateType> = {
   onSelect: (value: DateType) => void;
 };
 
-function DecadeBody<DateType>(props: YearBodyProps<DateType>) {
+function DecadeBody<DateType>(_props: YearBodyProps<DateType>) {
+  const props = useMergeProps(_props);
   const DECADE_UNIT_DIFF_DES = DECADE_UNIT_DIFF - 1;
   const { prefixCls, viewDate, generateConfig } = props;
 
@@ -61,8 +62,7 @@ function DecadeBody<DateType>(props: YearBodyProps<DateType>) {
   );
 }
 
-
-DecadeBody.displayName ='DecadeBody'
+DecadeBody.displayName = 'DecadeBody';
 DecadeBody.inheritAttrs = false;
 
 export default DecadeBody;

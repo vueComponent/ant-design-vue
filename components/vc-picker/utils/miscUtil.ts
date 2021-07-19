@@ -51,8 +51,8 @@ export function updateValues<T, R = [T | null, T | null] | null>(
     typeof value === 'function' ? (value as UpdateValue<T | null>)(newValues[index]) : value;
 
   if (!newValues[0] && !newValues[1]) {
-    return (null as unknown) as R;
+    return null as unknown as R;
   }
 
-  return (newValues as unknown) as R;
+  return newValues as unknown as R;
 }

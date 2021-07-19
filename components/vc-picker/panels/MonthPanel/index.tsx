@@ -1,15 +1,16 @@
-
 import MonthHeader from './MonthHeader';
 import type { MonthCellRender } from './MonthBody';
 import MonthBody, { MONTH_COL_COUNT } from './MonthBody';
 import type { PanelSharedProps } from '../../interface';
 import { createKeyDownHandler } from '../../utils/uiUtil';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export type MonthPanelProps<DateType> = {
   monthCellContentRender?: MonthCellRender<DateType>;
 } & PanelSharedProps<DateType>;
 
-function MonthPanel<DateType>(props: MonthPanelProps<DateType>) {
+function MonthPanel<DateType>(_props: MonthPanelProps<DateType>) {
+  const props = useMergeProps(_props);
   const {
     prefixCls,
     operationRef,
@@ -24,8 +25,8 @@ function MonthPanel<DateType>(props: MonthPanelProps<DateType>) {
   const panelPrefixCls = `${prefixCls}-month-panel`;
 
   // ======================= Keyboard =======================
-  operationRef.current = {
-    onKeyDown: event =>
+  operationRef.value = {
+    onKeyDown: (event: KeyboardEvent) =>
       createKeyDownHandler(event, {
         onLeftRight: diff => {
           onSelect(generateConfig.addMonth(value || viewDate, diff), 'key');
@@ -34,10 +35,7 @@ function MonthPanel<DateType>(props: MonthPanelProps<DateType>) {
           onSelect(generateConfig.addYear(value || viewDate, diff), 'key');
         },
         onUpDown: diff => {
-          onSelect(
-            generateConfig.addMonth(value || viewDate, diff * MONTH_COL_COUNT),
-            'key',
-          );
+          onSelect(generateConfig.addMonth(value || viewDate, diff * MONTH_COL_COUNT), 'key');
         },
         onEnter: () => {
           onPanelChange('date', value || viewDate);
@@ -79,8 +77,7 @@ function MonthPanel<DateType>(props: MonthPanelProps<DateType>) {
   );
 }
 
-
-MonthPanel.displayName ='MonthPanel'
+MonthPanel.displayName = 'MonthPanel';
 MonthPanel.inheritAttrs = false;
 
 export default MonthPanel;

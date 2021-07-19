@@ -1,4 +1,3 @@
-
 import TimeHeader from './TimeHeader';
 import type { BodyOperationRef } from './TimeBody';
 import TimeBody from './TimeBody';
@@ -6,6 +5,7 @@ import type { PanelSharedProps, DisabledTimes } from '../../interface';
 import { createKeyDownHandler } from '../../utils/uiUtil';
 import classNames from '../../../_util/classNames';
 import { ref } from '@vue/reactivity';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export type SharedTimeProps<DateType> = {
   format?: string;
@@ -24,12 +24,14 @@ export type SharedTimeProps<DateType> = {
 export type TimePanelProps<DateType> = {
   format?: string;
   active?: boolean;
-} & PanelSharedProps<DateType> & SharedTimeProps<DateType>;
+} & PanelSharedProps<DateType> &
+  SharedTimeProps<DateType>;
 
 const countBoolean = (boolList: (boolean | undefined)[]) =>
   boolList.filter(bool => bool !== false).length;
 
-function TimePanel<DateType>(props: TimePanelProps<DateType>) {
+function TimePanel<DateType>(_props: TimePanelProps<DateType>) {
+  const props = useMergeProps(_props);
   const {
     generateConfig,
     format = 'HH:mm:ss',
@@ -50,27 +52,27 @@ function TimePanel<DateType>(props: TimePanelProps<DateType>) {
   const activeColumnIndex = ref(-1);
   const columnsCount = countBoolean([showHour, showMinute, showSecond, use12Hours]);
 
-  operationRef.current = {
-    onKeyDown: event =>
+  operationRef.value = {
+    onKeyDown: (event: KeyboardEvent) =>
       createKeyDownHandler(event, {
         onLeftRight: diff => {
           activeColumnIndex.value = (activeColumnIndex.value + diff + columnsCount) % columnsCount;
         },
         onUpDown: diff => {
           if (activeColumnIndex.value === -1) {
-            activeColumnIndex.value = 0
+            activeColumnIndex.value = 0;
           } else if (bodyOperationRef.value) {
             bodyOperationRef.value.onUpDown(diff);
           }
         },
         onEnter: () => {
           onSelect(value || generateConfig.getNow(), 'key');
-          activeColumnIndex.value = -1
+          activeColumnIndex.value = -1;
         },
       }),
 
     onBlur: () => {
-      activeColumnIndex.value = -1
+      activeColumnIndex.value = -1;
     },
   };
 
@@ -91,8 +93,7 @@ function TimePanel<DateType>(props: TimePanelProps<DateType>) {
   );
 }
 
-
-TimePanel.displayName ='TimePanel'
+TimePanel.displayName = 'TimePanel';
 TimePanel.inheritAttrs = false;
 
 export default TimePanel;

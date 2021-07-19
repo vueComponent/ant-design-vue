@@ -1,4 +1,3 @@
-
 import { useInjectPanel } from '../PanelContext';
 import type { GenerateConfig } from '../generate';
 import { getLastDay } from '../utils/timeUtil';
@@ -6,6 +5,7 @@ import type { PanelMode } from '../interface';
 import { getCellDateDisabled } from '../utils/dateUtil';
 import { VueNode } from '../../_util/type';
 import classNames from '../../_util/classNames';
+import useMergeProps from '../hooks/useMergeProps';
 
 export type PanelBodyProps<DateType> = {
   prefixCls: string;
@@ -30,25 +30,26 @@ export type PanelBodyProps<DateType> = {
   rowClassName?: (date: DateType) => string;
 };
 
-function PanelBody<DateType>({
-  prefixCls,
-  disabledDate,
-  onSelect,
-  picker,
-  rowNum,
-  colNum,
-  prefixColumn,
-  rowClassName,
-  baseDate,
-  getCellClassName,
-  getCellText,
-  getCellNode,
-  getCellDate,
-  generateConfig,
-  titleCell,
-  headerCells,
-}: PanelBodyProps<DateType>) {
-  const { onDateMouseEnter, onDateMouseLeave, mode } = useInjectPanel()
+function PanelBody<DateType>(_props: PanelBodyProps<DateType>) {
+  const {
+    prefixCls,
+    disabledDate,
+    onSelect,
+    picker,
+    rowNum,
+    colNum,
+    prefixColumn,
+    rowClassName,
+    baseDate,
+    getCellClassName,
+    getCellText,
+    getCellNode,
+    getCellDate,
+    generateConfig,
+    titleCell,
+    headerCells,
+  } = useMergeProps(_props);
+  const { onDateMouseEnter, onDateMouseLeave, mode } = useInjectPanel();
 
   const cellPrefixCls = `${prefixCls}-cell`;
 
@@ -64,7 +65,7 @@ function PanelBody<DateType>({
       const currentDate = getCellDate(baseDate, offset);
       const disabled = getCellDateDisabled({
         cellDate: currentDate,
-        mode,
+        mode: mode.value,
         disabledDate,
         generateConfig,
       });

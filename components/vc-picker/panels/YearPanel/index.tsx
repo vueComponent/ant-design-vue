@@ -1,8 +1,8 @@
-
 import YearHeader from './YearHeader';
 import YearBody, { YEAR_COL_COUNT } from './YearBody';
 import type { PanelSharedProps, PanelMode } from '../../interface';
 import { createKeyDownHandler } from '../../utils/uiUtil';
+import useMergeProps from '../../hooks/useMergeProps';
 
 export type YearPanelProps<DateType> = {
   sourceMode: PanelMode;
@@ -10,7 +10,8 @@ export type YearPanelProps<DateType> = {
 
 export const YEAR_DECADE_COUNT = 10;
 
-function YearPanel<DateType>(props: YearPanelProps<DateType>) {
+function YearPanel<DateType>(_props: YearPanelProps<DateType>) {
+  const props = useMergeProps(_props);
   const {
     prefixCls,
     operationRef,
@@ -26,29 +27,20 @@ function YearPanel<DateType>(props: YearPanelProps<DateType>) {
   const panelPrefixCls = `${prefixCls}-year-panel`;
 
   // ======================= Keyboard =======================
-  operationRef.current = {
-    onKeyDown: event =>
+  operationRef.value = {
+    onKeyDown: (event: KeyboardEvent) =>
       createKeyDownHandler(event, {
         onLeftRight: diff => {
           onSelect(generateConfig.addYear(value || viewDate, diff), 'key');
         },
         onCtrlLeftRight: diff => {
-          onSelect(
-            generateConfig.addYear(value || viewDate, diff * YEAR_DECADE_COUNT),
-            'key',
-          );
+          onSelect(generateConfig.addYear(value || viewDate, diff * YEAR_DECADE_COUNT), 'key');
         },
         onUpDown: diff => {
-          onSelect(
-            generateConfig.addYear(value || viewDate, diff * YEAR_COL_COUNT),
-            'key',
-          );
+          onSelect(generateConfig.addYear(value || viewDate, diff * YEAR_COL_COUNT), 'key');
         },
         onEnter: () => {
-          onPanelChange(
-            sourceMode === 'date' ? 'date' : 'month',
-            value || viewDate,
-          );
+          onPanelChange(sourceMode === 'date' ? 'date' : 'month', value || viewDate);
         },
       }),
   };
@@ -86,8 +78,6 @@ function YearPanel<DateType>(props: YearPanelProps<DateType>) {
     </div>
   );
 }
-
-
 
 YearPanel.displayName = 'YearPanel';
 YearPanel.inheritAttrs = false;

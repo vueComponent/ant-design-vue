@@ -18,14 +18,14 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
                 </colgroup>
                 <thead class="ant-table-thead">
                   <tr>
-                    <th class="ant-table-fixed-columns-in-body ant-table-selection-column"><span class="ant-table-header-column"><div class=""><span class="ant-table-column-title"><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                    <th class="ant-table-fixed-columns-in-body ant-table-selection-column"><span class="ant-table-header-column"><div><span class="ant-table-column-title"><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!----></label>
                       <!---->
             </div></span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!---->
           </th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div class=""><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -92,7 +92,7 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
             </colgroup>
             <thead class="ant-table-thead">
               <tr>
-                <th class="ant-table-selection-column ant-table-row-cell-last"><span class="ant-table-header-column"><div class=""><span class="ant-table-column-title"><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                <th class="ant-table-selection-column ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title"><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                   <!----></label>
                   <!---->
         </div></span><span class="ant-table-column-sorter"><!----></span>

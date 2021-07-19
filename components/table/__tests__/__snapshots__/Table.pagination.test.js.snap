@@ -16,7 +16,7 @@ exports[`Table.pagination renders pagination correctly 1`] = `
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div class=""><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!---->
           </th>

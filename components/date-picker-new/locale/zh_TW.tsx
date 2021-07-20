@@ -1,6 +1,6 @@
 import CalendarLocale from '../../vc-picker/locale/zh_TW';
 import TimePickerLocale from '../../time-picker/locale/zh_TW';
-import { PickerLocale } from '../generatePicker';
+import type { PickerLocale } from '../generatePicker';
 
 // 统一合并为完整的 Locale
 const locale: PickerLocale = {

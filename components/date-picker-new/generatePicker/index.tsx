@@ -1,22 +1,22 @@
-import { GenerateConfig } from '../../vc-picker/generate/index';
-import {
+import type { GenerateConfig } from '../../vc-picker/generate/index';
+import type {
   PickerBaseProps as RCPickerBaseProps,
   PickerDateProps as RCPickerDateProps,
   PickerTimeProps as RCPickerTimeProps,
 } from '../../vc-picker/Picker';
-import { SharedTimeProps } from '../../vc-picker/panels/TimePanel';
-import {
+import type { SharedTimeProps } from '../../vc-picker/panels/TimePanel';
+import type {
   RangePickerBaseProps as RCRangePickerBaseProps,
   RangePickerDateProps as RCRangePickerDateProps,
   RangePickerTimeProps as RCRangePickerTimeProps,
 } from '../../vc-picker/RangePicker';
-import { PickerMode, Locale as RcPickerLocale } from '../../vc-picker/interface';
+import type { PickerMode, Locale as RcPickerLocale } from '../../vc-picker/interface';
 import PickerButton from '../PickerButton';
 import PickerTag from '../PickerTag';
-import { TimePickerLocale } from '../../time-picker';
+import type { TimePickerLocale } from '../../time-picker';
 import generateSinglePicker from './generateSinglePicker';
 import generateRangePicker from './generateRangePicker';
-import { SizeType } from '../../config-provider';
+import type { SizeType } from '../../config-provider';
 
 export const Components = { button: PickerButton, rangeItem: PickerTag };
 

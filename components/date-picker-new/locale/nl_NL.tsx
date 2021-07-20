@@ -1,6 +1,6 @@
 import CalendarLocale from '../../vc-picker/locale/nl_NL';
 import TimePickerLocale from '../../time-picker/locale/nl_NL';
-import { PickerLocale } from '../generatePicker';
+import type { PickerLocale } from '../generatePicker';
 
 // Merge into a locale object
 const locale: PickerLocale = {

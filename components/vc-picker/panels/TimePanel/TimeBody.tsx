@@ -6,7 +6,7 @@ import { leftPad } from '../../utils/miscUtil';
 import type { SharedTimeProps } from '.';
 import { setTime as utilSetTime } from '../../utils/timeUtil';
 import { cloneElement } from '../../../_util/vnode';
-import { VueNode } from '../../../_util/type';
+import type { VueNode } from '../../../_util/type';
 import type { Ref } from 'vue';
 import { computed, defineComponent } from 'vue';
 
@@ -74,7 +74,7 @@ const TimeBody = defineComponent({
         return false;
       }
     });
-    let hour = computed(() => {
+    const hour = computed(() => {
       // Should additional logic to handle 12 hours
       if (props.use12Hours) {
         return originHour.value % 12;
@@ -134,7 +134,7 @@ const TimeBody = defineComponent({
     const hours = computed(() => {
       if (!props.use12Hours) return rawHours.value;
       return rawHours.value
-        .filter(isPM ? hourMeta => hourMeta.value >= 12 : hourMeta => hourMeta.value < 12)
+        .filter(isPM.value ? hourMeta => hourMeta.value >= 12 : hourMeta => hourMeta.value < 12)
         .map(hourMeta => {
           const hourValue = hourMeta.value % 12;
           const hourLabel = hourValue === 0 ? '12' : leftPad(hourValue, 2);
@@ -260,8 +260,8 @@ const TimeBody = defineComponent({
 
       // 12 Hours
       let PMIndex = -1;
-      if (typeof isPM === 'boolean') {
-        PMIndex = isPM ? 1 : 0;
+      if (typeof isPM.value === 'boolean') {
+        PMIndex = isPM.value ? 1 : 0;
       }
 
       addColumnNode(

@@ -32,17 +32,9 @@ import { useInjectRange } from './RangeContext';
 import getExtraFooter from './utils/getExtraFooter';
 import getRanges from './utils/getRanges';
 import { getLowerBoundTime, setDateTime, setTime } from './utils/timeUtil';
-import { VueNode } from '../_util/type';
-import {
-  computed,
-  createVNode,
-  defineComponent,
-  HTMLAttributes,
-  ref,
-  toRef,
-  watch,
-  watchEffect,
-} from 'vue';
+import type { VueNode } from '../_util/type';
+import type { HTMLAttributes } from 'vue';
+import { computed, createVNode, defineComponent, ref, toRef, watch, watchEffect } from 'vue';
 import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
 import KeyCode from '../_util/KeyCode';
@@ -292,7 +284,7 @@ function PickerPanel<DateType>() {
       const triggerSelect = (
         date: DateType,
         type: 'key' | 'mouse' | 'submit',
-        forceTriggerSelect: boolean = false,
+        forceTriggerSelect = false,
       ) => {
         const { picker, generateConfig, onSelect, onChange, disabledDate } = props;
         if (mergedMode.value === picker || forceTriggerSelect) {
@@ -359,9 +351,9 @@ function PickerPanel<DateType>() {
           generateConfig.getHour(now),
           generateConfig.getMinute(now),
           generateConfig.getSecond(now),
-          isHourStepValid ? hourStep : 1,
-          isMinuteStepValid ? minuteStep : 1,
-          isSecondStepValid ? secondStep : 1,
+          isHourStepValid.value ? hourStep : 1,
+          isMinuteStepValid.value ? minuteStep : 1,
+          isSecondStepValid.value ? secondStep : 1,
         );
         const adjustedNow = setTime(
           generateConfig,

@@ -6,7 +6,8 @@ import PickerPanel from './PickerPanel';
 import usePickerInput from './hooks/usePickerInput';
 import getDataOrAriaProps, { toArray, getValue, updateValues } from './utils/miscUtil';
 import { getDefaultFormat, getInputSize, elementsContains } from './utils/uiUtil';
-import { ContextOperationRefProps, useProvidePanel } from './PanelContext';
+import type { ContextOperationRefProps } from './PanelContext';
+import { useProvidePanel } from './PanelContext';
 import {
   isEqual,
   getClosingViewDate,
@@ -27,18 +28,10 @@ import getRanges from './utils/getRanges';
 import useRangeViewDates from './hooks/useRangeViewDates';
 import type { DateRender } from './panels/DatePanel/DateBody';
 import useHoverValue from './hooks/useHoverValue';
-import { VueNode } from '../_util/type';
-import { ChangeEvent, FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
-import {
-  computed,
-  createVNode,
-  defineComponent,
-  HTMLAttributes,
-  ref,
-  toRef,
-  watch,
-  watchEffect,
-} from 'vue';
+import type { VueNode } from '../_util/type';
+import type { ChangeEvent, FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
+import type { HTMLAttributes } from 'vue';
+import { computed, createVNode, defineComponent, ref, toRef, watch, watchEffect } from 'vue';
 import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
 import useState from '../_util/hooks/useState';
@@ -291,7 +284,7 @@ function RangerPicker<DateType>() {
         postState: values => {
           let postValues = values;
 
-          if (mergedDisabled[0] && mergedDisabled[1]) {
+          if (mergedDisabled.value[0] && mergedDisabled.value[1]) {
             return postValues;
           }
 
@@ -449,11 +442,11 @@ function RangerPicker<DateType>() {
 
         const startStr =
           values && values[0]
-            ? formatValue(values[0], { generateConfig, locale, format: formatList[0] })
+            ? formatValue(values[0], { generateConfig, locale, format: formatList.value[0] })
             : '';
         const endStr =
           values && values[1]
-            ? formatValue(values[1], { generateConfig, locale, format: formatList[0] })
+            ? formatValue(values[1], { generateConfig, locale, format: formatList.value[0] })
             : '';
 
         if (onCalendarChange) {
@@ -941,8 +934,8 @@ function RangerPicker<DateType>() {
           direction,
           autocomplete = 'off',
         } = props;
-        let arrowLeft: number = 0;
-        let panelLeft: number = 0;
+        let arrowLeft = 0;
+        let panelLeft = 0;
         if (
           mergedActivePickerIndex.value &&
           startInputDivRef.value &&
@@ -1094,10 +1087,10 @@ function RangerPicker<DateType>() {
                 e.stopPropagation();
                 let values = mergedValue.value;
 
-                if (!mergedDisabled[0]) {
+                if (!mergedDisabled.value[0]) {
                   values = updateValues(values, null, 0);
                 }
-                if (!mergedDisabled[1]) {
+                if (!mergedDisabled.value[1]) {
                   values = updateValues(values, null, 1);
                 }
 
@@ -1112,11 +1105,11 @@ function RangerPicker<DateType>() {
         }
 
         const inputSharedProps = {
-          size: getInputSize(picker, formatList[0], generateConfig),
+          size: getInputSize(picker, formatList.value[0], generateConfig),
         };
 
-        let activeBarLeft: number = 0;
-        let activeBarWidth: number = 0;
+        let activeBarLeft = 0;
+        let activeBarWidth = 0;
         if (startInputDivRef.value && endInputDivRef.value && separatorRef.value) {
           if (mergedActivePickerIndex.value === 0) {
             activeBarWidth = startInputDivRef.value.offsetWidth;

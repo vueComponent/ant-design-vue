@@ -3,7 +3,7 @@ import type { Locale } from '../../interface';
 import type { GenerateConfig } from '../../generate';
 import { useInjectPanel } from '../../PanelContext';
 import { formatValue } from '../../utils/dateUtil';
-import { VueNode } from '../../../_util/type';
+import type { VueNode } from '../../../_util/type';
 import useMergeProps from '../../hooks/useMergeProps';
 
 export type DateHeaderProps<DateType> = {

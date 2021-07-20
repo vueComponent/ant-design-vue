@@ -1,7 +1,7 @@
 import type { GenerateConfig } from '../../generate';
 import type { Locale } from '../../interface';
 import { formatValue, isSameQuarter } from '../../utils/dateUtil';
-import RangeContext, { useInjectRange } from '../../RangeContext';
+import { useInjectRange } from '../../RangeContext';
 import useCellClassName from '../../hooks/useCellClassName';
 import PanelBody from '../PanelBody';
 import useMergeProps from '../../hooks/useMergeProps';

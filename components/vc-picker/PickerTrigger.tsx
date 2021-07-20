@@ -1,8 +1,8 @@
-import { CSSProperties } from '@vue/runtime-dom';
-import { AlignType } from '../vc-align/interface';
+import type { CSSProperties } from '@vue/runtime-dom';
+import type { AlignType } from '../vc-align/interface';
 import Trigger from '../vc-trigger';
 import classNames from '../_util/classNames';
-import { VueNode } from '../_util/type';
+import type { VueNode } from '../_util/type';
 import useMergeProps from './hooks/useMergeProps';
 
 const BUILT_IN_PLACEMENTS = {

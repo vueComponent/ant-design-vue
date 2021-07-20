@@ -3,7 +3,7 @@ import type { GenerateConfig } from '../generate';
 import { getLastDay } from '../utils/timeUtil';
 import type { PanelMode } from '../interface';
 import { getCellDateDisabled } from '../utils/dateUtil';
-import { VueNode } from '../../_util/type';
+import type { VueNode } from '../../_util/type';
 import classNames from '../../_util/classNames';
 import useMergeProps from '../hooks/useMergeProps';
 

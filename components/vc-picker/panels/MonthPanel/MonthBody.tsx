@@ -4,7 +4,7 @@ import { formatValue, isSameMonth } from '../../utils/dateUtil';
 import { useInjectRange } from '../../RangeContext';
 import useCellClassName from '../../hooks/useCellClassName';
 import PanelBody from '../PanelBody';
-import { VueNode } from '../../../_util/type';
+import type { VueNode } from '../../../_util/type';
 import useMergeProps from '../../hooks/useMergeProps';
 
 export const MONTH_COL_COUNT = 3;

@@ -20,27 +20,19 @@ import PickerPanel from './PickerPanel';
 import PickerTrigger from './PickerTrigger';
 import { formatValue, isEqual, parseValue } from './utils/dateUtil';
 import getDataOrAriaProps, { toArray } from './utils/miscUtil';
-import { ContextOperationRefProps, useProvidePanel } from './PanelContext';
+import type { ContextOperationRefProps } from './PanelContext';
+import { useProvidePanel } from './PanelContext';
 import type { CustomFormat, PickerMode } from './interface';
 import { getDefaultFormat, getInputSize, elementsContains } from './utils/uiUtil';
 import usePickerInput from './hooks/usePickerInput';
 import useTextValueMapping from './hooks/useTextValueMapping';
 import useValueTexts from './hooks/useValueTexts';
 import useHoverValue from './hooks/useHoverValue';
-import {
-  computed,
-  createVNode,
-  CSSProperties,
-  defineComponent,
-  HtmlHTMLAttributes,
-  ref,
-  Ref,
-  toRef,
-  watch,
-} from 'vue';
-import { ChangeEvent, FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
-import { VueNode } from '../_util/type';
-import { AlignType } from '../vc-align/interface';
+import type { CSSProperties, HtmlHTMLAttributes, Ref } from 'vue';
+import { computed, createVNode, defineComponent, ref, toRef, watch } from 'vue';
+import type { ChangeEvent, FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
+import type { VueNode } from '../_util/type';
+import type { AlignType } from '../vc-align/interface';
 import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
 import classNames from '../_util/classNames';
@@ -137,6 +129,7 @@ type MergedPickerProps<DateType> = {
 function Picker<DateType>() {
   return defineComponent<MergedPickerProps<DateType>>({
     name: 'Picker',
+    inheritAttrs: false,
     props: [
       'prefixCls',
       'id',
@@ -181,7 +174,6 @@ function Picker<DateType>() {
       'direction',
       'autocomplete',
     ] as any,
-    inheritAttrs: false,
     slots: [
       'suffixIcon',
       'clearIcon',
@@ -267,7 +259,7 @@ function Picker<DateType>() {
           onChange(
             newValue,
             newValue
-              ? formatValue(newValue, { generateConfig, locale, format: formatList[0] })
+              ? formatValue(newValue, { generateConfig, locale, format: formatList.value[0] })
               : '',
           );
         }
@@ -317,7 +309,7 @@ function Picker<DateType>() {
         triggerOpen,
         forwardKeyDown,
         isClickOutside: target =>
-          !elementsContains([panelDivRef.current, inputDivRef.current], target as HTMLElement),
+          !elementsContains([panelDivRef.value, inputDivRef.value], target as HTMLElement),
         onSubmit: () => {
           if (props.disabledDate && props.disabledDate(selectedValue.value)) {
             return false;

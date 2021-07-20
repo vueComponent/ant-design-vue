@@ -1,4 +1,4 @@
-import { VueNode } from '../../_util/type';
+import type { VueNode } from '../../_util/type';
 import type { Components, RangeList, Locale } from '../interface';
 
 export type RangesProps = {

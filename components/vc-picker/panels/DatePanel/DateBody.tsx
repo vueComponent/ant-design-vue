@@ -9,7 +9,7 @@ import {
 import type { Locale } from '../../interface';
 import useCellClassName from '../../hooks/useCellClassName';
 import PanelBody from '../PanelBody';
-import { VueNode } from '../../../_util/type';
+import type { VueNode } from '../../../_util/type';
 import { useInjectRange } from '../../RangeContext';
 import useMergeProps from '../../hooks/useMergeProps';
 

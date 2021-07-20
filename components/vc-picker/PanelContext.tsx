@@ -1,4 +1,5 @@
-import { inject, InjectionKey, provide, Ref } from 'vue';
+import type { InjectionKey, Ref } from 'vue';
+import { inject, provide } from 'vue';
 import type { OnSelect, PanelMode } from './interface';
 
 export type ContextOperationRefProps = {

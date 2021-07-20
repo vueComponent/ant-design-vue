@@ -6,7 +6,6 @@ import { WEEK_DAY_COUNT } from '../../utils/dateUtil';
 import type { KeyboardConfig } from '../../utils/uiUtil';
 import { createKeyDownHandler } from '../../utils/uiUtil';
 import classNames from '../../../_util/classNames';
-import { ref } from '@vue/reactivity';
 import useMergeProps from '../../hooks/useMergeProps';
 
 const DATE_ROW_COUNT = 6;

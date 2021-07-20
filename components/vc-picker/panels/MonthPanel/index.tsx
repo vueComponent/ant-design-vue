@@ -2,7 +2,7 @@ import MonthHeader from './MonthHeader';
 import type { MonthCellRender } from './MonthBody';
 import MonthBody, { MONTH_COL_COUNT } from './MonthBody';
 import type { PanelSharedProps } from '../../interface';
-import { createKeyDownHandler } from '../../utils/uiUtil';
+import { createKeydownHandler } from '../../utils/uiUtil';
 import useMergeProps from '../../hooks/useMergeProps';
 
 export type MonthPanelProps<DateType> = {
@@ -26,8 +26,8 @@ function MonthPanel<DateType>(_props: MonthPanelProps<DateType>) {
 
   // ======================= Keyboard =======================
   operationRef.value = {
-    onKeyDown: (event: KeyboardEvent) =>
-      createKeyDownHandler(event, {
+    onKeydown: (event: KeyboardEvent) =>
+      createKeydownHandler(event, {
         onLeftRight: diff => {
           onSelect(generateConfig.addMonth(value || viewDate, diff), 'key');
         },

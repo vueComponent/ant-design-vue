@@ -2,7 +2,7 @@ import TimeHeader from './TimeHeader';
 import type { BodyOperationRef } from './TimeBody';
 import TimeBody from './TimeBody';
 import type { PanelSharedProps, DisabledTimes } from '../../interface';
-import { createKeyDownHandler } from '../../utils/uiUtil';
+import { createKeydownHandler } from '../../utils/uiUtil';
 import classNames from '../../../_util/classNames';
 import { ref } from '@vue/reactivity';
 import useMergeProps from '../../hooks/useMergeProps';
@@ -53,8 +53,8 @@ function TimePanel<DateType>(_props: TimePanelProps<DateType>) {
   const columnsCount = countBoolean([showHour, showMinute, showSecond, use12Hours]);
 
   operationRef.value = {
-    onKeyDown: (event: KeyboardEvent) =>
-      createKeyDownHandler(event, {
+    onKeydown: (event: KeyboardEvent) =>
+      createKeydownHandler(event, {
         onLeftRight: diff => {
           activeColumnIndex.value = (activeColumnIndex.value + diff + columnsCount) % columnsCount;
         },

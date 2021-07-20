@@ -1,7 +1,7 @@
 import QuarterHeader from './QuarterHeader';
 import QuarterBody from './QuarterBody';
 import type { PanelSharedProps } from '../../interface';
-import { createKeyDownHandler } from '../../utils/uiUtil';
+import { createKeydownHandler } from '../../utils/uiUtil';
 import useMergeProps from '../../hooks/useMergeProps';
 
 export type QuarterPanelProps<DateType> = {} & PanelSharedProps<DateType>;
@@ -23,8 +23,8 @@ function QuarterPanel<DateType>(_props: QuarterPanelProps<DateType>) {
 
   // ======================= Keyboard =======================
   operationRef.value = {
-    onKeyDown: (event: KeyboardEvent) =>
-      createKeyDownHandler(event, {
+    onKeydown: (event: KeyboardEvent) =>
+      createKeydownHandler(event, {
         onLeftRight: diff => {
           onSelect(generateConfig.addMonth(value || viewDate, diff * 3), 'key');
         },

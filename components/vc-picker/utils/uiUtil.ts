@@ -66,7 +66,7 @@ export type KeyboardConfig = {
   onPageUpDown?: ((diff: number) => void) | null;
   onEnter?: (() => void) | null;
 };
-export function createKeyDownHandler(
+export function createKeydownHandler(
   event: KeyboardEvent,
   { onLeftRight, onCtrlLeftRight, onUpDown, onPageUpDown, onEnter }: KeyboardConfig,
 ): boolean {
@@ -197,7 +197,7 @@ type ClickEventHandler = (event: MouseEvent) => void;
 let globalClickFunc: ClickEventHandler | null = null;
 const clickCallbacks = new Set<ClickEventHandler>();
 
-export function addGlobalMouseDownEvent(callback: ClickEventHandler) {
+export function addGlobalMousedownEvent(callback: ClickEventHandler) {
   if (!globalClickFunc && typeof window !== 'undefined' && window.addEventListener) {
     globalClickFunc = (e: MouseEvent) => {
       // Clone a new list to avoid repeat trigger events

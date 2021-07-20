@@ -76,13 +76,13 @@ export type PickerSharedProps<DateType> = {
   onOpenChange?: (open: boolean) => void;
   onFocus?: FocusEventHandler;
   onBlur?: FocusEventHandler;
-  onMouseDown?: MouseEventHandler;
-  onMouseUp?: MouseEventHandler;
-  onMouseEnter?: MouseEventHandler;
-  onMouseLeave?: MouseEventHandler;
+  onMousedown?: MouseEventHandler;
+  onMouseup?: MouseEventHandler;
+  onMouseenter?: MouseEventHandler;
+  onMouseleave?: MouseEventHandler;
   onClick?: MouseEventHandler;
-  onContextMenu?: MouseEventHandler;
-  onKeyDown?: (event: KeyboardEvent, preventDefault: () => void) => void;
+  onContextmenu?: MouseEventHandler;
+  onKeydown?: (event: KeyboardEvent, preventDefault: () => void) => void;
 
   // WAI-ARIA
   role?: string;
@@ -163,13 +163,13 @@ function Picker<DateType>() {
       'onOpenChange',
       'onFocus',
       'onBlur',
-      'onMouseDown',
-      'onMouseUp',
-      'onMouseEnter',
-      'onMouseLeave',
-      'onContextMenu',
+      'onMousedown',
+      'onMouseup',
+      'onMouseenter',
+      'onMouseleave',
+      'onContextmenu',
       'onClick',
-      'onKeyDown',
+      'onKeydown',
       'onSelect',
       'direction',
       'autocomplete',
@@ -273,10 +273,10 @@ function Picker<DateType>() {
         triggerInnerOpen(newOpen);
       };
 
-      const forwardKeyDown = (e: KeyboardEvent) => {
-        if (mergedOpen && operationRef.value && operationRef.value.onKeyDown) {
+      const forwardKeydown = (e: KeyboardEvent) => {
+        if (mergedOpen && operationRef.value && operationRef.value.onKeydown) {
           // Let popup panel handle keyboard
-          return operationRef.value.onKeyDown(e);
+          return operationRef.value.onKeydown(e);
         }
 
         /* istanbul ignore next */
@@ -284,15 +284,15 @@ function Picker<DateType>() {
         {
           warning(
             false,
-            'Picker not correct forward KeyDown operation. Please help to fire issue about this.',
+            'Picker not correct forward Keydown operation. Please help to fire issue about this.',
           );
           return false;
         }
       };
 
-      const onInternalMouseUp: MouseEventHandler = (...args) => {
-        if (props.onMouseUp) {
-          props.onMouseUp(...args);
+      const onInternalMouseup: MouseEventHandler = (...args) => {
+        if (props.onMouseup) {
+          props.onMouseup(...args);
         }
 
         if (inputRef.value) {
@@ -307,7 +307,7 @@ function Picker<DateType>() {
         open: mergedOpen,
         value: text,
         triggerOpen,
-        forwardKeyDown,
+        forwardKeydown,
         isClickOutside: target =>
           !elementsContains([panelDivRef.value, inputDivRef.value], target as HTMLElement),
         onSubmit: () => {
@@ -325,8 +325,8 @@ function Picker<DateType>() {
           setSelectedValue(mergedValue.value);
           resetText();
         },
-        onKeyDown: (e, preventDefault) => {
-          props.onKeyDown?.(e, preventDefault);
+        onKeydown: (e, preventDefault) => {
+          props.onKeydown?.(e, preventDefault);
         },
         onFocus: (e: FocusEvent) => {
           props.onFocus?.(e);
@@ -387,8 +387,8 @@ function Picker<DateType>() {
         onSelect: onContextSelect,
         open: mergedOpen,
         defaultOpenValue: toRef(props, 'defaultOpenValue'),
-        onDateMouseEnter: onEnter,
-        onDateMouseLeave: onLeave,
+        onDateMouseenter: onEnter,
+        onDateMouseleave: onLeave,
       });
 
       expose({
@@ -426,10 +426,10 @@ function Picker<DateType>() {
           placeholder,
           getPopupContainer,
           panelRender,
-          onMouseDown,
-          onMouseEnter,
-          onMouseLeave,
-          onContextMenu,
+          onMousedown,
+          onMouseenter,
+          onMouseleave,
+          onContextmenu,
           onClick,
           onSelect,
           direction,
@@ -542,11 +542,11 @@ function Picker<DateType>() {
                 [`${prefixCls}-rtl`]: direction === 'rtl',
               })}
               style={attrs.style}
-              onMousedown={onMouseDown}
-              onMouseup={onInternalMouseUp}
-              onMouseenter={onMouseEnter}
-              onMouseleave={onMouseLeave}
-              onContextmenu={onContextMenu}
+              onMousedown={onMousedown}
+              onMouseup={onInternalMouseup}
+              onMouseenter={onMouseenter}
+              onMouseleave={onMouseleave}
+              onContextmenu={onContextmenu}
               onClick={onClick}
             >
               <div

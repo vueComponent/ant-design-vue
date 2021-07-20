@@ -1,7 +1,7 @@
 import YearHeader from './YearHeader';
 import YearBody, { YEAR_COL_COUNT } from './YearBody';
 import type { PanelSharedProps, PanelMode } from '../../interface';
-import { createKeyDownHandler } from '../../utils/uiUtil';
+import { createKeydownHandler } from '../../utils/uiUtil';
 import useMergeProps from '../../hooks/useMergeProps';
 
 export type YearPanelProps<DateType> = {
@@ -28,8 +28,8 @@ function YearPanel<DateType>(_props: YearPanelProps<DateType>) {
 
   // ======================= Keyboard =======================
   operationRef.value = {
-    onKeyDown: (event: KeyboardEvent) =>
-      createKeyDownHandler(event, {
+    onKeydown: (event: KeyboardEvent) =>
+      createKeydownHandler(event, {
         onLeftRight: diff => {
           onSelect(generateConfig.addYear(value || viewDate, diff), 'key');
         },

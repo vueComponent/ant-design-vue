@@ -4,7 +4,7 @@ import DateHeader from './DateHeader';
 import type { PanelSharedProps } from '../../interface';
 import { WEEK_DAY_COUNT } from '../../utils/dateUtil';
 import type { KeyboardConfig } from '../../utils/uiUtil';
-import { createKeyDownHandler } from '../../utils/uiUtil';
+import { createKeydownHandler } from '../../utils/uiUtil';
 import classNames from '../../../_util/classNames';
 import useMergeProps from '../../hooks/useMergeProps';
 
@@ -38,8 +38,8 @@ function DatePanel<DateType>(_props: DatePanelProps<DateType>) {
   const panelPrefixCls = `${prefixCls}-${panelName}-panel`;
   // ======================= Keyboard =======================
   operationRef.value = {
-    onKeyDown: (event: KeyboardEvent) =>
-      createKeyDownHandler(event, {
+    onKeydown: (event: KeyboardEvent) =>
+      createKeydownHandler(event, {
         onLeftRight: diff => {
           onSelect(generateConfig.addDate(value || viewDate, diff), 'key');
         },

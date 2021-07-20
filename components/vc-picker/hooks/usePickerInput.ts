@@ -6,15 +6,15 @@ import { ref } from 'vue';
 import { computed } from 'vue';
 import type { FocusEventHandler } from '../../_util/EventInterface';
 import KeyCode from '../../_util/KeyCode';
-import { addGlobalMouseDownEvent, getTargetFromEvent } from '../utils/uiUtil';
+import { addGlobalMousedownEvent, getTargetFromEvent } from '../utils/uiUtil';
 
 export default function usePickerInput({
   open,
   value,
   isClickOutside,
   triggerOpen,
-  forwardKeyDown,
-  onKeyDown,
+  forwardKeydown,
+  onKeydown,
   blurToCancel,
   onSubmit,
   onCancel,
@@ -25,8 +25,8 @@ export default function usePickerInput({
   value: Ref<string>;
   isClickOutside: (clickElement: EventTarget | null) => boolean;
   triggerOpen: (open: boolean) => void;
-  forwardKeyDown: (e: KeyboardEvent) => boolean;
-  onKeyDown: (e: KeyboardEvent, preventDefault: () => void) => void;
+  forwardKeydown: (e: KeyboardEvent) => boolean;
+  onKeydown: (e: KeyboardEvent, preventDefault: () => void) => void;
   blurToCancel?: ComputedRef<boolean>;
   onSubmit: () => void | boolean;
   onCancel: () => void;
@@ -56,7 +56,7 @@ export default function usePickerInput({
         preventDefaultRef.value = true;
       };
 
-      onKeyDown(e, preventDefault);
+      onKeydown(e, preventDefault);
 
       if (preventDefaultRef.value) return;
 
@@ -77,7 +77,7 @@ export default function usePickerInput({
             typing.value = false;
             e.preventDefault();
           } else if (!typing.value && open.value) {
-            if (!forwardKeyDown(e) && e.shiftKey) {
+            if (!forwardKeydown(e) && e.shiftKey) {
               typing.value = true;
               e.preventDefault();
             }
@@ -96,7 +96,7 @@ export default function usePickerInput({
         triggerOpen(true);
       } else if (!typing.value) {
         // Let popup panel handle keyboard
-        forwardKeyDown(e);
+        forwardKeydown(e);
       }
     },
 
@@ -149,13 +149,13 @@ export default function usePickerInput({
   watch(value, () => {
     valueChangedRef.value = true;
   });
-  const globalMouseDownEvent = ref();
+  const globalMousedownEvent = ref();
   // Global click handler
   watchEffect(
     () =>
-      globalMouseDownEvent.value &&
-      globalMouseDownEvent.value()(
-        (globalMouseDownEvent.value = addGlobalMouseDownEvent((e: MouseEvent) => {
+      globalMousedownEvent.value &&
+      globalMousedownEvent.value()(
+        (globalMousedownEvent.value = addGlobalMousedownEvent((e: MouseEvent) => {
           const target = getTargetFromEvent(e);
 
           if (open) {
@@ -176,7 +176,7 @@ export default function usePickerInput({
       ),
   );
   onBeforeUnmount(() => {
-    globalMouseDownEvent.value && globalMouseDownEvent.value();
+    globalMousedownEvent.value && globalMousedownEvent.value();
   });
 
   return [inputProps, { focused, typing }];

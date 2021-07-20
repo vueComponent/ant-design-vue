@@ -1,7 +1,7 @@
 import DecadeHeader from './DecadeHeader';
 import DecadeBody, { DECADE_COL_COUNT } from './DecadeBody';
 import type { PanelSharedProps } from '../../interface';
-import { createKeyDownHandler } from '../../utils/uiUtil';
+import { createKeydownHandler } from '../../utils/uiUtil';
 import useMergeProps from '../../hooks/useMergeProps';
 
 export type DecadePanelProps<DateType> = PanelSharedProps<DateType>;
@@ -25,8 +25,8 @@ function DecadePanel<DateType>(_props: DecadePanelProps<DateType>) {
 
   // ======================= Keyboard =======================
   operationRef.value = {
-    onKeyDown: (event: KeyboardEvent) =>
-      createKeyDownHandler(event, {
+    onKeydown: (event: KeyboardEvent) =>
+      createKeydownHandler(event, {
         onLeftRight: diff => {
           onSelect(generateConfig.addYear(viewDate, diff * DECADE_UNIT_DIFF), 'key');
         },

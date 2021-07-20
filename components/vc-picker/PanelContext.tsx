@@ -3,7 +3,7 @@ import { inject, provide } from 'vue';
 import type { OnSelect, PanelMode } from './interface';
 
 export type ContextOperationRefProps = {
-  onKeyDown?: (e: KeyboardEvent) => boolean;
+  onKeydown?: (e: KeyboardEvent) => boolean;
   onClose?: () => void;
 };
 
@@ -14,8 +14,8 @@ export type PanelContextProps = {
   panelRef?: Ref<HTMLDivElement>;
   hidePrevBtn?: Ref<boolean>;
   hideNextBtn?: Ref<boolean>;
-  onDateMouseEnter?: (date: any) => void;
-  onDateMouseLeave?: (date: any) => void;
+  onDateMouseenter?: (date: any) => void;
+  onDateMouseleave?: (date: any) => void;
   onSelect?: OnSelect<any>;
   hideRanges?: Ref<boolean>;
   open?: Ref<boolean>;

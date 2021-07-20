@@ -72,7 +72,7 @@ export type PickerPanelSharedProps<DateType> = {
   onSelect?: (value: DateType) => void;
   onChange?: (value: DateType) => void;
   onPanelChange?: OnPanelChange<DateType>;
-  onMouseDown?: (e: MouseEvent) => void;
+  onMousedown?: (e: MouseEvent) => void;
   onOk?: (date: DateType) => void;
 
   direction?: 'ltr' | 'rtl';
@@ -142,7 +142,7 @@ function PickerPanel<DateType>() {
       'onSelect',
       'onChange',
       'onPanelChange',
-      'onMouseDown',
+      'onMousedown',
       'onPickerValueChange',
       'onOk',
       'components',
@@ -309,8 +309,8 @@ function PickerPanel<DateType>() {
       };
 
       // ========================= Interactive ==========================
-      const onInternalKeyDown = (e: KeyboardEvent) => {
-        if (panelRef.value && panelRef.value.onKeyDown) {
+      const onInternalKeydown = (e: KeyboardEvent) => {
+        if (panelRef.value && panelRef.value.onKeydown) {
           if (
             [
               KeyCode.LEFT,
@@ -324,7 +324,7 @@ function PickerPanel<DateType>() {
           ) {
             e.preventDefault();
           }
-          return panelRef.value.onKeyDown(e);
+          return panelRef.value.onKeydown(e);
         }
 
         /* istanbul ignore next */
@@ -399,13 +399,13 @@ function PickerPanel<DateType>() {
           showTime,
           showToday,
           renderExtraFooter,
-          onMouseDown,
+          onMousedown,
           onOk,
           components,
         } = props;
         if (operationRef && panelPosition.value !== 'right') {
           operationRef.value = {
-            onKeyDown: onInternalKeyDown,
+            onKeydown: onInternalKeydown,
             onClose: () => {
               if (panelRef.value && panelRef.value.onClose) {
                 panelRef.value.onClose();
@@ -580,9 +580,9 @@ function PickerPanel<DateType>() {
             tabindex={tabindex}
             class={classNames(classString.value, attrs.class)}
             style={attrs.style}
-            onKeydown={onInternalKeyDown}
+            onKeydown={onInternalKeydown}
             onBlur={onInternalBlur}
-            onMousedown={onMouseDown}
+            onMousedown={onMousedown}
             ref={panelDivRef}
           >
             {panelNode}

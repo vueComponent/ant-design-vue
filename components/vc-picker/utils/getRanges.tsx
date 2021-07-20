@@ -32,9 +32,9 @@ export default function getRanges({
 
     presetNode = (
       <>
-        {rangeList.map(({ label, onClick, onMouseEnter, onMouseLeave }) => (
+        {rangeList.map(({ label, onClick, onMouseenter, onMouseleave }) => (
           <li key={label} class={`${prefixCls}-preset`}>
-            <Item onClick={onClick} onMouseenter={onMouseEnter} onMouseleave={onMouseLeave}>
+            <Item onClick={onClick} onMouseenter={onMouseenter} onMouseleave={onMouseleave}>
               {label}
             </Item>
           </li>

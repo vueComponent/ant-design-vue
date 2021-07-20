@@ -105,8 +105,8 @@ export type RangePickerSharedProps<DateType> = {
   onPanelChange?: (values: RangeValue<DateType>, modes: [PanelMode, PanelMode]) => void;
   onFocus?: FocusEventHandler;
   onBlur?: FocusEventHandler;
-  onMouseEnter?: MouseEventHandler;
-  onMouseLeave?: MouseEventHandler;
+  onMouseenter?: MouseEventHandler;
+  onMouseleave?: MouseEventHandler;
   onOk?: (dates: RangeValue<DateType>) => void;
   direction?: 'ltr' | 'rtl';
   autocomplete?: string;
@@ -168,6 +168,8 @@ type MergedRangePickerProps<DateType> = {
 } & OmitType<DateType>;
 function RangerPicker<DateType>() {
   return defineComponent<MergedRangePickerProps<DateType>>({
+    name: 'RangerPicker',
+    inheritAttrs: false,
     props: [
       'prefixCls',
       'id',
@@ -210,10 +212,10 @@ function RangerPicker<DateType>() {
       'onCalendarChange',
       'onFocus',
       'onBlur',
-      'onMouseEnter',
-      'onMouseLeave',
+      'onMouseenter',
+      'onMouseleave',
       'onOk',
-      'onKeyDown',
+      'onKeydown',
       'components',
       'order',
       'direction',
@@ -502,10 +504,10 @@ function RangerPicker<DateType>() {
         }
       }
 
-      const forwardKeyDown = (e: KeyboardEvent) => {
-        if (mergedOpen && operationRef.value && operationRef.value.onKeyDown) {
+      const forwardKeydown = (e: KeyboardEvent) => {
+        if (mergedOpen && operationRef.value && operationRef.value.onKeydown) {
           // Let popup panel handle keyboard
-          return operationRef.value.onKeyDown(e);
+          return operationRef.value.onKeydown(e);
         }
 
         /* istanbul ignore next */
@@ -513,7 +515,7 @@ function RangerPicker<DateType>() {
         {
           warning(
             false,
-            'Picker not correct forward KeyDown operation. Please help to fire issue about this.',
+            'Picker not correct forward Keydown operation. Please help to fire issue about this.',
           );
           return false;
         }
@@ -573,7 +575,7 @@ function RangerPicker<DateType>() {
 
       const [endHoverValue, onEndEnter, onEndLeave] = useHoverValue(endText, sharedTextHooksProps);
 
-      const onDateMouseEnter = (date: DateType) => {
+      const onDateMouseenter = (date: DateType) => {
         setHoverRangedValue(updateValues(selectedValue.value, date, mergedActivePickerIndex.value));
         if (mergedActivePickerIndex.value === 0) {
           onStartEnter(date);
@@ -582,7 +584,7 @@ function RangerPicker<DateType>() {
         }
       };
 
-      const onDateMouseLeave = () => {
+      const onDateMouseleave = () => {
         setHoverRangedValue(updateValues(selectedValue.value, null, mergedActivePickerIndex.value));
         if (mergedActivePickerIndex.value === 0) {
           onStartLeave();
@@ -593,7 +595,7 @@ function RangerPicker<DateType>() {
 
       // ============================= Input =============================
       const getSharedInputHookProps = (index: 0 | 1, resetText: () => void) => ({
-        forwardKeyDown,
+        forwardKeydown,
         onBlur: (e: FocusEvent) => {
           props.onBlur?.(e);
         },
@@ -625,8 +627,8 @@ function RangerPicker<DateType>() {
         blurToCancel: needConfirmButton,
         open: startOpen,
         value: startText,
-        onKeyDown: (e, preventDefault) => {
-          props.onKeyDown?.(e, preventDefault);
+        onKeydown: (e, preventDefault) => {
+          props.onKeydown?.(e, preventDefault);
         },
       });
 
@@ -635,8 +637,8 @@ function RangerPicker<DateType>() {
         blurToCancel: needConfirmButton,
         open: endOpen,
         value: endText,
-        onKeyDown: (e, preventDefault) => {
-          props.onKeyDown?.(e, preventDefault);
+        onKeydown: (e, preventDefault) => {
+          props.onKeydown?.(e, preventDefault);
         },
       });
 
@@ -657,7 +659,7 @@ function RangerPicker<DateType>() {
         }
       };
 
-      const onPickerMouseDown = (e: MouseEvent) => {
+      const onPickerMousedown = (e: MouseEvent) => {
         // shouldn't affect input elements if picker is active
         if (
           mergedOpen.value &&
@@ -759,10 +761,10 @@ function RangerPicker<DateType>() {
               triggerChange(newValues, null);
               triggerOpen(false, mergedActivePickerIndex.value);
             },
-            onMouseEnter: () => {
+            onMouseenter: () => {
               setRangeHoverValue(newValues);
             },
-            onMouseLeave: () => {
+            onMouseleave: () => {
               setRangeHoverValue(null);
             },
           };
@@ -897,8 +899,8 @@ function RangerPicker<DateType>() {
       useProvidePanel({
         operationRef,
         hideHeader: computed(() => props.picker === 'time'),
-        onDateMouseEnter,
-        onDateMouseLeave,
+        onDateMouseenter,
+        onDateMouseleave,
         hideRanges: computed(() => true),
         onSelect: onContextSelect,
         open: mergedOpen,
@@ -927,8 +929,8 @@ function RangerPicker<DateType>() {
           clearIcon,
           inputReadOnly,
           renderExtraFooter,
-          onMouseEnter,
-          onMouseLeave,
+          onMouseenter,
+          onMouseleave,
           onOk,
           components,
           direction,
@@ -1145,9 +1147,9 @@ function RangerPicker<DateType>() {
               })}
               style={attrs.style}
               onClick={onPickerClick}
-              onMouseenter={onMouseEnter}
-              onMouseleave={onMouseLeave}
-              onMousedown={onPickerMouseDown}
+              onMouseenter={onMouseenter}
+              onMouseleave={onMouseleave}
+              onMousedown={onPickerMousedown}
               {...getDataOrAriaProps(props)}
             >
               <div

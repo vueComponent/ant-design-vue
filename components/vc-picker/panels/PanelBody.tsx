@@ -49,7 +49,7 @@ function PanelBody<DateType>(_props: PanelBodyProps<DateType>) {
     titleCell,
     headerCells,
   } = useMergeProps(_props);
-  const { onDateMouseEnter, onDateMouseLeave, mode } = useInjectPanel();
+  const { onDateMouseenter, onDateMouseleave, mode } = useInjectPanel();
 
   const cellPrefixCls = `${prefixCls}-cell`;
 
@@ -99,13 +99,13 @@ function PanelBody<DateType>(_props: PanelBodyProps<DateType>) {
             }
           }}
           onMouseenter={() => {
-            if (!disabled && onDateMouseEnter) {
-              onDateMouseEnter(currentDate);
+            if (!disabled && onDateMouseenter) {
+              onDateMouseenter(currentDate);
             }
           }}
           onMouseleave={() => {
-            if (!disabled && onDateMouseLeave) {
-              onDateMouseLeave(currentDate);
+            if (!disabled && onDateMouseleave) {
+              onDateMouseleave(currentDate);
             }
           }}
         >

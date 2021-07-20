@@ -46,7 +46,7 @@ export type PanelMode = 'time' | 'date' | 'week' | 'month' | 'quarter' | 'year' 
 export type PickerMode = Exclude<PanelMode, 'datetime' | 'decade'>;
 
 export type PanelRefProps = {
-  onKeyDown?: (e: KeyboardEvent) => boolean;
+  onKeydown?: (e: KeyboardEvent) => boolean;
   onBlur?: (e: FocusEvent) => void;
   onClose?: () => void;
 };
@@ -103,8 +103,8 @@ export type Components = {
 export type RangeList = {
   label: string;
   onClick: () => void;
-  onMouseEnter: () => void;
-  onMouseLeave: () => void;
+  onMouseenter: () => void;
+  onMouseleave: () => void;
 }[];
 
 export type CustomFormat<DateType> = (value: DateType) => string;

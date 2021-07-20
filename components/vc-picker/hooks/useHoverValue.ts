@@ -1,31 +1,31 @@
-import { useState, useEffect, useRef } from 'react';
+import type { ComputedRef, Ref, UnwrapRef } from 'vue';
+import { ref, onBeforeUnmount, watch } from 'vue';
 import type { ValueTextConfig } from './useValueTexts';
 import useValueTexts from './useValueTexts';
 
 export default function useHoverValue<DateType>(
-  valueText: string,
+  valueText: Ref<string>,
   { formatList, generateConfig, locale }: ValueTextConfig<DateType>,
-): [string, (date: DateType) => void, (immediately?: boolean) => void] {
-  const [value, internalSetValue] = useState<DateType>(null);
-  const raf = useRef(null);
+): [ComputedRef<string>, (date: DateType) => void, (immediately?: boolean) => void] {
+  const innerValue = ref<DateType>(null);
+  const raf = ref(null);
 
   function setValue(val: DateType, immediately = false) {
-    cancelAnimationFrame(raf.current);
+    cancelAnimationFrame(raf.value);
     if (immediately) {
-      internalSetValue(val);
+      innerValue.value = val as UnwrapRef<DateType>;
       return;
     }
-    raf.current = requestAnimationFrame(() => {
-      internalSetValue(val);
+    raf.value = requestAnimationFrame(() => {
+      innerValue.value = val as UnwrapRef<DateType>;
     });
   }
 
-  const [, firstText] = useValueTexts(value, {
+  const [, firstText] = useValueTexts(innerValue as Ref<DateType>, {
     formatList,
     generateConfig,
     locale,
   });
-
   function onEnter(date: DateType) {
     setValue(date);
   }
@@ -34,11 +34,12 @@ export default function useHoverValue<DateType>(
     setValue(null, immediately);
   }
 
-  useEffect(() => {
+  watch(valueText, () => {
     onLeave(true);
-  }, [valueText]);
-
-  useEffect(() => () => cancelAnimationFrame(raf.current), []);
+  });
+  onBeforeUnmount(() => {
+    cancelAnimationFrame(raf.value);
+  });
 
   return [firstText, onEnter, onLeave];
 }

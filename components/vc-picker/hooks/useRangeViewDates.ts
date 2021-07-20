@@ -1,8 +1,10 @@
-import * as React from 'react';
 import type { RangeValue, PickerMode } from '../interface';
 import type { GenerateConfig } from '../generate';
 import { getValue, updateValues } from '../utils/miscUtil';
 import { getClosingViewDate, isSameYear, isSameMonth, isSameDecade } from '../utils/dateUtil';
+import type { ComputedRef, Ref } from 'vue';
+import { computed } from 'vue';
+import { ref } from 'vue';
 
 function getStartEndDistance<DateType>(
   startDate: DateType,
@@ -67,55 +69,64 @@ export default function useRangeViewDates<DateType>({
   defaultDates,
   generateConfig,
 }: {
-  values: RangeValue<DateType>;
-  picker: PickerMode;
+  values: Ref<RangeValue<DateType>>;
+  picker: Ref<PickerMode>;
   defaultDates: RangeValue<DateType> | undefined;
-  generateConfig: GenerateConfig<DateType>;
-}): [(activePickerIndex: 0 | 1) => DateType, (viewDate: DateType | null, index: 0 | 1) => void] {
-  const [defaultViewDates, setDefaultViewDates] = React.useState<
-    [DateType | null, DateType | null]
-  >(() => [getValue(defaultDates, 0), getValue(defaultDates, 1)]);
-  const [viewDates, setInternalViewDates] = React.useState<RangeValue<DateType>>(null);
-
-  const startDate = getValue(values, 0);
-  const endDate = getValue(values, 1);
+  generateConfig: Ref<GenerateConfig<DateType>>;
+}): [
+  ComputedRef<DateType>,
+  ComputedRef<DateType>,
+  (viewDate: DateType | null, index: 0 | 1) => void,
+] {
+  const defaultViewDates = ref<[DateType | null, DateType | null]>([
+    getValue(defaultDates, 0),
+    getValue(defaultDates, 1),
+  ]);
+  const viewDates = ref<RangeValue<DateType>>(null);
+  const startDate = computed(() => getValue(values.value, 0));
+  const endDate = computed(() => getValue(values.value, 1));
 
   function getViewDate(index: 0 | 1): DateType {
     // If set default view date, use it
-    if (defaultViewDates[index]) {
-      return defaultViewDates[index]!;
+    if (defaultViewDates.value[index]) {
+      return defaultViewDates.value[index]! as DateType;
     }
 
     return (
-      getValue(viewDates, index) ||
-      getRangeViewDate(values, index, picker, generateConfig) ||
-      startDate ||
-      endDate ||
-      generateConfig.getNow()
+      (getValue(viewDates.value, index) as any) ||
+      getRangeViewDate(values.value, index, picker.value, generateConfig.value) ||
+      startDate.value ||
+      endDate.value ||
+      generateConfig.value.getNow()
     );
   }
+  const startViewDate = computed(() => {
+    return getViewDate(0);
+  });
+
+  const endViewDate = computed(() => {
+    return getViewDate(1);
+  });
 
   function setViewDate(viewDate: DateType | null, index: 0 | 1) {
     if (viewDate) {
-      let newViewDates = updateValues(viewDates, viewDate, index);
+      let newViewDates = updateValues(viewDates.value, viewDate as any, index);
       // Set view date will clean up default one
-      setDefaultViewDates(
-        // Should always be an array
-        updateValues(defaultViewDates, null, index) || [null, null],
-      );
+      // Should always be an array
+      defaultViewDates.value = updateValues(defaultViewDates.value, null, index) || [null, null];
 
       // Reset another one when not have value
       const anotherIndex = (index + 1) % 2;
-      if (!getValue(values, anotherIndex)) {
+      if (!getValue(values.value, anotherIndex)) {
         newViewDates = updateValues(newViewDates, viewDate, anotherIndex);
       }
 
-      setInternalViewDates(newViewDates);
-    } else if (startDate || endDate) {
+      viewDates.value = newViewDates;
+    } else if (startDate.value || endDate.value) {
       // Reset all when has values when `viewDate` is `null` which means from open trigger
-      setInternalViewDates(null);
+      viewDates.value = null;
     }
   }
 
-  return [getViewDate, setViewDate];
+  return [startViewDate, endViewDate, setViewDate];
 }

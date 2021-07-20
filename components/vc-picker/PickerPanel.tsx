@@ -33,7 +33,16 @@ import getExtraFooter from './utils/getExtraFooter';
 import getRanges from './utils/getRanges';
 import { getLowerBoundTime, setDateTime, setTime } from './utils/timeUtil';
 import { VueNode } from '../_util/type';
-import { computed, defineComponent, ref, toRef, watch, watchEffect } from 'vue';
+import {
+  computed,
+  createVNode,
+  defineComponent,
+  HTMLAttributes,
+  ref,
+  toRef,
+  watch,
+  watchEffect,
+} from 'vue';
 import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
 import KeyCode from '../_util/KeyCode';
@@ -83,7 +92,7 @@ export type PickerPanelSharedProps<DateType> = {
 
   /** @private Internal usage. Do not use in your production env */
   components?: Components;
-};
+} & HTMLAttributes;
 
 export type PickerPanelBaseProps<DateType> = {
   picker: Exclude<PickerMode, 'date' | 'time'>;
@@ -598,5 +607,6 @@ function PickerPanel<DateType>() {
     },
   });
 }
-
-export default PickerPanel();
+const InterPickerPanel = PickerPanel<any>();
+export default <DateType extends any>(props: MergedPickerPanelProps<DateType>): JSX.Element =>
+  createVNode(InterPickerPanel, props);

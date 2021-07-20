@@ -1,4 +1,5 @@
 import type { ComputedRef, Ref } from 'vue';
+import { computed } from 'vue';
 import useMemo from '../../_util/hooks/useMemo';
 import shallowequal from '../../_util/shallowequal';
 import type { GenerateConfig } from '../generate';
@@ -14,8 +15,8 @@ export type ValueTextConfig<DateType> = {
 export default function useValueTexts<DateType>(
   value: Ref<DateType | null>,
   { formatList, generateConfig, locale }: ValueTextConfig<DateType>,
-) {
-  return useMemo<[string[], string]>(
+): [ComputedRef<string[]>, ComputedRef<string>] {
+  const texts = useMemo<[string[], string]>(
     () => {
       if (!value.value) {
         return [[''], ''];
@@ -44,4 +45,7 @@ export default function useValueTexts<DateType>(
     [value, formatList],
     (next, prev) => prev[0] !== next[0] || !shallowequal(prev[1], next[1]),
   );
+  const fullValueTexts = computed(() => texts.value[0]);
+  const firstValueText = computed(() => texts.value[1]);
+  return [fullValueTexts, firstValueText];
 }

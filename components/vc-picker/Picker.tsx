@@ -20,8 +20,7 @@ import PickerPanel from './PickerPanel';
 import PickerTrigger from './PickerTrigger';
 import { formatValue, isEqual, parseValue } from './utils/dateUtil';
 import getDataOrAriaProps, { toArray } from './utils/miscUtil';
-import type { ContextOperationRefProps } from './PanelContext';
-import PanelContext from './PanelContext';
+import { ContextOperationRefProps, useProvidePanel } from './PanelContext';
 import type { CustomFormat, PickerMode } from './interface';
 import { getDefaultFormat, getInputSize, elementsContains } from './utils/uiUtil';
 import usePickerInput from './hooks/usePickerInput';
@@ -30,20 +29,21 @@ import useValueTexts from './hooks/useValueTexts';
 import useHoverValue from './hooks/useHoverValue';
 import {
   computed,
+  createVNode,
   CSSProperties,
   defineComponent,
   HtmlHTMLAttributes,
   ref,
   Ref,
   toRef,
-  toRefs,
+  watch,
 } from 'vue';
-import { FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
+import { ChangeEvent, FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import { VueNode } from '../_util/type';
 import { AlignType } from '../vc-align/interface';
 import useMergedState from '../_util/hooks/useMergedState';
-import { locale } from 'dayjs';
 import { warning } from '../vc-util/warning';
+import classNames from '../_util/classNames';
 
 export type PickerRefConfig = {
   focus: () => void;
@@ -91,10 +91,6 @@ export type PickerSharedProps<DateType> = {
   onClick?: MouseEventHandler;
   onContextMenu?: MouseEventHandler;
   onKeyDown?: (event: KeyboardEvent, preventDefault: () => void) => void;
-
-  // Internal
-  /** @private Internal usage, do not use in production mode!!! */
-  pickerRef?: Ref<PickerRefConfig>;
 
   // WAI-ARIA
   role?: string;
@@ -169,7 +165,6 @@ function Picker<DateType>() {
       'disabledDate',
       'placeholder',
       'getPopupContainer',
-      'pickerRef',
       'panelRender',
       'onChange',
       'onOpenChange',
@@ -196,7 +191,7 @@ function Picker<DateType>() {
       'superNextIcon',
       'panelRender',
     ],
-    setup(props, { slots, attrs, expose }) {
+    setup(props, { attrs, expose }) {
       const inputRef = ref(null);
       const needConfirmButton = computed(
         () => (props.picker === 'date' && !!props.showTime) || props.picker === 'time',
@@ -242,13 +237,11 @@ function Picker<DateType>() {
       });
 
       // ============================= Text ==============================
-      const texts = useValueTexts(selectedValue, {
+      const [valueTexts, firstValueText] = useValueTexts(selectedValue, {
         formatList,
         generateConfig: toRef(props, 'generateConfig'),
         locale: toRef(props, 'locale'),
       });
-      const valueTexts = computed(() => texts.value[0]);
-      const firstValueText = computed(() => texts.value[1]);
 
       const [text, triggerTextChange, resetText] = useTextValueMapping({
         valueTexts,
@@ -351,11 +344,256 @@ function Picker<DateType>() {
         },
       });
 
+      // ============================= Sync ==============================
+      // Close should sync back with text value
+      watch([mergedOpen, valueTexts], () => {
+        if (!mergedOpen.value) {
+          setSelectedValue(mergedValue.value);
+
+          if (!valueTexts.value.length || valueTexts.value[0] === '') {
+            triggerTextChange('');
+          } else if (firstValueText.value !== text.value) {
+            resetText();
+          }
+        }
+      });
+
+      // Change picker should sync back with text value
+      watch(
+        () => props.picker,
+        () => {
+          if (!mergedOpen.value) {
+            resetText();
+          }
+        },
+      );
+
+      // Sync innerValue with control mode
+      watch(mergedValue, () => {
+        // Sync select value
+        setSelectedValue(mergedValue.value);
+      });
+
+      const [hoverValue, onEnter, onLeave] = useHoverValue(text, {
+        formatList,
+        generateConfig: toRef(props, 'generateConfig'),
+        locale: toRef(props, 'locale'),
+      });
+
+      const onContextSelect = (date: DateType, type: 'key' | 'mouse' | 'submit') => {
+        if (type === 'submit' || (type !== 'key' && !needConfirmButton.value)) {
+          // triggerChange will also update selected values
+          triggerChange(date);
+          triggerOpen(false);
+        }
+      };
+
+      useProvidePanel({
+        operationRef,
+        hideHeader: computed(() => props.picker === 'time'),
+        panelRef: panelDivRef,
+        onSelect: onContextSelect,
+        open: mergedOpen,
+        defaultOpenValue: toRef(props, 'defaultOpenValue'),
+        onDateMouseEnter: onEnter,
+        onDateMouseLeave: onLeave,
+      });
+
+      expose({
+        focus: () => {
+          if (inputRef.value) {
+            inputRef.value.focus();
+          }
+        },
+        blur: () => {
+          if (inputRef.value) {
+            inputRef.value.blur();
+          }
+        },
+      });
+
       return () => {
-        return null;
+        const {
+          prefixCls = 'rc-picker',
+          id,
+          tabindex,
+          dropdownClassName,
+          dropdownAlign,
+          popupStyle,
+          transitionName,
+          generateConfig,
+          locale,
+          inputReadOnly,
+          allowClear,
+          autofocus,
+          picker = 'date',
+          defaultOpenValue,
+          suffixIcon,
+          clearIcon,
+          disabled,
+          placeholder,
+          getPopupContainer,
+          panelRender,
+          onMouseDown,
+          onMouseEnter,
+          onMouseLeave,
+          onContextMenu,
+          onClick,
+          onSelect,
+          direction,
+          autocomplete = 'off',
+        } = props;
+
+        // ============================= Panel =============================
+        const panelProps = {
+          // Remove `picker` & `format` here since TimePicker is little different with other panel
+          ...(props as Omit<MergedPickerProps<DateType>, 'picker' | 'format'>),
+          pickerValue: undefined,
+          onPickerValueChange: undefined,
+          onChange: null,
+        };
+
+        let panelNode: VueNode = (
+          <PickerPanel
+            {...panelProps}
+            generateConfig={generateConfig}
+            class={classNames({
+              [`${prefixCls}-panel-focused`]: !typing.value,
+            })}
+            value={selectedValue.value}
+            locale={locale}
+            tabindex={-1}
+            onSelect={date => {
+              onSelect?.(date);
+              setSelectedValue(date);
+            }}
+            direction={direction}
+            onPanelChange={(viewDate, mode) => {
+              const { onPanelChange } = props;
+              onLeave(true);
+              onPanelChange?.(viewDate, mode);
+            }}
+          />
+        );
+
+        if (panelRender) {
+          panelNode = panelRender(panelNode);
+        }
+
+        const panel = (
+          <div
+            class={`${prefixCls}-panel-container`}
+            onMousedown={e => {
+              e.preventDefault();
+            }}
+          >
+            {panelNode}
+          </div>
+        );
+
+        let suffixNode: VueNode;
+        if (suffixIcon) {
+          suffixNode = <span class={`${prefixCls}-suffix`}>{suffixIcon}</span>;
+        }
+
+        let clearNode: VueNode;
+        if (allowClear && mergedValue.value && !disabled) {
+          clearNode = (
+            <span
+              onMousedown={e => {
+                e.preventDefault();
+                e.stopPropagation();
+              }}
+              onMouseup={e => {
+                e.preventDefault();
+                e.stopPropagation();
+                triggerChange(null);
+                triggerOpen(false);
+              }}
+              class={`${prefixCls}-clear`}
+              role="button"
+            >
+              {clearIcon || <span class={`${prefixCls}-clear-btn`} />}
+            </span>
+          );
+        }
+
+        // ============================ Warning ============================
+        if (process.env.NODE_ENV !== 'production') {
+          warning(
+            !defaultOpenValue,
+            '`defaultOpenValue` may confuse user for the current value status. Please use `defaultValue` instead.',
+          );
+        }
+
+        // ============================ Return =============================
+
+        const popupPlacement = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
+
+        return (
+          <PickerTrigger
+            visible={mergedOpen.value}
+            popupElement={panel}
+            popupStyle={popupStyle}
+            prefixCls={prefixCls}
+            dropdownClassName={dropdownClassName}
+            dropdownAlign={dropdownAlign}
+            getPopupContainer={getPopupContainer}
+            transitionName={transitionName}
+            popupPlacement={popupPlacement}
+            direction={direction}
+          >
+            <div
+              class={classNames(prefixCls, attrs.class, {
+                [`${prefixCls}-disabled`]: disabled,
+                [`${prefixCls}-focused`]: focused,
+                [`${prefixCls}-rtl`]: direction === 'rtl',
+              })}
+              style={attrs.style}
+              onMousedown={onMouseDown}
+              onMouseup={onInternalMouseUp}
+              onMouseenter={onMouseEnter}
+              onMouseleave={onMouseLeave}
+              onContextmenu={onContextMenu}
+              onClick={onClick}
+            >
+              <div
+                class={classNames(`${prefixCls}-input`, {
+                  [`${prefixCls}-input-placeholder`]: !!hoverValue.value,
+                })}
+                ref={inputDivRef}
+              >
+                <input
+                  id={id}
+                  tabindex={tabindex}
+                  disabled={disabled}
+                  readonly={
+                    inputReadOnly || typeof formatList.value[0] === 'function' || !typing.value
+                  }
+                  value={hoverValue || text}
+                  onChange={(e: ChangeEvent) => {
+                    triggerTextChange(e.target.value);
+                  }}
+                  autofocus={autofocus}
+                  placeholder={placeholder}
+                  ref={inputRef}
+                  title={text.value}
+                  {...inputProps.value}
+                  size={getInputSize(picker, formatList.value[0], generateConfig)}
+                  {...getDataOrAriaProps(props)}
+                  autocomplete={autocomplete}
+                />
+                {suffixNode}
+                {clearNode}
+              </div>
+            </div>
+          </PickerTrigger>
+        );
       };
     },
   });
 }
 
-export default Picker();
+const InterPicker = Picker<any>();
+export default <DateType extends any>(props: MergedPickerProps<DateType>, { slots }): JSX.Element =>
+  createVNode(InterPicker, props, slots);

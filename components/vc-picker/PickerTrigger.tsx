@@ -47,7 +47,6 @@ export type PickerTriggerProps = {
   visible: boolean;
   popupElement: VueNode;
   popupStyle?: CSSProperties;
-  children: VueNode;
   dropdownClassName?: string;
   transitionName?: string;
   getPopupContainer?: (node: HTMLElement) => HTMLElement;

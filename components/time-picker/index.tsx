@@ -31,6 +31,11 @@ export function generateShowHourMinuteSecond(format: string) {
   };
 }
 
+export interface TimePickerLocale {
+  placeholder?: string;
+  rangePlaceholder?: [string, string];
+}
+
 export const timePickerProps = () => ({
   size: PropTypes.oneOf(tuple('large', 'default', 'small')),
   value: TimeOrTimesType,

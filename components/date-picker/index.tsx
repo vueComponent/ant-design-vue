@@ -1,5 +1,6 @@
 import type { Moment } from 'moment';
 import momentGenerateConfig from '../vc-picker/generate/moment';
+import { withInstall } from '../_util/type';
 import type {
   PickerProps,
   PickerDateProps,
@@ -14,4 +15,4 @@ export type RangePickerProps = BaseRangePickerProps<Moment>;
 
 const DatePicker = generatePicker<Moment>(momentGenerateConfig);
 
-export default DatePicker;
+export default withInstall(DatePicker);

@@ -15,7 +15,7 @@ import classNames from '../../_util/classNames';
 
 export default function generateRangePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
   const RangePicker = defineComponent<RangePickerProps<DateType>>({
-    name: 'RangePicker',
+    name: 'ARangePicker',
     inheritAttrs: false,
     props: ['size', 'prefixCls', 'direction', 'getPopupContainer', 'locale'] as any,
     slots: ['suffixIcon'],

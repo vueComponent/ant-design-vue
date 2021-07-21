@@ -983,9 +983,8 @@ function RangerPicker<DateType>() {
           });
 
           if (picker !== 'time' && !showTime) {
-            const viewDate = mergedActivePickerIndex.value
-              ? startViewDate.value
-              : endViewDate.value;
+            const viewDate =
+              mergedActivePickerIndex.value === 0 ? startViewDate.value : endViewDate.value;
             const nextViewDate = getClosingViewDate(viewDate, picker, generateConfig);
             const currentMode = mergedModes.value[mergedActivePickerIndex.value];
 
@@ -1166,7 +1165,7 @@ function RangerPicker<DateType>() {
                     inputReadOnly || typeof formatList.value[0] === 'function' || !startTyping.value
                   }
                   value={startHoverValue.value || startText.value}
-                  onChange={(e: ChangeEvent) => {
+                  onInput={(e: ChangeEvent) => {
                     triggerStartTextChange(e.target.value);
                   }}
                   autofocus={autofocus}
@@ -1193,7 +1192,7 @@ function RangerPicker<DateType>() {
                     inputReadOnly || typeof formatList.value[0] === 'function' || !endTyping.value
                   }
                   value={endHoverValue.value || endText.value}
-                  onChange={(e: ChangeEvent) => {
+                  onInput={(e: ChangeEvent) => {
                     triggerEndTextChange(e.target.value);
                   }}
                   placeholder={getValue(placeholder, 1) || ''}

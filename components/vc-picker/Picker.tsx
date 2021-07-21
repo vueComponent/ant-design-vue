@@ -566,7 +566,7 @@ function Picker<DateType>() {
                     inputReadOnly || typeof formatList.value[0] === 'function' || !typing.value
                   }
                   value={hoverValue.value || text.value}
-                  onChange={(e: ChangeEvent) => {
+                  onInput={(e: ChangeEvent) => {
                     triggerTextChange(e.target.value);
                   }}
                   autofocus={autofocus}

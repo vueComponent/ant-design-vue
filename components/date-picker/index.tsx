@@ -1,5 +1,5 @@
 import type { Moment } from 'moment';
-import { App } from 'vue';
+import type { App } from 'vue';
 import momentGenerateConfig from '../vc-picker/generate/moment';
 import type {
   PickerProps,

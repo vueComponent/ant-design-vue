@@ -132,8 +132,8 @@ function PickerPanel<DateType>() {
       defaultPickerValue: Object,
       disabledDate: Function,
       mode: String,
-      picker: String,
-      tabindex: [Number, String],
+      picker: { type: String, default: 'date' },
+      tabindex: { type: [Number, String], default: 0 },
       showNow: Boolean,
       showTime: Boolean,
       showToday: Boolean,
@@ -430,7 +430,6 @@ function PickerPanel<DateType>() {
         };
         delete pickerProps.onChange;
         delete pickerProps.onSelect;
-
         switch (mergedMode.value) {
           case 'decade':
             panelNode = (

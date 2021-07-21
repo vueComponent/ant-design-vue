@@ -2,7 +2,8 @@ import type { RangeValue, PickerMode } from '../interface';
 import type { GenerateConfig } from '../generate';
 import { getValue, updateValues } from '../utils/miscUtil';
 import { getClosingViewDate, isSameYear, isSameMonth, isSameDecade } from '../utils/dateUtil';
-import type { ComputedRef, Ref } from 'vue';
+import type { Ref } from 'vue';
+import { watch } from 'vue';
 import { computed } from 'vue';
 import { ref } from 'vue';
 
@@ -73,11 +74,7 @@ export default function useRangeViewDates<DateType>({
   picker: Ref<PickerMode>;
   defaultDates: RangeValue<DateType> | undefined;
   generateConfig: Ref<GenerateConfig<DateType>>;
-}): [
-  ComputedRef<DateType>,
-  ComputedRef<DateType>,
-  (viewDate: DateType | null, index: 0 | 1) => void,
-] {
+}): [Ref<DateType>, Ref<DateType>, (viewDate: DateType | null, index: 0 | 1) => void] {
   const defaultViewDates = ref<[DateType | null, DateType | null]>([
     getValue(defaultDates, 0),
     getValue(defaultDates, 1),
@@ -86,7 +83,7 @@ export default function useRangeViewDates<DateType>({
   const startDate = computed(() => getValue(values.value, 0));
   const endDate = computed(() => getValue(values.value, 1));
 
-  function getViewDate(index: 0 | 1): DateType {
+  const getViewDate = (index: 0 | 1): DateType => {
     // If set default view date, use it
     if (defaultViewDates.value[index]) {
       return defaultViewDates.value[index]! as DateType;
@@ -99,14 +96,19 @@ export default function useRangeViewDates<DateType>({
       endDate.value ||
       generateConfig.value.getNow()
     );
-  }
-  const startViewDate = computed(() => {
-    return getViewDate(0);
-  });
+  };
 
-  const endViewDate = computed(() => {
-    return getViewDate(1);
-  });
+  const startViewDate = ref(null);
+
+  const endViewDate = ref(null);
+  watch(
+    viewDates,
+    () => {
+      startViewDate.value = getViewDate(0);
+      endViewDate.value = getViewDate(1);
+    },
+    { immediate: true },
+  );
 
   function setViewDate(viewDate: DateType | null, index: 0 | 1) {
     if (viewDate) {

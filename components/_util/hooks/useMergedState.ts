@@ -1,4 +1,5 @@
 import type { Ref, UnwrapRef } from 'vue';
+import { toRaw } from 'vue';
 import { watchEffect } from 'vue';
 import { unref } from 'vue';
 import { watch } from 'vue';
@@ -36,7 +37,7 @@ export default function useMergedState<T, R = Ref<T>>(
   function triggerChange(newValue: T) {
     const preVal = mergedValue.value;
     innerValue.value = newValue;
-    if (mergedValue.value !== newValue && option.onChange) {
+    if (toRaw(mergedValue.value) !== newValue && option.onChange) {
       option.onChange(newValue, preVal);
     }
   }

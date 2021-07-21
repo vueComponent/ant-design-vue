@@ -47,9 +47,10 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
           bordered = true,
           placeholder,
           suffixIcon = slots.suffixIcon?.(),
+          picker = 'date',
           ...restProps
         } = p;
-        const { format, showTime, picker } = p as any;
+        const { format, showTime } = p as any;
 
         let additionalOverrideProps: any = {};
 
@@ -76,6 +77,7 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
             allowClear
             transitionName={`${rootPrefixCls.value}-slide-up`}
             {...additionalOverrideProps}
+            picker={picker}
             class={classNames(
               {
                 [`${pre}-${size.value}`]: size.value,

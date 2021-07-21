@@ -1,25 +1,32 @@
 <template>
   <a-space direction="vertical">
-    <!-- <a-date-picker v-model:value="value1" /> -->
-    <!-- <a-month-picker v-model:value="value2" placeholder="Select month" />
-    <a-week-picker v-model:value="value4" placeholder="Select week" /> -->
-    <a-range-picker v-model:value="value3" />
+    <a-date-picker show-time placeholder="Select Time" @change="onChange" @ok="onOk" />
+    <a-range-picker
+      :show-time="{ format: 'HH:mm' }"
+      format="YYYY-MM-DD HH:mm"
+      :placeholder="['Start Time', 'End Time']"
+      @change="onChange"
+      @ok="onOk"
+    />
   </a-space>
 </template>
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
 import { Moment } from 'moment';
+import { defineComponent } from 'vue';
 export default defineComponent({
   setup() {
-    const value1 = ref<Moment>();
-    watch(value1, () => {
-      console.log(value1);
-    });
+    const onChange = (value: Moment[], dateString: string[]) => {
+      console.log('Selected Time: ', value);
+      console.log('Formatted Selected Time: ', dateString);
+    };
+
+    const onOk = (value: Moment[]) => {
+      console.log('onOk: ', value);
+    };
+
     return {
-      value1,
-      value2: ref<Moment>(),
-      value3: ref<Moment[]>([]),
-      value4: ref<Moment>(),
+      onChange,
+      onOk,
     };
   },
 });

@@ -23,7 +23,16 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
     return defineComponent<InnerPickerProps>({
       name: displayName,
       inheritAttrs: false,
-      props: ['size', 'prefixCls', 'direction', 'getPopupContainer', 'locale', 'value'] as any,
+      props: [
+        'size',
+        'prefixCls',
+        'direction',
+        'getPopupContainer',
+        'locale',
+        'value',
+        'showTime',
+        'showNow',
+      ] as any,
       slots: ['suffixIcon'],
       emits: ['change', 'panelChange', 'ok', 'openChange', 'update:value'],
       setup(props, { slots, expose, attrs, emit }) {
@@ -56,7 +65,8 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
             showToday = true,
             ...restProps
           } = p;
-          const { format, showTime } = p as any;
+          const showTime = p.showTime === '' ? true : p.showTime;
+          const { format } = p as any;
 
           let additionalOverrideProps: any = {};
           if (picker) {
@@ -66,7 +76,13 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
 
           additionalOverrideProps = {
             ...additionalOverrideProps,
-            ...(showTime ? getTimeProps({ format, picker: mergedPicker, ...showTime }) : {}),
+            ...(showTime
+              ? getTimeProps({
+                  format,
+                  picker: mergedPicker,
+                  ...(typeof showTime === 'object' ? showTime : {}),
+                })
+              : {}),
             ...(mergedPicker === 'time'
               ? getTimeProps({ format, ...p, picker: mergedPicker })
               : {}),

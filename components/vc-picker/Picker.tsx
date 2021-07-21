@@ -91,6 +91,7 @@ export type PickerSharedProps<DateType> = {
   autocomplete?: string;
   direction?: 'ltr' | 'rtl';
   showToday?: boolean;
+  showTime?: boolean | undefined | object;
 } & HtmlHTMLAttributes;
 
 type OmitPanelProps<Props> = Omit<

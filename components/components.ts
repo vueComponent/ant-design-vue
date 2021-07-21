@@ -51,7 +51,13 @@ export { default as Comment } from './comment';
 export { default as ConfigProvider } from './config-provider';
 
 export type { DatePickerProps } from './date-picker';
-export { default as DatePicker } from './date-picker';
+export {
+  default as DatePicker,
+  MonthPicker,
+  WeekPicker,
+  RangePicker,
+  QuarterPicker,
+} from './date-picker';
 
 export type { DescriptionsProps } from './descriptions';
 export { default as Descriptions, DescriptionsItem } from './descriptions';

@@ -45,7 +45,7 @@ export default function useRangeDisabled<DateType>(
   }
 
   const disabledStartDate = (date: DateType) => {
-    if (disabledDate && disabledDate.value(date)) {
+    if (disabledDate && disabledDate?.value?.(date)) {
       return true;
     }
 

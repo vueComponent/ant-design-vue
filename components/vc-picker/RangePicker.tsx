@@ -823,7 +823,7 @@ function RangerPicker<DateType>() {
               {...panelProps}
               dateRender={panelDateRender}
               showTime={panelShowTime}
-              mode={mergedModes[mergedActivePickerIndex.value]}
+              mode={mergedModes.value[mergedActivePickerIndex.value]}
               generateConfig={generateConfig}
               style={undefined}
               direction={direction}
@@ -859,7 +859,7 @@ function RangerPicker<DateType>() {
                 let viewDate = date;
                 if (
                   panelPosition === 'right' &&
-                  mergedModes[mergedActivePickerIndex.value] === newMode
+                  mergedModes.value[mergedActivePickerIndex.value] === newMode
                 ) {
                   viewDate = getClosingViewDate(viewDate, newMode as any, generateConfig, -1);
                 }
@@ -958,7 +958,7 @@ function RangerPicker<DateType>() {
           let panels: VueNode;
           const extraNode = getExtraFooter(
             prefixCls,
-            mergedModes[mergedActivePickerIndex.value],
+            mergedModes.value[mergedActivePickerIndex.value],
             renderExtraFooter,
           );
 
@@ -987,7 +987,7 @@ function RangerPicker<DateType>() {
               ? startViewDate.value
               : endViewDate.value;
             const nextViewDate = getClosingViewDate(viewDate, picker, generateConfig);
-            const currentMode = mergedModes[mergedActivePickerIndex.value];
+            const currentMode = mergedModes.value[mergedActivePickerIndex.value];
 
             const showDoublePanel = currentMode === picker;
             const leftPanel = renderPanel(showDoublePanel ? 'left' : false, {

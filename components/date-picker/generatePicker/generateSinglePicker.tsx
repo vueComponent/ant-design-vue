@@ -23,9 +23,10 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
     return defineComponent<InnerPickerProps>({
       name: displayName,
       inheritAttrs: false,
-      props: ['size', 'prefixCls', 'direction', 'getPopupContainer', 'locale'] as any,
+      props: ['size', 'prefixCls', 'direction', 'getPopupContainer', 'locale', 'value'] as any,
       slots: ['suffixIcon'],
-      setup(props, { slots, expose, attrs }) {
+      emits: ['change', 'panelChange', 'ok', 'openChange', 'update:value'],
+      setup(props, { slots, expose, attrs, emit }) {
         const { prefixCls, direction, getPopupContainer, size, rootPrefixCls } = useConfigInject(
           'picker',
           props,
@@ -39,6 +40,11 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
             pickerRef.value?.blur();
           },
         });
+        const onChange = (date: DateType, dateString: string) => {
+          emit('update:value', date);
+          emit('change', date, dateString);
+        };
+
         const [contextLocale] = useLocaleReceiver('DatePicker', enUS);
         return () => {
           const locale = { ...contextLocale.value, ...props.locale };
@@ -47,13 +53,10 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
             bordered = true,
             placeholder,
             suffixIcon = slots.suffixIcon?.(),
+            showToday = true,
             ...restProps
           } = p;
           const { format, showTime } = p as any;
-
-          const additionalProps = {
-            showToday: true,
-          };
 
           let additionalOverrideProps: any = {};
           if (picker) {
@@ -80,9 +83,9 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
               clearIcon={<CloseCircleFilled />}
               allowClear
               transitionName={`${rootPrefixCls.value}-slide-up`}
-              {...additionalProps}
               {...restProps}
               {...additionalOverrideProps}
+              showToday={showToday}
               locale={locale!.lang}
               class={classNames(
                 {
@@ -100,6 +103,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
               superNextIcon={<span class={`${pre}-super-next-icon`} />}
               components={Components}
               direction={direction.value}
+              onChange={onChange}
             />
           );
         };

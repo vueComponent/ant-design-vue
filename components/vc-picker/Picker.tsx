@@ -90,6 +90,7 @@ export type PickerSharedProps<DateType> = {
 
   autocomplete?: string;
   direction?: 'ltr' | 'rtl';
+  showToday?: boolean;
 } & HtmlHTMLAttributes;
 
 type OmitPanelProps<Props> = Omit<
@@ -173,6 +174,7 @@ function Picker<DateType>() {
       'onSelect',
       'direction',
       'autocomplete',
+      'showToday',
     ] as any,
     slots: [
       'suffixIcon',
@@ -440,6 +442,7 @@ function Picker<DateType>() {
         const panelProps = {
           // Remove `picker` & `format` here since TimePicker is little different with other panel
           ...(props as Omit<MergedPickerProps<DateType>, 'picker' | 'format'>),
+          ...attrs,
           pickerValue: undefined,
           onPickerValueChange: undefined,
           onChange: null,
@@ -538,7 +541,7 @@ function Picker<DateType>() {
             <div
               class={classNames(prefixCls, attrs.class, {
                 [`${prefixCls}-disabled`]: disabled,
-                [`${prefixCls}-focused`]: focused,
+                [`${prefixCls}-focused`]: focused.value,
                 [`${prefixCls}-rtl`]: direction === 'rtl',
               })}
               style={attrs.style}
@@ -562,7 +565,7 @@ function Picker<DateType>() {
                   readonly={
                     inputReadOnly || typeof formatList.value[0] === 'function' || !typing.value
                   }
-                  value={hoverValue || text}
+                  value={hoverValue.value || text.value}
                   onChange={(e: ChangeEvent) => {
                     triggerTextChange(e.target.value);
                   }}

@@ -31,7 +31,12 @@ export const useProvideRange = (props: RangeContextProps) => {
 };
 
 export const useInjectRange = () => {
-  return inject(RangeContextKey);
+  return inject(RangeContextKey, {
+    rangedValue: ref(),
+    hoverRangedValue: ref(),
+    inRange: ref(),
+    panelPosition: ref(),
+  });
 };
 
 export const RangeContextProvider = defineComponent({

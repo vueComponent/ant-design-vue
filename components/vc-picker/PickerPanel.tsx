@@ -122,35 +122,35 @@ function PickerPanel<DateType>() {
   return defineComponent<MergedPickerPanelProps<DateType>>({
     name: 'PickerPanel',
     inheritAttrs: false,
-    props: [
-      'prefixCls',
-      'locale',
-      'generateConfig',
-      'value',
-      'defaultValue',
-      'pickerValue',
-      'defaultPickerValue',
-      'disabledDate',
-      'mode',
-      { picker: { default: 'date' } },
-      { tabindex: { default: 0 } },
-      'showNow',
-      'showTime',
-      'showToday',
-      'renderExtraFooter',
-      'hideHeader',
-      'onSelect',
-      'onChange',
-      'onPanelChange',
-      'onMousedown',
-      'onPickerValueChange',
-      'onOk',
-      'components',
-      'direction',
-      { hourStep: { default: 1 } },
-      { minuteStep: { default: 1 } },
-      { secondStep: { default: 1 } },
-    ] as any,
+    props: {
+      prefixCls: String,
+      locale: Object,
+      generateConfig: Object,
+      value: Object,
+      defaultValue: Object,
+      pickerValue: Object,
+      defaultPickerValue: Object,
+      disabledDate: Function,
+      mode: String,
+      picker: String,
+      tabindex: [Number, String],
+      showNow: Boolean,
+      showTime: Boolean,
+      showToday: Boolean,
+      renderExtraFooter: Function,
+      hideHeader: Boolean,
+      onSelect: Function,
+      onChange: Function,
+      onPanelChange: Function,
+      onMousedown: Function,
+      onPickerValueChange: Function,
+      onOk: Function,
+      components: Object,
+      direction: String,
+      hourStep: { type: Number, default: 1 },
+      minuteStep: { type: Number, default: 1 },
+      secondStep: { type: Number, default: 1 },
+    } as any,
     setup(props, { attrs }) {
       const needConfirmButton = computed(
         () => (props.picker === 'date' && !!props.showTime) || props.picker === 'time',
@@ -197,7 +197,7 @@ function PickerPanel<DateType>() {
         value: toRef(props, 'value'),
         defaultValue: props.defaultValue,
         postState: val => {
-          if (!val && defaultOpenValue.value && props.picker === 'time') {
+          if (!val && defaultOpenValue?.value && props.picker === 'time') {
             return defaultOpenValue.value;
           }
           return val;
@@ -534,7 +534,7 @@ function PickerPanel<DateType>() {
         let extraFooter: VueNode;
         let rangesNode: VueNode;
 
-        if (!hideRanges) {
+        if (!hideRanges?.value) {
           extraFooter = getExtraFooter(prefixCls, mergedMode.value, renderExtraFooter);
           rangesNode = getRanges({
             prefixCls,

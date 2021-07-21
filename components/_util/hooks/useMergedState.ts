@@ -13,7 +13,7 @@ export default function useMergedState<T, R = Ref<T>>(
     postState?: (val: T) => T;
   },
 ): [R, (val: T) => void] {
-  const { defaultValue, value } = option || {};
+  const { defaultValue, value = ref() } = option || {};
   let initValue: T =
     typeof defaultStateValue === 'function' ? (defaultStateValue as any)() : defaultStateValue;
   if (value.value !== undefined) {

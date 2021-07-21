@@ -17,9 +17,10 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
   const RangePicker = defineComponent<RangePickerProps<DateType>>({
     name: 'ARangePicker',
     inheritAttrs: false,
-    props: ['size', 'prefixCls', 'direction', 'getPopupContainer', 'locale'] as any,
+    props: ['size', 'prefixCls', 'direction', 'getPopupContainer', 'locale', 'value'] as any,
     slots: ['suffixIcon'],
-    setup(props, { expose, slots, attrs }) {
+    emits: ['change', 'panelChange', 'ok', 'openChange', 'update:value', 'calendarChange'],
+    setup(props, { expose, slots, attrs, emit }) {
       const { prefixCls, direction, getPopupContainer, size, rootPrefixCls } = useConfigInject(
         'picker',
         props,
@@ -33,6 +34,10 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
           pickerRef.value?.blur();
         },
       });
+      const onChange = (dates: [DateType, DateType], dateStrings: [string, string]) => {
+        emit('update:value', dates);
+        emit('change', dates, dateStrings);
+      };
       const [contextLocale] = useLocaleReceiver('DatePicker', enUS);
       return () => {
         const locale = { ...contextLocale.value, ...props.locale };
@@ -88,6 +93,7 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
             superNextIcon={<span class={`${pre}-super-next-icon`} />}
             components={Components}
             direction={direction.value}
+            onChange={onChange}
           />
         );
       };

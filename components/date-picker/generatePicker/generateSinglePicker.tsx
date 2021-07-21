@@ -2,16 +2,22 @@ import CalendarOutlined from '@ant-design/icons-vue/CalendarOutlined';
 import ClockCircleOutlined from '@ant-design/icons-vue/ClockCircleOutlined';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import RCPicker from '../../vc-picker';
-import type { PickerMode } from '../../vc-picker/interface';
+import type { DisabledTime, PanelMode, PickerMode } from '../../vc-picker/interface';
 import type { GenerateConfig } from '../../vc-picker/generate/index';
 import enUS from '../locale/en_US';
 import { getPlaceholder } from '../util';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
-import type { PickerProps, PickerDateProps, PickerTimeProps } from '.';
+import type { PickerProps, PickerDateProps, PickerTimeProps, PickerLocale } from '.';
 import { getTimeProps, Components } from '.';
-import { defineComponent, ref } from 'vue';
+import { CSSProperties, defineComponent, PropType, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
+import { AlignType } from '../../vc-align/interface';
+import { VueNode } from '../../_util/type';
+import { SharedTimeProps } from '../../vc-picker/panels/TimePanel';
+import { SizeType } from '../../config-provider';
+import { DateRender } from '../../vc-picker/panels/DatePanel/DateBody';
+import { commonProps } from './props';
 
 export default function generatePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
   type DatePickerProps = PickerProps<DateType>;
@@ -23,18 +29,11 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
     return defineComponent<InnerPickerProps>({
       name: displayName,
       inheritAttrs: false,
-      props: [
-        'size',
-        'prefixCls',
-        'direction',
-        'getPopupContainer',
-        'locale',
-        'value',
-        'showTime',
-        'showNow',
-      ] as any,
-      slots: ['suffixIcon'],
-      emits: ['change', 'panelChange', 'ok', 'openChange', 'update:value'],
+      props: {
+        ...commonProps<DateType>(),
+      } as any,
+      slots: ['suffixIcon', 'panelRender', 'dateRender'],
+      emits: ['change', 'openChange', 'focus', 'blur', 'panelChange', 'ok', 'update:value'],
       setup(props, { slots, expose, attrs, emit }) {
         const { prefixCls, direction, getPopupContainer, size, rootPrefixCls } = useConfigInject(
           'picker',

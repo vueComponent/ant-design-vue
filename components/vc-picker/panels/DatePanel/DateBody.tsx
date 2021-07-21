@@ -13,7 +13,7 @@ import type { VueNode } from '../../../_util/type';
 import { useInjectRange } from '../../RangeContext';
 import useMergeProps from '../../hooks/useMergeProps';
 
-export type DateRender<DateType> = (currentDate: DateType, today: DateType) => VueNode;
+export type DateRender<DateType> = (props: { current: DateType; today: DateType }) => VueNode;
 
 export type DateBodyPassProps<DateType> = {
   dateRender?: DateRender<DateType>;
@@ -74,7 +74,9 @@ function DateBody<DateType>(_props: DateBodyProps<DateType>) {
     offsetCell: (date, offset) => generateConfig.addDate(date, offset),
   });
 
-  const getCellNode = dateRender ? (date: DateType) => dateRender(date, today) : undefined;
+  const getCellNode = dateRender
+    ? (date: DateType) => dateRender({ current: date, today })
+    : undefined;
 
   return (
     <PanelBody

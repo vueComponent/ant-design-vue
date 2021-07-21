@@ -36,6 +36,7 @@ import type { AlignType } from '../vc-align/interface';
 import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
 import classNames from '../_util/classNames';
+import { SharedTimeProps } from './panels/TimePanel';
 
 export type PickerRefConfig = {
   focus: () => void;
@@ -91,7 +92,7 @@ export type PickerSharedProps<DateType> = {
   autocomplete?: string;
   direction?: 'ltr' | 'rtl';
   showToday?: boolean;
-  showTime?: boolean | undefined | object;
+  showTime?: boolean | SharedTimeProps<DateType>;
 } & HtmlHTMLAttributes;
 
 type OmitPanelProps<Props> = Omit<

@@ -75,11 +75,11 @@ export type RangeInfo = {
   range: RangeType;
 };
 
-export type RangeDateRender<DateType> = (
-  currentDate: DateType,
-  today: DateType,
-  info: RangeInfo,
-) => VueNode;
+export type RangeDateRender<DateType> = (props: {
+  current: DateType;
+  today: DateType;
+  info: RangeInfo;
+}) => VueNode;
 
 export type RangePickerSharedProps<DateType> = {
   id?: string;
@@ -803,9 +803,13 @@ function RangerPicker<DateType>() {
 
         let panelDateRender: DateRender<DateType> | null = null;
         if (dateRender) {
-          panelDateRender = (date, today) =>
-            dateRender(date, today, {
-              range: mergedActivePickerIndex ? 'end' : 'start',
+          panelDateRender = ({ current: date, today }) =>
+            dateRender({
+              current: date,
+              today,
+              info: {
+                range: mergedActivePickerIndex.value ? 'end' : 'start',
+              },
             });
         }
 

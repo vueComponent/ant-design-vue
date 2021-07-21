@@ -1,39 +1,22 @@
 <template>
-  <div>
-    <demo />
-  </div>
+  <a-space direction="vertical">
+    <a-date-picker v-model:value="value1" />
+    <a-month-picker v-model:value="value2" placeholder="Select month" />
+    <a-range-picker v-model:value="value3" />
+    <a-week-picker v-model:value="value4" placeholder="Select week" />
+  </a-space>
 </template>
-<script>
-import { defineComponent } from 'vue';
-import demo from '../v2-doc/src/docs/mentions/demo/index.vue';
-// import Affix from '../components/affix';
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import { Moment } from 'moment';
 export default defineComponent({
-  components: {
-    demo,
-    // Affix,
-  },
-  data() {
+  setup() {
     return {
-      visible: false,
-      pStyle: {
-        fontSize: '16px',
-        color: 'rgba(0,0,0,0.85)',
-        lineHeight: '24px',
-        display: 'block',
-        marginBottom: '16px',
-      },
-      pStyle2: {
-        marginBottom: '24px',
-      },
+      value1: ref<Moment>(),
+      value2: ref<Moment>(),
+      value3: ref<Moment[]>([]),
+      value4: ref<Moment>(),
     };
-  },
-  methods: {
-    showDrawer() {
-      this.visible = true;
-    },
-    onClose() {
-      this.visible = false;
-    },
   },
 });
 </script>

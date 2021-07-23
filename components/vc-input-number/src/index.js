@@ -6,6 +6,7 @@ import classNames from '../../_util/classNames';
 import KeyCode from '../../_util/KeyCode';
 import InputHandler from './InputHandler';
 import { defineComponent } from 'vue';
+import supportsPassive from '../../_util/supportsPassive';
 
 function preventDefault(e) {
   e.preventDefault();
@@ -699,11 +700,13 @@ export default defineComponent({
     let downEvents;
     if (useTouch) {
       upEvents = {
-        onTouchstart: editable && !upDisabledClass && this.up,
+        [supportsPassive ? 'onTouchstartPassive' : 'onTouchstart']:
+          editable && !upDisabledClass && this.up,
         onTouchend: this.stop,
       };
       downEvents = {
-        onTouchstart: editable && !downDisabledClass && this.down,
+        [supportsPassive ? 'onTouchstartPassive' : 'onTouchstart']:
+          editable && !downDisabledClass && this.down,
         onTouchend: this.stop,
       };
     } else {

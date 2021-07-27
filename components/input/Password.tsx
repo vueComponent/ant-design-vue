@@ -7,7 +7,8 @@ import EyeInvisibleOutlined from '@ant-design/icons-vue/EyeInvisibleOutlined';
 import inputProps from './inputProps';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import { defineComponent } from 'vue';
+import { defineComponent, inject } from 'vue';
+import { defaultConfigProvider } from '../config-provider';
 
 const ActionMap = {
   click: 'onClick',
@@ -20,8 +21,8 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     ...inputProps,
-    prefixCls: PropTypes.string.def('ant-input-password'),
-    inputPrefixCls: PropTypes.string.def('ant-input'),
+    prefixCls: PropTypes.string,
+    inputPrefixCls: PropTypes.string,
     action: PropTypes.string.def('click'),
     visibilityToggle: PropTypes.looseBool.def(true),
     iconRender: PropTypes.func.def((visible: boolean) =>
@@ -31,6 +32,7 @@ export default defineComponent({
   setup() {
     return {
       input: null,
+      configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
   data() {
@@ -56,8 +58,8 @@ export default defineComponent({
         visible: !this.visible,
       });
     },
-    getIcon() {
-      const { prefixCls, action } = this.$props;
+    getIcon(prefixCls) {
+      const { action } = this.$props;
       const iconTrigger = ActionMap[action] || '';
       const iconRender = this.$slots.iconRender || this.$props.iconRender;
       const icon = iconRender(this.visible);
@@ -81,8 +83,8 @@ export default defineComponent({
   },
   render() {
     const {
-      prefixCls,
-      inputPrefixCls,
+      prefixCls: customizePrefixCls,
+      inputPrefixCls: customizeInputPrefixCls,
       size,
       suffix,
       action,
@@ -91,7 +93,12 @@ export default defineComponent({
       ...restProps
     } = getOptionProps(this);
     const { class: className } = this.$attrs;
-    const suffixIcon = visibilityToggle && this.getIcon();
+
+    const getPrefixCls = this.configProvider.getPrefixCls;
+    const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
+    const prefixCls = getPrefixCls('input-password', customizePrefixCls);
+
+    const suffixIcon = visibilityToggle && this.getIcon(prefixCls);
     const inputClassName = classNames(prefixCls, className, {
       [`${prefixCls}-${size}`]: !!size,
     });

@@ -1,6 +1,6 @@
 import { flattenChildren, getPropsSlot, isValidElement } from '../../_util/props-util';
 import PropTypes from '../../_util/vue-types';
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent, getCurrentInstance, onBeforeUnmount, ref, watch } from 'vue';
 import { useInjectKeyPath } from './hooks/useKeyPath';
 import { useInjectFirstLevel, useInjectMenu } from './hooks/useMenuContext';
@@ -18,6 +18,7 @@ const menuItemProps = {
   danger: Boolean,
   title: { type: [String, Boolean], default: undefined },
   icon: PropTypes.VNodeChild,
+  onClick: Object as PropType<(e: MouseEvent | KeyboardEvent) => void>,
 };
 
 export type MenuItemProps = Partial<ExtractPropTypes<typeof menuItemProps>>;

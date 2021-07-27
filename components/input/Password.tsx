@@ -20,8 +20,8 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     ...inputProps,
-    prefixCls: PropTypes.string.def('ant-input-password'),
-    inputPrefixCls: PropTypes.string.def('ant-input'),
+    prefixCls: PropTypes.string,
+    inputPrefixCls: PropTypes.string,
     action: PropTypes.string.def('click'),
     visibilityToggle: PropTypes.looseBool.def(true),
     iconRender: PropTypes.func.def((visible: boolean) =>

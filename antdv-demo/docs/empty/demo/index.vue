@@ -9,7 +9,7 @@ import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
 const md = {
-  cn: `# 空状态
+  cn: `# Empty 空状态
         空状态时的展示占位图。
 
       空状态时的展示占位图。

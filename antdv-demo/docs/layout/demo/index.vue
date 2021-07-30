@@ -13,7 +13,7 @@ import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
 const md = {
-  cn: `# 布局
+  cn: `# Layout 布局
   协助进行页面级整体布局。
 
 ## 设计规则

@@ -9,7 +9,7 @@ import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
 const md = {
-  cn: `# 时间轴
+  cn: `# Timeline 时间轴
   垂直展示的时间流信息。
   ## 何时使用
   - 当有一系列信息需按时间排列时，可正序和倒序。

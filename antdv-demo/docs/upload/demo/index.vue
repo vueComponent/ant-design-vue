@@ -15,7 +15,7 @@ import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
 const md = {
-  cn: `# 上传
+  cn: `# Upload 上传
   上传是将信息（网页、文字、图片、视频等）通过网页或者上传工具发布到远程服务器上的过程。
   ## 何时使用
   - 当需要上传一个或一些文件时。

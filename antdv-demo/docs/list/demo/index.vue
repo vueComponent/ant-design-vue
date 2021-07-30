@@ -12,7 +12,7 @@ import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
 const md = {
-  cn: `# 列表
+  cn: `# List 列表
   通用列表。
 ## 何时使用
 最基础的列表展示，可承载文字、列表、图片、段落，常用于后台数据展示页面。

@@ -7,7 +7,7 @@ import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
 const md = {
-  cn: `# Comment评论
+  cn: `# Comment 评论
 对网站内容的反馈、评价和讨论。
 
 ## 何时使用

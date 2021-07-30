@@ -7,7 +7,7 @@ import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
 const md = {
-  cn: `# Tooltip
+  cn: `# Tooltip 文字提示
 
   简单的文字提示气泡框。
 

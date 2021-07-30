@@ -11,7 +11,7 @@ import Update from './update';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 const md = {
-  cn: `# 通知提醒框
+  cn: `# Notification 通知提醒框
 全局展示通知提醒信息。
 ## 何时使用
 在系统四个角显示通知提醒信息。经常用于以下情况：

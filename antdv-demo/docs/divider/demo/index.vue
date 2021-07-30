@@ -5,7 +5,7 @@ import WithText from './with-text';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 const md = {
-  cn: `# 分割线
+  cn: `# Divider 分割线
         区隔内容的分割线。
         ## 何时使用
         - 对不同章节的文本段落进行分割。

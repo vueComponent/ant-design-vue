@@ -8,7 +8,7 @@ import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
 const md = {
-  cn: `# 加载占位图
+  cn: `# Skeleton 加载占位图/骨架屏
 
   在需要等待加载内容的位置提供一个占位图。
 

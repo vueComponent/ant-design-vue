@@ -10,7 +10,7 @@ import US from './../index.en-US.md';
 import CN from './../index.zh-CN.md';
 
 const md = {
-  cn: `# Breadcrumb面包屑
+  cn: `# Breadcrumb 面包屑
            显示当前页面在系统层级结构中的位置，并能向上返回。
          ## 何时使用
          - 当系统拥有超过两级以上的层级结构时；

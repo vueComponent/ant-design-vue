@@ -1146,7 +1146,9 @@ export default {
       getPopupContainer: contextGetPopupContainer,
       transformCellText,
     }) {
-      const { showHeader, locale, getPopupContainer, ...restProps } = getOptionProps(this);
+      const { showHeader, locale, getPopupContainer, expandIcon, ...restProps } = getOptionProps(
+        this,
+      );
       const data = this.getCurrentPageData();
       const expandIconAsCell = this.expandedRowRender && this.expandIconAsCell !== false;
 
@@ -1190,7 +1192,7 @@ export default {
       const vcTableProps = {
         key: 'table',
         props: {
-          expandIcon: this.renderExpandIcon(prefixCls),
+          expandIcon: expandIcon || this.renderExpandIcon(prefixCls),
           ...restProps,
           customRow: (record, index) => this.onRow(prefixCls, record, index),
           components: this.sComponents,

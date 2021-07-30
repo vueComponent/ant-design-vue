@@ -26,10 +26,14 @@ const Empty = {
   props: {
     ...EmptyProps(),
   },
+  inject: {
+    configProvider: { default: () => ConfigConsumerProps },
+  },
   methods: {
     renderEmpty(contentLocale) {
       const { prefixCls: customizePrefixCls, imageStyle } = this.$props;
-      const prefixCls = ConfigConsumerProps.getPrefixCls('empty', customizePrefixCls);
+      const { getPrefixCls } = this.configProvider;
+      const prefixCls = getPrefixCls('empty', customizePrefixCls);
       const image = getComponentFromProp(this, 'image') || <DefaultEmptyImg />;
       const description = getComponentFromProp(this, 'description');
 

@@ -8,7 +8,7 @@ import Update from './update';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 const md = {
-  cn: `# 全局提示
+  cn: `# Message 全局提示
 全局展示操作反馈信息。
 ## 何时使用
 - 可提供成功、警告和错误等反馈信息。

@@ -9,7 +9,7 @@ import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
 const md = {
-  cn: `# 穿梭框
+  cn: `# Transfer 穿梭框
   双栏穿梭选择框。
   ## 何时使用
 

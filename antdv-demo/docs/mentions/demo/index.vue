@@ -9,7 +9,7 @@ import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
 const md = {
-  cn: `# Mentions提及 (版本：1.5.0+)
+  cn: `# Mentions 提及 (版本：1.5.0+)
           提及组件。
 ## 何时使用
 - 用于在输入中提及某人或某事，常用于发布、聊天或评论功能。

@@ -212,7 +212,10 @@
 
       &-active {
         color: @tabs-highlight-color;
-        font-weight: 500;
+        // https://github.com/vueComponent/ant-design-vue/issues/4241
+        // Remove font-weight to keep pace with antd (#4241)
+        text-shadow: 0 0 0.25px currentColor;
+        // font-weight: 500;
       }
 
       &-disabled {

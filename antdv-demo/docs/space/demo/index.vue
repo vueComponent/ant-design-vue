@@ -25,13 +25,14 @@ const md = {
 export default {
   category: 'Components',
   subtitle: '间距',
+  cols: 1,
   type: 'Layout',
   title: 'Space',
   render() {
     return (
       <div>
         <md cn={md.cn} us={md.us} />
-        <demo-sort>
+        <demo-sort cols={1}>
           <Base />
           <Vertical />
           <Size />

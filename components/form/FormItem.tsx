@@ -1,4 +1,5 @@
-import { PropType, ExtractPropTypes, ComputedRef, watch } from 'vue';
+import type { PropType, ExtractPropTypes, ComputedRef } from 'vue';
+import { watch } from 'vue';
 import { defineComponent, computed, nextTick, ref, watchEffect, onBeforeUnmount } from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';

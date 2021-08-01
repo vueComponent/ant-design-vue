@@ -367,7 +367,7 @@ export default defineComponent({
       siderCollapsed,
       defaultMotions: computed(() => (isMounted.value ? defaultMotions : null)),
       motion: computed(() => (isMounted.value ? props.motion : null)),
-      overflowDisabled: computed(() => undefined),
+      overflowDisabled: ref(undefined),
       onOpenChange: onInternalOpenChange,
       onItemClick: onInternalClick,
       registerMenuInfo,
@@ -391,7 +391,7 @@ export default defineComponent({
               // Always wrap provider to avoid sub node re-mount
               <MenuContextProvider
                 key={child.key}
-                props={{ overflowDisabled: computed(() => index > lastVisibleIndex.value) }}
+                overflowDisabled={index > lastVisibleIndex.value}
               >
                 {child}
               </MenuContextProvider>

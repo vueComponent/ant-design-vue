@@ -1,6 +1,7 @@
 import { computed, defineComponent, ref, watch } from 'vue';
 import Transition from '../../_util/transition';
 import { useInjectMenu, MenuContextProvider } from './hooks/useMenuContext';
+import type { MenuMode } from './interface';
 import SubMenuList from './SubMenuList';
 
 export default defineComponent({
@@ -12,7 +13,7 @@ export default defineComponent({
     keyPath: Array,
   },
   setup(props, { slots }) {
-    const fixedMode = computed(() => 'inline');
+    const fixedMode = computed<MenuMode>(() => 'inline');
     const { motion, mode, defaultMotions } = useInjectMenu();
     const sameModeRef = computed(() => mode.value === fixedMode.value);
     const destroy = ref(!sameModeRef.value);
@@ -43,12 +44,7 @@ export default defineComponent({
         return null;
       }
       return (
-        <MenuContextProvider
-          props={{
-            mode: fixedMode,
-            locked: !sameModeRef.value,
-          }}
-        >
+        <MenuContextProvider mode={fixedMode.value}>
           <Transition {...mergedMotion.value}>
             <SubMenuList
               v-show={mergedOpen.value}

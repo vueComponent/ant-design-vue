@@ -373,7 +373,7 @@ export default defineComponent({
       registerMenuInfo,
       unRegisterMenuInfo,
       selectedSubMenuEventKeys,
-      isRootMenu: true,
+      isRootMenu: ref(true),
       expandIcon: props.expandIcon || slots.expandIcon,
     });
     return () => {

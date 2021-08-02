@@ -1,8 +1,6 @@
 import type { Key } from '../../../_util/type';
 import type { ComputedRef, CSSProperties, InjectionKey, PropType, Ref, UnwrapRef } from 'vue';
-import { toRef } from 'vue';
-import { watchEffect } from 'vue';
-import { defineComponent, inject, provide } from 'vue';
+import { defineComponent, inject, provide, toRef } from 'vue';
 import type {
   BuiltinPlacements,
   MenuClickEventHandler,
@@ -21,7 +19,7 @@ export interface StoreMenuInfo {
   parentKeys: ComputedRef<Key[]>;
 }
 export interface MenuContextProps {
-  isRootMenu: boolean;
+  isRootMenu: Ref<boolean>;
 
   store: Ref<Record<string, UnwrapRef<StoreMenuInfo>>>;
   registerMenuInfo: (key: string, info: StoreMenuInfo) => void;
@@ -115,17 +113,17 @@ const MenuContextProvider = defineComponent({
   setup(props, { slots }) {
     const menuContext = useInjectMenu();
     const newContext = { ...menuContext };
-    watchEffect(() => {
-      if (props.mode !== undefined) {
-        newContext.mode = toRef(props, 'mode');
-      }
-      if (props.isRootMenu !== undefined) {
-        newContext.isRootMenu = props.isRootMenu;
-      }
-      if (props.overflowDisabled !== undefined) {
-        newContext.overflowDisabled = toRef(props, 'overflowDisabled');
-      }
-    });
+    // 确保传入的属性不会动态增删
+    // 不需要 watch 变化
+    if (props.mode !== undefined) {
+      newContext.mode = toRef(props, 'mode');
+    }
+    if (props.isRootMenu !== undefined) {
+      newContext.isRootMenu = toRef(props, 'isRootMenu');
+    }
+    if (props.overflowDisabled !== undefined) {
+      newContext.overflowDisabled = toRef(props, 'overflowDisabled');
+    }
     useProvideMenu(newContext);
     return () => slots.default?.();
   },

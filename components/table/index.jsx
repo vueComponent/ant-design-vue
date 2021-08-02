@@ -112,7 +112,7 @@ const Table = {
       title: slotTitle,
       footer: slotFooter,
       expandedRowRender = props.expandedRowRender,
-      expandIcon = props.expandIcon,
+      expandIcon,
     } = $scopedSlots;
     title = title || slotTitle;
     footer = footer || slotFooter;
@@ -123,7 +123,7 @@ const Table = {
         title,
         footer,
         expandedRowRender,
-        expandIcon,
+        expandIcon: this.$props.expandIcon || expandIcon,
       },
       on: getListeners(this),
     };

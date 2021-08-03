@@ -115,7 +115,7 @@ export default function usePickerInput({
         return;
       }
 
-      if (blurToCancel) {
+      if (blurToCancel.value) {
         setTimeout(() => {
           let { activeElement } = document;
           while (activeElement && activeElement.shadowRoot) {

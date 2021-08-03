@@ -191,13 +191,14 @@ function Picker<DateType>() {
     // ],
     setup(props, { attrs, expose }) {
       const inputRef = ref(null);
+      const picker = computed(() => picker.value ?? 'date');
       const needConfirmButton = computed(
-        () => (props.picker === 'date' && !!props.showTime) || props.picker === 'time',
+        () => (picker.value === 'date' && !!props.showTime) || picker.value === 'time',
       );
 
       // ============================= State =============================
       const formatList = computed(() =>
-        toArray(getDefaultFormat(props.format, props.picker, props.showTime, props.use12Hours)),
+        toArray(getDefaultFormat(props.format, picker.value, props.showTime, props.use12Hours)),
       );
 
       // Panel ref
@@ -273,12 +274,11 @@ function Picker<DateType>() {
         if (props.disabled && newOpen) {
           return;
         }
-
         triggerInnerOpen(newOpen);
       };
 
       const forwardKeydown = (e: KeyboardEvent) => {
-        if (mergedOpen && operationRef.value && operationRef.value.onKeydown) {
+        if (mergedOpen.value && operationRef.value && operationRef.value.onKeydown) {
           // Let popup panel handle keyboard
           return operationRef.value.onKeydown(e);
         }
@@ -355,14 +355,11 @@ function Picker<DateType>() {
       });
 
       // Change picker should sync back with text value
-      watch(
-        () => props.picker,
-        () => {
-          if (!mergedOpen.value) {
-            resetText();
-          }
-        },
-      );
+      watch(picker, () => {
+        if (!mergedOpen.value) {
+          resetText();
+        }
+      });
 
       // Sync innerValue with control mode
       watch(mergedValue, () => {
@@ -386,7 +383,7 @@ function Picker<DateType>() {
 
       useProvidePanel({
         operationRef,
-        hideHeader: computed(() => props.picker === 'time'),
+        hideHeader: computed(() => picker.value === 'time'),
         panelRef: panelDivRef,
         onSelect: onContextSelect,
         open: mergedOpen,

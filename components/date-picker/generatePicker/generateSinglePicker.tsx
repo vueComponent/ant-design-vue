@@ -140,7 +140,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
           if (picker) {
             additionalOverrideProps.picker = picker;
           }
-          const mergedPicker = picker || p.picker;
+          const mergedPicker = picker || p.picker || 'date';
 
           additionalOverrideProps = {
             ...additionalOverrideProps,
@@ -172,6 +172,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
               transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
               {...restProps}
               {...additionalOverrideProps}
+              picker={mergedPicker}
               value={value.value}
               defaultValue={defaultValue.value}
               defaultPickerValue={defaultPickerValue.value}
@@ -206,7 +207,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
     });
   }
 
-  const DatePicker = getPicker<DatePickerProps>('date', 'ADatePicker');
+  const DatePicker = getPicker<DatePickerProps>(undefined, 'ADatePicker');
   const WeekPicker = getPicker<Omit<PickerDateProps<DateType>, 'picker'>>('week', 'AWeekPicker');
   const MonthPicker = getPicker<Omit<PickerDateProps<DateType>, 'picker'>>('month', 'AMonthPicker');
   const YearPicker = getPicker<Omit<PickerDateProps<DateType>, 'picker'>>('year', 'AYearPicker');

@@ -1,4 +1,4 @@
-import DatePicker from './moment';
-export * from './moment';
+import DatePicker from './dayjs';
+export * from './dayjs';
 
 export default DatePicker;

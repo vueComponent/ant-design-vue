@@ -2,9 +2,19 @@ import type { CSSProperties, PropType } from 'vue';
 import type { PickerLocale } from '.';
 import type { SizeType } from '../../config-provider';
 import type { AlignType } from '../../vc-align/interface';
-import type { PanelMode, PickerMode } from '../../vc-picker/interface';
+import type {
+  CustomFormat,
+  DisabledTime,
+  DisabledTimes,
+  EventValue,
+  PanelMode,
+  PickerMode,
+  RangeValue,
+} from '../../vc-picker/interface';
 import type { DateRender } from '../../vc-picker/panels/DatePanel/DateBody';
+import type { MonthCellRender } from '../../vc-picker/panels/MonthPanel/MonthBody';
 import type { SharedTimeProps } from '../../vc-picker/panels/TimePanel';
+import type { RangeDateRender, RangeType } from '../../vc-picker/RangePicker';
 import type { VueNode } from '../../_util/type';
 
 function commonProps<DateType>() {
@@ -68,7 +78,46 @@ function commonProps<DateType>() {
 function datePickerProps<DateType>() {
   return {
     defaultPickerValue: { type: [String, Object] as PropType<DateType> },
+    defaultValue: { type: [String, Object] as PropType<DateType> },
+    value: { type: [String, Object] as PropType<DateType> },
+    disabledTime: { type: Function as PropType<DisabledTime<DateType>> },
+    format: {
+      type: [String, Function, Array] as PropType<
+        string | CustomFormat<DateType> | (string | CustomFormat<DateType>)[]
+      >,
+    },
+    renderExtraFooter: { type: Function as PropType<(mode: PanelMode) => VueNode> },
+    showNow: { type: Boolean, default: undefined },
+    monthCellRender: { type: Function as PropType<MonthCellRender<DateType>> },
+    // deprecated  Please use `monthCellRender"` instead.',
+    monthCellContentRender: { type: Function as PropType<MonthCellRender<DateType>> },
   };
 }
 
-export { commonProps, datePickerProps };
+function rangePickerProps<DateType>() {
+  return {
+    allowEmpty: { type: Array as unknown as PropType<[boolean, boolean]> },
+    dateRender: { type: Function as PropType<RangeDateRender<DateType>> },
+    defaultPickerValue: { type: Array as unknown as PropType<[DateType, DateType]> },
+    defaultValue: { type: Array as unknown as PropType<[DateType, DateType]> },
+    value: { type: Array as unknown as PropType<[DateType, DateType]> },
+    disabledTime: {
+      type: Function as PropType<(date: EventValue<DateType>, type: RangeType) => DisabledTimes>,
+    },
+    disabled: { type: Array as unknown as PropType<[boolean, boolean]> },
+    format: String,
+    renderExtraFooter: { type: Function as PropType<() => VueNode> },
+    separator: { type: Function as PropType<() => VueNode> },
+    ranges: {
+      type: Object as PropType<
+        Record<
+          string,
+          Exclude<RangeValue<DateType>, null> | (() => Exclude<RangeValue<DateType>, null>)
+        >
+      >,
+    },
+    placeholder: Array,
+  };
+}
+
+export { commonProps, datePickerProps, rangePickerProps };

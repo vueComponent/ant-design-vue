@@ -2,22 +2,19 @@ import CalendarOutlined from '@ant-design/icons-vue/CalendarOutlined';
 import ClockCircleOutlined from '@ant-design/icons-vue/ClockCircleOutlined';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import RCPicker from '../../vc-picker';
-import type { DisabledTime, PanelMode, PickerMode } from '../../vc-picker/interface';
+import type { PickerMode } from '../../vc-picker/interface';
 import type { GenerateConfig } from '../../vc-picker/generate/index';
 import enUS from '../locale/en_US';
 import { getPlaceholder } from '../util';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
-import type { PickerProps, PickerDateProps, PickerTimeProps, PickerLocale } from '.';
+import type { PickerProps, PickerDateProps, PickerTimeProps } from '.';
 import { getTimeProps, Components } from '.';
-import { CSSProperties, defineComponent, PropType, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
-import { AlignType } from '../../vc-align/interface';
-import { VueNode } from '../../_util/type';
-import { SharedTimeProps } from '../../vc-picker/panels/TimePanel';
-import { SizeType } from '../../config-provider';
-import { DateRender } from '../../vc-picker/panels/DatePanel/DateBody';
-import { commonProps } from './props';
+import { commonProps, datePickerProps } from './props';
+import Omit from 'omit.js';
+import devWarning from '../../vc-util/devWarning';
 
 export default function generatePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
   type DatePickerProps = PickerProps<DateType>;
@@ -31,10 +28,27 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
       inheritAttrs: false,
       props: {
         ...commonProps<DateType>(),
+        ...datePickerProps<DateType>(),
       } as any,
-      slots: ['suffixIcon', 'panelRender', 'dateRender'],
+      slots: [
+        'suffixIcon',
+        // 'clearIcon',
+        // 'prevIcon',
+        // 'nextIcon',
+        // 'superPrevIcon',
+        // 'superNextIcon',
+        // 'panelRender',
+        'dateRender',
+        'renderExtraFooter',
+        'monthCellRender',
+      ],
       emits: ['change', 'openChange', 'focus', 'blur', 'panelChange', 'ok', 'update:value'],
       setup(props, { slots, expose, attrs, emit }) {
+        devWarning(
+          !(props as any).monthCellContentRender,
+          'DatePicker',
+          '`monthCellContentRender` is deprecated. Please use `monthCellRender"` instead.',
+        );
         const { prefixCls, direction, getPopupContainer, size, rootPrefixCls } = useConfigInject(
           'picker',
           props,
@@ -89,6 +103,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
           const pre = prefixCls.value;
           return (
             <RCPicker<DateType>
+              {...Omit(slots, ['default'])}
               ref={pickerRef}
               placeholder={getPlaceholder(mergedPicker, locale, placeholder)}
               suffixIcon={

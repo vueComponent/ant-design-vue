@@ -1,4 +1,5 @@
 import type { Ref } from 'vue';
+import type { VueNode } from '../_util/type';
 import type { GenerateConfig } from './generate';
 
 export type Locale = {
@@ -65,10 +66,10 @@ export type PanelSharedProps<DateType> = {
   locale: Locale;
   disabledDate?: (date: DateType) => boolean;
 
-  // prevIcon?: React.ReactNode;
-  // nextIcon?: React.ReactNode;
-  // superPrevIcon?: React.ReactNode;
-  // superNextIcon?: React.ReactNode;
+  prevIcon?: VueNode;
+  nextIcon?: VueNode;
+  superPrevIcon?: VueNode;
+  superNextIcon?: VueNode;
 
   // /**
   //  * Typescript can not handle generic type so we can not use `forwardRef` here.

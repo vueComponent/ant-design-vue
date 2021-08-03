@@ -12,13 +12,29 @@ import { getTimeProps, Components } from '.';
 import { defineComponent, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
+import { commonProps, rangePickerProps } from './props';
+import Omit from 'omit.js';
 
 export default function generateRangePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
   const RangePicker = defineComponent<RangePickerProps<DateType>>({
     name: 'ARangePicker',
     inheritAttrs: false,
-    props: ['size', 'prefixCls', 'direction', 'getPopupContainer', 'locale', 'value'] as any,
-    slots: ['suffixIcon'],
+    props: {
+      ...commonProps<DateType>(),
+      ...rangePickerProps<DateType>(),
+    } as any,
+    slots: [
+      'suffixIcon',
+      // 'clearIcon',
+      // 'prevIcon',
+      // 'nextIcon',
+      // 'superPrevIcon',
+      // 'superNextIcon',
+      // 'panelRender',
+      'dateRender',
+      'renderExtraFooter',
+      // 'separator',
+    ],
     emits: ['change', 'panelChange', 'ok', 'openChange', 'update:value', 'calendarChange'],
     setup(props, { expose, slots, attrs, emit }) {
       const { prefixCls, direction, getPopupContainer, size, rootPrefixCls } = useConfigInject(
@@ -62,6 +78,7 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
         const pre = prefixCls.value;
         return (
           <VCRangePicker<DateType>
+            {...Omit(slots, ['default'])}
             {...restProps}
             separator={
               <span aria-label="to" class={`${pre}-separator`}>

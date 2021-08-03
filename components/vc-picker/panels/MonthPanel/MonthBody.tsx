@@ -10,7 +10,7 @@ import useMergeProps from '../../hooks/useMergeProps';
 export const MONTH_COL_COUNT = 3;
 const MONTH_ROW_COUNT = 4;
 
-export type MonthCellRender<DateType> = (currentDate: DateType, locale: Locale) => VueNode;
+export type MonthCellRender<DateType> = (obj: { current: DateType; locale: Locale }) => VueNode;
 
 export type MonthBodyProps<DateType> = {
   prefixCls: string;
@@ -51,7 +51,7 @@ function MonthBody<DateType>(_props: MonthBodyProps<DateType>) {
   const baseMonth = generateConfig.setMonth(viewDate, 0);
 
   const getCellNode = monthCellRender
-    ? (date: DateType) => monthCellRender(date, locale)
+    ? (date: DateType) => monthCellRender({ current: date, locale })
     : undefined;
 
   return (

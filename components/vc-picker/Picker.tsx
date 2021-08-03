@@ -178,15 +178,15 @@ function Picker<DateType>() {
       'autocomplete',
       'showToday',
     ] as any,
-    slots: [
-      'suffixIcon',
-      'clearIcon',
-      'prevIcon',
-      'nextIcon',
-      'superPrevIcon',
-      'superNextIcon',
-      'panelRender',
-    ],
+    // slots: [
+    //   'suffixIcon',
+    //   'clearIcon',
+    //   'prevIcon',
+    //   'nextIcon',
+    //   'superPrevIcon',
+    //   'superNextIcon',
+    //   'panelRender',
+    // ],
     setup(props, { attrs, expose }) {
       const inputRef = ref(null);
       const needConfirmButton = computed(

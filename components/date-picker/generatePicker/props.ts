@@ -72,14 +72,15 @@ function commonProps<DateType>() {
     disabledDate: { type: Function as PropType<(date: DateType) => boolean> },
     mode: { type: String as PropType<PanelMode> },
     picker: { type: String as PropType<PickerMode> },
+    valueFormat: String,
   };
 }
 
 function datePickerProps<DateType>() {
   return {
-    defaultPickerValue: { type: [String, Object] as PropType<DateType> },
-    defaultValue: { type: [String, Object] as PropType<DateType> },
-    value: { type: [String, Object] as PropType<DateType> },
+    defaultPickerValue: { type: [String, Object] as PropType<DateType | string> },
+    defaultValue: { type: [String, Object] as PropType<DateType | string> },
+    value: { type: [String, Object] as PropType<DateType | string> },
     disabledTime: { type: Function as PropType<DisabledTime<DateType>> },
     format: {
       type: [String, Function, Array] as PropType<
@@ -98,8 +99,10 @@ function rangePickerProps<DateType>() {
   return {
     allowEmpty: { type: Array as unknown as PropType<[boolean, boolean]> },
     dateRender: { type: Function as PropType<RangeDateRender<DateType>> },
-    defaultPickerValue: { type: Array as unknown as PropType<[DateType, DateType]> },
-    defaultValue: { type: Array as unknown as PropType<[DateType, DateType]> },
+    defaultPickerValue: {
+      type: Array as unknown as PropType<[DateType, DateType] | [string, string]>,
+    },
+    defaultValue: { type: Array as unknown as PropType<[DateType, DateType] | [string, string]> },
     value: { type: Array as unknown as PropType<[DateType, DateType]> },
     disabledTime: {
       type: Function as PropType<(date: EventValue<DateType>, type: RangeType) => DisabledTimes>,
@@ -120,5 +123,19 @@ function rangePickerProps<DateType>() {
     mode: { type: Array as unknown as PropType<[PanelMode, PanelMode]> },
   };
 }
+
+export type ExtraDatePickerProps<DateType> = {
+  valueFormat?: string;
+  defaultPickerValue?: DateType | string;
+  defaultValue?: DateType | string;
+  value?: DateType | string;
+};
+
+export type ExtraRangePickerProps<DateType> = {
+  valueFormat?: string;
+  defaultPickerValue?: [DateType, DateType] | [string, string];
+  defaultValue?: [DateType, DateType] | [string, string];
+  value?: [DateType, DateType] | [string, string];
+};
 
 export { commonProps, datePickerProps, rangePickerProps };

@@ -31,7 +31,7 @@ import useHoverValue from './hooks/useHoverValue';
 import type { VueNode } from '../_util/type';
 import type { ChangeEvent, FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import type { HTMLAttributes } from 'vue';
-import { computed, createVNode, defineComponent, ref, toRef, watch, watchEffect } from 'vue';
+import { computed, defineComponent, ref, toRef, watch, watchEffect } from 'vue';
 import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
 import useState from '../_util/hooks/useState';

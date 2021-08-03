@@ -29,7 +29,7 @@ import useTextValueMapping from './hooks/useTextValueMapping';
 import useValueTexts from './hooks/useValueTexts';
 import useHoverValue from './hooks/useHoverValue';
 import type { CSSProperties, HtmlHTMLAttributes, Ref } from 'vue';
-import { computed, createVNode, defineComponent, ref, toRef, watch } from 'vue';
+import { computed, defineComponent, ref, toRef, watch } from 'vue';
 import type { ChangeEvent, FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import type { VueNode } from '../_util/type';
 import type { AlignType } from '../vc-align/interface';

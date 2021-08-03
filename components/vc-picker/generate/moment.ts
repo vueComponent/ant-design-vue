@@ -135,6 +135,24 @@ const generateConfig: GenerateConfig<Moment> = {
       return null;
     },
   },
+  toDate: (value, valueFormat) => {
+    if (Array.isArray(value)) {
+      return value.map((val: any) =>
+        typeof val === 'string' && val ? moment(val, valueFormat) : val || null,
+      ) as Moment[];
+    } else {
+      return (
+        typeof value === 'string' && value ? moment(value, valueFormat) : value || null
+      ) as Moment;
+    }
+  },
+  toString: (value, valueFormat) => {
+    if (Array.isArray(value)) {
+      return value.map((val: any) => (moment.isMoment(val) ? val.format(valueFormat) : val));
+    } else {
+      return moment.isMoment(value) ? value.format(valueFormat) : value;
+    }
+  },
 };
 
 export default generateConfig;

@@ -26,6 +26,14 @@ export type GenerateConfig<DateType> = {
   isAfter: (date1: DateType, date2: DateType) => boolean;
   isValidate: (date: DateType) => boolean;
 
+  toDate: (
+    value: string | string[] | DateType | DateType[],
+    valueFormat: string,
+  ) => DateType | DateType[];
+  toString: (
+    value: string | string[] | DateType | DateType[],
+    valueFormat: string,
+  ) => string | string[];
   locale: {
     getWeekFirstDay: (locale: string) => number;
     getWeekFirstDate: (locale: string, value: DateType) => DateType;

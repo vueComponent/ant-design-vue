@@ -9,14 +9,14 @@ import { getPlaceholder } from '../util';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
 import type { PickerProps, PickerDateProps, PickerTimeProps } from '.';
 import { getTimeProps, Components } from '.';
-import { defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
-import { commonProps, datePickerProps } from './props';
+import { commonProps, datePickerProps, ExtraDatePickerProps } from './props';
 import devWarning from '../../vc-util/devWarning';
 
 export default function generatePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
-  type DatePickerProps = PickerProps<DateType>;
+  type DatePickerProps = PickerProps<DateType> & ExtraDatePickerProps<DateType>;
 
   function getPicker<InnerPickerProps extends DatePickerProps>(
     picker?: PickerMode,
@@ -68,8 +68,9 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
           },
         });
         const onChange = (date: DateType, dateString: string) => {
-          emit('update:value', date);
-          emit('change', date, dateString);
+          const value = props.valueFormat ? generateConfig.toString(date, props.valueFormat) : date;
+          emit('update:value', value);
+          emit('change', value, dateString);
         };
         const onOpenChange = (open: boolean) => {
           emit('openChange', open);
@@ -80,7 +81,8 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
         const onBlur = () => {
           emit('blur');
         };
-        const onPanelChange = (value: DateType, mode: PanelMode | null) => {
+        const onPanelChange = (date: DateType, mode: PanelMode | null) => {
+          const value = props.valueFormat ? generateConfig.toString(date, props.valueFormat) : date;
           emit('panelChange', value, mode);
         };
         const onOk = (value: DateType) => {
@@ -88,6 +90,32 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
         };
 
         const [contextLocale] = useLocaleReceiver('DatePicker', enUS);
+
+        const value = computed(() => {
+          if (props.value) {
+            return props.valueFormat
+              ? generateConfig.toDate(props.value, props.valueFormat)
+              : props.value;
+          }
+          return props.value;
+        });
+        const defaultValue = computed(() => {
+          if (props.defaultValue) {
+            return props.valueFormat
+              ? generateConfig.toDate(props.defaultValue, props.valueFormat)
+              : props.defaultValue;
+          }
+          return props.defaultValue;
+        });
+        const defaultPickerValue = computed(() => {
+          if (props.defaultPickerValue) {
+            return props.valueFormat
+              ? generateConfig.toDate(props.defaultPickerValue, props.valueFormat)
+              : props.defaultPickerValue;
+          }
+          return props.defaultPickerValue;
+        });
+
         return () => {
           const locale = { ...contextLocale.value, ...props.locale };
           const p = { ...props, ...attrs } as InnerPickerProps;
@@ -144,6 +172,9 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
               transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
               {...restProps}
               {...additionalOverrideProps}
+              value={value.value}
+              defaultValue={defaultValue.value}
+              defaultPickerValue={defaultPickerValue.value}
               showToday={showToday}
               locale={locale!.lang}
               class={classNames(

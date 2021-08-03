@@ -113,6 +113,25 @@ const generateConfig: GenerateConfig<Dayjs> = {
       return null;
     },
   },
+
+  toDate: (value, valueFormat) => {
+    if (Array.isArray(value)) {
+      return value.map((val: any) =>
+        typeof val === 'string' && val ? dayjs(val, valueFormat) : val || null,
+      ) as Dayjs[];
+    } else {
+      return (
+        typeof value === 'string' && value ? dayjs(value, valueFormat) : value || null
+      ) as Dayjs;
+    }
+  },
+  toString: (value, valueFormat) => {
+    if (Array.isArray(value)) {
+      return value.map((val: any) => (dayjs.isDayjs(val) ? val.format(valueFormat) : val));
+    } else {
+      return dayjs.isDayjs(value) ? value.format(valueFormat) : value;
+    }
+  },
 };
 
 export default generateConfig;

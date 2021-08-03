@@ -22,6 +22,7 @@ import {
   startOfWeek,
   format as formatDate,
   parse as parseDate,
+  isDate,
 } from 'date-fns';
 import * as Locale from 'date-fns/locale';
 import type { GenerateConfig } from '.';
@@ -109,6 +110,28 @@ const generateConfig: GenerateConfig<Date> = {
       }
       return null;
     },
+  },
+  toDate: (value, valueFormat) => {
+    if (Array.isArray(value)) {
+      return value.map((val: any) =>
+        typeof val === 'string' && val ? parseDate(val, valueFormat, new Date()) : val || null,
+      ) as Date[];
+    } else {
+      return (
+        typeof value === 'string' && value
+          ? parseDate(value, valueFormat, new Date())
+          : value || null
+      ) as Date;
+    }
+  },
+  toString: (value, valueFormat) => {
+    if (Array.isArray(value)) {
+      return value.map((val: any) =>
+        isDate(val) ? formatDate(val as Date, valueFormat) : val,
+      ) as string[];
+    } else {
+      return (isDate(value) ? formatDate(value as Date, valueFormat) : value) as string;
+    }
   },
 };
 

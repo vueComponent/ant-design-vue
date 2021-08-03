@@ -1224,7 +1224,4 @@ function RangerPicker<DateType>() {
 }
 
 const InterRangerPicker = RangerPicker<any>();
-export default <DateType extends any>(
-  props: MergedRangePickerProps<DateType>,
-  { slots },
-): JSX.Element => createVNode(InterRangerPicker, props, slots);
+export default InterRangerPicker;

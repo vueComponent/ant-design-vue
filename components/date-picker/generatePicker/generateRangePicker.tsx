@@ -115,7 +115,7 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
         };
         const pre = prefixCls.value;
         return (
-          <VCRangePicker<DateType>
+          <VCRangePicker
             dateRender={dateRender}
             renderExtraFooter={renderExtraFooter}
             separator={

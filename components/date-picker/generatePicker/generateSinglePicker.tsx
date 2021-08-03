@@ -129,7 +129,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
           };
           const pre = prefixCls.value;
           return (
-            <RCPicker<DateType>
+            <RCPicker
               monthCellRender={props.monthCellRender}
               dateRender={dateRender}
               renderExtraFooter={renderExtraFooter}

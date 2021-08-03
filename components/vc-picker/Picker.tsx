@@ -589,7 +589,4 @@ function Picker<DateType>() {
     },
   });
 }
-
-const InterPicker = Picker<any>();
-export default <DateType extends any>(props: MergedPickerProps<DateType>, { slots }): JSX.Element =>
-  createVNode(InterPicker, props, slots);
+export default Picker<any>();

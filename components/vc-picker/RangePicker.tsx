@@ -450,7 +450,6 @@ function RangerPicker<DateType>() {
           values && values[1]
             ? formatValue(values[1], { generateConfig, locale, format: formatList.value[0] })
             : '';
-
         if (onCalendarChange) {
           const info: RangeInfo = { range: sourceIndex === 0 ? 'start' : 'end' };
 

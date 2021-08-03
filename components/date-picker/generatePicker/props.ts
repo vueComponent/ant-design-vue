@@ -104,7 +104,7 @@ function rangePickerProps<DateType>() {
     disabledTime: {
       type: Function as PropType<(date: EventValue<DateType>, type: RangeType) => DisabledTimes>,
     },
-    disabled: { type: Array as unknown as PropType<[boolean, boolean]> },
+    disabled: { type: [Boolean, Array] as unknown as PropType<boolean | [boolean, boolean]> },
     format: String,
     renderExtraFooter: { type: Function as PropType<() => VueNode> },
     separator: { type: Function as PropType<() => VueNode> },
@@ -117,6 +117,7 @@ function rangePickerProps<DateType>() {
       >,
     },
     placeholder: Array,
+    mode: { type: Array as unknown as PropType<[PanelMode, PanelMode]> },
   };
 }
 

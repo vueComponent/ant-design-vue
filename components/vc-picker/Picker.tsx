@@ -177,6 +177,8 @@ function Picker<DateType>() {
       'direction',
       'autocomplete',
       'showToday',
+      'renderExtraFooter',
+      'dateRender',
     ] as any,
     // slots: [
     //   'suffixIcon',
@@ -207,7 +209,6 @@ function Picker<DateType>() {
         value: toRef(props, 'value'),
         defaultValue: props.defaultValue,
       });
-
       const selectedValue = ref(mergedValue.value) as Ref<DateType>;
       const setSelectedValue = (val: DateType) => {
         selectedValue.value = val;
@@ -238,7 +239,6 @@ function Picker<DateType>() {
         generateConfig: toRef(props, 'generateConfig'),
         locale: toRef(props, 'locale'),
       });
-
       const [text, triggerTextChange, resetText] = useTextValueMapping({
         valueTexts,
         onTextChange: newText => {
@@ -526,7 +526,6 @@ function Picker<DateType>() {
         // ============================ Return =============================
 
         const popupPlacement = direction === 'rtl' ? 'bottomRight' : 'bottomLeft';
-
         return (
           <PickerTrigger
             visible={mergedOpen.value}

@@ -138,6 +138,7 @@ function PickerPanel<DateType>() {
       showTime: [Boolean, Object],
       showToday: Boolean,
       renderExtraFooter: Function,
+      dateRender: Function,
       hideHeader: Boolean,
       onSelect: Function,
       onChange: Function,

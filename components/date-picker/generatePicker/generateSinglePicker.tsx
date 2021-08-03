@@ -2,7 +2,7 @@ import CalendarOutlined from '@ant-design/icons-vue/CalendarOutlined';
 import ClockCircleOutlined from '@ant-design/icons-vue/ClockCircleOutlined';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import RCPicker from '../../vc-picker';
-import type { PickerMode } from '../../vc-picker/interface';
+import type { PanelMode, PickerMode } from '../../vc-picker/interface';
 import type { GenerateConfig } from '../../vc-picker/generate/index';
 import enUS from '../locale/en_US';
 import { getPlaceholder } from '../util';
@@ -13,7 +13,6 @@ import { defineComponent, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
 import { commonProps, datePickerProps } from './props';
-import Omit from 'omit.js';
 import devWarning from '../../vc-util/devWarning';
 
 export default function generatePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
@@ -45,9 +44,15 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
       emits: ['change', 'openChange', 'focus', 'blur', 'panelChange', 'ok', 'update:value'],
       setup(props, { slots, expose, attrs, emit }) {
         devWarning(
-          !(props as any).monthCellContentRender,
+          !((props as any).monthCellContentRender || slots.monthCellContentRender),
           'DatePicker',
           '`monthCellContentRender` is deprecated. Please use `monthCellRender"` instead.',
+        );
+
+        devWarning(
+          !(attrs as any).getCalendarContainer,
+          'DatePicker',
+          '`getCalendarContainer` is deprecated. Please use `getPopupContainer"` instead.',
         );
         const { prefixCls, direction, getPopupContainer, size, rootPrefixCls } = useConfigInject(
           'picker',
@@ -66,6 +71,21 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
           emit('update:value', date);
           emit('change', date, dateString);
         };
+        const onOpenChange = (open: boolean) => {
+          emit('openChange', open);
+        };
+        const onFoucs = () => {
+          emit('focus');
+        };
+        const onBlur = () => {
+          emit('blur');
+        };
+        const onPanelChange = (value: DateType, mode: PanelMode | null) => {
+          emit('panelChange', value, mode);
+        };
+        const onOk = (value: DateType) => {
+          emit('ok', value);
+        };
 
         const [contextLocale] = useLocaleReceiver('DatePicker', enUS);
         return () => {
@@ -76,6 +96,13 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
             placeholder,
             suffixIcon = slots.suffixIcon?.(),
             showToday = true,
+            transitionName,
+            allowClear = true,
+            dateRender = slots.dateRender,
+            renderExtraFooter = slots.renderExtraFooter,
+            monthCellRender = slots.monthCellRender ||
+              (props as any).monthCellContentRender ||
+              slots.monthCellContentRender,
             ...restProps
           } = p;
           const showTime = p.showTime === '' ? true : p.showTime;
@@ -103,7 +130,9 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
           const pre = prefixCls.value;
           return (
             <RCPicker<DateType>
-              {...Omit(slots, ['default'])}
+              monthCellRender={props.monthCellRender}
+              dateRender={dateRender}
+              renderExtraFooter={renderExtraFooter}
               ref={pickerRef}
               placeholder={getPlaceholder(mergedPicker, locale, placeholder)}
               suffixIcon={
@@ -111,8 +140,8 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
                 (mergedPicker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)
               }
               clearIcon={<CloseCircleFilled />}
-              allowClear
-              transitionName={`${rootPrefixCls.value}-slide-up`}
+              allowClear={allowClear}
+              transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
               {...restProps}
               {...additionalOverrideProps}
               showToday={showToday}
@@ -125,7 +154,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
                 attrs.class,
               )}
               prefixCls={pre}
-              getPopupContainer={getPopupContainer.value}
+              getPopupContainer={attrs.getCalendarContainer || getPopupContainer.value}
               generateConfig={generateConfig}
               prevIcon={<span class={`${pre}-prev-icon`} />}
               nextIcon={<span class={`${pre}-next-icon`} />}
@@ -134,6 +163,11 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
               components={Components}
               direction={direction.value}
               onChange={onChange}
+              onOpenChange={onOpenChange}
+              onFocus={onFoucs}
+              onBlur={onBlur}
+              onPanelChange={onPanelChange}
+              onOk={onOk}
             />
           );
         };

@@ -22,7 +22,7 @@ export default function useTextValueMapping({
 
   watch(
     () => [...valueTexts.value],
-    (cur, pre) => {
+    (cur, pre = []) => {
       if (
         cur.join('||') !== pre.join('||') &&
         valueTexts.value.every(valText => valText !== text.value)
@@ -30,6 +30,7 @@ export default function useTextValueMapping({
         resetText();
       }
     },
+    { immediate: true },
   );
 
   return [text, triggerTextChange, resetText];

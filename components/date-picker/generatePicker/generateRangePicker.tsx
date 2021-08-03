@@ -13,7 +13,9 @@ import { defineComponent, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
 import { commonProps, rangePickerProps } from './props';
-import Omit from 'omit.js';
+import { PanelMode, RangeValue } from '../../vc-picker/interface';
+import { RangePickerSharedProps } from '../../vc-picker/RangePicker';
+import devWarning from '../../vc-util/devWarning';
 
 export default function generateRangePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
   const RangePicker = defineComponent<RangePickerProps<DateType>>({
@@ -35,8 +37,22 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
       'renderExtraFooter',
       // 'separator',
     ],
-    emits: ['change', 'panelChange', 'ok', 'openChange', 'update:value', 'calendarChange'],
+    emits: [
+      'change',
+      'panelChange',
+      'ok',
+      'openChange',
+      'update:value',
+      'calendarChange',
+      'focus',
+      'blur',
+    ],
     setup(props, { expose, slots, attrs, emit }) {
+      devWarning(
+        !(attrs as any).getCalendarContainer,
+        'DatePicker',
+        '`getCalendarContainer` is deprecated. Please use `getPopupContainer"` instead.',
+      );
       const { prefixCls, direction, getPopupContainer, size, rootPrefixCls } = useConfigInject(
         'picker',
         props,
@@ -54,6 +70,24 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
         emit('update:value', dates);
         emit('change', dates, dateStrings);
       };
+      const onOpenChange = (open: boolean) => {
+        emit('openChange', open);
+      };
+      const onFoucs = () => {
+        emit('focus');
+      };
+      const onBlur = () => {
+        emit('blur');
+      };
+      const onPanelChange = (values: RangeValue<DateType>, modes: [PanelMode, PanelMode]) => {
+        emit('panelChange', values, modes);
+      };
+      const onOk = (value: DateType) => {
+        emit('ok', value);
+      };
+      const onCalendarChange: RangePickerSharedProps<DateType>['onCalendarChange'] = (...args) => {
+        emit('calendarChange', ...args);
+      };
       const [contextLocale] = useLocaleReceiver('DatePicker', enUS);
       return () => {
         const locale = { ...contextLocale.value, ...props.locale };
@@ -64,6 +98,10 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
           placeholder,
           suffixIcon = slots.suffixIcon?.(),
           picker = 'date',
+          transitionName,
+          allowClear = true,
+          dateRender = slots.dateRender,
+          renderExtraFooter = slots.renderExtraFooter,
           ...restProps
         } = p;
         const { format, showTime } = p as any;
@@ -78,8 +116,8 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
         const pre = prefixCls.value;
         return (
           <VCRangePicker<DateType>
-            {...Omit(slots, ['default'])}
-            {...restProps}
+            dateRender={dateRender}
+            renderExtraFooter={renderExtraFooter}
             separator={
               <span aria-label="to" class={`${pre}-separator`}>
                 <SwapRightOutlined />
@@ -91,8 +129,9 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
               suffixIcon || (picker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)
             }
             clearIcon={<CloseCircleFilled />}
-            allowClear
-            transitionName={`${rootPrefixCls.value}-slide-up`}
+            allowClear={allowClear}
+            transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
+            {...restProps}
             {...additionalOverrideProps}
             picker={picker}
             class={classNames(
@@ -104,7 +143,7 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
             )}
             locale={locale!.lang}
             prefixCls={pre}
-            getPopupContainer={getPopupContainer.value}
+            getPopupContainer={attrs.getCalendarContainer || getPopupContainer.value}
             generateConfig={generateConfig}
             prevIcon={<span class={`${pre}-prev-icon`} />}
             nextIcon={<span class={`${pre}-next-icon`} />}
@@ -113,6 +152,12 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
             components={Components}
             direction={direction.value}
             onChange={onChange}
+            onOpenChange={onOpenChange}
+            onFocus={onFoucs}
+            onBlur={onBlur}
+            onPanelChange={onPanelChange}
+            onOk={onOk}
+            onCalendarChange={onCalendarChange}
           />
         );
       };

@@ -9,7 +9,7 @@ import { getPlaceholder } from '../util';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
 import type { PickerProps, PickerDateProps, PickerTimeProps } from '.';
 import { getTimeProps, Components } from '.';
-import { computed, defineComponent, ref } from 'vue';
+import { computed, DefineComponent, defineComponent, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
 import { commonProps, datePickerProps, ExtraDatePickerProps } from './props';
@@ -21,7 +21,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
   function getPicker<InnerPickerProps extends DatePickerProps>(
     picker?: PickerMode,
     displayName?: string,
-  ) {
+  ): DefineComponent<InnerPickerProps> {
     return defineComponent<InnerPickerProps>({
       name: displayName,
       inheritAttrs: false,
@@ -152,7 +152,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
                 })
               : {}),
             ...(mergedPicker === 'time'
-              ? getTimeProps({ format, ...p, picker: mergedPicker })
+              ? getTimeProps({ format, ...restProps, picker: mergedPicker })
               : {}),
           };
           const pre = prefixCls.value;
@@ -204,7 +204,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
           );
         };
       },
-    });
+    }) as unknown as DefineComponent<InnerPickerProps>;
   }
 
   const DatePicker = getPicker<DatePickerProps>(undefined, 'ADatePicker');

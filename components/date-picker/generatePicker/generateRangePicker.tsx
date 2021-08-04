@@ -151,7 +151,7 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
           additionalOverrideProps = {
             ...additionalOverrideProps,
             ...(showTime ? getTimeProps({ format, picker, ...showTime }) : {}),
-            ...(picker === 'time' ? getTimeProps({ format, ...p, picker }) : {}),
+            ...(picker === 'time' ? getTimeProps({ format, ...restProps, picker }) : {}),
           };
           const pre = prefixCls.value;
           return (

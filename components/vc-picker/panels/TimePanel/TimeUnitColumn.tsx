@@ -3,7 +3,7 @@ import { useInjectPanel } from '../../PanelContext';
 import classNames from '../../../_util/classNames';
 import { ref } from '@vue/reactivity';
 import { onBeforeUnmount, watch } from '@vue/runtime-core';
-import { defineComponent } from 'vue';
+import { defineComponent, nextTick } from 'vue';
 
 export type Unit = {
   label: any;
@@ -43,17 +43,23 @@ export default defineComponent<TimeUnitColumnProps>({
       scrollRef.value?.();
     });
 
-    watch(open, () => {
-      scrollRef.value?.();
-      if (open.value) {
-        const li = liRefs.value.get(props.value!);
-        if (li) {
-          scrollRef.value = waitElementReady(li, () => {
-            scrollTo(ulRef.value!, li.offsetTop, 0);
-          });
-        }
-      }
-    });
+    watch(
+      open,
+      () => {
+        scrollRef.value?.();
+        nextTick(() => {
+          if (open.value) {
+            const li = liRefs.value.get(props.value!);
+            if (li) {
+              scrollRef.value = waitElementReady(li, () => {
+                scrollTo(ulRef.value!, li.offsetTop, 0);
+              });
+            }
+          }
+        });
+      },
+      { immediate: true, flush: 'post' },
+    );
     return () => {
       const { prefixCls, units, onSelect, value, active, hideDisabledOptions } = props;
       const cellPrefixCls = `${prefixCls}-cell`;

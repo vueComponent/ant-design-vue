@@ -179,7 +179,7 @@ export { default as Tabs, TabPane, TabContent } from './tabs';
 export type { TagProps } from './tag';
 export { default as Tag, CheckableTag } from './tag';
 
-export type { TimePickerProps } from './time-picker';
+export type { TimePickerProps, TimeRangePickerProps } from './time-picker';
 export { default as TimePicker } from './time-picker';
 
 export type { TimelineProps, TimelineItemProps } from './timeline';

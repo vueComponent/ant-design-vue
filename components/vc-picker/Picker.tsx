@@ -191,7 +191,7 @@ function Picker<DateType>() {
     // ],
     setup(props, { attrs, expose }) {
       const inputRef = ref(null);
-      const picker = computed(() => picker.value ?? 'date');
+      const picker = computed(() => props.picker ?? 'date');
       const needConfirmButton = computed(
         () => (picker.value === 'date' && !!props.showTime) || picker.value === 'time',
       );

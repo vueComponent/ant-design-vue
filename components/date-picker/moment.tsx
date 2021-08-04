@@ -35,4 +35,10 @@ DatePicker.install = function (app: App) {
 
 export { RangePicker, WeekPicker, MonthPicker, QuarterPicker };
 
-export default DatePicker as typeof DatePicker & Plugin;
+export default DatePicker as typeof DatePicker &
+  Plugin & {
+    readonly RangePicker: typeof RangePicker;
+    readonly MonthPicker: typeof MonthPicker;
+    readonly WeekPicker: typeof WeekPicker;
+    readonly QuarterPicker: typeof QuarterPicker;
+  };

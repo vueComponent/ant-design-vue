@@ -17,7 +17,11 @@ import { filterEmpty, getListeners } from '../_util/props-util';
 import Base from '../base';
 
 // Initial setting
-VueIcon.add(...Object.keys(allIcons).map(key => allIcons[key]));
+
+// https://github.com/vueComponent/ant-design-vue/issues/2745
+let validIcons = allIcons.default || allIcons;
+
+VueIcon.add(...Object.keys(validIcons).map(key => validIcons[key]));
 setTwoToneColor('#1890ff');
 const defaultTheme = 'outlined';
 let dangerousTheme;

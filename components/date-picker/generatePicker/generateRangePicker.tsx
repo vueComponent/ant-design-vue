@@ -141,6 +141,7 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
             allowClear = true,
             dateRender = slots.dateRender,
             renderExtraFooter = slots.renderExtraFooter,
+            separator = slots.separator?.(),
             ...restProps
           } = p;
           const { format, showTime } = p as any;
@@ -158,9 +159,11 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
               dateRender={dateRender}
               renderExtraFooter={renderExtraFooter}
               separator={
-                <span aria-label="to" class={`${pre}-separator`}>
-                  <SwapRightOutlined />
-                </span>
+                separator || (
+                  <span aria-label="to" class={`${pre}-separator`}>
+                    <SwapRightOutlined />
+                  </span>
+                )
               }
               ref={pickerRef}
               placeholder={getRangePlaceholder(picker, locale, placeholder)}

@@ -110,7 +110,7 @@ function rangePickerProps<DateType>() {
     disabled: { type: [Boolean, Array] as unknown as PropType<boolean | [boolean, boolean]> },
     format: String,
     renderExtraFooter: { type: Function as PropType<() => VueNode> },
-    separator: { type: Function as PropType<() => VueNode> },
+    separator: { type: String },
     ranges: {
       type: Object as PropType<
         Record<

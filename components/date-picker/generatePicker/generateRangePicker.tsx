@@ -17,7 +17,10 @@ import { PanelMode, RangeValue } from '../../vc-picker/interface';
 import { RangePickerSharedProps } from '../../vc-picker/RangePicker';
 import devWarning from '../../vc-util/devWarning';
 
-export default function generateRangePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
+export default function generateRangePicker<DateType>(
+  generateConfig: GenerateConfig<DateType>,
+  extraProps: Record<string, any> = {},
+) {
   const RangePicker = defineComponent<RangePickerProps<DateType> & ExtraRangePickerProps<DateType>>(
     {
       name: 'ARangePicker',
@@ -25,6 +28,7 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
       props: {
         ...commonProps<DateType>(),
         ...rangePickerProps<DateType>(),
+        ...extraProps,
       } as any,
       slots: [
         'suffixIcon',
@@ -44,6 +48,7 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
         'ok',
         'openChange',
         'update:value',
+        'update:open',
         'calendarChange',
         'focus',
         'blur',
@@ -75,6 +80,7 @@ export default function generateRangePicker<DateType>(generateConfig: GenerateCo
           emit('change', values, dateStrings);
         };
         const onOpenChange = (open: boolean) => {
+          emit('update:open', open);
           emit('openChange', open);
         };
         const onFoucs = () => {

@@ -139,7 +139,7 @@ function PickerPanel<DateType>() {
       showToday: Boolean,
       renderExtraFooter: Function,
       dateRender: Function,
-      hideHeader: Boolean,
+      hideHeader: { type: Boolean, default: undefined },
       onSelect: Function,
       onChange: Function,
       onPanelChange: Function,
@@ -417,8 +417,8 @@ function PickerPanel<DateType>() {
 
         // ============================ Panels ============================
         let panelNode: VueNode;
-
         const pickerProps = {
+          ...attrs,
           ...(props as MergedPickerPanelProps<DateType>),
           operationRef: panelRef,
           prefixCls,
@@ -540,7 +540,7 @@ function PickerPanel<DateType>() {
             prefixCls,
             components,
             needConfirmButton: needConfirmButton.value,
-            okDisabled: !mergedValue || (disabledDate && disabledDate(mergedValue.value)),
+            okDisabled: !mergedValue.value || (disabledDate && disabledDate(mergedValue.value)),
             locale,
             showNow,
             onNow: needConfirmButton.value && onNow,

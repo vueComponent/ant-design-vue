@@ -442,6 +442,8 @@ function Picker<DateType>() {
           // Remove `picker` & `format` here since TimePicker is little different with other panel
           ...(props as Omit<MergedPickerProps<DateType>, 'picker' | 'format'>),
           ...attrs,
+          class: undefined,
+          style: undefined,
           pickerValue: undefined,
           onPickerValueChange: undefined,
           onChange: null,

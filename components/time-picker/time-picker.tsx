@@ -20,20 +20,23 @@ export interface TimePickerLocale {
 
 const timpePickerProps = {
   format: String,
-  showNow: Boolean,
-  showHour: Boolean,
-  showMinute: Boolean,
-  showSecond: Boolean,
-  use12Hours: Boolean,
+  showNow: { type: Boolean, default: undefined },
+  showHour: { type: Boolean, default: undefined },
+  showMinute: { type: Boolean, default: undefined },
+  showSecond: { type: Boolean, default: undefined },
+  use12Hours: { type: Boolean, default: undefined },
   hourStep: Number,
   minuteStep: Number,
   secondStep: Number,
-  hideDisabledOptions: Boolean,
+  hideDisabledOptions: { type: Boolean, default: undefined },
   popupClassName: String,
 };
 
 function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
-  const DatePicker = generatePicker<DateType>(generateConfig);
+  const DatePicker = generatePicker<DateType>(generateConfig, {
+    ...timpePickerProps,
+    order: { type: Boolean, default: true },
+  });
   const { TimePicker: InternalTimePicker, RangePicker: InternalRangePicker } = DatePicker as any;
   interface TimeRangePickerProps extends Omit<RangePickerTimeProps<DateType>, 'picker'> {
     popupClassName?: string;
@@ -52,7 +55,7 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
       ...timpePickerProps,
     } as any,
     slot: ['addon', 'renderExtraFooter', 'suffixIcon', 'clearIcon'],
-    emits: ['change', 'openChange', 'focus', 'blur', 'ok', 'update:value'],
+    emits: ['change', 'openChange', 'focus', 'blur', 'ok', 'update:value', 'update:open'],
     setup(props, { slots, expose, emit, attrs }) {
       devWarning(
         !slots.addon,
@@ -73,6 +76,7 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
         emit('change', value, dateString);
       };
       const onOpenChange = (open: boolean) => {
+        emit('update:open', open);
         emit('openChange', open);
       };
       const onFoucs = () => {
@@ -121,6 +125,7 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
       'ok',
       'openChange',
       'update:value',
+      'update:open',
       'calendarChange',
       'focus',
       'blur',
@@ -143,6 +148,7 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
         emit('change', values, dateStrings);
       };
       const onOpenChange = (open: boolean) => {
+        emit('update:open', open);
         emit('openChange', open);
       };
       const onFoucs = () => {

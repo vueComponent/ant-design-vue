@@ -15,7 +15,10 @@ import classNames from '../../_util/classNames';
 import { commonProps, datePickerProps, ExtraDatePickerProps } from './props';
 import devWarning from '../../vc-util/devWarning';
 
-export default function generatePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
+export default function generatePicker<DateType>(
+  generateConfig: GenerateConfig<DateType>,
+  extraProps: Record<string, any> = {},
+) {
   type DatePickerProps = PickerProps<DateType> & ExtraDatePickerProps<DateType>;
 
   function getPicker<InnerPickerProps extends DatePickerProps>(
@@ -28,6 +31,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
       props: {
         ...commonProps<DateType>(),
         ...datePickerProps<DateType>(),
+        ...extraProps,
       } as any,
       slots: [
         'suffixIcon',
@@ -41,7 +45,16 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
         'renderExtraFooter',
         'monthCellRender',
       ],
-      emits: ['change', 'openChange', 'focus', 'blur', 'panelChange', 'ok', 'update:value'],
+      emits: [
+        'change',
+        'openChange',
+        'focus',
+        'blur',
+        'panelChange',
+        'ok',
+        'update:value',
+        'update:open',
+      ],
       setup(props, { slots, expose, attrs, emit }) {
         devWarning(
           !((props as any).monthCellContentRender || slots.monthCellContentRender),
@@ -73,6 +86,7 @@ export default function generatePicker<DateType>(generateConfig: GenerateConfig<
           emit('change', value, dateString);
         };
         const onOpenChange = (open: boolean) => {
+          emit('update:open', open);
           emit('openChange', open);
         };
         const onFoucs = () => {

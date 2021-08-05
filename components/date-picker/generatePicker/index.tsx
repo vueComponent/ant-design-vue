@@ -125,13 +125,16 @@ export type RangePickerProps<DateType> =
   | RangePickerDateProps<DateType>
   | RangePickerTimeProps<DateType>;
 
-function generatePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
+function generatePicker<DateType>(
+  generateConfig: GenerateConfig<DateType>,
+  extraProps: Record<string, any> = {},
+) {
   // =========================== Picker ===========================
   const { DatePicker, WeekPicker, MonthPicker, YearPicker, TimePicker, QuarterPicker } =
-    generateSinglePicker(generateConfig);
+    generateSinglePicker(generateConfig, extraProps);
 
   // ======================== Range Picker ========================
-  const RangePicker = generateRangePicker(generateConfig);
+  const RangePicker = generateRangePicker(generateConfig, extraProps);
 
   // =========================== Export ===========================
   type MergedDatePickerType = typeof DatePicker & {

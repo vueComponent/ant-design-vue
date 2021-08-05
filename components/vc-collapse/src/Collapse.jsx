@@ -11,7 +11,6 @@ import openAnimationFactory from './openAnimationFactory';
 import { collapseProps } from './commonProps';
 import { getDataAndAriaProps } from '../../_util/util';
 import { defineComponent } from 'vue';
-import isNil from 'lodash/isNil';
 
 function _toArray(activeKey) {
   let currentActiveKey = activeKey;
@@ -79,7 +78,7 @@ export default defineComponent({
       const { prefixCls, accordion, destroyInactivePanel, expandIcon } = this.$props;
 
       // If there is no key provide, use the panel order as default key
-      const key = !isNil(child.key) ? String(child.key) : String(index);
+      const key = String(child.key ?? index);
       const { header, headerClass, disabled } = getPropsData(child);
       let isActive = false;
 

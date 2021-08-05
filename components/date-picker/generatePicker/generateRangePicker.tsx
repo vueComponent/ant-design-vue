@@ -148,6 +148,7 @@ export default function generateRangePicker<DateType>(
             dateRender = slots.dateRender,
             renderExtraFooter = slots.renderExtraFooter,
             separator = slots.separator?.(),
+            clearIcon = slots.clearIcon?.(),
             ...restProps
           } = p;
           const { format, showTime } = p as any;
@@ -176,7 +177,7 @@ export default function generateRangePicker<DateType>(
               suffixIcon={
                 suffixIcon || (picker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)
               }
-              clearIcon={<CloseCircleFilled />}
+              clearIcon={clearIcon || <CloseCircleFilled />}
               allowClear={allowClear}
               transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
               {...restProps}

@@ -180,7 +180,7 @@ export type { TagProps } from './tag';
 export { default as Tag, CheckableTag } from './tag';
 
 export type { TimePickerProps, TimeRangePickerProps } from './time-picker';
-export { default as TimePicker } from './time-picker';
+export { default as TimePicker, TimeRangePicker } from './time-picker';
 
 export type { TimelineProps, TimelineItemProps } from './timeline';
 export { default as Timeline, TimelineItem } from './timeline';

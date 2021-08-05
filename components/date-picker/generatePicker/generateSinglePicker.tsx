@@ -145,6 +145,7 @@ export default function generatePicker<DateType>(
             monthCellRender = slots.monthCellRender ||
               (props as any).monthCellContentRender ||
               slots.monthCellContentRender,
+            clearIcon = slots.clearIcon?.(),
             ...restProps
           } = p;
           const showTime = p.showTime === '' ? true : p.showTime;
@@ -181,7 +182,7 @@ export default function generatePicker<DateType>(
                 suffixIcon ||
                 (mergedPicker === 'time' ? <ClockCircleOutlined /> : <CalendarOutlined />)
               }
-              clearIcon={<CloseCircleFilled />}
+              clearIcon={clearIcon || <CloseCircleFilled />}
               allowClear={allowClear}
               transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
               {...restProps}

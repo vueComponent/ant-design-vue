@@ -92,7 +92,6 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
         return (
           <InternalTimePicker
             {...attrs}
-            {...slots}
             {...props}
             dropdownClassName={props.popupClassName}
             mode={undefined}
@@ -103,6 +102,7 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
             onFocus={onFoucs}
             onBlur={onBlur}
             onOk={onOk}
+            v-slots={slots}
           />
         );
       };
@@ -177,7 +177,6 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
         return (
           <InternalRangePicker
             {...attrs}
-            {...slots}
             {...props}
             dropdownClassName={props.popupClassName}
             picker="time"
@@ -190,6 +189,7 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
             onPanelChange={onPanelChange}
             onOk={onOk}
             onCalendarChange={onCalendarChange}
+            v-slots={slots}
           />
         );
       };

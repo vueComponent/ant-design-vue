@@ -145,74 +145,76 @@ const List = defineComponent({
     watch(
       [inVirtual, useVirtual, () => state.scrollTop, mergedData, heights, () => props.height],
       () => {
-        if (!useVirtual.value) {
-          calRes.value = {
-            scrollHeight: undefined,
-            start: 0,
-            end: mergedData.value.length - 1,
-            offset: undefined,
-          };
-          return;
-        }
-
-        // Always use virtual scroll bar in avoid shaking
-        if (!inVirtual.value) {
-          calRes.value = {
-            scrollHeight: fillerInnerRef.value?.offsetHeight || 0,
-            start: 0,
-            end: mergedData.value.length - 1,
-            offset: undefined,
-          };
-          return;
-        }
-
-        let itemTop = 0;
-        let startIndex: number | undefined;
-        let startOffset: number | undefined;
-        let endIndex: number | undefined;
-        const dataLen = mergedData.value.length;
-        const data = mergedData.value;
-        for (let i = 0; i < dataLen; i += 1) {
-          const item = data[i];
-          const key = getKey(item);
-
-          const cacheHeight = heights[key];
-          const currentItemBottom =
-            itemTop + (cacheHeight === undefined ? props.itemHeight! : cacheHeight);
-
-          if (currentItemBottom >= state.scrollTop && startIndex === undefined) {
-            startIndex = i;
-            startOffset = itemTop;
+        nextTick(() => {
+          if (!useVirtual.value) {
+            calRes.value = {
+              scrollHeight: undefined,
+              start: 0,
+              end: mergedData.value.length - 1,
+              offset: undefined,
+            };
+            return;
           }
 
-          // Check item bottom in the range. We will render additional one item for motion usage
-          if (currentItemBottom > state.scrollTop + props.height! && endIndex === undefined) {
-            endIndex = i;
+          // Always use virtual scroll bar in avoid shaking
+          if (!inVirtual.value) {
+            calRes.value = {
+              scrollHeight: fillerInnerRef.value?.offsetHeight || 0,
+              start: 0,
+              end: mergedData.value.length - 1,
+              offset: undefined,
+            };
+            return;
           }
 
-          itemTop = currentItemBottom;
-        }
+          let itemTop = 0;
+          let startIndex: number | undefined;
+          let startOffset: number | undefined;
+          let endIndex: number | undefined;
+          const dataLen = mergedData.value.length;
+          const data = mergedData.value;
+          for (let i = 0; i < dataLen; i += 1) {
+            const item = data[i];
+            const key = getKey(item);
 
-        // Fallback to normal if not match. This code should never reach
-        /* istanbul ignore next */
-        if (startIndex === undefined) {
-          startIndex = 0;
-          startOffset = 0;
-        }
-        if (endIndex === undefined) {
-          endIndex = dataLen - 1;
-        }
+            const cacheHeight = heights[key];
+            const currentItemBottom =
+              itemTop + (cacheHeight === undefined ? props.itemHeight! : cacheHeight);
 
-        // Give cache to improve scroll experience
-        endIndex = Math.min(endIndex + 1, dataLen);
-        calRes.value = {
-          scrollHeight: itemTop,
-          start: startIndex,
-          end: endIndex,
-          offset: startOffset,
-        };
+            if (currentItemBottom >= state.scrollTop && startIndex === undefined) {
+              startIndex = i;
+              startOffset = itemTop;
+            }
+
+            // Check item bottom in the range. We will render additional one item for motion usage
+            if (currentItemBottom > state.scrollTop + props.height! && endIndex === undefined) {
+              endIndex = i;
+            }
+
+            itemTop = currentItemBottom;
+          }
+
+          // Fallback to normal if not match. This code should never reach
+          /* istanbul ignore next */
+          if (startIndex === undefined) {
+            startIndex = 0;
+            startOffset = 0;
+          }
+          if (endIndex === undefined) {
+            endIndex = dataLen - 1;
+          }
+
+          // Give cache to improve scroll experience
+          endIndex = Math.min(endIndex + 1, dataLen);
+          calRes.value = {
+            scrollHeight: itemTop,
+            start: startIndex,
+            end: endIndex,
+            offset: startOffset,
+          };
+        });
       },
-      { immediate: true },
+      { immediate: true, flush: 'post' },
     );
 
     // =============================== In Range ===============================

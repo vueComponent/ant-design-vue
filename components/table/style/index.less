@@ -615,15 +615,6 @@
     overflow-x: hidden;
     table {
       min-width: 100%;
-
-      // https://github.com/ant-design/ant-design/issues/14545
-      // https://github.com/ant-design/ant-design/issues/19491
-      .@{table-prefix-cls}-fixed-columns-in-body:not([colspan]) {
-        color: transparent;
-        & > * {
-          visibility: hidden;
-        }
-      }
     }
   }
 
@@ -775,6 +766,96 @@
 
   &-row[class*='@{table-prefix-cls}-row-level-0'] .@{table-prefix-cls}-selection-column > span {
     display: inline-block;
+  }
+
+  // ============================ Fixed =============================
+  &-cell-fix-left,
+  &-cell-fix-right {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    z-index: @zindex-table-fixed;
+    background: @table-bg;
+  }
+
+  &-cell-fix-left-first::after,
+  &-cell-fix-left-last::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: -1px;
+    width: 30px;
+    transform: translateX(100%);
+    transition: box-shadow 0.3s;
+    content: '';
+    pointer-events: none;
+  }
+
+  &-cell-fix-right-first::after,
+  &-cell-fix-right-last::after {
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: 0;
+    width: 30px;
+    transform: translateX(-100%);
+    transition: box-shadow 0.3s;
+    content: '';
+    pointer-events: none;
+  }
+
+  .@{table-prefix-cls}-container {
+    &::before,
+    &::after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 1;
+      width: 30px;
+      transition: box-shadow 0.3s;
+      content: '';
+      pointer-events: none;
+    }
+
+    &::before {
+      left: 0;
+    }
+    &::after {
+      right: 0;
+    }
+  }
+
+  &-ping-left {
+    &:not(.@{table-prefix-cls}-has-fix-left) .@{table-prefix-cls}-container {
+      position: relative;
+
+      &::before {
+        box-shadow: inset 10px 0 8px -8px darken(@shadow-color, 5%);
+      }
+    }
+
+    .@{table-prefix-cls}-cell-fix-left-first::after,
+    .@{table-prefix-cls}-cell-fix-left-last::after {
+      box-shadow: inset 10px 0 8px -8px darken(@shadow-color, 5%);
+    }
+
+    .@{table-prefix-cls}-cell-fix-left-last::before {
+      background-color: transparent !important;
+    }
+  }
+
+  &-ping-right {
+    &:not(.@{table-prefix-cls}-has-fix-right) .@{table-prefix-cls}-container {
+      position: relative;
+
+      &::after {
+        box-shadow: inset -10px 0 8px -8px darken(@shadow-color, 5%);
+      }
+    }
+
+    .@{table-prefix-cls}-cell-fix-right-first::after,
+    .@{table-prefix-cls}-cell-fix-right-last::after {
+      box-shadow: inset -10px 0 8px -8px darken(@shadow-color, 5%);
+    }
   }
 }
 

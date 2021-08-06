@@ -250,6 +250,7 @@ const TableRow = {
           indentSize={indentSize}
           indent={indent}
           index={index}
+          colIndex={i}
           column={column}
           key={column.key || column.dataIndex}
           expandIcon={hasExpandIcon(i) && renderExpandIcon()}

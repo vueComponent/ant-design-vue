@@ -27,15 +27,10 @@ const BaseTable = {
   },
   methods: {
     getColumns(cols) {
-      const { columns = [], fixed } = this.$props;
-      const { table } = this;
-      const { prefixCls } = table.$props;
+      const { columns = [] } = this.$props;
       return (cols || columns).map(column => ({
         ...column,
-        className:
-          !!column.fixed && !fixed
-            ? classNames(`${prefixCls}-fixed-columns-in-body`, column.className, column.class)
-            : classNames(column.className, column.class),
+        className: classNames(column.className, column.class),
       }));
     },
     handleRowHover(isHover, key) {
@@ -44,7 +39,6 @@ const BaseTable = {
 
     renderRows(renderData, indent, ancestorKeys = []) {
       const {
-        columnManager,
         sComponents: components,
         prefixCls,
         childrenColumnName,
@@ -57,6 +51,7 @@ const BaseTable = {
         onRowMouseLeave = noop,
         rowRef,
       } = { ...this.table.$attrs, ...this.table.$props, ...this.table.$data };
+      const { columnManager } = this.store;
       const { getRowKey, fixed, expander, isAnyColumnsFixed } = this;
 
       const rows = [];
@@ -68,17 +63,17 @@ const BaseTable = {
           typeof rowClassName === 'string' ? rowClassName : rowClassName(record, i, indent);
 
         const onHoverProps = {};
-        if (columnManager.isAnyColumnsFixed()) {
+        if (columnManager.isAnyColumnsFixed) {
           onHoverProps.onHover = this.handleRowHover;
         }
 
         let leafColumns;
         if (fixed === 'left') {
-          leafColumns = columnManager.leftLeafColumns();
+          leafColumns = columnManager.leftLeafColumns;
         } else if (fixed === 'right') {
-          leafColumns = columnManager.rightLeafColumns();
+          leafColumns = columnManager.rightLeafColumns;
         } else {
-          leafColumns = this.getColumns(columnManager.leafColumns());
+          leafColumns = this.getColumns(columnManager.leafColumns);
         }
 
         const rowPrefixCls = `${prefixCls}-row`;

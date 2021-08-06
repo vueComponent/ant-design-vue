@@ -3,7 +3,7 @@ import BaseMixin from '../../_util/BaseMixin';
 import { getOptionProps, hasProp, getComponent, findDOMNode } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
 import KeyCode from '../../_util/KeyCode';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import DateTable from './date/DateTable';
 import CalendarHeader from './calendar/CalendarHeader';
 import CalendarFooter from './calendar/CalendarFooter';
@@ -15,8 +15,8 @@ import { getTimeConfig, getTodayTime, syncTime } from './util';
 import { goStartMonth, goEndMonth, goTime } from './util/toTime';
 import { defineComponent } from 'vue';
 
-const getMomentObjectIfValid = date => {
-  if (moment.isMoment(date) && date.isValid()) {
+const getDayjsObjectIfValid = date => {
+  if (dayjs.isDayjs(date) && date.isValid()) {
     return date;
   }
   return false;
@@ -72,9 +72,7 @@ const Calendar = defineComponent({
     return {
       sMode: this.mode || 'date',
       sValue:
-        getMomentObjectIfValid(props.value) ||
-        getMomentObjectIfValid(props.defaultValue) ||
-        moment(),
+        getDayjsObjectIfValid(props.value) || getDayjsObjectIfValid(props.defaultValue) || dayjs(),
       sSelectedValue: props.selectedValue || props.defaultSelectedValue,
     };
   },
@@ -85,8 +83,8 @@ const Calendar = defineComponent({
     value(val) {
       this.setState({
         sValue:
-          getMomentObjectIfValid(val) ||
-          getMomentObjectIfValid(this.defaultValue) ||
+          getDayjsObjectIfValid(val) ||
+          getDayjsObjectIfValid(this.defaultValue) ||
           getNowByCurrentStateValue(this.sValue),
       });
     },

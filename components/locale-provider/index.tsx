@@ -1,7 +1,7 @@
 import type { App, VNode, PropType } from 'vue';
 import { provide, defineComponent, reactive, watch, onUnmounted } from 'vue';
 import PropTypes from '../_util/vue-types';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import interopDefault from '../_util/interopDefault';
 import type { ModalLocale } from '../modal/locale';
 import { changeConfirmLocale } from '../modal/locale';
@@ -38,11 +38,11 @@ export interface LocaleProviderProps {
 
 export const ANT_MARK = 'internalMark';
 
-function setMomentLocale(locale?: Locale) {
+function setDayjsLocale(locale?: Locale) {
   if (locale && locale.locale) {
-    interopDefault(moment).locale(locale.locale);
+    interopDefault(dayjs).locale(locale.locale);
   } else {
-    interopDefault(moment).locale('en');
+    interopDefault(dayjs).locale('en');
   }
 }
 
@@ -75,7 +75,7 @@ const LocaleProvider = defineComponent({
           ...val,
           exist: true,
         };
-        setMomentLocale(val);
+        setDayjsLocale(val);
         changeConfirmLocale(val && val.Modal);
       },
       { immediate: true },

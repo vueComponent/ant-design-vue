@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import KeyCode from '../../_util/KeyCode';
@@ -32,7 +32,7 @@ const MonthCalendar = defineComponent({
     const props = this.$props;
     return {
       mode: 'month',
-      sValue: props.value || props.defaultValue || moment(),
+      sValue: props.value || props.defaultValue || dayjs(),
       sSelectedValue: props.selectedValue || props.defaultSelectedValue,
     };
   },

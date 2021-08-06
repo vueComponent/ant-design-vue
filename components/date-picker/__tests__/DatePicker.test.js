@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import MockDate from 'mockdate';
 import DatePicker from '..';
 import {
@@ -19,7 +19,7 @@ describe('DatePicker', () => {
 
   beforeEach(() => {
     document.body.outerHTML = '';
-    MockDate.set(moment('2016-11-22'));
+    MockDate.set(dayjs('2016-11-22'));
   });
 
   afterEach(() => {
@@ -61,7 +61,7 @@ describe('DatePicker', () => {
         placeholder: 'Избор на час',
       },
     };
-    const birthday = moment('2000-01-01', 'YYYY-MM-DD');
+    const birthday = dayjs('2000-01-01', 'YYYY-MM-DD');
     const wrapper = mount({
       render() {
         return <DatePicker open locale={locale} value={birthday} />;
@@ -78,7 +78,7 @@ describe('DatePicker', () => {
       data() {
         return {
           cleared: false,
-          value: moment(),
+          value: dayjs(),
         };
       },
       methods: {
@@ -86,7 +86,7 @@ describe('DatePicker', () => {
           let cleared = this.cleared;
 
           if (cleared) {
-            value = moment(moment(value).format('YYYY-MM-DD 12:12:12'));
+            value = dayjs(dayjs(value).format('YYYY-MM-DD 12:12:12'));
             cleared = false;
           }
 
@@ -122,13 +122,13 @@ describe('DatePicker', () => {
       $$('.ant-calendar-input')[0].blur();
     }, 0);
     await asyncExpect(() => {
-      selectDateFromBody(moment('2016-11-13'));
+      selectDateFromBody(dayjs('2016-11-13'));
     }, 0);
     await asyncExpect(() => {
       expect($$('.ant-calendar-input')[0].value).toBe('2016-11-13 12:12:12');
     });
     await asyncExpect(() => {
-      selectDateFromBody(moment('2016-11-14'));
+      selectDateFromBody(dayjs('2016-11-14'));
     });
     await asyncExpect(() => {
       expect($$('.ant-calendar-input')[0].value).toBe('2016-11-14 12:12:12');
@@ -161,7 +161,7 @@ describe('DatePicker', () => {
       expect(handleChange).not.toBeCalled();
     });
     await asyncExpect(() => {
-      selectDateFromBody(moment('2017-12-22'));
+      selectDateFromBody(dayjs('2017-12-22'));
     }, 1000);
     await asyncExpect(() => {
       expect(handleChange).toBeCalled();
@@ -174,7 +174,7 @@ describe('DatePicker', () => {
       openPanel(wrapper);
     }, 0);
     await asyncExpect(() => {
-      selectDateFromBody(moment('2016-11-23'));
+      selectDateFromBody(dayjs('2016-11-23'));
     }, 100);
     await asyncExpect(() => {
       clearInput(wrapper);
@@ -183,7 +183,7 @@ describe('DatePicker', () => {
       openPanel(wrapper);
     }, 0);
     await asyncExpect(() => {
-      expect(hasSelected(wrapper, moment('2016-11-22'))).toBe(true);
+      expect(hasSelected(wrapper, dayjs('2016-11-22'))).toBe(true);
     }, 0);
   });
 });

@@ -8,7 +8,7 @@ import enUS from './locale/en_US';
 import PropTypes from '../_util/vue-types';
 import { getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
-import { checkValidate, stringToMoment, momentToString } from '../_util/moment-util';
+import { checkValidate, stringToDayjs, dayjsToString } from '../_util/dayjs-util';
 
 type PickerType = 'date' | 'week' | 'month';
 
@@ -135,17 +135,17 @@ export default function wrapPicker<P>(
         this.$emit('mouseleave', e);
       },
       handleChange(date: any, dateString: string) {
-        const value = this.valueFormat ? momentToString(date, this.valueFormat) : date;
+        const value = this.valueFormat ? dayjsToString(date, this.valueFormat) : date;
         this.$emit('update:value', value);
         this.$emit('change', value, dateString);
       },
       handleOk(val: any) {
-        this.$emit('ok', this.valueFormat ? momentToString(val, this.valueFormat) : val);
+        this.$emit('ok', this.valueFormat ? dayjsToString(val, this.valueFormat) : val);
       },
       handleCalendarChange(date: any, dateString: string) {
         this.$emit(
           'calendarChange',
-          this.valueFormat ? momentToString(date, this.valueFormat) : date,
+          this.valueFormat ? dayjsToString(date, this.valueFormat) : date,
           dateString,
         );
       },
@@ -159,13 +159,13 @@ export default function wrapPicker<P>(
 
       transformValue(props) {
         if ('value' in props) {
-          props.value = stringToMoment(props.value, this.valueFormat);
+          props.value = stringToDayjs(props.value, this.valueFormat);
         }
         if ('defaultValue' in props) {
-          props.defaultValue = stringToMoment(props.defaultValue, this.valueFormat);
+          props.defaultValue = stringToDayjs(props.defaultValue, this.valueFormat);
         }
         if ('defaultPickerValue' in props) {
-          props.defaultPickerValue = stringToMoment(props.defaultPickerValue, this.valueFormat);
+          props.defaultPickerValue = stringToDayjs(props.defaultPickerValue, this.valueFormat);
         }
       },
 

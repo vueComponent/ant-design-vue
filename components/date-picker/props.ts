@@ -1,19 +1,19 @@
 import type { PropType } from 'vue';
-import type moment from 'moment';
+import type dayjs from 'dayjs';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { tuple } from '../_util/type';
 
-export type PickerValue = moment.Moment | undefined | null | string;
+export type PickerValue = dayjs.Dayjs | undefined | null | string;
 
 export type RangePickerValue =
   | undefined[]
   | null[]
-  | [moment.Moment | string]
-  | [undefined, moment.Moment | string]
-  | [moment.Moment | string, undefined]
-  | [null, moment.Moment | string]
-  | [moment.Moment | string, null]
-  | [moment.Moment, moment.Moment]
+  | [dayjs.Dayjs | string]
+  | [undefined, dayjs.Dayjs | string]
+  | [dayjs.Dayjs | string, undefined]
+  | [null, dayjs.Dayjs | string]
+  | [dayjs.Dayjs | string, null]
+  | [dayjs.Dayjs, dayjs.Dayjs]
   | [string, string];
 
 export const PickerProps = {
@@ -34,7 +34,7 @@ export const PickerProps = {
   open: PropTypes.looseBool,
   disabledDate: PropTypes.func,
   showToday: PropTypes.looseBool,
-  dateRender: PropTypes.any, // ({current: moment.Moment, today: moment.Moment}) => vNode,
+  dateRender: PropTypes.any, // ({current: dayjs.Dayjs, today: dayjs.Dayjs}) => vNode,
   pickerClass: PropTypes.string,
   pickerInputClass: PropTypes.string,
   timePicker: PropTypes.any,

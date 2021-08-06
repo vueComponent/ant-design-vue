@@ -1,9 +1,11 @@
 import PropTypes from '../../../_util/vue-types';
 import BaseMixin from '../../../_util/BaseMixin';
 import { getOptionProps } from '../../../_util/props-util';
+import '../../../_util/dayjs-util';
 import MonthPanel from '../month/MonthPanel';
 import YearPanel from '../year/YearPanel';
 import DecadePanel from '../decade/DecadePanel';
+
 function noop() {}
 function goMonth(direction) {
   const next = this.value.clone();

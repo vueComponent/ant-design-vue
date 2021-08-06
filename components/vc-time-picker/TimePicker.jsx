@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
@@ -32,7 +32,7 @@ export default defineComponent({
       defaultOpenValue: {
         type: Object,
         default: () => {
-          return moment();
+          return dayjs();
         },
       },
       pickerInputClass: String,

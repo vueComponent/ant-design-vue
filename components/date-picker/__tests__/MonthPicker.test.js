@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import DatePicker from '..';
 import focusTest from '../../../tests/shared/focusTest';
 import { openPanel, $$ } from './utils';
@@ -11,7 +11,7 @@ describe('MonthPicker', () => {
   focusTest(MonthPicker);
   it('reset select item when popup close', async () => {
     const wrapper = mount(MonthPicker, {
-      props: { value: moment('2018-07-01') },
+      props: { value: dayjs('2018-07-01') },
       sync: false,
       attachTo: 'body',
     });

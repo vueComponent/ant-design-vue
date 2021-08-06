@@ -1,7 +1,7 @@
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { getOptionProps, hasProp, getComponent } from '../../_util/props-util';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import KeyCode from '../../_util/KeyCode';
 import CalendarPart from './range-calendar/CalendarPart';
 import TodayButton from './calendar/TodayButton';
@@ -52,7 +52,7 @@ function normalizeAnchor(props, init) {
     : getValueFromSelectedValue(selectedValue);
   return !isEmptyArray(normalizedValue)
     ? normalizedValue
-    : init && [moment(), moment().add(1, 'months')];
+    : init && [dayjs(), dayjs().add(1, 'months')];
 }
 
 function generateOptions(length, extraOptionGen) {
@@ -235,7 +235,7 @@ const RangeCalendar = defineComponent({
         let nextHoverValue;
 
         if (!firstSelectedValue) {
-          currentHoverTime = hoverValue[0] || selectedValue[0] || value[0] || moment();
+          currentHoverTime = hoverValue[0] || selectedValue[0] || value[0] || dayjs();
           nextHoverTime = func(currentHoverTime);
           nextHoverValue = [nextHoverTime];
           this.fireHoverValueChange(nextHoverValue);
@@ -581,7 +581,7 @@ const RangeCalendar = defineComponent({
       }
       // 尚未选择过时间，直接输入的话
       if (!this.sSelectedValue[0] || !this.sSelectedValue[1]) {
-        const startValue = selectedValue[0] || moment();
+        const startValue = selectedValue[0] || dayjs();
         const endValue = selectedValue[1] || startValue.clone().add(1, 'months');
         this.setState({
           sSelectedValue: selectedValue,

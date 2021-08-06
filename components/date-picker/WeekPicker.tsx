@@ -1,5 +1,5 @@
 import { defineComponent, inject, nextTick } from 'vue';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import Calendar from '../vc-calendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
@@ -13,13 +13,13 @@ import InputIcon from './InputIcon';
 import { getDataAndAriaProps } from '../_util/util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 
-function formatValue(value: moment.Moment | null, format: string): string {
+function formatValue(value: dayjs.Dayjs | null, format: string): string {
   return (value && value.format(format)) || '';
 }
 
 interface WeekPickerState {
   _open?: boolean;
-  _value?: moment.Moment | null;
+  _value?: dayjs.Dayjs | null;
 }
 function noop() {}
 
@@ -40,9 +40,9 @@ export default defineComponent({
   },
   data(): WeekPickerState {
     const value: any = this.value || this.defaultValue;
-    if (value && !interopDefault(moment).isMoment(value)) {
+    if (value && !interopDefault(dayjs).isDayjs(value)) {
       throw new Error(
-        'The value/defaultValue of WeekPicker or MonthPicker must be ' + 'a moment object',
+        'The value/defaultValue of WeekPicker or MonthPicker must be ' + 'a dayjs object',
       );
     }
     return {
@@ -101,7 +101,7 @@ export default defineComponent({
       }
       return <div class={`${prefixCls}-date`}>{dateNode}</div>;
     },
-    handleChange(value: moment.Moment | null) {
+    handleChange(value: dayjs.Dayjs | null) {
       if (!hasProp(this, 'value')) {
         this.setState({ _value: value });
       }

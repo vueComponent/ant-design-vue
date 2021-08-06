@@ -1,8 +1,10 @@
 import PropTypes from '../../../_util/vue-types';
 import { getOptionProps } from '../../../_util/props-util';
+import '../../../_util/dayjs-util';
 import cx from '../../../_util/classNames';
 import DateConstants from './DateConstants';
 import { getTitleString, getTodayTime } from '../util/';
+
 function noop() {}
 function isSameDay(one, two) {
   return one && two && one.isSame(two, 'day');

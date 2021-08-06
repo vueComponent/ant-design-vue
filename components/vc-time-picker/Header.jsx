@@ -1,6 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { withDirectives } from 'vue';
 import antInput from '../_util/antInputDirective';
 
@@ -83,7 +83,7 @@ const Header = {
 
       if (str) {
         const value = this.getProtoValue().clone();
-        const parsed = moment(str, format, true);
+        const parsed = dayjs(str, format, true);
         if (!parsed.isValid()) {
           this.setState({
             invalid: true,

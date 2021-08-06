@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import MockDate from 'mockdate';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import Statistic from '..';
 import { formatTimeStr } from '../utils';
 import mountTest from '../../../tests/shared/mountTest';
@@ -10,7 +10,7 @@ describe('Statistic', () => {
   mountTest(Statistic.Countdown);
 
   beforeAll(() => {
-    MockDate.set(moment('2018-11-28 00:00:00'));
+    MockDate.set(dayjs('2018-11-28 00:00:00'));
   });
 
   afterAll(() => {
@@ -65,7 +65,7 @@ describe('Statistic', () => {
 
   describe('Countdown', () => {
     it('render correctly', () => {
-      const now = moment().add(2, 'd').add(11, 'h').add(28, 'm').add(9, 's').add(3, 'ms');
+      const now = dayjs().add(2, 'd').add(11, 'h').add(28, 'm').add(9, 's').add(3, 'ms');
 
       [
         ['H:m:s', '59:28:9'],

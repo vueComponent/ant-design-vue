@@ -1,4 +1,4 @@
-import type moment from 'moment';
+import type dayjs from 'dayjs';
 import type { CSSProperties } from 'vue';
 import type { VueNode } from '../_util/type';
 import { tuple } from '../_util/type';
@@ -6,12 +6,12 @@ import { tuple } from '../_util/type';
 export type RangePickerValue =
   | undefined[]
   | null[]
-  | [moment.Moment | string]
-  | [undefined, moment.Moment | string]
-  | [moment.Moment | string, undefined]
-  | [null, moment.Moment | string]
-  | [moment.Moment | string, null]
-  | [moment.Moment, moment.Moment]
+  | [dayjs.Dayjs | string]
+  | [undefined, dayjs.Dayjs | string]
+  | [dayjs.Dayjs | string, undefined]
+  | [null, dayjs.Dayjs | string]
+  | [dayjs.Dayjs | string, null]
+  | [dayjs.Dayjs, dayjs.Dayjs]
   | [string, string];
 
 export interface PickerProps {
@@ -34,20 +34,20 @@ export interface PickerProps {
   open?: boolean;
   valueFormat?: string;
   onOpenChange?: (status: boolean) => void;
-  disabledDate?: (current: moment.Moment | null) => boolean;
-  dateRender?: (current: moment.Moment, today: moment.Moment) => any;
+  disabledDate?: (current: dayjs.Dayjs | null) => boolean;
+  dateRender?: (current: dayjs.Dayjs, today: dayjs.Dayjs) => any;
   autofocus?: boolean;
   onFocus?: EventHandlerNonNull;
   onBlur?: EventHandlerNonNull;
 }
 
 export interface SinglePickerProps {
-  value?: moment.Moment | undefined | null | string;
-  defaultValue?: moment.Moment | undefined | null | string;
-  defaultPickerValue?: moment.Moment | undefined | null | string;
+  value?: dayjs.Dayjs | undefined | null | string;
+  defaultValue?: dayjs.Dayjs | undefined | null | string;
+  defaultPickerValue?: dayjs.Dayjs | undefined | null | string;
   placeholder?: string;
   renderExtraFooter?: (mode: DatePickerMode) => any;
-  onChange?: (date: moment.Moment | null, dateString: string) => void;
+  onChange?: (date: dayjs.Dayjs | null, dateString: string) => void;
 }
 
 const DatePickerModes = tuple('time', 'date', 'month', 'year', 'decade');
@@ -57,19 +57,19 @@ export interface DatePickerPropsTypes extends PickerProps, SinglePickerProps {
   showTime?: Record<string, any> | boolean;
   showToday?: boolean;
   open?: boolean;
-  disabledTime?: (current?: moment.Moment | null) => {
+  disabledTime?: (current?: dayjs.Dayjs | null) => {
     disabledHours?: () => number[];
     disabledMinutes?: () => number[];
     disabledSeconds?: () => number[];
   };
   onOpenChange?: (status: boolean) => void;
-  onPanelChange?: (value: moment.Moment | null, mode: DatePickerMode) => void;
-  onOk?: (selectedTime: moment.Moment | null) => void;
+  onPanelChange?: (value: dayjs.Dayjs | null, mode: DatePickerMode) => void;
+  onOk?: (selectedTime: dayjs.Dayjs | null) => void;
   mode?: DatePickerMode;
 }
 
 export interface MonthPickerPropsTypes extends PickerProps, SinglePickerProps {
-  monthCellContentRender?: (date: moment.Moment, locale: any) => any;
+  monthCellContentRender?: (date: dayjs.Dayjs, locale: any) => any;
 }
 
 export type RangePickerPresetRange = RangePickerValue | (() => RangePickerValue);

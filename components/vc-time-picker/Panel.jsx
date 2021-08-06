@@ -1,4 +1,4 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
@@ -29,7 +29,7 @@ function toNearestValidTime(time, hourOptions, minuteOptions, secondOptions) {
   const second = secondOptions
     .slice()
     .sort((a, b) => Math.abs(time.second() - a) - Math.abs(time.second() - b))[0];
-  return moment(`${hour}:${minute}:${second}`, 'HH:mm:ss');
+  return dayjs(`${hour}:${minute}:${second}`, 'HH:mm:ss');
 }
 
 const Panel = defineComponent({
@@ -42,7 +42,7 @@ const Panel = defineComponent({
     defaultOpenValue: {
       type: Object,
       default: () => {
-        return moment();
+        return dayjs();
       },
     },
     value: PropTypes.any,

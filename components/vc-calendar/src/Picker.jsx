@@ -6,17 +6,17 @@ import createChainedFunction from '../../_util/createChainedFunction';
 import KeyCode from '../../_util/KeyCode';
 import placements from './picker/placements';
 import Trigger from '../../vc-trigger';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import isNil from 'lodash-es/isNil';
 import { defineComponent } from 'vue';
 const TimeType = {
   validator(value) {
     if (Array.isArray(value)) {
       return (
-        value.length === 0 || value.findIndex(val => !isNil(val) && !moment.isMoment(val)) === -1
+        value.length === 0 || value.findIndex(val => !isNil(val) && !dayjs.isDayjs(val)) === -1
       );
     } else {
-      return isNil(value) || moment.isMoment(value);
+      return isNil(value) || dayjs.isDayjs(value);
     }
   },
 };

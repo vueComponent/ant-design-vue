@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import { asyncExpect } from '@/tests/utils';
 import Comment from '..';
 import List from '../../list';
@@ -14,7 +14,7 @@ const CommentTest = {
       comments: [],
       submitting: false,
       value: '',
-      moment,
+      dayjs,
     };
   },
   methods: {
@@ -32,7 +32,7 @@ const CommentTest = {
             author: 'Han Solo',
             avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
             content: this.value,
-            datetime: moment().fromNow(),
+            datetime: dayjs().fromNow(),
           },
           ...this.comments,
         ];

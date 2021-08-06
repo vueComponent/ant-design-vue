@@ -1,4 +1,4 @@
-import Moment from 'moment';
+import Dayjs from 'dayjs';
 import { mount } from '@vue/test-utils';
 import { asyncExpect } from '@/tests/utils';
 import MockDate from 'mockdate';
@@ -31,13 +31,13 @@ describe('Calendar', () => {
     await asyncExpect(() => {
       expect(onSelect).toHaveBeenCalledWith(expect.anything());
       const value = onSelect.mock.calls[0][0];
-      expect(Moment.isMoment(value)).toBe(true);
+      expect(Dayjs.isDayjs(value)).toBe(true);
     });
   });
 
   it('only Valid range should be selectable', async () => {
     const onSelect = jest.fn();
-    const validRange = [Moment('2018-02-02'), Moment('2018-02-18')];
+    const validRange = [Dayjs('2018-02-02'), Dayjs('2018-02-18')];
     const wrapper = mount(
       {
         render() {
@@ -45,7 +45,7 @@ describe('Calendar', () => {
             <Calendar
               onSelect={onSelect}
               validRange={validRange}
-              defaultValue={Moment('2018-02-02')}
+              defaultValue={Dayjs('2018-02-02')}
             />
           );
         },
@@ -61,7 +61,7 @@ describe('Calendar', () => {
 
   it('dates other than in valid range should be disabled', async () => {
     const onSelect = jest.fn();
-    const validRange = [Moment('2018-02-02'), Moment('2018-02-18')];
+    const validRange = [Dayjs('2018-02-02'), Dayjs('2018-02-18')];
     const wrapper = mount(
       {
         render() {
@@ -69,7 +69,7 @@ describe('Calendar', () => {
             <Calendar
               onSelect={onSelect}
               validRange={validRange}
-              defaultValue={Moment('2018-02-02')}
+              defaultValue={Dayjs('2018-02-02')}
             />
           );
         },
@@ -87,7 +87,7 @@ describe('Calendar', () => {
 
   it('months other than in valid range should be disabled', async () => {
     const onSelect = jest.fn();
-    const validRange = [Moment('2018-02-02'), Moment('2018-05-18')];
+    const validRange = [Dayjs('2018-02-02'), Dayjs('2018-05-18')];
     const wrapper = mount(
       {
         render() {
@@ -95,7 +95,7 @@ describe('Calendar', () => {
             <Calendar
               onSelect={onSelect}
               validRange={validRange}
-              defaultValue={Moment('2018-02-02')}
+              defaultValue={Dayjs('2018-02-02')}
               mode="year"
             />
           );
@@ -121,7 +121,7 @@ describe('Calendar', () => {
 
   it('months other than in valid range should not be shown in header', async () => {
     document.body.innerHTML = '';
-    const validRange = [Moment('2017-02-02'), Moment('2018-05-18')];
+    const validRange = [Dayjs('2017-02-02'), Dayjs('2018-05-18')];
     // eslint-disable-next-line no-unused-vars
     const wrapper = mount(
       {
@@ -142,19 +142,19 @@ describe('Calendar', () => {
   });
 
   it('getDateRange should returns a disabledDate function', async () => {
-    const validRange = [Moment('2018-02-02'), Moment('2018-05-18')];
+    const validRange = [Dayjs('2018-02-02'), Dayjs('2018-05-18')];
     const wrapper = mount(Calendar, {
       props: {
         validRange,
-        defaultValue: Moment('2018-02-02'),
+        defaultValue: Dayjs('2018-02-02'),
       },
       sync: false,
     });
     await asyncExpect(() => {
       const instance = wrapper.vm;
       const disabledDate = instance.getDateRange(validRange);
-      expect(disabledDate(Moment('2018-06-02'))).toBe(true);
-      expect(disabledDate(Moment('2018-04-02'))).toBe(false);
+      expect(disabledDate(Dayjs('2018-06-02'))).toBe(true);
+      expect(disabledDate(Dayjs('2018-04-02'))).toBe(false);
     });
   });
 
@@ -191,7 +191,7 @@ describe('Calendar', () => {
   });
 
   it('Calendar should support locale', async () => {
-    MockDate.set(Moment('2018-10-19'));
+    MockDate.set(Dayjs('2018-10-19'));
     // eslint-disable-next-line
     const zhCN = require('../locale/zh_CN').default;
     const wrapper = mount(Calendar, {
@@ -208,7 +208,7 @@ describe('Calendar', () => {
 
   it('should trigger onPanelChange when click last month of date', () => {
     const onPanelChange = jest.fn();
-    const date = new Moment('1990-09-03');
+    const date = new Dayjs('1990-09-03');
     const wrapper = mount(Calendar, {
       props: {
         value: date,
@@ -224,7 +224,7 @@ describe('Calendar', () => {
 
   it('switch should work correctly without prop mode', async () => {
     const onPanelChange = jest.fn();
-    const date = new Moment(new Date(Date.UTC(2017, 7, 9, 8)));
+    const date = new Dayjs(new Date(Date.UTC(2017, 7, 9, 8)));
     const wrapper = mount(Calendar, {
       props: {
         value: date,
@@ -273,35 +273,35 @@ describe('Calendar', () => {
   };
 
   it('if value.month > end.month, set value.month to end.month', async () => {
-    const value = new Moment('1990-01-03');
-    const start = new Moment('2019-04-01');
-    const end = new Moment('2019-11-01');
+    const value = new Dayjs('1990-01-03');
+    const start = new Dayjs('2019-04-01');
+    const end = new Dayjs('2019-11-01');
     const onValueChange = jest.fn();
     await createWrapper(start, end, value, onValueChange);
     expect(onValueChange).toHaveBeenCalledWith(value.year('2019').month('3'));
   });
   it('if value.month > end.month, set value.month to end.month1', async () => {
-    const value = new Moment('1990-01-03');
-    const start = new Moment('2019-04-01');
-    const end = new Moment('2019-11-01');
+    const value = new Dayjs('1990-01-03');
+    const start = new Dayjs('2019-04-01');
+    const end = new Dayjs('2019-11-01');
     const onValueChange = jest.fn();
     await createWrapper(start, end, value, onValueChange);
     expect(onValueChange).toHaveBeenCalledWith(value.year('2019').month('3'));
   });
 
   it('if start.month > value.month, set value.month to start.month ', async () => {
-    const value = new Moment('1990-01-03');
-    const start = new Moment('2019-11-01');
-    const end = new Moment('2019-03-01');
+    const value = new Dayjs('1990-01-03');
+    const start = new Dayjs('2019-11-01');
+    const end = new Dayjs('2019-03-01');
     const onValueChange = jest.fn();
     await createWrapper(start, end, value, onValueChange);
     expect(onValueChange).toHaveBeenCalledWith(value.year('2019').month('10'));
   });
 
   it('onMonthChange should work correctly', async () => {
-    const start = new Moment('2018-11-01');
-    const end = new Moment('2019-03-01');
-    const value = new Moment('2018-12-03');
+    const start = new Dayjs('2018-11-01');
+    const end = new Dayjs('2019-03-01');
+    const value = new Dayjs('2018-12-03');
     const onValueChange = jest.fn();
     const wrapper = mount(
       {
@@ -334,7 +334,7 @@ describe('Calendar', () => {
 
   it('onTypeChange should work correctly', () => {
     const onTypeChange = jest.fn();
-    const value = new Moment('2018-12-03');
+    const value = new Dayjs('2018-12-03');
     const wrapper = mount({
       render() {
         return (

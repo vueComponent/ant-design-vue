@@ -5,10 +5,11 @@ import { Group, Button } from '../radio';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
 import type { VueNode } from '../_util/type';
-import type moment from 'moment';
+import type dayjs from 'dayjs';
+import '../_util/dayjs-util';
 import type { RadioChangeEvent } from '../radio/interface';
 
-function getMonthsLocale(value: moment.Moment): string[] {
+function getMonthsLocale(value: dayjs.Dayjs): string[] {
   const current = value.clone();
   const localeData = value.localeData();
   const months = [];
@@ -19,8 +20,8 @@ function getMonthsLocale(value: moment.Moment): string[] {
   return months;
 }
 export interface RenderHeader {
-  value: moment.Moment;
-  onChange?: (value: moment.Moment) => void;
+  value: dayjs.Dayjs;
+  onChange?: (value: dayjs.Dayjs) => void;
   type: string;
   onTypeChange: (type: string) => void;
 }
@@ -33,10 +34,10 @@ export const HeaderProps = {
   yearSelectTotal: PropTypes.number,
   type: PropTypes.string,
   value: {
-    type: Object as PropType<moment.Moment>,
+    type: Object as PropType<dayjs.Dayjs>,
   },
   validRange: {
-    type: Array as PropType<moment.Moment[]>,
+    type: Array as PropType<dayjs.Dayjs[]>,
   },
   headerRender: PropTypes.func,
   onValueChange: PropTypes.func,

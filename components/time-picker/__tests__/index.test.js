@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import TimePicker from '..';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import focusTest from '../../../tests/shared/focusTest';
 import mountTest from '../../../tests/shared/mountTest';
 import { sleep } from '../../../tests/utils';
@@ -47,7 +47,7 @@ describe('TimePicker', () => {
   it('not render clean icon when allowClear is false', () => {
     const wrapper = mount({
       render() {
-        return <TimePicker defaultValue={moment('2000-01-01 00:00:00')} allowClear={false} />;
+        return <TimePicker defaultValue={dayjs('2000-01-01 00:00:00')} allowClear={false} />;
       },
     });
     expect(wrapper.html()).toMatchSnapshot();

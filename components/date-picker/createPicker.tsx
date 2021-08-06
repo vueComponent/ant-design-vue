@@ -1,6 +1,6 @@
 import type { CSSProperties, DefineComponent } from 'vue';
 import { defineComponent, inject, nextTick } from 'vue';
-import moment from 'moment';
+import dayjs from 'dayjs';
 import omit from 'lodash-es/omit';
 import MonthCalendar from '../vc-calendar/src/MonthCalendar';
 import VcDatePicker from '../vc-calendar/src/Picker';
@@ -18,14 +18,14 @@ import { getDataAndAriaProps } from '../_util/util';
 import { isEmptySlot } from '../_util/props-util';
 
 export interface PickerProps {
-  value?: moment.Moment;
+  value?: dayjs.Dayjs;
   open?: boolean;
   prefixCls?: string;
 }
 export interface PickerState {
   sOpen?: boolean;
-  sValue?: moment.Moment | null;
-  showDate?: moment.Moment | null;
+  sValue?: dayjs.Dayjs | null;
+  showDate?: dayjs.Dayjs | null;
 }
 export default function createPicker<P>(
   TheCalendar: DefineComponent<P>,
@@ -92,7 +92,7 @@ export default function createPicker<P>(
         this.handleChange(null);
       },
 
-      handleChange(value: moment.Moment | null) {
+      handleChange(value: dayjs.Dayjs | null) {
         if (!hasProp(this, 'value')) {
           this.setState({
             sValue: value,
@@ -102,7 +102,7 @@ export default function createPicker<P>(
         this.$emit('change', value, formatDate(value, this.format));
       },
 
-      handleCalendarChange(value: moment.Moment) {
+      handleCalendarChange(value: dayjs.Dayjs) {
         this.setState({ showDate: value });
       },
       handleOpenChange(open: boolean) {
@@ -184,7 +184,7 @@ export default function createPicker<P>(
         disabledTime,
         locale: locale.lang,
         timePicker: props.timePicker,
-        defaultValue: props.defaultPickerValue || interopDefault(moment)(),
+        defaultValue: props.defaultPickerValue || interopDefault(dayjs)(),
         dateInputPlaceholder: placeholder,
         prefixCls,
         dateRender,

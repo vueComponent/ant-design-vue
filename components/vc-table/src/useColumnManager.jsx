@@ -23,7 +23,7 @@ export default function useColumnManager(columns) {
         const rowSpan = rows.length - currentRow;
         if (
           column &&
-          !column.children && // parent columns are supposed to be one row
+          !column.children && // parent columns.value are supposed to be one row
           rowSpan > 1 &&
           (!column.rowSpan || column.rowSpan < rowSpan)
         ) {
@@ -47,7 +47,7 @@ export default function useColumnManager(columns) {
         } else {
           parentColumn.colSpan += 1;
         }
-        // update rowspan to all same row columns
+        // update rowspan to all same row columns.value
         for (let i = 0; i < rows[currentRow].length - 1; i += 1) {
           setRowSpan(rows[currentRow][i]);
         }
@@ -59,16 +59,18 @@ export default function useColumnManager(columns) {
       });
       return grouped;
     };
-    return _groupColumns(columns);
+    return _groupColumns(columns.value);
   });
 
-  const isAnyColumnsFixed = computed(() => columns.some(column => !!column.fixed));
+  const isAnyColumnsFixed = computed(() => columns.value.some(column => !!column.fixed));
 
   const isAnyColumnsLeftFixed = computed(() =>
-    columns.some(column => column.fixed === 'left' || column.fixed === true),
+    columns.value.some(column => column.fixed === 'left' || column.fixed === true),
   );
 
-  const isAnyColumnsRightFixed = computed(() => columns.some(column => column.fixed === 'right'));
+  const isAnyColumnsRightFixed = computed(() =>
+    columns.value.some(column => column.fixed === 'right'),
+  );
 
   const leftColumns = computed(() =>
     groupedColumns.value.filter(column => column.fixed === 'left' || column.fixed === true),
@@ -78,7 +80,9 @@ export default function useColumnManager(columns) {
     return groupedColumns.value.filter(column => column.fixed === 'right');
   });
 
-  const leafColumns = computed(() => _leafColumns(columns));
+  const leafColumns = computed(() => {
+    return _leafColumns(columns.value);
+  });
 
   const leftLeafColumns = computed(() => _leafColumns(leftColumns.value));
 

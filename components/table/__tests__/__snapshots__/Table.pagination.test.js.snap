@@ -12,11 +12,11 @@ exports[`Table.pagination renders pagination correctly 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
+                <col data-key="name">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!---->
           </th>
@@ -38,8 +38,6 @@ exports[`Table.pagination renders pagination correctly 1`] = `
           </tbody>
           </table>
         </div>
-        <!---->
-        <!---->
         <!---->
         <!---->
       </div>

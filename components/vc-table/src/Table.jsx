@@ -9,6 +9,7 @@ import {
   ref,
   onUpdated,
   onMounted,
+  toRef,
 } from 'vue';
 import shallowequal from '../../_util/shallowequal';
 import merge from 'lodash-es/merge';
@@ -99,7 +100,7 @@ export default defineComponent({
     },
   ),
   setup(props) {
-    const columnManager = useColumnManager(props.columns);
+    const columnManager = useColumnManager(toRef(props, 'columns'));
     const colsKeys = computed(() => getColumnsKey(columnManager.leafColumns.value));
     const [colsWidths, updateColsWidths] = useLayoutState(new Map());
     const pureColWidths = computed(() =>

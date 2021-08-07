@@ -1,7 +1,6 @@
 import { reactive, defineComponent, nextTick, computed, watch } from 'vue';
 import FilterFilled from '@ant-design/icons-vue/FilterFilled';
 import Menu, { SubMenu, MenuItem } from '../menu';
-import closest from '../_util/dom-closest';
 import classNames from '../_util/classNames';
 import shallowequal from '../_util/shallowequal';
 import Dropdown from '../dropdown';
@@ -9,7 +8,7 @@ import Checkbox from '../checkbox';
 import Radio from '../radio';
 import FilterDropdownMenuWrapper from './FilterDropdownMenuWrapper';
 import { FilterMenuProps } from './interface';
-import { isValidElement, findDOMNode } from '../_util/props-util';
+import { isValidElement } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { cloneElement } from '../_util/vnode';
 import BaseMixin2 from '../_util/BaseMixin2';
@@ -67,33 +66,9 @@ export default defineComponent({
     // );
     return state;
   },
-
-  mounted() {
-    const { column } = this;
-    nextTick(() => {
-      this.setNeverShown(column);
-    });
-  },
-  updated() {
-    const { column } = this;
-    nextTick(() => {
-      this.setNeverShown(column);
-    });
-  },
   methods: {
     getDropdownVisible() {
-      return this.neverShown ? false : this.sVisible;
-    },
-    setNeverShown(column) {
-      const rootNode = findDOMNode(this);
-      const filterBelongToScrollBody = !!closest(rootNode, `.ant-table-scroll`);
-      if (filterBelongToScrollBody) {
-        // When fixed column have filters, there will be two dropdown menus
-        // Filter dropdown menu inside scroll body should never be shown
-        // To fix https://github.com/ant-design/ant-design/issues/5010 and
-        // https://github.com/ant-design/ant-design/issues/7909
-        this.neverShown = !!column.fixed;
-      }
+      return !!this.sVisible;
     },
 
     setSelectedKeys({ selectedKeys }) {

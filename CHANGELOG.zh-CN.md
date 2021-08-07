@@ -10,6 +10,20 @@
 
 ---
 
+## 2.2.3
+
+`2021-08-07`
+
+- 🌟 `Table` 固定列使用 `position: sticky` ， 提升性能，解决部分场景不对齐问题 [38569c](https://github.com/vueComponent/ant-design-vue/commit/38569c28c7eb4eaa34f2cc096982daea901062d4)
+- 🌟 `Collapse` 支持 number 类型 key [#4405](https://github.com/vueComponent/ant-design-vue/issues/4405)
+- 🌟 优化 `Tabs` 在 windows 下选中时闪动问题 [#4241](https://github.com/vueComponent/ant-design-vue/issues/4241)
+- 🌟 `InputPassword` 支持全局设置 prefixCls [#4430](https://github.com/vueComponent/ant-design-vue/issues/4430)
+- 🐞 修复 `Select` 无法滚动问题 [#4396](https://github.com/vueComponent/ant-design-vue/issues/4396)
+- 🐞 修复 `Badge` 在 ssr 下报错问题 [#4384](https://github.com/vueComponent/ant-design-vue/issues/4384)
+- 🐞 修复 `Form` 多出无效数据字段问题 [#4435](https://github.com/vueComponent/ant-design-vue/issues/4435)
+- 🐞 修复 `FormItem` 子元素是原生标签时报错问题 [#4383](https://github.com/vueComponent/ant-design-vue/issues/4383)
+- 🐞 修复 `TreeSelect` 通过 slot 自定义 title 时报错问题 [#4459](https://github.com/vueComponent/ant-design-vue/issues/4459)
+
 ## 2.2.2
 
 `2021-07-11`

@@ -10,6 +10,17 @@
 
 ---
 
+## 1.7.7
+
+`2021-08-07`
+
+- 🌟 `Tree` 支持全局通过 slot 设置 title [#4299](https://github.com/vueComponent/ant-design-vue/issues/4299)
+- 🌟 `InputPassword` 支持全局设置 prefixCls [#4280](https://github.com/vueComponent/ant-design-vue/issues/4280)
+- 🌟 `TreeSelect` 支持 showArrow [#4360](https://github.com/vueComponent/ant-design-vue/issues/4360)
+- 🌟 优化 `Tabs` 在 windows 下选中时闪动问题 [#4241](https://github.com/vueComponent/ant-design-vue/issues/4241)
+- 🌟 `Table` 支持通过 slot 自定义 expandIcon [#4448](https://github.com/vueComponent/ant-design-vue/issues/4448)
+- 🐞 修复 `Empty` 组件全局 prefixCls 没有响应式问题 [#4446](https://github.com/vueComponent/ant-design-vue/issues/4446)
+
 ## 1.7.6
 
 `2021-06-26`

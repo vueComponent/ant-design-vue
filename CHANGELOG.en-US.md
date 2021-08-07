@@ -10,6 +10,17 @@
 
 ---
 
+## 1.7.7
+
+`2021-08-07`
+
+- 🌟 `Tree` supports global setting of title via slot [#4299](https://github.com/vueComponent/ant-design-vue/issues/4299)
+- 🌟 `InputPassword` supports global setting prefixCls [#4280](https://github.com/vueComponent/ant-design-vue/issues/4280)
+- 🌟 `TreeSelect` supports showArrow [#4360](https://github.com/vueComponent/ant-design-vue/issues/4360)
+- 🌟 Optimize the flickering problem of `Tabs` when selected under windows [#4241](https://github.com/vueComponent/ant-design-vue/issues/4241)
+- 🌟 `Table` supports slot customization expandIcon [#4448](https://github.com/vueComponent/ant-design-vue/issues/4448)
+- 🐞 Fix the problem that the global prefixCls of the `Empty` component is not responsive [#4446](https://github.com/vueComponent/ant-design-vue/issues/4446)
+
 ## 1.7.6
 
 `2021-06-26`

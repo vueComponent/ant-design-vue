@@ -12,7 +12,7 @@ let lessLoaderConfig = require('./lessLoaderConfig')('production');
 module.exports = merge(baseWebpackConfig, {
   output: {
     path: path.resolve(__dirname, '../_site'),
-    publicPath: 'https://alicdn.antdv.com/v1/',
+    publicPath: 'https://aliyuncdn.antdv.com/v1/',
     filename: '[name].[contenthash:8].js',
     chunkFilename: '[contenthash:8].async.js',
   },

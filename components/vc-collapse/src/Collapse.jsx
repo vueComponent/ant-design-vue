@@ -15,7 +15,9 @@ import { defineComponent } from 'vue';
 function _toArray(activeKey) {
   let currentActiveKey = activeKey;
   if (!Array.isArray(currentActiveKey)) {
-    currentActiveKey = currentActiveKey ? [currentActiveKey] : [];
+    const activeKeyType = typeof currentActiveKey;
+    currentActiveKey =
+      activeKeyType === 'number' || activeKeyType === 'string' ? [currentActiveKey] : [];
   }
   return currentActiveKey.map(key => String(key));
 }
@@ -76,7 +78,7 @@ export default defineComponent({
       const { prefixCls, accordion, destroyInactivePanel, expandIcon } = this.$props;
 
       // If there is no key provide, use the panel order as default key
-      const key = child.key || String(index);
+      const key = String(child.key ?? index);
       const { header, headerClass, disabled } = getPropsData(child);
       let isActive = false;
 

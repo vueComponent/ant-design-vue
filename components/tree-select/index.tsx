@@ -93,10 +93,10 @@ const TreeSelect = defineComponent({
         let newLabel = typeof label === 'function' ? label() : label;
         let newTitle = typeof title === 'function' ? title() : title;
         if (!newLabel && slots.label && $slots[slots.label]) {
-          newLabel = <>{$slots.label(item)}</>;
+          newLabel = <>{$slots[slots.label](item)}</>;
         }
         if (!newTitle && slots.title && $slots[slots.title]) {
-          newTitle = <>{$slots.title(item)}</>;
+          newTitle = <>{$slots[slots.title](item)}</>;
         }
         const treeNodeProps = {
           ...item,

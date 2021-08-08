@@ -12,7 +12,6 @@ export default function toArray(children: any[], option: Option = {}): any[] {
     if ((child === undefined || child === null) && !option.keepEmpty) {
       return;
     }
-    debugger;
     if (Array.isArray(child)) {
       ret = ret.concat(toArray(child));
     } else if (isFragment(child) && child.props) {

@@ -5,7 +5,7 @@ import { flattenChildren, getPropsSlot } from '../_util/props-util';
 import warning from '../_util/warning';
 import BreadcrumbItem from './BreadcrumbItem';
 import Menu from '../menu';
-import type { Omit, VueNode } from '../_util/type';
+import type { VueNode } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export interface Route {

@@ -5,6 +5,7 @@ import warning from '../../_util/warning';
 import BaseMixin from '../../_util/BaseMixin';
 import { ITouchProps } from './PropTypes';
 import { defineComponent } from 'vue';
+import supportsPassive from '../../_util/supportsPassive';
 
 export default defineComponent({
   name: 'TouchFeedback',
@@ -76,8 +77,8 @@ export default defineComponent({
     const events = disabled
       ? undefined
       : {
-          onTouchstart: this.onTouchStart,
-          onTouchmove: this.onTouchMove,
+          [supportsPassive ? 'onTouchstartPassive' : 'onTouchstart']: this.onTouchStart,
+          [supportsPassive ? 'onTouchmovePassive' : 'onTouchmove']: this.onTouchMove,
           onTouchend: this.onTouchEnd,
           onTouchcancel: this.onTouchCancel,
           onMousedown: this.onMouseDown,

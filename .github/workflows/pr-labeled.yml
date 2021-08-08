@@ -1,0 +1,20 @@
+name: PR Labeled
+
+on: 
+  pull_request_target:
+    types: [labeled]
+
+jobs:
+  reply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Usage
+        if: github.event.label.name == 'Usage'
+        uses: actions-cool/issues-helper@v1.2
+        with:
+          actions: 'create-comment, close-issue'
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            Hello @${{ github.event.pull_request.user.login }}, we use GitHub PR to build and perfect of Ant Design Vue. So, please don't ask usage questions here. You can try to open a new discussion in [antdv discussions](https://github.com/vueComponent/ant-design-vue/discussions), select `Q&A` to ask questions, also can ask questions on [Stack Overflow](http://stackoverflow.com/questions/) or [Segment Fault](https://segmentfault.com).
+
+            你好 @${{ github.event.pull_request.user.login }}，Ant Design Vue PR 是用于建设、完善项目的地方。请勿询问如何使用的问题，你可以试着在 [antdv discussions](https://github.com/vueComponent/ant-design-vue/discussions) 新开一个 discussion，选择 `Q&A` 类别进行提问，也可以在 [Stack Overflow](http://stackoverflow.com/questions/) 或者 [Segment Fault](https://segmentfault.com/) 中提问。

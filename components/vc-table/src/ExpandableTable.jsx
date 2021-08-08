@@ -147,11 +147,11 @@ const ExpandableTable = {
       };
       let colCount;
       if (fixed === 'left') {
-        colCount = this.columnManager.leftLeafColumns().length;
+        colCount = this.columnManager.leftLeafColumns.value.length;
       } else if (fixed === 'right') {
-        colCount = this.columnManager.rightLeafColumns().length;
+        colCount = this.columnManager.rightLeafColumns.value.length;
       } else {
-        colCount = this.columnManager.leafColumns().length;
+        colCount = this.columnManager.leafColumns.value.length;
       }
       const columns = [
         {

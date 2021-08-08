@@ -1072,16 +1072,16 @@ exports[`Locale Provider should display the text as ar 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="الفلاتر" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -1105,8 +1105,6 @@ exports[`Locale Provider should display the text as ar 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -1614,16 +1612,16 @@ exports[`Locale Provider should display the text as bg 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Филтриране" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -1647,8 +1645,6 @@ exports[`Locale Provider should display the text as bg 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -2156,16 +2152,16 @@ exports[`Locale Provider should display the text as ca 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtrar Menu" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -2189,8 +2185,6 @@ exports[`Locale Provider should display the text as ca 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -2698,16 +2692,16 @@ exports[`Locale Provider should display the text as cs 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtr" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -2731,8 +2725,6 @@ exports[`Locale Provider should display the text as cs 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -3240,16 +3232,16 @@ exports[`Locale Provider should display the text as da 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtermenu" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -3273,8 +3265,6 @@ exports[`Locale Provider should display the text as da 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -3782,16 +3772,16 @@ exports[`Locale Provider should display the text as de 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filter-Menü" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -3815,8 +3805,6 @@ exports[`Locale Provider should display the text as de 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -4324,16 +4312,16 @@ exports[`Locale Provider should display the text as el 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Μενού φίλτρων" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -4357,8 +4345,6 @@ exports[`Locale Provider should display the text as el 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -4866,16 +4852,16 @@ exports[`Locale Provider should display the text as en 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filter menu" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -4899,8 +4885,6 @@ exports[`Locale Provider should display the text as en 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -5408,16 +5392,16 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filter menu" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -5441,8 +5425,6 @@ exports[`Locale Provider should display the text as en-gb 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -5950,16 +5932,16 @@ exports[`Locale Provider should display the text as es 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtrar menú" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -5983,8 +5965,6 @@ exports[`Locale Provider should display the text as es 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -6492,16 +6472,16 @@ exports[`Locale Provider should display the text as et 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtri menüü" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -6525,8 +6505,6 @@ exports[`Locale Provider should display the text as et 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -7034,16 +7012,16 @@ exports[`Locale Provider should display the text as fa 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="منوی فیلتر" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -7067,8 +7045,6 @@ exports[`Locale Provider should display the text as fa 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -7576,16 +7552,16 @@ exports[`Locale Provider should display the text as fi 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Suodatus valikko" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -7609,8 +7585,6 @@ exports[`Locale Provider should display the text as fi 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -8118,16 +8092,16 @@ exports[`Locale Provider should display the text as fr 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtrer" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -8151,8 +8125,6 @@ exports[`Locale Provider should display the text as fr 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -8660,16 +8632,16 @@ exports[`Locale Provider should display the text as fr 2`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtrer" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -8693,8 +8665,6 @@ exports[`Locale Provider should display the text as fr 2`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -9202,16 +9172,16 @@ exports[`Locale Provider should display the text as he 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="תפריט סינון" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -9235,8 +9205,6 @@ exports[`Locale Provider should display the text as he 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -9744,16 +9712,16 @@ exports[`Locale Provider should display the text as hi 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="सूची बंद करें" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -9777,8 +9745,6 @@ exports[`Locale Provider should display the text as hi 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -10286,16 +10252,16 @@ exports[`Locale Provider should display the text as hr 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filter meni" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -10319,8 +10285,6 @@ exports[`Locale Provider should display the text as hr 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -10828,16 +10792,16 @@ exports[`Locale Provider should display the text as hu 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Szűrők" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -10861,8 +10825,6 @@ exports[`Locale Provider should display the text as hu 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -11370,16 +11332,16 @@ exports[`Locale Provider should display the text as hy 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="ֆիլտրի ընտրացանկ" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -11403,8 +11365,6 @@ exports[`Locale Provider should display the text as hy 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -11912,16 +11872,16 @@ exports[`Locale Provider should display the text as id 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Saring" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -11945,8 +11905,6 @@ exports[`Locale Provider should display the text as id 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -12454,16 +12412,16 @@ exports[`Locale Provider should display the text as is 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Afmarkanir" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -12487,8 +12445,6 @@ exports[`Locale Provider should display the text as is 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -12996,16 +12952,16 @@ exports[`Locale Provider should display the text as it 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Menù Filtro" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -13029,8 +12985,6 @@ exports[`Locale Provider should display the text as it 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -13538,16 +13492,16 @@ exports[`Locale Provider should display the text as ja 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="メニューをフィルター" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -13571,8 +13525,6 @@ exports[`Locale Provider should display the text as ja 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -14080,16 +14032,16 @@ exports[`Locale Provider should display the text as kn 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="ಪಟ್ಟಿ ಸೋಸಿ" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -14113,8 +14065,6 @@ exports[`Locale Provider should display the text as kn 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -14622,16 +14572,16 @@ exports[`Locale Provider should display the text as ko 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="필터 메뉴" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -14655,8 +14605,6 @@ exports[`Locale Provider should display the text as ko 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -15164,16 +15112,16 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Menuê peldanka" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -15197,8 +15145,6 @@ exports[`Locale Provider should display the text as ku-iq 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -15706,16 +15652,16 @@ exports[`Locale Provider should display the text as lv 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtrēšanas izvēlne" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -15739,8 +15685,6 @@ exports[`Locale Provider should display the text as lv 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -16248,16 +16192,16 @@ exports[`Locale Provider should display the text as mk 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Мени за филтрирање" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -16281,8 +16225,6 @@ exports[`Locale Provider should display the text as mk 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -16790,16 +16732,16 @@ exports[`Locale Provider should display the text as mn-mn 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Хайх цэс" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -16823,8 +16765,6 @@ exports[`Locale Provider should display the text as mn-mn 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -17332,16 +17272,16 @@ exports[`Locale Provider should display the text as ms-my 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Cari dengan tajuk" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -17365,8 +17305,6 @@ exports[`Locale Provider should display the text as ms-my 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -17874,16 +17812,16 @@ exports[`Locale Provider should display the text as nb 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtermeny" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -17907,8 +17845,6 @@ exports[`Locale Provider should display the text as nb 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -18416,16 +18352,16 @@ exports[`Locale Provider should display the text as ne-np 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="फिल्टर मेनु" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -18449,8 +18385,6 @@ exports[`Locale Provider should display the text as ne-np 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -18958,16 +18892,16 @@ exports[`Locale Provider should display the text as nl 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filteren" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -18991,8 +18925,6 @@ exports[`Locale Provider should display the text as nl 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -19500,16 +19432,16 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="FilterMenu" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -19533,8 +19465,6 @@ exports[`Locale Provider should display the text as nl-be 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -20042,16 +19972,16 @@ exports[`Locale Provider should display the text as pl 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Menu filtra" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -20075,8 +20005,6 @@ exports[`Locale Provider should display the text as pl 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -20584,16 +20512,16 @@ exports[`Locale Provider should display the text as pt 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtro" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -20617,8 +20545,6 @@ exports[`Locale Provider should display the text as pt 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -21126,16 +21052,16 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtro" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -21159,8 +21085,6 @@ exports[`Locale Provider should display the text as pt-br 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -21668,16 +21592,16 @@ exports[`Locale Provider should display the text as ro 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtrează" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -21701,8 +21625,6 @@ exports[`Locale Provider should display the text as ro 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -22210,16 +22132,16 @@ exports[`Locale Provider should display the text as ru 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Фильтр" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -22243,8 +22165,6 @@ exports[`Locale Provider should display the text as ru 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -22752,16 +22672,16 @@ exports[`Locale Provider should display the text as sk 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filter" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -22785,8 +22705,6 @@ exports[`Locale Provider should display the text as sk 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -23294,16 +23212,16 @@ exports[`Locale Provider should display the text as sl 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filter" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -23327,8 +23245,6 @@ exports[`Locale Provider should display the text as sl 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -23836,16 +23752,16 @@ exports[`Locale Provider should display the text as sr 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filter" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -23869,8 +23785,6 @@ exports[`Locale Provider should display the text as sr 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -24378,16 +24292,16 @@ exports[`Locale Provider should display the text as sv 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Filtermeny" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -24411,8 +24325,6 @@ exports[`Locale Provider should display the text as sv 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -24920,16 +24832,16 @@ exports[`Locale Provider should display the text as ta 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="பட்டியலை மூடு" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -24953,8 +24865,6 @@ exports[`Locale Provider should display the text as ta 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -25462,16 +25372,16 @@ exports[`Locale Provider should display the text as th 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="ตัวกรอง" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -25495,8 +25405,6 @@ exports[`Locale Provider should display the text as th 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -26004,16 +25912,16 @@ exports[`Locale Provider should display the text as tr 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Menü Filtrele" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -26037,8 +25945,6 @@ exports[`Locale Provider should display the text as tr 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -26546,16 +26452,16 @@ exports[`Locale Provider should display the text as uk 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Фільтрувати" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -26579,8 +26485,6 @@ exports[`Locale Provider should display the text as uk 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -27088,16 +26992,16 @@ exports[`Locale Provider should display the text as vi 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="Bộ " tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -27121,8 +27025,6 @@ exports[`Locale Provider should display the text as vi 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -27630,16 +27532,16 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="筛选" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -27663,8 +27565,6 @@ exports[`Locale Provider should display the text as zh-cn 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>
@@ -28172,16 +28072,16 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
           <div class="ant-table-body">
             <table class="">
               <colgroup>
-                <col>
-                <col>
+                <col data-key="name">
+                <col data-key="age">
               </colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
+                  <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-column-has-actions ant-table-column-has-filters"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
           </div></span>
           <!--teleport start-->
           <!--teleport end--><span title="篩選器" tabindex="-1" role="img" aria-label="filter" class="anticon anticon-filter ant-dropdown-trigger"><svg focusable="false" class="" data-icon="filter" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M349 838c0 17.7 14.2 32 31.8 32h262.4c17.6 0 31.8-14.3 31.8-32V642H349v196zm531.1-684H143.9c-24.5 0-39.8 26.7-27.5 48l221.3 376h348.8l221.3-376c12.1-21.3-3.2-48-27.7-48z"></path></svg></span></th>
-          <th class="ant-table-row-cell-last"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
+          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
         </div></span>
         <!---->
         </th>
@@ -28205,8 +28105,6 @@ exports[`Locale Provider should display the text as zh-tw 1`] = `
           <!---->
         </div>
       </div>
-      <!---->
-      <!---->
       <!---->
     </div>
   </div>

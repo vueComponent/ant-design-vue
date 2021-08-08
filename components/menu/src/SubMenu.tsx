@@ -268,12 +268,7 @@ export default defineComponent({
             onVisibleChange={onPopupVisibleChange}
             v-slots={{
               popup: ({ visible }) => (
-                <MenuContextProvider
-                  props={{
-                    mode: subMenuTriggerModeRef,
-                    isRootMenu: false,
-                  }}
-                >
+                <MenuContextProvider mode={subMenuTriggerModeRef.value} isRootMenu={false}>
                   <Transition {...mergedMotion.value}>
                     <SubMenuList v-show={visible} id={popupId} ref={popupRef}>
                       {slots.default?.()}
@@ -292,7 +287,7 @@ export default defineComponent({
         titleNode = <PopupTrigger>{titleNode}</PopupTrigger>;
       }
       return (
-        <MenuContextProvider props={{ mode: renderMode }}>
+        <MenuContextProvider mode={renderMode.value}>
           <Overflow.Item
             component="li"
             {...attrs}

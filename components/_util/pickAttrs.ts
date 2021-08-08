@@ -15,7 +15,7 @@ const eventsName = `onCopy onCut onPaste onCompositionend onCompositionstart onC
     onKeypress onKeyup onFocus onBlur onChange onInput onSubmit onClick onContextmenu onDoubleclick onDblclick
     onDrag onDragend onDragenter onDragexit onDragleave onDragover onDragstart onDrop onMousedown
     onMouseenter onMouseleave onMousemove onMouseout onMouseover onMouseup onSelect onTouchcancel
-    onTouchend onTouchmove onTouchstart onScroll onWheel onAbort onCanplay onCanplaythrough
+    onTouchend onTouchmove onTouchstart onTouchstartPassive onTouchmovePassive onScroll onWheel onAbort onCanplay onCanplaythrough
     onDurationchange onEmptied onEncrypted onEnded onError onLoadeddata onLoadedmetadata
     onLoadstart onPause onPlay onPlaying onProgress onRatechange onSeeked onSeeking onStalled onSuspend onTimeupdate onVolumechange onWaiting onLoad onError`;
 

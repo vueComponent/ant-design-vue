@@ -80,7 +80,7 @@ export default defineComponent({
           )}
           stretch={mode === 'horizontal' ? 'minWidth' : null}
           getPopupContainer={
-            isRootMenu ? getPopupContainer.value : triggerNode => triggerNode.parentNode
+            isRootMenu.value ? getPopupContainer.value : triggerNode => triggerNode.parentNode
           }
           builtinPlacements={placement.value}
           popupPlacement={popupPlacement.value}

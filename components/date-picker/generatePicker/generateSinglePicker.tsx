@@ -99,7 +99,8 @@ export default function generatePicker<DateType>(
           const value = props.valueFormat ? generateConfig.toString(date, props.valueFormat) : date;
           emit('panelChange', value, mode);
         };
-        const onOk = (value: DateType) => {
+        const onOk = (date: DateType) => {
+          const value = props.valueFormat ? generateConfig.toString(date, props.valueFormat) : date;
           emit('ok', value);
         };
 

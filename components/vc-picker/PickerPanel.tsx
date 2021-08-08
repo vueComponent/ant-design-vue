@@ -84,7 +84,7 @@ export type PickerPanelSharedProps<DateType> = {
 
   /** @private Internal usage. Do not use in your production env */
   components?: Components;
-} & HTMLAttributes;
+} & Omit<HTMLAttributes, 'onSelect'>;
 
 export type PickerPanelBaseProps<DateType> = {
   picker: Exclude<PickerMode, 'date' | 'time'>;

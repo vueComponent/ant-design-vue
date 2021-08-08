@@ -1,33 +1,39 @@
 <template>
-  <a-space direction="vertical">
-    <a-date-picker show-time placeholder="Select Time" @change="onChange" @ok="onOk" />
-    <a-range-picker
-      :show-time="{ format: 'HH:mm' }"
-      format="YYYY-MM-DD HH:mm"
-      :placeholder="['Start Time', 'End Time']"
-      @change="onChange"
-      @ok="onOk"
-    />
-  </a-space>
+  <div>
+    <demo />
+  </div>
 </template>
-<script lang="ts">
-import { Moment } from 'moment';
+<script>
 import { defineComponent } from 'vue';
+import demo from '../v2-doc/src/docs/time-picker/demo/index.vue';
+// import Affix from '../components/affix';
 export default defineComponent({
-  setup() {
-    const onChange = (value: Moment[], dateString: string[]) => {
-      console.log('Selected Time: ', value);
-      console.log('Formatted Selected Time: ', dateString);
-    };
-
-    const onOk = (value: Moment[]) => {
-      console.log('onOk: ', value);
-    };
-
+  components: {
+    demo,
+    // Affix,
+  },
+  data() {
     return {
-      onChange,
-      onOk,
+      visible: false,
+      pStyle: {
+        fontSize: '16px',
+        color: 'rgba(0,0,0,0.85)',
+        lineHeight: '24px',
+        display: 'block',
+        marginBottom: '16px',
+      },
+      pStyle2: {
+        marginBottom: '24px',
+      },
     };
+  },
+  methods: {
+    showDrawer() {
+      this.visible = true;
+    },
+    onClose() {
+      this.visible = false;
+    },
   },
 });
 </script>

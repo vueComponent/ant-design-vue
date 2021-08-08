@@ -95,7 +95,10 @@ export default function generateRangePicker<DateType>(
             : dates;
           emit('panelChange', values, modes);
         };
-        const onOk = (value: DateType) => {
+        const onOk = (dates: DateType) => {
+          const value = props.valueFormat
+            ? generateConfig.toString(dates, props.valueFormat)
+            : dates;
           emit('ok', value);
         };
         const onCalendarChange: RangePickerSharedProps<DateType>['onCalendarChange'] = (

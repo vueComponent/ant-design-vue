@@ -69,7 +69,7 @@ export function useLocaleReceiver<T extends LocaleComponent>(
   defaultLocale?: Locale[T] | Function,
 ): [ComputedRef<Locale[T]>] {
   const localeData = inject<LocaleReceiverContext>('localeData', {} as LocaleReceiverContext);
-  const componentLocale = computed(() => {
+  const componentLocale = computed<Locale[T]>(() => {
     const { antLocale } = localeData;
     const locale =
       defaultLocale || (defaultLocaleData as LocaleInterface)[componentName || 'global'];

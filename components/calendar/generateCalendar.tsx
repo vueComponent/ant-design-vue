@@ -12,7 +12,7 @@ import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import enUS from './locale/en_US';
 import CalendarHeader from './Header';
 import { VueNode } from '../_util/type';
-import { computed, defineComponent, toRef } from 'vue';
+import { App, computed, defineComponent, toRef } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 
@@ -303,7 +303,10 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
       };
     },
   });
-
+  Calendar.install = function (app: App) {
+    app.component(Calendar.name, Calendar);
+    return app;
+  };
   return Calendar;
 }
 

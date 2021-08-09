@@ -1,8 +1,4 @@
-import { Moment } from 'moment';
-import momentGenerateConfig from '../vc-picker/generate/moment';
-import generateCalendar, { CalendarProps } from './generateCalendar';
+import Calendar from './dayjs';
+export * from './dayjs';
 
-const Calendar = generateCalendar<Moment>(momentGenerateConfig);
-
-export { CalendarProps };
 export default Calendar;

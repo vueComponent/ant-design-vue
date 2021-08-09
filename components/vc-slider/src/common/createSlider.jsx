@@ -9,6 +9,7 @@ import Marks from './Marks';
 import Handle from '../Handle';
 import * as utils from '../utils';
 import BaseMixin from '../../../_util/BaseMixin';
+import supportsPassive from '../../../_util/supportsPassive';
 
 function noop() {}
 
@@ -295,13 +296,18 @@ export default function createSlider(Component) {
         class: `${prefixCls}-mark`,
         onClickLabel: disabled ? noop : this.onClickMarkLabel,
       };
+      const touchEvents = {
+        [supportsPassive ? 'onTouchstartPassive' : 'onTouchstart']: disabled
+          ? noop
+          : this.onTouchStart,
+      };
       return (
         <div
           id={id}
           ref={this.saveSlider}
           tabindex="-1"
           class={sliderClassName}
-          onTouchstart={disabled ? noop : this.onTouchStart}
+          {...touchEvents}
           onMousedown={disabled ? noop : this.onMouseDown}
           onMouseup={disabled ? noop : this.onMouseUp}
           onKeydown={disabled ? noop : this.onKeyDown}

@@ -1,3 +1,4 @@
+import supportsPassive from '../../../_util/supportsPassive';
 import classNames from '../../../_util/classNames';
 import { isValidElement } from '../../../_util/props-util';
 
@@ -51,13 +52,16 @@ const Marks = (_, { attrs }) => {
 
       const style = vertical ? bottomStyle : leftStyle;
       const markStyle = markPointIsObject ? { ...style, ...markPoint.style } : style;
+      const touchEvents = {
+        [supportsPassive ? 'onTouchstartPassive' : 'onTouchstart']: e => onClickLabel(e, point),
+      };
       return (
         <span
           class={markClassName}
           style={markStyle}
           key={point}
           onMousedown={e => onClickLabel(e, point)}
-          onTouchstart={e => onClickLabel(e, point)}
+          {...touchEvents}
         >
           {markLabel}
         </span>

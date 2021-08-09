@@ -1,4 +1,5 @@
 import type { PropType, ExtractPropTypes, ComputedRef } from 'vue';
+import { watch } from 'vue';
 import { defineComponent, computed, nextTick, ref, watchEffect, onBeforeUnmount } from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';
@@ -271,16 +272,31 @@ export default defineComponent({
       clearValidate,
       resetField,
     });
-    formContext.addField(eventKey, {
-      fieldValue,
-      fieldId,
+    let registered = false;
+    watch(
       fieldName,
-      resetField,
-      clearValidate,
-      namePath,
-      validateRules,
-      rules: rulesRef,
-    });
+      val => {
+        if (val) {
+          if (!registered) {
+            registered = true;
+            formContext.addField(eventKey, {
+              fieldValue,
+              fieldId,
+              fieldName,
+              resetField,
+              clearValidate,
+              namePath,
+              validateRules,
+              rules: rulesRef,
+            });
+          }
+        } else {
+          registered = false;
+          formContext.removeField(eventKey);
+        }
+      },
+      { immediate: true },
+    );
     onBeforeUnmount(() => {
       formContext.removeField(eventKey);
     });
@@ -306,7 +322,7 @@ export default defineComponent({
       const children = flattenChildren(slots.default?.());
       let firstChildren = children[0];
       if (fieldName.value && props.autoLink && isValidElement(firstChildren)) {
-        const originalEvents = firstChildren.props;
+        const originalEvents = firstChildren.props || {};
         const originalBlur = originalEvents.onBlur;
         const originalChange = originalEvents.onChange;
         firstChildren = cloneElement(firstChildren, {

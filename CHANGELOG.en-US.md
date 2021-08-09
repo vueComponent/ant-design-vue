@@ -10,6 +10,20 @@
 
 ---
 
+## 2.2.3
+
+`2021-08-07`
+
+- 🌟 Use `position: sticky` for the fixed column of `Table` to improve performance and solve the problem of misalignment in some scenes [38569c](https://github.com/vueComponent/ant-design-vue/commit/38569c28c7eb4eaa34f2cc096982daea901062d4)
+- 🌟 `Collapse` supports number type key [#4405](https://github.com/vueComponent/ant-design-vue/issues/4405)
+- 🌟 Optimize the flickering problem of `Tabs` when selected under windows [#4241](https://github.com/vueComponent/ant-design-vue/issues/4241)
+- 🌟 `InputPassword` supports global setting prefixCls [#4430](https://github.com/vueComponent/ant-design-vue/issues/4430)
+- 🐞 Fix `Select` cannot scroll issue [#4396](https://github.com/vueComponent/ant-design-vue/issues/4396)
+- 🐞 Fix `Badge` error reporting under ssr [#4384](https://github.com/vueComponent/ant-design-vue/issues/4384)
+- 🐞 Fix the issue of invalid data fields in `Form` [#4435](https://github.com/vueComponent/ant-design-vue/issues/4435)
+- 🐞 Fix an error when the child element of `FormItem` is a native label [#4383](https://github.com/vueComponent/ant-design-vue/issues/4383)
+- 🐞 Fix the error when `TreeSelect` customize title through slot [#4459](https://github.com/vueComponent/ant-design-vue/issues/4459)
+
 ## 2.2.2
 
 `2021-07-11`

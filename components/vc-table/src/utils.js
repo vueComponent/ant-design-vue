@@ -98,3 +98,19 @@ export function getDataAndAriaProps(props) {
     return memo;
   }, {});
 }
+
+export function getColumnsKey(columns) {
+  const columnKeys = [];
+
+  columns.forEach(column => {
+    const { key, dataIndex } = column || {};
+
+    columnKeys.push(key !== undefined ? key : dataIndex);
+  });
+
+  return columnKeys;
+}
+
+export function validateValue(val) {
+  return val !== null && val !== undefined;
+}

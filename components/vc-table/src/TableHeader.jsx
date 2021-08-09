@@ -1,44 +1,70 @@
-import { inject } from 'vue';
+import { computed, inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import TableHeaderRow from './TableHeaderRow';
 
-function getHeaderRows({ columns = [], currentRow = 0, rows = [], isLast = true }) {
-  rows = rows || [];
-  rows[currentRow] = rows[currentRow] || [];
+function parseHeaderRows(rootColumns) {
+  const rows = [];
 
-  columns.forEach((column, i) => {
-    if (column.rowSpan && rows.length < column.rowSpan) {
-      while (rows.length < column.rowSpan) {
-        rows.push([]);
+  function fillRowCells(columns, colIndex, rowIndex = 0) {
+    // Init rows
+    rows[rowIndex] = rows[rowIndex] || [];
+
+    let currentColIndex = colIndex;
+    const colSpans = columns.filter(Boolean).map(column => {
+      const cell = {
+        key: column.key,
+        className: column.className || column.class || '',
+        children: column.title,
+        column,
+        colStart: currentColIndex,
+      };
+
+      let colSpan = 1;
+
+      const subColumns = column.children;
+      if (subColumns && subColumns.length > 0) {
+        colSpan = fillRowCells(subColumns, currentColIndex, rowIndex + 1).reduce(
+          (total, count) => total + count,
+          0,
+        );
+        cell.hasSubColumns = true;
       }
-    }
-    const cellIsLast = isLast && i === columns.length - 1;
-    const cell = {
-      key: column.key,
-      className: column.className || column.class || '',
-      children: column.title,
-      isLast: cellIsLast,
-      column,
-    };
-    if (column.children) {
-      getHeaderRows({
-        columns: column.children,
-        currentRow: currentRow + 1,
-        rows,
-        isLast: cellIsLast,
-      });
-    }
-    if ('colSpan' in column) {
-      cell.colSpan = column.colSpan;
-    }
-    if ('rowSpan' in column) {
-      cell.rowSpan = column.rowSpan;
-    }
-    if (cell.colSpan !== 0) {
-      rows[currentRow].push(cell);
-    }
-  });
-  return rows.filter(row => row.length > 0);
+
+      if ('colSpan' in column) {
+        ({ colSpan } = column);
+      }
+
+      if ('rowSpan' in column) {
+        cell.rowSpan = column.rowSpan;
+      }
+
+      cell.colSpan = colSpan;
+      cell.colEnd = cell.colStart + colSpan - 1;
+      rows[rowIndex].push(cell);
+
+      currentColIndex += colSpan;
+
+      return colSpan;
+    });
+
+    return colSpans;
+  }
+
+  // Generate `rows` cell data
+  fillRowCells(rootColumns, 0);
+
+  // Handle `rowSpan`
+  const rowCount = rows.length;
+  for (let rowIndex = 0; rowIndex < rowCount; rowIndex += 1) {
+    rows[rowIndex].forEach(cell => {
+      if (!('rowSpan' in cell) && !cell.hasSubColumns) {
+        // eslint-disable-next-line no-param-reassign
+        cell.rowSpan = rowCount - rowIndex;
+      }
+    });
+  }
+
+  return rows;
 }
 
 export default {
@@ -49,21 +75,20 @@ export default {
     columns: PropTypes.array.isRequired,
     expander: PropTypes.object.isRequired,
   },
-  setup() {
+  setup(props) {
     return {
       table: inject('table', {}),
+      rows: computed(() => parseHeaderRows(props.columns)),
     };
   },
 
   render() {
     const { sComponents: components, prefixCls, showHeader, customHeaderRow } = this.table;
-    const { expander, columns, fixed } = this;
+    const { expander, columns, fixed, rows } = this;
 
     if (!showHeader) {
       return null;
     }
-
-    const rows = getHeaderRows({ columns });
 
     expander.renderExpandIndentCell(rows, fixed);
 

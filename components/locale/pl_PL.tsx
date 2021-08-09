@@ -2,7 +2,7 @@ import Pagination from '../vc-pagination/locale/pl_PL';
 import DatePicker from '../date-picker/locale/pl_PL';
 import TimePicker from '../time-picker/locale/pl_PL';
 import Calendar from '../calendar/locale/pl_PL';
-import { Locale } from '../locale-provider';
+import type { Locale } from '../locale-provider';
 
 const localeValues: Locale = {
   locale: 'pl',

@@ -30,7 +30,6 @@ import type { DateRender } from './panels/DatePanel/DateBody';
 import useHoverValue from './hooks/useHoverValue';
 import type { VueNode } from '../_util/type';
 import type { ChangeEvent, FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
-import type { HTMLAttributes } from 'vue';
 import { computed, defineComponent, ref, toRef, watch, watchEffect } from 'vue';
 import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
@@ -114,7 +113,7 @@ export type RangePickerSharedProps<DateType> = {
   activePickerIndex?: 0 | 1;
   dateRender?: RangeDateRender<DateType>;
   panelRender?: (originPanel: VueNode) => VueNode;
-} & HTMLAttributes;
+};
 
 type OmitPickerProps<Props> = Omit<
   Props,

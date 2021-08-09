@@ -28,7 +28,7 @@ import usePickerInput from './hooks/usePickerInput';
 import useTextValueMapping from './hooks/useTextValueMapping';
 import useValueTexts from './hooks/useValueTexts';
 import useHoverValue from './hooks/useHoverValue';
-import type { CSSProperties, HtmlHTMLAttributes, Ref } from 'vue';
+import type { CSSProperties, Ref } from 'vue';
 import { computed, defineComponent, ref, toRef, watch } from 'vue';
 import type { ChangeEvent, FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import type { VueNode } from '../_util/type';
@@ -93,7 +93,7 @@ export type PickerSharedProps<DateType> = {
   direction?: 'ltr' | 'rtl';
   showToday?: boolean;
   showTime?: boolean | SharedTimeProps<DateType>;
-} & HtmlHTMLAttributes;
+};
 
 type OmitPanelProps<Props> = Omit<
   Props,
@@ -442,7 +442,9 @@ function Picker<DateType>() {
           // Remove `picker` & `format` here since TimePicker is little different with other panel
           ...(props as Omit<MergedPickerProps<DateType>, 'picker' | 'format'>),
           ...attrs,
-          class: undefined,
+          class: classNames({
+            [`${prefixCls}-panel-focused`]: !typing.value,
+          }),
           style: undefined,
           pickerValue: undefined,
           onPickerValueChange: undefined,
@@ -453,9 +455,6 @@ function Picker<DateType>() {
           <PickerPanel
             {...panelProps}
             generateConfig={generateConfig}
-            class={classNames({
-              [`${prefixCls}-panel-focused`]: !typing.value,
-            })}
             value={selectedValue.value}
             locale={locale}
             tabindex={-1}

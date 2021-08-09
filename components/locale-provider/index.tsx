@@ -6,8 +6,8 @@ import { changeConfirmLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { withInstall } from '../_util/type';
 import type { ValidateMessages } from '../form/interface';
-import { TransferLocale } from '../transfer';
-import { PickerLocale as DatePickerLocale } from '../date-picker/generatePicker';
+import type { TransferLocale } from '../transfer';
+import type { PickerLocale as DatePickerLocale } from '../date-picker/generatePicker';
 
 interface TransferLocaleForEmpty {
   description: string;

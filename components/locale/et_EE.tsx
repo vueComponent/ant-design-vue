@@ -2,7 +2,7 @@ import Pagination from '../vc-pagination/locale/et_EE';
 import DatePicker from '../date-picker/locale/et_EE';
 import TimePicker from '../time-picker/locale/et_EE';
 import Calendar from '../calendar/locale/et_EE';
-import { Locale } from '../locale-provider';
+import type { Locale } from '../locale-provider';
 
 const localeValues: Locale = {
   locale: 'et',

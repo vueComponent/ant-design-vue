@@ -36,14 +36,14 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
     order: { type: Boolean, default: true },
   });
   const { TimePicker: InternalTimePicker, RangePicker: InternalRangePicker } = DatePicker as any;
-  interface TimeRangePickerProps extends Omit<RangePickerTimeProps<DateType>, 'picker'> {
+  type TimeRangePickerProps = Omit<RangePickerTimeProps<DateType>, 'picker'> & {
     popupClassName?: string;
     valueFormat?: string;
-  }
-  interface TimePickerProps extends Omit<PickerTimeProps<DateType>, 'picker'> {
+  };
+  type TimePickerProps = Omit<PickerTimeProps<DateType>, 'picker'> & {
     popupClassName?: string;
     valueFormat?: string;
-  }
+  };
   const TimePicker = defineComponent<TimePickerProps>({
     name: 'ATimePicker',
     inheritAttrs: false,

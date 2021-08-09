@@ -33,7 +33,6 @@ import getExtraFooter from './utils/getExtraFooter';
 import getRanges from './utils/getRanges';
 import { getLowerBoundTime, setDateTime, setTime } from './utils/timeUtil';
 import type { VueNode } from '../_util/type';
-import type { HTMLAttributes } from 'vue';
 import { computed, createVNode, defineComponent, ref, toRef, watch, watchEffect } from 'vue';
 import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
@@ -84,7 +83,7 @@ export type PickerPanelSharedProps<DateType> = {
 
   /** @private Internal usage. Do not use in your production env */
   components?: Components;
-} & Omit<HTMLAttributes, 'onSelect'>;
+};
 
 export type PickerPanelBaseProps<DateType> = {
   picker: Exclude<PickerMode, 'date' | 'time'>;

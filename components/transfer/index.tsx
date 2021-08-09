@@ -54,6 +54,12 @@ export interface TransferLocale {
   searchPlaceholder: string;
   itemUnit: string;
   itemsUnit: string;
+  remove: string;
+  selectAll: string;
+  selectCurrent: string;
+  selectInvert: string;
+  removeAll: string;
+  removeCurrent: string;
 }
 
 const Transfer = defineComponent({

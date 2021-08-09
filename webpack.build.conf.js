@@ -2,14 +2,6 @@
 const getWebpackConfig = require('./antd-tools/getWebpackConfig');
 const IgnoreEmitPlugin = require('ignore-emit-webpack-plugin');
 const darkVars = require('./scripts/dark-vars');
-const { webpack } = getWebpackConfig;
-// noParse still leave `require('./locale' + name)` in dist files
-// ignore is better
-// http://stackoverflow.com/q/25384360
-function ignoreMomentLocale(webpackConfig) {
-  delete webpackConfig.module.noParse;
-  webpackConfig.plugins.push(new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/));
-}
 
 function addLocales(webpackConfig) {
   let packageName = 'antd-with-locales';
@@ -20,20 +12,19 @@ function addLocales(webpackConfig) {
   webpackConfig.output.filename = '[name].js';
 }
 
-function externalMoment(config) {
-  config.externals.moment = {
-    root: 'moment',
-    commonjs2: 'moment',
-    commonjs: 'moment',
-    amd: 'moment',
+function externalDayjs(config) {
+  config.externals.dayjs = {
+    root: 'dayjs',
+    commonjs2: 'dayjs',
+    commonjs: 'dayjs',
+    amd: 'dayjs',
   };
 }
 
 const webpackConfig = getWebpackConfig(false);
 if (process.env.RUN_ENV === 'PRODUCTION') {
   webpackConfig.forEach(config => {
-    ignoreMomentLocale(config);
-    externalMoment(config);
+    externalDayjs(config);
     addLocales(config);
   });
 }
@@ -41,8 +32,7 @@ if (process.env.RUN_ENV === 'PRODUCTION') {
 const webpackDarkConfig = getWebpackConfig(false);
 
 webpackDarkConfig.forEach(config => {
-  ignoreMomentLocale(config);
-  externalMoment(config);
+  externalDayjs(config);
 
   // rename default entry to ${theme} entry
   Object.keys(config.entry).forEach(entryName => {

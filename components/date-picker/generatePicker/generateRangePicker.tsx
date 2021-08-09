@@ -12,9 +12,10 @@ import { getTimeProps, Components } from '.';
 import { computed, defineComponent, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
-import { commonProps, ExtraRangePickerProps, rangePickerProps } from './props';
-import { PanelMode, RangeValue } from '../../vc-picker/interface';
-import { RangePickerSharedProps } from '../../vc-picker/RangePicker';
+import type { ExtraRangePickerProps } from './props';
+import { commonProps, rangePickerProps } from './props';
+import type { PanelMode, RangeValue } from '../../vc-picker/interface';
+import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
 import devWarning from '../../vc-util/devWarning';
 
 export default function generateRangePicker<DateType>(

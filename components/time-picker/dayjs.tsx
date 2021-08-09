@@ -1,8 +1,8 @@
-import { Dayjs } from 'dayjs';
+import type { Dayjs } from 'dayjs';
 import createTimePicker from './time-picker';
 import dayjsGenerateConfig from '../vc-picker/generate/dayjs';
-import { App } from 'vue';
-import { PickerTimeProps, RangePickerTimeProps } from '../date-picker/generatePicker';
+import type { App } from 'vue';
+import type { PickerTimeProps, RangePickerTimeProps } from '../date-picker/generatePicker';
 
 const { TimePicker, TimeRangePicker } = createTimePicker<Dayjs>(dayjsGenerateConfig);
 

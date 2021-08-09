@@ -9,10 +9,12 @@ import { getPlaceholder } from '../util';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
 import type { PickerProps, PickerDateProps, PickerTimeProps } from '.';
 import { getTimeProps, Components } from '.';
-import { computed, DefineComponent, defineComponent, ref } from 'vue';
+import type { DefineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
-import { commonProps, datePickerProps, ExtraDatePickerProps } from './props';
+import type { ExtraDatePickerProps } from './props';
+import { commonProps, datePickerProps } from './props';
 import devWarning from '../../vc-util/devWarning';
 
 export default function generatePicker<DateType>(

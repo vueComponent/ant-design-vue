@@ -1,16 +1,14 @@
 import { defineComponent, ref } from 'vue';
-import generatePicker, {
-  PickerTimeProps,
-  RangePickerTimeProps,
-} from '../date-picker/generatePicker';
+import type { PickerTimeProps, RangePickerTimeProps } from '../date-picker/generatePicker';
+import generatePicker from '../date-picker/generatePicker';
 import {
   commonProps,
   datePickerProps,
   rangePickerProps,
 } from '../date-picker/generatePicker/props';
-import { GenerateConfig } from '../vc-picker/generate';
-import { PanelMode, RangeValue } from '../vc-picker/interface';
-import { RangePickerSharedProps } from '../vc-picker/RangePicker';
+import type { GenerateConfig } from '../vc-picker/generate';
+import type { PanelMode, RangeValue } from '../vc-picker/interface';
+import type { RangePickerSharedProps } from '../vc-picker/RangePicker';
 import devWarning from '../vc-util/devWarning';
 
 export interface TimePickerLocale {

@@ -1,8 +1,8 @@
-import { Moment } from 'moment';
+import type { Moment } from 'moment';
 import createTimePicker from './time-picker';
 import momentGenerateConfig from '../vc-picker/generate/moment';
-import { App } from 'vue';
-import { PickerTimeProps, RangePickerTimeProps } from '../date-picker/generatePicker';
+import type { App } from 'vue';
+import type { PickerTimeProps, RangePickerTimeProps } from '../date-picker/generatePicker';
 
 const { TimePicker, TimeRangePicker } = createTimePicker<Moment>(momentGenerateConfig);
 

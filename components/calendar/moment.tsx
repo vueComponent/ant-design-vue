@@ -1,4 +1,4 @@
-import { Moment } from 'moment';
+import type { Moment } from 'moment';
 import generateConfig from '../vc-picker/generate/moment';
 import { withInstall } from '../_util/type';
 import generateCalendar, { CalendarProps } from './generateCalendar';

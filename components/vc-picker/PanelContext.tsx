@@ -32,7 +32,7 @@ export const useProvidePanel = (props: PanelContextProps) => {
 };
 
 export const useInjectPanel = () => {
-  return inject(PanelContextKey);
+  return inject(PanelContextKey, {});
 };
 
 export default PanelContextKey;

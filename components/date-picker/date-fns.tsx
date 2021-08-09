@@ -6,7 +6,7 @@ import type {
   RangePickerProps as BaseRangePickerProps,
 } from './generatePicker';
 import generatePicker from './generatePicker';
-import { ExtraDatePickerProps, ExtraRangePickerProps } from './generatePicker/props';
+import type { ExtraDatePickerProps, ExtraRangePickerProps } from './generatePicker/props';
 
 export type DatePickerProps = PickerProps<Date> & ExtraDatePickerProps<Date>;
 export type MonthPickerProps = Omit<PickerDateProps<Date>, 'picker'> & ExtraDatePickerProps<Date>;

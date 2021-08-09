@@ -1,7 +1,7 @@
 import createTimePicker from './time-picker';
 import dateFnsGenerateConfig from '../vc-picker/generate/dateFns';
-import { App } from 'vue';
-import { PickerTimeProps, RangePickerTimeProps } from '../date-picker/generatePicker';
+import type { App } from 'vue';
+import type { PickerTimeProps, RangePickerTimeProps } from '../date-picker/generatePicker';
 
 const { TimePicker, TimeRangePicker } = createTimePicker<Date>(dateFnsGenerateConfig);
 

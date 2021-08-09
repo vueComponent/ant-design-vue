@@ -1,39 +1,21 @@
 <template>
-  <div>
-    <demo />
-  </div>
+  <a-calendar v-model:value="value" @panelChange="onPanelChange" />
 </template>
-<script>
-import { defineComponent } from 'vue';
-import demo from '../v2-doc/src/docs/time-picker/demo/index.vue';
-// import Affix from '../components/affix';
+<script lang="ts">
+import { defineComponent, ref } from 'vue';
+import { Dayjs } from 'dayjs';
+
 export default defineComponent({
-  components: {
-    demo,
-    // Affix,
-  },
-  data() {
-    return {
-      visible: false,
-      pStyle: {
-        fontSize: '16px',
-        color: 'rgba(0,0,0,0.85)',
-        lineHeight: '24px',
-        display: 'block',
-        marginBottom: '16px',
-      },
-      pStyle2: {
-        marginBottom: '24px',
-      },
+  setup() {
+    const value = ref<Dayjs>();
+    const onPanelChange = (value: Dayjs, mode: string) => {
+      console.log(value, mode);
     };
-  },
-  methods: {
-    showDrawer() {
-      this.visible = true;
-    },
-    onClose() {
-      this.visible = false;
-    },
+
+    return {
+      value,
+      onPanelChange,
+    };
   },
 });
 </script>

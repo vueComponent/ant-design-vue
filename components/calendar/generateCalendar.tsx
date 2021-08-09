@@ -1,9 +1,9 @@
 import useMergedState from '../_util/hooks/useMergedState';
 import padStart from 'lodash-es/padStart';
-import { PickerPanel as RCPickerPanel } from '../vc-picker';
-import { Locale } from '../vc-picker/interface';
-import { GenerateConfig } from '../vc-picker/generate';
-import {
+import { PickerPanel } from '../vc-picker';
+import type { Locale } from '../vc-picker/interface';
+import type { GenerateConfig } from '../vc-picker/generate';
+import type {
   PickerPanelBaseProps as RCPickerPanelBaseProps,
   PickerPanelDateProps as RCPickerPanelDateProps,
   PickerPanelTimeProps as RCPickerPanelTimeProps,
@@ -11,8 +11,9 @@ import {
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import enUS from './locale/en_US';
 import CalendarHeader from './Header';
-import { VueNode } from '../_util/type';
-import { App, computed, defineComponent, toRef } from 'vue';
+import type { VueNode } from '../_util/type';
+import type { App } from 'vue';
+import { computed, defineComponent, toRef } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 
@@ -255,11 +256,11 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
           <div
             {...attrs}
             class={classNames(
-              calendarPrefixCls,
+              calendarPrefixCls.value,
               {
-                [`${calendarPrefixCls}-full`]: fullscreen,
-                [`${calendarPrefixCls}-mini`]: !fullscreen,
-                [`${calendarPrefixCls}-rtl`]: direction.value === 'rtl',
+                [`${calendarPrefixCls.value}-full`]: fullscreen,
+                [`${calendarPrefixCls.value}-mini`]: !fullscreen,
+                [`${calendarPrefixCls.value}-rtl`]: direction.value === 'rtl',
               },
               attrs.class,
             )}
@@ -285,7 +286,7 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
               />
             )}
 
-            <RCPickerPanel
+            <PickerPanel
               value={mergedValue.value}
               prefixCls={prefixCls.value}
               locale={mergedLocale.value.lang}

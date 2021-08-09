@@ -36,7 +36,7 @@ import type { AlignType } from '../vc-align/interface';
 import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
 import classNames from '../_util/classNames';
-import { SharedTimeProps } from './panels/TimePanel';
+import type { SharedTimeProps } from './panels/TimePanel';
 
 export type PickerRefConfig = {
   focus: () => void;

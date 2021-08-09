@@ -1,5 +1,5 @@
 import type { VNodeTypes, PropType, ComputedRef } from 'vue';
-import { toRefs, unref } from 'vue';
+import { unref } from 'vue';
 import { inject, defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import defaultLocaleData from './default';

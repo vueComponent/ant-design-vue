@@ -140,7 +140,7 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
         () => value.value || generateConfig.getNow(),
         {
           defaultValue: defaultValue.value,
-          value: value,
+          value,
         },
       );
 

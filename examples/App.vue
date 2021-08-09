@@ -1,29 +1,39 @@
 <template>
-  <a-alert :message="`You selected date: ${selectedValue && selectedValue.format('YYYY-MM-DD')}`" />
-  <a-calendar :value="date" @select="onSelect" @panelChange="onPanelChange" />
+  <div>
+    <demo />
+  </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
-import dayjs, { Dayjs } from 'dayjs';
-
+<script>
+import { defineComponent } from 'vue';
+import demo from '../v2-doc/src/docs/calendar/demo/index.vue';
+// import Affix from '../components/affix';
 export default defineComponent({
-  setup() {
-    const date = ref(dayjs('2017-01-25'));
-    const selectedValue = ref(dayjs('2017-01-25'));
-
-    const onSelect = (value: Dayjs) => {
-      date.value = value;
-      selectedValue.value = value;
-    };
-    const onPanelChange = (value: Dayjs) => {
-      date.value = value;
-    };
+  components: {
+    demo,
+    // Affix,
+  },
+  data() {
     return {
-      date,
-      selectedValue,
-      onSelect,
-      onPanelChange,
+      visible: false,
+      pStyle: {
+        fontSize: '16px',
+        color: 'rgba(0,0,0,0.85)',
+        lineHeight: '24px',
+        display: 'block',
+        marginBottom: '16px',
+      },
+      pStyle2: {
+        marginBottom: '24px',
+      },
     };
+  },
+  methods: {
+    showDrawer() {
+      this.visible = true;
+    },
+    onClose() {
+      this.visible = false;
+    },
   },
 });
 </script>

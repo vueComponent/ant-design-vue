@@ -2,11 +2,12 @@ import type { CSSProperties, FunctionalComponent } from 'vue';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import Button from '../button';
+import type { Direction } from '../config-provider';
 
 function noop() {}
 
 export interface TransferOperationProps {
-  class?: any;
+  class?: string;
   leftArrowText?: string;
   rightArrowText?: string;
   moveToLeft?: (e: MouseEvent) => void;
@@ -15,6 +16,8 @@ export interface TransferOperationProps {
   rightActive?: boolean;
   style?: CSSProperties | string;
   disabled?: boolean;
+  direction?: Direction;
+  oneWay?: boolean;
 }
 
 const Operation: FunctionalComponent<TransferOperationProps> = props => {
@@ -28,6 +31,8 @@ const Operation: FunctionalComponent<TransferOperationProps> = props => {
     rightActive,
     class: className,
     style,
+    direction,
+    oneWay,
   } = props;
 
   return (
@@ -37,23 +42,25 @@ const Operation: FunctionalComponent<TransferOperationProps> = props => {
         size="small"
         disabled={disabled || !rightActive}
         onClick={moveToRight}
-        icon={<RightOutlined />}
+        icon={direction !== 'rtl' ? <RightOutlined /> : <LeftOutlined />}
       >
         {rightArrowText}
       </Button>
-      <Button
-        type="primary"
-        size="small"
-        disabled={disabled || !leftActive}
-        onClick={moveToLeft}
-        icon={<LeftOutlined />}
-      >
-        {leftArrowText}
-      </Button>
+      {!oneWay && (
+        <Button
+          type="primary"
+          size="small"
+          disabled={disabled || !leftActive}
+          onClick={moveToLeft}
+          icon={direction !== 'rtl' ? <LeftOutlined /> : <RightOutlined />}
+        >
+          {leftArrowText}
+        </Button>
+      )}
     </div>
   );
 };
-
+Operation.displayName = 'Operation';
 Operation.inheritAttrs = false;
 
 export default Operation;

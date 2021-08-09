@@ -92,10 +92,15 @@ const Dropdown = defineComponent({
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('dropdown', customizePrefixCls);
     const child = getSlot(this)[0];
-    const dropdownTrigger = cloneElement(child, {
-      class: classNames(child?.props?.class, `${prefixCls}-trigger`),
-      disabled,
-    });
+    const dropdownTrigger = cloneElement(
+      child,
+      Object.assign(
+        {
+          class: classNames(child?.props?.class, `${prefixCls}-trigger`),
+        },
+        disabled ? { disabled } : {},
+      ),
+    );
     const triggerActions = disabled ? [] : typeof trigger === 'string' ? [trigger] : trigger;
     let alignPoint;
     if (triggerActions && triggerActions.indexOf('contextmenu') !== -1) {

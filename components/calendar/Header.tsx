@@ -39,7 +39,6 @@ function YearSelect<DateType>(props: SharedProps<DateType>) {
   for (let index = start; index < end; index++) {
     options.push({ label: `${index}${suffix}`, value: index });
   }
-
   return (
     <Select
       size={fullscreen ? undefined : 'small'}

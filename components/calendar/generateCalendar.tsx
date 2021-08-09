@@ -130,7 +130,7 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
         value: toRef(props, 'mode'),
       });
 
-      const panelMode = computed(() => (mergedValue.value === 'year' ? 'month' : 'date'));
+      const panelMode = computed(() => (mergedMode.value === 'year' ? 'month' : 'date'));
 
       const mergedDisabledDate = computed(() => {
         return (date: DateType) => {
@@ -158,7 +158,7 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
           ) {
             triggerPanelChange(date, mergedMode.value);
           }
-
+          emit('update:value', date);
           emit('change', date);
         }
       };
@@ -204,7 +204,6 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
           if (dateFullCellRender) {
             return dateFullCellRender({ current: date });
           }
-
           return (
             <div
               class={classNames(
@@ -251,7 +250,6 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
             </div>
           );
         };
-
         return (
           <div
             {...attrs}

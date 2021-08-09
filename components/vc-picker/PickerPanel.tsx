@@ -214,7 +214,7 @@ function PickerPanel<DateType>() {
           const now = generateConfig.getNow();
           if (!date) return now;
           // When value is null and set showTime
-          if (!mergedValue && props.showTime) {
+          if (!mergedValue.value && props.showTime) {
             if (typeof showTime === 'object') {
               return setDateTime(generateConfig, date, showTime.defaultValue || now);
             }
@@ -388,6 +388,16 @@ function PickerPanel<DateType>() {
         hidePrevBtn: computed(() => inRange.value && panelPosition.value === 'right'),
         hideNextBtn: computed(() => inRange.value && panelPosition.value === 'left'),
       });
+
+      watch(
+        () => props.value,
+        () => {
+          if (props.value) {
+            setInnerViewDate(props.value);
+          }
+        },
+      );
+
       return () => {
         const {
           prefixCls = 'ant-picker',
@@ -545,7 +555,7 @@ function PickerPanel<DateType>() {
             showNow,
             onNow: needConfirmButton.value && onNow,
             onOk: () => {
-              if (mergedValue) {
+              if (mergedValue.value) {
                 triggerSelect(mergedValue.value, 'submit', true);
                 if (onOk) {
                   onOk(mergedValue.value);

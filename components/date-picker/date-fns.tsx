@@ -13,12 +13,15 @@ export type MonthPickerProps = Omit<PickerDateProps<Date>, 'picker'> & ExtraDate
 export type WeekPickerProps = Omit<PickerDateProps<Date>, 'picker'> & ExtraDatePickerProps<Date>;
 export type RangePickerProps = BaseRangePickerProps<Date> & ExtraRangePickerProps<Date>;
 
-const DatePicker = generatePicker<Date>(dataFnsGenerateConfig);
+const { DatePicker, WeekPicker, MonthPicker, YearPicker, TimePicker, QuarterPicker, RangePicker } =
+  generatePicker<Date>(dataFnsGenerateConfig);
 
-const RangePicker = DatePicker.RangePicker;
-const MonthPicker = DatePicker.MonthPicker;
-const WeekPicker = DatePicker.WeekPicker;
-const QuarterPicker = DatePicker.QuarterPicker;
+DatePicker.WeekPicker = WeekPicker;
+DatePicker.MonthPicker = MonthPicker;
+DatePicker.YearPicker = YearPicker;
+DatePicker.RangePicker = RangePicker;
+DatePicker.TimePicker = TimePicker;
+DatePicker.QuarterPicker = QuarterPicker;
 
 /* istanbul ignore next */
 DatePicker.install = function (app: App) {

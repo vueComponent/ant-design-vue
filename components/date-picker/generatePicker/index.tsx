@@ -17,6 +17,8 @@ import type { TimePickerLocale } from '../../time-picker';
 import generateSinglePicker from './generateSinglePicker';
 import generateRangePicker from './generateRangePicker';
 import type { SizeType } from '../../config-provider';
+import type { ExtraDatePickerProps, ExtraRangePickerProps } from './props';
+import type { DefineComponent } from 'vue';
 
 export const Components = { button: PickerButton, rangeItem: PickerTag };
 
@@ -129,32 +131,33 @@ function generatePicker<DateType>(
   generateConfig: GenerateConfig<DateType>,
   extraProps: Record<string, any> = {},
 ) {
+  type DatePickerProps = PickerProps<DateType> & ExtraDatePickerProps<DateType>;
   // =========================== Picker ===========================
   const { DatePicker, WeekPicker, MonthPicker, YearPicker, TimePicker, QuarterPicker } =
-    generateSinglePicker(generateConfig, extraProps);
+    generateSinglePicker<DateType>(generateConfig, extraProps);
 
   // ======================== Range Picker ========================
-  const RangePicker = generateRangePicker(generateConfig, extraProps);
+  const RangePicker = generateRangePicker<DateType>(generateConfig, extraProps);
 
-  // =========================== Export ===========================
-  type MergedDatePickerType = typeof DatePicker & {
-    WeekPicker: typeof WeekPicker;
-    MonthPicker: typeof MonthPicker;
-    YearPicker: typeof YearPicker;
-    RangePicker: typeof RangePicker;
-    TimePicker: typeof TimePicker;
-    QuarterPicker: typeof QuarterPicker;
+  // 类型过于复杂，使用 as 避免 TS7056 错误
+  // error TS7056: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
+  return {
+    DatePicker,
+    WeekPicker,
+    MonthPicker,
+    YearPicker,
+    TimePicker,
+    QuarterPicker,
+    RangePicker,
+  } as unknown as {
+    DatePicker: DefineComponent<DatePickerProps>;
+    WeekPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
+    MonthPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
+    YearPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
+    TimePicker: DefineComponent<Omit<PickerTimeProps<DateType>, 'picker'>>;
+    QuarterPicker: DefineComponent<Omit<PickerTimeProps<DateType>, 'picker'>>;
+    RangePicker: DefineComponent<RangePickerProps<DateType> & ExtraRangePickerProps<DateType>>;
   };
-
-  const MergedDatePicker = DatePicker as MergedDatePickerType;
-  MergedDatePicker.WeekPicker = WeekPicker;
-  MergedDatePicker.MonthPicker = MonthPicker;
-  MergedDatePicker.YearPicker = YearPicker;
-  MergedDatePicker.RangePicker = RangePicker;
-  MergedDatePicker.TimePicker = TimePicker;
-  MergedDatePicker.QuarterPicker = QuarterPicker;
-
-  return MergedDatePicker;
 }
 
 export default generatePicker;

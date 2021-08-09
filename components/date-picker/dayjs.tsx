@@ -14,12 +14,15 @@ export type MonthPickerProps = Omit<PickerDateProps<Dayjs>, 'picker'> & ExtraDat
 export type WeekPickerProps = Omit<PickerDateProps<Dayjs>, 'picker'> & ExtraDatePickerProps<Dayjs>;
 export type RangePickerProps = BaseRangePickerProps<Dayjs> & ExtraRangePickerProps<Dayjs>;
 
-const DatePicker = generatePicker<Dayjs>(dayjsGenerateConfig);
+const { DatePicker, WeekPicker, MonthPicker, YearPicker, TimePicker, QuarterPicker, RangePicker } =
+  generatePicker<Dayjs>(dayjsGenerateConfig);
 
-const RangePicker = DatePicker.RangePicker;
-const MonthPicker = DatePicker.MonthPicker;
-const WeekPicker = DatePicker.WeekPicker;
-const QuarterPicker = DatePicker.QuarterPicker;
+DatePicker.WeekPicker = WeekPicker;
+DatePicker.MonthPicker = MonthPicker;
+DatePicker.YearPicker = YearPicker;
+DatePicker.RangePicker = RangePicker;
+DatePicker.TimePicker = TimePicker;
+DatePicker.QuarterPicker = QuarterPicker;
 
 /* istanbul ignore next */
 DatePicker.install = function (app: App) {

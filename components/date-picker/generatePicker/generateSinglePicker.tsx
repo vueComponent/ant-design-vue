@@ -17,7 +17,7 @@ import type { ExtraDatePickerProps } from './props';
 import { commonProps, datePickerProps } from './props';
 import devWarning from '../../vc-util/devWarning';
 
-export default function generatePicker<DateType>(
+export default function generateSinglePicker<DateType>(
   generateConfig: GenerateConfig<DateType>,
   extraProps: Record<string, any> = {},
 ) {
@@ -238,5 +238,19 @@ export default function generatePicker<DateType>(
     'AQuarterPicker',
   );
 
-  return { DatePicker, WeekPicker, MonthPicker, YearPicker, TimePicker, QuarterPicker };
+  return {
+    DatePicker,
+    WeekPicker,
+    MonthPicker,
+    YearPicker,
+    TimePicker,
+    QuarterPicker,
+  } as unknown as {
+    DatePicker: DefineComponent<DatePickerProps>;
+    WeekPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
+    MonthPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
+    YearPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
+    TimePicker: DefineComponent<Omit<PickerTimeProps<DateType>, 'picker'>>;
+    QuarterPicker: DefineComponent<Omit<PickerTimeProps<DateType>, 'picker'>>;
+  };
 }

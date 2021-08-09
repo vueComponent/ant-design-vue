@@ -212,7 +212,7 @@ export default defineComponent({
         if (!!filterOption === false) {
           return true;
         }
-        return filterOption(targetMeasureText, option);
+        return (filterOption as Function)(targetMeasureText, option);
       });
       return list;
     };

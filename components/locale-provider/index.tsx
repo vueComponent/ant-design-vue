@@ -8,16 +8,17 @@ import { withInstall } from '../_util/type';
 import type { ValidateMessages } from '../form/interface';
 import type { TransferLocale } from '../transfer';
 import type { PickerLocale as DatePickerLocale } from '../date-picker/generatePicker';
+import { PaginationLocale } from '../pagination/Pagination';
 
 interface TransferLocaleForEmpty {
   description: string;
 }
 export interface Locale {
   locale: string;
-  Pagination?: Object;
-  Table?: Object;
-  Popconfirm?: Object;
-  Upload?: Object;
+  Pagination?: PaginationLocale;
+  Table?: Record<string, any>;
+  Popconfirm?: Record<string, any>;
+  Upload?: Record<string, any>;
   Form?: {
     optional?: string;
     defaultValidateMessages: ValidateMessages;
@@ -72,9 +73,9 @@ const LocaleProvider = defineComponent({
       () => props.locale,
       val => {
         state.antLocale = {
-          ...val,
+          ...props.locale,
           exist: true,
-        };
+        } as any;
         changeConfirmLocale(val && val.Modal);
       },
       { immediate: true },

@@ -73,10 +73,11 @@ export default function generateRangePicker<DateType>(
             pickerRef.value?.blur();
           },
         });
+        const maybeToStrings = (dates: DateType[]) => {
+          return props.valueFormat ? generateConfig.toString(dates, props.valueFormat) : dates;
+        };
         const onChange = (dates: [DateType, DateType], dateStrings: [string, string]) => {
-          const values = props.valueFormat
-            ? generateConfig.toString(dates, props.valueFormat)
-            : dates;
+          const values = maybeToStrings(dates);
           emit('update:value', values);
           emit('change', values, dateStrings);
         };
@@ -91,15 +92,11 @@ export default function generateRangePicker<DateType>(
           emit('blur');
         };
         const onPanelChange = (dates: RangeValue<DateType>, modes: [PanelMode, PanelMode]) => {
-          const values = props.valueFormat
-            ? generateConfig.toString(dates, props.valueFormat)
-            : dates;
+          const values = maybeToStrings(dates);
           emit('panelChange', values, modes);
         };
-        const onOk = (dates: DateType) => {
-          const value = props.valueFormat
-            ? generateConfig.toString(dates, props.valueFormat)
-            : dates;
+        const onOk = (dates: DateType[]) => {
+          const value = maybeToStrings(dates);
           emit('ok', value);
         };
         const onCalendarChange: RangePickerSharedProps<DateType>['onCalendarChange'] = (
@@ -107,9 +104,7 @@ export default function generateRangePicker<DateType>(
           dateStrings: [string, string],
           info,
         ) => {
-          const values = props.valueFormat
-            ? generateConfig.toString(dates, props.valueFormat)
-            : dates;
+          const values = maybeToStrings(dates);
           emit('calendarChange', values, dateStrings, info);
         };
         const [contextLocale] = useLocaleReceiver('DatePicker', enUS);

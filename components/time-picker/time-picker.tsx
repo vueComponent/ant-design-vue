@@ -139,7 +139,7 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
         },
       });
       const onChange = (
-        values: [DateType, DateType] | [string, string],
+        values: RangeValue<string> | RangeValue<DateType>,
         dateStrings: [string, string],
       ) => {
         emit('update:value', values);
@@ -156,16 +156,16 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
         emit('blur');
       };
       const onPanelChange = (
-        values: string | RangeValue<DateType>,
+        values: RangeValue<string> | RangeValue<DateType>,
         modes: [PanelMode, PanelMode],
       ) => {
         emit('panelChange', values, modes);
       };
-      const onOk = (value: DateType) => {
-        emit('ok', value);
+      const onOk = (values: RangeValue<string> | RangeValue<DateType>) => {
+        emit('ok', values);
       };
       const onCalendarChange: RangePickerSharedProps<DateType>['onCalendarChange'] = (
-        values: [DateType, DateType] | [string, string],
+        values: RangeValue<string> | RangeValue<DateType>,
         dateStrings: [string, string],
         info,
       ) => {

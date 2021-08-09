@@ -82,8 +82,11 @@ export default function generatePicker<DateType>(
             pickerRef.value?.blur();
           },
         });
+        const maybeToString = (date: DateType) => {
+          return props.valueFormat ? generateConfig.toString(date, props.valueFormat) : date;
+        };
         const onChange = (date: DateType, dateString: string) => {
-          const value = props.valueFormat ? generateConfig.toString(date, props.valueFormat) : date;
+          const value = maybeToString(date);
           emit('update:value', value);
           emit('change', value, dateString);
         };
@@ -98,11 +101,11 @@ export default function generatePicker<DateType>(
           emit('blur');
         };
         const onPanelChange = (date: DateType, mode: PanelMode | null) => {
-          const value = props.valueFormat ? generateConfig.toString(date, props.valueFormat) : date;
+          const value = maybeToString(date);
           emit('panelChange', value, mode);
         };
         const onOk = (date: DateType) => {
-          const value = props.valueFormat ? generateConfig.toString(date, props.valueFormat) : date;
+          const value = maybeToString(date);
           emit('ok', value);
         };
 

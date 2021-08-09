@@ -115,13 +115,32 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
     setup(props, { emit, slots, attrs }) {
       const { prefixCls, direction } = useConfigInject('picker', props);
       const calendarPrefixCls = computed(() => `${prefixCls.value}-calendar`);
+      const maybeToString = (date: DateType) => {
+        return props.valueFormat ? generateConfig.toString(date, props.valueFormat) : date;
+      };
+      const value = computed(() => {
+        if (props.value) {
+          return props.valueFormat
+            ? (generateConfig.toDate(props.value, props.valueFormat) as DateType)
+            : (props.value as DateType);
+        }
+        return props.value as DateType;
+      });
+      const defaultValue = computed(() => {
+        if (props.defaultValue) {
+          return props.valueFormat
+            ? (generateConfig.toDate(props.defaultValue, props.valueFormat) as DateType)
+            : (props.defaultValue as DateType);
+        }
+        return props.defaultValue as DateType;
+      });
 
       // Value
       const [mergedValue, setMergedValue] = useMergedState(
-        () => props.value || generateConfig.getNow(),
+        () => value.value || generateConfig.getNow(),
         {
-          defaultValue: props.defaultValue,
-          value: toRef(props, 'value'),
+          defaultValue: defaultValue.value,
+          value: value,
         },
       );
 
@@ -144,7 +163,7 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
 
       // ====================== Events ======================
       const triggerPanelChange = (date: DateType, newMode: CalendarMode) => {
-        emit('panelChange', date, newMode);
+        emit('panelChange', maybeToString(date), newMode);
       };
 
       const triggerChange = (date: DateType) => {
@@ -158,8 +177,9 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
           ) {
             triggerPanelChange(date, mergedMode.value);
           }
-          emit('update:value', date);
-          emit('change', date);
+          const val = maybeToString(date);
+          emit('update:value', val);
+          emit('change', val);
         }
       };
 
@@ -170,7 +190,7 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
 
       const onInternalSelect = (date: DateType) => {
         triggerChange(date);
-        emit('select', date);
+        emit('select', maybeToString(date));
       };
       // ====================== Locale ======================
       const defaultLocale = computed(() => {

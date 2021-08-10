@@ -16,6 +16,7 @@
 
 - 🌟 Support Vue@3.2 [#4490](https://github.com/vueComponent/ant-design-vue/issues/4490)
 - 🌟 Automatically hide the horizontal scroll bar of `Table` [#4484](https://github.com/vueComponent/ant-design-vue/issues/4484)
+- 🐞 Fix the issue of `Progress` trailColor not taking effect [#4483](https://github.com/vueComponent/ant-design-vue/issues/4483)
 
 ## 2.2.3
 

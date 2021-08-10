@@ -16,6 +16,7 @@
 
 - 🌟 支持 Vue@3.2 [#4490](https://github.com/vueComponent/ant-design-vue/issues/4490)
 - 🌟 自动隐藏 `Table` 横向滚动条 [#4484](https://github.com/vueComponent/ant-design-vue/issues/4484)
+- 🐞 修复 `Progress` trailColor 不生效问题 [#4483](https://github.com/vueComponent/ant-design-vue/issues/4483)
 
 ## 2.2.3
 

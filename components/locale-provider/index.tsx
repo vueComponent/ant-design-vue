@@ -8,7 +8,7 @@ import { withInstall } from '../_util/type';
 import type { ValidateMessages } from '../form/interface';
 import type { TransferLocale } from '../transfer';
 import type { PickerLocale as DatePickerLocale } from '../date-picker/generatePicker';
-import { PaginationLocale } from '../pagination/Pagination';
+import type { PaginationLocale } from '../pagination/Pagination';
 
 interface TransferLocaleForEmpty {
   description: string;

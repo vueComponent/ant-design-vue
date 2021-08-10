@@ -1,4 +1,5 @@
-import { BaseTransitionProps, CSSProperties, onBeforeUpdate, Ref } from 'vue';
+import type { BaseTransitionProps, CSSProperties, Ref } from 'vue';
+import { onBeforeUpdate } from 'vue';
 import { getCurrentInstance } from 'vue';
 import { defineComponent, nextTick, Transition as T, TransitionGroup as TG } from 'vue';
 

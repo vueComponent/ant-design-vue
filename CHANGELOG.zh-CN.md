@@ -10,6 +10,13 @@
 
 ---
 
+## 2.2.4
+
+`2021-08-10`
+
+- 🌟 支持 Vue@3.2 [#4490](https://github.com/vueComponent/ant-design-vue/issues/4490)
+- 🌟 自动隐藏 `Table` 横向滚动条 [#4484](https://github.com/vueComponent/ant-design-vue/issues/4484)
+
 ## 2.2.3
 
 `2021-08-07`

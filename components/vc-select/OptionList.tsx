@@ -5,7 +5,7 @@ import classNames from '../_util/classNames';
 import pickAttrs from '../_util/pickAttrs';
 import { isValidElement } from '../_util/props-util';
 import createRef from '../_util/createRef';
-import type { VNodeChild } from 'vue';
+import type { PropType, VNodeChild } from 'vue';
 import { computed, defineComponent, nextTick, reactive, watch } from 'vue';
 import List from '../vc-virtual-list/List';
 import type {
@@ -61,7 +61,7 @@ const OptionListProps = {
   virtual: PropTypes.looseBool,
 
   onSelect: PropTypes.func,
-  onToggleOpen: PropTypes.func,
+  onToggleOpen: { type: Function as PropType<(open?: boolean) => void> },
   /** Tell Select that some value is now active to make accessibility work */
   onActiveValue: PropTypes.func,
   onScroll: PropTypes.func,

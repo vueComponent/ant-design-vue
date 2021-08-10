@@ -1057,7 +1057,7 @@ export default function generateSelector<
     methods: {
       // We need force update here since popup dom is render async
       onPopupMouseEnter() {
-        this.$forceUpdate();
+        (this as any).$forceUpdate();
       },
     },
     render() {

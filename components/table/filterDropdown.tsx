@@ -98,7 +98,7 @@ export default defineComponent({
       this.setVisible(false);
       // Call `setSelectedKeys` & `confirm` in the same time will make filter data not up to date
       // https://github.com/ant-design/ant-design/issues/12284
-      this.$forceUpdate();
+      (this as any).$forceUpdate();
       nextTick(this.confirmFilter2);
     },
 

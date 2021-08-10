@@ -1,5 +1,5 @@
-import type { BaseTransitionProps, CSSProperties, Ref } from 'vue';
-import { getCurrentInstance, onUpdated } from 'vue';
+import { BaseTransitionProps, CSSProperties, onBeforeUpdate, Ref } from 'vue';
+import { getCurrentInstance } from 'vue';
 import { defineComponent, nextTick, Transition as T, TransitionGroup as TG } from 'vue';
 
 export const getTransitionProps = (transitionName: string, opt: object = {}) => {
@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === 'test') {
     inheritAttrs: false,
     setup(_props, { slots, attrs }) {
       const instance = getCurrentInstance();
-      onUpdated(() => {
+      onBeforeUpdate(() => {
         const child = instance.subTree.children[0];
         if (child && child.dirs && child.dirs[0]) {
           const value = child.dirs[0].value;

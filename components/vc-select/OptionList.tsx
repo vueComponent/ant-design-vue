@@ -151,7 +151,9 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
           const value = Array.from(props.values)[0];
           const index = memoFlattenOptions.value.findIndex(({ data }) => data.value === value);
           setActive(index);
-          scrollIntoView(index);
+          nextTick(() => {
+            scrollIntoView(index);
+          });
         }
         // Force trigger scrollbar visible when open
         if (props.open) {

@@ -10,7 +10,7 @@ export const getTransitionProps = (transitionName: string, opt: object = {}) => 
   const transitionProps = transitionName
     ? {
         appear: true,
-        appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
+        // appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
         // appearActiveClass: `antdv-base-transtion`,
         appearToClass: `${transitionName}-appear ${transitionName}-appear-active`,
         enterFromClass: `${transitionName}-enter ${transitionName}-enter-prepare`,
@@ -29,7 +29,7 @@ export const getTransitionGroupProps = (transitionName: string, opt: object = {}
   const transitionProps = transitionName
     ? {
         appear: true,
-        appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
+        // appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
         appearActiveClass: `${transitionName}`,
         appearToClass: `${transitionName}-appear ${transitionName}-appear-active`,
         enterFromClass: `${transitionName}-appear ${transitionName}-enter ${transitionName}-appear-prepare ${transitionName}-enter-prepare`,

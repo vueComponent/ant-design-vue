@@ -77,6 +77,7 @@ const OptionListProps = {
 const OptionList = defineComponent<OptionListProps, { state?: any }>({
   name: 'OptionList',
   inheritAttrs: false,
+  slots: ['option'],
   setup(props) {
     const itemPrefixCls = computed(() => `${props.prefixCls}-item`);
 
@@ -268,6 +269,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
       setActive,
       onSelectValue,
       memoFlattenOptions,
+      $slots,
     } = this as any;
     const {
       id,
@@ -281,6 +283,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
       onScroll,
       onMouseenter,
     } = this.$props as OptionListProps;
+    const renderOption = $slots.option;
     const { activeIndex } = this.state;
     // ========================== Render ==========================
     if (memoFlattenOptions.length === 0) {
@@ -315,12 +318,11 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
           onMouseenter={onMouseenter}
           children={({ group, groupOption, data }, itemIndex) => {
             const { label, key } = data;
-
             // Group
             if (group) {
               return (
                 <div class={classNames(itemPrefixCls, `${itemPrefixCls}-group`)}>
-                  {label !== undefined ? label : key}
+                  {renderOption ? renderOption(data) : label !== undefined ? label : key}
                 </div>
               );
             }
@@ -387,7 +389,9 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
                 }}
                 style={style}
               >
-                <div class={`${optionPrefixCls}-content`}>{content}</div>
+                <div class={`${optionPrefixCls}-content`}>
+                  {renderOption ? renderOption(data) : content}
+                </div>
                 {isValidElement(menuItemSelectedIcon) || selected}
                 {iconVisible && (
                   <TransBtn

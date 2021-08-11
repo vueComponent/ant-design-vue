@@ -340,6 +340,7 @@ export default function generateSelector<
   } = config as any;
   const Select = defineComponent<SelectProps<OptionsType, ValueType>>({
     name: 'Select',
+    slots: ['option'],
     setup(props: SelectProps<OptionsType, ValueType>) {
       const useInternalProps = computed(
         () => props.internalProps && props.internalProps.mark === INTERNAL_PROPS_MARK,
@@ -1093,6 +1094,7 @@ export default function generateSelector<
         displayValues,
         activeValue,
         onSearchSubmit,
+        $slots: slots,
       } = this as any;
       const {
         prefixCls = defaultPrefixCls,
@@ -1204,6 +1206,7 @@ export default function generateSelector<
           menuItemSelectedIcon={menuItemSelectedIcon}
           virtual={virtual !== false && dropdownMatchSelectWidth !== false}
           onMouseenter={onPopupMouseEnter}
+          v-slots={{ option: slots.option }}
         />
       );
 

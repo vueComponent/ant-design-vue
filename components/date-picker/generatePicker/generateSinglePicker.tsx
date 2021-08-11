@@ -7,34 +7,26 @@ import type { GenerateConfig } from '../../vc-picker/generate/index';
 import enUS from '../locale/en_US';
 import { getPlaceholder } from '../util';
 import { useLocaleReceiver } from '../../locale-provider/LocaleReceiver';
-import type { PickerProps, PickerDateProps, PickerTimeProps } from '.';
 import { getTimeProps, Components } from '.';
-import type { DefineComponent } from 'vue';
 import { computed, defineComponent, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
-import type { ExtraDatePickerProps } from './props';
 import { commonProps, datePickerProps } from './props';
 import devWarning from '../../vc-util/devWarning';
 
-export default function generateSinglePicker<DateType>(
+export default function generateSinglePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
-  extraProps: Record<string, any> = {},
+  extraProps: ExtraProps,
 ) {
-  type DatePickerProps = PickerProps<DateType> & ExtraDatePickerProps<DateType>;
-
-  function getPicker<InnerPickerProps extends DatePickerProps>(
-    picker?: PickerMode,
-    displayName?: string,
-  ): DefineComponent<InnerPickerProps> {
-    return defineComponent<InnerPickerProps>({
+  function getPicker(picker?: PickerMode, displayName?: string) {
+    return defineComponent({
       name: displayName,
       inheritAttrs: false,
       props: {
         ...commonProps<DateType>(),
         ...datePickerProps<DateType>(),
         ...extraProps,
-      } as any,
+      },
       slots: [
         'suffixIcon',
         // 'clearIcon',
@@ -59,13 +51,13 @@ export default function generateSinglePicker<DateType>(
       ],
       setup(props, { slots, expose, attrs, emit }) {
         devWarning(
-          !((props as any).monthCellContentRender || slots.monthCellContentRender),
+          !(props.monthCellContentRender || slots.monthCellContentRender),
           'DatePicker',
           '`monthCellContentRender` is deprecated. Please use `monthCellRender"` instead.',
         );
 
         devWarning(
-          !(attrs as any).getCalendarContainer,
+          !attrs.getCalendarContainer,
           'DatePicker',
           '`getCalendarContainer` is deprecated. Please use `getPopupContainer"` instead.',
         );
@@ -94,12 +86,6 @@ export default function generateSinglePicker<DateType>(
           emit('update:open', open);
           emit('openChange', open);
         };
-        const onFoucs = () => {
-          emit('focus');
-        };
-        const onBlur = () => {
-          emit('blur');
-        };
         const onPanelChange = (date: DateType, mode: PanelMode | null) => {
           const value = maybeToString(date);
           emit('panelChange', value, mode);
@@ -114,7 +100,7 @@ export default function generateSinglePicker<DateType>(
         const value = computed(() => {
           if (props.value) {
             return props.valueFormat
-              ? generateConfig.toDate(props.value, props.valueFormat)
+              ? generateConfig.toDate(props.value as string | DateType, props.valueFormat)
               : props.value;
           }
           return props.value;
@@ -122,7 +108,7 @@ export default function generateSinglePicker<DateType>(
         const defaultValue = computed(() => {
           if (props.defaultValue) {
             return props.valueFormat
-              ? generateConfig.toDate(props.defaultValue, props.valueFormat)
+              ? generateConfig.toDate(props.defaultValue as string | DateType, props.valueFormat)
               : props.defaultValue;
           }
           return props.defaultValue;
@@ -130,7 +116,10 @@ export default function generateSinglePicker<DateType>(
         const defaultPickerValue = computed(() => {
           if (props.defaultPickerValue) {
             return props.valueFormat
-              ? generateConfig.toDate(props.defaultPickerValue, props.valueFormat)
+              ? generateConfig.toDate(
+                  props.defaultPickerValue as string | DateType,
+                  props.valueFormat,
+                )
               : props.defaultPickerValue;
           }
           return props.defaultPickerValue;
@@ -138,7 +127,7 @@ export default function generateSinglePicker<DateType>(
 
         return () => {
           const locale = { ...contextLocale.value, ...props.locale };
-          const p = { ...props, ...attrs } as InnerPickerProps;
+          const p = { ...props, ...attrs };
           const {
             bordered = true,
             placeholder,
@@ -217,26 +206,23 @@ export default function generateSinglePicker<DateType>(
               direction={direction.value}
               onChange={onChange}
               onOpenChange={onOpenChange}
-              onFocus={onFoucs}
-              onBlur={onBlur}
+              onFocus={props.onFocus}
+              onBlur={props.onBlur}
               onPanelChange={onPanelChange}
               onOk={onOk}
             />
           );
         };
       },
-    }) as unknown as DefineComponent<InnerPickerProps>;
+    });
   }
 
-  const DatePicker = getPicker<DatePickerProps>(undefined, 'ADatePicker');
-  const WeekPicker = getPicker<Omit<PickerDateProps<DateType>, 'picker'>>('week', 'AWeekPicker');
-  const MonthPicker = getPicker<Omit<PickerDateProps<DateType>, 'picker'>>('month', 'AMonthPicker');
-  const YearPicker = getPicker<Omit<PickerDateProps<DateType>, 'picker'>>('year', 'AYearPicker');
-  const TimePicker = getPicker<Omit<PickerTimeProps<DateType>, 'picker'>>('time', 'TimePicker'); // 给独立组件 TimePicker 使用，此处名称不用更改
-  const QuarterPicker = getPicker<Omit<PickerTimeProps<DateType>, 'picker'>>(
-    'quarter',
-    'AQuarterPicker',
-  );
+  const DatePicker = getPicker(undefined, 'ADatePicker');
+  const WeekPicker = getPicker('week', 'AWeekPicker');
+  const MonthPicker = getPicker('month', 'AMonthPicker');
+  const YearPicker = getPicker('year', 'AYearPicker');
+  const TimePicker = getPicker('time', 'TimePicker'); // 给独立组件 TimePicker 使用，此处名称不用更改
+  const QuarterPicker = getPicker('quarter', 'AQuarterPicker');
 
   return {
     DatePicker,
@@ -245,12 +231,5 @@ export default function generateSinglePicker<DateType>(
     YearPicker,
     TimePicker,
     QuarterPicker,
-  } as unknown as {
-    DatePicker: DefineComponent<DatePickerProps>;
-    WeekPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
-    MonthPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
-    YearPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
-    TimePicker: DefineComponent<Omit<PickerTimeProps<DateType>, 'picker'>>;
-    QuarterPicker: DefineComponent<Omit<PickerTimeProps<DateType>, 'picker'>>;
   };
 }

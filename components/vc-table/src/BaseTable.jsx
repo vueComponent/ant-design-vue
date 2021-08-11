@@ -132,16 +132,13 @@ const BaseTable = {
 
   render() {
     const { sComponents: components, prefixCls, scroll, data } = this.table;
-    const { expander, tableClassName, hasHead, hasBody, fixed, isAnyColumnsFixed } = this.$props;
+    const { expander, tableClassName, hasHead, hasBody, fixed } = this.$props;
     const columns = this.getColumns();
     const tableStyle = {};
 
     if (!fixed && scroll.x) {
-      // 当有固定列时，width auto 会导致 body table 的宽度撑不开，从而固定列无法对齐
-      // 详情见：https://github.com/ant-design/ant-design/issues/22160
-      const tableWidthScrollX = isAnyColumnsFixed ? 'max-content' : 'auto';
       // not set width, then use content fixed width
-      tableStyle.width = scroll.x === true ? tableWidthScrollX : scroll.x;
+      tableStyle.width = scroll.x === true ? 'auto' : scroll.x;
       tableStyle.width =
         typeof tableStyle.width === 'number' ? `${tableStyle.width}px` : tableStyle.width;
     }

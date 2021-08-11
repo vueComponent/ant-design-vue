@@ -50,7 +50,7 @@ const Row: FunctionalComponent<RowProps> = props => {
       if (typeof component === 'string') {
         return (
           <Cell
-            key={`${type}-${key || index}`}
+            key={`${type}-${String(key) || index}`}
             class={className}
             style={style}
             labelStyle={{ ...rootLabelStyle.value, ...labelStyle }}
@@ -68,7 +68,7 @@ const Row: FunctionalComponent<RowProps> = props => {
 
       return [
         <Cell
-          key={`label-${key || index}`}
+          key={`label-${String(key) || index}`}
           class={className}
           style={{ ...rootLabelStyle.value, ...style, ...labelStyle }}
           span={1}
@@ -79,7 +79,7 @@ const Row: FunctionalComponent<RowProps> = props => {
           label={label}
         />,
         <Cell
-          key={`content-${key || index}`}
+          key={`content-${String(key) || index}`}
           class={className}
           style={{ ...rootContentStyle.value, ...style, ...contentStyle }}
           span={span * 2 - 1}

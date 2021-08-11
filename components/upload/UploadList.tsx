@@ -64,7 +64,7 @@ export default defineComponent({
           previewFile(file.originFileObj).then(previewDataUrl => {
             // Need append '' to avoid dead loop
             file.thumbUrl = previewDataUrl || '';
-            this.$forceUpdate();
+            (this as any).$forceUpdate();
           });
         }
       });

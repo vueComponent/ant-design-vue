@@ -10,6 +10,22 @@
 
 ---
 
+## 2.2.5
+
+`2021-08-11`
+
+- 🌟 `Select` 支持通过 option 插槽定制化节点 [68c1f4](https://github.com/vueComponent/ant-design-vue/commit/68c1f4550108a3a6bbe4f1b2c5c168523fd6c84a)
+- 🐞 修复开发环境下弹窗类组件在低版本 chrome 下，不显示问题，并避免弹窗闪动 [#4409](https://github.com/vueComponent/ant-design-vue/issues/4409)
+- 🐞 修复 `Select` 打开时没有滚动到激活位置问题 [ccb240](https://github.com/vueComponent/ant-design-vue/commit/ccb24016c07632f49550646c971060c402586c67)
+
+## 2.2.4
+
+`2021-08-10`
+
+- 🌟 支持 Vue@3.2 [#4490](https://github.com/vueComponent/ant-design-vue/issues/4490)
+- 🌟 自动隐藏 `Table` 横向滚动条 [#4484](https://github.com/vueComponent/ant-design-vue/issues/4484)
+- 🐞 修复 `Progress` trailColor 不生效问题 [#4483](https://github.com/vueComponent/ant-design-vue/issues/4483)
+
 ## 2.2.3
 
 `2021-08-07`

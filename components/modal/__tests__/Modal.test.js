@@ -65,4 +65,17 @@ describe('Modal', () => {
       expect(wrapper.html()).toMatchSnapshot();
     });
   });
+
+  it('should work with getContainer=false', async () => {
+    const wrapper1 = mount(Modal, {
+      sync: false,
+      props: {
+        getContainer: false,
+        visible: true,
+      },
+    });
+    await asyncExpect(() => {
+      expect(wrapper1.html()).toMatchSnapshot();
+    });
+  });
 });

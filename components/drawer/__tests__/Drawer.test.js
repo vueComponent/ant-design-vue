@@ -130,4 +130,21 @@ describe('Drawer', () => {
       expect(wrapper.html()).toMatchSnapshot();
     });
   });
+
+  it('footer should work', async () => {
+    const props = {
+      props: {
+        getContainer: false,
+      },
+      slots: {
+        default: () => 'Here is content of Drawer',
+        footer: () => 'Test footer',
+      },
+      sync: false,
+    };
+    const wrapper = mount(Drawer, props);
+    await asyncExpect(() => {
+      expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
 });

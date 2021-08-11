@@ -173,6 +173,12 @@ const Drawer = defineComponent({
         )
       );
     },
+    renderFooter(prefixCls: string) {
+      if (!this.$slots.footer) {
+        return null;
+      }
+      return <div class={`${prefixCls}-footer`}>{this.$slots.footer()}</div>;
+    },
     // render drawer body dom
     renderBody(prefixCls: string) {
       if (this.destroyClose && !this.visible) {
@@ -200,6 +206,7 @@ const Drawer = defineComponent({
           <div key="body" class={`${prefixCls}-body`} style={bodyStyle}>
             {this.$slots.default?.()}
           </div>
+          {this.renderFooter(prefixCls)}
         </div>
       );
     },

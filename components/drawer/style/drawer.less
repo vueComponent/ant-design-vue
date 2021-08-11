@@ -184,6 +184,7 @@
     background: @drawer-bg;
     border-bottom: @border-width-base @border-style-base @border-color-split;
     border-radius: @border-radius-base @border-radius-base 0 0;
+    flex-shrink: 0;
   }
 
   &-header-no-title {
@@ -192,14 +193,23 @@
   }
 
   &-body {
+    flex: 1;
     padding: @drawer-body-padding;
     font-size: @font-size-base;
     line-height: @line-height-base;
     word-wrap: break-word;
+    overflow: auto;
   }
   &-wrapper-body {
     height: 100%;
-    overflow: auto;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-footer {
+    padding: @drawer-footer-padding;
+    border-top: @border-width-base @border-style-base @border-color-split;
+    flex-shrink: 0;
   }
 
   &-mask {

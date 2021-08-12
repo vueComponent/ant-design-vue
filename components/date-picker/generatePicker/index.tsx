@@ -17,8 +17,6 @@ import type { TimePickerLocale } from '../../time-picker';
 import generateSinglePicker from './generateSinglePicker';
 import generateRangePicker from './generateRangePicker';
 import type { SizeType } from '../../config-provider';
-import type { ExtraDatePickerProps, ExtraRangePickerProps } from './props';
-import type { DefineComponent } from 'vue';
 
 export const Components = { button: PickerButton, rangeItem: PickerTag };
 
@@ -127,20 +125,17 @@ export type RangePickerProps<DateType> =
   | RangePickerDateProps<DateType>
   | RangePickerTimeProps<DateType>;
 
-function generatePicker<DateType>(
+function generatePicker<DateType, ExtraProps extends Record<string, any> = {}>(
   generateConfig: GenerateConfig<DateType>,
-  extraProps: Record<string, any> = {},
+  extraProps?: ExtraProps,
 ) {
-  type DatePickerProps = PickerProps<DateType> & ExtraDatePickerProps<DateType>;
   // =========================== Picker ===========================
   const { DatePicker, WeekPicker, MonthPicker, YearPicker, TimePicker, QuarterPicker } =
-    generateSinglePicker<DateType>(generateConfig, extraProps);
+    generateSinglePicker<DateType, ExtraProps>(generateConfig, extraProps);
 
   // ======================== Range Picker ========================
   const RangePicker = generateRangePicker<DateType>(generateConfig, extraProps);
 
-  // 类型过于复杂，使用 as 避免 TS7056 错误
-  // error TS7056: The inferred type of this node exceeds the maximum length the compiler will serialize. An explicit type annotation is needed.
   return {
     DatePicker,
     WeekPicker,
@@ -149,14 +144,6 @@ function generatePicker<DateType>(
     TimePicker,
     QuarterPicker,
     RangePicker,
-  } as unknown as {
-    DatePicker: DefineComponent<DatePickerProps>;
-    WeekPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
-    MonthPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
-    YearPicker: DefineComponent<Omit<PickerDateProps<DateType>, 'picker'>>;
-    TimePicker: DefineComponent<Omit<PickerTimeProps<DateType>, 'picker'>>;
-    QuarterPicker: DefineComponent<Omit<PickerTimeProps<DateType>, 'picker'>>;
-    RangePicker: DefineComponent<RangePickerProps<DateType> & ExtraRangePickerProps<DateType>>;
   };
 }
 

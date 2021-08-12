@@ -1,4 +1,4 @@
-import { computed, inject } from 'vue';
+import { inject } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import TableHeaderRow from './TableHeaderRow';
 
@@ -75,21 +75,20 @@ export default {
     columns: PropTypes.array.isRequired,
     expander: PropTypes.object.isRequired,
   },
-  setup(props) {
+  setup() {
     return {
       table: inject('table', {}),
-      rows: computed(() => parseHeaderRows(props.columns)),
     };
   },
 
   render() {
     const { sComponents: components, prefixCls, showHeader, customHeaderRow } = this.table;
-    const { expander, columns, fixed, rows } = this;
+    const { expander, columns, fixed } = this;
 
     if (!showHeader) {
       return null;
     }
-
+    const rows = parseHeaderRows(this.columns);
     expander.renderExpandIndentCell(rows, fixed);
 
     const HeaderWrapper = components.header.wrapper;

@@ -1,4 +1,5 @@
 import debounce from 'lodash-es/debounce';
+import ResizeObserver from 'resize-observer-polyfill';
 import classnames from '../../_util/classNames';
 import BaseMixin from '../../_util/BaseMixin';
 import defaultProps from './default-props';

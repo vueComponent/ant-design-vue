@@ -648,7 +648,7 @@ export default defineComponent({
       portal = (
         <Portal
           key="portal"
-          children={this.getComponent()}
+          v-slots={{ default: this.getComponent }}
           getContainer={this.getContainer}
           didUpdate={this.handlePortalUpdate}
         ></Portal>

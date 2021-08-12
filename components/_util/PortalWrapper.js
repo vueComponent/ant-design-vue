@@ -141,8 +141,8 @@ export default defineComponent({
       portal = (
         <Portal
           getContainer={this.getDomContainer}
-          children={children(childProps)}
           ref={this.savePortal}
+          v-slots={{ default: () => children(childProps) }}
         ></Portal>
       );
     }

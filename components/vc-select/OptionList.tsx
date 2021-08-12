@@ -147,22 +147,20 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
     watch(
       () => props.open,
       () => {
-        if (!props.multiple && props.open && props.values.size === 1) {
-          const value = Array.from(props.values)[0];
-          const index = memoFlattenOptions.value.findIndex(({ data }) => data.value === value);
-          setActive(index);
-          nextTick(() => {
+        nextTick(() => {
+          if (!props.multiple && props.open && props.values.size === 1) {
+            const value = Array.from(props.values)[0];
+            const index = memoFlattenOptions.value.findIndex(({ data }) => data.value === value);
+            setActive(index);
             scrollIntoView(index);
-          });
-        }
-        // Force trigger scrollbar visible when open
-        if (props.open) {
-          nextTick(() => {
+          }
+          // Force trigger scrollbar visible when open
+          if (props.open) {
             listRef.current?.scrollTo(undefined);
-          });
-        }
+          }
+        });
       },
-      { immediate: true, flush: 'post' },
+      { immediate: true },
     );
 
     // ========================== Values ==========================

@@ -131,6 +131,7 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
           [`${dropdownPrefixCls}-empty`]: empty,
         })}
         popupStyle={popupStyle}
+        // destroyPopupOnHide
         // getTriggerDOMNode={getTriggerDOMNode}
       >
         {getSlot(this)[0]}

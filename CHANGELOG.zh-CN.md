@@ -10,6 +10,14 @@
 
 ---
 
+## 2.2.6
+
+`2021-08-12`
+
+- 🐞 修复 `Table` 展开列表渲染错位问题 [#4507](https://github.com/vueComponent/ant-design-vue/issues/4507)
+- 🐞 修复 `Rate` 自定义 `character` 插槽未生效问题 [#4509](https://github.com/vueComponent/ant-design-vue/issues/4509)
+- 🐞 添加 resize-observer-polyfill, 修复在低版本 Chrome 下报错问题 [#4508](https://github.com/vueComponent/ant-design-vue/issues/4508)
+
 ## 2.2.5
 
 `2021-08-11`

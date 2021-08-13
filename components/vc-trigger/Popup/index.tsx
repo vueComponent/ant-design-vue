@@ -1,0 +1,46 @@
+import { defineComponent, ref, watch } from 'vue';
+import { popupProps } from './interface';
+import Mask from './Mask';
+import MobilePopupInner from './MobilePopupInner';
+import PopupInner from './PopupInner';
+
+export default defineComponent({
+  props: popupProps,
+  inheritAttrs: false,
+  name: 'Popup',
+  setup(props, { attrs, slots }) {
+    const innerVisible = ref(false);
+    const inMobile = ref(false);
+    const popupRef = ref();
+    watch(
+      [() => props.visible, () => props.mobile],
+      () => {
+        innerVisible.value = props.visible;
+        if (props.visible && props.mobile) {
+          inMobile.value = true;
+        }
+      },
+      { immediate: true, flush: 'post' },
+    );
+    return () => {
+      const cloneProps = { ...props, ...attrs, visible: innerVisible.value };
+      const popupNode = inMobile.value ? (
+        <MobilePopupInner
+          {...cloneProps}
+          mobile={props.mobile}
+          ref={popupRef}
+          v-slots={{ default: slots.default }}
+        ></MobilePopupInner>
+      ) : (
+        <PopupInner {...cloneProps} ref={popupRef} v-slots={{ default: slots.default }} />
+      );
+
+      return (
+        <div>
+          <Mask {...cloneProps} />
+          {popupNode}
+        </div>
+      );
+    };
+  },
+});

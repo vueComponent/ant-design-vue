@@ -1,7 +1,6 @@
-import { computed, defineComponent, inject, provide, ref } from 'vue';
+import { defineComponent, inject, provide } from 'vue';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
-import raf from '../_util/raf';
 import {
   hasProp,
   getComponent,
@@ -25,10 +24,7 @@ function returnEmptyString() {
   return '';
 }
 
-function returnDocument(element) {
-  if (element) {
-    return element.ownerDocument;
-  }
+function returnDocument() {
   return window.document;
 }
 const ALL_HANDLERS = [
@@ -80,29 +76,18 @@ export default defineComponent({
     maskAnimation: PropTypes.string,
     stretch: PropTypes.string,
     alignPoint: PropTypes.looseBool, // Maybe we can support user pass position in the future
-    autoDestroy: PropTypes.looseBool.def(false),
-    mobile: Object,
   },
-  setup(props) {
-    const align = computed(() => {
-      const { popupPlacement, popupAlign, builtinPlacements } = props;
-      if (popupPlacement && builtinPlacements) {
-        return getAlignFromPlacement(builtinPlacements, popupPlacement, popupAlign);
-      }
-      return popupAlign;
-    });
+  setup() {
     return {
       vcTriggerContext: inject('vcTriggerContext', {}),
+      savePopupRef: inject('savePopupRef', noop),
       dialogContext: inject('dialogContext', null),
-      popupRef: ref(null),
-      triggerRef: ref(null),
-      align,
     };
   },
   data() {
     const props = this.$props;
     let popupVisible;
-    if (this.popupVisible !== undefined) {
+    if (hasProp(this, 'popupVisible')) {
       popupVisible = !!props.popupVisible;
     } else {
       popupVisible = !!props.defaultPopupVisible;
@@ -112,12 +97,12 @@ export default defineComponent({
         this.fireEvents(h, e);
       };
     });
+    this._component = null;
     this.focusTime = null;
     this.clickOutsideHandler = null;
     this.contextmenuOutsideHandler1 = null;
     this.contextmenuOutsideHandler2 = null;
     this.touchOutsideHandler = null;
-    this.attachId = null;
     return {
       prevPopupVisible: popupVisible,
       sPopupVisible: popupVisible,
@@ -154,7 +139,6 @@ export default defineComponent({
     this.clearDelayTimer();
     this.clearOutsideHandler();
     clearTimeout(this.mouseDownTimeout);
-    raf.cancel(this.attachId);
   },
   methods: {
     updatedCal() {
@@ -168,7 +152,7 @@ export default defineComponent({
       if (state.sPopupVisible) {
         let currentDocument;
         if (!this.clickOutsideHandler && (this.isClickToHide() || this.isContextmenuToShow())) {
-          currentDocument = props.getDocument(this.getRootDomNode());
+          currentDocument = props.getDocument();
           this.clickOutsideHandler = addEventListener(
             currentDocument,
             'mousedown',
@@ -177,7 +161,7 @@ export default defineComponent({
         }
         // always hide on mobile
         if (!this.touchOutsideHandler) {
-          currentDocument = currentDocument || props.getDocument(this.getRootDomNode());
+          currentDocument = currentDocument || props.getDocument();
           this.touchOutsideHandler = addEventListener(
             currentDocument,
             'touchstart',
@@ -187,7 +171,7 @@ export default defineComponent({
         }
         // close popup when trigger type contains 'onContextmenu' and document is scrolling.
         if (!this.contextmenuOutsideHandler1 && this.isContextmenuToShow()) {
-          currentDocument = currentDocument || props.getDocument(this.getRootDomNode());
+          currentDocument = currentDocument || props.getDocument();
           this.contextmenuOutsideHandler1 = addEventListener(
             currentDocument,
             'scroll',
@@ -231,7 +215,9 @@ export default defineComponent({
         e &&
         e.relatedTarget &&
         !e.relatedTarget.setTimeout &&
-        contains(this.popupRef?.getPopupDomNode(), e.relatedTarget)
+        this._component &&
+        this._component.getPopupDomNode &&
+        contains(this._component.getPopupDomNode(), e.relatedTarget)
       ) {
         return;
       }
@@ -337,37 +323,19 @@ export default defineComponent({
         return;
       }
       const target = event.target;
-      const root = this.getRootDomNode();
-      const popupNode = this.getPopupDomNode();
-      if (
-        // mousedown on the target should also close popup when action is contextMenu.
-        // https://github.com/ant-design/ant-design/issues/29853
-        (!contains(root, target) || this.isContextMenuOnly()) &&
-        !contains(popupNode, target) &&
-        !this.hasPopupMouseDown
-      ) {
+      const root = findDOMNode(this);
+      if (!contains(root, target) && !this.hasPopupMouseDown) {
         this.close();
       }
     },
     getPopupDomNode() {
-      // for test
-      return this.popupRef?.getElement() || null;
+      if (this._component && this._component.getPopupDomNode) {
+        return this._component.getPopupDomNode();
+      }
+      return null;
     },
 
     getRootDomNode() {
-      const { getTriggerDOMNode } = this.$props;
-      if (getTriggerDOMNode) {
-        return getTriggerDOMNode(this.triggerRef);
-      }
-
-      try {
-        const domNode = findDOMNode(this.triggerRef);
-        if (domNode) {
-          return domNode;
-        }
-      } catch (err) {
-        // Do nothing
-      }
       return findDOMNode(this);
     },
 
@@ -398,6 +366,10 @@ export default defineComponent({
       }
       return popupAlign;
     },
+    savePopup(node) {
+      this._component = node;
+      this.savePopupRef(node);
+    },
     getComponent() {
       const self = this;
       const mouseProps = {};
@@ -414,6 +386,7 @@ export default defineComponent({
         prefixCls,
         destroyPopupOnHide,
         popupClassName,
+        action,
         popupAnimation,
         popupTransitionName,
         popupStyle,
@@ -423,16 +396,16 @@ export default defineComponent({
         zIndex,
         stretch,
         alignPoint,
-        mobile,
-        forceRender,
       } = self.$props;
       const { sPopupVisible, point } = this.$data;
+      const align = this.getPopupAlign();
       const popupProps = {
         prefixCls,
         destroyPopupOnHide,
         visible: sPopupVisible,
         point: alignPoint ? point : null,
-        align: this.align,
+        action,
+        align,
         animation: popupAnimation,
         getClassNameFromAlign: handleGetPopupClassFromAlign,
         stretch,
@@ -444,53 +417,28 @@ export default defineComponent({
         maskTransitionName,
         getContainer,
         popupClassName,
-        style: popupStyle,
+        popupStyle,
         onAlign: $attrs.onPopupAlign || noop,
         ...mouseProps,
-        ref: 'popupRef',
-        mobile,
-        forceRender,
+        ref: this.savePopup,
       };
       return <Popup {...popupProps}>{getComponent(self, 'popup')}</Popup>;
     },
 
-    attachParent(popupContainer) {
-      raf.cancel(this.attachId);
-
-      const { getPopupContainer, getDocument } = this.$props;
-      const domNode = this.getRootDomNode();
-
-      let mountNode;
-      if (!getPopupContainer) {
-        mountNode = getDocument(this.getRootDomNode()).body;
-      } else if (domNode || getPopupContainer.length === 0) {
-        // Compatible for legacy getPopupContainer with domNode argument.
-        // If no need `domNode` argument, will call directly.
-        // https://codesandbox.io/s/eloquent-mclean-ss93m?file=/src/App.js
-        mountNode = getPopupContainer(domNode);
-      }
-
-      if (mountNode) {
-        mountNode.appendChild(popupContainer);
-      } else {
-        // Retry after frame render in case parent not ready
-        this.attachId = raf(() => {
-          this.attachParent(popupContainer);
-        });
-      }
-    },
-
     getContainer() {
-      const { $props: props } = this;
-      const { getDocument } = props;
-      const popupContainer = getDocument(this.getRootDomNode()).createElement('div');
+      const { $props: props, dialogContext } = this;
+      const popupContainer = document.createElement('div');
       // Make sure default popup container will never cause scrollbar appearing
       // https://github.com/react-component/trigger/issues/41
       popupContainer.style.position = 'absolute';
       popupContainer.style.top = '0';
       popupContainer.style.left = '0';
       popupContainer.style.width = '100%';
-      this.attachParent(popupContainer);
+      const mountNode = props.getPopupContainer
+        ? props.getPopupContainer(findDOMNode(this), dialogContext)
+        : props.getDocument().body;
+      mountNode.appendChild(popupContainer);
+      this.popupContainer = popupContainer;
       return popupContainer;
     },
 
@@ -507,7 +455,7 @@ export default defineComponent({
         onPopupVisibleChange && onPopupVisibleChange(sPopupVisible);
       }
       // Always record the point position since mouseEnterDelay will delay the show
-      if (alignPoint && event && sPopupVisible) {
+      if (alignPoint && event) {
         this.setPoint(event);
       }
     },
@@ -586,11 +534,6 @@ export default defineComponent({
       return action.indexOf('click') !== -1 || showAction.indexOf('click') !== -1;
     },
 
-    isContextMenuOnly() {
-      const { action } = this.$props;
-      return action === 'contextmenu' || (action.length === 1 && action[0] === 'contextmenu');
-    },
-
     isContextmenuToShow() {
       const { action, showAction } = this.$props;
       return action.indexOf('contextmenu') !== -1 || showAction.indexOf('contextmenu') !== -1;
@@ -621,8 +564,8 @@ export default defineComponent({
       return action.indexOf('focus') !== -1 || hideAction.indexOf('blur') !== -1;
     },
     forcePopupAlign() {
-      if (this.$data.sPopupVisible) {
-        this.popupRef?.forceAlign();
+      if (this.$data.sPopupVisible && this._component && this._component.alignInstance) {
+        this._component.alignInstance.forceAlign();
       }
     },
     fireEvents(type, e) {
@@ -642,7 +585,7 @@ export default defineComponent({
   render() {
     const { sPopupVisible, $attrs } = this;
     const children = filterEmpty(getSlot(this));
-    const { forceRender, alignPoint, autoDestroy } = this.$props;
+    const { forceRender, alignPoint } = this.$props;
 
     if (children.length > 1) {
       warning(false, 'Trigger children just support only one default', true);
@@ -698,10 +641,10 @@ export default defineComponent({
     if (childrenClassName) {
       newChildProps.class = childrenClassName;
     }
-    const trigger = cloneElement(child, { ...newChildProps, ref: 'triggerRef' }, true, true);
+    const trigger = cloneElement(child, newChildProps);
     let portal;
     // prevent unmounting after it's rendered
-    if (sPopupVisible || this.popupRef || forceRender) {
+    if (sPopupVisible || this._component || forceRender) {
       portal = (
         <Portal
           key="portal"
@@ -711,14 +654,6 @@ export default defineComponent({
         ></Portal>
       );
     }
-    if (!sPopupVisible && autoDestroy) {
-      portal = null;
-    }
-    return (
-      <>
-        {portal}
-        {trigger}
-      </>
-    );
+    return [portal, trigger];
   },
 });

@@ -13,7 +13,7 @@ function preventDefault(e) {
 }
 
 function defaultParser(input) {
-  return input.replace(/[^\w\.-]+/g, '');
+  return input.replace(/[^\d\.-]+/g, '');
 }
 
 /**

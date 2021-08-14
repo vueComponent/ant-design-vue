@@ -1,4 +1,4 @@
-import { computed, defineComponent, inject, provide, ref } from 'vue';
+import { computed, defineComponent, HTMLAttributes, inject, provide, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
 import raf from '../_util/raf';
@@ -12,15 +12,15 @@ import {
 } from '../_util/props-util';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../_util/requestAnimationTimeout';
 import addEventListener from '../vc-util/Dom/addEventListener';
-import warning from '../_util/warning';
 import Popup from './Popup';
-import { getAlignFromPlacement, getAlignPopupClassName, noop } from './utils';
+import { getAlignFromPlacement, getAlignPopupClassName } from './utils/alignUtil';
 import BaseMixin from '../_util/BaseMixin';
 import Portal from '../_util/Portal';
 import classNames from '../_util/classNames';
 import { cloneElement } from '../_util/vnode';
 import supportsPassive from '../_util/supportsPassive';
 
+function noop() {}
 function returnEmptyString() {
   return '';
 }
@@ -59,7 +59,7 @@ export default defineComponent({
     popupClassName: PropTypes.string.def(''),
     popupPlacement: PropTypes.string,
     builtinPlacements: PropTypes.object,
-    popupTransitionName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    popupTransitionName: PropTypes.string,
     popupAnimation: PropTypes.any,
     mouseEnterDelay: PropTypes.number.def(0),
     mouseLeaveDelay: PropTypes.number.def(0.1),
@@ -76,12 +76,13 @@ export default defineComponent({
     popupAlign: PropTypes.object.def(() => ({})),
     popupVisible: PropTypes.looseBool,
     defaultPopupVisible: PropTypes.looseBool.def(false),
-    maskTransitionName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    maskTransitionName: PropTypes.string,
     maskAnimation: PropTypes.string,
     stretch: PropTypes.string,
     alignPoint: PropTypes.looseBool, // Maybe we can support user pass position in the future
     autoDestroy: PropTypes.looseBool.def(false),
     mobile: Object,
+    getTriggerDOMNode: Function,
   },
   setup(props) {
     const align = computed(() => {
@@ -92,11 +93,25 @@ export default defineComponent({
       return popupAlign;
     });
     return {
-      vcTriggerContext: inject('vcTriggerContext', {}),
-      dialogContext: inject('dialogContext', null),
+      vcTriggerContext: inject(
+        'vcTriggerContext',
+        {} as { onPopupMouseDown?: (...args: any[]) => void },
+      ),
       popupRef: ref(null),
       triggerRef: ref(null),
       align,
+      focusTime: null,
+      clickOutsideHandler: null,
+      contextmenuOutsideHandler1: null,
+      contextmenuOutsideHandler2: null,
+      touchOutsideHandler: null,
+      attachId: null,
+      delayTimer: null,
+      hasPopupMouseDown: false,
+      preClickTime: null,
+      preTouchTime: null,
+      mouseDownTimeout: null,
+      childOriginEvents: {},
     };
   },
   data() {
@@ -108,16 +123,11 @@ export default defineComponent({
       popupVisible = !!props.defaultPopupVisible;
     }
     ALL_HANDLERS.forEach(h => {
-      this[`fire${h}`] = e => {
-        this.fireEvents(h, e);
+      (this as any)[`fire${h}`] = e => {
+        (this as any).fireEvents(h, e);
       };
     });
-    this.focusTime = null;
-    this.clickOutsideHandler = null;
-    this.contextmenuOutsideHandler1 = null;
-    this.contextmenuOutsideHandler2 = null;
-    this.touchOutsideHandler = null;
-    this.attachId = null;
+
     return {
       prevPopupVisible: popupVisible,
       sPopupVisible: popupVisible,
@@ -133,7 +143,9 @@ export default defineComponent({
     },
   },
   created() {
-    provide('vcTriggerContext', this);
+    provide('vcTriggerContext', {
+      onPopupMouseDown: this.onPopupMouseDown,
+    });
   },
   deactivated() {
     this.setPopupVisible(false);
@@ -318,7 +330,7 @@ export default defineComponent({
         this.setPopupVisible(!this.$data.sPopupVisible, event);
       }
     },
-    onPopupMouseDown(...args) {
+    onPopupMouseDown(...args: any[]) {
       const { vcTriggerContext = {} } = this;
       this.hasPopupMouseDown = true;
 
@@ -400,7 +412,7 @@ export default defineComponent({
     },
     getComponent() {
       const self = this;
-      const mouseProps = {};
+      const mouseProps: HTMLAttributes = {};
       if (this.isMouseEnterToShow()) {
         mouseProps.onMouseenter = self.onPopupMouseenter;
       }
@@ -450,7 +462,7 @@ export default defineComponent({
         ref: 'popupRef',
         mobile,
         forceRender,
-      };
+      } as any;
       return <Popup {...popupProps}>{getComponent(self, 'popup')}</Popup>;
     },
 
@@ -494,7 +506,7 @@ export default defineComponent({
       return popupContainer;
     },
 
-    setPopupVisible(sPopupVisible, event) {
+    setPopupVisible(sPopupVisible: boolean, event?: any) {
       const { alignPoint, sPopupVisible: prevPopupVisible, onPopupVisibleChange } = this;
       this.clearDelayTimer();
       if (prevPopupVisible !== sPopupVisible) {
@@ -528,7 +540,7 @@ export default defineComponent({
         this.afterPopupVisibleChange(this.sPopupVisible);
       }
     },
-    delaySetPopupVisible(visible, delayS, event) {
+    delaySetPopupVisible(visible: boolean, delayS: number, event?: any) {
       const delay = delayS * 1000;
       this.clearDelayTimer();
       if (delay) {
@@ -571,14 +583,14 @@ export default defineComponent({
       }
     },
 
-    createTwoChains(event) {
+    createTwoChains(event: string) {
       let fn = () => {};
       const events = getEvents(this);
       if (this.childOriginEvents[event] && events[event]) {
         return this[`fire${event}`];
       }
       fn = this.childOriginEvents[event] || events[event] || fn;
-      return fn;
+      return fn as any;
     },
 
     isClickToShow() {
@@ -625,7 +637,7 @@ export default defineComponent({
         this.popupRef?.forceAlign();
       }
     },
-    fireEvents(type, e) {
+    fireEvents(type: string, e: Event) {
       if (this.childOriginEvents[type]) {
         this.childOriginEvents[type](e);
       }
@@ -644,12 +656,9 @@ export default defineComponent({
     const children = filterEmpty(getSlot(this));
     const { forceRender, alignPoint, autoDestroy } = this.$props;
 
-    if (children.length > 1) {
-      warning(false, 'Trigger children just support only one default', true);
-    }
     const child = children[0];
     this.childOriginEvents = getEvents(child);
-    const newChildProps = {
+    const newChildProps: any = {
       key: 'trigger',
     };
 
@@ -689,7 +698,10 @@ export default defineComponent({
     } else {
       newChildProps.onFocus = this.createTwoChains('onFocus');
       newChildProps.onBlur = e => {
-        if (e && (!e.relatedTarget || !contains(e.target, e.relatedTarget))) {
+        if (
+          e &&
+          (!e.relatedTarget || !contains(e.target as HTMLElement, e.relatedTarget as HTMLElement))
+        ) {
           this.createTwoChains('onBlur')(e);
         }
       };

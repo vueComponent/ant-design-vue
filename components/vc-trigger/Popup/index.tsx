@@ -8,7 +8,7 @@ export default defineComponent({
   props: popupProps,
   inheritAttrs: false,
   name: 'Popup',
-  setup(props, { attrs, slots }) {
+  setup(props, { attrs, slots, expose }) {
     const innerVisible = ref(false);
     const inMobile = ref(false);
     const popupRef = ref();
@@ -22,6 +22,14 @@ export default defineComponent({
       },
       { immediate: true, flush: 'post' },
     );
+    expose({
+      forceAlign: () => {
+        popupRef.value?.forceAlign();
+      },
+      getElement: () => {
+        popupRef.value?.getElement();
+      },
+    });
     return () => {
       const cloneProps = { ...props, ...attrs, visible: innerVisible.value };
       const popupNode = inMobile.value ? (

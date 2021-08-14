@@ -1,4 +1,4 @@
-import { defineComponent, inject, provide, ref } from 'vue';
+import { computed, defineComponent, inject, provide, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
 import raf from '../_util/raf';
@@ -81,13 +81,22 @@ export default defineComponent({
     stretch: PropTypes.string,
     alignPoint: PropTypes.looseBool, // Maybe we can support user pass position in the future
     autoDestroy: PropTypes.looseBool.def(false),
+    mobile: Object,
   },
-  setup() {
+  setup(props) {
+    const align = computed(() => {
+      const { popupPlacement, popupAlign, builtinPlacements } = props;
+      if (popupPlacement && builtinPlacements) {
+        return getAlignFromPlacement(builtinPlacements, popupPlacement, popupAlign);
+      }
+      return popupAlign;
+    });
     return {
       vcTriggerContext: inject('vcTriggerContext', {}),
       dialogContext: inject('dialogContext', null),
       popupRef: ref(null),
       triggerRef: ref(null),
+      align,
     };
   },
   data() {
@@ -222,7 +231,7 @@ export default defineComponent({
         e &&
         e.relatedTarget &&
         !e.relatedTarget.setTimeout &&
-        contains(this.popupRef?.getPopupDomNode(), e.relatedTarget)
+        contains(this.popupRef?.getElement(), e.relatedTarget)
       ) {
         return;
       }
@@ -418,13 +427,12 @@ export default defineComponent({
         forceRender,
       } = self.$props;
       const { sPopupVisible, point } = this.$data;
-      const align = this.getPopupAlign();
       const popupProps = {
         prefixCls,
         destroyPopupOnHide,
         visible: sPopupVisible,
         point: alignPoint ? point : null,
-        align,
+        align: this.align,
         animation: popupAnimation,
         getClassNameFromAlign: handleGetPopupClassFromAlign,
         stretch,
@@ -436,7 +444,7 @@ export default defineComponent({
         maskTransitionName,
         getContainer,
         popupClassName,
-        popupStyle,
+        style: popupStyle,
         onAlign: $attrs.onPopupAlign || noop,
         ...mouseProps,
         ref: 'popupRef',

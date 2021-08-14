@@ -154,7 +154,7 @@ export default defineComponent({
           onBeforeAppear={onShowPrepare}
           onBeforeEnter={onShowPrepare}
         >
-          {!destroyPopupOnHide ? (
+          {!destroyPopupOnHide || visible ? (
             <Align
               v-show={visible}
               target={getAlignTarget()}
@@ -170,10 +170,12 @@ export default defineComponent({
                 onMouseenter={onMouseenter}
                 onMouseleave={onMouseleave}
                 onMousedown={withModifiers(onMousedown, ['capture'])}
-                onTouchstart={withModifiers(
-                  onTouchstart,
-                  supportsPassive ? ['capture', 'passive'] : ['capture'],
-                )}
+                {...{
+                  [supportsPassive ? 'onTouchstartPassive' : 'onTouchstart']: withModifiers(
+                    onTouchstart,
+                    ['capture'],
+                  ),
+                }}
                 style={mergedStyle}
               >
                 {childNode}

@@ -231,7 +231,7 @@ export default defineComponent({
         e &&
         e.relatedTarget &&
         !e.relatedTarget.setTimeout &&
-        contains(this.popupRef?.getPopupDomNode(), e.relatedTarget)
+        contains(this.popupRef?.getElement(), e.relatedTarget)
       ) {
         return;
       }

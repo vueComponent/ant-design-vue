@@ -76,7 +76,15 @@ const Select = defineComponent({
   props: SelectProps(),
   SECRET_COMBOBOX_MODE_DO_NOT_USE: 'SECRET_COMBOBOX_MODE_DO_NOT_USE',
   emits: ['change', 'update:value'],
-  slots: ['notFoundContent', 'suffixIcon', 'itemIcon', 'removeIcon', 'clearIcon', 'dropdownRender'],
+  slots: [
+    'notFoundContent',
+    'suffixIcon',
+    'itemIcon',
+    'removeIcon',
+    'clearIcon',
+    'dropdownRender',
+    'option',
+  ],
   setup(props, { attrs, emit, slots, expose }) {
     const selectRef = ref(null);
 
@@ -194,6 +202,7 @@ const Select = defineComponent({
           dropdownClassName={rcSelectRtlDropDownClassName}
           onChange={triggerChange}
           dropdownRender={selectProps.dropdownRender || slots.dropdownRender}
+          v-slots={{ option: slots.option }}
         >
           {slots.default?.()}
         </RcSelect>

@@ -27,15 +27,10 @@ const BaseTable = {
   },
   methods: {
     getColumns(cols) {
-      const { columns = [], fixed } = this.$props;
-      const { table } = this;
-      const { prefixCls } = table.$props;
+      const { columns = [] } = this.$props;
       return (cols || columns).map(column => ({
         ...column,
-        className:
-          !!column.fixed && !fixed
-            ? classNames(`${prefixCls}-fixed-columns-in-body`, column.className, column.class)
-            : classNames(column.className, column.class),
+        className: classNames(column.className, column.class),
       }));
     },
     handleRowHover(isHover, key) {
@@ -44,7 +39,6 @@ const BaseTable = {
 
     renderRows(renderData, indent, ancestorKeys = []) {
       const {
-        columnManager,
         sComponents: components,
         prefixCls,
         childrenColumnName,
@@ -57,6 +51,7 @@ const BaseTable = {
         onRowMouseLeave = noop,
         rowRef,
       } = { ...this.table.$attrs, ...this.table.$props, ...this.table.$data };
+      const { columnManager } = this.store;
       const { getRowKey, fixed, expander, isAnyColumnsFixed } = this;
 
       const rows = [];
@@ -68,17 +63,17 @@ const BaseTable = {
           typeof rowClassName === 'string' ? rowClassName : rowClassName(record, i, indent);
 
         const onHoverProps = {};
-        if (columnManager.isAnyColumnsFixed()) {
+        if (columnManager.isAnyColumnsFixed) {
           onHoverProps.onHover = this.handleRowHover;
         }
 
         let leafColumns;
         if (fixed === 'left') {
-          leafColumns = columnManager.leftLeafColumns();
+          leafColumns = columnManager.leftLeafColumns;
         } else if (fixed === 'right') {
-          leafColumns = columnManager.rightLeafColumns();
+          leafColumns = columnManager.rightLeafColumns;
         } else {
-          leafColumns = this.getColumns(columnManager.leafColumns());
+          leafColumns = this.getColumns(columnManager.leafColumns);
         }
 
         const rowPrefixCls = `${prefixCls}-row`;
@@ -137,16 +132,13 @@ const BaseTable = {
 
   render() {
     const { sComponents: components, prefixCls, scroll, data } = this.table;
-    const { expander, tableClassName, hasHead, hasBody, fixed, isAnyColumnsFixed } = this.$props;
+    const { expander, tableClassName, hasHead, hasBody, fixed } = this.$props;
     const columns = this.getColumns();
     const tableStyle = {};
 
     if (!fixed && scroll.x) {
-      // 当有固定列时，width auto 会导致 body table 的宽度撑不开，从而固定列无法对齐
-      // 详情见：https://github.com/ant-design/ant-design/issues/22160
-      const tableWidthScrollX = isAnyColumnsFixed ? 'max-content' : 'auto';
       // not set width, then use content fixed width
-      tableStyle.width = scroll.x === true ? tableWidthScrollX : scroll.x;
+      tableStyle.width = scroll.x === true ? 'auto' : scroll.x;
       tableStyle.width =
         typeof tableStyle.width === 'number' ? `${tableStyle.width}px` : tableStyle.width;
     }

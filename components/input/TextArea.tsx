@@ -55,7 +55,7 @@ export default defineComponent({
       if (!hasProp(this, 'value')) {
         this.stateValue = value;
       } else {
-        this.$forceUpdate();
+        (this as any).$forceUpdate();
       }
       nextTick(() => {
         callback && callback();

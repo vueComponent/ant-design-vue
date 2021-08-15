@@ -108,9 +108,9 @@ function useForm(
   resetFields: (newValues?: Props) => void;
   validate: <T = any>(names?: namesType, option?: validateOptions) => Promise<T>;
   validateField: (
-    name?: string,
-    value?: any,
-    rules?: [Record<string, unknown>],
+    name: string,
+    value: any,
+    rules: Record<string, unknown>[],
     option?: validateOptions,
   ) => Promise<RuleError[]>;
   mergeValidateInfo: (items: ValidateInfo | ValidateInfo[]) => ValidateInfo;
@@ -236,8 +236,8 @@ function useForm(
   const validateField = (
     name: string,
     value: any,
-    rules: any,
-    option: validateOptions,
+    rules: Record<string, unknown>[],
+    option: validateOptions = {},
   ): Promise<RuleError[]> => {
     const promise = validateRules(
       [name],

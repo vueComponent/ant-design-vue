@@ -49,6 +49,8 @@ export const menuProps = {
   triggerSubMenuAction: { type: String as PropType<TriggerSubMenuAction>, default: 'hover' },
 
   getPopupContainer: Function as PropType<(node: HTMLElement) => HTMLElement>,
+
+  expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
 };
 
 export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
@@ -66,6 +68,7 @@ export default defineComponent({
     'click',
     'update:activeKey',
   ],
+  slots: ['expandIcon'],
   setup(props, { slots, emit }) {
     const { prefixCls, direction } = useConfigInject('menu', props);
     const store = ref<Record<string, StoreMenuInfo>>({});
@@ -364,13 +367,14 @@ export default defineComponent({
       siderCollapsed,
       defaultMotions: computed(() => (isMounted.value ? defaultMotions : null)),
       motion: computed(() => (isMounted.value ? props.motion : null)),
-      overflowDisabled: computed(() => undefined),
+      overflowDisabled: ref(undefined),
       onOpenChange: onInternalOpenChange,
       onItemClick: onInternalClick,
       registerMenuInfo,
       unRegisterMenuInfo,
       selectedSubMenuEventKeys,
-      isRootMenu: true,
+      isRootMenu: ref(true),
+      expandIcon: props.expandIcon || slots.expandIcon,
     });
     return () => {
       const childList = flattenChildren(slots.default?.());
@@ -387,7 +391,7 @@ export default defineComponent({
               // Always wrap provider to avoid sub node re-mount
               <MenuContextProvider
                 key={child.key}
-                props={{ overflowDisabled: computed(() => index > lastVisibleIndex.value) }}
+                overflowDisabled={index > lastVisibleIndex.value}
               >
                 {child}
               </MenuContextProvider>

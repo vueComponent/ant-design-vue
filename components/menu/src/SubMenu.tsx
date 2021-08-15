@@ -12,6 +12,8 @@ import InlineSubMenuList from './InlineSubMenuList';
 import Transition, { getTransitionProps } from '../../_util/transition';
 import { cloneElement } from '../../_util/vnode';
 import Overflow from '../../vc-overflow';
+import devWarning from '../../vc-util/devWarning';
+import isValid from '../../_util/isValid';
 
 let indexGuid = 0;
 
@@ -24,6 +26,7 @@ const subMenuProps = {
   popupOffset: Array as PropType<number[]>,
   internalPopupClose: Boolean,
   eventKey: String,
+  expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
 };
 
 export type SubMenuProps = Partial<ExtractPropTypes<typeof subMenuProps>>;
@@ -32,20 +35,23 @@ export default defineComponent({
   name: 'ASubMenu',
   inheritAttrs: false,
   props: subMenuProps,
-  slots: ['icon', 'title'],
+  slots: ['icon', 'title', 'expandIcon'],
   emits: ['titleClick', 'mouseenter', 'mouseleave'],
   setup(props, { slots, attrs, emit }) {
     useProvideFirstLevel(false);
 
     const instance = getCurrentInstance();
-    const key =
-      instance.vnode.key !== null ? instance.vnode.key : `sub_menu_${++indexGuid}_$$_not_set_key`;
-
+    const vnodeKey =
+      typeof instance.vnode.key === 'symbol' ? String(instance.vnode.key) : instance.vnode.key;
+    devWarning(
+      typeof instance.vnode.key !== 'symbol',
+      'SubMenu',
+      `SubMenu \`:key="${String(vnodeKey)}"\` not support Symbol type`,
+    );
+    const key = isValid(vnodeKey) ? vnodeKey : `sub_menu_${++indexGuid}_$$_not_set_key`;
     const eventKey =
       props.eventKey ??
-      (instance.vnode.key !== null
-        ? `sub_menu_${++indexGuid}_$$_${instance.vnode.key}`
-        : (key as string));
+      (isValid(vnodeKey) ? `sub_menu_${++indexGuid}_$$_${vnodeKey}` : (key as string));
     const { parentEventKeys, parentInfo, parentKeys } = useInjectKeyPath();
     const keysPath = computed(() => [...parentKeys.value, key]);
     const eventKeysPath = computed(() => [...parentEventKeys.value, eventKey]);
@@ -84,6 +90,7 @@ export default defineComponent({
       selectedSubMenuEventKeys,
       motion,
       defaultMotions,
+      expandIcon: menuExpandIcon,
     } = useInjectMenu();
 
     registerMenuInfo(eventKey, menuInfo);
@@ -226,6 +233,7 @@ export default defineComponent({
       const icon = getPropsSlot(slots, props, 'icon');
       const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
+      const expandIcon = props.expandIcon || slots.expandIcon || menuExpandIcon;
       let titleNode = (
         <div
           style={directionStyle.value}
@@ -244,8 +252,8 @@ export default defineComponent({
           {title}
 
           {/* Only non-horizontal mode shows the icon */}
-          {mode.value !== 'horizontal' && slots.expandIcon ? (
-            slots.expandIcon({ ...props, isOpen: open.value })
+          {mode.value !== 'horizontal' && expandIcon ? (
+            expandIcon({ ...props, isOpen: open.value })
           ) : (
             <i class={`${subMenuPrefixClsValue}-arrow`} />
           )}
@@ -265,12 +273,7 @@ export default defineComponent({
             onVisibleChange={onPopupVisibleChange}
             v-slots={{
               popup: ({ visible }) => (
-                <MenuContextProvider
-                  props={{
-                    mode: subMenuTriggerModeRef,
-                    isRootMenu: false,
-                  }}
-                >
+                <MenuContextProvider mode={subMenuTriggerModeRef.value} isRootMenu={false}>
                   <Transition {...mergedMotion.value}>
                     <SubMenuList v-show={visible} id={popupId} ref={popupRef}>
                       {slots.default?.()}
@@ -283,9 +286,13 @@ export default defineComponent({
             {titleNode}
           </PopupTrigger>
         );
+      } else {
+        // 包裹一层，保持结构一致，防止动画丢失
+        // https://github.com/vueComponent/ant-design-vue/issues/4325
+        titleNode = <PopupTrigger>{titleNode}</PopupTrigger>;
       }
       return (
-        <MenuContextProvider props={{ mode: renderMode }}>
+        <MenuContextProvider mode={renderMode.value}>
           <Overflow.Item
             component="li"
             {...attrs}

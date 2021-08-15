@@ -79,7 +79,7 @@ const modalProps = {
   wrapClassName: PropTypes.string,
   maskTransitionName: PropTypes.string,
   transitionName: PropTypes.string,
-  getContainer: PropTypes.func,
+  getContainer: PropTypes.any,
   zIndex: PropTypes.number,
   bodyStyle: PropTypes.style,
   maskStyle: PropTypes.style,
@@ -119,10 +119,11 @@ export interface ModalFuncProps {
   maskStyle?: CSSProperties;
   type?: string;
   keyboard?: boolean;
-  getContainer?: getContainerFunc;
+  getContainer?: getContainerFunc | boolean | string;
   autoFocusButton?: null | 'ok' | 'cancel';
   transitionName?: string;
   maskTransitionName?: string;
+  parentContext?: any;
 }
 
 type getContainerFunc = () => HTMLElement;

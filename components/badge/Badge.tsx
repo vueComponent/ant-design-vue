@@ -114,7 +114,7 @@ export default defineComponent({
       [`${prefixCls.value}-count-sm`]: props.size === 'small',
       [`${prefixCls.value}-multiple-words`]:
         !isDotRef.value && displayCount.value && displayCount.value.toString().length > 1,
-      [`${prefixCls.value}-status-${status}`]: !!status,
+      [`${prefixCls.value}-status-${props.status}`]: !!props.status,
       [`${prefixCls.value}-status-${props.color}`]: isPresetColor(props.color),
     }));
 

@@ -68,7 +68,7 @@ const Space = defineComponent({
     );
     const style = computed(() => {
       const gapStyle: CSSProperties = {};
-      if (supportFlexGap) {
+      if (supportFlexGap.value) {
         gapStyle.columnGap = `${horizontalSize.value}px`;
         gapStyle.rowGap = `${verticalSize.value}px`;
       }
@@ -94,7 +94,7 @@ const Space = defineComponent({
         <div class={cn.value} style={style.value}>
           {items.map((child, index) => {
             let itemStyle: CSSProperties = {};
-            if (!supportFlexGap) {
+            if (!supportFlexGap.value) {
               if (direction === 'vertical') {
                 if (index < latestIndex) {
                   itemStyle = { marginBottom: `${horizontalSizeVal / (split ? 2 : 1)}px` };

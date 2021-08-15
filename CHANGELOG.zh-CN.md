@@ -10,6 +10,74 @@
 
 ---
 
+## 2.2.6
+
+`2021-08-12`
+
+- 🐞 修复 `Table` 展开列表渲染错位问题 [#4507](https://github.com/vueComponent/ant-design-vue/issues/4507)
+- 🐞 修复 `Rate` 自定义 `character` 插槽未生效问题 [#4509](https://github.com/vueComponent/ant-design-vue/issues/4509)
+- 🐞 添加 resize-observer-polyfill, 修复在低版本 Chrome 下报错问题 [#4508](https://github.com/vueComponent/ant-design-vue/issues/4508)
+
+## 2.2.5
+
+`2021-08-11`
+
+- 🌟 `Select` 支持通过 option 插槽定制化节点 [68c1f4](https://github.com/vueComponent/ant-design-vue/commit/68c1f4550108a3a6bbe4f1b2c5c168523fd6c84a)
+- 🐞 修复开发环境下弹窗类组件在低版本 chrome 下，不显示问题，并避免弹窗闪动 [#4409](https://github.com/vueComponent/ant-design-vue/issues/4409)
+- 🐞 修复 `Select` 打开时没有滚动到激活位置问题 [ccb240](https://github.com/vueComponent/ant-design-vue/commit/ccb24016c07632f49550646c971060c402586c67)
+
+## 2.2.4
+
+`2021-08-10`
+
+- 🌟 支持 Vue@3.2 [#4490](https://github.com/vueComponent/ant-design-vue/issues/4490)
+- 🌟 自动隐藏 `Table` 横向滚动条 [#4484](https://github.com/vueComponent/ant-design-vue/issues/4484)
+- 🐞 修复 `Progress` trailColor 不生效问题 [#4483](https://github.com/vueComponent/ant-design-vue/issues/4483)
+
+## 2.2.3
+
+`2021-08-07`
+
+- 🌟 `Table` 固定列使用 `position: sticky` ， 提升性能，解决部分场景不对齐问题 [38569c](https://github.com/vueComponent/ant-design-vue/commit/38569c28c7eb4eaa34f2cc096982daea901062d4)
+- 🌟 `Collapse` 支持 number 类型 key [#4405](https://github.com/vueComponent/ant-design-vue/issues/4405)
+- 🌟 优化 `Tabs` 在 windows 下选中时闪动问题 [#4241](https://github.com/vueComponent/ant-design-vue/issues/4241)
+- 🌟 `InputPassword` 支持全局设置 prefixCls [#4430](https://github.com/vueComponent/ant-design-vue/issues/4430)
+- 🐞 修复 `Select` 无法滚动问题 [#4396](https://github.com/vueComponent/ant-design-vue/issues/4396)
+- 🐞 修复 `Badge` 在 ssr 下报错问题 [#4384](https://github.com/vueComponent/ant-design-vue/issues/4384)
+- 🐞 修复 `Form` 多出无效数据字段问题 [#4435](https://github.com/vueComponent/ant-design-vue/issues/4435)
+- 🐞 修复 `FormItem` 子元素是原生标签时报错问题 [#4383](https://github.com/vueComponent/ant-design-vue/issues/4383)
+- 🐞 修复 `TreeSelect` 通过 slot 自定义 title 时报错问题 [#4459](https://github.com/vueComponent/ant-design-vue/issues/4459)
+
+## 2.2.2
+
+`2021-07-11`
+
+- 🌟 Switch 新增 checkedValue、unCheckedValue 属性用于自定义 checked 绑定值 [#4329](https://github.com/vueComponent/ant-design-vue/issues/4329)
+- 🐞 修复 SubMenu 动画丢失的问题 [#4325](https://github.com/vueComponent/ant-design-vue/issues/4325)
+- 🐞 修复 TimePicker 在 Form 下验证错误时没有红框问题 [#4331](https://github.com/vueComponent/ant-design-vue/issues/4331)
+- 🐞 修复 UploadDragger 不支持 vite-plugin-components 按需加载问题 [#4334](https://github.com/vueComponent/ant-design-vue/issues/4334)
+- 🐞 修复 TreeSelect 通过 slot 自定义 title 时报错问题 [1152e8](https://github.com/vueComponent/ant-design-vue/commit/1152e8cd71cadf9e8fb4797916adca20c0e35974)
+- 🐞 修复 Dropdown submenu 样式丢失问题 [#4351](https://github.com/vueComponent/ant-design-vue/issues/4351)
+- TS
+  - 修复 Table 在 ts 4.3.5 版本下类型报错问题 [#4296](https://github.com/vueComponent/ant-design-vue/issues/4296)
+  - 完善 notification 类型 [#4346](https://github.com/vueComponent/ant-design-vue/issues/4346)
+
+## 2.2.1
+
+`2021-07-06`
+
+- 🐞 修复 Space 组件在不支持 flex 的浏览器中样式不生效问题
+- 🐞 修复 DatePicker 在 safari 下触发滚动问题 [#4323](https://github.com/vueComponent/ant-design-vue/issues/4323)
+
+## 2.2.0
+
+`2021-07-06`
+
+- 🎉 重构 Button 组件，移除 type="danger"，新增 `danger` 属性 [#4291](https://github.com/vueComponent/ant-design-vue/issues/4291)
+- 🐞 修复 Rate 组件不更新问题 [#4294](https://github.com/vueComponent/ant-design-vue/issues/4294)
+- 🐞 修复 Tree replaceFields 报错问题 [#4298](https://github.com/vueComponent/ant-design-vue/issues/4298)
+- 🐞 修复 Modal 缺少 parentContext 类型问题 [#4305](https://github.com/vueComponent/ant-design-vue/issues/4305)
+
 ## 2.2.0-rc.1
 
 `2021-06-29`
@@ -424,7 +492,6 @@
 
 ### 兼容性调整
 
-- IE 最低支持版本为 IE 11。
 - Vue 最低支持版本为 Vue 3.0。
 
 #### 调整的 API

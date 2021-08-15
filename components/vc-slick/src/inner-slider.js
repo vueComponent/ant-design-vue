@@ -1,4 +1,5 @@
 import debounce from 'lodash-es/debounce';
+import ResizeObserver from 'resize-observer-polyfill';
 import classnames from '../../_util/classNames';
 import BaseMixin from '../../_util/BaseMixin';
 import defaultProps from './default-props';
@@ -23,6 +24,7 @@ import {
 import Track from './track';
 import Dots from './dots';
 import { PrevArrow, NextArrow } from './arrows';
+import supportsPassive from '../../_util/supportsPassive';
 
 function noop() {}
 
@@ -694,8 +696,11 @@ export default {
       onMousemove: this.dragging && touchMove ? this.swipeMove : noop,
       onMouseup: touchMove ? this.swipeEnd : noop,
       onMouseleave: this.dragging && touchMove ? this.swipeEnd : noop,
-      onTouchstart: touchMove ? this.swipeStart : noop,
-      onTouchmove: this.dragging && touchMove ? this.swipeMove : noop,
+      [supportsPassive ? 'onTouchstartPassive' : 'onTouchstart']: touchMove
+        ? this.swipeStart
+        : noop,
+      [supportsPassive ? 'onTouchmovePassive' : 'onTouchmove']:
+        this.dragging && touchMove ? this.swipeMove : noop,
       onTouchend: touchMove ? this.swipeEnd : noop,
       onTouchcancel: this.dragging && touchMove ? this.swipeEnd : noop,
       onKeydown: this.accessibility ? this.keyHandler : noop,

@@ -1,6 +1,7 @@
 import classNames from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
 import { computed, inject } from 'vue';
+import { getCellFixedInfo } from './fixUtil';
 
 const TableHeaderRow = {
   name: 'TableHeaderRow',
@@ -35,6 +36,7 @@ const TableHeaderRow = {
         }
         return null;
       }),
+      store,
     };
   },
   render() {
@@ -50,21 +52,44 @@ const TableHeaderRow = {
     if (style.height === null) {
       delete style.height;
     }
+    const { stickyOffsets, columnManager } = this.store;
     return (
       <HeaderRow {...rowProps} style={style}>
         {row.map((cell, i) => {
           const { column, isLast, children, className, ...cellProps } = cell;
+          const fixedInfo = getCellFixedInfo(
+            cell.colStart,
+            cell.colEnd,
+            columnManager.leafColumns,
+            stickyOffsets,
+          );
           const customProps = column.customHeaderCell ? column.customHeaderCell(column) : {};
           const headerCellProps = {
             ...cellProps,
             ...customProps,
             key: column.key || column.dataIndex || i,
           };
-
+          if (headerCellProps.colSpan === 0) {
+            return null;
+          }
           if (column.align) {
             headerCellProps.style = { ...customProps.style, textAlign: column.align };
           }
+          // ====================== Fixed =======================
+          const { fixLeft, fixRight, firstFixLeft, lastFixLeft, firstFixRight, lastFixRight } =
+            fixedInfo;
+          const fixedStyle = {};
+          const isFixLeft = typeof fixLeft === 'number';
+          const isFixRight = typeof fixRight === 'number';
 
+          if (isFixLeft) {
+            fixedStyle.position = 'sticky';
+            fixedStyle.left = `${fixLeft}px`;
+          }
+          if (isFixRight) {
+            fixedStyle.position = 'sticky';
+            fixedStyle.right = `${fixRight}px`;
+          }
           headerCellProps.class = classNames(
             customProps.class,
             customProps.className,
@@ -75,9 +100,15 @@ const TableHeaderRow = {
               [`${prefixCls}-row-cell-ellipsis`]: !!column.ellipsis,
               [`${prefixCls}-row-cell-break-word`]: !!column.width,
               [`${prefixCls}-row-cell-last`]: isLast,
+              [`${prefixCls}-cell-fix-left`]: isFixLeft,
+              [`${prefixCls}-cell-fix-left-first`]: firstFixLeft,
+              [`${prefixCls}-cell-fix-left-last`]: lastFixLeft,
+              [`${prefixCls}-cell-fix-right`]: isFixRight,
+              [`${prefixCls}-cell-fix-right-first`]: firstFixRight,
+              [`${prefixCls}-cell-fix-right-last`]: lastFixRight,
             },
           );
-
+          headerCellProps.style = { ...(headerCellProps.style || {}), ...fixedStyle };
           if (typeof HeaderCell === 'function') {
             return HeaderCell(headerCellProps, children);
           }

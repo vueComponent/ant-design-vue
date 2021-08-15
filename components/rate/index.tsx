@@ -40,7 +40,6 @@ const Rate = defineComponent({
     allowClear: true,
     prefixCls: 'ant-rate',
     tabindex: 0,
-    character: '★',
     direction: 'ltr',
   }),
   emits: ['hoverChange', 'update:value', 'change', 'focus', 'blur', 'keydown'],

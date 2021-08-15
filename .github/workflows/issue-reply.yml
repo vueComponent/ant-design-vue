@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: Need Reproduce
         if: github.event.label.name == '🤔 Need Reproduce'
-        uses: actions-cool/issues-helper@v1
+        uses: actions-cool/issues-helper@v1.2
         with:
           actions: 'create-comment'
           issue-number: ${{ github.event.issue.number }}
@@ -21,7 +21,7 @@ jobs:
       
       - name: help wanted
         if: github.event.label.name == 'help wanted'
-        uses: actions-cool/issues-helper@v1
+        uses: actions-cool/issues-helper@v1.2
         with:
           actions: 'create-comment'
           issue-number: ${{ github.event.issue.number }}
@@ -29,3 +29,15 @@ jobs:
             Hello @${{ github.event.issue.user.login }}. We totally like your proposal/feedback, welcome to send us a Pull Request for it. Please send your Pull Request to proper branch, fill the Pull Request Template here, provide changelog/TypeScript/documentation/test cases if needed and make sure CI passed, we will review it soon. We appreciate your effort in advance and looking forward to your contribution!
 
             你好 @${{ github.event.issue.user.login }}，我们完全同意你的提议/反馈，欢迎直接在此仓库创建一个 Pull Request 来解决这个问题。请将 Pull Request 发到正确的分支，务必填写 Pull Request 内的预设模板，提供改动所需相应的 changelog、TypeScript 定义、测试用例、文档等，并确保 CI 通过，我们会尽快进行 Review，提前感谢和期待您的贡献。
+
+      - name: Usage
+        if: github.event.label.name == 'Usage'
+        uses: actions-cool/issues-helper@v1.2
+        with:
+          actions: 'create-comment, close-issue'
+          issue-number: ${{ github.event.issue.number }}
+          body: |
+            Hello @${{ github.event.issue.user.login }}, we use GitHub issues to trace bugs or discuss plans of Ant Design Vue. So, please don't ask usage questions here. You can try to open a new discussion in [antdv discussions](https://github.com/vueComponent/ant-design-vue/discussions), select `Q&A` to ask questions, also can ask questions on [Stack Overflow](http://stackoverflow.com/questions/) or [Segment Fault](https://segmentfault.com).
+
+            你好 @${{ github.event.issue.user.login }}，Ant Design Vue Issue 板块是用于 bug 反馈与需求讨论的地方。请勿询问如何使用的问题，你可以试着在 [antdv discussions](https://github.com/vueComponent/ant-design-vue/discussions) 新开一个 discussion，选择 `Q&A` 类别进行提问，也可以在 [Stack Overflow](http://stackoverflow.com/questions/) 或者 [Segment Fault](https://segmentfault.com/) 中提问。
+            

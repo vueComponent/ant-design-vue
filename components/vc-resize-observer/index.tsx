@@ -1,5 +1,6 @@
 // based on rc-resize-observer 1.0.0
 import type { PropType } from 'vue';
+import ResizeObserver from 'resize-observer-polyfill';
 import {
   defineComponent,
   getCurrentInstance,
@@ -18,7 +19,7 @@ interface ResizeObserverState {
   offsetWidth: number;
 }
 
-const ResizeObserver = defineComponent({
+export default defineComponent({
   name: 'ResizeObserver',
   props: {
     disabled: Boolean,
@@ -110,7 +111,7 @@ const ResizeObserver = defineComponent({
       }
 
       if (!resizeObserver && element) {
-        resizeObserver = new window.ResizeObserver(onResize);
+        resizeObserver = new ResizeObserver(onResize);
         resizeObserver.observe(element);
       }
     };
@@ -135,5 +136,3 @@ const ResizeObserver = defineComponent({
     };
   },
 });
-
-export default ResizeObserver;

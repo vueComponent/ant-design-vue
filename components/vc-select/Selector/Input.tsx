@@ -74,7 +74,7 @@ const Input = defineComponent<InputProps, { VCSelectContainerEvent: any; blurTim
       inputRef,
       attrs,
     } = this.$props as InputProps;
-    let inputNode: any = withDirectives((inputElement || <input />) as VNode, [[antInput]]);
+    let inputNode: any = inputElement || withDirectives((<input />) as VNode, [[antInput]]);
 
     const inputProps = inputNode.props || {};
     const {

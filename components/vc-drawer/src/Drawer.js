@@ -439,6 +439,15 @@ const Drawer = defineComponent({
         onKeydown: open && keyboard ? this.onKeyDown : noop,
         style: { ...wrapStyle, ...style },
       };
+      // 跑用例用
+      const touchEvents = {
+        [supportsPassive ? 'onTouchstartPassive' : 'onTouchstart']: open
+          ? this.removeStartHandler
+          : noop,
+        [supportsPassive ? 'onTouchmovePassive' : 'onTouchmove']: open
+          ? this.removeMoveHandler
+          : noop,
+      };
       return (
         <div
           ref={c => {
@@ -475,8 +484,7 @@ const Drawer = defineComponent({
               ref={c => {
                 this.contentDom = c;
               }}
-              onTouchstart={open ? this.removeStartHandler : noop} // 跑用例用
-              onTouchmove={open ? this.removeMoveHandler : noop} // 跑用例用
+              {...touchEvents}
             >
               {children}
             </div>

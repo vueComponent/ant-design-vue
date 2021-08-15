@@ -455,7 +455,7 @@ export default defineComponent({
         maskAnimation,
         maskTransitionName,
         getContainer,
-        popupClassName,
+        class: popupClassName,
         style: popupStyle,
         onAlign: $attrs.onPopupAlign || noop,
         ...mouseProps,

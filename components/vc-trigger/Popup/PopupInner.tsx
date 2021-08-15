@@ -59,15 +59,14 @@ export default defineComponent({
 
     const onInternalAlign = (popupDomNode: HTMLElement, matchAlign: AlignType) => {
       const nextAlignedClassName = props.getClassNameFromAlign(matchAlign);
+      const preAlignedClassName = alignedClassName.value;
       if (alignedClassName.value !== nextAlignedClassName) {
-        nextTick(() => {
-          alignedClassName.value = nextAlignedClassName;
-        });
+        alignedClassName.value = nextAlignedClassName;
       }
       if (status.value === 'align') {
         // Repeat until not more align needed
-        if (alignedClassName.value !== nextAlignedClassName) {
-          Promise.resolve().then(() => {
+        if (preAlignedClassName !== nextAlignedClassName) {
+          nextTick(() => {
             forceAlign();
           });
         } else {
@@ -148,12 +147,7 @@ export default defineComponent({
       const mergedClassName = classNames(prefixCls, attrs.class, alignedClassName.value);
       const transitionProps = getTransitionProps(motion.value.name, motion.value);
       return (
-        <Transition
-          ref={elementRef}
-          {...transitionProps}
-          onBeforeAppear={onShowPrepare}
-          onBeforeEnter={onShowPrepare}
-        >
+        <Transition ref={elementRef} {...transitionProps} onBeforeEnter={onShowPrepare}>
           {!destroyPopupOnHide || visible ? (
             <Align
               v-show={visible}

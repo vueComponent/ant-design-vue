@@ -1,4 +1,4 @@
-import type { PropType } from 'vue';
+import { nextTick, PropType } from 'vue';
 import { defineComponent, ref, computed, onMounted, onUpdated, watch, onUnmounted } from 'vue';
 import { alignElement, alignPoint } from 'dom-align';
 import addEventListener from '../vc-util/Dom/addEventListener';
@@ -56,13 +56,6 @@ export default defineComponent({
   setup(props, { expose, slots }) {
     const cacheRef = ref<{ element?: HTMLElement; point?: TargetPoint; align?: AlignType }>({});
     const nodeRef = ref();
-    const forceAlignPropsRef = computed(() => ({
-      disabled: props.disabled,
-      target: props.target,
-      align: props.align,
-      onAlign: props.onAlign,
-    }));
-
     const [forceAlign, cancelForceAlign] = useBuffer(
       () => {
         const {
@@ -70,7 +63,7 @@ export default defineComponent({
           target: latestTarget,
           align: latestAlign,
           onAlign: latestOnAlign,
-        } = forceAlignPropsRef.value;
+        } = props;
         if (!latestDisabled && latestTarget && nodeRef.value) {
           const source = nodeRef.value;
 
@@ -83,29 +76,14 @@ export default defineComponent({
           cacheRef.value.align = latestAlign;
           // IE lose focus after element realign
           // We should record activeElement and restore later
-          // const { activeElement } = document;
-          // console.log(
-          //   '🌹',
-          //   source.style.display,
-          //   source.style.left,
-          //   source.style.top,
-          //   source.className,
-          // );
+          const { activeElement } = document;
           // We only align when element is visible
           if (element && isVisible(element)) {
             result = alignElement(source, element, latestAlign);
           } else if (point) {
             result = alignPoint(source, point, latestAlign);
           }
-
-          // console.log(
-          //   '😸',
-          //   source.style.display,
-          //   source.style.left,
-          //   source.style.top,
-          //   source.className,
-          // );
-          // restoreFocus(activeElement, source);
+          restoreFocus(activeElement, source);
 
           if (latestOnAlign && result) {
             latestOnAlign(source, result);
@@ -157,11 +135,15 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      goAlign();
+      nextTick(() => {
+        goAlign();
+      });
     });
 
     onUpdated(() => {
-      goAlign();
+      nextTick(() => {
+        goAlign();
+      });
     });
 
     // Listen for disabled change
@@ -174,7 +156,7 @@ export default defineComponent({
           cancelForceAlign();
         }
       },
-      { flush: 'post' },
+      { immediate: true, flush: 'post' },
     );
 
     // Listen for window resize
@@ -210,7 +192,7 @@ export default defineComponent({
       if (child) {
         return cloneElement(child[0], { ref: nodeRef }, true, true);
       }
-      return child && child[0];
+      return null;
     };
   },
 });

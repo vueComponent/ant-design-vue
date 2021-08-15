@@ -16,7 +16,7 @@ export const getTransitionProps = (transitionName: string, opt: TransitionProps 
   const transitionProps: TransitionProps = transitionName
     ? {
         appear: true,
-        type: 'animation',
+        // type: 'animation',
         // appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
         // appearActiveClass: `antdv-base-transtion`,
         // appearToClass: `${transitionName}-appear ${transitionName}-appear-active`,

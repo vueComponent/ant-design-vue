@@ -1,4 +1,5 @@
 import type { Ref } from 'vue';
+import { nextTick } from 'vue';
 import { onBeforeUnmount } from 'vue';
 import { ref, watch } from 'vue';
 import raf from '../../_util/raf';
@@ -26,7 +27,6 @@ export default (
   const status = ref<PopupStatus>(null);
   const rafRef = ref<number>();
   const destroyRef = ref(false);
-
   function setStatus(nextStatus: PopupStatus) {
     if (!destroyRef.value) {
       status.value = nextStatus;
@@ -60,9 +60,9 @@ export default (
   watch(
     visible,
     () => {
-      status.value = 'measure';
+      setStatus('measure');
     },
-    { immediate: true },
+    { immediate: true, flush: 'post' },
   );
   // Go next status
   watch(
@@ -76,7 +76,7 @@ export default (
       }
 
       if (status.value) {
-        rafRef.value = raf(async () => {
+        nextTick(() => {
           const index = StatusQueue.indexOf(status.value);
           const nextStatus = StatusQueue[index + 1];
           if (nextStatus && index !== -1) {
@@ -85,7 +85,7 @@ export default (
         });
       }
     },
-    { immediate: true },
+    { immediate: true, flush: 'post' },
   );
   onBeforeUnmount(() => {
     destroyRef.value = true;

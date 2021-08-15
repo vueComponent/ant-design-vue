@@ -20,7 +20,6 @@ export default defineComponent({
     wrapperClassName: PropTypes.string,
     forceRender: PropTypes.looseBool,
     getContainer: PropTypes.any,
-    children: PropTypes.func,
     visible: PropTypes.looseBool,
   },
   data() {
@@ -130,7 +129,7 @@ export default defineComponent({
   },
 
   render() {
-    const { children, forceRender, visible } = this.$props;
+    const { forceRender, visible } = this.$props;
     let portal = null;
     const childProps = {
       getOpenCount: () => openCount,
@@ -141,8 +140,8 @@ export default defineComponent({
       portal = (
         <Portal
           getContainer={this.getDomContainer}
-          children={children(childProps)}
           ref={this.savePortal}
+          v-slots={{ default: () => this.$slots.default?.(childProps) }}
         ></Portal>
       );
     }

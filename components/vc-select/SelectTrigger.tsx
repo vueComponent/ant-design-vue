@@ -95,6 +95,7 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
       transitionName,
       direction,
       getPopupContainer,
+      getTriggerDOMNode,
     } = props as SelectTriggerProps;
     const dropdownPrefixCls = `${prefixCls}-dropdown`;
 
@@ -131,8 +132,7 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
           [`${dropdownPrefixCls}-empty`]: empty,
         })}
         popupStyle={popupStyle}
-        // destroyPopupOnHide
-        // getTriggerDOMNode={getTriggerDOMNode}
+        getTriggerDOMNode={getTriggerDOMNode}
       >
         {getSlot(this)[0]}
       </Trigger>

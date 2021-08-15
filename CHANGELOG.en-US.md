@@ -10,6 +10,14 @@
 
 ---
 
+## 2.2.6
+
+`2021-08-12`
+
+- 🐞 Fix `Table` expanded list rendering problem [#4507](https://github.com/vueComponent/ant-design-vue/issues/4507)
+- 🐞 Fix `Rate` custom `character` slot not taking effect [#4509](https://github.com/vueComponent/ant-design-vue/issues/4509)
+- 🐞 Add resize-observer-polyfill to fix the problem of reporting errors in low versions of Chrome [#4508](https://github.com/vueComponent/ant-design-vue/issues/4508)
+
 ## 2.2.5
 
 `2021-08-11`

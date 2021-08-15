@@ -1,4 +1,5 @@
 import debounce from 'lodash-es/debounce';
+import ResizeObserver from 'resize-observer-polyfill';
 import PropTypes from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
 import { getComponent, getSlot } from '../../_util/props-util';

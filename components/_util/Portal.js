@@ -11,25 +11,25 @@ import {
 
 export default defineComponent({
   name: 'Portal',
+  inheritAttrs: false,
   props: {
     getContainer: PropTypes.func.isRequired,
     didUpdate: PropTypes.func,
   },
   setup(props, { slots }) {
     const container = ref();
-
     onMounted(() => {
       container.value = props.getContainer();
     });
     onUpdated(() => {
       nextTick(() => {
-        props.didUpdate?.(props);
+        props.nextTick?.(props);
       });
     });
     onBeforeUnmount(() => {
-      container.value &&
-        container.value.parentNode &&
+      if (container.value && container.value.parentNode) {
         container.value.parentNode.removeChild(container.value);
+      }
     });
     return () => {
       return container.value ? <Teleport to={container.value}>{slots.default?.()}</Teleport> : null;

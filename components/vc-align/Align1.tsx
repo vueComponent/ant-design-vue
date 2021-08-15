@@ -1,4 +1,4 @@
-import { nextTick, PropType } from 'vue';
+import type { PropType } from 'vue';
 import { defineComponent, ref, computed, onMounted, onUpdated, watch, onUnmounted } from 'vue';
 import { alignElement, alignPoint } from 'dom-align';
 import addEventListener from '../vc-util/Dom/addEventListener';
@@ -8,7 +8,6 @@ import isVisible from '../vc-util/Dom/isVisible';
 import { isSamePoint, restoreFocus, monitorResize } from './util';
 import type { AlignType, AlignResult, TargetType, TargetPoint } from './interface';
 import useBuffer from './hooks/useBuffer';
-import isEqual from 'lodash-es/isEqual';
 
 type OnAlign = (source: HTMLElement, result: AlignResult) => void;
 
@@ -54,18 +53,23 @@ export default defineComponent({
   props: alignProps,
   emits: ['align'],
   setup(props, { expose, slots }) {
-    const cacheRef = ref<{ element?: HTMLElement; point?: TargetPoint; align?: AlignType }>({});
+    const cacheRef = ref<{ element?: HTMLElement; point?: TargetPoint }>({});
     const nodeRef = ref();
+    const forceAlignPropsRef = computed(() => ({
+      disabled: props.disabled,
+      target: props.target,
+      onAlign: props.onAlign,
+    }));
+
     const [forceAlign, cancelForceAlign] = useBuffer(
       () => {
         const {
           disabled: latestDisabled,
           target: latestTarget,
-          align: latestAlign,
           onAlign: latestOnAlign,
-        } = props;
-        if (!latestDisabled && latestTarget && nodeRef.value) {
-          const source = nodeRef.value;
+        } = forceAlignPropsRef.value;
+        if (!latestDisabled && latestTarget && nodeRef.value && nodeRef.value.$el) {
+          const source = nodeRef.value.$el;
 
           let result: AlignResult;
           const element = getElement(latestTarget);
@@ -73,16 +77,18 @@ export default defineComponent({
 
           cacheRef.value.element = element;
           cacheRef.value.point = point;
-          cacheRef.value.align = latestAlign;
+
           // IE lose focus after element realign
           // We should record activeElement and restore later
           const { activeElement } = document;
+
           // We only align when element is visible
           if (element && isVisible(element)) {
-            result = alignElement(source, element, latestAlign);
+            result = alignElement(source, element, props.align);
           } else if (point) {
-            result = alignPoint(source, point, latestAlign);
+            result = alignPoint(source, point, props.align);
           }
+
           restoreFocus(activeElement, source);
 
           if (latestOnAlign && result) {
@@ -112,17 +118,13 @@ export default defineComponent({
       const element = getElement(target);
       const point = getPoint(target);
 
-      if (nodeRef.value !== sourceResizeMonitor.value.element) {
+      if (nodeRef.value && nodeRef.value.$el !== sourceResizeMonitor.value.element) {
         sourceResizeMonitor.value.cancel();
-        sourceResizeMonitor.value.element = nodeRef.value;
-        sourceResizeMonitor.value.cancel = monitorResize(nodeRef.value, forceAlign);
+        sourceResizeMonitor.value.element = nodeRef.value.$el;
+        sourceResizeMonitor.value.cancel = monitorResize(nodeRef.value.$el, forceAlign);
       }
 
-      if (
-        cacheRef.value.element !== element ||
-        !isSamePoint(cacheRef.value.point, point) ||
-        !isEqual(cacheRef.value.align, props.align)
-      ) {
+      if (cacheRef.value.element !== element || !isSamePoint(cacheRef.value.point, point)) {
         forceAlign();
 
         // Add resize observer
@@ -135,15 +137,11 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      nextTick(() => {
-        goAlign();
-      });
+      goAlign();
     });
 
     onUpdated(() => {
-      nextTick(() => {
-        goAlign();
-      });
+      goAlign();
     });
 
     // Listen for disabled change
@@ -156,7 +154,7 @@ export default defineComponent({
           cancelForceAlign();
         }
       },
-      { immediate: true, flush: 'post' },
+      { flush: 'post' },
     );
 
     // Listen for window resize
@@ -192,7 +190,7 @@ export default defineComponent({
       if (child) {
         return cloneElement(child[0], { ref: nodeRef }, true, true);
       }
-      return null;
+      return child && child[0];
     };
   },
 });

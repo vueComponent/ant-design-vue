@@ -13,7 +13,7 @@ export default defineComponent({
     defaultVisible: PropTypes.looseBool,
     visible: PropTypes.looseBool,
     placement: PropTypes.string.def('right'),
-    transitionName: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
+    transitionName: PropTypes.string,
     animation: PropTypes.any,
     afterVisibleChange: PropTypes.func.def(() => {}),
     overlay: PropTypes.any,

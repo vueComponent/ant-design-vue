@@ -527,7 +527,6 @@ function Picker<DateType>() {
         return (
           <PickerTrigger
             visible={mergedOpen.value}
-            popupElement={panel}
             popupStyle={popupStyle}
             prefixCls={prefixCls}
             dropdownClassName={dropdownClassName}
@@ -536,6 +535,9 @@ function Picker<DateType>() {
             transitionName={transitionName}
             popupPlacement={popupPlacement}
             direction={direction}
+            v-slots={{
+              popupElement: () => panel,
+            }}
           >
             <div
               class={classNames(prefixCls, attrs.class, {

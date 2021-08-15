@@ -2,7 +2,6 @@ import type { CSSProperties } from '@vue/runtime-dom';
 import type { AlignType } from '../vc-align/interface';
 import Trigger from '../vc-trigger';
 import classNames from '../_util/classNames';
-import type { VueNode } from '../_util/type';
 import useMergeProps from './hooks/useMergeProps';
 
 const BUILT_IN_PLACEMENTS = {
@@ -45,7 +44,6 @@ type Placement = 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
 export type PickerTriggerProps = {
   prefixCls: string;
   visible: boolean;
-  popupElement: VueNode;
   popupStyle?: CSSProperties;
   dropdownClassName?: string;
   transitionName?: string;
@@ -59,7 +57,6 @@ export type PickerTriggerProps = {
 function PickerTrigger(props: PickerTriggerProps, { slots }) {
   const {
     prefixCls,
-    popupElement,
     popupStyle,
     visible,
     dropdownClassName,
@@ -87,7 +84,6 @@ function PickerTrigger(props: PickerTriggerProps, { slots }) {
       builtinPlacements={BUILT_IN_PLACEMENTS}
       prefixCls={dropdownPrefixCls}
       popupTransitionName={transitionName}
-      popup={popupElement}
       popupAlign={dropdownAlign}
       popupVisible={visible}
       popupClassName={classNames(dropdownClassName, {
@@ -96,9 +92,11 @@ function PickerTrigger(props: PickerTriggerProps, { slots }) {
       })}
       popupStyle={popupStyle}
       getPopupContainer={getPopupContainer}
-    >
-      {slots.default?.()}
-    </Trigger>
+      v-slots={{
+        default: slots.default,
+        popup: slots.popupElement,
+      }}
+    ></Trigger>
   );
 }
 

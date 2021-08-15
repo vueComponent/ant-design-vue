@@ -1,9 +1,9 @@
 import type { AlignType } from '../interface';
 import useVisibleStatus from './useVisibleStatus';
 import useStretchStyle from './useStretchStyle';
+import type { CSSProperties } from 'vue';
 import {
   computed,
-  CSSProperties,
   defineComponent,
   nextTick,
   ref,
@@ -12,19 +12,21 @@ import {
   watch,
   withModifiers,
 } from 'vue';
-import Align, { RefAlign } from 'ant-design-vue/es/vc-align/Align';
+import type { RefAlign } from '../../vc-align/Align';
+import Align from '../../vc-align/Align';
 import { getMotion } from '../utils/motionUtil';
-import { flattenChildren } from 'ant-design-vue/es/_util/props-util';
-import classNames from 'ant-design-vue/es/_util/classNames';
-import { innerProps, PopupInnerProps } from './interface';
-import { getTransitionProps } from 'ant-design-vue/es/_util/transition';
-import supportsPassive from 'ant-design-vue/es/_util/supportsPassive';
+import { flattenChildren } from '../../_util/props-util';
+import classNames from '../../_util/classNames';
+import type { PopupInnerProps } from './interface';
+import { innerProps } from './interface';
+import { getTransitionProps } from '../../_util/transition';
+import supportsPassive from '../../_util/supportsPassive';
 
 export default defineComponent({
-  props: innerProps,
   name: 'PopupInner',
-  emits: ['mouseenter', 'mouseleave', 'mousedown', 'touchstart', 'align'],
   inheritAttrs: false,
+  props: innerProps,
+  emits: ['mouseenter', 'mouseleave', 'mousedown', 'touchstart', 'align'],
   setup(props, { expose, attrs, slots }) {
     const alignRef = ref<RefAlign>();
     const elementRef = ref<HTMLDivElement>();
@@ -147,36 +149,46 @@ export default defineComponent({
       const mergedClassName = classNames(prefixCls, attrs.class, alignedClassName.value);
       const transitionProps = getTransitionProps(motion.value.name, motion.value);
       return (
-        <Transition ref={elementRef} {...transitionProps} onBeforeEnter={onShowPrepare}>
-          {!destroyPopupOnHide || visible ? (
-            <Align
-              v-show={visible}
-              target={getAlignTarget()}
-              key="popup"
-              ref={alignRef}
-              monitorWindowResize
-              disabled={alignDisabled}
-              align={align}
-              onAlign={onInternalAlign}
-            >
-              <div
-                class={mergedClassName}
-                onMouseenter={onMouseenter}
-                onMouseleave={onMouseleave}
-                onMousedown={withModifiers(onMousedown, ['capture'])}
-                {...{
-                  [supportsPassive ? 'onTouchstartPassive' : 'onTouchstart']: withModifiers(
-                    onTouchstart,
-                    ['capture'],
-                  ),
-                }}
-                style={mergedStyle}
-              >
-                {childNode}
-              </div>
-            </Align>
-          ) : null}
-        </Transition>
+        <Transition
+          ref={elementRef}
+          {...transitionProps}
+          onBeforeEnter={onShowPrepare}
+          v-slots={{
+            default: () => {
+              return !destroyPopupOnHide || visible ? (
+                <Align
+                  v-show={visible}
+                  target={getAlignTarget()}
+                  key="popup"
+                  ref={alignRef}
+                  monitorWindowResize
+                  disabled={alignDisabled}
+                  align={align}
+                  onAlign={onInternalAlign}
+                  v-slots={{
+                    default: () => (
+                      <div
+                        class={mergedClassName}
+                        onMouseenter={onMouseenter}
+                        onMouseleave={onMouseleave}
+                        onMousedown={withModifiers(onMousedown, ['capture'])}
+                        {...{
+                          [supportsPassive ? 'onTouchstartPassive' : 'onTouchstart']: withModifiers(
+                            onTouchstart,
+                            ['capture'],
+                          ),
+                        }}
+                        style={mergedStyle}
+                      >
+                        {childNode}
+                      </div>
+                    ),
+                  }}
+                ></Align>
+              ) : null;
+            },
+          }}
+        ></Transition>
       );
     };
   },

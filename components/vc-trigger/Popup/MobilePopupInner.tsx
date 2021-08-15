@@ -1,13 +1,15 @@
-import { CSSProperties, defineComponent, ref, Transition } from 'vue';
-import { flattenChildren } from 'ant-design-vue/es/_util/props-util';
-import classNames from 'ant-design-vue/es/_util/classNames';
-import { MobilePopupProps, mobileProps } from './interface';
+import type { CSSProperties } from 'vue';
+import { defineComponent, ref, Transition } from 'vue';
+import { flattenChildren } from '../../_util/props-util';
+import classNames from '../../_util/classNames';
+import type { MobilePopupProps } from './interface';
+import { mobileProps } from './interface';
 
 export default defineComponent({
+  name: 'MobilePopupInner',
+  inheritAttrs: false,
   props: mobileProps,
   emits: ['mouseenter', 'mouseleave', 'mousedown', 'touchstart', 'align'],
-  inheritAttrs: false,
-  name: 'MobilePopupInner',
   setup(props, { expose, slots }) {
     const elementRef = ref<HTMLDivElement>();
 

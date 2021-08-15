@@ -5,9 +5,9 @@ import MobilePopupInner from './MobilePopupInner';
 import PopupInner from './PopupInner';
 
 export default defineComponent({
-  props: popupProps,
-  inheritAttrs: false,
   name: 'Popup',
+  inheritAttrs: false,
+  props: popupProps,
   setup(props, { attrs, slots, expose }) {
     const innerVisible = ref(false);
     const inMobile = ref(false);

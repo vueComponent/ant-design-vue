@@ -1,4 +1,5 @@
-import { computed, defineComponent, HTMLAttributes, inject, provide, ref } from 'vue';
+import type { HTMLAttributes } from 'vue';
+import { computed, defineComponent, inject, provide, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
 import raf from '../_util/raf';
@@ -411,17 +412,16 @@ export default defineComponent({
       return popupAlign;
     },
     getComponent() {
-      const self = this;
       const mouseProps: HTMLAttributes = {};
       if (this.isMouseEnterToShow()) {
-        mouseProps.onMouseenter = self.onPopupMouseenter;
+        mouseProps.onMouseenter = this.onPopupMouseenter;
       }
       if (this.isMouseLeaveToHide()) {
-        mouseProps.onMouseleave = self.onPopupMouseleave;
+        mouseProps.onMouseleave = this.onPopupMouseleave;
       }
       mouseProps.onMousedown = this.onPopupMouseDown;
       mouseProps[supportsPassive ? 'onTouchstartPassive' : 'onTouchstart'] = this.onPopupMouseDown;
-      const { handleGetPopupClassFromAlign, getRootDomNode, getContainer, $attrs } = self;
+      const { handleGetPopupClassFromAlign, getRootDomNode, getContainer, $attrs } = this;
       const {
         prefixCls,
         destroyPopupOnHide,
@@ -437,7 +437,7 @@ export default defineComponent({
         alignPoint,
         mobile,
         forceRender,
-      } = self.$props;
+      } = this.$props;
       const { sPopupVisible, point } = this.$data;
       const popupProps = {
         prefixCls,
@@ -463,7 +463,12 @@ export default defineComponent({
         mobile,
         forceRender,
       } as any;
-      return <Popup {...popupProps}>{getComponent(self, 'popup')}</Popup>;
+      return (
+        <Popup
+          {...popupProps}
+          v-slots={{ default: this.$slots.popup || (() => getComponent(this, 'popup')) }}
+        ></Popup>
+      );
     },
 
     attachParent(popupContainer) {

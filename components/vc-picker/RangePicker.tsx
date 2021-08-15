@@ -1062,7 +1062,6 @@ function RangerPicker<DateType>() {
             style={{ minWidth: `${popupMinWidth.value}px` }}
           >
             <div class={`${prefixCls}-range-arrow`} style={arrowPositionStyle} />
-
             {renderPanels()}
           </div>
         );
@@ -1128,7 +1127,6 @@ function RangerPicker<DateType>() {
         return (
           <PickerTrigger
             visible={mergedOpen.value}
-            popupElement={rangePanel}
             popupStyle={popupStyle}
             prefixCls={prefixCls}
             dropdownClassName={dropdownClassName}
@@ -1137,6 +1135,9 @@ function RangerPicker<DateType>() {
             transitionName={transitionName}
             range
             direction={direction}
+            v-slots={{
+              popupElement: () => rangePanel,
+            }}
           >
             <div
               ref={containerRef}

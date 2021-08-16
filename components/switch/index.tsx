@@ -134,6 +134,9 @@ const Switch = defineComponent({
       [`${prefixCls.value}-disabled`]: props.disabled,
       [prefixCls.value]: true,
     }));
+
+    const trulyChecked = computed(() => checked.value === props.checkedValue);
+
     return () => (
       <Wave insertExtraNode>
         <button
@@ -160,7 +163,7 @@ const Switch = defineComponent({
         >
           {props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null}
           <span class={`${prefixCls.value}-inner`}>
-            {checked.value
+            {trulyChecked.value
               ? getPropsSlot(slots, props, 'checkedChildren')
               : getPropsSlot(slots, props, 'unCheckedChildren')}
           </span>

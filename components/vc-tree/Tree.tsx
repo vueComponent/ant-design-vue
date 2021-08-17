@@ -1,4 +1,5 @@
-import { TreeContext, NodeMouseEventHandler, NodeDragEventHandler } from './contextTypes';
+import type { NodeMouseEventHandler, NodeDragEventHandler } from './contextTypes';
+import { TreeContext } from './contextTypes';
 import {
   getDataAndAria,
   getDragChildrenKeys,
@@ -10,7 +11,7 @@ import {
   arrDel,
   posToArr,
 } from './util';
-import { Key, FlattenNode, EventDataNode, NodeInstance, ScrollTo } from './interface';
+import type { Key, FlattenNode, EventDataNode, NodeInstance, ScrollTo } from './interface';
 import {
   flattenTreeData,
   convertTreeToData,
@@ -24,7 +25,8 @@ import { conductCheck } from './utils/conductUtil';
 import DropIndicator from './DropIndicator';
 import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, watchEffect } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { CheckInfo, treeProps } from './props';
+import type { CheckInfo } from './props';
+import { treeProps } from './props';
 import { warning } from '../vc-util/warning';
 import KeyCode from '../_util/KeyCode';
 import classNames from '../_util/classNames';
@@ -185,7 +187,7 @@ export default defineComponent({
           checkedKeyEntity = parseCheckedKeys(props.checkedKeys) || {};
         } else if (!init && props.defaultCheckedKeys) {
           checkedKeyEntity = parseCheckedKeys(props.defaultCheckedKeys) || {};
-        } else if (treeData) {
+        } else if (treeData.value) {
           // If `treeData` changed, we also need check it
           checkedKeyEntity = parseCheckedKeys(props.checkedKeys) || {
             checkedKeys: checkedKeys.value,
@@ -495,7 +497,7 @@ export default defineComponent({
         onDragleave({ event, node: convertNodePropsToEventData(node.props) });
       }
     };
-    const onNodeDrop = (event: MouseEvent, _node, outsideTree: boolean = false) => {
+    const onNodeDrop = (event: MouseEvent, _node, outsideTree = false) => {
       const { dragChildrenKeys, dropPosition, dropTargetKey, dropTargetPos, dropAllowed } =
         dragState;
 
@@ -1029,21 +1031,21 @@ export default defineComponent({
 
             titleRender,
 
-            onNodeClick: onNodeClick,
-            onNodeDoubleClick: onNodeDoubleClick,
-            onNodeExpand: onNodeExpand,
-            onNodeSelect: onNodeSelect,
-            onNodeCheck: onNodeCheck,
-            onNodeLoad: onNodeLoad,
-            onNodeMouseEnter: onNodeMouseEnter,
-            onNodeMouseLeave: onNodeMouseLeave,
-            onNodeContextMenu: onNodeContextMenu,
-            onNodeDragStart: onNodeDragStart,
-            onNodeDragEnter: onNodeDragEnter,
-            onNodeDragOver: onNodeDragOver,
-            onNodeDragLeave: onNodeDragLeave,
-            onNodeDragEnd: onNodeDragEnd,
-            onNodeDrop: onNodeDrop,
+            onNodeClick,
+            onNodeDoubleClick,
+            onNodeExpand,
+            onNodeSelect,
+            onNodeCheck,
+            onNodeLoad,
+            onNodeMouseEnter,
+            onNodeMouseLeave,
+            onNodeContextMenu,
+            onNodeDragStart,
+            onNodeDragEnter,
+            onNodeDragOver,
+            onNodeDragLeave,
+            onNodeDragEnd,
+            onNodeDrop,
           }}
         >
           <div

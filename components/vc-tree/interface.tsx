@@ -1,4 +1,4 @@
-import { CSSProperties, VNode } from 'vue';
+import type { CSSProperties, VNode } from 'vue';
 export type { ScrollTo } from '../vc-virtual-list/List';
 
 export interface DataNode {

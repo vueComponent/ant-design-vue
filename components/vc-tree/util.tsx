@@ -4,7 +4,7 @@
  */
 
 import TreeNode from './TreeNode';
-import {
+import type {
   NodeElement,
   Key,
   DataNode,
@@ -14,7 +14,7 @@ import {
   Direction,
 } from './interface';
 import { warning } from '../vc-util/warning';
-import { AllowDrop, TreeNodeProps, TreeProps } from './props';
+import type { AllowDrop, TreeNodeProps, TreeProps } from './props';
 
 export function arrDel(list: Key[], value: Key) {
   const clone = list.slice();

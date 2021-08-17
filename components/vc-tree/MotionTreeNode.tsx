@@ -1,8 +1,10 @@
 import TreeNode from './TreeNode';
-import { FlattenNode } from './interface';
-import { getTreeNodeProps, TreeNodeRequiredProps } from './utils/treeUtil';
+import type { FlattenNode } from './interface';
+import type { TreeNodeRequiredProps } from './utils/treeUtil';
+import { getTreeNodeProps } from './utils/treeUtil';
 import { useInjectTreeContext } from './contextTypes';
-import { defineComponent, onBeforeUnmount, onMounted, PropType, ref, Transition, watch } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, onBeforeUnmount, onMounted, ref, Transition, watch } from 'vue';
 import { treeNodeProps } from './props';
 
 export default defineComponent({

@@ -1,4 +1,5 @@
-import { VNode, PropType, DefineComponent, ExtractPropTypes, ref } from 'vue';
+import type { VNode, PropType, DefineComponent, ExtractPropTypes } from 'vue';
+import { ref } from 'vue';
 import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import VcTree, { TreeNode } from '../vc-tree';
@@ -6,7 +7,7 @@ import animation from '../_util/openAnimation';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { DataNode, FieldNames, Key } from '../vc-tree/interface';
+import type { DataNode, FieldNames, Key } from '../vc-tree/interface';
 import { treeProps as vcTreeProps } from '../vc-tree/props';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import renderSwitcherIcon from './utils/iconUtil';
@@ -51,7 +52,7 @@ export interface AntTreeNodeProps {
   [customProp: string]: any;
 }
 
-export interface AntTreeNode extends DefineComponent<AntTreeNodeProps, {}> {}
+export type AntTreeNode = DefineComponent<AntTreeNodeProps, {}>;
 
 export interface AntTreeNodeBaseEvent {
   node: AntTreeNode;

@@ -4,7 +4,7 @@
 
 import { computed, defineComponent, ref, watch } from 'vue';
 import VirtualList from '../vc-virtual-list';
-import { FlattenNode, DataEntity, DataNode, ScrollTo } from './interface';
+import type { FlattenNode, DataEntity, DataNode, ScrollTo } from './interface';
 import MotionTreeNode from './MotionTreeNode';
 import { nodeListProps } from './props';
 import { findExpandedKeys, getExpandRange } from './utils/diffUtil';

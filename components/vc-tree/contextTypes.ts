@@ -84,6 +84,7 @@ export interface TreeContextProps {
 const TreeContextKey: InjectionKey<ComputedRef<TreeContextProps>> = Symbol('TreeContextKey');
 
 export const TreeContext = defineComponent({
+  name: 'TreeContext',
   props: {
     value: { type: Object as PropType<TreeContextProps> },
   },
@@ -92,7 +93,7 @@ export const TreeContext = defineComponent({
       TreeContextKey,
       computed(() => props.value),
     );
-    return slots.default?.();
+    return () => slots.default?.();
   },
 });
 

@@ -20,6 +20,7 @@ export default (
   }>;
   autoInsertSpaceInButton: ComputedRef<Boolean>;
   renderEmpty?: ComputedRef<(componentName?: string) => VNodeChild | JSX.Element>;
+  virtual: ComputedRef<Boolean>;
 } => {
   const configProvider = inject<UnwrapRef<ConfigProviderProps>>(
     'configProvider',
@@ -34,6 +35,7 @@ export default (
   const form = computed(() => configProvider.form);
   const size = computed(() => props.size || configProvider.componentSize);
   const getTargetContainer = computed(() => props.getTargetContainer);
+  const virtual = computed(() => props.virtual);
   return {
     configProvider,
     prefixCls,
@@ -45,5 +47,6 @@ export default (
     form,
     autoInsertSpaceInButton,
     renderEmpty,
+    virtual,
   };
 };

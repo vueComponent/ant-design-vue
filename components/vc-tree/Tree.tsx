@@ -32,6 +32,7 @@ import classNames from '../_util/classNames';
 export default defineComponent({
   name: 'Tree',
   inheritAttrs: false,
+  slots: ['checkable'],
   props: initDefaultProps(treeProps(), {
     prefixCls: 'vc-tree',
     showLine: false,
@@ -52,7 +53,7 @@ export default defineComponent({
     allowDrop: () => true,
   }),
 
-  setup(props, { attrs }) {
+  setup(props, { attrs, slots }) {
     const destroyed = ref(false);
     let delayedDragEnterLogic: Record<Key, number> = {};
 
@@ -91,6 +92,34 @@ export default defineComponent({
       return props.treeData !== undefined ? props.treeData : convertTreeToData(props.children);
     });
     const keyEntities = ref({});
+
+    const focused = ref(false);
+    const activeKey = ref<Key>(null);
+
+    const listChanging = ref(false);
+
+    const fieldNames = computed(() => fillFieldNames(props.fieldNames));
+
+    const listRef = ref();
+
+    let dragStartMousePosition = null;
+
+    let dragNode = null;
+
+    const treeNodeRequiredProps = computed(() => {
+      return {
+        expandedKeys: expandedKeys.value || [],
+        selectedKeys: selectedKeys.value || [],
+        loadedKeys: loadedKeys.value || [],
+        loadingKeys: loadingKeys.value || [],
+        checkedKeys: checkedKeys.value || [],
+        halfCheckedKeys: halfCheckedKeys.value || [],
+        dragOverNodeKey: dragState.dragOverNodeKey,
+        dropPosition: dragState.dropPosition,
+        keyEntities: keyEntities.value,
+      };
+    });
+
     watchEffect(() => {
       if (treeData.value) {
         const entitiesMap = convertDataToEntities(treeData.value, { fieldNames: fieldNames.value });
@@ -186,32 +215,6 @@ export default defineComponent({
       }
     });
 
-    const focused = ref(false);
-    const activeKey = ref<Key>(null);
-
-    const listChanging = ref(false);
-
-    const fieldNames = computed(() => fillFieldNames(props.fieldNames));
-
-    const listRef = ref();
-
-    let dragStartMousePosition = null;
-
-    let dragNode = null;
-
-    const treeNodeRequiredProps = computed(() => {
-      return {
-        expandedKeys: expandedKeys.value || [],
-        selectedKeys: selectedKeys.value || [],
-        loadedKeys: loadedKeys.value || [],
-        loadingKeys: loadingKeys.value || [],
-        checkedKeys: checkedKeys.value || [],
-        halfCheckedKeys: halfCheckedKeys.value || [],
-        dragOverNodeKey: dragState.dragOverNodeKey,
-        dropPosition: dragState.dropPosition,
-        keyEntities: keyEntities.value,
-      };
-    });
     const scrollTo: ScrollTo = scroll => {
       listRef.value.scrollTo(scroll);
     };
@@ -983,7 +986,7 @@ export default defineComponent({
         checkable,
         checkStrictly,
         disabled,
-        motion,
+        openAnimation,
         loadData,
         filterTreeNode,
         height,
@@ -1059,7 +1062,7 @@ export default defineComponent({
               disabled={disabled}
               selectable={selectable}
               checkable={!!checkable}
-              motion={motion}
+              motion={openAnimation}
               dragging={dragging}
               height={height}
               itemHeight={itemHeight}
@@ -1078,6 +1081,7 @@ export default defineComponent({
               onScroll={onScroll}
               {...treeNodeRequiredProps.value}
               {...domProps}
+              v-slots={slots}
             />
           </div>
         </TreeContext>

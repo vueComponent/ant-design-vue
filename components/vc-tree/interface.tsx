@@ -1,4 +1,4 @@
-import { VNode } from 'vue';
+import { CSSProperties, VNode } from 'vue';
 export type { ScrollTo } from '../vc-virtual-list/List';
 
 export interface DataNode {
@@ -14,8 +14,8 @@ export interface DataNode {
   switcherIcon?: IconType;
 
   /** Set style of TreeNode. This is not recommend if you don't have any force requirement */
-  // className?: string;
-  // style?: CSSProperties;
+  class?: string;
+  style?: CSSProperties;
 }
 
 export interface EventDataNode extends DataNode {

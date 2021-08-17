@@ -13,7 +13,7 @@ import UploadList from './UploadList';
 import { UploadProps } from './interface';
 import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './utils';
 import { defineComponent, inject } from 'vue';
-import { getDataAndAria } from '../vc-tree/src/util';
+import { getDataAndAriaProps } from '../_util/util';
 
 export default defineComponent({
   name: 'AUpload',
@@ -280,7 +280,7 @@ export default defineComponent({
         [`${prefixCls}-disabled`]: disabled,
       });
       return (
-        <span class={className} {...getDataAndAria(this.$attrs)}>
+        <span class={className} {...getDataAndAriaProps(this.$attrs)}>
           <div
             class={dragCls}
             onDrop={this.onFileDrop}

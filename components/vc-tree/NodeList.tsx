@@ -94,6 +94,7 @@ export default defineComponent({
   name: 'NodeList',
   inheritAttrs: false,
   props: nodeListProps,
+  slots: ['checkable'],
   setup(props, { expose, attrs, slots }) {
     // =============================== Ref ================================
     const listRef = ref(null);
@@ -275,8 +276,7 @@ export default defineComponent({
             itemHeight={itemHeight}
             prefixCls={`${prefixCls}-list`}
             ref={listRef}
-          >
-            {(treeNode: FlattenNode) => {
+            children={(treeNode: FlattenNode) => {
               const {
                 pos,
                 data: { ...restProps },
@@ -310,10 +310,11 @@ export default defineComponent({
                   onMousemove={() => {
                     onActiveChange(null);
                   }}
+                  v-slots={slots}
                 />
               );
             }}
-          </VirtualList>
+          ></VirtualList>
         </>
       );
     };

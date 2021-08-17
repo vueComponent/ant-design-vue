@@ -5,8 +5,15 @@ import type {
   NodeMouseEventHandler,
   NodeMouseEventParams,
 } from './contextTypes';
-import type { DataNode, Key, FlattenNode, DataEntity, EventDataNode, Direction } from './interface';
-import { fillFieldNames } from './utils/treeUtil';
+import type {
+  DataNode,
+  Key,
+  FlattenNode,
+  DataEntity,
+  EventDataNode,
+  Direction,
+  FieldNames,
+} from './interface';
 
 export interface CheckInfo {
   event: 'check';
@@ -103,7 +110,7 @@ export const treeProps = () => ({
   tabindex: Number,
   children: PropTypes.VNodeChild,
   treeData: { type: Array as PropType<DataNode[]> }, // Generate treeNode by children
-  fieldNames: fillFieldNames,
+  fieldNames: { type: Object as PropType<FieldNames> },
   showLine: { type: Boolean, default: undefined },
   showIcon: { type: Boolean, default: undefined },
   icon: PropTypes.any,
@@ -218,7 +225,7 @@ export const treeProps = () => ({
    */
   onActiveChange: { type: Function as PropType<(key: Key) => void> },
   filterTreeNode: { type: Function as PropType<(treeNode: EventDataNode) => boolean> },
-  motion: PropTypes.any,
+  openAnimation: PropTypes.any,
   switcherIcon: PropTypes.any,
 
   // Virtual List

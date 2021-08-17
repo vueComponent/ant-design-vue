@@ -16,7 +16,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: treeNodeProps,
   isTreeNode: 1,
-  slots: ['title', 'icon', 'switcherIcon'],
+  slots: ['title', 'icon', 'switcherIcon', 'checkable'],
   setup(props, { attrs, expose, slots }) {
     const dragNodeHighlight = ref(false);
     const context = useInjectTreeContext();
@@ -275,9 +275,6 @@ export default defineComponent({
 
       if (!checkable) return null;
 
-      // [Legacy] Custom element should be separate with `checkable` in future
-      const $custom = typeof checkable !== 'boolean' ? checkable : null;
-
       return (
         <span
           class={classNames(
@@ -288,7 +285,7 @@ export default defineComponent({
           )}
           onClick={onCheck}
         >
-          {$custom}
+          {slots.checkable?.()}
         </span>
       );
     };

@@ -3,7 +3,7 @@ import {
   convertDataToTree as vcConvertDataToTree,
   convertTreeToEntities as vcConvertTreeToEntities,
   conductCheck as rcConductCheck,
-} from '../../vc-tree/src/util';
+} from '../../vc-tree/utils/treeUtil';
 import { hasClass } from '../../vc-util/Dom/class';
 import { SHOW_CHILD, SHOW_PARENT } from './strategies';
 import { getSlot, getPropsData, isEmptyElement } from '../../_util/props-util';

@@ -5,6 +5,7 @@ import { convertNodePropsToEventData } from './utils/treeUtil';
 import { computed, defineComponent, getCurrentInstance, onMounted, onUpdated, ref } from 'vue';
 import { treeNodeProps } from './props';
 import classNames from '../_util/classNames';
+import { warning } from '../vc-util/warning';
 
 const ICON_OPEN = 'open';
 const ICON_CLOSE = 'close';
@@ -17,7 +18,11 @@ export default defineComponent({
   props: treeNodeProps,
   isTreeNode: 1,
   slots: ['title', 'icon', 'switcherIcon', 'checkable'],
-  setup(props, { attrs, expose, slots }) {
+  setup(props, { attrs, slots }) {
+    warning(
+      !('slots' in props.data),
+      'treeData slots is deprecated, please use `v-slot:icon` or `v-slot:title`, `v-slot:switcherIcon` instead',
+    );
     const dragNodeHighlight = ref(false);
     const context = useInjectTreeContext();
     const instance = getCurrentInstance();
@@ -198,7 +203,10 @@ export default defineComponent({
     };
 
     const renderSwitcherIconDom = (isLeaf: boolean) => {
-      const { switcherIcon: switcherIconFromProps = slots.switcherIcon } = props;
+      const {
+        switcherIcon: switcherIconFromProps = slots.switcherIcon ||
+          context.value.slots?.[props.data?.slots?.switcherIcon],
+      } = props;
       const { switcherIcon: switcherIconFromCtx } = context.value;
 
       const switcherIcon = switcherIconFromProps || switcherIconFromCtx;
@@ -327,7 +335,13 @@ export default defineComponent({
 
     // Icon + Title
     const renderSelector = () => {
-      const { title = slots.title, selected, icon = slots.icon, loading, data } = props;
+      const {
+        title = slots.title || context.value.slots?.[props.data?.slots?.title],
+        selected,
+        icon = slots.icon,
+        loading,
+        data,
+      } = props;
       const {
         prefixCls,
         showIcon,
@@ -345,7 +359,7 @@ export default defineComponent({
       let $icon;
 
       if (showIcon) {
-        const currentIcon = icon || treeIcon;
+        const currentIcon = icon || context.value.slots?.[data?.slots?.icon] || treeIcon;
 
         $icon = currentIcon ? (
           <span class={classNames(`${prefixCls}-iconEle`, `${prefixCls}-icon__customize`)}>
@@ -377,7 +391,7 @@ export default defineComponent({
           class={classNames(
             `${wrapClass}`,
             `${wrapClass}-${nodeState.value || 'normal'}`,
-            !disabled && (selected || dragNodeHighlight) && `${prefixCls}-node-selected`,
+            !disabled && (selected || dragNodeHighlight.value) && `${prefixCls}-node-selected`,
             !disabled && mergedDraggable && 'draggable',
           )}
           draggable={(!disabled && mergedDraggable) || undefined}

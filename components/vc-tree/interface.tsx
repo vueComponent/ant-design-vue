@@ -16,6 +16,7 @@ export interface DataNode {
   /** Set style of TreeNode. This is not recommend if you don't have any force requirement */
   class?: string;
   style?: CSSProperties;
+  slots?: Record<string, string>;
 }
 
 export interface EventDataNode extends DataNode {

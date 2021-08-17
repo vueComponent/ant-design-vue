@@ -1,4 +1,4 @@
-import type { VNode, PropType, DefineComponent, ExtractPropTypes } from 'vue';
+import type { VNode, PropType, DefineComponent, ExtractPropTypes, CSSProperties } from 'vue';
 import { ref } from 'vue';
 import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
@@ -16,7 +16,7 @@ import dropIndicatorRender from './utils/dropIndicator';
 export interface AntdTreeNodeAttribute {
   eventKey: string;
   prefixCls: string;
-  className: string;
+  class: string;
   expanded: boolean;
   selected: boolean;
   checked: boolean;
@@ -239,6 +239,7 @@ export default defineComponent({
           onExpand={handleExpand}
           onSelect={handleSelect}
           v-slots={{
+            ...slots,
             checkable: () => <span class={`${prefixCls.value}-checkbox-inner`} />,
           }}
           children={filterEmpty(slots.default?.())}

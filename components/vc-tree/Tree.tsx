@@ -1046,13 +1046,14 @@ export default defineComponent({
             onNodeDragLeave,
             onNodeDragEnd,
             onNodeDrop,
+            slots: slots,
           }}
         >
           <div
             role="tree"
             class={classNames(prefixCls, className, {
               [`${prefixCls}-show-line`]: showLine,
-              [`${prefixCls}-focused`]: focused,
+              [`${prefixCls}-focused`]: focused.value,
               [`${prefixCls}-active-focused`]: activeKey.value !== null,
             })}
           >

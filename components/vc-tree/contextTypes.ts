@@ -80,6 +80,7 @@ export interface TreeContextProps {
   onNodeDragLeave: NodeDragEventHandler;
   onNodeDragEnd: NodeDragEventHandler;
   onNodeDrop: NodeDragEventHandler;
+  slots: Record<string, any>;
 }
 const TreeContextKey: InjectionKey<ComputedRef<TreeContextProps>> = Symbol('TreeContextKey');
 

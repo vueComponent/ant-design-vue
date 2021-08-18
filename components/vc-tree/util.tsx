@@ -9,9 +9,9 @@ import type {
   Key,
   DataNode,
   DataEntity,
-  NodeInstance,
   FlattenNode,
   Direction,
+  DragNodeEvent,
 } from './interface';
 import { warning } from '../vc-util/warning';
 import type { AllowDrop, TreeNodeProps, TreeProps } from './props';
@@ -79,8 +79,8 @@ export function isFirstChild(treeNodeEntity: DataEntity) {
 // Only used when drag, not affect SSR.
 export function calcDropPosition(
   event: MouseEvent,
-  _dragNode: NodeInstance,
-  targetNode: NodeInstance,
+  _dragNode: DragNodeEvent,
+  targetNode: DragNodeEvent,
   indent: number,
   startMousePosition: {
     x: number;
@@ -108,7 +108,7 @@ export function calcDropPosition(
   const rawDropLevelOffset = (horizontalMouseOffset - 12) / indent;
 
   // find abstract drop node by horizontal offset
-  let abstractDropNodeEntity: DataEntity = keyEntities[targetNode.props.eventKey];
+  let abstractDropNodeEntity: DataEntity = keyEntities[targetNode.eventKey.value];
 
   if (clientY < top + height / 2) {
     // first half, set abstract drop node to previous node
@@ -150,7 +150,7 @@ export function calcDropPosition(
       dropNode: abstractDropDataNode,
       dropPosition: -1,
     }) &&
-    abstractDropNodeEntity.key === targetNode.props.eventKey
+    abstractDropNodeEntity.key === targetNode.eventKey.value
   ) {
     // first half of first node in first level
     dropPosition = -1;

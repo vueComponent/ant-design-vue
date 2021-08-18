@@ -13,7 +13,7 @@ import type {
   Key,
   DataEntity,
   EventDataNode,
-  NodeInstance,
+  DragNodeEvent,
   DataNode,
   Direction,
 } from './interface';
@@ -30,7 +30,7 @@ export type NodeDragEventParams = {
 export type NodeMouseEventHandler = (e: MouseEvent, node: EventDataNode) => void;
 export type NodeDragEventHandler = (
   e: MouseEvent,
-  node: NodeInstance,
+  node: DragNodeEvent,
   outsideTree?: boolean,
 ) => void;
 

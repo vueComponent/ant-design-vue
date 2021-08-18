@@ -1,4 +1,4 @@
-import type { CSSProperties, VNode } from 'vue';
+import type { ComputedRef, CSSProperties, Ref, VNode } from 'vue';
 export type { ScrollTo } from '../vc-virtual-list/List';
 
 export interface DataNode {
@@ -31,6 +31,8 @@ export interface EventDataNode extends DataNode {
   dragOverGapBottom: boolean;
   pos: string;
   active: boolean;
+  dataRef: DataNode;
+  eventKey: Key; // 兼容 v2， 推荐直接用 key
 }
 
 export type IconType = any;
@@ -38,16 +40,17 @@ export type IconType = any;
 export type Key = string | number;
 
 export type NodeElement = VNode & {
-  selectHandle?: HTMLSpanElement;
   type: {
     isTreeNode: boolean;
   };
 };
 
-export type NodeInstance = VNode & {
-  selectHandle?: HTMLSpanElement;
+export type DragNodeEvent = {
+  eventData: ComputedRef<EventDataNode>;
+  eventKey: ComputedRef<Key>;
+  selectHandle: Ref<HTMLSpanElement>;
+  pos: ComputedRef<string>;
 };
-
 export interface Entity {
   node: NodeElement;
   index: number;

@@ -6,6 +6,7 @@ import { computed, defineComponent, getCurrentInstance, onMounted, onUpdated, re
 import { treeNodeProps } from './props';
 import classNames from '../_util/classNames';
 import { warning } from '../vc-util/warning';
+import { DragNodeEvent } from './interface';
 
 const ICON_OPEN = 'open';
 const ICON_CLOSE = 'close';
@@ -18,14 +19,13 @@ export default defineComponent({
   props: treeNodeProps,
   isTreeNode: 1,
   slots: ['title', 'icon', 'switcherIcon', 'checkable'],
-  setup(props, { attrs, slots }) {
+  setup(props, { attrs, slots, expose }) {
     warning(
       !('slots' in props.data),
       'treeData slots is deprecated, please use `v-slot:icon` or `v-slot:title`, `v-slot:switcherIcon` instead',
     );
     const dragNodeHighlight = ref(false);
     const context = useInjectTreeContext();
-    const instance = getCurrentInstance();
     const selectHandle = ref();
 
     const hasChildren = computed(() => {
@@ -86,9 +86,19 @@ export default defineComponent({
       return treeSelectable;
     });
 
+    const eventData = computed(() => {
+      return convertNodePropsToEventData(props);
+    });
+    const dragNodeEvent: DragNodeEvent = {
+      eventData,
+      eventKey: computed(() => props.eventKey),
+      selectHandle,
+      pos: computed(() => props.pos),
+    };
+    expose(dragNodeEvent);
     const onSelectorDoubleClick = (e: MouseEvent) => {
       const { onNodeDoubleClick } = context.value;
-      onNodeDoubleClick(e, convertNodePropsToEventData(props));
+      onNodeDoubleClick(e, eventData.value);
     };
 
     const onSelect = (e: MouseEvent) => {
@@ -96,7 +106,7 @@ export default defineComponent({
 
       const { onNodeSelect } = context.value;
       e.preventDefault();
-      onNodeSelect(e, convertNodePropsToEventData(props));
+      onNodeSelect(e, eventData.value);
     };
 
     const onCheck = (e: MouseEvent) => {
@@ -109,13 +119,13 @@ export default defineComponent({
 
       e.preventDefault();
       const targetChecked = !checked;
-      onNodeCheck(e, convertNodePropsToEventData(props), targetChecked);
+      onNodeCheck(e, eventData.value, targetChecked);
     };
 
     const onSelectorClick = (e: MouseEvent) => {
       // Click trigger before select/check operation
       const { onNodeClick } = context.value;
-      onNodeClick(e, convertNodePropsToEventData(props));
+      onNodeClick(e, eventData.value);
 
       if (isSelectable.value) {
         onSelect(e);
@@ -126,17 +136,17 @@ export default defineComponent({
 
     const onMouseEnter = (e: MouseEvent) => {
       const { onNodeMouseEnter } = context.value;
-      onNodeMouseEnter(e, convertNodePropsToEventData(props));
+      onNodeMouseEnter(e, eventData.value);
     };
 
     const onMouseLeave = (e: MouseEvent) => {
       const { onNodeMouseLeave } = context.value;
-      onNodeMouseLeave(e, convertNodePropsToEventData(props));
+      onNodeMouseLeave(e, eventData.value);
     };
 
     const onContextmenu = (e: MouseEvent) => {
       const { onNodeContextMenu } = context.value;
-      onNodeContextMenu(e, convertNodePropsToEventData(props));
+      onNodeContextMenu(e, eventData.value);
     };
 
     const onDragStart = (e: DragEvent) => {
@@ -144,7 +154,7 @@ export default defineComponent({
 
       e.stopPropagation();
       dragNodeHighlight.value = true;
-      onNodeDragStart(e, instance.vnode);
+      onNodeDragStart(e, dragNodeEvent);
 
       try {
         // ie throw error
@@ -160,7 +170,7 @@ export default defineComponent({
 
       e.preventDefault();
       e.stopPropagation();
-      onNodeDragEnter(e, instance.vnode);
+      onNodeDragEnter(e, dragNodeEvent);
     };
 
     const onDragOver = (e: DragEvent) => {
@@ -168,14 +178,14 @@ export default defineComponent({
 
       e.preventDefault();
       e.stopPropagation();
-      onNodeDragOver(e, instance.vnode);
+      onNodeDragOver(e, dragNodeEvent);
     };
 
     const onDragLeave = (e: DragEvent) => {
       const { onNodeDragLeave } = context.value;
 
       e.stopPropagation();
-      onNodeDragLeave(e, instance.vnode);
+      onNodeDragLeave(e, dragNodeEvent);
     };
 
     const onDragEnd = (e: DragEvent) => {
@@ -183,7 +193,7 @@ export default defineComponent({
 
       e.stopPropagation();
       dragNodeHighlight.value = false;
-      onNodeDragEnd(e, instance.vnode);
+      onNodeDragEnd(e, dragNodeEvent);
     };
 
     const onDrop = (e: DragEvent) => {
@@ -192,14 +202,14 @@ export default defineComponent({
       e.preventDefault();
       e.stopPropagation();
       dragNodeHighlight.value = false;
-      onNodeDrop(e, instance.vnode);
+      onNodeDrop(e, dragNodeEvent);
     };
 
     // Disabled item still can be switch
     const onExpand = e => {
       const { onNodeExpand } = context.value;
       if (props.loading) return;
-      onNodeExpand(e, convertNodePropsToEventData(props));
+      onNodeExpand(e, eventData.value);
     };
 
     const renderSwitcherIconDom = (isLeaf: boolean) => {
@@ -231,7 +241,7 @@ export default defineComponent({
         // We needn't reload data when has children in sync logic
         // It's only needed in node expanded
         if (!hasChildren.value && !loaded) {
-          onNodeLoad(convertNodePropsToEventData(props));
+          onNodeLoad(eventData.value);
         }
       }
     };
@@ -240,7 +250,7 @@ export default defineComponent({
       syncLoadData();
     });
     onUpdated(() => {
-      syncLoadData();
+      //syncLoadData();
     });
 
     // Switcher
@@ -454,7 +464,7 @@ export default defineComponent({
             'drag-over': !disabled && dragOver,
             'drag-over-gap-top': !disabled && dragOverGapTop,
             'drag-over-gap-bottom': !disabled && dragOverGapBottom,
-            'filter-node': filterTreeNode && filterTreeNode(convertNodePropsToEventData(props)),
+            'filter-node': filterTreeNode && filterTreeNode(eventData.value),
           })}
           style={attrs.style}
           onDragenter={mergedDraggable ? onDragEnter : undefined}

@@ -11,7 +11,7 @@ import {
   arrDel,
   posToArr,
 } from './util';
-import type { Key, FlattenNode, EventDataNode, NodeInstance, ScrollTo } from './interface';
+import type { Key, FlattenNode, EventDataNode, ScrollTo, DragNodeEvent } from './interface';
 import {
   flattenTreeData,
   convertTreeToData,
@@ -106,7 +106,7 @@ export default defineComponent({
 
     let dragStartMousePosition = null;
 
-    let dragNode = null;
+    let dragNode: DragNodeEvent = null;
 
     const treeNodeRequiredProps = computed(() => {
       return {
@@ -251,7 +251,7 @@ export default defineComponent({
       cleanDragState();
 
       if (onDragend && !outsideTree) {
-        onDragend({ event, node: convertNodePropsToEventData(node.props) });
+        onDragend({ event, node: node.eventData.value });
       }
 
       dragNode = null;
@@ -266,7 +266,7 @@ export default defineComponent({
 
     const onNodeDragStart: NodeDragEventHandler = (event, node) => {
       const { onDragstart } = props;
-      const { eventKey } = node.props;
+      const { eventKey, eventData } = node;
 
       dragNode = node;
       dragStartMousePosition = {
@@ -274,17 +274,17 @@ export default defineComponent({
         y: event.clientY,
       };
 
-      const newExpandedKeys = arrDel(expandedKeys.value, eventKey);
+      const newExpandedKeys = arrDel(expandedKeys.value, eventKey.value);
 
       dragState.dragging = true;
-      dragState.dragChildrenKeys = getDragChildrenKeys(eventKey, keyEntities.value);
+      dragState.dragChildrenKeys = getDragChildrenKeys(eventKey.value, keyEntities.value);
       indent.value = listRef.value.getIndentWidth();
 
       setExpandedKeys(newExpandedKeys);
       window.addEventListener('dragend', onWindowDragEnd);
 
       if (onDragstart) {
-        onDragstart({ event, node: convertNodePropsToEventData(node.props) });
+        onDragstart({ event, node: eventData.value });
       }
     };
 
@@ -295,9 +295,8 @@ export default defineComponent({
      * Better for use mouse move event to refresh drag state.
      * But let's just keep it to avoid event trigger logic change.
      */
-    const onNodeDragEnter = (event: MouseEvent, node: NodeInstance) => {
+    const onNodeDragEnter = (event: MouseEvent, node: DragNodeEvent) => {
       const { onDragenter, onExpand, allowDrop, direction } = props;
-      const { pos } = node.props;
 
       const {
         dropPosition,
@@ -347,27 +346,27 @@ export default defineComponent({
         clearTimeout(delayedDragEnterLogic[key]);
       });
 
-      if (dragNode.props.eventKey !== node.props.eventKey) {
+      if (dragNode.eventKey.value !== node.eventKey.value) {
         // hoist expand logic here
         // since if logic is on the bottom
         // it will be blocked by abstract dragover node check
         //   => if you dragenter from top, you mouse will still be consider as in the top node
         (event as any).persist();
-        delayedDragEnterLogic[pos] = window.setTimeout(() => {
+        delayedDragEnterLogic[node.pos.value] = window.setTimeout(() => {
           if (!dragState.dragging) return;
 
           let newExpandedKeys = [...expandedKeys.value];
-          const entity = keyEntities[node.props.eventKey];
+          const entity = keyEntities[node.eventKey.value];
 
           if (entity && (entity.children || []).length) {
-            newExpandedKeys = arrAdd(expandedKeys.value, node.props.eventKey);
+            newExpandedKeys = arrAdd(expandedKeys.value, node.eventKey.value);
           }
 
           setExpandedKeys(newExpandedKeys);
 
           if (onExpand) {
             onExpand(newExpandedKeys, {
-              node: convertNodePropsToEventData(node.props),
+              node: node.eventData.value,
               expanded: true,
               nativeEvent: (event as any).nativeEvent,
             });
@@ -376,7 +375,7 @@ export default defineComponent({
       }
 
       // Skip if drag node is self
-      if (dragNode.props.eventKey === dropTargetKey && dropLevelOffset === 0) {
+      if (dragNode.eventKey.value === dropTargetKey && dropLevelOffset === 0) {
         Object.assign(dragState, {
           dragOverNodeKey: null,
           dropPosition: null,
@@ -403,13 +402,13 @@ export default defineComponent({
       if (onDragenter) {
         onDragenter({
           event,
-          node: convertNodePropsToEventData(node.props),
+          node: node.eventData.value,
           expandedKeys: expandedKeys.value,
         });
       }
     };
 
-    const onNodeDragOver = (event: MouseEvent, node: NodeInstance) => {
+    const onNodeDragOver = (event: MouseEvent, node: DragNodeEvent) => {
       const { onDragover, allowDrop, direction } = props;
 
       const {
@@ -441,7 +440,7 @@ export default defineComponent({
 
       // Update drag position
 
-      if (dragNode.props.eventKey === dropTargetKey && dropLevelOffset === 0) {
+      if (dragNode.eventKey.value === dropTargetKey && dropLevelOffset === 0) {
         if (
           !(
             dragState.dropPosition === null &&
@@ -486,7 +485,7 @@ export default defineComponent({
       }
 
       if (onDragover) {
-        onDragover({ event, node: convertNodePropsToEventData(node.props) });
+        onDragover({ event, node: node.eventData.value });
       }
     };
 
@@ -494,7 +493,7 @@ export default defineComponent({
       const { onDragleave } = props;
 
       if (onDragleave) {
-        onDragleave({ event, node: convertNodePropsToEventData(node.props) });
+        onDragleave({ event, node: node.eventData.value });
       }
     };
     const onNodeDrop = (event: MouseEvent, _node, outsideTree = false) => {
@@ -527,8 +526,8 @@ export default defineComponent({
       const dropResult = {
         event,
         node: convertNodePropsToEventData(abstractDropNodeProps),
-        dragNode: dragNode ? convertNodePropsToEventData(dragNode.props) : null,
-        dragNodesKeys: [dragNode.props.eventKey].concat(dragChildrenKeys),
+        dragNode: dragNode ? dragNode.eventData.value : null,
+        dragNodesKeys: [dragNode.eventKey.value].concat(dragChildrenKeys),
         dropToGap: dropPosition !== 0,
         dropPosition: dropPosition + Number(posArr[posArr.length - 1]),
       };
@@ -804,9 +803,10 @@ export default defineComponent({
               // );
               // flattenNodes.value = newFlattenTreeData;
             })
-            .catch(() => {
+            .catch(e => {
               const expandedKeysToRestore = arrDel(expandedKeys.value, key);
               setExpandedKeys(expandedKeysToRestore);
+              Promise.reject(e);
             });
         }
       }
@@ -874,7 +874,13 @@ export default defineComponent({
         onActiveChange(null);
       }
     };
-
+    const activeItemEventNode = computed(() => {
+      return convertNodePropsToEventData({
+        ...getTreeNodeProps(activeKey.value, treeNodeRequiredProps.value),
+        data: activeItem.value.data,
+        active: true,
+      });
+    });
     const onKeyDown = event => {
       const { onKeyDown, checkable, selectable } = props;
 
@@ -896,11 +902,7 @@ export default defineComponent({
       const item = activeItem.value;
       if (item && item.data) {
         const expandable = item.data.isLeaf === false || !!(item.data.children || []).length;
-        const eventNode = convertNodePropsToEventData({
-          ...getTreeNodeProps(activeKey.value, treeNodeRequiredProps.value),
-          data: item.data,
-          active: true,
-        });
+        const eventNode = activeItemEventNode.value;
 
         switch (event.which) {
           // >>> Expand

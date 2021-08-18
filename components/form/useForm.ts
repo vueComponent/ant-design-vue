@@ -107,6 +107,8 @@ function useForm(
   validateInfos: validateInfos;
   resetFields: (newValues?: Props) => void;
   validate: <T = any>(names?: namesType, option?: validateOptions) => Promise<T>;
+
+  /** This is an internal usage. Do not use in your prod */
   validateField: (
     name: string,
     value: any,

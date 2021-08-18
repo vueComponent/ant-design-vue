@@ -1,4 +1,4 @@
-import type { VNode, PropType, DefineComponent, ExtractPropTypes, CSSProperties } from 'vue';
+import type { PropType, ExtractPropTypes } from 'vue';
 import { ref } from 'vue';
 import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
@@ -7,7 +7,7 @@ import animation from '../_util/openAnimation';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import type { DataNode, FieldNames, Key } from '../vc-tree/interface';
+import type { DataNode, DragNodeEvent, FieldNames, Key } from '../vc-tree/interface';
 import { treeProps as vcTreeProps } from '../vc-tree/props';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import renderSwitcherIcon from './utils/iconUtil';
@@ -33,36 +33,20 @@ export interface AntdTreeNodeAttribute {
   disableCheckbox: boolean;
 }
 
-export interface AntTreeNodeProps {
-  className?: string;
-  checkable?: boolean;
-  disabled?: boolean;
-  disableCheckbox?: boolean;
-  title?: string | any;
-  key?: Key;
-  eventKey?: string;
-  isLeaf?: boolean;
-  checked?: boolean;
-  expanded?: boolean;
-  loading?: boolean;
-  selected?: boolean;
-  selectable?: boolean;
-  icon?: ((treeNode: AntdTreeNodeAttribute) => any) | VNode;
-  children?: any;
-  [customProp: string]: any;
-}
+export type AntTreeNodeProps = DataNode;
 
-export type AntTreeNode = DefineComponent<AntTreeNodeProps, {}>;
+// [Legacy] Compatible for v2
+export type TreeDataItem = DataNode;
 
 export interface AntTreeNodeBaseEvent {
-  node: AntTreeNode;
+  node: DataNode;
   nativeEvent: MouseEvent;
 }
 
 export interface AntTreeNodeCheckedEvent extends AntTreeNodeBaseEvent {
   event: 'check';
   checked?: boolean;
-  checkedNodes?: AntTreeNode[];
+  checkedNodes?: DataNode[];
 }
 
 export interface AntTreeNodeSelectedEvent extends AntTreeNodeBaseEvent {
@@ -76,7 +60,7 @@ export interface AntTreeNodeExpandedEvent extends AntTreeNodeBaseEvent {
 }
 
 export interface AntTreeNodeMouseEvent {
-  node: AntTreeNode;
+  node: DataNode;
   event: DragEvent;
 }
 
@@ -85,16 +69,13 @@ export interface AntTreeNodeDragEnterEvent extends AntTreeNodeMouseEvent {
 }
 
 export interface AntTreeNodeDropEvent {
-  node: AntTreeNode;
-  dragNode: AntTreeNode;
+  node: DragNodeEvent;
+  dragNode: DragNodeEvent;
   dragNodesKeys: Key[];
   dropPosition: number;
   dropToGap?: boolean;
   event: MouseEvent;
 }
-
-// [Legacy] Compatible for v2
-export type TreeDataItem = DataNode;
 
 export const treeProps = () => {
   return {
@@ -130,8 +111,6 @@ export const treeProps = () => {
     defaultSelectedKeys: { type: Array as PropType<Key[]> },
     selectable: { type: Boolean, default: undefined },
 
-    /** filter some AntTreeNodes as you need. it should return true */
-    filterAntTreeNode: { type: Function as PropType<(node: AntTreeNode) => boolean> },
     loadedKeys: { type: Array as PropType<Key[]> },
     draggable: { type: Boolean, default: undefined },
     showIcon: { type: Boolean, default: undefined },

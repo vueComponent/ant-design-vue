@@ -6,13 +6,13 @@ export { EventDataNode, DataNode } from '../vc-tree/interface';
 
 export {
   TreeProps,
-  AntTreeNode,
   AntTreeNodeMouseEvent,
   AntTreeNodeExpandedEvent,
   AntTreeNodeCheckedEvent,
   AntTreeNodeSelectedEvent,
   AntdTreeNodeAttribute,
   AntTreeNodeProps,
+  TreeDataItem,
 } from './Tree';
 
 export { ExpandAction as DirectoryTreeExpandAction, DirectoryTreeProps } from './DirectoryTree';

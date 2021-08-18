@@ -58,7 +58,6 @@ export default defineComponent({
   setup(props, { attrs, slots }) {
     const destroyed = ref(false);
     let delayedDragEnterLogic: Record<Key, number> = {};
-
     const indent = ref();
     const selectedKeys = ref([]);
     const checkedKeys = ref([]);
@@ -147,7 +146,7 @@ export default defineComponent({
             ? conductExpandParent(props.expandedKeys, keyEntities.value)
             : props.expandedKeys;
       } else if (!init && props.defaultExpandAll) {
-        const cloneKeyEntities = { ...keyEntities };
+        const cloneKeyEntities = { ...keyEntities.value };
         delete cloneKeyEntities[MOTION_KEY];
         keys = Object.keys(cloneKeyEntities).map(key => cloneKeyEntities[key].key);
       } else if (!init && props.defaultExpandedKeys) {
@@ -223,7 +222,7 @@ export default defineComponent({
     // =========================== Expanded ===========================
     /** Set uncontrolled `expandedKeys`. This will also auto update `flattenNodes`. */
     const setExpandedKeys = (keys: Key[]) => {
-      if (props.expandedKeys !== undefined) {
+      if (props.expandedKeys === undefined) {
         expandedKeys.value = keys;
       }
     };
@@ -267,7 +266,6 @@ export default defineComponent({
     const onNodeDragStart: NodeDragEventHandler = (event, node) => {
       const { onDragstart } = props;
       const { eventKey, eventData } = node;
-
       dragNode = node;
       dragStartMousePosition = {
         x: event.clientX,
@@ -351,24 +349,22 @@ export default defineComponent({
         // since if logic is on the bottom
         // it will be blocked by abstract dragover node check
         //   => if you dragenter from top, you mouse will still be consider as in the top node
-        (event as any).persist();
         delayedDragEnterLogic[node.pos.value] = window.setTimeout(() => {
           if (!dragState.dragging) return;
 
           let newExpandedKeys = [...expandedKeys.value];
-          const entity = keyEntities[node.eventKey.value];
+          const entity = keyEntities.value[node.eventKey.value];
 
           if (entity && (entity.children || []).length) {
             newExpandedKeys = arrAdd(expandedKeys.value, node.eventKey.value);
           }
-
           setExpandedKeys(newExpandedKeys);
 
           if (onExpand) {
             onExpand(newExpandedKeys, {
               node: node.eventData.value,
               expanded: true,
-              nativeEvent: (event as any).nativeEvent,
+              nativeEvent: event,
             });
           }
         }, 800);
@@ -579,7 +575,7 @@ export default defineComponent({
         })
         .filter(node => node);
 
-      if (props.selectedKeys !== undefined) {
+      if (props.selectedKeys === undefined) {
         selectedKeys.value = newSelectedKeys;
       }
 
@@ -589,7 +585,7 @@ export default defineComponent({
           selected: targetSelected,
           node: treeNode,
           selectedNodes,
-          nativeEvent: (e as any).nativeEvent,
+          nativeEvent: e,
         });
       }
     };
@@ -604,7 +600,7 @@ export default defineComponent({
         event: 'check',
         node: treeNode,
         checked,
-        nativeEvent: (e as any).nativeEvent,
+        nativeEvent: e,
       };
 
       if (checkStrictly) {
@@ -615,11 +611,11 @@ export default defineComponent({
         checkedObj = { checked: newCheckedKeys, halfChecked: newHalfCheckedKeys };
 
         eventObj.checkedNodes = newCheckedKeys
-          .map(checkedKey => keyEntities[checkedKey])
+          .map(checkedKey => keyEntities.value[checkedKey])
           .filter(entity => entity)
           .map(entity => entity.node);
 
-        if (props.checkedKeys !== undefined) {
+        if (props.checkedKeys === undefined) {
           checkedKeys.value = newCheckedKeys;
         }
       } else {
@@ -647,17 +643,16 @@ export default defineComponent({
         eventObj.checkedNodes = [];
         eventObj.checkedNodesPositions = [];
         eventObj.halfCheckedKeys = newHalfCheckedKeys;
-
+        console.log(eventObj);
         newCheckedKeys.forEach(checkedKey => {
           const entity = keyEntities.value[checkedKey];
           if (!entity) return;
 
           const { node, pos } = entity;
-
           eventObj.checkedNodes.push(node);
           eventObj.checkedNodesPositions.push({ node, pos });
         });
-        if (props.checkedKeys !== undefined) {
+        if (props.checkedKeys === undefined) {
           checkedKeys.value = newCheckedKeys;
           halfCheckedKeys.value = newHalfCheckedKeys;
         }
@@ -698,7 +693,7 @@ export default defineComponent({
               });
             }
 
-            if (props.loadedKeys !== undefined) {
+            if (props.loadedKeys === undefined) {
               loadedKeys.value = newLoadedKeys;
             }
             loadingKeys.value = newLoadingKeys;
@@ -785,7 +780,7 @@ export default defineComponent({
         onExpand(newExpandedKeys, {
           node: treeNode,
           expanded: targetExpanded,
-          nativeEvent: (e as any).nativeEvent,
+          nativeEvent: e,
         });
       }
 

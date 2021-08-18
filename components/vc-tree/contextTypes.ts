@@ -41,7 +41,8 @@ export interface TreeContextProps {
   icon: IconType;
   switcherIcon: IconType;
   draggable: ((node: DataNode) => boolean) | boolean;
-  checkable: boolean | VueNode;
+  checkable: boolean;
+  customCheckable: () => any;
   checkStrictly: boolean;
   disabled: boolean;
   keyEntities: Record<Key, DataEntity>;

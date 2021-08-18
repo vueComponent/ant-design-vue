@@ -2,60 +2,44 @@
   <a-tree
     v-model:expandedKeys="expandedKeys"
     v-model:selectedKeys="selectedKeys"
-    v-model:checkedKeys="checkedKeys"
-    checkable
+    :load-data="onLoadData"
     :tree-data="treeData"
-  >
-    <template #title0010><span style="color: #1890ff">sss</span></template>
-  </a-tree>
+  />
 </template>
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { TreeDataItem } from 'ant-design-vue/es/tree/Tree';
-
-const treeData: TreeDataItem[] = [
-  {
-    title: 'parent 1',
-    key: '0-0',
-    children: [
-      {
-        title: 'parent 1-0',
-        key: '0-0-0',
-        disabled: true,
-        children: [
-          { title: 'leaf', key: '0-0-0-0', disableCheckbox: true },
-          { title: 'leaf', key: '0-0-0-1' },
-        ],
-      },
-      {
-        title: 'parent 1-1',
-        key: '0-0-1',
-        children: [{ key: '0-0-1-0', slots: { title: 'title0010' } }],
-      },
-    ],
-  },
-];
 
 export default defineComponent({
   setup() {
-    const expandedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-    const selectedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-    const checkedKeys = ref<string[]>(['0-0-0', '0-0-1']);
-    watch(expandedKeys, () => {
-      console.log('expandedKeys', expandedKeys);
-    });
-    watch(selectedKeys, () => {
-      console.log('selectedKeys', selectedKeys);
-    });
-    watch(checkedKeys, () => {
-      console.log('checkedKeys', checkedKeys);
-    });
-
+    const expandedKeys = ref<string[]>([]);
+    const selectedKeys = ref<string[]>([]);
+    const treeData = ref<TreeDataItem[]>([
+      { title: 'Expand to load', key: '0' },
+      { title: 'Expand to load', key: '1' },
+      { title: 'Tree Node', key: '2', isLeaf: true },
+    ]);
+    const onLoadData = (treeNode: any) => {
+      return new Promise((resolve: (value?: unknown) => void) => {
+        if (treeNode.dataRef.children) {
+          resolve();
+          return;
+        }
+        setTimeout(() => {
+          treeNode.dataRef.children = [
+            { title: 'Child Node', key: `${treeNode.eventKey}-0` },
+            { title: 'Child Node', key: `${treeNode.eventKey}-1` },
+          ];
+          treeData.value = [...treeData.value];
+          resolve();
+        }, 1000);
+      });
+    };
     return {
-      treeData,
       expandedKeys,
       selectedKeys,
-      checkedKeys,
+      treeData,
+      onLoadData,
     };
   },
 });

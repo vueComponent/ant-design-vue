@@ -293,7 +293,7 @@ export default defineComponent({
           )}
           onClick={onCheck}
         >
-          {slots.checkable?.()}
+          {context.value.customCheckable?.()}
         </span>
       );
     };

@@ -34,7 +34,7 @@ import classNames from '../_util/classNames';
 export default defineComponent({
   name: 'Tree',
   inheritAttrs: false,
-  slots: ['checkable'],
+  slots: ['checkable', 'title', 'icon'],
   props: initDefaultProps(treeProps(), {
     prefixCls: 'vc-tree',
     showLine: false,
@@ -982,7 +982,7 @@ export default defineComponent({
         tabindex = 0,
         selectable,
         showIcon,
-        icon,
+        icon = slots.icon,
         switcherIcon,
         draggable,
         checkable,
@@ -994,7 +994,6 @@ export default defineComponent({
         height,
         itemHeight,
         virtual,
-        titleRender,
         dropIndicatorRender,
         onContextmenu,
         onScroll,
@@ -1014,6 +1013,7 @@ export default defineComponent({
             switcherIcon,
             draggable,
             checkable,
+            customCheckable: slots.checkable,
             checkStrictly,
             disabled,
             keyEntities: keyEntities.value,
@@ -1029,7 +1029,7 @@ export default defineComponent({
             loadData,
             filterTreeNode,
 
-            titleRender,
+            titleRender: slots.title,
 
             onNodeClick,
             onNodeDoubleClick,
@@ -1084,7 +1084,6 @@ export default defineComponent({
               onScroll={onScroll}
               {...treeNodeRequiredProps.value}
               {...domProps}
-              v-slots={slots}
             />
           </div>
         </TreeContext>

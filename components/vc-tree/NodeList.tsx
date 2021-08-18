@@ -94,8 +94,7 @@ export default defineComponent({
   name: 'NodeList',
   inheritAttrs: false,
   props: nodeListProps,
-  slots: ['checkable'],
-  setup(props, { expose, attrs, slots }) {
+  setup(props, { expose, attrs }) {
     // =============================== Ref ================================
     const listRef = ref(null);
     const indentMeasurerRef = ref(null);
@@ -310,7 +309,6 @@ export default defineComponent({
                   onMousemove={() => {
                     onActiveChange(null);
                   }}
-                  v-slots={slots}
                 />
               );
             }}

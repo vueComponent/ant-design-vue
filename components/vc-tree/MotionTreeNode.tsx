@@ -3,9 +3,10 @@ import type { FlattenNode } from './interface';
 import type { TreeNodeRequiredProps } from './utils/treeUtil';
 import { getTreeNodeProps } from './utils/treeUtil';
 import { useInjectTreeContext } from './contextTypes';
-import type { PropType } from 'vue';
+import { computed, getCurrentInstance, nextTick, PropType } from 'vue';
 import { defineComponent, onBeforeUnmount, onMounted, ref, Transition, watch } from 'vue';
 import { treeNodeProps } from './props';
+import { collapseMotion } from '../_util/transition';
 
 export default defineComponent({
   name: 'MotionTreeNode',
@@ -25,7 +26,21 @@ export default defineComponent({
     const visible = ref(true);
     const context = useInjectTreeContext();
     const motionedRef = ref(false);
-    const onMotionEnd = () => {
+    const transitionClass = ref('');
+    const transitionStyle = ref({});
+    const transitionProps = computed(() => {
+      if (props.motion) {
+        return props.motion;
+      } else {
+        return collapseMotion(transitionStyle, transitionClass);
+      }
+    });
+    const onMotionEnd = (type?: 'appear' | 'leave') => {
+      if (type === 'appear') {
+        transitionProps.value?.onAfterAppear?.();
+      } else if (type === 'leave') {
+        transitionProps.value?.onAfterLeave?.();
+      }
       if (!motionedRef.value) {
         props.onMotionEnd();
       }
@@ -36,9 +51,12 @@ export default defineComponent({
       () => props.motionNodes,
       () => {
         if (props.motionNodes && props.motionType === 'hide' && visible.value) {
-          visible.value = false;
+          nextTick(() => {
+            visible.value = false;
+          });
         }
       },
+      { immediate: true, flush: 'post' },
     );
     onMounted(() => {
       props.motionNodes && props.onMotionStart();
@@ -46,18 +64,23 @@ export default defineComponent({
     onBeforeUnmount(() => {
       props.motionNodes && onMotionEnd();
     });
+
     return () => {
       const { motion, motionNodes, motionType, active, treeNodeRequiredProps, ...otherProps } =
         props;
       if (motionNodes) {
         return (
           <Transition
-            {...motion}
+            {...transitionProps.value}
             appear={motionType === 'show'}
-            onAfterAppear={onMotionEnd}
-            onAfterLeave={onMotionEnd}
+            onAfterAppear={() => onMotionEnd('appear')}
+            onAfterLeave={() => onMotionEnd('leave')}
           >
-            <div v-show={visible.value} class={`${context.value.prefixCls}-treenode-motion`}>
+            <div
+              v-show={visible.value}
+              class={[`${context.value.prefixCls}-treenode-motion`, transitionClass.value]}
+              style={transitionStyle.value}
+            >
               {motionNodes.map((treeNode: FlattenNode) => {
                 const {
                   data: { ...restProps },

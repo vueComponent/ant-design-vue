@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import VcTree, { TreeNode } from '../vc-tree';
-import animation from '../_util/openAnimation';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
@@ -136,10 +135,6 @@ export default defineComponent({
     checkable: false,
     selectable: true,
     showIcon: false,
-    openAnimation: {
-      ...animation,
-      appear: false,
-    },
     blockNode: false,
   }),
   slots: ['icon', 'title', 'switcherIcon'],

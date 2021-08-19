@@ -2,7 +2,7 @@ import { useInjectTreeContext } from './contextTypes';
 import { getDataAndAria } from './util';
 import Indent from './Indent';
 import { convertNodePropsToEventData } from './utils/treeUtil';
-import { computed, defineComponent, getCurrentInstance, onMounted, onUpdated, ref } from 'vue';
+import { computed, defineComponent, onMounted, onUpdated, ref } from 'vue';
 import { treeNodeProps } from './props';
 import classNames from '../_util/classNames';
 import { warning } from '../vc-util/warning';
@@ -18,7 +18,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: treeNodeProps,
   isTreeNode: 1,
-  slots: ['title', 'icon', 'switcherIcon', 'checkable'],
+  slots: ['title', 'icon', 'switcherIcon'],
   setup(props, { attrs, slots, expose }) {
     warning(
       !('slots' in props.data),

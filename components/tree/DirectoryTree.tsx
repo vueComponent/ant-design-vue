@@ -247,13 +247,13 @@ export default defineComponent({
         },
         attrs.class,
       );
-      const { icon = slots.icon, ...otherProps } = props;
+      const { icon = slots.icon, blockNode = true, ...otherProps } = props;
       return (
         <Tree
           {...attrs}
           icon={icon || getIcon}
           ref={treeRef}
-          blockNode
+          blockNode={blockNode}
           {...otherProps}
           prefixCls={prefixCls.value}
           class={connectClassName}

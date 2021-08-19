@@ -41,7 +41,7 @@ export const treeNodeProps = {
   dragOverGapTop: { type: Boolean, default: undefined },
   dragOverGapBottom: { type: Boolean, default: undefined },
   pos: String,
-  // domRef: React.Ref<HTMLDivElement>,
+
   /** New added in Tree for easy data access */
   data: { type: Object as PropType<DataNode> },
   isStart: { type: Array as PropType<boolean[]> },

@@ -118,7 +118,7 @@ export default defineComponent({
       props.onListChangeEnd();
     }
     watch(
-      [() => ({ ...props.expandedKeys }), () => props.data],
+      [() => [...props.expandedKeys], () => props.data],
       ([expandedKeys, data], [prevExpandedKeys, prevData]) => {
         const diffExpanded = findExpandedKeys(prevExpandedKeys, expandedKeys);
 
@@ -161,9 +161,7 @@ export default defineComponent({
           transitionData.value = data;
         }
       },
-      { immediate: true },
     );
-
     // We should clean up motion if is changed by dragging
     watch(
       () => props.dragging,
@@ -174,7 +172,9 @@ export default defineComponent({
       },
     );
 
-    const mergedData = computed(() => (props.motion ? transitionData.value : props.data));
+    const mergedData = computed(() =>
+      props.motion === undefined ? transitionData.value : props.data,
+    );
 
     return () => {
       const {

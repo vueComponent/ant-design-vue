@@ -149,7 +149,7 @@ export const treeProps = () => ({
   onKeyDown: { type: Function as PropType<EventHandlerNonNull> },
   onContextmenu: { type: Function as PropType<EventHandlerNonNull> },
   onClick: { type: Function as PropType<NodeMouseEventHandler> },
-  onDblClick: { type: Function as PropType<NodeMouseEventHandler> },
+  onDblclick: { type: Function as PropType<NodeMouseEventHandler> },
   onScroll: { type: Function as PropType<EventHandlerNonNull> },
   onExpand: {
     type: Function as PropType<

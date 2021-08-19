@@ -55,7 +55,7 @@ export default defineComponent({
     allowDrop: () => true,
   }),
 
-  setup(props, { attrs, slots }) {
+  setup(props, { attrs, slots, expose }) {
     const destroyed = ref(false);
     let delayedDragEnterLogic: Record<Key, number> = {};
     const indent = ref();
@@ -543,9 +543,9 @@ export default defineComponent({
     };
 
     const onNodeDoubleClick: NodeMouseEventHandler = (e, treeNode) => {
-      const { onDblClick } = props;
-      if (onDblClick) {
-        onDblClick(e, treeNode);
+      const { onDblclick } = props;
+      if (onDblclick) {
+        onDblclick(e, treeNode);
       }
     };
 
@@ -953,7 +953,9 @@ export default defineComponent({
         onKeyDown(event);
       }
     };
-
+    expose({
+      onNodeExpand,
+    });
     onUnmounted(() => {
       window.removeEventListener('dragend', onWindowDragEnd);
       destroyed.value = true;

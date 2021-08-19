@@ -1,45 +1,30 @@
 <template>
-  <a-tree
+  <a-directory-tree
     v-model:expandedKeys="expandedKeys"
     v-model:selectedKeys="selectedKeys"
-    :load-data="onLoadData"
-    :tree-data="treeData"
-  />
+    multiple
+    @test="onTest"
+  >
+    <a-tree-node key="0-0" title="parent 0">
+      <a-tree-node key="0-0-0" title="leaf 0-0" is-leaf />
+      <a-tree-node key="0-0-1" title="leaf 0-1" is-leaf />
+    </a-tree-node>
+    <a-tree-node key="0-1" title="parent 1">
+      <a-tree-node key="0-1-0" title="leaf 1-0" is-leaf />
+      <a-tree-node key="0-1-1" title="leaf 1-1" is-leaf />
+    </a-tree-node>
+  </a-directory-tree>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-import { TreeDataItem } from 'ant-design-vue/es/tree/Tree';
-
 export default defineComponent({
   setup() {
-    const expandedKeys = ref<string[]>([]);
+    const expandedKeys = ref<string[]>(['0-0', '0-1']);
     const selectedKeys = ref<string[]>([]);
-    const treeData = ref<TreeDataItem[]>([
-      { title: 'Expand to load', key: '0' },
-      { title: 'Expand to load', key: '1' },
-      { title: 'Tree Node', key: '2', isLeaf: true },
-    ]);
-    const onLoadData = (treeNode: any) => {
-      return new Promise((resolve: (value?: unknown) => void) => {
-        if (treeNode.dataRef.children) {
-          resolve();
-          return;
-        }
-        setTimeout(() => {
-          treeNode.dataRef.children = [
-            { title: 'Child Node', key: `${treeNode.eventKey}-0` },
-            { title: 'Child Node', key: `${treeNode.eventKey}-1` },
-          ];
-          treeData.value = [...treeData.value];
-          resolve();
-        }, 1000);
-      });
-    };
     return {
       expandedKeys,
       selectedKeys,
-      treeData,
-      onLoadData,
+      onTest: () => {},
     };
   },
 });

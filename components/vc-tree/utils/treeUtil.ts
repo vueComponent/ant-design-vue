@@ -64,7 +64,7 @@ export function warningWithoutKey(treeData: DataNode[], fieldNames: FieldNames) 
  * Convert `children` of Tree into `treeData` structure.
  */
 export function convertTreeToData(rootNodes: VNodeChild): DataNode[] {
-  function dig(node: VNodeChild): DataNode[] {
+  function dig(node: VNodeChild = []): DataNode[] {
     const treeNodes = node as NodeElement[];
     return treeNodes
       .map(treeNode => {
@@ -75,8 +75,8 @@ export function convertTreeToData(rootNodes: VNodeChild): DataNode[] {
         }
 
         const key = treeNode.key as string | number;
-        const { children, ...rest } = treeNode.props;
-
+        const { ...rest } = treeNode.props;
+        const children = (treeNode.children as any)?.default?.();
         const dataNode: DataNode = {
           ...rest,
           key,

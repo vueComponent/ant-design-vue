@@ -150,13 +150,18 @@ export default defineComponent({
     'expand',
     'select',
     'check',
+    'doubleclick',
+    'dblclick',
   ],
   TreeNode,
   setup(props, { attrs, expose, emit, slots }) {
     const { prefixCls, direction, virtual } = useConfigInject('tree', props);
-    const tree = ref();
+    const treeRef = ref();
     expose({
-      tree,
+      treeRef,
+      onNodeExpand: (...args) => {
+        treeRef.value?.onNodeExpand(...args);
+      },
     });
 
     const handleCheck: TreeProps['onCheck'] = (checkedObjOrKeys, eventObj) => {
@@ -197,7 +202,7 @@ export default defineComponent({
           itemHeight={20}
           virtual={virtual.value}
           {...newProps}
-          ref={tree}
+          ref={treeRef}
           prefixCls={prefixCls.value}
           class={classNames(
             {

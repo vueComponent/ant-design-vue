@@ -986,7 +986,7 @@ export default defineComponent({
         checkable,
         checkStrictly,
         disabled,
-        openAnimation,
+        motion,
         loadData,
         filterTreeNode,
         height,
@@ -1063,7 +1063,7 @@ export default defineComponent({
               disabled={disabled}
               selectable={selectable}
               checkable={!!checkable}
-              motion={openAnimation}
+              motion={motion}
               dragging={dragging}
               height={height}
               itemHeight={itemHeight}

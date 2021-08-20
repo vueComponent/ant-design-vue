@@ -18,8 +18,8 @@ import type { RawValueType, FlattenOptionsType } from './interface/generator';
 import useMemo from '../_util/hooks/useMemo';
 
 export interface RefOptionListProps {
-  onKeydown: KeyboardEvent;
-  onKeyup: KeyboardEvent;
+  onKeydown: (e?: KeyboardEvent) => void;
+  onKeyup: (e?: KeyboardEvent) => void;
   scrollTo?: (index: number) => void;
 }
 export interface OptionListProps {

@@ -123,6 +123,7 @@ export const treeProps = () => {
      */
     replaceFields: { type: Object as PropType<FieldNames> },
     blockNode: { type: Boolean, default: undefined },
+    openAnimation: PropTypes.any,
   };
 };
 
@@ -182,6 +183,7 @@ export default defineComponent({
         selectable,
         fieldNames,
         replaceFields,
+        motion = props.openAnimation,
       } = props;
       const newProps = {
         ...attrs,
@@ -197,6 +199,7 @@ export default defineComponent({
           itemHeight={20}
           virtual={virtual.value}
           {...newProps}
+          motion={motion}
           ref={treeRef}
           prefixCls={prefixCls.value}
           class={classNames(
@@ -226,103 +229,4 @@ export default defineComponent({
       );
     };
   },
-  // methods: {
-  //   renderSwitcherIcon(prefixCls: string, switcherIcon: VNode, { isLeaf, loading, expanded }) {
-  //     const { showLine } = this.$props;
-  //     if (loading) {
-  //       return <LoadingOutlined class={`${prefixCls}-switcher-loading-icon`} />;
-  //     }
-
-  //     if (isLeaf) {
-  //       return showLine ? <FileOutlined class={`${prefixCls}-switcher-line-icon`} /> : null;
-  //     }
-  //     const switcherCls = `${prefixCls}-switcher-icon`;
-  //     if (switcherIcon) {
-  //       return cloneElement(switcherIcon, {
-  //         class: switcherCls,
-  //       });
-  //     }
-  //     return showLine ? (
-  //       expanded ? (
-  //         <MinusSquareOutlined class={`${prefixCls}-switcher-line-icon`} />
-  //       ) : (
-  //         <PlusSquareOutlined class={`${prefixCls}-switcher-line-icon`} />
-  //       )
-  //     ) : (
-  //       <CaretDownFilled class={switcherCls} />
-  //     );
-  //   },
-  //   updateTreeData(treeData: TreeDataItem[]) {
-  //     const { $slots } = this;
-  //     const defaultFields = { children: 'children', title: 'title', key: 'key' };
-  //     const replaceFields = { ...defaultFields, ...this.$props.replaceFields };
-  //     return treeData.map(item => {
-  //       const key = item[replaceFields.key];
-  //       const children = item[replaceFields.children];
-  //       const { slots = {}, class: cls, style, ...restProps } = item;
-  //       const treeNodeProps = {
-  //         ...restProps,
-  //         icon: $slots[slots.icon] || restProps.icon,
-  //         switcherIcon: $slots[slots.switcherIcon] || restProps.switcherIcon,
-  //         title: $slots[slots.title] || $slots.title || restProps[replaceFields.title],
-  //         dataRef: item,
-  //         key,
-  //         class: cls,
-  //         style,
-  //       };
-  //       if (children) {
-  //         return { ...treeNodeProps, children: this.updateTreeData(children) };
-  //       }
-  //       return treeNodeProps;
-  //     });
-  //   },
-  //   setTreeRef(node: VNode) {
-  //     this.tree = node;
-  //   },
-  //   handleCheck(checkedObj: (number | string)[], eventObj: CheckEvent) {
-  //     this.$emit('update:checkedKeys', checkedObj);
-  //     this.$emit('check', checkedObj, eventObj);
-  //   },
-  //   handleExpand(expandedKeys: (number | string)[], eventObj: ExpendEvent) {
-  //     this.$emit('update:expandedKeys', expandedKeys);
-  //     this.$emit('expand', expandedKeys, eventObj);
-  //   },
-  //   handleSelect(selectedKeys: (number | string)[], eventObj: SelectEvent) {
-  //     this.$emit('update:selectedKeys', selectedKeys);
-  //     this.$emit('select', selectedKeys, eventObj);
-  //   },
-  // },
-  // render() {
-  //   const props = getOptionProps(this);
-  //   const { prefixCls: customizePrefixCls, showIcon, treeNodes, blockNode } = props;
-  //   const getPrefixCls = this.configProvider.getPrefixCls;
-  //   const prefixCls = getPrefixCls('tree', customizePrefixCls);
-  //   const switcherIcon = getComponent(this, 'switcherIcon');
-  //   const checkable = props.checkable;
-  //   let treeData = props.treeData || treeNodes;
-  //   if (treeData) {
-  //     treeData = this.updateTreeData(treeData);
-  //   }
-  //   const { class: className, ...restAttrs } = this.$attrs;
-  //   const vcTreeProps = {
-  //     ...props,
-  //     prefixCls,
-  //     checkable: checkable ? <span class={`${prefixCls}-checkbox-inner`} /> : checkable,
-  //     children: getSlot(this),
-  //     switcherIcon: nodeProps => this.renderSwitcherIcon(prefixCls, switcherIcon, nodeProps),
-  //     ref: this.setTreeRef,
-  //     ...restAttrs,
-  //     class: classNames(className, {
-  //       [`${prefixCls}-icon-hide`]: !showIcon,
-  //       [`${prefixCls}-block-node`]: blockNode,
-  //     }),
-  //     onCheck: this.handleCheck,
-  //     onExpand: this.handleExpand,
-  //     onSelect: this.handleSelect,
-  //   } as Record<string, any>;
-  //   if (treeData) {
-  //     vcTreeProps.treeData = treeData;
-  //   }
-  //   return <VcTree {...vcTreeProps} />;
-  // },
 });

@@ -33,9 +33,6 @@ export function optionListProps<OptionsType>() {
   };
 }
 
-class Helper<T> {
-  Return = optionListProps<T>();
-}
-type FuncReturnType<T> = Helper<T>['Return'];
-
-export type OptionListProps = Partial<ExtractPropTypes<FuncReturnType<DataNode>>>;
+export type OptionListProps = Partial<
+  Omit<ExtractPropTypes<ReturnType<typeof optionListProps>>, 'options'> & { options: DataNode[] }
+>;

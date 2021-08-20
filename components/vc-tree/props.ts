@@ -225,7 +225,7 @@ export const treeProps = () => ({
    */
   onActiveChange: { type: Function as PropType<(key: Key) => void> },
   filterTreeNode: { type: Function as PropType<(treeNode: EventDataNode) => boolean> },
-  openAnimation: PropTypes.any,
+  motion: PropTypes.any,
   switcherIcon: PropTypes.any,
 
   // Virtual List

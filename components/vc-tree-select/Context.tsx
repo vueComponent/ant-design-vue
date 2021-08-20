@@ -12,6 +12,7 @@ import {
 
 interface ContextProps {
   checkable: boolean;
+  customCheckable: () => any;
   checkedKeys: Key[];
   halfCheckedKeys: Key[];
   treeExpandedKeys: Key[];

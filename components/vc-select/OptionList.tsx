@@ -16,6 +16,12 @@ import type {
 } from './interface';
 import type { RawValueType, FlattenOptionsType } from './interface/generator';
 import useMemo from '../_util/hooks/useMemo';
+
+export interface RefOptionListProps {
+  onKeydown: KeyboardEvent;
+  onKeyup: KeyboardEvent;
+  scrollTo?: (index: number) => void;
+}
 export interface OptionListProps {
   prefixCls: string;
   id: string;

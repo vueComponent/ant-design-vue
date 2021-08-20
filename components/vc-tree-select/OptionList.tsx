@@ -22,32 +22,6 @@ interface TreeEventInfo {
   checked?: boolean;
 }
 
-export interface OptionListProps<OptionsType extends object[]> {
-  prefixCls: string;
-  id: string;
-  options: OptionsType;
-  flattenOptions: FlattenDataNode[];
-  height: number;
-  itemHeight: number;
-  virtual?: boolean;
-  values: Set<RawValueType>;
-  multiple: boolean;
-  open: boolean;
-  defaultActiveFirstOption?: boolean;
-  notFoundContent?: any;
-  menuItemSelectedIcon?: any;
-  childrenAsData: boolean;
-  searchValue: string;
-
-  onSelect: (value: RawValueType, option: { selected: boolean }) => void;
-  onToggleOpen: (open?: boolean) => void;
-  /** Tell Select that some value is now active to make accessibility work */
-  onActiveValue: (value: RawValueType, index: number) => void;
-  onScroll: UIEvent;
-
-  onMouseenter: () => void;
-}
-
 type ReviseRefOptionListProps = Omit<RefOptionListProps, 'scrollTo'> & { scrollTo: ScrollTo };
 
 export default defineComponent({

@@ -3,11 +3,11 @@ import type { DataNode } from '../tree';
 import PropTypes from '../_util/vue-types';
 import type { FlattenDataNode, RawValueType } from './interface';
 
-export function optionListProps<OptionsType extends object[]>() {
+export function optionListProps<OptionsType>() {
   return {
     prefixCls: String,
     id: String,
-    options: { type: Array as PropType<unknown> as PropType<OptionsType> },
+    options: { type: Array as PropType<OptionsType[]> },
     flattenOptions: { type: Array as PropType<FlattenDataNode[]> },
     height: Number,
     itemHeight: Number,
@@ -33,9 +33,9 @@ export function optionListProps<OptionsType extends object[]>() {
   };
 }
 
-class Helper<T extends object[]> {
+class Helper<T> {
   Return = optionListProps<T>();
 }
-type FuncReturnType<T extends object[]> = Helper<T>['Return'];
+type FuncReturnType<T> = Helper<T>['Return'];
 
-export type OptionListProps = Partial<ExtractPropTypes<FuncReturnType<DataNode[]>>>;
+export type OptionListProps = Partial<ExtractPropTypes<FuncReturnType<DataNode>>>;

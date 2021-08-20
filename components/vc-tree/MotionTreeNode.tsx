@@ -3,7 +3,7 @@ import type { FlattenNode } from './interface';
 import type { TreeNodeRequiredProps } from './utils/treeUtil';
 import { getTreeNodeProps } from './utils/treeUtil';
 import { useInjectTreeContext } from './contextTypes';
-import { computed, getCurrentInstance, nextTick, PropType } from 'vue';
+import { computed, nextTick, PropType } from 'vue';
 import { defineComponent, onBeforeUnmount, onMounted, ref, Transition, watch } from 'vue';
 import { treeNodeProps } from './props';
 import { collapseMotion } from '../_util/transition';

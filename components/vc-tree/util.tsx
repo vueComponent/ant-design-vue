@@ -42,7 +42,7 @@ export function getPosition(level: string | number, index: number) {
 }
 
 export function isTreeNode(node: NodeElement) {
-  return node && node.type && node.type.isTreeNode;
+  return node && node.type && (node.type as any).isTreeNode;
 }
 
 export function getDragChildrenKeys(dragNodeKey: Key, keyEntities: Record<Key, DataEntity>): Key[] {
@@ -272,7 +272,6 @@ export function convertDataToTree(
   const list = Array.isArray(treeData) ? treeData : [treeData];
   return list.map(({ children, ...props }): NodeElement => {
     const childrenNodes = convertDataToTree(children, processor);
-
     return <TreeNode {...processProps(props)}>{childrenNodes}</TreeNode>;
   });
 }

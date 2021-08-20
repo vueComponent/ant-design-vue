@@ -1,4 +1,4 @@
-import type { ComputedRef, CSSProperties, DefineComponent, Ref, VNode } from 'vue';
+import type { ComputedRef, CSSProperties, Ref, VNode } from 'vue';
 import { TreeNodeProps } from './props';
 export type { ScrollTo } from '../vc-virtual-list/List';
 
@@ -40,11 +40,7 @@ export type IconType = any;
 
 export type Key = string | number;
 
-export type NodeElement = VNode<DefineComponent<TreeNodeProps>> & {
-  type: {
-    isTreeNode: boolean;
-  };
-};
+export type NodeElement = VNode<TreeNodeProps>;
 
 export type DragNodeEvent = {
   eventData: ComputedRef<EventDataNode>;

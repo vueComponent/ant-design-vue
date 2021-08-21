@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { DataNode } from '../tree';
+import type { DataNode } from './interface';
 import { selectBaseProps } from '../vc-select';
 import type { FilterFunc } from '../vc-select/interface/generator';
 import omit from '../_util/omit';
@@ -87,9 +87,9 @@ export function treeSelectProps<ValueType = DefaultValueType>() {
       type: [Boolean, Object] as PropType<boolean | SimpleModeConfig>,
       default: undefined,
     },
-    treeExpandedKeys: { type: [String, Number] as PropType<Key> },
-    treeDefaultExpandedKeys: { type: [String, Number] as PropType<Key> },
-    treeLoadedKeys: { type: [String, Number] as PropType<Key> },
+    treeExpandedKeys: { type: Array as PropType<Key[]> },
+    treeDefaultExpandedKeys: { type: Array as PropType<Key[]> },
+    treeLoadedKeys: { type: Array as PropType<Key[]> },
     treeCheckable: { type: Boolean, default: undefined },
     treeCheckStrictly: { type: Boolean, default: undefined },
     showCheckedStrategy: { type: String as PropType<CheckedStrategy> },

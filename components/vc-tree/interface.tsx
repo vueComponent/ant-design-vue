@@ -21,19 +21,19 @@ export interface DataNode {
 }
 
 export interface EventDataNode extends DataNode {
-  expanded: boolean;
-  selected: boolean;
+  expanded?: boolean;
+  selected?: boolean;
   checked: boolean;
-  loaded: boolean;
-  loading: boolean;
-  halfChecked: boolean;
-  dragOver: boolean;
-  dragOverGapTop: boolean;
-  dragOverGapBottom: boolean;
-  pos: string;
-  active: boolean;
-  dataRef: DataNode;
-  eventKey: Key; // 兼容 v2， 推荐直接用 key
+  loaded?: boolean;
+  loading?: boolean;
+  halfChecked?: boolean;
+  dragOver?: boolean;
+  dragOverGapTop?: boolean;
+  dragOverGapBottom?: boolean;
+  pos?: string;
+  active?: boolean;
+  dataRef?: DataNode;
+  eventKey?: Key; // 兼容 v2， 推荐直接用 key
 }
 
 export type IconType = any;

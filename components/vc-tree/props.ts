@@ -43,7 +43,7 @@ export const treeNodeProps = {
   pos: String,
 
   /** New added in Tree for easy data access */
-  data: { type: Object as PropType<DataNode> },
+  data: { type: Object as PropType<DataNode>, default: undefined as DataNode },
   isStart: { type: Array as PropType<boolean[]> },
   isEnd: { type: Array as PropType<boolean[]> },
   active: { type: Boolean, default: undefined },

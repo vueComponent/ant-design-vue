@@ -71,8 +71,8 @@ export type ExportedSelectProps<T extends DefaultValueType = DefaultValueType> =
 const Select = defineComponent({
   name: 'Select',
   inheritAttrs: false,
-  Option: Option,
-  OptGroup: OptGroup,
+  Option,
+  OptGroup,
   props: RefSelect.props,
   setup(props, { attrs, expose, slots }) {
     const selectRef = ref(null);

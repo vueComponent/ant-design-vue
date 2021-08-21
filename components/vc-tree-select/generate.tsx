@@ -1,17 +1,14 @@
-import generateSelector, { GenerateConfig } from '../vc-select/generate';
+import type { GenerateConfig } from '../vc-select/generate';
+import generateSelector from '../vc-select/generate';
 import TreeNode from './TreeNode';
 import type {
-  Key,
   DefaultValueType,
   DataNode,
   LabelValueType,
-  SimpleModeConfig,
   RawValueType,
   ChangeEventExtra,
-  LegacyDataNode,
   SelectSource,
   FlattenDataNode,
-  FieldNames,
 } from './interface';
 import {
   flattenOptions,
@@ -32,7 +29,8 @@ import useKeyValueMapping from './hooks/useKeyValueMapping';
 import { formatStrategyKeys, SHOW_ALL, SHOW_PARENT, SHOW_CHILD } from './utils/strategyUtil';
 import { fillAdditionalInfo } from './utils/legacyUtil';
 import useSelectValues from './hooks/useSelectValues';
-import { treeSelectProps, TreeSelectProps } from './props';
+import type { TreeSelectProps } from './props';
+import { treeSelectProps } from './props';
 import { getLabeledValue } from '../vc-select/utils/valueUtil';
 import omit from '../_util/omit';
 import { computed, defineComponent, ref, toRef, watch, watchEffect } from 'vue';
@@ -94,10 +92,10 @@ export default function generate(config: {
     props: treeSelectProps(),
     slots: [],
     name: 'TreeSelect',
-    TreeNode: TreeNode,
-    SHOW_ALL: SHOW_ALL,
-    SHOW_PARENT: SHOW_PARENT,
-    SHOW_CHILD: SHOW_CHILD,
+    TreeNode,
+    SHOW_ALL,
+    SHOW_PARENT,
+    SHOW_CHILD,
     setup(props, { expose, slots, attrs }) {
       const mergedCheckable = computed(() => props.treeCheckable || props.treeCheckStrictly);
       const mergedMultiple = computed(() => props.multiple || mergedCheckable.value);

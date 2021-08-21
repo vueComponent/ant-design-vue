@@ -642,7 +642,6 @@ export default defineComponent({
         eventObj.checkedNodes = [];
         eventObj.checkedNodesPositions = [];
         eventObj.halfCheckedKeys = newHalfCheckedKeys;
-        console.log(eventObj);
         newCheckedKeys.forEach(checkedKey => {
           const entity = keyEntities.value[checkedKey];
           if (!entity) return;
@@ -1044,7 +1043,7 @@ export default defineComponent({
             onNodeDragLeave,
             onNodeDragEnd,
             onNodeDrop,
-            slots: slots,
+            slots,
           }}
         >
           <div

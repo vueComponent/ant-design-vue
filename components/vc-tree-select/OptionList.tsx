@@ -1,14 +1,14 @@
 import type { DataNode, TreeDataNode, Key } from './interface';
 import { useInjectSelectContext } from './Context';
-import { RefOptionListProps } from '../vc-select/OptionList';
-import { ScrollTo } from '../vc-virtual-list/List';
+import type { RefOptionListProps } from '../vc-select/OptionList';
+import type { ScrollTo } from '../vc-virtual-list/List';
 import { computed, defineComponent, nextTick, ref, watch } from 'vue';
 import { optionListProps } from './props';
 import useMemo from '../_util/hooks/useMemo';
-import { EventDataNode } from '../tree';
+import type { EventDataNode } from '../tree';
 import KeyCode from '../_util/KeyCode';
 import Tree from '../vc-tree/Tree';
-import { TreeProps } from '../vc-tree/props';
+import type { TreeProps } from '../vc-tree/props';
 
 const HIDDEN_STYLE = {
   width: 0,
@@ -70,7 +70,7 @@ export default defineComponent({
       () => {
         nextTick(() => {
           if (props.open && !props.multiple && valueKeys.value.length) {
-            treeRef.value?.scrollTo({ key: valueKeys[0] });
+            treeRef.value?.scrollTo({ key: valueKeys.value[0] });
           }
         });
       },
@@ -214,13 +214,13 @@ export default defineComponent({
       if (treeLoadedKeys) {
         treeProps.loadedKeys = treeLoadedKeys;
       }
-      if (mergedExpandedKeys) {
+      if (mergedExpandedKeys.value) {
         treeProps.expandedKeys = mergedExpandedKeys.value;
       }
 
       return (
         <div onMousedown={onListMouseDown} onMouseenter={onMouseenter}>
-          {activeEntity && open && (
+          {activeEntity.value && open && (
             <span style={HIDDEN_STYLE} aria-live="assertive">
               {activeEntity.value.data.value}
             </span>

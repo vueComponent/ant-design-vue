@@ -6,7 +6,7 @@ import { computed, defineComponent, onMounted, onUpdated, ref } from 'vue';
 import { treeNodeProps } from './props';
 import classNames from '../_util/classNames';
 import { warning } from '../vc-util/warning';
-import { DragNodeEvent } from './interface';
+import type { DragNodeEvent } from './interface';
 
 const ICON_OPEN = 'open';
 const ICON_CLOSE = 'close';

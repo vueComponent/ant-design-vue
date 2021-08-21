@@ -1,14 +1,7 @@
 import type { FlattenDataNode, Key, LegacyDataNode, RawValueType } from './interface';
 import type { SkipType } from './hooks/useKeyValueMapping';
-import {
-  computed,
-  ComputedRef,
-  defineComponent,
-  inject,
-  InjectionKey,
-  PropType,
-  provide,
-} from 'vue';
+import type { ComputedRef, InjectionKey, PropType } from 'vue';
+import { computed, defineComponent, inject, provide } from 'vue';
 
 interface ContextProps {
   checkable: boolean;

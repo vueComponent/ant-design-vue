@@ -1,5 +1,5 @@
 import type { ComputedRef, CSSProperties, Ref, VNode } from 'vue';
-import { TreeNodeProps } from './props';
+import type { TreeNodeProps } from './props';
 export type { ScrollTo } from '../vc-virtual-list/List';
 
 export interface DataNode {

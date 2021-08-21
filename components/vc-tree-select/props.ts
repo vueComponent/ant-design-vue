@@ -100,7 +100,7 @@ export function treeSelectProps<ValueType = DefaultValueType>() {
     showTreeIcon: { type: Boolean, default: undefined },
     switcherIcon: PropTypes.any,
     treeMotion: PropTypes.any,
-    children: PropTypes.any,
+    children: Array,
 
     filterTreeNode: {
       type: [Boolean, Function] as PropType<boolean | FilterFunc<LegacyDataNode>>,

@@ -89,9 +89,9 @@ export default function generate(config: {
   });
 
   return defineComponent({
-    props: treeSelectProps(),
-    slots: [],
     name: 'TreeSelect',
+    props: treeSelectProps(),
+    slots: ['placeholder', 'maxTagPlaceholder', 'treeIcon', 'switcherIcon'],
     TreeNode,
     SHOW_ALL,
     SHOW_PARENT,

@@ -1,9 +1,9 @@
-import type { VNodeChild, App, PropType, Plugin } from 'vue';
+import type { App, PropType, Plugin, ExtractPropTypes } from 'vue';
 import { computed, defineComponent, ref } from 'vue';
 import omit from 'omit.js';
 import classNames from '../_util/classNames';
 import type { SelectProps as RcSelectProps } from '../vc-select';
-import RcSelect, { Option, OptGroup, BaseProps } from '../vc-select';
+import RcSelect, { Option, OptGroup, selectBaseProps } from '../vc-select';
 import type { OptionProps as OptionPropsType } from '../vc-select/Option';
 import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
@@ -20,36 +20,26 @@ export type OptionType = typeof Option;
 export interface LabeledValue {
   key?: string;
   value: RawValue;
-  label: VNodeChild;
+  label: any;
 }
 export type SelectValue = RawValue | RawValue[] | LabeledValue | LabeledValue[] | undefined;
 
-export interface InternalSelectProps<VT> extends Omit<RcSelectProps<VT>, 'mode'> {
-  suffixIcon?: VNodeChild;
-  itemIcon?: VNodeChild;
+interface InternalSelectProps<VT> extends Omit<RcSelectProps<VT>, 'mode'> {
+  suffixIcon?: any;
+  itemIcon?: any;
   size?: SizeType;
   mode?: 'multiple' | 'tags' | 'SECRET_COMBOBOX_MODE_DO_NOT_USE';
   bordered?: boolean;
 }
 
-export interface SelectPropsTypes<VT>
-  extends Omit<
-    InternalSelectProps<VT>,
-    'inputIcon' | 'mode' | 'getInputElement' | 'backfill' | 'class' | 'style'
-  > {
+interface SelectPropsTypes<VT>
+  extends Omit<InternalSelectProps<VT>, 'inputIcon' | 'mode' | 'getInputElement' | 'backfill'> {
   mode?: 'multiple' | 'tags';
 }
-export type SelectTypes = SelectPropsTypes<SelectValue>;
-export const SelectProps = () => ({
-  ...(omit(BaseProps(), [
-    'inputIcon',
-    'mode',
-    'getInputElement',
-    'backfill',
-    'class',
-    'style',
-  ]) as Omit<
-    ReturnType<typeof BaseProps>,
+export type SelectProps = Partial<ExtractPropTypes<SelectPropsTypes<SelectValue>>>;
+export const selectProps = () => ({
+  ...(omit(selectBaseProps(), ['inputIcon', 'mode', 'getInputElement', 'backfill']) as Omit<
+    SelectPropsTypes<SelectValue>,
     'inputIcon' | 'mode' | 'getInputElement' | 'backfill' | 'class' | 'style'
   >),
   value: {
@@ -58,9 +48,9 @@ export const SelectProps = () => ({
   defaultValue: {
     type: [Array, Object, String, Number] as PropType<SelectValue>,
   },
-  notFoundContent: PropTypes.VNodeChild,
-  suffixIcon: PropTypes.VNodeChild,
-  itemIcon: PropTypes.VNodeChild,
+  notFoundContent: PropTypes.any,
+  suffixIcon: PropTypes.any,
+  itemIcon: PropTypes.any,
   size: PropTypes.oneOf(tuple('small', 'middle', 'large', 'default')),
   mode: PropTypes.oneOf(tuple('multiple', 'tags', 'SECRET_COMBOBOX_MODE_DO_NOT_USE')),
   bordered: PropTypes.looseBool.def(true),
@@ -73,7 +63,7 @@ const Select = defineComponent({
   Option,
   OptGroup,
   inheritAttrs: false,
-  props: SelectProps(),
+  props: selectProps(),
   SECRET_COMBOBOX_MODE_DO_NOT_USE: 'SECRET_COMBOBOX_MODE_DO_NOT_USE',
   emits: ['change', 'update:value'],
   slots: [
@@ -146,7 +136,7 @@ const Select = defineComponent({
       const isMultiple = mode.value === 'multiple' || mode.value === 'tags';
 
       // ===================== Empty =====================
-      let mergedNotFound: VNodeChild;
+      let mergedNotFound: any;
       if (notFoundContent !== undefined) {
         mergedNotFound = notFoundContent;
       } else if (slots.notFoundContent) {

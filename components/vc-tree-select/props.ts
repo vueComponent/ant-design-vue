@@ -1,7 +1,21 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { DataNode } from '../tree';
+import { selectBaseProps } from '../vc-select';
+import type { FilterFunc } from '../vc-select/interface/generator';
+import omit from '../_util/omit';
+import type { Key } from '../_util/type';
 import PropTypes from '../_util/vue-types';
-import type { FlattenDataNode, RawValueType } from './interface';
+import type {
+  ChangeEventExtra,
+  DefaultValueType,
+  FieldNames,
+  FlattenDataNode,
+  LabelValueType,
+  LegacyDataNode,
+  RawValueType,
+  SimpleModeConfig,
+} from './interface';
+import type { CheckedStrategy } from './utils/strategyUtil';
 
 export function optionListProps<OptionsType>() {
   return {
@@ -33,6 +47,94 @@ export function optionListProps<OptionsType>() {
   };
 }
 
-export type OptionListProps = Partial<
-  Omit<ExtractPropTypes<ReturnType<typeof optionListProps>>, 'options'> & { options: DataNode[] }
+export function treeSelectProps<ValueType = DefaultValueType>() {
+  const selectProps = omit(selectBaseProps<DataNode, ValueType>(), [
+    'onChange',
+    'mode',
+    'menuItemSelectedIcon',
+    'dropdownAlign',
+    'backfill',
+    'getInputElement',
+    'optionLabelProp',
+    'tokenSeparators',
+    'filterOption',
+  ]);
+  return {
+    ...selectProps,
+
+    multiple: { type: Boolean, default: undefined },
+    showArrow: { type: Boolean, default: undefined },
+    showSearch: { type: Boolean, default: undefined },
+    open: { type: Boolean, default: undefined },
+    defaultOpen: { type: Boolean, default: undefined },
+    value: { type: [String, Number, Object, Array] as PropType<ValueType> },
+    defaultValue: { type: [String, Number, Object, Array] as PropType<ValueType> },
+    disabled: { type: Boolean, default: undefined },
+
+    placeholder: PropTypes.any,
+    /** @deprecated Use `searchValue` instead */
+    inputValue: String,
+    searchValue: String,
+    autoClearSearchValue: { type: Boolean, default: undefined },
+
+    maxTagPlaceholder: { type: Function as PropType<(omittedValues: LabelValueType[]) => any> },
+
+    fieldNames: { type: Object as PropType<FieldNames> },
+    loadData: { type: Function as PropType<(dataNode: LegacyDataNode) => Promise<unknown>> },
+    treeNodeFilterProp: String,
+    treeNodeLabelProp: String,
+    treeDataSimpleMode: {
+      type: [Boolean, Object] as PropType<boolean | SimpleModeConfig>,
+      default: undefined,
+    },
+    treeExpandedKeys: { type: [String, Number] as PropType<Key> },
+    treeDefaultExpandedKeys: { type: [String, Number] as PropType<Key> },
+    treeLoadedKeys: { type: [String, Number] as PropType<Key> },
+    treeCheckable: { type: Boolean, default: undefined },
+    treeCheckStrictly: { type: Boolean, default: undefined },
+    showCheckedStrategy: { type: String as PropType<CheckedStrategy> },
+    treeDefaultExpandAll: { type: Boolean, default: undefined },
+    treeData: { type: Array as PropType<DataNode[]> },
+    treeLine: { type: Boolean, default: undefined },
+    treeIcon: PropTypes.any,
+    showTreeIcon: { type: Boolean, default: undefined },
+    switcherIcon: PropTypes.any,
+    treeMotion: PropTypes.any,
+    children: PropTypes.any,
+
+    filterTreeNode: {
+      type: [Boolean, Function] as PropType<boolean | FilterFunc<LegacyDataNode>>,
+      default: undefined,
+    },
+    dropdownPopupAlign: PropTypes.any,
+
+    // Event
+    onSearch: { type: Function as PropType<(value: string) => void> },
+    onChange: {
+      type: Function as PropType<
+        (value: ValueType, labelList: any[], extra: ChangeEventExtra) => void
+      >,
+    },
+    onTreeExpand: { type: Function as PropType<(expandedKeys: Key[]) => void> },
+    onTreeLoad: { type: Function as PropType<(loadedKeys: Key[]) => void> },
+    onDropdownVisibleChange: { type: Function as PropType<(open: boolean) => void> },
+
+    // Legacy
+    /** `searchPlaceholder` has been removed since search box has been merged into input box */
+    searchPlaceholder: PropTypes.any,
+
+    /** @private This is not standard API since we only used in `rc-cascader`. Do not use in your production */
+    labelRender: { type: Function as PropType<(entity: FlattenDataNode) => any> },
+  };
+}
+
+class Helper<T> {
+  ReturnOptionListProps = optionListProps<T>();
+  ReturnTreeSelectProps = treeSelectProps<T>();
+}
+
+export type OptionListProps = Partial<ExtractPropTypes<Helper<DataNode>['ReturnOptionListProps']>>;
+
+export type TreeSelectProps<T = DefaultValueType> = Partial<
+  ExtractPropTypes<Helper<T>['ReturnTreeSelectProps']>
 >;

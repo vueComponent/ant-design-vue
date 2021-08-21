@@ -11,14 +11,13 @@ import KeyCode from '../_util/KeyCode';
 import classNames from '../_util/classNames';
 import Selector from './Selector';
 import SelectTrigger from './SelectTrigger';
-import type { RenderNode, Mode, RenderDOMFunc, OnActiveValue } from './interface';
+import type { Mode, RenderDOMFunc, OnActiveValue } from './interface';
 import type {
   GetLabeledValue,
   FilterOptions,
   FilterFunc,
   DefaultValueType,
   RawValueType,
-  LabelValueType,
   Key,
   DisplayLabelValueType,
   FlattenOptionsType,
@@ -26,7 +25,6 @@ import type {
   OnClear,
   SelectSource,
   CustomTagProps,
-  DropdownRender,
 } from './interface/generator';
 import { INTERNAL_PROPS_MARK } from './interface/generator';
 import type { OptionListProps } from './OptionList';
@@ -38,7 +36,7 @@ import { getSeparatedContent } from './utils/valueUtil';
 import useSelectTriggerControl from './hooks/useSelectTriggerControl';
 import useCacheDisplayValue from './hooks/useCacheDisplayValue';
 import useCacheOptions from './hooks/useCacheOptions';
-import type { CSSProperties, DefineComponent, VNode, VNodeChild } from 'vue';
+import type { CSSProperties, DefineComponent, PropType, VNode, VNodeChild } from 'vue';
 import {
   computed,
   defineComponent,
@@ -50,8 +48,7 @@ import {
   watchEffect,
 } from 'vue';
 import createRef from '../_util/createRef';
-import PropTypes, { withUndefined } from '../_util/vue-types';
-import initDefaultProps from '../_util/props-util/initDefaultProps';
+import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
 import isMobile from '../vc-util/isMobile';
 
@@ -68,248 +65,177 @@ const DEFAULT_OMIT_PROPS = [
   'tabindex',
 ];
 
-export const BaseProps = () => ({
-  prefixCls: PropTypes.string,
-  id: PropTypes.string,
-  class: PropTypes.string,
-  style: PropTypes.any,
+export function selectBaseProps<OptionType, ValueType>() {
+  return {
+    prefixCls: String,
+    id: String,
 
-  // Options
-  options: PropTypes.array,
-  mode: PropTypes.string,
+    // Options
+    options: { type: Array as PropType<OptionType[]> },
+    mode: { type: String as PropType<Mode> },
 
-  // Value
-  value: PropTypes.any,
-  defaultValue: PropTypes.any,
-  labelInValue: PropTypes.looseBool,
+    // Value
+    value: { type: [String, Number, Object, Array] as PropType<ValueType> },
+    defaultValue: { type: [String, Number, Object, Array] as PropType<ValueType> },
+    labelInValue: { type: Boolean, default: undefined },
 
-  // Search
-  inputValue: PropTypes.string,
-  searchValue: PropTypes.string,
-  optionFilterProp: PropTypes.string,
-  /**
-   * In Select, `false` means do nothing.
-   * In TreeSelect, `false` will highlight match item.
-   * It's by design.
-   */
-  filterOption: PropTypes.any,
-  filterSort: PropTypes.func,
-  showSearch: PropTypes.looseBool,
-  autoClearSearchValue: PropTypes.looseBool,
-  onSearch: PropTypes.func,
-  onClear: PropTypes.func,
+    // Search
+    inputValue: String,
+    searchValue: String,
+    optionFilterProp: String,
+    /**
+     * In Select, `false` means do nothing.
+     * In TreeSelect, `false` will highlight match item.
+     * It's by design.
+     */
+    filterOption: {
+      type: [Boolean, Function] as PropType<boolean | FilterFunc<OptionType>>,
+      default: undefined,
+    },
+    filterSort: {
+      type: Function as PropType<(optionA: OptionType, optionB: OptionType) => number>,
+    },
+    showSearch: { type: Boolean, default: undefined },
+    autoClearSearchValue: { type: Boolean, default: undefined },
+    onSearch: { type: Function as PropType<(value: string) => void> },
+    onClear: { type: Function as PropType<OnClear> },
 
-  // Icons
-  allowClear: PropTypes.looseBool,
-  clearIcon: PropTypes.VNodeChild,
-  showArrow: PropTypes.looseBool,
-  inputIcon: PropTypes.VNodeChild,
-  removeIcon: PropTypes.VNodeChild,
-  menuItemSelectedIcon: PropTypes.VNodeChild,
+    // Icons
+    allowClear: { type: Boolean, default: undefined },
+    clearIcon: PropTypes.any,
+    showArrow: { type: Boolean, default: undefined },
+    inputIcon: PropTypes.VNodeChild,
+    removeIcon: PropTypes.VNodeChild,
+    menuItemSelectedIcon: PropTypes.VNodeChild,
 
-  // Dropdown
-  open: PropTypes.looseBool,
-  defaultOpen: PropTypes.looseBool,
-  listHeight: PropTypes.number,
-  listItemHeight: PropTypes.number,
-  dropdownStyle: PropTypes.object,
-  dropdownClassName: PropTypes.string,
-  dropdownMatchSelectWidth: withUndefined(PropTypes.oneOfType([Boolean, Number])),
-  virtual: PropTypes.looseBool,
-  dropdownRender: PropTypes.func,
-  dropdownAlign: PropTypes.any,
-  animation: PropTypes.string,
-  transitionName: PropTypes.string,
-  getPopupContainer: PropTypes.func,
-  direction: PropTypes.string,
+    // Dropdown
+    open: { type: Boolean, default: undefined },
+    defaultOpen: { type: Boolean, default: undefined },
+    listHeight: Number,
+    listItemHeight: Number,
+    dropdownStyle: { type: Function as PropType<CSSProperties> },
+    dropdownClassName: String,
+    dropdownMatchSelectWidth: {
+      type: [Boolean, Number] as PropType<boolean | number>,
+      default: undefined,
+    },
+    virtual: { type: Boolean, default: undefined },
+    dropdownRender: { type: Function as PropType<(menu: VNode) => any> },
+    dropdownAlign: PropTypes.any,
+    animation: String,
+    transitionName: String,
+    getPopupContainer: { type: Function as PropType<RenderDOMFunc> },
+    direction: String,
 
-  // Others
-  disabled: PropTypes.looseBool,
-  loading: PropTypes.looseBool,
-  autofocus: PropTypes.looseBool,
-  defaultActiveFirstOption: PropTypes.looseBool,
-  notFoundContent: PropTypes.VNodeChild,
-  placeholder: PropTypes.VNodeChild,
-  backfill: PropTypes.looseBool,
-  getInputElement: PropTypes.func,
-  optionLabelProp: PropTypes.string,
-  maxTagTextLength: PropTypes.number,
-  maxTagCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  maxTagPlaceholder: PropTypes.any,
-  tokenSeparators: PropTypes.array,
-  tagRender: PropTypes.func,
-  showAction: PropTypes.array,
-  tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    // Others
+    disabled: { type: Boolean, default: undefined },
+    loading: { type: Boolean, default: undefined },
+    autofocus: { type: Boolean, default: undefined },
+    defaultActiveFirstOption: { type: Boolean, default: undefined },
+    notFoundContent: PropTypes.any,
+    placeholder: PropTypes.any,
+    backfill: { type: Boolean, default: undefined },
+    /** @private Internal usage. Do not use in your production. */
+    getInputElement: { type: Function as PropType<() => any> },
+    optionLabelProp: String,
+    maxTagTextLength: Number,
+    maxTagCount: { type: [String, Number] as PropType<number | 'responsive'> },
+    maxTagPlaceholder: PropTypes.any,
+    tokenSeparators: { type: Array as PropType<string[]> },
+    tagRender: { type: Function as PropType<(props: CustomTagProps) => any> },
+    showAction: { type: Array as PropType<('focus' | 'click')[]> },
+    tabindex: { type: [Number, String] },
 
-  // Events
-  onKeyup: PropTypes.func,
-  onKeydown: PropTypes.func,
-  onPopupScroll: PropTypes.func,
-  onDropdownVisibleChange: PropTypes.func,
-  onSelect: PropTypes.func,
-  onDeselect: PropTypes.func,
-  onInputKeyDown: PropTypes.func,
-  onClick: PropTypes.func,
-  onChange: PropTypes.func,
-  onBlur: PropTypes.func,
-  onFocus: PropTypes.func,
-  onMousedown: PropTypes.func,
-  onMouseenter: PropTypes.func,
-  onMouseleave: PropTypes.func,
+    // Events
+    onKeyup: { type: Function as PropType<(e: KeyboardEvent) => void> },
+    onKeydown: { type: Function as PropType<(e: KeyboardEvent) => void> },
+    onPopupScroll: { type: Function as PropType<(e: UIEvent) => void> },
+    onDropdownVisibleChange: { type: Function as PropType<(open: boolean) => void> },
+    onSelect: {
+      type: Function as PropType<(value: SingleType<ValueType>, option: OptionType) => void>,
+    },
+    onDeselect: {
+      type: Function as PropType<(value: SingleType<ValueType>, option: OptionType) => void>,
+    },
+    onInputKeyDown: { type: Function as PropType<(e: KeyboardEvent) => void> },
+    onClick: { type: Function as PropType<(e: MouseEvent) => void> },
+    onChange: {
+      type: Function as PropType<(value: ValueType, option: OptionType | OptionType[]) => void>,
+    },
+    onBlur: { type: Function as PropType<(e: FocusEvent) => void> },
+    onFocus: { type: Function as PropType<(e: FocusEvent) => void> },
+    onMousedown: { type: Function as PropType<(e: MouseEvent) => void> },
+    onMouseenter: { type: Function as PropType<(e: MouseEvent) => void> },
+    onMouseleave: { type: Function as PropType<(e: MouseEvent) => void> },
 
-  // Motion
-  choiceTransitionName: PropTypes.string,
+    // Motion
+    choiceTransitionName: String,
 
-  // Internal props
-  /**
-   * Only used in current version for internal event process.
-   * Do not use in production environment.
-   */
-  internalProps: PropTypes.object,
-  children: PropTypes.array,
-});
-
-export interface SelectProps<OptionsType extends object[], ValueType> {
-  prefixCls?: string;
-  id?: string;
-  class?: string;
-  style?: CSSProperties;
-
-  // Options
-  options?: OptionsType;
-  children?: any[];
-  mode?: Mode;
-
-  // Value
-  value?: ValueType;
-  defaultValue?: ValueType;
-  labelInValue?: boolean;
-
-  // Search
-  inputValue?: string;
-  searchValue?: string;
-  optionFilterProp?: string;
-  /**
-   * In Select, `false` means do nothing.
-   * In TreeSelect, `false` will highlight match item.
-   * It's by design.
-   */
-  filterOption?: boolean | FilterFunc<OptionsType[number]>;
-  filterSort?: (optionA: OptionsType[number], optionB: OptionsType[number]) => number;
-  showSearch?: boolean;
-  autoClearSearchValue?: boolean;
-  onSearch?: (value: string) => void;
-  onClear?: OnClear;
-
-  // Icons
-  allowClear?: boolean;
-  clearIcon?: VNodeChild;
-  showArrow?: boolean;
-  inputIcon?: RenderNode;
-  removeIcon?: VNodeChild;
-  menuItemSelectedIcon?: RenderNode;
-
-  // Dropdown
-  open?: boolean;
-  defaultOpen?: boolean;
-  listHeight?: number;
-  listItemHeight?: number;
-  dropdownStyle?: CSSProperties;
-  dropdownClassName?: string;
-  dropdownMatchSelectWidth?: boolean | number;
-  virtual?: boolean;
-  dropdownRender?: DropdownRender;
-  dropdownAlign?: any;
-  animation?: string;
-  transitionName?: string;
-  getPopupContainer?: RenderDOMFunc;
-  direction?: string;
-
-  // Others
-  disabled?: boolean;
-  loading?: boolean;
-  autofocus?: boolean;
-  defaultActiveFirstOption?: boolean;
-  notFoundContent?: VNodeChild;
-  placeholder?: VNodeChild;
-  backfill?: boolean;
-  getInputElement?: () => VNodeChild | JSX.Element;
-  optionLabelProp?: string;
-  maxTagTextLength?: number;
-  maxTagCount?: number | 'responsive';
-  maxTagPlaceholder?: VNodeChild | ((omittedValues: LabelValueType[]) => VNodeChild);
-  tokenSeparators?: string[];
-  tagRender?: (props: CustomTagProps) => VNodeChild;
-  showAction?: ('focus' | 'click')[];
-  tabindex?: number | string;
-
-  // Events
-  onKeyup?: EventHandlerNonNull;
-  onKeydown?: EventHandlerNonNull;
-  onPopupScroll?: EventHandlerNonNull;
-  onDropdownVisibleChange?: (open: boolean) => void;
-  onSelect?: (value: SingleType<ValueType>, option: OptionsType[number]) => void;
-  onDeselect?: (value: SingleType<ValueType>, option: OptionsType[number]) => void;
-  onInputKeyDown?: EventHandlerNonNull;
-  onClick?: EventHandlerNonNull;
-  onChange?: (value: ValueType, option: OptionsType[number] | OptionsType) => void;
-  onBlur?: EventHandlerNonNull;
-  onFocus?: EventHandlerNonNull;
-  onMousedown?: EventHandlerNonNull;
-  onMouseenter?: EventHandlerNonNull;
-  onMouseleave?: EventHandlerNonNull;
-
-  // Motion
-  choiceTransitionName?: string;
-
-  // Internal props
-  /**
-   * Only used in current version for internal event process.
-   * Do not use in production environment.
-   */
-  internalProps?: {
-    mark?: string;
-    onClear?: OnClear;
-    skipTriggerChange?: boolean;
-    skipTriggerSelect?: boolean;
-    onRawSelect?: (value: RawValueType, option: OptionsType[number], source: SelectSource) => void;
-    onRawDeselect?: (
-      value: RawValueType,
-      option: OptionsType[number],
-      source: SelectSource,
-    ) => void;
+    // Internal props
+    /**
+     * Only used in current version for internal event process.
+     * Do not use in production environment.
+     */
+    internalProps: {
+      type: Object as PropType<{
+        mark?: string;
+        onClear?: OnClear;
+        skipTriggerChange?: boolean;
+        skipTriggerSelect?: boolean;
+        onRawSelect?: (value: RawValueType, option: OptionType, source: SelectSource) => void;
+        onRawDeselect?: (value: RawValueType, option: OptionType, source: SelectSource) => void;
+      }>,
+      default: undefined as {
+        mark?: string;
+        onClear?: OnClear;
+        skipTriggerChange?: boolean;
+        skipTriggerSelect?: boolean;
+        onRawSelect?: (value: RawValueType, option: OptionType, source: SelectSource) => void;
+        onRawDeselect?: (value: RawValueType, option: OptionType, source: SelectSource) => void;
+      },
+    },
+    children: Array,
   };
 }
 
-export interface GenerateConfig<OptionsType extends object[]> {
+class Helper<T1, T2> {
+  SelectBaseProps = selectBaseProps<T1, T2>();
+}
+type FuncReturnType<T1, T2> = Helper<T1, T2>['SelectBaseProps'];
+
+export type SelectProps<T1, T2> = FuncReturnType<T1, T2>;
+
+export interface GenerateConfig<OptionType extends object> {
   prefixCls: string;
   components: {
-    optionList: DefineComponent<Omit<OptionListProps, 'options'> & { options?: OptionsType }>;
+    optionList: DefineComponent<
+      Omit<OptionListProps<OptionType>, 'options'> & { options?: OptionType[] }
+    >;
   };
-  /** Convert jsx tree into `OptionsType` */
-  convertChildrenToData: (children: VNodeChild | JSX.Element) => OptionsType;
+  /** Convert jsx tree into `OptionType[]` */
+  convertChildrenToData: (children: VNodeChild | JSX.Element) => OptionType[];
   /** Flatten nest options into raw option list */
-  flattenOptions: (options: OptionsType, props: any) => FlattenOptionsType<OptionsType>;
+  flattenOptions: (options: OptionType[], props: any) => FlattenOptionsType<OptionType>;
   /** Convert single raw value into { label, value } format. Will be called by each value */
-  getLabeledValue: GetLabeledValue<FlattenOptionsType<OptionsType>>;
-  filterOptions: FilterOptions<OptionsType>;
+  getLabeledValue: GetLabeledValue<FlattenOptionsType<OptionType>>;
+  filterOptions: FilterOptions<OptionType[]>;
   findValueOption: // Need still support legacy ts api
-  | ((values: RawValueType[], options: FlattenOptionsType<OptionsType>) => OptionsType)
+  | ((values: RawValueType[], options: FlattenOptionsType<OptionType>) => OptionType[])
     // New API add prevValueOptions support
     | ((
         values: RawValueType[],
-        options: FlattenOptionsType<OptionsType>,
-        info?: { prevValueOptions?: OptionsType[] },
-      ) => OptionsType);
+        options: FlattenOptionsType<OptionType>,
+        info?: { prevValueOptions?: OptionType[][] },
+      ) => OptionType[]);
   /** Check if a value is disabled */
-  isValueDisabled: (value: RawValueType, options: FlattenOptionsType<OptionsType>) => boolean;
+  isValueDisabled: (value: RawValueType, options: FlattenOptionsType<OptionType>) => boolean;
   warningProps?: (props: any) => void;
   fillOptionsWithMissingValue?: (
-    options: OptionsType,
+    options: OptionType[],
     value: DefaultValueType,
     optionLabelProp: string,
     labelInValue: boolean,
-  ) => OptionsType;
+  ) => OptionType[];
   omitDOMProps?: (props: object) => object;
 }
 type ValueType = DefaultValueType;
@@ -318,13 +244,13 @@ type ValueType = DefaultValueType;
  * Do not use it in your prod env since we may refactor this.
  */
 export default function generateSelector<
-  OptionsType extends {
+  OptionType extends {
     value?: RawValueType;
-    label?: VNodeChild;
+    label?: any;
     key?: Key;
     disabled?: boolean;
-  }[],
->(config: GenerateConfig<OptionsType>) {
+  },
+>(config: GenerateConfig<OptionType>) {
   const {
     prefixCls: defaultPrefixCls,
     components: { optionList: OptionList },
@@ -338,10 +264,12 @@ export default function generateSelector<
     fillOptionsWithMissingValue,
     omitDOMProps,
   } = config as any;
-  const Select = defineComponent<SelectProps<OptionsType, ValueType>>({
+  const Select = defineComponent({
     name: 'Select',
     slots: ['option'],
-    setup(props: SelectProps<OptionsType, ValueType>) {
+    inheritAttrs: false,
+    props: selectBaseProps<OptionType, DefaultValueType>(),
+    setup(props) {
       const useInternalProps = computed(
         () => props.internalProps && props.internalProps.mark === INTERNAL_PROPS_MARK,
       );
@@ -440,7 +368,7 @@ export default function generateSelector<
         return mergedSearchValue;
       });
 
-      const mergedOptions = computed((): OptionsType => {
+      const mergedOptions = computed((): OptionType[] => {
         let newOptions = props.options;
         if (newOptions === undefined) {
           newOptions = convertChildrenToData(props.children);
@@ -459,7 +387,7 @@ export default function generateSelector<
           );
         }
 
-        return newOptions || ([] as OptionsType);
+        return newOptions || ([] as OptionType[]);
       });
 
       const mergedFlattenOptions = computed(() => flattenOptions(mergedOptions.value, props));
@@ -467,12 +395,12 @@ export default function generateSelector<
       const getValueOption = useCacheOptions(mergedFlattenOptions);
 
       // Display options for OptionList
-      const displayOptions = computed<OptionsType>(() => {
+      const displayOptions = computed<OptionType[]>(() => {
         if (!mergedSearchValue.value || !mergedShowSearch.value) {
-          return [...mergedOptions.value] as OptionsType;
+          return [...mergedOptions.value] as OptionType[];
         }
         const { optionFilterProp = 'value', mode, filterOption } = props;
-        const filteredOptions: OptionsType = filterOptions(
+        const filteredOptions: OptionType[] = filterOptions(
           mergedSearchValue.value,
           mergedOptions.value,
           {
@@ -489,10 +417,10 @@ export default function generateSelector<
             value: mergedSearchValue.value,
             label: mergedSearchValue.value,
             key: '__RC_SELECT_TAG_PLACEHOLDER__',
-          });
+          } as OptionType);
         }
         if (props.filterSort && Array.isArray(filteredOptions)) {
-          return ([...filteredOptions] as OptionsType).sort(props.filterSort);
+          return ([...filteredOptions] as OptionType[]).sort(props.filterSort);
         }
 
         return filteredOptions;
@@ -591,9 +519,9 @@ export default function generateSelector<
           return;
         }
         const newRawValuesOptions = getValueOption(newRawValues);
-        const outValues = toOuterValues<FlattenOptionsType<OptionsType>>(Array.from(newRawValues), {
+        const outValues = toOuterValues<FlattenOptionsType<OptionType>>(Array.from(newRawValues), {
           labelInValue: mergedLabelInValue.value,
-          options: newRawValuesOptions,
+          options: newRawValuesOptions as any,
           getLabeledValue,
           prevValueMap: mergedValueMap.value,
           optionLabelProp: mergedOptionLabelProp.value,
@@ -872,7 +800,7 @@ export default function generateSelector<
       };
 
       // KeyUp
-      const onInternalKeyUp = (event: Event) => {
+      const onInternalKeyUp = (event: KeyboardEvent) => {
         if (mergedOpen.value && listRef.value) {
           listRef.value.onKeyup(event);
         }
@@ -1098,7 +1026,6 @@ export default function generateSelector<
       } = this as any;
       const {
         prefixCls = defaultPrefixCls,
-        class: className,
         id,
 
         open,
@@ -1172,7 +1099,7 @@ export default function generateSelector<
         internalProps = {},
 
         ...restProps
-      } = this.$props as SelectProps<OptionsType, ValueType>;
+      } = this.$props; //as SelectProps<OptionType[], ValueType>;
 
       // ============================= Input ==============================
       // Only works in `combobox`
@@ -1267,7 +1194,7 @@ export default function generateSelector<
       }
 
       // ============================= Render =============================
-      const mergedClassName = classNames(prefixCls, className, {
+      const mergedClassName = classNames(prefixCls, this.$attrs.class, {
         [`${prefixCls}-focused`]: mockFocused,
         [`${prefixCls}-multiple`]: isMultiple,
         [`${prefixCls}-single`]: !isMultiple,
@@ -1282,6 +1209,7 @@ export default function generateSelector<
 
       return (
         <div
+          {...this.$attrs}
           class={mergedClassName}
           {...domProps}
           ref="containerRef"
@@ -1355,6 +1283,5 @@ export default function generateSelector<
       );
     },
   });
-  Select.props = initDefaultProps(BaseProps(), {});
   return Select;
 }

@@ -57,7 +57,7 @@ export interface SelectorProps {
   onSearch: (searchText: string, fromTyping: boolean, isCompositing: boolean) => boolean;
   onSearchSubmit: (searchText: string) => void;
   onSelect: (value: RawValueType, option: { selected: boolean }) => void;
-  onInputKeyDown?: EventHandlerNonNull;
+  onInputKeyDown?: (e: KeyboardEvent) => void;
 
   /**
    * @private get real dom for trigger align.

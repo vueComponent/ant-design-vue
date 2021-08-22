@@ -1,6 +1,5 @@
 import type { Ref } from 'vue';
-import { computed } from 'vue';
-import { reactive, watch, nextTick, unref } from 'vue';
+import { reactive, watch, nextTick, unref, computed, isReactive, watchEffect } from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import intersection from 'lodash-es/intersection';
 import isEqual from 'lodash-es/isEqual';
@@ -125,13 +124,20 @@ function useForm(
     return Object.keys(unref(rulesRef));
   });
 
-  rulesKeys.value.forEach(key => {
-    validateInfos[key] = {
-      autoLink: false,
-      required: isRequired(unref(rulesRef)[key]),
-    };
+  watchEffect(() => {
+    Object.keys(validateInfos).forEach(key => delete validateInfos[key]);
+    rulesKeys.value.forEach(key => {
+      validateInfos[key] = {
+        autoLink: false,
+        required: isRequired(unref(rulesRef)[key]),
+      };
+    });
+
+    if (!isReactive(validateInfos)) {
+      validateInfos = reactive(validateInfos);
+    }
   });
-  validateInfos = reactive(validateInfos);
+
   const resetFields = (newValues: Props) => {
     Object.assign(unref(modelRef), {
       ...cloneDeep(initialModel),

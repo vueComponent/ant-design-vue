@@ -91,7 +91,7 @@ export default function generate(config: {
   return defineComponent({
     name: 'TreeSelect',
     props: treeSelectProps(),
-    slots: ['placeholder', 'maxTagPlaceholder', 'treeIcon', 'switcherIcon'],
+    slots: ['placeholder', 'maxTagPlaceholder', 'treeIcon', 'switcherIcon', 'notFoundContent'],
     TreeNode,
     SHOW_ALL,
     SHOW_PARENT,
@@ -488,7 +488,7 @@ export default function generate(config: {
               mode={mergedMultiple.value ? 'multiple' : null}
               {...props}
               {...selectProps}
-              value={selectValues}
+              value={selectValues.value}
               // We will handle this ourself since we need calculate conduction
               labelInValue
               options={mergedTreeData.value}

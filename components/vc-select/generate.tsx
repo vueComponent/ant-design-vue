@@ -75,8 +75,14 @@ export function selectBaseProps<OptionType, ValueType>() {
     mode: { type: String as PropType<Mode> },
 
     // Value
-    value: { type: [String, Number, Object, Array] as PropType<ValueType> },
-    defaultValue: { type: [String, Number, Object, Array] as PropType<ValueType> },
+    value: {
+      type: [String, Number, Object, Array] as PropType<ValueType>,
+      default: undefined as ValueType,
+    },
+    defaultValue: {
+      type: [String, Number, Object, Array] as PropType<ValueType>,
+      default: undefined as ValueType,
+    },
     labelInValue: { type: Boolean, default: undefined },
 
     // Search
@@ -194,7 +200,7 @@ export function selectBaseProps<OptionType, ValueType>() {
         onRawDeselect?: (value: RawValueType, option: OptionType, source: SelectSource) => void;
       },
     },
-    children: Array,
+    children: { type: Array as PropType<any[]> },
   };
 }
 

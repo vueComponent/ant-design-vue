@@ -1,4 +1,5 @@
 import type { PropType, ExtractPropTypes } from 'vue';
+import { watchEffect } from 'vue';
 import { ref } from 'vue';
 import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
@@ -11,6 +12,7 @@ import { treeProps as vcTreeProps } from '../vc-tree/props';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import renderSwitcherIcon from './utils/iconUtil';
 import dropIndicatorRender from './utils/dropIndicator';
+import devWarning from '../vc-util/devWarning';
 
 export interface AntdTreeNodeAttribute {
   eventKey: string;
@@ -160,6 +162,14 @@ export default defineComponent({
       },
     });
 
+    watchEffect(() => {
+      devWarning(
+        props.replaceFields === undefined,
+        'Tree',
+        '`replaceFields` is deprecated, please use fieldNames instead',
+      );
+    });
+
     const handleCheck: TreeProps['onCheck'] = (checkedObjOrKeys, eventObj) => {
       emit('update:checkedKeys', checkedObjOrKeys);
       emit('check', checkedObjOrKeys, eventObj);
@@ -181,8 +191,7 @@ export default defineComponent({
         blockNode,
         checkable,
         selectable,
-        fieldNames,
-        replaceFields,
+        fieldNames = props.replaceFields,
         motion = props.openAnimation,
       } = props;
       const newProps = {
@@ -190,7 +199,7 @@ export default defineComponent({
         ...props,
         showLine: Boolean(showLine),
         dropIndicatorRender,
-        fieldNames: fieldNames || (replaceFields as FieldNames),
+        fieldNames,
         icon,
       };
 

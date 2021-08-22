@@ -18,24 +18,34 @@ export default (
   form?: ComputedRef<{
     requiredMark?: RequiredMark;
   }>;
-  autoInsertSpaceInButton: ComputedRef<Boolean>;
+  autoInsertSpaceInButton: ComputedRef<boolean>;
   renderEmpty?: ComputedRef<(componentName?: string) => VNodeChild | JSX.Element>;
-  virtual: ComputedRef<Boolean>;
+  virtual: ComputedRef<boolean>;
+  dropdownMatchSelectWidth: ComputedRef<boolean>;
+  getPopupContainer: ComputedRef<ConfigProviderProps['getPopupContainer']>;
 } => {
   const configProvider = inject<UnwrapRef<ConfigProviderProps>>(
     'configProvider',
     defaultConfigProvider,
   );
   const prefixCls = computed(() => configProvider.getPrefixCls(name, props.prefixCls));
-  const direction = computed(() => configProvider.direction);
+  const direction = computed(() => props.direction ?? configProvider.direction);
   const autoInsertSpaceInButton = computed(() => configProvider.autoInsertSpaceInButton);
   const renderEmpty = computed(() => configProvider.renderEmpty);
   const space = computed(() => configProvider.space);
   const pageHeader = computed(() => configProvider.pageHeader);
   const form = computed(() => configProvider.form);
-  const size = computed(() => props.size || configProvider.componentSize);
-  const getTargetContainer = computed(() => props.getTargetContainer);
-  const virtual = computed(() => props.virtual);
+  const size = computed(() => props.size ?? configProvider.componentSize);
+  const getTargetContainer = computed(
+    () => props.getTargetContainer || configProvider.getTargetContainer,
+  );
+  const getPopupContainer = computed(
+    () => props.getPopupContainer || configProvider.getPopupContainer,
+  );
+  const virtual = computed(() => props.virtual ?? configProvider.virtual);
+  const dropdownMatchSelectWidth = computed<boolean>(
+    () => props.dropdownMatchSelectWidth ?? configProvider.dropdownMatchSelectWidth,
+  );
   return {
     configProvider,
     prefixCls,
@@ -48,5 +58,7 @@ export default (
     autoInsertSpaceInButton,
     renderEmpty,
     virtual,
+    dropdownMatchSelectWidth,
+    getPopupContainer,
   };
 };

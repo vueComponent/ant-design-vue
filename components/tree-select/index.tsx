@@ -70,6 +70,7 @@ const TreeSelect = defineComponent({
   }),
   slots: [
     'title',
+    'titleRender',
     'placeholder',
     'maxTagPlaceholder',
     'treeIcon',

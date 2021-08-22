@@ -362,7 +362,7 @@ export default defineComponent({
         icon: treeIcon,
         draggable,
         loadData,
-        titleRender,
+        slots: contextSlots,
       } = context.value;
       const disabled = isDisabled.value;
       const mergedDraggable = typeof draggable === 'function' ? draggable(data) : draggable;
@@ -390,11 +390,12 @@ export default defineComponent({
       let titleNode: any;
       if (typeof title === 'function') {
         titleNode = title(data);
-      } else if (titleRender) {
-        titleNode = titleRender(data);
+      } else if (contextSlots.titleRender) {
+        titleNode = contextSlots.titleRender(data);
       } else {
-        titleNode = title === undefined ? defaultTitle : title;
+        titleNode = title;
       }
+      titleNode = titleNode === undefined ? defaultTitle : titleNode;
 
       const $title = <span class={`${prefixCls}-title`}>{titleNode}</span>;
 

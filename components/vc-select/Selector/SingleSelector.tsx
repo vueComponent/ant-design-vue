@@ -1,7 +1,7 @@
 import pickAttrs from '../../_util/pickAttrs';
 import Input from './Input';
 import type { InnerSelectorProps } from './interface';
-import type { VNodeChild } from 'vue';
+import { Fragment, Suspense, VNodeChild } from 'vue';
 import { computed, defineComponent, ref, watch } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { useInjectTreeSelectContext } from 'ant-design-vue/es/vc-tree-select/Context';
@@ -96,11 +96,21 @@ const SingleSelector = defineComponent<SelectorProps>({
         onInputCompositionEnd,
       } = props;
       const item = values[0];
-      let slotTitle = null;
-      if (treeSelectContext.value.slots) {
-        slotTitle =
+      let titleNode = null;
+      // custom tree-select title by slot
+      if (item && treeSelectContext.value.slots) {
+        titleNode =
+          item.label ||
           treeSelectContext.value.slots[item?.option?.data?.slots?.title] ||
           treeSelectContext.value.slots.title;
+        if (typeof titleNode === 'function') {
+          titleNode = titleNode(item.option?.data || {});
+        } else if (treeSelectContext.value.slots.titleRender) {
+          // 因历史 title 是覆盖逻辑，新增 titleRender，所有的 title 都走一遍 titleRender
+          titleNode = treeSelectContext.value.slots.titleRender(item.option?.data || {});
+        }
+      } else {
+        titleNode = item?.label;
       }
       return (
         <>
@@ -134,8 +144,7 @@ const SingleSelector = defineComponent<SelectorProps>({
           {/* Display value */}
           {!combobox.value && item && !hasTextInput.value && (
             <span class={`${prefixCls}-selection-item`} title={title.value}>
-              {/* <Fragment key={item.key || item.value}>{item.label}</Fragment> */}
-              {slotTitle?.(item.option?.data) || item.label}
+              <Fragment key={item.key || item.value}>{titleNode}</Fragment>
             </span>
           )}
 

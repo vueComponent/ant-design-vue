@@ -34,7 +34,7 @@ import classNames from '../_util/classNames';
 export default defineComponent({
   name: 'Tree',
   inheritAttrs: false,
-  slots: ['checkable', 'title', 'icon'],
+  slots: ['checkable', 'title', 'icon', 'titleRender'],
   props: initDefaultProps(treeProps(), {
     prefixCls: 'vc-tree',
     showLine: false,
@@ -1022,8 +1022,6 @@ export default defineComponent({
 
             loadData,
             filterTreeNode,
-
-            titleRender: slots.title,
 
             onNodeClick,
             onNodeDoubleClick,

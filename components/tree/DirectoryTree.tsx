@@ -42,7 +42,7 @@ export default defineComponent({
     showIcon: true,
     expandAction: 'click',
   }),
-  slots: ['icon', 'title', 'switcherIcon'],
+  slots: ['icon', 'title', 'switcherIcon', 'titleRender'],
   emits: [
     'update:selectedKeys',
     'update:checkedKeys',

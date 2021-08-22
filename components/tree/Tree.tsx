@@ -141,7 +141,7 @@ export default defineComponent({
     showIcon: false,
     blockNode: false,
   }),
-  slots: ['icon', 'title', 'switcherIcon'],
+  slots: ['icon', 'title', 'switcherIcon', 'titleRender'],
   emits: [
     'update:selectedKeys',
     'update:checkedKeys',

@@ -1,4 +1,10 @@
-import type { FlattenDataNode, Key, LegacyDataNode, RawValueType } from './interface';
+import type {
+  FlattenDataNode,
+  InternalDataEntity,
+  Key,
+  LegacyDataNode,
+  RawValueType,
+} from './interface';
 import type { SkipType } from './hooks/useKeyValueMapping';
 import type { ComputedRef, InjectionKey, PropType } from 'vue';
 import { computed, defineComponent, inject, provide } from 'vue';
@@ -31,7 +37,11 @@ interface ContextProps {
     ignoreDisabledCheck?: boolean,
   ) => FlattenDataNode;
 
-  slots: Record<string, any>;
+  slots: {
+    title?: (data: InternalDataEntity) => any;
+    titleRender?: (data: InternalDataEntity) => any;
+    [key: string]: (d: any) => any | undefined;
+  };
 }
 
 const SelectContextKey: InjectionKey<ComputedRef<ContextProps>> = Symbol('SelectContextKey');

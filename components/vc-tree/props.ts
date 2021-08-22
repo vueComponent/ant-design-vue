@@ -132,7 +132,7 @@ export const treeProps = () => ({
   defaultSelectedKeys: { type: Array as PropType<Key[]> },
   selectedKeys: { type: Array as PropType<Key[]> },
   allowDrop: { type: Function as PropType<AllowDrop> },
-  // titleRender: { type: Function as PropType<(node: DataNode) => any> },
+
   dropIndicatorRender: {
     type: Function as PropType<
       (props: {

@@ -64,7 +64,6 @@ export interface TreeContextProps {
 
   loadData: (treeNode: EventDataNode) => Promise<void>;
   filterTreeNode: (treeNode: EventDataNode) => boolean;
-  titleRender?: (node: DataNode) => VueNode;
 
   onNodeClick: NodeMouseEventHandler;
   onNodeDoubleClick: NodeMouseEventHandler;
@@ -81,7 +80,11 @@ export interface TreeContextProps {
   onNodeDragLeave: NodeDragEventHandler;
   onNodeDragEnd: NodeDragEventHandler;
   onNodeDrop: NodeDragEventHandler;
-  slots: Record<string, any>;
+  slots: {
+    title?: (data: DataNode) => any;
+    titleRender?: (data: DataNode) => any;
+    [key: string]: (d: any) => any | undefined;
+  };
 }
 const TreeContextKey: InjectionKey<ComputedRef<TreeContextProps>> = Symbol('TreeContextKey');
 

@@ -7,7 +7,7 @@
     placeholder="Please select"
     tree-default-expand-all
   >
-    <template #title1="{ key, value }">
+    <template #title="{ key, value }">
       <span v-if="key === '0-0-1'" style="color: #08c">Child Node1 {{ value }}</span>
     </template>
   </a-tree-select>

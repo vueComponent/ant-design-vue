@@ -84,10 +84,6 @@ export default defineComponent({
       // abstract-drag-over-node is the top node
       dragOverNodeKey: null,
     });
-    warning(
-      !(props.treeData === undefined && props.children),
-      '`children` of Tree is deprecated. Please use `treeData` instead.',
-    );
     const treeData = computed(() => {
       return props.treeData !== undefined ? props.treeData : convertTreeToData(props.children);
     });
@@ -953,6 +949,7 @@ export default defineComponent({
     };
     expose({
       onNodeExpand,
+      scrollTo,
     });
     onUnmounted(() => {
       window.removeEventListener('dragend', onWindowDragEnd);

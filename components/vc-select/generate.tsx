@@ -119,7 +119,7 @@ export function selectBaseProps<OptionType, ValueType>() {
     defaultOpen: { type: Boolean, default: undefined },
     listHeight: Number,
     listItemHeight: Number,
-    dropdownStyle: { type: Function as PropType<CSSProperties> },
+    dropdownStyle: { type: Object as PropType<CSSProperties> },
     dropdownClassName: String,
     dropdownMatchSelectWidth: {
       type: [Boolean, Number] as PropType<boolean | number>,
@@ -275,7 +275,7 @@ export default function generateSelector<
     slots: ['option'],
     inheritAttrs: false,
     props: selectBaseProps<OptionType, DefaultValueType>(),
-    setup(props) {
+    setup(props, { expose }) {
       const useInternalProps = computed(
         () => props.internalProps && props.internalProps.mark === INTERNAL_PROPS_MARK,
       );
@@ -455,10 +455,10 @@ export default function generateSelector<
             labelInValue: mergedLabelInValue.value,
             optionLabelProp: mergedOptionLabelProp.value,
           });
-
           return {
             ...displayValue,
             disabled: isValueDisabled(val, valueOptions),
+            option: valueOptions[0],
           };
         });
 
@@ -947,10 +947,12 @@ export default function generateSelector<
       const blur = () => {
         selectorRef.value.blur();
       };
-      return {
+      expose({
         focus,
         blur,
-        scrollTo: listRef.value?.scrollTo,
+        scrollTo: (...args: any[]) => listRef.value?.scrollTo(...args),
+      });
+      return {
         tokenWithEnter,
         mockFocused,
         mergedId,
@@ -1139,7 +1141,7 @@ export default function generateSelector<
           menuItemSelectedIcon={menuItemSelectedIcon}
           virtual={virtual !== false && dropdownMatchSelectWidth !== false}
           onMouseenter={onPopupMouseEnter}
-          v-slots={{ option: slots.option }}
+          v-slots={{ ...slots, option: slots.option }}
         />
       );
 
@@ -1212,7 +1214,6 @@ export default function generateSelector<
         [`${prefixCls}-customize-input`]: customizeInputElement,
         [`${prefixCls}-show-search`]: mergedShowSearch,
       });
-
       return (
         <div
           {...this.$attrs}

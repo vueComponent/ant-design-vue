@@ -42,7 +42,7 @@ import {
   flattenOptions,
   fillOptionsWithMissingValue,
 } from './utils/valueUtil';
-import type { SelectProps } from './generate';
+import { selectBaseProps, SelectProps } from './generate';
 import generateSelector from './generate';
 import type { DefaultValueType } from './interface/generator';
 import warningProps from './utils/warningPropsUtil';
@@ -67,6 +67,10 @@ export type ExportedSelectProps<T extends DefaultValueType = DefaultValueType> =
   SelectOptionsType[number],
   T
 >;
+
+export function selectProps<T>() {
+  return selectBaseProps<SelectOptionsType[number], T>();
+}
 
 const Select = defineComponent({
   name: 'Select',

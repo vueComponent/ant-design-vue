@@ -78,6 +78,10 @@ function formatTreeData(
         node,
       };
 
+      if (node.slots) {
+        dataNode.slots = node.slots;
+      }
+
       // Check `key` & `value` and warning user
       if (process.env.NODE_ENV !== 'production') {
         if (

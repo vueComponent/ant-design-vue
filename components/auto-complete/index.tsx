@@ -1,6 +1,6 @@
 import type { App, Plugin, VNode, ExtractPropTypes } from 'vue';
 import { defineComponent, inject, provide } from 'vue';
-import Select, { SelectProps } from '../select';
+import Select, { selectProps } from '../select';
 import Input from '../input';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
@@ -15,7 +15,7 @@ function isSelectOptionOrSelectOptGroup(child: any): boolean {
 }
 
 const autoCompleteProps = {
-  ...SelectProps(),
+  ...selectProps(),
   dataSource: PropTypes.array,
   dropdownMenuStyle: PropTypes.style,
   optionLabelProp: PropTypes.string,

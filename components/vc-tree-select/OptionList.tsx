@@ -1,5 +1,5 @@
 import type { DataNode, TreeDataNode, Key } from './interface';
-import { useInjectSelectContext } from './Context';
+import { useInjectTreeSelectContext } from './Context';
 import type { RefOptionListProps } from '../vc-select/OptionList';
 import type { ScrollTo } from '../vc-virtual-list/List';
 import { computed, defineComponent, nextTick, ref, watch } from 'vue';
@@ -36,7 +36,7 @@ export default defineComponent({
   slots: ['notFoundContent', 'menuItemSelectedIcon'],
   expose: ['scrollTo', 'onKeydown', 'onKeyup'],
   setup(props, { slots, expose }) {
-    const context = useInjectSelectContext();
+    const context = useInjectTreeSelectContext();
 
     const treeRef = ref();
     const memoOptions = useMemo(
@@ -144,7 +144,7 @@ export default defineComponent({
       activeKey.value = key;
     };
     expose({
-      scrollTo: treeRef.value?.scrollTo as ScrollTo,
+      scrollTo: (...args: any[]) => treeRef.value.scrollTo?.(...args),
       onKeydown: (event: KeyboardEvent) => {
         const { which } = event;
         switch (which) {
@@ -217,7 +217,6 @@ export default defineComponent({
       if (mergedExpandedKeys.value) {
         treeProps.expandedKeys = mergedExpandedKeys.value;
       }
-
       return (
         <div onMousedown={onListMouseDown} onMouseenter={onMouseenter}>
           {activeEntity.value && open && (
@@ -255,7 +254,7 @@ export default defineComponent({
             onExpand={onInternalExpand}
             onLoad={onTreeLoad}
             filterTreeNode={filterTreeNode}
-            v-slots={{ checkable: context.value.customCheckable }}
+            v-slots={{ ...slots, checkable: context.value.customCheckable }}
           />
         </div>
       );

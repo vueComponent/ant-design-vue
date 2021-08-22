@@ -2,8 +2,9 @@ import pickAttrs from '../../_util/pickAttrs';
 import Input from './Input';
 import type { InnerSelectorProps } from './interface';
 import type { VNodeChild } from 'vue';
-import { computed, defineComponent, Fragment, ref, watch } from 'vue';
+import { computed, defineComponent, ref, watch } from 'vue';
 import PropTypes from '../../_util/vue-types';
+import { useInjectTreeSelectContext } from 'ant-design-vue/es/vc-tree-select/Context';
 
 interface SelectorProps extends InnerSelectorProps {
   inputElement: VNodeChild;
@@ -50,6 +51,7 @@ const SingleSelector = defineComponent<SelectorProps>({
       }
       return inputValue;
     });
+    const treeSelectContext = useInjectTreeSelectContext();
     watch(
       [combobox, () => props.activeValue],
       () => {
@@ -94,6 +96,12 @@ const SingleSelector = defineComponent<SelectorProps>({
         onInputCompositionEnd,
       } = props;
       const item = values[0];
+      let slotTitle = null;
+      if (treeSelectContext.value.slots) {
+        slotTitle =
+          treeSelectContext.value.slots[item?.option?.data?.slots?.title] ||
+          treeSelectContext.value.slots.title;
+      }
       return (
         <>
           <span class={`${prefixCls}-selection-search`}>
@@ -126,7 +134,8 @@ const SingleSelector = defineComponent<SelectorProps>({
           {/* Display value */}
           {!combobox.value && item && !hasTextInput.value && (
             <span class={`${prefixCls}-selection-item`} title={title.value}>
-              <Fragment key={item.key || item.value}>{item.label}</Fragment>
+              {/* <Fragment key={item.key || item.value}>{item.label}</Fragment> */}
+              {slotTitle?.(item.option?.data) || item.label}
             </span>
           )}
 

@@ -11,8 +11,6 @@ import VcTreeSelect, {
 import classNames from '../_util/classNames';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { SizeType } from '../config-provider';
-
-export { TreeData, TreeSelectProps } from './interface';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import CaretDownOutlined from '@ant-design/icons-vue/CaretDownOutlined';
 import type { DefaultValueType, FieldNames } from '../vc-tree-select/interface';
@@ -23,6 +21,7 @@ import devWarning from '../vc-util/devWarning';
 import getIcons from '../select/utils/iconUtil';
 import renderSwitcherIcon from '../tree/utils/iconUtil';
 import type { AntTreeNodeProps } from '../tree/Tree';
+import { warning } from '../vc-util/warning';
 
 const getTransitionName = (rootPrefixCls: string, motion: string, transitionName?: string) => {
   if (transitionName !== undefined) {
@@ -53,6 +52,7 @@ export const treeSelectProps = {
   replaceFields: { type: Object as PropType<FieldNames> },
 };
 export type TreeSelectProps = Partial<ExtractPropTypes<typeof treeSelectProps>>;
+
 const TreeSelect = defineComponent({
   TreeNode,
   SHOW_ALL,
@@ -68,8 +68,19 @@ const TreeSelect = defineComponent({
     listItemHeight: 26,
     bordered: true,
   }),
-  slots: ['placeholder', 'maxTagPlaceholder', 'treeIcon', 'switcherIcon', 'notFoundContent'],
+  slots: [
+    'title',
+    'placeholder',
+    'maxTagPlaceholder',
+    'treeIcon',
+    'switcherIcon',
+    'notFoundContent',
+  ],
   setup(props, { attrs, slots, expose, emit }) {
+    warning(
+      !(props.treeData === undefined && slots.default),
+      '`children` of Tree is deprecated. Please use `treeData` instead.',
+    );
     watchEffect(() => {
       devWarning(
         props.multiple !== false || !props.treeCheckable,
@@ -212,6 +223,7 @@ const TreeSelect = defineComponent({
           onSearch={handleSearch}
           onTreeExpand={handleTreeExpand}
           v-slots={{
+            ...slots,
             treeCheckable: () => <span class={`${prefixCls.value}-tree-checkbox-inner`} />,
           }}
           children={slots.default?.()}

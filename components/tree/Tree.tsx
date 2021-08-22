@@ -13,6 +13,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import renderSwitcherIcon from './utils/iconUtil';
 import dropIndicatorRender from './utils/dropIndicator';
 import devWarning from '../vc-util/devWarning';
+import { warning } from '../vc-util/warning';
 
 export interface AntdTreeNodeAttribute {
   eventKey: string;
@@ -153,6 +154,10 @@ export default defineComponent({
   ],
   TreeNode,
   setup(props, { attrs, expose, emit, slots }) {
+    warning(
+      !(props.treeData === undefined && slots.default),
+      '`children` of Tree is deprecated. Please use `treeData` instead.',
+    );
     const { prefixCls, direction, virtual } = useConfigInject('tree', props);
     const treeRef = ref();
     expose({

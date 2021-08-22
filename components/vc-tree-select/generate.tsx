@@ -91,7 +91,15 @@ export default function generate(config: {
   return defineComponent({
     name: 'TreeSelect',
     props: treeSelectProps(),
-    slots: ['placeholder', 'maxTagPlaceholder', 'treeIcon', 'switcherIcon', 'notFoundContent'],
+    slots: [
+      'title',
+      'placeholder',
+      'maxTagPlaceholder',
+      'treeIcon',
+      'switcherIcon',
+      'notFoundContent',
+      'treeCheckable',
+    ],
     TreeNode,
     SHOW_ALL,
     SHOW_PARENT,
@@ -105,7 +113,6 @@ export default function generate(config: {
       // ======================= Tree Data =======================
       // FieldNames
       const mergedFieldNames = computed(() => fillFieldNames(props.fieldNames, true));
-
       // Legacy both support `label` or `title` if not set.
       // We have to fallback to function to handle this
       const getTreeNodeTitle = (node: DataNode) => {
@@ -157,9 +164,9 @@ export default function generate(config: {
       const selectRef = ref(null);
 
       expose({
-        scrollTo: selectRef.value.scrollTo,
-        focus: selectRef.value.focus,
-        blur: selectRef.value.blur,
+        scrollTo: (...args: any[]) => selectRef.value.scrollTo?.(...args),
+        focus: () => selectRef.value.focus?.(),
+        blur: () => selectRef.value?.blur(),
 
         /** @private Internal usage. It's save to remove if `rc-cascader` not use it any longer */
         getEntityByValue,
@@ -477,7 +484,7 @@ export default function generate(config: {
           treeNodeFilterProp,
           getEntityByKey,
           getEntityByValue,
-          customCheckable: slots.checkable,
+          customCheckable: slots.treeCheckable,
           slots,
         };
         return (
@@ -496,6 +503,7 @@ export default function generate(config: {
               onSelect={null}
               onDeselect={null}
               onDropdownVisibleChange={onInternalDropdownVisibleChange}
+              v-slots={slots}
             />
           </SelectContext>
         );

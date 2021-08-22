@@ -22,7 +22,9 @@ export default defineComponent({
   setup(props, { attrs, slots, expose }) {
     warning(
       !('slots' in props.data),
-      'treeData slots is deprecated, please use `v-slot:icon` or `v-slot:title`, `v-slot:switcherIcon` instead',
+      `treeData slots is deprecated, please use ${Object.keys(props.data.slots || {}).map(
+        key => '`v-slot:' + key + '` ',
+      )}instead`,
     );
     const dragNodeHighlight = ref(false);
     const context = useInjectTreeContext();
@@ -346,7 +348,9 @@ export default defineComponent({
     // Icon + Title
     const renderSelector = () => {
       const {
-        title = slots.title || context.value.slots?.[props.data?.slots?.title],
+        title = slots.title ||
+          context.value.slots?.[props.data?.slots?.title] ||
+          context.value.slots?.title,
         selected,
         icon = slots.icon,
         loading,

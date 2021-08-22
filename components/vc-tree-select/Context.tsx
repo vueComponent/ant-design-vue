@@ -50,7 +50,7 @@ export const SelectContext = defineComponent({
   },
 });
 
-export const useInjectSelectContext = () => {
+export const useInjectTreeSelectContext = () => {
   return inject(
     SelectContextKey,
     computed(() => ({} as ContextProps)),

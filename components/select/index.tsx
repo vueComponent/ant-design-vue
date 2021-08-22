@@ -1,8 +1,7 @@
 import type { App, PropType, Plugin, ExtractPropTypes } from 'vue';
 import { computed, defineComponent, ref } from 'vue';
-import omit from 'omit.js';
 import classNames from '../_util/classNames';
-import type { SelectProps as RcSelectProps } from '../vc-select';
+import { selectProps as vcSelectProps } from '../vc-select';
 import RcSelect, { Option, OptGroup, selectBaseProps } from '../vc-select';
 import type { OptionProps as OptionPropsType } from '../vc-select/Option';
 import getIcons from './utils/iconUtil';
@@ -10,6 +9,7 @@ import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { SizeType } from '../config-provider';
+import omit from '../_util/omit';
 
 type RawValue = string | number;
 
@@ -24,24 +24,8 @@ export interface LabeledValue {
 }
 export type SelectValue = RawValue | RawValue[] | LabeledValue | LabeledValue[] | undefined;
 
-interface InternalSelectProps<VT> extends Omit<RcSelectProps<VT>, 'mode'> {
-  suffixIcon?: any;
-  itemIcon?: any;
-  size?: SizeType;
-  mode?: 'multiple' | 'tags' | 'SECRET_COMBOBOX_MODE_DO_NOT_USE';
-  bordered?: boolean;
-}
-
-interface SelectPropsTypes<VT>
-  extends Omit<InternalSelectProps<VT>, 'inputIcon' | 'mode' | 'getInputElement' | 'backfill'> {
-  mode?: 'multiple' | 'tags';
-}
-export type SelectProps = Partial<ExtractPropTypes<SelectPropsTypes<SelectValue>>>;
 export const selectProps = () => ({
-  ...(omit(selectBaseProps(), ['inputIcon', 'mode', 'getInputElement', 'backfill']) as Omit<
-    SelectPropsTypes<SelectValue>,
-    'inputIcon' | 'mode' | 'getInputElement' | 'backfill' | 'class' | 'style'
-  >),
+  ...omit(vcSelectProps<SelectValue>(), ['inputIcon', 'mode', 'getInputElement', 'backfill']),
   value: {
     type: [Array, Object, String, Number] as PropType<SelectValue>,
   },
@@ -57,6 +41,8 @@ export const selectProps = () => ({
   transitionName: PropTypes.string.def('slide-up'),
   choiceTransitionName: PropTypes.string.def(''),
 });
+
+export type SelectProps = Partial<ExtractPropTypes<ReturnType<typeof selectProps>>>;
 
 const Select = defineComponent({
   name: 'ASelect',

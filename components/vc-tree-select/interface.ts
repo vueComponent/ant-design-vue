@@ -38,6 +38,8 @@ export interface InternalDataEntity {
 
   /** Origin DataNode */
   node: DataNode;
+
+  slots?: Record<string, string>; // 兼容 V2
 }
 
 export interface LegacyDataNode extends DataNode {

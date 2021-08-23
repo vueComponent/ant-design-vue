@@ -1,5 +1,6 @@
+import type { VNodeChild } from 'vue';
+import { camelize } from 'vue';
 import { warning } from '../../vc-util/warning';
-import { isValidElement } from '../../_util/props-util';
 import type {
   DataNode,
   LegacyDataNode,
@@ -10,32 +11,58 @@ import type {
 } from '../interface';
 import TreeNode from '../TreeNode';
 
-export function convertChildrenToData(nodes): DataNode[] {
-  return nodes
-    .map(node => {
-      if (!isValidElement(node) || !node.type) {
+function isTreeSelectNode(node: any) {
+  return node && node.type && (node.type as any).isTreeSelectNode;
+}
+export function convertChildrenToData(rootNodes: VNodeChild): DataNode[] {
+  function dig(treeNodes: any[] = []): DataNode[] {
+    return treeNodes.map(treeNode => {
+      // Filter invalidate node
+      if (!isTreeSelectNode(treeNode)) {
+        warning(!treeNode, 'TreeSelect/TreeSelectNode can only accept TreeSelectNode as children.');
         return null;
       }
-
+      const slots = (treeNode.children as any) || {};
+      const key = treeNode.key as string | number;
+      const props: any = {};
+      for (const [k, v] of Object.entries(treeNode.props)) {
+        props[camelize(k)] = v;
+      }
+      const { isLeaf, checkable, selectable, disabled, disableCheckbox } = props;
+      // 默认值为 undefined
+      const newProps = {
+        isLeaf: isLeaf || isLeaf === '' || undefined,
+        checkable: checkable || checkable === '' || undefined,
+        selectable: selectable || selectable === '' || undefined,
+        disabled: disabled || disabled === '' || undefined,
+        disableCheckbox: disableCheckbox || disableCheckbox === '' || undefined,
+      };
+      const slotsProps = { ...props, ...newProps };
       const {
+        title = slots.title?.(slotsProps),
+        switcherIcon = slots.switcherIcon?.(slotsProps),
+        ...rest
+      } = props;
+      const children = slots.default?.();
+      const dataNode: DataNode = {
+        ...rest,
+        title,
+        switcherIcon,
         key,
-        props: { children, value, ...restProps },
-      } = node;
-
-      const data = {
-        key,
-        value,
-        ...restProps,
+        isLeaf,
+        ...newProps,
       };
 
-      const childData = convertChildrenToData(children);
-      if (childData.length) {
-        data.children = childData;
+      const parsedChildren = dig(children);
+      if (parsedChildren.length) {
+        dataNode.children = parsedChildren;
       }
 
-      return data;
-    })
-    .filter(data => data);
+      return dataNode;
+    });
+  }
+
+  return dig(rootNodes as any[]);
 }
 
 export function fillLegacyProps(dataNode: DataNode): LegacyDataNode {

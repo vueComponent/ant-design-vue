@@ -96,8 +96,8 @@ export default defineComponent({
   props: nodeListProps,
   setup(props, { expose, attrs }) {
     // =============================== Ref ================================
-    const listRef = ref(null);
-    const indentMeasurerRef = ref(null);
+    const listRef = ref();
+    const indentMeasurerRef = ref();
     expose({
       scrollTo: scroll => {
         listRef.value.scrollTo(scroll);

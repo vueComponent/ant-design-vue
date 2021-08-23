@@ -42,7 +42,8 @@ import {
   flattenOptions,
   fillOptionsWithMissingValue,
 } from './utils/valueUtil';
-import { selectBaseProps, SelectProps } from './generate';
+import type { SelectProps } from './generate';
+import { selectBaseProps } from './generate';
 import generateSelector from './generate';
 import type { DefaultValueType } from './interface/generator';
 import warningProps from './utils/warningPropsUtil';
@@ -79,7 +80,7 @@ const Select = defineComponent({
   OptGroup,
   props: RefSelect.props,
   setup(props, { attrs, expose, slots }) {
-    const selectRef = ref(null);
+    const selectRef = ref();
     expose({
       focus: () => {
         selectRef.value?.focus();

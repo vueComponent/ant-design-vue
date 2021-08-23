@@ -870,8 +870,8 @@ export default defineComponent({
         active: true,
       });
     });
-    const onKeyDown = event => {
-      const { onKeyDown, checkable, selectable } = props;
+    const onKeydown = event => {
+      const { onKeydown, checkable, selectable } = props;
 
       // >>>>>>>>>> Direction
       switch (event.which) {
@@ -943,13 +943,14 @@ export default defineComponent({
         }
       }
 
-      if (onKeyDown) {
-        onKeyDown(event);
+      if (onKeydown) {
+        onKeydown(event);
       }
     };
     expose({
       onNodeExpand,
       scrollTo,
+      onKeydown,
     });
     onUnmounted(() => {
       window.removeEventListener('dragend', onWindowDragEnd);
@@ -1068,7 +1069,7 @@ export default defineComponent({
               activeItem={activeItem.value}
               onFocus={onFocus}
               onBlur={onBlur}
-              onKeydown={onKeyDown}
+              onKeydown={onKeydown}
               onActiveChange={onActiveChange}
               onListChangeStart={onListChangeStart}
               onListChangeEnd={onListChangeEnd}

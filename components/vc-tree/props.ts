@@ -146,7 +146,7 @@ export const treeProps = () => ({
   },
   onFocus: { type: Function as PropType<(e: FocusEvent) => void> },
   onBlur: { type: Function as PropType<(e: FocusEvent) => void> },
-  onKeyDown: { type: Function as PropType<EventHandlerNonNull> },
+  onKeydown: { type: Function as PropType<EventHandlerNonNull> },
   onContextmenu: { type: Function as PropType<EventHandlerNonNull> },
   onClick: { type: Function as PropType<NodeMouseEventHandler> },
   onDblclick: { type: Function as PropType<NodeMouseEventHandler> },

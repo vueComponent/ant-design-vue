@@ -2,13 +2,12 @@ import type { App, PropType, Plugin, ExtractPropTypes } from 'vue';
 import { computed, defineComponent, ref } from 'vue';
 import classNames from '../_util/classNames';
 import { selectProps as vcSelectProps } from '../vc-select';
-import RcSelect, { Option, OptGroup, selectBaseProps } from '../vc-select';
+import RcSelect, { Option, OptGroup } from '../vc-select';
 import type { OptionProps as OptionPropsType } from '../vc-select/Option';
 import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
-import type { SizeType } from '../config-provider';
 import omit from '../_util/omit';
 
 type RawValue = string | number;
@@ -62,7 +61,7 @@ const Select = defineComponent({
     'option',
   ],
   setup(props, { attrs, emit, slots, expose }) {
-    const selectRef = ref(null);
+    const selectRef = ref();
 
     const focus = () => {
       if (selectRef.value) {

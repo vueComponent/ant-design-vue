@@ -52,7 +52,7 @@ export interface SelectorProps {
   // Motion
   choiceTransitionName?: string;
 
-  onToggleOpen: (open?: boolean) => void;
+  onToggleOpen: (open?: boolean) => void | any;
   /** `onSearch` returns go next step boolean to check if need do toggle open */
   onSearch: (searchText: string, fromTyping: boolean, isCompositing: boolean) => boolean;
   onSearchSubmit: (searchText: string) => void;

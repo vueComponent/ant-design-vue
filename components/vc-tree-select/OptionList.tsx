@@ -34,7 +34,6 @@ export default defineComponent({
   inheritAttrs: false,
   props: optionListProps<DataNode>(),
   slots: ['notFoundContent', 'menuItemSelectedIcon'],
-  expose: ['scrollTo', 'onKeydown', 'onKeyup'],
   setup(props, { slots, expose }) {
     const context = useInjectTreeSelectContext();
 
@@ -153,7 +152,7 @@ export default defineComponent({
           case KeyCode.DOWN:
           case KeyCode.LEFT:
           case KeyCode.RIGHT:
-            treeRef.value?.onKeyDown(event);
+            treeRef.value?.onKeydown(event);
             break;
 
           // >>> Select item

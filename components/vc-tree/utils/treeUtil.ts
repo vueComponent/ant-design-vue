@@ -12,6 +12,7 @@ import { getPosition, isTreeNode } from '../util';
 import { warning } from '../../vc-util/warning';
 import Omit from 'omit.js';
 import type { VNodeChild } from 'vue';
+import { camelize } from 'vue';
 import type { TreeNodeProps } from '../props';
 
 export function getKey(key: Key, pos: string) {
@@ -60,74 +61,58 @@ export function warningWithoutKey(treeData: DataNode[], fieldNames: FieldNames) 
   dig(treeData);
 }
 
-const cacheStringFunction = (fn: (s: string) => string) => {
-  const cache = Object.create(null);
-  return (str: string) => {
-    const hit = cache[str];
-    return hit || (cache[str] = fn(str));
-  };
-};
-
-const camelizeRE = /-(\w)/g;
-
-const camelize = cacheStringFunction((str: string) => {
-  return str.replace(camelizeRE, (_, c) => (c ? c.toUpperCase() : ''));
-});
-
 /**
  * Convert `children` of Tree into `treeData` structure.
  */
 export function convertTreeToData(rootNodes: VNodeChild): DataNode[] {
   function dig(node: VNodeChild = []): DataNode[] {
     const treeNodes = node as NodeElement[];
-    return treeNodes
-      .map(treeNode => {
-        // Filter invalidate node
-        if (!isTreeNode(treeNode)) {
-          warning(!treeNode, 'Tree/TreeNode can only accept TreeNode as children.');
-          return null;
-        }
-        const slots = (treeNode.children as any) || {};
-        const key = treeNode.key as string | number;
-        const props: any = {};
-        for (const [k, v] of Object.entries(treeNode.props)) {
-          props[camelize(k)] = v;
-        }
-        const { isLeaf, checkable, selectable, disabled, disableCheckbox } = props;
-        // 默认值为 undefined
-        const newProps = {
-          isLeaf: isLeaf || isLeaf === '' || undefined,
-          checkable: checkable || checkable === '' || undefined,
-          selectable: selectable || selectable === '' || undefined,
-          disabled: disabled || disabled === '' || undefined,
-          disableCheckbox: disableCheckbox || disableCheckbox === '' || undefined,
-        };
-        const slotsProps = { ...props, ...newProps };
-        const {
-          title = slots.title?.(slotsProps),
-          icon = slots.icon?.(slotsProps),
-          switcherIcon = slots.switcherIcon?.(slotsProps),
-          ...rest
-        } = props;
-        const children = slots.default?.();
-        const dataNode: DataNode = {
-          ...rest,
-          title,
-          icon,
-          switcherIcon,
-          key,
-          isLeaf,
-          ...newProps,
-        };
+    return treeNodes.map(treeNode => {
+      // Filter invalidate node
+      if (!isTreeNode(treeNode)) {
+        warning(!treeNode, 'Tree/TreeNode can only accept TreeNode as children.');
+        return null;
+      }
+      const slots = (treeNode.children as any) || {};
+      const key = treeNode.key as string | number;
+      const props: any = {};
+      for (const [k, v] of Object.entries(treeNode.props)) {
+        props[camelize(k)] = v;
+      }
+      const { isLeaf, checkable, selectable, disabled, disableCheckbox } = props;
+      // 默认值为 undefined
+      const newProps = {
+        isLeaf: isLeaf || isLeaf === '' || undefined,
+        checkable: checkable || checkable === '' || undefined,
+        selectable: selectable || selectable === '' || undefined,
+        disabled: disabled || disabled === '' || undefined,
+        disableCheckbox: disableCheckbox || disableCheckbox === '' || undefined,
+      };
+      const slotsProps = { ...props, ...newProps };
+      const {
+        title = slots.title?.(slotsProps),
+        icon = slots.icon?.(slotsProps),
+        switcherIcon = slots.switcherIcon?.(slotsProps),
+        ...rest
+      } = props;
+      const children = slots.default?.();
+      const dataNode: DataNode = {
+        ...rest,
+        title,
+        icon,
+        switcherIcon,
+        key,
+        isLeaf,
+        ...newProps,
+      };
 
-        const parsedChildren = dig(children);
-        if (parsedChildren.length) {
-          dataNode.children = parsedChildren;
-        }
+      const parsedChildren = dig(children);
+      if (parsedChildren.length) {
+        dataNode.children = parsedChildren;
+      }
 
-        return dataNode;
-      })
-      .filter((dataNode: DataNode) => dataNode);
+      return dataNode;
+    });
   }
 
   return dig(rootNodes);

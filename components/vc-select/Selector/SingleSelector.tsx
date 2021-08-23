@@ -1,7 +1,8 @@
 import pickAttrs from '../../_util/pickAttrs';
 import Input from './Input';
 import type { InnerSelectorProps } from './interface';
-import { Fragment, Suspense, VNodeChild } from 'vue';
+import type { VNodeChild } from 'vue';
+import { Fragment } from 'vue';
 import { computed, defineComponent, ref, watch } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { useInjectTreeSelectContext } from 'ant-design-vue/es/vc-tree-select/Context';

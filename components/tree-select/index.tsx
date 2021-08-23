@@ -22,6 +22,7 @@ import getIcons from '../select/utils/iconUtil';
 import renderSwitcherIcon from '../tree/utils/iconUtil';
 import type { AntTreeNodeProps } from '../tree/Tree';
 import { warning } from '../vc-util/warning';
+import { flattenChildren } from '../_util/props-util';
 
 const getTransitionName = (rootPrefixCls: string, motion: string, transitionName?: string) => {
   if (transitionName !== undefined) {
@@ -80,7 +81,7 @@ const TreeSelect = defineComponent({
   setup(props, { attrs, slots, expose, emit }) {
     warning(
       !(props.treeData === undefined && slots.default),
-      '`children` of Tree is deprecated. Please use `treeData` instead.',
+      '`children` of TreeSelect is deprecated. Please use `treeData` instead.',
     );
     watchEffect(() => {
       devWarning(
@@ -194,6 +195,10 @@ const TreeSelect = defineComponent({
         attrs.class,
       );
       const rootPrefixCls = configProvider.getPrefixCls();
+      const otherProps: any = {};
+      if (props.treeData === undefined && slots.default) {
+        otherProps.children = flattenChildren(slots.default());
+      }
       return (
         <VcTreeSelect
           {...attrs}
@@ -227,7 +232,7 @@ const TreeSelect = defineComponent({
             ...slots,
             treeCheckable: () => <span class={`${prefixCls.value}-tree-checkbox-inner`} />,
           }}
-          children={slots.default?.()}
+          {...otherProps}
         />
       );
     };

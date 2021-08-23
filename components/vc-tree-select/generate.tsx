@@ -161,7 +161,7 @@ export default function generate(config: {
       });
 
       // ========================== Ref ==========================
-      const selectRef = ref(null);
+      const selectRef = ref();
 
       expose({
         scrollTo: (...args: any[]) => selectRef.value.scrollTo?.(...args),

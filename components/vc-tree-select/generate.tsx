@@ -64,6 +64,7 @@ const OMIT_PROPS: (keyof TreeSelectProps)[] = [
   'treeDataSimpleMode',
   'treeNodeLabelProp',
   'treeDefaultExpandedKeys',
+  'bordered',
 ];
 
 export default function generate(config: {
@@ -236,8 +237,9 @@ export default function generate(config: {
             ...checkedKeys.map(key => getEntityByKey(key).data.value),
           ];
           rawHalfCheckedKeys.value = halfCheckedKeys;
+        } else {
+          [rawValues.value, rawHalfCheckedKeys.value] = [newRawValues, valueHalfCheckedKeys];
         }
-        [rawValues.value, rawHalfCheckedKeys.value] = [newRawValues, valueHalfCheckedKeys];
       });
 
       const selectValues = useSelectValues(rawValues, {
@@ -378,7 +380,7 @@ export default function generate(config: {
         option: DataNode,
         source: SelectSource,
       ) => {
-        const eventValue = mergedLabelInValue.value ? selectValue : selectValue;
+        const eventValue = selectValue;
 
         let newRawValues = removeValue(rawValues.value, selectValue);
 

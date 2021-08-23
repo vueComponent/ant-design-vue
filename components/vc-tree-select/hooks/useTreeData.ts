@@ -1,4 +1,4 @@
-import { warning } from 'ant-design-vue/es/vc-util/warning';
+import { warning } from '../../vc-util/warning';
 import type { ComputedRef, Ref } from 'vue';
 import { computed } from 'vue';
 import type {
@@ -76,6 +76,7 @@ function formatTreeData(
         value: mergedValue,
         title: getLabelProp(node),
         node,
+        dataRef: node,
       };
 
       if (node.slots) {

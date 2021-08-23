@@ -8,6 +8,7 @@ import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { DataNode, DragNodeEvent, FieldNames, Key } from '../vc-tree/interface';
+import type { TreeNodeProps } from '../vc-tree/props';
 import { treeProps as vcTreeProps } from '../vc-tree/props';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import renderSwitcherIcon from './utils/iconUtil';
@@ -35,7 +36,7 @@ export interface AntdTreeNodeAttribute {
   disableCheckbox: boolean;
 }
 
-export type AntTreeNodeProps = DataNode;
+export type AntTreeNodeProps = TreeNodeProps;
 
 // [Legacy] Compatible for v2
 export type TreeDataItem = DataNode;

@@ -39,6 +39,8 @@ export interface InternalDataEntity {
   /** Origin DataNode */
   node: DataNode;
 
+  dataRef: DataNode;
+
   slots?: Record<string, string>; // 兼容 V2
 }
 

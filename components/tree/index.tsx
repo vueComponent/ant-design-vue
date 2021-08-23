@@ -11,7 +11,6 @@ export {
   AntTreeNodeCheckedEvent,
   AntTreeNodeSelectedEvent,
   AntdTreeNodeAttribute,
-  AntTreeNodeProps,
   TreeDataItem,
 } from './Tree';
 

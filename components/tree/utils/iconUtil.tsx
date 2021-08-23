@@ -4,7 +4,7 @@ import MinusSquareOutlined from '@ant-design/icons-vue/MinusSquareOutlined';
 import PlusSquareOutlined from '@ant-design/icons-vue/PlusSquareOutlined';
 import CaretDownFilled from '@ant-design/icons-vue/CaretDownFilled';
 import type { AntTreeNodeProps } from '../Tree';
-import { isValidElement } from 'ant-design-vue/es/_util/props-util';
+import { isValidElement } from '../../_util/props-util';
 
 import { cloneVNode } from 'vue';
 

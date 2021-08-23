@@ -1,4 +1,4 @@
-import type { DataNode, Key } from 'ant-design-vue/es/vc-tree/interface';
+import type { DataNode, Key } from '../../vc-tree/interface';
 
 enum Record {
   None,

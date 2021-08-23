@@ -1034,7 +1034,7 @@ export default function generateSelector<
           internalProps = {},
 
           ...restProps
-        } = props; //as SelectProps<OptionType[], ValueType>;
+        } = { ...props, ...attrs }; //as SelectProps<OptionType[], ValueType>;
         // ============================= Input ==============================
         // Only works in `combobox`
         const customizeInputElement: VNodeChild | JSX.Element =
@@ -1144,9 +1144,8 @@ export default function generateSelector<
         });
         return (
           <div
-            {...attrs}
-            class={mergedClassName}
             {...domProps}
+            class={mergedClassName}
             ref={containerRef}
             onMousedown={onInternalMouseDown}
             onKeydown={onInternalKeyDown}

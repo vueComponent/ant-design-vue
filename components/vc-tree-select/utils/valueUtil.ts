@@ -11,9 +11,9 @@ import type {
 } from '../interface';
 import { fillLegacyProps } from './legacyUtil';
 import type { SkipType } from '../hooks/useKeyValueMapping';
-import type { FlattenNode } from 'ant-design-vue/es/vc-tree/interface';
-import { flattenTreeData } from 'ant-design-vue/es/vc-tree/utils/treeUtil';
-import type { FilterFunc } from 'ant-design-vue/es/vc-select/interface/generator';
+import type { FlattenNode } from '../../vc-tree/interface';
+import { flattenTreeData } from '../../vc-tree/utils/treeUtil';
+import type { FilterFunc } from '../../vc-select/interface/generator';
 
 type CompatibleDataNode = Omit<FlattenDataNode, 'level'>;
 

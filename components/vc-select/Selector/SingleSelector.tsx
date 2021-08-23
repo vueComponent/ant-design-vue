@@ -5,7 +5,7 @@ import type { VNodeChild } from 'vue';
 import { Fragment } from 'vue';
 import { computed, defineComponent, ref, watch } from 'vue';
 import PropTypes from '../../_util/vue-types';
-import { useInjectTreeSelectContext } from 'ant-design-vue/es/vc-tree-select/Context';
+import { useInjectTreeSelectContext } from '../../vc-tree-select/Context';
 
 interface SelectorProps extends InnerSelectorProps {
   inputElement: VNodeChild;

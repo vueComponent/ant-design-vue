@@ -634,7 +634,7 @@ export default defineComponent({
 
         checkedObj = newCheckedKeys;
 
-        // [Legacy] This is used for `rc-tree-select`
+        // [Legacy] This is used for vc-tree-select`
         eventObj.checkedNodes = [];
         eventObj.checkedNodesPositions = [];
         eventObj.halfCheckedKeys = newHalfCheckedKeys;
@@ -997,7 +997,6 @@ export default defineComponent({
 
       const { class: className, style } = attrs;
       const domProps = getDataAndAria({ ...props, ...attrs });
-
       return (
         <TreeContext
           value={{

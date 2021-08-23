@@ -143,7 +143,7 @@ export default defineComponent({
       activeKey.value = key;
     };
     expose({
-      scrollTo: (...args: any[]) => treeRef.value.scrollTo?.(...args),
+      scrollTo: (...args: any[]) => treeRef.value?.scrollTo?.(...args),
       onKeydown: (event: KeyboardEvent) => {
         const { which } = event;
         switch (which) {

@@ -1,12 +1,14 @@
 import { warning } from '../../vc-util/warning';
-import type { TreeSelectProps } from '../TreeSelect';
 import { toArray } from './valueUtil';
 
-function warningProps(props: TreeSelectProps) {
+function warningProps(props: any) {
   const { searchPlaceholder, treeCheckStrictly, treeCheckable, labelInValue, value, multiple } =
     props;
 
-  warning(!searchPlaceholder, '`searchPlaceholder` has been removed.');
+  warning(
+    !searchPlaceholder,
+    '`searchPlaceholder` has been removed, please use `placeholder` instead',
+  );
 
   if (treeCheckStrictly && labelInValue === false) {
     warning(false, '`treeCheckStrictly` will force set `labelInValue` to `true`.');

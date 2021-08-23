@@ -11,8 +11,6 @@ import VcTreeSelect, {
 import classNames from '../_util/classNames';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { SizeType } from '../config-provider';
-import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
-import CaretDownOutlined from '@ant-design/icons-vue/CaretDownOutlined';
 import type { DefaultValueType, FieldNames } from '../vc-tree-select/interface';
 import omit from '../_util/omit';
 import PropTypes from '../_util/vue-types';
@@ -236,78 +234,6 @@ const TreeSelect = defineComponent({
         />
       );
     };
-  },
-
-  methods: {
-    saveTreeSelect(node: any) {
-      this.vcTreeSelect = node;
-    },
-    focus() {
-      this.vcTreeSelect.focus();
-    },
-
-    blur() {
-      this.vcTreeSelect.blur();
-    },
-    renderSwitcherIcon(prefixCls: string, { isLeaf, loading }) {
-      if (loading) {
-        return <LoadingOutlined class={`${prefixCls}-switcher-loading-icon`} />;
-      }
-      if (isLeaf) {
-        return null;
-      }
-      return <CaretDownOutlined class={`${prefixCls}-switcher-icon`} />;
-    },
-    handleChange(...args: any[]) {
-      this.$emit('update:value', args[0]);
-      this.$emit('change', ...args);
-    },
-    handleTreeExpand(...args: any[]) {
-      this.$emit('update:treeExpandedKeys', args[0]);
-      this.$emit('treeExpand', ...args);
-    },
-    handleSearch(...args: any[]) {
-      this.$emit('update:searchValue', args[0]);
-      this.$emit('search', ...args);
-    },
-    updateTreeData(treeData: any[]) {
-      const { $slots } = this;
-      const defaultFields = {
-        children: 'children',
-        title: 'title',
-        key: 'key',
-        label: 'label',
-        value: 'value',
-      };
-      const replaceFields = { ...defaultFields, ...this.$props.replaceFields };
-      return treeData.map(item => {
-        const { slots = {} } = item;
-        const label = item[replaceFields.label];
-        const title = item[replaceFields.title];
-        const value = item[replaceFields.value];
-        const key = item[replaceFields.key];
-        const children = item[replaceFields.children];
-        let newLabel = typeof label === 'function' ? label() : label;
-        let newTitle = typeof title === 'function' ? title() : title;
-        if (!newLabel && slots.label && $slots[slots.label]) {
-          newLabel = <>{$slots[slots.label](item)}</>;
-        }
-        if (!newTitle && slots.title && $slots[slots.title]) {
-          newTitle = <>{$slots[slots.title](item)}</>;
-        }
-        const treeNodeProps = {
-          ...item,
-          title: newTitle || newLabel,
-          value,
-          dataRef: item,
-          key,
-        };
-        if (children) {
-          return { ...treeNodeProps, children: this.updateTreeData(children) };
-        }
-        return treeNodeProps;
-      });
-    },
   },
 });
 

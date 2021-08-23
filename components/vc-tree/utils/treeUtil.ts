@@ -402,8 +402,8 @@ export function convertNodePropsToEventData(props: TreeNodeProps): EventDataNode
     pos,
     active,
   } = props;
-
   const eventData = {
+    dataRef: data,
     ...data,
     expanded,
     selected,
@@ -416,7 +416,6 @@ export function convertNodePropsToEventData(props: TreeNodeProps): EventDataNode
     dragOverGapBottom,
     pos,
     active,
-    dataRef: data,
     eventKey: data.key,
   };
   if (!('props' in eventData)) {

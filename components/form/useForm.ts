@@ -119,19 +119,33 @@ function useForm(
   clearValidate: (names?: namesType) => void;
 } {
   const initialModel = cloneDeep(unref(modelRef));
-  let validateInfos: validateInfos = {};
+  const validateInfos = reactive<validateInfos>({});
 
   const rulesKeys = computed(() => {
     return Object.keys(unref(rulesRef));
   });
 
-  rulesKeys.value.forEach(key => {
-    validateInfos[key] = {
-      autoLink: false,
-      required: isRequired(unref(rulesRef)[key]),
-    };
-  });
-  validateInfos = reactive(validateInfos);
+  watch(
+    rulesKeys,
+    () => {
+      const newValidateInfos = {};
+      rulesKeys.value.forEach(key => {
+        newValidateInfos[key] = validateInfos[key] || {
+          autoLink: false,
+          required: isRequired(unref(rulesRef)[key]),
+        };
+        delete validateInfos[key];
+      });
+      for (const key in validateInfos) {
+        if (Object.prototype.hasOwnProperty.call(validateInfos, key)) {
+          delete validateInfos[key];
+        }
+      }
+      Object.assign(validateInfos, newValidateInfos);
+    },
+    { immediate: true },
+  );
+
   const resetFields = (newValues: Props) => {
     Object.assign(unref(modelRef), {
       ...cloneDeep(initialModel),
@@ -251,6 +265,9 @@ function useForm(
       },
       !!option.validateFirst,
     );
+    if (!validateInfos[name]) {
+      return promise.catch((e: any) => e);
+    }
     validateInfos[name].validateStatus = 'validating';
     promise
       .catch((e: any) => e)
@@ -327,7 +344,9 @@ function useForm(
     validate(names, { trigger: 'change' });
     oldModel = cloneDeep(model);
   };
+
   const debounceOptions = options?.debounce;
+
   watch(
     modelRef,
     debounceOptions && debounceOptions.wait

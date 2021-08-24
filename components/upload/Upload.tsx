@@ -15,6 +15,27 @@ import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './u
 import { defineComponent, inject } from 'vue';
 import { getDataAndAriaProps } from '../_util/util';
 
+export type UploadFileStatus = 'error' | 'success' | 'done' | 'uploading' | 'removed';
+export interface UploadFile<T = any> {
+  uid: string;
+  size?: number;
+  name: string;
+  fileName?: string;
+  lastModified?: number;
+  lastModifiedDate?: Date;
+  url?: string;
+  status?: UploadFileStatus;
+  percent?: number;
+  thumbUrl?: string;
+  originFileObj?: any;
+  response?: T;
+  error?: any;
+  linkProps?: any;
+  type?: string;
+  xhr?: T;
+  preview?: string;
+}
+
 export default defineComponent({
   name: 'AUpload',
   mixins: [BaseMixin],
@@ -185,7 +206,10 @@ export default defineComponent({
       if (result === false) {
         this.handleChange({
           file,
-          fileList: uniqBy(stateFileList.concat(fileList.map(fileToObject)), item => item.uid),
+          fileList: uniqBy(
+            stateFileList.concat(fileList.map(fileToObject)),
+            (item: UploadFile) => item.uid,
+          ),
         });
         return false;
       }

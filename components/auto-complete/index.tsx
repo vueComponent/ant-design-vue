@@ -33,7 +33,7 @@ const AutoComplete = defineComponent({
   inheritAttrs: false,
   props: {
     ...autoCompleteProps,
-    prefixCls: PropTypes.string.def('ant-select'),
+    prefixCls: PropTypes.string,
     showSearch: PropTypes.looseBool,
     transitionName: PropTypes.string.def('slide-up'),
     choiceTransitionName: PropTypes.string.def('zoom'),

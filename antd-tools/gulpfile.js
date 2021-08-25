@@ -26,16 +26,18 @@ const ts = require('gulp-typescript');
 const gulp = require('gulp');
 const fs = require('fs');
 const rimraf = require('rimraf');
-const tsConfig = require('./getTSCommonConfig')();
-const replaceLib = require('./replaceLib');
 const stripCode = require('gulp-strip-code');
 const compareVersions = require('compare-versions');
+const getTSCommonConfig = require('./getTSCommonConfig');
+const replaceLib = require('./replaceLib');
 
 const packageJson = require(getProjectPath('package.json'));
 const tsDefaultReporter = ts.reporter.defaultReporter();
 const cwd = process.cwd();
 const libDir = getProjectPath('lib');
 const esDir = getProjectPath('es');
+
+const tsConfig = getTSCommonConfig();
 
 function dist(done) {
   rimraf.sync(path.join(cwd, 'dist'));

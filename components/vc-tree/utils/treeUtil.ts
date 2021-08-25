@@ -14,6 +14,7 @@ import Omit from 'omit.js';
 import type { VNodeChild } from 'vue';
 import { camelize } from 'vue';
 import type { TreeNodeProps } from '../props';
+import { filterEmpty } from '../../_util/props-util';
 
 export function getKey(key: Key, pos: string) {
   if (key !== null && key !== undefined) {
@@ -66,7 +67,7 @@ export function warningWithoutKey(treeData: DataNode[], fieldNames: FieldNames) 
  */
 export function convertTreeToData(rootNodes: VNodeChild): DataNode[] {
   function dig(node: VNodeChild = []): DataNode[] {
-    const treeNodes = node as NodeElement[];
+    const treeNodes = filterEmpty(node as NodeElement[]);
     return treeNodes.map(treeNode => {
       // Filter invalidate node
       if (!isTreeNode(treeNode)) {
@@ -114,7 +115,6 @@ export function convertTreeToData(rootNodes: VNodeChild): DataNode[] {
       return dataNode;
     });
   }
-
   return dig(rootNodes);
 }
 

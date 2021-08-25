@@ -245,7 +245,7 @@ export default defineComponent({
       cleanDragState();
 
       if (onDragend && !outsideTree) {
-        onDragend({ event, node: node.eventData.value });
+        onDragend({ event, node: node.eventData });
       }
 
       dragNode = null;
@@ -267,17 +267,17 @@ export default defineComponent({
         y: event.clientY,
       };
 
-      const newExpandedKeys = arrDel(expandedKeys.value, eventKey.value);
+      const newExpandedKeys = arrDel(expandedKeys.value, eventKey);
 
       dragState.dragging = true;
-      dragState.dragChildrenKeys = getDragChildrenKeys(eventKey.value, keyEntities.value);
+      dragState.dragChildrenKeys = getDragChildrenKeys(eventKey, keyEntities.value);
       indent.value = listRef.value.getIndentWidth();
 
       setExpandedKeys(newExpandedKeys);
       window.addEventListener('dragend', onWindowDragEnd);
 
       if (onDragstart) {
-        onDragstart({ event, node: eventData.value });
+        onDragstart({ event, node: eventData });
       }
     };
 
@@ -339,25 +339,25 @@ export default defineComponent({
         clearTimeout(delayedDragEnterLogic[key]);
       });
 
-      if (dragNode.eventKey.value !== node.eventKey.value) {
+      if (dragNode.eventKey !== node.eventKey) {
         // hoist expand logic here
         // since if logic is on the bottom
         // it will be blocked by abstract dragover node check
         //   => if you dragenter from top, you mouse will still be consider as in the top node
-        delayedDragEnterLogic[node.pos.value] = window.setTimeout(() => {
+        delayedDragEnterLogic[node.pos] = window.setTimeout(() => {
           if (!dragState.dragging) return;
 
           let newExpandedKeys = [...expandedKeys.value];
-          const entity = keyEntities.value[node.eventKey.value];
+          const entity = keyEntities.value[node.eventKey];
 
           if (entity && (entity.children || []).length) {
-            newExpandedKeys = arrAdd(expandedKeys.value, node.eventKey.value);
+            newExpandedKeys = arrAdd(expandedKeys.value, node.eventKey);
           }
           setExpandedKeys(newExpandedKeys);
 
           if (onExpand) {
             onExpand(newExpandedKeys, {
-              node: node.eventData.value,
+              node: node.eventData,
               expanded: true,
               nativeEvent: event,
             });
@@ -366,7 +366,7 @@ export default defineComponent({
       }
 
       // Skip if drag node is self
-      if (dragNode.eventKey.value === dropTargetKey && dropLevelOffset === 0) {
+      if (dragNode.eventKey === dropTargetKey && dropLevelOffset === 0) {
         Object.assign(dragState, {
           dragOverNodeKey: null,
           dropPosition: null,
@@ -393,7 +393,7 @@ export default defineComponent({
       if (onDragenter) {
         onDragenter({
           event,
-          node: node.eventData.value,
+          node: node.eventData,
           expandedKeys: expandedKeys.value,
         });
       }
@@ -431,7 +431,7 @@ export default defineComponent({
 
       // Update drag position
 
-      if (dragNode.eventKey.value === dropTargetKey && dropLevelOffset === 0) {
+      if (dragNode.eventKey === dropTargetKey && dropLevelOffset === 0) {
         if (
           !(
             dragState.dropPosition === null &&
@@ -476,7 +476,7 @@ export default defineComponent({
       }
 
       if (onDragover) {
-        onDragover({ event, node: node.eventData.value });
+        onDragover({ event, node: node.eventData });
       }
     };
 
@@ -484,7 +484,7 @@ export default defineComponent({
       const { onDragleave } = props;
 
       if (onDragleave) {
-        onDragleave({ event, node: node.eventData.value });
+        onDragleave({ event, node: node.eventData });
       }
     };
     const onNodeDrop = (event: MouseEvent, _node, outsideTree = false) => {
@@ -517,8 +517,8 @@ export default defineComponent({
       const dropResult = {
         event,
         node: convertNodePropsToEventData(abstractDropNodeProps),
-        dragNode: dragNode ? dragNode.eventData.value : null,
-        dragNodesKeys: [dragNode.eventKey.value].concat(dragChildrenKeys),
+        dragNode: dragNode ? dragNode.eventData : null,
+        dragNodesKeys: [dragNode.eventKey].concat(dragChildrenKeys),
         dropToGap: dropPosition !== 0,
         dropPosition: dropPosition + Number(posArr[posArr.length - 1]),
       };

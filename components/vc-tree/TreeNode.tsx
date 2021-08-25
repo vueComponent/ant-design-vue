@@ -2,11 +2,20 @@ import { useInjectTreeContext } from './contextTypes';
 import { getDataAndAria } from './util';
 import Indent from './Indent';
 import { convertNodePropsToEventData } from './utils/treeUtil';
-import { computed, defineComponent, onMounted, onUpdated, ref } from 'vue';
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  onMounted,
+  onUpdated,
+  reactive,
+  ref,
+} from 'vue';
 import { treeNodeProps } from './props';
 import classNames from '../_util/classNames';
 import { warning } from '../vc-util/warning';
-import type { DragNodeEvent } from './interface';
+import type { DragNodeEvent, Key } from './interface';
+import pick from 'lodash-es/pick';
 
 const ICON_OPEN = 'open';
 const ICON_CLOSE = 'close';
@@ -87,16 +96,36 @@ export default defineComponent({
 
       return treeSelectable;
     });
-
+    const renderArgsData = computed(() => {
+      return {
+        ...pick(props, [
+          'active',
+          'checkable',
+          'checked',
+          'disableCheckbox',
+          'disabled',
+          'expanded',
+          'isLeaf',
+          'loading',
+          'selectable',
+          'selected',
+          'halfChecked',
+        ]),
+        ...props.data,
+        dataRef: props.data,
+        isLeaf: isLeaf.value,
+      };
+    });
     const eventData = computed(() => {
       return convertNodePropsToEventData(props);
     });
-    const dragNodeEvent: DragNodeEvent = {
+    const dragNodeEvent: DragNodeEvent = reactive({
       eventData,
       eventKey: computed(() => props.eventKey),
       selectHandle,
       pos: computed(() => props.pos),
-    };
+      key: getCurrentInstance().vnode.key as Key,
+    });
     expose(dragNodeEvent);
     const onSelectorDoubleClick = (e: MouseEvent) => {
       const { onNodeDoubleClick } = context.value;
@@ -214,7 +243,7 @@ export default defineComponent({
       onNodeExpand(e, eventData.value);
     };
 
-    const renderSwitcherIconDom = (isLeaf: boolean) => {
+    const renderSwitcherIconDom = () => {
       const {
         switcherIcon: switcherIconFromProps = slots.switcherIcon ||
           context.value.slots?.[props.data?.slots?.switcherIcon],
@@ -224,7 +253,7 @@ export default defineComponent({
       const switcherIcon = switcherIconFromProps || switcherIconFromCtx;
       // if switcherIconDom is null, no render switcher span
       if (typeof switcherIcon === 'function') {
-        return switcherIcon({ ...props, isLeaf });
+        return switcherIcon(renderArgsData.value);
       }
       return switcherIcon;
     };
@@ -259,11 +288,9 @@ export default defineComponent({
     const renderSwitcher = () => {
       const { expanded } = props;
       const { prefixCls } = context.value;
-
+      // if switcherIconDom is null, no render switcher span
+      const switcherIconDom = renderSwitcherIconDom();
       if (isLeaf.value) {
-        // if switcherIconDom is null, no render switcher span
-        const switcherIconDom = renderSwitcherIconDom(true);
-
         return switcherIconDom !== false ? (
           <span class={classNames(`${prefixCls}-switcher`, `${prefixCls}-switcher-noop`)}>
             {switcherIconDom}
@@ -275,8 +302,6 @@ export default defineComponent({
         `${prefixCls}-switcher`,
         `${prefixCls}-switcher_${expanded ? ICON_OPEN : ICON_CLOSE}`,
       );
-
-      const switcherIconDom = renderSwitcherIconDom(false);
 
       return switcherIconDom !== false ? (
         <span onClick={onExpand} class={switcherCls}>
@@ -348,14 +373,19 @@ export default defineComponent({
     // Icon + Title
     const renderSelector = () => {
       const {
-        title = slots.title ||
-          context.value.slots?.[props.data?.slots?.title] ||
-          context.value.slots?.title,
+        // title = slots.title ||
+        //   context.value.slots?.[props.data?.slots?.title] ||
+        //   context.value.slots?.title,
         selected,
         icon = slots.icon,
         loading,
         data,
       } = props;
+      const title =
+        slots.title ||
+        context.value.slots?.[props.data?.slots?.title] ||
+        context.value.slots?.title ||
+        props.title;
       const {
         prefixCls,
         showIcon,
@@ -377,7 +407,7 @@ export default defineComponent({
 
         $icon = currentIcon ? (
           <span class={classNames(`${prefixCls}-iconEle`, `${prefixCls}-icon__customize`)}>
-            {typeof currentIcon === 'function' ? currentIcon(props) : currentIcon}
+            {typeof currentIcon === 'function' ? currentIcon(renderArgsData.value) : currentIcon}
           </span>
         ) : (
           renderIcon()
@@ -389,9 +419,9 @@ export default defineComponent({
       // Title
       let titleNode: any;
       if (typeof title === 'function') {
-        titleNode = title(data);
+        titleNode = title(renderArgsData.value);
       } else if (contextSlots.titleRender) {
-        titleNode = contextSlots.titleRender(data);
+        titleNode = contextSlots.titleRender(renderArgsData.value);
       } else {
         titleNode = title;
       }

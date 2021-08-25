@@ -101,15 +101,16 @@ const SingleSelector = defineComponent<SelectorProps>({
       // custom tree-select title by slot
       if (item && treeSelectContext.value.slots) {
         titleNode =
-          item.label ||
           treeSelectContext.value.slots[item?.option?.data?.slots?.title] ||
-          treeSelectContext.value.slots.title;
+          treeSelectContext.value.slots.title ||
+          item.label;
         if (typeof titleNode === 'function') {
           titleNode = titleNode(item.option?.data || {});
-        } else if (treeSelectContext.value.slots.titleRender) {
-          // 因历史 title 是覆盖逻辑，新增 titleRender，所有的 title 都走一遍 titleRender
-          titleNode = treeSelectContext.value.slots.titleRender(item.option?.data || {});
         }
+        //  else if (treeSelectContext.value.slots.titleRender) {
+        //   // 因历史 title 是覆盖逻辑，新增 titleRender，所有的 title 都走一遍 titleRender
+        //   titleNode = treeSelectContext.value.slots.titleRender(item.option?.data || {});
+        // }
       } else {
         titleNode = item?.label;
       }

@@ -1,3 +1,4 @@
+import { filterEmpty } from '../../_util/props-util';
 import type { VNodeChild } from 'vue';
 import { camelize } from 'vue';
 import { warning } from '../../vc-util/warning';
@@ -16,7 +17,7 @@ function isTreeSelectNode(node: any) {
 }
 export function convertChildrenToData(rootNodes: VNodeChild): DataNode[] {
   function dig(treeNodes: any[] = []): DataNode[] {
-    return treeNodes.map(treeNode => {
+    return filterEmpty(treeNodes).map(treeNode => {
       // Filter invalidate node
       if (!isTreeSelectNode(treeNode)) {
         warning(!treeNode, 'TreeSelect/TreeSelectNode can only accept TreeSelectNode as children.');

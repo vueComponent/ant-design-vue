@@ -2,19 +2,24 @@ import type { App, Plugin } from 'vue';
 import Tree from './Tree';
 import DirectoryTree from './DirectoryTree';
 
-export { EventDataNode, DataNode } from '../vc-tree/interface';
+export type { EventDataNode, DataNode } from '../vc-tree/interface';
 
-export {
+export type {
   TreeProps,
   AntTreeNodeMouseEvent,
   AntTreeNodeExpandedEvent,
   AntTreeNodeCheckedEvent,
   AntTreeNodeSelectedEvent,
+  AntTreeNodeDragEnterEvent,
+  AntTreeNodeDropEvent,
   AntdTreeNodeAttribute,
   TreeDataItem,
 } from './Tree';
 
-export { ExpandAction as DirectoryTreeExpandAction, DirectoryTreeProps } from './DirectoryTree';
+export type {
+  ExpandAction as DirectoryTreeExpandAction,
+  DirectoryTreeProps,
+} from './DirectoryTree';
 
 Tree.TreeNode.name = 'ATreeNode';
 Tree.DirectoryTree = DirectoryTree;

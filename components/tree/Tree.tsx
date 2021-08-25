@@ -7,7 +7,7 @@ import VcTree, { TreeNode } from '../vc-tree';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import type { DataNode, DragNodeEvent, FieldNames, Key } from '../vc-tree/interface';
+import type { DataNode, EventDataNode, FieldNames, Key } from '../vc-tree/interface';
 import type { TreeNodeProps } from '../vc-tree/props';
 import { treeProps as vcTreeProps } from '../vc-tree/props';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -42,7 +42,7 @@ export type AntTreeNodeProps = TreeNodeProps;
 export type TreeDataItem = DataNode;
 
 export interface AntTreeNodeBaseEvent {
-  node: DataNode;
+  node: EventDataNode;
   nativeEvent: MouseEvent;
 }
 
@@ -63,7 +63,7 @@ export interface AntTreeNodeExpandedEvent extends AntTreeNodeBaseEvent {
 }
 
 export interface AntTreeNodeMouseEvent {
-  node: DataNode;
+  node: EventDataNode;
   event: DragEvent;
 }
 
@@ -72,8 +72,8 @@ export interface AntTreeNodeDragEnterEvent extends AntTreeNodeMouseEvent {
 }
 
 export interface AntTreeNodeDropEvent {
-  node: DragNodeEvent;
-  dragNode: DragNodeEvent;
+  node: EventDataNode;
+  dragNode: EventDataNode;
   dragNodesKeys: Key[];
   dropPosition: number;
   dropToGap?: boolean;
@@ -192,7 +192,7 @@ export default defineComponent({
       const {
         showIcon,
         showLine,
-        switcherIcon = slots.switcherIcon?.(),
+        switcherIcon = slots.switcherIcon,
         icon = slots.icon,
         blockNode,
         checkable,

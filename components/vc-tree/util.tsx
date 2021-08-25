@@ -108,7 +108,7 @@ export function calcDropPosition(
   const rawDropLevelOffset = (horizontalMouseOffset - 12) / indent;
 
   // find abstract drop node by horizontal offset
-  let abstractDropNodeEntity: DataEntity = keyEntities[targetNode.eventKey.value];
+  let abstractDropNodeEntity: DataEntity = keyEntities[targetNode.eventKey];
 
   if (clientY < top + height / 2) {
     // first half, set abstract drop node to previous node
@@ -150,7 +150,7 @@ export function calcDropPosition(
       dropNode: abstractDropDataNode,
       dropPosition: -1,
     }) &&
-    abstractDropNodeEntity.key === targetNode.eventKey.value
+    abstractDropNodeEntity.key === targetNode.eventKey
   ) {
     // first half of first node in first level
     dropPosition = -1;

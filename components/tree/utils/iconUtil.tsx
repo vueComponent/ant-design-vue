@@ -12,41 +12,46 @@ export default function renderSwitcherIcon(
   prefixCls: string,
   switcherIcon: any,
   showLine: boolean | { showLeafIcon: boolean } | undefined,
-  { isLeaf, expanded, loading }: AntTreeNodeProps,
+  props: AntTreeNodeProps,
 ) {
+  const { isLeaf, expanded, loading } = props;
+  let icon = switcherIcon;
   if (loading) {
     return <LoadingOutlined class={`${prefixCls}-switcher-loading-icon`} />;
   }
-  let showLeafIcon;
+  let showLeafIcon: boolean;
   if (showLine && typeof showLine === 'object') {
     showLeafIcon = showLine.showLeafIcon;
   }
+  let defaultIcon = null;
+  const switcherCls = `${prefixCls}-switcher-icon`;
   if (isLeaf) {
     if (showLine) {
       if (typeof showLine === 'object' && !showLeafIcon) {
-        return <span class={`${prefixCls}-switcher-leaf-line`} />;
+        defaultIcon = <span class={`${prefixCls}-switcher-leaf-line`} />;
+      } else {
+        defaultIcon = <FileOutlined class={`${prefixCls}-switcher-line-icon`} />;
       }
-      return <FileOutlined class={`${prefixCls}-switcher-line-icon`} />;
     }
-    return null;
+    return defaultIcon;
+  } else {
+    defaultIcon = <CaretDownFilled class={switcherCls} />;
+    if (showLine) {
+      defaultIcon = expanded ? (
+        <MinusSquareOutlined class={`${prefixCls}-switcher-line-icon`} />
+      ) : (
+        <PlusSquareOutlined class={`${prefixCls}-switcher-line-icon`} />
+      );
+    }
   }
-  const switcherCls = `${prefixCls}-switcher-icon`;
-  if (isValidElement(switcherIcon)) {
-    return cloneVNode(switcherIcon, {
+
+  if (typeof switcherIcon === 'function') {
+    icon = switcherIcon({ ...props, defaultIcon, switcherCls });
+  } else if (isValidElement(icon)) {
+    icon = cloneVNode(icon, {
       class: switcherCls,
     });
   }
 
-  if (switcherIcon) {
-    return switcherIcon;
-  }
-
-  if (showLine) {
-    return expanded ? (
-      <MinusSquareOutlined class={`${prefixCls}-switcher-line-icon`} />
-    ) : (
-      <PlusSquareOutlined class={`${prefixCls}-switcher-line-icon`} />
-    );
-  }
-  return <CaretDownFilled class={switcherCls} />;
+  return icon || defaultIcon;
 }

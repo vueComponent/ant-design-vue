@@ -199,6 +199,7 @@ export default defineComponent({
         selectable,
         fieldNames = props.replaceFields,
         motion = props.openAnimation,
+        itemHeight = 20,
       } = props;
       const newProps = {
         ...attrs,
@@ -207,13 +208,13 @@ export default defineComponent({
         dropIndicatorRender,
         fieldNames,
         icon,
+        itemHeight,
       };
 
       return (
         <VcTree
-          itemHeight={20}
-          virtual={virtual.value}
           {...newProps}
+          virtual={virtual.value}
           motion={motion}
           ref={treeRef}
           prefixCls={prefixCls.value}

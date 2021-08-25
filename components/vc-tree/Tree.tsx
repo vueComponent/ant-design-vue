@@ -561,9 +561,10 @@ export default defineComponent({
       }
 
       // [Legacy] Not found related usage in doc or upper libs
+      const keyEntitiesValue = keyEntities.value;
       const selectedNodes = newSelectedKeys
         .map(selectedKey => {
-          const entity = keyEntities.value[selectedKey];
+          const entity = keyEntitiesValue[selectedKey];
           if (!entity) return null;
 
           return entity.node;
@@ -605,8 +606,9 @@ export default defineComponent({
         const newHalfCheckedKeys = arrDel(halfCheckedKeys.value, key);
         checkedObj = { checked: newCheckedKeys, halfChecked: newHalfCheckedKeys };
 
+        const keyEntitiesValue = keyEntities.value;
         eventObj.checkedNodes = newCheckedKeys
-          .map(checkedKey => keyEntities.value[checkedKey])
+          .map(checkedKey => keyEntitiesValue[checkedKey])
           .filter(entity => entity)
           .map(entity => entity.node);
 
@@ -828,14 +830,6 @@ export default defineComponent({
         onActiveChange(newActiveKey);
       }
     };
-
-    // const getActiveItem = () => {
-    //   if (activeKey.value === null) {
-    //     return null;
-    //   }
-
-    //   return flattenNodes.value.find(({ data: { key } }) => key === activeKey.value) || null;
-    // };
 
     const activeItem = computed<FlattenNode>(() => {
       if (activeKey.value === null) {

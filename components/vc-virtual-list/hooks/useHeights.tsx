@@ -36,7 +36,7 @@ export default function useHeights<T>(
     const origin = instance.get(key);
 
     if (ins) {
-      instance.set(key, ins);
+      instance.set(key, (ins as any).$el || ins);
       collectHeight();
     } else {
       instance.delete(key);

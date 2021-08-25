@@ -318,14 +318,16 @@ const Form = defineComponent({
       e.preventDefault();
       e.stopPropagation();
       emit('submit', e);
-      const res = validateFields();
-      res
-        .then(values => {
-          emit('finish', values);
-        })
-        .catch(errors => {
-          handleFinishFailed(errors);
-        });
+      if (props.model) {
+        const res = validateFields();
+        res
+          .then(values => {
+            emit('finish', values);
+          })
+          .catch(errors => {
+            handleFinishFailed(errors);
+          });
+      }
     };
 
     expose({

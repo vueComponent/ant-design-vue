@@ -115,6 +115,9 @@ const Mentions = {
       const { measureText: prevMeasureText, measuring } = this.$data;
       const { prefix = '', validateSearch } = this.$props;
       const target = event.target;
+      if (target.composing) {
+        return;
+      }
       const selectionStartText = getBeforeSelectionText(target);
       const { location: measureIndex, prefix: measurePrefix } = getLastMeasureIndex(
         selectionStartText,

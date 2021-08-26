@@ -152,6 +152,7 @@
     "mkdirp": "^0.5.1",
     "mockdate": "^2.0.2",
     "nprogress": "^0.2.0",
+    "object-assign": "^4.1.1",
     "postcss": "^8.2.12",
     "postcss-loader": "^6.0.0",
     "prettier": "^2.2.0",

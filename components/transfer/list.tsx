@@ -14,8 +14,8 @@ import type { RadioChangeEvent } from '../radio/interface';
 const defaultRender = () => null;
 
 const TransferItem = {
-  key: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  key: PropTypes.string,
+  title: PropTypes.string,
   description: PropTypes.string,
   disabled: PropTypes.looseBool,
 };

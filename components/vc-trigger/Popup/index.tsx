@@ -27,7 +27,7 @@ export default defineComponent({
         popupRef.value?.forceAlign();
       },
       getElement: () => {
-        popupRef.value?.getElement();
+        return popupRef.value?.getElement();
       },
     });
     return () => {

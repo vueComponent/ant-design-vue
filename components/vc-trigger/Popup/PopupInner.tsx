@@ -110,7 +110,9 @@ export default defineComponent({
 
     expose({
       forceAlign,
-      getElement: () => elementRef.value,
+      getElement: () => {
+        return (elementRef.value as any).$el || elementRef.value;
+      },
     });
     return () => {
       const {

@@ -23,7 +23,7 @@ describe('Mentions', () => {
   beforeEach(() => {
     document.body.innerHTML = '';
   });
-
+  focusTest(Mentions);
   it('getMentions', () => {
     const mentions = getMentions('@light #bamboo cat', { prefix: ['@', '#'] });
     expect(mentions).toEqual([
@@ -100,6 +100,4 @@ describe('Mentions', () => {
 
     expect(wrapper.find('textarea').element.value).toBe('@notExist');
   });
-
-  focusTest(Mentions);
 });

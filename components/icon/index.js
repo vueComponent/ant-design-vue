@@ -19,9 +19,11 @@ import Base from '../base';
 // Initial setting
 
 // https://github.com/vueComponent/ant-design-vue/issues/2745
-let validIcons = allIcons.default || allIcons;
-
-VueIcon.add(...Object.keys(validIcons).map(key => validIcons[key]));
+VueIcon.add(
+  ...Object.keys(allIcons)
+    .filter(key => key !== 'default')
+    .map(key => allIcons[key]),
+);
 setTwoToneColor('#1890ff');
 const defaultTheme = 'outlined';
 let dangerousTheme;

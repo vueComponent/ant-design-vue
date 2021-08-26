@@ -86,6 +86,12 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
           emit('update:open', open);
           emit('openChange', open);
         };
+        const onFocus = () => {
+          emit('focus');
+        };
+        const onBlur = () => {
+          emit('blur');
+        };
         const onPanelChange = (date: DateType, mode: PanelMode | null) => {
           const value = maybeToString(date);
           emit('panelChange', value, mode);
@@ -206,8 +212,8 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               direction={direction.value}
               onChange={onChange}
               onOpenChange={onOpenChange}
-              onFocus={props.onFocus}
-              onBlur={props.onBlur}
+              onFocus={onFocus}
+              onBlur={onBlur}
               onPanelChange={onPanelChange}
               onOk={onOk}
             />

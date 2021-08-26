@@ -156,12 +156,23 @@ export interface CalendarHeaderProps<DateType> {
 export default defineComponent<CalendarHeaderProps<any>>({
   name: 'CalendarHeader',
   inheritAttrs: false,
+  props: [
+    'mode',
+    'prefixCls',
+    'value',
+    'validRange',
+    'generateConfig',
+    'locale',
+    'mode',
+    'fullscreen',
+  ] as any,
   setup(_props, { attrs }) {
     const divRef = ref<HTMLDivElement>(null);
     return () => {
-      const { prefixCls, fullscreen, mode, onChange, onModeChange } = attrs;
+      const props = { ..._props, ...attrs };
+      const { prefixCls, fullscreen, mode, onChange, onModeChange } = props;
       const sharedProps = {
-        ...attrs,
+        ...props,
         onChange,
         fullscreen,
         divRef,

@@ -11,8 +11,8 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 const defaultRender = () => null;
 
 const TransferItem = {
-  key: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  key: PropTypes.string,
+  title: PropTypes.string,
   description: PropTypes.string,
   disabled: PropTypes.bool,
 };

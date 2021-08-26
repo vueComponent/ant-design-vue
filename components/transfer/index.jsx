@@ -19,8 +19,8 @@ import Base from '../base';
 export const TransferDirection = 'left' | 'right';
 
 export const TransferItem = {
-  key: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
+  key: PropTypes.string,
+  title: PropTypes.string,
   description: PropTypes.string,
   disabled: PropTypes.bool,
 };

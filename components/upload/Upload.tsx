@@ -13,7 +13,28 @@ import UploadList from './UploadList';
 import { UploadProps } from './interface';
 import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './utils';
 import { defineComponent, inject } from 'vue';
-import { getDataAndAria } from '../vc-tree/src/util';
+import { getDataAndAriaProps } from '../_util/util';
+
+export type UploadFileStatus = 'error' | 'success' | 'done' | 'uploading' | 'removed';
+export interface UploadFile<T = any> {
+  uid: string;
+  size?: number;
+  name: string;
+  fileName?: string;
+  lastModified?: number;
+  lastModifiedDate?: Date;
+  url?: string;
+  status?: UploadFileStatus;
+  percent?: number;
+  thumbUrl?: string;
+  originFileObj?: any;
+  response?: T;
+  error?: any;
+  linkProps?: any;
+  type?: string;
+  xhr?: T;
+  preview?: string;
+}
 
 export default defineComponent({
   name: 'AUpload',
@@ -185,7 +206,10 @@ export default defineComponent({
       if (result === false) {
         this.handleChange({
           file,
-          fileList: uniqBy(stateFileList.concat(fileList.map(fileToObject)), item => item.uid),
+          fileList: uniqBy(
+            stateFileList.concat(fileList.map(fileToObject)),
+            (item: UploadFile) => item.uid,
+          ),
         });
         return false;
       }
@@ -280,7 +304,7 @@ export default defineComponent({
         [`${prefixCls}-disabled`]: disabled,
       });
       return (
-        <span class={className} {...getDataAndAria(this.$attrs)}>
+        <span class={className} {...getDataAndAriaProps(this.$attrs)}>
           <div
             class={dragCls}
             onDrop={this.onFileDrop}

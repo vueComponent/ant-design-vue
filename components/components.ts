@@ -169,6 +169,7 @@ export { default as Table, TableColumn, TableColumnGroup } from './table';
 export type { TransferProps } from './transfer';
 export { default as Transfer } from './transfer';
 
+export type { TreeProps, DirectoryTreeProps } from './tree';
 export { default as Tree, TreeNode, DirectoryTree } from './tree';
 
 export type { TreeSelectProps } from './tree-select';

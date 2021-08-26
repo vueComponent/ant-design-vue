@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "strictNullChecks": false,
-    "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,

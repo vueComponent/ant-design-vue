@@ -68,7 +68,7 @@ export default defineComponent({
     'click',
     'update:activeKey',
   ],
-  slots: ['expandIcon'],
+  slots: ['expandIcon', 'overflowedIndicator'],
   setup(props, { slots, emit }) {
     const { prefixCls, direction } = useConfigInject('menu', props);
     const store = ref<Record<string, StoreMenuInfo>>({});
@@ -396,7 +396,7 @@ export default defineComponent({
                 {child}
               </MenuContextProvider>
             ));
-      const overflowedIndicator = <EllipsisOutlined />;
+      const overflowedIndicator = slots.overflowedIndicator?.() || <EllipsisOutlined />;
 
       return (
         <Overflow

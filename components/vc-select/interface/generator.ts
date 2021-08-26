@@ -56,9 +56,11 @@ export type FilterOptions<OptionsType extends object[]> = (
 
 export type FilterFunc<OptionType> = (inputValue: string, option?: OptionType) => boolean;
 
-export type FlattenOptionsType<OptionsType extends object[] = object[]> = {
+export type FlattenOptionsType<OptionType = object> = {
   key: Key;
-  data: OptionsType[number];
+  data: OptionType;
+  label?: any;
+  value?: RawValueType;
   /** Used for customize data */
   [name: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any
 }[];

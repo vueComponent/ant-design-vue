@@ -43,13 +43,13 @@ import {
   fillOptionsWithMissingValue,
 } from './utils/valueUtil';
 import type { SelectProps } from './generate';
+import { selectBaseProps } from './generate';
 import generateSelector from './generate';
 import type { DefaultValueType } from './interface/generator';
 import warningProps from './utils/warningPropsUtil';
 import { defineComponent, ref } from 'vue';
-import omit from 'lodash-es/omit';
 
-const RefSelect = generateSelector<SelectOptionsType>({
+const RefSelect = generateSelector<SelectOptionsType[number]>({
   prefixCls: 'rc-select',
   components: {
     optionList: SelectOptionList as any,
@@ -64,12 +64,23 @@ const RefSelect = generateSelector<SelectOptionsType>({
   fillOptionsWithMissingValue,
 });
 
-export type ExportedSelectProps<ValueType extends DefaultValueType = DefaultValueType> =
-  SelectProps<SelectOptionsType, ValueType>;
+export type ExportedSelectProps<T extends DefaultValueType = DefaultValueType> = SelectProps<
+  SelectOptionsType[number],
+  T
+>;
 
-const Select = defineComponent<Omit<ExportedSelectProps, 'children'>>({
+export function selectProps<T>() {
+  return selectBaseProps<SelectOptionsType[number], T>();
+}
+
+const Select = defineComponent({
+  name: 'Select',
+  inheritAttrs: false,
+  Option,
+  OptGroup,
+  props: RefSelect.props,
   setup(props, { attrs, expose, slots }) {
-    const selectRef = ref(null);
+    const selectRef = ref();
     expose({
       focus: () => {
         selectRef.value?.focus();
@@ -91,8 +102,4 @@ const Select = defineComponent<Omit<ExportedSelectProps, 'children'>>({
     };
   },
 });
-Select.inheritAttrs = false;
-Select.props = omit(RefSelect.props, ['children']);
-Select.Option = Option;
-Select.OptGroup = OptGroup;
 export default Select;

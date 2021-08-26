@@ -130,7 +130,6 @@ module.exports = {
     historyApiFallback: {
       rewrites: [{ from: /./, to: '/index.html' }],
     },
-    disableHostCheck: true,
     hot: true,
     open: true,
   },

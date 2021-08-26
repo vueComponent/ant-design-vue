@@ -1,7 +1,6 @@
 import warning, { noteOnce } from '../../vc-util/warning';
 import type { SelectProps } from '..';
 import { convertChildrenToData } from './legacyUtil';
-import type { OptionData } from '../interface';
 import { toArray } from './commonUtil';
 import type { RawValueType, LabelValueType } from '../interface/generator';
 import { isValidElement } from '../../_util/props-util';
@@ -35,23 +34,6 @@ function warningProps(props: SelectProps) {
     mode !== 'tags' || mergedOptions.every((opt: any) => !opt.disabled),
     'Please avoid setting option to disabled in tags mode since user can always type text as tag.',
   );
-
-  // `combobox` & `tags` should option be `string` type
-  if (mode === 'tags' || mode === 'combobox') {
-    const hasNumberValue = mergedOptions.some(item => {
-      if (item.options) {
-        return item.options.some(
-          (opt: OptionData) => typeof ('value' in opt ? opt.value : opt.key) === 'number',
-        );
-      }
-      return typeof ('value' in item ? item.value : item.key) === 'number';
-    });
-
-    warning(
-      !hasNumberValue,
-      '`value` of Option should not use number type when `mode` is `tags` or `combobox`.',
-    );
-  }
 
   // `combobox` should not use `optionLabelProp`
   warning(

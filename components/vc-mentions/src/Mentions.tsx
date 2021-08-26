@@ -114,6 +114,9 @@ export default defineComponent({
       const { measureText: prevMeasureText, measuring } = state;
       const { prefix, validateSearch } = props;
       const target = event.target as HTMLTextAreaElement;
+      if (target.composing) {
+        return;
+      }
       const selectionStartText = getBeforeSelectionText(target);
       const { location: measureIndex, prefix: measurePrefix } = getLastMeasureIndex(
         selectionStartText,

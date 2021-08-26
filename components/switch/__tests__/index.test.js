@@ -70,4 +70,35 @@ describe('Switch', () => {
     });
     expect(checked.value).toBe(1);
   });
+
+  it('customize checked value and children should work', async () => {
+    resetWarned();
+    const checked = ref(1);
+    const onUpdate = val => (checked.value = val);
+    const wrapper = mount({
+      render() {
+        return (
+          <Switch
+            {...{ 'onUpdate:checked': onUpdate }}
+            checked={checked.value}
+            unCheckedValue={1}
+            checkedValue={2}
+            checkedChildren="on"
+            unCheckedChildren="off"
+          />
+        );
+      },
+    });
+    await asyncExpect(() => {
+      wrapper.find('button').trigger('click');
+    });
+    expect(checked.value).toBe(2);
+    expect(wrapper.find('.ant-switch-inner').text()).toBe('on');
+
+    await asyncExpect(() => {
+      wrapper.find('button').trigger('click');
+    });
+    expect(checked.value).toBe(1);
+    expect(wrapper.find('.ant-switch-inner').text()).toBe('off');
+  });
 });

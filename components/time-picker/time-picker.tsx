@@ -1,5 +1,5 @@
 import { defineComponent, ref } from 'vue';
-import type { PickerTimeProps, RangePickerTimeProps } from '../date-picker/generatePicker';
+import type { RangePickerTimeProps } from '../date-picker/generatePicker';
 import generatePicker from '../date-picker/generatePicker';
 import {
   commonProps,
@@ -40,25 +40,26 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
     popupClassName?: string;
     valueFormat?: string;
   };
-  type TimePickerProps = Omit<PickerTimeProps<DateType>, 'picker'> & {
-    popupClassName?: string;
-    valueFormat?: string;
-  };
-  const TimePicker = defineComponent<TimePickerProps>({
+  // type TimePickerProps = Omit<PickerTimeProps<DateType>, 'picker'> & {
+  //   popupClassName?: string;
+  //   valueFormat?: string;
+  // };
+  const TimePicker = defineComponent({
     name: 'ATimePicker',
     inheritAttrs: false,
     props: {
       ...commonProps<DateType>(),
       ...datePickerProps<DateType>(),
       ...timpePickerProps,
+      addon: { type: Function },
     } as any,
     slot: ['addon', 'renderExtraFooter', 'suffixIcon', 'clearIcon'],
     emits: ['change', 'openChange', 'focus', 'blur', 'ok', 'update:value', 'update:open'],
     setup(props, { slots, expose, emit, attrs }) {
       devWarning(
-        !slots.addon,
+        !(slots.addon || props.addon),
         'TimePicker',
-        '`addon` is deprecated. Please use `renderExtraFooter` instead.',
+        '`addon` is deprecated. Please use `v-slot:renderExtraFooter` instead.',
       );
       const pickerRef = ref();
       expose({
@@ -94,7 +95,9 @@ function createTimePicker<DateType>(generateConfig: GenerateConfig<DateType>) {
             dropdownClassName={props.popupClassName}
             mode={undefined}
             ref={pickerRef}
-            renderExtraFooter={slots.addon ?? props.renderExtraFooter ?? slots.renderExtraFooter}
+            renderExtraFooter={
+              props.addon || slots.addon || props.renderExtraFooter || slots.renderExtraFooter
+            }
             onChange={onChange}
             onOpenChange={onOpenChange}
             onFocus={onFoucs}

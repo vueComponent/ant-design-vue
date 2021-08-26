@@ -1,16 +1,52 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '../utils';
+import { sleep } from '../utils';
 
 export default function focusTest(Component) {
   describe('focus and blur', () => {
+    let focused = false;
+    let blurred = false;
+    const mockFocus = jest.spyOn(HTMLElement.prototype, 'focus');
+    const mockBlur = jest.spyOn(HTMLElement.prototype, 'blur');
+
     beforeAll(() => {
-      jest.useFakeTimers();
+      mockFocus.mockImplementation(() => {
+        focused = true;
+      });
+      mockBlur.mockImplementation(() => {
+        blurred = true;
+      });
+    });
+
+    let container;
+    beforeEach(() => {
+      container = document.createElement('div');
+      document.body.appendChild(container);
+      focused = false;
+      blurred = false;
     });
 
     afterAll(() => {
-      jest.useRealTimers();
+      mockFocus.mockRestore();
+      mockBlur.mockRestore();
     });
 
+    afterEach(() => {
+      document.body.removeChild(container);
+    });
+
+    const getElement = wrapper => {
+      let ele = wrapper.findAll('input');
+      if (ele.length === 0) {
+        ele = wrapper.findAll('button');
+      }
+      if (ele.length === 0) {
+        ele = wrapper.findAll('textarea');
+      }
+      if (ele.length === 0) {
+        ele = wrapper.findAll('div[tabindex]');
+      }
+      return ele[0];
+    };
     it('focus() and onFocus', async () => {
       const handleFocus = jest.fn();
       const wrapper = mount(
@@ -19,46 +55,45 @@ export default function focusTest(Component) {
             return <Component ref="component" onFocus={handleFocus} />;
           },
         },
-        { attachTo: 'body', sync: false },
+        { attachTo: container, sync: false },
       );
       wrapper.vm.$refs.component.focus();
-      jest.runAllTimers();
+      expect(focused).toBeTruthy();
+      getElement(wrapper).trigger('focus');
       expect(handleFocus).toBeCalled();
     });
 
     it('blur() and onBlur', async () => {
       const handleBlur = jest.fn();
+      const handleFocus = jest.fn();
       const wrapper = mount(
         {
           render() {
-            return <Component ref="component" onBlur={handleBlur} />;
+            return <Component ref="component" onFocus={handleFocus} onBlur={handleBlur} />;
           },
         },
-        { attachTo: 'body', sync: false },
+        { attachTo: container, sync: false },
       );
-      wrapper.vm.$refs.component.focus();
+      getElement(wrapper).trigger('focus');
       wrapper.vm.$refs.component.blur();
-      jest.runAllTimers();
-      await asyncExpect(() => {
-        expect(handleBlur).toBeCalled();
-      });
+      expect(blurred).toBeTruthy();
+      getElement(wrapper).trigger('blur');
+      await sleep(300);
+      expect(handleBlur).toBeCalled();
     });
 
-    it('autofocus', done => {
-      jest.useRealTimers();
+    it('autofocus', async () => {
       const handleFocus = jest.fn();
-      mount(
+      const wrapper = mount(
         {
           render() {
             return <Component autofocus={true} onFocus={handleFocus} />;
           },
         },
-        { attachTo: 'body', sync: false },
+        { attachTo: container, sync: false },
       );
-      setTimeout(() => {
-        expect(handleFocus).toBeCalled();
-        done();
-      }, 1000);
+      getElement(wrapper).trigger('focus');
+      expect(handleFocus).toBeCalled();
     });
   });
 }

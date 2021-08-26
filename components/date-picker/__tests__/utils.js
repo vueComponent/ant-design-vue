@@ -32,3 +32,29 @@ export function selectDateFromBody(date, index) {
   }
   calendar.querySelector(`[title="${date.format('LL')}"][role="gridcell"]`).click();
 }
+
+export function openPicker(wrapper, index = 0) {
+  wrapper.findAll('input')[index].trigger('mousedown');
+  wrapper.findAll('input')[index].trigger('focus');
+}
+export function closePicker(wrapper, index = 0) {
+  wrapper.findAll('input')[index].trigger('blur');
+}
+
+export function selectCell(wrapper, text, index = 0) {
+  let matchCell;
+  $$('table')
+    [index].querySelectorAll('td')
+    .forEach(td => {
+      if (td.textContent === String(text) && td.className.includes('-in-view')) {
+        matchCell = td;
+        td.click('click');
+      }
+    });
+
+  if (!matchCell) {
+    throw new Error('Cell not match in picker panel.');
+  }
+
+  return matchCell;
+}

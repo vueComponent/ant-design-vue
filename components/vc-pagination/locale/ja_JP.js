@@ -1,6 +1,6 @@
 export default {
   // Options.jsx
-  items_per_page: '/ ページ',
+  items_per_page: '件 / ページ',
   jump_to: '移動',
   jump_to_confirm: '確認する',
   page: 'ページ',

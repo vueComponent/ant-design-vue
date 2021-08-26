@@ -79,3 +79,9 @@ export default defineComponent({
   },
 });
 </script>
+<style>
+.ant-select-dropdown {
+  /* top: 140px !important;
+  left: 50px !important; */
+}
+</style>

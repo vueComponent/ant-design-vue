@@ -1,4 +1,4 @@
-export default function contains(root: Node | null | undefined, n?: Node) {
+export default function contains(root: HTMLElement | null | undefined, n?: HTMLElement) {
   if (!root) {
     return false;
   }

@@ -11,11 +11,12 @@ function $$(className) {
 }
 
 function triggerInput(wrapper, text = '') {
+  const lastChar = text[text.length - 1];
   wrapper.find('textarea').element.value = text;
   wrapper.find('textarea').element.selectionStart = text.length;
   wrapper.find('textarea').trigger('keydown');
   wrapper.find('textarea').trigger('change');
-  wrapper.find('textarea').trigger('keyup');
+  wrapper.find('textarea').trigger('keyup', { key: lastChar });
 }
 
 describe('Mentions', () => {
@@ -69,9 +70,9 @@ describe('Mentions', () => {
       },
       { sync: false, attachTo: 'body' },
     );
-    await sleep(500);
+    await sleep(100);
     triggerInput(wrapper, '@');
-    await sleep(500);
+    await sleep(100);
     expect($$('.ant-mentions-dropdown-menu-item').length).toBeTruthy();
     expect($$('.ant-spin')).toBeTruthy();
   });

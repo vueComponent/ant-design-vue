@@ -1,48 +1,38 @@
 import PropTypes from './vue-types';
-import { defineComponent, nextTick, Teleport } from 'vue';
+import {
+  defineComponent,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  ref,
+  Teleport,
+} from 'vue';
 
 export default defineComponent({
   name: 'Portal',
+  inheritAttrs: false,
   props: {
     getContainer: PropTypes.func.isRequired,
-    children: PropTypes.any.isRequired,
     didUpdate: PropTypes.func,
   },
-  data() {
-    this._container = null;
-    return {};
-  },
-  mounted() {
-    this.createContainer();
-  },
-  updated() {
-    const { didUpdate } = this.$props;
-    if (didUpdate) {
+  setup(props, { slots }) {
+    const container = ref();
+    onMounted(() => {
+      container.value = props.getContainer();
+    });
+    onUpdated(() => {
       nextTick(() => {
-        didUpdate(this.$props);
+        props.nextTick?.(props);
       });
-    }
-  },
-
-  beforeUnmount() {
-    this.removeContainer();
-  },
-  methods: {
-    createContainer() {
-      this._container = this.$props.getContainer();
-      this.$forceUpdate();
-    },
-    removeContainer() {
-      if (this._container && this._container.parentNode) {
-        this._container.parentNode.removeChild(this._container);
+    });
+    onBeforeUnmount(() => {
+      if (container.value && container.value.parentNode) {
+        container.value.parentNode.removeChild(container.value);
       }
-    },
-  },
-
-  render() {
-    if (this._container) {
-      return <Teleport to={this._container}>{this.$props.children}</Teleport>;
-    }
-    return null;
+    });
+    return () => {
+      return container.value ? <Teleport to={container.value}>{slots.default?.()}</Teleport> : null;
+    };
   },
 });

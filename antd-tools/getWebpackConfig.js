@@ -80,7 +80,6 @@ function getWebpackConfig(modules) {
     },
 
     module: {
-      noParse: [/moment.js/],
       rules: [
         {
           test: /\.vue$/,

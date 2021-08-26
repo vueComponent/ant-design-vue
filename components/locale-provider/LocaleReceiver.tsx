@@ -1,4 +1,5 @@
 import type { VNodeTypes, PropType, ComputedRef } from 'vue';
+import { unref } from 'vue';
 import { inject, defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import defaultLocaleData from './default';
@@ -66,13 +67,13 @@ type LocaleComponent = keyof Locale;
 
 export function useLocaleReceiver<T extends LocaleComponent>(
   componentName: T,
-  defaultLocale?: Locale[T] | Function,
+  defaultLocale?: Locale[T] | Function | ComputedRef<Locale[T] | Function>,
 ): [ComputedRef<Locale[T]>] {
   const localeData = inject<LocaleReceiverContext>('localeData', {} as LocaleReceiverContext);
-  const componentLocale = computed(() => {
+  const componentLocale = computed<Locale[T]>(() => {
     const { antLocale } = localeData;
     const locale =
-      defaultLocale || (defaultLocaleData as LocaleInterface)[componentName || 'global'];
+      unref(defaultLocale) || (defaultLocaleData as LocaleInterface)[componentName || 'global'];
     const localeFromContext = componentName && antLocale ? antLocale[componentName] : {};
 
     return {

@@ -194,7 +194,7 @@
     "vue-style-loader": "^4.1.2",
     "vuex": "^4.0.0-beta.2",
     "webpack": "^5.0.0",
-    "webpack-bundle-analyzer": "^4.0.0",
+    "webpack-bundle-analyzer": "^4.4.2",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^4.0.0",
     "webpack-merge": "^5.0.0",
@@ -202,11 +202,14 @@
     "xhr-mock": "^2.5.1"
   },
   "dependencies": {
+    "@ant-design/colors": "^5.1.1",
     "@ant-design/icons-vue": "^6.0.0",
     "@babel/runtime": "^7.10.5",
     "@simonwep/pickr": "~1.8.0",
     "array-tree-filter": "^2.1.0",
     "async-validator": "^3.3.0",
+    "date-fns": "^2.22.1",
+    "dayjs": "^1.10.5",
     "dom-align": "^1.12.1",
     "dom-scroll-into-view": "^2.0.0",
     "lodash": "^4.17.21",

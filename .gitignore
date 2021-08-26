@@ -73,3 +73,5 @@ site/dev.js
 
 # IDE 语法提示临时文件
 vetur/
+
+report.html

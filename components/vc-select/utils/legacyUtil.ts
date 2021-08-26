@@ -7,8 +7,9 @@ function convertNodeToOption(node: VNode): OptionData {
     key,
     children,
     props: { value, disabled, ...restProps },
-  } = node as VNode & {
+  } = node as Omit<VNode, 'key'> & {
     children: { default?: () => any };
+    key: string | number;
   };
   const child = children && children.default ? children.default() : undefined;
   return {
@@ -16,7 +17,7 @@ function convertNodeToOption(node: VNode): OptionData {
     value: value !== undefined ? value : key,
     children: child,
     disabled: disabled || disabled === '', // support <a-select-option disabled />
-    ...restProps,
+    ...(restProps as Omit<typeof restProps, 'key'>),
   };
 }
 
@@ -46,7 +47,7 @@ export function convertChildrenToData(
       const child = children && children.default ? children.default() : undefined;
       const label = props?.label || children.label?.() || key;
       return {
-        key: `__RC_SELECT_GRP__${key === null ? index : key}__`,
+        key: `__RC_SELECT_GRP__${key === null ? index : String(key)}__`,
         ...props,
         label,
         options: convertChildrenToData(child || []),

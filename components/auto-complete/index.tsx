@@ -2,7 +2,6 @@ import type { App, Plugin, VNode, ExtractPropTypes } from 'vue';
 import { defineComponent, inject, provide } from 'vue';
 import Select, { SelectProps } from '../select';
 import Input from '../input';
-import InputElement from './InputElement';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
 import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
@@ -72,7 +71,7 @@ const AutoComplete = defineComponent({
     getInputElement() {
       const children = getSlot(this);
       const element = children.length ? children[0] : <Input lazy={false} />;
-      return <InputElement {...element.props}>{element}</InputElement>;
+      return element;
     },
 
     focus() {

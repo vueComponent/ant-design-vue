@@ -7,9 +7,9 @@ import type {
   DisplayLabelValueType,
 } from '../interface/generator';
 import type { RenderNode } from '../interface';
-import type { InnerSelectorProps } from '.';
+import type { InnerSelectorProps } from './interface';
 import Input from './Input';
-import type { VNodeChild, Ref } from 'vue';
+import type { VNodeChild, Ref, PropType } from 'vue';
 import { computed, defineComponent, onMounted, ref, watch } from 'vue';
 import classNames from '../../_util/classNames';
 import pickAttrs from '../../_util/pickAttrs';
@@ -17,24 +17,24 @@ import PropTypes from '../../_util/vue-types';
 import type { VueNode } from '../../_util/type';
 import Overflow from '../../vc-overflow';
 
-interface SelectorProps extends InnerSelectorProps {
+type SelectorProps = InnerSelectorProps & {
   // Icon
   removeIcon?: RenderNode;
 
   // Tags
   maxTagCount?: number | 'responsive';
   maxTagTextLength?: number;
-  maxTagPlaceholder?: VNodeChild;
+  maxTagPlaceholder?: VNodeChild | ((omittedValues: LabelValueType[]) => VNodeChild);
   tokenSeparators?: string[];
   tagRender?: (props: CustomTagProps) => VNodeChild;
-  onToggleOpen: (open?: boolean) => void;
+  onToggleOpen: any;
 
   // Motion
   choiceTransitionName?: string;
 
   // Event
   onSelect: (value: RawValueType, option: { selected: boolean }) => void;
-}
+};
 
 const props = {
   id: PropTypes.string,
@@ -62,6 +62,7 @@ const props = {
   ),
   tagRender: PropTypes.func,
 
+  onToggleOpen: { type: Function as PropType<(open?: boolean) => void> },
   onSelect: PropTypes.func,
   onInputChange: PropTypes.func,
   onInputPaste: PropTypes.func,
@@ -78,6 +79,8 @@ const onPreventMouseDown = (event: MouseEvent) => {
 
 const SelectSelector = defineComponent<SelectorProps>({
   name: 'MultipleSelectSelector',
+  inheritAttrs: false,
+  props: props as any,
   setup(props) {
     const measureRef = ref();
     const inputWidth = ref(0);
@@ -278,6 +281,5 @@ const SelectSelector = defineComponent<SelectorProps>({
     };
   },
 });
-SelectSelector.inheritAttrs = false;
-SelectSelector.props = props;
+
 export default SelectSelector;

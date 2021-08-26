@@ -35,9 +35,11 @@ const DialogWrap = defineComponent({
         visible={visible}
         forceRender={forceRender}
         getContainer={getContainer}
-        children={childProps => {
-          dialogProps = { ...dialogProps, ...childProps };
-          return <Dialog {...dialogProps}>{getSlot(this)}</Dialog>;
+        v-slots={{
+          default: childProps => {
+            dialogProps = { ...dialogProps, ...childProps };
+            return <Dialog {...dialogProps}>{getSlot(this)}</Dialog>;
+          },
         }}
       />
     );

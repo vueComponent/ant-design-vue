@@ -10,6 +10,7 @@ import type { MenuInfo } from './interface';
 import KeyCode from '../../_util/KeyCode';
 import useDirectionStyle from './hooks/useDirectionStyle';
 import Overflow from '../../vc-overflow';
+import devWarning from '../../vc-util/devWarning';
 
 let indexGuid = 0;
 const menuItemProps = {
@@ -30,7 +31,15 @@ export default defineComponent({
   slots: ['icon', 'title'],
   setup(props, { slots, emit, attrs }) {
     const instance = getCurrentInstance();
-    const key = instance.vnode.key;
+
+    const key =
+      typeof instance.vnode.key === 'symbol' ? String(instance.vnode.key) : instance.vnode.key;
+    devWarning(
+      typeof instance.vnode.key !== 'symbol',
+      'MenuItem',
+      `MenuItem \`:key="${String(key)}"\` not support Symbol type`,
+    );
+
     const eventKey = `menu_item_${++indexGuid}_$$_${key}`;
     const { parentEventKeys, parentKeys } = useInjectKeyPath();
     const {

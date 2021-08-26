@@ -1,19 +1,27 @@
-import type { BaseTransitionProps, CSSProperties, Ref } from 'vue';
-import { getCurrentInstance, onUpdated } from 'vue';
+import type {
+  BaseTransitionProps,
+  CSSProperties,
+  Ref,
+  TransitionGroupProps,
+  TransitionProps,
+} from 'vue';
+import { onBeforeUpdate } from 'vue';
+import { getCurrentInstance } from 'vue';
 import { defineComponent, nextTick, Transition as T, TransitionGroup as TG } from 'vue';
 
-export const getTransitionProps = (transitionName: string, opt: object = {}) => {
+export const getTransitionProps = (transitionName: string, opt: TransitionProps = {}) => {
   if (process.env.NODE_ENV === 'test') {
     return opt;
   }
-  const transitionProps = transitionName
+  const transitionProps: TransitionProps = transitionName
     ? {
         appear: true,
-        appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
+        // type: 'animation',
+        // appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
         // appearActiveClass: `antdv-base-transtion`,
-        appearToClass: `${transitionName}-appear ${transitionName}-appear-active`,
+        // appearToClass: `${transitionName}-appear ${transitionName}-appear-active`,
         enterFromClass: `${transitionName}-enter ${transitionName}-enter-prepare`,
-        // enterActiveClass: `antdv-base-transtion`,
+        // enterActiveClass: `${transitionName}-enter ${transitionName}-enter-active`,
         enterToClass: `${transitionName}-enter ${transitionName}-enter-active`,
         leaveFromClass: ` ${transitionName}-leave`,
         leaveActiveClass: `${transitionName}-leave ${transitionName}-leave-active`,
@@ -24,11 +32,11 @@ export const getTransitionProps = (transitionName: string, opt: object = {}) => 
   return transitionProps;
 };
 
-export const getTransitionGroupProps = (transitionName: string, opt: object = {}) => {
-  const transitionProps = transitionName
+export const getTransitionGroupProps = (transitionName: string, opt: TransitionProps = {}) => {
+  const transitionProps: TransitionGroupProps = transitionName
     ? {
         appear: true,
-        appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
+        // appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
         appearActiveClass: `${transitionName}`,
         appearToClass: `${transitionName}-appear ${transitionName}-appear-active`,
         enterFromClass: `${transitionName}-appear ${transitionName}-enter ${transitionName}-appear-prepare ${transitionName}-enter-prepare`,
@@ -51,7 +59,7 @@ if (process.env.NODE_ENV === 'test') {
     inheritAttrs: false,
     setup(_props, { slots, attrs }) {
       const instance = getCurrentInstance();
-      onUpdated(() => {
+      onBeforeUpdate(() => {
         const child = instance.subTree.children[0];
         if (child && child.dirs && child.dirs[0]) {
           const value = child.dirs[0].value;

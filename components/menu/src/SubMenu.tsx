@@ -12,6 +12,8 @@ import InlineSubMenuList from './InlineSubMenuList';
 import Transition, { getTransitionProps } from '../../_util/transition';
 import { cloneElement } from '../../_util/vnode';
 import Overflow from '../../vc-overflow';
+import devWarning from '../../vc-util/devWarning';
+import isValid from '../../_util/isValid';
 
 let indexGuid = 0;
 
@@ -39,14 +41,17 @@ export default defineComponent({
     useProvideFirstLevel(false);
 
     const instance = getCurrentInstance();
-    const key =
-      instance.vnode.key !== null ? instance.vnode.key : `sub_menu_${++indexGuid}_$$_not_set_key`;
-
+    const vnodeKey =
+      typeof instance.vnode.key === 'symbol' ? String(instance.vnode.key) : instance.vnode.key;
+    devWarning(
+      typeof instance.vnode.key !== 'symbol',
+      'SubMenu',
+      `SubMenu \`:key="${String(vnodeKey)}"\` not support Symbol type`,
+    );
+    const key = isValid(vnodeKey) ? vnodeKey : `sub_menu_${++indexGuid}_$$_not_set_key`;
     const eventKey =
       props.eventKey ??
-      (instance.vnode.key !== null
-        ? `sub_menu_${++indexGuid}_$$_${instance.vnode.key}`
-        : (key as string));
+      (isValid(vnodeKey) ? `sub_menu_${++indexGuid}_$$_${vnodeKey}` : (key as string));
     const { parentEventKeys, parentInfo, parentKeys } = useInjectKeyPath();
     const keysPath = computed(() => [...parentKeys.value, key]);
     const eventKeysPath = computed(() => [...parentEventKeys.value, eventKey]);

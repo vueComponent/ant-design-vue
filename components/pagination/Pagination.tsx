@@ -51,6 +51,7 @@ export const paginationConfig = () => ({
 export type PaginationProps = Partial<ExtractPropTypes<ReturnType<typeof paginationProps>>>;
 export type PaginationConfig = Partial<ExtractPropTypes<ReturnType<typeof paginationConfig>>>;
 
+export type PaginationLocale = any;
 export default defineComponent({
   name: 'APagination',
   inheritAttrs: false,

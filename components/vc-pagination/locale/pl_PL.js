@@ -1,8 +1,8 @@
 export default {
   // Options.jsx
-  items_per_page: '/ stronę',
+  items_per_page: 'na stronę',
   jump_to: 'Idź do',
-  jump_to_confirm: 'potwierdzać',
+  jump_to_confirm: 'potwierdź',
   page: '',
 
   // Pagination.jsx

@@ -501,41 +501,15 @@ export default defineComponent({
       );
     },
 
-    renderLeftFixedTable() {
-      const { prefixCls } = this;
-
-      return (
-        <div key="left" class={`${prefixCls}-fixed-left`}>
-          {this.renderTable({
-            columns: this.columnManager.leftColumns.value,
-            fixed: 'left',
-          })}
-        </div>
-      );
-    },
-    renderRightFixedTable() {
-      const { prefixCls } = this;
-
-      return (
-        <div class={`${prefixCls}-fixed-right`}>
-          {this.renderTable({
-            columns: this.columnManager.rightColumns.value,
-            fixed: 'right',
-          })}
-        </div>
-      );
-    },
-
     renderTable(options) {
-      const { columns, fixed, isAnyColumnsFixed } = options;
+      const { columns, isAnyColumnsFixed } = options;
       const { prefixCls, scroll = {} } = this;
-      const tableClassName = scroll.x || fixed ? `${prefixCls}-fixed` : '';
+      const tableClassName = scroll.x ? `${prefixCls}-fixed` : '';
 
       const headTable = (
         <HeadTable
           key="head"
           columns={columns}
-          fixed={fixed}
           tableClassName={tableClassName}
           handleBodyScrollLeft={this.handleBodyScrollLeft}
           expander={this.expander}
@@ -546,7 +520,6 @@ export default defineComponent({
         <BodyTable
           key="body"
           columns={columns}
-          fixed={fixed}
           tableClassName={tableClassName}
           getRowKey={this.getRowKey}
           handleWheel={this.handleWheel}

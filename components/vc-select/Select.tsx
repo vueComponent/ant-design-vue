@@ -84,6 +84,7 @@ const Select = defineComponent<Omit<ExportedSelectProps, 'children'>>({
           ref={selectRef}
           {...(props as any)}
           {...attrs}
+          v-slots={slots}
           children={slots.default?.() || []}
         />
       );

@@ -10,9 +10,11 @@ export default (
 ): {
   configProvider: UnwrapRef<ConfigProviderProps>;
   prefixCls: ComputedRef<string>;
+  rootPrefixCls: ComputedRef<string>;
   direction: ComputedRef<Direction>;
   size: ComputedRef<SizeType>;
   getTargetContainer: ComputedRef<() => HTMLElement>;
+  getPopupContainer: ComputedRef<() => HTMLElement>;
   space: ComputedRef<{ size: SizeType | number }>;
   pageHeader: ComputedRef<{ ghost: boolean }>;
   form?: ComputedRef<{
@@ -26,6 +28,7 @@ export default (
     defaultConfigProvider,
   );
   const prefixCls = computed(() => configProvider.getPrefixCls(name, props.prefixCls));
+  const rootPrefixCls = computed(() => configProvider.getPrefixCls());
   const direction = computed(() => configProvider.direction);
   const autoInsertSpaceInButton = computed(() => configProvider.autoInsertSpaceInButton);
   const renderEmpty = computed(() => configProvider.renderEmpty);
@@ -34,16 +37,19 @@ export default (
   const form = computed(() => configProvider.form);
   const size = computed(() => props.size || configProvider.componentSize);
   const getTargetContainer = computed(() => props.getTargetContainer);
+  const getPopupContainer = computed(() => props.getPopupContainer);
   return {
     configProvider,
     prefixCls,
     direction,
     size,
     getTargetContainer,
+    getPopupContainer,
     space,
     pageHeader,
     form,
     autoInsertSpaceInButton,
     renderEmpty,
+    rootPrefixCls,
   };
 };

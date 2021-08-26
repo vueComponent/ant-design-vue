@@ -123,7 +123,7 @@ const Drawer = defineComponent({
       }
       if (!this.visible) {
         this.destroyClose = true;
-        this.$forceUpdate();
+        (this as any).$forceUpdate();
       }
     },
 

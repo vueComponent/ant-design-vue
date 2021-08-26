@@ -50,7 +50,14 @@ export { default as Comment } from './comment';
 
 export { default as ConfigProvider } from './config-provider';
 
-export { default as DatePicker, RangePicker, MonthPicker, WeekPicker } from './date-picker';
+export type { DatePickerProps } from './date-picker';
+export {
+  default as DatePicker,
+  MonthPicker,
+  WeekPicker,
+  RangePicker,
+  QuarterPicker,
+} from './date-picker';
 
 export type { DescriptionsProps } from './descriptions';
 export { default as Descriptions, DescriptionsItem } from './descriptions';
@@ -172,8 +179,8 @@ export { default as Tabs, TabPane, TabContent } from './tabs';
 export type { TagProps } from './tag';
 export { default as Tag, CheckableTag } from './tag';
 
-export type { TimePickerProps } from './time-picker';
-export { default as TimePicker } from './time-picker';
+export type { TimePickerProps, TimeRangePickerProps } from './time-picker';
+export { default as TimePicker, TimeRangePicker } from './time-picker';
 
 export type { TimelineProps, TimelineItemProps } from './timeline';
 export { default as Timeline, TimelineItem } from './timeline';

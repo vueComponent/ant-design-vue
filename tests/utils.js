@@ -1,9 +1,9 @@
-import moment from 'moment';
+import dayjs from 'dayjs';
 import MockDate from 'mockdate';
 import { nextTick } from 'vue';
 
 export function setMockDate(dateString = '2017-09-18T03:30:07.795') {
-  MockDate.set(moment(dateString));
+  MockDate.set(dayjs(dateString));
 }
 
 export function resetMockDate() {

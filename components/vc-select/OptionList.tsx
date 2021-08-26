@@ -5,7 +5,7 @@ import classNames from '../_util/classNames';
 import pickAttrs from '../_util/pickAttrs';
 import { isValidElement } from '../_util/props-util';
 import createRef from '../_util/createRef';
-import type { VNodeChild } from 'vue';
+import type { PropType, VNodeChild } from 'vue';
 import { computed, defineComponent, nextTick, reactive, watch } from 'vue';
 import List from '../vc-virtual-list/List';
 import type {
@@ -61,7 +61,7 @@ const OptionListProps = {
   virtual: PropTypes.looseBool,
 
   onSelect: PropTypes.func,
-  onToggleOpen: PropTypes.func,
+  onToggleOpen: { type: Function as PropType<(open?: boolean) => void> },
   /** Tell Select that some value is now active to make accessibility work */
   onActiveValue: PropTypes.func,
   onScroll: PropTypes.func,
@@ -77,6 +77,7 @@ const OptionListProps = {
 const OptionList = defineComponent<OptionListProps, { state?: any }>({
   name: 'OptionList',
   inheritAttrs: false,
+  slots: ['option'],
   setup(props) {
     const itemPrefixCls = computed(() => `${props.prefixCls}-item`);
 
@@ -146,20 +147,20 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
     watch(
       () => props.open,
       () => {
-        if (!props.multiple && props.open && props.values.size === 1) {
-          const value = Array.from(props.values)[0];
-          const index = memoFlattenOptions.value.findIndex(({ data }) => data.value === value);
-          setActive(index);
-          scrollIntoView(index);
-        }
-        // Force trigger scrollbar visible when open
-        if (props.open) {
-          nextTick(() => {
+        nextTick(() => {
+          if (!props.multiple && props.open && props.values.size === 1) {
+            const value = Array.from(props.values)[0];
+            const index = memoFlattenOptions.value.findIndex(({ data }) => data.value === value);
+            setActive(index);
+            scrollIntoView(index);
+          }
+          // Force trigger scrollbar visible when open
+          if (props.open) {
             listRef.current?.scrollTo(undefined);
-          });
-        }
+          }
+        });
       },
-      { immediate: true, flush: 'post' },
+      { immediate: true },
     );
 
     // ========================== Values ==========================
@@ -268,6 +269,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
       setActive,
       onSelectValue,
       memoFlattenOptions,
+      $slots,
     } = this as any;
     const {
       id,
@@ -281,6 +283,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
       onScroll,
       onMouseenter,
     } = this.$props as OptionListProps;
+    const renderOption = $slots.option;
     const { activeIndex } = this.state;
     // ========================== Render ==========================
     if (memoFlattenOptions.length === 0) {
@@ -315,12 +318,11 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
           onMouseenter={onMouseenter}
           children={({ group, groupOption, data }, itemIndex) => {
             const { label, key } = data;
-
             // Group
             if (group) {
               return (
                 <div class={classNames(itemPrefixCls, `${itemPrefixCls}-group`)}>
-                  {label !== undefined ? label : key}
+                  {renderOption ? renderOption(data) : label !== undefined ? label : key}
                 </div>
               );
             }
@@ -387,7 +389,9 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
                 }}
                 style={style}
               >
-                <div class={`${optionPrefixCls}-content`}>{content}</div>
+                <div class={`${optionPrefixCls}-content`}>
+                  {renderOption ? renderOption(data) : content}
+                </div>
                 {isValidElement(menuItemSelectedIcon) || selected}
                 {iconVisible && (
                   <TransBtn

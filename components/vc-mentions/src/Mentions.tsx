@@ -22,9 +22,9 @@ import {
 } from './util';
 import KeywordTrigger from './KeywordTrigger';
 import { vcMentionsProps, defaultProps } from './mentionsProps';
-import antInput from '../../_util/antInputDirective';
 import type { OptionProps } from './Option';
 import MentionsContextKey from './MentionsContext';
+import antInputDirective from '../../_util/antInputDirective';
 
 export type MentionsProps = Partial<ExtractPropTypes<typeof vcMentionsProps>>;
 
@@ -36,7 +36,7 @@ export default defineComponent({
   props: initDefaultProps(vcMentionsProps, defaultProps),
   slots: ['notFoundContent', 'option'],
   emits: ['change', 'select', 'search', 'focus', 'blur', 'pressenter'],
-  setup(props: MentionsProps, { emit, attrs, expose, slots }) {
+  setup(props, { emit, attrs, expose, slots }) {
     const measure = ref(null);
     const textarea = ref(null);
     const focusId = ref();
@@ -114,7 +114,7 @@ export default defineComponent({
       const { measureText: prevMeasureText, measuring } = state;
       const { prefix, validateSearch } = props;
       const target = event.target as HTMLTextAreaElement;
-      if (target.composing) {
+      if ((target as any).composing) {
         return;
       }
       const selectionStartText = getBeforeSelectionText(target);
@@ -277,7 +277,7 @@ export default defineComponent({
       };
       return (
         <div class={classNames(prefixCls, className)} style={style}>
-          {withDirectives(<textarea ref={textarea} {...textareaProps} />, [[antInput]])}
+          {withDirectives(<textarea ref={textarea} {...textareaProps} />, [[antInputDirective]])}
           {measuring && (
             <div ref={measure} class={`${prefixCls}-measure`}>
               {state.value.slice(0, measureLocation)}

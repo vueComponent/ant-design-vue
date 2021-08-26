@@ -1067,7 +1067,7 @@ export default function generateSelector<
             menuItemSelectedIcon={menuItemSelectedIcon}
             virtual={virtual !== false && dropdownMatchSelectWidth !== false}
             onMouseenter={onPopupMouseEnter}
-            v-slots={{ ...slots, option: slots.option }}
+            v-slots={slots}
           />
         );
 

@@ -1,9 +1,5 @@
 /* eslint-disable no-console */
-const { getProjectPath, injectRequire } = require('./utils/projectHelper');
-
-injectRequire();
-
-// const install = require('./install')
+const { getProjectPath } = require('./utils/projectHelper');
 const runCmd = require('./runCmd');
 const getBabelCommonConfig = require('./getBabelCommonConfig');
 const merge2 = require('merge2');

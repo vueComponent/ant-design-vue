@@ -1,5 +1,4 @@
-const { getProjectPath, resolve, injectRequire } = require('./utils/projectHelper');
-injectRequire();
+const { getProjectPath, resolve } = require('./utils/projectHelper');
 const path = require('path');
 const webpack = require('webpack');
 const WebpackBar = require('webpackbar');

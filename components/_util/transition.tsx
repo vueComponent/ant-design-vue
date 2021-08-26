@@ -5,7 +5,7 @@ import type {
   TransitionGroupProps,
   TransitionProps,
 } from 'vue';
-import { onBeforeUpdate } from 'vue';
+import { onUpdated } from 'vue';
 import { getCurrentInstance } from 'vue';
 import { defineComponent, nextTick, Transition as T, TransitionGroup as TG } from 'vue';
 
@@ -59,7 +59,7 @@ if (process.env.NODE_ENV === 'test') {
     inheritAttrs: false,
     setup(_props, { slots, attrs }) {
       const instance = getCurrentInstance();
-      onBeforeUpdate(() => {
+      onUpdated(() => {
         const child = instance.subTree.children[0];
         if (child && child.dirs && child.dirs[0]) {
           const value = child.dirs[0].value;

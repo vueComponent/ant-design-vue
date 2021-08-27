@@ -17,7 +17,7 @@ export default {
     return {
       visibleAdblockBanner: !!this.demoContext.blocked,
       value: null,
-      showTopBanner: !localStorage.getItem('notification-key-2.0'),
+      showTopBanner: !localStorage.getItem('notification-key-2.2'),
     };
   },
   watch: {
@@ -92,21 +92,11 @@ export default {
         {isCN && this.showTopBanner && (
           <div class="global-notification">
             <span>
+              当前文档是 1.x 版本，如需使用 Vue 3 请访问&nbsp;&nbsp;
               <a href="https://2x.antdv.com/" target="_blank">
-                2.0 正式版
+                2.x
               </a>
-              &nbsp;已发布，更快、更小、更易用&nbsp;&nbsp;
-            </span>
-            <br />
-            <span style="padding: 5px 0; display: inline-block;">
-              支持 Vue 3.0，全新 Composition API 文档，TS、JS 双示例
-            </span>
-            <br />
-            <span>
-              <a href="https://store.antdv.com/pro/" target="_blank">
-                Vue3 Admin Pro
-              </a>
-              &nbsp; 同步更新，支持多种布局、多标签页、暗黑主题等
+              &nbsp;&nbsp;版本文档
             </span>
             <a-icon
               type="close"
@@ -118,21 +108,11 @@ export default {
         {!isCN && this.showTopBanner && (
           <div class="global-notification">
             <span>
+              You’re browsing the documentation for v1.x (support vue 2).&nbsp;
               <a href="https://2x.antdv.com/" target="_blank">
-                2.0 release
+                Click here
               </a>
-              &nbsp; Faster, Smaller, Easier&nbsp;&nbsp;
-            </span>
-            <br />
-            <span style="padding: 5px 0; display: inline-block;">
-              Support Vue 3、New Composition API document、 TS, JS dual examples
-            </span>
-            <br />
-            <span>
-              <a href="https://store.antdv.com/pro/?lang=en" target="_blank">
-                Vue3 Admin Pro
-              </a>
-              &nbsp; is updated synchronously, supports multiple layouts, dark themes, etc.
+              &nbsp;for v2.x（support vue 3） documentation.
             </span>
             <a-icon
               type="close"

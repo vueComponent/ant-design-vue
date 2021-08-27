@@ -10,6 +10,14 @@
 
 ---
 
+## 1.7.8
+
+`2021-08-27`
+
+- 🐞 修复 `AutoComplete` 使用 configProvider 全局配置 prefixCls 不生效问题 [#4566](https://github.com/vueComponent/ant-design-vue/issues/4566)
+- 🐞 移除 Transfer 自定义 key warning 问题 [#4574](https://github.com/vueComponent/ant-design-vue/issues/4574)
+- 🐞 修复 `Icon` 在 webpack 5 下报错问题 [#4579](https://github.com/vueComponent/ant-design-vue/issues/4579)
+
 ## 1.7.7
 
 `2021-08-07`

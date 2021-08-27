@@ -15,7 +15,7 @@ import getPlacements, { AdjustOverflow, PlacementsConfig } from './placements';
 
 export { AdjustOverflow, PlacementsConfig };
 
-export type TooltipPlacement = typeof placementTypes;
+export type TooltipPlacement = typeof placementTypes[number];
 
 // https://github.com/react-component/tooltip
 // https://github.com/yiminghe/dom-align
@@ -44,7 +44,7 @@ const props = abstractTooltipProps();
 
 const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 
-const tooltipProps = {
+export const tooltipProps = {
   ...props,
   title: PropTypes.VNodeChild,
 };
@@ -88,8 +88,11 @@ export default defineComponent({
     };
 
     const handleVisibleChange = (val: boolean) => {
-      visible.value = isNoTitle() ? false : val;
-      if (!isNoTitle()) {
+      const noTitle = isNoTitle();
+      if (props.visible === undefined) {
+        visible.value = noTitle ? false : val;
+      }
+      if (!noTitle) {
         emit('update:visible', val);
         emit('visibleChange', val);
       }
@@ -99,7 +102,7 @@ export default defineComponent({
       return tooltip.value.getPopupDomNode();
     };
 
-    expose({ getPopupDomNode, visible });
+    expose({ getPopupDomNode, visible, forcePopupAlign: () => tooltip.value?.forcePopupAlign() });
 
     const tooltipPlacements = computed(() => {
       const { builtinPlacements, arrowPointAtCenter, autoAdjustOverflow } = props;

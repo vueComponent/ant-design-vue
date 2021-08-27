@@ -55,7 +55,11 @@ export default defineComponent({
       return triggerDOM.value.getPopupDomNode();
     };
 
-    expose({ getPopupDomNode, triggerDOM });
+    expose({
+      getPopupDomNode,
+      triggerDOM,
+      forcePopupAlign: () => triggerDOM.value?.forcePopupAlign(),
+    });
 
     const destroyTooltip = ref(false);
     const autoDestroy = ref(false);

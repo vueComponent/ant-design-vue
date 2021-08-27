@@ -22,8 +22,8 @@ export function isNotTouchEvent(e) {
 export function getClosestPoint(val, { marks, step, min, max }) {
   const points = Object.keys(marks).map(parseFloat);
   if (step !== null) {
-    const base = 10 ** getPrecision(step);
-    const maxSteps = Math.floor((max * base - min * base) / (step * base));
+    const baseNum = 10 ** getPrecision(step);
+    const maxSteps = Math.floor((max * baseNum - min * baseNum) / (step * baseNum));
     const steps = Math.min((val - min) / step, maxSteps);
     const closestStep = Math.round(steps) * step + min;
     points.push(closestStep);
@@ -96,7 +96,8 @@ export function calculateNextValue(func, value, props) {
 
   if (props.step) {
     return operations[func](value, props.step);
-  } else if (!!Object.keys(props.marks).length && !!props.marks[keyToGet]) {
+  }
+  if (!!Object.keys(props.marks).length && !!props.marks[keyToGet]) {
     return props.marks[keyToGet];
   }
   return value;

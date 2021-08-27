@@ -2,7 +2,7 @@ import supportsPassive from '../../../_util/supportsPassive';
 import classNames from '../../../_util/classNames';
 import { isValidElement } from '../../../_util/props-util';
 
-const Marks = (_, { attrs }) => {
+const Marks = (_, { attrs, slots }) => {
   const {
     class: className,
     vertical,
@@ -16,19 +16,21 @@ const Marks = (_, { attrs }) => {
     onClickLabel,
   } = attrs;
   const marksKeys = Object.keys(marks);
-
+  const customMark = slots.mark;
   const range = max - min;
   const elements = marksKeys
     .map(parseFloat)
     .sort((a, b) => a - b)
     .map(point => {
-      const markPoint = typeof marks[point] === 'function' ? marks[point](h) : marks[point];
+      const markPoint = typeof marks[point] === 'function' ? marks[point]() : marks[point];
       const markPointIsObject = typeof markPoint === 'object' && !isValidElement(markPoint);
-      const markLabel = markPointIsObject ? markPoint.label : markPoint;
+      let markLabel = markPointIsObject ? markPoint.label : markPoint;
       if (!markLabel && markLabel !== 0) {
         return null;
       }
-
+      if (customMark) {
+        markLabel = customMark({ point, label: markLabel });
+      }
       const isActive =
         (!included && point === upperBound) ||
         (included && point <= upperBound && point >= lowerBound);
@@ -43,11 +45,9 @@ const Marks = (_, { attrs }) => {
       };
 
       const leftStyle = {
-        transform: `translateX(-50%)`,
-        msTransform: `translateX(-50%)`,
-        [reverse ? 'right' : 'left']: reverse
-          ? `${((point - min / 4) / range) * 100}%`
-          : `${((point - min) / range) * 100}%`,
+        transform: `translateX(${reverse ? `50%` : `-50%`})`,
+        msTransform: `translateX(${reverse ? `50%` : `-50%`})`,
+        [reverse ? 'right' : 'left']: `${((point - min) / range) * 100}%`,
       };
 
       const style = vertical ? bottomStyle : leftStyle;

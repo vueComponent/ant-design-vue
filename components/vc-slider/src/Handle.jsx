@@ -19,6 +19,9 @@ export default defineComponent({
     value: PropTypes.number,
     tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     reverse: PropTypes.looseBool,
+    ariaLabel: String,
+    ariaLabelledBy: String,
+    ariaValueTextFormatter: Function,
     // handleFocus: PropTypes.func.def(noop),
     // handleBlur: PropTypes.func.def(noop),
   },
@@ -68,13 +71,26 @@ export default defineComponent({
     },
     // when click can not focus in vue, use mousedown trigger focus
     handleMousedown(e) {
+      e.preventDefault();
       this.focus();
       this.__emit('mousedown', e);
     },
   },
   render() {
-    const { prefixCls, vertical, reverse, offset, disabled, min, max, value, tabindex } =
-      getOptionProps(this);
+    const {
+      prefixCls,
+      vertical,
+      reverse,
+      offset,
+      disabled,
+      min,
+      max,
+      value,
+      tabindex,
+      ariaLabel,
+      ariaLabelledBy,
+      ariaValueTextFormatter,
+    } = getOptionProps(this);
     const className = classNames(this.$attrs.class, {
       [`${prefixCls}-handle-click-focused`]: this.clickFocused,
     });
@@ -83,7 +99,7 @@ export default defineComponent({
       ? {
           [reverse ? 'top' : 'bottom']: `${offset}%`,
           [reverse ? 'bottom' : 'top']: 'auto',
-          transform: `translateY(+50%)`,
+          transform: reverse ? null : `translateY(+50%)`,
         }
       : {
           [reverse ? 'right' : 'left']: `${offset}%`,
@@ -101,15 +117,20 @@ export default defineComponent({
       ...this.$attrs.style,
       ...positionStyle,
     };
-    let _tabIndex = tabindex || 0;
+    let mergedTabIndex = tabindex || 0;
     if (disabled || tabindex === null) {
-      _tabIndex = null;
+      mergedTabIndex = null;
+    }
+
+    let ariaValueText;
+    if (ariaValueTextFormatter) {
+      ariaValueText = ariaValueTextFormatter(value);
     }
 
     const handleProps = {
       ...this.$attrs,
       role: 'slider',
-      tabindex: _tabIndex,
+      tabindex: mergedTabIndex,
       ...ariaProps,
       class: className,
       onBlur: this.handleBlur,
@@ -118,6 +139,13 @@ export default defineComponent({
       ref: this.setHandleRef,
       style: elStyle,
     };
-    return <div {...handleProps} />;
+    return (
+      <div
+        {...handleProps}
+        aria-label={ariaLabel}
+        aria-labelledby={ariaLabelledBy}
+        aria-valuetext={ariaValueText}
+      />
+    );
   },
 });

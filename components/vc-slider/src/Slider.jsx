@@ -19,6 +19,10 @@ const Slider = defineComponent({
     reverse: PropTypes.looseBool,
     min: PropTypes.number,
     max: PropTypes.number,
+    ariaLabelForHandle: String,
+    ariaLabelledByForHandle: String,
+    ariaValueTextFormatterForHandle: String,
+    startPoint: Number,
   },
   data() {
     const defaultValue = this.defaultValue !== undefined ? this.defaultValue : this.min;
@@ -111,10 +115,14 @@ const Slider = defineComponent({
       }
     },
     getLowerBound() {
-      return this.min;
+      const minPoint = this.$props.startPoint || this.$props.min;
+      return this.$data.sValue > minPoint ? minPoint : this.$data.sValue;
     },
     getUpperBound() {
-      return this.sValue;
+      if (this.$data.sValue < this.$props.startPoint) {
+        return this.$props.startPoint;
+      }
+      return this.$data.sValue;
     },
     trimAlignValue(v, nextProps = {}) {
       if (v === null) {
@@ -124,18 +132,27 @@ const Slider = defineComponent({
       const val = utils.ensureValueInRange(v, mergedProps);
       return utils.ensureValuePrecision(val, mergedProps);
     },
-    getTrack({ prefixCls, reverse, vertical, included, offset, minimumTrackStyle, _trackStyle }) {
+    getTrack({
+      prefixCls,
+      reverse,
+      vertical,
+      included,
+      minimumTrackStyle,
+      mergedTrackStyle,
+      length,
+      offset,
+    }) {
       return (
         <Track
           class={`${prefixCls}-track`}
           vertical={vertical}
           included={included}
-          offset={0}
+          offset={offset}
           reverse={reverse}
-          length={offset}
+          length={length}
           style={{
             ...minimumTrackStyle,
-            ..._trackStyle,
+            ...mergedTrackStyle,
           }}
         />
       );
@@ -150,8 +167,12 @@ const Slider = defineComponent({
         trackStyle,
         handleStyle,
         tabindex,
+        ariaLabelForHandle,
+        ariaLabelledByForHandle,
+        ariaValueTextFormatterForHandle,
         min,
         max,
+        startPoint,
         reverse,
         handle,
         defaultHandle,
@@ -172,22 +193,26 @@ const Slider = defineComponent({
         reverse,
         index: 0,
         tabindex,
+        ariaLabel: ariaLabelForHandle,
+        ariaLabelledBy: ariaLabelledByForHandle,
+        ariaValueTextFormatter: ariaValueTextFormatterForHandle,
         style: handleStyle[0] || handleStyle,
         ref: h => this.saveHandle(0, h),
         onFocus: this.onFocus,
         onBlur: this.onBlur,
       });
-
-      const _trackStyle = trackStyle[0] || trackStyle;
+      const trackOffset = startPoint !== undefined ? this.calcOffset(startPoint) : 0;
+      const mergedTrackStyle = trackStyle[0] || trackStyle;
       return {
         tracks: this.getTrack({
           prefixCls,
           reverse,
           vertical,
           included,
-          offset,
+          offset: trackOffset,
           minimumTrackStyle,
-          _trackStyle,
+          mergedTrackStyle,
+          length: offset - trackOffset,
         }),
         handles,
       };

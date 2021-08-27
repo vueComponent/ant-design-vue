@@ -3,6 +3,7 @@ import classNames from '../classNames';
 import { isVNode, Fragment, Comment, Text, h } from 'vue';
 import { camelize, hyphenate, isOn, resolvePropValue } from '../util';
 import isValid from '../isValid';
+import initDefaultProps from './initDefaultProps';
 // function getType(fn) {
 //   const match = fn && fn.toString().match(/^\s*function (\w+)/);
 //   return match ? match[1] : '';
@@ -367,16 +368,6 @@ export function filterEmpty(children = []) {
   });
   return res.filter(c => !isEmptyElement(c));
 }
-const initDefaultProps = (propTypes, defaultProps) => {
-  Object.keys(defaultProps).forEach(k => {
-    if (propTypes[k]) {
-      propTypes[k].def && (propTypes[k] = propTypes[k].def(defaultProps[k]));
-    } else {
-      throw new Error(`not have ${k} prop`);
-    }
-  });
-  return propTypes;
-};
 
 export function mergeProps() {
   const args = [].slice.call(arguments, 0);
@@ -401,7 +392,6 @@ function isValidElement(element) {
 function getPropsSlot(slots, props, prop = 'default') {
   return props[prop] ?? slots[prop]?.();
 }
-
 export {
   splitAttrs,
   hasProp,

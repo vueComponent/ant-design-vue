@@ -1,10 +1,11 @@
 import classNames from '../../_util/classNames';
 import PropTypes, { withUndefined } from '../../_util/vue-types';
 import BaseMixin from '../../_util/BaseMixin';
-import { initDefaultProps, hasProp } from '../../_util/props-util';
+import { hasProp } from '../../_util/props-util';
 import Track from './common/Track';
 import createSlider from './common/createSlider';
 import * as utils from './utils';
+import initDefaultProps from '../../_util/props-util/initDefaultProps';
 
 const trimAlignValue = ({ value, handle, bounds, props }) => {
   const { allowCross, pushable } = props;
@@ -35,6 +36,10 @@ const rangeProps = {
   min: PropTypes.number,
   max: PropTypes.number,
   autofocus: PropTypes.looseBool,
+  ariaLabelGroupForHandles: Array,
+  ariaLabelledByGroupForHandles: Array,
+  ariaValueTextFormatterGroupForHandles: Array,
+  draggableTrack: PropTypes.looseBool,
 };
 const Range = {
   name: 'Range',
@@ -46,6 +51,10 @@ const Range = {
     allowCross: true,
     pushable: false,
     tabindex: [],
+    draggableTrack: false,
+    ariaLabelGroupForHandles: [],
+    ariaLabelledByGroupForHandles: [],
+    ariaValueTextFormatterGroupForHandles: [],
   }),
   data() {
     const { count, min, max } = this;
@@ -89,7 +98,7 @@ const Range = {
   methods: {
     setChangeValue(value) {
       const { bounds } = this;
-      const nextBounds = value.map((v, i) =>
+      let nextBounds = value.map((v, i) =>
         trimAlignValue({
           value: v,
           handle: i,
@@ -97,8 +106,19 @@ const Range = {
           props: this.$props,
         }),
       );
-      if (nextBounds.length === bounds.length && nextBounds.every((v, i) => v === bounds[i]))
-        return;
+      if (bounds.length === nextBounds.length) {
+        if (nextBounds.every((v, i) => v === bounds[i])) {
+          return null;
+        }
+      } else {
+        nextBounds = value.map((v, i) =>
+          trimAlignValue({
+            value: v,
+            handle: i,
+            props: this.$props,
+          }),
+        );
+      }
 
       this.setState({ bounds: nextBounds });
 
@@ -131,6 +151,19 @@ const Range = {
       const changedValue = data.bounds;
       this.__emit('change', changedValue);
     },
+
+    positionGetValue(position) {
+      const bounds = this.getValue();
+      const value = this.calcValueByPos(position);
+      const closestBound = this.getClosestBound(value);
+      const index = this.getBoundNeedMoving(value, closestBound);
+      const prevValue = bounds[index];
+      if (value === prevValue) return null;
+
+      const nextBounds = [...bounds];
+      nextBounds[index] = value;
+      return nextBounds;
+    },
     onStart(position) {
       const { bounds } = this;
       this.__emit('beforeChange', bounds);
@@ -156,13 +189,35 @@ const Range = {
     onEnd(force) {
       const { sHandle } = this;
       this.removeDocumentEvents();
+      if (!sHandle) {
+        this.dragTrack = false;
+      }
       if (sHandle !== null || force) {
         this.__emit('afterChange', this.bounds);
       }
       this.setState({ sHandle: null });
     },
-    onMove(e, position) {
+    onMove(e, position, dragTrack, startBounds) {
       utils.pauseEvent(e);
+      const { $data: state, $props: props } = this;
+      const maxValue = props.max || 100;
+      const minValue = props.min || 0;
+      if (dragTrack) {
+        let pos = props.vertical ? -position : position;
+        pos = props.reverse ? -pos : pos;
+        const max = maxValue - Math.max(...startBounds);
+        const min = minValue - Math.min(...startBounds);
+        const ratio = Math.min(Math.max(pos / (this.getSliderLength() / 100), min), max);
+        const nextBounds = startBounds.map(v =>
+          Math.floor(Math.max(Math.min(v + ratio, maxValue), minValue)),
+        );
+        if (state.bounds.map((c, i) => c === nextBounds[i]).some(c => !c)) {
+          this.onChange({
+            bounds: nextBounds,
+          });
+        }
+        return;
+      }
       const { bounds, sHandle } = this;
       const value = this.calcValueByPos(position);
       const oldValue = bounds[sHandle];
@@ -193,8 +248,8 @@ const Range = {
     getClosestBound(value) {
       const { bounds } = this;
       let closestBound = 0;
-      for (let i = 1; i < bounds.length - 1; ++i) {
-        if (value > bounds[i]) {
+      for (let i = 1; i < bounds.length - 1; i += 1) {
+        if (value >= bounds[i]) {
           closestBound = i;
         }
       }
@@ -230,7 +285,7 @@ const Range = {
      */
     getPoints() {
       const { marks, step, min, max } = this;
-      const cache = this._getPointsCache;
+      const cache = this.internalPointsCache;
       if (!cache || cache.marks !== marks || cache.step !== step) {
         const pointsObject = { ...marks };
         if (step !== null) {
@@ -240,9 +295,9 @@ const Range = {
         }
         const points = Object.keys(pointsObject).map(parseFloat);
         points.sort((a, b) => a - b);
-        this._getPointsCache = { marks, step, points };
+        this.internalPointsCache = { marks, step, points };
       }
-      return this._getPointsCache.points;
+      return this.internalPointsCache.points;
     },
 
     moveTo(value, isFromKeyboardEvent) {
@@ -277,8 +332,8 @@ const Range = {
 
     pushSurroundingHandles(bounds, handle) {
       const value = bounds[handle];
-      let { pushable: threshold } = this;
-      threshold = Number(threshold);
+      let { pushable } = this;
+      const threshold = Number(pushable);
 
       let direction = 0;
       if (bounds[handle + 1] - value < threshold) {
@@ -324,7 +379,8 @@ const Range = {
       }
       const nextHandle = handle + direction;
       const nextValue = points[nextPointIndex];
-      const { pushable: threshold } = this;
+      const { pushable } = this;
+      const threshold = Number(pushable);
       const diffToNext = direction * (bounds[nextHandle] - nextValue);
       if (!this.pushHandle(bounds, nextHandle, direction, threshold - diffToNext)) {
         // couldn't push next handle, so we won't push this one either
@@ -397,28 +453,33 @@ const Range = {
         trackStyle,
         handleStyle,
         tabindex,
+        ariaLabelGroupForHandles,
+        ariaLabelledByGroupForHandles,
+        ariaValueTextFormatterGroupForHandles,
       } = this;
       const handleGenerator = handle || defaultHandle;
       const offsets = bounds.map(v => this.calcOffset(v));
 
       const handleClassName = `${prefixCls}-handle`;
       const handles = bounds.map((v, i) => {
-        let _tabIndex = tabindex[i] || 0;
+        let mergedTabIndex = tabindex[i] || 0;
         if (disabled || tabindex[i] === null) {
-          _tabIndex = null;
+          mergedTabIndex = null;
         }
+        const dragging = sHandle === i;
         return handleGenerator({
           class: classNames({
             [handleClassName]: true,
             [`${handleClassName}-${i + 1}`]: true,
+            [`${handleClassName}-dragging`]: dragging,
           }),
           prefixCls,
           vertical,
+          dragging,
           offset: offsets[i],
           value: v,
-          dragging: sHandle === i,
           index: i,
-          tabindex: _tabIndex,
+          tabindex: mergedTabIndex,
           min,
           max,
           reverse,
@@ -427,6 +488,9 @@ const Range = {
           ref: h => this.saveHandle(i, h),
           onFocus: this.onFocus,
           onBlur: this.onBlur,
+          ariaLabel: ariaLabelGroupForHandles[i],
+          ariaLabelledBy: ariaLabelledByGroupForHandles[i],
+          ariaValueTextFormatter: ariaValueTextFormatterGroupForHandles[i],
         });
       });
 

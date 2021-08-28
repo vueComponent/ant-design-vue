@@ -199,7 +199,7 @@ export default defineComponent({
         selectable,
         fieldNames = props.replaceFields,
         motion = props.openAnimation,
-        itemHeight = 20,
+        itemHeight = 28,
       } = props;
       const newProps = {
         ...attrs,

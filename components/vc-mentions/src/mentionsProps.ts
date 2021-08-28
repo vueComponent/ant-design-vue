@@ -47,7 +47,7 @@ export const defaultProps = {
   split: ' ',
   rows: 1,
   validateSearch: defaultValidateSearch,
-  filterOption: defaultFilterOption,
+  filterOption: (() => defaultFilterOption) as any,
 };
 
 export default initDefaultProps(vcMentionsProps, defaultProps);

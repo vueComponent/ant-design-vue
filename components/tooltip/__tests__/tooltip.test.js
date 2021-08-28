@@ -16,11 +16,6 @@ describe('Tooltip', () => {
             mouseEnterDelay: 0,
             mouseLeaveDelay: 0,
             onVisibleChange,
-            // TODO test/util 的bug 没有使用 v-model 同样会改变
-            'onUpdate:visible': () => {
-              props.visible = this.visible;
-              this.$forceUpdate();
-            },
           };
           if (this.visible !== undefined) {
             props.visible = this.visible;
@@ -80,7 +75,7 @@ describe('Tooltip', () => {
     });
     await asyncExpect(() => {
       expect(onVisibleChange).toHaveBeenLastCalledWith(true);
-      expect(wrapper.vm.$refs.tooltip.visible).toBe(true);
+      expect(wrapper.vm.$refs.tooltip.visible).toBe(false);
     });
     await asyncExpect(() => {
       // always trigger onVisibleChange

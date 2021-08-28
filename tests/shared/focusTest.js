@@ -29,7 +29,7 @@ export default function focusTest(Component) {
       expect(handleFocus).toBeCalled();
     });
 
-    fit('blur() and onBlur', async () => {
+    it('blur() and onBlur', async () => {
       const handleBlur = jest.fn();
       const handleFocus = jest.fn();
       const wrapper = mount(

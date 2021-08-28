@@ -230,7 +230,7 @@ export default defineComponent({
 
       const vcTooltipProps = {
         ...attrs,
-        ...props,
+        ...(props as TooltipProps),
         prefixCls: prefixCls.value,
         getTooltipContainer: getPopupContainer || getTargetContainer.value,
         builtinPlacements: tooltipPlacements.value,

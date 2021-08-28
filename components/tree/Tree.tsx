@@ -200,7 +200,7 @@ export default defineComponent({
         fieldNames = props.replaceFields,
         motion = props.openAnimation,
         itemHeight = 28,
-      } = props;
+      } = props as TreeProps;
       const newProps = {
         ...attrs,
         ...props,

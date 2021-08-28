@@ -30,6 +30,8 @@ export default defineComponent({
     builtinPlacements: PropTypes.object,
     overlayInnerStyle: PropTypes.style,
     popupVisible: PropTypes.looseBool,
+    onVisibleChange: PropTypes.func,
+    onPopupAlign: PropTypes.func,
   },
   slots: ['arrowContent', 'overlay'],
   setup(props, { slots, attrs, expose }) {
@@ -116,12 +118,12 @@ export default defineComponent({
         mouseEnterDelay,
         ...extraProps,
         ...attrs,
-        onPopupVisibleChange: (attrs.onVisibleChange as any) || noop,
-        onPopupAlign: attrs.onPopupAlign || noop,
+        onPopupVisibleChange: props.onVisibleChange || noop,
+        onPopupAlign: props.onPopupAlign || noop,
         ref: triggerDOM,
         popup: getPopupElement(),
       };
-      return <Trigger {...triggerProps}>{slots.default?.()}</Trigger>;
+      return <Trigger {...triggerProps} v-slots={{ default: slots.default }}></Trigger>;
     };
   },
 });

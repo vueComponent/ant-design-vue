@@ -1,6 +1,6 @@
-import { CSSProperties } from 'vue';
+import type { CSSProperties } from 'vue';
 import classNames from '../../../_util/classNames';
-import { VueNode } from '../../../_util/type';
+import type { VueNode } from '../../../_util/type';
 import warning from '../../../_util/warning';
 
 const calcPoints = (

@@ -1,4 +1,5 @@
-import { computed, CSSProperties, defineComponent, ref } from 'vue';
+import type { CSSProperties } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import classNames from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
 import addEventListener from '../../vc-util/Dom/addEventListener';
@@ -30,9 +31,9 @@ export default defineComponent({
         clickFocused.value = true;
       }
     };
-    const handleBlur = () => {
+    const handleBlur = (e: FocusEvent) => {
       clickFocused.value = false;
-      emit('blur');
+      emit('blur', e);
     };
     const handleKeyDown = () => {
       clickFocused.value = false;
@@ -58,6 +59,7 @@ export default defineComponent({
       focus,
       blur,
       clickFocus,
+      ref: handle,
     });
     let onMouseUpListener = null;
     onMounted(() => {

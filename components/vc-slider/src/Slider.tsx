@@ -28,7 +28,7 @@ const Slider = defineComponent({
     const defaultValue = this.defaultValue !== undefined ? this.defaultValue : this.min;
     const value = this.value !== undefined ? this.value : defaultValue;
     return {
-      sValue: this.trimAlignValue(value),
+      sValue: (this as any).trimAlignValue(value),
       dragging: false,
     };
   },

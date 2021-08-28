@@ -1,12 +1,14 @@
-import { computed, CSSProperties, ref, VNodeTypes } from 'vue';
+import type { CSSProperties, VNodeTypes } from 'vue';
+import { computed, ref } from 'vue';
 import { defineComponent } from 'vue';
 import BaseMixin from '../_util/BaseMixin';
 import VcSlider from '../vc-slider/src/Slider';
 import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
-import { VueNode, withInstall } from '../_util/type';
-import { PropType } from 'vue';
-import { TooltipPlacement } from '../tooltip/Tooltip';
+import type { VueNode } from '../_util/type';
+import { withInstall } from '../_util/type';
+import type { PropType } from 'vue';
+import type { TooltipPlacement } from '../tooltip/Tooltip';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import SliderTooltip from './SliderTooltip';
 import classNames from '../_util/classNames';
@@ -26,7 +28,6 @@ interface HandleGeneratorInfo {
   value?: number;
   dragging?: boolean;
   index: number;
-  rest?: any[];
 }
 interface SliderRange {
   draggableTrack?: boolean;
@@ -39,7 +40,7 @@ export type HandleGeneratorFn = (config: {
 type Value = [number, number] | number;
 
 const defaultTipFormatter = (value: number) => (typeof value === 'number' ? value.toString() : '');
-export const SliderProps = () => ({
+export const sliderProps = () => ({
   prefixCls: String,
   tooltipPrefixCls: String,
   range: { type: [Boolean, Object] as PropType<boolean | SliderRange>, default: undefined },
@@ -77,7 +78,7 @@ const Slider = defineComponent({
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
-    ...SliderProps(),
+    ...sliderProps(),
   },
   emits: ['update:value', 'change', 'afterChange'],
   slots: ['mark'],

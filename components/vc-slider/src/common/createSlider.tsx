@@ -66,7 +66,7 @@ export default function createSlider(Component) {
         step && Math.floor(step) === step ? isPointDiffEven : true,
         `Slider[max] - Slider[min] (${max - min}) should be a multiple of Slider[step] (${step})`,
       );
-      this.handlesRefs = {};
+      (this as any).handlesRefs = {};
       return {};
     },
     mounted() {

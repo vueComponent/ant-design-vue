@@ -5,9 +5,9 @@ import Tooltip, { tooltipProps } from '../tooltip';
 import raf from '../_util/raf';
 
 export default defineComponent({
-  props: tooltipProps,
   name: 'SliderTooltip',
   inheritAttrs: false,
+  props: tooltipProps,
   setup(props, { attrs, slots }) {
     const innerRef = ref<any>(null);
 

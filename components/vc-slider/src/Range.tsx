@@ -7,7 +7,17 @@ import createSlider from './common/createSlider';
 import * as utils from './utils';
 import initDefaultProps from '../../_util/props-util/initDefaultProps';
 
-const trimAlignValue = ({ value, handle, bounds, props }) => {
+const trimAlignValue = ({
+  value,
+  handle,
+  bounds,
+  props,
+}: {
+  value: number;
+  handle: number;
+  bounds?: number[];
+  props: any;
+}) => {
   const { allowCross, pushable } = props;
   const thershold = Number(pushable);
   const valInRange = utils.ensureValueInRange(value, props);
@@ -332,7 +342,7 @@ const Range = {
 
     pushSurroundingHandles(bounds, handle) {
       const value = bounds[handle];
-      let { pushable } = this;
+      const { pushable } = this;
       const threshold = Number(pushable);
 
       let direction = 0;

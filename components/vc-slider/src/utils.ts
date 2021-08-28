@@ -1,7 +1,7 @@
 import keyCode from '../../_util/KeyCode';
 import { findDOMNode } from '../../_util/props-util';
 
-export function isEventFromHandle(e, handles) {
+export function isEventFromHandle(e: { target: HTMLElement }, handles) {
   try {
     return Object.keys(handles).some(
       key => e.target === findDOMNode(handles[key]) || e.target === handles[key],
@@ -11,15 +11,15 @@ export function isEventFromHandle(e, handles) {
   }
 }
 
-export function isValueOutOfRange(value, { min, max }) {
+export function isValueOutOfRange(value: number, { min, max }: { min?: number; max?: number }) {
   return value < min || value > max;
 }
 
-export function isNotTouchEvent(e) {
+export function isNotTouchEvent(e: TouchEvent) {
   return e.touches.length > 1 || (e.type.toLowerCase() === 'touchend' && e.touches.length > 0);
 }
 
-export function getClosestPoint(val, { marks, step, min, max }) {
+export function getClosestPoint(val: number, { marks, step, min, max }) {
   const points = Object.keys(marks).map(parseFloat);
   if (step !== null) {
     const baseNum = 10 ** getPrecision(step);
@@ -32,7 +32,7 @@ export function getClosestPoint(val, { marks, step, min, max }) {
   return points[diffs.indexOf(Math.min(...diffs))];
 }
 
-export function getPrecision(step) {
+export function getPrecision(step: number) {
   const stepString = step.toString();
   let precision = 0;
   if (stepString.indexOf('.') >= 0) {
@@ -41,7 +41,7 @@ export function getPrecision(step) {
   return precision;
 }
 
-export function getMousePosition(vertical, e) {
+export function getMousePosition(vertical: boolean, e: MouseEvent) {
   let zoom = 1;
   if (window.visualViewport) {
     zoom = +(window.visualViewport.width / document.body.getBoundingClientRect().width).toFixed(2);
@@ -49,7 +49,7 @@ export function getMousePosition(vertical, e) {
   return (vertical ? e.clientY : e.pageX) / zoom;
 }
 
-export function getTouchPosition(vertical, e) {
+export function getTouchPosition(vertical: boolean, e: TouchEvent) {
   let zoom = 1;
   if (window.visualViewport) {
     zoom = +(window.visualViewport.width / document.body.getBoundingClientRect().width).toFixed(2);
@@ -57,14 +57,14 @@ export function getTouchPosition(vertical, e) {
   return (vertical ? e.touches[0].clientY : e.touches[0].pageX) / zoom;
 }
 
-export function getHandleCenterPosition(vertical, handle) {
+export function getHandleCenterPosition(vertical: boolean, handle: HTMLElement) {
   const coords = handle.getBoundingClientRect();
   return vertical
     ? coords.top + coords.height * 0.5
     : window.pageXOffset + coords.left + coords.width * 0.5;
 }
 
-export function ensureValueInRange(val, { max, min }) {
+export function ensureValueInRange(val: number, { max, min }: { max?: number; min?: number }) {
   if (val <= min) {
     return min;
   }
@@ -74,13 +74,13 @@ export function ensureValueInRange(val, { max, min }) {
   return val;
 }
 
-export function ensureValuePrecision(val, props) {
+export function ensureValuePrecision(val: number, props: any) {
   const { step } = props;
   const closestPoint = isFinite(getClosestPoint(val, props)) ? getClosestPoint(val, props) : 0; // eslint-disable-line
   return step === null ? closestPoint : parseFloat(closestPoint.toFixed(getPrecision(step)));
 }
 
-export function pauseEvent(e) {
+export function pauseEvent(e: Event) {
   e.stopPropagation();
   e.preventDefault();
 }
@@ -103,7 +103,7 @@ export function calculateNextValue(func, value, props) {
   return value;
 }
 
-export function getKeyboardValueMutator(e, vertical, reverse) {
+export function getKeyboardValueMutator(e: KeyboardEvent, vertical: boolean, reverse: boolean) {
   const increase = 'increase';
   const decrease = 'decrease';
   let method = increase;
@@ -122,9 +122,9 @@ export function getKeyboardValueMutator(e, vertical, reverse) {
       break;
 
     case keyCode.END:
-      return (value, props) => props.max;
+      return (_value, props) => props.max;
     case keyCode.HOME:
-      return (value, props) => props.min;
+      return (_value, props) => props.min;
     case keyCode.PAGE_UP:
       return (value, props) => value + props.step * 2;
     case keyCode.PAGE_DOWN:

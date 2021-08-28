@@ -1,7 +1,16 @@
+import { CSSProperties } from 'vue';
 import classNames from '../../../_util/classNames';
+import { VueNode } from '../../../_util/type';
 import warning from '../../../_util/warning';
 
-const calcPoints = (vertical, marks, dots, step, min, max) => {
+const calcPoints = (
+  _vertical: boolean,
+  marks: Record<number, VueNode | { style?: CSSProperties; label?: string }>,
+  dots: boolean,
+  step: number,
+  min: number,
+  max: number,
+) => {
   warning(
     dots ? step > 0 : true,
     'Slider',
@@ -20,7 +29,7 @@ const calcPoints = (vertical, marks, dots, step, min, max) => {
   return points;
 };
 
-const Steps = (_, { attrs }) => {
+const Steps = (_: any, { attrs }) => {
   const {
     prefixCls,
     vertical,

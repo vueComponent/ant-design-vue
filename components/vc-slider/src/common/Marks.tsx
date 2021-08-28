@@ -2,7 +2,7 @@ import supportsPassive from '../../../_util/supportsPassive';
 import classNames from '../../../_util/classNames';
 import { isValidElement } from '../../../_util/props-util';
 
-const Marks = (_, { attrs, slots }) => {
+const Marks = (_: any, { attrs, slots }: any) => {
   const {
     class: className,
     vertical,

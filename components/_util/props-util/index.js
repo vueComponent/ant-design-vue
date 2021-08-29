@@ -42,7 +42,7 @@ const parseStyleText = (cssText = '', camel) => {
 };
 
 const hasProp = (instance, prop) => {
-  return prop in getOptionProps(instance);
+  return instance[prop] !== undefined;
 };
 // 重构后直接使用 hasProp 替换
 const slotHasProp = (slot, prop) => {
@@ -386,6 +386,9 @@ export function mergeProps() {
 }
 
 function isValidElement(element) {
+  if (Array.isArray(element) && element.length === 1) {
+    element = element[0];
+  }
   return element && element.__v_isVNode && typeof element.type !== 'symbol'; // remove text node
 }
 

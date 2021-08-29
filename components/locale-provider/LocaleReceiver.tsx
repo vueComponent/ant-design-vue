@@ -1,4 +1,4 @@
-import type { VNodeTypes, PropType, ComputedRef } from 'vue';
+import type { VNodeTypes, PropType, ComputedRef, Ref } from 'vue';
 import { unref } from 'vue';
 import { inject, defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
@@ -68,6 +68,7 @@ type LocaleComponent = keyof Locale;
 export function useLocaleReceiver<T extends LocaleComponent>(
   componentName: T,
   defaultLocale?: Locale[T] | Function | ComputedRef<Locale[T] | Function>,
+  propsLocale?: Ref<Locale[T]>,
 ): [ComputedRef<Locale[T]>] {
   const localeData = inject<LocaleReceiverContext>('localeData', {} as LocaleReceiverContext);
   const componentLocale = computed<Locale[T]>(() => {
@@ -79,6 +80,7 @@ export function useLocaleReceiver<T extends LocaleComponent>(
     return {
       ...(typeof locale === 'function' ? (locale as Function)() : locale),
       ...(localeFromContext || {}),
+      ...(unref(propsLocale) || {}),
     };
   });
   return [componentLocale];

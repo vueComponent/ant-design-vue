@@ -1,12 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
-import {
-  hasProp,
-  getOptionProps,
-  getComponent,
-  splitAttrs,
-  isValidElement,
-} from '../_util/props-util';
+import { hasProp, getComponent, splitAttrs, isValidElement } from '../_util/props-util';
 import Pager from './Pager';
 import Options from './Options';
 import LOCALE from './locale/zh_CN';
@@ -15,8 +9,7 @@ import classNames from '../_util/classNames';
 import { defineComponent, withDirectives } from 'vue';
 import antInput from '../_util/antInputDirective';
 import { cloneElement } from '../_util/vnode';
-
-function noop() {}
+import firstNotUndefined from '../_util/firstNotUndefined';
 
 // 是否是正整数
 function isInteger(value) {
@@ -53,7 +46,7 @@ export default defineComponent({
     showPrevNextJumpers: PropTypes.looseBool.def(true),
     showQuickJumper: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]).def(false),
     showTitle: PropTypes.looseBool.def(true),
-    pageSizeOptions: PropTypes.arrayOf(PropTypes.string),
+    pageSizeOptions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
     buildOptionText: PropTypes.func,
     showTotal: PropTypes.func,
     simple: PropTypes.looseBool,
@@ -66,23 +59,10 @@ export default defineComponent({
     totalBoundaryShowSizeChanger: PropTypes.number.def(50),
   },
   data() {
-    const props = getOptionProps(this);
-    const hasOnChange = this.onChange !== noop;
-    const hasCurrent = 'current' in props;
-    if (hasCurrent && !hasOnChange) {
-      console.warn(
-        'Warning: You provided a `current` prop to a Pagination component without an `onChange` handler. This will render a read-only component.',
-      ); // eslint-disable-line
-    }
-    let current = this.defaultCurrent;
-    if ('current' in props) {
-      current = this.current;
-    }
+    const props = this.$props;
+    let current = firstNotUndefined([this.current, this.defaultCurrent]);
 
-    let pageSize = this.defaultPageSize;
-    if ('pageSize' in props) {
-      pageSize = this.pageSize;
-    }
+    const pageSize = firstNotUndefined([this.pageSize, this.defaultPageSize]);
 
     current = Math.min(current, calculatePage(pageSize, undefined, props));
 
@@ -100,7 +80,7 @@ export default defineComponent({
       });
     },
     pageSize(val) {
-      const newState = {};
+      const newState: any = {};
       let current = this.stateCurrent;
       const newCurrent = calculatePage(val, this.$data, this.$props);
       current = current > newCurrent ? newCurrent : current;
@@ -111,7 +91,7 @@ export default defineComponent({
       newState.statePageSize = val;
       this.setState(newState);
     },
-    stateCurrent(val, oldValue) {
+    stateCurrent(_val, oldValue) {
       // When current page change, fix focused style of prev item
       // A hacky solution of https://github.com/ant-design/ant-design/issues/8948
       this.$nextTick(() => {
@@ -126,7 +106,7 @@ export default defineComponent({
       });
     },
     total() {
-      const newState = {};
+      const newState: any = {};
       const newCurrent = calculatePage(this.pageSize, this.$data, this.$props);
       if (hasProp(this, 'current')) {
         const current = Math.min(this.current, newCurrent);
@@ -332,7 +312,9 @@ export default defineComponent({
         originalElement: this.getItemIcon('prevIcon', 'prev page'),
       });
       const disabled = !this.hasPrev();
-      return isValidElement(prevButton) ? cloneElement(prevButton, { disabled }) : prevButton;
+      return isValidElement(prevButton)
+        ? cloneElement(prevButton, disabled ? { disabled } : {})
+        : prevButton;
     },
 
     renderNext(nextPage) {
@@ -343,7 +325,9 @@ export default defineComponent({
         originalElement: this.getItemIcon('nextIcon', 'next page'),
       });
       const disabled = !this.hasNext();
-      return isValidElement(nextButton) ? cloneElement(nextButton, { disabled }) : nextButton;
+      return isValidElement(nextButton)
+        ? cloneElement(nextButton, disabled ? { disabled } : {})
+        : nextButton;
     },
   },
   render() {
@@ -646,7 +630,7 @@ export default defineComponent({
     const buildOptionText = this.buildOptionText || this.$slots.buildOptionText;
     return (
       <ul
-        unselectable="unselectable"
+        unselectable="on"
         ref="paginationNode"
         {...restAttrs}
         class={classNames(

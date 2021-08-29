@@ -1,9 +1,10 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent } from 'vue';
 
+type widthUnit = number | string;
 export const skeletonParagraphProps = {
   prefixCls: String,
-  width: { type: [Number, String] as PropType<string | number> },
+  width: { type: [Number, String, Array] as PropType<widthUnit[] | widthUnit> },
   rows: Number,
 };
 

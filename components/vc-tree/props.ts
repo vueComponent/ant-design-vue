@@ -1,4 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { EventHandler } from '../_util/EventInterface';
 import PropTypes from '../_util/vue-types';
 import type {
   NodeDragEventParams,
@@ -47,7 +48,7 @@ export const treeNodeProps = {
   isStart: { type: Array as PropType<boolean[]> },
   isEnd: { type: Array as PropType<boolean[]> },
   active: { type: Boolean, default: undefined },
-  onMousemove: { type: Function as PropType<EventHandlerNonNull> },
+  onMousemove: { type: Function as PropType<EventHandler> },
 
   // By user
   isLeaf: { type: Boolean, default: undefined },
@@ -91,11 +92,11 @@ export const nodeListProps = {
   itemHeight: { type: Number as PropType<number> },
   virtual: { type: Boolean as PropType<boolean> },
 
-  onKeydown: { type: Function as PropType<EventHandlerNonNull> },
+  onKeydown: { type: Function as PropType<EventHandler> },
   onFocus: { type: Function as PropType<(e: FocusEvent) => void> },
   onBlur: { type: Function as PropType<(e: FocusEvent) => void> },
   onActiveChange: { type: Function as PropType<(key: Key) => void> },
-  onContextmenu: { type: Function as PropType<EventHandlerNonNull> },
+  onContextmenu: { type: Function as PropType<EventHandler> },
 
   onListChangeStart: { type: Function as PropType<() => void> },
   onListChangeEnd: { type: Function as PropType<() => void> },
@@ -146,11 +147,11 @@ export const treeProps = () => ({
   },
   onFocus: { type: Function as PropType<(e: FocusEvent) => void> },
   onBlur: { type: Function as PropType<(e: FocusEvent) => void> },
-  onKeydown: { type: Function as PropType<EventHandlerNonNull> },
-  onContextmenu: { type: Function as PropType<EventHandlerNonNull> },
+  onKeydown: { type: Function as PropType<EventHandler> },
+  onContextmenu: { type: Function as PropType<EventHandler> },
   onClick: { type: Function as PropType<NodeMouseEventHandler> },
   onDblclick: { type: Function as PropType<NodeMouseEventHandler> },
-  onScroll: { type: Function as PropType<EventHandlerNonNull> },
+  onScroll: { type: Function as PropType<EventHandler> },
   onExpand: {
     type: Function as PropType<
       (

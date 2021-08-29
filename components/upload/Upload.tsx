@@ -185,7 +185,10 @@ export default defineComponent({
       if (result === false) {
         this.handleChange({
           file,
-          fileList: uniqBy(stateFileList.concat(fileList.map(fileToObject)), item => item.uid),
+          fileList: uniqBy(
+            stateFileList.concat(fileList.map(fileToObject)),
+            (item: any) => item.uid,
+          ),
         });
         return false;
       }

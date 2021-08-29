@@ -1,15 +1,12 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
-import PropTypes, { withUndefined } from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
 import type { AvatarProps } from './Avatar';
-import { avatarProps } from './Avatar';
 import type { SkeletonTitleProps } from './Title';
-import Title, { skeletonTitleProps } from './Title';
+import Title from './Title';
 import type { SkeletonParagraphProps } from './Paragraph';
-import Paragraph, { skeletonParagraphProps } from './Paragraph';
-import Omit from 'omit.js';
+import Paragraph from './Paragraph';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import Element from './Element';
 
@@ -17,30 +14,22 @@ import Element from './Element';
 type SkeletonAvatarProps = Omit<AvatarProps, 'active'>;
 
 export const skeletonProps = {
-  active: PropTypes.looseBool,
-  loading: PropTypes.looseBool,
-  prefixCls: PropTypes.string,
-  avatar: withUndefined(
-    PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.shape(Omit(avatarProps, ['active'])).loose,
-      PropTypes.looseBool,
-    ]),
-  ),
-  title: withUndefined(
-    PropTypes.oneOfType([
-      PropTypes.looseBool,
-      PropTypes.string,
-      PropTypes.shape(skeletonTitleProps).loose,
-    ]),
-  ),
-  paragraph: withUndefined(
-    PropTypes.oneOfType([
-      PropTypes.looseBool,
-      PropTypes.string,
-      PropTypes.shape(skeletonParagraphProps).loose,
-    ]),
-  ),
+  active: { type: Boolean, default: undefined },
+  loading: { type: Boolean, default: undefined },
+  prefixCls: String,
+  avatar: {
+    type: [Boolean, Object] as PropType<SkeletonAvatarProps | boolean>,
+    default: undefined as SkeletonAvatarProps | boolean,
+  },
+  title: {
+    type: [Boolean, Object] as PropType<SkeletonTitleProps | boolean>,
+    default: undefined as SkeletonTitleProps | boolean,
+  },
+  paragraph: {
+    type: [Boolean, Object] as PropType<SkeletonParagraphProps | boolean>,
+    default: undefined as SkeletonParagraphProps | boolean,
+  },
+  round: { type: Boolean, default: undefined },
 };
 
 export type SkeletonProps = Partial<ExtractPropTypes<typeof skeletonProps>>;

@@ -1,13 +1,10 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent } from 'vue';
-import PropTypes from '../_util/vue-types';
-
-const widthUnit = PropTypes.oneOfType([PropTypes.number, PropTypes.string]);
 
 export const skeletonParagraphProps = {
-  prefixCls: PropTypes.string,
-  width: PropTypes.oneOfType([widthUnit, PropTypes.arrayOf(widthUnit)]),
-  rows: PropTypes.number,
+  prefixCls: String,
+  width: { type: [Number, String] as PropType<string | number> },
+  rows: Number,
 };
 
 export type SkeletonParagraphProps = Partial<ExtractPropTypes<typeof skeletonParagraphProps>>;

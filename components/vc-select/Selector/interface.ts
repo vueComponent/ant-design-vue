@@ -2,6 +2,7 @@ import type { RefObject } from '../../_util/createRef';
 import type { VNodeChild } from 'vue';
 import type { Mode } from '../interface';
 import type { LabelValueType } from '../interface/generator';
+import type { EventHandler } from '../../_util/EventInterface';
 
 export interface InnerSelectorProps {
   prefixCls: string;
@@ -18,10 +19,10 @@ export interface InnerSelectorProps {
   accessibilityIndex: number;
   open: boolean;
   tabindex?: number | string;
-  onInputKeyDown: EventHandlerNonNull;
-  onInputMouseDown: EventHandlerNonNull;
-  onInputChange: EventHandlerNonNull;
-  onInputPaste: EventHandlerNonNull;
-  onInputCompositionStart: EventHandlerNonNull;
-  onInputCompositionEnd: EventHandlerNonNull;
+  onInputKeyDown: EventHandler;
+  onInputMouseDown: EventHandler;
+  onInputChange: EventHandler;
+  onInputPaste: EventHandler;
+  onInputCompositionStart: EventHandler;
+  onInputCompositionEnd: EventHandler;
 }

@@ -16,6 +16,7 @@ import type {
 } from './interface';
 import type { RawValueType, FlattenOptionsType } from './interface/generator';
 import useMemo from '../_util/hooks/useMemo';
+import type { EventHandler } from '../_util/EventInterface';
 export interface OptionListProps {
   prefixCls: string;
   id: string;
@@ -37,10 +38,10 @@ export interface OptionListProps {
   onToggleOpen: (open?: boolean) => void;
   /** Tell Select that some value is now active to make accessibility work */
   onActiveValue: OnActiveValue;
-  onScroll: EventHandlerNonNull;
+  onScroll: EventHandler;
 
   /** Tell Select that mouse enter the popup to force re-render */
-  onMouseenter?: EventHandlerNonNull;
+  onMouseenter?: EventHandler;
 }
 
 const OptionListProps = {
@@ -90,7 +91,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
     // =========================== List ===========================
     const listRef = createRef();
 
-    const onListMouseDown: EventHandlerNonNull = event => {
+    const onListMouseDown: EventHandler = event => {
       event.preventDefault();
     };
 

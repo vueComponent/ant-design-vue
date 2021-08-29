@@ -6,7 +6,6 @@
       "ant-design-vue/es/*": ["components/*"]
     },
     "strictNullChecks": false,
-    "strict": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "experimentalDecorators": true,

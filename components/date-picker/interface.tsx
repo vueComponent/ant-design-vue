@@ -1,5 +1,6 @@
 import type moment from 'moment';
 import type { CSSProperties } from 'vue';
+import type { EventHandler } from '../_util/EventInterface';
 import type { VueNode } from '../_util/type';
 import { tuple } from '../_util/type';
 
@@ -37,8 +38,8 @@ export interface PickerProps {
   disabledDate?: (current: moment.Moment | null) => boolean;
   dateRender?: (current: moment.Moment, today: moment.Moment) => any;
   autofocus?: boolean;
-  onFocus?: EventHandlerNonNull;
-  onBlur?: EventHandlerNonNull;
+  onFocus?: EventHandler;
+  onBlur?: EventHandler;
 }
 
 export interface SinglePickerProps {

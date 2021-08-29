@@ -38,7 +38,7 @@ import { getSeparatedContent } from './utils/valueUtil';
 import useSelectTriggerControl from './hooks/useSelectTriggerControl';
 import useCacheDisplayValue from './hooks/useCacheDisplayValue';
 import useCacheOptions from './hooks/useCacheOptions';
-import type { CSSProperties, DefineComponent, VNode, VNodeChild } from 'vue';
+import type { CSSProperties, DefineComponent, PropType, VNode, VNodeChild } from 'vue';
 import {
   computed,
   defineComponent,
@@ -54,6 +54,7 @@ import PropTypes, { withUndefined } from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import warning from '../_util/warning';
 import isMobile from '../vc-util/isMobile';
+import type { EventHandler } from '../_util/EventInterface';
 
 const DEFAULT_OMIT_PROPS = [
   'children',
@@ -148,7 +149,7 @@ export const BaseProps = () => ({
   onDropdownVisibleChange: PropTypes.func,
   onSelect: PropTypes.func,
   onDeselect: PropTypes.func,
-  onInputKeyDown: PropTypes.func,
+  onInputKeyDown: { type: Function as PropType<EventHandler> },
   onClick: PropTypes.func,
   onChange: PropTypes.func,
   onBlur: PropTypes.func,
@@ -244,20 +245,20 @@ export interface SelectProps<OptionsType extends object[], ValueType> {
   tabindex?: number | string;
 
   // Events
-  onKeyup?: EventHandlerNonNull;
-  onKeydown?: EventHandlerNonNull;
-  onPopupScroll?: EventHandlerNonNull;
+  onKeyup?: EventHandler;
+  onKeydown?: EventHandler;
+  onPopupScroll?: EventHandler;
   onDropdownVisibleChange?: (open: boolean) => void;
   onSelect?: (value: SingleType<ValueType>, option: OptionsType[number]) => void;
   onDeselect?: (value: SingleType<ValueType>, option: OptionsType[number]) => void;
-  onInputKeyDown?: EventHandlerNonNull;
-  onClick?: EventHandlerNonNull;
+  onInputKeyDown?: EventHandler;
+  onClick?: EventHandler;
   onChange?: (value: ValueType, option: OptionsType[number] | OptionsType) => void;
-  onBlur?: EventHandlerNonNull;
-  onFocus?: EventHandlerNonNull;
-  onMousedown?: EventHandlerNonNull;
-  onMouseenter?: EventHandlerNonNull;
-  onMouseleave?: EventHandlerNonNull;
+  onBlur?: EventHandler;
+  onFocus?: EventHandler;
+  onMousedown?: EventHandler;
+  onMouseenter?: EventHandler;
+  onMouseleave?: EventHandler;
 
   // Motion
   choiceTransitionName?: string;
@@ -1326,7 +1327,7 @@ export default function generateSelector<
             getTriggerDOMNode={() => selectorDomRef.current}
           >
             <Selector
-              {...this.$props}
+              {...(this.$props as any)}
               domRef={selectorDomRef}
               prefixCls={prefixCls}
               inputElement={customizeInputElement}

@@ -19,6 +19,7 @@ import { defineComponent } from 'vue';
 import createRef from '../../_util/createRef';
 import PropTypes from '../../_util/vue-types';
 import type { VueNode } from '../../_util/type';
+import type { EventHandler } from '../../_util/EventInterface';
 
 export interface SelectorProps {
   id: string;
@@ -57,7 +58,7 @@ export interface SelectorProps {
   onSearch: (searchText: string, fromTyping: boolean, isCompositing: boolean) => boolean;
   onSearchSubmit: (searchText: string) => void;
   onSelect: (value: RawValueType, option: { selected: boolean }) => void;
-  onInputKeyDown?: EventHandlerNonNull;
+  onInputKeyDown?: EventHandler;
 
   /**
    * @private get real dom for trigger align.
@@ -106,7 +107,7 @@ const Selector = defineComponent<SelectorProps>({
     onSearch: PropTypes.func,
     onSearchSubmit: PropTypes.func,
     onSelect: PropTypes.func,
-    onInputKeyDown: PropTypes.func,
+    onInputKeyDown: { type: Function as PropType<EventHandler> },
 
     /**
      * @private get real dom for trigger align.

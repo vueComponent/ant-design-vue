@@ -5,6 +5,7 @@ import PropTypes from '../../_util/vue-types';
 import type { RefObject } from '../../_util/createRef';
 import antInput from '../../_util/antInputDirective';
 import classNames from '../../_util/classNames';
+import type { EventHandler } from '../../_util/EventInterface';
 
 interface InputProps {
   prefixCls: string;
@@ -21,19 +22,43 @@ interface InputProps {
   /** Pass accessibility props to input */
   attrs: object;
   inputRef: RefObject;
-  onKeydown: EventHandlerNonNull;
-  onMousedown: EventHandlerNonNull;
-  onChange: EventHandlerNonNull;
-  onPaste: EventHandlerNonNull;
-  onCompositionstart: EventHandlerNonNull;
-  onCompositionend: EventHandlerNonNull;
-  onFocus: EventHandlerNonNull;
-  onBlur: EventHandlerNonNull;
+  onKeydown: EventHandler;
+  onMousedown: EventHandler;
+  onChange: EventHandler;
+  onPaste: EventHandler;
+  onCompositionstart: EventHandler;
+  onCompositionend: EventHandler;
+  onFocus: EventHandler;
+  onBlur: EventHandler;
 }
 
-const Input = defineComponent<InputProps, { VCSelectContainerEvent: any; blurTimeout: any }>({
+const Input = defineComponent({
   name: 'Input',
   inheritAttrs: false,
+  props: {
+    inputRef: PropTypes.any,
+    prefixCls: PropTypes.string,
+    id: PropTypes.string,
+    inputElement: PropTypes.any,
+    disabled: PropTypes.looseBool,
+    autofocus: PropTypes.looseBool,
+    autocomplete: PropTypes.string,
+    editable: PropTypes.looseBool,
+    accessibilityIndex: PropTypes.number,
+    value: PropTypes.string,
+    open: PropTypes.looseBool,
+    tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    /** Pass accessibility props to input */
+    attrs: PropTypes.object,
+    onKeydown: PropTypes.func,
+    onMousedown: PropTypes.func,
+    onChange: PropTypes.func,
+    onPaste: PropTypes.func,
+    onCompositionstart: PropTypes.func,
+    onCompositionend: PropTypes.func,
+    onFocus: PropTypes.func,
+    onBlur: PropTypes.func,
+  },
   setup(props) {
     if (process.env.NODE_ENV === 'test') {
       onMounted(() => {
@@ -47,7 +72,7 @@ const Input = defineComponent<InputProps, { VCSelectContainerEvent: any; blurTim
     }
     return {
       blurTimeout: null,
-      VCSelectContainerEvent: inject('VCSelectContainerEvent'),
+      VCSelectContainerEvent: inject('VCSelectContainerEvent') as any,
     };
   },
   render() {
@@ -164,29 +189,29 @@ const Input = defineComponent<InputProps, { VCSelectContainerEvent: any; blurTim
   },
 });
 
-Input.props = {
-  inputRef: PropTypes.any,
-  prefixCls: PropTypes.string,
-  id: PropTypes.string,
-  inputElement: PropTypes.any,
-  disabled: PropTypes.looseBool,
-  autofocus: PropTypes.looseBool,
-  autocomplete: PropTypes.string,
-  editable: PropTypes.looseBool,
-  accessibilityIndex: PropTypes.number,
-  value: PropTypes.string,
-  open: PropTypes.looseBool,
-  tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  /** Pass accessibility props to input */
-  attrs: PropTypes.object,
-  onKeydown: PropTypes.func,
-  onMousedown: PropTypes.func,
-  onChange: PropTypes.func,
-  onPaste: PropTypes.func,
-  onCompositionstart: PropTypes.func,
-  onCompositionend: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-};
+// Input.props = {
+//   inputRef: PropTypes.any,
+//   prefixCls: PropTypes.string,
+//   id: PropTypes.string,
+//   inputElement: PropTypes.any,
+//   disabled: PropTypes.looseBool,
+//   autofocus: PropTypes.looseBool,
+//   autocomplete: PropTypes.string,
+//   editable: PropTypes.looseBool,
+//   accessibilityIndex: PropTypes.number,
+//   value: PropTypes.string,
+//   open: PropTypes.looseBool,
+//   tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+//   /** Pass accessibility props to input */
+//   attrs: PropTypes.object,
+//   onKeydown: PropTypes.func,
+//   onMousedown: PropTypes.func,
+//   onChange: PropTypes.func,
+//   onPaste: PropTypes.func,
+//   onCompositionstart: PropTypes.func,
+//   onCompositionend: PropTypes.func,
+//   onFocus: PropTypes.func,
+//   onBlur: PropTypes.func,
+// };
 
 export default Input;

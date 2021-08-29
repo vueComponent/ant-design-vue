@@ -1,87 +1,39 @@
 <template>
-  <a-space direction="vertical" style="width: 100%">
-    <a-tree-select
-      v-model:value="value"
-      show-search
-      style="width: 100%"
-      :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
-      placeholder="Please select"
-      allow-clear
-      tree-default-expand-all
-      :tree-data="treeData"
-    >
-      <template #suffixIcon><SmileOutlined /></template>
-    </a-tree-select>
-
-    <a-tree-select
-      v-model:value="value1"
-      show-search
-      style="width: 100%"
-      :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
-      placeholder="Please select"
-      allow-clear
-      multiple
-      show-arrow
-      tree-default-expand-all
-      :tree-data="treeData"
-    >
-      <template #suffixIcon><SmileOutlined /></template>
-    </a-tree-select>
-  </a-space>
+  <div>
+    <demo />
+  </div>
 </template>
-<script lang="ts">
-import { SmileOutlined } from '@ant-design/icons-vue';
-import { TreeSelectProps } from 'ant-design-vue';
-import { defineComponent, ref, watch } from 'vue';
-
+<script>
+import { defineComponent } from 'vue';
+import demo from '../v2-doc/src/docs/pagination/demo/index.vue';
+// import Affix from '../components/affix';
 export default defineComponent({
   components: {
-    SmileOutlined,
+    demo,
+    // Affix,
   },
-  setup() {
-    const value = ref<string[]>([]);
-    const value1 = ref<string[]>([]);
-    const treeData = ref<TreeSelectProps['treeData']>([
-      {
-        title: 'parent 1',
-        value: 'parent 1',
-        children: [
-          {
-            title: 'parent 1-0',
-            value: 'parent 1-0',
-            children: [
-              {
-                title: 'my leaf',
-                value: 'leaf1',
-              },
-              {
-                title: 'your leaf',
-                value: 'leaf2',
-              },
-            ],
-          },
-          {
-            title: 'parent 1-1',
-            value: 'parent 1-1',
-          },
-        ],
-      },
-    ]);
-    watch(value, () => {
-      console.log('select', value.value);
-    });
-
+  data() {
     return {
-      value,
-      value1,
-      treeData,
+      visible: false,
+      pStyle: {
+        fontSize: '16px',
+        color: 'rgba(0,0,0,0.85)',
+        lineHeight: '24px',
+        display: 'block',
+        marginBottom: '16px',
+      },
+      pStyle2: {
+        marginBottom: '24px',
+      },
     };
+  },
+  methods: {
+    showDrawer() {
+      this.visible = true;
+    },
+    onClose() {
+      this.visible = false;
+    },
   },
 });
 </script>
-<style>
-.ant-select-dropdown {
-  /* top: 140px !important;
-  left: 50px !important; */
-}
-</style>

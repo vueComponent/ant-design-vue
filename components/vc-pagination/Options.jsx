@@ -12,7 +12,7 @@ export default {
     quickGo: PropTypes.func,
     selectComponentClass: PropTypes.any,
     current: PropTypes.number,
-    pageSizeOptions: PropTypes.array.def(['10', '20', '30', '40']),
+    pageSizeOptions: PropTypes.array.def(['10', '20', '50', '100']),
     pageSize: PropTypes.number,
     buildOptionText: PropTypes.func,
     locale: PropTypes.object,
@@ -27,8 +27,8 @@ export default {
   },
   methods: {
     getValidValue() {
-      const { goInputText, current } = this;
-      return !goInputText || isNaN(goInputText) ? current : Number(goInputText);
+      const { goInputText } = this;
+      return !goInputText || isNaN(goInputText) ? undefined : Number(goInputText);
     },
     defaultBuildOptionText(opt) {
       return `${opt.value} ${this.locale.items_per_page}`;
@@ -42,13 +42,18 @@ export default {
     },
     handleBlur(e) {
       const { goButton, quickGo, rootPrefixCls } = this.$props;
-      if (goButton) {
+
+      const { goInputText } = this.$data;
+      if (goButton || goInputText === '') {
         return;
       }
+      this.setState({
+        goInputText: '',
+      });
       if (
         e.relatedTarget &&
-        (e.relatedTarget.className.indexOf(`${rootPrefixCls}-prev`) >= 0 ||
-          e.relatedTarget.className.indexOf(`${rootPrefixCls}-next`) >= 0)
+        (e.relatedTarget.className.indexOf(`${rootPrefixCls}-item-link`) >= 0 ||
+          e.relatedTarget.className.indexOf(`${rootPrefixCls}-item`) >= 0)
       ) {
         return;
       }
@@ -67,6 +72,19 @@ export default {
         });
       }
     },
+    getPageSizeOptions() {
+      const { pageSize, pageSizeOptions } = this.$props;
+      if (pageSizeOptions.some(option => option.toString() === pageSize.toString())) {
+        return pageSizeOptions;
+      }
+      return pageSizeOptions.concat([pageSize.toString()]).sort((a, b) => {
+        // eslint-disable-next-line no-restricted-globals
+        const numberA = isNaN(Number(a)) ? 0 : Number(a);
+        // eslint-disable-next-line no-restricted-globals
+        const numberB = isNaN(Number(b)) ? 0 : Number(b);
+        return numberA - numberB;
+      });
+    },
   },
   render() {
     const {
@@ -79,7 +97,6 @@ export default {
       defaultBuildOptionText,
       selectPrefixCls,
       pageSize,
-      pageSizeOptions,
       goInputText,
       disabled,
     } = this;
@@ -91,6 +108,8 @@ export default {
     if (!changeSize && !quickGo) {
       return null;
     }
+
+    const pageSizeOptions = this.getPageSizeOptions();
 
     if (changeSize && Select) {
       const buildOptionText = this.buildOptionText || defaultBuildOptionText;
@@ -120,7 +139,13 @@ export default {
       if (goButton) {
         gotoButton =
           typeof goButton === 'boolean' ? (
-            <button type="button" onClick={this.go} onKeyup={this.go} disabled={disabled}>
+            <button
+              type="button"
+              onClick={this.go}
+              onKeyup={this.go}
+              disabled={disabled}
+              class={`${prefixCls}-quick-jumper-button`}
+            >
               {locale.jump_to_confirm}
             </button>
           ) : (

@@ -49,7 +49,11 @@ export default {
         class={cls}
         style={style}
       >
-        {this.itemRender({ page: this.page, type: 'page', originalElement: <a>{this.page}</a> })}
+        {this.itemRender({
+          page: this.page,
+          type: 'page',
+          originalElement: <a rel="nofollow">{this.page}</a>,
+        })}
       </li>
     );
   },

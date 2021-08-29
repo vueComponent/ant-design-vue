@@ -43,7 +43,7 @@ export const imageProps = {
     PropTypes.shape({
       visible: PropTypes.bool,
       onVisibleChange: PropTypes.func,
-      getContainer: PropTypes.oneOf([PropTypes.func, PropTypes.bool]),
+      getContainer: PropTypes.oneOfType([PropTypes.func, PropTypes.looseBool, PropTypes.string]),
     }).loose,
   ]).def(true),
 };

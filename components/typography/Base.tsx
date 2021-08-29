@@ -30,6 +30,7 @@ import {
 } from 'vue';
 import type { AutoSizeType } from '../input/ResizableTextArea';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import type { EventHandler } from '../_util/EventInterface';
 
 export type BaseType = 'secondary' | 'success' | 'warning' | 'danger';
 
@@ -58,7 +59,7 @@ export interface EllipsisConfig {
   expandable?: boolean;
   suffix?: string;
   symbol?: string;
-  onExpand?: EventHandlerNonNull;
+  onExpand?: EventHandler;
   onEllipsis?: (ellipsis: boolean) => void;
   tooltip?: boolean;
 }

@@ -6,3 +6,5 @@ export type ChangeEvent = Event & {
     value?: string | undefined;
   };
 };
+
+export type EventHandler = (...args: any[]) => void;

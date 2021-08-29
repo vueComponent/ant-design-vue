@@ -22,6 +22,8 @@ export interface RefOptionListProps {
   onKeyup: (e?: KeyboardEvent) => void;
   scrollTo?: (index: number) => void;
 }
+
+import type { EventHandler } from '../_util/EventInterface';
 export interface OptionListProps<OptionType extends object> {
   prefixCls: string;
   id: string;
@@ -43,10 +45,10 @@ export interface OptionListProps<OptionType extends object> {
   onToggleOpen: (open?: boolean) => void;
   /** Tell Select that some value is now active to make accessibility work */
   onActiveValue: OnActiveValue;
-  onScroll: EventHandlerNonNull;
+  onScroll: EventHandler;
 
   /** Tell Select that mouse enter the popup to force re-render */
-  onMouseenter?: EventHandlerNonNull;
+  onMouseenter?: EventHandler;
 }
 
 const OptionListProps = {
@@ -96,7 +98,7 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
     // =========================== List ===========================
     const listRef = createRef();
 
-    const onListMouseDown: EventHandlerNonNull = event => {
+    const onListMouseDown: EventHandler = event => {
       event.preventDefault();
     };
 

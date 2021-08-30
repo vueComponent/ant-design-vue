@@ -124,7 +124,7 @@ module.exports = {
       'ant-design-vue': path.join(__dirname, './components'),
       vue$: 'vue/dist/vue.runtime.esm-bundler.js',
     },
-    extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue', '.md'],
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.vue', '.md'],
   },
   devServer: {
     historyApiFallback: {

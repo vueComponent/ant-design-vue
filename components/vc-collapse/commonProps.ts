@@ -1,4 +1,7 @@
-import PropTypes from '../../_util/vue-types';
+import type { PropType } from 'vue';
+import PropTypes from '../_util/vue-types';
+
+export type CollapsibleType = 'header' | 'disabled';
 
 const collapseProps = () => ({
   prefixCls: PropTypes.string,
@@ -19,6 +22,7 @@ const collapseProps = () => ({
   openAnimation: PropTypes.object,
   expandIconPosition: PropTypes.oneOf(['left', 'right']),
   onChange: PropTypes.func,
+  collapsible: { type: String as PropType<CollapsibleType> },
 });
 
 const panelProps = () => ({
@@ -34,7 +38,10 @@ const panelProps = () => ({
   forceRender: PropTypes.looseBool,
   expandIcon: PropTypes.func,
   extra: PropTypes.any,
-  panelKey: PropTypes.any,
+  panelKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  collapsible: { type: String as PropType<CollapsibleType> },
+  role: String,
+  onItemClick: { type: Function as PropType<(panelKey: string | number) => void> },
 });
 
 export { collapseProps, panelProps };

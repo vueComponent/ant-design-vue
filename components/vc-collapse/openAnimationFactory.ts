@@ -1,14 +1,14 @@
-import cssAnimation from '../../_util/css-animation';
+import cssAnimation from '../_util/css-animation';
 
-function animate(node, show, transitionName, done) {
-  let height;
+function animate(node: HTMLElement, show: boolean, transitionName: string, done: () => void) {
+  let height: number;
   return cssAnimation(node, transitionName, {
     start() {
       if (!show) {
         node.style.height = `${node.offsetHeight}px`;
       } else {
         height = node.offsetHeight;
-        node.style.height = 0;
+        node.style.height = '0px';
       }
     },
     active() {
@@ -21,12 +21,12 @@ function animate(node, show, transitionName, done) {
   });
 }
 
-function animation(prefixCls) {
+function animation(prefixCls: string) {
   return {
-    onEnter(node, done) {
+    onEnter(node: HTMLElement, done: () => void) {
       return animate(node, true, `${prefixCls}-anim`, done);
     },
-    onLeave(node, done) {
+    onLeave(node: HTMLElement, done: () => void) {
       return animate(node, false, `${prefixCls}-anim`, done);
     },
   };

@@ -1,31 +1,25 @@
 import type { PropType } from 'vue';
+import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 
 export type CollapsibleType = 'header' | 'disabled';
 
+export type ActiveKeyType = Array<string | number> | string | number;
 const collapseProps = () => ({
   prefixCls: PropTypes.string,
-  activeKey: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-  ]),
-  defaultActiveKey: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number,
-    PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-  ]),
+  activeKey: { type: [Array, Number, String] as PropType<ActiveKeyType> },
+  defaultActiveKey: { type: [Array, Number, String] as PropType<ActiveKeyType> },
   accordion: PropTypes.looseBool,
   destroyInactivePanel: PropTypes.looseBool,
   bordered: PropTypes.looseBool,
   expandIcon: PropTypes.func,
   openAnimation: PropTypes.object,
-  expandIconPosition: PropTypes.oneOf(['left', 'right']),
-  onChange: PropTypes.func,
+  expandIconPosition: PropTypes.oneOf(tuple('left', 'right')),
   collapsible: { type: String as PropType<CollapsibleType> },
+  ghost: PropTypes.looseBool,
 });
 
-const panelProps = () => ({
+const collapsePanelProps = () => ({
   openAnimation: PropTypes.object,
   prefixCls: PropTypes.string,
   header: PropTypes.any,
@@ -33,6 +27,7 @@ const panelProps = () => ({
   showArrow: PropTypes.looseBool,
   isActive: PropTypes.looseBool,
   destroyInactivePanel: PropTypes.looseBool,
+  /** @deprecated Use `collapsible="disabled"` instead */
   disabled: PropTypes.looseBool,
   accordion: PropTypes.looseBool,
   forceRender: PropTypes.looseBool,
@@ -44,4 +39,4 @@ const panelProps = () => ({
   onItemClick: { type: Function as PropType<(panelKey: string | number) => void> },
 });
 
-export { collapseProps, panelProps };
+export { collapseProps, collapsePanelProps };

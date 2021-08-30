@@ -1,10 +1,10 @@
 import { defineComponent, ref, watchEffect } from 'vue';
-import { panelProps } from './commonProps';
+import { collapsePanelProps } from './commonProps';
 import classNames from '../_util/classNames';
 
 export default defineComponent({
   name: 'PanelContent',
-  props: panelProps(),
+  props: collapsePanelProps(),
   setup(props, { slots }) {
     const rendered = ref(false);
 

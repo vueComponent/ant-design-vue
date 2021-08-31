@@ -22,7 +22,7 @@ export default defineComponent({
     openClassName: PropTypes.string,
     animation: PropTypes.any,
     align: PropTypes.object,
-    overlayStyle: PropTypes.object.def(() => ({})),
+    overlayStyle: PropTypes.style,
     placement: PropTypes.string.def('bottomLeft'),
     overlay: PropTypes.any,
     trigger: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def(

@@ -16,8 +16,7 @@ export default defineComponent({
     transitionName: PropTypes.string,
     animation: PropTypes.any,
     afterVisibleChange: PropTypes.func.def(() => {}),
-    overlay: PropTypes.any,
-    overlayStyle: PropTypes.object,
+    overlayStyle: PropTypes.style,
     overlayClassName: PropTypes.string,
     prefixCls: PropTypes.string.def('rc-tooltip'),
     mouseEnterDelay: PropTypes.number.def(0.1),
@@ -47,8 +46,8 @@ export default defineComponent({
           key="content"
           prefixCls={prefixCls}
           id={tipId}
-          overlay={getPropsSlot(slots, props, 'overlay')}
           overlayInnerStyle={overlayInnerStyle}
+          v-slots={{ overlay: slots.overlay }}
         />,
       ];
     };

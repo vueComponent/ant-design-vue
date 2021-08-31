@@ -6,12 +6,13 @@ import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { PresetColorTypes } from '../_util/colors';
 import warning from '../_util/warning';
-import { getPropsSlot, getStyle, filterEmpty, isValidElement } from '../_util/props-util';
+import { getStyle, filterEmpty, isValidElement, initDefaultProps } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import type { triggerTypes, placementTypes } from './abstractTooltipProps';
 import abstractTooltipProps from './abstractTooltipProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import getPlacements, { AdjustOverflow, PlacementsConfig } from './placements';
+import firstNotUndefined from '../_util/firstNotUndefined';
 
 export { AdjustOverflow, PlacementsConfig };
 
@@ -40,36 +41,45 @@ const splitObject = (obj: any, keys: string[]) => {
   });
   return { picked, omitted };
 };
-const props = abstractTooltipProps();
 
 const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 
-export const tooltipProps = {
-  ...props,
-  title: PropTypes.VNodeChild,
-};
+export const tooltipProps = () => ({
+  ...abstractTooltipProps(),
+  title: PropTypes.any,
+});
 
 export type TriggerTypes = typeof triggerTypes[number];
 
 export type PlacementTypes = typeof placementTypes[number];
 
-export type TooltipProps = Partial<ExtractPropTypes<typeof tooltipProps>>;
+export type TooltipProps = Partial<ExtractPropTypes<ReturnType<typeof tooltipProps>>>;
 
 export default defineComponent({
   name: 'ATooltip',
   inheritAttrs: false,
-  props: tooltipProps,
+  props: initDefaultProps(tooltipProps(), {
+    trigger: 'hover',
+    transitionName: 'zoom-big-fast',
+    align: () => ({}),
+    placement: 'top',
+    mouseEnterDelay: 0.1,
+    mouseLeaveDelay: 0.1,
+    arrowPointAtCenter: false,
+    autoAdjustOverflow: true,
+  }),
+  slots: ['title'],
   emits: ['update:visible', 'visibleChange'],
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, getTargetContainer } = useConfigInject('tooltip', props);
 
-    const visible = ref(false);
+    const visible = ref(firstNotUndefined([props.visible, props.defaultVisible]));
 
     const tooltip = ref();
 
     onMounted(() => {
       warning(
-        !('default-visible' in attrs) || !('defaultVisible' in attrs),
+        props.defaultVisible === undefined,
         'Tooltip',
         `'defaultVisible' is deprecated, please use 'v-model:visible'`,
       );
@@ -79,11 +89,10 @@ export default defineComponent({
       val => {
         visible.value = !!val;
       },
-      { immediate: true },
     );
 
     const isNoTitle = () => {
-      const title = getPropsSlot(slots, props, 'title');
+      const title = props.title ?? slots.title;
       return !title && title !== 0;
     };
 
@@ -164,8 +173,7 @@ export default defineComponent({
     };
 
     const getOverlay = () => {
-      const title = getPropsSlot(slots, props, 'title');
-      return title ?? '';
+      return props.title ?? slots.title?.();
     };
 
     const onPopupAlign = (domNode: HTMLElement, align: any) => {
@@ -234,7 +242,6 @@ export default defineComponent({
         prefixCls: prefixCls.value,
         getTooltipContainer: getPopupContainer || getTargetContainer.value,
         builtinPlacements: tooltipPlacements.value,
-        overlay: getOverlay(),
         visible: tempVisible,
         ref: tooltip,
         overlayClassName: customOverlayClassName,
@@ -249,6 +256,7 @@ export default defineComponent({
             arrowContent: () => (
               <span class={`${prefixCls.value}-arrow-content`} style={arrowContentStyle}></span>
             ),
+            overlay: getOverlay,
           }}
         >
           {visible.value ? cloneElement(child, { class: childCls }) : child}

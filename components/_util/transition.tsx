@@ -153,6 +153,13 @@ const collapseMotion = (style: Ref<CSSProperties>, className: Ref<string>): CSSM
   };
 };
 
-export { Transition, TransitionGroup, collapseMotion };
+const getTransitionName = (rootPrefixCls: string, motion: string, transitionName?: string) => {
+  if (transitionName !== undefined) {
+    return transitionName;
+  }
+  return `${rootPrefixCls}-${motion}`;
+};
+
+export { Transition, TransitionGroup, collapseMotion, getTransitionName };
 
 export default Transition;

@@ -2,8 +2,8 @@
   <div id="search-box" :class="{ 'narrow-mode': responsive, focused: !!focused }">
     <SearchOutlined />
     <a-input
-      :placeholder="searchPlaceholder"
       ref="inputRef"
+      :placeholder="searchPlaceholder"
       @focus="triggerFocus(true)"
       @blue="triggerFocus(false)"
     ></a-input>
@@ -14,6 +14,9 @@ import { ref, defineComponent } from 'vue';
 import { SearchOutlined } from '@ant-design/icons-vue';
 export default defineComponent({
   name: 'SearchBox',
+  components: {
+    SearchOutlined,
+  },
   props: ['isZhCN', 'responsive'],
   emits: ['triggerFocus'],
   setup(props, { emit }) {
@@ -29,9 +32,6 @@ export default defineComponent({
       triggerFocus,
       searchPlaceholder: props.isZhCN ? '搜索文档' : 'Search Docs',
     };
-  },
-  components: {
-    SearchOutlined,
   },
 });
 </script>

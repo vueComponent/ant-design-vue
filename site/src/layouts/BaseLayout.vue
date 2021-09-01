@@ -1,10 +1,10 @@
 <template>
   <div>
-    <header :name="name" />
+    <HeaderCom :name="name" />
     <div style="padding: 20px; margin: 0 auto; width: 960px">
       <router-view />
     </div>
-    <footer />
+    <FooterCom />
   </div>
 </template>
 
@@ -14,8 +14,8 @@ import Footer from '../components/footer';
 import NProgress from 'nprogress';
 export default {
   components: {
-    Header,
-    Footer,
+    HeaderCom: Header,
+    FooterCom: Footer,
   },
   props: ['name'],
   beforeCreate() {},

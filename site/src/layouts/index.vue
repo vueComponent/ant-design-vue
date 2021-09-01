@@ -4,14 +4,14 @@
     <a-row>
       <template v-if="isMobile">
         <a-drawer
+          key="mobile-menu"
           :closable="false"
           placement="left"
           class="drawer drawer-left"
           :visible="visible"
-          key="mobile-menu"
-          wrapperClassName="drawer-wrapper"
+          wrapper-class-name="drawer-wrapper"
         >
-          <Menu :menus="dataSource" :activeMenuItem="activeMenuItem" :isZhCN="isZhCN" />
+          <Menu :menus="dataSource" :active-menu-item="activeMenuItem" :is-zh-c-n="isZhCN" />
           <template #handle>
             <div class="drawer-handle" @click="handleClickShowButton">
               <close-outlined v-if="visible" :style="iconStyle" />
@@ -24,20 +24,20 @@
         <a-col :xxl="4" :xl="5" :lg="6" :md="6" :sm="24" :xs="24" class="main-menu">
           <a-affix>
             <section class="main-menu-inner">
-              <Sponsors :isCN="isZhCN" />
-              <Menu :menus="dataSource" :activeMenuItem="activeMenuItem" :isZhCN="isZhCN" />
+              <Sponsors :is-c-n="isZhCN" />
+              <Menu :menus="dataSource" :active-menu-item="activeMenuItem" :is-zh-c-n="isZhCN" />
             </section>
           </a-affix>
         </a-col>
       </template>
       <a-col :xxl="20" :xl="19" :lg="18" :md="18" :sm="24" :xs="24">
         <section :class="mainContainerClass">
-          <TopAd :isCN="isZhCN" />
-          <Demo v-if="isDemo" :pageData="pageData" :isZhCN="isZhCN">
+          <TopAd :is-c-n="isZhCN" />
+          <Demo v-if="isDemo" :page-data="pageData" :is-zh-c-n="isZhCN">
             <component :is="matchCom" />
           </Demo>
           <router-view v-else />
-          <a-affix v-if="headers.length" class="toc-affix" :offsetTop="20">
+          <a-affix v-if="headers.length" class="toc-affix" :offset-top="20">
             <a-anchor>
               <a-anchor-link
                 v-for="h in headers"
@@ -52,8 +52,8 @@
           <a-dropdown placement="topCenter">
             <template #overlay>
               <a-menu
+                :selected-keys="[themeMode.theme.value]"
                 @click="({ key }) => themeMode.changeTheme(key)"
-                :selectedKeys="[themeMode.theme.value]"
               >
                 <a-menu-item key="default">{{ $t('app.theme.switch.default') }}</a-menu-item>
                 <a-menu-item key="dark">{{ $t('app.theme.switch.dark') }}</a-menu-item>
@@ -64,16 +64,16 @@
             </a-avatar>
           </a-dropdown>
         </div>
-        <PrevAndNext :menus="menus" :currentMenuIndex="currentMenuIndex" />
+        <PrevAndNext :menus="menus" :current-menu-index="currentMenuIndex" />
         <Footer />
       </a-col>
     </a-row>
-    <RightBottomAd :isCN="isZhCN" :isMobile="isMobile" />
+    <RightBottomAd :is-c-n="isZhCN" :is-mobile="isMobile" />
   </div>
 </template>
 <script lang="ts">
-import { GlobalConfig } from '@/App.vue';
-import { GLOBAL_CONFIG } from '@/SymbolKey';
+import type { GlobalConfig } from '../App.vue';
+import { GLOBAL_CONFIG } from '../SymbolKey';
 import { defineComponent, inject, computed, ref, provide, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import Header from './header/index.vue';
@@ -81,7 +81,7 @@ import Footer from './Footer.vue';
 import Menu from './Menu.vue';
 import PrevAndNext from './PrevAndNext.vue';
 import Demo from './Demo.vue';
-import useMenus from '@/hooks/useMenus';
+import useMenus from '../hooks/useMenus';
 import TopAd from '../components/rice/top_rice.vue';
 import Sponsors from '../components/rice/sponsors.vue';
 import RightBottomAd from '../components/rice/right_bottom_rice.vue';
@@ -90,6 +90,19 @@ import ThemeIcon from './ThemeIcon.vue';
 
 export default defineComponent({
   name: 'Layout',
+  components: {
+    TopAd,
+    Sponsors,
+    RightBottomAd,
+    Demo,
+    Header,
+    Footer,
+    Menu,
+    PrevAndNext,
+    CloseOutlined,
+    MenuOutlined,
+    ThemeIcon,
+  },
   setup() {
     const visible = ref(false);
     const route = useRoute();
@@ -122,9 +135,9 @@ export default defineComponent({
       );
     });
     const matchCom = computed(() => {
-      return route.matched[route.matched.length - 1]?.components?.default as any;
+      return route.matched[route.matched.length - 1]?.components?.default;
     });
-    const isZhCN = globalConfig!.isZhCN;
+    const isZhCN = globalConfig.isZhCN;
     const pageData = computed(() =>
       isDemo.value
         ? matchCom.value[isZhCN.value ? 'CN' : 'US']?.pageData
@@ -150,7 +163,7 @@ export default defineComponent({
     return {
       themeMode,
       visible,
-      isMobile: globalConfig!.isMobile,
+      isMobile: globalConfig.isMobile,
       isZhCN,
       mainContainerClass,
       menus,
@@ -167,19 +180,6 @@ export default defineComponent({
         fontSize: '20px',
       },
     };
-  },
-  components: {
-    TopAd,
-    Sponsors,
-    RightBottomAd,
-    Demo,
-    Header,
-    Footer,
-    Menu,
-    PrevAndNext,
-    CloseOutlined,
-    MenuOutlined,
-    ThemeIcon,
   },
 });
 </script>

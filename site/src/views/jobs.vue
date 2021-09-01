@@ -9,34 +9,40 @@
     </h1>
     <div style="margin-top: 30px">
       <a-list item-layout="vertical" size="large" :data-source="list">
-        <a-list-item v-show="isEffective(item.effectiveTime)" slot="renderItem" slot-scope="item">
-          <a-list-item-meta>
-            <div slot="description">
-              <p>工作地点：{{ item.location }}</p>
-              <h3>职位描述</h3>
-              <p v-html="item.desc" />
-            </div>
-            <div slot="title">
-              <h2>
-                <a :href="item.url" target="_blank">{{ item.company }}</a>
-                <span>{{ item.title }}(岗位 ID: {{ item.id }})</span>
-              </h2>
-            </div>
-          </a-list-item-meta>
-          <template v-slot:actions>
-            <div>
-              <a-tooltip title="发送邮件到：antdv@foxmail.com">
-                <a :href="`mailto:antdv@foxmail.com?subject=应聘 ${item.id} 职位`">
-                  <a-icon type="link" style="margin-right: 8px" />
-                  立刻申请
-                </a>
-              </a-tooltip>
+        <template #renderItem="item">
+          <a-list-item v-show="isEffective(item.effectiveTime)">
+            <a-list-item-meta>
+              <template #description>
+                <div>
+                  <p>工作地点：{{ item.location }}</p>
+                  <h3>职位描述</h3>
+                  <p v-html="item.desc" />
+                </div>
+              </template>
+              <template #title>
+                <div>
+                  <h2>
+                    <a :href="item.url" target="_blank">{{ item.company }}</a>
+                    <span>{{ item.title }}(岗位 ID: {{ item.id }})</span>
+                  </h2>
+                </div>
+              </template>
+            </a-list-item-meta>
+            <template #actions>
+              <div>
+                <a-tooltip title="发送邮件到：antdv@foxmail.com">
+                  <a :href="`mailto:antdv@foxmail.com?subject=应聘 ${item.id} 职位`">
+                    <a-icon type="link" style="margin-right: 8px" />
+                    立刻申请
+                  </a>
+                </a-tooltip>
 
-              <span>注：邮件中请注明投递岗位 ID</span>
-            </div>
-          </template>
-          <p v-html="item.condition" />
-        </a-list-item>
+                <span>注：邮件中请注明投递岗位 ID</span>
+              </div>
+            </template>
+            <p v-html="item.condition" />
+          </a-list-item>
+        </template>
       </a-list>
     </div>
   </div>

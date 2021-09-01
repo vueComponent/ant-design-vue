@@ -1,12 +1,12 @@
 function select(element) {
-  var selectedText;
+  let selectedText;
 
   if (element.nodeName === 'SELECT') {
     element.focus();
 
     selectedText = element.value;
   } else if (element.nodeName === 'INPUT' || element.nodeName === 'TEXTAREA') {
-    var isReadOnly = element.hasAttribute('readonly');
+    let isReadOnly = element.hasAttribute('readonly');
 
     if (!isReadOnly) {
       element.setAttribute('readonly', '');
@@ -25,8 +25,8 @@ function select(element) {
       element.focus();
     }
 
-    var selection = window.getSelection();
-    var range = document.createRange();
+    let selection = window.getSelection();
+    let range = document.createRange();
 
     range.selectNodeContents(element);
     selection.removeAllRanges();

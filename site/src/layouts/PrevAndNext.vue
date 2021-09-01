@@ -1,8 +1,8 @@
 <template>
   <section class="prev-next-nav">
     <router-link
-      key="prev"
       v-if="prev"
+      key="prev"
       class="prev-page"
       :to="getLocalizedPathname(prev.path, isZhCN)"
     >
@@ -25,8 +25,8 @@
       <span v-if="isZhCN" class="chinese">{{ prev.subtitle }}</span>
     </router-link>
     <router-link
-      key="next"
       v-if="next"
+      key="next"
       class="next-page"
       :to="getLocalizedPathname(next.path, isZhCN)"
     >

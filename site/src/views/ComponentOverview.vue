@@ -17,7 +17,7 @@
       v-model:value="search"
       :placeholder="$t('app.components.overview.search')"
       class="components-overview-search"
-      autoFocus
+      auto-focus
     >
       <template #suffix>
         <SearchOutlined />
@@ -64,6 +64,9 @@ import useMenus from '@/hooks/useMenus';
 import { getLocalizedPathname } from '@/utils/util';
 export default defineComponent({
   name: 'ComponentOverview',
+  components: {
+    SearchOutlined,
+  },
   setup() {
     const globalConfig = inject<GlobalConfig>(GLOBAL_CONFIG);
     const search = ref('');
@@ -94,9 +97,6 @@ export default defineComponent({
       inputRef,
       isZhCN: globalConfig?.isZhCN,
     };
-  },
-  components: {
-    SearchOutlined,
   },
 });
 </script>

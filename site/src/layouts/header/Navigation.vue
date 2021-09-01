@@ -1,5 +1,5 @@
 <template>
-  <a-menu class="menu-site" :mode="menuMode" :selectedKeys="[activeMenuItem]" id="nav">
+  <a-menu id="nav" class="menu-site" :mode="menuMode" :selected-keys="[activeMenuItem]">
     <a-menu-item key="docs/vue">
       <router-link :to="getLocalizedPathname('/docs/vue/introduce', isZhCN)">
         {{ $t('app.header.menu.documentation') }}
@@ -49,9 +49,9 @@
   </a-menu>
 </template>
 <script lang="ts">
-import { GlobalConfig } from '@/App.vue';
-import { GLOBAL_CONFIG } from '@/SymbolKey';
-import { getLocalizedPathname } from '@/utils/util';
+import type { GlobalConfig } from '../../App.vue';
+import { GLOBAL_CONFIG } from '../../SymbolKey';
+import { getLocalizedPathname } from '../../utils/util';
 import { computed, defineComponent, inject, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 export default defineComponent({
@@ -59,7 +59,7 @@ export default defineComponent({
   setup() {
     const globalConfig = inject<GlobalConfig>(GLOBAL_CONFIG);
     const menuMode = computed(() => {
-      return globalConfig!.isMobile.value ? 'inline' : 'horizontal';
+      return globalConfig.isMobile.value ? 'inline' : 'horizontal';
     });
     const route = useRoute();
     const activeMenuItem = ref('home');
@@ -82,8 +82,8 @@ export default defineComponent({
       { immediate: true },
     );
     return {
-      isMobile: globalConfig!.isMobile,
-      isZhCN: globalConfig!.isZhCN,
+      isMobile: globalConfig.isMobile,
+      isZhCN: globalConfig.isZhCN,
       getLocalizedPathname,
       menuMode,
       activeMenuItem,

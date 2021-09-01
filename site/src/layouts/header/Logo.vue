@@ -8,13 +8,13 @@
 </template>
 
 <script lang="ts">
-import { GlobalConfig } from '@/App.vue';
-import { GLOBAL_CONFIG } from '@/SymbolKey';
+import type { GlobalConfig } from '../../App.vue';
+import { GLOBAL_CONFIG } from '../../SymbolKey';
 import { defineComponent, inject } from 'vue';
 import logo from '../../assets/logo.svg';
 export default defineComponent({
   setup() {
-    return { logo, isZhCN: inject<GlobalConfig>(GLOBAL_CONFIG)!.isZhCN.value };
+    return { logo, isZhCN: inject<GlobalConfig>(GLOBAL_CONFIG).isZhCN.value };
   },
 });
 </script>

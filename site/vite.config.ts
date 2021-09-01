@@ -4,9 +4,9 @@ import md from '../plugin/md';
 import docs from '../plugin/docs';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 // import { getThemeVariables } from 'ant-design-vue/dist/theme';
-import { additionalData } from './themeConfig';
+// import { additionalData } from './themeConfig';
 import defaultVar from '../scripts/default-vars';
-import compact from '../scripts/compact-vars';
+// import compact from '../scripts/compact-vars';
 // import dark from '../scripts/dark-vars';
 /**
  * @type {import('vite').UserConfig}

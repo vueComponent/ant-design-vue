@@ -1,10 +1,10 @@
-var DOCUMENT_NODE_TYPE = 9;
+let DOCUMENT_NODE_TYPE = 9;
 
 /**
  * A polyfill for Element.matches()
  */
 if (typeof Element !== 'undefined' && !Element.prototype.matches) {
-  var proto = Element.prototype;
+  let proto = Element.prototype;
 
   proto.matches =
     proto.matchesSelector ||

@@ -4,7 +4,7 @@
     v-clipboard:success="onCopied"
     :class="justCopied === type ? 'copied' : ''"
   >
-    <component v-bind:is="allIcons[name]"></component>
+    <component :is="allIcons[name]"></component>
     <span class="anticon-class">
       <a-badge :dot="isNew">
         {{ type }}

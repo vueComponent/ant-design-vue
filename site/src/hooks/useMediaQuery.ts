@@ -52,7 +52,7 @@ export const getScreenClassName = () => {
     }
     return false;
   });
-  className = (mediaQueryKey as unknown) as MediaQueryKey;
+  className = mediaQueryKey as unknown as MediaQueryKey;
   return className;
 };
 

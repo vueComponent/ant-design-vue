@@ -1,5 +1,6 @@
 import { groupBy, sortBy } from 'lodash-es';
-import { computed, ComputedRef, inject } from 'vue';
+import type { ComputedRef } from 'vue';
+import { computed, inject } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { GLOBAL_CONFIG } from '../SymbolKey';
 const typeOrder: any = {

@@ -13,15 +13,15 @@ const generateId = (() => {
 })();
 
 export default {
-  typeName: 'LoginTab', // 标志位 用来判断是不是自定义组件
+  typeName: 'LoginTab',
+  inject: {
+    loginContext: { default: () => ({ tabUtil: {} }) },
+  }, // 标志位 用来判断是不是自定义组件
   props: {
     active: Boolean,
     destroyInactiveTabPane: Boolean,
     rootPrefixCls: String,
     tab: String,
-  },
-  inject: {
-    loginContext: { default: () => ({ tabUtil: {} }) },
   },
   data() {
     return {

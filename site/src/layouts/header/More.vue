@@ -10,7 +10,7 @@
         }"
       />
     </a-button>
-    <template v-slot:overlay>
+    <template #overlay>
       <Ecosystem />
     </template>
   </a-dropdown>
@@ -18,12 +18,16 @@
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue';
 import { DownOutlined } from '@ant-design/icons-vue';
-import { GlobalConfig } from '@/App.vue';
-import { GLOBAL_CONFIG } from '@/SymbolKey';
-import { getLocalizedPathname } from '@/utils/util';
+import type { GlobalConfig } from '../../App.vue';
+import { GLOBAL_CONFIG } from '../../SymbolKey';
+import { getLocalizedPathname } from '../../utils/util';
 import Ecosystem from './Ecosystem.vue';
 
 export default defineComponent({
+  components: {
+    DownOutlined,
+    Ecosystem,
+  },
   props: {
     isRTL: {
       type: Boolean,
@@ -34,13 +38,9 @@ export default defineComponent({
     const downstyle = computed(() => (props.isRTL ? '-1px 2px 0 0' : '-1px 0 0 2px'));
     return {
       downstyle,
-      isZhCN: inject<GlobalConfig>(GLOBAL_CONFIG)!.isZhCN.value,
+      isZhCN: inject<GlobalConfig>(GLOBAL_CONFIG).isZhCN.value,
       getLocalizedPathname,
     };
-  },
-  components: {
-    DownOutlined,
-    Ecosystem,
   },
 });
 </script>

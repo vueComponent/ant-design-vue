@@ -26,7 +26,7 @@
       <a-menu-item key="wechat">
         <a-popover placement="right">
           <a>{{ isZhCN ? '微信' : 'WeChat' }}</a>
-          <template v-slot:content>
+          <template #content>
             <img width="160" height="160" alt="wechat" src="https://qn.antdv.com/wechat.jpeg" />
           </template>
         </a-popover>
@@ -42,9 +42,9 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, inject } from 'vue';
-import { GlobalConfig } from '@/App.vue';
-import { GLOBAL_CONFIG } from '@/SymbolKey';
-import { getLocalizedPathname } from '@/utils/util';
+import { GlobalConfig } from '../../App.vue';
+import { GLOBAL_CONFIG } from '../../SymbolKey';
+import { getLocalizedPathname } from '../../utils/util';
 
 export default defineComponent({
   props: {
@@ -57,7 +57,7 @@ export default defineComponent({
     const downstyle = computed(() => (props.isRTL ? '-1px 2px 0 0' : '-1px 0 0 2px'));
     return {
       downstyle,
-      isZhCN: inject<GlobalConfig>(GLOBAL_CONFIG)!.isZhCN.value,
+      isZhCN: inject<GlobalConfig>(GLOBAL_CONFIG).isZhCN.value,
       getLocalizedPathname,
     };
   },

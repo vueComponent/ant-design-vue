@@ -18,11 +18,11 @@ import { defineComponent } from 'vue';
 import Icon from '@ant-design/icons-vue';
 export default defineComponent({
   name: 'ThemeIcon',
-  setup() {
-    return {};
-  },
   components: {
     Icon,
+  },
+  setup() {
+    return {};
   },
 });
 </script>

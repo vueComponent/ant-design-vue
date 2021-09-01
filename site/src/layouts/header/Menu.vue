@@ -8,17 +8,17 @@
       key="version"
       class="version"
       size="small"
-      :defaultValue="antdVersion"
-      :getPopupContainer="trigger => trigger.parentNode"
+      :default-value="antdVersion"
+      :get-popup-container="trigger => trigger.parentNode"
     >
       <a-select-option :value="antdVersion">{{ antdVersion }}</a-select-option>
       <a-select-option value="1.x" @click="changeVersion">1.x</a-select-option>
     </a-select>
     <a-button
-      size="small"
-      @click="onLangChange"
-      class="header-button header-lang-button"
       key="lang-button"
+      size="small"
+      class="header-button header-lang-button"
+      @click="onLangChange"
     >
       {{ $t('app.header.lang') }}
     </a-button>
@@ -37,6 +37,12 @@ import { isZhCN, isLocalStorageNameSupported, getLocalizedPathname } from '@/uti
 import { useRoute } from 'vue-router';
 export default defineComponent({
   name: 'HeaderMenu',
+  components: {
+    Navigation,
+    Github,
+    More,
+    Ecosystem,
+  },
   props: ['isMobile'],
   setup() {
     const antdVersion = ref(version);
@@ -68,12 +74,6 @@ export default defineComponent({
       antdVersion,
       changeVersion,
     };
-  },
-  components: {
-    Navigation,
-    Github,
-    More,
-    Ecosystem,
   },
 });
 </script>

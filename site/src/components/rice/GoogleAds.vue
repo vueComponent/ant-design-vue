@@ -1,5 +1,5 @@
 <template>
-  <div v-if="false" class="google-ads" id="API">
+  <div v-if="false" id="API" class="google-ads">
     <ins
       ref="ins"
       class="adsbygoogle"

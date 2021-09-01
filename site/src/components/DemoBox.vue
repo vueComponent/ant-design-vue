@@ -2,7 +2,7 @@
   <template v-if="inIframe">
     <div :id="sectionId"><slot /></div>
   </template>
-  <section v-else class="code-box" :id="sectionId">
+  <section v-else :id="sectionId" class="code-box">
     <section class="code-box-demo">
       <template v-if="iframeDemo[iframeDemoKey]">
         <div class="browser-mockup with-url">
@@ -35,10 +35,10 @@
           @visibleChange="onCopyTooltipVisibleChange"
         >
           <component
+            :is="copied && copyTooltipVisible ? 'CheckOutlined' : 'SnippetsOutlined'"
             key="copy"
             v-clipboard:copy="type === 'TS' ? sourceCode : jsSourceCode"
             v-clipboard:success="handleCodeCopied"
-            :is="copied && copyTooltipVisible ? 'CheckOutlined' : 'SnippetsOutlined'"
             class="code-box-code-copy code-box-code-action"
           />
         </a-tooltip>
@@ -81,13 +81,17 @@
 </template>
 
 <script lang="ts">
-import { GlobalConfig } from '@/App.vue';
-import { GLOBAL_CONFIG } from '@/SymbolKey';
+import type { GlobalConfig } from '../App.vue';
+import { GLOBAL_CONFIG } from '../SymbolKey';
 import { computed, defineComponent, inject, onMounted, ref } from 'vue';
 import { CheckOutlined, SnippetsOutlined } from '@ant-design/icons-vue';
 import { Modal } from 'ant-design-vue';
 export default defineComponent({
   name: 'DemoBox',
+  components: {
+    CheckOutlined,
+    SnippetsOutlined,
+  },
   props: {
     jsfiddle: Object,
   },
@@ -105,7 +109,7 @@ export default defineComponent({
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     const addDemosInfo: any = inject('addDemosInfo', () => {});
 
-    const globalConfig = inject<GlobalConfig>(GLOBAL_CONFIG)!;
+    const globalConfig = inject<GlobalConfig>(GLOBAL_CONFIG);
     const title = computed(
       () =>
         props.jsfiddle &&
@@ -199,10 +203,6 @@ export default defineComponent({
       sourceCode: decodeURIComponent(escape(window.atob(props.jsfiddle?.sourceCode))),
       jsSourceCode: decodeURIComponent(escape(window.atob(props.jsfiddle?.jsSourceCode))),
     };
-  },
-  components: {
-    CheckOutlined,
-    SnippetsOutlined,
   },
 });
 </script>

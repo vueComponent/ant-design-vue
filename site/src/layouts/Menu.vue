@@ -1,9 +1,9 @@
 <template>
   <a-menu
-    :inlineIndent="30"
+    :inline-indent="30"
     class="aside-container menu-site"
     mode="inline"
-    :selectedKeys="[activeMenuItem]"
+    :selected-keys="[activeMenuItem]"
   >
     <a-menu-item v-if="showOverview" key="/components/overview">
       <router-link :to="getLocalizedPathname('/components/overview', isZhCN)">

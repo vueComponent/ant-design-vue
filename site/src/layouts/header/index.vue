@@ -1,6 +1,6 @@
 <template>
   <header id="header" :class="headerClassName">
-    <div class="adblock-banner" v-if="visibleAdblockBanner">
+    <div v-if="visibleAdblockBanner" class="adblock-banner">
       <template v-if="isZhCN">
         我们检测到你可能使用了 AdBlock 或 Adblock
         Plus，它会影响到正常功能的使用（如复制、展开代码等）。
@@ -17,15 +17,15 @@
       <CloseOutlined class="close-icon" @click="visibleAdblockBanner = false" />
     </div>
     <a-popover
-      overlayClassName="popover-menu"
+      v-model:visible="menuVisible"
+      overlay-class-name="popover-menu"
       placement="bottomRight"
       trigger="click"
-      arrowPointAtCenter
-      v-model:visible="menuVisible"
+      arrow-point-at-center
     >
       <UnorderedListOutlined class="nav-phone-icon" />
-      <template v-slot:content>
-        <Menu :isMobile="isMobile" />
+      <template #content>
+        <Menu :is-mobile="isMobile" />
       </template>
     </a-popover>
     <a-row :style="{ flexFlow: 'nowrap', height: 64 }">
@@ -35,7 +35,7 @@
       <a-col v-bind="colProps[1]" class="menu-row">
         <SearchBox
           key="search"
-          :isZhCN="isZhCN"
+          :is-zh-c-n="isZhCN"
           :responsive="responsive"
           @triggerFocus="onTriggerSearching"
         />
@@ -45,16 +45,23 @@
   </header>
 </template>
 <script lang="ts">
-import { GlobalConfig } from '@/App.vue';
-import { GLOBAL_CONFIG } from '@/SymbolKey';
-import { getLocalizedPathname } from '@/utils/util';
-import { computed, defineComponent, inject, onMounted, Ref, ref, watch } from 'vue';
+import type { GlobalConfig } from '../../App.vue';
+import { GLOBAL_CONFIG } from '../../SymbolKey';
+import { getLocalizedPathname } from '../../utils/util';
+import { computed, defineComponent, inject, onMounted, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import Logo from './Logo.vue';
 import Menu from './Menu.vue';
 import { UnorderedListOutlined, CloseOutlined } from '@ant-design/icons-vue';
 import SearchBox from './SearchBox.vue';
 export default defineComponent({
+  components: {
+    Logo,
+    Menu,
+    UnorderedListOutlined,
+    SearchBox,
+    CloseOutlined,
+  },
   setup() {
     const route = useRoute();
     const globalConfig = inject<GlobalConfig>(GLOBAL_CONFIG);
@@ -92,7 +99,7 @@ export default defineComponent({
         apiKey: '92003c1d1d07beef165b08446f4224a3',
         indexName: 'antdv',
         inputSelector: '#search-box input',
-        algoliaOptions: { facetFilters: [`tags:${globalConfig!.isZhCN.value ? 'cn' : 'en'}`] },
+        algoliaOptions: { facetFilters: [`tags:${globalConfig.isZhCN.value ? 'cn' : 'en'}`] },
         transformData(hits: any[]) {
           hits.forEach(hit => {
             hit.url = hit.url.replace('www.antdv.com', window.location.host);
@@ -109,13 +116,13 @@ export default defineComponent({
       });
     });
     const visibleAdblockBanner = ref(false);
-    watch(globalConfig?.blocked as Ref<boolean>, val => {
+    watch(globalConfig?.blocked, val => {
       visibleAdblockBanner.value = val;
     });
     return {
-      isZhCN: globalConfig!.isZhCN,
-      isMobile: globalConfig!.isMobile,
-      responsive: globalConfig!.responsive,
+      isZhCN: globalConfig.isZhCN,
+      isMobile: globalConfig.isMobile,
+      responsive: globalConfig.responsive,
       getLocalizedPathname,
       visibleAdblockBanner,
       headerClassName: {
@@ -126,13 +133,6 @@ export default defineComponent({
       menuVisible,
       onTriggerSearching,
     };
-  },
-  components: {
-    Logo,
-    Menu,
-    UnorderedListOutlined,
-    SearchBox,
-    CloseOutlined,
   },
 });
 </script>

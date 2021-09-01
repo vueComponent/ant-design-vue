@@ -13,12 +13,6 @@
 </template>
 <script>
 export default {
-  props: {
-    defaultActiveKey: {
-      type: String,
-      default: '',
-    },
-  },
   provide() {
     const { tabs, form } = this;
     return {
@@ -43,6 +37,12 @@ export default {
       },
     };
   },
+  props: {
+    defaultActiveKey: {
+      type: String,
+      default: '',
+    },
+  },
   data() {
     return {
       type: this.defaultActiveKey,
@@ -52,7 +52,7 @@ export default {
   },
   computed: {
     children() {
-      const children = this.$slots.default;
+      const children = this.$slots.default();
       const tabChildren = [];
       const otherChildren = [];
 

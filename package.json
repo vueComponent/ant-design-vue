@@ -42,6 +42,8 @@
     "pretty-quick": "pretty-quick",
     "dist": "node --max_old_space_size=8192 antd-tools/cli/run.js dist",
     "lint": "eslint -c ./.eslintrc.js --fix --ext .jsx,.js,.ts,.tsx ./components",
+    "lint:demo": "eslint -c ./.eslintrc.js --fix --ext .vue ./components",
+    "lint:site": "eslint -c ./.eslintrc.js --fix --ext .jsx,.js,.ts,.tsx,vue ./site",
     "lint:style": "stylelint \"{site,components}/**/*.less\" --syntax less",
     "codecov": "codecov",
     "routes": "node site/scripts/genrateRoutes.js"

@@ -82,7 +82,7 @@ export default defineComponent({
       return (
         <ButtonGroup {...restProps} class={classNames(prefixCls.value, className)}>
           {slots.leftButton ? slots.leftButton({ button: leftButton }) : leftButton}
-          <Dropdown {...dropdownProps} v-slots={{ overlay: slots.overlay }}>
+          <Dropdown {...dropdownProps} v-slots={{ overlay: () => overlay }}>
             {slots.rightButton ? slots.rightButton({ button: rightButton }) : rightButton}
           </Dropdown>
         </ButtonGroup>

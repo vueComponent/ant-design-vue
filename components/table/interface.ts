@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType, UnwrapRef } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import { paginationProps as getPaginationProps, paginationConfig } from '../pagination';
-import { getSpinProps } from '../spin';
+import { spinProps } from '../spin';
 import { tuple } from '../_util/type';
 
 const PaginationProps = getPaginationProps();
@@ -140,7 +140,7 @@ export const tableProps = {
   expandIconAsCell: PropTypes.looseBool,
   expandIconColumnIndex: PropTypes.number,
   expandRowByClick: PropTypes.looseBool,
-  loading: PropTypes.oneOfType([PropTypes.shape(getSpinProps()).loose, PropTypes.looseBool]),
+  loading: PropTypes.oneOfType([PropTypes.shape(spinProps()).loose, PropTypes.looseBool]),
   locale: TableLocale,
   indentSize: PropTypes.number,
   customRow: PropTypes.func,

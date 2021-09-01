@@ -5,5 +5,5 @@ import generateCalendar, { CalendarProps } from './generateCalendar';
 
 const Calendar = generateCalendar<Dayjs>(generateConfig);
 
-export { CalendarProps };
+export type { CalendarProps };
 export default withInstall(Calendar);

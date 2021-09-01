@@ -12,7 +12,7 @@ module.exports = {
     parser: 'babel-eslint',
   },
   extends: ['plugin:vue/vue3-recommended', 'prettier'],
-  plugins: ['markdown', 'jest', '@typescript-eslint', 'eslint-plugin-no-explicit-type-exports'],
+  plugins: ['markdown', 'jest', '@typescript-eslint'],
   overrides: [
     {
       files: ['**/demo/*.md'],
@@ -28,10 +28,9 @@ module.exports = {
         project: './tsconfig.json',
       },
       rules: {
-        'no-explicit-type-exports/no-explicit-type-exports': 2,
         '@typescript-eslint/no-explicit-any': 0,
         '@typescript-eslint/ban-types': 0,
-        '@typescript-eslint/consistent-type-imports': 1,
+        '@typescript-eslint/consistent-type-imports': 'error',
         '@typescript-eslint/explicit-module-boundary-types': 0,
         '@typescript-eslint/no-empty-function': 0,
         '@typescript-eslint/no-non-null-assertion': 0,

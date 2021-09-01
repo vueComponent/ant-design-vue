@@ -1,7 +1,10 @@
 import Picker, { PickerProps } from './Picker';
-import PickerPanel, { PickerPanelProps } from './PickerPanel';
-import RangePicker, { RangePickerProps } from './RangePicker';
+import PickerPanel from './PickerPanel';
+import RangePicker from './RangePicker';
+import type { PickerPanelProps } from './PickerPanel';
+import type { RangePickerProps } from './RangePicker';
 
-export { PickerPanel, RangePicker, PickerProps, PickerPanelProps, RangePickerProps };
+export { PickerPanel, RangePicker };
+export type { PickerProps, PickerPanelProps, RangePickerProps };
 
 export default Picker;

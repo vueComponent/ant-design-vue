@@ -19,7 +19,7 @@ import type { Breakpoint } from '../_util/responsiveObserve';
 import { responsiveArray } from '../_util/responsiveObserve';
 
 export { ListItemProps } from './Item';
-export { ListItemMetaProps } from './ItemMeta';
+export type { ListItemMetaProps } from './ItemMeta';
 
 export type ColumnType = 'gutter' | 'column' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 

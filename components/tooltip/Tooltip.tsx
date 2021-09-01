@@ -11,10 +11,9 @@ import { cloneElement } from '../_util/vnode';
 import type { triggerTypes, placementTypes } from './abstractTooltipProps';
 import abstractTooltipProps from './abstractTooltipProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
-import getPlacements, { AdjustOverflow, PlacementsConfig } from './placements';
+import getPlacements from './placements';
 import firstNotUndefined from '../_util/firstNotUndefined';
-
-export { AdjustOverflow, PlacementsConfig };
+export type { AdjustOverflow, PlacementsConfig } from './placements';
 
 export type TooltipPlacement = typeof placementTypes[number];
 

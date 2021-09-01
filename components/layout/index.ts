@@ -2,8 +2,8 @@ import type { App, Plugin } from 'vue';
 import Layout from './layout';
 import Sider from './Sider';
 
-export { BasicProps as LayoutProps } from './layout';
-export { SiderProps } from './Sider';
+export type { BasicProps as LayoutProps } from './layout';
+export type { SiderProps } from './Sider';
 
 Layout.Sider = Sider;
 

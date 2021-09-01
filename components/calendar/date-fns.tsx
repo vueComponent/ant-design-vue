@@ -4,5 +4,5 @@ import generateCalendar, { CalendarProps } from './generateCalendar';
 
 const Calendar = generateCalendar<Date>(generateConfig);
 
-export { CalendarProps };
+export type { CalendarProps };
 export default withInstall(Calendar);

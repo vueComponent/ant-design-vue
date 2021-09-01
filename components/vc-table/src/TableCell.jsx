@@ -54,7 +54,7 @@ export default {
       component: BodyCell,
     } = this;
     const fixedInfoList = this.store.fixedInfoList || [];
-    const fixedInfo = fixedInfoList[this.colIndex];
+    const fixedInfo = fixedInfoList[this.colIndex] || {};
     const { fixLeft, fixRight, firstFixLeft, lastFixLeft, firstFixRight, lastFixRight } = fixedInfo;
     // ====================== Fixed =======================
     const fixedStyle = {};

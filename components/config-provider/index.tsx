@@ -1,7 +1,8 @@
 import type { PropType, ExtractPropTypes, UnwrapRef } from 'vue';
 import { reactive, provide, defineComponent, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
-import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
+import defaultRenderEmpty from './renderEmpty';
+import type { RenderEmptyHandler } from './renderEmpty';
 import type { Locale } from '../locale-provider';
 import LocaleProvider, { ANT_MARK } from '../locale-provider';
 import type { TransformCellTextProps } from '../table/interface';
@@ -15,7 +16,7 @@ export interface CSPConfig {
   nonce?: string;
 }
 
-export { RenderEmptyHandler };
+export type { RenderEmptyHandler };
 
 export type Direction = 'ltr' | 'rtl';
 

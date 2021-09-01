@@ -7,11 +7,12 @@
     "jest": true,
     "es6": true
   },
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "parser": "babel-eslint"
   },
   "extends": ["plugin:vue/vue3-recommended", "prettier"],
-  "plugins": ["markdown", "jest"],
+  "plugins": ["markdown", "jest", "@typescript-eslint", "eslint-plugin-no-explicit-type-exports"],
   "overrides": [
     {
       "files": ["**/demo/*.md"],
@@ -27,7 +28,11 @@
         "@vue/prettier",
         "@vue/prettier/@typescript-eslint"
       ],
+      "parserOptions": {
+        "project": "./tsconfig.json"
+      },
       "rules": {
+        "no-explicit-type-exports/no-explicit-type-exports": 2,
         "@typescript-eslint/no-explicit-any": 0,
         "@typescript-eslint/ban-types": 0,
         "@typescript-eslint/consistent-type-imports": 1,

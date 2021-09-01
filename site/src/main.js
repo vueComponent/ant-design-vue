@@ -1,4 +1,4 @@
-import 'ant-design-vue/dist/antd.less';
+import '../../components/style';
 import 'docsearch.js/dist/cdn/docsearch.css';
 import './index.less';
 import 'nprogress/nprogress.css';
@@ -18,11 +18,11 @@ const app = createApp(App);
 
 app.use(Antd);
 app.use(clipboard);
-app.component('transition', Transition);
-app.component('transition-group', TransitionGroup);
-app.component('demo-box', demoBox);
-app.component('demo-container', demoContainer);
-app.component('demo-sort', demoSort);
+app.component('Transition', Transition);
+app.component('TransitionGroup', TransitionGroup);
+app.component('DemoBox', demoBox);
+app.component('DemoContainer', demoContainer);
+app.component('DemoSort', demoSort);
 app.component('VNodes', function (_, { attrs: { value } }) {
   return value;
 });

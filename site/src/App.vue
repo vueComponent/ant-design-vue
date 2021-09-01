@@ -10,8 +10,8 @@ import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import useMediaQuery from './hooks/useMediaQuery';
 import { GLOBAL_CONFIG } from './SymbolKey';
-import enUS from 'ant-design-vue/es/locale/en_US';
-import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import enUS from '../../components/locale/en_US';
+import zhCN from '../../components/locale/zh_CN';
 import dayjs from 'dayjs';
 import 'dayjs/locale/zh-cn';
 function isZhCN(name: string) {

@@ -1,5 +1,6 @@
 <template>
   <article>
+    hello
     <section class="markdown">
       <h1>
         {{ frontmatter.title }}
@@ -11,7 +12,7 @@
       <h2>{{ $t('app.component.examples') }}</h2>
     </section>
     <slot />
-    <GoogleAds v-if="showAd" :key="`goo-${route.path}`" />
+    <!-- <GoogleAds v-if="showAd" :key="`goo-${route.path}`" /> -->
     <section class="markdown api-container" v-html="api"></section>
   </article>
 </template>

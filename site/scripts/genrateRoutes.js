@@ -6,12 +6,12 @@ const matter = require('gray-matter');
 const { CLIEngine } = require('eslint');
 
 (async () => {
-  const paths = await globby('src/docs/*/index.*.md');
+  const paths = await globby('components/*/index.*.md');
   const components = {};
 
   paths.forEach(path => {
     const content = fs.readFileSync(path).toString();
-    const componentName = path.split('/')[2];
+    const componentName = path.split('/')[1];
 
     if (componentName !== 'color-picker') {
       const { data } = matter(content);
@@ -25,7 +25,7 @@ export default [
   {
     path: '${component}:lang(-cn)?',
     meta: ${JSON.stringify(components[component])},
-    component: () => import('../docs/${component}/demo/index.vue'),
+    component: () => import('../../../components/${component}/demo/index.vue'),
   }`,
   )}
 ];`;
@@ -38,5 +38,5 @@ export default [
 
   const report = engine.executeOnText(TEMPLATE);
 
-  fs.writeFileSync('src/router/demoRoutes.js', report.results[0].output);
+  fs.writeFileSync('site/src/router/demoRoutes.js', report.results[0].output);
 })();

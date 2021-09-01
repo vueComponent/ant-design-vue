@@ -1,7 +1,7 @@
 import path from 'path';
 import vue from '@vitejs/plugin-vue';
-import md from './plugin/md';
-import docs from './plugin/docs';
+import md from '../plugin/md';
+import docs from '../plugin/docs';
 import vueJsx from '@vitejs/plugin-vue-jsx';
 
 /**
@@ -11,7 +11,7 @@ export default {
   resolve: {
     alias: {
       vue: 'vue/dist/vue.esm-bundler.js',
-      'ant-design-vue': path.resolve(__dirname, './components'),
+      'ant-design-vue': path.resolve(__dirname, '../components'),
     },
   },
   plugins: [

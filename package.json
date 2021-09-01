@@ -28,8 +28,8 @@
     "vetur"
   ],
   "scripts": {
-    "debugger": "vite",
-    "dev": "vite serve site",
+    "debugger": "vite serve examples",
+    "dev": "yarn routes && vite serve site",
     "test": "cross-env NODE_ENV=test WORKFLOW=true jest --config .jest.js",
     "test:dev": "cross-env NODE_ENV=test jest --config .jest.js",
     "compile": "node antd-tools/cli/run.js compile",
@@ -43,7 +43,8 @@
     "dist": "node --max_old_space_size=8192 antd-tools/cli/run.js dist",
     "lint": "eslint -c ./.eslintrc.js --fix --ext .jsx,.js,.ts,.tsx ./components",
     "lint:style": "stylelint \"{site,components}/**/*.less\" --syntax less",
-    "codecov": "codecov"
+    "codecov": "codecov",
+    "routes": "node site/scripts/genrateRoutes.js"
   },
   "repository": {
     "type": "git",

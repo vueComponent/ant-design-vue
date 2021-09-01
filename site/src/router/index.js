@@ -35,7 +35,7 @@ const routes = [
           const hash = route.hash.replace('#', '');
           return { iframeName: hash };
         },
-        component: () => import('../docs/layout/demo/index.vue'),
+        component: () => import('../../../components/layout/demo/index.vue'),
       },
     ],
   },

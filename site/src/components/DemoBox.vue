@@ -98,11 +98,7 @@ export default defineComponent({
     const copied = ref(false);
     const sectionId = computed(() => {
       const relativePath = props.jsfiddle?.relativePath || '';
-      return `components-${relativePath
-        .split('/docs/')[1]
-        .split('/')
-        .join('-')
-        .replace('.vue', '')}`;
+      return `${relativePath.split('/').join('-').replace('.vue', '')}`;
     });
     const inIframe = inject('inIframe', false);
     const iframeHeight = computed(() => props.jsfiddle?.iframe);

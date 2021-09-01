@@ -12,7 +12,7 @@
     "lib": ["dom", "es2017"],
     "skipLibCheck": true,
     "allowJs": true,
-    "importsNotUsedAsValues": "error"
+    "importsNotUsedAsValues": "preserve"
   },
   "exclude": [
     "node_modules",

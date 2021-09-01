@@ -11,13 +11,7 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
   },
-  extends: [
-    'plugin:vue/vue3-essential',
-    'eslint:recommended',
-    '@vue/typescript/recommended',
-    '@vue/prettier',
-    '@vue/prettier/@typescript-eslint',
-  ],
+  extends: ['plugin:vue/vue3-recommended', 'prettier'],
   plugins: ['markdown', 'jest', '@typescript-eslint'],
   overrides: [
     {
@@ -47,6 +41,10 @@ module.exports = {
         '@typescript-eslint/ban-ts-comment': 0,
       },
     },
+    {
+      files: ['*.vue'],
+      parser: 'vue-eslint-parser',
+    },
   ],
   rules: {
     'comma-dangle': [2, 'always-multiline'],
@@ -58,24 +56,25 @@ module.exports = {
     camelcase: 'off',
     'no-extra-boolean-cast': 'off',
     semi: ['error', 'always'],
-    // 'vue/require-explicit-emits': 'off',
-    // 'vue/require-prop-types': 'off',
-    // 'vue/require-default-prop': 'off',
-    // 'vue/no-reserved-keys': 'off',
-    // 'vue/comment-directive': 'off',
-    // 'vue/prop-name-casing': 'off',
-    // 'vue/one-component-per-file': 'off',
-    // 'vue/custom-event-name-casing': 'off',
-    // 'vue/max-attributes-per-line': [
-    //   2,
-    //   {
-    //     singleline: 20,
-    //     multiline: {
-    //       max: 1,
-    //       allowFirstLine: false,
-    //     },
-    //   },
-    // ],
+    'vue/no-v-html': 'off',
+    'vue/require-explicit-emits': 'off',
+    'vue/require-prop-types': 'off',
+    'vue/require-default-prop': 'off',
+    'vue/no-reserved-keys': 'off',
+    'vue/comment-directive': 'off',
+    'vue/prop-name-casing': 'off',
+    'vue/one-component-per-file': 'off',
+    'vue/custom-event-name-casing': 'off',
+    'vue/max-attributes-per-line': [
+      2,
+      {
+        singleline: 20,
+        multiline: {
+          max: 1,
+          allowFirstLine: false,
+        },
+      },
+    ],
   },
   globals: {
     h: true,

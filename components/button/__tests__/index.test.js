@@ -2,8 +2,8 @@ import Button from '../index';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 import { mount } from '@vue/test-utils';
 import { nextTick } from 'vue';
-import { asyncExpect, sleep } from '@/tests/utils';
-import mountTest from '@/tests/shared/mountTest';
+import { asyncExpect, sleep } from '../../../tests/utils';
+import mountTest from '../../../tests/shared/mountTest';
 import { resetWarned } from '../../_util/warning';
 
 describe('Button', () => {
@@ -27,7 +27,7 @@ describe('Button', () => {
     expect(wrapper.find('.ant-btn-primary').exists()).toBe(true);
   });
 
-  it('renders Chinese characters correctly', (done) => {
+  it('renders Chinese characters correctly', done => {
     const wrapper = mount({
       render() {
         return <Button>按钮</Button>;

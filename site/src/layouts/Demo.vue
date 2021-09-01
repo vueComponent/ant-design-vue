@@ -19,15 +19,15 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue';
 import { useRoute } from 'vue-router';
-import GoogleAds from '../components/rice/GoogleAds.vue';
+// import GoogleAds from '../components/rice/GoogleAds.vue';
 
 const showAd = location.host.indexOf('antdv.com') > -1;
 export default defineComponent({
   name: 'Demo',
-  props: ['pageData', 'isZhCN'],
   components: {
-    GoogleAds,
+    // GoogleAds,
   },
+  props: ['pageData', 'isZhCN'],
   setup(props) {
     const route = useRoute();
     const frontmatter = computed(() => props?.pageData?.frontmatter || {});

@@ -1,7 +1,11 @@
-import Menu, { MenuProps } from './src/Menu';
-import MenuItem, { MenuItemProps } from './src/MenuItem';
-import SubMenu, { SubMenuProps } from './src/SubMenu';
-import ItemGroup, { MenuItemGroupProps } from './src/ItemGroup';
+import type { MenuProps } from './src/Menu';
+import Menu from './src/Menu';
+import type { MenuItemProps } from './src/MenuItem';
+import MenuItem from './src/MenuItem';
+import type { SubMenuProps } from './src/SubMenu';
+import SubMenu from './src/SubMenu';
+import type { MenuItemGroupProps } from './src/ItemGroup';
+import ItemGroup from './src/ItemGroup';
 import Divider from './src/Divider';
 import type { App, Plugin } from 'vue';
 import type { MenuTheme } from './src/interface';

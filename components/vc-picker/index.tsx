@@ -1,4 +1,5 @@
-import Picker, { PickerProps } from './Picker';
+import type { PickerProps } from './Picker';
+import Picker from './Picker';
 import PickerPanel from './PickerPanel';
 import RangePicker from './RangePicker';
 import type { PickerPanelProps } from './PickerPanel';

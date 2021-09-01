@@ -10,7 +10,6 @@ import vueJsx from '@vitejs/plugin-vue-jsx';
 export default {
   resolve: {
     alias: {
-      // moment: 'moment/dist/moment.js',
       vue: 'vue/dist/vue.esm-bundler.js',
       'ant-design-vue': path.resolve(__dirname, './components'),
     },
@@ -34,7 +33,7 @@ export default {
       'lodash-es',
       'vue',
       'vue-router',
-      'moment',
+      'dayjs',
       'async-validator',
     ],
   },

@@ -28,7 +28,8 @@
     "vetur"
   ],
   "scripts": {
-    "dev": "vite",
+    "debugger": "vite",
+    "dev": "vite serve site",
     "test": "cross-env NODE_ENV=test WORKFLOW=true jest --config .jest.js",
     "test:dev": "cross-env NODE_ENV=test jest --config .jest.js",
     "compile": "node antd-tools/cli/run.js compile",

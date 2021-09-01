@@ -1,0 +1,159 @@
+@import './theme/static/index.less';
+
+.drawer {
+  position: fixed;
+  z-index: 9999;
+  -webkit-transition: width 0s ease 0.3s, height 0s ease 0.3s,
+    -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: width 0s ease 0.3s, height 0s ease 0.3s,
+    -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: width 0s ease 0.3s, height 0s ease 0.3s,
+    transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: width 0s ease 0.3s, height 0s ease 0.3s,
+    transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
+
+.drawer > * {
+  -webkit-transition: opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    -webkit-box-shadow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    -webkit-box-shadow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    box-shadow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    box-shadow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    -webkit-box-shadow 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
+
+.drawer.drawer-open {
+  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
+
+.drawer .drawer-mask {
+  background: #000;
+  opacity: 0;
+  width: 100%;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  -webkit-transition: opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), height 0s ease 0.3s;
+  transition: opacity 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86), height 0s ease 0.3s;
+}
+
+.drawer-content-wrapper {
+  position: absolute;
+  background: #fff;
+}
+
+.drawer-content {
+  overflow: auto;
+  z-index: 1;
+  position: relative;
+}
+
+.drawer-handle {
+  position: absolute;
+  top: 72px;
+  width: 41px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 0;
+  text-align: center;
+  line-height: 40px;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: #fff;
+}
+
+.drawer-handle-icon {
+  width: 14px;
+  height: 2px;
+  background: #333;
+  position: relative;
+  -webkit-transition: background 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: background 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
+
+.drawer-handle-icon:after,
+.drawer-handle-icon:before {
+  content: '';
+  display: block;
+  position: absolute;
+  background: #333;
+  width: 100%;
+  height: 2px;
+  -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+  transition: transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86),
+    -webkit-transform 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+}
+
+.drawer-handle-icon:before {
+  top: -5px;
+}
+
+.drawer-handle-icon:after {
+  top: 5px;
+}
+
+.drawer-left,
+.drawer-right {
+  width: 0;
+  height: 100%;
+}
+
+.drawer-left .drawer-content,
+.drawer-left .drawer-content-wrapper,
+.drawer-right .drawer-content,
+.drawer-right .drawer-content-wrapper {
+  height: 100%;
+}
+
+.drawer-left.drawer-open,
+.drawer-right.drawer-open {
+  width: 100%;
+}
+
+.drawer-left.drawer-open.no-mask,
+.drawer-right.drawer-open.no-mask {
+  width: 0;
+}
+
+.drawer-left {
+  top: 0;
+  left: 0;
+}
+.drawer-left .ant-drawer-body {
+  padding: 0;
+}
+
+.drawer-left .drawer-handle {
+  right: -40px;
+  border-radius: 0 4px 4px 0;
+}
+
+.drawer-left .drawer-handle,
+.drawer-left.drawer-open .drawer-content-wrapper {
+  -webkit-box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+}

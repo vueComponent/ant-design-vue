@@ -1,8 +1,10 @@
 import { transformSync } from '@babel/core';
 import { CLIEngine } from 'eslint';
+import path from 'path';
 const engine = new CLIEngine({
   fix: true,
   useEslintrc: false,
+  baseConfig: require(path.join(process.cwd(), '.eslintrc.js')),
 });
 const tsToJs = (content: string): string => {
   if (!content) {

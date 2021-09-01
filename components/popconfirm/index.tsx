@@ -1,5 +1,6 @@
 import omit from 'omit.js';
-import { computed, ExtractPropTypes, onMounted, PropType, ref, toRef } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
+import { computed, onMounted, ref, toRef } from 'vue';
 import { defineComponent } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';

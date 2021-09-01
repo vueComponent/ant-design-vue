@@ -1,4 +1,5 @@
-import { computed, defineComponent, ExtractPropTypes, ref } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';

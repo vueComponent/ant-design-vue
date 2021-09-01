@@ -30,11 +30,11 @@ function noop() {}
 
 export default {
   name: 'InnerSlider',
+  mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
     ...defaultProps,
   },
-  mixins: [BaseMixin],
   data() {
     this.preProps = { ...this.$props };
     this.list = null;
@@ -47,6 +47,145 @@ export default {
       currentSlide: this.initialSlide,
       slideCount: this.children.length,
     };
+  },
+  watch: {
+    __propsSymbol__() {
+      const nextProps = this.$props;
+      const spec = {
+        listRef: this.list,
+        trackRef: this.track,
+        ...nextProps,
+        ...this.$data,
+      };
+      let setTrackStyle = false;
+      for (const key of Object.keys(this.preProps)) {
+        if (!nextProps.hasOwnProperty(key)) {
+          setTrackStyle = true;
+          break;
+        }
+        if (
+          typeof nextProps[key] === 'object' ||
+          typeof nextProps[key] === 'function' ||
+          typeof nextProps[key] === 'symbol'
+        ) {
+          continue;
+        }
+        if (nextProps[key] !== this.preProps[key]) {
+          setTrackStyle = true;
+          break;
+        }
+      }
+      this.updateState(spec, setTrackStyle, () => {
+        if (this.currentSlide >= nextProps.children.length) {
+          this.changeSlide({
+            message: 'index',
+            index: nextProps.children.length - nextProps.slidesToShow,
+            currentSlide: this.currentSlide,
+          });
+        }
+        if (nextProps.autoplay) {
+          this.handleAutoPlay('update');
+        } else {
+          this.pause('paused');
+        }
+      });
+      this.preProps = { ...nextProps };
+    },
+  },
+  beforeMount() {
+    this.ssrInit();
+    this.__emit('init');
+    if (this.lazyLoad) {
+      const slidesToLoad = getOnDemandLazySlides({
+        ...this.$props,
+        ...this.$data,
+      });
+      if (slidesToLoad.length > 0) {
+        this.setState(prevState => ({
+          lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad),
+        }));
+        this.__emit('lazyLoad', slidesToLoad);
+      }
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      const spec = {
+        listRef: this.list,
+        trackRef: this.track,
+        children: this.children,
+        ...this.$props,
+      };
+      this.updateState(spec, true, () => {
+        this.adaptHeight();
+        this.autoplay && this.handleAutoPlay('update');
+      });
+      if (this.lazyLoad === 'progressive') {
+        this.lazyLoadTimer = setInterval(this.progressiveLazyLoad, 1000);
+      }
+      this.ro = new ResizeObserver(() => {
+        if (this.animating) {
+          this.onWindowResized(false); // don't set trackStyle hence don't break animation
+          this.callbackTimers.push(setTimeout(() => this.onWindowResized(), this.speed));
+        } else {
+          this.onWindowResized();
+        }
+      });
+      this.ro.observe(this.list);
+      Array.prototype.forEach.call(document.querySelectorAll('.slick-slide'), slide => {
+        slide.onfocus = this.$props.pauseOnFocus ? this.onSlideFocus : null;
+        slide.onblur = this.$props.pauseOnFocus ? this.onSlideBlur : null;
+      });
+      // To support server-side rendering
+      if (!window) {
+        return;
+      }
+      if (window.addEventListener) {
+        window.addEventListener('resize', this.onWindowResized);
+      } else {
+        window.attachEvent('onresize', this.onWindowResized);
+      }
+    });
+  },
+  beforeUnmount() {
+    if (this.animationEndCallback) {
+      clearTimeout(this.animationEndCallback);
+    }
+    if (this.lazyLoadTimer) {
+      clearInterval(this.lazyLoadTimer);
+    }
+    if (this.callbackTimers.length) {
+      this.callbackTimers.forEach(timer => clearTimeout(timer));
+      this.callbackTimers = [];
+    }
+    if (window.addEventListener) {
+      window.removeEventListener('resize', this.onWindowResized);
+    } else {
+      window.detachEvent('onresize', this.onWindowResized);
+    }
+    if (this.autoplayTimer) {
+      clearInterval(this.autoplayTimer);
+    }
+  },
+  updated() {
+    this.checkImagesLoad();
+    this.__emit('reInit');
+    if (this.lazyLoad) {
+      const slidesToLoad = getOnDemandLazySlides({
+        ...this.$props,
+        ...this.$data,
+      });
+      if (slidesToLoad.length > 0) {
+        this.setState(prevState => ({
+          lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad),
+        }));
+        this.__emit('lazyLoad');
+      }
+    }
+    // if (this.props.onLazyLoad) {
+    //   this.props.onLazyLoad([leftMostSlide])
+    // }
+    this.adaptHeight();
   },
   methods: {
     listRefHandler(ref) {
@@ -430,145 +569,6 @@ export default {
     },
     appendDots({ dots }) {
       return <ul style={{ display: 'block' }}>{dots}</ul>;
-    },
-  },
-  beforeMount() {
-    this.ssrInit();
-    this.__emit('init');
-    if (this.lazyLoad) {
-      const slidesToLoad = getOnDemandLazySlides({
-        ...this.$props,
-        ...this.$data,
-      });
-      if (slidesToLoad.length > 0) {
-        this.setState(prevState => ({
-          lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad),
-        }));
-        this.__emit('lazyLoad', slidesToLoad);
-      }
-    }
-  },
-  mounted() {
-    this.$nextTick(() => {
-      const spec = {
-        listRef: this.list,
-        trackRef: this.track,
-        children: this.children,
-        ...this.$props,
-      };
-      this.updateState(spec, true, () => {
-        this.adaptHeight();
-        this.autoplay && this.handleAutoPlay('update');
-      });
-      if (this.lazyLoad === 'progressive') {
-        this.lazyLoadTimer = setInterval(this.progressiveLazyLoad, 1000);
-      }
-      this.ro = new ResizeObserver(() => {
-        if (this.animating) {
-          this.onWindowResized(false); // don't set trackStyle hence don't break animation
-          this.callbackTimers.push(setTimeout(() => this.onWindowResized(), this.speed));
-        } else {
-          this.onWindowResized();
-        }
-      });
-      this.ro.observe(this.list);
-      Array.prototype.forEach.call(document.querySelectorAll('.slick-slide'), slide => {
-        slide.onfocus = this.$props.pauseOnFocus ? this.onSlideFocus : null;
-        slide.onblur = this.$props.pauseOnFocus ? this.onSlideBlur : null;
-      });
-      // To support server-side rendering
-      if (!window) {
-        return;
-      }
-      if (window.addEventListener) {
-        window.addEventListener('resize', this.onWindowResized);
-      } else {
-        window.attachEvent('onresize', this.onWindowResized);
-      }
-    });
-  },
-  beforeUnmount() {
-    if (this.animationEndCallback) {
-      clearTimeout(this.animationEndCallback);
-    }
-    if (this.lazyLoadTimer) {
-      clearInterval(this.lazyLoadTimer);
-    }
-    if (this.callbackTimers.length) {
-      this.callbackTimers.forEach(timer => clearTimeout(timer));
-      this.callbackTimers = [];
-    }
-    if (window.addEventListener) {
-      window.removeEventListener('resize', this.onWindowResized);
-    } else {
-      window.detachEvent('onresize', this.onWindowResized);
-    }
-    if (this.autoplayTimer) {
-      clearInterval(this.autoplayTimer);
-    }
-  },
-  updated() {
-    this.checkImagesLoad();
-    this.__emit('reInit');
-    if (this.lazyLoad) {
-      const slidesToLoad = getOnDemandLazySlides({
-        ...this.$props,
-        ...this.$data,
-      });
-      if (slidesToLoad.length > 0) {
-        this.setState(prevState => ({
-          lazyLoadedList: prevState.lazyLoadedList.concat(slidesToLoad),
-        }));
-        this.__emit('lazyLoad');
-      }
-    }
-    // if (this.props.onLazyLoad) {
-    //   this.props.onLazyLoad([leftMostSlide])
-    // }
-    this.adaptHeight();
-  },
-  watch: {
-    __propsSymbol__() {
-      const nextProps = this.$props;
-      const spec = {
-        listRef: this.list,
-        trackRef: this.track,
-        ...nextProps,
-        ...this.$data,
-      };
-      let setTrackStyle = false;
-      for (const key of Object.keys(this.preProps)) {
-        if (!nextProps.hasOwnProperty(key)) {
-          setTrackStyle = true;
-          break;
-        }
-        if (
-          typeof nextProps[key] === 'object' ||
-          typeof nextProps[key] === 'function' ||
-          typeof nextProps[key] === 'symbol'
-        ) {
-          continue;
-        }
-        if (nextProps[key] !== this.preProps[key]) {
-          setTrackStyle = true;
-          break;
-        }
-      }
-      this.updateState(spec, setTrackStyle, () => {
-        if (this.currentSlide >= nextProps.children.length) {
-          this.changeSlide({
-            message: 'index',
-            index: nextProps.children.length - nextProps.slidesToShow,
-            currentSlide: this.currentSlide,
-          });
-        }
-        if (nextProps.autoplay) {
-          this.handleAutoPlay('update');
-        } else {
-          this.pause('paused');
-        }
-      });
-      this.preProps = { ...nextProps };
     },
   },
   render() {

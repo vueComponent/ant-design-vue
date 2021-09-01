@@ -1,4 +1,4 @@
-import { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes } from 'vue';
 import { defineComponent } from 'vue';
 import Button from '../button';
 import classNames from '../_util/classNames';

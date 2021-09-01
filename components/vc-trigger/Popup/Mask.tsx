@@ -21,13 +21,11 @@ export default function Mask(props: MaskProps) {
   let motion = {};
 
   if (maskTransitionName || maskAnimation) {
-    motion = {
-      ...getMotion({
-        prefixCls,
-        transitionName: maskTransitionName,
-        animation: maskAnimation,
-      }),
-    };
+    motion = getMotion({
+      prefixCls,
+      transitionName: maskTransitionName,
+      animation: maskAnimation,
+    });
   }
 
   return (

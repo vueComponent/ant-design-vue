@@ -83,7 +83,7 @@ export default defineComponent({
 
     // ======================== Motion ========================
     const motion = computed(() => {
-      const m = { ...getMotion(props) };
+      const m = getMotion(props);
       ['onAfterEnter', 'onAfterLeave'].forEach(eventName => {
         m[eventName] = () => {
           goNextStatus();

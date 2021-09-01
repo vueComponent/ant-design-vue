@@ -18,6 +18,5 @@ export function getMotion({ prefixCls, animation, transitionName }: GetMotionPro
       name: transitionName,
     };
   }
-
-  return null;
+  return {};
 }

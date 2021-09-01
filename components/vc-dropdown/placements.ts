@@ -5,7 +5,7 @@ const autoAdjustOverflow = {
 
 const targetOffset = [0, 0];
 
-export const placements = {
+const placements = {
   topLeft: {
     points: ['bl', 'tl'],
     overflow: autoAdjustOverflow,

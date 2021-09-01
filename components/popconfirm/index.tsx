@@ -5,7 +5,6 @@ import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
-import BaseMixin from '../_util/BaseMixin';
 import type { ButtonProps, LegacyButtonType } from '../button/buttonTypes';
 import { convertLegacyProps } from '../button/buttonTypes';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
@@ -47,7 +46,6 @@ export interface PopconfirmLocale {
 
 const Popconfirm = defineComponent({
   name: 'APopconfirm',
-  mixins: [BaseMixin],
   props: initDefaultProps(popconfirmProps(), {
     trigger: 'click',
     transitionName: 'zoom-big',

@@ -142,7 +142,7 @@ const Drawer = defineComponent({
   methods: {
     domFocus() {
       if (this.dom) {
-        this.dom.focus();
+        this.dom.focus({ preventScroll: true });
       }
     },
     onKeyDown(e) {

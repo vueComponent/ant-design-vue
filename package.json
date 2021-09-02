@@ -51,7 +51,8 @@
     "lint:style": "stylelint \"{site,components}/**/*.less\" --syntax less",
     "codecov": "codecov",
     "routes": "node site/scripts/genrateRoutes.js",
-    "tsc": "tsc --noEmit"
+    "tsc": "tsc --noEmit",
+    "site": "yarn routes && ./node_modules/vite/bin/vite.js build site --base=https://aliyuncdn.antdv.com/v2/"
   },
   "repository": {
     "type": "git",

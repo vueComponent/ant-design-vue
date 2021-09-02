@@ -8,8 +8,8 @@
   </demo-sort>
 </template>
 
-<script>
-import IconDisplay from '../../../theme/template/IconDisplay';
+<script lang="ts">
+import IconDisplay from '../../../site/src/theme/template/IconDisplay';
 import Basic from './basic.vue';
 import Custom from './custom.vue';
 import Iconfont from './iconfont.vue';

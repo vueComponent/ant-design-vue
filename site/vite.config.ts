@@ -13,6 +13,7 @@ export default {
     alias: {
       '@': path.join(__dirname, './src'),
       vue: 'vue/dist/vue.esm-bundler.js',
+      'ant-design-vue/es': path.resolve(__dirname, '../components'),
       'ant-design-vue': path.resolve(__dirname, '../components'),
     },
   },
@@ -43,7 +44,10 @@ export default {
   css: {
     preprocessorOptions: {
       less: {
-        modifyVars: { ...defaultVar },
+        modifyVars: {
+          hack: `true;@import "${require.resolve('../components/style/color/colorPalette.less')}";`,
+          ...defaultVar,
+        },
         javascriptEnabled: true,
         // includePaths: ["node_modules/"],
         additionalData,

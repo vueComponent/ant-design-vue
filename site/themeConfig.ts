@@ -6,6 +6,7 @@ const themeConfig = [
     theme: 'dark',
     htmlThemeAttr: 'dark',
     modifyVars: {
+      hack: `true;@import "${require.resolve('../components/style/color/colorPalette.less')}";`,
       ...defaultVars,
       ...dark,
       'text-color': 'fade(@white, 65%)',
@@ -36,6 +37,8 @@ const additionalData = async (content: string, filename: string): Promise<string
       }
       return Promise.resolve(res);
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
       return Promise.reject(content);
     }
   });

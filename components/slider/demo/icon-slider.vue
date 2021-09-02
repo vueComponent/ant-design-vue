@@ -18,7 +18,7 @@ You can add an icon beside the slider to make it meaningful.
 <template>
   <div class="icon-wrapper">
     <frown-outlined :style="{ color: preColor }" />
-    <a-slider :min="0" :max="20" v-model:value="sliderValue" />
+    <a-slider v-model:value="sliderValue" :min="0" :max="20" />
     <smile-outlined :style="{ color: nextColor }" />
   </div>
 </template>

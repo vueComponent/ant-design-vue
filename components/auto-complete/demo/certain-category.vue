@@ -105,14 +105,14 @@ const dataSource = [
   },
 ];
 export default defineComponent({
+  components: {
+    SearchOutlined,
+  },
   setup() {
     return {
       value: ref(''),
       dataSource,
     };
-  },
-  components: {
-    SearchOutlined,
   },
 });
 </script>

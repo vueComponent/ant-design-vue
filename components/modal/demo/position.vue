@@ -22,9 +22,9 @@ You can use `centered`,`style.top` or other styles to set position of modal dial
       Display a modal dialog at 20px to Top
     </a-button>
     <a-modal
+      v-model:visible="modal1Visible"
       title="20px to Top"
       style="top: 20px"
-      v-model:visible="modal1Visible"
       @ok="setModal1Visible(false)"
     >
       <p>some contents...</p>

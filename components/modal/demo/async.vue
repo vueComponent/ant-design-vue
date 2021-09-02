@@ -21,8 +21,8 @@ you can use this pattern when you submit a form.
   <div>
     <a-button type="primary" @click="showModal">Open Modal with async logic</a-button>
     <a-modal
-      title="Title"
       v-model:visible="visible"
+      title="Title"
       :confirm-loading="confirmLoading"
       @ok="handleOk"
     >

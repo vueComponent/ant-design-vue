@@ -22,16 +22,16 @@ Here is [a complete demo](/components/layout/#components-layout-demo-side) with 
 
 <template>
   <div style="width: 256px">
-    <a-button type="primary" @click="toggleCollapsed" style="margin-bottom: 16px">
+    <a-button type="primary" style="margin-bottom: 16px" @click="toggleCollapsed">
       <MenuUnfoldOutlined v-if="collapsed" />
       <MenuFoldOutlined v-else />
     </a-button>
     <a-menu
+      v-model:openKeys="openKeys"
+      v-model:selectedKeys="selectedKeys"
       mode="inline"
       theme="dark"
       :inline-collapsed="collapsed"
-      v-model:openKeys="openKeys"
-      v-model:selectedKeys="selectedKeys"
     >
       <a-menu-item key="1">
         <template #icon>
@@ -89,6 +89,15 @@ import {
   AppstoreOutlined,
 } from '@ant-design/icons-vue';
 export default defineComponent({
+  components: {
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    PieChartOutlined,
+    MailOutlined,
+    DesktopOutlined,
+    InboxOutlined,
+    AppstoreOutlined,
+  },
   setup() {
     const state = reactive({
       collapsed: false,
@@ -112,15 +121,6 @@ export default defineComponent({
       ...toRefs(state),
       toggleCollapsed,
     };
-  },
-  components: {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    PieChartOutlined,
-    MailOutlined,
-    DesktopOutlined,
-    InboxOutlined,
-    AppstoreOutlined,
   },
 });
 </script>

@@ -22,8 +22,8 @@ Customize Trigger Token by `prefix` props. Default to `@`, `Array<string>` also 
     :prefix="['@', '#']"
     @search="onSearch"
   >
-    <a-mentions-option v-for="value in options" :key="value" :value="value">
-      {{ value }}
+    <a-mentions-option v-for="val in options" :key="val" :value="val">
+      {{ val }}
     </a-mentions-option>
   </a-mentions>
 </template>

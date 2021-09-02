@@ -19,10 +19,10 @@ Click the menu and you will see that all the other menus gets collapsed to keep 
 <template>
   <div>
     <a-menu
+      v-model:selectedKeys="selectedKeys"
       style="width: 256px"
       mode="inline"
-      :openKeys="openKeys"
-      v-model:selectedKeys="selectedKeys"
+      :open-keys="openKeys"
       @openChange="onOpenChange"
     >
       <a-sub-menu key="sub1">
@@ -65,6 +65,11 @@ Click the menu and you will see that all the other menus gets collapsed to keep 
 import { defineComponent, reactive, toRefs } from 'vue';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
 export default defineComponent({
+  components: {
+    MailOutlined,
+    AppstoreOutlined,
+    SettingOutlined,
+  },
   setup() {
     const state = reactive({
       rootSubmenuKeys: ['sub1', 'sub2', 'sub4'],
@@ -83,11 +88,6 @@ export default defineComponent({
       ...toRefs(state),
       onOpenChange,
     };
-  },
-  components: {
-    MailOutlined,
-    AppstoreOutlined,
-    SettingOutlined,
   },
 });
 </script>

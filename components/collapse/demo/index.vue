@@ -34,7 +34,7 @@ export default {
     Mix,
     Noarrow,
     Extra,
-    Ghost
+    Ghost,
   },
 };
 </script>

@@ -21,9 +21,9 @@ Fixed Header is generally used to fix the top navigation to facilitate page swit
     <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
       <div class="logo" />
       <a-menu
+        v-model:selectedKeys="selectedKeys"
         theme="dark"
         mode="horizontal"
-        v-model:selectedKeys="selectedKeys"
         :style="{ lineHeight: '64px' }"
       >
         <a-menu-item key="1">nav 1</a-menu-item>

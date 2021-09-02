@@ -23,7 +23,7 @@ Customize the suffix icon through `suffixIcon`
         <SmileOutlined />
       </template>
     </a-date-picker>
-    <a-date-picker @change="onChange" placeholder="Select month" picker="month">
+    <a-date-picker placeholder="Select month" picker="month" @change="onChange">
       <template #suffixIcon>
         <SmileOutlined />
       </template>
@@ -33,15 +33,15 @@ Customize the suffix icon through `suffixIcon`
         <SmileOutlined />
       </template>
     </a-range-picker>
-    <a-date-picker @change="onChange" placeholder="Select week" picker="week">
+    <a-date-picker placeholder="Select week" picker="week" @change="onChange">
       <template #suffixIcon>
         <SmileOutlined />
       </template>
     </a-date-picker>
     <a-date-picker suffix-icon="ab" @change="onChange" />
-    <a-date-picker suffix-icon="ab" placeholder="Select month" @change="onChange" picker="month"/>
+    <a-date-picker suffix-icon="ab" placeholder="Select month" picker="month" @change="onChange"/>
     <a-range-picker suffix-icon="ab" @change="onChange" />
-    <a-date-picker suffix-icon="ab" placeholder="Select week" @change="onChange" picker="week"/>
+    <a-date-picker suffix-icon="ab" placeholder="Select week" picker="week" @change="onChange"/>
   </a-space>
 </template>
 <script lang="ts">

@@ -25,10 +25,10 @@ Show all props provided by PageHeader.
       :avatar="{ src: 'https://avatars1.githubusercontent.com/u/8186664?s=460&v=4' }"
       :breadcrumb="{ routes }"
     >
-      <template v-slot:tags>
+      <template #tags>
         <a-tag color="blue">Running</a-tag>
       </template>
-      <template v-slot:extra>
+      <template #extra>
         <a-button key="3">Operation</a-button>
         <a-button key="2">Operation</a-button>
         <a-button key="1" type="primary">Primary</a-button>
@@ -36,7 +36,7 @@ Show all props provided by PageHeader.
           <a-button :style="{ border: 'none', padding: 0 }">
             <EllipsisOutlined :style="{ fontSize: '20px', verticalAlign: 'top' }" />
           </a-button>
-          <template v-slot:overlay>
+          <template #overlay>
             <a-menu>
               <a-menu-item>
                 <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
@@ -128,14 +128,14 @@ const iconLinks: IconLink[] = [
 ];
 
 export default defineComponent({
+  components: {
+    EllipsisOutlined,
+  },
   setup() {
     return {
       routes,
       iconLinks,
     };
-  },
-  components: {
-    EllipsisOutlined,
   },
 });
 </script>

@@ -17,7 +17,7 @@ Replace the default star to other character like alphabet, digit, iconfont or ev
 </docs>
 <template>
   <div>
-    <a-rate v-model:value="value1" allowHalf>
+    <a-rate v-model:value="value1" allow-half>
       <template #character>
         <heart-outlined />
       </template>
@@ -33,6 +33,9 @@ Replace the default star to other character like alphabet, digit, iconfont or ev
 import { HeartOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
+  components: {
+    HeartOutlined,
+  },
   setup() {
     const value1 = ref<number>(2);
     const value2 = ref<number>(2.5);
@@ -42,9 +45,6 @@ export default defineComponent({
       value2,
       value3,
     };
-  },
-  components: {
-    HeartOutlined,
   },
 });
 </script>

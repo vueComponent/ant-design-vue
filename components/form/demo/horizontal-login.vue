@@ -52,6 +52,10 @@ interface FormState {
   password: string;
 }
 export default defineComponent({
+  components: {
+    UserOutlined,
+    LockOutlined,
+  },
   setup() {
     const formState: UnwrapRef<FormState> = reactive({
       user: '',
@@ -68,10 +72,6 @@ export default defineComponent({
       handleFinish,
       handleFinishFailed,
     };
-  },
-  components: {
-    UserOutlined,
-    LockOutlined,
   },
 });
 </script>

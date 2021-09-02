@@ -17,8 +17,8 @@ Provide additional interactive capacity of editable and copyable.
 <template>
   <a-typography-paragraph v-model:content="editableStr" editable />
   <a-typography-paragraph v-model:content="customIconStr" editable>
-    <template v-slot:editableIcon><HighlightOutlined /></template>
-    <template v-slot:editableTooltip>click to edit text</template>
+    <template #editableIcon><HighlightOutlined /></template>
+    <template #editableTooltip>click to edit text</template>
   </a-typography-paragraph>
   <a-typography-paragraph v-model:content="hideTooltipStr" :editable="{ tooltip: false }" />
   <a-typography-paragraph
@@ -31,11 +31,11 @@ Provide additional interactive capacity of editable and copyable.
     Replace copy text.
   </a-typography-paragraph>
   <a-typography-paragraph copyable content="Custom Copy icon and replace tooltips text.">
-    <template v-slot:copyableIcon="{ copied }">
+    <template #copyableIcon="{ copied }">
       <SmileOutlined v-if="!copied" key="copy-icon" />
       <SmileFilled v-else key="copied-icon" />
     </template>
-    <template v-slot:copyableTooltip="{ copied }">
+    <template #copyableTooltip="{ copied }">
       <span v-if="!copied" key="copy-tooltip">click here</span>
       <span v-else key="copied-tooltip">you clicked!!</span>
     </template>
@@ -49,6 +49,11 @@ import { defineComponent, ref, watch } from 'vue';
 import { HighlightOutlined, SmileOutlined, SmileFilled } from '@ant-design/icons-vue';
 
 export default defineComponent({
+  components: {
+    HighlightOutlined,
+    SmileOutlined,
+    SmileFilled,
+  },
   setup() {
     const editableStr = ref('This is an editable text.');
     watch(editableStr, () => {
@@ -60,11 +65,6 @@ export default defineComponent({
       hideTooltipStr: ref('Hide Edit tooltip.'),
       lengthLimitedStr: ref('This is an editable text with limited length.'),
     };
-  },
-  components: {
-    HighlightOutlined,
-    SmileOutlined,
-    SmileFilled,
   },
 });
 </script>

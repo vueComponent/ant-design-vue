@@ -55,16 +55,16 @@ Horizontal top navigation menu.
 import { defineComponent, ref } from 'vue';
 import { MailOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
 export default defineComponent({
+  components: {
+    MailOutlined,
+    AppstoreOutlined,
+    SettingOutlined,
+  },
   setup() {
     const current = ref<string[]>(['mail']);
     return {
       current,
     };
-  },
-  components: {
-    MailOutlined,
-    AppstoreOutlined,
-    SettingOutlined,
   },
 });
 </script>

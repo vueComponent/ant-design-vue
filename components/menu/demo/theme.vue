@@ -27,9 +27,9 @@ There are two built-in themes: `light` and `dark`. The default value is `light`.
     <br />
     <br />
     <a-menu
-      style="width: 256px"
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
+      style="width: 256px"
       mode="inline"
       :theme="theme"
     >
@@ -79,6 +79,12 @@ import {
   SettingOutlined,
 } from '@ant-design/icons-vue';
 export default defineComponent({
+  components: {
+    MailOutlined,
+    CalendarOutlined,
+    AppstoreOutlined,
+    SettingOutlined,
+  },
   setup() {
     const state = reactive({
       theme: 'dark',
@@ -93,12 +99,6 @@ export default defineComponent({
       ...toRefs(state),
       changeTheme,
     };
-  },
-  components: {
-    MailOutlined,
-    CalendarOutlined,
-    AppstoreOutlined,
-    SettingOutlined,
   },
 });
 </script>

@@ -34,7 +34,7 @@ The combination of radio button style.
       </a-radio-group>
     </div>
     <div :style="{ marginTop: '16px' }">
-      <a-radio-group disabled v-model:value="value3">
+      <a-radio-group v-model:value="value3" disabled>
         <a-radio-button value="a">Hangzhou</a-radio-button>
         <a-radio-button value="b">Shanghai</a-radio-button>
         <a-radio-button value="c">Beijing</a-radio-button>

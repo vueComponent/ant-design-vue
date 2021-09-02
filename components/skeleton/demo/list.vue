@@ -24,7 +24,7 @@ Use skeleton in list component.
         <a-list-item key="item.title">
           <template v-if="!loading" #actions>
             <span v-for="{ type, text } in actions" :key="type">
-              <component v-bind:is="type" style="margin-right: 8px"></component>
+              <component :is="type" style="margin-right: 8px"></component>
               {{ text }}
             </span>
           </template>

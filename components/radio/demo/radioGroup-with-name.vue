@@ -16,7 +16,7 @@ Passing the `name` property to all `input[type="radio"]` that are in the same Ra
 
 </docs>
 <template>
-  <a-radio-group name="radioGroup" v-model:value="value">
+  <a-radio-group v-model:value="value" name="radioGroup">
     <a-radio value="1">A</a-radio>
     <a-radio value="2">B</a-radio>
     <a-radio value="3">C</a-radio>

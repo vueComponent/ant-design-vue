@@ -16,7 +16,7 @@ Use the single file method to recursively generate menus.
 
 <template>
   <div style="width: 256px">
-    <a-button type="primary" @click="toggleCollapsed" style="margin-bottom: 16px">
+    <a-button type="primary" style="margin-bottom: 16px" @click="toggleCollapsed">
       <MenuUnfoldOutlined v-if="collapsed" />
       <MenuFoldOutlined v-else />
     </a-button>
@@ -37,7 +37,7 @@ Use the single file method to recursively generate menus.
           </a-menu-item>
         </template>
         <template v-else>
-          <sub-menu :menu-info="item" :key="item.key" />
+          <sub-menu :key="item.key" :menu-info="item" />
         </template>
       </template>
     </a-menu>
@@ -103,6 +103,12 @@ const list = [
   },
 ];
 export default defineComponent({
+  components: {
+    'sub-menu': SubMenu,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    PieChartOutlined,
+  },
   setup() {
     const collapsed = ref<boolean>(false);
 
@@ -114,12 +120,6 @@ export default defineComponent({
       collapsed,
       toggleCollapsed,
     };
-  },
-  components: {
-    'sub-menu': SubMenu,
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    PieChartOutlined,
   },
 });
 </script>

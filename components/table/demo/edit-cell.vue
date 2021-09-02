@@ -17,7 +17,7 @@ Table with editable cells.
 </docs>
 
 <template>
-  <a-button class="editable-add-btn" @click="handleAdd" style="margin-bottom: 8px">Add</a-button>
+  <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="handleAdd">Add</a-button>
   <a-table bordered :data-source="dataSource" :columns="columns">
     <template #name="{ text, record }">
       <div class="editable-cell">

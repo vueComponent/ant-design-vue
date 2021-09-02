@@ -46,7 +46,7 @@ export default {
     UseFormNested,
     UseFormTrigger,
     UseFormMerge,
-    LableWidth
+    LableWidth,
   },
 };
 </script>

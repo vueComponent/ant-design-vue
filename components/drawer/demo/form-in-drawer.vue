@@ -50,7 +50,7 @@ Use form in drawer with submit button.
       <a-row :gutter="16">
         <a-col :span="12">
           <a-form-item label="Owner" name="owner">
-            <a-select placeholder="Please a-s an owner" v-model:value="form.owner">
+            <a-select v-model:value="form.owner" placeholder="Please a-s an owner">
               <a-select-option value="xiao">Xiaoxiao Fu</a-select-option>
               <a-select-option value="mao">Maomao Zhou</a-select-option>
             </a-select>
@@ -58,7 +58,7 @@ Use form in drawer with submit button.
         </a-col>
         <a-col :span="12">
           <a-form-item label="Type" name="type">
-            <a-select placeholder="Please choose the type" v-model:value="form.type">
+            <a-select v-model:value="form.type" placeholder="Please choose the type">
               <a-select-option value="private">Private</a-select-option>
               <a-select-option value="public">Public</a-select-option>
             </a-select>
@@ -68,7 +68,7 @@ Use form in drawer with submit button.
       <a-row :gutter="16">
         <a-col :span="12">
           <a-form-item label="Approver" name="approver">
-            <a-select placeholder="Please choose the approver" v-model:value="form.approver">
+            <a-select v-model:value="form.approver" placeholder="Please choose the approver">
               <a-select-option value="jack">Jack Ma</a-select-option>
               <a-select-option value="tom">Tom Liu</a-select-option>
             </a-select>

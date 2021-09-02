@@ -18,46 +18,56 @@ Using `marks` property to mark a graduated slider, use `value` to specify the po
 <template>
   <div id="components-slider-demo-mark">
     <h4>included=true</h4>
-    <a-slider :marks="marks" v-model:value="value1">
-      <template #mark="{label, point }">
-        <template v-if="point === 100"><strong>{{label}}</strong></template>
-        <template v-else>{{label}}</template>
+    <a-slider v-model:value="value1" :marks="marks">
+      <template #mark="{ label, point }">
+        <template v-if="point === 100">
+          <strong>{{ label }}</strong>
+        </template>
+        <template v-else>{{ label }}</template>
       </template>
     </a-slider>
-    <a-slider range :marks="marks" v-model:value="value2">
-      <template #mark="{label, point }">
-        <template v-if="point === 100"><strong>{{label}}</strong></template>
-        <template v-else>{{label}}</template>
+    <a-slider v-model:value="value2" range :marks="marks">
+      <template #mark="{ label, point }">
+        <template v-if="point === 100">
+          <strong>{{ label }}</strong>
+        </template>
+        <template v-else>{{ label }}</template>
       </template>
     </a-slider>
 
     <h4>included=false</h4>
-    <a-slider :marks="marks" :included="false" v-model:value="value3">
-      <template #mark="{label, point }">
-        <template v-if="point === 100"><strong>{{label}}</strong></template>
-        <template v-else>{{label}}</template>
+    <a-slider v-model:value="value3" :marks="marks" :included="false">
+      <template #mark="{ label, point }">
+        <template v-if="point === 100">
+          <strong>{{ label }}</strong>
+        </template>
+        <template v-else>{{ label }}</template>
       </template>
     </a-slider>
 
     <h4>marks & step</h4>
-    <a-slider :marks="marks" :step="10" v-model:value="value4">
-      <template #mark="{label, point }">
-        <template v-if="point === 100"><strong>{{label}}</strong></template>
-        <template v-else>{{label}}</template>
+    <a-slider v-model:value="value4" :marks="marks" :step="10">
+      <template #mark="{ label, point }">
+        <template v-if="point === 100">
+          <strong>{{ label }}</strong>
+        </template>
+        <template v-else>{{ label }}</template>
       </template>
     </a-slider>
 
     <h4>step=null</h4>
-    <a-slider :marks="marks" :step="null" v-model:value="value5">
-      <template #mark="{label, point }">
-        <template v-if="point === 100"><strong>{{label}}</strong></template>
-        <template v-else>{{label}}</template>
+    <a-slider v-model:value="value5" :marks="marks" :step="null">
+      <template #mark="{ label, point }">
+        <template v-if="point === 100">
+          <strong>{{ label }}</strong>
+        </template>
+        <template v-else>{{ label }}</template>
       </template>
     </a-slider>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, createVNode, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   setup() {

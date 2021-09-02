@@ -16,7 +16,7 @@ Basic usage.
 
 </docs>
 <template>
-  <a-mentions autofocus v-model:value="value" @select="onSelect">
+  <a-mentions v-model:value="value" autofocus @select="onSelect">
     <a-mentions-option value="afc163">afc163</a-mentions-option>
     <a-mentions-option value="zombieJ">zombieJ</a-mentions-option>
     <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>

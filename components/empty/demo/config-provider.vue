@@ -18,9 +18,9 @@ Use ConfigProvider set global Empty style.
 
 <template>
   <a-switch
+    v-model:checked="customize"
     un-checked-children="default"
     checked-children="customize"
-    v-model:checked="customize"
   />
   <a-divider />
   <a-config-provider>

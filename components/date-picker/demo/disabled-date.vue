@@ -35,8 +35,8 @@ Disabled part of dates and time by `disabledDate` and `disabledTime` respectivel
       :disabled-date="disabledDate"
     />
     <a-range-picker
-      style="width: 400px"
       v-model:value="value4"
+      style="width: 400px"
       :disabled-date="disabledDate"
       :disabled-time="disabledRangeTime"
       :show-time="{

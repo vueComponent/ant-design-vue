@@ -19,7 +19,7 @@ Set range picker type by `picker` prop.
 <template>
   <a-space direction="vertical" :size="12">
     <a-range-picker v-model:value="value1" />
-    <a-range-picker v-model:value="value2" showTime />
+    <a-range-picker v-model:value="value2" show-time />
     <a-range-picker v-model:value="value3" picker="week"/>
     <a-range-picker v-model:value="value4" picker="month"/>
     <a-range-picker v-model:value="value5" picker="year"/>

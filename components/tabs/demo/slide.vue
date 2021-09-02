@@ -23,11 +23,11 @@ In order to fit in more tabs, they can slide left and right (or up and down).
       <a-radio-button value="left">Vertical</a-radio-button>
     </a-radio-group>
     <a-tabs
+      v-model:activeKey="activeKey"
       :tab-position="mode"
       :style="{ height: '200px' }"
       @prevClick="callback"
       @nextClick="callback"
-      v-model:activeKey="activeKey"
     >
       <a-tab-pane v-for="i in 30" :key="i" :tab="`Tab-${i}`">Content of tab {{ i }}</a-tab-pane>
     </a-tabs>

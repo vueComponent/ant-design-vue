@@ -18,9 +18,9 @@ After users upload picture, the thumbnail will be shown in list. The upload butt
 <template>
   <div class="clearfix">
     <a-upload
+      v-model:file-list="fileList"
       action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
       list-type="picture-card"
-      v-model:file-list="fileList"
       @preview="handlePreview"
     >
       <div v-if="fileList.length < 8">

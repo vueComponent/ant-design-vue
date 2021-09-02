@@ -18,7 +18,7 @@ Using pre & post tabs example.
 <template>
   <div>
     <div style="margin-bottom: 16px">
-      <a-input addon-before="Http://" addon-after=".com" v-model:value="value1" />
+      <a-input v-model:value="value1" addon-before="Http://" addon-after=".com" />
     </div>
     <div style="margin-bottom: 16px">
       <a-input v-model:value="value2">

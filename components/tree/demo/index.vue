@@ -43,7 +43,7 @@ export default defineComponent({
     SwitcherIcon,
     ReplaceFields,
     ContextMenu,
-    VirtualScroll
+    VirtualScroll,
   },
   setup() {
     return {};

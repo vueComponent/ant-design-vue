@@ -18,9 +18,9 @@ Change `pageSize`.
 <template>
   <div>
     <a-pagination
-      show-size-changer
       v-model:current="current1"
       v-model:pageSize="pageSize"
+      show-size-changer
       :total="500"
       @showSizeChange="onShowSizeChange"
     />

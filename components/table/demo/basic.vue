@@ -108,15 +108,15 @@ const data = [
 ];
 
 export default defineComponent({
+  components: {
+    SmileOutlined,
+    DownOutlined,
+  },
   setup() {
     return {
       data,
       columns,
     };
-  },
-  components: {
-    SmileOutlined,
-    DownOutlined,
   },
 });
 </script>

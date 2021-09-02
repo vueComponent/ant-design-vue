@@ -18,9 +18,9 @@ There are three sizes available to a numeric input box. By default, the size is 
 
 <template>
   <div>
-    <a-input-number size="large" :min="1" :max="100000" v-model:value="value1" />
-    <a-input-number :min="1" :max="100000" v-model:value="value2" />
-    <a-input-number size="small" :min="1" :max="100000" v-model:value="value3" />
+    <a-input-number v-model:value="value1" size="large" :min="1" :max="100000" />
+    <a-input-number v-model:value="value2" :min="1" :max="100000" />
+    <a-input-number v-model:value="value3" size="small" :min="1" :max="100000" />
   </div>
 </template>
 <script lang="ts">

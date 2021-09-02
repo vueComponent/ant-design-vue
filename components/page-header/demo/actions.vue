@@ -47,7 +47,7 @@ Use the operating area and customize the sub-nodes, suitable for use in the need
       <template #tags>
         <a-tag color="blue">Running</a-tag>
       </template>
-      <template v-slot:extra>
+      <template #extra>
         <a-button key="3">Operation</a-button>
         <a-button key="2">Operation</a-button>
         <a-button key="1" type="primary">Primary</a-button>

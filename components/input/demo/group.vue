@@ -31,8 +31,8 @@ Note: You don't need `Col` to control the width in the `compact` mode.
     </a-input-group>
     <br />
     <a-input-group compact>
-      <a-input style="width: 20%" v-model:value="value1" />
-      <a-input style="width: 30%" v-model:value="value2" />
+      <a-input v-model:value="value1" style="width: 20%" />
+      <a-input v-model:value="value2" style="width: 30%" />
     </a-input-group>
     <br />
     <a-input-group compact>
@@ -40,7 +40,7 @@ Note: You don't need `Col` to control the width in the `compact` mode.
         <a-select-option value="Zhejiang">Zhejiang</a-select-option>
         <a-select-option value="Jiangsu">Jiangsu</a-select-option>
       </a-select>
-      <a-input style="width: 50%" v-model:value="value4" />
+      <a-input v-model:value="value4" style="width: 50%" />
     </a-input-group>
     <br />
     <a-input-group compact>
@@ -48,11 +48,11 @@ Note: You don't need `Col` to control the width in the `compact` mode.
         <a-select-option value="Option1">Option1</a-select-option>
         <a-select-option value="Option2">Option2</a-select-option>
       </a-select>
-      <a-input style="width: 50%" v-model:value="value6" />
+      <a-input v-model:value="value6" style="width: 50%" />
     </a-input-group>
     <br />
     <a-input-group compact>
-      <a-input style="width: 50%" v-model:value="value7" />
+      <a-input v-model:value="value7" style="width: 50%" />
       <a-date-picker v-model:value="value8" style="width: 50%" />
     </a-input-group>
     <br />

@@ -22,9 +22,9 @@ Full screen by custom style.
     <a-modal
       v-model:visible="visible"
       title="Basic Modal"
-      @ok="handleOk"
       width="100%"
-      wrapClassName="full-modal"
+      wrap-class-name="full-modal"
+      @ok="handleOk"
     >
       <p>Some contents...</p>
       <p>Some contents...</p>

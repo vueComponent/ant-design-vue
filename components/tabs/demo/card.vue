@@ -17,7 +17,7 @@ Another type Tabs, which doesn't support vertical mode.
 </docs>
 
 <template>
-  <a-tabs type="card" v-model:activeKey="activeKey">
+  <a-tabs v-model:activeKey="activeKey" type="card">
     <a-tab-pane key="1" tab="Tab 1">Content of Tab Pane 1</a-tab-pane>
     <a-tab-pane key="2" tab="Tab 2">Content of Tab Pane 2</a-tab-pane>
     <a-tab-pane key="3" tab="Tab 3">Content of Tab Pane 3</a-tab-pane>

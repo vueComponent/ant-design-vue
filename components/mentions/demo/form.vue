@@ -24,7 +24,7 @@ to work with `Form`.
       name="coders"
       v-bind="validateInfos.coders"
     >
-      <a-mentions rows="1" v-model:value="modelRef.coders">
+      <a-mentions v-model:value="modelRef.coders" rows="1">
         <a-mentions-option value="afc163">afc163</a-mentions-option>
         <a-mentions-option value="zombieJ">zombieJ</a-mentions-option>
         <a-mentions-option value="yesmeck">yesmeck</a-mentions-option>
@@ -38,9 +38,9 @@ to work with `Form`.
       v-bind="validateInfos.bio"
     >
       <a-mentions
+        v-model:value="modelRef.bio"
         rows="3"
         placeholder="You can use @ to ref user here"
-        v-model:value="modelRef.bio"
       >
         <a-mentions-option value="afc163">afc163</a-mentions-option>
         <a-mentions-option value="zombieJ">zombieJ</a-mentions-option>

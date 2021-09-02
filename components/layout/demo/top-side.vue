@@ -20,9 +20,9 @@ Both the top navigation and the sidebar, commonly used in documentation site.
     <a-layout-header class="header">
       <div class="logo" />
       <a-menu
+        v-model:selectedKeys="selectedKeys1"
         theme="dark"
         mode="horizontal"
-        v-model:selectedKeys="selectedKeys1"
         :style="{ lineHeight: '64px' }"
       >
         <a-menu-item key="1">nav 1</a-menu-item>
@@ -39,9 +39,9 @@ Both the top navigation and the sidebar, commonly used in documentation site.
       <a-layout style="padding: 24px 0; background: #fff">
         <a-layout-sider width="200" style="background: #fff">
           <a-menu
-            mode="inline"
             v-model:selectedKeys="selectedKeys2"
             v-model:openKeys="openKeys"
+            mode="inline"
             style="height: 100%"
           >
             <a-sub-menu key="sub1">

@@ -76,6 +76,12 @@ interface MenuInfo {
   domEvent: MouseEvent;
 }
 export default defineComponent({
+  components: {
+    MailOutlined,
+    CalendarOutlined,
+    AppstoreOutlined,
+    SettingOutlined,
+  },
   setup() {
     const state = reactive({
       selectedKeys: [],
@@ -88,12 +94,6 @@ export default defineComponent({
       ...toRefs(state),
       handleClick,
     };
-  },
-  components: {
-    MailOutlined,
-    CalendarOutlined,
-    AppstoreOutlined,
-    SettingOutlined,
   },
 });
 </script>

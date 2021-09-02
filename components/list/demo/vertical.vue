@@ -28,7 +28,7 @@ Setting `itemLayout` property with `vertical` to create a vertical list.
       <a-list-item key="item.title">
         <template #actions>
           <span v-for="{ type, text } in actions" :key="type">
-            <component v-bind:is="type" style="margin-right: 8px" />
+            <component :is="type" style="margin-right: 8px" />
             {{ text }}
           </span>
         </template>

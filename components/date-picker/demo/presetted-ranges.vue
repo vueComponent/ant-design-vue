@@ -20,8 +20,8 @@ We can set presetted ranges to RangePicker to improve user experience.
   <a-space direction="vertical" :size="12">
     <a-range-picker v-model:value="value1" :ranges="ranges" />
     <a-range-picker
-      style="width: 400px"
       v-model:value="value2"
+      style="width: 400px"
       :ranges="ranges"
       show-time
       format="YYYY/MM/DD HH:mm:ss"

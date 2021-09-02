@@ -16,7 +16,7 @@ Show character counting.
 
 </docs>
 <template>
-  <a-textarea v-model:value="value" showCount :maxlength="100" />
+  <a-textarea v-model:value="value" show-count :maxlength="100" />
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';

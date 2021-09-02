@@ -23,7 +23,7 @@ The level of the aside navigation is scalable. The first, second, and third leve
   <a-layout style="min-height: 100vh">
     <a-layout-sider v-model:collapsed="collapsed" collapsible>
       <div class="logo" />
-      <a-menu theme="dark" v-model:selectedKeys="selectedKeys" mode="inline">
+      <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <a-menu-item key="1">
           <pie-chart-outlined />
           <span>Option 1</span>

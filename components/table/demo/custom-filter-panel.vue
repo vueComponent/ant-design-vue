@@ -54,8 +54,8 @@ Implement a customized column search example via `filterDropdown`.
         >
           <mark
             v-if="fragment.toLowerCase() === searchText.toLowerCase()"
-            class="highlight"
             :key="i"
+            class="highlight"
           >
             {{ fragment }}
           </mark>

@@ -105,6 +105,10 @@ import { defineComponent } from 'vue';
 import { UserOutlined, DownOutlined } from '@ant-design/icons-vue';
 
 export default defineComponent({
+  components: {
+    UserOutlined,
+    DownOutlined,
+  },
   setup() {
     const handleButtonClick = (e: Event) => {
       console.log('click left button', e);
@@ -116,10 +120,6 @@ export default defineComponent({
       handleButtonClick,
       handleMenuClick,
     };
-  },
-  components: {
-    UserOutlined,
-    DownOutlined,
   },
 });
 </script>

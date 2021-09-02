@@ -20,14 +20,14 @@ Use `rowClassName` Customize the table with Striped.
     size="middle"
     :columns="columns"
     :data-source="data"
-    :rowClassName="(record, index) => (index % 2 === 1 ? 'table-striped' : null)"
+    :row-class-name="(record, index) => (index % 2 === 1 ? 'table-striped' : null)"
   />
   <a-table
     class="ant-table-striped"
     size="middle"
     :columns="columns"
     :data-source="data"
-    :rowClassName="(record, index) => (index % 2 === 1 ? 'table-striped' : null)"
+    :row-class-name="(record, index) => (index % 2 === 1 ? 'table-striped' : null)"
     bordered
   />
 </template>

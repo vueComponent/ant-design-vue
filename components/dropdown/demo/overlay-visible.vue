@@ -42,6 +42,9 @@ interface MenuInfo {
   domEvent: MouseEvent;
 }
 export default defineComponent({
+  components: {
+    DownOutlined,
+  },
   setup() {
     const visible = ref(false);
     const handleMenuClick = (e: MenuInfo) => {
@@ -53,9 +56,6 @@ export default defineComponent({
       visible,
       handleMenuClick,
     };
-  },
-  components: {
-    DownOutlined,
   },
 });
 </script>

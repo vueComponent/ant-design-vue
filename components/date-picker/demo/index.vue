@@ -55,7 +55,7 @@ export default defineComponent({
     Suffix,
     SelectInRnage,
     Bordered,
-    RangePicker
+    RangePicker,
   },
 });
 </script>

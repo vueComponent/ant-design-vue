@@ -17,7 +17,7 @@ Render radios by configuring `options`.
 </docs>
 <template>
   <div>
-    <a-radio-group :options="plainOptions" v-model:value="value1" />
+    <a-radio-group v-model:value="value1" :options="plainOptions" />
     <br />
     <a-radio-group v-model:value="value2" :options="options" />
     <br />

@@ -17,7 +17,7 @@ The Drawer can appear from any edge of the screen.
 </docs>
 
 <template>
-  <a-radio-group style="margin-right: 8px" v-model:value="placement">
+  <a-radio-group v-model:value="placement" style="margin-right: 8px">
     <a-radio value="top">top</a-radio>
     <a-radio value="right">right</a-radio>
     <a-radio value="bottom">bottom</a-radio>

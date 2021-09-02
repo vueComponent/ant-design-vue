@@ -43,6 +43,9 @@ interface MenuInfo {
 }
 
 export default defineComponent({
+  components: {
+    DownOutlined,
+  },
   setup() {
     const onClick = ({ key }: MenuInfo) => {
       console.log(`Click on item ${key}`);
@@ -50,9 +53,6 @@ export default defineComponent({
     return {
       onClick,
     };
-  },
-  components: {
-    DownOutlined,
   },
 });
 </script>

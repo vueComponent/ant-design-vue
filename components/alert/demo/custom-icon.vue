@@ -20,16 +20,16 @@ Custom Icon make information more clear and more friendly.
   <a-alert message="showIcon = false" type="success">
     <template #icon><smile-outlined /></template>
   </a-alert>
-  <a-alert message="Success Tips" type="success" showIcon>
+  <a-alert message="Success Tips" type="success" show-icon>
     <template #icon><smile-outlined /></template>
   </a-alert>
-  <a-alert message="Informational Notes" type="info" showIcon>
+  <a-alert message="Informational Notes" type="info" show-icon>
     <template #icon><smile-outlined /></template>
   </a-alert>
-  <a-alert message="Warning" type="warning" showIcon>
+  <a-alert message="Warning" type="warning" show-icon>
     <template #icon><smile-outlined /></template>
   </a-alert>
-  <a-alert message="Error" type="error" showIcon>
+  <a-alert message="Error" type="error" show-icon>
     <template #icon><smile-outlined /></template>
   </a-alert>
   <a-alert

@@ -62,15 +62,15 @@ Customize render list with Table component.
       </template>
     </a-transfer>
     <a-switch
+      v-model:checked="disabled"
       un-checked-children="disabled"
       checked-children="disabled"
-      v-model:checked="disabled"
       style="margin-top: 16px"
     />
     <a-switch
+      v-model:checked="showSearch"
       un-checked-children="showSearch"
       checked-children="showSearch"
-      v-model:checked="showSearch"
       style="margin-top: 16px"
     />
   </div>

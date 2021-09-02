@@ -16,7 +16,7 @@ Use `defaultFileList` for uploaded files when page init.
 </docs>
 
 <template>
-  <a-upload action="https://www.mocky.io/v2/5cc8019d300000980a055e76" v-model:file-list="fileList">
+  <a-upload v-model:file-list="fileList" action="https://www.mocky.io/v2/5cc8019d300000980a055e76">
     <a-button>
       <upload-outlined></upload-outlined>
       Upload

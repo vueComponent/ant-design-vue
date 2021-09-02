@@ -20,7 +20,7 @@ When dealing with long content, a fixed sider can provide a better user experien
   <a-layout>
     <a-layout-sider :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }">
       <div class="logo" />
-      <a-menu theme="dark" mode="inline" v-model:selectedKeys="selectedKeys">
+      <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <a-menu-item key="1">
           <user-outlined />
           <span class="nav-text">nav 1</span>
@@ -175,11 +175,6 @@ import {
 } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
-  setup() {
-    return {
-      selectedKeys: ref<string[]>(['4']),
-    };
-  },
   components: {
     UserOutlined,
     VideoCameraOutlined,
@@ -189,6 +184,11 @@ export default defineComponent({
     AppstoreOutlined,
     TeamOutlined,
     ShopOutlined,
+  },
+  setup() {
+    return {
+      selectedKeys: ref<string[]>(['4']),
+    };
   },
 });
 </script>

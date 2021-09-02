@@ -19,8 +19,8 @@ You can set `twoToneColor` prop to specific primary color for two-tone icons.
 <template>
   <div class="icons-list">
     <SmileTwoTone />
-    <HeartTwoTone twoToneColor="#eb2f96" />
-    <CheckCircleTwoTone twoToneColor="#52c41a" />
+    <HeartTwoTone two-tone-color="#eb2f96" />
+    <CheckCircleTwoTone two-tone-color="#52c41a" />
   </div>
 </template>
 <script>

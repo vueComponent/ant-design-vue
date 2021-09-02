@@ -40,7 +40,7 @@ export default {
     Size,
     Suffix,
     Bordered,
-    RangePicker
+    RangePicker,
   },
 };
 </script>

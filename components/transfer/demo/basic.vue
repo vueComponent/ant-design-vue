@@ -30,9 +30,9 @@ The most basic usage of `Transfer` involves providing the source data and target
       @scroll="handleScroll"
     />
     <a-switch
+      v-model:checked="disabled"
       un-checked-children="enabled"
       checked-children="disabled"
-      v-model:checked="disabled"
       style="margin-top: 16px"
     />
   </div>

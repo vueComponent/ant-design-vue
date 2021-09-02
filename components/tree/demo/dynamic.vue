@@ -18,10 +18,10 @@ To load data asynchronously when click to expand a treeNode.
 
 <template>
   <a-tree
-    :load-data="onLoadData"
-    :tree-data="treeData"
     v-model:expandedKeys="expandedKeys"
     v-model:selectedKeys="selectedKeys"
+    :load-data="onLoadData"
+    :tree-data="treeData"
   />
 </template>
 

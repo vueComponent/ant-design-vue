@@ -63,6 +63,10 @@ interface Domain {
   key: number;
 }
 export default defineComponent({
+  components: {
+    MinusCircleOutlined,
+    PlusOutlined,
+  },
   setup() {
     const formRef = ref();
     const formItemLayout = {
@@ -119,10 +123,6 @@ export default defineComponent({
       removeDomain,
       addDomain,
     };
-  },
-  components: {
-    MinusCircleOutlined,
-    PlusOutlined,
   },
 });
 </script>

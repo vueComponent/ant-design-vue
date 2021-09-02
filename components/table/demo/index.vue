@@ -22,7 +22,7 @@
     <RowSelection />
     <Size />
     <Stripe />
-    <Template />
+    <TemplateCom />
   </demo-sort>
 </template>
 
@@ -48,7 +48,7 @@ import RowSelectionAndOperation from './row-selection-and-operation.vue';
 import RowSelectionCustom from './row-selection-custom.vue';
 import RowSelection from './row-selection.vue';
 import Size from './size.vue';
-import Template from './template.vue';
+import TemplateCom from './template.vue';
 import Ellipsis from './ellipsis.vue';
 import Stripe from './stripe.vue';
 import CN from '../index.zh-CN.md';
@@ -79,7 +79,7 @@ export default {
     RowSelectionCustom,
     RowSelection,
     Size,
-    Template,
+    TemplateCom,
     Stripe,
   },
 };

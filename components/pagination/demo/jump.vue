@@ -16,11 +16,11 @@ Jump to a page directly.
 </docs>
 <template>
   <div>
-    <a-pagination show-quick-jumper v-model:current="current1" :total="500" @change="onChange" />
+    <a-pagination v-model:current="current1" show-quick-jumper :total="500" @change="onChange" />
     <br />
     <a-pagination
-      show-quick-jumper
       v-model:current="current2"
+      show-quick-jumper
       :total="500"
       disabled
       show-less-items

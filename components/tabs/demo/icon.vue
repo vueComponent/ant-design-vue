@@ -42,14 +42,14 @@ The Tab with Icon.
 import { AppleOutlined, AndroidOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
+  components: {
+    AppleOutlined,
+    AndroidOutlined,
+  },
   setup() {
     return {
       activeKey: ref('1'),
     };
-  },
-  components: {
-    AppleOutlined,
-    AndroidOutlined,
   },
 });
 </script>

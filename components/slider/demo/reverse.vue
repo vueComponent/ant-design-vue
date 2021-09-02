@@ -18,9 +18,9 @@ Using `reverse` to render slider reversely.
 <template>
   <div>
     <a-slider v-model:value="value1" :reverse="reverse" />
-    <a-slider range v-model:value="value2" :reverse="reverse" />
+    <a-slider v-model:value="value2" range :reverse="reverse" />
     Reversed:
-    <a-switch size="small" v-model:checked="reverse" />
+    <a-switch v-model:checked="reverse" size="small" />
   </div>
 </template>
 <script lang="ts">

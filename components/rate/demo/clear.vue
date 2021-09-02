@@ -20,7 +20,7 @@ Support set allow to clear star when click again.
     <a-rate v-model:value="value1" />
     <span class="ant-rate-text">allowClear: true</span>
     <br />
-    <a-rate :allow-clear="false" v-model:value="value2" />
+    <a-rate v-model:value="value2" :allow-clear="false" />
     <span class="ant-rate-text">allowClear: false</span>
   </div>
 </template>

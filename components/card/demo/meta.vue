@@ -24,7 +24,7 @@ A Card that supports `cover`, `avatar`, `title` and `description`.
         src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
       />
     </template>
-    <template class="ant-card-actions" #actions>
+    <template #actions class="ant-card-actions">
       <setting-outlined key="setting" />
       <edit-outlined key="edit" />
       <ellipsis-outlined key="ellipsis" />

@@ -30,14 +30,14 @@ Generating a set of Tags by array, you can add and remove dynamically.
   <a-input
     v-if="inputVisible"
     ref="inputRef"
+    v-model:value="inputValue"
     type="text"
     size="small"
     :style="{ width: '78px' }"
-    v-model:value="inputValue"
     @blur="handleInputConfirm"
     @keyup.enter="handleInputConfirm"
   />
-  <a-tag v-else @click="showInput" style="background: #fff; border-style: dashed">
+  <a-tag v-else style="background: #fff; border-style: dashed" @click="showInput">
     <plus-outlined />
     New Tag
   </a-tag>

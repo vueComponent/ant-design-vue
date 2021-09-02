@@ -18,9 +18,9 @@ Vertical menu with inline submenus.
 <template>
   <a-menu
     id="dddddd"
-    style="width: 256px"
     v-model:openKeys="openKeys"
     v-model:selectedKeys="selectedKeys"
+    style="width: 256px"
     mode="inline"
     @click="handleClick"
   >
@@ -70,6 +70,12 @@ Vertical menu with inline submenus.
 import { defineComponent, ref, watch } from 'vue';
 import { MailOutlined, QqOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
 export default defineComponent({
+  components: {
+    MailOutlined,
+    QqOutlined,
+    AppstoreOutlined,
+    SettingOutlined,
+  },
   setup() {
     const selectedKeys = ref<string[]>(['1']);
     const openKeys = ref<string[]>(['sub1']);
@@ -92,12 +98,6 @@ export default defineComponent({
       handleClick,
       titleClick,
     };
-  },
-  components: {
-    MailOutlined,
-    QqOutlined,
-    AppstoreOutlined,
-    SettingOutlined,
   },
 });
 </script>

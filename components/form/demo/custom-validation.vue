@@ -20,8 +20,8 @@ See more advanced usage at [async-validator](https://github.com/yiminghe/async-v
 
 <template>
   <a-form
-    name="custom-validation"
     ref="formRef"
+    name="custom-validation"
     :model="formState"
     :rules="rules"
     v-bind="layout"

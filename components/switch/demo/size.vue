@@ -20,7 +20,7 @@ title:
   <div>
     <a-switch v-model:checked="checked1" />
     <br />
-    <a-switch size="small" v-model:checked="checked2" />
+    <a-switch v-model:checked="checked2" size="small" />
   </div>
 </template>
 

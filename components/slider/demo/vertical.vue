@@ -18,13 +18,13 @@ The vertical Slider.
 <template>
   <div style="height: 300px">
     <div style="display: inline-block; height: 300px; margin-left: 70px">
-      <a-slider vertical v-model:value="value1" />
+      <a-slider v-model:value="value1" vertical />
     </div>
     <div style="display: inline-block; height: 300px; margin-left: 70px">
-      <a-slider vertical range :step="10" v-model:value="value2" />
+      <a-slider v-model:value="value2" vertical range :step="10" />
     </div>
     <div style="display: inline-block; height: 300px; margin-left: 70px">
-      <a-slider vertical range :marks="marks" v-model:value="value3" />
+      <a-slider v-model:value="value3" vertical range :marks="marks" />
     </div>
   </div>
 </template>

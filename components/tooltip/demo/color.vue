@@ -54,8 +54,8 @@ const customColors = ['#f50', '#2db7f5', '#87d068', '#108ee9'];
 export default defineComponent({
   setup() {
     return {
-      colors: colors,
-      customColors: customColors,
+      colors,
+      customColors,
     };
   },
 });

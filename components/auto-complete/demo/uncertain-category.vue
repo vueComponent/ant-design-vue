@@ -39,7 +39,7 @@ Lookup-Patterns - Uncertain Category.
           <span class="global-search-item-count">{{ item.count }} results</span>
         </a-select-option>
       </template>
-      <a-input-search size="large" placeholder="input here" enterButton></a-input-search>
+      <a-input-search size="large" placeholder="input here" enter-button></a-input-search>
     </a-auto-complete>
   </div>
 </template>

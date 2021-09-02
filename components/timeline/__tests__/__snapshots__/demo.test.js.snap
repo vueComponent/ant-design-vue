@@ -1,8 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/timeline/demo/alternate.md correctly 1`] = `
+exports[`renders ./components/timeline/demo/alternate.vue correctly 1`] = `
 <ul class="ant-timeline ant-timeline-alternate">
   <li class="ant-timeline-item ant-timeline-item-left">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -10,25 +11,29 @@ exports[`renders ./antdv-demo/docs/timeline/demo/alternate.md correctly 1`] = `
     <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-right">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-green">
       <!---->
     </div>
-    <div class="ant-timeline-item-content"> Solve initial network problems 2015-09-01 </div>
+    <div class="ant-timeline-item-content">Solve initial network problems 2015-09-01</div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-left">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue"><span style="font-size: 16px;" role="img" aria-label="clock-circle" class="anticon anticon-clock-circle"><svg class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue"><span style="font-size: 16px;" role="img" aria-label="clock-circle" class="anticon anticon-clock-circle"><svg focusable="false" class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span></div>
     <div class="ant-timeline-item-content"> Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-right">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-red">
       <!---->
     </div>
-    <div class="ant-timeline-item-content"> Network problems being solved 2015-09-01 </div>
+    <div class="ant-timeline-item-content">Network problems being solved 2015-09-01</div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-left">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -36,16 +41,18 @@ exports[`renders ./antdv-demo/docs/timeline/demo/alternate.md correctly 1`] = `
     <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-last ant-timeline-item-right">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue"><span style="font-size: 16px;" role="img" aria-label="clock-circle" class="anticon anticon-clock-circle"><svg class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue"><span style="font-size: 16px;" role="img" aria-label="clock-circle" class="anticon anticon-clock-circle"><svg focusable="false" class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span></div>
     <div class="ant-timeline-item-content"> Technical testing 2015-09-01 </div>
   </li>
 </ul>
 `;
 
-exports[`renders ./antdv-demo/docs/timeline/demo/basic.md correctly 1`] = `
+exports[`renders ./components/timeline/demo/basic.vue correctly 1`] = `
 <ul class="ant-timeline">
   <li class="ant-timeline-item">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -53,6 +60,7 @@ exports[`renders ./antdv-demo/docs/timeline/demo/basic.md correctly 1`] = `
     <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -60,6 +68,7 @@ exports[`renders ./antdv-demo/docs/timeline/demo/basic.md correctly 1`] = `
     <div class="ant-timeline-item-content">Solve initial network problems 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -67,6 +76,7 @@ exports[`renders ./antdv-demo/docs/timeline/demo/basic.md correctly 1`] = `
     <div class="ant-timeline-item-content">Technical testing 2015-09-01</div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-last">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -76,23 +86,26 @@ exports[`renders ./antdv-demo/docs/timeline/demo/basic.md correctly 1`] = `
 </ul>
 `;
 
-exports[`renders ./antdv-demo/docs/timeline/demo/color.md correctly 1`] = `
+exports[`renders ./components/timeline/demo/color.vue correctly 1`] = `
 <ul class="ant-timeline">
   <li class="ant-timeline-item">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-green">
       <!---->
     </div>
-    <div class="ant-timeline-item-content"> Create a services site 2015-09-01 </div>
+    <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-green">
       <!---->
     </div>
-    <div class="ant-timeline-item-content"> Create a services site 2015-09-01 </div>
+    <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-red">
       <!---->
@@ -104,6 +117,7 @@ exports[`renders ./antdv-demo/docs/timeline/demo/color.md correctly 1`] = `
     </div>
   </li>
   <li class="ant-timeline-item">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -115,6 +129,7 @@ exports[`renders ./antdv-demo/docs/timeline/demo/color.md correctly 1`] = `
     </div>
   </li>
   <li class="ant-timeline-item">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-gray">
       <!---->
@@ -126,6 +141,7 @@ exports[`renders ./antdv-demo/docs/timeline/demo/color.md correctly 1`] = `
     </div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-last">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-gray">
       <!---->
@@ -139,9 +155,10 @@ exports[`renders ./antdv-demo/docs/timeline/demo/color.md correctly 1`] = `
 </ul>
 `;
 
-exports[`renders ./antdv-demo/docs/timeline/demo/custom.md correctly 1`] = `
+exports[`renders ./components/timeline/demo/custom.vue correctly 1`] = `
 <ul class="ant-timeline">
   <li class="ant-timeline-item">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -149,6 +166,7 @@ exports[`renders ./antdv-demo/docs/timeline/demo/custom.md correctly 1`] = `
     <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -156,11 +174,13 @@ exports[`renders ./antdv-demo/docs/timeline/demo/custom.md correctly 1`] = `
     <div class="ant-timeline-item-content">Solve initial network problems 2015-09-01</div>
   </li>
   <li class="ant-timeline-item">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-red"><span style="font-size: 16px;" role="img" aria-label="clock-circle" class="anticon anticon-clock-circle"><svg class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-red"><span style="font-size: 16px;" role="img" aria-label="clock-circle" class="anticon anticon-clock-circle"><svg focusable="false" class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span></div>
     <div class="ant-timeline-item-content"> Technical testing 2015-09-01 </div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-last">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -170,10 +190,49 @@ exports[`renders ./antdv-demo/docs/timeline/demo/custom.md correctly 1`] = `
 </ul>
 `;
 
-exports[`renders ./antdv-demo/docs/timeline/demo/pending.md correctly 1`] = `
+exports[`renders ./components/timeline/demo/label.vue correctly 1`] = `
+<div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 20px;"><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="left"><span class="ant-radio-inner"></span></span><span>Left</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="right"><span class="ant-radio-inner"></span></span><span>Right</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="alternate"><span class="ant-radio-inner"></span></span><span>Alternate</span></label></div>
+<ul class="ant-timeline ant-timeline-label">
+  <li class="ant-timeline-item ant-timeline-item-left">
+    <div class="ant-timeline-item-label">2015-09-01</div>
+    <div class="ant-timeline-item-tail"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue">
+      <!---->
+    </div>
+    <div class="ant-timeline-item-content">Create a services</div>
+  </li>
+  <li class="ant-timeline-item ant-timeline-item-left">
+    <div class="ant-timeline-item-label">2015-09-01 09:12:11</div>
+    <div class="ant-timeline-item-tail"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue">
+      <!---->
+    </div>
+    <div class="ant-timeline-item-content">Solve initial network problems</div>
+  </li>
+  <li class="ant-timeline-item ant-timeline-item-left">
+    <!---->
+    <div class="ant-timeline-item-tail"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue">
+      <!---->
+    </div>
+    <div class="ant-timeline-item-content">Technical testing</div>
+  </li>
+  <li class="ant-timeline-item ant-timeline-item-last ant-timeline-item-left">
+    <div class="ant-timeline-item-label"><strong style="color: red;">2015-09-01 09:12:11</strong></div>
+    <div class="ant-timeline-item-tail"></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-blue">
+      <!---->
+    </div>
+    <div class="ant-timeline-item-content"> Network problems being solved </div>
+  </li>
+</ul>
+`;
+
+exports[`renders ./components/timeline/demo/pending.vue correctly 1`] = `
 <div>
   <ul class="ant-timeline ant-timeline-pending">
     <li class="ant-timeline-item">
+      <!---->
       <div class="ant-timeline-item-tail"></div>
       <div class="ant-timeline-item-head ant-timeline-item-head-blue">
         <!---->
@@ -181,6 +240,7 @@ exports[`renders ./antdv-demo/docs/timeline/demo/pending.md correctly 1`] = `
       <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
     </li>
     <li class="ant-timeline-item">
+      <!---->
       <div class="ant-timeline-item-tail"></div>
       <div class="ant-timeline-item-head ant-timeline-item-head-blue">
         <!---->
@@ -188,6 +248,7 @@ exports[`renders ./antdv-demo/docs/timeline/demo/pending.md correctly 1`] = `
       <div class="ant-timeline-item-content">Solve initial network problems 2015-09-01</div>
     </li>
     <li class="ant-timeline-item ant-timeline-item-last">
+      <!---->
       <div class="ant-timeline-item-tail"></div>
       <div class="ant-timeline-item-head ant-timeline-item-head-blue">
         <!---->
@@ -195,8 +256,9 @@ exports[`renders ./antdv-demo/docs/timeline/demo/pending.md correctly 1`] = `
       <div class="ant-timeline-item-content">Technical testing 2015-09-01</div>
     </li>
     <li class="ant-timeline-item ant-timeline-item-pending">
+      <!---->
       <div class="ant-timeline-item-tail"></div>
-      <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024" focusable="false"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></div>
+      <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue"><span role="img" aria-label="loading" class="anticon anticon-loading"><svg focusable="false" class="anticon-spin" data-icon="loading" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="0 0 1024 1024"><path d="M988 548c-19.9 0-36-16.1-36-36 0-59.4-11.6-117-34.6-171.3a440.45 440.45 0 00-94.3-139.9 437.71 437.71 0 00-139.9-94.3C629 83.6 571.4 72 512 72c-19.9 0-36-16.1-36-36s16.1-36 36-36c69.1 0 136.2 13.5 199.3 40.3C772.3 66 827 103 874 150c47 47 83.9 101.8 109.7 162.7 26.7 63.1 40.2 130.2 40.2 199.3.1 19.9-16 36-35.9 36z"></path></svg></span></div>
       <div class="ant-timeline-item-content">Recording...</div>
     </li>
   </ul><button style="margin-top: 16px;" class="ant-btn ant-btn-primary" type="button">
@@ -205,9 +267,10 @@ exports[`renders ./antdv-demo/docs/timeline/demo/pending.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/timeline/demo/right.md correctly 1`] = `
+exports[`renders ./components/timeline/demo/right.vue correctly 1`] = `
 <ul class="ant-timeline ant-timeline-right">
   <li class="ant-timeline-item ant-timeline-item-right">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -215,6 +278,7 @@ exports[`renders ./antdv-demo/docs/timeline/demo/right.md correctly 1`] = `
     <div class="ant-timeline-item-content">Create a services site 2015-09-01</div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-right">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->
@@ -222,11 +286,13 @@ exports[`renders ./antdv-demo/docs/timeline/demo/right.md correctly 1`] = `
     <div class="ant-timeline-item-content">Solve initial network problems 2015-09-01</div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-right">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
-    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue"><span style="font-size: 16px;" role="img" aria-label="clock-circle" class="anticon anticon-clock-circle"><svg class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span></div>
+    <div class="ant-timeline-item-head ant-timeline-item-head-custom ant-timeline-item-head-blue"><span style="font-size: 16px;" role="img" aria-label="clock-circle" class="anticon anticon-clock-circle"><svg focusable="false" class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span></div>
     <div class="ant-timeline-item-content"> Technical testing 2015-09-01 </div>
   </li>
   <li class="ant-timeline-item ant-timeline-item-last ant-timeline-item-right">
+    <!---->
     <div class="ant-timeline-item-tail"></div>
     <div class="ant-timeline-item-head ant-timeline-item-head-blue">
       <!---->

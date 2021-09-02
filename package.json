@@ -31,8 +31,7 @@
     "predev": "node node_modules/esbuild/install.js",
     "debugger": "yarn predev && vite serve examples",
     "dev": "yarn predev && yarn routes && vite serve site",
-    "test": "cross-env NODE_ENV=test WORKFLOW=true jest --config .jest.js",
-    "test:dev": "cross-env NODE_ENV=test jest --config .jest.js",
+    "test": "cross-env NODE_ENV=test jest --config .jest.js",
     "compile": "node antd-tools/cli/run.js compile",
     "generator-webtypes": "tsc -p antd-tools/generator-types/tsconfig.json && node antd-tools/generator-types/index.js",
     "pub": "node --max_old_space_size=8192 antd-tools/cli/run.js pub",
@@ -52,7 +51,8 @@
     "codecov": "codecov",
     "routes": "node site/scripts/genrateRoutes.js",
     "tsc": "tsc --noEmit",
-    "site": "yarn routes && ./node_modules/vite/bin/vite.js build site --base=https://aliyuncdn.antdv.com/v2/"
+    "site": "yarn routes && ./node_modules/vite/bin/vite.js build site --base=https://aliyuncdn.antdv.com/v2/",
+    "pub:site": "npm run site && node scripts/pushToOSS.js"
   },
   "repository": {
     "type": "git",

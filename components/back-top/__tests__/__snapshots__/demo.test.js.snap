@@ -1,13 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/back-top/demo/basic.md correctly 1`] = `
-<div>
-  <!----> Scroll down to see the bottom-right <strong style="color: rgba(64, 64, 64, 0.6);"> gray </strong> button.
-</div>
-`;
+exports[`renders ./components/back-top/demo/basic.vue correctly 1`] = `<!----> Scroll down to see the bottom-right <strong style="color: rgba(64, 64, 64, 0.6);">gray</strong> button.`;
 
-exports[`renders ./antdv-demo/docs/back-top/demo/custom.md correctly 1`] = `
+exports[`renders ./components/back-top/demo/custom.vue correctly 1`] = `
 <div id="components-back-top-demo-custom">
-  <!----> Scroll down to see the bottom-right <strong style="color: rgb(16, 136, 233);"> blue </strong> button.
+  <!----> Scroll down to see the bottom-right <strong style="color: rgb(16, 136, 233);">blue</strong> button.
 </div>
 `;

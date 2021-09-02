@@ -7,9 +7,12 @@ import { sleep } from '../utils';
 
 export default function demoTest(component, options = {}) {
   const suffix = options.suffix || 'vue';
-  const files = glob.sync(`./v2-doc/src/docs/${component}/demo/*.${suffix}`);
+  const files = glob.sync(`./components/${component}/demo/*.${suffix}`);
 
   files.forEach(file => {
+    if (file.includes('index.vue')) {
+      return;
+    }
     let testMethod = options.skip === true ? test.skip : test;
     if (Array.isArray(options.skip) && options.skip.some(c => file.includes(c))) {
       testMethod = test.skip;

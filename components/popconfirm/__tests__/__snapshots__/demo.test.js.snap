@@ -1,20 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/popconfirm/demo/basic.md correctly 1`] = `<!----><a href="#">Delete</a>`;
+exports[`renders ./components/popconfirm/demo/basic.vue correctly 1`] = `<!----><a href="#">Delete</a>`;
 
-exports[`renders ./antdv-demo/docs/popconfirm/demo/dynamic-trigger.md correctly 1`] = `
+exports[`renders ./components/popconfirm/demo/dynamic-trigger.vue correctly 1`] = `
 <div>
-  <!----><a href="#">Delete a task</a><br><br> Whether directly execute：<label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input" value=""><span class="ant-checkbox-inner"></span></span>
+  <!----><a href="#">Delete a task</a><br><br> Whether directly execute： <label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
     <!---->
   </label>
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/popconfirm/demo/icon.md correctly 1`] = `<!----><a href="#">Delete</a>`;
+exports[`renders ./components/popconfirm/demo/icon.vue correctly 1`] = `<!----><a href="#">Delete</a>`;
 
-exports[`renders ./antdv-demo/docs/popconfirm/demo/local.md correctly 1`] = `<!----><a href="#">Delete</a>`;
+exports[`renders ./components/popconfirm/demo/local.vue correctly 1`] = `<!----><a href="#">Delete</a>`;
 
-exports[`renders ./antdv-demo/docs/popconfirm/demo/placement.md correctly 1`] = `
+exports[`renders ./components/popconfirm/demo/placement.vue correctly 1`] = `
 <div id="components-a-popconfirm-demo-placement">
   <div style="margin-left: 70px; white-space: nowrap;">
     <!----><button class="ant-btn" type="button">

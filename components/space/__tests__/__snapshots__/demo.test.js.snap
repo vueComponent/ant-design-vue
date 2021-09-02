@@ -1,64 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/space/demo/align.md correctly 1`] = `
+exports[`renders ./components/space/demo/align.vue correctly 1`] = `
 <div class="space-align-container">
   <div class="space-align-block">
     <div class="ant-space ant-space-horizontal ant-space-align-center">
       <div class="ant-space-item" style="margin-right: 8px;"> center </div>
+      <!---->
       <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
           <!----><span>Primary</span>
         </button></div>
+      <!---->
       <div class="ant-space-item"><span class="mock-block">Block</span></div>
+      <!---->
     </div>
   </div>
   <div class="space-align-block">
     <div class="ant-space ant-space-horizontal ant-space-align-start">
       <div class="ant-space-item" style="margin-right: 8px;"> start </div>
+      <!---->
       <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
           <!----><span>Primary</span>
         </button></div>
+      <!---->
       <div class="ant-space-item"><span class="mock-block">Block</span></div>
+      <!---->
     </div>
   </div>
   <div class="space-align-block">
     <div class="ant-space ant-space-horizontal ant-space-align-end">
       <div class="ant-space-item" style="margin-right: 8px;"> end </div>
+      <!---->
       <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
           <!----><span>Primary</span>
         </button></div>
+      <!---->
       <div class="ant-space-item"><span class="mock-block">Block</span></div>
+      <!---->
     </div>
   </div>
   <div class="space-align-block">
     <div class="ant-space ant-space-horizontal ant-space-align-baseline">
       <div class="ant-space-item" style="margin-right: 8px;"> baseline </div>
+      <!---->
       <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
           <!----><span>Primary</span>
         </button></div>
+      <!---->
       <div class="ant-space-item"><span class="mock-block">Block</span></div>
+      <!---->
     </div>
   </div>
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/space/demo/base.md correctly 1`] = `
+exports[`renders ./components/space/demo/base.vue correctly 1`] = `
 <div class="ant-space ant-space-horizontal ant-space-align-center">
   <div class="ant-space-item" style="margin-right: 8px;"> Space </div>
+  <!---->
   <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>Button</span>
     </button></div>
-  <div class="ant-space-item" style="margin-right: 8px;"><span class=""><div class="ant-upload ant-upload-select ant-upload-select-text"><span role="button" tabindex="0" class="ant-upload"><input type="file" style="display: none;" accept=""><button class="ant-btn" type="button"><!----><span role="img" aria-label="upload" class="anticon anticon-upload"><svg class="" data-icon="upload" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M400 317.7h73.9V656c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V317.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 163a8 8 0 00-12.6 0l-112 141.7c-4.1 5.3-.4 13 6.3 13zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span><span>Click to Upload</span></button></span></div>
+  <!---->
+  <div class="ant-space-item" style="margin-right: 8px;"><span><div class="ant-upload ant-upload-select ant-upload-select-text"><span role="button" tabindex="0" class="ant-upload"><input type="file" style="display: none;" accept=""><button class="ant-btn" type="button"><!----><span role="img" aria-label="upload" class="anticon anticon-upload"><svg focusable="false" class="" data-icon="upload" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M400 317.7h73.9V656c0 4.4 3.6 8 8 8h60c4.4 0 8-3.6 8-8V317.7H624c6.7 0 10.4-7.7 6.3-12.9L518.3 163a8 8 0 00-12.6 0l-112 141.7c-4.1 5.3-.4 13 6.3 13zM878 626h-60c-4.4 0-8 3.6-8 8v154H214V634c0-4.4-3.6-8-8-8h-60c-4.4 0-8 3.6-8 8v198c0 17.7 14.3 32 32 32h684c17.7 0 32-14.3 32-32V634c0-4.4-3.6-8-8-8z"></path></svg></span><span>Click to Upload</span></button></span></div>
   <div class="ant-upload-list ant-upload-list-text"></div></span>
 </div>
+<!---->
 <div class="ant-space-item">
   <!----><button class="ant-btn" type="button">
     <!----><span>Confirm</span>
   </button>
 </div>
+<!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/space/demo/customize.md correctly 1`] = `
+exports[`renders ./components/space/demo/customize.vue correctly 1`] = `
 <div>
   <div tabindex="-1" class="ant-slider">
     <div class="ant-slider-rail"></div>
@@ -72,40 +88,48 @@ exports[`renders ./antdv-demo/docs/space/demo/customize.md correctly 1`] = `
     <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
         <!----><span>Primary</span>
       </button></div>
+    <!---->
     <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn" type="button">
         <!----><span>Default</span>
       </button></div>
+    <!---->
     <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-dashed" type="button">
         <!----><span>Dashed</span>
       </button></div>
+    <!---->
     <div class="ant-space-item"><button class="ant-btn ant-btn-link" type="button">
         <!----><span>Link</span>
       </button></div>
+    <!---->
   </div>
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/space/demo/size.md correctly 1`] = `
+exports[`renders ./components/space/demo/size.vue correctly 1`] = `
 <div>
   <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="small"><span class="ant-radio-inner"></span></span><span>Small</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="middle"><span class="ant-radio-inner"></span></span><span>Middle</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="large"><span class="ant-radio-inner"></span></span><span>Large</span></label></div><br><br>
   <div class="ant-space ant-space-horizontal ant-space-align-center">
     <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-primary" type="button">
         <!----><span>Primary</span>
       </button></div>
+    <!---->
     <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn" type="button">
         <!----><span>Default</span>
       </button></div>
+    <!---->
     <div class="ant-space-item" style="margin-right: 8px;"><button class="ant-btn ant-btn-dashed" type="button">
         <!----><span>Dashed</span>
       </button></div>
+    <!---->
     <div class="ant-space-item"><button class="ant-btn ant-btn-link" type="button">
         <!----><span>Link</span>
       </button></div>
+    <!---->
   </div>
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/space/demo/vertical.md correctly 1`] = `
+exports[`renders ./components/space/demo/vertical.vue correctly 1`] = `
 <div class="ant-space ant-space-vertical">
   <div class="ant-space-item" style="margin-bottom: 8px;">
     <div class="ant-card ant-card-bordered" style="width: 300px;">
@@ -124,6 +148,7 @@ exports[`renders ./antdv-demo/docs/space/demo/vertical.md correctly 1`] = `
       <!---->
     </div>
   </div>
+  <!---->
   <div class="ant-space-item">
     <div class="ant-card ant-card-bordered" style="width: 300px;">
       <div class="ant-card-head">
@@ -141,5 +166,6 @@ exports[`renders ./antdv-demo/docs/space/demo/vertical.md correctly 1`] = `
       <!---->
     </div>
   </div>
+  <!---->
 </div>
 `;

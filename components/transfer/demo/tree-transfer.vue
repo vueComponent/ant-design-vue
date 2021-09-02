@@ -85,7 +85,7 @@ function handleTreeData(
   targetKeys: string[] = [],
 ): TreeProps['treeData'] {
   data.forEach(item => {
-    item['disabled'] = targetKeys.includes(item.key);
+    item['disabled'] = targetKeys.includes(item.key as any);
     if (item.children) {
       handleTreeData(item.children, targetKeys);
     }

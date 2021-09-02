@@ -113,6 +113,7 @@ export default defineComponent({
         ]),
         ...props.data,
         dataRef: props.data,
+        data: props.data,
         isLeaf: isLeaf.value,
       };
     });

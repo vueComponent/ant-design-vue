@@ -18,7 +18,7 @@ const client = new OSS({
   accessKeySecret,
 });
 
-const assetsPath = path.join(process.cwd(), 'dist', 'assets');
+const assetsPath = path.join(process.cwd(), 'site', 'dist', 'assets');
 
 const put = file => {
   return new Promise((reslove, reject) => {

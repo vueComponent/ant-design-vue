@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/carousel/demo/autoplay.md correctly 1`] = `
+exports[`renders ./components/carousel/demo/autoplay.vue correctly 1`] = `
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized">
     <!---->
@@ -82,7 +82,7 @@ exports[`renders ./antdv-demo/docs/carousel/demo/autoplay.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/carousel/demo/basic.md correctly 1`] = `
+exports[`renders ./components/carousel/demo/basic.vue correctly 1`] = `
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized">
     <!---->
@@ -164,10 +164,10 @@ exports[`renders ./antdv-demo/docs/carousel/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/carousel/demo/customArrows.md correctly 1`] = `
+exports[`renders ./components/carousel/demo/customArrows.vue correctly 1`] = `
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized">
-    <div class="custom-slick-arrow slick-arrow slick-prev" style="left: 10px; z-index: 1; display: block;"><span role="img" aria-label="left-circle" class="anticon anticon-left-circle"><svg class="" data-icon="left-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M603.3 327.5l-246 178a7.95 7.95 0 000 12.9l246 178c5.3 3.8 12.7 0 12.7-6.5V643c0-10.2-4.9-19.9-13.2-25.9L457.4 512l145.4-105.2c8.3-6 13.2-15.6 13.2-25.9V334c0-6.5-7.4-10.3-12.7-6.5z"></path><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg></span></div>
+    <div class="custom-slick-arrow slick-arrow slick-prev" style="left: 10px; display: block;"><span role="img" aria-label="left-circle" class="anticon anticon-left-circle"><svg focusable="false" class="" data-icon="left-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M603.3 327.5l-246 178a7.95 7.95 0 000 12.9l246 178c5.3 3.8 12.7 0 12.7-6.5V643c0-10.2-4.9-19.9-13.2-25.9L457.4 512l145.4-105.2c8.3-6 13.2-15.6 13.2-25.9V334c0-6.5-7.4-10.3-12.7-6.5z"></path><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg></span></div>
     <div class="slick-list">
       <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
         <div class="slick-slide slick-cloned" tabindex="-1" data-index="-1" aria-hidden="true" style="width: 0px;">
@@ -235,7 +235,7 @@ exports[`renders ./antdv-demo/docs/carousel/demo/customArrows.md correctly 1`] =
         </div>
       </div>
     </div>
-    <div class="custom-slick-arrow slick-arrow slick-next" style="right: 10px; display: block;"><span role="img" aria-label="right-circle" class="anticon anticon-right-circle"><svg class="" data-icon="right-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M666.7 505.5l-246-178A8 8 0 00408 334v46.9c0 10.2 4.9 19.9 13.2 25.9L566.6 512 421.2 617.2c-8.3 6-13.2 15.6-13.2 25.9V690c0 6.5 7.4 10.3 12.7 6.5l246-178c4.4-3.2 4.4-9.8 0-13z"></path><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg></span></div>
+    <div class="custom-slick-arrow slick-arrow slick-next" style="right: 10px; display: block;"><span role="img" aria-label="right-circle" class="anticon anticon-right-circle"><svg focusable="false" class="" data-icon="right-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M666.7 505.5l-246-178A8 8 0 00408 334v46.9c0 10.2 4.9 19.9 13.2 25.9L566.6 512 421.2 617.2c-8.3 6-13.2 15.6-13.2 25.9V690c0 6.5 7.4 10.3 12.7 6.5l246-178c4.4-3.2 4.4-9.8 0-13z"></path><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path></svg></span></div>
     <ul style="display: block;" class="slick-dots slick-dots-bottom">
       <li class="slick-active"><button>1</button></li>
       <li class=""><button>2</button></li>
@@ -246,69 +246,69 @@ exports[`renders ./antdv-demo/docs/carousel/demo/customArrows.md correctly 1`] =
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/carousel/demo/customPaging.md correctly 1`] = `
+exports[`renders ./components/carousel/demo/customPaging.vue correctly 1`] = `
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized"><button type="button" data-role="none" class="slick-arrow slick-prev" style="display: block;"> Previous</button>
     <div class="slick-list">
       <div class="slick-track" style="opacity: 1; transform: translate3d(0px, 0px, 0px);">
         <div class="slick-slide slick-cloned" tabindex="-1" data-index="-1" aria-hidden="true" style="width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="0" aria-hidden="false" class="slick-slide slick-active slick-current" style="outline: none; width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract01.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="1" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract02.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="2" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract03.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract03.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="3" aria-hidden="true" class="slick-slide" style="outline: none; width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="4" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract01.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="5" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract02.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="6" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract03.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract03.jpg"></div>
           </div>
         </div>
         <div tabindex="-1" data-index="7" aria-hidden="true" class="slick-slide slick-cloned" style="width: 0px;">
           <div>
-            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
+            <div tabindex="-1" style="width: 100%; display: inline-block;"><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract04.jpg"></div>
           </div>
         </div>
       </div>
     </div><button type="button" data-role="none" class="slick-arrow slick-next" style="display: block;"> Next</button>
     <ul style="display: block;" class="slick-dots slick-dots-bottom slick-dots slick-thumb">
-      <li class="slick-active"><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract01.jpg"></a></li>
-      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract02.jpg"></a></li>
-      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract03.jpg"></a></li>
-      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/abstract04.jpg"></a></li>
+      <li class="slick-active"><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract01.jpg"></a></li>
+      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract02.jpg"></a></li>
+      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract03.jpg"></a></li>
+      <li class=""><a><img src="https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/abstract04.jpg"></a></li>
     </ul>
   </div>
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/carousel/demo/fade.md correctly 1`] = `
+exports[`renders ./components/carousel/demo/fade.vue correctly 1`] = `
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized">
     <!---->
@@ -355,8 +355,8 @@ exports[`renders ./antdv-demo/docs/carousel/demo/fade.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/carousel/demo/position.md correctly 1`] = `
-<div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 8px;"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="top"><span class="ant-radio-button-inner"></span></span><span> Top </span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="bottom"><span class="ant-radio-button-inner"></span></span><span> Bottom </span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="left"><span class="ant-radio-button-inner"></span></span><span> Left </span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="right"><span class="ant-radio-button-inner"></span></span><span> Right </span></label></div>
+exports[`renders ./components/carousel/demo/position.vue correctly 1`] = `
+<div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-bottom: 8px;"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="top"><span class="ant-radio-button-inner"></span></span><span>Top</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="bottom"><span class="ant-radio-button-inner"></span></span><span>Bottom</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="left"><span class="ant-radio-button-inner"></span></span><span>Left</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="right"><span class="ant-radio-button-inner"></span></span><span>Right</span></label></div>
 <div class="ant-carousel">
   <div class="slick-slider slick-initialized">
     <!---->

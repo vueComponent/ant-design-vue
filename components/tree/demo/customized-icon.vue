@@ -21,11 +21,11 @@ You can customize icons for different nodes.
     <template #switcherIcon>
       <down-outlined />
     </template>
-    <template #icon="{ data, selected }">
-      <template v-if="data.key === '0-0'">
+    <template #icon="{ key, selected }">
+      <template v-if="key === '0-0'">
         <smile-outlined />
       </template>
-      <template v-else-if="data.key === '0-0-0'">
+      <template v-else-if="key === '0-0-0'">
         <smile-outlined />
       </template>
       <template v-else>

@@ -85,7 +85,7 @@ import type { GlobalConfig } from '../App.vue';
 import { GLOBAL_CONFIG } from '../SymbolKey';
 import { computed, defineComponent, inject, onMounted, ref } from 'vue';
 import { CheckOutlined, SnippetsOutlined } from '@ant-design/icons-vue';
-import { Modal } from 'ant-design-vue';
+// import { Modal } from 'ant-design-vue';
 export default defineComponent({
   name: 'DemoBox',
   components: {
@@ -117,11 +117,11 @@ export default defineComponent({
         props.jsfiddle?.title[globalConfig.isZhCN.value ? 'zh-CN' : 'en-US'],
     );
     const warning = () => {
-      Modal.warning({
-        content: globalConfig.isZhCN
-          ? '我们检测到你可能使用了 AdBlock 或 Adblock Plus，它会影响到复制、展开代码等功能。 你可以将 Ant Design Vue 加入白名单，以便我们更好地提供服务。'
-          : 'We have detected that you may have used AdBlock or Adblock Plus, which will affect functions such as copying and expanding code. You can add Ant Design Vue to the whitelist so that we can provide better services.',
-      });
+      // Modal.warning({
+      //   content: globalConfig.isZhCN
+      //     ? '我们检测到你可能使用了 AdBlock 或 Adblock Plus，它会影响到复制、展开代码等功能。 你可以将 Ant Design Vue 加入白名单，以便我们更好地提供服务。'
+      //     : 'We have detected that you may have used AdBlock or Adblock Plus, which will affect functions such as copying and expanding code. You can add Ant Design Vue to the whitelist so that we can provide better services.',
+      // });
     };
     const iframeDemoKey = computed(() => {
       return (

@@ -555,6 +555,7 @@ export default {
 
 ```js
 // v1
+// eslint-disable-next-line no-undef,no-unused-vars
 validateFields((err, value) => {
   if (!err) {
     // Do something with value
@@ -566,6 +567,7 @@ validateFields((err, value) => {
 
 ```js
 // v2
+// eslint-disable-next-line no-undef,no-unused-vars
 validateFields().then(values => {
   // Do something with value
 });

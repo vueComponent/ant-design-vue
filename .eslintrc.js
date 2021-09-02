@@ -15,7 +15,7 @@ module.exports = {
   plugins: ['markdown', 'jest', '@typescript-eslint'],
   overrides: [
     {
-      files: ['**/demo/*.md'],
+      files: ['*.md'],
       processor: 'markdown/markdown',
       rules: {
         'no-console': 'off',

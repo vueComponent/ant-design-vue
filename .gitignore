@@ -75,3 +75,5 @@ site/dev.js
 vetur/
 
 report.html
+
+site/src/router/demoRoutes.js

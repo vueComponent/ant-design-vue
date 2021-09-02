@@ -12,9 +12,9 @@ export default [
     component: () => import('../../../components/alert/demo/index.vue'),
   },
   {
-    path: 'anchor:lang(-cn)?',
-    meta: {"category":"Components","type":"其他","cols":2,"title":"Anchor","cover":"https://gw.alipayobjects.com/zos/alicdn/_1-C1JwsC/Anchor.svg","subtitle":"锚点"},
-    component: () => import('../../../components/anchor/demo/index.vue'),
+    path: 'auto-complete:lang(-cn)?',
+    meta: {"category":"Components","type":"数据录入","cols":2,"title":"AutoComplete","cover":"https://gw.alipayobjects.com/zos/alicdn/qtJm4yt45/AutoComplete.svg","subtitle":"自动完成"},
+    component: () => import('../../../components/auto-complete/demo/index.vue'),
   },
   {
     path: 'avatar:lang(-cn)?',
@@ -22,9 +22,9 @@ export default [
     component: () => import('../../../components/avatar/demo/index.vue'),
   },
   {
-    path: 'auto-complete:lang(-cn)?',
-    meta: {"category":"Components","type":"数据录入","cols":2,"title":"AutoComplete","cover":"https://gw.alipayobjects.com/zos/alicdn/qtJm4yt45/AutoComplete.svg","subtitle":"自动完成"},
-    component: () => import('../../../components/auto-complete/demo/index.vue'),
+    path: 'back-top:lang(-cn)?',
+    meta: {"category":"Components","type":"其他","title":"BackTop","cover":"https://gw.alipayobjects.com/zos/alicdn/tJZ5jbTwX/BackTop.svg","subtitle":"回到顶部"},
+    component: () => import('../../../components/back-top/demo/index.vue'),
   },
   {
     path: 'badge:lang(-cn)?',
@@ -32,9 +32,9 @@ export default [
     component: () => import('../../../components/badge/demo/index.vue'),
   },
   {
-    path: 'back-top:lang(-cn)?',
-    meta: {"category":"Components","type":"其他","title":"BackTop","cover":"https://gw.alipayobjects.com/zos/alicdn/tJZ5jbTwX/BackTop.svg","subtitle":"回到顶部"},
-    component: () => import('../../../components/back-top/demo/index.vue'),
+    path: 'breadcrumb:lang(-cn)?',
+    meta: {"category":"Components","type":"导航","title":"Breadcrumb","cover":"https://gw.alipayobjects.com/zos/alicdn/9Ltop8JwH/Breadcrumb.svg","subtitle":"面包屑"},
+    component: () => import('../../../components/breadcrumb/demo/index.vue'),
   },
   {
     path: 'button:lang(-cn)?',
@@ -42,9 +42,9 @@ export default [
     component: () => import('../../../components/button/demo/index.vue'),
   },
   {
-    path: 'breadcrumb:lang(-cn)?',
-    meta: {"category":"Components","type":"导航","title":"Breadcrumb","cover":"https://gw.alipayobjects.com/zos/alicdn/9Ltop8JwH/Breadcrumb.svg","subtitle":"面包屑"},
-    component: () => import('../../../components/breadcrumb/demo/index.vue'),
+    path: 'anchor:lang(-cn)?',
+    meta: {"category":"Components","type":"其他","cols":2,"title":"Anchor","cover":"https://gw.alipayobjects.com/zos/alicdn/_1-C1JwsC/Anchor.svg","subtitle":"锚点"},
+    component: () => import('../../../components/anchor/demo/index.vue'),
   },
   {
     path: 'calendar:lang(-cn)?',

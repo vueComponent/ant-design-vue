@@ -28,8 +28,9 @@
     "vetur"
   ],
   "scripts": {
-    "debugger": "vite serve examples",
-    "dev": "yarn routes && vite serve site",
+    "predev": "node node_modules/esbuild/install.js",
+    "debugger": "yarn predev && vite serve examples",
+    "dev": "yarn predev && yarn routes && vite serve site",
     "test": "cross-env NODE_ENV=test WORKFLOW=true jest --config .jest.js",
     "test:dev": "cross-env NODE_ENV=test jest --config .jest.js",
     "compile": "node antd-tools/cli/run.js compile",

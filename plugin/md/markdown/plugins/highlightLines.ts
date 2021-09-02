@@ -28,7 +28,7 @@ export const highlightLinePlugin = (md: MarkdownIt) => {
     const rawCode = code.replace(wrapperRE, '');
     const highlightLinesCode = rawCode
       .split('\n')
-      .map((split, index) => {
+      .map((_split, index) => {
         const lineNumber = index + 1;
         const inRange = lineNumbers.some(([start, end]) => {
           if (start && end) {

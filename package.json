@@ -42,12 +42,16 @@
     "prettier": "prettier -c --write '**/*'",
     "pretty-quick": "pretty-quick",
     "dist": "node --max_old_space_size=8192 antd-tools/cli/run.js dist",
-    "lint": "eslint -c ./.eslintrc.js --fix --ext .jsx,.js,.ts,.tsx ./components",
-    "lint:demo": "eslint -c ./.eslintrc.js --fix --ext .vue ./components",
+    "lint": "npm run tsc && npm run lint:demo && npm run lint:md && npm run lint:script && npm run lint:site",
+    "lint:components": "eslint --fix --ext .jsx,.js,.ts,.tsx ./components",
+    "lint:demo": "eslint --fix components/*/demo/*.vue",
+    "lint:md": "eslint --fix *.md",
+    "lint:script": "eslint . --ext '.js,.jsx,.ts,.tsx'",
     "lint:site": "eslint -c ./.eslintrc.js --fix --ext .jsx,.js,.ts,.tsx,vue ./site",
     "lint:style": "stylelint \"{site,components}/**/*.less\" --syntax less",
     "codecov": "codecov",
-    "routes": "node site/scripts/genrateRoutes.js"
+    "routes": "node site/scripts/genrateRoutes.js",
+    "tsc": "tsc --noEmit"
   },
   "repository": {
     "type": "git",

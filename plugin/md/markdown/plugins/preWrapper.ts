@@ -7,8 +7,8 @@
 //   3. <!--beforeend-->
 //   4. <!--afterend-->
 
-import MarkdownIt from 'markdown-it';
-import { MarkdownParsedData } from '../markdown';
+import type MarkdownIt from 'markdown-it';
+import type { MarkdownParsedData } from '../markdown';
 
 export const preWrapperPlugin = (md: MarkdownIt) => {
   const fence = md.renderer.rules.fence!;

@@ -9,7 +9,7 @@ import { URL } from 'url';
 const indexRE = /(^|.*\/)index.md(#?.*)$/i;
 
 export const linkPlugin = (md: MarkdownIt, externalAttrs: Record<string, string>) => {
-  md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
+  md.renderer.rules.link_open = (tokens, idx, options, _env, self) => {
     const token = tokens[idx];
     const hrefIndex = token.attrIndex('href');
     if (hrefIndex >= 0) {

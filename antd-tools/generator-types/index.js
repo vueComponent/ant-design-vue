@@ -13,6 +13,7 @@ try {
     outputDir: path.resolve(rootPath, './vetur'),
     tagPrefix: 'a-',
   });
+  // eslint-disable-next-line no-console
   console.log('generator types success');
 } catch (e) {
   console.error('generator types error', e);

@@ -18,7 +18,7 @@ export function formatType(type: string) {
 }
 
 export function getComponentName(name: string) {
-  let title = name
+  const title = name
     .split('-')
     .map(it => it.substring(0, 1) + it.substring(1))
     .join('');

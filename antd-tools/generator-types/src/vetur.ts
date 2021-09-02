@@ -1,4 +1,4 @@
-import { VueTag, VeturTags, VeturAttributes } from './type';
+import type { VueTag, VeturTags, VeturAttributes } from './type';
 
 export function genVeturTags(tags: VueTag[]) {
   const veturTags: VeturTags = {};

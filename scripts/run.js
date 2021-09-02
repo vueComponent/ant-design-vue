@@ -8,7 +8,9 @@ const gulp = require('gulp');
 const program = require('commander');
 
 program.on('--help', () => {
+  // eslint-disable-next-line no-console
   console.log('  Usage:'.to.bold.blue.color);
+  // eslint-disable-next-line no-console
   console.log();
 });
 
@@ -41,6 +43,7 @@ const task = program.args[0];
 if (!task) {
   program.help();
 } else {
+  // eslint-disable-next-line no-console
   console.log('scripts run', task);
 
   require('./gulpfile');

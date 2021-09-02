@@ -49,7 +49,7 @@
 
 <script>
 // eslint-disable-next-line no-unused-vars
-import { mapActions, mapState, mapMutations } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import Login from './components';
 
 const { Tab, Email, Password, Submit } = Login;

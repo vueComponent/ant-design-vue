@@ -4,7 +4,7 @@ import { deeplyParseHeader } from '../../utils/parseHeader';
 import { slugify } from './slugify';
 
 export const extractHeaderPlugin = (md: MarkdownIt, include = ['h2', 'h3']) => {
-  md.renderer.rules.heading_open = (tokens, i, options, env, self) => {
+  md.renderer.rules.heading_open = (tokens, i, options, _env, self) => {
     const token = tokens[i];
     if (include.includes(token.tag)) {
       const title = tokens[i + 1].content;

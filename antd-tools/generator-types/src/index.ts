@@ -1,10 +1,10 @@
 import glob from 'fast-glob';
-import { join, dirname, basename } from 'path';
+import { join, dirname } from 'path';
 import { mdParser } from './parser';
 import { formatter } from './formatter';
 import { genWebTypes } from './web-types';
 import { readFileSync, outputFileSync } from 'fs-extra';
-import { Options, VueTag } from './type';
+import type { Options, VueTag } from './type';
 import { normalizePath, getComponentName } from './utils';
 import { genVeturTags, genVeturAttributes } from './vetur';
 

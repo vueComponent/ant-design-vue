@@ -34,7 +34,7 @@ const useMenus = (): {
         const inCategory =
           r.meta &&
           r.meta.category &&
-          r.meta.category.toLowerCase() === category &&
+          (r.meta.category as string).toLowerCase() === category &&
           !pattern.test(r.path);
         if (inCategory && category === 'docs') {
           if (isZhCN) {

@@ -1,7 +1,7 @@
 <docs>
 ---
 order: 2
-title: 
+title:
   zh-CN: 自定义尺寸
   en-US: Custom Size
 ---
@@ -68,7 +68,7 @@ Custom sizes to fit in a variety of containers.
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 // TODO
-import { RadioChangeEvent } from 'ant-design-vue/es/radio/interface';
+import type { RadioChangeEvent } from 'ant-design-vue/es/radio/interface';
 
 export default defineComponent({
   setup() {

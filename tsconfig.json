@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "ant-design-vue": ["components/index.tsx"],
+      "ant-design-vue/es/*": ["components/*"]
+    },
     "strictNullChecks": false,
     "moduleResolution": "node",
     "esModuleInterop": true,

@@ -1,11 +1,13 @@
 import less from 'less';
-// import { getThemeVariables } from 'ant-design-vue/dist/theme';
+import defaultVars from '../scripts/default-vars';
+import dark from '../scripts/dark-vars';
 const themeConfig = [
   {
     theme: 'dark',
     htmlThemeAttr: 'dark',
     modifyVars: {
-      // ...getThemeVariables({ dark: true }),
+      ...defaultVars,
+      ...dark,
       'text-color': 'fade(@white, 65%)',
       'gray-8': '@text-color',
       'background-color-base': '#555',

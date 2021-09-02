@@ -3,18 +3,14 @@ import vue from '@vitejs/plugin-vue';
 import md from '../plugin/md';
 import docs from '../plugin/docs';
 import vueJsx from '@vitejs/plugin-vue-jsx';
-// import { getThemeVariables } from 'ant-design-vue/dist/theme';
-// import { additionalData } from './themeConfig';
+import { additionalData } from './themeConfig';
 import defaultVar from '../scripts/default-vars';
-// import compact from '../scripts/compact-vars';
-// import dark from '../scripts/dark-vars';
 /**
  * @type {import('vite').UserConfig}
  */
 export default {
   resolve: {
     alias: {
-      // moment: 'moment/dist/moment.js',
       '@': path.join(__dirname, './src'),
       vue: 'vue/dist/vue.esm-bundler.js',
       'ant-design-vue': path.resolve(__dirname, '../components'),
@@ -23,6 +19,8 @@ export default {
   plugins: [
     vueJsx({
       // options are passed on to @vue/babel-plugin-jsx
+      mergeProps: false,
+      enableObjectSlots: false,
     }),
     docs(),
     md(),
@@ -31,7 +29,16 @@ export default {
     }),
   ],
   optimizeDeps: {
-    include: ['fetch-jsonp', '@ant-design/icons-vue', 'lodash-es'],
+    include: [
+      'fetch-jsonp',
+      '@ant-design/icons-vue',
+      'lodash-es',
+      'dayjs',
+      'vue',
+      'vue-router',
+      'vue-i18n',
+      'async-validator',
+    ],
   },
   css: {
     preprocessorOptions: {
@@ -39,7 +46,7 @@ export default {
         modifyVars: { ...defaultVar },
         javascriptEnabled: true,
         // includePaths: ["node_modules/"],
-        // additionalData,
+        additionalData,
       },
     },
   },

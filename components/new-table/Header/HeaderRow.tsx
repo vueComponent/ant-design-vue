@@ -18,7 +18,7 @@ export interface RowProps<RecordType = DefaultRecordType> {
   flattenColumns: readonly ColumnType<RecordType>[];
   rowComponent: CustomizeComponent;
   cellComponent: CustomizeComponent;
-  onHeaderRow: GetComponentProps<readonly ColumnType<RecordType>[]>;
+  customHeaderRow: GetComponentProps<readonly ColumnType<RecordType>[]>;
   index: number;
 }
 
@@ -31,7 +31,7 @@ export default defineComponent<RowProps>({
     'rowComponent',
     'cellComponent',
     'index',
-    'onHeaderRow',
+    'customHeaderRow',
   ] as any,
   setup(props: RowProps) {
     const tableContext = useInjectTable();
@@ -43,13 +43,13 @@ export default defineComponent<RowProps>({
         flattenColumns,
         rowComponent: RowComponent,
         cellComponent: CellComponent,
-        onHeaderRow,
+        customHeaderRow,
         index,
       } = props;
 
       let rowProps;
-      if (onHeaderRow) {
-        rowProps = onHeaderRow(
+      if (customHeaderRow) {
+        rowProps = customHeaderRow(
           cells.map(cell => cell.column),
           index,
         );
@@ -70,8 +70,8 @@ export default defineComponent<RowProps>({
             );
 
             let additionalProps;
-            if (column && column.onHeaderCell) {
-              additionalProps = cell.column.onHeaderCell(column);
+            if (column && column.customHeaderCell) {
+              additionalProps = cell.column.customHeaderCell(column);
             }
 
             return (

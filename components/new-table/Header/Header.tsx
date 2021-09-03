@@ -87,18 +87,18 @@ export interface HeaderProps<RecordType = DefaultRecordType> {
   columns: ColumnsType<RecordType>;
   flattenColumns: readonly ColumnType<RecordType>[];
   stickyOffsets: StickyOffsets;
-  onHeaderRow: GetComponentProps<readonly ColumnType<RecordType>[]>;
+  customHeaderRow: GetComponentProps<readonly ColumnType<RecordType>[]>;
 }
 
 export default defineComponent<HeaderProps>({
   name: 'Header',
-  props: ['columns', 'flattenColumns', 'stickyOffsets', 'onHeaderRow'] as any,
+  props: ['columns', 'flattenColumns', 'stickyOffsets', 'customHeaderRow'] as any,
   setup(props) {
     const tableContext = useInjectTable();
     const rows = computed(() => parseHeaderRows(props.columns));
     return () => {
       const { prefixCls, getComponent } = tableContext;
-      const { stickyOffsets, flattenColumns, onHeaderRow } = props;
+      const { stickyOffsets, flattenColumns, customHeaderRow } = props;
       const WrapperComponent = getComponent(['header', 'wrapper'], 'thead');
       const trComponent = getComponent(['header', 'row'], 'tr');
       const thComponent = getComponent(['header', 'cell'], 'th');
@@ -113,7 +113,7 @@ export default defineComponent<HeaderProps>({
                 stickyOffsets={stickyOffsets}
                 rowComponent={trComponent}
                 cellComponent={thComponent}
-                onHeaderRow={onHeaderRow}
+                customHeaderRow={customHeaderRow}
                 index={rowIndex}
               />
             );

@@ -62,4 +62,9 @@ export function getDataAndAriaProps(props) {
   }, {});
 }
 
+export function toPx(val) {
+  if (typeof val === 'number') return `${val}px`;
+  return val;
+}
+
 export { isOn, cacheStringFunction, camelize, hyphenate, capitalize, resolvePropValue };

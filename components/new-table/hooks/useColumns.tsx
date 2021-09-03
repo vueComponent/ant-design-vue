@@ -102,40 +102,38 @@ function revertForRtl<RecordType>(columns: ColumnsType<RecordType>): ColumnsType
 /**
  * Parse `columns` & `children` into `columns`.
  */
-function useColumns<RecordType>(
-  {
-    prefixCls,
-    columns: baseColumns,
-    // children,
-    expandable,
-    expandedKeys,
-    getRowKey,
-    onTriggerExpand,
-    expandIcon,
-    rowExpandable,
-    expandIconColumnIndex,
-    direction,
-    expandRowByClick,
-    columnWidth,
-    fixed,
-  }: {
-    prefixCls?: Ref<string>;
-    columns?: Ref<ColumnsType<RecordType>>;
-    // children?: React.ReactNode;
-    expandable: Ref<boolean>;
-    expandedKeys: Ref<Set<Key>>;
-    getRowKey: GetRowKey<RecordType>;
-    onTriggerExpand: TriggerEventHandler<RecordType>;
-    expandIcon?: Ref<RenderExpandIcon<RecordType>>;
-    rowExpandable?: Ref<(record: RecordType) => boolean>;
-    expandIconColumnIndex?: Ref<number>;
-    direction?: Ref<'ltr' | 'rtl'>;
-    expandRowByClick?: Ref<boolean>;
-    columnWidth?: Ref<number | string>;
-    fixed?: Ref<FixedType>;
-  },
-  transformColumns: (columns: ColumnsType<RecordType>) => ColumnsType<RecordType>,
-): [ComputedRef<ColumnsType<RecordType>>, ComputedRef<readonly ColumnType<RecordType>[]>] {
+function useColumns<RecordType>({
+  prefixCls,
+  columns: baseColumns,
+  // children,
+  expandable,
+  expandedKeys,
+  getRowKey,
+  onTriggerExpand,
+  expandIcon,
+  rowExpandable,
+  expandIconColumnIndex,
+  direction,
+  expandRowByClick,
+  expandColumnWidth,
+  expandFixed,
+}: {
+  prefixCls?: Ref<string>;
+  columns?: Ref<ColumnsType<RecordType>>;
+  // children?: React.ReactNode;
+  expandable: Ref<boolean>;
+  expandedKeys: Ref<Set<Key>>;
+  getRowKey: Ref<GetRowKey<RecordType>>;
+  onTriggerExpand: TriggerEventHandler<RecordType>;
+  expandIcon?: Ref<RenderExpandIcon<RecordType>>;
+  rowExpandable?: Ref<(record: RecordType) => boolean>;
+  expandIconColumnIndex?: Ref<number>;
+  direction?: Ref<'ltr' | 'rtl'>;
+  expandRowByClick?: Ref<boolean>;
+  expandColumnWidth?: Ref<number | string>;
+  expandFixed?: Ref<FixedType>;
+}): // transformColumns: (columns: ColumnsType<RecordType>) => ColumnsType<RecordType>,
+[ComputedRef<ColumnsType<RecordType>>, ComputedRef<readonly ColumnType<RecordType>[]>] {
   // const baseColumns = React.useMemo<ColumnsType<RecordType>>(
   //   () => columns || convertChildrenToColumns(children),
   //   [columns, children],
@@ -148,10 +146,10 @@ function useColumns<RecordType>(
       const prevColumn = baseColumns[expandColIndex];
 
       let fixedColumn: FixedType | null;
-      if ((fixed.value === 'left' || fixed.value) && !expandIconColumnIndex.value) {
+      if ((expandFixed.value === 'left' || expandFixed.value) && !expandIconColumnIndex.value) {
         fixedColumn = 'left';
       } else if (
-        (fixed.value === 'right' || fixed.value) &&
+        (expandFixed.value === 'right' || expandFixed.value) &&
         expandIconColumnIndex.value === baseColumns.value.length
       ) {
         fixedColumn = 'right';
@@ -170,9 +168,9 @@ function useColumns<RecordType>(
         title: '',
         fixed: fixedColumn,
         class: `${prefixCls.value}-row-expand-icon-cell`,
-        width: columnWidth.value,
-        render: (_, record, index) => {
-          const rowKey = getRowKey(record, index);
+        width: expandColumnWidth.value,
+        customRender: ({ record, index }) => {
+          const rowKey = getRowKey.value(record, index);
           const expanded = expandedKeysValue.has(rowKey);
           const recordExpandable = rowExpandableValue ? rowExpandableValue(record) : true;
 
@@ -203,9 +201,9 @@ function useColumns<RecordType>(
 
   const mergedColumns = computed(() => {
     let finalColumns = withExpandColumns.value;
-    if (transformColumns) {
-      finalColumns = transformColumns(finalColumns);
-    }
+    // if (transformColumns) {
+    //   finalColumns = transformColumns(finalColumns);
+    // }
 
     // Always provides at least one column for table display
     if (!finalColumns.length) {

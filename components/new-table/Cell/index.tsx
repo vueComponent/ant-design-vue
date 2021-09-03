@@ -1,5 +1,5 @@
 import classNames from 'ant-design-vue/es/_util/classNames';
-import { isValidElement } from 'ant-design-vue/es/_util/props-util';
+import { isValidElement, parseStyleText } from 'ant-design-vue/es/_util/props-util';
 import { CSSProperties, defineComponent, HTMLAttributes } from 'vue';
 
 import type {
@@ -46,7 +46,7 @@ export interface CellProps<RecordType = DefaultRecordType> {
   // Additional
   /** @private Used for `expandable` with nest tree */
   appendNode?: any;
-  additionalProps?: Omit<HTMLAttributes, 'style'> & { style?: CSSProperties };
+  additionalProps?: HTMLAttributes;
 
   rowType?: 'header' | 'body' | 'footer';
 
@@ -196,7 +196,7 @@ export default defineComponent<CellProps>({
           cellClass,
         ),
         style: {
-          ...additionalProps.style,
+          ...parseStyleText(additionalProps.style as any),
           ...alignStyle,
           ...fixedStyle,
           ...cellStyle,

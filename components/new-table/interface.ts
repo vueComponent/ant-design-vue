@@ -64,7 +64,7 @@ interface ColumnSharedType<RecordType> {
   class?: string;
   className?: string;
   fixed?: FixedType;
-  onHeaderCell?: GetComponentProps<ColumnsType<RecordType>[number]>;
+  customHeaderCell?: GetComponentProps<ColumnsType<RecordType>[number]>;
   ellipsis?: CellEllipsisType;
   align?: AlignType;
 }
@@ -87,7 +87,7 @@ export interface ColumnType<RecordType> extends ColumnSharedType<RecordType> {
   }) => any | RenderedCell<RecordType>;
   rowSpan?: number;
   width?: number | string;
-  onCell?: GetComponentProps<RecordType>;
+  customCell?: GetComponentProps<RecordType>;
   /** @deprecated Please use `onCell` instead */
   onCellClick?: (record: RecordType, e: MouseEvent) => void;
 }
@@ -150,30 +150,31 @@ export type GetComponent = (
 export type ExpandableType = false | 'row' | 'nest';
 
 export interface LegacyExpandableProps<RecordType> {
-  /** @deprecated Use `expandable.expandedRowKeys` instead */
   expandedRowKeys?: Key[];
-  /** @deprecated Use `expandable.defaultExpandedRowKeys` instead */
+
   defaultExpandedRowKeys?: Key[];
-  /** @deprecated Use `expandable.expandedRowRender` instead */
+
   expandedRowRender?: ExpandedRowRender<RecordType>;
-  /** @deprecated Use `expandable.expandRowByClick` instead */
+
   expandRowByClick?: boolean;
-  /** @deprecated Use `expandable.expandIcon` instead */
+
   expandIcon?: RenderExpandIcon<RecordType>;
-  /** @deprecated Use `expandable.onExpand` instead */
+
   onExpand?: (expanded: boolean, record: RecordType) => void;
-  /** @deprecated Use `expandable.onExpandedRowsChange` instead */
+
   onExpandedRowsChange?: (expandedKeys: Key[]) => void;
-  /** @deprecated Use `expandable.defaultExpandAllRows` instead */
+
   defaultExpandAllRows?: boolean;
-  /** @deprecated Use `expandable.indentSize` instead */
+
   indentSize?: number;
-  /** @deprecated Use `expandable.expandIconColumnIndex` instead */
+
   expandIconColumnIndex?: number;
-  /** @deprecated Use `expandable.expandedRowClassName` instead */
+
   expandedRowClassName?: RowClassName<RecordType>;
-  /** @deprecated Use `expandable.childrenColumnName` instead */
+
   childrenColumnName?: string;
+
+  rowExpandable?: (record: RecordType) => boolean;
 }
 
 export type ExpandedRowRender<ValueType> = (

@@ -50,11 +50,11 @@ function flatRecord<T>(
  * @param {GetRowKey<T>} getRowKey  : 获取当前rowKey的方法
  * @returns flattened data
  */
-export default function useFlattenRecords<T>(
-  dataRef: Ref<[]>,
+export default function useFlattenRecords<T = unknown>(
+  dataRef: Ref<T[]>,
   childrenColumnNameRef: Ref<string>,
   expandedKeysRef: Ref<Set<Key>>,
-  getRowKey: GetRowKey<T>,
+  getRowKey: Ref<GetRowKey<T>>,
 ) {
   const arr: Ref<{ record: T; indent: number }[]> = computed(() => {
     const childrenColumnName = childrenColumnNameRef.value;
@@ -67,7 +67,7 @@ export default function useFlattenRecords<T>(
       for (let i = 0; i < data?.length; i += 1) {
         const record = data[i];
 
-        temp.push(...flatRecord<T>(record, 0, childrenColumnName, expandedKeys, getRowKey));
+        temp.push(...flatRecord<T>(record, 0, childrenColumnName, expandedKeys, getRowKey.value));
       }
 
       return temp;

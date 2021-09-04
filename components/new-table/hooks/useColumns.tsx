@@ -120,7 +120,6 @@ function useColumns<RecordType>({
 }: {
   prefixCls?: Ref<string>;
   columns?: Ref<ColumnsType<RecordType>>;
-  // children?: React.ReactNode;
   expandable: Ref<boolean>;
   expandedKeys: Ref<Set<Key>>;
   getRowKey: Ref<GetRowKey<RecordType>>;
@@ -134,11 +133,6 @@ function useColumns<RecordType>({
   expandFixed?: Ref<FixedType>;
 }): // transformColumns: (columns: ColumnsType<RecordType>) => ColumnsType<RecordType>,
 [ComputedRef<ColumnsType<RecordType>>, ComputedRef<readonly ColumnType<RecordType>[]>] {
-  // const baseColumns = React.useMemo<ColumnsType<RecordType>>(
-  //   () => columns || convertChildrenToColumns(children),
-  //   [columns, children],
-  // );
-
   // Add expand column
   const withExpandColumns = computed<ColumnsType<RecordType>>(() => {
     if (expandable.value) {

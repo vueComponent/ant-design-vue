@@ -86,6 +86,7 @@ export default defineComponent<RowProps>({
                 additionalProps={additionalProps}
                 rowType="header"
                 column={column}
+                v-slots={{ default: () => column.title }}
               />
             );
           })}

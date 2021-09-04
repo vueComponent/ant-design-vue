@@ -36,9 +36,8 @@ export type RowClassName<RecordType> = (
 export interface CellType<RecordType = DefaultRecordType> {
   key?: Key;
   class?: string;
-  className?: string;
   style?: CSSProperties;
-  children?: any;
+  // children?: any;
   column?: ColumnsType<RecordType>[number];
   colSpan?: number;
   rowSpan?: number;

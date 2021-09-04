@@ -6,8 +6,6 @@ import type { AlignType } from '../interface';
 import { getCellFixedInfo } from '../utils/fixUtil';
 
 export interface SummaryCellProps {
-  className?: string;
-  children?: any;
   index: number;
   colSpan?: number;
   rowSpan?: number;
@@ -38,7 +36,7 @@ export default defineComponent<SummaryCellProps>({
 
       return (
         <Cell
-          className={attrs.class as string}
+          class={attrs.class as string}
           index={index}
           component="td"
           prefixCls={prefixCls}

@@ -29,8 +29,8 @@ function parseHeaderRows<RecordType>(
     const colSpans: number[] = columns.filter(Boolean).map(column => {
       const cell: CellType<RecordType> = {
         key: column.key,
-        className: classNames(column.className, column.class),
-        children: column.title,
+        class: classNames(column.className, column.class),
+        // children: column.title,
         column,
         colStart: currentColIndex,
       };

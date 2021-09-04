@@ -16,7 +16,6 @@ export interface BodyProps<RecordType> {
   expandedKeys: Set<Key>;
   customRow: GetComponentProps<RecordType>;
   rowExpandable: (record: RecordType) => boolean;
-  // emptyNode: React.ReactNode;
   childrenColumnName: string;
 }
 

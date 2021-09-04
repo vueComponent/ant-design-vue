@@ -22,14 +22,12 @@ function isRenderCell<RecordType = DefaultRecordType>(
 
 export interface CellProps<RecordType = DefaultRecordType> {
   prefixCls?: string;
-  className?: string;
   record?: RecordType;
   /** `record` index. Not `column` index. */
   index?: number;
   dataIndex?: DataIndex;
   customRender?: ColumnType<RecordType>['customRender'];
   component?: CustomizeComponent;
-  children?: any;
   colSpan?: number;
   rowSpan?: number;
   ellipsis?: CellEllipsisType;
@@ -46,6 +44,7 @@ export interface CellProps<RecordType = DefaultRecordType> {
   // Additional
   /** @private Used for `expandable` with nest tree */
   appendNode?: any;
+
   additionalProps?: HTMLAttributes;
 
   rowType?: 'header' | 'body' | 'footer';
@@ -56,18 +55,39 @@ export interface CellProps<RecordType = DefaultRecordType> {
 }
 export default defineComponent<CellProps>({
   name: 'Cell',
-  props: [] as any,
+  props: [
+    'prefixCls',
+    'record',
+    'index',
+    'dataIndex',
+    'customRender',
+    'children',
+    'component',
+    'colSpan',
+    'rowSpan',
+    'fixLeft',
+    'fixRight',
+    'firstFixLeft',
+    'lastFixLeft',
+    'firstFixRight',
+    'lastFixRight',
+    'appendNode',
+    'additionalProps',
+    'ellipsis',
+    'align',
+    'rowType',
+    'isSticky',
+    'column',
+  ] as any,
   slots: ['appendNode'],
-  setup(props) {
+  setup(props, { slots }) {
     return () => {
       const {
         prefixCls,
-        className,
         record,
         index,
         dataIndex,
         customRender,
-        children,
         component: Component = 'td',
         colSpan,
         rowSpan,
@@ -77,7 +97,7 @@ export default defineComponent<CellProps>({
         lastFixLeft,
         firstFixRight,
         lastFixRight,
-        appendNode,
+        appendNode = slots.appendNode?.(),
         additionalProps = {},
         ellipsis,
         align,
@@ -90,7 +110,7 @@ export default defineComponent<CellProps>({
       // ==================== Child Node ====================
       let cellProps: CellType;
       let childNode;
-
+      const children = slots.default?.();
       if (validateValue(children)) {
         childNode = children;
       } else {
@@ -127,8 +147,7 @@ export default defineComponent<CellProps>({
         colSpan: cellColSpan,
         rowSpan: cellRowSpan,
         style: cellStyle,
-        className: cellClassName,
-        class: cellClass,
+        class: cellClassName,
         ...restCellProps
       } = cellProps || {};
       const mergedColSpan = cellColSpan !== undefined ? cellColSpan : colSpan;
@@ -179,7 +198,6 @@ export default defineComponent<CellProps>({
         rowSpan: mergedRowSpan && mergedRowSpan !== 1 ? mergedRowSpan : null,
         class: classNames(
           cellPrefixCls,
-          className,
           {
             [`${cellPrefixCls}-fix-left`]: isFixLeft,
             [`${cellPrefixCls}-fix-left-first`]: firstFixLeft,
@@ -193,7 +211,6 @@ export default defineComponent<CellProps>({
           },
           additionalProps.class,
           cellClassName,
-          cellClass,
         ),
         style: {
           ...parseStyleText(additionalProps.style as any),

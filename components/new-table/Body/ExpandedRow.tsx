@@ -43,24 +43,6 @@ export default defineComponent<ExpandedRowProps>({
         colSpan,
       } = props;
 
-      let contentNode: any = slots.default?.();
-
-      if (fixColumn) {
-        contentNode = (
-          <div
-            style={{
-              width: componentWidth - (fixHeader ? tableContext.scrollbarSize : 0),
-              position: 'sticky',
-              left: 0,
-              overflow: 'hidden',
-            }}
-            class={`${prefixCls}-expanded-row-fixed`}
-          >
-            {contentNode}
-          </div>
-        );
-      }
-
       return (
         <Component
           class={attrs.class}
@@ -68,9 +50,33 @@ export default defineComponent<ExpandedRowProps>({
             display: expanded ? null : 'none',
           }}
         >
-          <Cell component={cellComponent} prefixCls={prefixCls} colSpan={colSpan}>
-            {contentNode}
-          </Cell>
+          <Cell
+            component={cellComponent}
+            prefixCls={prefixCls}
+            colSpan={colSpan}
+            v-slots={{
+              default: () => {
+                let contentNode: any = slots.default?.();
+
+                if (fixColumn) {
+                  contentNode = (
+                    <div
+                      style={{
+                        width: componentWidth - (fixHeader ? tableContext.scrollbarSize : 0),
+                        position: 'sticky',
+                        left: 0,
+                        overflow: 'hidden',
+                      }}
+                      class={`${prefixCls}-expanded-row-fixed`}
+                    >
+                      {contentNode}
+                    </div>
+                  );
+                }
+                return contentNode;
+              },
+            }}
+          ></Cell>
         </Component>
       );
     };

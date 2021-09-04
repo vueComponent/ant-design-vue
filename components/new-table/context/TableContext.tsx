@@ -15,6 +15,8 @@ export interface TableContextProps {
   fixedInfoList: readonly FixedInfo[];
 
   isSticky: boolean;
+
+  summaryCollect: (uniKey: string, fixed: boolean | string) => void;
 }
 
 export const BodyContextKey: InjectionKey<TableContextProps> = Symbol('TableContextProps');

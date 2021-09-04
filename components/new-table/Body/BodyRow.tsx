@@ -142,26 +142,6 @@ export default defineComponent<BodyRowProps<unknown>>({
             const key = columnsKey[colIndex];
             const fixedInfo = fixedInfoList[colIndex];
 
-            // ============= Used for nest expandable =============
-            let appendCellNode;
-            if (colIndex === (expandIconColumnIndex || 0) && nestExpandable.value) {
-              appendCellNode = (
-                <>
-                  <span
-                    style={{ paddingLeft: `${indentSize * indent}px` }}
-                    class={`${prefixCls}-row-indent indent-level-${indent}`}
-                  />
-                  {expandIcon({
-                    prefixCls,
-                    expanded: expanded.value,
-                    expandable: hasNestChildren.value,
-                    record,
-                    onExpand: onInternalTriggerExpand,
-                  })}
-                </>
-              );
-            }
-
             let additionalCellProps;
             if (column.customCell) {
               additionalCellProps = column.customCell(record, index);
@@ -180,8 +160,30 @@ export default defineComponent<BodyRowProps<unknown>>({
                 dataIndex={dataIndex}
                 customRender={customRender}
                 {...fixedInfo}
-                appendNode={appendCellNode}
                 additionalProps={additionalCellProps}
+                v-slots={{
+                  // ============= Used for nest expandable =============
+                  appendNode: () => {
+                    if (colIndex === (expandIconColumnIndex || 0) && nestExpandable.value) {
+                      return (
+                        <>
+                          <span
+                            style={{ paddingLeft: `${indentSize * indent}px` }}
+                            class={`${prefixCls}-row-indent indent-level-${indent}`}
+                          />
+                          {expandIcon({
+                            prefixCls,
+                            expanded: expanded.value,
+                            expandable: hasNestChildren.value,
+                            record,
+                            onExpand: onInternalTriggerExpand,
+                          })}
+                        </>
+                      );
+                    }
+                    return null;
+                  },
+                }}
               />
             );
           })}

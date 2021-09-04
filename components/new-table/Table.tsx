@@ -1,26 +1,20 @@
-import ColumnGroup from './sugar/ColumnGroup';
-import Column from './sugar/Column';
 import Header from './Header/Header';
 import type {
   GetRowKey,
   ColumnsType,
   TableComponents,
   Key,
-  DefaultRecordType,
   TriggerEventHandler,
   GetComponentProps,
   ExpandableConfig,
   LegacyExpandableProps,
-  GetComponent,
   PanelRender,
   TableLayout,
-  ExpandableType,
   RowClassName,
   CustomizeComponent,
   ColumnType,
   CustomizeScrollBody,
   TableSticky,
-  FixedType,
 } from './interface';
 import Body from './Body';
 import useColumns from './hooks/useColumns';
@@ -28,16 +22,13 @@ import { useLayoutState, useTimeoutLock } from './hooks/useFrame';
 import { getPathValue, mergeObject, validateValue, getColumnsKey } from './utils/valueUtil';
 import useStickyOffsets from './hooks/useStickyOffsets';
 import ColGroup from './ColGroup';
-import { getExpandableProps, getDataAndAriaProps } from './utils/legacyUtil';
 import Panel from './Panel';
-import Footer, { FooterComponents } from './Footer';
+import Footer from './Footer';
 import { findAllChildrenKeys, renderExpandIcon } from './utils/expandUtil';
 import { getCellFixedInfo } from './utils/fixUtil';
 import StickyScrollBar from './stickyScrollBar';
 import useSticky from './hooks/useSticky';
 import FixedHolder from './FixedHolder';
-import type { SummaryProps } from './Footer/Summary';
-import Summary from './Footer/Summary';
 import {
   computed,
   CSSProperties,
@@ -59,6 +50,10 @@ import isVisible from '../vc-util/Dom/isVisible';
 import { getTargetScrollBarSize } from '../_util/getScrollBarSize';
 import classNames from '../_util/classNames';
 import { EventHandler } from '../_util/EventInterface';
+import VCResizeObserver from '../vc-resize-observer';
+import { useProvideTable } from './context/TableContext';
+import { useProvideBody } from './context/BodyContext';
+import { useProvideResize } from './context/ResizeContext';
 
 // Used for conditions cache
 const EMPTY_DATA = [];
@@ -85,8 +80,8 @@ export interface TableProps<RecordType = unknown> extends LegacyExpandableProps<
   rowClassName?: string | RowClassName<RecordType>;
 
   // Additional Part
-  // title?: PanelRender<RecordType>;
-  // footer?: PanelRender<RecordType>;
+  title?: PanelRender<RecordType>;
+  footer?: PanelRender<RecordType>;
   // summary?: (data: readonly RecordType[]) => any;
 
   // Customize
@@ -103,40 +98,14 @@ export interface TableProps<RecordType = unknown> extends LegacyExpandableProps<
   expandColumnWidth?: number;
   expandIconColumnIndex?: number;
 
-  // // =================================== Internal ===================================
-  // /**
-  //  * @private Internal usage, may remove by refactor. Should always use `columns` instead.
-  //  *
-  //  * !!! DO NOT USE IN PRODUCTION ENVIRONMENT !!!
-  //  */
-  // internalHooks?: string;
-
-  // /**
-  //  * @private Internal usage, may remove by refactor. Should always use `columns` instead.
-  //  *
-  //  * !!! DO NOT USE IN PRODUCTION ENVIRONMENT !!!
-  //  */
-  // // Used for antd table transform column with additional column
-  // transformColumns?: (columns: ColumnsType<RecordType>) => ColumnsType<RecordType>;
-
-  // /**
-  //  * @private Internal usage, may remove by refactor.
-  //  *
-  //  * !!! DO NOT USE IN PRODUCTION ENVIRONMENT !!!
-  //  */
-  // internalRefs?: {
-  //   body: React.MutableRefObject<HTMLDivElement>;
-  // };
-
   sticky?: boolean | TableSticky;
 }
 
 export default defineComponent<TableProps>({
   name: 'Table',
   slots: ['title', 'footer', 'summary', 'emptyText'],
-  inheritAttrs: false,
   emits: ['expand', 'expandedRowsChange'],
-  setup(props, { slots, attrs, emit }) {
+  setup(props, { slots, emit }) {
     const mergedData = computed(() => props.data || EMPTY_DATA);
     const hasData = computed(() => !!mergedData.value.length);
 
@@ -432,13 +401,58 @@ export default defineComponent<TableProps>({
     const emptyNode = () => {
       return hasData.value ? null : slots.emptyText?.() || 'No Data';
     };
+    useProvideTable(
+      reactive({
+        ...reactivePick(props, 'prefixCls', 'direction'),
+        getComponent,
+        scrollbarSize,
+        fixedInfoList: computed(() =>
+          flattenColumns.value.map((_, colIndex) =>
+            getCellFixedInfo(
+              colIndex,
+              colIndex,
+              flattenColumns.value,
+              stickyOffsets.value,
+              props.direction,
+            ),
+          ),
+        ),
+        isSticky: computed(() => stickyState.value.isSticky),
+        summaryCollect,
+      }),
+    );
+
+    useProvideBody(
+      reactive({
+        ...reactivePick(
+          props,
+          'rowClassName',
+          'expandedRowClassName',
+          'expandRowByClick',
+          'expandedRowRender',
+          'expandIconColumnIndex',
+          'indentSize',
+        ),
+        columns,
+        flattenColumns,
+        tableLayout: mergedTableLayout,
+        componentWidth,
+        fixHeader,
+        fixColumn,
+        horizonScroll,
+        expandIcon: mergedExpandIcon,
+        expandableType,
+        onTriggerExpand,
+      }),
+    );
+
+    useProvideResize({
+      onColumnResize,
+    });
 
     return () => {
       const {
         prefixCls,
-        rowClassName,
-        data,
-        rowKey,
         scroll,
         tableLayout,
         direction,
@@ -450,10 +464,8 @@ export default defineComponent<TableProps>({
         // Customize
         id,
         showHeader,
-        components,
         customHeaderRow,
         rowExpandable,
-        sticky,
 
         customRow,
       } = props;
@@ -648,7 +660,36 @@ export default defineComponent<TableProps>({
           </div>
         );
       }
-      return null;
+
+      let fullTable = (
+        <div
+          class={classNames(prefixCls, {
+            [`${prefixCls}-rtl`]: direction === 'rtl',
+            [`${prefixCls}-ping-left`]: pingedLeft.value,
+            [`${prefixCls}-ping-right`]: pingedRight.value,
+            [`${prefixCls}-layout-fixed`]: tableLayout === 'fixed',
+            [`${prefixCls}-fixed-header`]: fixHeader.value,
+            /** No used but for compatible */
+            [`${prefixCls}-fixed-column`]: fixColumn.value,
+            [`${prefixCls}-scroll-horizontal`]: horizonScroll.value,
+            [`${prefixCls}-has-fix-left`]: flattenColumns.value[0] && flattenColumns.value[0].fixed,
+            [`${prefixCls}-has-fix-right`]:
+              flattenColumns.value[columnCount.value - 1] &&
+              flattenColumns.value[columnCount.value - 1].fixed === 'right',
+          })}
+          id={id}
+          ref={fullTableRef}
+        >
+          {title && <Panel class={`${prefixCls}-title`}>{title(mergedData.value)}</Panel>}
+          <div class={`${prefixCls}-container`}>{groupTableNode}</div>
+          {footer && <Panel class={`${prefixCls}-footer`}>{footer(mergedData.value)}</Panel>}
+        </div>
+      );
+
+      if (horizonScroll.value) {
+        fullTable = <VCResizeObserver onResize={onFullTableResize}>{fullTable}</VCResizeObserver>;
+      }
+      return fullTable;
     };
   },
 });

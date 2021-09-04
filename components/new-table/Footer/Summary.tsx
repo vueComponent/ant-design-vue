@@ -1,4 +1,5 @@
-import { FunctionalComponent } from 'vue';
+import { computed, defineComponent, FunctionalComponent, onBeforeUnmount, watchEffect } from 'vue';
+import { useInjectTable } from '../context/TableContext';
 import Cell from './Cell';
 import Row from './Row';
 
@@ -11,16 +12,22 @@ export interface SummaryFC extends FunctionalComponent<SummaryProps> {
   Cell: typeof Cell;
 }
 
-/**
- * Syntactic sugar. Do not support HOC.
- */
-const Summary: SummaryFC = (_props, { slots }) => {
-  return slots.default?.();
-};
-
-Summary.Row = Row;
-Summary.Cell = Cell;
-
-Summary.displayName = 'Summary';
+let indexGuid = 0;
+const Summary = defineComponent<SummaryProps>({
+  props: ['fixed'] as any,
+  name: 'Summary',
+  setup(props, { slots }) {
+    const tableContext = useInjectTable();
+    const uniKey = `table-summary-uni-key-${++indexGuid}`;
+    const fixed = computed(() => (props.fixed as string) === '' || props.fixed);
+    watchEffect(() => {
+      tableContext.summaryCollect(uniKey, fixed.value);
+    });
+    onBeforeUnmount(() => {
+      tableContext.summaryCollect(uniKey, false);
+    });
+    return () => slots.default?.();
+  },
+});
 
 export default Summary;

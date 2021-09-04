@@ -29,9 +29,9 @@ import { getCellFixedInfo } from './utils/fixUtil';
 import StickyScrollBar from './stickyScrollBar';
 import useSticky from './hooks/useSticky';
 import FixedHolder from './FixedHolder';
+import type { CSSProperties } from 'vue';
 import {
   computed,
-  CSSProperties,
   defineComponent,
   nextTick,
   onMounted,
@@ -49,7 +49,7 @@ import { toPx } from '../_util/util';
 import isVisible from '../vc-util/Dom/isVisible';
 import { getTargetScrollBarSize } from '../_util/getScrollBarSize';
 import classNames from '../_util/classNames';
-import { EventHandler } from '../_util/EventInterface';
+import type { EventHandler } from '../_util/EventInterface';
 import VCResizeObserver from '../vc-resize-observer';
 import { useProvideTable } from './context/TableContext';
 import { useProvideBody } from './context/BodyContext';
@@ -262,9 +262,9 @@ export default defineComponent<TableProps>({
     };
 
     // Scroll
-    let scrollXStyle = ref<CSSProperties>({});
-    let scrollYStyle = ref<CSSProperties>({});
-    let scrollTableStyle = ref<CSSProperties>({});
+    const scrollXStyle = ref<CSSProperties>({});
+    const scrollYStyle = ref<CSSProperties>({});
+    const scrollTableStyle = ref<CSSProperties>({});
 
     watchEffect(() => {
       if (fixHeader.value) {
@@ -356,7 +356,7 @@ export default defineComponent<TableProps>({
     };
 
     const onFullTableResize = ({ width }) => {
-      if (width !== componentWidth) {
+      if (width !== componentWidth.value) {
         triggerOnScroll();
         componentWidth.value = fullTableRef.value ? fullTableRef.value.offsetWidth : width;
       }
@@ -561,7 +561,7 @@ export default defineComponent<TableProps>({
               >
                 {bodyColGroup}
                 {bodyTable}
-                {!fixFooter && summaryNode && (
+                {!fixFooter.value && summaryNode && (
                   <Footer stickyOffsets={stickyOffsets} flattenColumns={flattenColumns.value}>
                     {summaryNode}
                   </Footer>

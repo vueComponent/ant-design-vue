@@ -1,4 +1,4 @@
-import { CustomizeComponent } from '../interface';
+import type { CustomizeComponent } from '../interface';
 import Cell from '../Cell';
 import { defineComponent } from 'vue';
 import { useInjectTable } from '../context/TableContext';

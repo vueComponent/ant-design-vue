@@ -1,6 +1,7 @@
-import { inject, InjectionKey, provide } from 'vue';
-import { GetComponent } from '../interface';
-import { FixedInfo } from '../utils/fixUtil';
+import type { InjectionKey } from 'vue';
+import { inject, provide } from 'vue';
+import type { GetComponent } from '../interface';
+import type { FixedInfo } from '../utils/fixUtil';
 
 export interface TableContextProps {
   // Table context

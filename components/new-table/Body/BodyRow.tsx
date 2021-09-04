@@ -70,7 +70,7 @@ export default defineComponent<BodyRowProps<unknown>>({
     };
 
     // =========================== onRow ===========================
-    let additionalProps = computed<Record<string, any>>(
+    const additionalProps = computed<Record<string, any>>(
       () => props.customRow?.(props.record, props.index) || {},
     );
 
@@ -84,7 +84,7 @@ export default defineComponent<BodyRowProps<unknown>>({
       }
     };
 
-    let computeRowClassName = computed(() => {
+    const computeRowClassName = computed(() => {
       const { record, index, indent } = props;
       const { rowClassName } = bodyContext;
       if (typeof rowClassName === 'string') {

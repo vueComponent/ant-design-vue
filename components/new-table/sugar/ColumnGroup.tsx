@@ -1,5 +1,5 @@
-import { ColumnType } from '../interface';
-import { FunctionalComponent } from 'vue';
+import type { ColumnType } from '../interface';
+import type { FunctionalComponent } from 'vue';
 /* istanbul ignore next */
 /**
  * This is a syntactic sugar for `columns` prop.

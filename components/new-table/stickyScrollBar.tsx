@@ -1,8 +1,9 @@
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref, Ref, watch } from 'vue';
+import type { Ref } from 'vue';
+import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import addEventListenerWrap from '../vc-util/Dom/addEventListener';
 import { getOffset } from '../vc-util/Dom/css';
 import classNames from '../_util/classNames';
-import { MouseEventHandler } from '../_util/EventInterface';
+import type { MouseEventHandler } from '../_util/EventInterface';
 import getScrollBarSize from '../_util/getScrollBarSize';
 import { useInjectTable } from './context/TableContext';
 import { useLayoutState } from './hooks/useFrame';
@@ -188,7 +189,7 @@ export default defineComponent<StickyScrollBarProps>({
         <div
           style={{
             height: `${scrollbarSize}px`,
-            width: `${bodyWidth}px`,
+            width: `${bodyWidth.value}px`,
             bottom: `${props.offsetScroll}px`,
           }}
           class={`${prefixCls}-sticky-scroll`}

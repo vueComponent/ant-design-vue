@@ -1,6 +1,7 @@
 import type { HeaderProps } from '../Header/Header';
 import ColGroup from '../ColGroup';
 import type { ColumnsType, ColumnType, DefaultRecordType } from '../interface';
+import type { Ref } from 'vue';
 import {
   computed,
   defineComponent,
@@ -8,7 +9,6 @@ import {
   onBeforeUnmount,
   onMounted,
   ref,
-  Ref,
   toRef,
   watchEffect,
 } from 'vue';
@@ -107,11 +107,11 @@ export default defineComponent<FixedHeaderProps<DefaultRecordType>>({
         }),
       };
 
-      columnsWithScrollbar.value = combinationScrollBarSize
+      columnsWithScrollbar.value = combinationScrollBarSize.value
         ? [...props.columns, ScrollBarColumn]
         : props.columns;
 
-      flattenColumnsWithScrollbar.value = combinationScrollBarSize
+      flattenColumnsWithScrollbar.value = combinationScrollBarSize.value
         ? [...props.flattenColumns, ScrollBarColumn]
         : props.flattenColumns;
     });

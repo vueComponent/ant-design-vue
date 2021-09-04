@@ -1,4 +1,4 @@
-import {
+import type {
   ColumnType,
   DefaultRecordType,
   ColumnsType,
@@ -9,7 +9,8 @@ import {
   TriggerEventHandler,
   ExpandedRowRender,
 } from '../interface';
-import { inject, InjectionKey, provide } from 'vue';
+import type { InjectionKey } from 'vue';
+import { inject, provide } from 'vue';
 
 export interface BodyContextProps<RecordType = DefaultRecordType> {
   rowClassName: string | RowClassName<RecordType>;

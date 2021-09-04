@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue';
 import Cell from '../Cell';
 import { useInjectTable } from '../context/TableContext';
-import {
+import type {
   CellType,
   StickyOffsets,
   ColumnType,

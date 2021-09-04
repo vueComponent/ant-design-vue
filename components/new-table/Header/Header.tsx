@@ -20,7 +20,7 @@ function parseHeaderRows<RecordType>(
   function fillRowCells(
     columns: ColumnsType<RecordType>,
     colIndex: number,
-    rowIndex: number = 0,
+    rowIndex = 0,
   ): number[] {
     // Init rows
     rows[rowIndex] = rows[rowIndex] || [];
@@ -35,7 +35,7 @@ function parseHeaderRows<RecordType>(
         colStart: currentColIndex,
       };
 
-      let colSpan: number = 1;
+      let colSpan = 1;
 
       const subColumns = (column as ColumnGroupType<RecordType>).children;
       if (subColumns && subColumns.length > 0) {

@@ -1,5 +1,6 @@
 import { warning } from 'ant-design-vue/es/vc-util/warning';
-import { computed, ComputedRef, Ref, watchEffect } from 'vue';
+import type { ComputedRef, Ref } from 'vue';
+import { computed, watchEffect } from 'vue';
 import type {
   ColumnsType,
   ColumnType,

@@ -1,5 +1,5 @@
-import { FunctionalComponent } from 'vue';
-import { ColumnType } from '../interface';
+import type { FunctionalComponent } from 'vue';
+import type { ColumnType } from '../interface';
 
 export type ColumnProps<RecordType> = ColumnType<RecordType>;
 

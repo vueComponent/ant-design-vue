@@ -1,6 +1,7 @@
 import classNames from 'ant-design-vue/es/_util/classNames';
 import { isValidElement, parseStyleText } from 'ant-design-vue/es/_util/props-util';
-import { CSSProperties, defineComponent, HTMLAttributes } from 'vue';
+import type { CSSProperties, HTMLAttributes } from 'vue';
+import { defineComponent } from 'vue';
 
 import type {
   DataIndex,

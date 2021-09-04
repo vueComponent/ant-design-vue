@@ -1,4 +1,4 @@
-import { Key, DataIndex } from '../interface';
+import type { Key, DataIndex } from '../interface';
 
 const INTERNAL_KEY_PREFIX = 'RC_TABLE_KEY';
 

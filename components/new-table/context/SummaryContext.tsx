@@ -1,5 +1,6 @@
-import { inject, InjectionKey, provide } from 'vue';
-import { ColumnType, StickyOffsets } from '../interface';
+import type { InjectionKey } from 'vue';
+import { inject, provide } from 'vue';
+import type { ColumnType, StickyOffsets } from '../interface';
 
 export type FlattenColumns<RecordType> = readonly (ColumnType<RecordType> & {
   scrollbar?: boolean;

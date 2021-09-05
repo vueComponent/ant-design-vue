@@ -238,11 +238,6 @@ const TableRow = {
     for (let i = 0; i < columns.length; i += 1) {
       const column = columns[i];
 
-      warning(
-        column.onCellClick === undefined,
-        'column[onCellClick] is deprecated, please use column[customCell] instead.',
-      );
-
       cells.push(
         <TableCell
           prefixCls={prefixCls}

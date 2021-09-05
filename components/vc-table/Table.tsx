@@ -6,8 +6,6 @@ import type {
   Key,
   TriggerEventHandler,
   GetComponentProps,
-  ExpandableConfig,
-  LegacyExpandableProps,
   PanelRender,
   TableLayout,
   RowClassName,
@@ -15,6 +13,8 @@ import type {
   ColumnType,
   CustomizeScrollBody,
   TableSticky,
+  ExpandedRowRender,
+  RenderExpandIcon,
 } from './interface';
 import Body from './Body';
 import useColumns from './hooks/useColumns';
@@ -29,7 +29,7 @@ import { getCellFixedInfo } from './utils/fixUtil';
 import StickyScrollBar from './stickyScrollBar';
 import useSticky from './hooks/useSticky';
 import FixedHolder from './FixedHolder';
-import type { CSSProperties } from 'vue';
+import type { CSSProperties, Ref } from 'vue';
 import {
   computed,
   defineComponent,
@@ -63,7 +63,7 @@ const EMPTY_SCROLL_TARGET = {};
 
 export const INTERNAL_HOOKS = 'rc-table-internal-hook';
 
-export interface TableProps<RecordType = unknown> extends LegacyExpandableProps<RecordType> {
+export interface TableProps<RecordType = unknown> {
   prefixCls?: string;
   data?: RecordType[];
   columns?: ColumnsType<RecordType>;
@@ -73,10 +73,6 @@ export interface TableProps<RecordType = unknown> extends LegacyExpandableProps<
   // Fixed Columns
   scroll?: { x?: number | true | string; y?: number | string };
 
-  // Expandable
-  /** Config expand rows */
-  expandable?: ExpandableConfig<RecordType>;
-  indentSize?: number;
   rowClassName?: string | RowClassName<RecordType>;
 
   // Additional Part
@@ -94,17 +90,94 @@ export interface TableProps<RecordType = unknown> extends LegacyExpandableProps<
 
   direction?: 'ltr' | 'rtl';
 
+  // Expandable
   expandFixed?: boolean;
   expandColumnWidth?: number;
+  expandedRowKeys?: Key[];
+  defaultExpandedRowKeys?: Key[];
+  expandedRowRender?: ExpandedRowRender<RecordType>;
+  expandRowByClick?: boolean;
+  expandIcon?: RenderExpandIcon<RecordType>;
+  onExpand?: (expanded: boolean, record: RecordType) => void;
+  onExpandedRowsChange?: (expandedKeys: Key[]) => void;
+  defaultExpandAllRows?: boolean;
+  indentSize?: number;
   expandIconColumnIndex?: number;
+  expandedRowClassName?: RowClassName<RecordType>;
+  childrenColumnName?: string;
+  rowExpandable?: (record: RecordType) => boolean;
+
+  // =================================== Internal ===================================
+  /**
+   * @private Internal usage, may remove by refactor. Should always use `columns` instead.
+   *
+   * !!! DO NOT USE IN PRODUCTION ENVIRONMENT !!!
+   */
+  internalHooks?: string;
+
+  /**
+   * @private Internal usage, may remove by refactor. Should always use `columns` instead.
+   *
+   * !!! DO NOT USE IN PRODUCTION ENVIRONMENT !!!
+   */
+  // Used for antd table transform column with additional column
+  transformColumns?: (columns: ColumnsType<RecordType>) => ColumnsType<RecordType>;
+
+  /**
+   * @private Internal usage, may remove by refactor.
+   *
+   * !!! DO NOT USE IN PRODUCTION ENVIRONMENT !!!
+   */
+  internalRefs?: {
+    body: Ref<HTMLDivElement>;
+  };
 
   sticky?: boolean | TableSticky;
+
+  canExpandable?: boolean;
 }
 
 export default defineComponent<TableProps>({
   name: 'Table',
   slots: ['title', 'footer', 'summary', 'emptyText'],
   emits: ['expand', 'expandedRowsChange'],
+  props: [
+    'prefixCls',
+    'data',
+    'columns',
+    'rowKey',
+    'tableLayout',
+    'scroll',
+    'rowClassName',
+    'title',
+    'footer',
+    'id',
+    'showHeader',
+    'components',
+    'customRow',
+    'customHeaderRow',
+    'direction',
+    'expandFixed',
+    'expandColumnWidth',
+    'expandedRowKeys',
+    'defaultExpandedRowKeys',
+    'expandedRowRender',
+    'expandRowByClick',
+    'expandIcon',
+    'onExpand',
+    'onExpandedRowsChange',
+    'defaultExpandAllRows',
+    'indentSize',
+    'expandIconColumnIndex',
+    'expandedRowClassName',
+    'childrenColumnName',
+    'rowExpandable',
+    'sticky',
+    'transformColumns',
+    'internalHooks',
+    'internalRefs',
+    'canExpandable',
+  ] as any,
   setup(props, { slots, emit }) {
     const mergedData = computed(() => props.data || EMPTY_DATA);
     const hasData = computed(() => !!mergedData.value.length);
@@ -157,6 +230,7 @@ export default defineComponent<TableProps>({
        *  Do not use `__PARENT_RENDER_ICON__` in prod since we will remove this when refactor
        */
       if (
+        props.canExpandable ||
         mergedData.value.some(
           record => record && typeof record === 'object' && record[mergedChildrenColumnName.value],
         )
@@ -203,16 +277,19 @@ export default defineComponent<TableProps>({
 
     const componentWidth = ref(0);
 
-    const [columns, flattenColumns] = useColumns({
-      ...toRefs(props),
+    const [columns, flattenColumns] = useColumns(
+      {
+        ...toRefs(props),
 
-      // children,
-      expandable: computed(() => !!props.expandedRowRender),
-      expandedKeys: mergedExpandedKeys,
-      getRowKey,
-      onTriggerExpand,
-      expandIcon: mergedExpandIcon,
-    });
+        // children,
+        expandable: computed(() => !!props.expandedRowRender),
+        expandedKeys: mergedExpandedKeys,
+        getRowKey,
+        onTriggerExpand,
+        expandIcon: mergedExpandIcon,
+      },
+      computed(() => (props.internalHooks === INTERNAL_HOOKS ? props.transformColumns : null)),
+    );
 
     const columnContext = computed(() => ({
       columns: columns.value,
@@ -376,6 +453,15 @@ export default defineComponent<TableProps>({
         setScrollbarSize(getTargetScrollBarSize(scrollBodyRef.value).width);
       });
     });
+
+    watchEffect(
+      () => {
+        if (props.internalHooks === INTERNAL_HOOKS && props.internalRefs) {
+          props.internalRefs.body.value = scrollBodyRef.value;
+        }
+      },
+      { flush: 'post' },
+    );
 
     // Table layout
     const mergedTableLayout = computed(() => {

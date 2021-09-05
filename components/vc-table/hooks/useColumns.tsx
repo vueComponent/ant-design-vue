@@ -103,37 +103,39 @@ function revertForRtl<RecordType>(columns: ColumnsType<RecordType>): ColumnsType
 /**
  * Parse `columns` & `children` into `columns`.
  */
-function useColumns<RecordType>({
-  prefixCls,
-  columns: baseColumns,
-  // children,
-  expandable,
-  expandedKeys,
-  getRowKey,
-  onTriggerExpand,
-  expandIcon,
-  rowExpandable,
-  expandIconColumnIndex,
-  direction,
-  expandRowByClick,
-  expandColumnWidth,
-  expandFixed,
-}: {
-  prefixCls?: Ref<string>;
-  columns?: Ref<ColumnsType<RecordType>>;
-  expandable: Ref<boolean>;
-  expandedKeys: Ref<Set<Key>>;
-  getRowKey: Ref<GetRowKey<RecordType>>;
-  onTriggerExpand: TriggerEventHandler<RecordType>;
-  expandIcon?: Ref<RenderExpandIcon<RecordType>>;
-  rowExpandable?: Ref<(record: RecordType) => boolean>;
-  expandIconColumnIndex?: Ref<number>;
-  direction?: Ref<'ltr' | 'rtl'>;
-  expandRowByClick?: Ref<boolean>;
-  expandColumnWidth?: Ref<number | string>;
-  expandFixed?: Ref<FixedType>;
-}): // transformColumns: (columns: ColumnsType<RecordType>) => ColumnsType<RecordType>,
-[ComputedRef<ColumnsType<RecordType>>, ComputedRef<readonly ColumnType<RecordType>[]>] {
+function useColumns<RecordType>(
+  {
+    prefixCls,
+    columns: baseColumns,
+    // children,
+    expandable,
+    expandedKeys,
+    getRowKey,
+    onTriggerExpand,
+    expandIcon,
+    rowExpandable,
+    expandIconColumnIndex,
+    direction,
+    expandRowByClick,
+    expandColumnWidth,
+    expandFixed,
+  }: {
+    prefixCls?: Ref<string>;
+    columns?: Ref<ColumnsType<RecordType>>;
+    expandable: Ref<boolean>;
+    expandedKeys: Ref<Set<Key>>;
+    getRowKey: Ref<GetRowKey<RecordType>>;
+    onTriggerExpand: TriggerEventHandler<RecordType>;
+    expandIcon?: Ref<RenderExpandIcon<RecordType>>;
+    rowExpandable?: Ref<(record: RecordType) => boolean>;
+    expandIconColumnIndex?: Ref<number>;
+    direction?: Ref<'ltr' | 'rtl'>;
+    expandRowByClick?: Ref<boolean>;
+    expandColumnWidth?: Ref<number | string>;
+    expandFixed?: Ref<FixedType>;
+  },
+  transformColumns: Ref<(columns: ColumnsType<RecordType>) => ColumnsType<RecordType>>,
+): [ComputedRef<ColumnsType<RecordType>>, ComputedRef<readonly ColumnType<RecordType>[]>] {
   // Add expand column
   const withExpandColumns = computed<ColumnsType<RecordType>>(() => {
     if (expandable.value) {
@@ -196,9 +198,9 @@ function useColumns<RecordType>({
 
   const mergedColumns = computed(() => {
     let finalColumns = withExpandColumns.value;
-    // if (transformColumns) {
-    //   finalColumns = transformColumns(finalColumns);
-    // }
+    if (transformColumns.value) {
+      finalColumns = transformColumns.value(finalColumns);
+    }
 
     // Always provides at least one column for table display
     if (!finalColumns.length) {

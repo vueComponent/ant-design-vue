@@ -14,7 +14,7 @@ export const ColumnFilterItem = PropTypes.shape({
 }).loose;
 
 export const columnProps = {
-  title: PropTypes.VNodeChild,
+  title: PropTypes.any,
   key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   dataIndex: PropTypes.string,
   customRender: PropTypes.func,
@@ -49,7 +49,6 @@ export const columnProps = {
   ),
   sortDirections: PropTypes.array,
   // children?: ColumnProps<T>[];
-  // onCellClick?: (record: T, event: any) => void;
   // onCell?: (record: T) => any;
   // onHeaderCell?: (props: ColumnProps<T>) => any;
 };

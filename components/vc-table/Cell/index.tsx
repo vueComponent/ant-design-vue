@@ -119,7 +119,7 @@ export default defineComponent<CellProps>({
       const children = slots.default?.();
       if (validateValue(children) || cellType === 'header') {
         childNode = children;
-        if (cellType === 'header' && contextSlots.value.headerCell) {
+        if (cellType === 'header' && contextSlots.value.headerCell && !column.slots?.title) {
           childNode = contextSlots.value.headerCell({ title: column.title, index, column });
         }
       } else {
@@ -138,7 +138,7 @@ export default defineComponent<CellProps>({
           }
         }
 
-        if (cellType === 'body' && contextSlots.value.bodyCell) {
+        if (cellType === 'body' && contextSlots.value.bodyCell && !column.slots?.customRender) {
           childNode = contextSlots.value.bodyCell({ text: value, value, record, index, column });
         }
       }

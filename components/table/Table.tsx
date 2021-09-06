@@ -623,7 +623,6 @@ const Table = defineComponent<TableProps>({
   setup(_props, { attrs, slots }) {
     return () => {
       const columns = (attrs.columns || convertChildrenToColumns(slots.default?.())) as ColumnsType;
-      console.log('slots', slots);
       return (
         <InteralTable
           {...attrs}

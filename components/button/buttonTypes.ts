@@ -29,7 +29,7 @@ const buttonProps = () => ({
     type: String as PropType<SizeType>,
   },
   loading: {
-    type: [Boolean, Object],
+    type: [Boolean, Object] as PropType<boolean | { delay?: number }>,
     default: (): boolean | { delay?: number } => false,
   },
   disabled: PropTypes.looseBool,

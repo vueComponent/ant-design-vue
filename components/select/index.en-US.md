@@ -62,6 +62,8 @@ Select component to select value from options.
 | open | Controlled open state of dropdown | boolean | - | |
 | loading | indicate loading state | Boolean | false | |
 
+> Note, if you find that the drop-down menu scrolls with the page, or you need to trigger Select in other popup layers, please try to use `getPopupContainer={triggerNode => triggerNode.parentElement}` to fix the drop-down popup rendering node in the parent element of the trigger .
+
 ### events
 
 | Events Name | Description | Arguments |

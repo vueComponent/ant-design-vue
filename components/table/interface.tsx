@@ -195,3 +195,10 @@ type TablePaginationPosition =
 export interface TablePaginationConfig extends PaginationProps {
   position?: TablePaginationPosition[];
 }
+
+export interface TransformCellTextProps {
+  text: any;
+  column: ColumnType;
+  record: any;
+  index: number;
+}

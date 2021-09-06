@@ -1,45 +1,73 @@
+<docs>
+---
+order: 0
+title:
+  en-US: Basic Usage
+  zh-CN: 基本用法
+---
+
+## zh-CN
+
+简单的表格，最后一列是各种操作。
+
+## en-US
+
+Simple table with actions.
+</docs>
+
 <template>
   <a-table :columns="columns" :data-source="data">
-    <template #customTitle>
-      <span>
-        <smile-outlined />
-        Name
-      </span>
+    <template #headerCell="{ title, column }">
+      <template v-if="column.key === 'name'">
+        <span>
+          <smile-outlined />
+          Name
+        </span>
+      </template>
+      <template v-else>{{ title }}</template>
     </template>
-    <template #tags="{ text: tags }">
-      <span>
-        <a-tag
-          v-for="tag in tags"
-          :key="tag"
-          :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
-        >
-          {{ tag.toUpperCase() }}
-        </a-tag>
-      </span>
-    </template>
-    <template #action="{ record }">
-      <span>
-        <a>Invite 一 {{ record.name }}</a>
-        <a-divider type="vertical" />
-        <a>Delete</a>
-        <a-divider type="vertical" />
-        <a class="ant-dropdown-link">
-          More actions
-          <down-outlined />
+
+    <template #bodyCell="{ column, record }">
+      <template v-if="column.key === 'name'">
+        <a>
+          {{ record.name }}
         </a>
-      </span>
+      </template>
+      <template v-else-if="column.key === 'tags'">
+        <span>
+          <a-tag
+            v-for="tag in record.tags"
+            :key="tag"
+            :color="tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'"
+          >
+            {{ tag.toUpperCase() }}
+          </a-tag>
+        </span>
+      </template>
+      <template v-else-if="column.key === 'action'">
+        <span>
+          <a>Invite 一 {{ record.name }}</a>
+          <a-divider type="vertical" />
+          <a>Delete</a>
+          <a-divider type="vertical" />
+          <a class="ant-dropdown-link">
+            More actions
+            <down-outlined />
+          </a>
+        </span>
+      </template>
+      <template v-else>{{ record.name }}</template>
     </template>
   </a-table>
 </template>
 <script lang="ts">
 import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 const columns = [
   {
-    title: 'Name',
+    name: 'Name',
     dataIndex: 'name',
     key: 'name',
-    slots: { title: 'customTitle', customRender: 'name' },
   },
   {
     title: 'Age',
@@ -55,12 +83,10 @@ const columns = [
     title: 'Tags',
     key: 'tags',
     dataIndex: 'tags',
-    slots: { customRender: 'tags' },
   },
   {
     title: 'Action',
     key: 'action',
-    slots: { customRender: 'action' },
   },
 ];
 
@@ -94,12 +120,9 @@ export default defineComponent({
     DownOutlined,
   },
   setup() {
-    const test = ref('111');
-    window.test = test;
     return {
       data,
       columns,
-      test,
     };
   },
 });

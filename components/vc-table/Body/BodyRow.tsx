@@ -162,6 +162,7 @@ export default defineComponent<BodyRowProps<unknown>>({
                 customRender={customRender}
                 {...fixedInfo}
                 additionalProps={additionalCellProps}
+                column={column}
                 v-slots={{
                   // ============= Used for nest expandable =============
                   appendNode: () => {

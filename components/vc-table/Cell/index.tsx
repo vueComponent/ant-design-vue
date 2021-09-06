@@ -14,6 +14,7 @@ import type {
   CellEllipsisType,
 } from '../interface';
 import { getPathValue, validateValue } from '../utils/valueUtil';
+import { useInjectSlots } from '../../table/context';
 
 function isRenderCell<RecordType = DefaultRecordType>(
   data: RenderedCell<RecordType>,
@@ -53,6 +54,8 @@ export interface CellProps<RecordType = DefaultRecordType> {
   isSticky?: boolean;
 
   column?: ColumnType<RecordType>;
+
+  cellType?: 'header' | 'body';
 }
 export default defineComponent<CellProps>({
   name: 'Cell',
@@ -62,7 +65,6 @@ export default defineComponent<CellProps>({
     'index',
     'dataIndex',
     'customRender',
-    'children',
     'component',
     'colSpan',
     'rowSpan',
@@ -79,9 +81,11 @@ export default defineComponent<CellProps>({
     'rowType',
     'isSticky',
     'column',
+    'cellType',
   ] as any,
   slots: ['appendNode'],
   setup(props, { slots }) {
+    const contextSlots = useInjectSlots();
     return () => {
       const {
         prefixCls,
@@ -105,6 +109,7 @@ export default defineComponent<CellProps>({
         rowType,
         isSticky,
         column,
+        cellType,
       } = props;
       const cellPrefixCls = `${prefixCls}-cell`;
 
@@ -112,8 +117,11 @@ export default defineComponent<CellProps>({
       let cellProps: CellType;
       let childNode;
       const children = slots.default?.();
-      if (validateValue(children)) {
+      if (validateValue(children) || cellType === 'header') {
         childNode = children;
+        if (cellType === 'header' && contextSlots.value.headerCell) {
+          childNode = contextSlots.value.headerCell({ title: column.title, index, column });
+        }
       } else {
         const value = getPathValue(record, dataIndex);
 
@@ -128,6 +136,10 @@ export default defineComponent<CellProps>({
           } else {
             childNode = renderData;
           }
+        }
+
+        if (cellType === 'body' && contextSlots.value.bodyCell) {
+          childNode = contextSlots.value.bodyCell({ text: value, value, record, index, column });
         }
       }
 

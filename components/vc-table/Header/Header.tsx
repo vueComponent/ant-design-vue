@@ -92,6 +92,7 @@ export interface HeaderProps<RecordType = DefaultRecordType> {
 
 export default defineComponent<HeaderProps>({
   name: 'Header',
+  inheritAttrs: false,
   props: ['columns', 'flattenColumns', 'stickyOffsets', 'customHeaderRow'] as any,
   setup(props) {
     const tableContext = useInjectTable();

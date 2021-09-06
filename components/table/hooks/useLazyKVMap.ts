@@ -41,6 +41,7 @@ export default function useLazyKVMap<RecordType>(
     },
     {
       deep: false,
+      immediate: true,
     },
   );
   function getRecordByKey(key: Key): RecordType {

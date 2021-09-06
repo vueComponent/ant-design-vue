@@ -149,6 +149,7 @@ export default defineComponent<BodyRowProps<unknown>>({
 
             return (
               <Cell
+                cellType="body"
                 class={columnClassName}
                 ellipsis={column.ellipsis}
                 align={column.align}
@@ -193,7 +194,12 @@ export default defineComponent<BodyRowProps<unknown>>({
       // ======================== Expand Row =========================
       let expandRowNode;
       if (rowSupportExpand.value && (expandRended.value || expanded.value)) {
-        const expandContent = expandedRowRender(record, index, indent + 1, expanded.value);
+        const expandContent = expandedRowRender({
+          record,
+          index,
+          indent: indent + 1,
+          expanded: expanded.value,
+        });
         const computedExpandedRowClassName =
           expandedRowClassName && expandedRowClassName(record, index, indent);
         expandRowNode = (

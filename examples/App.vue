@@ -1,8 +1,5 @@
 <template>
   <a-table :columns="columns" :data-source="data">
-    <template #name="{ text }">
-      <a>{{ text }}</a>
-    </template>
     <template #customTitle>
       <span>
         <smile-outlined />
@@ -36,9 +33,10 @@
 </template>
 <script lang="ts">
 import { SmileOutlined, DownOutlined } from '@ant-design/icons-vue';
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 const columns = [
   {
+    title: 'Name',
     dataIndex: 'name',
     key: 'name',
     slots: { title: 'customTitle', customRender: 'name' },
@@ -96,9 +94,12 @@ export default defineComponent({
     DownOutlined,
   },
   setup() {
+    const test = ref('111');
+    window.test = test;
     return {
       data,
       columns,
+      test,
     };
   },
 });

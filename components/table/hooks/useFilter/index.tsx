@@ -143,6 +143,7 @@ function generateFilterInfo<RecordType>(filterStates: FilterState<RecordType>[])
   const currentFilters: Record<string, FilterValue | null> = {};
 
   filterStates.forEach(({ key, filteredKeys, column }) => {
+    console.log(column);
     const { filters, filterDropdown } = column;
     if (filterDropdown) {
       currentFilters[key] = filteredKeys || null;

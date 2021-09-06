@@ -77,6 +77,7 @@ export default defineComponent<RowProps>({
             return (
               <Cell
                 {...cell}
+                cellType="header"
                 ellipsis={column.ellipsis}
                 align={column.align}
                 component={CellComponent}

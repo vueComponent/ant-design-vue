@@ -54,6 +54,7 @@ import VCResizeObserver from '../vc-resize-observer';
 import { useProvideTable } from './context/TableContext';
 import { useProvideBody } from './context/BodyContext';
 import { useProvideResize } from './context/ResizeContext';
+import { getDataAndAriaProps } from './utils/legacyUtil';
 
 // Used for conditions cache
 const EMPTY_DATA = [];
@@ -178,7 +179,8 @@ export default defineComponent<TableProps>({
     'internalRefs',
     'canExpandable',
   ] as any,
-  setup(props, { slots, emit }) {
+  inheritAttrs: false,
+  setup(props, { attrs, slots, emit }) {
     const mergedData = computed(() => props.data || EMPTY_DATA);
     const hasData = computed(() => !!mergedData.value.length);
 
@@ -749,9 +751,10 @@ export default defineComponent<TableProps>({
           </div>
         );
       }
-
+      const ariaProps = getDataAndAriaProps(attrs);
       let fullTable = (
         <div
+          {...ariaProps}
           class={classNames(prefixCls, {
             [`${prefixCls}-rtl`]: direction === 'rtl',
             [`${prefixCls}-ping-left`]: pingedLeft.value,
@@ -765,7 +768,9 @@ export default defineComponent<TableProps>({
             [`${prefixCls}-has-fix-right`]:
               flattenColumns.value[columnCount.value - 1] &&
               flattenColumns.value[columnCount.value - 1].fixed === 'right',
+            [attrs.class as string]: attrs.class,
           })}
+          style={attrs.style}
           id={id}
           ref={fullTableRef}
         >

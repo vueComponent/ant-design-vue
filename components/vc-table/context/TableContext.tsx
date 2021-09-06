@@ -20,12 +20,12 @@ export interface TableContextProps {
   summaryCollect: (uniKey: string, fixed: boolean | string) => void;
 }
 
-export const BodyContextKey: InjectionKey<TableContextProps> = Symbol('TableContextProps');
+export const TableContextKey: InjectionKey<TableContextProps> = Symbol('TableContextProps');
 
 export const useProvideTable = (props: TableContextProps) => {
-  provide(BodyContextKey, props);
+  provide(TableContextKey, props);
 };
 
 export const useInjectTable = () => {
-  return inject(BodyContextKey, {} as TableContextProps);
+  return inject(TableContextKey, {} as TableContextProps);
 };

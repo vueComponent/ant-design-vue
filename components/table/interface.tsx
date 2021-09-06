@@ -106,7 +106,7 @@ export interface ColumnType<RecordType = DefaultRecordType> extends RcColumnType
   filterMultiple?: boolean;
   filteredValue?: FilterValue | null;
   defaultFilteredValue?: FilterValue | null;
-  filterIcon?: VueNode | ((filtered: boolean) => VueNode);
+  filterIcon?: VueNode | ((opt: { filtered: boolean; column: ColumnType }) => VueNode);
   onFilter?: (value: string | number | boolean, record: RecordType) => boolean;
   filterDropdownVisible?: boolean;
   onFilterDropdownVisibleChange?: (visible: boolean) => void;

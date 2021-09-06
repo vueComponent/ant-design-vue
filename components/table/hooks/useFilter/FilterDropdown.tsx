@@ -18,6 +18,7 @@ import type { FilterState } from '.';
 import { computed, defineComponent, onBeforeUnmount, ref } from 'vue';
 import classNames from '../../../_util/classNames';
 import useConfigInject from '../../../_util/hooks/useConfigInject';
+import { useInjectSlots } from '../../context';
 
 const { SubMenu, Item: MenuItem } = Menu;
 
@@ -119,6 +120,7 @@ export default defineComponent<FilterDropdownProps<any>>({
     'getPopupContainer',
   ] as any,
   setup(props, { slots }) {
+    const contextSlots = useInjectSlots();
     const filterDropdownVisible = computed(() => props.column.filterDropdownVisible);
     const visible = ref(false);
     const filtered = computed(
@@ -294,9 +296,11 @@ export default defineComponent<FilterDropdownProps<any>>({
 
       let filterIcon;
       if (typeof column.filterIcon === 'function') {
-        filterIcon = column.filterIcon(filtered.value);
+        filterIcon = column.filterIcon({ filtered: filtered.value, column });
       } else if (column.filterIcon) {
         filterIcon = column.filterIcon;
+      } else if (contextSlots.value.customFilterIcon) {
+        filterIcon = contextSlots.value.customFilterIcon({ filtered: filtered.value, column });
       } else {
         filterIcon = <FilterFilled />;
       }

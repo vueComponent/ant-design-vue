@@ -66,6 +66,14 @@ interface ColumnSharedType<RecordType> {
   customHeaderCell?: GetComponentProps<ColumnsType<RecordType>[number]>;
   ellipsis?: CellEllipsisType;
   align?: AlignType;
+
+  /** @deprecated Please use `v-slot:filterIcon` `v-slot:bodyCell` `v-slot:headerCell` instead */
+  slots?: {
+    filterIcon?: string;
+    filterDropdown?: string;
+    customRender?: string;
+    title?: string;
+  };
 }
 
 export interface ColumnGroupType<RecordType> extends ColumnSharedType<RecordType> {
@@ -176,12 +184,12 @@ export interface LegacyExpandableProps<RecordType> {
   rowExpandable?: (record: RecordType) => boolean;
 }
 
-export type ExpandedRowRender<ValueType> = (
-  record: ValueType,
-  index: number,
-  indent: number,
-  expanded: boolean,
-) => any;
+export type ExpandedRowRender<ValueType> = (opt: {
+  record: ValueType;
+  index: number;
+  indent: number;
+  expanded: boolean;
+}) => any;
 
 export interface RenderExpandIconProps<RecordType> {
   prefixCls: string;

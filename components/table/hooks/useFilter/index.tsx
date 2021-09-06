@@ -1,8 +1,9 @@
-import { DefaultRecordType } from 'ant-design-vue/es/vc-table/interface';
-import devWarning from 'ant-design-vue/es/vc-util/devWarning';
-import useState from 'ant-design-vue/es/_util/hooks/useState';
-import { computed, Ref } from 'vue';
-import {
+import type { DefaultRecordType } from '../../../vc-table/interface';
+import devWarning from '../../../vc-util/devWarning';
+import useState from '../../../_util/hooks/useState';
+import type { Ref } from 'vue';
+import { computed } from 'vue';
+import type {
   TransformColumns,
   ColumnsType,
   ColumnType,

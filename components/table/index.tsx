@@ -1,8 +1,8 @@
 import Table from './Table';
-import Column from './Column';
-import ColumnGroup from './ColumnGroup';
+import type Column from './Column';
+import type ColumnGroup from './ColumnGroup';
 import type { TableProps, TablePaginationConfig } from './Table';
-import { App } from 'vue';
+import type { App } from 'vue';
 
 export type { ColumnProps } from './Column';
 export type { ColumnsType, ColumnType, ColumnGroupType } from './interface';

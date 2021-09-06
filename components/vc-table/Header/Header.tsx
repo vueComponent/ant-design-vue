@@ -1,4 +1,4 @@
-import classNames from 'ant-design-vue/es/_util/classNames';
+import classNames from '../../_util/classNames';
 import { computed, defineComponent } from 'vue';
 import { useInjectTable } from '../context/TableContext';
 import type {

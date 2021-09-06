@@ -1,5 +1,5 @@
 import { defineComponent } from 'vue';
-import { ColumnType } from './interface';
+import type { ColumnType } from './interface';
 
 export type ColumnProps = ColumnType;
 export default defineComponent<ColumnProps>({

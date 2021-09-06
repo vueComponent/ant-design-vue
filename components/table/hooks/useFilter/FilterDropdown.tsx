@@ -6,12 +6,18 @@ import Checkbox from '../../../checkbox';
 import Radio from '../../../radio';
 import Dropdown from '../../../dropdown';
 import Empty from '../../../empty';
-import { ColumnType, ColumnFilterItem, Key, TableLocale, GetPopupContainer } from '../../interface';
+import type {
+  ColumnType,
+  ColumnFilterItem,
+  Key,
+  TableLocale,
+  GetPopupContainer,
+} from '../../interface';
 import FilterDropdownMenuWrapper from './FilterWrapper';
-import { FilterState } from '.';
+import type { FilterState } from '.';
 import { computed, defineComponent, onBeforeUnmount, ref } from 'vue';
-import classNames from 'ant-design-vue/es/_util/classNames';
-import useConfigInject from 'ant-design-vue/es/_util/hooks/useConfigInject';
+import classNames from '../../../_util/classNames';
+import useConfigInject from '../../../_util/hooks/useConfigInject';
 
 const { SubMenu, Item: MenuItem } = Menu;
 

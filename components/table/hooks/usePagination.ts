@@ -1,4 +1,4 @@
-import useState from 'ant-design-vue/es/_util/hooks/useState';
+import useState from '../../_util/hooks/useState';
 import type { Ref } from 'vue';
 import { computed } from 'vue';
 import type { PaginationProps } from '../../pagination';

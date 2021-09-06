@@ -13,7 +13,7 @@ import {
   watchEffect,
 } from 'vue';
 import { useInjectTable } from '../context/TableContext';
-import classNames from 'ant-design-vue/es/_util/classNames';
+import classNames from '../../_util/classNames';
 
 function useColumnWidth(colWidthsRef: Ref<readonly number[]>, columCountRef: Ref<number>) {
   return computed(() => {

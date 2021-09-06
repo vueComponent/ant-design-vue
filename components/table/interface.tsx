@@ -8,9 +8,10 @@ import type {
 import type { TooltipProps } from '../tooltip';
 import type { CheckboxProps } from '../checkbox';
 import type { PaginationProps } from '../pagination';
-import { Breakpoint } from '../_util/responsiveObserve';
-import { INTERNAL_SELECTION_ITEM } from './hooks/useSelection';
-import { tuple, VueNode } from '../_util/type';
+import type { Breakpoint } from '../_util/responsiveObserve';
+import type { INTERNAL_SELECTION_ITEM } from './hooks/useSelection';
+import type { VueNode } from '../_util/type';
+import { tuple } from '../_util/type';
 // import { TableAction } from './Table';
 
 export type { GetRowKey, ExpandableConfig };
@@ -136,7 +137,7 @@ export type SelectionSelectFn<T> = (
   nativeEvent: Event,
 ) => void;
 
-export interface TableRowSelection<T> {
+export interface TableRowSelection<T = DefaultRecordType> {
   /** Keep the selection keys in list even the key not exist in `dataSource` anymore */
   preserveSelectedRowKeys?: boolean;
   type?: RowSelectionType;
@@ -169,7 +170,7 @@ export type TransformColumns<RecordType> = (
   columns: ColumnsType<RecordType>,
 ) => ColumnsType<RecordType>;
 
-export interface TableCurrentDataSource<RecordType> {
+export interface TableCurrentDataSource<RecordType = DefaultRecordType> {
   currentDataSource: RecordType[];
   action: TableAction;
 }

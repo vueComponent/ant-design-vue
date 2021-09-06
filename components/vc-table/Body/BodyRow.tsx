@@ -5,8 +5,8 @@ import ExpandedRow from './ExpandedRow';
 import { computed, defineComponent, ref, watchEffect } from 'vue';
 import { useInjectTable } from '../context/TableContext';
 import { useInjectBody } from '../context/BodyContext';
-import classNames from 'ant-design-vue/es/_util/classNames';
-import { parseStyleText } from 'ant-design-vue/es/_util/props-util';
+import classNames from '../../_util/classNames';
+import { parseStyleText } from '../../_util/props-util';
 
 export interface BodyRowProps<RecordType> {
   record: RecordType;

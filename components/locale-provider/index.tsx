@@ -9,7 +9,7 @@ import type { ValidateMessages } from '../form/interface';
 import type { TransferLocale } from '../transfer';
 import type { PickerLocale as DatePickerLocale } from '../date-picker/generatePicker';
 import type { PaginationLocale } from '../pagination/Pagination';
-import { TableLocale } from '../table/interface';
+import type { TableLocale } from '../table/interface';
 
 interface TransferLocaleForEmpty {
   description: string;

@@ -1,20 +1,22 @@
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
-import { DataNode } from 'ant-design-vue/es/tree';
-import { INTERNAL_COL_DEFINE } from 'ant-design-vue/es/vc-table';
-import { FixedType } from 'ant-design-vue/es/vc-table/interface';
-import { GetCheckDisabled } from 'ant-design-vue/es/vc-tree/interface';
-import { arrAdd, arrDel } from 'ant-design-vue/es/vc-tree/util';
-import { conductCheck } from 'ant-design-vue/es/vc-tree/utils/conductUtil';
-import { convertDataToEntities } from 'ant-design-vue/es/vc-tree/utils/treeUtil';
-import devWarning from 'ant-design-vue/es/vc-util/devWarning';
-import useMergedState from 'ant-design-vue/es/_util/hooks/useMergedState';
-import useState from 'ant-design-vue/es/_util/hooks/useState';
-import { computed, ref, Ref, watchEffect } from 'vue';
-import Checkbox, { CheckboxProps } from '../../checkbox';
+import type { DataNode } from '../../tree';
+import { INTERNAL_COL_DEFINE } from '../../vc-table';
+import type { FixedType } from '../../vc-table/interface';
+import type { GetCheckDisabled } from '../../vc-tree/interface';
+import { arrAdd, arrDel } from '../../vc-tree/util';
+import { conductCheck } from '../../vc-tree/utils/conductUtil';
+import { convertDataToEntities } from '../../vc-tree/utils/treeUtil';
+import devWarning from '../../vc-util/devWarning';
+import useMergedState from '../../_util/hooks/useMergedState';
+import useState from '../../_util/hooks/useState';
+import type { Ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
+import type { CheckboxProps } from '../../checkbox';
+import Checkbox from '../../checkbox';
 import Dropdown from '../../dropdown';
 import Menu from '../../menu';
 import Radio from '../../radio';
-import {
+import type {
   TableRowSelection,
   Key,
   ColumnsType,
@@ -474,8 +476,8 @@ export default function useSelection<RecordType>(
               onChange={({ nativeEvent }) => {
                 const { shiftKey } = nativeEvent;
 
-                let startIndex: number = -1;
-                let endIndex: number = -1;
+                let startIndex = -1;
+                let endIndex = -1;
 
                 // Get range of this
                 if (shiftKey && checkStrictly) {

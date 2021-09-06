@@ -1,4 +1,5 @@
-import { defineComponent, ExtractPropTypes, inject, nextTick } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent, inject, nextTick } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import VcCheckbox from '../vc-checkbox';

@@ -1,5 +1,5 @@
-import classNames from 'ant-design-vue/es/_util/classNames';
-import { isValidElement, parseStyleText } from 'ant-design-vue/es/_util/props-util';
+import classNames from '../../_util/classNames';
+import { isValidElement, parseStyleText } from '../../_util/props-util';
 import type { CSSProperties, HTMLAttributes } from 'vue';
 import { defineComponent } from 'vue';
 

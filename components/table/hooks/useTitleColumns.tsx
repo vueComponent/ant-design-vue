@@ -1,5 +1,5 @@
-import { Ref } from 'vue';
-import { TransformColumns, ColumnTitleProps, ColumnsType } from '../interface';
+import type { Ref } from 'vue';
+import type { TransformColumns, ColumnTitleProps, ColumnsType } from '../interface';
 import { renderColumnTitle } from '../util';
 
 function fillTitle<RecordType>(

@@ -1,12 +1,14 @@
 import RcTable, { Summary } from '../vc-table';
-import { TableProps as RcTableProps, INTERNAL_HOOKS } from '../vc-table/Table';
-import Spin, { SpinProps } from '../spin';
+import type { TableProps as RcTableProps } from '../vc-table/Table';
+import { INTERNAL_HOOKS } from '../vc-table/Table';
+import type { SpinProps } from '../spin';
+import Spin from '../spin';
 import Pagination from '../pagination';
-import { TooltipProps } from '../tooltip';
+import type { TooltipProps } from '../tooltip';
 import usePagination, { DEFAULT_PAGE_SIZE, getPaginationParam } from './hooks/usePagination';
 import useLazyKVMap from './hooks/useLazyKVMap';
-import { Breakpoint } from '../_util/responsiveObserve';
-import {
+import type { Breakpoint } from '../_util/responsiveObserve';
+import type {
   TableRowSelection,
   GetRowKey,
   ColumnType,
@@ -26,24 +28,28 @@ import useSelection, {
   SELECTION_INVERT,
   SELECTION_NONE,
 } from './hooks/useSelection';
-import useSorter, { getSortData, SortState } from './hooks/useSorter';
-import useFilter, { getFilterData, FilterState } from './hooks/useFilter';
+import type { SortState } from './hooks/useSorter';
+import useSorter, { getSortData } from './hooks/useSorter';
+import type { FilterState } from './hooks/useFilter';
+import useFilter, { getFilterData } from './hooks/useFilter';
 import useTitleColumns from './hooks/useTitleColumns';
 import renderExpandIcon from './ExpandIcon';
 import scrollTo from '../_util/scrollTo';
 import defaultLocale from '../locale/en_US';
 import Column from './Column';
 import ColumnGroup from './ColumnGroup';
-import { SizeType } from '../config-provider';
+import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
+import type { PropType } from 'vue';
 import { computed, defineComponent, ref, toRef, watchEffect } from 'vue';
-import { DefaultRecordType } from '../vc-table/interface';
+import type { DefaultRecordType } from '../vc-table/interface';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import { convertChildrenToColumns } from '../vc-table/hooks/useColumns';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import classNames from '../_util/classNames';
 import omit from '../_util/omit';
+import { initDefaultProps } from '../_util/props-util';
 
 export type { ColumnsType, TablePaginationConfig };
 
@@ -74,6 +80,7 @@ export interface TableProps<RecordType = DefaultRecordType>
     | 'columns'
     | 'scroll'
     | 'emptyText'
+    | 'canExpandable'
   > {
   dropdownPrefixCls?: string;
   dataSource?: RcTableProps<RecordType>['data'];
@@ -100,9 +107,76 @@ export interface TableProps<RecordType = DefaultRecordType>
   showSorterTooltip?: boolean | TooltipProps;
 }
 
+const tableProps = () => {
+  return {
+    prefixCls: { type: String as PropType<string> },
+    columns: { type: Array as PropType<ColumnsType> },
+    rowKey: { type: [String, Function] as PropType<TableProps['rowKey']> },
+    tableLayout: { type: String as PropType<TableProps['tableLayout']> },
+    rowClassName: { type: String as PropType<TableProps['rowClassName']> },
+    title: { type: Function as PropType<TableProps['title']> },
+    footer: { type: Function as PropType<TableProps['footer']> },
+    id: { type: String as PropType<TableProps['id']> },
+    showHeader: { type: Boolean as PropType<TableProps['showHeader']> },
+    components: { type: Object as PropType<TableProps['components']> },
+    customRow: { type: Function as PropType<TableProps['customRow']> },
+    customHeaderRow: { type: Function as PropType<TableProps['customHeaderRow']> },
+    direction: { type: String as PropType<TableProps['direction']> },
+    expandFixed: { type: Boolean as PropType<TableProps['expandFixed']> },
+    expandColumnWidth: { type: Number as PropType<TableProps['expandColumnWidth']> },
+    expandedRowKeys: { type: Array as PropType<TableProps['expandedRowKeys']> },
+    defaultExpandedRowKeys: { type: Array as PropType<TableProps['defaultExpandedRowKeys']> },
+    expandedRowRender: { type: Function as PropType<TableProps['expandedRowRender']> },
+    expandRowByClick: { type: Boolean as PropType<TableProps['expandRowByClick']> },
+    expandIcon: { type: Function as PropType<TableProps['expandIcon']> },
+    onExpand: { type: Function as PropType<TableProps['onExpand']> },
+    onExpandedRowsChange: { type: Function as PropType<TableProps['onExpandedRowsChange']> },
+    defaultExpandAllRows: { type: Boolean as PropType<TableProps['defaultExpandAllRows']> },
+    indentSize: { type: Number as PropType<TableProps['indentSize']> },
+    expandIconColumnIndex: { type: Number as PropType<TableProps['expandIconColumnIndex']> },
+    expandedRowClassName: { type: Function as PropType<TableProps['expandedRowClassName']> },
+    childrenColumnName: { type: String as PropType<TableProps['childrenColumnName']> },
+    rowExpandable: { type: Function as PropType<TableProps['rowExpandable']> },
+    sticky: { type: String as PropType<TableProps['sticky']> },
+
+    dropdownPrefixCls: String,
+    dataSource: { type: Array as PropType<RcTableProps['data']> },
+    pagination: { type: [Boolean, Object] as PropType<false | TablePaginationConfig> },
+    loading: { type: [Boolean, Object] as PropType<false | SpinProps> },
+    size: { type: String as PropType<SizeType> },
+    bordered: Boolean,
+    locale: { type: Object as PropType<TableLocale> },
+
+    onChange: {
+      type: Function as PropType<
+        (
+          pagination: TablePaginationConfig,
+          filters: Record<string, FilterValue | null>,
+          sorter: SorterResult | SorterResult[],
+          extra: TableCurrentDataSource,
+        ) => void
+      >,
+    },
+
+    rowSelection: { type: Object as PropType<TableRowSelection> },
+    getPopupContainer: { type: Function as PropType<GetPopupContainer> },
+    scroll: {
+      type: Object as PropType<
+        RcTableProps['scroll'] & {
+          scrollToFirstRowOnChange?: boolean;
+        }
+      >,
+    },
+    sortDirections: { type: Array as PropType<SortOrder[]> },
+    showSorterTooltip: { type: [Boolean, Object] as PropType<boolean | TooltipProps> },
+  };
+};
+
 const InteralTable = defineComponent<TableProps>({
   name: 'InteralTable',
-  props: {} as any,
+  props: initDefaultProps(tableProps(), {
+    rowKey: 'key',
+  }) as any,
   inheritAttrs: false,
   emits: [],
   slots: ['emptyText', 'expandIcon', 'title', 'footer', 'summary'],
@@ -173,7 +247,7 @@ const InteralTable = defineComponent<TableProps>({
     const triggerOnChange = (
       info: Partial<ChangeEventInfo>,
       action: TableAction,
-      reset: boolean = false,
+      reset = false,
     ) => {
       const { pagination, scroll, onChange } = props;
       const changeInfo = {

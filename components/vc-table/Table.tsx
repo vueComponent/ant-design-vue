@@ -242,18 +242,21 @@ export default defineComponent<TableProps>({
     });
 
     const innerExpandedKeys = ref([]);
+    const stop = watchEffect(() => {
+      if (props.defaultExpandedRowKeys) {
+        innerExpandedKeys.value = props.defaultExpandedRowKeys;
+      }
+      if (props.defaultExpandAllRows) {
+        innerExpandedKeys.value = findAllChildrenKeys(
+          mergedData.value,
+          getRowKey.value,
+          mergedChildrenColumnName.value,
+        );
+      }
+    });
+    // defalutXxxx 仅仅第一次生效
+    stop();
 
-    // defalutXxxx 仅仅第一次生效  不用考虑响应式问题
-    if (props.defaultExpandedRowKeys) {
-      innerExpandedKeys.value = props.defaultExpandedRowKeys;
-    }
-    if (props.defaultExpandAllRows) {
-      innerExpandedKeys.value = findAllChildrenKeys(
-        mergedData.value,
-        getRowKey.value,
-        mergedChildrenColumnName.value,
-      );
-    }
     const mergedExpandedKeys = computed(
       () => new Set(props.expandedRowKeys || innerExpandedKeys.value || []),
     );

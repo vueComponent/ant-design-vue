@@ -1,6 +1,6 @@
 import CaretDownOutlined from '@ant-design/icons-vue/CaretDownOutlined';
 import CaretUpOutlined from '@ant-design/icons-vue/CaretUpOutlined';
-import {
+import type {
   TransformColumns,
   ColumnsType,
   Key,
@@ -12,12 +12,14 @@ import {
   ColumnGroupType,
   TableLocale,
 } from '../interface';
-import Tooltip, { TooltipProps } from '../../tooltip';
+import type { TooltipProps } from '../../tooltip';
+import Tooltip from '../../tooltip';
 import { getColumnKey, getColumnPos, renderColumnTitle } from '../util';
-import classNames from 'ant-design-vue/es/_util/classNames';
-import { computed, Ref } from 'vue';
-import useState from 'ant-design-vue/es/_util/hooks/useState';
-import { DefaultRecordType } from 'ant-design-vue/es/vc-table/interface';
+import classNames from '../../_util/classNames';
+import type { Ref } from 'vue';
+import { computed } from 'vue';
+import useState from '../../_util/hooks/useState';
+import type { DefaultRecordType } from '../../vc-table/interface';
 
 const ASCEND = 'ascend';
 const DESCEND = 'descend';

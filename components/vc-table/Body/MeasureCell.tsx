@@ -1,4 +1,4 @@
-import VCResizeObserver from 'ant-design-vue/es/vc-resize-observer';
+import VCResizeObserver from '../../vc-resize-observer';
 import type { Key } from '../interface';
 
 export interface MeasureCellProps {

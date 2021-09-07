@@ -1,5 +1,5 @@
 // debugger tsx
-import Demo from '../../components/table/demo/ajax.vue';
+import Demo from '../../components/table/demo/custom-filter-panel.vue';
 
 export default {
   render() {

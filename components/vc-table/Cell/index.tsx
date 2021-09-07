@@ -119,16 +119,19 @@ export default defineComponent<CellProps>({
       const children = slots.default?.();
       if (validateValue(children) || cellType === 'header') {
         childNode = children;
-        if (cellType === 'header' && contextSlots.value.headerCell && !column.slots?.title) {
-          childNode = contextSlots.value.headerCell({ title: column.title, index, column });
-        }
       } else {
         const value = getPathValue(record, dataIndex);
 
         // Customize render node
         childNode = value;
         if (customRender) {
-          const renderData = customRender({ text: value, value, record, index, column });
+          const renderData = customRender({
+            text: value,
+            value,
+            record,
+            index,
+            column: column.__originColumn__,
+          });
 
           if (isRenderCell(renderData)) {
             childNode = renderData.children;
@@ -139,7 +142,13 @@ export default defineComponent<CellProps>({
         }
 
         if (cellType === 'body' && contextSlots.value.bodyCell && !column.slots?.customRender) {
-          childNode = contextSlots.value.bodyCell({ text: value, value, record, index, column });
+          childNode = contextSlots.value.bodyCell({
+            text: value,
+            value,
+            record,
+            index,
+            column: column.__originColumn__,
+          });
         }
       }
 

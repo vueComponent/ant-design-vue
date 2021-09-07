@@ -34,14 +34,13 @@ function collectFilterStates<RecordType>(
 
   (columns || []).forEach((column, index) => {
     const columnPos = getColumnPos(index, pos);
-
-    if ('children' in column) {
-      filterStates = [...filterStates, ...collectFilterStates(column.children, init, columnPos)];
-    } else if (column.filters || 'filterDropdown' in column || 'onFilter' in column) {
+    const hasFilterDropdown =
+      column.filterDropdown || column?.slots?.filterDropdown || column.customFilterDropdown;
+    if (column.filters || hasFilterDropdown || 'onFilter' in column) {
       if ('filteredValue' in column) {
         // Controlled
         let filteredValues = column.filteredValue;
-        if (!('filterDropdown' in column)) {
+        if (!hasFilterDropdown) {
           filteredValues = filteredValues?.map(String) ?? filteredValues;
         }
         filterStates.push({
@@ -61,6 +60,9 @@ function collectFilterStates<RecordType>(
           forceFiltered: column.filtered,
         });
       }
+    }
+    if ('children' in column) {
+      filterStates = [...filterStates, ...collectFilterStates(column.children, init, columnPos)];
     }
   });
 
@@ -82,8 +84,9 @@ function injectFilter<RecordType>(
     const { filterMultiple = true } = column as ColumnType<RecordType>;
 
     let newColumn: ColumnsType<RecordType>[number] = column;
-
-    if (newColumn.filters || newColumn.filterDropdown) {
+    const hasFilterDropdown =
+      column.filterDropdown || column?.slots?.filterDropdown || column.customFilterDropdown;
+    if (newColumn.filters || hasFilterDropdown) {
       const columnKey = getColumnKey(newColumn, columnPos);
       const filterState = filterStates.find(({ key }) => columnKey === key);
 
@@ -143,9 +146,10 @@ function generateFilterInfo<RecordType>(filterStates: FilterState<RecordType>[])
   const currentFilters: Record<string, FilterValue | null> = {};
 
   filterStates.forEach(({ key, filteredKeys, column }) => {
-    console.log(column);
-    const { filters, filterDropdown } = column;
-    if (filterDropdown) {
+    const hasFilterDropdown =
+      column.filterDropdown || column?.slots?.filterDropdown || column.customFilterDropdown;
+    const { filters } = column;
+    if (hasFilterDropdown) {
       currentFilters[key] = filteredKeys || null;
     } else if (Array.isArray(filteredKeys)) {
       const keys = flattenKeys(filters);

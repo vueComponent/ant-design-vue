@@ -20,19 +20,21 @@ Table cell supports `colSpan` and `rowSpan` that set in render return object. Wh
 
 <template>
   <a-table :columns="columns" :data-source="data" bordered>
-    <template #name="{ text }">
-      <a>{{ text }}</a>
+    <template #bodyCell="{ column, text }">
+      <template v-if="column.dataIndex === 'name'">
+        <a href="javascript:;">{{ text }}</a>
+      </template>
+      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>
 <script lang="ts">
-import { defineComponent, h } from 'vue';
-import { ColumnProps } from 'ant-design-vue/es/table/interface';
+import { defineComponent } from 'vue';
+import { TableColumnType } from 'ant-design-vue';
 // In the fifth row, other columns are merged into first column
 // by setting it's colSpan to be 0
-const renderContent = ({ text, index }: any) => {
+const renderContent = ({ index }: any) => {
   const obj = {
-    children: text,
     props: {} as any,
   };
   if (index === 4) {
@@ -86,16 +88,15 @@ const data = [
 
 export default defineComponent({
   setup() {
-    const columns: ColumnProps[] = [
+    const columns: TableColumnType[] = [
       {
         title: 'Name',
         dataIndex: 'name',
-        customRender: ({ text, index }) => {
+        customRender: ({ index }) => {
           if (index < 4) {
-            return h('a', { href: 'javascript:;' }, text);
+            return;
           }
           return {
-            children: h('a', { href: 'javascript:;' }, text),
             props: {
               colSpan: 5,
             },
@@ -111,9 +112,8 @@ export default defineComponent({
         title: 'Home phone',
         colSpan: 2,
         dataIndex: 'tel',
-        customRender: ({ text, index }) => {
+        customRender: ({ index }) => {
           const obj = {
-            children: text,
             props: {} as any,
           };
           if (index === 2) {

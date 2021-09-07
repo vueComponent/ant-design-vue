@@ -15,7 +15,7 @@ import type {
 } from '../../interface';
 import FilterDropdownMenuWrapper from './FilterWrapper';
 import type { FilterState } from '.';
-import { computed, defineComponent, onBeforeUnmount, ref } from 'vue';
+import { computed, defineComponent, nextTick, onBeforeUnmount, ref, watch } from 'vue';
 import classNames from '../../../_util/classNames';
 import useConfigInject from '../../../_util/hooks/useConfigInject';
 import { useInjectSlots } from '../../context';
@@ -131,6 +131,24 @@ export default defineComponent<FilterDropdownProps<any>>({
         ),
     );
 
+    const filterDropdownRef = computed(() => {
+      const { filterDropdown, slots = {}, customFilterDropdown } = props.column;
+      return (
+        filterDropdown ||
+        (slots.filterDropdown && contextSlots.value[slots.filterDropdown]) ||
+        (customFilterDropdown && contextSlots.value.customFilterDropdown)
+      );
+    });
+
+    const filterIconRef = computed(() => {
+      const { filterIcon, slots = {} } = props.column;
+      return (
+        filterIcon ||
+        (slots.filterIcon && contextSlots.value[slots.filterIcon]) ||
+        contextSlots.value.customFilterIcon
+      );
+    });
+
     const triggerVisible = (newVisible: boolean) => {
       visible.value = newVisible;
       props.column.onFilterDropdownVisibleChange?.(newVisible);
@@ -142,15 +160,21 @@ export default defineComponent<FilterDropdownProps<any>>({
         : visible.value,
     );
 
-    const filteredKeys = ref([]);
+    const propFilteredKeys = computed(() => props.filterState?.filteredKeys);
 
-    const mergedFilteredKeys = computed(
-      () => props.filterState?.filteredKeys || filteredKeys.value || [],
-    );
+    const filteredKeys = ref([]);
 
     const onSelectKeys = ({ selectedKeys }: { selectedKeys?: Key[] }) => {
       filteredKeys.value = selectedKeys;
     };
+
+    watch(
+      propFilteredKeys,
+      () => {
+        onSelectKeys({ selectedKeys: propFilteredKeys.value || [] });
+      },
+      { immediate: true },
+    );
 
     const openKeys = ref([]);
 
@@ -190,7 +214,7 @@ export default defineComponent<FilterDropdownProps<any>>({
 
     const onConfirm = () => {
       triggerVisible(false);
-      internalTriggerFilter(mergedFilteredKeys.value);
+      internalTriggerFilter(filteredKeys.value);
     };
 
     const onReset = () => {
@@ -203,14 +227,18 @@ export default defineComponent<FilterDropdownProps<any>>({
       if (closeDropdown) {
         triggerVisible(false);
       }
-      internalTriggerFilter(mergedFilteredKeys.value);
+      internalTriggerFilter(filteredKeys.value);
     };
 
     const onVisibleChange = (newVisible: boolean) => {
+      if (newVisible && propFilteredKeys.value !== undefined) {
+        // Sync filteredKeys on appear in controlled mode (propFilteredKeys.value !== undefiend)
+        filteredKeys.value = propFilteredKeys.value || [];
+      }
       triggerVisible(newVisible);
 
       // Default will filter when closed
-      if (!newVisible && !props.column.filterDropdown) {
+      if (!newVisible && !filterDropdownRef.value) {
         onConfirm();
       }
     };
@@ -233,20 +261,21 @@ export default defineComponent<FilterDropdownProps<any>>({
 
       let dropdownContent;
 
-      if (typeof column.filterDropdown === 'function') {
-        dropdownContent = column.filterDropdown({
+      if (typeof filterDropdownRef.value === 'function') {
+        dropdownContent = filterDropdownRef.value({
           prefixCls: `${dropdownPrefixCls}-custom`,
           setSelectedKeys: (selectedKeys: Key[]) => onSelectKeys({ selectedKeys }),
-          selectedKeys: mergedFilteredKeys.value,
+          selectedKeys: filteredKeys.value,
           confirm: doFilter,
           clearFilters: onReset,
           filters: column.filters,
           visible: mergedVisible.value,
+          column: column.__originColumn__,
         });
-      } else if (column.filterDropdown) {
-        dropdownContent = column.filterDropdown;
+      } else if (filterDropdownRef.value) {
+        dropdownContent = filterDropdownRef.value;
       } else {
-        const selectedKeys = mergedFilteredKeys.value as any;
+        const selectedKeys = filteredKeys.value as any;
         dropdownContent = (
           <>
             <Menu
@@ -265,7 +294,7 @@ export default defineComponent<FilterDropdownProps<any>>({
                   renderFilterItems({
                     filters: column.filters || [],
                     prefixCls,
-                    filteredKeys: mergedFilteredKeys.value,
+                    filteredKeys: filteredKeys.value,
                     filterMultiple,
                     locale,
                   }),
@@ -295,19 +324,20 @@ export default defineComponent<FilterDropdownProps<any>>({
       );
 
       let filterIcon;
-      if (typeof column.filterIcon === 'function') {
-        filterIcon = column.filterIcon({ filtered: filtered.value, column });
-      } else if (column.filterIcon) {
-        filterIcon = column.filterIcon;
-      } else if (contextSlots.value.customFilterIcon) {
-        filterIcon = contextSlots.value.customFilterIcon({ filtered: filtered.value, column });
+      if (typeof filterIconRef.value === 'function') {
+        filterIcon = filterIconRef.value({
+          filtered: filtered.value,
+          column: column.__originColumn__,
+        });
+      } else if (filterIconRef.value) {
+        filterIcon = filterIconRef.value;
       } else {
         filterIcon = <FilterFilled />;
       }
 
       return (
         <div class={`${prefixCls}-column`}>
-          <span class={`${tablePrefixCls}-column-title`}>{slots.defalut?.()}</span>
+          <span class={`${tablePrefixCls}-column-title`}>{slots.default?.()}</span>
           <Dropdown
             overlay={menu}
             trigger={['click']}

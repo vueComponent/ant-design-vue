@@ -17,8 +17,11 @@ Add border, title and footer for table.
 
 <template>
   <a-table :columns="columns" :data-source="data" bordered>
-    <template #name="{ text }">
-      <a>{{ text }}</a>
+    <template #bodyCell="{ column, text }">
+      <template v-if="column.dataIndex === 'name'">
+        <a>{{ text }}</a>
+      </template>
+      <template v-else>{{ text }}</template>
     </template>
     <template #title>Header</template>
     <template #footer>Footer</template>
@@ -31,7 +34,6 @@ const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
-    slots: { customRender: 'name' },
   },
   {
     title: 'Cash Assets',

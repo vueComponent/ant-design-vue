@@ -1,4 +1,4 @@
-import Table from './Table';
+import Table, { tableProps } from './Table';
 import type Column from './Column';
 import type ColumnGroup from './ColumnGroup';
 import type { TableProps, TablePaginationConfig } from './Table';
@@ -18,6 +18,7 @@ Table.install = function (app: App) {
 
 export const TableColumn = Table.Column;
 export const TableColumnGroup = Table.ColumnGroup;
+export { tableProps };
 
 export default Table as typeof Table &
   Plugin & {

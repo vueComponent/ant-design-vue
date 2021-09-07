@@ -51,6 +51,7 @@ import classNames from '../_util/classNames';
 import omit from '../_util/omit';
 import { initDefaultProps } from '../_util/props-util';
 import { ContextSlots, useProvideSlots } from './context';
+import useColumns from './hooks/useColumns';
 
 export type { ColumnsType, TablePaginationConfig };
 
@@ -107,7 +108,7 @@ export interface TableProps<RecordType = DefaultRecordType>
   sortDirections?: SortOrder[];
   showSorterTooltip?: boolean | TooltipProps;
 }
-const tableProps = () => {
+export const tableProps = () => {
   return {
     prefixCls: { type: String as PropType<string>, default: undefined },
     columns: { type: Array as PropType<ColumnsType>, default: undefined },
@@ -394,10 +395,13 @@ const InteralTable = defineComponent<
     });
     const mergedData = computed(() => getFilterData(sortedData.value, filterStates.value));
     // ============================ Column ============================
+
+    const [transformBasicColumns] = useColumns(toRef(props, 'contextSlots'));
+
     const columnTitleProps = computed(() => ({
       ...sorterTitleProps.value,
     }));
-    const [transformTitleColumns] = useTitleColumns(columnTitleProps, toRef(props, 'contextSlots'));
+    const [transformTitleColumns] = useTitleColumns(columnTitleProps);
 
     // ========================== Pagination ==========================
     const onPaginationChange = (current: number, pageSize: number) => {
@@ -505,7 +509,9 @@ const InteralTable = defineComponent<
 
     const transformColumns = (innerColumns: ColumnsType<any>): ColumnsType<any> => {
       const res = transformTitleColumns(
-        transformSelectionColumns(transformFilterColumns(transformSorterColumns(innerColumns))),
+        transformSelectionColumns(
+          transformFilterColumns(transformSorterColumns(transformBasicColumns(innerColumns))),
+        ),
       );
       return res;
     };

@@ -67,6 +67,8 @@ interface ColumnSharedType<RecordType> {
   ellipsis?: CellEllipsisType;
   align?: AlignType;
 
+  customFilterDropdown?: boolean;
+
   /** @deprecated Please use `v-slot:filterIcon` `v-slot:bodyCell` `v-slot:headerCell` instead */
   slots?: {
     filterIcon?: string;
@@ -74,6 +76,13 @@ interface ColumnSharedType<RecordType> {
     customRender?: string;
     title?: string;
   };
+
+  /**
+   * @private Internal usage.
+   *
+   * !!! DO NOT USE IN PRODUCTION ENVIRONMENT !!!
+   */
+  __originColumn__?: any;
 }
 
 export interface ColumnGroupType<RecordType> extends ColumnSharedType<RecordType> {

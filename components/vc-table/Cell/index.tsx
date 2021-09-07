@@ -1,7 +1,7 @@
 import classNames from '../../_util/classNames';
-import { isValidElement, parseStyleText } from '../../_util/props-util';
+import { flattenChildren, isValidElement, parseStyleText } from '../../_util/props-util';
 import type { CSSProperties, HTMLAttributes } from 'vue';
-import { defineComponent } from 'vue';
+import { defineComponent, isVNode } from 'vue';
 
 import type {
   DataIndex,
@@ -142,13 +142,15 @@ export default defineComponent<CellProps>({
         }
 
         if (cellType === 'body' && contextSlots.value.bodyCell && !column.slots?.customRender) {
-          childNode = contextSlots.value.bodyCell({
-            text: value,
-            value,
-            record,
-            index,
-            column: column.__originColumn__,
-          });
+          childNode = flattenChildren(
+            contextSlots.value.bodyCell({
+              text: value,
+              value,
+              record,
+              index,
+              column: column.__originColumn__,
+            }) as any,
+          );
         }
       }
 
@@ -165,6 +167,9 @@ export default defineComponent<CellProps>({
         childNode = <span class={`${cellPrefixCls}-content`}>{childNode}</span>;
       }
 
+      if (Array.isArray(childNode) && childNode.length === 1) {
+        childNode = childNode[0];
+      }
       const {
         colSpan: cellColSpan,
         rowSpan: cellRowSpan,
@@ -204,11 +209,10 @@ export default defineComponent<CellProps>({
       let title: string;
       const ellipsisConfig: CellEllipsisType = ellipsis === true ? { showTitle: true } : ellipsis;
       if (ellipsisConfig && (ellipsisConfig.showTitle || rowType === 'header')) {
-        debugger;
         if (typeof childNode === 'string' || typeof childNode === 'number') {
           title = childNode.toString();
-        } else if (isValidElement(childNode) && typeof childNode.props.children === 'string') {
-          title = childNode.props.children;
+        } else if (isVNode(childNode) && typeof childNode.children === 'string') {
+          title = childNode.children;
         }
       }
 

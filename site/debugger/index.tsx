@@ -1,5 +1,5 @@
 // debugger tsx
-import Demo from '../../components/table/demo/custom-filter-panel.vue';
+import Demo from '../../components/table/demo/expand-children.vue';
 
 export default {
   render() {

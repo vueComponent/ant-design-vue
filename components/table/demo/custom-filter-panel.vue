@@ -55,7 +55,6 @@ Implement a customized column search example via `customFilterDropdown`.
     </template>
     <template #bodyCell="{ text, column }">
       <span v-if="searchText && searchedColumn === column.dataIndex">
-        {{ searchText }}{{ searchedColumn }} {{ column.dataIndex }}
         <template
           v-for="(fragment, i) in text
             .toString()
@@ -80,7 +79,7 @@ Implement a customized column search example via `customFilterDropdown`.
 
 <script>
 import { SearchOutlined } from '@ant-design/icons-vue';
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, reactive, ref, toRefs } from 'vue';
 const data = [
   {
     key: '1',
@@ -174,9 +173,8 @@ export default defineComponent({
       columns,
       handleSearch,
       handleReset,
-      searchText: '',
       searchInput,
-      searchedColumn: '',
+      ...toRefs(state),
     };
   },
 });

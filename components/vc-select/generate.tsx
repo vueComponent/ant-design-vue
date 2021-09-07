@@ -38,7 +38,7 @@ import { getSeparatedContent } from './utils/valueUtil';
 import useSelectTriggerControl from './hooks/useSelectTriggerControl';
 import useCacheDisplayValue from './hooks/useCacheDisplayValue';
 import useCacheOptions from './hooks/useCacheOptions';
-import type { CSSProperties, DefineComponent, PropType, VNode, VNodeChild } from 'vue';
+import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue';
 import {
   computed,
   defineComponent,
@@ -137,7 +137,7 @@ export const BaseProps = () => ({
   maxTagTextLength: PropTypes.number,
   maxTagCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   maxTagPlaceholder: PropTypes.any,
-  tokenSeparators: PropTypes.array,
+  tokenSeparators: PropTypes.arrayOf(PropTypes.string),
   tagRender: PropTypes.func,
   showAction: PropTypes.array,
   tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -285,7 +285,10 @@ export interface SelectProps<OptionsType extends object[], ValueType> {
 export interface GenerateConfig<OptionsType extends object[]> {
   prefixCls: string;
   components: {
-    optionList: DefineComponent<Omit<OptionListProps, 'options'> & { options?: OptionsType }>;
+    // TODO
+    optionList: (
+      props: Omit<OptionListProps, 'options'> & { options?: OptionsType },
+    ) => JSX.Element;
   };
   /** Convert jsx tree into `OptionsType` */
   convertChildrenToData: (children: VNodeChild | JSX.Element) => OptionsType;
@@ -313,6 +316,7 @@ export interface GenerateConfig<OptionsType extends object[]> {
   ) => OptionsType;
   omitDOMProps?: (props: object) => object;
 }
+
 type ValueType = DefaultValueType;
 /**
  * This function is in internal usage.
@@ -338,11 +342,12 @@ export default function generateSelector<
     warningProps,
     fillOptionsWithMissingValue,
     omitDOMProps,
-  } = config as any;
-  const Select = defineComponent<SelectProps<OptionsType, ValueType>>({
+  } = config;
+  const Select = defineComponent({
     name: 'Select',
     slots: ['option'],
-    setup(props: SelectProps<OptionsType, ValueType>) {
+    props: initDefaultProps(BaseProps(), {}),
+    setup(props) {
       const useInternalProps = computed(
         () => props.internalProps && props.internalProps.mark === INTERNAL_PROPS_MARK,
       );
@@ -442,9 +447,9 @@ export default function generateSelector<
       });
 
       const mergedOptions = computed((): OptionsType => {
-        let newOptions = props.options;
+        let newOptions = props.options as OptionsType;
         if (newOptions === undefined) {
-          newOptions = convertChildrenToData(props.children);
+          newOptions = convertChildrenToData(props.children as VNodeChild);
         }
 
         /**
@@ -733,7 +738,7 @@ export default function generateSelector<
         // Check if match the `tokenSeparators`
         const patchLabels: string[] = isCompositing
           ? null
-          : getSeparatedContent(searchText, props.tokenSeparators);
+          : getSeparatedContent(searchText, props.tokenSeparators as string[]);
         let patchRawValues: RawValueType[] = patchLabels;
 
         if (props.mode === 'combobox') {
@@ -913,12 +918,12 @@ export default function generateSelector<
         if (props.disabled) {
           return;
         }
-        const serachVal = mergedSearchValue.value;
-        if (serachVal) {
+        const searchVal = mergedSearchValue.value;
+        if (searchVal) {
           // `tags` mode should move `searchValue` into values
           if (props.mode === 'tags') {
             triggerSearch('', false, false);
-            triggerChange(Array.from(new Set([...mergedRawValue.value, serachVal])));
+            triggerChange(Array.from(new Set([...mergedRawValue.value, searchVal])));
           } else if (props.mode === 'multiple') {
             // `multiple` mode only clean the search value but not trigger event
             setInnerSearchValue('');
@@ -1096,7 +1101,7 @@ export default function generateSelector<
         activeValue,
         onSearchSubmit,
         $slots: slots,
-      } = this as any;
+      } = this;
       const {
         prefixCls = defaultPrefixCls,
         class: className,
@@ -1356,6 +1361,6 @@ export default function generateSelector<
       );
     },
   });
-  Select.props = initDefaultProps(BaseProps(), {});
+
   return Select;
 }

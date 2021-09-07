@@ -1,7 +1,7 @@
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import type { DataNode } from '../../tree';
 import { INTERNAL_COL_DEFINE } from '../../vc-table';
-import type { FixedType } from '../../vc-table/interface';
+import type { ColumnType, FixedType } from '../../vc-table/interface';
 import type { GetCheckDisabled } from '../../vc-tree/interface';
 import { arrAdd, arrDel } from '../../vc-tree/util';
 import { conductCheck } from '../../vc-tree/utils/conductUtil';
@@ -423,13 +423,12 @@ export default function useSelection<RecordType>(
     }
 
     // Body Cell
-    let renderCell: (
-      _: RecordType,
-      record: RecordType,
-      index: number,
-    ) => { node: any; checked: boolean };
+    let renderCell: ({ record, index }: { record: RecordType; index: number }) => {
+      node: any;
+      checked: boolean;
+    };
     if (selectionType === 'radio') {
-      renderCell = (_, record, index) => {
+      renderCell = ({ record, index }) => {
         const key = getRowKey.value(record, index);
         const checked = keySet.has(key);
 
@@ -450,7 +449,7 @@ export default function useSelection<RecordType>(
         };
       };
     } else {
-      renderCell = (_, record, index) => {
+      renderCell = ({ record, index }) => {
         const key = getRowKey.value(record, index);
         const checked = keySet.has(key);
         const indeterminate = derivedHalfSelectedKeySet.value.has(key);
@@ -572,8 +571,8 @@ export default function useSelection<RecordType>(
       };
     }
 
-    const renderSelectionCell = (_: any, record: RecordType, index: number) => {
-      const { node, checked } = renderCell(_, record, index);
+    const renderSelectionCell: ColumnType<RecordType>['customRender'] = ({ record, index }) => {
+      const { node, checked } = renderCell({ record, index });
 
       if (customizeRenderCell) {
         return customizeRenderCell(checked, record, index, node);
@@ -587,7 +586,7 @@ export default function useSelection<RecordType>(
       width: selectionColWidth,
       className: `${prefixCls.value}-selection-column`,
       title: mergedRowSelection.value.columnTitle || title,
-      render: renderSelectionCell,
+      customRender: renderSelectionCell,
       [INTERNAL_COL_DEFINE]: {
         class: `${prefixCls.value}-selection-col`,
       },

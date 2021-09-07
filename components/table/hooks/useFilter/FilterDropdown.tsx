@@ -15,7 +15,7 @@ import type {
 } from '../../interface';
 import FilterDropdownMenuWrapper from './FilterWrapper';
 import type { FilterState } from '.';
-import { computed, defineComponent, nextTick, onBeforeUnmount, ref, watch } from 'vue';
+import { computed, defineComponent, onBeforeUnmount, ref, watch } from 'vue';
 import classNames from '../../../_util/classNames';
 import useConfigInject from '../../../_util/hooks/useConfigInject';
 import { useInjectSlots } from '../../context';

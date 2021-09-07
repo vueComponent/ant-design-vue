@@ -140,6 +140,7 @@ const routes = [
       { path: '', redirect: '/docs/vue/introduce/' },
     ],
   },
+  { path: '/debugger', component: () => import('../../debugger') },
   { path: '/:lang(.*)', redirect: '/components/overview/' },
 ];
 

@@ -81,7 +81,11 @@ export default function useSelection<RecordType>(
 ): [TransformColumns<RecordType>, Ref<Set<Key>>] {
   // ======================== Caches ========================
   const preserveRecordsRef = ref(new Map<Key, RecordType>());
-  const mergedRowSelection = computed(() => rowSelectionRef.value || {});
+  const mergedRowSelection = computed(() => {
+    const temp = rowSelectionRef.value || {};
+    const { checkStrictly = true } = temp;
+    return { ...temp, checkStrictly };
+  });
   // ========================= Keys =========================
   const [mergedSelectedKeys, setMergedSelectedKeys] = useMergedState(
     mergedRowSelection.value.selectedRowKeys ||
@@ -301,7 +305,7 @@ export default function useSelection<RecordType>(
       fixed,
       renderCell: customizeRenderCell,
       hideSelectAll,
-      checkStrictly = true,
+      checkStrictly,
     } = mergedRowSelection.value;
 
     const {
@@ -482,7 +486,7 @@ export default function useSelection<RecordType>(
 
                 // Get range of this
                 if (shiftKey && checkStrictly) {
-                  const pointKeys = new Set([lastSelectedKey, key]);
+                  const pointKeys = new Set([lastSelectedKey.value, key]);
 
                   recordKeys.some((recordKey, recordIndex) => {
                     if (pointKeys.has(recordKey)) {

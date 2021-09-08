@@ -13,7 +13,7 @@ export { ModalProps, ModalFuncProps } from './Modal';
 const info = function (props: ModalFuncProps) {
   const config = {
     type: 'info',
-    icon: <InfoCircleOutlined />,
+    icon: () => <InfoCircleOutlined />,
     okCancel: false,
     ...props,
   };
@@ -23,7 +23,7 @@ const info = function (props: ModalFuncProps) {
 const success = function (props: ModalFuncProps) {
   const config = {
     type: 'success',
-    icon: <CheckCircleOutlined />,
+    icon: () => <CheckCircleOutlined />,
     okCancel: false,
     ...props,
   };
@@ -33,7 +33,7 @@ const success = function (props: ModalFuncProps) {
 const error = function (props: ModalFuncProps) {
   const config = {
     type: 'error',
-    icon: <CloseCircleOutlined />,
+    icon: () => <CloseCircleOutlined />,
     okCancel: false,
     ...props,
   };
@@ -43,7 +43,7 @@ const error = function (props: ModalFuncProps) {
 const warning = function (props: ModalFuncProps) {
   const config = {
     type: 'warning',
-    icon: <ExclamationCircleOutlined />,
+    icon: () => <ExclamationCircleOutlined />,
     okCancel: false,
     ...props,
   };

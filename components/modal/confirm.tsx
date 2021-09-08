@@ -1,17 +1,20 @@
-import { createApp } from 'vue';
+import { createVNode, render as vueRender } from 'vue';
 import ConfirmDialog from './ConfirmDialog';
 import type { ModalFuncProps } from './Modal';
 import { destroyFns } from './Modal';
 
 import Omit from 'omit.js';
 
-export default function confirm(config: ModalFuncProps) {
+const confirm = (config: ModalFuncProps) => {
   const div = document.createElement('div');
   document.body.appendChild(div);
-  let currentConfig = { ...Omit(config, ['parentContext']), close, visible: true } as any;
+  let currentConfig = {
+    ...Omit(config, ['parentContext', 'appContext']),
+    close,
+    visible: true,
+  } as any;
 
   let confirmDialogInstance = null;
-  let confirmDialogProps = {};
   function close(this: typeof close, ...args: any[]) {
     currentConfig = {
       ...currentConfig,
@@ -25,12 +28,15 @@ export default function confirm(config: ModalFuncProps) {
       ...currentConfig,
       ...newConfig,
     };
-    confirmDialogInstance &&
-      Object.assign(confirmDialogInstance, { confirmDialogProps: currentConfig });
+    if (confirmDialogInstance) {
+      Object.assign(confirmDialogInstance.component.props, currentConfig);
+      confirmDialogInstance.component.update();
+    }
   }
   function destroy(...args: any[]) {
     if (confirmDialogInstance && div.parentNode) {
-      confirmDialogInstance.vIf = false; // hack destroy
+      Object.assign(confirmDialogInstance.component.props, { vIf: false }); // hack destroy
+      confirmDialogInstance.component.update();
       confirmDialogInstance = null;
       div.parentNode.removeChild(div);
     }
@@ -46,20 +52,14 @@ export default function confirm(config: ModalFuncProps) {
       }
     }
   }
-
+  const Wrapper = p => {
+    return p.vIf ? <ConfirmDialog {...p}></ConfirmDialog> : null;
+  };
   function render(props: ModalFuncProps) {
-    confirmDialogProps = props;
-    return createApp({
-      parent: (config as any).parentContext,
-      data() {
-        return { confirmDialogProps, vIf: true };
-      },
-      render() {
-        // 先解构，避免报错，原因不详
-        const cdProps = { ...this.confirmDialogProps };
-        return this.vIf ? <ConfirmDialog {...cdProps} /> : null;
-      },
-    }).mount(div);
+    const vm = createVNode(Wrapper, { ...props, vIf: true });
+    vm.appContext = config.parentContext || config.appContext || vm.appContext;
+    vueRender(vm, div);
+    return vm;
   }
 
   confirmDialogInstance = render(currentConfig);
@@ -68,4 +68,6 @@ export default function confirm(config: ModalFuncProps) {
     destroy: close,
     update,
   };
-}
+};
+
+export default confirm;

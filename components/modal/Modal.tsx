@@ -95,9 +95,9 @@ export interface ModalFuncProps {
   prefixCls?: string;
   class?: string;
   visible?: boolean;
-  title?: VNodeTypes;
+  title?: () => VNodeTypes | VNodeTypes;
   closable?: boolean;
-  content?: VNodeTypes;
+  content?: () => VNodeTypes | VNodeTypes;
   // TODO: find out exact types
   onOk?: (...args: any[]) => any;
   onCancel?: (...args: any[]) => any;
@@ -105,10 +105,10 @@ export interface ModalFuncProps {
   cancelButtonProps?: ButtonPropsType;
   centered?: boolean;
   width?: string | number;
-  okText?: VNodeTypes;
+  okText?: () => VNodeTypes | VNodeTypes;
   okType?: LegacyButtonType;
-  cancelText?: VNodeTypes;
-  icon?: VNodeTypes;
+  cancelText?: () => VNodeTypes | VNodeTypes;
+  icon?: () => VNodeTypes | VNodeTypes;
   /* Deprecated */
   iconType?: string;
   mask?: boolean;
@@ -123,7 +123,10 @@ export interface ModalFuncProps {
   autoFocusButton?: null | 'ok' | 'cancel';
   transitionName?: string;
   maskTransitionName?: string;
+
+  /** @deprecated please use `appContext` instead */
   parentContext?: any;
+  appContext?: any;
 }
 
 type getContainerFunc = () => HTMLElement;

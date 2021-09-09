@@ -13,24 +13,6 @@ import type {
 } from '../interface';
 import { INTERNAL_COL_DEFINE } from '../utils/legacyUtil';
 
-export function convertChildrenToColumns<RecordType>(
-  children: any[] = [],
-): ColumnsType<RecordType> {
-  return children.map(({ key, props }) => {
-    const { children: nodeChildren, ...restProps } = props;
-    const column = {
-      key,
-      ...restProps,
-    };
-
-    if (nodeChildren) {
-      column.children = convertChildrenToColumns(nodeChildren);
-    }
-
-    return column;
-  });
-}
-
 function flatColumns<RecordType>(columns: ColumnsType<RecordType>): ColumnType<RecordType>[] {
   return columns.reduce((list, column) => {
     const { fixed } = column;

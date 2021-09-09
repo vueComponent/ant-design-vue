@@ -44,7 +44,6 @@ import type { PropType } from 'vue';
 import { computed, defineComponent, ref, toRef, watchEffect } from 'vue';
 import type { DefaultRecordType } from '../vc-table/interface';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
-import { convertChildrenToColumns } from '../vc-table/hooks/useColumns';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import classNames from '../_util/classNames';
@@ -52,6 +51,7 @@ import omit from '../_util/omit';
 import { initDefaultProps } from '../_util/props-util';
 import { ContextSlots, useProvideSlots } from './context';
 import useColumns from './hooks/useColumns';
+import { convertChildrenToColumns } from './util';
 
 export type { ColumnsType, TablePaginationConfig };
 

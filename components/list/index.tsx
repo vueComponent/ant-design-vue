@@ -24,7 +24,7 @@ export { ListItemMetaProps } from './ItemMeta';
 export type ColumnType = 'gutter' | 'column' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
 export const ListGridType = {
-  gutter: PropTypes.number,
+  gutter: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(Number)]),
   column: PropTypes.number,
   xs: PropTypes.number,
   sm: PropTypes.number,

@@ -14,7 +14,7 @@ import {
 } from 'vue';
 import { useInjectTable } from '../context/TableContext';
 import classNames from '../../_util/classNames';
-import addEventListenerWrap from 'ant-design-vue/es/vc-util/Dom/addEventListener';
+import addEventListenerWrap from '../../vc-util/Dom/addEventListener';
 
 function useColumnWidth(colWidthsRef: Ref<readonly number[]>, columCountRef: Ref<number>) {
   return computed(() => {
@@ -71,13 +71,13 @@ export default defineComponent<FixedHeaderProps<DefaultRecordType>>({
       tableContext.isSticky && !props.fixHeader ? 0 : tableContext.scrollbarSize,
     );
     const scrollRef = ref();
-    function onWheel(e: WheelEvent) {
+    const onWheel = (e: WheelEvent) => {
       const { currentTarget, deltaX } = e;
       if (deltaX) {
         emit('scroll', { currentTarget, scrollLeft: (currentTarget as any).scrollLeft + deltaX });
         e.preventDefault();
       }
-    }
+    };
     const wheelEvent = ref();
     onMounted(() => {
       nextTick(() => {

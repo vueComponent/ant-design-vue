@@ -1,4 +1,4 @@
-import RcTable, { Summary } from '../vc-table';
+import RcTable from '../vc-table';
 import type { TableProps as RcTableProps } from '../vc-table/Table';
 import { INTERNAL_HOOKS } from '../vc-table/Table';
 import type { SpinProps } from '../spin';
@@ -23,11 +23,7 @@ import type {
   TableAction,
   FilterValue,
 } from './interface';
-import useSelection, {
-  SELECTION_ALL,
-  SELECTION_INVERT,
-  SELECTION_NONE,
-} from './hooks/useSelection';
+import useSelection from './hooks/useSelection';
 import type { SortState } from './hooks/useSorter';
 import useSorter, { getSortData } from './hooks/useSorter';
 import type { FilterState } from './hooks/useFilter';
@@ -36,8 +32,6 @@ import useTitleColumns from './hooks/useTitleColumns';
 import renderExpandIcon from './ExpandIcon';
 import scrollTo from '../_util/scrollTo';
 import defaultLocale from '../locale/en_US';
-import Column from './Column';
-import ColumnGroup from './ColumnGroup';
 import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
 import type { PropType } from 'vue';
@@ -240,7 +234,7 @@ const InteralTable = defineComponent<
     'customFilterIcon',
     'customFilterDropdown',
   ],
-  setup(props, { attrs, slots, emit }) {
+  setup(props, { attrs, slots }) {
     devWarning(
       !(typeof props.rowKey === 'function' && props.rowKey.length > 1),
       'Table',

@@ -1,4 +1,6 @@
 import Summary from './Summary';
+import SummaryRow from './Row';
+import SummaryCell from './Cell';
 import type { DefaultRecordType, StickyOffsets } from '../interface';
 import { computed, defineComponent, reactive, toRef } from 'vue';
 import type { FlattenColumns } from '../context/SummaryContext';
@@ -34,4 +36,5 @@ export default defineComponent({
   },
 });
 
+export { SummaryRow, SummaryCell };
 export const FooterComponents = Summary;

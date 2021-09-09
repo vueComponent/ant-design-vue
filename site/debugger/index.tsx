@@ -1,5 +1,5 @@
 // debugger tsx
-import Demo from '../../components/table/demo/template.vue';
+import Demo from '../../components/table/demo/summary.vue';
 
 export default {
   render() {

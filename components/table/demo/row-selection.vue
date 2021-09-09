@@ -7,40 +7,40 @@ title:
 ---
 
 ## zh-CN
-第一列是联动的选择框。  
+第一列是联动的选择框。
 默认点击 checkbox 触发选择行为，需要 `点击行` 触发可参考例子：https://codesandbox.io/s/row-selection-on-click-tr58v
 
 ## en-US
-Rows can be selectable by making first column as a selectable column.  
+Rows can be selectable by making first column as a selectable column.
 selection happens when clicking checkbox defaultly. You can see https://codesandbox.io/s/row-selection-on-click-tr58v if you need row-click selection behavior.
 
 </docs>
 
 <template>
   <a-table :row-selection="rowSelection" :columns="columns" :data-source="data">
-    <template #name="{ text }">
-      <a>{{ text }}</a>
+    <template #bodyCell="{ column, text }">
+      <template v-if="column.dataIndex === 'name'">
+        <a>{{ text }}</a>
+      </template>
+      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { ColumnProps } from 'ant-design-vue/es/table/interface';
-
-type Key = ColumnProps['key'];
+import type { TableProps, TableColumnType } from 'ant-design-vue';
 
 interface DataType {
-  key: Key;
+  key: string;
   name: string;
   age: number;
   address: string;
 }
 
-const columns = [
+const columns: TableColumnType<DataType>[] = [
   {
     title: 'Name',
     dataIndex: 'name',
-    slots: { customRender: 'name' },
   },
   {
     title: 'Age',
@@ -80,8 +80,8 @@ const data: DataType[] = [
 
 export default defineComponent({
   setup() {
-    const rowSelection = {
-      onChange: (selectedRowKeys: Key[], selectedRows: DataType[]) => {
+    const rowSelection: TableProps['rowSelection'] = {
+      onChange: (selectedRowKeys: string[], selectedRows: DataType[]) => {
         console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
       },
       getCheckboxProps: (record: DataType) => ({

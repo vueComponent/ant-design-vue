@@ -109,7 +109,7 @@ export default defineComponent<CellProps>({
         align,
         rowType,
         isSticky,
-        column,
+        column = {},
         cellType,
       } = props;
       const cellPrefixCls = `${prefixCls}-cell`;

@@ -20,7 +20,7 @@ export default defineComponent<SummaryCellProps>({
     const tableContext = useInjectTable();
     const summaryContext = useInjectSummary();
     return () => {
-      const { index, colSpan, rowSpan, align } = props;
+      const { index, colSpan = 1, rowSpan, align } = props;
       const { prefixCls, direction } = tableContext;
       const { scrollColumnIndex, stickyOffsets, flattenColumns } = summaryContext;
       const lastIndex = index + colSpan - 1;
@@ -33,7 +33,6 @@ export default defineComponent<SummaryCellProps>({
         stickyOffsets,
         direction,
       );
-
       return (
         <Cell
           class={attrs.class as string}
@@ -44,7 +43,7 @@ export default defineComponent<SummaryCellProps>({
           dataIndex={null}
           align={align}
           customRender={() => ({
-            children: slots.defalut?.(),
+            children: slots.default?.(),
             props: {
               colSpan: mergedColSpan,
               rowSpan,

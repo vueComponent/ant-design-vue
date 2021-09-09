@@ -15,6 +15,7 @@
     <FixedHeader />
     <GroupingColumns />
     <Head />
+    <MultipleSorter />
     <NestedTable />
     <ResetFilter />
     <RowSelectionAndOperation />
@@ -22,6 +23,7 @@
     <RowSelection />
     <Size />
     <Stripe />
+    <Summary />
     <TemplateCom />
   </demo-sort>
 </template>
@@ -51,6 +53,8 @@ import Size from './size.vue';
 import TemplateCom from './template.vue';
 import Ellipsis from './ellipsis.vue';
 import Stripe from './stripe.vue';
+import MultipleSorter from './multiple-sorter.vue';
+import Summary from './summary.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -81,6 +85,8 @@ export default {
     Size,
     TemplateCom,
     Stripe,
+    MultipleSorter,
+    Summary,
   },
 };
 </script>

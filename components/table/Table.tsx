@@ -489,7 +489,9 @@ const InteralTable = defineComponent<
 
       return classNames(
         {
-          [`${prefixCls}-row-selected`]: selectedKeySet.value.has(getRowKey.value(record, index)),
+          [`${prefixCls.value}-row-selected`]: selectedKeySet.value.has(
+            getRowKey.value(record, index),
+          ),
         },
         mergedRowClassName,
       );
@@ -644,12 +646,5 @@ const Table = defineComponent<TableProps>({
     };
   },
 });
-
-Table.SELECTION_ALL = SELECTION_ALL;
-Table.SELECTION_INVERT = SELECTION_INVERT;
-Table.SELECTION_NONE = SELECTION_NONE;
-Table.Column = Column;
-Table.ColumnGroup = ColumnGroup;
-Table.Summary = Summary;
 
 export default Table;

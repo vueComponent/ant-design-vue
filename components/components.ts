@@ -172,7 +172,14 @@ export type {
   ColumnProps as TableColumnProps,
   ColumnsType as TableColumnsType,
 } from './table';
-export { default as Table, TableColumn, TableColumnGroup } from './table';
+export {
+  default as Table,
+  TableColumn,
+  TableColumnGroup,
+  TableSummary,
+  TableSummaryRow,
+  TableSummaryCell,
+} from './table';
 
 export type { TransferProps } from './transfer';
 export { default as Transfer } from './transfer';

@@ -332,7 +332,7 @@ export default defineComponent<TableProps>({
     const summaryFixedInfos = reactive<Record<string, boolean | string>>({});
     const fixFooter = computed(() => {
       const info = Object.values(summaryFixedInfos)[0];
-      return fixHeader.value || (stickyState.value.isSticky && info);
+      return (fixHeader.value || stickyState.value.isSticky) && info;
     });
 
     const summaryCollect = (uniKey: string, fixed: boolean | string) => {
@@ -568,7 +568,7 @@ export default defineComponent<TableProps>({
         stickyState.value;
       const TableComponent = getComponent(['table'], 'table');
 
-      const summaryNode = slots.summary?.();
+      const summaryNode = slots.summary?.({ pageData: mergedData.value });
 
       let groupTableNode;
 
@@ -703,7 +703,7 @@ export default defineComponent<TableProps>({
             {bodyContent}
 
             {/* Summary Table */}
-            {fixFooter.value !== 'top' && (
+            {fixFooter.value && fixFooter.value !== 'top' && (
               <FixedHolder
                 {...fixedHolderProps}
                 stickyBottomOffset={offsetSummary}

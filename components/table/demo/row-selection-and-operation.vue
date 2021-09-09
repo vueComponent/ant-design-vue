@@ -37,9 +37,8 @@ To perform operations and clear selections after selecting some rows, use `rowSe
 </template>
 <script lang="ts">
 import { computed, defineComponent, reactive, toRefs } from 'vue';
-import { ColumnProps } from 'ant-design-vue/es/table/interface';
 
-type Key = ColumnProps['key'];
+type Key = string | number;
 
 interface DataType {
   key: Key;

@@ -15,6 +15,7 @@ import type {
 } from '../interface';
 import { getPathValue, validateValue } from '../utils/valueUtil';
 import { useInjectSlots } from '../../table/context';
+import { INTERNAL_COL_DEFINE } from '../utils/legacyUtil';
 
 function isRenderCell<RecordType = DefaultRecordType>(
   data: RenderedCell<RecordType>,
@@ -141,7 +142,12 @@ export default defineComponent<CellProps>({
           }
         }
 
-        if (cellType === 'body' && contextSlots.value.bodyCell && !column.slots?.customRender) {
+        if (
+          !(INTERNAL_COL_DEFINE in column) &&
+          cellType === 'body' &&
+          contextSlots.value.bodyCell &&
+          !column.slots?.customRender
+        ) {
           childNode = flattenChildren(
             contextSlots.value.bodyCell({
               text: value,

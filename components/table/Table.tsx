@@ -114,7 +114,10 @@ export const tableProps = () => {
     columns: { type: Array as PropType<ColumnsType>, default: undefined },
     rowKey: { type: [String, Function] as PropType<TableProps['rowKey']>, default: undefined },
     tableLayout: { type: String as PropType<TableProps['tableLayout']>, default: undefined },
-    rowClassName: { type: String as PropType<TableProps['rowClassName']>, default: undefined },
+    rowClassName: {
+      type: [String, Function] as PropType<TableProps['rowClassName']>,
+      default: undefined,
+    },
     title: { type: Function as PropType<TableProps['title']>, default: undefined },
     footer: { type: Function as PropType<TableProps['footer']>, default: undefined },
     id: { type: String as PropType<TableProps['id']>, default: undefined },

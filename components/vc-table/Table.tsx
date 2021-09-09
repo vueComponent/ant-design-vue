@@ -390,11 +390,15 @@ export default defineComponent<TableProps>({
       if (!target) {
         return;
       }
+
       if (typeof target === 'function') {
         target(scrollLeft);
-      } else if (target.scrollLeft !== scrollLeft) {
+        return;
+      }
+      const domTarget = (target as any).$el || target;
+      if (domTarget.scrollLeft !== scrollLeft) {
         // eslint-disable-next-line no-param-reassign
-        target.scrollLeft = scrollLeft;
+        domTarget.scrollLeft = scrollLeft;
       }
     }
 

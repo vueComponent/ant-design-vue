@@ -14,6 +14,7 @@ import {
 } from 'vue';
 import { useInjectTable } from '../context/TableContext';
 import classNames from '../../_util/classNames';
+import addEventListenerWrap from 'ant-design-vue/es/vc-util/Dom/addEventListener';
 
 function useColumnWidth(colWidthsRef: Ref<readonly number[]>, columCountRef: Ref<number>) {
   return computed(() => {
@@ -77,13 +78,14 @@ export default defineComponent<FixedHeaderProps<DefaultRecordType>>({
         e.preventDefault();
       }
     }
+    const wheelEvent = ref();
     onMounted(() => {
       nextTick(() => {
-        scrollRef.value?.addEventListener('wheel', onWheel);
+        wheelEvent.value = addEventListenerWrap(scrollRef.value, 'wheel', onWheel);
       });
     });
     onBeforeUnmount(() => {
-      scrollRef.value?.removeEventListener('wheel', onWheel);
+      wheelEvent.value?.remove();
     });
 
     // Check if all flattenColumns has width

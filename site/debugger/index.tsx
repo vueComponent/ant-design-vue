@@ -1,5 +1,5 @@
 // debugger tsx
-import Demo from '../../components/table/demo/expand-children.vue';
+import Demo from '../../components/table/demo/template.vue';
 
 export default {
   render() {

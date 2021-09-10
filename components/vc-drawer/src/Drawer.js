@@ -90,6 +90,12 @@ const Drawer = defineComponent({
       if (val !== this.preProps.placement) {
         // test 的 bug, 有动画过场，删除 dom
         this.contentDom = null;
+        if(this.contentWrapper) {
+          this.contentWrapper.style.transition = `none`;
+          setTimeout(() => {
+            this.contentWrapper.style.transition = ``;
+          });
+        }
       }
       this.preProps.placement = val;
     },

@@ -38,6 +38,7 @@ This example shows how to fetch and present data from a remote server, and how t
 import type { TableProps } from 'ant-design-vue';
 import { usePagination } from 'vue-request';
 import { computed, defineComponent } from 'vue';
+import axios from 'axios';
 const columns = [
   {
     title: 'Name',
@@ -76,7 +77,7 @@ type APIResult = {
 };
 
 const queryData = (params: APIParams) => {
-  return `https://randomuser.me/api?noinfo&${new URLSearchParams(params)}`;
+  return axios.get<APIResult>('https://randomuser.me/api?noinfo', { params });
 };
 
 export default defineComponent({
@@ -87,8 +88,8 @@ export default defineComponent({
       loading,
       current,
       pageSize,
-    } = usePagination<APIResult>(queryData, {
-      formatResult: res => res.results,
+    } = usePagination(queryData, {
+      formatResult: res => res.data.results,
       pagination: {
         currentKey: 'page',
         pageSizeKey: 'results',

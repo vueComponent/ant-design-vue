@@ -35,7 +35,7 @@ import defaultLocale from '../locale/en_US';
 import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
 import type { PropType } from 'vue';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { computed, defineComponent, toRef, watchEffect } from 'vue';
 import type { DefaultRecordType } from '../vc-table/interface';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
@@ -237,7 +237,7 @@ const InteralTable = defineComponent<
     'customFilterIcon',
     'customFilterDropdown',
   ],
-  setup(props, { attrs, slots }) {
+  setup(props, { attrs, slots, expose }) {
     devWarning(
       !(typeof props.rowKey === 'function' && props.rowKey.length > 1),
       'Table',
@@ -497,7 +497,9 @@ const InteralTable = defineComponent<
         mergedRowClassName,
       );
     };
-
+    expose({
+      selectedKeySet,
+    });
     const expandIconColumnIndex = computed(() => {
       // Adjust expand icon index, no overwrite expandIconColumnIndex if set.
       if (expandType.value === 'nest' && props.expandIconColumnIndex === undefined) {
@@ -633,11 +635,16 @@ const InteralTable = defineComponent<
 const Table = defineComponent<TableProps>({
   name: 'ATable',
   inheritAttrs: false,
-  setup(_props, { attrs, slots }) {
+  setup(_props, { attrs, slots, expose }) {
+    const table = ref();
+    expose({
+      table,
+    });
     return () => {
       const columns = (attrs.columns || convertChildrenToColumns(slots.default?.())) as ColumnsType;
       return (
         <InteralTable
+          ref={table}
           {...attrs}
           columns={columns || []}
           expandedRowRender={slots.expandedRowRender}

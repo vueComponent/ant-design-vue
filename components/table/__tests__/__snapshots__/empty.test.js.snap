@@ -43,8 +43,7 @@ exports[`Table renders empty table 1`] = `
                 <!---->
                 <tr class="ant-table-placeholder">
                   <td colspan="8" class="ant-table-cell">
-                    <!---->
-                    <!---->
+                    <!---->No data
                   </td>
                 </tr>
               </tbody>
@@ -102,8 +101,7 @@ exports[`Table renders empty table with custom emptyText 1`] = `
                 <!---->
                 <tr class="ant-table-placeholder">
                   <td colspan="8" class="ant-table-cell">
-                    <!---->
-                    <!---->
+                    <!---->custom empty text
                   </td>
                 </tr>
               </tbody>
@@ -182,8 +180,7 @@ exports[`Table renders empty table with fixed columns 1`] = `
                 <!---->
                 <tr class="ant-table-placeholder">
                   <td colspan="11" class="ant-table-cell">
-                    <!---->
-                    <!---->
+                    <!---->No data
                   </td>
                 </tr>
               </tbody>
@@ -245,8 +242,7 @@ exports[`Table renders empty table without emptyText when loading 1`] = `
                 <!---->
                 <tr class="ant-table-placeholder">
                   <td colspan="8" class="ant-table-cell">
-                    <!---->
-                    <!---->
+                    <!---->No data
                   </td>
                 </tr>
               </tbody>

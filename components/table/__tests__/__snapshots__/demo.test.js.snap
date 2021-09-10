@@ -1093,24 +1093,12 @@ exports[`renders ./components/table/demo/fixed-columns.vue correctly 1`] = `
   <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-fixed-column ant-table-scroll-horizontal ant-table-has-fix-left ant-table-has-fix-right">
+      <div class="ant-table ant-table-fixed-header ant-table-fixed-column ant-table-scroll-horizontal ant-table-has-fix-left ant-table-has-fix-right">
         <!---->
         <div class="ant-table-container">
-          <div style="overflow-x: auto; overflow-y: hidden;" class="ant-table-content">
-            <table style="width: 1300px; min-width: 100%; table-layout: fixed;">
-              <colgroup>
-                <col style="width: 100px;">
-                <col style="width: 100px;">
-                <col>
-                <col>
-                <col>
-                <col>
-                <col>
-                <col>
-                <col>
-                <col>
-                <col style="width: 100px;">
-              </colgroup>
+          <div style="overflow: hidden;" class="ant-table-header">
+            <table style="table-layout: fixed; visibility: hidden;">
+              <colgroup></colgroup>
               <thead class="ant-table-thead">
                 <tr>
                   <th class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;" colstart="0" colend="0">
@@ -1148,6 +1136,24 @@ exports[`renders ./components/table/demo/fixed-columns.vue correctly 1`] = `
                   </th>
                 </tr>
               </thead>
+              <!---->
+            </table>
+          </div>
+          <div style="overflow-x: auto; overflow-y: scroll; max-height: 1000px;" class="ant-table-body">
+            <table style="width: 1300px; min-width: 100%; table-layout: fixed;">
+              <colgroup>
+                <col style="width: 100px;">
+                <col style="width: 100px;">
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col style="width: 100px;">
+              </colgroup>
               <tbody class="ant-table-tbody">
                 <tr aria-hidden="true" class="ant-table-measure-row" style="height: 0px; font-size: 0px;">
                   <td style="padding: 0px; border: 0px; height: 0px;">
@@ -1260,6 +1266,8 @@ exports[`renders ./components/table/demo/fixed-columns.vue correctly 1`] = `
               <!---->
             </table>
           </div>
+          <!---->
+          <!---->
         </div>
         <!---->
       </div>
@@ -4365,7 +4373,7 @@ exports[`renders ./components/table/demo/summary.vue correctly 1`] = `
       </div>
     </div>
   </div>
-</div>
+</div><br>
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <!---->

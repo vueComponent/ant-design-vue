@@ -95,15 +95,27 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
 
 exports[`Table.rowSelection render with default selection correctly 1`] = `
 <div>
-  <div class="ant-dropdown  ant-dropdown-placement-bottomLeft" style="display: none;">
-    <ul role="menu" tabindex="0" class="ant-dropdown-menu ant-dropdown-menu-vertical ant-dropdown-menu-root ant-dropdown-menu-light ant-table-selection-menu ant-dropdown-content">
-      <li role="menuitem" class="ant-dropdown-menu-item">
-        <div>Select current page</div>
-      </li>
-      <li role="menuitem" class="ant-dropdown-menu-item">
-        <div>Invert current page</div>
-      </li>
-    </ul>
+  <!---->
+  <div class="ant-dropdown" style="pointer-events: none; display: none;">
+    <div class="ant-dropdown-content">
+      <!---->
+      <ul class="ant-dropdown-menu ant-dropdown-menu-root ant-dropdown-menu-vertical ant-dropdown-menu-light" role="menu" data-menu-list="true">
+        <!---->
+        <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" role="menuitem" tabindex="-1" data-menu-id="all" aria-disabled="false">
+          <!----><span class="ant-dropdown-menu-title-content">Select all data</span>
+        </li>
+        <!---->
+        <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" role="menuitem" tabindex="-1" data-menu-id="invert" aria-disabled="false">
+          <!----><span class="ant-dropdown-menu-title-content">Invert current page</span>
+        </li>
+        <!---->
+        <li class="ant-dropdown-menu-item ant-dropdown-menu-item-only-child" role="menuitem" tabindex="-1" data-menu-id="none" aria-disabled="false">
+          <!----><span class="ant-dropdown-menu-title-content">Clear all data</span>
+        </li>
+        <!---->
+        <!---->
+      </ul>
+    </div>
   </div>
 </div>
 `;

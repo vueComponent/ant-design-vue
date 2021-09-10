@@ -562,7 +562,7 @@ export default defineComponent<TableProps>({
         getRowKey={getRowKey.value}
         customRow={props.customRow}
         childrenColumnName={mergedChildrenColumnName.value}
-        v-slots={{ emptyText: emptyNode }}
+        v-slots={{ emptyNode }}
       />
     );
 

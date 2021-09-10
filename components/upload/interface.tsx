@@ -70,7 +70,7 @@ export const UploadProps = {
   action: PropsTypes.oneOfType([PropsTypes.string, PropsTypes.func]),
   directory: PropsTypes.looseBool,
   data: PropsTypes.oneOfType([PropsTypes.object, PropsTypes.func]),
-  method: PropsTypes.oneOf(tuple('POST', 'PUT', 'post', 'put')),
+  method: PropsTypes.oneOf(tuple('POST', 'PUT', 'PATCH', 'post', 'put', 'patch')),
   headers: PropsTypes.object,
   showUploadList: PropsTypes.oneOfType([PropsTypes.looseBool, ShowUploadListInterface]),
   multiple: PropsTypes.looseBool,

@@ -35,7 +35,8 @@ import defaultLocale from '../locale/en_US';
 import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
 import type { PropType } from 'vue';
-import { computed, defineComponent, ref, toRef, watchEffect } from 'vue';
+import { reactive } from 'vue';
+import { computed, defineComponent, toRef, watchEffect } from 'vue';
 import type { DefaultRecordType } from '../vc-table/interface';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -43,7 +44,8 @@ import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import classNames from '../_util/classNames';
 import omit from '../_util/omit';
 import { initDefaultProps } from '../_util/props-util';
-import { ContextSlots, useProvideSlots } from './context';
+import { useProvideSlots } from './context';
+import type { ContextSlots } from './context';
 import useColumns from './hooks/useColumns';
 import { convertChildrenToColumns } from './util';
 
@@ -77,6 +79,7 @@ export interface TableProps<RecordType = DefaultRecordType>
     | 'scroll'
     | 'emptyText'
     | 'canExpandable'
+    | 'onUpdateInternalRefs'
   > {
   dropdownPrefixCls?: string;
   dataSource?: RcTableProps<RecordType>['data'];
@@ -217,11 +220,11 @@ const InteralTable = defineComponent<
   }
 >({
   name: 'InteralTable',
+  inheritAttrs: false,
   props: initDefaultProps(tableProps(), {
     rowKey: 'key',
   }) as any,
-  inheritAttrs: false,
-  emits: [],
+  // emits: ['expandedRowsChange', 'change', 'expand'],
   slots: [
     'emptyText',
     'expandIcon',
@@ -282,8 +285,12 @@ const InteralTable = defineComponent<
       return null;
     });
 
-    const internalRefs = {
-      body: ref<HTMLDivElement>(),
+    const internalRefs = reactive({
+      body: null,
+    });
+
+    const updateInternalRefs = refs => {
+      Object.assign(internalRefs, refs);
     };
 
     // ============================ RowKey ============================
@@ -325,9 +332,9 @@ const InteralTable = defineComponent<
         }
       }
 
-      if (scroll && scroll.scrollToFirstRowOnChange !== false && internalRefs.body.value) {
+      if (scroll && scroll.scrollToFirstRowOnChange !== false && internalRefs.body) {
         scrollTo(0, {
-          getContainer: () => internalRefs.body.value!,
+          getContainer: () => internalRefs.body,
         });
       }
 
@@ -606,7 +613,8 @@ const InteralTable = defineComponent<
               rowClassName={internalRowClassName}
               // Internal
               internalHooks={INTERNAL_HOOKS}
-              internalRefs={internalRefs as any}
+              internalRefs={internalRefs}
+              onUpdateInternalRefs={updateInternalRefs}
               transformColumns={transformColumns}
               v-slots={{
                 ...slots,

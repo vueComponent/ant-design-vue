@@ -7,8 +7,8 @@ export interface SummaryProps {
 
 let indexGuid = 0;
 const Summary = defineComponent<SummaryProps>({
-  props: ['fixed'] as any,
   name: 'Summary',
+  props: ['fixed'] as any,
   setup(props, { slots }) {
     const tableContext = useInjectTable();
     const uniKey = `table-summary-uni-key-${++indexGuid}`;

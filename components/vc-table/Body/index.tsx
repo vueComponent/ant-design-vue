@@ -107,7 +107,7 @@ export default defineComponent<BodyProps<any>>({
       const columnsKey = getColumnsKey(flattenColumns);
 
       return (
-        <WrapperComponent className={`${prefixCls}-tbody`}>
+        <WrapperComponent class={`${prefixCls}-tbody`}>
           {/* Measure body column width with additional hidden col */}
           {measureColumnWidth && (
             <tr

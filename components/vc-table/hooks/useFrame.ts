@@ -1,5 +1,5 @@
 import type { Ref, UnwrapRef } from 'vue';
-import { getCurrentInstance, onBeforeUnmount, ref } from 'vue';
+import { onBeforeUnmount, ref } from 'vue';
 
 export type Updater<State> = (prev: State) => State;
 
@@ -14,7 +14,6 @@ export function useLayoutState<State>(
 
   const lastPromiseRef = ref<Promise<void>>(null);
   const updateBatchRef = ref<Updater<State>[]>([]);
-  const instance = getCurrentInstance();
   function setFrameState(updater: Updater<State>) {
     updateBatchRef.value.push(updater);
 
@@ -24,7 +23,7 @@ export function useLayoutState<State>(
     promise.then(() => {
       if (lastPromiseRef.value === promise) {
         const prevBatch = updateBatchRef.value;
-        const prevState = stateRef.value;
+        // const prevState = stateRef.value;
         updateBatchRef.value = [];
 
         prevBatch.forEach(batchUpdater => {
@@ -32,10 +31,6 @@ export function useLayoutState<State>(
         });
 
         lastPromiseRef.value = null;
-
-        if (prevState !== stateRef.value) {
-          instance.update();
-        }
       }
     });
   }

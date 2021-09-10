@@ -17,6 +17,7 @@ export interface ExpandedRowProps {
 
 export default defineComponent<ExpandedRowProps>({
   name: 'ExpandedRow',
+  inheritAttrs: false,
   props: [
     'prefixCls',
     'component',
@@ -28,7 +29,6 @@ export default defineComponent<ExpandedRowProps>({
     'expanded',
     'colSpan',
   ] as any,
-  inheritAttrs: false,
   setup(props, { slots, attrs }) {
     const tableContext = useInjectTable();
     return () => {

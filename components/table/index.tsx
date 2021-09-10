@@ -2,7 +2,8 @@ import Table, { tableProps } from './Table';
 import Column from './Column';
 import ColumnGroup from './ColumnGroup';
 import type { TableProps, TablePaginationConfig } from './Table';
-import { App, defineComponent } from 'vue';
+import { defineComponent } from 'vue';
+import type { App } from 'vue';
 import { Summary, SummaryCell, SummaryRow } from '../vc-table';
 import { SELECTION_ALL, SELECTION_INVERT, SELECTION_NONE } from './hooks/useSelection';
 

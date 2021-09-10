@@ -14,8 +14,8 @@ export interface FooterProps<RecordType = DefaultRecordType> {
 
 export default defineComponent({
   name: 'Footer',
-  props: ['stickyOffsets', 'flattenColumns'],
   inheritAttrs: false,
+  props: ['stickyOffsets', 'flattenColumns'],
   setup(props, { slots }) {
     const tableContext = useInjectTable();
     useProvideSummary(

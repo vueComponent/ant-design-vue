@@ -3,7 +3,6 @@ import PropTypes, { withUndefined } from '../../_util/vue-types';
 import TableCell from './TableCell';
 import { initDefaultProps, findDOMNode } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
-import warning from '../../_util/warning';
 import { computed, inject } from 'vue';
 function noop() {}
 const TableRow = {

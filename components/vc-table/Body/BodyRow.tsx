@@ -24,6 +24,8 @@ export interface BodyRowProps<RecordType> {
 }
 
 export default defineComponent<BodyRowProps<unknown>>({
+  name: 'BodyRow',
+  inheritAttrs: false,
   props: [
     'record',
     'index',
@@ -38,8 +40,6 @@ export default defineComponent<BodyRowProps<unknown>>({
     'getRowKey',
     'childrenColumnName',
   ] as any,
-  name: 'BodyRow',
-  inheritAttrs: false,
   setup(props, { attrs }) {
     const tableContext = useInjectTable();
     const bodyContext = useInjectBody();
@@ -92,6 +92,7 @@ export default defineComponent<BodyRowProps<unknown>>({
       } else if (typeof rowClassName === 'function') {
         return rowClassName(record, index, indent);
       }
+      return '';
     });
 
     const columnsKey = computed(() => getColumnsKey(bodyContext.flattenColumns));

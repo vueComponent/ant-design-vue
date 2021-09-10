@@ -38,6 +38,7 @@ Set summary content by `summary` prop. Sync column fixed status with `a-table-su
       </a-table-summary-row>
     </template>
   </a-table>
+  <br />
   <a-table
     :columns="fixedColumns"
     :data-source="fixedData"

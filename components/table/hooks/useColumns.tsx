@@ -1,6 +1,6 @@
 import devWarning from '../../vc-util/devWarning';
 import type { Ref } from 'vue';
-import { ContextSlots } from '../context';
+import type { ContextSlots } from '../context';
 import type { TransformColumns, ColumnsType } from '../interface';
 
 function fillSlots<RecordType>(columns: ColumnsType<RecordType>, contextSlots: Ref<ContextSlots>) {

@@ -29,7 +29,7 @@ import { getCellFixedInfo } from './utils/fixUtil';
 import StickyScrollBar from './stickyScrollBar';
 import useSticky from './hooks/useSticky';
 import FixedHolder from './FixedHolder';
-import type { CSSProperties, Ref } from 'vue';
+import type { CSSProperties } from 'vue';
 import {
   computed,
   defineComponent,
@@ -130,18 +130,19 @@ export interface TableProps<RecordType = unknown> {
    * !!! DO NOT USE IN PRODUCTION ENVIRONMENT !!!
    */
   internalRefs?: {
-    body: Ref<HTMLDivElement>;
+    body: HTMLDivElement;
   };
 
   sticky?: boolean | TableSticky;
 
   canExpandable?: boolean;
+
+  onUpdateInternalRefs?: (refs: Record<string, any>) => void;
 }
 
 export default defineComponent<TableProps>({
   name: 'Table',
-  slots: ['title', 'footer', 'summary', 'emptyText'],
-  emits: ['expand', 'expandedRowsChange'],
+  inheritAttrs: false,
   props: [
     'prefixCls',
     'data',
@@ -178,8 +179,10 @@ export default defineComponent<TableProps>({
     'internalHooks',
     'internalRefs',
     'canExpandable',
+    'onUpdateInternalRefs',
   ] as any,
-  inheritAttrs: false,
+  slots: ['title', 'footer', 'summary', 'emptyText'],
+  emits: ['expand', 'expandedRowsChange', 'updateInternalRefs'],
   setup(props, { attrs, slots, emit }) {
     const mergedData = computed(() => props.data || EMPTY_DATA);
     const hasData = computed(() => !!mergedData.value.length);
@@ -466,7 +469,11 @@ export default defineComponent<TableProps>({
     watchEffect(
       () => {
         if (props.internalHooks === INTERNAL_HOOKS && props.internalRefs) {
-          props.internalRefs.body.value = scrollBodyRef.value;
+          props.onUpdateInternalRefs({
+            body: scrollBodyRef.value
+              ? (scrollBodyRef.value as any).$el || scrollBodyRef.value
+              : null,
+          });
         }
       },
       { flush: 'post' },
@@ -545,6 +552,26 @@ export default defineComponent<TableProps>({
       onColumnResize,
     });
 
+    // Body
+    const bodyTable = () => (
+      <Body
+        data={mergedData.value}
+        measureColumnWidth={fixHeader.value || horizonScroll.value || stickyState.value.isSticky}
+        expandedKeys={mergedExpandedKeys.value}
+        rowExpandable={props.rowExpandable}
+        getRowKey={getRowKey.value}
+        customRow={props.customRow}
+        childrenColumnName={mergedChildrenColumnName.value}
+        v-slots={{ emptyText: emptyNode }}
+      />
+    );
+
+    const bodyColGroup = () => (
+      <ColGroup
+        colWidths={flattenColumns.value.map(({ width }) => width)}
+        columns={flattenColumns.value}
+      />
+    );
     return () => {
       const {
         prefixCls,
@@ -560,17 +587,14 @@ export default defineComponent<TableProps>({
         id,
         showHeader,
         customHeaderRow,
-        rowExpandable,
-
-        customRow,
       } = props;
       const { isSticky, offsetHeader, offsetSummary, offsetScroll, stickyClassName, container } =
         stickyState.value;
       const TableComponent = getComponent(['table'], 'table');
-
+      const customizeScrollBody = getComponent(['body']) as unknown as CustomizeScrollBody<any>;
       const summaryNode = slots.summary?.({ pageData: mergedData.value });
 
-      let groupTableNode;
+      let groupTableNode = () => null;
 
       // Header props
       const headerProps = {
@@ -582,29 +606,6 @@ export default defineComponent<TableProps>({
         scroll,
       };
 
-      // Body
-      const bodyTable = (
-        <Body
-          data={mergedData.value}
-          measureColumnWidth={fixHeader.value || horizonScroll.value || isSticky}
-          expandedKeys={mergedExpandedKeys.value}
-          rowExpandable={rowExpandable}
-          getRowKey={getRowKey.value}
-          customRow={customRow}
-          childrenColumnName={mergedChildrenColumnName.value}
-          v-slots={{ emptyText: emptyNode }}
-        />
-      );
-
-      const bodyColGroup = (
-        <ColGroup
-          colWidths={flattenColumns.value.map(({ width }) => width)}
-          columns={flattenColumns.value}
-        />
-      );
-
-      const customizeScrollBody = getComponent(['body']) as unknown as CustomizeScrollBody<any>;
-
       if (
         process.env.NODE_ENV !== 'production' &&
         typeof customizeScrollBody === 'function' &&
@@ -615,14 +616,15 @@ export default defineComponent<TableProps>({
       }
       if (fixHeader.value || isSticky) {
         // >>>>>> Fixed Header
-        let bodyContent;
+        let bodyContent = () => null;
 
         if (typeof customizeScrollBody === 'function') {
-          bodyContent = customizeScrollBody(mergedData.value, {
-            scrollbarSize: scrollbarSize.value,
-            ref: scrollBodyRef,
-            onScroll,
-          });
+          bodyContent = () =>
+            customizeScrollBody(mergedData.value, {
+              scrollbarSize: scrollbarSize.value,
+              ref: scrollBodyRef,
+              onScroll,
+            });
 
           headerProps.colWidths = flattenColumns.value.map(({ width }, index) => {
             const colWidth =
@@ -638,7 +640,7 @@ export default defineComponent<TableProps>({
             return 0;
           }) as number[];
         } else {
-          bodyContent = (
+          bodyContent = () => (
             <div
               style={{
                 ...scrollXStyle.value,
@@ -654,8 +656,8 @@ export default defineComponent<TableProps>({
                   tableLayout: mergedTableLayout.value,
                 }}
               >
-                {bodyColGroup}
-                {bodyTable}
+                {bodyColGroup()}
+                {bodyTable()}
                 {!fixFooter.value && summaryNode && (
                   <Footer stickyOffsets={stickyOffsets} flattenColumns={flattenColumns.value}>
                     {summaryNode}
@@ -677,7 +679,7 @@ export default defineComponent<TableProps>({
           onScroll,
         };
 
-        groupTableNode = (
+        groupTableNode = () => (
           <>
             {/* Header Table */}
             {showHeader !== false && (
@@ -700,7 +702,7 @@ export default defineComponent<TableProps>({
             )}
 
             {/* Body Table */}
-            {bodyContent}
+            {bodyContent()}
 
             {/* Summary Table */}
             {fixFooter.value && fixFooter.value !== 'top' && (
@@ -730,7 +732,7 @@ export default defineComponent<TableProps>({
         );
       } else {
         // >>>>>> Unique table
-        groupTableNode = (
+        groupTableNode = () => (
           <div
             style={{
               ...scrollXStyle.value,
@@ -743,9 +745,9 @@ export default defineComponent<TableProps>({
             <TableComponent
               style={{ ...scrollTableStyle.value, tableLayout: mergedTableLayout.value }}
             >
-              {bodyColGroup}
+              {bodyColGroup()}
               {showHeader !== false && <Header {...headerProps} {...columnContext.value} />}
-              {bodyTable}
+              {bodyTable()}
               {summaryNode && (
                 <Footer stickyOffsets={stickyOffsets.value} flattenColumns={flattenColumns.value}>
                   {summaryNode}
@@ -756,7 +758,7 @@ export default defineComponent<TableProps>({
         );
       }
       const ariaProps = getDataAndAriaProps(attrs);
-      let fullTable = (
+      const fullTable = () => (
         <div
           {...ariaProps}
           class={classNames(prefixCls, {
@@ -779,15 +781,20 @@ export default defineComponent<TableProps>({
           ref={fullTableRef}
         >
           {title && <Panel class={`${prefixCls}-title`}>{title(mergedData.value)}</Panel>}
-          <div class={`${prefixCls}-container`}>{groupTableNode}</div>
+          <div class={`${prefixCls}-container`}>{groupTableNode()}</div>
           {footer && <Panel class={`${prefixCls}-footer`}>{footer(mergedData.value)}</Panel>}
         </div>
       );
 
       if (horizonScroll.value) {
-        fullTable = <VCResizeObserver onResize={onFullTableResize}>{fullTable}</VCResizeObserver>;
+        return (
+          <VCResizeObserver
+            onResize={onFullTableResize}
+            v-slots={{ default: fullTable }}
+          ></VCResizeObserver>
+        );
       }
-      return fullTable;
+      return fullTable();
     };
   },
 });

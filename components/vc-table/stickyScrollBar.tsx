@@ -17,9 +17,9 @@ interface StickyScrollBarProps {
 
 export default defineComponent<StickyScrollBarProps>({
   name: 'StickyScrollBar',
+  inheritAttrs: false,
   props: ['offsetScroll', 'container', 'scrollBodyRef'] as any,
   emits: ['scroll'],
-  inheritAttrs: false,
   setup(props, { emit, expose }) {
     const tableContext = useInjectTable();
     const bodyScrollWidth = computed(() => props.scrollBodyRef.value.scrollWidth || 0);

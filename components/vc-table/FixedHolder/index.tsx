@@ -48,6 +48,7 @@ export interface FixedHeaderProps<RecordType> extends HeaderProps<RecordType> {
 
 export default defineComponent<FixedHeaderProps<DefaultRecordType>>({
   name: 'FixedHolder',
+  inheritAttrs: false,
   props: [
     'columns',
     'flattenColumns',
@@ -64,7 +65,6 @@ export default defineComponent<FixedHeaderProps<DefaultRecordType>>({
     'stickyClassName',
   ] as any,
   emits: ['scroll'],
-  inheritAttrs: false,
   setup(props, { attrs, slots, emit }) {
     const tableContext = useInjectTable();
     const combinationScrollBarSize = computed(() =>

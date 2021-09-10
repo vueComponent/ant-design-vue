@@ -14,8 +14,8 @@ export interface SummaryCellProps {
 
 export default defineComponent<SummaryCellProps>({
   name: 'SummaryCell',
-  props: ['index', 'colSpan', 'rowSpan', 'align'] as any,
   inheritAttrs: false,
+  props: ['index', 'colSpan', 'rowSpan', 'align'] as any,
   setup(props, { attrs, slots }) {
     const tableContext = useInjectTable();
     const summaryContext = useInjectSummary();

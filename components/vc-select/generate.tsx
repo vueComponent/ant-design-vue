@@ -401,13 +401,18 @@ export default function generateSelector<
       // ============================== Ref ===============================
       const selectorDomRef = createRef();
 
-      const mergedValue = ref();
+      const innerSearchValue = ref('');
+      const setInnerSearchValue = (val: string) => {
+        innerSearchValue.value = val;
+      };
+
+      const mergedValue = ref(props.value !== undefined ? props.value : props.defaultValue);
       watch(
         () => props.value,
         () => {
-          mergedValue.value = props.value !== undefined ? props.value : props.defaultValue;
+          mergedValue.value = props.value;
+          innerSearchValue.value = '';
         },
-        { immediate: true },
       );
       // ============================= Value ==============================
 
@@ -428,10 +433,6 @@ export default function generateSelector<
       const activeValue = ref(null);
       const setActiveValue = (val: string) => {
         activeValue.value = val;
-      };
-      const innerSearchValue = ref('');
-      const setInnerSearchValue = (val: string) => {
-        innerSearchValue.value = val;
       };
 
       const mergedSearchValue = computed(() => {

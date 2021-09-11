@@ -73,7 +73,7 @@ export interface FilterConfirmProps {
   closeDropdown: boolean;
 }
 
-export interface FilterDropdownProps {
+export interface FilterDropdownProps<RecordType> {
   prefixCls: string;
   setSelectedKeys: (selectedKeys: Key[]) => void;
   selectedKeys: Key[];
@@ -81,6 +81,7 @@ export interface FilterDropdownProps {
   clearFilters?: () => void;
   filters?: ColumnFilterItem[];
   visible: boolean;
+  column: ColumnType<RecordType>;
 }
 
 export interface ColumnType<RecordType = DefaultRecordType> extends RcColumnType<RecordType> {
@@ -102,7 +103,7 @@ export interface ColumnType<RecordType = DefaultRecordType> extends RcColumnType
   // Filter
   filtered?: boolean;
   filters?: ColumnFilterItem[];
-  filterDropdown?: VueNode | ((props: FilterDropdownProps) => VueNode);
+  filterDropdown?: VueNode | ((props: FilterDropdownProps<RecordType>) => VueNode);
   filterMultiple?: boolean;
   filteredValue?: FilterValue | null;
   defaultFilteredValue?: FilterValue | null;

@@ -143,8 +143,8 @@ export default defineComponent({
       props.jsfiddle && props.jsfiddle.docHtml
         ? (
             props.jsfiddle.docHtml
-              .replace('<h2 id="zh-cn">zh-CN</h2>', '')
-              .split('<h2 id="en-us">en-US</h2>')[globalConfig.isZhCN.value ? 0 : 1] || ''
+              .replace('<h2 id="zh-CN">zh-CN</h2>', '')
+              .split('<h2 id="en-US">en-US</h2>')[globalConfig.isZhCN.value ? 0 : 1] || ''
           ).trim()
         : '',
     );

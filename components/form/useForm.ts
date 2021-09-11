@@ -122,7 +122,7 @@ function useForm(
   const validateInfos = reactive<validateInfos>({});
 
   const rulesKeys = computed(() => {
-    return Object.keys(unref(rulesRef));
+    return rulesRef ? Object.keys(unref(rulesRef)) : [];
   });
 
   watch(

@@ -17,30 +17,32 @@ Table with editable rows.
 
 <template>
   <a-table :columns="columns" :data-source="dataSource" bordered>
-    <template v-for="col in ['name', 'age', 'address']" #[col]="{ text, record }" :key="col">
-      <div>
-        <a-input
-          v-if="editableData[record.key]"
-          v-model:value="editableData[record.key][col]"
-          style="margin: -5px 0"
-        />
-        <template v-else>
-          {{ text }}
-        </template>
-      </div>
-    </template>
-    <template #operation="{ record }">
-      <div class="editable-row-operations">
-        <span v-if="editableData[record.key]">
-          <a @click="save(record.key)">Save</a>
-          <a-popconfirm title="Sure to cancel?" @confirm="cancel(record.key)">
-            <a>Cancel</a>
-          </a-popconfirm>
-        </span>
-        <span v-else>
-          <a @click="edit(record.key)">Edit</a>
-        </span>
-      </div>
+    <template #bodyCell="{ column, text, record }">
+      <template v-if="['name', 'age', 'address'].includes(column.dataIndex)">
+        <div>
+          <a-input
+            v-if="editableData[record.key]"
+            v-model:value="editableData[record.key][column.dataIndex]"
+            style="margin: -5px 0"
+          />
+          <template v-else>
+            {{ text }}
+          </template>
+        </div>
+      </template>
+      <template v-else-if="column.dataIndex === 'operation'">
+        <div class="editable-row-operations">
+          <span v-if="editableData[record.key]">
+            <a @click="save(record.key)">Save</a>
+            <a-popconfirm title="Sure to cancel?" @confirm="cancel(record.key)">
+              <a>Cancel</a>
+            </a-popconfirm>
+          </span>
+          <span v-else>
+            <a @click="edit(record.key)">Edit</a>
+          </span>
+        </div>
+      </template>
     </template>
   </a-table>
 </template>
@@ -53,24 +55,20 @@ const columns = [
     title: 'name',
     dataIndex: 'name',
     width: '25%',
-    slots: { customRender: 'name' },
   },
   {
     title: 'age',
     dataIndex: 'age',
     width: '15%',
-    slots: { customRender: 'age' },
   },
   {
     title: 'address',
     dataIndex: 'address',
     width: '40%',
-    slots: { customRender: 'address' },
   },
   {
     title: 'operation',
     dataIndex: 'operation',
-    slots: { customRender: 'operation' },
   },
 ];
 interface DataItem {

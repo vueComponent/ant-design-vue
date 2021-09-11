@@ -164,7 +164,22 @@ export { default as Steps, Step } from './steps';
 export type { SwitchProps } from './switch';
 export { default as Switch } from './switch';
 
-export { default as Table, TableColumn, TableColumnGroup } from './table';
+export type {
+  TableProps,
+  TablePaginationConfig,
+  ColumnGroupType as TableColumnGroupType,
+  ColumnType as TableColumnType,
+  ColumnProps as TableColumnProps,
+  ColumnsType as TableColumnsType,
+} from './table';
+export {
+  default as Table,
+  TableColumn,
+  TableColumnGroup,
+  TableSummary,
+  TableSummaryRow,
+  TableSummaryCell,
+} from './table';
 
 export type { TransferProps } from './transfer';
 export { default as Transfer } from './transfer';

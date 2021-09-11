@@ -19,26 +19,29 @@ Table with editable cells.
 <template>
   <a-button class="editable-add-btn" style="margin-bottom: 8px" @click="handleAdd">Add</a-button>
   <a-table bordered :data-source="dataSource" :columns="columns">
-    <template #name="{ text, record }">
-      <div class="editable-cell">
-        <div v-if="editableData[record.key]" class="editable-cell-input-wrapper">
-          <a-input v-model:value="editableData[record.key].name" @pressEnter="save(record.key)" />
-          <check-outlined class="editable-cell-icon-check" @click="save(record.key)" />
+    <template #bodyCell="{ column, text, record }">
+      <template v-if="column.dataIndex === 'name'">
+        <div class="editable-cell">
+          <div v-if="editableData[record.key]" class="editable-cell-input-wrapper">
+            <a-input v-model:value="editableData[record.key].name" @pressEnter="save(record.key)" />
+            <check-outlined class="editable-cell-icon-check" @click="save(record.key)" />
+          </div>
+          <div v-else class="editable-cell-text-wrapper">
+            {{ text || ' ' }}
+            <edit-outlined class="editable-cell-icon" @click="edit(record.key)" />
+          </div>
         </div>
-        <div v-else class="editable-cell-text-wrapper">
-          {{ text || ' ' }}
-          <edit-outlined class="editable-cell-icon" @click="edit(record.key)" />
-        </div>
-      </div>
-    </template>
-    <template #operation="{ record }">
-      <a-popconfirm
-        v-if="dataSource.length"
-        title="Sure to delete?"
-        @confirm="onDelete(record.key)"
-      >
-        <a>Delete</a>
-      </a-popconfirm>
+      </template>
+      <template v-else-if="column.dataIndex === 'operation'">
+        <a-popconfirm
+          v-if="dataSource.length"
+          title="Sure to delete?"
+          @confirm="onDelete(record.key)"
+        >
+          <a>Delete</a>
+        </a-popconfirm>
+      </template>
+      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>
@@ -65,7 +68,6 @@ export default defineComponent({
         title: 'name',
         dataIndex: 'name',
         width: '30%',
-        slots: { customRender: 'name' },
       },
       {
         title: 'age',
@@ -78,7 +80,6 @@ export default defineComponent({
       {
         title: 'operation',
         dataIndex: 'operation',
-        slots: { customRender: 'operation' },
       },
     ];
     const dataSource: Ref<DataItem[]> = ref([

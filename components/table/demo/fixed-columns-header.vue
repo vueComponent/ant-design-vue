@@ -25,8 +25,11 @@ A Solution for displaying large amounts of data with long columns.
 
 <template>
   <a-table :columns="columns" :data-source="data" :scroll="{ x: 1500, y: 300 }">
-    <template #action>
-      <a>action</a>
+    <template #bodyCell="{ column, text }">
+      <template v-if="column.key === 'operation'">
+        <a>action</a>
+      </template>
+      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>
@@ -49,7 +52,6 @@ const columns = [
     key: 'operation',
     fixed: 'right',
     width: 100,
-    slots: { customRender: 'action' },
   },
 ];
 

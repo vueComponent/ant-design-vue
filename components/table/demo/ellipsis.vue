@@ -20,8 +20,11 @@ Ellipsis cell content via setting `column.ellipsis`.
 
 <template>
   <a-table :columns="columns" :data-source="data">
-    <template #name="{ text }">
-      <a>{{ text }}</a>
+    <template #bodyCell="{ column, text }">
+      <template v-if="column.dataIndex === 'name'">
+        <a>{{ text }}</a>
+      </template>
+      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>
@@ -32,7 +35,6 @@ const columns = [
     title: 'Name',
     dataIndex: 'name',
     key: 'name',
-    slots: { customRender: 'name' },
   },
   {
     title: 'Age',

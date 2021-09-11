@@ -8,13 +8,17 @@ title:
 
 ## zh-CN
 
-使用 template 风格的 API
+使用 template 风格的 API。
+
+> 不推荐使用，会有一定的性能损耗。
 
 > 这个只是一个描述 `columns` 的语法糖，所以你不能用其他组件去包裹 `Column` 和 `ColumnGroup`。
 
 ## en-US
 
-Using template style API
+Using template style API.
+
+> Not recommended, there will be a certain performance loss.
 
 > Since this is just a syntax sugar for the prop `columns`, so that you can't compose `Column` and `ColumnGroup` with other Components.
 

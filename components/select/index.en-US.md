@@ -24,43 +24,43 @@ Select component to select value from options.
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| allowClear | Show clear button. | boolean | false | |
-| autoClearSearchValue | Whether the current search will be cleared on selecting an item. Only applies when `mode` is set to `multiple` or `tags`. | boolean | true | |
-| autofocus | Get focus by default | boolean | false | |
-| bordered | Whether has border style | boolean | true | |
-| defaultActiveFirstOption | Whether active first option by default | boolean | true | |
-| disabled | Whether disabled select | boolean | false | |
-| dropdownClassName | className of dropdown menu | string | - | |
-| dropdownMatchSelectWidth | Whether dropdown's width is same with select. | boolean | true | |
-| dropdownRender | Customize dropdown content | ({menuNode: VNode, props}) => VNode \| v-slot | - | |
-| dropdownStyle | style of dropdown menu | object | - | |
-| dropdownMenuStyle | additional style applied to dropdown menu | object | - | |
-| filterOption | If true, filter options by input, if function, filter options against it. The function will receive two arguments, `inputValue` and `option`, if the function returns `true`, the option will be included in the filtered set; Otherwise, it will be excluded. | boolean or function(inputValue, option) | true | |
-| firstActiveValue | Value of action option by default | string\|string\[] | - | |
-| getPopupContainer | Parent Node which the selector should be rendered to. Default to `body`. When position issues happen, try to modify it into scrollable content and position it relative. | function(triggerNode) | () => document.body | |
-| labelInValue | whether to embed label in value, turn the format of value from `string` to `{key: string, label: vNodes}` | boolean | false | |
-| maxTagCount | Max tag count to show | number | - | |
-| maxTagPlaceholder | Placeholder for not showing tags | slot/function(omittedValues) | - | |
-| maxTagTextLength | Max text length to show | number | - | |
-| mode | Set mode of Select | 'multiple' \| 'tags' | - | |
-| notFoundContent | Specify content to show when no result matches.. | string\|slot | 'Not Found' | |
-| optionFilterProp | Which prop value of option will be used for filter if filterOption is true | string | value | |
-| optionLabelProp | Which prop value of option will render as content of select. | string | `value` for `combobox`, `children` for other modes | |
-| placeholder | Placeholder of select | string\|slot | - | |
-| showSearch | Whether show search input in single mode. | boolean | false | |
-| showArrow | Whether to show the drop-down arrow | boolean | true | |
-| size | Size of Select input. `default` `large` `small` | string | default | |
-| suffixIcon | The custom suffix icon | VNode \| slot | - | |
-| removeIcon | The custom remove icon | VNode \| slot | - | |
-| clearIcon | The custom clear icon | VNode \| slot | - | |
-| menuItemSelectedIcon | The custom menuItemSelected icon | VNode \| slot | - | |
-| tokenSeparators | Separator used to tokenize on tag/multiple mode | string\[] |  | |
-| value(v-model) | Current selected option. | string\|number\|string\[]\|number\[] | - | |
-| options | Data of the selectOption, manual construction work is no longer needed if this property has been set | array&lt;{value, label, [disabled, key, title]}> | \[] | |
+| allowClear | Show clear button. | boolean | false |  |
+| autoClearSearchValue | Whether the current search will be cleared on selecting an item. Only applies when `mode` is set to `multiple` or `tags`. | boolean | true |  |
+| autofocus | Get focus by default | boolean | false |  |
+| bordered | Whether has border style | boolean | true |  |
+| defaultActiveFirstOption | Whether active first option by default | boolean | true |  |
+| disabled | Whether disabled select | boolean | false |  |
+| dropdownClassName | className of dropdown menu | string | - |  |
+| dropdownMatchSelectWidth | Whether dropdown's width is same with select. | boolean | true |  |
+| dropdownRender | Customize dropdown content | ({menuNode: VNode, props}) => VNode \| v-slot | - |  |
+| dropdownStyle | style of dropdown menu | object | - |  |
+| dropdownMenuStyle | additional style applied to dropdown menu | object | - |  |
+| filterOption | If true, filter options by input, if function, filter options against it. The function will receive two arguments, `inputValue` and `option`, if the function returns `true`, the option will be included in the filtered set; Otherwise, it will be excluded. | boolean or function(inputValue, option) | true |  |
+| firstActiveValue | Value of action option by default | string\|string\[] | - |  |
+| getPopupContainer | Parent Node which the selector should be rendered to. Default to `body`. When position issues happen, try to modify it into scrollable content and position it relative. | function(triggerNode) | () => document.body |  |
+| labelInValue | whether to embed label in value, turn the format of value from `string` to `{key: string, label: vNodes}` | boolean | false |  |
+| maxTagCount | Max tag count to show | number | - |  |
+| maxTagPlaceholder | Placeholder for not showing tags | slot/function(omittedValues) | - |  |
+| maxTagTextLength | Max text length to show | number | - |  |
+| mode | Set mode of Select | 'multiple' \| 'tags' | - |  |
+| notFoundContent | Specify content to show when no result matches.. | string\|slot | 'Not Found' |  |
+| optionFilterProp | Which prop value of option will be used for filter if filterOption is true | string | value |  |
+| optionLabelProp | Which prop value of option will render as content of select. | string | `value` for `combobox`, `children` for other modes |  |
+| placeholder | Placeholder of select | string\|slot | - |  |
+| showSearch | Whether show search input in single mode. | boolean | false |  |
+| showArrow | Whether to show the drop-down arrow | boolean | true |  |
+| size | Size of Select input. `default` `large` `small` | string | default |  |
+| suffixIcon | The custom suffix icon | VNode \| slot | - |  |
+| removeIcon | The custom remove icon | VNode \| slot | - |  |
+| clearIcon | The custom clear icon | VNode \| slot | - |  |
+| menuItemSelectedIcon | The custom menuItemSelected icon | VNode \| slot | - |  |
+| tokenSeparators | Separator used to tokenize on tag/multiple mode | string\[] |  |  |
+| value(v-model) | Current selected option. | string\|number\|string\[]\|number\[] | - |  |
+| options | Data of the selectOption, manual construction work is no longer needed if this property has been set | array&lt;{value, label, [disabled, key, title]}> | \[] |  |
 | option | custom render option by slot | v-slot:option="{value, label, [disabled, key, title]}" | - | 2.2.5 |
-| defaultOpen | Initial open state of dropdown | boolean | - | |
-| open | Controlled open state of dropdown | boolean | - | |
-| loading | indicate loading state | Boolean | false | |
+| defaultOpen | Initial open state of dropdown | boolean | - |  |
+| open | Controlled open state of dropdown | boolean | - |  |
+| loading | indicate loading state | Boolean | false |  |
 
 > Note, if you find that the drop-down menu scrolls with the page, or you need to trigger Select in other popup layers, please try to use `getPopupContainer={triggerNode => triggerNode.parentElement}` to fix the drop-down popup rendering node in the parent element of the trigger .
 
@@ -109,3 +109,11 @@ Select component to select value from options.
 ### The dropdown is closed when click `dropdownRender` area?
 
 See the [dropdownRender example](/components/select/#components-select-demo-custom-dropdown).
+
+### Why is `placeholder` not displayed?
+
+`placeholder` will only be displayed when `value = undefined`, and other values such as null, 0,'', etc. are meaningful values for the JS language.
+
+You can check [JS Language Specification](https://262.ecma-international.org/5.1/#sec-4.3.9) for further details.
+
+You can also check [antd issue](https://github.com/ant-design/ant-design/issues/2367) to view the discussion.

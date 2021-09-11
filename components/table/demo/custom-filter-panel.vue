@@ -8,17 +8,25 @@ title:
 
 ## zh-CN
 
-通过 `filterDropdown` 定义自定义的列筛选功能，并实现一个搜索列的示例。
+通过 `customFilterDropdown` 定义自定义的列筛选功能，并实现一个搜索列的示例。
 
 ## en-US
 
-Implement a customized column search example via `filterDropdown`.
+Implement a customized column search example via `customFilterDropdown`.
 
 </docs>
 
 <template>
   <a-table :data-source="data" :columns="columns">
-    <template #filterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }">
+    <template #headerCell="{ column }">
+      <template v-if="column.key === 'name'">
+        <span style="color: #1890ff">Name</span>
+      </template>
+      <template v-else>{{ column.title }}</template>
+    </template>
+    <template
+      #customFilterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }"
+    >
       <div style="padding: 8px">
         <a-input
           ref="searchInput"
@@ -42,10 +50,10 @@ Implement a customized column search example via `filterDropdown`.
         </a-button>
       </div>
     </template>
-    <template #filterIcon="filtered">
+    <template #customFilterIcon="{ filtered }">
       <search-outlined :style="{ color: filtered ? '#108ee9' : undefined }" />
     </template>
-    <template #customRender="{ text, column }">
+    <template #bodyCell="{ text, column }">
       <span v-if="searchText && searchedColumn === column.dataIndex">
         <template
           v-for="(fragment, i) in text
@@ -71,7 +79,7 @@ Implement a customized column search example via `filterDropdown`.
 
 <script>
 import { SearchOutlined } from '@ant-design/icons-vue';
-import { defineComponent, reactive, ref } from 'vue';
+import { defineComponent, reactive, ref, toRefs } from 'vue';
 const data = [
   {
     key: '1',
@@ -116,17 +124,12 @@ export default defineComponent({
         title: 'Name',
         dataIndex: 'name',
         key: 'name',
-        slots: {
-          filterDropdown: 'filterDropdown',
-          filterIcon: 'filterIcon',
-          customRender: 'customRender',
-        },
+        customFilterDropdown: true,
         onFilter: (value, record) =>
           record.name.toString().toLowerCase().includes(value.toLowerCase()),
         onFilterDropdownVisibleChange: visible => {
           if (visible) {
             setTimeout(() => {
-              console.log(searchInput.value);
               searchInput.value.focus();
             }, 100);
           }
@@ -136,30 +139,12 @@ export default defineComponent({
         title: 'Age',
         dataIndex: 'age',
         key: 'age',
-        slots: {
-          filterDropdown: 'filterDropdown',
-          filterIcon: 'filterIcon',
-          customRender: 'customRender',
-        },
-        onFilter: (value, record) =>
-          record.age.toString().toLowerCase().includes(value.toLowerCase()),
-        onFilterDropdownVisibleChange: visible => {
-          if (visible) {
-            setTimeout(() => {
-              searchInput.value.focus();
-            }, 100);
-          }
-        },
       },
       {
         title: 'Address',
         dataIndex: 'address',
         key: 'address',
-        slots: {
-          filterDropdown: 'filterDropdown',
-          filterIcon: 'filterIcon',
-          customRender: 'customRender',
-        },
+        customFilterDropdown: true,
         onFilter: (value, record) =>
           record.address.toString().toLowerCase().includes(value.toLowerCase()),
         onFilterDropdownVisibleChange: visible => {
@@ -188,9 +173,8 @@ export default defineComponent({
       columns,
       handleSearch,
       handleReset,
-      searchText: '',
       searchInput,
-      searchedColumn: '',
+      ...toRefs(state),
     };
   },
 });

@@ -9,6 +9,7 @@ import type { ValidateMessages } from '../form/interface';
 import type { TransferLocale } from '../transfer';
 import type { PickerLocale as DatePickerLocale } from '../date-picker/generatePicker';
 import type { PaginationLocale } from '../pagination/Pagination';
+import type { TableLocale } from '../table/interface';
 
 interface TransferLocaleForEmpty {
   description: string;
@@ -16,7 +17,7 @@ interface TransferLocaleForEmpty {
 export interface Locale {
   locale: string;
   Pagination?: PaginationLocale;
-  Table?: Record<string, any>;
+  Table?: TableLocale;
   Popconfirm?: Record<string, any>;
   Upload?: Record<string, any>;
   Form?: {

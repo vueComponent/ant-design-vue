@@ -421,340 +421,327 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
             <div class="ant-spin-nested-loading">
               <!---->
               <div class="ant-spin-container">
-                <div class="ant-table ant-table-small ant-table-scroll-position-left">
+                <div class="ant-table ant-table-small">
                   <!---->
-                  <div class="ant-table-content">
-                    <!---->
-                    <div class="ant-table-body">
-                      <table class="">
+                  <div class="ant-table-container">
+                    <div class="ant-table-content">
+                      <table style="table-layout: auto;">
                         <colgroup>
-                          <col data-key="selection-column" class="ant-table-selection-col">
-                          <col data-key="title">
-                          <col data-key="description">
+                          <col class="ant-table-selection-col">
                         </colgroup>
                         <thead class="ant-table-thead">
                           <tr>
-                            <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-selection-column"><span class="ant-table-header-column"><div><span class="ant-table-column-title"><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                              <!----></label>
+                            <th class="ant-table-cell ant-table-selection-column" colstart="0" colend="0">
                               <!---->
-                    </div></span><span class="ant-table-column-sorter"><!----></span>
-                  </div></span>
-                  <!---->
-                  </th>
-                  <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
-                </div></span>
-                <!---->
-                </th>
-                <th colstart="2" colspan="1" colend="2" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Description</span><span class="ant-table-column-sorter"><!----></span>
-              </div></span>
-              <!---->
-              </th>
-              </tr>
-              </thead>
-              <tbody class="ant-table-tbody">
-                <tr class="ant-table-row ant-table-row-level-0" data-row-key="0">
-                  <td class="ant-table-selection-column">
-                    <!---->
-                    <!----><span><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                    <!----></label></span>
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->content1
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->description of content1
-                  </td>
-                </tr>
-                <tr class="ant-table-row ant-table-row-level-0" data-row-key="1">
-                  <td class="ant-table-selection-column">
-                    <!---->
-                    <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                    <!----></label></span>
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->content2
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->description of content2
-                  </td>
-                </tr>
-                <tr class="ant-table-row ant-table-row-level-0" data-row-key="3">
-                  <td class="ant-table-selection-column">
-                    <!---->
-                    <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                    <!----></label></span>
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->content4
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->description of content4
-                  </td>
-                </tr>
-                <tr class="ant-table-row ant-table-row-level-0" data-row-key="4">
-                  <td class="ant-table-selection-column">
-                    <!---->
-                    <!----><span><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                    <!----></label></span>
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->content5
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->description of content5
-                  </td>
-                </tr>
-                <tr class="ant-table-row ant-table-row-level-0" data-row-key="6">
-                  <td class="ant-table-selection-column">
-                    <!---->
-                    <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                    <!----></label></span>
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->content7
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->description of content7
-                  </td>
-                </tr>
-                <tr class="ant-table-row ant-table-row-level-0" data-row-key="7">
-                  <td class="ant-table-selection-column">
-                    <!---->
-                    <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                    <!----></label></span>
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->content8
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->description of content8
-                  </td>
-                </tr>
-                <tr class="ant-table-row ant-table-row-level-0" data-row-key="9">
-                  <td class="ant-table-selection-column">
-                    <!---->
-                    <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                    <!----></label></span>
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->content10
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->description of content10
-                  </td>
-                </tr>
-                <tr class="ant-table-row ant-table-row-level-0" data-row-key="10">
-                  <td class="ant-table-selection-column">
-                    <!---->
-                    <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                    <!----></label></span>
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->content11
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->description of content11
-                  </td>
-                </tr>
-                <tr class="ant-table-row ant-table-row-level-0" data-row-key="12">
-                  <td class="ant-table-selection-column">
-                    <!---->
-                    <!----><span><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                    <!----></label></span>
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->content13
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->description of content13
-                  </td>
-                </tr>
-                <tr class="ant-table-row ant-table-row-level-0" data-row-key="13">
-                  <td class="ant-table-selection-column">
-                    <!---->
-                    <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                    <!----></label></span>
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->content14
-                  </td>
-                  <td class="">
-                    <!---->
-                    <!---->description of content14
-                  </td>
-                </tr>
-              </tbody>
-              </table>
-            </div>
-            <!---->
-            <!---->
-          </div>
-        </div>
-        <ul unselectable="on" class="ant-pagination mini ant-table-pagination">
-          <!---->
-          <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
-          <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
-          <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a rel="nofollow">2</a></li>
-          <li title="Next Page" tabindex="0" class="ant-pagination-next" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
-          <!---->
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-<!---->
-</div>
-<div class="ant-transfer-operation"><button disabled="" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only" type="button"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button><button disabled="" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only" type="button"><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></div>
-<div class="ant-transfer-list">
-  <div class="ant-transfer-list-header">
-    <!---->
-    <!----><span tabindex="-1" role="img" aria-label="down" class="anticon anticon-down ant-dropdown-trigger ant-transfer-list-header-dropdown"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span><span class="ant-transfer-list-header-selected"><span>6 items</span><span class="ant-transfer-list-header-title"></span></span>
-  </div>
-  <div class="ant-transfer-list-body">
-    <!---->
-    <div class="ant-transfer-list-body-customize-wrapper">
-      <div class="ant-table-wrapper">
-        <div class="ant-spin-nested-loading">
-          <!---->
-          <div class="ant-spin-container">
-            <div class="ant-table ant-table-small ant-table-scroll-position-left">
-              <!---->
-              <div class="ant-table-content">
-                <!---->
-                <div class="ant-table-body">
-                  <table class="">
-                    <colgroup>
-                      <col data-key="selection-column" class="ant-table-selection-col">
-                      <col data-key="title">
-                    </colgroup>
-                    <thead class="ant-table-thead">
-                      <tr>
-                        <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-selection-column"><span class="ant-table-header-column"><div><span class="ant-table-column-title"><div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                          <!----></label>
+                              <div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                  <!---->
+                                </label>
+                                <!---->
+                              </div>
+                            </th>
+                            <th class="ant-table-cell" colstart="1" colend="1">
+                              <!---->Name
+                            </th>
+                            <th class="ant-table-cell" colstart="2" colend="2">
+                              <!---->Description
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody class="ant-table-tbody">
                           <!---->
-                </div></span><span class="ant-table-column-sorter"><!----></span>
-              </div></span>
-              <!---->
-              </th>
-              <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Name</span><span class="ant-table-column-sorter"><!----></span>
-            </div></span>
-            <!---->
-            </th>
-            </tr>
-            </thead>
-            <tbody class="ant-table-tbody">
-              <tr class="ant-table-row ant-table-row-level-0" data-row-key="2">
-                <td class="ant-table-selection-column">
+                          <tr data-row-key="0" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content1
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->description of content1
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content2
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->description of content2
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="3" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content4
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->description of content4
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="4" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content5
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->description of content5
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="6" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content7
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->description of content7
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="7" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content8
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->description of content8
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="9" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content10
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->description of content10
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="10" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content11
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->description of content11
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="12" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content13
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->description of content13
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="13" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content14
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->description of content14
+                            </td>
+                          </tr>
+                          <!---->
+                        </tbody>
+                        <!---->
+                      </table>
+                    </div>
+                  </div>
                   <!---->
-                  <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                  <!----></label></span>
-                </td>
-                <td class="">
+                </div>
+                <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right">
                   <!---->
-                  <!---->content3
-                </td>
-              </tr>
-              <tr class="ant-table-row ant-table-row-level-0" data-row-key="5">
-                <td class="ant-table-selection-column">
+                  <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
+                  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
+                  <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a rel="nofollow">2</a></li>
+                  <li title="Next Page" tabindex="0" class="ant-pagination-next" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
                   <!---->
-                  <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                  <!----></label></span>
-                </td>
-                <td class="">
-                  <!---->
-                  <!---->content6
-                </td>
-              </tr>
-              <tr class="ant-table-row ant-table-row-level-0" data-row-key="8">
-                <td class="ant-table-selection-column">
-                  <!---->
-                  <!----><span><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                  <!----></label></span>
-                </td>
-                <td class="">
-                  <!---->
-                  <!---->content9
-                </td>
-              </tr>
-              <tr class="ant-table-row ant-table-row-level-0" data-row-key="11">
-                <td class="ant-table-selection-column">
-                  <!---->
-                  <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                  <!----></label></span>
-                </td>
-                <td class="">
-                  <!---->
-                  <!---->content12
-                </td>
-              </tr>
-              <tr class="ant-table-row ant-table-row-level-0" data-row-key="14">
-                <td class="ant-table-selection-column">
-                  <!---->
-                  <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                  <!----></label></span>
-                </td>
-                <td class="">
-                  <!---->
-                  <!---->content15
-                </td>
-              </tr>
-              <tr class="ant-table-row ant-table-row-level-0" data-row-key="17">
-                <td class="ant-table-selection-column">
-                  <!---->
-                  <!----><span><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                  <!----></label></span>
-                </td>
-                <td class="">
-                  <!---->
-                  <!---->content18
-                </td>
-              </tr>
-            </tbody>
-            </table>
+                </ul>
+              </div>
+            </div>
           </div>
-          <!---->
-          <!---->
         </div>
       </div>
-      <ul unselectable="on" class="ant-pagination mini ant-table-pagination">
-        <!---->
-        <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
-        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
-        <li title="Next Page" class="ant-pagination-next ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
-        <!---->
-      </ul>
+      <!---->
     </div>
-  </div>
+    <div class="ant-transfer-operation"><button disabled="" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only" type="button"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button><button disabled="" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only" type="button"><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></div>
+    <div class="ant-transfer-list">
+      <div class="ant-transfer-list-header">
+        <!---->
+        <!----><span tabindex="-1" role="img" aria-label="down" class="anticon anticon-down ant-dropdown-trigger ant-transfer-list-header-dropdown"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span><span class="ant-transfer-list-header-selected"><span>6 items</span><span class="ant-transfer-list-header-title"></span></span>
+      </div>
+      <div class="ant-transfer-list-body">
+        <!---->
+        <div class="ant-transfer-list-body-customize-wrapper">
+          <div class="ant-table-wrapper">
+            <div class="ant-spin-nested-loading">
+              <!---->
+              <div class="ant-spin-container">
+                <div class="ant-table ant-table-small">
+                  <!---->
+                  <div class="ant-table-container">
+                    <div class="ant-table-content">
+                      <table style="table-layout: auto;">
+                        <colgroup>
+                          <col class="ant-table-selection-col">
+                        </colgroup>
+                        <thead class="ant-table-thead">
+                          <tr>
+                            <th class="ant-table-cell ant-table-selection-column" colstart="0" colend="0">
+                              <!---->
+                              <div class="ant-table-selection"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                  <!---->
+                                </label>
+                                <!---->
+                              </div>
+                            </th>
+                            <th class="ant-table-cell" colstart="1" colend="1">
+                              <!---->Name
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody class="ant-table-tbody">
+                          <!---->
+                          <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content3
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="5" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content6
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="8" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content9
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="11" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content12
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="14" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content15
+                            </td>
+                          </tr>
+                          <!---->
+                          <tr data-row-key="17" class="ant-table-row ant-table-row-level-0">
+                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+                                <!---->
+                              </label>
+                            </td>
+                            <td class="ant-table-cell ant-table-cell-with-append">
+                              <!---->content18
+                            </td>
+                          </tr>
+                          <!---->
+                        </tbody>
+                        <!---->
+                      </table>
+                    </div>
+                  </div>
+                  <!---->
+                </div>
+                <ul unselectable="on" class="ant-pagination mini ant-table-pagination ant-table-pagination-right">
+                  <!---->
+                  <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
+                  <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
+                  <li title="Next Page" class="ant-pagination-next ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
+                  <!---->
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!---->
+    </div>
+  </div><button style="margin-top: 16px;" type="button" role="switch" aria-checked="false" class="ant-switch">
+    <!----><span class="ant-switch-inner">disabled</span>
+  </button><button style="margin-top: 16px;" type="button" role="switch" aria-checked="false" class="ant-switch">
+    <!----><span class="ant-switch-inner">showSearch</span>
+  </button>
 </div>
-</div>
-</div>
-<!---->
-</div>
-</div><button style="margin-top: 16px;" type="button" role="switch" aria-checked="false" class="ant-switch">
-  <!----><span class="ant-switch-inner">disabled</span>
-</button><button style="margin-top: 16px;" type="button" role="switch" aria-checked="false" class="ant-switch">
-  <!----><span class="ant-switch-inner">showSearch</span>
-</button></div>
 `;
 
 exports[`renders ./components/transfer/demo/tree-transfer.vue correctly 1`] = `

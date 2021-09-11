@@ -421,8 +421,8 @@ export default defineComponent({
       let titleNode: any;
       if (typeof title === 'function') {
         titleNode = title(renderArgsData.value);
-      } else if (contextSlots.titleRender) {
-        titleNode = contextSlots.titleRender(renderArgsData.value);
+      } else if (contextSlots.valuetitleRender) {
+        titleNode = contextSlots.valuetitleRender(renderArgsData.value);
       } else {
         titleNode = title;
       }

@@ -28,20 +28,23 @@ This example shows how to fetch and present data from a remote server, and how t
     :loading="loading"
     @change="handleTableChange"
   >
-    <template #name="{ text }">{{ text.first }} {{ text.last }}</template>
+    <template #bodyCell="{ column, text }">
+      <template v-if="column.dataIndex === 'name'">{{ text.first }} {{ text.last }}</template>
+      <template v-else>{{ text }}</template>
+    </template>
   </a-table>
 </template>
 <script lang="ts">
-import { TableState, TableStateFilters } from 'ant-design-vue/es/table/interface';
+import type { TableProps } from 'ant-design-vue';
 import { usePagination } from 'vue-request';
 import { computed, defineComponent } from 'vue';
+import axios from 'axios';
 const columns = [
   {
     title: 'Name',
     dataIndex: 'name',
     sorter: true,
     width: '20%',
-    slots: { customRender: 'name' },
   },
   {
     title: 'Gender',
@@ -58,7 +61,6 @@ const columns = [
   },
 ];
 
-type Pagination = TableState['pagination'];
 type APIParams = {
   results: number;
   page?: number;
@@ -75,21 +77,24 @@ type APIResult = {
 };
 
 const queryData = (params: APIParams) => {
-  return `https://randomuser.me/api?noinfo&${new URLSearchParams(params)}`;
+  return axios.get<APIResult>('https://randomuser.me/api?noinfo', { params });
 };
 
 export default defineComponent({
   setup() {
-    const { data: dataSource, run, loading, current, pageSize } = usePagination<APIResult>(
-      queryData,
-      {
-        formatResult: res => res.results,
-        pagination: {
-          currentKey: 'page',
-          pageSizeKey: 'results',
-        },
+    const {
+      data: dataSource,
+      run,
+      loading,
+      current,
+      pageSize,
+    } = usePagination(queryData, {
+      formatResult: res => res.data.results,
+      pagination: {
+        currentKey: 'page',
+        pageSizeKey: 'results',
       },
-    );
+    });
 
     const pagination = computed(() => ({
       total: 200,
@@ -97,9 +102,13 @@ export default defineComponent({
       pageSize: pageSize.value,
     }));
 
-    const handleTableChange = (pag: Pagination, filters: TableStateFilters, sorter: any) => {
+    const handleTableChange: TableProps['onChange'] = (
+      pag: { pageSize: number; current: number },
+      filters: any,
+      sorter: any,
+    ) => {
       run({
-        results: pag!.pageSize!,
+        results: pag.pageSize!,
         page: pag?.current,
         sortField: sorter.field,
         sortOrder: sorter.order,

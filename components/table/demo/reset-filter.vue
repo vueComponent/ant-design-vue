@@ -35,9 +35,7 @@ Control filters and sorters by `filteredValue` and `sortOrder`.
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { TableState, TableStateFilters } from 'ant-design-vue/es/table/interface';
-
-type Pagination = TableState['pagination'];
+import type { TableColumnType, TableProps } from 'ant-design-vue';
 
 interface DataItem {
   key: string;
@@ -78,7 +76,7 @@ export default defineComponent({
     const filteredInfo = ref();
     const sortedInfo = ref();
 
-    const columns = computed(() => {
+    const columns = computed<TableColumnType[]>(() => {
       const filtered = filteredInfo.value || {};
       const sorted = sortedInfo.value || {};
       return [
@@ -120,7 +118,7 @@ export default defineComponent({
       ];
     });
 
-    const handleChange = (pagination: Pagination, filters: TableStateFilters, sorter: any) => {
+    const handleChange: TableProps['onChange'] = (pagination, filters, sorter) => {
       console.log('Various parameters', pagination, filters, sorter);
       filteredInfo.value = filters;
       sortedInfo.value = sorter;

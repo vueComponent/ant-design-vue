@@ -1,15 +1,9 @@
 import { defineComponent } from 'vue';
-import PropTypes, { withUndefined } from '../_util/vue-types';
-import { tuple } from '../_util/type';
+import type { ColumnGroupProps } from '../vc-table/sugar/ColumnGroup';
 
-export default defineComponent({
+export default defineComponent<ColumnGroupProps<any>>({
   name: 'ATableColumnGroup',
-  props: {
-    fixed: withUndefined(
-      PropTypes.oneOfType([PropTypes.looseBool, PropTypes.oneOf(tuple('left', 'right'))]),
-    ),
-    title: PropTypes.any,
-  },
+  slots: ['title'],
   __ANT_TABLE_COLUMN_GROUP: true,
   render() {
     return null;

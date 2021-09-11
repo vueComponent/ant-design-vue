@@ -18,8 +18,11 @@ When there's too much information to show and the table can't display all at onc
 
 <template>
   <a-table :columns="columns" :data-source="data">
-    <template #action>
-      <a>Delete</a>
+    <template #bodyCell="{ column, text }">
+      <template v-if="column.key === 'action'">
+        <a>Delete</a>
+      </template>
+      <template v-else>{{ text }}</template>
     </template>
     <template #expandedRowRender="{ record }">
       <p style="margin: 0">
@@ -34,7 +37,7 @@ const columns = [
   { title: 'Name', dataIndex: 'name', key: 'name' },
   { title: 'Age', dataIndex: 'age', key: 'age' },
   { title: 'Address', dataIndex: 'address', key: 'address' },
-  { title: 'Action', dataIndex: '', key: 'x', slots: { customRender: 'action' } },
+  { title: 'Action', key: 'action' },
 ];
 
 const data = [

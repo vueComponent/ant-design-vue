@@ -15,7 +15,10 @@ export default (options: Options = {}): Plugin => {
   return {
     name: 'vueToMdToVue',
     transform(code, id) {
-      if (id.endsWith('.vue') && id.indexOf('/demo/') > -1 && id.indexOf('index.vue') === -1) {
+      if (
+        (id.endsWith('.vue') && id.indexOf('/demo/') > -1 && id.indexOf('index.vue') === -1) ||
+        id.indexOf('/examples/App.vue') > -1
+      ) {
         // transform .md files into vueSrc so plugin-vue can handle it
         return { code: markdownToVue(vueToMarkdown(code, id).vueSrc, id).vueSrc, map: null };
       }

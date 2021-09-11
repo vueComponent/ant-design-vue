@@ -5,6 +5,7 @@
       "ant-design-vue": ["components/index.ts"],
       "ant-design-vue/es/*": ["components/*"]
     },
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "strictNullChecks": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -14,7 +15,6 @@
     "noUnusedLocals": true,
     "noImplicitAny": false,
     "target": "es6",
-    "lib": ["dom", "es2017"],
     "skipLibCheck": true,
     "allowJs": true,
     "importsNotUsedAsValues": "preserve"

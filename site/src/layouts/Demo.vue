@@ -34,12 +34,12 @@ export default defineComponent({
       return props?.pageData?.html || '';
     });
     const description = computed(() => {
-      return docHtml.value.split('<h2 id="api">API</h2>')[0];
+      return docHtml.value.split('<h2 id="API">API</h2>')[0];
     });
     const api = computed(() => {
       return `
       <h2 id="API"><span>API</span><a href="#API" class="anchor">#</a></h2>
-      ${docHtml.value.split('<h2 id="api">API</h2>')[1]}
+      ${docHtml.value.split('<h2 id="API">API</h2>')[1]}
       `;
     });
     return { frontmatter, description, api, route, showAd };

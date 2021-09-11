@@ -32,6 +32,13 @@ export type RowClassName<RecordType> = (
   indent: number,
 ) => string;
 
+export type TransformCellText<RecordType> = (opt: {
+  text: any;
+  column: ColumnType<RecordType>;
+  record: any;
+  index: number;
+}) => any;
+
 // =================== Column ===================
 export interface CellType<RecordType = DefaultRecordType> {
   key?: Key;

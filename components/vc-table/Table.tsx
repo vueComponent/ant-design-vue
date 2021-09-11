@@ -15,6 +15,7 @@ import type {
   TableSticky,
   ExpandedRowRender,
   RenderExpandIcon,
+  TransformCellText,
 } from './interface';
 import Body from './Body';
 import useColumns from './hooks/useColumns';
@@ -138,6 +139,8 @@ export interface TableProps<RecordType = unknown> {
   canExpandable?: boolean;
 
   onUpdateInternalRefs?: (refs: Record<string, any>) => void;
+
+  transformCellText?: TransformCellText<RecordType>;
 }
 
 export default defineComponent<TableProps>({
@@ -180,6 +183,7 @@ export default defineComponent<TableProps>({
     'internalRefs',
     'canExpandable',
     'onUpdateInternalRefs',
+    'transformCellText',
   ] as any,
   slots: ['title', 'footer', 'summary', 'emptyText'],
   emits: ['expand', 'expandedRowsChange', 'updateInternalRefs'],
@@ -505,7 +509,7 @@ export default defineComponent<TableProps>({
     };
     useProvideTable(
       reactive({
-        ...reactivePick(props, 'prefixCls', 'direction'),
+        ...reactivePick(props, 'prefixCls', 'direction', 'transformCellText'),
         getComponent,
         scrollbarSize,
         fixedInfoList: computed(() =>

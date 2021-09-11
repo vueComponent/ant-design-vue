@@ -105,6 +105,7 @@ export interface TableProps<RecordType = DefaultRecordType>
   sortDirections?: SortOrder[];
   showSorterTooltip?: boolean | TooltipProps;
 }
+
 export const tableProps = () => {
   return {
     prefixCls: { type: String as PropType<string>, default: undefined },
@@ -211,6 +212,9 @@ export const tableProps = () => {
     contextSlots: {
       type: Object as PropType<ContextSlots>,
     },
+    transformCellText: {
+      type: Function as PropType<TableProps['transformCellText']>,
+    },
   };
 };
 
@@ -264,6 +268,9 @@ const InteralTable = defineComponent<
       prefixCls,
       configProvider,
     } = useConfigInject('table', props);
+    const transformCellText = computed(
+      () => props.transformCellText || configProvider.transformCellText,
+    );
     const [tableLocale] = useLocaleReceiver('Table', defaultLocale.Table, toRef(props, 'locale'));
     const rawData = computed(() => props.dataSource || EMPTY_LIST);
 
@@ -618,6 +625,7 @@ const InteralTable = defineComponent<
               internalRefs={internalRefs}
               onUpdateInternalRefs={updateInternalRefs}
               transformColumns={transformColumns}
+              transformCellText={transformCellText.value}
               v-slots={{
                 ...slots,
                 emptyText: () =>

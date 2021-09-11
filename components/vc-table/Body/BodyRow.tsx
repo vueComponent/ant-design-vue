@@ -107,7 +107,7 @@ export default defineComponent<BodyRowProps<unknown>>({
         rowComponent: RowComponent,
         cellComponent,
       } = props;
-      const { prefixCls, fixedInfoList } = tableContext;
+      const { prefixCls, fixedInfoList, transformCellText } = tableContext;
       const {
         fixHeader,
         fixColumn,
@@ -164,6 +164,7 @@ export default defineComponent<BodyRowProps<unknown>>({
                 {...fixedInfo}
                 additionalProps={additionalCellProps}
                 column={column}
+                transformCellText={transformCellText}
                 v-slots={{
                   // ============= Used for nest expandable =============
                   appendNode: () => {

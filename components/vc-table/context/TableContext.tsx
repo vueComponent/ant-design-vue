@@ -1,6 +1,6 @@
 import type { InjectionKey } from 'vue';
 import { inject, provide } from 'vue';
-import type { GetComponent } from '../interface';
+import type { GetComponent, TransformCellText } from '../interface';
 import type { FixedInfo } from '../utils/fixUtil';
 
 export interface TableContextProps {
@@ -18,6 +18,8 @@ export interface TableContextProps {
   isSticky: boolean;
 
   summaryCollect: (uniKey: string, fixed: boolean | string) => void;
+
+  transformCellText: TransformCellText<unknown>;
 }
 
 export const TableContextKey: InjectionKey<TableContextProps> = Symbol('TableContextProps');

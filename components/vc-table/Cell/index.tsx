@@ -1,6 +1,6 @@
 import classNames from '../../_util/classNames';
 import { flattenChildren, isValidElement, parseStyleText } from '../../_util/props-util';
-import type { CSSProperties, HTMLAttributes } from 'vue';
+import { CSSProperties, HTMLAttributes } from 'vue';
 import { defineComponent, isVNode } from 'vue';
 
 import type {
@@ -12,6 +12,7 @@ import type {
   DefaultRecordType,
   AlignType,
   CellEllipsisType,
+  TransformCellText,
 } from '../interface';
 import { getPathValue, validateValue } from '../utils/valueUtil';
 import { useInjectSlots } from '../../table/context';
@@ -57,6 +58,8 @@ export interface CellProps<RecordType = DefaultRecordType> {
   column?: ColumnType<RecordType>;
 
   cellType?: 'header' | 'body';
+
+  transformCellText?: TransformCellText<RecordType>;
 }
 export default defineComponent<CellProps>({
   name: 'Cell',
@@ -83,6 +86,7 @@ export default defineComponent<CellProps>({
     'isSticky',
     'column',
     'cellType',
+    'transformCellText',
   ] as any,
   slots: ['appendNode'],
   setup(props, { slots }) {
@@ -157,6 +161,15 @@ export default defineComponent<CellProps>({
               column: column.__originColumn__,
             }) as any,
           );
+        }
+        /** maybe we should @deprecated */
+        if (props.transformCellText) {
+          childNode = props.transformCellText({
+            text: childNode,
+            record,
+            index,
+            column: column.__originColumn__,
+          });
         }
       }
 

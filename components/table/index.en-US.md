@@ -106,6 +106,7 @@ Specify `dataSource` of Table as an array of data.
 | customFilterDropdown | Customized filter overlay，need set `column.customFilterDropdown` | v-slot:customFilterDropdown="[FilterDropdownProps](#FilterDropdownProps)" | - | 3.0 |
 | customFilterIcon | Customized filter icon | v-slot:customFilterIcon="{filtered, column}" | - | 3.0 |
 | emptyText | Customize the display content when empty data | v-slot:emptyText | - | 3.0 |
+| summary | Summary content | v-slot:summary | - | 3.0 |
 | transformCellText | The data can be changed again before rendering, generally used for the default configuration of empty data. You can configured globally through [ConfigProvider](/components/config-provider-cn/) | Function({ text, column, record, index }) => any, The `text` here is the data processed by other defined cell api, and it may be of type VNode \| string \| number | - | 1.5.4 ｜ |
 
 - `expandFixed`

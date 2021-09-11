@@ -112,6 +112,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 | customFilterDropdown | 自定义筛选菜单，需要配合 `column.customFilterDropdown` 使用 | v-slot:customFilterDropdown="[FilterDropdownProps](#FilterDropdownProps)" | - | 3.0 |
 | customFilterIcon | 自定义筛选图标 | v-slot:customFilterIcon="{filtered, column}" | - | 3.0 |
 | emptyText | 自定义空数据时的显示内容 | v-slot:emptyText | - | 3.0 |
+| summary | 总结栏 | v-slot:summary | - | 3.0 |
 | transformCellText | 数据渲染前可以再次改变，一般用于空数据的默认配置，可以通过 [ConfigProvider](/components/config-provider-cn/) 全局统一配置 | Function({ text, column, record, index }) => any，此处的 text 是经过其它定义单元格 api 处理后的数据，有可能是 VNode \| string \| number 类型 | - | 1.5.4 |
 
 - `expandFixed`

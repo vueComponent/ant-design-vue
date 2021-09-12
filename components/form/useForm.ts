@@ -98,6 +98,7 @@ function useForm(
     immediate?: boolean;
     deep?: boolean;
     validateOnRuleChange?: boolean;
+    ignoreMissedProps?: boolean;
     debounce?: DebounceSettings;
   },
 ): {
@@ -120,6 +121,7 @@ function useForm(
 } {
   const initialModel = cloneDeep(unref(modelRef));
   const validateInfos = reactive<validateInfos>({});
+  const ignoreMissedProps = options?.ignoreMissedProps ?? true;
 
   const rulesKeys = computed(() => {
     return rulesRef ? Object.keys(unref(rulesRef)) : [];
@@ -182,7 +184,7 @@ function useForm(
     for (let i = 0; i < names.length; i++) {
       const name = names[i];
       const prop = getPropByPath(unref(modelRef), name, strict);
-      if (!prop.isValid) continue;
+      if (!prop.isValid && ignoreMissedProps) continue;
       values[name] = prop.v;
       const rules = filterRules(unref(rulesRef)[name], toArray(option && option.trigger));
       if (rules.length) {

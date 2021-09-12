@@ -1,6 +1,6 @@
 {
   "name": "ant-design-vue",
-  "version": "2.2.7",
+  "version": "3.0.0-alpha.0",
   "title": "Ant Design Vue",
   "description": "An enterprise-class UI design language and Vue-based implementation",
   "keywords": [
@@ -50,7 +50,7 @@
     "codecov": "codecov",
     "routes": "node site/scripts/genrateRoutes.js",
     "tsc": "tsc --noEmit",
-    "site": "yarn routes && ./node_modules/vite/bin/vite.js build site --base=https://aliyuncdn.antdv.com/v2/",
+    "site": "yarn routes && ./node_modules/vite/bin/vite.js build site --base=https://next.antdv.com/",
     "pub:site": "npm run site && node scripts/pushToOSS.js"
   },
   "repository": {

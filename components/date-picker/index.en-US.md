@@ -5,6 +5,12 @@ title: DatePicker
 cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 ---
 
+To select or input a date.
+
+## When To Use
+
+By clicking the input box, you can select a date from a popup calendar.
+
 ## API
 
 There are five kinds of picker:
@@ -89,6 +95,7 @@ The following APIs are shared by DatePicker, RangePicker.
 | size | To determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px | `large` \| `middle` \| `small` | - |  |
 | suffixIcon | The custom suffix icon | v-slot:suffixIcon | - |  |
 | valueFormat | optional, format of binding value. If not specified, the binding value will be a Date object | string，[date formats](https://day.js.org/docs/en/display/format) | - |  |
+
 ### Common Events
 
 | Events Name | Description | Arguments | Version |
@@ -116,6 +123,7 @@ The following APIs are shared by DatePicker, RangePicker.
 | showTime.defaultValue | To set default time of selected date, [demo](#components-date-picker-demo-disabled-date) | [dayjs](https://day.js.org/) | dayjs() |  |
 | showToday | Whether to show `Today` button | boolean | true |  |
 | value(v-model) | To set date | [dayjs](https://day.js.org/) | - |  |
+
 ### DatePicker Events
 
 | Events Name | Description | Arguments | Version |
@@ -147,6 +155,7 @@ The following APIs are shared by DatePicker, RangePicker.
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | format | To set the date format, refer to [dayjs](https://day.js.org/) | string | `YYYY-wo` |  |
+
 ### RangePicker
 
 | Property | Description | Type | Default | Version |
@@ -167,13 +176,13 @@ The following APIs are shared by DatePicker, RangePicker.
 ### RangePicker Events
 
 | Events Name | Description | Arguments | Version |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | calendarChange | Callback function, can be executed when the start time or the end time of the range is changing. | function(dates: \[dayjs, dayjs], dateStrings: \[string, string], info: { range:`start`\|`end` }) | - |  |
 | change | a callback function, can be executed when the selected time is changing | function(dates: \[dayjs, dayjs\] \| \[string, string\], dateStrings: \[string, string\]) |  |
 | ok | callback when click ok button | function(dates: \[dayjs, dayjs\] \| \[string, string\]) |  |
 
-
 ## FAQ
+
 ### How to use DatePicker with customize date library（like moment.js \| dayjs \| date-fns）？
 
 Please refer [replace date](/docs/vue/replace-date)

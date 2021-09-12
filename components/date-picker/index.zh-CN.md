@@ -6,6 +6,12 @@ subtitle: 日期选择框
 cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 ---
 
+输入或选择日期的控件。
+
+## 何时使用
+
+当用户需要输入一个日期，可以点击标准输入框，弹出日期面板进行选择。
+
 ## API
 
 日期类组件包括以下五种形式。
@@ -89,7 +95,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 | popupStyle | 额外的弹出日历样式 | CSSProperties | {} |  |
 | size | 输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px | `large` \| `middle` \| `small` | - |  |
 | suffixIcon | 自定义的选择框后缀图标 | v-slot:suffixIcon | - |  |
-| valueFormat | 可选，绑定值的格式，对 value、defaultValue、defaultPickerValue 起作用。不指定则绑定值为 dayjs 对象 | string，[具体格式](https://day.js.org/docs/zh-CN/display/format) | - | |
+| valueFormat | 可选，绑定值的格式，对 value、defaultValue、defaultPickerValue 起作用。不指定则绑定值为 dayjs 对象 | string，[具体格式](https://day.js.org/docs/zh-CN/display/format) | - |  |
 
 ### 共有的事件
 
@@ -121,10 +127,10 @@ cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 
 ### DatePicker 事件
 
-| 事件名称 | 说明               | 回调参数                                             |
-| -------- | ------------------ | ---------------------------------------------------- |
+| 事件名称 | 说明               | 回调参数                                            |
+| -------- | ------------------ | --------------------------------------------------- |
 | change   | 时间发生变化的回调 | function(date: dayjs \| string, dateString: string) |
-| ok       | 点击确定按钮的回调 | function(date: dayjs \| string)                                           |
+| ok       | 点击确定按钮的回调 | function(date: dayjs \| string)                     |
 
 ### DatePicker\[picker=year]
 
@@ -153,7 +159,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 
 ### RangePicker
 
-
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | allowEmpty | 允许起始项部分为空 | \[boolean, boolean] | \[false, false] |  |
@@ -168,15 +173,17 @@ cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 | showTime | 增加时间选择功能 | Object\|boolean | [TimePicker Options](/components/time-picker/#API) |  |
 | showTime.defaultValue | 设置用户选择日期时默认的时分秒，[例子](#components-date-picker-demo-disabled-date) | [dayjs](https://day.js.org/)\[] | \[dayjs(), dayjs()] |  |
 | value(v-model) | 日期 | [dayjs](https://day.js.org/)\[] | - |  |
+
 ### RangePicker 事件
 
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
-| calendarChange | 待选日期发生变化的回调 | function(dates: \[dayjs, dayjs\] \| \[string, string\], dateStrings: \[string, string\],  info: { range:`start`\|`end` }) |
+| calendarChange | 待选日期发生变化的回调 | function(dates: \[dayjs, dayjs\] \| \[string, string\], dateStrings: \[string, string\], info: { range:`start`\|`end` }) |
 | change | 日期范围发生变化的回调 | function(dates: \[dayjs, dayjs\] \| \[string, string\], dateStrings: \[string, string\]) |
 | ok | 点击确定按钮的回调 | function(dates: \[dayjs, dayjs\] \| \[string, string\]) |
 
 ## FAQ
+
 ### 如何在 DatePicker 中使用自定义日期库（如 moment.js \| dayjs \| date-fns）？
 
 请参考[《自定义日期库》](/docs/vue/replace-date-cn)
@@ -184,4 +191,3 @@ cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 ### 为何全局修改 dayjs.locale 不生效？
 
 DatePicker 默认 `locale` 为 `en`。你可以通过 DatePicker 的 `locale` 属性来单独设置，也可以通过 [ConfigProvider `locale`](/components/config-provider-cn) 属性来配置。
-

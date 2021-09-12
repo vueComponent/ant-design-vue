@@ -8,22 +8,20 @@ const accessKeyId = process.env.ALI_OSS_ACCESSKEY;
 const accessKeySecret = process.env.ALI_OSS_SECRETKEY;
 
 const client = new OSS({
-  bucket: 'antdv-beijing',
+  bucket: 'next-antdv',
   cname: 'true',
-  endpoint: 'aliyuncdn.antdv.com',
-  // region以杭州为例（oss-cn-hangzhou），其他region按实际情况填写。
+  endpoint: 'next-antdv.oss-cn-beijing.aliyuncs.com',
   region: 'oss-cn-beijing',
-  // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录RAM控制台创建RAM账号。
   accessKeyId,
   accessKeySecret,
 });
 
 const assetsPath = path.join(process.cwd(), 'site', 'dist', 'assets');
 
-const put = file => {
+const put = (target, source) => {
   return new Promise((reslove, reject) => {
     client
-      .put(`v2/assets/${file}`, path.join(assetsPath, file))
+      .put(target, source)
       .then(res => {
         if (res.res.status !== 200) {
           console.log(`${res.name} upload failed!`);
@@ -50,9 +48,10 @@ async function upload() {
     });
     for (const file of files) {
       if (file.isFile()) {
-        await put(file.name);
+        await put(`assets/${file.name}`, path.join(assetsPath, file.name));
       }
     }
+    await put('index.html', path.join(process.cwd(), 'site', 'dist', 'index.html'));
   } catch (err) {
     console.error(err);
   }

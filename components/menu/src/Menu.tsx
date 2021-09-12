@@ -346,17 +346,21 @@ export default defineComponent({
     };
 
     const lastVisibleIndex = ref(0);
-    const expandIcon: MenuProps['expandIcon'] = opt => {
-      let icon = props.expandIcon || slots.expandIcon;
-      icon = typeof icon === 'function' ? icon(opt) : icon;
-      return cloneElement(
-        icon,
-        {
-          class: `${prefixCls.value}-submenu-expand-icon`,
-        },
-        false,
-      );
-    };
+    const expandIcon = computed<MenuProps['expandIcon']>(() =>
+      props.expandIcon || slots.expandIcon
+        ? opt => {
+            let icon = props.expandIcon || slots.expandIcon;
+            icon = typeof icon === 'function' ? icon(opt) : icon;
+            return cloneElement(
+              icon,
+              {
+                class: `${prefixCls.value}-submenu-expand-icon`,
+              },
+              false,
+            );
+          }
+        : null,
+    );
     useProvideMenu({
       store,
       prefixCls,

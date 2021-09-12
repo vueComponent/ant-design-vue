@@ -75,7 +75,7 @@ export interface MenuContextProps {
 
   // // Icon
   // itemIcon?: RenderIconType;
-  expandIcon?: (p?: { isOpen: boolean; [key: string]: any }) => any;
+  expandIcon?: ComputedRef<(p?: { isOpen: boolean; [key: string]: any }) => any>;
 
   // // Function
   onItemClick: MenuClickEventHandler;

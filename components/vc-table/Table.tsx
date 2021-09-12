@@ -16,6 +16,7 @@ import type {
   ExpandedRowRender,
   RenderExpandIcon,
   TransformCellText,
+  DefaultRecordType,
 } from './interface';
 import Body from './Body';
 import useColumns from './hooks/useColumns';
@@ -65,7 +66,7 @@ const EMPTY_SCROLL_TARGET = {};
 
 export const INTERNAL_HOOKS = 'rc-table-internal-hook';
 
-export interface TableProps<RecordType = unknown> {
+export interface TableProps<RecordType = DefaultRecordType> {
   prefixCls?: string;
   data?: RecordType[];
   columns?: ColumnsType<RecordType>;
@@ -143,7 +144,7 @@ export interface TableProps<RecordType = unknown> {
   transformCellText?: TransformCellText<RecordType>;
 }
 
-export default defineComponent<TableProps>({
+export default defineComponent<TableProps<DefaultRecordType>>({
   name: 'Table',
   inheritAttrs: false,
   props: [
@@ -190,7 +191,6 @@ export default defineComponent<TableProps>({
   setup(props, { attrs, slots, emit }) {
     const mergedData = computed(() => props.data || EMPTY_DATA);
     const hasData = computed(() => !!mergedData.value.length);
-
     // ==================== Customize =====================
     const mergedComponents = computed(() =>
       mergeObject<TableComponents<any>>(props.components, {}),

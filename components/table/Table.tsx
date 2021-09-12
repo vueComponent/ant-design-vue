@@ -132,10 +132,13 @@ export const tableProps = () => {
       type: Number as PropType<TableProps['expandColumnWidth']>,
       default: undefined,
     },
-    expandedRowKeys: { type: Array as PropType<TableProps['expandedRowKeys']>, default: undefined },
+    expandedRowKeys: {
+      type: Array as PropType<TableProps['expandedRowKeys']>,
+      default: undefined as TableProps['expandedRowKeys'],
+    },
     defaultExpandedRowKeys: {
       type: Array as PropType<TableProps['defaultExpandedRowKeys']>,
-      default: undefined,
+      default: undefined as TableProps['defaultExpandedRowKeys'],
     },
     expandedRowRender: {
       type: Function as PropType<TableProps['expandedRowRender']>,
@@ -605,6 +608,8 @@ const InteralTable = defineComponent<
             <RcTable
               {...attrs}
               {...tableProps}
+              expandedRowKeys={props.expandedRowKeys as any}
+              defaultExpandedRowKeys={props.defaultExpandedRowKeys as any}
               expandIconColumnIndex={expandIconColumnIndex.value}
               indentSize={indentSize.value}
               expandIcon={expandIcon}
@@ -649,7 +654,7 @@ const Table = defineComponent<TableProps>({
       table,
     });
     return () => {
-      const columns = (attrs.columns || convertChildrenToColumns(slots.default?.())) as ColumnsType;
+      const columns = attrs.columns || convertChildrenToColumns(slots.default?.());
       return (
         <InteralTable
           ref={table}

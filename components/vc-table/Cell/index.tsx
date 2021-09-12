@@ -1,6 +1,6 @@
 import classNames from '../../_util/classNames';
 import { flattenChildren, isValidElement, parseStyleText } from '../../_util/props-util';
-import { CSSProperties, HTMLAttributes } from 'vue';
+import type { CSSProperties, HTMLAttributes } from 'vue';
 import { defineComponent, isVNode } from 'vue';
 
 import type {

@@ -231,7 +231,7 @@ export default defineComponent({
 
     return () => {
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
-      let baseTitleNode = () => {
+      const baseTitleNode = () => {
         const icon = getPropsSlot(slots, props, 'icon');
         const expandIcon = props.expandIcon || slots.expandIcon || menuExpandIcon.value;
         const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);

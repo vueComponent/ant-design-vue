@@ -14,7 +14,7 @@ export default defineComponent({
     item: PropTypes.any,
     renderItem: Function as PropType<(item: any) => VueNode>,
     responsive: Boolean,
-    itemKey: [String, Number],
+    itemKey: { type: [String, Number] as PropType<string | number> },
     registerSize: Function as PropType<(key: Key, width: number | null) => void>,
     display: Boolean,
     order: Number,
@@ -29,7 +29,7 @@ export default defineComponent({
 
     // ================================ Effect ================================
     function internalRegisterSize(width: number | null) {
-      props.registerSize(props.itemKey!, width);
+      props.registerSize(props.itemKey, width);
     }
 
     onUnmounted(() => {

@@ -81,7 +81,7 @@ const Drawer = defineComponent({
       }
       this.preProps.open = val;
       if (val) {
-        nextTick(() => {
+        setTimeout(() => {
           this.domFocus();
         });
       }

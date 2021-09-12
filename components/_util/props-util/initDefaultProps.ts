@@ -13,7 +13,7 @@ const initDefaultProps = <T>(
       : any;
   },
 ): T => {
-  const propTypes: T = { ...types } as T;
+  const propTypes: T = { ...types };
   Object.keys(defaultProps).forEach(k => {
     const prop = propTypes[k] as VueTypeValidableDef;
     if (prop) {

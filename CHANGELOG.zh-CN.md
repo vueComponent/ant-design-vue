@@ -10,6 +10,21 @@
 
 ---
 
+## 2.2.7
+
+`2021-09-08`
+
+- 🌟 Menu 支持 overflowedIndicator 插槽 [#4515](https://github.com/vueComponent/ant-design-vue/issues/4515)
+- 🌟 useForm 支持动态 rule [#4498](https://github.com/vueComponent/ant-design-vue/issues/4498)
+- 🌟 Select 支持 Number 类型 [#4570](https://github.com/vueComponent/ant-design-vue/issues/4570)
+- 🐞 修复 css zoom 引起的 warning 问题 [#4554](https://github.com/vueComponent/ant-design-vue/issues/4554)
+- 🐞 修复 Mentions 输入中文报错问题 [#4524](https://github.com/vueComponent/ant-design-vue/issues/4524)
+- 🐞 修复 AutoComplete 不支持全局 prefixCls 问题 [#4566](https://github.com/vueComponent/ant-design-vue/issues/4566)
+- 🐞 修复 Table 嵌套表格报错问题 [#4600](https://github.com/vueComponent/ant-design-vue/issues/4600)
+- 🐞 修复 Dropdown 下的 MenuItem danger 属性无样式问题 [#4618](https://github.com/vueComponent/ant-design-vue/issues/4618)
+- 🐞 修复 Modal.xxx 等方法传递 appContext 失效问题 [#4627](https://github.com/vueComponent/ant-design-vue/issues/4627)
+- 🐞 修复一些 TS 类型错误
+
 ## 2.2.6
 
 `2021-08-12`

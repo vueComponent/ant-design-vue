@@ -36,7 +36,7 @@ import { getSeparatedContent } from './utils/valueUtil';
 import useSelectTriggerControl from './hooks/useSelectTriggerControl';
 import useCacheDisplayValue from './hooks/useCacheDisplayValue';
 import useCacheOptions from './hooks/useCacheOptions';
-import type { CSSProperties, DefineComponent, PropType, VNode, VNodeChild } from 'vue';
+import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue';
 import { getCurrentInstance } from 'vue';
 import {
   computed,
@@ -215,9 +215,13 @@ export type SelectProps<T1, T2> = FuncReturnType<T1, T2>;
 export interface GenerateConfig<OptionType extends object> {
   prefixCls: string;
   components: {
-    optionList: DefineComponent<
-      Omit<OptionListProps<OptionType>, 'options'> & { options?: OptionType[] }
-    >;
+    // TODO
+    optionList: (
+      props: Omit<OptionListProps<OptionType>, 'options'> & { options?: OptionType[] },
+    ) => JSX.Element;
+    // optionList: DefineComponent<
+    //   Omit<OptionListProps<OptionType>, 'options'> & { options?: OptionType[] }
+    // >;
   };
   /** Convert jsx tree into `OptionType[]` */
   convertChildrenToData: (children: VNodeChild | JSX.Element) => OptionType[];
@@ -245,6 +249,7 @@ export interface GenerateConfig<OptionType extends object> {
   ) => OptionType[];
   omitDOMProps?: (props: object) => object;
 }
+
 type ValueType = DefaultValueType;
 /**
  * This function is in internal usage.
@@ -330,13 +335,18 @@ export default function generateSelector<
       // ============================== Ref ===============================
       const selectorDomRef = createRef();
 
-      const mergedValue = ref();
+      const innerSearchValue = ref('');
+      const setInnerSearchValue = (val: string) => {
+        innerSearchValue.value = val;
+      };
+
+      const mergedValue = ref(props.value !== undefined ? props.value : props.defaultValue);
       watch(
         () => props.value,
         () => {
-          mergedValue.value = props.value !== undefined ? props.value : props.defaultValue;
+          mergedValue.value = props.value;
+          innerSearchValue.value = '';
         },
-        { immediate: true },
       );
       // ============================= Value ==============================
 
@@ -358,10 +368,6 @@ export default function generateSelector<
       const setActiveValue = (val: string) => {
         activeValue.value = val;
       };
-      const innerSearchValue = ref('');
-      const setInnerSearchValue = (val: string) => {
-        innerSearchValue.value = val;
-      };
 
       const mergedSearchValue = computed(() => {
         let mergedSearchValue = innerSearchValue.value;
@@ -378,7 +384,7 @@ export default function generateSelector<
       const mergedOptions = computed((): OptionType[] => {
         let newOptions = props.options;
         if (newOptions === undefined) {
-          newOptions = convertChildrenToData(props.children);
+          newOptions = convertChildrenToData(props.children as VNodeChild);
         }
 
         /**
@@ -667,7 +673,7 @@ export default function generateSelector<
         // Check if match the `tokenSeparators`
         const patchLabels: string[] = isCompositing
           ? null
-          : getSeparatedContent(searchText, props.tokenSeparators);
+          : getSeparatedContent(searchText, props.tokenSeparators as string[]);
         let patchRawValues: RawValueType[] = patchLabels;
 
         if (props.mode === 'combobox') {
@@ -847,12 +853,12 @@ export default function generateSelector<
         if (props.disabled) {
           return;
         }
-        const serachVal = mergedSearchValue.value;
-        if (serachVal) {
+        const searchVal = mergedSearchValue.value;
+        if (searchVal) {
           // `tags` mode should move `searchValue` into values
           if (props.mode === 'tags') {
             triggerSearch('', false, false);
-            triggerChange(Array.from(new Set([...mergedRawValue.value, serachVal])));
+            triggerChange(Array.from(new Set([...mergedRawValue.value, searchVal])));
           } else if (props.mode === 'multiple') {
             // `multiple` mode only clean the search value but not trigger event
             setInnerSearchValue('');

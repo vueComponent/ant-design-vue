@@ -10,6 +10,21 @@
 
 ---
 
+## 2.2.7
+
+`2021-09-08`
+
+- 🌟 Menu supports overflowedIndicator slot [#4515](https://github.com/vueComponent/ant-design-vue/issues/4515)
+- 🌟 useForm supports dynamic rule [#4498](https://github.com/vueComponent/ant-design-vue/issues/4498)
+- 🌟 Select supports Number type [#4570](https://github.com/vueComponent/ant-design-vue/issues/4570)
+- 🐞 Fix the warning problem caused by css zoom [#4554](https://github.com/vueComponent/ant-design-vue/issues/4554)
+- 🐞 Fix Mentions input Chinese error report [#4524](https://github.com/vueComponent/ant-design-vue/issues/4524)
+- 🐞 Fix the issue that AutoComplete does not support global prefixCls [#4566](https://github.com/vueComponent/ant-design-vue/issues/4566)
+- 🐞 Fix Table nested table error report [#4600](https://github.com/vueComponent/ant-design-vue/issues/4600)
+- 🐞 Fix MenuItem danger property under Dropdown has no style problem [#4618](https://github.com/vueComponent/ant-design-vue/issues/4618)
+- 🐞 Fix Modal.xxx and other methods passing appContext invalid problem [#4627](https://github.com/vueComponent/ant-design-vue/issues/4627)
+- 🐞 Fix some TS type errors
+
 ## 2.2.6
 
 `2021-08-12`

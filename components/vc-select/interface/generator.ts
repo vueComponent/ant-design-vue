@@ -12,7 +12,7 @@ export type RawValueType = string | number | null;
 export interface LabelValueType extends Record<string, any> {
   key?: Key;
   value?: RawValueType;
-  label?: VueNode;
+  label?: any;
   isCacheable?: boolean;
 }
 export type DefaultValueType = RawValueType | RawValueType[] | LabelValueType | LabelValueType[];
@@ -26,7 +26,7 @@ export type SingleType<MixType> = MixType extends (infer Single)[] ? Single : Mi
 export type OnClear = () => any;
 
 export type CustomTagProps = {
-  label: VueNode;
+  label: any;
   value: DefaultValueType;
   disabled: boolean;
   onClose: (event?: MouseEvent) => void;

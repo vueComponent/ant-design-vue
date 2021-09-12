@@ -3,12 +3,19 @@ import type { ModalFuncProps } from './Modal';
 import Dialog from './Modal';
 import ActionButton from './ActionButton';
 import { getConfirmLocale } from './locale';
-import type { FunctionalComponent } from 'vue';
+import { FunctionalComponent } from 'vue';
 
 interface ConfirmDialogProps extends ModalFuncProps {
   afterClose?: () => void;
-  close: (...args: any[]) => void;
+  close?: (...args: any[]) => void;
   autoFocusButton?: null | 'ok' | 'cancel';
+}
+
+function renderSomeContent(_name, someContent) {
+  if (typeof someContent === 'function') {
+    return someContent();
+  }
+  return someContent;
 }
 
 const ConfirmDialog: FunctionalComponent<ConfirmDialogProps> = props => {
@@ -40,8 +47,10 @@ const ConfirmDialog: FunctionalComponent<ConfirmDialogProps> = props => {
   // 默认为 false，保持旧版默认行为
   const maskClosable = props.maskClosable === undefined ? false : props.maskClosable;
   const runtimeLocale = getConfirmLocale();
-  const okText = props.okText || (okCancel ? runtimeLocale.okText : runtimeLocale.justOkText);
-  const cancelText = props.cancelText || runtimeLocale.cancelText;
+  const okText =
+    renderSomeContent('okText', props.okText) ||
+    (okCancel ? runtimeLocale.okText : runtimeLocale.justOkText);
+  const cancelText = renderSomeContent('cancelText', props.cancelText) || runtimeLocale.cancelText;
   const autoFocusButton = props.autoFocusButton === null ? false : props.autoFocusButton || 'ok';
   const transitionName = props.transitionName || 'zoom';
   const maskTransitionName = props.maskTransitionName || 'fade';
@@ -89,11 +98,15 @@ const ConfirmDialog: FunctionalComponent<ConfirmDialogProps> = props => {
     >
       <div class={`${contentPrefixCls}-body-wrapper`}>
         <div class={`${contentPrefixCls}-body`}>
-          {icon}
+          {renderSomeContent('icon', icon)}
           {props.title === undefined ? null : (
-            <span class={`${contentPrefixCls}-title`}>{props.title}</span>
+            <span class={`${contentPrefixCls}-title`}>
+              {renderSomeContent('title', props.title)}
+            </span>
           )}
-          <div class={`${contentPrefixCls}-content`}>{props.content}</div>
+          <div class={`${contentPrefixCls}-content`}>
+            {renderSomeContent('content', props.content)}
+          </div>
         </div>
         <div class={`${contentPrefixCls}-btns`}>
           {cancelButton}

@@ -62,7 +62,7 @@ export default defineComponent<ExpandedRowProps>({
                   contentNode = (
                     <div
                       style={{
-                        width: componentWidth - (fixHeader ? tableContext.scrollbarSize : 0),
+                        width: `${componentWidth - (fixHeader ? tableContext.scrollbarSize : 0)}px`,
                         position: 'sticky',
                         left: 0,
                         overflow: 'hidden',

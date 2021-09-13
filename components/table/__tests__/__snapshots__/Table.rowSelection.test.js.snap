@@ -31,45 +31,45 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
               <tbody class="ant-table-tbody">
                 <!---->
                 <tr data-row-key="0" class="ant-table-row ant-table-row-level-0">
-                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last ant-table-cell-with-append ant-table-selection-column" style="position: sticky; left: 0px;">
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last ant-table-selection-column" style="position: sticky; left: 0px;">
                     <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                   </td>
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->Jack
                   </td>
                 </tr>
                 <!---->
                 <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
-                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last ant-table-cell-with-append ant-table-selection-column" style="position: sticky; left: 0px;">
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last ant-table-selection-column" style="position: sticky; left: 0px;">
                     <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                   </td>
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->Lucy
                   </td>
                 </tr>
                 <!---->
                 <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
-                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last ant-table-cell-with-append ant-table-selection-column" style="position: sticky; left: 0px;">
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last ant-table-selection-column" style="position: sticky; left: 0px;">
                     <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                   </td>
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->Tom
                   </td>
                 </tr>
                 <!---->
                 <tr data-row-key="3" class="ant-table-row ant-table-row-level-0">
-                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last ant-table-cell-with-append ant-table-selection-column" style="position: sticky; left: 0px;">
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last ant-table-selection-column" style="position: sticky; left: 0px;">
                     <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
                   </td>
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->Jerry
                   </td>
                 </tr>

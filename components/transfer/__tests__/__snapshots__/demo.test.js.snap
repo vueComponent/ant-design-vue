@@ -450,141 +450,141 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                         <tbody class="ant-table-tbody">
                           <!---->
                           <tr data-row-key="0" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content1
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->description of content1
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content2
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->description of content2
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="3" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content4
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->description of content4
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="4" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content5
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->description of content5
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="6" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content7
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->description of content7
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="7" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content8
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->description of content8
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="9" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content10
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->description of content10
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="10" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content11
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->description of content11
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="12" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content13
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->description of content13
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="13" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content14
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->description of content14
                             </td>
                           </tr>
@@ -650,67 +650,67 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                         <tbody class="ant-table-tbody">
                           <!---->
                           <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content3
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="5" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content6
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="8" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content9
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="11" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content12
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="14" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content15
                             </td>
                           </tr>
                           <!---->
                           <tr data-row-key="17" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-cell-with-append ant-table-selection-column">
+                            <td class="ant-table-cell ant-table-selection-column">
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
                             </td>
-                            <td class="ant-table-cell ant-table-cell-with-append">
+                            <td class="ant-table-cell">
                               <!---->content18
                             </td>
                           </tr>

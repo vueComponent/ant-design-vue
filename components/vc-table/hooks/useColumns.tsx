@@ -122,7 +122,7 @@ function useColumns<RecordType>(
   const withExpandColumns = computed<ColumnsType<RecordType>>(() => {
     if (expandable.value) {
       const expandColIndex = expandIconColumnIndex.value || 0;
-      const prevColumn = baseColumns[expandColIndex];
+      const prevColumn = baseColumns.value[expandColIndex];
 
       let fixedColumn: FixedType | null;
       if ((expandFixed.value === 'left' || expandFixed.value) && !expandIconColumnIndex.value) {

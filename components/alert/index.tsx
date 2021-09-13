@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue';
-import { inject, cloneVNode, defineComponent, ref } from 'vue';
+import { inject, defineComponent, ref } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -15,6 +15,7 @@ import { getTransitionProps, Transition } from '../_util/transition';
 import { isValidElement, getPropsSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
+import { cloneElement } from '../_util/vnode';
 
 function noop() {}
 
@@ -139,7 +140,7 @@ const Alert = defineComponent({
 
       const iconNode = (icon &&
         (isValidElement(icon) ? (
-          cloneVNode(icon, {
+          cloneElement(icon, {
             class: `${prefixCls}-icon`,
           })
         ) : (

@@ -167,26 +167,26 @@ export default defineComponent<BodyRowProps<unknown>>({
                 transformCellText={transformCellText}
                 v-slots={{
                   // ============= Used for nest expandable =============
-                  appendNode: () => {
-                    if (colIndex === (expandIconColumnIndex || 0) && nestExpandable.value) {
-                      return (
-                        <>
-                          <span
-                            style={{ paddingLeft: `${indentSize * indent}px` }}
-                            class={`${prefixCls}-row-indent indent-level-${indent}`}
-                          />
-                          {expandIcon({
-                            prefixCls,
-                            expanded: expanded.value,
-                            expandable: hasNestChildren.value,
-                            record,
-                            onExpand: onInternalTriggerExpand,
-                          })}
-                        </>
-                      );
-                    }
-                    return null;
-                  },
+                  appendNode:
+                    colIndex === (expandIconColumnIndex || 0) && nestExpandable.value
+                      ? () => {
+                          return (
+                            <>
+                              <span
+                                style={{ paddingLeft: `${indentSize * indent}px` }}
+                                class={`${prefixCls}-row-indent indent-level-${indent}`}
+                              />
+                              {expandIcon({
+                                prefixCls,
+                                expanded: expanded.value,
+                                expandable: hasNestChildren.value,
+                                record,
+                                onExpand: onInternalTriggerExpand,
+                              })}
+                            </>
+                          );
+                        }
+                      : undefined,
                 }}
               />
             );

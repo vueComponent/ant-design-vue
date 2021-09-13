@@ -17,7 +17,7 @@ When there's too much information to show and the table can't display all at onc
 </docs>
 
 <template>
-  <a-table :columns="columns" :data-source="data">
+  <a-table :columns="columns" :data-source="data" :scroll="{ x: 2000 }">
     <template #bodyCell="{ column, text }">
       <template v-if="column.key === 'action'">
         <a>Delete</a>
@@ -34,7 +34,7 @@ When there's too much information to show and the table can't display all at onc
 <script lang="ts">
 import { defineComponent } from 'vue';
 const columns = [
-  { title: 'Name', dataIndex: 'name', key: 'name' },
+  { title: 'Name', dataIndex: 'name', key: 'name', fixed: true },
   { title: 'Age', dataIndex: 'age', key: 'age' },
   { title: 'Address', dataIndex: 'address', key: 'address' },
   { title: 'Action', key: 'action' },

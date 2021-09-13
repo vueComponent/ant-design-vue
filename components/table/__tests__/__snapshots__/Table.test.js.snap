@@ -24,21 +24,21 @@ exports[`Table align column should not override cell style 1`] = `
               <tbody class="ant-table-tbody">
                 <!---->
                 <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->
                     <!---->
                   </td>
-                  <td style="color: red; text-align: center;" class="ant-table-cell ant-table-cell-with-append">
+                  <td style="color: red; text-align: center;" class="ant-table-cell">
                     <!---->32
                   </td>
                 </tr>
                 <!---->
                 <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->
                     <!---->
                   </td>
-                  <td style="color: red; text-align: center;" class="ant-table-cell ant-table-cell-with-append">
+                  <td style="color: red; text-align: center;" class="ant-table-cell">
                     <!---->42
                   </td>
                 </tr>
@@ -94,25 +94,25 @@ exports[`Table renders JSX correctly 1`] = `
               <tbody class="ant-table-tbody">
                 <!---->
                 <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->John
                   </td>
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->Brown
                   </td>
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->32
                   </td>
                 </tr>
                 <!---->
                 <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->Jim
                   </td>
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->Green
                   </td>
-                  <td class="ant-table-cell ant-table-cell-with-append">
+                  <td class="ant-table-cell">
                     <!---->42
                   </td>
                 </tr>

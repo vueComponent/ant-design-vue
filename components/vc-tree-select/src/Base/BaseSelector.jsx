@@ -99,7 +99,7 @@ export default function () {
           vcTreeSelect: { onSelectorClear },
         } = this;
 
-        if (!allowClear || !selectorValueList.length || !selectorValueList[0].value) {
+        if (!allowClear || !selectorValueList.length) {
           return null;
         }
         const clearIcon = getComponent(this, 'clearIcon');

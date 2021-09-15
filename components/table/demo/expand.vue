@@ -18,11 +18,10 @@ When there's too much information to show and the table can't display all at onc
 
 <template>
   <a-table :columns="columns" :data-source="data" :scroll="{ x: 2000 }">
-    <template #bodyCell="{ column, text }">
+    <template #bodyCell="{ column }">
       <template v-if="column.key === 'action'">
         <a>Delete</a>
       </template>
-      <template v-else>{{ text }}</template>
     </template>
     <template #expandedRowRender="{ record }">
       <p style="margin: 0">

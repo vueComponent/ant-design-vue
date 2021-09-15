@@ -30,7 +30,6 @@ This example shows how to fetch and present data from a remote server, and how t
   >
     <template #bodyCell="{ column, text }">
       <template v-if="column.dataIndex === 'name'">{{ text.first }} {{ text.last }}</template>
-      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>

@@ -3,17 +3,17 @@ import { computed } from 'vue';
 import { inject, provide } from 'vue';
 
 export type ContextSlots = {
-  emptyText?: (...args: any[]) => void;
-  expandIcon?: (...args: any[]) => void;
-  title?: (...args: any[]) => void;
-  footer?: (...args: any[]) => void;
-  summary?: (...args: any[]) => void;
-  bodyCell?: (...args: any[]) => void;
-  headerCell?: (...args: any[]) => void;
-  customFilterIcon?: (...args: any[]) => void;
-  customFilterDropdown?: (...args: any[]) => void;
+  emptyText?: (...args: any[]) => any;
+  expandIcon?: (...args: any[]) => any;
+  title?: (...args: any[]) => any;
+  footer?: (...args: any[]) => any;
+  summary?: (...args: any[]) => any;
+  bodyCell?: (...args: any[]) => any;
+  headerCell?: (...args: any[]) => any;
+  customFilterIcon?: (...args: any[]) => any;
+  customFilterDropdown?: (...args: any[]) => any;
   // 兼容 2.x 的 columns slots 配置
-  [key: string]: (...args: any[]) => void;
+  [key: string]: (...args: any[]) => any;
 };
 
 export type ContextProps = ComputedRef<ContextSlots>;

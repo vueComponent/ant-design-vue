@@ -22,7 +22,6 @@ selection happens when clicking checkbox defaultly. You can see https://codesand
       <template v-if="column.dataIndex === 'name'">
         <a>{{ text }}</a>
       </template>
-      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>

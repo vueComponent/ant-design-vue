@@ -25,11 +25,10 @@ A Solution for displaying large amounts of data with long columns.
 
 <template>
   <a-table :columns="columns" :data-source="data" :scroll="{ x: 1500, y: 300 }">
-    <template #bodyCell="{ column, text }">
+    <template #bodyCell="{ column }">
       <template v-if="column.key === 'operation'">
         <a>action</a>
       </template>
-      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>

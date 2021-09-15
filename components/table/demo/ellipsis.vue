@@ -24,7 +24,6 @@ Ellipsis cell content via setting `column.ellipsis`.
       <template v-if="column.dataIndex === 'name'">
         <a>{{ text }}</a>
       </template>
-      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>

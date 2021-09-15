@@ -17,14 +17,13 @@ Simple table with actions.
 
 <template>
   <a-table :columns="columns" :data-source="data">
-    <template #headerCell="{ title, column }">
+    <template #headerCell="{ column }">
       <template v-if="column.key === 'name'">
         <span>
           <smile-outlined />
           Name
         </span>
       </template>
-      <template v-else>{{ title }}</template>
     </template>
 
     <template #bodyCell="{ column, record }">
@@ -56,7 +55,6 @@ Simple table with actions.
           </a>
         </span>
       </template>
-      <template v-else>{{ record.name }}</template>
     </template>
   </a-table>
 </template>

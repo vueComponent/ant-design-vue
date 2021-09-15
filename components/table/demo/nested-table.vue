@@ -19,15 +19,14 @@ Showing more detailed info of every row.
 
 <template>
   <a-table :columns="columns" :data-source="data" class="components-table-demo-nested">
-    <template #bodyCell="{ column, text }">
+    <template #bodyCell="{ column }">
       <template v-if="column.key === 'operation'">
         <a>Publish</a>
       </template>
-      <template v-else>{{ text }}</template>
     </template>
     <template #expandedRowRender>
       <a-table :columns="innerColumns" :data-source="innerData" :pagination="false">
-        <template #bodyCell="{ column, text }">
+        <template #bodyCell="{ column }">
           <template v-if="column.key === 'state'">
             <span>
               <a-badge status="success" />
@@ -52,7 +51,6 @@ Showing more detailed info of every row.
               </a-dropdown>
             </span>
           </template>
-          <template v-else>{{ text }}</template>
         </template>
       </a-table>
     </template>

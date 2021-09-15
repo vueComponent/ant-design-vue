@@ -24,7 +24,6 @@ Table cell supports `colSpan` and `rowSpan` that set in render return object. Wh
       <template v-if="column.dataIndex === 'name'">
         <a href="javascript:;">{{ text }}</a>
       </template>
-      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>

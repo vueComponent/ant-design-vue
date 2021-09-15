@@ -22,7 +22,6 @@ Implement a customized column search example via `customFilterDropdown`.
       <template v-if="column.key === 'name'">
         <span style="color: #1890ff">Name</span>
       </template>
-      <template v-else>{{ column.title }}</template>
     </template>
     <template
       #customFilterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters, column }"
@@ -70,9 +69,6 @@ Implement a customized column search example via `customFilterDropdown`.
           <template v-else>{{ fragment }}</template>
         </template>
       </span>
-      <template v-else>
-        {{ text }}
-      </template>
     </template>
   </a-table>
 </template>

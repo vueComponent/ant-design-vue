@@ -1,7 +1,7 @@
 import classNames from '../../_util/classNames';
 import { flattenChildren, isValidElement, parseStyleText } from '../../_util/props-util';
 import type { CSSProperties, HTMLAttributes } from 'vue';
-import { defineComponent, isVNode } from 'vue';
+import { defineComponent, isVNode, renderSlot } from 'vue';
 
 import type {
   DataIndex,
@@ -152,15 +152,19 @@ export default defineComponent<CellProps>({
           contextSlots.value.bodyCell &&
           !column.slots?.customRender
         ) {
-          childNode = flattenChildren(
-            contextSlots.value.bodyCell({
+          const child = renderSlot(
+            contextSlots.value,
+            'bodyCell',
+            {
               text: value,
               value,
               record,
               index,
               column: column.__originColumn__,
-            }) as any,
+            },
+            () => [childNode],
           );
+          childNode = flattenChildren(child as any);
         }
         /** maybe we should @deprecated */
         if (props.transformCellText) {

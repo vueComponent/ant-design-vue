@@ -1,4 +1,5 @@
 import devWarning from '../../vc-util/devWarning';
+import { renderSlot } from 'vue';
 import type { Ref } from 'vue';
 import type { ContextSlots } from '../context';
 import type { TransformColumns, ColumnsType } from '../interface';
@@ -23,10 +24,15 @@ function fillSlots<RecordType>(columns: ColumnsType<RecordType>, contextSlots: R
     });
 
     if (contextSlots.value.headerCell && !column.slots?.title) {
-      cloneColumn.title = contextSlots.value.headerCell({
-        title: column.title,
-        column,
-      });
+      cloneColumn.title = renderSlot(
+        contextSlots.value,
+        'headerCell',
+        {
+          title: column.title,
+          column,
+        },
+        () => [column.title as any],
+      );
     }
     if ('children' in cloneColumn) {
       cloneColumn.children = fillSlots(cloneColumn.children, contextSlots);

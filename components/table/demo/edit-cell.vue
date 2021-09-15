@@ -41,7 +41,6 @@ Table with editable cells.
           <a>Delete</a>
         </a-popconfirm>
       </template>
-      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>

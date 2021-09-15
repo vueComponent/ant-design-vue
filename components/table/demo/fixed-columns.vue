@@ -26,11 +26,10 @@ To fix some columns and scroll inside other columns, and you must set `scroll.x`
 
 <template>
   <a-table :columns="columns" :data-source="data" :scroll="{ x: 1300, y: 1000 }">
-    <template #bodyCell="{ column, text }">
+    <template #bodyCell="{ column }">
       <template v-if="column.key === 'operation'">
         <a>action</a>
       </template>
-      <template v-else>{{ text }}</template>
     </template>
   </a-table>
 </template>

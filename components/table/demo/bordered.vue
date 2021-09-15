@@ -21,7 +21,6 @@ Add border, title and footer for table.
       <template v-if="column.dataIndex === 'name'">
         <a>{{ text }}</a>
       </template>
-      <template v-else>{{ text }}</template>
     </template>
     <template #title>Header</template>
     <template #footer>Footer</template>

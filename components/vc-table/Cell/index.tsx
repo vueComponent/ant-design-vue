@@ -162,7 +162,7 @@ export default defineComponent<CellProps>({
               index,
               column: column.__originColumn__,
             },
-            () => [childNode],
+            () => [childNode === undefined ? value : childNode],
           );
           childNode = flattenChildren(child as any);
         }

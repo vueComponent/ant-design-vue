@@ -37,10 +37,10 @@ exports[`renders ./components/table/demo/basic.vue correctly 1`] = `
                     <!----><a>John Brown</a>
                   </td>
                   <td class="ant-table-cell">
-                    <!---->John Brown
+                    <!---->32
                   </td>
                   <td class="ant-table-cell">
-                    <!---->John Brown
+                    <!---->New York No. 1 Lake Park
                   </td>
                   <td class="ant-table-cell">
                     <!----><span><span class="ant-tag ant-tag-green">NICE<!----></span><span class="ant-tag ant-tag-geekblue">DEVELOPER<!----></span></span>
@@ -55,10 +55,10 @@ exports[`renders ./components/table/demo/basic.vue correctly 1`] = `
                     <!----><a>Jim Green</a>
                   </td>
                   <td class="ant-table-cell">
-                    <!---->Jim Green
+                    <!---->42
                   </td>
                   <td class="ant-table-cell">
-                    <!---->Jim Green
+                    <!---->London No. 1 Lake Park
                   </td>
                   <td class="ant-table-cell">
                     <!----><span><span class="ant-tag ant-tag-volcano">LOSER<!----></span></span>
@@ -73,10 +73,10 @@ exports[`renders ./components/table/demo/basic.vue correctly 1`] = `
                     <!----><a>Joe Black</a>
                   </td>
                   <td class="ant-table-cell">
-                    <!---->Joe Black
+                    <!---->32
                   </td>
                   <td class="ant-table-cell">
-                    <!---->Joe Black
+                    <!---->Sidney No. 1 Lake Park
                   </td>
                   <td class="ant-table-cell">
                     <!----><span><span class="ant-tag ant-tag-green">COOL<!----></span><span class="ant-tag ant-tag-geekblue">TEACHER<!----></span></span>

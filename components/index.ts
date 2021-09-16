@@ -3,6 +3,7 @@ import type { App } from 'vue';
 import * as components from './components';
 import { default as version } from './version';
 export * from './components';
+import './globalComponent';
 
 export const install = function (app: App) {
   Object.keys(components).forEach(key => {

@@ -95,9 +95,9 @@ export interface ModalFuncProps {
   prefixCls?: string;
   class?: string;
   visible?: boolean;
-  title?: string | (() => VNodeTypes) | VNodeTypes;
+  title?: VNodeTypes | (() => VNodeTypes);
   closable?: boolean;
-  content?: string | (() => VNodeTypes) | VNodeTypes;
+  content?: VNodeTypes | (() => VNodeTypes);
   // TODO: find out exact types
   onOk?: (...args: any[]) => any;
   onCancel?: (...args: any[]) => any;
@@ -105,9 +105,9 @@ export interface ModalFuncProps {
   cancelButtonProps?: ButtonPropsType;
   centered?: boolean;
   width?: string | number;
-  okText?: string | (() => VNodeTypes) | VNodeTypes;
+  okText?: VNodeTypes | (() => VNodeTypes);
   okType?: LegacyButtonType;
-  cancelText?: string | (() => VNodeTypes) | VNodeTypes;
+  cancelText?: VNodeTypes | (() => VNodeTypes);
   icon?: (() => VNodeTypes) | VNodeTypes;
   /* Deprecated */
   iconType?: string;

@@ -10,6 +10,18 @@
 
 ---
 
+## 2.2.8
+
+`2021-09-17`
+
+- 🌟 Upload method 支持 patch [#4637](https://github.com/vueComponent/ant-design-vue/issues/4637)
+- 🌟 List gutter 支持数组 [d2b721](https://github.com/vueComponent/ant-design-vue/commit/d2b72143f0e15c8716b4ea8f68b2b72eff5cf510)
+- 🐞 修复 Modal 类型错误 [#4632](https://github.com/vueComponent/ant-design-vue/issues/4632)
+- 🐞 修复 AutoComplete 无法重置 undefined 问题 [741718](https://github.com/vueComponent/ant-design-vue/commit/741718a0f92c790266e7a07d8d129c5673344a7e)
+- 🐞 修复 Tag 关闭图标样式丢失问题 [#4649](https://github.com/vueComponent/ant-design-vue/issues/4649)
+- 🐞 修复 TreeSelect 清楚按钮在特殊条件下不显示问题 [#4655](https://github.com/vueComponent/ant-design-vue/issues/4655)
+- 🐞 修复 useForm immdiate 不生效问题 [#4646](https://github.com/vueComponent/ant-design-vue/issues/4646)
+
 ## 2.2.7
 
 `2021-09-08`

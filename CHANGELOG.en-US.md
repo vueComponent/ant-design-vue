@@ -10,6 +10,18 @@
 
 ---
 
+## 2.2.8
+
+`2021-09-17`
+
+- 🌟 Upload method supports patch [#4637](https://github.com/vueComponent/ant-design-vue/issues/4637)
+- 🌟 List gutter supports array [d2b721](https://github.com/vueComponent/ant-design-vue/commit/d2b72143f0e15c8716b4ea8f68b2b72eff5cf510)
+- 🐞 Fix Modal type error [#4632](https://github.com/vueComponent/ant-design-vue/issues/4632)
+- 🐞 Fix the problem that AutoComplete cannot reset undefined [741718](https://github.com/vueComponent/ant-design-vue/commit/741718a0f92c790266e7a07d8d129c5673344a7e)
+- 🐞 Fix the missing style of Tag closed icon [#4649](https://github.com/vueComponent/ant-design-vue/issues/4649)
+- 🐞 Fix the problem that the TreeSelect clear button does not display under special conditions [#4655](https://github.com/vueComponent/ant-design-vue/issues/4655)
+- 🐞 Fix useForm immdiate not working issue [#4646](https://github.com/vueComponent/ant-design-vue/issues/4646)
+
 ## 2.2.7
 
 `2021-09-08`

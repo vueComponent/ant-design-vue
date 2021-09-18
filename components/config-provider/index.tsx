@@ -58,7 +58,7 @@ export const configConsumerProps = [
 ];
 
 export const defaultPrefixCls = 'ant';
-let globalPrefixCls = ref<string>();
+const globalPrefixCls = ref<string>();
 
 type GlobalConfigProviderProps = {
   prefixCls?: MaybeRef<ConfigProviderProps['prefixCls']>;

@@ -65,7 +65,10 @@ export interface CalendarProps<DateType> {
   valueFormat?: string;
 }
 
-function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
+function generateCalendar<
+  DateType,
+  Props extends CalendarProps<DateType> = CalendarProps<DateType>,
+>(generateConfig: GenerateConfig<DateType>) {
   function isSameYear(date1: DateType, date2: DateType) {
     return date1 && date2 && generateConfig.getYear(date1) === generateConfig.getYear(date2);
   }
@@ -82,28 +85,9 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
     );
   }
 
-  const Calendar = defineComponent<CalendarProps<DateType>>({
+  const Calendar = defineComponent<Props>({
     name: 'ACalendar',
     inheritAttrs: false,
-    props: [
-      'prefixCls',
-      'locale',
-      'validRange',
-      'disabledDate',
-      'dateFullCellRender',
-      'dateCellRender',
-      'monthFullCellRender',
-      'monthCellRender',
-      'headerRender',
-      'value',
-      'defaultValue',
-      'mode',
-      'fullscreen',
-      'onChange',
-      'onPanelChange',
-      'onSelect',
-      'valueFormat',
-    ] as any,
     emits: ['change', 'panelChange', 'select', 'update:value'],
     slots: [
       'dateFullCellRender',
@@ -303,7 +287,6 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
                 onModeChange={triggerModeChange}
               />
             )}
-
             <PickerPanel
               value={mergedValue.value}
               prefixCls={prefixCls.value}
@@ -322,11 +305,33 @@ function generateCalendar<DateType>(generateConfig: GenerateConfig<DateType>) {
       };
     },
   });
+
+  Calendar.props = [
+    'prefixCls',
+    'locale',
+    'validRange',
+    'disabledDate',
+    'dateFullCellRender',
+    'dateCellRender',
+    'monthFullCellRender',
+    'monthCellRender',
+    'headerRender',
+    'value',
+    'defaultValue',
+    'mode',
+    'fullscreen',
+    'onChange',
+    'onPanelChange',
+    'onSelect',
+    'valueFormat',
+  ];
+
   Calendar.install = function (app: App) {
     app.component(Calendar.name, Calendar);
     return app;
   };
-  return Calendar;
+
+  return Calendar as unknown as (props: CalendarProps<DateType>) => JSX.Element;
 }
 
 export default generateCalendar;

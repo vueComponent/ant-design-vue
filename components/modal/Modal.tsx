@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, VNodeTypes, CSSProperties, PropType } from 'vue';
-import { defineComponent, inject } from 'vue';
+import { defineComponent, inject, computed } from 'vue';
 import classNames from '../_util/classNames';
 import Dialog from '../vc-dialog';
 import PropTypes from '../_util/vue-types';
@@ -157,7 +157,9 @@ export default defineComponent({
   }),
   emits: ['update:visible', 'cancel', 'change', 'ok'],
   setup() {
+    const confirmLocale = computed(() => getConfirmLocale());
     return {
+      confirmLocale,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
@@ -210,6 +212,7 @@ export default defineComponent({
       centered,
       getContainer,
       $attrs,
+      confirmLocale,
     } = this;
     const children = getSlot(this);
     const { getPrefixCls, getPopupContainer: getContextPopupContainer } = this.configProvider;
@@ -218,7 +221,7 @@ export default defineComponent({
     const defaultFooter = (
       <LocaleReceiver
         componentName="Modal"
-        defaultLocale={getConfirmLocale()}
+        defaultLocale={confirmLocale}
         children={this.renderFooter}
       />
     );

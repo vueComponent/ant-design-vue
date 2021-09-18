@@ -1,3 +1,4 @@
+import { ref } from 'vue';
 import defaultLocale from '../locale/default';
 
 export interface ModalLocale {
@@ -6,23 +7,23 @@ export interface ModalLocale {
   justOkText: string;
 }
 
-let runtimeLocale = {
+const runtimeLocale = ref({
   ...defaultLocale.Modal,
-};
+});
 
 export function changeConfirmLocale(newLocale?: ModalLocale) {
   if (newLocale) {
-    runtimeLocale = {
+    runtimeLocale.value = {
       ...runtimeLocale,
       ...newLocale,
     };
   } else {
-    runtimeLocale = {
+    runtimeLocale.value = {
       ...defaultLocale.Modal,
     };
   }
 }
 
 export function getConfirmLocale() {
-  return runtimeLocale;
+  return runtimeLocale.value;
 }

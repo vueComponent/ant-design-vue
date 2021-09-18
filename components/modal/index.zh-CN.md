@@ -89,7 +89,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3StSdUlSH/Modal.svg
 | zIndex | 设置 Modal 的 `z-index` | Number | 1000 |  |
 | onCancel | 取消回调，参数为关闭函数，返回 promise 时 resolve 后自动关闭 | function | 无 |  |
 | onOk | 点击确定回调，参数为关闭函数，返回 promise 时 resolve 后自动关闭 | function | 无 |  |
-| parentContext | 弹窗的父级上下文，一般用于获取父级 provider， 如获取 `ConfigProvider` 的配置 | vue instance | - |  |
+| appContext | 弹窗的上下文，一般用于获取全局注册组件、vuex 等内容 | - | - |  |
 
 以上函数调用后，会返回一个引用，可以通过该引用更新和关闭弹窗。
 
@@ -115,4 +115,23 @@ const router = new VueRouter({ ... })
 router.beforeEach((to, from, next) => {
   Modal.destroyAll();
 })
+```
+
+## FAQ
+
+### 为什么 Modal 方法不能获取 全局注册组件、context、vuex 等内容和 ConfigProvider `locale/prefixCls` 配置， 以及不能响应式更新数据 ？
+
+直接调用 Modal 方法，组件会通过 `Vue.render` 动态创建新的 Vue 实体。其 context 与当前代码所在 context 并不相同，因而无法获取 context 信息。
+
+当你需要 context 信息（例如使用全局注册的组件）时，可以通过 `appContext` 属性传递当前组件 context, 当你需要保留属性响应式时，你可以使用函数返回：
+
+```tsx
+import { getCurrentInstance } from 'vue';
+
+const appContext = getCurrentInstance().appContext;
+const title = ref('some message');
+Modal.confirm({
+  title: () => title.value, // 此时 title 的改变，会同步更新 confirm 中的 title
+  appContext,
+});
 ```

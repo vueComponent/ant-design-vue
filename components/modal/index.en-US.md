@@ -9,11 +9,7 @@ Modal dialogs.
 
 ## When To Use
 
-When requiring users to interact with the application, but without jumping to a new page and interrupting
-the user's workflow, you can use `Modal` to create a new floating layer over the current page to get user
-feedback or display information.
-Additionally, if you need show a simple confirmation dialog, you can use `antd.Modal.confirm()`,
-and so on.
+When requiring users to interact with the application, but without jumping to a new page and interrupting the user's workflow, you can use `Modal` to create a new floating layer over the current page to get user feedback or display information. Additionally, if you need show a simple confirmation dialog, you can use `antd.Modal.confirm()`, and so on.
 
 ## API
 
@@ -89,7 +85,7 @@ The items listed above are all functions, expecting a settings object as paramet
 | zIndex | The `z-index` of the Modal | Number | 1000 |  |
 | onCancel | Specify a function that will be called when the user clicks the Cancel button. The parameter of this function is a function whose execution should include closing the dialog. You can also just return a promise and when the promise is resolved, the modal dialog will also be closed | function | - |  |
 | onOk | Specify a function that will be called when the user clicks the OK button. The parameter of this function is a function whose execution should include closing the dialog. You can also just return a promise and when the promise is resolved, the modal dialog will also be closed | function | - |  |
-| parentContext | The parent context of the popup is generally used to get the parent provider, such as the configuration of `ConfigProvider` | vue instance | - |  |
+| appContext | The context of the pop-up window is generally used to obtain content such as global registered components, vuex, etc. | - | - |  |
 
 All the `Modal.method`s will return a reference, and then we can update and close the modal dialog by the reference.
 
@@ -115,4 +111,23 @@ const router = new VueRouter({ ... })
 router.beforeEach((to, from, next) => {
   Modal.destroyAll();
 })
+```
+
+## FAQ
+
+### Why can't the Modal method obtain global registered components, context, vuex, etc. and ConfigProvider `locale/prefixCls` configuration, and can't update data responsively?
+
+Call the Modal method directly, and the component will dynamically create a new Vue entity through `Vue.render`. Its context is not the same as the context where the current code is located, so the context information cannot be obtained.
+
+When you need context information (for example, using a globally registered component), you can pass the current component context through the `appContext` property. When you need to keep the property responsive, you can use the function to return:
+
+```tsx
+import { getCurrentInstance } from 'vue';
+
+const appContext = getCurrentInstance().appContext;
+const title = ref('some message');
+Modal.confirm({
+  title: () => title.value, // the change of title will update the title in confirm synchronously
+  appContext,
+});
 ```

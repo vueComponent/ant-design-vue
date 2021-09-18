@@ -56,6 +56,26 @@ Some components use dynamic style to support wave effect. You can config `csp` p
 | pageHeader | Unify the ghost of pageHeader ,Ref [pageHeader](<(/components/page-header)> | { ghost:boolean } | 'true' | 1.5.0 |
 | transformCellText | Table data can be changed again before rendering. The default configuration of general user empty data. | Function({ text, column, record, index }) => any | - | 1.5.4 ｜ |
 
+### ConfigProvider.config() `3.0.0+`
+
+Setting `Modal`、`Message`、`Notification` rootPrefixCls.
+
+```jsx
+ConfigProvider.config({
+  prefixCls: 'ant',
+});
+```
+
+or
+
+```jsx
+// some cinfig support reactively, you can change prefixCls.value = 'other'
+const prefixCls = ref('ant');
+ConfigProvider.config({
+  prefixCls,
+});
+```
+
 ## FAQ
 
 #### Does the locale problem still exist in DatePicker even if ConfigProvider `locale` is used?

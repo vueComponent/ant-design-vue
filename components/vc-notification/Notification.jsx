@@ -1,10 +1,11 @@
-import { createApp, defineComponent } from 'vue';
+import { defineComponent, createVNode, render as vueRender, onMounted, ref, nextTick } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
 import createChainedFunction from '../_util/createChainedFunction';
 import Notice from './Notice';
 import { getTransitionGroupProps, TransitionGroup } from '../_util/transition';
+import ConfigProvider, { globalConfig } from '../config-provider';
 
 function noop() {}
 
@@ -95,7 +96,9 @@ const Notification = defineComponent({
         key,
       };
       return (
-        <Notice {...noticeProps}>{typeof content === 'function' ? content() : content}</Notice>
+        <Notice {...noticeProps}>
+          {typeof content === 'function' ? content({ prefixCls }) : content}
+        </Notice>
       );
     });
     const className = {
@@ -120,7 +123,13 @@ const Notification = defineComponent({
 });
 
 Notification.newInstance = function newNotificationInstance(properties, callback) {
-  const { getContainer, style, class: className, ...props } = properties || {};
+  const {
+    getContainer,
+    appContext,
+    prefixCls: customizePrefixCls,
+    rootPrefixCls: customRootPrefixCls,
+    ...props
+  } = properties || {};
   const div = document.createElement('div');
   if (getContainer) {
     const root = getContainer();
@@ -128,37 +137,43 @@ Notification.newInstance = function newNotificationInstance(properties, callback
   } else {
     document.body.appendChild(div);
   }
-  const app = createApp({
-    mounted() {
-      const self = this;
-      this.$nextTick(() => {
-        callback({
-          notice(noticeProps) {
-            self.$refs.notification.add(noticeProps);
-          },
-          removeNotice(key) {
-            self.$refs.notification.remove(key);
-          },
-          component: self,
-          destroy() {
-            app.unmount(div);
-            if (div.parentNode) {
-              div.parentNode.removeChild(div);
-            }
-          },
+  let vm = null;
+  const Wrapper = defineComponent({
+    setup(_props, { attrs }) {
+      const notiRef = ref();
+      onMounted(() => {
+        nextTick(() => {
+          callback({
+            notice(noticeProps) {
+              notiRef.value?.add(noticeProps);
+            },
+            removeNotice(key) {
+              notiRef.value?.remove(key);
+            },
+            destroy() {
+              vm?.unmount(div);
+              if (div.parentNode) {
+                div.parentNode.removeChild(div);
+              }
+            },
+          });
         });
       });
-    },
-    render() {
-      const p = {
-        ...props,
-        ref: 'notification',
-        style,
-        class: className,
+      return () => {
+        const { getPrefixCls, getRootPrefixCls } = globalConfig();
+        const prefixCls = getPrefixCls('message', customizePrefixCls);
+        const rootPrefixCls = getRootPrefixCls(customRootPrefixCls, prefixCls);
+        return (
+          <ConfigProvider prefixCls={rootPrefixCls}>
+            <Notification ref={notiRef} {...attrs} prefixCls={prefixCls} />
+          </ConfigProvider>
+        );
       };
-      return <Notification {...p} />;
     },
   });
-  app.mount(div);
+
+  vm = createVNode(Wrapper, props);
+  vm.appContext = appContext || vm.appContext;
+  vueRender(vm, div);
 };
 export default Notification;

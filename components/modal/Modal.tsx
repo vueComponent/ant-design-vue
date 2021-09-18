@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, VNodeTypes, CSSProperties, PropType } from 'vue';
+import type { ExtractPropTypes, CSSProperties, PropType } from 'vue';
 import { defineComponent, inject, computed } from 'vue';
 import classNames from '../_util/classNames';
 import Dialog from '../vc-dialog';
@@ -13,6 +13,7 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
+import type { VueNode } from '../_util/type';
 
 let mousePosition: { x: number; y: number } | null = null;
 // ref: https://github.com/ant-design/ant-design/issues/15795
@@ -95,9 +96,9 @@ export interface ModalFuncProps {
   prefixCls?: string;
   class?: string;
   visible?: boolean;
-  title?: string | (() => VNodeTypes) | VNodeTypes;
+  title?: string | (() => VueNode) | VueNode;
   closable?: boolean;
-  content?: string | (() => VNodeTypes) | VNodeTypes;
+  content?: string | (() => VueNode) | VueNode;
   // TODO: find out exact types
   onOk?: (...args: any[]) => any;
   onCancel?: (...args: any[]) => any;
@@ -105,10 +106,10 @@ export interface ModalFuncProps {
   cancelButtonProps?: ButtonPropsType;
   centered?: boolean;
   width?: string | number;
-  okText?: string | (() => VNodeTypes) | VNodeTypes;
+  okText?: string | (() => VueNode) | VueNode;
   okType?: LegacyButtonType;
-  cancelText?: string | (() => VNodeTypes) | VNodeTypes;
-  icon?: (() => VNodeTypes) | VNodeTypes;
+  cancelText?: string | (() => VueNode) | VueNode;
+  icon?: (() => VueNode) | VueNode;
   /* Deprecated */
   iconType?: string;
   mask?: boolean;

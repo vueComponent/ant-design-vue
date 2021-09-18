@@ -1,4 +1,4 @@
-import { defineComponent, createVNode, render as vueRender, onMounted, ref, nextTick } from 'vue';
+import { defineComponent, createVNode, render as vueRender, onMounted, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getComponent } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
@@ -88,7 +88,7 @@ const Notification = defineComponent({
         duration,
         closable,
         update,
-        closeIcon: getComponent(this, 'closeIcon'),
+        closeIcon: getComponent(this, 'closeIcon', { prefixCls }),
         onClose: close,
         onClick: notice.onClick || noop,
         style,
@@ -124,6 +124,7 @@ const Notification = defineComponent({
 
 Notification.newInstance = function newNotificationInstance(properties, callback) {
   const {
+    name = 'notification',
     getContainer,
     appContext,
     prefixCls: customizePrefixCls,
@@ -137,31 +138,28 @@ Notification.newInstance = function newNotificationInstance(properties, callback
   } else {
     document.body.appendChild(div);
   }
-  let vm = null;
   const Wrapper = defineComponent({
     setup(_props, { attrs }) {
       const notiRef = ref();
       onMounted(() => {
-        nextTick(() => {
-          callback({
-            notice(noticeProps) {
-              notiRef.value?.add(noticeProps);
-            },
-            removeNotice(key) {
-              notiRef.value?.remove(key);
-            },
-            destroy() {
-              vm?.unmount(div);
-              if (div.parentNode) {
-                div.parentNode.removeChild(div);
-              }
-            },
-          });
+        callback({
+          notice(noticeProps) {
+            notiRef.value?.add(noticeProps);
+          },
+          removeNotice(key) {
+            notiRef.value?.remove(key);
+          },
+          destroy() {
+            vueRender(null, div);
+            if (div.parentNode) {
+              div.parentNode.removeChild(div);
+            }
+          },
         });
       });
       return () => {
         const { getPrefixCls, getRootPrefixCls } = globalConfig();
-        const prefixCls = getPrefixCls('message', customizePrefixCls);
+        const prefixCls = getPrefixCls(name, customizePrefixCls);
         const rootPrefixCls = getRootPrefixCls(customRootPrefixCls, prefixCls);
         return (
           <ConfigProvider prefixCls={rootPrefixCls}>
@@ -172,7 +170,7 @@ Notification.newInstance = function newNotificationInstance(properties, callback
     },
   });
 
-  vm = createVNode(Wrapper, props);
+  const vm = createVNode(Wrapper, props);
   vm.appContext = appContext || vm.appContext;
   vueRender(vm, div);
 };

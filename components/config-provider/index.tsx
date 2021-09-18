@@ -58,7 +58,7 @@ export const configConsumerProps = [
 ];
 
 export const defaultPrefixCls = 'ant';
-let globalPrefixCls = ref<string>();
+const globalPrefixCls = ref<string>();
 
 type GlobalConfigProviderProps = {
   prefixCls?: MaybeRef<ConfigProviderProps['prefixCls']>;
@@ -154,6 +154,7 @@ export type ConfigProviderProps = Partial<ExtractPropTypes<typeof configProvider
 
 const ConfigProvider = defineComponent({
   name: 'AConfigProvider',
+  inheritAttrs: false,
   props: configProviderProps,
   setup(props, { slots }) {
     const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {

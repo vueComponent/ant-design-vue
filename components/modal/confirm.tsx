@@ -6,7 +6,7 @@ import { destroyFns } from './Modal';
 import Omit from 'omit.js';
 import ConfigProvider, { globalConfig } from '../config-provider';
 
-let defaultRootPrefixCls = '';
+const defaultRootPrefixCls = '';
 
 function getRootPrefixCls() {
   return defaultRootPrefixCls;
@@ -42,7 +42,8 @@ const confirm = (config: ModalFuncProps) => {
   }
   function destroy(...args: any[]) {
     if (confirmDialogInstance && div.parentNode) {
-      Object.assign(confirmDialogInstance.component.props, { vIf: false }); // hack destroy
+      // destroy
+      vueRender(null, div);
       confirmDialogInstance.component.update();
       confirmDialogInstance = null;
       div.parentNode.removeChild(div);
@@ -59,18 +60,18 @@ const confirm = (config: ModalFuncProps) => {
       }
     }
   }
-  const Wrapper = (p: ModalFuncProps & { vIf: boolean }) => {
+  const Wrapper = (p: ModalFuncProps) => {
     const { getPrefixCls } = globalConfig();
     const rootPrefixCls = getPrefixCls(undefined, getRootPrefixCls());
     const prefixCls = p.prefixCls || `${rootPrefixCls}-modal`;
-    return p.vIf ? (
+    return (
       <ConfigProvider prefixCls={rootPrefixCls}>
         <ConfirmDialog {...p} prefixCls={prefixCls}></ConfirmDialog>
       </ConfigProvider>
-    ) : null;
+    );
   };
   function render(props: ModalFuncProps) {
-    const vm = createVNode(Wrapper, { ...props, vIf: true });
+    const vm = createVNode(Wrapper, { ...props });
     vm.appContext = config.parentContext || config.appContext || vm.appContext;
     vueRender(vm, div);
     return vm;

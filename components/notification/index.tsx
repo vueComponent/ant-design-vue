@@ -1,10 +1,13 @@
-import type { VNodeTypes, CSSProperties } from 'vue';
+import type { CSSProperties } from 'vue';
 import Notification from '../vc-notification';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import InfoCircleOutlined from '@ant-design/icons-vue/InfoCircleOutlined';
 import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
+import type { VueNode } from '../_util/type';
+import { renderHelper } from '../_util/util';
+import { globalConfig } from '../config-provider';
 
 export type NotificationPlacement = 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight';
 
@@ -14,21 +17,26 @@ export interface ConfigProps {
   top?: string | number;
   bottom?: string | number;
   duration?: number;
+  prefixCls?: string;
   placement?: NotificationPlacement;
   getContainer?: () => HTMLElement;
-  closeIcon?: VNodeTypes;
+  closeIcon?: VueNode | (() => VueNode);
 }
 
 const notificationInstance: { [key: string]: any } = {};
 let defaultDuration = 4.5;
 let defaultTop = '24px';
 let defaultBottom = '24px';
+let defaultPrefixCls = '';
 let defaultPlacement: NotificationPlacement = 'topRight';
 let defaultGetContainer = () => document.body;
 let defaultCloseIcon = null;
 
 function setNotificationConfig(options: ConfigProps) {
-  const { duration, placement, bottom, top, getContainer, closeIcon } = options;
+  const { duration, placement, bottom, top, getContainer, closeIcon, prefixCls } = options;
+  if (prefixCls !== undefined) {
+    defaultPrefixCls = prefixCls;
+  }
   if (duration !== undefined) {
     defaultDuration = duration;
   }
@@ -88,26 +96,20 @@ function getPlacementStyle(
   return style;
 }
 
-type NotificationInstanceProps = {
-  prefixCls: string;
-  placement?: NotificationPlacement;
-  getContainer?: () => HTMLElement;
-  top?: string;
-  bottom?: string;
-  closeIcon?: VNodeTypes;
-};
-
 function getNotificationInstance(
   {
-    prefixCls,
+    prefixCls: customizePrefixCls,
     placement = defaultPlacement,
     getContainer = defaultGetContainer,
     top,
     bottom,
     closeIcon = defaultCloseIcon,
-  }: NotificationInstanceProps,
+    appContext,
+  }: NotificationArgsProps,
   callback: (n: any) => void,
 ) {
+  const { getPrefixCls } = globalConfig();
+  const prefixCls = getPrefixCls('notification', customizePrefixCls || defaultPrefixCls);
   const cacheKey = `${prefixCls}-${placement}`;
   if (notificationInstance[cacheKey]) {
     callback(notificationInstance[cacheKey]);
@@ -115,14 +117,16 @@ function getNotificationInstance(
   }
   Notification.newInstance(
     {
-      prefixCls,
+      name: 'notification',
+      prefixCls: customizePrefixCls || defaultPrefixCls,
       class: `${prefixCls}-${placement}`,
       style: getPlacementStyle(placement, top, bottom),
+      appContext,
       getContainer,
-      closeIcon: () => {
+      closeIcon: ({ prefixCls }) => {
         const closeIconToRender = (
           <span class={`${prefixCls}-close-x`}>
-            {closeIcon || <CloseOutlined class={`${prefixCls}-close-icon`} />}
+            {renderHelper(closeIcon, {}, <CloseOutlined class={`${prefixCls}-close-icon`} />)}
           </span>
         );
         return closeIconToRender;
@@ -143,13 +147,13 @@ const typeToIcon = {
 };
 
 export interface NotificationArgsProps {
-  message: VNodeTypes;
-  description?: VNodeTypes;
-  btn?: VNodeTypes;
+  message: VueNode | (() => VueNode);
+  description?: VueNode | (() => VueNode);
+  btn?: VueNode | (() => VueNode);
   key?: string;
   onClose?: () => void;
   duration?: number | null;
-  icon?: VNodeTypes;
+  icon?: VueNode | (() => VueNode);
   placement?: NotificationPlacement;
   style?: CSSProperties;
   prefixCls?: string;
@@ -159,57 +163,46 @@ export interface NotificationArgsProps {
   top?: string;
   bottom?: string;
   getContainer?: () => HTMLElement;
-  closeIcon?: VNodeTypes;
+  closeIcon?: VueNode | (() => VueNode);
+  appContext?: any;
 }
 
 function notice(args: NotificationArgsProps) {
   const { icon, type, description, message, btn } = args;
-  const outerPrefixCls = args.prefixCls || 'ant-notification';
-  const prefixCls = `${outerPrefixCls}-notice`;
   const duration = args.duration === undefined ? defaultDuration : args.duration;
-
-  let iconNode = null;
-  if (icon) {
-    iconNode = () => <span class={`${prefixCls}-icon`}>{icon}</span>;
-  } else if (type) {
-    const Icon = typeToIcon[type];
-    iconNode = () => <Icon class={`${prefixCls}-icon ${prefixCls}-icon-${type}`} />;
-  }
-  const { placement, top, bottom, getContainer, closeIcon } = args;
-  getNotificationInstance(
-    {
-      prefixCls: outerPrefixCls,
-      placement,
-      top,
-      bottom,
-      getContainer,
-      closeIcon,
-    },
-    notification => {
-      notification.notice({
-        content: () => (
+  getNotificationInstance(args, notification => {
+    notification.notice({
+      content: ({ prefixCls }) => {
+        let iconNode = null;
+        if (icon) {
+          iconNode = () => <span class={`${prefixCls}-icon`}>{renderHelper(icon)}</span>;
+        } else if (type) {
+          const Icon = typeToIcon[type];
+          iconNode = () => <Icon class={`${prefixCls}-icon ${prefixCls}-icon-${type}`} />;
+        }
+        return (
           <div class={iconNode ? `${prefixCls}-with-icon` : ''}>
             {iconNode && iconNode()}
             <div class={`${prefixCls}-message`}>
               {!description && iconNode ? (
                 <span class={`${prefixCls}-message-single-line-auto-margin`} />
               ) : null}
-              {message}
+              {renderHelper(message)}
             </div>
-            <div class={`${prefixCls}-description`}>{description}</div>
-            {btn ? <span class={`${prefixCls}-btn`}>{btn}</span> : null}
+            <div class={`${prefixCls}-description`}>{renderHelper(description)}</div>
+            {btn ? <span class={`${prefixCls}-btn`}>{renderHelper(btn)}</span> : null}
           </div>
-        ),
-        duration,
-        closable: true,
-        onClose: args.onClose,
-        onClick: args.onClick,
-        key: args.key,
-        style: args.style || {},
-        class: args.class,
-      });
-    },
-  );
+        );
+      },
+      duration,
+      closable: true,
+      onClose: args.onClose,
+      onClick: args.onClick,
+      key: args.key,
+      style: args.style || {},
+      class: args.class,
+    });
+  });
 }
 
 const apiBase = {

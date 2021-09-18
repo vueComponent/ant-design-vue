@@ -1,3 +1,4 @@
+import type { VueNode } from './type';
 export const isFunction = val => typeof val === 'function';
 
 export const isArray = Array.isArray;
@@ -65,6 +66,17 @@ export function getDataAndAriaProps(props) {
 export function toPx(val) {
   if (typeof val === 'number') return `${val}px`;
   return val;
+}
+
+export function renderHelper<T = Record<string, any>>(
+  v: VueNode | ((arg0: T) => VueNode),
+  props: T = {} as T,
+  defaultV?: any,
+) {
+  if (typeof v === 'function') {
+    return v(props);
+  }
+  return v ?? defaultV;
 }
 
 export { isOn, cacheStringFunction, camelize, hyphenate, capitalize, resolvePropValue };

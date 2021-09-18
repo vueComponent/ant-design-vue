@@ -23,12 +23,14 @@ function getMessageInstance(args: MessageArgsProps, callback: (i: any) => void) 
   }
   Notification.newInstance(
     {
+      appContext: args.appContext,
       prefixCls: args.prefixCls || localPrefixCls,
       rootPrefixCls: args.rootPrefixCls,
       transitionName,
       style: { top: defaultTop }, // 覆盖原来的样式
       getContainer,
       maxCount,
+      name: 'message',
     },
     (instance: any) => {
       if (messageInstance) {
@@ -92,7 +94,6 @@ function notice(args: MessageArgsProps): MessageType {
         duration,
         style: args.style || {},
         class: args.class,
-        appContext: args.appContext,
         content: ({ prefixCls }) => {
           const Icon = iconMap[args.type];
           const iconNode = Icon ? <Icon /> : '';

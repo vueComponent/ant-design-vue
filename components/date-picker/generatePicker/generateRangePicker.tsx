@@ -16,18 +16,18 @@ import type { PanelMode, RangeValue } from '../../vc-picker/interface';
 import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
 import devWarning from '../../vc-util/devWarning';
 
-export default function generateRangePicker<DateType, ExtraProps extends {} = {}>(
+export default function generateRangePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
   extraProps: ExtraProps,
 ) {
   const RangePicker = defineComponent({
     name: 'ARangePicker',
-    inheritAttrs: false,
     props: {
       ...commonProps<DateType>(),
       ...rangePickerProps<DateType>(),
       ...extraProps,
     },
+    inheritAttrs: false,
     slots: [
       'suffixIcon',
       // 'clearIcon',

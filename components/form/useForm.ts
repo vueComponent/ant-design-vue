@@ -332,16 +332,20 @@ function useForm(
     return info;
   };
   let oldModel = initialModel;
+  let isFirstTime = true;
   const modelFn = (model: { [x: string]: any }) => {
     const names = [];
     rulesKeys.value.forEach(key => {
       const prop = getPropByPath(model, key, false);
       const oldProp = getPropByPath(oldModel, key, false);
-      if (!isEqual(prop.v, oldProp.v)) {
+      const isFirstValidation = isFirstTime && options?.immediate && prop.isValid;
+
+      if (isFirstValidation || !isEqual(prop.v, oldProp.v)) {
         names.push(key);
       }
     });
     validate(names, { trigger: 'change' });
+    isFirstTime = false;
     oldModel = cloneDeep(model);
   };
 

@@ -1,5 +1,5 @@
-import type { PropType, ExtractPropTypes, UnwrapRef } from 'vue';
-import { reactive, provide, defineComponent, watch } from 'vue';
+import type { PropType, ExtractPropTypes, UnwrapRef, App, Plugin, WatchStopHandle } from 'vue';
+import { reactive, provide, defineComponent, watch, ref, unref, watchEffect } from 'vue';
 import PropTypes from '../_util/vue-types';
 import defaultRenderEmpty from './renderEmpty';
 import type { RenderEmptyHandler } from './renderEmpty';
@@ -7,8 +7,8 @@ import type { Locale } from '../locale-provider';
 import LocaleProvider, { ANT_MARK } from '../locale-provider';
 import type { TransformCellTextProps } from '../table/interface';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import { withInstall } from '../_util/type';
 import type { RequiredMark } from '../form/Form';
+import type { MaybeRef } from '../_util/type';
 
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
 
@@ -56,6 +56,56 @@ export const configConsumerProps = [
   'locale',
   'pageHeader',
 ];
+
+export const defaultPrefixCls = 'ant';
+let globalPrefixCls = ref<string>();
+
+type GlobalConfigProviderProps = {
+  prefixCls?: MaybeRef<ConfigProviderProps['prefixCls']>;
+};
+
+let stopWatchEffect: WatchStopHandle;
+const setGlobalConfig = (params: GlobalConfigProviderProps) => {
+  if (stopWatchEffect) {
+    stopWatchEffect();
+  }
+  stopWatchEffect = watchEffect(() => {
+    const prefixCls = unref(params.prefixCls);
+    if (prefixCls !== undefined) {
+      globalPrefixCls.value = prefixCls;
+    }
+  });
+};
+
+function getGlobalPrefixCls() {
+  return globalPrefixCls.value || defaultPrefixCls;
+}
+
+export const globalConfig = () => ({
+  getPrefixCls: (suffixCls?: string, customizePrefixCls?: string) => {
+    if (customizePrefixCls) return customizePrefixCls;
+    return suffixCls ? `${getGlobalPrefixCls()}-${suffixCls}` : getGlobalPrefixCls();
+  },
+  getRootPrefixCls: (rootPrefixCls?: string, customizePrefixCls?: string) => {
+    // Customize rootPrefixCls is first priority
+    if (rootPrefixCls) {
+      return rootPrefixCls;
+    }
+
+    // If Global prefixCls provided, use this
+    if (globalPrefixCls.value) {
+      return globalPrefixCls.value;
+    }
+
+    // [Legacy] If customize prefixCls provided, we cut it to get the prefixCls
+    if (customizePrefixCls && customizePrefixCls.includes('-')) {
+      return customizePrefixCls.replace(/^(.*)-[^-]*$/, '$1');
+    }
+
+    // Fallback to default prefixCls
+    return getGlobalPrefixCls();
+  },
+});
 
 export const configProviderProps = {
   getTargetContainer: {
@@ -168,4 +218,12 @@ export const defaultConfigProvider: UnwrapRef<ConfigProviderProps> = reactive({
   direction: 'ltr',
 });
 
-export default withInstall(ConfigProvider);
+ConfigProvider.config = setGlobalConfig;
+ConfigProvider.install = function (app: App) {
+  app.component(ConfigProvider.name, ConfigProvider);
+};
+
+export default ConfigProvider as typeof ConfigProvider &
+  Plugin & {
+    readonly config: typeof setGlobalConfig;
+  };

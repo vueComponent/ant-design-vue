@@ -4,6 +4,13 @@ import type { ModalFuncProps } from './Modal';
 import { destroyFns } from './Modal';
 
 import Omit from 'omit.js';
+import ConfigProvider, { globalConfig } from '../config-provider';
+
+let defaultRootPrefixCls = '';
+
+function getRootPrefixCls() {
+  return defaultRootPrefixCls;
+}
 
 const confirm = (config: ModalFuncProps) => {
   const div = document.createElement('div');
@@ -52,8 +59,15 @@ const confirm = (config: ModalFuncProps) => {
       }
     }
   }
-  const Wrapper = p => {
-    return p.vIf ? <ConfirmDialog {...p}></ConfirmDialog> : null;
+  const Wrapper = (p: ModalFuncProps & { vIf: boolean }) => {
+    const { getPrefixCls } = globalConfig();
+    const rootPrefixCls = getPrefixCls(undefined, getRootPrefixCls());
+    const prefixCls = p.prefixCls || `${rootPrefixCls}-modal`;
+    return p.vIf ? (
+      <ConfigProvider prefixCls={rootPrefixCls}>
+        <ConfirmDialog {...p} prefixCls={prefixCls}></ConfirmDialog>
+      </ConfigProvider>
+    ) : null;
   };
   function render(props: ModalFuncProps) {
     const vm = createVNode(Wrapper, { ...props, vIf: true });

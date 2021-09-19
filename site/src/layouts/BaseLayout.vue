@@ -10,7 +10,7 @@
 
 <script>
 import Header from '../components/header';
-import Footer from '../components/footer';
+import Footer from './Footer.vue';
 import NProgress from 'nprogress';
 export default {
   components: {

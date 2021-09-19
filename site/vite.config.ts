@@ -11,7 +11,6 @@ import defaultVar from '../scripts/default-vars';
 export default {
   resolve: {
     alias: {
-      '@': path.join(__dirname, './src'),
       vue: 'vue/dist/vue.esm-bundler.js',
       'ant-design-vue/es': path.resolve(__dirname, '../components'),
       'ant-design-vue': path.resolve(__dirname, '../components'),

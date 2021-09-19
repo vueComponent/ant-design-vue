@@ -7,7 +7,7 @@
 </template>
 <script lang="ts">
 import { isZhCN } from '../utils/util';
-import GoogleAds from './GoogleAds.vue';
+import GoogleAds from './rice/GoogleAds.vue';
 import { inject } from 'vue';
 
 const showAd = location.host.indexOf('antdv.com') > -1;

@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import logo from '../public/logo.svg';
+import logo from '../assets/logo.svg';
 export default {
   components: {},
   beforeCreate() {

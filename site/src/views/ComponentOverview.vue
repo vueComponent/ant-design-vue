@@ -56,12 +56,12 @@
   </section>
 </template>
 <script lang="ts">
-import { GlobalConfig } from '@/App.vue';
+import { GlobalConfig } from '../App.vue';
 import { computed, defineComponent, inject, onMounted, ref } from 'vue';
 import { SearchOutlined } from '@ant-design/icons-vue';
-import { GLOBAL_CONFIG } from '@/SymbolKey';
-import useMenus from '@/hooks/useMenus';
-import { getLocalizedPathname } from '@/utils/util';
+import { GLOBAL_CONFIG } from '../SymbolKey';
+import useMenus from '../hooks/useMenus';
+import { getLocalizedPathname } from '../utils/util';
 export default defineComponent({
   name: 'ComponentOverview',
   components: {

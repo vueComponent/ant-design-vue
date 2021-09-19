@@ -33,7 +33,7 @@ import More from './More.vue';
 import Navigation from './Navigation.vue';
 import Ecosystem from './Ecosystem.vue';
 import { version } from 'ant-design-vue';
-import { isZhCN, isLocalStorageNameSupported, getLocalizedPathname } from '@/utils/util';
+import { isZhCN, isLocalStorageNameSupported, getLocalizedPathname } from '../../utils/util';
 import { useRoute } from 'vue-router';
 export default defineComponent({
   name: 'HeaderMenu',

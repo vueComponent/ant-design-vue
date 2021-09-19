@@ -152,7 +152,6 @@ export default {
       // 减少状态
       sFilters: this.getDefaultFilters(props.columns),
       sPagination: this.getDefaultPagination(this.$props),
-      pivot: undefined,
       sComponents: createComponents(this.components),
       filterDataCnt: 0,
     };
@@ -583,7 +582,7 @@ export default {
       const defaultSelection = this.store.selectionDirty ? [] : this.getDefaultSelection();
       let selectedRowKeys = this.store.selectedRowKeys.concat(defaultSelection);
       const key = this.getRecordKey(record, rowIndex);
-      const { pivot } = this.$data;
+      const { pivot } = this;
       const rows = this.getFlatCurrentPageData();
       let realIndex = rowIndex;
       if (this.$props.expandedRowRender) {
@@ -613,7 +612,7 @@ export default {
           }
         }
 
-        this.setState({ pivot: realIndex });
+        this.pivot = realIndex;
         this.store.selectionDirty = true;
         this.setSelectedRowKeys(selectedRowKeys, {
           selectWay: 'onSelectMultiple',
@@ -628,7 +627,7 @@ export default {
         } else {
           selectedRowKeys = selectedRowKeys.filter(i => key !== i);
         }
-        this.setState({ pivot: realIndex });
+        this.pivot = realIndex;
         this.store.selectionDirty = true;
         this.setSelectedRowKeys(selectedRowKeys, {
           selectWay: 'onSelect',

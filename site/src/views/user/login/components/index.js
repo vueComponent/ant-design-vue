@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import Login from './Login';
 import LoginSubmit from './LoginSubmit';
 import LoginTab from './LoginTab';

@@ -3,6 +3,3 @@ declare module '*.json' {
   export const version: string;
   export default value;
 }
-
-export * from '../plugin/docs';
-export * from '../plugin/md';

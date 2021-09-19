@@ -1,4 +1,5 @@
 import ItemMap from './map';
+// eslint-disable-next-line import/no-unresolved
 import WrapFormItem from './WrapFormItem';
 
 const LoginItem = {};

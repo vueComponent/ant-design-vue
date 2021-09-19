@@ -1,5 +1,5 @@
 import { isZhCN } from '../utils/util';
-import packageInfo from '../../package.json';
+import packageInfo from '../../../package.json';
 import logo from '../assets/logo.svg';
 import antDesignVue from '../assets/ant-design-vue.svg';
 import { SearchOutlined } from '@ant-design/icons-vue';

@@ -331,7 +331,7 @@ function generateCalendar<
     return app;
   };
 
-  return Calendar as unknown as (props: CalendarProps<DateType>) => JSX.Element;
+  return Calendar;
 }
 
 export default generateCalendar;

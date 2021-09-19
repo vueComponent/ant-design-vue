@@ -3,7 +3,7 @@ import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import warning from '../_util/warning';
 import TransButton from '../_util/transButton';
 import raf from '../_util/raf';
-import isStyleSupport from '../_util/styleChecker';
+import { isStyleSupport } from '../_util/styleChecker';
 import Editable from './Editable';
 import measure from './util';
 import PropTypes from '../_util/vue-types';

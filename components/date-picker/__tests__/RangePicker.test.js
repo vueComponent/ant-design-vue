@@ -1,8 +1,7 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect, setMockDate, resetMockDate, sleep } from '../../../tests/utils';
 import dayjs from 'dayjs';
 import DatePicker from '../';
-import { setMockDate, resetMockDate, sleep } from '../../../tests/utils';
 import { openPicker, selectCell, closePicker } from './utils';
 import focusTest from '../../../tests/shared/focusTest';
 

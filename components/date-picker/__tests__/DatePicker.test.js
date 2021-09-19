@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import dayjs from 'dayjs';
 import MockDate from 'mockdate';
 import DatePicker from '..';

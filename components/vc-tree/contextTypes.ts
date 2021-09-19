@@ -4,9 +4,7 @@
  */
 
 import type { ComputedRef, InjectionKey, PropType } from 'vue';
-import { inject } from 'vue';
-import { computed } from 'vue';
-import { defineComponent, provide } from 'vue';
+import { inject, computed, defineComponent, provide } from 'vue';
 import type { VueNode } from '../_util/type';
 import type {
   IconType,

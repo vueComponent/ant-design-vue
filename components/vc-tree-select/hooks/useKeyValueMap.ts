@@ -1,6 +1,5 @@
 import type { ComputedRef, Ref } from 'vue';
-import { ref } from 'vue';
-import { watchEffect } from 'vue';
+import { ref, watchEffect } from 'vue';
 import type { FlattenDataNode, Key, RawValueType } from '../interface';
 
 /**

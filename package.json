@@ -141,6 +141,7 @@
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.0.0",
     "eslint-plugin-html": "^6.0.0",
+    "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-markdown": "^2.0.0",
     "eslint-plugin-no-explicit-type-exports": "^0.11.10",

@@ -4,8 +4,16 @@ import type { TreeNodeRequiredProps } from './utils/treeUtil';
 import { getTreeNodeProps } from './utils/treeUtil';
 import { useInjectTreeContext } from './contextTypes';
 import type { PropType } from 'vue';
-import { computed, nextTick } from 'vue';
-import { defineComponent, onBeforeUnmount, onMounted, ref, Transition, watch } from 'vue';
+import {
+  computed,
+  nextTick,
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  Transition,
+  watch,
+} from 'vue';
 import { treeNodeProps } from './props';
 import { collapseMotion } from '../_util/transition';
 

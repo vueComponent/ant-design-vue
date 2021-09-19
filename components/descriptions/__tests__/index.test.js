@@ -3,7 +3,7 @@ import { h } from 'vue';
 import MockDate from 'mockdate';
 import Descriptions from '..';
 import { resetWarned } from '../../_util/warning';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 
 describe('Descriptions', () => {
   const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});

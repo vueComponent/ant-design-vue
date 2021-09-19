@@ -43,8 +43,7 @@ import {
   fillOptionsWithMissingValue,
 } from './utils/valueUtil';
 import type { SelectProps } from './generate';
-import { selectBaseProps } from './generate';
-import generateSelector from './generate';
+import generateSelector, { selectBaseProps } from './generate';
 import type { DefaultValueType } from './interface/generator';
 import warningProps from './utils/warningPropsUtil';
 import { defineComponent, ref } from 'vue';

@@ -1,6 +1,7 @@
 import type { ExtractPropTypes } from 'vue';
-import { toRef, watchEffect } from 'vue';
 import {
+  toRef,
+  watchEffect,
   defineComponent,
   provide,
   withDirectives,

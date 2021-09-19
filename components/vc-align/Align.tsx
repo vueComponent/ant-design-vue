@@ -1,6 +1,14 @@
 import type { PropType } from 'vue';
-import { nextTick } from 'vue';
-import { defineComponent, ref, computed, onMounted, onUpdated, watch, onUnmounted } from 'vue';
+import {
+  nextTick,
+  defineComponent,
+  ref,
+  computed,
+  onMounted,
+  onUpdated,
+  watch,
+  onUnmounted,
+} from 'vue';
 import { alignElement, alignPoint } from 'dom-align';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import { cloneElement } from '../_util/vnode';

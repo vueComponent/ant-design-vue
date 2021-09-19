@@ -37,8 +37,8 @@ import useSelectTriggerControl from './hooks/useSelectTriggerControl';
 import useCacheDisplayValue from './hooks/useCacheDisplayValue';
 import useCacheOptions from './hooks/useCacheOptions';
 import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue';
-import { getCurrentInstance } from 'vue';
 import {
+  getCurrentInstance,
   computed,
   defineComponent,
   onBeforeUnmount,

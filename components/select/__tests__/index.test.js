@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import Select from '..';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import focusTest from '../../../tests/shared/focusTest';

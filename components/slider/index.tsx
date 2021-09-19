@@ -1,13 +1,11 @@
-import type { CSSProperties, VNodeTypes } from 'vue';
-import { computed, ref } from 'vue';
-import { defineComponent } from 'vue';
+import type { CSSProperties, VNodeTypes, PropType } from 'vue';
+import { computed, ref, defineComponent } from 'vue';
 import BaseMixin from '../_util/BaseMixin';
 import VcSlider from '../vc-slider/src/Slider';
 import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
 import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
-import type { PropType } from 'vue';
 import type { TooltipPlacement } from '../tooltip/Tooltip';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import SliderTooltip from './SliderTooltip';

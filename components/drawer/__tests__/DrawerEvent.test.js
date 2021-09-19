@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import Drawer from '..';
 import Button from '../../button';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 
 const DrawerEventTester = {
   props: {

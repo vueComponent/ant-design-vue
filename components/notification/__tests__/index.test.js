@@ -1,4 +1,4 @@
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import notification from '..';
 import { StepBackwardOutlined } from '@ant-design/icons-vue';
 

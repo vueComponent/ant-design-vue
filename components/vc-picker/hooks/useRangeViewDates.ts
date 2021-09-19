@@ -3,9 +3,7 @@ import type { GenerateConfig } from '../generate';
 import { getValue, updateValues } from '../utils/miscUtil';
 import { getClosingViewDate, isSameYear, isSameMonth, isSameDecade } from '../utils/dateUtil';
 import type { Ref } from 'vue';
-import { watch } from 'vue';
-import { computed } from 'vue';
-import { ref } from 'vue';
+import { watch, computed, ref } from 'vue';
 
 function getStartEndDistance<DateType>(
   startDate: DateType,

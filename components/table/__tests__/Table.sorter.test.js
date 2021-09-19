@@ -1,6 +1,6 @@
 import * as Vue from 'vue';
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import Table from '..';
 
 describe('Table.sorter', () => {

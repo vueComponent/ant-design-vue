@@ -1,6 +1,5 @@
 import type { App, ExtractPropTypes, Plugin, PropType } from 'vue';
-import { computed, ref, watchEffect } from 'vue';
-import { defineComponent } from 'vue';
+import { computed, ref, watchEffect, defineComponent } from 'vue';
 import VcTreeSelect, {
   TreeNode,
   SHOW_ALL,

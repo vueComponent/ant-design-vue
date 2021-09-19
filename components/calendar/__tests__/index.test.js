@@ -1,11 +1,10 @@
 import dayjs from 'dayjs';
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect , sleep } from '../../../tests/utils';
 import MockDate from 'mockdate';
 import Calendar from '..';
 import Header from '../Header';
 import mountTest from '../../../tests/shared/mountTest';
-import { sleep } from '../../../tests/utils';
 import generateConfig from '../../vc-picker/generate/dayjs';
 
 describe('Calendar', () => {

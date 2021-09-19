@@ -1,6 +1,4 @@
-import { onBeforeUnmount, watch } from 'vue';
-import { onActivated } from 'vue';
-import { defineComponent, ref } from 'vue';
+import { onBeforeUnmount, watch, onActivated, defineComponent, ref } from 'vue';
 import Tooltip, { tooltipProps } from '../tooltip';
 import raf from '../_util/raf';
 

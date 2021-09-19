@@ -1,8 +1,7 @@
 import { mount } from '@vue/test-utils';
 import Transfer from '..';
 import * as Vue from 'vue';
-import { sleep } from '../../../tests/utils';
-import { asyncExpect } from '@/tests/utils';
+import { sleep, asyncExpect } from '../../../tests/utils';
 import mountTest from '../../../tests/shared/mountTest';
 
 const listCommonProps = {

@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import dayjs from 'dayjs';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import Comment from '..';
 import List from '../../list';
 import Form from '../../form';

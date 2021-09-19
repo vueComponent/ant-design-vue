@@ -1,6 +1,6 @@
 import Button from '../index';
 import { mount } from '@vue/test-utils';
-import { asyncExpect, sleep } from '@/tests/utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 
 describe('click wave effect', () => {
   async function clickButton(wrapper) {

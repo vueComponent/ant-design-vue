@@ -1,6 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import { watchEffect } from 'vue';
-import { defineComponent, ref, watch } from 'vue';
+import { watchEffect, defineComponent, ref, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import classNames from '../_util/classNames';

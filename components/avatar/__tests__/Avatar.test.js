@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import Avatar from '..';
 import useBreakpoint from '../../_util/hooks/useBreakpoint';
 

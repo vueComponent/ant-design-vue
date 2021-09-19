@@ -1,7 +1,5 @@
 import type { App, PropType, Plugin, ExtractPropTypes } from 'vue';
-import { watch } from 'vue';
-import { ref, onMounted } from 'vue';
-import { defineComponent, nextTick } from 'vue';
+import { watch, ref, onMounted, defineComponent, nextTick } from 'vue';
 import classNames from '../_util/classNames';
 import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';

@@ -1,4 +1,4 @@
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import message from '..';
 import SmileOutlined from '@ant-design/icons-vue/SmileOutlined';
 

@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import { handleGradient, sortGradient } from '../Line';
 import Progress from '..';
 import ProgressSteps from '../Steps';

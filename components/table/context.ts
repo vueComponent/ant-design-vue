@@ -1,6 +1,5 @@
 import type { ComputedRef, InjectionKey } from 'vue';
-import { computed } from 'vue';
-import { inject, provide } from 'vue';
+import { computed, inject, provide } from 'vue';
 
 export type ContextSlots = {
   emptyText?: (...args: any[]) => any;

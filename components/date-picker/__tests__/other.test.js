@@ -1,10 +1,9 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 import dayjs from 'dayjs';
 import DatePicker from '../';
 import LocaleProvider from '../../locale-provider';
 import locale from '../../locale-provider/zh_CN';
-import { sleep } from '../../../tests/utils';
 
 const { MonthPicker, WeekPicker } = DatePicker;
 

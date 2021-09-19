@@ -1,15 +1,12 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { nextTick, onUpdated, ref, watch } from 'vue';
-import { defineComponent } from 'vue';
+import { nextTick, onUpdated, ref, watch, defineComponent } from 'vue';
 import debounce from 'lodash-es/debounce';
 import FolderOpenOutlined from '@ant-design/icons-vue/FolderOpenOutlined';
 import FolderOutlined from '@ant-design/icons-vue/FolderOutlined';
 import FileOutlined from '@ant-design/icons-vue/FileOutlined';
 import classNames from '../_util/classNames';
-import type { AntdTreeNodeAttribute } from './Tree';
-import { treeProps } from './Tree';
-import type { TreeProps } from './Tree';
-import Tree from './Tree';
+import type { AntdTreeNodeAttribute, TreeProps } from './Tree';
+import Tree, { treeProps } from './Tree';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { convertDataToEntities, convertTreeToData } from '../vc-tree/utils/treeUtil';
 import type { DataNode, EventDataNode, Key } from '../vc-tree/interface';

@@ -1,10 +1,8 @@
 import type { CSSProperties } from 'vue';
-import { computed, defineComponent, ref } from 'vue';
+import { computed, defineComponent, ref, onMounted, onBeforeUnmount } from 'vue';
 import classNames from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
 import addEventListener from '../../vc-util/Dom/addEventListener';
-import { onMounted } from 'vue';
-import { onBeforeUnmount } from 'vue';
 
 export default defineComponent({
   name: 'Handle',

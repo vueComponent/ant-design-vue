@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import Badge from '../index';
 import mountTest from '../../../tests/shared/mountTest';
 
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 describe('Badge', () => {
   it('badge dot not scaling count > 9', () => {
     const badge = mount({

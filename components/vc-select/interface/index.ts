@@ -1,10 +1,9 @@
-import type * as Vue from 'vue';
-import type { VNode } from 'vue';
+import type { VNode, VNodeChild, CSSProperties } from 'vue';
 import type { Key, RawValueType } from './generator';
 
 export type RenderDOMFunc = (props: any) => HTMLElement;
 
-export type RenderNode = Vue.VNodeChild | ((props: any) => Vue.VNodeChild);
+export type RenderNode = VNodeChild | ((props: any) => VNodeChild);
 
 export type Mode = 'multiple' | 'tags' | 'combobox';
 
@@ -21,8 +20,8 @@ export interface OptionCoreData {
   value?: Key;
   title?: string;
   class?: string;
-  style?: Vue.CSSProperties;
-  label?: Vue.VNodeChild;
+  style?: CSSProperties;
+  label?: VNodeChild;
   /** @deprecated Only works when use `children` as option data */
   children?: VNode[] | JSX.Element[];
 }
@@ -34,10 +33,10 @@ export interface OptionData extends OptionCoreData {
 
 export interface OptionGroupData {
   key?: Key;
-  label?: Vue.VNodeChild;
+  label?: VNodeChild;
   options: OptionData[];
   class?: string;
-  style?: Vue.CSSProperties;
+  style?: CSSProperties;
 
   /** Save for customize data */
   [prop: string]: any; // eslint-disable-line @typescript-eslint/no-explicit-any

@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import Modal from '..';
 import mountTest from '../../../tests/shared/mountTest';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 
 const ModalTester = {
   props: ['footer', 'visible'],

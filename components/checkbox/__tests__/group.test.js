@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect, sleep } from '@/tests/utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 import Checkbox from '../index';
 import mountTest from '../../../tests/shared/mountTest';
 

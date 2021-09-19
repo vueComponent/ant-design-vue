@@ -1,7 +1,6 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 import Table from '..';
-import { sleep } from '../../../tests/utils';
 
 describe('Table.rowSelection', () => {
   const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});

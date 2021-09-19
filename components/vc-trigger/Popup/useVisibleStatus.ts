@@ -1,7 +1,5 @@
 import type { Ref } from 'vue';
-import { nextTick } from 'vue';
-import { onBeforeUnmount } from 'vue';
-import { ref, watch } from 'vue';
+import { nextTick, onBeforeUnmount, ref, watch } from 'vue';
 import raf from '../../_util/raf';
 
 /**

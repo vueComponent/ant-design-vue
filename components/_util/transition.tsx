@@ -5,9 +5,14 @@ import type {
   TransitionGroupProps,
   TransitionProps,
 } from 'vue';
-import { onUpdated } from 'vue';
-import { getCurrentInstance } from 'vue';
-import { defineComponent, nextTick, Transition as T, TransitionGroup as TG } from 'vue';
+import {
+  onUpdated,
+  getCurrentInstance,
+  defineComponent,
+  nextTick,
+  Transition as T,
+  TransitionGroup as TG,
+} from 'vue';
 
 export const getTransitionProps = (transitionName: string, opt: TransitionProps = {}) => {
   if (process.env.NODE_ENV === 'test') {

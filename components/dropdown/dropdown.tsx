@@ -1,6 +1,5 @@
 import type { ExtractPropTypes } from 'vue';
-import { computed } from 'vue';
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import RcDropdown from '../vc-dropdown';
 import DropdownButton from './dropdown-button';
 import { cloneElement } from '../_util/vnode';

@@ -1,11 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import type { DataNode } from './interface';
-import { selectBaseProps } from '../vc-select';
-import type { FilterFunc } from '../vc-select/interface/generator';
-import omit from '../_util/omit';
-import type { Key } from '../_util/type';
-import PropTypes from '../_util/vue-types';
 import type {
+  DataNode,
   ChangeEventExtra,
   DefaultValueType,
   FieldNames,
@@ -15,6 +10,11 @@ import type {
   RawValueType,
   SimpleModeConfig,
 } from './interface';
+import { selectBaseProps } from '../vc-select';
+import type { FilterFunc } from '../vc-select/interface/generator';
+import omit from '../_util/omit';
+import type { Key } from '../_util/type';
+import PropTypes from '../_util/vue-types';
 import type { CheckedStrategy } from './utils/strategyUtil';
 
 export function optionListProps<OptionsType>() {

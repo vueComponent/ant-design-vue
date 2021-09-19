@@ -1,4 +1,4 @@
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import { mount } from '@vue/test-utils';
 import KeyCode from '../../_util/KeyCode';
 import Cascader from '..';

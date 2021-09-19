@@ -1,7 +1,5 @@
 import type { PropType, ExtractPropTypes } from 'vue';
-import { watchEffect } from 'vue';
-import { ref } from 'vue';
-import { defineComponent } from 'vue';
+import { watchEffect, ref, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import VcTree, { TreeNode } from '../vc-tree';
 import PropTypes from '../_util/vue-types';

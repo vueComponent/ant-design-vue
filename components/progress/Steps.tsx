@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, PropType, VNodeChild } from 'vue';
-import { computed } from 'vue';
-import { defineComponent } from 'vue';
+import { computed, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import type { ProgressSize } from './props';
 import { progressProps } from './props';

@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, CSSProperties } from 'vue';
-import { computed, watch } from 'vue';
-import { defineComponent, onMounted, ref } from 'vue';
+import { computed, watch, defineComponent, onMounted, ref } from 'vue';
 import VcTooltip from '../vc-tooltip';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';

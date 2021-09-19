@@ -8,8 +8,7 @@ import Dropdown from '../dropdown';
 import Search from './search';
 import ListBody from './ListBody';
 import type { VNode, VNodeTypes, ExtractPropTypes, PropType } from 'vue';
-import { watchEffect, computed } from 'vue';
-import { defineComponent, ref } from 'vue';
+import { watchEffect, computed, defineComponent, ref } from 'vue';
 import type { RadioChangeEvent } from '../radio/interface';
 import type { TransferItem } from './index';
 

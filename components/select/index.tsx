@@ -1,8 +1,7 @@
 import type { App, PropType, Plugin, ExtractPropTypes } from 'vue';
 import { computed, defineComponent, ref } from 'vue';
 import classNames from '../_util/classNames';
-import { selectProps as vcSelectProps } from '../vc-select';
-import RcSelect, { Option, OptGroup } from '../vc-select';
+import RcSelect, { selectProps as vcSelectProps, Option, OptGroup } from '../vc-select';
 import type { OptionProps as OptionPropsType } from '../vc-select/Option';
 import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';

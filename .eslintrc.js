@@ -11,8 +11,13 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
   },
-  extends: ['plugin:vue/vue3-recommended', 'prettier'],
-  plugins: ['markdown', 'jest', '@typescript-eslint'],
+  extends: [
+    'plugin:vue/vue3-recommended',
+    'plugin:import/recommended',
+    'plugin:import/typescript',
+    'prettier',
+  ],
+  plugins: ['markdown', 'jest', '@typescript-eslint', 'import'],
   overrides: [
     {
       files: ['*.md'],
@@ -57,6 +62,9 @@ module.exports = {
     },
   ],
   rules: {
+    'import/no-named-as-default': 'off',
+    'import/namespace': [2, { allowComputed: true }],
+    'import/no-named-as-default-member': 'off',
     'comma-dangle': [2, 'always-multiline'],
     'no-var': 'error',
     'no-console': [2, { allow: ['warn', 'error'] }],

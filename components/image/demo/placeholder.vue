@@ -38,7 +38,7 @@ import { ref, defineComponent } from 'vue';
 export default defineComponent({
   setup() {
     return {
-      random: ref(Date.now()),
+      random: ref(),
     };
   },
 });

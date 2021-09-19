@@ -629,7 +629,10 @@ export default function generateSelector<
 
           props.onChange(outValue, isMultiple.value ? outOptions : outOptions[0]);
         }
-        mergedValue.value = outValue;
+
+        if (props.value === undefined) {
+          mergedValue.value = outValue;
+        }
       };
 
       const onInternalSelect = (

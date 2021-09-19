@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import Layout from '../layouts/index.vue';
 import Iframe from '../layouts/Iframe.vue';
 // import Iframe from '../components/iframe.jsx';

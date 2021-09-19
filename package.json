@@ -188,6 +188,7 @@
     "prettier": "^2.2.0",
     "pretty-quick": "^3.0.0",
     "prismjs": "^1.23.0",
+    "query-string": "^7.0.1",
     "querystring": "^0.2.0",
     "raw-loader": "^4.0.2",
     "reqwest": "^2.0.5",

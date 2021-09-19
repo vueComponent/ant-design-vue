@@ -76,17 +76,14 @@ describe('Table.pagination', () => {
     });
   });
 
-  it('paginate data', done => {
+  it('paginate data', async () => {
     const wrapper = mount(Table, getTableOptions());
-    Vue.nextTick(() => {
-      expect(renderedNames(wrapper)).toEqual(['Jack', 'Lucy']);
-      const pager = wrapper.findAllComponents({ name: 'Pager' });
-      pager.at(pager.length - 1).trigger('click');
-      Vue.nextTick(() => {
-        expect(renderedNames(wrapper)).toEqual(['Tom', 'Jerry']);
-        done();
-      });
-    });
+    await sleep();
+    expect(renderedNames(wrapper)).toEqual(['Jack', 'Lucy']);
+    const pager = wrapper.findAllComponents({ name: 'Pager' });
+    pager.at(pager.length - 1).trigger('click');
+    await sleep();
+    expect(renderedNames(wrapper)).toEqual(['Tom', 'Jerry']);
   });
 
   it('repaginates when pageSize change', () => {

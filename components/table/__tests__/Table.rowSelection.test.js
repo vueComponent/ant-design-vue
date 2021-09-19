@@ -260,7 +260,7 @@ describe('Table.rowSelection', () => {
     expect(handleSelectInvert).toBeCalledWith([1, 2, 3]);
   });
 
-  it('fires selection event', () => {
+  it('fires selection event', async () => {
     const handleSelectOdd = jest.fn();
     const handleSelectEven = jest.fn();
     const rowSelection = {
@@ -289,6 +289,7 @@ describe('Table.rowSelection', () => {
       },
       { sync: false },
     );
+    await sleep();
     expect(dropdownWrapper.findAll('.ant-dropdown-menu-item').length).toBe(4);
 
     dropdownWrapper.findAll('.ant-dropdown-menu-item')[2].trigger('click');
@@ -399,6 +400,7 @@ describe('Table.rowSelection', () => {
         dataSource: newData,
       }),
     );
+    await sleep();
     const pager = wrapper.findAllComponents({ name: 'Pager' });
     pager.at(pager.length - 1).trigger('click'); // switch to second page
     wrapper.findAll('input')[0].element.checked = true;

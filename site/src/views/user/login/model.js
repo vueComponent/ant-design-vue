@@ -1,5 +1,5 @@
-import router from '../../../router';
 import { parse } from 'query-string';
+import router from '../../../router';
 import { fakeAccountLogin } from './service';
 
 export default {

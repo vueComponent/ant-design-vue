@@ -15,6 +15,7 @@
   </demo-sort>
 </template>
 <script lang="ts">
+import { defineComponent } from 'vue';
 import Basic from './basic.vue';
 import CustomValidation from './custom-validation.vue';
 import DynamicFormItem from './dynamic-form-item.vue';
@@ -27,11 +28,10 @@ import UseFormNested from './useForm-nested.vue';
 import UseFormTrigger from './useForm-trigger.vue';
 import UseFormMerge from './useForm-merge.vue';
 import LableWidth from './lable-width.vue';
-
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
-export default {
+export default defineComponent({
   US,
   CN,
   components: {
@@ -48,7 +48,7 @@ export default {
     UseFormMerge,
     LableWidth,
   },
-};
+});
 </script>
 <style>
 .code-box-demo .ant-form:not(.ant-form-inline):not(.ant-form-vertical) {

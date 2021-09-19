@@ -3,10 +3,8 @@ import { mount } from '@vue/test-utils';
 import MockDate from 'mockdate';
 import dayjs from 'dayjs';
 import antd from 'ant-design-vue';
-import utc from 'dayjs/plugin/utc';
 import { sleep } from '../utils';
 
-dayjs.extend(utc);
 export default function demoTest(component, options = {}) {
   const suffix = options.suffix || 'vue';
   const files = glob.sync(`./components/${component}/demo/*.${suffix}`);
@@ -20,7 +18,7 @@ export default function demoTest(component, options = {}) {
       testMethod = test.skip;
     }
     testMethod(`renders ${file} correctly`, async () => {
-      MockDate.set(dayjs.utc('2016-11-22').valueOf());
+      MockDate.set(dayjs('2016-11-22T00:00:00Z').valueOf());
       const demo = require(`../.${file}`).default || require(`../.${file}`);
       document.body.innerHTML = '';
       const wrapper = mount(demo, { global: { plugins: [antd] }, attachTo: document.body });

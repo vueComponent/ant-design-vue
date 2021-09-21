@@ -7,6 +7,7 @@ import inputProps from './inputProps';
 import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export function fixControlledValue(value: string | number) {
   if (typeof value === 'undefined' || value === null) {
@@ -56,11 +57,13 @@ export default defineComponent({
     ...inputProps,
   },
   setup() {
+    const formItemContext = useInjectFormItemContext();
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
       removePasswordTimeout: undefined,
       input: null,
       clearableInput: null,
+      formItemContext,
     };
   },
   data() {
@@ -100,6 +103,7 @@ export default defineComponent({
     handleInputBlur(e: Event) {
       this.isFocused = false;
       this.onBlur && this.onBlur(e);
+      this.formItemContext.onFieldBlur();
     },
 
     focus() {
@@ -138,6 +142,7 @@ export default defineComponent({
       this.$emit('update:value', (e.target as HTMLInputElement).value);
       this.$emit('change', e);
       this.$emit('input', e);
+      this.formItemContext.onFieldChange();
     },
     handleReset(e: Event) {
       this.setValue('', () => {
@@ -240,6 +245,12 @@ export default defineComponent({
       prefix,
       isFocused,
     };
-    return <ClearableLabeledInput {...props} ref={this.saveClearableInput} />;
+    return (
+      <ClearableLabeledInput
+        {...props}
+        id={props.id ?? this.formItemContext.id.value}
+        ref={this.saveClearableInput}
+      />
+    );
   },
 });

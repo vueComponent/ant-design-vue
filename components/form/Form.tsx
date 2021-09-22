@@ -22,6 +22,7 @@ import type {
   RuleError,
   ValidateErrorEntity,
   ValidateOptions,
+  Callbacks,
 } from './interface';
 import { useInjectSize } from '../_util/hooks/useSize';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -76,11 +77,13 @@ export const formProps = {
   // 提交失败自动滚动到第一个错误字段
   scrollToFirstError: { type: [Boolean, Object] as PropType<boolean | Options> },
   onSubmit: PropTypes.func,
-  onFinish: PropTypes.func,
-  onFinishFailed: PropTypes.func,
   name: PropTypes.string,
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
   size: { type: String as PropType<SizeType> },
+  onValuesChange: { type: Function as PropType<Callbacks['onValuesChange']> },
+  onFieldsChange: { type: Function as PropType<Callbacks['onFieldsChange']> },
+  onFinish: { type: Function as PropType<Callbacks['onFinish']> },
+  onFinishFailed: { type: Function as PropType<Callbacks['onFinishFailed']> },
 };
 
 export type FormProps = Partial<ExtractPropTypes<typeof formProps>>;

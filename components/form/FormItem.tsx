@@ -274,8 +274,16 @@ export default defineComponent({
 
     useProvideFormItemContext({
       id: fieldId,
-      onFieldBlur,
-      onFieldChange,
+      onFieldBlur: () => {
+        if (props.autoLink) {
+          onFieldBlur();
+        }
+      },
+      onFieldChange: () => {
+        if (props.autoLink) {
+          onFieldChange();
+        }
+      },
       clearValidate,
     });
     let registered = false;

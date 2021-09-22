@@ -9,10 +9,12 @@ import { tuple, withInstall } from '../_util/type';
 import { getPropsSlot } from '../_util/props-util';
 import Omit from 'omit.js';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export const SwitchSizes = tuple('small', 'default');
 type CheckedType = boolean | string | number;
 const switchProps = {
+  id: PropTypes.string,
   prefixCls: PropTypes.string,
   size: PropTypes.oneOf(SwitchSizes),
   disabled: PropTypes.looseBool,
@@ -55,8 +57,9 @@ const Switch = defineComponent({
   inheritAttrs: false,
   props: switchProps,
   slots: ['checkedChildren', 'unCheckedChildren'],
-  emits: ['update:checked', 'mouseup', 'change', 'click', 'keydown'],
+  emits: ['update:checked', 'mouseup', 'change', 'click', 'keydown', 'blur'],
   setup(props, { attrs, slots, expose, emit }) {
+    const formItemContext = useInjectFormItemContext();
     onBeforeMount(() => {
       warning(
         !('defaultChecked' in attrs),
@@ -104,6 +107,11 @@ const Switch = defineComponent({
       }
       emit('update:checked', check);
       emit('change', check, e);
+      formItemContext.onFieldChange();
+    };
+
+    const handleBlur = () => {
+      emit('blur');
     };
 
     const handleClick = (e: MouseEvent) => {
@@ -147,10 +155,13 @@ const Switch = defineComponent({
             'defaultChecked',
             'checkedValue',
             'unCheckedValue',
+            'id',
           ])}
           {...attrs}
+          id={props.id ?? formItemContext.id.value}
           onKeydown={handleKeyDown}
           onClick={handleClick}
+          onBlur={handleBlur}
           onMouseup={handleMouseUp}
           type="button"
           role="switch"

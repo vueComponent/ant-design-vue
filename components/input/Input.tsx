@@ -178,6 +178,7 @@ export default defineComponent({
       const inputProps: any = {
         ...otherProps,
         ...$attrs,
+        id: otherProps.id ?? this.formItemContext.id.value,
         onKeydown: handleKeyDown,
         class: classNames(getInputClassName(prefixCls, size, disabled), {
           [$attrs.class as string]: $attrs.class && !addonBefore && !addonAfter,
@@ -245,12 +246,7 @@ export default defineComponent({
       prefix,
       isFocused,
     };
-    return (
-      <ClearableLabeledInput
-        {...props}
-        id={props.id ?? this.formItemContext.id.value}
-        ref={this.saveClearableInput}
-      />
-    );
+
+    return <ClearableLabeledInput {...props} ref={this.saveClearableInput} />;
   },
 });

@@ -15,7 +15,7 @@ import { commonProps, rangePickerProps } from './props';
 import type { PanelMode, RangeValue } from '../../vc-picker/interface';
 import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
 import devWarning from '../../vc-util/devWarning';
-import { useInjectFormItemContext } from 'ant-design-vue/es/form/FormItemContext';
+import { useInjectFormItemContext } from '../../form/FormItemContext';
 
 export default function generateRangePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,

@@ -11,6 +11,7 @@ import type { GenerateConfig } from '../vc-picker/generate';
 import type { PanelMode, RangeValue } from '../vc-picker/interface';
 import type { RangePickerSharedProps } from '../vc-picker/RangePicker';
 import devWarning from '../vc-util/devWarning';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export interface TimePickerLocale {
   placeholder?: string;
@@ -74,6 +75,7 @@ function createTimePicker<
     slot: ['addon', 'renderExtraFooter', 'suffixIcon', 'clearIcon'],
     emits: ['change', 'openChange', 'focus', 'blur', 'ok', 'update:value', 'update:open'],
     setup(props, { slots, expose, emit, attrs }) {
+      const formItemContext = useInjectFormItemContext();
       devWarning(
         !(slots.addon || props.addon),
         'TimePicker',
@@ -91,6 +93,7 @@ function createTimePicker<
       const onChange = (value: DateType | string, dateString: string) => {
         emit('update:value', value);
         emit('change', value, dateString);
+        formItemContext.onFieldChange();
       };
       const onOpenChange = (open: boolean) => {
         emit('update:open', open);
@@ -101,15 +104,18 @@ function createTimePicker<
       };
       const onBlur = () => {
         emit('blur');
+        formItemContext.onFieldBlur();
       };
       const onOk = (value: DateType) => {
         emit('ok', value);
       };
       return () => {
+        const { id = formItemContext.id.value, ...restProps } = props;
         return (
           <InternalTimePicker
             {...attrs}
-            {...props}
+            {...restProps}
+            id={id}
             dropdownClassName={props.popupClassName}
             mode={undefined}
             ref={pickerRef}
@@ -152,6 +158,9 @@ function createTimePicker<
     ],
     setup(props, { slots, expose, emit, attrs }) {
       const pickerRef = ref();
+
+      const formItemContext = useInjectFormItemContext();
+
       expose({
         focus: () => {
           pickerRef.value?.focus();
@@ -166,6 +175,7 @@ function createTimePicker<
       ) => {
         emit('update:value', values);
         emit('change', values, dateStrings);
+        formItemContext.onFieldChange();
       };
       const onOpenChange = (open: boolean) => {
         emit('update:open', open);
@@ -176,6 +186,7 @@ function createTimePicker<
       };
       const onBlur = () => {
         emit('blur');
+        formItemContext.onFieldBlur();
       };
       const onPanelChange = (
         values: RangeValue<string> | RangeValue<DateType>,
@@ -194,10 +205,12 @@ function createTimePicker<
         emit('calendarChange', values, dateStrings, info);
       };
       return () => {
+        const { id = formItemContext.id.value, ...restProps } = props;
         return (
           <InternalRangePicker
             {...attrs}
-            {...props}
+            {...restProps}
+            id={id}
             dropdownClassName={props.popupClassName}
             picker="time"
             mode={undefined}

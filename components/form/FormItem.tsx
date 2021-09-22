@@ -276,6 +276,7 @@ export default defineComponent({
       id: fieldId,
       onFieldBlur,
       onFieldChange,
+      clearValidate,
     });
     let registered = false;
     watch(
@@ -305,12 +306,6 @@ export default defineComponent({
     onBeforeUnmount(() => {
       formContext.removeField(eventKey);
     });
-    // const onHelpAnimEnd = (_key: string, helpShow: boolean) => {
-    //   this.helpShow = helpShow;
-    //   if (!helpShow) {
-    //     this.$forceUpdate();
-    //   }
-    // };
     const itemClassName = computed(() => ({
       [`${prefixCls.value}-item`]: true,
 
@@ -324,36 +319,6 @@ export default defineComponent({
     }));
     return () => {
       const help = props.help ?? (slots.help ? filterEmpty(slots.help()) : null);
-      // const children = flattenChildren(slots.default?.());
-      // let firstChildren = children[0];
-      // if (fieldName.value && props.autoLink && isValidElement(firstChildren)) {
-      //   const originalEvents = firstChildren.props || {};
-      //   const originalBlur = originalEvents.onBlur;
-      //   const originalChange = originalEvents.onChange;
-      //   firstChildren = cloneElement(firstChildren, {
-      //     ...(fieldId.value ? { id: fieldId.value } : undefined),
-      //     onBlur: (...args: any[]) => {
-      //       if (Array.isArray(originalChange)) {
-      //         for (let i = 0, l = originalChange.length; i < l; i++) {
-      //           originalBlur[i](...args);
-      //         }
-      //       } else if (originalBlur) {
-      //         originalBlur(...args);
-      //       }
-      //       onFieldBlur();
-      //     },
-      //     onChange: (...args: any[]) => {
-      //       if (Array.isArray(originalChange)) {
-      //         for (let i = 0, l = originalChange.length; i < l; i++) {
-      //           originalChange[i](...args);
-      //         }
-      //       } else if (originalChange) {
-      //         originalChange(...args);
-      //       }
-      //       onFieldChange();
-      //     },
-      //   });
-      // }
       return (
         <Row
           {...attrs}

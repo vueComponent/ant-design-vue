@@ -27,13 +27,12 @@ Just add the `rules` attribute for `Form` component, pass validation rules, and 
       <a-input v-model:value="formState.name" />
     </a-form-item>
     <a-form-item label="Activity zone" name="region">
-      <a-select
-        v-model:value="formState.region"
-        placeholder="please select your zone"
-        :options="option"
-      ></a-select>
+      <a-select v-model:value="formState.region" placeholder="please select your zone">
+        <a-select-option value="shanghai">Zone one</a-select-option>
+        <a-select-option value="beijing">Zone two</a-select-option>
+      </a-select>
     </a-form-item>
-    <!-- <a-form-item label="Activity time" required name="date1">
+    <a-form-item label="Activity time" required name="date1">
       <a-date-picker
         v-model:value="formState.date1"
         show-time
@@ -60,7 +59,7 @@ Just add the `rules` attribute for `Form` component, pass validation rules, and 
     </a-form-item>
     <a-form-item label="Activity form" name="desc">
       <a-textarea v-model:value="formState.desc" />
-    </a-form-item> -->
+    </a-form-item>
     <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
       <a-button type="primary" @click="onSubmit">Create</a-button>
       <a-button style="margin-left: 10px" @click="resetForm">Reset</a-button>
@@ -132,12 +131,6 @@ export default defineComponent({
       rules,
       onSubmit,
       resetForm,
-      option: ref([
-        {
-          value: 'lucy',
-          label: 'Lucy',
-        },
-      ]),
     };
   },
 });

@@ -2,7 +2,7 @@
 
 exports[`renders ./components/slider/demo/basic.vue correctly 1`] = `
 <div>
-  <div tabindex="-1" class="ant-slider">
+  <div id="test" tabindex="-1" class="ant-slider">
     <div class="ant-slider-rail"></div>
     <div class="ant-slider-track" style="left: 0%; width: 0%;"></div>
     <div class="ant-slider-step"></div>

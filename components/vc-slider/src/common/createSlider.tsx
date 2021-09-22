@@ -16,6 +16,7 @@ function noop() {}
 export default function createSlider(Component) {
   // const displayName = `ComponentEnhancer(${Component.displayName})`
   const propTypes = {
+    id: PropTypes.string,
     min: PropTypes.number,
     max: PropTypes.number,
     step: PropTypes.number,
@@ -292,8 +293,9 @@ export default function createSlider(Component) {
         railStyle,
         dotStyle,
         activeDotStyle,
+        id,
       } = this;
-      const { class: className, style, id } = this.$attrs;
+      const { class: className, style } = this.$attrs;
       const { tracks, handles } = this.renderSlider();
 
       const sliderClassName = classNames(prefixCls, className, {

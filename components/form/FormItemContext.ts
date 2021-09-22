@@ -2,9 +2,10 @@ import type { ComputedRef, InjectionKey } from 'vue';
 import { computed, inject, provide } from 'vue';
 
 export type FormItemContext = {
-  id: ComputedRef<string | number>;
+  id: ComputedRef<string>;
   onFieldBlur: () => void;
   onFieldChange: () => void;
+  clearValidate: () => void;
 };
 
 type ContextProps = FormItemContext;
@@ -20,6 +21,7 @@ export const useInjectFormItemContext = () => {
     id: computed(() => undefined),
     onFieldBlur: () => {},
     onFieldChange: () => {},
+    clearValidate: () => {},
   };
 
   // We should prevent the passing of context for children

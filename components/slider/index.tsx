@@ -10,6 +10,7 @@ import type { TooltipPlacement } from '../tooltip/Tooltip';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import SliderTooltip from './SliderTooltip';
 import classNames from '../_util/classNames';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export type SliderValue = number | [number, number];
 
@@ -39,6 +40,7 @@ type Value = [number, number] | number;
 
 const defaultTipFormatter = (value: number) => (typeof value === 'number' ? value.toString() : '');
 export const sliderProps = () => ({
+  id: String,
   prefixCls: String,
   tooltipPrefixCls: String,
   range: { type: [Boolean, Object] as PropType<boolean | SliderRange>, default: undefined },
@@ -78,11 +80,12 @@ const Slider = defineComponent({
   props: {
     ...sliderProps(),
   },
-  emits: ['update:value', 'change', 'afterChange'],
+  emits: ['update:value', 'change', 'afterChange', 'blur'],
   slots: ['mark'],
   setup(props, { attrs, slots, emit, expose }) {
     const { prefixCls, rootPrefixCls, direction, getPopupContainer, configProvider } =
       useConfigInject('slider', props);
+    const formItemContext = useInjectFormItemContext();
     const sliderRef = ref();
     const visibles = ref<Visibles>({});
     const toggleTooltipVisible = (index: number, visible: boolean) => {
@@ -107,6 +110,10 @@ const Slider = defineComponent({
     const handleChange = (val: SliderValue) => {
       emit('update:value', val);
       emit('change', val);
+      formItemContext.onFieldChange();
+    };
+    const handleBlur = () => {
+      emit('blur');
     };
     expose({
       focus,
@@ -140,7 +147,12 @@ const Slider = defineComponent({
       );
     };
     return () => {
-      const { tooltipPrefixCls: customizeTooltipPrefixCls, range, ...restProps } = props;
+      const {
+        tooltipPrefixCls: customizeTooltipPrefixCls,
+        range,
+        id = formItemContext.id.value,
+        ...restProps
+      } = props;
       const tooltipPrefixCls = configProvider.getPrefixCls('tooltip', customizeTooltipPrefixCls);
       const cls = classNames(attrs.class, {
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
@@ -181,6 +193,7 @@ const Slider = defineComponent({
       return (
         <VcSlider
           {...restProps}
+          id={id}
           step={restProps.step!}
           class={cls}
           ref={ref}
@@ -193,6 +206,7 @@ const Slider = defineComponent({
           }
           prefixCls={prefixCls.value}
           onChange={handleChange}
+          onBlur={handleBlur}
           v-slots={{ mark: slots.mark }}
         />
       );

@@ -7,6 +7,7 @@ import VcMentions from '../vc-mentions';
 import { mentionsProps as baseMentionsProps } from '../vc-mentions/src/mentionsProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { flattenChildren, getOptionProps } from '../_util/props-util';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 const { Option } = VcMentions;
 
@@ -75,6 +76,7 @@ const mentionsProps = {
   },
   notFoundContent: PropTypes.any,
   defaultValue: String,
+  id: String,
 };
 
 export type MentionsProps = Partial<ExtractPropTypes<typeof mentionsProps>>;
@@ -92,6 +94,7 @@ const Mentions = defineComponent({
     const focused = ref(false);
     const vcMentions = ref(null);
     const value = ref(props.value ?? props.defaultValue ?? '');
+    const formItemContext = useInjectFormItemContext();
     watch(
       () => props.value,
       val => {
@@ -106,6 +109,7 @@ const Mentions = defineComponent({
     const handleBlur = (e: FocusEvent) => {
       focused.value = false;
       emit('blur', e);
+      formItemContext.onFieldBlur();
     };
 
     const handleSelect = (...args: [MentionsOptionProps, string]) => {
@@ -119,6 +123,7 @@ const Mentions = defineComponent({
       }
       emit('update:value', val);
       emit('change', val);
+      formItemContext.onFieldChange();
     };
 
     const getNotFoundContent = () => {
@@ -159,7 +164,13 @@ const Mentions = defineComponent({
     });
 
     return () => {
-      const { disabled, getPopupContainer, rows = 1, ...restProps } = props;
+      const {
+        disabled,
+        getPopupContainer,
+        rows = 1,
+        id = formItemContext.id.value,
+        ...restProps
+      } = props;
       const { class: className, ...otherAttrs } = attrs;
       const otherProps = omit(restProps, ['defaultValue', 'onUpdate:value', 'prefixCls']);
 
@@ -186,6 +197,7 @@ const Mentions = defineComponent({
         onBlur: handleBlur,
         ref: vcMentions,
         value: value.value,
+        id,
       };
       return (
         <VcMentions

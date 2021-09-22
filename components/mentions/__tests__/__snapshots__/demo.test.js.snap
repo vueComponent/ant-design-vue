@@ -21,7 +21,7 @@ exports[`renders ./components/mentions/demo/form.vue correctly 1`] = `
     <div class="ant-col ant-col-18 ant-form-item-control">
       <div class="ant-form-item-control-input">
         <div class="ant-form-item-control-input-content">
-          <div class="ant-mentions"><textarea rows="1"></textarea>
+          <div class="ant-mentions"><textarea rows="1" id="coders"></textarea>
             <!---->
           </div>
         </div>
@@ -38,7 +38,7 @@ exports[`renders ./components/mentions/demo/form.vue correctly 1`] = `
     <div class="ant-col ant-col-18 ant-form-item-control">
       <div class="ant-form-item-control-input">
         <div class="ant-form-item-control-input-content">
-          <div class="ant-mentions"><textarea rows="3" placeholder="You can use @ to ref user here"></textarea>
+          <div class="ant-mentions"><textarea rows="3" placeholder="You can use @ to ref user here" id="bio"></textarea>
             <!---->
           </div>
         </div>

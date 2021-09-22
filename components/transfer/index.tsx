@@ -13,6 +13,7 @@ import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { TransferListBodyProps } from './ListBody';
 import type { PaginationType } from './interface';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export type { TransferListProps } from './list';
 export type { TransferOperationProps } from './operation';
@@ -64,6 +65,7 @@ export interface TransferLocale {
 }
 
 export const transferProps = {
+  id: String,
   prefixCls: String,
   dataSource: { type: Array as PropType<TransferItem[]>, default: [] },
   disabled: { type: Boolean, default: undefined },
@@ -118,6 +120,7 @@ const Transfer = defineComponent({
     const sourceSelectedKeys = ref([]);
     const targetSelectedKeys = ref([]);
 
+    const formItemContext = useInjectFormItemContext();
     watch(
       () => props.selectedKeys,
       () => {
@@ -164,6 +167,7 @@ const Transfer = defineComponent({
       emit('update:targetKeys', newTargetKeys);
       handleSelectChange(oppositeDirection, []);
       emit('change', newTargetKeys, direction, newMoveKeys);
+      formItemContext.onFieldChange();
     };
 
     const moveToLeft = () => {
@@ -312,6 +316,7 @@ const Transfer = defineComponent({
         selectAllLabels = [],
         oneWay,
         pagination,
+        id = formItemContext.id.value,
       } = props;
       const { class: className, style } = attrs;
 
@@ -335,7 +340,7 @@ const Transfer = defineComponent({
       const rightTitle =
         (titles && titles[1]) ?? slots.rightTitle?.() ?? (locale.titles || ['', ''])[1];
       return (
-        <div class={cls} style={style}>
+        <div class={cls} style={style} id={id}>
           <List
             key="leftList"
             prefixCls={`${prefixCls.value}-list`}

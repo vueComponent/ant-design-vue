@@ -14,7 +14,7 @@ import classNames from '../../_util/classNames';
 import { commonProps, datePickerProps } from './props';
 
 import devWarning from '../../vc-util/devWarning';
-import { useInjectFormItemContext } from 'ant-design-vue/es/form/FormItemContext';
+import { useInjectFormItemContext } from '../../form/FormItemContext';
 
 export default function generateSinglePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,

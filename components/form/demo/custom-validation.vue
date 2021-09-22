@@ -44,8 +44,9 @@ See more advanced usage at [async-validator](https://github.com/yiminghe/async-v
   </a-form>
 </template>
 <script lang="ts">
-import { RuleObject, ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
-import { defineComponent, reactive, ref, UnwrapRef } from 'vue';
+import { RuleObject } from 'ant-design-vue/es/form';
+import { defineComponent, reactive, ref } from 'vue';
+import type { UnwrapRef } from 'vue';
 interface FormState {
   pass: string;
   checkPass: string;
@@ -59,7 +60,7 @@ export default defineComponent({
       checkPass: '',
       age: undefined,
     });
-    let checkAge = async (rule: RuleObject, value: number) => {
+    let checkAge = async (_rule: RuleObject, value: number) => {
       if (!value) {
         return Promise.reject('Please input the age');
       }
@@ -73,7 +74,7 @@ export default defineComponent({
         }
       }
     };
-    let validatePass = async (rule: RuleObject, value: string) => {
+    let validatePass = async (_rule: RuleObject, value: string) => {
       if (value === '') {
         return Promise.reject('Please input the password');
       } else {
@@ -83,7 +84,7 @@ export default defineComponent({
         return Promise.resolve();
       }
     };
-    let validatePass2 = async (rule: RuleObject, value: string) => {
+    let validatePass2 = async (_rule: RuleObject, value: string) => {
       if (value === '') {
         return Promise.reject('Please input the password again');
       } else if (value !== formState.pass) {
@@ -105,7 +106,7 @@ export default defineComponent({
     const handleFinish = (values: FormState) => {
       console.log(values, formState);
     };
-    const handleFinishFailed = (errors: ValidateErrorEntity<FormState>) => {
+    const handleFinishFailed = errors => {
       console.log(errors);
     };
     const resetForm = () => {

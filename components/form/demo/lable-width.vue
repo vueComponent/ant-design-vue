@@ -45,7 +45,9 @@ Set label width by labelCol.style
   </a-form>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRaw, UnwrapRef } from 'vue';
+import { defineComponent, reactive, toRaw } from 'vue';
+import type { UnwrapRef } from 'vue';
+
 interface FormState {
   name: string;
   delivery: boolean;

@@ -1,5 +1,5 @@
 // debugger tsx
-import Demo from '../../components/form/demo/validation.vue';
+import Demo from '../../components/form/demo/customized-form-controls.vue';
 
 export default {
   render() {

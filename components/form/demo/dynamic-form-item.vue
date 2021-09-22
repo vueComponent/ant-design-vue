@@ -55,8 +55,8 @@ Add or remove form items dynamically.
 
 <script lang="ts">
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons-vue';
-import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
-import { defineComponent, reactive, ref, UnwrapRef } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
+import type { UnwrapRef } from 'vue';
 
 interface Domain {
   value: string;
@@ -94,7 +94,7 @@ export default defineComponent({
         .then(() => {
           console.log('values', dynamicValidateForm.domains);
         })
-        .catch((error: ValidateErrorEntity<any>) => {
+        .catch(error => {
           console.log('error', error);
         });
     };

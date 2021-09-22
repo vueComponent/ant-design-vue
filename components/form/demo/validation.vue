@@ -67,9 +67,10 @@ Just add the `rules` attribute for `Form` component, pass validation rules, and 
   </a-form>
 </template>
 <script lang="ts">
-import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
 import { Dayjs } from 'dayjs';
-import { defineComponent, reactive, ref, toRaw, UnwrapRef } from 'vue';
+import { defineComponent, reactive, ref, toRaw } from 'vue';
+import type { UnwrapRef } from 'vue';
+
 interface FormState {
   name: string;
   region: string | undefined;
@@ -115,7 +116,7 @@ export default defineComponent({
         .then(() => {
           console.log('values', formState, toRaw(formState));
         })
-        .catch((error: ValidateErrorEntity<FormState>) => {
+        .catch(error => {
           console.log('error', error);
         });
     };

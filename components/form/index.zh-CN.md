@@ -48,7 +48,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 ### 事件
 
 | 事件名称 | 说明 | 回调参数 | 版本 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | submit | 数据验证成功后回调事件 | Function(e:Event) | ｜ |
 | validate | 任一表单项被校验后触发 | 被校验的表单项 name 值，校验是否通过，错误消息（如果存在） |
 | finish | 提交表单且数据验证成功后回调事件 | function(values) | - | 2.0.0 |
@@ -57,7 +57,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 ### 方法
 
 | 方法名 | 说明 | 参数 |
-| --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | validate | 触发表单验证, 同 validateFields | (nameList?: [NamePath](#NamePath)[]) => Promise |
 | validateFields | 触发表单验证 | (nameList?: [NamePath](#NamePath)[]) => Promise |
 | scrollToField | 滚动到对应字段位置 | (name: [NamePath](#NamePath), options: [[ScrollOptions](https://github.com/stipsan/scroll-into-view-if-needed/tree/ece40bd9143f48caf4b99503425ecb16b0ad8249#options)]) => void |  |  |
@@ -85,7 +85,59 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 | validateFirst | 当某一规则校验不通过时，是否停止剩下的规则的校验。 | boolean | false | 2.0.0 |
 | validateTrigger | 设置字段校验的时机 | string \| string[] | `change` | 2.0.0 |
 
-#### 注意：
+### 注意：
+
+#### 3.x
+
+自 3.0 版本以后，Form.Item 不再劫持子元素，而是通过 provider / inject 依赖注入的方式进行自动校验，这种方式可以提高组件性能，子元素也不会限制个数，同样子元素也可以是进一步封装的高级组件。你可以参考[自定义表单控件示例](#components-form-demo-customized-form-controls)
+
+但它同样会有一些缺点：
+
+1、自定义组件如果希望 Form.Item 进行校验展示，你需要 `const {id, onFieldChange, onFieldBlur} = useFormItemContext` 注入，并调用相应的方法。
+
+2、一个 Form.Item 只能收集一个表单项的数据，如果有多个表单项，会导致收集错乱，例如，
+
+```html
+<a-form-item>
+  <a-input name="a"></a-input>
+  <a-input name="b"></a-input>
+</a-form-item>
+```
+
+如上 Form.Item 并不知道需要收集 `name="a"` 还是 `name=`b``，你可以通过如下两种方式去解决此类问题：
+
+第一种，使用多个 `a-form-item`:
+
+```html
+<a-form-item>
+  <a-input name="a"></a-input>
+  <a-form-item><a-input name="b"></a-input></a-form-item>
+</a-form-item>
+```
+
+第二种，使用自定义组件包裹，并在自定义组件中调用 `useFormItemContext`
+
+```html
+<script>
+  import { Form } from 'ant-desing-vue';
+  export default {
+    setup() {
+      const formItemContext = Form.useFormItemContext();
+    },
+  };
+</script>
+```
+
+```html
+<a-form-item>
+  <custom-com>
+    <a-input name="a"></a-input>
+    <a-input name="b"></a-input>
+  </custom-com>
+</a-form-item>
+```
+
+#### 2.x
 
 Form.Item 会对唯一子元素进行劫持，并监听 `blur` 和 `change` 事件，来达到自动校验的目的，所以请确保表单域没有其它元素包裹。如果有多个子元素，将只会监听第一个子元素的变化。
 
@@ -130,13 +182,11 @@ Form.Item 会对唯一子元素进行劫持，并监听 `blur` 和 `change` 事�
 
 2.2 以下版本需要需要 @ant-design-vue/use 库单独提供，不建议继续使用，你应该尽快升级到 2.2+ 版本
 
-
 ```ts
 import { Form } from 'ant-design-vue';
 const useForm = Form.useForm;
 
 useForm(modelRef, ruleRef, [options]);
-
 ```
 
 参数说明：
@@ -173,5 +223,5 @@ function useForm(
   ) => Promise<RuleError[]>;
   mergeValidateInfo: (items: ValidateInfo | ValidateInfo[]) => ValidateInfo;
   clearValidate: (names?: namesType) => void;
-}
+};
 ```

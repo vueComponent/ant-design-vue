@@ -61,7 +61,9 @@ Basic Form data control. Includes layout, initial values, validation and submit.
 </template>
 <script lang="ts">
 import { Dayjs } from 'dayjs';
-import { defineComponent, reactive, toRaw, UnwrapRef } from 'vue';
+import { defineComponent, reactive, toRaw } from 'vue';
+import type { UnwrapRef } from 'vue';
+
 interface FormState {
   name: string;
   region: string | undefined;

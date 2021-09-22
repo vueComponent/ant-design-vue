@@ -36,7 +36,8 @@ There are three layout for form: `horizontal`, `vertical`, `inline`.
   </a-form>
 </template>
 <script lang="ts">
-import { computed, defineComponent, reactive, UnwrapRef } from 'vue';
+import { computed, defineComponent, reactive } from 'vue';
+import type { UnwrapRef } from 'vue';
 
 interface FormState {
   layout: 'horizontal' | 'vertical' | 'inline';

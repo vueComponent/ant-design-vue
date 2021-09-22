@@ -48,7 +48,8 @@ Table with editable rows.
 </template>
 <script lang="ts">
 import { cloneDeep } from 'lodash-es';
-import { defineComponent, reactive, ref, UnwrapRef } from 'vue';
+import { defineComponent, reactive, ref } from 'vue';
+import type { UnwrapRef } from 'vue';
 
 const columns = [
   {

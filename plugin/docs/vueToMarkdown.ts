@@ -36,6 +36,7 @@ ${style}
     debug(`[render] ${file} in ${Date.now() - start}ms.`);
     const result = {
       vueSrc: newContent?.trim(),
+      ignore: !docs,
     };
     cache.set(src, result);
     return result;

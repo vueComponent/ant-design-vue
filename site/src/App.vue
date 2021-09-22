@@ -5,7 +5,8 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, provide, Ref, watch, ref } from 'vue';
+import { computed, defineComponent, provide, watch, ref } from 'vue';
+import type { Ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import useMediaQuery from './hooks/useMediaQuery';

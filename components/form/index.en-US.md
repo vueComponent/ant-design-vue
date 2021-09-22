@@ -25,7 +25,6 @@ You can align the controls of a `form` using the `layout` prop：
 
 A form consists of one or more form fields whose type includes input, textarea, checkbox, radio, select, tag, and more. A form field is defined using `<a-form-item />`.
 
-
 ## API
 
 ### Form
@@ -48,7 +47,7 @@ A form consists of one or more form fields whose type includes input, textarea, 
 ### Events
 
 | Events Name | Description | Arguments | Version |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | submit | Defines a function will be called if form data validation is successful. | Function(e:Event) |  |
 | validate | triggers after a form item is validated | name of the form item being validated, whether validation is passed and the error message if not |  |
 | finish | Trigger after submitting the form and verifying data successfully | function(values) | - | 2.0.0 |
@@ -57,7 +56,7 @@ A form consists of one or more form fields whose type includes input, textarea, 
 ### Methods
 
 | Method | Description | Parameters |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | validate | Validate fields, it is same as validateFields | (nameList?: [NamePath](#NamePath)[]) => Promise |  |
 | validateFields | Validate fields | (nameList?: [NamePath](#NamePath)[]) => Promise |  |
 | scrollToField | Scroll to field position | (name: [NamePath](#NamePath), options: [[ScrollOptions](https://github.com/stipsan/scroll-into-view-if-needed/tree/ece40bd9143f48caf4b99503425ecb16b0ad8249#options)]) => void |  |
@@ -85,11 +84,65 @@ A form consists of one or more form fields whose type includes input, textarea, 
 | validateFirst | Whether stop validate on first rule of error for this field. | boolean | false |  |
 | validateTrigger | When to validate the value of children node | string \| string[] | `change` |  |
 
-#### Note
+### Note
 
-Form.Item will hijack the only child element and listen to the `blur` and`change` events to achieve the purpose of automatic verification, so please ensure that the form field is not wrapped by other elements. If there are multiple child elements, only the first child element will be monitored for changes.
+#### 3.x
 
-If the form field to be monitored does not meet the conditions for automatic monitoring, you can associate the form field as follows:
+Since version 3.0, Form.Item no longer hijacks child elements, but automatically checks through provider/inject dependency injection. This method can improve component performance, and there is no limit to the number of child elements. The same is true for child elements. It can be a high-level component that is further encapsulated.
+
+You can reference [Customized Form Controls](#components-form-demo-customized-form-controls)
+
+But it also has some disadvantages:
+
+1. If the custom component wants Form.Item to be verified and displayed, you need to inject `const {id, onFieldChange, onFieldBlur} = useFormItemContext` and call the corresponding method.
+
+2. A Form.Item can only collect the data of one form item. If there are multiple form items, it will cause collection confusion, for example,
+
+```html
+<a-form-item>
+  <a-input name="a"></a-input>
+  <a-input name="b"></a-input>
+</a-form-item>
+```
+
+As above Form.Item does not know whether to collect `name="a"` or `name=`b``, you can solve this kind of problem in the following two ways:
+
+The first is to use multiple `a-form-item`:
+
+```html
+<a-form-item>
+  <a-input name="a"></a-input>
+  <a-form-item><a-input name="b"></a-input></a-form-item>
+</a-form-item>
+```
+
+The second way is to wrap it with a custom component and call `useFormItemContext` in the custom component
+
+```html
+<script>
+  import { Form } from 'ant-desing-vue';
+  export default {
+    setup() {
+      const formItemContext = Form.useFormItemContext();
+    },
+  };
+</script>
+```
+
+```html
+<a-form-item>
+  <custom-com>
+    <a-input name="a"></a-input>
+    <a-input name="b"></a-input>
+  </custom-com>
+</a-form-item>
+```
+
+#### 2.x
+
+Form.Item hijacks the only child element and listens to the `blur` and `change` events to achieve the purpose of automatic verification, so please make sure that the form field is not wrapped by other elements. If there are multiple child elements, only the change of the first child element will be monitored.
+
+If the form field to be monitored does not meet the conditions of automatic monitoring, you can associate the form field as follows:
 
 ```html
 <a-form-item name="form.name" ref="name" :autoLink="false">
@@ -124,20 +177,17 @@ If the form field to be monitored does not meet the conditions for automatic mon
 
 See more advanced usage at [async-validator](https://github.com/yiminghe/async-validator).
 
-
 ### useForm (v2.2)
 
 `useForm` is a method that can run independently of the Form component. It uses the Vue response mechanism to monitor and verify data, and returns the verification result. You can bind the verification result to any component, `Form. Item` only displays the results.
 
 The following versions need to be provided separately by `@ant-design-vue/use` library, it is not recommended to continue to use, you should upgrade to version 2.2+ as soon as possible
 
-
 ```ts
 import { Form } from 'ant-design-vue';
 const useForm = Form.useForm;
 
 useForm(modelRef, ruleRef, [options]);
-
 ```
 
 参数说明：
@@ -174,5 +224,5 @@ function useForm(
   ) => Promise<RuleError[]>;
   mergeValidateInfo: (items: ValidateInfo | ValidateInfo[]) => ValidateInfo;
   clearValidate: (names?: namesType) => void;
-}
+};
 ```

@@ -45,8 +45,10 @@ Inline login form is often used in navigation bar.
 </template>
 <script lang="ts">
 import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
-import { ValidateErrorEntity } from 'ant-design-vue/es/form/interface';
-import { defineComponent, reactive, UnwrapRef } from 'vue';
+import { defineComponent, reactive } from 'vue';
+import type { UnwrapRef } from 'vue';
+import type { FormProps } from 'ant-design-vue';
+
 interface FormState {
   user: string;
   password: string;
@@ -61,10 +63,10 @@ export default defineComponent({
       user: '',
       password: '',
     });
-    const handleFinish = (values: FormState) => {
+    const handleFinish: FormProps['onFinish'] = values => {
       console.log(values, formState);
     };
-    const handleFinishFailed = (errors: ValidateErrorEntity<FormState>) => {
+    const handleFinishFailed: FormProps['onFinishFailed'] = errors => {
       console.log(errors);
     };
     return {

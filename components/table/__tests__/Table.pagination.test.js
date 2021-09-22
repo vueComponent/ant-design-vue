@@ -25,7 +25,7 @@ describe('Table.pagination', () => {
       props: {
         columns,
         dataSource: data,
-        pagination,
+        pagination: { ...pagination },
         ...props,
       },
       sync: false,

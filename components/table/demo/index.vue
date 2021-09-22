@@ -57,8 +57,9 @@ import MultipleSorter from './multiple-sorter.vue';
 import Summary from './summary.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
+import { defineComponent } from '@vue/runtime-core';
 
-export default {
+export default defineComponent({
   CN,
   US,
   components: {
@@ -88,5 +89,5 @@ export default {
     MultipleSorter,
     Summary,
   },
-};
+});
 </script>

@@ -25,6 +25,7 @@ When there is a need for autocomplete functionality.
 | backfill | backfill selected item the input when using keyboard | boolean | false |  |
 | #default (for customize input element) | customize input element | HTMLInputElement / HTMLTextAreaElement | `<Input />` |  |
 | options | Data source for autocomplete | slot \| [DataSourceItemType](https://github.com/vueComponent/ant-design-vue/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |  |
+| option | custom render option by slot | v-slot:option="{value, label, [disabled, key, title]}" | - | 3.0 |
 | dropdownMenuStyle | additional style applied to dropdown menu | object |  | 1.5.0 |
 | defaultActiveFirstOption | Whether active first option by default | boolean | true |  |
 | disabled | Whether disabled select | boolean | false |  |
@@ -38,7 +39,7 @@ When there is a need for autocomplete functionality.
 ### events
 
 | Events Name | Description | Arguments | Version |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | change | Called when select an option or input value change, or value of input is changed | function(value) |  |
 | blur | Called when leaving the component. | function() |  |
 | focus | Called when entering the component | function() |  |

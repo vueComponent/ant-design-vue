@@ -26,28 +26,23 @@ Lookup-Patterns - Certain Category.
       size="large"
       style="width: 100%"
       option-label-prop="value"
+      :options="dataSource"
     >
-      <template #dataSource>
-        <a-select-opt-group v-for="group in dataSource" :key="group.title">
-          <template #label>
-            <span>
-              {{ group.title }}
-              <a
-                style="float: right"
-                href="https://www.google.com/search?q=antd"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                more
-              </a>
-            </span>
-          </template>
-          <a-select-option v-for="opt in group.children" :key="opt.title" :value="opt.title">
-            {{ opt.title }}
-            <span class="certain-search-item-count">{{ opt.count }} people</span>
-          </a-select-option>
-        </a-select-opt-group>
-        <a-select-option key="all" disabled class="show-all">
+      <template #option="item">
+        <template v-if="item.options">
+          <span>
+            {{ item.value }}
+            <a
+              style="float: right"
+              href="https://www.google.com/search?q=antd"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              more
+            </a>
+          </span>
+        </template>
+        <template v-else-if="item.value === 'all'">
           <a
             href="https://www.google.com/search?q=ant-design-vue"
             target="_blank"
@@ -55,7 +50,11 @@ Lookup-Patterns - Certain Category.
           >
             View all results
           </a>
-        </a-select-option>
+        </template>
+        <template v-else>
+          {{ item.title }}
+          <span class="certain-search-item-count">{{ item.count }} people</span>
+        </template>
       </template>
       <a-input placeholder="input here">
         <template #suffix><search-outlined class="certain-category-icon" /></template>
@@ -69,39 +68,42 @@ import { SearchOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 const dataSource = [
   {
-    title: 'Libraries',
-    children: [
+    value: 'Libraries',
+    options: [
       {
-        title: 'AntDesign',
+        value: 'AntDesign',
         count: 10000,
       },
       {
-        title: 'AntDesign UI',
+        value: 'AntDesign UI',
         count: 10600,
       },
     ],
   },
   {
-    title: 'Solutions',
-    children: [
+    value: 'Solutions',
+    options: [
       {
-        title: 'AntDesign UI FAQ',
+        value: 'AntDesign UI FAQ',
         count: 60100,
       },
       {
-        title: 'AntDesign FAQ',
+        value: 'AntDesign FAQ',
         count: 30010,
       },
     ],
   },
   {
-    title: 'Articles',
-    children: [
+    value: 'Articles',
+    options: [
       {
-        title: 'AntDesign design language',
+        value: 'AntDesign design language',
         count: 100000,
       },
     ],
+  },
+  {
+    value: 'all',
   },
 ];
 export default defineComponent({

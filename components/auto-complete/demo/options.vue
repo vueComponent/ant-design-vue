@@ -8,11 +8,11 @@ title:
 
 ## zh-CN
 
-也可以直接传递 #dataSource 的Option。
+3.0 以上版本，可以传递 `v-slot:option` 来自定义 Option。
 
 ## en-US
 
-You could pass `#dataSource` as children of `AutoComplete`, instead of using `dataSource`.
+For 3.0+, You could pass `v-slot:option` to custom option.
 </docs>
 
 <template>
@@ -20,12 +20,12 @@ You could pass `#dataSource` as children of `AutoComplete`, instead of using `da
     v-model:value="value"
     style="width: 200px"
     placeholder="input here"
+    :options="options"
     @search="handleSearch"
   >
-    <template #dataSource>
-      <a-select-option v-for="email in result" :key="email">
-        {{ email }}
-      </a-select-option>
+    <template #option="{ value: val }">
+      {{ val.split('@')[0] }} @
+      <span style="font-weight: bold">{{ val.split('@')[1] }}</span>
     </template>
   </a-auto-complete>
 </template>
@@ -36,20 +36,20 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
     const value = ref('');
-    const result = ref<string[]>([]);
+    const options = ref<{ value: string }[]>([]);
     const handleSearch = (val: string) => {
-      let res: string[];
+      let res: { value: string }[];
       if (!val || val.indexOf('@') >= 0) {
         res = [];
       } else {
-        res = ['gmail.com', '163.com', 'qq.com'].map(domain => `${val}@${domain}`);
+        res = ['gmail.com', '163.com', 'qq.com'].map(domain => ({ value: `${val}@${domain}` }));
       }
-      result.value = res;
+      options.value = res;
     };
 
     return {
       value,
-      result,
+      options,
       handleSearch,
     };
   },

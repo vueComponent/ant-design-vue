@@ -23,21 +23,20 @@ Lookup-Patterns - Uncertain Category.
       size="large"
       style="width: 100%"
       option-label-prop="title"
+      :options="dataSource"
       @select="onSelect"
       @search="handleSearch"
     >
-      <template #dataSource>
-        <a-select-option v-for="item in dataSource" :key="item.category" :title="item.category">
-          Found {{ item.query }} on
-          <a
-            :href="`https://s.taobao.com/search?q=${item.query}`"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {{ item.category }}
-          </a>
-          <span class="global-search-item-count">{{ item.count }} results</span>
-        </a-select-option>
+      <template #option="item">
+        Found {{ item.query }} on
+        <a
+          :href="`https://s.taobao.com/search?q=${item.query}`"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ item.category }}
+        </a>
+        <span class="global-search-item-count">{{ item.count }} results</span>
       </template>
       <a-input-search size="large" placeholder="input here" enter-button></a-input-search>
     </a-auto-complete>
@@ -49,6 +48,7 @@ import { defineComponent, ref } from 'vue';
 interface Option {
   query: string;
   category: string;
+  value: string;
   count: number;
 }
 export default defineComponent({
@@ -67,9 +67,10 @@ export default defineComponent({
       return new Array(getRandomInt(5))
         .join('.')
         .split('.')
-        .map((item, idx) => ({
+        .map((_item, idx) => ({
           query,
           category: `${query}${idx}`,
+          value: `${query}${idx}`,
           count: getRandomInt(200, 100),
         }));
     };

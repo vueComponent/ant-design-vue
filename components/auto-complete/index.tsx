@@ -1,7 +1,6 @@
 import type { App, Plugin, VNode, ExtractPropTypes } from 'vue';
 import { defineComponent, inject, provide } from 'vue';
 import Select, { selectProps } from '../select';
-import Input from '../input';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
 import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
@@ -44,6 +43,7 @@ const AutoComplete = defineComponent({
     defaultActiveFirstOption: PropTypes.looseBool.def(true),
   },
   emits: ['change', 'select', 'focus', 'blur'],
+  slots: ['option'],
   Option,
   OptGroup,
   setup(props, { slots }) {
@@ -70,7 +70,7 @@ const AutoComplete = defineComponent({
     },
     getInputElement() {
       const children = getSlot(this);
-      const element = children.length ? children[0] : <Input lazy={false} />;
+      const element = children.length ? children[0] : undefined;
       return element;
     },
 
@@ -144,7 +144,11 @@ const AutoComplete = defineComponent({
       class: cls,
       ref: this.saveSelect,
     };
-    return <Select {...selectProps}>{optionChildren}</Select>;
+    return (
+      <Select {...selectProps} v-slots={{ option: this.$slots.option }}>
+        {optionChildren}
+      </Select>
+    );
   },
 });
 

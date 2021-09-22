@@ -44,7 +44,7 @@ See more advanced usage at [async-validator](https://github.com/yiminghe/async-v
   </a-form>
 </template>
 <script lang="ts">
-import { RuleObject } from 'ant-design-vue/es/form';
+import type { RuleObject } from 'ant-design-vue/es/form';
 import { defineComponent, reactive, ref } from 'vue';
 import type { UnwrapRef } from 'vue';
 interface FormState {

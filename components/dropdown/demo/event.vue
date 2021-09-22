@@ -32,13 +32,13 @@ An event will be triggered when you click menu items, in which you can make diff
   </a-dropdown>
 </template>
 <script lang="ts">
-import { defineComponent, VNodeChild } from 'vue';
+import { defineComponent } from 'vue';
 import { DownOutlined } from '@ant-design/icons-vue';
 
 interface MenuInfo {
   key: string;
   keyPath: string[];
-  item: VNodeChild;
+  item: any;
   domEvent: MouseEvent;
 }
 

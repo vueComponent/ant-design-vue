@@ -32,13 +32,13 @@ The default is to close the menu when you click on menu items, this feature can 
   </a-dropdown>
 </template>
 <script lang="ts">
-import { defineComponent, ref, VNodeChild } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { DownOutlined } from '@ant-design/icons-vue';
 
 interface MenuInfo {
   key: string;
   keyPath: string[];
-  item: VNodeChild;
+  item: any;
   domEvent: MouseEvent;
 }
 export default defineComponent({

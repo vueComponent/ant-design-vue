@@ -61,7 +61,7 @@ Submenus open as pop-ups.
   </a-menu>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, toRefs, VNodeChild } from 'vue';
+import { defineComponent, reactive, toRefs } from 'vue';
 import {
   MailOutlined,
   CalendarOutlined,
@@ -72,7 +72,7 @@ import {
 interface MenuInfo {
   key: string;
   keyPath: string[];
-  item: VNodeChild;
+  item: any;
   domEvent: MouseEvent;
 }
 export default defineComponent({

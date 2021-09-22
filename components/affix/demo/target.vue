@@ -26,11 +26,11 @@ Set a `target` for 'Affix', which is listen to scroll event of target element (d
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, VNode } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   setup() {
-    const containerRef = ref<VNode>();
+    const containerRef = ref();
     return {
       containerRef,
     };

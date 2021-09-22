@@ -126,8 +126,6 @@ exports[`renders ./components/button/demo/ghost.vue correctly 1`] = `
     <!----><span>Dashed</span>
   </button><button class="ant-btn ant-btn-background-ghost ant-btn-dangerous" type="button">
     <!----><span>Danger</span>
-  </button><button class="ant-btn ant-btn-link" type="button">
-    <!----><span>Link</span>
   </button></div>
 `;
 

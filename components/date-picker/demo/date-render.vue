@@ -18,8 +18,8 @@ We can customize the rendering of date cells in the calendar by providing a `dat
 <template>
   <a-space direction="vertical" :size="12">
     <a-date-picker v-model:value="value1">
-      <template #dateRender="{ current, today }">
-        <div class="ant-picker-cell-inner" :style="getCurrentStyle(current, today)">
+      <template #dateRender="{ current }">
+        <div class="ant-picker-cell-inner" :style="getCurrentStyle(current)">
           {{ current.date() }}
         </div>
       </template>
@@ -35,7 +35,8 @@ We can customize the rendering of date cells in the calendar by providing a `dat
 </template>
 <script lang="ts">
 import type { Dayjs } from 'dayjs';
-import { CSSProperties, defineComponent, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
+import type { CSSProperties } from 'vue';
 export default defineComponent({
   setup() {
     const getCurrentStyle = (current: Dayjs) => {
@@ -57,4 +58,3 @@ export default defineComponent({
   },
 });
 </script>
-

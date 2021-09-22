@@ -26,13 +26,13 @@ The tree structure can be populated using `treeData` property. This is a quick a
   >
     <template #title="{ key, value: val, title }">
       <span v-if="key === '0-0-1'" style="color: #08c">Child Node1 {{ val }}</span>
-      <template v-else> {{ title }} </template>
+      <template v-else>{{ title }}</template>
     </template>
   </a-tree-select>
 </template>
 
 <script lang="ts">
-import { TreeSelectProps } from 'ant-design-vue';
+import type { TreeSelectProps } from 'ant-design-vue';
 import { defineComponent, ref, watch } from 'vue';
 
 const treeData: TreeSelectProps['treeData'] = [

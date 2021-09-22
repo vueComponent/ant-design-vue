@@ -52,8 +52,8 @@ Customize render list with Tree component.
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';
-import { TreeProps } from 'ant-design-vue';
-import { AntTreeNodeCheckedEvent } from 'ant-design-vue/es/tree';
+import type { TreeProps } from 'ant-design-vue';
+import type { AntTreeNodeCheckedEvent } from 'ant-design-vue/es/tree';
 const tData: TreeProps['treeData'] = [
   { key: '0-0', title: '0-0' },
   {

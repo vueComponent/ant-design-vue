@@ -45,7 +45,7 @@ Using `OptGroup` or `options.options` to group the options.
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { UserOutlined } from '@ant-design/icons-vue';
-import { SelectTypes } from 'ant-design-vue/es/select';
+import type { SelectProps } from 'ant-design-vue';
 export default defineComponent({
   components: {
     UserOutlined,
@@ -55,7 +55,7 @@ export default defineComponent({
       console.log(`selected ${value}`);
     };
 
-    const options = ref<SelectTypes['options']>([
+    const options = ref<SelectProps['options']>([
       {
         label: 'Manager',
         options: [

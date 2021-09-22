@@ -27,11 +27,10 @@ Multiple selection usage.
     multiple
     tree-default-expand-all
     :tree-data="treeData"
-  >
-  </a-tree-select>
+  ></a-tree-select>
 </template>
 <script lang="ts">
-import { TreeSelectProps } from 'ant-design-vue';
+import type { TreeSelectProps } from 'ant-design-vue';
 import { defineComponent, ref, watch } from 'vue';
 
 export default defineComponent({

@@ -33,7 +33,7 @@ Replace the title,key and children fields in treeNode with the corresponding fie
 </template>
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
-import { TreeProps } from 'ant-design-vue';
+import type { TreeProps } from 'ant-design-vue';
 
 export default defineComponent({
   setup() {

@@ -31,7 +31,7 @@
 </template>
 <script lang="ts">
 import { SmileOutlined } from '@ant-design/icons-vue';
-import { TreeSelectProps } from 'ant-design-vue';
+import type { TreeSelectProps } from 'ant-design-vue';
 import { defineComponent, ref, watch } from 'vue';
 
 export default defineComponent({

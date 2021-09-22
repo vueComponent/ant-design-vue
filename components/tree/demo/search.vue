@@ -39,7 +39,7 @@ Searchable Tree.
 
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
-import { TreeProps } from 'ant-design-vue';
+import type { TreeProps } from 'ant-design-vue';
 
 const x = 3;
 const y = 2;
@@ -82,7 +82,10 @@ const generateList = (data: TreeProps['treeData']) => {
 };
 generateList(genData);
 
-const getParentKey = (key: string, tree: TreeProps['treeData']): string | number | undefined => {
+const getParentKey = (
+  key: string | number,
+  tree: TreeProps['treeData'],
+): string | number | undefined => {
   let parentKey;
   for (let i = 0; i < tree.length; i++) {
     const node = tree[i];
@@ -98,7 +101,7 @@ const getParentKey = (key: string, tree: TreeProps['treeData']): string | number
 };
 export default defineComponent({
   setup() {
-    const expandedKeys = ref<string[]>([]);
+    const expandedKeys = ref<(string | number)[]>([]);
     const searchValue = ref<string>('');
     const autoExpandParent = ref<boolean>(true);
     const gData = ref<TreeProps['treeData']>(genData);

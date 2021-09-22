@@ -33,7 +33,7 @@ Basic Usage
 </template>
 <script lang="ts">
 import { SmileOutlined, MehOutlined } from '@ant-design/icons-vue';
-import { SelectTypes } from 'ant-design-vue/es/select';
+import type { SelectProps } from 'ant-design-vue';
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
@@ -46,7 +46,7 @@ export default defineComponent({
       console.log(`selected ${value}`);
     };
 
-    const options1 = ref<SelectTypes['options']>([
+    const options1 = ref<SelectProps['options']>([
       {
         value: 'jack',
         label: 'Jack',
@@ -65,7 +65,7 @@ export default defineComponent({
         label: 'Yiminghe',
       },
     ]);
-    const options2 = ref<SelectTypes['options']>([
+    const options2 = ref<SelectProps['options']>([
       {
         value: 'lucy',
         label: 'Lucy',

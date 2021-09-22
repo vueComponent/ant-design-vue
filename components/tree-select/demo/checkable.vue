@@ -27,7 +27,8 @@ Multiple and checkable.
   />
 </template>
 <script lang="ts">
-import { TreeSelectProps, TreeSelect } from 'ant-design-vue';
+import { TreeSelect } from 'ant-design-vue';
+import type { TreeSelectProps } from 'ant-design-vue';
 import { defineComponent, ref, watch } from 'vue';
 const SHOW_PARENT = TreeSelect.SHOW_PARENT;
 

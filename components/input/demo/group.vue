@@ -97,7 +97,7 @@ Note: You don't need `Col` to control the width in the `compact` mode.
       </a-select>
       <a-auto-complete
         v-model:value="value16"
-        :data-source="dataSource"
+        :options="[{ value: 'text 1' }, { value: 'text 2' }]"
         style="width: 200px"
         placeholder="Email"
       />
@@ -118,7 +118,7 @@ Note: You don't need `Col` to control the width in the `compact` mode.
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue';
+import { defineComponent, ref } from 'vue';
 
 const options = [
   {
@@ -174,14 +174,6 @@ export default defineComponent({
     const value16 = ref<string>('');
     const value17 = ref<string>('Home');
     const value18 = ref<string[]>([]);
-    const dataSource = ref<string[]>([]);
-
-    watch(value16, val => {
-      dataSource.value =
-        !val || val.indexOf('@') >= 0
-          ? []
-          : [`${val}@gmail.com`, `${val}@163.com`, `${val}@qq.com`];
-    });
 
     return {
       value1,
@@ -203,7 +195,6 @@ export default defineComponent({
       value17,
       value18,
       options,
-      dataSource,
     };
   },
 });

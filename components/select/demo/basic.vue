@@ -47,18 +47,17 @@ Basic Usage
       :options="options1"
       @focus="focus"
       @change="handleChange"
-    >
-    </a-select>
+    ></a-select>
     <a-select v-model:value="value2" style="width: 120px" disabled :options="options2"></a-select>
     <a-select v-model:value="value3" style="width: 120px" loading :options="options3"></a-select>
   </a-space>
 </template>
 <script lang="ts">
-import { SelectTypes } from 'ant-design-vue/es/select';
+import type { SelectProps } from 'ant-design-vue';
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
-    const options1 = ref<SelectTypes['options']>([
+    const options1 = ref<SelectProps['options']>([
       {
         value: 'jack',
         label: 'Jack',
@@ -77,13 +76,13 @@ export default defineComponent({
         label: 'Yiminghe',
       },
     ]);
-    const options2 = ref<SelectTypes['options']>([
+    const options2 = ref<SelectProps['options']>([
       {
         value: 'lucy',
         label: 'Lucy',
       },
     ]);
-    const options3 = ref<SelectTypes['options']>([
+    const options3 = ref<SelectProps['options']>([
       {
         value: 'lucy',
         label: 'Lucy',

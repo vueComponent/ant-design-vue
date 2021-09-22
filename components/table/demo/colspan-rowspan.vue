@@ -29,7 +29,7 @@ Table cell supports `colSpan` and `rowSpan` that set in render return object. Wh
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { TableColumnType } from 'ant-design-vue';
+import type { TableColumnType } from 'ant-design-vue';
 // In the fifth row, other columns are merged into first column
 // by setting it's colSpan to be 0
 const renderContent = ({ index }: any) => {

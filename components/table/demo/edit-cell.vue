@@ -45,7 +45,8 @@ Table with editable cells.
   </a-table>
 </template>
 <script lang="ts">
-import { computed, defineComponent, reactive, Ref, ref, UnwrapRef } from 'vue';
+import { computed, defineComponent, reactive, ref } from 'vue';
+import type { Ref, UnwrapRef } from 'vue';
 import { CheckOutlined, EditOutlined } from '@ant-design/icons-vue';
 import { cloneDeep } from 'lodash-es';
 

@@ -26,15 +26,14 @@ Search the options while expanded.
     @focus="handleFocus"
     @blur="handleBlur"
     @change="handleChange"
-  >
-  </a-select>
+  ></a-select>
 </template>
 <script lang="ts">
-import { SelectTypes } from 'ant-design-vue/es/select';
+import type { SelectProps } from 'ant-design-vue';
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
-    const options = ref<SelectTypes['options']>([
+    const options = ref<SelectProps['options']>([
       { value: 'jack', label: 'Jack' },
       { value: 'lucy', label: 'Lucy' },
       { value: 'tom', label: 'Tom' },
@@ -62,4 +61,3 @@ export default defineComponent({
   },
 });
 </script>
-

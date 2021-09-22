@@ -25,11 +25,10 @@ The label of the selected item will be packed as an object for passing to the on
     style="width: 120px"
     :options="options"
     @change="handleChange"
-  >
-  </a-select>
+  ></a-select>
 </template>
 <script lang="ts">
-import { SelectTypes } from 'ant-design-vue/es/select';
+import type { SelectProps } from 'ant-design-vue';
 import { defineComponent, ref } from 'vue';
 
 interface Value {
@@ -39,7 +38,7 @@ interface Value {
 
 export default defineComponent({
   setup() {
-    const options = ref<SelectTypes['options']>([
+    const options = ref<SelectProps['options']>([
       {
         value: 'jack',
         label: 'Jack (100)',

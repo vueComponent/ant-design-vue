@@ -18,6 +18,7 @@ export interface DataNode {
   class?: string;
   style?: CSSProperties;
   slots?: Record<string, string>;
+  [key: string]: any;
 }
 
 export interface EventDataNode extends DataNode {

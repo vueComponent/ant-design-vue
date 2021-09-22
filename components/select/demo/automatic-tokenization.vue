@@ -29,10 +29,10 @@ Try to copy `Lucy,Jack` to the input. Only available in tags and multiple mode.
 </template>
 <script lang="ts">
 import { defineComponent, ref, watch } from 'vue';
-import { SelectTypes } from 'ant-design-vue/es/select';
+import type { SelectProps } from 'ant-design-vue';
 export default defineComponent({
   setup() {
-    const options = ref<SelectTypes['options']>([
+    const options = ref<SelectProps['options']>([
       {
         value: 'a1',
         label: 'a1',

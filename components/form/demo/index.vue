@@ -8,6 +8,7 @@
     <CustomValidation />
     <DynamicFormItem />
     <NestedForm />
+    <CustomizedFormControls />
     <UseFormBasic />
     <UseFormNested />
     <UseFormTrigger />
@@ -28,6 +29,7 @@ import UseFormNested from './useForm-nested.vue';
 import UseFormTrigger from './useForm-trigger.vue';
 import UseFormMerge from './useForm-merge.vue';
 import LableWidth from './lable-width.vue';
+import CustomizedFormControls from './customized-form-controls.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -47,6 +49,7 @@ export default defineComponent({
     UseFormTrigger,
     UseFormMerge,
     LableWidth,
+    CustomizedFormControls,
   },
 });
 </script>

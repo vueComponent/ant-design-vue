@@ -158,7 +158,6 @@ export default defineComponent({
         typeof nextValue === 'number' &&
         nextValue > max
       ) {
-        this.__emit('update:value', max);
         this.__emit('change', max);
       }
       if (
@@ -167,7 +166,6 @@ export default defineComponent({
         typeof nextValue === 'number' &&
         nextValue < min
       ) {
-        this.__emit('update:value', min);
         this.__emit('change', min);
       }
     }
@@ -277,7 +275,6 @@ export default defineComponent({
       this.rawInput = this.parser(this.getValueFromEvent(e));
       this.setState({ inputValue: this.rawInput });
       const num = this.toNumber(this.rawInput); // valid number or invalid string
-      this.__emit('update:value', num);
       this.__emit('change', num);
     },
     onFocus(...args) {
@@ -374,7 +371,6 @@ export default defineComponent({
         );
       }
       if (changed) {
-        this.__emit('update:value', newValue);
         this.__emit('change', newValue);
       }
       return newValue;

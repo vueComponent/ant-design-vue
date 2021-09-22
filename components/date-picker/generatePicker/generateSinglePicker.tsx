@@ -14,6 +14,7 @@ import classNames from '../../_util/classNames';
 import { commonProps, datePickerProps } from './props';
 
 import devWarning from '../../vc-util/devWarning';
+import { useInjectFormItemContext } from '../../form/FormItemContext';
 
 export default function generateSinglePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
@@ -51,6 +52,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
         'update:open',
       ],
       setup(props, { slots, expose, attrs, emit }) {
+        const formItemContext = useInjectFormItemContext();
         devWarning(
           !(props.monthCellContentRender || slots.monthCellContentRender),
           'DatePicker',
@@ -91,6 +93,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
           const value = maybeToString(date);
           emit('update:value', value);
           emit('change', value, dateString);
+          formItemContext.onFieldChange();
         };
         const onOpenChange = (open: boolean) => {
           emit('update:open', open);
@@ -101,6 +104,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
         };
         const onBlur = () => {
           emit('blur');
+          formItemContext.onFieldBlur();
         };
         const onPanelChange = (date: DateType, mode: PanelMode | null) => {
           const value = maybeToString(date);
@@ -157,6 +161,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               (props as any).monthCellContentRender ||
               slots.monthCellContentRender,
             clearIcon = slots.clearIcon?.(),
+            id = formItemContext.id.value,
             ...restProps
           } = p;
           const showTime = p.showTime === '' ? true : p.showTime;
@@ -198,6 +203,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
               {...restProps}
               {...additionalOverrideProps}
+              id={id}
               picker={mergedPicker}
               value={value.value}
               defaultValue={defaultValue.value}

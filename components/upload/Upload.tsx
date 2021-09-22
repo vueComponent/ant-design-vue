@@ -14,6 +14,7 @@ import { UploadProps } from './interface';
 import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './utils';
 import { defineComponent, inject } from 'vue';
 import { getDataAndAriaProps } from '../_util/util';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export type UploadFileStatus = 'error' | 'success' | 'done' | 'uploading' | 'removed';
 export interface UploadFile<T = any> {
@@ -54,10 +55,12 @@ export default defineComponent({
     supportServerRender: true,
   }),
   setup() {
+    const formItemContext = useInjectFormItemContext();
     return {
       upload: null,
       progressTimer: null,
       configProvider: inject('configProvider', defaultConfigProvider),
+      formItemContext,
     };
   },
   // recentUploadStatus: boolean | PromiseLike<any>;
@@ -190,6 +193,7 @@ export default defineComponent({
       }
       this.$emit('update:fileList', info.fileList);
       this.$emit('change', info);
+      this.formItemContext.onFieldChange();
     },
     onFileDrop(e) {
       this.setState({
@@ -276,6 +280,7 @@ export default defineComponent({
 
     const vcUploadProps = {
       ...this.$props,
+      id: this.$props.id ?? this.formItemContext.id.value,
       prefixCls,
       beforeUpload: this.reBeforeUpload,
       onStart: this.onStart,

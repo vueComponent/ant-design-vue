@@ -20,6 +20,7 @@ import renderSwitcherIcon from '../tree/utils/iconUtil';
 import type { AntTreeNodeProps } from '../tree/Tree';
 import { warning } from '../vc-util/warning';
 import { flattenChildren } from '../_util/props-util';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 const getTransitionName = (rootPrefixCls: string, motion: string, transitionName?: string) => {
   if (transitionName !== undefined) {
@@ -92,6 +93,8 @@ const TreeSelect = defineComponent({
         '`replaceFields` is deprecated, please use fieldNames instead',
       );
     });
+
+    const formItemContext = useInjectFormItemContext();
     const {
       configProvider,
       prefixCls,
@@ -131,6 +134,7 @@ const TreeSelect = defineComponent({
     const handleChange = (...args: any[]) => {
       emit('update:value', args[0]);
       emit('change', ...args);
+      formItemContext.onFieldChange();
     };
     const handleTreeExpand = (...args: any[]) => {
       emit('update:treeExpandedKeys', args[0]);
@@ -139,6 +143,10 @@ const TreeSelect = defineComponent({
     const handleSearch = (...args: any[]) => {
       emit('update:searchValue', args[0]);
       emit('search', ...args);
+    };
+    const handleBlur = () => {
+      emit('blur');
+      formItemContext.onFieldBlur();
     };
     return () => {
       const {
@@ -154,6 +162,7 @@ const TreeSelect = defineComponent({
         treeLine,
         switcherIcon = slots.switcherIcon?.(),
         fieldNames = props.replaceFields,
+        id = formItemContext.id.value,
       } = props;
       // ===================== Icons =====================
       const { suffixIcon, removeIcon, clearIcon } = getIcons(
@@ -202,6 +211,7 @@ const TreeSelect = defineComponent({
           virtual={virtual.value}
           dropdownMatchSelectWidth={dropdownMatchSelectWidth.value}
           {...selectProps}
+          id={id}
           fieldNames={fieldNames}
           ref={treeSelectRef}
           prefixCls={prefixCls.value}
@@ -223,6 +233,7 @@ const TreeSelect = defineComponent({
           choiceTransitionName={getTransitionName(rootPrefixCls, '', choiceTransitionName)}
           transitionName={getTransitionName(rootPrefixCls, 'slide-up', transitionName)}
           onChange={handleChange}
+          onBlur={handleBlur}
           onSearch={handleSearch}
           onTreeExpand={handleTreeExpand}
           v-slots={{

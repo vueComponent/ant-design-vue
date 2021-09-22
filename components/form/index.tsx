@@ -2,6 +2,7 @@ import type { App, Plugin } from 'vue';
 import Form, { formProps } from './Form';
 import FormItem, { formItemProps } from './FormItem';
 import useForm from './useForm';
+import { useInjectFormItemContext } from './FormItemContext';
 
 export type { FormProps } from './Form';
 export type { FormItemProps } from './FormItem';
@@ -13,10 +14,11 @@ Form.install = function (app: App) {
   return app;
 };
 
-export { FormItem, formItemProps, formProps, useForm };
+export { FormItem, formItemProps, formProps, useForm, useInjectFormItemContext };
 
 export default Form as typeof Form &
   Plugin & {
     readonly Item: typeof Form.Item;
     readonly useForm: typeof useForm;
+    readonly useInjectFormItemContext: typeof useInjectFormItemContext;
   };

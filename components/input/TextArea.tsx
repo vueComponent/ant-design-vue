@@ -7,6 +7,7 @@ import { defaultConfigProvider } from '../config-provider';
 import { fixControlledValue, resolveOnChange } from './Input';
 import classNames from '../_util/classNames';
 import PropTypes, { withUndefined } from '../_util/vue-types';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 const TextAreaProps = {
   ...inputProps,
@@ -24,10 +25,12 @@ export default defineComponent({
     ...TextAreaProps,
   },
   setup() {
+    const formItemContext = useInjectFormItemContext();
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
       resizableTextArea: null,
       clearableInput: null,
+      formItemContext,
     };
   },
   data() {
@@ -71,6 +74,7 @@ export default defineComponent({
       this.$emit('update:value', (e.target as any).value);
       this.$emit('change', e);
       this.$emit('input', e);
+      this.formItemContext.onFieldChange();
     },
     handleChange(e: Event) {
       const { value, composing, isComposing } = e.target as any;
@@ -103,6 +107,10 @@ export default defineComponent({
       });
       resolveOnChange(this.resizableTextArea.textArea, e, this.triggerChange);
     },
+    handleBlur(e: Event) {
+      this.$emit('blur', e);
+      this.formItemContext.onFieldBlur();
+    },
 
     renderTextArea(prefixCls: string) {
       const props = getOptionProps(this);
@@ -118,7 +126,13 @@ export default defineComponent({
         onChange: this.handleChange,
         onKeydown: this.handleKeyDown,
       };
-      return <ResizableTextArea {...resizeProps} ref={this.saveTextArea} />;
+      return (
+        <ResizableTextArea
+          {...resizeProps}
+          id={resizeProps.id ?? this.formItemContext.id.value}
+          ref={this.saveTextArea}
+        />
+      );
     },
   },
   render() {

@@ -8,6 +8,7 @@ import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import omit from '../_util/omit';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 type RawValue = string | number;
 
@@ -49,7 +50,7 @@ const Select = defineComponent({
   inheritAttrs: false,
   props: selectProps(),
   SECRET_COMBOBOX_MODE_DO_NOT_USE: 'SECRET_COMBOBOX_MODE_DO_NOT_USE',
-  emits: ['change', 'update:value'],
+  emits: ['change', 'update:value', 'blur'],
   slots: [
     'notFoundContent',
     'suffixIcon',
@@ -61,7 +62,7 @@ const Select = defineComponent({
   ],
   setup(props, { attrs, emit, slots, expose }) {
     const selectRef = ref();
-
+    const formItemContext = useInjectFormItemContext();
     const focus = () => {
       if (selectRef.value) {
         selectRef.value.focus();
@@ -99,6 +100,11 @@ const Select = defineComponent({
     const triggerChange = (...args: any[]) => {
       emit('update:value', args[0]);
       emit('change', ...args);
+      formItemContext.onFieldChange();
+    };
+    const handleBlur = (e: InputEvent) => {
+      emit('blur', e);
+      formItemContext.onFieldBlur();
     };
     expose({
       blur,
@@ -113,6 +119,7 @@ const Select = defineComponent({
         dropdownClassName,
         virtual,
         dropdownMatchSelectWidth,
+        id = formItemContext.id.value,
       } = props;
 
       const { renderEmpty, getPopupContainer: getContextPopupContainer } = configProvider;
@@ -175,6 +182,8 @@ const Select = defineComponent({
           getPopupContainer={getPopupContainer || getContextPopupContainer}
           dropdownClassName={rcSelectRtlDropDownClassName}
           onChange={triggerChange}
+          onBlur={handleBlur}
+          id={id}
           dropdownRender={selectProps.dropdownRender || slots.dropdownRender}
           v-slots={{ option: slots.option }}
         >

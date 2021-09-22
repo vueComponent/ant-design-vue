@@ -15,6 +15,7 @@ import { commonProps, rangePickerProps } from './props';
 import type { PanelMode, RangeValue } from '../../vc-picker/interface';
 import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
 import devWarning from '../../vc-util/devWarning';
+import { useInjectFormItemContext } from '../../form/FormItemContext';
 
 export default function generateRangePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
@@ -52,6 +53,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
       'blur',
     ],
     setup(props, { expose, slots, attrs, emit }) {
+      const formItemContext = useInjectFormItemContext();
       devWarning(
         !attrs.getCalendarContainer,
         'DatePicker',
@@ -86,6 +88,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
         const values = maybeToStrings(dates);
         emit('update:value', values);
         emit('change', values, dateStrings);
+        formItemContext.onFieldChange();
       };
       const onOpenChange = (open: boolean) => {
         emit('update:open', open);
@@ -96,6 +99,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
       };
       const onBlur = () => {
         emit('blur');
+        formItemContext.onFieldBlur();
       };
       const onPanelChange = (dates: RangeValue<DateType>, modes: [PanelMode, PanelMode]) => {
         const values = maybeToStrings(dates);
@@ -154,6 +158,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
           renderExtraFooter = slots.renderExtraFooter,
           separator = slots.separator?.(),
           clearIcon = slots.clearIcon?.(),
+          id = formItemContext.id.value,
           ...restProps
         } = p;
         const { format, showTime } = p as any;
@@ -187,6 +192,7 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
             transitionName={transitionName || `${rootPrefixCls.value}-slide-up`}
             {...restProps}
             {...additionalOverrideProps}
+            id={id}
             value={value.value}
             defaultValue={defaultValue.value}
             defaultPickerValue={defaultPickerValue.value}

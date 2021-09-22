@@ -4,9 +4,8 @@ import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import Row from '../grid/Row';
 import type { ColProps } from '../grid/Col';
-import { isValidElement, flattenChildren, filterEmpty } from '../_util/props-util';
+import { filterEmpty } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
-import { cloneElement } from '../_util/vnode';
 import { validateRules as validateRulesUtil } from './utils/validateUtil';
 import { getNamePath } from './utils/valueUtil';
 import { toArray } from './utils/typeUtil';
@@ -19,6 +18,7 @@ import { useInjectForm } from './context';
 import FormItemLabel from './FormItemLabel';
 import FormItemInput from './FormItemInput';
 import type { ValidationRule } from './Form';
+import { useProvideFormItemContext } from './FormItemContext';
 
 const ValidateStatuses = tuple('success', 'warning', 'error', 'validating', '');
 export type ValidateStatus = typeof ValidateStatuses[number];
@@ -271,6 +271,13 @@ export default defineComponent({
       clearValidate,
       resetField,
     });
+
+    useProvideFormItemContext({
+      id: fieldId,
+      onFieldBlur,
+      onFieldChange,
+      clearValidate,
+    });
     let registered = false;
     watch(
       fieldName,
@@ -299,12 +306,6 @@ export default defineComponent({
     onBeforeUnmount(() => {
       formContext.removeField(eventKey);
     });
-    // const onHelpAnimEnd = (_key: string, helpShow: boolean) => {
-    //   this.helpShow = helpShow;
-    //   if (!helpShow) {
-    //     this.$forceUpdate();
-    //   }
-    // };
     const itemClassName = computed(() => ({
       [`${prefixCls.value}-item`]: true,
 
@@ -318,36 +319,6 @@ export default defineComponent({
     }));
     return () => {
       const help = props.help ?? (slots.help ? filterEmpty(slots.help()) : null);
-      const children = flattenChildren(slots.default?.());
-      let firstChildren = children[0];
-      if (fieldName.value && props.autoLink && isValidElement(firstChildren)) {
-        const originalEvents = firstChildren.props || {};
-        const originalBlur = originalEvents.onBlur;
-        const originalChange = originalEvents.onChange;
-        firstChildren = cloneElement(firstChildren, {
-          ...(fieldId.value ? { id: fieldId.value } : undefined),
-          onBlur: (...args: any[]) => {
-            if (Array.isArray(originalChange)) {
-              for (let i = 0, l = originalChange.length; i < l; i++) {
-                originalBlur[i](...args);
-              }
-            } else if (originalBlur) {
-              originalBlur(...args);
-            }
-            onFieldBlur();
-          },
-          onChange: (...args: any[]) => {
-            if (Array.isArray(originalChange)) {
-              for (let i = 0, l = originalChange.length; i < l; i++) {
-                originalChange[i](...args);
-              }
-            } else if (originalChange) {
-              originalChange(...args);
-            }
-            onFieldChange();
-          },
-        });
-      }
       return (
         <Row
           {...attrs}
@@ -357,32 +328,37 @@ export default defineComponent({
             attrs.class,
           ]}
           key="row"
-        >
-          {/* Label */}
-          <FormItemLabel
-            {...props}
-            htmlFor={fieldId.value}
-            required={isRequired.value}
-            requiredMark={formContext.requiredMark.value}
-            prefixCls={prefixCls.value}
-            onClick={onLabelClick}
-            label={props.label ?? slots.label?.()}
-          />
-          {/* Input Group */}
-          <FormItemInput
-            {...props}
-            errors={help !== undefined && help !== null ? toArray(help) : errors.value}
-            prefixCls={prefixCls.value}
-            status={validateState.value}
-            onDomErrorVisibleChange={(v: boolean) => (domErrorVisible.value = v)}
-            validateStatus={validateState.value}
-            ref={inputRef}
-            help={help}
-            extra={props.extra ?? slots.extra?.()}
-          >
-            {[firstChildren, children.slice(1)]}
-          </FormItemInput>
-        </Row>
+          v-slots={{
+            default: () => (
+              <>
+                {/* Label */}
+                <FormItemLabel
+                  {...props}
+                  htmlFor={fieldId.value}
+                  required={isRequired.value}
+                  requiredMark={formContext.requiredMark.value}
+                  prefixCls={prefixCls.value}
+                  onClick={onLabelClick}
+                  label={props.label ?? slots.label?.()}
+                />
+                {/* Input Group */}
+                <FormItemInput
+                  {...props}
+                  errors={help !== undefined && help !== null ? toArray(help) : errors.value}
+                  prefixCls={prefixCls.value}
+                  status={validateState.value}
+                  onDomErrorVisibleChange={(v: boolean) => (domErrorVisible.value = v)}
+                  validateStatus={validateState.value}
+                  ref={inputRef}
+                  help={help}
+                  extra={props.extra ?? slots.extra?.()}
+                  v-slots={{ default: slots.default }}
+                  // v-slots={{ default: () => [firstChildren, children.slice(1)] }}
+                ></FormItemInput>
+              </>
+            ),
+          }}
+        ></Row>
       );
     };
   },

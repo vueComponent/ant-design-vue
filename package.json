@@ -51,7 +51,8 @@
     "routes": "node site/scripts/genrateRoutes.js",
     "tsc": "tsc --noEmit",
     "site": "yarn routes && ./node_modules/vite/bin/vite.js build site --base=https://next.antdv.com/",
-    "pub:site": "npm run site && node site/scripts/pushToOSS.js"
+    "pub:site": "npm run site && node site/scripts/pushToOSS.js",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -157,7 +158,7 @@
     "gulp-strip-code": "^0.1.4",
     "gulp-typescript": "^6.0.0-alpha.1",
     "html-webpack-plugin": "^5.3.1",
-    "husky": "^4.0.0",
+    "husky": "^6.0.0",
     "ignore-emit-webpack-plugin": "^2.0.6",
     "jest": "^26.0.0",
     "jest-environment-jsdom-fifteen": "^1.0.2",

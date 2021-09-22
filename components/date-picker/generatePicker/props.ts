@@ -19,6 +19,7 @@ import type { VueNode } from '../../_util/type';
 
 function commonProps<DateType>() {
   return {
+    id: String,
     dropdownClassName: String,
     dropdownAlign: { type: Object as PropType<AlignType> },
     popupStyle: { type: Object as PropType<CSSProperties> },
@@ -77,6 +78,7 @@ function commonProps<DateType>() {
 }
 
 export interface CommonProps<DateType> {
+  id?: string;
   prefixCls?: string;
   dropdownClassName?: string;
   dropdownAlign?: AlignType;

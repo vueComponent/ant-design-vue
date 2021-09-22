@@ -8,6 +8,7 @@ import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 import type { RadioChangeEvent } from '../radio/interface';
 import type { EventHandler } from '../_util/EventInterface';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 function noop() {}
 
 export const checkboxProps = () => {
@@ -38,7 +39,9 @@ export default defineComponent({
   props: checkboxProps(),
   emits: ['change', 'update:checked'],
   setup() {
+    const formItemContext = useInjectFormItemContext();
     return {
+      formItemContext,
       configProvider: inject('configProvider', defaultConfigProvider),
       checkboxGroupContext: inject('checkboxGroupContext', undefined),
     };
@@ -96,7 +99,13 @@ export default defineComponent({
     const props = getOptionProps(this);
     const { checkboxGroupContext: checkboxGroup, $attrs } = this;
     const children = getSlot(this);
-    const { indeterminate, prefixCls: customizePrefixCls, skipGroup, ...restProps } = props;
+    const {
+      indeterminate,
+      prefixCls: customizePrefixCls,
+      skipGroup,
+      id = this.formItemContext.id.value,
+      ...restProps
+    } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
     const {
@@ -109,12 +118,14 @@ export default defineComponent({
     } = $attrs;
     const checkboxProps: any = {
       ...restProps,
+      id,
       prefixCls,
       ...restAttrs,
     };
     if (checkboxGroup && !skipGroup) {
       checkboxProps.onChange = (...args) => {
         this.$emit('change', ...args);
+        this.formItemContext.onFieldChange();
         checkboxGroup.toggleOption({ label: children, value: props.value });
       };
       checkboxProps.name = checkboxGroup.name;

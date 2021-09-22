@@ -5,6 +5,7 @@ import Checkbox from './Checkbox';
 import hasProp, { getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import type { VueNode } from '../_util/type';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export type CheckboxValueType = string | number | boolean;
 export interface CheckboxOptionType {
@@ -25,10 +26,13 @@ export default defineComponent({
     options: { type: Array as PropType<Array<CheckboxOptionType | string>> },
     disabled: PropTypes.looseBool,
     onChange: PropTypes.func,
+    id: PropTypes.string,
   },
   emits: ['change', 'update:value'],
   setup() {
+    const formItemContext = useInjectFormItemContext();
     return {
+      formItemContext,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
@@ -95,11 +99,12 @@ export default defineComponent({
       // this.$emit('input', val);
       this.$emit('update:value', val);
       this.$emit('change', val);
+      this.formItemContext.onFieldChange();
     },
   },
   render() {
     const { $props: props, $data: state } = this;
-    const { prefixCls: customizePrefixCls, options } = props;
+    const { prefixCls: customizePrefixCls, options, id = this.formItemContext.id.value } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
     let children = getSlot(this);
@@ -120,6 +125,10 @@ export default defineComponent({
         </Checkbox>
       ));
     }
-    return <div class={groupPrefixCls}>{children}</div>;
+    return (
+      <div class={groupPrefixCls} id={id}>
+        {children}
+      </div>
+    );
   },
 });

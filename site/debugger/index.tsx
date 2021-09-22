@@ -1,5 +1,5 @@
 // debugger tsx
-import Demo from '../../components/modal/demo/index.vue';
+import Demo from '../../components/form/demo/validation.vue';
 
 export default {
   render() {

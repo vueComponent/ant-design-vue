@@ -42,7 +42,7 @@
               <a-anchor-link
                 v-for="h in headers"
                 :key="h.title"
-                :href="h.href || `#${h.title.replace(/^(\d)/, '_$1')}`"
+                :href="h.href || `#${slugifyTitle(h.title)}`"
                 :title="h.title"
               ></a-anchor-link>
             </a-anchor>
@@ -87,6 +87,9 @@ import Sponsors from '../components/rice/sponsors.vue';
 import RightBottomAd from '../components/rice/right_bottom_rice.vue';
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons-vue';
 import ThemeIcon from './ThemeIcon.vue';
+
+const rControl = /[\u0000-\u001f]/g;
+const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'<>,.?/]+/g;
 
 export default defineComponent({
   name: 'Layout',
@@ -162,6 +165,21 @@ export default defineComponent({
       visible.value = !visible.value;
     };
     return {
+      slugifyTitle: (str: string) => {
+        return (
+          str
+            // Remove control characters
+            .replace(rControl, '')
+            // Replace special characters
+            .replace(rSpecial, '-')
+            // Remove continuos separators
+            .replace(/\-{2,}/g, '-')
+            // Remove prefixing and trailing separtors
+            .replace(/^\-+|\-+$/g, '')
+            // ensure it doesn't start with a number (#121)
+            .replace(/^(\d)/, '_$1')
+        );
+      },
       themeMode,
       visible,
       isMobile: globalConfig.isMobile,

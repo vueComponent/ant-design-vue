@@ -49,6 +49,7 @@ Array [
   "Empty",
   "Form",
   "FormItem",
+  "FormItemRest",
   "Grid",
   "Input",
   "InputGroup",

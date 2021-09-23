@@ -74,7 +74,7 @@ export type { EmptyProps } from './empty';
 export { default as Empty } from './empty';
 
 export type { FormProps, FormItemProps } from './form';
-export { default as Form, FormItem } from './form';
+export { default as Form, FormItem, FormItemRest } from './form';
 
 export { default as Grid } from './grid';
 

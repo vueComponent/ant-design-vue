@@ -104,7 +104,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 </a-form-item>
 ```
 
-如上 Form.Item 并不知道需要收集 `name="a"` 还是 `name=`b``，你可以通过如下两种方式去解决此类问题：
+如上 Form.Item 并不知道需要收集 `name="a"` 还是 `name=`b``，你可以通过如下三种方式去解决此类问题：
 
 第一种，使用多个 `a-form-item`:
 
@@ -115,10 +115,11 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 </a-form-item>
 ```
 
-第二种，使用自定义组件包裹，并在自定义组件中调用 `useFormItemContext`
+第二种，使用自定义组件包裹，并在自定义组件中调用 `useFormItemContext`，相当于把多个表单项合并成了一个
 
 ```html
 <script>
+  // 自定义组件
   import { Form } from 'ant-desing-vue';
   export default {
     setup() {
@@ -134,6 +135,15 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
     <a-input name="a"></a-input>
     <a-input name="b"></a-input>
   </custom-com>
+</a-form-item>
+```
+
+第三种，组件库提供了一个 `a-form-item-rest` 组件，它会阻止数据的收集，你可以将不需要收集校验的表单项放到这个组件中即可，它和第一种方式很类似，但它不会产生额外的 dom 节点。
+
+```html
+<a-form-item>
+  <a-input name="a"></a-input>
+  <a-form-item-rest><a-input name="b"></a-input></a-form-item-rest>
 </a-form-item>
 ```
 

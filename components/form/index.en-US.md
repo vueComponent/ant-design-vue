@@ -116,12 +116,14 @@ The first is to use multiple `a-form-item`:
 </a-form-item>
 ```
 
-The second way is to wrap it with a custom component and call `useFormItemContext` in the custom component
+The second way is to wrap it with a custom component and call `useFormItemContext` in the custom component, It is equivalent to merging multiple form items into one.
 
 ```html
 <script>
+  // custom component
   import { Form } from 'ant-desing-vue';
   export default {
+    name: 'custom-name',
     setup() {
       const formItemContext = Form.useFormItemContext();
     },
@@ -135,6 +137,15 @@ The second way is to wrap it with a custom component and call `useFormItemContex
     <a-input name="a"></a-input>
     <a-input name="b"></a-input>
   </custom-com>
+</a-form-item>
+```
+
+Third, the component library provides an `a-form-item-rest` component, which will prevent data collection. You can put form items that do not need to be collected and verified into this component. It is the same as the first This method is very similar, but it does not generate additional dom nodes.
+
+```html
+<a-form-item>
+  <a-input name="a"></a-input>
+  <a-form-item-rest><a-input name="b"></a-input></a-form-item-rest>
 </a-form-item>
 ```
 

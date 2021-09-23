@@ -272,20 +272,25 @@ export default defineComponent({
       resetField,
     });
 
-    useProvideFormItemContext({
-      id: fieldId,
-      onFieldBlur: () => {
-        if (props.autoLink) {
-          onFieldBlur();
-        }
+    useProvideFormItemContext(
+      {
+        id: fieldId,
+        onFieldBlur: () => {
+          if (props.autoLink) {
+            onFieldBlur();
+          }
+        },
+        onFieldChange: () => {
+          if (props.autoLink) {
+            onFieldChange();
+          }
+        },
+        clearValidate,
       },
-      onFieldChange: () => {
-        if (props.autoLink) {
-          onFieldChange();
-        }
-      },
-      clearValidate,
-    });
+      computed(() => {
+        return !!(props.autoLink && formContext.model.value && fieldName.value);
+      }),
+    );
     let registered = false;
     watch(
       fieldName,

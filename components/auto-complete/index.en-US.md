@@ -24,7 +24,7 @@ When there is a need for autocomplete functionality.
 | autofocus | get focus when component mounted | boolean | false |  |
 | backfill | backfill selected item the input when using keyboard | boolean | false |  |
 | #default (for customize input element) | customize input element | HTMLInputElement / HTMLTextAreaElement | `<Input />` |  |
-| options | Data source for autocomplete | slot \| [DataSourceItemType](https://github.com/vueComponent/ant-design-vue/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |  |
+| options | Data source for autocomplete | [DataSourceItemType](https://github.com/vueComponent/ant-design-vue/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |  |
 | option | custom render option by slot | v-slot:option="{value, label, [disabled, key, title]}" | - | 3.0 |
 | dropdownMenuStyle | additional style applied to dropdown menu | object |  | 1.5.0 |
 | defaultActiveFirstOption | Whether active first option by default | boolean | true |  |

@@ -31,7 +31,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/qtJm4yt45/AutoComplete.svg
 | autofocus | 自动获取焦点 | boolean | false |  |
 | backfill | 使用键盘选择选项的时候把选中项回填到输入框中 | boolean | false |  |
 | #default (自定义输入框) | 自定义输入框 | HTMLInputElement / HTMLTextAreaElement | `<Input />` |  |
-| options | 自动完成的数据源 | slot \| [DataSourceItemType](https://github.com/vueComponent/ant-design-vue/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |  |
+| options | 自动完成的数据源 | [DataSourceItemType](https://github.com/vueComponent/ant-design-vue/blob/724d53b907e577cf5880c1e6742d4c3f924f8f49/components/auto-complete/index.vue#L9)\[] |  |  |
 | option | 通过 option 插槽，自定义节点 | v-slot:option="{value, label, [disabled, key, title]}" | - | 3.0 |
 | dropdownMenuStyle | dropdown 菜单自定义样式 | object |  | 1.5.0 |
 | defaultActiveFirstOption | 是否默认高亮第一个选项。 | boolean | true |  |

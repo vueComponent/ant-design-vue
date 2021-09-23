@@ -255,7 +255,7 @@ describe('Table.rowSelection', () => {
       { sync: false },
     );
     const div = dropdownWrapper.findAll('li.ant-dropdown-menu-item');
-    div.at(1).trigger('click');
+    div[1].trigger('click');
 
     expect(handleSelectInvert).toBeCalledWith([1, 2, 3]);
   });
@@ -295,7 +295,7 @@ describe('Table.rowSelection', () => {
     dropdownWrapper.findAll('.ant-dropdown-menu-item')[2].trigger('click');
     expect(handleSelectOdd).toBeCalledWith([0, 1, 2, 3]);
 
-    dropdownWrapper.findAll('.ant-dropdown-menu-item').at(3).trigger('click');
+    dropdownWrapper.findAll('.ant-dropdown-menu-item')[3].trigger('click');
     expect(handleSelectEven).toBeCalledWith([0, 1, 2, 3]);
   });
 
@@ -402,7 +402,7 @@ describe('Table.rowSelection', () => {
     );
     await sleep();
     const pager = wrapper.findAllComponents({ name: 'Pager' });
-    pager.at(pager.length - 1).trigger('click'); // switch to second page
+    pager[pager.length - 1].trigger('click'); // switch to second page
     wrapper.findAll('input')[0].element.checked = true;
     wrapper.findAll('input')[0].trigger('change');
     await asyncExpect(() => {
@@ -458,7 +458,7 @@ describe('Table.rowSelection', () => {
       expect(wrapper.findAllComponents({ name: 'ACheckbox' }).length).toBe(5);
       const allCheckbox = wrapper.findAllComponents({ name: 'ACheckbox' });
       Array(allCheckbox.length).forEach((_, index) => {
-        const checkbox = allCheckbox.at(index);
+        const checkbox = allCheckbox[index];
         expect(checkbox.vm.checked).toBe(true);
         expect(checkbox.vm.indeterminate).toBe(false);
       });
@@ -473,7 +473,7 @@ describe('Table.rowSelection', () => {
       expect(wrapper.findAllComponents({ name: 'ACheckbox' }).length).toBe(4);
       const allCheckbox = wrapper.findAllComponents({ name: 'ACheckbox' });
       Array(allCheckbox.length).forEach((_, index) => {
-        const checkbox = allCheckbox.at(index);
+        const checkbox = allCheckbox[index];
         expect(checkbox.vm.checked).toBe(true);
         expect(checkbox.vm.indeterminate).toBe(false);
       });
@@ -556,8 +556,7 @@ describe('Table.rowSelection', () => {
       indexList.forEach(index => {
         dropdownWrapper
           .findAll('.ant-dropdown-menu-item .ant-checkbox-wrapper')
-          .at(index)
-          .trigger('click');
+          [index].trigger('click');
       });
       dropdownWrapper.find('.ant-table-filter-dropdown-btns .ant-btn-primary').trigger('click');
     }

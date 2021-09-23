@@ -81,7 +81,7 @@ describe('Table.pagination', () => {
     await sleep();
     expect(renderedNames(wrapper)).toEqual(['Jack', 'Lucy']);
     const pager = wrapper.findAllComponents({ name: 'Pager' });
-    pager.at(pager.length - 1).trigger('click');
+    pager[pager.length - 1].trigger('click');
     await sleep();
     expect(renderedNames(wrapper)).toEqual(['Tom', 'Jerry']);
   });

@@ -56,7 +56,7 @@
   </section>
 </template>
 <script lang="ts">
-import { GlobalConfig } from '../App.vue';
+import type { GlobalConfig } from '../App.vue';
 import { computed, defineComponent, inject, onMounted, ref } from 'vue';
 import { SearchOutlined } from '@ant-design/icons-vue';
 import { GLOBAL_CONFIG } from '../SymbolKey';

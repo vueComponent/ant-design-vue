@@ -47,17 +47,17 @@ const useMenus = (): {
         }
       })
       .map(r => ({ ...r.meta, path: r.path.split(':lang')[0].replace('-cn', '') }));
-    if (category === 'docs') {
-      ms.push({
-        enTitle: 'Change Log',
-        title: '更新日志',
-        category: 'docs',
-        target: '_blank',
-        path: globalConfig.isZhCN.value
-          ? 'https://github.com/vueComponent/ant-design-vue/blob/next/CHANGELOG.zh-CN.md'
-          : 'https://github.com/vueComponent/ant-design-vue/blob/next/CHANGELOG.en-US.md',
-      } as any);
-    }
+    // if (category === 'docs') {
+    //   ms.push({
+    //     enTitle: 'Change Log',
+    //     title: '更新日志',
+    //     category: 'docs',
+    //     target: '_blank',
+    //     path: globalConfig.isZhCN.value
+    //       ? 'https://github.com/vueComponent/ant-design-vue/blob/next/CHANGELOG.zh-CN.md'
+    //       : 'https://github.com/vueComponent/ant-design-vue/blob/next/CHANGELOG.en-US.md',
+    //   } as any);
+    // }
     return ms;
   });
   const activeMenuItem = computed(() => {

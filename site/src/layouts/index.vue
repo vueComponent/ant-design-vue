@@ -42,7 +42,7 @@
               <a-anchor-link
                 v-for="h in headers"
                 :key="h.title"
-                :href="h.href || `#${h.title}`"
+                :href="h.href || `#${h.title.replace(/^(\d)/, '_$1')}`"
                 :title="h.title"
               ></a-anchor-link>
             </a-anchor>
@@ -117,10 +117,11 @@ export default defineComponent({
       }
     });
 
-    const themeMode = inject('themeMode', () => ({
+    const themeMode = inject('themeMode', {
       theme: ref('default'),
-      changeTheme: () => void 0,
-    }));
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      changeTheme: (_key: any) => void 0,
+    });
 
     watch(
       () => route.path,
@@ -141,7 +142,7 @@ export default defineComponent({
     const pageData = computed(() =>
       isDemo.value
         ? matchCom.value[isZhCN.value ? 'CN' : 'US']?.pageData
-        : matchCom.value?.pageData,
+        : (matchCom.value as any)?.pageData,
     );
     const headers = computed(() => {
       if (isDemo.value) {

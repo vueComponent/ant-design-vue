@@ -70,7 +70,7 @@ module.exports = {
     'no-var': 'error',
     'no-console': [2, { allow: ['warn', 'error'] }],
     'object-shorthand': 2,
-    'no-unused-vars': [2, { ignoreRestSiblings: true, argsIgnorePattern: '^h$' }],
+    'no-unused-vars': [2, { ignoreRestSiblings: true, argsIgnorePattern: '^_' }],
     'no-undef': 2,
     camelcase: 'off',
     'no-extra-boolean-cast': 'off',

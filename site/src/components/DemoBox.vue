@@ -142,9 +142,14 @@ export default defineComponent({
     const docHtml = computed(() =>
       props.jsfiddle && props.jsfiddle.docHtml
         ? (
-            props.jsfiddle.docHtml
-              .replace('<h2 id="zh-CN">zh-CN</h2>', '')
-              .split('<h2 id="en-US">en-US</h2>')[globalConfig.isZhCN.value ? 0 : 1] || ''
+            props.jsfiddle.docHtml.replace(
+              `<h2 id="zh-CN">zh-CN <a class="header-anchor" href="#zh-CN">
+          <span aria-hidden="true" class="anchor">#</span>
+        </a></h2>`,
+              '',
+            ).split(`<h2 id="en-US">en-US <a class="header-anchor" href="#en-US">
+          <span aria-hidden="true" class="anchor">#</span>
+        </a></h2>`)[globalConfig.isZhCN.value ? 0 : 1] || ''
           ).trim()
         : '',
     );

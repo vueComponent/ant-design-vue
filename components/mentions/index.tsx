@@ -1,13 +1,13 @@
 import type { App, PropType, Plugin, ExtractPropTypes } from 'vue';
 import { watch, ref, onMounted, defineComponent, nextTick } from 'vue';
 import classNames from '../_util/classNames';
-import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import VcMentions from '../vc-mentions';
 import { mentionsProps as baseMentionsProps } from '../vc-mentions/src/mentionsProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { flattenChildren, getOptionProps } from '../_util/props-util';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import omit from '../_util/omit';
 
 const { Option } = VcMentions;
 

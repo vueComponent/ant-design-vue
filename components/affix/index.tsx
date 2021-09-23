@@ -12,7 +12,6 @@ import {
 } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import omit from 'omit.js';
 import ResizeObserver from '../vc-resize-observer';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import { withInstall } from '../_util/type';
@@ -24,6 +23,7 @@ import {
   getFixedBottom,
 } from './utils';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import omit from '../_util/omit';
 
 function getDefaultTarget() {
   return typeof window !== 'undefined' ? window : null;

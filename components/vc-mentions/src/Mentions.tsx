@@ -12,7 +12,6 @@ import {
   computed,
 } from 'vue';
 import classNames from '../../_util/classNames';
-import omit from 'omit.js';
 import KeyCode from '../../_util/KeyCode';
 import { initDefaultProps } from '../../_util/props-util';
 import {
@@ -26,6 +25,8 @@ import { vcMentionsProps, defaultProps } from './mentionsProps';
 import type { OptionProps } from './Option';
 import MentionsContextKey from './MentionsContext';
 import antInputDirective from '../../_util/antInputDirective';
+import omit from '../../_util/omit';
+import type { EventHandler } from '../../_util/EventInterface';
 
 export type MentionsProps = Partial<ExtractPropTypes<typeof vcMentionsProps>>;
 
@@ -59,7 +60,7 @@ export default defineComponent({
       emit('change', val);
     };
 
-    const onChange = ({ target: { value, composing }, isComposing }) => {
+    const onChange: EventHandler = ({ target: { value, composing }, isComposing }) => {
       if (isComposing || composing) return;
       triggerChange(value);
     };

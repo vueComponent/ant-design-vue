@@ -10,11 +10,11 @@ import type {
 } from '../interface';
 import { getPosition, isTreeNode } from '../util';
 import { warning } from '../../vc-util/warning';
-import Omit from 'omit.js';
 import type { VNodeChild } from 'vue';
 import { camelize } from 'vue';
 import type { TreeNodeProps } from '../props';
 import { filterEmpty } from '../../_util/props-util';
+import omit from '../../_util/omit';
 
 export function getKey(key: Key, pos: string) {
   if (key !== null && key !== undefined) {
@@ -141,7 +141,7 @@ export function flattenTreeData(
 
       // Add FlattenDataNode into list
       const flattenNode: FlattenNode = {
-        ...Omit(treeNode, [fieldTitle, fieldKey, fieldChildren] as any),
+        ...omit(treeNode, [fieldTitle, fieldKey, fieldChildren] as any),
         title: treeNode[fieldTitle],
         key: mergedKey,
         parent,

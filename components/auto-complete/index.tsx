@@ -4,10 +4,10 @@ import Select, { selectProps } from '../select';
 import PropTypes from '../_util/vue-types';
 import { defaultConfigProvider } from '../config-provider';
 import { getComponent, getOptionProps, isValidElement, getSlot } from '../_util/props-util';
-import Omit from 'omit.js';
 import warning from '../_util/warning';
 import Option from './Option';
 import OptGroup from './OptGroup';
+import omit from '../_util/omit';
 
 function isSelectOptionOrSelectOptGroup(child: any): boolean {
   return child?.type?.isSelectOption || child?.type?.isSelectOptGroup;
@@ -134,7 +134,7 @@ const AutoComplete = defineComponent({
         : [];
     }
     const selectProps = {
-      ...Omit(getOptionProps(this), ['dataSource', 'optionLabelProp']),
+      ...omit(getOptionProps(this) as any, ['dataSource', 'optionLabelProp']),
       ...this.$attrs,
       mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
       // optionLabelProp,

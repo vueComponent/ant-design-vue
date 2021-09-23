@@ -1,5 +1,5 @@
-import Omit from 'omit.js';
 import type { FunctionalComponent } from 'vue';
+import omit from '../_util/omit';
 import { tupleNum } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
@@ -31,6 +31,6 @@ const Title: FunctionalComponent<TitleProps> = (props, { slots, attrs }) => {
 
 Title.displayName = 'ATypographyTitle';
 Title.inheritAttrs = false;
-Title.props = Omit({ ...baseProps(), level: PropTypes.number }, ['component', 'strong']);
+Title.props = omit({ ...baseProps(), level: PropTypes.number }, ['component', 'strong']) as any;
 
 export default Title;

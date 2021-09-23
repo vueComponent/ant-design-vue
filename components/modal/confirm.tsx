@@ -2,9 +2,8 @@ import { createVNode, render as vueRender } from 'vue';
 import ConfirmDialog from './ConfirmDialog';
 import type { ModalFuncProps } from './Modal';
 import { destroyFns } from './Modal';
-
-import Omit from 'omit.js';
 import ConfigProvider, { globalConfig } from '../config-provider';
+import omit from '../_util/omit';
 
 const defaultRootPrefixCls = '';
 
@@ -16,7 +15,7 @@ const confirm = (config: ModalFuncProps) => {
   const div = document.createElement('div');
   document.body.appendChild(div);
   let currentConfig = {
-    ...Omit(config, ['parentContext', 'appContext']),
+    ...omit(config, ['parentContext', 'appContext']),
     close,
     visible: true,
   } as any;

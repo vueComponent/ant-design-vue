@@ -4,7 +4,6 @@ import PropTypes from '../_util/vue-types';
 import VcCascader from '../vc-cascader';
 import arrayTreeFilter from 'array-tree-filter';
 import classNames from '../_util/classNames';
-import omit from 'omit.js';
 import KeyCode from '../_util/KeyCode';
 import Input from '../input';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
@@ -28,6 +27,7 @@ import type { VueNode } from '../_util/type';
 import { tuple, withInstall } from '../_util/type';
 import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import omit from '../_util/omit';
 
 export interface CascaderOptionType {
   value?: string | number;

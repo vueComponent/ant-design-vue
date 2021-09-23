@@ -1,4 +1,3 @@
-import omit from 'omit.js';
 import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, onMounted, ref, toRef, defineComponent } from 'vue';
 import Tooltip from '../tooltip';
@@ -19,6 +18,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import { getTransitionName } from '../_util/transition';
 import { cloneVNodes } from '../_util/vnode';
+import omit from '../_util/omit';
 
 export const popconfirmProps = () => ({
   ...abstractTooltipProps(),

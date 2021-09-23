@@ -2,12 +2,12 @@ import type { VNode } from 'vue';
 import { defineComponent, inject, nextTick, withDirectives } from 'vue';
 import antInputDirective from '../_util/antInputDirective';
 import classNames from '../_util/classNames';
-import omit from 'omit.js';
 import inputProps from './inputProps';
 import { hasProp, getComponent, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import ClearableLabeledInput from './ClearableLabeledInput';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import omit from '../_util/omit';
 
 export function fixControlledValue(value: string | number) {
   if (typeof value === 'undefined' || value === null) {

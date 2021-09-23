@@ -7,9 +7,9 @@ import Wave from '../_util/wave';
 import warning from '../_util/warning';
 import { tuple, withInstall } from '../_util/type';
 import { getPropsSlot } from '../_util/props-util';
-import Omit from 'omit.js';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import omit from '../_util/omit';
 
 export const SwitchSizes = tuple('small', 'default');
 type CheckedType = boolean | string | number;
@@ -72,7 +72,9 @@ const Switch = defineComponent({
         '`value` is not validate prop, do you mean `checked`?',
       );
     });
-    const checked = ref(props.checked !== undefined ? props.checked : attrs.defaultChecked);
+    const checked = ref<string | number | boolean>(
+      props.checked !== undefined ? props.checked : (attrs.defaultChecked as boolean),
+    );
     const checkedStatus = computed(() => checked.value === props.checkedValue);
 
     watch(
@@ -146,13 +148,12 @@ const Switch = defineComponent({
     return () => (
       <Wave insertExtraNode>
         <button
-          {...Omit(props, [
+          {...omit(props, [
             'prefixCls',
             'checkedChildren',
             'unCheckedChildren',
             'checked',
             'autofocus',
-            'defaultChecked',
             'checkedValue',
             'unCheckedValue',
             'id',
@@ -165,7 +166,7 @@ const Switch = defineComponent({
           onMouseup={handleMouseUp}
           type="button"
           role="switch"
-          aria-checked={checked.value}
+          aria-checked={checked.value as any}
           disabled={props.disabled || props.loading}
           class={[attrs.class, classNames.value]}
           ref={refSwitchNode}

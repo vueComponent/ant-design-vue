@@ -1,7 +1,6 @@
 import type { CSSProperties } from 'vue';
 import { inject, provide, nextTick, defineComponent } from 'vue';
 import classnames from '../_util/classNames';
-import omit from 'omit.js';
 import VcDrawer from '../vc-drawer/src';
 import PropTypes from '../_util/vue-types';
 import BaseMixin from '../_util/BaseMixin';
@@ -9,6 +8,7 @@ import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import { getComponent, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
+import omit from '../_util/omit';
 
 const PlacementTypes = tuple('top', 'right', 'bottom', 'left');
 type placementType = typeof PlacementTypes[number];

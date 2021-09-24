@@ -92,7 +92,6 @@ export const transferProps = {
   pagination: { type: [Object, Boolean] as PropType<PaginationType>, default: undefined },
   onChange: PropTypes.func,
   onSelectChange: PropTypes.func,
-  onSearchChange: PropTypes.func,
   onSearch: PropTypes.func,
   onScroll: PropTypes.func,
   ['onUpdate:targetKeys']: PropTypes.func,
@@ -114,7 +113,7 @@ const Transfer = defineComponent({
     'rightSelectAllLabel',
     'footer',
   ],
-  emits: ['update:targetKeys', 'change', 'search', 'scroll', 'selectChange', 'searchChange'],
+  emits: ['update:targetKeys', 'change', 'search', 'scroll', 'selectChange'],
   setup(props, { emit, attrs, slots, expose }) {
     const { configProvider, prefixCls, direction } = useConfigInject('transfer', props);
     const sourceSelectedKeys = ref([]);

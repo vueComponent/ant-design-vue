@@ -17,7 +17,7 @@ Almost anything can be represented in a tree structure. Examples include directo
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| treeData | treeNode of tree, please use `treeNodes` before v1.1.4 | array | - |  |
+| treeData | treeNode of tree, please use `treeNodes` before v1.1.4 | [TreeNode[]](#TreeNode) | - |  |
 | replaceFields | Replace the title,key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', title:'title', key:'key' } |  |
 | autoExpandParent | Whether to automatically expand a parent treeNode | boolean | true |  |
 | blockNode | Whether treeNode fill remaining horizontal space | boolean | false |  |
@@ -37,7 +37,7 @@ Almost anything can be represented in a tree structure. Examples include directo
 | showIcon | Shows the icon before a TreeNode's title. There is no default style; you must set a custom style for it if set to `true` | boolean | false |  |
 | switcherIcon | customize collapse/expand icon of tree node | slot | - |  |
 | showLine | Shows a connecting line | boolean | false |  |
-| title | Title | slot |  | 2.0.0 |
+| title | custom title | slot |  | 2.0.0 |
 
 ### Events
 
@@ -55,9 +55,7 @@ Almost anything can be represented in a tree structure. Examples include directo
 | rightClick | Callback function for when the user right clicks a treeNode | function({event, node}) |
 | select | Callback function for when the user clicks a treeNode | function(selectedKeys, e:{selected: bool, selectedNodes, node, event}) |
 
-### TreeNode props
-
-One of the Tree `treeNode` prop for describing the tree's node, TreeNode has the same API.
+### TreeNode
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
@@ -70,8 +68,7 @@ One of the Tree `treeNode` prop for describing the tree's node, TreeNode has the
 | isLeaf | Determines if this is a leaf node(effective when `loadData` is specified) | boolean | false |  |
 | key | Used with (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys. P.S.: It must be unique in all of treeNodes of the tree! | string \| number | internal calculated position of treeNode |  |
 | selectable | Set whether the treeNode can be selected | boolean | true |  |
-| title | Title | string\|slot\|slot-scope | '---' |  |
-| slots | When using treeNodes, you can use this property to configure the properties that support the slot, such as `slots: { title: 'XXX'}` | object | - |  |
+| title | Title | string | '---' |  |
 
 ### DirectoryTree props
 

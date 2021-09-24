@@ -89,6 +89,16 @@ const routes = [
         component: () => import('../vueDocs/migration-v2.en-US.md'),
       },
       {
+        path: 'vue/migration-v3-cn',
+        meta: { enTitle: 'V2 to V3', title: '从 v2 到 v3', category: 'docs' },
+        component: () => import('../vueDocs/migration-v3.zh-CN.md'),
+      },
+      {
+        path: 'vue/migration-v3',
+        meta: { enTitle: 'V2 to V3', title: '从 v2 到 v3', category: 'docs' },
+        component: () => import('../vueDocs/migration-v3.en-US.md'),
+      },
+      {
         path: 'vue/replace-date-cn',
         meta: { enTitle: 'Custom Date Library', title: '自定义时间库', category: 'docs' },
         component: () => import('../vueDocs/replace-date.zh-CN.md'),

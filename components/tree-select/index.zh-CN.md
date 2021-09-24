@@ -50,6 +50,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Ax4DA0njr/TreeSelect.svg
 | treeNodeFilterProp | 输入项过滤对应的 treeNode 属性 | string | 'value' |  |
 | treeNodeLabelProp | 作为显示的 prop 设置 | string | 'title' |  |
 | value(v-model) | 指定当前选中的条目 | string/string\[] | - |  |
+| title | 自定义标题 | slot |  | 3.0.0 |
 
 ### 事件
 
@@ -81,4 +82,3 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Ax4DA0njr/TreeSelect.svg
 | key | 此项必须设置（其值在整个树范围内唯一） | string \| number | - |  |
 | title | 树节点显示的内容 | string\|slot | '---' |  |
 | value | 默认根据此属性值进行筛选（其值在整个树范围内唯一） | string | - |  |
-| scopedSlots | 使用 treeData 时，可以通过该属性配置支持 slot 的属性，如 `scopedSlots: { title: 'XXX'}` | object | - |  |

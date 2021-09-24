@@ -4,11 +4,114 @@
 
 #### Release Schedule
 
-- Weekly release: patch version for routine bugfix.
-- Monthly release: minor version for new features.
+- Weekly release: patch version at the end of every week for routine bugfix (anytime for urgent bugfix).
+- Monthly release: minor version at the end of every month for new features.
 - Major version release is not included in this schedule for breaking change and new features.
 
 ---
+
+## 3.0.0-alpha.0
+
+`2021-09-24`
+
+🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+- Open source documentation
+- Removed the `lazy` attribute of Transfer, it does not have a real optimization effect.
+- Removed the `combobox` mode of Select, please use `AutoComplete` instead.
+- Deprecated Button.Group, please use `Space` instead.
+- `Timeline.Item` new label
+- `Steps` added `responsive`, `percent`
+- `Collapse` added `ghost`, `collapsible`
+- `Popconfirm` added `cancelButton`, `okButton`, and `esc` button hiding
+- `ConfigProvider` added ConfigProvider.config to define the configuration of `Modal.xxx` `message` `notification`
+- `Tree` `TreeSlelct`
+
+  - Added virtual scrolling, discarded using `a-tree-node` `a-tree-select-node` to build nodes, using `treeData` property instead to improve component performance
+  - Deprecated `scopedSlots` `slots` custom rendering node, and replace it with `v-slot:title` to improve ease of use, avoid slot configuration expansion, and also avoid slot conflicts
+
+- `Table`
+
+  - Removed the `rowSelection.hideDefaultSelections` property of Table, please use `SELECTION_ALL` and `SELECTION_INVERT` in `rowSelection.selections` instead, [custom options](/components/table/#components-table-demo- row-selection-custom).
+  - Removed Column slots and replaced them with `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon` to improve ease of use , To avoid slot configuration expansion, but also to avoid the problem of slot conflicts
+  - Added expandFixed to control whether the expanded icon is fixed
+  - Added the showSorterTooltip header whether to display the tooltip for the next sort.
+  - Added sticky for setting sticky head and scroll bar
+  - Added rowExpandable to set whether to allow row expansion
+  - New slot headerCell is used to personalize the header cell
+  - Added slot bodyCell for personalized cell
+  - New slot customFilterDropdown is used to customize the filter menu, which needs to be used with `column.customFilterDropdown`
+  - Added slot customFilterIcon for custom filter icons
+  - New slot emptyText is used to customize the display content of empty data
+  - Added slot summary for the summary column
+
+- `DatePicker` `TimePicker` `Calendar`
+
+  - By default, a more lightweight dayjs is used to replace momentjs. If your project is too large and uses a lot of momentjs methods, you can refer to the document [Custom Time Library](/docs/vue/replace-date-cn), Replace with momentjs.
+  - UI interaction adjustment, its antd 4.x interaction specification
+
+- `Form` The main goal of this update is to improve performance. If you don't have custom form controls, you can almost ignore this part
+
+  - Since version 3.0, Form.Item no longer hijacks child elements, but automatically checks through provider/inject dependency injection. This method can improve component performance, and there is no limit to the number of child elements. The same is true for child elements. It can be a high-level component that is further encapsulated.
+
+    You can reference [Customized Form Controls](#components-form-demo-customized-form-controls)
+
+    But it also has some disadvantages:
+
+    1. If the custom component wants Form.Item to be verified and displayed, you need to inject `const {id, onFieldChange, onFieldBlur} = useFormItemContext()` and call the corresponding method.
+
+    2. A Form.Item can only collect the data of one form item. If there are multiple form items, it will cause collection confusion, for example,
+
+    ```html
+    <a-form-item>
+      <a-input name="a"></a-input>
+      <a-input name="b"></a-input>
+    </a-form-item>
+    ```
+
+    As above Form.Item does not know whether to collect `name="a"` or `name=`b``, you can solve this kind of problem in the following two ways:
+
+    The first is to use multiple `a-form-item`:
+
+    ```html
+    <a-form-item>
+      <a-input name="a"></a-input>
+      <a-form-item><a-input name="b"></a-input></a-form-item>
+    </a-form-item>
+    ```
+
+    The second way is to wrap it with a custom component and call `useFormItemContext` in the custom component, It is equivalent to merging multiple form items into one.
+
+    ```html
+    <script>
+      // custom component
+      import { Form } from 'ant-desing-vue';
+      export default {
+        name: 'custom-name',
+        setup() {
+          const formItemContext = Form.useFormItemContext();
+        },
+      };
+    </script>
+    ```
+
+    ```html
+    <a-form-item>
+      <custom-com>
+        <a-input name="a"></a-input>
+        <a-input name="b"></a-input>
+      </custom-com>
+    </a-form-item>
+    ```
+
+    Third, the component library provides an `a-form-item-rest` component, which will prevent data collection. You can put form items that do not need to be collected and verified into this component. It is the same as the first This method is very similar, but it does not generate additional dom nodes.
+
+    ```html
+    <a-form-item>
+      <a-input name="a"></a-input>
+      <a-form-item-rest><a-input name="b"></a-input></a-form-item-rest>
+    </a-form-item>
+    ```
 
 ## 2.2.8
 

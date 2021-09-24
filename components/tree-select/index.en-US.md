@@ -49,6 +49,7 @@ Tree selection control.
 | treeNodeFilterProp | Will be used for filtering if `filterTreeNode` returns true | string | 'value' |  |
 | treeNodeLabelProp | Will render as content of select | string | 'title' |  |
 | value(v-model) | To set the current selected treeNode(s). | string\|string\[] | - |  |
+| title | custom title | slot |  | 3.0.0 |
 
 ### Events
 
@@ -78,9 +79,8 @@ Tree selection control.
 | disabled | Disabled or not | boolean | false |  |
 | isLeaf | Leaf node or not | boolean | false |  |
 | key | Required property, should be unique in the tree | string \| number | - |  |
-| title | Content showed on the treeNodes | string\|slot | '---' |  |
+| title | Content showed on the treeNodes | string | '---' |  |
 | value | Will be treated as `treeNodeFilterProp` by default, should be unique in the tree | string | - |  |
-| scopedSlots | When using treeNodes, you can use this property to configure the properties that support the slot, such as `scopedSlots: { title: 'XXX'}` | object | - |  |
 
 ## FAQ
 

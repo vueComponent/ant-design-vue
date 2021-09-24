@@ -20,7 +20,6 @@ Alert component for feedback.
 | disabled | Whether disabled transfer | boolean | false |  |
 | filterOption | A function to determine whether an item should show in search result list | (inputValue, option): boolean |  |  |
 | footer | customize the progress dot by setting a scoped slot | slot="footer" slot-scope="props" |  |  |
-| lazy | property of vc-lazy-load for lazy rendering items. Turn off it by set to `false`. | object\|boolean | `{ height: 32, offset: 32 }` |  |
 | listStyle | A custom CSS style used for rendering the transfer columns. | object |  |  |
 | locale | i18n text including filter, empty text, item unit, etc | object | `{ itemUnit: 'item', itemsUnit: 'items', notFoundContent: 'The list is empty', searchPlaceholder: 'Search here' }` |  |
 | operations | A set of operations that are sorted from top to bottom. | string\[] | \['>', '<'] |  |

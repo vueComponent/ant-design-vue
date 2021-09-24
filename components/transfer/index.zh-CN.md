@@ -21,7 +21,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/QAXskNI4G/Transfer.svg
 | disabled | 是否禁用 | boolean | false |  |
 | filterOption | 接收 `inputValue` `option` 两个参数，当 `option` 符合筛选条件时，应返回 `true`，反之则返回 `false`。 | (inputValue, option): boolean |  |  |
 | footer | 可以设置为一个 作用域插槽 | slot="footer" slot-scope="props" |  |  |
-| lazy | Transfer 使用了 [vc-lazy-load]优化性能，这里可以设置相关参数。设为 `false` 可以关闭懒加载。 | object\|boolean | `{ height: 32, offset: 32 }` |  |
 | listStyle | 两个穿梭框的自定义样式 | object |  |  |
 | locale | 各种语言 | object | `{ itemUnit: '项', itemsUnit: '项', notFoundContent: '列表为空', searchPlaceholder: '请输入搜索内容' }` |  |
 | operations | 操作文案集合，顺序从上至下 | string\[] | \['>', '<'] |  |

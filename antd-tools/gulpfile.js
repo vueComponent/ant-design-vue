@@ -334,23 +334,21 @@ gulp.task('compile-with-es', done => {
   console.log('start compile at ', startTime);
   console.log('[Parallel] Compile to es...');
   compile(false).on('finish', done);
-  compileTs(false, done);
 });
 
 gulp.task('compile-with-lib', done => {
   console.log('[Parallel] Compile to js...');
   compile().on('finish', done);
-  compileTs(true, done);
 });
 
-gulp.task('compile-with-es-ts-type', done => {
+gulp.task('compile-with-es-ts-type', async done => {
   console.log('[Parallel] Compile to es ts type...');
-  compileTs(false, done);
+  await compileTs(false, done);
 });
 
-gulp.task('compile-with-lib-ts-type', done => {
+gulp.task('compile-with-lib-ts-type', async done => {
   console.log('[Parallel] Compile to lib ts type...');
-  compileTs(true, done);
+  await compileTs(true, done);
 });
 
 gulp.task(

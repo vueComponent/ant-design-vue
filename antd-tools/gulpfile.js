@@ -328,7 +328,10 @@ function pub(done) {
   }
 }
 
+let startTime = new Date();
 gulp.task('compile-with-es', done => {
+  startTime = new Date();
+  console.log('start compile at ', startTime);
   console.log('[Parallel] Compile to es...');
   compile(false).on('finish', done);
   compileTs(false, done);
@@ -340,11 +343,31 @@ gulp.task('compile-with-lib', done => {
   compileTs(true, done);
 });
 
+gulp.task('compile-with-es-ts-type', done => {
+  console.log('[Parallel] Compile to es ts type...');
+  compileTs(false, done);
+});
+
+gulp.task('compile-with-lib-ts-type', done => {
+  console.log('[Parallel] Compile to lib ts type...');
+  compileTs(true, done);
+});
+
 gulp.task(
   'compile',
-  gulp.series(gulp.parallel('compile-with-es', 'compile-with-lib'), done => {
-    done();
-  }),
+  gulp.series(
+    gulp.parallel(
+      'compile-with-es',
+      'compile-with-lib',
+      'compile-with-es-ts-type',
+      'compile-with-lib-ts-type',
+    ),
+    done => {
+      console.log('end compile at ', new Date());
+      console.log('compile time ', (new Date() - startTime) / 1000, 's');
+      done();
+    },
+  ),
 );
 
 gulp.task(

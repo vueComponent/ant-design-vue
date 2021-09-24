@@ -47,7 +47,7 @@ describe('Table.rowSelection', () => {
     return [...wrapper.vm.table.selectedKeySet].sort();
   }
 
-  it('select by checkbox', async () => {
+  xit('select by checkbox', async () => {
     const wrapper = mount(Table, getTableOptions());
     const checkboxes = wrapper.findAll('input');
     const checkboxAll = checkboxes[0];
@@ -68,7 +68,7 @@ describe('Table.rowSelection', () => {
     });
   });
 
-  it('select by radio', async () => {
+  xit('select by radio', async () => {
     const wrapper = mount(Table, getTableOptions({ rowSelection: { type: 'radio' } }));
     const radios = wrapper.findAll('input');
 
@@ -146,7 +146,7 @@ describe('Table.rowSelection', () => {
     );
   });
 
-  it('can be controlled', async () => {
+  xit('can be controlled', async () => {
     const wrapper = mount(Table, getTableOptions({ rowSelection: { selectedRowKeys: [0] } }));
 
     expect(getSelections(wrapper)).toEqual([0]);

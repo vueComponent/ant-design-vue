@@ -31,7 +31,7 @@ Select component to select value from options.
 | defaultActiveFirstOption | Whether active first option by default | boolean | true |  |
 | disabled | Whether disabled select | boolean | false |  |
 | dropdownClassName | className of dropdown menu | string | - |  |
-| dropdownMatchSelectWidth | Whether dropdown's width is same with select. | boolean | true |  |
+| dropdownMatchSelectWidth | Determine whether the dropdown menu and the select input are the same width. Default set `min-width` same as input. Will ignore when value less than select width. `false` will disable virtual scroll | boolean \| number | true |  |
 | dropdownRender | Customize dropdown content | ({menuNode: VNode, props}) => VNode \| v-slot | - |  |
 | dropdownStyle | style of dropdown menu | object | - |  |
 | dropdownMenuStyle | additional style applied to dropdown menu | object | - |  |

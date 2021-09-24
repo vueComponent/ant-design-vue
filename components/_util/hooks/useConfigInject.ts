@@ -22,7 +22,7 @@ export default (
   autoInsertSpaceInButton: ComputedRef<boolean>;
   renderEmpty?: ComputedRef<(componentName?: string) => VNodeChild | JSX.Element>;
   virtual: ComputedRef<boolean>;
-  dropdownMatchSelectWidth: ComputedRef<boolean>;
+  dropdownMatchSelectWidth: ComputedRef<boolean | number>;
   getPopupContainer: ComputedRef<ConfigProviderProps['getPopupContainer']>;
 } => {
   const configProvider = inject<UnwrapRef<ConfigProviderProps>>(
@@ -44,7 +44,7 @@ export default (
     () => props.getPopupContainer || configProvider.getPopupContainer,
   );
   const virtual = computed(() => props.virtual ?? configProvider.virtual);
-  const dropdownMatchSelectWidth = computed<boolean>(
+  const dropdownMatchSelectWidth = computed<boolean | number>(
     () => props.dropdownMatchSelectWidth ?? configProvider.dropdownMatchSelectWidth,
   );
   const size = computed(() => props.size || configProvider.componentSize);

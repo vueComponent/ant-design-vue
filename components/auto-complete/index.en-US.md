@@ -29,6 +29,7 @@ When there is a need for autocomplete functionality.
 | dropdownMenuStyle | additional style applied to dropdown menu | object |  | 1.5.0 |
 | defaultActiveFirstOption | Whether active first option by default | boolean | true |  |
 | disabled | Whether disabled select | boolean | false |  |
+| dropdownMatchSelectWidth | Determine whether the dropdown menu and the select input are the same width. Default set `min-width` same as input. Will ignore when value less than select width. `false` will disable virtual scroll | boolean \| number | true |  |
 | filterOption | If true, filter options by input, if function, filter options against it. The function will receive two arguments, `inputValue` and `option`, if the function returns `true`, the option will be included in the filtered set; Otherwise, it will be excluded. | boolean or function(inputValue, option) | true |  |
 | optionLabelProp | Which prop value of option will render as content of select. | string | `children` |  |
 | placeholder | placeholder of input | string | - |  |

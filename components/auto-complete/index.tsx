@@ -18,7 +18,7 @@ const autoCompleteProps = {
   dataSource: PropTypes.array,
   dropdownMenuStyle: PropTypes.style,
   optionLabelProp: PropTypes.string,
-  dropdownMatchSelectWidth: PropTypes.looseBool,
+  dropdownMatchSelectWidth: { type: [Number, Boolean], default: true },
 };
 
 export type AutoCompleteProps = Partial<ExtractPropTypes<typeof autoCompleteProps>>;

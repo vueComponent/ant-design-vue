@@ -42,7 +42,7 @@ export interface ConfigConsumerProps {
     size?: SizeType | number;
   };
   virtual?: boolean;
-  dropdownMatchSelectWidth?: boolean;
+  dropdownMatchSelectWidth?: boolean | number;
 }
 
 export const configConsumerProps = [
@@ -144,7 +144,7 @@ export const configProviderProps = {
     type: Object as PropType<{ size: SizeType | number }>,
   },
   virtual: PropTypes.looseBool,
-  dropdownMatchSelectWidth: PropTypes.looseBool,
+  dropdownMatchSelectWidth: { type: [Number, Boolean], default: true },
   form: {
     type: Object as PropType<{ requiredMark?: RequiredMark }>,
   },

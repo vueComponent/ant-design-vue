@@ -32,7 +32,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/_0XzgOis7/Select.svg
 | defaultActiveFirstOption | 是否默认高亮第一个选项。 | boolean | true |  |
 | disabled | 是否禁用 | boolean | false |  |
 | dropdownClassName | 下拉菜单的 className 属性 | string | - |  |
-| dropdownMatchSelectWidth | 下拉菜单和选择器同宽 | boolean | true | 」 |
+| dropdownMatchSelectWidth | 下拉菜单和选择器同宽。默认将设置 `min-width`，当值小于选择框宽度时会被忽略。false 时会关闭虚拟滚动 | boolean \| number | true |  |
 | dropdownRender | 自定义下拉框内容 | ({menuNode: VNode, props}) => VNode \| v-slot | - |  |
 | dropdownStyle | 下拉菜单的 style 属性 | object | - |  |
 | dropdownMenuStyle | dropdown 菜单自定义样式 | object | - |  |

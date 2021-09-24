@@ -22,7 +22,7 @@
 - 移除了 Transfer 的 `lazy` 属性，它并没有起到真正的优化效果。
 - 移除了 Select 的 `combobox` 模式，请使用 `AutoComplete` 替代。
 - 废弃 Button.Group，请使用 `Space` 代替。
-- `DatePicker` `TimePicker` `Calendar` 移除 momentjs，请使用 momentjs 替换
+- `DatePicker` `TimePicker` `Calendar` 移除 momentjs，请使用 dayjs 替换
 - `Tree`、`TreeSlelct`
   - 废弃使用 `a-tree-node` `a-tree-select-node` 构建节点，使用 `treeData` 属性替代
   - 废弃 `scopedSlots` `slots` 自定义渲染节点，使用 `v-slot:title` 替换

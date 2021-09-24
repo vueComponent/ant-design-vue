@@ -21,7 +21,7 @@ The 2.x version is a compatible version developed for compatibility with Vue 3. 
 - Removed the `lazy` attribute of Transfer, it does not have a real optimization effect.
 - Removed the `combobox` mode of Select, please use `AutoComplete` instead.
 - Deprecated Button.Group, please use `Space` instead.
-- `DatePicker` `TimePicker` `Calendar` remove momentjs, please use momentjs instead
+- `DatePicker` `TimePicker` `Calendar` remove momentjs, please use dayjs instead
 - `Tree`, `TreeSlelct`
   - Deprecated the use of `a-tree-node` and `a-tree-select-node` to construct nodes, use the `treeData` property instead
   - Deprecated `scopedSlots` `slots` custom rendering node, use `v-slot:title` instead

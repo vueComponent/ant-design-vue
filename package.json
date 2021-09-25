@@ -146,7 +146,7 @@
     "eslint-plugin-import": "^2.24.2",
     "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-markdown": "^2.0.0",
-    "eslint-plugin-no-explicit-type-exports": "^0.11.10",
+    "eslint-plugin-no-explicit-type-exports": "^0.12.0",
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-vue": "^7.1.0",
     "fast-glob": "^3.2.7",

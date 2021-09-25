@@ -3,6 +3,7 @@
     <Basic />
     <Size />
     <Tags />
+    <Responsive />
     <AutomaticTokenization />
     <LabelInValue />
     <Multiple />
@@ -35,6 +36,7 @@ import HideSelected from './hide-selected.vue';
 import CustomDropdownMenu from './custom-dropdown-menu.vue';
 import OptionLabelProp from './option-label-prop.vue';
 import BigData from './big-data.vue';
+import Responsive from './responsive.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -58,6 +60,7 @@ export default defineComponent({
     CustomDropdownMenu,
     OptionLabelProp,
     BigData,
+    Responsive,
   },
   setup() {
     return {};

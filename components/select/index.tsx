@@ -1,15 +1,14 @@
-import type { VNodeChild, App, PropType, Plugin } from 'vue';
+import type { App, PropType, Plugin, ExtractPropTypes } from 'vue';
 import { computed, defineComponent, ref } from 'vue';
-import omit from 'omit.js';
 import classNames from '../_util/classNames';
-import type { SelectProps as RcSelectProps } from '../vc-select';
-import RcSelect, { Option, OptGroup, BaseProps } from '../vc-select';
+import RcSelect, { selectProps as vcSelectProps, Option, OptGroup } from '../vc-select';
 import type { OptionProps as OptionPropsType } from '../vc-select/Option';
 import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
-import type { SizeType } from '../config-provider';
+import omit from '../_util/omit';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 type RawValue = string | number;
 
@@ -20,47 +19,21 @@ export type OptionType = typeof Option;
 export interface LabeledValue {
   key?: string;
   value: RawValue;
-  label: VNodeChild;
+  label: any;
 }
 export type SelectValue = RawValue | RawValue[] | LabeledValue | LabeledValue[] | undefined;
 
-export interface InternalSelectProps<VT> extends Omit<RcSelectProps<VT>, 'mode'> {
-  suffixIcon?: VNodeChild;
-  itemIcon?: VNodeChild;
-  size?: SizeType;
-  mode?: 'multiple' | 'tags' | 'SECRET_COMBOBOX_MODE_DO_NOT_USE';
-  bordered?: boolean;
-}
-
-export interface SelectPropsTypes<VT>
-  extends Omit<
-    InternalSelectProps<VT>,
-    'inputIcon' | 'mode' | 'getInputElement' | 'backfill' | 'class' | 'style'
-  > {
-  mode?: 'multiple' | 'tags';
-}
-export type SelectTypes = SelectPropsTypes<SelectValue>;
-export const SelectProps = () => ({
-  ...(omit(BaseProps(), [
-    'inputIcon',
-    'mode',
-    'getInputElement',
-    'backfill',
-    'class',
-    'style',
-  ]) as Omit<
-    ReturnType<typeof BaseProps>,
-    'inputIcon' | 'mode' | 'getInputElement' | 'backfill' | 'class' | 'style'
-  >),
+export const selectProps = () => ({
+  ...omit(vcSelectProps<SelectValue>(), ['inputIcon', 'mode', 'getInputElement', 'backfill']),
   value: {
     type: [Array, Object, String, Number] as PropType<SelectValue>,
   },
   defaultValue: {
     type: [Array, Object, String, Number] as PropType<SelectValue>,
   },
-  notFoundContent: PropTypes.VNodeChild,
-  suffixIcon: PropTypes.VNodeChild,
-  itemIcon: PropTypes.VNodeChild,
+  notFoundContent: PropTypes.any,
+  suffixIcon: PropTypes.any,
+  itemIcon: PropTypes.any,
   size: PropTypes.oneOf(tuple('small', 'middle', 'large', 'default')),
   mode: PropTypes.oneOf(tuple('multiple', 'tags', 'SECRET_COMBOBOX_MODE_DO_NOT_USE')),
   bordered: PropTypes.looseBool.def(true),
@@ -68,14 +41,16 @@ export const SelectProps = () => ({
   choiceTransitionName: PropTypes.string.def(''),
 });
 
+export type SelectProps = Partial<ExtractPropTypes<ReturnType<typeof selectProps>>>;
+
 const Select = defineComponent({
   name: 'ASelect',
   Option,
   OptGroup,
   inheritAttrs: false,
-  props: SelectProps(),
+  props: selectProps(),
   SECRET_COMBOBOX_MODE_DO_NOT_USE: 'SECRET_COMBOBOX_MODE_DO_NOT_USE',
-  emits: ['change', 'update:value'],
+  emits: ['change', 'update:value', 'blur'],
   slots: [
     'notFoundContent',
     'suffixIcon',
@@ -86,8 +61,8 @@ const Select = defineComponent({
     'option',
   ],
   setup(props, { attrs, emit, slots, expose }) {
-    const selectRef = ref(null);
-
+    const selectRef = ref();
+    const formItemContext = useInjectFormItemContext();
     const focus = () => {
       if (selectRef.value) {
         selectRef.value.focus();
@@ -125,6 +100,11 @@ const Select = defineComponent({
     const triggerChange = (...args: any[]) => {
       emit('update:value', args[0]);
       emit('change', ...args);
+      formItemContext.onFieldChange();
+    };
+    const handleBlur = (e: InputEvent) => {
+      emit('blur', e);
+      formItemContext.onFieldBlur();
     };
     expose({
       blur,
@@ -139,6 +119,7 @@ const Select = defineComponent({
         dropdownClassName,
         virtual,
         dropdownMatchSelectWidth,
+        id = formItemContext.id.value,
       } = props;
 
       const { renderEmpty, getPopupContainer: getContextPopupContainer } = configProvider;
@@ -146,7 +127,7 @@ const Select = defineComponent({
       const isMultiple = mode.value === 'multiple' || mode.value === 'tags';
 
       // ===================== Empty =====================
-      let mergedNotFound: VNodeChild;
+      let mergedNotFound: any;
       if (notFoundContent !== undefined) {
         mergedNotFound = notFoundContent;
       } else if (slots.notFoundContent) {
@@ -201,6 +182,8 @@ const Select = defineComponent({
           getPopupContainer={getPopupContainer || getContextPopupContainer}
           dropdownClassName={rcSelectRtlDropDownClassName}
           onChange={triggerChange}
+          onBlur={handleBlur}
+          id={id}
           dropdownRender={selectProps.dropdownRender || slots.dropdownRender}
           v-slots={{ option: slots.option }}
         >

@@ -58,13 +58,11 @@ export interface MenuContextProps {
 
   // // Motion
   motion?: ComputedRef<CSSMotionProps | null>;
-  defaultMotions?: ComputedRef<Partial<
-    {
-      [key in MenuMode | 'other']:
-        | CSSMotionProps
-        | ((style: Ref<CSSProperties>, className: Ref<string>) => CSSMotionProps);
-    }
-  > | null>;
+  defaultMotions?: ComputedRef<Partial<{
+    [key in MenuMode | 'other']:
+      | CSSMotionProps
+      | ((style: Ref<CSSProperties>, className: Ref<string>) => CSSMotionProps);
+  }> | null>;
 
   // // Popup
   subMenuOpenDelay: ComputedRef<number>;
@@ -75,7 +73,7 @@ export interface MenuContextProps {
 
   // // Icon
   // itemIcon?: RenderIconType;
-  expandIcon?: (p?: { isOpen: boolean; [key: string]: any }) => any;
+  expandIcon?: ComputedRef<(p?: { isOpen: boolean; [key: string]: any }) => any>;
 
   // // Function
   onItemClick: MenuClickEventHandler;

@@ -1,60 +1,56 @@
 import type { ExtractPropTypes } from 'vue';
-import { defineComponent, inject } from 'vue';
+import { defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getComponent } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { defaultConfigProvider } from '../config-provider';
 import { tuple } from '../_util/type';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
-export const timelineItemProps = {
+export const timelineItemProps = () => ({
   prefixCls: PropTypes.string,
   color: PropTypes.string,
   dot: PropTypes.any,
   pending: PropTypes.looseBool,
   position: PropTypes.oneOf(tuple('left', 'right', '')).def(''),
-};
+  label: PropTypes.any,
+});
 
-export type TimelineItemProps = Partial<ExtractPropTypes<typeof timelineItemProps>>;
+export type TimelineItemProps = Partial<ExtractPropTypes<ReturnType<typeof timelineItemProps>>>;
 
 export default defineComponent({
   name: 'ATimelineItem',
-  props: initDefaultProps(timelineItemProps, {
+  props: initDefaultProps(timelineItemProps(), {
     color: 'blue',
     pending: false,
   }),
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
+  slots: ['dot', 'label'],
+  setup(props, { slots }) {
+    const { prefixCls } = useConfigInject('timeline', props);
+    return () => {
+      const { color = '', pending, label = slots.label?.(), dot = slots.dot?.() } = props;
+      const itemClassName = classNames({
+        [`${prefixCls.value}-item`]: true,
+        [`${prefixCls.value}-item-pending`]: pending,
+      });
+
+      const dotClassName = classNames({
+        [`${prefixCls.value}-item-head`]: true,
+        [`${prefixCls.value}-item-head-custom`]: dot,
+        [`${prefixCls.value}-item-head-${color}`]: true,
+      });
+      return (
+        <li class={itemClassName}>
+          {label && <div class={`${prefixCls.value}-item-label`}>{label}</div>}
+          <div class={`${prefixCls.value}-item-tail`} />
+          <div
+            class={dotClassName}
+            style={{ borderColor: /blue|red|green|gray/.test(color) ? undefined : color }}
+          >
+            {dot}
+          </div>
+          <div class={`${prefixCls.value}-item-content`}>{slots.default?.()}</div>
+        </li>
+      );
     };
-  },
-  render() {
-    const { prefixCls: customizePrefixCls, color = '', pending } = getOptionProps(this);
-    const { getPrefixCls } = this.configProvider;
-    const prefixCls = getPrefixCls('timeline', customizePrefixCls);
-
-    const dot = getComponent(this, 'dot');
-    const itemClassName = classNames({
-      [`${prefixCls}-item`]: true,
-      [`${prefixCls}-item-pending`]: pending,
-    });
-
-    const dotClassName = classNames({
-      [`${prefixCls}-item-head`]: true,
-      [`${prefixCls}-item-head-custom`]: dot,
-      [`${prefixCls}-item-head-${color}`]: true,
-    });
-    return (
-      <li class={itemClassName}>
-        <div class={`${prefixCls}-item-tail`} />
-        <div
-          class={dotClassName}
-          style={{ borderColor: /blue|red|green|gray/.test(color) ? undefined : color }}
-        >
-          {dot}
-        </div>
-        <div class={`${prefixCls}-item-content`}>{this.$slots.default?.()}</div>
-      </li>
-    );
   },
 });

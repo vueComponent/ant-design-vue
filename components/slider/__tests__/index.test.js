@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import Slider from '..';
 import mountTest from '../../../tests/shared/mountTest';
 
@@ -19,9 +19,9 @@ describe('Slider', () => {
     await asyncExpect(() => {
       expect(document.body.innerHTML).toMatchSnapshot();
       wrapper.findAll('.ant-slider-handle')[0].trigger('mouseleave');
-    }, 0);
+    }, 100);
     await asyncExpect(() => {
       expect(document.body.innerHTML).toMatchSnapshot();
-    }, 0);
+    }, 100);
   });
 });

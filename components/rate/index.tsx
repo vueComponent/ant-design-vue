@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, VNode } from 'vue';
-import { watch } from 'vue';
-import { defineComponent, ref, reactive, onMounted } from 'vue';
+import { watch, defineComponent, ref, reactive, onMounted } from 'vue';
 import { initDefaultProps, getPropsSlot, findDOMNode } from '../_util/props-util';
 import { withInstall } from '../_util/type';
 import { getOffsetLeft } from './util';
@@ -13,6 +12,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 
 import Star from './Star';
 import { useRef } from '../_util/hooks/useRef';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export const rateProps = {
   prefixCls: PropTypes.string,
@@ -26,6 +26,7 @@ export const rateProps = {
   autofocus: PropTypes.looseBool,
   tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   direction: PropTypes.string,
+  id: PropTypes.string,
 };
 
 export type RateProps = Partial<ExtractPropTypes<typeof rateProps>>;
@@ -45,6 +46,7 @@ const Rate = defineComponent({
   emits: ['hoverChange', 'update:value', 'change', 'focus', 'blur', 'keydown'],
   setup(props, { slots, attrs, emit, expose }) {
     const { prefixCls, direction } = useConfigInject('rate', props);
+    const formItemContext = useInjectFormItemContext();
     const rateRef = ref();
     const [setRef, starRefs] = useRef();
     const state = reactive({
@@ -83,6 +85,7 @@ const Rate = defineComponent({
       }
       emit('update:value', value);
       emit('change', value);
+      formItemContext.onFieldChange();
     };
 
     const onHover = (e: MouseEvent, index: number) => {
@@ -116,6 +119,7 @@ const Rate = defineComponent({
     const onBlur = () => {
       state.focused = false;
       emit('blur');
+      formItemContext.onFieldBlur();
     };
     const onKeyDown = (event: KeyboardEvent) => {
       const { keyCode } = event;
@@ -188,7 +192,7 @@ const Rate = defineComponent({
     const character = getPropsSlot(slots, props, 'character') || <StarFilled />;
 
     return () => {
-      const { count, allowHalf, disabled, tabindex } = props;
+      const { count, allowHalf, disabled, tabindex, id = formItemContext.id.value } = props;
       const { class: className, style } = attrs;
       const stars = [];
       const disabledClass = disabled ? `${prefixCls.value}-disabled` : '';
@@ -217,6 +221,7 @@ const Rate = defineComponent({
       return (
         <ul
           {...attrs}
+          id={id}
           class={rateClassName}
           style={style}
           onMouseleave={disabled ? null : onMouseLeave}

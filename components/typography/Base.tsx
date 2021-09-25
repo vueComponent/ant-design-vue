@@ -1,9 +1,8 @@
-import omit from 'omit.js';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import warning from '../_util/warning';
 import TransButton from '../_util/transButton';
 import raf from '../_util/raf';
-import isStyleSupport from '../_util/styleChecker';
+import { isStyleSupport } from '../_util/styleChecker';
 import Editable from './Editable';
 import measure from './util';
 import PropTypes from '../_util/vue-types';
@@ -31,6 +30,7 @@ import {
 import type { AutoSizeType } from '../input/ResizableTextArea';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { EventHandler } from '../_util/EventInterface';
+import omit from '../_util/omit';
 
 export type BaseType = 'secondary' | 'success' | 'warning' | 'danger';
 

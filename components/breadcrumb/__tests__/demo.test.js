@@ -1,3 +1,3 @@
 import demoTest from '../../../tests/shared/demoTest';
 
-demoTest('breadcrumb', { skip: ['router.md'] });
+demoTest('breadcrumb', { skip: ['router'] });

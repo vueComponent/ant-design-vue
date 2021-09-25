@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import Input from '../index';
 import Button from '../../button';
 import focusTest from '../../../tests/shared/focusTest';

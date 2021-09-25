@@ -5,7 +5,7 @@ import classNames from '../_util/classNames';
 import pickAttrs from '../_util/pickAttrs';
 import { isValidElement } from '../_util/props-util';
 import createRef from '../_util/createRef';
-import type { PropType, VNodeChild } from 'vue';
+import type { PropType } from 'vue';
 import { computed, defineComponent, nextTick, reactive, watch } from 'vue';
 import List from '../vc-virtual-list/List';
 import type {
@@ -16,19 +16,26 @@ import type {
 } from './interface';
 import type { RawValueType, FlattenOptionsType } from './interface/generator';
 import useMemo from '../_util/hooks/useMemo';
+
+export interface RefOptionListProps {
+  onKeydown: (e?: KeyboardEvent) => void;
+  onKeyup: (e?: KeyboardEvent) => void;
+  scrollTo?: (index: number) => void;
+}
+
 import type { EventHandler } from '../_util/EventInterface';
-export interface OptionListProps {
+export interface OptionListProps<OptionType extends object> {
   prefixCls: string;
   id: string;
-  options: SelectOptionsType;
-  flattenOptions: FlattenOptionsType<SelectOptionsType>;
+  options: OptionType[];
+  flattenOptions: FlattenOptionsType<OptionType>;
   height: number;
   itemHeight: number;
   values: Set<RawValueType>;
   multiple: boolean;
   open: boolean;
   defaultActiveFirstOption?: boolean;
-  notFoundContent?: VNodeChild;
+  notFoundContent?: any;
   menuItemSelectedIcon?: RenderNode;
   childrenAsData: boolean;
   searchValue: string;
@@ -75,7 +82,7 @@ const OptionListProps = {
  * Using virtual list of option display.
  * Will fallback to dom if use customize render.
  */
-const OptionList = defineComponent<OptionListProps, { state?: any }>({
+const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, { state?: any }>({
   name: 'OptionList',
   inheritAttrs: false,
   slots: ['option'],
@@ -285,7 +292,7 @@ const OptionList = defineComponent<OptionListProps, { state?: any }>({
       virtual,
       onScroll,
       onMouseenter,
-    } = this.$props as OptionListProps;
+    } = this.$props;
     const renderOption = $slots.option;
     const { activeIndex } = this.state;
     // ========================== Render ==========================

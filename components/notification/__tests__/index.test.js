@@ -1,4 +1,4 @@
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import notification from '..';
 import { StepBackwardOutlined } from '@ant-design/icons-vue';
 
@@ -11,7 +11,7 @@ describe('notification', () => {
     notification.destroy();
   });
 
-  it('should be able to hide manually', async () => {
+  fit('should be able to hide manually', async () => {
     notification.open({
       message: 'Notification Title',
       duration: 0,

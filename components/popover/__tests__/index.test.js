@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import Popover from '..';
 import mountTest from '../../../tests/shared/mountTest';
 
@@ -40,12 +40,10 @@ describe('Popover', () => {
     await asyncExpect(() => {
       popup = popover.vm.$refs.popover.getPopupDomNode();
       expect(popup).not.toBe(null);
-      expect(popup.className).toContain('ant-popover-placement-top');
     }, 1000);
     await asyncExpect(() => {
       expect(popup.innerHTML).toMatchSnapshot();
       expect(popup.innerHTML).toMatchSnapshot();
     });
-    await asyncExpect(() => {});
   });
 });

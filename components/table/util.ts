@@ -1,73 +1,63 @@
-export function flatArray(data = [], childrenName = 'children') {
-  const result = [];
-  const loop = array => {
-    array.forEach(item => {
-      if (item[childrenName]) {
-        const newItem = { ...item };
-        delete newItem[childrenName];
-        result.push(newItem);
-        if (item[childrenName].length > 0) {
-          loop(item[childrenName]);
-        }
-      } else {
-        result.push(item);
-      }
-    });
-  };
-  loop(data);
-  return result;
+import { camelize } from 'vue';
+import { flattenChildren } from '../_util/props-util';
+import type { ColumnType, ColumnsType, ColumnTitle, ColumnTitleProps, Key } from './interface';
+
+export function getColumnKey<RecordType>(column: ColumnType<RecordType>, defaultKey: string): Key {
+  if ('key' in column && column.key !== undefined && column.key !== null) {
+    return column.key;
+  }
+  if (column.dataIndex) {
+    return (Array.isArray(column.dataIndex) ? column.dataIndex.join('.') : column.dataIndex) as Key;
+  }
+
+  return defaultKey;
 }
 
-export function treeMap(tree, mapper, childrenName = 'children') {
-  return tree.map((node, index) => {
-    const extra = {};
-    if (node[childrenName]) {
-      extra[childrenName] = treeMap(node[childrenName], mapper, childrenName);
+export function getColumnPos(index: number, pos?: string) {
+  return pos ? `${pos}-${index}` : `${index}`;
+}
+
+export function renderColumnTitle<RecordType>(
+  title: ColumnTitle<RecordType>,
+  props: ColumnTitleProps<RecordType>,
+) {
+  if (typeof title === 'function') {
+    return title(props);
+  }
+
+  return title;
+}
+
+export function convertChildrenToColumns<RecordType>(
+  elements: any[] = [],
+): ColumnsType<RecordType> {
+  const flattenElements = flattenChildren(elements);
+  const columns = [];
+  flattenElements.forEach(element => {
+    if (!element) {
+      return;
     }
-    return {
-      ...mapper(node, index),
-      ...extra,
-    };
+    const key = element.key;
+    const style = element.props?.style || {};
+    const cls = element.props?.class || '';
+    const props = element.props || {};
+    for (const [k, v] of Object.entries(props)) {
+      props[camelize(k)] = v;
+    }
+    const { default: children, ...restSlots } = element.children || {};
+    const column = { ...restSlots, ...props, style, class: cls };
+    if (key) {
+      column.key = key;
+    }
+    if (element.type?.__ANT_TABLE_COLUMN_GROUP) {
+      column.children = convertChildrenToColumns(
+        typeof children === 'function' ? children() : children,
+      );
+    } else {
+      const customRender = element.children?.default;
+      column.customRender = column.customRender || customRender;
+    }
+    columns.push(column);
   });
-}
-
-export function flatFilter(tree, callback) {
-  return tree.reduce((acc, node) => {
-    if (callback(node)) {
-      acc.push(node);
-    }
-    if (node.children) {
-      const children = flatFilter(node.children, callback);
-      acc.push(...children);
-    }
-    return acc;
-  }, []);
-}
-
-// export function normalizeColumns (elements) {
-//   const columns = []
-//   React.Children.forEach(elements, (element) => {
-//     if (!React.isValidElement(element)) {
-//       return
-//     }
-//     const column = {
-//       ...element.props,
-//     }
-//     if (element.key) {
-//       column.key = element.key
-//     }
-//     if (element.type && element.type.__ANT_TABLE_COLUMN_GROUP) {
-//       column.children = normalizeColumns(column.children)
-//     }
-//     columns.push(column)
-//   })
-//   return columns
-// }
-
-export function generateValueMaps(items, maps = {}) {
-  (items || []).forEach(({ value, children }) => {
-    maps[value.toString()] = value;
-    generateValueMaps(children, maps);
-  });
-  return maps;
+  return columns;
 }

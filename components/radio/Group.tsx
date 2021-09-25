@@ -6,6 +6,7 @@ import { getOptionProps, filterEmpty, hasProp, getSlot } from '../_util/props-ut
 import { defaultConfigProvider } from '../config-provider';
 import { tuple } from '../_util/type';
 import type { RadioChangeEvent } from './interface';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export default defineComponent({
   name: 'ARadioGroup',
@@ -19,10 +20,13 @@ export default defineComponent({
     name: PropTypes.string,
     buttonStyle: PropTypes.string.def('outline'),
     onChange: PropTypes.func,
+    id: PropTypes.string,
   },
   emits: ['update:value', 'change'],
   setup() {
+    const formItemContext = useInjectFormItemContext();
     return {
+      formItemContext,
       updatingValue: false,
       configProvider: inject('configProvider', defaultConfigProvider),
       radioGroupContext: null,
@@ -65,6 +69,7 @@ export default defineComponent({
         this.updatingValue = true;
         this.$emit('update:value', value);
         this.$emit('change', ev);
+        this.formItemContext.onFieldChange();
       }
       nextTick(() => {
         this.updatingValue = false;
@@ -73,7 +78,12 @@ export default defineComponent({
   },
   render() {
     const props = getOptionProps(this);
-    const { prefixCls: customizePrefixCls, options, buttonStyle } = props;
+    const {
+      prefixCls: customizePrefixCls,
+      options,
+      buttonStyle,
+      id = this.formItemContext.id.value,
+    } = props;
     const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
@@ -114,6 +124,10 @@ export default defineComponent({
       });
     }
 
-    return <div class={classString}>{children}</div>;
+    return (
+      <div class={classString} id={id}>
+        {children}
+      </div>
+    );
   },
 });

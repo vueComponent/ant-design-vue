@@ -1,20 +1,32 @@
-import type { BaseTransitionProps, CSSProperties, Ref } from 'vue';
-import { onUpdated } from 'vue';
-import { getCurrentInstance } from 'vue';
-import { defineComponent, nextTick, Transition as T, TransitionGroup as TG } from 'vue';
+import type {
+  BaseTransitionProps,
+  CSSProperties,
+  Ref,
+  TransitionGroupProps,
+  TransitionProps,
+} from 'vue';
+import {
+  onUpdated,
+  getCurrentInstance,
+  defineComponent,
+  nextTick,
+  Transition as T,
+  TransitionGroup as TG,
+} from 'vue';
 
-export const getTransitionProps = (transitionName: string, opt: object = {}) => {
+export const getTransitionProps = (transitionName: string, opt: TransitionProps = {}) => {
   if (process.env.NODE_ENV === 'test') {
     return opt;
   }
-  const transitionProps = transitionName
+  const transitionProps: TransitionProps = transitionName
     ? {
         appear: true,
+        // type: 'animation',
         // appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
         // appearActiveClass: `antdv-base-transtion`,
-        appearToClass: `${transitionName}-appear ${transitionName}-appear-active`,
+        // appearToClass: `${transitionName}-appear ${transitionName}-appear-active`,
         enterFromClass: `${transitionName}-enter ${transitionName}-enter-prepare`,
-        // enterActiveClass: `antdv-base-transtion`,
+        // enterActiveClass: `${transitionName}-enter ${transitionName}-enter-active`,
         enterToClass: `${transitionName}-enter ${transitionName}-enter-active`,
         leaveFromClass: ` ${transitionName}-leave`,
         leaveActiveClass: `${transitionName}-leave ${transitionName}-leave-active`,
@@ -25,8 +37,8 @@ export const getTransitionProps = (transitionName: string, opt: object = {}) => 
   return transitionProps;
 };
 
-export const getTransitionGroupProps = (transitionName: string, opt: object = {}) => {
-  const transitionProps = transitionName
+export const getTransitionGroupProps = (transitionName: string, opt: TransitionProps = {}) => {
+  const transitionProps: TransitionGroupProps = transitionName
     ? {
         appear: true,
         // appearFromClass: `${transitionName}-appear ${transitionName}-appear-prepare`,
@@ -146,6 +158,13 @@ const collapseMotion = (style: Ref<CSSProperties>, className: Ref<string>): CSSM
   };
 };
 
-export { Transition, TransitionGroup, collapseMotion };
+const getTransitionName = (rootPrefixCls: string, motion: string, transitionName?: string) => {
+  if (transitionName !== undefined) {
+    return transitionName;
+  }
+  return `${rootPrefixCls}-${motion}`;
+};
+
+export { Transition, TransitionGroup, collapseMotion, getTransitionName };
 
 export default Transition;

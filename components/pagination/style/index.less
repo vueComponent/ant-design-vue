@@ -59,7 +59,7 @@
       }
     }
 
-    &:focus,
+    &:focus-visible,
     &:hover {
       border-color: @primary-color;
       transition: all 0.3s;
@@ -77,12 +77,12 @@
         color: @primary-color;
       }
 
-      &:focus,
+      &:focus-visible,
       &:hover {
         border-color: @primary-5;
       }
 
-      &:focus a,
+      &:focus-visible a,
       &:hover a {
         color: @primary-5;
       }
@@ -96,9 +96,8 @@
       position: relative;
 
       .@{pagination-prefix-cls}-item-link-icon {
-        .iconfont-size-under-12px(12px);
-
         color: @primary-color;
+        font-size: @font-size-sm;
         letter-spacing: -1px;
         opacity: 0;
         transition: all 0.2s;
@@ -120,6 +119,7 @@
         display: block;
         margin: auto;
         color: @disabled-color;
+        font-family: Arial, Helvetica, sans-serif;
         letter-spacing: 2px;
         text-align: center;
         text-indent: 0.13em;
@@ -128,7 +128,7 @@
       }
     }
 
-    &:focus,
+    &:focus-visible,
     &:hover {
       .@{pagination-prefix-cls}-item-link-icon {
         opacity: 1;
@@ -164,20 +164,24 @@
 
   &-prev,
   &-next {
+    font-family: Arial, Helvetica, sans-serif;
     outline: 0;
 
-    a {
+    button {
       color: @text-color;
+      cursor: pointer;
       user-select: none;
     }
 
-    &:hover a {
+    &:hover button {
       border-color: @primary-5;
     }
 
     .@{pagination-prefix-cls}-item-link {
       display: block;
+      width: 100%;
       height: 100%;
+      padding: 0;
       font-size: 12px;
       text-align: center;
       background-color: @pagination-item-link-bg;
@@ -187,7 +191,7 @@
       transition: all 0.3s;
     }
 
-    &:focus .@{pagination-prefix-cls}-item-link,
+    &:focus-visible .@{pagination-prefix-cls}-item-link,
     &:hover .@{pagination-prefix-cls}-item-link {
       color: @primary-color;
       border-color: @primary-color;
@@ -197,9 +201,8 @@
   &-disabled {
     &,
     &:hover,
-    &:focus {
+    &:focus-visible {
       cursor: not-allowed;
-      a,
       .@{pagination-prefix-cls}-item-link {
         color: @disabled-color;
         border-color: @border-color-base;
@@ -217,15 +220,23 @@
     margin-left: 16px;
     vertical-align: middle;
 
+    // IE11 css hack. `*::-ms-backdrop,` is a must have
+    @media all and (-ms-high-contrast: none) {
+      *::-ms-backdrop,
+      & {
+        vertical-align: top;
+      }
+    }
+
     &-size-changer.@{ant-prefix}-select {
       display: inline-block;
       width: auto;
-      margin-right: 8px;
     }
 
     &-quick-jumper {
       display: inline-block;
       height: @input-height-base;
+      margin-left: @margin-xs;
       line-height: @input-height-base;
       vertical-align: top;
 
@@ -233,6 +244,7 @@
         .input();
 
         width: 50px;
+        height: @input-height-base;
         margin: 0 8px;
       }
     }
@@ -245,6 +257,7 @@
     vertical-align: top;
     .@{pagination-prefix-cls}-item-link {
       height: @pagination-item-size-sm;
+      background-color: transparent;
       border: 0;
       &::after {
         height: @pagination-item-size-sm;
@@ -272,6 +285,13 @@
 
       &:hover {
         border-color: @primary-color;
+      }
+
+      &[disabled] {
+        color: @disabled-color;
+        background: @disabled-bg;
+        border-color: @border-color-base;
+        cursor: not-allowed;
       }
     }
   }
@@ -321,6 +341,11 @@
 
   &.mini &-options {
     margin-left: 2px;
+
+    &-size-changer {
+      top: @pagination-mini-options-size-changer-top;
+    }
+
     &-quick-jumper {
       height: @pagination-item-size-sm;
       line-height: @pagination-item-size-sm;
@@ -329,6 +354,7 @@
         .input-sm();
 
         width: 44px;
+        height: @input-height-sm;
       }
     }
   }
@@ -359,27 +385,25 @@
     }
 
     .@{pagination-prefix-cls}-item-link {
-      &,
-      &:hover,
-      &:focus {
-        color: @text-color-secondary;
-        background: @disabled-bg;
-        border-color: @border-color-base;
-        cursor: not-allowed;
+      color: @disabled-color;
+      background: @disabled-bg;
+      border-color: @border-color-base;
+      cursor: not-allowed;
+      .@{pagination-prefix-cls}-simple& {
+        background: transparent;
       }
     }
 
-    .@{pagination-prefix-cls}-jump-prev,
-    .@{pagination-prefix-cls}-jump-next {
-      &:focus,
-      &:hover {
-        .@{pagination-prefix-cls}-item-link-icon {
-          opacity: 0;
-        }
-        .@{pagination-prefix-cls}-item-ellipsis {
-          opacity: 1;
-        }
-      }
+    .@{pagination-prefix-cls}-item-link-icon {
+      opacity: 0;
+    }
+
+    .@{pagination-prefix-cls}-item-ellipsis {
+      opacity: 1;
+    }
+
+    .@{pagination-prefix-cls}-simple-pager {
+      color: @disabled-color;
     }
   }
 }
@@ -398,3 +422,5 @@
     display: none;
   }
 }
+
+@import './rtl';

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/image/demo/basic.md correctly 1`] = `
+exports[`renders ./components/image/demo/basic.vue correctly 1`] = `
 <div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png">
   <!---->
   <!---->
@@ -8,18 +8,18 @@ exports[`renders ./antdv-demo/docs/image/demo/basic.md correctly 1`] = `
 <!---->
 `;
 
-exports[`renders ./antdv-demo/docs/image/demo/fallback.md correctly 1`] = `
-<div class="ant-image" style="width: 200px; height: 200px;"><img class="ant-image-img" src="error">
+exports[`renders ./components/image/demo/fallback.vue correctly 1`] = `
+<div class="ant-image" style="width: 200px; height: 200px;"><img class="ant-image-img" src="https://www.antdv.com/#error">
   <!---->
   <!---->
 </div>
 <!---->
 `;
 
-exports[`renders ./antdv-demo/docs/image/demo/placeholder.md correctly 1`] = `
+exports[`renders ./components/image/demo/placeholder.vue correctly 1`] = `
 <div class="ant-space ant-space-horizontal ant-space-align-center">
   <div class="ant-space-item" style="margin-right: 12px;">
-    <div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?1479744000000">
+    <div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?undefined">
       <div aria-hidden="true" class="ant-image-placeholder">
         <div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png?x-oss-process=image/blur,r_50,s_50/quality,q_1/resize,m_mfit,h_200,w_200">
           <!---->
@@ -31,19 +31,21 @@ exports[`renders ./antdv-demo/docs/image/demo/placeholder.md correctly 1`] = `
     </div>
     <!---->
   </div>
+  <!---->
   <div class="ant-space-item"><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>reload</span>
     </button></div>
+  <!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/image/demo/previewGroup.md correctly 1`] = `
-<div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://qn.antdv.com/vue.png">
+exports[`renders ./components/image/demo/previewGroup.vue correctly 1`] = `
+<div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://aliyuncdn.antdv.com/vue.png">
   <!---->
   <!---->
 </div>
 <!---->
-<div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://qn.antdv.com/logo.png">
+<div class="ant-image" style="width: 200px;"><img class="ant-image-img" src="https://aliyuncdn.antdv.com/logo.png">
   <!---->
   <!---->
 </div>

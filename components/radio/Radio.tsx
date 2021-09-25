@@ -6,6 +6,7 @@ import classNames from '../_util/classNames';
 import { getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import type { RadioChangeEvent } from './interface';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export const radioProps = {
   prefixCls: PropTypes.string,
@@ -30,9 +31,11 @@ export default defineComponent({
   props: radioProps,
   emits: ['update:checked', 'update:value', 'change', 'blur', 'focus'],
   setup() {
+    const formItemContext = useInjectFormItemContext();
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
       radioGroupContext: inject('radioGroupContext', null),
+      formItemContext,
     };
   },
   methods: {
@@ -47,6 +50,7 @@ export default defineComponent({
       this.$emit('update:checked', targetChecked);
       this.$emit('update:value', targetChecked);
       this.$emit('change', event);
+      this.formItemContext.onFieldChange();
     },
     onChange2(e: RadioChangeEvent) {
       this.$emit('change', e);
@@ -59,12 +63,17 @@ export default defineComponent({
   render() {
     const { $slots, radioGroupContext: radioGroup } = this;
     const props = getOptionProps(this);
-    const { prefixCls: customizePrefixCls, ...restProps } = props;
+    const {
+      prefixCls: customizePrefixCls,
+      id = this.formItemContext.id.value,
+      ...restProps
+    } = props;
     const { getPrefixCls } = this.configProvider;
     const prefixCls = getPrefixCls('radio', customizePrefixCls);
 
     const rProps: RadioProps = {
       prefixCls,
+      id,
       ...restProps,
     };
 

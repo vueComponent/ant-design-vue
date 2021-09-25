@@ -230,41 +230,42 @@ export default defineComponent({
     );
 
     return () => {
-      const icon = getPropsSlot(slots, props, 'icon');
-      const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
-      const expandIcon = props.expandIcon || slots.expandIcon || menuExpandIcon;
-      let titleNode = (
-        <div
-          style={directionStyle.value}
-          class={`${subMenuPrefixClsValue}-title`}
-          tabindex={mergedDisabled.value ? null : -1}
-          ref={elementRef}
-          title={typeof title === 'string' ? title : null}
-          data-menu-id={key}
-          aria-expanded={open.value}
-          aria-haspopup
-          aria-controls={popupId}
-          aria-disabled={mergedDisabled.value}
-          onClick={onInternalTitleClick}
-          onFocus={onInternalFocus}
-        >
-          {title}
+      const baseTitleNode = () => {
+        const icon = getPropsSlot(slots, props, 'icon');
+        const expandIcon = props.expandIcon || slots.expandIcon || menuExpandIcon.value;
+        const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);
+        return (
+          <div
+            style={directionStyle.value}
+            class={`${subMenuPrefixClsValue}-title`}
+            tabindex={mergedDisabled.value ? null : -1}
+            ref={elementRef}
+            title={typeof title === 'string' ? title : null}
+            data-menu-id={key}
+            aria-expanded={open.value}
+            aria-haspopup
+            aria-controls={popupId}
+            aria-disabled={mergedDisabled.value}
+            onClick={onInternalTitleClick}
+            onFocus={onInternalFocus}
+          >
+            {title}
 
-          {/* Only non-horizontal mode shows the icon */}
-          {mode.value !== 'horizontal' && expandIcon ? (
-            expandIcon({ ...props, isOpen: open.value })
-          ) : (
-            <i class={`${subMenuPrefixClsValue}-arrow`} />
-          )}
-        </div>
-      );
-
+            {/* Only non-horizontal mode shows the icon */}
+            {mode.value !== 'horizontal' && expandIcon ? (
+              expandIcon({ ...props, isOpen: open.value })
+            ) : (
+              <i class={`${subMenuPrefixClsValue}-arrow`} />
+            )}
+          </div>
+        );
+      };
+      let titleNode = () => null;
       if (!overflowDisabled.value && mode.value !== 'inline') {
-        const triggerMode = triggerModeRef.value;
-        titleNode = (
+        titleNode = () => (
           <PopupTrigger
-            mode={triggerMode}
+            mode={triggerModeRef.value}
             prefixCls={subMenuPrefixClsValue}
             visible={!props.internalPopupClose && open.value}
             popupClassName={popupClassName.value}
@@ -283,13 +284,13 @@ export default defineComponent({
               ),
             }}
           >
-            {titleNode}
+            {baseTitleNode()}
           </PopupTrigger>
         );
       } else {
         // 包裹一层，保持结构一致，防止动画丢失
         // https://github.com/vueComponent/ant-design-vue/issues/4325
-        titleNode = <PopupTrigger>{titleNode}</PopupTrigger>;
+        titleNode = () => <PopupTrigger>{baseTitleNode()}</PopupTrigger>;
       }
       return (
         <MenuContextProvider mode={renderMode.value}>
@@ -311,16 +312,21 @@ export default defineComponent({
             onMouseenter={onMouseEnter}
             onMouseleave={onMouseLeave}
             data-submenu-id={key}
-          >
-            {titleNode}
+            v-slots={() => {
+              return (
+                <>
+                  {titleNode()}
 
-            {/* Inline mode */}
-            {!overflowDisabled.value && (
-              <InlineSubMenuList id={popupId} open={open.value} keyPath={keysPath.value}>
-                {slots.default?.()}
-              </InlineSubMenuList>
-            )}
-          </Overflow.Item>
+                  {/* Inline mode */}
+                  {!overflowDisabled.value && (
+                    <InlineSubMenuList id={popupId} open={open.value} keyPath={keysPath.value}>
+                      {slots.default?.()}
+                    </InlineSubMenuList>
+                  )}
+                </>
+              );
+            }}
+          ></Overflow.Item>
         </MenuContextProvider>
       );
     };

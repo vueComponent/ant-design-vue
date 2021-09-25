@@ -1,117 +1,92 @@
-import type { VNode, ExtractPropTypes } from 'vue';
-import { provide, inject, defineComponent } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { defineComponent } from 'vue';
 import Button from '../button';
 import classNames from '../_util/classNames';
-import buttonTypes from '../button/buttonTypes';
 import Dropdown from './dropdown';
-import PropTypes from '../_util/vue-types';
-import { hasProp, getComponent, getSlot } from '../_util/props-util';
-import getDropdownProps from './getDropdownProps';
-import { defaultConfigProvider } from '../config-provider';
+import { initDefaultProps } from '../_util/props-util';
+import { dropdownButtonProps } from './props';
 import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
-import { tuple } from '../_util/type';
-
-const ButtonTypesProps = buttonTypes();
-const DropdownProps = getDropdownProps();
+import useConfigInject from '../_util/hooks/useConfigInject';
 const ButtonGroup = Button.Group;
-const dropdownButtonProps = {
-  ...DropdownProps,
-  type: PropTypes.oneOf(tuple('primary', 'ghost', 'dashed', 'danger', 'default')).def('default'),
-  size: PropTypes.oneOf(tuple('small', 'large', 'default')).def('default'),
-  htmlType: ButtonTypesProps.htmlType,
-  href: PropTypes.string,
-  disabled: PropTypes.looseBool,
-  prefixCls: PropTypes.string,
-  placement: DropdownProps.placement.def('bottomRight'),
-  icon: PropTypes.any,
-  title: PropTypes.string,
-  onClick: PropTypes.func,
-  onVisibleChange: PropTypes.func,
-  'onUpdate:visible': PropTypes.func,
-};
-export type DropdownButtonProps = Partial<ExtractPropTypes<typeof dropdownButtonProps>>;
+
+export type DropdownButtonProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownButtonProps>>>;
+
 export default defineComponent({
   name: 'ADropdownButton',
   inheritAttrs: false,
-  props: dropdownButtonProps,
+  __ANT_BUTTON: true,
+  props: initDefaultProps(dropdownButtonProps(), {
+    trigger: 'hover',
+    placement: 'bottomRight',
+    type: 'default',
+  }),
   emits: ['click', 'visibleChange', 'update:visible'],
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-      popupRef: null,
+  slots: ['icon', 'leftButton', 'rightButton', 'overlay'],
+  setup(props, { slots, attrs, emit }) {
+    const handleClick = (e: MouseEvent) => {
+      emit('click', e);
     };
-  },
-  created() {
-    provide('savePopupRef', this.savePopupRef);
-  },
-  methods: {
-    savePopupRef(ref: VNode) {
-      this.popupRef = ref;
-    },
-    handleClick(e: Event) {
-      this.$emit('click', e);
-    },
-    handleVisibleChange(val: boolean) {
-      this.$emit('update:visible', val);
-      this.$emit('visibleChange', val);
-    },
-  },
-  render() {
-    const {
-      type,
-      disabled,
-      onClick,
-      htmlType,
-      class: className,
-      prefixCls: customizePrefixCls,
-      overlay,
-      trigger,
-      align,
-      visible,
-      onVisibleChange,
-      placement,
-      getPopupContainer,
-      href,
-      title,
-      ...restProps
-    } = { ...this.$props, ...this.$attrs } as any;
-    const icon = getComponent(this, 'icon') || <EllipsisOutlined />;
-    const { getPopupContainer: getContextPopupContainer } = this.configProvider;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('dropdown-button', customizePrefixCls);
-    const dropdownProps: any = {
-      align,
-      disabled,
-      trigger: disabled ? [] : trigger,
-      placement,
-      getPopupContainer: getPopupContainer || getContextPopupContainer,
-      onVisibleChange: this.handleVisibleChange,
-    };
-    if (hasProp(this, 'visible')) {
-      dropdownProps.visible = visible;
-    }
-
-    const buttonGroupProps = {
-      ...restProps,
-      class: classNames(prefixCls, className),
+    const handleVisibleChange = (val: boolean) => {
+      emit('update:visible', val);
+      emit('visibleChange', val);
     };
 
-    return (
-      <ButtonGroup {...buttonGroupProps}>
+    const { prefixCls, direction, getPopupContainer } = useConfigInject('dropdown-button', props);
+
+    return () => {
+      const {
+        type,
+        disabled,
+        htmlType,
+        class: className = '',
+        overlay = slots.overlay?.(),
+        trigger,
+        align,
+        visible,
+        onVisibleChange,
+        placement = direction.value === 'rtl' ? 'bottomLeft' : 'bottomRight',
+        href,
+        title,
+        icon = slots.icon?.() || <EllipsisOutlined />,
+        mouseEnterDelay,
+        mouseLeaveDelay,
+        ...restProps
+      } = { ...props, ...attrs };
+
+      const dropdownProps = {
+        align,
+        disabled,
+        trigger: disabled ? [] : trigger,
+        placement,
+        getPopupContainer: getPopupContainer.value,
+        onVisibleChange: handleVisibleChange,
+        mouseEnterDelay,
+        mouseLeaveDelay,
+        visible,
+      };
+
+      const leftButton = (
         <Button
           type={type}
           disabled={disabled}
-          onClick={this.handleClick}
+          onClick={handleClick}
           htmlType={htmlType}
           href={href}
           title={title}
-        >
-          {getSlot(this)}
-        </Button>
-        <Dropdown {...dropdownProps} overlay={getComponent(this, 'overlay')}>
-          <Button type={type}>{icon}</Button>
-        </Dropdown>
-      </ButtonGroup>
-    );
+          v-slots={{ default: slots.default }}
+        ></Button>
+      );
+
+      const rightButton = <Button type={type} icon={icon} />;
+
+      return (
+        <ButtonGroup {...restProps} class={classNames(prefixCls.value, className)}>
+          {slots.leftButton ? slots.leftButton({ button: leftButton }) : leftButton}
+          <Dropdown {...dropdownProps} v-slots={{ overlay: () => overlay }}>
+            {slots.rightButton ? slots.rightButton({ button: rightButton }) : rightButton}
+          </Dropdown>
+        </ButtonGroup>
+      );
+    };
   },
 });

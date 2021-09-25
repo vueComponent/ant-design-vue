@@ -323,8 +323,8 @@
 @layout-trigger-color-light: @text-color;
 
 // z-index list, order by `z-index`
-@zindex-badge: 1;
-@zindex-table-fixed: 1;
+@zindex-badge: auto;
+@zindex-table-fixed: 2;
 @zindex-affix: 10;
 @zindex-back-top: 10;
 @zindex-picker-panel: 10;
@@ -336,7 +336,8 @@
 @zindex-popover: 1030;
 @zindex-dropdown: 1050;
 @zindex-picker: 1050;
-@zindex-tooltip: 1060;
+@zindex-popoconfirm: 1060;
+@zindex-tooltip: 1070;
 @zindex-image: 1080;
 
 // Animation
@@ -471,6 +472,7 @@
 @popover-color: @text-color;
 // Popover maximum width
 @popover-min-width: 177px;
+@popover-min-height: 32px;
 // Popover arrow width
 @popover-arrow-width: 6px;
 // Popover arrow color
@@ -480,6 +482,7 @@
 @popover-arrow-outer-color: @popover-bg;
 // Popover distance with trigger
 @popover-distance: @popover-arrow-width + 4px;
+@popover-padding-horizontal: @padding-md;
 
 // Modal
 // --
@@ -496,9 +499,12 @@
 // --
 @progress-default-color: @processing-color;
 @progress-remaining-color: @background-color-base;
-@progress-text-color: @text-color;
+@progress-info-text-color: @progress-text-color;
 @progress-radius: 100px;
-
+@progress-steps-item-bg: #f3f3f3;
+@progress-text-font-size: 1em;
+@progress-text-color: @text-color; // This is for circle text color, should be renamed better
+@progress-circle-text-font-size: 1em;
 // Menu
 // ---
 @menu-inline-toplevel-item-height: 40px;
@@ -550,8 +556,8 @@
 @table-header-bg: @background-color-light;
 @table-header-color: @heading-color;
 @table-header-sort-bg: @background-color-base;
-@table-body-sort-bg: rgba(0, 0, 0, 0.01);
-@table-row-hover-bg: @primary-1;
+@table-body-sort-bg: #fafafa;
+@table-row-hover-bg: @background-color-light;
 @table-selected-row-color: inherit;
 @table-selected-row-bg: @primary-1;
 @table-body-selected-sort-bg: @table-selected-row-bg;
@@ -559,15 +565,31 @@
 @table-expanded-row-bg: #fbfbfb;
 @table-padding-vertical: 16px;
 @table-padding-horizontal: 16px;
+@table-padding-vertical-md: (@table-padding-vertical * 3 / 4);
+@table-padding-horizontal-md: (@table-padding-horizontal / 2);
+@table-padding-vertical-sm: (@table-padding-vertical / 2);
+@table-padding-horizontal-sm: (@table-padding-horizontal / 2);
+@table-border-color: @border-color-split;
 @table-border-radius-base: @border-radius-base;
 @table-footer-bg: @background-color-light;
 @table-footer-color: @heading-color;
-@table-header-bg-sm: transparent;
+@table-header-bg-sm: @table-header-bg;
+@table-font-size: @font-size-base;
+@table-font-size-md: @table-font-size;
+@table-font-size-sm: @table-font-size;
+@table-header-cell-split-color: rgba(0, 0, 0, 0.06);
 // Sorter
 // Legacy: `table-header-sort-active-bg` is used for hover not real active
-@table-header-sort-active-bg: darken(@table-header-bg, 3%);
+@table-header-sort-active-bg: rgba(0, 0, 0, 0.04);
 // Filter
-@table-header-filter-active-bg: darken(@table-header-sort-active-bg, 5%);
+@table-header-filter-active-bg: rgba(0, 0, 0, 0.04);
+@table-filter-btns-bg: inherit;
+@table-filter-dropdown-bg: @component-background;
+@table-expand-icon-bg: @component-background;
+@table-selection-column-width: 32px;
+// Sticky
+@table-sticky-scroll-bar-bg: fade(#000, 35%);
+@table-sticky-scroll-bar-radius: 4px;
 
 // Tag
 // --
@@ -578,9 +600,30 @@
 
 // TimePicker
 // ---
-@time-picker-panel-column-width: 56px;
-@time-picker-panel-width: @time-picker-panel-column-width * 3;
-@time-picker-selected-bg: @background-color-base;
+@picker-bg: @component-background;
+@picker-basic-cell-hover-color: @item-hover-bg;
+@picker-basic-cell-active-with-range-color: @primary-1;
+@picker-basic-cell-hover-with-range-color: lighten(@primary-color, 35%);
+@picker-basic-cell-disabled-bg: @disabled-bg;
+@picker-border-color: @border-color-split;
+@picker-date-hover-range-border-color: lighten(@primary-color, 20%);
+@picker-date-hover-range-color: @picker-basic-cell-hover-with-range-color;
+@picker-time-panel-column-width: 56px;
+@picker-time-panel-column-height: 224px;
+@picker-time-panel-cell-height: 28px;
+@picker-panel-cell-height: 24px;
+@picker-panel-cell-width: 36px;
+@picker-text-height: 40px;
+@picker-panel-without-time-cell-height: 66px;
+
+// Calendar
+// ---
+@calendar-bg: @component-background;
+@calendar-input-bg: @input-bg;
+@calendar-border-color: @border-color-inverse;
+@calendar-item-active-bg: @item-active-bg;
+@calendar-full-bg: @calendar-bg;
+@calendar-full-panel-bg: @calendar-full-bg;
 
 // Carousel
 // ---
@@ -692,15 +735,16 @@
 // Pagination
 // ---
 @pagination-item-bg: @component-background;
-@pagination-item-size: 32px;
+@pagination-item-size: @height-base;
 @pagination-item-size-sm: 24px;
-@pagination-font-family: Arial;
+@pagination-font-family: @font-family;
 @pagination-font-weight-active: 500;
 @pagination-item-bg-active: @component-background;
 @pagination-item-link-bg: @component-background;
 @pagination-item-disabled-color-active: @white;
 @pagination-item-disabled-bg-active: darken(@disabled-bg, 10%);
 @pagination-item-input-bg: @component-background;
+@pagination-mini-options-size-changer-top: 0px;
 
 // PageHeader
 // ---
@@ -727,7 +771,7 @@
 
 // Slider
 // ---
-@slider-margin: 14px 6px 10px;
+@slider-margin: 10px 6px 10px;
 @slider-rail-background-color: @background-color-base;
 @slider-rail-background-color-hover: #e1e1e1;
 @slider-track-background-color: @primary-3;
@@ -737,8 +781,10 @@
 @slider-handle-color: @primary-3;
 @slider-handle-color-hover: @primary-4;
 @slider-handle-color-focus: tint(@primary-color, 20%);
-@slider-handle-color-focus-shadow: fade(@primary-color, 20%);
+@slider-handle-color-focus-shadow: fade(@primary-color, 12%);
 @slider-handle-color-tooltip-open: @primary-color;
+@slider-handle-size: 14px;
+@slider-handle-margin-top: -5px;
 @slider-handle-shadow: 0;
 @slider-dot-border-color: @border-color-split;
 @slider-dot-border-color-active: tint(@primary-color, 50%);
@@ -747,6 +793,7 @@
 
 // Tree
 // ---
+@tree-bg: @component-background;
 @tree-title-height: 24px;
 @tree-child-padding: 18px;
 @tree-directory-selected-color: #fff;
@@ -775,9 +822,12 @@
 // Transfer
 // ---
 @transfer-header-height: 40px;
+@transfer-item-height: @height-base;
 @transfer-disabled-bg: @disabled-bg;
 @transfer-list-height: 200px;
 @transfer-item-hover-bg: @item-hover-bg;
+@transfer-item-padding-vertical: 6px;
+@transfer-list-search-icon-top: 12px;
 
 // Message
 // ---
@@ -837,6 +887,7 @@
 @timeline-dot-border-width: 2px;
 @timeline-dot-color: @primary-color;
 @timeline-dot-bg: @component-background;
+@timeline-item-padding-bottom: 20px;
 
 // Typography
 // ---
@@ -855,8 +906,28 @@
 @image-preview-operation-disabled-color: fade(@image-preview-operation-color, 45%);
 
 // Steps
+// ---
+@process-tail-color: @border-color-split;
 @steps-nav-arrow-color: fade(@black, 25%);
 @steps-background: @component-background;
+@steps-icon-size: 32px;
+@steps-icon-custom-size: @steps-icon-size;
+@steps-icon-custom-top: 0px;
+@steps-icon-custom-font-size: 24px;
+@steps-icon-top: -0.5px;
+@steps-icon-font-size: @font-size-lg;
+@steps-icon-margin: 0 8px 0 0;
+@steps-title-line-height: @height-base;
+@steps-small-icon-size: 24px;
+@steps-small-icon-margin: 0 8px 0 0;
+@steps-dot-size: 8px;
+@steps-dot-top: 2px;
+@steps-current-dot-size: 10px;
+@steps-description-max-width: 140px;
+@steps-nav-content-max-width: auto;
+@steps-vertical-icon-width: 16px;
+@steps-vertical-tail-width: 16px;
+@steps-vertical-tail-width-sm: 12px;
 
 // Notification
 // ---

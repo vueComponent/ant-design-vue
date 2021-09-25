@@ -1,26 +1,25 @@
 import type { App, VNode, PropType } from 'vue';
 import { provide, defineComponent, reactive, watch, onUnmounted } from 'vue';
 import PropTypes from '../_util/vue-types';
-import moment from 'moment';
-import interopDefault from '../_util/interopDefault';
 import type { ModalLocale } from '../modal/locale';
 import { changeConfirmLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { withInstall } from '../_util/type';
 import type { ValidateMessages } from '../form/interface';
+import type { TransferLocale } from '../transfer';
+import type { PickerLocale as DatePickerLocale } from '../date-picker/generatePicker';
+import type { PaginationLocale } from '../pagination/Pagination';
+import type { TableLocale } from '../table/interface';
+
+interface TransferLocaleForEmpty {
+  description: string;
+}
 export interface Locale {
   locale: string;
-  Pagination?: Object;
-  DatePicker?: Object;
-  TimePicker?: Object;
-  Calendar?: Object;
-  Table?: Object;
-  Modal?: ModalLocale;
-  Popconfirm?: Object;
-  Transfer?: Object;
-  Select?: Object;
-  Upload?: Object;
-
+  Pagination?: PaginationLocale;
+  Table?: TableLocale;
+  Popconfirm?: Record<string, any>;
+  Upload?: Record<string, any>;
   Form?: {
     optional?: string;
     defaultValidateMessages: ValidateMessages;
@@ -28,6 +27,17 @@ export interface Locale {
   Image?: {
     preview: string;
   };
+  DatePicker?: DatePickerLocale;
+  TimePicker?: Record<string, any>;
+  Calendar?: Record<string, any>;
+  Modal?: ModalLocale;
+  Transfer?: Partial<TransferLocale>;
+  Select?: Record<string, any>;
+  Empty?: TransferLocaleForEmpty;
+  global?: Record<string, any>;
+  PageHeader?: { back: string };
+  Icon?: Record<string, any>;
+  Text?: Record<string, any>;
 }
 
 export interface LocaleProviderProps {
@@ -37,14 +47,6 @@ export interface LocaleProviderProps {
 }
 
 export const ANT_MARK = 'internalMark';
-
-function setMomentLocale(locale?: Locale) {
-  if (locale && locale.locale) {
-    interopDefault(moment).locale(locale.locale);
-  } else {
-    interopDefault(moment).locale('en');
-  }
-}
 
 const LocaleProvider = defineComponent({
   name: 'ALocaleProvider',
@@ -72,10 +74,9 @@ const LocaleProvider = defineComponent({
       () => props.locale,
       val => {
         state.antLocale = {
-          ...val,
+          ...props.locale,
           exist: true,
-        };
-        setMomentLocale(val);
+        } as any;
         changeConfirmLocale(val && val.Modal);
       },
       { immediate: true },

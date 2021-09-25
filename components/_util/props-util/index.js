@@ -3,6 +3,7 @@ import classNames from '../classNames';
 import { isVNode, Fragment, Comment, Text, h } from 'vue';
 import { camelize, hyphenate, isOn, resolvePropValue } from '../util';
 import isValid from '../isValid';
+import initDefaultProps from './initDefaultProps';
 // function getType(fn) {
 //   const match = fn && fn.toString().match(/^\s*function (\w+)/);
 //   return match ? match[1] : '';
@@ -28,6 +29,7 @@ const parseStyleText = (cssText = '', camel) => {
   const res = {};
   const listDelimiter = /;(?![^(]*\))/g;
   const propertyDelimiter = /:(.+)/;
+  if (typeof cssText === 'object') return cssText;
   cssText.split(listDelimiter).forEach(function (item) {
     if (item) {
       const tmp = item.split(propertyDelimiter);
@@ -41,7 +43,7 @@ const parseStyleText = (cssText = '', camel) => {
 };
 
 const hasProp = (instance, prop) => {
-  return prop in getOptionProps(instance);
+  return instance[prop] !== undefined;
 };
 // 重构后直接使用 hasProp 替换
 const slotHasProp = (slot, prop) => {
@@ -367,16 +369,6 @@ export function filterEmpty(children = []) {
   });
   return res.filter(c => !isEmptyElement(c));
 }
-const initDefaultProps = (propTypes, defaultProps) => {
-  Object.keys(defaultProps).forEach(k => {
-    if (propTypes[k]) {
-      propTypes[k].def && (propTypes[k] = propTypes[k].def(defaultProps[k]));
-    } else {
-      throw new Error(`not have ${k} prop`);
-    }
-  });
-  return propTypes;
-};
 
 export function mergeProps() {
   const args = [].slice.call(arguments, 0);
@@ -395,13 +387,15 @@ export function mergeProps() {
 }
 
 function isValidElement(element) {
+  if (Array.isArray(element) && element.length === 1) {
+    element = element[0];
+  }
   return element && element.__v_isVNode && typeof element.type !== 'symbol'; // remove text node
 }
 
 function getPropsSlot(slots, props, prop = 'default') {
   return props[prop] ?? slots[prop]?.();
 }
-
 export {
   splitAttrs,
   hasProp,

@@ -1,15 +1,13 @@
-import type { App, PropType, VNodeTypes, Plugin, ExtractPropTypes } from 'vue';
-import { defineComponent, inject, nextTick } from 'vue';
+import type { App, PropType, Plugin, ExtractPropTypes } from 'vue';
+import { watch, ref, onMounted, defineComponent, nextTick } from 'vue';
 import classNames from '../_util/classNames';
-import omit from 'omit.js';
 import PropTypes from '../_util/vue-types';
 import VcMentions from '../vc-mentions';
 import { mentionsProps as baseMentionsProps } from '../vc-mentions/src/mentionsProps';
-import Spin from '../spin';
-import BaseMixin from '../_util/BaseMixin';
-import { defaultConfigProvider } from '../config-provider';
-import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
-import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import { flattenChildren, getOptionProps } from '../_util/props-util';
+import { useInjectFormItemContext } from '../form/FormItemContext';
+import omit from '../_util/omit';
 
 const { Option } = VcMentions;
 
@@ -20,23 +18,26 @@ interface MentionsConfig {
 
 export interface MentionsOptionProps {
   value: string;
-  disabled: boolean;
-  children: VNodeTypes;
+  disabled?: boolean;
+  label?: string | number | ((o: MentionsOptionProps) => any);
   [key: string]: any;
 }
 
-function loadingFilterOption() {
-  return true;
+interface MentionsEntity {
+  prefix: string;
+  value: string;
 }
 
-function getMentions(value = '', config: MentionsConfig) {
+export type MentionPlacement = 'top' | 'bottom';
+
+const getMentions = (value = '', config: MentionsConfig): MentionsEntity[] => {
   const { prefix = '@', split = ' ' } = config || {};
-  const prefixList = Array.isArray(prefix) ? prefix : [prefix];
+  const prefixList: string[] = Array.isArray(prefix) ? prefix : [prefix];
 
   return value
     .split(split)
-    .map((str = '') => {
-      let hitPrefix = null;
+    .map((str = ''): MentionsEntity | null => {
+      let hitPrefix: string | null = null;
 
       prefixList.some(prefixStr => {
         const startStr = str.slice(0, prefixStr.length);
@@ -50,13 +51,13 @@ function getMentions(value = '', config: MentionsConfig) {
       if (hitPrefix !== null) {
         return {
           prefix: hitPrefix,
-          value: str.slice(hitPrefix.length),
+          value: str.slice((hitPrefix as string).length),
         };
       }
       return null;
     })
-    .filter(entity => !!entity && !!entity.value);
-}
+    .filter((entity): entity is MentionsEntity => !!entity && !!entity.value);
+};
 
 const mentionsProps = {
   ...baseMentionsProps,
@@ -73,145 +74,155 @@ const mentionsProps = {
   onChange: {
     type: Function as PropType<(text: string) => void>,
   },
+  notFoundContent: PropTypes.any,
+  defaultValue: String,
+  id: String,
 };
 
 export type MentionsProps = Partial<ExtractPropTypes<typeof mentionsProps>>;
 
 const Mentions = defineComponent({
   name: 'AMentions',
-  mixins: [BaseMixin],
   inheritAttrs: false,
-  Option: { ...Option, name: 'AMentionsOption' },
-  getMentions,
   props: mentionsProps,
-  emits: ['update:value', 'change', 'focus', 'blur', 'select'],
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
+  getMentions,
+  Option,
+  emits: ['update:value', 'change', 'focus', 'blur', 'select', 'pressenter'],
+  slots: ['notFoundContent', 'option'],
+  setup(props, { slots, emit, attrs, expose }) {
+    const { prefixCls, renderEmpty, direction } = useConfigInject('mentions', props);
+    const focused = ref(false);
+    const vcMentions = ref(null);
+    const value = ref(props.value ?? props.defaultValue ?? '');
+    const formItemContext = useInjectFormItemContext();
+    watch(
+      () => props.value,
+      val => {
+        value.value = val;
+      },
+    );
+    const handleFocus = (e: FocusEvent) => {
+      focused.value = true;
+      emit('focus', e);
     };
-  },
-  data() {
-    return {
-      focused: false,
+
+    const handleBlur = (e: FocusEvent) => {
+      focused.value = false;
+      emit('blur', e);
+      formItemContext.onFieldBlur();
     };
-  },
-  mounted() {
-    nextTick(() => {
-      if (process.env.NODE_ENV === 'test') {
-        if (this.autofocus) {
-          this.focus();
-        }
+
+    const handleSelect = (...args: [MentionsOptionProps, string]) => {
+      emit('select', ...args);
+      focused.value = true;
+    };
+
+    const handleChange = (val: string) => {
+      if (props.value === undefined) {
+        value.value = val;
       }
-    });
-  },
-  methods: {
-    handleFocus(e: FocusEvent) {
-      this.$emit('focus', e);
-      this.setState({
-        focused: true,
-      });
-    },
-    handleBlur(e: FocusEvent) {
-      this.$emit('blur', e);
-      this.setState({
-        focused: false,
-      });
-    },
-    handleSelect(...args: [MentionsOptionProps, string]) {
-      this.$emit('select', ...args);
-      this.setState({
-        focused: true,
-      });
-    },
-    handleChange(val: string) {
-      this.$emit('update:value', val);
-      this.$emit('change', val);
-    },
-    getNotFoundContent(renderEmpty: RenderEmptyHandler) {
-      const notFoundContent = getComponent(this, 'notFoundContent');
+      emit('update:value', val);
+      emit('change', val);
+      formItemContext.onFieldChange();
+    };
+
+    const getNotFoundContent = () => {
+      const notFoundContent = props.notFoundContent;
       if (notFoundContent !== undefined) {
         return notFoundContent;
       }
-
-      return renderEmpty('Select');
-    },
-    getOptions() {
-      const { loading } = this.$props;
-      const children = getSlot(this);
-
-      if (loading) {
-        return (
-          <Option value="ANTD_SEARCHING" disabled>
-            <Spin size="small" />
-          </Option>
-        );
+      if (slots.notFoundContent) {
+        return slots.notFoundContent();
       }
-      return children;
-    },
-    getFilterOption() {
-      const { filterOption, loading } = this.$props;
-      if (loading) {
-        return loadingFilterOption;
-      }
-      return filterOption;
-    },
-    focus() {
-      (this.$refs.vcMentions as HTMLTextAreaElement).focus();
-    },
-    blur() {
-      (this.$refs.vcMentions as HTMLTextAreaElement).blur();
-    },
-  },
-  render() {
-    const { focused } = this.$data;
-    const { getPrefixCls, renderEmpty } = this.configProvider;
-    const {
-      prefixCls: customizePrefixCls,
-      disabled,
-      getPopupContainer,
-      ...restProps
-    } = getOptionProps(this) as any;
-    const { class: className, ...otherAttrs } = this.$attrs;
-    const prefixCls = getPrefixCls('mentions', customizePrefixCls);
-    const otherProps = omit(restProps, ['loading', 'onUpdate:value']);
-
-    const mergedClassName = classNames(className, {
-      [`${prefixCls}-disabled`]: disabled,
-      [`${prefixCls}-focused`]: focused,
-    });
-
-    const mentionsProps = {
-      prefixCls,
-      notFoundContent: this.getNotFoundContent(renderEmpty),
-      ...otherProps,
-      disabled,
-      filterOption: this.getFilterOption(),
-      getPopupContainer,
-      children: this.getOptions(),
-      class: mergedClassName,
-      rows: 1,
-      ...otherAttrs,
-      onChange: this.handleChange,
-      onSelect: this.handleSelect,
-      onFocus: this.handleFocus,
-      onBlur: this.handleBlur,
-      ref: 'vcMentions',
+      return renderEmpty.value('Select');
     };
 
-    return <VcMentions {...mentionsProps} />;
+    const getOptions = () => {
+      return flattenChildren(slots.default?.() || []).map(item => {
+        return { ...getOptionProps(item), label: (item.children as any)?.default?.() };
+      });
+    };
+
+    const focus = () => {
+      (vcMentions.value as HTMLTextAreaElement).focus();
+    };
+
+    const blur = () => {
+      (vcMentions.value as HTMLTextAreaElement).blur();
+    };
+
+    expose({ focus, blur });
+
+    onMounted(() => {
+      nextTick(() => {
+        if (process.env.NODE_ENV === 'test') {
+          if (props.autofocus) {
+            focus();
+          }
+        }
+      });
+    });
+
+    return () => {
+      const {
+        disabled,
+        getPopupContainer,
+        rows = 1,
+        id = formItemContext.id.value,
+        ...restProps
+      } = props;
+      const { class: className, ...otherAttrs } = attrs;
+      const otherProps = omit(restProps, ['defaultValue', 'onUpdate:value', 'prefixCls']);
+
+      const mergedClassName = classNames(className, {
+        [`${prefixCls.value}-disabled`]: disabled,
+        [`${prefixCls.value}-focused`]: focused.value,
+        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+      });
+
+      const mentionsProps = {
+        prefixCls: prefixCls.value,
+        ...otherProps,
+        disabled,
+        direction: direction.value,
+        filterOption: props.filterOption,
+        getPopupContainer,
+        options: props.options || getOptions(),
+        class: mergedClassName,
+        ...otherAttrs,
+        rows,
+        onChange: handleChange,
+        onSelect: handleSelect,
+        onFocus: handleFocus,
+        onBlur: handleBlur,
+        ref: vcMentions,
+        value: value.value,
+        id,
+      };
+      return (
+        <VcMentions
+          {...mentionsProps}
+          v-slots={{ notFoundContent: getNotFoundContent, option: slots.option }}
+        ></VcMentions>
+      );
+    };
   },
 });
+
+export const MentionsOption = {
+  ...Option,
+  name: 'AMentionsOption',
+};
 
 /* istanbul ignore next */
 Mentions.install = function (app: App) {
   app.component(Mentions.name, Mentions);
-  app.component(Mentions.Option.name, Mentions.Option);
+  app.component(MentionsOption.name, MentionsOption);
   return app;
 };
 
-export const MentionsOption = Mentions.Option;
-
 export default Mentions as typeof Mentions &
   Plugin & {
+    getMentions: typeof getMentions;
     readonly Option: typeof Option;
   };

@@ -1,9 +1,9 @@
 import type { App, Plugin } from 'vue';
 import Avatar from './Avatar';
 import Group from './Group';
-
-export { AvatarProps, AvatarSize, avatarProps } from './Avatar';
-export { AvatarGroupProps } from './Group';
+export { avatarProps } from './Avatar';
+export type { AvatarProps, AvatarSize } from './Avatar';
+export type { AvatarGroupProps } from './Group';
 
 Avatar.Group = Group;
 

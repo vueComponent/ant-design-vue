@@ -2,9 +2,10 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "ant-design-vue": ["components/index.tsx"],
+      "ant-design-vue": ["components/index.ts"],
       "ant-design-vue/es/*": ["components/*"]
     },
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "strictNullChecks": false,
     "moduleResolution": "node",
     "esModuleInterop": true,
@@ -14,9 +15,9 @@
     "noUnusedLocals": true,
     "noImplicitAny": false,
     "target": "es6",
-    "lib": ["dom", "es2017"],
     "skipLibCheck": true,
-    "allowJs": true
+    "allowJs": true,
+    "importsNotUsedAsValues": "preserve"
   },
-  "exclude": ["node_modules", "lib", "es", "antd-tools", "dist", "v2-doc"]
+  "exclude": ["node_modules", "lib", "es", "dist", "v2-doc", "scripts", "**/__tests__/**/*"]
 }

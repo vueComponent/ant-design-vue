@@ -50,7 +50,14 @@ export { default as Comment } from './comment';
 
 export { default as ConfigProvider } from './config-provider';
 
-export { default as DatePicker, RangePicker, MonthPicker, WeekPicker } from './date-picker';
+export type { DatePickerProps } from './date-picker';
+export {
+  default as DatePicker,
+  MonthPicker,
+  WeekPicker,
+  RangePicker,
+  QuarterPicker,
+} from './date-picker';
 
 export type { DescriptionsProps } from './descriptions';
 export { default as Descriptions, DescriptionsItem } from './descriptions';
@@ -67,7 +74,7 @@ export type { EmptyProps } from './empty';
 export { default as Empty } from './empty';
 
 export type { FormProps, FormItemProps } from './form';
-export { default as Form, FormItem } from './form';
+export { default as Form, FormItem, FormItemRest } from './form';
 
 export { default as Grid } from './grid';
 
@@ -157,11 +164,27 @@ export { default as Steps, Step } from './steps';
 export type { SwitchProps } from './switch';
 export { default as Switch } from './switch';
 
-export { default as Table, TableColumn, TableColumnGroup } from './table';
+export type {
+  TableProps,
+  TablePaginationConfig,
+  ColumnGroupType as TableColumnGroupType,
+  ColumnType as TableColumnType,
+  ColumnProps as TableColumnProps,
+  ColumnsType as TableColumnsType,
+} from './table';
+export {
+  default as Table,
+  TableColumn,
+  TableColumnGroup,
+  TableSummary,
+  TableSummaryRow,
+  TableSummaryCell,
+} from './table';
 
 export type { TransferProps } from './transfer';
 export { default as Transfer } from './transfer';
 
+export type { TreeProps, DirectoryTreeProps } from './tree';
 export { default as Tree, TreeNode, DirectoryTree } from './tree';
 
 export type { TreeSelectProps } from './tree-select';
@@ -172,8 +195,8 @@ export { default as Tabs, TabPane, TabContent } from './tabs';
 export type { TagProps } from './tag';
 export { default as Tag, CheckableTag } from './tag';
 
-export type { TimePickerProps } from './time-picker';
-export { default as TimePicker } from './time-picker';
+export type { TimePickerProps, TimeRangePickerProps } from './time-picker';
+export { default as TimePicker, TimeRangePicker } from './time-picker';
 
 export type { TimelineProps, TimelineItemProps } from './timeline';
 export { default as Timeline, TimelineItem } from './timeline';

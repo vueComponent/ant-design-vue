@@ -1,118 +1,148 @@
-import type { VNode, ExtractPropTypes } from 'vue';
-import { provide, inject, cloneVNode, defineComponent } from 'vue';
-import RcDropdown from '../vc-dropdown/src/index';
+import type { ExtractPropTypes } from 'vue';
+import { computed, defineComponent } from 'vue';
+import RcDropdown from '../vc-dropdown';
 import DropdownButton from './dropdown-button';
-import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import classNames from '../_util/classNames';
-import {
-  getOptionProps,
-  getPropsData,
-  getComponent,
-  isValidElement,
-  getSlot,
-} from '../_util/props-util';
-import getDropdownProps from './getDropdownProps';
-import { defaultConfigProvider } from '../config-provider';
+import { isValidElement, initDefaultProps } from '../_util/props-util';
+import { dropdownProps } from './props';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import devWarning from '../vc-util/devWarning';
+import omit from '../_util/omit';
 
-const dropdownProps = getDropdownProps();
-
-export type DropdownProps = Partial<ExtractPropTypes<typeof dropdownProps>>;
+export type DropdownProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownProps>>>;
 
 const Dropdown = defineComponent({
   name: 'ADropdown',
   inheritAttrs: false,
-  props: {
-    ...dropdownProps,
-    prefixCls: PropTypes.string,
-    mouseEnterDelay: PropTypes.number.def(0.15),
-    mouseLeaveDelay: PropTypes.number.def(0.1),
-    placement: dropdownProps.placement.def('bottomLeft'),
-    onVisibleChange: PropTypes.func,
-    'onUpdate:visible': PropTypes.func,
-  },
+  props: initDefaultProps(dropdownProps(), {
+    mouseEnterDelay: 0.15,
+    mouseLeaveDelay: 0.1,
+    placement: 'bottomLeft',
+    trigger: 'hover',
+  }),
   emits: ['visibleChange', 'update:visible'],
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-      popupRef: null,
-    };
-  },
-  created() {
-    provide('savePopupRef', this.savePopupRef);
-  },
-  methods: {
-    savePopupRef(ref: VNode) {
-      this.popupRef = ref;
-    },
-    getTransitionName() {
-      const { placement = '', transitionName } = this.$props;
+  slots: ['overlay'],
+  setup(props, { slots, attrs, emit }) {
+    const { prefixCls, rootPrefixCls, direction, getPopupContainer } = useConfigInject(
+      'dropdown',
+      props,
+    );
+
+    const transitionName = computed(() => {
+      const { placement = '', transitionName } = props;
       if (transitionName !== undefined) {
         return transitionName;
       }
       if (placement.indexOf('top') >= 0) {
-        return 'slide-down';
+        return `${rootPrefixCls.value}-slide-down`;
       }
-      return 'slide-up';
-    },
-    renderOverlay(prefixCls: string) {
-      const overlay = getComponent(this, 'overlay');
+      return `${rootPrefixCls.value}-slide-up`;
+    });
+
+    const renderOverlay = () => {
+      // rc-dropdown already can process the function of overlay, but we have check logic here.
+      // So we need render the element to check and pass back to rc-dropdown.
+      const overlay = props.overlay || slots.overlay?.();
       const overlayNode = Array.isArray(overlay) ? overlay[0] : overlay;
-      // menu cannot be selectable in dropdown defaultly
-      // menu should be focusable in dropdown defaultly
-      const overlayProps = overlayNode && getPropsData(overlayNode);
-      const { selectable = false, focusable = true } = (overlayProps || {}) as any;
-      const expandIcon = () => (
-        <span class={`${prefixCls}-menu-submenu-arrow`}>
-          <RightOutlined class={`${prefixCls}-menu-submenu-arrow-icon`} />
-        </span>
+
+      if (!overlayNode) return null;
+      const overlayProps = overlayNode.props || {};
+
+      // Warning if use other mode
+      devWarning(
+        !overlayProps.mode || overlayProps.mode === 'vertical',
+        'Dropdown',
+        `mode="${overlayProps.mode}" is not supported for Dropdown's Menu.`,
       );
 
+      // menu cannot be selectable in dropdown defaultly
+      const { selectable = false, expandIcon = (overlayNode.children as any)?.expandIcon?.() } =
+        overlayProps;
+
+      const overlayNodeExpandIcon =
+        typeof expandIcon !== 'undefined' && isValidElement(expandIcon) ? (
+          expandIcon
+        ) : (
+          <span class={`${prefixCls.value}-menu-submenu-arrow`}>
+            <RightOutlined class={`${prefixCls.value}-menu-submenu-arrow-icon`} />
+          </span>
+        );
+
       const fixedModeOverlay = isValidElement(overlayNode)
-        ? cloneVNode(overlayNode, {
+        ? cloneElement(overlayNode, {
             mode: 'vertical',
             selectable,
-            focusable,
-            expandIcon,
+            expandIcon: () => overlayNodeExpandIcon,
           })
-        : overlay;
-      return fixedModeOverlay;
-    },
-    handleVisibleChange(val: boolean) {
-      this.$emit('update:visible', val);
-      this.$emit('visibleChange', val);
-    },
-  },
+        : overlayNode;
 
-  render() {
-    const props = getOptionProps(this);
-    const { prefixCls: customizePrefixCls, trigger, disabled, getPopupContainer } = props;
-    const { getPopupContainer: getContextPopupContainer } = this.configProvider;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('dropdown', customizePrefixCls);
-    const child = getSlot(this)[0];
-    const dropdownTrigger = cloneElement(child, {
-      class: classNames(child?.props?.class, `${prefixCls}-trigger`),
-      disabled,
-    });
-    const triggerActions = disabled ? [] : typeof trigger === 'string' ? [trigger] : trigger;
-    let alignPoint;
-    if (triggerActions && triggerActions.indexOf('contextmenu') !== -1) {
-      alignPoint = true;
-    }
-    const dropdownProps = {
-      alignPoint,
-      ...props,
-      ...this.$attrs,
-      prefixCls,
-      getPopupContainer: getPopupContainer || getContextPopupContainer,
-      transitionName: this.getTransitionName(),
-      trigger: triggerActions,
-      overlay: this.renderOverlay(prefixCls),
-      onVisibleChange: this.handleVisibleChange,
+      return fixedModeOverlay;
     };
-    return <RcDropdown {...dropdownProps}>{dropdownTrigger}</RcDropdown>;
+
+    const placement = computed(() => {
+      if (props.placement !== undefined) {
+        return props.placement;
+      }
+      return direction.value === 'rtl' ? 'bottomRight' : 'bottomLeft';
+    });
+
+    const handleVisibleChange = (val: boolean) => {
+      emit('update:visible', val);
+      emit('visibleChange', val);
+    };
+
+    return () => {
+      const { arrow, trigger, disabled, overlayClassName } = props;
+      const child = slots.default?.()[0];
+      const dropdownTrigger = cloneElement(
+        child,
+        Object.assign(
+          {
+            class: classNames(
+              child?.props?.class,
+              {
+                [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+              },
+              `${prefixCls.value}-trigger`,
+            ),
+          },
+          disabled ? { disabled } : {},
+        ),
+      );
+
+      const overlayClassNameCustomized = classNames(overlayClassName, {
+        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+      });
+
+      const triggerActions = disabled ? [] : trigger;
+      let alignPoint: boolean;
+      if (triggerActions && triggerActions.indexOf('contextmenu') !== -1) {
+        alignPoint = true;
+      }
+      const dropdownProps = omit(
+        {
+          ...props,
+          ...attrs,
+          overlayClassName: overlayClassNameCustomized,
+          arrow,
+          alignPoint,
+          prefixCls: prefixCls.value,
+          getPopupContainer: getPopupContainer.value,
+          transitionName: transitionName.value,
+          trigger: triggerActions,
+          onVisibleChange: handleVisibleChange,
+          placement: placement.value,
+        },
+        ['overlay'],
+      );
+      return (
+        <RcDropdown {...dropdownProps} v-slots={{ overlay: renderOverlay }}>
+          {dropdownTrigger}
+        </RcDropdown>
+      );
+    };
   },
 });
 

@@ -1,12 +1,14 @@
 import { mount } from '@vue/test-utils';
-import moment from 'moment';
-import { asyncExpect } from '@/tests/utils';
+import dayjs from 'dayjs';
+import { asyncExpect } from '../../../tests/utils';
 import Comment from '..';
 import List from '../../list';
 import Form from '../../form';
 import Button from '../../button';
 import Input from '../../input';
 import mountTest from '../../../tests/shared/mountTest';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
 
 const CommentTest = {
   data() {
@@ -14,7 +16,7 @@ const CommentTest = {
       comments: [],
       submitting: false,
       value: '',
-      moment,
+      dayjs,
     };
   },
   methods: {
@@ -32,7 +34,7 @@ const CommentTest = {
             author: 'Han Solo',
             avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
             content: this.value,
-            datetime: moment().fromNow(),
+            datetime: dayjs().fromNow(),
           },
           ...this.comments,
         ];

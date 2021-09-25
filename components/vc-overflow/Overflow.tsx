@@ -302,7 +302,7 @@ const Overflow = defineComponent({
           };
 
       // >>>>> Rest node
-      let restNode: VueNode;
+      let restNode = () => null;
       const restContextProps = {
         order: displayRest ? mergedDisplayCount.value : Number.MAX_SAFE_INTEGER,
         className: `${itemPrefixCls.value}-rest`,
@@ -313,19 +313,21 @@ const Overflow = defineComponent({
       if (!renderRawRest) {
         const mergedRenderRest = renderRest || defaultRenderRest;
 
-        restNode = (
+        restNode = () => (
           <Item
             {...itemSharedProps}
             // When not show, order should be the last
             {...restContextProps}
-          >
-            {typeof mergedRenderRest === 'function'
-              ? mergedRenderRest(omittedItems.value)
-              : mergedRenderRest}
-          </Item>
+            v-slots={{
+              default: () =>
+                typeof mergedRenderRest === 'function'
+                  ? mergedRenderRest(omittedItems.value)
+                  : mergedRenderRest,
+            }}
+          ></Item>
         );
       } else if (renderRawRest) {
-        restNode = (
+        restNode = () => (
           <OverflowContextProvider
             value={{
               ...itemSharedProps,
@@ -337,7 +339,7 @@ const Overflow = defineComponent({
         );
       }
 
-      const overflowNode = (
+      const overflowNode = () => (
         <Component
           class={classNames(!invalidate.value && prefixCls, className)}
           style={style}
@@ -346,7 +348,7 @@ const Overflow = defineComponent({
           {mergedData.value.map(internalRenderItemNode)}
 
           {/* Rest Count Item */}
-          {showRest.value ? restNode : null}
+          {showRest.value ? restNode() : null}
 
           {/* Suffix Node */}
           {suffix && (
@@ -357,17 +359,18 @@ const Overflow = defineComponent({
               registerSize={registerSuffixSize}
               display
               style={suffixStyle}
-            >
-              {suffix}
-            </Item>
+              v-slots={{ default: () => suffix }}
+            ></Item>
           )}
         </Component>
       );
       // 使用 disabled  避免结构不一致 导致子组件 rerender
       return (
-        <ResizeObserver disabled={!isResponsive.value} onResize={onOverflowResize}>
-          {overflowNode}
-        </ResizeObserver>
+        <ResizeObserver
+          disabled={!isResponsive.value}
+          onResize={onOverflowResize}
+          v-slots={{ default: overflowNode }}
+        ></ResizeObserver>
       );
     };
   },

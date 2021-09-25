@@ -86,33 +86,32 @@ const FormItemInput = defineComponent({
 
       // Should provides additional icon if `hasFeedback`
       const IconNode = validateStatus && iconMap[validateStatus];
-      const icon =
-        hasFeedback && IconNode ? (
-          <span class={`${baseClassName}-children-icon`}>
-            <IconNode />
-          </span>
-        ) : null;
-
-      const inputDom = (
-        <div class={`${baseClassName}-control-input`}>
-          <div class={`${baseClassName}-control-input-content`}>{slots.default?.()}</div>
-          {icon}
-        </div>
-      );
-      const errorListDom = (
-        <ErrorList errors={errors} help={help} onDomErrorVisibleChange={onDomErrorVisibleChange} />
-      );
-
-      // If extra = 0, && will goes wrong
-      // 0&&error -> 0
-      const extraDom = extra ? <div class={`${baseClassName}-extra`}>{extra}</div> : null;
 
       return (
-        <Col {...mergedWrapperCol} class={className}>
-          {inputDom}
-          {errorListDom}
-          {extraDom}
-        </Col>
+        <Col
+          {...mergedWrapperCol}
+          class={className}
+          v-slots={{
+            default: () => (
+              <>
+                <div class={`${baseClassName}-control-input`}>
+                  <div class={`${baseClassName}-control-input-content`}>{slots.default?.()}</div>
+                  {hasFeedback && IconNode ? (
+                    <span class={`${baseClassName}-children-icon`}>
+                      <IconNode />
+                    </span>
+                  ) : null}
+                </div>
+                <ErrorList
+                  errors={errors}
+                  help={help}
+                  onDomErrorVisibleChange={onDomErrorVisibleChange}
+                />
+                {extra ? <div class={`${baseClassName}-extra`}>{extra}</div> : null}
+              </>
+            ),
+          }}
+        ></Col>
       );
     };
   },

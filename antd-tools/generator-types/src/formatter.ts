@@ -1,7 +1,6 @@
-/* eslint-disable no-continue */
-import { Artical, Articals } from './parser';
+import type { Articals } from './parser';
 import { formatType, removeVersion, toKebabCase } from './utils';
-import { VueTag } from './type';
+import type { VueTag } from './type';
 
 function getComponentName(name: string, tagPrefix: string) {
   if (name) {
@@ -35,7 +34,7 @@ function parserProps(tag: VueTag, line: any) {
   });
 }
 
-export function formatter(articals: Articals, componentName: string, tagPrefix: string = '') {
+export function formatter(articals: Articals, componentName: string, tagPrefix = '') {
   if (!articals.length) {
     return;
   }

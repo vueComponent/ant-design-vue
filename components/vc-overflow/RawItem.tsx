@@ -35,9 +35,8 @@ export default defineComponent({
             {...restContext}
             {...restProps}
             {...props}
-          >
-            {slots.default?.()}
-          </Item>
+            v-slots={slots}
+          ></Item>
         </OverflowContextProvider>
       );
     };

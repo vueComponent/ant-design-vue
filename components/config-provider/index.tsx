@@ -1,13 +1,14 @@
-import type { PropType, ExtractPropTypes, UnwrapRef } from 'vue';
-import { reactive, provide, defineComponent, watch } from 'vue';
+import type { PropType, ExtractPropTypes, UnwrapRef, App, Plugin, WatchStopHandle } from 'vue';
+import { reactive, provide, defineComponent, watch, ref, unref, watchEffect } from 'vue';
 import PropTypes from '../_util/vue-types';
-import defaultRenderEmpty, { RenderEmptyHandler } from './renderEmpty';
+import defaultRenderEmpty from './renderEmpty';
+import type { RenderEmptyHandler } from './renderEmpty';
 import type { Locale } from '../locale-provider';
 import LocaleProvider, { ANT_MARK } from '../locale-provider';
 import type { TransformCellTextProps } from '../table/interface';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import { withInstall } from '../_util/type';
 import type { RequiredMark } from '../form/Form';
+import type { MaybeRef } from '../_util/type';
 
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
 
@@ -15,7 +16,7 @@ export interface CSPConfig {
   nonce?: string;
 }
 
-export { RenderEmptyHandler };
+export type { RenderEmptyHandler };
 
 export type Direction = 'ltr' | 'rtl';
 
@@ -41,7 +42,7 @@ export interface ConfigConsumerProps {
     size?: SizeType | number;
   };
   virtual?: boolean;
-  dropdownMatchSelectWidth?: boolean;
+  dropdownMatchSelectWidth?: boolean | number;
 }
 
 export const configConsumerProps = [
@@ -55,6 +56,56 @@ export const configConsumerProps = [
   'locale',
   'pageHeader',
 ];
+
+export const defaultPrefixCls = 'ant';
+const globalPrefixCls = ref<string>();
+
+type GlobalConfigProviderProps = {
+  prefixCls?: MaybeRef<ConfigProviderProps['prefixCls']>;
+};
+
+let stopWatchEffect: WatchStopHandle;
+const setGlobalConfig = (params: GlobalConfigProviderProps) => {
+  if (stopWatchEffect) {
+    stopWatchEffect();
+  }
+  stopWatchEffect = watchEffect(() => {
+    const prefixCls = unref(params.prefixCls);
+    if (prefixCls !== undefined) {
+      globalPrefixCls.value = prefixCls;
+    }
+  });
+};
+
+function getGlobalPrefixCls() {
+  return globalPrefixCls.value || defaultPrefixCls;
+}
+
+export const globalConfig = () => ({
+  getPrefixCls: (suffixCls?: string, customizePrefixCls?: string) => {
+    if (customizePrefixCls) return customizePrefixCls;
+    return suffixCls ? `${getGlobalPrefixCls()}-${suffixCls}` : getGlobalPrefixCls();
+  },
+  getRootPrefixCls: (rootPrefixCls?: string, customizePrefixCls?: string) => {
+    // Customize rootPrefixCls is first priority
+    if (rootPrefixCls) {
+      return rootPrefixCls;
+    }
+
+    // If Global prefixCls provided, use this
+    if (globalPrefixCls.value) {
+      return globalPrefixCls.value;
+    }
+
+    // [Legacy] If customize prefixCls provided, we cut it to get the prefixCls
+    if (customizePrefixCls && customizePrefixCls.includes('-')) {
+      return customizePrefixCls.replace(/^(.*)-[^-]*$/, '$1');
+    }
+
+    // Fallback to default prefixCls
+    return getGlobalPrefixCls();
+  },
+});
 
 export const configProviderProps = {
   getTargetContainer: {
@@ -93,7 +144,7 @@ export const configProviderProps = {
     type: Object as PropType<{ size: SizeType | number }>,
   },
   virtual: PropTypes.looseBool,
-  dropdownMatchSelectWidth: PropTypes.looseBool,
+  dropdownMatchSelectWidth: { type: [Number, Boolean], default: true },
   form: {
     type: Object as PropType<{ requiredMark?: RequiredMark }>,
   },
@@ -103,6 +154,7 @@ export type ConfigProviderProps = Partial<ExtractPropTypes<typeof configProvider
 
 const ConfigProvider = defineComponent({
   name: 'AConfigProvider',
+  inheritAttrs: false,
   props: configProviderProps,
   setup(props, { slots }) {
     const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
@@ -167,4 +219,12 @@ export const defaultConfigProvider: UnwrapRef<ConfigProviderProps> = reactive({
   direction: 'ltr',
 });
 
-export default withInstall(ConfigProvider);
+ConfigProvider.config = setGlobalConfig;
+ConfigProvider.install = function (app: App) {
+  app.component(ConfigProvider.name, ConfigProvider);
+};
+
+export default ConfigProvider as typeof ConfigProvider &
+  Plugin & {
+    readonly config: typeof setGlobalConfig;
+  };

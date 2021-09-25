@@ -1,0 +1,52 @@
+@import '~ant-design-vue/es/style/themes/default.less';
+
+.main {
+  width: 368px;
+  margin: 0 auto;
+  /deep/ .ant-form-item {
+    margin-bottom: 24px;
+  }
+
+  /deep/ .ant-select-selection-selected-value {
+    padding-right: 0;
+  }
+  h3 {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  .getCaptcha {
+    display: block;
+    width: 100%;
+  }
+
+  .submit {
+    width: 50%;
+  }
+
+  .login {
+    float: right;
+    line-height: @btn-height-lg;
+  }
+}
+.success,
+.warning,
+.error {
+  transition: color 0.3s;
+}
+
+.success {
+  color: @success-color;
+}
+
+.warning {
+  color: @warning-color;
+}
+
+.error {
+  color: @error-color;
+}
+
+.progress-pass > .progress /deep/ .ant-progress-bg {
+  background-color: @warning-color;
+}

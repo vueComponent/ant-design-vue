@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import Menu from '..';
 import { InboxOutlined, PieChartOutlined } from '@ant-design/icons-vue';
 import mountTest from '../../../tests/shared/mountTest';

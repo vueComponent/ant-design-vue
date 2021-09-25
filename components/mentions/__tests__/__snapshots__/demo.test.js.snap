@@ -1,65 +1,84 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/mentions/demo/async.md correctly 1`] = `
+exports[`renders ./components/mentions/demo/async.vue correctly 1`] = `
 <div class="ant-mentions"><textarea rows="1"></textarea>
   <!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/mentions/demo/basic.md correctly 1`] = `
+exports[`renders ./components/mentions/demo/basic.vue correctly 1`] = `
 <div class="ant-mentions ant-mentions-focused"><textarea autofocus="" rows="1"></textarea>
   <!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/mentions/demo/form.md correctly 1`] = `
+exports[`renders ./components/mentions/demo/form.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-5 ant-form-item-label"><label for="coders" class="" title="Top coders">Top coders</label></div>
-    <div class="ant-col ant-col-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-mentions"><textarea rows="1" id="coders"></textarea><!----></div><!----></span>
+    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="form_item_coders" class="ant-form-item-required" title="Top coders">Top coders
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-18 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-mentions"><textarea rows="1" id="form_item_coders"></textarea>
+            <!---->
+          </div>
+        </div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-5 ant-form-item-label"><label for="bio" class="ant-form-item-required" title="Bio">Bio</label></div>
-    <div class="ant-col ant-col-12 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-mentions"><textarea rows="3" placeholder="You can use @ to ref user here" id="bio"></textarea><!----></div><!----></span>
+    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="form_item_bio" class="ant-form-item-required" title="Bio">Bio
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-18 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-mentions"><textarea rows="3" placeholder="You can use @ to ref user here" id="form_item_bio"></textarea>
+            <!---->
+          </div>
+        </div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <!---->
-    <div class="ant-col ant-col-12 ant-col-offset-5 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="button"><!----><span>Submit</span></button><button style="margin-left: 8px;" class="ant-btn" type="button">
-          <!----><span>Reset</span>
-        </button>
-        <!----></span>
-        <!---->
+    <div class="ant-col ant-col-12 ant-col-offset-5 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="button">
+            <!----><span>Submit</span>
+          </button><button style="margin-left: 8px;" class="ant-btn" type="button">
+            <!----><span>Reset</span>
+          </button></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
 </form>
 `;
 
-exports[`renders ./antdv-demo/docs/mentions/demo/placement.md correctly 1`] = `
+exports[`renders ./components/mentions/demo/placement.vue correctly 1`] = `
 <div class="ant-mentions"><textarea rows="1"></textarea>
   <!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/mentions/demo/prefix.md correctly 1`] = `
+exports[`renders ./components/mentions/demo/prefix.vue correctly 1`] = `
 <div class="ant-mentions"><textarea rows="1" placeholder="input @ to mention people, # to mention tag"></textarea>
   <!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/mentions/demo/readonly.md correctly 1`] = `
+exports[`renders ./components/mentions/demo/readonly.vue correctly 1`] = `
 <div>
   <div style="margin-bottom: 10px;">
     <div class="ant-mentions ant-mentions-disabled"><textarea disabled="" rows="1" placeholder="this is disabled Mentions"></textarea>

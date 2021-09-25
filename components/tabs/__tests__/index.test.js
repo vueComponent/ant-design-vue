@@ -1,7 +1,5 @@
 import { mount } from '@vue/test-utils';
-import Tabs from '..';
-
-const { TabPane } = Tabs;
+import Tabs, { TabPane } from '..';
 
 describe('Tabs', () => {
   describe('editable-card', () => {

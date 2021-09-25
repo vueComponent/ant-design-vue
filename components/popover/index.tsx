@@ -1,54 +1,61 @@
-import { defineComponent, inject } from 'vue';
+import type { ExtractPropTypes } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getComponent, getSlot } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
+import { initDefaultProps } from '../_util/props-util';
 import { withInstall } from '../_util/type';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import omit from '../_util/omit';
+import { getTransitionName } from '../_util/transition';
 
-const props = abstractTooltipProps();
+export const popoverProps = () => ({
+  ...abstractTooltipProps(),
+  content: PropTypes.any,
+  title: PropTypes.any,
+});
+
+export type PopoverProps = Partial<ExtractPropTypes<ReturnType<typeof popoverProps>>>;
+
 const Popover = defineComponent({
   name: 'APopover',
-  props: {
-    ...props,
-    prefixCls: PropTypes.string,
-    transitionName: PropTypes.string.def('zoom-big'),
-    content: PropTypes.any,
-    title: PropTypes.any,
-  },
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-  methods: {
-    getPopupDomNode() {
-      return (this.$refs.tooltip as any).getPopupDomNode();
-    },
-  },
+  props: initDefaultProps(popoverProps(), {
+    trigger: 'hover',
+    transitionName: 'zoom-big',
+    placement: 'top',
+    mouseEnterDelay: 0.1,
+    mouseLeaveDelay: 0.1,
+  }),
+  setup(props, { expose, slots }) {
+    const tooltipRef = ref();
 
-  render() {
-    const { title, prefixCls: customizePrefixCls, $slots } = this;
-    const { getPrefixCls } = this.configProvider;
-    const prefixCls = getPrefixCls('popover', customizePrefixCls);
-
-    const props = getOptionProps(this);
-    delete props.title;
-    delete props.content;
-    const tooltipProps = {
-      ...props,
-      prefixCls,
-      ref: 'tooltip',
-      title: (
-        <div>
-          {(title || $slots.title) && (
-            <div class={`${prefixCls}-title`}>{getComponent(this, 'title')}</div>
-          )}
-          <div class={`${prefixCls}-inner-content`}>{getComponent(this, 'content')}</div>
-        </div>
-      ),
+    expose({
+      getPopupDomNode: () => {
+        return tooltipRef.value?.getPopupDomNode?.();
+      },
+    });
+    const { prefixCls, configProvider } = useConfigInject('popover', props);
+    const rootPrefixCls = computed(() => configProvider.getPrefixCls());
+    const getOverlay = () => {
+      const { title = slots.title?.(), content = slots.content?.() } = props;
+      return (
+        <>
+          {title && <div class={`${prefixCls.value}-title`}>{title}</div>}
+          <div class={`${prefixCls.value}-inner-content`}>{content}</div>
+        </>
+      );
     };
-    return <Tooltip {...tooltipProps}>{getSlot(this)}</Tooltip>;
+    return () => {
+      return (
+        <Tooltip
+          {...omit(props, ['title', 'content'])}
+          prefixCls={prefixCls.value}
+          ref={tooltipRef}
+          v-slots={{ title: getOverlay, default: slots.default }}
+          transitionName={getTransitionName(rootPrefixCls.value, 'zoom-big', props.transitionName)}
+        />
+      );
+    };
   },
 });
 

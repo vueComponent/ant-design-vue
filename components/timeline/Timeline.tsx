@@ -1,98 +1,92 @@
 import type { ExtractPropTypes } from 'vue';
-import { inject, cloneVNode, defineComponent } from 'vue';
+import { cloneVNode, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getPropsData, filterEmpty, getComponent } from '../_util/props-util';
+import { filterEmpty } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import type { TimelineItemProps } from './TimelineItem';
 import TimelineItem from './TimelineItem';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
-import { defaultConfigProvider } from '../config-provider';
 import { tuple } from '../_util/type';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
-export const timelineProps = {
+export const timelineProps = () => ({
   prefixCls: PropTypes.string,
   /** 指定最后一个幽灵节点是否存在或内容 */
   pending: PropTypes.any,
-  pendingDot: PropTypes.string,
+  pendingDot: PropTypes.any,
   reverse: PropTypes.looseBool,
   mode: PropTypes.oneOf(tuple('left', 'alternate', 'right', '')),
-};
+});
 
-export type TimelineProps = Partial<ExtractPropTypes<typeof timelineProps>>;
+export type TimelineProps = Partial<ExtractPropTypes<ReturnType<typeof timelineProps>>>;
 
 export default defineComponent({
   name: 'ATimeline',
-  props: initDefaultProps(timelineProps, {
+  props: initDefaultProps(timelineProps(), {
     reverse: false,
     mode: '',
   }),
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-  render() {
-    const { prefixCls: customizePrefixCls, reverse, mode } = getOptionProps(this);
-    const { getPrefixCls } = this.configProvider;
-    const prefixCls = getPrefixCls('timeline', customizePrefixCls);
-
-    const pendingDot = getComponent(this, 'pendingDot');
-    const pending = getComponent(this, 'pending');
-    const pendingNode = typeof pending === 'boolean' ? null : pending;
-    const classString = classNames(prefixCls, {
-      [`${prefixCls}-pending`]: !!pending,
-      [`${prefixCls}-reverse`]: !!reverse,
-      [`${prefixCls}-${mode}`]: !!mode,
-    });
-    const children = filterEmpty(this.$slots.default?.());
-    // // Remove falsy items
-    // const falsylessItems = filterEmpty(this.$slots.default)
-    // const items = falsylessItems.map((item, idx) => {
-    //   return cloneElement(item, {
-    //     props: {
-    //       last: falsylessItems.length - 1 === idx,
-    //     },
-    //   })
-    // })
-    const pendingItem = pending ? (
-      <TimelineItem pending={!!pending} dot={pendingDot || <LoadingOutlined />}>
-        {pendingNode}
-      </TimelineItem>
-    ) : null;
-
-    const timeLineItems = reverse
-      ? [pendingItem, ...children.reverse()]
-      : [...children, pendingItem];
-
+  slots: ['pending', 'pendingDot'],
+  setup(props, { slots }) {
+    const { prefixCls, direction } = useConfigInject('timeline', props);
     const getPositionCls = (ele, idx: number) => {
-      const eleProps = getPropsData(ele) as TimelineItemProps;
-      if (mode === 'alternate') {
-        if (eleProps.position === 'right') return `${prefixCls}-item-right`;
-        if (eleProps.position === 'left') return `${prefixCls}-item-left`;
-        return idx % 2 === 0 ? `${prefixCls}-item-left` : `${prefixCls}-item-right`;
+      const eleProps = ele.props || {};
+      if (props.mode === 'alternate') {
+        if (eleProps.position === 'right') return `${prefixCls.value}-item-right`;
+        if (eleProps.position === 'left') return `${prefixCls.value}-item-left`;
+        return idx % 2 === 0 ? `${prefixCls.value}-item-left` : `${prefixCls.value}-item-right`;
       }
-      if (mode === 'left') return `${prefixCls}-item-left`;
-      if (mode === 'right') return `${prefixCls}-item-right`;
-      if (eleProps.position === 'right') return `${prefixCls}-item-right`;
+      if (props.mode === 'left') return `${prefixCls.value}-item-left`;
+      if (props.mode === 'right') return `${prefixCls.value}-item-right`;
+      if (eleProps.position === 'right') return `${prefixCls.value}-item-right`;
       return '';
     };
 
-    // Remove falsy items
-    const truthyItems = timeLineItems.filter(item => !!item);
-    const itemsCount = truthyItems.length;
-    const lastCls = `${prefixCls}-item-last`;
-    const items = truthyItems.map((ele, idx) => {
-      const pendingClass = idx === itemsCount - 2 ? lastCls : '';
-      const readyClass = idx === itemsCount - 1 ? lastCls : '';
-      return cloneVNode(ele, {
-        class: classNames([
-          !reverse && !!pending ? pendingClass : readyClass,
-          getPositionCls(ele, idx),
-        ]),
-      });
-    });
+    return () => {
+      const {
+        pending = slots.pending?.(),
+        pendingDot = slots.pendingDot?.(),
+        reverse,
+        mode,
+      } = props;
+      const pendingNode = typeof pending === 'boolean' ? null : pending;
+      const children = filterEmpty(slots.default?.());
 
-    return <ul class={classString}>{items}</ul>;
+      const pendingItem = pending ? (
+        <TimelineItem pending={!!pending} dot={pendingDot || <LoadingOutlined />}>
+          {pendingNode}
+        </TimelineItem>
+      ) : null;
+
+      if (pendingItem) {
+        children.push(pendingItem);
+      }
+
+      const timeLineItems = reverse ? children.reverse() : children;
+
+      const itemsCount = timeLineItems.length;
+      const lastCls = `${prefixCls.value}-item-last`;
+      const items = timeLineItems.map((ele, idx) => {
+        const pendingClass = idx === itemsCount - 2 ? lastCls : '';
+        const readyClass = idx === itemsCount - 1 ? lastCls : '';
+        return cloneVNode(ele, {
+          class: classNames([
+            !reverse && !!pending ? pendingClass : readyClass,
+            getPositionCls(ele, idx),
+          ]),
+        });
+      });
+      const hasLabelItem = timeLineItems.some(
+        item => !!(item.props?.label || item.children?.label),
+      );
+      const classString = classNames(prefixCls.value, {
+        [`${prefixCls.value}-pending`]: !!pending,
+        [`${prefixCls.value}-reverse`]: !!reverse,
+        [`${prefixCls.value}-${mode}`]: !!mode && !hasLabelItem,
+        [`${prefixCls.value}-label`]: hasLabelItem,
+        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+      });
+      return <ul class={classString}>{items}</ul>;
+    };
   },
 });

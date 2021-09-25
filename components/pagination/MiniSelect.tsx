@@ -1,18 +1,18 @@
 import { defineComponent } from 'vue';
-import VcSelect, { SelectProps } from '../select';
-import { getOptionProps, getSlot } from '../_util/props-util';
+import VcSelect, { selectProps } from '../select';
 
 export default defineComponent({
   inheritAttrs: false,
-  props: SelectProps(),
+  props: selectProps(),
   Option: VcSelect.Option,
-  render() {
-    const selectOptionsProps = getOptionProps(this);
-    const selelctProps: any = {
-      ...selectOptionsProps,
-      size: 'small',
-      ...this.$attrs,
+  setup(props, { attrs, slots }) {
+    return () => {
+      const selelctProps: any = {
+        ...props,
+        size: 'small',
+        ...attrs,
+      };
+      return <VcSelect {...selelctProps} v-slots={slots}></VcSelect>;
     };
-    return <VcSelect {...selelctProps}>{getSlot(this)}</VcSelect>;
   },
 });

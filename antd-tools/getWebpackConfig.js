@@ -79,7 +79,6 @@ function getWebpackConfig(modules) {
     },
 
     module: {
-      noParse: [/moment.js/],
       rules: [
         {
           test: /\.vue$/,
@@ -124,6 +123,9 @@ function getWebpackConfig(modules) {
             },
             {
               loader: 'ts-loader',
+              options: {
+                transpileOnly: true,
+              },
             },
           ],
         },

@@ -1,24 +1,24 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/message/demo/duration.md correctly 1`] = `
+exports[`renders ./components/message/demo/duration.vue correctly 1`] = `
 <button class="ant-btn" type="button">
   <!----><span>Customized display duration</span>
 </button>
 `;
 
-exports[`renders ./antdv-demo/docs/message/demo/info.md correctly 1`] = `
+exports[`renders ./components/message/demo/info.vue correctly 1`] = `
 <button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Display normal message</span>
 </button>
 `;
 
-exports[`renders ./antdv-demo/docs/message/demo/loading.md correctly 1`] = `
+exports[`renders ./components/message/demo/loading.vue correctly 1`] = `
 <button class="ant-btn" type="button">
   <!----><span>Display a loading indicator</span>
 </button>
 `;
 
-exports[`renders ./antdv-demo/docs/message/demo/other.md correctly 1`] = `
+exports[`renders ./components/message/demo/other.vue correctly 1`] = `
 <div><button class="ant-btn" type="button">
     <!----><span>Success</span>
   </button><button class="ant-btn" type="button">
@@ -28,13 +28,13 @@ exports[`renders ./antdv-demo/docs/message/demo/other.md correctly 1`] = `
   </button></div>
 `;
 
-exports[`renders ./antdv-demo/docs/message/demo/thenable.md correctly 1`] = `
+exports[`renders ./components/message/demo/thenable.vue correctly 1`] = `
 <button class="ant-btn" type="button">
   <!----><span>Display a sequence of message</span>
 </button>
 `;
 
-exports[`renders ./antdv-demo/docs/message/demo/update.md correctly 1`] = `
+exports[`renders ./components/message/demo/update.vue correctly 1`] = `
 <button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Open the message box</span>
 </button>

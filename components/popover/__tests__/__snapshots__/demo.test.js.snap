@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/popover/demo/arrow-point-at-center.md correctly 1`] = `
+exports[`renders ./components/popover/demo/arrow-point-at-center.vue correctly 1`] = `
 <div>
   <!----><button class="ant-btn" type="button">
     <!----><span>Align edge / 边缘对齐</span>
@@ -11,26 +11,26 @@ exports[`renders ./antdv-demo/docs/popover/demo/arrow-point-at-center.md correct
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/popover/demo/basic.md correctly 1`] = `
+exports[`renders ./components/popover/demo/basic.vue correctly 1`] = `
 <!----><button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Hover me</span>
 </button>
 `;
 
-exports[`renders ./antdv-demo/docs/popover/demo/control.md correctly 1`] = `
+exports[`renders ./components/popover/demo/control.vue correctly 1`] = `
 <!----><button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Click me</span>
 </button>
 `;
 
-exports[`renders ./antdv-demo/docs/popover/demo/hover-with-click.md correctly 1`] = `
+exports[`renders ./components/popover/demo/hover-with-click.vue correctly 1`] = `
 <!---->
 <!----><button class="ant-btn" type="button">
   <!----><span>Hover and click / 悬停并单击</span>
 </button>
 `;
 
-exports[`renders ./antdv-demo/docs/popover/demo/placement.md correctly 1`] = `
+exports[`renders ./components/popover/demo/placement.vue correctly 1`] = `
 <div id="components-popover-demo-placement">
   <div style="margin-left: 70px; white-space: nowrap;">
     <!----><button class="ant-btn" type="button">
@@ -79,15 +79,15 @@ exports[`renders ./antdv-demo/docs/popover/demo/placement.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/popover/demo/triggerType.md correctly 1`] = `
+exports[`renders ./components/popover/demo/triggerType.vue correctly 1`] = `
 <div>
-  <!----><button class="ant-btn ant-btn-primary" type="button">
+  <!----><button class="ant-btn" type="button">
     <!----><span>Hover me</span>
   </button>
-  <!----><button class="ant-btn ant-btn-primary" type="button">
+  <!----><button class="ant-btn" type="button">
     <!----><span>Focus me</span>
   </button>
-  <!----><button class="ant-btn ant-btn-primary" type="button">
+  <!----><button class="ant-btn" type="button">
     <!----><span>Click me</span>
   </button>
 </div>

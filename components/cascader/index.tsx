@@ -4,7 +4,6 @@ import PropTypes from '../_util/vue-types';
 import VcCascader from '../vc-cascader';
 import arrayTreeFilter from 'array-tree-filter';
 import classNames from '../_util/classNames';
-import omit from 'omit.js';
 import KeyCode from '../_util/KeyCode';
 import Input from '../input';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
@@ -27,6 +26,8 @@ import { defaultConfigProvider } from '../config-provider';
 import type { VueNode } from '../_util/type';
 import { tuple, withInstall } from '../_util/type';
 import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
+import { useInjectFormItemContext } from '../form/FormItemContext';
+import omit from '../_util/omit';
 
 export interface CascaderOptionType {
   value?: string | number;
@@ -220,12 +221,14 @@ const Cascader = defineComponent({
   inheritAttrs: false,
   props: cascaderProps,
   setup() {
+    const formItemContext = useInjectFormItemContext();
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
       localeData: inject('localeData', {} as any),
       cachedOptions: [],
       popupRef: undefined,
       input: undefined,
+      formItemContext,
     };
   },
   data() {
@@ -323,6 +326,7 @@ const Cascader = defineComponent({
         inputFocused: false,
       });
       this.$emit('blur', e);
+      this.formItemContext.onFieldBlur();
     },
 
     handleInputClick(e: MouseEvent & { nativeEvent?: any }) {
@@ -354,6 +358,7 @@ const Cascader = defineComponent({
       }
       this.$emit('update:value', value);
       this.$emit('change', value, selectedOptions);
+      this.formItemContext.onFieldChange();
     },
 
     getLabel() {
@@ -474,7 +479,12 @@ const Cascader = defineComponent({
       ...otherProps
     } = props as any;
     const { onEvents, extraAttrs } = splitAttrs(this.$attrs);
-    const { class: className, style, ...restAttrs } = extraAttrs;
+    const {
+      class: className,
+      style,
+      id = this.formItemContext.id.value,
+      ...restAttrs
+    } = extraAttrs;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const renderEmpty = this.configProvider.renderEmpty;
     const prefixCls = getPrefixCls('cascader', customizePrefixCls);
@@ -570,6 +580,7 @@ const Cascader = defineComponent({
     const inputProps = {
       ...restAttrs,
       ...tempInputProps,
+      id,
       prefixCls: inputPrefixCls,
       placeholder: value && value.length > 0 ? undefined : placeholder,
       value: inputValue,

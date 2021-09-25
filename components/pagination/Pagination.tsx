@@ -1,5 +1,5 @@
 import type { ExtractPropTypes } from 'vue';
-import { defineComponent, inject } from 'vue';
+import { computed, toRef, defineComponent } from 'vue';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
@@ -8,12 +8,11 @@ import { tuple } from '../_util/type';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import VcSelect from '../select';
 import MiniSelect from './MiniSelect';
-import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import { getOptionProps } from '../_util/props-util';
+import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
-import { defaultConfigProvider } from '../config-provider';
 import classNames from '../_util/classNames';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const paginationProps = () => ({
   total: PropTypes.number,
@@ -51,93 +50,87 @@ export const paginationConfig = () => ({
 export type PaginationProps = Partial<ExtractPropTypes<ReturnType<typeof paginationProps>>>;
 export type PaginationConfig = Partial<ExtractPropTypes<ReturnType<typeof paginationConfig>>>;
 
+export type PaginationLocale = any;
 export default defineComponent({
   name: 'APagination',
   inheritAttrs: false,
-  props: {
-    ...paginationProps(),
-  },
+  props: paginationProps(),
   emits: ['change', 'showSizeChange', 'update:current', 'update:pageSize'],
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-
-  methods: {
-    getIconsProps(prefixCls: string) {
-      const prevIcon = (
-        <a class={`${prefixCls}-item-link`}>
+  setup(props, { slots, attrs }) {
+    const { prefixCls, configProvider, direction } = useConfigInject('pagination', props);
+    const selectPrefixCls = computed(() =>
+      configProvider.getPrefixCls('select', props.selectPrefixCls),
+    );
+    const [locale] = useLocaleReceiver('Pagination', enUS, toRef(props, 'locale'));
+    const getIconsProps = (pre: string) => {
+      const ellipsis = <span class={`${pre}-item-ellipsis`}>•••</span>;
+      let prevIcon = (
+        <button class={`${pre}-item-link`} type="button" tabindex={-1}>
           <LeftOutlined />
-        </a>
+        </button>
       );
-      const nextIcon = (
-        <a class={`${prefixCls}-item-link`}>
+      let nextIcon = (
+        <button class={`${pre}-item-link`} type="button" tabindex={-1}>
           <RightOutlined />
-        </a>
+        </button>
       );
-      const jumpPrevIcon = (
-        <a class={`${prefixCls}-item-link`}>
+      let jumpPrevIcon = (
+        <a class={`${pre}-item-link`}>
           {/* You can use transition effects in the container :) */}
-          <div class={`${prefixCls}-item-container`}>
-            <DoubleLeftOutlined class={`${prefixCls}-item-link-icon`} />
-            <span class={`${prefixCls}-item-ellipsis`}>•••</span>
+          <div class={`${pre}-item-container`}>
+            <DoubleLeftOutlined class={`${pre}-item-link-icon`} />
+            {ellipsis}
           </div>
         </a>
       );
-      const jumpNextIcon = (
-        <a class={`${prefixCls}-item-link`}>
+      let jumpNextIcon = (
+        <a class={`${pre}-item-link`}>
           {/* You can use transition effects in the container :) */}
-          <div class={`${prefixCls}-item-container`}>
-            <DoubleRightOutlined class={`${prefixCls}-item-link-icon`} />
-            <span class={`${prefixCls}-item-ellipsis`}>•••</span>
+          <div class={`${pre}-item-container`}>
+            <DoubleRightOutlined class={`${pre}-item-link-icon`} />
+            {ellipsis}
           </div>
         </a>
       );
+      // change arrows direction in right-to-left direction
+      if (direction.value === 'rtl') {
+        [prevIcon, nextIcon] = [nextIcon, prevIcon];
+        [jumpPrevIcon, jumpNextIcon] = [jumpNextIcon, jumpPrevIcon];
+      }
       return {
         prevIcon,
         nextIcon,
         jumpPrevIcon,
         jumpNextIcon,
       };
-    },
-    renderPagination(contextLocale: object) {
+    };
+
+    return () => {
       const {
-        prefixCls: customizePrefixCls,
-        selectPrefixCls: customizeSelectPrefixCls,
-        buildOptionText,
         size,
-        locale: customLocale,
+        itemRender = slots.itemRender,
+        buildOptionText = slots.buildOptionText,
         ...restProps
-      } = getOptionProps(this);
-      const getPrefixCls = this.configProvider.getPrefixCls;
-      const prefixCls = getPrefixCls('pagination', customizePrefixCls);
-      const selectPrefixCls = getPrefixCls('select', customizeSelectPrefixCls);
+      } = props;
 
       const isSmall = size === 'small';
       const paginationProps = {
-        prefixCls,
-        selectPrefixCls,
         ...restProps,
-        ...this.getIconsProps(prefixCls),
+        ...getIconsProps(prefixCls.value),
+        prefixCls: prefixCls.value,
+        selectPrefixCls: selectPrefixCls.value,
         selectComponentClass: isSmall ? MiniSelect : VcSelect,
-        locale: { ...contextLocale, ...customLocale },
-        buildOptionText: buildOptionText || this.$slots.buildOptionText,
-        ...this.$attrs,
-        class: classNames({ mini: isSmall }, this.$attrs.class),
-        itemRender: this.itemRender || this.$slots.itemRender,
+        locale: locale.value,
+        buildOptionText,
+        ...attrs,
+        class: classNames(
+          { mini: isSmall, [`${prefixCls.value}-rtl`]: direction.value === 'rtl' },
+          attrs.class,
+        ),
+        itemRender,
       };
 
       return <VcPagination {...paginationProps} />;
-    },
-  },
-  render() {
-    return (
-      <LocaleReceiver
-        componentName="Pagination"
-        defaultLocale={enUS}
-        children={this.renderPagination}
-      />
-    );
+    };
   },
 });

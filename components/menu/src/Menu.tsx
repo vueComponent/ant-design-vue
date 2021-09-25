@@ -23,6 +23,7 @@ import Overflow from '../../vc-overflow';
 import MenuItem from './MenuItem';
 import SubMenu from './SubMenu';
 import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
+import { cloneElement } from '../../_util/vnode';
 
 export const menuProps = {
   prefixCls: String,
@@ -345,7 +346,21 @@ export default defineComponent({
     };
 
     const lastVisibleIndex = ref(0);
-
+    const expandIcon = computed<MenuProps['expandIcon']>(() =>
+      props.expandIcon || slots.expandIcon
+        ? opt => {
+            let icon = props.expandIcon || slots.expandIcon;
+            icon = typeof icon === 'function' ? icon(opt) : icon;
+            return cloneElement(
+              icon,
+              {
+                class: `${prefixCls.value}-submenu-expand-icon`,
+              },
+              false,
+            );
+          }
+        : null,
+    );
     useProvideMenu({
       store,
       prefixCls,
@@ -374,7 +389,7 @@ export default defineComponent({
       unRegisterMenuInfo,
       selectedSubMenuEventKeys,
       isRootMenu: ref(true),
-      expandIcon: props.expandIcon || slots.expandIcon,
+      expandIcon,
     });
     return () => {
       const childList = flattenChildren(slots.default?.());

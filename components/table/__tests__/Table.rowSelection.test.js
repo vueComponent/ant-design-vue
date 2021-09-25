@@ -1,9 +1,17 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 import Table from '..';
-import { sleep } from '../../../tests/utils';
 
 describe('Table.rowSelection', () => {
+  const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+  afterEach(() => {
+    errorSpy.mockReset();
+  });
+
+  afterAll(() => {
+    errorSpy.mockRestore();
+  });
   const columns = [
     {
       title: 'Name',
@@ -30,46 +38,37 @@ describe('Table.rowSelection', () => {
     };
   }
   function renderedNames(wrapper) {
-    return wrapper.findAllComponents({ name: 'TableRow' }).map(row => {
+    return wrapper.findAllComponents({ name: 'BodyRow' }).map(row => {
       return row.props().record.name;
     });
   }
 
-  function getStore(wrapper) {
-    return wrapper.vm.$refs.table.store;
+  function getSelections(wrapper) {
+    return [...wrapper.vm.table.selectedKeySet].sort();
   }
 
-  it('select by checkbox', async () => {
+  xit('select by checkbox', async () => {
     const wrapper = mount(Table, getTableOptions());
     const checkboxes = wrapper.findAll('input');
     const checkboxAll = checkboxes[0];
     checkboxAll.element.checked = true;
     checkboxAll.trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper)).toEqual({
-        selectedRowKeys: [0, 1, 2, 3],
-        selectionDirty: true,
-      });
+      expect(getSelections(wrapper)).toEqual([0, 1, 2, 3]);
     });
     checkboxes[1].element.checked = false;
     checkboxes[1].trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper)).toEqual({
-        selectedRowKeys: [1, 2, 3],
-        selectionDirty: true,
-      });
+      expect(getSelections(wrapper)).toEqual([1, 2, 3]);
     });
     checkboxes[1].element.checked = true;
     checkboxes[1].trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper)).toEqual({
-        selectedRowKeys: [1, 2, 3, 0],
-        selectionDirty: true,
-      });
+      expect(getSelections(wrapper)).toEqual([0, 1, 2, 3]);
     });
   });
 
-  it('select by radio', async () => {
+  xit('select by radio', async () => {
     const wrapper = mount(Table, getTableOptions({ rowSelection: { type: 'radio' } }));
     const radios = wrapper.findAll('input');
 
@@ -77,103 +76,84 @@ describe('Table.rowSelection', () => {
     radios[0].element.checked = true;
     radios[0].trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper)).toEqual({
-        selectedRowKeys: [0],
-        selectionDirty: true,
-      });
+      expect(getSelections(wrapper)).toEqual([0]);
     });
     radios[radios.length - 1].element.checked = true;
     radios[radios.length - 1].trigger('change');
     await asyncExpect(() => {
-      expect(getStore(wrapper)).toEqual({
-        selectedRowKeys: [3],
-        selectionDirty: true,
-      });
+      expect(getSelections(wrapper)).toEqual([3]);
     });
   });
 
-  xit('pass getCheckboxProps to checkbox', async () => {
+  it('pass getCheckboxProps to checkbox', async () => {
     const rowSelection = {
       getCheckboxProps: record => ({
-        props: {
-          disabled: record.name === 'Lucy',
-          name: record.name,
-        },
+        disabled: record.name === 'Lucy',
+        name: record.name,
       }),
     };
 
     const wrapper = mount(Table, getTableOptions({ rowSelection }));
     const checkboxes = wrapper.findAll('input');
     await sleep();
-    expect(checkboxes[1].props.disabled).toBe(false);
-    expect(checkboxes[1].vnode.data.attrs.name).toEqual(data[0].name);
-    expect(checkboxes[2].vnode.data.attrs.disabled).toBe(true);
-    expect(checkboxes[2].vnode.data.attrs.name).toEqual(data[1].name);
+    expect(checkboxes[1].wrapperElement.disabled).toBe(false);
+    expect(checkboxes[1].wrapperElement.name).toEqual(data[0].name);
+    expect(checkboxes[2].wrapperElement.disabled).toBe(true);
+    expect(checkboxes[2].wrapperElement.name).toEqual(data[1].name);
   });
 
-  xit('works with pagination', async () => {
+  it('works with pagination', async () => {
     const wrapper = mount(Table, getTableOptions({ pagination: { pageSize: 2 } }));
 
-    const checkboxAll = wrapper.findAllComponents({ name: 'SelectionCheckboxAll' });
+    await sleep();
+    const checkboxAll = wrapper.find('input');
+    checkboxAll.wrapperElement.checked = true;
+    checkboxAll.trigger('change');
     const pagers = wrapper.findAllComponents({ name: 'Pager' });
-    checkboxAll.find('input').element.checked = true;
-    checkboxAll.find('input').trigger('change');
     await asyncExpect(() => {
-      expect(checkboxAll.vm.$data).toEqual({ checked: true, indeterminate: false });
+      expect(wrapper.findComponent({ name: 'ACheckbox' }).props()).toEqual(
+        expect.objectContaining({ checked: true, indeterminate: false }),
+      );
     });
     pagers[1].trigger('click');
     await asyncExpect(() => {
-      expect(checkboxAll.vm.$data).toEqual({ checked: false, indeterminate: false });
+      expect(wrapper.findComponent({ name: 'ACheckbox' }).props()).toEqual(
+        expect.objectContaining({ checked: false, indeterminate: false }),
+      );
     });
     pagers[0].trigger('click');
     await asyncExpect(() => {
-      expect(checkboxAll.vm.$data).toEqual({ checked: true, indeterminate: false });
+      expect(wrapper.findComponent({ name: 'ACheckbox' }).props()).toEqual(
+        expect.objectContaining({ checked: true, indeterminate: false }),
+      );
     });
   });
 
   // https://github.com/ant-design/ant-design/issues/4020
-  xit('handles defaultChecked', async () => {
+  it('handles defaultChecked', async () => {
     const rowSelection = {
       getCheckboxProps: record => {
         return {
-          props: {
-            defaultChecked: record.key === 0,
-          },
+          defaultChecked: record.key === 0,
         };
       },
     };
 
-    const wrapper = mount(Table, getTableOptions({ rowSelection }));
+    mount(Table, getTableOptions({ rowSelection }));
 
-    await asyncExpect(() => {
-      const checkboxs = wrapper.findAll('input');
-      expect(checkboxs[1].vnode.data.domProps.checked).toBe(true);
-      expect(checkboxs.at(2).vnode.data.domProps.checked).toBe(false);
-      checkboxs.at(2).element.checked = true;
-      checkboxs.at(2).trigger('change');
-    }, 0);
-
-    await asyncExpect(() => {
-      const checkboxs = wrapper.findAll('input');
-      expect(checkboxs[1].vnode.data.domProps.checked).toBe(true);
-      expect(checkboxs.at(2).vnode.data.domProps.checked).toBe(true);
-    }, 1000);
+    expect(errorSpy).toHaveBeenCalledWith(
+      'Warning: [ant-design-vue: Table] Do not set `checked` or `defaultChecked` in `getCheckboxProps`. Please use `selectedRowKeys` instead.',
+    );
   });
 
-  it('can be controlled', async () => {
+  xit('can be controlled', async () => {
     const wrapper = mount(Table, getTableOptions({ rowSelection: { selectedRowKeys: [0] } }));
 
-    expect(getStore(wrapper)).toEqual({
-      selectedRowKeys: [0],
-      selectionDirty: false,
-    });
+    expect(getSelections(wrapper)).toEqual([0]);
 
     wrapper.setProps({ rowSelection: { selectedRowKeys: [1] } });
     await asyncExpect(() => {
-      expect(getStore(wrapper)).toEqual({
-        selectedRowKeys: [1],
-        selectionDirty: false,
-      });
+      expect(getSelections(wrapper)).toEqual([1]);
     });
   });
 
@@ -216,7 +196,7 @@ describe('Table.rowSelection', () => {
     });
   });
 
-  xit('render with default selection correctly', async () => {
+  it('render with default selection correctly', async () => {
     const rowSelection = {
       selections: true,
     };
@@ -224,7 +204,7 @@ describe('Table.rowSelection', () => {
     const dropdownWrapper = mount(
       {
         render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
+          return wrapper.findComponent({ name: 'Trigger' }).vm.getComponent();
         },
       },
       { sync: false },
@@ -232,14 +212,12 @@ describe('Table.rowSelection', () => {
     await asyncExpect(() => {
       expect(dropdownWrapper.html()).toMatchSnapshot();
     });
-
-    await asyncExpect(() => {});
   });
 
-  xit('click select all selection', () => {
-    const handleSelectAll = jest.fn();
+  it('click select all selection', () => {
+    const handleChange = jest.fn();
     const rowSelection = {
-      onSelectAll: handleSelectAll,
+      onChange: handleChange,
       selections: true,
     };
     const wrapper = mount(Table, getTableOptions({ rowSelection }));
@@ -247,17 +225,17 @@ describe('Table.rowSelection', () => {
     const dropdownWrapper = mount(
       {
         render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
+          return wrapper.findComponent({ name: 'Trigger' }).vm.getComponent();
         },
       },
       { sync: false },
     );
-    dropdownWrapper.findAll('.ant-dropdown-menu-item > div')[0].trigger('click');
+    dropdownWrapper.findAll('.ant-dropdown-menu-item')[0].trigger('click');
 
-    expect(handleSelectAll).toBeCalledWith(true, data, data);
+    expect(handleChange.mock.calls[0][0]).toEqual([0, 1, 2, 3]);
   });
 
-  xit('fires selectInvert event', () => {
+  it('fires selectInvert event', async () => {
     const handleSelectInvert = jest.fn();
     const rowSelection = {
       onSelectInvert: handleSelectInvert,
@@ -267,25 +245,28 @@ describe('Table.rowSelection', () => {
     const checkboxes = wrapper.findAll('input');
     checkboxes[1].element.checked = true;
     checkboxes[1].trigger('change');
+    await sleep();
     const dropdownWrapper = mount(
       {
         render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
+          return wrapper.findComponent({ name: 'Trigger' }).vm.getComponent();
         },
       },
       { sync: false },
     );
-    const div = dropdownWrapper.findAll('.ant-dropdown-menu-item > div');
-    div.at(div.length - 1).trigger('click');
+    const div = dropdownWrapper.findAll('li.ant-dropdown-menu-item');
+    div[1].trigger('click');
 
     expect(handleSelectInvert).toBeCalledWith([1, 2, 3]);
   });
 
-  xit('fires selection event', () => {
+  it('fires selection event', async () => {
     const handleSelectOdd = jest.fn();
     const handleSelectEven = jest.fn();
     const rowSelection = {
       selections: [
+        Table.SELECTION_ALL,
+        Table.SELECTION_INVERT,
         {
           key: 'odd',
           text: '奇数项',
@@ -303,21 +284,22 @@ describe('Table.rowSelection', () => {
     const dropdownWrapper = mount(
       {
         render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
+          return wrapper.findComponent({ name: 'Trigger' }).vm.getComponent();
         },
       },
       { sync: false },
     );
+    await sleep();
     expect(dropdownWrapper.findAll('.ant-dropdown-menu-item').length).toBe(4);
 
-    dropdownWrapper.findAll('.ant-dropdown-menu-item > div').at(2).trigger('click');
+    dropdownWrapper.findAll('.ant-dropdown-menu-item')[2].trigger('click');
     expect(handleSelectOdd).toBeCalledWith([0, 1, 2, 3]);
 
-    dropdownWrapper.findAll('.ant-dropdown-menu-item > div').at(3).trigger('click');
+    dropdownWrapper.findAll('.ant-dropdown-menu-item')[3].trigger('click');
     expect(handleSelectEven).toBeCalledWith([0, 1, 2, 3]);
   });
 
-  xit('could hide default selection options', () => {
+  it('could hide default selection options', () => {
     const rowSelection = {
       hideDefaultSelections: true,
       selections: [
@@ -335,7 +317,7 @@ describe('Table.rowSelection', () => {
     const dropdownWrapper = mount(
       {
         render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
+          return wrapper.findComponent({ name: 'Trigger' }).vm.getComponent();
         },
       },
       { sync: false },
@@ -343,7 +325,7 @@ describe('Table.rowSelection', () => {
     expect(dropdownWrapper.findAll('.ant-dropdown-menu-item').length).toBe(2);
   });
 
-  xit('handle custom selection onSelect correctly when hide default selection options', () => {
+  it('handle custom selection onSelect correctly when hide default selection options', () => {
     const handleSelectOdd = jest.fn();
     const handleSelectEven = jest.fn();
     const rowSelection = {
@@ -366,25 +348,25 @@ describe('Table.rowSelection', () => {
     const dropdownWrapper = mount(
       {
         render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
+          return wrapper.findComponent({ name: 'Trigger' }).vm.getComponent();
         },
       },
       { sync: false },
     );
     expect(dropdownWrapper.findAll('.ant-dropdown-menu-item').length).toBe(2);
 
-    dropdownWrapper.findAll('.ant-dropdown-menu-item > div')[0].trigger('click');
+    dropdownWrapper.findAll('.ant-dropdown-menu-item')[0].trigger('click');
     expect(handleSelectOdd).toBeCalledWith([0, 1, 2, 3]);
 
-    dropdownWrapper.findAll('.ant-dropdown-menu-item > div')[1].trigger('click');
+    dropdownWrapper.findAll('.ant-dropdown-menu-item')[1].trigger('click');
     expect(handleSelectEven).toBeCalledWith([0, 1, 2, 3]);
   });
 
   // https:// github.com/ant-design/ant-design/issues/4245
-  xit('handles disabled checkbox correctly when dataSource changes', async () => {
+  it('handles disabled checkbox correctly when dataSource changes', async () => {
     const rowSelection = {
       getCheckboxProps: record => {
-        return { props: { disabled: record.disabled } };
+        return { disabled: record.disabled };
       },
     };
     const wrapper = mount(Table, getTableOptions({ rowSelection }));
@@ -396,14 +378,14 @@ describe('Table.rowSelection', () => {
       wrapper.setProps({ dataSource: newData });
     });
     await asyncExpect(() => {
-      wrapper.findAll('input').wrappers.forEach(checkbox => {
-        expect(checkbox.vnode.data.attrs.disabled).toBe(true);
+      wrapper.findAll('input').forEach(checkbox => {
+        expect(checkbox.wrapperElement.disabled).toBe(true);
       });
     });
   });
 
   // https://github.com/ant-design/ant-design/issues/4779
-  xit('should not switch pagination when select record', async () => {
+  it('should not switch pagination when select record', async () => {
     const newData = [];
     for (let i = 0; i < 20; i += 1) {
       newData.push({
@@ -418,8 +400,9 @@ describe('Table.rowSelection', () => {
         dataSource: newData,
       }),
     );
-    const pager = wrapper.findAll({ name: 'Pager' });
-    pager.at(pager.length - 1).trigger('click'); // switch to second page
+    await sleep();
+    const pager = wrapper.findAllComponents({ name: 'Pager' });
+    pager[pager.length - 1].trigger('click'); // switch to second page
     wrapper.findAll('input')[0].element.checked = true;
     wrapper.findAll('input')[0].trigger('change');
     await asyncExpect(() => {
@@ -460,7 +443,7 @@ describe('Table.rowSelection', () => {
   });
 
   // https://github.com/ant-design/ant-design/issues/10629
-  xit('should keep all checked state when remove item from dataSource', async () => {
+  it('should keep all checked state when remove item from dataSource', async () => {
     const wrapper = mount(Table, {
       props: {
         columns,
@@ -475,7 +458,7 @@ describe('Table.rowSelection', () => {
       expect(wrapper.findAllComponents({ name: 'ACheckbox' }).length).toBe(5);
       const allCheckbox = wrapper.findAllComponents({ name: 'ACheckbox' });
       Array(allCheckbox.length).forEach((_, index) => {
-        const checkbox = allCheckbox.at(index);
+        const checkbox = allCheckbox[index];
         expect(checkbox.vm.checked).toBe(true);
         expect(checkbox.vm.indeterminate).toBe(false);
       });
@@ -490,7 +473,7 @@ describe('Table.rowSelection', () => {
       expect(wrapper.findAllComponents({ name: 'ACheckbox' }).length).toBe(4);
       const allCheckbox = wrapper.findAllComponents({ name: 'ACheckbox' });
       Array(allCheckbox.length).forEach((_, index) => {
-        const checkbox = allCheckbox.at(index);
+        const checkbox = allCheckbox[index];
         expect(checkbox.vm.checked).toBe(true);
         expect(checkbox.vm.indeterminate).toBe(false);
       });
@@ -510,7 +493,7 @@ describe('Table.rowSelection', () => {
       sync: false,
     });
     await asyncExpect(() => {
-      expect(wrapper.findAll('thead tr div')[0].text()).toBe('多选');
+      expect(wrapper.findAll('thead tr th')[0].text()).toBe('多选');
     });
     await asyncExpect(() => {
       wrapper.setProps({
@@ -521,12 +504,12 @@ describe('Table.rowSelection', () => {
       });
     });
     await asyncExpect(() => {
-      expect(wrapper.findAll('thead tr div')[0].text()).toBe('单选');
+      expect(wrapper.findAll('thead tr th')[0].text()).toBe('单选');
     });
   });
 
   // https://github.com/ant-design/ant-design/issues/11384
-  xit('should keep item even if in filter', async () => {
+  it('should keep item even if in filter', async () => {
     const filterColumns = [
       {
         title: 'Name',
@@ -563,11 +546,20 @@ describe('Table.rowSelection', () => {
     const dropdownWrapper = mount(
       {
         render() {
-          return wrapper.find({ name: 'Trigger' }).vm.getComponent();
+          return wrapper.findComponent({ name: 'Trigger' }).vm.getComponent();
         },
       },
       { sync: false },
     );
+    await sleep();
+    function clickFilter(indexList) {
+      indexList.forEach(index => {
+        dropdownWrapper
+          .findAll('.ant-dropdown-menu-item .ant-checkbox-wrapper')
+          [index].trigger('click');
+      });
+      dropdownWrapper.find('.ant-table-filter-dropdown-btns .ant-btn-primary').trigger('click');
+    }
 
     function clickItem() {
       wrapper.findAll(
@@ -577,10 +569,7 @@ describe('Table.rowSelection', () => {
     }
 
     // Check Jack
-    dropdownWrapper.findAll('.ant-dropdown-menu-item .ant-checkbox-wrapper')[0].trigger('click');
-    dropdownWrapper
-      .find('.ant-table-filter-dropdown-btns .ant-table-filter-dropdown-link.confirm')
-      .trigger('click');
+    clickFilter([0]);
     await asyncExpect(() => {
       expect(wrapper.findAll('tbody tr').length).toBe(1);
     });
@@ -592,19 +581,9 @@ describe('Table.rowSelection', () => {
       expect(onChange.mock.calls[0][1].length).toBe(1);
     });
 
-    await asyncExpect(() => {
-      dropdownWrapper.findAll('.ant-dropdown-menu-item .ant-checkbox-wrapper')[0].trigger('click');
-    });
+    // Check Lucy
+    clickFilter([0, 1]);
 
-    await asyncExpect(() => {
-      // Check Lucy
-      dropdownWrapper.findAll('.ant-dropdown-menu-item .ant-checkbox-wrapper')[1].trigger('click');
-    });
-    await asyncExpect(() => {
-      dropdownWrapper
-        .find('.ant-table-filter-dropdown-btns .ant-table-filter-dropdown-link.confirm')
-        .trigger('click');
-    });
     await asyncExpect(() => {
       expect(wrapper.findAll('tbody tr').length).toBe(1);
     });
@@ -617,7 +596,7 @@ describe('Table.rowSelection', () => {
     });
   });
 
-  xit('render correctly when set childrenColumnName', async () => {
+  it('render correctly when set childrenColumnName', async () => {
     const newDatas = [
       {
         key: 1,
@@ -652,16 +631,18 @@ describe('Table.rowSelection', () => {
     });
 
     const checkboxes = wrapper.findAll('input');
-    const checkboxAll = wrapper.findAllComponents({ name: 'SelectionCheckboxAll' });
-
     checkboxes[1].element.checked = true;
     checkboxes[1].trigger('change');
-    expect(checkboxAll.$data).toEqual({ indeterminate: true, checked: false });
-
+    await sleep();
+    expect(wrapper.findComponent({ name: 'ACheckbox' }).props()).toEqual(
+      expect.objectContaining({ checked: false, indeterminate: true }),
+    );
     checkboxes[2].element.checked = true;
     checkboxes[2].trigger('change');
     await asyncExpect(() => {
-      expect(checkboxAll.vm.$data).toEqual({ indeterminate: false, checked: true });
+      expect(wrapper.findComponent({ name: 'ACheckbox' }).props()).toEqual(
+        expect.objectContaining({ checked: true, indeterminate: false }),
+      );
     });
   });
 });

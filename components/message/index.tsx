@@ -1,32 +1,36 @@
-import type { CSSProperties, VNodeTypes } from 'vue';
+import type { CSSProperties } from 'vue';
 import Notification from '../vc-notification';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import InfoCircleFilled from '@ant-design/icons-vue/InfoCircleFilled';
+import type { VueNode } from '../_util/type';
 
 let defaultDuration = 3;
 let defaultTop: string;
 let messageInstance: any;
 let key = 1;
-let prefixCls = 'ant-message';
+let localPrefixCls = '';
 let transitionName = 'move-up';
 let getContainer = () => document.body;
 let maxCount: number;
 
-function getMessageInstance(callback: (i: any) => void) {
+function getMessageInstance(args: MessageArgsProps, callback: (i: any) => void) {
   if (messageInstance) {
     callback(messageInstance);
     return;
   }
   Notification.newInstance(
     {
-      prefixCls,
+      appContext: args.appContext,
+      prefixCls: args.prefixCls || localPrefixCls,
+      rootPrefixCls: args.rootPrefixCls,
       transitionName,
       style: { top: defaultTop }, // 覆盖原来的样式
       getContainer,
       maxCount,
+      name: 'message',
     },
     (instance: any) => {
       if (messageInstance) {
@@ -60,20 +64,21 @@ export interface MessageType {
 }
 
 export interface MessageArgsProps {
-  content: VNodeTypes;
+  content: string | (() => VueNode) | VueNode;
   duration: number | null;
   type: NoticeType;
+  prefixCls?: string;
+  rootPrefixCls?: string;
   onClose?: () => void;
-  icon?: VNodeTypes;
+  icon?: (() => VueNode) | VueNode;
   key?: string | number;
   style?: CSSProperties;
   class?: string;
+  appContext?: any;
 }
 
 function notice(args: MessageArgsProps): MessageType {
   const duration = args.duration !== undefined ? args.duration : defaultDuration;
-  const Icon = iconMap[args.type];
-  const iconNode = Icon ? <Icon /> : '';
 
   const target = args.key || key++;
   const closePromise = new Promise(resolve => {
@@ -83,19 +88,21 @@ function notice(args: MessageArgsProps): MessageType {
       }
       return resolve(true);
     };
-    getMessageInstance(instance => {
+    getMessageInstance(args, instance => {
       instance.notice({
         key: target,
         duration,
         style: args.style || {},
         class: args.class,
-        content: () => {
+        content: ({ prefixCls }) => {
+          const Icon = iconMap[args.type];
+          const iconNode = Icon ? <Icon /> : '';
           return (
             <div
               class={`${prefixCls}-custom-content${args.type ? ` ${prefixCls}-${args.type}` : ''}`}
             >
-              {args.icon || iconNode}
-              <span>{args.content}</span>
+              {typeof args.icon === 'function' ? args.icon : args.icon || iconNode}
+              <span>{typeof args.content === 'function' ? args.content() : args.content}</span>
             </div>
           );
         },
@@ -115,7 +122,7 @@ function notice(args: MessageArgsProps): MessageType {
 }
 
 type ConfigDuration = number | (() => void);
-type JointContent = VNodeTypes | MessageArgsProps;
+type JointContent = VueNode | MessageArgsProps;
 export type ConfigOnClose = () => void;
 
 function isArgsProps(content: JointContent): content is MessageArgsProps {
@@ -145,7 +152,7 @@ const api: any = {
       defaultDuration = options.duration;
     }
     if (options.prefixCls !== undefined) {
-      prefixCls = options.prefixCls;
+      localPrefixCls = options.prefixCls;
     }
     if (options.getContainer !== undefined) {
       getContainer = options.getContainer;

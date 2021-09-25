@@ -4,7 +4,7 @@ import focusTest from '../../../tests/shared/focusTest';
 import { resetWarned } from '../../_util/warning';
 import mountTest from '../../../tests/shared/mountTest';
 import { ref } from 'vue';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 
 describe('Switch', () => {
   focusTest(Switch);

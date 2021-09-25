@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect, sleep } from '@/tests/utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 import KeyCode from '../../_util/KeyCode';
 import copy from '../../_util/copy-to-clipboard';
 import Typography from '..';

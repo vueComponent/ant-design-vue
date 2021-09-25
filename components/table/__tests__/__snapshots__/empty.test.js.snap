@@ -5,79 +5,56 @@ exports[`Table renders empty table 1`] = `
   <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-default ant-table-empty ant-table-scroll-position-left">
+      <div class="ant-table ant-table-empty">
         <!---->
-        <div class="ant-table-content">
-          <!---->
-          <div class="ant-table-body">
-            <table class="">
-              <colgroup>
-                <col data-key="1">
-                <col data-key="2">
-                <col data-key="3">
-                <col data-key="4">
-                <col data-key="5">
-                <col data-key="6">
-                <col data-key="7">
-                <col data-key="8">
-              </colgroup>
+        <div class="ant-table-container">
+          <div class="ant-table-content">
+            <table style="table-layout: auto;">
+              <colgroup></colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th colstart="0" colspan="1" colend="0" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 1</span><span class="ant-table-column-sorter"><!----></span>
-          </div></span>
-          <!---->
-          </th>
-          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 2</span><span class="ant-table-column-sorter"><!----></span>
-        </div></span>
+                  <th class="ant-table-cell" colstart="0" colend="0">
+                    <!---->Column 1
+                  </th>
+                  <th class="ant-table-cell" colstart="1" colend="1">
+                    <!---->Column 2
+                  </th>
+                  <th class="ant-table-cell" colstart="2" colend="2">
+                    <!---->Column 3
+                  </th>
+                  <th class="ant-table-cell" colstart="3" colend="3">
+                    <!---->Column 4
+                  </th>
+                  <th class="ant-table-cell" colstart="4" colend="4">
+                    <!---->Column 5
+                  </th>
+                  <th class="ant-table-cell" colstart="5" colend="5">
+                    <!---->Column 6
+                  </th>
+                  <th class="ant-table-cell" colstart="6" colend="6">
+                    <!---->Column 7
+                  </th>
+                  <th class="ant-table-cell" colstart="7" colend="7">
+                    <!---->Column 8
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="ant-table-tbody">
+                <!---->
+                <tr class="ant-table-placeholder">
+                  <td colspan="8" class="ant-table-cell">
+                    <!---->No data
+                  </td>
+                </tr>
+              </tbody>
+              <!---->
+            </table>
+          </div>
+        </div>
         <!---->
-        </th>
-        <th colstart="2" colspan="1" colend="2" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 3</span><span class="ant-table-column-sorter"><!----></span>
-      </div></span>
-      <!---->
-      </th>
-      <th colstart="3" colspan="1" colend="3" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 4</span><span class="ant-table-column-sorter"><!----></span>
-    </div></span>
-    <!---->
-    </th>
-    <th colstart="4" colspan="1" colend="4" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 5</span><span class="ant-table-column-sorter"><!----></span>
-  </div></span>
-  <!---->
-  </th>
-  <th colstart="5" colspan="1" colend="5" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 6</span><span class="ant-table-column-sorter"><!----></span>
-</div></span>
-<!---->
-</th>
-<th colstart="6" colspan="1" colend="6" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 7</span><span class="ant-table-column-sorter"><!----></span></div></span>
-  <!---->
-</th>
-<th colstart="7" colspan="1" colend="7" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 8</span><span class="ant-table-column-sorter"><!----></span></div></span>
-  <!---->
-</th>
-</tr>
-</thead>
-<tbody class="ant-table-tbody"></tbody>
-</table>
-</div>
-<div class="ant-table-placeholder">
-  <div class="ant-empty ant-empty-normal">
-    <div class="ant-empty-image"><svg class="ant-empty-img-simple" width="64" height="41" viewBox="0 0 64 41">
-        <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
-          <ellipse class="ant-empty-img-simple-ellipse" fill="#F5F5F5" cx="32" cy="33" rx="32" ry="7"></ellipse>
-          <g class="ant-empty-img-simple-g" fill-rule="nonzero" stroke="#D9D9D9">
-            <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
-            <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#FAFAFA" class="ant-empty-img-simple-path"></path>
-          </g>
-        </g>
-      </svg></div>
-    <p class="ant-empty-description">No Data</p>
-    <!---->
+      </div>
+    </div>
   </div>
-</div>
-<!---->
-</div>
-</div>
-</div>
-</div>
 </div>
 `;
 
@@ -86,65 +63,56 @@ exports[`Table renders empty table with custom emptyText 1`] = `
   <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-default ant-table-empty ant-table-scroll-position-left">
+      <div class="ant-table ant-table-empty">
         <!---->
-        <div class="ant-table-content">
-          <!---->
-          <div class="ant-table-body">
-            <table class="">
-              <colgroup>
-                <col data-key="1">
-                <col data-key="2">
-                <col data-key="3">
-                <col data-key="4">
-                <col data-key="5">
-                <col data-key="6">
-                <col data-key="7">
-                <col data-key="8">
-              </colgroup>
+        <div class="ant-table-container">
+          <div class="ant-table-content">
+            <table style="table-layout: auto;">
+              <colgroup></colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th colstart="0" colspan="1" colend="0" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 1</span><span class="ant-table-column-sorter"><!----></span>
-          </div></span>
-          <!---->
-          </th>
-          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 2</span><span class="ant-table-column-sorter"><!----></span>
-        </div></span>
+                  <th class="ant-table-cell" colstart="0" colend="0">
+                    <!---->Column 1
+                  </th>
+                  <th class="ant-table-cell" colstart="1" colend="1">
+                    <!---->Column 2
+                  </th>
+                  <th class="ant-table-cell" colstart="2" colend="2">
+                    <!---->Column 3
+                  </th>
+                  <th class="ant-table-cell" colstart="3" colend="3">
+                    <!---->Column 4
+                  </th>
+                  <th class="ant-table-cell" colstart="4" colend="4">
+                    <!---->Column 5
+                  </th>
+                  <th class="ant-table-cell" colstart="5" colend="5">
+                    <!---->Column 6
+                  </th>
+                  <th class="ant-table-cell" colstart="6" colend="6">
+                    <!---->Column 7
+                  </th>
+                  <th class="ant-table-cell" colstart="7" colend="7">
+                    <!---->Column 8
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="ant-table-tbody">
+                <!---->
+                <tr class="ant-table-placeholder">
+                  <td colspan="8" class="ant-table-cell">
+                    <!---->custom empty text
+                  </td>
+                </tr>
+              </tbody>
+              <!---->
+            </table>
+          </div>
+        </div>
         <!---->
-        </th>
-        <th colstart="2" colspan="1" colend="2" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 3</span><span class="ant-table-column-sorter"><!----></span>
-      </div></span>
-      <!---->
-      </th>
-      <th colstart="3" colspan="1" colend="3" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 4</span><span class="ant-table-column-sorter"><!----></span>
-    </div></span>
-    <!---->
-    </th>
-    <th colstart="4" colspan="1" colend="4" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 5</span><span class="ant-table-column-sorter"><!----></span>
-  </div></span>
-  <!---->
-  </th>
-  <th colstart="5" colspan="1" colend="5" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 6</span><span class="ant-table-column-sorter"><!----></span>
-</div></span>
-<!---->
-</th>
-<th colstart="6" colspan="1" colend="6" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 7</span><span class="ant-table-column-sorter"><!----></span></div></span>
-  <!---->
-</th>
-<th colstart="7" colspan="1" colend="7" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 8</span><span class="ant-table-column-sorter"><!----></span></div></span>
-  <!---->
-</th>
-</tr>
-</thead>
-<tbody class="ant-table-tbody"></tbody>
-</table>
-</div>
-<div class="ant-table-placeholder">custom empty text </div>
-<!---->
-</div>
-</div>
-</div>
-</div>
+      </div>
+    </div>
+  </div>
 </div>
 `;
 
@@ -153,94 +121,77 @@ exports[`Table renders empty table with fixed columns 1`] = `
   <div class="ant-spin-nested-loading">
     <!---->
     <div class="ant-spin-container">
-      <div class="ant-table ant-table-default ant-table-empty ant-table-scroll-position-left ant-table-scroll-position-right">
+      <div class="ant-table ant-table-has-fix-left ant-table-has-fix-right ant-table-empty">
         <!---->
-        <div class="ant-table-content">
-          <div class="ant-table-scroll">
-            <!---->
-            <div class="ant-table-body">
-              <table class="">
-                <colgroup>
-                  <col data-key="name" style="width: 100px; min-width: 100px;">
-                  <col data-key="age" style="width: 100px; min-width: 100px;">
-                  <col data-key="1">
-                  <col data-key="2">
-                  <col data-key="3">
-                  <col data-key="4">
-                  <col data-key="5">
-                  <col data-key="6">
-                  <col data-key="7">
-                  <col data-key="8">
-                  <col data-key="address" style="width: 100px; min-width: 100px;">
-                </colgroup>
-                <thead class="ant-table-thead">
-                  <tr>
-                    <th colstart="0" colspan="1" colend="0" rowspan="1" class="ant-table-row-cell-break-word"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Full Name</span><span class="ant-table-column-sorter"><!----></span>
-            </div></span>
-            <!---->
-            </th>
-            <th colstart="1" colspan="1" colend="1" rowspan="1" class="ant-table-row-cell-break-word"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Age</span><span class="ant-table-column-sorter"><!----></span>
-          </div></span>
-          <!---->
-          </th>
-          <th colstart="2" colspan="1" colend="2" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 1</span><span class="ant-table-column-sorter"><!----></span>
-        </div></span>
+        <div class="ant-table-container">
+          <div class="ant-table-content">
+            <table style="table-layout: auto;">
+              <colgroup>
+                <col style="width: 100px;">
+                <col style="width: 100px;">
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col style="width: 100px;">
+              </colgroup>
+              <thead class="ant-table-thead">
+                <tr>
+                  <th class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;" colstart="0" colend="0">
+                    <!---->Full Name
+                  </th>
+                  <th class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;" colstart="1" colend="1">
+                    <!---->Age
+                  </th>
+                  <th class="ant-table-cell" colstart="2" colend="2">
+                    <!---->Column 1
+                  </th>
+                  <th class="ant-table-cell" colstart="3" colend="3">
+                    <!---->Column 2
+                  </th>
+                  <th class="ant-table-cell" colstart="4" colend="4">
+                    <!---->Column 3
+                  </th>
+                  <th class="ant-table-cell" colstart="5" colend="5">
+                    <!---->Column 4
+                  </th>
+                  <th class="ant-table-cell" colstart="6" colend="6">
+                    <!---->Column 5
+                  </th>
+                  <th class="ant-table-cell" colstart="7" colend="7">
+                    <!---->Column 6
+                  </th>
+                  <th class="ant-table-cell" colstart="8" colend="8">
+                    <!---->Column 7
+                  </th>
+                  <th class="ant-table-cell" colstart="9" colend="9">
+                    <!---->Column 8
+                  </th>
+                  <th class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;" colstart="10" colend="10">
+                    <!---->Action
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="ant-table-tbody">
+                <!---->
+                <tr class="ant-table-placeholder">
+                  <td colspan="11" class="ant-table-cell">
+                    <!---->No data
+                  </td>
+                </tr>
+              </tbody>
+              <!---->
+            </table>
+          </div>
+        </div>
         <!---->
-        </th>
-        <th colstart="3" colspan="1" colend="3" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 2</span><span class="ant-table-column-sorter"><!----></span>
-      </div></span>
-      <!---->
-      </th>
-      <th colstart="4" colspan="1" colend="4" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 3</span><span class="ant-table-column-sorter"><!----></span>
-    </div></span>
-    <!---->
-    </th>
-    <th colstart="5" colspan="1" colend="5" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 4</span><span class="ant-table-column-sorter"><!----></span>
-  </div></span>
-  <!---->
-  </th>
-  <th colstart="6" colspan="1" colend="6" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 5</span><span class="ant-table-column-sorter"><!----></span>
-</div></span>
-<!---->
-</th>
-<th colstart="7" colspan="1" colend="7" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 6</span><span class="ant-table-column-sorter"><!----></span></div></span>
-  <!---->
-</th>
-<th colstart="8" colspan="1" colend="8" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 7</span><span class="ant-table-column-sorter"><!----></span></div></span>
-  <!---->
-</th>
-<th colstart="9" colspan="1" colend="9" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 8</span><span class="ant-table-column-sorter"><!----></span></div></span>
-  <!---->
-</th>
-<th colstart="10" colspan="1" colend="10" rowspan="1" class="ant-table-row-cell-break-word"><span class="ant-table-header-column"><div><span class="ant-table-column-title">Action</span><span class="ant-table-column-sorter"><!----></span></div></span>
-  <!---->
-</th>
-</tr>
-</thead>
-<tbody class="ant-table-tbody"></tbody>
-</table>
-</div>
-<div class="ant-table-placeholder">
-  <div class="ant-empty ant-empty-normal">
-    <div class="ant-empty-image"><svg class="ant-empty-img-simple" width="64" height="41" viewBox="0 0 64 41">
-        <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
-          <ellipse class="ant-empty-img-simple-ellipse" fill="#F5F5F5" cx="32" cy="33" rx="32" ry="7"></ellipse>
-          <g class="ant-empty-img-simple-g" fill-rule="nonzero" stroke="#D9D9D9">
-            <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
-            <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#FAFAFA" class="ant-empty-img-simple-path"></path>
-          </g>
-        </g>
-      </svg></div>
-    <p class="ant-empty-description">No Data</p>
-    <!---->
+      </div>
+    </div>
   </div>
-</div>
-<!---->
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>
 `;
 
@@ -248,83 +199,60 @@ exports[`Table renders empty table without emptyText when loading 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <div>
-      <div class="ant-spin ant-spin-spinning ant-table-without-pagination ant-table-spin-holder"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
+      <div class="ant-spin ant-spin-spinning"><span class="ant-spin-dot ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span>
         <!---->
       </div>
     </div>
     <div class="ant-spin-container ant-spin-blur">
-      <div class="ant-table ant-table-default ant-table-empty ant-table-scroll-position-left">
+      <div class="ant-table ant-table-empty">
         <!---->
-        <div class="ant-table-content">
-          <!---->
-          <div class="ant-table-body">
-            <table class="">
-              <colgroup>
-                <col data-key="1">
-                <col data-key="2">
-                <col data-key="3">
-                <col data-key="4">
-                <col data-key="5">
-                <col data-key="6">
-                <col data-key="7">
-                <col data-key="8">
-              </colgroup>
+        <div class="ant-table-container">
+          <div class="ant-table-content">
+            <table style="table-layout: auto;">
+              <colgroup></colgroup>
               <thead class="ant-table-thead">
                 <tr>
-                  <th colstart="0" colspan="1" colend="0" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 1</span><span class="ant-table-column-sorter"><!----></span>
-          </div></span>
-          <!---->
-          </th>
-          <th colstart="1" colspan="1" colend="1" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 2</span><span class="ant-table-column-sorter"><!----></span>
-        </div></span>
+                  <th class="ant-table-cell" colstart="0" colend="0">
+                    <!---->Column 1
+                  </th>
+                  <th class="ant-table-cell" colstart="1" colend="1">
+                    <!---->Column 2
+                  </th>
+                  <th class="ant-table-cell" colstart="2" colend="2">
+                    <!---->Column 3
+                  </th>
+                  <th class="ant-table-cell" colstart="3" colend="3">
+                    <!---->Column 4
+                  </th>
+                  <th class="ant-table-cell" colstart="4" colend="4">
+                    <!---->Column 5
+                  </th>
+                  <th class="ant-table-cell" colstart="5" colend="5">
+                    <!---->Column 6
+                  </th>
+                  <th class="ant-table-cell" colstart="6" colend="6">
+                    <!---->Column 7
+                  </th>
+                  <th class="ant-table-cell" colstart="7" colend="7">
+                    <!---->Column 8
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="ant-table-tbody">
+                <!---->
+                <tr class="ant-table-placeholder">
+                  <td colspan="8" class="ant-table-cell">
+                    <!---->No data
+                  </td>
+                </tr>
+              </tbody>
+              <!---->
+            </table>
+          </div>
+        </div>
         <!---->
-        </th>
-        <th colstart="2" colspan="1" colend="2" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 3</span><span class="ant-table-column-sorter"><!----></span>
-      </div></span>
-      <!---->
-      </th>
-      <th colstart="3" colspan="1" colend="3" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 4</span><span class="ant-table-column-sorter"><!----></span>
-    </div></span>
-    <!---->
-    </th>
-    <th colstart="4" colspan="1" colend="4" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 5</span><span class="ant-table-column-sorter"><!----></span>
-  </div></span>
-  <!---->
-  </th>
-  <th colstart="5" colspan="1" colend="5" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 6</span><span class="ant-table-column-sorter"><!----></span>
-</div></span>
-<!---->
-</th>
-<th colstart="6" colspan="1" colend="6" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 7</span><span class="ant-table-column-sorter"><!----></span></div></span>
-  <!---->
-</th>
-<th colstart="7" colspan="1" colend="7" rowspan="1" class=""><span class="ant-table-header-column"><div><span class="ant-table-column-title">Column 8</span><span class="ant-table-column-sorter"><!----></span></div></span>
-  <!---->
-</th>
-</tr>
-</thead>
-<tbody class="ant-table-tbody"></tbody>
-</table>
-</div>
-<div class="ant-table-placeholder">
-  <div class="ant-empty ant-empty-normal">
-    <div class="ant-empty-image"><svg class="ant-empty-img-simple" width="64" height="41" viewBox="0 0 64 41">
-        <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
-          <ellipse class="ant-empty-img-simple-ellipse" fill="#F5F5F5" cx="32" cy="33" rx="32" ry="7"></ellipse>
-          <g class="ant-empty-img-simple-g" fill-rule="nonzero" stroke="#D9D9D9">
-            <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
-            <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#FAFAFA" class="ant-empty-img-simple-path"></path>
-          </g>
-        </g>
-      </svg></div>
-    <p class="ant-empty-description">No Data</p>
-    <!---->
+      </div>
+    </div>
   </div>
-</div>
-<!---->
-</div>
-</div>
-</div>
-</div>
 </div>
 `;

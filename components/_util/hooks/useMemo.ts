@@ -1,9 +1,9 @@
-import type { Ref } from 'vue';
+import type { Ref, WatchSource } from 'vue';
 import { ref, watch } from 'vue';
 
 export default function useMemo<T>(
   getValue: () => T,
-  condition: any[],
+  condition: (WatchSource<unknown> | object)[],
   shouldUpdate?: (prev: any[], next: any[]) => boolean,
 ) {
   const cacheRef: Ref<T> = ref(getValue() as any);

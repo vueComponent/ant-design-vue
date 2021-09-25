@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/anchor/demo/basic.md correctly 1`] = `
+exports[`renders ./components/anchor/demo/basic.vue correctly 1`] = `
 <div>
   <div class="">
     <div class="ant-anchor-wrapper" style="max-height: 100vh;">
@@ -29,7 +29,7 @@ exports[`renders ./antdv-demo/docs/anchor/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/anchor/demo/customizeHighlight.md correctly 1`] = `
+exports[`renders ./components/anchor/demo/customizeHighlight.vue correctly 1`] = `
 <div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor fixed">
     <div class="ant-anchor-ink"><span class="ant-anchor-ink-ball visible" style="top: -4.5px;"></span></div>
@@ -51,7 +51,7 @@ exports[`renders ./antdv-demo/docs/anchor/demo/customizeHighlight.md correctly 1
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/anchor/demo/onChange.md correctly 1`] = `
+exports[`renders ./components/anchor/demo/onChange.vue correctly 1`] = `
 <div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor fixed">
     <div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div>
@@ -73,7 +73,7 @@ exports[`renders ./antdv-demo/docs/anchor/demo/onChange.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/anchor/demo/onClick.md correctly 1`] = `
+exports[`renders ./components/anchor/demo/onClick.vue correctly 1`] = `
 <div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor fixed">
     <div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div>
@@ -95,7 +95,7 @@ exports[`renders ./antdv-demo/docs/anchor/demo/onClick.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/anchor/demo/static.md correctly 1`] = `
+exports[`renders ./components/anchor/demo/static.vue correctly 1`] = `
 <div class="ant-anchor-wrapper" style="max-height: 100vh;">
   <div class="ant-anchor fixed">
     <div class="ant-anchor-ink"><span class="ant-anchor-ink-ball"></span></div>
@@ -117,7 +117,7 @@ exports[`renders ./antdv-demo/docs/anchor/demo/static.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/anchor/demo/targetOffset.md correctly 1`] = `
+exports[`renders ./components/anchor/demo/targetOffset.vue correctly 1`] = `
 <div>
   <div class="">
     <div class="ant-anchor-wrapper" style="max-height: 100vh;">

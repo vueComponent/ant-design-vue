@@ -17,23 +17,22 @@ const chalk = require('chalk');
 const getNpmArgs = require('./utils/get-npm-args');
 const getChangelog = require('./utils/getChangelog');
 const path = require('path');
-// const watch = require('gulp-watch')
-const ts = require('gulp-typescript');
 const gulp = require('gulp');
+const fg = require('fast-glob');
 const fs = require('fs');
 const rimraf = require('rimraf');
+const { createCompilerHost, createProgram } = require('typescript');
 const stripCode = require('gulp-strip-code');
 const compareVersions = require('compare-versions');
-const getTSCommonConfig = require('./getTSCommonConfig');
+// const getTSCommonConfig = require('./getTSCommonConfig');
 const replaceLib = require('./replaceLib');
 
 const packageJson = require(getProjectPath('package.json'));
-const tsDefaultReporter = ts.reporter.defaultReporter();
 const cwd = process.cwd();
 const libDir = getProjectPath('lib');
 const esDir = getProjectPath('es');
 
-const tsConfig = getTSCommonConfig();
+// const tsConfig = getTSCommonConfig();
 
 function dist(done) {
   rimraf.sync(path.join(cwd, 'dist'));
@@ -72,29 +71,51 @@ function dist(done) {
   });
 }
 
-const tsFiles = ['**/*.ts', '**/*.tsx', '!node_modules/**/*.*', 'typings/**/*.d.ts'];
+async function compileTs(modules = false, cb) {
+  const options = {
+    allowJs: true,
+    declaration: true,
+    emitDeclarationOnly: true,
+  };
 
-function compileTs(stream) {
-  return stream
-    .pipe(ts(tsConfig))
-    .js.pipe(
-      through2.obj(function (file, encoding, next) {
-        // console.log(file.path, file.base);
-        file.path = file.path.replace(/\.[jt]sx$/, '.js');
-        this.push(file);
-        next();
-      }),
-    )
-    .pipe(gulp.dest(process.cwd()));
+  const createdFiles = {};
+  const host = createCompilerHost(options);
+  host.writeFile = (fileName, contents) => {
+    createdFiles[path.isAbsolute(fileName) ? path.relative(cwd, fileName) : fileName] = contents;
+  };
+
+  const files = await fg(
+    [
+      'components/**/*.js',
+      'components/**/*.jsx',
+      'components/**/*.tsx',
+      'components/**/*.ts',
+      '!components/*/__tests__/*',
+      '!components/*/style/*',
+      '!components/styles.ts',
+    ],
+    { cwd },
+  );
+
+  const program = createProgram(files, options, host);
+  program.emit();
+
+  Object.keys(createdFiles).forEach(fileName => {
+    const contents = createdFiles[fileName];
+    const filePath = path.join(
+      cwd,
+      fileName.replace(/^components/, modules === false ? 'es' : 'lib'),
+    );
+    const dir = path.dirname(filePath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    fs.writeFileSync(filePath, contents);
+  });
+  cb(0);
 }
 
-gulp.task('tsc', () =>
-  compileTs(
-    gulp.src(tsFiles, {
-      base: cwd,
-    }),
-  ),
-);
+gulp.task('tsc', () => compileTs());
 
 function babelify(js, modules) {
   const babelConfig = getBabelCommonConfig(modules);
@@ -169,7 +190,7 @@ function compile(modules) {
   const assets = gulp
     .src(['components/**/*.@(png|svg)'])
     .pipe(gulp.dest(modules === false ? esDir : libDir));
-  let error = 0;
+  // let error = 0;
   const source = [
     'components/**/*.js',
     'components/**/*.jsx',
@@ -179,27 +200,8 @@ function compile(modules) {
     '!components/*/__tests__/*',
   ];
 
-  const tsResult = gulp.src(source).pipe(
-    ts(tsConfig, {
-      error(e) {
-        tsDefaultReporter.error(e);
-        error = 1;
-      },
-      finish: tsDefaultReporter.finish,
-    }),
-  );
-
-  function check() {
-    if (error && !argv['ignore-error']) {
-      process.exit(1);
-    }
-  }
-
-  tsResult.on('finish', check);
-  tsResult.on('end', check);
-  const tsFilesStream = babelify(tsResult.js, modules);
-  const tsd = tsResult.dts.pipe(gulp.dest(modules === false ? esDir : libDir));
-  return merge2([less, tsFilesStream, tsd, assets]);
+  const jsFilesStream = babelify(gulp.src(source), modules);
+  return merge2([less, jsFilesStream, assets]);
 }
 
 function tag() {
@@ -292,7 +294,6 @@ gulp.task(
 
 function publish(tagString, done) {
   let args = ['publish', '--with-antd-tools'];
-  args = args.concat(['--tag', 'next']);
   if (tagString) {
     args = args.concat(['--tag', tagString]);
   }
@@ -327,7 +328,10 @@ function pub(done) {
   }
 }
 
+let startTime = new Date();
 gulp.task('compile-with-es', done => {
+  startTime = new Date();
+  console.log('start compile at ', startTime);
   console.log('[Parallel] Compile to es...');
   compile(false).on('finish', done);
 });
@@ -337,11 +341,31 @@ gulp.task('compile-with-lib', done => {
   compile().on('finish', done);
 });
 
+gulp.task('compile-with-es-ts-type', async done => {
+  console.log('[Parallel] Compile to es ts type...');
+  await compileTs(false, done);
+});
+
+gulp.task('compile-with-lib-ts-type', async done => {
+  console.log('[Parallel] Compile to lib ts type...');
+  await compileTs(true, done);
+});
+
 gulp.task(
   'compile',
-  gulp.series(gulp.parallel('compile-with-es', 'compile-with-lib'), done => {
-    done();
-  }),
+  gulp.series(
+    gulp.parallel(
+      'compile-with-es',
+      'compile-with-lib',
+      'compile-with-es-ts-type',
+      'compile-with-lib-ts-type',
+    ),
+    done => {
+      console.log('end compile at ', new Date());
+      console.log('compile time ', (new Date() - startTime) / 1000, 's');
+      done();
+    },
+  ),
 );
 
 gulp.task(

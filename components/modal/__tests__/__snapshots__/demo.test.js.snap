@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/modal/demo/async.md correctly 1`] = `
+exports[`renders ./components/modal/demo/async.vue correctly 1`] = `
 <div><button class="ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal with async logic</span>
   </button>
@@ -8,7 +8,7 @@ exports[`renders ./antdv-demo/docs/modal/demo/async.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/modal/demo/basic.md correctly 1`] = `
+exports[`renders ./components/modal/demo/basic.vue correctly 1`] = `
 <div><button class="ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal</span>
   </button>
@@ -16,7 +16,7 @@ exports[`renders ./antdv-demo/docs/modal/demo/basic.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/modal/demo/button-props.md correctly 1`] = `
+exports[`renders ./components/modal/demo/button-props.vue correctly 1`] = `
 <div><button class="ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal with customized button props</span>
   </button>
@@ -24,7 +24,7 @@ exports[`renders ./antdv-demo/docs/modal/demo/button-props.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/modal/demo/confirm.md correctly 1`] = `
+exports[`renders ./components/modal/demo/confirm.vue correctly 1`] = `
 <div><button class="ant-btn" type="button">
     <!----><span>Confirm</span>
   </button><button class="ant-btn ant-btn-dashed" type="button">
@@ -34,19 +34,19 @@ exports[`renders ./antdv-demo/docs/modal/demo/confirm.md correctly 1`] = `
   </button></div>
 `;
 
-exports[`renders ./antdv-demo/docs/modal/demo/confirm-promise.md correctly 1`] = `
+exports[`renders ./components/modal/demo/confirm-promise.vue correctly 1`] = `
 <button class="ant-btn" type="button">
   <!----><span>Confirm</span>
 </button>
 `;
 
-exports[`renders ./antdv-demo/docs/modal/demo/confirm-router.md correctly 1`] = `
+exports[`renders ./components/modal/demo/confirm-router.vue correctly 1`] = `
 <button class="ant-btn" type="button">
   <!----><span>Confirm</span>
 </button>
 `;
 
-exports[`renders ./antdv-demo/docs/modal/demo/footer.md correctly 1`] = `
+exports[`renders ./components/modal/demo/footer.vue correctly 1`] = `
 <div><button class="ant-btn ant-btn-primary" type="button">
     <!----><span>Open Modal with customized footer</span>
   </button>
@@ -54,7 +54,15 @@ exports[`renders ./antdv-demo/docs/modal/demo/footer.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/modal/demo/info.md correctly 1`] = `
+exports[`renders ./components/modal/demo/fullscreen.vue correctly 1`] = `
+<div><button class="ant-btn ant-btn-primary" type="button">
+    <!----><span>Open Modal</span>
+  </button>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/modal/demo/info.vue correctly 1`] = `
 <div><button class="ant-btn" type="button">
     <!----><span>Info</span>
   </button><button class="ant-btn" type="button">
@@ -66,28 +74,36 @@ exports[`renders ./antdv-demo/docs/modal/demo/info.md correctly 1`] = `
   </button></div>
 `;
 
-exports[`renders ./antdv-demo/docs/modal/demo/locale.md correctly 1`] = `
+exports[`renders ./components/modal/demo/locale.vue correctly 1`] = `
 <div><button class="ant-btn ant-btn-primary" type="button">
     <!----><span>Modal</span>
-  </button>
-  <!----><br><br><button class="ant-btn" type="button">
+  </button><button class="ant-btn" type="button">
     <!----><span>Confirm</span>
   </button>
+  <!---->
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/modal/demo/manual.md correctly 1`] = `
+exports[`renders ./components/modal/demo/manual.vue correctly 1`] = `
 <button class="ant-btn" type="button">
   <!----><span>Open modal to close in 5s</span>
 </button>
 `;
 
-exports[`renders ./antdv-demo/docs/modal/demo/position.md correctly 1`] = `
+exports[`renders ./components/modal/demo/position.vue correctly 1`] = `
 <div id="components-modal-demo-position"><button class="ant-btn ant-btn-primary" type="button">
     <!----><span>Display a modal dialog at 20px to Top</span>
   </button>
   <!----><br><br><button class="ant-btn ant-btn-primary" type="button">
     <!----><span>Vertically centered modal dialog</span>
+  </button>
+  <!---->
+</div>
+`;
+
+exports[`renders ./components/modal/demo/width.vue correctly 1`] = `
+<div><button class="ant-btn ant-btn-primary" type="button">
+    <!----><span>Open Modal of 1000px width</span>
   </button>
   <!---->
 </div>

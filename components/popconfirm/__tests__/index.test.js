@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import Popconfirm from '..';
 function $$(className) {
   return document.body.querySelectorAll(className);
@@ -68,12 +68,11 @@ describe('Popconfirm', () => {
     await asyncExpect(() => {
       const popup = popconfirm.vm.$refs.popconfirm.getPopupDomNode();
       expect(popup).not.toBe(null);
-      expect(popup.className).toContain('ant-popover-placement-top');
       expect(popup.innerHTML).toMatchSnapshot();
     }, 1000);
   });
 
-  fit('should not open in disabled', async () => {
+  it('should not open in disabled', async () => {
     const popconfirm = mount(
       {
         render() {
@@ -87,7 +86,6 @@ describe('Popconfirm', () => {
       { sync: false },
     );
     popconfirm.find('span').trigger('click');
-    popconfirm.vm.$refs.popconfirm.$forceUpdate();
     const popup = popconfirm.vm.$refs.popconfirm.getPopupDomNode();
     expect(popup).toBeFalsy();
   });

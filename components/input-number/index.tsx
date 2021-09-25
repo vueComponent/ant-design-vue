@@ -9,6 +9,7 @@ import VcInputNumber from '../vc-input-number/src';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
 import type { EventHandler } from '../_util/EventInterface';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 
 const inputNumberProps = {
   prefixCls: PropTypes.string,
@@ -40,13 +41,22 @@ const InputNumber = defineComponent({
   name: 'AInputNumber',
   inheritAttrs: false,
   props: inputNumberProps,
-  setup(props) {
+  emits: ['input', 'change', 'blur', 'update:value'],
+  setup(props, { emit }) {
+    const formItemContext = useInjectFormItemContext();
     const inputNumberRef = ref(null);
     const focus = () => {
       inputNumberRef.value.focus();
     };
     const blur = () => {
       inputNumberRef.value.blur();
+    };
+    const handleChange = (val: number) => {
+      emit('update:value', val);
+      emit('change', val);
+    };
+    const handleBlur = () => {
+      emit('blur');
     };
     onMounted(() => {
       nextTick(() => {
@@ -62,6 +72,9 @@ const InputNumber = defineComponent({
       inputNumberRef,
       focus,
       blur,
+      formItemContext,
+      handleBlur,
+      handleChange,
     };
   },
 
@@ -70,6 +83,7 @@ const InputNumber = defineComponent({
       prefixCls: customizePrefixCls,
       size,
       class: className,
+      id = this.formItemContext.id.value,
       ...others
     } = {
       ...getOptionProps(this),
@@ -94,6 +108,9 @@ const InputNumber = defineComponent({
       downHandler: downIcon,
       ...others,
       class: inputNumberClass,
+      onChange: this.handleChange,
+      onBlur: this.handleBlur,
+      id,
     };
     return <VcInputNumber {...vcInputNumberProps} ref="inputNumberRef" />;
   },

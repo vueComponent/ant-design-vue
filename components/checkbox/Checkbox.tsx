@@ -1,3 +1,4 @@
+import type { ExtractPropTypes } from 'vue';
 import { defineComponent, inject, nextTick } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
@@ -7,13 +8,11 @@ import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 import type { RadioChangeEvent } from '../radio/interface';
 import type { EventHandler } from '../_util/EventInterface';
+import { useInjectFormItemContext } from '../form/FormItemContext';
 function noop() {}
 
-export default defineComponent({
-  name: 'ACheckbox',
-  inheritAttrs: false,
-  __ANT_CHECKBOX: true,
-  props: {
+export const checkboxProps = () => {
+  return {
     prefixCls: PropTypes.string,
     defaultChecked: PropTypes.looseBool,
     checked: PropTypes.looseBool,
@@ -27,10 +26,22 @@ export default defineComponent({
     autofocus: PropTypes.looseBool,
     onChange: PropTypes.func,
     'onUpdate:checked': PropTypes.func,
-  },
+    skipGroup: PropTypes.looseBool,
+  };
+};
+
+export type CheckboxProps = Partial<ExtractPropTypes<ReturnType<typeof checkboxProps>>>;
+
+export default defineComponent({
+  name: 'ACheckbox',
+  inheritAttrs: false,
+  __ANT_CHECKBOX: true,
+  props: checkboxProps(),
   emits: ['change', 'update:checked'],
   setup() {
+    const formItemContext = useInjectFormItemContext();
     return {
+      formItemContext,
       configProvider: inject('configProvider', defaultConfigProvider),
       checkboxGroupContext: inject('checkboxGroupContext', undefined),
     };
@@ -38,6 +49,9 @@ export default defineComponent({
 
   watch: {
     value(value, prevValue) {
+      if (this.skipGroup) {
+        return;
+      }
       nextTick(() => {
         const { checkboxGroupContext: checkboxGroup = {} } = this;
         if (checkboxGroup.registerValue && checkboxGroup.cancelValue) {
@@ -85,7 +99,13 @@ export default defineComponent({
     const props = getOptionProps(this);
     const { checkboxGroupContext: checkboxGroup, $attrs } = this;
     const children = getSlot(this);
-    const { indeterminate, prefixCls: customizePrefixCls, ...restProps } = props;
+    const {
+      indeterminate,
+      prefixCls: customizePrefixCls,
+      skipGroup,
+      id = this.formItemContext.id.value,
+      ...restProps
+    } = props;
     const getPrefixCls = this.configProvider.getPrefixCls;
     const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
     const {
@@ -98,12 +118,14 @@ export default defineComponent({
     } = $attrs;
     const checkboxProps: any = {
       ...restProps,
+      id,
       prefixCls,
       ...restAttrs,
     };
-    if (checkboxGroup) {
+    if (checkboxGroup && !skipGroup) {
       checkboxProps.onChange = (...args) => {
         this.$emit('change', ...args);
+        this.formItemContext.onFieldChange();
         checkboxGroup.toggleOption({ label: children, value: props.value });
       };
       checkboxProps.name = checkboxGroup.name;

@@ -1,10 +1,14 @@
-import Menu, { MenuProps } from './src/Menu';
-import MenuItem, { MenuItemProps } from './src/MenuItem';
-import SubMenu, { SubMenuProps } from './src/SubMenu';
-import ItemGroup, { MenuItemGroupProps } from './src/ItemGroup';
+import type { MenuProps } from './src/Menu';
+import Menu from './src/Menu';
+import type { MenuItemProps } from './src/MenuItem';
+import MenuItem from './src/MenuItem';
+import type { SubMenuProps } from './src/SubMenu';
+import SubMenu from './src/SubMenu';
+import type { MenuItemGroupProps } from './src/ItemGroup';
+import ItemGroup from './src/ItemGroup';
 import Divider from './src/Divider';
 import type { App, Plugin } from 'vue';
-import { MenuTheme } from './src/interface';
+import type { MenuTheme } from './src/interface';
 /* istanbul ignore next */
 Menu.install = function (app: App) {
   app.component(Menu.name, Menu);
@@ -19,7 +23,7 @@ Menu.Item = MenuItem;
 Menu.Divider = Divider;
 Menu.SubMenu = SubMenu;
 Menu.ItemGroup = ItemGroup;
-
+export type { MenuProps, SubMenuProps, MenuItemProps, MenuItemGroupProps, MenuTheme };
 export {
   SubMenu,
   MenuItem as Item,
@@ -28,11 +32,6 @@ export {
   ItemGroup as MenuItemGroup,
   Divider,
   Divider as MenuDivider,
-  MenuProps,
-  SubMenuProps,
-  MenuItemProps,
-  MenuItemGroupProps,
-  MenuTheme,
 };
 
 export default Menu as typeof Menu &

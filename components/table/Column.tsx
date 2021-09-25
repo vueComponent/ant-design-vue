@@ -1,9 +1,10 @@
 import { defineComponent } from 'vue';
-import { columnProps } from './interface';
+import type { ColumnType } from './interface';
 
-export default defineComponent({
+export type ColumnProps<RecordType = unknown> = ColumnType<RecordType>;
+export default defineComponent<ColumnProps>({
   name: 'ATableColumn',
-  props: columnProps,
+  slots: ['title', 'filterIcon'],
   render() {
     return null;
   },

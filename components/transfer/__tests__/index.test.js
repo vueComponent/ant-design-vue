@@ -1,8 +1,7 @@
 import { mount } from '@vue/test-utils';
 import Transfer from '..';
 import * as Vue from 'vue';
-import { sleep } from '../../../tests/utils';
-import { asyncExpect } from '@/tests/utils';
+import { sleep, asyncExpect } from '../../../tests/utils';
 import mountTest from '../../../tests/shared/mountTest';
 
 const listCommonProps = {
@@ -90,19 +89,28 @@ const searchTransferProps = {
 describe('Transfer', () => {
   mountTest(Transfer);
   it('should render correctly', () => {
-    const props = {
-      props: listCommonProps,
-    };
-    const wrapper = mount(Transfer, props);
+    const wrapper = mount({
+      setup() {
+        return () => <Transfer {...{ ...listCommonProps }} />;
+      },
+    });
+
     expect(wrapper.html()).toMatchSnapshot();
   });
 
   it('should move selected keys to corresponding list', done => {
     const handleChange = jest.fn();
-    const wrapper = mount(Transfer, {
-      props: { ...listCommonProps, onChange: handleChange },
-      sync: false,
-    });
+
+    const wrapper = mount(
+      {
+        setup() {
+          return () => <Transfer {...{ ...listCommonProps, onChange: handleChange }} />;
+        },
+      },
+      {
+        sync: false,
+      },
+    );
     Vue.nextTick(() => {
       wrapper.findAll('.ant-btn')[0].trigger('click'); // move selected keys to right list
       expect(handleChange).toHaveBeenCalledWith(['a', 'b'], 'right', ['a']);
@@ -111,10 +119,16 @@ describe('Transfer', () => {
   });
   it('should move selected keys expect disabled to corresponding list', done => {
     const handleChange = jest.fn();
-    const wrapper = mount(Transfer, {
-      props: { ...listDisabledProps, onChange: handleChange },
-      sync: false,
-    });
+    const wrapper = mount(
+      {
+        setup() {
+          return () => <Transfer {...{ ...listDisabledProps, onChange: handleChange }} />;
+        },
+      },
+      {
+        sync: false,
+      },
+    );
     Vue.nextTick(() => {
       wrapper.findAll('.ant-btn')[0].trigger('click');
       expect(handleChange).toHaveBeenCalledWith(['b'], 'right', ['b']);
@@ -124,10 +138,18 @@ describe('Transfer', () => {
 
   it('should uncheck checkbox when click on checked item', async () => {
     const handleSelectChange = jest.fn();
-    const wrapper = mount(Transfer, {
-      props: { ...listCommonProps, onSelectChange: handleSelectChange },
-      sync: false,
-    });
+
+    const wrapper = mount(
+      {
+        setup() {
+          return () => <Transfer {...{ ...listCommonProps, onSelectChange: handleSelectChange }} />;
+        },
+      },
+      {
+        sync: false,
+      },
+    );
+
     await sleep();
     wrapper.findAll('.ant-transfer-list-content-item')[0].trigger('click');
     expect(handleSelectChange).toHaveBeenLastCalledWith([], []);
@@ -135,10 +157,18 @@ describe('Transfer', () => {
 
   it('should check checkbox when click on unchecked item', async () => {
     const handleSelectChange = jest.fn();
-    const wrapper = mount(Transfer, {
-      props: { ...listCommonProps, onSelectChange: handleSelectChange },
-      sync: false,
-    });
+
+    const wrapper = mount(
+      {
+        setup() {
+          return () => <Transfer {...{ ...listCommonProps, onSelectChange: handleSelectChange }} />;
+        },
+      },
+      {
+        sync: false,
+      },
+    );
+
     await sleep();
     wrapper.findAll('.ant-transfer-list-content-item')[2].trigger('click');
     await sleep();
@@ -147,10 +177,18 @@ describe('Transfer', () => {
 
   it('should not check checkbox when click on disabled item', async () => {
     const handleSelectChange = jest.fn();
-    const wrapper = mount(Transfer, {
-      props: { ...listCommonProps, onSelectChange: handleSelectChange },
-      sync: false,
-    });
+
+    const wrapper = mount(
+      {
+        setup() {
+          return () => <Transfer {...{ ...listCommonProps, onSelectChange: handleSelectChange }} />;
+        },
+      },
+      {
+        sync: false,
+      },
+    );
+
     await sleep();
     wrapper.findAll('.ant-transfer-list-content-item')[1].trigger('click');
     expect(handleSelectChange).not.toHaveBeenCalled();
@@ -200,14 +238,26 @@ describe('Transfer', () => {
 
   it('should call `filterOption` when use input in search box', done => {
     const filterOption = (inputValue, option) => inputValue === option.title;
-    const wrapper = mount(Transfer, {
-      props: {
-        ...listCommonProps,
-        showSearch: true,
-        filterOption,
+
+    const wrapper = mount(
+      {
+        setup() {
+          return () => (
+            <Transfer
+              {...{
+                ...listCommonProps,
+                showSearch: true,
+                filterOption,
+              }}
+            />
+          );
+        },
       },
-      sync: false,
-    });
+      {
+        sync: false,
+      },
+    );
+
     Vue.nextTick(() => {
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input')[0];
       input.element.value = 'a';
@@ -227,15 +277,26 @@ describe('Transfer', () => {
   it('should display the correct count of items when filter by input', done => {
     const filterOption = (inputValue, option) => option.description.indexOf(inputValue) > -1;
     const renderFunc = item => item.title;
-    const wrapper = mount(Transfer, {
-      props: {
-        ...searchTransferProps,
-        showSearch: true,
-        filterOption,
-        render: renderFunc,
+    const wrapper = mount(
+      {
+        setup() {
+          return () => (
+            <Transfer
+              {...{
+                ...searchTransferProps,
+                showSearch: true,
+                filterOption,
+                render: renderFunc,
+              }}
+            />
+          );
+        },
       },
-      sync: false,
-    });
+      {
+        sync: false,
+      },
+    );
+
     Vue.nextTick(() => {
       const input = wrapper.findAll('.ant-transfer-list-body-search-wrapper input')[0];
       input.element.value = 'content2';
@@ -247,7 +308,7 @@ describe('Transfer', () => {
             .findAll('.ant-transfer-list-header-selected > span')[0]
             .text()
             .trim(),
-        ).toEqual('1 items');
+        ).toEqual('1 item');
         done();
       });
     });
@@ -395,14 +456,11 @@ describe('Transfer', () => {
       targetKeys: ['c', 'b'],
       lazy: false,
     };
-
-    const props = {
-      props: {
-        ...sortedTargetKeyProps,
-        render: item => item.title,
+    const wrapper = mount({
+      setup() {
+        return () => <Transfer {...sortedTargetKeyProps} render={item => item.title} />;
       },
-    };
-    const wrapper = mount(Transfer, props);
+    });
     expect(wrapper.html()).toMatchSnapshot();
   });
   it('should add custom styles when their props are provided', async () => {

@@ -7,8 +7,8 @@ import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import CloseCircleOutlined from '@ant-design/icons-vue/CloseCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
 
-export { IActionButtonProps as ActionButtonProps } from './ActionButton';
-export { ModalProps, ModalFuncProps } from './Modal';
+export type { IActionButtonProps as ActionButtonProps } from './ActionButton';
+export type { ModalProps, ModalFuncProps } from './Modal';
 
 const info = function (props: ModalFuncProps) {
   const config = {

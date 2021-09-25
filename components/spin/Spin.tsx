@@ -10,7 +10,7 @@ import { defaultConfigProvider } from '../config-provider';
 
 export const SpinSize = PropTypes.oneOf(tuple('small', 'default', 'large'));
 
-export const getSpinProps = () => ({
+export const spinProps = () => ({
   prefixCls: PropTypes.string,
   spinning: PropTypes.looseBool,
   size: SpinSize,
@@ -20,7 +20,7 @@ export const getSpinProps = () => ({
   indicator: PropTypes.any,
 });
 
-export type SpinProps = Partial<ExtractPropTypes<ReturnType<typeof getSpinProps>>>;
+export type SpinProps = Partial<ExtractPropTypes<ReturnType<typeof spinProps>>>;
 
 // Render indicator
 let defaultIndicator: () => VNode = null;
@@ -38,7 +38,7 @@ export default defineComponent({
   name: 'ASpin',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: initDefaultProps(getSpinProps(), {
+  props: initDefaultProps(spinProps(), {
     size: 'default',
     spinning: true,
     wrapperClassName: '',

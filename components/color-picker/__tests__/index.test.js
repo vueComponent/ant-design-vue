@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import ColorPicker from '..';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 describe('ColorPicker', () => {
   xit('should support default value', async () => {
     const wrapper = mount(

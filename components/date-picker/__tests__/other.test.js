@@ -1,10 +1,9 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
-import moment from 'moment';
+import { asyncExpect, sleep } from '../../../tests/utils';
+import dayjs from 'dayjs';
 import DatePicker from '../';
 import LocaleProvider from '../../locale-provider';
 import locale from '../../locale-provider/zh_CN';
-import { sleep } from '../../../tests/utils';
 
 const { MonthPicker, WeekPicker } = DatePicker;
 
@@ -20,7 +19,7 @@ describe('Picker format by locale', () => {
     },
   };
 
-  const date = moment('2000-01-01', 'YYYY-MM-DD');
+  const date = dayjs('2000-01-01', 'YYYY-MM-DD');
   function matchPicker(name, Picker, props) {
     it(name, async () => {
       const wrapper = mount(
@@ -52,7 +51,7 @@ describe('MonthPicker and WeekPicker', () => {
     document.body.innerHTML = '';
   });
   it('render MonthPicker', async () => {
-    const birthday = moment('2000-01-01', 'YYYY-MM-DD').locale('zh-cn');
+    const birthday = dayjs('2000-01-01', 'YYYY-MM-DD').locale('zh-cn');
     const wrapper = mount(MonthPicker, { props: { open: true }, sync: false });
     await asyncExpect(() => {
       wrapper.setProps({ value: birthday });
@@ -64,7 +63,7 @@ describe('MonthPicker and WeekPicker', () => {
   });
 
   it('render WeekPicker', async () => {
-    const birthday = moment('2000-01-01', 'YYYY-MM-DD').locale('zh-cn');
+    const birthday = dayjs('2000-01-01', 'YYYY-MM-DD').locale('zh-cn');
     const wrapper = mount(WeekPicker, { props: { open: false }, sync: false });
     await asyncExpect(() => {
       wrapper.setProps({ value: birthday, open: true });

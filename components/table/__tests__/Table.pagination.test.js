@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import Table from '..';
 import * as Vue from 'vue';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 
 describe('Table.pagination', () => {
   const columns = [
@@ -25,7 +25,7 @@ describe('Table.pagination', () => {
       props: {
         columns,
         dataSource: data,
-        pagination,
+        pagination: { ...pagination },
         ...props,
       },
       sync: false,
@@ -33,7 +33,7 @@ describe('Table.pagination', () => {
   }
 
   function renderedNames(wrapper) {
-    return wrapper.findAllComponents({ name: 'TableRow' }).map(row => {
+    return wrapper.findAllComponents({ name: 'BodyRow' }).map(row => {
       return row.props().record.name;
     });
   }
@@ -76,20 +76,17 @@ describe('Table.pagination', () => {
     });
   });
 
-  xit('paginate data', done => {
+  it('paginate data', async () => {
     const wrapper = mount(Table, getTableOptions());
-    Vue.nextTick(() => {
-      expect(renderedNames(wrapper)).toEqual(['Jack', 'Lucy']);
-      const pager = wrapper.findAllComponents({ name: 'Pager' });
-      pager.at(pager.length - 1).trigger('click');
-      Vue.nextTick(() => {
-        expect(renderedNames(wrapper)).toEqual(['Tom', 'Jerry']);
-        done();
-      });
-    });
+    await sleep();
+    expect(renderedNames(wrapper)).toEqual(['Jack', 'Lucy']);
+    const pager = wrapper.findAllComponents({ name: 'Pager' });
+    pager[pager.length - 1].trigger('click');
+    await sleep();
+    expect(renderedNames(wrapper)).toEqual(['Tom', 'Jerry']);
   });
 
-  xit('repaginates when pageSize change', () => {
+  it('repaginates when pageSize change', () => {
     const wrapper = mount(Table, getTableOptions());
     wrapper.setProps({ pagination: { pageSize: 1 } });
     Vue.nextTick(() => {
@@ -97,7 +94,7 @@ describe('Table.pagination', () => {
     });
   });
 
-  xit('fires change event', done => {
+  it('fires change event', done => {
     const handleChange = jest.fn();
     const handlePaginationChange = jest.fn();
     const noop = () => {};
@@ -108,8 +105,8 @@ describe('Table.pagination', () => {
           ...pagination,
           onChange: handlePaginationChange,
           onShowSizeChange: noop,
-          onChange: handleChange,
         },
+        onChange: handleChange,
       }),
     );
     Vue.nextTick(() => {
@@ -131,6 +128,7 @@ describe('Table.pagination', () => {
             { key: 2, name: 'Tom' },
             { key: 3, name: 'Jerry' },
           ],
+          action: 'paginate',
         },
       );
 
@@ -156,7 +154,7 @@ describe('Table.pagination', () => {
 
   // https://github.com/ant-design/ant-design/issues/4532
   // https://codepen.io/afc163/pen/pWVRJV?editors=001
-  xit('should display pagination as prop pagination change between true and false', async () => {
+  it('should display pagination as prop pagination change between true and false', async () => {
     const wrapper = mount(Table, getTableOptions());
     await asyncExpect(() => {
       expect(wrapper.findAll('.ant-pagination')).toHaveLength(1);
@@ -182,8 +180,8 @@ describe('Table.pagination', () => {
     });
     await asyncExpect(() => {
       expect(wrapper.findAll('.ant-pagination')).toHaveLength(1);
-      expect(wrapper.findAll('.ant-pagination-item')).toHaveLength(1); // pageSize will be 10
-      expect(renderedNames(wrapper)).toHaveLength(4);
+      expect(wrapper.findAll('.ant-pagination-item')).toHaveLength(2); // pageSize will be 10
+      expect(renderedNames(wrapper)).toEqual(['Tom', 'Jerry']);
     });
   });
 
@@ -202,30 +200,30 @@ describe('Table.pagination', () => {
     });
   });
 
-  xit('specify the position of pagination', async () => {
-    const wrapper = mount(Table, getTableOptions({ pagination: { position: 'top' } }));
+  it('specify the position of pagination', async () => {
+    const wrapper = mount(Table, getTableOptions({ pagination: { position: ['topLeft'] } }));
     await asyncExpect(() => {
       expect(wrapper.findAll('.ant-spin-container > *')).toHaveLength(2);
-      expect(wrapper.findAll('.ant-spin-container > *')[0].findAll('.ant-pagination')).toHaveLength(
-        1,
-      );
-      wrapper.setProps({ pagination: { position: 'bottom' } });
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(1);
+      wrapper.setProps({ pagination: { position: 'bottomRight' } });
     }, 0);
     await asyncExpect(() => {
       expect(wrapper.findAll('.ant-spin-container > *')).toHaveLength(2);
-      expect(wrapper.findAll('.ant-spin-container > *')[1].findAll('.ant-pagination')).toHaveLength(
-        1,
-      );
-      wrapper.setProps({ pagination: { position: 'both' } });
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(1);
+      wrapper.setProps({ pagination: { position: ['topLeft', 'bottomRight'] } });
     }, 0);
     await asyncExpect(() => {
       expect(wrapper.findAll('.ant-spin-container > *')).toHaveLength(3);
-      expect(wrapper.findAll('.ant-spin-container > *')[0].findAll('.ant-pagination')).toHaveLength(
-        1,
-      );
-      expect(wrapper.findAll('.ant-spin-container > *')[2].findAll('.ant-pagination')).toHaveLength(
-        1,
-      );
+      expect(wrapper.findAll('.ant-pagination')).toHaveLength(2);
     }, 0);
+    wrapper.setProps({ pagination: { position: ['none', 'none'] } });
+    await sleep();
+    expect(wrapper.findAll('.ant-pagination')).toHaveLength(0);
+    wrapper.setProps({ pagination: { position: ['invalid'] } });
+    await sleep();
+    expect(wrapper.findAll('.ant-pagination')).toHaveLength(1);
+    wrapper.setProps({ pagination: { position: ['invalid', 'invalid'] } });
+    await sleep();
+    expect(wrapper.findAll('.ant-pagination')).toHaveLength(1);
   });
 });

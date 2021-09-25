@@ -24,8 +24,8 @@ describe('DropdownButton', () => {
 
   it("don't pass visible to Dropdown if it's not exits", () => {
     const wrapper = mount(Dropdown.Button, {
-      props: {
-        overlay: (
+      slots: {
+        overlay: () => (
           <Menu>
             <Menu.Item>foo</Menu.Item>
           </Menu>
@@ -43,11 +43,13 @@ describe('DropdownButton', () => {
         return (
           <Dropdown.Button
             href="https://ant.design"
-            overlay={
-              <Menu>
-                <Menu.Item>foo</Menu.Item>
-              </Menu>
-            }
+            v-slots={{
+              overlay: () => (
+                <Menu>
+                  <Menu.Item>foo</Menu.Item>
+                </Menu>
+              ),
+            }}
           />
         );
       },

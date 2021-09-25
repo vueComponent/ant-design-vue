@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/divider/demo/customize-style.md correctly 1`] = `
+exports[`renders ./components/divider/demo/customize-style.vue correctly 1`] = `
 <div class="ant-divider ant-divider-horizontal" role="separator" style="height: 2px; background-color: rgb(124, 179, 5);">
   <!---->
 </div>
@@ -15,13 +15,13 @@ exports[`renders ./antdv-demo/docs/divider/demo/customize-style.md correctly 1`]
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/divider/demo/horizontal.md correctly 1`] = `
+exports[`renders ./components/divider/demo/horizontal.vue correctly 1`] = `
 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
 <div class="ant-divider ant-divider-horizontal" role="separator">
   <!---->
 </div>
 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
-<div class="ant-divider ant-divider-horizontal ant-divider-with-text-center" role="separator"><span class="ant-divider-inner-text">With Text</span></div>
+<div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center" role="separator"><span class="ant-divider-inner-text">With Text</span></div>
 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
 <div class="ant-divider ant-divider-horizontal ant-divider-dashed" role="separator">
   <!---->
@@ -29,7 +29,7 @@ exports[`renders ./antdv-demo/docs/divider/demo/horizontal.md correctly 1`] = `
 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
 `;
 
-exports[`renders ./antdv-demo/docs/divider/demo/vertical.md correctly 1`] = `
+exports[`renders ./components/divider/demo/vertical.vue correctly 1`] = `
 <div> Text <div class="ant-divider ant-divider-vertical" role="separator">
     <!---->
   </div><a href="#">Link</a>
@@ -39,12 +39,12 @@ exports[`renders ./antdv-demo/docs/divider/demo/vertical.md correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./antdv-demo/docs/divider/demo/with-text.md correctly 1`] = `
+exports[`renders ./components/divider/demo/with-text.vue correctly 1`] = `
 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
-<div class="ant-divider ant-divider-horizontal ant-divider-with-text-center" role="separator"><span class="ant-divider-inner-text">Text</span></div>
+<div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-center" role="separator"><span class="ant-divider-inner-text">Text</span></div>
 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
-<div class="ant-divider ant-divider-horizontal ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text"> Left Text </span></div>
+<div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-left" role="separator"><span class="ant-divider-inner-text">Left Text</span></div>
 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
-<div class="ant-divider ant-divider-horizontal ant-divider-with-text-right" role="separator"><span class="ant-divider-inner-text"> Right Text </span></div>
+<div class="ant-divider ant-divider-horizontal ant-divider-with-text ant-divider-with-text-right" role="separator"><span class="ant-divider-inner-text">Right Text</span></div>
 <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nonne merninisti licere mihi ista probare, quae sunt a te dicta? Refert tamen, quo modo. </p>
 `;

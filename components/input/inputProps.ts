@@ -2,6 +2,7 @@ import type { PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import type { SizeType } from '../config-provider';
 export default {
+  id: PropTypes.string,
   prefixCls: PropTypes.string,
   inputPrefixCls: PropTypes.string,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),

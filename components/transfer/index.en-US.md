@@ -1,0 +1,94 @@
+---
+category: Components
+type: Data Entry
+title: Transfer
+cover: https://gw.alipayobjects.com/zos/alicdn/QAXskNI4G/Transfer.svg
+---
+
+Alert component for feedback.
+
+## When To Use
+
+- When you need to show alert messages to users.
+- When you need a persistent static container which is closable by user actions.
+
+## API
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| dataSource | Used for setting the source data. The elements that are part of this array will be present the left column. Except the elements whose keys are included in `targetKeys` prop. | \[{key: string.isRequired,title: string.isRequired,description: string,disabled: bool}\] | \[] |  |
+| disabled | Whether disabled transfer | boolean | false |  |
+| filterOption | A function to determine whether an item should show in search result list | (inputValue, option): boolean |  |  |
+| footer | customize the progress dot by setting a scoped slot | slot="footer" slot-scope="props" |  |  |
+| listStyle | A custom CSS style used for rendering the transfer columns. | object |  |  |
+| locale | i18n text including filter, empty text, item unit, etc | object | `{ itemUnit: 'item', itemsUnit: 'items', notFoundContent: 'The list is empty', searchPlaceholder: 'Search here' }` |  |
+| operations | A set of operations that are sorted from top to bottom. | string\[] | \['>', '<'] |  |
+| render | The function to generate the item shown on a column. Based on an record (element of the dataSource array), this function should return a element which is generated from that record. Also, it can return a plain object with `value` and `label`, `label` is a element and `value` is for title | Function(record) \| slot |  |  |
+| selectedKeys | A set of keys of selected items. | string\[] | \[] |  |
+| showSearch | If included, a search box is shown on each column. | boolean | false |  |
+| showSelectAll | Show select all checkbox on the header | boolean | true |  |
+| targetKeys | A set of keys of elements that are listed on the right column. | string\[] | \[] |  |
+| titles | A set of titles that are sorted from left to right. | string\[] | - |  |
+
+### events
+
+| Events Name | Description | Arguments | Version |
+| --- | --- | --- | --- |
+| change | A callback function that is executed when the transfer between columns is complete. | (targetKeys, direction, moveKeys): void |  |
+| scroll | A callback function which is executed when scroll options list | (direction, event): void |  |
+| search | A callback function which is executed when search field are changed | (direction: 'left'\|'right', value: string): void | - |
+| selectChange | A callback function which is executed when selected items are changed. | (sourceSelectedKeys, targetSelectedKeys): void |  |
+
+### Render Props
+
+Transfer accept `children` to customize render list, using follow props:
+
+```json
+{
+  "direction": String,
+  "disabled": Boolean,
+  "filteredItems": Array,
+  "selectedKeys": Array,
+  "onItemSelect": Function,
+  "onItemSelectAll": Function
+}
+```
+
+| Property        | Description             | Type                                | Version |
+| --------------- | ----------------------- | ----------------------------------- | ------- |
+| direction       | List render direction   | 'left' \| 'right'                   |         |
+| disabled        | Disable list or not     | boolean                             |         |
+| filteredItems   | Filtered items          | TransferItem[]                      |         |
+| onItemSelect    | Select item             | (key: string, selected: boolean)    |         |
+| onItemSelectAll | Select a group of items | (keys: string[], selected: boolean) |         |
+| selectedKeys    | Selected items          | string[]                            |         |
+
+#### example
+
+```html
+<a-transfer>
+  <template
+    #children="{
+      direction,
+      filteredItems,
+      selectedKeys,
+      disabled: listDisabled,
+      onItemSelectAll,
+      onItemSelect,
+    }"
+  >
+    <your-component />
+  <template>
+</a-transfer>
+```
+
+## Warning
+
+According the standard of Vue, the key should always be supplied directly to the elements in the array. In Transfer, the keys should be set on the elements included in `dataSource` array. By default, `key` property is used as an unique identifier.
+
+If there's no `key` in your data, you should use `rowKey` to specify the key that will be used for uniquely identify each element.
+
+```jsx
+// eg. your primary key is `uid`
+return <Transfer :rowKey="record => record.uid" />;
+```

@@ -5,7 +5,8 @@ import SkeletonInput from './Input';
 import SkeletonImage from './Image';
 import SkeletonAvatar from './Avatar';
 
-export { SkeletonProps, skeletonProps } from './Skeleton';
+export type { SkeletonProps } from './Skeleton';
+export { skeletonProps } from './Skeleton';
 
 Skeleton.Button = SkeletonButton;
 Skeleton.Avatar = SkeletonAvatar;

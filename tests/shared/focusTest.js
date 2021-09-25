@@ -1,14 +1,16 @@
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '../utils';
+import { sleep } from '../utils';
 
 export default function focusTest(Component) {
   describe('focus and blur', () => {
-    beforeAll(() => {
-      jest.useFakeTimers();
+    let container;
+    beforeEach(() => {
+      container = document.createElement('div');
+      document.body.appendChild(container);
     });
 
-    afterAll(() => {
-      jest.useRealTimers();
+    afterEach(() => {
+      document.body.removeChild(container);
     });
 
     it('focus() and onFocus', async () => {
@@ -19,46 +21,43 @@ export default function focusTest(Component) {
             return <Component ref="component" onFocus={handleFocus} />;
           },
         },
-        { attachTo: 'body', sync: false },
+        { attachTo: container, sync: false },
       );
+      await sleep();
       wrapper.vm.$refs.component.focus();
-      jest.runAllTimers();
+      await sleep();
       expect(handleFocus).toBeCalled();
     });
 
     it('blur() and onBlur', async () => {
       const handleBlur = jest.fn();
+      const handleFocus = jest.fn();
       const wrapper = mount(
         {
           render() {
-            return <Component ref="component" onBlur={handleBlur} />;
+            return <Component ref="component" onFocus={handleFocus} onBlur={handleBlur} />;
           },
         },
-        { attachTo: 'body', sync: false },
+        { attachTo: container, sync: false },
       );
       wrapper.vm.$refs.component.focus();
       wrapper.vm.$refs.component.blur();
-      jest.runAllTimers();
-      await asyncExpect(() => {
-        expect(handleBlur).toBeCalled();
-      });
+      await sleep(3000);
+      expect(handleBlur).toBeCalled();
     });
 
-    it('autofocus', done => {
-      jest.useRealTimers();
+    it('autofocus', async () => {
       const handleFocus = jest.fn();
       mount(
         {
           render() {
-            return <Component autofocus={true} onFocus={handleFocus} />;
+            return <Component autofocus onFocus={handleFocus} />;
           },
         },
-        { attachTo: 'body', sync: false },
+        { attachTo: container, sync: false },
       );
-      setTimeout(() => {
-        expect(handleFocus).toBeCalled();
-        done();
-      }, 1000);
+      await sleep();
+      expect(handleFocus).toBeCalled();
     });
   });
 }

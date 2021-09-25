@@ -71,18 +71,6 @@ export default defineComponent({
         overflowProps['aria-hidden'] = true;
       }
 
-      const itemNode = (
-        <Component
-          class={classNames(!invalidate && prefixCls)}
-          style={overflowStyle}
-          {...overflowProps}
-          {...restProps}
-          ref={itemNodeRef}
-        >
-          {childNode}
-        </Component>
-      );
-
       // 使用 disabled  避免结构不一致 导致子组件 rerender
       return (
         <ResizeObserver
@@ -90,9 +78,20 @@ export default defineComponent({
           onResize={({ offsetWidth }) => {
             internalRegisterSize(offsetWidth);
           }}
-        >
-          {itemNode}
-        </ResizeObserver>
+          v-slots={{
+            default: () => (
+              <Component
+                class={classNames(!invalidate && prefixCls)}
+                style={overflowStyle}
+                {...overflowProps}
+                {...restProps}
+                ref={itemNodeRef}
+              >
+                {childNode}
+              </Component>
+            ),
+          }}
+        ></ResizeObserver>
       );
     };
   },

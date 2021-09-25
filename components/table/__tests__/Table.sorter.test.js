@@ -1,6 +1,6 @@
 import * as Vue from 'vue';
 import { mount } from '@vue/test-utils';
-import { asyncExpect } from '@/tests/utils';
+import { asyncExpect } from '../../../tests/utils';
 import Table from '..';
 
 describe('Table.sorter', () => {
@@ -9,6 +9,7 @@ describe('Table.sorter', () => {
   const column = {
     title: 'Name',
     dataIndex: 'name',
+    key: 'name',
     sorter: sorterFn,
   };
 
@@ -38,7 +39,7 @@ describe('Table.sorter', () => {
   }
 
   function renderedNames(wrapper) {
-    return wrapper.findAllComponents({ name: 'TableRow' }).wrappers.map(row => {
+    return wrapper.findAllComponents({ name: 'BodyRow' }).map(row => {
       return row.props().record.name;
     });
   }
@@ -51,7 +52,7 @@ describe('Table.sorter', () => {
     });
   });
 
-  xit('default sort order ascend', done => {
+  it('default sort order ascend', done => {
     const wrapper = mount(
       Table,
       getTableOptions(
@@ -67,7 +68,7 @@ describe('Table.sorter', () => {
     });
   });
 
-  xit('default sort order descend', done => {
+  it('default sort order descend', done => {
     const wrapper = mount(
       Table,
       getTableOptions(
@@ -104,7 +105,7 @@ describe('Table.sorter', () => {
     });
   });
 
-  xit('can be controlled by sortOrder', done => {
+  it('can be controlled by sortOrder', done => {
     const wrapper = mount(
       Table,
       getTableOptions({
@@ -148,7 +149,7 @@ describe('Table.sorter', () => {
     });
   });
 
-  xit('works with grouping columns in controlled mode', done => {
+  it('works with grouping columns in controlled mode', done => {
     const columns = [
       {
         title: 'group',

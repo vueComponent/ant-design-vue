@@ -30,6 +30,20 @@ const ScrollStyle: CSSProperties = {
   overflowAnchor: 'none',
 };
 
+export type ScrollAlign = 'top' | 'bottom' | 'auto';
+export type ScrollConfig =
+  | {
+      index: number;
+      align?: ScrollAlign;
+      offset?: number;
+    }
+  | {
+      key: Key;
+      align?: ScrollAlign;
+      offset?: number;
+    };
+export type ScrollTo = (arg: number | ScrollConfig) => void;
+
 function renderChildren<T>(
   list: T[],
   startIndex: number,
@@ -68,7 +82,7 @@ const List = defineComponent({
     /** If not match virtual scroll condition, Set List still use height of container. */
     fullHeight: PropTypes.looseBool,
     itemKey: {
-      type: [String, Number, Function] as PropType<Key | ((item: object) => Key)>,
+      type: [String, Number, Function] as PropType<Key | ((item: Record<string, any>) => Key)>,
       required: true,
     },
     component: {
@@ -81,7 +95,7 @@ const List = defineComponent({
     onMousedown: PropTypes.func,
     onMouseenter: PropTypes.func,
   },
-  setup(props) {
+  setup(props, { expose }) {
     // ================================= MISC =================================
     const useVirtual = computed(() => {
       const { height, itemHeight, virtual } = props;
@@ -323,6 +337,10 @@ const List = defineComponent({
       },
     );
 
+    expose({
+      scrollTo,
+    });
+
     const componentStyle = computed(() => {
       let cs: CSSProperties | null = null;
       if (props.height) {
@@ -343,7 +361,6 @@ const List = defineComponent({
       state,
       mergedData,
       componentStyle,
-      scrollTo,
       onFallbackScroll,
       onScrollBar,
       componentRef,

@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { h, createVNode } from 'vue';
-import { asyncExpect, sleep } from '@/tests/utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 import Carousel from '..';
 import mountTest from '../../../tests/shared/mountTest';
 

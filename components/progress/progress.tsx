@@ -1,20 +1,21 @@
-import { defineComponent, inject } from 'vue';
-import classNames from '../_util/classNames';
-import { getOptionProps } from '../_util/props-util';
+import type { VNodeChild } from 'vue';
+import { computed, defineComponent } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { defaultConfigProvider } from '../config-provider';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
-import Line from './line';
-import Circle from './circle';
-import { validProgress } from './utils';
-import { ProgressProps, ProgressStatuses } from './props';
+import Line from './Line';
+import Circle from './Circle';
+import Steps from './Steps';
+import { getSuccessPercent, validProgress } from './utils';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import devWarning from '../vc-util/devWarning';
+import { progressProps, progressStatuses } from './props';
 
 export default defineComponent({
   name: 'AProgress',
-  props: initDefaultProps(ProgressProps, {
+  props: initDefaultProps(progressProps(), {
     type: 'line',
     percent: 0,
     showInfo: true,
@@ -24,88 +25,104 @@ export default defineComponent({
     gapDegree: 0,
     strokeLinecap: 'round',
   }),
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-  methods: {
-    getPercentNumber() {
-      const { successPercent, percent = 0 } = this.$props;
+  slots: ['format'],
+  setup(props, { slots }) {
+    const { prefixCls, direction } = useConfigInject('progress', props);
+    devWarning(
+      props.successPercent == undefined,
+      'Progress',
+      '`successPercent` is deprecated. Please use `success.percent` instead.',
+    );
+    const classString = computed(() => {
+      const { type, showInfo, size } = props;
+      const pre = prefixCls.value;
+      return {
+        [pre]: true,
+        [`${pre}-${(type === 'dashboard' && 'circle') || type}`]: true,
+        [`${pre}-show-info`]: showInfo,
+        [`${pre}-${size}`]: size,
+        [`${pre}-rtl`]: direction.value === 'rtl',
+      };
+    });
+
+    const percentNumber = computed(() => {
+      const { percent = 0 } = props;
+      const successPercent = getSuccessPercent(props);
       return parseInt(
         successPercent !== undefined ? successPercent.toString() : percent.toString(),
         10,
       );
-    },
+    });
 
-    getProgressStatus() {
-      const { status } = this.$props;
-      if (ProgressStatuses.indexOf(status) < 0 && this.getPercentNumber() >= 100) {
+    const progressStatus = computed(() => {
+      const { status } = props;
+      if (progressStatuses.indexOf(status) < 0 && percentNumber.value >= 100) {
         return 'success';
       }
       return status || 'normal';
-    },
-    renderProcessInfo(prefixCls: string, progressStatus: typeof ProgressStatuses[number]) {
-      const { showInfo, format, type, percent, successPercent } = this.$props;
+    });
+
+    const renderProcessInfo = () => {
+      const { showInfo, format, type, percent } = props;
+      const successPercent = getSuccessPercent(props);
       if (!showInfo) return null;
 
-      let text;
-      const textFormatter = format || this.$slots.format || (percentNumber => `${percentNumber}%`);
+      let text: VNodeChild;
+      const textFormatter = format || slots?.format || ((val: number) => `${val}%`);
       const isLineType = type === 'line';
       if (
         format ||
-        this.$slots.format ||
-        (progressStatus !== 'exception' && progressStatus !== 'success')
+        slots?.format ||
+        (progressStatus.value !== 'exception' && progressStatus.value !== 'success')
       ) {
         text = textFormatter(validProgress(percent), validProgress(successPercent));
-      } else if (progressStatus === 'exception') {
+      } else if (progressStatus.value === 'exception') {
         text = isLineType ? <CloseCircleFilled /> : <CloseOutlined />;
-      } else if (progressStatus === 'success') {
+      } else if (progressStatus.value === 'success') {
         text = isLineType ? <CheckCircleFilled /> : <CheckOutlined />;
       }
       return (
-        <span class={`${prefixCls}-text`} title={typeof text === 'string' ? text : undefined}>
+        <span class={`${prefixCls.value}-text`} title={typeof text === 'string' ? text : undefined}>
           {text}
         </span>
       );
-    },
-  },
-  render() {
-    const props = getOptionProps(this);
-    const { prefixCls: customizePrefixCls, size, type, showInfo } = props;
-    const { getPrefixCls } = this.configProvider;
-    const prefixCls = getPrefixCls('progress', customizePrefixCls);
-    const progressStatus = this.getProgressStatus();
-    const progressInfo = this.renderProcessInfo(prefixCls, progressStatus);
-
-    let progress;
-
-    // Render progress shape
-    if (type === 'line') {
-      const lineProps = {
-        ...props,
-        prefixCls,
-      };
-      progress = <Line {...lineProps}>{progressInfo}</Line>;
-    } else if (type === 'circle' || type === 'dashboard') {
-      const circleProps = {
-        ...props,
-        prefixCls,
-        progressStatus,
-      };
-      progress = <Circle {...circleProps}>{progressInfo}</Circle>;
-    }
-
-    const classString = classNames(prefixCls, {
-      [`${prefixCls}-${(type === 'dashboard' && 'circle') || type}`]: true,
-      [`${prefixCls}-status-${progressStatus}`]: true,
-      [`${prefixCls}-show-info`]: showInfo,
-      [`${prefixCls}-${size}`]: size,
-    });
-
-    const progressProps = {
-      class: classString,
     };
-    return <div {...progressProps}>{progress}</div>;
+
+    return () => {
+      const { type, steps, strokeColor } = props;
+      const progressInfo = renderProcessInfo();
+
+      let progress: VNodeChild;
+      // Render progress shape
+      if (type === 'line') {
+        progress = steps ? (
+          <Steps
+            {...props}
+            strokeColor={typeof strokeColor === 'string' ? strokeColor : undefined}
+            prefixCls={prefixCls.value}
+            steps={steps}
+          >
+            {progressInfo}
+          </Steps>
+        ) : (
+          <Line {...props} prefixCls={prefixCls.value}>
+            {progressInfo}
+          </Line>
+        );
+      } else if (type === 'circle' || type === 'dashboard') {
+        progress = (
+          <Circle {...props} prefixCls={prefixCls.value}>
+            {progressInfo}
+          </Circle>
+        );
+      }
+
+      const classNames = {
+        ...classString.value,
+        [`${prefixCls.value}-status-${progressStatus.value}`]: true,
+      };
+
+      return <div class={classNames}>{progress}</div>;
+    };
   },
 });

@@ -1,111 +1,68 @@
-import type { App, Plugin } from 'vue';
+import Table, { tableProps } from './Table';
+import Column from './Column';
+import ColumnGroup from './ColumnGroup';
+import type { TableProps, TablePaginationConfig } from './Table';
 import { defineComponent } from 'vue';
-import T, { defaultTableProps } from './Table';
-import type Column from './Column';
-import type ColumnGroup from './ColumnGroup';
-import {
-  getOptionProps,
-  getKey,
-  getPropsData,
-  getSlot,
-  flattenChildren,
-} from '../_util/props-util';
+import type { App } from 'vue';
+import { Summary, SummaryCell, SummaryRow } from '../vc-table';
+import { SELECTION_ALL, SELECTION_INVERT, SELECTION_NONE } from './hooks/useSelection';
 
-const Table = defineComponent({
-  name: 'ATable',
-  Column: T.Column,
-  ColumnGroup: T.ColumnGroup,
-  inheritAttrs: false,
-  props: defaultTableProps,
-  methods: {
-    normalize(elements = []) {
-      const flattenElements = flattenChildren(elements);
-      const columns = [];
-      flattenElements.forEach(element => {
-        if (!element) {
-          return;
-        }
-        const key = getKey(element);
-        const style = element.props?.style || {};
-        const cls = element.props?.class || '';
-        const props = getPropsData(element);
-        const { default: children, ...restSlots } = element.children || {};
-        const column = { ...restSlots, ...props, style, class: cls };
-        if (key) {
-          column.key = key;
-        }
-        if (element.type?.__ANT_TABLE_COLUMN_GROUP) {
-          column.children = this.normalize(typeof children === 'function' ? children() : children);
-        } else {
-          const customRender = element.children?.default;
-          column.customRender = column.customRender || customRender;
-        }
-        columns.push(column);
-      });
-      return columns;
-    },
-    updateColumns(cols = []) {
-      const columns = [];
-      const { $slots } = this;
-      cols.forEach(col => {
-        const { slots = {}, ...restProps } = col;
-        const column = {
-          ...restProps,
-        };
-        Object.keys(slots).forEach(key => {
-          const name = slots[key];
-          if (column[key] === undefined && $slots[name]) {
-            column[key] = $slots[name];
-          }
-        });
-        // if (slotScopeName && $scopedSlots[slotScopeName]) {
-        //   column.customRender = column.customRender || $scopedSlots[slotScopeName]
-        // }
-        if (col.children) {
-          column.children = this.updateColumns(column.children);
-        }
-        columns.push(column);
-      });
-      return columns;
-    },
-  },
-  render() {
-    const { normalize, $slots } = this;
-    const props: any = { ...getOptionProps(this), ...this.$attrs };
-    const columns = props.columns ? this.updateColumns(props.columns) : normalize(getSlot(this));
-    let { title, footer } = props;
-    const {
-      title: slotTitle,
-      footer: slotFooter,
-      expandedRowRender = props.expandedRowRender,
-      expandIcon,
-    } = $slots;
-    title = title || slotTitle;
-    footer = footer || slotFooter;
-    const tProps = {
-      ...props,
-      columns,
-      title,
-      footer,
-      expandedRowRender,
-      expandIcon: this.$props.expandIcon || expandIcon,
-    };
-    return <T {...tProps} ref="table" />;
-  },
+export type { ColumnProps } from './Column';
+export type { ColumnsType, ColumnType, ColumnGroupType } from './interface';
+export type { TableProps, TablePaginationConfig };
+
+const TableSummaryRow = defineComponent({ ...SummaryRow, name: 'ATableSummaryRow' });
+const TableSummaryCell = defineComponent({ ...SummaryCell, name: 'ATableSummaryCell' });
+
+const TempSummary = defineComponent({
+  ...Summary,
+  name: 'ATableSummary',
 });
+
+const TableSummary = TempSummary as typeof TempSummary & {
+  Cell: typeof TableSummaryCell;
+  Row: typeof TableSummaryRow;
+};
+TableSummary.Cell = TableSummaryCell;
+TableSummary.Row = TableSummaryRow;
+
+const T = Table as typeof Table &
+  Plugin & {
+    Column: typeof Column;
+    ColumnGroup: typeof ColumnGroup;
+    Summary: typeof TableSummary;
+    SELECTION_ALL: typeof SELECTION_ALL;
+    SELECTION_INVERT: typeof SELECTION_INVERT;
+    SELECTION_NONE: typeof SELECTION_NONE;
+  };
+
+T.SELECTION_ALL = SELECTION_ALL;
+T.SELECTION_INVERT = SELECTION_INVERT;
+T.SELECTION_NONE = SELECTION_NONE;
+
+T.Column = Column;
+T.ColumnGroup = ColumnGroup;
+
+T.Summary = TableSummary;
+
 /* istanbul ignore next */
-Table.install = function (app: App) {
-  app.component(Table.name, Table);
-  app.component(Table.Column.name, Table.Column);
-  app.component(Table.ColumnGroup.name, Table.ColumnGroup);
+T.install = function (app: App) {
+  app.component(TableSummary.name, TableSummary);
+  app.component(TableSummaryCell.name, TableSummaryCell);
+  app.component(TableSummaryRow.name, TableSummaryRow);
+  app.component(T.name, T);
+  app.component(T.Column.name, Column);
+  app.component(T.ColumnGroup.name, ColumnGroup);
   return app;
 };
 
-export const TableColumn = Table.Column;
-export const TableColumnGroup = Table.ColumnGroup;
+export {
+  tableProps,
+  TableSummary,
+  TableSummaryRow,
+  TableSummaryCell,
+  Column as TableColumn,
+  ColumnGroup as TableColumnGroup,
+};
 
-export default Table as typeof Table &
-  Plugin & {
-    readonly Column: typeof Column;
-    readonly ColumnGroup: typeof ColumnGroup;
-  };
+export default T;

@@ -1,6 +1,6 @@
 import type { App, Plugin } from 'vue';
-import Collapse from './Collapse';
-import CollapsePanel from './CollapsePanel';
+import Collapse, { collapseProps } from './Collapse';
+import CollapsePanel, { collapsePanelProps } from './CollapsePanel';
 export type { CollapseProps } from './Collapse';
 export type { CollapsePanelProps } from './CollapsePanel';
 
@@ -13,7 +13,7 @@ Collapse.install = function (app: App) {
   return app;
 };
 
-export { CollapsePanel };
+export { CollapsePanel, collapseProps, collapsePanelProps };
 export default Collapse as typeof Collapse &
   Plugin & {
     readonly Panel: typeof CollapsePanel;

@@ -1,4 +1,4 @@
-import { shallowMount as shallow, mount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import Table from '..';
 import * as Vue from 'vue';
 import mountTest from '../../../tests/shared/mountTest';
@@ -55,7 +55,7 @@ describe('Table', () => {
         dataIndex: 'name',
       },
     ];
-    const wrapper = shallow(Table, {
+    const wrapper = mount(Table, {
       props: {
         columns,
       },
@@ -70,7 +70,7 @@ describe('Table', () => {
     ];
     wrapper.setProps({ columns: newColumns });
     await sleep();
-    expect(wrapper.vm.columns).toStrictEqual(newColumns);
+    expect(wrapper.find('th').text()).toEqual('Title');
   });
 
   it('loading with Spin', async () => {

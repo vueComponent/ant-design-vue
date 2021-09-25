@@ -1,507 +1,882 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./antdv-demo/docs/form/demo/basic.md correctly 1`] = `
+exports[`renders ./components/form/demo/basic.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Activity name">Activity name</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="text" class="ant-input"><!----></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Activity name">Activity name
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="text" class="ant-input"></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Activity zone">Activity zone</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-single ant-select-show-arrow"><!----><!----><div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span>
-        <!----><span class="ant-select-selection-placeholder">please select your zone</span>
-      </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Activity zone">Activity zone
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-select ant-select-single ant-select-show-arrow">
+            <!---->
+            <!---->
+            <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span>
+              <!----><span class="ant-select-selection-placeholder">please select your zone</span>
+            </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+            <!---->
+          </div>
+        </div>
+        <!---->
+      </div>
+      <!---->
       <!---->
     </div>
-    <!----></span>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Activity time">Activity time
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <!---->
+          <div class="ant-picker" style="width: 100%;">
+            <div class="ant-picker-input"><input readonly="" placeholder="Pick a date" title="" size="21" autocomplete="off"><span class="ant-picker-suffix"><span role="img" aria-label="calendar" class="anticon anticon-calendar"><svg focusable="false" class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></span>
+              <!---->
+            </div>
+          </div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Instant delivery">Instant delivery
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button type="button" role="switch" aria-checked="false" class="ant-switch">
+            <!----><span class="ant-switch-inner"><!----></span>
+          </button></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Activity type">Activity type
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-checkbox-group"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="1"><span class="ant-checkbox-inner"></span></span><span>Online</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="2"><span class="ant-checkbox-inner"></span></span><span>Promotion</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="3"><span class="ant-checkbox-inner"></span></span><span>Offline</span></label></div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Resources">Resources
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="1"><span class="ant-radio-inner"></span></span><span>Sponsor</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="2"><span class="ant-radio-inner"></span></span><span>Venue</span></label></div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Activity form">Activity form
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="textarea" class="ant-input"></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
     <!---->
-    <!---->
-  </div>
-  </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Activity time">Activity time</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-calendar-picker" style="min-width: 195px; width: 100%;"><!----><div><input readonly="" placeholder="Pick a date" class="ant-calendar-picker-input ant-input"><!----><span role="img" aria-label="calendar" class="anticon anticon-calendar ant-calendar-picker-icon"><svg class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></div></span>
-      <!----></span>
-      <!---->
-      <!---->
-    </div>
-  </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Instant delivery">Instant delivery</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-switch" type="button" role="switch" aria-checked="false"><!----><span class="ant-switch-inner"><!----></span></button>
-        <!----></span>
-        <!---->
+    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="button">
+            <!----><span>Create</span>
+          </button><button style="margin-left: 10px;" class="ant-btn" type="button">
+            <!----><span>Cancel</span>
+          </button></div>
         <!---->
       </div>
-    </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Activity type">Activity type</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-checkbox-group"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="1"><span class="ant-checkbox-inner"></span></span><span> Online </span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="2"><span class="ant-checkbox-inner"></span></span><span> Promotion </span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="3"><span class="ant-checkbox-inner"></span></span><span> Offline </span></label></div>
-      <!----></span>
       <!---->
       <!---->
-    </div>
-  </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Resources">Resources</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="1"><span class="ant-radio-inner"></span></span><span> Sponsor </span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="2"><span class="ant-radio-inner"></span></span><span> Venue </span></label></div>
-      <!----></span>
-      <!---->
-      <!---->
-    </div>
-  </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Activity form">Activity form</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="textarea" class="ant-input"><!----></span>
-        <!---->
-        <!---->
-      </div>
-    </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <!---->
-    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="button"><!----><span>Create</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Cancel</span>
-        </button>
-        <!----></span>
-        <!---->
-        <!---->
-      </div>
     </div>
   </div>
 </form>
 `;
 
-exports[`renders ./antdv-demo/docs/form/demo/custom-validation.md correctly 1`] = `
+exports[`renders ./components/form/demo/custom-validation.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label for="custom-validation_pass" class="ant-form-item-required" title="Password">Password</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="password" autocomplete="off" id="custom-validation_pass" class="ant-input"><!----></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="custom-validation_pass" class="ant-form-item-required" title="Password">Password
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="password" id="custom-validation_pass" autocomplete="off" class="ant-input"></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label for="custom-validation_checkPass" class="" title="Confirm">Confirm</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="password" autocomplete="off" id="custom-validation_checkPass" class="ant-input"><!----></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="custom-validation_checkPass" class="" title="Confirm">Confirm
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="password" id="custom-validation_checkPass" autocomplete="off" class="ant-input"></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label for="custom-validation_age" class="" title="Age">Age</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-input-number"><div class="ant-input-number-handler-wrap"><span><span unselectable="unselectable" role="button" aria-label="Increase Value" aria-disabled="false" class="ant-input-number-handler ant-input-number-handler-up "><span role="img" aria-label="up" class="anticon anticon-up ant-input-number-handler-up-inner"><svg class="" data-icon="up" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 00140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"></path></svg></span></span></span><span unselectable="unselectable" role="button" aria-label="Decrease Value" aria-disabled="false" class="ant-input-number-handler ant-input-number-handler-down "><span role="img" aria-label="down" class="anticon anticon-down ant-input-number-handler-down-inner"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span></div>
-      <div class="ant-input-number-input-wrap"><input role="spinbutton" aria-valuemin="-9007199254740991" aria-valuenow="" class="ant-input-number-input" autocomplete="off" min="-9007199254740991" step="1" id="custom-validation_age"></div>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="custom-validation_age" class="" title="Age">Age
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-input-number">
+            <div class="ant-input-number-handler-wrap"><span><span unselectable="unselectable" role="button" aria-label="Increase Value" aria-disabled="false" class="ant-input-number-handler ant-input-number-handler-up"><span role="img" aria-label="up" class="anticon anticon-up ant-input-number-handler-up-inner"><svg focusable="false" class="" data-icon="up" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M890.5 755.3L537.9 269.2c-12.8-17.6-39-17.6-51.7 0L133.5 755.3A8 8 0 00140 768h75c5.1 0 9.9-2.5 12.9-6.6L512 369.8l284.1 391.6c3 4.1 7.8 6.6 12.9 6.6h75c6.5 0 10.3-7.4 6.5-12.7z"></path></svg></span></span></span><span unselectable="unselectable" role="button" aria-label="Decrease Value" aria-disabled="false" class="ant-input-number-handler ant-input-number-handler-down"><span role="img" aria-label="down" class="anticon anticon-down ant-input-number-handler-down-inner"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span></div>
+            <div class="ant-input-number-input-wrap"><input role="spinbutton" aria-valuemin="-9007199254740991" class="ant-input-number-input" autocomplete="off" min="-9007199254740991" step="1" id="custom-validation_age"></div>
+          </div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
     </div>
-    <!----></span>
-    <!---->
-    <!---->
-  </div>
-  </div>
   </div>
   <div class="ant-row ant-form-item">
     <!---->
-    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="submit"><!----><span>Submit</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Reset</span>
-        </button>
-        <!----></span>
-        <!---->
+    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="submit">
+            <!----><span>Submit</span>
+          </button><button style="margin-left: 10px;" class="ant-btn" type="button">
+            <!----><span>Reset</span>
+          </button></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
 </form>
 `;
 
-exports[`renders ./antdv-demo/docs/form/demo/dynamic-form-item.md correctly 1`] = `
-<form class="ant-form ant-form-horizontal">
+exports[`renders ./components/form/demo/customized-form-controls.vue correctly 1`] = `
+<form class="ant-form ant-form-inline">
   <div class="ant-row ant-form-item">
-    <!---->
-    <div class="ant-col ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-20 ant-col-sm-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button style="width: 60%;" class="ant-btn ant-btn-dashed" type="button"><!----><span role="img" aria-label="plus" class="anticon anticon-plus"><svg class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg></span><span>Add field</span></button>
-        <!----></span>
+    <div class="ant-col ant-form-item-label"><label html-for="customized_form_controls_price" class="" title="Price">Price
         <!---->
+      </label></div>
+    <div class="ant-col ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><span><input type="text" style="width: 100px;" class="ant-input"><div style="width: 80px; margin: 0px 8px;" class="ant-select ant-select-single ant-select-show-arrow"><!----><!----><div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span><span class="ant-select-selection-item" title="RMB">RMB</span>
+          <!---->
+        </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
         <!---->
-      </div>
+      </div></span>
     </div>
+    <!---->
+  </div>
+  <!---->
+  <!---->
+  </div>
   </div>
   <div class="ant-row ant-form-item">
     <!---->
-    <div class="ant-col ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-20 ant-col-sm-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="submit"><!----><span>Submit</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Reset</span>
-        </button>
-        <!----></span>
-        <!---->
+    <div class="ant-col ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="submit">
+            <!----><span>Submit</span>
+          </button></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
 </form>
 `;
 
-exports[`renders ./antdv-demo/docs/form/demo/horizontal-login.md correctly 1`] = `
+exports[`renders ./components/form/demo/dynamic-form-item.vue correctly 1`] = `
+<form class="ant-form ant-form-horizontal">
+  <div class="ant-row ant-form-item">
+    <!---->
+    <div class="ant-col ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-20 ant-col-sm-offset-4 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button style="width: 60%;" class="ant-btn ant-btn-dashed" type="button">
+            <!----><span role="img" aria-label="plus" class="anticon anticon-plus"><svg focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg></span><span>Add field</span>
+          </button></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <!---->
+    <div class="ant-col ant-col-xs-24 ant-col-xs-offset-0 ant-col-sm-20 ant-col-sm-offset-4 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="submit">
+            <!----><span>Submit</span>
+          </button><button style="margin-left: 10px;" class="ant-btn" type="button">
+            <!----><span>Reset</span>
+          </button></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+</form>
+`;
+
+exports[`renders ./components/form/demo/horizontal-login.vue correctly 1`] = `
 <form class="ant-form ant-form-inline">
   <div class="ant-row ant-form-item">
     <!---->
-    <div class="ant-col ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><span style="color: rgba(0, 0, 0, 0.25);" role="img" aria-label="user" class="anticon anticon-user"><svg class="" data-icon="user" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></path></svg></span></span><input placeholder="Username" type="text" class="ant-input">
-        <!----></span>
-        <!----></span>
-        <!---->
+    <div class="ant-col ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><span style="color: rgba(0, 0, 0, 0.25);" role="img" aria-label="user" class="anticon anticon-user"><svg focusable="false" class="" data-icon="user" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M858.5 763.6a374 374 0 00-80.6-119.5 375.63 375.63 0 00-119.5-80.6c-.4-.2-.8-.3-1.2-.5C719.5 518 760 444.7 760 362c0-137-111-248-248-248S264 225 264 362c0 82.7 40.5 156 102.8 201.1-.4.2-.8.3-1.2.5-44.8 18.9-85 46-119.5 80.6a375.63 375.63 0 00-80.6 119.5A371.7 371.7 0 00136 901.8a8 8 0 008 8.2h60c4.4 0 7.9-3.5 8-7.8 2-77.2 33-149.5 87.8-204.3 56.7-56.7 132-87.9 212.2-87.9s155.5 31.2 212.2 87.9C779 752.7 810 825 812 902.2c.1 4.4 3.6 7.8 8 7.8h60a8 8 0 008-8.2c-1-47.8-10.9-94.3-29.5-138.2zM512 534c-45.9 0-89.1-17.9-121.6-50.4S340 407.9 340 362c0-45.9 17.9-89.1 50.4-121.6S466.1 190 512 190s89.1 17.9 121.6 50.4S684 316.1 684 362c0 45.9-17.9 89.1-50.4 121.6S557.9 534 512 534z"></path></svg></span></span><input placeholder="Username" type="text" class="ant-input">
+          <!----></span>
+        </div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <!---->
-    <div class="ant-col ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><span style="color: rgba(0, 0, 0, 0.25);" role="img" aria-label="lock" class="anticon anticon-lock"><svg class="" data-icon="lock" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M832 464h-68V240c0-70.7-57.3-128-128-128H388c-70.7 0-128 57.3-128 128v224h-68c-17.7 0-32 14.3-32 32v384c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V496c0-17.7-14.3-32-32-32zM332 240c0-30.9 25.1-56 56-56h248c30.9 0 56 25.1 56 56v224H332V240zm460 600H232V536h560v304zM484 701v53c0 4.4 3.6 8 8 8h40c4.4 0 8-3.6 8-8v-53a48.01 48.01 0 10-56 0z"></path></svg></span></span><input type="password" placeholder="Password" class="ant-input">
-        <!----></span>
-        <!----></span>
-        <!---->
+    <div class="ant-col ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><span class="ant-input-affix-wrapper"><span class="ant-input-prefix"><span style="color: rgba(0, 0, 0, 0.25);" role="img" aria-label="lock" class="anticon anticon-lock"><svg focusable="false" class="" data-icon="lock" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M832 464h-68V240c0-70.7-57.3-128-128-128H388c-70.7 0-128 57.3-128 128v224h-68c-17.7 0-32 14.3-32 32v384c0 17.7 14.3 32 32 32h640c17.7 0 32-14.3 32-32V496c0-17.7-14.3-32-32-32zM332 240c0-30.9 25.1-56 56-56h248c30.9 0 56 25.1 56 56v224H332V240zm460 600H232V536h560v304zM484 701v53c0 4.4 3.6 8 8 8h40c4.4 0 8-3.6 8-8v-53a48.01 48.01 0 10-56 0z"></path></svg></span></span><input placeholder="Password" type="password" class="ant-input">
+          <!----></span>
+        </div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <!---->
-    <div class="ant-col ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button disabled="" class="ant-btn ant-btn-primary" type="submit"><!----><span>Log in</span></button>
-        <!----></span>
-        <!---->
+    <div class="ant-col ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button disabled="" class="ant-btn ant-btn-primary" type="submit">
+            <!----><span>Log in</span>
+          </button></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
 </form>
 `;
 
-exports[`renders ./antdv-demo/docs/form/demo/layout.md correctly 1`] = `
+exports[`renders ./components/form/demo/lable-width.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Form Layout">Form Layout</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="horizontal"><span class="ant-radio-button-inner"></span></span><span> Horizontal </span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="vertical"><span class="ant-radio-button-inner"></span></span><span> Vertical </span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="inline"><span class="ant-radio-button-inner"></span></span><span> Inline </span></label></div>
-      <!----></span>
+    <div class="ant-col ant-form-item-label" style="width: 150px;"><label class="" title="Activity name">Activity name
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="text" class="ant-input"></div>
+        <!---->
+      </div>
       <!---->
       <!---->
     </div>
   </div>
-  </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Field A">Field A</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="input placeholder" type="text" class="ant-input"><!----></span>
+    <div class="ant-col ant-form-item-label" style="width: 150px;"><label class="" title="Instant delivery">Instant delivery
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button type="button" role="switch" aria-checked="false" class="ant-switch">
+            <!----><span class="ant-switch-inner"><!----></span>
+          </button></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Field B">Field B</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input placeholder="input placeholder" type="text" class="ant-input"><!----></span>
+    <div class="ant-col ant-form-item-label" style="width: 150px;"><label class="" title="Activity type">Activity type
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-checkbox-group"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="1"><span class="ant-checkbox-inner"></span></span><span>Online</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="2"><span class="ant-checkbox-inner"></span></span><span>Promotion</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="3"><span class="ant-checkbox-inner"></span></span><span>Offline</span></label></div>
+        </div>
         <!---->
       </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-form-item-label" style="width: 150px;"><label class="" title="Resources">Resources
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="1"><span class="ant-radio-inner"></span></span><span>Sponsor</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="2"><span class="ant-radio-inner"></span></span><span>Venue</span></label></div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-form-item-label" style="width: 150px;"><label class="" title="Activity form">Activity form
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="textarea" class="ant-input"></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <!---->
-    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="button"><!----><span>Submit</span></button>
-        <!----></span>
-        <!---->
+    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="button">
+            <!----><span>Create</span>
+          </button><button style="margin-left: 10px;" class="ant-btn" type="button">
+            <!----><span>Cancel</span>
+          </button></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
 </form>
 `;
 
-exports[`renders ./antdv-demo/docs/form/demo/useForm-basic.md correctly 1`] = `
+exports[`renders ./components/form/demo/layout.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity name">Activity name</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="text" class="ant-input"><!----></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Form Layout">Form Layout
         <!---->
-        <!---->
-      </div>
-    </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity zone">Activity zone</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-single ant-select-show-arrow"><!----><!----><div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span>
-        <!----><span class="ant-select-selection-placeholder">please select your zone</span>
-      </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
-      <!---->
-    </div>
-    <!----></span>
-    <!---->
-    <!---->
-  </div>
-  </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity type">Activity type</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-checkbox-group"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="1"><span class="ant-checkbox-inner"></span></span><span> Online </span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="2"><span class="ant-checkbox-inner"></span></span><span> Promotion </span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="3"><span class="ant-checkbox-inner"></span></span><span> Offline </span></label></div>
-      <!----></span>
-      <!---->
-      <!---->
-    </div>
-  </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <!---->
-    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="button"><!----><span>Create</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Reset</span>
-        </button>
-        <!----></span>
-        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default"><label class="ant-radio-button-wrapper ant-radio-button-wrapper-checked"><span class="ant-radio-button ant-radio-button-checked"><input type="radio" class="ant-radio-button-input" value="horizontal"><span class="ant-radio-button-inner"></span></span><span>Horizontal</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="vertical"><span class="ant-radio-button-inner"></span></span><span>Vertical</span></label><label class="ant-radio-button-wrapper"><span class="ant-radio-button"><input type="radio" class="ant-radio-button-input" value="inline"><span class="ant-radio-button-inner"></span></span><span>Inline</span></label></div>
+        </div>
         <!---->
       </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Field A">Field A
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input placeholder="input placeholder" type="text" class="ant-input"></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="" title="Field B">Field B
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input placeholder="input placeholder" type="text" class="ant-input"></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <!---->
+    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="button">
+            <!----><span>Submit</span>
+          </button></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
     </div>
   </div>
 </form>
 `;
 
-exports[`renders ./antdv-demo/docs/form/demo/useForm-merge.md correctly 1`] = `
+exports[`renders ./components/form/demo/nested-form.vue correctly 1`] = `
+<div>
+  <form class="ant-form ant-form-horizontal">
+    <div class="ant-row ant-form-item">
+      <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_name" class="ant-form-item-required" title="Activity name">Activity name
+          <!---->
+        </label></div>
+      <div class="ant-col ant-col-14 ant-form-item-control">
+        <div class="ant-form-item-control-input">
+          <div class="ant-form-item-control-input-content"><input type="text" id="form_item_name" class="ant-input"></div>
+          <!---->
+        </div>
+        <!---->
+        <!---->
+      </div>
+    </div>
+    <div class="ant-row ant-form-item">
+      <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_sub_name" class="ant-form-item-required" title="Sub name">Sub name
+          <!---->
+        </label></div>
+      <div class="ant-col ant-col-14 ant-form-item-control">
+        <div class="ant-form-item-control-input">
+          <div class="ant-form-item-control-input-content"><input type="text" id="form_item_sub_name" class="ant-input"></div>
+          <!---->
+        </div>
+        <!---->
+        <!---->
+      </div>
+    </div>
+    <div class="ant-row ant-form-item">
+      <!---->
+      <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control">
+        <div class="ant-form-item-control-input">
+          <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="button">
+              <!----><span>Create</span>
+            </button><button style="margin-left: 10px;" class="ant-btn" type="button">
+              <!----><span>Reset</span>
+            </button></div>
+          <!---->
+        </div>
+        <!---->
+        <!---->
+      </div>
+    </div>
+  </form>
+</div>
+`;
+
+exports[`renders ./components/form/demo/useForm-basic.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity name">Activity name</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="text" class="ant-input"><!----></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity name">Activity name
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="text" class="ant-input"></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity zone">Activity zone</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-single ant-select-show-arrow"><!----><!----><div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span>
-        <!----><span class="ant-select-selection-placeholder">please select your zone</span>
-      </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
-      <!---->
-    </div>
-    <!----></span>
-    <!---->
-    <!---->
-  </div>
-  </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity type">Activity type</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-checkbox-group"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="1"><span class="ant-checkbox-inner"></span></span><span> Online </span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="2"><span class="ant-checkbox-inner"></span></span><span> Promotion </span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="3"><span class="ant-checkbox-inner"></span></span><span> Offline </span></label></div>
-      <!----></span>
-      <!---->
-      <!---->
-    </div>
-  </div>
-  </div>
-  <div class="ant-row error-infos ant-form-item">
-    <!---->
-    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="button"><!----><span>Create</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Reset</span>
-        </button>
-        <!----></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity zone">Activity zone
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-select ant-select-single ant-select-show-arrow">
+            <!---->
+            <!---->
+            <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span>
+              <!----><span class="ant-select-selection-placeholder">please select your zone</span>
+            </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+            <!---->
+          </div>
+        </div>
         <!---->
       </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity type">Activity type
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-checkbox-group"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="1"><span class="ant-checkbox-inner"></span></span><span>Online</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="2"><span class="ant-checkbox-inner"></span></span><span>Promotion</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="3"><span class="ant-checkbox-inner"></span></span><span>Offline</span></label></div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <!---->
+    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="button">
+            <!----><span>Create</span>
+          </button><button style="margin-left: 10px;" class="ant-btn" type="button">
+            <!----><span>Reset</span>
+          </button></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
     </div>
   </div>
 </form>
 `;
 
-exports[`renders ./antdv-demo/docs/form/demo/useForm-nested.md correctly 1`] = `
+exports[`renders ./components/form/demo/useForm-merge.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity name">Activity name</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="text" class="ant-input"><!----></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity name">Activity name
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="text" class="ant-input"></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Sub name">Sub name</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="text" class="ant-input"><!----></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity zone">Activity zone
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-select ant-select-single ant-select-show-arrow">
+            <!---->
+            <!---->
+            <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span>
+              <!----><span class="ant-select-selection-placeholder">please select your zone</span>
+            </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+            <!---->
+          </div>
+        </div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity type">Activity type
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-checkbox-group"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="1"><span class="ant-checkbox-inner"></span></span><span>Online</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="2"><span class="ant-checkbox-inner"></span></span><span>Promotion</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="3"><span class="ant-checkbox-inner"></span></span><span>Offline</span></label></div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item ant-form-item-with-help error-infos">
     <!---->
-    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="button"><!----><span>Create</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Reset</span>
-        </button>
-        <!----></span>
-        <!---->
+    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="button">
+            <!----><span>Create</span>
+          </button><button style="margin-left: 10px;" class="ant-btn" type="button">
+            <!----><span>Reset</span>
+          </button></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
 </form>
 `;
 
-exports[`renders ./antdv-demo/docs/form/demo/useForm-trigger.md correctly 1`] = `
+exports[`renders ./components/form/demo/useForm-nested.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity name">Activity name</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="text" class="ant-input"><!----></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity name">Activity name
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="text" class="ant-input"></div>
         <!---->
       </div>
-    </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity zone">Activity zone</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-single ant-select-show-arrow"><!----><!----><div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span>
-        <!----><span class="ant-select-selection-placeholder">please select your zone</span>
-      </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+      <!---->
       <!---->
     </div>
-    <!----></span>
-    <!---->
-    <!---->
   </div>
-  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Sub name">Sub name
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="text" class="ant-input"></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
   </div>
   <div class="ant-row ant-form-item">
     <!---->
-    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="button"><!----><span>Create</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Reset</span>
-        </button>
-        <!----></span>
-        <!---->
+    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="button">
+            <!----><span>Create</span>
+          </button><button style="margin-left: 10px;" class="ant-btn" type="button">
+            <!----><span>Reset</span>
+          </button></div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
 </form>
 `;
 
-exports[`renders ./antdv-demo/docs/form/demo/validation.md correctly 1`] = `
+exports[`renders ./components/form/demo/useForm-trigger.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label for="name" class="ant-form-item-required" title="Activity name">Activity name</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><input type="text" id="name" class="ant-input"><!----></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity name">Activity name
         <!---->
-        <!---->
-      </div>
-    </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label for="region" class="ant-form-item-required" title="Activity zone">Activity zone</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-select ant-select-single ant-select-show-arrow"><!----><!----><div class="ant-select-selector"><span class="ant-select-selection-search"><input id="region" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="region_list" aria-autocomplete="list" aria-controls="region_list" aria-activedescendant="region_list_0" readonly="" unselectable="on" type="search"></span>
-        <!----><span class="ant-select-selection-placeholder">please select your zone</span>
-      </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
-      <!---->
-    </div>
-    <!----></span>
-    <!---->
-    <!---->
-  </div>
-  </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label for="date1" class="ant-form-item-required" title="Activity time">Activity time</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><span id="date1" class="ant-calendar-picker" style="min-width: 195px; width: 100%;"><!----><div><input readonly="" placeholder="Pick a date" class="ant-calendar-picker-input ant-input"><!----><span role="img" aria-label="calendar" class="anticon anticon-calendar ant-calendar-picker-icon"><svg class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896" focusable="false"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></div></span>
-      <!----></span>
-      <!---->
-      <!---->
-    </div>
-  </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label for="delivery" class="" title="Instant delivery">Instant delivery</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button id="delivery" class="ant-switch" type="button" role="switch" aria-checked="false"><!----><span class="ant-switch-inner"><!----></span></button>
-        <!----></span>
-        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="text" class="ant-input"></div>
         <!---->
       </div>
-    </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label for="type" class="ant-form-item-required" title="Activity type">Activity type</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-checkbox-group" id="type"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="1"><span class="ant-checkbox-inner"></span></span><span> Online </span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="2"><span class="ant-checkbox-inner"></span></span><span> Promotion </span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="3"><span class="ant-checkbox-inner"></span></span><span> Offline </span></label></div>
-      <!----></span>
       <!---->
       <!---->
     </div>
   </div>
-  </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label for="resource" class="ant-form-item-required" title="Resources">Resources</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" id="resource"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="1"><span class="ant-radio-inner"></span></span><span> Sponsor </span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="2"><span class="ant-radio-inner"></span></span><span> Venue </span></label></div>
-      <!----></span>
-      <!---->
-      <!---->
-    </div>
-  </div>
-  </div>
-  <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label for="desc" class="ant-form-item-required" title="Activity form">Activity form</label></div>
-    <div class="ant-col ant-col-14 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><textarea id="desc" class="ant-input"></textarea><!----></span>
+    <div class="ant-col ant-col-4 ant-form-item-label"><label class="ant-form-item-required" title="Activity zone">Activity zone
         <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-select ant-select-single ant-select-show-arrow">
+            <!---->
+            <!---->
+            <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span>
+              <!----><span class="ant-select-selection-placeholder">please select your zone</span>
+            </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+            <!---->
+          </div>
+        </div>
         <!---->
       </div>
+      <!---->
+      <!---->
     </div>
   </div>
   <div class="ant-row ant-form-item">
     <!---->
-    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control-wrapper">
-      <div class="ant-form-item-control"><span class="ant-form-item-children"><button class="ant-btn ant-btn-primary" type="button"><!----><span>Create</span></button><button style="margin-left: 10px;" class="ant-btn" type="button">
-          <!----><span>Reset</span>
-        </button>
-        <!----></span>
-        <!---->
+    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="button">
+            <!----><span>Create</span>
+          </button><button style="margin-left: 10px;" class="ant-btn" type="button">
+            <!----><span>Reset</span>
+          </button></div>
         <!---->
       </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+</form>
+`;
+
+exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
+<form class="ant-form ant-form-horizontal">
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_name" class="ant-form-item-required" title="Activity name">Activity name
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><input type="text" id="form_item_name" class="ant-input"></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_region" class="ant-form-item-required" title="Activity zone">Activity zone
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-select ant-select-single ant-select-show-arrow">
+            <!---->
+            <!---->
+            <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="form_item_region" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="form_item_region_list" aria-autocomplete="list" aria-controls="form_item_region_list" aria-activedescendant="form_item_region_list_0" readonly="" unselectable="on" type="search"></span>
+              <!----><span class="ant-select-selection-placeholder">please select your zone</span>
+            </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+            <!---->
+          </div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_date1" class="ant-form-item-required" title="Activity time">Activity time
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <!---->
+          <div class="ant-picker" style="width: 100%;">
+            <div class="ant-picker-input"><input id="form_item_date1" readonly="" placeholder="Pick a date" title="" size="21" autocomplete="off"><span class="ant-picker-suffix"><span role="img" aria-label="calendar" class="anticon anticon-calendar"><svg focusable="false" class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></span>
+              <!---->
+            </div>
+          </div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_delivery" class="" title="Instant delivery">Instant delivery
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button id="form_item_delivery" type="button" role="switch" aria-checked="false" class="ant-switch">
+            <!----><span class="ant-switch-inner"><!----></span>
+          </button></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_type" class="ant-form-item-required" title="Activity type">Activity type
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-checkbox-group" id="form_item_type"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="1"><span class="ant-checkbox-inner"></span></span><span>Online</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="2"><span class="ant-checkbox-inner"></span></span><span>Promotion</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="3"><span class="ant-checkbox-inner"></span></span><span>Offline</span></label></div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_resource" class="ant-form-item-required" title="Resources">Resources
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content">
+          <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" id="form_item_resource"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="1"><span class="ant-radio-inner"></span></span><span>Sponsor</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="2"><span class="ant-radio-inner"></span></span><span>Venue</span></label></div>
+        </div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_desc" class="ant-form-item-required" title="Activity form">Activity form
+        <!---->
+      </label></div>
+    <div class="ant-col ant-col-14 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><textarea id="form_item_desc" class="ant-input"></textarea></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
+    </div>
+  </div>
+  <div class="ant-row ant-form-item">
+    <!---->
+    <div class="ant-col ant-col-14 ant-col-offset-4 ant-form-item-control">
+      <div class="ant-form-item-control-input">
+        <div class="ant-form-item-control-input-content"><button class="ant-btn ant-btn-primary" type="button">
+            <!----><span>Create</span>
+          </button><button style="margin-left: 10px;" class="ant-btn" type="button">
+            <!----><span>Reset</span>
+          </button></div>
+        <!---->
+      </div>
+      <!---->
+      <!---->
     </div>
   </div>
 </form>

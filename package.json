@@ -200,7 +200,7 @@
     "rucksack-css": "^1.0.2",
     "selenium-server": "^3.0.1",
     "semver": "^7.0.0",
-    "slash": "^2.0.0",
+    "slash": "^4.0.0",
     "style-loader": "^3.0.0",
     "stylelint": "^13.0.0",
     "stylelint-config-prettier": "^8.0.0",

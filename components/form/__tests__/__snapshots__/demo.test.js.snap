@@ -464,12 +464,12 @@ exports[`renders ./components/form/demo/nested-form.vue correctly 1`] = `
 <div>
   <form class="ant-form ant-form-horizontal">
     <div class="ant-row ant-form-item">
-      <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="name" class="ant-form-item-required" title="Activity name">Activity name
+      <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_name" class="ant-form-item-required" title="Activity name">Activity name
           <!---->
         </label></div>
       <div class="ant-col ant-col-14 ant-form-item-control">
         <div class="ant-form-item-control-input">
-          <div class="ant-form-item-control-input-content"><input type="text" id="name" class="ant-input"></div>
+          <div class="ant-form-item-control-input-content"><input type="text" id="form_item_name" class="ant-input"></div>
           <!---->
         </div>
         <!---->
@@ -477,12 +477,12 @@ exports[`renders ./components/form/demo/nested-form.vue correctly 1`] = `
       </div>
     </div>
     <div class="ant-row ant-form-item">
-      <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="sub_name" class="ant-form-item-required" title="Sub name">Sub name
+      <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_sub_name" class="ant-form-item-required" title="Sub name">Sub name
           <!---->
         </label></div>
       <div class="ant-col ant-col-14 ant-form-item-control">
         <div class="ant-form-item-control-input">
-          <div class="ant-form-item-control-input-content"><input type="text" id="sub_name" class="ant-input"></div>
+          <div class="ant-form-item-control-input-content"><input type="text" id="form_item_sub_name" class="ant-input"></div>
           <!---->
         </div>
         <!---->
@@ -752,12 +752,12 @@ exports[`renders ./components/form/demo/useForm-trigger.vue correctly 1`] = `
 exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="name" class="ant-form-item-required" title="Activity name">Activity name
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_name" class="ant-form-item-required" title="Activity name">Activity name
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
       <div class="ant-form-item-control-input">
-        <div class="ant-form-item-control-input-content"><input type="text" id="name" class="ant-input"></div>
+        <div class="ant-form-item-control-input-content"><input type="text" id="form_item_name" class="ant-input"></div>
         <!---->
       </div>
       <!---->
@@ -765,7 +765,7 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="region" class="ant-form-item-required" title="Activity zone">Activity zone
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_region" class="ant-form-item-required" title="Activity zone">Activity zone
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -774,7 +774,7 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
           <div class="ant-select ant-select-single ant-select-show-arrow">
             <!---->
             <!---->
-            <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="region" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="region_list" aria-autocomplete="list" aria-controls="region_list" aria-activedescendant="region_list_0" readonly="" unselectable="on" type="search"></span>
+            <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="form_item_region" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="form_item_region_list" aria-autocomplete="list" aria-controls="form_item_region_list" aria-activedescendant="form_item_region_list_0" readonly="" unselectable="on" type="search"></span>
               <!----><span class="ant-select-selection-placeholder">please select your zone</span>
             </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
             <!---->
@@ -787,7 +787,7 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="date1" class="ant-form-item-required" title="Activity time">Activity time
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_date1" class="ant-form-item-required" title="Activity time">Activity time
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -795,7 +795,7 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
         <div class="ant-form-item-control-input-content">
           <!---->
           <div class="ant-picker" style="width: 100%;">
-            <div class="ant-picker-input"><input id="date1" readonly="" placeholder="Pick a date" title="" size="21" autocomplete="off"><span class="ant-picker-suffix"><span role="img" aria-label="calendar" class="anticon anticon-calendar"><svg focusable="false" class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></span>
+            <div class="ant-picker-input"><input id="form_item_date1" readonly="" placeholder="Pick a date" title="" size="21" autocomplete="off"><span class="ant-picker-suffix"><span role="img" aria-label="calendar" class="anticon anticon-calendar"><svg focusable="false" class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></span>
               <!---->
             </div>
           </div>
@@ -807,12 +807,12 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="delivery" class="" title="Instant delivery">Instant delivery
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_delivery" class="" title="Instant delivery">Instant delivery
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
       <div class="ant-form-item-control-input">
-        <div class="ant-form-item-control-input-content"><button id="delivery" type="button" role="switch" aria-checked="false" class="ant-switch">
+        <div class="ant-form-item-control-input-content"><button id="form_item_delivery" type="button" role="switch" aria-checked="false" class="ant-switch">
             <!----><span class="ant-switch-inner"><!----></span>
           </button></div>
         <!---->
@@ -822,13 +822,13 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="type" class="ant-form-item-required" title="Activity type">Activity type
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_type" class="ant-form-item-required" title="Activity type">Activity type
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
       <div class="ant-form-item-control-input">
         <div class="ant-form-item-control-input-content">
-          <div class="ant-checkbox-group" id="type"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="1"><span class="ant-checkbox-inner"></span></span><span>Online</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="2"><span class="ant-checkbox-inner"></span></span><span>Promotion</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="3"><span class="ant-checkbox-inner"></span></span><span>Offline</span></label></div>
+          <div class="ant-checkbox-group" id="form_item_type"><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="1"><span class="ant-checkbox-inner"></span></span><span>Online</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="2"><span class="ant-checkbox-inner"></span></span><span>Promotion</span></label><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input" value="3"><span class="ant-checkbox-inner"></span></span><span>Offline</span></label></div>
         </div>
         <!---->
       </div>
@@ -837,13 +837,13 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="resource" class="ant-form-item-required" title="Resources">Resources
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_resource" class="ant-form-item-required" title="Resources">Resources
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
       <div class="ant-form-item-control-input">
         <div class="ant-form-item-control-input-content">
-          <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" id="resource"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="1"><span class="ant-radio-inner"></span></span><span>Sponsor</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="2"><span class="ant-radio-inner"></span></span><span>Venue</span></label></div>
+          <div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" id="form_item_resource"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="1"><span class="ant-radio-inner"></span></span><span>Sponsor</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="2"><span class="ant-radio-inner"></span></span><span>Venue</span></label></div>
         </div>
         <!---->
       </div>
@@ -852,12 +852,12 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="desc" class="ant-form-item-required" title="Activity form">Activity form
+    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_desc" class="ant-form-item-required" title="Activity form">Activity form
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
       <div class="ant-form-item-control-input">
-        <div class="ant-form-item-control-input-content"><textarea id="desc" class="ant-input"></textarea></div>
+        <div class="ant-form-item-control-input-content"><textarea id="form_item_desc" class="ant-input"></textarea></div>
         <!---->
       </div>
       <!---->

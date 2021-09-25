@@ -66,7 +66,6 @@ function getPropByPath(obj: any, namePathList: any, strict?: boolean) {
   };
 }
 export const formItemProps = {
-  id: PropTypes.string,
   htmlFor: PropTypes.string,
   prefixCls: PropTypes.string,
   label: PropTypes.VNodeChild,
@@ -92,6 +91,10 @@ export const formItemProps = {
 export type FormItemProps = Partial<ExtractPropTypes<typeof formItemProps>>;
 
 let indexGuid = 0;
+
+// default form item id prefix.
+const defaultItemNamePrefixCls = 'form_item';
+
 export default defineComponent({
   name: 'AFormItem',
   mixins: [BaseMixin],
@@ -114,15 +117,12 @@ export default defineComponent({
       return getNamePath(val);
     });
     const fieldId = computed(() => {
-      const { id } = props;
-      if (id) {
-        return id;
-      } else if (!namePath.value.length) {
+      if (!namePath.value.length) {
         return undefined;
       } else {
         const formName = formContext.name.value;
         const mergedId = namePath.value.join('_');
-        return formName ? `${formName}_${mergedId}` : mergedId;
+        return formName ? `${formName}_${mergedId}` : `${defaultItemNamePrefixCls}_${mergedId}`;
       }
     });
     const fieldValue = computed(() => {

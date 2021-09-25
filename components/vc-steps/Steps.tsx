@@ -1,5 +1,4 @@
 import PropTypes from '../_util/vue-types';
-import BaseMixin from '../_util/BaseMixin';
 import { filterEmpty } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
 import { defineComponent } from 'vue';
@@ -24,7 +23,6 @@ export type ProgressDotRender = (info: {
 
 export default defineComponent({
   name: 'Steps',
-  mixins: [BaseMixin],
   props: {
     type: PropTypes.string.def('default'),
     prefixCls: PropTypes.string.def('vc-steps'),

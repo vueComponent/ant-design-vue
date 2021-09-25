@@ -5,7 +5,6 @@ import PropTypes from '../_util/vue-types';
 import Row from '../grid/Row';
 import type { ColProps } from '../grid/Col';
 import { filterEmpty } from '../_util/props-util';
-import BaseMixin from '../_util/BaseMixin';
 import { validateRules as validateRulesUtil } from './utils/validateUtil';
 import { getNamePath } from './utils/valueUtil';
 import { toArray } from './utils/typeUtil';
@@ -97,7 +96,6 @@ const defaultItemNamePrefixCls = 'form_item';
 
 export default defineComponent({
   name: 'AFormItem',
-  mixins: [BaseMixin],
   inheritAttrs: false,
   __ANT_NEW_FORM_ITEM: true,
   props: formItemProps,

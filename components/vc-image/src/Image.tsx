@@ -1,8 +1,6 @@
 import type { ImgHTMLAttributes, CSSProperties } from 'vue';
 import { ref, watch, defineComponent, computed, onMounted } from 'vue';
 import isNumber from 'lodash-es/isNumber';
-
-import BaseMixin from '../../_util/BaseMixin';
 import cn from '../../_util/classNames';
 import PropTypes from '../../_util/vue-types';
 import { getOffset } from '../../vc-util/Dom/css';
@@ -61,7 +59,6 @@ const mergeDefaultValue = <T extends object>(obj: T, defaultValues: object): T =
 let uuid = 0;
 const ImageInternal = defineComponent({
   name: 'Image',
-  mixins: [BaseMixin],
   inheritAttrs: false,
   props: imageProps,
   emits: ['click'],

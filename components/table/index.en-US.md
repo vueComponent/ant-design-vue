@@ -188,10 +188,9 @@ type Breakpoint = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 
 ### ColumnGroup
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| title | Title of the column group | string\|slot | - |
-| slots | When using columns, you can use this property to configure the properties that support the slot, such as `slots: { title: 'XXX'}` | object | - |
+| Property | Description               | Type         | Default |
+| -------- | ------------------------- | ------------ | ------- |
+| title    | Title of the column group | string\|slot | -       |
 
 ### pagination
 

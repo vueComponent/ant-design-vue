@@ -20,12 +20,13 @@ export function resolveOnChange(target, e, onChange) {
     let event = e;
     if (e.type === 'click') {
       // click clear icon
-      //event = Object.create(e);
-      Object.defineProperty(event, 'target', {
-        writable: true,
-      });
-      Object.defineProperty(event, 'currentTarget', {
-        writable: true,
+      event = Object.create(e, {
+        target: {
+          writable: true,
+        },
+        currentTarget: {
+          writable: true,
+        },
       });
       event.target = target;
       event.currentTarget = target;

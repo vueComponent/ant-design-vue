@@ -1,6 +1,6 @@
 <docs>
 ---
-order: 2
+order: 3
 title:
   zh-CN: 渲染在当前 DOM
   en-US: Render in current dom
@@ -40,7 +40,7 @@ Render in current dom. custom container, check getContainer.
       :closable="false"
       :visible="visible"
       :get-container="false"
-      :wrap-style="{ position: 'absolute' }"
+      :style="{ position: 'absolute' }"
       @close="onClose"
     >
       <p>Some contents...</p>

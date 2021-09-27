@@ -1,189 +1,237 @@
-import type { CSSProperties } from 'vue';
-import { inject, provide, nextTick, defineComponent } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import {
+  inject,
+  nextTick,
+  defineComponent,
+  ref,
+  onMounted,
+  provide,
+  onBeforeMount,
+  onUpdated,
+  onUnmounted,
+} from 'vue';
+import { getPropsSlot } from '../_util/props-util';
 import classnames from '../_util/classNames';
-import VcDrawer from '../vc-drawer/src';
+import VcDrawer from '../vc-drawer';
 import PropTypes from '../_util/vue-types';
-import BaseMixin from '../_util/BaseMixin';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
-import { getComponent, getOptionProps } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
 import omit from '../_util/omit';
 
 const PlacementTypes = tuple('top', 'right', 'bottom', 'left');
-type placementType = typeof PlacementTypes[number];
+export type placementType = typeof PlacementTypes[number];
+
+const SizeTypes = tuple('default', 'large');
+export type sizeType = typeof SizeTypes[number];
+
+export interface PushState {
+  distance: string | number;
+}
+
+const defaultPushState: PushState = { distance: 180 };
+
+const drawerProps = {
+  autoFocus: PropTypes.looseBool,
+  closable: PropTypes.looseBool.def(true),
+  closeIcon: PropTypes.VNodeChild.def(<CloseOutlined />),
+  destroyOnClose: PropTypes.looseBool,
+  forceRender: PropTypes.looseBool,
+  getContainer: PropTypes.any,
+  maskClosable: PropTypes.looseBool.def(true),
+  mask: PropTypes.looseBool.def(true),
+  maskStyle: PropTypes.object,
+  style: PropTypes.object,
+  size: {
+    type: String as PropType<sizeType>,
+  },
+  drawerStyle: PropTypes.object,
+  headerStyle: PropTypes.object,
+  bodyStyle: PropTypes.object,
+  contentWrapperStyle: PropTypes.object,
+  title: PropTypes.VNodeChild,
+  visible: PropTypes.looseBool,
+  className: PropTypes.string,
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  zIndex: PropTypes.number,
+  prefixCls: PropTypes.string,
+  push: PropTypes.oneOfType([PropTypes.looseBool, { type: Object as PropType<PushState> }]).def(
+    defaultPushState,
+  ),
+  placement: PropTypes.oneOf(PlacementTypes).def('right'),
+  keyboard: PropTypes.looseBool.def(true),
+  extra: PropTypes.VNodeChild,
+  footer: PropTypes.VNodeChild,
+  footerStyle: PropTypes.object,
+  level: PropTypes.any.def(null),
+  levelMove: PropTypes.any,
+};
+
+export type DrawerProps = Partial<ExtractPropTypes<typeof drawerProps>>;
+
 const Drawer = defineComponent({
   name: 'ADrawer',
-  mixins: [BaseMixin],
   inheritAttrs: false,
-  props: {
-    closable: PropTypes.looseBool.def(true),
-    destroyOnClose: PropTypes.looseBool,
-    getContainer: PropTypes.any,
-    maskClosable: PropTypes.looseBool.def(true),
-    mask: PropTypes.looseBool.def(true),
-    maskStyle: PropTypes.object,
-    wrapStyle: PropTypes.object,
-    bodyStyle: PropTypes.object,
-    headerStyle: PropTypes.object,
-    drawerStyle: PropTypes.object,
-    title: PropTypes.VNodeChild,
-    visible: PropTypes.looseBool,
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(256),
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).def(256),
-    zIndex: PropTypes.number,
-    prefixCls: PropTypes.string,
-    placement: PropTypes.oneOf(PlacementTypes).def('right'),
-    level: PropTypes.any.def(null),
-    wrapClassName: PropTypes.string, // not use class like react, vue will add class to root dom
-    handle: PropTypes.VNodeChild,
-    afterVisibleChange: PropTypes.func,
-    keyboard: PropTypes.looseBool.def(true),
-    onClose: PropTypes.func,
-    'onUpdate:visible': PropTypes.func,
-  },
-  setup(props) {
+  props: drawerProps,
+  emits: ['update:visible', 'close', 'afterVisibleChange'],
+  setup(props, { emit, slots, attrs }) {
+    const sPush = ref(false);
+    const preVisible = ref(props.visible);
+    const destroyClose = ref(false);
+    const vcDrawer = ref(null);
     const configProvider = inject('configProvider', defaultConfigProvider);
-    return {
-      configProvider,
-      destroyClose: false,
-      preVisible: props.visible,
-      parentDrawer: inject('parentDrawer', null),
-    };
-  },
-  data() {
-    return {
-      sPush: false,
-    };
-  },
-  beforeCreate() {
-    provide('parentDrawer', this);
-  },
-  mounted() {
-    // fix: delete drawer in child and re-render, no push started.
-    // <Drawer>{show && <Drawer />}</Drawer>
-    const { visible } = this;
-    if (visible && this.parentDrawer) {
-      this.parentDrawer.push();
-    }
-  },
-  updated() {
-    nextTick(() => {
-      if (this.preVisible !== this.visible && this.parentDrawer) {
-        if (this.visible) {
-          this.parentDrawer.push();
-        } else {
-          this.parentDrawer.pull();
-        }
-      }
-      this.preVisible = this.visible;
-    });
-  },
-  beforeUnmount() {
-    // unmount drawer in child, clear push.
-    if (this.parentDrawer) {
-      this.parentDrawer.pull();
-    }
-  },
-  methods: {
-    domFocus() {
-      if (this.$refs.vcDrawer) {
-        (this.$refs.vcDrawer as any).domFocus();
-      }
-    },
-    close(e: Event) {
-      this.$emit('update:visible', false);
-      this.$emit('close', e);
-    },
-    // onMaskClick(e) {
-    //   if (!this.maskClosable) {
-    //     return;
-    //   }
-    //   this.close(e);
-    // },
-    push() {
-      this.setState({
-        sPush: true,
+    const parentDrawerOpts = inject('parentDrawerOpts', null);
+
+    onBeforeMount(() => {
+      provide('parentDrawerOpts', {
+        setPush,
+        setPull,
       });
-    },
-    pull() {
-      this.setState(
-        {
-          sPush: false,
-        },
-        () => {
-          this.domFocus();
-        },
-      );
-    },
-    onDestroyTransitionEnd() {
-      const isDestroyOnClose = this.getDestroyOnClose();
+    });
+
+    onMounted(() => {
+      const { visible } = props;
+      if (visible && parentDrawerOpts) {
+        parentDrawerOpts.setPush();
+      }
+    });
+
+    onUnmounted(() => {
+      if (parentDrawerOpts) {
+        parentDrawerOpts.setPull();
+      }
+    });
+
+    onUpdated(() => {
+      const { visible } = props;
+      nextTick(() => {
+        if (preVisible.value !== visible && parentDrawerOpts) {
+          if (visible) {
+            parentDrawerOpts.setPush();
+          } else {
+            parentDrawerOpts.setPull();
+          }
+        }
+        preVisible.value = visible;
+      });
+    });
+
+    const domFocus = () => {
+      vcDrawer.value?.domFocus?.();
+    };
+
+    const close = (e: Event) => {
+      emit('update:visible', false);
+      emit('close', e);
+    };
+
+    const afterVisibleChange = (visible: boolean) => {
+      emit('afterVisibleChange', visible);
+    };
+
+    const setPush = () => {
+      sPush.value = true;
+    };
+
+    const setPull = () => {
+      sPush.value = false;
+      nextTick(() => {
+        domFocus();
+      });
+    };
+
+    const onDestroyTransitionEnd = () => {
+      const isDestroyOnClose = getDestroyOnClose();
       if (!isDestroyOnClose) {
         return;
       }
-      if (!this.visible) {
-        this.destroyClose = true;
-        (this as any).$forceUpdate();
+      if (!props.visible) {
+        destroyClose.value = true;
       }
-    },
+    };
 
-    getDestroyOnClose() {
-      return this.destroyOnClose && !this.visible;
-    },
-    // get drawar push width or height
-    getPushTransform(placement?: placementType) {
+    const getDestroyOnClose = () => {
+      return props.destroyOnClose && !props.visible;
+    };
+
+    const getPushTransform = (placement?: placementType) => {
+      const { push } = props;
+      let distance: number | string;
+      if (typeof push === 'boolean') {
+        distance = push ? defaultPushState.distance : 0;
+      } else {
+        distance = push!.distance;
+      }
+
+      distance = parseFloat(String(distance || 0));
+
       if (placement === 'left' || placement === 'right') {
-        return `translateX(${placement === 'left' ? 180 : -180}px)`;
+        return `translateX(${placement === 'left' ? distance : -distance}px)`;
       }
       if (placement === 'top' || placement === 'bottom') {
-        return `translateY(${placement === 'top' ? 180 : -180}px)`;
+        return `translateY(${placement === 'top' ? distance : -distance}px)`;
       }
-    },
-    getRcDrawerStyle() {
-      const { zIndex, placement, wrapStyle } = this.$props;
-      const { sPush: push } = this.$data;
+    };
+
+    const getRcDrawerStyle = () => {
+      const { zIndex, placement, style, mask } = props;
+      const offsetStyle = mask ? {} : getOffsetStyle();
       return {
         zIndex,
-        transform: push ? this.getPushTransform(placement) : undefined,
-        ...wrapStyle,
+        transform: sPush.value ? getPushTransform(placement) : undefined,
+        ...offsetStyle,
+        ...style,
       };
-    },
-    renderHeader(prefixCls: string) {
-      const { closable, headerStyle } = this.$props;
-      const title = getComponent(this, 'title');
+    };
+
+    const renderHeader = (prefixCls: string) => {
+      const { closable, headerStyle } = props;
+      const extra = getPropsSlot(slots, props, 'extra');
+      const title = getPropsSlot(slots, props, 'title');
       if (!title && !closable) {
         return null;
       }
 
-      const headerClassName = title ? `${prefixCls}-header` : `${prefixCls}-header-no-title`;
       return (
-        <div class={headerClassName} style={headerStyle}>
-          {title && <div class={`${prefixCls}-title`}>{title}</div>}
-          {closable ? this.renderCloseIcon(prefixCls) : null}
+        <div
+          class={classnames(`${prefixCls}-header`, {
+            [`${prefixCls}-header-close-only`]: closable && !title && !extra,
+          })}
+          style={headerStyle}
+        >
+          <div class={`${prefixCls}-header-title`}>
+            {renderCloseIcon(prefixCls)}
+            {title && <div class={`${prefixCls}-title`}>{title}</div>}
+          </div>
+          {extra && <div class={`${prefixCls}-extra`}>{extra}</div>}
         </div>
       );
-    },
-    renderCloseIcon(prefixCls: string) {
-      const { closable } = this;
+    };
+
+    const renderCloseIcon = (prefixCls: string) => {
+      const { closable } = props;
+      const $closeIcon = getPropsSlot(slots, props, 'closeIcon');
       return (
         closable && (
-          <button key="closer" onClick={this.close} aria-label="Close" class={`${prefixCls}-close`}>
-            <CloseOutlined />
+          <button key="closer" onClick={close} aria-label="Close" class={`${prefixCls}-close`}>
+            {$closeIcon}
           </button>
         )
       );
-    },
-    // render drawer body dom
-    renderBody(prefixCls: string) {
-      if (this.destroyClose && !this.visible) {
+    };
+
+    const renderBody = (prefixCls: string) => {
+      if (destroyClose.value && !props.visible) {
         return null;
       }
-      this.destroyClose = false;
-      const { bodyStyle, drawerStyle } = this.$props;
+      destroyClose.value = false;
+
+      const { bodyStyle, drawerStyle } = props;
 
       const containerStyle: CSSProperties = {};
 
-      const isDestroyOnClose = this.getDestroyOnClose();
+      const isDestroyOnClose = getDestroyOnClose();
       if (isDestroyOnClose) {
         // Increase the opacity transition, delete children after closing.
         containerStyle.opacity = 0;
@@ -194,74 +242,93 @@ const Drawer = defineComponent({
         <div
           class={`${prefixCls}-wrapper-body`}
           style={{ ...containerStyle, ...drawerStyle }}
-          onTransitionend={this.onDestroyTransitionEnd}
+          onTransitionend={onDestroyTransitionEnd}
         >
-          {this.renderHeader(prefixCls)}
+          {renderHeader(prefixCls)}
           <div key="body" class={`${prefixCls}-body`} style={bodyStyle}>
-            {this.$slots.default?.()}
+            {slots.default?.()}
           </div>
+          {renderFooter(prefixCls)}
         </div>
       );
-    },
-  },
-  render() {
-    const props: any = getOptionProps(this);
-    const {
-      prefixCls: customizePrefixCls,
-      width,
-      height,
-      visible,
-      placement,
-      wrapClassName,
-      mask,
-      ...rest
-    } = props;
-    const haveMask = mask ? '' : 'no-mask';
-    const offsetStyle: CSSProperties = {};
-    if (placement === 'left' || placement === 'right') {
-      offsetStyle.width = typeof width === 'number' ? `${width}px` : width;
-    } else {
-      offsetStyle.height = typeof height === 'number' ? `${height}px` : height;
-    }
-    const handler = getComponent(this, 'handle') || false;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('drawer', customizePrefixCls);
-    const { class: className } = this.$attrs;
-    const vcDrawerProps: any = {
-      ...this.$attrs,
-      ...omit(rest, [
-        'closable',
-        'destroyOnClose',
-        'drawerStyle',
-        'headerStyle',
-        'bodyStyle',
-        'title',
-        'push',
-        'visible',
-        'getPopupContainer',
-        'rootPrefixCls',
-        'getPrefixCls',
-        'renderEmpty',
-        'csp',
-        'pageHeader',
-        'autoInsertSpaceInButton',
-      ]),
-      onClose: this.close,
-      handler,
-      ...offsetStyle,
-      prefixCls,
-      open: visible,
-      showMask: mask,
-      placement,
-      class: classnames({
-        [className as string]: !!className,
-        [wrapClassName]: !!wrapClassName,
-        [haveMask]: !!haveMask,
-      }),
-      wrapStyle: this.getRcDrawerStyle(),
-      ref: 'vcDrawer',
     };
-    return <VcDrawer {...vcDrawerProps}>{this.renderBody(prefixCls)}</VcDrawer>;
+
+    const renderFooter = (prefixCls: string) => {
+      const footer = getPropsSlot(slots, props, 'footer');
+      if (!footer) {
+        return null;
+      }
+
+      const footerClassName = `${prefixCls}-footer`;
+      return (
+        <div class={footerClassName} style={props.footerStyle}>
+          {footer}
+        </div>
+      );
+    };
+
+    const getOffsetStyle = () => {
+      // https://github.com/ant-design/ant-design/issues/24287
+      const { visible, mask, placement, size, width, height } = props;
+      if (!visible && !mask) {
+        return {};
+      }
+      const offsetStyle: CSSProperties = {};
+      if (placement === 'left' || placement === 'right') {
+        const defaultWidth = size === 'large' ? 736 : 378;
+        offsetStyle.width = typeof width === 'undefined' ? defaultWidth : width;
+      } else {
+        const defaultHeight = size === 'large' ? 736 : 378;
+        offsetStyle.height = typeof height === 'undefined' ? defaultHeight : height;
+      }
+      return offsetStyle;
+    };
+
+    return () => {
+      const {
+        prefixCls: customizePrefixCls,
+        width,
+        height,
+        visible,
+        placement,
+        mask,
+        className,
+        ...rest
+      } = props;
+      const offsetStyle = mask ? getOffsetStyle() : {};
+      const haveMask = mask ? '' : 'no-mask';
+      const getPrefixCls = configProvider.getPrefixCls;
+      const prefixCls = getPrefixCls('drawer', customizePrefixCls);
+      const vcDrawerProps: any = {
+        ...attrs,
+        ...omit(rest, [
+          'size',
+          'closeIcon',
+          'closable',
+          'destroyOnClose',
+          'drawerStyle',
+          'headerStyle',
+          'bodyStyle',
+          'title',
+          'push',
+        ]),
+        ...offsetStyle,
+        onClose: close,
+        afterVisibleChange,
+        handler: false,
+        prefixCls,
+        open: visible,
+        showMask: mask,
+        placement,
+        wrapperClassName: classnames({
+          [className as string]: className,
+          [haveMask]: !!haveMask,
+        }),
+        style: getRcDrawerStyle(),
+        ref: vcDrawer,
+      };
+      return <VcDrawer {...vcDrawerProps}>{renderBody(prefixCls)}</VcDrawer>;
+    };
   },
 });
 

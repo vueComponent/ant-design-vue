@@ -1,5 +1,5 @@
 import PropTypes from '../../_util/vue-types';
-import { PropType, ExtractPropTypes } from 'vue';
+import type { PropType, ExtractPropTypes } from 'vue';
 
 export type IPlacement = 'left' | 'top' | 'right' | 'bottom';
 

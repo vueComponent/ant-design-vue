@@ -37,19 +37,19 @@ Open a new drawer on top of an existing drawer to handle multi branch tasks.
 <template>
   <a-button type="primary" @click="showDrawer">Open</a-button>
   <a-drawer
+    v-model:visible="visible"
     title="Multi-level drawer"
     width="520"
     :closable="false"
-    v-model:visible="visible"
     :footer-style="{ textAlign: 'right' }"
     @close="onClose"
   >
     <a-button type="primary" @click="showChildrenDrawer">Two-level drawer</a-button>
     <a-drawer
+      v-model:visible="childrenDrawer"
       title="Two-level Drawer"
       width="320"
       :closable="false"
-      v-model:visible="childrenDrawer"
     >
       <a-button type="primary" @click="showChildrenDrawer">This is two-level drawer</a-button>
     </a-drawer>

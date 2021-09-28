@@ -18,7 +18,7 @@ A Drawer is a panel that is typically overlaid on top of a page and slides in fr
 ## API
 
 | Props | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | autoFocus | Whether Drawer should get focused after open | boolean | true | 3.0.0 |
 | bodyStyle | Style of the drawer content part | CSSProperties | - |  |
 | className(old: wrapClassName) | The class name of the container of the Drawer dialog | string | - | 3.0.0 |
@@ -30,7 +30,7 @@ A Drawer is a panel that is typically overlaid on top of a page and slides in fr
 | extra | Extra actions area at corner | VNode \| slot | - | 3.0.0 |
 | footer | The footer for Drawer | VNode \| slot | - | 3.0.0 |
 | footerStyle | Style of the drawer footer part | CSSProperties | - | 3.0.0 |
-| forceRender | Prerender Drawer component forcely | boolean | - | false | 3.0.0 |
+| forceRender | Prerender Drawer component forcely | boolean | false | 3.0.0 |
 | getContainer | Return the mounted node for Drawer | HTMLElement \| `() => HTMLElement` \| Selectors | 'body' |  |
 | headerStyle | Style of the drawer header part | CSSProperties | - | 3.0.0 |
 | height | Placement is `top` or `bottom`, height of the Drawer dialog | string \| number | 378 |  |

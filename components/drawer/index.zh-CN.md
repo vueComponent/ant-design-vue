@@ -18,7 +18,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/7z8NJQhFb/Drawer.svg
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | autoFocus | 抽屉展开后是否将焦点切换至其 Dom 节点 | boolean | true | 3.0.0 |
 | bodyStyle | 可用于设置 Drawer 内容部分的样式 | CSSProperties | - |  |
 | className(原 wrapClassName) | 对话框外层容器的类名 | string | - | 3.0.0 |
@@ -30,7 +30,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/7z8NJQhFb/Drawer.svg
 | extra | 抽屉右上角的操作区域 | VNode \| slot | - | 3.0.0 |
 | footer | 抽屉的页脚 | VNode \| slot | - | 3.0.0 |
 | footerStyle | 抽屉页脚部件的样式 | CSSProperties | - | 3.0.0 |
-| forceRender | 预渲染 Drawer 内元素 | boolean | - | false | 3.0.0 |
+| forceRender | 预渲染 Drawer 内元素 | boolean | false | 3.0.0 |
 | getContainer | 指定 Drawer 挂载的 HTML 节点 | HTMLElement \| `() => HTMLElement` \| Selectors | 'body' |  |
 | headerStyle | 用于设置 Drawer 头部的样式 | CSSProperties | - | 3.0.0 |
 | height | 高度, 在 `placement` 为 `top` 或 `bottom` 时使用 | string \| number | 378 |  |

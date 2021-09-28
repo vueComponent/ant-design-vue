@@ -5,8 +5,8 @@
     <placement />
     <render-in-current />
     <form-in-drawer />
-    <user-profile />
     <multi-level-drawer />
+    <user-profile />
     <size />
   </demo-sort>
 </template>

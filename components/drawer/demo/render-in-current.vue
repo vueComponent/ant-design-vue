@@ -48,10 +48,10 @@ Render in current dom. custom container, check getContainer.
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
-    const visible = ref(true);
+    const visible = ref(false);
 
     const afterVisibleChange = (bool: boolean) => {
       console.log('visible', bool);
@@ -64,10 +64,6 @@ export default defineComponent({
     const onClose = () => {
       visible.value = false;
     };
-
-    onMounted(() => {
-      visible.value = false;
-    });
 
     return {
       visible,

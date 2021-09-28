@@ -6,6 +6,7 @@ import omit from '../../_util/omit';
 import supportsPassive from '../../_util/supportsPassive';
 import { DrawerChildProps } from './IDrawerPropTypes';
 import type { IDrawerChildProps } from './IDrawerPropTypes';
+import setStyle from '../../_util/setStyle';
 
 import {
   addEventListener,
@@ -21,11 +22,48 @@ import {
 
 const currentDrawer: Record<string, boolean> = {};
 
+export interface scrollLockOptions {
+  container: HTMLElement;
+}
+
+const createScrollLocker = (options: scrollLockOptions) => {
+  let scrollBarSize = 0;
+  let cacheStyleMap = new Map();
+  return {
+    getContainer: () => {
+      return options?.container;
+    },
+    getCacheStyleMap: () => {
+      return cacheStyleMap;
+    },
+    lock: () => {
+      cacheStyleMap.set(
+        options.container,
+        setStyle(
+          {
+            width: scrollBarSize !== 0 ? `calc(100% - ${scrollBarSize}px)` : undefined,
+            overflow: 'hidden',
+            overflowX: 'hidden',
+            overflowY: 'hidden',
+          },
+          {
+            element: options.container || document.body,
+          },
+        ),
+      );
+    },
+    unLock: () => {
+      setStyle(cacheStyleMap.get(options.container) || {}, { element: options.container });
+      cacheStyleMap.delete(options.container);
+    },
+  };
+};
+
 const DrawerChild = defineComponent({
   inheritAttrs: false,
   props: DrawerChildProps,
   emits: ['close', 'handleClick', 'change'],
-  setup(props, { emit, slots, expose }) {
+  setup(props, { emit, slots }) {
     const state = reactive({
       levelDom: [],
       dom: null,
@@ -40,6 +78,7 @@ const DrawerChild = defineComponent({
         x: null,
         y: null,
       },
+      scrollLocker: null,
     });
 
     onMounted(() => {
@@ -55,6 +94,13 @@ const DrawerChild = defineComponent({
             .replace('.', Math.round(Math.random() * 9).toString()),
         ).toString(16)}`;
         getLevelDom(props);
+
+        if (container) {
+          state.scrollLocker = createScrollLocker({
+            container: container.parentNode,
+          });
+        }
+
         if (open) {
           if (container && container.parentNode === document.body) {
             currentDrawer[state.drawerId] = open;
@@ -67,14 +113,15 @@ const DrawerChild = defineComponent({
             }
           });
           if (showMask) {
-            props.scrollLocker?.lock();
+            state.scrollLocker?.lock();
           }
         }
       });
     });
 
     onUpdated(() => {
-      const { open, getContainer, scrollLocker, showMask, autoFocus } = props;
+      const { open, getContainer, showMask, autoFocus } = props;
+
       const container = getContainer?.();
       if (container && container.parentNode === document.body) {
         currentDrawer[state.drawerId] = !!open;
@@ -85,21 +132,21 @@ const DrawerChild = defineComponent({
           domFocus();
         }
         if (showMask) {
-          scrollLocker?.lock();
+          state.scrollLocker?.lock();
         }
       } else {
-        scrollLocker?.unLock();
+        state.scrollLocker?.unLock();
       }
     });
 
     onUnmounted(() => {
-      const { open, scrollLocker } = props;
+      const { open } = props;
       delete currentDrawer[state.drawerId];
       if (open) {
         setLevelTransform(false);
         document.body.style.touchAction = '';
       }
-      scrollLocker?.unLock();
+      state.scrollLocker?.unLock();
     });
 
     watch(
@@ -399,28 +446,6 @@ const DrawerChild = defineComponent({
         placementName,
       };
     };
-
-    const getDerivedStateFromProps = (
-      props: IDrawerChildProps,
-      { prevProps }: { prevProps: IDrawerChildProps },
-    ) => {
-      const nextState = {
-        prevProps: props,
-      };
-      if (prevProps !== undefined) {
-        const { placement, level } = props;
-        if (placement !== prevProps.placement) {
-          // test 的 bug, 有动画过场，删除 dom
-          state.contentDom = null;
-        }
-        if (level !== prevProps.level) {
-          getLevelDom(props);
-        }
-      }
-      return nextState;
-    };
-
-    expose({ getDerivedStateFromProps });
 
     return () => {
       const {

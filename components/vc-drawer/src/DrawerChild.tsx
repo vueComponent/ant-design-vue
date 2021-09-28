@@ -27,8 +27,8 @@ export interface scrollLockOptions {
 }
 
 const createScrollLocker = (options: scrollLockOptions) => {
-  let scrollBarSize = 0;
-  let cacheStyleMap = new Map();
+  const scrollBarSize = 0;
+  const cacheStyleMap = new Map();
   return {
     getContainer: () => {
       return options?.container;

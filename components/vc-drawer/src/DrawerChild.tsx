@@ -16,7 +16,6 @@ import {
   removeEventListener,
   transformArguments,
   transitionEndFun,
-  transitionStr,
   windowIsUndefined,
 } from './utils';
 
@@ -360,9 +359,6 @@ const DrawerChild = defineComponent({
     const remScrollingEffect = (right: number) => {
       const { placement, duration, ease } = props;
 
-      if (transitionStr) {
-        document.body.style.overflowX = 'hidden';
-      }
       state.dom.style.transition = 'none';
       let heightTransition: string;
       let widthTransition = `width ${duration} ${ease}`;

@@ -74,8 +74,8 @@ exports[`renders ./components/transfer/demo/advanced.vue correctly 1`] = `
       </ul>
       <!---->
     </div>
-    <div class="ant-transfer-list-footer"><button style="float: right; margin: 5px;" class="ant-btn ant-btn-sm" type="button">
-        <!----><span>reload</span>
+    <div class="ant-transfer-list-footer"><button style="float: left; margin: 5px;" class="ant-btn ant-btn-sm" type="button">
+        <!----><span>left reload</span>
       </button></div>
   </div>
   <div class="ant-transfer-operation"><button disabled="" class="ant-btn ant-btn-primary ant-btn-sm" type="button"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span><span>to right</span></button><button disabled="" class="ant-btn ant-btn-primary ant-btn-sm" type="button"><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span><span>to left</span></button></div>
@@ -90,7 +90,7 @@ exports[`renders ./components/transfer/demo/advanced.vue correctly 1`] = `
       <div class="ant-transfer-list-body-not-found"><span>没数据</span></div>
     </div>
     <div class="ant-transfer-list-footer"><button style="float: right; margin: 5px;" class="ant-btn ant-btn-sm" type="button">
-        <!----><span>reload</span>
+        <!----><span>right reload</span>
       </button></div>
   </div>
 </div>
@@ -300,6 +300,223 @@ exports[`renders ./components/transfer/demo/custom-item.vue correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/transfer/demo/oneway.vue correctly 1`] = `
+<div>
+  <div class="ant-transfer">
+    <div class="ant-transfer-list">
+      <div class="ant-transfer-list-header"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox ant-checkbox-indeterminate"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+          <!---->
+        </label>
+        <!----><span tabindex="-1" role="img" aria-label="down" class="anticon anticon-down ant-dropdown-trigger ant-transfer-list-header-dropdown"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span><span class="ant-transfer-list-header-selected"><span>2/20 items</span><span class="ant-transfer-list-header-title">Source</span></span>
+      </div>
+      <div class="ant-transfer-list-body">
+        <!---->
+        <ul class="ant-transfer-list-content">
+          <li class="ant-transfer-list-content-item ant-transfer-list-content-item-disabled" title="content1"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled ant-transfer-list-checkbox"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content1</span></li>
+          <li class="ant-transfer-list-content-item" title="content2"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked ant-transfer-list-checkbox"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content2</span></li>
+          <li class="ant-transfer-list-content-item" title="content3"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content3</span></li>
+          <li class="ant-transfer-list-content-item ant-transfer-list-content-item-disabled" title="content4"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled ant-transfer-list-checkbox"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content4</span></li>
+          <li class="ant-transfer-list-content-item" title="content5"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-checked ant-transfer-list-checkbox"><span class="ant-checkbox ant-checkbox-checked"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content5</span></li>
+          <li class="ant-transfer-list-content-item" title="content6"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content6</span></li>
+          <li class="ant-transfer-list-content-item ant-transfer-list-content-item-disabled" title="content7"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled ant-transfer-list-checkbox"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content7</span></li>
+          <li class="ant-transfer-list-content-item" title="content8"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content8</span></li>
+          <li class="ant-transfer-list-content-item" title="content9"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content9</span></li>
+          <li class="ant-transfer-list-content-item ant-transfer-list-content-item-disabled" title="content10"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled ant-transfer-list-checkbox"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content10</span></li>
+          <li class="ant-transfer-list-content-item" title="content11"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content11</span></li>
+          <li class="ant-transfer-list-content-item" title="content12"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content12</span></li>
+          <li class="ant-transfer-list-content-item ant-transfer-list-content-item-disabled" title="content13"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled ant-transfer-list-checkbox"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content13</span></li>
+          <li class="ant-transfer-list-content-item" title="content14"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content14</span></li>
+          <li class="ant-transfer-list-content-item" title="content15"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content15</span></li>
+          <li class="ant-transfer-list-content-item ant-transfer-list-content-item-disabled" title="content16"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled ant-transfer-list-checkbox"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content16</span></li>
+          <li class="ant-transfer-list-content-item" title="content17"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content17</span></li>
+          <li class="ant-transfer-list-content-item" title="content18"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content18</span></li>
+          <li class="ant-transfer-list-content-item ant-transfer-list-content-item-disabled" title="content19"><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled ant-transfer-list-checkbox"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content19</span></li>
+          <li class="ant-transfer-list-content-item" title="content20"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content20</span></li>
+        </ul>
+        <!---->
+      </div>
+      <!---->
+    </div>
+    <div class="ant-transfer-operation"><button class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only" type="button"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button>
+      <!---->
+    </div>
+    <div class="ant-transfer-list">
+      <div class="ant-transfer-list-header">
+        <!---->
+        <!----><span tabindex="-1" role="img" aria-label="down" class="anticon anticon-down ant-dropdown-trigger ant-transfer-list-header-dropdown"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span><span class="ant-transfer-list-header-selected"><span>0 item</span><span class="ant-transfer-list-header-title">Target</span></span>
+      </div>
+      <div class="ant-transfer-list-body">
+        <!---->
+        <div class="ant-transfer-list-body-not-found">
+          <div class="ant-empty ant-empty-small ant-empty-normal">
+            <div class="ant-empty-image"><svg class="ant-empty-img-simple" width="64" height="41" viewBox="0 0 64 41">
+                <g transform="translate(0 1)" fill="none" fill-rule="evenodd">
+                  <ellipse class="ant-empty-img-simple-ellipse" fill="#F5F5F5" cx="32" cy="33" rx="32" ry="7"></ellipse>
+                  <g class="ant-empty-img-simple-g" fill-rule="nonzero" stroke="#D9D9D9">
+                    <path d="M55 12.76L44.854 1.258C44.367.474 43.656 0 42.907 0H21.093c-.749 0-1.46.474-1.947 1.257L9 12.761V22h46v-9.24z"></path>
+                    <path d="M41.613 15.931c0-1.605.994-2.93 2.227-2.931H55v18.137C55 33.26 53.68 35 52.05 35h-40.1C10.32 35 9 33.259 9 31.137V13h11.16c1.233 0 2.227 1.323 2.227 2.928v.022c0 1.605 1.005 2.901 2.237 2.901h14.752c1.232 0 2.237-1.308 2.237-2.913v-.007z" fill="#FAFAFA" class="ant-empty-img-simple-path"></path>
+                  </g>
+                </g>
+              </svg></div>
+            <p class="ant-empty-description">No Data</p>
+            <!---->
+          </div>
+        </div>
+      </div>
+      <!---->
+    </div>
+  </div><button style="margin-top: 16px;" type="button" role="switch" aria-checked="false" class="ant-switch">
+    <!----><span class="ant-switch-inner">enabled</span>
+  </button>
+</div>
+`;
+
+exports[`renders ./components/transfer/demo/pagination.vue correctly 1`] = `
+<div>
+  <div class="ant-transfer">
+    <div class="ant-transfer-list ant-transfer-list-with-pagination">
+      <div class="ant-transfer-list-header">
+        <!---->
+        <!----><span tabindex="-1" role="img" aria-label="down" class="anticon anticon-down ant-dropdown-trigger ant-transfer-list-header-dropdown"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span><span class="ant-transfer-list-header-selected"><span>134 items</span><span class="ant-transfer-list-header-title"></span></span>
+      </div>
+      <div class="ant-transfer-list-body">
+        <!---->
+        <ul class="ant-transfer-list-content">
+          <li class="ant-transfer-list-content-item" title="content1"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content1</span></li>
+          <li class="ant-transfer-list-content-item" title="content2"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content2</span></li>
+          <li class="ant-transfer-list-content-item" title="content4"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content4</span></li>
+          <li class="ant-transfer-list-content-item" title="content5"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content5</span></li>
+          <li class="ant-transfer-list-content-item" title="content7"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content7</span></li>
+          <li class="ant-transfer-list-content-item" title="content8"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content8</span></li>
+          <li class="ant-transfer-list-content-item" title="content10"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content10</span></li>
+          <li class="ant-transfer-list-content-item" title="content11"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content11</span></li>
+          <li class="ant-transfer-list-content-item" title="content13"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content13</span></li>
+          <li class="ant-transfer-list-content-item" title="content14"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content14</span></li>
+        </ul>
+        <ul class="ant-pagination ant-pagination-simple mini ant-transfer-list-pagination">
+          <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
+          <li title="1/14" class="ant-pagination-simple-pager"><input type="text" size="3"><span class="ant-pagination-slash">／</span>14</li>
+          <li title="Next Page" tabindex="0" class="ant-pagination-next" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
+          <!---->
+        </ul>
+      </div>
+      <!---->
+    </div>
+    <div class="ant-transfer-operation"><button disabled="" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only" type="button"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button><button disabled="" class="ant-btn ant-btn-primary ant-btn-sm ant-btn-icon-only" type="button"><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></div>
+    <div class="ant-transfer-list ant-transfer-list-with-pagination">
+      <div class="ant-transfer-list-header">
+        <!---->
+        <!----><span tabindex="-1" role="img" aria-label="down" class="anticon anticon-down ant-dropdown-trigger ant-transfer-list-header-dropdown"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span><span class="ant-transfer-list-header-selected"><span>66 items</span><span class="ant-transfer-list-header-title"></span></span>
+      </div>
+      <div class="ant-transfer-list-body">
+        <!---->
+        <ul class="ant-transfer-list-content">
+          <li class="ant-transfer-list-content-item" title="content3"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content3</span></li>
+          <li class="ant-transfer-list-content-item" title="content6"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content6</span></li>
+          <li class="ant-transfer-list-content-item" title="content9"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content9</span></li>
+          <li class="ant-transfer-list-content-item" title="content12"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content12</span></li>
+          <li class="ant-transfer-list-content-item" title="content15"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content15</span></li>
+          <li class="ant-transfer-list-content-item" title="content18"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content18</span></li>
+          <li class="ant-transfer-list-content-item" title="content21"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content21</span></li>
+          <li class="ant-transfer-list-content-item" title="content24"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content24</span></li>
+          <li class="ant-transfer-list-content-item" title="content27"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content27</span></li>
+          <li class="ant-transfer-list-content-item" title="content30"><label class="ant-checkbox-wrapper ant-transfer-list-checkbox"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
+              <!---->
+            </label><span class="ant-transfer-list-content-item-text">content30</span></li>
+        </ul>
+        <ul class="ant-pagination ant-pagination-simple mini ant-transfer-list-pagination">
+          <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
+          <li title="1/7" class="ant-pagination-simple-pager"><input type="text" size="3"><span class="ant-pagination-slash">／</span>7</li>
+          <li title="Next Page" tabindex="0" class="ant-pagination-next" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
+          <!---->
+        </ul>
+      </div>
+      <!---->
+    </div>
+  </div><button style="margin-top: 16px;" type="button" role="switch" aria-checked="false" class="ant-switch">
+    <!----><span class="ant-switch-inner">enabled</span>
+  </button>
+</div>
+`;
+
 exports[`renders ./components/transfer/demo/search.vue correctly 1`] = `
 <div class="ant-transfer">
   <div class="ant-transfer-list">
@@ -412,7 +629,7 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
         <!---->
-        <!----><span tabindex="-1" role="img" aria-label="down" class="anticon anticon-down ant-dropdown-trigger ant-transfer-list-header-dropdown"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span><span class="ant-transfer-list-header-selected"><span>14 items</span><span class="ant-transfer-list-header-title"></span></span>
+        <!----><span tabindex="-1" role="img" aria-label="down" class="anticon anticon-down ant-dropdown-trigger ant-transfer-list-header-dropdown"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span><span class="ant-transfer-list-header-selected"><span>7 items</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body">
         <!---->
@@ -547,48 +764,6 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                             </td>
                           </tr>
                           <!---->
-                          <tr data-row-key="10" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-selection-column">
-                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                                <!---->
-                              </label>
-                            </td>
-                            <td class="ant-table-cell">
-                              <!---->content11
-                            </td>
-                            <td class="ant-table-cell">
-                              <!---->description of content11
-                            </td>
-                          </tr>
-                          <!---->
-                          <tr data-row-key="12" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-selection-column">
-                              <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                                <!---->
-                              </label>
-                            </td>
-                            <td class="ant-table-cell">
-                              <!---->content13
-                            </td>
-                            <td class="ant-table-cell">
-                              <!---->description of content13
-                            </td>
-                          </tr>
-                          <!---->
-                          <tr data-row-key="13" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-selection-column">
-                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                                <!---->
-                              </label>
-                            </td>
-                            <td class="ant-table-cell">
-                              <!---->content14
-                            </td>
-                            <td class="ant-table-cell">
-                              <!---->description of content14
-                            </td>
-                          </tr>
-                          <!---->
                         </tbody>
                         <!---->
                       </table>
@@ -600,8 +775,7 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                   <!---->
                   <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
                   <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
-                  <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a rel="nofollow">2</a></li>
-                  <li title="Next Page" tabindex="0" class="ant-pagination-next" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
+                  <li title="Next Page" class="ant-pagination-next ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
                   <!---->
                 </ul>
               </div>
@@ -615,7 +789,7 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
     <div class="ant-transfer-list">
       <div class="ant-transfer-list-header">
         <!---->
-        <!----><span tabindex="-1" role="img" aria-label="down" class="anticon anticon-down ant-dropdown-trigger ant-transfer-list-header-dropdown"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span><span class="ant-transfer-list-header-selected"><span>6 items</span><span class="ant-transfer-list-header-title"></span></span>
+        <!----><span tabindex="-1" role="img" aria-label="down" class="anticon anticon-down ant-dropdown-trigger ant-transfer-list-header-dropdown"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span><span class="ant-transfer-list-header-selected"><span>3 items</span><span class="ant-transfer-list-header-title"></span></span>
       </div>
       <div class="ant-transfer-list-body">
         <!---->
@@ -679,39 +853,6 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                             </td>
                             <td class="ant-table-cell">
                               <!---->content9
-                            </td>
-                          </tr>
-                          <!---->
-                          <tr data-row-key="11" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-selection-column">
-                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                                <!---->
-                              </label>
-                            </td>
-                            <td class="ant-table-cell">
-                              <!---->content12
-                            </td>
-                          </tr>
-                          <!---->
-                          <tr data-row-key="14" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-selection-column">
-                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                                <!---->
-                              </label>
-                            </td>
-                            <td class="ant-table-cell">
-                              <!---->content15
-                            </td>
-                          </tr>
-                          <!---->
-                          <tr data-row-key="17" class="ant-table-row ant-table-row-level-0">
-                            <td class="ant-table-cell ant-table-selection-column">
-                              <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
-                                <!---->
-                              </label>
-                            </td>
-                            <td class="ant-table-cell">
-                              <!---->content18
                             </td>
                           </tr>
                           <!---->

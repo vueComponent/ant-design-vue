@@ -15,7 +15,7 @@ import classnames from '../_util/classNames';
 import VcDrawer from '../vc-drawer';
 import PropTypes from '../_util/vue-types';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
-import { defaultConfigProvider } from '../config-provider';
+import useConfigInject from '../_util/hooks/useConfigInject';
 import { tuple, withInstall } from '../_util/type';
 import omit from '../_util/omit';
 
@@ -80,8 +80,8 @@ const Drawer = defineComponent({
     const preVisible = ref(props.visible);
     const destroyClose = ref(false);
     const vcDrawer = ref(null);
-    const configProvider = inject('configProvider', defaultConfigProvider);
     const parentDrawerOpts = inject('parentDrawerOpts', null);
+    const { prefixCls } = useConfigInject('drawer', props);
 
     onBeforeMount(() => {
       provide('parentDrawerOpts', {
@@ -285,20 +285,10 @@ const Drawer = defineComponent({
     };
 
     return () => {
-      const {
-        prefixCls: customizePrefixCls,
-        width,
-        height,
-        visible,
-        placement,
-        mask,
-        className,
-        ...rest
-      } = props;
+      const { width, height, visible, placement, mask, className, ...rest } = props;
+
       const offsetStyle = mask ? getOffsetStyle() : {};
       const haveMask = mask ? '' : 'no-mask';
-      const getPrefixCls = configProvider.getPrefixCls;
-      const prefixCls = getPrefixCls('drawer', customizePrefixCls);
       const vcDrawerProps: any = {
         ...attrs,
         ...omit(rest, [
@@ -316,7 +306,7 @@ const Drawer = defineComponent({
         onClose: close,
         afterVisibleChange,
         handler: false,
-        prefixCls,
+        prefixCls: prefixCls.value,
         open: visible,
         showMask: mask,
         placement,
@@ -327,7 +317,7 @@ const Drawer = defineComponent({
         style: getRcDrawerStyle(),
         ref: vcDrawer,
       };
-      return <VcDrawer {...vcDrawerProps}>{renderBody(prefixCls)}</VcDrawer>;
+      return <VcDrawer {...vcDrawerProps}>{renderBody(prefixCls.value)}</VcDrawer>;
     };
   },
 });

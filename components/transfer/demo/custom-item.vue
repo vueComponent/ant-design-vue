@@ -1,6 +1,6 @@
 <docs>
 ---
-order: 3
+order: 4
 title:
   zh-CN: 自定义渲染行数据
   en-US: Custom datasource
@@ -18,12 +18,12 @@ Custom each Transfer Item, and in this way you can render a complex datasource.
 
 <template>
   <a-transfer
+    v-model:target-keys="targetKeys"
     :data-source="mockData"
     :list-style="{
       width: '300px',
       height: '300px',
     }"
-    :target-keys="targetKeys"
     @change="handleChange"
   >
     <template #render="item">
@@ -66,7 +66,6 @@ export default defineComponent({
       targetKeys.value = keys;
     };
     const handleChange = (keys: string[], direction: string, moveKeys: string[]) => {
-      targetKeys.value = keys;
       console.log(keys, direction, moveKeys);
     };
     return {

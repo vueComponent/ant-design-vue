@@ -12,6 +12,10 @@ Alert component for feedback.
 - When you need to show alert messages to users.
 - When you need a persistent static container which is closable by user actions.
 
+Transfer the elements between two columns in an intuitive and efficient way.
+
+One or more elements can be selected from either column, one click on the proper `direction` button, and the transfer is done. The left column is considered the `source` and the right column is considered the `target`. As you can see in the API description, these names are reflected in.
+
 ## API
 
 | Property | Description | Type | Default | Version |
@@ -22,12 +26,15 @@ Alert component for feedback.
 | footer | customize the progress dot by setting a scoped slot | slot="footer" slot-scope="props" |  |  |
 | listStyle | A custom CSS style used for rendering the transfer columns. | object |  |  |
 | locale | i18n text including filter, empty text, item unit, etc | object | `{ itemUnit: 'item', itemsUnit: 'items', notFoundContent: 'The list is empty', searchPlaceholder: 'Search here' }` |  |
+| oneWay | Display as single direction style | boolean | false | 3.0.0 |
 | operations | A set of operations that are sorted from top to bottom. | string\[] | \['>', '<'] |  |
+| operationStyle | A custom CSS style used for rendering the operations column | CSSProperties | - | 3.0.0 |
+| pagination | Use pagination. Not work in render props | boolean \| { pageSize: number } | false | 3.0.0 |
 | render | The function to generate the item shown on a column. Based on an record (element of the dataSource array), this function should return a element which is generated from that record. Also, it can return a plain object with `value` and `label`, `label` is a element and `value` is for title | Function(record) \| slot |  |  |
-| selectedKeys | A set of keys of selected items. | string\[] | \[] |  |
+| selectedKeys(v-model) | A set of keys of selected items. | string\[] | \[] |  |
 | showSearch | If included, a search box is shown on each column. | boolean | false |  |
 | showSelectAll | Show select all checkbox on the header | boolean | true |  |
-| targetKeys | A set of keys of elements that are listed on the right column. | string\[] | \[] |  |
+| targetKeys(v-model) | A set of keys of elements that are listed on the right column. | string\[] | \[] |  |
 | titles | A set of titles that are sorted from left to right. | string\[] | - |  |
 
 ### events

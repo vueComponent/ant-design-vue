@@ -1,18 +1,18 @@
 <docs>
 ---
-order: 0
+order: 1
 title:
-  zh-CN: 基本用法
-  en-US: Basic usage
+  zh-CN: 单向样式
+  en-US: One Way
 ---
 
 ## zh-CN
 
-最基本的用法，展示了 `dataSource`、`targetKeys`、每行的渲染函数 `render` 以及回调函数 `change` `selectChange` `scroll` 的用法。
+通过 `oneWay` 将 Transfer 转为单向样式。
 
 ## en-US
 
-The most basic usage of `Transfer` involves providing the source data and target keys arrays, plus the rendering and some callback functions.
+Use `oneWay` to makes Transfer to one way style.
 
 </docs>
 
@@ -22,6 +22,7 @@ The most basic usage of `Transfer` involves providing the source data and target
       v-model:target-keys="targetKeys"
       v-model:selected-keys="selectedKeys"
       :data-source="mockData"
+      :one-way="true"
       :titles="['Source', 'Target']"
       :render="item => item.title"
       :disabled="disabled"
@@ -55,12 +56,11 @@ for (let i = 0; i < 20; i++) {
   });
 }
 
-const oriTargetKeys = mockData.filter(item => +item.key % 3 > 1).map(item => item.key);
 export default defineComponent({
   data() {
     const disabled = ref<boolean>(false);
 
-    const targetKeys = ref<string[]>(oriTargetKeys);
+    const targetKeys = ref<string[]>([]);
 
     const selectedKeys = ref<string[]>(['1', '4']);
 

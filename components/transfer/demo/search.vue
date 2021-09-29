@@ -1,6 +1,6 @@
 <docs>
 ---
-order: 1
+order: 2
 title:
   zh-CN: 带搜索框
   en-US: Search
@@ -18,10 +18,10 @@ Transfer with a search box.
 
 <template>
   <a-transfer
+    v-model:target-keys="targetKeys"
     :data-source="mockData"
     show-search
     :filter-option="filterOption"
-    :target-keys="targetKeys"
     :render="item => item.title"
     @change="handleChange"
     @search="handleSearch"
@@ -66,7 +66,6 @@ export default defineComponent({
     };
     const handleChange = (keys: string[], direction: string, moveKeys: string[]) => {
       console.log(keys, direction, moveKeys);
-      targetKeys.value = keys;
     };
 
     const handleSearch = (dir: string, value: string) => {

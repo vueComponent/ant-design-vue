@@ -19,9 +19,16 @@ Render radios by configuring `options`.
   <div>
     <a-radio-group v-model:value="value1" :options="plainOptions" />
     <br />
-    <a-radio-group v-model:value="value2" :options="options" />
+    <a-radio-group v-model:value="value2" :options="optionsWithDisabled" />
     <br />
-    <a-radio-group v-model:value="value3" :options="optionsWithDisabled" disabled />
+    <a-radio-group v-model:value="value3" :options="plainOptions" disabled />
+    <br />
+    <a-radio-group v-model:value="value1" option-type="button" :options="plainOptions" />
+    <br />
+    <a-radio-group v-model:value="value2" option-type="button" :options="optionsWithDisabled" />
+    <br />
+    <a-radio-group v-model:value="value3" option-type="button" :options="plainOptions" disabled />
+    <br />
   </div>
 </template>
 <script lang="ts">
@@ -35,7 +42,7 @@ const options = [
 const optionsWithDisabled = [
   { label: 'Apple', value: 'Apple' },
   { label: 'Pear', value: 'Pear' },
-  { label: 'Orange', value: 'Orange', disabled: false },
+  { label: 'Orange', value: 'Orange', disabled: true },
 ];
 export default defineComponent({
   data() {

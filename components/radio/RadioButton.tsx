@@ -1,35 +1,28 @@
 import { defineComponent, inject } from 'vue';
 import type { RadioProps } from './Radio';
 import Radio, { radioProps } from './Radio';
-import { getOptionProps, getSlot } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import type { RadioGroupContext } from './interface';
 
 export default defineComponent({
   name: 'ARadioButton',
-  props: {
-    ...radioProps,
-  },
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-      radioGroupContext: inject<any>('radioGroupContext', {}),
-    };
-  },
-  render() {
-    const props = getOptionProps(this) as RadioProps;
-    const { prefixCls: customizePrefixCls, ...otherProps } = props;
-    const { getPrefixCls } = this.configProvider;
-    const prefixCls = getPrefixCls('radio-button', customizePrefixCls);
+  props: radioProps,
+  setup(props: RadioProps, { slots }) {
+    const { prefixCls } = useConfigInject('radio-button', props);
+    const radioGroupContext = inject<RadioGroupContext>('radioGroupContext');
 
-    const rProps: RadioProps = {
-      prefixCls,
-      ...otherProps,
+    return () => {
+      const rProps: RadioProps = {
+        ...props,
+        prefixCls: prefixCls.value,
+      };
+
+      if (radioGroupContext) {
+        rProps.onChange = radioGroupContext.onRadioChange;
+        rProps.checked = rProps.value === radioGroupContext.stateValue.value;
+        rProps.disabled = rProps.disabled || radioGroupContext.props.disabled;
+      }
+      return <Radio {...rProps}>{slots.default?.()}</Radio>;
     };
-    if (this.radioGroupContext) {
-      rProps.onChange = this.radioGroupContext.onRadioChange;
-      rProps.checked = props.value === this.radioGroupContext.stateValue;
-      rProps.disabled = props.disabled || this.radioGroupContext.disabled;
-    }
-    return <Radio {...rProps}>{getSlot(this)}</Radio>;
   },
 });

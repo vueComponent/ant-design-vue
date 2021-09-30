@@ -32,7 +32,7 @@ export default defineComponent({
   setup() {
     const value = ref<number>(1);
     const radioStyle = reactive({
-      display: 'block',
+      display: 'flex',
       height: '30px',
       lineHeight: '30px',
     });

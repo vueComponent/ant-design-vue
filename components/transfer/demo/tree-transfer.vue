@@ -1,6 +1,6 @@
 <docs>
 ---
-order: 5
+order: 7
 title:
   zh-CN: 树穿梭框
   en-US: Tree Transfer
@@ -19,12 +19,11 @@ Customize render list with Tree component.
 <template>
   <div>
     <a-transfer
+      v-model:target-keys="targetKeys"
       class="tree-transfer"
       :data-source="dataSource"
-      :target-keys="targetKeys"
       :render="item => item.title"
       :show-select-all="false"
-      @change="onChange"
     >
       <template #children="{ direction, selectedKeys, onItemSelect }">
         <a-tree
@@ -103,9 +102,6 @@ export default defineComponent({
       return handleTreeData(tData, targetKeys.value);
     });
 
-    const onChange = (keys: string[]) => {
-      targetKeys.value = keys;
-    };
     const onChecked = (
       _: Record<string, string[]>,
       e: AntTreeNodeCheckedEvent,
@@ -119,7 +115,6 @@ export default defineComponent({
       targetKeys,
       dataSource,
       treeData,
-      onChange,
       onChecked,
     };
   },

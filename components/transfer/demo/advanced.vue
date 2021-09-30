@@ -1,6 +1,6 @@
 <docs>
 ---
-order: 2
+order: 3
 title:
   zh-CN: 高级用法
   en-US: Advanced
@@ -18,6 +18,7 @@ You can customize the labels of the transfer buttons, the width and height of th
 
 <template>
   <a-transfer
+    v-model:target-keys="targetKeys"
     :data-source="mockData"
     show-search
     :list-style="{
@@ -25,12 +26,26 @@ You can customize the labels of the transfer buttons, the width and height of th
       height: '300px',
     }"
     :operations="['to right', 'to left']"
-    :target-keys="targetKeys"
     :render="item => `${item.title}-${item.description}`"
     @change="handleChange"
   >
-    <template #footer>
-      <a-button size="small" style="float: right; margin: 5px" @click="getMock">reload</a-button>
+    <template #footer="{ direction }">
+      <a-button
+        v-if="direction === 'left'"
+        size="small"
+        style="float: left; margin: 5px"
+        @click="getMock"
+      >
+        left reload
+      </a-button>
+      <a-button
+        v-else-if="direction === 'right'"
+        size="small"
+        style="float: right; margin: 5px"
+        @click="getMock"
+      >
+        right reload
+      </a-button>
     </template>
     <template #notFoundContent>
       <span>没数据</span>
@@ -72,7 +87,6 @@ export default defineComponent({
       targetKeys.value = keys;
     };
     const handleChange = (keys: string[], direction: string, moveKeys: string[]) => {
-      targetKeys.value = keys;
       console.log(keys, direction, moveKeys);
     };
     return {

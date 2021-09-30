@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import { watchEffect, defineComponent, ref, watch } from 'vue';
+import { watchEffect, defineComponent, ref, watch, toRaw } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { getPropsSlot } from '../_util/props-util';
 import classNames from '../_util/classNames';
@@ -90,11 +90,6 @@ export const transferProps = {
   children: { type: Function as PropType<(props: TransferListBodyProps) => VueNode> },
   oneWay: { type: Boolean, default: undefined },
   pagination: { type: [Object, Boolean] as PropType<PaginationType>, default: undefined },
-  onChange: PropTypes.func,
-  onSelectChange: PropTypes.func,
-  onSearch: PropTypes.func,
-  onScroll: PropTypes.func,
-  ['onUpdate:targetKeys']: PropTypes.func,
 };
 
 export type TransferProps = Partial<ExtractPropTypes<typeof transferProps>>;
@@ -113,7 +108,7 @@ const Transfer = defineComponent({
     'rightSelectAllLabel',
     'footer',
   ],
-  emits: ['update:targetKeys', 'change', 'search', 'scroll', 'selectChange'],
+  emits: ['update:targetKeys', 'update:selectedKeys', 'change', 'search', 'scroll', 'selectChange'],
   setup(props, { emit, attrs, slots, expose }) {
     const { configProvider, prefixCls, direction } = useConfigInject('transfer', props);
     const sourceSelectedKeys = ref([]);
@@ -193,14 +188,14 @@ const Transfer = defineComponent({
         if (!props.selectedKeys) {
           sourceSelectedKeys.value = holder;
         }
-
-        emit('selectChange', holder, targetSelectedKeys.value);
+        emit('update:selectedKeys', [...holder, ...targetSelectedKeys.value]);
+        emit('selectChange', holder, toRaw(targetSelectedKeys.value));
       } else {
         if (!props.selectedKeys) {
           targetSelectedKeys.value = holder;
         }
-
-        emit('selectChange', sourceSelectedKeys.value, holder);
+        emit('update:selectedKeys', [...holder, ...sourceSelectedKeys.value]);
+        emit('selectChange', toRaw(sourceSelectedKeys.value), holder);
       }
     };
 

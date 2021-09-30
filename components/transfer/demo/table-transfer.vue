@@ -1,6 +1,6 @@
 <docs>
 ---
-order: 4
+order: 6
 title:
   zh-CN: 表格穿梭框
   en-US: Table Transfer
@@ -19,8 +19,8 @@ Customize render list with Table component.
 <template>
   <div>
     <a-transfer
+      v-model:target-keys="targetKeys"
       :data-source="mockData"
-      :target-keys="targetKeys"
       :disabled="disabled"
       :show-search="showSearch"
       :filter-option="(inputValue, item) => item.title.indexOf(inputValue) !== -1"
@@ -76,7 +76,6 @@ Customize render list with Table component.
   </div>
 </template>
 <script lang="ts">
-import { difference } from 'lodash-es';
 import { defineComponent, ref } from 'vue';
 interface MockData {
   key: string;
@@ -86,7 +85,7 @@ interface MockData {
 }
 type tableColumn = Record<string, string>;
 const mockData: MockData[] = [];
-for (let i = 0; i < 20; i++) {
+for (let i = 0; i < 10; i++) {
   mockData.push({
     key: i.toString(),
     title: `content${i + 1}`,
@@ -123,7 +122,7 @@ export default defineComponent({
     const rightColumns = ref<tableColumn[]>(rightTableColumns);
 
     const onChange = (nextTargetKeys: string[]) => {
-      targetKeys.value = nextTargetKeys;
+      console.log('nextTargetKeys', nextTargetKeys);
     };
 
     const getRowSelection = ({
@@ -140,10 +139,7 @@ export default defineComponent({
           const treeSelectedKeys = selectedRows
             .filter(item => !item.disabled)
             .map(({ key }) => key);
-          const diffKeys = selected
-            ? difference(treeSelectedKeys, selectedKeys)
-            : difference(selectedKeys, treeSelectedKeys);
-          onItemSelectAll(diffKeys, selected);
+          onItemSelectAll(treeSelectedKeys, selected);
         },
         onSelect({ key }: Record<string, string>, selected: boolean) {
           onItemSelect(key, selected);

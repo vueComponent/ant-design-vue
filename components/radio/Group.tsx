@@ -58,7 +58,7 @@ export default defineComponent({
     onBeforeMount(() => {
       provide('radioGroupContext', {
         onRadioChange,
-        stateValue: stateValue,
+        stateValue,
         props,
       });
     });

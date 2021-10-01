@@ -63,20 +63,22 @@ export default function usePagination(
   }));
 
   // ============ Basic Pagination Config ============
-  const mergedPagination = computed(() =>
-    extendsObject<Partial<TablePaginationConfig>>(innerPagination.value, pagination.value, {
-      total: paginationTotal.value > 0 ? paginationTotal.value : totalRef.value,
-    }),
-  );
-
-  // Reset `current` if data length or pageSize changed
-  const maxPage = Math.ceil(
-    (paginationTotal.value || totalRef.value) / mergedPagination.value.pageSize!,
-  );
-  if (mergedPagination.value.current! > maxPage) {
-    // Prevent a maximum page count of 0
-    mergedPagination.value.current = maxPage || 1;
-  }
+  const mergedPagination = computed(() => {
+    const mP = extendsObject<Partial<TablePaginationConfig>>(
+      innerPagination.value,
+      pagination.value,
+      {
+        total: paginationTotal.value > 0 ? paginationTotal.value : totalRef.value,
+      },
+    );
+    // Reset `current` if data length or pageSize changed
+    const maxPage = Math.ceil((paginationTotal.value || totalRef.value) / mP.pageSize!);
+    if (mP.current! > maxPage) {
+      // Prevent a maximum page count of 0
+      mP.current = maxPage || 1;
+    }
+    return mP;
+  });
 
   const refreshPagination = (current = 1, pageSize?: number) => {
     if (pagination.value === false) return;

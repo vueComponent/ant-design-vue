@@ -45,7 +45,7 @@ export default defineComponent({
   setup(props, { slots, emit }) {
     const formItemContext = useInjectFormItemContext();
     const { prefixCls } = useConfigInject('radio', props);
-    const stateValue = ref(props.value);
+    const stateValue = ref(props.value === undefined ? props.defaultValue : props.value);
     const updatingValue = ref<boolean>(false);
     watch(
       () => props.value,
@@ -54,14 +54,6 @@ export default defineComponent({
         updatingValue.value = false;
       },
     );
-
-    onBeforeMount(() => {
-      provide('radioGroupContext', {
-        onRadioChange,
-        stateValue,
-        props,
-      });
-    });
 
     const onRadioChange = (ev: RadioChangeEvent) => {
       const lastValue = stateValue.value;
@@ -81,6 +73,12 @@ export default defineComponent({
         updatingValue.value = false;
       });
     };
+    
+    provide('radioGroupContext', {
+      onRadioChange,
+      stateValue,
+      props,
+    });
 
     return () => {
       const { options, optionType, buttonStyle, id = formItemContext.id.value } = props;
@@ -91,7 +89,7 @@ export default defineComponent({
         [`${groupPrefixCls}-${props.size}`]: props.size,
       });
 
-      let children = slots.default?.();
+      let children = null;
       if (options && options.length > 0) {
         const optionsPrefixCls =
           optionType === 'button' ? `${prefixCls.value}-button` : prefixCls.value;
@@ -122,6 +120,8 @@ export default defineComponent({
             </Radio>
           );
         });
+      } else {
+        children = slots.default?.();
       }
       return (
         <div class={classString} id={id}>

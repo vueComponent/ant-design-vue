@@ -1,133 +1,133 @@
-import { provide, inject, nextTick, defineComponent } from 'vue';
+import { provide, nextTick, defineComponent, ref, watch, onBeforeMount } from 'vue';
+import type { PropType, ExtractPropTypes } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
-import { getOptionProps, filterEmpty, hasProp, getSlot } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
+import useConfigInject from '../_util/hooks/useConfigInject';
 import { tuple } from '../_util/type';
 import type { RadioChangeEvent } from './interface';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 
+const RadioGroupSizeTypes = tuple('large', 'default', 'small');
+
+export type RadioGroupSize = typeof RadioGroupSizeTypes[number];
+
+const RadioGroupOptionTypes = tuple('default', 'button');
+
+export type RadioGroupOption = typeof RadioGroupOptionTypes[number];
+
+export type RadioGroupChildOption = {
+  label: string;
+  value: string;
+  disabled?: boolean;
+};
+
+const radioGroupProps = {
+  prefixCls: PropTypes.string,
+  value: PropTypes.any,
+  size: PropTypes.oneOf(RadioGroupSizeTypes).def('default'),
+  options: {
+    type: Array as PropType<Array<String | RadioGroupChildOption>>,
+  },
+  disabled: PropTypes.looseBool,
+  name: PropTypes.string,
+  buttonStyle: PropTypes.string.def('outline'),
+  id: PropTypes.string,
+  optionType: PropTypes.oneOf(RadioGroupOptionTypes).def('default'),
+};
+
+export type RadioGroupProps = Partial<ExtractPropTypes<typeof radioGroupProps>>;
+
 export default defineComponent({
   name: 'ARadioGroup',
-  props: {
-    prefixCls: PropTypes.string,
-    defaultValue: PropTypes.any,
-    value: PropTypes.any,
-    size: PropTypes.oneOf(tuple('large', 'default', 'small')).def('default'),
-    options: PropTypes.array,
-    disabled: PropTypes.looseBool,
-    name: PropTypes.string,
-    buttonStyle: PropTypes.string.def('outline'),
-    onChange: PropTypes.func,
-    id: PropTypes.string,
-  },
+  props: radioGroupProps,
   emits: ['update:value', 'change'],
-  setup() {
+  setup(props, { slots, emit }) {
     const formItemContext = useInjectFormItemContext();
-    return {
-      formItemContext,
-      updatingValue: false,
-      configProvider: inject('configProvider', defaultConfigProvider),
-      radioGroupContext: null,
-    };
-  },
-  data() {
-    const { value, defaultValue } = this;
-    return {
-      stateValue: value === undefined ? defaultValue : value,
-    };
-  },
-  watch: {
-    value(val) {
-      this.updatingValue = false;
-      this.stateValue = val;
-    },
-  },
-  // computed: {
-  //   radioOptions() {
-  //     const { disabled } = this;
-  //     return this.options.map(option => {
-  //       return typeof option === 'string'
-  //         ? { label: option, value: option }
-  //         : { ...option, disabled: option.disabled === undefined ? disabled : option.disabled };
-  //     });
-  //   },
-  // },
-  created() {
-    this.radioGroupContext = provide('radioGroupContext', this);
-  },
-  methods: {
-    onRadioChange(ev: RadioChangeEvent) {
-      const lastValue = this.stateValue;
+    const { prefixCls } = useConfigInject('radio', props);
+    const stateValue = ref(props.value === undefined ? props.defaultValue : props.value);
+    const updatingValue = ref<boolean>(false);
+    watch(
+      () => props.value,
+      val => {
+        stateValue.value = val;
+        updatingValue.value = false;
+      },
+    );
+
+    const onRadioChange = (ev: RadioChangeEvent) => {
+      const lastValue = stateValue.value;
       const { value } = ev.target;
-      if (!hasProp(this, 'value')) {
-        this.stateValue = value;
+
+      if (!('value' in props)) {
+        stateValue.value = value;
       }
       // nextTick for https://github.com/vueComponent/ant-design-vue/issues/1280
-      if (!this.updatingValue && value !== lastValue) {
-        this.updatingValue = true;
-        this.$emit('update:value', value);
-        this.$emit('change', ev);
-        this.formItemContext.onFieldChange();
+      if (!updatingValue.value && value !== lastValue) {
+        updatingValue.value = true;
+        emit('update:value', value);
+        emit('change', ev);
+        formItemContext.onFieldChange();
       }
       nextTick(() => {
-        this.updatingValue = false;
+        updatingValue.value = false;
       });
-    },
-  },
-  render() {
-    const props = getOptionProps(this);
-    const {
-      prefixCls: customizePrefixCls,
-      options,
-      buttonStyle,
-      id = this.formItemContext.id.value,
-    } = props;
-    const { getPrefixCls } = this.configProvider;
-    const prefixCls = getPrefixCls('radio', customizePrefixCls);
-
-    const groupPrefixCls = `${prefixCls}-group`;
-    const classString = classNames(groupPrefixCls, `${groupPrefixCls}-${buttonStyle}`, {
-      [`${groupPrefixCls}-${props.size}`]: props.size,
+    };
+    
+    provide('radioGroupContext', {
+      onRadioChange,
+      stateValue,
+      props,
     });
 
-    let children = filterEmpty(getSlot(this));
+    return () => {
+      const { options, optionType, buttonStyle, id = formItemContext.id.value } = props;
 
-    // 如果存在 options, 优先使用
-    if (options && options.length > 0) {
-      children = options.map(option => {
-        if (typeof option === 'string') {
+      const groupPrefixCls = `${prefixCls.value}-group`;
+
+      const classString = classNames(groupPrefixCls, `${groupPrefixCls}-${buttonStyle}`, {
+        [`${groupPrefixCls}-${props.size}`]: props.size,
+      });
+
+      let children = null;
+      if (options && options.length > 0) {
+        const optionsPrefixCls =
+          optionType === 'button' ? `${prefixCls.value}-button` : prefixCls.value;
+        children = options.map(option => {
+          if (typeof option === 'string') {
+            return (
+              <Radio
+                key={option}
+                prefixCls={optionsPrefixCls}
+                disabled={props.disabled}
+                value={option}
+                checked={stateValue.value === option}
+              >
+                {option}
+              </Radio>
+            );
+          }
+          const { value, disabled, label } = option as RadioGroupChildOption;
           return (
             <Radio
-              key={option}
-              prefixCls={prefixCls}
-              disabled={props.disabled}
-              value={option}
-              checked={this.stateValue === option}
+              key={`radio-group-value-options-${value}`}
+              prefixCls={optionsPrefixCls}
+              disabled={disabled || props.disabled}
+              value={value}
+              checked={stateValue.value === value}
             >
-              {option}
+              {label}
             </Radio>
           );
-        }
-        return (
-          <Radio
-            key={`radio-group-value-options-${option.value}`}
-            prefixCls={prefixCls}
-            disabled={option.disabled || props.disabled}
-            value={option.value}
-            checked={this.stateValue === option.value}
-          >
-            {option.label}
-          </Radio>
-        );
-      });
-    }
-
-    return (
-      <div class={classString} id={id}>
-        {children}
-      </div>
-    );
+        });
+      } else {
+        children = slots.default?.();
+      }
+      return (
+        <div class={classString} id={id}>
+          {children}
+        </div>
+      );
+    };
   },
 });

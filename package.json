@@ -117,7 +117,7 @@
     "acorn": "^8.0.0",
     "ali-oss": "^6.16.0",
     "autoprefixer": "^10.2.0",
-    "axios": "^0.21.0",
+    "axios": "^0.22.0",
     "babel-eslint": "^10.0.1",
     "babel-jest": "^26.1.0",
     "babel-loader": "^8.0.0",

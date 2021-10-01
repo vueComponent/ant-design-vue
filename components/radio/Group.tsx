@@ -1,4 +1,4 @@
-import { provide, nextTick, defineComponent, ref, watch, onBeforeMount } from 'vue';
+import { provide, nextTick, defineComponent, ref, watch } from 'vue';
 import type { PropType, ExtractPropTypes } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
@@ -44,8 +44,8 @@ export default defineComponent({
   emits: ['update:value', 'change'],
   setup(props, { slots, emit }) {
     const formItemContext = useInjectFormItemContext();
-    const { prefixCls } = useConfigInject('radio', props);
-    const stateValue = ref(props.value === undefined ? props.defaultValue : props.value);
+    const { prefixCls, direction, size } = useConfigInject('radio', props);
+    const stateValue = ref(props.value);
     const updatingValue = ref<boolean>(false);
     watch(
       () => props.value,
@@ -73,7 +73,7 @@ export default defineComponent({
         updatingValue.value = false;
       });
     };
-    
+
     provide('radioGroupContext', {
       onRadioChange,
       stateValue,
@@ -86,7 +86,8 @@ export default defineComponent({
       const groupPrefixCls = `${prefixCls.value}-group`;
 
       const classString = classNames(groupPrefixCls, `${groupPrefixCls}-${buttonStyle}`, {
-        [`${groupPrefixCls}-${props.size}`]: props.size,
+        [`${groupPrefixCls}-${size.value}`]: size.value,
+        [`${groupPrefixCls}-rtl`]: direction.value === 'rtl',
       });
 
       let children = null;

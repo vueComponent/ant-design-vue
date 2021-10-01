@@ -31,8 +31,8 @@ export default defineComponent({
   setup(props, { emit, expose, slots }) {
     const formItemContext = useInjectFormItemContext();
     const vcCheckbox = ref<HTMLElement>();
-    const radioGroupContext = inject<RadioGroupContext>('radioGroupContext');
-    const { prefixCls } = useConfigInject('radio', props);
+    const radioGroupContext = inject<RadioGroupContext>('radioGroupContext', undefined);
+    const { prefixCls, direction } = useConfigInject('radio', props);
 
     const focus = () => {
       vcCheckbox.value.focus();
@@ -81,6 +81,7 @@ export default defineComponent({
         [`${prefixCls.value}-wrapper`]: true,
         [`${prefixCls.value}-wrapper-checked`]: rProps.checked,
         [`${prefixCls.value}-wrapper-disabled`]: rProps.disabled,
+        [`${prefixCls.value}-wrapper-rtl`]: direction.value === 'rtl',
       });
 
       return (

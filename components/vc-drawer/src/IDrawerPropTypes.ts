@@ -1,34 +1,38 @@
 import PropTypes from '../../_util/vue-types';
-import type { PropType, ExtractPropTypes } from 'vue';
+import type { PropType } from 'vue';
 
 export type IPlacement = 'left' | 'top' | 'right' | 'bottom';
-
-const Props = {
+type ILevelMove = number | [number, number];
+const props = () => ({
   prefixCls: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  style: PropTypes.object,
+  style: PropTypes.style,
+  class: PropTypes.string,
   placement: {
     type: String as PropType<IPlacement>,
   },
-  class: PropTypes.string,
-  level: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  levelMove: PropTypes.oneOfType([PropTypes.number, PropTypes.func, PropTypes.array]),
+  wrapperClassName: PropTypes.string,
+  level: { type: [String, Array] as PropType<string | string[]> },
+  levelMove: {
+    type: [Number, Function, Array] as PropType<
+      ILevelMove | ((e: { target: HTMLElement; open: boolean }) => ILevelMove)
+    >,
+  },
   duration: PropTypes.string,
   ease: PropTypes.string,
   showMask: PropTypes.looseBool,
   maskClosable: PropTypes.looseBool,
-  maskStyle: PropTypes.object,
+  maskStyle: PropTypes.style,
   afterVisibleChange: PropTypes.func,
   keyboard: PropTypes.looseBool,
-  contentWrapperStyle: PropTypes.object,
-  autoFocus: PropTypes.looseBool,
+  contentWrapperStyle: PropTypes.style,
+  autofocus: PropTypes.looseBool,
   open: PropTypes.looseBool,
-};
+});
 
-const DrawerProps = {
-  ...Props,
-  wrapperClassName: PropTypes.string,
+const drawerProps = () => ({
+  ...props(),
   forceRender: PropTypes.looseBool,
   getContainer: PropTypes.oneOfType([
     PropTypes.string,
@@ -36,18 +40,14 @@ const DrawerProps = {
     PropTypes.object,
     PropTypes.looseBool,
   ]),
-};
+});
 
-type IDrawerProps = Partial<ExtractPropTypes<typeof DrawerProps>>;
-
-const DrawerChildProps = {
-  ...Props,
+const drawerChildProps = () => ({
+  ...props(),
   getContainer: PropTypes.func,
   getOpenCount: PropTypes.func,
   scrollLocker: PropTypes.any,
   switchScrollingEffect: PropTypes.func,
-};
+});
 
-type IDrawerChildProps = Partial<ExtractPropTypes<typeof DrawerChildProps>>;
-
-export { DrawerProps, DrawerChildProps, IDrawerProps, IDrawerChildProps };
+export { drawerProps, drawerChildProps };

@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { nextTick, onBeforeUnmount, ref, watch } from 'vue';
+import { nextTick, onBeforeUnmount, ref, watch, onMounted } from 'vue';
 import raf from '../../_util/raf';
 
 /**
@@ -62,29 +62,32 @@ export default (
     },
     { immediate: true, flush: 'post' },
   );
-  // Go next status
-  watch(
-    status,
-    () => {
-      switch (status.value) {
-        case 'measure':
-          doMeasure();
-          break;
-        default:
-      }
+  onMounted(() => {
+    // Go next status
+    watch(
+      status,
+      () => {
+        switch (status.value) {
+          case 'measure':
+            doMeasure();
+            break;
+          default:
+        }
 
-      if (status.value) {
-        nextTick(() => {
-          const index = StatusQueue.indexOf(status.value);
-          const nextStatus = StatusQueue[index + 1];
-          if (nextStatus && index !== -1) {
-            setStatus(nextStatus);
-          }
-        });
-      }
-    },
-    { immediate: true, flush: 'post' },
-  );
+        if (status.value) {
+          nextTick(() => {
+            const index = StatusQueue.indexOf(status.value);
+            const nextStatus = StatusQueue[index + 1];
+            if (nextStatus && index !== -1) {
+              setStatus(nextStatus);
+            }
+          });
+        }
+      },
+      { immediate: true, flush: 'post' },
+    );
+  });
+
   onBeforeUnmount(() => {
     destroyRef.value = true;
     cancelRaf();

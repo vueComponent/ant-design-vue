@@ -1,12 +1,19 @@
-import { defineComponent, reactive, onMounted, onUpdated, onUnmounted, nextTick, watch } from 'vue';
+import {
+  defineComponent,
+  reactive,
+  onMounted,
+  computed,
+  onUnmounted,
+  nextTick,
+  watch,
+  ref,
+} from 'vue';
 import classnames from '../../_util/classNames';
 import getScrollBarSize from '../../_util/getScrollBarSize';
 import KeyCode from '../../_util/KeyCode';
 import omit from '../../_util/omit';
 import supportsPassive from '../../_util/supportsPassive';
-import { DrawerChildProps } from './IDrawerPropTypes';
-import type { IDrawerChildProps } from './IDrawerPropTypes';
-import setStyle from '../../_util/setStyle';
+import { drawerChildProps } from './IDrawerPropTypes';
 
 import {
   addEventListener,
@@ -25,127 +32,92 @@ export interface scrollLockOptions {
   container: HTMLElement;
 }
 
-const createScrollLocker = (options: scrollLockOptions) => {
-  const scrollBarSize = 0;
-  const cacheStyleMap = new Map();
-  return {
-    getContainer: () => {
-      return options?.container;
-    },
-    getCacheStyleMap: () => {
-      return cacheStyleMap;
-    },
-    lock: () => {
-      cacheStyleMap.set(
-        options.container,
-        setStyle(
-          {
-            width: scrollBarSize !== 0 ? `calc(100% - ${scrollBarSize}px)` : undefined,
-            overflow: 'hidden',
-            overflowX: 'hidden',
-            overflowY: 'hidden',
-          },
-          {
-            element: options.container || document.body,
-          },
-        ),
-      );
-    },
-    unLock: () => {
-      setStyle(cacheStyleMap.get(options.container) || {}, { element: options.container });
-      cacheStyleMap.delete(options.container);
-    },
-  };
-};
-
 const DrawerChild = defineComponent({
   inheritAttrs: false,
-  props: DrawerChildProps,
+  props: drawerChildProps(),
   emits: ['close', 'handleClick', 'change'],
   setup(props, { emit, slots }) {
     const state = reactive({
-      levelDom: [],
-      dom: null,
-      contentWrapper: null,
-      contentDom: null,
-      maskDom: null,
-      handlerDom: null,
-      drawerId: null,
-      timeout: null,
-      passive: null,
       startPos: {
         x: null,
         y: null,
       },
-      scrollLocker: null,
     });
+    let timeout;
+    const contentWrapper = ref<HTMLElement>();
+    const dom = ref<HTMLElement>();
+    const maskDom = ref<HTMLElement>();
+    const handlerDom = ref<HTMLElement>();
+    const contentDom = ref<HTMLElement>();
+    let levelDom = [];
+    const drawerId = `drawer_id_${Number(
+      (Date.now() + Math.random())
+        .toString()
+        .replace('.', Math.round(Math.random() * 9).toString()),
+    ).toString(16)}`;
+
+    const passive = !windowIsUndefined && supportsPassive ? { passive: false } : false;
 
     onMounted(() => {
       nextTick(() => {
-        if (!windowIsUndefined) {
-          state.passive = supportsPassive ? { passive: false } : false;
-        }
-        const { open, getContainer, showMask, autoFocus } = props;
+        const { open, getContainer, showMask, autofocus } = props;
         const container = getContainer?.();
-        state.drawerId = `drawer_id_${Number(
-          (Date.now() + Math.random())
-            .toString()
-            .replace('.', Math.round(Math.random() * 9).toString()),
-        ).toString(16)}`;
         getLevelDom(props);
-
-        if (container) {
-          state.scrollLocker = createScrollLocker({
-            container: container.parentNode,
-          });
-        }
-
         if (open) {
           if (container && container.parentNode === document.body) {
-            currentDrawer[state.drawerId] = open;
+            currentDrawer[drawerId] = open;
           }
           // 默认打开状态时推出 level;
           openLevelTransition();
           nextTick(() => {
-            if (autoFocus) {
+            if (autofocus) {
               domFocus();
             }
           });
           if (showMask) {
-            state.scrollLocker?.lock();
+            props.scrollLocker?.lock();
           }
         }
       });
     });
-
-    onUpdated(() => {
-      const { open, getContainer, showMask, autoFocus } = props;
-
-      const container = getContainer?.();
-      if (container && container.parentNode === document.body) {
-        currentDrawer[state.drawerId] = !!open;
-      }
-      openLevelTransition();
-      if (open) {
-        if (autoFocus) {
-          domFocus();
+    watch(
+      () => props.level,
+      () => {
+        getLevelDom(props);
+      },
+      { flush: 'post' },
+    );
+    watch(
+      () => props.open,
+      () => {
+        const { open, getContainer, scrollLocker, showMask, autofocus } = props;
+        const container = getContainer?.();
+        if (container && container.parentNode === document.body) {
+          currentDrawer[drawerId] = !!open;
         }
-        if (showMask) {
-          state.scrollLocker?.lock();
+        openLevelTransition();
+        if (open) {
+          if (autofocus) {
+            domFocus();
+          }
+          if (showMask) {
+            scrollLocker?.lock();
+          }
+        } else {
+          scrollLocker?.unLock();
         }
-      } else {
-        state.scrollLocker?.unLock();
-      }
-    });
+      },
+      { flush: 'post' },
+    );
 
     onUnmounted(() => {
       const { open } = props;
-      delete currentDrawer[state.drawerId];
+      delete currentDrawer[drawerId];
       if (open) {
         setLevelTransform(false);
         document.body.style.touchAction = '';
       }
-      state.scrollLocker?.unLock();
+      props.scrollLocker?.unLock();
     });
 
     watch(
@@ -153,19 +125,13 @@ const DrawerChild = defineComponent({
       val => {
         if (val) {
           // test 的 bug, 有动画过场，删除 dom
-          state.contentDom = null;
-          if (state.contentWrapper) {
-            state.contentWrapper.style.transition = `none`;
-            setTimeout(() => {
-              state.contentWrapper.style.transition = ``;
-            });
-          }
+          contentDom.value = null;
         }
       },
     );
 
     const domFocus = () => {
-      state.dom?.focus?.();
+      dom.value?.focus?.();
     };
 
     const removeStartHandler = (e: TouchEvent) => {
@@ -186,9 +152,9 @@ const DrawerChild = defineComponent({
       const differX = e.changedTouches[0].clientX - state.startPos.x;
       const differY = e.changedTouches[0].clientY - state.startPos.y;
       if (
-        (currentTarget === state.maskDom ||
-          currentTarget === state.handlerDom ||
-          (currentTarget === state.contentDom &&
+        (currentTarget === maskDom.value ||
+          currentTarget === handlerDom.value ||
+          (currentTarget === contentDom.value &&
             getTouchParentScroll(currentTarget, e.target as HTMLElement, differX, differY))) &&
         e.cancelable
       ) {
@@ -201,6 +167,9 @@ const DrawerChild = defineComponent({
       removeEventListener(dom, transitionEndFun, transitionEnd);
       dom.style.transition = '';
     };
+    const onClose = (e: Event) => {
+      emit('close', e);
+    };
 
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.keyCode === KeyCode.ESC) {
@@ -209,19 +178,15 @@ const DrawerChild = defineComponent({
       }
     };
 
-    const onClose = (e: Event) => {
-      emit('close', e);
-    };
-
     const onWrapperTransitionEnd = (e: TransitionEvent) => {
       const { open, afterVisibleChange } = props;
-      if (e.target === state.contentWrapper && e.propertyName.match(/transform$/)) {
-        state.dom.style.transition = '';
+      if (e.target === contentWrapper.value && e.propertyName.match(/transform$/)) {
+        dom.value.style.transition = '';
         if (!open && getCurrentDrawerSome()) {
           document.body.style.overflowX = '';
-          if (state.maskDom) {
-            state.maskDom.style.left = '';
-            state.maskDom.style.width = '';
+          if (maskDom.value) {
+            maskDom.value.style.left = '';
+            maskDom.value.style.width = '';
           }
         }
         if (afterVisibleChange) {
@@ -230,11 +195,21 @@ const DrawerChild = defineComponent({
       }
     };
 
+    const horizontalBoolAndPlacementName = computed(() => {
+      const { placement } = props;
+      const isHorizontal = placement === 'left' || placement === 'right';
+      const placementName = `translate${isHorizontal ? 'X' : 'Y'}`;
+      return {
+        isHorizontal,
+        placementName,
+      };
+    });
+
     const openLevelTransition = () => {
       const { open, width, height } = props;
-      const { isHorizontal, placementName } = getHorizontalBoolAndPlacementName();
-      const contentValue = state.contentDom
-        ? state.contentDom.getBoundingClientRect()[isHorizontal ? 'width' : 'height']
+      const { isHorizontal, placementName } = horizontalBoolAndPlacementName.value;
+      const contentValue = contentDom.value
+        ? contentDom.value.getBoundingClientRect()[isHorizontal ? 'width' : 'height']
         : 0;
       const value = (isHorizontal ? width : height) || contentValue;
       setLevelAndScrolling(open, placementName, value);
@@ -248,7 +223,7 @@ const DrawerChild = defineComponent({
     ) => {
       const { placement, levelMove, duration, ease, showMask } = props;
       // router 切换时可能会导至页面失去滚动条，所以需要时时获取。
-      state.levelDom.forEach(dom => {
+      levelDom.forEach(dom => {
         dom.style.transition = `transform ${duration} ${ease}`;
         addEventListener(dom, transitionEndFun, transitionEnd);
         let levelValue = open ? value : 0;
@@ -290,7 +265,7 @@ const DrawerChild = defineComponent({
       // 处理 body 滚动
       if (container && container.parentNode === document.body && showMask) {
         const eventArray = ['touchstart'];
-        const domArray = [document.body, state.maskDom, state.handlerDom, state.contentDom];
+        const domArray = [document.body, maskDom.value, handlerDom.value, contentDom.value];
         if (open && document.body.style.overflow !== 'hidden') {
           if (right) {
             addScrollingEffect(right);
@@ -305,7 +280,7 @@ const DrawerChild = defineComponent({
               item,
               eventArray[i] || 'touchmove',
               i ? removeMoveHandler : removeStartHandler,
-              state.passive,
+              passive,
             );
           });
         } else if (getCurrentDrawerSome()) {
@@ -322,7 +297,7 @@ const DrawerChild = defineComponent({
               item,
               eventArray[i] || 'touchmove',
               i ? removeMoveHandler : removeStartHandler,
-              state.passive,
+              passive,
             );
           });
         }
@@ -333,25 +308,25 @@ const DrawerChild = defineComponent({
       const { placement, duration, ease } = props;
       const widthTransition = `width ${duration} ${ease}`;
       const transformTransition = `transform ${duration} ${ease}`;
-      state.dom.style.transition = 'none';
+      dom.value.style.transition = 'none';
       switch (placement) {
         case 'right':
-          state.dom.style.transform = `translateX(-${right}px)`;
+          dom.value.style.transform = `translateX(-${right}px)`;
           break;
         case 'top':
         case 'bottom':
-          state.dom.style.width = `calc(100% - ${right}px)`;
-          state.dom.style.transform = 'translateZ(0)';
+          dom.value.style.width = `calc(100% - ${right}px)`;
+          dom.value.style.transform = 'translateZ(0)';
           break;
         default:
           break;
       }
-      clearTimeout(state.timeout);
-      state.timeout = setTimeout(() => {
-        if (state.dom) {
-          state.dom.style.transition = `${transformTransition},${widthTransition}`;
-          state.dom.style.width = '';
-          state.dom.style.transform = '';
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        if (dom.value) {
+          dom.value.style.transition = `${transformTransition},${widthTransition}`;
+          dom.value.style.width = '';
+          dom.value.style.transform = '';
         }
       });
     };
@@ -359,59 +334,59 @@ const DrawerChild = defineComponent({
     const remScrollingEffect = (right: number) => {
       const { placement, duration, ease } = props;
 
-      state.dom.style.transition = 'none';
+      dom.value.style.transition = 'none';
       let heightTransition: string;
       let widthTransition = `width ${duration} ${ease}`;
       const transformTransition = `transform ${duration} ${ease}`;
       switch (placement) {
         case 'left': {
-          state.dom.style.width = '100%';
+          dom.value.style.width = '100%';
           widthTransition = `width 0s ${ease} ${duration}`;
           break;
         }
         case 'right': {
-          state.dom.style.transform = `translateX(${right}px)`;
-          state.dom.style.width = '100%';
+          dom.value.style.transform = `translateX(${right}px)`;
+          dom.value.style.width = '100%';
           widthTransition = `width 0s ${ease} ${duration}`;
-          if (state.maskDom) {
-            state.maskDom.style.left = `-${right}px`;
-            state.maskDom.style.width = `calc(100% + ${right}px)`;
+          if (maskDom.value) {
+            maskDom.value.style.left = `-${right}px`;
+            maskDom.value.style.width = `calc(100% + ${right}px)`;
           }
           break;
         }
         case 'top':
         case 'bottom': {
-          state.dom.style.width = `calc(100% + ${right}px)`;
-          state.dom.style.height = '100%';
-          state.dom.style.transform = 'translateZ(0)';
+          dom.value.style.width = `calc(100% + ${right}px)`;
+          dom.value.style.height = '100%';
+          dom.value.style.transform = 'translateZ(0)';
           heightTransition = `height 0s ${ease} ${duration}`;
           break;
         }
         default:
           break;
       }
-      clearTimeout(state.timeout);
-      state.timeout = setTimeout(() => {
-        if (state.dom) {
-          state.dom.style.transition = `${transformTransition},${
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        if (dom.value) {
+          dom.value.style.transition = `${transformTransition},${
             heightTransition ? `${heightTransition},` : ''
           }${widthTransition}`;
-          state.dom.style.transform = '';
-          state.dom.style.width = '';
-          state.dom.style.height = '';
+          dom.value.style.transform = '';
+          dom.value.style.width = '';
+          dom.value.style.height = '';
         }
       });
     };
 
     const getCurrentDrawerSome = () => !Object.keys(currentDrawer).some(key => currentDrawer[key]);
 
-    const getLevelDom = ({ level, getContainer }: IDrawerChildProps) => {
+    const getLevelDom = ({ level, getContainer }) => {
       if (windowIsUndefined) {
         return;
       }
       const container = getContainer?.();
       const parent = container ? (container.parentNode as HTMLElement) : null;
-      state.levelDom = [];
+      levelDom = [];
       if (level === 'all') {
         const children: HTMLElement[] = parent ? Array.prototype.slice.call(parent.children) : [];
         children.forEach((child: HTMLElement) => {
@@ -421,28 +396,28 @@ const DrawerChild = defineComponent({
             child.nodeName !== 'LINK' &&
             child !== container
           ) {
-            state.levelDom.push(child);
+            levelDom.push(child);
           }
         });
       } else if (level) {
         dataToArray(level).forEach(key => {
           document.querySelectorAll(key).forEach(item => {
-            state.levelDom.push(item);
+            levelDom.push(item);
           });
         });
       }
     };
 
-    const getHorizontalBoolAndPlacementName = () => {
-      const { placement } = props;
-      const isHorizontal = placement === 'left' || placement === 'right';
-      const placementName = `translate${isHorizontal ? 'X' : 'Y'}`;
-      return {
-        isHorizontal,
-        placementName,
-      };
+    const onHandleClick = e => {
+      emit('handleClick', e);
     };
 
+    const canOpen = ref(false);
+    watch(dom, () => {
+      nextTick(() => {
+        canOpen.value = true;
+      });
+    });
     return () => {
       const {
         width,
@@ -465,17 +440,19 @@ const DrawerChild = defineComponent({
         scrollLocker,
         contentWrapperStyle,
         style,
+        class: className,
         ...otherProps
       } = props;
       // 首次渲染都将是关闭状态。
-      const open = state.dom ? $open : false;
+      const open = $open && canOpen.value;
       const wrapperClassName = classnames(prefixCls, {
         [`${prefixCls}-${placement}`]: true,
         [`${prefixCls}-open`]: open,
+        [className]: !!className,
         'no-mask': !showMask,
       });
 
-      const { placementName } = getHorizontalBoolAndPlacementName();
+      const { placementName } = horizontalBoolAndPlacementName.value;
       // 百分比与像素动画不同步，第一次打用后全用像素动画。
       // const defaultValue = !this.contentDom || !level ? '100%' : `${value}px`;
       const placementPos = placement === 'left' || placement === 'top' ? '-100%' : '100%';
@@ -483,13 +460,11 @@ const DrawerChild = defineComponent({
 
       return (
         <div
-          {...omit(otherProps, ['switchScrollingEffect', 'autoFocus'])}
+          {...omit(otherProps, ['switchScrollingEffect', 'autofocus'])}
           tabindex={-1}
           class={wrapperClassName}
           style={style}
-          ref={(c: HTMLElement | null) => {
-            state.dom = c as HTMLElement;
-          }}
+          ref={dom}
           onKeydown={open && keyboard ? onKeyDown : undefined}
           onTransitionend={onWrapperTransitionEnd}
         >
@@ -498,9 +473,7 @@ const DrawerChild = defineComponent({
               class={`${prefixCls}-mask`}
               onClick={maskClosable ? onClose : undefined}
               style={maskStyle}
-              ref={c => {
-                state.maskDom = c as HTMLElement;
-              }}
+              ref={maskDom}
             />
           )}
           <div
@@ -512,18 +485,16 @@ const DrawerChild = defineComponent({
               height: isNumeric(height) ? `${height}px` : height,
               ...contentWrapperStyle,
             }}
-            ref={c => {
-              state.contentWrapper = c as HTMLElement;
-            }}
+            ref={contentWrapper}
           >
-            <div
-              class={`${prefixCls}-content`}
-              ref={c => {
-                state.contentDom = c as HTMLElement;
-              }}
-            >
-              {slots.children?.()}
+            <div class={`${prefixCls}-content`} ref={contentDom}>
+              {slots.default?.()}
             </div>
+            {slots.handler ? (
+              <div onClick={onHandleClick} ref={handlerDom}>
+                {slots.handler?.()}
+              </div>
+            ) : null}
           </div>
         </div>
       );

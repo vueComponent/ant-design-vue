@@ -1,12 +1,12 @@
 import Child from './DrawerChild';
 import { initDefaultProps } from '../../_util/props-util';
-import { Teleport, defineComponent, ref, watch } from 'vue';
-import { DrawerProps } from './IDrawerPropTypes';
-import type { IDrawerProps } from './IDrawerPropTypes';
+import { defineComponent, ref } from 'vue';
+import { drawerProps } from './IDrawerPropTypes';
+import PortalWrapper from '../../_util/PortalWrapper';
 
 const DrawerWrapper = defineComponent({
   inheritAttrs: false,
-  props: initDefaultProps(DrawerProps, {
+  props: initDefaultProps(drawerProps(), {
     prefixCls: 'drawer',
     placement: 'left',
     getContainer: 'body',
@@ -17,54 +17,15 @@ const DrawerWrapper = defineComponent({
     showMask: true,
     maskClosable: true,
     maskStyle: {},
-    wrapperClassName: null,
+    wrapperClassName: '',
     keyboard: true,
     forceRender: false,
-    autoFocus: true,
+    autofocus: true,
   }),
   emits: ['handleClick', 'close'],
-
-  setup(props, { emit, expose, slots }) {
+  slots: ['handler'],
+  setup(props, { emit, slots }) {
     const dom = ref<HTMLElement>(null);
-
-    const container = ref(props.getContainer || null);
-
-    const open = ref<boolean>(props.open);
-
-    const $forceRender = ref<boolean>(props.forceRender);
-
-    watch(
-      () => props.open,
-      val => {
-        if (!dom.value) {
-          $forceRender.value = true;
-          open.value = false;
-          setTimeout(() => {
-            open.value = true;
-          });
-        } else {
-          open.value = val;
-        }
-      },
-    );
-
-    const getDerivedStateFromProps = (
-      props: IDrawerProps,
-      { prevProps }: { prevProps: IDrawerProps },
-    ) => {
-      const newState: {
-        open?: boolean;
-        prevProps: IDrawerProps;
-      } = {
-        prevProps: props,
-      };
-      if (typeof prevProps !== 'undefined' && props.open !== prevProps.open) {
-        newState.open = props.open;
-      }
-      return newState;
-    };
-
-    expose({ getDerivedStateFromProps });
 
     const onHandleClick = (e: MouseEvent | KeyboardEvent) => {
       emit('handleClick', e);
@@ -81,11 +42,11 @@ const DrawerWrapper = defineComponent({
       let portal = null;
       if (!getContainer) {
         return (
-          <div class={wrapperClassName || null} ref={dom}>
+          <div class={wrapperClassName} ref={dom}>
             <Child
-              v-slots={{ children: slots.default }}
+              v-slots={slots}
               {...otherProps}
-              open={open.value}
+              open={props.open}
               getContainer={() => dom.value}
               onClose={onClose}
               onHandleClick={onHandleClick}
@@ -93,21 +54,33 @@ const DrawerWrapper = defineComponent({
           </div>
         );
       }
-      if ($forceRender.value || open.value || dom.value) {
+
+      // 如果有 handler 为内置强制渲染；
+      const $forceRender = !!slots.handler || forceRender;
+      if ($forceRender || props.open || dom.value) {
         portal = (
-          <Teleport to={container.value}>
-            <div class={wrapperClassName || null} ref={dom}>
-              <Child
-                v-slots={{ children: slots.default }}
-                {...props}
-                open={open.value}
-                getContainer={() => dom.value}
-                afterVisibleChange={afterVisibleChange}
-                onClose={onClose}
-                onHandleClick={onHandleClick}
-              />
-            </div>
-          </Teleport>
+          <PortalWrapper
+            visible={props.open}
+            forceRender={$forceRender}
+            getContainer={getContainer}
+            wrapperClassName={wrapperClassName}
+            v-slots={{
+              default: ({ visible, afterClose, ...rest }) => (
+                <Child
+                  ref={dom}
+                  v-slots={slots}
+                  {...otherProps}
+                  {...rest}
+                  open={visible !== undefined ? visible : props.open}
+                  afterVisibleChange={
+                    afterClose !== undefined ? afterClose : props.afterVisibleChange
+                  }
+                  onClose={onClose}
+                  onHandleClick={onHandleClick}
+                />
+              ),
+            }}
+          ></PortalWrapper>
         );
       }
       return portal;

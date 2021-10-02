@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import Modal from '..';
 import mountTest from '../../../tests/shared/mountTest';
 import { asyncExpect } from '../../../tests/utils';
-
+jest.mock('../../_util/Portal');
 const ModalTester = {
   props: ['footer', 'visible'],
   methods: {

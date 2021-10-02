@@ -16,7 +16,7 @@ const DrawerCom = {
       type: Boolean,
       default: false,
     },
-    wrapClassName: {
+    class: {
       type: String,
       default: '',
     },
@@ -106,6 +106,7 @@ describe('Drawer', () => {
         destroyOnClose: true,
         closable: false,
         getContainer: false,
+        visible: true,
       },
       slots: {
         default: () => 'Here is content of Drawer',
@@ -121,7 +122,8 @@ describe('Drawer', () => {
   it('class is test_drawer', async () => {
     const props = {
       props: {
-        wrapClassName: 'test_drawer',
+        class: 'test_drawer',
+        visible: true,
       },
       sync: false,
     };

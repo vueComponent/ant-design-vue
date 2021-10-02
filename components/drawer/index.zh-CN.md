@@ -21,7 +21,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/7z8NJQhFb/Drawer.svg
 | --- | --- | --- | --- | --- |
 | autoFocus | 抽屉展开后是否将焦点切换至其 Dom 节点 | boolean | true | 3.0.0 |
 | bodyStyle | 可用于设置 Drawer 内容部分的样式 | CSSProperties | - |  |
-| className(原 wrapClassName) | 对话框外层容器的类名 | string | - | 3.0.0 |
+| class | 对话框外层容器的类名 | string | - |  |
 | closable | 是否显示右上角的关闭按钮 | boolean | true |  |
 | closeIcon | 自定义关闭图标 | VNode \| slot | <CloseOutlined /> | 3.0.0 |
 | contentWrapperStyle | 可用于设置 Drawer 包裹内容部分的样式 | CSSProperties | 3.0.0 |
@@ -41,7 +41,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/7z8NJQhFb/Drawer.svg
 | placement | 抽屉的方向 | 'top' \| 'right' \| 'bottom' \| 'left' | 'right' |  |
 | push | 用于设置多层 Drawer 的推动行为 | boolean \| {distance: string \| number} | { distance: 180} | 3.0.0 |
 | size | 预设抽屉宽度（或高度），default `378px` 和 large `736px` | `default` \| `large` | `default` | 3.0.0 |
-| style(原 wrapStyle) | 可用于设置 Drawer 最外层容器的样式，和 `drawerStyle` 的区别是作用节点包括 `mask` | CSSProperties | - | 3.0.0 |
+| style | 可用于设置 Drawer 最外层容器的样式，和 `drawerStyle` 的区别是作用节点包括 `mask` | CSSProperties | - |  |
 | title | 标题 | string \| slot | - |  |
 | visible(v-model) | Drawer 是否可见 | boolean | - |  |
 | width | 宽度 | string \| number | 378 |  |

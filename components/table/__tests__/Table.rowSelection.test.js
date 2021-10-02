@@ -1,12 +1,13 @@
 import { mount } from '@vue/test-utils';
 import { asyncExpect, sleep } from '../../../tests/utils';
 import Table from '..';
-
+jest.mock('../../_util/Portal');
 describe('Table.rowSelection', () => {
   const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
 
   afterEach(() => {
     errorSpy.mockReset();
+    document.body.innerHTML = '';
   });
 
   afterAll(() => {
@@ -582,8 +583,9 @@ describe('Table.rowSelection', () => {
     });
 
     // Check Lucy
-    clickFilter([0, 1]);
-
+    clickFilter([0]);
+    await sleep();
+    clickFilter([1]);
     await asyncExpect(() => {
       expect(wrapper.findAll('tbody tr').length).toBe(1);
     });

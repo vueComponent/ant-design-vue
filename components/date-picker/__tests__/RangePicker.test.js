@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import DatePicker from '../';
 import { openPicker, selectCell, closePicker } from './utils';
 import focusTest from '../../../tests/shared/focusTest';
-
+jest.mock('../../_util/Portal');
 const { RangePicker } = DatePicker;
 
 describe('RangePicker', () => {

@@ -4,8 +4,8 @@ exports[`Drawer render correctly 1`] = `
 <div><button class="ant-btn" type="button" ant-click-animating-without-extra-node="false">
     <!----><span>open</span>
   </button>
-  <div>
-    <div class="ant-drawer ant-drawer-right" tabindex="-1">
+  <div class="">
+    <div tabindex="-1" class="ant-drawer ant-drawer-right">
       <div class="ant-drawer-mask"></div>
       <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 378px;">
         <div class="ant-drawer-content">
@@ -20,6 +20,7 @@ exports[`Drawer render correctly 1`] = `
             <!---->
           </div>
         </div>
+        <!---->
       </div>
     </div>
   </div>

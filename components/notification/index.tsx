@@ -172,7 +172,8 @@ function notice(args: NotificationArgsProps) {
   const duration = args.duration === undefined ? defaultDuration : args.duration;
   getNotificationInstance(args, notification => {
     notification.notice({
-      content: ({ prefixCls }) => {
+      content: ({ prefixCls: outerPrefixCls }) => {
+        const prefixCls = `${outerPrefixCls}-notice`;
         let iconNode = null;
         if (icon) {
           iconNode = () => <span class={`${prefixCls}-icon`}>{renderHelper(icon)}</span>;

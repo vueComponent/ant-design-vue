@@ -37,15 +37,16 @@ export default defineComponent({
         message: 'Notification Title',
         description:
           'A function will be be called after the notification is closed (automatically after the "duration" time of manually).',
-        btn: h(
-          Button,
-          {
-            type: 'primary',
-            size: 'small',
-            onClick: () => notification.close(key),
-          },
-          'Confirm',
-        ),
+        btn: () =>
+          h(
+            Button,
+            {
+              type: 'primary',
+              size: 'small',
+              onClick: () => notification.close(key),
+            },
+            { default: () => 'Confirm' },
+          ),
         key,
         onClose: close,
       });

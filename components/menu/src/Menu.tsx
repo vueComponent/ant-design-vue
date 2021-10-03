@@ -26,6 +26,7 @@ import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 import { cloneElement } from '../../_util/vnode';
 
 export const menuProps = {
+  id: String,
   prefixCls: String,
   disabled: Boolean,
   inlineCollapsed: Boolean,
@@ -420,6 +421,7 @@ export default defineComponent({
           itemComponent={MenuItem}
           class={className.value}
           role="menu"
+          id={props.id}
           data={wrappedChildList}
           renderRawItem={node => node}
           renderRawRest={omitItems => {

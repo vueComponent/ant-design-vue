@@ -43,6 +43,7 @@ const Overflow = defineComponent({
   name: 'Overflow',
   inheritAttrs: false,
   props: {
+    id: String,
     prefixCls: String,
     data: Array,
     itemKey: [String, Number, Function] as PropType<Key | ((item: any) => Key)>,
@@ -245,6 +246,7 @@ const Overflow = defineComponent({
         prefixCls = 'rc-overflow',
         suffix,
         component: Component = 'div' as any,
+        id,
       } = props;
       const { class: className, style, ...restAttrs } = attrs;
       let suffixStyle: CSSProperties = {};
@@ -341,6 +343,7 @@ const Overflow = defineComponent({
 
       const overflowNode = () => (
         <Component
+          id={id}
           class={classNames(!invalidate.value && prefixCls, className)}
           style={style}
           {...restAttrs}

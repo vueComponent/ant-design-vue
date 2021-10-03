@@ -190,7 +190,8 @@ export { default as Tree, TreeNode, DirectoryTree } from './tree';
 export type { TreeSelectProps } from './tree-select';
 export { default as TreeSelect, TreeSelectNode } from './tree-select';
 
-export { default as Tabs, TabPane, TabContent } from './tabs';
+export type { TabsProps, TabPaneProps } from './tabs';
+export { default as Tabs, TabPane } from './tabs';
 
 export type { TagProps } from './tag';
 export { default as Tag, CheckableTag } from './tag';

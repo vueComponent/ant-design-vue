@@ -14,6 +14,7 @@ import devWarning from '../../vc-util/devWarning';
 
 let indexGuid = 0;
 const menuItemProps = {
+  id: String,
   role: String,
   disabled: Boolean,
   danger: Boolean,
@@ -210,6 +211,7 @@ export default defineComponent({
           <Overflow.Item
             component="li"
             {...attrs}
+            id={props.id}
             style={{ ...((attrs.style as any) || {}), ...directionStyle.value }}
             class={[
               classNames.value,

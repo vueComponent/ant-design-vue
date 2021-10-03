@@ -20,10 +20,11 @@ Basic drawer.
   <a-button type="primary" @click="showDrawer">Open</a-button>
   <a-drawer
     v-model:visible="visible"
+    class="custom-class"
+    style="color: red"
     title="Basic Drawer"
     placement="right"
-    :closable="false"
-    :after-visible-change="afterVisibleChange"
+    @after-visible-change="afterVisibleChange"
   >
     <p>Some contents...</p>
     <p>Some contents...</p>

@@ -38,14 +38,14 @@ const MultiDrawer = {
       width: 520,
       visible: this.visible,
       getContainer: false,
-      wrapClassName: 'test_drawer',
+      class: 'test_drawer',
       placement: this.placement,
       onClose: this.onClose,
     };
     const childrenDrawerProps = {
       title: 'Two-level Drawer',
       width: 320,
-      wrapClassName: 'Two-level',
+      class: 'Two-level',
       visible: this.childrenDrawer,
       getContainer: false,
       placement: this.placement,
@@ -112,7 +112,7 @@ describe('Drawer', () => {
       wrapper.find('#open_two_drawer').trigger('click');
     }, 0);
     await asyncExpect(() => {
-      const translateX = wrapper.find('.ant-drawer.test_drawer').element.style.transform;
+      const translateX = wrapper.find('.test_drawer').element.style.transform;
       expect(translateX).toEqual('translateX(-180px)');
       expect(wrapper.find('#two_drawer_text').exists()).toBe(true);
     }, 1000);
@@ -133,7 +133,7 @@ describe('Drawer', () => {
       wrapper.find('#open_two_drawer').trigger('click');
     }, 0);
     await asyncExpect(() => {
-      const translateX = wrapper.find('.ant-drawer.test_drawer').element.style.transform;
+      const translateX = wrapper.find('.test_drawer').element.style.transform;
       expect(translateX).toEqual('translateX(180px)');
       expect(wrapper.find('#two_drawer_text').exists()).toBe(true);
     }, 1000);
@@ -153,7 +153,7 @@ describe('Drawer', () => {
       wrapper.find('#open_two_drawer').trigger('click');
     }, 0);
     await asyncExpect(() => {
-      const translateY = wrapper.find('.ant-drawer.test_drawer').element.style.transform;
+      const translateY = wrapper.find('.test_drawer').element.style.transform;
       expect(translateY).toEqual('translateY(180px)');
       expect(wrapper.find('#two_drawer_text').exists()).toBe(true);
     }, 1000);

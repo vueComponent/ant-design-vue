@@ -1,6 +1,6 @@
 <docs>
 ---
-order: 3
+order: 4
 title:
   zh-CN: 抽屉表单
   en-US: Submit form in drawer
@@ -26,6 +26,7 @@ Use form in drawer with submit button.
     :width="720"
     :visible="visible"
     :body-style="{ paddingBottom: '80px' }"
+    :footer-style="{ textAlign: 'right' }"
     @close="onClose"
   >
     <a-form :model="form" :rules="rules" layout="vertical">
@@ -96,22 +97,10 @@ Use form in drawer with submit button.
         </a-col>
       </a-row>
     </a-form>
-    <div
-      :style="{
-        position: 'absolute',
-        right: 0,
-        bottom: 0,
-        width: '100%',
-        borderTop: '1px solid #e9e9e9',
-        padding: '10px 16px',
-        background: '#fff',
-        textAlign: 'right',
-        zIndex: 1,
-      }"
-    >
+    <template #footer>
       <a-button style="margin-right: 8px" @click="onClose">Cancel</a-button>
       <a-button type="primary" @click="onClose">Submit</a-button>
-    </div>
+    </template>
   </a-drawer>
 </template>
 <script lang="ts">

@@ -7,6 +7,13 @@ exports[`renders ./components/drawer/demo/basic.vue correctly 1`] = `
 <!---->
 `;
 
+exports[`renders ./components/drawer/demo/extra.vue correctly 1`] = `
+<div class="ant-radio-group ant-radio-group-outline ant-radio-group-default" style="margin-right: 8px;"><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="top"><span class="ant-radio-inner"></span></span><span>top</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="right"><span class="ant-radio-inner"></span></span><span>right</span></label><label class="ant-radio-wrapper"><span class="ant-radio"><input type="radio" class="ant-radio-input" value="bottom"><span class="ant-radio-inner"></span></span><span>bottom</span></label><label class="ant-radio-wrapper ant-radio-wrapper-checked"><span class="ant-radio ant-radio-checked"><input type="radio" class="ant-radio-input" value="left"><span class="ant-radio-inner"></span></span><span>left</span></label></div><button class="ant-btn ant-btn-primary" type="button">
+  <!----><span>Open</span>
+</button>
+<!---->
+`;
+
 exports[`renders ./components/drawer/demo/form-in-drawer.vue correctly 1`] = `
 <button class="ant-btn ant-btn-primary" type="button">
   <!----><span role="img" aria-label="plus" class="anticon anticon-plus"><svg focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg></span><span>New account</span>
@@ -33,18 +40,22 @@ exports[`renders ./components/drawer/demo/render-in-current.vue correctly 1`] = 
       <!----><span>Open</span>
     </button></div>
   <div class="">
-    <div class="ant-drawer ant-drawer-right" style="position: absolute;" tabindex="-1">
+    <div tabindex="-1" class="ant-drawer ant-drawer-right" style="position: absolute;">
       <div class="ant-drawer-mask"></div>
-      <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 256px;">
+      <div class="ant-drawer-content-wrapper" style="transform: translateX(100%); width: 378px;">
         <div class="ant-drawer-content">
           <div class="ant-drawer-wrapper-body">
             <div class="ant-drawer-header">
-              <div class="ant-drawer-title">Basic Drawer</div>
+              <div class="ant-drawer-header-title">
+                <!---->
+                <div class="ant-drawer-title">Basic Drawer</div>
+              </div>
               <!---->
             </div>
             <div class="ant-drawer-body">
               <p>Some contents...</p>
             </div>
+            <!---->
           </div>
         </div>
         <!---->
@@ -52,6 +63,15 @@ exports[`renders ./components/drawer/demo/render-in-current.vue correctly 1`] = 
     </div>
   </div>
 </div>
+`;
+
+exports[`renders ./components/drawer/demo/size.vue correctly 1`] = `
+<button style="margin-right: 8px;" class="ant-btn ant-btn-primary" type="button">
+  <!----><span>Open Default Size (378px)</span>
+</button><button class="ant-btn ant-btn-primary" type="button">
+  <!----><span>Open Large Size (736px)</span>
+</button>
+<!---->
 `;
 
 exports[`renders ./components/drawer/demo/user-profile.vue correctly 1`] = `

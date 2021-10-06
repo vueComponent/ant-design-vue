@@ -1,6 +1,6 @@
 import type { Tab, EditableConfig } from '../interface';
 import type { PropType } from 'vue';
-import { onBeforeUnmount, defineComponent, computed, ref } from 'vue';
+import { defineComponent, computed, ref } from 'vue';
 import type { FocusEventHandler } from '../../../_util/EventInterface';
 import KeyCode from '../../../_util/KeyCode';
 import classNames from '../../../_util/classNames';
@@ -37,7 +37,7 @@ export default defineComponent({
     },
     renderWrapper: { type: Function as PropType<(node: any) => any> },
     removeAriaLabel: { type: String },
-    onRemove: { type: Function as PropType<() => void> },
+    // onRemove: { type: Function as PropType<() => void> },
     onFocus: { type: Function as PropType<FocusEventHandler> },
   },
   emits: ['click', 'resize', 'remove', 'focus'],
@@ -52,9 +52,9 @@ export default defineComponent({
     expose({
       domRef,
     });
-    onBeforeUnmount(() => {
-      props.onRemove();
-    });
+    // onBeforeUnmount(() => {
+    //   props.onRemove();
+    // });
     function onRemoveTab(event: MouseEvent | KeyboardEvent) {
       event.preventDefault();
       event.stopPropagation();

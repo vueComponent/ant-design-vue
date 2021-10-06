@@ -256,7 +256,6 @@ const InternalTabs = defineComponent({
         onTabClick: onInternalTabClick,
         onTabScroll,
         style: tabBarStyle,
-        panes: flattenChildren(slots.default?.()),
       };
 
       if (renderTabBar) {

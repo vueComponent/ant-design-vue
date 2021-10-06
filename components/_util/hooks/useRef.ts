@@ -1,11 +1,12 @@
-import type { Ref } from 'vue';
+import type { Ref, ComponentPublicInstance } from 'vue';
 import { onBeforeUpdate, ref } from 'vue';
 
-export type UseRef = [(el: any, key: string | number) => void, Ref<any>];
-export type Refs = Record<string | number, any>;
+type RefType = HTMLElement | ComponentPublicInstance;
+export type Refs = Record<string | number, RefType>;
+export type UseRef = [(el: RefType, key: string | number) => void, Ref<Refs>];
 export const useRef = (): UseRef => {
   const refs = ref<Refs>({});
-  const setRef = (el: any, key: string | number) => {
+  const setRef = (el: RefType, key: string | number) => {
     refs.value[key] = el;
   };
   onBeforeUpdate(() => {

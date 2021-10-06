@@ -15,7 +15,6 @@ import useOffsets from '../hooks/useOffsets';
 import OperationNode from './OperationNode';
 import { useInjectTabs } from '../TabContext';
 import useTouchMove from '../hooks/useTouchMove';
-import useRefs from '../hooks/useRefs';
 import AddButton from './AddButton';
 import type { Key } from '../../../_util/type';
 import type { ExtractPropTypes, PropType, CSSProperties } from 'vue';
@@ -27,6 +26,7 @@ import wrapperRaf from '../../../_util/raf';
 import classNames from '../../../_util/classNames';
 import ResizeObserver from '../../../vc-resize-observer';
 import { toPx } from '../../../_util/util';
+import useRef from '../../../_util/hooks/useRef';
 const DEFAULT_SIZE = { width: 0, height: 0, left: 0, top: 0, right: 0 };
 const tabNavListProps = () => {
   return {
@@ -34,7 +34,6 @@ const tabNavListProps = () => {
     tabPosition: { type: String as PropType<TabPosition> },
     activeKey: { type: [String, Number] },
     rtl: { type: Boolean },
-    panes: PropTypes.any,
     animated: { type: Object as PropType<AnimatedConfig>, default: undefined as AnimatedConfig },
     extra: PropTypes.any,
     editable: { type: Object as PropType<EditableConfig> },
@@ -63,7 +62,7 @@ export default defineComponent({
   name: 'TabNavList',
   inheritAttrs: false,
   props: tabNavListProps(),
-  slots: ['panes', 'moreIcon', 'extra'],
+  slots: ['moreIcon', 'extra'],
   emits: ['tabClick', 'tabScroll'],
   setup(props, { attrs, slots }) {
     const { tabs, prefixCls } = useInjectTabs();
@@ -71,8 +70,7 @@ export default defineComponent({
     const tabListRef = ref<HTMLDivElement>();
     const operationsRef = ref<{ $el: HTMLDivElement }>();
     const innerAddButtonRef = ref<HTMLButtonElement>();
-    const [getBtnRef, removeBtnRef] = useRefs();
-
+    const [setRef, btnRefs] = useRef();
     const tabPositionTopOrBottom = computed(
       () => props.tabPosition === 'top' || props.tabPosition === 'bottom',
     );
@@ -315,8 +313,8 @@ export default defineComponent({
       setTabSizes(() => {
         const newSizes: TabSizeMap = new Map();
         tabs.value.forEach(({ key }) => {
-          const btnRef = getBtnRef(key).value;
-          const btnNode = (btnRef as any).$el || btnRef;
+          const btnRef = btnRefs.value[key];
+          const btnNode = (btnRef as any)?.$el || btnRef;
           if (btnNode) {
             newSizes.set(key, {
               width: btnNode.offsetWidth,
@@ -459,12 +457,9 @@ export default defineComponent({
             editable={editable}
             active={key === activeKey}
             removeAriaLabel={locale?.removeAriaLabel}
-            ref={getBtnRef(key)}
+            ref={r => setRef(r, key)}
             onClick={e => {
               onTabClick(key, e);
-            }}
-            onRemove={() => {
-              removeBtnRef(key);
             }}
             onFocus={() => {
               scrollToTab(key);
@@ -537,7 +532,6 @@ export default defineComponent({
               </ResizeObserver>
             </div>
           </ResizeObserver>
-
           <OperationNode
             {...props}
             ref={operationsRef}

@@ -7,7 +7,7 @@ import { setDateTime as setTime } from '../../utils/timeUtil';
 import type { PanelRefProps, DisabledTime } from '../../interface';
 import KeyCode from '../../../_util/KeyCode';
 import classNames from '../../../_util/classNames';
-import { ref } from '@vue/reactivity';
+import { ref } from 'vue';
 import useMergeProps from '../../hooks/useMergeProps';
 
 export type DatetimePanelProps<DateType> = {

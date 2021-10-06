@@ -1,9 +1,7 @@
 import { scrollTo, waitElementReady } from '../../utils/uiUtil';
 import { useInjectPanel } from '../../PanelContext';
 import classNames from '../../../_util/classNames';
-import { ref } from '@vue/reactivity';
-import { onBeforeUnmount, watch } from '@vue/runtime-core';
-import { defineComponent, nextTick } from 'vue';
+import { ref, onBeforeUnmount, watch, defineComponent, nextTick } from 'vue';
 
 export type Unit = {
   label: any;

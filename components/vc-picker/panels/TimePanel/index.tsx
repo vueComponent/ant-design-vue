@@ -4,7 +4,7 @@ import TimeBody from './TimeBody';
 import type { PanelSharedProps, DisabledTimes } from '../../interface';
 import { createKeydownHandler } from '../../utils/uiUtil';
 import classNames from '../../../_util/classNames';
-import { ref } from '@vue/reactivity';
+import { ref } from 'vue';
 import useMergeProps from '../../hooks/useMergeProps';
 
 export type SharedTimeProps<DateType> = {

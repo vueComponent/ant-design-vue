@@ -18,20 +18,15 @@ Under different screen sizes, there should be different performance
 </docs>
 
 <template>
-  <div class="components-page-header-demo-responsive">
-    <a-page-header
-      style="border: 1px solid rgb(235, 237, 240)"
-      title="Title"
-      sub-title="This is a subtitle"
-      @back="() => $router.go(-1)"
-    >
+  <div class="components-page-header-demo-responsive" style="border: 1px solid rgb(235, 237, 240)">
+    <a-page-header title="Title" sub-title="This is a subtitle" @back="() => $router.go(-1)">
       <template #extra>
         <a-button key="3">Operation</a-button>
         <a-button key="2">Operation</a-button>
         <a-button key="1" type="primary">Primary</a-button>
       </template>
       <template #footer>
-        <a-tabs default-active-key="1">
+        <a-tabs>
           <a-tab-pane key="1" tab="Details" />
           <a-tab-pane key="2" tab="Rule" />
         </a-tabs>
@@ -73,6 +68,9 @@ Under different screen sizes, there should be different performance
   </div>
 </template>
 <style>
+.components-page-header-demo-responsive {
+  padding-bottom: 20px;
+}
 .components-page-header-demo-responsive tr:last-child td {
   padding-bottom: 0;
 }

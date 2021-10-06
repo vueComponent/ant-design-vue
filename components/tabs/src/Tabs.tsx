@@ -24,6 +24,7 @@ import type { SizeType } from '../../config-provider';
 import { useProvideTabs } from './TabContext';
 import type { Key } from '../../_util/type';
 import pick from 'lodash-es/pick';
+import PropTypes from '../../_util/vue-types';
 
 export type TabsType = 'line' | 'card' | 'editable-card';
 export type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
@@ -36,7 +37,7 @@ export const tabsProps = () => {
     prefixCls: { type: String },
     id: { type: String },
 
-    activeKey: { type: [String, Number], required: true },
+    activeKey: { type: [String, Number] },
     defaultActiveKey: { type: [String, Number] },
     direction: { type: String as PropType<'ltr' | 'rtl'> },
     animated: { type: [Boolean, Object] as PropType<boolean | AnimatedConfig> },
@@ -65,6 +66,7 @@ export const tabsProps = () => {
     locale: { type: Object as PropType<TabsLocale>, default: undefined as TabsLocale },
     onPrevClick: Function,
     onNextClick: Function,
+    tabBarExtraContent: PropTypes.any,
   };
 };
 
@@ -139,9 +141,14 @@ const InternalTabs = defineComponent({
       '`onPrevClick / @prevClick` and `onNextClick / @nextClick` has been removed. Please use `onTabScroll / @tabScroll` instead.',
     );
     devWarning(
+      !(props.tabBarExtraContent !== undefined),
+      'Tabs',
+      '`tabBarExtraContent` prop has been removed. Please use `rightExtra` slot instead.',
+    );
+    devWarning(
       !(slots.tabBarExtraContent !== undefined),
       'Tabs',
-      '`tabBarExtraContent` slot is deprecated. Please use `rightExtra` instead.',
+      '`tabBarExtraContent` slot is deprecated. Please use `rightExtra` slot instead.',
     );
     const { prefixCls, direction, size, rootPrefixCls } = useConfigInject('tabs', props);
     const rtl = computed(() => direction.value === 'rtl');

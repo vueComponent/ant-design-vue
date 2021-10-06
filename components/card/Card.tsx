@@ -7,6 +7,7 @@ import Col from '../col';
 import PropTypes from '../_util/vue-types';
 import { getComponent, getSlot, isEmptyElement } from '../_util/props-util';
 import BaseMixin from '../_util/BaseMixin';
+import type { SizeType } from '../config-provider';
 import { defaultConfigProvider } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
 
@@ -21,7 +22,7 @@ export type CardType = 'inner';
 
 const { TabPane } = Tabs;
 
-const cardProps = {
+const cardProps = () => ({
   prefixCls: PropTypes.string,
   title: PropTypes.VNodeChild,
   extra: PropTypes.VNodeChild,
@@ -43,14 +44,14 @@ const cardProps = {
   onTabChange: {
     type: Function as PropType<(key: string) => void>,
   },
-};
+});
 
-export type CardProps = Partial<ExtractPropTypes<typeof cardProps>>;
+export type CardProps = Partial<ExtractPropTypes<ReturnType<typeof cardProps>>>;
 
 const Card = defineComponent({
   name: 'ACard',
   mixins: [BaseMixin],
-  props: cardProps,
+  props: cardProps(),
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),
@@ -166,7 +167,7 @@ const Card = defineComponent({
 
     const hasActiveTabKey = activeTabKey !== undefined;
     const tabsProps = {
-      size: 'large',
+      size: 'large' as SizeType,
       [hasActiveTabKey ? 'activeKey' : 'defaultActiveKey']: hasActiveTabKey
         ? activeTabKey
         : defaultActiveTabKey,

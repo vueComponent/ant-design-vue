@@ -118,7 +118,6 @@ Array [
   "TreeSelectNode",
   "Tabs",
   "TabPane",
-  "TabContent",
   "Tag",
   "CheckableTag",
   "TimePicker",

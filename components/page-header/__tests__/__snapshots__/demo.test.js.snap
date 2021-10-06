@@ -1135,10 +1135,10 @@ exports[`renders ./components/page-header/demo/ghost.vue correctly 1`] = `
 exports[`renders ./components/page-header/demo/responsive.vue correctly 1`] = `
 <div
   class="components-page-header-demo-responsive"
+  style="border: 1px solid rgb(235, 237, 240);"
 >
   <div
     class="ant-page-header has-footer ant-page-header-ghost"
-    style="border: 1px solid rgb(235, 237, 240);"
   >
     <!---->
     <div
@@ -1464,174 +1464,132 @@ exports[`renders ./components/page-header/demo/responsive.vue correctly 1`] = `
     >
       
       <div
-        class="ant-tabs-line ant-tabs ant-tabs-top"
+        class="ant-tabs ant-tabs-top"
       >
-        
         <div
-          class="ant-tabs-bar ant-tabs-top-bar"
+          class="ant-tabs-nav"
           role="tablist"
-          tabindex="0"
         >
-          
+          <!---->
           <div
-            class="ant-tabs-nav-container"
+            class="ant-tabs-nav-wrap"
           >
-            <span
-              class="ant-tabs-tab-prev ant-tabs-tab-btn-disabled"
-              unselectable="unselectable"
-            >
-              <span
-                class="ant-tabs-tab-prev-icon"
-              >
-                <span
-                  aria-label="left"
-                  class="anticon anticon-left ant-tabs-tab-prev-icon-target"
-                  role="img"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class=""
-                    data-icon="left"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"
-                    />
-                  </svg>
-                </span>
-              </span>
-            </span>
-            <span
-              class="ant-tabs-tab-next ant-tabs-tab-btn-disabled"
-              unselectable="unselectable"
-            >
-              <span
-                class="ant-tabs-tab-next-icon"
-              >
-                <span
-                  aria-label="right"
-                  class="anticon anticon-right ant-tabs-tab-next-icon-target"
-                  role="img"
-                >
-                  <svg
-                    aria-hidden="true"
-                    class=""
-                    data-icon="right"
-                    fill="currentColor"
-                    focusable="false"
-                    height="1em"
-                    viewBox="64 64 896 896"
-                    width="1em"
-                  >
-                    <path
-                      d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"
-                    />
-                  </svg>
-                </span>
-              </span>
-            </span>
             <div
-              class="ant-tabs-nav-wrap"
+              class="ant-tabs-nav-list"
+              style="transform: translate(0px, 0px);"
             >
+              
               <div
-                class="ant-tabs-nav-scroll"
+                class="ant-tabs-tab ant-tabs-tab-active"
               >
                 <div
-                  class="ant-tabs-nav ant-tabs-nav-animated"
+                  aria-controls="rc-tabs-test-panel-1"
+                  aria-selected="true"
+                  class="ant-tabs-tab-btn"
+                  id="rc-tabs-test-tab-1"
+                  role="tab"
+                  tabindex="0"
                 >
-                  
-                  <div>
-                    
-                    <div
-                      aria-disabled="false"
-                      aria-selected="true"
-                      class="ant-tabs-tab-active ant-tabs-tab"
-                      role="tab"
-                    >
-                      Details
-                    </div>
-                    <div
-                      aria-disabled="false"
-                      aria-selected="false"
-                      class="ant-tabs-tab"
-                      role="tab"
-                    >
-                      Rule
-                    </div>
-                    
-                  </div>
-                  <div
-                    class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"
-                    style="display: block; transform: translate3d(0px,0,0); webkit-transform: translate3d(0px,0,0); width: 0px;"
-                  />
-                  
+                  Details
                 </div>
+                <!---->
               </div>
-            </div>
-          </div>
-          
-        </div>
-        <div
-          role="presentation"
-          style="width: 0px; height: 0px; overflow: hidden; position: absolute;"
-          tabindex="0"
-        >
-          
-          
-        </div>
-        <div
-          class="ant-tabs-top-content ant-tabs-content ant-tabs-content-animated"
-          style="margin-left: 0%;"
-        >
-          
-          <div
-            aria-hidden="false"
-            class="ant-tabs-tabpane ant-tabs-tabpane-active"
-            role="tabpanel"
-          >
-            <div
-              role="presentation"
-              style="width: 0px; height: 0px; overflow: hidden; position: absolute;"
-              tabindex="0"
-            >
+              <div
+                class="ant-tabs-tab"
+              >
+                <div
+                  aria-controls="rc-tabs-test-panel-2"
+                  aria-selected="false"
+                  class="ant-tabs-tab-btn"
+                  id="rc-tabs-test-tab-2"
+                  role="tab"
+                  tabindex="0"
+                >
+                  Rule
+                </div>
+                <!---->
+              </div>
               
-              
-            </div>
-            
-            
-            <div
-              role="presentation"
-              style="width: 0px; height: 0px; overflow: hidden; position: absolute;"
-              tabindex="0"
-            >
-              
-              
+              <!---->
+              <div
+                class="ant-tabs-ink-bar ant-tabs-ink-bar-animated"
+              />
             </div>
           </div>
           <div
-            aria-hidden="true"
-            class="ant-tabs-tabpane ant-tabs-tabpane-inactive"
-            role="tabpanel"
+            class="ant-tabs-nav-operations ant-tabs-nav-operations-hidden"
           >
+            
             <!---->
-            <!---->
+            <button
+              aria-controls="rc-tabs-test-more-popup"
+              aria-expanded="false"
+              aria-haspopup="listbox"
+              aria-hidden="true"
+              class="ant-tabs-nav-more"
+              id="rc-tabs-test-more"
+              style="visibility: hidden; order: 1;"
+              tabindex="-1"
+              type="button"
+            >
+              <span
+                aria-label="ellipsis"
+                class="anticon anticon-ellipsis"
+                role="img"
+              >
+                <svg
+                  aria-hidden="true"
+                  class=""
+                  data-icon="ellipsis"
+                  fill="currentColor"
+                  focusable="false"
+                  height="1em"
+                  viewBox="64 64 896 896"
+                  width="1em"
+                >
+                  <path
+                    d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+                  />
+                </svg>
+              </span>
+            </button>
+            
             <!---->
           </div>
-          
+          <!---->
+          <!---->
         </div>
         <div
-          role="presentation"
-          style="width: 0px; height: 0px; overflow: hidden; position: absolute;"
-          tabindex="0"
+          class="ant-tabs-content-holder"
         >
-          
-          
+          <div
+            class="ant-tabs-content ant-tabs-content-top"
+          >
+            
+            <div
+              aria-hidden="false"
+              aria-labelledby="rc-tabs-test-tab-1"
+              class="ant-tabs-tabpane ant-tabs-tabpane-active"
+              id="rc-tabs-test-panel-1"
+              role="tabpanel"
+              tabindex="0"
+            >
+              <!---->
+            </div>
+            <div
+              aria-hidden="true"
+              aria-labelledby="rc-tabs-test-tab-2"
+              class="ant-tabs-tabpane"
+              id="rc-tabs-test-panel-2"
+              role="tabpanel"
+              style="display: none;"
+              tabindex="-1"
+            >
+              <!---->
+            </div>
+            
+          </div>
         </div>
-        
       </div>
       
     </div>

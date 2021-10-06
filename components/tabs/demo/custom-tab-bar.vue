@@ -16,7 +16,7 @@ Customized bar of tab.
 </docs>
 
 <template>
-  <div style="height: 2000px">
+  <div>
     <a-tabs v-model:activeKey="activeKey">
       <a-tab-pane key="1" tab="Tab 1" style="height: 200px">Content of Tab Pane 1</a-tab-pane>
       <a-tab-pane key="2" tab="Tab 2" force-render>Content of Tab Pane 2</a-tab-pane>

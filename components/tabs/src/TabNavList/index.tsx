@@ -96,7 +96,6 @@ export default defineComponent({
 
     const [tabSizes, setTabSizes] = useRafState<TabSizeMap>(new Map());
     const tabOffsets = useOffsets(tabs, tabSizes);
-
     // ========================== Util =========================
     const operationsHiddenClassName = computed(() => `${prefixCls.value}-nav-operations-hidden`);
 
@@ -234,14 +233,14 @@ export default defineComponent({
 
       if (['top', 'bottom'].includes(props.tabPosition)) {
         unit = 'width';
-        basicSize = wrapperContentWidth.value;
+        basicSize = wrapperWidth.value;
         tabContentSize = wrapperContentWidth.value;
         addSize = addWidth.value;
         position = props.rtl ? 'right' : 'left';
         transformSize = Math.abs(transformLeft.value);
       } else {
         unit = 'height';
-        basicSize = wrapperContentHeight.value;
+        basicSize = wrapperHeight.value;
         tabContentSize = wrapperContentHeight.value;
         addSize = addHeight.value;
         position = 'top';
@@ -255,7 +254,7 @@ export default defineComponent({
 
       const tabsVal = tabs.value;
       if (!tabsVal.length) {
-        [visibleStart.value, visibleEnd.value] = [0, 0];
+        return ([visibleStart.value, visibleEnd.value] = [0, 0]);
       }
 
       const len = tabsVal.length;
@@ -267,7 +266,6 @@ export default defineComponent({
           break;
         }
       }
-
       let startIndex = 0;
       for (let i = len - 1; i >= 0; i -= 1) {
         const offset = tabOffsets.value.get(tabsVal[i].key) || DEFAULT_SIZE;
@@ -277,7 +275,7 @@ export default defineComponent({
         }
       }
 
-      [visibleStart.value, visibleEnd.value] = [startIndex, endIndex];
+      return ([visibleStart.value, visibleEnd.value] = [startIndex, endIndex]);
     });
 
     const onListHolderResize = () => {
@@ -473,7 +471,6 @@ export default defineComponent({
           ></TabNode>
         );
       });
-
       return (
         <div
           ref={ref}

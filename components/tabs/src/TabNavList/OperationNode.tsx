@@ -9,6 +9,7 @@ import classNames from '../../../_util/classNames';
 import { defineComponent, watch, computed, onMounted } from 'vue';
 import PropTypes from '../../../_util/vue-types';
 import useState from '../../../_util/hooks/useState';
+import { EllipsisOutlined } from '@ant-design/icons-vue';
 
 export interface OperationNodeProps {
   prefixCls: string;
@@ -124,7 +125,7 @@ export default defineComponent({
         tabs,
         locale,
         mobile,
-        moreIcon = slots.moreIcon?.() || 'More',
+        moreIcon = slots.moreIcon?.() || <EllipsisOutlined />,
         moreTransitionName,
         editable,
         tabBarGutter,

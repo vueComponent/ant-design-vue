@@ -2,6 +2,7 @@
   <demo-sort :cols="1">
     <Basic />
     <Disabled />
+    <Centered />
     <Icon />
     <Slide />
     <Extra />
@@ -28,6 +29,7 @@ import Position from './position.vue';
 import Size from './size.vue';
 import Slide from './slide.vue';
 import CustomTabBar from './custom-tab-bar.vue';
+import Centered from './centered.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -40,6 +42,7 @@ export default defineComponent({
   CN,
   US,
   components: {
+    Centered,
     Basic,
     Card,
     CardTop,

@@ -17,7 +17,7 @@ In order to fit in more tabs, they can slide left and right (or up and down).
 </docs>
 
 <template>
-  <div style="width: 500px">
+  <div>
     <a-radio-group v-model:value="mode" :style="{ marginBottom: '8px' }">
       <a-radio-button value="top">Horizontal</a-radio-button>
       <a-radio-button value="left">Vertical</a-radio-button>
@@ -26,8 +26,7 @@ In order to fit in more tabs, they can slide left and right (or up and down).
       v-model:activeKey="activeKey"
       :tab-position="mode"
       :style="{ height: '200px' }"
-      @prevClick="callback"
-      @nextClick="callback"
+      @tabScroll="callback"
     >
       <a-tab-pane v-for="i in 30" :key="i" :tab="`Tab-${i}`">Content of tab {{ i }}</a-tab-pane>
     </a-tabs>

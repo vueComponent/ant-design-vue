@@ -1,4 +1,3 @@
-import supportsPassive from 'ant-design-vue/es/_util/supportsPassive';
 import type { Ref } from 'vue';
 import { ref, onBeforeUnmount, onMounted } from 'vue';
 import useState from '../../../_util/hooks/useState';
@@ -131,11 +130,7 @@ export default function useTouchMove(
 
     // No need to clean up since element removed
     domRef.value?.addEventListener('touchstart', onProxyTouchStart, { passive: false });
-    domRef.value?.addEventListener(
-      'wheel',
-      onProxyWheel,
-      supportsPassive ? { passive: true } : false,
-    );
+    domRef.value?.addEventListener('wheel', onProxyWheel, { passive: false });
   });
 
   onBeforeUnmount(() => {

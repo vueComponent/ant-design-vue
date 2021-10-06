@@ -32,7 +32,7 @@ Ant Design has 3 types of Tabs for different situations.
 
 ### Tabs Slots
 
-| 插槽名称     | 说明                           | 参数              |
+| Slot Name    | Description                    | Type              |
 | ------------ | ------------------------------ | ----------------- | --- |
 | renderTabBar | Replace the TabBar             | { DefaultTabBar } |     |
 | leftExtra    | Extra content in tab bar left  | -                 | -   |

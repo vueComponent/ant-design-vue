@@ -35,7 +35,6 @@ const tabNavListProps = () => {
     activeKey: { type: [String, Number] },
     rtl: { type: Boolean },
     animated: { type: Object as PropType<AnimatedConfig>, default: undefined as AnimatedConfig },
-    extra: PropTypes.any,
     editable: { type: Object as PropType<EditableConfig> },
     moreIcon: PropTypes.any,
     moreTransitionName: { type: String },
@@ -55,14 +54,14 @@ export type TabNavListProps = Partial<ExtractPropTypes<ReturnType<typeof tabNavL
 interface ExtraContentProps {
   position: TabBarExtraPosition;
   prefixCls: string;
-  extra?: TabBarExtraContent;
+  extra?: (info?: { position: 'left' | 'right' }) => TabBarExtraContent;
 }
 
 export default defineComponent({
   name: 'TabNavList',
   inheritAttrs: false,
   props: tabNavListProps(),
-  slots: ['moreIcon', 'extra'],
+  slots: ['moreIcon', 'leftExtra', 'rightExtra', 'tabBarExtraContent'],
   emits: ['tabClick', 'tabScroll'],
   setup(props, { attrs, slots }) {
     const { tabs, prefixCls } = useInjectTabs();
@@ -387,9 +386,7 @@ export default defineComponent({
 
     const ExtraContent = ({ position, prefixCls, extra }: ExtraContentProps) => {
       if (!extra) return null;
-
-      const content = slots.extra?.({ position });
-
+      const content = extra?.({ position });
       return content ? <div class={`${prefixCls}-extra-content`}>{content}</div> : null;
     };
 
@@ -404,7 +401,6 @@ export default defineComponent({
         animated,
         activeKey,
         rtl,
-        extra,
         editable,
         locale,
         tabPosition,
@@ -489,7 +485,7 @@ export default defineComponent({
             doLockAnimation();
           }}
         >
-          <ExtraContent position="left" extra={extra} prefixCls={pre} />
+          <ExtraContent position="left" prefixCls={pre} extra={slots.leftExtra} />
 
           <ResizeObserver onResize={onListHolderResize}>
             <div
@@ -540,7 +536,8 @@ export default defineComponent({
             class={!hasDropdown && operationsHiddenClassName.value}
           />
 
-          <ExtraContent position="right" extra={extra} prefixCls={pre} />
+          <ExtraContent position="right" prefixCls={pre} extra={slots.rightExtra} />
+          <ExtraContent position="right" prefixCls={pre} extra={slots.tabBarExtraContent} />
         </div>
       );
     };

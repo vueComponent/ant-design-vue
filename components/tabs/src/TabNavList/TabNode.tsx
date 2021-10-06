@@ -112,7 +112,7 @@ export default defineComponent({
             }}
             onFocus={onFocus}
           >
-            {tab}
+            {typeof tab === 'function' ? tab() : tab}
           </div>
 
           {/* Remove Button */}
@@ -127,7 +127,7 @@ export default defineComponent({
                 onRemoveTab(e);
               }}
             >
-              {closeIcon || editable.removeIcon || '×'}
+              {closeIcon?.() || editable.removeIcon?.() || '×'}
             </button>
           )}
         </div>

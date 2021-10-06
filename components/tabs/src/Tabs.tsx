@@ -23,6 +23,7 @@ import devWarning from '../../vc-util/devWarning';
 import type { SizeType } from '../../config-provider';
 import { useProvideTabs } from './TabContext';
 import type { Key } from '../../_util/type';
+import pick from 'lodash-es/pick';
 
 export type TabsType = 'line' | 'card' | 'editable-card';
 export type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
@@ -121,13 +122,26 @@ const InternalTabs = defineComponent({
     }),
     tabs: { type: Array as PropType<Tab[]> },
   },
-  slots: ['tabBarExtraContent', 'moreIcon', 'addIcon', 'removeIcon'],
+  slots: [
+    'tabBarExtraContent',
+    'leftExtra',
+    'rightExtra',
+    'moreIcon',
+    'addIcon',
+    'removeIcon',
+    'renderTabBar',
+  ],
   emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
   setup(props, { attrs, slots }) {
     devWarning(
       !(props.onPrevClick !== undefined) && !(props.onNextClick !== undefined),
       'Tabs',
       '`onPrevClick / @prevClick` and `onNextClick / @nextClick` has been removed. Please use `onTabScroll / @tabScroll` instead.',
+    );
+    devWarning(
+      !(slots.tabBarExtraContent !== undefined),
+      'Tabs',
+      '`tabBarExtraContent` slot is deprecated. Please use `rightExtra` instead.',
     );
     const { prefixCls, direction, size, rootPrefixCls } = useConfigInject('tabs', props);
     const rtl = computed(() => direction.value === 'rtl');
@@ -218,7 +232,7 @@ const InternalTabs = defineComponent({
         tabBarStyle,
         locale,
         destroyInactiveTabPane,
-        renderTabBar,
+        renderTabBar = slots.renderTabBar,
         onTabScroll,
         hideAdd,
         centered,
@@ -259,15 +273,12 @@ const InternalTabs = defineComponent({
       };
 
       if (renderTabBar) {
-        tabNavBar = renderTabBar(tabNavBarProps, TabNavList);
+        tabNavBar = renderTabBar({ ...tabNavBarProps, DefaultTabBar: TabNavList });
       } else {
         tabNavBar = (
           <TabNavList
             {...tabNavBarProps}
-            v-slots={{
-              moreIcon: slots.moreIcon,
-              extra: slots.tabBarExtraContent,
-            }}
+            v-slots={pick(slots, ['moreIcon', 'leftExtra', 'rightExtra', 'tabBarExtraContent'])}
           />
         );
       }
@@ -281,7 +292,7 @@ const InternalTabs = defineComponent({
             pre,
             `${pre}-${mergedTabPosition.value}`,
             {
-              [`${pre}-${size}`]: size.value,
+              [`${pre}-${size.value}`]: size.value,
               [`${pre}-card`]: ['card', 'editable-card'].includes(type as string),
               [`${pre}-editable-card`]: type === 'editable-card',
               [`${pre}-centered`]: centered,
@@ -314,7 +325,15 @@ export default defineComponent({
       tabPane: false,
     },
   }),
-  slots: ['tabBarExtraContent', 'moreIcon', 'addIcon', 'removeIcon'],
+  slots: [
+    'tabBarExtraContent',
+    'leftExtra',
+    'rightExtra',
+    'moreIcon',
+    'addIcon',
+    'removeIcon',
+    'renderTabBar',
+  ],
   emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
   setup(props, { attrs, slots, emit }) {
     const handleChange = (key: string) => {

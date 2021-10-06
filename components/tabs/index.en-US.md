@@ -19,18 +19,19 @@ Ant Design has 3 types of Tabs for different situations.
 
 ### Tabs
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| activeKey(v-model) | Current TabPane's key | string | - |
-| animated | Whether to change tabs with animation. Only works while `tabPosition="top"\|"bottom"` | boolean \| {inkBar:boolean, tabPane:boolean} | `true`, `false` when `type="card"` |
-| defaultActiveKey | Initial active TabPane's key, if `activeKey` is not set. | string | - |
-| hideAdd | Hide plus icon or not. Only works while `type="editable-card"` | boolean | `false` |
-| size | preset tab bar size | `large` \| `default` \| `small` | `default` |
-| tabBarExtraContent | Extra content in tab bar | slot | - |
-| tabBarStyle | Tab bar style object | object | - |
-| tabPosition | Position of tabs | `top` \| `right` \| `bottom` \| `left` | `top` |
-| type | Basic style of tabs | `line` \| `card` \| `editable-card` | `line` |
-| tabBarGutter | The gap between tabs | number | - |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| activeKey(v-model) | Current TabPane's key | string | - |  |
+| animated | Whether to change tabs with animation. Only works while `tabPosition="top"\|"bottom"` | boolean \| {inkBar:boolean, tabPane:boolean} | `true`, `false` when `type="card"` |  |
+| defaultActiveKey | Initial active TabPane's key, if `activeKey` is not set. | string | - |  |
+| hideAdd | Hide plus icon or not. Only works while `type="editable-card"` | boolean | `false` | } |
+| size | preset tab bar size | `large` \| `default` \| `small` | `default` |  |
+| leftExtra | Extra content in tab bar left | v-slot:leftExtra | - | 3.0 |
+| rightExtra | Extra content in tab bar right | v-slot:rightExtra | - | 3.0 |
+| tabBarStyle | Tab bar style object | object | - |  |
+| tabPosition | Position of tabs | `top` \| `right` \| `bottom` \| `left` | `top` |  |
+| type | Basic style of tabs | `line` \| `card` \| `editable-card` | `line` |  |
+| tabBarGutter | The gap between tabs | number | - |  |
 
 ### Events
 

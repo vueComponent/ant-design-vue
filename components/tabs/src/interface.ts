@@ -19,7 +19,7 @@ export interface Tab extends TabPaneProps {
   node: VueNode;
 }
 
-export type RenderTabBar = (props: any, DefaultTabBar: any) => VueNode;
+export type RenderTabBar = (props: { DefaultTabBar: any; [key: string]: any }) => VueNode;
 
 export interface TabsLocale {
   dropdownAriaLabel?: string;

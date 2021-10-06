@@ -8,7 +8,7 @@ export interface TabPaneProps {
   disabled?: boolean;
   forceRender?: boolean;
   closable?: boolean;
-  closeIcon?: VueNode;
+  closeIcon?: () => VueNode;
 
   // Pass by TabPaneList
   prefixCls?: string;

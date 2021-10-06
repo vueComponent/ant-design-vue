@@ -1,4 +1,5 @@
-import type { Refs } from '../../_util/hooks/useRef';
+import type { RefsValue } from '../../_util/hooks/useRefs';
+import type { Ref } from 'vue';
 import { ref, onUpdated } from 'vue';
 import type { ProgressProps } from './types';
 
@@ -12,15 +13,15 @@ export const defaultProps: Partial<ProgressProps> = {
   trailWidth: 1,
 };
 
-export const useTransitionDuration = (paths: Refs) => {
+export const useTransitionDuration = (paths: Ref<RefsValue>) => {
   const prevTimeStamp = ref(null);
 
   onUpdated(() => {
     const now = Date.now();
     let updated = false;
 
-    Object.keys(paths.value).forEach(key => {
-      const path = paths.value[key];
+    paths.value.forEach(val => {
+      const path = (val as any)?.$el || val;
       if (!path) {
         return;
       }

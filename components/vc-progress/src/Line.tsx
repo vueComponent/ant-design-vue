@@ -1,4 +1,4 @@
-import { useRef } from '../../_util/hooks/useRef';
+import useRefs from '../../_util/hooks/useRefs';
 import { computed, defineComponent } from 'vue';
 import initDefaultProps from '../../_util/props-util/initDefaultProps';
 import { useTransitionDuration, defaultProps } from './common';
@@ -58,7 +58,7 @@ export default defineComponent({
       const { strokeColor } = props;
       return Array.isArray(strokeColor) ? strokeColor : [strokeColor];
     });
-    const [setRef, paths] = useRef();
+    const [setRef, paths] = useRefs();
     useTransitionDuration(paths);
     const center = computed(() => props.strokeWidth / 2);
     const right = computed(() => 100 - props.strokeWidth / 2);
@@ -103,7 +103,7 @@ export default defineComponent({
         >
           <path {...pathFirst.value} />
           {percentListProps.value.map((pathProps, index) => {
-            return <path ref={c => setRef(c, index)} {...pathProps} />;
+            return <path ref={setRef(index)} {...pathProps} />;
           })}
         </svg>
       );

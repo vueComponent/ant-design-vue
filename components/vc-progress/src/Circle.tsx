@@ -3,7 +3,7 @@ import type { GapPositionType } from './types';
 import { propTypes } from './types';
 import { computed, defineComponent, ref } from 'vue';
 import initDefaultProps from '../../_util/props-util/initDefaultProps';
-import { useRef } from '../../_util/hooks/useRef';
+import useRefs from '../../_util/hooks/useRefs';
 
 let gradientSeed = 0;
 
@@ -75,7 +75,7 @@ export default defineComponent({
     const percentList = computed(() => toArray(props.percent));
     const strokeColorList = computed(() => toArray(props.strokeColor));
 
-    const [setRef, paths] = useRef();
+    const [setRef, paths] = useRefs();
     useTransitionDuration(paths);
 
     const getStokeList = () => {
@@ -111,7 +111,7 @@ export default defineComponent({
           class: `${prefixCls}-circle-path`,
           style: pathStyle,
         };
-        return <path ref={c => setRef(c, index)} {...pathProps} />;
+        return <path ref={setRef(index)} {...pathProps} />;
       });
     };
 

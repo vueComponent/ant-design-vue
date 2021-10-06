@@ -26,7 +26,7 @@ import wrapperRaf from '../../../_util/raf';
 import classNames from '../../../_util/classNames';
 import ResizeObserver from '../../../vc-resize-observer';
 import { toPx } from '../../../_util/util';
-import useRef from '../../../_util/hooks/useRef';
+import useRefs from '../../../_util/hooks/useRefs';
 const DEFAULT_SIZE = { width: 0, height: 0, left: 0, top: 0, right: 0 };
 const tabNavListProps = () => {
   return {
@@ -70,7 +70,7 @@ export default defineComponent({
     const tabListRef = ref<HTMLDivElement>();
     const operationsRef = ref<{ $el: HTMLDivElement }>();
     const innerAddButtonRef = ref<HTMLButtonElement>();
-    const [setRef, btnRefs] = useRef();
+    const [setRef, btnRefs] = useRefs();
     const tabPositionTopOrBottom = computed(
       () => props.tabPosition === 'top' || props.tabPosition === 'bottom',
     );
@@ -313,7 +313,7 @@ export default defineComponent({
       setTabSizes(() => {
         const newSizes: TabSizeMap = new Map();
         tabs.value.forEach(({ key }) => {
-          const btnRef = btnRefs.value[key];
+          const btnRef = btnRefs.value.get(key);
           const btnNode = (btnRef as any)?.$el || btnRef;
           if (btnNode) {
             newSizes.set(key, {
@@ -457,7 +457,7 @@ export default defineComponent({
             editable={editable}
             active={key === activeKey}
             removeAriaLabel={locale?.removeAriaLabel}
-            ref={r => setRef(r, key)}
+            ref={setRef(key)}
             onClick={e => {
               onTabClick(key, e);
             }}

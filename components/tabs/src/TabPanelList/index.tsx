@@ -25,22 +25,20 @@ export default defineComponent({
     destroyInactiveTabPane: { type: Boolean },
   },
   setup(props) {
-    const tabsContext = useInjectTabs();
+    const { tabs, prefixCls } = useInjectTabs();
     return () => {
       const { id, activeKey, animated, tabPosition, rtl, destroyInactiveTabPane } = props;
-      const { prefixCls, tabs } = tabsContext;
       const tabPaneAnimated = animated.tabPane;
-
-      const activeIndex = tabs.findIndex(tab => tab.key === activeKey);
-
+      const pre = prefixCls.value;
+      const activeIndex = tabs.value.findIndex(tab => tab.key === activeKey);
       return (
-        <div class={`${prefixCls}-content-holder`}>
+        <div class={`${pre}-content-holder`}>
           <div
             class={[
-              `${prefixCls}-content`,
-              `${prefixCls}-content-${tabPosition}`,
+              `${pre}-content`,
+              `${pre}-content-${tabPosition}`,
               {
-                [`${prefixCls}-content-animated`]: tabPaneAnimated,
+                [`${pre}-content-animated`]: tabPaneAnimated,
               },
             ]}
             style={
@@ -49,10 +47,10 @@ export default defineComponent({
                 : null
             }
           >
-            {tabs.map(tab => {
+            {tabs.value.map(tab => {
               return cloneElement(tab.node, {
                 key: tab.key,
-                prefixCls,
+                prefixCls: pre,
                 tabKey: tab.key,
                 id,
                 animated: tabPaneAnimated,

@@ -1,6 +1,6 @@
 import { defineComponent, ref, watch, computed } from 'vue';
 import type { CSSProperties } from 'vue';
-import type { VueNode } from '../../../_util/type';
+import type { VueNode, Key } from '../../../_util/type';
 import PropTypes from '../../../_util/vue-types';
 
 export interface TabPaneProps {
@@ -12,7 +12,7 @@ export interface TabPaneProps {
 
   // Pass by TabPaneList
   prefixCls?: string;
-  tabKey?: string;
+  tabKey?: Key;
   id?: string;
   animated?: boolean;
   active?: boolean;
@@ -33,7 +33,7 @@ export default defineComponent({
 
     // Pass by TabPaneList
     prefixCls: { type: String },
-    tabKey: { type: String },
+    tabKey: { type: [String, Number] },
     id: { type: String },
   },
   slots: ['closeIcon', 'tab'],

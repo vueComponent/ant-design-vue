@@ -32,7 +32,7 @@ const tabNavListProps = () => {
   return {
     id: { type: String },
     tabPosition: { type: String as PropType<TabPosition> },
-    activeKey: { type: String },
+    activeKey: { type: [String, Number] },
     rtl: { type: Boolean },
     panes: PropTypes.any,
     animated: { type: Object as PropType<AnimatedConfig>, default: undefined as AnimatedConfig },
@@ -66,7 +66,7 @@ export default defineComponent({
   slots: ['panes', 'moreIcon', 'extra'],
   emits: ['tabClick', 'tabScroll'],
   setup(props, { attrs, slots }) {
-    const tabsContext = useInjectTabs();
+    const { tabs, prefixCls } = useInjectTabs();
     const tabsWrapperRef = ref<HTMLDivElement>();
     const tabListRef = ref<HTMLDivElement>();
     const operationsRef = ref<{ $el: HTMLDivElement }>();
@@ -98,15 +98,10 @@ export default defineComponent({
     const [addHeight, setAddHeight] = useState<number>(0);
 
     const [tabSizes, setTabSizes] = useRafState<TabSizeMap>(new Map());
-    const tabOffsets = useOffsets(
-      computed(() => tabsContext.tabs),
-      tabSizes,
-    );
+    const tabOffsets = useOffsets(tabs, tabSizes);
 
     // ========================== Util =========================
-    const operationsHiddenClassName = computed(
-      () => `${tabsContext.prefixCls}-nav-operations-hidden`,
-    );
+    const operationsHiddenClassName = computed(() => `${prefixCls.value}-nav-operations-hidden`);
 
     const transformMin = ref(0);
     const transformMax = ref(0);
@@ -261,15 +256,15 @@ export default defineComponent({
         mergedBasicSize = basicSize - addSize;
       }
 
-      const { tabs } = tabsContext;
-      if (!tabs.length) {
+      const tabsVal = tabs.value;
+      if (!tabsVal.length) {
         [visibleStart.value, visibleEnd.value] = [0, 0];
       }
 
-      const len = tabs.length;
+      const len = tabsVal.length;
       let endIndex = len;
       for (let i = 0; i < len; i += 1) {
-        const offset = tabOffsets.value.get(tabs[i].key) || DEFAULT_SIZE;
+        const offset = tabOffsets.value.get(tabsVal[i].key) || DEFAULT_SIZE;
         if (offset[position] + offset[unit] > transformSize + mergedBasicSize) {
           endIndex = i - 1;
           break;
@@ -278,7 +273,7 @@ export default defineComponent({
 
       let startIndex = 0;
       for (let i = len - 1; i >= 0; i -= 1) {
-        const offset = tabOffsets.value.get(tabs[i].key) || DEFAULT_SIZE;
+        const offset = tabOffsets.value.get(tabsVal[i].key) || DEFAULT_SIZE;
         if (offset[position] < transformSize) {
           startIndex = i + 1;
           break;
@@ -319,7 +314,7 @@ export default defineComponent({
       // Update buttons records
       setTabSizes(() => {
         const newSizes: TabSizeMap = new Map();
-        tabsContext.tabs.forEach(({ key }) => {
+        tabs.value.forEach(({ key }) => {
           const btnRef = getBtnRef(key).value;
           const btnNode = (btnRef as any).$el || btnRef;
           if (btnNode) {
@@ -337,8 +332,8 @@ export default defineComponent({
 
     // ======================== Dropdown =======================
     const hiddenTabs = computed(() => [
-      ...tabsContext.tabs.slice(0, visibleStart.value),
-      ...tabsContext.tabs.slice(visibleEnd.value + 1),
+      ...tabs.value.slice(0, visibleStart.value),
+      ...tabs.value.slice(visibleEnd.value + 1),
     ]);
 
     // =================== Link & Operations ===================
@@ -385,7 +380,7 @@ export default defineComponent({
     );
 
     watch(
-      [() => props.rtl, () => props.tabBarGutter, () => props.activeKey, () => tabsContext.tabs],
+      [() => props.rtl, () => props.tabBarGutter, () => props.activeKey, () => tabs.value],
       () => {
         onListHolderResize();
       },
@@ -406,7 +401,6 @@ export default defineComponent({
     });
 
     return () => {
-      const { prefixCls, tabs } = tabsContext;
       const {
         id,
         animated,
@@ -420,9 +414,10 @@ export default defineComponent({
         onTabClick,
       } = props;
       const { class: className, style } = attrs;
+      const pre = prefixCls.value;
       // ========================= Render ========================
       const hasDropdown = !!hiddenTabs.value.length;
-      const wrapPrefix = `${prefixCls}-nav-wrap`;
+      const wrapPrefix = `${pre}-nav-wrap`;
       let pingLeft: boolean;
       let pingRight: boolean;
       let pingTop: boolean;
@@ -450,12 +445,12 @@ export default defineComponent({
           typeof tabBarGutter === 'number' ? `${tabBarGutter}px` : tabBarGutter;
       }
 
-      const tabNodes = tabs.map((tab, i) => {
+      const tabNodes = tabs.value.map((tab, i) => {
         const { key } = tab;
         return (
           <TabNode
             id={id}
-            prefixCls={prefixCls}
+            prefixCls={pre}
             key={key}
             tab={tab}
             /* first node should not have margin left */
@@ -492,14 +487,14 @@ export default defineComponent({
         <div
           ref={ref}
           role="tablist"
-          class={classNames(`${prefixCls}-nav`, className)}
+          class={classNames(`${pre}-nav`, className)}
           style={style}
           onKeydown={() => {
             // No need animation when use keyboard
             doLockAnimation();
           }}
         >
-          <ExtraContent position="left" extra={extra} prefixCls={prefixCls} />
+          <ExtraContent position="left" extra={extra} prefixCls={pre} />
 
           <ResizeObserver onResize={onListHolderResize}>
             <div
@@ -514,7 +509,7 @@ export default defineComponent({
               <ResizeObserver onResize={onListHolderResize}>
                 <div
                   ref={tabListRef}
-                  class={`${prefixCls}-nav-list`}
+                  class={`${pre}-nav-list`}
                   style={{
                     transform: `translate(${transformLeft.value}px, ${transformTop.value}px)`,
                     transition: lockAnimation.value ? 'none' : undefined,
@@ -523,7 +518,7 @@ export default defineComponent({
                   {tabNodes}
                   <AddButton
                     ref={innerAddButtonRef}
-                    prefixCls={prefixCls}
+                    prefixCls={pre}
                     locale={locale}
                     editable={editable}
                     style={{
@@ -533,8 +528,8 @@ export default defineComponent({
                   />
 
                   <div
-                    class={classNames(`${prefixCls}-ink-bar`, {
-                      [`${prefixCls}-ink-bar-animated`]: animated.inkBar,
+                    class={classNames(`${pre}-ink-bar`, {
+                      [`${pre}-ink-bar-animated`]: animated.inkBar,
                     })}
                     style={inkStyle.value}
                   />
@@ -546,12 +541,12 @@ export default defineComponent({
           <OperationNode
             {...props}
             ref={operationsRef}
-            prefixCls={prefixCls}
+            prefixCls={pre}
             tabs={hiddenTabs.value}
             class={!hasDropdown && operationsHiddenClassName.value}
           />
 
-          <ExtraContent position="right" extra={extra} prefixCls={prefixCls} />
+          <ExtraContent position="right" extra={extra} prefixCls={pre} />
         </div>
       );
     };

@@ -15,7 +15,7 @@ export type TabOffsetMap = Map<Key, TabOffset>;
 export type TabPosition = 'left' | 'right' | 'top' | 'bottom';
 
 export interface Tab extends TabPaneProps {
-  key: string;
+  key: Key;
   node: VueNode;
 }
 
@@ -28,10 +28,7 @@ export interface TabsLocale {
 }
 
 export interface EditableConfig {
-  onEdit: (
-    type: 'add' | 'remove',
-    info: { key?: string; event: MouseEvent | KeyboardEvent },
-  ) => void;
+  onEdit: (type: 'add' | 'remove', info: { key?: Key; event: MouseEvent | KeyboardEvent }) => void;
   showAdd?: boolean;
   removeIcon?: () => VueNode;
   addIcon?: () => VueNode;

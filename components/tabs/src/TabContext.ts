@@ -1,10 +1,10 @@
 import type { Tab } from './interface';
-import type { PropType, InjectionKey } from 'vue';
-import { provide, inject, defineComponent } from 'vue';
+import type { PropType, InjectionKey, Ref } from 'vue';
+import { provide, inject, defineComponent, toRefs, ref } from 'vue';
 
 export interface TabContextProps {
-  tabs: Tab[];
-  prefixCls: string;
+  tabs: Ref<Tab[]>;
+  prefixCls: Ref<string>;
 }
 
 const TabsContextKey: InjectionKey<TabContextProps> = Symbol('tabsContextKey');
@@ -14,7 +14,7 @@ export const useProvideTabs = (props: TabContextProps) => {
 };
 
 export const useInjectTabs = () => {
-  return inject(TabsContextKey, { tabs: [], prefixCls: undefined });
+  return inject(TabsContextKey, { tabs: ref([]), prefixCls: ref() });
 };
 
 const TabsContextProvider = defineComponent({
@@ -25,7 +25,7 @@ const TabsContextProvider = defineComponent({
     prefixCls: { type: String, default: undefined },
   },
   setup(props, { slots }) {
-    useProvideTabs(props);
+    useProvideTabs(toRefs(props));
     return () => slots.default?.();
   },
 });

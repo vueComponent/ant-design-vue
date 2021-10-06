@@ -21,7 +21,8 @@ import classNames from '../../_util/classNames';
 import { CloseOutlined, PlusOutlined } from '@ant-design/icons-vue';
 import devWarning from '../../vc-util/devWarning';
 import type { SizeType } from '../../config-provider';
-import TabsContextProvider from './TabContext';
+import { useProvideTabs } from './TabContext';
+import type { Key } from '../../_util/type';
 
 export type TabsType = 'line' | 'card' | 'editable-card';
 export type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
@@ -34,8 +35,8 @@ export const tabsProps = () => {
     prefixCls: { type: String },
     id: { type: String },
 
-    activeKey: { type: String },
-    defaultActiveKey: { type: String },
+    activeKey: { type: [String, Number], required: true },
+    defaultActiveKey: { type: [String, Number] },
     direction: { type: String as PropType<'ltr' | 'rtl'> },
     animated: { type: [Boolean, Object] as PropType<boolean | AnimatedConfig> },
     renderTabBar: { type: Function as PropType<RenderTabBar> },
@@ -50,12 +51,12 @@ export const tabsProps = () => {
     centered: Boolean,
     onEdit: {
       type: Function as PropType<
-        (e: MouseEvent | KeyboardEvent | string, action: 'add' | 'remove') => void
+        (e: MouseEvent | KeyboardEvent | Key, action: 'add' | 'remove') => void
       >,
     },
-    onChange: { type: Function as PropType<(activeKey: string) => void> },
+    onChange: { type: Function as PropType<(activeKey: Key) => void> },
     onTabClick: {
-      type: Function as PropType<(activeKey: string, e: KeyboardEvent | MouseEvent) => void>,
+      type: Function as PropType<(activeKey: Key, e: KeyboardEvent | MouseEvent) => void>,
     },
     onTabScroll: { type: Function as PropType<OnTabScroll> },
 
@@ -78,7 +79,7 @@ function parseTabList(children: any[]): Tab[] {
           props[camelize(k)] = v;
         }
         const slots = node.children || {};
-        const key = node.key !== undefined ? String(node.key) : undefined;
+        const key = node.key !== undefined ? node.key : undefined;
         const {
           tab = slots.tab,
           disabled,
@@ -159,7 +160,7 @@ const InternalTabs = defineComponent({
     });
 
     // ====================== Active Key ======================
-    const [mergedActiveKey, setMergedActiveKey] = useMergedState<string>(() => props.tabs[0]?.key, {
+    const [mergedActiveKey, setMergedActiveKey] = useMergedState<Key>(() => props.tabs[0]?.key, {
       value: computed(() => props.activeKey),
       defaultValue: props.defaultActiveKey,
     });
@@ -171,7 +172,7 @@ const InternalTabs = defineComponent({
       let newActiveIndex = props.tabs.findIndex(tab => tab.key === mergedActiveKey.value);
       if (newActiveIndex === -1) {
         newActiveIndex = Math.max(0, Math.min(activeIndex.value, props.tabs.length - 1));
-        setMergedActiveKey(props.tabs[newActiveIndex]?.key);
+        mergedActiveKey.value = props.tabs[newActiveIndex]?.key;
       }
       setActiveIndex(newActiveIndex);
     });
@@ -197,30 +198,30 @@ const InternalTabs = defineComponent({
     });
 
     // ======================== Events ========================
-    const onInternalTabClick = (key: string, e: MouseEvent | KeyboardEvent) => {
+    const onInternalTabClick = (key: Key, e: MouseEvent | KeyboardEvent) => {
       props.onTabClick?.(key, e);
 
       setMergedActiveKey(key);
       props.onChange?.(key);
     };
 
+    useProvideTabs({
+      tabs: computed(() => props.tabs),
+      prefixCls,
+    });
+
     return () => {
       const {
         id,
         type,
-        activeKey,
-        defaultActiveKey,
         tabBarGutter,
         tabBarStyle,
         locale,
         destroyInactiveTabPane,
         renderTabBar,
-        onChange,
-        onTabClick,
         onTabScroll,
         hideAdd,
         centered,
-        ...restProps
       } = props;
       // ======================== Render ========================
       const sharedProps = {
@@ -274,34 +275,31 @@ const InternalTabs = defineComponent({
       const pre = prefixCls.value;
 
       return (
-        <TabsContextProvider tabs={props.tabs} prefixCls={pre}>
-          <div
-            {...attrs}
-            id={id}
-            class={classNames(
-              pre,
-              `${pre}-${mergedTabPosition.value}`,
-              {
-                [`${pre}-${size}`]: size.value,
-                [`${pre}-card`]: ['card', 'editable-card'].includes(type as string),
-                [`${pre}-editable-card`]: type === 'editable-card',
-                [`${pre}-centered`]: centered,
-                [`${pre}-mobile`]: mobile.value,
-                [`${pre}-editable`]: type === 'editable-card',
-                [`${pre}-rtl`]: rtl.value,
-              },
-              attrs.class,
-            )}
-            {...restProps}
-          >
-            {tabNavBar}
-            <TabPanelList
-              destroyInactiveTabPane={destroyInactiveTabPane}
-              {...sharedProps}
-              animated={mergedAnimated.value}
-            />
-          </div>
-        </TabsContextProvider>
+        <div
+          {...attrs}
+          id={id}
+          class={classNames(
+            pre,
+            `${pre}-${mergedTabPosition.value}`,
+            {
+              [`${pre}-${size}`]: size.value,
+              [`${pre}-card`]: ['card', 'editable-card'].includes(type as string),
+              [`${pre}-editable-card`]: type === 'editable-card',
+              [`${pre}-centered`]: centered,
+              [`${pre}-mobile`]: mobile.value,
+              [`${pre}-editable`]: type === 'editable-card',
+              [`${pre}-rtl`]: rtl.value,
+            },
+            attrs.class,
+          )}
+        >
+          {tabNavBar}
+          <TabPanelList
+            destroyInactiveTabPane={destroyInactiveTabPane}
+            {...sharedProps}
+            animated={mergedAnimated.value}
+          />
+        </div>
       );
     };
   },

@@ -16,7 +16,7 @@ export interface OperationNodeProps {
   tabs: Tab[];
   rtl: boolean;
   tabBarGutter?: number;
-  activeKey: string;
+  activeKey: Key;
   mobile: boolean;
   moreIcon?: VueNode;
   moreTransitionName?: string;
@@ -34,7 +34,7 @@ export default defineComponent({
     tabs: { type: Object as PropType<Tab[]> },
     rtl: { type: Boolean },
     tabBarGutter: { type: Number },
-    activeKey: { type: String },
+    activeKey: { type: [String, Number] },
     mobile: { type: Boolean },
     moreIcon: PropTypes.any,
     moreTransitionName: { type: String },
@@ -47,7 +47,7 @@ export default defineComponent({
   setup(props, { attrs, slots }) {
     // ======================== Dropdown ========================
     const [open, setOpen] = useState(false);
-    const [selectedKey, setSelectedKey] = useState<string>(null);
+    const [selectedKey, setSelectedKey] = useState<Key>(null);
     const selectOffset = (offset: -1 | 1) => {
       const enabledTabs = props.tabs.filter(tab => !tab.disabled);
       let selectedIndex = enabledTabs.findIndex(tab => tab.key === selectedKey.value) || 0;

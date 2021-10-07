@@ -1,4 +1,4 @@
-import type { DataNode, Key } from '../../vc-tree/interface';
+import type { DataNode, FieldNames, Key } from '../../vc-tree/interface';
 
 enum Record {
   None,
@@ -8,12 +8,14 @@ enum Record {
 
 function traverseNodesKey(
   treeData: DataNode[],
+  fieldNames: FieldNames,
   callback: (key: Key | number | null, node: DataNode) => boolean,
 ) {
   function processNode(dataNode: DataNode) {
-    const { key, children } = dataNode;
+    const key = dataNode[fieldNames.key];
+    const children = dataNode[fieldNames.children];
     if (callback(key, dataNode) !== false) {
-      traverseNodesKey(children || [], callback);
+      traverseNodesKey(children || [], fieldNames, callback);
     }
   }
 
@@ -26,11 +28,13 @@ export function calcRangeKeys({
   expandedKeys,
   startKey,
   endKey,
+  fieldNames,
 }: {
   treeData: DataNode[];
   expandedKeys: Key[];
   startKey?: Key;
   endKey?: Key;
+  fieldNames: FieldNames;
 }): Key[] {
   const keys: Key[] = [];
   let record: Record = Record.None;
@@ -46,7 +50,7 @@ export function calcRangeKeys({
     return key === startKey || key === endKey;
   }
 
-  traverseNodesKey(treeData, (key: Key) => {
+  traverseNodesKey(treeData, fieldNames, (key: Key) => {
     if (record === Record.End) {
       return false;
     }
@@ -76,10 +80,14 @@ export function calcRangeKeys({
   return keys;
 }
 
-export function convertDirectoryKeysToNodes(treeData: DataNode[], keys: Key[]) {
+export function convertDirectoryKeysToNodes(
+  treeData: DataNode[],
+  keys: Key[],
+  fieldNames: FieldNames,
+) {
   const restKeys: Key[] = [...keys];
   const nodes: DataNode[] = [];
-  traverseNodesKey(treeData, (key: Key, node: DataNode) => {
+  traverseNodesKey(treeData, fieldNames, (key: Key, node: DataNode) => {
     const index = restKeys.indexOf(key);
     if (index !== -1) {
       nodes.push(node);

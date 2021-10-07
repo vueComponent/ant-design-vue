@@ -1,5 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { nextTick, onUpdated, ref, watch, defineComponent } from 'vue';
+import { nextTick, onUpdated, ref, watch, defineComponent, computed } from 'vue';
 import debounce from 'lodash-es/debounce';
 import FolderOpenOutlined from '@ant-design/icons-vue/FolderOpenOutlined';
 import FolderOutlined from '@ant-design/icons-vue/FolderOutlined';
@@ -8,7 +8,11 @@ import classNames from '../_util/classNames';
 import type { AntdTreeNodeAttribute, TreeProps } from './Tree';
 import Tree, { treeProps } from './Tree';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import { convertDataToEntities, convertTreeToData } from '../vc-tree/utils/treeUtil';
+import {
+  convertDataToEntities,
+  convertTreeToData,
+  fillFieldNames,
+} from '../vc-tree/utils/treeUtil';
 import type { DataNode, EventDataNode, Key } from '../vc-tree/interface';
 import { conductExpandParent } from '../vc-tree/util';
 import { calcRangeKeys, convertDirectoryKeysToNodes } from './utils/dictUtil';
@@ -168,7 +172,7 @@ export default defineComponent({
       emit('doubleclick', event, node);
       emit('dblclick', event, node);
     };
-
+    const fieldNames = computed(() => fillFieldNames(props.fieldNames));
     const onSelect = (
       keys: Key[],
       event: {
@@ -181,8 +185,7 @@ export default defineComponent({
     ) => {
       const { multiple } = props;
       const { node, nativeEvent } = event;
-      const { key = '' } = node;
-
+      const key = node[fieldNames.value.key];
       // const newState: DirectoryTreeState = {};
 
       // We need wrap this event since some value is not same
@@ -202,7 +205,11 @@ export default defineComponent({
         newSelectedKeys = keys;
         lastSelectedKey.value = key;
         cachedSelectedKeys.value = newSelectedKeys;
-        newEvent.selectedNodes = convertDirectoryKeysToNodes(treeData.value, newSelectedKeys);
+        newEvent.selectedNodes = convertDirectoryKeysToNodes(
+          treeData.value,
+          newSelectedKeys,
+          fieldNames.value,
+        );
       } else if (multiple && shiftPick) {
         // Shift click
         newSelectedKeys = Array.from(
@@ -213,16 +220,25 @@ export default defineComponent({
               expandedKeys: expandedKeys.value,
               startKey: key,
               endKey: lastSelectedKey.value,
+              fieldNames: fieldNames.value,
             }),
           ]),
         );
-        newEvent.selectedNodes = convertDirectoryKeysToNodes(treeData.value, newSelectedKeys);
+        newEvent.selectedNodes = convertDirectoryKeysToNodes(
+          treeData.value,
+          newSelectedKeys,
+          fieldNames.value,
+        );
       } else {
         // Single click
-        newSelectedKeys = [key];
+        newSelectedKeys = keys;
         lastSelectedKey.value = key;
         cachedSelectedKeys.value = newSelectedKeys;
-        newEvent.selectedNodes = convertDirectoryKeysToNodes(treeData.value, newSelectedKeys);
+        newEvent.selectedNodes = convertDirectoryKeysToNodes(
+          treeData.value,
+          newSelectedKeys,
+          fieldNames.value,
+        );
       }
 
       emit('update:selectedKeys', newSelectedKeys);

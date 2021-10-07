@@ -22,7 +22,7 @@ describe('Tabs', () => {
     });
 
     it('add card', () => {
-      wrapper.find('.ant-tabs-new-tab').trigger('click');
+      wrapper.find('.ant-tabs-nav-add').trigger('click');
       expect(handleEdit.mock.calls[0][1]).toBe('add');
     });
 
@@ -37,7 +37,7 @@ describe('Tabs', () => {
       const wrapper = mount({
         render() {
           return (
-            <Tabs tabPosition="left" tabBarExtraContent="xxx">
+            <Tabs tabPosition="left" v-slots={{ rightExtra: () => 'xxx' }}>
               <TabPane tab="foo" key="1">
                 foo
               </TabPane>

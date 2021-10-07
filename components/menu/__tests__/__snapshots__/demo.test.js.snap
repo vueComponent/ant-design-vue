@@ -27,7 +27,7 @@ exports[`renders ./components/menu/demo/horizontal.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/menu/demo/inline.vue correctly 1`] = `
-<ul class="ant-menu ant-menu-root ant-menu-inline ant-menu-light" style="width: 256px;" role="menu" data-menu-list="true" id="dddddd">
+<ul id="dddddd" class="ant-menu ant-menu-root ant-menu-inline ant-menu-light" style="width: 256px;" role="menu" data-menu-list="true">
   <li class="ant-menu-submenu ant-menu-submenu-inline ant-menu-submenu-open ant-menu-submenu-selected" role="none" data-submenu-id="sub1">
     <!--teleport start-->
     <!--teleport end-->

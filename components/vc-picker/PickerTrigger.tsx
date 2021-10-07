@@ -1,4 +1,4 @@
-import type { CSSProperties } from '@vue/runtime-dom';
+import type { CSSProperties } from 'vue';
 import type { AlignType } from '../vc-align/interface';
 import Trigger from '../vc-trigger';
 import classNames from '../_util/classNames';

@@ -1,4 +1,4 @@
-import type { CSSProperties } from '@vue/runtime-dom';
+import type { CSSProperties } from 'vue';
 import getScrollBarSize from '../../_util/getScrollBarSize';
 import setStyle from '../../_util/setStyle';
 

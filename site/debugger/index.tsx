@@ -1,5 +1,5 @@
 // debugger tsx
-import Demo from '../../components/auto-complete/demo/index.vue';
+import Demo from '../../components/tabs/demo/card-top.vue';
 
 export default {
   render() {

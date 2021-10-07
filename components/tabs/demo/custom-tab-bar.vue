@@ -22,11 +22,7 @@ Customized bar of tab.
       <a-tab-pane key="2" tab="Tab 2" force-render>Content of Tab Pane 2</a-tab-pane>
       <a-tab-pane key="3" tab="Tab 3">Content of Tab Pane 3</a-tab-pane>
       <template #renderTabBar="{ DefaultTabBar, ...props }">
-        <component
-          :is="DefaultTabBar"
-          v-bind="props"
-          :style="{ zIndex: 1, background: '#fff', textAlign: 'right' }"
-        />
+        <component :is="DefaultTabBar" v-bind="props" :style="{ opacity: 0.5 }" />
       </template>
     </a-tabs>
   </div>

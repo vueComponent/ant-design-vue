@@ -10,6 +10,7 @@ export default defineComponent({
   props: {
     component: PropTypes.any,
     title: PropTypes.any,
+    id: String,
   },
   setup(props, { slots, attrs }) {
     const context = useInjectOverflowContext();

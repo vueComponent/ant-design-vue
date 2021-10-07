@@ -24,8 +24,8 @@ More content can be hosted
     :active-tab-key="key"
     @tabChange="key => onTabChange(key, 'key')"
   >
-    <template #customRender="item">
-      <span>
+    <template #customTab="item">
+      <span v-if="item.key === 'tab1'">
         <home-outlined />
         {{ item.key }}
       </span>
@@ -63,8 +63,7 @@ export default defineComponent({
     const tabList = [
       {
         key: 'tab1',
-        // tab: 'tab1',
-        slots: { tab: 'customRender' },
+        tab: 'tab1',
       },
       {
         key: 'tab2',

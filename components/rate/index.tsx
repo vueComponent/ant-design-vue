@@ -11,7 +11,7 @@ import Tooltip from '../tooltip';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 import Star from './Star';
-import { useRef } from '../_util/hooks/useRef';
+import useRefs from '../_util/hooks/useRefs';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export const rateProps = {
@@ -48,7 +48,7 @@ const Rate = defineComponent({
     const { prefixCls, direction } = useConfigInject('rate', props);
     const formItemContext = useInjectFormItemContext();
     const rateRef = ref();
-    const [setRef, starRefs] = useRef();
+    const [setRef, starRefs] = useRefs();
     const state = reactive({
       value: props.value,
       focused: false,
@@ -62,7 +62,7 @@ const Rate = defineComponent({
       },
     );
     const getStarDOM = (index: number) => {
-      return findDOMNode(starRefs.value[index]);
+      return findDOMNode(starRefs.value.get(index));
     };
     const getStarValue = (index: number, x: number) => {
       const reverse = direction.value === 'rtl';
@@ -199,7 +199,7 @@ const Rate = defineComponent({
       for (let index = 0; index < count; index++) {
         stars.push(
           <Star
-            ref={(r: any) => setRef(r, index)}
+            ref={setRef(index)}
             key={index}
             index={index}
             count={count}

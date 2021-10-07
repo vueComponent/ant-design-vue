@@ -139,6 +139,7 @@
     "diacritics": "^1.3.0",
     "docsearch.js": "^2.6.3",
     "enquire-js": "^0.2.1",
+    "esbuild": "~0.12.29",
     "escape-html": "^1.0.3",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.0.0",

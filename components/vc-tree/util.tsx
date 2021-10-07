@@ -113,10 +113,10 @@ export function calcDropPosition(
   if (clientY < top + height / 2) {
     // first half, set abstract drop node to previous node
     const nodeIndex = flattenedNodes.findIndex(
-      flattenedNode => flattenedNode.data.key === abstractDropNodeEntity.key,
+      flattenedNode => flattenedNode.key === abstractDropNodeEntity.key,
     );
     const prevNodeIndex = nodeIndex <= 0 ? 0 : nodeIndex - 1;
-    const prevNodeKey = flattenedNodes[prevNodeIndex].data.key;
+    const prevNodeKey = flattenedNodes[prevNodeIndex].key;
     abstractDropNodeEntity = keyEntities[prevNodeKey];
   }
 

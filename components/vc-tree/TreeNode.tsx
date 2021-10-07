@@ -117,6 +117,7 @@ export default defineComponent({
         isLeaf: isLeaf.value,
       };
     });
+    const instance = getCurrentInstance();
     const eventData = computed(() => {
       return convertNodePropsToEventData(props);
     });
@@ -125,7 +126,7 @@ export default defineComponent({
       eventKey: computed(() => props.eventKey),
       selectHandle,
       pos: computed(() => props.pos),
-      key: getCurrentInstance().vnode.key as Key,
+      key: instance.vnode.key as Key,
     });
     expose(dragNodeEvent);
     const onSelectorDoubleClick = (e: MouseEvent) => {

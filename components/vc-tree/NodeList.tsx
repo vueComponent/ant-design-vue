@@ -71,20 +71,17 @@ export function getMinimumRangeTransitionRange(
 }
 
 function itemKey(item: FlattenNode) {
-  const {
-    data: { key },
-    pos,
-  } = item;
+  const { key, pos } = item;
   return getKey(key, pos);
 }
 
 function getAccessibilityPath(item: FlattenNode): string {
-  let path = String(item.data.key);
+  let path = String(item.key);
   let current = item;
 
   while (current.parent) {
     current = current.parent;
-    path = `${current.data.key} > ${path}`;
+    path = `${current.key} > ${path}`;
   }
 
   return path;
@@ -104,7 +101,6 @@ export default defineComponent({
       },
       getIndentWidth: () => indentMeasurerRef.value.offsetWidth,
     });
-
     // ============================== Motion ==============================
     const transitionData = ref<FlattenNode[]>(props.data);
     const transitionRange = ref([]);
@@ -121,12 +117,10 @@ export default defineComponent({
       [() => [...props.expandedKeys], () => props.data],
       ([expandedKeys, data], [prevExpandedKeys, prevData]) => {
         const diffExpanded = findExpandedKeys(prevExpandedKeys, expandedKeys);
-
         if (diffExpanded.key !== null) {
           const { virtual, height, itemHeight } = props;
           if (diffExpanded.add) {
-            const keyIndex = prevData.findIndex(({ data: { key } }) => key === diffExpanded.key);
-
+            const keyIndex = prevData.findIndex(({ key }) => key === diffExpanded.key);
             const rangeNodes = getMinimumRangeTransitionRange(
               getExpandRange(prevData, data, diffExpanded.key),
               virtual,
@@ -141,7 +135,7 @@ export default defineComponent({
             transitionRange.value = rangeNodes;
             motionType.value = 'show';
           } else {
-            const keyIndex = data.findIndex(({ data: { key } }) => key === diffExpanded.key);
+            const keyIndex = data.findIndex(({ key }) => key === diffExpanded.key);
 
             const rangeNodes = getMinimumRangeTransitionRange(
               getExpandRange(data, prevData, diffExpanded.key),
@@ -295,7 +289,7 @@ export default defineComponent({
                   {...restProps}
                   {...treeNodeProps}
                   title={title}
-                  active={!!activeItem && key === activeItem.data.key}
+                  active={!!activeItem && key === activeItem.key}
                   pos={pos}
                   data={treeNode.data}
                   isStart={isStart}

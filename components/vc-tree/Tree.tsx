@@ -160,7 +160,6 @@ export default defineComponent({
     const flattenNodes = computed(() => {
       return flattenTreeData(treeData.value, expandedKeys.value, fieldNames.value);
     });
-
     // ================ selectedKeys =================
     watchEffect(() => {
       if (props.selectable) {
@@ -499,10 +498,9 @@ export default defineComponent({
       cleanDragState();
 
       if (dropTargetKey === null) return;
-
       const abstractDropNodeProps = {
         ...getTreeNodeProps(dropTargetKey, treeNodeRequiredProps.value),
-        active: activeItem.value?.data.key === dropTargetKey,
+        active: activeItem.value?.key === dropTargetKey,
         data: keyEntities.value[dropTargetKey].node,
       };
       const dropToChild = dragChildrenKeys.indexOf(dropTargetKey) !== -1;
@@ -663,7 +661,7 @@ export default defineComponent({
       new Promise<void>((resolve, reject) => {
         // We need to get the latest state of loading/loaded keys
         const { loadData, onLoad } = props;
-        const { key } = treeNode;
+        const key = treeNode[fieldNames.value.key];
 
         if (
           !loadData ||
@@ -836,11 +834,11 @@ export default defineComponent({
         return null;
       }
 
-      return flattenNodes.value.find(({ data: { key } }) => key === activeKey.value) || null;
+      return flattenNodes.value.find(({ key }) => key === activeKey.value) || null;
     });
 
     const offsetActiveKey = (offset: number) => {
-      let index = flattenNodes.value.findIndex(({ data: { key } }) => key === activeKey.value);
+      let index = flattenNodes.value.findIndex(({ key }) => key === activeKey.value);
 
       // Align with index
       if (index === -1 && offset < 0) {
@@ -851,7 +849,7 @@ export default defineComponent({
 
       const item = flattenNodes.value[index];
       if (item) {
-        const { key } = item.data;
+        const { key } = item;
         onActiveChange(key);
       } else {
         onActiveChange(null);
@@ -894,7 +892,7 @@ export default defineComponent({
             if (expandable && expandedKeys.value.includes(activeKey.value)) {
               onNodeExpand({} as MouseEvent, eventNode);
             } else if (item.parent) {
-              onActiveChange(item.parent.data.key);
+              onActiveChange(item.parent.key);
             }
             event.preventDefault();
             break;
@@ -904,7 +902,7 @@ export default defineComponent({
             if (expandable && !expandedKeys.value.includes(activeKey.value)) {
               onNodeExpand({} as MouseEvent, eventNode);
             } else if (item.children && item.children.length) {
-              onActiveChange(item.children[0].data.key);
+              onActiveChange(item.children[0].key);
             }
             event.preventDefault();
             break;

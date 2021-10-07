@@ -28,13 +28,17 @@ export function calcRangeKeys({
   expandedKeys,
   startKey,
   endKey,
-  fieldNames,
+  fieldNames = {
+    title: 'title',
+    key: 'key',
+    children: 'children',
+  },
 }: {
   treeData: DataNode[];
   expandedKeys: Key[];
   startKey?: Key;
   endKey?: Key;
-  fieldNames: FieldNames;
+  fieldNames?: FieldNames;
 }): Key[] {
   const keys: Key[] = [];
   let record: Record = Record.None;

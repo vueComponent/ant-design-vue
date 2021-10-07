@@ -401,6 +401,7 @@ export function convertNodePropsToEventData(props: TreeNodeProps): EventDataNode
     dragOverGapBottom,
     pos,
     active,
+    eventKey,
   } = props;
   const eventData = {
     dataRef: data,
@@ -416,7 +417,7 @@ export function convertNodePropsToEventData(props: TreeNodeProps): EventDataNode
     dragOverGapBottom,
     pos,
     active,
-    eventKey: data.key,
+    eventKey,
   };
   if (!('props' in eventData)) {
     Object.defineProperty(eventData, 'props', {

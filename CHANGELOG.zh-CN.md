@@ -10,6 +10,23 @@
 
 ---
 
+## 3.0.0-alpha.1
+
+`2021-10-07`
+
+- 🌟 重构 `Tabs` [#4732](https://github.com/vueComponent/ant-design-vue/issues/4732)
+  - 移除 `prevClick`、`nextClick` 事件，使用 `tabScroll` 事件替代
+  - 废弃 `tabBarExtraContent` 插槽，使用 rightExtra 插槽替换，同时新增 `leftExtra` 插槽
+  - 新增 `addIcon`、`closeIcon`、`moreIcon` 插槽
+- 🌟 重构 `Card`，废弃 tabList slots 配置，使用 customTab 插槽统一配置 [#4732](https://github.com/vueComponent/ant-design-vue/issues/4732)
+- 🌟 重构 `Drawer`
+  - 新增 `autofocus` `contentWrapperStyle` `footerStyle` `headerStyle` `push` `size` `forceRender` 等属性
+  - 新增 `closeIcon` `extra` `footer` 等插槽
+  - 废弃 `afterVisibleChange` 属性，使用同名事件替代
+- 🐞 修复 `Table` pagination 没有响应式变化问题 [1add0d](https://github.com/vueComponent/ant-design-vue/commit/1add0d251cd35aa2c55404f7a60f1531425490c1)
+- 🐞 修复 `notification` 样式错位问题 [#4703](https://github.com/vueComponent/ant-design-vue/issues/4703)
+- 🐞 修复 `Tree` fieldsName 导致的选中、拖拽等异常 [#4726](https://github.com/vueComponent/ant-design-vue/issues/4726)
+
 ## 3.0.0-alpha.0
 
 `2021-09-24`

@@ -10,6 +10,23 @@
 
 ---
 
+## 3.0.0-alpha.1
+
+`2021-10-07`
+
+- 🌟 Refactor `Tabs` [#4732](https://github.com/vueComponent/ant-design-vue/issues/4732)
+  - Removed `prevClick`, `nextClick` events, and use `tabScroll` event instead
+  - Obsolete the `tabBarExtraContent` slot, replace it with the rightExtra slot, and add the `leftExtra` slot
+  - Added `addIcon`, `closeIcon`, `moreIcon` slots
+- 🌟 Refactor `Card`, discard the tabList slots configuration, and use the customTab slot for unified configuration [#4732](https://github.com/vueComponent/ant-design-vue/issues/4732)
+- 🌟 Refactor `Drawer`
+  - Added `autofocus` `contentWrapperStyle` `footerStyle` `headerStyle` `push` `size` `forceRender` and other attributes
+  - Added `closeIcon` `extra` `footer` and other slots
+  - Deprecated `afterVisibleChange` property, use event with the same name instead
+- 🐞 Fix the problem that `Table` pagination does not respond to changes [1add0d](https://github.com/vueComponent/ant-design-vue/commit/1add0d251cd35aa2c55404f7a60f1531425490c1)
+- 🐞 Fix `notification` style misalignment problem [#4703](https://github.com/vueComponent/ant-design-vue/issues/4703)
+- 🐞 Fix the selection, dragging and other abnormalities caused by `Tree` fieldsName [#4726](https://github.com/vueComponent/ant-design-vue/issues/4726)
+
 ## 3.0.0-alpha.0
 
 `2021-09-24`

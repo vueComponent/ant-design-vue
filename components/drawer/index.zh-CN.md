@@ -19,7 +19,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/7z8NJQhFb/Drawer.svg
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| autoFocus | 抽屉展开后是否将焦点切换至其 Dom 节点 | boolean | true | 3.0.0 |
+| autofocus | 抽屉展开后是否将焦点切换至其 Dom 节点 | boolean | true | 3.0.0 |
 | bodyStyle | 可用于设置 Drawer 内容部分的样式 | CSSProperties | - |  |
 | class | 对话框外层容器的类名 | string | - |  |
 | closable | 是否显示右上角的关闭按钮 | boolean | true |  |
@@ -47,7 +47,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/7z8NJQhFb/Drawer.svg
 | width | 宽度 | string \| number | 378 |  |
 | zIndex | 设置 Drawer 的 `z-index` | Number | 1000 |  |
 
-## 方法
+## 事件
 
 | 名称               | 描述                                 | 类型              | 默认值 | 版本 |
 | ------------------ | ------------------------------------ | ----------------- | ------ | ---- |

@@ -19,7 +19,7 @@ A Drawer is a panel that is typically overlaid on top of a page and slides in fr
 
 | Props | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| autoFocus | Whether Drawer should get focused after open | boolean | true | 3.0.0 |
+| autofocus | Whether Drawer should get focused after open | boolean | true | 3.0.0 |
 | bodyStyle | Style of the drawer content part | CSSProperties | - |  |
 | class | The class name of the container of the Drawer dialog | string | - |  |
 | closable | Whether a close (x) button is visible on top right of the Drawer dialog or not | boolean | true |  |
@@ -47,7 +47,7 @@ A Drawer is a panel that is typically overlaid on top of a page and slides in fr
 | width | Width of the Drawer dialog | string \| number | 378 |  |
 | zIndex | The `z-index` of the Drawer | Number | 1000 |  |
 
-## Methods
+## Events
 
 | Name | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |

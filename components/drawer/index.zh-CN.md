@@ -24,7 +24,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/7z8NJQhFb/Drawer.svg
 | class | 对话框外层容器的类名 | string | - |  |
 | closable | 是否显示右上角的关闭按钮 | boolean | true |  |
 | closeIcon | 自定义关闭图标 | VNode \| slot | <CloseOutlined /> | 3.0.0 |
-| contentWrapperStyle | 可用于设置 Drawer 包裹内容部分的样式 | CSSProperties | 3.0.0 |
+| contentWrapperStyle | 可用于设置 Drawer 包裹内容部分的样式 | CSSProperties | - | 3.0.0 |
 | destroyOnClose | 关闭时销毁 Drawer 里的子元素 | boolean | false |  |
 | drawerStyle | 用于设置 Drawer 弹出层的样式 | object | - |  |
 | extra | 抽屉右上角的操作区域 | VNode \| slot | - | 3.0.0 |
@@ -39,7 +39,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/7z8NJQhFb/Drawer.svg
 | maskClosable | 点击蒙层是否允许关闭 | boolean | true |  |
 | maskStyle | 遮罩样式 | CSSProperties | {} |  |
 | placement | 抽屉的方向 | 'top' \| 'right' \| 'bottom' \| 'left' | 'right' |  |
-| push | 用于设置多层 Drawer 的推动行为 | boolean \| {distance: string \| number} | { distance: 180} | 3.0.0 |
+| push | 用于设置多层 Drawer 的推动行为 | boolean \| {distance: string \| number} | { distance: 180 } | 3.0.0 |
 | size | 预设抽屉宽度（或高度），default `378px` 和 large `736px` | `default` \| `large` | `default` | 3.0.0 |
 | style | 可用于设置 Drawer 最外层容器的样式，和 `drawerStyle` 的区别是作用节点包括 `mask` | CSSProperties | - |  |
 | title | 标题 | string \| slot | - |  |

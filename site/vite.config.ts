@@ -16,6 +16,9 @@ export default {
       'ant-design-vue': path.resolve(__dirname, '../components'),
     },
   },
+  server: {
+    host: true,
+  },
   plugins: [
     vueJsx({
       // options are passed on to @vue/babel-plugin-jsx

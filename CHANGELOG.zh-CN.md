@@ -10,6 +10,12 @@
 
 ---
 
+## 3.0.0-alpha.2
+
+`2021-10-08`
+
+- 🐞 修复引用 process.nextTick 问题 [#4737](https://github.com/vueComponent/ant-design-vue/issues/4737)
+
 ## 3.0.0-alpha.1
 
 `2021-10-07`

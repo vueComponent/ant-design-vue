@@ -10,11 +10,11 @@ import {
   onBeforeUnmount,
   onUpdated,
   getCurrentInstance,
+  nextTick,
 } from 'vue';
 import canUseDom from './canUseDom';
 import ScrollLocker from '../vc-util/Dom/scrollLocker';
 import wrapperRaf from './raf';
-import { nextTick } from 'process';
 
 let openCount = 0;
 const supportDom = canUseDom();

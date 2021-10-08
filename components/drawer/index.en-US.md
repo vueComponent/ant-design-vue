@@ -24,7 +24,7 @@ A Drawer is a panel that is typically overlaid on top of a page and slides in fr
 | class | The class name of the container of the Drawer dialog | string | - |  |
 | closable | Whether a close (x) button is visible on top right of the Drawer dialog or not | boolean | true |  |
 | closeIcon | Custom close icon | VNode \| slot | <CloseOutlined /> | 3.0.0 |
-| contentWrapperStyle | Style of the drawer wrapper of content part | CSSProperties | 3.0.0 |
+| contentWrapperStyle | Style of the drawer wrapper of content part | CSSProperties | - | 3.0.0 |
 | destroyOnClose | Whether to unmount child components on closing drawer or not | boolean | false |  |
 | drawerStyle | Style of the popup layer element | object | - |  |
 | extra | Extra actions area at corner | VNode \| slot | - | 3.0.0 |
@@ -39,7 +39,7 @@ A Drawer is a panel that is typically overlaid on top of a page and slides in fr
 | maskClosable | Clicking on the mask (area outside the Drawer) to close the Drawer or not | boolean | true |  |
 | maskStyle | Style for Drawer's mask element | CSSProperties | {} |  |
 | placement | The placement of the Drawer | 'top' \| 'right' \| 'bottom' \| 'left' | 'right' |  |
-| push | Nested drawers push behavior | boolean \| {distance: string \| number} | { distance: 180} | 3.0.0 |
+| push | Nested drawers push behavior | boolean \| {distance: string \| number} | { distance: 180 } | 3.0.0 |
 | size | presetted size of drawer, default `378px` and large `736px` | `default` \| `large` | `default` | 3.0.0 |
 | style | Style of wrapper element which contains mask compare to drawerStyle | CSSProperties | - |  |
 | title | The title for Drawer | string \| slot | - |  |

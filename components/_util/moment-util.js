@@ -1,5 +1,5 @@
 import interopDefault from './interopDefault';
-import * as moment from 'moment';
+import moment from 'moment';
 import warning from './warning';
 import isNil from 'lodash/isNil';
 

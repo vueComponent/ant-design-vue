@@ -1,5 +1,5 @@
 import PropTypes from '../_util/vue-types';
-import * as moment from 'moment';
+import moment from 'moment';
 import interopDefault from '../_util/interopDefault';
 import { changeConfirmLocale } from '../modal/locale';
 import Base from '../base';

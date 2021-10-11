@@ -1,6 +1,6 @@
 <docs>
 ---
-order: 8
+order: 9
 title:
   zh-CN: 带页签的卡片
   en-US: With tabs

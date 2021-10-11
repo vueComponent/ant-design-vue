@@ -1,3 +1,5 @@
+let scrollbarVerticalSize = {};
+let scrollbarHorizontalSize  = {};
 // Measure scrollbar width for padding body during modal show/hide
 const scrollbarMeasure = {
   position: 'absolute',
@@ -13,7 +15,14 @@ export function measureScrollbar({ direction = 'vertical', prefixCls }) {
     return 0;
   }
 
+  const ratio = window.devicePixelRatio;
   const isVertical = direction === 'vertical';
+  if (isVertical && scrollbarVerticalSize[ratio]) {
+    return scrollbarVerticalSize[ratio];
+  }
+  if (!isVertical && scrollbarHorizontalSize[ratio]) {
+    return scrollbarHorizontalSize[ratio];
+  }
   const scrollDiv = document.createElement('div');
   Object.keys(scrollbarMeasure).forEach(scrollProp => {
     scrollDiv.style[scrollProp] = scrollbarMeasure[scrollProp];
@@ -31,8 +40,10 @@ export function measureScrollbar({ direction = 'vertical', prefixCls }) {
   let size = 0;
   if (isVertical) {
     size = scrollDiv.offsetWidth - scrollDiv.clientWidth;
+    scrollbarVerticalSize[ratio] = size;
   } else {
     size = scrollDiv.offsetHeight - scrollDiv.clientHeight;
+    scrollbarHorizontalSize[ratio] = size;
   }
 
   document.body.removeChild(scrollDiv);

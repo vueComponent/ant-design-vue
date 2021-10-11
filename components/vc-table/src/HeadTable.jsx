@@ -15,6 +15,22 @@ export default {
   inject: {
     table: { default: () => ({}) },
   },
+  data() {
+    return { scrollbarWidthOfHeader: 0 };
+  },
+  created() {
+    // https://github.com/vueComponent/ant-design-vue/issues/4740
+    this.updateScrollbarWidthOfHeader();
+    window.addEventListener('resize', this.updateScrollbarWidthOfHeader);
+  },
+  destroy() {
+    window.removeEventListener('resize', this.updateScrollbarWidthOfHeader);
+  },
+  methods: {
+    updateScrollbarWidthOfHeader() {
+      this.scrollbarWidthOfHeader = measureScrollbar({ direction: 'horizontal', prefixCls: this.table.prefixCls });
+    },
+  },
   render() {
     const { columns, fixed, tableClassName, handleBodyScrollLeft, expander, table } = this;
     const { prefixCls, scroll, showHeader, saveRef } = table;
@@ -26,7 +42,7 @@ export default {
     if (scroll.y) {
       useFixedHeader = true;
       // https://github.com/ant-design/ant-design/issues/17051
-      const scrollbarWidthOfHeader = measureScrollbar({ direction: 'horizontal', prefixCls });
+      const scrollbarWidthOfHeader = this.scrollbarWidthOfHeader;
       // Add negative margin bottom for scroll bar overflow bug
       if (scrollbarWidthOfHeader > 0 && !fixed) {
         headStyle.marginBottom = `-${scrollbarWidthOfHeader}px`;
@@ -49,7 +65,7 @@ export default {
           directives: [
             {
               name: 'ant-ref',
-              value: fixed ? () => {} : saveRef('headTable'),
+              value: fixed ? () => { } : saveRef('headTable'),
             },
           ],
         }}

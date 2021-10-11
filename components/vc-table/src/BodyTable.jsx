@@ -17,6 +17,22 @@ export default {
   inject: {
     table: { default: () => ({}) },
   },
+  data() {
+    return { scrollbarWidth: 0 };
+  },
+  created() {
+    // https://github.com/vueComponent/ant-design-vue/issues/4740
+    this.updateScrollbarWidth();
+    window.addEventListener('resize', this.updateScrollbarWidth);
+  },
+  destroy() {
+    window.removeEventListener('resize', this.updateScrollbarWidth);
+  },
+  methods: {
+    updateScrollbarWidth() {
+      this.scrollbarWidth = measureScrollbar({ direction: 'horizontal' });
+    },
+  },
   render() {
     const { prefixCls, scroll } = this.table;
     const {
@@ -55,7 +71,7 @@ export default {
       useFixedHeader = true;
 
       // Add negative margin bottom for scroll bar overflow bug
-      const scrollbarWidth = measureScrollbar({ direction: 'vertical' });
+      const scrollbarWidth = this.scrollbarWidth;
       if (scrollbarWidth > 0 && fixed) {
         bodyStyle.marginBottom = `-${scrollbarWidth}px`;
         bodyStyle.paddingBottom = '0px';

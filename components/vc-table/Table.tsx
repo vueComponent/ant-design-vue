@@ -509,7 +509,7 @@ export default defineComponent<TableProps<DefaultRecordType>>({
     };
     useProvideTable(
       reactive({
-        ...reactivePick(props, 'prefixCls', 'direction', 'transformCellText'),
+        ...toRefs(reactivePick(props, 'prefixCls', 'direction', 'transformCellText')),
         getComponent,
         scrollbarSize,
         fixedInfoList: computed(() =>

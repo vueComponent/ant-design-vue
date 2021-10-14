@@ -527,17 +527,18 @@ export default defineComponent<TableProps<DefaultRecordType>>({
         summaryCollect,
       }),
     );
-
     useProvideBody(
       reactive({
-        ...reactivePick(
-          props,
-          'rowClassName',
-          'expandedRowClassName',
-          'expandRowByClick',
-          'expandedRowRender',
-          'expandIconColumnIndex',
-          'indentSize',
+        ...toRefs(
+          reactivePick(
+            props,
+            'rowClassName',
+            'expandedRowClassName',
+            'expandRowByClick',
+            'expandedRowRender',
+            'expandIconColumnIndex',
+            'indentSize',
+          ),
         ),
         columns,
         flattenColumns,

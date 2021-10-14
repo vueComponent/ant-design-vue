@@ -471,6 +471,16 @@ const InteralTable = defineComponent<
       return mergedData.value.slice((current - 1) * pageSize, current * pageSize);
     });
 
+    const expandIconColumnIndex = computed(() => {
+      // Adjust expand icon index, no overwrite expandIconColumnIndex if set.
+      if (expandType.value === 'nest' && props.expandIconColumnIndex === undefined) {
+        return props.rowSelection ? 1 : 0;
+      } else if (props.expandIconColumnIndex! > 0 && props.rowSelection) {
+        return props.expandIconColumnIndex - 1;
+      }
+      return props.expandIconColumnIndex;
+    });
+
     // ========================== Selections ==========================
     const [transformSelectionColumns, selectedKeySet] = useSelection(
       computed(() => props.rowSelection),
@@ -483,7 +493,7 @@ const InteralTable = defineComponent<
         expandType,
         childrenColumnName,
         locale: tableLocale,
-        expandIconColumnIndex: computed(() => props.expandIconColumnIndex),
+        expandIconColumnIndex,
         getPopupContainer: computed(() => props.getPopupContainer),
       },
     );
@@ -508,15 +518,6 @@ const InteralTable = defineComponent<
     };
     expose({
       selectedKeySet,
-    });
-    const expandIconColumnIndex = computed(() => {
-      // Adjust expand icon index, no overwrite expandIconColumnIndex if set.
-      if (expandType.value === 'nest' && props.expandIconColumnIndex === undefined) {
-        return props.rowSelection ? 1 : 0;
-      } else if (props.expandIconColumnIndex! > 0 && props.rowSelection) {
-        return props.expandIconColumnIndex - 1;
-      }
-      return props.expandIconColumnIndex;
     });
 
     const indentSize = computed(() => {

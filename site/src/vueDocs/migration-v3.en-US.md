@@ -22,9 +22,10 @@ The 2.x version is a compatible version developed for compatibility with Vue 3. 
 - Removed the `combobox` mode of Select, please use `AutoComplete` instead.
 - Deprecated Button.Group, please use `Space` instead.
 - `DatePicker` `TimePicker` `Calendar` remove momentjs, please use dayjs instead
-- `Tree`, `TreeSlelct`
+- `Tree`, `TreeSelect`
   - Deprecated the use of `a-tree-node` and `a-tree-select-node` to construct nodes, use the `treeData` property instead
   - Deprecated `scopedSlots` `slots` custom rendering node, use `v-slot:title` instead
+  - Deprecated `replaceFields`, use `fieldNames` instead
 - `Table`
   - Removed the `rowSelection.hideDefaultSelections` property of Table, please use `SELECTION_ALL` and `SELECTION_INVERT` in `rowSelection.selections` instead, [custom options](/components/table/#components-table-demo- row-selection-custom).
   - Removed Column slots and replaced them with `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon`
@@ -33,9 +34,9 @@ The 2.x version is a compatible version developed for compatibility with Vue 3. 
 
 In order to make the components have better performance and maintainability, we have used TS + Composition Api to refactor almost all components. There are still very few components that have not been refactored. Such components will be refactored gradually in the future, and the rest There will be no destructive updates to the components, so there is no need to worry about future upgrade costs.
 
-Major updates after the 3.0 version refactoring include `Tree` `TreeSlelct` `DatePicker` `TimePicker` `Calendar` `Form` `Table`, other components also have corresponding function updates, you can check ChangeLog for further details
+Major updates after the 3.0 version refactoring include `Tree` `TreeSelect` `DatePicker` `TimePicker` `Calendar` `Form` `Table`, other components also have corresponding function updates, you can check ChangeLog for further details
 
-- `Tree` `TreeSlelct`
+- `Tree` `TreeSelect`
 
   - Added virtual scrolling, discarded using `a-tree-node` `a-tree-select-node` to build nodes, using `treeData` property instead to improve component performance
   - Deprecated `scopedSlots` `slots` custom rendering node, and replace it with `v-slot:title` to improve ease of use, avoid slot configuration expansion, and also avoid slot conflicts

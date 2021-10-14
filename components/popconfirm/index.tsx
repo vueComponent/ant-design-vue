@@ -19,6 +19,7 @@ import classNames from '../_util/classNames';
 import { getTransitionName } from '../_util/transition';
 import { cloneVNodes } from '../_util/vnode';
 import omit from '../_util/omit';
+import { tooltipDefaultProps } from '../tooltip/Tooltip';
 
 export const popconfirmProps = () => ({
   ...abstractTooltipProps(),
@@ -47,6 +48,7 @@ export interface PopconfirmLocale {
 const Popconfirm = defineComponent({
   name: 'APopconfirm',
   props: initDefaultProps(popconfirmProps(), {
+    ...tooltipDefaultProps,
     trigger: 'click',
     transitionName: 'zoom-big',
     align: () => ({}),

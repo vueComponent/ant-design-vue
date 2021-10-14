@@ -47,6 +47,17 @@ export const tooltipProps = () => ({
   title: PropTypes.any,
 });
 
+export const tooltipDefaultProps = {
+  trigger: 'hover',
+  transitionName: 'zoom-big-fast',
+  align: () => ({}),
+  placement: 'top',
+  mouseEnterDelay: 0.1,
+  mouseLeaveDelay: 0.1,
+  arrowPointAtCenter: false,
+  autoAdjustOverflow: true,
+};
+
 export type TriggerTypes = typeof triggerTypes[number];
 
 export type PlacementTypes = typeof placementTypes[number];

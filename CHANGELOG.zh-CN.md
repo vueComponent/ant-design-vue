@@ -10,6 +10,15 @@
 
 ---
 
+## 3.0.0-alpha.3
+
+`2021-10-08`
+
+- Table
+  - 🐞 修复排序提示不显示问题 [f64d7a](https://github.com/vueComponent/ant-design-vue/commit/f64d7adb22952cfdd5bf642343335fd78460d745)
+  - 🐞 修复部分属性响应式丢失问题 [#4756](https://github.com/vueComponent/ant-design-vue/issues/4756)
+- 🐞 修复 `Popover` `Popconfirm` 默认自动校准位置不生效问题 [98b5e5](https://github.com/vueComponent/ant-design-vue/commit/98b5e5d53fd10620eddc2c386181f868ef941397)
+
 ## 3.0.0-alpha.2
 
 `2021-10-08`

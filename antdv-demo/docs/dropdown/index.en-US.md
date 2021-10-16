@@ -5,6 +5,7 @@
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | disabled | whether the dropdown menu is disabled | boolean | - |
+| destroyPopupOnHide | Whether destroy dropdown when hidden | boolean | false |  |
 | getPopupContainer | to set the container of the dropdown menu. The default is to create a `div` element in `body`, you can reset it to the scrolling area and make a relative reposition. [example](https://codepen.io/afc163/pen/zEjNOy?editors=0010) | Function(triggerNode) | `() => document.body` |
 | overlay(slot-scope) | the dropdown menu | [Menu](/components/menu) | - |
 | overlayClassName | Class name of the dropdown root element | string | - |

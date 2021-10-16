@@ -23,4 +23,5 @@ export default () => ({
   mouseLeaveDelay: PropTypes.number,
   openClassName: PropTypes.string,
   minOverlayWidthMatchTrigger: PropTypes.bool,
+  destroyPopupOnHide: PropTypes.bool,
 });

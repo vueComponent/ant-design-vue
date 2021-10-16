@@ -9,6 +9,7 @@ export default {
   mixins: [BaseMixin],
   props: {
     minOverlayWidthMatchTrigger: PropTypes.bool,
+    destroyPopupOnHide: PropTypes.bool.def(false),
     prefixCls: PropTypes.string.def('rc-dropdown'),
     transitionName: PropTypes.string,
     overlayClassName: PropTypes.string.def(''),
@@ -169,6 +170,7 @@ export default {
       overlayClassName,
       overlayStyle,
       trigger,
+      destroyPopupOnHide,
       ...otherProps
     } = this.$props;
     let triggerHideAction = hideAction;
@@ -180,6 +182,7 @@ export default {
       props: {
         ...otherProps,
         prefixCls,
+        destroyPopupOnHide,
         popupClassName: overlayClassName,
         popupStyle: overlayStyle,
         builtinPlacements: placements,

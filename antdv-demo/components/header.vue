@@ -17,7 +17,7 @@ export default {
     return {
       visibleAdblockBanner: !!this.demoContext.blocked,
       value: null,
-      showTopBanner: !localStorage.getItem('notification-key-2.2'),
+      showTopBanner: !localStorage.getItem('notification-key-next'),
     };
   },
   watch: {
@@ -64,8 +64,8 @@ export default {
       this.value = val;
     },
     closeTopBanner() {},
-    changeVersion() {
-      location.href = `https://2x.antdv.com${this.$route.fullPath}`;
+    changeVersion(v) {
+      location.href = `https://${v}.antdv.com${this.$route.fullPath}`;
     },
   },
   render() {
@@ -92,32 +92,32 @@ export default {
         {isCN && this.showTopBanner && (
           <div class="global-notification">
             <span>
-              当前文档是 1.x 版本，如需使用 Vue 3 请访问&nbsp;&nbsp;
-              <a href="https://2x.antdv.com/" target="_blank">
-                2.x
+              v3 版本已发布，请访问 &nbsp;&nbsp;
+              <a href="https://next.antdv.com/" target="_blank">
+                next.antdv.com
               </a>
-              &nbsp;&nbsp;版本文档
+              &nbsp;&nbsp;查看更多详情
             </span>
             <a-icon
               type="close"
               style="position: absolute;top: 13px;right: 15px;"
-              onClick={() => this.handleClose('2.0')}
+              onClick={() => this.handleClose('next')}
             />
           </div>
         )}
         {!isCN && this.showTopBanner && (
           <div class="global-notification">
             <span>
-              You’re browsing the documentation for v1.x (support vue 2).&nbsp;
-              <a href="https://2x.antdv.com/" target="_blank">
-                Click here
+              v3 beta is out! Discover more about it on &nbsp;
+              <a href="https://next.antdv.com/" target="_blank">
+                next.antdv.com
               </a>
-              &nbsp;for v2.x（support vue 3） documentation.
+              &nbsp;
             </span>
             <a-icon
               type="close"
               style="position: absolute;top: 8px;right: 15px;"
-              onClick={() => this.handleClose('2.0')}
+              onClick={() => this.handleClose('next')}
             />
           </div>
         )}
@@ -162,8 +162,11 @@ export default {
             </a-button>
             <a-select size="small" defaultValue={packageInfo.version} class="version">
               <a-select-option value={packageInfo.version}>{packageInfo.version}</a-select-option>
-              <a-select-option value="2.x" onClick={this.changeVersion}>
-                2.x
+              <a-select-option value="2.x" onClick={() => this.changeVersion('2x')}>
+                v2 LST
+              </a-select-option>
+              <a-select-option value="next" onClick={() => this.changeVersion('next')}>
+                v3 Current (Latest Features)
               </a-select-option>
             </a-select>
             <a-menu selectedKeys={selectedKeys} mode="horizontal" class="menu-site" id="nav">

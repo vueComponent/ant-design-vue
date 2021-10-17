@@ -29,6 +29,7 @@ export default {
   props: ['isCN', 'isMobile'],
   data() {
     return {
+      isEffective,
       visible: true,
       ads: [
         {

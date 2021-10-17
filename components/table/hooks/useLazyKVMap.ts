@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { watch, ref } from 'vue';
+import { watch, shallowRef } from 'vue';
 import type { Key, GetRowKey } from '../interface';
 
 interface MapCache<RecordType> {
@@ -11,7 +11,7 @@ export default function useLazyKVMap<RecordType>(
   childrenColumnNameRef: Ref<string>,
   getRowKeyRef: Ref<GetRowKey<RecordType>>,
 ) {
-  const mapCacheRef = ref<MapCache<RecordType>>({});
+  const mapCacheRef = shallowRef<MapCache<RecordType>>({});
 
   watch(
     [dataRef, childrenColumnNameRef, getRowKeyRef],

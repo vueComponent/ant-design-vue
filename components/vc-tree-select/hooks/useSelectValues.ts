@@ -6,7 +6,7 @@ import { formatStrategyKeys } from '../utils/strategyUtil';
 import type { DefaultValueType } from '../../vc-select/interface/generator';
 import type { DataEntity } from '../../vc-tree/interface';
 import type { Ref } from 'vue';
-import { ref, watchEffect } from 'vue';
+import { shallowRef, watchEffect } from 'vue';
 
 interface Config {
   treeConduction: Ref<boolean>;
@@ -36,7 +36,7 @@ export default function useSelectValues(
     getLabelProp,
   }: Config,
 ): Ref<LabelValueType[]> {
-  const rawValueLabeled = ref([]);
+  const rawValueLabeled = shallowRef([]);
   watchEffect(() => {
     let mergedRawValues = rawValues.value;
 

@@ -23,7 +23,16 @@ import {
 import NodeList, { MOTION_KEY, MotionEntity } from './NodeList';
 import { conductCheck } from './utils/conductUtil';
 import DropIndicator from './DropIndicator';
-import { computed, defineComponent, onMounted, onUnmounted, reactive, ref, watchEffect } from 'vue';
+import {
+  computed,
+  defineComponent,
+  onMounted,
+  onUnmounted,
+  reactive,
+  ref,
+  shallowRef,
+  watchEffect,
+} from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { CheckInfo } from './props';
 import { treeProps } from './props';
@@ -59,12 +68,12 @@ export default defineComponent({
     const destroyed = ref(false);
     let delayedDragEnterLogic: Record<Key, number> = {};
     const indent = ref();
-    const selectedKeys = ref([]);
-    const checkedKeys = ref([]);
-    const halfCheckedKeys = ref([]);
-    const loadedKeys = ref([]);
-    const loadingKeys = ref([]);
-    const expandedKeys = ref([]);
+    const selectedKeys = shallowRef([]);
+    const checkedKeys = shallowRef([]);
+    const halfCheckedKeys = shallowRef([]);
+    const loadedKeys = shallowRef([]);
+    const loadingKeys = shallowRef([]);
+    const expandedKeys = shallowRef([]);
 
     const dragState = reactive({
       dragging: false,
@@ -87,7 +96,7 @@ export default defineComponent({
     const treeData = computed(() => {
       return props.treeData !== undefined ? props.treeData : convertTreeToData(props.children);
     });
-    const keyEntities = ref({});
+    const keyEntities = shallowRef({});
 
     const focused = ref(false);
     const activeKey = ref<Key>(null);

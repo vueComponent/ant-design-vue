@@ -45,6 +45,7 @@ import {
   onMounted,
   provide,
   ref,
+  shallowRef,
   watch,
   watchEffect,
 } from 'vue';
@@ -519,7 +520,7 @@ export default function generateSelector<
       };
 
       // We need cache options here in case user update the option list
-      const prevValueOptions = ref([]);
+      const prevValueOptions = shallowRef([]);
       const setPrevValueOptions = (val: any[]) => {
         prevValueOptions.value = val;
       };

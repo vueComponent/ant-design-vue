@@ -33,7 +33,7 @@ import type { TreeSelectProps } from './props';
 import { treeSelectProps } from './props';
 import { getLabeledValue } from '../vc-select/utils/valueUtil';
 import omit from '../_util/omit';
-import { computed, defineComponent, ref, toRef, watch, watchEffect } from 'vue';
+import { computed, defineComponent, ref, shallowRef, toRef, watch, watchEffect } from 'vue';
 import { convertDataToEntities } from '../vc-tree/utils/treeUtil';
 import { conductCheck } from '../vc-tree/utils/conductUtil';
 import { warning } from '../vc-util/warning';
@@ -202,8 +202,8 @@ export default function generate(config: {
         return { missingRawValues, existRawValues };
       };
 
-      const rawValues = ref<RawValueType[]>([]);
-      const rawHalfCheckedKeys = ref<RawValueType[]>([]);
+      const rawValues = shallowRef<RawValueType[]>([]);
+      const rawHalfCheckedKeys = shallowRef<RawValueType[]>([]);
 
       watchEffect(() => {
         const valueHalfCheckedKeys: RawValueType[] = [];

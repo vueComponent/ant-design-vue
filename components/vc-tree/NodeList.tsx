@@ -2,7 +2,7 @@
  * Handle virtual list of the TreeNodes.
  */
 
-import { computed, defineComponent, ref, watch } from 'vue';
+import { computed, defineComponent, ref, shallowRef, watch } from 'vue';
 import VirtualList from '../vc-virtual-list';
 import type { FlattenNode, DataEntity, DataNode, ScrollTo } from './interface';
 import MotionTreeNode from './MotionTreeNode';
@@ -102,8 +102,8 @@ export default defineComponent({
       getIndentWidth: () => indentMeasurerRef.value.offsetWidth,
     });
     // ============================== Motion ==============================
-    const transitionData = ref<FlattenNode[]>(props.data);
-    const transitionRange = ref([]);
+    const transitionData = shallowRef<FlattenNode[]>(props.data);
+    const transitionRange = shallowRef([]);
     const motionType = ref<'show' | 'hide' | null>(null);
 
     function onMotionEnd() {

@@ -2,7 +2,7 @@ import type { DataNode, TreeDataNode, Key } from './interface';
 import { useInjectTreeSelectContext } from './Context';
 import type { RefOptionListProps } from '../vc-select/OptionList';
 import type { ScrollTo } from '../vc-virtual-list/List';
-import { computed, defineComponent, nextTick, ref, watch } from 'vue';
+import { computed, defineComponent, nextTick, ref, shallowRef, watch } from 'vue';
 import { optionListProps } from './props';
 import useMemo from '../_util/hooks/useMemo';
 import type { EventDataNode } from '../tree';
@@ -88,8 +88,8 @@ export default defineComponent({
     };
 
     // =========================== Keys ===========================
-    const expandedKeys = ref<Key[]>(context.value.treeDefaultExpandedKeys);
-    const searchExpandedKeys = ref<Key[]>(null);
+    const expandedKeys = shallowRef<Key[]>(context.value.treeDefaultExpandedKeys);
+    const searchExpandedKeys = shallowRef<Key[]>(null);
 
     watch(
       () => props.searchValue,

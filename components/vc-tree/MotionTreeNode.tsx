@@ -11,6 +11,7 @@ import {
   onBeforeUnmount,
   onMounted,
   ref,
+  shallowRef,
   Transition,
   watch,
 } from 'vue';
@@ -36,7 +37,7 @@ export default defineComponent({
     const context = useInjectTreeContext();
     const motionedRef = ref(false);
     const transitionClass = ref('');
-    const transitionStyle = ref({});
+    const transitionStyle = shallowRef({});
     const transitionProps = computed(() => {
       if (props.motion) {
         return props.motion;

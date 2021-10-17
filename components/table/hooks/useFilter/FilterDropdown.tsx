@@ -15,7 +15,7 @@ import type {
 } from '../../interface';
 import FilterDropdownMenuWrapper from './FilterWrapper';
 import type { FilterState } from '.';
-import { computed, defineComponent, onBeforeUnmount, ref, watch } from 'vue';
+import { computed, defineComponent, onBeforeUnmount, ref, shallowRef, watch } from 'vue';
 import classNames from '../../../_util/classNames';
 import useConfigInject from '../../../_util/hooks/useConfigInject';
 import { useInjectSlots } from '../../context';
@@ -162,7 +162,7 @@ export default defineComponent<FilterDropdownProps<any>>({
 
     const propFilteredKeys = computed(() => props.filterState?.filteredKeys);
 
-    const filteredKeys = ref([]);
+    const filteredKeys = shallowRef([]);
 
     const onSelectKeys = ({ selectedKeys }: { selectedKeys?: Key[] }) => {
       filteredKeys.value = selectedKeys;
@@ -176,7 +176,7 @@ export default defineComponent<FilterDropdownProps<any>>({
       { immediate: true },
     );
 
-    const openKeys = ref([]);
+    const openKeys = shallowRef([]);
 
     const openRef = ref();
 

@@ -1,5 +1,5 @@
 import type { ComputedRef, Ref } from 'vue';
-import { ref, watchEffect } from 'vue';
+import { shallowRef, watchEffect } from 'vue';
 import type { FlattenDataNode, Key, RawValueType } from '../interface';
 
 /**
@@ -7,8 +7,8 @@ import type { FlattenDataNode, Key, RawValueType } from '../interface';
  * Only re-calculate when `flattenOptions` changed.
  */
 export default function useKeyValueMap(flattenOptions: ComputedRef<FlattenDataNode[]>) {
-  const cacheKeyMap: Ref<Map<Key, FlattenDataNode>> = ref(new Map());
-  const cacheValueMap: Ref<Map<RawValueType, FlattenDataNode>> = ref(new Map());
+  const cacheKeyMap: Ref<Map<Key, FlattenDataNode>> = shallowRef(new Map());
+  const cacheValueMap: Ref<Map<RawValueType, FlattenDataNode>> = shallowRef(new Map());
 
   watchEffect(() => {
     const newCacheKeyMap = new Map();

@@ -10,7 +10,7 @@ import devWarning from '../../vc-util/devWarning';
 import useMergedState from '../../_util/hooks/useMergedState';
 import useState from '../../_util/hooks/useState';
 import type { Ref } from 'vue';
-import { computed, ref, watchEffect } from 'vue';
+import { computed, shallowRef, watchEffect } from 'vue';
 import type { CheckboxProps } from '../../checkbox';
 import Checkbox from '../../checkbox';
 import Dropdown from '../../dropdown';
@@ -80,7 +80,7 @@ export default function useSelection<RecordType>(
   configRef: UseSelectionConfig<RecordType>,
 ): [TransformColumns<RecordType>, Ref<Set<Key>>] {
   // ======================== Caches ========================
-  const preserveRecordsRef = ref(new Map<Key, RecordType>());
+  const preserveRecordsRef = shallowRef(new Map<Key, RecordType>());
   const mergedRowSelection = computed(() => {
     const temp = rowSelectionRef.value || {};
     const { checkStrictly = true } = temp;

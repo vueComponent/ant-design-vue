@@ -1,6 +1,12 @@
 <template>
   <div id="right-bottom">
-    <img v-if="isCN" width="150" alt="官方公众号" src="https://qn.antdv.com/wechat.jpeg">
+    <!-- <img v-if="isCN" width="150" alt="官方公众号" src="https://qn.antdv.com/wechat.jpeg"> -->
+    <img
+      v-if="isCN"
+      width="150"
+      alt="早早聊 Vue 专场大会"
+      :src="`https://next-antdv.oss-cn-beijing.aliyuncs.com/zaozaoliao.png?v=${Date.now()}`"
+    />
     <div v-if="isMobile" class="close" @click="visible = false">
       <a-icon type="close" />
     </div>
@@ -44,6 +50,8 @@ export default {
   bottom: 10px;
   right: 10px;
   width: 150px;
+  border-radius: 5px;
+  overflow: hidden;
   .close {
     position: absolute;
     text-align: center;

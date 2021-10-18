@@ -50,7 +50,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 | 事件名称 | 说明 | 回调参数 | 版本 |
 | --- | --- | --- | --- | --- |
 | submit | 数据验证成功后回调事件 | Function(e:Event) | ｜ |
-| validate | 任一表单项被校验后触发 | 被校验的表单项 name 值，校验是否通过，错误消息（如果存在） |
 | finish | 提交表单且数据验证成功后回调事件 | function(values) | - | 2.0.0 |
 | finishFailed | 提交表单且数据验证失败后回调事件 | function({ values, errorFields, outOfDate }) | - | 2.0.0 |
 

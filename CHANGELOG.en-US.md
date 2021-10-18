@@ -57,7 +57,7 @@
 - `Collapse` added `ghost`, `collapsible`
 - `Popconfirm` added `cancelButton`, `okButton`, and `esc` button hiding
 - `ConfigProvider` added ConfigProvider.config to define the configuration of `Modal.xxx` `message` `notification`
-- `Tree` `TreeSlelct`
+- `Tree` `TreeSelect`
 
   - Added virtual scrolling, discarded using `a-tree-node` `a-tree-select-node` to build nodes, using `treeData` property instead to improve component performance
   - Deprecated `scopedSlots` `slots` custom rendering node, and replace it with `v-slot:title` to improve ease of use, avoid slot configuration expansion, and also avoid slot conflicts

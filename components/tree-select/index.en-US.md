@@ -41,7 +41,8 @@ Tree selection control.
 | treeCheckable | Whether to show checkbox on the treeNodes | boolean | false |  |
 | treeCheckStrictly | Whether to check nodes precisely (in the `checkable` mode), means parent and child nodes are not associated, and it will make `labelInValue` be true | boolean | false |  |
 | treeData | Data of the treeNodes, manual construction work is no longer needed if this property has been set(ensure the Uniqueness of each value) | array\<{ value, title, children, \[disabled, disableCheckbox, selectable] }> | \[] |  |
-| replaceFields | Replace the title,value, key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', title:'title', key:'key', value: 'value' } |  | 1.6.1 |
+| replaceFields | Replace the title,value, key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', label:'title', key:'key', value: 'value' } |  | 1.6.1 (3.0.0 deprecated) |
+| fieldNames | Replace the title,value, key and children fields in treeNode with the corresponding fields in treeData | object | {children:'children', label:'title', key:'key', value: 'value' } |  | 3.0.0 |
 | treeDataSimpleMode | Enable simple mode of treeData. Changes the `treeData` schema to: \[{id:1, pId:0, value:'1', title:"test1",...},...] where pId is parent node's id). It is possible to replace the default `id` and `pId` keys by providing object to `treeDataSimpleMode` | false\|object\<{ id: string, pId: string, rootPId: null }> | false |  |
 | treeDefaultExpandAll | Whether to expand all treeNodes by default | boolean | false |  |
 | treeDefaultExpandedKeys | Default expanded treeNodes | string\[] \| number\[] | - |  |

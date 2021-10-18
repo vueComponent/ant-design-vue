@@ -57,7 +57,7 @@
 - `Collapse` 新增 `ghost`、`collapsible`
 - `Popconfirm` 新增 `cancelButton`、`okButton`, 以及 `esc` 按键隐藏
 - `ConfigProvider` 新增 ConfigProvider.config，定义 `Modal.xxx` `message` `notification` 的配置
-- `Tree` `TreeSlelct`
+- `Tree` `TreeSelect`
 
   - 新增了虚拟滚动，废弃使用 `a-tree-node` `a-tree-select-node` 构建节点，使用 `treeData` 属性替代，提升组件性能
   - 废弃 `scopedSlots` `slots` 自定义渲染节点，使用 `v-slot:title` 替换，提升易用性，避免插槽配置膨胀，同时也避免了插槽冲突问题

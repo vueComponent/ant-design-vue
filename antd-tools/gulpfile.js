@@ -31,6 +31,8 @@ const packageJson = require(getProjectPath('package.json'));
 const cwd = process.cwd();
 const libDir = getProjectPath('lib');
 const esDir = getProjectPath('es');
+const slash = require('slash');
+const npmCLI = `npm${process.platform === 'win32' ? '.cmd' : ''}`;
 
 // const tsConfig = getTSCommonConfig();
 
@@ -127,7 +129,7 @@ function babelify(js, modules) {
   let stream = js.pipe(babel(babelConfig)).pipe(
     through2.obj(function z(file, encoding, next) {
       this.push(file.clone());
-      if (file.path.match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
+      if (slash(file.path).match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
         const content = file.contents.toString(encoding);
         file.contents = Buffer.from(
           content
@@ -168,8 +170,8 @@ function compile(modules) {
       through2.obj(function (file, encoding, next) {
         this.push(file.clone());
         if (
-          file.path.match(/\/style\/index\.less$/) ||
-          file.path.match(/\/style\/v2-compatible-reset\.less$/)
+          slash(file.path).match(/\/style\/index\.less$/) ||
+          slash(file.path).match(/\/style\/v2-compatible-reset\.less$/)
         ) {
           transformLess(file.path)
             .then(css => {
@@ -297,7 +299,7 @@ function publish(tagString, done) {
   if (tagString) {
     args = args.concat(['--tag', tagString]);
   }
-  const publishNpm = process.env.PUBLISH_NPM_CLI || 'npm';
+  const publishNpm = process.env.PUBLISH_NPM_CLI || npmCLI;
   runCmd(publishNpm, args, code => {
     tag();
     githubRelease(() => {
@@ -316,7 +318,7 @@ function pub(done) {
     tagString = 'next';
   }
   if (packageJson.scripts['pre-publish']) {
-    runCmd('npm', ['run', 'pre-publish'], code2 => {
+    runCmd(npmCLI, ['run', 'pre-publish'], code2 => {
       if (code2) {
         done(code2);
         return;
@@ -418,7 +420,7 @@ gulp.task(
           newVersion.trim() === version
         ) {
           // eslint-disable-next-line no-unused-vars
-          runCmd('npm', ['run', 'pub'], code => {
+          runCmd(npmCLI, ['run', 'pub'], code => {
             done();
           });
         } else {

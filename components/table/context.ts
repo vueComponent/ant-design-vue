@@ -12,7 +12,7 @@ export type ContextSlots = {
   customFilterIcon?: (...args: any[]) => any;
   customFilterDropdown?: (...args: any[]) => any;
   // 兼容 2.x 的 columns slots 配置
-  [key: string]: (...args: any[]) => any;
+  [key: string]: ((...args: any[]) => any) | undefined;
 };
 
 export type ContextProps = ComputedRef<ContextSlots>;

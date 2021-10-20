@@ -64,7 +64,7 @@
             </a-avatar>
           </a-dropdown>
         </div>
-        <PrevAndNext :menus="menus" :current-menu-index="currentMenuIndex" />
+        <PrevAndNext :menus="menus" :current-menu-index="currentMenuIndex" :is-zh-c-n="isZhCN" />
         <Footer />
       </a-col>
     </a-row>
@@ -122,7 +122,6 @@ export default defineComponent({
 
     const themeMode = inject('themeMode', {
       theme: ref('default'),
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       changeTheme: (_key: any) => void 0,
     });
 
@@ -166,19 +165,12 @@ export default defineComponent({
     };
     return {
       slugifyTitle: (str: string) => {
-        return (
-          str
-            // Remove control characters
-            .replace(rControl, '')
-            // Replace special characters
-            .replace(rSpecial, '-')
-            // Remove continuos separators
-            .replace(/\-{2,}/g, '-')
-            // Remove prefixing and trailing separtors
-            .replace(/^\-+|\-+$/g, '')
-            // ensure it doesn't start with a number (#121)
-            .replace(/^(\d)/, '_$1')
-        );
+        return str
+          .replace(rControl, '')
+          .replace(rSpecial, '-')
+          .replace(/\-{2,}/g, '-')
+          .replace(/^\-+|\-+$/g, '')
+          .replace(/^(\d)/, '_$1');
       },
       themeMode,
       visible,
@@ -195,7 +187,6 @@ export default defineComponent({
       dataSource,
       handleClickShowButton,
       iconStyle: {
-        // color: '#fff',
         fontSize: '20px',
       },
     };

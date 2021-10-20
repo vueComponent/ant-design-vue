@@ -14,7 +14,7 @@
 
 `2021-10-20`
 
-- 组件部分状态使用 shallowRef 提升性能 [3a968f](https://github.com/vueComponent/ant-design-vue/commit/3a968fdd33960a788f2037d944aca4e8ee81294f)
+- Use shallowRef to improve performance in part of the component state [3a968f](https://github.com/vueComponent/ant-design-vue/commit/3a968fdd33960a788f2037d944aca4e8ee81294f)
 
 ## 3.0.0-alpha.3
 

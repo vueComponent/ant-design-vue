@@ -203,7 +203,7 @@
     "semver": "^7.0.0",
     "slash": "^3.0.0",
     "style-loader": "^3.0.0",
-    "stylelint": "^13.0.0",
+    "stylelint": "^14.0.0",
     "stylelint-config-prettier": "^8.0.0",
     "stylelint-config-rational-order": "^0.1.2",
     "stylelint-config-standard": "^22.0.0",

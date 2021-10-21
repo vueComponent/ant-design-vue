@@ -64,7 +64,7 @@
             </a-avatar>
           </a-dropdown>
         </div>
-        <PrevAndNext :menus="menus" :current-menu-index="currentMenuIndex" />
+        <PrevAndNext :menus="menus" :current-menu-index="currentMenuIndex" :is-zh-c-n="isZhCN" />
         <Footer />
       </a-col>
     </a-row>

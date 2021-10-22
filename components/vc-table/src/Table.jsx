@@ -4,7 +4,7 @@ import merge from 'lodash/merge';
 import classes from 'component-classes';
 import classNames from 'classnames';
 import PropTypes from '../../_util/vue-types';
-import { debounce } from './utils';
+import { debounce, getColumnsKey, validateValue } from './utils';
 import warning from '../../_util/warning';
 import addEventListener from '../../vc-util/Dom/addEventListener';
 import ColumnManager from './ColumnManager';
@@ -14,10 +14,13 @@ import ExpandableTable from './ExpandableTable';
 import { initDefaultProps, getOptionProps, getListeners } from '../../_util/props-util';
 import BaseMixin from '../../_util/BaseMixin';
 import Vue from 'vue';
+import StickyOffsets from './useStickyOffsets';
+import { getCellFixedInfo } from './fixUtil';
+import ResizeObserver from '../../vc-resize-observer';
 
 export default {
   name: 'Table',
-  mixins: [BaseMixin],
+  mixins: [BaseMixin, StickyOffsets],
   provide() {
     return { 'table-store': this.store, table: this };
   },
@@ -94,9 +97,15 @@ export default {
       fixedColumnsBodyRowsHeight: {},
       expandedRowsHeight: {},
       expandedRowKeys: [],
+      fixedInfoList:[],
+      stickyOffsets:{},
     });
+
     return {
       columnManager: new ColumnManager(this.columns),
+      fixedInfoList: [],
+      pingedLeft: false,
+      pingedRight: false,
       sComponents: merge(
         {
           table: 'table',
@@ -114,6 +123,14 @@ export default {
         this.components,
       ),
     };
+  },
+  computed:{
+    colsKeys(){
+      return getColumnsKey(this.columnManager.leafColumns());
+    },
+    horizonScroll({scroll}){
+      return scroll && validateValue(scroll.x);
+    },
   },
   watch: {
     components() {
@@ -145,6 +162,23 @@ export default {
           this.resetScrollX();
         });
       }
+    },
+    colsWidths:{
+      immediate: true,
+      handler(){
+        const pureColWidths = this.colsKeys.map(columnKey => this.colsWidths.get(columnKey));
+        this.colWidths = pureColWidths;
+        this.stickyColumns = this.columnManager.leafColumns();
+      },
+    },
+    stickyOffsets:{
+      immediate:true,
+      handler(val){
+        this.store.stickyOffsets = val;
+        this.store.fixedInfoList = this.fixedInfoList = this.columnManager.leafColumns().map((_, colIndex) =>
+          getCellFixedInfo(colIndex, colIndex, this.columnManager.leafColumns(), val),
+        );
+      },
     },
   },
 
@@ -186,6 +220,7 @@ export default {
       if (this.ref_bodyTable) {
         this.ref_bodyTable.scrollLeft = 0;
       }
+      this.onFullTableResize();
     });
   },
 
@@ -197,6 +232,7 @@ export default {
           this.resizeEvent = addEventListener(window, 'resize', this.debouncedWindowResize);
         }
       }
+      this.onFullTableResize();
     });
   },
 
@@ -383,6 +419,7 @@ export default {
     },
 
     handleBodyScroll(e) {
+      this.onScroll(e.target);
       this.handleBodyScrollLeft(e);
       this.handleBodyScrollTop(e);
     },
@@ -442,14 +479,17 @@ export default {
         this.renderFooter(),
       ];
 
-      return scrollable ? <div class={`${prefixCls}-scroll`}>{table}</div> : table;
+      return scrollable ? (
+        <ResizeObserver onResize={this.onFullTableResize}>
+          <div class={`${prefixCls}-scroll`}>{table}</div>
+        </ResizeObserver>) : table;
     },
 
     renderLeftFixedTable() {
       const { prefixCls } = this;
 
       return (
-        <div class={`${prefixCls}-fixed-left`}>
+        <div key="left" class={`${prefixCls}-fixed-left`}>
           {this.renderTable({
             columns: this.columnManager.leftColumns(),
             fixed: 'left',
@@ -497,6 +537,7 @@ export default {
           handleBodyScroll={this.handleBodyScroll}
           expander={this.expander}
           isAnyColumnsFixed={isAnyColumnsFixed}
+          ref="bodyRef"
         />
       );
 
@@ -533,6 +574,24 @@ export default {
         </div>
       );
     },
+    onColumnResize(columnKey, width){
+        this.updateColsWidths(widths => {
+          if (widths.get(columnKey) !== width) {
+            const newWidths = new Map(widths);
+            newWidths.set(columnKey, width);
+            return newWidths;
+          }
+          return widths;
+        });
+    },
+    onScroll(currentTarget){
+      const { scrollWidth, clientWidth, scrollLeft } = currentTarget;
+      this.pingedLeft = scrollLeft > 0;
+      this.pingedRight = scrollLeft < scrollWidth - clientWidth;
+    },
+    onFullTableResize(){
+      this.horizonScroll && this.onScroll(this.$refs.bodyRef.$el);
+    },
   },
 
   render() {
@@ -546,10 +605,9 @@ export default {
         this.scrollPosition === 'both',
       [`${prefixCls}-scroll-position-${this.scrollPosition}`]: this.scrollPosition !== 'both',
       [`${prefixCls}-layout-fixed`]: this.isTableLayoutFixed(),
+      [`${prefixCls}-ping-left`]: this.pingedLeft,
+      [`${prefixCls}-ping-right`]: this.pingedRight,
     });
-
-    const hasLeftFixed = columnManager.isAnyColumnsLeftFixed();
-    const hasRightFixed = columnManager.isAnyColumnsRightFixed();
 
     const expandableTableProps = {
       props: {
@@ -576,11 +634,7 @@ export default {
               // id={props.id}
             >
               {this.renderTitle()}
-              <div class={`${prefixCls}-content`}>
-                {this.renderMainTable()}
-                {hasLeftFixed && this.renderLeftFixedTable()}
-                {hasRightFixed && this.renderRightFixedTable()}
-              </div>
+              <div class={`${prefixCls}-content`}>{this.renderMainTable()}</div>
             </div>
           );
         },

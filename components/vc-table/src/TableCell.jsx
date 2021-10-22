@@ -20,9 +20,11 @@ export default {
     column: PropTypes.object,
     expandIcon: PropTypes.any,
     component: PropTypes.any,
+    colIndex: PropTypes.number,
   },
   inject: {
     table: { default: () => ({}) },
+    store: { from: 'table-store', default: () => ({}) },
   },
   methods: {
     handleClick(e) {
@@ -47,8 +49,24 @@ export default {
       column,
       component: BodyCell,
     } = this;
+    const fixedInfoList = this.store.fixedInfoList || [];
+    const fixedInfo = fixedInfoList[this.colIndex];
+    const { fixLeft, fixRight, firstFixLeft, lastFixLeft, firstFixRight, lastFixRight } = fixedInfo;
+    // ====================== Fixed =======================
+    const fixedStyle = {};
+    const isFixLeft = typeof fixLeft === 'number';
+    const isFixRight = typeof fixRight === 'number';
+
+    if (isFixLeft) {
+      fixedStyle.position = 'sticky';
+      fixedStyle.left = `${fixLeft}px`;
+    }
+    if (isFixRight) {
+      fixedStyle.position = 'sticky';
+      fixedStyle.right = `${fixRight}px`;
+    }
     const { dataIndex, customRender, className = '' } = column;
-    const { transformCellText } = this.table;
+    const { transformCellText, prefixCls: rootPrefixCls } = this.table;
     // We should return undefined if no dataIndex is specified, but in order to
     // be compatible with object-path's behavior, we return the record object instead.
     let text;
@@ -114,6 +132,12 @@ export default {
       // 如果有宽度，增加断行处理
       // https://github.com/ant-design/ant-design/issues/13825#issuecomment-449889241
       [`${prefixCls}-cell-break-word`]: !!column.width,
+      [`${rootPrefixCls}-cell-fix-left`]: isFixLeft,
+      [`${rootPrefixCls}-cell-fix-left-first`]: firstFixLeft,
+      [`${rootPrefixCls}-cell-fix-left-last`]: lastFixLeft,
+      [`${rootPrefixCls}-cell-fix-right`]: isFixRight,
+      [`${rootPrefixCls}-cell-fix-right-first`]: firstFixRight,
+      [`${rootPrefixCls}-cell-fix-right-last`]: lastFixRight,
     });
 
     if (column.ellipsis) {
@@ -128,7 +152,11 @@ export default {
     }
 
     return (
-      <BodyCell class={cellClassName} {...tdProps}>
+      <BodyCell
+        class={cellClassName}
+        {...tdProps}
+        {...{ style: { ...(tdProps.style || {}), ...fixedStyle } }}
+      >
         {indentText}
         {expandIcon}
         {text}

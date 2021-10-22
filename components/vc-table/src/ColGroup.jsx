@@ -1,5 +1,6 @@
 import PropTypes from '../../_util/vue-types';
 import { INTERNAL_COL_DEFINE } from './utils';
+import ResizeObserver from '../../vc-resize-observer';
 
 export default {
   name: 'ColGroup',
@@ -9,10 +10,11 @@ export default {
   },
   inject: {
     table: { default: () => ({}) },
+    store: { from: 'table-store', default: () => ({}) },
   },
   render() {
     const { fixed, table } = this;
-    const { prefixCls, expandIconAsCell, columnManager } = table;
+    const { prefixCls, expandIconAsCell, columnManager, onColumnResize } = table;
 
     let cols = [];
 
@@ -33,7 +35,12 @@ export default {
       leafColumns.map(({ key, dataIndex, width, [INTERNAL_COL_DEFINE]: additionalProps }) => {
         const mergedKey = key !== undefined ? key : dataIndex;
         const w = typeof width === 'number' ? `${width}px` : width;
-        return <col key={mergedKey} style={{ width: w, minWidth: w }} {...additionalProps} />;
+        return <ResizeObserver onResize={({ offsetWidth }) => {
+          onColumnResize(mergedKey, offsetWidth);
+          }}
+        >
+          <col data-key={mergedKey} key={mergedKey} style={{ width: w, minWidth: w }} {...additionalProps} />
+        </ResizeObserver>;
       }),
     );
     return <colgroup>{cols}</colgroup>;

@@ -85,3 +85,19 @@ export function remove(array, item) {
   const last = array.slice(index + 1, array.length);
   return front.concat(last);
 }
+
+export function getColumnsKey(columns) {
+  const columnKeys = [];
+
+  columns.forEach(column => {
+    const { key, dataIndex } = column || {};
+
+    columnKeys.push(key !== undefined ? key : dataIndex);
+  });
+
+  return columnKeys;
+}
+
+export function validateValue(val) {
+  return val !== null && val !== undefined;
+}

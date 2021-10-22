@@ -24,15 +24,10 @@ const BaseTable = {
   },
   methods: {
     getColumns(cols) {
-      const { columns = [], fixed } = this.$props;
-      const { table } = this;
-      const { prefixCls } = table.$props;
+      const { columns = [] } = this.$props;
       return (cols || columns).map(column => ({
         ...column,
-        className:
-          !!column.fixed && !fixed
-            ? classNames(`${prefixCls}-fixed-columns-in-body`, column.className || column.class)
-            : column.className || column.class,
+        className: classNames(column.className, column.class),
       }));
     },
     handleRowHover(isHover, key) {

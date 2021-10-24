@@ -100,8 +100,8 @@ const Calendar = {
   },
   methods: {
     onPanelChange(value, mode) {
-      const { sValue } = this;
-      if (!hasProp(this, 'mode')) {
+      const { sValue, timePicker } = this;
+      if (!!timePicker || !hasProp(this, 'mode')) {
         this.setState({ sMode: mode });
       }
       this.__emit('panelChange', value || sValue, mode);

@@ -1,11 +1,6 @@
 <template>
   <div id="right-bottom">
-    <img
-      v-if="isCN"
-      width="150"
-      alt="早早聊 Vue 专场大会"
-      :src="`https://next.antdv.com/common_rice.png?v=${v}`"
-    />
+    <img v-if="isCN" width="150" :src="`https://next.antdv.com/common_rice.png?v=${v}`" />
     <div v-if="isMobile" class="close" @click="visible = false">
       <close-outlined />
     </div>

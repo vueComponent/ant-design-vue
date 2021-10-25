@@ -123,7 +123,7 @@ export default defineComponent({
         destroyPopupOnHide,
         onMouseenter,
         onMouseleave,
-        onTouchstart,
+        onTouchstart = () => {},
         onMousedown,
       } = props as PopupInnerProps;
       const statusValue = status.value;

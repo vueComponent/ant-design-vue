@@ -1,12 +1,6 @@
 <template>
   <div id="right-bottom">
-    <img
-      v-if="isCN && isEffective('2021-10-17 10:00:00', '2021-10-23 18:00:00')"
-      width="150"
-      alt="早早聊 Vue 专场大会"
-      :src="`https://next-antdv.oss-cn-beijing.aliyuncs.com/zaozaoliao.png?v=${Date.now()}`"
-    />
-    <img v-else-if="isCN" width="150" alt="官方公众号" src="https://qn.antdv.com/wechat.jpeg" />
+    <img width="150" :src="`https://next.antdv.com/common_rice.png?v=${v}`" />
     <div v-if="isMobile" class="close" @click="visible = false">
       <a-icon type="close" />
     </div>
@@ -26,6 +20,7 @@ export default {
     return {
       isEffective,
       visible: true,
+      v: moment().date(),
       ads: [
         {
           alt: 'geektime',

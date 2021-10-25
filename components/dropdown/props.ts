@@ -45,7 +45,7 @@ const dropdownProps = () => ({
 const ButtonTypesProps = buttonTypes();
 const dropdownButtonProps = () => ({
   ...dropdownProps(),
-  type: PropTypes.oneOf(tuple('primary', 'ghost', 'dashed', 'default')),
+  type: ButtonTypesProps.type,
   size: PropTypes.oneOf(tuple('small', 'large')),
   htmlType: ButtonTypesProps.htmlType,
   href: PropTypes.string,

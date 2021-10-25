@@ -18,7 +18,7 @@ Almost anything can be represented in a tree structure. Examples include directo
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | treeData | treeNode of tree, please use `treeNodes` before v1.1.4 | [TreeNode[]](#TreeNode) | - |  |
-| replaceFields | Replace the title,key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', title:'title', key:'key' } |  |
+| fieldNames | Replace the title,key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', title:'title', key:'key' } | 3.0.0 |
 | autoExpandParent | Whether to automatically expand a parent treeNode | boolean | true |  |
 | blockNode | Whether treeNode fill remaining horizontal space | boolean | false |  |
 | checkable | Adds a `Checkbox` before the treeNodes | boolean | false |  |

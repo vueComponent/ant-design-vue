@@ -595,7 +595,7 @@ export default defineComponent({
 
     const onNodeCheck = (e: MouseEvent, treeNode: EventDataNode, checked: boolean) => {
       const { checkStrictly, onCheck } = props;
-      const { key } = treeNode;
+      const key = treeNode[fieldNames.value.key];
 
       // Prepare trigger arguments
       let checkedObj;

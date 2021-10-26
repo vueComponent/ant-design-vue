@@ -10,6 +10,20 @@
 
 ---
 
+## 3.0.0-alpha.5
+
+`2021-10-26`
+
+- Table
+  - 🐞 Fix sticky time reporting error [#4804](https://github.com/vueComponent/ant-design-vue/issues/4804) [#4808](https://github.com/vueComponent/ant-design-vue/issues/4808)
+  - 🐞 Fix emptyText internationalization failure problem [#4805](https://github.com/vueComponent/ant-design-vue/issues/4805)
+  - 🌟 Optimize performance issues when size changes [#4787](https://github.com/vueComponent/ant-design-vue/issues/4787)
+- 🌟 useForm supports deep responsive rule [#4799](https://github.com/vueComponent/ant-design-vue/issues/4799)
+- 🌟 Dropdown type supports text type [#4802](https://github.com/vueComponent/ant-design-vue/issues/4802)
+- 🐞 Fix Menu reporting error on mobile terminal [#4794](https://github.com/vueComponent/ant-design-vue/issues/4794)
+- 🐞 Fix the invalidation problem when checking the Tree custom fieldNames [#4790](https://github.com/vueComponent/ant-design-vue/issues/4790)
+- 🐞 Fix api component internationalization failure problem [#4780](https://github.com/vueComponent/ant-design-vue/issues/4780)
+
 ## 3.0.0-alpha.4
 
 `2021-10-20`

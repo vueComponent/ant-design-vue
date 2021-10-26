@@ -10,6 +10,20 @@
 
 ---
 
+## 3.0.0-alpha.5
+
+`2021-10-26`
+
+- Table
+  - 🐞 修复 sticky 时报错问题 [#4804](https://github.com/vueComponent/ant-design-vue/issues/4804) [#4808](https://github.com/vueComponent/ant-design-vue/issues/4808)
+  - 🐞 修复 emptyText 国际化失效问题 [#4805](https://github.com/vueComponent/ant-design-vue/issues/4805)
+  - 🌟 优化大小改变时的性能问题 [#4787](https://github.com/vueComponent/ant-design-vue/issues/4787)
+- 🌟 useForm 支持深度响应式 rule [#4799](https://github.com/vueComponent/ant-design-vue/issues/4799)
+- 🌟 Dropdown type 支持 text 类型 [#4802](https://github.com/vueComponent/ant-design-vue/issues/4802)
+- 🐞 修复 Menu 在移动端报错问题 [#4794](https://github.com/vueComponent/ant-design-vue/issues/4794)
+- 🐞 修复 Tree 自定义 fieldNames 时，勾选失效问题 [#4790](https://github.com/vueComponent/ant-design-vue/issues/4790)
+- 🐞 修复 api 组件国际化失效问题 [#4780](https://github.com/vueComponent/ant-design-vue/issues/4780)
+
 ## 3.0.0-alpha.4
 
 `2021-10-20`

@@ -171,7 +171,7 @@ export const tableProps = () => {
       default: undefined,
     },
     rowExpandable: { type: Function as PropType<TableProps['rowExpandable']>, default: undefined },
-    sticky: { type: String as PropType<TableProps['sticky']>, default: undefined },
+    sticky: { type: [Boolean, Object] as PropType<TableProps['sticky']>, default: undefined },
 
     dropdownPrefixCls: String,
     dataSource: { type: Array as PropType<RcTableProps['data']>, default: undefined },

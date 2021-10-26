@@ -6,7 +6,7 @@ let id = 0;
 const ids: RafMap = {};
 
 // Support call raf with delay specified frame
-export default function wrapperRaf(callback: () => void, delayFrames = 1): number {
+export default function raf(callback: () => void, delayFrames = 1): number {
   const myId: number = id++;
   let restFrames: number = delayFrames;
 
@@ -26,11 +26,11 @@ export default function wrapperRaf(callback: () => void, delayFrames = 1): numbe
   return myId;
 }
 
-wrapperRaf.cancel = function cancel(pid?: number) {
+raf.cancel = function cancel(pid?: number) {
   if (pid === undefined) return;
 
   cancelAnimationFrame(ids[pid]);
   delete ids[pid];
 };
 
-wrapperRaf.ids = ids; // export this for test usage
+raf.ids = ids; // export this for test usage

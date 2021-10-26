@@ -448,12 +448,15 @@ export default defineComponent<TableProps<DefaultRecordType>>({
         onScroll({ currentTarget: scrollBodyRef.value });
       }
     };
-
+    let timtout;
     const onFullTableResize = ({ width }) => {
-      if (width !== componentWidth.value) {
-        triggerOnScroll();
-        componentWidth.value = fullTableRef.value ? fullTableRef.value.offsetWidth : width;
-      }
+      clearTimeout(timtout);
+      timtout = setTimeout(() => {
+        if (width !== componentWidth.value) {
+          triggerOnScroll();
+          componentWidth.value = fullTableRef.value ? fullTableRef.value.offsetWidth : width;
+        }
+      }, 100);
     };
 
     watch([horizonScroll, () => props.data, () => props.columns], () => {

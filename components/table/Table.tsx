@@ -634,7 +634,7 @@ const InteralTable = defineComponent<
               v-slots={{
                 ...slots,
                 emptyText: () =>
-                  slots.emptyText?.() || tableLocale.value.emptyText || renderEmpty.value('Table'),
+                  slots.emptyText?.() || props.locale?.emptyText || renderEmpty.value('Table'),
               }}
             />
             {bottomPaginationNode}

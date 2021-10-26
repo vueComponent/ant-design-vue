@@ -728,7 +728,7 @@ export default defineComponent<TableProps<DefaultRecordType>>({
               ></FixedHolder>
             )}
 
-            {isSticky && (
+            {isSticky && scrollBodyRef.value && (
               <StickyScrollBar
                 ref={stickyRef}
                 offsetScroll={offsetScroll}

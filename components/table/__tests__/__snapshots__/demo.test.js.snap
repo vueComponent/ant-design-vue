@@ -4109,6 +4109,519 @@ exports[`renders ./components/table/demo/size.vue correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/table/demo/sticky.vue correctly 1`] = `
+<div class="ant-table-wrapper">
+  <div class="ant-spin-nested-loading">
+    <!---->
+    <div class="ant-spin-container">
+      <div class="ant-table ant-table-fixed-column ant-table-scroll-horizontal ant-table-has-fix-left ant-table-has-fix-right">
+        <!---->
+        <div class="ant-table-container">
+          <div style="overflow: hidden; top: 0px;" class="ant-table-header ant-table-sticky-holder">
+            <table style="table-layout: fixed; visibility: hidden;">
+              <colgroup></colgroup>
+              <thead class="ant-table-thead">
+                <tr>
+                  <th class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-sticky" style="position: sticky; left: 0px;" colstart="0" colend="0">
+                    <!---->Full Name
+                  </th>
+                  <th class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last ant-table-cell-fix-sticky" style="position: sticky; left: 0px;" colstart="1" colend="1">
+                    <!---->Age
+                  </th>
+                  <th class="ant-table-cell" colstart="2" colend="2">
+                    <!---->Column 1
+                  </th>
+                  <th class="ant-table-cell" colstart="3" colend="3">
+                    <!---->Column 2
+                  </th>
+                  <th class="ant-table-cell" colstart="4" colend="4">
+                    <!---->Column 3
+                  </th>
+                  <th class="ant-table-cell" colstart="5" colend="5">
+                    <!---->Column 4
+                  </th>
+                  <th class="ant-table-cell" colstart="6" colend="6">
+                    <!---->Column 5
+                  </th>
+                  <th class="ant-table-cell" colstart="7" colend="7">
+                    <!---->Column 6
+                  </th>
+                  <th class="ant-table-cell" colstart="8" colend="8">
+                    <!---->Column 7
+                  </th>
+                  <th class="ant-table-cell" colstart="9" colend="9">
+                    <!---->Column 8
+                  </th>
+                  <th class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first ant-table-cell-fix-sticky" style="position: sticky; right: 0px;" colstart="10" colend="10">
+                    <!---->Action
+                  </th>
+                </tr>
+              </thead>
+              <!---->
+            </table>
+          </div>
+          <div style="overflow-x: auto; overflow-y: hidden;" class="ant-table-body">
+            <table style="width: 1500px; min-width: 100%; table-layout: fixed;">
+              <colgroup>
+                <col style="width: 100px;">
+                <col style="width: 100px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col style="width: 150px;">
+                <col>
+                <col style="width: 100px;">
+              </colgroup>
+              <tbody class="ant-table-tbody">
+                <tr aria-hidden="true" class="ant-table-measure-row" style="height: 0px; font-size: 0px;">
+                  <td style="padding: 0px; border: 0px; height: 0px;">
+                    <div style="height: 0px; overflow: hidden;">&nbsp;</div>
+                  </td>
+                  <td style="padding: 0px; border: 0px; height: 0px;">
+                    <div style="height: 0px; overflow: hidden;">&nbsp;</div>
+                  </td>
+                  <td style="padding: 0px; border: 0px; height: 0px;">
+                    <div style="height: 0px; overflow: hidden;">&nbsp;</div>
+                  </td>
+                  <td style="padding: 0px; border: 0px; height: 0px;">
+                    <div style="height: 0px; overflow: hidden;">&nbsp;</div>
+                  </td>
+                  <td style="padding: 0px; border: 0px; height: 0px;">
+                    <div style="height: 0px; overflow: hidden;">&nbsp;</div>
+                  </td>
+                  <td style="padding: 0px; border: 0px; height: 0px;">
+                    <div style="height: 0px; overflow: hidden;">&nbsp;</div>
+                  </td>
+                  <td style="padding: 0px; border: 0px; height: 0px;">
+                    <div style="height: 0px; overflow: hidden;">&nbsp;</div>
+                  </td>
+                  <td style="padding: 0px; border: 0px; height: 0px;">
+                    <div style="height: 0px; overflow: hidden;">&nbsp;</div>
+                  </td>
+                  <td style="padding: 0px; border: 0px; height: 0px;">
+                    <div style="height: 0px; overflow: hidden;">&nbsp;</div>
+                  </td>
+                  <td style="padding: 0px; border: 0px; height: 0px;">
+                    <div style="height: 0px; overflow: hidden;">&nbsp;</div>
+                  </td>
+                  <td style="padding: 0px; border: 0px; height: 0px;">
+                    <div style="height: 0px; overflow: hidden;">&nbsp;</div>
+                  </td>
+                </tr>
+                <tr data-row-key="0" class="ant-table-row ant-table-row-level-0">
+                  <td class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;">
+                    <!---->Edrward 0
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
+                    <!---->32
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 0
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 0
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 0
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 0
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 0
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 0
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 0
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 0
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
+                    <!----><a>action</a>
+                  </td>
+                </tr>
+                <!---->
+                <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
+                  <td class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;">
+                    <!---->Edrward 1
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
+                    <!---->32
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 1
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 1
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 1
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 1
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 1
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 1
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 1
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 1
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
+                    <!----><a>action</a>
+                  </td>
+                </tr>
+                <!---->
+                <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
+                  <td class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;">
+                    <!---->Edrward 2
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
+                    <!---->32
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 2
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 2
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 2
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 2
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 2
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 2
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 2
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 2
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
+                    <!----><a>action</a>
+                  </td>
+                </tr>
+                <!---->
+                <tr data-row-key="3" class="ant-table-row ant-table-row-level-0">
+                  <td class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;">
+                    <!---->Edrward 3
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
+                    <!---->32
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 3
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 3
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 3
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 3
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 3
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 3
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 3
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 3
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
+                    <!----><a>action</a>
+                  </td>
+                </tr>
+                <!---->
+                <tr data-row-key="4" class="ant-table-row ant-table-row-level-0">
+                  <td class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;">
+                    <!---->Edrward 4
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
+                    <!---->32
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 4
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 4
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 4
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 4
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 4
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 4
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 4
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 4
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
+                    <!----><a>action</a>
+                  </td>
+                </tr>
+                <!---->
+                <tr data-row-key="5" class="ant-table-row ant-table-row-level-0">
+                  <td class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;">
+                    <!---->Edrward 5
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
+                    <!---->32
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 5
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 5
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 5
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 5
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 5
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 5
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 5
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 5
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
+                    <!----><a>action</a>
+                  </td>
+                </tr>
+                <!---->
+                <tr data-row-key="6" class="ant-table-row ant-table-row-level-0">
+                  <td class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;">
+                    <!---->Edrward 6
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
+                    <!---->32
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 6
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 6
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 6
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 6
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 6
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 6
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 6
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 6
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
+                    <!----><a>action</a>
+                  </td>
+                </tr>
+                <!---->
+                <tr data-row-key="7" class="ant-table-row ant-table-row-level-0">
+                  <td class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;">
+                    <!---->Edrward 7
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
+                    <!---->32
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 7
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 7
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 7
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 7
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 7
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 7
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 7
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 7
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
+                    <!----><a>action</a>
+                  </td>
+                </tr>
+                <!---->
+                <tr data-row-key="8" class="ant-table-row ant-table-row-level-0">
+                  <td class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;">
+                    <!---->Edrward 8
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
+                    <!---->32
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 8
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 8
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 8
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 8
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 8
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 8
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 8
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 8
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
+                    <!----><a>action</a>
+                  </td>
+                </tr>
+                <!---->
+                <tr data-row-key="9" class="ant-table-row ant-table-row-level-0">
+                  <td class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;">
+                    <!---->Edrward 9
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
+                    <!---->32
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 9
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 9
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 9
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 9
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 9
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 9
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 9
+                  </td>
+                  <td class="ant-table-cell">
+                    <!---->London Park no. 9
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
+                    <!----><a>action</a>
+                  </td>
+                </tr>
+                <!---->
+              </tbody>
+              <tfoot class="ant-table-summary">
+                <tr>
+                  <td colspan="2" class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;">
+                    <!---->Fix Left
+                  </td>
+                  <td colspan="8" class="ant-table-cell">
+                    <!---->Scroll Context
+                  </td>
+                  <td class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;">
+                    <!---->Fix Right
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+          <!---->
+          <!---->
+        </div>
+        <!---->
+      </div>
+      <ul unselectable="on" class="ant-pagination ant-table-pagination ant-table-pagination-right">
+        <!---->
+        <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true"><button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
+        <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active"><a rel="nofollow">1</a></li>
+        <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2"><a rel="nofollow">2</a></li>
+        <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a rel="nofollow">3</a></li>
+        <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a rel="nofollow">4</a></li>
+        <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next"><a rel="nofollow">5</a></li>
+        <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a class="ant-pagination-item-link">
+            <div class="ant-pagination-item-container"><span role="img" aria-label="double-right" class="anticon anticon-double-right ant-pagination-item-link-icon"><svg focusable="false" class="" data-icon="double-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1A7.98 7.98 0 00188 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5zm304 0L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1A7.98 7.98 0 00492 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"></path></svg></span><span class="ant-pagination-item-ellipsis">•••</span></div>
+          </a></li>
+        <li title="10" tabindex="0" class="ant-pagination-item ant-pagination-item-10"><a rel="nofollow">10</a></li>
+        <li title="Next Page" tabindex="0" class="ant-pagination-next" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="right" class="anticon anticon-right"><svg focusable="false" class="" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path></svg></span></button></li>
+        <li class="ant-pagination-options">
+          <div class="ant-select ant-pagination-options-size-changer ant-select-single ant-select-show-arrow">
+            <!---->
+            <!---->
+            <div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span><span class="ant-select-selection-item">10 / page</span>
+              <!---->
+            </div><span class="ant-select-arrow" style="user-select: none;" unselectable="on" aria-hidden="true"><span role="img" aria-label="down" class="anticon anticon-down ant-select-suffix"><svg focusable="false" class="" data-icon="down" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M884 256h-75c-5.1 0-9.9 2.5-12.9 6.6L512 654.2 227.9 262.6c-3-4.1-7.8-6.6-12.9-6.6h-75c-6.5 0-10.3 7.4-6.5 12.7l352.6 486.1c12.8 17.6 39 17.6 51.7 0l352.6-486.1c3.9-5.3.1-12.7-6.4-12.7z"></path></svg></span></span>
+            <!---->
+          </div>
+          <!---->
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`renders ./components/table/demo/stripe.vue correctly 1`] = `
 <div class="ant-table-wrapper ant-table-striped">
   <div class="ant-spin-nested-loading">

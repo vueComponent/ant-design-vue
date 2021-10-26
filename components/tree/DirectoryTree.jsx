@@ -211,6 +211,7 @@ export default {
     const prefixCls = getPrefixCls('tree', customizePrefixCls);
     const { _expandedKeys: expandedKeys, _selectedKeys: selectedKeys } = this.$data;
     const listeners = getListeners(this);
+    const { $scopedSlots } = this;
     warning(!listeners.doubleclick, '`doubleclick` is deprecated. please use `dblclick` instead.');
     const treeProps = {
       props: {
@@ -230,6 +231,7 @@ export default {
         dblclick: this.onDoubleClick,
         expand: this.onExpand,
       },
+      scopedSlots: $scopedSlots,
     };
     return <Tree {...treeProps}>{this.$slots.default}</Tree>;
   },

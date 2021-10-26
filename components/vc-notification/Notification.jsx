@@ -5,7 +5,7 @@ import BaseMixin from '../_util/BaseMixin';
 import createChainedFunction from '../_util/createChainedFunction';
 import Notice from './Notice';
 import { getTransitionGroupProps, TransitionGroup } from '../_util/transition';
-import ConfigProvider, { globalConfig } from '../config-provider';
+import ConfigProvider, { globalConfigForApi } from '../config-provider';
 
 function noop() {}
 
@@ -158,11 +158,11 @@ Notification.newInstance = function newNotificationInstance(properties, callback
         });
       });
       return () => {
-        const { getPrefixCls, getRootPrefixCls } = globalConfig();
-        const prefixCls = getPrefixCls(name, customizePrefixCls);
-        const rootPrefixCls = getRootPrefixCls(customRootPrefixCls, prefixCls);
+        const global = globalConfigForApi;
+        const prefixCls = global.getPrefixCls(name, customizePrefixCls);
+        const rootPrefixCls = global.getRootPrefixCls(customRootPrefixCls, prefixCls);
         return (
-          <ConfigProvider prefixCls={rootPrefixCls}>
+          <ConfigProvider {...global} notUpdateGlobalConfig={true} prefixCls={rootPrefixCls}>
             <Notification ref={notiRef} {...attrs} prefixCls={prefixCls} />
           </ConfigProvider>
         );

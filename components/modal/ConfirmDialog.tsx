@@ -2,8 +2,8 @@ import classNames from '../_util/classNames';
 import type { ModalFuncProps } from './Modal';
 import Dialog from './Modal';
 import ActionButton from './ActionButton';
-import { getConfirmLocale } from './locale';
-import { defineComponent, computed } from 'vue';
+import { defineComponent } from 'vue';
+import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 
 interface ConfirmDialogProps extends ModalFuncProps {
   afterClose?: () => void;
@@ -52,7 +52,7 @@ export default defineComponent<ConfirmDialogProps>({
     'content',
   ] as any,
   setup(props, { attrs }) {
-    const runtimeLocale = computed(() => getConfirmLocale());
+    const [locale] = useLocaleReceiver('Modal');
     return () => {
       const {
         icon,
@@ -86,9 +86,9 @@ export default defineComponent<ConfirmDialogProps>({
       const style = attrs.style || {};
       const okText =
         renderSomeContent('okText', props.okText) ||
-        (okCancel ? runtimeLocale.value.okText : runtimeLocale.value.justOkText);
+        (okCancel ? locale.value.okText : locale.value.justOkText);
       const cancelText =
-        renderSomeContent('cancelText', props.cancelText) || runtimeLocale.value.cancelText;
+        renderSomeContent('cancelText', props.cancelText) || locale.value.cancelText;
       const autoFocusButton =
         props.autoFocusButton === null ? false : props.autoFocusButton || 'ok';
 

@@ -1,5 +1,5 @@
 import type { PropType, ExtractPropTypes, UnwrapRef, App, Plugin, WatchStopHandle } from 'vue';
-import { reactive, provide, defineComponent, watch, ref, unref, watchEffect } from 'vue';
+import { reactive, provide, defineComponent, watch, watchEffect } from 'vue';
 import PropTypes from '../_util/vue-types';
 import defaultRenderEmpty from './renderEmpty';
 import type { RenderEmptyHandler } from './renderEmpty';
@@ -58,7 +58,47 @@ export const configConsumerProps = [
 ];
 
 export const defaultPrefixCls = 'ant';
-const globalPrefixCls = ref<string>();
+
+function getGlobalPrefixCls() {
+  return globalConfigForApi.prefixCls || defaultPrefixCls;
+}
+const globalConfigByCom = reactive<ConfigProviderProps>({});
+const globalConfigBySet = reactive<ConfigProviderProps>({}); // 权重最大
+export const globalConfigForApi = reactive<
+  ConfigProviderProps & {
+    getRootPrefixCls?: (rootPrefixCls?: string, customizePrefixCls?: string) => string;
+  }
+>({});
+
+watchEffect(() => {
+  Object.assign(globalConfigForApi, globalConfigByCom, globalConfigBySet);
+  globalConfigForApi.prefixCls = getGlobalPrefixCls();
+  globalConfigForApi.getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
+    if (customizePrefixCls) return customizePrefixCls;
+    return suffixCls
+      ? `${globalConfigForApi.prefixCls}-${suffixCls}`
+      : globalConfigForApi.prefixCls;
+  };
+  globalConfigForApi.getRootPrefixCls = (rootPrefixCls?: string, customizePrefixCls?: string) => {
+    // Customize rootPrefixCls is first priority
+    if (rootPrefixCls) {
+      return rootPrefixCls;
+    }
+
+    // If Global prefixCls provided, use this
+    if (globalConfigForApi.prefixCls) {
+      return globalConfigForApi.prefixCls;
+    }
+
+    // [Legacy] If customize prefixCls provided, we cut it to get the prefixCls
+    if (customizePrefixCls && customizePrefixCls.includes('-')) {
+      return customizePrefixCls.replace(/^(.*)-[^-]*$/, '$1');
+    }
+
+    // Fallback to default prefixCls
+    return getGlobalPrefixCls();
+  };
+});
 
 type GlobalConfigProviderProps = {
   prefixCls?: MaybeRef<ConfigProviderProps['prefixCls']>;
@@ -70,16 +110,9 @@ const setGlobalConfig = (params: GlobalConfigProviderProps) => {
     stopWatchEffect();
   }
   stopWatchEffect = watchEffect(() => {
-    const prefixCls = unref(params.prefixCls);
-    if (prefixCls !== undefined) {
-      globalPrefixCls.value = prefixCls;
-    }
+    Object.assign(globalConfigBySet, reactive(params));
   });
 };
-
-function getGlobalPrefixCls() {
-  return globalPrefixCls.value || defaultPrefixCls;
-}
 
 export const globalConfig = () => ({
   getPrefixCls: (suffixCls?: string, customizePrefixCls?: string) => {
@@ -93,8 +126,8 @@ export const globalConfig = () => ({
     }
 
     // If Global prefixCls provided, use this
-    if (globalPrefixCls.value) {
-      return globalPrefixCls.value;
+    if (globalConfigForApi.prefixCls) {
+      return globalConfigForApi.prefixCls;
     }
 
     // [Legacy] If customize prefixCls provided, we cut it to get the prefixCls
@@ -148,6 +181,8 @@ export const configProviderProps = {
   form: {
     type: Object as PropType<{ requiredMark?: RequiredMark }>,
   },
+  // internal use
+  notUpdateGlobalConfig: Boolean,
 };
 
 export type ConfigProviderProps = Partial<ExtractPropTypes<typeof configProviderProps>>;
@@ -193,6 +228,12 @@ const ConfigProvider = defineComponent({
         },
       );
     });
+    if (!props.notUpdateGlobalConfig) {
+      Object.assign(globalConfigByCom, configProvider);
+      watch(configProvider, () => {
+        Object.assign(globalConfigByCom, configProvider);
+      });
+    }
 
     provide('configProvider', configProvider);
 

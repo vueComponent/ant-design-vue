@@ -1,8 +1,7 @@
 import type { App, VNode, PropType } from 'vue';
-import { provide, defineComponent, reactive, watch, onUnmounted } from 'vue';
+import { provide, defineComponent, reactive, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import type { ModalLocale } from '../modal/locale';
-import { changeConfirmLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { withInstall } from '../_util/type';
 import type { ValidateMessages } from '../form/interface';
@@ -72,18 +71,14 @@ const LocaleProvider = defineComponent({
     provide('localeData', state);
     watch(
       () => props.locale,
-      val => {
+      () => {
         state.antLocale = {
           ...props.locale,
           exist: true,
         } as any;
-        changeConfirmLocale(val && val.Modal);
       },
       { immediate: true },
     );
-    onUnmounted(() => {
-      changeConfirmLocale();
-    });
 
     return () => {
       return slots.default?.();

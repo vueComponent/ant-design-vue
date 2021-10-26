@@ -2,14 +2,8 @@ import { createVNode, render as vueRender } from 'vue';
 import ConfirmDialog from './ConfirmDialog';
 import type { ModalFuncProps } from './Modal';
 import { destroyFns } from './Modal';
-import ConfigProvider, { globalConfig } from '../config-provider';
+import ConfigProvider, { globalConfigForApi } from '../config-provider';
 import omit from '../_util/omit';
-
-const defaultRootPrefixCls = '';
-
-function getRootPrefixCls() {
-  return defaultRootPrefixCls;
-}
 
 const confirm = (config: ModalFuncProps) => {
   const div = document.createElement('div');
@@ -60,11 +54,11 @@ const confirm = (config: ModalFuncProps) => {
     }
   }
   const Wrapper = (p: ModalFuncProps) => {
-    const { getPrefixCls } = globalConfig();
-    const rootPrefixCls = getPrefixCls(undefined, getRootPrefixCls());
+    const global = globalConfigForApi;
+    const rootPrefixCls = global.prefixCls;
     const prefixCls = p.prefixCls || `${rootPrefixCls}-modal`;
     return (
-      <ConfigProvider prefixCls={rootPrefixCls}>
+      <ConfigProvider {...(global as any)} notUpdateGlobalConfig={true} prefixCls={rootPrefixCls}>
         <ConfirmDialog {...p} prefixCls={prefixCls}></ConfirmDialog>
       </ConfigProvider>
     );

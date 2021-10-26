@@ -1,7 +1,8 @@
 // debugger tsx
-import Demo from '../../components/tabs/demo/card-top.vue';
+import Demo from './demo/demo.vue';
 
 export default {
+  setup() {},
   render() {
     return <Demo />;
   },

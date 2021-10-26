@@ -1,15 +1,14 @@
 import type { ExtractPropTypes, CSSProperties, PropType } from 'vue';
-import { defineComponent, inject, computed } from 'vue';
+import { defineComponent, inject } from 'vue';
 import classNames from '../_util/classNames';
 import Dialog from '../vc-dialog';
 import PropTypes from '../_util/vue-types';
 import addEventListener from '../vc-util/Dom/addEventListener';
-import { getConfirmLocale } from './locale';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import Button from '../button';
 import type { ButtonProps as ButtonPropsType, LegacyButtonType } from '../button/buttonTypes';
 import buttonTypes, { convertLegacyProps } from '../button/buttonTypes';
-import LocaleReceiver from '../locale-provider/LocaleReceiver';
+import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
@@ -158,9 +157,9 @@ export default defineComponent({
   }),
   emits: ['update:visible', 'cancel', 'change', 'ok'],
   setup() {
-    const confirmLocale = computed(() => getConfirmLocale());
+    const [locale] = useLocaleReceiver('Modal');
     return {
-      confirmLocale,
+      locale,
       configProvider: inject('configProvider', defaultConfigProvider),
     };
   },
@@ -184,8 +183,8 @@ export default defineComponent({
     handleOk(e: MouseEvent) {
       this.$emit('ok', e);
     },
-    renderFooter(locale: ModalLocale) {
-      const { okType, confirmLoading } = this;
+    renderFooter() {
+      const { okType, confirmLoading, locale } = this;
       const cancelBtnProps = { onClick: this.handleCancel, ...(this.cancelButtonProps || {}) };
       const okBtnProps = {
         onClick: this.handleOk,
@@ -213,19 +212,12 @@ export default defineComponent({
       centered,
       getContainer,
       $attrs,
-      confirmLocale,
     } = this;
     const children = getSlot(this);
     const { getPrefixCls, getPopupContainer: getContextPopupContainer } = this.configProvider;
     const prefixCls = getPrefixCls('modal', customizePrefixCls);
 
-    const defaultFooter = (
-      <LocaleReceiver
-        componentName="Modal"
-        defaultLocale={confirmLocale}
-        children={this.renderFooter}
-      />
-    );
+    const defaultFooter = this.renderFooter();
     const closeIcon = getComponent(this, 'closeIcon');
     const closeIconToRender = (
       <span class={`${prefixCls}-close-x`}>

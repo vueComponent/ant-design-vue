@@ -6,6 +6,7 @@
     <checkable />
     <suffix />
     <async />
+    <Highlight />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -15,6 +16,7 @@ import Multiple from './multiple.vue';
 import Checkable from './checkable.vue';
 import Suffix from './suffix.vue';
 import Async from './async.vue';
+import Highlight from './highlight.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -29,6 +31,7 @@ export default defineComponent({
     Checkable,
     Suffix,
     Async,
+    Highlight,
   },
   setup() {
     return {};

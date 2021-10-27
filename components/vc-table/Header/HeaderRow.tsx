@@ -11,6 +11,7 @@ import type {
 } from '../interface';
 import { getCellFixedInfo } from '../utils/fixUtil';
 import { getColumnsKey } from '../utils/valueUtil';
+import DragHandleVue from './DragHandle';
 
 export interface RowProps<RecordType = DefaultRecordType> {
   cells: readonly CellType<RecordType>[];
@@ -73,7 +74,7 @@ export default defineComponent<RowProps>({
             if (column && column.customHeaderCell) {
               additionalProps = cell.column.customHeaderCell(column);
             }
-
+            const col: ColumnType<any> = column;
             return (
               <Cell
                 {...cell}
@@ -87,7 +88,19 @@ export default defineComponent<RowProps>({
                 additionalProps={additionalProps}
                 rowType="header"
                 column={column}
-                v-slots={{ default: () => column.title }}
+                v-slots={{
+                  default: () => column.title,
+                  dragHandle: () =>
+                    col.resizable ? (
+                      <DragHandleVue
+                        prefixCls={prefixCls}
+                        width={col.width as number}
+                        minWidth={col.minWidth}
+                        maxWidth={col.maxWidth}
+                        column={col}
+                      />
+                    ) : null,
+                }}
               />
             );
           })}

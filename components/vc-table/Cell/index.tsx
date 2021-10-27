@@ -273,6 +273,7 @@ export default defineComponent<CellProps>({
         <Component {...componentProps}>
           {appendNode}
           {childNode}
+          {slots.dragHandle?.()}
         </Component>
       );
     };

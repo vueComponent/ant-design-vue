@@ -110,6 +110,9 @@ export interface ColumnType<RecordType> extends ColumnSharedType<RecordType> {
   }) => any | RenderedCell<RecordType>;
   rowSpan?: number;
   width?: number | string;
+  minWidth?: number;
+  maxWidth?: number;
+  resizable?: boolean;
   customCell?: GetComponentProps<RecordType>;
   /** @deprecated Please use `onCell` instead */
   onCellClick?: (record: RecordType, e: MouseEvent) => void;

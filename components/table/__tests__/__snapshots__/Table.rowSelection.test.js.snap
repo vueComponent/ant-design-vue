@@ -22,9 +22,11 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
                       </label>
                       <!---->
                     </div>
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="1" colend="1">
                     <!---->Name
+                    <!---->
                   </th>
                 </tr>
               </thead>
@@ -35,9 +37,11 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
                     <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
+                    <!---->
                   </td>
                   <td class="ant-table-cell">
                     <!---->Jack
+                    <!---->
                   </td>
                 </tr>
                 <!---->
@@ -46,9 +50,11 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
                     <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
+                    <!---->
                   </td>
                   <td class="ant-table-cell">
                     <!---->Lucy
+                    <!---->
                   </td>
                 </tr>
                 <!---->
@@ -57,9 +63,11 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
                     <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
+                    <!---->
                   </td>
                   <td class="ant-table-cell">
                     <!---->Tom
+                    <!---->
                   </td>
                 </tr>
                 <!---->
@@ -68,9 +76,11 @@ exports[`Table.rowSelection fix selection column on the left 1`] = `
                     <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                       <!---->
                     </label>
+                    <!---->
                   </td>
                   <td class="ant-table-cell">
                     <!---->Jerry
+                    <!---->
                   </td>
                 </tr>
                 <!---->

@@ -655,12 +655,15 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                                 </label>
                                 <!---->
                               </div>
+                              <!---->
                             </th>
                             <th class="ant-table-cell" colstart="1" colend="1">
                               <!---->Name
+                              <!---->
                             </th>
                             <th class="ant-table-cell" colstart="2" colend="2">
                               <!---->Description
+                              <!---->
                             </th>
                           </tr>
                         </thead>
@@ -671,12 +674,15 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                               <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->content1
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->description of content1
+                              <!---->
                             </td>
                           </tr>
                           <!---->
@@ -685,12 +691,15 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->content2
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->description of content2
+                              <!---->
                             </td>
                           </tr>
                           <!---->
@@ -699,12 +708,15 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->content4
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->description of content4
+                              <!---->
                             </td>
                           </tr>
                           <!---->
@@ -713,12 +725,15 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                               <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->content5
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->description of content5
+                              <!---->
                             </td>
                           </tr>
                           <!---->
@@ -727,12 +742,15 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->content7
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->description of content7
+                              <!---->
                             </td>
                           </tr>
                           <!---->
@@ -741,12 +759,15 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->content8
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->description of content8
+                              <!---->
                             </td>
                           </tr>
                           <!---->
@@ -755,12 +776,15 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->content10
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->description of content10
+                              <!---->
                             </td>
                           </tr>
                           <!---->
@@ -815,9 +839,11 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                                 </label>
                                 <!---->
                               </div>
+                              <!---->
                             </th>
                             <th class="ant-table-cell" colstart="1" colend="1">
                               <!---->Name
+                              <!---->
                             </th>
                           </tr>
                         </thead>
@@ -828,9 +854,11 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->content3
+                              <!---->
                             </td>
                           </tr>
                           <!---->
@@ -839,9 +867,11 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                               <!----><label class="ant-checkbox-wrapper"><span class="ant-checkbox"><input type="checkbox" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->content6
+                              <!---->
                             </td>
                           </tr>
                           <!---->
@@ -850,9 +880,11 @@ exports[`renders ./components/transfer/demo/table-transfer.vue correctly 1`] = `
                               <!----><label class="ant-checkbox-wrapper ant-checkbox-wrapper-disabled"><span class="ant-checkbox ant-checkbox-disabled"><input type="checkbox" disabled="" class="ant-checkbox-input"><span class="ant-checkbox-inner"></span></span>
                                 <!---->
                               </label>
+                              <!---->
                             </td>
                             <td class="ant-table-cell">
                               <!---->content9
+                              <!---->
                             </td>
                           </tr>
                           <!---->

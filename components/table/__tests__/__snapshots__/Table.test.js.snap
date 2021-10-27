@@ -15,9 +15,11 @@ exports[`Table align column should not override cell style 1`] = `
                 <tr>
                   <th class="ant-table-cell" colstart="0" colend="0">
                     <!---->Name
+                    <!---->
                   </th>
                   <th class="ant-table-cell" style="text-align: center;" colstart="1" colend="1">
                     <!---->Age
+                    <!---->
                   </th>
                 </tr>
               </thead>
@@ -27,9 +29,11 @@ exports[`Table align column should not override cell style 1`] = `
                   <td class="ant-table-cell">
                     <!---->
                     <!---->
+                    <!---->
                   </td>
                   <td style="color: red; text-align: center;" class="ant-table-cell">
                     <!---->32
+                    <!---->
                   </td>
                 </tr>
                 <!---->
@@ -37,9 +41,11 @@ exports[`Table align column should not override cell style 1`] = `
                   <td class="ant-table-cell">
                     <!---->
                     <!---->
+                    <!---->
                   </td>
                   <td style="color: red; text-align: center;" class="ant-table-cell">
                     <!---->42
+                    <!---->
                   </td>
                 </tr>
                 <!---->
@@ -77,17 +83,21 @@ exports[`Table renders JSX correctly 1`] = `
                 <tr>
                   <th colspan="2" class="ant-table-cell" colstart="0" hassubcolumns="true" colend="1">
                     <!---->Name
+                    <!---->
                   </th>
                   <th rowspan="2" class="ant-table-cell" colstart="2" colend="2">
                     <!---->Age
+                    <!---->
                   </th>
                 </tr>
                 <tr>
                   <th class="ant-table-cell" colstart="0" colend="0">
                     <!---->First Name
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="1" colend="1">
                     <!---->Last Name
+                    <!---->
                   </th>
                 </tr>
               </thead>
@@ -96,24 +106,30 @@ exports[`Table renders JSX correctly 1`] = `
                 <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell">
                     <!---->John
+                    <!---->
                   </td>
                   <td class="ant-table-cell">
                     <!---->Brown
+                    <!---->
                   </td>
                   <td class="ant-table-cell">
                     <!---->32
+                    <!---->
                   </td>
                 </tr>
                 <!---->
                 <tr data-row-key="2" class="ant-table-row ant-table-row-level-0">
                   <td class="ant-table-cell">
                     <!---->Jim
+                    <!---->
                   </td>
                   <td class="ant-table-cell">
                     <!---->Green
+                    <!---->
                   </td>
                   <td class="ant-table-cell">
                     <!---->42
+                    <!---->
                   </td>
                 </tr>
                 <!---->

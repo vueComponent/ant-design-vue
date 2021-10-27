@@ -15,27 +15,35 @@ exports[`Table renders empty table 1`] = `
                 <tr>
                   <th class="ant-table-cell" colstart="0" colend="0">
                     <!---->Column 1
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="1" colend="1">
                     <!---->Column 2
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="2" colend="2">
                     <!---->Column 3
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="3" colend="3">
                     <!---->Column 4
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="4" colend="4">
                     <!---->Column 5
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="5" colend="5">
                     <!---->Column 6
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="6" colend="6">
                     <!---->Column 7
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="7" colend="7">
                     <!---->Column 8
+                    <!---->
                   </th>
                 </tr>
               </thead>
@@ -57,6 +65,7 @@ exports[`Table renders empty table 1`] = `
                       <p class="ant-empty-description">No Data</p>
                       <!---->
                     </div>
+                    <!---->
                   </td>
                 </tr>
               </tbody>
@@ -86,27 +95,35 @@ exports[`Table renders empty table with custom emptyText 1`] = `
                 <tr>
                   <th class="ant-table-cell" colstart="0" colend="0">
                     <!---->Column 1
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="1" colend="1">
                     <!---->Column 2
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="2" colend="2">
                     <!---->Column 3
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="3" colend="3">
                     <!---->Column 4
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="4" colend="4">
                     <!---->Column 5
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="5" colend="5">
                     <!---->Column 6
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="6" colend="6">
                     <!---->Column 7
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="7" colend="7">
                     <!---->Column 8
+                    <!---->
                   </th>
                 </tr>
               </thead>
@@ -115,6 +132,7 @@ exports[`Table renders empty table with custom emptyText 1`] = `
                 <tr class="ant-table-placeholder">
                   <td colspan="8" class="ant-table-cell">
                     <!---->custom empty text
+                    <!---->
                   </td>
                 </tr>
               </tbody>
@@ -156,36 +174,47 @@ exports[`Table renders empty table with fixed columns 1`] = `
                 <tr>
                   <th class="ant-table-cell ant-table-cell-fix-left" style="position: sticky; left: 0px;" colstart="0" colend="0">
                     <!---->Full Name
+                    <!---->
                   </th>
                   <th class="ant-table-cell ant-table-cell-fix-left ant-table-cell-fix-left-last" style="position: sticky; left: 0px;" colstart="1" colend="1">
                     <!---->Age
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="2" colend="2">
                     <!---->Column 1
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="3" colend="3">
                     <!---->Column 2
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="4" colend="4">
                     <!---->Column 3
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="5" colend="5">
                     <!---->Column 4
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="6" colend="6">
                     <!---->Column 5
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="7" colend="7">
                     <!---->Column 6
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="8" colend="8">
                     <!---->Column 7
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="9" colend="9">
                     <!---->Column 8
+                    <!---->
                   </th>
                   <th class="ant-table-cell ant-table-cell-fix-right ant-table-cell-fix-right-first" style="position: sticky; right: 0px;" colstart="10" colend="10">
                     <!---->Action
+                    <!---->
                   </th>
                 </tr>
               </thead>
@@ -207,6 +236,7 @@ exports[`Table renders empty table with fixed columns 1`] = `
                       <p class="ant-empty-description">No Data</p>
                       <!---->
                     </div>
+                    <!---->
                   </td>
                 </tr>
               </tbody>
@@ -240,27 +270,35 @@ exports[`Table renders empty table without emptyText when loading 1`] = `
                 <tr>
                   <th class="ant-table-cell" colstart="0" colend="0">
                     <!---->Column 1
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="1" colend="1">
                     <!---->Column 2
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="2" colend="2">
                     <!---->Column 3
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="3" colend="3">
                     <!---->Column 4
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="4" colend="4">
                     <!---->Column 5
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="5" colend="5">
                     <!---->Column 6
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="6" colend="6">
                     <!---->Column 7
+                    <!---->
                   </th>
                   <th class="ant-table-cell" colstart="7" colend="7">
                     <!---->Column 8
+                    <!---->
                   </th>
                 </tr>
               </thead>
@@ -282,6 +320,7 @@ exports[`Table renders empty table without emptyText when loading 1`] = `
                       <p class="ant-empty-description">No Data</p>
                       <!---->
                     </div>
+                    <!---->
                   </td>
                 </tr>
               </tbody>

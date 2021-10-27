@@ -123,9 +123,11 @@ exports[`renders ./components/empty/demo/config-provider.vue correctly 1`] = `
                   <tr>
                     <th class="ant-table-cell" colstart="0" colend="0">
                       <!---->Name
+                      <!---->
                     </th>
                     <th class="ant-table-cell" colstart="1" colend="1">
                       <!---->Age
+                      <!---->
                     </th>
                   </tr>
                 </thead>
@@ -147,6 +149,7 @@ exports[`renders ./components/empty/demo/config-provider.vue correctly 1`] = `
                         <p class="ant-empty-description">No Data</p>
                         <!---->
                       </div>
+                      <!---->
                     </td>
                   </tr>
                 </tbody>

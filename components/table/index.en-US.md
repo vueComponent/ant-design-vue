@@ -120,6 +120,7 @@ Specify `dataSource` of Table as an array of data.
 | change | Callback executed when pagination, filters or sorter is changed | Function(pagination, filters, sorter, { currentDataSource }) |  |
 | expand | Callback executed when the row expand icon is clicked | Function(expanded, record) |  |
 | expandedRowsChange | Callback executed when the expanded rows change | Function(expandedRows) |  |
+| resizeColumn | Triggered when the column is dragged | Function(width, column) |
 
 #### customRow usage
 
@@ -174,6 +175,9 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |  |
 | sortDirections | supported sort way, could be `'ascend'`, `'descend'` | Array | `['ascend', 'descend']` | 1.5.0 |
 | title | Title of this column | string | - |  |
+| minWidth | Drag the minimum width of the column, it will be affected by the automatic adjustment and distribution of the table width | number | 50 | 3.0 |
+| maxWidth | Drag the maximum width of the column, it will be affected by the automatic adjustment and distribution of the table width | number | - | 3.0 |
+| resizable | Whether the width can be adjusted by dragging, at this time width must be number type | boolean | - | 3.0 |
 | width | Width of this column | string\|number | - |  |
 | customCell | Set props on per cell | Function(record, rowIndex) | - |  |
 | customHeaderCell | Set props on per header cell | Function(column) | - |  |

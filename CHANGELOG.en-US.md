@@ -10,6 +10,12 @@
 
 ---
 
+## 3.0.0-alpha.6
+
+`2021-10-27`
+
+- 🌟 Table add drag column feature
+
 ## 3.0.0-alpha.5
 
 `2021-10-26`

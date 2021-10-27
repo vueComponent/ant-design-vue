@@ -126,6 +126,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 | expandedRowsChange | 展开的行变化时触发 | Function(expandedRows) |
 | change | 分页、排序、筛选变化时触发 | Function(pagination, filters, sorter, { currentDataSource }) |
 | expand | 点击展开图标时触发 | Function(expanded, record) |
+| resizeColumn | 拖动列时触发 | Function(width, column) |
 
 #### customRow 用法
 
@@ -181,6 +182,9 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 | sortDirections | 支持的排序方式，取值为 `'ascend'` `'descend'` | Array | `['ascend', 'descend']` | 1.5.0 |
 | title | 列头显示文字 | string | - |  |
 | width | 列宽度 | string\|number | - |  |
+| minWidth | 拖动列最小宽度，会受到表格自动调整分配宽度影响 | number | 50 | 3.0 |
+| maxWidth | 拖动列最大宽度，会受到表格自动调整分配宽度影响 | number | - | 3.0 |
+| resizable | 是否可拖动调整宽度，此时 width 必须是 number 类型 | boolean | - | 3.0 |
 | customCell | 设置单元格属性 | Function(record, rowIndex) | - |  |
 | customHeaderCell | 设置头部单元格属性 | Function(column) | - |  |
 | onFilter | 本地模式下，确定筛选的运行函数, 使用 template 或 jsx 时作为`filter`事件使用 | Function | - |  |

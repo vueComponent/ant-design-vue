@@ -1,17 +1,7 @@
 import addEventListenerWrap from '../../vc-util/Dom/addEventListener';
 import type { EventHandler } from '../../_util/EventInterface';
 import raf from '../../_util/raf';
-import {
-  defineComponent,
-  onUnmounted,
-  nextTick,
-  watch,
-  computed,
-  ref,
-  watchEffect,
-  getCurrentInstance,
-  onMounted,
-} from 'vue';
+import { defineComponent, onUnmounted, computed, ref, watchEffect, getCurrentInstance } from 'vue';
 import type { PropType } from 'vue';
 import devWarning from '../../vc-util/devWarning';
 import type { ColumnType } from '../interface';
@@ -81,13 +71,7 @@ export default defineComponent({
         : Infinity;
     });
     const instance = getCurrentInstance();
-    // eslint-disable-next-line vue/no-setup-props-destructure
-    let baseWidth = props.width;
-    onMounted(() => {
-      nextTick(() => {
-        baseWidth = instance.vnode.el?.parentNode?.getBoundingClientRect().width;
-      });
-    });
+    let baseWidth = 0;
     const dragging = ref(false);
     let rafId: number;
     const updateWidth = (e: HandleEvent) => {
@@ -117,15 +101,12 @@ export default defineComponent({
     const handleStop = (e: HandleEvent) => {
       dragging.value = false;
       updateWidth(e);
-      nextTick(() => {
-        baseWidth = instance.vnode.el?.parentNode?.getBoundingClientRect().width;
-      });
       removeEvents();
     };
     const handleStart = (e: HandleEvent, eventsFor: any) => {
       dragging.value = true;
       removeEvents();
-
+      baseWidth = instance.vnode.el.parentNode.getBoundingClientRect().width;
       if (e instanceof MouseEvent && e.which !== 1) {
         return;
       }
@@ -149,16 +130,6 @@ export default defineComponent({
       e.stopPropagation();
       e.preventDefault();
     };
-
-    watch(
-      () => props.width,
-      () => {
-        if (!dragging.value) {
-          baseWidth = props.width;
-        }
-      },
-      { immediate: true },
-    );
 
     return () => {
       const { prefixCls } = props;

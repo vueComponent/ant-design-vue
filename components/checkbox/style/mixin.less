@@ -7,7 +7,6 @@
     .reset-component();
 
     position: relative;
-    top: -0.09em;
     display: inline-block;
     line-height: 1;
     white-space: nowrap;
@@ -148,7 +147,10 @@
   .@{checkbox-prefix-cls}-wrapper {
     .reset-component();
 
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    max-width: 100%;
     line-height: unset;
     cursor: pointer;
     &.@{checkbox-prefix-cls}-wrapper-disabled {
@@ -162,6 +164,8 @@
   .@{checkbox-prefix-cls} + span {
     padding-right: 8px;
     padding-left: 8px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .@{checkbox-prefix-cls}-group {

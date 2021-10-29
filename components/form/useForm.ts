@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { reactive, watch, nextTick, unref, shallowRef } from 'vue';
+import { reactive, watch, nextTick, unref, shallowRef, toRaw } from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import intersection from 'lodash-es/intersection';
 import isEqual from 'lodash-es/isEqual';
@@ -8,7 +8,7 @@ import omit from 'lodash-es/omit';
 import { validateRules } from './utils/validateUtil';
 import { defaultValidateMessages } from './utils/messages';
 import { allPromiseFinish } from './utils/asyncUtil';
-import type { RuleError, ValidateMessages } from './interface';
+import type { Callbacks, RuleError, ValidateMessages } from './interface';
 import type { ValidateStatus } from './FormItem';
 
 interface DebounceSettings {
@@ -98,6 +98,7 @@ function useForm(
     deep?: boolean;
     validateOnRuleChange?: boolean;
     debounce?: DebounceSettings;
+    onValidate?: Callbacks['onValidate'];
   },
 ): {
   modelRef: Props | Ref<Props>;
@@ -252,6 +253,11 @@ function useForm(
           const res = results.filter(result => result && result.errors.length);
           validateInfos[name].validateStatus = res.length ? 'error' : 'success';
           validateInfos[name].help = res.length ? res.map(r => r.errors) : '';
+          options?.onValidate?.(
+            name,
+            !res.length,
+            res.length ? toRaw(validateInfos[name].help[0]) : null,
+          );
         }
       });
     return promise;

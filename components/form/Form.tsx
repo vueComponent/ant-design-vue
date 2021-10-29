@@ -84,6 +84,7 @@ export const formProps = {
   onFieldsChange: { type: Function as PropType<Callbacks['onFieldsChange']> },
   onFinish: { type: Function as PropType<Callbacks['onFinish']> },
   onFinishFailed: { type: Function as PropType<Callbacks['onFinishFailed']> },
+  onValidate: { type: Function as PropType<Callbacks['onValidate']> },
 };
 
 export type FormProps = Partial<ExtractPropTypes<typeof formProps>>;
@@ -102,7 +103,7 @@ const Form = defineComponent({
   }),
   Item: FormItem,
   useForm,
-  emits: ['finishFailed', 'submit', 'finish'],
+  emits: ['finishFailed', 'submit', 'finish', 'validate'],
   setup(props, { emit, slots, expose, attrs }) {
     const size = useInjectSize(props);
     const { prefixCls, direction, form: contextForm } = useConfigInject('form', props);
@@ -355,6 +356,9 @@ const Form = defineComponent({
       rules: computed(() => props.rules),
       addField,
       removeField,
+      onValidate: (name, status, errors) => {
+        emit('validate', name, status, errors);
+      },
     });
 
     watch(

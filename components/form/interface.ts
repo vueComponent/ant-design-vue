@@ -155,6 +155,11 @@ export interface Callbacks<Values = any> {
   onFieldsChange?: (changedFields: FieldData[], allFields: FieldData[]) => void;
   onFinish?: (values: Values) => void;
   onFinishFailed?: (errorInfo: ValidateErrorEntity<Values>) => void;
+  onValidate?: (
+    name: string | number | string[] | number[],
+    status: boolean,
+    errors: string[] | null,
+  ) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

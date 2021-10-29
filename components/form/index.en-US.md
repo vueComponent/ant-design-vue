@@ -49,6 +49,7 @@ A form consists of one or more form fields whose type includes input, textarea, 
 | Events Name | Description | Arguments | Version |
 | --- | --- | --- | --- | --- |
 | submit | Defines a function will be called if form data validation is successful. | Function(e:Event) |  |
+| validate | triggers after a form item is validated | Function(name, status, errorMsgs) |  |  |
 | finish | Trigger after submitting the form and verifying data successfully | function(values) | - | 2.0.0 |
 | finishFailed | Trigger after submitting the form and verifying data failed | function({ values, errorFields, outOfDate }) | - | 2.0.0 |
 
@@ -234,5 +235,10 @@ function useForm(
   ) => Promise<RuleError[]>;
   mergeValidateInfo: (items: ValidateInfo | ValidateInfo[]) => ValidateInfo;
   clearValidate: (names?: namesType) => void;
+  onValidate?: (
+    name: string | number | string[] | number[],
+    status: boolean,
+    errorMsgs: string[] | null,
+  ) => void;
 };
 ```

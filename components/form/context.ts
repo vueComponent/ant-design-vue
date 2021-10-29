@@ -19,6 +19,11 @@ export interface FormContextProps {
   removeField: (eventKey: string) => void;
   validateTrigger?: ComputedRef<string | string[]>;
   rules?: ComputedRef<{ [k: string]: ValidationRule[] | ValidationRule }>;
+  onValidate: (
+    name: string | number | string[] | number[],
+    status: boolean,
+    errors: string[] | null,
+  ) => void;
 }
 
 export const FormContextKey: InjectionKey<FormContextProps> = Symbol('formContextKey');
@@ -38,6 +43,7 @@ export const useInjectForm = () => {
     model: computed(() => undefined),
     rules: computed(() => undefined),
     requiredMark: computed(() => false),
+    onValidate: () => {},
   });
 };
 

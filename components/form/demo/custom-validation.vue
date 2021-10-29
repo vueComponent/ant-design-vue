@@ -26,6 +26,7 @@ See more advanced usage at [async-validator](https://github.com/yiminghe/async-v
     :rules="rules"
     v-bind="layout"
     @finish="handleFinish"
+    @validate="handleValidate"
     @finishFailed="handleFinishFailed"
   >
     <a-form-item has-feedback label="Password" name="pass">
@@ -112,6 +113,9 @@ export default defineComponent({
     const resetForm = () => {
       formRef.value.resetFields();
     };
+    const handleValidate = (...args) => {
+      console.log(args);
+    };
     return {
       formState,
       formRef,
@@ -120,6 +124,7 @@ export default defineComponent({
       handleFinishFailed,
       handleFinish,
       resetForm,
+      handleValidate,
     };
   },
 });

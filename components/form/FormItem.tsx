@@ -1,5 +1,14 @@
 import type { PropType, ExtractPropTypes, ComputedRef } from 'vue';
-import { watch, defineComponent, computed, nextTick, ref, watchEffect, onBeforeUnmount } from 'vue';
+import {
+  watch,
+  defineComponent,
+  computed,
+  nextTick,
+  ref,
+  watchEffect,
+  onBeforeUnmount,
+  toRaw,
+} from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import PropTypes from '../_util/vue-types';
 import Row from '../grid/Row';
@@ -213,6 +222,12 @@ export default defineComponent({
             validateState.value = res.length ? 'error' : 'success';
 
             errors.value = res.map(r => r.errors);
+
+            formContext.onValidate(
+              fieldName.value,
+              !errors.value.length,
+              errors.value.length ? toRaw(errors.value[0]) : null,
+            );
           }
         });
 

@@ -50,6 +50,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 | 事件名称 | 说明 | 回调参数 | 版本 |
 | --- | --- | --- | --- | --- |
 | submit | 数据验证成功后回调事件 | Function(e:Event) | ｜ |
+| validate | 任一表单项被校验后触发 | Function(name, status, errorMsgs) |  |
 | finish | 提交表单且数据验证成功后回调事件 | function(values) | - | 2.0.0 |
 | finishFailed | 提交表单且数据验证失败后回调事件 | function({ values, errorFields, outOfDate }) | - | 2.0.0 |
 
@@ -232,5 +233,10 @@ function useForm(
   ) => Promise<RuleError[]>;
   mergeValidateInfo: (items: ValidateInfo | ValidateInfo[]) => ValidateInfo;
   clearValidate: (names?: namesType) => void;
+  onValidate?: (
+    name: string | number | string[] | number[],
+    status: boolean,
+    errorMsgs: string[] | null,
+  ) => void;
 };
 ```

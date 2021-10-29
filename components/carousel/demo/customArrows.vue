@@ -61,6 +61,7 @@ export default defineComponent({
   color: #fff;
   background-color: rgba(31, 45, 61, 0.11);
   opacity: 0.3;
+  z-index: 1;
 }
 .ant-carousel :deep(.custom-slick-arrow:before) {
   display: none;

@@ -41,7 +41,7 @@ export default defineComponent({
     const memoOptions = useMemo(
       () => props.options,
       [() => props.open, () => props.options],
-      (next, prev) => next[0] && prev[1] !== next[1],
+      next => next[0],
     );
 
     const valueKeys = computed(() => {

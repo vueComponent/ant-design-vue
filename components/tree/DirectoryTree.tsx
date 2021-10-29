@@ -55,11 +55,12 @@ export default defineComponent({
     'dblclick',
     'click',
   ],
-  setup(props, { attrs, slots, emit }) {
+  setup(props, { attrs, slots, emit, expose }) {
     // convertTreeToData 兼容 a-tree-node 历史写法，未来a-tree-node移除后，删除相关代码，不要再render中调用 treeData，否则死循环
     const treeData = ref<DataNode[]>(
       props.treeData || convertTreeToData(filterEmpty(slots.default?.())),
     );
+
     watch(
       () => props.treeData,
       () => {
@@ -79,7 +80,14 @@ export default defineComponent({
     const cachedSelectedKeys = ref<Key[]>();
 
     const treeRef = ref();
-
+    expose({
+      selectedKeys: computed(() => treeRef.value?.selectedKeys),
+      checkedKeys: computed(() => treeRef.value?.checkedKeys),
+      halfCheckedKeys: computed(() => treeRef.value?.halfCheckedKeys),
+      loadedKeys: computed(() => treeRef.value?.loadedKeys),
+      loadingKeys: computed(() => treeRef.value?.loadingKeys),
+      expandedKeys: computed(() => treeRef.value?.expandedKeys),
+    });
     const getInitExpandedKeys = () => {
       const { keyEntities } = convertDataToEntities(treeData.value);
 

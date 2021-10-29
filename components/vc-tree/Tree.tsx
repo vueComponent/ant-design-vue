@@ -952,6 +952,12 @@ export default defineComponent({
       onNodeExpand,
       scrollTo,
       onKeydown,
+      selectedKeys: computed(() => selectedKeys.value),
+      checkedKeys: computed(() => checkedKeys.value),
+      halfCheckedKeys: computed(() => halfCheckedKeys.value),
+      loadedKeys: computed(() => loadedKeys.value),
+      loadingKeys: computed(() => loadingKeys.value),
+      expandedKeys: computed(() => expandedKeys.value),
     });
     onUnmounted(() => {
       window.removeEventListener('dragend', onWindowDragEnd);

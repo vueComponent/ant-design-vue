@@ -1,5 +1,5 @@
 import type { PropType, ExtractPropTypes } from 'vue';
-import { watchEffect, ref, defineComponent } from 'vue';
+import { watchEffect, ref, defineComponent, computed } from 'vue';
 import classNames from '../_util/classNames';
 import VcTree, { TreeNode } from '../vc-tree';
 import PropTypes from '../_util/vue-types';
@@ -164,6 +164,12 @@ export default defineComponent({
       onNodeExpand: (...args) => {
         treeRef.value?.onNodeExpand(...args);
       },
+      selectedKeys: computed(() => treeRef.value?.selectedKeys),
+      checkedKeys: computed(() => treeRef.value?.checkedKeys),
+      halfCheckedKeys: computed(() => treeRef.value?.halfCheckedKeys),
+      loadedKeys: computed(() => treeRef.value?.loadedKeys),
+      loadingKeys: computed(() => treeRef.value?.loadingKeys),
+      expandedKeys: computed(() => treeRef.value?.expandedKeys),
     });
 
     watchEffect(() => {

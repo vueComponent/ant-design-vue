@@ -10,6 +10,15 @@
 
 ---
 
+## 3.0.0-alpha.7
+
+`2021-10-29`
+
+- 🌟 Form 新增 validate 事件 [#4817](https://github.com/vueComponent/ant-design-vue/issues/4817)
+- 🌟 Tree 提供 ref 获取内部状态 api [#4820](https://github.com/vueComponent/ant-design-vue/issues/4820)
+- 🐞 修复 Table 拖动时宽度突变问题 [#4811](https://github.com/vueComponent/ant-design-vue/issues/4811)
+- 🐞 修复 TreeSelect 为空后，再次打开不更新问题 [a5604b](https://github.com/vueComponent/ant-design-vue/commit/a5604bb96796b9ec0090d3ec0c6d32d13d0df740)
+
 ## 3.0.0-alpha.6
 
 `2021-10-27`

@@ -10,6 +10,15 @@
 
 ---
 
+## 3.0.0-alpha.7
+
+`2021-10-29`
+
+- 🌟 Form added validate event [#4817](https://github.com/vueComponent/ant-design-vue/issues/4817)
+- 🌟 Tree provides ref to get internal state api [#4820](https://github.com/vueComponent/ant-design-vue/issues/4820)
+- 🐞 Fix the width mutation problem when dragging Table [#4811](https://github.com/vueComponent/ant-design-vue/issues/4811)
+- 🐞 Fix the problem that TreeSelect is empty and does not update when opened again [a5604b](https://github.com/vueComponent/ant-design-vue/commit/a5604bb96796b9ec0090d3ec0c6d32d13d0df740)
+
 ## 3.0.0-alpha.6
 
 `2021-10-27`

@@ -10,6 +10,12 @@
 
 ---
 
+## 3.0.0-alpha.8
+
+`2021-10-30`
+
+- 🐞 Fix the missing component type [#4823](https://github.com/vueComponent/ant-design-vue/issues/4823)
+
 ## 3.0.0-alpha.7
 
 `2021-10-29`

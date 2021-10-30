@@ -26,13 +26,14 @@ const stripCode = require('gulp-strip-code');
 const compareVersions = require('compare-versions');
 // const getTSCommonConfig = require('./getTSCommonConfig');
 const replaceLib = require('./replaceLib');
+const getTSCommonConfig = require('./getTSCommonConfig');
 
 const packageJson = require(getProjectPath('package.json'));
 const cwd = process.cwd();
 const libDir = getProjectPath('lib');
 const esDir = getProjectPath('es');
 
-// const tsConfig = getTSCommonConfig();
+const tsConfig = getTSCommonConfig();
 
 function dist(done) {
   rimraf.sync(path.join(cwd, 'dist'));
@@ -73,9 +74,9 @@ function dist(done) {
 
 async function compileTs(modules = false, cb) {
   const options = {
-    allowJs: true,
-    declaration: true,
     emitDeclarationOnly: true,
+    ...tsConfig,
+    moduleResolution: 2,
   };
 
   const createdFiles = {};
@@ -90,6 +91,7 @@ async function compileTs(modules = false, cb) {
       'components/**/*.jsx',
       'components/**/*.tsx',
       'components/**/*.ts',
+      'typings/**/*.d.ts',
       '!components/*/__tests__/*',
       '!components/*/style/*',
       '!components/styles.ts',

@@ -28,7 +28,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/xS9YEJhfe/Input.svg
 | prefix | 带有前缀图标的 input | string\|slot |  |  |
 | size | 控件大小。注：标准表单内的输入框大小限制为 `large`。可选 `large` `default` `small` | string | `default` |  |
 | suffix | 带有后缀图标的 input | string\|slot |  |  |
-| type | 声明 input 类型，同原生 input 标签的 type 属性，见：[MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#属性)(请直接使用 `Input.TextArea` 代替 `type="textarea"`)。 | string | `text` |  |
+| type | 声明 input 类型，同原生 input 标签的 type 属性，见：[MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#属性)(请直接使用 `<a-textarea />` 代替 `type="textarea"`)。 | string | `text` |  |
 | value(v-model) | 输入框内容 | string |  |  |
 | allowClear | 可以点击清除图标删除内容 | boolean |  |  |
 
@@ -41,7 +41,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/xS9YEJhfe/Input.svg
 
 > 如果 `Input` 在 `Form.Item` 内，并且 `Form.Item` 设置了 `id` 和 `options` 属性，则 `value` `defaultValue` 和 `id` 属性会被自动设置。
 
-### Input.TextArea
+### TextArea
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- | --- |
@@ -51,13 +51,13 @@ cover: https://gw.alipayobjects.com/zos/alicdn/xS9YEJhfe/Input.svg
 | allowClear | 可以点击清除图标删除内容 | boolean |  | 1.5.0 |
 | showCount | 是否展示字数 | boolean | false |  |
 
-### Input.TextArea 事件
+### TextArea 事件
 
 | 事件名称   | 说明           | 回调参数    |
 | ---------- | -------------- | ----------- |
 | pressEnter | 按下回车的回调 | function(e) |
 
-`Input.TextArea` 的其他属性和浏览器自带的 [textarea](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea) 一致。
+`Textarea` 的其他属性和浏览器自带的 [textarea](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea) 一致。
 
 #### Input.Search
 

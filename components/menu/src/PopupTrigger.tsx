@@ -4,6 +4,7 @@ import { computed, defineComponent, onBeforeUnmount, ref, watch } from 'vue';
 import type { MenuMode } from './interface';
 import { useInjectMenu } from './hooks/useMenuContext';
 import { placements, placementsRtl } from './placements';
+import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
 import classNames from '../../_util/classNames';
 
@@ -48,7 +49,7 @@ export default defineComponent({
 
     const popupPlacement = computed(() => popupPlacementMap[props.mode]);
 
-    const visibleRef = ref<number>();
+    const visibleRef = ref<RafFrame>();
     watch(
       () => props.visible,
       visible => {

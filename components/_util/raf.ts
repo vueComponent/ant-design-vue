@@ -1,13 +1,12 @@
-interface RafMap {
-  [id: number]: number;
-}
+import getRequestAnimationFrame, { cancelRequestAnimationFrame } from './getRequestAnimationFrame';
 
-let id = 0;
-const ids: RafMap = {};
+const oriRaf = getRequestAnimationFrame();
 
+export type RafFrame = {
+  id: number;
+};
 // Support call raf with delay specified frame
-export default function raf(callback: () => void, delayFrames = 1): number {
-  const myId: number = id++;
+export default function raf(callback: () => void, delayFrames = 1): { id: number } {
   let restFrames: number = delayFrames;
 
   function internalCallback() {
@@ -15,22 +14,20 @@ export default function raf(callback: () => void, delayFrames = 1): number {
 
     if (restFrames <= 0) {
       callback();
-      delete ids[myId];
     } else {
-      ids[myId] = requestAnimationFrame(internalCallback);
+      frame.id = oriRaf(internalCallback);
     }
   }
 
-  ids[myId] = requestAnimationFrame(internalCallback);
+  const frame = {
+    id: oriRaf(internalCallback),
+  };
 
-  return myId;
+  return frame;
 }
 
-raf.cancel = function cancel(pid?: number) {
-  if (pid === undefined) return;
+raf.cancel = function cancel(frame?: { id: number }) {
+  if (!frame) return;
 
-  cancelAnimationFrame(ids[pid]);
-  delete ids[pid];
+  cancelRequestAnimationFrame(frame.id);
 };
-
-raf.ids = ids; // export this for test usage

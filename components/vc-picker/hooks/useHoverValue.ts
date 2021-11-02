@@ -1,3 +1,5 @@
+import type { RafFrame } from '../../_util/raf';
+import raf from '../../_util/raf';
 import type { ComputedRef, Ref, UnwrapRef } from 'vue';
 import { ref, onBeforeUnmount, watch } from 'vue';
 import type { ValueTextConfig } from './useValueTexts';
@@ -8,15 +10,15 @@ export default function useHoverValue<DateType>(
   { formatList, generateConfig, locale }: ValueTextConfig<DateType>,
 ): [ComputedRef<string>, (date: DateType) => void, (immediately?: boolean) => void] {
   const innerValue = ref<DateType>(null);
-  const raf = ref(null);
+  let rafId: RafFrame;
 
   function setValue(val: DateType, immediately = false) {
-    cancelAnimationFrame(raf.value);
+    raf.cancel(rafId);
     if (immediately) {
       innerValue.value = val as UnwrapRef<DateType>;
       return;
     }
-    raf.value = requestAnimationFrame(() => {
+    rafId = raf(() => {
       innerValue.value = val as UnwrapRef<DateType>;
     });
   }
@@ -38,7 +40,7 @@ export default function useHoverValue<DateType>(
     onLeave(true);
   });
   onBeforeUnmount(() => {
-    cancelAnimationFrame(raf.value);
+    raf.cancel(rafId);
   });
 
   return [firstText, onEnter, onLeave];

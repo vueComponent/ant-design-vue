@@ -3,6 +3,7 @@ import { onBeforeUnmount, watchEffect, watch, ref, computed } from 'vue';
 import type { FocusEventHandler } from '../../_util/EventInterface';
 import KeyCode from '../../_util/KeyCode';
 import { addGlobalMousedownEvent, getTargetFromEvent } from '../utils/uiUtil';
+import raf from '../../_util/raf';
 
 export default function usePickerInput({
   open,
@@ -161,7 +162,7 @@ export default function usePickerInput({
               preventBlurRef.value = true;
 
               // Always set back in case `onBlur` prevented by user
-              requestAnimationFrame(() => {
+              raf(() => {
                 preventBlurRef.value = false;
               });
             } else if (!focused.value || clickedOutside) {

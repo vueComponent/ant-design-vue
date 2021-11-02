@@ -1,14 +1,15 @@
 import isVisible from '../../vc-util/Dom/isVisible';
 import KeyCode from '../../_util/KeyCode';
+import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
 import type { GenerateConfig } from '../generate';
 import type { CustomFormat, PanelMode, PickerMode } from '../interface';
 
-const scrollIds = new Map<HTMLElement, number>();
+const scrollIds = new Map<HTMLElement, RafFrame>();
 
 /** Trigger when element is visible in view */
 export function waitElementReady(element: HTMLElement, callback: () => void): () => void {
-  let id: number;
+  let id: RafFrame;
 
   function tryOrNextFrame() {
     if (isVisible(element)) {
@@ -30,14 +31,14 @@ export function waitElementReady(element: HTMLElement, callback: () => void): ()
 /* eslint-disable no-param-reassign */
 export function scrollTo(element: HTMLElement, to: number, duration: number) {
   if (scrollIds.get(element)) {
-    cancelAnimationFrame(scrollIds.get(element)!);
+    raf.cancel(scrollIds.get(element)!);
   }
 
   // jump to target if duration zero
   if (duration <= 0) {
     scrollIds.set(
       element,
-      requestAnimationFrame(() => {
+      raf(() => {
         element.scrollTop = to;
       }),
     );
@@ -49,7 +50,7 @@ export function scrollTo(element: HTMLElement, to: number, duration: number) {
 
   scrollIds.set(
     element,
-    requestAnimationFrame(() => {
+    raf(() => {
       element.scrollTop += perTick;
       if (element.scrollTop !== to) {
         scrollTo(element, to, duration - 10);

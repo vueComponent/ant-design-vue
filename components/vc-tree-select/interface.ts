@@ -24,7 +24,6 @@ export interface DataNode {
   checkable?: boolean;
   selectable?: boolean;
   children?: DataNode[];
-  selectable?: boolean;
 
   /** Customize data info */
   [prop: string]: any;

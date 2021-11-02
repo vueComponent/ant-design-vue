@@ -79,7 +79,6 @@ function formatTreeData(
         selectable,
         dataRef: node,
         checkable,
-        selectable,
       };
 
       if (node.slots) {

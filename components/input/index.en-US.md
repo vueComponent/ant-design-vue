@@ -27,7 +27,7 @@ A basic widget for getting the user input is a text field. Keyboard and mouse ca
 | prefix | The prefix icon for the Input. | string\|slot |  |  |
 | size | The size of the input box. Note: in the context of a form, the `large` size is used. Available: `large` `default` `small` | string | `default` |  |
 | suffix | The suffix icon for the Input. | string\|slot |  |  |
-| type | The type of input, see: [MDN](https://developer.mozilla.org/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types)(use `Input.TextArea` instead of `type="textarea"`) | string | `text` |  |
+| type | The type of input, see: [MDN](https://developer.mozilla.org/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types)(use `<a-textarea />` instead of `type="textarea"`) | string | `text` |  |
 | value(v-model) | The input content value | string |  |  |
 | allowClear | allow to remove input content with clear icon | boolean |  |  |
 
@@ -40,7 +40,7 @@ A basic widget for getting the user input is a text field. Keyboard and mouse ca
 
 > When `Input` is used in a `Form.Item` context, if the `Form.Item` has the `id` and `options` props defined then `value`, `defaultValue`, and `id` props of `Input` are automatically set.
 
-### Input.TextArea
+### TextArea
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- | --- |
@@ -50,13 +50,13 @@ A basic widget for getting the user input is a text field. Keyboard and mouse ca
 | allowClear | allow to remove input content with clear icon | boolean |  | 1.5.0 |
 | showCount | Whether show text count | boolean | false |  |
 
-### Input.TextArea Events
+### TextArea Events
 
 | Events Name | Description                                                        | Arguments   |
 | ----------- | ------------------------------------------------------------------ | ----------- |
 | pressEnter  | The callback function that is triggered when Enter key is pressed. | function(e) |
 
-The rest of the props of `Input.TextArea` are the same as the original [textarea](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea).
+The rest of the props of `TextArea` are the same as the original [textarea](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea).
 
 #### Input.Search
 

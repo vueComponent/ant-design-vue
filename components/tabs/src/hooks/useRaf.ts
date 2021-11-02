@@ -1,9 +1,10 @@
 import type { Ref } from 'vue';
 import { ref, onBeforeUnmount } from 'vue';
+import type { RafFrame } from '../../../_util/raf';
 import wrapperRaf from '../../../_util/raf';
 
 export default function useRaf<Callback extends Function>(callback: Callback) {
-  const rafRef = ref<number>();
+  const rafRef = ref<RafFrame>();
   const removedRef = ref(false);
 
   function trigger(...args: any[]) {

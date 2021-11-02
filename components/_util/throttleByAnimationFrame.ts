@@ -1,5 +1,8 @@
+import type { RafFrame } from './raf';
+import raf from './raf';
+
 export default function throttleByAnimationFrame(fn: (...args: any[]) => void) {
-  let requestId: number | null;
+  let requestId: RafFrame;
 
   const later = (args: any[]) => () => {
     requestId = null;
@@ -8,11 +11,11 @@ export default function throttleByAnimationFrame(fn: (...args: any[]) => void) {
 
   const throttled = (...args: any[]) => {
     if (requestId == null) {
-      requestId = requestAnimationFrame(later(args));
+      requestId = raf(later(args));
     }
   };
 
-  (throttled as any).cancel = () => cancelAnimationFrame(requestId!);
+  (throttled as any).cancel = () => raf.cancel(requestId!);
 
   return throttled;
 }

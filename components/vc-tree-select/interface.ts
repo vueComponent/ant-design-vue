@@ -24,6 +24,7 @@ export interface DataNode {
   checkable?: boolean;
   selectable?: boolean;
   children?: DataNode[];
+  selectable?: boolean;
 
   /** Customize data info */
   [prop: string]: any;
@@ -33,10 +34,10 @@ export interface InternalDataEntity {
   key: Key;
   value: RawValueType;
   title?: any;
-  disableCheckbox?: boolean;
-  disabled?: boolean;
-  selectable?: boolean;
-  checkable?: boolean;
+  checkable: boolean;
+  disableCheckbox: boolean;
+  disabled: boolean;
+  selectable: boolean;
   children?: InternalDataEntity[];
 
   /** Origin DataNode */

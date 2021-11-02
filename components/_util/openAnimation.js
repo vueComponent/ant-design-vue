@@ -1,5 +1,6 @@
 import cssAnimation from './css-animation';
 import { nextTick } from 'vue';
+import { requestAnimationTimeout, cancelAnimationTimeout } from './requestAnimationTimeout';
 
 function animate(node, show, done) {
   let height;
@@ -8,7 +9,7 @@ function animate(node, show, done) {
   return cssAnimation(node, 'ant-motion-collapse-legacy', {
     start() {
       if (appearRequestAnimationFrameId) {
-        cancelAnimationFrame(appearRequestAnimationFrameId);
+        cancelAnimationTimeout(appearRequestAnimationFrameId);
       }
       if (!show) {
         node.style.height = `${node.offsetHeight}px`;
@@ -18,7 +19,7 @@ function animate(node, show, done) {
         // not get offsetHeight when appear
         // set it into raf get correct offsetHeight
         if (height === 0) {
-          appearRequestAnimationFrameId = requestAnimationFrame(() => {
+          appearRequestAnimationFrameId = requestAnimationTimeout(() => {
             height = node.offsetHeight;
             node.style.height = '0px';
             node.style.opacity = '0';
@@ -31,19 +32,19 @@ function animate(node, show, done) {
     },
     active() {
       if (requestAnimationFrameId) {
-        cancelAnimationFrame(requestAnimationFrameId);
+        cancelAnimationTimeout(requestAnimationFrameId);
       }
-      requestAnimationFrameId = requestAnimationFrame(() => {
+      requestAnimationFrameId = requestAnimationTimeout(() => {
         node.style.height = `${show ? height : 0}px`;
         node.style.opacity = show ? '1' : '0';
       });
     },
     end() {
       if (appearRequestAnimationFrameId) {
-        cancelAnimationFrame(appearRequestAnimationFrameId);
+        cancelAnimationTimeout(appearRequestAnimationFrameId);
       }
       if (requestAnimationFrameId) {
-        cancelAnimationFrame(requestAnimationFrameId);
+        cancelAnimationTimeout(requestAnimationFrameId);
       }
       node.style.height = '';
       node.style.opacity = '';

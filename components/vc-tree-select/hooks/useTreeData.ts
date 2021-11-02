@@ -76,6 +76,7 @@ function formatTreeData(
         value: mergedValue,
         title: getLabelProp(node),
         node,
+        selectable,
         dataRef: node,
         checkable,
         selectable,

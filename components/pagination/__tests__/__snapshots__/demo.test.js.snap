@@ -24,7 +24,7 @@ exports[`renders ./components/pagination/demo/changer.vue correctly 1`] = `
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3 ant-pagination-item-active"><a rel="nofollow">3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a rel="nofollow">4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next"><a rel="nofollow">5</a></li>
-    <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a class="ant-pagination-item-link">
+    <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a rel="nofollow" class="ant-pagination-item-link">
         <div class="ant-pagination-item-container"><span role="img" aria-label="double-right" class="anticon anticon-double-right ant-pagination-item-link-icon"><svg focusable="false" class="" data-icon="double-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1A7.98 7.98 0 00188 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5zm304 0L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1A7.98 7.98 0 00492 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"></path></svg></span><span class="ant-pagination-item-ellipsis">•••</span></div>
       </a></li>
     <li title="25" tabindex="0" class="ant-pagination-item ant-pagination-item-25"><a rel="nofollow">25</a></li>
@@ -50,7 +50,7 @@ exports[`renders ./components/pagination/demo/changer.vue correctly 1`] = `
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4 ant-pagination-item-active"><a rel="nofollow">4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5"><a rel="nofollow">5</a></li>
     <li title="6" tabindex="0" class="ant-pagination-item ant-pagination-item-6 ant-pagination-item-before-jump-next"><a rel="nofollow">6</a></li>
-    <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a class="ant-pagination-item-link">
+    <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a rel="nofollow" class="ant-pagination-item-link">
         <div class="ant-pagination-item-container"><span role="img" aria-label="double-right" class="anticon anticon-double-right ant-pagination-item-link-icon"><svg focusable="false" class="" data-icon="double-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1A7.98 7.98 0 00188 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5zm304 0L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1A7.98 7.98 0 00492 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"></path></svg></span><span class="ant-pagination-item-ellipsis">•••</span></div>
       </a></li>
     <li title="50" tabindex="0" class="ant-pagination-item ant-pagination-item-50"><a rel="nofollow">50</a></li>
@@ -103,7 +103,7 @@ exports[`renders ./components/pagination/demo/itemRender.vue correctly 1`] = `
   <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a rel="nofollow">3</a></li>
   <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a rel="nofollow">4</a></li>
   <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next"><a rel="nofollow">5</a></li>
-  <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a class="ant-pagination-item-link">
+  <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a rel="nofollow" class="ant-pagination-item-link">
       <div class="ant-pagination-item-container"><span role="img" aria-label="double-right" class="anticon anticon-double-right ant-pagination-item-link-icon"><svg focusable="false" class="" data-icon="double-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1A7.98 7.98 0 00188 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5zm304 0L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1A7.98 7.98 0 00492 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"></path></svg></span><span class="ant-pagination-item-ellipsis">•••</span></div>
     </a></li>
   <li title="50" tabindex="0" class="ant-pagination-item ant-pagination-item-50"><a rel="nofollow">50</a></li>
@@ -132,7 +132,7 @@ exports[`renders ./components/pagination/demo/jump.vue correctly 1`] = `
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a rel="nofollow">3</a></li>
     <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a rel="nofollow">4</a></li>
     <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next"><a rel="nofollow">5</a></li>
-    <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a class="ant-pagination-item-link">
+    <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a rel="nofollow" class="ant-pagination-item-link">
         <div class="ant-pagination-item-container"><span role="img" aria-label="double-right" class="anticon anticon-double-right ant-pagination-item-link-icon"><svg focusable="false" class="" data-icon="double-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1A7.98 7.98 0 00188 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5zm304 0L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1A7.98 7.98 0 00492 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"></path></svg></span><span class="ant-pagination-item-ellipsis">•••</span></div>
       </a></li>
     <li title="50" tabindex="0" class="ant-pagination-item ant-pagination-item-50"><a rel="nofollow">50</a></li>
@@ -157,7 +157,7 @@ exports[`renders ./components/pagination/demo/jump.vue correctly 1`] = `
     <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1"><a rel="nofollow">1</a></li>
     <li title="2" tabindex="0" class="ant-pagination-item ant-pagination-item-2 ant-pagination-item-active"><a rel="nofollow">2</a></li>
     <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3 ant-pagination-item-before-jump-next"><a rel="nofollow">3</a></li>
-    <li title="Next 3 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a class="ant-pagination-item-link">
+    <li title="Next 3 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a rel="nofollow" class="ant-pagination-item-link">
         <div class="ant-pagination-item-container"><span role="img" aria-label="double-right" class="anticon anticon-double-right ant-pagination-item-link-icon"><svg focusable="false" class="" data-icon="double-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1A7.98 7.98 0 00188 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5zm304 0L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1A7.98 7.98 0 00492 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"></path></svg></span><span class="ant-pagination-item-ellipsis">•••</span></div>
       </a></li>
     <li title="50" tabindex="0" class="ant-pagination-item ant-pagination-item-50"><a rel="nofollow">50</a></li>
@@ -234,7 +234,7 @@ exports[`renders ./components/pagination/demo/more.vue correctly 1`] = `
   <!---->
   <li title="Previous Page" tabindex="0" class="ant-pagination-prev" aria-disabled="false"><button class="ant-pagination-item-link" type="button" tabindex="-1"><span role="img" aria-label="left" class="anticon anticon-left"><svg focusable="false" class="" data-icon="left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z"></path></svg></span></button></li>
   <li title="1" tabindex="0" class="ant-pagination-item ant-pagination-item-1"><a rel="nofollow">1</a></li>
-  <li title="Previous 5 Pages" tabindex="0" class="ant-pagination-jump-prev ant-pagination-jump-prev-custom-icon"><a class="ant-pagination-item-link">
+  <li title="Previous 5 Pages" tabindex="0" class="ant-pagination-jump-prev ant-pagination-jump-prev-custom-icon"><a rel="nofollow" class="ant-pagination-item-link">
       <div class="ant-pagination-item-container"><span role="img" aria-label="double-left" class="anticon anticon-double-left ant-pagination-item-link-icon"><svg focusable="false" class="" data-icon="double-left" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M272.9 512l265.4-339.1c4.1-5.2.4-12.9-6.3-12.9h-77.3c-4.9 0-9.6 2.3-12.6 6.1L186.8 492.3a31.99 31.99 0 000 39.5l255.3 326.1c3 3.9 7.7 6.1 12.6 6.1H532c6.7 0 10.4-7.7 6.3-12.9L272.9 512zm304 0l265.4-339.1c4.1-5.2.4-12.9-6.3-12.9h-77.3c-4.9 0-9.6 2.3-12.6 6.1L490.8 492.3a31.99 31.99 0 000 39.5l255.3 326.1c3 3.9 7.7 6.1 12.6 6.1H836c6.7 0 10.4-7.7 6.3-12.9L576.9 512z"></path></svg></span><span class="ant-pagination-item-ellipsis">•••</span></div>
     </a></li>
   <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4 ant-pagination-item-after-jump-prev"><a rel="nofollow">4</a></li>
@@ -242,7 +242,7 @@ exports[`renders ./components/pagination/demo/more.vue correctly 1`] = `
   <li title="6" tabindex="0" class="ant-pagination-item ant-pagination-item-6 ant-pagination-item-active"><a rel="nofollow">6</a></li>
   <li title="7" tabindex="0" class="ant-pagination-item ant-pagination-item-7"><a rel="nofollow">7</a></li>
   <li title="8" tabindex="0" class="ant-pagination-item ant-pagination-item-8 ant-pagination-item-before-jump-next"><a rel="nofollow">8</a></li>
-  <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a class="ant-pagination-item-link">
+  <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a rel="nofollow" class="ant-pagination-item-link">
       <div class="ant-pagination-item-container"><span role="img" aria-label="double-right" class="anticon anticon-double-right ant-pagination-item-link-icon"><svg focusable="false" class="" data-icon="double-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1A7.98 7.98 0 00188 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5zm304 0L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1A7.98 7.98 0 00492 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"></path></svg></span><span class="ant-pagination-item-ellipsis">•••</span></div>
     </a></li>
   <li title="50" tabindex="0" class="ant-pagination-item ant-pagination-item-50"><a rel="nofollow">50</a></li>

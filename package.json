@@ -102,7 +102,6 @@
     "@types/markdown-it": "^10.0.2",
     "@types/node": "^14.0.0",
     "@types/postcss-load-config": "^2.0.1",
-    "@types/raf": "^3.4.0",
     "@typescript-eslint/eslint-plugin": "^4.1.0",
     "@typescript-eslint/parser": "^4.1.0",
     "@vitejs/plugin-vue": "^1.2.4",

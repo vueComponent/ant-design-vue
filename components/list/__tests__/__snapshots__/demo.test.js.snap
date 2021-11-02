@@ -486,7 +486,7 @@ exports[`renders ./components/list/demo/vertical.vue correctly 1`] = `
       <li title="3" tabindex="0" class="ant-pagination-item ant-pagination-item-3"><a rel="nofollow">3</a></li>
       <li title="4" tabindex="0" class="ant-pagination-item ant-pagination-item-4"><a rel="nofollow">4</a></li>
       <li title="5" tabindex="0" class="ant-pagination-item ant-pagination-item-5 ant-pagination-item-before-jump-next"><a rel="nofollow">5</a></li>
-      <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a class="ant-pagination-item-link">
+      <li title="Next 5 Pages" tabindex="0" class="ant-pagination-jump-next ant-pagination-jump-next-custom-icon"><a rel="nofollow" class="ant-pagination-item-link">
           <div class="ant-pagination-item-container"><span role="img" aria-label="double-right" class="anticon anticon-double-right ant-pagination-item-link-icon"><svg focusable="false" class="" data-icon="double-right" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M533.2 492.3L277.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H188c-6.7 0-10.4 7.7-6.3 12.9L447.1 512 181.7 851.1A7.98 7.98 0 00188 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5zm304 0L581.9 166.1c-3-3.9-7.7-6.1-12.6-6.1H492c-6.7 0-10.4 7.7-6.3 12.9L751.1 512 485.7 851.1A7.98 7.98 0 00492 864h77.3c4.9 0 9.6-2.3 12.6-6.1l255.3-326.1c9.1-11.7 9.1-27.9 0-39.5z"></path></svg></span><span class="ant-pagination-item-ellipsis">•••</span></div>
         </a></li>
       <li title="8" tabindex="0" class="ant-pagination-item ant-pagination-item-8"><a rel="nofollow">8</a></li>

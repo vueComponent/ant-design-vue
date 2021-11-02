@@ -1,5 +1,6 @@
 import type { Ref } from 'vue';
 import { nextTick, onBeforeUnmount, ref, watch, onMounted } from 'vue';
+import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
 
 /**
@@ -23,7 +24,7 @@ export default (
   doMeasure: Func,
 ): [Ref<PopupStatus>, (callback?: () => void) => void] => {
   const status = ref<PopupStatus>(null);
-  const rafRef = ref<number>();
+  const rafRef = ref<RafFrame>();
   const destroyRef = ref(false);
   function setStatus(nextStatus: PopupStatus) {
     if (!destroyRef.value) {

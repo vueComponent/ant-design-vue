@@ -18,6 +18,7 @@ export default defineComponent({
   name: 'ABreadcrumbItem',
   __ANT_BREADCRUMB_ITEM: true,
   props: breadcrumbItemProps,
+  emits: ['click'],
   slots: ['separator', 'overlay'],
   setup(props, { slots }) {
     const { prefixCls } = useConfigInject('breadcrumb', props);

@@ -33,26 +33,26 @@ export default function useTouchMove(
 
     e.preventDefault();
     const { screenX, screenY } = e.touches[0];
-    setTouchPosition({ x: screenX, y: screenY });
     const offsetX = screenX - touchPosition.value.x;
     const offsetY = screenY - touchPosition.value.y;
     onOffset(offsetX, offsetY);
+    setTouchPosition({ x: screenX, y: screenY });
     const now = Date.now();
-    setLastTimestamp(now);
     setLastTimeDiff(now - lastTimestamp.value);
+    setLastTimestamp(now);
     setLastOffset({ x: offsetX, y: offsetY });
   }
 
   function onTouchEnd() {
     if (!touchPosition.value) return;
-
+    const lastOffsetValue = lastOffset.value;
     setTouchPosition(null);
     setLastOffset(null);
 
     // Swipe if needed
-    if (lastOffset.value) {
-      const distanceX = lastOffset.value.x / lastTimeDiff.value;
-      const distanceY = lastOffset.value.y / lastTimeDiff.value;
+    if (lastOffsetValue) {
+      const distanceX = lastOffsetValue.x / lastTimeDiff.value;
+      const distanceY = lastOffsetValue.y / lastTimeDiff.value;
       const absX = Math.abs(distanceX);
       const absY = Math.abs(distanceY);
 

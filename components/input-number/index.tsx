@@ -54,9 +54,11 @@ const InputNumber = defineComponent({
     const handleChange = (val: number) => {
       emit('update:value', val);
       emit('change', val);
+      formItemContext.onFieldChange();
     };
     const handleBlur = () => {
       emit('blur');
+      formItemContext.onFieldBlur();
     };
     onMounted(() => {
       nextTick(() => {

@@ -64,7 +64,7 @@ function formatTreeData(
 
   function dig(dataNodes: DataNode[]) {
     return (dataNodes || []).map(node => {
-      const { key, disableCheckbox, disabled, selectable } = node;
+      const { key, disableCheckbox, disabled, checkable, selectable } = node;
 
       const value = node[fieldValue];
       const mergedValue = fieldValue in node ? value : key;
@@ -78,6 +78,8 @@ function formatTreeData(
         node,
         selectable,
         dataRef: node,
+        checkable,
+        selectable,
       };
 
       if (node.slots) {

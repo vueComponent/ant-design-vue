@@ -396,6 +396,13 @@ function isValidElement(element) {
 function getPropsSlot(slots, props, prop = 'default') {
   return props[prop] ?? slots[prop]?.();
 }
+
+export const getTextFromElement = ele => {
+  if (isValidElement(ele) && isStringElement(ele[0])) {
+    return ele[0].children;
+  }
+  return ele;
+};
 export {
   splitAttrs,
   hasProp,

@@ -53,6 +53,7 @@ import createRef from '../_util/createRef';
 import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
 import isMobile from '../vc-util/isMobile';
+import { getTextFromElement } from '../_util/props-util';
 
 const DEFAULT_OMIT_PROPS = [
   'children',
@@ -699,7 +700,7 @@ export default function generateSelector<
             patchRawValues = patchLabels
               .map(label => {
                 const item = mergedFlattenOptions.value.find(
-                  ({ data }) => data[mergedOptionLabelProp.value] === label,
+                  ({ data }) => getTextFromElement(data[mergedOptionLabelProp.value]) === label,
                 );
                 return item ? item.data.value : null;
               })

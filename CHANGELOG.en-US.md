@@ -10,6 +10,16 @@
 
 ---
 
+## 3.0.0-alpha.9
+
+`2021-11-03`
+
+- 🐞 Fix requestAnimationFrame undefined error under ssr for some components [#4833](https://github.com/vueComponent/ant-design-vue/issues/4833)
+- 🐞 Fix the problem that TreeSelect selectable and checkable cannot be closed [#4838](https://github.com/vueComponent/ant-design-vue/issues/4838)
+- 🐞 Fix the problem that Tabs cannot be scrolled on the mobile terminal [#4828](https://github.com/vueComponent/ant-design-vue/issues/4828)
+- 🐞 Fix InputNumber does not trigger inspection under form [#4831](https://github.com/vueComponent/ant-design-vue/issues/4831)
+- 🐞 Fix that when Select uses `<a-select-option>` to build a node, the automatic word segmentation fails [#4844](https://github.com/vueComponent/ant-design-vue/issues/4844)
+
 ## 3.0.0-alpha.8
 
 `2021-10-30`

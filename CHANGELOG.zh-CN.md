@@ -10,6 +10,16 @@
 
 ---
 
+## 3.0.0-alpha.9
+
+`2021-11-03`
+
+- 🐞 修复部分组件在 ssr 下 requestAnimationFrame 未定义错误 [#4833](https://github.com/vueComponent/ant-design-vue/issues/4833)
+- 🐞 修复 TreeSelect selectable、checkable 无法关闭问题 [#4838](https://github.com/vueComponent/ant-design-vue/issues/4838)
+- 🐞 修复 Tabs 在移动端无法滚动问题 [#4828](https://github.com/vueComponent/ant-design-vue/issues/4828)
+- 🐞 修复 InputNumber 在 form 下不触发检验问题 [#4831](https://github.com/vueComponent/ant-design-vue/issues/4831)
+- 🐞 修复 Select 使用 `<a-select-option>` 构建节点时，自动分词失效 [#4844](https://github.com/vueComponent/ant-design-vue/issues/4844)
+
 ## 3.0.0-alpha.8
 
 `2021-10-30`

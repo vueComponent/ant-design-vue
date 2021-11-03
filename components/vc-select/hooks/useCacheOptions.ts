@@ -12,17 +12,15 @@ export default function useCacheOptions<
 >(options: Ref) {
   const optionMap = computed(() => {
     const map: Map<RawValueType, FlattenOptionsType<OptionType>[number]> = new Map();
-    options.value.forEach((item: any) => {
-      const {
-        data: { value },
-      } = item;
+    options.value.forEach(item => {
+      const { value } = item;
       map.set(value, item);
     });
     return map;
   });
 
-  const getValueOption = (vals: RawValueType[]) =>
-    vals.map(value => optionMap.value.get(value)).filter(Boolean);
+  const getValueOption = (valueList: RawValueType[]) =>
+    valueList.map(value => optionMap.value.get(value)).filter(Boolean);
 
   return getValueOption;
 }

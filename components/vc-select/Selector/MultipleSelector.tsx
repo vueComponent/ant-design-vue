@@ -121,6 +121,11 @@ const SelectSelector = defineComponent<SelectorProps>({
           class={classNames(`${selectionPrefixCls.value}-item`, {
             [`${selectionPrefixCls.value}-item-disabled`]: itemDisabled,
           })}
+          title={
+            typeof content === 'string' || typeof content === 'number'
+              ? content.toString()
+              : undefined
+          }
         >
           <span class={`${selectionPrefixCls.value}-item-content`}>{content}</span>
           {closable && (

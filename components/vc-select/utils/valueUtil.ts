@@ -6,6 +6,7 @@ import type {
   OptionData,
   OptionGroupData,
   FlattenOptionData,
+  FieldNames,
 } from '../interface';
 import type {
   LabelValueType,
@@ -34,22 +35,45 @@ function getKey(data: OptionData | OptionGroupData, index: number) {
   return `rc-index-key-${index}`;
 }
 
+export function fillFieldNames(fieldNames?: FieldNames) {
+  const { label, value, options } = fieldNames || {};
+
+  return {
+    label: label || 'label',
+    value: value || 'value',
+    options: options || 'options',
+  };
+}
+
 /**
  * Flat options into flatten list.
  * We use `optionOnly` here is aim to avoid user use nested option group.
  * Here is simply set `key` to the index if not provided.
  */
-export function flattenOptions(options: SelectOptionsType): FlattenOptionData[] {
+export function flattenOptions(
+  options: SelectOptionsType,
+  { fieldNames }: { fieldNames?: FieldNames } = {},
+): FlattenOptionData[] {
   const flattenList: FlattenOptionData[] = [];
+
+  const {
+    label: fieldLabel,
+    value: fieldValue,
+    options: fieldOptions,
+  } = fillFieldNames(fieldNames);
 
   function dig(list: SelectOptionsType, isGroupOption: boolean) {
     list.forEach(data => {
-      if (isGroupOption || !('options' in data)) {
+      const label = data[fieldLabel];
+
+      if (isGroupOption || !(fieldOptions in data)) {
         // Option
         flattenList.push({
           key: getKey(data, flattenList.length),
           groupOption: isGroupOption,
           data,
+          label,
+          value: data[fieldValue],
         });
       } else {
         // Option Group
@@ -57,9 +81,10 @@ export function flattenOptions(options: SelectOptionsType): FlattenOptionData[] 
           key: getKey(data, flattenList.length),
           group: true,
           data,
+          label,
         });
 
-        dig(data.options, true);
+        dig(data[fieldOptions], true);
       }
     });
   }
@@ -96,11 +121,10 @@ export function findValueOption(
 ): OptionData[] {
   const optionMap: Map<RawValueType, OptionData> = new Map();
 
-  options.forEach(flattenItem => {
-    if (!flattenItem.group) {
-      const data = flattenItem.data as OptionData;
+  options.forEach(({ data, group, value }) => {
+    if (!group) {
       // Check if match
-      optionMap.set(data.value, data);
+      optionMap.set(value, data as OptionData);
     }
   });
 

@@ -13,9 +13,12 @@ import type {
   OptionData,
   RenderNode,
   OnActiveValue,
+  FieldNames,
 } from './interface';
 import type { RawValueType, FlattenOptionsType } from './interface/generator';
+import { fillFieldNames } from './utils/valueUtil';
 import useMemo from '../_util/hooks/useMemo';
+import { isPlatformMac } from './utils/platformUtil';
 
 export interface RefOptionListProps {
   onKeydown: (e?: KeyboardEvent) => void;
@@ -24,10 +27,12 @@ export interface RefOptionListProps {
 }
 
 import type { EventHandler } from '../_util/EventInterface';
+import omit from '../_util/omit';
 export interface OptionListProps<OptionType extends object> {
   prefixCls: string;
   id: string;
   options: OptionType[];
+  fieldNames?: FieldNames;
   flattenOptions: FlattenOptionsType<OptionType>;
   height: number;
   itemHeight: number;
@@ -40,6 +45,7 @@ export interface OptionListProps<OptionType extends object> {
   childrenAsData: boolean;
   searchValue: string;
   virtual: boolean;
+  direction?: 'ltr' | 'rtl';
 
   onSelect: (value: RawValueType, option: { selected: boolean }) => void;
   onToggleOpen: (open?: boolean) => void;
@@ -55,6 +61,7 @@ const OptionListProps = {
   prefixCls: PropTypes.string,
   id: PropTypes.string,
   options: PropTypes.array,
+  fieldNames: PropTypes.object,
   flattenOptions: PropTypes.array,
   height: PropTypes.number,
   itemHeight: PropTypes.number,
@@ -67,6 +74,7 @@ const OptionListProps = {
   childrenAsData: PropTypes.looseBool,
   searchValue: PropTypes.string,
   virtual: PropTypes.looseBool,
+  direction: PropTypes.string,
 
   onSelect: PropTypes.func,
   onToggleOpen: { type: Function as PropType<(open?: boolean) => void> },
@@ -153,15 +161,17 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
     // Auto scroll to item position in single mode
 
     watch(
-      () => props.open,
+      [() => props.open, () => props.searchValue],
       () => {
         if (!props.multiple && props.open && props.values.size === 1) {
           const value = Array.from(props.values)[0];
           const index = memoFlattenOptions.value.findIndex(({ data }) => data.value === value);
-          setActive(index);
-          nextTick(() => {
-            scrollIntoView(index);
-          });
+          if (index !== -1) {
+            setActive(index);
+            nextTick(() => {
+              scrollIntoView(index);
+            });
+          }
         }
         // Force trigger scrollbar visible when open
         if (props.open) {
@@ -216,9 +226,11 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
       setActive,
       onSelectValue,
       onKeydown: (event: KeyboardEvent) => {
-        const { which } = event;
+        const { which, ctrlKey } = event;
         switch (which) {
-          // >>> Arrow keys
+          // >>> Arrow keys & ctrl + n/p on Mac
+          case KeyCode.N:
+          case KeyCode.P:
           case KeyCode.UP:
           case KeyCode.DOWN: {
             let offset = 0;
@@ -226,6 +238,12 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
               offset = -1;
             } else if (which === KeyCode.DOWN) {
               offset = 1;
+            } else if (isPlatformMac() && ctrlKey) {
+              if (which === KeyCode.N) {
+                offset = 1;
+              } else if (which === KeyCode.P) {
+                offset = -1;
+              }
             }
 
             if (offset !== 0) {
@@ -290,11 +308,13 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
       menuItemSelectedIcon,
       notFoundContent,
       virtual,
+      fieldNames,
       onScroll,
       onMouseenter,
     } = this.$props;
     const renderOption = $slots.option;
     const { activeIndex } = this.state;
+    const omitFieldNameList = Object.values(fillFieldNames(fieldNames));
     // ========================== Render ==========================
     if (memoFlattenOptions.length === 0) {
       return (
@@ -326,8 +346,8 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
           onScroll={onScroll}
           virtual={virtual}
           onMouseenter={onMouseenter}
-          children={({ group, groupOption, data }, itemIndex) => {
-            const { label, key } = data;
+          children={({ group, groupOption, data, label, value }, itemIndex) => {
+            const { key } = data;
             // Group
             if (group) {
               return (
@@ -337,17 +357,8 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
               );
             }
 
-            const {
-              disabled,
-              value,
-              title,
-              children,
-              style,
-              class: cls,
-              className,
-              ...otherProps
-            } = data;
-
+            const { disabled, title, children, style, class: cls, className, ...otherProps } = data;
+            const passedProps = omit(otherProps, omitFieldNameList);
             // Option
             const selected = values.has(value);
 
@@ -376,7 +387,7 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
 
             return (
               <div
-                {...otherProps}
+                {...passedProps}
                 aria-selected={selected}
                 class={optionClassName}
                 title={optionTitle}

@@ -8,6 +8,13 @@ export type RenderNode = VNodeChild | ((props: any) => VNodeChild);
 export type Mode = 'multiple' | 'tags' | 'combobox';
 
 // ======================== Option ========================
+
+export interface FieldNames {
+  value?: string;
+  label?: string;
+  options?: string;
+}
+
 export type OnActiveValue = (
   active: RawValueType,
   index: number,
@@ -49,4 +56,6 @@ export interface FlattenOptionData {
   groupOption?: boolean;
   key: string | number;
   data: OptionData | OptionGroupData;
+  label?: any;
+  value?: RawValueType;
 }

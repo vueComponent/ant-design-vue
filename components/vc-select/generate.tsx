@@ -11,7 +11,7 @@ import KeyCode from '../_util/KeyCode';
 import classNames from '../_util/classNames';
 import Selector from './Selector';
 import SelectTrigger from './SelectTrigger';
-import type { Mode, RenderDOMFunc, OnActiveValue } from './interface';
+import type { Mode, RenderDOMFunc, OnActiveValue, FieldNames } from './interface';
 import type {
   GetLabeledValue,
   FilterOptions,
@@ -67,6 +67,8 @@ const DEFAULT_OMIT_PROPS = [
   'tabindex',
 ];
 
+export type Placement = 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
+
 export function selectBaseProps<OptionType, ValueType>() {
   return {
     prefixCls: String,
@@ -87,6 +89,7 @@ export function selectBaseProps<OptionType, ValueType>() {
     },
     labelInValue: { type: Boolean, default: undefined },
 
+    fieldNames: { type: Object as PropType<FieldNames> },
     // Search
     inputValue: String,
     searchValue: String,
@@ -127,13 +130,16 @@ export function selectBaseProps<OptionType, ValueType>() {
       type: [Boolean, Number] as PropType<boolean | number>,
       default: undefined,
     },
+    placement: {
+      type: String as PropType<Placement>,
+    },
     virtual: { type: Boolean, default: undefined },
     dropdownRender: { type: Function as PropType<(menu: VNode) => any> },
     dropdownAlign: PropTypes.any,
     animation: String,
     transitionName: String,
     getPopupContainer: { type: Function as PropType<RenderDOMFunc> },
-    direction: String,
+    direction: { type: String as PropType<'ltr' | 'rtl'> },
 
     // Others
     disabled: { type: Boolean, default: undefined },
@@ -237,7 +243,7 @@ export interface GenerateConfig<OptionType extends object> {
     | ((
         values: RawValueType[],
         options: FlattenOptionsType<OptionType>,
-        info?: { prevValueOptions?: OptionType[][] },
+        info?: { prevValueOptions?: OptionType[][]; props?: any },
       ) => OptionType[]);
   /** Check if a value is disabled */
   isValueDisabled: (value: RawValueType, options: FlattenOptionsType<OptionType>) => boolean;
@@ -487,7 +493,7 @@ export default function generateSelector<
 
       const triggerSelect = (newValue: RawValueType, isSelect: boolean, source: SelectSource) => {
         const newValueOption = getValueOption([newValue]);
-        const outOption = findValueOption([newValue], newValueOption)[0];
+        const outOption = findValueOption([newValue], newValueOption, { props })[0];
         const { internalProps = {} } = props;
         if (!internalProps.skipTriggerSelect) {
           // Skip trigger `onSelect` or `onDeselect` if configured
@@ -549,6 +555,7 @@ export default function generateSelector<
         ) {
           const outOptions = findValueOption(newRawValues, newRawValuesOptions, {
             prevValueOptions: prevValueOptions.value,
+            props,
           });
 
           // We will cache option in case it removed by ajax
@@ -1008,6 +1015,7 @@ export default function generateSelector<
           backfill,
           getInputElement,
           getPopupContainer,
+          placement,
 
           // Dropdown
           listHeight = 200,
@@ -1022,6 +1030,7 @@ export default function generateSelector<
           dropdownAlign,
           showAction,
           direction,
+          fieldNames,
 
           // Tags
           tokenSeparators,
@@ -1062,6 +1071,7 @@ export default function generateSelector<
             open={mergedOpen.value}
             childrenAsData={!options}
             options={displayOptions.value}
+            fieldNames={fieldNames}
             flattenOptions={displayFlattenOptions.value}
             multiple={isMultiple.value}
             values={rawValues.value}
@@ -1077,6 +1087,7 @@ export default function generateSelector<
             menuItemSelectedIcon={menuItemSelectedIcon}
             virtual={virtual !== false && dropdownMatchSelectWidth !== false}
             onMouseenter={onPopupMouseEnter}
+            direction={direction}
             v-slots={slots}
           />
         );
@@ -1193,6 +1204,7 @@ export default function generateSelector<
               dropdownMatchSelectWidth={dropdownMatchSelectWidth}
               dropdownRender={dropdownRender as any}
               dropdownAlign={dropdownAlign}
+              placement={placement}
               getPopupContainer={getPopupContainer}
               empty={!mergedOptions.value.length}
               getTriggerDOMNode={() => selectorDomRef.current}

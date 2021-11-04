@@ -39,7 +39,7 @@ export default defineComponent({
       },
     ]);
     const value = ref<string[]>([]);
-    const handleChange = (value: string) => {
+    const handleChange = (value: []) => {
       console.log(`selected ${value}`);
     };
     watch(value, () => {

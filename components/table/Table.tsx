@@ -196,7 +196,7 @@ export const tableProps = () => {
       default: undefined,
     },
     onResizeColumn: {
-      type: Function as PropType<(w: number, col: ColumnsType) => void>,
+      type: Function as PropType<(w: number, col: ColumnType) => void>,
       default: undefined,
     },
     rowSelection: { type: Object as PropType<TableRowSelection>, default: undefined },

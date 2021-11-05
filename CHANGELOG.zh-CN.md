@@ -10,6 +10,14 @@
 
 ---
 
+## 3.0.0-alpha.10
+
+`2021-11-05`
+
+- 🐞 修复 Tree 不触发 loadData 问题 [#4835](https://github.com/vueComponent/ant-design-vue/issues/4835)
+- 🐞 修复 Breadcrumb.Item click 事件不触发问题 [#4845](https://github.com/vueComponent/ant-design-vue/issues/4845)
+- 🐞 修复 Checkbox 在 Group 下有时不居中问题 [#4846](https://github.com/vueComponent/ant-design-vue/issues/4846)
+
 ## 3.0.0-alpha.9
 
 `2021-11-03`

@@ -10,6 +10,14 @@
 
 ---
 
+## 3.0.0-alpha.10
+
+`2021-11-05`
+
+- 🐞 Fix the problem that Tree does not trigger loadData [#4835](https://github.com/vueComponent/ant-design-vue/issues/4835)
+- 🐞 Fix Breadcrumb.Item click event not triggering issue [#4845](https://github.com/vueComponent/ant-design-vue/issues/4845)
+- 🐞 Fix Checkbox sometimes not centered under Group [#4846](https://github.com/vueComponent/ant-design-vue/issues/4846)
+
 ## 3.0.0-alpha.9
 
 `2021-11-03`

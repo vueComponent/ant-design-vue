@@ -34,6 +34,7 @@ export interface EventDataNode extends DataNode {
   pos?: string;
   active?: boolean;
   dataRef?: DataNode;
+  parent?: DataNode;
   eventKey?: Key; // 兼容 v2， 推荐直接用 key
 }
 

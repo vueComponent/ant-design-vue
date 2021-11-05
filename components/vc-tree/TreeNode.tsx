@@ -119,7 +119,10 @@ export default defineComponent({
     });
     const instance = getCurrentInstance();
     const eventData = computed(() => {
-      return convertNodePropsToEventData(props);
+      const { eventKey } = props;
+      const { keyEntities } = context.value;
+      const { parent } = keyEntities[eventKey] || {};
+      return { ...convertNodePropsToEventData(props), parent };
     });
     const dragNodeEvent: DragNodeEvent = reactive({
       eventData,

@@ -375,7 +375,7 @@ export function getTreeNodeProps(
     checked: checkedKeys.indexOf(key) !== -1,
     halfChecked: halfCheckedKeys.indexOf(key) !== -1,
     pos: String(entity ? entity.pos : ''),
-
+    parent: entity.parent,
     // [Legacy] Drag props
     // Since the interaction of drag is changed, the semantic of the props are
     // not accuracy, I think it should be finally removed

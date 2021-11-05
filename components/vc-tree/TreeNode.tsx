@@ -286,7 +286,8 @@ export default defineComponent({
       syncLoadData();
     });
     onUpdated(() => {
-      //syncLoadData();
+      // https://github.com/vueComponent/ant-design-vue/issues/4835
+      syncLoadData();
     });
 
     // Switcher

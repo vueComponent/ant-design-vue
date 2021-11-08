@@ -127,6 +127,7 @@
     "chalk": "^4.1.1",
     "cheerio": "^1.0.0-rc.2",
     "codecov": "^3.0.0",
+    "codesandbox": "^2.2.3",
     "colorful": "^2.1.0",
     "commander": "^7.2.0",
     "compare-versions": "^3.3.0",

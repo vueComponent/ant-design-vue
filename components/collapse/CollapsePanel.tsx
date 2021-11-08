@@ -79,7 +79,7 @@ export default defineComponent({
         ></PanelContent>
       );
       const transitionProps = {
-        appear: true,
+        appear: false,
         css: false,
         ...openAnimation,
       };

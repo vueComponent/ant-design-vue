@@ -5,7 +5,7 @@ const raf = getRequestAnimationFrame();
 
 export const cancelAnimationTimeout = frame => caf(frame.id);
 
-export const requestAnimationTimeout = (callback, delay) => {
+export const requestAnimationTimeout = (callback, delay = 0) => {
   const start = Date.now();
   function timeout() {
     if (Date.now() - start >= delay) {

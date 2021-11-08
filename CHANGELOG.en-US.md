@@ -10,6 +10,14 @@
 
 ---
 
+## 3.0.0-alpha.11
+
+`2021-11-08`
+
+- 🌟 Add codesanbox link to the document [#4861](https://github.com/vueComponent/ant-design-vue/issues/4861)
+- 🐞 Fix Collapse animation loss problem [#4856](https://github.com/vueComponent/ant-design-vue/issues/4856)
+- 🐞 Fix the warning problem when Table does not set dataIndex
+
 ## 3.0.0-alpha.10
 
 `2021-11-05`

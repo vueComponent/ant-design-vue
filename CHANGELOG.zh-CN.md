@@ -10,6 +10,14 @@
 
 ---
 
+## 3.0.0-alpha.11
+
+`2021-11-08`
+
+- 🌟 文档添加 codesanbox 链接 [#4861](https://github.com/vueComponent/ant-design-vue/issues/4861)
+- 🐞 修复 Collapse 动画丢失问题 [#4856](https://github.com/vueComponent/ant-design-vue/issues/4856)
+- 🐞 修复 Table 未设置 dataIndex 时报 warning 问题
+
 ## 3.0.0-alpha.10
 
 `2021-11-05`

@@ -8,7 +8,7 @@ export interface TypographyProps extends HTMLAttributes {
   prefixCls?: string;
 }
 
-interface InternalTypographyProps extends TypographyProps {
+export interface InternalTypographyProps extends TypographyProps {
   component?: string;
 }
 

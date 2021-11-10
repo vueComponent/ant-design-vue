@@ -99,12 +99,6 @@ const Content = generator({
   name: 'ALayoutContent',
 })(Basic);
 
-Layout.Header = Header;
-Layout.Footer = Footer;
-Layout.Content = Content;
+export { Header, Footer, Content };
 
-export default Layout as typeof Layout & {
-  readonly Header: typeof Header;
-  readonly Footer: typeof Footer;
-  readonly Content: typeof Content;
-};
+export default Layout;

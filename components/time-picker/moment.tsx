@@ -14,18 +14,14 @@ export interface TimePickerProps extends Omit<PickerTimeProps<Moment>, 'picker'>
   popupClassName?: string;
   valueFormat?: string;
 }
-
 /* istanbul ignore next */
-TimePicker.install = function (app: App) {
-  app.component(TimePicker.name, TimePicker);
-  app.component(TimeRangePicker.name, TimeRangePicker);
-  return app;
-};
-TimePicker.TimeRangePicker = TimeRangePicker;
-
 export { TimePicker, TimeRangePicker };
-
-export default TimePicker as typeof TimePicker &
-  Plugin & {
-    readonly TimeRangePicker: typeof TimeRangePicker;
-  };
+export default Object.assign(TimePicker, {
+  TimePicker,
+  TimeRangePicker,
+  install: (app: App) => {
+    app.component(TimePicker.name, TimePicker);
+    app.component(TimeRangePicker.name, TimeRangePicker);
+    return app;
+  },
+});

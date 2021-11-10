@@ -1,10 +1,10 @@
-import type { App, ExtractPropTypes, Plugin } from 'vue';
+import type { App, ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import PropTypes, { withUndefined } from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
-import VcSteps from '../vc-steps';
+import VcSteps, { Step as VcStep } from '../vc-steps';
 import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
@@ -118,19 +118,15 @@ const Steps = defineComponent({
       );
     };
   },
-  Step: { ...VcSteps.Step, name: 'AStep' },
 });
 
 /* istanbul ignore next */
-Steps.install = function (app: App) {
-  app.component(Steps.name, Steps);
-  app.component(Steps.Step.name, Steps.Step);
-  return app;
-};
-
-export const Step = Steps.Step;
-
-export default Steps as typeof Steps &
-  Plugin & {
-    readonly Step: typeof VcSteps.Step;
-  };
+export const Step = defineComponent({ ...VcStep, name: 'AStep' });
+export default Object.assign(Steps, {
+  Step,
+  install: (app: App) => {
+    app.component(Steps.name, Steps);
+    app.component(Step.name, Step);
+    return app;
+  },
+});

@@ -1,15 +1,13 @@
-import type { App, PropType, Plugin, ExtractPropTypes } from 'vue';
+import type { App, PropType, ExtractPropTypes } from 'vue';
 import { watch, ref, onMounted, defineComponent, nextTick } from 'vue';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
-import VcMentions from '../vc-mentions';
+import VcMentions, { Option } from '../vc-mentions';
 import { mentionsProps as baseMentionsProps } from '../vc-mentions/src/mentionsProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { flattenChildren, getOptionProps } from '../_util/props-util';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
-
-const { Option } = VcMentions;
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -85,8 +83,6 @@ const Mentions = defineComponent({
   name: 'AMentions',
   inheritAttrs: false,
   props: mentionsProps,
-  getMentions,
-  Option,
   emits: ['update:value', 'change', 'focus', 'blur', 'select', 'pressenter'],
   slots: ['notFoundContent', 'option'],
   setup(props, { slots, emit, attrs, expose }) {
@@ -209,20 +205,18 @@ const Mentions = defineComponent({
   },
 });
 
-export const MentionsOption = {
+/* istanbul ignore next */
+export const MentionsOption = defineComponent({
   ...Option,
   name: 'AMentionsOption',
-};
+});
 
-/* istanbul ignore next */
-Mentions.install = function (app: App) {
-  app.component(Mentions.name, Mentions);
-  app.component(MentionsOption.name, MentionsOption);
-  return app;
-};
-
-export default Mentions as typeof Mentions &
-  Plugin & {
-    getMentions: typeof getMentions;
-    readonly Option: typeof Option;
-  };
+export default Object.assign(Mentions, {
+  Option: MentionsOption,
+  getMentions,
+  install: (app: App) => {
+    app.component(Mentions.name, Mentions);
+    app.component(MentionsOption.name, MentionsOption);
+    return app;
+  },
+});

@@ -1,4 +1,4 @@
-import type { App, ExtractPropTypes, Plugin, PropType } from 'vue';
+import type { App, ExtractPropTypes, PropType } from 'vue';
 import { computed, ref, watchEffect, defineComponent } from 'vue';
 import VcTreeSelect, {
   TreeNode,
@@ -54,9 +54,6 @@ export type TreeSelectProps = Partial<ExtractPropTypes<typeof treeSelectProps>>;
 
 const TreeSelect = defineComponent({
   TreeNode,
-  SHOW_ALL,
-  SHOW_PARENT,
-  SHOW_CHILD,
   name: 'ATreeSelect',
   inheritAttrs: false,
   props: initDefaultProps(treeSelectProps, {
@@ -248,21 +245,15 @@ const TreeSelect = defineComponent({
 });
 
 /* istanbul ignore next */
-TreeSelect.install = function (app: App) {
-  app.component(TreeSelect.name, TreeSelect);
-  app.component(TreeSelect.TreeNode.displayName, TreeSelect.TreeNode);
-  return app;
-};
-
-export const TreeSelectNode = TreeSelect.TreeNode;
-
-export default TreeSelect as typeof TreeSelect &
-  Plugin & {
-    readonly TreeNode: typeof TreeNode;
-
-    readonly SHOW_ALL: typeof SHOW_ALL;
-
-    readonly SHOW_PARENT: typeof SHOW_PARENT;
-
-    readonly SHOW_CHILD: typeof SHOW_CHILD;
-  };
+export const TreeSelectNode = TreeNode;
+export default Object.assign(TreeSelect, {
+  TreeNode,
+  SHOW_ALL,
+  SHOW_PARENT,
+  SHOW_CHILD,
+  install: (app: App) => {
+    app.component(TreeSelect.name, TreeSelect);
+    app.component(TreeSelectNode.displayName, TreeSelectNode);
+    return app;
+  },
+});

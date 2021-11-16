@@ -102,7 +102,10 @@ export default defineComponent({
   setup(props) {
     const columnManager = useColumnManager(toRef(props, 'columns'));
     const colsKeys = computed(() => getColumnsKey(columnManager.leafColumns.value));
-    const [colsWidths, updateColsWidths] = useLayoutState(new Map());
+    const initColsWidths = props.columns?.map(item => {
+      return [item.key ?? item.dataIndex, item.width];
+    });
+    const [colsWidths, updateColsWidths] = useLayoutState(new Map(initColsWidths));
     const pureColWidths = computed(() =>
       colsKeys.value.map(columnKey => colsWidths.value.get(columnKey)),
     );

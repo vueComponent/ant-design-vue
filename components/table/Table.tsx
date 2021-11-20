@@ -35,7 +35,7 @@ import defaultLocale from '../locale/en_US';
 import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
 import type { PropType } from 'vue';
-import { reactive, ref, computed, defineComponent, toRef, watchEffect } from 'vue';
+import { reactive, ref, computed, defineComponent, toRef, watchEffect, watch } from 'vue';
 import type { DefaultRecordType } from '../vc-table/interface';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -487,23 +487,27 @@ const InteralTable = defineComponent<
       }
       return props.expandIconColumnIndex;
     });
-
-    // ========================== Selections ==========================
-    const [transformSelectionColumns, selectedKeySet] = useSelection(
-      computed(() => props.rowSelection),
-      {
-        prefixCls,
-        data: mergedData,
-        pageData,
-        getRowKey,
-        getRecordByKey,
-        expandType,
-        childrenColumnName,
-        locale: tableLocale,
-        expandIconColumnIndex,
-        getPopupContainer: computed(() => props.getPopupContainer),
+    const rowSelection = ref();
+    watch(
+      () => props.rowSelection,
+      () => {
+        rowSelection.value = { ...props.rowSelection };
       },
+      { deep: true },
     );
+    // ========================== Selections ==========================
+    const [transformSelectionColumns, selectedKeySet] = useSelection(rowSelection, {
+      prefixCls,
+      data: mergedData,
+      pageData,
+      getRowKey,
+      getRecordByKey,
+      expandType,
+      childrenColumnName,
+      locale: tableLocale,
+      expandIconColumnIndex,
+      getPopupContainer: computed(() => props.getPopupContainer),
+    });
 
     const internalRowClassName = (record: any, index: number, indent: number) => {
       let mergedRowClassName;

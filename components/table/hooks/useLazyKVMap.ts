@@ -39,7 +39,7 @@ export default function useLazyKVMap<RecordType>(
       };
     },
     {
-      deep: false,
+      deep: true,
       immediate: true,
     },
   );

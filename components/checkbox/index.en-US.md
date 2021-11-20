@@ -24,6 +24,7 @@ Checkbox component.
 | checked(v-model) | Specifies whether the checkbox is selected. | boolean | false   |         |
 | disabled         | Disable checkbox                            | boolean | false   |         |
 | indeterminate    | indeterminate checked state of checkbox     | boolean | false   |         |
+| value            | value of checkbox in CheckboxGroup          | boolean \| string \| number | - |  |
 
 #### events
 

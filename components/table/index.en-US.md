@@ -98,7 +98,7 @@ Specify `dataSource` of Table as an array of data.
 | size | Size of table | `default` \| `middle` \| `small` \| `large` | `default` |
 | sticky | Set sticky header and scroll bar | boolean \| `{offsetHeader?: number, offsetScroll?: number, getContainer?: () => HTMLElement}` | - | 3.0 |
 | title | Table title renderer | Function(currentPageData)\| v-slot:title="currentPageData" |  |  |
-| customHeaderRow | Set props on per header row | Function(column, index) | - |  |
+| customHeaderRow | Set props on per header row | Function(columns, index) | - |  |
 | customRow | Set props on per row | Function(record, index) | - |  |
 | getPopupContainer | the render container of dropdowns in table | (triggerNode) => HTMLElement | `() => TableHtmlElement` | 1.5.0 |
 | headerCell | custom head cell by slot | v-slot:headerCell="{title, column}" | - | 3.0 |
@@ -138,7 +138,7 @@ Same as `customRow` `customHeaderRow` `customCell` `customHeaderCell`. Follow [V
       onMouseleave: (event) => {}   // mouse leave row
     };
   }}
-  customHeaderRow={(column) => {
+  customHeaderRow={(columns, index) => {
     return {
       onClick: () => {},        // click header row
     };

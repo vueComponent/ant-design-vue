@@ -105,7 +105,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 | title | 表格标题 | Function(currentPageData)\|v-slot:title="currentPageData" |  |  |
 | indentSize | 展示树形数据时，每层缩进的宽度，以 px 为单位 | number | 15 |  |
 | rowExpandable | 设置是否允许行展开 | (record) => boolean | - | 3.0 |
-| customHeaderRow | 设置头部行属性 | Function(column, index) | - |  |
+| customHeaderRow | 设置头部行属性 | Function(columns, index) | - |  |
 | customRow | 设置行属性 | Function(record, index) | - |  |
 | headerCell | 个性化头部单元格 | v-slot:headerCell="{title, column}" | - | 3.0 |
 | bodyCell | 个性化单元格 | v-slot:bodyCell="{text, record, index, column}" | - | 3.0 |
@@ -144,7 +144,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
       onMouseleave: (event) => {}
     };
   }}
-  customHeaderRow={(column) => {
+  customHeaderRow={(columns, index) => {
     return {
       onClick: () => {},        // 点击表头行
     };

@@ -23,6 +23,7 @@ Search the options while expanded.
     placeholder="Select a person"
     style="width: 200px"
     :options="options"
+    :filter-option="filterOption"
     @focus="handleFocus"
     @blur="handleBlur"
     @change="handleChange"

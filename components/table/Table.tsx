@@ -493,7 +493,7 @@ const InteralTable = defineComponent<
       () => {
         rowSelection.value = { ...props.rowSelection };
       },
-      { deep: true },
+      { deep: true, immediate: true },
     );
     // ========================== Selections ==========================
     const [transformSelectionColumns, selectedKeySet] = useSelection(rowSelection, {

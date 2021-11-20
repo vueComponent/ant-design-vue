@@ -173,16 +173,15 @@ export default function generate(config: {
         getEntityByValue,
       });
 
-      const valueRef = ref<DefaultValueType>(props.defaultValue);
+      const valueRef = ref<DefaultValueType>(
+        props.value === undefined ? props.defaultValue : props.value,
+      );
 
       watch(
         () => props.value,
         () => {
-          if (props.value !== undefined) {
-            valueRef.value = props.value;
-          }
+          valueRef.value = props.value;
         },
-        { immediate: true },
       );
 
       /** Get `missingRawValues` which not exist in the tree yet */

@@ -37,6 +37,7 @@ export interface InternalDataEntity {
   disableCheckbox: boolean;
   disabled: boolean;
   selectable: boolean;
+  isLeaf: boolean;
   children?: InternalDataEntity[];
 
   /** Origin DataNode */

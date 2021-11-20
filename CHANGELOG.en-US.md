@@ -12,9 +12,14 @@
 
 ## 3.0.0-alpha.12
 
-`2021-11-09`
+`2021-11-20`
 
-- 🐞 Fix some component types missing issue [#4863](https://github.com/vueComponent/ant-design-vue/issues/4863)
+- 🐞 Fix the problem that TimeRangePicker does not hide the panel correctly [#4902](https://github.com/vueComponent/ant-design-vue/issues/4902)
+- 🐞 Fix the problem that TreeSelect is not cleared when resetting undefined [#4897](https://github.com/vueComponent/ant-design-vue/issues/4897)
+- 🐞 Fix the issue that TreeSelect isLeaf does not take effect [#4883](https://github.com/vueComponent/ant-design-vue/issues/4883)
+- 🐞 Fix Table rowSelection reporting loop response warning problem [#4885](https://github.com/vueComponent/ant-design-vue/issues/4885)
+- 🐞 Fix the problem that Table rowSelection does not respond when dynamically updated [#4889](https://github.com/vueComponent/ant-design-vue/issues/4889)
+- 🐞 Fix missing component types [#4863](https://github.com/vueComponent/ant-design-vue/issues/4863)
 
 ## 3.0.0-alpha.11
 

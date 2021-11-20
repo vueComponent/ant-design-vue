@@ -12,8 +12,13 @@
 
 ## 3.0.0-alpha.12
 
-`2021-11-09`
+`2021-11-20`
 
+- 🐞 修复 TimeRangePicker 没有正确隐藏 panel 问题 [#4902](https://github.com/vueComponent/ant-design-vue/issues/4902)
+- 🐞 修复 TreeSelect 重置 undefined 时，没有清空问题 [#4897](https://github.com/vueComponent/ant-design-vue/issues/4897)
+- 🐞 修复 TreeSelect isLeaf 不生效问题 [#4883](https://github.com/vueComponent/ant-design-vue/issues/4883)
+- 🐞 修复 Table rowSelection 报循环响应 warning 问题 [#4885](https://github.com/vueComponent/ant-design-vue/issues/4885)
+- 🐞 修复 Table rowSelection 动态更新时不响应问题 [#4889](https://github.com/vueComponent/ant-design-vue/issues/4889)
 - 🐞 修复部分组件类型丢失问题 [#4863](https://github.com/vueComponent/ant-design-vue/issues/4863)
 
 ## 3.0.0-alpha.11

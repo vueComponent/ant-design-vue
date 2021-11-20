@@ -10,7 +10,7 @@ import devWarning from '../../vc-util/devWarning';
 import useMergedState from '../../_util/hooks/useMergedState';
 import useState from '../../_util/hooks/useState';
 import type { Ref } from 'vue';
-import { computed, shallowRef, watchEffect } from 'vue';
+import { computed, shallowRef } from 'vue';
 import type { CheckboxProps } from '../../checkbox';
 import Checkbox from '../../checkbox';
 import Dropdown from '../../dropdown';
@@ -167,12 +167,14 @@ export default function useSelection<RecordType>(
   // Save last selected key to enable range selection
   const [lastSelectedKey, setLastSelectedKey] = useState<Key | null>(null);
 
-  // Reset if rowSelection reset
-  watchEffect(() => {
-    if (!rowSelectionRef.value) {
-      setMergedSelectedKeys([]);
-    }
-  });
+  // // Reset if rowSelection reset
+  // we use computed to reset, donot need setMergedSelectedKeys again like react
+  // https://github.com/vueComponent/ant-design-vue/issues/4885
+  // watchEffect(() => {
+  //   if (!rowSelectionRef.value) {
+  //     setMergedSelectedKeys([]);
+  //   }
+  // });
 
   const setSelectedKeys = (keys: Key[]) => {
     let availableKeys: Key[];

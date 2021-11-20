@@ -491,7 +491,7 @@ const InteralTable = defineComponent<
     watch(
       () => props.rowSelection,
       () => {
-        rowSelection.value = { ...props.rowSelection };
+        rowSelection.value = props.rowSelection ? { ...props.rowSelection } : props.rowSelection;
       },
       { deep: true, immediate: true },
     );

@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { reactive, watch, nextTick, unref, shallowRef, toRaw } from 'vue';
+import { reactive, watch, nextTick, unref, shallowRef, toRaw, ref } from 'vue';
 import cloneDeep from 'lodash-es/cloneDeep';
 import intersection from 'lodash-es/intersection';
 import isEqual from 'lodash-es/isEqual';
@@ -92,7 +92,7 @@ function getPropByPath(obj: Props, path: string, strict: boolean) {
 
 function useForm(
   modelRef: Props | Ref<Props>,
-  rulesRef?: Props | Ref<Props>,
+  rulesRef: Props | Ref<Props> = ref({}),
   options?: {
     immediate?: boolean;
     deep?: boolean;

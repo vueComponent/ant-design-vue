@@ -11,6 +11,7 @@ import useBreakpoint from '../_util/hooks/useBreakpoint';
 import classNames from '../_util/classNames';
 import Progress from '../progress';
 import omit from '../_util/omit';
+import { VcStepProps } from '../vc-steps/Step';
 
 export const stepsProps = () => ({
   prefixCls: PropTypes.string,
@@ -121,7 +122,7 @@ const Steps = defineComponent({
 });
 
 /* istanbul ignore next */
-export const Step = defineComponent({ ...VcStep, name: 'AStep' });
+export const Step = defineComponent({ ...VcStep, name: 'AStep', props: VcStepProps() });
 export default Object.assign(Steps, {
   Step,
   install: (app: App) => {

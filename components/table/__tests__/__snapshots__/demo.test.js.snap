@@ -125,6 +125,11 @@ exports[`renders ./components/table/demo/basic.vue correctly 1`] = `
 </div>
 `;
 
+exports[`renders ./components/table/demo/big-data.vue correctly 1`] = `
+<iframe src="https://www.surely.cool/for-ant-demo" height="400"></iframe>
+<!--v-if-->
+`;
+
 exports[`renders ./components/table/demo/bordered.vue correctly 1`] = `
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">

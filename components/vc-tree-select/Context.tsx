@@ -40,7 +40,7 @@ interface ContextProps {
   slots: {
     title?: (data: InternalDataEntity) => any;
     titleRender?: (data: InternalDataEntity) => any;
-    [key: string]: (d: any) => any | undefined;
+    [key: string]: ((...args: any[]) => any) | undefined;
   };
 }
 

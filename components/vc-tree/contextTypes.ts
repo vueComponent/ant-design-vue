@@ -81,7 +81,7 @@ export interface TreeContextProps {
   slots: {
     title?: (data: DataNode) => any;
     titleRender?: (data: DataNode) => any;
-    [key: string]: (d: any) => any | undefined;
+    [key: string]: ((...args: any[]) => any) | undefined;
   };
 }
 const TreeContextKey: InjectionKey<ComputedRef<TreeContextProps>> = Symbol('TreeContextKey');

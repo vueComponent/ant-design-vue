@@ -56,7 +56,7 @@ const drawerProps = () => ({
   bodyStyle: PropTypes.object,
   contentWrapperStyle: PropTypes.object,
   title: PropTypes.VNodeChild,
-  visible: PropTypes.looseBool.isRequired,
+  visible: PropTypes.looseBool,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   zIndex: PropTypes.number,

@@ -27,6 +27,7 @@
     <Stripe />
     <Summary />
     <TemplateCom />
+    <bigData />
   </demo-sort>
 </template>
 
@@ -59,6 +60,7 @@ import MultipleSorter from './multiple-sorter.vue';
 import Summary from './summary.vue';
 import Sticky from './sticky.vue';
 import ResizableColumn from './resizable-column.vue';
+import bigData from './big-data.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from '@vue/runtime-core';
@@ -94,6 +96,7 @@ export default defineComponent({
     Summary,
     Sticky,
     ResizableColumn,
+    bigData,
   },
 });
 </script>

@@ -1,5 +1,11 @@
 <template>
-  <a-menu id="nav" class="menu-site" :mode="menuMode" :selected-keys="[activeMenuItem]">
+  <a-menu
+    id="nav"
+    class="menu-site"
+    :mode="menuMode"
+    :selected-keys="[activeMenuItem]"
+    disabled-overflow
+  >
     <a-menu-item key="docs/vue">
       <router-link :to="getLocalizedPathname('/docs/vue/introduce', isZhCN)">
         {{ $t('app.header.menu.documentation') }}
@@ -10,6 +16,17 @@
         {{ $t('app.header.menu.components') }}
       </router-link>
     </a-menu-item>
+    <a-menu-item v-if="isZhCN" key="surely-vue">
+      <a
+        href="https://www.surely.cool"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="position: relative"
+      >
+        高级组件
+        <a-badge color="red" style="position: absolute; top: -35px; right: -15px" />
+      </a>
+    </a-menu-item>
     <a-menu-item key="store">
       <a
         href="https://store.antdv.com/pro/"
@@ -18,7 +35,7 @@
         style="position: relative"
       >
         {{ $t('app.header.menu.store') }}
-        <a-badge color="red" style="position: absolute; top: -35px; right: -15px" />
+        <!-- <a-badge color="red" style="position: absolute; top: -35px; right: -15px" /> -->
       </a>
     </a-menu-item>
     <a-menu-item v-if="isZhCN" key="geektime">
@@ -29,7 +46,7 @@
         style="position: relative"
       >
         实战课程
-        <a-badge color="red" style="position: absolute; top: -35px; right: -15px" />
+        <!-- <a-badge color="red" style="position: absolute; top: -35px; right: -15px" /> -->
       </a>
     </a-menu-item>
     <template v-if="isMobile">

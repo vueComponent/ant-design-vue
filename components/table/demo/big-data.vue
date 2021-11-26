@@ -19,10 +19,10 @@ Using this component, you can smoothly scroll through 100,000 rows and 100,000 c
 </docs>
 
 <template>
-  <iframe src="https://www.surely.cool/for-ant-demo" height="400" />
+  <iframe src="https://www.surely.cool/for-ant-demo" height="400"></iframe>
   <div v-if="false">
     you can visit
-    <a href="https://www.surely.cool" />
+    <a href="https://www.surely.cool"></a>
     get more info
   </div>
 </template>

@@ -31,7 +31,7 @@ const removeMarkdownTokens = (str: string) =>
     // eslint-disable-next-line no-useless-escape
     .replace(/(\\)(\*|_|`|\!|<|\$)/g, '$2'); // remove escape char '\'
 
-const trim = (str: string) => str.trim();
+const trim = (str = '') => str?.trim();
 
 // This method remove the raw HTML but reserve the HTML wrapped by `<code>`.
 // e.g.

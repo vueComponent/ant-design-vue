@@ -25,7 +25,7 @@ export const snippetPlugin = (md: MarkdownIt, root: string) => {
     const start = pos + 3;
     const end = state.skipSpacesBack(max, pos);
     const rawPath = state.src.slice(start, end)?.trim().replace(/^@/, root);
-    const filename = rawPath.split(/{/).shift()!.trim();
+    const filename = rawPath.split(/{/).shift()?.trim();
     const content = fs.existsSync(filename)
       ? fs.readFileSync(filename).toString()
       : 'Not found: ' + filename;

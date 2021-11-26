@@ -69,7 +69,7 @@ ${fetchCode(content, 'style')}
 
     debug(`[render] ${file} in ${Date.now() - start}ms.`);
     const result = {
-      vueSrc: newContent.trim(),
+      vueSrc: newContent?.trim(),
       pageData,
     };
     cache.set(src, result);
@@ -91,7 +91,7 @@ ${vueCode?.trim()}
   const script = fetchCode(vueCode, 'script');
   const style = fetchCode(vueCode, 'style');
   const scriptContent = fetchCode(vueCode, 'scriptContent');
-  let jsCode = (await tsToJs(scriptContent)).trim();
+  let jsCode = (await tsToJs(scriptContent))?.trim();
   jsCode = jsCode
     ? `<script>
 ${jsCode}
@@ -146,7 +146,7 @@ const inferTitle = (frontmatter: any, content: string) => {
   }
   const match = content.match(/^\s*#+\s+(.*)/m);
   if (match) {
-    return deeplyParseHeader(match[1].trim());
+    return deeplyParseHeader(match[1]?.trim());
   }
   return '';
 };

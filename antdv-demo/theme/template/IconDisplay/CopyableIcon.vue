@@ -20,14 +20,13 @@ export default {
     'a-badge': Badge,
   },
   props: ['type', 'isNew', 'theme', 'justCopied'],
-  data() {
-    const { type, theme } = this;
-    return {
-      text:
-        theme === 'outlined'
-          ? `<a-icon type="${type}" />`
-          : `<a-icon type="${type}" theme="${theme}" />`,
-    };
+  computed: {
+    text() {
+      const { type, theme } = this;
+      return theme === 'outlined'
+        ? `<a-icon type="${type}" />`
+        : `<a-icon type="${type}" theme="${theme}" />`;
+    },
   },
   methods: {
     onCopied() {

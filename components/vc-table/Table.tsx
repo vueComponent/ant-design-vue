@@ -668,7 +668,7 @@ export default defineComponent<TableProps<DefaultRecordType>>({
                 {bodyColGroup()}
                 {bodyTable()}
                 {!fixFooter.value && summaryNode && (
-                  <Footer stickyOffsets={stickyOffsets} flattenColumns={flattenColumns.value}>
+                  <Footer stickyOffsets={stickyOffsets.value} flattenColumns={flattenColumns.value}>
                     {summaryNode}
                   </Footer>
                 )}

@@ -3,7 +3,7 @@ const globby = require('globby');
 const fs = require('fs');
 const path = require('path');
 const matter = require('gray-matter');
-const { CLIEngine } = require('eslint');
+const { ESLint } = require('eslint');
 
 (async () => {
   const paths = await globby('components/*/index.*.md');
@@ -30,13 +30,13 @@ export default [
   )}
 ];`;
 
-  const engine = new CLIEngine({
+  const engine = new ESLint({
     fix: true,
     useEslintrc: false,
     baseConfig: require(path.join(process.cwd(), '.eslintrc.js')),
   });
 
-  const report = engine.executeOnText(TEMPLATE);
+  const report = await engine.lintText(TEMPLATE);
 
-  fs.writeFileSync('site/src/router/demoRoutes.js', report.results[0].output);
+  fs.writeFileSync('site/src/router/demoRoutes.js', report[0].output);
 })();

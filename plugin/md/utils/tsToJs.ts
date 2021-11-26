@@ -1,12 +1,12 @@
 import { transformSync } from '@babel/core';
-import { CLIEngine } from 'eslint';
+import { ESLint } from 'eslint';
 import path from 'path';
-const engine = new CLIEngine({
+const engine = new ESLint({
   fix: true,
   useEslintrc: false,
   baseConfig: require(path.join(process.cwd(), '.eslintrc.js')),
 });
-const tsToJs = (content: string): string => {
+const tsToJs = async (content: string): Promise<string> => {
   if (!content) {
     return '';
   }
@@ -21,8 +21,8 @@ const tsToJs = (content: string): string => {
       ],
     ],
   });
-  const report = engine.executeOnText(code);
-  let output = report.results[0].output;
+  const report = await engine.lintText(code);
+  let output = report[0].output;
   output = output ? output.trim() : output;
   return output;
 };

@@ -12,10 +12,10 @@ export default (options: Options = {}): Plugin => {
   const markdownToVue = createMarkdownToVueRenderFn(root, markdown);
   return {
     name: 'mdToVue',
-    transform(code, id) {
+    async transform(code, id) {
       if (id.endsWith('.md')) {
         // transform .md files into vueSrc so plugin-vue can handle it
-        return { code: markdownToVue(code, id).vueSrc, map: null };
+        return { code: (await markdownToVue(code, id)).vueSrc, map: null };
       }
     },
   };

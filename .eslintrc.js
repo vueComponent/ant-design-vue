@@ -88,12 +88,10 @@ module.exports = {
       2,
       {
         singleline: 20,
-        multiline: {
-          max: 1,
-          allowFirstLine: false,
-        },
+        multiline: 1,
       },
     ],
+    'vue/multi-word-component-names': 'off',
   },
   globals: {
     h: true,

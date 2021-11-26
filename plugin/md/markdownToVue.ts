@@ -23,10 +23,10 @@ interface MarkdownCompileResult {
 export function createMarkdownToVueRenderFn(
   root: string = process.cwd(),
   options: MarkdownOptions = {},
-): any {
+) {
   const md = createMarkdownRenderer(options);
 
-  return (src: string, file: string): MarkdownCompileResult => {
+  return async (src: string, file: string): Promise<MarkdownCompileResult> => {
     const relativePath = slash(path.relative(root, file));
 
     const cached = cache.get(src);
@@ -57,7 +57,7 @@ export function createMarkdownToVueRenderFn(
       lastUpdated: Math.round(fs.statSync(file).mtimeMs),
     };
     const newContent = data.vueCode
-      ? genComponentCode(md, data, pageData)
+      ? await genComponentCode(md, data, pageData)
       : `
 <template><article class="markdown">${html}</article></template>
 
@@ -69,7 +69,7 @@ ${fetchCode(content, 'style')}
 
     debug(`[render] ${file} in ${Date.now() - start}ms.`);
     const result = {
-      vueSrc: newContent?.trim(),
+      vueSrc: newContent.trim(),
       pageData,
     };
     cache.set(src, result);
@@ -77,7 +77,7 @@ ${fetchCode(content, 'style')}
   };
 }
 
-function genComponentCode(md: MarkdownRenderer, data: PageData, pageData: PageData) {
+async function genComponentCode(md: MarkdownRenderer, data: PageData, pageData: PageData) {
   const { vueCode, headers = [] } = data as MarkdownParsedData;
   const cn = headers.find(h => h.title === 'zh-CN')?.content;
   const us = headers.find(h => h.title === 'en-US')?.content;
@@ -91,7 +91,7 @@ ${vueCode?.trim()}
   const script = fetchCode(vueCode, 'script');
   const style = fetchCode(vueCode, 'style');
   const scriptContent = fetchCode(vueCode, 'scriptContent');
-  let jsCode = tsToJs(scriptContent)?.trim();
+  let jsCode = (await tsToJs(scriptContent)).trim();
   jsCode = jsCode
     ? `<script>
 ${jsCode}

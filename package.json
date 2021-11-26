@@ -124,7 +124,7 @@
     "babel-plugin-inline-import-data-uri": "^1.0.1",
     "babel-plugin-istanbul": "^6.0.0",
     "case-sensitive-paths-webpack-plugin": "^2.1.2",
-    "chalk": "^4.1.1",
+    "chalk": "^5.0.0",
     "cheerio": "^1.0.0-rc.2",
     "codecov": "^3.0.0",
     "codesandbox": "^2.2.3",

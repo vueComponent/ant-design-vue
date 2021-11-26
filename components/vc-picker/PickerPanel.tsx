@@ -609,5 +609,5 @@ function PickerPanel<DateType>() {
   });
 }
 const InterPickerPanel = PickerPanel<any>();
-export default <DateType extends any>(props: MergedPickerPanelProps<DateType>): JSX.Element =>
+export default <DateType,>(props: MergedPickerPanelProps<DateType>): JSX.Element =>
   createVNode(InterPickerPanel, props);

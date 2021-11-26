@@ -39,8 +39,7 @@ The height of the input field for the select defaults to 32px. If size is set to
       placeholder="Please select"
       style="width: 200px"
       @popupScroll="popupScroll"
-    >
-    </a-select>
+    ></a-select>
     <a-select
       v-model:value="value3"
       :options="options"
@@ -48,8 +47,7 @@ The height of the input field for the select defaults to 32px. If size is set to
       :size="size"
       placeholder="Please select"
       style="width: 200px"
-    >
-    </a-select>
+    ></a-select>
   </a-space>
 </template>
 <script lang="ts">

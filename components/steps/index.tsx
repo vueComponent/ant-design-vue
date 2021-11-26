@@ -122,7 +122,11 @@ const Steps = defineComponent({
 });
 
 /* istanbul ignore next */
-export const Step = defineComponent({ ...VcStep, name: 'AStep', props: VcStepProps() });
+export const Step = defineComponent({
+  ...VcStep,
+  name: 'AStep',
+  props: VcStepProps(),
+});
 export default Object.assign(Steps, {
   Step,
   install: (app: App) => {

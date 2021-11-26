@@ -8,6 +8,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import { flattenChildren, getOptionProps } from '../_util/props-util';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
+import { optionProps } from '../vc-mentions/src/Option';
 
 interface MentionsConfig {
   prefix?: string | string[];
@@ -209,6 +210,7 @@ const Mentions = defineComponent({
 export const MentionsOption = defineComponent({
   ...Option,
   name: 'AMentionsOption',
+  props: optionProps,
 });
 
 export default Object.assign(Mentions, {

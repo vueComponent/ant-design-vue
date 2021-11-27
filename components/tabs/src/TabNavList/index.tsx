@@ -28,6 +28,8 @@ import classNames from '../../../_util/classNames';
 import ResizeObserver from '../../../vc-resize-observer';
 import { toPx } from '../../../_util/util';
 import useRefs from '../../../_util/hooks/useRefs';
+import pick from 'lodash-es/pick';
+
 const DEFAULT_SIZE = { width: 0, height: 0, left: 0, top: 0, right: 0 };
 const tabNavListProps = () => {
   return {
@@ -528,6 +530,7 @@ export default defineComponent({
           </ResizeObserver>
           <OperationNode
             {...props}
+            v-slots={pick(slots, ['moreIcon'])}
             ref={operationsRef}
             prefixCls={pre}
             tabs={hiddenTabs.value}

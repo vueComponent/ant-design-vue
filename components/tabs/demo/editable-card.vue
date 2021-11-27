@@ -39,10 +39,6 @@ export default defineComponent({
 
     const newTabIndex = ref(0);
 
-    const callback = (key: string) => {
-      console.log(key);
-    };
-
     const add = () => {
       activeKey.value = `newTab${++newTabIndex.value}`;
       panes.value.push({ title: 'New Tab', content: 'Content of new Tab', key: activeKey.value });
@@ -76,7 +72,6 @@ export default defineComponent({
     return {
       panes,
       activeKey,
-      callback,
       onEdit,
     };
   },

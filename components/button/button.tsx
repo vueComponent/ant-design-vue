@@ -175,6 +175,10 @@ export default defineComponent({
         ],
         onClick: handleClick,
       };
+      // https://github.com/vueComponent/ant-design-vue/issues/4930
+      if (!disabled) {
+        delete buttonProps.disabled;
+      }
 
       const iconNode = innerLoading.value ? <LoadingOutlined /> : icon;
 

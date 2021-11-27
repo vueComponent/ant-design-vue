@@ -55,9 +55,3 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5rWLU27so/Grid.svg
 | xxl    | `≥1600px` 响应式栅格，可为栅格数或一个包含其他属性的对象 | number\|object | -      |
 
 响应式栅格的断点扩展自 [BootStrap 4 的规则](https://getbootstrap.com/docs/4.0/layout/overview/#responsive-breakpoints)（不包含链接里 `occasionally` 的部分)。
-
-## FAQ
-
-### IE9 响应式不工作怎么办？
-
-可以引入 [matchMedia polyfill](https://github.com/paulirish/matchMedia.js/) 添加支持。

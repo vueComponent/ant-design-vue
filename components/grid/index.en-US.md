@@ -26,8 +26,8 @@ Following is a brief look at how it works:
 - If the sum of \`col\` spans in a \`row\` are more than 24, then the overflowing \`col\` as a whole will start a new line arrangement.
 
 ## Flex layout
-Our grid systems support Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using \`order\`.
-Flex layout uses a 24 grid layout to define the width of each "box", but does not rigidly adhere to the grid layout.
+
+Our grid systems support Flex layout to allow the elements within the parent to be aligned horizontally - left, center, right, wide arrangement, and decentralized arrangement. The Grid system also supports vertical alignment - top aligned, vertically centered, bottom-aligned. You can also define the order of elements by using \`order\`. Flex layout uses a 24 grid layout to define the width of each "box", but does not rigidly adhere to the grid layout.
 
 ## API
 
@@ -58,9 +58,3 @@ Flex layout uses a 24 grid layout to define the width of each "box", but does no
 | xxl | `≥1600px`, could be a `span` value or an object containing above props | number\|object | - |
 
 The breakpoints of responsive grid follow [BootStrap 4 media queries rules](https://getbootstrap.com/docs/4.0/layout/overview/#responsive-breakpoints)(not including `occasionally part`).
-
-## FAQ
-
-### How to support IE9 when using responsive?
-
-You can use [matchMedia polyfill](https://github.com/paulirish/matchMedia.js/) to handle this.

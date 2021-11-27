@@ -328,7 +328,7 @@ function useForm(
     });
     validate(names, { trigger: 'change' });
     isFirstTime = false;
-    oldModel = cloneDeep(model);
+    oldModel = cloneDeep(toRaw(model));
   };
 
   const debounceOptions = options?.debounce;

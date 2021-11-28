@@ -16,7 +16,6 @@ npm install --save @ant-design/icons-vue
 
 安装 [Kitchen Sketch 插件 💎](https://kitchen.alipay.com)，就可以一键拖拽使用 Ant Design 和 Iconfont 的海量图标，还可以关联自有项目。
 
-
 ## API
 
 ### 通用图标
@@ -33,9 +32,9 @@ npm install --save @ant-design/icons-vue
 ```jsx
 import { StarOutlined, StarFilled, StarTwoTone } from '@ant-design/icons-vue';
 
-<StarOutlined />
-<StarFilled />
-<StarTwoTone twoToneColor="#eb2f96" />
+<star-outlined />
+<star-filled />
+<star-two-tone two-tone-color="#eb2f96" />
 ```
 
 ### 自定义 Icon/Custom Icon
@@ -62,7 +61,7 @@ import { StarOutlined, StarFilled, StarTwoTone } from '@ant-design/icons-vue';
 
 ```html
 <template>
-  <MessageOutlined :style="{fontSize: '16px', color: '#08c'}" />
+  <message-outlined :style="{fontSize: '16px', color: '#08c'}" />
 </template>
 <script>
   import { MessageOutlined } from '@ant-design/icons-vue';

@@ -27,9 +27,9 @@ We still have three different themes for icons, icon component name is the icon 
 ```jsx
 import { StarOutlined, StarFilled, StarTwoTone } from '@ant-design/icons-vue';
 
-<StarOutlined />
-<StarFilled />
-<StarTwoTone twoToneColor="#eb2f96" />
+<star-outlined />
+<star-filled />
+<star-two-tone two-tone-color="#eb2f96" />
 ```
 
 ### Custom Icon
@@ -60,7 +60,7 @@ The properties `theme`, `component` and `twoToneColor` were added in `1.2.0`. Th
 
 ```html
 <template>
-  <MessageOutlined :style="{fontSize: '16px', color: '#08c'}" />
+  <message-outlined :style="{fontSize: '16px', color: '#08c'}" />
 </template>
 <script>
   import { MessageOutlined } from '@ant-design/icons-vue';

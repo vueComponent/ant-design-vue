@@ -1,4 +1,5 @@
 import { getParameters } from 'codesandbox/lib/api/define';
+import packageInfo from '../../../package.json';
 
 const indexHtml = `<!DOCTYPE html>
 <html lang="en">
@@ -63,7 +64,7 @@ export function getCodeSandboxParams(code: string, meta: Meta): string {
           dependencies: {
             ...getDeps(code),
             vue: 'next',
-            'ant-design-vue': 'next',
+            'ant-design-vue': packageInfo.version,
           },
           devDependencies: {
             '@vue/cli-plugin-babel': '~4.5.0',

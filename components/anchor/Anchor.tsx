@@ -238,7 +238,7 @@ export default defineComponent({
       });
 
       const anchorClass = classNames(pre, {
-        fixed: !affix && !showInkInFixed,
+        [`${pre}-fixed`]: !affix && !showInkInFixed,
       });
 
       const wrapperStyle = {

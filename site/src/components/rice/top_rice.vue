@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="show">
     <template v-if="ads.length">
       <a-carousel autoplay>
         <template v-for="ad in ads" :key="ad.href">
@@ -35,6 +35,7 @@ export default {
   props: ['isCN', 'isMobile'],
   data() {
     return {
+      show: false,
       showGoogleAd: location.host.indexOf('antdv.com') > -1,
       cnAds: [
         {

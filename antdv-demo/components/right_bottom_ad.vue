@@ -1,5 +1,5 @@
 <template>
-  <div id="right-bottom">
+  <div v-if="isCN" id="right-bottom">
     <img width="150" :src="`https://next.antdv.com/common_rice.png?v=${v}`" />
     <div v-if="isMobile" class="close" @click="visible = false">
       <a-icon type="close" />

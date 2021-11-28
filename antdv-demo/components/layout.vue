@@ -6,7 +6,7 @@ import Footer from './footer';
 // import Geektime from './geektime';
 import GeektimeAds from './geektime_ads';
 import RightBottomAd from './right_bottom_ad';
-import Sponsors from './sponsors';
+// import Sponsors from './sponsors';
 import zhCN from 'ant-design-vue/es/locale-provider/zh_CN';
 import enUS from 'ant-design-vue/es/locale-provider/default';
 import sortBy from 'lodash/sortBy';
@@ -14,8 +14,9 @@ import { isZhCN } from '../utils/util';
 import { Provider, create } from '../../components/_util/store';
 import NProgress from 'nprogress';
 import MobileMenu from '../../components/vc-drawer/src';
-import TopAd from './top_ad';
+// import TopAd from './top_ad';
 import GoogleAds from './GoogleAds';
+import SurelyVue from './surelyVue';
 
 const docsList = [
   { key: 'introduce', enTitle: 'Ant Design of Vue', title: 'Ant Design of Vue' },
@@ -255,6 +256,7 @@ export default {
             <a-row>
               {isMobile ? (
                 <MobileMenu ref="sidebar" wrapperClassName="drawer-wrapper">
+                  <SurelyVue />
                   <a-menu
                     class="aside-container menu-site"
                     selectedKeys={[name]}
@@ -281,7 +283,7 @@ export default {
                 >
                   <a-affix>
                     <section class="main-menu-inner">
-                      <Sponsors isCN={isCN} />
+                      <SurelyVue />
                       <a-menu
                         class="aside-container menu-site"
                         selectedKeys={[name]}
@@ -300,7 +302,6 @@ export default {
               )}
               <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <section class="main-container main-container-component">
-                  <TopAd isCN={isCN} />
                   {showAd ? <GeektimeAds isMobile={isMobile} /> : null}
                   {!isMobile ? (
                     <div class={['toc-affix', isCN ? 'toc-affix-cn' : '']} style="width: 150px;">

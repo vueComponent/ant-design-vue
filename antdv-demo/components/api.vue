@@ -9,7 +9,7 @@
 import { isZhCN } from '../utils/util';
 import GoogleAds from './GoogleAds';
 
-const showAd = location.host.indexOf('antdv.com') > -1;
+const showAd = false; // location.host.indexOf('antdv.com') > -1;
 export default {
   name: 'Api',
   components: {

@@ -174,13 +174,26 @@ export default {
                 <router-link to="/docs/vue/introduce">{isCN ? '组件' : 'Components'}</router-link>
               </a-menu-item>
               {isCN ? (
+                <a-menu-item key="surely-vue">
+                  <a
+                    href="https://www.surely.cool"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style="position: relative"
+                  >
+                    高级组件
+                    <a-badge color="red" style="position: absolute;top: -10px;right: -10px;" />
+                  </a>
+                </a-menu-item>
+              ) : null}
+              {isCN ? (
                 <a-menu-item key="store">
                   <a
                     href="https://store.antdv.com/pro/"
                     target="_blank"
                     style="position: relative;"
                   >
-                    商店 <a-badge color="red" style="position: absolute;top: -10px;right: -10px;" />
+                    商店
                   </a>
                 </a-menu-item>
               ) : (
@@ -191,7 +204,6 @@ export default {
                     style="position: relative;"
                   >
                     Store{' '}
-                    <a-badge color="red" style="position: absolute;top: -10px;right: -10px;" />
                   </a>
                 </a-menu-item>
               )}
@@ -203,7 +215,6 @@ export default {
                     style="position: relative;"
                   >
                     Vue 实战教程
-                    <a-badge color="red" style="position: absolute;top: -10px;right: -10px;" />
                   </a>
                 </a-menu-item>
               ) : null}

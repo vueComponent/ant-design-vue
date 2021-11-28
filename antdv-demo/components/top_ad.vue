@@ -40,14 +40,14 @@ export default {
           href: 'https://yidengfe.com/launches/01/yd.html',
           visible: isEffective('2020-09-11 17:00:00', '2021-03-11 17:00:00'),
         },
-      ].filter((ad) => ad.visible),
+      ].filter(ad => ad.visible),
       enAds: [
         {
           img: 'https://qn.antdv.com/TheBigRichGroup.png',
           href: 'https://thebigrichgroup.com/',
           visible: isEffective('2020-09-18 17:00:00', '2021-07-11 17:00:00'),
         },
-      ].filter((ad) => ad.visible),
+      ].filter(ad => ad.visible),
     };
   },
   computed: {

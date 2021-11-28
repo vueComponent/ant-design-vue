@@ -22,7 +22,7 @@ Official website ： [https://surely.cool/](https://surely.cool/)
 
 Github：[https://github.com/surely-vue/table]
 
-- 🐞 Upgrade ts, fix component type error [e28168](https://github.com/vueComponent/ant-design-vue/commit/e28168e0bed28a97ef8c7b33f80d03f6fd0b5a02)[#4908](https://github.com/vueComponent/ant- design-vue/issues/4908)[#4912](https://github.com/vueComponent/ant-design-vue/issues/4912)
+- 🐞 Upgrade ts, fix component type error [e28168](https://github.com/vueComponent/ant-design-vue/commit/e28168e0bed28a97ef8c7b33f80d03f6fd0b5a02)[#4908](https://github.com/vueComponent/ant-design-vue/issues/4908)[#4912](https://github.com/vueComponent/ant-design-vue/issues/4912)
 - 🐞 Drawer visible is changed to optional to avoid reporting type errors in the writing of jsx v-model [#4908](https://github.com/vueComponent/ant-design-vue/issues/4908)
 - 🐞 Fix the problem that the tabs moreIcon slot does not take effect [#4928](https://github.com/vueComponent/ant-design-vue/issues/4928)
 - 🐞 Fix Button :disabled="false" when the style is wrong [#4930](https://github.com/vueComponent/ant-design-vue/issues/4930)

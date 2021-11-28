@@ -113,7 +113,7 @@ const cascaderProps = {
   // onChange?: (value: string[], selectedOptions?: CascaderOptionType[]) => void;
   /** 选择后展示的渲染函数 */
   displayRender: PropTypes.func,
-  transitionName: PropTypes.string.def('slide-up'),
+  transitionName: PropTypes.string.def('ant-slide-up'),
   popupStyle: PropTypes.object.def(() => ({})),
   /** 自定义浮层类名 */
   popupClassName: PropTypes.string,

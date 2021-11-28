@@ -37,7 +37,7 @@ export const selectProps = () => ({
   size: PropTypes.oneOf(tuple('small', 'middle', 'large', 'default')),
   mode: PropTypes.oneOf(tuple('multiple', 'tags', 'SECRET_COMBOBOX_MODE_DO_NOT_USE')),
   bordered: PropTypes.looseBool.def(true),
-  transitionName: PropTypes.string.def('slide-up'),
+  transitionName: PropTypes.string.def('ant-slide-up'),
   choiceTransitionName: PropTypes.string.def(''),
 });
 

@@ -10,6 +10,25 @@
 
 ---
 
+## 3.0.0-alpha.13
+
+`2021-11-28`
+
+🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+高级组件 Surely Vue 发布！！！
+
+官方站点 ： [https://surely.cool/](https://surely.cool/)
+
+Github：[https://github.com/surely-vue/table]
+
+- 🐞 升级 ts，修复组件类型错误 [e28168](https://github.com/vueComponent/ant-design-vue/commit/e28168e0bed28a97ef8c7b33f80d03f6fd0b5a02)[#4908](https://github.com/vueComponent/ant-design-vue/issues/4908)[#4912](https://github.com/vueComponent/ant-design-vue/issues/4912)
+- 🐞 Drawer visible 改为可选，避免在 jsx v-model 写法中报类型错误 [#4908](https://github.com/vueComponent/ant-design-vue/issues/4908)
+- 🐞 修复 tabs moreIcon 插槽不生效问题 [#4928](https://github.com/vueComponent/ant-design-vue/issues/4928)
+- 🐞 修复 Button :disabled="false" 时，样式错误问题 [#4930](https://github.com/vueComponent/ant-design-vue/issues/4930)
+- 🐞 修复展开类组件(Select、AutoComplete、TreeSelect)，动画方向错误、展开闪动问题 [#4909](https://github.com/vueComponent/ant-design-vue/issues/4909)
+- 🐞 Anchor 类名 fixed 没有前缀，导致命名冲突问题 [#4931](https://github.com/vueComponent/ant-design-vue/issues/4931)
+
 ## 3.0.0-alpha.12
 
 `2021-11-20`

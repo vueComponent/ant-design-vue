@@ -139,7 +139,7 @@ const Base = defineComponent<InternalBlockProps>({
     });
 
     onBeforeUnmount(() => {
-      window.clearTimeout(state.copyId);
+      clearTimeout(state.copyId);
       raf.cancel(state.rafId);
     });
 
@@ -223,7 +223,7 @@ const Base = defineComponent<InternalBlockProps>({
           copyConfig.onCopy();
         }
 
-        state.copyId = window.setTimeout(() => {
+        state.copyId = setTimeout(() => {
           state.copied = false;
         }, 3000);
       });

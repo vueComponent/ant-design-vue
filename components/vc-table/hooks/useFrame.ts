@@ -35,17 +35,17 @@ export function useTimeoutLock<State>(
   defaultState?: State,
 ): [(state: UnwrapRef<State>) => void, () => UnwrapRef<State> | null] {
   const frameRef = ref<State | null>(defaultState || null);
-  const timeoutRef = ref<number>();
+  const timeoutRef = ref<any>();
 
   function cleanUp() {
-    window.clearTimeout(timeoutRef.value);
+    clearTimeout(timeoutRef.value);
   }
 
   function setState(newState: UnwrapRef<State>) {
     frameRef.value = newState;
     cleanUp();
 
-    timeoutRef.value = window.setTimeout(() => {
+    timeoutRef.value = setTimeout(() => {
       frameRef.value = null;
       timeoutRef.value = undefined;
     }, 100);

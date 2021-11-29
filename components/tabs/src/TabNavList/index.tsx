@@ -129,7 +129,7 @@ export default defineComponent({
     };
 
     // ========================= Mobile ========================
-    const touchMovingRef = ref<number>();
+    const touchMovingRef = ref<any>();
     const [lockAnimation, setLockAnimation] = useState<number>();
 
     const doLockAnimation = () => {
@@ -137,7 +137,7 @@ export default defineComponent({
     };
 
     const clearTouchMoving = () => {
-      window.clearTimeout(touchMovingRef.value);
+      clearTimeout(touchMovingRef.value);
     };
     const doMove = (setState: (fn: (val: number) => number) => void, offset: number) => {
       setState((value: number) => {
@@ -171,7 +171,7 @@ export default defineComponent({
     watch(lockAnimation, () => {
       clearTouchMoving();
       if (lockAnimation.value) {
-        touchMovingRef.value = window.setTimeout(() => {
+        touchMovingRef.value = setTimeout(() => {
           setLockAnimation(0);
         }, 100);
       }

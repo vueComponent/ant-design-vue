@@ -3,6 +3,7 @@
 import Event from './Event';
 import classes from '../component-classes';
 import { requestAnimationTimeout, cancelAnimationTimeout } from '../requestAnimationTimeout';
+import { inBrowser } from '../env';
 
 const isCssAnimationSupported = Event.endEvents.length !== 0;
 const capitalPrefixes = [
@@ -15,6 +16,7 @@ const capitalPrefixes = [
 const prefixes = ['-webkit-', '-moz-', '-o-', 'ms-', ''];
 
 function getStyleProperty(node, name) {
+  if (inBrowser) return '';
   // old ff need null, https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
   const style = window.getComputedStyle(node, null);
   let ret = '';

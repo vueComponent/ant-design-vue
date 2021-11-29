@@ -9,10 +9,10 @@ export default function useDelayReset(
   timeout = 10,
 ): [Ref<Boolean>, (val: boolean, callback?: () => void) => void, () => void] {
   const bool = ref(false);
-  let delay: number;
+  let delay: any;
 
   const cancelLatest = () => {
-    window.clearTimeout(delay);
+    clearTimeout(delay);
   };
 
   onMounted(() => {
@@ -20,7 +20,7 @@ export default function useDelayReset(
   });
   const delaySetBool = (value: boolean, callback: () => void) => {
     cancelLatest();
-    delay = window.setTimeout(() => {
+    delay = setTimeout(() => {
       bool.value = value;
       if (callback) {
         callback();

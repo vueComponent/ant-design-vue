@@ -18,14 +18,14 @@ export default function useTouchMove(
   const [lastTimestamp, setLastTimestamp] = useState<number>(0);
   const [lastTimeDiff, setLastTimeDiff] = useState<number>(0);
   const [lastOffset, setLastOffset] = useState<{ x: number; y: number }>();
-  const motionRef = ref<number>();
+  const motionInterval = ref<any>();
 
   // ========================= Events =========================
   // >>> Touch events
   function onTouchStart(e: TouchEvent) {
     const { screenX, screenY } = e.touches[0];
     setTouchPosition({ x: screenX, y: screenY });
-    window.clearInterval(motionRef.value);
+    clearInterval(motionInterval.value);
   }
 
   function onTouchMove(e: TouchEvent) {
@@ -62,9 +62,9 @@ export default function useTouchMove(
       let currentX = distanceX;
       let currentY = distanceY;
 
-      motionRef.value = window.setInterval(() => {
+      motionInterval.value = setInterval(() => {
         if (Math.abs(currentX) < STOP_SWIPE_DISTANCE && Math.abs(currentY) < STOP_SWIPE_DISTANCE) {
-          window.clearInterval(motionRef.value);
+          clearInterval(motionInterval.value);
           return;
         }
 

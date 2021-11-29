@@ -395,7 +395,7 @@ function RangerPicker<DateType>() {
       function triggerOpenAndFocus(index: 0 | 1) {
         triggerOpen(true, index);
         // Use setTimeout to make sure panel DOM exists
-        window.setTimeout(() => {
+        setTimeout(() => {
           const inputRef = [startInputRef, endInputRef][index];
           if (inputRef.value) {
             inputRef.value.focus();

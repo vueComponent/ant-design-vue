@@ -129,7 +129,7 @@ export default defineComponent({
           getComputedStyle(node).getPropertyValue('border-top-color') || // Firefox Compatible
           getComputedStyle(node).getPropertyValue('border-color') ||
           getComputedStyle(node).getPropertyValue('background-color');
-        this.clickWaveTimeoutId = window.setTimeout(() => this.onClick(node, waveColor), 0);
+        this.clickWaveTimeoutId = setTimeout(() => this.onClick(node, waveColor), 0);
         raf.cancel(this.animationStartId);
         this.animationStart = true;
 

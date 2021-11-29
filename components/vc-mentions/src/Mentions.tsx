@@ -173,7 +173,7 @@ export default defineComponent({
       onBlur(event);
     };
     const onFocus = (event: Event) => {
-      window.clearTimeout(focusId.value);
+      clearTimeout(focusId.value);
       const { isFocus } = state;
       if (!isFocus && event) {
         emit('focus', event);
@@ -181,7 +181,7 @@ export default defineComponent({
       state.isFocus = true;
     };
     const onBlur = (event: Event) => {
-      focusId.value = window.setTimeout(() => {
+      focusId.value = setTimeout(() => {
         state.isFocus = false;
         stopMeasure();
         emit('blur', event);

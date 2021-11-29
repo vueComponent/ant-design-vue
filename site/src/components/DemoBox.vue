@@ -78,7 +78,7 @@
       </div>
     </section>
     <section :class="highlightClass">
-      <div class="highlight" ref="codeRef">
+      <div ref="codeRef" class="highlight">
         <slot v-if="type === 'TS'" name="htmlCode" />
         <slot v-else name="jsVersionHtml" />
       </div>

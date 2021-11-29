@@ -181,16 +181,16 @@ export default defineComponent<FilterDropdownProps<any>>({
     const openRef = ref();
 
     const onOpenChange = (keys: string[]) => {
-      openRef.value = window.setTimeout(() => {
+      openRef.value = setTimeout(() => {
         openKeys.value = keys;
       });
     };
     const onMenuClick = () => {
-      window.clearTimeout(openRef.value);
+      clearTimeout(openRef.value);
     };
 
     onBeforeUnmount(() => {
-      window.clearTimeout(openRef.value);
+      clearTimeout(openRef.value);
     });
 
     // ======================= Submit ========================

@@ -214,10 +214,10 @@ export default defineComponent({
       { immediate: true },
     );
 
-    let timeout: number;
+    let timeout: any;
     const changeActiveKeys = (keys: Key[]) => {
-      window.clearTimeout(timeout);
-      timeout = window.setTimeout(() => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
         if (props.activeKey === undefined) {
           activeKeys.value = keys;
         }

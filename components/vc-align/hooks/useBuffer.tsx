@@ -5,7 +5,7 @@ export default (callback: () => boolean, buffer: ComputedRef<number>) => {
   let timeout = null;
 
   function cancelTrigger() {
-    window.clearTimeout(timeout);
+    clearTimeout(timeout);
   }
 
   function trigger(force?: boolean) {
@@ -17,12 +17,12 @@ export default (callback: () => boolean, buffer: ComputedRef<number>) => {
 
       called = true;
       cancelTrigger();
-      timeout = window.setTimeout(() => {
+      timeout = setTimeout(() => {
         called = false;
       }, buffer.value);
     } else {
       cancelTrigger();
-      timeout = window.setTimeout(() => {
+      timeout = setTimeout(() => {
         called = false;
         trigger();
       }, buffer.value);

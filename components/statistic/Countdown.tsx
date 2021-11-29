@@ -17,7 +17,7 @@ export default defineComponent({
   }),
   emits: ['finish', 'change'],
   setup(props, { emit }) {
-    const countdownId = ref<number>();
+    const countdownId = ref<any>();
     const statistic = ref();
     const syncTimer = () => {
       const { value } = props;
@@ -32,7 +32,7 @@ export default defineComponent({
     const startTimer = () => {
       if (countdownId.value) return;
       const timestamp = getTime(props.value);
-      countdownId.value = window.setInterval(() => {
+      countdownId.value = setInterval(() => {
         statistic.value.$forceUpdate();
         if (timestamp > Date.now()) {
           emit('change', timestamp - Date.now());

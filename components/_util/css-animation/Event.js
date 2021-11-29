@@ -87,7 +87,7 @@ const TransitionEvents = {
 
   addStartEventListener(node, eventListener) {
     if (startEvents.length === 0) {
-      window.setTimeout(eventListener, 0);
+      setTimeout(eventListener, 0);
       return;
     }
     startEvents.forEach(startEvent => {
@@ -109,7 +109,7 @@ const TransitionEvents = {
 
   addEndEventListener(node, eventListener) {
     if (endEvents.length === 0) {
-      window.setTimeout(eventListener, 0);
+      setTimeout(eventListener, 0);
       return;
     }
     endEvents.forEach(endEvent => {

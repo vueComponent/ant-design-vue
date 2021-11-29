@@ -8,10 +8,10 @@ import { onBeforeUpdate } from 'vue';
  */
 export default function useLock(duration = 250): [() => boolean | null, (lock: boolean) => void] {
   let lock: boolean | null = null;
-  let timeout: number;
+  let timeout: any;
 
   onBeforeUpdate(() => {
-    window.clearTimeout(timeout);
+    clearTimeout(timeout);
   });
 
   function doLock(locked: boolean) {
@@ -19,8 +19,8 @@ export default function useLock(duration = 250): [() => boolean | null, (lock: b
       lock = locked;
     }
 
-    window.clearTimeout(timeout);
-    timeout = window.setTimeout(() => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
       lock = null;
     }, duration);
   }

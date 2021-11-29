@@ -147,7 +147,7 @@ const collapseMotion = (style: Ref<CSSProperties>, className: Ref<string>): CSSM
       style.value = getCurrentHeight(node);
     },
     onLeave: node => {
-      window.setTimeout(() => {
+      setTimeout(() => {
         style.value = getCollapsedHeight(node);
       });
     },

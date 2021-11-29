@@ -24,14 +24,14 @@ export default defineComponent({
     const timeout = ref();
     const cacheErrors = ref([...props.errors]);
     watch([() => [...props.errors], () => props.help], newValues => {
-      window.clearTimeout(timeout.value);
+      clearTimeout(timeout.value);
       if (props.help) {
         visible.value = !!(props.errors && props.errors.length);
         if (visible.value) {
           cacheErrors.value = newValues[0];
         }
       } else {
-        timeout.value = window.setTimeout(() => {
+        timeout.value = setTimeout(() => {
           visible.value = !!(props.errors && props.errors.length);
           if (visible.value) {
             cacheErrors.value = newValues[0];
@@ -40,7 +40,7 @@ export default defineComponent({
       }
     });
     onBeforeUnmount(() => {
-      window.clearTimeout(timeout.value);
+      clearTimeout(timeout.value);
     });
     // Memo status in same visible
     watch([visible, status], () => {

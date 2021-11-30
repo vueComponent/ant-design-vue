@@ -32,6 +32,7 @@ export const ListGridType = {
   lg: PropTypes.number,
   xl: PropTypes.number,
   xxl: PropTypes.number,
+  xxxl: PropTypes.number,
 };
 
 export const ListSize = tuple('small', 'default', 'large');

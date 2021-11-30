@@ -29,6 +29,10 @@ export const MediaQueryEnum = {
     minWidth: 1600,
     matchMedia: '(min-width: 1600px)',
   },
+  xxxl: {
+    minWidth: 2000,
+    matchMedia: '(min-width: 2000px)',
+  },
 };
 
 export type MediaQueryKey = keyof typeof MediaQueryEnum;

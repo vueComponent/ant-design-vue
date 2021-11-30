@@ -187,7 +187,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 #### Breakpoint
 
 ```ts
-type Breakpoint = 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
+type Breakpoint = 'xxxl' | 'xxl' | 'xl' | 'lg' | 'md' | 'sm' | 'xs';
 ```
 
 ### ColumnGroup

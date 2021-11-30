@@ -8,19 +8,19 @@ title:
 
 ## zh-CN
 
-双色图标可以通过 `twoToneColor` 属性设置主题色。
+双色图标可以通过 `two-tone-color` 属性设置主题色。
 
 ## en-US
 
-You can set `twoToneColor` prop to specific primary color for two-tone icons.
+You can set `two-tone-color` prop to specific primary color for two-tone icons.
 
 </docs>
 
 <template>
   <div class="icons-list">
-    <SmileTwoTone />
-    <HeartTwoTone two-tone-color="#eb2f96" />
-    <CheckCircleTwoTone two-tone-color="#52c41a" />
+    <smile-two-tone />
+    <heart-two-tone two-tone-color="#eb2f96" />
+    <check-circle-two-tone two-tone-color="#52c41a" />
   </div>
 </template>
 <script>

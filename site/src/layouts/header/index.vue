@@ -74,6 +74,7 @@ export default defineComponent({
       ? [{ flex: 'none' }, { flex: 'auto' }]
       : [
           {
+            xxxl: 4,
             xxl: 4,
             xl: 5,
             lg: 6,
@@ -82,6 +83,7 @@ export default defineComponent({
             xs: 24,
           },
           {
+            xxxl: 20,
             xxl: 20,
             xl: 19,
             lg: 18,

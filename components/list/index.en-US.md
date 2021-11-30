@@ -43,17 +43,18 @@ More about pagination, please check [`Pagination`](https://www.antdv.com/compone
 
 ### List grid props
 
-| Property | Description              | Type                                     | Default   |
-| -------- | ------------------------ | ---------------------------------------- | --------- |
-| column   | column of grid           | number oneOf [ 1, 2, 3, 4, 6, 8, 12, 24] | -         |
-| gutter   | spacing between grid     | number                                   | 0         |
-| size     | Size of list             | `default` \| `middle` \| `small`         | `default` |
-| xs       | `<576px` column of grid  | number                                   | -         |
-| sm       | `≥576px` column of grid  | number                                   | -         |
-| md       | `≥768px` column of grid  | number                                   | -         |
-| lg       | `≥992px` column of grid  | number                                   | -         |
-| xl       | `≥1200px` column of grid | number                                   | -         |
-| xxl      | `≥1600px` column of grid | number                                   | -         |
+| Property | Description              | Type                                     | Default   | Version |
+| -------- | ------------------------ | ---------------------------------------- | --------- | --------- |
+| column   | column of grid           | number oneOf [ 1, 2, 3, 4, 6, 8, 12, 24] | -         | |
+| gutter   | spacing between grid     | number                                   | 0         | |
+| size     | Size of list             | `default` \| `middle` \| `small`         | `default` | |
+| xs       | `<576px` column of grid  | number                                   | -         | |
+| sm       | `≥576px` column of grid  | number                                   | -         | |
+| md       | `≥768px` column of grid  | number                                   | -         | |
+| lg       | `≥992px` column of grid  | number                                   | -         | |
+| xl       | `≥1200px` column of grid | number                                   | -         | |
+| xxl      | `≥1600px` column of grid | number                                   | -         | |
+| xxxl     | `≥2000px` column of grid | number                                   | -         | 3.0 |
 
 ### List.Item
 

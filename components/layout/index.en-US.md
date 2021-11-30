@@ -118,5 +118,6 @@ The sidebar.
   lg: '992px',
   xl: '1200px',
   xxl: '1600px',
+  xxxl: '2000px',
 }
 ```

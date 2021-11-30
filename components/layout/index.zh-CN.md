@@ -119,5 +119,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/hzEndUVEx/Layout.svg
   lg: '992px',
   xl: '1200px',
   xxl: '1600px',
+  xxxl: '2000px',
 }
 ```

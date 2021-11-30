@@ -18,6 +18,7 @@ const dimensionMaxMap = {
   lg: '991.98px',
   xl: '1199.98px',
   xxl: '1599.98px',
+  xxxl: '1999.98px',
 };
 
 export type CollapseType = 'clickTrigger' | 'responsive';
@@ -32,7 +33,7 @@ export const siderProps = {
   trigger: PropTypes.VNodeChild,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   collapsedWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  breakpoint: PropTypes.oneOf(tuple('xs', 'sm', 'md', 'lg', 'xl', 'xxl')),
+  breakpoint: PropTypes.oneOf(tuple('xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl')),
   theme: PropTypes.oneOf(tuple('light', 'dark')).def('dark'),
   onBreakpoint: Function as PropType<(broken: boolean) => void>,
   onCollapse: Function as PropType<(collapsed: boolean, type: CollapseType) => void>,

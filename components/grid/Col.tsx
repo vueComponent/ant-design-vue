@@ -51,6 +51,7 @@ const colProps = {
   lg: objectOrNumber,
   xl: objectOrNumber,
   xxl: objectOrNumber,
+  xxxl: objectOrNumber,
   prefixCls: PropTypes.string,
   flex: stringOrNumber,
 };
@@ -67,7 +68,7 @@ export default defineComponent({
       const { span, order, offset, push, pull } = props;
       const pre = prefixCls.value;
       let sizeClassObj = {};
-      ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].forEach(size => {
+      ['xs', 'sm', 'md', 'lg', 'xl', 'xxl', 'xxxl'].forEach(size => {
         let sizeProps: ColSize = {};
         const propSize = props[size];
         if (typeof propSize === 'number') {

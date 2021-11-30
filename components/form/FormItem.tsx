@@ -285,6 +285,12 @@ export default defineComponent({
       resetField,
     });
 
+    // instead useProvideFormItemContext onFieldChange
+    watch(fieldValue, () => {
+      if (props.autoLink) {
+        onFieldChange();
+      }
+    });
     useProvideFormItemContext(
       {
         id: fieldId,
@@ -294,9 +300,9 @@ export default defineComponent({
           }
         },
         onFieldChange: () => {
-          if (props.autoLink) {
-            onFieldChange();
-          }
+          // if (props.autoLink) {
+          //   onFieldChange();
+          // }
         },
         clearValidate,
       },

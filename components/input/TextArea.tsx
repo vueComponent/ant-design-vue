@@ -123,6 +123,7 @@ export default defineComponent({
         showCount: null,
         prefixCls,
         onInput: this.handleChange,
+        onBlur: this.handleBlur,
         onChange: this.handleChange,
         onKeydown: this.handleKeyDown,
       };

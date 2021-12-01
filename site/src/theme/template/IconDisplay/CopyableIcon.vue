@@ -7,7 +7,7 @@
     <component :is="allIcons[name]"></component>
     <span class="anticon-class">
       <a-badge :dot="isNew">
-        {{ type }}
+        {{ kebabCasedType }}
       </a-badge>
     </span>
   </li>
@@ -19,15 +19,27 @@ import { defineComponent } from 'vue';
 
 const allIcons = AntdIcons;
 
+const kebabCase = function kebabCase(str) {
+  return str
+    .split(/(?=[A-Z])/)
+    .join('-')
+    .toLowerCase();
+};
+
 export default defineComponent({
   components: {
     'a-badge': Badge,
   },
   props: ['name', 'type', 'isNew', 'theme', 'justCopied'],
   data() {
+    const kebabCasedName = kebabCase(this.name);
+    const kebabCasedType = kebabCase(this.type);
+
     this.allIcons = allIcons;
+
     return {
-      text: `<${this.name} />`,
+      text: `<${kebabCasedName} />`,
+      kebabCasedType,
     };
   },
   methods: {

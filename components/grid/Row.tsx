@@ -44,6 +44,7 @@ const ARow = defineComponent({
       lg: true,
       xl: true,
       xxl: true,
+      xxxl: true,
     });
 
     const supportFlexGap = useFlexGapSupport();

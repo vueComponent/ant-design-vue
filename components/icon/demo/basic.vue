@@ -18,12 +18,12 @@ Import icons from `@ant-design/icons-vue`, component name of icons with differen
 
 <template>
   <div class="icons-list">
-    <HomeOutlined />
-    <SettingFilled />
-    <SmileOutlined />
-    <SyncOutlined spin />
-    <SmileOutlined :rotate="180" />
-    <LoadingOutlined />
+    <home-outlined />
+    <setting-filled />
+    <smile-outlined />
+    <sync-outlined spin />
+    <smile-outlined :rotate="180" />
+    <loading-outlined />
   </div>
 </template>
 <script lang="ts">

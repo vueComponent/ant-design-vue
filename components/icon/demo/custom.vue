@@ -18,7 +18,7 @@ Create a reusable Vue component by using `Icon`. The property / slot `component`
 
 <template>
   <div class="custom-icons-list">
-    <Icon :style="{ color: 'hotpink' }">
+    <icon :style="{ color: 'hotpink' }">
       <template #component>
         <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 1024 1024">
           <path
@@ -26,9 +26,9 @@ Create a reusable Vue component by using `Icon`. The property / slot `component`
           />
         </svg>
       </template>
-    </Icon>
+    </icon>
 
-    <Icon :style="{ fontSize: '32px' }">
+    <icon :style="{ fontSize: '32px' }">
       <template #component="svgProps">
         <svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor" v-bind="svgProps">
           <path
@@ -73,7 +73,7 @@ Create a reusable Vue component by using `Icon`. The property / slot `component`
           />
         </svg>
       </template>
-    </Icon>
+    </icon>
   </div>
 </template>
 <script lang="ts">

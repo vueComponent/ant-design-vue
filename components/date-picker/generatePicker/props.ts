@@ -156,7 +156,7 @@ function rangePickerProps<DateType>() {
       type: Array as unknown as PropType<[DateType, DateType] | [string, string]>,
     },
     defaultValue: { type: Array as unknown as PropType<[DateType, DateType] | [string, string]> },
-    value: { type: Array as unknown as PropType<[DateType, DateType]> },
+    value: { type: Array as unknown as PropType<[DateType, DateType] | [string, string]> },
     disabledTime: {
       type: Function as PropType<(date: EventValue<DateType>, type: RangeType) => DisabledTimes>,
     },
@@ -182,7 +182,7 @@ export interface RangePickerProps<DateType> {
   dateRender?: RangeDateRender<DateType>;
   defaultPickerValue?: [DateType, DateType] | [string, string];
   defaultValue?: [DateType, DateType] | [string, string];
-  value?: [DateType, DateType];
+  value?: [DateType, DateType] | [string, string];
   disabledTime?: (date: EventValue<DateType>, type: RangeType) => DisabledTimes;
   disabled?: [boolean, boolean];
   format?: string;

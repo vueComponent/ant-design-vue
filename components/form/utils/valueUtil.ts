@@ -1,5 +1,7 @@
 import { toArray } from './typeUtil';
 import type { InternalNamePath, NamePath } from '../interface';
+import get from '../../vc-util/get';
+import set from '../../vc-util/set';
 
 /**
  * Convert name to internal supported format.
@@ -10,6 +12,21 @@ import type { InternalNamePath, NamePath } from '../interface';
  */
 export function getNamePath(path: NamePath | null): InternalNamePath {
   return toArray(path);
+}
+
+export function getValue<T>(store: T, namePath: InternalNamePath) {
+  const value = get(store, namePath);
+  return value;
+}
+
+export function setValue<T>(
+  store: T,
+  namePath: InternalNamePath,
+  value: any,
+  removeIfUndefined = false,
+): T {
+  const newStore = set(store, namePath, value, removeIfUndefined);
+  return newStore;
 }
 
 export function containsNamePath(namePathList: InternalNamePath[], namePath: InternalNamePath) {
@@ -48,6 +65,16 @@ export function setValues<T>(store: T, ...restValues: T[]): T {
     (current: T, newStore: T) => internalSetValues(current, newStore),
     store,
   );
+}
+
+export function cloneByNamePathList<T>(store: T, namePathList: InternalNamePath[]): T {
+  let newStore = {} as T;
+  namePathList.forEach(namePath => {
+    const value = getValue(store, namePath);
+    newStore = setValue(newStore, namePath, value);
+  });
+
+  return newStore;
 }
 
 export function matchNamePath(

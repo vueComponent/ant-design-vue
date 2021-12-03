@@ -5,7 +5,7 @@ import classNames from '../_util/classNames';
 import warning from '../_util/warning';
 import type { FieldExpose } from './FormItem';
 import FormItem from './FormItem';
-import { getNamePath, containsNamePath } from './utils/valueUtil';
+import { getNamePath, containsNamePath, cloneByNamePathList } from './utils/valueUtil';
 import { defaultValidateMessages } from './utils/messages';
 import { allPromiseFinish } from './utils/asyncUtil';
 import { toArray } from './utils/typeUtil';
@@ -133,7 +133,6 @@ const Form = defineComponent({
     );
     const lastValidatePromise = ref();
     const fields: Record<string, FieldExpose> = {};
-
     const addField = (eventKey: string, field: FieldExpose) => {
       fields[eventKey] = field;
     };
@@ -197,19 +196,15 @@ const Form = defineComponent({
       }
     };
     // eslint-disable-next-line no-unused-vars
-    const getFieldsValue = (nameList: NamePath[] | true = true) => {
-      const values: any = {};
-      Object.values(fields).forEach(({ fieldName, fieldValue }) => {
-        values[fieldName.value] = fieldValue.value;
-      });
+    const getFieldsValue = (nameList: InternalNamePath[] | true = true) => {
       if (nameList === true) {
-        return values;
+        const allNameList = [];
+        Object.values(fields).forEach(({ namePath }) => {
+          allNameList.push(namePath.value);
+        });
+        return cloneByNamePathList(props.model, allNameList);
       } else {
-        const res: any = {};
-        toArray(nameList as NamePath[]).forEach(
-          namePath => (res[namePath as string] = values[namePath as string]),
-        );
-        return res;
+        return cloneByNamePathList(props.model, nameList);
       }
     };
     const validateFields = (nameList?: NamePath[], options?: ValidateOptions) => {

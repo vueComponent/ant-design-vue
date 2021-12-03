@@ -56,7 +56,7 @@ export const sliderProps = () => ({
   vertical: { type: Boolean, default: undefined },
   tipFormatter: {
     type: [Function, Object] as PropType<((value?: number) => any) | null>,
-    default: defaultTipFormatter,
+    default: () => defaultTipFormatter,
   },
   tooltipVisible: { type: Boolean, default: undefined },
   tooltipPlacement: { type: String as PropType<TooltipPlacement> },

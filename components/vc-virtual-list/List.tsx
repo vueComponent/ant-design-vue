@@ -148,7 +148,12 @@ const List = defineComponent({
     }
 
     // ================================ Height ================================
-    const [setInstance, collectHeight, heights] = useHeights(getKey, null, null);
+    const [setInstance, collectHeight, heights, updatedMark] = useHeights(
+      mergedData,
+      getKey,
+      null,
+      null,
+    );
 
     const calRes = ref<{
       scrollHeight?: number;
@@ -157,9 +162,17 @@ const List = defineComponent({
       offset?: number;
     }>({});
     watch(
-      [inVirtual, useVirtual, () => state.scrollTop, mergedData, heights, () => props.height],
+      [
+        inVirtual,
+        useVirtual,
+        () => state.scrollTop,
+        mergedData,
+        updatedMark,
+        heights,
+        () => props.height,
+      ],
       () => {
-        nextTick(() => {
+        setTimeout(() => {
           if (!useVirtual.value) {
             calRes.value = {
               scrollHeight: undefined,
@@ -191,7 +204,7 @@ const List = defineComponent({
             const item = data[i];
             const key = getKey(item);
 
-            const cacheHeight = heights[key];
+            const cacheHeight = heights.value[key];
             const currentItemBottom =
               itemTop + (cacheHeight === undefined ? props.itemHeight! : cacheHeight);
 

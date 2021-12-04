@@ -7,7 +7,7 @@ import type { GetKey } from '../interface';
 export default function useScrollTo(
   containerRef: Ref<Element | undefined>,
   mergedData: ComputedRef<any[]>,
-  heights: Data,
+  heights: Ref<Data>,
   props,
   getKey: GetKey,
   collectHeight: () => void,
@@ -63,7 +63,7 @@ export default function useScrollTo(
           for (let i = 0; i <= maxLen; i += 1) {
             const key = getKey(data[i]);
             itemTop = stackTop;
-            const cacheHeight = heights[key!];
+            const cacheHeight = heights.value[key!];
             itemBottom = itemTop + (cacheHeight === undefined ? itemHeight : cacheHeight);
 
             stackTop = itemBottom;

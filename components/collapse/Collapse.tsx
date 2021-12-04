@@ -52,6 +52,7 @@ export default defineComponent({
       () => {
         stateActiveKey.value = getActiveKeysArray(props.activeKey);
       },
+      { deep: true },
     );
     const { prefixCls, direction } = useConfigInject('collapse', props);
     const iconPosition = computed(() => {

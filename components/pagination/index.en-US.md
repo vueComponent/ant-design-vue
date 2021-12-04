@@ -41,6 +41,6 @@ A long list can be divided into several pages using `Pagination`, and only one p
 ### events
 
 | Events Name | Description | Arguments |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | change | a callback function, executed when the page number is changed, and it takes the resulting page number and pageSize as its arguments | Function(page, pageSize) | noop |
 | showSizeChange | a callback function, executed when `pageSize` is changed | Function(current, size) | noop |

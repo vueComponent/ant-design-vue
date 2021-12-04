@@ -148,7 +148,7 @@
     "eslint-plugin-jest": "^25.3.0",
     "eslint-plugin-markdown": "^2.0.0",
     "eslint-plugin-no-explicit-type-exports": "^0.12.0",
-    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-vue": "^8.1.1",
     "fast-glob": "^3.2.7",
     "fetch-jsonp": "^1.1.3",

@@ -1,4 +1,3 @@
-
 # Ant Design of Vue
 
 这里是 Ant Design 的 Vue 实现，开发和服务于企业级后台产品。
@@ -34,8 +33,8 @@
 - [Electron](https://electronjs.org/)
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Opera | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/electron/electron_48x48.png" alt="Electron" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Electron |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Edge                                                                                                                                                                                                      | last 2 versions                                                                                                                                                                                                   | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                           | last 2 versions                                                                                                                                                                                                       |
+| --- | --- | --- | --- | --- | --- |
+| Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
 ## 版本
 
@@ -72,14 +71,14 @@ $ yarn add ant-design-vue@next
 ## 示例
 
 ```jsx
-import { DatePicker } from "ant-design-vue";
+import { DatePicker } from 'ant-design-vue';
 app.use(DatePicker);
 ```
 
 引入样式：
 
 ```jsx
-import "ant-design-vue/dist/antd.css"; // or 'ant-design-vue/dist/antd.less'
+import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 ```
 
 ### 按需加载
@@ -103,18 +102,19 @@ import "ant-design-vue/dist/antd.css"; // or 'ant-design-vue/dist/antd.less'
 
   ```jsx
   // babel-plugin-import 会帮助你加载 JS 和 CSS
-  import { DatePicker } from "ant-design-vue";
+  import { DatePicker } from 'ant-design-vue';
   ```
 
 - 手动引入
 
   ```jsx
-  import DatePicker from "ant-design-vue/lib/date-picker"; // 加载 JS
-  import "ant-design-vue/lib/date-picker/style/css"; // 加载 CSS
+  import DatePicker from 'ant-design-vue/lib/date-picker'; // 加载 JS
+  import 'ant-design-vue/lib/date-picker/style/css'; // 加载 CSS
   // import 'ant-design-vue/lib/date-picker/style';         // 加载 LESS
   ```
 
 - Vite 按需
+
   ```js
   // vite.config.js
   import ViteComponents, { AntDesignVueResolver } from 'vite-plugin-components';

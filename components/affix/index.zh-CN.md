@@ -25,15 +25,13 @@ cover: https://gw.alipayobjects.com/zos/alicdn/tX6-md4H6/Affix.svg
 ### 事件
 
 | 事件名称 | 说明                         | 回调参数          | 版本 |
-| -------- | ---------------------------- | ----------------- | ---- |
-| change   | 固定状态改变时触发的回调函数 | Function(affixed) | 无   |  |
+| -------- | ---------------------------- | ----------------- | ---- | --- |
+| change   | 固定状态改变时触发的回调函数 | Function(affixed) | 无   |     |
 
 **注意：**`Affix` 内的元素不要使用绝对定位，如需要绝对定位的效果，可以直接设置 `Affix` 为绝对定位：
 
 ```html
-<a-affix :style="{ position: 'absolute', top: y, left: x}">
-  ...
-</a-affix>
+<a-affix :style="{ position: 'absolute', top: y, left: x}">...</a-affix>
 ```
 
 ## FAQ

@@ -1,8 +1,8 @@
 <template>
   <demo-sort>
     <Basic />
-    <RangePicker/>
-    <Bordered/>
+    <RangePicker />
+    <Bordered />
     <Format />
     <Time />
     <Disabled />

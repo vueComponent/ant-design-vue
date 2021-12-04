@@ -1,8 +1,8 @@
 <template>
   <demo-sort>
     <Basic />
-    <Bordered/>
-    <RangePicker/>
+    <Bordered />
+    <RangePicker />
     <Hours />
     <Addon />
     <Disabled />

@@ -30,14 +30,14 @@ Display statistic number.
 
 ### Statistic.Countdown
 
-| Property   | Description                              | Type             | Default    |
-| ---------- | ---------------------------------------- | ---------------- | ---------- |
+| Property   | Description                            | Type             | Default    |
+| ---------- | -------------------------------------- | ---------------- | ---------- |
 | format     | Format as [dayjs](https://day.js.org/) | string           | 'HH:mm:ss' |
-| prefix     | prefix node of value                     | string \| v-slot | -          |
-| suffix     | suffix node of value                     | string \| v-slot | -          |
-| title      | Display title                            | string \| v-slot | -          |
-| value      | Set target countdown time                | number \| dayjs | -          |
-| valueStyle | Set value css style                      | style            | -          |
+| prefix     | prefix node of value                   | string \| v-slot | -          |
+| suffix     | suffix node of value                   | string \| v-slot | -          |
+| title      | Display title                          | string \| v-slot | -          |
+| value      | Set target countdown time              | number \| dayjs  | -          |
+| valueStyle | Set value css style                    | style            | -          |
 
 #### Statistic.Countdown Events
 

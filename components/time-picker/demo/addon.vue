@@ -60,5 +60,3 @@ export default defineComponent({
   },
 });
 </script>
-
-

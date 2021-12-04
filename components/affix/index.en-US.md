@@ -30,9 +30,7 @@ Please note that Affix should not cover other content on the page, especially wh
 **Note:** Children of `Affix` must not have the property `position: absolute`, but you can set `position: absolute` on `Affix` itself:
 
 ```html
-<a-affix :style="{ position: 'absolute', top: y, left: x}">
-  ...
-</a-affix>
+<a-affix :style="{ position: 'absolute', top: y, left: x}">...</a-affix>
 ```
 
 ## FAQ

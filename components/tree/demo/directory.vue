@@ -22,8 +22,7 @@ Built-in directory tree. `multiple` support `ctrl(Windows)` / `command(Mac)` sel
     v-model:selectedKeys="selectedKeys"
     multiple
     :tree-data="treeData"
-  >
-  </a-directory-tree>
+  ></a-directory-tree>
 </template>
 <script lang="ts">
 import type { TreeProps } from 'ant-design-vue';

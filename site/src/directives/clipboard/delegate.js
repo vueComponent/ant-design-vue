@@ -16,7 +16,7 @@ function _delegate(element, selector, type, callback, useCapture) {
   element.addEventListener(type, listenerFn, useCapture);
 
   return {
-    destroy () {
+    destroy() {
       element.removeEventListener(type, listenerFn, useCapture);
     },
   };

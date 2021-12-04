@@ -33,14 +33,14 @@ cover: https://gw.alipayobjects.com/zos/alicdn/9Ltop8JwH/Breadcrumb.svg
 #### 事件
 
 | 事件名称 | 说明     | 回调参数             | 版本 |
-| -------- | -------- | -------------------- | ---- |
+| -------- | -------- | -------------------- | ---- | ----- |
 | click    | 单击事件 | (e:MouseEvent)=>void | -    | 1.5.0 |
 
 ### Breadcrumb.Separator `1.5.0`
 
 | 参数 | 类型 | 默认值 | 版本 |
 | ---- | ---- | ------ | ---- |
-| - | - | - | - |
+| -    | -    | -      | -    |
 
 > 注意：在使用 `Breadcrumb.Separator` 时，其父组件的分隔符必须设置为 `separator=""`，否则会出现父组件默认的分隔符。
 
@@ -65,59 +65,55 @@ interface Route {
 <template>
   <a-breadcrumb :routes="routes">
     <template #itemRender="{ route, params, routes, paths }">
-      <span v-if="routes.indexOf(route) === routes.length - 1">
-        {{route.breadcrumbName}}
-      </span>
-      <router-link v-else :to="paths.join('/')">
-        {{route.breadcrumbName}}
-      </router-link>
+      <span v-if="routes.indexOf(route) === routes.length - 1">{{route.breadcrumbName}}</span>
+      <router-link v-else :to="paths.join('/')">{{route.breadcrumbName}}</router-link>
     </template>
   </a-breadcrumb>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
-interface Route {
-  path: string;
-  breadcrumbName: string;
-  children?: Array<{
+  import { defineComponent, ref } from 'vue';
+  interface Route {
     path: string;
     breadcrumbName: string;
-  }>;
-}
-export default defineComponent({
-  setup () {
-    const routes = ref<Route[]>([
-      {
-        path: 'index',
-        breadcrumbName: 'home',
-      },
-      {
-        path: 'first',
-        breadcrumbName: 'first',
-        children: [
-          {
-            path: '/general',
-            breadcrumbName: 'General',
-          },
-          {
-            path: '/layout',
-            breadcrumbName: 'Layout',
-          },
-          {
-            path: '/navigation',
-            breadcrumbName: 'Navigation',
-          },
-        ],
-      },
-      {
-        path: 'second',
-        breadcrumbName: 'second',
-      },
-    ]);
-    return {
-      routes,
-    }
+    children?: Array<{
+      path: string;
+      breadcrumbName: string;
+    }>;
   }
-});
+  export default defineComponent({
+    setup() {
+      const routes = ref<Route[]>([
+        {
+          path: 'index',
+          breadcrumbName: 'home',
+        },
+        {
+          path: 'first',
+          breadcrumbName: 'first',
+          children: [
+            {
+              path: '/general',
+              breadcrumbName: 'General',
+            },
+            {
+              path: '/layout',
+              breadcrumbName: 'Layout',
+            },
+            {
+              path: '/navigation',
+              breadcrumbName: 'Navigation',
+            },
+          ],
+        },
+        {
+          path: 'second',
+          breadcrumbName: 'second',
+        },
+      ]);
+      return {
+        routes,
+      };
+    },
+  });
 </script>
 ```

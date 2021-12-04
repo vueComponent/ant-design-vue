@@ -44,7 +44,8 @@ In `ant-design-vue@1.2.0`, we introduced the svg icon ([Why use the svg icon?](h
 The old way of using Icon will be obsolete:
 
 ```html
-<a-icon type="smile" /> <a-button icon="smile" />
+<a-icon type="smile" />
+<a-button icon="smile" />
 ```
 
 In 2.0, an on-demand introduction method will be adopted:

@@ -39,9 +39,9 @@ Customize the suffix icon through `suffixIcon`
       </template>
     </a-date-picker>
     <a-date-picker suffix-icon="ab" @change="onChange" />
-    <a-date-picker suffix-icon="ab" placeholder="Select month" picker="month" @change="onChange"/>
+    <a-date-picker suffix-icon="ab" placeholder="Select month" picker="month" @change="onChange" />
     <a-range-picker suffix-icon="ab" @change="onChange" />
-    <a-date-picker suffix-icon="ab" placeholder="Select week" picker="week" @change="onChange"/>
+    <a-date-picker suffix-icon="ab" placeholder="Select week" picker="week" @change="onChange" />
   </a-space>
 </template>
 <script lang="ts">

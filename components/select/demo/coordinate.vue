@@ -24,14 +24,12 @@ Using the [Cascader](/components/cascader) component is strongly recommended ins
       v-model:value="province"
       style="width: 120px"
       :options="provinceData.map(pro => ({ value: pro }))"
-    >
-    </a-select>
+    ></a-select>
     <a-select
       v-model:value="secondCity"
       style="width: 120px"
       :options="cities.map(city => ({ value: city }))"
-    >
-    </a-select>
+    ></a-select>
   </a-space>
 </template>
 <script lang="ts">

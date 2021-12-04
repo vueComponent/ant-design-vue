@@ -30,7 +30,7 @@ A dynamic progress bar is better.
   </div>
 </template>
 <script lang="ts">
-import { MinusOutlined , PlusOutlined } from '@ant-design/icons-vue';
+import { MinusOutlined, PlusOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   components: {

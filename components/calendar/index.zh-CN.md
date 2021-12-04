@@ -17,10 +17,8 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/dPQmLq08DI/Calendar.svg
 **注意：**Calendar 部分 locale 是从 value 中读取，所以请先正确设置 dayjs 的 locale。
 
 ```html
-// 默认语言为 en-US，所以如果需要使用其他语言，推荐在入口文件全局设置 locale
-// import dayjs from 'dayjs';
-// import 'dayjs/locale/zh-cn';
-// dayjs.locale('zh-cn');
+// 默认语言为 en-US，所以如果需要使用其他语言，推荐在入口文件全局设置 locale // import dayjs from
+'dayjs'; // import 'dayjs/locale/zh-cn'; // dayjs.locale('zh-cn');
 
 <a-calendar v-model:value="value" @panelChange="onPanelChange" @select="onSelect"></a-calendar>
 ```
@@ -38,7 +36,7 @@ cover: https://gw.alipayobjects.com/zos/antfincdn/dPQmLq08DI/Calendar.svg
 | validRange | 设置可以显示的日期 | \[[dayjs](https://day.js.org/), [dayjs](https://day.js.org/)] | 无 |  |
 | value(v-model) | 展示日期 | [dayjs](https://day.js.org/) | 当前日期 |  |
 | headerRender | 自定义头部内容 | v-slot:headerRender="{value: dayjs, type: string, onChange: f(), onTypeChange: f()}" | - |  |
-| valueFormat | 可选，绑定值的格式，对 value、defaultValue 起作用。不指定则绑定值为 dayjs 对象 | string，[具体格式](https://day.js.org/docs/zh-CN/display/format) | - | |
+| valueFormat | 可选，绑定值的格式，对 value、defaultValue 起作用。不指定则绑定值为 dayjs 对象 | string，[具体格式](https://day.js.org/docs/zh-CN/display/format) | - |  |
 
 ### 事件
 

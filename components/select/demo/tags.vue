@@ -24,8 +24,7 @@ Select with tags, transform input to tag (scroll the menu)
     placeholder="Tags Mode"
     :options="options"
     @change="handleChange"
-  >
-  </a-select>
+  ></a-select>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';

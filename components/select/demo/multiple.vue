@@ -24,8 +24,7 @@ Multiple selection, selecting from existing items (scroll the menu).
     placeholder="Please select"
     :options="[...Array(25)].map((_, i) => ({ value: (i + 10).toString(36) + (i + 1) }))"
     @change="handleChange"
-  >
-  </a-select>
+  ></a-select>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';

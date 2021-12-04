@@ -29,8 +29,7 @@ Search with remote data.
     :options="data"
     @search="handleSearch"
     @change="handleChange"
-  >
-  </a-select>
+  ></a-select>
 </template>
 <script lang="ts">
 import jsonp from 'fetch-jsonp';

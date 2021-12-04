@@ -19,7 +19,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/QaeBt_ZMg/Upload.svg
 ## API
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | accept | 接受上传的文件类型, 详见 [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) | string | 无 |  |
 | action | 上传的地址 | string\|(file) => `Promise` | 无 |  |
 | method | 上传请求的 http method | string | 'post' | 1.5.0 |
@@ -44,7 +44,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/QaeBt_ZMg/Upload.svg
 ### 事件
 
 | 事件名称 | 说明 | 回调参数 | 版本 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | change | 上传文件改变时的状态，详见 [change](#change) | Function | 无 |  |
 | preview | 点击文件链接或预览图标时的回调 | Function(file) | 无 |  |
 | download | 点击下载文件时的回调，如果没有指定，则默认跳转到文件 url 对应的标签页。 | Function(file): void | 跳转新标签页 | 1.5.0 |

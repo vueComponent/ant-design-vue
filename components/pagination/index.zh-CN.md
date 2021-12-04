@@ -35,6 +35,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/1vqv2bj68/Pagination.svg
 ### 事件
 
 | 事件名称       | 说明                                         | 回调参数                 |
-| -------------- | -------------------------------------------- | ------------------------ |
+| -------------- | -------------------------------------------- | ------------------------ | ---- |
 | change         | 页码改变的回调，参数是改变后的页码及每页条数 | Function(page, pageSize) | noop |
 | showSizeChange | pageSize 变化的回调                          | Function(current, size)  | noop |

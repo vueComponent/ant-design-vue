@@ -42,7 +42,7 @@ The following APIs are shared by Tooltip, Popconfirm, Popover.
 ### events
 
 | Events Name | Description | Arguments |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | visibleChange | Callback executed when visibility of the tooltip card is changed | (visible) => void | - |
 
 ## Note

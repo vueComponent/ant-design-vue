@@ -29,10 +29,10 @@ cover: https://gw.alipayobjects.com/zos/alicdn/KpcciCJgv/Skeleton.svg
 
 ### SkeletonAvatarProps
 
-| 属性  | 说明                 | 类型                                          | 默认值 |
-| ----- | -------------------- | --------------------------------------------- | ------ |
+| 属性  | 说明                 | 类型                                      | 默认值 |
+| ----- | -------------------- | ----------------------------------------- | ------ |
 | size  | 设置头像占位图的大小 | number \| `large` \| `small` \| `default` | -      |
-| shape | 指定头像的形状       | `circle` \| `square`                    | -      |
+| shape | 指定头像的形状       | `circle` \| `square`                      | -      |
 
 ### SkeletonTitleProps
 

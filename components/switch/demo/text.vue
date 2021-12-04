@@ -32,7 +32,6 @@ With text and icon.
 import { defineComponent, reactive, toRefs } from 'vue';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons-vue';
 export default defineComponent({
-
   components: {
     CheckOutlined,
     CloseOutlined,

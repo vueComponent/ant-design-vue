@@ -32,7 +32,7 @@ For displaying anchor hyperlinks on page and jumping between them.
 ### Events
 
 | Events Name | Description | Arguments | Version |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | click | set the handler to handle `click` event | Function(e: Event, link: Object) |  |
 | change | Listening for anchor link change | (currentActiveLink: string) => void |  | 1.5.0 |
 

@@ -33,7 +33,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/_1-C1JwsC/Anchor.svg
 ### 事件
 
 | 事件名称 | 说明                   | 回调参数                            | 版本 |
-| -------- | ---------------------- | ----------------------------------- | ---- |
+| -------- | ---------------------- | ----------------------------------- | ---- | ----- |
 | click    | `click` 事件的 handler | Function(e: Event, link: Object)    |      |
 | change   | 监听锚点链接改变       | (currentActiveLink: string) => void |      | 1.5.0 |
 

@@ -28,10 +28,10 @@ Provide a placeholder while you wait for content to load, or to visualise conten
 
 ## SkeletonAvatarProps
 
-| Property | Description             | Type                                          | Default |
-| -------- | ----------------------- | --------------------------------------------- | ------- |
+| Property | Description             | Type                                      | Default |
+| -------- | ----------------------- | ----------------------------------------- | ------- |
 | size     | Set the size of avatar  | number \| `large` \| `small` \| `default` | -       |
-| shape    | Set the shape of avatar | `circle` \| `square`                    | -       |
+| shape    | Set the shape of avatar | `circle` \| `square`                      | -       |
 
 ### SkeletonTitleProps
 

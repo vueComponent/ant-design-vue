@@ -10,8 +10,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fjMCD9xRq/Popconfirm.svg
 
 ## 何时使用
 
-目标元素的操作需要用户进一步的确认时，在目标元素附近弹出浮层提示，询问用户。
-和 'confirm' 弹出的全屏居中模态对话框相比，交互形式更轻量。
+目标元素的操作需要用户进一步的确认时，在目标元素附近弹出浮层提示，询问用户。和 'confirm' 弹出的全屏居中模态对话框相比，交互形式更轻量。
 
 ## API
 
@@ -25,7 +24,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fjMCD9xRq/Popconfirm.svg
 | okButton | 完全自定义确认按钮 | slot | - | 3.0 |
 | okType | 确认按钮类型 | string | primary |  |
 | title | 确认框的描述 | string\|slot | 无 |  |
-| visible (v-model) | 是否显示 | boolean| - |  |
+| visible (v-model) | 是否显示 | boolean | - |  |
 | icon | 自定义弹出气泡 Icon 图标 | vNode | &lt;Icon type="exclamation-circle" /&gt; |  |
 | disabled | 点击 Popconfirm 子元素是否弹出气泡确认框 | boolean | false |  |
 

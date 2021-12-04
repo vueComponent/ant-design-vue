@@ -56,12 +56,12 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
 
 ### Menu.Item
 
-| 参数     | 说明                     | 类型    | 默认值 | 版本  |
-| -------- | ------------------------ | ------- | ------ | ----- |
-| disabled | 是否禁用                 | boolean | false  | |
-| key      | item 的唯一标志          | string  |        | |
-| title    | 设置收缩时展示的悬浮标题 | string/slot  |        | |
-| icon    | 菜单图标 | slot  |        | 2.8.0 |
+| 参数     | 说明                     | 类型        | 默认值 | 版本  |
+| -------- | ------------------------ | ----------- | ------ | ----- |
+| disabled | 是否禁用                 | boolean     | false  |       |
+| key      | item 的唯一标志          | string      |        |       |
+| title    | 设置收缩时展示的悬浮标题 | string/slot |        |       |
+| icon     | 菜单图标                 | slot        |        | 2.8.0 |
 
 ### Menu.SubMenu
 
@@ -72,7 +72,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
 | key            | 唯一标志                 | string       |          |       |
 | title          | 子菜单项值               | string\|slot |          |       |
 | expandIcon     | 自定义 Menu 展开收起图标 | slot         | 箭头图标 |       |
-| icon    | 菜单图标 | slot  |        | 2.8.0 |
+| icon           | 菜单图标                 | slot         |          | 2.8.0 |
 
 Menu.SubMenu 的子元素必须是 `MenuItem` 或者 `SubMenu`.
 

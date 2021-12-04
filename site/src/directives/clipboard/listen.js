@@ -49,7 +49,7 @@ function listenNode(node, type, callback) {
   node.addEventListener(type, callback);
 
   return {
-    destroy () {
+    destroy() {
       node.removeEventListener(type, callback);
     },
   };
@@ -70,7 +70,7 @@ function listenNodeList(nodeList, type, callback) {
   });
 
   return {
-    destroy () {
+    destroy() {
       Array.prototype.forEach.call(nodeList, function (node) {
         node.removeEventListener(type, callback);
       });

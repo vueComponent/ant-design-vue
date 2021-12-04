@@ -36,7 +36,7 @@ To input a value in a range.
 ### events
 
 | Events Name | Description | Arguments |
-| --- | --- | --- |
+| --- | --- | --- | --- |
 | afterChange | Fire when `mouseup` is fired. | Function(value) | NOOP |
 | change | Callback function that is fired when the user changes the slider's value. | Function(value) | NOOP |
 

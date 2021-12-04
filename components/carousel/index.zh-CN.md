@@ -6,8 +6,7 @@ subtitle: 走马灯
 cover: https://gw.alipayobjects.com/zos/antfincdn/%24C9tmj978R/Carousel.svg
 ---
 
-
-旋转木马，一组轮播的区域。 
+旋转木马，一组轮播的区域。
 
 ## 何时使用
 

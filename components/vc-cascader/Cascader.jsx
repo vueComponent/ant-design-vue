@@ -1,4 +1,4 @@
-import { getComponent, getSlot , hasProp, getEvents } from '../_util/props-util';
+import { getComponent, getSlot, hasProp, getEvents } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
 import Menus from './Menus';

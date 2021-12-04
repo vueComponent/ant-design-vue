@@ -14,7 +14,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/h04Zsl98I/TimePicker.svg
 
 ## API
 
-
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | allowClear | 是否展示清除按钮 | boolean | true |  |
@@ -46,10 +45,10 @@ cover: https://gw.alipayobjects.com/zos/alicdn/h04Zsl98I/TimePicker.svg
 
 ### 事件
 
-| 事件名称   | 说明                  | 回调参数                                                   |
-| ---------- | --------------------- | ---------------------------------------------------------- |
+| 事件名称   | 说明                  | 回调参数                                                  |
+| ---------- | --------------------- | --------------------------------------------------------- |
 | change     | 时间发生变化的回调    | function(time: dayjs \| string, timeString: string): void |
-| openChange | 面板打开/关闭时的回调 | (open: boolean): void                                      |
+| openChange | 面板打开/关闭时的回调 | (open: boolean): void                                     |
 
 ## 方法
 
@@ -58,16 +57,16 @@ cover: https://gw.alipayobjects.com/zos/alicdn/h04Zsl98I/TimePicker.svg
 | blur()  | 移除焦点 |
 | focus() | 获取焦点 |
 
-
 ### TimeRangePicker
 
 属性与 DatePicker 的 [RangePicker](/components/date-picker/#RangePicker) 相同。还包含以下属性：
 
-| 参数 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
-| order | 始末时间是否自动排序 | boolean | true |  |
+| 参数  | 说明                 | 类型    | 默认值 | 版本 |
+| ----- | -------------------- | ------- | ------ | ---- |
+| order | 始末时间是否自动排序 | boolean | true   |      |
 
 ## FAQ
+
 ### 如何在 DatePicker 中使用自定义日期库（如 moment.js \| dayjs \| date-fns）？
 
 请参考[《自定义日期库》](/docs/vue/replace-date-cn)

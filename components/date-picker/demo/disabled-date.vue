@@ -25,15 +25,8 @@ Disabled part of dates and time by `disabledDate` and `disabledTime` respectivel
       :disabled-time="disabledDateTime"
       :show-time="{ defaultValue: dayjs('00:00:00', 'HH:mm:ss') }"
     />
-    <a-date-picker
-      v-model:value="value2"
-      :disabled-date="disabledDate"
-      picker="month"
-    />
-    <a-range-picker
-      v-model:value="value3"
-      :disabled-date="disabledDate"
-    />
+    <a-date-picker v-model:value="value2" :disabled-date="disabledDate" picker="month" />
+    <a-range-picker v-model:value="value3" :disabled-date="disabledDate" />
     <a-range-picker
       v-model:value="value4"
       style="width: 400px"

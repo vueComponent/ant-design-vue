@@ -1,10 +1,7 @@
 const fs = require('fs');
 
 module.exports = function getChangelog(file, version) {
-  const lines = fs
-    .readFileSync(file)
-    .toString()
-    .split('\n');
+  const lines = fs.readFileSync(file).toString().split('\n');
   const changeLog = [];
   const startPattern = new RegExp(`^## ${version}`);
   const stopPattern = /^## /; // 前一个版本

@@ -60,11 +60,12 @@ By clicking the input box, you can select a time from a popup panel.
 
 Same props from [RangePicker](/components/date-picker/#RangePicker) of DatePicker. And includes additional props:
 
-| Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- |
-| order | Order start and end time | boolean | true |  |
+| Property | Description              | Type    | Default | Version |
+| -------- | ------------------------ | ------- | ------- | ------- |
+| order    | Order start and end time | boolean | true    |         |
 
 ## FAQ
+
 ### How to use DatePicker with customize date library（like moment.js \| dayjs \| date-fns）？
 
 Please refer [replace date](/docs/vue/replace-date)

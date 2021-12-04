@@ -19,10 +19,10 @@ Basic use case. Users can select or input a date in panel.
 <template>
   <a-space direction="vertical" :size="12">
     <a-date-picker v-model:value="value1" />
-    <a-date-picker v-model:value="value2" picker="week"/>
-    <a-date-picker v-model:value="value3" picker="month"/>
-    <a-date-picker v-model:value="value4" picker="quarter"/>
-    <a-date-picker v-model:value="value5" picker="year"/>
+    <a-date-picker v-model:value="value2" picker="week" />
+    <a-date-picker v-model:value="value3" picker="month" />
+    <a-date-picker v-model:value="value4" picker="quarter" />
+    <a-date-picker v-model:value="value5" picker="year" />
   </a-space>
 </template>
 <script lang="ts">

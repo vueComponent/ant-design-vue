@@ -4,7 +4,7 @@ function E() {
 }
 
 E.prototype = {
-  on (name, callback, ctx) {
+  on(name, callback, ctx) {
     let e = this.e || (this.e = {});
 
     (e[name] || (e[name] = [])).push({
@@ -15,7 +15,7 @@ E.prototype = {
     return this;
   },
 
-  once (name, callback, ctx) {
+  once(name, callback, ctx) {
     let self = this;
     function listener() {
       self.off(name, listener);
@@ -26,7 +26,7 @@ E.prototype = {
     return this.on(name, listener, ctx);
   },
 
-  emit (name) {
+  emit(name) {
     let data = [].slice.call(arguments, 1);
     let evtArr = ((this.e || (this.e = {}))[name] || []).slice();
     let i = 0;
@@ -39,7 +39,7 @@ E.prototype = {
     return this;
   },
 
-  off (name, callback) {
+  off(name, callback) {
     let e = this.e || (this.e = {});
     let evts = e[name];
     let liveEvents = [];

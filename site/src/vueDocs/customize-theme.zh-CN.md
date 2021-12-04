@@ -131,6 +131,7 @@ module.exports = {
 ## 使用暗黑主题
 
 方式一：在样式文件全量引入 [antd.dark.less](https://unpkg.com/browse/ant-design-vue@2.0.0/dist/antd.dark.less)。
+
 ```less
 @import '~ant-design-vue/dist/antd.dark.less'; // 引入官方提供的暗色 less 样式入口文件
 ```

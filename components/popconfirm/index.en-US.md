@@ -25,9 +25,9 @@ The difference with the 'confirm' modal dialog is that it's more lightweight tha
 | okButton | custom render confirm button | slot | - | 3.0 |
 | okType | Button `type` of the Confirm button | string | `primary` |  |
 | title | title of the confirmation box | string\|slot | - |  |
-| visible (v-model) | hide or show | boolean| - |  |
+| visible (v-model) | hide or show | boolean | - |  |
 | icon | customize icon of confirmation | vNode\|slot | &lt;Icon type="exclamation-circle" /&gt; |  |
-| disabled | is show popconfirm when click its childrenNode | boolean | false | |
+| disabled | is show popconfirm when click its childrenNode | boolean | false |  |
 
 ### events
 

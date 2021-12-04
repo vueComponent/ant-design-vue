@@ -23,8 +23,7 @@ Hide already selected options in the dropdown.
     placeholder="Inserted are removed"
     style="width: 100%"
     :options="filteredOptions.map(item => ({ value: item }))"
-  >
-  </a-select>
+  ></a-select>
 </template>
 <script lang="ts">
 import { computed, defineComponent, ref } from 'vue';

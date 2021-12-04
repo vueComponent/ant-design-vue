@@ -18,7 +18,7 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 ## API
 
 | Property | Description | Type | Default | Version |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | accept | File types that can be accepted. See [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) | string | - |  |
 | action | Uploading URL | string\|(file) => `Promise` | - |  |
 | method | http method of upload request | string | 'post' | 1.5.0 |
@@ -43,7 +43,7 @@ Uploading is the process of publishing information (web pages, text, pictures, v
 ### events
 
 | Events Name | Description | Arguments | Version |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | change | A callback function, can be executed when uploading state is changing. See [change](#change) | Function | - |  |
 | preview | A callback function, will be executed when file link or preview icon is clicked. | Function(file) | - |  |
 | download | Click the method to download the file, pass the method to perform the method logic, do not pass the default jump to the new TAB. | Function(file): void | Jump to new TAB | 1.5.0 |

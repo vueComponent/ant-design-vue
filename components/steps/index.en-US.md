@@ -38,7 +38,7 @@ The whole of the step bar.
 #### Steps Events
 
 | Events Name | Description                  | Arguments         | Version |
-| ----------- | ---------------------------- | ----------------- | ------- |
+| ----------- | ---------------------------- | ----------------- | ------- | ----- |
 | change      | Trigger when Step is changed | (current) => void | -       | 1.5.0 |
 
 ### Steps.Step

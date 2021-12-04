@@ -33,8 +33,8 @@ Following the Ant Design specification, we developed a Vue UI library `antd` tha
 - [Electron](https://electronjs.org/)
 
 | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/> Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Opera | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/electron/electron_48x48.png" alt="Electron" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)<br/>Electron |
-| --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|Edge                                                                                                                                                                                                      | last 2 versions                                                                                                                                                                                                   | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                               | last 2 versions                                                                                                                                                                                           | last 2 versions                                                                                                                                                                                                       |
+| --- | --- | --- | --- | --- | --- |
+| Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
 ## Version
 
@@ -71,14 +71,14 @@ We provide `antd.js` `antd.css` and `antd.min.js` `antd.min.css` under `ant-desi
 ## Usage
 
 ```jsx
-import { DatePicker } from "ant-design-vue";
+import { DatePicker } from 'ant-design-vue';
 app.use(DatePicker);
 ```
 
 And import stylesheets manually:
 
 ```jsx
-import "ant-design-vue/dist/antd.css"; // or 'ant-design-vue/dist/antd.less'
+import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 ```
 
 ### Use modularized antd
@@ -100,18 +100,19 @@ import "ant-design-vue/dist/antd.css"; // or 'ant-design-vue/dist/antd.less'
 
   ```jsx
   // import js and css modularly, parsed by babel-plugin-import
-  import { DatePicker } from "ant-design-vue";
+  import { DatePicker } from 'ant-design-vue';
   ```
 
 - Manually import
 
   ```jsx
-  import DatePicker from "ant-design-vue/lib/date-picker"; // for js
-  import "ant-design-vue/lib/date-picker/style/css"; // for css
+  import DatePicker from 'ant-design-vue/lib/date-picker'; // for js
+  import 'ant-design-vue/lib/date-picker/style/css'; // for css
   // import 'ant-design-vue/lib/date-picker/style';         // that will import less
   ```
 
 - For Vite
+
   ```js
   // vite.config.js
   import ViteComponents, { AntDesignVueResolver } from 'vite-plugin-components';
@@ -124,6 +125,8 @@ import "ant-design-vue/dist/antd.css"; // or 'ant-design-vue/dist/antd.less'
       }),
     ],
   };
+  ```
+
 ```
 
 ## Links
@@ -155,3 +158,4 @@ Ant Design Vue is committed to providing programmers with a ** pleasant ** devel
 ## THANK YOU
 
 [Ant Design Team](https://github.com/ant-design/ant-design/blob/master/AUTHORS.txt)
+```

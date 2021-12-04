@@ -17,7 +17,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5FrZKStG_/List.svg
 ### List
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
-| --- | --- | --- | --- | --- |
+| --- | --- | --- | --- | --- | --- |
 | bordered | 是否展示边框 | boolean | false |  |
 | footer | 列表底部 | string\|slot | - |  |
 | grid | 列表栅格配置 | object | - |  |
@@ -46,21 +46,21 @@ cover: https://gw.alipayobjects.com/zos/alicdn/5FrZKStG_/List.svg
 ### List grid props
 
 | 参数   | 说明                 | 类型                                     | 默认值 | 版本 |
-| ------ | -------------------- | ---------------------------------------- | ------ | ------ |
-| column | 列数                 | number oneOf [ 1, 2, 3, 4, 6, 8, 12, 24] | -      ||
-| gutter | 栅格间隔             | number                                   | 0      ||
-| xs     | `<576px` 展示的列数  | number                                   | -      ||
-| sm     | `≥576px` 展示的列数  | number                                   | -      ||
-| md     | `≥768px` 展示的列数  | number                                   | -      ||
-| lg     | `≥992px` 展示的列数  | number                                   | -      ||
-| xl     | `≥1200px` 展示的列数 | number                                   | -      ||
-| xxl    | `≥1600px` 展示的列数 | number                                   | -      ||
-| xxxl   | `≥2000px` 展示的列数 | number                                   | -      |3.0|
+| ------ | -------------------- | ---------------------------------------- | ------ | ---- |
+| column | 列数                 | number oneOf [ 1, 2, 3, 4, 6, 8, 12, 24] | -      |      |
+| gutter | 栅格间隔             | number                                   | 0      |      |
+| xs     | `<576px` 展示的列数  | number                                   | -      |      |
+| sm     | `≥576px` 展示的列数  | number                                   | -      |      |
+| md     | `≥768px` 展示的列数  | number                                   | -      |      |
+| lg     | `≥992px` 展示的列数  | number                                   | -      |      |
+| xl     | `≥1200px` 展示的列数 | number                                   | -      |      |
+| xxl    | `≥1600px` 展示的列数 | number                                   | -      |      |
+| xxxl   | `≥2000px` 展示的列数 | number                                   | -      | 3.0  |
 
 ### List.Item
 
 | 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
+| --- | --- | --- | --- | --- |
 | actions | 列表操作组，根据 `itemLayout` 的不同, 位置在卡片底部或者最右侧 | Array\<vNode>/ | slot | - |
 | extra | 额外内容, 通常用在 `itemLayout` 为 `vertical` 的情况下, 展示右侧内容; `horizontal` 展示在列表元素最右侧 | string\|slot | - |
 

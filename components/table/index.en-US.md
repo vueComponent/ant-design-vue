@@ -280,3 +280,21 @@ return <Table rowKey={record => record.uid} />;
 Table deprecated `column.slots`, added `v-slot:bodyCell`, `v-slot:headerCell`, custom cells, and added `column.customFilterDropdown` `v-slot:customFilterDropdown`, custom filtering Menu, added `v-slot:customFilterIcon` custom filter button, but `column.slots` is still available, we will remove it in the next major version.
 
 Besides, the breaking change is changing `dataIndex` from nest string path like `user.age` to string array path like `['user', 'age']`. This help to resolve developer should additional work on the field which contains `.`.
+
+## FAQ
+
+### How to hide pagination when single page or no data?
+
+You can set `hideOnSinglePage` with `pagination` prop.
+
+### Table will return to first page when filter data.
+
+Table total page count usually reduce after filter data, we defaultly return to first page in case of current page is out of filtered results.
+
+### Why Table pagination show size changer?
+
+In order to improve user experience, Pagination show size changer by default when `total > 50` since `3.0`. You can set `showSizeChanger=false` to disable this feature.
+
+### How to handle fixed column display over the mask layout?
+
+Fixed column use `z-index` to make it over other columns. You will find sometime fixed columns also over your mask layout. You can set `z-index` on your mask layout to resolve.

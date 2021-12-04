@@ -286,3 +286,23 @@ return <Table rowKey={record => record.uid} />;
 Table 废弃了 `column.slots`, 新增 `v-slot:bodyCell`、`v-slot:headerCell`，自定义单元格，新增 `column.customFilterDropdown` `v-slot:customFilterDropdown`，自定义筛选菜单，新增了 `v-slot:customFilterIcon` 自定义筛选按钮，但 `column.slots` 还可用，我们会在下一个大版本时移除。
 
 此外，比较重大的改动为 `dataIndex` 从支持路径嵌套如 `user.age` 改成了数组路径如 `['user', 'age']`。以解决过去属性名带 `.` 需要额外的数据转化问题。
+
+## FAQ
+
+### 如何在没有数据或只有一页数据时隐藏分页栏
+
+你可以设置 `pagination` 的 `hideOnSinglePage` 属性为 `true`。
+
+### 表格过滤时会回到第一页？
+
+前端过滤时通常条目总数会减少，从而导致总页数小于筛选前的当前页数，为了防止当前页面没有数据，我们默认会返回第一页。
+
+如果你在使用远程分页，很可能需要保持当前页面，你可以手动控制当前页面不变。
+
+### 表格分页为何会出现 size 切换器？
+
+自 `3.0` 起，Pagination 在 `total` 大于 50 条时会默认显示 size 切换器以提升用户交互体验。如果你不需要该功能，可以通过设置 `showSizeChanger` 为 `false` 来关闭。
+
+### 固定列穿透到最上层该怎么办？
+
+固定列通过 `z-index` 属性将其悬浮于非固定列之上，这使得有时候你会发现在 Table 上放置遮罩层时固定列会被透过的情况。为遮罩层设置更高的 `z-index` 覆盖住固定列即可。

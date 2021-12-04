@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { mount } from '@vue/test-utils';
-import { asyncExpect , sleep } from '../../../tests/utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 import MockDate from 'mockdate';
 import Calendar from '..';
 import Header from '../Header';
@@ -37,7 +37,7 @@ describe('Calendar', () => {
     );
     await asyncExpect(() => {
       wrapper.findAll('.ant-picker-cell')[0].trigger('click');
-    });
+    }, 0);
     await asyncExpect(() => {
       expect(onSelect).toHaveBeenCalledWith(expect.anything());
       const value = onSelect.mock.calls[0][0];
@@ -141,11 +141,11 @@ describe('Calendar', () => {
     );
     await sleep();
     openSelect(wrapper, '.ant-picker-calendar-year-select');
-    await sleep();
+    await sleep(100);
     clickSelectItem(wrapper);
     await sleep();
     openSelect(wrapper, '.ant-picker-calendar-month-select');
-    await sleep();
+    await sleep(100);
     // 2 years and 11 months
     expect(wrapper.findAll('.ant-select-item-option').length).toBe(13);
   });
@@ -336,7 +336,7 @@ describe('Calendar', () => {
     );
     await sleep();
     openSelect(wrapper, '.ant-picker-calendar-month-select');
-    await sleep();
+    await sleep(100);
     clickSelectItem(wrapper);
     expect(onValueChange).toHaveBeenCalledWith(value.month(10));
   });

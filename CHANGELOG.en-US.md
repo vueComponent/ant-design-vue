@@ -10,6 +10,17 @@
 
 ---
 
+## 3.0.0-alpha.14
+
+`2021-12-05`
+
+- 🌟 Add xxxl grid [#4953](https://github.com/vueComponent/ant-design-vue/issues/4953)
+- 🌟 Collapse activeKey supports deep monitoring [#4969](https://github.com/vueComponent/ant-design-vue/issues/4969)
+- 🐞 Fix the problem that the form verification is not triggered when textarea blur [af5440](https://github.com/vueComponent/ant-design-vue/commit/af54405381d60bfadb383996a6ad64724b80f996)
+- 🐞 Fix the issue of unchecked form during active assignment [#4955](https://github.com/vueComponent/ant-design-vue/issues/4955)
+- 🐞 Fix the problem of unable to scroll after Select search [#4971](https://github.com/vueComponent/ant-design-vue/issues/4971)
+- 🐞 Fix rangePicker, slider type issues
+
 ## 3.0.0-alpha.13
 
 `2021-11-28`

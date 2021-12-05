@@ -10,6 +10,17 @@
 
 ---
 
+## 3.0.0-alpha.14
+
+`2021-12-05`
+
+- 🌟 新增 xxxl 网格 [#4953](https://github.com/vueComponent/ant-design-vue/issues/4953)
+- 🌟 Collapse activeKey 支持深度监听 [#4969](https://github.com/vueComponent/ant-design-vue/issues/4969)
+- 🐞 修复 textarea blur 时未触发表单校验问题 [af5440](https://github.com/vueComponent/ant-design-vue/commit/af54405381d60bfadb383996a6ad64724b80f996)
+- 🐞 修复 Form 主动赋值时未校验问题 [#4955](https://github.com/vueComponent/ant-design-vue/issues/4955)
+- 🐞 修复 Select 搜索后无法滚动问题 [#4971](https://github.com/vueComponent/ant-design-vue/issues/4971)
+- 🐞 修复 rangePicker、slider 类型问题
+
 ## 3.0.0-alpha.13
 
 `2021-11-28`

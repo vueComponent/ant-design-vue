@@ -9,7 +9,8 @@
     "perf",
     "test",
     "chore",
-    "revert"
+    "revert",
+    "ci"
   ],
   "warnOnFail": false,
   "autoFix": false

@@ -16,7 +16,7 @@ export default defineComponent({
     format: 'HH:mm:ss',
   }),
   emits: ['finish', 'change'],
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const countdownId = ref<any>();
     const statistic = ref();
     const syncTimer = () => {
@@ -76,6 +76,9 @@ export default defineComponent({
       stopTimer();
     });
     return () => {
+      const title = props.title ?? slots.title?.();
+      const prefix = props.prefix ?? slots.prefix?.();
+      const suffix = props.suffix ?? slots.suffix?.();
       return (
         <Statistic
           ref={statistic}
@@ -83,6 +86,11 @@ export default defineComponent({
             ...props,
             valueRender: valueRenderHtml,
             formatter: formatCountdown,
+          }}
+          v-slots={{
+            title,
+            prefix,
+            suffix,
           }}
         />
       );

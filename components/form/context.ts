@@ -20,7 +20,7 @@ export interface FormContextProps {
   validateTrigger?: ComputedRef<string | string[]>;
   rules?: ComputedRef<{ [k: string]: ValidationRule[] | ValidationRule }>;
   onValidate: (
-    name: string | number | string[] | number[],
+    name: string | number | Array<string | number>,
     status: boolean,
     errors: string[] | null,
   ) => void;

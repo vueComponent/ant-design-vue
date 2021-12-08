@@ -59,6 +59,7 @@ const Select = defineComponent({
     'clearIcon',
     'dropdownRender',
     'option',
+    'placeholder',
   ],
   setup(props, { attrs, emit, slots, expose }) {
     const selectRef = ref();
@@ -120,6 +121,7 @@ const Select = defineComponent({
         virtual,
         dropdownMatchSelectWidth,
         id = formItemContext.id.value,
+        placeholder = slots.placeholder?.(),
       } = props;
 
       const { renderEmpty, getPopupContainer: getContextPopupContainer } = configProvider;
@@ -168,6 +170,7 @@ const Select = defineComponent({
           dropdownMatchSelectWidth={dropdownMatchSelectWidth}
           {...selectProps}
           {...attrs}
+          placeholder={placeholder}
           listHeight={listHeight}
           listItemHeight={listItemHeight}
           mode={mode.value}

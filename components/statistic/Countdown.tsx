@@ -76,9 +76,6 @@ export default defineComponent({
       stopTimer();
     });
     return () => {
-      const title = props.title ?? slots.title?.();
-      const prefix = props.prefix ?? slots.prefix?.();
-      const suffix = props.suffix ?? slots.suffix?.();
       return (
         <Statistic
           ref={statistic}
@@ -87,11 +84,7 @@ export default defineComponent({
             valueRender: valueRenderHtml,
             formatter: formatCountdown,
           }}
-          v-slots={{
-            title,
-            prefix,
-            suffix,
-          }}
+          v-slots={slots}
         />
       );
     };

@@ -16,7 +16,7 @@ export default defineComponent({
     format: 'HH:mm:ss',
   }),
   emits: ['finish', 'change'],
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const countdownId = ref<any>();
     const statistic = ref();
     const syncTimer = () => {
@@ -84,6 +84,7 @@ export default defineComponent({
             valueRender: valueRenderHtml,
             formatter: formatCountdown,
           }}
+          v-slots={slots}
         />
       );
     };

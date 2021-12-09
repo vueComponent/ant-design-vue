@@ -28,7 +28,7 @@ export interface MenuContextProps {
   openKeys: Ref<Key[]>;
   selectedKeys: Ref<Key[]>;
 
-  selectedSubMenuEventKeys: Ref<string[]>;
+  selectedSubMenuKeys: Ref<Array<number | string>>;
   rtl?: ComputedRef<boolean>;
 
   inlineCollapsed: Ref<boolean>;
@@ -67,7 +67,7 @@ export interface MenuContextProps {
   // // Popup
   subMenuOpenDelay: ComputedRef<number>;
   subMenuCloseDelay: ComputedRef<number>;
-  // forceSubMenuRender?: boolean;
+  forceSubMenuRender: ComputedRef<boolean>;
   builtinPlacements?: ComputedRef<BuiltinPlacements>;
   triggerSubMenuAction?: ComputedRef<TriggerSubMenuAction>;
 
@@ -89,6 +89,16 @@ const useProvideMenu = (props: MenuContextProps) => {
 
 const useInjectMenu = () => {
   return inject(MenuContextKey);
+};
+
+const ForceRenderKey: InjectionKey<boolean> = Symbol('ForceRenderKey');
+
+export const useProvideForceRender = (forceRender: boolean) => {
+  provide(ForceRenderKey, forceRender);
+};
+
+export const useInjectForceRender = () => {
+  return inject(ForceRenderKey, false);
 };
 
 const MenuFirstLevelContextKey: InjectionKey<Boolean> = Symbol('menuFirstLevelContextKey');

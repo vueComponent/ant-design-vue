@@ -21,8 +21,8 @@ Use the single file method to recursively generate menus.
       <MenuFoldOutlined v-else />
     </a-button>
     <a-menu
-      :default-selected-keys="['1']"
-      :default-open-keys="['2']"
+      v-model:openKeys="openKeys"
+      v-model:selectedKeys="selectedKeys"
       mode="inline"
       theme="dark"
       :inline-collapsed="collapsed"
@@ -119,6 +119,8 @@ export default defineComponent({
       list,
       collapsed,
       toggleCollapsed,
+      selectedKeys: ref(['1']),
+      openKeys: ref(['2']),
     };
   },
 });

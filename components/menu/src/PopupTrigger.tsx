@@ -2,7 +2,7 @@ import Trigger from '../../vc-trigger';
 import type { PropType } from 'vue';
 import { computed, defineComponent, onBeforeUnmount, ref, watch } from 'vue';
 import type { MenuMode } from './interface';
-import { useInjectMenu } from './hooks/useMenuContext';
+import { useInjectForceRender, useInjectMenu } from './hooks/useMenuContext';
 import { placements, placementsRtl } from './placements';
 import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
@@ -39,8 +39,9 @@ export default defineComponent({
       builtinPlacements,
       triggerSubMenuAction,
       isRootMenu,
+      forceSubMenuRender,
     } = useInjectMenu();
-
+    const forceRender = useInjectForceRender();
     const placement = computed(() =>
       rtl.value
         ? { ...placementsRtl, ...builtinPlacements.value }
@@ -91,7 +92,7 @@ export default defineComponent({
           mouseEnterDelay={subMenuOpenDelay.value}
           mouseLeaveDelay={subMenuCloseDelay.value}
           onPopupVisibleChange={onVisibleChange}
-          forceRender={true}
+          forceRender={forceRender || forceSubMenuRender.value}
           v-slots={{
             popup: () => {
               return slots.popup?.({ visible: innerVisible.value });

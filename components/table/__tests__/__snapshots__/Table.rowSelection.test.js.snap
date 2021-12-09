@@ -125,6 +125,11 @@ exports[`Table.rowSelection render with default selection correctly 1`] = `
         <!---->
         <!---->
       </ul>
+      <div style="display: none;" aria-hidden="true">
+        <!---->
+        <!---->
+        <!---->
+      </div>
     </div>
   </div>
 </div>

@@ -1,5 +1,5 @@
 import type { Key } from '../../_util/type';
-import type { ExtractPropTypes, PropType, UnwrapRef } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent, ref, inject, watchEffect, watch, onMounted, unref } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
 import type { StoreMenuInfo } from './hooks/useMenuContext';
@@ -24,6 +24,7 @@ import MenuItem from './MenuItem';
 import SubMenu from './SubMenu';
 import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 import { cloneElement } from '../../_util/vnode';
+import { OVERFLOW_KEY, PathContext } from './hooks/useKeyPath';
 
 export const menuProps = {
   id: String,
@@ -31,6 +32,7 @@ export const menuProps = {
   disabled: Boolean,
   inlineCollapsed: Boolean,
   disabledOverflow: Boolean,
+  forceSubMenuRender: Boolean,
   openKeys: Array,
   selectedKeys: Array,
   activeKey: String, // 内部组件使用
@@ -60,6 +62,7 @@ export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
 const EMPTY_LIST: string[] = [];
 export default defineComponent({
   name: 'AMenu',
+  inheritAttrs: false,
   props: menuProps,
   emits: [
     'update:openKeys',
@@ -71,7 +74,7 @@ export default defineComponent({
     'update:activeKey',
   ],
   slots: ['expandIcon', 'overflowedIndicator'],
-  setup(props, { slots, emit }) {
+  setup(props, { slots, emit, attrs }) {
     const { prefixCls, direction } = useConfigInject('menu', props);
     const store = ref<Record<string, StoreMenuInfo>>({});
     const siderCollapsed = inject(SiderCollapsedKey, ref(undefined));
@@ -102,7 +105,7 @@ export default defineComponent({
 
     const activeKeys = ref([]);
     const mergedSelectedKeys = ref([]);
-    const keyMapStore = ref({});
+    const keyMapStore = ref<Record<Key, StoreMenuInfo>>({});
     watch(
       store,
       () => {
@@ -117,11 +120,9 @@ export default defineComponent({
     watchEffect(() => {
       if (props.activeKey !== undefined) {
         let keys = [];
-        const menuInfo = props.activeKey
-          ? (keyMapStore.value[props.activeKey] as UnwrapRef<StoreMenuInfo>)
-          : undefined;
+        const menuInfo = props.activeKey ? keyMapStore.value[props.activeKey] : undefined;
         if (menuInfo && props.activeKey !== undefined) {
-          keys = [...menuInfo.parentKeys, props.activeKey];
+          keys = uniq([].concat(unref(menuInfo.parentKeys), props.activeKey));
         } else {
           keys = [];
         }
@@ -139,22 +140,21 @@ export default defineComponent({
       { immediate: true },
     );
 
-    const selectedSubMenuEventKeys = ref([]);
-
+    const selectedSubMenuKeys = ref([]);
     watch(
       [keyMapStore, mergedSelectedKeys],
       () => {
-        let subMenuParentEventKeys = [];
+        let subMenuParentKeys = [];
         mergedSelectedKeys.value.forEach(key => {
           const menuInfo = keyMapStore.value[key];
           if (menuInfo) {
-            subMenuParentEventKeys.push(...unref(menuInfo.parentEventKeys));
+            subMenuParentKeys = subMenuParentKeys.concat(unref(menuInfo.parentKeys));
           }
         });
 
-        subMenuParentEventKeys = uniq(subMenuParentEventKeys);
-        if (!shallowEqual(selectedSubMenuEventKeys.value, subMenuParentEventKeys)) {
-          selectedSubMenuEventKeys.value = subMenuParentEventKeys;
+        subMenuParentKeys = uniq(subMenuParentKeys);
+        if (!shallowEqual(selectedSubMenuKeys.value, subMenuParentKeys)) {
+          selectedSubMenuKeys.value = subMenuParentKeys;
         }
       },
       { immediate: true },
@@ -321,8 +321,8 @@ export default defineComponent({
       triggerSelection(info);
     };
 
-    const onInternalOpenChange = (eventKey: Key, open: boolean) => {
-      const { key, childrenEventKeys } = store.value[eventKey];
+    const onInternalOpenChange = (key: Key, open: boolean) => {
+      const childrenEventKeys = keyMapStore.value[key].childrenEventKeys;
       let newOpenKeys = mergedOpenKeys.value.filter(k => k !== key);
 
       if (open) {
@@ -330,7 +330,7 @@ export default defineComponent({
       } else if (mergedMode.value !== 'inline') {
         // We need find all related popup to close
         const subPathKeys = getChildrenKeys(childrenEventKeys);
-        newOpenKeys = newOpenKeys.filter(k => !subPathKeys.includes(k));
+        newOpenKeys = uniq(newOpenKeys.filter(k => !subPathKeys.includes(k)));
       }
 
       if (!shallowEqual(mergedOpenKeys, newOpenKeys)) {
@@ -388,9 +388,10 @@ export default defineComponent({
       onItemClick: onInternalClick,
       registerMenuInfo,
       unRegisterMenuInfo,
-      selectedSubMenuEventKeys,
+      selectedSubMenuKeys,
       isRootMenu: ref(true),
       expandIcon,
+      forceSubMenuRender: computed(() => props.forceSubMenuRender),
     });
     return () => {
       const childList = flattenChildren(slots.default?.());
@@ -415,43 +416,63 @@ export default defineComponent({
       const overflowedIndicator = slots.overflowedIndicator?.() || <EllipsisOutlined />;
 
       return (
-        <Overflow
-          prefixCls={`${prefixCls.value}-overflow`}
-          component="ul"
-          itemComponent={MenuItem}
-          class={className.value}
-          role="menu"
-          id={props.id}
-          data={wrappedChildList}
-          renderRawItem={node => node}
-          renderRawRest={omitItems => {
-            // We use origin list since wrapped list use context to prevent open
-            const len = omitItems.length;
+        <>
+          <Overflow
+            {...attrs}
+            prefixCls={`${prefixCls.value}-overflow`}
+            component="ul"
+            itemComponent={MenuItem}
+            class={className.value}
+            role="menu"
+            id={props.id}
+            data={wrappedChildList}
+            renderRawItem={node => node}
+            renderRawRest={omitItems => {
+              // We use origin list since wrapped list use context to prevent open
+              const len = omitItems.length;
 
-            const originOmitItems = len ? childList.slice(-len) : null;
+              const originOmitItems = len ? childList.slice(-len) : null;
 
-            return (
-              <SubMenu
-                eventKey={Overflow.OVERFLOW_KEY}
-                title={overflowedIndicator}
-                disabled={allVisible}
-                internalPopupClose={len === 0}
-              >
-                {originOmitItems}
-              </SubMenu>
-            );
-          }}
-          maxCount={
-            mergedMode.value !== 'horizontal' || props.disabledOverflow
-              ? Overflow.INVALIDATE
-              : Overflow.RESPONSIVE
-          }
-          ssr="full"
-          data-menu-list
-          onVisibleChange={newLastIndex => {
-            lastVisibleIndex.value = newLastIndex;
-          }}
-        />
+              return (
+                <>
+                  <SubMenu
+                    eventKey={OVERFLOW_KEY}
+                    key={OVERFLOW_KEY}
+                    title={overflowedIndicator}
+                    disabled={allVisible}
+                    internalPopupClose={len === 0}
+                  >
+                    {originOmitItems}
+                  </SubMenu>
+                  <PathContext>
+                    <SubMenu
+                      eventKey={OVERFLOW_KEY}
+                      key={OVERFLOW_KEY}
+                      title={overflowedIndicator}
+                      disabled={allVisible}
+                      internalPopupClose={len === 0}
+                    >
+                      {originOmitItems}
+                    </SubMenu>
+                  </PathContext>
+                </>
+              );
+            }}
+            maxCount={
+              mergedMode.value !== 'horizontal' || props.disabledOverflow
+                ? Overflow.INVALIDATE
+                : Overflow.RESPONSIVE
+            }
+            ssr="full"
+            data-menu-list
+            onVisibleChange={newLastIndex => {
+              lastVisibleIndex.value = newLastIndex;
+            }}
+          />
+          <div style={{ display: 'none' }} aria-hidden>
+            <PathContext>{wrappedChildList}</PathContext>
+          </div>
+        </>
       );
     };
   },

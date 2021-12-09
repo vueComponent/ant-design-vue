@@ -1,8 +1,9 @@
 import type { Key } from '../../../_util/type';
 import type { ComputedRef, InjectionKey } from 'vue';
-import { computed, inject, provide } from 'vue';
+import { computed, inject, provide, defineComponent } from 'vue';
 import type { StoreMenuInfo } from './useMenuContext';
 
+export const OVERFLOW_KEY = '$$__vc-menu-more__key';
 const KeyPathContext: InjectionKey<{
   parentEventKeys: ComputedRef<string[]>;
   parentKeys: ComputedRef<Key[]>;
@@ -23,6 +24,19 @@ const useProvideKeyPath = (eventKey: string, key: Key, menuInfo: StoreMenuInfo) 
   const keys = computed(() => [...parentKeys.value, key]);
   provide(KeyPathContext, { parentEventKeys: eventKeys, parentKeys: keys, parentInfo: menuInfo });
   return keys;
+};
+
+const measure = Symbol('measure');
+export const PathContext = defineComponent({
+  setup(_props, { slots }) {
+    // 不需要响应式
+    provide(measure, true);
+    return () => slots.default?.();
+  },
+});
+
+export const useMeasure = () => {
+  return inject(measure, false);
 };
 
 export { useProvideKeyPath, useInjectKeyPath, KeyPathContext };

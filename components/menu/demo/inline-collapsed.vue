@@ -108,7 +108,7 @@ export default defineComponent({
 
     watch(
       () => state.openKeys,
-      (val, oldVal) => {
+      (_val, oldVal) => {
         state.preOpenKeys = oldVal;
       },
     );

@@ -3,6 +3,7 @@ import type { ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
 import PropTypes from '../../_util/vue-types';
 import { useInjectMenu } from './hooks/useMenuContext';
+import { useMeasure } from './hooks/useKeyPath';
 
 const menuItemGroupProps = {
   title: PropTypes.VNodeChild,
@@ -18,7 +19,9 @@ export default defineComponent({
   setup(props, { slots, attrs }) {
     const { prefixCls } = useInjectMenu();
     const groupPrefixCls = computed(() => `${prefixCls.value}-item-group`);
+    const isMeasure = useMeasure();
     return () => {
+      if (isMeasure) return slots.default?.();
       return (
         <li {...attrs} onClick={e => e.stopPropagation()} class={groupPrefixCls.value}>
           <div

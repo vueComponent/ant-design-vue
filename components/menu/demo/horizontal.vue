@@ -30,7 +30,7 @@ Horizontal top navigation menu.
       </template>
       Navigation Two
     </a-menu-item>
-    <a-sub-menu>
+    <a-sub-menu key="sub1">
       <template #icon>
         <setting-outlined />
       </template>

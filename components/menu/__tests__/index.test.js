@@ -55,7 +55,7 @@ describe('Menu', () => {
       { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
-      expect($$('.ant-menu-submenu-selected').length).toBe(2);
+      expect($$('li.ant-menu-submenu-selected').length).toBe(1);
     });
   });
   it('should accept openKeys in mode horizontal', async () => {

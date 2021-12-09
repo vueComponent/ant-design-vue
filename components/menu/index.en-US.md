@@ -68,11 +68,13 @@ More layouts with navigation: [Layout](/components/layout).
 | -------------- | ----------------------------------- | ------------ | ------------- | ------- |
 | popupClassName | Sub-menu class name                 | string       |               | 1.5.0   |
 | disabled       | whether sub menu is disabled or not | boolean      | false         |         |
-| key            | Unique ID of the sub menu           | string       |               |         |
+| key            | Unique ID of the sub menu, required | string       |               |         |
 | title          | title of the sub menu               | string\|slot |               |         |
 | expandIcon     | Customized expandIcon               | slot         | arrow icon    | ｜      |
 
 The children of Menu.SubMenu must be `MenuItem` or `SubMenu`.
+
+`SubMenu` must pass the key. If it is not passed, the sub-elements under the SubMenu will be rendered in advance, and some scenes cannot be effectively highlighted.
 
 ### Menu.SubMenu Events
 

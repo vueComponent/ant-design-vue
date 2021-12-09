@@ -69,12 +69,14 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
 | -------------- | ------------------------ | ------------ | -------- | ----- |
 | popupClassName | 子菜单样式               | string       |          | 1.5.0 |
 | disabled       | 是否禁用                 | boolean      | false    |       |
-| key            | 唯一标志                 | string       |          |       |
+| key            | 唯一标志, 必填           | string       |          |       |
 | title          | 子菜单项值               | string\|slot |          |       |
 | expandIcon     | 自定义 Menu 展开收起图标 | slot         | 箭头图标 |       |
 | icon           | 菜单图标                 | slot         |          | 2.8.0 |
 
 Menu.SubMenu 的子元素必须是 `MenuItem` 或者 `SubMenu`.
+
+`SubMenu` 必须传递 key，如不传递，该 SubMenu 下子元素将提前渲染，而且部分场景无法进行有效高亮。
 
 ### SubMenu 事件
 

@@ -7,6 +7,7 @@ import { placements, placementsRtl } from './placements';
 import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
 import classNames from '../../_util/classNames';
+import { getTransitionProps } from '../../_util/transition';
 
 const popupPlacementMap = {
   horizontal: 'bottomLeft',
@@ -40,6 +41,9 @@ export default defineComponent({
       triggerSubMenuAction,
       isRootMenu,
       forceSubMenuRender,
+      motion,
+      defaultMotions,
+      mode,
     } = useInjectMenu();
     const forceRender = useInjectForceRender();
     const placement = computed(() =>
@@ -68,6 +72,13 @@ export default defineComponent({
     const onVisibleChange = (visible: boolean) => {
       emit('visibleChange', visible);
     };
+    const style = ref({});
+    const className = ref('');
+    const mergedMotion = computed(() => {
+      const m = motion.value || defaultMotions.value?.[mode.value] || defaultMotions.value?.other;
+      const res = typeof m === 'function' ? m(style, className) : m;
+      return res ? getTransitionProps(res.name, { css: true }) : undefined;
+    });
     return () => {
       const { prefixCls, popupClassName, mode, popupOffset, disabled } = props;
       return (
@@ -93,6 +104,7 @@ export default defineComponent({
           mouseLeaveDelay={subMenuCloseDelay.value}
           onPopupVisibleChange={onVisibleChange}
           forceRender={forceRender || forceSubMenuRender.value}
+          popupAnimation={mergedMotion.value}
           v-slots={{
             popup: () => {
               return slots.popup?.({ visible: innerVisible.value });

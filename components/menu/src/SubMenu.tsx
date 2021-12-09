@@ -15,7 +15,6 @@ import useDirectionStyle from './hooks/useDirectionStyle';
 import PopupTrigger from './PopupTrigger';
 import SubMenuList from './SubMenuList';
 import InlineSubMenuList from './InlineSubMenuList';
-import Transition, { getTransitionProps } from '../../_util/transition';
 import { cloneElement } from '../../_util/vnode';
 import Overflow from '../../vc-overflow';
 import devWarning from '../../vc-util/devWarning';
@@ -93,8 +92,6 @@ export default defineComponent({
       registerMenuInfo,
       unRegisterMenuInfo,
       selectedSubMenuKeys,
-      motion,
-      defaultMotions,
       expandIcon: menuExpandIcon,
     } = useInjectMenu();
 
@@ -230,14 +227,6 @@ export default defineComponent({
 
     const renderMode = computed(() => (mode.value === 'horizontal' ? 'vertical' : mode.value));
 
-    const style = ref({});
-    const className = ref('');
-    const mergedMotion = computed(() => {
-      const m = motion.value || defaultMotions.value?.[mode.value] || defaultMotions.value?.other;
-      const res = typeof m === 'function' ? m(style, className) : m;
-      return res ? getTransitionProps(res.name) : undefined;
-    });
-
     const subMenuTriggerModeRef = computed(() =>
       triggerModeRef.value === 'horizontal' ? 'vertical' : triggerModeRef.value,
     );
@@ -291,13 +280,11 @@ export default defineComponent({
             disabled={mergedDisabled.value}
             onVisibleChange={onPopupVisibleChange}
             v-slots={{
-              popup: ({ visible }) => (
+              popup: () => (
                 <MenuContextProvider mode={subMenuTriggerModeRef.value} isRootMenu={false}>
-                  <Transition {...mergedMotion.value}>
-                    <SubMenuList v-show={visible} id={popupId} ref={popupRef}>
-                      {slots.default?.()}
-                    </SubMenuList>
-                  </Transition>
+                  <SubMenuList id={popupId} ref={popupRef}>
+                    {slots.default?.()}
+                  </SubMenuList>
                 </MenuContextProvider>
               ),
             }}

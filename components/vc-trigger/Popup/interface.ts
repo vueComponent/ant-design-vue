@@ -11,7 +11,7 @@ export const innerProps = {
   forceRender: Boolean,
 
   // Legacy Motion
-  animation: String,
+  animation: [String, Object],
   transitionName: String,
 
   // Measure

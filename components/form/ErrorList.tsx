@@ -44,7 +44,7 @@ export default defineComponent({
     });
     // Memo status in same visible
     watch([visible, status], () => {
-      if (visible.value && status.value) {
+      if (visible.value) {
         innerStatus.value = status.value;
       }
     });

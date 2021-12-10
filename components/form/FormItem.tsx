@@ -245,13 +245,13 @@ export default defineComponent({
       validateRules({ triggerName: 'change' });
     };
     const clearValidate = () => {
-      validateState.value = '';
+      validateState.value = props.validateStatus;
       validateDisabled.value = false;
       errors.value = [];
     };
 
     const resetField = () => {
-      validateState.value = '';
+      validateState.value = props.validateStatus;
       validateDisabled.value = true;
       errors.value = [];
       const model = formContext.model.value || {};

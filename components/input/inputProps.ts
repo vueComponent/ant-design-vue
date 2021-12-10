@@ -32,4 +32,5 @@ export default {
   onChange: PropTypes.func,
   onInput: PropTypes.func,
   'onUpdate:value': PropTypes.func,
+  valueModifiers: Object,
 };

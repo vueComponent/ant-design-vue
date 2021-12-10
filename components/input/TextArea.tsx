@@ -16,6 +16,7 @@ const TextAreaProps = {
   showCount: PropTypes.looseBool,
   onCompositionstart: PropTypes.func,
   onCompositionend: PropTypes.func,
+  valueModifiers: Object,
 };
 
 export default defineComponent({
@@ -127,6 +128,9 @@ export default defineComponent({
         onChange: this.handleChange,
         onKeydown: this.handleKeyDown,
       };
+      if (this.valueModifiers?.lazy) {
+        delete resizeProps.onInput;
+      }
       return (
         <ResizableTextArea
           {...resizeProps}

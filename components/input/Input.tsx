@@ -172,9 +172,9 @@ export default defineComponent({
         handleInputBlur,
         size,
         disabled,
+        valueModifiers = {},
         $attrs,
       } = this;
-
       const inputProps: any = {
         ...otherProps,
         ...$attrs,
@@ -190,6 +190,9 @@ export default defineComponent({
         onFocus: handleInputFocus,
         onBlur: handleInputBlur,
       };
+      if (valueModifiers.lazy) {
+        delete inputProps.onInput;
+      }
       if (!inputProps.autofocus) {
         delete inputProps.autofocus;
       }

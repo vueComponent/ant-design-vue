@@ -23,9 +23,6 @@ export default defineComponent({
   emits: ['click', 'visibleChange', 'update:visible'],
   slots: ['icon', 'leftButton', 'rightButton', 'overlay'],
   setup(props, { slots, attrs, emit }) {
-    const handleClick = (e: MouseEvent) => {
-      emit('click', e);
-    };
     const handleVisibleChange = (val: boolean) => {
       emit('update:visible', val);
       emit('visibleChange', val);
@@ -43,13 +40,15 @@ export default defineComponent({
         trigger,
         align,
         visible,
-        onVisibleChange,
+        onVisibleChange: _onVisibleChange,
         placement = direction.value === 'rtl' ? 'bottomLeft' : 'bottomRight',
         href,
         title,
         icon = slots.icon?.() || <EllipsisOutlined />,
         mouseEnterDelay,
         mouseLeaveDelay,
+        onClick,
+        'onUpdate:visible': _updateVisible,
         ...restProps
       } = { ...props, ...attrs };
 
@@ -69,7 +68,7 @@ export default defineComponent({
         <Button
           type={type}
           disabled={disabled}
-          onClick={handleClick}
+          onClick={onClick}
           htmlType={htmlType}
           href={href}
           title={title}

@@ -3,6 +3,7 @@ import type { PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 
 import buttonTypes from '../button/buttonTypes';
+import type { MouseEventHandler } from '../_util/EventInterface';
 
 type Align = {
   points?: [string, string];
@@ -40,6 +41,12 @@ const dropdownProps = () => ({
   mouseLeaveDelay: PropTypes.number,
   openClassName: PropTypes.string,
   minOverlayWidthMatchTrigger: PropTypes.looseBool,
+  onVisibleChange: {
+    type: Function as PropType<(val: boolean) => void>,
+  },
+  'onUpdate:visible': {
+    type: Function as PropType<(val: boolean) => void>,
+  },
 });
 
 const ButtonTypesProps = buttonTypes();
@@ -53,6 +60,9 @@ const dropdownButtonProps = () => ({
   prefixCls: PropTypes.string,
   icon: PropTypes.any,
   title: PropTypes.string,
+  onClick: {
+    type: Function as PropType<MouseEventHandler>,
+  },
 });
 
 export { dropdownProps, dropdownButtonProps };

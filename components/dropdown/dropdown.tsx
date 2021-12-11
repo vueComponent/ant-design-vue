@@ -135,7 +135,7 @@ const Dropdown = defineComponent({
           onVisibleChange: handleVisibleChange,
           placement: placement.value,
         },
-        ['overlay'],
+        ['overlay', 'onUpdate:visible'],
       );
       return (
         <RcDropdown {...dropdownProps} v-slots={{ overlay: renderOverlay }}>

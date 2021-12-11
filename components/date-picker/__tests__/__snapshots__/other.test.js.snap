@@ -4,7 +4,7 @@ exports[`MonthPicker and WeekPicker render MonthPicker 1`] = `
 <div style="position: absolute; top: 0px; left: 0px; width: 100%;">
   <div>
     <!---->
-    <div class="ant-picker-dropdown" style="opacity: 0; pointer-events: none;">
+    <div class="ant-picker-dropdown" style="pointer-events: none; display: none;">
       <div class="ant-picker-panel-container">
         <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
           <div class="ant-picker-month-panel">
@@ -77,7 +77,7 @@ exports[`MonthPicker and WeekPicker render WeekPicker 1`] = `
 <div style="position: absolute; top: 0px; left: 0px; width: 100%;">
   <div>
     <!---->
-    <div class="ant-picker-dropdown" style="opacity: 0; pointer-events: none;">
+    <div class="ant-picker-dropdown" style="pointer-events: none;">
       <div class="ant-picker-panel-container">
         <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
           <div class="ant-picker-week-panel">

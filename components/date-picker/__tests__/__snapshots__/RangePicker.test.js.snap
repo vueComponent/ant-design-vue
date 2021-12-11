@@ -15,7 +15,7 @@ exports[`RangePicker show month panel according to value 1`] = `
 <div data-v-app="">
   <div>
     <!---->
-    <div class="ant-picker-dropdown ant-picker-dropdown-range" style="opacity: 0; pointer-events: none;">
+    <div class="ant-picker-dropdown ant-picker-dropdown-range" style="pointer-events: none; display: none;">
       <div class="ant-picker-range-wrapper ant-picker-date-range-wrapper" style="min-width: 0px;">
         <div class="ant-picker-range-arrow" style="left: 0px;"></div>
         <div class="ant-picker-panel-container" style="margin-left: 0px;">

@@ -12,6 +12,7 @@ import abstractTooltipProps from './abstractTooltipProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import getPlacements from './placements';
 import firstNotUndefined from '../_util/firstNotUndefined';
+import raf from '../_util/raf';
 export type { AdjustOverflow, PlacementsConfig } from './placements';
 
 export type TooltipPlacement = typeof placementTypes[number];
@@ -93,13 +94,16 @@ export default defineComponent({
         `'defaultVisible' is deprecated, please use 'v-model:visible'`,
       );
     });
+    let rafId: any;
     watch(
       () => props.visible,
       val => {
-        visible.value = !!val;
+        raf.cancel(rafId);
+        rafId = raf(() => {
+          visible.value = !!val;
+        });
       },
     );
-
     const isNoTitle = () => {
       const title = props.title ?? slots.title;
       return !title && title !== 0;

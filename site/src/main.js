@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
 import '../../components/style';
 import 'docsearch.js/dist/cdn/docsearch.css';
 import './index.less';
 import 'nprogress/nprogress.css';
-import { createApp, Transition, TransitionGroup } from 'vue';
+import { createApp, Transition, TransitionGroup, version as vueVersion } from 'vue';
 import i18n from './i18n';
 import NProgress from 'nprogress';
 import router from './router';
@@ -13,7 +14,8 @@ import demoSort from './components/demoSort.jsx';
 import store from './store/index.js';
 import clipboard from './directives/clipboard';
 import App from './App.vue';
-
+console.log('vue version: ', vueVersion);
+console.log('ant design vue version: ', Antd.version);
 const app = createApp(App);
 
 app.use(Antd);

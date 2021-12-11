@@ -1,7 +1,6 @@
 import type { ExtractPropTypes, HTMLAttributes } from 'vue';
-import { createVNode, defineComponent, provide, ref } from 'vue';
+import { computed, createVNode, defineComponent, provide, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
-import classNames from '../_util/classNames';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { SiderHookProviderKey } from './injectionKey';
 
@@ -32,7 +31,7 @@ function generator({ suffixCls, tagName, name }: GeneratorArgument) {
             prefixCls: prefixCls.value,
             tagName,
           };
-          return <BasicComponent {...basicComponentProps}>{slots.default?.()}</BasicComponent>;
+          return <BasicComponent {...basicComponentProps} v-slots={slots}></BasicComponent>;
         };
       },
     });
@@ -43,7 +42,7 @@ function generator({ suffixCls, tagName, name }: GeneratorArgument) {
 const Basic = defineComponent({
   props: basicProps,
   setup(props, { slots }) {
-    return () => createVNode(props.tagName, { class: props.prefixCls }, slots.default?.());
+    return () => createVNode(props.tagName, { class: props.prefixCls }, slots);
   },
 });
 
@@ -62,15 +61,18 @@ const BasicLayout = defineComponent({
     };
 
     provide(SiderHookProviderKey, siderHookProvider);
-
-    return () => {
-      const { prefixCls, hasSider, tagName } = props;
-      const divCls = classNames(prefixCls, {
+    const divCls = computed(() => {
+      const { prefixCls, hasSider } = props;
+      return {
+        [`${prefixCls}`]: true,
         [`${prefixCls}-has-sider`]:
           typeof hasSider === 'boolean' ? hasSider : siders.value.length > 0,
         [`${prefixCls}-rtl`]: direction.value === 'rtl',
-      });
-      return createVNode(tagName, { class: divCls }, slots.default?.());
+      };
+    });
+    return () => {
+      const { tagName } = props;
+      return createVNode(tagName, { class: divCls.value }, slots);
     };
   },
 });

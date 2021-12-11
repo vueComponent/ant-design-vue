@@ -200,7 +200,7 @@ export default defineComponent({
         attrs.class,
       );
       return (
-        <aside {...attrs} class={siderCls} style={divStyle} ref={ref}>
+        <aside {...attrs} class={siderCls} style={divStyle}>
           <div class={`${pre}-children`}>{slots.default?.()}</div>
           {collapsible || (below.value && zeroWidthTrigger) ? triggerDom : null}
         </aside>

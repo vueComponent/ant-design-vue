@@ -39,9 +39,25 @@ export default defineComponent({
         measureStretchStyle(props.getRootDomNode());
       }
     };
+    const visible = ref(false);
+    let timeoutId: any;
+    watch(
+      () => props.visible,
+      val => {
+        clearTimeout(timeoutId);
+        if (val) {
+          timeoutId = setTimeout(() => {
+            visible.value = props.visible;
+          });
+        } else {
+          visible.value = false;
+        }
+      },
+      { immediate: true },
+    );
 
     // ======================== Status ========================
-    const [status, goNextStatus] = useVisibleStatus(toRef(props, 'visible'), doMeasure);
+    const [status, goNextStatus] = useVisibleStatus(visible, doMeasure);
 
     // ======================== Aligns ========================
     const prepareResolveRef = ref<(value?: unknown) => void>();
@@ -117,7 +133,6 @@ export default defineComponent({
     return () => {
       const {
         zIndex,
-        visible,
         align,
         prefixCls,
         destroyPopupOnHide,
@@ -131,7 +146,8 @@ export default defineComponent({
       const mergedStyle: CSSProperties = {
         ...stretchStyle.value,
         zIndex,
-        opacity: statusValue === 'motion' || statusValue === 'stable' || !visible ? undefined : 0,
+        opacity:
+          statusValue === 'motion' || statusValue === 'stable' || !visible.value ? undefined : 0,
         pointerEvents: statusValue === 'stable' ? undefined : 'none',
         ...(attrs.style as object),
       };
@@ -149,7 +165,8 @@ export default defineComponent({
         childNode = <div class={`${prefixCls}-content`}>{childNode}</div>;
       }
       const mergedClassName = classNames(prefixCls, attrs.class, alignedClassName.value);
-      const transitionProps = getTransitionProps(motion.value.name, motion.value);
+      const hasAnimate = visible.value || !props.visible;
+      const transitionProps = hasAnimate ? getTransitionProps(motion.value.name, motion.value) : {};
       return (
         <Transition
           ref={elementRef}
@@ -157,9 +174,9 @@ export default defineComponent({
           onBeforeEnter={onShowPrepare}
           v-slots={{
             default: () => {
-              return !destroyPopupOnHide || visible ? (
+              return !destroyPopupOnHide || props.visible ? (
                 <Align
-                  v-show={visible}
+                  v-show={visible.value}
                   target={getAlignTarget()}
                   key="popup"
                   ref={alignRef}

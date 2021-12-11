@@ -62,12 +62,12 @@ export default defineComponent({
   },
 
   mounted() {
-    this.scrollbarRef.current.addEventListener(
+    this.scrollbarRef.current?.addEventListener(
       'touchstart',
       this.onScrollbarTouchStart,
       supportsPassive ? ({ passive: false } as EventListenerOptions) : false,
     );
-    this.thumbRef.current.addEventListener(
+    this.thumbRef.current?.addEventListener(
       'touchstart',
       this.onMouseDown,
       supportsPassive ? ({ passive: false } as EventListenerOptions) : false,

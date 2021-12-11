@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { nextTick, onBeforeUnmount, ref, watch, onMounted } from 'vue';
+import { onBeforeUnmount, ref, watch, onMounted } from 'vue';
 import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
 
@@ -76,7 +76,7 @@ export default (
         }
 
         if (status.value) {
-          nextTick(() => {
+          rafRef.value = raf(async () => {
             const index = StatusQueue.indexOf(status.value);
             const nextStatus = StatusQueue[index + 1];
             if (nextStatus && index !== -1) {

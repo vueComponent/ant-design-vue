@@ -26,7 +26,7 @@ export const getTransitionProps = (transitionName: string, opt: TransitionProps 
         // appearActiveClass: `antdv-base-transtion`,
         // appearToClass: `${transitionName}-appear ${transitionName}-appear-active`,
         enterFromClass: `${transitionName}-enter ${transitionName}-enter-prepare`,
-        // enterActiveClass: `${transitionName}-enter ${transitionName}-enter-active`,
+        enterActiveClass: `${transitionName}-enter ${transitionName}-enter-prepare`,
         enterToClass: `${transitionName}-enter ${transitionName}-enter-active`,
         leaveFromClass: ` ${transitionName}-leave`,
         leaveActiveClass: `${transitionName}-leave ${transitionName}-leave-active`,

@@ -111,6 +111,8 @@ export default defineComponent({
       return responsiveHandlerRef.value!(mql);
     }
     const uniqueId = generateId('ant-sider-');
+    siderHook && siderHook.addSider(uniqueId);
+
     onMounted(() => {
       if (typeof window !== 'undefined') {
         const { matchMedia } = window;
@@ -124,7 +126,6 @@ export default defineComponent({
           responsiveHandler(mql);
         }
       }
-      siderHook && siderHook.addSider(uniqueId);
     });
     onBeforeUnmount(() => {
       try {

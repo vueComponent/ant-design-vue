@@ -10,6 +10,25 @@
 
 ---
 
+## 3.0.0-alpha.15
+
+`2021-12-12`
+
+- 🌟 优化 Layout 性能
+- 🌟 Menu 支持懒加载(SubMenu 必须填写 key)，提升性能 [#4812](https://github.com/vueComponent/ant-design-vue/issues/4812)
+- 🌟 Input、Textarea 支持 lazy 指令修饰符 [#4951](https://github.com/vueComponent/ant-design-vue/issues/4951)
+- 🐞 Select placeholder 支持 slot [#4995](https://github.com/vueComponent/ant-design-vue/issues/4995)
+- 🐞 修复 Radio cursor 样式 [#4997](https://github.com/vueComponent/ant-design-vue/issues/4997)
+- 🐞 修复 Statistic.Countdown 属性支持插槽 [#4996](https://github.com/vueComponent/ant-design-vue/issues/4996)
+- 🐞 修复 FormItem name 属性类型错误 [#4998](https://github.com/vueComponent/ant-design-vue/issues/4998)
+- 🐞 修复 Menu 隐藏动画丢失问题
+- 🐞 修复 FormItem explain style 未响应问题 [#5004](https://github.com/vueComponent/ant-design-vue/issues/5004)
+- 🐞 修复 Slider tooltip 特殊条件不显示问题
+- 🐞 修复 Dropdown 特殊条件触发两次 click 事件问题 [#5002](https://github.com/vueComponent/ant-design-vue/issues/5002)
+- 🐞 修复部分组件在 SSR 下报错问题，支持 Nuxt
+- 🐞 修复下拉框组件，在边缘处位置跳动问题 [#5008](https://github.com/vueComponent/ant-design-vue/issues/5008)
+- 🐞 修复 Table 类型错误 [#5009](https://github.com/vueComponent/ant-design-vue/issues/5009)
+
 ## 3.0.0-alpha.14
 
 `2021-12-05`

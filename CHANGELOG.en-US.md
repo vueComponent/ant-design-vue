@@ -10,6 +10,25 @@
 
 ---
 
+## 3.0.0-alpha.15
+
+`2021-12-12`
+
+- 🌟 Optimize Layout performance
+- 🌟 Menu supports lazy loading (SubMenu must fill in the key) to improve performance [#4812](https://github.com/vueComponent/ant-design-vue/issues/4812)
+- 🌟 Input and Textarea support lazy command modifier [#4951](https://github.com/vueComponent/ant-design-vue/issues/4951)
+- 🐞 Select placeholder supports slot [#4995](https://github.com/vueComponent/ant-design-vue/issues/4995)
+- 🐞 Fix Radio cursor style [#4997](https://github.com/vueComponent/ant-design-vue/issues/4997)
+- 🐞 Fix Statistic.Countdown property support slot [#4996](https://github.com/vueComponent/ant-design-vue/issues/4996)
+- 🐞 Fix FormItem name attribute type error [#4998](https://github.com/vueComponent/ant-design-vue/issues/4998)
+- 🐞 Fix Menu hidden animation loss problem
+- 🐞 Fix FormItem explain style not responding issue [#5004](https://github.com/vueComponent/ant-design-vue/issues/5004)
+- 🐞 Fix the problem that Slider tooltip does not display under special conditions
+- 🐞 Fix the problem that Dropdown special conditions trigger two click events [#5002](https://github.com/vueComponent/ant-design-vue/issues/5002)
+- 🐞 Fix some components reporting errors under SSR, support Nuxt
+- 🐞 Fix the problem that the drop-down box component jumps at the edge [#5008](https://github.com/vueComponent/ant-design-vue/issues/5008)
+- 🐞 Fix Table type error [#5009](https://github.com/vueComponent/ant-design-vue/issues/5009)
+
 ## 3.0.0-alpha.14
 
 `2021-12-05`

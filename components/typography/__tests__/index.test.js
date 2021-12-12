@@ -75,7 +75,7 @@ describe('Typography', () => {
         expect(onEllipsis).toHaveBeenCalledWith(true);
         onEllipsis.mockReset();
         wrapper.setProps({ ellipsis: { rows: 2, onEllipsis } });
-        await sleep(100);
+        await sleep(300);
         expect(wrapper.text()).toEqual('Bamboo is Little Light Bamboo is Litt...');
         expect(onEllipsis).not.toHaveBeenCalled();
 

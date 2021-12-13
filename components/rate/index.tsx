@@ -39,7 +39,6 @@ const Rate = defineComponent({
     count: 5,
     allowHalf: false,
     allowClear: true,
-    prefixCls: 'ant-rate',
     tabindex: 0,
     direction: 'ltr',
   }),

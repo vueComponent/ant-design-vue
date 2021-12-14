@@ -1,187 +1,145 @@
-import { defineComponent, inject } from 'vue';
+import type { PropType } from 'vue';
+import { computed, ref, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
-import isMobile from '../_util/isMobile';
 import Input from './Input';
-import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 import inputProps from './inputProps';
 import Button from '../button';
 import { cloneElement } from '../_util/vnode';
 import PropTypes from '../_util/vue-types';
-import { getOptionProps, getComponent } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
 import isPlainObject from 'lodash-es/isPlainObject';
+import type { ChangeEvent, MouseEventHandler } from '../_util/EventInterface';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import omit from '../_util/omit';
+import isMobile from '../_util/isMobile';
 
 export default defineComponent({
   name: 'AInputSearch',
   inheritAttrs: false,
   props: {
     ...inputProps,
+    inputPrefixCls: PropTypes.string,
     // 不能设置默认值 https://github.com/vueComponent/ant-design-vue/issues/1916
-    enterButton: PropTypes.VNodeChild,
-    onSearch: PropTypes.func,
+    enterButton: PropTypes.any,
+    onSearch: {
+      type: Function as PropType<
+        (value: string, event?: ChangeEvent | MouseEvent | KeyboardEvent) => void
+      >,
+    },
   },
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-      input: null,
+  setup(props, { slots, attrs, expose, emit }) {
+    const inputRef = ref();
+    const focus = () => {
+      inputRef.value?.focus();
     };
-  },
-  methods: {
-    saveInput(node: HTMLInputElement) {
-      this.input = node;
-    },
-    handleChange(e: Event) {
-      this.$emit('update:value', (e.target as HTMLInputElement).value);
+    const blur = () => {
+      inputRef.value?.blur();
+    };
+    expose({
+      focus,
+      blur,
+    });
+
+    const onChange = (e: ChangeEvent) => {
+      emit('update:value', (e.target as HTMLInputElement).value);
       if (e && e.target && e.type === 'click') {
-        this.$emit('search', (e.target as HTMLInputElement).value, e);
+        emit('search', e.target.value, e);
       }
-      this.$emit('change', e);
-    },
-    handleSearch(e: Event) {
-      if (this.loading || this.disabled) {
-        return;
+      emit('change', e);
+    };
+
+    const onMousedown: MouseEventHandler = e => {
+      if (document.activeElement === inputRef.value?.inputRef.value) {
+        e.preventDefault();
       }
-      this.$emit('search', this.input.stateValue, e);
+    };
+
+    const onSearch = (e: MouseEvent | KeyboardEvent) => {
+      emit('search', inputRef.value?.stateValue, e);
       if (!isMobile.tablet) {
-        this.input.focus();
+        inputRef.value.focus();
       }
-    },
-    focus() {
-      this.input.focus();
-    },
+    };
 
-    blur() {
-      this.input.blur();
-    },
-    renderLoading(prefixCls: string) {
-      const { size } = this.$props;
-      let enterButton = getComponent(this, 'enterButton');
-      // 兼容 <a-input-search enterButton />， 因enterButton类型为 any，此类写法 enterButton 为空字符串
+    const { prefixCls, getPrefixCls, direction, size } = useConfigInject('input-search', props);
+    const inputPrefixCls = computed(() => getPrefixCls('input', props.inputPrefixCls));
+    return () => {
+      const {
+        disabled,
+        loading,
+        addonAfter = slots.addonAfter?.(),
+        suffix = slots.suffix?.(),
+        ...restProps
+      } = props;
+      let { enterButton = slots.enterButton?.() } = props;
       enterButton = enterButton || enterButton === '';
-      if (enterButton) {
-        return (
-          <Button class={`${prefixCls}-button`} type="primary" size={size} key="enterButton">
-            <LoadingOutlined />
-          </Button>
-        );
-      }
-      return <LoadingOutlined class={`${prefixCls}-icon`} key="loadingIcon" />;
-    },
-    renderSuffix(prefixCls: string) {
-      const { loading } = this;
-      const suffix = getComponent(this, 'suffix');
-      let enterButton = getComponent(this, 'enterButton');
-      // 兼容 <a-input-search enterButton />， 因enterButton类型为 any，此类写法 enterButton 为空字符串
-      enterButton = enterButton || enterButton === '';
-      if (loading && !enterButton) {
-        return [suffix, this.renderLoading(prefixCls)];
-      }
+      const searchIcon = typeof enterButton === 'boolean' ? <SearchOutlined /> : null;
+      const btnClassName = `${prefixCls.value}-button`;
 
-      if (enterButton) return suffix;
-
-      const icon = (
-        <SearchOutlined class={`${prefixCls}-icon`} key="searchIcon" onClick={this.handleSearch} />
-      );
-
-      if (suffix) {
-        // let cloneSuffix = suffix;
-        // if (isValidElement(cloneSuffix) && !cloneSuffix.key) {
-        //   cloneSuffix = cloneElement(cloneSuffix, {
-        //     key: 'originSuffix',
-        //   });
-        // }
-        return [suffix, icon];
-      }
-
-      return icon;
-    },
-    renderAddonAfter(prefixCls: string) {
-      const { size, disabled, loading } = this;
-      const btnClassName = `${prefixCls}-button`;
-      let enterButton = getComponent(this, 'enterButton');
-      enterButton = enterButton || enterButton === '';
-      const addonAfter = getComponent(this, 'addonAfter');
-      if (loading && enterButton) {
-        return [this.renderLoading(prefixCls), addonAfter];
-      }
-      if (!enterButton) return addonAfter;
       const enterButtonAsElement = Array.isArray(enterButton) ? enterButton[0] : enterButton;
       let button: any;
       const isAntdButton =
         enterButtonAsElement.type &&
         isPlainObject(enterButtonAsElement.type) &&
         enterButtonAsElement.type.__ANT_BUTTON;
-      if (enterButtonAsElement.tagName === 'button' || isAntdButton) {
+
+      if (isAntdButton || enterButtonAsElement.tagName === 'button') {
         button = cloneElement(enterButtonAsElement, {
+          onMousedown,
+          onClick: onSearch,
           key: 'enterButton',
-          class: isAntdButton ? btnClassName : '',
-          ...(isAntdButton ? { size } : {}),
-          onClick: this.handleSearch,
+          ...(isAntdButton
+            ? {
+                class: btnClassName,
+                size: size.value,
+              }
+            : {}),
         });
       } else {
         button = (
           <Button
             class={btnClassName}
-            type="primary"
-            size={size}
+            type={enterButton ? 'primary' : undefined}
+            size={size.value}
             disabled={disabled}
             key="enterButton"
-            onClick={this.handleSearch}
+            onMousedown={onMousedown}
+            onClick={onSearch}
+            loading={loading}
+            icon={searchIcon}
           >
-            {enterButton === true || enterButton === '' ? <SearchOutlined /> : enterButton}
+            {enterButton}
           </Button>
         );
       }
       if (addonAfter) {
-        return [button, addonAfter];
+        button = [button, addonAfter];
       }
-
-      return button;
-    },
-  },
-  render() {
-    const {
-      prefixCls: customizePrefixCls,
-      inputPrefixCls: customizeInputPrefixCls,
-      size,
-      class: className,
-      ...restProps
-    } = { ...getOptionProps(this), ...this.$attrs } as any;
-    delete restProps.onSearch;
-    delete restProps.loading;
-    delete restProps.enterButton;
-    delete restProps.addonBefore;
-    delete restProps['onUpdate:value'];
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('input-search', customizePrefixCls);
-    const inputPrefixCls = getPrefixCls('input', customizeInputPrefixCls);
-
-    let enterButton = getComponent(this, 'enterButton');
-    const addonBefore = getComponent(this, 'addonBefore');
-    enterButton = enterButton || enterButton === '';
-    let inputClassName: string;
-    if (enterButton) {
-      inputClassName = classNames(prefixCls, className, {
-        [`${prefixCls}-enter-button`]: !!enterButton,
-        [`${prefixCls}-${size}`]: !!size,
-      });
-    } else {
-      inputClassName = classNames(prefixCls, className);
-    }
-
-    const inputProps = {
-      ...restProps,
-      prefixCls: inputPrefixCls,
-      size,
-      suffix: this.renderSuffix(prefixCls),
-      prefix: getComponent(this, 'prefix'),
-      addonAfter: this.renderAddonAfter(prefixCls),
-      addonBefore,
-      class: inputClassName,
-      onPressEnter: this.handleSearch,
-      onChange: this.handleChange,
+      const cls = classNames(
+        prefixCls.value,
+        {
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+          [`${prefixCls.value}-${size.value}`]: !!size.value,
+          [`${prefixCls.value}-with-button`]: !!enterButton,
+        },
+        attrs.class,
+      );
+      return (
+        <Input
+          ref={inputRef}
+          {...omit(restProps, ['onUpdate:value', 'onSearch'])}
+          {...attrs}
+          onPressEnter={onSearch}
+          size={size.value}
+          prefixCls={inputPrefixCls.value}
+          addonAfter={button}
+          suffix={suffix}
+          onChange={onChange}
+          class={cls}
+          disabled={disabled}
+          v-slots={slots}
+        />
+      );
     };
-    return <Input {...inputProps} ref={this.saveInput} />;
   },
 });

@@ -35,7 +35,7 @@ export default defineComponent({
   __ANT_BUTTON: true,
   props,
   slots: ['icon'],
-  emits: ['click'],
+  emits: ['click', 'mousedown'],
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, autoInsertSpaceInButton, direction } = useConfigInject('btn', props);
 

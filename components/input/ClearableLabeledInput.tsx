@@ -3,22 +3,23 @@ import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import { getInputClassName } from './Input';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
-import { getComponent } from '../_util/props-util';
-import type { VNode } from 'vue';
-import { defineComponent } from 'vue';
+import type { PropType, VNode } from 'vue';
+import { ref, defineComponent } from 'vue';
 import { tuple } from '../_util/type';
+import type { Direction, SizeType } from '../config-provider';
+import type { MouseEventHandler } from '../_util/EventInterface';
 
-export function hasPrefixSuffix(instance: any) {
-  return !!(
-    getComponent(instance, 'prefix') ||
-    getComponent(instance, 'suffix') ||
-    instance.$props.allowClear
-  );
+export function hasPrefixSuffix(propsAndSlots: any) {
+  return !!(propsAndSlots.prefix || propsAndSlots.suffix || propsAndSlots.allowClear);
+}
+
+function hasAddon(propsAndSlots: any) {
+  return !!(propsAndSlots.addonBefore || propsAndSlots.addonAfter);
 }
 
 const ClearableInputType = ['text', 'input'];
 
-const ClearableLabeledInput = defineComponent({
+export default defineComponent({
   name: 'ClearableLabeledInput',
   inheritAttrs: false,
   props: {
@@ -27,93 +28,125 @@ const ClearableLabeledInput = defineComponent({
     value: PropTypes.any,
     defaultValue: PropTypes.any,
     allowClear: PropTypes.looseBool,
-    element: PropTypes.VNodeChild,
+    element: PropTypes.any,
     handleReset: PropTypes.func,
     disabled: PropTypes.looseBool,
-    size: PropTypes.oneOf(tuple('small', 'large', 'default')),
-    suffix: PropTypes.VNodeChild,
-    prefix: PropTypes.VNodeChild,
-    addonBefore: PropTypes.VNodeChild,
-    addonAfter: PropTypes.VNodeChild,
+    direction: { type: String as PropType<Direction> },
+    size: { type: String as PropType<SizeType> },
+    suffix: PropTypes.any,
+    prefix: PropTypes.any,
+    addonBefore: PropTypes.any,
+    addonAfter: PropTypes.any,
     readonly: PropTypes.looseBool,
-    isFocused: PropTypes.looseBool,
+    focused: PropTypes.looseBool,
+    bordered: PropTypes.looseBool,
+    triggerFocus: { type: Function as PropType<() => void> },
   },
-  methods: {
-    renderClearIcon(prefixCls: string) {
-      const { allowClear, value, disabled, readonly, inputType, handleReset } = this.$props;
+  setup(props, { slots, attrs }) {
+    const containerRef = ref();
+    const onInputMouseUp: MouseEventHandler = e => {
+      if (containerRef.value?.contains(e.target as Element)) {
+        const { triggerFocus } = props;
+        triggerFocus?.();
+      }
+    };
+    const renderClearIcon = (prefixCls: string) => {
+      const { allowClear, value, disabled, readonly, handleReset } = props;
       if (!allowClear) {
         return null;
       }
-      const showClearIcon =
-        !disabled && !readonly && value !== undefined && value !== null && value !== '';
-      const className =
-        inputType === ClearableInputType[0]
-          ? `${prefixCls}-textarea-clear-icon`
-          : `${prefixCls}-clear-icon`;
+      const needClear = !disabled && !readonly && value;
+      const className = `${prefixCls}-clear-icon`;
       return (
         <CloseCircleFilled
           onClick={handleReset}
-          class={classNames(className, {
-            [`${className}-hidden`]: !showClearIcon,
-          })}
+          class={classNames(
+            {
+              [`${className}-hidden`]: !needClear,
+            },
+            className,
+          )}
           role="button"
         />
       );
-    },
+    };
 
-    renderSuffix(prefixCls: string) {
-      const { suffix, allowClear } = this.$props;
+    const renderSuffix = (prefixCls: string) => {
+      const { suffix = slots.suffix?.(), allowClear } = props;
       if (suffix || allowClear) {
         return (
           <span class={`${prefixCls}-suffix`}>
-            {this.renderClearIcon(prefixCls)}
+            {renderClearIcon(prefixCls)}
             {suffix}
           </span>
         );
       }
       return null;
-    },
+    };
 
-    renderLabeledIcon(prefixCls: string, element: VNode): VNode {
-      const props = this.$props;
-      const { style } = this.$attrs;
-      const suffix = this.renderSuffix(prefixCls);
-      if (!hasPrefixSuffix(this)) {
+    const renderLabeledIcon = (prefixCls: string, element: VNode) => {
+      const {
+        focused,
+        value,
+        prefix = slots.prefix?.(),
+        size,
+        suffix = slots.suffix?.(),
+        disabled,
+        allowClear,
+        direction,
+        readonly,
+        bordered,
+        addonAfter = slots.addonAfter,
+        addonBefore = slots.addonBefore,
+      } = props;
+      const suffixNode = renderSuffix(prefixCls);
+      if (!hasPrefixSuffix({ prefix, suffix, allowClear })) {
         return cloneElement(element, {
-          value: props.value,
+          value,
         });
       }
 
-      const prefix = props.prefix ? (
-        <span class={`${prefixCls}-prefix`}>{props.prefix}</span>
-      ) : null;
+      const prefixNode = prefix ? <span class={`${prefixCls}-prefix`}>{prefix}</span> : null;
 
-      const affixWrapperCls = classNames(this.$attrs?.class, `${prefixCls}-affix-wrapper`, {
-        [`${prefixCls}-affix-wrapper-focused`]: props.isFocused,
-        [`${prefixCls}-affix-wrapper-disabled`]: props.disabled,
-        [`${prefixCls}-affix-wrapper-sm`]: props.size === 'small',
-        [`${prefixCls}-affix-wrapper-lg`]: props.size === 'large',
-        [`${prefixCls}-affix-wrapper-input-with-clear-btn`]:
-          props.suffix && props.allowClear && this.$props.value,
+      const affixWrapperCls = classNames(`${prefixCls}-affix-wrapper`, {
+        [`${prefixCls}-affix-wrapper-focused`]: focused,
+        [`${prefixCls}-affix-wrapper-disabled`]: disabled,
+        [`${prefixCls}-affix-wrapper-sm`]: size === 'small',
+        [`${prefixCls}-affix-wrapper-lg`]: size === 'large',
+        [`${prefixCls}-affix-wrapper-input-with-clear-btn`]: suffix && allowClear && value,
+        [`${prefixCls}-affix-wrapper-rtl`]: direction === 'rtl',
+        [`${prefixCls}-affix-wrapper-readonly`]: readonly,
+        [`${prefixCls}-affix-wrapper-borderless`]: !bordered,
+        // className will go to addon wrapper
+        [`${attrs.class}`]: !hasAddon({ addonAfter, addonBefore }) && attrs.class,
       });
       return (
-        <span class={affixWrapperCls} style={style}>
-          {prefix}
+        <span
+          ref={containerRef}
+          class={affixWrapperCls}
+          style={attrs.style}
+          onMouseup={onInputMouseUp}
+        >
+          {prefixNode}
           {cloneElement(element, {
             style: null,
-            value: props.value,
-            class: getInputClassName(prefixCls, props.size, props.disabled),
+            value,
+            class: getInputClassName(prefixCls, bordered, size, disabled),
           })}
-          {suffix}
+          {suffixNode}
         </span>
-      ) as VNode;
-    },
+      );
+    };
 
-    renderInputWithLabel(prefixCls: string, labeledElement: VNode) {
-      const { addonBefore, addonAfter, size } = this.$props;
-      const { style, class: className } = this.$attrs;
+    const renderInputWithLabel = (prefixCls: string, labeledElement: VNode) => {
+      const {
+        addonBefore = slots.addonBefore?.(),
+        addonAfter = slots.addonAfter?.(),
+        size,
+        direction,
+      } = props;
       // Not wrap when there is not addons
-      if (!addonBefore && !addonAfter) {
+      if (!hasAddon({ addonBefore, addonAfter })) {
         return labeledElement;
       }
 
@@ -124,19 +157,24 @@ const ClearableLabeledInput = defineComponent({
       ) : null;
       const addonAfterNode = addonAfter ? <span class={addonClassName}>{addonAfter}</span> : null;
 
-      const mergedWrapperClassName = classNames(`${prefixCls}-wrapper`, {
-        [wrapperClassName]: addonBefore || addonAfter,
+      const mergedWrapperClassName = classNames(`${prefixCls}-wrapper`, wrapperClassName, {
+        [`${wrapperClassName}-rtl`]: direction === 'rtl',
       });
 
-      const mergedGroupClassName = classNames(className, `${prefixCls}-group-wrapper`, {
-        [`${prefixCls}-group-wrapper-sm`]: size === 'small',
-        [`${prefixCls}-group-wrapper-lg`]: size === 'large',
-      });
+      const mergedGroupClassName = classNames(
+        `${prefixCls}-group-wrapper`,
+        {
+          [`${prefixCls}-group-wrapper-sm`]: size === 'small',
+          [`${prefixCls}-group-wrapper-lg`]: size === 'large',
+          [`${prefixCls}-group-wrapper-rtl`]: direction === 'rtl',
+        },
+        attrs.class,
+      );
 
       // Need another wrapper for changing display:table to display:inline-block
       // and put style prop in wrapper
       return (
-        <span class={mergedGroupClassName} style={style}>
+        <span class={mergedGroupClassName} style={attrs.style}>
           <span class={mergedWrapperClassName}>
             {addonBeforeNode}
             {cloneElement(labeledElement, { style: null })}
@@ -144,41 +182,49 @@ const ClearableLabeledInput = defineComponent({
           </span>
         </span>
       );
-    },
+    };
 
-    renderTextAreaWithClearIcon(prefixCls: string, element: VNode) {
-      const { value, allowClear } = this.$props;
-      const { style, class: className } = this.$attrs;
+    const renderTextAreaWithClearIcon = (prefixCls: string, element: VNode) => {
+      const {
+        value,
+        allowClear,
+        direction,
+        bordered,
+        addonAfter = slots.addonAfter,
+        addonBefore = slots.addonBefore,
+      } = props;
       if (!allowClear) {
-        return cloneElement(element, { value });
+        return cloneElement(element, {
+          value,
+        });
       }
       const affixWrapperCls = classNames(
-        className,
         `${prefixCls}-affix-wrapper`,
         `${prefixCls}-affix-wrapper-textarea-with-clear-btn`,
+        {
+          [`${prefixCls}-affix-wrapper-rtl`]: direction === 'rtl',
+          [`${prefixCls}-affix-wrapper-borderless`]: !bordered,
+          // className will go to addon wrapper
+          [`${attrs.class}`]: !hasAddon({ addonAfter, addonBefore }) && attrs.class,
+        },
       );
       return (
-        <span class={affixWrapperCls} style={style}>
+        <span class={affixWrapperCls} style={attrs.style}>
           {cloneElement(element, {
             style: null,
             value,
           })}
-          {this.renderClearIcon(prefixCls)}
+          {renderClearIcon(prefixCls)}
         </span>
       );
-    },
+    };
 
-    renderClearableLabeledInput() {
-      const { prefixCls, inputType, element } = this.$props as any;
+    return () => {
+      const { prefixCls, inputType, element = slots.element?.() } = props;
       if (inputType === ClearableInputType[0]) {
-        return this.renderTextAreaWithClearIcon(prefixCls, element);
+        return renderTextAreaWithClearIcon(prefixCls, element);
       }
-      return this.renderInputWithLabel(prefixCls, this.renderLabeledIcon(prefixCls, element));
-    },
-  },
-  render() {
-    return this.renderClearableLabeledInput();
+      return renderInputWithLabel(prefixCls, renderLabeledIcon(prefixCls, element));
+    };
   },
 });
-
-export default ClearableLabeledInput;

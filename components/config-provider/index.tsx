@@ -160,6 +160,9 @@ export const configProviderProps = {
   csp: {
     type: Object as PropType<CSPConfig>,
   },
+  input: {
+    type: Object as PropType<{ autocomplete: string }>,
+  },
   autoInsertSpaceInButton: PropTypes.looseBool,
   locale: {
     type: Object as PropType<Locale>,

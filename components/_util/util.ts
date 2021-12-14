@@ -1,6 +1,6 @@
 import type { VueNode } from './type';
 export const isFunction = val => typeof val === 'function';
-
+export const controlDefaultValue = Symbol('controlDefaultValue') as any;
 export const isArray = Array.isArray;
 export const isString = val => typeof val === 'string';
 export const isSymbol = val => typeof val === 'symbol';

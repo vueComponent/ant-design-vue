@@ -24,6 +24,8 @@ export default (
   virtual: ComputedRef<boolean>;
   dropdownMatchSelectWidth: ComputedRef<boolean | number>;
   getPopupContainer: ComputedRef<ConfigProviderProps['getPopupContainer']>;
+  getPrefixCls: ConfigProviderProps['getPrefixCls'];
+  autocomplete: ComputedRef<string>;
 } => {
   const configProvider = inject<UnwrapRef<ConfigProviderProps>>(
     'configProvider',
@@ -48,6 +50,7 @@ export default (
     () => props.dropdownMatchSelectWidth ?? configProvider.dropdownMatchSelectWidth,
   );
   const size = computed(() => props.size || configProvider.componentSize);
+  const autocomplete = computed(() => props.autocomplete || configProvider.input?.autocomplete);
   return {
     configProvider,
     prefixCls,
@@ -63,5 +66,7 @@ export default (
     virtual,
     dropdownMatchSelectWidth,
     rootPrefixCls,
+    getPrefixCls: configProvider.getPrefixCls,
+    autocomplete,
   };
 };

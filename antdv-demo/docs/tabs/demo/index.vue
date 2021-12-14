@@ -4,6 +4,7 @@ import CardTop from './card-top';
 import Card from './card';
 import CustomAddTrigger from './custom-add-trigger';
 import Disabled from './disabled';
+import Centered from './centered';
 import EditableCard from './editable-card';
 import Extra from './extra';
 import Icon from './icon';
@@ -56,6 +57,7 @@ export default {
         <demo-sort cols={1}>
           <Basic />
           <Disabled />
+          <Centered />
           <Icon />
           <Slide />
           <Extra />

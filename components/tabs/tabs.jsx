@@ -25,6 +25,7 @@ export default {
     prefixCls: PropTypes.string,
     activeKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     defaultActiveKey: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    centered: PropTypes.bool.def(false),
     hideAdd: PropTypes.bool.def(false),
     tabBarStyle: PropTypes.object,
     tabBarExtraContent: PropTypes.any,
@@ -78,6 +79,7 @@ export default {
       type = 'line',
       tabPosition,
       animated = true,
+      centered,
       hideAdd,
       renderTabBar,
     } = props;
@@ -93,6 +95,7 @@ export default {
       tabPaneAnimated = 'animated' in props ? tabPaneAnimated : false;
     }
     const cls = {
+      [`${prefixCls}-centered`]: centered,
       [`${prefixCls}-vertical`]: tabPosition === 'left' || tabPosition === 'right',
       [`${prefixCls}-${size}`]: !!size,
       [`${prefixCls}-card`]: type.indexOf('card') >= 0,

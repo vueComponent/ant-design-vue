@@ -1,7 +1,7 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import type { SizeType } from '../config-provider';
-import { controlDefaultValue } from '../_util/util';
+import omit from '../_util/omit';
 export const inputDefaultValue = Symbol() as unknown as string;
 const inputProps = {
   id: PropTypes.string,
@@ -10,7 +10,7 @@ const inputProps = {
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   value: {
     type: [String, Number, Symbol] as PropType<string | number>,
-    default: controlDefaultValue,
+    default: undefined,
   },
   placeholder: {
     type: [String, Number] as PropType<string | number>,
@@ -57,6 +57,7 @@ const inputProps = {
   maxlength: PropTypes.number,
   loading: PropTypes.looseBool,
   bordered: PropTypes.looseBool,
+  htmlSize: Number,
   onPressEnter: PropTypes.func,
   onKeydown: PropTypes.func,
   onKeyup: PropTypes.func,
@@ -69,3 +70,25 @@ const inputProps = {
 };
 export default inputProps;
 export type InputProps = Partial<ExtractPropTypes<typeof inputProps>>;
+
+export interface AutoSizeType {
+  minRows?: number;
+  maxRows?: number;
+}
+interface ShowCountProps {
+  formatter: (args: { count: number; maxlength?: number }) => string;
+}
+const textAreaProps = {
+  ...omit(inputProps, ['prefix', 'addonBefore', 'addonAfter', 'suffix']),
+  autosize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
+  autoSize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
+  showCount: { type: [Boolean, Object] as PropType<ShowCountProps> },
+  onResize: { type: Function as PropType<(size: { width: number; height: number }) => void> },
+  onCompositionstart: PropTypes.func,
+  onCompositionend: PropTypes.func,
+  valueModifiers: Object,
+};
+
+export { textAreaProps };
+
+export type TextAreaProps = Partial<ExtractPropTypes<typeof textAreaProps>>;

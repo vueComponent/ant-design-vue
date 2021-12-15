@@ -1,184 +1,219 @@
-import { defineComponent, inject, nextTick } from 'vue';
+import {
+  computed,
+  defineComponent,
+  getCurrentInstance,
+  nextTick,
+  onMounted,
+  ref,
+  watch,
+  watchEffect,
+} from 'vue';
 import ClearableLabeledInput from './ClearableLabeledInput';
 import ResizableTextArea from './ResizableTextArea';
-import inputProps from './inputProps';
-import { hasProp, getOptionProps } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
-import { fixControlledValue, resolveOnChange } from './Input';
+import { textAreaProps } from './inputProps';
+import type { InputFocusOptions } from './Input';
+import { fixControlledValue, resolveOnChange, triggerFocus } from './Input';
 import classNames from '../_util/classNames';
-import PropTypes, { withUndefined } from '../_util/vue-types';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import type { FocusEventHandler } from '../_util/EventInterface';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import omit from '../_util/omit';
 
-const TextAreaProps = {
-  ...inputProps,
-  autosize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
-  autoSize: withUndefined(PropTypes.oneOfType([Object, Boolean])),
-  showCount: PropTypes.looseBool,
-  onCompositionstart: PropTypes.func,
-  onCompositionend: PropTypes.func,
-  valueModifiers: Object,
-};
+function fixEmojiLength(value: string, maxLength: number) {
+  return [...(value || '')].slice(0, maxLength).join('');
+}
 
 export default defineComponent({
   name: 'ATextarea',
   inheritAttrs: false,
-  props: {
-    ...TextAreaProps,
-  },
-  setup() {
+  props: textAreaProps,
+  setup(props, { attrs, expose, emit }) {
     const formItemContext = useInjectFormItemContext();
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-      resizableTextArea: null,
-      clearableInput: null,
-      formItemContext,
-    };
-  },
-  data() {
-    const value = typeof this.value === 'undefined' ? this.defaultValue : this.value;
-    return {
-      stateValue: typeof value === 'undefined' ? '' : value,
-    };
-  },
-  watch: {
-    value(val: string) {
-      this.stateValue = val;
-    },
-  },
-  mounted() {
-    nextTick(() => {
-      if (process.env.NODE_ENV === 'test') {
-        if (this.autofocus) {
-          this.focus();
-        }
-      }
+    const stateValue = ref(props.value === undefined ? props.defaultValue : props.value);
+    const resizableTextArea = ref();
+    const { prefixCls, size, direction } = useConfigInject('input', props);
+    const showCount = computed(() => {
+      return (props.showCount as any) === '' || props.showCount || false;
     });
-  },
-  methods: {
-    setValue(value: string, callback?: Function) {
-      if (!hasProp(this, 'value')) {
-        this.stateValue = value;
+    // Max length value
+    const hasMaxLength = computed(() => Number(props.maxlength) > 0);
+    const compositing = ref(false);
+    const instance = getCurrentInstance();
+    watch(
+      () => props.value,
+      () => {
+        if ('value' in instance.vnode.props || {}) {
+          stateValue.value = props.value ?? '';
+        }
+      },
+    );
+
+    const focus = (option?: InputFocusOptions) => {
+      triggerFocus(resizableTextArea.value?.textArea, option);
+    };
+
+    const blur = () => {
+      resizableTextArea.value?.textArea?.blur();
+    };
+
+    const setValue = (value: string | number, callback?: Function) => {
+      if (stateValue.value === value) {
+        return;
+      }
+      if (props.value === undefined) {
+        stateValue.value = value;
       } else {
-        (this as any).$forceUpdate();
+        resizableTextArea.value?.instance.update?.();
       }
       nextTick(() => {
         callback && callback();
       });
-    },
-    handleKeyDown(e: KeyboardEvent) {
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.keyCode === 13) {
-        this.$emit('pressEnter', e);
+        emit('pressEnter', e);
       }
-      this.$emit('keydown', e);
-    },
-    triggerChange(e: Event) {
-      this.$emit('update:value', (e.target as any).value);
-      this.$emit('change', e);
-      this.$emit('input', e);
-      this.formItemContext.onFieldChange();
-    },
-    handleChange(e: Event) {
-      const { value, composing, isComposing } = e.target as any;
-      if (((isComposing || composing) && this.lazy) || this.stateValue === value) return;
+      emit('keydown', e);
+    };
 
-      this.setValue((e.target as HTMLTextAreaElement).value, () => {
-        this.resizableTextArea?.resizeTextarea();
+    const onBlur: FocusEventHandler = e => {
+      const { onBlur } = props;
+      onBlur?.(e);
+      formItemContext.onFieldBlur();
+    };
+    const triggerChange = (e: Event) => {
+      emit('update:value', (e.target as HTMLInputElement).value);
+      emit('change', e);
+      emit('input', e);
+      formItemContext.onFieldChange();
+    };
+
+    const handleReset = (e: MouseEvent) => {
+      resolveOnChange(resizableTextArea.value.textArea, e, triggerChange);
+      setValue('', () => {
+        focus();
       });
-      resolveOnChange(this.resizableTextArea.textArea, e, this.triggerChange);
-    },
+    };
 
-    focus() {
-      this.resizableTextArea.textArea.focus();
-    },
-
-    blur() {
-      this.resizableTextArea.textArea.blur();
-    },
-    saveTextArea(resizableTextArea: any) {
-      this.resizableTextArea = resizableTextArea;
-    },
-
-    saveClearableInput(clearableInput: HTMLTextAreaElement) {
-      this.clearableInput = clearableInput;
-    },
-    handleReset(e: Event) {
-      this.setValue('', () => {
-        this.resizableTextArea.renderTextArea();
-        this.focus();
-      });
-      resolveOnChange(this.resizableTextArea.textArea, e, this.triggerChange);
-    },
-    handleBlur(e: Event) {
-      this.$emit('blur', e);
-      this.formItemContext.onFieldBlur();
-    },
-
-    renderTextArea(prefixCls: string) {
-      const props = getOptionProps(this);
-      const { style, class: customClass } = this.$attrs;
+    const handleChange = (e: Event) => {
+      const { value, composing } = e.target as any;
+      compositing.value = (e as any).isComposing || composing;
+      if ((compositing.value && props.lazy) || stateValue.value === value) return;
+      let triggerValue = (e.currentTarget as any).value;
+      if (hasMaxLength.value) {
+        triggerValue = fixEmojiLength(triggerValue, props.maxlength!);
+      }
+      resolveOnChange(e.currentTarget as any, e, triggerChange, triggerValue);
+      setValue(triggerValue);
+    };
+    const renderTextArea = () => {
+      const { style, class: customClass } = attrs;
+      const { bordered = true } = props;
       const resizeProps = {
-        ...props,
-        ...this.$attrs,
-        style: !props.showCount && style,
-        class: !props.showCount && customClass,
+        ...omit(props, ['allowClear']),
+        ...attrs,
+        style: showCount.value && style,
+        class: {
+          [`${prefixCls.value}-borderless`]: !bordered,
+          [`${customClass}`]: customClass && !showCount.value,
+          [`${prefixCls.value}-sm`]: size.value === 'small',
+          [`${prefixCls.value}-lg`]: size.value === 'large',
+        },
         showCount: null,
-        prefixCls,
-        onInput: this.handleChange,
-        onBlur: this.handleBlur,
-        onChange: this.handleChange,
-        onKeydown: this.handleKeyDown,
+        prefixCls: prefixCls.value,
+        onInput: handleChange,
+        onChange: handleChange,
+        onBlur,
+        onKeydown: handleKeyDown,
       };
-      if (this.valueModifiers?.lazy) {
+      if (props.valueModifiers?.lazy) {
         delete resizeProps.onInput;
       }
       return (
         <ResizableTextArea
           {...resizeProps}
-          id={resizeProps.id ?? this.formItemContext.id.value}
-          ref={this.saveTextArea}
+          id={resizeProps.id ?? formItemContext.id.value}
+          ref={resizableTextArea}
+          maxlength={props.maxlength}
         />
       );
-    },
-  },
-  render() {
-    const { stateValue, prefixCls: customizePrefixCls, maxlength, showCount } = this;
-    const { style, class: customClass } = this.$attrs;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('input', customizePrefixCls);
-    let value = fixControlledValue(stateValue) as string;
-    // Max length value
-    const hasMaxlength = Number(maxlength) > 0;
-    value = hasMaxlength ? value.slice(0, maxlength) : value;
-    const props: any = {
-      ...getOptionProps(this),
-      ...this.$attrs,
-      prefixCls,
-      inputType: 'text',
-      element: this.renderTextArea(prefixCls),
-      handleReset: this.handleReset,
     };
 
-    let textareaNode = (
-      <ClearableLabeledInput {...props} value={value} ref={this.saveClearableInput} />
-    );
+    onMounted(() => {
+      if (process.env.NODE_ENV === 'test') {
+        if (props.autofocus) {
+          focus();
+        }
+      }
+    });
+    expose({
+      focus,
+      blur,
+      resizableTextArea,
+    });
+    const mergedValue = ref('');
+    watchEffect(() => {
+      let val = fixControlledValue(stateValue.value) as string;
+      if (
+        !compositing.value &&
+        hasMaxLength.value &&
+        (props.value === null || props.value === undefined)
+      ) {
+        // fix #27612 将value转为数组进行截取，解决 '😂'.length === 2 等emoji表情导致的截取乱码的问题
+        val = fixEmojiLength(val, props.maxlength);
+      }
+      mergedValue.value = val;
+    });
+    return () => {
+      const { maxlength, bordered = true } = props;
+      const { style, class: customClass } = attrs;
 
-    if (showCount) {
-      const valueLength = [...value].length;
-      const dataCount = `${valueLength}${hasMaxlength ? ` / ${maxlength}` : ''}`;
-      textareaNode = (
-        <div
-          class={classNames(
-            `${prefixCls}-textarea`,
-            `${prefixCls}-textarea-show-count`,
-            customClass,
-          )}
-          style={style}
-          data-count={dataCount}
-        >
-          {textareaNode}
-        </div>
+      const inputProps: any = {
+        ...props,
+        ...attrs,
+        prefixCls: prefixCls.value,
+        inputType: 'text',
+        handleReset,
+        direction: direction.value,
+        bordered,
+        style: showCount.value ? undefined : style,
+      };
+
+      let textareaNode = (
+        <ClearableLabeledInput
+          {...inputProps}
+          value={mergedValue.value}
+          v-slots={{ element: renderTextArea }}
+        />
       );
-    }
-    return textareaNode;
+
+      if (showCount.value) {
+        const valueLength = [...mergedValue.value].length;
+        let dataCount = '';
+        if (typeof showCount.value === 'object') {
+          dataCount = showCount.value.formatter({ count: valueLength, maxlength });
+        } else {
+          dataCount = `${valueLength}${hasMaxLength.value ? ` / ${maxlength}` : ''}`;
+        }
+        textareaNode = (
+          <div
+            class={classNames(
+              `${prefixCls.value}-textarea`,
+              {
+                [`${prefixCls.value}-textarea-rtl`]: direction.value === 'rtl',
+              },
+              `${prefixCls.value}-textarea-show-count`,
+              customClass,
+            )}
+            style={style}
+            data-count={dataCount}
+          >
+            {textareaNode}
+          </div>
+        );
+      }
+      return textareaNode;
+    };
   },
 });

@@ -29,7 +29,6 @@ export default defineComponent({
       };
     });
     return () => {
-      const {} = props;
       return (
         <span
           class={cls.value}

@@ -1,125 +1,100 @@
-import type { PropType, VNode } from 'vue';
-import { nextTick, defineComponent, withDirectives } from 'vue';
+import type { CSSProperties, VNode } from 'vue';
+import {
+  getCurrentInstance,
+  watch,
+  onBeforeUnmount,
+  ref,
+  nextTick,
+  defineComponent,
+  withDirectives,
+} from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import classNames from '../_util/classNames';
 import calculateNodeHeight from './calculateNodeHeight';
 import raf from '../_util/raf';
 import warning from '../_util/warning';
 import BaseMixin from '../_util/BaseMixin';
-import inputProps from './inputProps';
-import PropTypes from '../_util/vue-types';
-import { getOptionProps } from '../_util/props-util';
 import antInput from '../_util/antInputDirective';
 import omit from '../_util/omit';
+import { textAreaProps } from './inputProps';
 
 const RESIZE_STATUS_NONE = 0;
 const RESIZE_STATUS_RESIZING = 1;
 const RESIZE_STATUS_RESIZED = 2;
 
-export interface AutoSizeType {
-  minRows?: number;
-  maxRows?: number;
-}
-
-const TextAreaProps = {
-  ...inputProps,
-  autosize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
-  autoSize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
-  onResize: PropTypes.func,
-};
-
 const ResizableTextArea = defineComponent({
   name: 'ResizableTextArea',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: TextAreaProps,
-  setup() {
-    return {
-      nextFrameActionId: undefined,
-      textArea: null,
-      resizeFrameId: undefined,
-    };
-  },
-  data() {
-    return {
-      textareaStyles: {},
-      resizeStatus: RESIZE_STATUS_NONE,
-    };
-  },
-  watch: {
-    value() {
-      nextTick(() => {
-        this.resizeTextarea();
-      });
-    },
-  },
-  mounted() {
-    this.resizeTextarea();
-  },
-  beforeUnmount() {
-    raf.cancel(this.nextFrameActionId);
-    raf.cancel(this.resizeFrameId);
-  },
-  methods: {
-    saveTextArea(textArea: HTMLTextAreaElement) {
-      this.textArea = textArea;
-    },
-    handleResize(size: { width: number; height: number }) {
-      const { resizeStatus } = this.$data;
+  props: textAreaProps,
+  setup(props, { attrs, emit, expose }) {
+    let nextFrameActionId: any;
+    let resizeFrameId: any;
+    const textAreaRef = ref();
+    const textareaStyles = ref({});
+    const resizeStatus = ref(RESIZE_STATUS_NONE);
+    onBeforeUnmount(() => {
+      raf.cancel(nextFrameActionId);
+      raf.cancel(resizeFrameId);
+    });
 
-      if (resizeStatus !== RESIZE_STATUS_NONE) {
-        return;
-      }
-      this.$emit('resize', size);
-    },
-    resizeOnNextFrame() {
-      raf.cancel(this.nextFrameActionId);
-      this.nextFrameActionId = raf(this.resizeTextarea);
-    },
-
-    resizeTextarea() {
-      const autoSize = this.$props.autoSize || this.$props.autosize;
-      if (!autoSize || !this.textArea) {
-        return;
-      }
-      const { minRows, maxRows } = autoSize;
-      const textareaStyles = calculateNodeHeight(this.textArea, false, minRows, maxRows);
-      this.setState({ textareaStyles, resizeStatus: RESIZE_STATUS_RESIZING }, () => {
-        raf.cancel(this.resizeFrameId);
-        this.resizeFrameId = raf(() => {
-          this.setState({ resizeStatus: RESIZE_STATUS_RESIZED }, () => {
-            this.resizeFrameId = raf(() => {
-              this.setState({ resizeStatus: RESIZE_STATUS_NONE });
-              this.fixFirefoxAutoScroll();
-            });
-          });
-        });
-      });
-    },
     // https://github.com/ant-design/ant-design/issues/21870
-    fixFirefoxAutoScroll() {
+    const fixFirefoxAutoScroll = () => {
       try {
-        if (document.activeElement === this.textArea) {
-          const currentStart = this.textArea.selectionStart;
-          const currentEnd = this.textArea.selectionEnd;
-          this.textArea.setSelectionRange(currentStart, currentEnd);
+        if (document.activeElement === textAreaRef.value) {
+          const currentStart = textAreaRef.value.selectionStart;
+          const currentEnd = textAreaRef.value.selectionEnd;
+          textAreaRef.value.setSelectionRange(currentStart, currentEnd);
         }
       } catch (e) {
         // Fix error in Chrome:
         // Failed to read the 'selectionStart' property from 'HTMLInputElement'
         // http://stackoverflow.com/q/21177489/3040605
       }
-    },
+    };
 
-    renderTextArea() {
-      const props: any = { ...getOptionProps(this), ...this.$attrs };
-      const { prefixCls, autoSize, autosize, disabled, class: className } = props;
-      const { textareaStyles, resizeStatus } = this.$data;
-      warning(
-        autosize === undefined,
-        'Input.TextArea',
-        'autosize is deprecated, please use autoSize instead.',
-      );
+    const resizeTextarea = () => {
+      const autoSize = props.autoSize || props.autosize;
+      if (!autoSize || !textAreaRef.value) {
+        return;
+      }
+      const { minRows, maxRows } = autoSize;
+      textareaStyles.value = calculateNodeHeight(textAreaRef.value, false, minRows, maxRows);
+      resizeStatus.value = RESIZE_STATUS_RESIZING;
+      raf.cancel(resizeFrameId);
+      resizeFrameId = raf(() => {
+        resizeStatus.value = RESIZE_STATUS_RESIZED;
+        resizeFrameId = raf(() => {
+          resizeStatus.value = RESIZE_STATUS_NONE;
+          fixFirefoxAutoScroll();
+        });
+      });
+    };
+
+    const resizeOnNextFrame = () => {
+      raf.cancel(nextFrameActionId);
+      nextFrameActionId = raf(resizeTextarea);
+    };
+
+    const handleResize = (size: { width: number; height: number }) => {
+      if (resizeStatus.value !== RESIZE_STATUS_NONE) {
+        return;
+      }
+      emit('resize', size);
+
+      const autoSize = props.autoSize || props.autosize;
+      if (autoSize) {
+        resizeOnNextFrame();
+      }
+    };
+    warning(
+      props.autosize === undefined,
+      'Input.TextArea',
+      'autosize is deprecated, please use autoSize instead.',
+    );
+
+    const renderTextArea = () => {
+      const { prefixCls, autoSize, autosize, disabled } = props;
       const otherProps = omit(props, [
         'prefixCls',
         'onPressEnter',
@@ -130,23 +105,19 @@ const ResizableTextArea = defineComponent({
         'type',
         'lazy',
       ]);
-      const cls = classNames(prefixCls, className, {
+      const cls = classNames(prefixCls, attrs.class, {
         [`${prefixCls}-disabled`]: disabled,
       });
-      // Fix https://github.com/ant-design/ant-design/issues/6776
-      // Make sure it could be reset when using form.getFieldDecorator
-      if ('value' in otherProps) {
-        otherProps.value = otherProps.value || '';
-      }
       const style = {
-        ...props.style,
-        ...textareaStyles,
-        ...(resizeStatus === RESIZE_STATUS_RESIZING
+        ...(attrs.style as CSSProperties),
+        ...textareaStyles.value,
+        ...(resizeStatus.value === RESIZE_STATUS_RESIZING
           ? { overflowX: 'hidden', overflowY: 'hidden' }
           : null),
       };
       const textareaProps: any = {
         ...otherProps,
+        ...attrs,
         style,
         class: cls,
       };
@@ -154,17 +125,32 @@ const ResizableTextArea = defineComponent({
         delete textareaProps.autofocus;
       }
       return (
-        <ResizeObserver onResize={this.handleResize} disabled={!(autoSize || autosize)}>
-          {withDirectives((<textarea {...textareaProps} ref={this.saveTextArea} />) as VNode, [
+        <ResizeObserver onResize={handleResize} disabled={!(autoSize || autosize)}>
+          {withDirectives((<textarea {...textareaProps} ref={textAreaRef} />) as VNode, [
             [antInput],
           ])}
         </ResizeObserver>
       );
-    },
-  },
+    };
 
-  render() {
-    return this.renderTextArea();
+    watch(
+      () => props.value,
+      () => {
+        nextTick(() => {
+          resizeTextarea();
+        });
+      },
+    );
+    const instance = getCurrentInstance();
+    expose({
+      resizeTextarea,
+      textArea: textAreaRef,
+      instance,
+    });
+
+    return () => {
+      return renderTextArea();
+    };
   },
 });
 

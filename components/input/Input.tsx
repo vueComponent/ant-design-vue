@@ -19,7 +19,6 @@ import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { ChangeEvent, FocusEventHandler } from '../_util/EventInterface';
-import { controlDefaultValue } from '../_util/util';
 
 export function fixControlledValue(value: string | number) {
   if (typeof value === 'undefined' || value === null) {
@@ -134,13 +133,21 @@ export default defineComponent({
     let removePasswordTimeout: any;
     const formItemContext = useInjectFormItemContext();
     const { direction, prefixCls, size, autocomplete } = useConfigInject('input', props);
-    const stateValue = ref(props.value === controlDefaultValue ? props.defaultValue : props.value);
+    const stateValue = ref(props.value === undefined ? props.defaultValue : props.value);
     const focused = ref(false);
 
     watch(
       () => props.value,
       () => {
-        if (props.value !== controlDefaultValue) {
+        if (props.value !== undefined) {
+          stateValue.value = props.value;
+        }
+      },
+    );
+    watch(
+      () => props.disabled,
+      () => {
+        if (props.value !== undefined) {
           stateValue.value = props.value;
         }
       },
@@ -181,7 +188,7 @@ export default defineComponent({
     expose({
       focus,
       blur,
-      inputRef,
+      input: inputRef,
       stateValue,
       setSelectionRange,
       select,
@@ -217,7 +224,7 @@ export default defineComponent({
       if (stateValue.value === value) {
         return;
       }
-      if (props.value === controlDefaultValue) {
+      if (props.value === undefined) {
         stateValue.value = value;
       } else {
         instance.update();
@@ -234,9 +241,10 @@ export default defineComponent({
     };
 
     const handleChange = (e: ChangeEvent) => {
-      const { value, composing, isComposing } = e.target as any;
+      const { value, composing } = e.target as any;
       // https://github.com/vueComponent/ant-design-vue/issues/2203
-      if (((isComposing || composing) && props.lazy) || stateValue.value === value) return;
+      if ((((e as any).isComposing || composing) && props.lazy) || stateValue.value === value)
+        return;
       const newVal = e.target.value;
       resolveOnChange(inputRef.value, e, triggerChange);
       setValue(newVal, () => {
@@ -270,6 +278,7 @@ export default defineComponent({
         disabled,
         bordered = true,
         valueModifiers = {},
+        htmlSize,
       } = props;
       const otherProps = omit(props as InputProps & { inputType: any; placeholder: string }, [
         'prefixCls',
@@ -285,9 +294,11 @@ export default defineComponent({
         'size',
         'inputType',
         'bordered',
+        'htmlSize',
       ]);
       const inputProps = {
         ...otherProps,
+        ...attrs,
         autocomplete: autocomplete.value,
         onChange: handleChange,
         onInput: handleChange,
@@ -302,6 +313,7 @@ export default defineComponent({
         ),
         ref: inputRef,
         key: 'ant-input',
+        size: htmlSize,
       };
       if (valueModifiers.lazy) {
         delete inputProps.onInput;
@@ -321,7 +333,7 @@ export default defineComponent({
         inputType: 'input',
         value: fixControlledValue(stateValue.value),
         handleReset,
-        focused: focused.value,
+        focused: focused.value && props.disabled,
       };
 
       return (

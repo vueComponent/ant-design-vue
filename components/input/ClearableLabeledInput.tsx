@@ -39,7 +39,7 @@ export default defineComponent({
     addonAfter: PropTypes.any,
     readonly: PropTypes.looseBool,
     focused: PropTypes.looseBool,
-    bordered: PropTypes.looseBool,
+    bordered: PropTypes.looseBool.def(true),
     triggerFocus: { type: Function as PropType<() => void> },
   },
   setup(props, { slots, attrs }) {
@@ -51,7 +51,7 @@ export default defineComponent({
       }
     };
     const renderClearIcon = (prefixCls: string) => {
-      const { allowClear, value, disabled, readonly, handleReset } = props;
+      const { allowClear, value, disabled, readonly, handleReset, suffix = slots.suffix } = props;
       if (!allowClear) {
         return null;
       }
@@ -60,9 +60,12 @@ export default defineComponent({
       return (
         <CloseCircleFilled
           onClick={handleReset}
+          // Do not trigger onBlur when clear input
+          onMousedown={e => e.preventDefault()}
           class={classNames(
             {
               [`${className}-hidden`]: !needClear,
+              [`${className}-has-suffix`]: !!suffix,
             },
             className,
           )}

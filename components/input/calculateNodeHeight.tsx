@@ -1,19 +1,21 @@
 // Thanks to https://github.com/andreypopp/react-textarea-autosize/
 
+import type { CSSProperties } from 'vue';
+
 /**
  * calculateNodeHeight(uiTextNode, useCache = false)
  */
 
 const HIDDEN_TEXTAREA_STYLE = `
-  min-height:0 !important;
-  max-height:none !important;
-  height:0 !important;
-  visibility:hidden !important;
-  overflow:hidden !important;
-  position:absolute !important;
-  z-index:-1000 !important;
-  top:0 !important;
-  right:0 !important
+ min-height:0 !important;
+ max-height:none !important;
+ height:0 !important;
+ visibility:hidden !important;
+ overflow:hidden !important;
+ position:absolute !important;
+ z-index:-1000 !important;
+ top:0 !important;
+ right:0 !important
 `;
 
 const SIZING_STYLE = [
@@ -33,6 +35,7 @@ const SIZING_STYLE = [
   'padding-right',
   'border-width',
   'box-sizing',
+  'word-break',
 ];
 
 export interface NodeType {
@@ -90,9 +93,11 @@ export default function calculateNodeHeight(
   useCache = false,
   minRows: number | null = null,
   maxRows: number | null = null,
-) {
+): CSSProperties {
   if (!hiddenTextarea) {
     hiddenTextarea = document.createElement('textarea');
+    hiddenTextarea.setAttribute('tab-index', '-1');
+    hiddenTextarea.setAttribute('aria-hidden', 'true');
     document.body.appendChild(hiddenTextarea);
   }
 
@@ -120,7 +125,7 @@ export default function calculateNodeHeight(
   let minHeight = Number.MIN_SAFE_INTEGER;
   let maxHeight = Number.MAX_SAFE_INTEGER;
   let height = hiddenTextarea.scrollHeight;
-  let overflowY: string;
+  let overflowY: any;
 
   if (boxSizing === 'border-box') {
     // border-box: add border, since height = content + padding + border

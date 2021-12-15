@@ -49,7 +49,7 @@ export default defineComponent({
     };
 
     const onMousedown: MouseEventHandler = e => {
-      if (document.activeElement === inputRef.value?.inputRef.value) {
+      if (document.activeElement === inputRef.value?.input) {
         e.preventDefault();
       }
     };
@@ -84,17 +84,21 @@ export default defineComponent({
         enterButtonAsElement.type.__ANT_BUTTON;
 
       if (isAntdButton || enterButtonAsElement.tagName === 'button') {
-        button = cloneElement(enterButtonAsElement, {
-          onMousedown,
-          onClick: onSearch,
-          key: 'enterButton',
-          ...(isAntdButton
-            ? {
-                class: btnClassName,
-                size: size.value,
-              }
-            : {}),
-        });
+        button = cloneElement(
+          enterButtonAsElement,
+          {
+            onMousedown,
+            onClick: onSearch,
+            key: 'enterButton',
+            ...(isAntdButton
+              ? {
+                  class: btnClassName,
+                  size: size.value,
+                }
+              : {}),
+          },
+          false,
+        );
       } else {
         button = (
           <Button

@@ -422,7 +422,7 @@ export default defineComponent({
             prefixCls={`${prefixCls.value}-overflow`}
             component="ul"
             itemComponent={MenuItem}
-            class={className.value}
+            class={[className.value, attrs.class]}
             role="menu"
             id={props.id}
             data={wrappedChildList}

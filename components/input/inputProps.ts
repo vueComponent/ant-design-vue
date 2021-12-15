@@ -75,7 +75,7 @@ export interface AutoSizeType {
   minRows?: number;
   maxRows?: number;
 }
-interface ShowCountProps {
+export interface ShowCountProps {
   formatter: (args: { count: number; maxlength?: number }) => string;
 }
 const textAreaProps = {

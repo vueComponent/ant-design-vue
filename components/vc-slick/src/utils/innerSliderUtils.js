@@ -1,3 +1,5 @@
+import supportsPassive from '../../../_util/supportsPassive';
+
 export const getOnDemandLazySlides = spec => {
   const onDemandSlides = [];
   const startIndex = lazyStartIndex(spec);
@@ -275,7 +277,7 @@ export const keyHandler = (e, accessibility, rtl) => {
 };
 
 export const swipeStart = (e, swipe, draggable) => {
-  e.target.tagName === 'IMG' && e.preventDefault();
+  e.target.tagName === 'IMG' && !supportsPassive && e.preventDefault();
   if (!swipe || (!draggable && e.type.indexOf('mouse') !== -1)) return '';
   return {
     dragging: true,
@@ -311,8 +313,11 @@ export const swipeMove = (e, spec) => {
     listWidth,
   } = spec;
   if (scrolling) return;
-  if (animating) return e.preventDefault();
-  if (vertical && swipeToSlide && verticalSwiping) e.preventDefault();
+  if (animating) {
+    !supportsPassive && e.preventDefault();
+    return;
+  }
+  if (vertical && swipeToSlide && verticalSwiping) !supportsPassive && e.preventDefault();
   let swipeLeft;
   let state = {};
   const curLeft = getTrackLeft(spec);
@@ -379,7 +384,7 @@ export const swipeMove = (e, spec) => {
   }
   if (touchObject.swipeLength > 10) {
     state['swiping'] = true;
-    e.preventDefault();
+    !supportsPassive && e.preventDefault();
   }
   return state;
 };

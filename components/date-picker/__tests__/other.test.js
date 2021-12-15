@@ -65,12 +65,9 @@ describe('MonthPicker and WeekPicker', () => {
   it('render WeekPicker', async () => {
     const birthday = dayjs('2000-01-01', 'YYYY-MM-DD').locale('zh-cn');
     const wrapper = mount(WeekPicker, { props: { open: false }, sync: false });
-    await asyncExpect(() => {
-      wrapper.setProps({ value: birthday, open: true });
-    });
-    await sleep(50);
-    await asyncExpect(() => {
-      expect(document.body.innerHTML).toMatchSnapshot();
-    }, 0);
+    await sleep(10);
+    wrapper.setProps({ value: birthday, open: true });
+    await sleep(1000);
+    expect(document.body.innerHTML).toMatchSnapshot();
   });
 });

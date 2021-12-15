@@ -82,7 +82,7 @@ export default defineComponent({
       });
 
       const omittedProps = {
-        ...omit(restProps, ['suffix', 'iconRender']),
+        ...omit(restProps, ['suffix', 'iconRender', 'action']),
         ...attrs,
         type: visible.value ? 'text' : 'password',
         class: inputClassName,

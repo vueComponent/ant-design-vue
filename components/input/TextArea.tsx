@@ -113,7 +113,7 @@ export default defineComponent({
       const resizeProps = {
         ...omit(props, ['allowClear']),
         ...attrs,
-        style: showCount.value && style,
+        style: showCount.value ? {} : style,
         class: {
           [`${prefixCls.value}-borderless`]: !bordered,
           [`${customClass}`]: customClass && !showCount.value,

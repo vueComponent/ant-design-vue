@@ -141,7 +141,7 @@ exports[`renders ./components/form/demo/custom-validation.vue correctly 1`] = `
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
       <div class="ant-form-item-control-input">
-        <div class="ant-form-item-control-input-content"><input type="password" id="custom-validation_pass" autocomplete="off" class="ant-input"></div>
+        <div class="ant-form-item-control-input-content"><input autocomplete="off" type="password" id="custom-validation_pass" class="ant-input"></div>
         <!---->
       </div>
       <!---->
@@ -154,7 +154,7 @@ exports[`renders ./components/form/demo/custom-validation.vue correctly 1`] = `
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
       <div class="ant-form-item-control-input">
-        <div class="ant-form-item-control-input-content"><input type="password" id="custom-validation_checkPass" autocomplete="off" class="ant-input"></div>
+        <div class="ant-form-item-control-input-content"><input autocomplete="off" type="password" id="custom-validation_checkPass" class="ant-input"></div>
         <!---->
       </div>
       <!---->

@@ -295,6 +295,7 @@ export default defineComponent({
         'inputType',
         'bordered',
         'htmlSize',
+        'lazy',
       ]);
       const inputProps = {
         ...otherProps,
@@ -314,6 +315,7 @@ export default defineComponent({
         ref: inputRef,
         key: 'ant-input',
         size: htmlSize,
+        id: otherProps.id ?? formItemContext.id.value,
       };
       if (valueModifiers.lazy) {
         delete inputProps.onInput;

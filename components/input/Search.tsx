@@ -73,7 +73,6 @@ export default defineComponent({
       } = props;
       let { enterButton = slots.enterButton?.() } = props;
       enterButton = enterButton || enterButton === '';
-      const searchIcon = typeof enterButton === 'boolean' ? <SearchOutlined /> : null;
       const btnClassName = `${prefixCls.value}-button`;
 
       const enterButtonAsElement = Array.isArray(enterButton) ? enterButton[0] : enterButton;
@@ -82,7 +81,6 @@ export default defineComponent({
         enterButtonAsElement.type &&
         isPlainObject(enterButtonAsElement.type) &&
         enterButtonAsElement.type.__ANT_BUTTON;
-
       if (isAntdButton || enterButtonAsElement.tagName === 'button') {
         button = cloneElement(
           enterButtonAsElement,
@@ -110,9 +108,8 @@ export default defineComponent({
             onMousedown={onMousedown}
             onClick={onSearch}
             loading={loading}
-            icon={searchIcon}
           >
-            {enterButton}
+            {enterButton === true ? <SearchOutlined /> : enterButton}
           </Button>
         );
       }
@@ -131,7 +128,7 @@ export default defineComponent({
       return (
         <Input
           ref={inputRef}
-          {...omit(restProps, ['onUpdate:value', 'onSearch'])}
+          {...omit(restProps, ['onUpdate:value', 'onSearch', 'enterButton'])}
           {...attrs}
           onPressEnter={onSearch}
           size={size.value}

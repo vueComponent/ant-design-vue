@@ -105,7 +105,7 @@ And this plugin can load styles too, read [usage](https://github.com/ant-design/
 
 > FYI, babel-plugin-import's `style` option will importing some global reset styles, don't use it if you don't need those styles. You can import styles manually via `import 'ant-design-vue/dist/antd.css'` and override the global reset styles.
 
-If you use Vite, you can use [vite-plugin-components](https://github.com/antfu/vite-plugin-components) to load on demand.
+If you use Vite, you can use [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) to load on demand.
 
 ## Customization
 

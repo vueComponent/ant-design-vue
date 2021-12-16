@@ -117,13 +117,16 @@ import 'ant-design-vue/dist/antd.css'; // or 'ant-design-vue/dist/antd.less'
 
   ```js
   // vite.config.js
-  import ViteComponents, { AntDesignVueResolver } from 'vite-plugin-components';
-
+  import Components from 'unplugin-vue-components/vite'
+  import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
+  
   export default {
     plugins: [
       /* ... */
-      ViteComponents({
-        customComponentResolvers: [AntDesignVueResolver()],
+      Components({
+        resolvers: [
+          AntDesignVueResolver(),
+        ],
       }),
     ],
   };

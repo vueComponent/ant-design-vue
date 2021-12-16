@@ -56,6 +56,18 @@ export default function(modeName) {
     created() {
       this.domRef = createRef();
     },
+    watch: {
+      open(val) {
+        if (!val) {
+          this.onBlur(this.blurEvent);
+        }
+      },
+    },
+    data() {
+      return {
+        blurEvent: null,
+      };
+    },
     methods: {
       onFocus(e) {
         const { focused } = this.$props;
@@ -70,13 +82,16 @@ export default function(modeName) {
       },
 
       onBlur(e) {
+        const { focused } = this.$props;
         const {
           vcTreeSelect: { onSelectorBlur },
         } = this;
 
-        // TODO: Not trigger when is inner component get focused
         onSelectorBlur();
-        this.__emit('blur', e);
+        this.blurEvent = e;
+        if (!focused) {
+          this.__emit('blur', e);
+        }
       },
 
       focus() {

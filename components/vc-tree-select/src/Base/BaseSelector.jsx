@@ -58,7 +58,7 @@ export default function(modeName) {
     },
     watch: {
       open(val) {
-        if (!val) {
+        if (!val && this.blurEvent) {
           this.onBlur(this.blurEvent);
         }
       },

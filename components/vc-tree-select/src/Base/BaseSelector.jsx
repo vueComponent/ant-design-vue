@@ -84,14 +84,12 @@ export default function(modeName) {
           this.__emit('focus', e);
         }
       },
-      
       onBlur(e) {
         const { open } = this.$props;
         const {
           vcTreeSelect: { onSelectorBlur },
         } = this;
-
-        onSelectorBlur();
+      onSelectorBlur();
         this.blurEvent = e;
 
         if (!open) {

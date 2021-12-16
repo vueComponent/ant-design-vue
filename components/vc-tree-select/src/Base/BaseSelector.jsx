@@ -89,7 +89,7 @@ export default function(modeName) {
         const {
           vcTreeSelect: { onSelectorBlur },
         } = this;
-      onSelectorBlur();
+        onSelectorBlur();
         this.blurEvent = e;
 
         if (!open) {

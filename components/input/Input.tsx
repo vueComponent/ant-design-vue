@@ -37,7 +37,6 @@ export function resolveOnChange(
     return;
   }
   const event: any = e;
-  const originalInputValue = target.value;
 
   if (e.type === 'click') {
     Object.defineProperty(event, 'target', {
@@ -48,13 +47,13 @@ export function resolveOnChange(
     });
     // click clear icon
     //event = Object.create(e);
-    event.target = target;
-    event.currentTarget = target;
+    const currentTarget = target.cloneNode(true);
+
+    event.target = currentTarget;
+    event.currentTarget = currentTarget;
     // change target ref value cause e.target.value should be '' when clear input
-    target.value = '';
+    (currentTarget as any).value = '';
     onChange(event);
-    // reset target ref value
-    target.value = originalInputValue;
     return;
   }
   // Trigger by composition event, this means we need force change the input value
@@ -227,7 +226,11 @@ export default defineComponent({
       if (props.value === undefined) {
         stateValue.value = value;
       } else {
-        instance.update();
+        nextTick(() => {
+          if (inputRef.value.value !== stateValue.value) {
+            instance.update();
+          }
+        });
       }
       nextTick(() => {
         callback && callback();

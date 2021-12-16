@@ -19,12 +19,12 @@ const tagProps = {
     type: String as PropType<LiteralUnion<PresetColorType | PresetStatusColorType, string>>,
   },
   closable: PropTypes.looseBool.def(false),
-  closeIcon: PropTypes.VNodeChild,
+  closeIcon: PropTypes.any,
   visible: PropTypes.looseBool,
   onClose: {
     type: Function as PropType<(e: MouseEvent) => void>,
   },
-  icon: PropTypes.VNodeChild,
+  icon: PropTypes.any,
 };
 
 export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<typeof tagProps>>;

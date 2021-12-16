@@ -14,7 +14,7 @@ import SingleSelector from './SingleSelector';
 import type { LabelValueType, RawValueType, CustomTagProps } from '../interface/generator';
 import type { RenderNode, Mode } from '../interface';
 import useLock from '../hooks/useLock';
-import type { VNodeChild, PropType } from 'vue';
+import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
 import createRef from '../../_util/createRef';
 import PropTypes from '../../_util/vue-types';
@@ -38,14 +38,14 @@ export interface SelectorProps {
   accessibilityIndex: number;
   tabindex?: number | string;
   disabled?: boolean;
-  placeholder?: VNodeChild;
+  placeholder?: VueNode;
   removeIcon?: RenderNode;
 
   // Tags
   maxTagCount?: number | 'responsive';
   maxTagTextLength?: number;
-  maxTagPlaceholder?: VNodeChild | ((omittedValues: LabelValueType[]) => VNodeChild);
-  tagRender?: (props: CustomTagProps) => VNodeChild;
+  maxTagPlaceholder?: VueNode | ((omittedValues: LabelValueType[]) => VueNode);
+  tagRender?: (props: CustomTagProps) => VueNode;
 
   /** Check if `tokenSeparators` contains `\n` or `\r\n` */
   tokenWithEnter?: boolean;

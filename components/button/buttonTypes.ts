@@ -36,7 +36,7 @@ const buttonProps = () => ({
   ghost: PropTypes.looseBool,
   block: PropTypes.looseBool,
   danger: PropTypes.looseBool,
-  icon: PropTypes.VNodeChild,
+  icon: PropTypes.any,
   href: PropTypes.string,
   target: PropTypes.string,
   title: PropTypes.string,

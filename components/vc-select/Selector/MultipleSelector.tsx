@@ -9,7 +9,7 @@ import type {
 import type { RenderNode } from '../interface';
 import type { InnerSelectorProps } from './interface';
 import Input from './Input';
-import type { VNodeChild, Ref, PropType } from 'vue';
+import type { Ref, PropType } from 'vue';
 import { computed, defineComponent, onMounted, ref, watch } from 'vue';
 import classNames from '../../_util/classNames';
 import pickAttrs from '../../_util/pickAttrs';
@@ -24,9 +24,9 @@ type SelectorProps = InnerSelectorProps & {
   // Tags
   maxTagCount?: number | 'responsive';
   maxTagTextLength?: number;
-  maxTagPlaceholder?: VNodeChild | ((omittedValues: LabelValueType[]) => VNodeChild);
+  maxTagPlaceholder?: VueNode | ((omittedValues: LabelValueType[]) => VueNode);
   tokenSeparators?: string[];
-  tagRender?: (props: CustomTagProps) => VNodeChild;
+  tagRender?: (props: CustomTagProps) => VueNode;
   onToggleOpen: any;
 
   // Motion
@@ -52,7 +52,7 @@ const props = {
   accessibilityIndex: PropTypes.number,
   tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
-  removeIcon: PropTypes.VNodeChild,
+  removeIcon: PropTypes.any,
   choiceTransitionName: PropTypes.string,
 
   maxTagCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

@@ -1,6 +1,7 @@
 import { flattenChildren, isValidElement } from '../../_util/props-util';
-import type { VNode, VNodeChild } from 'vue';
+import type { VNode } from 'vue';
 import type { OptionData, OptionGroupData, OptionsType } from '../interface';
+import type { VueNode } from '../../_util/type';
 
 function convertNodeToOption(node: VNode): OptionData {
   const {
@@ -21,10 +22,7 @@ function convertNodeToOption(node: VNode): OptionData {
   };
 }
 
-export function convertChildrenToData(
-  nodes: VNodeChild | JSX.Element,
-  optionOnly = false,
-): OptionsType {
+export function convertChildrenToData(nodes: VueNode, optionOnly = false): OptionsType {
   const dd = flattenChildren(nodes as [])
     .map((node: VNode, index: number): OptionData | OptionGroupData | null => {
       if (!isValidElement(node) || !node.type) {

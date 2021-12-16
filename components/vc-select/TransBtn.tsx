@@ -1,9 +1,10 @@
-import type { FunctionalComponent, VNodeChild } from 'vue';
+import type { FunctionalComponent } from 'vue';
+import type { VueNode } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 
 export interface TransBtnProps {
   class: string;
-  customizeIcon: VNodeChild | ((props?: any) => VNodeChild);
+  customizeIcon: VueNode | ((props?: any) => VueNode);
   customizeIconProps?: any;
   onMousedown?: (payload: MouseEvent) => void;
   onClick?: (payload: MouseEvent) => void;
@@ -15,7 +16,7 @@ export interface TransBtnType extends FunctionalComponent<TransBtnProps> {
 
 const TransBtn: TransBtnType = (props, { slots }) => {
   const { class: className, customizeIcon, customizeIconProps, onMousedown, onClick } = props;
-  let icon: VNodeChild;
+  let icon: VueNode;
 
   if (typeof customizeIcon === 'function') {
     icon = customizeIcon(customizeIconProps);

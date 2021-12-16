@@ -23,7 +23,7 @@ export const avatarProps = {
   src: PropTypes.string,
   /** Srcset of image avatar */
   srcset: PropTypes.string,
-  icon: PropTypes.VNodeChild,
+  icon: PropTypes.any,
   alt: PropTypes.string,
   gap: PropTypes.number,
   draggable: PropTypes.bool,

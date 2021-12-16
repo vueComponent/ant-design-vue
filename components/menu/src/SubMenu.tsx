@@ -23,8 +23,8 @@ import isValid from '../../_util/isValid';
 let indexGuid = 0;
 
 const subMenuProps = {
-  icon: PropTypes.VNodeChild,
-  title: PropTypes.VNodeChild,
+  icon: PropTypes.any,
+  title: PropTypes.any,
   disabled: Boolean,
   level: Number,
   popupClassName: String,

@@ -26,7 +26,7 @@ export const badgeProps = {
   // sync antd@4.6.0
   size: PropTypes.oneOf(tuple('default', 'small')).def('default'),
   color: PropTypes.string,
-  text: PropTypes.VNodeChild,
+  text: PropTypes.any,
   offset: PropTypes.arrayOf(PropTypes.oneOfType([String, Number])),
   numberStyle: PropTypes.style,
   title: PropTypes.string,

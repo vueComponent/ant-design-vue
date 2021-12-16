@@ -133,7 +133,7 @@ const cascaderProps = {
     type: [Boolean, Object] as PropType<boolean | ShowSearchType | undefined>,
     default: undefined as PropType<boolean | ShowSearchType | undefined>,
   },
-  notFoundContent: PropTypes.VNodeChild,
+  notFoundContent: PropTypes.any,
   loadData: PropTypes.func,
   /** 次级菜单的展开方式，可选 'click' 和 'hover' */
   expandTrigger: PropTypes.oneOf(tuple('click', 'hover')),
@@ -147,7 +147,7 @@ const cascaderProps = {
   popupVisible: PropTypes.looseBool,
   fieldNames: { type: Object as PropType<FieldNamesType> },
   autofocus: PropTypes.looseBool,
-  suffixIcon: PropTypes.VNodeChild,
+  suffixIcon: PropTypes.any,
   showSearchRender: PropTypes.any,
   onChange: PropTypes.func,
   onPopupVisibleChange: PropTypes.func,

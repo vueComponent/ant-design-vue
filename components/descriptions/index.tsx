@@ -28,7 +28,7 @@ export const DescriptionsItemProps = {
 
 const descriptionsItemProp = {
   prefixCls: PropTypes.string,
-  label: PropTypes.VNodeChild,
+  label: PropTypes.any,
   labelStyle: PropTypes.style,
   contentStyle: PropTypes.style,
   span: PropTypes.number.def(1),
@@ -125,8 +125,8 @@ const descriptionsProps = {
   prefixCls: PropTypes.string,
   bordered: PropTypes.looseBool,
   size: PropTypes.oneOf(tuple('default', 'middle', 'small')).def('default'),
-  title: PropTypes.VNodeChild,
-  extra: PropTypes.VNodeChild,
+  title: PropTypes.any,
+  extra: PropTypes.any,
   column: {
     type: [Number, Object] as PropType<number | Partial<Record<Breakpoint, number>>>,
     default: (): number | Partial<Record<Breakpoint, number>> => DEFAULT_COLUMN_MAP,

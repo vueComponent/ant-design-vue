@@ -1,5 +1,6 @@
-import type { ExtractPropTypes, PropType, VNodeChild } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
+import type { VueNode } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import type { ProgressSize } from './props';
 import { progressProps } from './props';
@@ -25,7 +26,7 @@ export default defineComponent({
     const styledSteps = computed(() => {
       const { steps, strokeWidth = 8, strokeColor, trailColor, prefixCls } = props;
 
-      const temp: VNodeChild[] = [];
+      const temp: VueNode[] = [];
       for (let i = 0; i < steps; i += 1) {
         const cls = {
           [`${prefixCls}-steps-item`]: true,

@@ -35,7 +35,7 @@ import defaultLocale from '../locale/en_US';
 import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
 import type { PropType } from 'vue';
-import { reactive, ref, computed, defineComponent, toRef, watchEffect, watch } from 'vue';
+import { nextTick, reactive, ref, computed, defineComponent, toRef, watchEffect, watch } from 'vue';
 import type { DefaultRecordType } from '../vc-table/interface';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -465,11 +465,6 @@ const InteralTable = defineComponent<
       // Dynamic table data
       if (mergedData.value.length < total!) {
         if (mergedData.value.length > pageSize) {
-          devWarning(
-            false,
-            'Table',
-            '`dataSource` length is less than `pagination.total` but large than `pagination.pageSize`. Please make sure your config correct data with async mode.',
-          );
           return mergedData.value.slice((current - 1) * pageSize, current * pageSize);
         }
         return mergedData.value;
@@ -477,6 +472,25 @@ const InteralTable = defineComponent<
 
       return mergedData.value.slice((current - 1) * pageSize, current * pageSize);
     });
+
+    watchEffect(
+      () => {
+        nextTick(() => {
+          const { total, pageSize = DEFAULT_PAGE_SIZE } = mergedPagination.value;
+          // Dynamic table data
+          if (mergedData.value.length < total!) {
+            if (mergedData.value.length > pageSize) {
+              devWarning(
+                false,
+                'Table',
+                '`dataSource` length is less than `pagination.total` but large than `pagination.pageSize`. Please make sure your config correct data with async mode.',
+              );
+            }
+          }
+        });
+      },
+      { flush: 'post' },
+    );
 
     const expandIconColumnIndex = computed(() => {
       // Adjust expand icon index, no overwrite expandIconColumnIndex if set.

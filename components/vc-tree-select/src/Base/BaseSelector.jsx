@@ -58,8 +58,10 @@ export default function(modeName) {
     },
     watch: {
       open(val) {
-        if (!val && this.blurEvent) {
+        const { focused } = this.$props;
+        if (!val && this.blurEvent && !focused) {
           this.onBlur(this.blurEvent);
+          this.blur(this.blurEvent);
         }
       },
     },
@@ -70,7 +72,7 @@ export default function(modeName) {
     },
     methods: {
       onFocus(e) {
-        const { focused } = this.$props;
+        const { focused, open } = this.$props;
         const {
           vcTreeSelect: { onSelectorFocus },
         } = this;
@@ -78,18 +80,21 @@ export default function(modeName) {
         if (!focused) {
           onSelectorFocus();
         }
-        this.__emit('focus', e);
+        if (!open) {
+          this.__emit('focus', e);
+        }
       },
-
+      
       onBlur(e) {
-        const { focused } = this.$props;
+        const { open } = this.$props;
         const {
           vcTreeSelect: { onSelectorBlur },
         } = this;
 
         onSelectorBlur();
         this.blurEvent = e;
-        if (!focused) {
+
+        if (!open) {
           this.__emit('blur', e);
         }
       },

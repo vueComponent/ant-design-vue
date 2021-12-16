@@ -71,8 +71,9 @@ export default defineComponent({
         suffix = slots.suffix?.(),
         ...restProps
       } = props;
-      let { enterButton = slots.enterButton?.() } = props;
+      let { enterButton = slots.enterButton?.() ?? false } = props;
       enterButton = enterButton || enterButton === '';
+      const searchIcon = typeof enterButton === 'boolean' ? <SearchOutlined /> : null;
       const btnClassName = `${prefixCls.value}-button`;
 
       const enterButtonAsElement = Array.isArray(enterButton) ? enterButton[0] : enterButton;
@@ -98,6 +99,7 @@ export default defineComponent({
           false,
         );
       } else {
+        const iconOnly = searchIcon && !enterButton;
         button = (
           <Button
             class={btnClassName}
@@ -108,8 +110,9 @@ export default defineComponent({
             onMousedown={onMousedown}
             onClick={onSearch}
             loading={loading}
+            icon={iconOnly ? searchIcon : null}
           >
-            {enterButton === true ? <SearchOutlined /> : enterButton}
+            {iconOnly ? null : searchIcon || enterButton}
           </Button>
         );
       }

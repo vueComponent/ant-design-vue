@@ -136,6 +136,7 @@ export interface StickyOffsets {
 export type GetComponentProps<DataType> = (
   data: DataType,
   index?: number,
+  column?: ColumnType<any>,
 ) => Omit<HTMLAttributes, 'style'> & { style?: CSSProperties };
 
 type Component<P> = DefineComponent<P> | FunctionalComponent<P> | string;

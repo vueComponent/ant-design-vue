@@ -145,7 +145,7 @@ export default defineComponent<BodyRowProps<unknown>>({
 
             let additionalCellProps;
             if (column.customCell) {
-              additionalCellProps = column.customCell(record, index);
+              additionalCellProps = column.customCell(record, index, column);
             }
 
             return (

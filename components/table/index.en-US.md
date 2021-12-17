@@ -179,7 +179,7 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | maxWidth | Drag the maximum width of the column, it will be affected by the automatic adjustment and distribution of the table width | number | - | 3.0 |
 | resizable | Whether the width can be adjusted by dragging, at this time width must be number type | boolean | - | 3.0 |
 | width | Width of this column | string\|number | - |  |
-| customCell | Set props on per cell | Function(record, rowIndex) | - |  |
+| customCell | Set props on per cell | Function(record, rowIndex, column) | - | column add from 3.0 |
 | customHeaderCell | Set props on per header cell | Function(column) | - |  |
 | onFilter | Callback executed when the confirm filter button is clicked, Use as a `filter` event when using template or jsx | Function | - |  |
 | onFilterDropdownVisibleChange | Callback executed when `filterDropdownVisible` is changed, Use as a `filterDropdownVisible` event when using template or jsx | function(visible) {} | - |  |

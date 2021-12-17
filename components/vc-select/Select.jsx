@@ -94,6 +94,7 @@ const Select = {
     dropdownMatchSelectWidth: PropTypes.bool.def(true),
     dropdownStyle: SelectPropTypes.dropdownStyle.def(() => ({})),
     dropdownMenuStyle: PropTypes.object.def(() => ({})),
+    dropdownPlacement: PropTypes.oneOf(['bottomLeft', 'bottomRight', 'topLeft', 'topRight']),
     optionFilterProp: SelectPropTypes.optionFilterProp.def('value'),
     optionLabelProp: SelectPropTypes.optionLabelProp.def('value'),
     notFoundContent: PropTypes.any.def('Not Found'),
@@ -1641,6 +1642,7 @@ const Select = {
     };
     return (
       <SelectTrigger
+        dropdownPlacement={props.dropdownPlacement}
         dropdownAlign={props.dropdownAlign}
         dropdownClassName={props.dropdownClassName}
         dropdownMatchSelectWidth={props.dropdownMatchSelectWidth}

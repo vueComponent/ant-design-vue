@@ -24,6 +24,22 @@ const BUILT_IN_PLACEMENTS = {
       adjustY: 1,
     },
   },
+  bottomRight: {
+    points: ['tr', 'br'],
+    offset: [0, 4],
+    overflow: {
+      adjustX: 0,
+      adjustY: 1,
+    },
+  },
+  topRight: {
+    points: ['br', 'tr'],
+    offset: [0, -4],
+    overflow: {
+      adjustX: 0,
+      adjustY: 1,
+    },
+  },
 };
 
 export default {
@@ -35,6 +51,7 @@ export default {
     dropdownMatchSelectWidth: PropTypes.bool,
     defaultActiveFirstOption: PropTypes.bool,
     dropdownAlign: PropTypes.object,
+    dropdownPlacement: PropTypes.oneOf(['bottomLeft', 'bottomRight', 'topLeft', 'topRight']),
     visible: PropTypes.bool,
     disabled: PropTypes.bool,
     showSearch: PropTypes.bool,
@@ -181,6 +198,7 @@ export default {
       dropdownClassName,
       dropdownStyle,
       dropdownMatchSelectWidth,
+      dropdownPlacement,
       options,
       getPopupContainer,
       showAction,
@@ -217,13 +235,14 @@ export default {
     if (this.dropdownWidth) {
       popupStyle[widthProp] = `${this.dropdownWidth}px`;
     }
+
     const triggerProps = {
       props: {
         ...$props,
         showAction: disabled ? [] : showAction,
         hideAction,
         ref: 'triggerRef',
-        popupPlacement: 'bottomLeft',
+        popupPlacement: dropdownPlacement || 'bottomLeft',
         builtinPlacements: BUILT_IN_PLACEMENTS,
         prefixCls: dropdownPrefixCls,
         popupTransitionName: this.getDropdownTransitionName(),

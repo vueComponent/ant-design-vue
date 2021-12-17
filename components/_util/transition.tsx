@@ -58,12 +58,17 @@ export const getTransitionGroupProps = (transitionName: string, opt: TransitionP
 let Transition = T;
 let TransitionGroup = TG;
 
-if (process.env.JUST_ANTDV_ENV === 'test') {
+if (process.env.NODE_ENV === 'test') {
+  let warn = true;
   Transition = defineComponent({
     name: 'TransitionForTest',
     inheritAttrs: false,
     setup(_props, { slots, attrs }) {
       const instance = getCurrentInstance();
+      if (warn) {
+        console.warn('application runing at test env, you should build use production env');
+        warn = false;
+      }
       onUpdated(() => {
         const child = instance.subTree.children[0];
         if (child && child.dirs && child.dirs[0]) {

@@ -30,7 +30,7 @@
   "scripts": {
     "predev": "node node_modules/esbuild/install.js",
     "dev": "yarn predev && yarn routes && vite serve site",
-    "test": "cross-env NODE_ENV=test jest --config .jest.js",
+    "test": "cross-env NODE_ENV=test JUST_ANTDV_ENV=test jest --config .jest.js",
     "compile": "node antd-tools/cli/run.js compile",
     "generator-webtypes": "tsc -p antd-tools/generator-types/tsconfig.json && node antd-tools/generator-types/index.js",
     "pub": "node --max_old_space_size=8192 antd-tools/cli/run.js pub",

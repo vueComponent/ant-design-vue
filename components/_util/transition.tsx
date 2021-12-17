@@ -58,7 +58,7 @@ export const getTransitionGroupProps = (transitionName: string, opt: TransitionP
 let Transition = T;
 let TransitionGroup = TG;
 
-if (process.env.NODE_ENV === 'test') {
+if (process.env.JUST_ANTDV_ENV === 'test') {
   Transition = defineComponent({
     name: 'TransitionForTest',
     inheritAttrs: false,

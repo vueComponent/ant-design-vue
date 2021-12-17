@@ -35,7 +35,7 @@ const defaultPushState: PushState = { distance: 180 };
 const drawerProps = () => ({
   autofocus: PropTypes.looseBool,
   closable: PropTypes.looseBool,
-  closeIcon: PropTypes.VNodeChild,
+  closeIcon: PropTypes.any,
   destroyOnClose: PropTypes.looseBool,
   forceRender: PropTypes.looseBool,
   getContainer: PropTypes.any,
@@ -55,7 +55,7 @@ const drawerProps = () => ({
   headerStyle: PropTypes.object,
   bodyStyle: PropTypes.object,
   contentWrapperStyle: PropTypes.object,
-  title: PropTypes.VNodeChild,
+  title: PropTypes.any,
   visible: PropTypes.looseBool,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -64,12 +64,12 @@ const drawerProps = () => ({
   push: PropTypes.oneOfType([PropTypes.looseBool, { type: Object as PropType<PushState> }]),
   placement: PropTypes.oneOf(PlacementTypes),
   keyboard: PropTypes.looseBool,
-  extra: PropTypes.VNodeChild,
-  footer: PropTypes.VNodeChild,
+  extra: PropTypes.any,
+  footer: PropTypes.any,
   footerStyle: PropTypes.object,
   level: PropTypes.any,
   levelMove: PropTypes.any,
-  handle: PropTypes.VNodeChild,
+  handle: PropTypes.any,
   /** @deprecated Use `@afterVisibleChange` instead */
   afterVisibleChange: PropTypes.func,
 });

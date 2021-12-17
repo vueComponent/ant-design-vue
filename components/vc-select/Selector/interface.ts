@@ -1,15 +1,15 @@
 import type { RefObject } from '../../_util/createRef';
-import type { VNodeChild } from 'vue';
 import type { Mode } from '../interface';
 import type { LabelValueType } from '../interface/generator';
 import type { EventHandler } from '../../_util/EventInterface';
+import type { VueNode } from '../../_util/type';
 
 export interface InnerSelectorProps {
   prefixCls: string;
   id: string;
   mode: Mode;
   inputRef: RefObject;
-  placeholder?: VNodeChild;
+  placeholder?: VueNode;
   disabled?: boolean;
   autofocus?: boolean;
   autocomplete?: string;

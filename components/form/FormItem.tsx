@@ -76,9 +76,9 @@ function getPropByPath(obj: any, namePathList: any, strict?: boolean) {
 export const formItemProps = {
   htmlFor: PropTypes.string,
   prefixCls: PropTypes.string,
-  label: PropTypes.VNodeChild,
-  help: PropTypes.VNodeChild,
-  extra: PropTypes.VNodeChild,
+  label: PropTypes.any,
+  help: PropTypes.any,
+  extra: PropTypes.any,
   labelCol: { type: Object as PropType<ColProps> },
   wrapperCol: { type: Object as PropType<ColProps> },
   hasFeedback: PropTypes.looseBool.def(false),

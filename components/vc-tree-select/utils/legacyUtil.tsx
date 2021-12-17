@@ -1,5 +1,4 @@
 import { filterEmpty } from '../../_util/props-util';
-import type { VNodeChild } from 'vue';
 import { camelize } from 'vue';
 import { warning } from '../../vc-util/warning';
 import type {
@@ -11,11 +10,12 @@ import type {
   LegacyCheckedNode,
 } from '../interface';
 import TreeNode from '../TreeNode';
+import type { VueNode } from '../../_util/type';
 
 function isTreeSelectNode(node: any) {
   return node && node.type && (node.type as any).isTreeSelectNode;
 }
-export function convertChildrenToData(rootNodes: VNodeChild): DataNode[] {
+export function convertChildrenToData(rootNodes: VueNode): DataNode[] {
   function dig(treeNodes: any[] = []): DataNode[] {
     return filterEmpty(treeNodes).map(treeNode => {
       // Filter invalidate node

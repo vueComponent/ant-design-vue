@@ -36,7 +36,7 @@ import { getSeparatedContent } from './utils/valueUtil';
 import useSelectTriggerControl from './hooks/useSelectTriggerControl';
 import useCacheDisplayValue from './hooks/useCacheDisplayValue';
 import useCacheOptions from './hooks/useCacheOptions';
-import type { CSSProperties, PropType, VNode, VNodeChild } from 'vue';
+import type { CSSProperties, PropType, VNode } from 'vue';
 import {
   getCurrentInstance,
   computed,
@@ -54,6 +54,7 @@ import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
 import isMobile from '../vc-util/isMobile';
 import { getTextFromElement } from '../_util/props-util';
+import type { VueNode } from '../_util/type';
 
 const DEFAULT_OMIT_PROPS = [
   'children',
@@ -116,9 +117,9 @@ export function selectBaseProps<OptionType, ValueType>() {
     allowClear: { type: Boolean, default: undefined },
     clearIcon: PropTypes.any,
     showArrow: { type: Boolean, default: undefined },
-    inputIcon: PropTypes.VNodeChild,
-    removeIcon: PropTypes.VNodeChild,
-    menuItemSelectedIcon: PropTypes.VNodeChild,
+    inputIcon: PropTypes.any,
+    removeIcon: PropTypes.any,
+    menuItemSelectedIcon: PropTypes.any,
 
     // Dropdown
     open: { type: Boolean, default: undefined },
@@ -232,7 +233,7 @@ export interface GenerateConfig<OptionType extends object> {
     // >;
   };
   /** Convert jsx tree into `OptionType[]` */
-  convertChildrenToData: (children: VNodeChild | JSX.Element) => OptionType[];
+  convertChildrenToData: (children: VueNode) => OptionType[];
   /** Flatten nest options into raw option list */
   flattenOptions: (options: OptionType[], props: any) => FlattenOptionsType<OptionType>;
   /** Convert single raw value into { label, value } format. Will be called by each value */
@@ -392,7 +393,7 @@ export default function generateSelector<
       const mergedOptions = computed((): OptionType[] => {
         let newOptions = props.options;
         if (newOptions === undefined) {
-          newOptions = convertChildrenToData(props.children as VNodeChild);
+          newOptions = convertChildrenToData(props.children as VueNode);
         }
 
         /**
@@ -1057,7 +1058,7 @@ export default function generateSelector<
         } = { ...props, ...attrs }; //as SelectProps<OptionType[], ValueType>;
         // ============================= Input ==============================
         // Only works in `combobox`
-        const customizeInputElement: VNodeChild | JSX.Element =
+        const customizeInputElement: VueNode =
           (mode === 'combobox' && getInputElement && getInputElement()) || null;
 
         const domProps = omitDOMProps ? omitDOMProps(restProps) : restProps;

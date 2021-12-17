@@ -45,19 +45,19 @@ const alertProps = {
   /** Whether Alert can be closed */
   closable: PropTypes.looseBool,
   /** Close text to show */
-  closeText: PropTypes.VNodeChild,
+  closeText: PropTypes.any,
   /** Content of Alert */
-  message: PropTypes.VNodeChild,
+  message: PropTypes.any,
   /** Additional content of Alert */
-  description: PropTypes.VNodeChild,
+  description: PropTypes.any,
   /** Trigger when animation ending of Alert */
   afterClose: PropTypes.func.def(noop),
   /** Whether to show icon */
   showIcon: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   banner: PropTypes.looseBool,
-  icon: PropTypes.VNodeChild,
-  onClose: PropTypes.VNodeChild,
+  icon: PropTypes.any,
+  onClose: PropTypes.any,
 };
 
 export type AlertProps = Partial<ExtractPropTypes<typeof alertProps>>;

@@ -1,4 +1,3 @@
-import type { VNodeChild } from 'vue';
 import { computed, defineComponent } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
@@ -12,6 +11,7 @@ import { getSuccessPercent, validProgress } from './utils';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import { progressProps, progressStatuses } from './props';
+import type { VueNode } from '../_util/type';
 
 export default defineComponent({
   name: 'AProgress',
@@ -67,7 +67,7 @@ export default defineComponent({
       const successPercent = getSuccessPercent(props);
       if (!showInfo) return null;
 
-      let text: VNodeChild;
+      let text: VueNode;
       const textFormatter = format || slots?.format || ((val: number) => `${val}%`);
       const isLineType = type === 'line';
       if (
@@ -92,7 +92,7 @@ export default defineComponent({
       const { type, steps, strokeColor } = props;
       const progressInfo = renderProcessInfo();
 
-      let progress: VNodeChild;
+      let progress: VueNode;
       // Render progress shape
       if (type === 'line') {
         progress = steps ? (

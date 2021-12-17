@@ -14,7 +14,7 @@ export type PanelBodyProps<DateType> = {
   picker?: PanelMode;
 
   // By panel
-  headerCells?: VueNode;
+  headerCells?: VueNode[];
   rowNum: number;
   colNum: number;
   baseDate: DateType;

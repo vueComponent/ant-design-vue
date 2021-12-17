@@ -1,6 +1,7 @@
 import PropTypes from '../_util/vue-types';
+import type { VueNode } from '../_util/type';
 import { tuple } from '../_util/type';
-import type { PropType, VNodeChild, ExtractPropTypes } from 'vue';
+import type { PropType, ExtractPropTypes } from 'vue';
 
 export const progressStatuses = tuple('normal', 'exception', 'active', 'success');
 export type ProgressStatusesType = typeof progressStatuses[number];
@@ -21,7 +22,7 @@ export const progressProps = () => ({
   prefixCls: PropTypes.string,
   type: PropTypes.oneOf(ProgressType),
   percent: PropTypes.number,
-  format: { type: Function as PropType<(percent?: number, successPercent?: number) => VNodeChild> },
+  format: { type: Function as PropType<(percent?: number, successPercent?: number) => VueNode> },
   status: PropTypes.oneOf(progressStatuses),
   showInfo: PropTypes.looseBool,
   strokeWidth: PropTypes.number,

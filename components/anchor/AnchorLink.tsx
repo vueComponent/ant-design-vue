@@ -9,7 +9,7 @@ import { useInjectAnchor } from './context';
 const anchorLinkProps = {
   prefixCls: PropTypes.string,
   href: PropTypes.string.def('#'),
-  title: PropTypes.VNodeChild,
+  title: PropTypes.any,
   target: PropTypes.string,
 };
 

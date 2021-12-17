@@ -10,11 +10,11 @@ import type {
 } from '../interface';
 import { getPosition, isTreeNode } from '../util';
 import { warning } from '../../vc-util/warning';
-import type { VNodeChild } from 'vue';
 import { camelize } from 'vue';
 import type { TreeNodeProps } from '../props';
 import { filterEmpty } from '../../_util/props-util';
 import omit from '../../_util/omit';
+import type { VueNode } from '../../_util/type';
 
 export function getKey(key: Key, pos: string) {
   if (key !== null && key !== undefined) {
@@ -65,8 +65,8 @@ export function warningWithoutKey(treeData: DataNode[], fieldNames: FieldNames) 
 /**
  * Convert `children` of Tree into `treeData` structure.
  */
-export function convertTreeToData(rootNodes: VNodeChild): DataNode[] {
-  function dig(node: VNodeChild = []): DataNode[] {
+export function convertTreeToData(rootNodes: VueNode): DataNode[] {
+  function dig(node: VueNode = []): DataNode[] {
     const treeNodes = filterEmpty(node as NodeElement[]);
     return treeNodes.map(treeNode => {
       // Filter invalidate node

@@ -19,9 +19,9 @@ export const statisticProps = {
   valueRender: PropTypes.any,
   formatter: PropTypes.any,
   precision: PropTypes.number,
-  prefix: PropTypes.VNodeChild,
-  suffix: PropTypes.VNodeChild,
-  title: PropTypes.VNodeChild,
+  prefix: PropTypes.any,
+  suffix: PropTypes.any,
+  title: PropTypes.any,
   onFinish: PropTypes.func,
   loading: PropTypes.looseBool,
 };

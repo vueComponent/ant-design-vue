@@ -31,6 +31,7 @@ export default defineComponent({
     const formItemContext = useInjectFormItemContext();
     const stateValue = ref(props.value === undefined ? props.defaultValue : props.value);
     const resizableTextArea = ref();
+    const mergedValue = ref('');
     const { prefixCls, size, direction } = useConfigInject('input', props);
     const showCount = computed(() => {
       return (props.showCount as any) === '' || props.showCount || false;
@@ -63,7 +64,11 @@ export default defineComponent({
       if (props.value === undefined) {
         stateValue.value = value;
       } else {
-        resizableTextArea.value?.instance.update?.();
+        nextTick(() => {
+          if (resizableTextArea.value.textArea.value !== mergedValue.value) {
+            resizableTextArea.value?.instance.update?.();
+          }
+        });
       }
       nextTick(() => {
         callback && callback();
@@ -152,7 +157,7 @@ export default defineComponent({
       blur,
       resizableTextArea,
     });
-    const mergedValue = ref('');
+
     watchEffect(() => {
       let val = fixControlledValue(stateValue.value) as string;
       if (

@@ -14,14 +14,14 @@ import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
 
 export const pageHeaderProps = {
-  backIcon: PropTypes.VNodeChild,
+  backIcon: PropTypes.any,
   prefixCls: PropTypes.string,
-  title: PropTypes.VNodeChild,
-  subTitle: PropTypes.VNodeChild,
+  title: PropTypes.any,
+  subTitle: PropTypes.any,
   breadcrumb: PropTypes.object,
   tags: PropTypes.any,
-  footer: PropTypes.VNodeChild,
-  extra: PropTypes.VNodeChild,
+  footer: PropTypes.any,
+  extra: PropTypes.any,
   avatar: PropTypes.object,
   ghost: PropTypes.looseBool,
   onBack: PropTypes.func,

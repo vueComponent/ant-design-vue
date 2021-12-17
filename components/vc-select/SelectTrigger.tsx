@@ -3,11 +3,12 @@ import PropTypes from '../_util/vue-types';
 import { getSlot } from '../_util/props-util';
 import classNames from '../_util/classNames';
 import createRef from '../_util/createRef';
-import type { CSSProperties, VNodeChild } from 'vue';
+import type { CSSProperties } from 'vue';
 import { defineComponent } from 'vue';
 import type { RenderDOMFunc } from './interface';
 import type { DropdownRender } from './interface/generator';
 import type { Placement } from './generate';
+import type { VueNode } from '../_util/type';
 
 const getBuiltInPlacements = (dropdownMatchSelectWidth: number | boolean) => {
   // Enable horizontal overflow auto-adjustment when a custom dropdown width is provided
@@ -52,7 +53,7 @@ export interface SelectTriggerProps {
   prefixCls: string;
   disabled: boolean;
   visible: boolean;
-  popupElement: VNodeChild | JSX.Element;
+  popupElement: VueNode;
   animation?: string;
   transitionName?: string;
   containerWidth: number;

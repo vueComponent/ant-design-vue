@@ -6,7 +6,7 @@ import { useInjectMenu } from './hooks/useMenuContext';
 import { useMeasure } from './hooks/useKeyPath';
 
 const menuItemGroupProps = {
-  title: PropTypes.VNodeChild,
+  title: PropTypes.any,
 };
 
 export type MenuItemGroupProps = Partial<ExtractPropTypes<typeof menuItemGroupProps>>;

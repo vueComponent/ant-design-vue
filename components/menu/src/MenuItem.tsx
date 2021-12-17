@@ -19,7 +19,7 @@ const menuItemProps = {
   disabled: Boolean,
   danger: Boolean,
   title: { type: [String, Boolean], default: undefined },
-  icon: PropTypes.VNodeChild,
+  icon: PropTypes.any,
 };
 
 export type MenuItemProps = Partial<ExtractPropTypes<typeof menuItemProps>>;

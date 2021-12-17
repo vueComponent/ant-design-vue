@@ -111,7 +111,7 @@ export const treeProps = () => ({
   prefixCls: String,
   focusable: { type: Boolean, default: undefined },
   tabindex: Number,
-  children: PropTypes.VNodeChild,
+  children: PropTypes.any,
   treeData: { type: Array as PropType<DataNode[]> }, // Generate treeNode by children
   fieldNames: { type: Object as PropType<FieldNames> },
   showLine: { type: Boolean, default: undefined },

@@ -1,4 +1,4 @@
-import type { App, PropType, VNodeChild, Plugin, Ref } from 'vue';
+import type { App, PropType, Plugin, Ref, VNode } from 'vue';
 
 // https://stackoverflow.com/questions/46176165/ways-to-get-string-literal-type-of-array-values-without-enum-overhead
 export const tuple = <T extends string[]>(...args: T) => args;
@@ -29,7 +29,8 @@ export interface PropOptions<T = any, D = T> {
   validator?(value: unknown): boolean;
 }
 
-export type VueNode = VNodeChild | JSX.Element;
+declare type VNodeChildAtom = VNode | string | number | boolean | null | undefined | void;
+export type VueNode = VNodeChildAtom | VNodeChildAtom[] | JSX.Element;
 
 export const withInstall = <T>(comp: T) => {
   const c = comp as any;

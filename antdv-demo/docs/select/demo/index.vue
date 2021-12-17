@@ -14,6 +14,7 @@ import Suffix from './suffix';
 import HideSelected from './hide-selected';
 import CustomDropdownMenu from './custom-dropdown-menu';
 import OptionLabelProp from './option-label-prop';
+import DropdownPlacement from './dropdown-placement';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -57,6 +58,7 @@ export default {
           <HideSelected />
           <CustomDropdownMenu />
           <OptionLabelProp />
+          <DropdownPlacement />
         </demo-sort>
         <api>
           <CN slot="cn" />

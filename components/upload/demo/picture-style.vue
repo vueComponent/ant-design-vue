@@ -46,22 +46,14 @@ If uploaded file is a picture, the thumbnail can be shown. `IE8/9` do not suppor
 <script lang="ts">
 import { UploadOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
-
-interface FileItem {
-  uid: string;
-  name?: string;
-  status?: string;
-  response?: string;
-  url?: string;
-  thumbUrl?: string;
-}
+import type { UploadProps } from 'ant-design-vue';
 
 export default defineComponent({
   components: {
     UploadOutlined,
   },
   setup() {
-    const fileList = ref<FileItem[]>([
+    const fileList = ref<UploadProps['fileList']>([
       {
         uid: '-1',
         name: 'xxx.png',
@@ -77,7 +69,7 @@ export default defineComponent({
         thumbUrl: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
       },
     ]);
-    const fileList1 = ref<FileItem[]>([
+    const fileList1 = ref<UploadProps['fileList']>([
       {
         uid: '-1',
         name: 'xxx.png',

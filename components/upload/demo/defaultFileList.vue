@@ -26,25 +26,14 @@ Use `defaultFileList` for uploaded files when page init.
 <script lang="ts">
 import { UploadOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
-
-interface FileItem {
-  uid: string;
-  name?: string;
-  status?: string;
-  response?: string;
-  url?: string;
-}
-interface FileInfo {
-  file: FileItem;
-  fileList: FileItem[];
-}
+import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 
 export default defineComponent({
   components: {
     UploadOutlined,
   },
   setup() {
-    const fileList = ref<FileItem[]>([
+    const fileList = ref<UploadProps['fileList']>([
       {
         uid: '1',
         name: 'xxx.png',
@@ -67,7 +56,7 @@ export default defineComponent({
       },
     ]);
 
-    const handleChange = ({ file, fileList }: FileInfo) => {
+    const handleChange = ({ file, fileList }: UploadChangeParam) => {
       if (file.status !== 'uploading') {
         console.log(file, fileList);
       }

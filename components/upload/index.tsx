@@ -2,7 +2,7 @@ import type { App, Plugin } from 'vue';
 import Upload from './Upload';
 import Dragger from './Dragger';
 
-export { UploadProps, UploadListProps, UploadChangeParam } from './interface';
+export type { UploadProps, UploadListProps, UploadChangeParam } from './interface';
 
 Upload.Dragger = Dragger;
 

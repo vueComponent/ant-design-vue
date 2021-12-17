@@ -1,12 +1,12 @@
 import { defineComponent } from 'vue';
 import { getOptionProps, getSlot } from '../_util/props-util';
 import Upload from './Upload';
-import { UploadProps } from './interface';
+import { uploadProps } from './interface';
 
 export default defineComponent({
   name: 'AUploadDragger',
   inheritAttrs: false,
-  props: UploadProps,
+  props: uploadProps,
   render() {
     const props = getOptionProps(this);
     const { height, ...restProps } = props;

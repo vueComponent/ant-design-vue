@@ -2,10 +2,10 @@ import { mount } from '@vue/test-utils';
 import Upload from '..';
 import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from '../utils';
 import PropsTypes from '../../_util/vue-types';
-import { UploadListProps } from '../interface';
+import { uploadListProps } from '../interface';
 import { setup, teardown } from './mock';
 
-UploadListProps.items = PropsTypes.any;
+uploadListProps.items = PropsTypes.any;
 
 describe('Upload', () => {
   beforeEach(() => setup());

@@ -10,39 +10,19 @@ import defaultLocale from '../locale-provider/default';
 import { defaultConfigProvider } from '../config-provider';
 import Dragger from './Dragger';
 import UploadList from './UploadList';
-import { UploadProps } from './interface';
+import type { UploadFile } from './interface';
+import { uploadProps } from './interface';
 import { T, fileToObject, genPercentAdd, getFileItem, removeFileItem } from './utils';
 import { defineComponent, inject } from 'vue';
 import { getDataAndAriaProps } from '../_util/util';
 import { useInjectFormItemContext } from '../form/FormItemContext';
-
-export type UploadFileStatus = 'error' | 'success' | 'done' | 'uploading' | 'removed';
-export interface UploadFile<T = any> {
-  uid: string;
-  size?: number;
-  name: string;
-  fileName?: string;
-  lastModified?: number;
-  lastModifiedDate?: Date;
-  url?: string;
-  status?: UploadFileStatus;
-  percent?: number;
-  thumbUrl?: string;
-  originFileObj?: any;
-  response?: T;
-  error?: any;
-  linkProps?: any;
-  type?: string;
-  xhr?: T;
-  preview?: string;
-}
 
 export default defineComponent({
   name: 'AUpload',
   mixins: [BaseMixin],
   inheritAttrs: false,
   Dragger,
-  props: initDefaultProps(UploadProps, {
+  props: initDefaultProps(uploadProps, {
     type: 'select',
     multiple: false,
     action: '',

@@ -20,12 +20,12 @@ import EyeOutlined from '@ant-design/icons-vue/EyeOutlined';
 import Tooltip from '../tooltip';
 import Progress from '../progress';
 import classNames from '../_util/classNames';
-import { UploadListProps } from './interface';
+import { uploadListProps } from './interface';
 
 export default defineComponent({
   name: 'AUploadList',
   mixins: [BaseMixin],
-  props: initDefaultProps(UploadListProps, {
+  props: initDefaultProps(uploadListProps, {
     listType: 'text', // or picture
     progressAttr: {
       strokeWidth: 2,

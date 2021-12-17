@@ -41,26 +41,14 @@ We can upload serveral files at once in modern browsers by giving the input the 
 import { InboxOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 import { defineComponent, ref } from 'vue';
-
-interface FileItem {
-  uid: string;
-  name?: string;
-  status?: string;
-  response?: string;
-  url?: string;
-}
-
-interface FileInfo {
-  file: FileItem;
-  fileList: FileItem[];
-}
+import type { UploadChangeParam } from 'ant-design-vue';
 
 export default defineComponent({
   components: {
     InboxOutlined,
   },
   setup() {
-    const handleChange = (info: FileInfo) => {
+    const handleChange = (info: UploadChangeParam) => {
       const status = info.file.status;
       if (status !== 'uploading') {
         console.log(info.file, info.fileList);

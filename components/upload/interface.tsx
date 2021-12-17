@@ -1,3 +1,4 @@
+import type { ExtractPropTypes, PropType } from 'vue';
 import { tuple } from '../_util/type';
 import PropsTypes from '../_util/vue-types';
 
@@ -15,58 +16,51 @@ export interface VcFile extends File {
   readonly webkitRelativePath: string;
 }
 
-// export const UploadFile = PropsTypes.shape({
-//   uid: PropsTypes.oneOfType([
-//     PropsTypes.string,
-//     PropsTypes.number,
-//   ]),
-//   size: PropsTypes.number,
-//   name: PropsTypes.string,
-//   filename: PropsTypes.string,
-//   lastModified: PropsTypes.number,
-//   lastModifiedDate: PropsTypes.any,
-//   url: PropsTypes.string,
-//   status: UploadFileStatus,
-//   percent: PropsTypes.number,
-//   thumbUrl: PropsTypes.string,
-//   originFileObj: PropsTypes.any,
-//   response: PropsTypes.any,
-//   error: PropsTypes.any,
-//   linkProps: PropsTypes.any,
-//   type: PropsTypes.string,
-// }).loose
-
-function UploadFile({ uid, name }) {
-  if (!uid && uid !== 0) return false;
-  if (!['string', 'number'].includes(typeof uid)) return false;
-  if (name === '' || typeof name !== 'string') return false;
-  return true;
+export type UploadFileStatus = 'error' | 'success' | 'done' | 'uploading' | 'removed';
+export interface UploadFile<T = any> {
+  uid: string;
+  size?: number;
+  name: string;
+  fileName?: string;
+  lastModified?: number;
+  lastModifiedDate?: Date;
+  url?: string;
+  status?: UploadFileStatus;
+  percent?: number;
+  thumbUrl?: string;
+  originFileObj?: any;
+  response?: T;
+  error?: any;
+  linkProps?: any;
+  type?: string;
+  xhr?: T;
+  preview?: string;
 }
 
-export const UploadChangeParam = {
-  file: PropsTypes.custom(UploadFile),
-  fileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
-  event: PropsTypes.object,
-};
+export interface UploadChangeParam<T extends object = UploadFile> {
+  file: T;
+  fileList: UploadFile[];
+  event?: { percent: number };
+}
 
 export const ShowUploadListInterface = PropsTypes.shape({
   showRemoveIcon: PropsTypes.looseBool,
   showPreviewIcon: PropsTypes.looseBool,
 }).loose;
 
-export const UploadLocale = PropsTypes.shape({
-  uploading: PropsTypes.string,
-  removeFile: PropsTypes.string,
-  downloadFile: PropsTypes.string,
-  uploadError: PropsTypes.string,
-  previewFile: PropsTypes.string,
-}).loose;
+export interface UploadLocale {
+  uploading?: string;
+  removeFile?: string;
+  downloadFile?: string;
+  uploadError?: string;
+  previewFile?: string;
+}
 
-export const UploadProps = {
+export const uploadProps = {
   type: PropsTypes.oneOf(tuple('drag', 'select')),
   name: PropsTypes.string,
-  defaultFileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
-  fileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
+  defaultFileList: { type: Array as PropType<UploadFile[]> },
+  fileList: { type: Array as PropType<UploadFile[]> },
   action: PropsTypes.oneOfType([PropsTypes.string, PropsTypes.func]),
   directory: PropsTypes.looseBool,
   data: PropsTypes.oneOfType([PropsTypes.object, PropsTypes.func]),
@@ -86,36 +80,37 @@ export const UploadProps = {
   customRequest: PropsTypes.func,
   withCredentials: PropsTypes.looseBool,
   openFileDialogOnClick: PropsTypes.looseBool,
-  locale: UploadLocale,
+  locale: { type: Object as PropType<UploadLocale> },
   height: PropsTypes.number,
   id: PropsTypes.string,
   previewFile: PropsTypes.func,
   transformFile: PropsTypes.func,
-  onChange: PropsTypes.func,
-  onPreview: PropsTypes.func,
-  onRemove: PropsTypes.func,
-  onDownload: PropsTypes.func,
-  'onUpdate:fileList': PropsTypes.func,
+  onChange: { type: Function as PropType<(info: UploadChangeParam) => void> },
+  onPreview: { type: Function as PropType<(file: UploadFile) => void> },
+  onRemove: {
+    type: Function as PropType<(file: UploadFile) => void | boolean | Promise<void | boolean>>,
+  },
+  onDownload: { type: Function as PropType<(file: UploadFile) => void> },
+  'onUpdate:fileList': { type: Function as PropType<(files: UploadFile[]) => void> },
 };
 
-export const UploadState = {
-  fileList: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
-  dragState: PropsTypes.string,
-};
-
-export const UploadListProps = {
+export type UploadProps = Partial<ExtractPropTypes<typeof uploadProps>>;
+export const uploadListProps = {
   listType: PropsTypes.oneOf(tuple('text', 'picture', 'picture-card')),
   // items: PropsTypes.arrayOf(UploadFile),
-  items: PropsTypes.arrayOf(PropsTypes.custom(UploadFile)),
-  // items: PropsTypes.any,
+  items: { type: Array as PropType<UploadFile[]> },
   progressAttr: PropsTypes.object,
   prefixCls: PropsTypes.string,
   showRemoveIcon: PropsTypes.looseBool,
   showDownloadIcon: PropsTypes.looseBool,
   showPreviewIcon: PropsTypes.looseBool,
-  locale: UploadLocale,
+  locale: { type: Object as PropType<UploadLocale> },
   previewFile: PropsTypes.func,
-  onPreview: PropsTypes.func,
-  onRemove: PropsTypes.func,
-  onDownload: PropsTypes.func,
+  onPreview: { type: Function as PropType<(file: UploadFile) => void> },
+  onRemove: {
+    type: Function as PropType<(file: UploadFile) => void | boolean>,
+  },
+  onDownload: { type: Function as PropType<(file: UploadFile) => void> },
 };
+
+export type UploadListProps = Partial<ExtractPropTypes<typeof uploadListProps>>;

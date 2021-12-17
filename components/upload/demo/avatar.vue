@@ -42,22 +42,7 @@ Click to upload user's avatar, and validate size and format of picture with `bef
 import { PlusOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 import { defineComponent, ref } from 'vue';
-
-interface FileItem {
-  uid: string;
-  name?: string;
-  status?: string;
-  response?: string;
-  url?: string;
-  type?: string;
-  size: number;
-  originFileObj: any;
-}
-
-interface FileInfo {
-  file: FileItem;
-  fileList: FileItem[];
-}
+import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 
 function getBase64(img: Blob, callback: (base64Url: string) => void) {
   const reader = new FileReader();
@@ -74,7 +59,7 @@ export default defineComponent({
     const loading = ref<boolean>(false);
     const imageUrl = ref<string>('');
 
-    const handleChange = (info: FileInfo) => {
+    const handleChange = (info: UploadChangeParam) => {
       if (info.file.status === 'uploading') {
         loading.value = true;
         return;
@@ -92,7 +77,7 @@ export default defineComponent({
       }
     };
 
-    const beforeUpload = (file: FileItem) => {
+    const beforeUpload = (file: UploadProps['fileList'][number]) => {
       const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
       if (!isJpgOrPng) {
         message.error('You can only upload JPG file!');

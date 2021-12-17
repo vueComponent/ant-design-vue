@@ -76,7 +76,10 @@ export declare class Select extends AntdComponent {
    * @type object
    */
   dropdownStyle: object;
-
+  /**
+   * location of dropdown menu
+   */
+  dropdownPlacement: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
   /**
    * If true, filter options by input, if function, filter options against it. The function will receive two arguments, inputValue and option,
    * if the function returns true, the option will be included in the filtered set; Otherwise, it will be excluded.

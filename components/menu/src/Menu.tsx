@@ -75,7 +75,7 @@ export default defineComponent({
   ],
   slots: ['expandIcon', 'overflowedIndicator'],
   setup(props, { slots, emit, attrs }) {
-    const { prefixCls, direction } = useConfigInject('menu', props);
+    const { prefixCls, direction, getPrefixCls } = useConfigInject('menu', props);
     const store = ref<Record<string, StoreMenuInfo>>({});
     const siderCollapsed = inject(SiderCollapsedKey, ref(undefined));
     const inlineCollapsed = computed(() => {
@@ -293,12 +293,12 @@ export default defineComponent({
         [`${prefixCls.value}-${props.theme}`]: true,
       };
     });
-
-    const defaultMotions = {
-      horizontal: { name: `ant-slide-up` },
+    const rootPrefixCls = computed(() => getPrefixCls());
+    const defaultMotions = computed(() => ({
+      horizontal: { name: `${rootPrefixCls.value}-slide-up` },
       inline: collapseMotion,
-      other: { name: `ant-zoom-big` },
-    };
+      other: { name: `${rootPrefixCls.value}-zoom-big` },
+    }));
 
     useProvideFirstLevel(true);
 
@@ -381,7 +381,7 @@ export default defineComponent({
       inlineCollapsed: mergedInlineCollapsed,
       antdMenuTheme: computed(() => props.theme),
       siderCollapsed,
-      defaultMotions: computed(() => (isMounted.value ? defaultMotions : null)),
+      defaultMotions: computed(() => (isMounted.value ? defaultMotions.value : null)),
       motion: computed(() => (isMounted.value ? props.motion : null)),
       overflowDisabled: ref(undefined),
       onOpenChange: onInternalOpenChange,

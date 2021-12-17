@@ -57,7 +57,6 @@ const TreeSelect = defineComponent({
   name: 'ATreeSelect',
   inheritAttrs: false,
   props: initDefaultProps(treeSelectProps, {
-    transitionName: 'ant-slide-up',
     choiceTransitionName: '',
     listHeight: 256,
     treeIcon: false,
@@ -101,7 +100,15 @@ const TreeSelect = defineComponent({
       dropdownMatchSelectWidth,
       size,
       getPopupContainer,
+      getPrefixCls,
     } = useConfigInject('select', props);
+    const rootPrefixCls = computed(() => getPrefixCls());
+    const transitionName = computed(() =>
+      getTransitionName(rootPrefixCls.value, 'slide-up', props.transitionName),
+    );
+    const choiceTransitionName = computed(() =>
+      getTransitionName(rootPrefixCls.value, '', props.choiceTransitionName),
+    );
     const treePrefixCls = computed(() =>
       configProvider.getPrefixCls('select-tree', props.prefixCls),
     );
@@ -154,8 +161,6 @@ const TreeSelect = defineComponent({
         listItemHeight,
         multiple,
         treeIcon,
-        transitionName,
-        choiceTransitionName,
         treeLine,
         switcherIcon = slots.switcherIcon?.(),
         fieldNames = props.replaceFields,
@@ -197,7 +202,6 @@ const TreeSelect = defineComponent({
         },
         attrs.class,
       );
-      const rootPrefixCls = configProvider.getPrefixCls();
       const otherProps: any = {};
       if (props.treeData === undefined && slots.default) {
         otherProps.children = flattenChildren(slots.default());
@@ -227,8 +231,7 @@ const TreeSelect = defineComponent({
           getPopupContainer={getPopupContainer.value}
           treeMotion={null}
           dropdownClassName={mergedDropdownClassName.value}
-          choiceTransitionName={getTransitionName(rootPrefixCls, '', choiceTransitionName)}
-          transitionName={getTransitionName(rootPrefixCls, 'slide-up', transitionName)}
+          choiceTransitionName={choiceTransitionName.value}
           onChange={handleChange}
           onBlur={handleBlur}
           onSearch={handleSearch}
@@ -238,6 +241,7 @@ const TreeSelect = defineComponent({
             treeCheckable: () => <span class={`${prefixCls.value}-tree-checkbox-inner`} />,
           }}
           {...otherProps}
+          transitionName={transitionName.value}
         />
       );
     };

@@ -9,6 +9,7 @@ import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import omit from '../_util/omit';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import { getTransitionName } from '../_util/transition';
 
 type RawValue = string | number;
 
@@ -37,7 +38,7 @@ export const selectProps = () => ({
   size: PropTypes.oneOf(tuple('small', 'middle', 'large', 'default')),
   mode: PropTypes.oneOf(tuple('multiple', 'tags', 'SECRET_COMBOBOX_MODE_DO_NOT_USE')),
   bordered: PropTypes.looseBool.def(true),
-  transitionName: PropTypes.string.def('ant-slide-up'),
+  transitionName: PropTypes.string,
   choiceTransitionName: PropTypes.string.def(''),
 });
 
@@ -89,7 +90,11 @@ const Select = defineComponent({
 
       return mode;
     });
-    const { prefixCls, direction, configProvider } = useConfigInject('select', props);
+    const { prefixCls, direction, configProvider, getPrefixCls } = useConfigInject('select', props);
+    const rootPrefixCls = computed(() => getPrefixCls());
+    const transitionName = computed(() =>
+      getTransitionName(rootPrefixCls.value, 'slide-up', props.transitionName),
+    );
     const mergedClassName = computed(() =>
       classNames({
         [`${prefixCls.value}-lg`]: props.size === 'large',
@@ -189,6 +194,7 @@ const Select = defineComponent({
           id={id}
           dropdownRender={selectProps.dropdownRender || slots.dropdownRender}
           v-slots={{ option: slots.option }}
+          transitionName={transitionName.value}
         >
           {slots.default?.()}
         </RcSelect>

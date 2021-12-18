@@ -118,7 +118,7 @@
 
   // ======================== Warning ========================
   &-has-warning {
-    .form-control-validation(@warning-color; @warning-color; @form-warning-input-bg);
+    .form-control-validation(@warning-color; @warning-color; @form-warning-input-bg; @warning-color-hover; @warning-color-outline);
 
     &.@{form-item-prefix-cls}-has-feedback .@{form-item-prefix-cls}-children-icon {
       color: @warning-color;
@@ -159,7 +159,7 @@
 
   // ========================= Error =========================
   &-has-error {
-    .form-control-validation(@error-color; @error-color; @form-error-input-bg);
+    .form-control-validation(@error-color; @error-color; @form-error-input-bg; @error-color-hover; @error-color-outline);
 
     &.@{form-item-prefix-cls}-has-feedback .@{form-item-prefix-cls}-children-icon {
       color: @error-color;

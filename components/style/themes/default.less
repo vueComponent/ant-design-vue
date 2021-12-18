@@ -17,12 +17,26 @@
 @info-color: @primary-color;
 @success-color: @green-6;
 @processing-color: @blue-6;
-@error-color: @red-5;
 @highlight-color: @red-5;
-@warning-color: @gold-6;
 @normal-color: #d9d9d9;
 @white: #fff;
 @black: #000;
+
+// >>> Warning
+@warning-color: @gold-6;
+@warning-color-hover: color(~`colorPalette('@{warning-color}', 5) `);
+@warning-color-active: color(~`colorPalette('@{warning-color}', 7) `);
+@warning-color-outline: fade(@warning-color, @outline-fade);
+@warning-color-deprecated-bg: color(~`colorPalette('@{warning-color}', 1) `);
+@warning-color-deprecated-border: color(~`colorPalette('@{warning-color}', 3) `);
+
+// >>> Error
+@error-color: @red-5;
+@error-color-hover: color(~`colorPalette('@{error-color}', 5) `);
+@error-color-active: color(~`colorPalette('@{error-color}', 7) `);
+@error-color-outline: fade(@error-color, @outline-fade);
+@error-color-deprecated-bg: color(~`colorPalette('@{error-color}', 1) `);
+@error-color-deprecated-border: color(~`colorPalette('@{error-color}', 3) `);
 
 // Color used by default to control hover and active backgrounds and for
 // alert info backgrounds.

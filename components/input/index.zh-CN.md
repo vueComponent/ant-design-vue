@@ -21,6 +21,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/xS9YEJhfe/Input.svg
 | --- | --- | --- | --- | --- |
 | addonAfter | 带标签的 input，设置后置标签 | string\|slot |  |  |
 | addonBefore | 带标签的 input，设置前置标签 | string\|slot |  |  |
+| bordered | 是否有边框 | boolean | true | 3.0 |
 | defaultValue | 输入框默认内容 | string |  |  |
 | disabled | 是否禁用状态，默认为 false | boolean | false |  |
 | id | 输入框的 id | string |  |  |

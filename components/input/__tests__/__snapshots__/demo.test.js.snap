@@ -30,6 +30,8 @@ exports[`renders ./components/input/demo/autosize-textarea.vue correctly 1`] = `
 
 exports[`renders ./components/input/demo/basic.vue correctly 1`] = `<input placeholder="Basic usage" type="text" class="ant-input">`;
 
+exports[`renders ./components/input/demo/borderless.vue correctly 1`] = `<input placeholder="Borderless" type="text" class="ant-input ant-input-borderless">`;
+
 exports[`renders ./components/input/demo/group.vue correctly 1`] = `
 <div><span class="ant-input-group ant-input-group-lg"><div class="ant-row" style="margin-left: -4px; margin-right: -4px;"><div class="ant-col ant-col-5" style="padding-left: 4px; padding-right: 4px;"><input type="text" class="ant-input"></div><div class="ant-col ant-col-8" style="padding-left: 4px; padding-right: 4px;"><input type="text" class="ant-input"></div></div></span><br><span class="ant-input-group ant-input-group-compact"><input type="text" style="width: 20%;" class="ant-input"><input type="text" style="width: 30%;" class="ant-input"></span><br><span class="ant-input-group ant-input-group-compact"><div class="ant-select ant-select-single ant-select-show-arrow"><!----><!----><div class="ant-select-selector"><span class="ant-select-selection-search"><input id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-select-selection-search-input" style="opacity: 0;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0" readonly="" unselectable="on" type="search"></span><span class="ant-select-selection-item">Zhejiang</span>
   <!---->

@@ -21,6 +21,7 @@ A basic widget for getting the user input is a text field. Keyboard and mouse ca
 | addonAfter | The label text displayed after (on the right side of) the input field. | string\|slot |  |  |
 | addonBefore | The label text displayed before (on the left side of) the input field. | string\|slot |  |  |
 | defaultValue | The initial input content | string |  |  |
+| bordered | Whether has border style | boolean | true | 4.5.0 |
 | disabled | Whether the input is disabled. | boolean | false |  |
 | id | The ID for input | string |  |  |
 | maxlength | max length | number |  | 1.5.0 |

@@ -10,6 +10,20 @@
 
 ---
 
+## 3.0.0-alpha.16
+
+`2021-12-19`
+
+- 🌟 重构 Input，新增无边框配置
+- Table
+  - 🌟 Table customCell 新增 column 参数[#5052](https://github.com/vueComponent/ant-design-vue/issues/5052)
+  - 🐞 修复 Table 翻页时，控制台输出错误 warning 问题 [#5029](https://github.com/vueComponent/ant-design-vue/issues/5029)
+  - 🐞 修复 Table 翻页组件弹出框隐藏时，弹框位置错误问题 [#5028](https://github.com/vueComponent/ant-design-vue/issues/5028)
+- 🐞 修复 Rate 组件全局 prefixCls 未生效问题 [#5026](https://github.com/vueComponent/ant-design-vue/issues/5026)
+- 🐞 修复 Menu 自定义 class 未生效问题 [#5038](https://github.com/vueComponent/ant-design-vue/issues/5038)
+- 🐞 修复 Carousel 移动设备触摸时，打印 warning 问题 [#5040](https://github.com/vueComponent/ant-design-vue/issues/5040)
+- 🐞 修复自定义 prefixCls 时，Select 无法选中问题 [#5023](https://github.com/vueComponent/ant-design-vue/issues/5023)
+
 ## 3.0.0-alpha.15
 
 `2021-12-12`

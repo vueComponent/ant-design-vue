@@ -10,6 +10,20 @@
 
 ---
 
+## 3.0.0-alpha.16
+
+`2021-12-19`
+
+- 🌟 Refactored Input and added borderless configuration
+- Table
+  - 🌟 Table customCell added column parameter [#5052](https://github.com/vueComponent/ant-design-vue/issues/5052)
+  - 🐞 Fix the console output error warning problem when turning Table pages [#5029](https://github.com/vueComponent/ant-design-vue/issues/5029)
+  - 🐞 Fix the problem that the pop-up box of the Table page turning component is hidden, and the pop-up box position is wrong [#5028](https://github.com/vueComponent/ant-design-vue/issues/5028)
+- 🐞 Fix the issue that the global prefixCls of the Rate component does not take effect [#5026](https://github.com/vueComponent/ant-design-vue/issues/5026)
+- 🐞 Fix Menu custom class not taking effect [#5038](https://github.com/vueComponent/ant-design-vue/issues/5038)
+- 🐞 Fix the problem of printing warning when Carousel mobile device is touched [#5040](https://github.com/vueComponent/ant-design-vue/issues/5040)
+- 🐞 Fix the problem that Select cannot be selected when customizing prefixCls [#5023](https://github.com/vueComponent/ant-design-vue/issues/5023)
+
 ## 3.0.0-alpha.15
 
 `2021-12-12`

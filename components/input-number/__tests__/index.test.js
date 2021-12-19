@@ -22,8 +22,6 @@ describe('InputNumber', () => {
     );
     wrapper.find('input').element.value = '';
     wrapper.find('input').trigger('input');
-    expect(onChange).toHaveBeenLastCalledWith('');
-    wrapper.find('input').trigger('blur');
     expect(onChange).toHaveBeenLastCalledWith(null);
   });
 });

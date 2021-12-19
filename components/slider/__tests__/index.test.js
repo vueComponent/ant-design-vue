@@ -22,6 +22,6 @@ describe('Slider', () => {
     }, 1000);
     await asyncExpect(() => {
       expect(document.body.innerHTML).toMatchSnapshot();
-    }, 100);
+    }, 1000);
   });
 });

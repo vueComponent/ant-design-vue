@@ -1,38 +1,27 @@
-import type { PropType, ExtractPropTypes } from 'vue';
-import { defineComponent, inject, nextTick, onMounted, ref } from 'vue';
-import PropTypes from '../_util/vue-types';
-import { getOptionProps } from '../_util/props-util';
+import type { PropType, ExtractPropTypes, HTMLAttributes, App } from 'vue';
+import { watch, defineComponent, nextTick, onMounted, ref } from 'vue';
 import classNames from '../_util/classNames';
 import UpOutlined from '@ant-design/icons-vue/UpOutlined';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
-import VcInputNumber from '../vc-input-number/src';
-import { defaultConfigProvider } from '../config-provider';
-import { tuple, withInstall } from '../_util/type';
-import type { EventHandler } from '../_util/EventInterface';
+import VcInputNumber, { inputNumberProps as baseInputNumberProps } from './src/InputNumber';
+import type { SizeType } from '../config-provider';
 import { useInjectFormItemContext } from '../form/FormItemContext';
-
-const inputNumberProps = {
-  prefixCls: PropTypes.string,
-  min: PropTypes.number,
-  max: PropTypes.number,
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  step: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).def(1),
-  defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  disabled: PropTypes.looseBool,
-  size: PropTypes.oneOf(tuple('large', 'small', 'default')),
-  formatter: PropTypes.func,
-  parser: PropTypes.func,
-  decimalSeparator: PropTypes.string,
-  placeholder: PropTypes.string,
-  name: PropTypes.string,
-  id: PropTypes.string,
-  precision: PropTypes.number,
-  autofocus: PropTypes.looseBool,
-  onPressEnter: {
-    type: Function as PropType<EventHandler>,
-  },
-  onChange: Function as PropType<(num: number) => void>,
+import useConfigInject from '../_util/hooks/useConfigInject';
+import { cloneElement } from '../_util/vnode';
+import omit from '../_util/omit';
+import PropTypes from '../_util/vue-types';
+import isValidValue from '../_util/isValidValue';
+export const inputNumberProps = {
+  ...baseInputNumberProps,
+  size: { type: String as PropType<SizeType> },
+  bordered: { type: Boolean, default: true },
+  placeholder: String,
+  name: String,
+  id: String,
+  type: String,
+  addonBefore: PropTypes.any,
+  addonAfter: PropTypes.any,
+  'update:value': baseInputNumberProps.onChange,
 };
 
 export type InputNumberProps = Partial<ExtractPropTypes<typeof inputNumberProps>>;
@@ -41,17 +30,33 @@ const InputNumber = defineComponent({
   name: 'AInputNumber',
   inheritAttrs: false,
   props: inputNumberProps,
-  emits: ['input', 'change', 'blur', 'update:value'],
-  setup(props, { emit }) {
+  emits: ['focus', 'blur', 'change', 'input', 'update:value'],
+  slots: ['addonBefore', 'addonAfter'],
+  setup(props, { emit, expose, attrs, slots }) {
     const formItemContext = useInjectFormItemContext();
+    const { prefixCls, size, direction } = useConfigInject('input-number', props);
+    const mergedValue = ref(props.value === undefined ? props.defaultValue : props.value);
+    watch(
+      () => props.value,
+      () => {
+        mergedValue.value = props.value;
+      },
+    );
     const inputNumberRef = ref(null);
     const focus = () => {
-      inputNumberRef.value.focus();
+      inputNumberRef.value?.focus();
     };
     const blur = () => {
-      inputNumberRef.value.blur();
+      inputNumberRef.value?.blur();
     };
+    expose({
+      focus,
+      blur,
+    });
     const handleChange = (val: number) => {
+      if (props.value === undefined) {
+        mergedValue.value = val;
+      }
       emit('update:value', val);
       emit('change', val);
       formItemContext.onFieldChange();
@@ -59,6 +64,9 @@ const InputNumber = defineComponent({
     const handleBlur = () => {
       emit('blur');
       formItemContext.onFieldBlur();
+    };
+    const handleFocus = () => {
+      emit('focus');
     };
     onMounted(() => {
       nextTick(() => {
@@ -69,53 +77,88 @@ const InputNumber = defineComponent({
         }
       });
     });
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-      inputNumberRef,
-      focus,
-      blur,
-      formItemContext,
-      handleBlur,
-      handleChange,
+    return () => {
+      const {
+        class: className,
+        bordered,
+        readonly,
+        style,
+        addonBefore = slots.addonBefore?.(),
+        addonAfter = slots.addonAfter?.(),
+        ...others
+      } = { ...(attrs as HTMLAttributes), ...props };
+
+      const preCls = prefixCls.value;
+
+      const mergeSize = size.value;
+      const inputNumberClass = classNames(
+        {
+          [`${preCls}-lg`]: mergeSize === 'large',
+          [`${preCls}-sm`]: mergeSize === 'small',
+          [`${preCls}-rtl`]: direction.value === 'rtl',
+          [`${preCls}-readonly`]: readonly,
+          [`${preCls}-borderless`]: !bordered,
+        },
+        className,
+      );
+
+      const element = (
+        <VcInputNumber
+          {...omit(others, ['size', 'defaultValue'])}
+          ref={inputNumberRef}
+          value={mergedValue.value}
+          class={inputNumberClass}
+          prefixCls={preCls}
+          readonly={readonly}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          onFocus={handleFocus}
+          v-slots={{
+            upHandler: () => <UpOutlined class={`${preCls}-handler-up-inner`} />,
+            downHandler: () => <DownOutlined class={`${preCls}-handler-down-inner`} />,
+          }}
+        />
+      );
+
+      if (isValidValue(addonBefore) || isValidValue(addonAfter)) {
+        const wrapperClassName = `${preCls}-group`;
+        const addonClassName = `${wrapperClassName}-addon`;
+        const addonBeforeNode = addonBefore ? (
+          <div class={addonClassName}>{addonBefore}</div>
+        ) : null;
+        const addonAfterNode = addonAfter ? <div class={addonClassName}>{addonAfter}</div> : null;
+
+        const mergedWrapperClassName = classNames(`${preCls}-wrapper`, wrapperClassName, {
+          [`${wrapperClassName}-rtl`]: direction.value === 'rtl',
+        });
+
+        const mergedGroupClassName = classNames(
+          `${preCls}-group-wrapper`,
+          {
+            [`${preCls}-group-wrapper-sm`]: mergeSize === 'small',
+            [`${preCls}-group-wrapper-lg`]: mergeSize === 'large',
+            [`${preCls}-group-wrapper-rtl`]: direction.value === 'rtl',
+          },
+          className,
+        );
+        return (
+          <div class={mergedGroupClassName} style={style}>
+            <div class={mergedWrapperClassName}>
+              {addonBeforeNode}
+              {element}
+              {addonAfterNode}
+            </div>
+          </div>
+        );
+      }
+      return cloneElement(element, { style });
     };
-  },
-
-  render() {
-    const {
-      prefixCls: customizePrefixCls,
-      size,
-      class: className,
-      id = this.formItemContext.id.value,
-      ...others
-    } = {
-      ...getOptionProps(this),
-      ...this.$attrs,
-    } as any;
-    const { getPrefixCls } = this.configProvider;
-    const prefixCls = getPrefixCls('input-number', customizePrefixCls);
-
-    const inputNumberClass = classNames(
-      {
-        [`${prefixCls}-lg`]: size === 'large',
-        [`${prefixCls}-sm`]: size === 'small',
-      },
-      className,
-    );
-    const upIcon = <UpOutlined class={`${prefixCls}-handler-up-inner`} />;
-    const downIcon = <DownOutlined class={`${prefixCls}-handler-down-inner`} />;
-
-    const vcInputNumberProps = {
-      prefixCls,
-      upHandler: upIcon,
-      downHandler: downIcon,
-      ...others,
-      class: inputNumberClass,
-      onChange: this.handleChange,
-      onBlur: this.handleBlur,
-      id,
-    };
-    return <VcInputNumber {...vcInputNumberProps} ref="inputNumberRef" />;
   },
 });
 
-export default withInstall(InputNumber);
+export default Object.assign(InputNumber, {
+  install: (app: App) => {
+    app.component(InputNumber.name, InputNumber);
+    return app;
+  },
+});

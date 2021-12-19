@@ -1,0 +1,103 @@
+import isMobile from '../../vc-util/isMobile';
+import type { PropType } from 'vue';
+import { onBeforeUnmount, ref, defineComponent } from 'vue';
+import classNames from '../../_util/classNames';
+
+/**
+ * When click and hold on a button - the speed of auto changing the value.
+ */
+const STEP_INTERVAL = 200;
+
+/**
+ * When click and hold on a button - the delay before auto changing the value.
+ */
+const STEP_DELAY = 600;
+
+export default defineComponent({
+  name: 'StepHandler',
+  inheritAttrs: false,
+  props: {
+    prefixCls: String,
+    upDisabled: Boolean,
+    downDisabled: Boolean,
+    onStep: { type: Function as PropType<(up: boolean) => void> },
+  },
+  slots: ['upNode', 'downNode'],
+  setup(props, { slots, emit }) {
+    const stepTimeoutRef = ref();
+
+    // We will interval update step when hold mouse down
+    const onStepMouseDown = (e: MouseEvent, up: boolean) => {
+      e.preventDefault();
+
+      emit('step', up);
+
+      // Loop step for interval
+      function loopStep() {
+        emit('step', up);
+
+        stepTimeoutRef.value = setTimeout(loopStep, STEP_INTERVAL);
+      }
+
+      // First time press will wait some time to trigger loop step update
+      stepTimeoutRef.value = setTimeout(loopStep, STEP_DELAY);
+    };
+
+    const onStopStep = () => {
+      clearTimeout(stepTimeoutRef.value);
+    };
+
+    onBeforeUnmount(() => {
+      onStopStep();
+    });
+
+    return () => {
+      if (isMobile()) {
+        return null;
+      }
+      const { prefixCls, upDisabled, downDisabled } = props;
+      const handlerClassName = `${prefixCls}-handler`;
+
+      const upClassName = classNames(handlerClassName, `${handlerClassName}-up`, {
+        [`${handlerClassName}-up-disabled`]: upDisabled,
+      });
+      const downClassName = classNames(handlerClassName, `${handlerClassName}-down`, {
+        [`${handlerClassName}-down-disabled`]: downDisabled,
+      });
+
+      const sharedHandlerProps = {
+        unselectable: 'on' as const,
+        role: 'button',
+        onMouseup: onStopStep,
+        onMouseleave: onStopStep,
+      };
+      const { upNode, downNode } = slots;
+      return (
+        <div class={`${handlerClassName}-wrap`}>
+          <span
+            {...sharedHandlerProps}
+            onMousedown={e => {
+              onStepMouseDown(e, true);
+            }}
+            aria-label="Increase Value"
+            aria-disabled={upDisabled}
+            class={upClassName}
+          >
+            {upNode?.() || <span unselectable="on" class={`${prefixCls}-handler-up-inner`} />}
+          </span>
+          <span
+            {...sharedHandlerProps}
+            onMousedown={e => {
+              onStepMouseDown(e, false);
+            }}
+            aria-label="Decrease Value"
+            aria-disabled={downDisabled}
+            class={downClassName}
+          >
+            {downNode?.() || <span unselectable="on" class={`${prefixCls}-handler-down-inner`} />}
+          </span>
+        </div>
+      );
+    };
+  },
+});

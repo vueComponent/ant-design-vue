@@ -14,8 +14,7 @@ import {
 } from 'vue';
 import canUseDom from './canUseDom';
 import ScrollLocker from '../vc-util/Dom/scrollLocker';
-import type { RafFrame } from './raf';
-import wrapperRaf from './raf';
+import raf from './raf';
 
 let openCount = 0;
 const supportDom = canUseDom();
@@ -62,7 +61,7 @@ export default defineComponent({
   setup(props, { slots }) {
     const container = ref<HTMLElement>();
     const componentRef = ref();
-    const rafId = ref<RafFrame>();
+    const rafId = ref<number>();
     const scrollLocker = new ScrollLocker({
       container: getParent(props.getContainer) as HTMLElement,
     });
@@ -176,7 +175,7 @@ export default defineComponent({
 
       nextTick(() => {
         if (!attachToParent()) {
-          rafId.value = wrapperRaf(() => {
+          rafId.value = raf(() => {
             instance.update();
           });
         }
@@ -190,7 +189,7 @@ export default defineComponent({
         openCount = visible && openCount ? openCount - 1 : openCount;
       }
       removeCurrentContainer();
-      wrapperRaf.cancel(rafId.value);
+      raf.cancel(rafId.value);
     });
 
     return () => {

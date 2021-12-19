@@ -1,6 +1,6 @@
 import type { Ref } from 'vue';
 import { onBeforeUnmount, ref } from 'vue';
-import wrapperRaf from '../raf';
+import raf from '../raf';
 
 export type Updater<State> = (prev: State) => State;
 /**
@@ -15,10 +15,10 @@ export function useLayoutState<State>(
   let updateBatchRef = [];
   const rafRef = ref();
   function setFrameState(updater: Updater<State>) {
-    wrapperRaf.cancel(rafRef.value);
+    raf.cancel(rafRef.value);
     updateBatchRef.push(updater);
 
-    rafRef.value = wrapperRaf(() => {
+    rafRef.value = raf(() => {
       const prevBatch = updateBatchRef;
       // const prevState = stateRef.value;
       updateBatchRef = [];
@@ -34,7 +34,7 @@ export function useLayoutState<State>(
   }
 
   onBeforeUnmount(() => {
-    wrapperRaf.cancel(rafRef.value);
+    raf.cancel(rafRef.value);
   });
 
   return [stateRef as Ref<State>, setFrameState];

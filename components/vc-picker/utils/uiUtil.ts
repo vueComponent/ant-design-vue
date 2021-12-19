@@ -1,15 +1,14 @@
 import isVisible from '../../vc-util/Dom/isVisible';
 import KeyCode from '../../_util/KeyCode';
-import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
 import type { GenerateConfig } from '../generate';
 import type { CustomFormat, PanelMode, PickerMode } from '../interface';
 
-const scrollIds = new Map<HTMLElement, RafFrame>();
+const scrollIds = new Map<HTMLElement, number>();
 
 /** Trigger when element is visible in view */
 export function waitElementReady(element: HTMLElement, callback: () => void): () => void {
-  let id: RafFrame;
+  let id: number;
 
   function tryOrNextFrame() {
     if (isVisible(element)) {

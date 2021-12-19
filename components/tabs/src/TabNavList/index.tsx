@@ -22,8 +22,7 @@ import { onBeforeUnmount, defineComponent, ref, watch, watchEffect, computed } f
 import PropTypes from '../../../_util/vue-types';
 import useSyncState from '../hooks/useSyncState';
 import useState from '../../../_util/hooks/useState';
-import type { RafFrame } from '../../../_util/raf';
-import wrapperRaf from '../../../_util/raf';
+import raf from '../../../_util/raf';
 import classNames from '../../../_util/classNames';
 import ResizeObserver from '../../../vc-resize-observer';
 import { toPx } from '../../../_util/util';
@@ -340,9 +339,9 @@ export default defineComponent({
     const activeTabOffset = computed(() => tabOffsets.value.get(props.activeKey));
 
     // Delay set ink style to avoid remove tab blink
-    const inkBarRafRef = ref<RafFrame>();
+    const inkBarRafRef = ref<number>();
     const cleanInkBarRaf = () => {
-      wrapperRaf.cancel(inkBarRafRef.value);
+      raf.cancel(inkBarRafRef.value);
     };
 
     watch([activeTabOffset, tabPositionTopOrBottom, () => props.rtl], () => {
@@ -364,7 +363,7 @@ export default defineComponent({
       }
 
       cleanInkBarRaf();
-      inkBarRafRef.value = wrapperRaf(() => {
+      inkBarRafRef.value = raf(() => {
         setInkStyle(newInkStyle);
       });
     });

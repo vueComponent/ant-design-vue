@@ -1,6 +1,5 @@
 import addEventListenerWrap from '../../vc-util/Dom/addEventListener';
 import type { EventHandler } from '../../_util/EventInterface';
-import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
 import { defineComponent, onUnmounted, computed, ref, watchEffect, getCurrentInstance } from 'vue';
 import type { PropType } from 'vue';
@@ -74,7 +73,7 @@ export default defineComponent({
     const instance = getCurrentInstance();
     let baseWidth = 0;
     const dragging = ref(false);
-    let rafId: RafFrame;
+    let rafId: number;
     const updateWidth = (e: HandleEvent) => {
       let pageX = 0;
       if (e.touches) {

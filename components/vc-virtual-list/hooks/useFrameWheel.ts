@@ -1,5 +1,4 @@
 import type { Ref } from 'vue';
-import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
 import isFF from '../utils/isFirefox';
 import useOriginScroll from './useOriginScroll';
@@ -16,7 +15,7 @@ export default function useFrameWheel(
   onWheelDelta: (offset: number) => void,
 ): [(e: WheelEvent) => void, (e: FireFoxDOMMouseScrollEvent) => void] {
   let offsetRef = 0;
-  let nextFrame: RafFrame = null;
+  let nextFrame: number = null;
 
   // Firefox patch
   let wheelValue = null;

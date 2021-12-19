@@ -1,16 +1,15 @@
 import type { Ref } from 'vue';
 import { ref, onBeforeUnmount } from 'vue';
-import type { RafFrame } from '../../../_util/raf';
-import wrapperRaf from '../../../_util/raf';
+import raf from '../../../_util/raf';
 
 export default function useRaf<Callback extends Function>(callback: Callback) {
-  const rafRef = ref<RafFrame>();
+  const rafRef = ref<number>();
   const removedRef = ref(false);
 
   function trigger(...args: any[]) {
     if (!removedRef.value) {
-      wrapperRaf.cancel(rafRef.value);
-      rafRef.value = wrapperRaf(() => {
+      raf.cancel(rafRef.value);
+      rafRef.value = raf(() => {
         callback(...args);
       });
     }
@@ -18,7 +17,7 @@ export default function useRaf<Callback extends Function>(callback: Callback) {
 
   onBeforeUnmount(() => {
     removedRef.value = true;
-    wrapperRaf.cancel(rafRef.value);
+    raf.cancel(rafRef.value);
   });
 
   return trigger;

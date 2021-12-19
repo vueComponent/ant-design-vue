@@ -1,6 +1,5 @@
 import type { Data } from '../../_util/type';
 import type { ComputedRef, Ref } from 'vue';
-import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
 import type { GetKey } from '../interface';
 
@@ -14,7 +13,7 @@ export default function useScrollTo(
   syncScrollTop: (newTop: number) => void,
   triggerFlash: () => void,
 ) {
-  let scroll: RafFrame = null;
+  let scroll: number;
 
   return (arg?: any) => {
     // When not argument provided, we think dev may want to show the scrollbar

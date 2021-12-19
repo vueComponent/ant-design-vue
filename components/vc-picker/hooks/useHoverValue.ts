@@ -1,4 +1,3 @@
-import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
 import type { ComputedRef, Ref, UnwrapRef } from 'vue';
 import { ref, onBeforeUnmount, watch } from 'vue';
@@ -10,7 +9,7 @@ export default function useHoverValue<DateType>(
   { formatList, generateConfig, locale }: ValueTextConfig<DateType>,
 ): [ComputedRef<string>, (date: DateType) => void, (immediately?: boolean) => void] {
   const innerValue = ref<DateType>(null);
-  let rafId: RafFrame;
+  let rafId: number;
 
   function setValue(val: DateType, immediately = false) {
     raf.cancel(rafId);

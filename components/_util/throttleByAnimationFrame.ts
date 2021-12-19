@@ -1,8 +1,7 @@
-import type { RafFrame } from './raf';
 import raf from './raf';
 
 export default function throttleByAnimationFrame(fn: (...args: any[]) => void) {
-  let requestId: RafFrame;
+  let requestId: number;
 
   const later = (args: any[]) => () => {
     requestId = null;

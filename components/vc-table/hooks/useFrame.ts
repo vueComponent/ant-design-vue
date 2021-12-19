@@ -1,4 +1,3 @@
-import type { RafFrame } from '../../_util/raf';
 import raf from '../../_util/raf';
 import type { Ref, UnwrapRef } from 'vue';
 import { onBeforeUnmount, ref, shallowRef } from 'vue';
@@ -9,7 +8,7 @@ export function useLayoutState<State>(
   defaultState: State,
 ): [Ref<State>, (updater: Updater<State>) => void] {
   const stateRef = shallowRef<State>(defaultState);
-  let rafId: RafFrame;
+  let rafId: number;
   const updateBatchRef = shallowRef<Updater<State>[]>([]);
   function setFrameState(updater: Updater<State>) {
     updateBatchRef.value.push(updater);

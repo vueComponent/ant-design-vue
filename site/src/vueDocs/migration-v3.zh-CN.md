@@ -60,7 +60,7 @@
 - `DatePicker` `TimePicker` `Calendar`
 
   - 默认使用更加轻量级的 dayjs 替换 momentjs，如果你的项目过大，使用了大量的 momentjs 的方法，你可以参考文档[自定义时间库](/docs/vue/replace-date-cn)，替换成 momentjs。
-  - UI 交互调整，对其 antd 4.x 交互规范
+  - UI 交互调整，对齐 antd 4.x 交互规范
 
 - `Form` 这次更新主要目标是提升性能，如果你没有自定义表单控件，几乎可以忽略该部分
 

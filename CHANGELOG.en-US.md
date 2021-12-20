@@ -221,7 +221,7 @@ Github：[https://github.com/surely-vue/table]
 - `DatePicker` `TimePicker` `Calendar`
 
   - By default, a more lightweight dayjs is used to replace momentjs. If your project is too large and uses a lot of momentjs methods, you can refer to the document [Custom Time Library](/docs/vue/replace-date-cn), Replace with momentjs.
-  - UI interaction adjustment, its antd 4.x interaction specification
+  - UI interaction adjustment, align with antd 4.x interaction specifications
 
 - `Form` The main goal of this update is to improve performance. If you don't have custom form controls, you can almost ignore this part
 

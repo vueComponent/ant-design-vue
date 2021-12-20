@@ -2,47 +2,37 @@ import Menu, { MenuItem } from '../../../menu';
 import Dropdown from '../../../vc-dropdown';
 import type { Tab, TabsLocale, EditableConfig } from '../interface';
 import AddButton from './AddButton';
-import type { Key, VueNode } from '../../../_util/type';
+import type { Key } from '../../../_util/type';
 import KeyCode from '../../../_util/KeyCode';
-import type { CSSProperties, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import classNames from '../../../_util/classNames';
 import { defineComponent, watch, computed, onMounted } from 'vue';
 import PropTypes from '../../../_util/vue-types';
 import useState from '../../../_util/hooks/useState';
 import { EllipsisOutlined } from '@ant-design/icons-vue';
 
-export interface OperationNodeProps {
-  prefixCls: string;
-  id: string;
-  tabs: Tab[];
-  rtl: boolean;
-  tabBarGutter?: number;
-  activeKey: Key;
-  mobile: boolean;
-  moreIcon?: VueNode;
-  moreTransitionName?: string;
-  editable?: EditableConfig;
-  locale?: TabsLocale;
-  onTabClick: (key: Key, e: MouseEvent | KeyboardEvent) => void;
-}
+const operationNodeProps = {
+  prefixCls: { type: String },
+  id: { type: String },
+  tabs: { type: Object as PropType<Tab[]> },
+  rtl: { type: Boolean },
+  tabBarGutter: { type: Number },
+  activeKey: { type: [String, Number] },
+  mobile: { type: Boolean },
+  moreIcon: PropTypes.any,
+  moreTransitionName: { type: String },
+  editable: { type: Object as PropType<EditableConfig> },
+  locale: { type: Object as PropType<TabsLocale>, default: undefined as TabsLocale },
+  removeAriaLabel: String,
+  onTabClick: { type: Function as PropType<(key: Key, e: MouseEvent | KeyboardEvent) => void> },
+};
+
+export type OperationNodeProps = Partial<ExtractPropTypes<typeof operationNodeProps>>;
 
 export default defineComponent({
   name: 'OperationNode',
   inheritAttrs: false,
-  props: {
-    prefixCls: { type: String },
-    id: { type: String },
-    tabs: { type: Object as PropType<Tab[]> },
-    rtl: { type: Boolean },
-    tabBarGutter: { type: Number },
-    activeKey: { type: [String, Number] },
-    mobile: { type: Boolean },
-    moreIcon: PropTypes.any,
-    moreTransitionName: { type: String },
-    editable: { type: Object as PropType<EditableConfig> },
-    locale: { type: Object as PropType<TabsLocale>, default: undefined as TabsLocale },
-    onTabClick: { type: Function as PropType<(key: Key, e: MouseEvent | KeyboardEvent) => void> },
-  },
+  props: operationNodeProps,
   emits: ['tabClick'],
   slots: ['moreIcon'],
   setup(props, { attrs, slots }) {
@@ -98,6 +88,15 @@ export default defineComponent({
     const selectedItemId = computed(() =>
       selectedKey.value !== null ? `${popupId.value}-${selectedKey.value}` : null,
     );
+
+    const onRemoveTab = (event: MouseEvent | KeyboardEvent, key: Key) => {
+      event.preventDefault();
+      event.stopPropagation();
+      props.editable.onEdit('remove', {
+        key,
+        event,
+      });
+    };
 
     onMounted(() => {
       watch(
@@ -174,17 +173,34 @@ export default defineComponent({
                   dropdownAriaLabel !== undefined ? dropdownAriaLabel : 'expanded dropdown'
                 }
               >
-                {tabs.map(tab => (
-                  <MenuItem
-                    key={tab.key}
-                    id={`${popupId.value}-${tab.key}`}
-                    role="option"
-                    aria-controls={id && `${id}-panel-${tab.key}`}
-                    disabled={tab.disabled}
-                  >
-                    {typeof tab.tab === 'function' ? tab.tab() : tab.tab}
-                  </MenuItem>
-                ))}
+                {tabs.map(tab => {
+                  const removable = editable && tab.closable !== false && !tab.disabled;
+                  return (
+                    <MenuItem
+                      key={tab.key}
+                      id={`${popupId.value}-${tab.key}`}
+                      role="option"
+                      aria-controls={id && `${id}-panel-${tab.key}`}
+                      disabled={tab.disabled}
+                    >
+                      <span>{typeof tab.tab === 'function' ? tab.tab() : tab.tab}</span>
+                      {removable && (
+                        <button
+                          type="button"
+                          aria-label={props.removeAriaLabel || 'remove'}
+                          tabindex={0}
+                          class={`${dropdownPrefix}-menu-item-remove`}
+                          onClick={e => {
+                            e.stopPropagation();
+                            onRemoveTab(e, tab.key);
+                          }}
+                        >
+                          {tab.closeIcon?.() || editable.removeIcon?.() || '×'}
+                        </button>
+                      )}
+                    </MenuItem>
+                  );
+                })}
               </Menu>
             ),
             default: () => (

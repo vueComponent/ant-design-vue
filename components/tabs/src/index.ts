@@ -1,4 +1,4 @@
-// base rc-tabs 4.16.6
+// base rc-tabs 11.10.1
 import Tabs from './Tabs';
 import type { TabsProps } from './Tabs';
 import TabPane from './TabPanelList/TabPane';

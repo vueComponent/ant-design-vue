@@ -529,6 +529,7 @@ export default defineComponent({
           </ResizeObserver>
           <OperationNode
             {...props}
+            removeAriaLabel={locale?.removeAriaLabel}
             v-slots={pick(slots, ['moreIcon'])}
             ref={operationsRef}
             prefixCls={pre}

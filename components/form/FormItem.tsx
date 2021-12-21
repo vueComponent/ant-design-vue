@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes, ComputedRef } from 'vue';
+import type { PropType, ExtractPropTypes, ComputedRef, Ref } from 'vue';
 import {
   watch,
   defineComponent,
@@ -32,7 +32,7 @@ const ValidateStatuses = tuple('success', 'warning', 'error', 'validating', '');
 export type ValidateStatus = typeof ValidateStatuses[number];
 
 export interface FieldExpose {
-  fieldValue: ComputedRef<any>;
+  fieldValue: Ref<any>;
   fieldId: ComputedRef<any>;
   fieldName: ComputedRef<any>;
   resetField: () => void;
@@ -132,13 +132,21 @@ export default defineComponent({
         return formName ? `${formName}_${mergedId}` : `${defaultItemNamePrefixCls}_${mergedId}`;
       }
     });
-    const fieldValue = computed(() => {
+    const getNewFieldValue = () => {
       const model = formContext.model.value;
       if (!model || !fieldName.value) {
         return;
+      } else {
+        return getPropByPath(model, namePath.value, true).v;
       }
-      return getPropByPath(model, namePath.value, true).v;
-    });
+    };
+    const fieldValue = ref(getNewFieldValue());
+    watchEffect(
+      () => {
+        fieldValue.value = getNewFieldValue();
+      },
+      { flush: 'post' },
+    );
 
     const initialValue = ref(cloneDeep(fieldValue.value));
     const mergedValidateTrigger = computed(() => {

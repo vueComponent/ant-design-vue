@@ -93,7 +93,7 @@ export type FormExpose = {
   resetFields: (name?: NamePath) => void;
   clearValidate: (name?: NamePath) => void;
   validateFields: (
-    nameList?: NamePath[],
+    nameList?: NamePath[] | string,
     options?: ValidateOptions,
   ) => Promise<{
     [key: string]: any;
@@ -102,7 +102,7 @@ export type FormExpose = {
     [key: string]: any;
   };
   validate: (
-    nameList?: NamePath[],
+    nameList?: NamePath[] | string,
     options?: ValidateOptions,
   ) => Promise<{
     [key: string]: any;

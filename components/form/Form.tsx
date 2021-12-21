@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes, HTMLAttributes } from 'vue';
+import type { PropType, ExtractPropTypes, HTMLAttributes, ComponentPublicInstance } from 'vue';
 import { defineComponent, computed, watch, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
@@ -88,6 +88,29 @@ export const formProps = {
 };
 
 export type FormProps = Partial<ExtractPropTypes<typeof formProps>>;
+
+export type FormExpose = {
+  resetFields: (name?: NamePath) => void;
+  clearValidate: (name?: NamePath) => void;
+  validateFields: (
+    nameList?: NamePath[],
+    options?: ValidateOptions,
+  ) => Promise<{
+    [key: string]: any;
+  }>;
+  getFieldsValue: (nameList?: InternalNamePath[] | true) => {
+    [key: string]: any;
+  };
+  validate: (
+    nameList?: NamePath[],
+    options?: ValidateOptions,
+  ) => Promise<{
+    [key: string]: any;
+  }>;
+  scrollToField: (name: NamePath, options?: {}) => void;
+};
+
+export type FormInstance = ComponentPublicInstance<FormProps, FormExpose>;
 
 function isEqualName(name1: NamePath, name2: NamePath) {
   return isEqual(toArray(name1), toArray(name2));
@@ -328,7 +351,6 @@ const Form = defineComponent({
           });
       }
     };
-
     expose({
       resetFields,
       clearValidate,
@@ -336,7 +358,7 @@ const Form = defineComponent({
       getFieldsValue,
       validate,
       scrollToField,
-    });
+    } as FormExpose);
 
     useProvideForm({
       model: computed(() => props.model),

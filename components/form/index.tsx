@@ -5,7 +5,7 @@ import useForm from './useForm';
 import FormItemRest, { useInjectFormItemContext } from './FormItemContext';
 export type { Rule, RuleObject } from './interface';
 
-export type { FormProps } from './Form';
+export type { FormProps, FormInstance } from './Form';
 export type { FormItemProps } from './FormItem';
 
 Form.useInjectFormItemContext = useInjectFormItemContext;

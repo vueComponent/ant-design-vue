@@ -57,6 +57,7 @@ Add or remove form items dynamically.
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons-vue';
 import { defineComponent, reactive, ref } from 'vue';
 import type { UnwrapRef } from 'vue';
+import type { FormInstance } from 'ant-design-vue';
 
 interface Domain {
   value: string;
@@ -68,7 +69,7 @@ export default defineComponent({
     PlusOutlined,
   },
   setup() {
-    const formRef = ref();
+    const formRef = ref<FormInstance>();
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },

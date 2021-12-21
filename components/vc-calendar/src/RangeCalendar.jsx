@@ -91,7 +91,7 @@ const RangeCalendar = {
     visible: PropTypes.bool.def(true),
     prefixCls: PropTypes.string.def('rc-calendar'),
     dateInputPlaceholder: PropTypes.any,
-    seperator: PropTypes.string.def('~'),
+    separator: PropTypes.string.def('~'),
     defaultValue: PropTypes.any,
     value: PropTypes.any,
     hoverValue: PropTypes.any,
@@ -667,7 +667,7 @@ const RangeCalendar = {
       showClear,
       showToday,
       type,
-      seperator,
+      separator,
     } = props;
     const clearIcon = getComponentFromProp(this, 'clearIcon');
     const { sHoverValue, sSelectedValue, sMode: mode, sShowTimePicker, sValue } = this;
@@ -835,7 +835,7 @@ const RangeCalendar = {
             onMouseenter={type !== 'both' ? this.onDatePanelEnter : noop}
           >
             <CalendarPart {...leftPartProps} />
-            <span class={`${prefixCls}-range-middle`}>{seperator}</span>
+            <span class={`${prefixCls}-range-middle`}>{separator}</span>
             <CalendarPart {...rightPartProps} />
           </div>
           <div class={cls}>

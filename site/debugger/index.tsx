@@ -1,5 +1,5 @@
 // debugger tsx
-import Demo from './demo/demo.vue';
+import Demo from '../../components/form/demo/advanced-search.vue';
 
 export default {
   setup() {},

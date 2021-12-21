@@ -58,10 +58,6 @@ const Space = {
       },
     ];
 
-    if (content.data.class) {
-      someSpaceClass.push(content.data.class);
-    }
-
     const itemClassName = `${prefixCls}-item`;
     const marginDirection = 'marginRight'; // directionConfig === 'rtl' ? 'marginLeft' : 'marginRight';
 

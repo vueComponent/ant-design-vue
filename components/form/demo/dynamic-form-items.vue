@@ -16,7 +16,12 @@ Bind nested fields by array name.
 
 </docs>
 <template>
-  <a-form ref="formRef" :model="dynamicValidateForm" autocomplete="off" @finish="onFinish">
+  <a-form
+    ref="formRef"
+    name="dynamic_form_nest_item"
+    :model="dynamicValidateForm"
+    @finish="onFinish"
+  >
     <a-space
       v-for="(user, index) in dynamicValidateForm.users"
       :key="user.id"
@@ -58,7 +63,6 @@ Bind nested fields by array name.
 <script lang="ts">
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons-vue';
 import { defineComponent, reactive, ref } from 'vue';
-import type { UnwrapRef } from 'vue';
 import type { FormInstance } from 'ant-design-vue';
 
 interface User {
@@ -73,7 +77,7 @@ export default defineComponent({
   },
   setup() {
     const formRef = ref<FormInstance>();
-    const dynamicValidateForm: UnwrapRef<{ users: User[] }> = reactive({
+    const dynamicValidateForm = reactive<{ users: User[] }>({
       users: [],
     });
     const removeUser = (item: User) => {

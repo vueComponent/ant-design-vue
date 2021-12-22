@@ -1,25 +1,25 @@
 <docs>
 ---
-order: 0
+order: 10
 title:
-  zh-CN: 基本使用
-  en-US: Basic Usage
+  zh-CN: 内联登录栏
+  en-US: Inline Login Form
 ---
 
 ## zh-CN
 
-基本的表单数据域控制展示，包含布局、初始化、验证、提交。
+内联登录栏，常用在顶部导航栏中。
 
 ## en-US
 
-Basic Form data control. Includes layout, initial values, validation and submit.
+Inline login form is often used in navigation bar.
+
 </docs>
 <template>
   <a-form
     :model="formState"
-    name="basic"
-    :label-col="{ span: 8 }"
-    :wrapper-col="{ span: 16 }"
+    name="horizontal_login"
+    layout="inline"
     autocomplete="off"
     @finish="onFinish"
     @finishFailed="onFinishFailed"
@@ -29,7 +29,11 @@ Basic Form data control. Includes layout, initial values, validation and submit.
       name="username"
       :rules="[{ required: true, message: 'Please input your username!' }]"
     >
-      <a-input v-model:value="formState.username" />
+      <a-input v-model:value="formState.username">
+        <template #prefix>
+          <UserOutlined class="site-form-item-icon" />
+        </template>
+      </a-input>
     </a-form-item>
 
     <a-form-item
@@ -37,32 +41,34 @@ Basic Form data control. Includes layout, initial values, validation and submit.
       name="password"
       :rules="[{ required: true, message: 'Please input your password!' }]"
     >
-      <a-input-password v-model:value="formState.password" />
+      <a-input-password v-model:value="formState.password">
+        <template #prefix>
+          <LockOutlined class="site-form-item-icon" />
+        </template>
+      </a-input-password>
     </a-form-item>
 
-    <a-form-item name="remember" :wrapper-col="{ offset: 8, span: 16 }">
-      <a-checkbox v-model:checked="formState.remember">Remember me</a-checkbox>
-    </a-form-item>
-
-    <a-form-item :wrapper-col="{ offset: 8, span: 16 }">
-      <a-button type="primary" html-type="submit">Submit</a-button>
+    <a-form-item>
+      <a-button :disabled="disabled" type="primary" html-type="submit">Log in</a-button>
     </a-form-item>
   </a-form>
 </template>
 <script lang="ts">
-import { defineComponent, reactive } from 'vue';
-
+import { defineComponent, reactive, computed } from 'vue';
+import { UserOutlined, LockOutlined } from '@ant-design/icons-vue';
 interface FormState {
   username: string;
   password: string;
-  remember: boolean;
 }
 export default defineComponent({
+  components: {
+    UserOutlined,
+    LockOutlined,
+  },
   setup() {
     const formState = reactive<FormState>({
       username: '',
       password: '',
-      remember: true,
     });
     const onFinish = (values: any) => {
       console.log('Success:', values);
@@ -71,10 +77,14 @@ export default defineComponent({
     const onFinishFailed = (errorInfo: any) => {
       console.log('Failed:', errorInfo);
     };
+    const disabled = computed(() => {
+      return !(formState.username && formState.password);
+    });
     return {
       formState,
       onFinish,
       onFinishFailed,
+      disabled,
     };
   },
 });

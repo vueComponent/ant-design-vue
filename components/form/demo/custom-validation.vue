@@ -47,7 +47,6 @@ See more advanced usage at [async-validator](https://github.com/yiminghe/async-v
 <script lang="ts">
 import type { RuleObject } from 'ant-design-vue/es/form';
 import { defineComponent, reactive, ref } from 'vue';
-import type { UnwrapRef } from 'vue';
 import type { FormInstance } from 'ant-design-vue';
 interface FormState {
   pass: string;
@@ -57,7 +56,7 @@ interface FormState {
 export default defineComponent({
   setup() {
     const formRef = ref<FormInstance>();
-    const formState: UnwrapRef<FormState> = reactive({
+    const formState = reactive<FormState>({
       pass: '',
       checkPass: '',
       age: undefined,

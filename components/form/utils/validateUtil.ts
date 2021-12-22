@@ -32,6 +32,7 @@ async function validateRule(
 
   // Bug of `async-validator`
   delete (cloneRule as any).ruleIndex;
+  delete (cloneRule as any).trigger;
 
   // We should special handle array validate
   let subRuleField: RuleObject = null;

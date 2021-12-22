@@ -138,9 +138,7 @@ export default defineComponent({
     watch(
       () => props.value,
       () => {
-        if (props.value !== undefined) {
-          stateValue.value = props.value;
-        }
+        stateValue.value = props.value;
       },
     );
     watch(

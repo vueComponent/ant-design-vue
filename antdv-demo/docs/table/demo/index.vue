@@ -22,6 +22,8 @@ import Size from './size.md';
 import Template from './template.md';
 import ResizableColumn from './resizable-column';
 import ResizableColumnString from '!raw-loader!./resizable-column';
+import DragSorting from './drag-sorting.vue';
+import DragSortingString from '!raw-loader!./drag-sorting';
 import Ellipsis from './ellipsis';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -90,6 +92,9 @@ export default {
           <Template />
           <demo-container code={ResizableColumnString}>
             <ResizableColumn />
+          </demo-container>
+          <demo-container code={DragSortingString}>
+            <DragSorting />
           </demo-container>
         </demo-sort>
         <api>

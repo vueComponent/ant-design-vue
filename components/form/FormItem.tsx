@@ -140,13 +140,7 @@ export default defineComponent({
         return getPropByPath(model, namePath.value, true).v;
       }
     };
-    const fieldValue = ref(getNewFieldValue());
-    watchEffect(
-      () => {
-        fieldValue.value = getNewFieldValue();
-      },
-      { flush: 'post' },
-    );
+    const fieldValue = computed(() => getNewFieldValue());
 
     const initialValue = ref(cloneDeep(fieldValue.value));
     const mergedValidateTrigger = computed(() => {
@@ -293,12 +287,6 @@ export default defineComponent({
       resetField,
     });
 
-    // instead useProvideFormItemContext onFieldChange
-    watch(fieldValue, () => {
-      if (props.autoLink) {
-        onFieldChange();
-      }
-    });
     useProvideFormItemContext(
       {
         id: fieldId,
@@ -308,9 +296,9 @@ export default defineComponent({
           }
         },
         onFieldChange: () => {
-          // if (props.autoLink) {
-          //   onFieldChange();
-          // }
+          if (props.autoLink) {
+            onFieldChange();
+          }
         },
         clearValidate,
       },

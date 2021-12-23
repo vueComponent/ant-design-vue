@@ -186,9 +186,20 @@ export default defineComponent({
     watchEffect(() => {
       validateState.value = props.validateStatus;
     });
-
+    const messageVariables = computed(() => {
+      let variables: Record<string, string> = {};
+      if (typeof props.label === 'string') {
+        variables.label = props.label;
+      } else if (props.name) {
+        variables.label = String(name);
+      }
+      if (props.messageVariables) {
+        variables = { ...variables, ...props.messageVariables };
+      }
+      return variables;
+    });
     const validateRules = (options: ValidateOptions) => {
-      const { validateFirst = false, messageVariables } = props;
+      const { validateFirst = false } = props;
       const { triggerName } = options || {};
 
       let filteredRules = rulesRef.value;
@@ -209,9 +220,12 @@ export default defineComponent({
         namePath.value,
         fieldValue.value,
         filteredRules as RuleObject[],
-        options,
+        {
+          validateMessages: formContext.validateMessages.value,
+          ...options,
+        },
         validateFirst,
-        messageVariables,
+        messageVariables.value,
       );
       validateState.value = 'validating';
       errors.value = [];

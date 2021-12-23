@@ -269,42 +269,43 @@ export default defineComponent({
             itemHeight={itemHeight}
             prefixCls={`${prefixCls}-list`}
             ref={listRef}
-            children={(treeNode: FlattenNode) => {
-              const {
-                pos,
-                data: { ...restProps },
-                title,
-                key,
-                isStart,
-                isEnd,
-              } = treeNode;
-              const mergedKey = getKey(key, pos);
-              delete restProps.key;
-              delete restProps.children;
+            v-slots={{
+              default: (treeNode: FlattenNode) => {
+                const {
+                  pos,
+                  data: { ...restProps },
+                  title,
+                  key,
+                  isStart,
+                  isEnd,
+                } = treeNode;
+                const mergedKey = getKey(key, pos);
+                delete restProps.key;
+                delete restProps.children;
 
-              const treeNodeProps = getTreeNodeProps(mergedKey, treeNodeRequiredProps);
-
-              return (
-                <MotionTreeNode
-                  {...restProps}
-                  {...treeNodeProps}
-                  title={title}
-                  active={!!activeItem && key === activeItem.key}
-                  pos={pos}
-                  data={treeNode.data}
-                  isStart={isStart}
-                  isEnd={isEnd}
-                  motion={motion}
-                  motionNodes={key === MOTION_KEY ? transitionRange.value : null}
-                  motionType={motionType.value}
-                  onMotionStart={onListChangeStart}
-                  onMotionEnd={onMotionEnd}
-                  treeNodeRequiredProps={treeNodeRequiredProps}
-                  onMousemove={() => {
-                    onActiveChange(null);
-                  }}
-                />
-              );
+                const treeNodeProps = getTreeNodeProps(mergedKey, treeNodeRequiredProps);
+                return (
+                  <MotionTreeNode
+                    {...restProps}
+                    {...treeNodeProps}
+                    title={title}
+                    active={!!activeItem && key === activeItem.key}
+                    pos={pos}
+                    data={treeNode.data}
+                    isStart={isStart}
+                    isEnd={isEnd}
+                    motion={motion}
+                    motionNodes={key === MOTION_KEY ? transitionRange.value : null}
+                    motionType={motionType.value}
+                    onMotionStart={onListChangeStart}
+                    onMotionEnd={onMotionEnd}
+                    treeNodeRequiredProps={treeNodeRequiredProps}
+                    onMousemove={() => {
+                      onActiveChange(null);
+                    }}
+                  />
+                );
+              },
             }}
           ></VirtualList>
         </>

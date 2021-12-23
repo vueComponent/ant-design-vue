@@ -7,7 +7,7 @@ import { isValidElement } from '../_util/props-util';
 import createRef from '../_util/createRef';
 import type { PropType } from 'vue';
 import { computed, defineComponent, nextTick, reactive, watch } from 'vue';
-import List from '../vc-virtual-list/List';
+import List from '../vc-virtual-list';
 import type {
   OptionsType as SelectOptionsType,
   OptionData,
@@ -346,85 +346,95 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
           onScroll={onScroll}
           virtual={virtual}
           onMouseenter={onMouseenter}
-          children={({ group, groupOption, data, label, value }, itemIndex) => {
-            const { key } = data;
-            // Group
-            if (group) {
+          v-slots={{
+            default: ({ group, groupOption, data, label, value }, itemIndex) => {
+              const { key } = data;
+              // Group
+              if (group) {
+                return (
+                  <div class={classNames(itemPrefixCls, `${itemPrefixCls}-group`)}>
+                    {renderOption ? renderOption(data) : label !== undefined ? label : key}
+                  </div>
+                );
+              }
+
+              const {
+                disabled,
+                title,
+                children,
+                style,
+                class: cls,
+                className,
+                ...otherProps
+              } = data;
+              const passedProps = omit(otherProps, omitFieldNameList);
+              // Option
+              const selected = values.has(value);
+
+              const optionPrefixCls = `${itemPrefixCls}-option`;
+              const optionClassName = classNames(itemPrefixCls, optionPrefixCls, cls, className, {
+                [`${optionPrefixCls}-grouped`]: groupOption,
+                [`${optionPrefixCls}-active`]: activeIndex === itemIndex && !disabled,
+                [`${optionPrefixCls}-disabled`]: disabled,
+                [`${optionPrefixCls}-selected`]: selected,
+              });
+
+              const mergedLabel = childrenAsData ? children : label;
+
+              const iconVisible =
+                !menuItemSelectedIcon || typeof menuItemSelectedIcon === 'function' || selected;
+
+              const content = mergedLabel || value;
+              // https://github.com/ant-design/ant-design/issues/26717
+              let optionTitle =
+                typeof content === 'string' || typeof content === 'number'
+                  ? content.toString()
+                  : undefined;
+              if (title !== undefined) {
+                optionTitle = title;
+              }
+
               return (
-                <div class={classNames(itemPrefixCls, `${itemPrefixCls}-group`)}>
-                  {renderOption ? renderOption(data) : label !== undefined ? label : key}
+                <div
+                  {...passedProps}
+                  aria-selected={selected}
+                  class={optionClassName}
+                  title={optionTitle}
+                  onMousemove={e => {
+                    if (otherProps.onMousemove) {
+                      otherProps.onMousemove(e);
+                    }
+                    if (activeIndex === itemIndex || disabled) {
+                      return;
+                    }
+                    setActive(itemIndex);
+                  }}
+                  onClick={e => {
+                    if (!disabled) {
+                      onSelectValue(value);
+                    }
+                    if (otherProps.onClick) {
+                      otherProps.onClick(e);
+                    }
+                  }}
+                  style={style}
+                >
+                  <div class={`${optionPrefixCls}-content`}>
+                    {renderOption ? renderOption(data) : content}
+                  </div>
+                  {isValidElement(menuItemSelectedIcon) || selected}
+                  {iconVisible && (
+                    <TransBtn
+                      class={`${itemPrefixCls}-option-state`}
+                      customizeIcon={menuItemSelectedIcon}
+                      customizeIconProps={{ isSelected: selected }}
+                    >
+                      {selected ? '✓' : null}
+                    </TransBtn>
+                  )}
                 </div>
               );
-            }
-
-            const { disabled, title, children, style, class: cls, className, ...otherProps } = data;
-            const passedProps = omit(otherProps, omitFieldNameList);
-            // Option
-            const selected = values.has(value);
-
-            const optionPrefixCls = `${itemPrefixCls}-option`;
-            const optionClassName = classNames(itemPrefixCls, optionPrefixCls, cls, className, {
-              [`${optionPrefixCls}-grouped`]: groupOption,
-              [`${optionPrefixCls}-active`]: activeIndex === itemIndex && !disabled,
-              [`${optionPrefixCls}-disabled`]: disabled,
-              [`${optionPrefixCls}-selected`]: selected,
-            });
-
-            const mergedLabel = childrenAsData ? children : label;
-
-            const iconVisible =
-              !menuItemSelectedIcon || typeof menuItemSelectedIcon === 'function' || selected;
-
-            const content = mergedLabel || value;
-            // https://github.com/ant-design/ant-design/issues/26717
-            let optionTitle =
-              typeof content === 'string' || typeof content === 'number'
-                ? content.toString()
-                : undefined;
-            if (title !== undefined) {
-              optionTitle = title;
-            }
-
-            return (
-              <div
-                {...passedProps}
-                aria-selected={selected}
-                class={optionClassName}
-                title={optionTitle}
-                onMousemove={e => {
-                  if (otherProps.onMousemove) {
-                    otherProps.onMousemove(e);
-                  }
-                  if (activeIndex === itemIndex || disabled) {
-                    return;
-                  }
-                  setActive(itemIndex);
-                }}
-                onClick={e => {
-                  if (!disabled) {
-                    onSelectValue(value);
-                  }
-                  if (otherProps.onClick) {
-                    otherProps.onClick(e);
-                  }
-                }}
-                style={style}
-              >
-                <div class={`${optionPrefixCls}-content`}>
-                  {renderOption ? renderOption(data) : content}
-                </div>
-                {isValidElement(menuItemSelectedIcon) || selected}
-                {iconVisible && (
-                  <TransBtn
-                    class={`${itemPrefixCls}-option-state`}
-                    customizeIcon={menuItemSelectedIcon}
-                    customizeIconProps={{ isSelected: selected }}
-                  >
-                    {selected ? '✓' : null}
-                  </TransBtn>
-                )}
-              </div>
-            );
+            },
           }}
         ></List>
       </>

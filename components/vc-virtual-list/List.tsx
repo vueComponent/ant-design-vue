@@ -398,7 +398,7 @@ const List = defineComponent({
       virtual,
       component: Component = 'div',
       onScroll,
-      children,
+      children = this.$slots.default,
       style,
       class: className,
       ...restProps

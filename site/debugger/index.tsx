@@ -1,5 +1,6 @@
 // debugger tsx
-import Demo from './demo/demo.vue';
+import Demo from '../../components/form/demo/normal-login.vue';
+// import Demo from './demo/demo.vue';
 
 export default {
   setup() {},

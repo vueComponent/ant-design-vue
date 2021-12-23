@@ -93,7 +93,7 @@ export type FormExpose = {
   resetFields: (name?: NamePath) => void;
   clearValidate: (name?: NamePath) => void;
   validateFields: (
-    nameList?: NamePath[],
+    nameList?: NamePath[] | string,
     options?: ValidateOptions,
   ) => Promise<{
     [key: string]: any;
@@ -102,7 +102,7 @@ export type FormExpose = {
     [key: string]: any;
   };
   validate: (
-    nameList?: NamePath[],
+    nameList?: NamePath[] | string,
     options?: ValidateOptions,
   ) => Promise<{
     [key: string]: any;
@@ -145,7 +145,12 @@ const Form = defineComponent({
       }
       return true;
     });
-
+    const validateMessages = computed(() => {
+      return {
+        ...defaultValidateMessages,
+        ...props.validateMessages,
+      };
+    });
     const formClassName = computed(() =>
       classNames(prefixCls.value, {
         [`${prefixCls.value}-${props.layout}`]: true,
@@ -267,10 +272,7 @@ const Form = defineComponent({
         // Add field validate rule in to promise list
         if (!provideNameList || containsNamePath(namePathList, fieldNamePath)) {
           const promise = field.validateRules({
-            validateMessages: {
-              ...defaultValidateMessages,
-              ...props.validateMessages,
-            },
+            validateMessages: validateMessages.value,
             ...options,
           });
 
@@ -376,6 +378,7 @@ const Form = defineComponent({
       onValidate: (name, status, errors) => {
         emit('validate', name, status, errors);
       },
+      validateMessages,
     });
 
     watch(

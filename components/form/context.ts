@@ -3,7 +3,8 @@ import { inject, provide, computed } from 'vue';
 import type { ColProps } from '../grid';
 import type { RequiredMark, ValidationRule } from './Form';
 import type { ValidateStatus, FieldExpose } from './FormItem';
-import type { FormLabelAlign } from './interface';
+import type { FormLabelAlign, ValidateMessages } from './interface';
+import { defaultValidateMessages } from './utils/messages';
 
 export interface FormContextProps {
   model?: ComputedRef<any>;
@@ -24,6 +25,7 @@ export interface FormContextProps {
     status: boolean,
     errors: string[] | null,
   ) => void;
+  validateMessages: ComputedRef<ValidateMessages>;
 }
 
 export const FormContextKey: InjectionKey<FormContextProps> = Symbol('formContextKey');
@@ -44,6 +46,7 @@ export const useInjectForm = () => {
     rules: computed(() => undefined),
     requiredMark: computed(() => false),
     onValidate: () => {},
+    validateMessages: computed(() => defaultValidateMessages),
   });
 };
 

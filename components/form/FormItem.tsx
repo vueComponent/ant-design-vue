@@ -1,4 +1,4 @@
-import type { PropType, ExtractPropTypes, ComputedRef } from 'vue';
+import type { PropType, ExtractPropTypes, ComputedRef, Ref } from 'vue';
 import {
   watch,
   defineComponent,
@@ -32,7 +32,7 @@ const ValidateStatuses = tuple('success', 'warning', 'error', 'validating', '');
 export type ValidateStatus = typeof ValidateStatuses[number];
 
 export interface FieldExpose {
-  fieldValue: ComputedRef<any>;
+  fieldValue: Ref<any>;
   fieldId: ComputedRef<any>;
   fieldName: ComputedRef<any>;
   resetField: () => void;
@@ -132,13 +132,15 @@ export default defineComponent({
         return formName ? `${formName}_${mergedId}` : `${defaultItemNamePrefixCls}_${mergedId}`;
       }
     });
-    const fieldValue = computed(() => {
+    const getNewFieldValue = () => {
       const model = formContext.model.value;
       if (!model || !fieldName.value) {
         return;
+      } else {
+        return getPropByPath(model, namePath.value, true).v;
       }
-      return getPropByPath(model, namePath.value, true).v;
-    });
+    };
+    const fieldValue = computed(() => getNewFieldValue());
 
     const initialValue = ref(cloneDeep(fieldValue.value));
     const mergedValidateTrigger = computed(() => {
@@ -184,9 +186,20 @@ export default defineComponent({
     watchEffect(() => {
       validateState.value = props.validateStatus;
     });
-
+    const messageVariables = computed(() => {
+      let variables: Record<string, string> = {};
+      if (typeof props.label === 'string') {
+        variables.label = props.label;
+      } else if (props.name) {
+        variables.label = String(name);
+      }
+      if (props.messageVariables) {
+        variables = { ...variables, ...props.messageVariables };
+      }
+      return variables;
+    });
     const validateRules = (options: ValidateOptions) => {
-      const { validateFirst = false, messageVariables } = props;
+      const { validateFirst = false } = props;
       const { triggerName } = options || {};
 
       let filteredRules = rulesRef.value;
@@ -207,9 +220,12 @@ export default defineComponent({
         namePath.value,
         fieldValue.value,
         filteredRules as RuleObject[],
-        options,
+        {
+          validateMessages: formContext.validateMessages.value,
+          ...options,
+        },
         validateFirst,
-        messageVariables,
+        messageVariables.value,
       );
       validateState.value = 'validating';
       errors.value = [];
@@ -285,12 +301,6 @@ export default defineComponent({
       resetField,
     });
 
-    // instead useProvideFormItemContext onFieldChange
-    watch(fieldValue, () => {
-      if (props.autoLink) {
-        onFieldChange();
-      }
-    });
     useProvideFormItemContext(
       {
         id: fieldId,
@@ -300,9 +310,9 @@ export default defineComponent({
           }
         },
         onFieldChange: () => {
-          // if (props.autoLink) {
-          //   onFieldChange();
-          // }
+          if (props.autoLink) {
+            onFieldChange();
+          }
         },
         clearValidate,
       },

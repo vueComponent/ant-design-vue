@@ -15,7 +15,12 @@ title:
 Add or remove form items dynamically.
 </docs>
 <template>
-  <a-form ref="formRef" :model="dynamicValidateForm" v-bind="formItemLayoutWithOutLabel">
+  <a-form
+    ref="formRef"
+    name="dynamic_form_item"
+    :model="dynamicValidateForm"
+    v-bind="formItemLayoutWithOutLabel"
+  >
     <a-form-item
       v-for="(domain, index) in dynamicValidateForm.domains"
       :key="domain.key"
@@ -56,7 +61,7 @@ Add or remove form items dynamically.
 <script lang="ts">
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons-vue';
 import { defineComponent, reactive, ref } from 'vue';
-import type { UnwrapRef } from 'vue';
+import type { FormInstance } from 'ant-design-vue';
 
 interface Domain {
   value: string;
@@ -68,7 +73,7 @@ export default defineComponent({
     PlusOutlined,
   },
   setup() {
-    const formRef = ref();
+    const formRef = ref<FormInstance>();
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -85,7 +90,7 @@ export default defineComponent({
         sm: { span: 20, offset: 4 },
       },
     };
-    const dynamicValidateForm: UnwrapRef<{ domains: Domain[] }> = reactive({
+    const dynamicValidateForm = reactive<{ domains: Domain[] }>({
       domains: [],
     });
     const submitForm = () => {

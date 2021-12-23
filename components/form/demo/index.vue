@@ -4,11 +4,19 @@
     <LableWidth />
     <HorizontalLogin />
     <Layout />
-    <Validation />
+    <inlineLoginVue />
+    <normalLoginVue />
+    <!-- <Validation /> -->
     <CustomValidation />
     <DynamicFormItem />
     <NestedForm />
     <CustomizedFormControls />
+    <advancedSearchVue />
+    <dynamicFormItemsComplexVue />
+    <dynamicFormItemsVue />
+    <dynamicRuleVue />
+    <formContextVue />
+    <formInModalVue />
     <UseFormBasic />
     <UseFormNested />
     <UseFormTrigger />
@@ -17,18 +25,26 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
+import advancedSearchVue from './advanced-search.vue';
 import Basic from './basic.vue';
 import CustomValidation from './custom-validation.vue';
 import DynamicFormItem from './dynamic-form-item.vue';
+import dynamicFormItemsComplexVue from './dynamic-form-items-complex.vue';
+import dynamicFormItemsVue from './dynamic-form-items.vue';
+import dynamicRuleVue from './dynamic-rule.vue';
+import formContextVue from './form-context.vue';
+import formInModalVue from './form-in-modal.vue';
 import HorizontalLogin from './horizontal-login.vue';
-import NestedForm from './nested-form.vue';
+import inlineLoginVue from './inline-login.vue';
+import LableWidth from './lable-width.vue';
 import Layout from './layout.vue';
-import Validation from './validation.vue';
+import NestedForm from './nest-messages.vue';
+import normalLoginVue from './normal-login.vue';
+// import Validation from './validation.vue';
 import UseFormBasic from './useForm-basic.vue';
 import UseFormNested from './useForm-nested.vue';
 import UseFormTrigger from './useForm-trigger.vue';
 import UseFormMerge from './useForm-merge.vue';
-import LableWidth from './lable-width.vue';
 import CustomizedFormControls from './customized-form-controls.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -43,13 +59,21 @@ export default defineComponent({
     HorizontalLogin,
     NestedForm,
     Layout,
-    Validation,
+    // Validation,
     UseFormBasic,
     UseFormNested,
     UseFormTrigger,
     UseFormMerge,
     LableWidth,
     CustomizedFormControls,
+    advancedSearchVue,
+    dynamicFormItemsComplexVue,
+    dynamicFormItemsVue,
+    dynamicRuleVue,
+    formContextVue,
+    formInModalVue,
+    inlineLoginVue,
+    normalLoginVue,
   },
 });
 </script>

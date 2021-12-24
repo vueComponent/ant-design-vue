@@ -10,6 +10,30 @@
 
 ---
 
+## 3.0.0-beta.1
+
+`2021-12-24`
+
+- 🌟 Refactor the InputNumber component, add new attributes: `bordered` `controls` `keyboard` `stringMode`, slot: `addonAfter` `addonBefore`, event: `step`, please refer to InputNumber API description for details
+- 🌟 Add global.d.ts type file to facilitate volar recognition [#5067](https://github.com/vueComponent/ant-design-vue/issues/5067)
+- 🐞 Fix web-type.json missing issue [#4860](https://github.com/vueComponent/ant-design-vue/issues/4860) -Tabs
+
+  - 🌟 Tabs collapsed node added delete function
+  - 🐞 Tabs special scene not activated option issue [#5056](https://github.com/vueComponent/ant-design-vue/issues/5056)
+  - 🐞 Fix the problem of the default export TabPane component name error [b645f8](https://github.com/vueComponent/ant-design-vue/commit/b645f827d0e13d60bc01c740ae8cbc8f61cf2cdf)
+
+- Form
+
+  - 🌟 7 new usage examples added to the document
+  - 🌟 New FormInstance type export
+  - 🌟 No need to specify the type when verifying the Number type [#5064](https://github.com/vueComponent/ant-design-vue/issues/5064)
+  - 🐞 Roll back the automatic verification feature when FormItem is actively assigned. This scenario should not be automatically verified [#5056](https://github.com/vueComponent/ant-design-vue/issues/5056)
+  - 🐞 Fix validateMessages error problem
+
+- 🌟 Optimize the basic components of the virtual list and improve the performance of Tree, TreeSelect, and Select [4e70c6](https://github.com/vueComponent/ant-design-vue/commit/4e70c6dd775254ae713d8633db2d0363027708e1) [#5069](https://github. com/vueComponent/ant-design-vue/issues/5069)
+- 🐞 Fix the stuttering problem when Tree expands [#5069](https://github.com/vueComponent/ant-design-vue/issues/5069)
+- 🐞 Fix the issue that Input is not updated when reset to undefined
+
 ## 3.0.0-alpha.16
 
 `2021-12-19`

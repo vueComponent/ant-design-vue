@@ -6,7 +6,7 @@ const rootPath = path.resolve(__dirname, '../../');
 try {
   parseAndWrite({
     version: pkg.version,
-    name: 'types',
+    name: 'ant-design-vue',
     path: path.resolve(rootPath, './components'),
     // default match lang
     test: /en-US\.md/,

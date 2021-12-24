@@ -10,6 +10,31 @@
 
 ---
 
+## 3.0.0-beta.1
+
+`2021-12-24`
+
+- 🌟 重构 InputNumber 组件，新增属性： `bordered` `controls` `keyboard` `stringMode`， 插槽： `addonAfter` `addonBefore`， 事件：`step`，具体请查看 InputNumber API 说明
+- 🌟 添加 global.d.ts 类型文件，方便 volar 识别 [#5067](https://github.com/vueComponent/ant-design-vue/issues/5067)
+- 🐞 修复 web-type.json 丢失问题 [#4860](https://github.com/vueComponent/ant-design-vue/issues/4860)
+- Tabs
+
+  - 🌟 Tabs 折叠节点新增删除功能
+  - 🐞 Tabs 特殊场景未激活选项问题 [#5056](https://github.com/vueComponent/ant-design-vue/issues/5056)
+  - 🐞 修复默认导出的 TabPane 组件名称错误问题 [b645f8](https://github.com/vueComponent/ant-design-vue/commit/b645f827d0e13d60bc01c740ae8cbc8f61cf2cdf)
+
+- Form
+
+  - 🌟 文档新增 7 个使用示例
+  - 🌟 新增 FormInstance 类型导出
+  - 🌟 校验 Number 类型时无需指定类型 [#5064](https://github.com/vueComponent/ant-design-vue/issues/5064)
+  - 🐞 回滚 FormItem 主动赋值时自动校验特性，此场景不应该自动校验 [#5056](https://github.com/vueComponent/ant-design-vue/issues/5056)
+  - 🐞 修复 validateMessages 错误问题
+
+- 🌟 优化虚拟列表基础组件，提升 Tree、TreeSelect、Select 性能 [4e70c6](https://github.com/vueComponent/ant-design-vue/commit/4e70c6dd775254ae713d8633db2d0363027708e1) [#5069](https://github.com/vueComponent/ant-design-vue/issues/5069)
+- 🐞 修复 Tree 展开时卡顿闪动问题 [#5069](https://github.com/vueComponent/ant-design-vue/issues/5069)
+- 🐞 修复 Input 重置 undefined 时，不更新问题
+
 ## 3.0.0-alpha.16
 
 `2021-12-19`

@@ -321,7 +321,7 @@ describe('Menu', () => {
       { attachTo: 'body', sync: false },
     );
     await asyncExpect(() => {
-      expect(wrapper.findAll('ul.ant-menu-sub')[0].classes()).toContain('ant-menu-inline');
+      expect($$('ul.ant-menu-sub')[0].className).toContain('ant-menu-inline');
       expect($$('ul.ant-menu-sub')[0].style.display).not.toBe('none');
     }, 0);
     wrapper.setProps({ inlineCollapsed: true });
@@ -339,7 +339,7 @@ describe('Menu', () => {
     // }, 500);
     wrapper.setProps({ inlineCollapsed: false });
     await asyncExpect(() => {
-      expect(wrapper.findAll('ul.ant-menu-sub')[0].classes()).toContain('ant-menu-inline');
+      expect($$('ul.ant-menu-sub')[0].className).toContain('ant-menu-inline');
       expect($$('ul.ant-menu-sub')[0].style.display).not.toBe('none');
     }, 0);
   });
@@ -406,7 +406,7 @@ describe('Menu', () => {
   //   });
 
   const toggleMenu = (wrapper, index, event) => {
-    wrapper.findAll('.ant-menu-submenu-title')[index].trigger(event);
+    $$('.ant-menu-submenu-title')[index].dispatchEvent(new MouseEvent(event));
   };
 
   it('inline', async () => {

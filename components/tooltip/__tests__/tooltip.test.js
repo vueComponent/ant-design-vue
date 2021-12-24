@@ -5,7 +5,7 @@ import mountTest from '../../../tests/shared/mountTest';
 
 describe('Tooltip', () => {
   mountTest(Tooltip);
-  fit('check `onVisibleChange` arguments', async () => {
+  it('check `onVisibleChange` arguments', async () => {
     const onVisibleChange = jest.fn();
     const wrapper = mount(
       {
@@ -34,7 +34,7 @@ describe('Tooltip', () => {
     let lastCount = null;
     await asyncExpect(() => {
       // `title` is empty.
-      div = wrapper.findAll('#hello')[0].element;
+      div = document.getElementById('hello');
       div.dispatchEvent(new MouseEvent('mouseenter'));
     });
     await asyncExpect(() => {
@@ -53,14 +53,14 @@ describe('Tooltip', () => {
       wrapper.setProps({ title: 'Have a nice day!' });
     });
     await asyncExpect(() => {
-      wrapper.findAll('#hello')[0].element.dispatchEvent(new MouseEvent('mouseenter'));
+      document.getElementById('hello').dispatchEvent(new MouseEvent('mouseenter'));
     });
     await asyncExpect(() => {
       expect(onVisibleChange).toHaveBeenLastCalledWith(true);
       expect(wrapper.vm.$refs.tooltip.visible).toBe(true);
     }, 0);
     await asyncExpect(() => {
-      wrapper.findAll('#hello')[0].element.dispatchEvent(new MouseEvent('mouseleave'));
+      document.getElementById('hello').dispatchEvent(new MouseEvent('mouseleave'));
     });
     await asyncExpect(() => {
       expect(onVisibleChange).toHaveBeenLastCalledWith(false);
@@ -71,7 +71,7 @@ describe('Tooltip', () => {
       wrapper.setProps({ visible: false });
     });
     await asyncExpect(() => {
-      wrapper.findAll('#hello')[0].element.dispatchEvent(new MouseEvent('mouseenter'));
+      document.getElementById('hello').dispatchEvent(new MouseEvent('mouseenter'));
     });
     await asyncExpect(() => {
       expect(onVisibleChange).toHaveBeenLastCalledWith(true);
@@ -79,7 +79,7 @@ describe('Tooltip', () => {
     });
     await asyncExpect(() => {
       // always trigger onVisibleChange
-      wrapper.findAll('#hello')[0].element.dispatchEvent(new MouseEvent('mouseleave'));
+      document.getElementById('hello').dispatchEvent(new MouseEvent('mouseleave'));
       lastCount = onVisibleChange.mock.calls.length;
     });
     await asyncExpect(() => {

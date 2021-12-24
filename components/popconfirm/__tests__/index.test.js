@@ -12,7 +12,7 @@ describe('Popconfirm', () => {
   it('should popup Popconfirm dialog', async () => {
     const onVisibleChange = jest.fn();
 
-    const wrapper = mount(
+    mount(
       {
         render() {
           return (
@@ -33,13 +33,13 @@ describe('Popconfirm', () => {
     );
     let triggerNode = null;
     await asyncExpect(() => {
-      triggerNode = wrapper.findAll('span')[0];
-      triggerNode.trigger('click');
+      triggerNode = document.getElementsByTagName('span')[0];
+      triggerNode.dispatchEvent(new MouseEvent('click'));
     });
     await asyncExpect(() => {
       expect(onVisibleChange).toHaveBeenLastCalledWith(true, undefined);
       expect($$('.popconfirm-test').length).toBe(1);
-      triggerNode.trigger('click');
+      triggerNode.dispatchEvent(new MouseEvent('click'));
     }, 1000);
     await asyncExpect(() => {
       expect(onVisibleChange).toHaveBeenLastCalledWith(false, undefined);

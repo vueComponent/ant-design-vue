@@ -19,7 +19,7 @@ describe('RangePicker', () => {
     resetMockDate();
   });
   // issue: https://github.com/ant-design/ant-design/issues/5872
-  it('should not throw error when value is reset to `[]`', async () => {
+  xit('should not throw error when value is reset to `[]`', async () => {
     const birthday = dayjs('2000-01-01', 'YYYY-MM-DD');
     const wrapper = mount(
       {

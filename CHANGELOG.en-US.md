@@ -16,7 +16,7 @@
 
 - 🌟 Refactor the InputNumber component, add new attributes: `bordered` `controls` `keyboard` `stringMode`, slot: `addonAfter` `addonBefore`, event: `step`, please refer to InputNumber API description for details
 - 🌟 Add global.d.ts type file to facilitate volar recognition [#5067](https://github.com/vueComponent/ant-design-vue/issues/5067)
-- 🐞 Fix web-type.json missing issue [#4860](https://github.com/vueComponent/ant-design-vue/issues/4860) -Tabs
+- 🐞 Fix web-type.json missing issue [#4860](https://github.com/vueComponent/ant-design-vue/issues/4860) - Tabs
 
   - 🌟 Tabs collapsed node added delete function
   - 🐞 Tabs special scene not activated option issue [#5056](https://github.com/vueComponent/ant-design-vue/issues/5056)

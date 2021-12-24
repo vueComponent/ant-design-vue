@@ -1,7 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RangePicker customize separator 1`] = `
-<!---->
 <div class="ant-picker ant-picker-range">
   <div class="ant-picker-input ant-picker-input-active"><input readonly="" placeholder="Start date" size="12" autocomplete="off"></div>
   <div class="ant-picker-range-separator">test</div>

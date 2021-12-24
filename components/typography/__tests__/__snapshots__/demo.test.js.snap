@@ -85,7 +85,8 @@ exports[`renders ./components/typography/demo/ellipsis.vue correctly 1`] = `
     Design, a design language for background applications, is refined by Ant UED Team. Ant
     Design, a design language for background applications, is refined by Ant UED Team." aria-hidden="true">...</span>
   <!----><a class="ant-typography-expand" aria-label="Expand">more</a>
-</div><span class="ant-typography ant-typography-ellipsis ant-typography-single-line" style="width: 100px;"><!----><span><span title="Ant Design, a design language for background applications, is refined by Ant UED Team." aria-hidden="true">...</span>
+</div>
+<span class="ant-typography ant-typography-ellipsis ant-typography-single-line" style="width: 100px;"><!----><span><span title="Ant Design, a design language for background applications, is refined by Ant UED Team." aria-hidden="true">...</span>
 <!----></span></span>
 `;
 

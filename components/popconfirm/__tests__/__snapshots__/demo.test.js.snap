@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./components/popconfirm/demo/basic.vue correctly 1`] = `<!----><a href="#">Delete</a>`;
+exports[`renders ./components/popconfirm/demo/basic.vue correctly 1`] = `<a href="#">Delete</a>`;
 
 exports[`renders ./components/popconfirm/demo/dynamic-trigger.vue correctly 1`] = `
 <div>
@@ -10,9 +10,9 @@ exports[`renders ./components/popconfirm/demo/dynamic-trigger.vue correctly 1`] 
 </div>
 `;
 
-exports[`renders ./components/popconfirm/demo/icon.vue correctly 1`] = `<!----><a href="#">Delete</a>`;
+exports[`renders ./components/popconfirm/demo/icon.vue correctly 1`] = `<a href="#">Delete</a>`;
 
-exports[`renders ./components/popconfirm/demo/local.vue correctly 1`] = `<!----><a href="#">Delete</a>`;
+exports[`renders ./components/popconfirm/demo/local.vue correctly 1`] = `<a href="#">Delete</a>`;
 
 exports[`renders ./components/popconfirm/demo/placement.vue correctly 1`] = `
 <div id="components-a-popconfirm-demo-placement">

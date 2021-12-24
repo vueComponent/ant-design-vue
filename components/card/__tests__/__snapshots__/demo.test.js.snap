@@ -16,7 +16,8 @@ exports[`renders ./components/card/demo/basic.vue correctly 1`] = `
     <p>card content</p>
   </div>
   <!---->
-</div><br>
+</div>
+<br>
 <div class="ant-card ant-card-bordered ant-card-small" style="width: 300px;">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">
@@ -248,7 +249,8 @@ exports[`renders ./components/card/demo/loading.vue correctly 1`] = `
     </div>
   </div>
   <!---->
-</div><button style="margin-top: 16px;" class="ant-btn" type="button">
+</div>
+<button style="margin-top: 16px;" class="ant-btn" type="button">
   <!----><span>Toggle loading</span>
 </button>
 `;
@@ -333,7 +335,9 @@ exports[`renders ./components/card/demo/tabs.vue correctly 1`] = `
   <!---->
   <div class="ant-card-body"> content1</div>
   <!---->
-</div><br><br>
+</div>
+<br>
+<br>
 <div class="ant-card ant-card-bordered ant-card-contain-tabs" style="width: 100%;">
   <div class="ant-card-head">
     <div class="ant-card-head-wrapper">

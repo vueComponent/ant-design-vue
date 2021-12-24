@@ -12,20 +12,19 @@ exports[`renders ./components/popover/demo/arrow-point-at-center.vue correctly 1
 `;
 
 exports[`renders ./components/popover/demo/basic.vue correctly 1`] = `
-<!----><button class="ant-btn ant-btn-primary" type="button">
+<button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Hover me</span>
 </button>
 `;
 
 exports[`renders ./components/popover/demo/control.vue correctly 1`] = `
-<!----><button class="ant-btn ant-btn-primary" type="button">
+<button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Click me</span>
 </button>
 `;
 
 exports[`renders ./components/popover/demo/hover-with-click.vue correctly 1`] = `
-<!---->
-<!----><button class="ant-btn" type="button">
+<button class="ant-btn" type="button">
   <!----><span>Hover and click / 悬停并单击</span>
 </button>
 `;

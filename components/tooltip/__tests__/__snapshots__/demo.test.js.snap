@@ -28,7 +28,7 @@ exports[`renders ./components/tooltip/demo/auto-adjust-overflow.vue correctly 1`
 </div>
 `;
 
-exports[`renders ./components/tooltip/demo/basic.vue correctly 1`] = `<!----><span> Tooltip will show when mouse enter. </span>`;
+exports[`renders ./components/tooltip/demo/basic.vue correctly 1`] = `<span> Tooltip will show when mouse enter. </span>`;
 
 exports[`renders ./components/tooltip/demo/color.vue correctly 1`] = `
 <div id="components-a-tooltip-demo-color">

@@ -5,7 +5,8 @@ exports[`renders ./components/affix/demo/basic.vue correctly 1`] = `
   <div class="ant-affix" style="position: fixed; top: 10px; width: 0px; height: 0px;"><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>Affix top</span>
     </button></div>
-</div><br>
+</div>
+<br>
 <div>
   <div class=""><button class="ant-btn ant-btn-primary" type="button">
       <!----><span>Affix bottom</span>

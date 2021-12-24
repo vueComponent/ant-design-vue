@@ -1,5 +1,7 @@
 import type { PropType, Component, CSSProperties } from 'vue';
 import {
+  onMounted,
+  onUpdated,
   ref,
   defineComponent,
   watchEffect,
@@ -155,12 +157,58 @@ const List = defineComponent({
       null,
     );
 
-    const calRes = ref<{
+    const calRes = reactive<{
       scrollHeight?: number;
       start?: number;
       end?: number;
       offset?: number;
-    }>({});
+    }>({
+      scrollHeight: undefined,
+      start: 0,
+      end: 0,
+      offset: undefined,
+    });
+
+    const offsetHeight = ref(0);
+    onMounted(() => {
+      nextTick(() => {
+        offsetHeight.value = fillerInnerRef.value?.offsetHeight || 0;
+      });
+    });
+    onUpdated(() => {
+      nextTick(() => {
+        offsetHeight.value = fillerInnerRef.value?.offsetHeight || 0;
+      });
+    });
+    watch(
+      [useVirtual, mergedData],
+      () => {
+        if (!useVirtual.value) {
+          Object.assign(calRes, {
+            scrollHeight: undefined,
+            start: 0,
+            end: mergedData.value.length - 1,
+            offset: undefined,
+          });
+        }
+      },
+      { immediate: true },
+    );
+    watch(
+      [useVirtual, mergedData, offsetHeight, inVirtual],
+      () => {
+        // Always use virtual scroll bar in avoid shaking
+        if (useVirtual.value && !inVirtual.value) {
+          Object.assign(calRes, {
+            scrollHeight: offsetHeight.value,
+            start: 0,
+            end: mergedData.value.length - 1,
+            offset: undefined,
+          });
+        }
+      },
+      { immediate: true },
+    );
     watch(
       [
         inVirtual,
@@ -170,82 +218,73 @@ const List = defineComponent({
         updatedMark,
         heights,
         () => props.height,
+        offsetHeight,
       ],
       () => {
-        setTimeout(() => {
-          if (!useVirtual.value) {
-            calRes.value = {
-              scrollHeight: undefined,
-              start: 0,
-              end: mergedData.value.length - 1,
-              offset: undefined,
-            };
-            return;
+        if (!useVirtual.value || !inVirtual.value) {
+          return;
+        }
+        if (!inVirtual.value) {
+          Object.assign(calRes, {
+            scrollHeight: offsetHeight.value,
+            start: 0,
+            end: mergedData.value.length - 1,
+            offset: undefined,
+          });
+          return;
+        }
+
+        let itemTop = 0;
+        let startIndex: number | undefined;
+        let startOffset: number | undefined;
+        let endIndex: number | undefined;
+        const dataLen = mergedData.value.length;
+        const data = mergedData.value;
+        for (let i = 0; i < dataLen; i += 1) {
+          const item = data[i];
+          const key = getKey(item);
+
+          const cacheHeight = heights.value[key];
+          const currentItemBottom =
+            itemTop + (cacheHeight === undefined ? props.itemHeight! : cacheHeight);
+
+          if (currentItemBottom >= state.scrollTop && startIndex === undefined) {
+            startIndex = i;
+            startOffset = itemTop;
           }
 
-          // Always use virtual scroll bar in avoid shaking
-          if (!inVirtual.value) {
-            calRes.value = {
-              scrollHeight: fillerInnerRef.value?.offsetHeight || 0,
-              start: 0,
-              end: mergedData.value.length - 1,
-              offset: undefined,
-            };
-            return;
+          // Check item bottom in the range. We will render additional one item for motion usage
+          if (currentItemBottom > state.scrollTop + props.height! && endIndex === undefined) {
+            endIndex = i;
           }
 
-          let itemTop = 0;
-          let startIndex: number | undefined;
-          let startOffset: number | undefined;
-          let endIndex: number | undefined;
-          const dataLen = mergedData.value.length;
-          const data = mergedData.value;
-          for (let i = 0; i < dataLen; i += 1) {
-            const item = data[i];
-            const key = getKey(item);
+          itemTop = currentItemBottom;
+        }
 
-            const cacheHeight = heights.value[key];
-            const currentItemBottom =
-              itemTop + (cacheHeight === undefined ? props.itemHeight! : cacheHeight);
+        // Fallback to normal if not match. This code should never reach
+        /* istanbul ignore next */
+        if (startIndex === undefined) {
+          startIndex = 0;
+          startOffset = 0;
+        }
+        if (endIndex === undefined) {
+          endIndex = dataLen - 1;
+        }
 
-            if (currentItemBottom >= state.scrollTop && startIndex === undefined) {
-              startIndex = i;
-              startOffset = itemTop;
-            }
-
-            // Check item bottom in the range. We will render additional one item for motion usage
-            if (currentItemBottom > state.scrollTop + props.height! && endIndex === undefined) {
-              endIndex = i;
-            }
-
-            itemTop = currentItemBottom;
-          }
-
-          // Fallback to normal if not match. This code should never reach
-          /* istanbul ignore next */
-          if (startIndex === undefined) {
-            startIndex = 0;
-            startOffset = 0;
-          }
-          if (endIndex === undefined) {
-            endIndex = dataLen - 1;
-          }
-
-          // Give cache to improve scroll experience
-          endIndex = Math.min(endIndex + 1, dataLen);
-          calRes.value = {
-            scrollHeight: itemTop,
-            start: startIndex,
-            end: endIndex,
-            offset: startOffset,
-          };
+        // Give cache to improve scroll experience
+        endIndex = Math.min(endIndex + 1, dataLen);
+        Object.assign(calRes, {
+          scrollHeight: itemTop,
+          start: startIndex,
+          end: endIndex,
+          offset: startOffset,
         });
       },
-      { immediate: true, flush: 'post' },
+      { immediate: true },
     );
 
     // =============================== In Range ===============================
-    const maxScrollHeight = computed(() => calRes.value.scrollHeight! - props.height!);
+    const maxScrollHeight = computed(() => calRes.scrollHeight! - props.height!);
 
     function keepInRange(newScrollTop: number) {
       let newTop = newScrollTop;
@@ -416,15 +455,6 @@ const List = defineComponent({
       setInstance,
       mergedData,
     } = this;
-    const listChildren = renderChildren(
-      mergedData,
-      start,
-      end,
-      setInstance,
-      children,
-      sharedConfig,
-    );
-
     return (
       <div
         style={{
@@ -446,9 +476,11 @@ const List = defineComponent({
             offset={offset}
             onInnerResize={collectHeight}
             ref="fillerInnerRef"
-          >
-            {listChildren}
-          </Filler>
+            v-slots={{
+              default: () =>
+                renderChildren(mergedData, start, end, setInstance, children, sharedConfig),
+            }}
+          ></Filler>
         </Component>
 
         {useVirtual && (

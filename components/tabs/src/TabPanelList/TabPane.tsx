@@ -20,8 +20,9 @@ export interface TabPaneProps {
 }
 
 export default defineComponent({
-  name: 'TabPane',
+  name: 'ATabPane',
   inheritAttrs: false,
+  __ANT_TAB_PANE: true,
   props: {
     tab: PropTypes.any,
     disabled: { type: Boolean },

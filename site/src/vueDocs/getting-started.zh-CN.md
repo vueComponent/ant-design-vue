@@ -49,7 +49,6 @@ import App from './App';
 import 'ant-design-vue/dist/antd.css';
 
 const app = createApp();
-app.config.productionTip = false;
 
 app.use(Antd);
 ```
@@ -64,7 +63,6 @@ import { Button, message } from 'ant-design-vue';
 import App from './App';
 
 const app = createApp(App);
-app.config.productionTip = false;
 
 /* 会自动注册 Button 下的子组件, 例如 Button.Group */
 app.use(Button).mount('#app');

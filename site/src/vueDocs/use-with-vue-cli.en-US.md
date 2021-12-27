@@ -153,7 +153,7 @@ Remove the `import 'ant-design-vue/dist/antd.css';` statement added before becau
 
   Vue.component(Button.name, Button)
 
-  Vue.config.productionTip = false
+- Vue.config.productionTip = false
 
   new Vue({
     render: h => h(App)

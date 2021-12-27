@@ -67,7 +67,6 @@ import 'ant-design-vue/dist/antd.css';
 import App from './App';
 
 const app = createApp(App);
-app.config.productionTip = false;
 
 /* 会自动注册 Button 下的子组件, 例如 Button.Group */
 app.use(Button).mount('#app');
@@ -153,7 +152,7 @@ $ yarn add babel-plugin-import --dev
 
   Vue.component(Button.name, Button)
 
-  Vue.config.productionTip = false
+- Vue.config.productionTip = false
 
   new Vue({
     render: h => h(App)

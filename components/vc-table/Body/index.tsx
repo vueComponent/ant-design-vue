@@ -1,3 +1,4 @@
+// base rc-table@7.17.2
 import type { GetRowKey, Key, GetComponentProps } from '../interface';
 import ExpandedRow from './ExpandedRow';
 import { getColumnsKey } from '../utils/valueUtil';

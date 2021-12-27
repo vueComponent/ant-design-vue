@@ -449,13 +449,20 @@ export default defineComponent<TableProps<DefaultRecordType>>({
       }
     };
     let timtout;
+    const updateWidth = (width: number) => {
+      if (width !== componentWidth.value) {
+        triggerOnScroll();
+        componentWidth.value = fullTableRef.value ? fullTableRef.value.offsetWidth : width;
+      }
+    };
     const onFullTableResize = ({ width }) => {
       clearTimeout(timtout);
+      if (componentWidth.value === 0) {
+        updateWidth(width);
+        return;
+      }
       timtout = setTimeout(() => {
-        if (width !== componentWidth.value) {
-          triggerOnScroll();
-          componentWidth.value = fullTableRef.value ? fullTableRef.value.offsetWidth : width;
-        }
+        updateWidth(width);
       }, 100);
     };
 

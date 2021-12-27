@@ -2,7 +2,7 @@ import type { ExtractPropTypes } from 'vue';
 import { defineComponent, inject, nextTick } from 'vue';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import VcCheckbox from '../vc-checkbox';
+import VcCheckbox from '../vc-checkbox/Checkbox';
 import hasProp, { getOptionProps, getSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';

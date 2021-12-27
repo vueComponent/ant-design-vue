@@ -10,6 +10,13 @@
 
 ---
 
+## 3.0.0-beta.2
+
+`2021-12-27`
+
+- 🐞 修复 FormItem 未传递 name 时，触发检验问题 [#5081](https://github.com/vueComponent/ant-design-vue/issues/5081)
+- 🐞 修复 Table 首次渲染时宽度闪动问题 [#5075](https://github.com/vueComponent/ant-design-vue/issues/5075) [#4993](https://github.com/vueComponent/ant-design-vue/issues/4993)
+
 ## 3.0.0-beta.1
 
 `2021-12-24`

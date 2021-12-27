@@ -10,6 +10,13 @@
 
 ---
 
+## 3.0.0-beta.2
+
+`2021-12-27`
+
+- 🐞 Fix the issue of triggering inspection when FormItem does not pass the name [#5081](https://github.com/vueComponent/ant-design-vue/issues/5081)
+- 🐞 Fix the width flickering problem when Table is first rendered [#5075](https://github.com/vueComponent/ant-design-vue/issues/5075) [#4993](https://github.com/vueComponent /ant-design-vue/issues/4993)
+
 ## 3.0.0-beta.1
 
 `2021-12-24`

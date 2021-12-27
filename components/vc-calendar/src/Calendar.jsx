@@ -331,6 +331,8 @@ const Calendar = defineComponent({
             prefixCls={prefixCls}
             monthCellRender={monthCellRender}
             monthCellContentRender={monthCellContentRender}
+            disabledMonth={disabledDate}
+            disabledDate={disabledDate}
           />
           {timePicker && showTimePicker ? (
             <div class={`${prefixCls}-time-picker`}>

@@ -35,6 +35,7 @@ const CalendarHeader = {
     enablePrev: PropTypes.any.def(1),
     enableNext: PropTypes.any.def(1),
     disabledMonth: PropTypes.func,
+    disabledDate: PropTypes.func,
     mode: PropTypes.any,
     monthCellRender: PropTypes.func,
     monthCellContentRender: PropTypes.func,
@@ -151,6 +152,7 @@ const CalendarHeader = {
       enableNext,
       enablePrev,
       disabledMonth,
+      disabledDate,
       renderFooter,
     } = props;
 
@@ -177,6 +179,7 @@ const CalendarHeader = {
           locale={locale}
           value={value}
           rootPrefixCls={prefixCls}
+          disabledDate={disabledDate}
           onSelect={this.onYearSelect}
           onDecadePanelShow={this.showDecadePanel}
           renderFooter={renderFooter}
@@ -189,6 +192,7 @@ const CalendarHeader = {
           locale={locale}
           value={value}
           rootPrefixCls={prefixCls}
+          disabledDate={disabledDate}
           onSelect={this.onDecadeSelect}
           renderFooter={renderFooter}
         />

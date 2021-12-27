@@ -76,6 +76,18 @@
   }
 }
 
+@{calendar-prefix-cls}-year-panel-cell.@{calendar-prefix-cls}-year-panel-disabled-cell .@{calendar-prefix-cls}-year-panel-year {
+  color: @disabled-color;
+  background: @disabled-bg;
+  cursor: not-allowed;
+
+  &:hover {
+    color: @disabled-color;
+    background: @disabled-bg;
+    cursor: not-allowed;
+  }
+}
+
 .@{calendar-prefix-cls}-year-panel-last-decade-cell,
 .@{calendar-prefix-cls}-year-panel-next-decade-cell {
   .@{calendar-prefix-cls}-year-panel-year {

@@ -29,6 +29,7 @@ export default {
     defaultValue: PropTypes.object,
     rootPrefixCls: PropTypes.string,
     renderFooter: PropTypes.func,
+    disabledDate: PropTypes.func,
   },
   data() {
     this.nextCentury = goYear.bind(this, 100);
@@ -69,6 +70,7 @@ export default {
     const footer = renderFooter && renderFooter('decade');
     const decadesEls = decades.map((row, decadeIndex) => {
       const tds = row.map(decadeData => {
+        const disabled = typeof this.disabledDate === 'function' ? this.disabledDate(decadeData) : false;
         const dStartDecade = decadeData.startDecade;
         const dEndDecade = decadeData.endDecade;
         const isLast = dStartDecade < startYear;
@@ -78,15 +80,18 @@ export default {
           [`${prefixCls}-selected-cell`]: dStartDecade <= currentYear && currentYear <= dEndDecade,
           [`${prefixCls}-last-century-cell`]: isLast,
           [`${prefixCls}-next-century-cell`]: isNext,
+          [`${prefixCls}-disabled-cell`]: disabled,
         };
         const content = `${dStartDecade}-${dEndDecade}`;
         let clickHandler = noop;
-        if (isLast) {
-          clickHandler = this.previousCentury;
-        } else if (isNext) {
-          clickHandler = this.nextCentury;
-        } else {
-          clickHandler = chooseDecade.bind(this, dStartDecade);
+        if (!disabled) {
+          if (isLast) {
+            clickHandler = this.previousCentury;
+          } else if (isNext) {
+            clickHandler = this.nextCentury;
+          } else {
+            clickHandler = chooseDecade.bind(this, dStartDecade);
+          }
         }
         return (
           <td key={dStartDecade} onClick={clickHandler} role="gridcell" class={classNameMap}>

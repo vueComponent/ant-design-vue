@@ -29,6 +29,7 @@ export default {
     defaultValue: PropTypes.object,
     locale: PropTypes.object,
     renderFooter: PropTypes.func,
+    disabledDate: PropTypes.func,
   },
   data() {
     this.nextDecade = goYear.bind(this, 10);
@@ -78,19 +79,23 @@ export default {
 
     const yeasEls = years.map((row, index) => {
       const tds = row.map(yearData => {
+        const disabled = typeof this.disabledDate === 'function' ? this.disabledDate(yearData.year) : false;
         const classNameMap = {
           [`${prefixCls}-cell`]: 1,
           [`${prefixCls}-selected-cell`]: yearData.year === currentYear,
           [`${prefixCls}-last-decade-cell`]: yearData.year < startYear,
           [`${prefixCls}-next-decade-cell`]: yearData.year > endYear,
+          [`${prefixCls}-disabled-cell`]: disabled,
         };
         let clickHandler = noop;
-        if (yearData.year < startYear) {
-          clickHandler = this.previousDecade;
-        } else if (yearData.year > endYear) {
-          clickHandler = this.nextDecade;
-        } else {
-          clickHandler = chooseYear.bind(this, yearData.year);
+        if (!disabled) {
+          if (yearData.year < startYear) {
+            clickHandler = this.previousDecade;
+          } else if (yearData.year > endYear) {
+            clickHandler = this.nextDecade;
+          } else {
+            clickHandler = chooseYear.bind(this, yearData.year);
+          }
         }
         return (
           <td

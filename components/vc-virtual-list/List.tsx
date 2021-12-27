@@ -224,15 +224,6 @@ const List = defineComponent({
         if (!useVirtual.value || !inVirtual.value) {
           return;
         }
-        if (!inVirtual.value) {
-          Object.assign(calRes, {
-            scrollHeight: offsetHeight.value,
-            start: 0,
-            end: mergedData.value.length - 1,
-            offset: undefined,
-          });
-          return;
-        }
 
         let itemTop = 0;
         let startIndex: number | undefined;

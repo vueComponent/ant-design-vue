@@ -1,12 +1,13 @@
 import type { FunctionalComponent, PropType } from 'vue';
 import { cloneVNode } from 'vue';
+import { flattenChildren } from '../_util/props-util';
 
 export interface ItemProps {
   setRef: (element: HTMLElement) => void;
 }
 
 const Item: FunctionalComponent<ItemProps> = ({ setRef }, { slots }) => {
-  const children = slots.default?.();
+  const children = flattenChildren(slots.default?.());
 
   return children && children.length
     ? cloneVNode(children[0], {

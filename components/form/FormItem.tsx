@@ -199,6 +199,10 @@ export default defineComponent({
       return variables;
     });
     const validateRules = (options: ValidateOptions) => {
+      // no name, no value, so the validate result is incorrect
+      if (namePath.value.length === 0) {
+        return;
+      }
       const { validateFirst = false } = props;
       const { triggerName } = options || {};
 

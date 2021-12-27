@@ -1,12 +1,8 @@
 // base rc-input-number@7.3.4
 import type { DecimalClass, ValueType } from './utils/MiniDecimal';
-import getMiniDecimal, {
-  roundDownUnsignedDecimal,
-  roundUpUnsignedDecimal,
-  toFixed,
-} from './utils/MiniDecimal';
+import getMiniDecimal, { toFixed } from './utils/MiniDecimal';
 import StepHandler from './StepHandler';
-import { getNumberPrecision, num2str, trimNumber, validateNumber } from './utils/numberUtil';
+import { getNumberPrecision, num2str, validateNumber } from './utils/numberUtil';
 import useCursor from './hooks/useCursor';
 import useFrame from './hooks/useFrame';
 import type { HTMLAttributes, PropType } from 'vue';
@@ -33,25 +29,9 @@ const getDecimalValue = (stringMode: boolean, decimalValue: DecimalClass) => {
 
   return decimalValue.toNumber();
 };
-
-const getDecimalIfValidate = (value: ValueType, precision: number | undefined, isMax?: boolean) => {
+const getDecimalIfValidate = (value: ValueType) => {
   const decimal = getMiniDecimal(value);
-  if (decimal.isInvalidate()) {
-    return null;
-  }
-
-  if (precision === undefined) {
-    return decimal;
-  }
-
-  const { negative, integerStr, decimalStr, negativeStr } = trimNumber(decimal.toString());
-  const unSignedNumberStr = integerStr + '.' + decimalStr;
-
-  if ((isMax && !negative) || (!isMax && negative)) {
-    return getMiniDecimal(negativeStr + roundDownUnsignedDecimal(unSignedNumberStr, precision));
-  } else {
-    return getMiniDecimal(negativeStr + roundUpUnsignedDecimal(unSignedNumberStr, precision));
-  }
+  return decimal.isInvalidate() ? null : decimal;
 };
 
 export const inputNumberProps = {
@@ -210,8 +190,8 @@ export default defineComponent({
     }
 
     // >>> Max & Min limit
-    const maxDecimal = computed(() => getDecimalIfValidate(props.max, props.precision, true));
-    const minDecimal = computed(() => getDecimalIfValidate(props.min, props.precision, false));
+    const maxDecimal = computed(() => getDecimalIfValidate(props.max));
+    const minDecimal = computed(() => getDecimalIfValidate(props.min));
 
     const upDisabled = computed(() => {
       if (!maxDecimal.value || !decimalValue.value || decimalValue.value.isInvalidate()) {

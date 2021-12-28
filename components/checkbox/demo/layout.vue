@@ -17,7 +17,7 @@ We can use Checkbox and Grid Checkbox.group, to implement complex layout
 </docs>
 
 <template>
-  <a-checkbox-group v-model:value="value">
+  <a-checkbox-group v-model:value="value" style="width: 100%">
     <a-row>
       <a-col :span="8">
         <a-checkbox value="A">A</a-checkbox>
@@ -41,8 +41,9 @@ We can use Checkbox and Grid Checkbox.group, to implement complex layout
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
+    const value = ref([]);
     return {
-      value: ref([]),
+      value,
     };
   },
 });

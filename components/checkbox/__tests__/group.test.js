@@ -103,11 +103,10 @@ describe('CheckboxGroup', () => {
       props: { options },
       sync: false,
     });
-
-    expect(wrapper.vm.sValue).toEqual([]);
+    expect(wrapper.vm.mergedValue).toEqual([]);
     wrapper.setProps({ value: ['Apple'] });
     await asyncExpect(() => {
-      expect(wrapper.vm.sValue).toEqual(['Apple']);
+      expect(wrapper.vm.mergedValue).toEqual(['Apple']);
     });
   });
 

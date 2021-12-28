@@ -27,7 +27,7 @@ export default defineComponent({
   setup() {
     return {
       checked1: ref(false),
-      checked2: ref(false),
+      checked2: ref(true),
     };
   },
 });

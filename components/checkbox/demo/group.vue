@@ -19,9 +19,12 @@ Generate a group of checkboxes from an array
 <template>
   <a-checkbox-group v-model:value="value1" name="checkboxgroup" :options="plainOptions" />
   <br />
+  <br />
   <a-checkbox-group v-model:value="value2" :options="plainOptions" />
   <br />
+  <br />
   <a-checkbox-group v-model:value="value3" :options="options" />
+  <br />
   <br />
   <a-checkbox-group v-model:value="value4" :options="optionsWithDisabled" disabled>
     <template #label="{ value }">
@@ -51,7 +54,6 @@ export default defineComponent({
       value3: ['Pear'],
       value4: ['Apple'],
     });
-
     return {
       plainOptions,
       options,

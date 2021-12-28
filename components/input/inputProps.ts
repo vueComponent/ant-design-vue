@@ -2,6 +2,7 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import type { SizeType } from '../config-provider';
 import omit from '../_util/omit';
+import type { LiteralUnion } from '../_util/type';
 export const inputDefaultValue = Symbol() as unknown as string;
 const inputProps = {
   id: PropTypes.string,
@@ -18,28 +19,31 @@ const inputProps = {
   autocomplete: String,
   type: {
     type: String as PropType<
-      | 'button'
-      | 'checkbox'
-      | 'color'
-      | 'date'
-      | 'datetime-local'
-      | 'email'
-      | 'file'
-      | 'hidden'
-      | 'image'
-      | 'month'
-      | 'number'
-      | 'password'
-      | 'radio'
-      | 'range'
-      | 'reset'
-      | 'search'
-      | 'submit'
-      | 'tel'
-      | 'text'
-      | 'time'
-      | 'url'
-      | 'week'
+      LiteralUnion<
+        | 'button'
+        | 'checkbox'
+        | 'color'
+        | 'date'
+        | 'datetime-local'
+        | 'email'
+        | 'file'
+        | 'hidden'
+        | 'image'
+        | 'month'
+        | 'number'
+        | 'password'
+        | 'radio'
+        | 'range'
+        | 'reset'
+        | 'search'
+        | 'submit'
+        | 'tel'
+        | 'text'
+        | 'time'
+        | 'url'
+        | 'week',
+        string
+      >
     >,
     default: 'text',
   },

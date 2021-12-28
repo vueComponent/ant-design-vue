@@ -17,7 +17,7 @@ const RadioGroupOptionTypes = tuple('default', 'button');
 export type RadioGroupOption = typeof RadioGroupOptionTypes[number];
 
 export type RadioGroupChildOption = {
-  label: any;
+  label?: any;
   value: any;
   disabled?: boolean;
 };

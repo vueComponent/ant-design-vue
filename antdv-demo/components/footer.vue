@@ -90,6 +90,11 @@ export default {
                     Vue CLI
                   </a>
                 </div>
+                <div>
+                  <a href="https://antdv.formilyjs.org/" target="_blank">
+                    @formily/antdv
+                  </a>
+                </div>
                 {showPpy && (
                   <div>
                     <a href="https://www.pengpengyu.com/" target="_blank">

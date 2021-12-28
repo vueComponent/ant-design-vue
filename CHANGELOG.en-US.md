@@ -10,6 +10,18 @@
 
 ---
 
+## 3.0.0-beta.4
+
+`2021-12-28`
+
+- 🌟 Refactor the Checkbox component for better performance
+- 🌟 FormItem adds noStyle property, which makes it more convenient to organize form layout
+- 🐞 Fix the problem that InputNumber cannot enter the minimum value when the precision is 0 [#5083](https://github.com/vueComponent/ant-design-vue/issues/5083)
+
+#### Documentation:
+
+- 🌟 Form adds 2 new examples: Time-related Controls, Other Form Controls
+
 ## 3.0.0-beta.3
 
 `2021-12-27`

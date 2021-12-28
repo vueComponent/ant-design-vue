@@ -94,6 +94,7 @@ export const formItemProps = {
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
   messageVariables: { type: Object as PropType<Record<string, string>> },
   hidden: Boolean,
+  noStyle: Boolean,
 };
 
 export type FormItemProps = Partial<ExtractPropTypes<typeof formItemProps>>;
@@ -364,6 +365,7 @@ export default defineComponent({
       [`${prefixCls.value}-item-hidden`]: props.hidden,
     }));
     return () => {
+      if (props.noStyle) return slots.default?.();
       const help = props.help ?? (slots.help ? filterEmpty(slots.help()) : null);
       return (
         <Row

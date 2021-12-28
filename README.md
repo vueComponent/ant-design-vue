@@ -65,6 +65,7 @@ If you are in a bad network environment，you can try other registries and tools
 | [ant-design-vue-helper](https://marketplace.visualstudio.com/items?itemName=ant-design-vue.vscode-ant-design-vue-helper) | A vscode extension for ant-design-vue |
 | [vue-cli-plugin-ant-design](https://github.com/vueComponent/vue-cli-plugin-ant-design) | Vue-cli 3 plugin to add ant-design-vue |
 | [vue-dash-event](https://github.com/vueComponent/vue-dash-event) | The library function, implemented in the DOM template, can use the custom event of the ant-design-vue component (camelCase) |
+| [@formily/antdv](https://github.com/formilyjs/antdv) | The Library with Formily and ant-design-vue |
 
 ## Donation
 

@@ -72,6 +72,9 @@
             <div>
               <a href="https://vitejs.dev/" target="_blank">Vite</a>
             </div>
+            <div>
+              <a href="https://antdv.formilyjs.org/" target="_blank">@formily/antdv</a>
+            </div>
             <div v-if="showPpy()">
               <a href="https://www.pengpengyu.com/" target="_blank">砰砰鱼</a>
             </div>

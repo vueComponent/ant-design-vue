@@ -44,6 +44,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 | scrollToFirstError | 提交失败自动滚动到第一个错误字段 | boolean \| [options](https://github.com/stipsan/scroll-into-view-if-needed/#options) | false | 2.0.0 |
 | name | 表单名称，会作为表单字段 `id` 前缀使用 | string | - | 2.0.0 |
 | validateTrigger | 统一设置字段校验规则 | string \| string[] | `change` | 2.0.0 |
+| noStyle | 为 `true` 时不带样式，作为纯字段控件使用 | boolean | false | 3.0 |
 
 ### 事件
 

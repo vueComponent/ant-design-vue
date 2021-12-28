@@ -43,6 +43,7 @@ A form consists of one or more form fields whose type includes input, textarea, 
 | name | Form name. Will be the prefix of Field `id` | string | - | 2.0.0 |
 | scrollToFirstError | Auto scroll to first failed field when submit | boolean \| [options](https://github.com/stipsan/scroll-into-view-if-needed/#options) | false | 2.0.0 |
 | validateTrigger | Config field validate trigger | string \| string[] | `change` | 2.0.0 |
+| noStyle | No style for `true`, used as a pure field control | boolean | false | 3.0 |
 
 ### Events
 

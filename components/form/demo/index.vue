@@ -17,6 +17,8 @@
     <dynamicRuleVue />
     <formContextVue />
     <formInModalVue />
+    <timeRelatedControlsVue />
+    <validateOtherVue />
     <UseFormBasic />
     <UseFormNested />
     <UseFormTrigger />
@@ -46,6 +48,8 @@ import UseFormNested from './useForm-nested.vue';
 import UseFormTrigger from './useForm-trigger.vue';
 import UseFormMerge from './useForm-merge.vue';
 import CustomizedFormControls from './customized-form-controls.vue';
+import timeRelatedControlsVue from './time-related-controls.vue';
+import validateOtherVue from './validate-other.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 
@@ -53,6 +57,8 @@ export default defineComponent({
   US,
   CN,
   components: {
+    timeRelatedControlsVue,
+    validateOtherVue,
     Basic,
     CustomValidation,
     DynamicFormItem,

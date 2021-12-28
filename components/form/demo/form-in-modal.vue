@@ -34,7 +34,7 @@ When user visit a page with a list of items, and want to create a new item. The 
           <a-input v-model:value="formState.title" />
         </a-form-item>
         <a-form-item name="description" label="Description">
-          <a-input v-model:value="formState.description" type="textarea" />
+          <a-textarea v-model:value="formState.description" />
         </a-form-item>
         <a-form-item name="modifier" class="collection-create-form_last-form-item">
           <a-radio-group v-model:value="formState.modifier">

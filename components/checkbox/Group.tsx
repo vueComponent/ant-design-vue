@@ -1,134 +1,116 @@
-import type { PropType } from 'vue';
-import { defineComponent, inject, provide } from 'vue';
-import PropTypes from '../_util/vue-types';
+import { computed, ref, watch, defineComponent, provide } from 'vue';
 import Checkbox from './Checkbox';
-import hasProp, { getSlot } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
-import type { VueNode } from '../_util/type';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import useConfigInject from '../_util/hooks/useConfigInject';
+import type { CheckboxOptionType } from './interface';
+import { CheckboxGroupContextKey, checkboxGroupProps } from './interface';
 
-export type CheckboxValueType = string | number | boolean;
-export interface CheckboxOptionType {
-  label: VueNode;
-  value: CheckboxValueType;
-  disabled?: boolean;
-  indeterminate?: boolean;
-  onChange?: (e: Event) => void;
-}
-function noop() {}
 export default defineComponent({
   name: 'ACheckboxGroup',
-  props: {
-    name: PropTypes.string,
-    prefixCls: PropTypes.string,
-    defaultValue: { type: Array as PropType<Array<CheckboxValueType>> },
-    value: { type: Array as PropType<Array<CheckboxValueType>> },
-    options: { type: Array as PropType<Array<CheckboxOptionType | string>> },
-    disabled: PropTypes.looseBool,
-    onChange: PropTypes.func,
-    id: PropTypes.string,
-  },
+  props: checkboxGroupProps(),
   emits: ['change', 'update:value'],
-  setup() {
+  setup(props, { slots, emit, expose }) {
     const formItemContext = useInjectFormItemContext();
-    return {
-      formItemContext,
-      configProvider: inject('configProvider', defaultConfigProvider),
-    };
-  },
-
-  data() {
-    const { value, defaultValue } = this;
-    return {
-      sValue: value || defaultValue || [],
-      registeredValues: [],
-    };
-  },
-  watch: {
-    value(val) {
-      this.sValue = val || [];
-    },
-  },
-  created() {
-    provide('checkboxGroupContext', this);
-  },
-  methods: {
-    getOptions() {
-      const { options = [], $slots } = this;
-      return options.map(option => {
+    const { prefixCls, direction } = useConfigInject('checkbox', props);
+    const mergedValue = ref((props.value === undefined ? props.defaultValue : props.value) || []);
+    watch(
+      () => props.value,
+      () => {
+        mergedValue.value = props.value || [];
+      },
+    );
+    const options = computed(() => {
+      return props.options.map(option => {
         if (typeof option === 'string') {
           return {
             label: option,
             value: option,
           };
         }
-        let label = option.label;
-        if (label === undefined && $slots.label) {
-          label = $slots.label(option);
-        }
-        return { ...option, label };
+        return option;
       });
-    },
-    cancelValue(value: CheckboxValueType) {
-      this.registeredValues = this.registeredValues.filter(val => val !== value);
-    },
+    });
+    const triggerUpdate = ref(Symbol());
+    const registeredValuesMap = ref<Map<Symbol, string>>(new Map());
+    const cancelValue = (id: Symbol) => {
+      registeredValuesMap.value.delete(id);
+      triggerUpdate.value = Symbol();
+    };
+    const registerValue = (id: Symbol, value: string) => {
+      registeredValuesMap.value.set(id, value);
+      triggerUpdate.value = Symbol();
+    };
 
-    registerValue(value: CheckboxValueType) {
-      this.registeredValues = [...this.registeredValues, value];
-    },
-    toggleOption(option: CheckboxOptionType) {
-      const { registeredValues } = this;
-      const optionIndex = this.sValue.indexOf(option.value);
-      const value = [...this.sValue];
+    const registeredValues = ref(new Map());
+    watch(triggerUpdate, () => {
+      const valuseMap = new Map();
+      for (const value of registeredValuesMap.value.values()) {
+        valuseMap.set(value, true);
+      }
+      registeredValues.value = valuseMap;
+    });
+
+    const toggleOption = (option: CheckboxOptionType) => {
+      const optionIndex = mergedValue.value.indexOf(option.value);
+      const value = [...mergedValue.value];
       if (optionIndex === -1) {
         value.push(option.value);
       } else {
         value.splice(optionIndex, 1);
       }
-      if (!hasProp(this, 'value')) {
-        this.sValue = value;
+      if (props.value === undefined) {
+        mergedValue.value = value;
       }
-      const options = this.getOptions();
       const val = value
-        .filter(val => registeredValues.indexOf(val) !== -1)
+        .filter(val => registeredValues.value.has(val))
         .sort((a, b) => {
-          const indexA = options.findIndex(opt => opt.value === a);
-          const indexB = options.findIndex(opt => opt.value === b);
+          const indexA = options.value.findIndex(opt => opt.value === a);
+          const indexB = options.value.findIndex(opt => opt.value === b);
           return indexA - indexB;
         });
-      // this.$emit('input', val);
-      this.$emit('update:value', val);
-      this.$emit('change', val);
-      this.formItemContext.onFieldChange();
-    },
-  },
-  render() {
-    const { $props: props, $data: state } = this;
-    const { prefixCls: customizePrefixCls, options, id = this.formItemContext.id.value } = props;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    const prefixCls = getPrefixCls('checkbox', customizePrefixCls);
-    let children = getSlot(this);
-    const groupPrefixCls = `${prefixCls}-group`;
-    if (options && options.length > 0) {
-      children = this.getOptions().map(option => (
-        <Checkbox
-          prefixCls={prefixCls}
-          key={option.value.toString()}
-          disabled={'disabled' in option ? option.disabled : props.disabled}
-          indeterminate={option.indeterminate}
-          value={option.value}
-          checked={state.sValue.indexOf(option.value) !== -1}
-          onChange={option.onChange || noop}
-          class={`${groupPrefixCls}-item`}
+      emit('update:value', val);
+      emit('change', val);
+      formItemContext.onFieldChange();
+    };
+    provide(CheckboxGroupContextKey, {
+      cancelValue,
+      registerValue,
+      toggleOption,
+      mergedValue,
+      name: computed(() => props.name),
+      disabled: computed(() => props.disabled),
+    });
+    expose({
+      mergedValue,
+    });
+    return () => {
+      const { id = formItemContext.id.value } = props;
+      let children = null;
+      const groupPrefixCls = `${prefixCls.value}-group`;
+      if (options.value && options.value.length > 0) {
+        children = options.value.map(option => (
+          <Checkbox
+            prefixCls={prefixCls.value}
+            key={option.value.toString()}
+            disabled={'disabled' in option ? option.disabled : props.disabled}
+            indeterminate={option.indeterminate}
+            value={option.value}
+            checked={mergedValue.value.indexOf(option.value) !== -1}
+            onChange={option.onChange}
+            class={`${groupPrefixCls}-item`}
+          >
+            {option.label === undefined ? slots.label?.(option) : option.label}
+          </Checkbox>
+        ));
+      }
+      return (
+        <div
+          class={[groupPrefixCls, { [`${groupPrefixCls}-rtl`]: direction.value === 'rtl' }]}
+          id={id}
         >
-          {option.label}
-        </Checkbox>
-      ));
-    }
-    return (
-      <div class={groupPrefixCls} id={id}>
-        {children}
-      </div>
-    );
+          {children || slots.default?.()}
+        </div>
+      );
+    };
   },
 });

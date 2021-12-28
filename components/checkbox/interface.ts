@@ -1,0 +1,78 @@
+import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue';
+import type { VueNode } from '../_util/type';
+import PropTypes from '../_util/vue-types';
+
+export type CheckboxValueType = string | number | boolean;
+export interface CheckboxOptionType {
+  label?: VueNode;
+  value: CheckboxValueType;
+  disabled?: boolean;
+  indeterminate?: boolean;
+  onChange?: (e: Event) => void;
+}
+
+export const abstractCheckboxGroupProps = () => {
+  return {
+    name: String,
+    prefixCls: String,
+    options: {
+      type: Array as PropType<Array<CheckboxOptionType | string>>,
+      default: () => [] as Array<CheckboxOptionType | string>,
+    },
+    disabled: Boolean,
+    id: String,
+  };
+};
+
+export const checkboxGroupProps = () => {
+  return {
+    ...abstractCheckboxGroupProps(),
+    defaultValue: { type: Array as PropType<Array<CheckboxValueType>> },
+    value: { type: Array as PropType<Array<CheckboxValueType>> },
+    onChange: { type: Function as PropType<(checkedValue: Array<CheckboxValueType>) => void> },
+    'onUpdate:value': {
+      type: Function as PropType<(checkedValue: Array<CheckboxValueType>) => void>,
+    },
+  };
+};
+
+export type CheckboxGroupProps = Partial<ExtractPropTypes<ReturnType<typeof checkboxGroupProps>>>;
+
+export const abstractCheckboxProps = () => {
+  return {
+    prefixCls: String,
+    defaultChecked: { type: Boolean, default: undefined },
+    checked: { type: Boolean, default: undefined },
+    disabled: { type: Boolean, default: undefined },
+    isGroup: { type: Boolean, default: undefined },
+    value: PropTypes.any,
+    name: String,
+    id: String,
+    indeterminate: { type: Boolean, default: undefined },
+    type: { type: String, default: 'checkbox' },
+    autofocus: { type: Boolean, default: undefined },
+    onChange: PropTypes.func,
+    'onUpdate:checked': PropTypes.func,
+    skipGroup: { type: Boolean, default: false },
+  };
+};
+
+export const checkboxProps = () => {
+  return {
+    ...abstractCheckboxProps(),
+    indeterminate: { type: Boolean, default: false },
+  };
+};
+
+export type CheckboxProps = Partial<ExtractPropTypes<ReturnType<typeof checkboxProps>>>;
+
+export type CheckboxGroupContext = {
+  cancelValue: (id: Symbol) => void;
+  registerValue: (id: Symbol, value: string) => void;
+  toggleOption: (option: CheckboxOptionType) => void;
+  name: Ref<string>;
+  disabled: Ref<boolean>;
+  mergedValue: Ref<CheckboxValueType[]>;
+};
+export const CheckboxGroupContextKey: InjectionKey<CheckboxGroupContext> =
+  Symbol('CheckboxGroupContext');

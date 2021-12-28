@@ -17,7 +17,7 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
 </docs>
 
 <template>
-  <div :style="{ borderBottom: '1px solid #E9E9E9' }">
+  <div>
     <a-checkbox
       v-model:checked="checkAll"
       :indeterminate="indeterminate"
@@ -26,7 +26,7 @@ The `indeterminate` property can help you to achieve a 'check all' effect.
       Check all
     </a-checkbox>
   </div>
-  <br />
+  <a-divider />
   <a-checkbox-group v-model:value="checkedList" :options="plainOptions" />
 </template>
 <script lang="ts">

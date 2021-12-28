@@ -27,7 +27,7 @@ export default defineComponent({
     type: 'checkbox',
     defaultChecked: false,
   }),
-  emits: ['click', 'focus', 'blur', 'change', 'keydown', 'keypress', 'keyup'],
+  emits: ['click', 'change'],
   setup(props, { attrs, emit, expose }) {
     const checked = ref(props.checked === undefined ? props.defaultChecked : props.checked);
     const inputRef = ref<HTMLInputElement>();

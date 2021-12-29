@@ -1,3 +1,4 @@
-// based on rc-notification 3.3.1
+// based on rc-notification 4.5.7
 import Notification from './Notification';
+
 export default Notification;

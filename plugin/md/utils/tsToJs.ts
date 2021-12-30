@@ -16,7 +16,7 @@ const tsToJs = async (content: string): Promise<string> => {
       [
         require.resolve('@babel/plugin-transform-typescript'),
         {
-          isTSX: false,
+          isTSX: true,
         },
       ],
     ],

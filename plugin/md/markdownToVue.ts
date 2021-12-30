@@ -122,18 +122,43 @@ ${jsSourceCode}
       jsSourceCode: Buffer.from(jsSourceCode).toString('base64'),
     }),
   );
-
-  const newContent = `
-    <template>
-      <demo-box :jsfiddle="${jsfiddle}">
-        ${template.replace('<template>', '<template v-slot:default>')}
-        <template #htmlCode>${html}</template>
-        <template #jsVersionHtml>${jsVersion}</template>
-      </demo-box>
-    </template>
-    ${script}
-    ${style}
-    `;
+  /**
+   * @desc 兼容一下如果没有template的情况，让demo可以编辑jsx代码
+  */
+  const newContent = (()=>{
+    if(template){
+      return `
+      <template>
+        <demo-box :jsfiddle="${jsfiddle}">
+          ${template.replace('<template>', '<template v-slot:default>')}
+          <template #htmlCode>${html}</template>
+          <template #jsVersionHtml>${jsVersion}</template>
+        </demo-box>
+      </template>
+      ${script}
+      ${style}
+      `;
+    }else{
+      const s = scriptContent.replace('export default', 'const AComponent = ');
+      return `
+      <template>
+        <demo-box :jsfiddle="${jsfiddle}">
+          <template v-slot:default><a-component></a-component></template>
+          <template #htmlCode>${html}</template>
+          <template #jsVersionHtml>${jsVersion}</template>
+        </demo-box>
+      </template>
+        <script lang="jsx">
+          ${s}
+          export default {
+            components:{AComponent}
+          }
+        </script>
+        ${style}
+      `;
+    }
+    
+  })()
   return newContent;
 }
 

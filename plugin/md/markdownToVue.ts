@@ -157,7 +157,6 @@ ${jsSourceCode}
         ${style}
       `;
     }
-    
   })()
   return newContent;
 }

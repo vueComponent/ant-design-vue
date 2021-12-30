@@ -19,7 +19,7 @@ Custom arrows display
 <template>
   <a-carousel arrows>
     <template #prevArrow>
-      <div class="custom-slick-arrow" style="left: 10px; zindex: 1">
+      <div class="custom-slick-arrow" style="left: 10px; z-index: 1">
         <left-circle-outlined />
       </div>
     </template>

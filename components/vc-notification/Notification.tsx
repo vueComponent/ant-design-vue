@@ -1,5 +1,5 @@
-import { getTransitionGroupProps } from 'ant-design-vue/es/_util/transition';
-import type { Key } from 'ant-design-vue/es/_util/type';
+import { getTransitionGroupProps } from '../_util/transition';
+import type { Key } from '../_util/type';
 import type { CSSProperties } from 'vue';
 import {
   createVNode,
@@ -125,7 +125,7 @@ const Notification = defineComponent<NotificationProps>({
       remove,
     });
     return () => {
-      const { prefixCls, closeIcon = slots.closeIcon?.() } = props;
+      const { prefixCls, closeIcon = slots.closeIcon?.({ prefixCls }) } = props;
       const noticeNodes = notices.value.map(({ notice, holderCallback }, index) => {
         const updateMark = index === notices.value.length - 1 ? notice.updateMark : undefined;
         const { key, userPassKey } = notice;
@@ -201,6 +201,8 @@ Notification.newInstance = function newNotificationInstance(properties, callback
     appContext,
     prefixCls: customizePrefixCls,
     rootPrefixCls: customRootPrefixCls,
+    transitionName: customTransitionName,
+    hasTransitionName,
     ...props
   } = properties || {};
   const div = document.createElement('div');
@@ -234,9 +236,17 @@ Notification.newInstance = function newNotificationInstance(properties, callback
         const global = globalConfigForApi;
         const prefixCls = global.getPrefixCls(name, customizePrefixCls);
         const rootPrefixCls = global.getRootPrefixCls(customRootPrefixCls, prefixCls);
+        const transitionName = hasTransitionName
+          ? customTransitionName
+          : `${rootPrefixCls}-${customTransitionName}`;
         return (
           <ConfigProvider {...global} notUpdateGlobalConfig={true} prefixCls={rootPrefixCls}>
-            <Notification ref={notiRef} {...attrs} prefixCls={prefixCls} />
+            <Notification
+              ref={notiRef}
+              {...attrs}
+              prefixCls={prefixCls}
+              transitionName={transitionName}
+            />
           </ConfigProvider>
         );
       };

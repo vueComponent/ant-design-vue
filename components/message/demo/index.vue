@@ -6,6 +6,7 @@
     <loading />
     <thenable />
     <update />
+    <customStyleVue />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -15,6 +16,7 @@ import Duration from './duration.vue';
 import Loading from './loading.vue';
 import Thenable from './thenable.vue';
 import Update from './update.vue';
+import customStyleVue from './custom-style.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -28,6 +30,7 @@ export default defineComponent({
     Loading,
     Thenable,
     Update,
+    customStyleVue,
   },
   setup() {
     return {};

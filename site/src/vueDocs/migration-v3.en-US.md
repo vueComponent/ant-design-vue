@@ -4,7 +4,7 @@ The 2.x version is a compatible version developed for compatibility with Vue 3. 
 
 ## Upgrade preparation
 
-1. Please upgrade to the latest version of 2.x first, and remove/modify related APIs according to the warning information on the console. It is recommended to check the historical Change Log of 2.x first, which will not be detailed here.
+1. Please upgrade to the latest version of 2.x first, and remove/modify related APIs according to the warning information on the console. It is recommended to check the historical ChangeLog of 2.x first, which will not be detailed here.
 2. Upgrade the project to Vue 3.2 and above.
 
 ## 3.0 What are the incompatible changes
@@ -21,57 +21,55 @@ The 2.x version is a compatible version developed for compatibility with Vue 3. 
 - Removed the `lazy` attribute of Transfer, it does not have a real optimization effect.
 - Removed the `combobox` mode of Select, please use `AutoComplete` instead.
 - Deprecated Button.Group, please use `Space` instead.
-- `DatePicker` `TimePicker` `Calendar` remove momentjs, please use dayjs instead
+- `DatePicker` `TimePicker` `Calendar` remove momentjs, please use dayjs instead.
 - `Tree`, `TreeSelect`
-  - Deprecated the use of `a-tree-node` and `a-tree-select-node` to construct nodes, use the `treeData` property instead
-  - Deprecated `scopedSlots` `slots` custom rendering node, use `v-slot:title` instead
-  - Deprecated `replaceFields`, use `fieldNames` instead
+  - Deprecated the use of `a-tree-node` and `a-tree-select-node` to construct nodes, use the `treeData` property instead.
+  - Deprecated `scopedSlots` `slots` custom rendering node, use `v-slot:title` instead.
+  - Deprecated `replaceFields`, use `fieldNames` instead.
 - `Table`
   - Removed the `rowSelection.hideDefaultSelections` property of Table, please use `SELECTION_ALL` and `SELECTION_INVERT` in `rowSelection.selections` instead, [custom options](/components/table/#components-table-demo- row-selection-custom).
-  - Removed Column slots and replaced them with `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon`
+  - Removed Column slots and replaced them with `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon`.
 
 #### Component refactoring
 
 In order to make the components have better performance and maintainability, we have used TS + Composition Api to refactor almost all components. There are still very few components that have not been refactored. Such components will be refactored gradually in the future, and the rest There will be no destructive updates to the components, so there is no need to worry about future upgrade costs.
 
-Major updates after the 3.0 version refactoring include `Tree` `TreeSelect` `DatePicker` `TimePicker` `Calendar` `Form` `Table`, other components also have corresponding function updates, you can check ChangeLog for further details
+Major updates after the 3.0 version refactoring include `Tree` `TreeSelect` `DatePicker` `TimePicker` `Calendar` `Form` `Table`, other components also have corresponding function updates, you can check ChangeLog for further details.
 
 - `Tree` `TreeSelect`
 
-  - Added virtual scrolling, discarded using `a-tree-node` `a-tree-select-node` to build nodes, using `treeData` property instead to improve component performance
-  - Deprecated `scopedSlots` `slots` custom rendering node, and replace it with `v-slot:title` to improve ease of use, avoid slot configuration expansion, and also avoid slot conflicts
+  - Added virtual scrolling, discarded using `a-tree-node` `a-tree-select-node` to build nodes, using `treeData` property instead to improve component performance.
+  - Deprecated `scopedSlots` `slots` custom rendering node, and replace it with `v-slot:title` to improve ease of use, avoid slot configuration expansion, and also avoid slot conflicts.
 
 - `Table`
 
   - Removed the `rowSelection.hideDefaultSelections` property of Table, please use `SELECTION_ALL` and `SELECTION_INVERT` in `rowSelection.selections` instead, [custom options](/components/table/#components-table-demo- row-selection-custom).
-  - Removed Column slots and replaced them with `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon` to improve ease of use , To avoid slot configuration expansion, but also to avoid the problem of slot conflicts
-  - Added expandFixed to control whether the expanded icon is fixed
+  - Removed Column slots and replaced them with `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon` to improve ease of use , To avoid slot configuration expansion, but also to avoid the problem of slot conflicts.
+  - Added expandFixed to control whether the expanded icon is fixed.
   - Added the showSorterTooltip header whether to display the tooltip for the next sort.
-  - Added sticky for setting sticky head and scroll bar
-  - Added rowExpandable to set whether to allow row expansion
-  - New slot headerCell is used to personalize the header cell
-  - Added slot bodyCell for personalized cell
-  - New slot customFilterDropdown is used to customize the filter menu, which needs to be used with `column.customFilterDropdown`
-  - Added slot customFilterIcon for custom filter icons
-  - New slot emptyText is used to customize the display content of empty data
-  - Added slot summary for the summary column
+  - Added sticky for setting sticky head and scroll bar.
+  - Added rowExpandable to set whether to allow row expansion.
+  - New slot headerCell is used to personalize the header cell.
+  - Added slot bodyCell for personalized cell.
+  - New slot customFilterDropdown is used to customize the filter menu, which needs to be used with `column.customFilterDropdown`.
+  - Added slot customFilterIcon for custom filter icons.
+  - New slot emptyText is used to customize the display content of empty data.
+  - Added slot summary for the summary column.
 
 - `DatePicker` `TimePicker` `Calendar`
 
   - By default, a more lightweight dayjs is used to replace momentjs. If your project is too large and uses a lot of momentjs methods, you can refer to the document [Custom Time Library](/docs/vue/replace-date-cn), Replace with momentjs.
-  - UI interaction adjustment, align with antd 4.x interaction specifications
+  - UI interaction adjustment, align with antd 4.x interaction specifications.
 
 - `Form` The main goal of this update is to improve performance. If you don't have custom form controls, you can almost ignore this part
 
   - Since version 3.0, Form.Item no longer hijacks child elements, but automatically checks through provider/inject dependency injection. This method can improve component performance, and there is no limit to the number of child elements. The same is true for child elements. It can be a high-level component that is further encapsulated.
 
-    You can reference [Customized Form Controls](#components-form-demo-customized-form-controls)
-
-    But it also has some disadvantages:
+    You can reference [Customized Form Controls](#components-form-demo-customized-form-controls), but it also has some disadvantages:
 
     1. If the custom component wants Form.Item to be verified and displayed, you need to inject `const {id, onFieldChange, onFieldBlur} = useFormItemContext()` and call the corresponding method.
 
-    2. A Form.Item can only collect the data of one form item. If there are multiple form items, it will cause collection confusion, for example,
+    2. A Form.Item can only collect the data of one form item. If there are multiple form items, it will cause collection confusion. For example:
 
     ```html
     <a-form-item>
@@ -80,7 +78,7 @@ Major updates after the 3.0 version refactoring include `Tree` `TreeSelect` `Dat
     </a-form-item>
     ```
 
-    As above Form.Item does not know whether to collect `name="a"` or `name=`b``, you can solve this kind of problem in the following two ways:
+    As above Form.Item does not know whether to collect `name="a"` or `name="b"`, you can solve this kind of problem in the following two ways:
 
     The first is to use multiple `a-form-item`:
 

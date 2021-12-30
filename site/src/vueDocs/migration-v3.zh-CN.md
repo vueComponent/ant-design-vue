@@ -4,7 +4,7 @@
 
 ## 升级准备
 
-1. 请先升级到 2.x 的最新版本，按照控制台 warning 信息移除/修改相关的 API，建议优先查看 2.x 的历史 Change Log，在这里就不再详述。
+1. 请先升级到 2.x 的最新版本，按照控制台 warning 信息移除/修改相关的 API，建议优先查看 2.x 的历史 ChangeLog，在这里就不再详述。
 2. 升级项目 Vue 3.2 以上。
 3. 您和 3.0 只有这份文档的距离，相信我，今日加的班，是为了明天摸更多的鱼。
 
@@ -22,55 +22,53 @@
 - 移除了 Transfer 的 `lazy` 属性，它并没有起到真正的优化效果。
 - 移除了 Select 的 `combobox` 模式，请使用 `AutoComplete` 替代。
 - 废弃 Button.Group，请使用 `Space` 代替。
-- `DatePicker` `TimePicker` `Calendar` 移除 momentjs，请使用 dayjs 替换
+- `DatePicker` `TimePicker` `Calendar` 移除 momentjs，请使用 dayjs 替换。
 - `Tree`、`TreeSelect`
-  - 废弃使用 `a-tree-node` `a-tree-select-node` 构建节点，使用 `treeData` 属性替代
-  - 废弃 `scopedSlots` `slots` 自定义渲染节点，使用 `v-slot:title` 替换
-  - 废弃 `replaceFields` , 使用 `fieldNames` 替换
+  - 废弃使用 `a-tree-node` `a-tree-select-node` 构建节点，使用 `treeData` 属性替代。
+  - 废弃 `scopedSlots` `slots` 自定义渲染节点，使用 `v-slot:title` 替换。
+  - 废弃 `replaceFields` , 使用 `fieldNames` 替换。
 - `Table`
   - 移除了 Table 的 `rowSelection.hideDefaultSelections` 属性，请在 `rowSelection.selections` 中使用 `SELECTION_ALL` 和 `SELECTION_INVERT` 替代，[自定义选择项](/components/table/#components-table-demo-row-selection-custom)。
-  - 移除了 Column slots，分别使用 `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon` 替换
+  - 移除了 Column slots，分别使用 `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon` 替换。
 
 #### 组件重构
 
 为了让组件拥有更好的性能和可维护性，我们几乎使用 TS + Composition Api 重构了所有组件，目前还有极个别的组件没有重构，这类组件会在接下来逐步重构，剩余的组件不会有破坏性更新，所以不用担心未来的升级成本。
 
-3.0 版本重构后较大的更新有 `Tree` `TreeSelect` `DatePicker` `TimePicker` `Calendar` `Form` `Table`，其它组件也有相应功能的更新，你可以查看 ChangeLog 进一步了解详情
+3.0 版本重构后较大的更新有 `Tree` `TreeSelect` `DatePicker` `TimePicker` `Calendar` `Form` `Table`，其它组件也有相应功能的更新，你可以查看 ChangeLog 进一步了解详情。
 
 - `Tree` `TreeSelect`
 
-  - 新增了虚拟滚动，废弃使用 `a-tree-node` `a-tree-select-node` 构建节点，使用 `treeData` 属性替代，提升组件性能
-  - 废弃 `scopedSlots` `slots` 自定义渲染节点，使用 `v-slot:title` 替换，提升易用性，避免插槽配置膨胀，同时也避免了插槽冲突问题
+  - 新增了虚拟滚动，废弃使用 `a-tree-node` `a-tree-select-node` 构建节点，使用 `treeData` 属性替代，提升组件性能。
+  - 废弃 `scopedSlots` `slots` 自定义渲染节点，使用 `v-slot:title` 替换，提升易用性，避免插槽配置膨胀，同时也避免了插槽冲突问题。
 
 - `Table`
 
   - 移除了 Table 的 `rowSelection.hideDefaultSelections` 属性，请在 `rowSelection.selections` 中使用 `SELECTION_ALL` 和 `SELECTION_INVERT` 替代，[自定义选择项](/components/table/#components-table-demo-row-selection-custom)。
-  - 移除了 Column slots，分别使用 `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon` 替换，提升易用性，避免插槽配置膨胀，同时也避免了插槽冲突问题
-  - 新增 expandFixed 控制展开图标是否固定
+  - 移除了 Column slots，分别使用 `v-slot:headerCell` `v-slot:headerCell` `v-slot:bodyCell` `v-slot:customFilterDropdown` `v-slot:customFilterIcon` 替换，提升易用性，避免插槽配置膨胀，同时也避免了插槽冲突问题。
+  - 新增 expandFixed 控制展开图标是否固定。
   - 新增 showSorterTooltip 表头是否显示下一次排序的 tooltip 提示。
-  - 新增 sticky 用于设置粘性头部和滚动条
-  - 新增 rowExpandable 用于设置是否允许行展开
-  - 新增插槽 headerCell 用于个性化头部单元格
-  - 新增插槽 bodyCell 用于个性化单元格
-  - 新增插槽 customFilterDropdown 用于自定义筛选菜单，需要配合 `column.customFilterDropdown` 使用
-  - 新增插槽 customFilterIcon 用于自定义筛选图标
-  - 新增插槽 emptyText 用于自定义空数据时的显示内容
-  - 新增插槽 summary 用于总结栏
+  - 新增 sticky 用于设置粘性头部和滚动条。
+  - 新增 rowExpandable 用于设置是否允许行展开。
+  - 新增插槽 headerCell 用于个性化头部单元格。
+  - 新增插槽 bodyCell 用于个性化单元格。
+  - 新增插槽 customFilterDropdown 用于自定义筛选菜单，需要配合 `column.customFilterDropdown` 使用。
+  - 新增插槽 customFilterIcon 用于自定义筛选图标。
+  - 新增插槽 emptyText 用于自定义空数据时的显示内容。
+  - 新增插槽 summary 用于总结栏。
 
 - `DatePicker` `TimePicker` `Calendar`
 
   - 默认使用更加轻量级的 dayjs 替换 momentjs，如果你的项目过大，使用了大量的 momentjs 的方法，你可以参考文档[自定义时间库](/docs/vue/replace-date-cn)，替换成 momentjs。
-  - UI 交互调整，对齐 antd 4.x 交互规范
+  - UI 交互调整，对齐 antd 4.x 交互规范。
 
 - `Form` 这次更新主要目标是提升性能，如果你没有自定义表单控件，几乎可以忽略该部分
 
-  - 自 3.0 版本以后，Form.Item 不再劫持子元素，而是通过 provider / inject 依赖注入的方式进行自动校验，这种方式可以提高组件性能，子元素也不会限制个数，同样子元素也可以是进一步封装的高级组件。你可以参考[自定义表单控件示例](#components-form-demo-customized-form-controls)
-
-    但它同样会有一些缺点：
+  - 自 3.0 版本以后，Form.Item 不再劫持子元素，而是通过 provider / inject 依赖注入的方式进行自动校验，这种方式可以提高组件性能，子元素也不会限制个数，同样子元素也可以是进一步封装的高级组件。你可以参考[自定义表单控件示例](#components-form-demo-customized-form-controls)，但它同样会有一些缺点：
 
     1、自定义组件如果希望 Form.Item 进行校验展示，你需要 `const {id, onFieldChange, onFieldBlur} = useFormItemContext()` 注入，并调用相应的方法。
 
-    2、一个 Form.Item 只能收集一个表单项的数据，如果有多个表单项，会导致收集错乱，例如，
+    2、一个 Form.Item 只能收集一个表单项的数据，如果有多个表单项，会导致收集错乱。例如：
 
     ```html
     <a-form-item>
@@ -79,7 +77,7 @@
     </a-form-item>
     ```
 
-    如上 Form.Item 并不知道需要收集 `name="a"` 还是 `name=`b``，你可以通过如下三种方式去解决此类问题：
+    如上 Form.Item 并不知道需要收集 `name="a"` 还是 `name="b"`，你可以通过如下三种方式去解决此类问题：
 
     第一种，使用多个 `a-form-item`:
 
@@ -90,7 +88,7 @@
     </a-form-item>
     ```
 
-    第二种，使用自定义组件包裹，并在自定义组件中调用 `useFormItemContext`，相当于把多个表单项合并成了一个
+    第二种，使用自定义组件包裹，并在自定义组件中调用 `useFormItemContext`，相当于把多个表单项合并成了一个。
 
     ```html
     <script>

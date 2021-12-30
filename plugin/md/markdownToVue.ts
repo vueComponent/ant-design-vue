@@ -123,7 +123,7 @@ ${jsSourceCode}
     }),
   );
   /**
-   * @desc 兼容一下如果没有template的情况，让demo可以编辑jsx代码
+   * @desc If there is no template,let the demo can edit the JSX code
   */
   const newContent = (()=>{
     if(template){

@@ -65,6 +65,7 @@ type NotificationState = {
 
 const Notification = defineComponent<NotificationProps>({
   name: 'Notification',
+  inheritAttrs: false,
   props: ['prefixCls', 'transitionName', 'animation', 'maxCount', 'closeIcon'] as any,
   setup(props, { attrs, expose, slots }) {
     const hookRefs = new Map<Key, HTMLDivElement>();

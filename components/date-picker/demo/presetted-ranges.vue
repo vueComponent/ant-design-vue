@@ -31,12 +31,16 @@ We can set presetted ranges to RangePicker to improve user experience.
 <script lang="ts">
 import dayjs, { Dayjs } from 'dayjs';
 import { defineComponent, ref } from 'vue';
+type RangeValue = [Dayjs, Dayjs];
 export default defineComponent({
   setup() {
     return {
-      value1: ref<Dayjs[]>([]),
-      value2: ref<Dayjs[]>([]),
-      ranges: { Today: [dayjs(), dayjs()], 'This Month': [dayjs(), dayjs().endOf('month')] },
+      value1: ref<RangeValue>(),
+      value2: ref<RangeValue>(),
+      ranges: {
+        Today: [dayjs(), dayjs()] as RangeValue,
+        'This Month': [dayjs(), dayjs().endOf('month')] as RangeValue,
+      },
     };
   },
 });

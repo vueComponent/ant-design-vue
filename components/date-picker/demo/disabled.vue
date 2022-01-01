@@ -33,8 +33,14 @@ export default defineComponent({
     return {
       value1: ref<Dayjs>(dayjs('2015-06-06', dateFormat)),
       value2: ref<Dayjs>(dayjs('2015-06', 'YYYY-MM')),
-      value3: ref<Dayjs[]>([dayjs('2015-06-06', dateFormat), dayjs('2015-06-06', dateFormat)]),
-      value4: ref<Dayjs[]>([dayjs('2019-09-03', dateFormat), dayjs('2019-11-22', dateFormat)]),
+      value3: ref<[Dayjs, Dayjs]>([
+        dayjs('2015-06-06', dateFormat),
+        dayjs('2015-06-06', dateFormat),
+      ]),
+      value4: ref<[Dayjs, Dayjs]>([
+        dayjs('2019-09-03', dateFormat),
+        dayjs('2019-11-22', dateFormat),
+      ]),
     };
   },
 });

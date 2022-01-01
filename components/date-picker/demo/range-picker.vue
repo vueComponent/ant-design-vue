@@ -28,14 +28,15 @@ Set range picker type by `picker` prop.
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import type { Dayjs } from 'dayjs';
+type RangeValue = [Dayjs, Dayjs];
 export default defineComponent({
   setup() {
     return {
-      value1: ref<Dayjs[]>([]),
-      value2: ref<Dayjs[]>([]),
-      value3: ref<Dayjs[]>([]),
-      value4: ref<Dayjs[]>([]),
-      value5: ref<Dayjs[]>([]),
+      value1: ref<RangeValue>(),
+      value2: ref<RangeValue>(),
+      value3: ref<RangeValue>(),
+      value4: ref<RangeValue>(),
+      value5: ref<RangeValue>(),
     };
   },
 });

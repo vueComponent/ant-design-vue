@@ -37,7 +37,10 @@ export default defineComponent({
       value1: ref<Dayjs>(dayjs('2015/01/01', dateFormat)),
       value2: ref<Dayjs>(dayjs('01/01/2015', dateFormatList[0])),
       value3: ref<Dayjs>(dayjs('2015/01', monthFormat)),
-      value4: ref<Dayjs[]>([dayjs('2015/01/01', dateFormat), dayjs('2015/01/01', dateFormat)]),
+      value4: ref<[Dayjs, Dayjs]>([
+        dayjs('2015/01/01', dateFormat),
+        dayjs('2015/01/01', dateFormat),
+      ]),
       value5: ref<Dayjs>(dayjs('2015/01/01', dateFormat)),
       dateFormat,
       monthFormat,

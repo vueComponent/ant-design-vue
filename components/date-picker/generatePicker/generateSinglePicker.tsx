@@ -41,16 +41,6 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
         'renderExtraFooter',
         'monthCellRender',
       ],
-      emits: [
-        'change',
-        'openChange',
-        'focus',
-        'blur',
-        'panelChange',
-        'ok',
-        'update:value',
-        'update:open',
-      ],
       setup(props, { slots, expose, attrs, emit }) {
         const formItemContext = useInjectFormItemContext();
         devWarning(

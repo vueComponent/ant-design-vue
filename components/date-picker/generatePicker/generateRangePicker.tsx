@@ -41,17 +41,6 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
       'renderExtraFooter',
       // 'separator',
     ],
-    emits: [
-      'change',
-      'panelChange',
-      'ok',
-      'openChange',
-      'update:value',
-      'update:open',
-      'calendarChange',
-      'focus',
-      'blur',
-    ],
     setup(props, { expose, slots, attrs, emit }) {
       const formItemContext = useInjectFormItemContext();
       devWarning(
@@ -161,6 +150,8 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
           id = formItemContext.id.value,
           ...restProps
         } = p;
+        delete restProps['onUpdate:value'];
+        delete restProps['onUpdate:open'];
         const { format, showTime } = p as any;
 
         let additionalOverrideProps: any = {};

@@ -60,6 +60,7 @@ export interface CalendarProps<DateType> {
   mode?: CalendarMode;
   fullscreen?: boolean;
   onChange?: (date: DateType | string) => void;
+  'onUpdate:value'?: (date: DateType | string) => void;
   onPanelChange?: (date: DateType | string, mode: CalendarMode) => void;
   onSelect?: (date: DateType | string) => void;
   valueFormat?: string;
@@ -88,7 +89,25 @@ function generateCalendar<
   const Calendar = defineComponent<Props>({
     name: 'ACalendar',
     inheritAttrs: false,
-    emits: ['change', 'panelChange', 'select', 'update:value'],
+    props: [
+      'prefixCls',
+      'locale',
+      'validRange',
+      'disabledDate',
+      'dateFullCellRender',
+      'dateCellRender',
+      'monthFullCellRender',
+      'monthCellRender',
+      'headerRender',
+      'value',
+      'defaultValue',
+      'mode',
+      'fullscreen',
+      'onChange',
+      'onPanelChange',
+      'onSelect',
+      'valueFormat',
+    ] as any,
     slots: [
       'dateFullCellRender',
       'dateCellRender',
@@ -305,26 +324,6 @@ function generateCalendar<
       };
     },
   });
-
-  Calendar.props = [
-    'prefixCls',
-    'locale',
-    'validRange',
-    'disabledDate',
-    'dateFullCellRender',
-    'dateCellRender',
-    'monthFullCellRender',
-    'monthCellRender',
-    'headerRender',
-    'value',
-    'defaultValue',
-    'mode',
-    'fullscreen',
-    'onChange',
-    'onPanelChange',
-    'onSelect',
-    'valueFormat',
-  ];
 
   Calendar.install = function (app: App) {
     app.component(Calendar.name, Calendar);

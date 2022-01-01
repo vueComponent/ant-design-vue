@@ -1,3 +1,4 @@
+import type { FocusEventHandler, MouseEventHandler } from '../../_util/EventInterface';
 import type { CSSProperties, PropType } from 'vue';
 import type { PickerLocale } from '.';
 import type { SizeType } from '../../config-provider';
@@ -14,7 +15,7 @@ import type {
 import type { DateRender } from '../../vc-picker/panels/DatePanel/DateBody';
 import type { MonthCellRender } from '../../vc-picker/panels/MonthPanel/MonthBody';
 import type { SharedTimeProps } from '../../vc-picker/panels/TimePanel';
-import type { RangeDateRender, RangeType } from '../../vc-picker/RangePicker';
+import type { RangeDateRender, RangeInfo, RangeType } from '../../vc-picker/RangePicker';
 import type { VueNode } from '../../_util/type';
 
 function commonProps<DateType>() {
@@ -45,17 +46,24 @@ function commonProps<DateType>() {
     getPopupContainer: { type: Function as PropType<(node: HTMLElement) => HTMLElement> },
     panelRender: { type: Function as PropType<(originPanel: VueNode) => VueNode> },
     // // Events
-    // onChange?: (value: DateType | null, dateString: string) => void;
-    // onOpenChange?: (open: boolean) => void;
-    // onFocus?: FocusEventHandler;
-    // onBlur?: FocusEventHandler;
-    // onMousedown?: MouseEventHandler;
-    // onMouseup?: MouseEventHandler;
-    // onMouseenter?: MouseEventHandler;
-    // onMouseleave?: MouseEventHandler;
-    // onClick?: MouseEventHandler;
-    // onContextmenu?: MouseEventHandler;
-    // onKeydown?: (event: KeyboardEvent, preventDefault: () => void) => void;
+    onChange: {
+      type: Function as PropType<(value: DateType | string | null, dateString: string) => void>,
+    },
+    'onUpdate:value': { type: Function as PropType<(value: DateType | string | null) => void> },
+    onOk: { type: Function as PropType<(value: DateType | string | null) => void> },
+    onOpenChange: { type: Function as PropType<(open: boolean) => void> },
+    'onUpdate:open': { type: Function as PropType<(open: boolean) => void> },
+    onFocus: { type: Function as PropType<FocusEventHandler> },
+    onBlur: { type: Function as PropType<FocusEventHandler> },
+    onMousedown: { type: Function as PropType<MouseEventHandler> },
+    onMouseup: { type: Function as PropType<MouseEventHandler> },
+    onMouseenter: { type: Function as PropType<MouseEventHandler> },
+    onMouseleave: { type: Function as PropType<MouseEventHandler> },
+    onClick: { type: Function as PropType<MouseEventHandler> },
+    onContextmenu: { type: Function as PropType<MouseEventHandler> },
+    onKeydown: {
+      type: Function as PropType<(event: KeyboardEvent, preventDefault: () => void) => void>,
+    },
     // WAI-ARIA
     role: String,
     name: String,
@@ -100,6 +108,20 @@ export interface CommonProps<DateType> {
   superNextIcon?: VueNode;
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   panelRender?: (originPanel: VueNode) => VueNode;
+  onChange?: (value: DateType | string | null, dateString: string) => void;
+  'onUpdate:value'?: (value: DateType | string | null) => void;
+  onOk?: (value: DateType | string | null) => void;
+  onOpenChange?: (open: boolean) => void;
+  'onUpdate:open'?: (open: boolean) => void;
+  onFocus?: FocusEventHandler;
+  onBlur?: FocusEventHandler;
+  onMousedown?: MouseEventHandler;
+  onMouseup?: MouseEventHandler;
+  onMouseenter?: MouseEventHandler;
+  onMouseleave?: MouseEventHandler;
+  onClick?: MouseEventHandler;
+  onContextmenu?: MouseEventHandler;
+  onKeydown?: (event: KeyboardEvent, preventDefault: () => void) => void;
   role?: string;
   name?: string;
   autocomplete?: string;
@@ -153,10 +175,10 @@ function rangePickerProps<DateType>() {
     allowEmpty: { type: Array as unknown as PropType<[boolean, boolean]> },
     dateRender: { type: Function as PropType<RangeDateRender<DateType>> },
     defaultPickerValue: {
-      type: Array as unknown as PropType<[DateType, DateType] | [string, string]>,
+      type: Array as unknown as PropType<RangeValue<DateType> | RangeValue<string>>,
     },
-    defaultValue: { type: Array as unknown as PropType<[DateType, DateType] | [string, string]> },
-    value: { type: Array as unknown as PropType<[DateType, DateType] | [string, string]> },
+    defaultValue: { type: Array as unknown as PropType<RangeValue<DateType> | RangeValue<string>> },
+    value: { type: Array as unknown as PropType<RangeValue<DateType> | RangeValue<string>> },
     disabledTime: {
       type: Function as PropType<(date: EventValue<DateType>, type: RangeType) => DisabledTimes>,
     },
@@ -174,15 +196,43 @@ function rangePickerProps<DateType>() {
     },
     placeholder: Array,
     mode: { type: Array as unknown as PropType<[PanelMode, PanelMode]> },
+    onChange: {
+      type: Function as PropType<
+        (
+          value: RangeValue<DateType> | RangeValue<string> | null,
+          dateString: [string, string],
+        ) => void
+      >,
+    },
+    'onUpdate:value': {
+      type: Function as PropType<(value: RangeValue<DateType> | RangeValue<string> | null) => void>,
+    },
+    onCalendarChange: {
+      type: Function as PropType<
+        (
+          values: RangeValue<DateType> | RangeValue<string>,
+          formatString: [string, string],
+          info: RangeInfo,
+        ) => void
+      >,
+    },
+    onPanelChange: {
+      type: Function as PropType<
+        (values: RangeValue<DateType> | RangeValue<string>, modes: [PanelMode, PanelMode]) => void
+      >,
+    },
+    onOk: {
+      type: Function as PropType<(dates: RangeValue<DateType> | RangeValue<string>) => void>,
+    },
   };
 }
 
 export interface RangePickerProps<DateType> {
   allowEmpty?: [boolean, boolean];
   dateRender?: RangeDateRender<DateType>;
-  defaultPickerValue?: [DateType, DateType] | [string, string];
-  defaultValue?: [DateType, DateType] | [string, string];
-  value?: [DateType, DateType] | [string, string];
+  defaultPickerValue?: RangeValue<DateType> | RangeValue<string>;
+  defaultValue?: RangeValue<DateType> | RangeValue<string>;
+  value?: RangeValue<DateType> | RangeValue<string>;
   disabledTime?: (date: EventValue<DateType>, type: RangeType) => DisabledTimes;
   disabled?: [boolean, boolean];
   format?: string;
@@ -194,6 +244,21 @@ export interface RangePickerProps<DateType> {
   >;
   placeholder?: [string, string];
   mode?: [PanelMode, PanelMode];
+  onChange?: (
+    value: RangeValue<DateType> | RangeValue<string> | null,
+    dateString: [string, string],
+  ) => void;
+  'onUpdate:value'?: (value: RangeValue<DateType> | RangeValue<string> | null) => void;
+  onCalendarChange?: (
+    values: RangeValue<DateType> | RangeValue<string>,
+    formatString: [string, string],
+    info: RangeInfo,
+  ) => void;
+  onPanelChange?: (
+    values: RangeValue<DateType> | RangeValue<string>,
+    modes: [PanelMode, PanelMode],
+  ) => void;
+  onOk?: (dates: RangeValue<DateType> | RangeValue<string>) => void;
 }
 
 export type ExtraDatePickerProps<DateType> = {
@@ -205,9 +270,9 @@ export type ExtraDatePickerProps<DateType> = {
 
 export type ExtraRangePickerProps<DateType> = {
   valueFormat?: string;
-  defaultPickerValue?: [DateType, DateType] | [string, string];
-  defaultValue?: [DateType, DateType] | [string, string];
-  value?: [DateType, DateType] | [string, string];
+  defaultPickerValue?: RangeValue<DateType> | RangeValue<string>;
+  defaultValue?: RangeValue<DateType> | RangeValue<string>;
+  value?: RangeValue<DateType> | RangeValue<string>;
 };
 
 export { commonProps, datePickerProps, rangePickerProps };

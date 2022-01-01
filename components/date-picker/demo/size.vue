@@ -34,7 +34,7 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
     return {
-      size: ref<string>('default'),
+      size: ref<any>('default'),
     };
   },
 });

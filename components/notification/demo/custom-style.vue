@@ -8,11 +8,11 @@ title:
 
 ## zh-CN
 
-使用 style 和 className 来定义样式。
+使用 `style` 和 `class` 来定义样式。
 
 ## en-US
 
-The style and className are available to customize Notification.
+The `style` and `class` are available to customize Notification.
 
 </docs>
 
@@ -33,6 +33,7 @@ export default defineComponent({
           width: '600px',
           marginLeft: `${335 - 600}px`,
         },
+        class: 'notification-custom-class',
       });
     };
     return {
@@ -41,3 +42,8 @@ export default defineComponent({
   },
 });
 </script>
+<style>
+.notification-custom-class {
+  color: red;
+}
+</style>

@@ -24,11 +24,11 @@ cover: https://gw.alipayobjects.com/zos/alicdn/hAkKTIW0K/Message.svg
 - `message.warn(content, [duration], onClose)` // alias of warning
 - `message.loading(content, [duration], onClose)`
 
-| 参数     | 说明                                          | 类型           | 默认值 |
-| -------- | --------------------------------------------- | -------------- | ------ |
-| content  | 提示内容                                      | string\| VNode | -      |
-| duration | 自动关闭的延时，单位秒。设为 0 时不自动关闭。 | number         | 3      |
-| onClose  | 关闭时触发的回调函数                          | Function       | -      |
+| 参数 | 说明 | 类型 | 默认值 |
+| --- | --- | --- | --- |
+| content | 提示内容 | string\| VNode \| () => VNode | - |
+| duration | 自动关闭的延时，单位秒。设为 0 时不自动关闭。 | number | 3 |
+| onClose | 关闭时触发的回调函数 | Function | - |
 
 组件同时提供 promise 接口
 
@@ -47,13 +47,19 @@ cover: https://gw.alipayobjects.com/zos/alicdn/hAkKTIW0K/Message.svg
 - `message.warn(config)` // alias of warning
 - `message.loading(config)`
 
-| 参数     | 说明                                          | 类型           | 默认值 | 版本 |
-| -------- | --------------------------------------------- | -------------- | ------ | ---- |
-| content  | 提示内容                                      | string\| VNode | -      |      |
-| duration | 自动关闭的延时，单位秒。设为 0 时不自动关闭。 | number         | 3      |      |
-| onClose  | 关闭时触发的回调函数                          | Function       | -      |      |
-| icon     | 自定义图标                                    | VNode          | -      |      |
-| key      | 当前提示的唯一标志                            | string\|number | -      |      |
+`config` 对象属性如下：
+
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- |
+| class | 自定义 CSS class | string | - |  |
+| content | 提示内容 | string\| VNode \| ()=> VNode | - |  |
+| duration | 自动关闭的延时，单位秒。设为 0 时不自动关闭。 | number | 3 |  |
+| onClose | 关闭时触发的回调函数 | Function | - |  |
+| icon | 自定义图标 | VNode \| () => VNode | - |  |
+| key | 当前提示的唯一标志 | string \| number | - |  |
+| style | 自定义内联样式 | CSSProperties | - |  |
+| onClick | 点击 message 时触发的回调函数 | function | - |  |
+| onClose | 关闭时触发的回调函数 | function | - |  |
 
 ### 全局方法
 
@@ -69,12 +75,16 @@ message.config({
   top: `100px`,
   duration: 2,
   maxCount: 3,
+  rtl: true,
+  prefixCls: 'my-message',
 });
 ```
 
-| 参数 | 说明 | 类型 | 默认值 |
-| --- | --- | --- | --- |
-| duration | 默认自动关闭延时，单位秒 | number | 3 |
-| getContainer | 配置渲染节点的输出位置 | () => HTMLElement | () => document.body |
-| maxCount | 最大显示数, 超过限制时，最早的消息会被自动关闭 | number | - |
-| top | 消息距离顶部的位置 | string | `24px` |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| --- | --- | --- | --- | --- | --- |
+| duration | 默认自动关闭延时，单位秒 | number | 3 |  |
+| getContainer | 配置渲染节点的输出位置 | () => HTMLElement | () => document.body |  |
+| maxCount | 最大显示数, 超过限制时，最早的消息会被自动关闭 | number | - |  |
+| prefixCls | 消息节点的 className 前缀 | string | `ant-message` | 3.0 |
+| rtl | 是否开启 RTL 模式 | boolean | false |  |  |
+| top | 消息距离顶部的位置 | string | `8px` |  |

@@ -25,7 +25,7 @@ This components provides some static methods, with usage and arguments as follow
 
 | Argument | Description | Type | Default |
 | --- | --- | --- | --- |
-| content | content of the message | string\| VNode | - |
+| content | content of the message | string\| VNode \| () => VNode | - |
 | duration | time(seconds) before auto-dismiss, don't dismiss if set to 0 | number | 1.5 |
 | onClose | Specify a function that will be called when the message is closed | Function | - |
 
@@ -48,11 +48,15 @@ The properties of config are as follows:
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| content | content of the message | string\| VNode | - |  |
+| class | Customized CSS class | string | - |
+| content | content of the message | string\| VNode \| () => VNode | - |  |
 | duration | time(seconds) before auto-dismiss, don't dismiss if set to 0 | number | 3 |  |
 | onClose | Specify a function that will be called when the message is closed | function | - |  |
-| icon | Customized Icon | VNode | - |  |
+| icon | Customized Icon | VNode \| ()=> VNode | - |  |
 | key | The unique identifier of the Message | string\|number | - |  |
+| style | Customized inline style | CSSProperties | - |  |
+| onClick | Specify a function that will be called when the message is clicked | function | - |  |
+| onClose | Specify a function that will be called when the message is closed | function | - |  |
 
 ### Global static methods
 
@@ -68,12 +72,16 @@ message.config({
   top: '100px',
   duration: 2,
   maxCount: 3,
+  rtl: true,
+  prefixCls: 'my-message',
 });
 ```
 
-| Argument | Description | Type | Default |
-| --- | --- | --- | --- |
-| duration | time before auto-dismiss, in seconds | number | 1.5 |
-| getContainer | Return the mount node for Message | () => HTMLElement | () => document.body |
-| maxCount | max message show, drop oldest if exceed limit | number | - |
-| top | distance from top | string | `24px` |
+| Argument | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| duration | time before auto-dismiss, in seconds | number | 1.5 |  |
+| getContainer | Return the mount node for Message | () => HTMLElement | () => document.body |  |
+| maxCount | max message show, drop oldest if exceed limit | number | - |  |
+| prefixCls | The prefix className of message node | string | `ant-message` | 3.0 |
+| rtl | Whether to enable RTL mode | boolean | false | 3.0 |
+| top | distance from top | string | `8px` |

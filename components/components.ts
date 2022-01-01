@@ -114,6 +114,7 @@ export { default as Modal } from './modal';
 export type { StatisticProps } from './statistic';
 export { default as Statistic, StatisticCountdown } from './statistic';
 
+export type { NotificationPlacement } from './notification';
 export { default as notification } from './notification';
 
 export type { PageHeaderProps } from './page-header';

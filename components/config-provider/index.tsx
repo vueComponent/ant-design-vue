@@ -9,6 +9,8 @@ import type { TransformCellTextProps } from '../table/interface';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import type { RequiredMark } from '../form/Form';
 import type { MaybeRef } from '../_util/type';
+import message from '../message';
+import notification from '../notification';
 
 export type SizeType = 'small' | 'middle' | 'large' | undefined;
 
@@ -247,6 +249,17 @@ const ConfigProvider = defineComponent({
         </LocaleProvider>
       );
     };
+
+    watchEffect(() => {
+      if (props.direction) {
+        message.config({
+          rtl: props.direction === 'rtl',
+        });
+        notification.config({
+          rtl: props.direction === 'rtl',
+        });
+      }
+    });
 
     return () => (
       <LocaleReceiver children={(_, __, legacyLocale) => renderProvider(legacyLocale as Locale)} />

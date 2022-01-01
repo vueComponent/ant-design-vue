@@ -44,8 +44,6 @@ export interface NotificationInstance {
   removeNotice: (key: Key) => void;
   destroy: () => void;
   component: Notification;
-
-  useNotification: () => [NoticeFunc, any];
 }
 
 export interface NotificationProps {
@@ -124,6 +122,7 @@ const Notification = defineComponent<NotificationProps>({
     expose({
       add,
       remove,
+      notices,
     });
     return () => {
       const { prefixCls, closeIcon = slots.closeIcon?.({ prefixCls }) } = props;
@@ -231,6 +230,7 @@ Notification.newInstance = function newNotificationInstance(properties, callback
               div.parentNode.removeChild(div);
             }
           },
+          component: notiRef,
         });
       });
       return () => {

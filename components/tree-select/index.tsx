@@ -252,9 +252,9 @@ const TreeSelect = defineComponent({
 export const TreeSelectNode = TreeNode;
 export default Object.assign(TreeSelect, {
   TreeNode,
-  SHOW_ALL,
-  SHOW_PARENT,
-  SHOW_CHILD,
+  SHOW_ALL: SHOW_ALL as typeof SHOW_ALL,
+  SHOW_PARENT: SHOW_PARENT as typeof SHOW_PARENT,
+  SHOW_CHILD: SHOW_CHILD as typeof SHOW_CHILD,
   install: (app: App) => {
     app.component(TreeSelect.name, TreeSelect);
     app.component(TreeSelectNode.displayName, TreeSelectNode);

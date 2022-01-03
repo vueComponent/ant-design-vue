@@ -75,9 +75,7 @@ export type Visibles = { [index: number]: boolean };
 const Slider = defineComponent({
   name: 'ASlider',
   inheritAttrs: false,
-  props: {
-    ...sliderProps(),
-  },
+  props: sliderProps(),
   emits: ['update:value', 'change', 'afterChange', 'blur'],
   slots: ['mark'],
   setup(props, { attrs, slots, emit, expose }) {

@@ -16,6 +16,12 @@ export default defineComponent({
       type: Function,
       default: () => {},
     },
+    onClick: {
+      type: Function,
+    },
+    onKeypress: {
+      type: Function,
+    },
   },
   eimt: ['click', 'keypress'],
   setup(props, { emit, attrs }) {

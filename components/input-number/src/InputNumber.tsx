@@ -74,6 +74,8 @@ export const inputNumberProps = {
       (value: ValueType, info: { offset: ValueType; type: 'up' | 'down' }) => void
     >,
   },
+  onBlur: { type: Function as PropType<(e: InputEvent) => void> },
+  onFocus: { type: Function as PropType<(e: InputEvent) => void> },
 };
 
 export default defineComponent({

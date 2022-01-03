@@ -53,6 +53,7 @@ export const abstractCheckboxProps = () => {
     autofocus: { type: Boolean, default: undefined },
     onChange: PropTypes.func,
     'onUpdate:checked': PropTypes.func,
+    onClick: PropTypes.func,
     skipGroup: { type: Boolean, default: false },
   };
 };

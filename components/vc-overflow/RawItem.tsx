@@ -11,6 +11,11 @@ export default defineComponent({
     component: PropTypes.any,
     title: PropTypes.any,
     id: String,
+    onMouseenter: { type: Function },
+    onMouseleave: { type: Function },
+    onClick: { type: Function },
+    onKeydown: { type: Function },
+    onFocus: { type: Function },
   },
   setup(props, { slots, attrs }) {
     const context = useInjectOverflowContext();

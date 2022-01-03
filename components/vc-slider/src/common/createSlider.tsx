@@ -60,6 +60,7 @@ export default function createSlider(Component) {
       dotStyle: {},
       activeDotStyle: {},
     }),
+    emits: ['change', 'blur', 'focus'],
     data() {
       const { step, max, min } = this;
       const isPointDiffEven = isFinite(max - min) ? (max - min) % step === 0 : true; // eslint-disable-line
@@ -161,14 +162,14 @@ export default function createSlider(Component) {
           this.dragOffset = 0;
           this.onStart(handlePosition);
           utils.pauseEvent(e);
-          this.__emit('focus', e);
+          this.$emit('focus', e);
         }
       },
       onBlur(e) {
         if (!this.dragTrack) {
           this.onEnd();
         }
-        this.__emit('blur', e);
+        this.$emit('blur', e);
       },
       onMouseUp() {
         if (this.handlesRefs[this.prevMovedHandleIndex]) {

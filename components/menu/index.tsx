@@ -8,7 +8,7 @@ import type { MenuItemGroupProps } from './src/ItemGroup';
 import ItemGroup from './src/ItemGroup';
 import Divider from './src/Divider';
 import type { App, Plugin } from 'vue';
-import type { MenuTheme } from './src/interface';
+import type { MenuTheme, MenuMode } from './src/interface';
 /* istanbul ignore next */
 Menu.install = function (app: App) {
   app.component(Menu.name, Menu);
@@ -23,7 +23,7 @@ Menu.Item = MenuItem;
 Menu.Divider = Divider;
 Menu.SubMenu = SubMenu;
 Menu.ItemGroup = ItemGroup;
-export type { MenuProps, SubMenuProps, MenuItemProps, MenuItemGroupProps, MenuTheme };
+export type { MenuProps, SubMenuProps, MenuItemProps, MenuItemGroupProps, MenuTheme, MenuMode };
 export {
   SubMenu,
   MenuItem as Item,

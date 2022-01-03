@@ -94,6 +94,7 @@ export const nodeListProps = {
   itemHeight: { type: Number as PropType<number> },
   virtual: { type: Boolean as PropType<boolean> },
 
+  onScroll: { type: Function as PropType<EventHandler> },
   onKeydown: { type: Function as PropType<EventHandler> },
   onFocus: { type: Function as PropType<(e: FocusEvent) => void> },
   onBlur: { type: Function as PropType<(e: FocusEvent) => void> },

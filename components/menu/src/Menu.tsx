@@ -12,6 +12,8 @@ import type {
   TriggerSubMenuAction,
   MenuInfo,
   SelectInfo,
+  MenuClickEventHandler,
+  SelectEventHandler,
 } from './interface';
 import devWarning from '../../vc-util/devWarning';
 import type { CSSMotionProps } from '../../_util/transition';
@@ -25,6 +27,7 @@ import SubMenu from './SubMenu';
 import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 import { cloneElement } from '../../_util/vnode';
 import { OVERFLOW_KEY, PathContext } from './hooks/useKeyPath';
+import type { FocusEventHandler } from '../../_util/EventInterface';
 
 export const menuProps = {
   id: String,
@@ -55,6 +58,15 @@ export const menuProps = {
   getPopupContainer: Function as PropType<(node: HTMLElement) => HTMLElement>,
 
   expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
+  onOpenChange: Function as PropType<(keys: Key[]) => void>,
+  onSelect: Function as PropType<SelectEventHandler>,
+  onDeselect: Function as PropType<SelectEventHandler>,
+  onClick: Function as PropType<MenuClickEventHandler>,
+  onFocus: Function as PropType<FocusEventHandler>,
+  onBlur: Function as PropType<FocusEventHandler>,
+  'onUpdate:openKeys': Function as PropType<(keys: Key[]) => void>,
+  'onUpdate:selectedKeys': Function as PropType<(keys: Key[]) => void>,
+  'onUpdate:activeKey': Function as PropType<(key: Key) => void>,
 };
 
 export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
@@ -64,15 +76,6 @@ export default defineComponent({
   name: 'AMenu',
   inheritAttrs: false,
   props: menuProps,
-  emits: [
-    'update:openKeys',
-    'openChange',
-    'select',
-    'deselect',
-    'update:selectedKeys',
-    'click',
-    'update:activeKey',
-  ],
   slots: ['expandIcon', 'overflowedIndicator'],
   setup(props, { slots, emit, attrs }) {
     const { prefixCls, direction, getPrefixCls } = useConfigInject('menu', props);

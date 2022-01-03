@@ -20,6 +20,7 @@ export const radioProps = {
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
+  onClick: PropTypes.func,
 };
 
 export type RadioProps = Partial<ExtractPropTypes<typeof radioProps>>;
@@ -61,7 +62,12 @@ export default defineComponent({
 
     return () => {
       const radioGroup = radioGroupContext;
-      const { prefixCls: customizePrefixCls, id = formItemContext.id.value, ...restProps } = props;
+      const {
+        prefixCls: customizePrefixCls,
+        id = formItemContext.id.value,
+        onClick,
+        ...restProps
+      } = props;
 
       const rProps: RadioProps = {
         prefixCls: prefixCls.value,
@@ -85,7 +91,7 @@ export default defineComponent({
       });
 
       return (
-        <label class={wrapperClassString}>
+        <label class={wrapperClassString} onClick={onClick}>
           <VcCheckbox {...rProps} ref={vcCheckbox} />
           {slots.default && <span>{slots.default()}</span>}
         </label>

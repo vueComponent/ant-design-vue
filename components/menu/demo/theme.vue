@@ -78,6 +78,7 @@ import {
   AppstoreOutlined,
   SettingOutlined,
 } from '@ant-design/icons-vue';
+import type { MenuTheme } from 'ant-design-vue';
 export default defineComponent({
   components: {
     MailOutlined,
@@ -87,7 +88,7 @@ export default defineComponent({
   },
   setup() {
     const state = reactive({
-      theme: 'dark',
+      theme: 'dark' as MenuTheme,
       selectedKeys: ['1'],
       openKeys: ['sub1'],
     });

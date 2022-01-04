@@ -10,6 +10,14 @@
 
 ---
 
+## 3.0.0-beta.5
+
+`2022-01-04`
+
+- 🌟 重构 message、notification 组件 [#5113](https://github.com/vueComponent/ant-design-vue/issues/5113)
+- 🐞 修复 TimePicker、Slider、TreeSelect 类型错误 [#5109](https://github.com/vueComponent/ant-design-vue/issues/5109)
+- 🐞 修复 Space size=0 时未生效问题 [#5101](https://github.com/vueComponent/ant-design-vue/issues/5101)
+
 ## 3.0.0-beta.4
 
 `2021-12-28`

@@ -10,6 +10,14 @@
 
 ---
 
+## 3.0.0-beta.5
+
+`2022-01-04`
+
+- 🌟 Refactor message and notification components [#5113](https://github.com/vueComponent/ant-design-vue/issues/5113)
+- 🐞 Fix TimePicker, Slider, TreeSelect type errors [#5109](https://github.com/vueComponent/ant-design-vue/issues/5109)
+- 🐞 Fix the issue that it does not take effect when Space size=0 [#5101](https://github.com/vueComponent/ant-design-vue/issues/5101)
+
 ## 3.0.0-beta.4
 
 `2021-12-28`

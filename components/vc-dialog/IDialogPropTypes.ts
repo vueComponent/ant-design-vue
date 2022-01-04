@@ -1,11 +1,11 @@
+import type { ExtractPropTypes } from 'vue';
 import PropTypes from '../_util/vue-types';
 
-function IDialogPropTypes() {
+function dialogPropTypes() {
   return {
     keyboard: PropTypes.looseBool,
     mask: PropTypes.looseBool,
     afterClose: PropTypes.func,
-    // onClose: PropTypes. (e: SyntheticEvent<HTMLDivElement>) =>any,
     closable: PropTypes.looseBool,
     maskClosable: PropTypes.looseBool,
     visible: PropTypes.looseBool,
@@ -41,7 +41,8 @@ function IDialogPropTypes() {
     // https://github.com/react-component/dialog/issues/95
     focusTriggerAfterClose: PropTypes.looseBool,
     onClose: PropTypes.func,
+    modalRender: PropTypes.func,
   };
 }
-
-export default IDialogPropTypes;
+export type IDialogChildProps = Partial<ExtractPropTypes<ReturnType<typeof dialogPropTypes>>>;
+export default dialogPropTypes;

@@ -37,7 +37,7 @@ const Space = defineComponent({
   setup(props, { slots }) {
     const { prefixCls, space, direction: directionConfig } = useConfigInject('space', props);
     const supportFlexGap = useFlexGapSupport();
-    const size = computed(() => props.size || space.value?.size || 'small');
+    const size = computed(() => props.size ?? space.value?.size ?? 'small');
     const horizontalSize = ref<number>();
     const verticalSize = ref<number>();
     watch(

@@ -4,14 +4,17 @@ import Dialog from './Modal';
 import ActionButton from './ActionButton';
 import { defineComponent } from 'vue';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
+import { getTransitionName } from '../_util/transition';
 
 interface ConfirmDialogProps extends ModalFuncProps {
   afterClose?: () => void;
   close?: (...args: any[]) => void;
   autoFocusButton?: null | 'ok' | 'cancel';
+  rootPrefixCls: string;
+  iconPrefixCls?: string;
 }
 
-function renderSomeContent(_name, someContent) {
+function renderSomeContent(someContent: any) {
   if (typeof someContent === 'function') {
     return someContent();
   }
@@ -50,6 +53,12 @@ export default defineComponent<ConfirmDialogProps>({
     'type',
     'title',
     'content',
+    'direction',
+    'rootPrefixCls',
+    'bodyStyle',
+    'closeIcon',
+    'modalRender',
+    'focusTriggerAfterClose',
   ] as any,
   setup(props, { attrs }) {
     const [locale] = useLocaleReceiver('Modal');
@@ -73,22 +82,24 @@ export default defineComponent<ConfirmDialogProps>({
         width = 416,
         mask = true,
         maskClosable = false,
-        maskTransitionName = 'fade',
-        transitionName = 'zoom',
         type,
         title,
         content,
-        // closable = false,
+        direction,
+        closeIcon,
+        modalRender,
+        focusTriggerAfterClose,
+        rootPrefixCls,
+        bodyStyle,
       } = props;
       const okType = props.okType || 'primary';
       const prefixCls = props.prefixCls || 'ant-modal';
       const contentPrefixCls = `${prefixCls}-confirm`;
       const style = attrs.style || {};
       const okText =
-        renderSomeContent('okText', props.okText) ||
+        renderSomeContent(props.okText) ||
         (okCancel ? locale.value.okText : locale.value.justOkText);
-      const cancelText =
-        renderSomeContent('cancelText', props.cancelText) || locale.value.cancelText;
+      const cancelText = renderSomeContent(props.cancelText) || locale.value.cancelText;
       const autoFocusButton =
         props.autoFocusButton === null ? false : props.autoFocusButton || 'ok';
 
@@ -96,15 +107,17 @@ export default defineComponent<ConfirmDialogProps>({
         contentPrefixCls,
         `${contentPrefixCls}-${type}`,
         `${prefixCls}-${type}`,
+        { [`${contentPrefixCls}-rtl`]: direction === 'rtl' },
         attrs.class,
       );
 
       const cancelButton = okCancel && (
         <ActionButton
           actionFn={onCancel}
-          closeModal={close}
+          close={close}
           autofocus={autoFocusButton === 'cancel'}
           buttonProps={cancelButtonProps}
+          prefixCls={`${rootPrefixCls}-btn`}
         >
           {cancelText}
         </ActionButton>
@@ -118,13 +131,14 @@ export default defineComponent<ConfirmDialogProps>({
           onCancel={e => close({ triggerCancel: true }, e)}
           visible={visible}
           title=""
-          transitionName={transitionName}
           footer=""
-          maskTransitionName={maskTransitionName}
+          transitionName={getTransitionName(rootPrefixCls, 'zoom', props.transitionName)}
+          maskTransitionName={getTransitionName(rootPrefixCls, 'fade', props.maskTransitionName)}
           mask={mask}
           maskClosable={maskClosable}
           maskStyle={maskStyle}
           style={style}
+          bodyStyle={bodyStyle}
           width={width}
           zIndex={zIndex}
           afterClose={afterClose}
@@ -132,25 +146,27 @@ export default defineComponent<ConfirmDialogProps>({
           centered={centered}
           getContainer={getContainer}
           closable={closable}
+          closeIcon={closeIcon}
+          modalRender={modalRender}
+          focusTriggerAfterClose={focusTriggerAfterClose}
         >
           <div class={`${contentPrefixCls}-body-wrapper`}>
             <div class={`${contentPrefixCls}-body`}>
-              {renderSomeContent('icon', icon)}
+              {renderSomeContent(icon)}
               {title === undefined ? null : (
-                <span class={`${contentPrefixCls}-title`}>{renderSomeContent('title', title)}</span>
+                <span class={`${contentPrefixCls}-title`}>{renderSomeContent(title)}</span>
               )}
-              <div class={`${contentPrefixCls}-content`}>
-                {renderSomeContent('content', content)}
-              </div>
+              <div class={`${contentPrefixCls}-content`}>{renderSomeContent(content)}</div>
             </div>
             <div class={`${contentPrefixCls}-btns`}>
               {cancelButton}
               <ActionButton
                 type={okType}
                 actionFn={onOk}
-                closeModal={close}
+                close={close}
                 autofocus={autoFocusButton === 'ok'}
                 buttonProps={okButtonProps}
+                prefixCls={`${rootPrefixCls}-btn`}
               >
                 {okText}
               </ActionButton>

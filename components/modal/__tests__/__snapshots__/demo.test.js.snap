@@ -90,6 +90,14 @@ exports[`renders ./components/modal/demo/manual.vue correctly 1`] = `
 </button>
 `;
 
+exports[`renders ./components/modal/demo/modal-render.vue correctly 1`] = `
+<div><button class="ant-btn ant-btn-primary" type="button">
+    <!----><span>Open Draggable Modal</span>
+  </button>
+  <!---->
+</div>
+`;
+
 exports[`renders ./components/modal/demo/position.vue correctly 1`] = `
 <div id="components-modal-demo-position"><button class="ant-btn ant-btn-primary" type="button">
     <!----><span>Display a modal dialog at 20px to Top</span>

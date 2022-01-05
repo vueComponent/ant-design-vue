@@ -1,5 +1,5 @@
 import type { CSSProperties, PropType } from 'vue';
-import { computed, ref, defineComponent } from 'vue';
+import { computed, ref, defineComponent, nextTick } from 'vue';
 import type { MouseEventHandler } from '../_util/EventInterface';
 import Transition, { getTransitionProps } from '../_util/transition';
 import dialogPropTypes from './IDialogPropTypes';
@@ -12,6 +12,7 @@ export type ContentRef = {
 };
 export default defineComponent({
   name: 'Content',
+  inheritAttrs: false,
   props: {
     ...dialogPropTypes(),
     motionName: String,
@@ -20,7 +21,7 @@ export default defineComponent({
     onMousedown: Function as PropType<MouseEventHandler>,
     onMouseup: Function as PropType<MouseEventHandler>,
   },
-  setup(props, { expose, slots }) {
+  setup(props, { expose, slots, attrs }) {
     const sentinelStartRef = ref<HTMLDivElement>();
     const sentinelEndRef = ref<HTMLDivElement>();
     const dialogRef = ref<HTMLDivElement>();
@@ -54,13 +55,16 @@ export default defineComponent({
     });
 
     const onPrepare = () => {
-      const elementOffset = offset(dialogRef.value);
-
-      transformOrigin.value = props.mousePosition
-        ? `${props.mousePosition.x - elementOffset.left}px ${
-            props.mousePosition.y - elementOffset.top
-          }px`
-        : '';
+      nextTick(() => {
+        if (dialogRef.value) {
+          const elementOffset = offset(dialogRef.value);
+          transformOrigin.value = props.mousePosition
+            ? `${props.mousePosition.x - elementOffset.left}px ${
+                props.mousePosition.y - elementOffset.top
+              }px`
+            : '';
+        }
+      });
     };
     const onVisibleChanged = (visible: boolean) => {
       props.onVisibleChanged(visible);
@@ -122,24 +126,24 @@ export default defineComponent({
       return (
         <Transition
           {...transitionProps}
-          onEnter={onPrepare}
-          // onBeforeEnter={onPrepare}
+          onBeforeEnter={onPrepare}
           onAfterEnter={() => onVisibleChanged(true)}
           onAfterLeave={() => onVisibleChanged(false)}
         >
           {visible || !destroyOnClose ? (
             <div
+              {...attrs}
               ref={dialogRef}
               v-show={visible}
               key="dialog-element"
               role="document"
-              style={contentStyleRef.value}
-              class={prefixCls}
+              style={{ ...contentStyleRef.value, ...(attrs.style as any) }}
+              class={[prefixCls, attrs.class]}
               onMousedown={onMousedown}
               onMouseup={onMouseup}
             >
               <div tabindex={0} ref={sentinelStartRef} style={sentinelStyle} aria-hidden="true" />
-              {modalRender ? modalRender(content) : content}
+              {modalRender ? modalRender({ originVNode: content }) : content}
               <div tabindex={0} ref={sentinelEndRef} style={sentinelStyle} aria-hidden="true" />
             </div>
           ) : null}

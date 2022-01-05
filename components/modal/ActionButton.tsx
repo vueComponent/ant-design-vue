@@ -1,89 +1,113 @@
 import type { ExtractPropTypes, PropType } from 'vue';
-import { defineComponent } from 'vue';
-import PropTypes from '../_util/vue-types';
+import { onMounted, ref, defineComponent, onBeforeUnmount } from 'vue';
 import Button from '../button';
-import BaseMixin from '../_util/BaseMixin';
+import type { ButtonProps } from '../button';
 import type { LegacyButtonType } from '../button/buttonTypes';
 import { convertLegacyProps } from '../button/buttonTypes';
-import { getSlot, findDOMNode } from '../_util/props-util';
 
-const ActionButtonProps = {
+const actionButtonProps = {
   type: {
     type: String as PropType<LegacyButtonType>,
   },
-  actionFn: PropTypes.func,
-  closeModal: PropTypes.func,
-  autofocus: PropTypes.looseBool,
-  buttonProps: PropTypes.object,
+  actionFn: Function as PropType<(...args: any[]) => any | PromiseLike<any>>,
+  close: Function,
+  autofocus: Boolean,
+  prefixCls: String,
+  buttonProps: Object as PropType<ButtonProps>,
+  emitEvent: Boolean,
+  quitOnNullishReturnValue: Boolean,
 };
 
-export type IActionButtonProps = ExtractPropTypes<typeof ActionButtonProps>;
+export type ActionButtonProps = ExtractPropTypes<typeof actionButtonProps>;
+
+function isThenable(thing?: PromiseLike<any>): boolean {
+  return !!(thing && !!thing.then);
+}
 
 export default defineComponent({
-  mixins: [BaseMixin],
-  props: ActionButtonProps,
-  setup() {
-    return {
-      timeoutId: undefined,
-    };
-  },
-  data() {
-    return {
-      loading: false,
-    };
-  },
-  mounted() {
-    if (this.autofocus) {
-      this.timeoutId = setTimeout(() => findDOMNode(this).focus());
-    }
-  },
-  beforeUnmount() {
-    clearTimeout(this.timeoutId);
-  },
-  methods: {
-    onClick() {
-      const { actionFn, closeModal } = this;
-      if (actionFn) {
-        let ret: any;
-        if (actionFn.length) {
-          ret = actionFn(closeModal);
-        } else {
-          ret = actionFn();
-          if (!ret) {
-            closeModal();
-          }
-        }
-        if (ret && ret.then) {
-          this.setState({ loading: true });
-          ret.then(
-            (...args: any[]) => {
-              // It's unnecessary to set loading=false, for the Modal will be unmounted after close.
-              // this.setState({ loading: false });
-              closeModal(...args);
-            },
-            (e: Event) => {
-              // Emit error when catch promise reject
-              // eslint-disable-next-line no-console
-              console.error(e);
-              // See: https://github.com/ant-design/ant-design/issues/6183
-              this.setState({ loading: false });
-            },
-          );
-        }
-      } else {
-        closeModal();
+  name: 'ActionButton',
+  props: actionButtonProps,
+  setup(props, { slots }) {
+    const clickedRef = ref<boolean>(false);
+    const buttonRef = ref();
+    const loading = ref(false);
+    let timeoutId: any;
+    onMounted(() => {
+      if (props.autofocus) {
+        timeoutId = setTimeout(() => buttonRef.value.$el?.focus());
       }
-    },
-  },
+    });
+    onBeforeUnmount(() => {
+      clearTimeout(timeoutId);
+    });
 
-  render() {
-    const { type, loading, buttonProps } = this;
-    const props = {
-      ...convertLegacyProps(type),
-      onClick: this.onClick,
-      loading,
-      ...buttonProps,
+    const handlePromiseOnOk = (returnValueOfOnOk?: PromiseLike<any>) => {
+      const { close } = props;
+      if (!isThenable(returnValueOfOnOk)) {
+        return;
+      }
+      loading.value = true;
+      returnValueOfOnOk!.then(
+        (...args: any[]) => {
+          loading.value = false;
+          close(...args);
+          clickedRef.value = false;
+        },
+        (e: Error) => {
+          // Emit error when catch promise reject
+          // eslint-disable-next-line no-console
+          console.error(e);
+          // See: https://github.com/ant-design/ant-design/issues/6183
+          loading.value = false;
+          clickedRef.value = false;
+        },
+      );
     };
-    return <Button {...props}>{getSlot(this)}</Button>;
+
+    const onClick = (e: MouseEvent) => {
+      const { actionFn, close = () => {} } = props;
+      if (clickedRef.value) {
+        return;
+      }
+      clickedRef.value = true;
+      if (!actionFn) {
+        close();
+        return;
+      }
+      let returnValueOfOnOk;
+      if (props.emitEvent) {
+        returnValueOfOnOk = actionFn(e);
+        if (props.quitOnNullishReturnValue && !isThenable(returnValueOfOnOk)) {
+          clickedRef.value = false;
+          close(e);
+          return;
+        }
+      } else if (actionFn.length) {
+        returnValueOfOnOk = actionFn(close);
+        // https://github.com/ant-design/ant-design/issues/23358
+        clickedRef.value = false;
+      } else {
+        returnValueOfOnOk = actionFn();
+        if (!returnValueOfOnOk) {
+          close();
+          return;
+        }
+      }
+      handlePromiseOnOk(returnValueOfOnOk);
+    };
+    return () => {
+      const { type, prefixCls, buttonProps } = props;
+      return (
+        <Button
+          {...convertLegacyProps(type)}
+          onClick={onClick}
+          loading={loading.value}
+          prefixCls={prefixCls}
+          {...buttonProps}
+          ref={buttonRef}
+          v-slots={slots}
+        ></Button>
+      );
+    };
   },
 });

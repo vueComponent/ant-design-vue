@@ -162,7 +162,7 @@ const routes = [
     ],
   },
   { path: '/debugger', component: () => import('../../debugger') },
-  { path: '/:lang(.*)', redirect: '/components/overview/' },
+  { path: '/:lang(.*)', redirect: '/components/overview' },
 ];
 
 export default createRouter({

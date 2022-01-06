@@ -1,5 +1,14 @@
 import type { Ref } from 'vue';
-import { computed, defineComponent, onBeforeUnmount, onMounted, ref, watch } from 'vue';
+import {
+  getCurrentInstance,
+  onBeforeUpdate,
+  onBeforeMount,
+  defineComponent,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from 'vue';
 import addEventListenerWrap from '../vc-util/Dom/addEventListener';
 import { getOffset } from '../vc-util/Dom/css';
 import classNames from '../_util/classNames';
@@ -22,11 +31,22 @@ export default defineComponent<StickyScrollBarProps>({
   emits: ['scroll'],
   setup(props, { emit, expose }) {
     const tableContext = useInjectTable();
-    const bodyScrollWidth = computed(() => props.scrollBodyRef.value.scrollWidth || 0);
-    const bodyWidth = computed(() => props.scrollBodyRef.value.clientWidth || 0);
-    const scrollBarWidth = computed(
-      () => bodyScrollWidth.value && bodyWidth.value * (bodyWidth.value / bodyScrollWidth.value),
-    );
+    const bodyScrollWidth = ref(0);
+    const bodyWidth = ref(0);
+    const scrollBarWidth = ref(0);
+    const instance = getCurrentInstance();
+    const updateSomeValue = () => {
+      bodyScrollWidth.value = props.scrollBodyRef.value.scrollWidth || 0;
+      bodyWidth.value = props.scrollBodyRef.value.clientWidth || 0;
+      scrollBarWidth.value =
+        bodyScrollWidth.value && bodyWidth.value * (bodyWidth.value / bodyScrollWidth.value);
+    };
+    onBeforeMount(() => {
+      updateSomeValue();
+    });
+    onBeforeUpdate(() => {
+      updateSomeValue();
+    });
 
     const scrollBarRef = ref();
 
@@ -100,6 +120,7 @@ export default defineComponent<StickyScrollBarProps>({
           isHiddenScrollBar: false,
         }));
       }
+      instance.update?.();
     };
 
     const setScrollLeft = (left: number) => {

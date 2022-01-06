@@ -61,7 +61,7 @@ export const menuProps = {
   onOpenChange: Function as PropType<(keys: Key[]) => void>,
   onSelect: Function as PropType<SelectEventHandler>,
   onDeselect: Function as PropType<SelectEventHandler>,
-  onClick: Function as PropType<MenuClickEventHandler>,
+  onClick: [Function, Array] as PropType<MenuClickEventHandler>,
   onFocus: Function as PropType<FocusEventHandler>,
   onBlur: Function as PropType<FocusEventHandler>,
   'onUpdate:openKeys': Function as PropType<(keys: Key[]) => void>,

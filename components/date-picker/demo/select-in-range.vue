@@ -35,7 +35,7 @@ export default defineComponent({
     const hackValue = ref<RangeValue>();
 
     const disabledDate = (current: Dayjs) => {
-      if (!dates.value) {
+      if (!dates.value || (dates.value as any).length === 0) {
         return false;
       }
       const tooLate = dates.value[0] && current.diff(dates.value[0], 'days') > 7;
@@ -45,8 +45,8 @@ export default defineComponent({
 
     const onOpenChange = (open: boolean) => {
       if (open) {
-        dates.value = null;
-        hackValue.value = null;
+        dates.value = [] as any;
+        hackValue.value = [] as any;
       } else {
         hackValue.value = undefined;
       }

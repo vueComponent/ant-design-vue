@@ -1,4 +1,5 @@
 import type { ExtractPropTypes, PropType } from 'vue';
+import type { BasicDataNode } from '.';
 import type { EventHandler } from '../_util/EventInterface';
 import PropTypes from '../_util/vue-types';
 import type {
@@ -10,10 +11,10 @@ import type {
   DataNode,
   Key,
   FlattenNode,
-  DataEntity,
   EventDataNode,
   Direction,
   FieldNames,
+  DataEntity,
 } from './interface';
 
 export interface CheckInfo {
@@ -83,7 +84,7 @@ export const nodeListProps = {
   loadedKeys: { type: Array as PropType<Key[]> },
   loadingKeys: { type: Array as PropType<Key[]> },
   halfCheckedKeys: { type: Array as PropType<Key[]> },
-  keyEntities: { type: Object as PropType<Record<Key, DataEntity>> },
+  keyEntities: { type: Object as PropType<Record<Key, DataEntity<DataNode>>> },
 
   dragging: { type: Boolean as PropType<boolean> },
   dragOverNodeKey: { type: [String, Number] as PropType<Key> },
@@ -106,8 +107,17 @@ export const nodeListProps = {
 };
 
 export type NodeListProps = Partial<ExtractPropTypes<typeof nodeListProps>>;
-export type AllowDrop = (options: { dropNode: DataNode; dropPosition: -1 | 0 | 1 }) => boolean;
 
+export interface AllowDropOptions<TreeDataType extends BasicDataNode = DataNode> {
+  dragNode: EventDataNode;
+  dropNode: TreeDataType;
+  dropPosition: -1 | 0 | 1;
+}
+export type AllowDrop<TreeDataType extends BasicDataNode = DataNode> = (
+  options: AllowDropOptions<TreeDataType>,
+) => boolean;
+
+export type DraggableFn = (node: DataNode) => boolean;
 export const treeProps = () => ({
   prefixCls: String,
   focusable: { type: Boolean, default: undefined },
@@ -123,7 +133,7 @@ export const treeProps = () => ({
   multiple: { type: Boolean, default: undefined },
   checkable: { type: Boolean, default: undefined },
   checkStrictly: { type: Boolean, default: undefined },
-  draggable: { type: [Function, Boolean] as PropType<((node: DataNode) => boolean) | boolean> },
+  draggable: { type: [Function, Boolean] as PropType<DraggableFn | boolean> },
   defaultExpandParent: { type: Boolean, default: undefined },
   autoExpandParent: { type: Boolean, default: undefined },
   defaultExpandAll: { type: Boolean, default: undefined },

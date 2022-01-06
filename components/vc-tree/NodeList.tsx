@@ -6,6 +6,7 @@ import { computed, defineComponent, ref, shallowRef, watch } from 'vue';
 import VirtualList from '../vc-virtual-list';
 import type { FlattenNode, DataEntity, DataNode, ScrollTo } from './interface';
 import MotionTreeNode from './MotionTreeNode';
+import type { NodeListProps } from './props';
 import { nodeListProps } from './props';
 import { findExpandedKeys, getExpandRange } from './utils/diffUtil';
 import { getTreeNodeProps, getKey } from './utils/treeUtil';
@@ -35,6 +36,7 @@ export const MotionEntity: DataEntity = {
   index: 0,
   pos: '0',
   node: MotionNode,
+  nodes: [MotionNode],
 };
 
 const MotionFlattenData: FlattenNode = {
@@ -208,7 +210,7 @@ export default defineComponent({
         onListChangeEnd,
 
         ...domProps
-      } = { ...props, ...attrs };
+      } = { ...props, ...attrs } as NodeListProps;
 
       const treeNodeRequiredProps = {
         expandedKeys,
@@ -269,6 +271,15 @@ export default defineComponent({
             itemHeight={itemHeight}
             prefixCls={`${prefixCls}-list`}
             ref={listRef}
+            onVisibleChange={(originList, fullList) => {
+              const originSet = new Set(originList);
+              const restList = fullList.filter(item => !originSet.has(item));
+
+              // Motion node is not render. Skip motion
+              if (restList.some(item => itemKey(item) === MOTION_KEY)) {
+                onMotionEnd();
+              }
+            }}
             v-slots={{
               default: (treeNode: FlattenNode) => {
                 const {

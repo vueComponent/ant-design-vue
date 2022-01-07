@@ -12,7 +12,7 @@
 
 ## 3.0.0-beta.6
 
-`2022-01-04`
+`2022-01-07`
 
 - Modal
   - 🌟 重构 Modal 组件 [#5129](https://github.com/vueComponent/ant-design-vue/issues/5129)

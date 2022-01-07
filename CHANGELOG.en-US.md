@@ -12,7 +12,7 @@
 
 ## 3.0.0-beta.6
 
-`2022-01-04`
+`2022-01-07`
 
 - Modal
   - 🌟 Refactor Modal component [#5129](https://github.com/vueComponent/ant-design-vue/issues/5129)

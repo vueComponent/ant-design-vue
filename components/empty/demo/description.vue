@@ -17,5 +17,5 @@ Simplest Usage with no description.
 </docs>
 
 <template>
-  <a-empty :description="false" />
+  <a-empty :description="null" />
 </template>

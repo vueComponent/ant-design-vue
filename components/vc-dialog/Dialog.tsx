@@ -167,7 +167,7 @@ export default defineComponent({
           />
           <div
             tabIndex={-1}
-            onKeyDown={onWrapperKeyDown}
+            onKeydown={onWrapperKeyDown}
             class={classNames(`${prefixCls}-wrap`, wrapClassName)}
             ref={wrapperRef}
             onClick={onWrapperClick}

@@ -6,7 +6,9 @@ import {
   onBeforeUnmount,
   onUpdated,
   Teleport,
+  watch,
 } from 'vue';
+import { useInjectPortal } from '../vc-trigger/context';
 
 export default defineComponent({
   name: 'Portal',
@@ -19,13 +21,26 @@ export default defineComponent({
     let isSSR = true;
     // getContainer 不会改变，不用响应式
     let container: HTMLElement;
+    const { shouldRender } = useInjectPortal();
     onBeforeMount(() => {
       isSSR = false;
-      container = props.getContainer();
+      if (shouldRender.value) {
+        container = props.getContainer();
+      }
+    });
+    const stopWatch = watch(shouldRender, () => {
+      if (shouldRender.value && !container) {
+        container = props.getContainer();
+      }
+      if (container) {
+        stopWatch();
+      }
     });
     onUpdated(() => {
       nextTick(() => {
-        props.didUpdate?.(props);
+        if (shouldRender.value) {
+          props.didUpdate?.(props);
+        }
       });
     });
     onBeforeUnmount(() => {
@@ -34,6 +49,7 @@ export default defineComponent({
       }
     });
     return () => {
+      if (!shouldRender.value) return null;
       if (isSSR) {
         return slots.default?.();
       }

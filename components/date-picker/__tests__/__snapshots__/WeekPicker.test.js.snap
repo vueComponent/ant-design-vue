@@ -5,5 +5,182 @@ exports[`WeekPicker should support style prop 1`] = `
   <div class="ant-picker-input"><input readonly="" placeholder="Select week" title="" size="12" autocomplete="off"><span class="ant-picker-suffix"><span role="img" aria-label="calendar" class="anticon anticon-calendar"><svg focusable="false" class="" data-icon="calendar" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M880 184H712v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H384v-64c0-4.4-3.6-8-8-8h-56c-4.4 0-8 3.6-8 8v64H144c-17.7 0-32 14.3-32 32v664c0 17.7 14.3 32 32 32h736c17.7 0 32-14.3 32-32V216c0-17.7-14.3-32-32-32zm-40 656H184V460h656v380zM184 392V256h128v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h256v48c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8v-48h128v136H184z"></path></svg></span></span>
     <!---->
   </div>
+  <div>
+    <!---->
+    <div class="ant-picker-dropdown" style="pointer-events: none; display: none;">
+      <div class="ant-picker-panel-container">
+        <div tabindex="-1" class="ant-picker-panel ant-picker-panel-focused">
+          <div class="ant-picker-week-panel">
+            <div class="ant-picker-header"><button type="button" tabindex="-1" class="ant-picker-header-super-prev-btn"><span class="ant-picker-super-prev-icon"></span></button><button type="button" tabindex="-1" class="ant-picker-header-prev-btn"><span class="ant-picker-prev-icon"></span></button>
+              <div class="ant-picker-header-view"><button type="button" tabindex="-1" class="ant-picker-month-btn">Jan</button><button type="button" tabindex="-1" class="ant-picker-year-btn">2022</button></div><button type="button" tabindex="-1" class="ant-picker-header-next-btn"><span class="ant-picker-next-icon"></span></button><button type="button" tabindex="-1" class="ant-picker-header-super-next-btn"><span class="ant-picker-super-next-icon"></span></button>
+            </div>
+            <div class="ant-picker-body">
+              <table class="ant-picker-content">
+                <thead>
+                  <tr>
+                    <th aria-label="empty cell"></th>
+                    <th>Su</th>
+                    <th>Mo</th>
+                    <th>Tu</th>
+                    <th>We</th>
+                    <th>Th</th>
+                    <th>Fr</th>
+                    <th>Sa</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="ant-picker-week-panel-row">
+                    <td class="ant-picker-cell ant-picker-cell-week">1</td>
+                    <td title="2021-12-26" class="ant-picker-cell">
+                      <div class="ant-picker-cell-inner">26</div>
+                    </td>
+                    <td title="2021-12-27" class="ant-picker-cell">
+                      <div class="ant-picker-cell-inner">27</div>
+                    </td>
+                    <td title="2021-12-28" class="ant-picker-cell">
+                      <div class="ant-picker-cell-inner">28</div>
+                    </td>
+                    <td title="2021-12-29" class="ant-picker-cell">
+                      <div class="ant-picker-cell-inner">29</div>
+                    </td>
+                    <td title="2021-12-30" class="ant-picker-cell">
+                      <div class="ant-picker-cell-inner">30</div>
+                    </td>
+                    <td title="2021-12-31" class="ant-picker-cell ant-picker-cell-end">
+                      <div class="ant-picker-cell-inner">31</div>
+                    </td>
+                    <td title="2022-01-01" class="ant-picker-cell ant-picker-cell-start ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">1</div>
+                    </td>
+                  </tr>
+                  <tr class="ant-picker-week-panel-row">
+                    <td class="ant-picker-cell ant-picker-cell-week">2</td>
+                    <td title="2022-01-02" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">2</div>
+                    </td>
+                    <td title="2022-01-03" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">3</div>
+                    </td>
+                    <td title="2022-01-04" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">4</div>
+                    </td>
+                    <td title="2022-01-05" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">5</div>
+                    </td>
+                    <td title="2022-01-06" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">6</div>
+                    </td>
+                    <td title="2022-01-07" class="ant-picker-cell ant-picker-cell-in-view ant-picker-cell-today">
+                      <div class="ant-picker-cell-inner">7</div>
+                    </td>
+                    <td title="2022-01-08" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">8</div>
+                    </td>
+                  </tr>
+                  <tr class="ant-picker-week-panel-row">
+                    <td class="ant-picker-cell ant-picker-cell-week">3</td>
+                    <td title="2022-01-09" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">9</div>
+                    </td>
+                    <td title="2022-01-10" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">10</div>
+                    </td>
+                    <td title="2022-01-11" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">11</div>
+                    </td>
+                    <td title="2022-01-12" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">12</div>
+                    </td>
+                    <td title="2022-01-13" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">13</div>
+                    </td>
+                    <td title="2022-01-14" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">14</div>
+                    </td>
+                    <td title="2022-01-15" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">15</div>
+                    </td>
+                  </tr>
+                  <tr class="ant-picker-week-panel-row">
+                    <td class="ant-picker-cell ant-picker-cell-week">4</td>
+                    <td title="2022-01-16" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">16</div>
+                    </td>
+                    <td title="2022-01-17" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">17</div>
+                    </td>
+                    <td title="2022-01-18" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">18</div>
+                    </td>
+                    <td title="2022-01-19" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">19</div>
+                    </td>
+                    <td title="2022-01-20" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">20</div>
+                    </td>
+                    <td title="2022-01-21" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">21</div>
+                    </td>
+                    <td title="2022-01-22" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">22</div>
+                    </td>
+                  </tr>
+                  <tr class="ant-picker-week-panel-row">
+                    <td class="ant-picker-cell ant-picker-cell-week">5</td>
+                    <td title="2022-01-23" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">23</div>
+                    </td>
+                    <td title="2022-01-24" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">24</div>
+                    </td>
+                    <td title="2022-01-25" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">25</div>
+                    </td>
+                    <td title="2022-01-26" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">26</div>
+                    </td>
+                    <td title="2022-01-27" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">27</div>
+                    </td>
+                    <td title="2022-01-28" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">28</div>
+                    </td>
+                    <td title="2022-01-29" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">29</div>
+                    </td>
+                  </tr>
+                  <tr class="ant-picker-week-panel-row">
+                    <td class="ant-picker-cell ant-picker-cell-week">6</td>
+                    <td title="2022-01-30" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">30</div>
+                    </td>
+                    <td title="2022-01-31" class="ant-picker-cell ant-picker-cell-in-view">
+                      <div class="ant-picker-cell-inner">31</div>
+                    </td>
+                    <td title="2022-02-01" class="ant-picker-cell ant-picker-cell-start">
+                      <div class="ant-picker-cell-inner">1</div>
+                    </td>
+                    <td title="2022-02-02" class="ant-picker-cell">
+                      <div class="ant-picker-cell-inner">2</div>
+                    </td>
+                    <td title="2022-02-03" class="ant-picker-cell">
+                      <div class="ant-picker-cell-inner">3</div>
+                    </td>
+                    <td title="2022-02-04" class="ant-picker-cell">
+                      <div class="ant-picker-cell-inner">4</div>
+                    </td>
+                    <td title="2022-02-05" class="ant-picker-cell">
+                      <div class="ant-picker-cell-inner">5</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <!---->
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 `;

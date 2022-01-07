@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import MockDate from 'mockdate';
 import DatePicker from '..';
 import focusTest from '../../../tests/shared/focusTest';
-
+jest.mock('../../_util/Portal');
 describe('DatePicker', () => {
   focusTest(DatePicker);
 

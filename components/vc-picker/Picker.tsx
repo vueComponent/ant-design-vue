@@ -37,6 +37,7 @@ import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
 import classNames from '../_util/classNames';
 import type { SharedTimeProps } from './panels/TimePanel';
+import { useProviderTrigger } from '../vc-trigger/context';
 
 export type PickerRefConfig = {
   focus: () => void;
@@ -409,6 +410,8 @@ function Picker<DateType>() {
         },
       });
 
+      const getPortal = useProviderTrigger();
+
       return () => {
         const {
           prefixCls = 'rc-picker',
@@ -586,6 +589,7 @@ function Picker<DateType>() {
                 {suffixNode}
                 {clearNode}
               </div>
+              {getPortal()}
             </div>
           </PickerTrigger>
         );

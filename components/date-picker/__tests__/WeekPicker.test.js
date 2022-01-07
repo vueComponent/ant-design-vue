@@ -4,7 +4,7 @@ import DatePicker from '..';
 import focusTest from '../../../tests/shared/focusTest';
 
 const { WeekPicker } = DatePicker;
-
+jest.mock('../../_util/Portal');
 describe('WeekPicker', () => {
   focusTest(WeekPicker);
 

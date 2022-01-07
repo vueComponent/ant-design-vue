@@ -83,7 +83,7 @@ exports[`renders ./components/layout/demo/fixed.vue correctly 1`] = `
     <div class="logo"></div>
     <ul class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark" style="line-height: 64px;" role="menu" data-menu-list="true">
       <!---->
-      <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 0;" role="menuitem" tabindex="-1" data-menu-id="1" aria-disabled="false">
+      <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 0; order: 0;" role="menuitem" tabindex="-1" data-menu-id="1" aria-disabled="false">
         <!----><span class="ant-menu-title-content">nav 1</span>
       </li>
       <!---->
@@ -306,7 +306,7 @@ exports[`renders ./components/layout/demo/top.vue correctly 1`] = `
     <div class="logo"></div>
     <ul class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark" style="line-height: 64px;" role="menu" data-menu-list="true">
       <!---->
-      <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 0;" role="menuitem" tabindex="-1" data-menu-id="1" aria-disabled="false">
+      <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 0; order: 0;" role="menuitem" tabindex="-1" data-menu-id="1" aria-disabled="false">
         <!----><span class="ant-menu-title-content">nav 1</span>
       </li>
       <!---->
@@ -345,7 +345,7 @@ exports[`renders ./components/layout/demo/top-side.vue correctly 1`] = `
     <div class="logo"></div>
     <ul class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark" style="line-height: 64px;" role="menu" data-menu-list="true">
       <!---->
-      <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 0;" role="menuitem" tabindex="-1" data-menu-id="1" aria-disabled="false">
+      <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 0; order: 0;" role="menuitem" tabindex="-1" data-menu-id="1" aria-disabled="false">
         <!----><span class="ant-menu-title-content">nav 1</span>
       </li>
       <!---->
@@ -475,7 +475,7 @@ exports[`renders ./components/layout/demo/top-side-2.vue correctly 1`] = `
     <div class="logo"></div>
     <ul class="ant-menu-overflow ant-menu ant-menu-root ant-menu-horizontal ant-menu-dark" style="line-height: 64px;" role="menu" data-menu-list="true">
       <!---->
-      <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 0;" role="menuitem" tabindex="-1" data-menu-id="1" aria-disabled="false">
+      <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 0; order: 0;" role="menuitem" tabindex="-1" data-menu-id="1" aria-disabled="false">
         <!----><span class="ant-menu-title-content">nav 1</span>
       </li>
       <!---->

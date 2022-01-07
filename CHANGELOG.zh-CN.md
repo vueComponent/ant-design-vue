@@ -10,6 +10,23 @@
 
 ---
 
+## 3.0.0-beta.6
+
+`2022-01-04`
+
+- Modal
+  - 🌟 重构 Modal 组件 [#5129](https://github.com/vueComponent/ant-design-vue/issues/5129)
+  - 🐞 修复 Modal、Drawer 混合使用时，出现无法滚动问题 [#5096](https://github.com/vueComponent/ant-design-vue/issues/5096)
+- 🐞 修复 Menu 在 Dropdown 下，绑定 click 事件，属性校验不通过问题 [#5127](https://github.com/vueComponent/ant-design-vue/issues/5127)
+- 🐞 修复 Table 虚拟滚动条不更新问题 [#5124](https://github.com/vueComponent/ant-design-vue/issues/5124)
+- 🐞 调整 DatePicker 为单一根节点，用于支持 v-show [#5132](https://github.com/vueComponent/ant-design-vue/issues/5132)
+
+#### 文档：
+
+- 🌟 动态更新 document.title，方便切换文档 [#5121](https://github.com/vueComponent/ant-design-vue/issues/5121)
+- 🐞 修复 Empty 类型错误 [#5136](https://github.com/vueComponent/ant-design-vue/issues/5136)
+- 🐞 修复 RangeTime 范围选择示例错误 [#5125](https://github.com/vueComponent/ant-design-vue/issues/5125)
+
 ## 3.0.0-beta.5
 
 `2022-01-04`

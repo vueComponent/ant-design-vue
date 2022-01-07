@@ -10,6 +10,23 @@
 
 ---
 
+## 3.0.0-beta.6
+
+`2022-01-04`
+
+- Modal
+  - 🌟 Refactor Modal component [#5129](https://github.com/vueComponent/ant-design-vue/issues/5129)
+  - 🐞 Fix the problem of unable to scroll when Modal and Drawer are mixed [#5096](https://github.com/vueComponent/ant-design-vue/issues/5096)
+- 🐞 Fix Menu under Dropdown, bind the click event, the attribute verification fails [#5127](https://github.com/vueComponent/ant-design-vue/issues/5127)
+- 🐞 Fix Table virtual scroll bar not updating issue [#5124](https://github.com/vueComponent/ant-design-vue/issues/5124)
+- 🐞 Adjust DatePicker to a single root node to support v-show [#5132](https://github.com/vueComponent/ant-design-vue/issues/5132)
+
+#### Documentation:
+
+- 🌟 Dynamically update document.title to facilitate document switching [#5121](https://github.com/vueComponent/ant-design-vue/issues/5121)
+- 🐞 Fix Empty type error [#5136](https://github.com/vueComponent/ant-design-vue/issues/5136)
+- 🐞 Fix RangeTime range selection example error [#5125](https://github.com/vueComponent/ant-design-vue/issues/5125)
+
 ## 3.0.0-beta.5
 
 `2022-01-04`

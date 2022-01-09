@@ -15,7 +15,7 @@
  * - onFilterDropdownVisibleChange
  */
 
-import type { CSSProperties, DefineComponent, FunctionalComponent, HTMLAttributes, Ref } from 'vue';
+import type { CSSProperties, HTMLAttributes, Ref } from 'vue';
 
 export type Key = number | string;
 
@@ -139,9 +139,9 @@ export type GetComponentProps<DataType> = (
   column?: ColumnType<any>,
 ) => Omit<HTMLAttributes, 'style'> & { style?: CSSProperties };
 
-type Component<P> = DefineComponent<P> | FunctionalComponent<P> | string;
+// type Component<P> = DefineComponent<P> | FunctionalComponent<P> | string;
 
-export type CustomizeComponent = Component<any>;
+export type CustomizeComponent = any;
 
 export type CustomizeScrollBody<RecordType> = (
   data: readonly RecordType[],

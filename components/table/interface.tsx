@@ -12,6 +12,7 @@ import type { Breakpoint } from '../_util/responsiveObserve';
 import type { INTERNAL_SELECTION_ITEM } from './hooks/useSelection';
 import type { VueNode } from '../_util/type';
 import { tuple } from '../_util/type';
+import type { CSSProperties } from 'vue';
 // import { TableAction } from './Table';
 
 export type { GetRowKey, ExpandableConfig };
@@ -195,6 +196,8 @@ type TablePaginationPosition =
 
 export interface TablePaginationConfig extends PaginationProps {
   position?: TablePaginationPosition[];
+  class?: string;
+  style?: CSSProperties;
 }
 
 export interface TransformCellTextProps {

@@ -23,17 +23,17 @@ export type { ListItemMetaProps } from './ItemMeta';
 
 export type ColumnType = 'gutter' | 'column' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
 
-export const ListGridType = {
-  gutter: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(Number)]),
-  column: PropTypes.number,
-  xs: PropTypes.number,
-  sm: PropTypes.number,
-  md: PropTypes.number,
-  lg: PropTypes.number,
-  xl: PropTypes.number,
-  xxl: PropTypes.number,
-  xxxl: PropTypes.number,
-};
+export type ColumnCount = number;
+export interface ListGridType {
+  gutter?: number;
+  column?: ColumnCount;
+  xs?: ColumnCount;
+  sm?: ColumnCount;
+  md?: ColumnCount;
+  lg?: ColumnCount;
+  xl?: ColumnCount;
+  xxl?: ColumnCount;
+}
 
 export const ListSize = tuple('small', 'default', 'large');
 
@@ -43,7 +43,7 @@ export const listProps = {
   bordered: PropTypes.looseBool,
   dataSource: PropTypes.array,
   extra: PropTypes.any,
-  grid: PropTypes.shape(ListGridType).loose,
+  grid: { type: Object as PropType<ListGridType>, default: undefined },
   itemLayout: PropTypes.oneOf(tuple('horizontal', 'vertical')),
   loading: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
   loadMore: PropTypes.any,

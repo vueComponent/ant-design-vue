@@ -10,6 +10,14 @@
 
 ---
 
+## 3.0.0-beta.7
+
+`2022-01-10`
+
+- 🌟 Export FormItemInstance type [23f5fb](https://github.com/vueComponent/ant-design-vue/commit/23f5fba013ae8a76fb814c218fb319488da3c70b)
+- 🐞 Fix Modal not showing issue under Dropdown [#5139](https://github.com/vueComponent/ant-design-vue/issues/5139)
+- 🐞 Fix Modal esc shortcut key invalid issue [3297f7](https://github.com/vueComponent/ant-design-vue/commit/3297f7aa58f6098b2b1dd147341b5c8dc5f2f5e5)
+
 ## 3.0.0-beta.6
 
 `2022-01-07`

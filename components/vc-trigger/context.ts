@@ -27,11 +27,11 @@ export interface PortalContextProps {
   inTriggerContext: boolean; // 仅处理 trigger 上下文的 portal
 }
 const PortalContextKey: InjectionKey<PortalContextProps> = Symbol('PortalContextKey');
-export const useProvidePortal = (instance: any) => {
+export const useProvidePortal = (instance: any, config = { inTriggerContext: true }) => {
   provide(PortalContextKey, {
-    inTriggerContext: true,
+    inTriggerContext: config.inTriggerContext,
     shouldRender: computed(() => {
-      const { sPopupVisible, popupRef, forceRender, autoDestroy } = instance;
+      const { sPopupVisible, popupRef, forceRender, autoDestroy } = instance || {};
       // if (popPortal) return true;
       let shouldRender = false;
       if (sPopupVisible || popupRef || forceRender) {
@@ -46,6 +46,7 @@ export const useProvidePortal = (instance: any) => {
 };
 
 export const useInjectPortal = () => {
+  useProvidePortal({}, { inTriggerContext: false });
   const portalContext = inject(PortalContextKey, {
     shouldRender: computed(() => false),
     inTriggerContext: false,

@@ -148,7 +148,7 @@ export default defineComponent({
   }),
   setup(props, { emit, slots, attrs }) {
     const [locale] = useLocaleReceiver('Modal');
-    const { prefixCls, rootPrefixCls, direction } = useConfigInject(
+    const { prefixCls, rootPrefixCls, direction, getPopupContainer } = useConfigInject(
       'modal',
       props,
     );
@@ -206,7 +206,7 @@ export default defineComponent({
         <Dialog
           {...restProps}
           {...attrs}
-          getContainer={getContainer}
+          getContainer={getContainer || getPopupContainer}
           prefixCls={prefixCls.value}
           wrapClassName={wrapClassNameExtended}
           visible={visible}

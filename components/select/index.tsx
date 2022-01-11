@@ -20,7 +20,7 @@ export type OptionType = typeof Option;
 export interface LabeledValue {
   key?: string;
   value: RawValue;
-  label: any;
+  label?: any;
 }
 export type SelectValue = RawValue | RawValue[] | LabeledValue | LabeledValue[] | undefined;
 

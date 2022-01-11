@@ -1,4 +1,4 @@
-import type { CSSProperties, VNodeTypes, FunctionalComponent } from 'vue';
+import type { CSSProperties, FunctionalComponent } from 'vue';
 import { inject } from 'vue';
 import classNames from '../_util/classNames';
 import { defaultConfigProvider } from '../config-provider';
@@ -7,6 +7,7 @@ import DefaultEmptyImg from './empty';
 import SimpleEmptyImg from './simple';
 import { filterEmpty } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
+import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 
 const defaultEmptyImg = <DefaultEmptyImg />;
@@ -21,14 +22,14 @@ export interface EmptyProps {
   class?: any;
   style?: string | CSSProperties;
   imageStyle?: CSSProperties;
-  image?: VNodeTypes | null;
-  description?: VNodeTypes;
+  image?: VueNode | null;
+  description?: VueNode;
 }
 
 interface EmptyType extends FunctionalComponent<EmptyProps> {
   displayName: string;
-  PRESENTED_IMAGE_DEFAULT: VNodeTypes;
-  PRESENTED_IMAGE_SIMPLE: VNodeTypes;
+  PRESENTED_IMAGE_DEFAULT: VueNode;
+  PRESENTED_IMAGE_SIMPLE: VueNode;
 }
 
 const Empty: EmptyType = (props, { slots = {}, attrs }) => {

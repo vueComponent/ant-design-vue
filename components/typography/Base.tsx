@@ -61,7 +61,7 @@ export interface EllipsisConfig {
   symbol?: string;
   onExpand?: EventHandler;
   onEllipsis?: (ellipsis: boolean) => void;
-  tooltip?: boolean;
+  tooltip?: any;
 }
 
 export interface BlockProps extends TypographyProps {

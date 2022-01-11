@@ -64,7 +64,7 @@ const treeData = [
 ];
 export default defineComponent({
   setup() {
-    const onContextMenuClick = (treeKey: string, menuKey: string) => {
+    const onContextMenuClick = (treeKey: string, menuKey: string | number) => {
       console.log(`treeKey: ${treeKey}, menuKey: ${menuKey}`);
     };
     const expandedKeys = ref<string[]>(['0-0-0', '0-0-1']);

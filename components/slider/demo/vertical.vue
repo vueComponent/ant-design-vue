@@ -33,8 +33,8 @@ import { defineComponent, ref, createVNode } from 'vue';
 export default defineComponent({
   setup() {
     const value1 = ref<number>(30);
-    const value2 = ref<number[]>([20, 50]);
-    const value3 = ref<number[]>([26, 37]);
+    const value2 = ref<[number, number]>([20, 50]);
+    const value3 = ref<[number, number]>([26, 37]);
     const marks = ref<Record<number, any>>({
       0: '0°C',
       26: '26°C',

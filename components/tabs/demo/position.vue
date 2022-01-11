@@ -31,10 +31,11 @@ Tab's position: left, right, top or bottom.  Will auto switch to `top` in mobile
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { TabsProps } from '..';
 
 export default defineComponent({
   setup() {
-    const tabPosition = ref('top');
+    const tabPosition = ref<TabsProps['tabPosition']>('top');
     const activeKey = ref('1');
 
     return {

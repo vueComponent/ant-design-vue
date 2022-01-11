@@ -31,11 +31,12 @@ There are 4 position options available.
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import type { CarouselProps } from 'ant-design-vue';
 
 export default defineComponent({
   setup() {
     return {
-      dotPosition: ref('top'),
+      dotPosition: ref<CarouselProps['dotPosition']>('top'),
     };
   },
 });

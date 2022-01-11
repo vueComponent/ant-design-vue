@@ -51,6 +51,7 @@
     "codecov": "codecov",
     "routes": "node site/scripts/genrateRoutes.js",
     "tsc": "tsc --noEmit",
+    "vue-tsc": "vue-tsc --noEmit",
     "site": "yarn routes && ./node_modules/vite/bin/vite.js build site --base=https://next.antdv.com/",
     "pub:site": "npm run site && node site/scripts/pushToOSS.js",
     "prepare": "husky install"
@@ -232,6 +233,7 @@
     "vue-router": "^4.0.0",
     "vue-server-renderer": "^2.6.11",
     "vue-style-loader": "^4.1.2",
+    "vue-tsc": "^0.30.2",
     "vuex": "^4.0.0-beta.2",
     "webpack": "^5.0.0",
     "webpack-bundle-analyzer": "^4.4.2",

@@ -27,7 +27,7 @@ Cooperate with the content and buttons, to represent the progress of a process.
       <a-button
         v-if="current == steps.length - 1"
         type="primary"
-        @click="$message.success('Processing complete!')"
+        @click="message.success('Processing complete!')"
       >
         Done
       </a-button>
@@ -37,6 +37,7 @@ Cooperate with the content and buttons, to represent the progress of a process.
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { message } from 'ant-design-vue';
 
 export default defineComponent({
   setup() {
@@ -48,6 +49,7 @@ export default defineComponent({
       current.value--;
     };
     return {
+      message,
       current,
       steps: [
         {

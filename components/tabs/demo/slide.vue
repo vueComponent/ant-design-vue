@@ -34,10 +34,11 @@ In order to fit in more tabs, they can slide left and right (or up and down).
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import type { TabsProps } from 'ant-design-vue';
 
 export default defineComponent({
   setup() {
-    const mode = ref('top');
+    const mode = ref<TabsProps['tabPosition']>('top');
     const activeKey = ref('1');
     const callback = (val: string) => {
       console.log(val);

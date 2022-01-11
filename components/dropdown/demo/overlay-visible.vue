@@ -34,20 +34,15 @@ The default is to close the menu when you click on menu items, this feature can 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { DownOutlined } from '@ant-design/icons-vue';
+import { MenuProps } from 'ant-design-vue';
 
-interface MenuInfo {
-  key: string;
-  keyPath: string[];
-  item: any;
-  domEvent: MouseEvent;
-}
 export default defineComponent({
   components: {
     DownOutlined,
   },
   setup() {
     const visible = ref(false);
-    const handleMenuClick = (e: MenuInfo) => {
+    const handleMenuClick: MenuProps['onClick'] = e => {
       if (e.key === '3') {
         visible.value = false;
       }

@@ -34,13 +34,14 @@ If you need several buttons, we recommend that you use 1 primary button + n seco
 </template>
 <script lang="ts">
 import { DownOutlined } from '@ant-design/icons-vue';
+import { MenuProps } from 'ant-design-vue';
 import { defineComponent } from 'vue';
 export default defineComponent({
   components: {
     DownOutlined,
   },
   setup() {
-    const handleMenuClick = (e: Event) => {
+    const handleMenuClick: MenuProps['onClick'] = e => {
       console.log('click', e);
     };
     return {

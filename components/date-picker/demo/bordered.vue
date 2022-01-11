@@ -41,10 +41,10 @@ export default defineComponent({
       value3: ref<Dayjs>(),
       value4: ref<Dayjs>(),
       value5: ref<Dayjs>(),
-      value6: ref<Dayjs[]>([]),
-      value7: ref<Dayjs[]>([]),
-      value8: ref<Dayjs[]>([]),
-      value9: ref<Dayjs[]>([]),
+      value6: ref<[Dayjs, Dayjs]>(),
+      value7: ref<[Dayjs, Dayjs]>(),
+      value8: ref<[Dayjs, Dayjs]>(),
+      value9: ref<[Dayjs, Dayjs]>(),
     };
   },
 });

@@ -48,6 +48,7 @@ Custom modal content render. use `react-draggable` implements draggable.
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import type { CSSProperties } from 'vue';
 import VueDragResize from 'vue-drag-resize';
 export default defineComponent({
   components: {
@@ -57,7 +58,7 @@ export default defineComponent({
     const visible = ref<boolean>(false);
     const draggleRef = ref();
     const disabled = ref(true);
-    const bounds = ref({ left: 0, top: 0, width: 520, height: 0 });
+    const bounds = ref<CSSProperties>({ left: 0, top: 0, width: 520, height: 0 });
     const showModal = () => {
       visible.value = true;
     };
@@ -67,7 +68,7 @@ export default defineComponent({
       visible.value = false;
     };
 
-    const onStart = (event, uiData) => {
+    const onStart = (_event, uiData) => {
       const { clientWidth, clientHeight } = window.document.documentElement;
       const targetRect = draggleRef.value?.getBoundingClientRect();
       if (!targetRect) {

@@ -34,20 +34,14 @@ An event will be triggered when you click menu items, in which you can make diff
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { DownOutlined } from '@ant-design/icons-vue';
-
-interface MenuInfo {
-  key: string;
-  keyPath: string[];
-  item: any;
-  domEvent: MouseEvent;
-}
+import type { MenuProps } from 'ant-design-vue';
 
 export default defineComponent({
   components: {
     DownOutlined,
   },
   setup() {
-    const onClick = ({ key }: MenuInfo) => {
+    const onClick: MenuProps['onClick'] = ({ key }) => {
       console.log(`Click on item ${key}`);
     };
     return {

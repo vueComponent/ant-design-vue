@@ -56,6 +56,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/_0XzgOis7/Select.svg
 | clearIcon | 自定义的多选框清空图标 | VNode \| slot | - |  |
 | menuItemSelectedIcon | 自定义当前选中的条目图标 | VNode \| slot | - |  |
 | tokenSeparators | 在 tags 和 multiple 模式下自动分词的分隔符 | string\[] |  |  |
+| tagRender | 自定义 tag 内容 render，仅在 `mode` 为 `multiple` 或 `tags` 时生效 | slot \| (props) => any | - | 3.0 |
 | value(v-model) | 指定当前选中的条目 | string\|string\[]\|number\|number\[] | - |  |
 | options | options 数据，如果设置则不需要手动构造 selectOption 节点 | array&lt;{value, label, [disabled, key, title]}> | \[] |  |
 | option | 通过 option 插槽，自定义节点 | v-slot:option="{value, label, [disabled, key, title]}" | - | 2.2.5 |

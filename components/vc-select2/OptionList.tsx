@@ -278,7 +278,7 @@ const OptionList = defineComponent({
                 // Group
                 if (group) {
                   return (
-                    <div class={classNames(itemPrefixCls, `${itemPrefixCls.value}-group`)}>
+                    <div class={classNames(itemPrefixCls.value, `${itemPrefixCls.value}-group`)}>
                       {renderOption ? renderOption(data) : label !== undefined ? label : key}
                     </div>
                   );
@@ -298,12 +298,18 @@ const OptionList = defineComponent({
                 const selected = rawValues.has(value);
 
                 const optionPrefixCls = `${itemPrefixCls.value}-option`;
-                const optionClassName = classNames(itemPrefixCls, optionPrefixCls, cls, className, {
-                  [`${optionPrefixCls}-grouped`]: groupOption,
-                  [`${optionPrefixCls}-active`]: activeIndex === itemIndex && !disabled,
-                  [`${optionPrefixCls}-disabled`]: disabled,
-                  [`${optionPrefixCls}-selected`]: selected,
-                });
+                const optionClassName = classNames(
+                  itemPrefixCls.value,
+                  optionPrefixCls,
+                  cls,
+                  className,
+                  {
+                    [`${optionPrefixCls}-grouped`]: groupOption,
+                    [`${optionPrefixCls}-active`]: activeIndex === itemIndex && !disabled,
+                    [`${optionPrefixCls}-disabled`]: disabled,
+                    [`${optionPrefixCls}-selected`]: selected,
+                  },
+                );
 
                 const mergedLabel = getLabel(item);
 

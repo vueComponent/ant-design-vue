@@ -9,6 +9,7 @@ import PropTypes from '../../_util/vue-types';
 import type { VueNode } from '../../_util/type';
 import Overflow from '../../vc-overflow';
 import type { DisplayValueType, RenderNode, CustomTagProps, RawValueType } from '../BaseSelect';
+import type { BaseOptionType } from '../Select';
 
 type SelectorProps = InnerSelectorProps & {
   // Icon
@@ -140,12 +141,12 @@ const SelectSelector = defineComponent<SelectorProps>({
       itemDisabled: boolean,
       closable: boolean,
       onClose: (e: MouseEvent) => void,
+      option: BaseOptionType,
     ) {
       const onMouseDown = (e: MouseEvent) => {
         onPreventMouseDown(e);
         props.onToggleOpen(!open);
       };
-
       return (
         <span onMousedown={onMouseDown}>
           {props.tagRender({
@@ -154,13 +155,14 @@ const SelectSelector = defineComponent<SelectorProps>({
             disabled: itemDisabled,
             closable,
             onClose,
+            option,
           })}
         </span>
       );
     }
 
     function renderItem(valueItem: DisplayValueType) {
-      const { disabled: itemDisabled, label, value } = valueItem;
+      const { disabled: itemDisabled, label, value, option } = valueItem;
       const closable = !props.disabled && !itemDisabled;
 
       let displayLabel = label;
@@ -180,7 +182,7 @@ const SelectSelector = defineComponent<SelectorProps>({
       };
 
       return typeof props.tagRender === 'function'
-        ? customizeRenderSelector(value, displayLabel, itemDisabled, closable, onClose)
+        ? customizeRenderSelector(value, displayLabel, itemDisabled, closable, onClose, option)
         : defaultRenderSelector(label, displayLabel, itemDisabled, closable, onClose);
     }
 

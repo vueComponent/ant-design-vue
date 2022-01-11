@@ -22,6 +22,7 @@ import {
   getCurrentInstance,
   onBeforeUnmount,
   onMounted,
+  provide,
   ref,
   toRefs,
   watch,
@@ -36,6 +37,7 @@ import { toReactive } from '../_util/toReactive';
 import classNames from '../_util/classNames';
 import OptionList from './OptionList';
 import createRef from '../_util/createRef';
+import type { BaseOptionType } from './Select';
 
 const DEFAULT_OMIT_PROPS = [
   'value',
@@ -50,6 +52,8 @@ const DEFAULT_OMIT_PROPS = [
   'onInputKeyDown',
   'onPopupScroll',
   'tabindex',
+  'OptionList',
+  'notFoundContent',
 ] as const;
 
 export type RenderNode = VueNode | ((props: any) => VueNode);
@@ -74,20 +78,22 @@ export type CustomTagProps = {
   disabled: boolean;
   onClose: (event?: MouseEvent) => void;
   closable: boolean;
+  option: BaseOptionType;
 };
 
 export interface DisplayValueType {
   key?: Key;
   value?: RawValueType;
   label?: any;
-  disabled: boolean;
+  disabled?: boolean;
+  option?: BaseOptionType;
 }
 
-export interface BaseSelectRef {
+export type BaseSelectRef = {
   focus: () => void;
   blur: () => void;
   scrollTo: ScrollTo;
-}
+};
 
 const baseSelectPrivateProps = () => {
   return {
@@ -251,7 +257,7 @@ export default defineComponent({
   name: 'BaseSelect',
   inheritAttrs: false,
   props: initDefaultProps(baseSelectProps(), { showAction: [], notFoundContent: 'Not Found' }),
-  setup(props, { attrs, expose }) {
+  setup(props, { attrs, expose, slots }) {
     const multiple = computed(() => isMultiple(props.mode));
 
     const mergedShowSearch = computed(() =>
@@ -533,7 +539,10 @@ export default defineComponent({
         props.onBlur(...args);
       }
     };
-
+    provide('VCSelectContainerEvent', {
+      focus: onContainerFocus,
+      blur: onContainerBlur,
+    });
     const activeTimeoutIds: any[] = [];
 
     onMounted(() => {
@@ -743,7 +752,7 @@ export default defineComponent({
       }
 
       // =========================== OptionList ===========================
-      const optionList = <OptionList ref={listRef} />;
+      const optionList = <OptionList ref={listRef} v-slots={{ option: slots.option }} />;
 
       // ============================= Select =============================
       const mergedClassName = classNames(prefixCls, attrs.class, {
@@ -822,14 +831,14 @@ export default defineComponent({
       } else {
         renderNode = (
           <div
-            class={mergedClassName}
             {...domProps}
+            class={mergedClassName}
             ref={containerRef}
             onMousedown={onInternalMouseDown}
             onKeydown={onInternalKeyDown}
             onKeyup={onInternalKeyUp}
-            onFocus={onContainerFocus}
-            onBlur={onContainerBlur}
+            // onFocus={onContainerFocus}
+            // onBlur={onContainerBlur}
           >
             {mockFocused && !mergedOpen.value && (
               <span

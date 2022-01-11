@@ -25,7 +25,7 @@ function convertNodeToOption<OptionType extends BaseOptionType = DefaultOptionTy
 }
 
 export function convertChildrenToData<OptionType extends BaseOptionType = DefaultOptionType>(
-  nodes: VueNode,
+  nodes: VueNode[],
   optionOnly = false,
 ): OptionType[] {
   const dd = flattenChildren(nodes as [])

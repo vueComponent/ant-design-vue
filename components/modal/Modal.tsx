@@ -61,9 +61,12 @@ const modalProps = () => ({
   wrapClassName: String,
   maskTransitionName: String,
   transitionName: String,
-  getContainer: [String, Function, Boolean, Object] as PropType<
-    string | HTMLElement | getContainerFunc | false
-  >,
+  getContainer: {
+    type: [String, Function, Boolean, Object] as PropType<
+      string | HTMLElement | getContainerFunc | false
+    >,
+    default: undefined,
+  },
   zIndex: Number,
   bodyStyle: Object as PropType<CSSProperties>,
   maskStyle: Object as PropType<CSSProperties>,
@@ -206,7 +209,7 @@ export default defineComponent({
         <Dialog
           {...restProps}
           {...attrs}
-          getContainer={getContainer || getPopupContainer}
+          getContainer={getContainer || getPopupContainer.value}
           prefixCls={prefixCls.value}
           wrapClassName={wrapClassNameExtended}
           visible={visible}

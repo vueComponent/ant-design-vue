@@ -1,8 +1,8 @@
 import type { RefObject } from '../../_util/createRef';
-import type { Mode } from '../interface';
-import type { LabelValueType } from '../interface/generator';
+
 import type { EventHandler } from '../../_util/EventInterface';
 import type { VueNode } from '../../_util/type';
+import type { Mode, DisplayValueType } from '../BaseSelect';
 
 export interface InnerSelectorProps {
   prefixCls: string;
@@ -13,10 +13,10 @@ export interface InnerSelectorProps {
   disabled?: boolean;
   autofocus?: boolean;
   autocomplete?: string;
-  values: LabelValueType[];
+  values: DisplayValueType[];
   showSearch?: boolean;
   searchValue: string;
-  accessibilityIndex: number;
+  activeDescendantId: string;
   open: boolean;
   tabindex?: number | string;
   onInputKeyDown: EventHandler;

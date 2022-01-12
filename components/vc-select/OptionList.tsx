@@ -1,22 +1,12 @@
 import TransBtn from './TransBtn';
-import PropTypes from '../_util/vue-types';
+
 import KeyCode from '../_util/KeyCode';
 import classNames from '../_util/classNames';
 import pickAttrs from '../_util/pickAttrs';
 import { isValidElement } from '../_util/props-util';
 import createRef from '../_util/createRef';
-import type { PropType } from 'vue';
 import { computed, defineComponent, nextTick, reactive, watch } from 'vue';
 import List from '../vc-virtual-list';
-import type {
-  OptionsType as SelectOptionsType,
-  OptionData,
-  RenderNode,
-  OnActiveValue,
-  FieldNames,
-} from './interface';
-import type { RawValueType, FlattenOptionsType } from './interface/generator';
-import { fillFieldNames } from './utils/valueUtil';
 import useMemo from '../_util/hooks/useMemo';
 import { isPlatformMac } from './utils/platformUtil';
 
@@ -28,78 +18,28 @@ export interface RefOptionListProps {
 
 import type { EventHandler } from '../_util/EventInterface';
 import omit from '../_util/omit';
-export interface OptionListProps<OptionType extends object> {
-  prefixCls: string;
-  id: string;
-  options: OptionType[];
-  fieldNames?: FieldNames;
-  flattenOptions: FlattenOptionsType<OptionType>;
-  height: number;
-  itemHeight: number;
-  values: Set<RawValueType>;
-  multiple: boolean;
-  open: boolean;
-  defaultActiveFirstOption?: boolean;
-  notFoundContent?: any;
-  menuItemSelectedIcon?: RenderNode;
-  childrenAsData: boolean;
-  searchValue: string;
-  virtual: boolean;
-  direction?: 'ltr' | 'rtl';
-
-  onSelect: (value: RawValueType, option: { selected: boolean }) => void;
-  onToggleOpen: (open?: boolean) => void;
-  /** Tell Select that some value is now active to make accessibility work */
-  onActiveValue: OnActiveValue;
-  onScroll: EventHandler;
-
-  /** Tell Select that mouse enter the popup to force re-render */
-  onMouseenter?: EventHandler;
-}
-
-const OptionListProps = {
-  prefixCls: PropTypes.string,
-  id: PropTypes.string,
-  options: PropTypes.array,
-  fieldNames: PropTypes.object,
-  flattenOptions: PropTypes.array,
-  height: PropTypes.number,
-  itemHeight: PropTypes.number,
-  values: PropTypes.any,
-  multiple: PropTypes.looseBool,
-  open: PropTypes.looseBool,
-  defaultActiveFirstOption: PropTypes.looseBool,
-  notFoundContent: PropTypes.any,
-  menuItemSelectedIcon: PropTypes.any,
-  childrenAsData: PropTypes.looseBool,
-  searchValue: PropTypes.string,
-  virtual: PropTypes.looseBool,
-  direction: PropTypes.string,
-
-  onSelect: PropTypes.func,
-  onToggleOpen: { type: Function as PropType<(open?: boolean) => void> },
-  /** Tell Select that some value is now active to make accessibility work */
-  onActiveValue: PropTypes.func,
-  onScroll: PropTypes.func,
-
-  /** Tell Select that mouse enter the popup to force re-render */
-  onMouseenter: PropTypes.func,
-};
+import useBaseProps from './hooks/useBaseProps';
+import type { RawValueType } from './Select';
+import useSelectProps from './SelectContext';
+// export interface OptionListProps<OptionsType extends object[]> {
+export type OptionListProps = Record<string, never>;
 
 /**
  * Using virtual list of option display.
  * Will fallback to dom if use customize render.
  */
-const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, { state?: any }>({
+const OptionList = defineComponent({
   name: 'OptionList',
   inheritAttrs: false,
   slots: ['option'],
-  setup(props) {
-    const itemPrefixCls = computed(() => `${props.prefixCls}-item`);
+  setup(_, { expose, slots }) {
+    const baseProps = useBaseProps();
+    const props = useSelectProps();
+    const itemPrefixCls = computed(() => `${baseProps.prefixCls}-item`);
 
     const memoFlattenOptions = useMemo(
       () => props.flattenOptions,
-      [() => props.open, () => props.flattenOptions],
+      [() => baseProps.open, () => props.flattenOptions],
       next => next[0],
     );
 
@@ -124,7 +64,7 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
         const current = (index + i * offset + len) % len;
 
         const { group, data } = memoFlattenOptions.value[current];
-        if (!group && !(data as OptionData).disabled) {
+        if (!group && !data.disabled) {
           return current;
         }
       }
@@ -152,7 +92,7 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
     // Auto active first item when list length or searchValue changed
 
     watch(
-      [() => memoFlattenOptions.value.length, () => props.searchValue],
+      [() => memoFlattenOptions.value.length, () => baseProps.searchValue],
       () => {
         setActive(props.defaultActiveFirstOption !== false ? getEnabledActiveIndex(0) : -1);
       },
@@ -161,10 +101,10 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
     // Auto scroll to item position in single mode
 
     watch(
-      [() => props.open, () => props.searchValue],
+      [() => baseProps.open, () => baseProps.searchValue],
       () => {
-        if (!props.multiple && props.open && props.values.size === 1) {
-          const value = Array.from(props.values)[0];
+        if (!baseProps.multiple && baseProps.open && props.rawValues.size === 1) {
+          const value = Array.from(props.rawValues)[0];
           const index = memoFlattenOptions.value.findIndex(({ data }) => data.value === value);
           if (index !== -1) {
             setActive(index);
@@ -174,7 +114,7 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
           }
         }
         // Force trigger scrollbar visible when open
-        if (props.open) {
+        if (baseProps.open) {
           nextTick(() => {
             listRef.current?.scrollTo(undefined);
           });
@@ -186,262 +126,253 @@ const OptionList = defineComponent<OptionListProps<SelectOptionsType[number]>, {
     // ========================== Values ==========================
     const onSelectValue = (value?: RawValueType) => {
       if (value !== undefined) {
-        props.onSelect(value, { selected: !props.values.has(value) });
+        props.onSelect(value, { selected: !props.rawValues.has(value) });
       }
 
       // Single mode should always close by select
-      if (!props.multiple) {
-        props.onToggleOpen(false);
+      if (!baseProps.multiple) {
+        baseProps.toggleOpen(false);
       }
     };
-
+    const getLabel = (item: Record<string, any>) => item.label;
     function renderItem(index: number) {
       const item = memoFlattenOptions.value[index];
       if (!item) return null;
 
-      const itemData = (item.data || {}) as OptionData;
-      const { value, label, children } = itemData;
+      const itemData = item.data || {};
+      const { value } = itemData;
+      const { group } = item;
       const attrs = pickAttrs(itemData, true);
-      const mergedLabel = props.childrenAsData ? children : label;
+      const mergedLabel = getLabel(item);
       return item ? (
         <div
-          aria-label={typeof mergedLabel === 'string' ? mergedLabel : undefined}
+          aria-label={typeof mergedLabel === 'string' && !group ? mergedLabel : null}
           {...attrs}
           key={index}
-          role="option"
-          id={`${props.id}_list_${index}`}
-          aria-selected={props.values.has(value)}
+          role={group ? 'presentation' : 'option'}
+          id={`${baseProps.id}_list_${index}`}
+          aria-selected={props.rawValues.has(value)}
         >
           {value}
         </div>
       ) : null;
     }
-    return {
-      memoFlattenOptions,
-      renderItem,
-      listRef,
-      state,
-      onListMouseDown,
-      itemPrefixCls,
-      setActive,
-      onSelectValue,
-      onKeydown: (event: KeyboardEvent) => {
-        const { which, ctrlKey } = event;
-        switch (which) {
-          // >>> Arrow keys & ctrl + n/p on Mac
-          case KeyCode.N:
-          case KeyCode.P:
-          case KeyCode.UP:
-          case KeyCode.DOWN: {
-            let offset = 0;
-            if (which === KeyCode.UP) {
-              offset = -1;
-            } else if (which === KeyCode.DOWN) {
+    const onKeydown = (event: KeyboardEvent) => {
+      const { which, ctrlKey } = event;
+      switch (which) {
+        // >>> Arrow keys & ctrl + n/p on Mac
+        case KeyCode.N:
+        case KeyCode.P:
+        case KeyCode.UP:
+        case KeyCode.DOWN: {
+          let offset = 0;
+          if (which === KeyCode.UP) {
+            offset = -1;
+          } else if (which === KeyCode.DOWN) {
+            offset = 1;
+          } else if (isPlatformMac() && ctrlKey) {
+            if (which === KeyCode.N) {
               offset = 1;
-            } else if (isPlatformMac() && ctrlKey) {
-              if (which === KeyCode.N) {
-                offset = 1;
-              } else if (which === KeyCode.P) {
-                offset = -1;
-              }
+            } else if (which === KeyCode.P) {
+              offset = -1;
             }
-
-            if (offset !== 0) {
-              const nextActiveIndex = getEnabledActiveIndex(state.activeIndex + offset, offset);
-              scrollIntoView(nextActiveIndex);
-              setActive(nextActiveIndex, true);
-            }
-
-            break;
           }
 
-          // >>> Select
-          case KeyCode.ENTER: {
-            // value
-            const item = memoFlattenOptions.value[state.activeIndex];
-            if (item && !item.data.disabled) {
-              onSelectValue(item.data.value);
-            } else {
-              onSelectValue(undefined);
-            }
-
-            if (props.open) {
-              event.preventDefault();
-            }
-
-            break;
+          if (offset !== 0) {
+            const nextActiveIndex = getEnabledActiveIndex(state.activeIndex + offset, offset);
+            scrollIntoView(nextActiveIndex);
+            setActive(nextActiveIndex, true);
           }
 
-          // >>> Close
-          case KeyCode.ESC: {
-            props.onToggleOpen(false);
-            if (props.open) {
-              event.stopPropagation();
-            }
+          break;
+        }
+
+        // >>> Select
+        case KeyCode.ENTER: {
+          // value
+          const item = memoFlattenOptions.value[state.activeIndex];
+          if (item && !item.data.disabled) {
+            onSelectValue(item.data.value);
+          } else {
+            onSelectValue(undefined);
+          }
+
+          if (baseProps.open) {
+            event.preventDefault();
+          }
+
+          break;
+        }
+
+        // >>> Close
+        case KeyCode.ESC: {
+          baseProps.toggleOpen(false);
+          if (baseProps.open) {
+            event.stopPropagation();
           }
         }
-      },
-      onKeyup: () => {},
-
-      scrollTo: (index: number) => {
-        scrollIntoView(index);
-      },
+      }
     };
-  },
-  render() {
-    const {
-      renderItem,
-      listRef,
-      onListMouseDown,
-      itemPrefixCls,
-      setActive,
-      onSelectValue,
-      memoFlattenOptions,
-      $slots,
-    } = this as any;
-    const {
-      id,
-      childrenAsData,
-      values,
-      height,
-      itemHeight,
-      menuItemSelectedIcon,
-      notFoundContent,
-      virtual,
-      fieldNames,
-      onScroll,
-      onMouseenter,
-    } = this.$props;
-    const renderOption = $slots.option;
-    const { activeIndex } = this.state;
-    const omitFieldNameList = Object.values(fillFieldNames(fieldNames));
-    // ========================== Render ==========================
-    if (memoFlattenOptions.length === 0) {
+    const onKeyup = () => {};
+
+    const scrollTo = (index: number) => {
+      scrollIntoView(index);
+    };
+    expose({
+      onKeydown,
+      onKeyup,
+      scrollTo,
+    });
+    return () => {
+      // const {
+      //   renderItem,
+      //   listRef,
+      //   onListMouseDown,
+      //   itemPrefixCls,
+      //   setActive,
+      //   onSelectValue,
+      //   memoFlattenOptions,
+      //   $slots,
+      // } = this as any;
+      const { id, notFoundContent, onPopupScroll } = baseProps;
+      const { menuItemSelectedIcon, rawValues, fieldNames, virtual, listHeight, listItemHeight } =
+        props;
+
+      const renderOption = slots.option;
+      const { activeIndex } = state;
+      const omitFieldNameList = Object.keys(fieldNames).map(key => fieldNames[key]);
+      // ========================== Render ==========================
+      if (memoFlattenOptions.value.length === 0) {
+        return (
+          <div
+            role="listbox"
+            id={`${id}_list`}
+            class={`${itemPrefixCls.value}-empty`}
+            onMousedown={onListMouseDown}
+          >
+            {notFoundContent}
+          </div>
+        );
+      }
       return (
-        <div
-          role="listbox"
-          id={`${id}_list`}
-          class={`${itemPrefixCls}-empty`}
-          onMousedown={onListMouseDown}
-        >
-          {notFoundContent}
-        </div>
-      );
-    }
-    return (
-      <>
-        <div role="listbox" id={`${id}_list`} style={{ height: 0, width: 0, overflow: 'hidden' }}>
-          {renderItem(activeIndex - 1)}
-          {renderItem(activeIndex)}
-          {renderItem(activeIndex + 1)}
-        </div>
-        <List
-          itemKey="key"
-          ref={listRef}
-          data={memoFlattenOptions}
-          height={height}
-          itemHeight={itemHeight}
-          fullHeight={false}
-          onMousedown={onListMouseDown}
-          onScroll={onScroll}
-          virtual={virtual}
-          onMouseenter={onMouseenter}
-          v-slots={{
-            default: ({ group, groupOption, data, label, value }, itemIndex) => {
-              const { key } = data;
-              // Group
-              if (group) {
+        <>
+          <div role="listbox" id={`${id}_list`} style={{ height: 0, width: 0, overflow: 'hidden' }}>
+            {renderItem(activeIndex - 1)}
+            {renderItem(activeIndex)}
+            {renderItem(activeIndex + 1)}
+          </div>
+          <List
+            itemKey="key"
+            ref={listRef}
+            data={memoFlattenOptions.value}
+            height={listHeight}
+            itemHeight={listItemHeight}
+            fullHeight={false}
+            onMousedown={onListMouseDown}
+            onScroll={onPopupScroll}
+            virtual={virtual}
+            v-slots={{
+              default: (item, itemIndex) => {
+                const { group, groupOption, data, label, value } = item;
+                const { key } = data;
+                // Group
+                if (group) {
+                  return (
+                    <div class={classNames(itemPrefixCls.value, `${itemPrefixCls.value}-group`)}>
+                      {renderOption ? renderOption(data) : label !== undefined ? label : key}
+                    </div>
+                  );
+                }
+
+                const {
+                  disabled,
+                  title,
+                  children,
+                  style,
+                  class: cls,
+                  className,
+                  ...otherProps
+                } = data;
+                const passedProps = omit(otherProps, omitFieldNameList);
+                // Option
+                const selected = rawValues.has(value);
+
+                const optionPrefixCls = `${itemPrefixCls.value}-option`;
+                const optionClassName = classNames(
+                  itemPrefixCls.value,
+                  optionPrefixCls,
+                  cls,
+                  className,
+                  {
+                    [`${optionPrefixCls}-grouped`]: groupOption,
+                    [`${optionPrefixCls}-active`]: activeIndex === itemIndex && !disabled,
+                    [`${optionPrefixCls}-disabled`]: disabled,
+                    [`${optionPrefixCls}-selected`]: selected,
+                  },
+                );
+
+                const mergedLabel = getLabel(item);
+
+                const iconVisible =
+                  !menuItemSelectedIcon || typeof menuItemSelectedIcon === 'function' || selected;
+
+                const content = mergedLabel || value;
+                // https://github.com/ant-design/ant-design/issues/26717
+                let optionTitle =
+                  typeof content === 'string' || typeof content === 'number'
+                    ? content.toString()
+                    : undefined;
+                if (title !== undefined) {
+                  optionTitle = title;
+                }
+
                 return (
-                  <div class={classNames(itemPrefixCls, `${itemPrefixCls}-group`)}>
-                    {renderOption ? renderOption(data) : label !== undefined ? label : key}
+                  <div
+                    {...passedProps}
+                    aria-selected={selected}
+                    class={optionClassName}
+                    title={optionTitle}
+                    onMousemove={e => {
+                      if (otherProps.onMousemove) {
+                        otherProps.onMousemove(e);
+                      }
+                      if (activeIndex === itemIndex || disabled) {
+                        return;
+                      }
+                      setActive(itemIndex);
+                    }}
+                    onClick={e => {
+                      if (!disabled) {
+                        onSelectValue(value);
+                      }
+                      if (otherProps.onClick) {
+                        otherProps.onClick(e);
+                      }
+                    }}
+                    style={style}
+                  >
+                    <div class={`${optionPrefixCls}-content`}>
+                      {renderOption ? renderOption(data) : content}
+                    </div>
+                    {isValidElement(menuItemSelectedIcon) || selected}
+                    {iconVisible && (
+                      <TransBtn
+                        class={`${itemPrefixCls.value}-option-state`}
+                        customizeIcon={menuItemSelectedIcon}
+                        customizeIconProps={{ isSelected: selected }}
+                      >
+                        {selected ? '✓' : null}
+                      </TransBtn>
+                    )}
                   </div>
                 );
-              }
-
-              const {
-                disabled,
-                title,
-                children,
-                style,
-                class: cls,
-                className,
-                ...otherProps
-              } = data;
-              const passedProps = omit(otherProps, omitFieldNameList);
-              // Option
-              const selected = values.has(value);
-
-              const optionPrefixCls = `${itemPrefixCls}-option`;
-              const optionClassName = classNames(itemPrefixCls, optionPrefixCls, cls, className, {
-                [`${optionPrefixCls}-grouped`]: groupOption,
-                [`${optionPrefixCls}-active`]: activeIndex === itemIndex && !disabled,
-                [`${optionPrefixCls}-disabled`]: disabled,
-                [`${optionPrefixCls}-selected`]: selected,
-              });
-
-              const mergedLabel = childrenAsData ? children : label;
-
-              const iconVisible =
-                !menuItemSelectedIcon || typeof menuItemSelectedIcon === 'function' || selected;
-
-              const content = mergedLabel || value;
-              // https://github.com/ant-design/ant-design/issues/26717
-              let optionTitle =
-                typeof content === 'string' || typeof content === 'number'
-                  ? content.toString()
-                  : undefined;
-              if (title !== undefined) {
-                optionTitle = title;
-              }
-
-              return (
-                <div
-                  {...passedProps}
-                  aria-selected={selected}
-                  class={optionClassName}
-                  title={optionTitle}
-                  onMousemove={e => {
-                    if (otherProps.onMousemove) {
-                      otherProps.onMousemove(e);
-                    }
-                    if (activeIndex === itemIndex || disabled) {
-                      return;
-                    }
-                    setActive(itemIndex);
-                  }}
-                  onClick={e => {
-                    if (!disabled) {
-                      onSelectValue(value);
-                    }
-                    if (otherProps.onClick) {
-                      otherProps.onClick(e);
-                    }
-                  }}
-                  style={style}
-                >
-                  <div class={`${optionPrefixCls}-content`}>
-                    {renderOption ? renderOption(data) : content}
-                  </div>
-                  {isValidElement(menuItemSelectedIcon) || selected}
-                  {iconVisible && (
-                    <TransBtn
-                      class={`${itemPrefixCls}-option-state`}
-                      customizeIcon={menuItemSelectedIcon}
-                      customizeIconProps={{ isSelected: selected }}
-                    >
-                      {selected ? '✓' : null}
-                    </TransBtn>
-                  )}
-                </div>
-              );
-            },
-          }}
-        ></List>
-      </>
-    );
+              },
+            }}
+          ></List>
+        </>
+      );
+    };
   },
 });
-
-OptionList.props = OptionListProps;
 
 export default OptionList;

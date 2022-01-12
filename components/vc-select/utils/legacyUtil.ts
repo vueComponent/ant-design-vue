@@ -1,9 +1,11 @@
 import { flattenChildren, isValidElement } from '../../_util/props-util';
 import type { VNode } from 'vue';
-import type { OptionData, OptionGroupData, OptionsType } from '../interface';
+import type { BaseOptionType, DefaultOptionType } from '../Select';
 import type { VueNode } from '../../_util/type';
 
-function convertNodeToOption(node: VNode): OptionData {
+function convertNodeToOption<OptionType extends BaseOptionType = DefaultOptionType>(
+  node: VNode,
+): OptionType {
   const {
     key,
     children,
@@ -18,13 +20,16 @@ function convertNodeToOption(node: VNode): OptionData {
     value: value !== undefined ? value : key,
     children: child,
     disabled: disabled || disabled === '', // support <a-select-option disabled />
-    ...(restProps as Omit<typeof restProps, 'key'>),
+    ...(restProps as any),
   };
 }
 
-export function convertChildrenToData(nodes: VueNode, optionOnly = false): OptionsType {
+export function convertChildrenToData<OptionType extends BaseOptionType = DefaultOptionType>(
+  nodes: VueNode[],
+  optionOnly = false,
+): OptionType[] {
   const dd = flattenChildren(nodes as [])
-    .map((node: VNode, index: number): OptionData | OptionGroupData | null => {
+    .map((node: VNode, index: number): OptionType | null => {
       if (!isValidElement(node) || !node.type) {
         return null;
       }

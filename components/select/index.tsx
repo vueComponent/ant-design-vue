@@ -1,10 +1,10 @@
 import type { App, PropType, Plugin, ExtractPropTypes } from 'vue';
 import { computed, defineComponent, ref } from 'vue';
 import classNames from '../_util/classNames';
-import type { BaseSelectRef } from '../vc-select2';
-import RcSelect, { selectProps as vcSelectProps, Option, OptGroup } from '../vc-select2';
-import type { BaseOptionType, DefaultOptionType } from '../vc-select2/Select';
-import type { OptionProps } from '../vc-select2/Option';
+import type { BaseSelectRef } from '../vc-select';
+import RcSelect, { selectProps as vcSelectProps, Option, OptGroup } from '../vc-select';
+import type { BaseOptionType, DefaultOptionType } from '../vc-select/Select';
+import type { OptionProps } from '../vc-select/Option';
 import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';

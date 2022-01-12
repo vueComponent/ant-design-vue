@@ -11,8 +11,8 @@
 import KeyCode from '../../_util/KeyCode';
 import MultipleSelector from './MultipleSelector';
 import SingleSelector from './SingleSelector';
-import type { LabelValueType, RawValueType, CustomTagProps } from '../interface/generator';
-import type { RenderNode, Mode } from '../interface';
+import type { CustomTagProps, DisplayValueType, Mode, RenderNode } from '../BaseSelect';
+import { isValidateOpenKey } from '../utils/keyUtil';
 import useLock from '../hooks/useLock';
 import type { PropType } from 'vue';
 import { defineComponent } from 'vue';
@@ -20,22 +20,22 @@ import createRef from '../../_util/createRef';
 import PropTypes from '../../_util/vue-types';
 import type { VueNode } from '../../_util/type';
 import type { EventHandler } from '../../_util/EventInterface';
+import type { ScrollTo } from '../../vc-virtual-list/List';
 
 export interface SelectorProps {
   id: string;
   prefixCls: string;
   showSearch?: boolean;
   open: boolean;
-  /** Display in the Selector value, it's not same as `value` prop */
-  values: LabelValueType[];
-  multiple: boolean;
+  values: DisplayValueType[];
+  multiple?: boolean;
   mode: Mode;
   searchValue: string;
   activeValue: string;
   inputElement: VueNode;
 
   autofocus?: boolean;
-  accessibilityIndex: number;
+  activeDescendantId?: string;
   tabindex?: number | string;
   disabled?: boolean;
   placeholder?: VueNode;
@@ -44,7 +44,7 @@ export interface SelectorProps {
   // Tags
   maxTagCount?: number | 'responsive';
   maxTagTextLength?: number;
-  maxTagPlaceholder?: VueNode | ((omittedValues: LabelValueType[]) => VueNode);
+  maxTagPlaceholder?: VueNode | ((omittedValues: DisplayValueType[]) => VueNode);
   tagRender?: (props: CustomTagProps) => VueNode;
 
   /** Check if `tokenSeparators` contains `\n` or `\r\n` */
@@ -57,7 +57,7 @@ export interface SelectorProps {
   /** `onSearch` returns go next step boolean to check if need do toggle open */
   onSearch: (searchText: string, fromTyping: boolean, isCompositing: boolean) => boolean;
   onSearchSubmit: (searchText: string) => void;
-  onSelect: (value: RawValueType, option: { selected: boolean }) => void;
+  onRemove: (value: DisplayValueType) => void;
   onInputKeyDown?: (e: KeyboardEvent) => void;
 
   /**
@@ -65,6 +65,11 @@ export interface SelectorProps {
    * This may be removed after React provides replacement of `findDOMNode`
    */
   domRef: () => HTMLDivElement;
+}
+export interface RefSelectorProps {
+  focus: () => void;
+  blur: () => void;
+  scrollTo?: ScrollTo;
 }
 
 const Selector = defineComponent<SelectorProps>({
@@ -84,7 +89,7 @@ const Selector = defineComponent<SelectorProps>({
     inputElement: PropTypes.any,
 
     autofocus: PropTypes.looseBool,
-    accessibilityIndex: PropTypes.number,
+    activeDescendantId: PropTypes.string,
     tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     disabled: PropTypes.looseBool,
     placeholder: PropTypes.any,
@@ -106,7 +111,7 @@ const Selector = defineComponent<SelectorProps>({
     /** `onSearch` returns go next step boolean to check if need do toggle open */
     onSearch: PropTypes.func,
     onSearchSubmit: PropTypes.func,
-    onSelect: PropTypes.func,
+    onRemove: PropTypes.func,
     onInputKeyDown: { type: Function as PropType<EventHandler> },
 
     /**
@@ -115,7 +120,7 @@ const Selector = defineComponent<SelectorProps>({
      */
     domRef: PropTypes.func,
   } as any,
-  setup(props) {
+  setup(props, { expose }) {
     const inputRef = createRef();
     let compositionStatus = false;
 
@@ -139,7 +144,7 @@ const Selector = defineComponent<SelectorProps>({
         props.onSearchSubmit((event.target as HTMLInputElement).value);
       }
 
-      if (![KeyCode.SHIFT, KeyCode.TAB, KeyCode.BACKSPACE, KeyCode.ESC].includes(which)) {
+      if (isValidateOpenKey(which)) {
         props.onToggleOpen(true);
       }
     };
@@ -227,57 +232,43 @@ const Selector = defineComponent<SelectorProps>({
         props.onToggleOpen();
       }
     };
-
-    return {
+    expose({
       focus: () => {
         inputRef.current.focus();
       },
       blur: () => {
         inputRef.current.blur();
       },
-      onMousedown,
-      onClick,
-      onInputPaste,
-      inputRef,
-      onInternalInputKeyDown,
-      onInternalInputMouseDown,
-      onInputChange,
-      onInputCompositionEnd,
-      onInputCompositionStart,
+    });
+
+    return () => {
+      const { prefixCls, domRef, mode } = props as SelectorProps;
+      const sharedProps = {
+        inputRef,
+        onInputKeyDown: onInternalInputKeyDown,
+        onInputMouseDown: onInternalInputMouseDown,
+        onInputChange,
+        onInputPaste,
+        onInputCompositionStart,
+        onInputCompositionEnd,
+      };
+      const selectNode =
+        mode === 'multiple' || mode === 'tags' ? (
+          <MultipleSelector {...props} {...sharedProps} />
+        ) : (
+          <SingleSelector {...props} {...sharedProps} />
+        );
+      return (
+        <div
+          ref={domRef}
+          class={`${prefixCls}-selector`}
+          onClick={onClick}
+          onMousedown={onMousedown}
+        >
+          {selectNode}
+        </div>
+      );
     };
-  },
-  render() {
-    const { prefixCls, domRef, multiple } = this.$props as SelectorProps;
-    const {
-      onMousedown,
-      onClick,
-      inputRef,
-      onInputPaste,
-      onInternalInputKeyDown,
-      onInternalInputMouseDown,
-      onInputChange,
-      onInputCompositionStart,
-      onInputCompositionEnd,
-    } = this as any;
-    const sharedProps = {
-      inputRef,
-      onInputKeyDown: onInternalInputKeyDown,
-      onInputMouseDown: onInternalInputMouseDown,
-      onInputChange,
-      onInputPaste,
-      onInputCompositionStart,
-      onInputCompositionEnd,
-    };
-    const selectNode = multiple ? (
-      <MultipleSelector {...this.$props} {...sharedProps} />
-    ) : (
-      <SingleSelector {...this.$props} {...sharedProps} />
-    );
-    return (
-      <div ref={domRef} class={`${prefixCls}-selector`} onClick={onClick} onMousedown={onMousedown}>
-        {selectNode}
-      </div>
-    );
   },
 });
 

@@ -9,7 +9,6 @@ import type { VueNode } from '../../_util/type';
 interface SelectorProps extends InnerSelectorProps {
   inputElement: VueNode;
   activeValue: string;
-  backfill?: boolean;
 }
 const props = {
   inputElement: PropTypes.any,
@@ -25,7 +24,7 @@ const props = {
   showSearch: PropTypes.looseBool,
   autofocus: PropTypes.looseBool,
   autocomplete: PropTypes.string,
-  accessibilityIndex: PropTypes.number,
+  activeDescendantId: PropTypes.string,
   tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   activeValue: PropTypes.string,
   backfill: PropTypes.looseBool,
@@ -64,7 +63,7 @@ const SingleSelector = defineComponent<SelectorProps>({
 
     // Not show text when closed expect combobox mode
     const hasTextInput = computed(() =>
-      props.mode !== 'combobox' && !props.open ? false : !!inputValue.value,
+      props.mode !== 'combobox' && !props.open && !props.showSearch ? false : !!inputValue.value,
     );
 
     const title = computed(() => {
@@ -73,6 +72,18 @@ const SingleSelector = defineComponent<SelectorProps>({
         ? item.label.toString()
         : undefined;
     });
+
+    const renderPlaceholder = () => {
+      if (props.values[0]) {
+        return null;
+      }
+      const hiddenStyle = hasTextInput.value ? { visibility: 'hidden' as const } : undefined;
+      return (
+        <span class={`${props.prefixCls}-selection-placeholder`} style={hiddenStyle}>
+          {props.placeholder}
+        </span>
+      );
+    };
 
     return () => {
       const {
@@ -84,9 +95,8 @@ const SingleSelector = defineComponent<SelectorProps>({
         disabled,
         autofocus,
         autocomplete,
-        accessibilityIndex,
+        activeDescendantId,
         open,
-        placeholder,
         tabindex,
         onInputKeyDown,
         onInputMouseDown,
@@ -126,7 +136,7 @@ const SingleSelector = defineComponent<SelectorProps>({
               autofocus={autofocus}
               autocomplete={autocomplete}
               editable={inputEditable.value}
-              accessibilityIndex={accessibilityIndex}
+              activeDescendantId={activeDescendantId}
               value={inputValue.value}
               onKeydown={onInputKeyDown}
               onMousedown={onInputMouseDown}
@@ -150,9 +160,7 @@ const SingleSelector = defineComponent<SelectorProps>({
           )}
 
           {/* Display placeholder */}
-          {!item && !hasTextInput.value && (
-            <span class={`${prefixCls}-selection-placeholder`}>{placeholder}</span>
-          )}
+          {renderPlaceholder()}
         </>
       );
     };

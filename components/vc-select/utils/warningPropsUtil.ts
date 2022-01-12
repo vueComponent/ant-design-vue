@@ -1,10 +1,10 @@
 import warning, { noteOnce } from '../../vc-util/warning';
-import type { SelectProps } from '..';
 import { convertChildrenToData } from './legacyUtil';
 import { toArray } from './commonUtil';
-import type { RawValueType, LabelValueType } from '../interface/generator';
 import { isValidElement } from '../../_util/props-util';
 import type { VNode } from 'vue';
+import type { RawValueType, LabelInValueType, SelectProps } from '../Select';
+import { isMultiple } from '../BaseSelect';
 
 function warningProps(props: SelectProps) {
   const {
@@ -25,13 +25,13 @@ function warningProps(props: SelectProps) {
     optionLabelProp,
   } = props;
 
-  const multiple = mode === 'multiple' || mode === 'tags';
+  const multiple = isMultiple(mode);
   const mergedShowSearch = showSearch !== undefined ? showSearch : multiple || mode === 'combobox';
   const mergedOptions = options || convertChildrenToData(children);
 
   // `tags` should not set option as disabled
   warning(
-    mode !== 'tags' || mergedOptions.every((opt: any) => !opt.disabled),
+    mode !== 'tags' || mergedOptions.every((opt: { disabled?: boolean }) => !opt.disabled),
     'Please avoid setting option to disabled in tags mode since user can always type text as tag.',
   );
 
@@ -67,7 +67,7 @@ function warningProps(props: SelectProps) {
   );
 
   if (value !== undefined && value !== null) {
-    const values = toArray<RawValueType | LabelValueType>(value);
+    const values = toArray<RawValueType | LabelInValueType>(value);
     warning(
       !labelInValue ||
         values.every(val => typeof val === 'object' && ('key' in val || 'value' in val)),

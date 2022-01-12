@@ -4,7 +4,7 @@ import Group from './Group';
 import Search from './Search';
 import TextArea from './TextArea';
 import Password from './Password';
-
+export type { InputProps, TextAreaProps } from './inputProps';
 Input.Group = Group;
 Input.Search = Search;
 Input.TextArea = TextArea;

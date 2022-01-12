@@ -1,3 +1,4 @@
+import type { ExtractPropTypes } from 'vue';
 import { defineComponent, inject } from 'vue';
 import PropTypes from '../_util/vue-types';
 import debounce from 'lodash-es/debounce';
@@ -9,7 +10,7 @@ import SlickCarousel from '../vc-slick/src';
 import { tuple, withInstall } from '../_util/type';
 
 // Carousel
-export const CarouselProps = {
+export const carouselProps = {
   effect: PropTypes.oneOf(tuple('scrollx', 'fade')),
   dots: PropTypes.looseBool.def(true),
   vertical: PropTypes.looseBool,
@@ -53,11 +54,11 @@ export const CarouselProps = {
   dotPosition: PropTypes.oneOf(tuple('top', 'bottom', 'left', 'right')),
   verticalSwiping: PropTypes.looseBool.def(false),
 };
-
+export type CarouselProps = Partial<ExtractPropTypes<typeof carouselProps>>;
 const Carousel = defineComponent({
   name: 'ACarousel',
   inheritAttrs: false,
-  props: CarouselProps,
+  props: carouselProps,
   setup() {
     return {
       configProvider: inject('configProvider', defaultConfigProvider),

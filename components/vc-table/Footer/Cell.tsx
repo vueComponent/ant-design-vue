@@ -6,7 +6,7 @@ import type { AlignType } from '../interface';
 import { getCellFixedInfo } from '../utils/fixUtil';
 
 export interface SummaryCellProps {
-  index: number;
+  index?: number;
   colSpan?: number;
   rowSpan?: number;
   align?: AlignType;

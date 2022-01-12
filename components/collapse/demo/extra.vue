@@ -41,6 +41,7 @@ More than one panel can be expanded at a time, the first panel is initialized to
 <script lang="ts">
 import { SettingOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref, watch } from 'vue';
+import type { CollapseProps } from 'ant-design-vue';
 
 export default defineComponent({
   components: {
@@ -49,7 +50,7 @@ export default defineComponent({
   setup() {
     const text = `A dog is a type of domesticated animal.Known for its loyalty and faithfulness,it can be found as a welcome guest in many households across the world.`;
     const activeKey = ref(['1']);
-    const expandIconPosition = ref('left');
+    const expandIconPosition = ref<CollapseProps['expandIconPosition']>('left');
 
     const handleClick = (event: MouseEvent) => {
       // If you don't want click extra trigger collapse, you can prevent this:

@@ -51,7 +51,7 @@ The height of the input field for the select defaults to 32px. If size is set to
   </a-space>
 </template>
 <script lang="ts">
-import type { SizeType } from 'ant-design-vue/es/config-provider';
+import type { SelectProps } from 'ant-design-vue';
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
@@ -61,7 +61,7 @@ export default defineComponent({
 
     return {
       popupScroll,
-      size: ref<SizeType>('middle'),
+      size: ref<SelectProps['size']>('middle'),
       value1: ref('a1'),
       value2: ref(['a1', 'b2']),
       value3: ref(['a1', 'b2']),

@@ -10,6 +10,31 @@
 
 ---
 
+## 3.0.0-beta.7
+
+`2022-01-10`
+
+- 🌟 Export FormItemInstance type [23f5fb](https://github.com/vueComponent/ant-design-vue/commit/23f5fba013ae8a76fb814c218fb319488da3c70b)
+- 🐞 Fix Modal not showing issue under Dropdown [#5139](https://github.com/vueComponent/ant-design-vue/issues/5139)
+- 🐞 Fix Modal esc shortcut key invalid issue [3297f7](https://github.com/vueComponent/ant-design-vue/commit/3297f7aa58f6098b2b1dd147341b5c8dc5f2f5e5)
+
+## 3.0.0-beta.6
+
+`2022-01-07`
+
+- Modal
+  - 🌟 Refactor Modal component [#5129](https://github.com/vueComponent/ant-design-vue/issues/5129)
+  - 🐞 Fix the problem of unable to scroll when Modal and Drawer are mixed [#5096](https://github.com/vueComponent/ant-design-vue/issues/5096)
+- 🐞 Fix Menu under Dropdown, bind the click event, the attribute verification fails [#5127](https://github.com/vueComponent/ant-design-vue/issues/5127)
+- 🐞 Fix Table virtual scroll bar not updating issue [#5124](https://github.com/vueComponent/ant-design-vue/issues/5124)
+- 🐞 Adjust DatePicker to a single root node to support v-show [#5132](https://github.com/vueComponent/ant-design-vue/issues/5132)
+
+#### Documentation:
+
+- 🌟 Dynamically update document.title to facilitate document switching [#5121](https://github.com/vueComponent/ant-design-vue/issues/5121)
+- 🐞 Fix Empty type error [#5136](https://github.com/vueComponent/ant-design-vue/issues/5136)
+- 🐞 Fix RangeTime range selection example error [#5125](https://github.com/vueComponent/ant-design-vue/issues/5125)
+
 ## 3.0.0-beta.5
 
 `2022-01-04`

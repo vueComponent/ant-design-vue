@@ -33,13 +33,14 @@ Render radios by configuring `options`.
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
+import { RadioGroupProps } from 'ant-design-vue';
 const plainOptions = ['Apple', 'Pear', 'Orange'];
 const options = [
   { label: 'Apple', value: 'Apple' },
   { label: 'Pear', value: 'Pear' },
   { label: 'Orange', value: 'Orange' },
 ];
-const optionsWithDisabled = [
+const optionsWithDisabled: RadioGroupProps['options'] = [
   { label: 'Apple', value: 'Apple' },
   { label: 'Pear', value: 'Pear' },
   { label: 'Orange', value: 'Orange', disabled: true },

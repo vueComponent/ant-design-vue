@@ -35,6 +35,7 @@ import useMergedState from '../_util/hooks/useMergedState';
 import { warning } from '../vc-util/warning';
 import useState from '../_util/hooks/useState';
 import classNames from '../_util/classNames';
+import { useProviderTrigger } from '../vc-trigger/context';
 
 function reorderValues<DateType>(
   values: RangeValue<DateType>,
@@ -229,7 +230,7 @@ function RangerPicker<DateType>() {
       const needConfirmButton = computed(
         () => (props.picker === 'date' && !!props.showTime) || props.picker === 'time',
       );
-
+      const getPortal = useProviderTrigger();
       // We record opened status here in case repeat open with picker
       const openRecordsRef = ref<Record<number, boolean>>({});
 
@@ -1219,6 +1220,7 @@ function RangerPicker<DateType>() {
               />
               {suffixNode}
               {clearNode}
+              {getPortal()}
             </div>
           </PickerTrigger>
         );

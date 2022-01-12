@@ -206,7 +206,7 @@ export default defineComponent({
         <Dialog
           {...restProps}
           {...attrs}
-          getContainer={getPopupContainer}
+          getContainer={getContainer || getPopupContainer}
           prefixCls={prefixCls.value}
           wrapClassName={wrapClassNameExtended}
           visible={visible}

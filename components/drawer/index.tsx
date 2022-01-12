@@ -74,7 +74,7 @@ const drawerProps = () => ({
   afterVisibleChange: PropTypes.func,
 });
 
-export type DrawerProps = Partial<ExtractPropTypes<typeof drawerProps>>;
+export type DrawerProps = Partial<ExtractPropTypes<ReturnType<typeof drawerProps>>>;
 
 const Drawer = defineComponent({
   name: 'ADrawer',

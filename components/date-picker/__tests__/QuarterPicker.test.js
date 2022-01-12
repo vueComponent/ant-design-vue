@@ -3,7 +3,7 @@ import DatePicker from '..';
 import focusTest from '../../../tests/shared/focusTest';
 
 const { QuarterPicker } = DatePicker;
-
+jest.mock('../../_util/Portal');
 describe('QuarterPicker', () => {
   focusTest(QuarterPicker);
   fit('reset select item when popup close', async () => {

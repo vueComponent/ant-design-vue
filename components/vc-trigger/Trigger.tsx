@@ -20,6 +20,7 @@ import Portal from '../_util/Portal';
 import classNames from '../_util/classNames';
 import { cloneElement } from '../_util/vnode';
 import supportsPassive from '../_util/supportsPassive';
+import { useInjectTrigger, useProvidePortal } from './context';
 
 function noop() {}
 function returnEmptyString() {
@@ -93,12 +94,20 @@ export default defineComponent({
       }
       return popupAlign;
     });
+    const { setPortal, popPortal } = useInjectTrigger();
+    const popupRef = ref(null);
+    const setPopupRef = val => {
+      popupRef.value = val;
+    };
     return {
+      popPortal,
+      setPortal,
       vcTriggerContext: inject(
         'vcTriggerContext',
         {} as { onPopupMouseDown?: (...args: any[]) => void },
       ),
-      popupRef: ref(null),
+      popupRef,
+      setPopupRef,
       triggerRef: ref(null),
       align,
       focusTime: null,
@@ -128,7 +137,14 @@ export default defineComponent({
         (this as any).fireEvents(h, e);
       };
     });
-
+    (this as any).setPortal?.(
+      <Portal
+        key="portal"
+        v-slots={{ default: this.getComponent }}
+        getContainer={this.getContainer}
+        didUpdate={this.handlePortalUpdate}
+      ></Portal>,
+    );
     return {
       prevPopupVisible: popupVisible,
       sPopupVisible: popupVisible,
@@ -147,6 +163,7 @@ export default defineComponent({
     provide('vcTriggerContext', {
       onPopupMouseDown: this.onPopupMouseDown,
     });
+    useProvidePortal(this);
   },
   deactivated() {
     this.setPopupVisible(false);
@@ -459,7 +476,7 @@ export default defineComponent({
         style: popupStyle,
         onAlign: $attrs.onPopupAlign || noop,
         ...mouseProps,
-        ref: 'popupRef',
+        ref: this.setPopupRef,
         mobile,
         forceRender,
       } as any;
@@ -657,9 +674,9 @@ export default defineComponent({
     },
   },
   render() {
-    const { sPopupVisible, $attrs } = this;
+    const { $attrs } = this;
     const children = filterEmpty(getSlot(this));
-    const { forceRender, alignPoint, autoDestroy } = this.$props;
+    const { alignPoint } = this.$props;
 
     const child = children[0];
     this.childOriginEvents = getEvents(child);
@@ -716,10 +733,10 @@ export default defineComponent({
       newChildProps.class = childrenClassName;
     }
     const trigger = cloneElement(child, { ...newChildProps, ref: 'triggerRef' }, true, true);
-    let portal;
-    // prevent unmounting after it's rendered
-    if (sPopupVisible || this.popupRef || forceRender) {
-      portal = (
+    if (this.popPortal) {
+      return trigger;
+    } else {
+      const portal = (
         <Portal
           key="portal"
           v-slots={{ default: this.getComponent }}
@@ -727,15 +744,12 @@ export default defineComponent({
           didUpdate={this.handlePortalUpdate}
         ></Portal>
       );
+      return (
+        <>
+          {portal}
+          {trigger}
+        </>
+      );
     }
-    if (!sPopupVisible && autoDestroy) {
-      portal = null;
-    }
-    return (
-      <>
-        {portal}
-        {trigger}
-      </>
-    );
   },
 });

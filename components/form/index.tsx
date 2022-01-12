@@ -6,7 +6,7 @@ import FormItemRest, { useInjectFormItemContext } from './FormItemContext';
 export type { Rule, RuleObject } from './interface';
 
 export type { FormProps, FormInstance } from './Form';
-export type { FormItemProps } from './FormItem';
+export type { FormItemProps, FormItemInstance } from './FormItem';
 
 Form.useInjectFormItemContext = useInjectFormItemContext;
 Form.ItemRest = FormItemRest;

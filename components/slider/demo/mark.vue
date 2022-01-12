@@ -72,7 +72,7 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
     const value1 = ref<number>(37);
-    const value2 = ref<number[]>([26, 37]);
+    const value2 = ref<[number, number]>([26, 37]);
     const value3 = ref<number>(37);
     const value4 = ref<number>(37);
     const value5 = ref<number>(37);

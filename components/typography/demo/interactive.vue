@@ -40,7 +40,7 @@ Provide additional interactive capacity of editable and copyable.
       <span v-else key="copied-tooltip">you clicked!!</span>
     </template>
   </a-typography-paragraph>
-  <a-typography-paragraph :copyable="{ tooltips: false }">
+  <a-typography-paragraph :copyable="{ tooltip: false }">
     Hide Copy tooltips.
   </a-typography-paragraph>
 </template>

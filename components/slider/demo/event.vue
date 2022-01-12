@@ -27,7 +27,7 @@ import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
     const value1 = ref<number>(30);
-    const value2 = ref<number[]>([20, 50]);
+    const value2 = ref<[number, number]>([20, 50]);
 
     const onAfterChange = (value: number) => {
       console.log('afterChange: ', value);

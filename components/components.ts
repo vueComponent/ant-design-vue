@@ -69,12 +69,13 @@ export { default as Divider } from './divider';
 export type { DropdownProps } from './dropdown';
 export { default as Dropdown, DropdownButton } from './dropdown';
 
+export type { DrawerProps } from './drawer';
 export { default as Drawer } from './drawer';
 
 export type { EmptyProps } from './empty';
 export { default as Empty } from './empty';
 
-export type { FormProps, FormItemProps, FormInstance } from './form';
+export type { FormProps, FormItemProps, FormInstance, FormItemInstance } from './form';
 export { default as Form, FormItem, FormItemRest } from './form';
 
 export { default as Grid } from './grid';
@@ -130,6 +131,7 @@ export { default as Popover } from './popover';
 export type { ProgressProps } from './progress';
 export { default as Progress } from './progress';
 
+export type { RadioProps, RadioChangeEvent, RadioGroupProps } from './radio';
 export { default as Radio, RadioButton, RadioGroup } from './radio';
 
 export type { RateProps } from './rate';

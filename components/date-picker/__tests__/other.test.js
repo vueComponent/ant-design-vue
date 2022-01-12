@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import DatePicker from '../';
 import LocaleProvider from '../../locale-provider';
 import locale from '../../locale-provider/zh_CN';
-
+jest.mock('../../_util/Portal');
 const { MonthPicker, WeekPicker } = DatePicker;
 
 describe('Picker format by locale', () => {

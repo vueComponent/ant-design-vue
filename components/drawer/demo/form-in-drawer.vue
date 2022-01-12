@@ -80,7 +80,7 @@ Use form in drawer with submit button.
             <a-date-picker
               v-model:value="form.dateTime"
               style="width: 100%"
-              :get-popup-container="trigger => trigger.parentNode"
+              :get-popup-container="trigger => trigger.parentElement"
             />
           </a-form-item>
         </a-col>
@@ -117,7 +117,7 @@ export default defineComponent({
       owner: '',
       type: '',
       approver: '',
-      dateTime: '',
+      dateTime: null,
       description: '',
     });
 

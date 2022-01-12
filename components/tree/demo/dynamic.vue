@@ -38,8 +38,8 @@ export default defineComponent({
       { title: 'Expand to load', key: '1' },
       { title: 'Tree Node', key: '2', isLeaf: true },
     ]);
-    const onLoadData = (treeNode: any) => {
-      return new Promise((resolve: (value?: unknown) => void) => {
+    const onLoadData: TreeProps['loadData'] = treeNode => {
+      return new Promise(resolve => {
         if (treeNode.dataRef.children) {
           resolve();
           return;

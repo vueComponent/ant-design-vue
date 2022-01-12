@@ -26,7 +26,7 @@ exports[`Modal render correctly 1`] = `
 
 exports[`Modal render correctly 2`] = `
 <div>
-  <div></div>
+  <div style="overflow: hidden; overflow-x: hidden; overflow-y: hidden;" class="ant-scrolling-effect"></div>
   <div class="ant-modal-root">
     <div class="ant-modal-mask"></div>
     <div tabindex="-1" class="ant-modal-wrap" role="dialog">

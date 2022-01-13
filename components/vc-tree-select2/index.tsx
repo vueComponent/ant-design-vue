@@ -1,4 +1,4 @@
-// base rc-tree-select@4.6.1
+// base rc-tree-select@5.0.0-alpha.4
 import TreeSelect from './TreeSelect';
 import TreeNode from './TreeNode';
 import { SHOW_ALL, SHOW_CHILD, SHOW_PARENT } from './utils/strategyUtil';

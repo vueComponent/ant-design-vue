@@ -10,7 +10,6 @@ export default defineComponent({
   },
   setup() {
     return {
-      demoContext: inject('demoContext', {}),
       globalConfig: inject(GLOBAL_CONFIG),
     };
   },

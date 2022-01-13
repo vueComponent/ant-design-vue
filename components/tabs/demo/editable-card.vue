@@ -19,7 +19,7 @@ Only card type Tabs support adding & closable.
 
 <template>
   <a-tabs v-model:activeKey="activeKey" type="editable-card" @edit="onEdit">
-    <a-tab-pane v-for="pane in panes" :key="pane.key" :tab="pane.title" :closable="!!pane.closable">
+    <a-tab-pane v-for="pane in panes" :key="pane.key" :tab="pane.title" :closable="pane.closable">
       {{ pane.content }}
     </a-tab-pane>
   </a-tabs>

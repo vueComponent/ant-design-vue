@@ -16,25 +16,26 @@
 <script lang="ts">
 import dayjs from 'dayjs';
 import isBetween from 'dayjs/plugin/isBetween';
+import { defineComponent } from 'vue';
 dayjs.extend(isBetween);
 
-export default {
-  props: ['isMobile'],
-  data() {
+export default defineComponent({
+  props: {
+    isMobile: Boolean,
+  },
+  setup() {
     return {
       visible: true,
       effectiveTime: {
         start: '2019-08-05 17:00:00',
         end: '2019-09-05 17:00:00',
       },
+      isEffective({ start, end }) {
+        return dayjs().isBetween(start, end);
+      },
     };
   },
-  methods: {
-    isEffective({ start, end }) {
-      return dayjs().isBetween(start, end);
-    },
-  },
-};
+});
 </script>
 
 <style lang="less" scoped>

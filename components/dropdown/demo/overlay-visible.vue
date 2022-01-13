@@ -34,7 +34,7 @@ The default is to close the menu when you click on menu items, this feature can 
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import { DownOutlined } from '@ant-design/icons-vue';
-import { MenuProps } from 'ant-design-vue';
+import type { MenuProps } from 'ant-design-vue';
 
 export default defineComponent({
   components: {

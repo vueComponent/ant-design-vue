@@ -1,16 +1,9 @@
-import { warning } from '../../vc-util/warning';
-import type { ComputedRef, Ref } from 'vue';
+import type { Ref } from 'vue';
 import { computed } from 'vue';
-import type {
-  DataNode,
-  InternalDataEntity,
-  SimpleModeConfig,
-  RawValueType,
-  FieldNames,
-} from '../interface';
+import type { DataNode, SimpleModeConfig } from '../interface';
 import { convertChildrenToData } from '../utils/legacyUtil';
-
-const MAX_WARNING_TIMES = 10;
+import type { DefaultOptionType } from '../TreeSelect';
+import type { VueNode } from 'ant-design-vue/es/_util/type';
 
 function parseSimpleTreeData(
   treeData: DataNode[],
@@ -49,107 +42,26 @@ function parseSimpleTreeData(
 }
 
 /**
- * Format `treeData` with `value` & `key` which is used for calculation
- */
-function formatTreeData(
-  treeData: DataNode[],
-  getLabelProp: (node: DataNode) => any,
-  fieldNames: FieldNames,
-): InternalDataEntity[] {
-  let warningTimes = 0;
-  const valueSet = new Set<RawValueType>();
-
-  // Field names
-  const { value: fieldValue, children: fieldChildren } = fieldNames;
-
-  function dig(dataNodes: DataNode[]) {
-    return (dataNodes || []).map(node => {
-      const { key, disableCheckbox, disabled, checkable, selectable, isLeaf } = node;
-
-      const value = node[fieldValue];
-      const mergedValue = fieldValue in node ? value : key;
-
-      const dataNode: InternalDataEntity = {
-        disableCheckbox,
-        disabled,
-        key: key !== null && key !== undefined ? key : mergedValue,
-        value: mergedValue,
-        title: getLabelProp(node),
-        node,
-        selectable,
-        isLeaf,
-        dataRef: node,
-        checkable,
-      };
-
-      if (node.slots) {
-        dataNode.slots = node.slots;
-      }
-
-      // Check `key` & `value` and warning user
-      if (process.env.NODE_ENV !== 'production') {
-        if (
-          key !== null &&
-          key !== undefined &&
-          value !== undefined &&
-          String(key) !== String(value) &&
-          warningTimes < MAX_WARNING_TIMES
-        ) {
-          warningTimes += 1;
-          warning(
-            false,
-            `\`key\` or \`value\` with TreeNode must be the same or you can remove one of them. key: ${key}, value: ${value}.`,
-          );
-        }
-
-        warning(!valueSet.has(value), `Same \`value\` exist in the tree: ${value}`);
-        valueSet.add(value);
-      }
-
-      if (fieldChildren in node) {
-        dataNode.children = dig(node[fieldChildren]);
-      }
-
-      return dataNode;
-    });
-  }
-
-  return dig(treeData);
-}
-
-/**
  * Convert `treeData` or `children` into formatted `treeData`.
  * Will not re-calculate if `treeData` or `children` not change.
  */
 export default function useTreeData(
   treeData: Ref<DataNode[]>,
-  children: Ref<any[]>,
-  {
-    getLabelProp,
-    simpleMode,
-    fieldNames,
-  }: {
-    getLabelProp: (node: DataNode) => any;
-    simpleMode: Ref<boolean | SimpleModeConfig>;
-    fieldNames: Ref<FieldNames>;
-  },
-): ComputedRef<InternalDataEntity[]> {
+  children: Ref<VueNode[]>,
+  simpleMode: Ref<boolean | SimpleModeConfig>,
+): Ref<DefaultOptionType[]> {
   return computed(() => {
     if (treeData.value) {
-      return formatTreeData(
-        simpleMode.value
-          ? parseSimpleTreeData(treeData.value, {
-              id: 'id',
-              pId: 'pId',
-              rootPId: null,
-              ...(simpleMode.value !== true ? simpleMode.value : {}),
-            })
-          : treeData.value,
-        getLabelProp,
-        fieldNames.value,
-      );
-    } else {
-      return formatTreeData(convertChildrenToData(children.value), getLabelProp, fieldNames.value);
+      return simpleMode.value
+        ? parseSimpleTreeData(treeData.value, {
+            id: 'id',
+            pId: 'pId',
+            rootPId: null,
+            ...(simpleMode.value !== true ? simpleMode.value : {}),
+          })
+        : treeData.value;
     }
+
+    return convertChildrenToData(children.value);
   });
 }

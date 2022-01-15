@@ -6,9 +6,9 @@
 import type { InjectionKey } from 'vue';
 import { inject, provide } from 'vue';
 import type { DataEntity, IconType } from '../vc-tree/interface';
-import type { Key, LegacyDataNode, RawValueType } from './interface';
+import type { InternalDataEntity, Key, LegacyDataNode, RawValueType } from './interface';
 
-interface LegacyContextProps {
+export interface LegacyContextProps {
   checkable: boolean;
   checkedKeys: Key[];
   customCheckable: () => any;
@@ -29,11 +29,11 @@ interface LegacyContextProps {
 
   keyEntities: Record<RawValueType, DataEntity<any>>;
 
-  // slots: {
-  //   title?: (data: InternalDataEntity) => any;
-  //   titleRender?: (data: InternalDataEntity) => any;
-  //   [key: string]: ((...args: any[]) => any) | undefined;
-  // };
+  customSlots: {
+    title?: (data: InternalDataEntity) => any;
+    treeCheckable: () => any;
+    [key: string]: ((...args: any[]) => any) | undefined;
+  };
 }
 
 const TreeSelectLegacyContextPropsKey: InjectionKey<LegacyContextProps> = Symbol(

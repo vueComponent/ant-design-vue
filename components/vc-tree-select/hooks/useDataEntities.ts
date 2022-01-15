@@ -4,14 +4,13 @@ import type { FieldNames, RawValueType } from '../TreeSelect';
 
 import { isNil } from '../utils/valueUtil';
 import type { Ref } from 'vue';
-import { computed } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { warning } from '../../vc-util/warning';
 
-export default (treeData: Ref<any>, fieldNames: Ref<FieldNames>) =>
-  computed<{
-    valueEntities: Map<RawValueType, DataEntity>;
-    keyEntities: Record<string, DataEntity>;
-  }>(() => {
+export default (treeData: Ref<any>, fieldNames: Ref<FieldNames>) => {
+  const valueEntities = ref<Map<RawValueType, DataEntity>>(new Map());
+  const keyEntities = ref<Record<string, DataEntity>>({});
+  watchEffect(() => {
     const collection = convertDataToEntities(treeData.value, {
       fieldNames: fieldNames.value,
       initWrapper: wrapper => ({
@@ -34,7 +33,9 @@ export default (treeData: Ref<any>, fieldNames: Ref<FieldNames>) =>
         }
         wrapper.valueEntities.set(val, entity);
       },
-    });
-
-    return collection as any;
+    }) as any;
+    valueEntities.value = collection.valueEntities;
+    keyEntities.value = collection.keyEntities;
   });
+  return { valueEntities, keyEntities };
+};

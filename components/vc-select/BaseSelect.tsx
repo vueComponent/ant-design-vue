@@ -35,9 +35,9 @@ import isMobile from '../vc-util/isMobile';
 import KeyCode from '../_util/KeyCode';
 import { toReactive } from '../_util/toReactive';
 import classNames from '../_util/classNames';
-import OptionList from './OptionList';
 import createRef from '../_util/createRef';
 import type { BaseOptionType } from './Select';
+import useInjectLegacySelectContext from '../vc-tree-select/LegacyContext';
 
 const DEFAULT_OMIT_PROPS = [
   'value',
@@ -269,7 +269,7 @@ export default defineComponent({
     onMounted(() => {
       mobile.value = isMobile();
     });
-
+    const legacyTreeSelectContext = useInjectLegacySelectContext();
     // ============================== Refs ==============================
     const containerRef = ref<HTMLDivElement>(null);
     const selectorDomRef = createRef();
@@ -673,6 +673,7 @@ export default defineComponent({
         emptyOptions,
         activeDescendantId,
         activeValue,
+        OptionList,
 
         ...restProps
       } = { ...props, ...attrs } as BaseSelectProps;
@@ -752,7 +753,12 @@ export default defineComponent({
       }
 
       // =========================== OptionList ===========================
-      const optionList = <OptionList ref={listRef} v-slots={{ option: slots.option }} />;
+      const optionList = (
+        <OptionList
+          ref={listRef}
+          v-slots={{ ...legacyTreeSelectContext.customSlots, option: slots.option }}
+        />
+      );
 
       // ============================= Select =============================
       const mergedClassName = classNames(prefixCls, attrs.class, {
@@ -840,7 +846,7 @@ export default defineComponent({
             // onFocus={onContainerFocus}
             // onBlur={onContainerBlur}
           >
-            {mockFocused && !mergedOpen.value && (
+            {mockFocused.value && !mergedOpen.value && (
               <span
                 style={{
                   width: 0,

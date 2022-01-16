@@ -1,35 +1,42 @@
 <docs>
 ---
-order: 1
+order: 6
 title:
-  zh-CN: 多选
-  en-US: Multiple Selection
+  zh-CN: 线性样式
+  en-US: Show Tree Line
 ---
 
 ## zh-CN
 
-多选的树选择。
+通过 `treeLine` 配置线性样式。
 
 ## en-US
 
-Multiple selection usage.
+Use `treeLine` to show the line style.
 
 </docs>
 
 <template>
+  <a-switch
+    v-model:checked="treeLine"
+    checked-children="treeLine"
+    un-checked-children="treeLine"
+  ></a-switch>
+  <a-switch
+    v-model:checked="showLeafIcon"
+    :disabled="!treeLine"
+    checked-children="showLeafIcon"
+    un-checked-children="showLeafIcon"
+  ></a-switch>
   <a-tree-select
     v-model:value="value"
-    show-search
-    style="width: 100%"
-    :dropdown-style="{ maxHeight: '400px', overflow: 'auto' }"
+    style="width: 300px"
     placeholder="Please select"
-    allow-clear
-    multiple
-    tree-default-expand-all
+    :tree-line="treeLine && { showLeafIcon }"
     :tree-data="treeData"
   >
     <template #title="{ value: val, title }">
-      <b v-if="val === 'parent 1-1'" style="color: #08c">{{ val }}</b>
+      <b v-if="val === 'parent 1-1'" style="color: #08c">sss</b>
       <template v-else>{{ title }}</template>
     </template>
   </a-tree-select>
@@ -37,10 +44,11 @@ Multiple selection usage.
 <script lang="ts">
 import type { TreeSelectProps } from 'ant-design-vue';
 import { defineComponent, ref, watch } from 'vue';
-
 export default defineComponent({
   setup() {
-    const value = ref<string[]>([]);
+    const treeLine = ref(true);
+    const showLeafIcon = ref(false);
+    const value = ref<string>();
     const treeData = ref<TreeSelectProps['treeData']>([
       {
         title: 'parent 1',
@@ -68,10 +76,11 @@ export default defineComponent({
       },
     ]);
     watch(value, () => {
-      console.log('select', value.value);
+      console.log(value.value);
     });
-
     return {
+      treeLine,
+      showLeafIcon,
       value,
       treeData,
     };

@@ -36,7 +36,7 @@ Almost anything can be represented in a tree structure. Examples include directo
 | selectedKeys(v-model) | (Controlled) Specifies the keys of the selected treeNodes | string\[] \| number\[] | - |  |
 | showIcon | Shows the icon before a TreeNode's title. There is no default style; you must set a custom style for it if set to `true` | boolean | false |  |
 | switcherIcon | customize collapse/expand icon of tree node | slot | - |  |
-| showLine | Shows a connecting line | boolean | false |  |
+| showLine | Shows a connecting line | boolean \| {showLeafIcon: boolean}(3.0+) | false |  |
 | title | custom title | slot |  | 2.0.0 |
 
 ### Events

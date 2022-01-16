@@ -5,6 +5,7 @@
 
 import type { InjectionKey } from 'vue';
 import { inject, provide } from 'vue';
+import type { TreeProps } from '../tree';
 import type { DataEntity, IconType } from '../vc-tree/interface';
 import type { InternalDataEntity, Key, LegacyDataNode, RawValueType } from './interface';
 
@@ -20,7 +21,7 @@ export interface LegacyContextProps {
   treeIcon: IconType;
   showTreeIcon: boolean;
   switcherIcon: IconType;
-  treeLine: boolean;
+  treeLine: TreeProps['showLine'];
   treeNodeFilterProp: string;
   treeLoadedKeys: Key[];
   treeMotion: any;

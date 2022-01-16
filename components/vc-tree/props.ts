@@ -125,7 +125,10 @@ export const treeProps = () => ({
   children: PropTypes.any,
   treeData: { type: Array as PropType<DataNode[]> }, // Generate treeNode by children
   fieldNames: { type: Object as PropType<FieldNames> },
-  showLine: { type: Boolean, default: undefined },
+  showLine: {
+    type: [Boolean, Object] as PropType<boolean | { showLeafIcon: boolean }>,
+    default: undefined,
+  },
   showIcon: { type: Boolean, default: undefined },
   icon: PropTypes.any,
   selectable: { type: Boolean, default: undefined },

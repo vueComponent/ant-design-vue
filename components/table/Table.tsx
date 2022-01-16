@@ -262,8 +262,9 @@ const InteralTable = defineComponent<
     const screens = useBreakpoint();
 
     const mergedColumns = computed(() => {
-      const matched = new Set(Object.keys(screens).filter((m: Breakpoint) => screens[m]));
-
+      const matched = new Set(
+        Object.keys(screens.value).filter((m: Breakpoint) => screens.value[m]),
+      );
       return props.columns.filter(
         (c: ColumnType<DefaultRecordType>) =>
           !c.responsive || c.responsive.some((r: Breakpoint) => matched.has(r)),

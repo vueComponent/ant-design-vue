@@ -173,7 +173,7 @@ export function treeSelectProps<
     onDropdownVisibleChange: { type: Function as PropType<(open: boolean) => void> },
 
     // >>> Tree
-    treeLine: { type: Boolean, default: undefined },
+    treeLine: { type: [Boolean, Object], default: undefined },
     treeIcon: PropTypes.any,
     showTreeIcon: { type: Boolean, default: undefined },
     switcherIcon: PropTypes.any,

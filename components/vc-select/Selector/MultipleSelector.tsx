@@ -10,6 +10,7 @@ import type { VueNode } from '../../_util/type';
 import Overflow from '../../vc-overflow';
 import type { DisplayValueType, RenderNode, CustomTagProps, RawValueType } from '../BaseSelect';
 import type { BaseOptionType } from '../Select';
+import useInjectLegacySelectContext from '../../vc-tree-select/LegacyContext';
 
 type SelectorProps = InnerSelectorProps & {
   // Icon
@@ -79,7 +80,7 @@ const SelectSelector = defineComponent<SelectorProps>({
     const measureRef = ref();
     const inputWidth = ref(0);
     const focused = ref(false);
-
+    const legacyTreeSelectContext = useInjectLegacySelectContext();
     const selectionPrefixCls = computed(() => `${props.prefixCls}-selection`);
 
     // ===================== Search ======================
@@ -147,15 +148,20 @@ const SelectSelector = defineComponent<SelectorProps>({
         onPreventMouseDown(e);
         props.onToggleOpen(!open);
       };
+      let originData = option;
+      // For TreeSelect
+      if (legacyTreeSelectContext.keyEntities) {
+        originData = legacyTreeSelectContext.keyEntities[value]?.node || {};
+      }
       return (
-        <span onMousedown={onMouseDown}>
+        <span key={value} onMousedown={onMouseDown}>
           {props.tagRender({
             label: content,
             value,
             disabled: itemDisabled,
             closable,
             onClose,
-            option,
+            option: originData,
           })}
         </span>
       );

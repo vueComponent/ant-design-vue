@@ -109,6 +109,7 @@ const SingleSelector = defineComponent<SelectorProps>({
       let titleNode = null;
       // custom tree-select title by slot
 
+      // For TreeSelect
       if (item && legacyTreeSelectContext.customSlots) {
         const key = item.key ?? item.value;
         const originData = legacyTreeSelectContext.keyEntities[key]?.node || {};

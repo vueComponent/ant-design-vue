@@ -727,6 +727,7 @@ export default defineComponent({
           OptionList={OptionList}
           emptyOptions={!mergedTreeData.value.length}
           onDropdownVisibleChange={onInternalDropdownVisibleChange}
+          tagRender={props.tagRender || slots.tagRender}
         />
       );
     };

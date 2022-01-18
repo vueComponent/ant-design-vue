@@ -103,7 +103,11 @@ import { Button } from 'ant-design-vue';
 
 > 注意，babel-plugin-import 的 `style` 属性除了引入对应组件的样式，也会引入一些必要的全局样式。如果你不需要它们，建议不要使用此属性。你可以 `import 'ant-design-vue/dist/antd.css` 手动引入，并覆盖全局样式。
 
-如果你使用的 Vite，你可以使用 [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) 来进行按需加载
+如果你使用的 Vite，你可以使用 [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) 来进行按需加载。但是此插件无法处理非组件模块，如 message，这种组件需要手动加载：
+```ts
+import { message } from "ant-design-vue"
+import "ant-design-vue/es/message/style/css" //vite只能用 ant-design-vue/es 而非 ant-design-vue/lib
+```
 
 ## 配置主题和字体
 

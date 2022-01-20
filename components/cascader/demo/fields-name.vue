@@ -25,14 +25,8 @@ Custom Field Names
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-interface Option {
-  code: string;
-  name: string;
-  disabled?: boolean;
-  items?: Option[];
-  [key: string]: any;
-}
-const options: Option[] = [
+import type { CascaderProps } from 'ant-design-vue';
+const options: CascaderProps['options'] = [
   {
     code: 'zhejiang',
     name: 'Zhejiang',

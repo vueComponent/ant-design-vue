@@ -30,7 +30,7 @@ import {
 } from 'vue';
 import type { CSSProperties, ExtractPropTypes, PropType, VNode } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { initDefaultProps } from '../_util/props-util';
+import { initDefaultProps, isValidElement } from '../_util/props-util';
 import isMobile from '../vc-util/isMobile';
 import KeyCode from '../_util/KeyCode';
 import { toReactive } from '../_util/toReactive';
@@ -38,6 +38,7 @@ import classNames from '../_util/classNames';
 import createRef from '../_util/createRef';
 import type { BaseOptionType } from './Select';
 import useInjectLegacySelectContext from '../vc-tree-select/LegacyContext';
+import { cloneElement } from '../_util/vnode';
 
 const DEFAULT_OMIT_PROPS = [
   'value',
@@ -543,6 +544,8 @@ export default defineComponent({
       focus: onContainerFocus,
       blur: onContainerBlur,
     });
+
+    // Give focus back of Select
     const activeTimeoutIds: any[] = [];
 
     onMounted(() => {
@@ -591,7 +594,7 @@ export default defineComponent({
         triggerOpen,
         () => {
           if (triggerOpen.value) {
-            const newWidth = Math.ceil(containerRef.value.offsetWidth);
+            const newWidth = Math.ceil(containerRef.value?.offsetWidth);
             if (containerWidth.value !== newWidth && !Number.isNaN(newWidth)) {
               containerWidth.value = newWidth;
             }
@@ -740,7 +743,7 @@ export default defineComponent({
         onInternalSearch('', false, false);
       };
 
-      if (!disabled && allowClear && (displayValues.length || mergedSearchValue)) {
+      if (!disabled && allowClear && (displayValues.length || mergedSearchValue.value)) {
         clearNode = (
           <TransBtn
             class={`${prefixCls}-clear`}
@@ -800,7 +803,15 @@ export default defineComponent({
           v-slots={{
             default: () => {
               return customizeRawInputElement ? (
-                customizeRawInputElement
+                isValidElement(customizeRawInputElement) &&
+                  cloneElement(
+                    customizeRawInputElement,
+                    {
+                      ref: selectorDomRef,
+                    },
+                    false,
+                    true,
+                  )
               ) : (
                 <Selector
                   {...props}

@@ -27,13 +27,8 @@ Search and select options directly.
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-interface Option {
-  value: string;
-  label: string;
-  disabled?: boolean;
-  children?: Option[];
-}
-const options: Option[] = [
+import type { CascaderProps } from 'ant-design-vue';
+const options: CascaderProps['options'] = [
   {
     value: 'zhejiang',
     label: 'Zhejiang',

@@ -2,14 +2,14 @@ import type { CSSProperties, InjectionKey, Ref } from 'vue';
 import { inject, provide } from 'vue';
 import type { VueNode } from '../_util/type';
 import type {
-  CascaderProps,
+  BaseCascaderProps,
   InternalFieldNames,
   DefaultOptionType,
   SingleValueType,
 } from './Cascader';
 
 export interface CascaderContextProps {
-  options: Ref<CascaderProps['options']>;
+  options: Ref<BaseCascaderProps['options']>;
   fieldNames: Ref<InternalFieldNames>;
   values: Ref<SingleValueType[]>;
   halfValues: Ref<SingleValueType[]>;
@@ -23,7 +23,7 @@ export interface CascaderContextProps {
   expandIcon: Ref<VueNode>;
   loadingIcon: Ref<VueNode>;
   dropdownMenuColumnStyle: Ref<CSSProperties>;
-  slotsContext: Ref<Record<string, Function>>;
+  customSlots: Ref<Record<string, Function>>;
 }
 
 const CascaderContextKey: InjectionKey<CascaderContextProps> = Symbol('CascaderContextKey');

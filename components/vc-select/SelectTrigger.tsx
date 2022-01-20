@@ -161,8 +161,8 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
       return (
         <Trigger
           {...props}
-          showAction={[]}
-          hideAction={[]}
+          showAction={onPopupVisibleChange ? ['click'] : []}
+          hideAction={onPopupVisibleChange ? ['click'] : []}
           popupPlacement={placement || (direction === 'rtl' ? 'bottomRight' : 'bottomLeft')}
           builtinPlacements={builtInPlacements.value}
           prefixCls={dropdownPrefixCls}

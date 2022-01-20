@@ -19,19 +19,14 @@ Hover to expand sub menu, click to select option.
   <a-cascader
     v-model:value="value"
     :options="options"
-    :display-render="displayRender"
     expand-trigger="hover"
     placeholder="Please select"
   />
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-interface Option {
-  value: string;
-  label: string;
-  children?: Option[];
-}
-const options: Option[] = [
+import type { CascaderProps } from 'ant-design-vue';
+const options: CascaderProps['options'] = [
   {
     value: 'zhejiang',
     label: 'Zhejiang',
@@ -67,14 +62,9 @@ const options: Option[] = [
 ];
 export default defineComponent({
   setup() {
-    const displayRender = ({ labels }: { labels: string[] }) => {
-      return labels[labels.length - 1];
-    };
-
     return {
       value: ref<string[]>([]),
       options,
-      displayRender,
     };
   },
 });

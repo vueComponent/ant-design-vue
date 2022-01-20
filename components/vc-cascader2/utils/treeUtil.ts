@@ -1,10 +1,12 @@
 import type { Key } from '../../_util/type';
 import type { SingleValueType, DefaultOptionType, InternalFieldNames } from '../Cascader';
-import type { GetEntities } from '../hooks/useEntities';
+import type { OptionsInfo } from '../hooks/useEntities';
 
-export function formatStrategyValues(pathKeys: Key[], getKeyPathEntities: GetEntities) {
+export function formatStrategyValues(
+  pathKeys: Key[],
+  keyPathEntities: OptionsInfo['pathKeyEntities'],
+) {
   const valueSet = new Set(pathKeys);
-  const keyPathEntities = getKeyPathEntities();
 
   return pathKeys.filter(key => {
     const entity = keyPathEntities[key];

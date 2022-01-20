@@ -1,36 +1,42 @@
-import * as React from 'react';
-import type { RefOptionListProps } from 'rc-select/lib/OptionList';
-import KeyCode from 'rc-util/lib/KeyCode';
+import type { RefOptionListProps } from '../../vc-select/OptionList';
+import type { Key } from 'ant-design-vue/es/_util/type';
+import type { Ref, SetupContext } from 'vue';
+import { ref, watchEffect } from 'vue';
 import type { DefaultOptionType, InternalFieldNames, SingleValueType } from '../Cascader';
 import { toPathKey } from '../utils/commonUtil';
-import { useBaseProps } from 'rc-select';
+import { useBaseProps } from '../../vc-select';
+import KeyCode from '../../_util/KeyCode';
 
 export default (
-  ref: React.Ref<RefOptionListProps>,
-  options: DefaultOptionType[],
-  fieldNames: InternalFieldNames,
-  activeValueCells: React.Key[],
-  setActiveValueCells: (activeValueCells: React.Key[]) => void,
-  containerRef: React.RefObject<HTMLElement>,
+  context: SetupContext,
+  options: Ref<DefaultOptionType[]>,
+  fieldNames: Ref<InternalFieldNames>,
+  activeValueCells: Ref<Key[]>,
+  setActiveValueCells: (activeValueCells: Key[]) => void,
+  containerRef: Ref<HTMLElement>,
   onKeyBoardSelect: (valueCells: SingleValueType, option: DefaultOptionType) => void,
 ) => {
   const { direction, searchValue, toggleOpen, open } = useBaseProps();
   const rtl = direction === 'rtl';
-
-  const [validActiveValueCells, lastActiveIndex, lastActiveOptions] = React.useMemo(() => {
+  const [validActiveValueCells, lastActiveIndex, lastActiveOptions] = [
+    ref<Key[]>([]),
+    ref<number>(),
+    ref<DefaultOptionType[]>([]),
+  ];
+  watchEffect(() => {
     let activeIndex = -1;
-    let currentOptions = options;
+    let currentOptions = options.value;
 
     const mergedActiveIndexes: number[] = [];
-    const mergedActiveValueCells: React.Key[] = [];
+    const mergedActiveValueCells: Key[] = [];
 
-    const len = activeValueCells.length;
+    const len = activeValueCells.value.length;
 
     // Fill validate active value cells and index
     for (let i = 0; i < len; i += 1) {
       // Mark the active index for current options
       const nextActiveIndex = currentOptions.findIndex(
-        option => option[fieldNames.value] === activeValueCells[i],
+        option => option[fieldNames.value.value] === activeValueCells.value[i],
       );
 
       if (nextActiveIndex === -1) {
@@ -39,44 +45,48 @@ export default (
 
       activeIndex = nextActiveIndex;
       mergedActiveIndexes.push(activeIndex);
-      mergedActiveValueCells.push(activeValueCells[i]);
+      mergedActiveValueCells.push(activeValueCells.value[i]);
 
-      currentOptions = currentOptions[activeIndex][fieldNames.children];
+      currentOptions = currentOptions[activeIndex][fieldNames.value.children];
     }
 
     // Fill last active options
-    let activeOptions = options;
+    let activeOptions = options.value;
     for (let i = 0; i < mergedActiveIndexes.length - 1; i += 1) {
-      activeOptions = activeOptions[mergedActiveIndexes[i]][fieldNames.children];
+      activeOptions = activeOptions[mergedActiveIndexes[i]][fieldNames.value.children];
     }
 
-    return [mergedActiveValueCells, activeIndex, activeOptions];
-  }, [activeValueCells, fieldNames, options]);
+    [validActiveValueCells.value, lastActiveIndex.value, lastActiveOptions.value] = [
+      mergedActiveValueCells,
+      activeIndex,
+      activeOptions,
+    ];
+  });
 
   // Update active value cells and scroll to target element
-  const internalSetActiveValueCells = (next: React.Key[]) => {
+  const internalSetActiveValueCells = (next: Key[]) => {
     setActiveValueCells(next);
 
-    const ele = containerRef.current?.querySelector(`li[data-path-key="${toPathKey(next)}"]`);
+    const ele = containerRef.value?.querySelector(`li[data-path-key="${toPathKey(next)}"]`);
     ele?.scrollIntoView?.({ block: 'nearest' });
   };
 
   // Same options offset
   const offsetActiveOption = (offset: number) => {
-    const len = lastActiveOptions.length;
+    const len = lastActiveOptions.value.length;
 
-    let currentIndex = lastActiveIndex;
+    let currentIndex = lastActiveIndex.value;
     if (currentIndex === -1 && offset < 0) {
       currentIndex = len;
     }
 
     for (let i = 0; i < len; i += 1) {
       currentIndex = (currentIndex + offset + len) % len;
-      const option = lastActiveOptions[currentIndex];
+      const option = lastActiveOptions.value[currentIndex];
 
       if (option && !option.disabled) {
-        const value = option[fieldNames.value];
-        const nextActiveCells = validActiveValueCells.slice(0, -1).concat(value);
+        const value = option[fieldNames.value.value];
+        const nextActiveCells = validActiveValueCells.value.slice(0, -1).concat(value);
         internalSetActiveValueCells(nextActiveCells);
         return;
       }
@@ -85,8 +95,8 @@ export default (
 
   // Different options offset
   const prevColumn = () => {
-    if (validActiveValueCells.length > 1) {
-      const nextActiveCells = validActiveValueCells.slice(0, -1);
+    if (validActiveValueCells.value.length > 1) {
+      const nextActiveCells = validActiveValueCells.value.slice(0, -1);
       internalSetActiveValueCells(nextActiveCells);
     } else {
       toggleOpen(false);
@@ -95,19 +105,19 @@ export default (
 
   const nextColumn = () => {
     const nextOptions: DefaultOptionType[] =
-      lastActiveOptions[lastActiveIndex]?.[fieldNames.children] || [];
+      lastActiveOptions.value[lastActiveIndex.value]?.[fieldNames.value.children] || [];
 
     const nextOption = nextOptions.find(option => !option.disabled);
 
     if (nextOption) {
-      const nextActiveCells = [...validActiveValueCells, nextOption[fieldNames.value]];
+      const nextActiveCells = [...validActiveValueCells.value, nextOption[fieldNames.value.value]];
       internalSetActiveValueCells(nextActiveCells);
     }
   };
 
-  React.useImperativeHandle(ref, () => ({
+  context.expose({
     // scrollTo: treeRef.current?.scrollTo,
-    onKeyDown: event => {
+    onKeydown: event => {
       const { which } = event;
 
       switch (which) {
@@ -155,8 +165,11 @@ export default (
 
         // >>> Select
         case KeyCode.ENTER: {
-          if (validActiveValueCells.length) {
-            onKeyBoardSelect(validActiveValueCells, lastActiveOptions[lastActiveIndex]);
+          if (validActiveValueCells.value.length) {
+            onKeyBoardSelect(
+              validActiveValueCells.value,
+              lastActiveOptions.value[lastActiveIndex.value],
+            );
           }
           break;
         }
@@ -171,6 +184,6 @@ export default (
         }
       }
     },
-    onKeyUp: () => {},
-  }));
+    onKeyup: () => {},
+  } as RefOptionListProps);
 };

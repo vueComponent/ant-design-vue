@@ -10,13 +10,11 @@ export interface OptionsInfo {
   pathKeyEntities: Record<string, DataEntity>;
 }
 
-export type GetEntities = () => OptionsInfo['pathKeyEntities'];
-
 /** Lazy parse options data into conduct-able info to avoid perf issue in single mode */
 export default (options: Ref<DefaultOptionType[]>, fieldNames: Ref<InternalFieldNames>) => {
   const entities = computed(() => {
     return (
-      convertDataToEntities(options as any, {
+      convertDataToEntities(options.value as any, {
         fieldNames: fieldNames.value,
         initWrapper: wrapper => ({
           ...wrapper,

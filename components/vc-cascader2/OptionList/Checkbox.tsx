@@ -16,9 +16,9 @@ export default function Checkbox({
   disabled,
   onClick,
 }: CheckboxProps) {
-  const { slotsContext, checkable } = useInjectCascader();
+  const { customSlots, checkable } = useInjectCascader();
 
-  const mergedCheckable = checkable.value === undefined ? slotsContext.value.checkable : checkable;
+  const mergedCheckable = checkable.value === undefined ? customSlots.value.checkable : checkable;
   const customCheckbox =
     typeof mergedCheckable === 'function'
       ? mergedCheckable()

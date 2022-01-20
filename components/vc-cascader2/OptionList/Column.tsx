@@ -1,25 +1,24 @@
-import * as React from 'react';
-import classNames from 'classnames';
 import { isLeaf, toPathKey } from '../utils/commonUtil';
-import CascaderContext from '../context';
 import Checkbox from './Checkbox';
 import type { DefaultOptionType, SingleValueType } from '../Cascader';
 import { SEARCH_MARK } from '../hooks/useSearchOptions';
+import type { Key } from '../../_util/type';
+import { useInjectCascader } from '../context';
 
 export interface ColumnProps {
   prefixCls: string;
   multiple?: boolean;
   options: DefaultOptionType[];
   /** Current Column opened item key */
-  activeValue?: React.Key;
+  activeValue?: Key;
   /** The value path before current column */
-  prevValuePath: React.Key[];
+  prevValuePath: Key[];
   onToggleOpen: (open: boolean) => void;
   onSelect: (valuePath: SingleValueType, leaf: boolean) => void;
   onActive: (valuePath: SingleValueType) => void;
-  checkedSet: Set<React.Key>;
-  halfCheckedSet: Set<React.Key>;
-  loadingKeys: React.Key[];
+  checkedSet: Set<Key>;
+  halfCheckedSet: Set<Key>;
+  loadingKeys: Key[];
   isSelectable: (option: DefaultOptionType) => boolean;
 }
 
@@ -44,27 +43,29 @@ export default function Column({
     fieldNames,
     changeOnSelect,
     expandTrigger,
-    expandIcon,
-    loadingIcon,
+    expandIcon: expandIconRef,
+    loadingIcon: loadingIconRef,
     dropdownMenuColumnStyle,
-  } = React.useContext(CascaderContext);
+    customSlots,
+  } = useInjectCascader();
+  const expandIcon = expandIconRef.value ?? customSlots.value.expandIcon?.();
+  const loadingIcon = loadingIconRef.value ?? customSlots.value.loadingIcon?.();
 
-  const hoverOpen = expandTrigger === 'hover';
-
+  const hoverOpen = expandTrigger.value === 'hover';
   // ============================ Render ============================
   return (
-    <ul className={menuPrefixCls} role="menu">
+    <ul class={menuPrefixCls} role="menu">
       {options.map(option => {
         const { disabled } = option;
         const searchOptions = option[SEARCH_MARK];
-        const label = option[fieldNames.label];
-        const value = option[fieldNames.value];
+        const label = option[fieldNames.value.label];
+        const value = option[fieldNames.value.value];
 
-        const isMergedLeaf = isLeaf(option, fieldNames);
+        const isMergedLeaf = isLeaf(option, fieldNames.value);
 
         // Get real value of option. Search option is different way.
         const fullPath = searchOptions
-          ? searchOptions.map(opt => opt[fieldNames.value])
+          ? searchOptions.map(opt => opt[fieldNames.value.value])
           : [...prevValuePath, value];
         const fullPathKey = toPathKey(fullPath);
 
@@ -75,7 +76,6 @@ export default function Column({
 
         // >>>>> halfChecked
         const halfChecked = halfCheckedSet.has(fullPathKey);
-
         // >>>>> Open
         const triggerOpenPath = () => {
           if (!disabled && (!hoverOpen || !isMergedLeaf)) {
@@ -102,13 +102,16 @@ export default function Column({
         return (
           <li
             key={fullPathKey}
-            className={classNames(menuItemPrefixCls, {
-              [`${menuItemPrefixCls}-expand`]: !isMergedLeaf,
-              [`${menuItemPrefixCls}-active`]: activeValue === value,
-              [`${menuItemPrefixCls}-disabled`]: disabled,
-              [`${menuItemPrefixCls}-loading`]: isLoading,
-            })}
-            style={dropdownMenuColumnStyle}
+            class={[
+              menuItemPrefixCls,
+              {
+                [`${menuItemPrefixCls}-expand`]: !isMergedLeaf,
+                [`${menuItemPrefixCls}-active`]: activeValue === value,
+                [`${menuItemPrefixCls}-disabled`]: disabled,
+                [`${menuItemPrefixCls}-loading`]: isLoading,
+              },
+            ]}
+            style={dropdownMenuColumnStyle.value}
             role="menuitemcheckbox"
             title={title}
             aria-checked={checked}
@@ -119,12 +122,12 @@ export default function Column({
                 triggerSelect();
               }
             }}
-            onDoubleClick={() => {
-              if (changeOnSelect) {
+            onDblclick={() => {
+              if (changeOnSelect.value) {
                 onToggleOpen(false);
               }
             }}
-            onMouseEnter={() => {
+            onMouseenter={() => {
               if (hoverOpen) {
                 triggerOpenPath();
               }
@@ -136,18 +139,18 @@ export default function Column({
                 checked={checked}
                 halfChecked={halfChecked}
                 disabled={disabled}
-                onClick={(e: React.MouseEvent<HTMLSpanElement>) => {
+                onClick={(e: MouseEvent) => {
                   e.stopPropagation();
                   triggerSelect();
                 }}
               />
             )}
-            <div className={`${menuItemPrefixCls}-content`}>{option[fieldNames.label]}</div>
+            <div class={`${menuItemPrefixCls}-content`}>{option[fieldNames.value.label]}</div>
             {!isLoading && expandIcon && !isMergedLeaf && (
-              <div className={`${menuItemPrefixCls}-expand-icon`}>{expandIcon}</div>
+              <div class={`${menuItemPrefixCls}-expand-icon`}>{expandIcon}</div>
             )}
             {isLoading && loadingIcon && (
-              <div className={`${menuItemPrefixCls}-loading-icon`}>{loadingIcon}</div>
+              <div class={`${menuItemPrefixCls}-loading-icon`}>{loadingIcon}</div>
             )}
           </li>
         );
@@ -155,3 +158,19 @@ export default function Column({
     </ul>
   );
 }
+Column.props = [
+  'prefixCls',
+  'multiple',
+  'options',
+  'activeValue',
+  'prevValuePath',
+  'onToggleOpen',
+  'onSelect',
+  'onActive',
+  'checkedSet',
+  'halfCheckedSet',
+  'loadingKeys',
+  'isSelectable',
+];
+Column.displayName = 'Column';
+Column.inheritAttrs = false;

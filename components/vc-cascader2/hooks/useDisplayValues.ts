@@ -1,37 +1,38 @@
 import { toPathOptions } from '../utils/treeUtil';
-import * as React from 'react';
 import type {
   DefaultOptionType,
   SingleValueType,
-  CascaderProps,
+  BaseCascaderProps,
   InternalFieldNames,
 } from '../Cascader';
 import { toPathKey } from '../utils/commonUtil';
+import type { Ref } from 'vue';
+import { computed } from 'vue';
+import { isValidElement } from '../../_util/props-util';
+import { cloneElement } from '../../_util/vnode';
 
 export default (
-  rawValues: SingleValueType[],
-  options: DefaultOptionType[],
-  fieldNames: InternalFieldNames,
-  multiple: boolean,
-  displayRender: CascaderProps['displayRender'],
+  rawValues: Ref<SingleValueType[]>,
+  options: Ref<DefaultOptionType[]>,
+  fieldNames: Ref<InternalFieldNames>,
+  multiple: Ref<boolean>,
+  displayRender: Ref<BaseCascaderProps['displayRender']>,
 ) => {
-  return React.useMemo(() => {
+  return computed(() => {
     const mergedDisplayRender =
-      displayRender ||
+      displayRender.value ||
       // Default displayRender
-      (labels => {
-        const mergedLabels = multiple ? labels.slice(-1) : labels;
+      (({ labels }) => {
+        const mergedLabels = multiple.value ? labels.slice(-1) : labels;
         const SPLIT = ' / ';
 
         if (mergedLabels.every(label => ['string', 'number'].includes(typeof label))) {
           return mergedLabels.join(SPLIT);
         }
 
-        // If exist non-string value, use ReactNode instead
+        // If exist non-string value, use VueNode instead
         return mergedLabels.reduce((list, label, index) => {
-          const keyedLabel = React.isValidElement(label)
-            ? React.cloneElement(label, { key: index })
-            : label;
+          const keyedLabel = isValidElement(label) ? cloneElement(label, { key: index }) : label;
 
           if (index === 0) {
             return [keyedLabel];
@@ -41,13 +42,13 @@ export default (
         }, []);
       });
 
-    return rawValues.map(valueCells => {
-      const valueOptions = toPathOptions(valueCells, options, fieldNames);
+    return rawValues.value.map(valueCells => {
+      const valueOptions = toPathOptions(valueCells, options.value, fieldNames.value);
 
-      const label = mergedDisplayRender(
-        valueOptions.map(({ option, value }) => option?.[fieldNames.label] ?? value),
-        valueOptions.map(({ option }) => option),
-      );
+      const label = mergedDisplayRender({
+        labels: valueOptions.map(({ option, value }) => option?.[fieldNames.value.label] ?? value),
+        selectedOptions: valueOptions.map(({ option }) => option),
+      });
 
       return {
         label,
@@ -55,5 +56,5 @@ export default (
         valueCells,
       };
     });
-  }, [rawValues, options, fieldNames, displayRender, multiple]);
+  });
 };

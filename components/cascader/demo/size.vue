@@ -16,24 +16,20 @@ Cascade selection box of different sizes.
 
 </docs>
 <template>
-  <a-cascader v-model:value="value" size="large" :options="options" />
+  <a-cascader v-model:value="value" placeholder="Please select" size="large" :options="options" />
   <br />
   <br />
-  <a-cascader v-model:value="value" :options="options" />
+  <a-cascader v-model:value="value" placeholder="Please select" :options="options" />
   <br />
   <br />
-  <a-cascader v-model:value="value" size="small" :options="options" />
+  <a-cascader v-model:value="value" placeholder="Please select" size="small" :options="options" />
   <br />
   <br />
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-interface Option {
-  value: string;
-  label: string;
-  children?: Option[];
-}
-const options: Option[] = [
+import type { CascaderProps } from 'ant-design-vue';
+const options: CascaderProps['options'] = [
   {
     value: 'zhejiang',
     label: 'Zhejiang',

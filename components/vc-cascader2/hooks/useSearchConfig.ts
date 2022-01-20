@@ -1,13 +1,17 @@
-import type { CascaderProps, ShowSearchType } from '../Cascader';
+import type { BaseCascaderProps, ShowSearchType } from '../Cascader';
 import type { Ref } from 'vue';
-import { computed } from 'vue';
+import { ref, watchEffect } from 'vue';
 import { warning } from '../../vc-util/warning';
 
 // Convert `showSearch` to unique config
-export default function useSearchConfig(showSearch?: Ref<CascaderProps['showSearch']>) {
-  return computed(() => {
+export default function useSearchConfig(showSearch?: Ref<BaseCascaderProps['showSearch']>) {
+  const mergedShowSearch = ref(false);
+  const mergedSearchConfig = ref<ShowSearchType>({});
+  watchEffect(() => {
     if (!showSearch.value) {
-      return [false, {}];
+      mergedShowSearch.value = false;
+      mergedSearchConfig.value = {};
+      return;
     }
 
     let searchConfig: ShowSearchType = {
@@ -29,7 +33,9 @@ export default function useSearchConfig(showSearch?: Ref<CascaderProps['showSear
         warning(false, "'limit' of showSearch should be positive number or false.");
       }
     }
-
-    return [true, searchConfig];
+    mergedShowSearch.value = true;
+    mergedSearchConfig.value = searchConfig;
+    return;
   });
+  return { showSearch: mergedShowSearch, searchConfig: mergedSearchConfig };
 }

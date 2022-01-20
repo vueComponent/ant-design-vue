@@ -28,16 +28,11 @@ Load options lazily with `loadData`.
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-interface Option {
-  value: string;
-  label: string;
-  loading?: boolean;
-  isLeaf?: boolean;
-  children?: Option[];
-}
+import type { CascaderProps } from 'ant-design-vue';
+
 export default defineComponent({
   setup() {
-    const options = ref<Option[]>([
+    const options = ref<CascaderProps['options']>([
       {
         value: 'zhejiang',
         label: 'Zhejiang',

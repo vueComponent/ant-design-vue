@@ -18,21 +18,20 @@ Separate trigger button and result.
 <template>
   <span>
     {{ text }} &nbsp;
-    <a-cascader v-model:value="value" :options="options" @change="onChange">
+    <a-cascader
+      v-model:value="value"
+      placeholder="Please select"
+      :options="options"
+      @change="onChange"
+    >
       <a href="#">Change city</a>
     </a-cascader>
   </span>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-interface Option {
-  value: string;
-  label: string;
-  children?: Option[];
-  code?: number;
-  [key: string]: any;
-}
-const options: Option[] = [
+import type { CascaderProps } from 'ant-design-vue';
+const options: CascaderProps['options'] = [
   {
     value: 'zhejiang',
     label: 'Zhejiang',

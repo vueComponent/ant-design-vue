@@ -1,10 +1,5 @@
-import type {
-  ShowSearchType,
-  FieldNames,
-  BaseOptionType,
-  DefaultOptionType,
-} from '../vc-cascader2';
-import VcCascader, { cascaderProps as vcCascaderProps } from '../vc-cascader2';
+import type { ShowSearchType, FieldNames, BaseOptionType, DefaultOptionType } from '../vc-cascader';
+import VcCascader, { cascaderProps as vcCascaderProps } from '../vc-cascader';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import RedoOutlined from '@ant-design/icons-vue/RedoOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
@@ -22,7 +17,7 @@ import type { SizeType } from '../config-provider';
 import devWarning from '../vc-util/devWarning';
 import { getTransitionName } from '../_util/transition';
 import { useInjectFormItemContext } from '../form';
-import type { ValueType } from '../vc-cascader2/Cascader';
+import type { ValueType } from '../vc-cascader/Cascader';
 
 // Align the design since we use `rc-select` in root. This help:
 // - List search content will show all content

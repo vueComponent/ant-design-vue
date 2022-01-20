@@ -1,7 +1,7 @@
 import type { RefOptionListProps } from '../../vc-select/OptionList';
 import type { Key } from 'ant-design-vue/es/_util/type';
 import type { Ref, SetupContext } from 'vue';
-import { ref, watchEffect } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import type { DefaultOptionType, InternalFieldNames, SingleValueType } from '../Cascader';
 import { toPathKey } from '../utils/commonUtil';
 import { useBaseProps } from '../../vc-select';
@@ -16,8 +16,8 @@ export default (
   containerRef: Ref<HTMLElement>,
   onKeyBoardSelect: (valueCells: SingleValueType, option: DefaultOptionType) => void,
 ) => {
-  const { direction, searchValue, toggleOpen, open } = useBaseProps();
-  const rtl = direction === 'rtl';
+  const baseProps = useBaseProps();
+  const rtl = computed(() => baseProps.direction === 'rtl');
   const [validActiveValueCells, lastActiveIndex, lastActiveOptions] = [
     ref<Key[]>([]),
     ref<number>(),
@@ -31,7 +31,6 @@ export default (
     const mergedActiveValueCells: Key[] = [];
 
     const len = activeValueCells.value.length;
-
     // Fill validate active value cells and index
     for (let i = 0; i < len; i += 1) {
       // Mark the active index for current options
@@ -99,7 +98,7 @@ export default (
       const nextActiveCells = validActiveValueCells.value.slice(0, -1);
       internalSetActiveValueCells(nextActiveCells);
     } else {
-      toggleOpen(false);
+      baseProps.toggleOpen(false);
     }
   };
 
@@ -139,7 +138,7 @@ export default (
         }
 
         case KeyCode.LEFT: {
-          if (rtl) {
+          if (rtl.value) {
             nextColumn();
           } else {
             prevColumn();
@@ -148,7 +147,7 @@ export default (
         }
 
         case KeyCode.RIGHT: {
-          if (rtl) {
+          if (rtl.value) {
             prevColumn();
           } else {
             nextColumn();
@@ -157,7 +156,7 @@ export default (
         }
 
         case KeyCode.BACKSPACE: {
-          if (!searchValue) {
+          if (!baseProps.searchValue) {
             prevColumn();
           }
           break;
@@ -176,7 +175,7 @@ export default (
 
         // >>> Close
         case KeyCode.ESC: {
-          toggleOpen(false);
+          baseProps.toggleOpen(false);
 
           if (open) {
             event.stopPropagation();

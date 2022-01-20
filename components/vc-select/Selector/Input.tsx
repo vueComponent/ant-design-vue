@@ -174,11 +174,11 @@ const Input = defineComponent({
             this.VCSelectContainerEvent?.focus(args[0]);
           },
           onBlur: (...args: any[]) => {
-            // this.blurTimeout = setTimeout(() => {
-            onOriginBlur && onOriginBlur(args[0]);
-            onBlur && onBlur(args[0]);
-            this.VCSelectContainerEvent?.blur(args[0]);
-            // }, 200);
+            this.blurTimeout = setTimeout(() => {
+              onOriginBlur && onOriginBlur(args[0]);
+              onBlur && onBlur(args[0]);
+              this.VCSelectContainerEvent?.blur(args[0]);
+            }, 100);
           },
         },
         inputNode.type === 'textarea' ? {} : { type: 'search' },

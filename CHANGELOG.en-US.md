@@ -10,6 +10,19 @@
 
 ---
 
+## 3.0.0-beta.8
+
+`2022-01-21`
+
+- 🔥 Refactor `Cascader`, support multiple selection, add `tagRender` `multiple` `maxTagCount` `maxTagPlaceholder` `expandIcon`, use `dropdownClassName` `dropdownStyle` `open` `placement` to replace `popupClassName` `popupStyle` respectively ` `popupVisible` `popupPlacement` property
+- 🌟 Select, TreeSelect support slot maxTagPlaceholder
+- 🌟 `Table.Summary.Cell` supports `style`, `class` native properties
+- 🌟 Export more component types: `ConfigProviderProps` `InputProps` `TextAreaProps` `PopconfirmProps` `PopoverProps` `SliderProps` `StepProps` `StepsProps`
+- 🐞 Fix Modal reporting error under vue@3.2.28 [#5190](https://github.com/vueComponent/ant-design-vue/issues/5190)
+- 🐞 Fix `Modal` `getContainer` invalid problem [#5147](https://github.com/vueComponent/ant-design-vue/issues/5147)
+- 🐞 Fix `Table` `responsive` invalid problem [#5172](https://github.com/vueComponent/ant-design-vue/issues/5172)
+- 🐞 Fix `Tabs` activeKey controlled invalidation issue [#5180](https://github.com/vueComponent/ant-design-vue/issues/5180)
+
 ## 3.0.0-beta.7
 
 `2022-01-10`

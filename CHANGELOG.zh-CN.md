@@ -10,6 +10,19 @@
 
 ---
 
+## 3.0.0-beta.8
+
+`2022-01-21`
+
+- 🔥 重构 `Cascader`, 支持多选，新增 `tagRender` `multiple` `maxTagCount` `maxTagPlaceholder` `expandIcon`, 使用 `dropdownClassName` `dropdownStyle` `open` `placement` 分别替换 `popupClassName` `popupStyle` `popupVisible` `popupPlacement` 属性
+- 🌟 Select、TreeSelect 支持插槽 maxTagPlaceholder
+- 🌟 `Table.Summary.Cell` 支持 `style`、`class` 的原生属性
+- 🌟 导出更多组件类型: `ConfigProviderProps` `InputProps` `TextAreaProps` `PopconfirmProps` `PopoverProps` `SliderProps` `StepProps` `StepsProps`
+- 🐞 修复 Modal 在 vue@3.2.28 下报错问题 [#5190](https://github.com/vueComponent/ant-design-vue/issues/5190)
+- 🐞 修复 `Modal` `getContainer` 失效问题 [#5147](https://github.com/vueComponent/ant-design-vue/issues/5147)
+- 🐞 修复 `Table` `responsive` 失效问题 [#5172](https://github.com/vueComponent/ant-design-vue/issues/5172)
+- 🐞 修复 `Tabs` activeKey 受控失效问题 [#5180](https://github.com/vueComponent/ant-design-vue/issues/5180)
+
 ## 3.0.0-beta.7
 
 `2022-01-10`

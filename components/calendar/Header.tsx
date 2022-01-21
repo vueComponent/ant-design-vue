@@ -45,7 +45,7 @@ function YearSelect<DateType>(props: SharedProps<DateType>) {
       options={options}
       value={year}
       class={`${prefixCls}-year-select`}
-      onChange={numYear => {
+      onChange={(numYear: number) => {
         let newDate = generateConfig.setYear(value, numYear);
 
         if (validRange) {
@@ -108,7 +108,7 @@ function MonthSelect<DateType>(props: SharedProps<DateType>) {
       class={`${prefixCls}-month-select`}
       value={month}
       options={options}
-      onChange={newMonth => {
+      onChange={(newMonth: number) => {
         onChange(generateConfig.setMonth(value, newMonth));
       }}
       getPopupContainer={() => divRef!.value!}

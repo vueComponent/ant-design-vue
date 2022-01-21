@@ -1,21 +1,23 @@
 import type { App, PropType, Plugin, ExtractPropTypes } from 'vue';
 import { computed, defineComponent, ref } from 'vue';
 import classNames from '../_util/classNames';
+import type { BaseSelectRef } from '../vc-select';
 import RcSelect, { selectProps as vcSelectProps, Option, OptGroup } from '../vc-select';
-import type { OptionProps as OptionPropsType } from '../vc-select/Option';
+import type { BaseOptionType, DefaultOptionType } from '../vc-select/Select';
+import type { OptionProps } from '../vc-select/Option';
 import getIcons from './utils/iconUtil';
 import PropTypes from '../_util/vue-types';
-import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import omit from '../_util/omit';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import { getTransitionName } from '../_util/transition';
+import type { SizeType } from '../config-provider';
+import { initDefaultProps } from '../_util/props-util';
 
 type RawValue = string | number;
 
-export type OptionProps = OptionPropsType;
-
 export type OptionType = typeof Option;
+export type { OptionProps, BaseSelectRef as RefSelectProps, BaseOptionType, DefaultOptionType };
 
 export interface LabeledValue {
   key?: string;
@@ -35,23 +37,28 @@ export const selectProps = () => ({
   notFoundContent: PropTypes.any,
   suffixIcon: PropTypes.any,
   itemIcon: PropTypes.any,
-  size: PropTypes.oneOf(tuple('small', 'middle', 'large', 'default')),
-  mode: PropTypes.oneOf(tuple('multiple', 'tags', 'SECRET_COMBOBOX_MODE_DO_NOT_USE')),
-  bordered: PropTypes.looseBool.def(true),
-  transitionName: PropTypes.string,
-  choiceTransitionName: PropTypes.string.def(''),
+  size: String as PropType<SizeType>,
+  mode: String as PropType<'multiple' | 'tags' | 'SECRET_COMBOBOX_MODE_DO_NOT_USE'>,
+  bordered: { type: Boolean, default: true },
+  transitionName: String,
+  choiceTransitionName: { type: String, default: '' },
+  'onUpdate:value': Function as PropType<(val: SelectValue) => void>,
 });
 
 export type SelectProps = Partial<ExtractPropTypes<ReturnType<typeof selectProps>>>;
 
+const SECRET_COMBOBOX_MODE_DO_NOT_USE = 'SECRET_COMBOBOX_MODE_DO_NOT_USE';
 const Select = defineComponent({
   name: 'ASelect',
   Option,
   OptGroup,
   inheritAttrs: false,
-  props: selectProps(),
-  SECRET_COMBOBOX_MODE_DO_NOT_USE: 'SECRET_COMBOBOX_MODE_DO_NOT_USE',
-  emits: ['change', 'update:value', 'blur'],
+  props: initDefaultProps(selectProps(), {
+    listHeight: 256,
+    listItemHeight: 24,
+  }),
+  SECRET_COMBOBOX_MODE_DO_NOT_USE,
+  // emits: ['change', 'update:value', 'blur'],
   slots: [
     'notFoundContent',
     'suffixIcon',
@@ -61,20 +68,22 @@ const Select = defineComponent({
     'dropdownRender',
     'option',
     'placeholder',
+    'tagRender',
+    'maxTagPlaceholder',
   ],
   setup(props, { attrs, emit, slots, expose }) {
-    const selectRef = ref();
+    const selectRef = ref<BaseSelectRef>();
     const formItemContext = useInjectFormItemContext();
     const focus = () => {
-      if (selectRef.value) {
-        selectRef.value.focus();
-      }
+      selectRef.value?.focus();
     };
 
     const blur = () => {
-      if (selectRef.value) {
-        selectRef.value.blur();
-      }
+      selectRef.value?.blur();
+    };
+
+    const scrollTo: BaseSelectRef['scrollTo'] = arg => {
+      selectRef.value?.scrollTo(arg);
     };
 
     const mode = computed(() => {
@@ -84,7 +93,7 @@ const Select = defineComponent({
         return undefined;
       }
 
-      if (mode === Select.SECRET_COMBOBOX_MODE_DO_NOT_USE) {
+      if (mode === SECRET_COMBOBOX_MODE_DO_NOT_USE) {
         return 'combobox';
       }
 
@@ -103,19 +112,21 @@ const Select = defineComponent({
         [`${prefixCls.value}-borderless`]: !props.bordered,
       }),
     );
-    const triggerChange = (...args: any[]) => {
+    const triggerChange: SelectProps['onChange'] = (...args) => {
       emit('update:value', args[0]);
       emit('change', ...args);
       formItemContext.onFieldChange();
     };
-    const handleBlur = (e: InputEvent) => {
+    const handleBlur: SelectProps['onBlur'] = e => {
       emit('blur', e);
       formItemContext.onFieldBlur();
     };
     expose({
       blur,
       focus,
+      scrollTo,
     });
+    const isMultiple = computed(() => mode.value === 'multiple' || mode.value === 'tags');
     return () => {
       const {
         notFoundContent,
@@ -130,8 +141,6 @@ const Select = defineComponent({
       } = props;
 
       const { renderEmpty, getPopupContainer: getContextPopupContainer } = configProvider;
-
-      const isMultiple = mode.value === 'multiple' || mode.value === 'tags';
 
       // ===================== Empty =====================
       let mergedNotFound: any;
@@ -149,7 +158,7 @@ const Select = defineComponent({
       const { suffixIcon, itemIcon, removeIcon, clearIcon } = getIcons(
         {
           ...props,
-          multiple: isMultiple,
+          multiple: isMultiple.value,
           prefixCls: prefixCls.value,
         },
         slots,
@@ -195,9 +204,10 @@ const Select = defineComponent({
           dropdownRender={selectProps.dropdownRender || slots.dropdownRender}
           v-slots={{ option: slots.option }}
           transitionName={transitionName.value}
-        >
-          {slots.default?.()}
-        </RcSelect>
+          children={slots.default?.()}
+          tagRender={props.tagRender || slots.tagRender}
+          maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
+        ></RcSelect>
       );
     };
   },

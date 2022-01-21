@@ -48,6 +48,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Ax4DA0njr/TreeSelect.svg
 | treeDefaultExpandAll | 默认展开所有树节点 | boolean | false |  |
 | treeDefaultExpandedKeys | 默认展开的树节点 | string\[] \| number\[] | - |  |
 | treeExpandedKeys(v-model) | 设置展开的树节点 | string\[] \| number\[] | - |  |
+| treeLine | 是否展示线条样式，请参考 [Tree - showLine](/components/tree/#components-tree-demo-line) | boolean \| object | false | 3.0 |
 | treeNodeFilterProp | 输入项过滤对应的 treeNode 属性 | string | 'value' |  |
 | treeNodeLabelProp | 作为显示的 prop 设置 | string | 'title' |  |
 | value(v-model) | 指定当前选中的条目 | string/string\[] | - |  |

@@ -7,6 +7,9 @@
     <suffix />
     <async />
     <Highlight />
+    <treeLineVue />
+    <virtualScrollVue />
+    <customTagRenderVue />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -17,6 +20,9 @@ import Checkable from './checkable.vue';
 import Suffix from './suffix.vue';
 import Async from './async.vue';
 import Highlight from './highlight.vue';
+import treeLineVue from './tree-line.vue';
+import virtualScrollVue from './virtual-scroll.vue';
+import customTagRenderVue from './custom-tag-render.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -32,6 +38,9 @@ export default defineComponent({
     Suffix,
     Async,
     Highlight,
+    treeLineVue,
+    virtualScrollVue,
+    customTagRenderVue,
   },
   setup() {
     return {};

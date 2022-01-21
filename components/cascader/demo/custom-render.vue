@@ -16,7 +16,12 @@ For instance, add an external link after the selected value.
 
 </docs>
 <template>
-  <a-cascader v-model:value="value" :options="options" style="width: 100%">
+  <a-cascader
+    v-model:value="value"
+    placeholder="Please select"
+    :options="options"
+    style="width: 100%"
+  >
     <template #displayRender="{ labels, selectedOptions }">
       <span v-for="(label, index) in labels" :key="selectedOptions[index].value">
         <span v-if="index === labels.length - 1">
@@ -33,14 +38,8 @@ For instance, add an external link after the selected value.
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
-interface Option {
-  value: string;
-  label: string;
-  children?: Option[];
-  code?: number;
-  [key: string]: any;
-}
-const options: Option[] = [
+import type { CascaderProps } from 'ant-design-vue';
+const options: CascaderProps['options'] = [
   {
     value: 'zhejiang',
     label: 'Zhejiang',
@@ -78,7 +77,7 @@ const options: Option[] = [
 ];
 export default defineComponent({
   setup() {
-    const handleAreaClick = (e: Event, label: string, option: Option) => {
+    const handleAreaClick = (e: Event, label: string, option: CascaderProps['options'][number]) => {
       e.stopPropagation();
       console.log('clicked', label, option);
     };

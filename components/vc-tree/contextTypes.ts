@@ -12,22 +12,23 @@ import type {
   DataEntity,
   EventDataNode,
   DragNodeEvent,
-  DataNode,
   Direction,
 } from './interface';
+
+import type { DraggableConfig } from './Tree';
 
 export type NodeMouseEventParams = {
   event: MouseEvent;
   node: EventDataNode;
 };
 export type NodeDragEventParams = {
-  event: MouseEvent;
+  event: DragEvent;
   node: EventDataNode;
 };
 
 export type NodeMouseEventHandler = (e: MouseEvent, node: EventDataNode) => void;
 export type NodeDragEventHandler = (
-  e: MouseEvent,
+  e: DragEvent,
   node: DragNodeEvent,
   outsideTree?: boolean,
 ) => void;
@@ -38,12 +39,13 @@ export interface TreeContextProps {
   showIcon: boolean;
   icon: IconType;
   switcherIcon: IconType;
-  draggable: ((node: DataNode) => boolean) | boolean;
+  draggable: DraggableConfig;
+  draggingNodeKey?: Key;
   checkable: boolean;
   customCheckable: () => any;
   checkStrictly: boolean;
   disabled: boolean;
-  keyEntities: Record<Key, DataEntity>;
+  keyEntities: Record<Key, DataEntity<any>>;
   // for details see comment in Tree.state (Tree.tsx)
   dropLevelOffset?: number;
   dropContainerKey: Key | null;
@@ -79,8 +81,8 @@ export interface TreeContextProps {
   onNodeDragEnd: NodeDragEventHandler;
   onNodeDrop: NodeDragEventHandler;
   slots: {
-    title?: (data: DataNode) => any;
-    titleRender?: (data: DataNode) => any;
+    title?: (data: any) => any;
+    titleRender?: (data: any) => any;
     [key: string]: ((...args: any[]) => any) | undefined;
   };
 }

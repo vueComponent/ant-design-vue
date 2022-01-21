@@ -307,7 +307,7 @@ const Overflow = defineComponent({
       let restNode = () => null;
       const restContextProps = {
         order: displayRest ? mergedDisplayCount.value : Number.MAX_SAFE_INTEGER,
-        className: `${itemPrefixCls.value}-rest`,
+        className: `${itemPrefixCls.value} ${itemPrefixCls.value}-rest`,
         registerSize: registerOverflowSize,
         display: displayRest,
       };

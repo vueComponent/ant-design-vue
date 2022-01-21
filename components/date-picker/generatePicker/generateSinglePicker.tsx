@@ -11,6 +11,7 @@ import { getTimeProps, Components } from '.';
 import { computed, defineComponent, nextTick, onMounted, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
+import type { CommonProps, DatePickerProps } from './props';
 import { commonProps, datePickerProps } from './props';
 
 import devWarning from '../../vc-util/devWarning';
@@ -21,14 +22,15 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
   extraProps: ExtraProps,
 ) {
   function getPicker(picker?: PickerMode, displayName?: string) {
+    const comProps = {
+      ...commonProps<DateType>(),
+      ...datePickerProps<DateType>(),
+      ...extraProps,
+    };
     return defineComponent({
       name: displayName,
       inheritAttrs: false,
-      props: {
-        ...commonProps<DateType>(),
-        ...datePickerProps<DateType>(),
-        ...extraProps,
-      },
+      props: comProps,
       slots: [
         'suffixIcon',
         // 'clearIcon',
@@ -41,7 +43,11 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
         'renderExtraFooter',
         'monthCellRender',
       ],
-      setup(props, { slots, expose, attrs, emit }) {
+      setup(_props, { slots, expose, attrs, emit }) {
+        // 兼容 vue 3.2.7
+        const props = _props as unknown as CommonProps<DateType> &
+          DatePickerProps<DateType> &
+          ExtraProps;
         const formItemContext = useInjectFormItemContext();
         devWarning(
           !(props.monthCellContentRender || slots.monthCellContentRender),

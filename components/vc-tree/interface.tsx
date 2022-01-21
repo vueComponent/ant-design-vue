@@ -2,15 +2,13 @@ import type { CSSProperties, VNode } from 'vue';
 import type { TreeNodeProps } from './props';
 export type { ScrollTo } from '../vc-virtual-list/List';
 
-export interface DataNode {
+/** For fieldNames, we provides a abstract interface */
+export interface BasicDataNode {
   checkable?: boolean;
-  children?: DataNode[];
   disabled?: boolean;
   disableCheckbox?: boolean;
   icon?: IconType;
   isLeaf?: boolean;
-  key: string | number;
-  title?: any;
   selectable?: boolean;
   switcherIcon?: IconType;
 
@@ -19,6 +17,12 @@ export interface DataNode {
   style?: CSSProperties;
   slots?: Record<string, string>;
   [key: string]: any;
+}
+
+export interface DataNode extends BasicDataNode {
+  children?: DataNode[];
+  key: string | number;
+  title?: any;
 }
 
 export interface EventDataNode extends DataNode {
@@ -60,10 +64,12 @@ export interface Entity {
   children?: Entity[];
 }
 
-export interface DataEntity extends Omit<Entity, 'node' | 'parent' | 'children'> {
-  node: DataNode;
-  parent?: DataEntity;
-  children?: DataEntity[];
+export interface DataEntity<TreeDataType extends BasicDataNode = DataNode>
+  extends Omit<Entity, 'node' | 'parent' | 'children'> {
+  node: TreeDataType;
+  nodes: TreeDataType[];
+  parent?: DataEntity<TreeDataType>;
+  children?: DataEntity<TreeDataType>[];
   level: number;
 }
 
@@ -86,6 +92,8 @@ export type Direction = 'ltr' | 'rtl' | undefined;
 
 export interface FieldNames {
   title?: string;
+  /** @private Internal usage for `vc-tree-select`, safe to remove if no need */
+  _title?: string[];
   key?: string;
   children?: string;
 }

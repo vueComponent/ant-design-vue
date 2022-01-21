@@ -1,8 +1,8 @@
 import type { FunctionalComponent } from 'vue';
 
-import type { OptionGroupData } from './interface';
+import type { DefaultOptionType } from './Select';
 
-export type OptGroupProps = Omit<OptionGroupData, 'options'>;
+export type OptGroupProps = Omit<DefaultOptionType, 'options'>;
 
 export interface OptionGroupFC extends FunctionalComponent<OptGroupProps> {
   /** Legacy for check if is a Option Group */

@@ -47,6 +47,7 @@ Tree selection control.
 | treeDefaultExpandAll | Whether to expand all treeNodes by default | boolean | false |  |
 | treeDefaultExpandedKeys | Default expanded treeNodes | string\[] \| number\[] | - |  |
 | treeExpandedKeys(v-model) | Set expanded keys | string\[] \| number\[] | - |  |
+| treeLine | Show the line. Ref [Tree - showLine](/components/tree/#components-tree-demo-line) | boolean \| object | false | 3.0 |
 | treeNodeFilterProp | Will be used for filtering if `filterTreeNode` returns true | string | 'value' |  |
 | treeNodeLabelProp | Will render as content of select | string | 'title' |  |
 | value(v-model) | To set the current selected treeNode(s). | string\|string\[] | - |  |

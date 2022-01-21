@@ -96,6 +96,7 @@ const List = defineComponent({
     onScroll: PropTypes.func,
     onMousedown: PropTypes.func,
     onMouseenter: PropTypes.func,
+    onVisibleChange: Function as PropType<(visibleList: any[], fullList: any[]) => void>,
   },
   setup(props, { expose }) {
     // ================================= MISC =================================
@@ -399,6 +400,20 @@ const List = defineComponent({
       }
       return cs;
     });
+
+    // ================================ Effect ================================
+    /** We need told outside that some list not rendered */
+    watch(
+      [() => calRes.start, () => calRes.end, mergedData],
+      () => {
+        if (props.onVisibleChange) {
+          const renderList = mergedData.value.slice(calRes.start, calRes.end + 1);
+
+          props.onVisibleChange(renderList, mergedData.value);
+        }
+      },
+      { flush: 'post' },
+    );
 
     return {
       state,

@@ -1,12 +1,4 @@
 import TransBtn from '../TransBtn';
-import type {
-  LabelValueType,
-  RawValueType,
-  CustomTagProps,
-  DefaultValueType,
-  DisplayLabelValueType,
-} from '../interface/generator';
-import type { RenderNode } from '../interface';
 import type { InnerSelectorProps } from './interface';
 import Input from './Input';
 import type { Ref, PropType } from 'vue';
@@ -16,6 +8,9 @@ import pickAttrs from '../../_util/pickAttrs';
 import PropTypes from '../../_util/vue-types';
 import type { VueNode } from '../../_util/type';
 import Overflow from '../../vc-overflow';
+import type { DisplayValueType, RenderNode, CustomTagProps, RawValueType } from '../BaseSelect';
+import type { BaseOptionType } from '../Select';
+import useInjectLegacySelectContext from '../../vc-tree-select/LegacyContext';
 
 type SelectorProps = InnerSelectorProps & {
   // Icon
@@ -24,7 +19,7 @@ type SelectorProps = InnerSelectorProps & {
   // Tags
   maxTagCount?: number | 'responsive';
   maxTagTextLength?: number;
-  maxTagPlaceholder?: VueNode | ((omittedValues: LabelValueType[]) => VueNode);
+  maxTagPlaceholder?: VueNode | ((omittedValues: DisplayValueType[]) => VueNode);
   tokenSeparators?: string[];
   tagRender?: (props: CustomTagProps) => VueNode;
   onToggleOpen: any;
@@ -33,7 +28,7 @@ type SelectorProps = InnerSelectorProps & {
   choiceTransitionName?: string;
 
   // Event
-  onSelect: (value: RawValueType, option: { selected: boolean }) => void;
+  onRemove: (value: DisplayValueType) => void;
 };
 
 const props = {
@@ -49,7 +44,7 @@ const props = {
   showSearch: PropTypes.looseBool,
   autofocus: PropTypes.looseBool,
   autocomplete: PropTypes.string,
-  accessibilityIndex: PropTypes.number,
+  activeDescendantId: PropTypes.string,
   tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 
   removeIcon: PropTypes.any,
@@ -58,12 +53,12 @@ const props = {
   maxTagCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   maxTagTextLength: PropTypes.number,
   maxTagPlaceholder: PropTypes.any.def(
-    () => (omittedValues: LabelValueType[]) => `+ ${omittedValues.length} ...`,
+    () => (omittedValues: DisplayValueType[]) => `+ ${omittedValues.length} ...`,
   ),
   tagRender: PropTypes.func,
 
   onToggleOpen: { type: Function as PropType<(open?: boolean) => void> },
-  onSelect: PropTypes.func,
+  onRemove: PropTypes.func,
   onInputChange: PropTypes.func,
   onInputPaste: PropTypes.func,
   onInputKeyDown: PropTypes.func,
@@ -85,7 +80,7 @@ const SelectSelector = defineComponent<SelectorProps>({
     const measureRef = ref();
     const inputWidth = ref(0);
     const focused = ref(false);
-
+    const legacyTreeSelectContext = useInjectLegacySelectContext();
     const selectionPrefixCls = computed(() => `${props.prefixCls}-selection`);
 
     // ===================== Search ======================
@@ -111,6 +106,7 @@ const SelectSelector = defineComponent<SelectorProps>({
     // ===================== Render ======================
     // >>> Render Selector Node. Includes Item & Rest
     function defaultRenderSelector(
+      title: VueNode,
       content: VueNode,
       itemDisabled: boolean,
       closable?: boolean,
@@ -122,9 +118,7 @@ const SelectSelector = defineComponent<SelectorProps>({
             [`${selectionPrefixCls.value}-item-disabled`]: itemDisabled,
           })}
           title={
-            typeof content === 'string' || typeof content === 'number'
-              ? content.toString()
-              : undefined
+            typeof title === 'string' || typeof title === 'number' ? title.toString() : undefined
           }
         >
           <span class={`${selectionPrefixCls.value}-item-content`}>{content}</span>
@@ -143,31 +137,38 @@ const SelectSelector = defineComponent<SelectorProps>({
     }
 
     function customizeRenderSelector(
-      value: DefaultValueType,
+      value: RawValueType,
       content: VueNode,
       itemDisabled: boolean,
       closable: boolean,
       onClose: (e: MouseEvent) => void,
+      option: BaseOptionType,
     ) {
       const onMouseDown = (e: MouseEvent) => {
         onPreventMouseDown(e);
         props.onToggleOpen(!open);
       };
-
+      let originData = option;
+      // For TreeSelect
+      if (legacyTreeSelectContext.keyEntities) {
+        originData = legacyTreeSelectContext.keyEntities[value]?.node || {};
+      }
       return (
-        <span onMousedown={onMouseDown}>
+        <span key={value} onMousedown={onMouseDown}>
           {props.tagRender({
             label: content,
             value,
             disabled: itemDisabled,
             closable,
             onClose,
+            option: originData,
           })}
         </span>
       );
     }
 
-    function renderItem({ disabled: itemDisabled, label, value }: DisplayLabelValueType) {
+    function renderItem(valueItem: DisplayValueType) {
+      const { disabled: itemDisabled, label, value, option } = valueItem;
       const closable = !props.disabled && !itemDisabled;
 
       let displayLabel = label;
@@ -183,24 +184,22 @@ const SelectSelector = defineComponent<SelectorProps>({
       }
       const onClose = (event?: MouseEvent) => {
         if (event) event.stopPropagation();
-        props.onSelect(value, { selected: false });
+        props.onRemove?.(valueItem);
       };
 
       return typeof props.tagRender === 'function'
-        ? customizeRenderSelector(value, displayLabel, itemDisabled, closable, onClose)
-        : defaultRenderSelector(displayLabel, itemDisabled, closable, onClose);
+        ? customizeRenderSelector(value, displayLabel, itemDisabled, closable, onClose, option)
+        : defaultRenderSelector(label, displayLabel, itemDisabled, closable, onClose);
     }
 
-    function renderRest(omittedValues: DisplayLabelValueType[]) {
-      const {
-        maxTagPlaceholder = (omittedValues: LabelValueType[]) => `+ ${omittedValues.length} ...`,
-      } = props;
+    function renderRest(omittedValues: DisplayValueType[]) {
+      const { maxTagPlaceholder = omittedValues => `+ ${omittedValues.length} ...` } = props;
       const content =
         typeof maxTagPlaceholder === 'function'
           ? maxTagPlaceholder(omittedValues)
           : maxTagPlaceholder;
 
-      return defaultRenderSelector(content, false);
+      return defaultRenderSelector(content, content, false);
     }
 
     return () => {
@@ -214,7 +213,7 @@ const SelectSelector = defineComponent<SelectorProps>({
         disabled,
         autofocus,
         autocomplete,
-        accessibilityIndex,
+        activeDescendantId,
         tabindex,
         onInputChange,
         onInputPaste,
@@ -241,7 +240,7 @@ const SelectSelector = defineComponent<SelectorProps>({
             autofocus={autofocus}
             autocomplete={autocomplete}
             editable={inputEditable.value}
-            accessibilityIndex={accessibilityIndex}
+            activeDescendantId={activeDescendantId}
             value={inputValue.value}
             onKeydown={onInputKeyDown}
             onMousedown={onInputMouseDown}

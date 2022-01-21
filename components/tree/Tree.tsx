@@ -81,7 +81,10 @@ export interface AntTreeNodeDropEvent {
 export const treeProps = () => {
   return {
     ...vcTreeProps(),
-    showLine: { type: Boolean, default: undefined },
+    showLine: {
+      type: [Boolean, Object] as PropType<boolean | { showLeafIcon: boolean }>,
+      default: undefined,
+    },
     /** 是否支持多选 */
     multiple: { type: Boolean, default: undefined },
     /** 是否自动展开父节点 */

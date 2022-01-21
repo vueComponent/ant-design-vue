@@ -46,6 +46,14 @@ function filter(inputValue, path) {
   return path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
 }
 
+function toggleOpen(wrapper) {
+  wrapper.find('.ant-select-selector').trigger('mousedown');
+}
+
+function isOpen(wrapper) {
+  return !!wrapper.findComponent({ name: 'Trigger' }).props().popupVisible;
+}
+
 describe('Cascader', () => {
   focusTest(Cascader);
   beforeEach(() => {
@@ -65,7 +73,7 @@ describe('Cascader', () => {
   it('popup correctly when panel is open', async () => {
     const wrapper = mount(Cascader, { props: { options }, sync: false, attachTo: 'body' });
     await asyncExpect(() => {
-      wrapper.find('input').trigger('click');
+      toggleOpen(wrapper);
     });
     expect($$('.ant-cascader-menus').length).toBe(1);
     await asyncExpect(() => {
@@ -95,7 +103,7 @@ describe('Cascader', () => {
     });
 
     await asyncExpect(() => {
-      wrapper.find('input').trigger('click');
+      toggleOpen(wrapper);
     });
     expect($$('.ant-cascader-menus').length).toBe(1);
     await asyncExpect(() => {
@@ -106,9 +114,8 @@ describe('Cascader', () => {
   it('can be selected', async () => {
     const wrapper = mount(Cascader, { props: { options }, sync: false });
     await asyncExpect(() => {
-      wrapper.find('input').trigger('click');
+      toggleOpen(wrapper);
     });
-
     await asyncExpect(() => {
       $$('.ant-cascader-menu')[0].querySelectorAll('.ant-cascader-menu-item')[0].click();
     });
@@ -134,23 +141,36 @@ describe('Cascader', () => {
     });
   });
 
-  it('backspace should work with `Cascader[showSearch]`', async () => {
+  fit('backspace should work with `Cascader[showSearch]`', async () => {
     const wrapper = mount(Cascader, { props: { options, showSearch: true }, sync: false });
     await asyncExpect(() => {
       wrapper.find('input').element.value = '123';
       wrapper.find('input').trigger('input');
     });
     await asyncExpect(() => {
-      expect(wrapper.vm.inputValue).toBe('123');
+      expect(isOpen(wrapper)).toBeTruthy();
     });
     await asyncExpect(() => {
       wrapper.find('input').element.keyCode = KeyCode.BACKSPACE;
       wrapper.find('input').trigger('keydown');
     });
     await asyncExpect(() => {
-      // trigger onKeyDown will not trigger onChange by default, so the value is still '123'
-      expect(wrapper.vm.inputValue).toBe('123');
+      expect(isOpen(wrapper)).toBeTruthy();
     });
+    await asyncExpect(() => {
+      wrapper.find('input').element.value = '';
+      wrapper.find('input').trigger('input');
+    });
+    await asyncExpect(() => {
+      expect(isOpen(wrapper)).toBeTruthy();
+    });
+    // await asyncExpect(() => {
+    //   wrapper.find('input').element.keyCode = KeyCode.BACKSPACE;
+    //   wrapper.find('input').trigger('keydown');
+    // });
+    // await asyncExpect(() => {
+    //   expect(isOpen(wrapper)).toBeFalsy();
+    // }, 0);
   });
 
   describe('limit filtered item count', () => {
@@ -191,7 +211,6 @@ describe('Cascader', () => {
     });
 
     it('negative limit', async () => {
-      const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
       const wrapper = mount(Cascader, {
         props: { options, showSearch: { filter, limit: -1 } },
         sync: false,
@@ -203,9 +222,6 @@ describe('Cascader', () => {
       await asyncExpect(() => {
         expect($$('.ant-cascader-menu-item').length).toBe(2);
       }, 0);
-      expect(errorSpy).toBeCalledWith(
-        "Warning: [antdv: Cascader] 'limit' of showSearch in Cascader should be positive number or false.",
-      );
     });
   });
 });

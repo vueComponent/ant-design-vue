@@ -94,7 +94,7 @@ exports[`renders ./components/layout/demo/fixed.vue correctly 1`] = `
       <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 2;" role="menuitem" tabindex="-1" data-menu-id="3" aria-disabled="false">
         <!----><span class="ant-menu-title-content">nav 3</span>
       </li>
-      <li class="ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal" style="opacity: 0; height: 0px; overflow-y: hidden; order: 9007199254740991; pointer-events: none; position: absolute;" aria-hidden="true" role="none" data-submenu-id="$$__vc-menu-more__key">
+      <li class="ant-menu-overflow-item ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal" style="opacity: 0; height: 0px; overflow-y: hidden; order: 9007199254740991; pointer-events: none; position: absolute;" aria-hidden="true" role="none" data-submenu-id="$$__vc-menu-more__key">
         <!---->
         <div class="ant-menu-submenu-title" tabindex="-1" data-menu-id="$$__vc-menu-more__key" aria-expanded="false" aria-haspopup="true" aria-controls="$$__vc-menu-more__key-popup" aria-disabled="false"><span class="ant-menu-title-content"><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span></span><i class="ant-menu-submenu-arrow"></i></div>
         <!---->
@@ -317,7 +317,7 @@ exports[`renders ./components/layout/demo/top.vue correctly 1`] = `
       <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 2;" role="menuitem" tabindex="-1" data-menu-id="3" aria-disabled="false">
         <!----><span class="ant-menu-title-content">nav 3</span>
       </li>
-      <li class="ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal" style="opacity: 0; height: 0px; overflow-y: hidden; order: 9007199254740991; pointer-events: none; position: absolute;" aria-hidden="true" role="none" data-submenu-id="$$__vc-menu-more__key">
+      <li class="ant-menu-overflow-item ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal" style="opacity: 0; height: 0px; overflow-y: hidden; order: 9007199254740991; pointer-events: none; position: absolute;" aria-hidden="true" role="none" data-submenu-id="$$__vc-menu-more__key">
         <!---->
         <div class="ant-menu-submenu-title" tabindex="-1" data-menu-id="$$__vc-menu-more__key" aria-expanded="false" aria-haspopup="true" aria-controls="$$__vc-menu-more__key-popup" aria-disabled="false"><span class="ant-menu-title-content"><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span></span><i class="ant-menu-submenu-arrow"></i></div>
         <!---->
@@ -356,7 +356,7 @@ exports[`renders ./components/layout/demo/top-side.vue correctly 1`] = `
       <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 2;" role="menuitem" tabindex="-1" data-menu-id="3" aria-disabled="false">
         <!----><span class="ant-menu-title-content">nav 3</span>
       </li>
-      <li class="ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal" style="opacity: 0; height: 0px; overflow-y: hidden; order: 9007199254740991; pointer-events: none; position: absolute;" aria-hidden="true" role="none" data-submenu-id="$$__vc-menu-more__key">
+      <li class="ant-menu-overflow-item ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal" style="opacity: 0; height: 0px; overflow-y: hidden; order: 9007199254740991; pointer-events: none; position: absolute;" aria-hidden="true" role="none" data-submenu-id="$$__vc-menu-more__key">
         <!---->
         <div class="ant-menu-submenu-title" tabindex="-1" data-menu-id="$$__vc-menu-more__key" aria-expanded="false" aria-haspopup="true" aria-controls="$$__vc-menu-more__key-popup" aria-disabled="false"><span class="ant-menu-title-content"><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span></span><i class="ant-menu-submenu-arrow"></i></div>
         <!---->
@@ -486,7 +486,7 @@ exports[`renders ./components/layout/demo/top-side-2.vue correctly 1`] = `
       <li class="ant-menu-overflow-item ant-menu-item ant-menu-item-only-child" style="opacity: 1; order: 2;" role="menuitem" tabindex="-1" data-menu-id="3" aria-disabled="false">
         <!----><span class="ant-menu-title-content">nav 3</span>
       </li>
-      <li class="ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal" style="opacity: 0; height: 0px; overflow-y: hidden; order: 9007199254740991; pointer-events: none; position: absolute;" aria-hidden="true" role="none" data-submenu-id="$$__vc-menu-more__key">
+      <li class="ant-menu-overflow-item ant-menu-overflow-item ant-menu-overflow-item-rest ant-menu-submenu ant-menu-submenu-horizontal" style="opacity: 0; height: 0px; overflow-y: hidden; order: 9007199254740991; pointer-events: none; position: absolute;" aria-hidden="true" role="none" data-submenu-id="$$__vc-menu-more__key">
         <!---->
         <div class="ant-menu-submenu-title" tabindex="-1" data-menu-id="$$__vc-menu-more__key" aria-expanded="false" aria-haspopup="true" aria-controls="$$__vc-menu-more__key-popup" aria-disabled="false"><span class="ant-menu-title-content"><span role="img" aria-label="ellipsis" class="anticon anticon-ellipsis"><svg focusable="false" class="" data-icon="ellipsis" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"></path></svg></span></span><i class="ant-menu-submenu-arrow"></i></div>
         <!---->

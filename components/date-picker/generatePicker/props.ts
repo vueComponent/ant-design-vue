@@ -18,7 +18,7 @@ import type { SharedTimeProps } from '../../vc-picker/panels/TimePanel';
 import type { RangeDateRender, RangeInfo, RangeType } from '../../vc-picker/RangePicker';
 import type { VueNode } from '../../_util/type';
 
-function commonProps<DateType>() {
+function commonProps<DateType = any>() {
   return {
     id: String,
     dropdownClassName: String,
@@ -138,7 +138,7 @@ export interface CommonProps<DateType> {
   valueFormat?: string;
 }
 
-function datePickerProps<DateType>() {
+function datePickerProps<DateType = any>() {
   return {
     defaultPickerValue: { type: [String, Object] as PropType<DateType | string> },
     defaultValue: { type: [String, Object] as PropType<DateType | string> },

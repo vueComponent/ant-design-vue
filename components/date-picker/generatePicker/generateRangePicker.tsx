@@ -11,6 +11,7 @@ import { getTimeProps, Components } from '.';
 import { computed, defineComponent, nextTick, onMounted, ref } from 'vue';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import classNames from '../../_util/classNames';
+import type { CommonProps, RangePickerProps } from './props';
 import { commonProps, rangePickerProps } from './props';
 import type { PanelMode, RangeValue } from '../../vc-picker/interface';
 import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
@@ -41,7 +42,8 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
       'renderExtraFooter',
       // 'separator',
     ],
-    setup(props, { expose, slots, attrs, emit }) {
+    setup(_props, { expose, slots, attrs, emit }) {
+      const props = _props as unknown as CommonProps<DateType> & RangePickerProps<DateType>;
       const formItemContext = useInjectFormItemContext();
       devWarning(
         !attrs.getCalendarContainer,

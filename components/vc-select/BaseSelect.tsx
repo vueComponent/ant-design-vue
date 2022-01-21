@@ -281,6 +281,12 @@ export default defineComponent({
     /** Used for component focused management */
     const [mockFocused, setMockFocused, cancelSetMockFocused] = useDelayReset();
 
+    const focus = () => {
+      selectorRef.value?.focus();
+    };
+    const blur = () => {
+      selectorRef.value?.blur();
+    };
     expose({
       focus,
       blur,

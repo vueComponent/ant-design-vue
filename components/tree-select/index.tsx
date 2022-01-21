@@ -266,6 +266,7 @@ const TreeSelect = defineComponent({
             ...slots,
             treeCheckable: () => <span class={`${prefixCls.value}-tree-checkbox-inner`} />,
           }}
+          maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
         />
       );
     };

@@ -69,6 +69,7 @@ const Select = defineComponent({
     'option',
     'placeholder',
     'tagRender',
+    'maxTagPlaceholder',
   ],
   setup(props, { attrs, emit, slots, expose }) {
     const selectRef = ref<BaseSelectRef>();
@@ -205,6 +206,7 @@ const Select = defineComponent({
           transitionName={transitionName.value}
           children={slots.default?.()}
           tagRender={props.tagRender || slots.tagRender}
+          maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
         ></RcSelect>
       );
     };

@@ -268,6 +268,7 @@ export default defineComponent({
           [],
           missingValues,
         ];
+        return;
       }
 
       const keyPathValues = toPathKeys(existValues);
@@ -286,7 +287,6 @@ export default defineComponent({
     const deDuplicatedValues = computed(() => {
       const checkedKeys = toPathKeys(checkedValues.value);
       const deduplicateKeys = formatStrategyValues(checkedKeys, pathKeyEntities.value);
-
       return [...missingCheckedValues.value, ...getValueByKeyPath(deduplicateKeys)];
     });
 

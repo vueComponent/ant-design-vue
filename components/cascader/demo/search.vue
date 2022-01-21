@@ -28,6 +28,7 @@ Search and select options directly.
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 import type { CascaderProps } from 'ant-design-vue';
+import type { ShowSearchType } from 'ant-design-vue/es/cascader';
 const options: CascaderProps['options'] = [
   {
     value: 'zhejiang',
@@ -69,7 +70,7 @@ const options: CascaderProps['options'] = [
 ];
 export default defineComponent({
   setup() {
-    const filter = (inputValue: string, path: Option[]) => {
+    const filter: ShowSearchType['filter'] = (inputValue, path) => {
       return path.some(option => option.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1);
     };
 

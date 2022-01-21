@@ -77,7 +77,7 @@ const options: CascaderProps['options'] = [
 ];
 export default defineComponent({
   setup() {
-    const handleAreaClick = (e: Event, label: string, option: Option) => {
+    const handleAreaClick = (e: Event, label: string, option: CascaderProps['options'][number]) => {
       e.stopPropagation();
       console.log('clicked', label, option);
     };

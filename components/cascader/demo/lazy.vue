@@ -45,7 +45,7 @@ export default defineComponent({
       },
     ]);
 
-    const loadData = (selectedOptions: Option[]) => {
+    const loadData: CascaderProps['loadData'] = selectedOptions => {
       const targetOption = selectedOptions[selectedOptions.length - 1];
       targetOption.loading = true;
 

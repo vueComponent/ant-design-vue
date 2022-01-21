@@ -18,7 +18,7 @@ export default function Checkbox({
 }: CheckboxProps) {
   const { customSlots, checkable } = useInjectCascader();
 
-  const mergedCheckable = checkable.value === undefined ? customSlots.value.checkable : checkable;
+  const mergedCheckable = checkable.value !== false ? customSlots.value.checkable : checkable.value;
   const customCheckbox =
     typeof mergedCheckable === 'function'
       ? mergedCheckable()

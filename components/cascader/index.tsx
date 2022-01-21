@@ -24,7 +24,7 @@ import type { ValueType } from '../vc-cascader/Cascader';
 // - Hover opacity style
 // - Search filter match case
 
-export { BaseOptionType, DefaultOptionType };
+export type { BaseOptionType, DefaultOptionType, ShowSearchType };
 
 export type FieldNamesType = FieldNames;
 
@@ -134,11 +134,6 @@ const Cascader = defineComponent({
     // =================== Warning =====================
     if (process.env.NODE_ENV !== 'production') {
       watchEffect(() => {
-        devWarning(
-          props.popupClassName === undefined,
-          'Cascader',
-          '`popupClassName` is deprecated. Please use `dropdownClassName` instead.',
-        );
         devWarning(
           !props.multiple || !props.displayRender || !slots.displayRender,
           'Cascader',
@@ -269,6 +264,7 @@ const Cascader = defineComponent({
             checkable: () => <span class={`${cascaderPrefixCls.value}-checkbox-inner`} />,
           }}
           displayRender={props.displayRender || slots.displayRender}
+          maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
           onChange={handleChange}
           onBlur={handleBlur}
           v-slots={slots}

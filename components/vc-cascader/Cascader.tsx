@@ -17,10 +17,10 @@ import useMissingValues from './hooks/useMissingValues';
 import { formatStrategyValues, toPathOptions } from './utils/treeUtil';
 import { conductCheck } from '../vc-tree/utils/conductUtil';
 import useDisplayValues from './hooks/useDisplayValues';
-import { warning } from '../vc-util/warning';
 import { useProvideCascader } from './context';
 import OptionList from './OptionList';
 import { BaseSelect } from '../vc-select';
+import devWarning from '../vc-util/devWarning';
 
 export interface ShowSearchType<OptionType extends BaseOptionType = DefaultOptionType> {
   filter?: (inputValue: string, options: OptionType[], fieldNames: FieldNames) => boolean;
@@ -81,7 +81,10 @@ function baseCascaderProps<OptionType extends BaseOptionType = DefaultOptionType
     checkable: { type: Boolean, default: undefined },
 
     // Search
-    showSearch: { type: [Boolean, Object] as PropType<boolean | ShowSearchType<OptionType>> },
+    showSearch: {
+      type: [Boolean, Object] as PropType<boolean | ShowSearchType<OptionType>>,
+      default: undefined as boolean | ShowSearchType<OptionType>,
+    },
     searchValue: String,
     onSearch: Function as PropType<(value: string) => void>,
 
@@ -101,7 +104,14 @@ function baseCascaderProps<OptionType extends BaseOptionType = DefaultOptionType
     /** @deprecated Use `dropdownClassName` instead */
     popupClassName: String,
     dropdownClassName: String,
-    dropdownMenuColumnStyle: Object as PropType<CSSProperties>,
+    dropdownMenuColumnStyle: {
+      type: Object as PropType<CSSProperties>,
+      default: undefined as CSSProperties,
+    },
+
+    /** @deprecated Use `dropdownStyle` instead */
+    popupStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+    dropdownStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
 
     /** @deprecated Use `placement` instead */
     popupPlacement: String as PropType<Placement>,
@@ -266,7 +276,11 @@ export default defineComponent({
       const { checkedKeys, halfCheckedKeys } = conductCheck(keyPathValues, true, ketPathEntities);
 
       // Convert key back to value cells
-      return [getValueByKeyPath(checkedKeys), getValueByKeyPath(halfCheckedKeys), missingValues];
+      [checkedValues.value, halfCheckedValues.value, missingCheckedValues.value] = [
+        getValueByKeyPath(checkedKeys),
+        getValueByKeyPath(halfCheckedKeys),
+        missingValues,
+      ];
     });
 
     const deDuplicatedValues = computed(() => {
@@ -371,21 +385,30 @@ export default defineComponent({
     // ============================ Open ============================
     if (process.env.NODE_ENV !== 'production') {
       watchEffect(() => {
-        warning(
+        devWarning(
           !props.onPopupVisibleChange,
+          'Cascader',
           '`popupVisibleChange` is deprecated. Please use `dropdownVisibleChange` instead.',
         );
-        warning(
+        devWarning(
           props.popupVisible === undefined,
+          'Cascader',
           '`popupVisible` is deprecated. Please use `open` instead.',
         );
-        warning(
+        devWarning(
           props.popupClassName === undefined,
+          'Cascader',
           '`popupClassName` is deprecated. Please use `dropdownClassName` instead.',
         );
-        warning(
+        devWarning(
           props.popupPlacement === undefined,
+          'Cascader',
           '`popupPlacement` is deprecated. Please use `placement` instead.',
+        );
+        devWarning(
+          props.popupStyle === undefined,
+          'Cascader',
+          '`popupStyle` is deprecated. Please use `dropdownStyle` instead.',
         );
       });
     }
@@ -393,6 +416,8 @@ export default defineComponent({
     const mergedOpen = computed(() => (props.open !== undefined ? props.open : props.popupVisible));
 
     const mergedDropdownClassName = computed(() => props.dropdownClassName || props.popupClassName);
+
+    const mergedDropdownStyle = computed(() => props.dropdownStyle || props.popupStyle || {});
 
     const mergedPlacement = computed(() => props.placement || props.popupPlacement);
 
@@ -514,7 +539,7 @@ export default defineComponent({
           id={mergedId}
           prefixCls={props.prefixCls}
           dropdownMatchSelectWidth={false}
-          dropdownStyle={dropdownStyle}
+          dropdownStyle={{ ...mergedDropdownStyle.value, ...dropdownStyle }}
           // Value
           displayValues={displayValues.value}
           onDisplayValuesChange={onDisplayValuesChange}

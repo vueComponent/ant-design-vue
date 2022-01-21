@@ -71,7 +71,7 @@ export default defineComponent({
     const value = ref<string[]>([]);
     const text = ref<string>('Unselect');
 
-    const onChange = (_value: string, selectedOptions: Option[]) => {
+    const onChange: CascaderProps['onChange'] = (_value, selectedOptions) => {
       text.value = selectedOptions.map(o => o.label).join(', ');
     };
 

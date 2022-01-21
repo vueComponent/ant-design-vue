@@ -39,7 +39,7 @@ import type { TabsProps } from 'ant-design-vue';
 export default defineComponent({
   setup() {
     const mode = ref<TabsProps['tabPosition']>('top');
-    const activeKey = ref('1');
+    const activeKey = ref(1);
     const callback = (val: string) => {
       console.log(val);
     };

@@ -336,7 +336,7 @@ export default defineComponent({
         inputType: 'input',
         value: fixControlledValue(stateValue.value),
         handleReset,
-        focused: focused.value && props.disabled,
+        focused: focused.value && !props.disabled,
       };
 
       return (

@@ -1,9 +1,7 @@
-import supportsPassive from '../../_util/supportsPassive';
 import type { Ref } from 'vue';
-import { watch, onMounted } from 'vue';
+import { onBeforeUnmount, watch, onMounted } from 'vue';
 
 const SMOOTH_PTG = 14 / 15;
-
 export default function useMobileTouchMove(
   inVirtual: Ref<boolean>,
   listRef: Ref<HTMLDivElement | undefined>,
@@ -19,15 +17,7 @@ export default function useMobileTouchMove(
 
   const cleanUpEvents = () => {
     if (element) {
-      element.removeEventListener(
-        'touchmove',
-        onTouchMove,
-        supportsPassive
-          ? ({
-              passive: false,
-            } as EventListenerOptions)
-          : false,
-      );
+      element.removeEventListener('touchmove', onTouchMove);
       element.removeEventListener('touchend', onTouchEnd);
     }
   };
@@ -68,47 +58,28 @@ export default function useMobileTouchMove(
       touchY = Math.ceil(e.touches[0].pageY);
 
       element = e.target as HTMLElement;
-      element!.addEventListener(
-        'touchmove',
-        onTouchMove,
-        supportsPassive
-          ? ({
-              passive: false,
-            } as EventListenerOptions)
-          : false,
-      );
+      element!.addEventListener('touchmove', onTouchMove, { passive: false });
       element!.addEventListener('touchend', onTouchEnd);
     }
   };
+  const noop = () => {};
 
   onMounted(() => {
+    document.addEventListener('touchmove', noop, { passive: false });
     watch(
       inVirtual,
       val => {
-        listRef.value.removeEventListener(
-          'touchstart',
-          onTouchStart,
-          supportsPassive
-            ? ({
-                passive: false,
-              } as EventListenerOptions)
-            : false,
-        );
+        listRef.value.removeEventListener('touchstart', onTouchStart);
         cleanUpEvents();
         clearInterval(interval);
         if (val) {
-          listRef.value.addEventListener(
-            'touchstart',
-            onTouchStart,
-            supportsPassive
-              ? ({
-                  passive: false,
-                } as EventListenerOptions)
-              : false,
-          );
+          listRef.value.addEventListener('touchstart', onTouchStart, { passive: false });
         }
       },
       { immediate: true },
     );
+  });
+  onBeforeUnmount(() => {
+    document.removeEventListener('touchmove', noop);
   });
 }

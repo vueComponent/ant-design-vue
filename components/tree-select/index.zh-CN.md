@@ -56,12 +56,13 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Ax4DA0njr/TreeSelect.svg
 
 ### 事件
 
-| 事件名称   | 说明                   | 回调参数                      |
-| ---------- | ---------------------- | ----------------------------- |
-| change     | 选中树节点时调用此函数 | function(value, label, extra) |
-| search     | 文本框值变化时回调     | function(value: string)       |
-| select     | 被选中时调用           | function(value, node, extra)  |
-| treeExpand | 展开节点时调用         | function(expandedKeys)        |
+| 事件名称              | 说明                   | 回调参数                      | 版本 |
+| --------------------- | ---------------------- | ----------------------------- | ---- |
+| change                | 选中树节点时调用此函数 | function(value, label, extra) |      |
+| search                | 文本框值变化时回调     | function(value: string)       |      |
+| select                | 被选中时调用           | function(value, node, extra)  |      |
+| treeExpand            | 展开节点时调用         | function(expandedKeys)        |      |
+| dropdownVisibleChange | 展开下拉菜单的回调     | function(open)                | 3.0  |
 
 ### Tree 方法
 

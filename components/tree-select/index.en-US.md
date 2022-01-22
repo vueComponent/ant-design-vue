@@ -55,12 +55,13 @@ Tree selection control.
 
 ### Events
 
-| Events Name | Description | Arguments |
-| --- | --- | --- |
-| change | A callback function, can be executed when selected treeNodes or input value change | function(value, label, extra) |
-| search | A callback function, can be executed when the search input changes. | function(value: string) |
-| select | A callback function, can be executed when you select a treeNode. | function(value, node, extra) |
-| treeExpand | A callback function, can be executed when treeNode expanded | function(expandedKeys) |
+| Events Name | Description | Arguments | Version |
+| --- | --- | --- | --- |
+| change | A callback function, can be executed when selected treeNodes or input value change | function(value, label, extra) |  |
+| search | A callback function, can be executed when the search input changes. | function(value: string) |  |
+| select | A callback function, can be executed when you select a treeNode. | function(value, node, extra) |  |
+| treeExpand | A callback function, can be executed when treeNode expanded | function(expandedKeys) |  |
+| dropdownVisibleChange | Called when dropdown open | function(open) | 3.0 |
 
 ### Tree Methods
 

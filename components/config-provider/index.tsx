@@ -161,6 +161,7 @@ export const configProviderProps = {
   },
   csp: {
     type: Object as PropType<CSPConfig>,
+    default: undefined as CSPConfig,
   },
   input: {
     type: Object as PropType<{ autocomplete: string }>,

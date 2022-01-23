@@ -1,7 +1,7 @@
 import type { RequiredMark } from '../../form/Form';
 import type { ComputedRef, UnwrapRef } from 'vue';
 import { computed, inject } from 'vue';
-import type { ConfigProviderProps, Direction, SizeType } from '../../config-provider';
+import type { ConfigProviderProps, CSPConfig, Direction, SizeType } from '../../config-provider';
 import { defaultConfigProvider } from '../../config-provider';
 import type { VueNode } from '../type';
 
@@ -27,6 +27,7 @@ export default (
   getPopupContainer: ComputedRef<ConfigProviderProps['getPopupContainer']>;
   getPrefixCls: ConfigProviderProps['getPrefixCls'];
   autocomplete: ComputedRef<string>;
+  csp: ComputedRef<CSPConfig>;
 } => {
   const configProvider = inject<UnwrapRef<ConfigProviderProps>>(
     'configProvider',
@@ -52,6 +53,7 @@ export default (
   );
   const size = computed(() => props.size || configProvider.componentSize);
   const autocomplete = computed(() => props.autocomplete || configProvider.input?.autocomplete);
+  const csp = computed(() => configProvider.csp);
   return {
     configProvider,
     prefixCls,
@@ -69,5 +71,6 @@ export default (
     rootPrefixCls,
     getPrefixCls: configProvider.getPrefixCls,
     autocomplete,
+    csp,
   };
 };

@@ -44,6 +44,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
 | subMenuOpenDelay | 用户鼠标进入子菜单后开启延时，单位：秒 | number | 0 |
 | theme | 主题颜色 | string: `light` `dark` | `light` |
 | overflowedIndicator | 自定义 Menu 折叠时的图标 | DOM | `<span>···</span>` |
+| triggerSubMenuAction | 修改 Menu 子菜单的触发方式 | `click` \| `hover` | `hover` |
 
 ### Menu 事件
 

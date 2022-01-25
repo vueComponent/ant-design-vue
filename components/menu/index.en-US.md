@@ -44,6 +44,7 @@ More layouts with navigation: [Layout](/components/layout).
 | subMenuOpenDelay | delay time to show submenu when mouse enter, unit: second | number | 0 |
 | theme | color theme of the menu | string: `light` `dark` | `light` |
 | overflowedIndicator | Customized icon when menu is collapsed | DOM | `<span>···</span>` |
+| triggerSubMenuAction | method of trigger submenu | `click` \| `hover` | `hover` |
 
 ### Menu Events
 

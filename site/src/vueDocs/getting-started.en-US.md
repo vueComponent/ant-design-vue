@@ -46,9 +46,9 @@ import Antd from 'ant-design-vue';
 import App from './App';
 import 'ant-design-vue/dist/antd.css';
 
-const app = createApp();
+const app = createApp(App);
 
-app.use(Antd);
+app.use(Antd).mount('#app');
 ```
 
 The above imports Antd entirely. Note that CSS file needs to be imported separately.
@@ -104,9 +104,10 @@ And this plugin can load styles too, read [usage](https://github.com/ant-design/
 > FYI, babel-plugin-import's `style` option will importing some global reset styles, don't use it if you don't need those styles. You can import styles manually via `import 'ant-design-vue/dist/antd.css'` and override the global reset styles.
 
 If you use Vite, you can use [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components) to load on demand. However, this plugin can only deal with components. Others such as message should be loaded manually:
+
 ```ts
-import { message } from "ant-design-vue"
-import "ant-design-vue/es/message/style/css" //use ant-design-vue/es instead of ant-design-vue/lib
+import { message } from 'ant-design-vue';
+import 'ant-design-vue/es/message/style/css'; //use ant-design-vue/es instead of ant-design-vue/lib
 ```
 
 ## Customization

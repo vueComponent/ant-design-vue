@@ -10,6 +10,7 @@
     <treeLineVue />
     <virtualScrollVue />
     <customTagRenderVue />
+    <replaceFieldsVue />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -23,6 +24,7 @@ import Highlight from './highlight.vue';
 import treeLineVue from './tree-line.vue';
 import virtualScrollVue from './virtual-scroll.vue';
 import customTagRenderVue from './custom-tag-render.vue';
+import replaceFieldsVue from './replaceFields.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -41,6 +43,7 @@ export default defineComponent({
     treeLineVue,
     virtualScrollVue,
     customTagRenderVue,
+    replaceFieldsVue,
   },
   setup() {
     return {};

@@ -38,7 +38,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/qtJm4yt45/AutoComplete.svg
 | disabled | 是否禁用 | boolean | false |  |
 | dropdownMatchSelectWidth | 下拉菜单和选择器同宽。默认将设置 `min-width`，当值小于选择框宽度时会被忽略。false 时会关闭虚拟滚动 | boolean \| number | true |  |
 | filterOption | 是否根据输入项进行筛选。当其为一个函数时，会接收 `inputValue` `option` 两个参数，当 `option` 符合筛选条件时，应返回 `true`，反之则返回 `false`。 | boolean or function(inputValue, option) | true |  |
-| optionLabelProp | 回填到选择框的 Option 的属性值，默认是 Option 的子元素。比如在子元素需要高亮效果时，此值可以设为 `value`。 | string | `children` |  |
 | placeholder | 输入框提示 | string \| slot | - |  |
 | v-model:value | 指定当前选中的条目 | string\|string\[]\|{ key: string, label: string\|vNodes }\|Array&lt;{ key: string, label: string\|vNodes }> | 无 |  |
 | defaultOpen | 是否默认展开下拉菜单 | boolean | - |  |
@@ -61,3 +60,31 @@ cover: https://gw.alipayobjects.com/zos/alicdn/qtJm4yt45/AutoComplete.svg
 | ------- | -------- | ---- |
 | blur()  | 移除焦点 |
 | focus() | 获取焦点 |
+
+## FAQ
+
+### v2 的部分属性为何在 v3 中没有了？
+
+AutoComplete 组件是一个支持自动提示的 Input 组件，因而其不具有 `labelInValue` 等影响 value 展示的属性。在 v2 版本，AutoComplete 实现存在输入值如果遇到 `value` 与 `label` 相同时无法映射的问题。 v3 中不再支持 `label` 为值的输入形态。
+
+此外为了统一 API，`dataSource` 改为 `options` 你可以如下转换：
+
+#### v2
+
+```ts
+dataSource = ['light', 'bamboo'];
+// or
+dataSource = [
+  { value: 'light', text: 'Light' },
+  { value: 'bamboo', text: 'Bamboo' },
+];
+```
+
+#### v3
+
+```ts
+options = [
+  { value: 'light', label: 'Light' },
+  { value: 'bamboo', label: 'Bamboo' },
+];
+```

@@ -35,12 +35,17 @@
 
 为了让组件拥有更好的性能和可维护性，我们几乎使用 TS + Composition Api 重构了所有组件，目前还有极个别的组件没有重构，这类组件会在接下来逐步重构，剩余的组件不会有破坏性更新，所以不用担心未来的升级成本。
 
-3.0 版本重构后较大的更新有 `Tree` `TreeSelect` `DatePicker` `TimePicker` `Calendar` `Form` `Table`，其它组件也有相应功能的更新，你可以查看 ChangeLog 进一步了解详情。
+3.0 版本重构后较大的更新有 `Tree` `TreeSelect` `DatePicker` `TimePicker` `Calendar` `Form` `Table` `AutoComplete`，其它组件也有相应功能的更新，你可以查看 ChangeLog 进一步了解详情。
 
 - `Tree` `TreeSelect`
 
   - 新增了虚拟滚动，废弃使用 `a-tree-node` `a-tree-select-node` 构建节点，使用 `treeData` 属性替代，提升组件性能。
   - 废弃 `scopedSlots` `slots` 自定义渲染节点，使用 `v-slot:title` 替换，提升易用性，避免插槽配置膨胀，同时也避免了插槽冲突问题。
+
+- `AutoComplete`
+
+  - 不再支持 `optionLabelProp`，请直接设置 Option `value` 属性。
+  - 选项与 Select 对齐，请使用 `options` 代替 `dataSource`。
 
 - `Table`
 

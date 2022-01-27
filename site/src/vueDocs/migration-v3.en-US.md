@@ -41,6 +41,11 @@ Major updates after the 3.0 version refactoring include `Tree` `TreeSelect` `Dat
   - Added virtual scrolling, discarded using `a-tree-node` `a-tree-select-node` to build nodes, using `treeData` property instead to improve component performance.
   - Deprecated `scopedSlots` `slots` custom rendering node, and replace it with `v-slot:title` to improve ease of use, avoid slot configuration expansion, and also avoid slot conflicts.
 
+- `AutoComplete`
+
+  - no longer support `optionLabelProp`. Please set Option `value` directly.
+  - options definition align with Select. Please use `options` instead of `dataSource`.
+
 - `Table`
 
   - Removed the `rowSelection.hideDefaultSelections` property of Table, please use `SELECTION_ALL` and `SELECTION_INVERT` in `rowSelection.selections` instead, [custom options](/components/table/#components-table-demo- row-selection-custom).

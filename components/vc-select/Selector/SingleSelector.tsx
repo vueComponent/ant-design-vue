@@ -9,6 +9,7 @@ import useInjectLegacySelectContext from '../../vc-tree-select/LegacyContext';
 interface SelectorProps extends InnerSelectorProps {
   inputElement: VueNode;
   activeValue: string;
+  optionLabelRender: Function;
 }
 const props = {
   inputElement: PropTypes.any,
@@ -28,6 +29,7 @@ const props = {
   tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   activeValue: PropTypes.string,
   backfill: PropTypes.looseBool,
+  optionLabelRender: PropTypes.func,
   onInputChange: PropTypes.func,
   onInputPaste: PropTypes.func,
   onInputKeyDown: PropTypes.func,
@@ -98,6 +100,7 @@ const SingleSelector = defineComponent<SelectorProps>({
         activeDescendantId,
         open,
         tabindex,
+        optionLabelRender,
         onInputKeyDown,
         onInputMouseDown,
         onInputChange,
@@ -125,7 +128,7 @@ const SingleSelector = defineComponent<SelectorProps>({
         //   titleNode = treeSelectContext.value.slots.titleRender(item.option?.data || {});
         // }
       } else {
-        titleNode = item?.label;
+        titleNode = optionLabelRender && item ? optionLabelRender(item.option) : item?.label;
       }
       return (
         <>

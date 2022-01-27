@@ -70,6 +70,7 @@ const Select = defineComponent({
     'placeholder',
     'tagRender',
     'maxTagPlaceholder',
+    'optionLabel', // donot use, maybe remove it
   ],
   setup(props, { attrs, emit, slots, expose }) {
     const selectRef = ref<BaseSelectRef>();
@@ -206,6 +207,7 @@ const Select = defineComponent({
           transitionName={transitionName.value}
           children={slots.default?.()}
           tagRender={props.tagRender || slots.tagRender}
+          optionLabelRender={slots.optionLabel}
           maxTagPlaceholder={props.maxTagPlaceholder || slots.maxTagPlaceholder}
         ></RcSelect>
       );

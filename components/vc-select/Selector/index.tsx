@@ -46,6 +46,7 @@ export interface SelectorProps {
   maxTagTextLength?: number;
   maxTagPlaceholder?: VueNode | ((omittedValues: DisplayValueType[]) => VueNode);
   tagRender?: (props: CustomTagProps) => VueNode;
+  optionLabelRender?: (props: Record<string, any>) => VueNode;
 
   /** Check if `tokenSeparators` contains `\n` or `\r\n` */
   tokenWithEnter?: boolean;
@@ -100,6 +101,7 @@ const Selector = defineComponent<SelectorProps>({
     maxTagTextLength: PropTypes.number,
     maxTagPlaceholder: PropTypes.any,
     tagRender: PropTypes.func,
+    optionLabelRender: PropTypes.func,
 
     /** Check if `tokenSeparators` contains `\n` or `\r\n` */
     tokenWithEnter: PropTypes.looseBool,

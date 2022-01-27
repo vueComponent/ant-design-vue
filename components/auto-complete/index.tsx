@@ -14,10 +14,10 @@ function isSelectOptionOrSelectOptGroup(child: any): boolean {
 }
 
 const autoCompleteProps = {
-  ...selectProps(),
+  ...omit(selectProps(), ['loading', 'mode', 'optionLabelProp', 'labelInValue']),
   dataSource: PropTypes.array,
   dropdownMenuStyle: PropTypes.style,
-  optionLabelProp: PropTypes.string,
+  // optionLabelProp: PropTypes.string,
   dropdownMatchSelectWidth: { type: [Number, Boolean], default: true },
 };
 
@@ -38,7 +38,7 @@ const AutoComplete = defineComponent({
     choiceTransitionName: PropTypes.string.def('zoom'),
     autofocus: PropTypes.looseBool,
     backfill: PropTypes.looseBool,
-    optionLabelProp: PropTypes.string.def('children'),
+    // optionLabelProp: PropTypes.string.def('children'),
     filterOption: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]).def(false),
     defaultActiveFirstOption: PropTypes.looseBool.def(true),
   },
@@ -121,19 +121,22 @@ const AutoComplete = defineComponent({
         }
       }
 
-      const selectProps = {
-        ...omit(props, ['dataSource', 'optionLabelProp']),
-        ...attrs,
-        mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
-        // optionLabelProp,
-        getInputElement,
-        notFoundContent,
-        // placeholder: '',
-        class: cls,
-        ref: selectRef,
-      };
+      const selectProps = omit(
+        {
+          ...props,
+          ...(attrs as any),
+          mode: Select.SECRET_COMBOBOX_MODE_DO_NOT_USE,
+          // optionLabelProp,
+          getInputElement,
+          notFoundContent,
+          // placeholder: '',
+          class: cls,
+          ref: selectRef,
+        },
+        ['dataSource', 'loading'],
+      );
       return (
-        <Select {...selectProps} v-slots={{ option: slots.option }}>
+        <Select {...selectProps} v-slots={omit(slots, ['default', 'dataSource', 'options'])}>
           {optionChildren}
         </Select>
       );

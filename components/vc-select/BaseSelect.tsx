@@ -157,6 +157,7 @@ export const baseSelectPropsWithoutPrivate = () => {
   return {
     showSearch: { type: Boolean, default: undefined },
     tagRender: { type: Function as PropType<(props: CustomTagProps) => any> },
+    optionLabelRender: { type: Function as PropType<(option: Record<string, any>) => any> },
     direction: { type: String as PropType<'ltr' | 'rtl'> },
 
     // MISC
@@ -664,6 +665,7 @@ export default defineComponent({
         // Tags
         tokenSeparators,
         tagRender,
+        optionLabelRender,
 
         // Events
         onPopupScroll,
@@ -830,6 +832,7 @@ export default defineComponent({
                   mode={mode}
                   activeDescendantId={activeDescendantId}
                   tagRender={tagRender}
+                  optionLabelRender={optionLabelRender}
                   values={displayValues}
                   open={mergedOpen.value}
                   onToggleOpen={onToggleOpen}

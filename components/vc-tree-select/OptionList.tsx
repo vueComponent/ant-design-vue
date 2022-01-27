@@ -152,7 +152,7 @@ export default defineComponent({
           // >>> Select item
           case KeyCode.ENTER: {
             const { selectable, value } = activeEntity.value?.node || {};
-            if (selectable !== false) {
+            if (activeEntity.value && selectable !== false) {
               onInternalSelect(null, {
                 node: { key: activeKey.value },
                 selected: !legacyContext.checkedKeys.includes(value),

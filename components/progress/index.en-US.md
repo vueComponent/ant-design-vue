@@ -18,17 +18,18 @@ If it will take a long time to complete an operation, you can use `Progress` to 
 
 Properties that shared by all types.
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| format | The template function of the content | function(percent, successPercent) | (percent) => percent + `%` |
-| percent | To set the completion percentage | number | 0 |
-| showInfo | Whether to display the progress value and the status icon | boolean | true |
-| status | To set the status of the Progress, options: `success` `exception` `normal` `active`(line only) | string | - |
-| strokeColor | The color of progress bar | string | - |
-| strokeLinecap | To set the style of the progress linecap | `round` \| `square` | `round` |
-| success | Configs of successfully progress bar | { percent: number, strokeColor: string } | - |
-| trailColor | The color of unfilled part | string | - |
-| type | To set the type, options: `line` `circle` `dashboard` | string | `line` |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| format | The template function of the content | function(percent, successPercent) | (percent) => percent + `%` |  |
+| percent | To set the completion percentage | number | 0 |  |
+| showInfo | Whether to display the progress value and the status icon | boolean | true |  |
+| status | To set the status of the Progress, options: `success` `exception` `normal` `active`(line only) | string | - |  |
+| strokeColor | The color of progress bar | string | - |  |
+| strokeLinecap | To set the style of the progress linecap | `round` \| `square` | `round` |  |
+| success | Configs of successfully progress bar | { percent: number, strokeColor: string } | - |  |
+| trailColor | The color of unfilled part | string | - |  |
+| type | To set the type, options: `line` `circle` `dashboard` | string | `line` |  |
+| title | html dom title | string | - | 3.0 |
 
 ### `type="line"`
 

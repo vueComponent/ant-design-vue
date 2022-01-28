@@ -10,6 +10,19 @@
 
 ---
 
+## 3.0.0-beta.9
+
+`2022-01-28`
+
+🔥🔥🔥 Happy New Year 🔥🔥🔥
+
+- 🌟 `Progress` add title attribute to avoid title being overwritten by internal title [#4929](https://github.com/vueComponent/ant-design-vue/issues/4929)
+- 🐞 Fix `Input` focus state, style border issue [#5188](https://github.com/vueComponent/ant-design-vue/issues/5188)
+- 🌟 Optimize the scrolling effect of virtual scrolling under mobile [#5191](https://github.com/vueComponent/ant-design-vue/issues/5191)
+- 🐞 Fix the style issue of `Tree` component when dragging [6d4248](https://github.com/vueComponent/ant-design-vue/commit/6d4248d046a420aa6a1ddfeb78632e4405b91e51)
+- 🐞 Fix `TreeSelect` when the content is empty, the Enter button fills the empty node problem [#5217](https://github.com/vueComponent/ant-design-vue/issues/5217)
+- 🐞 Fix `Button` block style invalid after setting size [#5219](https://github.com/vueComponent/ant-design-vue/issues/5219)
+
 ## 3.0.0-beta.8
 
 `2022-01-21`

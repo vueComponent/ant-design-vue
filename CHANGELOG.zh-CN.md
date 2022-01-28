@@ -10,6 +10,19 @@
 
 ---
 
+## 3.0.0-beta.9
+
+`2022-01-28`
+
+🔥🔥🔥 新年快乐 🔥🔥🔥
+
+- 🌟 `Progress` 添加 title 属性，避免 title 被内部 title 覆盖问题 [#4929](https://github.com/vueComponent/ant-design-vue/issues/4929)
+- 🐞 修复 `Input` focus 状态时，样式边框问题 [#5188](https://github.com/vueComponent/ant-design-vue/issues/5188)
+- 🌟 优化虚拟滚动在 mobile 下的滚动效果 [#5191](https://github.com/vueComponent/ant-design-vue/issues/5191)
+- 🐞 修复 `Tree` 组件在拖拽时的样式问题 [6d4248](https://github.com/vueComponent/ant-design-vue/commit/6d4248d046a420aa6a1ddfeb78632e4405b91e51)
+- 🐞 修复 `TreeSelect` 在空内容时，回车按键填充空节点问题 [#5217](https://github.com/vueComponent/ant-design-vue/issues/5217)
+- 🐞 修复 `Button` 在设置 size 后，block 样式失效问题 [#5219](https://github.com/vueComponent/ant-design-vue/issues/5219)
+
 ## 3.0.0-beta.8
 
 `2022-01-21`

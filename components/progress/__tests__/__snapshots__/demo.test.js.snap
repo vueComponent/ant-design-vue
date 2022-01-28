@@ -13,7 +13,7 @@ exports[`renders ./components/progress/demo/circle.vue correctly 1`] = `
       <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-    </svg><span class="ant-progress-text" title="75%">75%</span></div>
+    </svg><span class="ant-progress-text">75%</span></div>
 </div>
 <div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-exception">
   <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
@@ -59,7 +59,7 @@ exports[`renders ./components/progress/demo/circle-dynamic.vue correctly 1`] = `
         <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-      </svg><span class="ant-progress-text" title="0%">0%</span></div>
+      </svg><span class="ant-progress-text">0%</span></div>
   </div>
   <div class="ant-btn-group"><button class="ant-btn ant-btn-icon-only" type="button"><span role="img" aria-label="minus" class="anticon anticon-minus"><svg focusable="false" class="" data-icon="minus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path></svg></span></button><button class="ant-btn ant-btn-icon-only" type="button"><span role="img" aria-label="plus" class="anticon anticon-plus"><svg focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg></span></button></div>
 </div>
@@ -78,7 +78,7 @@ exports[`renders ./components/progress/demo/circle-mini.vue correctly 1`] = `
       <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-    </svg><span class="ant-progress-text" title="30%">30%</span></div>
+    </svg><span class="ant-progress-text">30%</span></div>
 </div>
 <div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-exception">
   <div class="ant-progress-inner" style="width: 80px; height: 80px; font-size: 18px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
@@ -124,7 +124,7 @@ exports[`renders ./components/progress/demo/dashboard.vue correctly 1`] = `
         <path d="M 50,50 m 0,47
    a 47,47 0 1 1 0,-94
    a 47,47 0 1 1 0,94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-      </svg><span class="ant-progress-text" title="75%">75%</span></div>
+      </svg><span class="ant-progress-text">75%</span></div>
   </div>
 </div>
 `;
@@ -137,7 +137,7 @@ exports[`renders ./components/progress/demo/dynamic.vue correctly 1`] = `
         <div class="ant-progress-bg" style="width: 0%; height: 8px;"></div>
         <!---->
       </div>
-    </div><span class="ant-progress-text" title="0%">0%</span>
+    </div><span class="ant-progress-text">0%</span>
   </div>
   <div class="ant-btn-group"><button class="ant-btn ant-btn-icon-only" type="button"><span role="img" aria-label="minus" class="anticon anticon-minus"><svg focusable="false" class="" data-icon="minus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M872 474H152c-4.4 0-8 3.6-8 8v60c0 4.4 3.6 8 8 8h720c4.4 0 8-3.6 8-8v-60c0-4.4-3.6-8-8-8z"></path></svg></span></button><button class="ant-btn ant-btn-icon-only" type="button"><span role="img" aria-label="plus" class="anticon anticon-plus"><svg focusable="false" class="" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg></span></button></div>
 </div>
@@ -157,7 +157,7 @@ exports[`renders ./components/progress/demo/format.vue correctly 1`] = `
         <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-      </svg><span class="ant-progress-text" title="75 Days">75 Days</span></div>
+      </svg><span class="ant-progress-text">75 Days</span></div>
   </div>
   <div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-success">
     <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
@@ -171,7 +171,7 @@ exports[`renders ./components/progress/demo/format.vue correctly 1`] = `
         <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-      </svg><span class="ant-progress-text" title="Done">Done</span></div>
+      </svg><span class="ant-progress-text">Done</span></div>
   </div>
   <div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-normal">
     <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
@@ -198,7 +198,7 @@ exports[`renders ./components/progress/demo/gradient-line.vue correctly 1`] = `
         <div class="ant-progress-bg" style="width: 99.9%; height: 8px;"></div>
         <!---->
       </div>
-    </div><span class="ant-progress-text" title="99.9%">99.9%</span>
+    </div><span class="ant-progress-text">99.9%</span>
   </div>
   <div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-active">
     <div class="ant-progress-outer">
@@ -206,7 +206,7 @@ exports[`renders ./components/progress/demo/gradient-line.vue correctly 1`] = `
         <div class="ant-progress-bg" style="width: 99.9%; height: 8px;"></div>
         <!---->
       </div>
-    </div><span class="ant-progress-text" title="99.9%">99.9%</span>
+    </div><span class="ant-progress-text">99.9%</span>
   </div>
   <div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-normal">
     <div class="ant-progress-inner ant-progress-circle-gradient" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
@@ -225,7 +225,7 @@ exports[`renders ./components/progress/demo/gradient-line.vue correctly 1`] = `
         <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-      </svg><span class="ant-progress-text" title="90%">90%</span></div>
+      </svg><span class="ant-progress-text">90%</span></div>
   </div>
   <div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-success">
     <div class="ant-progress-inner ant-progress-circle-gradient" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
@@ -256,7 +256,7 @@ exports[`renders ./components/progress/demo/line.vue correctly 1`] = `
       <div class="ant-progress-bg" style="width: 30%; height: 8px;"></div>
       <!---->
     </div>
-  </div><span class="ant-progress-text" title="30%">30%</span>
+  </div><span class="ant-progress-text">30%</span>
 </div>
 <div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-active">
   <div class="ant-progress-outer">
@@ -264,7 +264,7 @@ exports[`renders ./components/progress/demo/line.vue correctly 1`] = `
       <div class="ant-progress-bg" style="width: 50%; height: 8px;"></div>
       <!---->
     </div>
-  </div><span class="ant-progress-text" title="50%">50%</span>
+  </div><span class="ant-progress-text">50%</span>
 </div>
 <div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-default ant-progress-status-exception">
   <div class="ant-progress-outer">
@@ -301,7 +301,7 @@ exports[`renders ./components/progress/demo/line-mini.vue correctly 1`] = `
         <div class="ant-progress-bg" style="width: 30%; height: 6px;"></div>
         <!---->
       </div>
-    </div><span class="ant-progress-text" title="30%">30%</span>
+    </div><span class="ant-progress-text">30%</span>
   </div>
   <div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-small ant-progress-status-active">
     <div class="ant-progress-outer">
@@ -309,7 +309,7 @@ exports[`renders ./components/progress/demo/line-mini.vue correctly 1`] = `
         <div class="ant-progress-bg" style="width: 50%; height: 6px;"></div>
         <!---->
       </div>
-    </div><span class="ant-progress-text" title="50%">50%</span>
+    </div><span class="ant-progress-text">50%</span>
   </div>
   <div class="ant-progress ant-progress-line ant-progress-show-info ant-progress-small ant-progress-status-exception">
     <div class="ant-progress-outer">
@@ -338,7 +338,7 @@ exports[`renders ./components/progress/demo/linecap.vue correctly 1`] = `
         <div class="ant-progress-bg" style="width: 75%; height: 8px; border-radius: 0;"></div>
         <!---->
       </div>
-    </div><span class="ant-progress-text" title="75%">75%</span>
+    </div><span class="ant-progress-text">75%</span>
   </div>
   <div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-normal">
     <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
@@ -352,7 +352,7 @@ exports[`renders ./components/progress/demo/linecap.vue correctly 1`] = `
         <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="square" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-      </svg><span class="ant-progress-text" title="75%">75%</span></div>
+      </svg><span class="ant-progress-text">75%</span></div>
   </div>
   <div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-normal">
     <div class="ant-progress-inner" style="width: 120px; height: 120px; font-size: 24px;"><svg class="ant-progress-circle" viewBox="0 0 100 100">
@@ -366,7 +366,7 @@ exports[`renders ./components/progress/demo/linecap.vue correctly 1`] = `
         <path d="M 50,50 m 0,47
    a 47,47 0 1 1 0,-94
    a 47,47 0 1 1 0,94" stroke="" stroke-linecap="square" stroke-width="6" opacity="0" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 0px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-      </svg><span class="ant-progress-text" title="75%">75%</span></div>
+      </svg><span class="ant-progress-text">75%</span></div>
   </div>
 </div>
 `;
@@ -380,7 +380,7 @@ exports[`renders ./components/progress/demo/segment.vue correctly 1`] = `
         <div class="ant-progress-bg" style="width: 60%; height: 8px;"></div>
         <div class="ant-progress-success-bg" style="width: 30%; height: 8px;"></div>
       </div>
-    </div><span class="ant-progress-text" title="60%">60%</span>
+    </div><span class="ant-progress-text">60%</span>
   </div>
   <!---->
   <div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-normal">
@@ -395,7 +395,7 @@ exports[`renders ./components/progress/demo/segment.vue correctly 1`] = `
         <path d="M 50,50 m 0,-47
    a 47,47 0 1 1 0,94
    a 47,47 0 1 1 0,-94" stroke="" stroke-linecap="round" stroke-width="6" opacity="1" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 88.59291283123217px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-      </svg><span class="ant-progress-text" title="60%">60%</span></div>
+      </svg><span class="ant-progress-text">60%</span></div>
   </div>
   <!---->
   <div class="ant-progress ant-progress-circle ant-progress-show-info ant-progress-default ant-progress-status-normal">
@@ -410,7 +410,7 @@ exports[`renders ./components/progress/demo/segment.vue correctly 1`] = `
         <path d="M 50,50 m 0,47
    a 47,47 0 1 1 0,-94
    a 47,47 0 1 1 0,94" stroke="" stroke-linecap="round" stroke-width="6" opacity="1" fill-opacity="0" class="ant-progress-circle-path" style="stroke: #52C41A; stroke-dasharray: 88.59291283123217px 295.3097094374406px; stroke-dashoffset: -0px; transition: stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s;"></path>
-      </svg><span class="ant-progress-text" title="60%">60%</span></div>
+      </svg><span class="ant-progress-text">60%</span></div>
   </div>
 </div>
 `;
@@ -420,7 +420,7 @@ exports[`renders ./components/progress/demo/steps.vue correctly 1`] = `
   <div class="ant-progress-steps-outer">
     <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
     <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text" title="50%">50%</span>
+    <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text">50%</span>
   </div>
 </div>
 <br>
@@ -430,7 +430,7 @@ exports[`renders ./components/progress/demo/steps.vue correctly 1`] = `
     <div class="ant-progress-steps-item ant-progress-steps-item-active" style="width: 14px; height: 8px;"></div>
     <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div>
     <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div>
-    <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text" title="30%">30%</span>
+    <div class="ant-progress-steps-item" style="width: 14px; height: 8px;"></div><span class="ant-progress-text">30%</span>
   </div>
 </div>
 <br>

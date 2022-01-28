@@ -81,11 +81,7 @@ export default defineComponent({
       } else if (progressStatus.value === 'success') {
         text = isLineType ? <CheckCircleFilled /> : <CheckOutlined />;
       }
-      return (
-        <span class={`${prefixCls.value}-text`} title={typeof text === 'string' ? text : undefined}>
-          {text}
-        </span>
-      );
+      return <span class={`${prefixCls.value}-text`}>{text}</span>;
     };
 
     return () => {

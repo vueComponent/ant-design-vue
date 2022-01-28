@@ -63,7 +63,7 @@ export default defineComponent({
     });
 
     const renderProcessInfo = () => {
-      const { showInfo, format, type, percent } = props;
+      const { showInfo, format, type, percent, title } = props;
       const successPercent = getSuccessPercent(props);
       if (!showInfo) return null;
 
@@ -81,11 +81,18 @@ export default defineComponent({
       } else if (progressStatus.value === 'success') {
         text = isLineType ? <CheckCircleFilled /> : <CheckOutlined />;
       }
-      return <span class={`${prefixCls.value}-text`}>{text}</span>;
+      return (
+        <span
+          class={`${prefixCls.value}-text`}
+          title={title === undefined && typeof text === 'string' ? text : undefined}
+        >
+          {text}
+        </span>
+      );
     };
 
     return () => {
-      const { type, steps, strokeColor } = props;
+      const { type, steps, strokeColor, title } = props;
       const progressInfo = renderProcessInfo();
 
       let progress: VueNode;
@@ -118,7 +125,11 @@ export default defineComponent({
         [`${prefixCls.value}-status-${progressStatus.value}`]: true,
       };
 
-      return <div class={classNames}>{progress}</div>;
+      return (
+        <div class={classNames} title={title}>
+          {progress}
+        </div>
+      );
     };
   },
 });

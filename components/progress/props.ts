@@ -42,6 +42,7 @@ export const progressProps = () => ({
   steps: PropTypes.number,
   /** @deprecated Use `success` instead */
   successPercent: PropTypes.number,
+  title: String,
 });
 
 export type ProgressProps = Partial<ExtractPropTypes<ReturnType<typeof progressProps>>>;

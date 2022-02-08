@@ -124,9 +124,9 @@ const OptionList = defineComponent({
     );
 
     // ========================== Values ==========================
-    const onSelectValue = (value?: RawValueType) => {
+    const onSelectValue = async (value?: RawValueType) => {
       if (value !== undefined) {
-        props.onSelect(value, { selected: !props.rawValues.has(value) });
+        await props.onSelect(value, { selected: !props.rawValues.has(value) });
       }
 
       // Single mode should always close by select
@@ -341,9 +341,9 @@ const OptionList = defineComponent({
                       }
                       setActive(itemIndex);
                     }}
-                    onClick={e => {
+                    onClick={async e => {
                       if (!disabled) {
-                        onSelectValue(value);
+                        await onSelectValue(value);
                       }
                       if (otherProps.onClick) {
                         otherProps.onClick(e);

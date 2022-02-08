@@ -421,7 +421,7 @@ export default defineComponent({
     };
 
     // ========================= OptionList =========================
-    const triggerSelect = (val: RawValueType, selected: boolean) => {
+    const triggerSelect = async (val: RawValueType, selected: boolean) => {
       const getSelectEnt = (): [RawValueType | LabelInValueType, DefaultOptionType] => {
         const option = getMixedOption(val);
         return [
@@ -438,7 +438,7 @@ export default defineComponent({
 
       if (selected && props.onSelect) {
         const [wrappedValue, option] = getSelectEnt();
-        props.onSelect(wrappedValue, option);
+        await props.onSelect(wrappedValue, option);
       } else if (!selected && props.onDeselect) {
         const [wrappedValue, option] = getSelectEnt();
         props.onDeselect(wrappedValue, option);
@@ -446,7 +446,7 @@ export default defineComponent({
     };
 
     // Used for OptionList selection
-    const onInternalSelect = (val, info) => {
+    const onInternalSelect = async (val, info) => {
       let cloneValues: (RawValueType | DisplayValueType)[];
 
       // Single mode always trigger select only with option list
@@ -459,7 +459,7 @@ export default defineComponent({
       }
 
       triggerChange(cloneValues);
-      triggerSelect(val, mergedSelect);
+      await triggerSelect(val, mergedSelect);
 
       // Clean search value if single or configured
       if (props.mode === 'combobox') {

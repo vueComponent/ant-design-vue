@@ -1,5 +1,6 @@
-import { mount } from '@vue/test-utils';
-import { asyncExpect } from '../../../tests/utils';
+import { createApp, render, onErrorCaptured, h, nextTick } from 'vue';
+import { mount, config } from '@vue/test-utils';
+import { asyncExpect, sleep } from '../../../tests/utils';
 import Select from '..';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import focusTest from '../../../tests/shared/focusTest';
@@ -175,6 +176,41 @@ describe('Select', () => {
         },
       });
       expect(wrapper.html()).toMatchSnapshot();
+    });
+  });
+
+  describe('Select Event', () => {
+    it('error thrown in [onSelect]', async () => {
+      const ERROR_MSG = 'onSelect error';
+      const onSelect = jest.fn().mockRejectedValue(ERROR_MSG);
+      const onErrorCaptured = jest.fn();
+
+      const wrapper = mount({
+        errorCaptured(err) {
+          onErrorCaptured(err);
+          return false;
+        },
+        render() {
+          return (
+            <div>
+              <Select getPopupContainer={n => n.parentNode} onSelect={onSelect}>
+                <Select.Option value="1">option 1</Select.Option>
+              </Select>
+            </div>
+          );
+        },
+      });
+
+      // open dropdown
+      wrapper.find('.ant-select-selector').trigger('mousedown');
+      await sleep();
+      expect(onErrorCaptured).not.toHaveBeenCalled();
+
+      // select option
+      wrapper.find('.ant-select-item-option').trigger('click');
+      await sleep(0);
+      expect(onErrorCaptured).toHaveBeenCalledTimes(1);
+      expect(onErrorCaptured).toHaveBeenLastCalledWith(ERROR_MSG);
     });
   });
 });

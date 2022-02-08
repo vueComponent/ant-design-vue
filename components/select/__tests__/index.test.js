@@ -1,5 +1,4 @@
-import { createApp, render, onErrorCaptured, h, nextTick } from 'vue';
-import { mount, config } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
 import { asyncExpect, sleep } from '../../../tests/utils';
 import Select from '..';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';

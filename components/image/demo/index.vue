@@ -4,6 +4,7 @@
     <fallback />
     <placeholder />
     <preview-group />
+    <controlled-preview />
   </demo-sort>
 </template>
 
@@ -12,6 +13,7 @@ import Basic from './basic.vue';
 import Fallback from './fallback.vue';
 import Placeholder from './placeholder.vue';
 import PreviewGroup from './previewGroup.vue';
+import ControlledPreview from './controlledPreview.vue';
 
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
@@ -24,6 +26,7 @@ export default defineComponent({
     Fallback,
     Placeholder,
     PreviewGroup,
+    ControlledPreview,
   },
 });
 </script>

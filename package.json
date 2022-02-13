@@ -70,8 +70,7 @@
   },
   "homepage": "https://www.antdv.com/",
   "peerDependencies": {
-    "@vue/compiler-sfc": ">=3.1.0",
-    "vue": ">=3.1.0"
+    "vue": ">=3.2.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -110,7 +109,7 @@
     "@vitejs/plugin-vue-jsx": "^1.1.6",
     "@vue/babel-plugin-jsx": "^1.0.0",
     "@vue/cli-plugin-eslint": "^5.0.0-0",
-    "@vue/compiler-sfc": "^3.1.0",
+    "@vue/compiler-sfc": "^3.2.0",
     "@vue/eslint-config-prettier": "^6.0.0",
     "@vue/eslint-config-typescript": "^9.0.0",
     "@vue/test-utils": "^2.0.0-0",
@@ -219,7 +218,7 @@
     "umi-request": "^1.3.5",
     "url-loader": "^3.0.0",
     "vite": "^2.3.8",
-    "vue": "^3.1.0",
+    "vue": "^3.2.0",
     "vue-antd-md-loader": "^1.2.1-beta.1",
     "vue-clipboard2": "0.3.3",
     "vue-drag-resize": "^2.0.3",

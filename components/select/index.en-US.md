@@ -47,6 +47,7 @@ Select component to select value from options.
 | optionFilterProp | Which prop value of option will be used for filter if filterOption is true | string | value |  |
 | optionLabelProp | Which prop value of option will render as content of select. | string | `children` \| `label`(when use options) |  |
 | placeholder | Placeholder of select | string\|slot | - |  |
+| searchValue | The current input "search" text | string | - |  |
 | showSearch | Whether show search input in single mode. | boolean | false |  |
 | showArrow | Whether to show the drop-down arrow | boolean | true |  |
 | size | Size of Select input. `default` `large` `small` | string | default |  |

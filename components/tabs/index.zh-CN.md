@@ -28,10 +28,10 @@ Ant Design 依次提供了三级选项卡，分别用于不同的场景。
 | animated | 是否使用动画切换 Tabs，在 `tabPosition=top | bottom` 时有效 | boolean \| {inkBar:boolean, tabPane:boolean} | true, 当 type="card" 时为 false |  |
 | centered | 标签居中展示 | boolean | false | 3.0 |
 | hideAdd | 是否隐藏加号图标，在 `type="editable-card"` 时有效 | boolean | false |  |
-| size | 大小，提供 `large` `default` 和 `small` 三种大小 | string | 'default' |  |
+| size | 大小，提供 `large` `default` 和 `small` 三种大小 | string | `default` |  |
 | tabBarStyle | tab bar 的样式对象 | object | - |  |
-| tabPosition | 页签位置，可选值有 `top` `right` `bottom` `left` | string | 'top' |  |
-| type | 页签的基本样式，可选 `line`、`card` `editable-card` 类型 | string | 'line' |  |
+| tabPosition | 页签位置，可选值有 `top` `right` `bottom` `left` | string | `top` |  |
+| type | 页签的基本样式，可选 `line`、`card` `editable-card` 类型 | string | `line` |  |
 | tabBarGutter | tabs 之间的间隙 | number | 无 |  |
 
 ### Tabs 插槽

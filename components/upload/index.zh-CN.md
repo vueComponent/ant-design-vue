@@ -22,7 +22,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/QaeBt_ZMg/Upload.svg
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | accept | 接受上传的文件类型, 详见 [input accept Attribute](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/file#accept) | string | 无 |  |
 | action | 上传的地址 | string\|(file) => `Promise` | 无 |  |
-| method | 上传请求的 http method | string | 'post' | 1.5.0 |
+| method | 上传请求的 http method | string | `post` | 1.5.0 |
 | directory | 支持上传文件夹（[caniuse](https://caniuse.com/#feat=input-file-directory)） | boolean | false |  |
 | beforeUpload | 上传文件之前的钩子，参数为上传的文件，若返回 `false` 则停止上传。支持返回一个 Promise 对象，Promise 对象 reject 时则停止上传，resolve 时开始上传（ resolve 传入 `File` 或 `Blob` 对象则上传 resolve 传入对象）。**注意：IE9 不支持该方法**。 | (file, fileList) => `boolean | Promise` | 无 |  |
 | customRequest | 通过覆盖默认的上传行为，可以自定义自己的上传实现 | Function | 无 |  |
@@ -30,9 +30,9 @@ cover: https://gw.alipayobjects.com/zos/alicdn/QaeBt_ZMg/Upload.svg
 | disabled | 是否禁用 | boolean | false |  |
 | fileList | 已经上传的文件列表（受控） | object\[] | 无 |  |
 | headers | 设置上传的请求头部，IE10 以上有效 | object | 无 |  |
-| listType | 上传列表的内建样式，支持三种基本样式 `text`, `picture` 和 `picture-card` | string | 'text' |  |
+| listType | 上传列表的内建样式，支持三种基本样式 `text`, `picture` 和 `picture-card` | string | `text` |  |
 | multiple | 是否支持多选文件，`ie10+` 支持。开启后按住 ctrl 可选择多个文件。 | boolean | false |  |
-| name | 发到后台的文件参数名 | string | 'file' |  |
+| name | 发到后台的文件参数名 | string | `file` |  |
 | previewFile | 自定义文件预览逻辑 | (file: File \| Blob) => Promise<dataURL: string> | 无 | 1.5.0 |
 | showUploadList | 是否展示 uploadList, 可设为一个对象，用于单独设定 showPreviewIcon 和 showRemoveIcon | Boolean or { showPreviewIcon?: boolean, showRemoveIcon?: boolean } | true |  |
 | supportServerRender | 服务端渲染时需要打开这个 | boolean | false |  |

@@ -26,6 +26,7 @@ Tree selection control.
 | filterTreeNode | Whether to filter treeNodes by input value. The value of `treeNodeFilterProp` is used for filtering by default. | boolean\|Function(inputValue: string, treeNode: TreeNode) (should return boolean) | Function |  |
 | getPopupContainer | To set the container of the dropdown menu. The default is to create a `div` element in `body`, you can reset it to the scrolling area and make a relative reposition. | Function(triggerNode) | () => document.body |  |
 | labelInValue | whether to embed label in value, turn the format of value from `string` to `{value: string, label: VNode, halfChecked: string[]}` | boolean | false |  |
+| listHeight | Config popup height | number | 256 |  |
 | loadData | Load data asynchronously. | function(node) | - |  |
 | maxTagCount | Max tag count to show | number | - |  |
 | maxTagPlaceholder | Placeholder for not showing tags | slot/function(omittedValues) | - |  |
@@ -51,6 +52,7 @@ Tree selection control.
 | treeNodeFilterProp | Will be used for filtering if `filterTreeNode` returns true | string | 'value' |  |
 | treeNodeLabelProp | Will render as content of select | string | 'title' |  |
 | value(v-model) | To set the current selected treeNode(s). | string\|string\[] | - |  |
+| virtual | Disable virtual scroll when set to false | boolean | true | 3.0 |
 | title | custom title | slot |  | 3.0.0 |
 
 ### Events

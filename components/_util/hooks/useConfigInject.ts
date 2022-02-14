@@ -47,9 +47,14 @@ export default (
   const getPopupContainer = computed(
     () => props.getPopupContainer || configProvider.getPopupContainer,
   );
-  const virtual = computed(() => props.virtual ?? configProvider.virtual);
+
   const dropdownMatchSelectWidth = computed<boolean | number>(
     () => props.dropdownMatchSelectWidth ?? configProvider.dropdownMatchSelectWidth,
+  );
+  const virtual = computed(
+    () =>
+      (props.virtual === undefined ? configProvider.virtual !== false : props.virtual !== false) &&
+      dropdownMatchSelectWidth.value !== false,
   );
   const size = computed(() => props.size || configProvider.componentSize);
   const autocomplete = computed(() => props.autocomplete || configProvider.input?.autocomplete);

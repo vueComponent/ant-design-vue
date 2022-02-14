@@ -229,9 +229,9 @@ const TreeSelect = defineComponent({
       return (
         <VcTreeSelect
           {...attrs}
+          {...selectProps}
           virtual={virtual.value}
           dropdownMatchSelectWidth={dropdownMatchSelectWidth.value}
-          {...selectProps}
           id={id}
           fieldNames={fieldNames}
           ref={treeSelectRef}

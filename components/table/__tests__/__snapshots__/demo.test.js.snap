@@ -6063,8 +6063,7 @@ exports[`renders ./components/table/demo/summary.vue correctly 1`] = `
       </div>
     </div>
   </div>
-</div>
-<br>
+</div><br>
 <div class="ant-table-wrapper">
   <div class="ant-spin-nested-loading">
     <!---->

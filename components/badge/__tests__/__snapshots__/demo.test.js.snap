@@ -2,10 +2,8 @@
 
 exports[`renders ./components/badge/demo/basic.vue correctly 1`] = `
 <span class="ant-badge"><a href="#" class="head-example"></a><sup data-show="true" class="ant-scroll-number ant-badge-count" title="5"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>
-<!----></span>
-<span class="ant-badge"><a href="#" class="head-example"></a><sup data-show="true" class="ant-scroll-number ant-badge-count" title="0"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">0</p></span></sup>
-<!----></span>
-<span class="ant-badge"><a href="#" class="head-example"></a><span style="color: rgb(245, 34, 45);" role="img" aria-label="clock-circle" class="anticon anticon-clock-circle ant-scroll-number-custom-component"><svg focusable="false" class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span>
+<!----></span><span class="ant-badge"><a href="#" class="head-example"></a><sup data-show="true" class="ant-scroll-number ant-badge-count" title="0"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">0</p></span></sup>
+<!----></span><span class="ant-badge"><a href="#" class="head-example"></a><span style="color: rgb(245, 34, 45);" role="img" aria-label="clock-circle" class="anticon anticon-clock-circle ant-scroll-number-custom-component"><svg focusable="false" class="" data-icon="clock-circle" width="1em" height="1em" fill="currentColor" aria-hidden="true" viewBox="64 64 896 896"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M686.7 638.6L544.1 535.5V288c0-4.4-3.6-8-8-8H488c-4.4 0-8 3.6-8 8v275.4c0 2.6 1.2 5 3.3 6.5l165.4 120.6c3.6 2.6 8.6 1.8 11.2-1.7l28.6-39c2.6-3.7 1.8-8.7-1.8-11.2z"></path></svg></span>
 <!----></span>
 `;
 
@@ -59,18 +57,13 @@ exports[`renders ./components/badge/demo/link.vue correctly 1`] = `
 
 exports[`renders ./components/badge/demo/no-wrapper.vue correctly 1`] = `
 <span class="ant-badge ant-badge-not-a-wrapper"><!----><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="25"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">2</p></span><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>
-<!----></span>
-<span class="ant-badge ant-badge-not-a-wrapper"><!----><sup style="background-color: rgb(255, 255, 255); color: rgb(153, 153, 153); box-shadow: 0 0 0 1px #d9d9d9 inset;" data-show="true" class="ant-scroll-number ant-badge-count" title="4"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">4</p></span></sup>
-<!----></span>
-<span class="ant-badge ant-badge-not-a-wrapper"><!----><sup style="background-color: rgb(82, 196, 26);" data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="109">99+</sup><!----></span>
+<!----></span><span class="ant-badge ant-badge-not-a-wrapper"><!----><sup style="background-color: rgb(255, 255, 255); color: rgb(153, 153, 153); box-shadow: 0 0 0 1px #d9d9d9 inset;" data-show="true" class="ant-scroll-number ant-badge-count" title="4"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">4</p></span></sup>
+<!----></span><span class="ant-badge ant-badge-not-a-wrapper"><!----><sup style="background-color: rgb(82, 196, 26);" data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="109">99+</sup><!----></span>
 `;
 
 exports[`renders ./components/badge/demo/overflow.vue correctly 1`] = `
 <span class="ant-badge"><a href="#" class="head-example"></a><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="99"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">9</p></span><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">9</p></span></sup>
-<!----></span>
-<span class="ant-badge"><a href="#" class="head-example"></a><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="100">99+</sup><!----></span>
-<span class="ant-badge"><a href="#" class="head-example"></a><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="99">10+</sup><!----></span>
-<span class="ant-badge"><a href="#" class="head-example"></a><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="1000">999+</sup><!----></span>
+<!----></span><span class="ant-badge"><a href="#" class="head-example"></a><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="100">99+</sup><!----></span><span class="ant-badge"><a href="#" class="head-example"></a><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="99">10+</sup><!----></span><span class="ant-badge"><a href="#" class="head-example"></a><sup data-show="true" class="ant-scroll-number ant-badge-count ant-badge-multiple-words" title="1000">999+</sup><!----></span>
 `;
 
 exports[`renders ./components/badge/demo/ribbon.vue correctly 1`] = `
@@ -87,23 +80,7 @@ exports[`renders ./components/badge/demo/ribbon.vue correctly 1`] = `
 </div>
 `;
 
-exports[`renders ./components/badge/demo/status.vue correctly 1`] = `
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text"><!----></span></span>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text"><!----></span></span>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-default"></span><span class="ant-badge-status-text"><!----></span></span>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-processing"></span><span class="ant-badge-status-text"><!----></span></span>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text"><!----></span></span>
-<br>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">Success</span></span>
-<br>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">Error</span></span>
-<br>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-default"></span><span class="ant-badge-status-text">Default</span></span>
-<br>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-processing"></span><span class="ant-badge-status-text">Processing</span></span>
-<br>
-<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">warning</span></span>
-`;
+exports[`renders ./components/badge/demo/status.vue correctly 1`] = `<span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text"><!----></span></span><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text"><!----></span></span><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-default"></span><span class="ant-badge-status-text"><!----></span></span><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-processing"></span><span class="ant-badge-status-text"><!----></span></span><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text"><!----></span></span><br><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-success"></span><span class="ant-badge-status-text">Success</span></span><br><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-error"></span><span class="ant-badge-status-text">Error</span></span><br><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-default"></span><span class="ant-badge-status-text">Default</span></span><br><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-processing"></span><span class="ant-badge-status-text">Processing</span></span><br><span class="ant-badge ant-badge-status ant-badge-not-a-wrapper"><span class="ant-badge-status-dot ant-badge-status-warning"></span><span class="ant-badge-status-text">warning</span></span>`;
 
 exports[`renders ./components/badge/demo/title.vue correctly 1`] = `
 <div id="components-badge-demo-title"><span class="ant-badge"><a href="#" class="head-example"></a><sup data-show="true" class="ant-scroll-number ant-badge-count" title="Custom hover text"><span class="ant-scroll-number-only" style="transition: none;"><p class="ant-scroll-number-only-unit current">5</p></span></sup>

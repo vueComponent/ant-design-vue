@@ -125,9 +125,7 @@ exports[`renders ./components/collapse/demo/extra.vue correctly 1`] = `
     </div>
     <!---->
   </div>
-</div>
-<br>
-<span>Expand Icon Position:</span>
+</div><br><span>Expand Icon Position:</span>
 <div class="ant-select ant-select-single ant-select-show-arrow">
   <!---->
   <!---->

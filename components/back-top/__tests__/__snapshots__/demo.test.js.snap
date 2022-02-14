@@ -1,10 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders ./components/back-top/demo/basic.vue correctly 1`] = `
-" Scroll down to see the bottom-right
-<strong style=\\"color: rgba(64, 64, 64, 0.6);\\">gray</strong>
- button."
-`;
+exports[`renders ./components/back-top/demo/basic.vue correctly 1`] = `<!----> Scroll down to see the bottom-right <strong style="color: rgba(64, 64, 64, 0.6);">gray</strong> button.`;
 
 exports[`renders ./components/back-top/demo/custom.vue correctly 1`] = `
 <div id="components-back-top-demo-custom">

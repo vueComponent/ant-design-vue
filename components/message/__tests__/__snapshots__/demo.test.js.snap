@@ -43,10 +43,7 @@ exports[`renders ./components/message/demo/thenable.vue correctly 1`] = `
 exports[`renders ./components/message/demo/update.vue correctly 1`] = `
 <button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Open the message box (update by key)</span>
-</button>
-<br>
-<br>
-<button class="ant-btn ant-btn-primary" type="button">
+</button><br><br><button class="ant-btn ant-btn-primary" type="button">
   <!----><span>Open the message box (update by reactive)</span>
 </button>
 `;

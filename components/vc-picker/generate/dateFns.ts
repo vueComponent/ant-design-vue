@@ -23,6 +23,7 @@ import {
   format as formatDate,
   parse as parseDate,
   isDate,
+  isMatch,
 } from 'date-fns';
 import * as Locale from 'date-fns/locale';
 import type { GenerateConfig } from '.';
@@ -104,7 +105,7 @@ const generateConfig: GenerateConfig<Date> = {
         const date = parseDate(formatText, format, new Date(), {
           locale: Locale[dealLocal(locale)],
         });
-        if (isValid(date) && formatText.length === format.length) {
+        if (isValid(date) && isMatch(formatText, format)) {
           return date;
         }
       }

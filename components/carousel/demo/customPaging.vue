@@ -32,7 +32,7 @@ Custom paging display
 import { defineComponent } from 'vue';
 
 const baseUrl =
-  'https://raw.githubusercontent.com/vueComponent/ant-design-vue/next/components/vc-slick/assets/img/react-slick/';
+  'https://raw.githubusercontent.com/vueComponent/ant-design-vue/master/components/vc-slick/assets/img/react-slick/';
 export default defineComponent({
   setup() {
     const getImgUrl = (i: number) => {

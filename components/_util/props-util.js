@@ -38,7 +38,7 @@ const slotHasProp = (slot, prop) => {
 const filterProps = (props, propsData = {}) => {
   const res = {};
   Object.keys(props).forEach(k => {
-    if (k in propsData || props[k] !== undefined) {
+    if (k in propsData && props[k] !== undefined) {
       res[k] = props[k];
     }
   });

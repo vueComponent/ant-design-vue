@@ -9,7 +9,15 @@ import type {
   CSSProperties,
   InjectionKey,
 } from 'vue';
-import { ref, defineComponent, onMounted, onBeforeUnmount, provide, toRef, computed } from 'vue';
+import {
+  onBeforeMount,
+  ref,
+  defineComponent,
+  onBeforeUnmount,
+  provide,
+  toRef,
+  computed,
+} from 'vue';
 import warning from '../_util/warning';
 import type { Breakpoint, ScreenMap } from '../_util/responsiveObserve';
 import ResponsiveObserve, { responsiveArray } from '../_util/responsiveObserve';
@@ -78,7 +86,6 @@ function getFilledItem(node: VNode, span: number | undefined, rowRestCol: number
     clone = cloneElement(node, {
       span: rowRestCol,
     });
-
     warning(
       span === undefined,
       'Descriptions',
@@ -95,7 +102,6 @@ function getRows(children: VNode[], column: number) {
 
   let tmpRow: VNode[] = [];
   let rowRestCol = column;
-
   childNodes.forEach((node, index) => {
     const span: number | undefined = node.props?.span;
     const mergedSpan = span || 1;
@@ -155,17 +161,13 @@ const Descriptions = defineComponent({
   Item: DescriptionsItem,
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('descriptions', props);
-
     let token: number;
-
     const screens = ref<ScreenMap>({});
-
-    onMounted(() => {
+    onBeforeMount(() => {
       token = ResponsiveObserve.subscribe(screen => {
         if (typeof props.column !== 'object') {
           return;
         }
-
         screens.value = screen;
       });
     });

@@ -1,4 +1,11 @@
-import type { PropType, ExtractPropTypes, ComputedRef, Ref, ComponentPublicInstance } from 'vue';
+import type {
+  PropType,
+  ExtractPropTypes,
+  ComputedRef,
+  Ref,
+  ComponentPublicInstance,
+  HTMLAttributes,
+} from 'vue';
 import {
   watch,
   defineComponent,
@@ -79,8 +86,8 @@ export const formItemProps = {
   label: PropTypes.any,
   help: PropTypes.any,
   extra: PropTypes.any,
-  labelCol: { type: Object as PropType<ColProps> },
-  wrapperCol: { type: Object as PropType<ColProps> },
+  labelCol: { type: Object as PropType<ColProps & HTMLAttributes> },
+  wrapperCol: { type: Object as PropType<ColProps & HTMLAttributes> },
   hasFeedback: PropTypes.looseBool.def(false),
   colon: PropTypes.looseBool,
   labelAlign: PropTypes.oneOf(tuple('left', 'right')),

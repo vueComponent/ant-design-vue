@@ -10,6 +10,16 @@
 
 ---
 
+## 3.0.0-beta.10
+
+`2022-02-18`
+
+- 🐞 修复日期组件使用 dayjs 或 dateFns 时，输入不合法值时自动 parse 问题 [#5221](https://github.com/vueComponent/ant-design-vue/issues/5221)
+- 🐞 修复 dropdownMatchSelectWidth 为 false 时，未关闭虚拟滚动问题 [#5242](https://github.com/vueComponent/ant-design-vue/issues/5242)
+- 🐞 修复 descriptions 控制台 warning 问题 [#5250](https://github.com/vueComponent/ant-design-vue/issues/5250)
+- 🐞 修复 dropdown 的右键展开时，挑动问题 [#5259](https://github.com/vueComponent/ant-design-vue/issues/5259)
+- 🐞 修复 TreeSelect windows 触摸板展开失效问题 [#5220](https://github.com/vueComponent/ant-design-vue/issues/5220)
+
 ## 3.0.0-beta.9
 
 `2022-01-28`

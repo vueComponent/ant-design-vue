@@ -10,6 +10,16 @@
 
 ---
 
+## 3.0.0-beta.10
+
+`2022-02-18`
+
+- 🐞 Fix the issue of automatic parse when inputting invalid values when the date component uses dayjs or dateFns [#5221](https://github.com/vueComponent/ant-design-vue/issues/5221)
+- 🐞 Fix the issue that virtual scrolling is not turned off when dropdownMatchSelectWidth is false [#5242](https://github.com/vueComponent/ant-design-vue/issues/5242)
+- 🐞 Fix descriptions console warning issue [#5250](https://github.com/vueComponent/ant-design-vue/issues/5250)
+- 🐞 Fix the problem of provoking when the right-click of dropdown is expanded [#5259](https://github.com/vueComponent/ant-design-vue/issues/5259)
+- 🐞 Fix TreeSelect windows touchpad expansion failure issue [#5220](https://github.com/vueComponent/ant-design-vue/issues/5220)
+
 ## 3.0.0-beta.9
 
 `2022-01-28`

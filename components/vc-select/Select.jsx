@@ -17,6 +17,7 @@ import {
   getClass,
   getStyle,
   getAttrs,
+  getAllProps,
   getOptionProps,
   getSlots,
   getListeners,
@@ -1184,7 +1185,7 @@ const Select = {
           menuItems.push(menuItem);
         });
         // ref: https://github.com/ant-design/ant-design/issues/14090
-        if (inputValue && menuItems.every(option => getValuePropValue(option) !== inputValue)) {
+        if (inputValue && menuItems.every(option => getAllProps(option)[this.optionFilterProp] !== inputValue)) {
           const p = {
             attrs: UNSELECTABLE_ATTRIBUTE,
             key: inputValue,

@@ -14,6 +14,7 @@ import { initDefaultProps, isValidElement } from '../../_util/props-util';
 import type { VueNode } from '../../_util/type';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import { getTransitionGroupProps, TransitionGroup } from '../../_util/transition';
+import listAnimation from './listAnimation';
 
 const HackSlot = (_, { slots }) => {
   return slots.default?.()[0];
@@ -142,6 +143,9 @@ export default defineComponent({
       [`${prefixCls.value}-list-rtl`]: direction.value === 'rtl',
     }));
     const transitionGroupProps = computed(() => ({
+      ...listAnimation(
+        `${prefixCls.value}-${props.listType === 'picture-card' ? 'animate-inline' : 'animate'}`,
+      ),
       ...getTransitionGroupProps(
         `${prefixCls.value}-${props.listType === 'picture-card' ? 'animate-inline' : 'animate'}`,
       ),

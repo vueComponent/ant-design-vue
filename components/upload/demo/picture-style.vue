@@ -99,10 +99,7 @@ export default defineComponent({
   width: 200px;
   margin-right: 8px;
 }
-.upload-list-inline :deep(.ant-upload-animate-enter) {
-  animation-name: uploadAnimateInlineIn;
-}
-.upload-list-inline :deep(.ant-upload-animate-leave) {
-  animation-name: uploadAnimateInlineOut;
+.upload-list-inline [class*='-upload-list-rtl'] :deep(.ant-upload-list-item) {
+  float: right;
 }
 </style>

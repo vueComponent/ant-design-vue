@@ -149,6 +149,7 @@ export default defineComponent({
     visible: false,
     okType: 'primary',
   }),
+  emits: ['update:visible', 'cancel', 'change', 'ok'],
   setup(props, { emit, slots, attrs }) {
     const [locale] = useLocaleReceiver('Modal');
     const { prefixCls, rootPrefixCls, direction, getPopupContainer } = useConfigInject(

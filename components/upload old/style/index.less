@@ -34,6 +34,8 @@
   }
 
   &&-select-picture-card {
+    display: table;
+    float: left;
     width: @upload-picture-card-size;
     height: @upload-picture-card-size;
     margin-right: 8px;
@@ -44,21 +46,19 @@
     border: @border-width-base dashed @border-color-base;
     border-radius: @border-radius-base;
     cursor: pointer;
-    transition: border-color 0.3s;
+    transition: border-color 0.3s ease;
 
     > .@{upload-prefix-cls} {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: table-cell;
+      width: 100%;
       height: 100%;
+      padding: 8px;
       text-align: center;
+      vertical-align: middle;
     }
 
     &:hover {
       border-color: @primary-color;
-      .@{upload-prefix-cls}-disabled& {
-        border-color: @border-color-base;
-      }
     }
   }
 
@@ -74,7 +74,7 @@
     transition: border-color 0.3s;
 
     .@{upload-prefix-cls} {
-      padding: @padding-md 0;
+      padding: 16px 0;
     }
 
     &.@{upload-prefix-cls}-drag-hover:not(.@{upload-prefix-cls}-disabled) {
@@ -116,12 +116,10 @@
       color: @text-color-secondary;
       font-size: @font-size-base;
     }
-
     .@{iconfont-css-prefix}-plus {
       color: @disabled-color;
       font-size: 30px;
       transition: all 0.3s;
-
       &:hover {
         color: @text-color-secondary;
       }
@@ -142,55 +140,52 @@
 .@{upload-prefix-cls}-list {
   .reset-component();
   .clearfix();
-  line-height: @line-height-base;
-
-  // ============================ Item ============================
+  &-item-list-type-text {
+    &:hover {
+      .@{upload-prefix-cls}-list-item-name-icon-count-1 {
+        padding-right: 14px;
+      }
+      .@{upload-prefix-cls}-list-item-name-icon-count-2 {
+        padding-right: 28px;
+      }
+    }
+  }
   &-item {
     position: relative;
-    height: @line-height-base * @font-size-base;
-    margin-top: @margin-xs;
+    height: 22px;
+    margin-top: 8px;
     font-size: @font-size-base;
-
     &-name {
       display: inline-block;
       width: 100%;
       padding-left: @font-size-base + 8px;
       overflow: hidden;
-      line-height: @line-height-base;
       white-space: nowrap;
       text-overflow: ellipsis;
+    }
+
+    &-name-icon-count-1 {
+      padding-right: 14px;
     }
 
     &-card-actions {
       position: absolute;
       right: 0;
-
-      &-btn {
-        opacity: 0;
-      }
-      &-btn.@{ant-prefix}-btn-sm {
-        height: 20px;
-        line-height: 1;
-      }
-
+      opacity: 0;
       &.picture {
-        top: 22px;
-        line-height: 0;
-      }
-
-      &-btn:focus,
-      &.picture &-btn {
+        top: 25px;
+        line-height: 1;
         opacity: 1;
       }
-
-      .@{iconfont-css-prefix} {
-        color: @upload-actions-color;
+      .anticon {
+        padding-right: 6px;
+        color: rgba(0, 0, 0, 0.45);
       }
     }
 
     &-info {
       height: 100%;
-      padding: 0 4px;
+      padding: 0 12px 0 4px;
       transition: background-color 0.3s;
 
       > span {
@@ -200,27 +195,25 @@
       }
 
       .@{iconfont-css-prefix}-loading,
-      .@{upload-prefix-cls}-text-icon {
-        .@{iconfont-css-prefix} {
-          position: absolute;
-          top: (@font-size-base / 2) - 2px;
-          color: @text-color-secondary;
-          font-size: @font-size-base;
-        }
+      .@{iconfont-css-prefix}-paper-clip {
+        position: absolute;
+        top: (@font-size-base / 2) - 2px;
+        color: @text-color-secondary;
+        font-size: @font-size-base;
       }
     }
 
     .@{iconfont-css-prefix}-close {
+      .iconfont-size-under-12px(10px);
+
       position: absolute;
       top: 6px;
       right: 4px;
       color: @text-color-secondary;
-      font-size: 10px;
       line-height: 0;
       cursor: pointer;
       opacity: 0;
       transition: all 0.3s;
-
       &:hover {
         color: @text-color;
       }
@@ -234,24 +227,21 @@
       opacity: 1;
     }
 
-    &:hover &-card-actions-btn {
+    &:hover &-card-actions {
       opacity: 1;
     }
 
     &-error,
-    &-error .@{upload-prefix-cls}-text-icon > .@{iconfont-css-prefix},
+    &-error .@{iconfont-css-prefix}-paper-clip,
     &-error &-name {
       color: @error-color;
     }
 
     &-error &-card-actions {
-      .@{iconfont-css-prefix} {
+      .anticon {
         color: @error-color;
       }
-
-      &-btn {
-        opacity: 1;
-      }
+      opacity: 1;
     }
 
     &-progress {
@@ -264,20 +254,17 @@
     }
   }
 
-  // =================== Picture & Picture Card ===================
   &-picture,
   &-picture-card {
     .@{upload-item} {
       position: relative;
       height: 66px;
-      padding: @padding-xs;
+      padding: 8px;
       border: @border-width-base @upload-picture-card-border-style @border-color-base;
       border-radius: @border-radius-base;
-
       &:hover {
         background: transparent;
       }
-
       &-error {
         border-color: @error-color;
       }
@@ -296,30 +283,15 @@
     }
 
     .@{upload-item}-thumbnail {
+      position: absolute;
+      top: 8px;
+      left: 8px;
       width: 48px;
       height: 48px;
-      line-height: 60px;
+      font-size: 26px;
+      line-height: 54px;
       text-align: center;
       opacity: 0.8;
-
-      .@{iconfont-css-prefix} {
-        font-size: 26px;
-      }
-    }
-
-    // Adjust the color of the error icon : https://github.com/ant-design/ant-design/pull/24160
-    .@{upload-item}-error .@{upload-item}-thumbnail {
-      .@{iconfont-css-prefix} {
-        svg path {
-          &[fill='#e6f7ff'] {
-            fill: @error-color-deprecated-bg;
-          }
-
-          &[fill='#1890ff'] {
-            fill: @error-color;
-          }
-        }
-      }
     }
 
     .@{upload-item}-icon {
@@ -328,10 +300,6 @@
       left: 50%;
       font-size: 26px;
       transform: translate(-50%, -50%);
-
-      .@{iconfont-css-prefix} {
-        font-size: 26px;
-      }
     }
 
     .@{upload-item}-image {
@@ -359,8 +327,16 @@
       transition: all 0.3s;
     }
 
+    .@{upload-item}-name-icon-count-1 {
+      padding-right: 18px;
+    }
+
+    .@{upload-item}-name-icon-count-2 {
+      padding-right: 36px;
+    }
+
     .@{upload-item}-uploading .@{upload-item}-name {
-      margin-bottom: 12px;
+      line-height: 28px;
     }
 
     .@{upload-item}-progress {
@@ -379,23 +355,21 @@
     }
   }
 
-  // ======================== Picture Card ========================
   &-picture-card {
-    &-container {
-      display: inline-block;
-      width: @upload-picture-card-size;
-      height: @upload-picture-card-size;
-      margin: 0 @margin-xs @margin-xs 0;
-      vertical-align: top;
-    }
-
     &.@{upload-prefix-cls}-list::after {
       display: none;
     }
-
+    &-container {
+      float: left;
+      width: @upload-picture-card-size;
+      height: @upload-picture-card-size;
+      margin: 0 8px 8px 0;
+    }
     .@{upload-item} {
-      height: 100%;
-      margin: 0;
+      float: left;
+      width: @upload-picture-card-size;
+      height: @upload-picture-card-size;
+      margin: 0 8px 8px 0;
     }
 
     .@{upload-item}-info {
@@ -439,7 +413,6 @@
         font-size: 16px;
         cursor: pointer;
         transition: all 0.3s;
-
         &:hover {
           color: @text-color-inverse;
         }
@@ -457,7 +430,7 @@
       display: block;
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
     }
 
     .@{upload-item}-name {
@@ -468,7 +441,7 @@
       text-align: center;
     }
 
-    .@{upload-item}-file + .@{upload-item}-name {
+    .anticon-picture + .@{upload-item}-name {
       position: absolute;
       bottom: 10px;
       display: block;
@@ -481,88 +454,70 @@
 
       .@{upload-item}-info {
         height: auto;
-
         &::before,
-        .@{iconfont-css-prefix}-eye,
+        .@{iconfont-css-prefix}-eye-o,
         .@{iconfont-css-prefix}-delete {
           display: none;
         }
+      }
+
+      &-text {
+        margin-top: 18px;
+        color: @text-color-secondary;
       }
     }
 
     .@{upload-item}-progress {
       bottom: 32px;
-      width: calc(100% - 14px);
       padding-left: 0;
     }
   }
 
-  // ======================= Picture & Text =======================
-  &-text,
-  &-picture {
-    &-container {
-      transition: opacity @animation-duration-slow, height @animation-duration-slow;
-
-      &::before {
-        display: table;
-        width: 0;
-        height: 0;
-        content: '';
-      }
-
-      // Don't know why span here, just stretch it
-      .@{upload-prefix-cls}-span {
-        display: block;
-        flex: auto;
-      }
-    }
-
-    // text & picture no need this additional element.
-    // But it used for picture-card, let's keep it.
-    .@{upload-prefix-cls}-span {
-      display: flex;
-      align-items: center;
-
-      > * {
-        flex: none;
-      }
-    }
-
-    .@{upload-item}-name {
-      flex: auto;
-      margin: 0;
-      padding: 0 @padding-xs;
-    }
-
-    .@{upload-item}-card-actions {
-      position: static;
-    }
+  .@{upload-prefix-cls}-success-icon {
+    color: @success-color;
+    font-weight: bold;
   }
 
-  // ============================ Text ============================
-  &-text {
-    .@{upload-prefix-cls}-text-icon {
-      .@{iconfont-css-prefix} {
-        position: static;
-      }
-    }
-  }
-
-  // =========================== Motion ===========================
-  .@{upload-prefix-cls}-animate-inline-appear,
+  .@{upload-prefix-cls}-animate-enter,
+  .@{upload-prefix-cls}-animate-leave,
   .@{upload-prefix-cls}-animate-inline-enter,
   .@{upload-prefix-cls}-animate-inline-leave {
-    animation-duration: @animation-duration-slow;
+    animation-duration: 0.3s;
     animation-fill-mode: @ease-in-out-circ;
   }
 
-  .@{upload-prefix-cls}-animate-inline-appear,
+  .@{upload-prefix-cls}-animate-enter {
+    animation-name: uploadAnimateIn;
+  }
+
+  .@{upload-prefix-cls}-animate-leave {
+    animation-name: uploadAnimateOut;
+  }
+
   .@{upload-prefix-cls}-animate-inline-enter {
     animation-name: uploadAnimateInlineIn;
   }
 
   .@{upload-prefix-cls}-animate-inline-leave {
     animation-name: uploadAnimateInlineOut;
+  }
+}
+
+@keyframes uploadAnimateIn {
+  from {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes uploadAnimateOut {
+  to {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
   }
 }
 
@@ -585,5 +540,3 @@
     opacity: 0;
   }
 }
-
-@import './rtl';

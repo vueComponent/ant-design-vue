@@ -7,19 +7,19 @@ export type Action = string | ((file: RcFile) => string | PromiseLike<string>);
 export const uploadProps = () => {
   return {
     capture: [Boolean, String] as PropType<boolean | 'user' | 'environment'>,
-    multipart: Boolean,
+    multipart: { type: Boolean, default: undefined },
     name: String,
-    disabled: Boolean,
+    disabled: { type: Boolean, default: undefined },
     componentTag: String as PropType<any>,
     action: [String, Function] as PropType<Action>,
     method: String as PropType<UploadRequestMethod>,
-    directory: Boolean,
+    directory: { type: Boolean, default: undefined },
     data: [Object, Function] as PropType<
       Record<string, unknown> | ((file: RcFile | string | Blob) => Record<string, unknown>)
     >,
     headers: Object as PropType<UploadRequestHeader>,
     accept: String,
-    multiple: Boolean,
+    multiple: { type: Boolean, default: undefined },
     onBatchStart: Function as PropType<
       (fileList: { file: RcFile; parsedFile: Exclude<BeforeUploadFileType, boolean> }[]) => void
     >,
@@ -38,8 +38,8 @@ export const uploadProps = () => {
       ) => BeforeUploadFileType | Promise<void | BeforeUploadFileType>
     >,
     customRequest: Function as PropType<(option: UploadRequestOption) => void>,
-    withCredentials: Boolean,
-    openFileDialogOnClick: Boolean,
+    withCredentials: { type: Boolean, default: undefined },
+    openFileDialogOnClick: { type: Boolean, default: undefined },
     prefixCls: String,
     id: String,
     onMouseenter: Function as PropType<(e: MouseEvent) => void>,

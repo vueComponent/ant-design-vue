@@ -224,7 +224,7 @@ export {
   TypographyTitle,
 } from './typography';
 
-export type { UploadProps, UploadListProps, UploadChangeParam } from './upload';
+export type { UploadProps, UploadListProps, UploadChangeParam, UploadFile } from './upload';
 
 export { default as Upload, UploadDragger } from './upload';
 

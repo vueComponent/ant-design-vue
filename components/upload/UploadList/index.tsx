@@ -189,13 +189,14 @@ export default defineComponent({
                 onPreview={onInternalPreview}
                 onDownload={onInternalDownload}
                 onClose={onInternalClose}
+                removeIcon={removeIcon}
+                previewIcon={previewIcon}
+                downloadIcon={downloadIcon}
+                itemRender={itemRender}
                 v-slots={{
-                  removeIcon,
-                  previewIcon,
-                  downloadIcon,
+                  ...slots,
                   iconRender: internalIconRender,
                   actionIconRender,
-                  itemRender,
                 }}
               />
             );

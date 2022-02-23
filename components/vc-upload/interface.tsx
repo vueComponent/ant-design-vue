@@ -23,6 +23,7 @@ export const uploadProps = () => {
     onBatchStart: Function as PropType<
       (fileList: { file: RcFile; parsedFile: Exclude<BeforeUploadFileType, boolean> }[]) => void
     >,
+    onReject: Function as PropType<(fileList: RcFile[]) => void>,
     onStart: Function as PropType<(file: RcFile) => void>,
     onError: Function as PropType<
       (error: Error, ret: Record<string, unknown>, file: RcFile) => void

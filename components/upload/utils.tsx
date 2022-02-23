@@ -1,6 +1,6 @@
-import type { RcFile, UploadFile, InternalUploadFile } from './interface';
+import type { FileType, UploadFile, InternalUploadFile } from './interface';
 
-export function file2Obj(file: RcFile): InternalUploadFile {
+export function file2Obj(file: FileType): InternalUploadFile {
   return {
     ...file,
     lastModified: file.lastModified,
@@ -26,7 +26,7 @@ export function updateFileList(file: UploadFile<any>, fileList: UploadFile<any>[
   return nextFileList;
 }
 
-export function getFileItem(file: RcFile, fileList: UploadFile[]) {
+export function getFileItem(file: FileType, fileList: UploadFile[]) {
   const matchKey = file.uid !== undefined ? 'uid' : 'name';
   return fileList.filter(item => item[matchKey] === file[matchKey])[0];
 }

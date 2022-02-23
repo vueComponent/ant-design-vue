@@ -148,7 +148,6 @@ export default defineComponent({
             title: locale.removeFile,
           })
         : null;
-
       const downloadIcon =
         showDownloadIcon && file.status === 'done'
           ? actionIconRender({

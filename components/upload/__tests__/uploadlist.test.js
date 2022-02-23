@@ -300,7 +300,7 @@ describe('Upload List', () => {
         defaultFileList: fileList,
         listType: 'picture-card',
         action: '',
-        remove: handleRemove,
+        onRemove: handleRemove,
         onChange: handleChange,
       },
 

@@ -20,7 +20,7 @@ Use `beforeUpload` for transform file before request such as add a watermark.
     <a-upload
       v-model:file-list="fileList"
       action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-      :transform-file="transformFile"
+      :before-upload="beforeUpload"
     >
       <a-button>
         <upload-outlined></upload-outlined>
@@ -32,33 +32,37 @@ Use `beforeUpload` for transform file before request such as add a watermark.
 <script lang="ts">
 import { UploadOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+import type { UploadProps } from 'ant-design-vue';
 
 export default defineComponent({
   components: {
     UploadOutlined,
   },
   setup() {
-    const transformFile = (file: any) => {
+    const beforeUpload: UploadProps['beforeUpload'] = file => {
       return new Promise(resolve => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onload = () => {
-          const canvas = document.createElement('canvas');
           const img: HTMLImageElement = document.createElement('img');
           img.src = reader.result as string;
           img.onload = () => {
-            const ctx: CanvasRenderingContext2D = canvas.getContext('2d')!;
+            const canvas = document.createElement('canvas');
+            canvas.width = img.naturalWidth;
+            canvas.height = img.naturalHeight;
+            const ctx = canvas.getContext('2d');
             ctx.drawImage(img, 0, 0);
             ctx.fillStyle = 'red';
             ctx.textBaseline = 'middle';
-            ctx.fillText('Ant Design', 20, 20);
+            ctx.font = '33px Arial';
+            ctx.fillText('Ant Design Vue', 20, 20);
             canvas.toBlob(resolve);
           };
         };
       });
     };
     return {
-      transformFile,
+      beforeUpload,
       fileList: ref([]),
     };
   },

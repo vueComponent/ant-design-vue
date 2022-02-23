@@ -1,36 +1,44 @@
 <docs>
 ---
-order: 2
+order: 12
 title:
-  zh-CN: 已上传的文件列表
-  en-US: Default Files
+  zh-CN: 自定义交互图标
+  en-US: custom action icon
 ---
 
 ## zh-CN
 
-使用 `fileList` 设置已上传的内容。
+使用相应插槽设置列表交互图标。
 
 ## en-US
 
-Use `fileList` for uploaded files when page init.
+Use slot for custom action icons of files.
 </docs>
 
 <template>
-  <a-upload v-model:file-list="fileList" action="https://www.mocky.io/v2/5cc8019d300000980a055e76">
+  <a-upload
+    v-model:file-list="fileList"
+    action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
+    :show-upload-list="{ showDownloadIcon: true, showRemoveIcon: true }"
+    @change="handleChange"
+  >
     <a-button>
       <upload-outlined></upload-outlined>
       Upload
     </a-button>
+    <template #downloadIcon>download</template>
+    <template #removeIcon><StarOutlined @click="handleClick"></StarOutlined></template>
   </a-upload>
 </template>
 <script lang="ts">
-import { UploadOutlined } from '@ant-design/icons-vue';
+import { UploadOutlined, StarOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 
 export default defineComponent({
   components: {
     UploadOutlined,
+    StarOutlined,
   },
   setup() {
     const fileList = ref<UploadProps['fileList']>([
@@ -64,6 +72,9 @@ export default defineComponent({
     return {
       fileList,
       handleChange,
+      handleClick: (e: MouseEvent) => {
+        console.log(e, 'custom removeIcon event');
+      },
     };
   },
 });

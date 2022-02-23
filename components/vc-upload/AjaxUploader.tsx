@@ -12,6 +12,7 @@ import { uploadProps } from './interface';
 import { defineComponent, onBeforeUnmount, onMounted, ref } from 'vue';
 import type { ChangeEvent } from '../_util/EventInterface';
 import pickAttrs from '../_util/pickAttrs';
+import partition from 'lodash-es/partition';
 
 interface ParsedFileInfo {
   origin: RcFile;
@@ -240,15 +241,18 @@ export default defineComponent({
           (_file: RcFile) => attrAccept(_file, props.accept),
         );
       } else {
-        let files = [...e.dataTransfer.files].filter((file: RcFile) =>
-          attrAccept(file, props.accept),
+        const files: [RcFile[], RcFile[]] = partition(
+          Array.prototype.slice.call(e.dataTransfer.files),
+          (file: RcFile) => attrAccept(file, props.accept),
         );
-
+        let successFiles = files[0];
+        const errorFiles = files[1];
         if (multiple === false) {
-          files = files.slice(0, 1);
+          successFiles = successFiles.slice(0, 1);
         }
 
-        uploadFiles(files);
+        uploadFiles(successFiles);
+        if (errorFiles.length && props.onReject) props.onReject(errorFiles);
       }
     };
     expose({

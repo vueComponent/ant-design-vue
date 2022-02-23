@@ -4,10 +4,10 @@ import UploadList from './UploadList';
 import type {
   UploadType,
   UploadListType,
-  RcFile,
   UploadFile,
   UploadChangeParam,
   ShowUploadListInterface,
+  FileType,
 } from './interface';
 import { uploadProps } from './interface';
 import { file2Obj, getFileItem, removeFileItem, updateFileList } from './utils';
@@ -57,15 +57,20 @@ export default defineComponent({
     const upload = ref();
     onMounted(() => {
       devWarning(
-        'fileList' in props || !('value' in props),
+        props.fileList !== undefined || attrs.value === undefined,
         'Upload',
         '`value` is not a valid prop, do you mean `fileList`?',
       );
 
       devWarning(
-        !('transformFile' in props),
+        props.transformFile === undefined,
         'Upload',
         '`transformFile` is deprecated. Please use `beforeUpload` directly.',
+      );
+      devWarning(
+        props.remove === undefined,
+        'Upload',
+        '`remove` props is deprecated. Please use `remove` event.',
       );
     });
 
@@ -98,10 +103,10 @@ export default defineComponent({
       formItemContext.onFieldChange();
     };
 
-    const mergedBeforeUpload = async (file: RcFile, fileListArgs: RcFile[]) => {
+    const mergedBeforeUpload = async (file: FileType, fileListArgs: FileType[]) => {
       const { beforeUpload, transformFile } = props;
 
-      let parsedFile: File | Blob | string = file;
+      let parsedFile: FileType | Blob | string = file;
       if (beforeUpload) {
         const result = await beforeUpload(file, fileListArgs);
 
@@ -128,7 +133,7 @@ export default defineComponent({
         parsedFile = await transformFile(parsedFile as any);
       }
 
-      return parsedFile as RcFile;
+      return parsedFile as File;
     };
 
     const onBatchStart: RcUploadProps['onBatchStart'] = batchFileInfoList => {
@@ -142,7 +147,7 @@ export default defineComponent({
         return;
       }
 
-      const objectFileList = filteredFileInfoList.map(info => file2Obj(info.file as RcFile));
+      const objectFileList = filteredFileInfoList.map(info => file2Obj(info.file as FileType));
 
       // Concat new files with prev files
       let newFileList = [...mergedFileList.value];
@@ -185,7 +190,7 @@ export default defineComponent({
       });
     };
 
-    const onSuccess = (response: any, file: RcFile, xhr: any) => {
+    const onSuccess = (response: any, file: FileType, xhr: any) => {
       try {
         if (typeof response === 'string') {
           response = JSON.parse(response);
@@ -210,7 +215,7 @@ export default defineComponent({
       onInternalChange(targetItem, nextFileList);
     };
 
-    const onProgress = (e: { percent: number }, file: RcFile) => {
+    const onProgress = (e: { percent: number }, file: FileType) => {
       // removed
       if (!getFileItem(file, mergedFileList.value)) {
         return;
@@ -225,7 +230,7 @@ export default defineComponent({
       onInternalChange(targetItem, nextFileList, e);
     };
 
-    const onError = (error: Error, response: any, file: RcFile) => {
+    const onError = (error: Error, response: any, file: FileType) => {
       // removed
       if (!getFileItem(file, mergedFileList.value)) {
         return;
@@ -243,29 +248,30 @@ export default defineComponent({
 
     const handleRemove = (file: UploadFile) => {
       let currentFile: UploadFile;
-      Promise.resolve(
-        typeof props.onRemove === 'function' ? props.onRemove(file) : props.onRemove,
-      ).then(ret => {
-        // Prevent removing file
-        if (ret === false) {
-          return;
-        }
+      const mergedRemove = props.onRemove || props.remove;
+      Promise.resolve(typeof mergedRemove === 'function' ? mergedRemove(file) : mergedRemove).then(
+        ret => {
+          // Prevent removing file
+          if (ret === false) {
+            return;
+          }
 
-        const removedFileList = removeFileItem(file, mergedFileList.value);
+          const removedFileList = removeFileItem(file, mergedFileList.value);
 
-        if (removedFileList) {
-          currentFile = { ...file, status: 'removed' };
-          mergedFileList.value?.forEach(item => {
-            const matchKey = currentFile.uid !== undefined ? 'uid' : 'name';
-            if (item[matchKey] === currentFile[matchKey] && !Object.isFrozen(item)) {
-              item.status = 'removed';
-            }
-          });
-          upload.value?.abort(currentFile);
+          if (removedFileList) {
+            currentFile = { ...file, status: 'removed' };
+            mergedFileList.value?.forEach(item => {
+              const matchKey = currentFile.uid !== undefined ? 'uid' : 'name';
+              if (item[matchKey] === currentFile[matchKey] && !Object.isFrozen(item)) {
+                item.status = 'removed';
+              }
+            });
+            upload.value?.abort(currentFile);
 
-          onInternalChange(currentFile, removedFileList);
-        }
-      });
+            onInternalChange(currentFile, removedFileList);
+          }
+        },
+      );
     };
 
     const onFileDrop = (e: DragEvent) => {
@@ -344,6 +350,7 @@ export default defineComponent({
         beforeUpload: mergedBeforeUpload,
         onChange: undefined,
       };
+      delete (rcUploadProps as any).remove;
 
       // Remove id to avoid open by label when trigger is hidden
       // !children: https://github.com/ant-design/ant-design/issues/14298

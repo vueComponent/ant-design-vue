@@ -4,9 +4,9 @@ import type {
 } from '../vc-upload/interface';
 import type { ProgressProps } from '../progress';
 import type { VueNode } from '../_util/type';
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType, CSSProperties } from 'vue';
 
-export interface RcFile extends OriRcFile {
+export interface FileType extends OriRcFile {
   readonly lastModifiedDate: Date;
 }
 
@@ -27,7 +27,7 @@ export interface UploadFile<T = any> {
   status?: UploadFileStatus;
   percent?: number;
   thumbUrl?: string;
-  originFileObj?: RcFile;
+  originFileObj?: FileType;
   response?: T;
   error?: any;
   linkProps?: any;
@@ -37,7 +37,7 @@ export interface UploadFile<T = any> {
 }
 
 export interface InternalUploadFile<T = any> extends UploadFile<T> {
-  originFileObj: RcFile;
+  originFileObj: FileType;
 }
 
 export interface ShowUploadListInterface {
@@ -63,7 +63,10 @@ export interface UploadLocale {
 
 export type UploadType = 'drag' | 'select';
 export type UploadListType = 'text' | 'picture' | 'picture-card';
-export type UploadListProgressProps = Omit<ProgressProps, 'percent' | 'type'>;
+export type UploadListProgressProps = Omit<ProgressProps, 'percent' | 'type'> & {
+  class?: string;
+  style?: CSSProperties;
+};
 
 export type ItemRender<T = any> = (opt: {
   originNode: VueNode;
@@ -76,11 +79,11 @@ export type ItemRender<T = any> = (opt: {
   };
 }) => VueNode;
 
-type PreviewFileHandler = (file: File | Blob) => PromiseLike<string>;
+type PreviewFileHandler = (file: FileType | Blob) => PromiseLike<string>;
 type TransformFileHandler = (
-  file: RcFile,
-) => string | Blob | File | PromiseLike<string | Blob | File>;
-type BeforeUploadValueType = void | boolean | string | Blob | File;
+  file: FileType,
+) => string | Blob | FileType | PromiseLike<string | Blob | FileType>;
+type BeforeUploadValueType = void | boolean | string | Blob | FileType;
 
 function uploadProps<T = any>() {
   return {
@@ -90,7 +93,7 @@ function uploadProps<T = any>() {
     defaultFileList: Array as PropType<Array<UploadFile<T>>>,
     fileList: Array as PropType<Array<UploadFile<T>>>,
     action: [String, Function] as PropType<
-      string | ((file: RcFile) => string) | ((file: RcFile) => PromiseLike<string>)
+      string | ((file: FileType) => string) | ((file: FileType) => PromiseLike<string>)
     >,
     directory: { type: Boolean, default: undefined },
     data: [Object, Function] as PropType<
@@ -106,7 +109,10 @@ function uploadProps<T = any>() {
     multiple: { type: Boolean, default: undefined },
     accept: String,
     beforeUpload: Function as PropType<
-      (file: RcFile, FileList: RcFile[]) => BeforeUploadValueType | Promise<BeforeUploadValueType>
+      (
+        file: FileType,
+        FileList: FileType[],
+      ) => BeforeUploadValueType | Promise<BeforeUploadValueType>
     >,
     onChange: Function as PropType<(info: UploadChangeParam<T>) => void>,
     'onUpdate:fileList': Function as PropType<(fileList: UploadChangeParam<T>['fileList']) => void>,
@@ -114,9 +120,12 @@ function uploadProps<T = any>() {
     listType: String as PropType<UploadListType>,
     onPreview: Function as PropType<(file: UploadFile<T>) => void>,
     onDownload: Function as PropType<(file: UploadFile<T>) => void>,
+    onReject: Function as PropType<(fileList: FileType[]) => void>,
     onRemove: Function as PropType<
       (file: UploadFile<T>) => void | boolean | Promise<void | boolean>
     >,
+    /** @deprecated Please use `onRemove` directly */
+    remove: Function as PropType<(file: UploadFile<T>) => void | boolean | Promise<void | boolean>>,
     supportServerRender: { type: Boolean, default: undefined },
     disabled: { type: Boolean, default: undefined },
     prefixCls: String,

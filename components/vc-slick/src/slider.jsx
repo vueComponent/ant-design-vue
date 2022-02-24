@@ -21,7 +21,7 @@ export default defineComponent({
     };
   },
   // handles responsive breakpoints
-  beforeMount() {
+  mounted() {
     if (this.responsive) {
       const breakpoints = this.responsive.map(breakpt => breakpt.breakpoint);
       // sort them in increasing order of their numerical value
@@ -185,7 +185,7 @@ export default defineComponent({
 
     if (settings === 'unslick') {
       const className = 'regular slider ' + (this.className || '');
-      return <div class={className}>{newChildren}</div>;
+      return <div class={className}>{children}</div>;
     } else if (newChildren.length <= settings.slidesToShow) {
       settings.unslick = true;
     }

@@ -24,6 +24,7 @@ const Slider = defineComponent({
     ariaValueTextFormatterForHandle: String,
     startPoint: Number,
   },
+  emits: ['beforeChange', 'afterChange', 'change'],
   data() {
     const defaultValue = this.defaultValue !== undefined ? this.defaultValue : this.min;
     const value = this.value !== undefined ? this.value : defaultValue;

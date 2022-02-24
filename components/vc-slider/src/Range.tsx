@@ -66,6 +66,7 @@ const Range = defineComponent({
     ariaLabelledByGroupForHandles: [],
     ariaValueTextFormatterGroupForHandles: [],
   }),
+  emits: ['beforeChange', 'afterChange', 'change'],
   displayName: 'Range',
   data() {
     const { count, min, max } = this;

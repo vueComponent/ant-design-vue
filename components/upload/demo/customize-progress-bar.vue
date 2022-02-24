@@ -1,18 +1,19 @@
 <docs>
 ---
-order: 0
+order: 15
 title:
-  zh-CN: 点击上传
-  en-US: Upload by clicking
+  zh-CN: 自定义进度条样式
+  en-US: Customize Progress Bar
 ---
 
 ## zh-CN
 
-经典款式，用户点击按钮弹出文件选择框。
+使用 `progress` 属性自定义进度条样式。
 
 ## en-US
 
-Classic mode. File selection dialog pops up when upload button is clicked.
+Use `progress` for customize progress bar.
+
 </docs>
 
 <template>
@@ -21,6 +22,7 @@ Classic mode. File selection dialog pops up when upload button is clicked.
     name="file"
     action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
     :headers="headers"
+    :progress="progress"
     @change="handleChange"
   >
     <a-button>
@@ -33,7 +35,7 @@ Classic mode. File selection dialog pops up when upload button is clicked.
 import { message } from 'ant-design-vue';
 import { UploadOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
-import type { UploadChangeParam } from 'ant-design-vue';
+import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
 
 export default defineComponent({
   components: {
@@ -52,12 +54,22 @@ export default defineComponent({
     };
 
     const fileList = ref([]);
+    const progress: UploadProps['progress'] = {
+      strokeColor: {
+        '0%': '#108ee9',
+        '100%': '#87d068',
+      },
+      strokeWidth: 3,
+      format: percent => `${parseFloat(percent.toFixed(2))}%`,
+      class: 'test',
+    };
     return {
       fileList,
       headers: {
         authorization: 'authorization-text',
       },
       handleChange,
+      progress,
     };
   },
 });

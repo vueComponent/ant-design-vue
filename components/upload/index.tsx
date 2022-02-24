@@ -1,21 +1,18 @@
-import type { App, Plugin } from 'vue';
-import Upload from './Upload';
+import type { App } from 'vue';
+import Upload, { LIST_IGNORE } from './Upload';
 import Dragger from './Dragger';
 
-export type { UploadProps, UploadListProps, UploadChangeParam } from './interface';
-
-Upload.Dragger = Dragger;
+export type { UploadProps, UploadListProps, UploadChangeParam, UploadFile } from './interface';
 
 /* istanbul ignore next */
-Upload.install = function (app: App) {
-  app.component(Upload.name, Upload);
-  app.component(Dragger.name, Dragger);
-  return app;
-};
-
 export const UploadDragger = Dragger;
 
-export default Upload as typeof Upload &
-  Plugin & {
-    readonly Dragger: typeof Dragger;
-  };
+export default Object.assign(Upload, {
+  Dragger,
+  LIST_IGNORE,
+  install(app: App) {
+    app.component(Upload.name, Upload);
+    app.component(Dragger.name, Dragger);
+    return app;
+  },
+});

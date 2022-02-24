@@ -25,10 +25,10 @@ After users upload picture, the thumbnail will be shown in list. The upload butt
     >
       <div v-if="fileList.length < 8">
         <plus-outlined />
-        <div class="ant-upload-text">Upload</div>
+        <div style="margin-top: 8px">Upload</div>
       </div>
     </a-upload>
-    <a-modal :visible="previewVisible" :footer="null" @cancel="handleCancel">
+    <a-modal :visible="previewVisible" :title="previewTitle" :footer="null" @cancel="handleCancel">
       <img alt="example" style="width: 100%" :src="previewImage" />
     </a-modal>
   </div>
@@ -36,7 +36,7 @@ After users upload picture, the thumbnail will be shown in list. The upload butt
 <script lang="ts">
 import { PlusOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
-import type { UploadChangeParam, UploadProps } from 'ant-design-vue';
+import type { UploadProps } from 'ant-design-vue';
 
 function getBase64(file: File) {
   return new Promise((resolve, reject) => {
@@ -52,8 +52,9 @@ export default defineComponent({
     PlusOutlined,
   },
   setup() {
-    const previewVisible = ref<boolean>(false);
-    const previewImage = ref<string | undefined>('');
+    const previewVisible = ref(false);
+    const previewImage = ref('');
+    const previewTitle = ref('');
 
     const fileList = ref<UploadProps['fileList']>([
       {
@@ -81,6 +82,13 @@ export default defineComponent({
         url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
       },
       {
+        uid: '-xxx',
+        percent: 50,
+        name: 'image.png',
+        status: 'uploading',
+        url: 'https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png',
+      },
+      {
         uid: '-5',
         name: 'image.png',
         status: 'error',
@@ -89,6 +97,7 @@ export default defineComponent({
 
     const handleCancel = () => {
       previewVisible.value = false;
+      previewTitle.value = '';
     };
     const handlePreview = async (file: UploadProps['fileList'][number]) => {
       if (!file.url && !file.preview) {
@@ -96,9 +105,7 @@ export default defineComponent({
       }
       previewImage.value = file.url || file.preview;
       previewVisible.value = true;
-    };
-    const handleChange = ({ fileList: newFileList }: UploadChangeParam) => {
-      fileList.value = newFileList;
+      previewTitle.value = file.name || file.url.substring(file.url.lastIndexOf('/') + 1);
     };
 
     return {
@@ -107,7 +114,7 @@ export default defineComponent({
       fileList,
       handleCancel,
       handlePreview,
-      handleChange,
+      previewTitle,
     };
   },
 });

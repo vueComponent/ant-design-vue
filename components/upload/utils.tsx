@@ -1,10 +1,6 @@
-export function T() {
-  return true;
-}
+import type { FileType, UploadFile, InternalUploadFile } from './interface';
 
-// Fix IE file.status problem
-// via coping a new Object
-export function fileToObject(file) {
+export function file2Obj(file: FileType): InternalUploadFile {
   return {
     ...file,
     lastModified: file.lastModified,
@@ -18,35 +14,24 @@ export function fileToObject(file) {
   };
 }
 
-/**
- * 生成Progress percent: 0.1 -> 0.98
- *   - for ie
- */
-export function genPercentAdd() {
-  let k = 0.1;
-  const i = 0.01;
-  const end = 0.98;
-  return function (s) {
-    let start = s;
-    if (start >= end) {
-      return start;
-    }
-
-    start += k;
-    k = k - i;
-    if (k < 0.001) {
-      k = 0.001;
-    }
-    return start;
-  };
+/** Upload fileList. Replace file if exist or just push into it. */
+export function updateFileList(file: UploadFile<any>, fileList: UploadFile<any>[]) {
+  const nextFileList = [...fileList];
+  const fileIndex = nextFileList.findIndex(({ uid }: UploadFile) => uid === file.uid);
+  if (fileIndex === -1) {
+    nextFileList.push(file);
+  } else {
+    nextFileList[fileIndex] = file;
+  }
+  return nextFileList;
 }
 
-export function getFileItem(file, fileList) {
+export function getFileItem(file: FileType, fileList: UploadFile[]) {
   const matchKey = file.uid !== undefined ? 'uid' : 'name';
   return fileList.filter(item => item[matchKey] === file[matchKey])[0];
 }
 
-export function removeFileItem(file, fileList) {
+export function removeFileItem(file: UploadFile, fileList: UploadFile[]) {
   const matchKey = file.uid !== undefined ? 'uid' : 'name';
   const removed = fileList.filter(item => item[matchKey] !== file[matchKey]);
   if (removed.length === fileList.length) {
@@ -63,13 +48,13 @@ const extname = (url = '') => {
   return (/\.[^./\\]*$/.exec(filenameWithoutSuffix) || [''])[0];
 };
 
-const isImageFileType = type => !!type && type.indexOf('image/') === 0;
+const isImageFileType = (type: string): boolean => type.indexOf('image/') === 0;
 
-export const isImageUrl = file => {
-  if (isImageFileType(file.type)) {
-    return true;
+export const isImageUrl = (file: UploadFile): boolean => {
+  if (file.type && !file.thumbUrl) {
+    return isImageFileType(file.type);
   }
-  const url = file.thumbUrl || file.url;
+  const url: string = (file.thumbUrl || file.url || '') as string;
   const extension = extname(url);
   if (
     /^data:image\//.test(url) ||
@@ -89,9 +74,9 @@ export const isImageUrl = file => {
 };
 
 const MEASURE_SIZE = 200;
-export function previewImage(file) {
+export function previewImage(file: File | Blob): Promise<string> {
   return new Promise(resolve => {
-    if (!isImageFileType(file.type)) {
+    if (!file.type || !isImageFileType(file.type)) {
       resolve('');
       return;
     }
@@ -111,7 +96,7 @@ export function previewImage(file) {
       let offsetX = 0;
       let offsetY = 0;
 
-      if (width < height) {
+      if (width > height) {
         drawHeight = height * (MEASURE_SIZE / width);
         offsetY = -(drawHeight - drawWidth) / 2;
       } else {
@@ -119,7 +104,7 @@ export function previewImage(file) {
         offsetX = -(drawWidth - drawHeight) / 2;
       }
 
-      ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+      ctx!.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
       const dataURL = canvas.toDataURL();
       document.body.removeChild(canvas);
 

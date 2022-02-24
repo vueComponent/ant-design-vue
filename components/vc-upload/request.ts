@@ -1,13 +1,15 @@
-function getError(option, xhr) {
+import type { UploadRequestOption, UploadRequestError, UploadProgressEvent } from './interface';
+
+function getError(option: UploadRequestOption, xhr: XMLHttpRequest) {
   const msg = `cannot ${option.method} ${option.action} ${xhr.status}'`;
-  const err = new Error(msg);
+  const err = new Error(msg) as UploadRequestError;
   err.status = xhr.status;
   err.method = option.method;
   err.url = option.action;
   return err;
 }
 
-function getBody(xhr) {
+function getBody(xhr: XMLHttpRequest) {
   const text = xhr.responseText || xhr.response;
   if (!text) {
     return text;
@@ -20,22 +22,12 @@ function getBody(xhr) {
   }
 }
 
-// option {
-//  onProgress: (event: { percent: number }): void,
-//  onError: (event: Error, body?: Object): void,
-//  onSuccess: (body: Object): void,
-//  data: Object,
-//  filename: String,
-//  file: File,
-//  withCredentials: Boolean,
-//  action: String,
-//  headers: Object,
-// }
-export default function upload(option) {
-  const xhr = new window.XMLHttpRequest();
+export default function upload(option: UploadRequestOption) {
+  // eslint-disable-next-line no-undef
+  const xhr = new XMLHttpRequest();
 
   if (option.onProgress && xhr.upload) {
-    xhr.upload.onprogress = function progress(e) {
+    xhr.upload.onprogress = function progress(e: UploadProgressEvent) {
       if (e.total > 0) {
         e.percent = (e.loaded / e.total) * 100;
       }
@@ -43,7 +35,8 @@ export default function upload(option) {
     };
   }
 
-  const formData = new window.FormData();
+  // eslint-disable-next-line no-undef
+  const formData = new FormData();
 
   if (option.data) {
     Object.keys(option.data).forEach(key => {
@@ -58,11 +51,16 @@ export default function upload(option) {
         return;
       }
 
-      formData.append(key, option.data[key]);
+      formData.append(key, value as string | Blob);
     });
   }
 
-  formData.append(option.filename, option.file);
+  // eslint-disable-next-line no-undef
+  if (option.file instanceof Blob) {
+    formData.append(option.filename, option.file, (option.file as any).name);
+  } else {
+    formData.append(option.filename, option.file);
+  }
 
   xhr.onerror = function error(e) {
     option.onError(e);
@@ -75,7 +73,7 @@ export default function upload(option) {
       return option.onError(getError(option, xhr), getBody(xhr));
     }
 
-    option.onSuccess(getBody(xhr), xhr);
+    return option.onSuccess(getBody(xhr), xhr);
   };
 
   xhr.open(option.method, option.action, true);
@@ -93,11 +91,12 @@ export default function upload(option) {
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
   }
 
-  for (const h in headers) {
-    if (headers.hasOwnProperty(h) && headers[h] !== null) {
+  Object.keys(headers).forEach(h => {
+    if (headers[h] !== null) {
       xhr.setRequestHeader(h, headers[h]);
     }
-  }
+  });
+
   xhr.send(formData);
 
   return {

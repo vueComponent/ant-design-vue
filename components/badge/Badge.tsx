@@ -62,7 +62,7 @@ export default defineComponent({
       () => numberedDisplayCount.value === '0' || numberedDisplayCount.value === 0,
     );
 
-    const showAsDot = computed(() => (props.dot && !isZero.value) || hasStatus.value);
+    const showAsDot = computed(() => props.dot && !isZero.value);
 
     const mergedCount = computed(() => (showAsDot.value ? '' : numberedDisplayCount.value));
 

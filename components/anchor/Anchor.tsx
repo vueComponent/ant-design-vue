@@ -127,10 +127,10 @@ export default defineComponent({
       emit('change', link);
     };
     const handleScrollTo = (link: string) => {
-      const { offsetTop, getContainer, targetOffset } = props;
+      const { offsetTop, targetOffset } = props;
 
       setCurrentActiveLink(link);
-      const container = getContainer();
+      const container = getContainer.value();
       const scrollTop = getScroll(container, true);
       const sharpLinkMatch = sharpMatcherRegx.exec(link);
       if (!sharpLinkMatch) {
@@ -150,7 +150,7 @@ export default defineComponent({
         callback: () => {
           state.animating = false;
         },
-        getContainer,
+        getContainer: getContainer.value,
       });
     };
     expose({

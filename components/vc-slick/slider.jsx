@@ -1,10 +1,10 @@
-import json2mq from '../../_util/json2mq';
-import BaseMixin from '../../_util/BaseMixin';
-import { cloneElement } from '../../_util/vnode';
+import json2mq from '../_util/json2mq';
+import BaseMixin from '../_util/BaseMixin';
+import { cloneElement } from '../_util/vnode';
 import InnerSlider from './inner-slider';
 import defaultProps from './default-props';
 import { canUseDOM } from './utils/innerSliderUtils';
-import { getSlot } from '../../_util/props-util';
+import { getSlot } from '../_util/props-util';
 import { defineComponent } from 'vue';
 
 export default defineComponent({

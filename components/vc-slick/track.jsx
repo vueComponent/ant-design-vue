@@ -1,7 +1,7 @@
 import { createVNode } from 'vue';
-import classnames from '../../_util/classNames';
-import { cloneElement } from '../../_util/vnode';
-import { flattenChildren } from '../../_util/props-util';
+import classnames from '../_util/classNames';
+import { cloneElement } from '../_util/vnode';
+import { flattenChildren } from '../_util/props-util';
 import { lazyStartIndex, lazyEndIndex, getPreClones } from './utils/innerSliderUtils';
 
 // given specifications/props for a slide, fetch all the classes that need to be applied to the slide

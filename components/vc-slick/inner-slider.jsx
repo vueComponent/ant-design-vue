@@ -1,7 +1,7 @@
 import debounce from 'lodash-es/debounce';
 import ResizeObserver from 'resize-observer-polyfill';
-import classnames from '../../_util/classNames';
-import BaseMixin from '../../_util/BaseMixin';
+import classnames from '../_util/classNames';
+import BaseMixin from '../_util/BaseMixin';
 import defaultProps from './default-props';
 import initialState from './initial-state';
 import {
@@ -24,7 +24,7 @@ import {
 import Track from './track';
 import Dots from './dots';
 import { PrevArrow, NextArrow } from './arrows';
-import supportsPassive from '../../_util/supportsPassive';
+import supportsPassive from '../_util/supportsPassive';
 
 function noop() {}
 

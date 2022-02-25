@@ -1,4 +1,4 @@
-import PropTypes from '../../_util/vue-types';
+import PropTypes from '../_util/vue-types';
 
 const defaultProps = {
   accessibility: PropTypes.looseBool.def(true),

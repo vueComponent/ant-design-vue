@@ -1,5 +1,5 @@
-import classnames from '../../_util/classNames';
-import { cloneElement } from '../../_util/vnode';
+import classnames from '../_util/classNames';
+import { cloneElement } from '../_util/vnode';
 import { clamp } from './utils/innerSliderUtils';
 
 const getDotCount = function (spec) {

@@ -133,13 +133,14 @@ const BackTop = defineComponent({
         },
       };
 
-      const backTopBtn = state.visible ? (
-        <div {...divProps} ref={domRef}>
-          {slots.default?.() || defaultElement}
-        </div>
-      ) : null;
       const transitionProps = getTransitionProps('fade');
-      return <Transition {...transitionProps}>{backTopBtn}</Transition>;
+      return (
+        <Transition {...transitionProps}>
+          <div v-show={state.visible} {...divProps} ref={domRef}>
+            {slots.default?.() || defaultElement}
+          </div>
+        </Transition>
+      );
     };
   },
 });

@@ -1,5 +1,6 @@
-import classnames from '../../_util/classNames';
-import { cloneElement } from '../../_util/vnode';
+import classnames from '../_util/classNames';
+import { cloneElement } from '../_util/vnode';
+import { clamp } from './utils/innerSliderUtils';
 
 const getDotCount = function (spec) {
   let dots;
@@ -39,24 +40,26 @@ const Dots = (_, { attrs }) => {
   //
   // Credit: http://stackoverflow.com/a/13735425/1849458
   const mouseEvents = { onMouseenter, onMouseover, onMouseleave };
-  const dots = Array.apply(
-    null,
-    Array(dotCount + 1)
-      .join('0')
-      .split(''),
-  ).map((x, i) => {
-    const leftBound = i * slidesToScroll;
-    const rightBound = i * slidesToScroll + (slidesToScroll - 1);
-    const className = classnames({
-      'slick-active': currentSlide >= leftBound && currentSlide <= rightBound,
+  let dots = [];
+  for (let i = 0; i < dotCount; i++) {
+    let _rightBound = (i + 1) * slidesToScroll - 1;
+    let rightBound = infinite ? _rightBound : clamp(_rightBound, 0, slideCount - 1);
+    let _leftBound = rightBound - (slidesToScroll - 1);
+    let leftBound = infinite ? _leftBound : clamp(_leftBound, 0, slideCount - 1);
+
+    let className = classnames({
+      'slick-active': infinite
+        ? currentSlide >= leftBound && currentSlide <= rightBound
+        : currentSlide === leftBound,
     });
 
-    const dotOptions = {
+    let dotOptions = {
       message: 'dots',
       index: i,
       slidesToScroll,
       currentSlide,
     };
+
     function onClick(e) {
       // In Autoplay the focus stays on clicked button even after transition
       // to next slide. That only goes away by click somewhere outside
@@ -65,14 +68,12 @@ const Dots = (_, { attrs }) => {
       }
       clickHandler(dotOptions);
     }
-    return (
+    dots = dots.concat(
       <li key={i} class={className}>
-        {cloneElement(customPaging({ i }), {
-          onClick,
-        })}
-      </li>
+        {cloneElement(customPaging({ i }), { onClick })}
+      </li>,
     );
-  });
+  }
 
   return cloneElement(appendDots({ dots }), {
     class: dotsClass,

@@ -1,7 +1,7 @@
 import debounce from 'lodash-es/debounce';
 import ResizeObserver from 'resize-observer-polyfill';
-import classnames from '../../_util/classNames';
-import BaseMixin from '../../_util/BaseMixin';
+import classnames from '../_util/classNames';
+import BaseMixin from '../_util/BaseMixin';
 import defaultProps from './default-props';
 import initialState from './initial-state';
 import {
@@ -24,7 +24,7 @@ import {
 import Track from './track';
 import Dots from './dots';
 import { PrevArrow, NextArrow } from './arrows';
-import supportsPassive from '../../_util/supportsPassive';
+import supportsPassive from '../_util/supportsPassive';
 
 function noop() {}
 
@@ -42,10 +42,12 @@ export default {
     this.callbackTimers = [];
     this.clickable = true;
     this.debouncedResize = null;
+    const ssrState = this.ssrInit();
     return {
       ...initialState,
       currentSlide: this.initialSlide,
       slideCount: this.children.length,
+      ...ssrState,
     };
   },
   watch: {
@@ -83,7 +85,9 @@ export default {
             currentSlide: this.currentSlide,
           });
         }
-        if (nextProps.autoplay) {
+        if (!this.preProps.autoplay && nextProps.autoplay) {
+          this.handleAutoPlay('playing');
+        } else if (nextProps.autoplay) {
           this.handleAutoPlay('update');
         } else {
           this.pause('paused');
@@ -92,8 +96,7 @@ export default {
       this.preProps = { ...nextProps };
     },
   },
-  beforeMount() {
-    this.ssrInit();
+  mounted() {
     this.__emit('init');
     if (this.lazyLoad) {
       const slidesToLoad = getOnDemandLazySlides({
@@ -107,8 +110,6 @@ export default {
         this.__emit('lazyLoad', slidesToLoad);
       }
     }
-  },
-  mounted() {
     this.$nextTick(() => {
       const spec = {
         listRef: this.list,
@@ -118,7 +119,7 @@ export default {
       };
       this.updateState(spec, true, () => {
         this.adaptHeight();
-        this.autoplay && this.handleAutoPlay('update');
+        this.autoplay && this.handleAutoPlay('playing');
       });
       if (this.lazyLoad === 'progressive') {
         this.lazyLoadTimer = setInterval(this.progressiveLazyLoad, 1000);
@@ -132,14 +133,11 @@ export default {
         }
       });
       this.ro.observe(this.list);
-      Array.prototype.forEach.call(document.querySelectorAll('.slick-slide'), slide => {
-        slide.onfocus = this.$props.pauseOnFocus ? this.onSlideFocus : null;
-        slide.onblur = this.$props.pauseOnFocus ? this.onSlideBlur : null;
-      });
-      // To support server-side rendering
-      if (!window) {
-        return;
-      }
+      document.querySelectorAll &&
+        Array.prototype.forEach.call(document.querySelectorAll('.slick-slide'), slide => {
+          slide.onfocus = this.$props.pauseOnFocus ? this.onSlideFocus : null;
+          slide.onblur = this.$props.pauseOnFocus ? this.onSlideBlur : null;
+        });
       if (window.addEventListener) {
         window.addEventListener('resize', this.onWindowResized);
       } else {
@@ -166,6 +164,7 @@ export default {
     if (this.autoplayTimer) {
       clearInterval(this.autoplayTimer);
     }
+    this.ro?.disconnect();
   },
   updated() {
     this.checkImagesLoad();
@@ -206,7 +205,8 @@ export default {
       this.debouncedResize();
     },
     resizeWindow(setTrackStyle = true) {
-      if (!this.track) return;
+      const isTrackMounted = Boolean(this.track);
+      if (!isTrackMounted) return;
       const spec = {
         listRef: this.list,
         trackRef: this.track,
@@ -278,10 +278,9 @@ export default {
           const currentWidth = `${childrenWidths[this.currentSlide]}px`;
           trackStyle.left = `calc(${trackStyle.left} + (100% - ${currentWidth}) / 2 ) `;
         }
-        this.setState({
+        return {
           trackStyle,
-        });
-        return;
+        };
       }
       const childrenCount = children.length;
       const spec = { ...this.$props, ...this.$data, slideCount: childrenCount };
@@ -296,13 +295,17 @@ export default {
         width: trackWidth + '%',
         left: trackLeft + '%',
       };
-      this.setState({
+      return {
         slideWidth: slideWidth + '%',
         trackStyle,
-      });
+      };
     },
     checkImagesLoad() {
-      const images = document.querySelectorAll('.slick-slide img');
+      let images =
+        (this.list &&
+          this.list.querySelectorAll &&
+          this.list.querySelectorAll('.slick-slide img')) ||
+        [];
       const imagesCount = images.length;
       let loadedCount = 0;
       Array.prototype.forEach.call(images, image => {
@@ -376,10 +379,16 @@ export default {
       if (this.$attrs.onLazyLoad && slidesToLoad.length > 0) {
         this.__emit('lazyLoad', slidesToLoad);
       }
+      if (!this.$props.waitForAnimate && this.animationEndCallback) {
+        clearTimeout(this.animationEndCallback);
+        afterChange && afterChange(currentSlide);
+        delete this.animationEndCallback;
+      }
       this.setState(state, () => {
-        asNavFor &&
-          asNavFor.innerSlider.currentSlide !== currentSlide &&
+        if (asNavFor && this.asNavForIndex !== index) {
+          this.asNavForIndex = index;
           asNavFor.innerSlider.slideHandler(index);
+        }
         if (!nextState) return;
         this.animationEndCallback = setTimeout(() => {
           const { animating, ...firstBatch } = nextState;
@@ -399,6 +408,11 @@ export default {
         this.slideHandler(targetSlide, dontAnimate);
       } else {
         this.slideHandler(targetSlide);
+      }
+      this.$props.autoplay && this.handleAutoPlay('update');
+      if (this.$props.focusOnSelect) {
+        const nodes = this.list.querySelectorAll('.slick-current');
+        nodes[0] && nodes[0].focus();
       }
     },
     clickHandler(e) {
@@ -464,6 +478,10 @@ export default {
       if (this.$props.verticalSwiping) {
         this.enableBodyScroll();
       }
+    },
+    touchEnd(e) {
+      this.swipeEnd(e);
+      this.clickable = true;
     },
     slickPrev() {
       // this and fellow methods are wrapped in setTimeout
@@ -599,11 +617,13 @@ export default {
       'variableWidth',
       'unslick',
       'centerPadding',
+      'targetSlide',
+      'useCSS',
     ]);
     const { pauseOnHover } = this.$props;
     trackProps = {
       ...trackProps,
-      focusOnSelect: this.focusOnSelect ? this.selectHandler : null,
+      focusOnSelect: this.focusOnSelect && this.clickable ? this.selectHandler : null,
       ref: this.trackRefHandler,
       onMouseleave: pauseOnHover ? this.onTrackLeave : noop,
       onMouseover: pauseOnHover ? this.onTrackOver : noop,
@@ -701,14 +721,15 @@ export default {
         : noop,
       [supportsPassive ? 'onTouchmovePassive' : 'onTouchmove']:
         this.dragging && touchMove ? this.swipeMove : noop,
-      onTouchend: touchMove ? this.swipeEnd : noop,
+      onTouchend: touchMove ? this.touchEnd : noop,
       onTouchcancel: this.dragging && touchMove ? this.swipeEnd : noop,
       onKeydown: this.accessibility ? this.keyHandler : noop,
     };
 
     let innerSliderProps = {
       class: className,
-      // dir: 'ltr',
+      dir: 'ltr',
+      style: this.$attrs.style,
     };
 
     if (this.unslick) {

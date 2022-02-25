@@ -1,168 +1,148 @@
-import type { ExtractPropTypes } from 'vue';
-import { defineComponent, inject } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
+import { ref, computed, watchEffect, defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
-import debounce from 'lodash-es/debounce';
-import hasProp, { getComponent } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
 import warning from '../_util/warning';
 import classNames from '../_util/classNames';
-import SlickCarousel from '../vc-slick/src';
-import { tuple, withInstall } from '../_util/type';
+import SlickCarousel from '../vc-slick';
+import { withInstall } from '../_util/type';
+import useConfigInject from '../_util/hooks/useConfigInject';
+
+export type SwipeDirection = 'left' | 'down' | 'right' | 'up' | string;
+
+export type LazyLoadTypes = 'ondemand' | 'progressive';
+
+export type CarouselEffect = 'scrollx' | 'fade';
+export type DotPosition = 'top' | 'bottom' | 'left' | 'right';
+
+export interface CarouselRef {
+  goTo: (slide: number, dontAnimate?: boolean) => void;
+  next: () => void;
+  prev: () => void;
+  autoplay: (palyType?: 'update' | 'leave' | 'blur') => void;
+  innerSlider: any;
+}
 
 // Carousel
-export const carouselProps = {
-  effect: PropTypes.oneOf(tuple('scrollx', 'fade')),
-  dots: PropTypes.looseBool.def(true),
-  vertical: PropTypes.looseBool,
-  autoplay: PropTypes.looseBool,
-  easing: PropTypes.string,
-  beforeChange: PropTypes.func,
-  afterChange: PropTypes.func,
+export const carouselProps = () => ({
+  effect: String as PropType<CarouselEffect>,
+  dots: { type: Boolean, default: true },
+  vertical: { type: Boolean, default: undefined },
+  autoplay: { type: Boolean, default: undefined },
+  easing: String,
+  beforeChange: Function as PropType<(currentSlide: number, nextSlide: number) => void>,
+  afterChange: Function as PropType<(currentSlide: number) => void>,
   // style: PropTypes.React.CSSProperties,
-  prefixCls: PropTypes.string,
-  accessibility: PropTypes.looseBool,
+  prefixCls: String,
+  accessibility: { type: Boolean, default: undefined },
   nextArrow: PropTypes.any,
   prevArrow: PropTypes.any,
-  pauseOnHover: PropTypes.looseBool,
-  // className: PropTypes.string,
-  adaptiveHeight: PropTypes.looseBool,
-  arrows: PropTypes.looseBool.def(false),
-  autoplaySpeed: PropTypes.number,
-  centerMode: PropTypes.looseBool,
-  centerPadding: PropTypes.string,
-  cssEase: PropTypes.string,
-  dotsClass: PropTypes.string,
-  draggable: PropTypes.looseBool.def(false),
-  fade: PropTypes.looseBool,
-  focusOnSelect: PropTypes.looseBool,
-  infinite: PropTypes.looseBool,
-  initialSlide: PropTypes.number,
-  lazyLoad: PropTypes.looseBool,
-  rtl: PropTypes.looseBool,
-  slide: PropTypes.string,
-  slidesToShow: PropTypes.number,
-  slidesToScroll: PropTypes.number,
-  speed: PropTypes.number,
-  swipe: PropTypes.looseBool,
-  swipeToSlide: PropTypes.looseBool,
-  touchMove: PropTypes.looseBool,
-  touchThreshold: PropTypes.number,
-  variableWidth: PropTypes.looseBool,
-  useCSS: PropTypes.looseBool,
-  slickGoTo: PropTypes.number,
-  responsive: PropTypes.array,
-  dotPosition: PropTypes.oneOf(tuple('top', 'bottom', 'left', 'right')),
-  verticalSwiping: PropTypes.looseBool.def(false),
-};
-export type CarouselProps = Partial<ExtractPropTypes<typeof carouselProps>>;
+  pauseOnHover: { type: Boolean, default: undefined },
+  // className: String,
+  adaptiveHeight: { type: Boolean, default: undefined },
+  arrows: { type: Boolean, default: false },
+  autoplaySpeed: Number,
+  centerMode: { type: Boolean, default: undefined },
+  centerPadding: String,
+  cssEase: String,
+  dotsClass: String,
+  draggable: { type: Boolean, default: false },
+  fade: { type: Boolean, default: undefined },
+  focusOnSelect: { type: Boolean, default: undefined },
+  infinite: { type: Boolean, default: undefined },
+  initialSlide: Number,
+  lazyLoad: String as PropType<LazyLoadTypes>,
+  rtl: { type: Boolean, default: undefined },
+  slide: String,
+  slidesToShow: Number,
+  slidesToScroll: Number,
+  speed: Number,
+  swipe: { type: Boolean, default: undefined },
+  swipeToSlide: { type: Boolean, default: undefined },
+  swipeEvent: Function as PropType<(swipeDirection: SwipeDirection) => void>,
+  touchMove: { type: Boolean, default: undefined },
+  touchThreshold: Number,
+  variableWidth: { type: Boolean, default: undefined },
+  useCSS: { type: Boolean, default: undefined },
+  slickGoTo: Number,
+  responsive: Array,
+  dotPosition: { type: String as PropType<DotPosition>, default: undefined },
+  verticalSwiping: { type: Boolean, default: false },
+});
+export type CarouselProps = Partial<ExtractPropTypes<ReturnType<typeof carouselProps>>>;
 const Carousel = defineComponent({
   name: 'ACarousel',
   inheritAttrs: false,
-  props: carouselProps,
-  setup() {
-    return {
-      configProvider: inject('configProvider', defaultConfigProvider),
-      slick: undefined,
-      innerSlider: undefined,
+  props: carouselProps(),
+  setup(props, { slots, attrs, expose }) {
+    const slickRef = ref();
+
+    const goTo = (slide: number, dontAnimate = false) => {
+      slickRef.value?.slickGoTo(slide, dontAnimate);
     };
-  },
-  beforeMount() {
-    this.onWindowResized = debounce(this.onWindowResized, 500, {
-      leading: false,
-    });
-  },
-  mounted() {
-    if (hasProp(this, 'vertical')) {
+
+    expose({
+      goTo,
+      autoplay: palyType => {
+        slickRef.value?.innerSlider?.handleAutoPlay(palyType);
+      },
+      prev: () => {
+        slickRef.value?.slickPrev();
+      },
+      next: () => {
+        slickRef.value?.slickNext();
+      },
+      innerSlider: computed(() => {
+        return slickRef.value?.innerSlider;
+      }),
+    } as CarouselRef);
+    watchEffect(() => {
       warning(
-        !this.vertical,
+        props.vertical === undefined,
         'Carousel',
         '`vertical` is deprecated, please use `dotPosition` instead.',
       );
-    }
-    const { autoplay } = this;
-    if (autoplay) {
-      window.addEventListener('resize', this.onWindowResized);
-    }
-    // https://github.com/ant-design/ant-design/issues/7191
-    this.innerSlider = this.slick && this.slick.innerSlider;
-  },
-  beforeUnmount() {
-    const { autoplay } = this;
-    if (autoplay) {
-      window.removeEventListener('resize', this.onWindowResized);
-      (this.onWindowResized as any).cancel();
-    }
-  },
-  methods: {
-    getDotPosition() {
-      if (this.dotPosition) {
-        return this.dotPosition;
-      }
-      if (hasProp(this, 'vertical')) {
-        return this.vertical ? 'right' : 'bottom';
-      }
+    });
+    const { prefixCls, direction } = useConfigInject('carousel', props);
+    const dotPosition = computed(() => {
+      if (props.dotPosition) return props.dotPosition;
+      if (props.vertical !== undefined) return props.vertical ? 'right' : 'bottom';
       return 'bottom';
-    },
-    saveSlick(node: HTMLElement) {
-      this.slick = node;
-    },
-    onWindowResized() {
-      // Fix https://github.com/ant-design/ant-design/issues/2550
-      const { autoplay } = this;
-      if (autoplay && this.slick && this.slick.innerSlider && this.slick.innerSlider.autoPlay) {
-        this.slick.innerSlider.autoPlay();
-      }
-    },
-
-    next() {
-      this.slick.slickNext();
-    },
-
-    prev() {
-      this.slick.slickPrev();
-    },
-
-    goTo(slide: number, dontAnimate = false) {
-      this.slick.slickGoTo(slide, dontAnimate);
-    },
-  },
-
-  render() {
-    const props = { ...this.$props };
-    const { $slots } = this;
-
-    if (props.effect === 'fade') {
-      props.fade = true;
-    }
-    const { class: cls, style, ...restAttrs } = this.$attrs as any;
-    const getPrefixCls = this.configProvider.getPrefixCls;
-    let className = getPrefixCls('carousel', props.prefixCls);
-    const dotsClass = 'slick-dots';
-    const dotPosition = this.getDotPosition();
-    props.vertical = dotPosition === 'left' || dotPosition === 'right';
-    props.dotsClass = classNames(`${dotsClass}`, `${dotsClass}-${dotPosition || 'bottom'}`, {
-      [`${props.dotsClass}`]: !!props.dotsClass,
     });
-    className = classNames({
-      [cls]: !!cls,
-      [className]: !!className,
-      [`${className}-vertical`]: props.vertical,
+    const vertical = computed(() => dotPosition.value === 'left' || dotPosition.value === 'right');
+    const dsClass = computed(() => {
+      const dotsClass = 'slick-dots';
+      return classNames({
+        [dotsClass]: true,
+        [`${dotsClass}-${dotPosition.value}`]: true,
+        [`${props.dotsClass}`]: !!props.dotsClass,
+      });
     });
-    const SlickCarouselProps = {
-      ...props,
-      ...restAttrs,
-      nextArrow: getComponent(this, 'nextArrow'),
-      prevArrow: getComponent(this, 'prevArrow'),
+    return () => {
+      const { dots, arrows, draggable, effect } = props;
+      const { class: cls, style, ...restAttrs } = attrs;
+      const fade = effect === 'fade' ? true : props.fade;
+      const className = classNames(prefixCls.value, {
+        [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
+        [`${prefixCls.value}-vertical`]: vertical.value,
+        [`${cls}`]: !!cls,
+      });
+      return (
+        <div class={className} style={style}>
+          <SlickCarousel
+            ref={slickRef}
+            {...props}
+            {...restAttrs}
+            dots={!!dots}
+            dotsClass={dsClass.value}
+            arrows={arrows}
+            draggable={draggable}
+            fade={fade}
+            vertical={vertical.value}
+            v-slots={slots}
+          />
+        </div>
+      );
     };
-    return (
-      <div class={className} style={style}>
-        <SlickCarousel
-          ref={this.saveSlick}
-          {...SlickCarouselProps}
-          v-slots={$slots}
-        ></SlickCarousel>
-      </div>
-    );
   },
 });
 

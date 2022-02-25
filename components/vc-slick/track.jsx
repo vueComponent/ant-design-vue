@@ -1,7 +1,7 @@
 import { createVNode } from 'vue';
-import classnames from '../../_util/classNames';
-import { cloneElement } from '../../_util/vnode';
-import { flattenChildren } from '../../_util/props-util';
+import classnames from '../_util/classNames';
+import { cloneElement } from '../_util/vnode';
+import { flattenChildren } from '../_util/props-util';
 import { lazyStartIndex, lazyEndIndex, getPreClones } from './utils/innerSliderUtils';
 
 // given specifications/props for a slide, fetch all the classes that need to be applied to the slide
@@ -24,7 +24,15 @@ const getSlideClasses = spec => {
   } else {
     slickActive = spec.currentSlide <= index && index < spec.currentSlide + spec.slidesToShow;
   }
-  const slickCurrent = index === spec.currentSlide;
+  let focusedSlide;
+  if (spec.targetSlide < 0) {
+    focusedSlide = spec.targetSlide + spec.slideCount;
+  } else if (spec.targetSlide >= spec.slideCount) {
+    focusedSlide = spec.targetSlide - spec.slideCount;
+  } else {
+    focusedSlide = spec.targetSlide;
+  }
+  let slickCurrent = index === focusedSlide;
   return {
     'slick-slide': true,
     'slick-active': slickActive,
@@ -49,32 +57,24 @@ const getSlideStyle = function (spec) {
       style.left = -spec.index * parseInt(spec.slideWidth) + 'px';
     }
     style.opacity = spec.currentSlide === spec.index ? 1 : 0;
-    style.transition =
-      'opacity ' +
-      spec.speed +
-      'ms ' +
-      spec.cssEase +
-      ', ' +
-      'visibility ' +
-      spec.speed +
-      'ms ' +
-      spec.cssEase;
-    style.WebkitTransition =
-      'opacity ' +
-      spec.speed +
-      'ms ' +
-      spec.cssEase +
-      ', ' +
-      'visibility ' +
-      spec.speed +
-      'ms ' +
-      spec.cssEase;
+    if (spec.useCSS) {
+      style.transition =
+        'opacity ' +
+        spec.speed +
+        'ms ' +
+        spec.cssEase +
+        ', ' +
+        'visibility ' +
+        spec.speed +
+        'ms ' +
+        spec.cssEase;
+    }
   }
 
   return style;
 };
 
-const getKey = (child, fallbackKey) => child.key || (child.key === 0 && '0') || fallbackKey;
+const getKey = (child, fallbackKey) => child.key + '-' + fallbackKey;
 
 const renderSlides = function (spec, children) {
   let key;

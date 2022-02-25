@@ -21,6 +21,7 @@ const initialState = {
   touchObject: { startX: 0, startY: 0, curX: 0, curY: 0 },
   trackStyle: {},
   trackWidth: 0,
+  targetSlide: 0,
 };
 
 export default initialState;

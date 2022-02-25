@@ -1,10 +1,10 @@
-import json2mq from '../../_util/json2mq';
-import BaseMixin from '../../_util/BaseMixin';
-import { cloneElement } from '../../_util/vnode';
+import json2mq from '../_util/json2mq';
+import BaseMixin from '../_util/BaseMixin';
+import { cloneElement } from '../_util/vnode';
 import InnerSlider from './inner-slider';
 import defaultProps from './default-props';
 import { canUseDOM } from './utils/innerSliderUtils';
-import { getSlot } from '../../_util/props-util';
+import { getSlot } from '../_util/props-util';
 import { defineComponent } from 'vue';
 
 export default defineComponent({
@@ -21,7 +21,7 @@ export default defineComponent({
     };
   },
   // handles responsive breakpoints
-  beforeMount() {
+  mounted() {
     if (this.responsive) {
       const breakpoints = this.responsive.map(breakpt => breakpt.breakpoint);
       // sort them in increasing order of their numerical value
@@ -77,19 +77,19 @@ export default defineComponent({
       this._responsiveMediaHandlers.push({ mql, query, listener });
     },
     slickPrev() {
-      this.innerSlider.slickPrev();
+      this.innerSlider?.slickPrev();
     },
     slickNext() {
-      this.innerSlider.slickNext();
+      this.innerSlider?.slickNext();
     },
     slickGoTo(slide, dontAnimate = false) {
-      this.innerSlider.slickGoTo(slide, dontAnimate);
+      this.innerSlider?.slickGoTo(slide, dontAnimate);
     },
     slickPause() {
-      this.innerSlider.pause('paused');
+      this.innerSlider?.pause('paused');
     },
     slickPlay() {
-      this.innerSlider.handleAutoPlay('play');
+      this.innerSlider?.handleAutoPlay('play');
     },
   },
 
@@ -185,7 +185,7 @@ export default defineComponent({
 
     if (settings === 'unslick') {
       const className = 'regular slider ' + (this.className || '');
-      return <div class={className}>{newChildren}</div>;
+      return <div class={className}>{children}</div>;
     } else if (newChildren.length <= settings.slidesToShow) {
       settings.unslick = true;
     }

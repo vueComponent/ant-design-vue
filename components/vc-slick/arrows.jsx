@@ -1,5 +1,5 @@
-import classnames from '../../_util/classNames';
-import { cloneElement } from '../../_util/vnode';
+import classnames from '../_util/classNames';
+import { cloneElement } from '../_util/vnode';
 import { canGoNext } from './utils/innerSliderUtils';
 
 function noop() {}

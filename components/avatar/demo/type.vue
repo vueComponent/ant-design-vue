@@ -23,7 +23,7 @@ Image, Icon and letter are supported, and the latter two kinds avatar can have c
   </a-avatar>
   <a-avatar>U</a-avatar>
   <a-avatar>USER</a-avatar>
-  <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+  <a-avatar src="https://joeschmoe.io/api/v1/random" />
   <a-avatar style="color: #f56a00; background-color: #fde3cf">U</a-avatar>
   <a-avatar style="background-color: #87d068">
     <template #icon>

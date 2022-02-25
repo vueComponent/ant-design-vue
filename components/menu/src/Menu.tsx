@@ -27,7 +27,7 @@ import SubMenu from './SubMenu';
 import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 import { cloneElement } from '../../_util/vnode';
 import { OVERFLOW_KEY, PathContext } from './hooks/useKeyPath';
-import type { FocusEventHandler } from '../../_util/EventInterface';
+import type { FocusEventHandler, MouseEventHandler } from '../../_util/EventInterface';
 
 export const menuProps = {
   id: String,
@@ -64,6 +64,7 @@ export const menuProps = {
   onClick: [Function, Array] as PropType<MenuClickEventHandler>,
   onFocus: Function as PropType<FocusEventHandler>,
   onBlur: Function as PropType<FocusEventHandler>,
+  onMousedown: Function as PropType<MouseEventHandler>,
   'onUpdate:openKeys': Function as PropType<(keys: Key[]) => void>,
   'onUpdate:selectedKeys': Function as PropType<(keys: Key[]) => void>,
   'onUpdate:activeKey': Function as PropType<(key: Key) => void>,
@@ -422,6 +423,7 @@ export default defineComponent({
         <>
           <Overflow
             {...attrs}
+            onMousedown={props.onMousedown}
             prefixCls={`${prefixCls.value}-overflow`}
             component="ul"
             itemComponent={MenuItem}

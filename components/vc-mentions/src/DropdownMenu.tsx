@@ -1,6 +1,6 @@
 import Menu, { Item as MenuItem } from '../../menu';
 import type { PropType } from 'vue';
-import { defineComponent, inject, ref } from 'vue';
+import { onBeforeUnmount, defineComponent, inject, ref } from 'vue';
 import type { OptionProps } from './Option';
 import MentionsContextKey from './MentionsContext';
 import Spin from '../../spin';
@@ -22,11 +22,20 @@ export default defineComponent({
       setActiveIndex,
       selectOption,
       onFocus = noop,
-      onBlur = noop,
       loading,
     } = inject(MentionsContextKey, {
       activeIndex: ref(),
       loading: ref(false),
+    });
+    let timeoutId: any;
+    const onMousedown = (e: MouseEvent) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        onFocus(e);
+      });
+    };
+    onBeforeUnmount(() => {
+      clearTimeout(timeoutId);
     });
     return () => {
       const { prefixCls, options } = props;
@@ -40,8 +49,7 @@ export default defineComponent({
             const option = options.find(({ value }) => value === key);
             selectOption(option);
           }}
-          onBlur={onBlur}
-          onFocus={onFocus}
+          onMousedown={onMousedown}
         >
           {!loading.value &&
             options.map((option, index) => {

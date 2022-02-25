@@ -2,6 +2,7 @@ import type { CSSProperties, HTMLAttributes, PropType } from 'vue';
 import { computed, defineComponent, ref, watch } from 'vue';
 import ResizeObserver from '../vc-resize-observer';
 import classNames from '../_util/classNames';
+import type { MouseEventHandler } from '../_util/EventInterface';
 import type { Key, VueNode } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import { OverflowContextProvider } from './context';
@@ -37,6 +38,8 @@ export interface OverflowProps<ItemType> extends HTMLAttributes {
 
   /** When set to `full`, ssr will render full items by default and remove at client side */
   ssr?: 'full';
+
+  onMousedown?: MouseEventHandler;
 }
 
 const Overflow = defineComponent({
@@ -63,6 +66,7 @@ const Overflow = defineComponent({
     onVisibleChange: Function as PropType<(visibleCount: number) => void>,
     /** When set to `full`, ssr will render full items by default and remove at client side */
     ssr: String as PropType<'full'>,
+    onMousedown: Function as PropType<MouseEventHandler>,
   },
   emits: ['visibleChange'],
   setup(props, { attrs, emit }) {
@@ -247,6 +251,7 @@ const Overflow = defineComponent({
         suffix,
         component: Component = 'div' as any,
         id,
+        onMousedown,
       } = props;
       const { class: className, style, ...restAttrs } = attrs;
       let suffixStyle: CSSProperties = {};
@@ -346,6 +351,7 @@ const Overflow = defineComponent({
           id={id}
           class={classNames(!invalidate.value && prefixCls, className)}
           style={style}
+          onMousedown={onMousedown}
           {...restAttrs}
         >
           {mergedData.value.map(internalRenderItemNode)}

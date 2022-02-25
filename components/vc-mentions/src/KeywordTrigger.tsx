@@ -92,9 +92,8 @@ export default defineComponent({
           popupTransitionName={transitionName}
           builtinPlacements={BUILT_IN_PLACEMENTS}
           getPopupContainer={getPopupContainer}
-        >
-          {slots.default?.()}
-        </Trigger>
+          v-slots={{ default: slots.default }}
+        ></Trigger>
       );
     };
   },

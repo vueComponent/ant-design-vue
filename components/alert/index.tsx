@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { inject, defineComponent, ref } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
@@ -16,6 +16,7 @@ import { isValidElement, getPropsSlot } from '../_util/props-util';
 import { defaultConfigProvider } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
 import { cloneElement } from '../_util/vnode';
+import type { NodeMouseEventHandler } from '../vc-tree/contextTypes';
 
 function noop() {}
 
@@ -37,7 +38,7 @@ const AlertTypes = tuple('success', 'info', 'warning', 'error');
 
 export type AlertType = typeof AlertTypes[number];
 
-const alertProps = {
+export const alertProps = () => ({
   /**
    * Type of Alert styles, options: `success`, `info`, `warning`, `error`
    */
@@ -57,16 +58,16 @@ const alertProps = {
   prefixCls: PropTypes.string,
   banner: PropTypes.looseBool,
   icon: PropTypes.any,
-  onClose: PropTypes.any,
-};
+  closeIcon: PropTypes.any,
+  onClose: Function as PropType<NodeMouseEventHandler>,
+});
 
-export type AlertProps = Partial<ExtractPropTypes<typeof alertProps>>;
+export type AlertProps = Partial<ExtractPropTypes<ReturnType<typeof alertProps>>>;
 
 const Alert = defineComponent({
   name: 'AAlert',
   inheritAttrs: false,
-  props: alertProps,
-  emits: ['close'],
+  props: alertProps(),
   setup(props, { slots, emit, attrs, expose }) {
     const configProvider = inject('configProvider', defaultConfigProvider);
     const closing = ref(false);
@@ -94,9 +95,13 @@ const Alert = defineComponent({
     };
 
     expose({ animationEnd });
-
+    const motionStyle = ref<CSSProperties>({});
     return () => {
-      const { prefixCls: customizePrefixCls, banner } = props;
+      const {
+        prefixCls: customizePrefixCls,
+        banner,
+        closeIcon: customCloseIcon = slots.closeIcon?.(),
+      } = props;
       const { getPrefixCls } = configProvider;
       const prefixCls = getPrefixCls('alert', customizePrefixCls);
 
@@ -132,8 +137,10 @@ const Alert = defineComponent({
         <button type="button" onClick={handleClose} class={`${prefixCls}-close-icon`} tabindex={0}>
           {closeText ? (
             <span class={`${prefixCls}-close-text`}>{closeText}</span>
-          ) : (
+          ) : customCloseIcon === undefined ? (
             <CloseOutlined />
+          ) : (
+            customCloseIcon
           )}
         </button>
       ) : null;
@@ -147,14 +154,23 @@ const Alert = defineComponent({
           <span class={`${prefixCls}-icon`}>{icon}</span>
         ))) || <IconType class={`${prefixCls}-icon`} />;
 
-      const transitionProps = getTransitionProps(`${prefixCls}-slide-up`, {
+      const transitionProps = getTransitionProps(`${prefixCls}-motion`, {
         appear: false,
+        css: true,
         onAfterLeave: animationEnd,
+        onBeforeLeave: (node: HTMLDivElement) => {
+          node.style.maxHeight = `${node.offsetHeight}px`;
+        },
+        onLeave: (node: HTMLDivElement) => {
+          node.style.maxHeight = '0px';
+        },
       });
       return closed.value ? null : (
         <Transition {...transitionProps}>
           <div
+            role="alert"
             {...attrs}
+            style={{ ...(attrs.style as Object), ...motionStyle.value }}
             v-show={!closing.value}
             class={[attrs.class, alertCls]}
             data-show={!closing.value}
@@ -162,8 +178,8 @@ const Alert = defineComponent({
           >
             {showIcon ? iconNode : null}
             <div class={`${prefixCls}-content`}>
-              <div class={`${prefixCls}-message`}>{message}</div>
-              <div class={`${prefixCls}-description`}>{description}</div>
+              {message ? <div class={`${prefixCls}-message`}>{message}</div> : null}
+              {description ? <div class={`${prefixCls}-description`}>{description}</div> : null}
             </div>
             {closeIcon}
           </div>

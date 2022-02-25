@@ -21,6 +21,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/8emPa3fjl/Alert.svg
 | banner | 是否用作顶部公告 | boolean | false |  |
 | closable | 默认不显示关闭按钮 | boolean | 无 |  |
 | closeText | 自定义关闭按钮 | string\|slot | 无 |  |
+| closeIcon | 自定义关闭 Icon | slot | <CloseOutlined /> | 3.0 |
 | description | 警告提示的辅助性文字介绍 | string\|slot | 无 |  |
 | icon | 自定义图标，`showIcon` 为 `true` 时有效 | vnode\|slot | - |  |
 | message | 警告提示内容 | string\|slot | 无 |  |

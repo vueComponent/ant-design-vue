@@ -20,6 +20,7 @@ Alert component for feedback.
 | banner | Whether to show as banner | boolean | false |  |
 | closable | Whether Alert can be closed | boolean |  |  |
 | closeText | Close text to show | string\|slot | - |  |
+| closeIcon | Custom close icon | slot | <CloseOutlined /> | 3.0 |
 | description | Additional content of Alert | string\|slot | - |  |
 | icon | Custom icon, effective when `showIcon` is `true` | vnode \| slot | - |  |
 | message | Content of Alert | string\|slot | - |  |

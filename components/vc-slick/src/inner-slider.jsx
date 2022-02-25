@@ -164,7 +164,7 @@ export default {
     if (this.autoplayTimer) {
       clearInterval(this.autoplayTimer);
     }
-    this.ro.disconnect();
+    this.ro?.disconnect();
   },
   updated() {
     this.checkImagesLoad();

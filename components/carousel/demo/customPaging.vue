@@ -71,6 +71,7 @@ export default defineComponent({
   width: 100%;
   height: 100%;
   filter: grayscale(100%);
+  display: block;
 }
 .ant-carousel :deep .slick-thumb li.slick-active img {
   filter: grayscale(0%);

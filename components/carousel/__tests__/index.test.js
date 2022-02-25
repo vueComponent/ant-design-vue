@@ -21,9 +21,7 @@ describe('Carousel', () => {
       sync: false,
     };
     const wrapper = mount(Carousel, props);
-    const { innerSlider, slick } = wrapper.vm;
-    const innerSliderFromRefs = slick.innerSlider;
-    expect(innerSlider).toBe(innerSliderFromRefs);
+    const { innerSlider } = wrapper.componentVM;
     expect(typeof innerSlider.slickNext).toBe('function');
   });
 
@@ -39,26 +37,25 @@ describe('Carousel', () => {
       sync: false,
     };
     const wrapper = mount(Carousel, props);
-    const { prev, next, goTo } = wrapper.vm;
+    const { prev, next, goTo, innerSlider } = wrapper.componentVM;
     expect(typeof prev).toBe('function');
     expect(typeof next).toBe('function');
     expect(typeof goTo).toBe('function');
-    const slick = wrapper.vm.slick;
 
-    expect(slick.innerSlider.currentSlide).toBe(0);
+    expect(innerSlider.currentSlide).toBe(0);
     wrapper.vm.goTo(2);
     await asyncExpect(() => {
-      expect(slick.innerSlider.currentSlide).toBe(2);
+      expect(innerSlider.currentSlide).toBe(2);
     }, 1000);
     prev();
     await asyncExpect(() => {
-      expect(slick.innerSlider.currentSlide).toBe(1);
+      expect(innerSlider.currentSlide).toBe(1);
     }, 1000);
 
     next();
 
     await asyncExpect(() => {
-      expect(slick.innerSlider.currentSlide).toBe(2);
+      expect(innerSlider.currentSlide).toBe(2);
     }, 1000);
   });
   // TODO
@@ -77,8 +74,8 @@ describe('Carousel', () => {
   //     sync: false,
   //   };
   //   const wrapper = mount(Carousel, props);
-
-  //   const spy = jest.spyOn(wrapper.vm.slick.innerSlider, 'handleAutoPlay');
+  //   await sleep(100);
+  //   const spy = jest.spyOn(wrapper.componentVM.innerSlider, 'handleAutoPlay');
   //   window.resizeTo(1000);
   //   expect(spy).not.toHaveBeenCalled();
   //   await new Promise(resolve => setTimeout(resolve, 1000));
@@ -100,12 +97,9 @@ describe('Carousel', () => {
       sync: false,
     };
     const wrapper = mount(Carousel, props);
-    const { onWindowResized } = wrapper.vm;
-    const spy = jest.spyOn(wrapper.vm.onWindowResized, 'cancel');
-    const spy2 = jest.spyOn(window, 'removeEventListener');
+    const spy = jest.spyOn(window, 'removeEventListener');
     wrapper.unmount();
     expect(spy).toHaveBeenCalled();
-    expect(spy2).toHaveBeenCalledWith('resize', onWindowResized);
   });
 
   describe('should works for dotPosition', () => {

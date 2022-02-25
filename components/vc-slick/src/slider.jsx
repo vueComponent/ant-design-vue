@@ -77,19 +77,19 @@ export default defineComponent({
       this._responsiveMediaHandlers.push({ mql, query, listener });
     },
     slickPrev() {
-      this.innerSlider.slickPrev();
+      this.innerSlider?.slickPrev();
     },
     slickNext() {
-      this.innerSlider.slickNext();
+      this.innerSlider?.slickNext();
     },
     slickGoTo(slide, dontAnimate = false) {
-      this.innerSlider.slickGoTo(slide, dontAnimate);
+      this.innerSlider?.slickGoTo(slide, dontAnimate);
     },
     slickPause() {
-      this.innerSlider.pause('paused');
+      this.innerSlider?.pause('paused');
     },
     slickPlay() {
-      this.innerSlider.handleAutoPlay('play');
+      this.innerSlider?.handleAutoPlay('play');
     },
   },
 

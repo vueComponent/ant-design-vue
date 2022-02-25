@@ -10,7 +10,13 @@ Autocomplete function of input field.
 
 ## When To Use
 
-When there is a need for autocomplete functionality.
+- When you need an input box instead of a selector.
+- When you need input suggestions or helping text.
+
+The differences with Select are:
+
+- AutoComplete is an input box with text hints, and users can type freely. The keyword is aiding **input**.
+- Select is selecting among given choices. The keyword is **select**.
 
 ## API
 
@@ -58,7 +64,7 @@ When there is a need for autocomplete functionality.
 
 ### Part of the api in v2 are not available in v3?
 
-AutoComplete is an Input component that supports auto complete tips. As such, it should not support props like `labelInValue` that affect value display. In v2, the AutoComplete implementation can not handle the case where the `value` and `label` are identical. v3 not longer support `label` as the value input.
+AutoComplete is an Input component that supports auto complete tips. As such, it should not support props like `labelInValue` that affect value display. In v3, the AutoComplete implementation can not handle the case where the `value` and `label` are identical. v4 not longer support `label` as the value input.
 
 Besides, to unify the API, `dataSource` is replaced with `options`. You can migrate with the following change:
 

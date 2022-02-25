@@ -1,4 +1,4 @@
-import type { App, Plugin, VNode, ExtractPropTypes } from 'vue';
+import type { App, VNode, ExtractPropTypes } from 'vue';
 import { defineComponent, ref } from 'vue';
 import Select, { selectProps } from '../select';
 import PropTypes from '../_util/vue-types';
@@ -44,8 +44,6 @@ const AutoComplete = defineComponent({
   },
   emits: ['change', 'select', 'focus', 'blur'],
   slots: ['option'],
-  Option,
-  OptGroup,
   setup(props, { slots, attrs, expose }) {
     warning(
       !('dataSource' in slots),
@@ -145,15 +143,13 @@ const AutoComplete = defineComponent({
 });
 
 /* istanbul ignore next */
-AutoComplete.install = function (app: App) {
-  app.component(AutoComplete.name, AutoComplete);
-  app.component(AutoComplete.Option.displayName, AutoComplete.Option);
-  app.component(AutoComplete.OptGroup.displayName, AutoComplete.OptGroup);
-  return app;
-};
-
-export default AutoComplete as typeof AutoComplete &
-  Plugin & {
-    readonly Option: typeof Option;
-    readonly OptGroup: typeof OptGroup;
-  };
+export default Object.assign(AutoComplete, {
+  Option,
+  OptGroup,
+  install(app: App) {
+    app.component(AutoComplete.name, AutoComplete);
+    app.component(Option.displayName, Option);
+    app.component(OptGroup.displayName, OptGroup);
+    return app;
+  },
+});

@@ -5,6 +5,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SizeType } from '../config-provider';
+import UnreachableException from '../_util/unreachableException';
 
 const buttonGroupProps = {
   prefixCls: PropTypes.string,
@@ -34,7 +35,8 @@ export default defineComponent({
           sizeCls = 'sm';
           break;
         default:
-          break;
+          // eslint-disable-next-line no-console
+          console.warn(new UnreachableException(size).error);
       }
       return {
         [`${prefixCls.value}`]: true,

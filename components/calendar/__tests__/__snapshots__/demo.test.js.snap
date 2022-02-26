@@ -1615,13 +1615,11 @@ exports[`renders ./components/calendar/demo/notice-calendar.vue correctly 1`] = 
 `;
 
 exports[`renders ./components/calendar/demo/select.vue correctly 1`] = `
-<div class="ant-alert ant-alert-info ant-alert-no-icon" data-show="true">
+<div role="alert" class="ant-alert ant-alert-info ant-alert-no-icon" data-show="true">
   <!---->
   <div class="ant-alert-content">
     <div class="ant-alert-message">You selected date: 2017-01-25</div>
-    <div class="ant-alert-description">
-      <!---->
-    </div>
+    <!---->
   </div>
   <!---->
 </div>

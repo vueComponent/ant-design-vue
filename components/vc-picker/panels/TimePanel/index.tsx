@@ -19,7 +19,16 @@ export type SharedTimeProps<DateType> = {
   secondStep?: number;
   hideDisabledOptions?: boolean;
   defaultValue?: DateType;
-} & DisabledTimes;
+
+  /** @deprecated Please use `disabledTime` instead. */
+  disabledHours?: DisabledTimes['disabledHours'];
+  /** @deprecated Please use `disabledTime` instead. */
+  disabledMinutes?: DisabledTimes['disabledMinutes'];
+  /** @deprecated Please use `disabledTime` instead. */
+  disabledSeconds?: DisabledTimes['disabledSeconds'];
+
+  disabledTime?: (date: DateType) => DisabledTimes;
+};
 
 export type TimePanelProps<DateType> = {
   format?: string;

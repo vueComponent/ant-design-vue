@@ -215,12 +215,20 @@ function PickerPanel<DateType>() {
           // When value is null and set showTime
           if (!mergedValue.value && props.showTime) {
             if (typeof showTime === 'object') {
-              return setDateTime(generateConfig, date, showTime.defaultValue || now);
+              return setDateTime(
+                generateConfig,
+                Array.isArray(date) ? date[0] : date,
+                showTime.defaultValue || now,
+              );
             }
             if (defaultValue) {
-              return setDateTime(generateConfig, date, defaultValue);
+              return setDateTime(
+                generateConfig,
+                Array.isArray(date) ? date[0] : date,
+                defaultValue,
+              );
             }
-            return setDateTime(generateConfig, date, now);
+            return setDateTime(generateConfig, Array.isArray(date) ? date[0] : date, now);
           }
           return date;
         },

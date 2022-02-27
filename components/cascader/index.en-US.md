@@ -23,9 +23,9 @@ Cascade selection box.
 | --- | --- | --- | --- | --- |
 | allowClear | whether allow clear | boolean | true |  |
 | autofocus | get focus when component mounted | boolean | false |  |
-| changeOnSelect | change value on each selection if set to true, see above demo for details | boolean | false |  |
+| changeOnSelect | (Work on single select) change value on each selection if set to true, see above demo for details | boolean | false |  |
 | disabled | whether disabled select | boolean | false |  |
-| displayRender | render function of displaying selected options, you can use #displayRender="{labels, selectedOptions}" | `({labels, selectedOptions}) => VNode` | `labels => labels.join(' / ')` |  |
+| displayRender | render function of displaying selected options, you can use #displayRender="{labels, selectedOptions}". | `({labels, selectedOptions}) => VNode` | `labels => labels.join(' / ')` |  |
 | expandTrigger | expand current item when click or hover, one of 'click' 'hover' | string | 'click' |  |
 | fieldNames | custom field name for label and value and children | object | `{ label: 'label', value: 'value', children: 'children' }` |  |
 | getPopupContainer | Parent Node which the selector should be rendered to. Default to `body`. When position issues happen, try to modify it into scrollable content and position it relative. | Function(triggerNode) | () => document.body |  |

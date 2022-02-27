@@ -71,15 +71,19 @@ export default defineComponent({
         <RightOutlined rotate={panelProps.isActive ? 90 : undefined} />
       );
 
-      return isValidElement(Array.isArray(expandIcon) ? icon[0] : icon)
-        ? cloneElement(
-            icon,
-            {
-              class: `${prefixCls.value}-arrow`,
-            },
-            false,
-          )
-        : icon;
+      return (
+        <div>
+          {isValidElement(Array.isArray(expandIcon) ? icon[0] : icon)
+            ? cloneElement(
+                icon,
+                {
+                  class: `${prefixCls.value}-arrow`,
+                },
+                false,
+              )
+            : icon}
+        </div>
+      );
     };
     const setActiveKey = (activeKey: Key[]) => {
       if (props.activeKey === undefined) {

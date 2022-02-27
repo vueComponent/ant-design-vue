@@ -1,8 +1,8 @@
 import { flattenChildren } from '../_util/props-util';
 import type { ExtractPropTypes, PropType } from 'vue';
-import { computed, defineComponent, inject } from 'vue';
-import { defaultConfigProvider } from '../config-provider';
+import { computed, defineComponent } from 'vue';
 import { withInstall } from '../_util/type';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const dividerProps = {
   prefixCls: String,
@@ -29,8 +29,7 @@ const Divider = defineComponent({
   name: 'ADivider',
   props: dividerProps,
   setup(props, { slots }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
-    const prefixClsRef = computed(() => configProvider.getPrefixCls('divider', props.prefixCls));
+    const { prefixCls: prefixClsRef, direction } = useConfigInject('divider', props);
 
     const classString = computed(() => {
       const { type, dashed, plain } = props;
@@ -40,7 +39,7 @@ const Divider = defineComponent({
         [`${prefixCls}-${type}`]: true,
         [`${prefixCls}-dashed`]: !!dashed,
         [`${prefixCls}-plain`]: !!plain,
-        [`${prefixCls}-rtl`]: configProvider.direction === 'rtl',
+        [`${prefixCls}-rtl`]: direction.value === 'rtl',
       };
     });
 

@@ -1,5 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import { inject, defineComponent, ref } from 'vue';
+import { defineComponent, ref } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -13,10 +13,10 @@ import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { getTransitionProps, Transition } from '../_util/transition';
 import { isValidElement, getPropsSlot } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
 import { cloneElement } from '../_util/vnode';
 import type { NodeMouseEventHandler } from '../vc-tree/contextTypes';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 function noop() {}
 
@@ -69,7 +69,7 @@ const Alert = defineComponent({
   inheritAttrs: false,
   props: alertProps(),
   setup(props, { slots, emit, attrs, expose }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
+    const { prefixCls, direction } = useConfigInject('alert', props);
     const closing = ref(false);
     const closed = ref(false);
     const alertNode = ref();
@@ -97,13 +97,7 @@ const Alert = defineComponent({
     expose({ animationEnd });
     const motionStyle = ref<CSSProperties>({});
     return () => {
-      const {
-        prefixCls: customizePrefixCls,
-        banner,
-        closeIcon: customCloseIcon = slots.closeIcon?.(),
-      } = props;
-      const { getPrefixCls } = configProvider;
-      const prefixCls = getPrefixCls('alert', customizePrefixCls);
+      const { banner, closeIcon: customCloseIcon = slots.closeIcon?.() } = props;
 
       let { closable, type, showIcon } = props;
 
@@ -123,20 +117,26 @@ const Alert = defineComponent({
       if (closeText) {
         closable = true;
       }
-
-      const alertCls = classNames(prefixCls, {
-        [`${prefixCls}-${type}`]: true,
-        [`${prefixCls}-closing`]: closing.value,
-        [`${prefixCls}-with-description`]: !!description,
-        [`${prefixCls}-no-icon`]: !showIcon,
-        [`${prefixCls}-banner`]: !!banner,
-        [`${prefixCls}-closable`]: closable,
+      const prefixClsValue = prefixCls.value;
+      const alertCls = classNames(prefixClsValue, {
+        [`${prefixClsValue}-${type}`]: true,
+        [`${prefixClsValue}-closing`]: closing.value,
+        [`${prefixClsValue}-with-description`]: !!description,
+        [`${prefixClsValue}-no-icon`]: !showIcon,
+        [`${prefixClsValue}-banner`]: !!banner,
+        [`${prefixClsValue}-closable`]: closable,
+        [`${prefixClsValue}-rtl`]: direction.value === 'rtl',
       });
 
       const closeIcon = closable ? (
-        <button type="button" onClick={handleClose} class={`${prefixCls}-close-icon`} tabindex={0}>
+        <button
+          type="button"
+          onClick={handleClose}
+          class={`${prefixClsValue}-close-icon`}
+          tabindex={0}
+        >
           {closeText ? (
-            <span class={`${prefixCls}-close-text`}>{closeText}</span>
+            <span class={`${prefixClsValue}-close-text`}>{closeText}</span>
           ) : customCloseIcon === undefined ? (
             <CloseOutlined />
           ) : (
@@ -148,13 +148,13 @@ const Alert = defineComponent({
       const iconNode = (icon &&
         (isValidElement(icon) ? (
           cloneElement(icon, {
-            class: `${prefixCls}-icon`,
+            class: `${prefixClsValue}-icon`,
           })
         ) : (
-          <span class={`${prefixCls}-icon`}>{icon}</span>
-        ))) || <IconType class={`${prefixCls}-icon`} />;
+          <span class={`${prefixClsValue}-icon`}>{icon}</span>
+        ))) || <IconType class={`${prefixClsValue}-icon`} />;
 
-      const transitionProps = getTransitionProps(`${prefixCls}-motion`, {
+      const transitionProps = getTransitionProps(`${prefixClsValue}-motion`, {
         appear: false,
         css: true,
         onAfterLeave: animationEnd,
@@ -177,9 +177,11 @@ const Alert = defineComponent({
             ref={alertNode}
           >
             {showIcon ? iconNode : null}
-            <div class={`${prefixCls}-content`}>
-              {message ? <div class={`${prefixCls}-message`}>{message}</div> : null}
-              {description ? <div class={`${prefixCls}-description`}>{description}</div> : null}
+            <div class={`${prefixClsValue}-content`}>
+              {message ? <div class={`${prefixClsValue}-message`}>{message}</div> : null}
+              {description ? (
+                <div class={`${prefixClsValue}-description`}>{description}</div>
+              ) : null}
             </div>
             {closeIcon}
           </div>

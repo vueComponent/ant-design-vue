@@ -20,6 +20,8 @@ import { tuple, withInstall } from '../_util/type';
 import omit from '../_util/omit';
 import devWarning from '../vc-util/devWarning';
 
+type ILevelMove = number | [number, number];
+
 const PlacementTypes = tuple('top', 'right', 'bottom', 'left');
 export type placementType = typeof PlacementTypes[number];
 
@@ -43,8 +45,8 @@ const drawerProps = () => ({
   mask: PropTypes.looseBool,
   maskStyle: PropTypes.object,
   /** @deprecated Use `style` instead */
-  wrapStyle: PropTypes.style,
-  style: PropTypes.style,
+  wrapStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  style: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   class: PropTypes.any,
   /** @deprecated Use `class` instead */
   wrapClassName: PropTypes.string,
@@ -68,7 +70,11 @@ const drawerProps = () => ({
   footer: PropTypes.any,
   footerStyle: PropTypes.object,
   level: PropTypes.any,
-  levelMove: PropTypes.any,
+  levelMove: {
+    type: [Number, Array, Function] as PropType<
+      ILevelMove | ((e: { target: HTMLElement; open: boolean }) => ILevelMove)
+    >,
+  },
   handle: PropTypes.any,
   /** @deprecated Use `@afterVisibleChange` instead */
   afterVisibleChange: PropTypes.func,
@@ -199,7 +205,7 @@ const Drawer = defineComponent({
 
     const offsetStyle = computed(() => {
       // https://github.com/ant-design/ant-design/issues/24287
-      const { visible, mask, placement, size, width, height } = props;
+      const { visible, mask, placement, size = 'default', width, height } = props;
       if (!visible && !mask) {
         return {};
       }
@@ -254,7 +260,7 @@ const Drawer = defineComponent({
 
     const renderCloseIcon = (prefixCls: string) => {
       const { closable } = props;
-      const $closeIcon = props.closeIcon ? slots.closeIcon?.() : props.closeIcon;
+      const $closeIcon = slots.closeIcon ? slots.closeIcon?.() : props.closeIcon;
       return (
         closable && (
           <button key="closer" onClick={close} aria-label="Close" class={`${prefixCls}-close`}>

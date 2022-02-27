@@ -34,6 +34,9 @@ export default defineComponent({
         case 'small':
           sizeCls = 'sm';
           break;
+        case 'middle':
+        case undefined:
+          break;
         default:
           // eslint-disable-next-line no-console
           console.warn(new UnreachableException(size).error);

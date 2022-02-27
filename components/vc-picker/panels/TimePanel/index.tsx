@@ -6,6 +6,7 @@ import { createKeydownHandler } from '../../utils/uiUtil';
 import classNames from '../../../_util/classNames';
 import { ref } from 'vue';
 import useMergeProps from '../../hooks/useMergeProps';
+// import type { RangeType } from '../../RangePicker';
 
 export type SharedTimeProps<DateType> = {
   format?: string;
@@ -27,7 +28,7 @@ export type SharedTimeProps<DateType> = {
   /** @deprecated Please use `disabledTime` instead. */
   disabledSeconds?: DisabledTimes['disabledSeconds'];
 
-  disabledTime?: (date: DateType) => DisabledTimes;
+  // disabledTime?: (date: DateType, type?: RangeType) => DisabledTimes;
 };
 
 export type TimePanelProps<DateType> = {

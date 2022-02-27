@@ -33,10 +33,10 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
     slots: [
       'suffixIcon',
       // 'clearIcon',
-      // 'prevIcon',
-      // 'nextIcon',
-      // 'superPrevIcon',
-      // 'superNextIcon',
+      'prevIcon',
+      'nextIcon',
+      'superPrevIcon',
+      'superNextIcon',
       // 'panelRender',
       'dateRender',
       'renderExtraFooter',
@@ -157,7 +157,6 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
         const { format, showTime } = p as any;
 
         let additionalOverrideProps: any = {};
-
         additionalOverrideProps = {
           ...additionalOverrideProps,
           ...(showTime ? getTimeProps({ format, picker, ...showTime }) : {}),
@@ -201,10 +200,10 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
             prefixCls={pre}
             getPopupContainer={attrs.getCalendarContainer || getPopupContainer.value}
             generateConfig={generateConfig}
-            prevIcon={<span class={`${pre}-prev-icon`} />}
-            nextIcon={<span class={`${pre}-next-icon`} />}
-            superPrevIcon={<span class={`${pre}-super-prev-icon`} />}
-            superNextIcon={<span class={`${pre}-super-next-icon`} />}
+            prevIcon={slots.prevIcon?.() || <span class={`${pre}-prev-icon`} />}
+            nextIcon={slots.nextIcon?.() || <span class={`${pre}-next-icon`} />}
+            superPrevIcon={slots.superPrevIcon?.() || <span class={`${pre}-super-prev-icon`} />}
+            superNextIcon={slots.superNextIcon?.() || <span class={`${pre}-super-next-icon`} />}
             components={Components}
             direction={direction.value}
             onChange={onChange}

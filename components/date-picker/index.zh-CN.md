@@ -96,6 +96,10 @@ cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 | size | 输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px | `large` \| `middle` \| `small` | - |  |
 | suffixIcon | 自定义的选择框后缀图标 | v-slot:suffixIcon | - |  |
 | valueFormat | 可选，绑定值的格式，对 value、defaultValue、defaultPickerValue 起作用。不指定则绑定值为 dayjs 对象 | string，[具体格式](https://day.js.org/docs/zh-CN/display/format) | - |  |
+| nextIcon | 自定义下一个图标 | slot | - | 3.0 |
+| prevIcon | 自定义上一个图标 | slot | - | 3.0 |
+| superNextIcon | 自定义 `<<` 切换图标 | slot | - | 3.0 |
+| superPrevIcon | 自定义 `>>` 切换图标 | slot | - | 3.0 |
 
 ### 共有的事件
 

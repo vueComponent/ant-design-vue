@@ -1,7 +1,6 @@
 import type { App, Plugin, ExtractPropTypes, PropType } from 'vue';
 import { provide, defineComponent, ref, watch, computed, toRef } from 'vue';
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import type { RenderEmptyHandler } from '../config-provider';
 
 import Spin from '../spin';
 import type { PaginationConfig } from '../pagination';
@@ -72,6 +71,7 @@ export interface ListLocale {
 export type ListProps = Partial<ExtractPropTypes<typeof listProps>>;
 
 import { ListContextKey } from './contextKey';
+import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
 const List = defineComponent({
   name: 'AList',

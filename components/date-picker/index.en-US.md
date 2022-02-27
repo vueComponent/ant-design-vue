@@ -95,6 +95,10 @@ The following APIs are shared by DatePicker, RangePicker.
 | size | To determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px | `large` \| `middle` \| `small` | - |  |
 | suffixIcon | The custom suffix icon | v-slot:suffixIcon | - |  |
 | valueFormat | optional, format of binding value. If not specified, the binding value will be a Date object | string，[date formats](https://day.js.org/docs/en/display/format) | - |  |
+| nextIcon | The custom next icon | slot | - | 3.0 |
+| prevIcon | The custom prev icon | slot | - | 3.0 |
+| superNextIcon | The custom super next icon | slot | - | 3.0 |
+| superPrevIcon | The custom super prev icon | slot | - | 3.0 |
 
 ### Common Events
 

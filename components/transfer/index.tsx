@@ -7,13 +7,13 @@ import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
-import type { RenderEmptyHandler } from '../config-provider';
 import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { TransferListBodyProps } from './ListBody';
 import type { PaginationType } from './interface';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
 export type { TransferListProps } from './list';
 export type { TransferOperationProps } from './operation';

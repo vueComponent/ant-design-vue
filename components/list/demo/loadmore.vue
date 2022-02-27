@@ -42,7 +42,7 @@ Load more list with `loadMore` property.
             <a href="https://www.antdv.com/">{{ item.name.last }}</a>
           </template>
           <template #avatar>
-            <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+            <a-avatar src="https://joeschmoe.io/api/v1/random" />
           </template>
         </a-list-item-meta>
         <div>content</div>

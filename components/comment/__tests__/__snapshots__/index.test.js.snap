@@ -12,7 +12,7 @@ exports[`Comment Comment can be used as editor, user can customize the editor co
           <li class="ant-list-item">
             <div class="ant-comment">
               <div class="ant-comment-inner">
-                <div class="ant-comment-avatar"><img src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" alt="comment-avatar"></div>
+                <div class="ant-comment-avatar"><img src="https://joeschmoe.io/api/v1/random" alt="comment-avatar"></div>
                 <div class="ant-comment-content">
                   <div class="ant-comment-content-author"><span class="ant-comment-content-author-name">Han Solo</span><span class="ant-comment-content-author-time">a few seconds ago</span></div>
                   <div class="ant-comment-content-detail">222</div>

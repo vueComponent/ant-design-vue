@@ -49,10 +49,7 @@ A basic comment with author, avatar, time and actions.
     </template>
     <template #author><a>Han Solo</a></template>
     <template #avatar>
-      <a-avatar
-        src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
-        alt="Han Solo"
-      />
+      <a-avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />
     </template>
     <template #content>
       <p>

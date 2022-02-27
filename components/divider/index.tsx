@@ -22,6 +22,7 @@ export const dividerProps = {
     type: Boolean,
     default: false,
   },
+  orientationMargin: [String, Number],
 };
 export type DividerProps = Partial<ExtractPropTypes<typeof dividerProps>>;
 
@@ -30,7 +31,12 @@ const Divider = defineComponent({
   props: dividerProps,
   setup(props, { slots }) {
     const { prefixCls: prefixClsRef, direction } = useConfigInject('divider', props);
-
+    const hasCustomMarginLeft = computed(
+      () => props.orientation === 'left' && props.orientationMargin != null,
+    );
+    const hasCustomMarginRight = computed(
+      () => props.orientation === 'right' && props.orientationMargin != null,
+    );
     const classString = computed(() => {
       const { type, dashed, plain } = props;
       const prefixCls = prefixClsRef.value;
@@ -40,9 +46,20 @@ const Divider = defineComponent({
         [`${prefixCls}-dashed`]: !!dashed,
         [`${prefixCls}-plain`]: !!plain,
         [`${prefixCls}-rtl`]: direction.value === 'rtl',
+        [`${prefixCls}-no-default-orientation-margin-left`]: hasCustomMarginLeft.value,
+        [`${prefixCls}-no-default-orientation-margin-right`]: hasCustomMarginRight.value,
       };
     });
-
+    const innerStyle = computed(() => {
+      const marginValue =
+        typeof props.orientationMargin === 'number'
+          ? `${props.orientationMargin}px`
+          : props.orientationMargin;
+      return {
+        ...(hasCustomMarginLeft.value && { marginLeft: marginValue }),
+        ...(hasCustomMarginRight.value && { marginRight: marginValue }),
+      };
+    });
     const orientationPrefix = computed(() =>
       props.orientation.length > 0 ? '-' + props.orientation : props.orientation,
     );
@@ -60,7 +77,9 @@ const Divider = defineComponent({
           role="separator"
         >
           {children.length ? (
-            <span class={`${prefixClsRef.value}-inner-text`}>{children}</span>
+            <span class={`${prefixClsRef.value}-inner-text`} style={innerStyle.value}>
+              {children}
+            </span>
           ) : null}
         </div>
       );

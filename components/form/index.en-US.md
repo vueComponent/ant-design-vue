@@ -122,7 +122,7 @@ The second way is to wrap it with a custom component and call `useFormItemContex
 ```html
 <script>
   // custom component
-  import { Form } from 'ant-desing-vue';
+  import { Form } from 'ant-design-vue';
   export default {
     name: 'custom-name',
     setup() {

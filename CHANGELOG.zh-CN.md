@@ -383,7 +383,7 @@ Github：[https://github.com/surely-vue/table]
     ```html
     <script>
       // 自定义组件
-      import { Form } from 'ant-desing-vue';
+      import { Form } from 'ant-design-vue';
       export default {
         setup() {
           const formItemContext = Form.useFormItemContext();

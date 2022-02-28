@@ -10,6 +10,16 @@
 
 ---
 
+## 3.0.0-beta.11
+
+`2022-02-28`
+
+- 🌟 重构 `Upload`, 新增 showDownloadIcon、directory、isImageUrl、itemRender、maxCount、openFileDialogOnClick、progress、previewIcon、removeIcon、downloadIcon、drop 等特性
+- 🌟 重构 `Carousel`
+- 🐞 修复 `Mentions` 长按时无法选中问题 [#5233](https://github.com/vueComponent/ant-design-vue/issues/5233)
+- 🐞 修复 `Table` 动态更改展开图标位置时，渲染多个展开图标问题 [#5295](https://github.com/vueComponent/ant-design-vue/issues/5295)
+- 🐞 修复 `Slider` 类型错误问题 [#5289](https://github.com/vueComponent/ant-design-vue/issues/5289)
+
 ## 3.0.0-beta.10
 
 `2022-02-18`

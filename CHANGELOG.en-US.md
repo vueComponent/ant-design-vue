@@ -10,6 +10,16 @@
 
 ---
 
+## 3.0.0-beta.11
+
+`2022-02-28`
+
+- 🌟 Refactor `Upload`, add showDownloadIcon, directory, isImageUrl, itemRender, maxCount, openFileDialogOnClick, progress, previewIcon, removeIcon, downloadIcon, drop and other features
+- 🌟 Refactor `Carousel`
+- 🐞 Fix `Mentions` cannot be selected when long-pressed [#5233](https://github.com/vueComponent/ant-design-vue/issues/5233)
+- 🐞 Fix the issue of rendering multiple expand icons when `Table` dynamically changes the expand icon position [#5295](https://github.com/vueComponent/ant-design-vue/issues/5295)
+- 🐞 Fix `Slider` type error [#5289](https://github.com/vueComponent/ant-design-vue/issues/5289)
+
 ## 3.0.0-beta.10
 
 `2022-02-18`

@@ -152,7 +152,6 @@ export default defineComponent<BodyRowProps<unknown>>({
               colIndex === (expandIconColumnIndex || 0) && nestExpandable.value ? (
                 <>
                   <span
-                    data-test={colIndex}
                     style={{ paddingLeft: `${indentSize * indent}px` }}
                     class={`${prefixCls}-row-indent indent-level-${indent}`}
                   />

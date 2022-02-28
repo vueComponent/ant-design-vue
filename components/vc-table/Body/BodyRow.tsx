@@ -147,7 +147,24 @@ export default defineComponent<BodyRowProps<unknown>>({
             if (column.customCell) {
               additionalCellProps = column.customCell(record, index, column);
             }
-
+            // not use slot to fix https://github.com/vueComponent/ant-design-vue/issues/5295
+            const appendNode =
+              colIndex === (expandIconColumnIndex || 0) && nestExpandable.value ? (
+                <>
+                  <span
+                    data-test={colIndex}
+                    style={{ paddingLeft: `${indentSize * indent}px` }}
+                    class={`${prefixCls}-row-indent indent-level-${indent}`}
+                  />
+                  {expandIcon({
+                    prefixCls,
+                    expanded: expanded.value,
+                    expandable: hasNestChildren.value,
+                    record,
+                    onExpand: onInternalTriggerExpand,
+                  })}
+                </>
+              ) : null;
             return (
               <Cell
                 cellType="body"
@@ -165,29 +182,7 @@ export default defineComponent<BodyRowProps<unknown>>({
                 additionalProps={additionalCellProps}
                 column={column}
                 transformCellText={transformCellText}
-                v-slots={{
-                  // ============= Used for nest expandable =============
-                  appendNode:
-                    colIndex === (expandIconColumnIndex || 0) && nestExpandable.value
-                      ? () => {
-                          return (
-                            <>
-                              <span
-                                style={{ paddingLeft: `${indentSize * indent}px` }}
-                                class={`${prefixCls}-row-indent indent-level-${indent}`}
-                              />
-                              {expandIcon({
-                                prefixCls,
-                                expanded: expanded.value,
-                                expandable: hasNestChildren.value,
-                                record,
-                                onExpand: onInternalTriggerExpand,
-                              })}
-                            </>
-                          );
-                        }
-                      : undefined,
-                }}
+                appendNode={appendNode}
               />
             );
           })}

@@ -122,7 +122,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/ORmcdeaoO/Form.svg
 ```html
 <script>
   // 自定义组件
-  import { Form } from 'ant-desing-vue';
+  import { Form } from 'ant-design-vue';
   export default {
     setup() {
       const formItemContext = Form.useFormItemContext();

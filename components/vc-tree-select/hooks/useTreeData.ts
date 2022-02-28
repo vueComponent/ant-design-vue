@@ -3,7 +3,7 @@ import { computed } from 'vue';
 import type { DataNode, SimpleModeConfig } from '../interface';
 import { convertChildrenToData } from '../utils/legacyUtil';
 import type { DefaultOptionType } from '../TreeSelect';
-import type { VueNode } from 'ant-design-vue/es/_util/type';
+import type { VueNode } from '../../_util/type';
 
 function parseSimpleTreeData(
   treeData: DataNode[],

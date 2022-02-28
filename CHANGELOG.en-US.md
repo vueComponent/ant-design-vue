@@ -386,7 +386,7 @@ Github：[https://github.com/surely-vue/table]
     ```html
     <script>
       // custom component
-      import { Form } from 'ant-desing-vue';
+      import { Form } from 'ant-design-vue';
       export default {
         name: 'custom-name',
         setup() {

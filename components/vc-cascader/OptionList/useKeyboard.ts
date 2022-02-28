@@ -1,5 +1,5 @@
 import type { RefOptionListProps } from '../../vc-select/OptionList';
-import type { Key } from 'ant-design-vue/es/_util/type';
+import type { Key } from '../../_util/type';
 import type { Ref, SetupContext } from 'vue';
 import { computed, ref, watchEffect } from 'vue';
 import type { DefaultOptionType, InternalFieldNames, SingleValueType } from '../Cascader';

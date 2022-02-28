@@ -21,35 +21,35 @@ exports[`renders ./components/grid/demo/basic.vue correctly 1`] = `
 exports[`renders ./components/grid/demo/flex.vue correctly 1`] = `
 <div id="components-grid-demo-flex">
   <p>sub-element align left</p>
-  <div class="ant-row ant-row-start" type="flex">
+  <div class="ant-row ant-row-start">
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
   </div>
   <p>sub-element align center</p>
-  <div class="ant-row ant-row-center" type="flex">
+  <div class="ant-row ant-row-center">
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
   </div>
   <p>sub-element align right</p>
-  <div class="ant-row ant-row-end" type="flex">
+  <div class="ant-row ant-row-end">
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
   </div>
   <p>sub-element monospaced arrangement</p>
-  <div class="ant-row ant-row-space-between" type="flex">
+  <div class="ant-row ant-row-space-between">
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
   </div>
   <p>sub-element align full</p>
-  <div class="ant-row ant-row-space-around" type="flex">
+  <div class="ant-row ant-row-space-around">
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>
     <div class="ant-col ant-col-4">col-4</div>

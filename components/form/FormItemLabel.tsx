@@ -33,6 +33,7 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, 
     vertical,
     labelAlign: contextLabelAlign,
     labelCol: contextLabelCol,
+    labelWrap,
     colon: contextColon,
   } = useInjectForm();
   const mergedLabelCol: FormItemLabelProps['labelCol'] = labelCol || contextLabelCol?.value || {};
@@ -44,6 +45,9 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, 
     labelClsBasic,
     mergedLabelAlign === 'left' && `${labelClsBasic}-left`,
     mergedLabelCol.class,
+    {
+      [`${labelClsBasic}-wrap`]: !!labelWrap.value,
+    },
   );
 
   let labelChildren = label;

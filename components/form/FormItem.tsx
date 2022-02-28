@@ -134,7 +134,6 @@ export default defineComponent({
     const fieldName = computed(() => props.name || props.prop);
     const errors = ref([]);
     const validateDisabled = ref(false);
-    const domErrorVisible = ref(false);
     const inputRef = ref();
     const namePath = computed(() => {
       const val = fieldName.value;
@@ -388,7 +387,9 @@ export default defineComponent({
           {...attrs}
           class={[
             itemClassName.value,
-            domErrorVisible.value || !!help ? `${prefixCls.value}-item-with-help` : '',
+            (help !== undefined && help !== null) || errors.value.length
+              ? `${prefixCls.value}-item-with-help`
+              : '',
             attrs.class,
           ]}
           key="row"
@@ -411,7 +412,6 @@ export default defineComponent({
                   errors={help !== undefined && help !== null ? toArray(help) : errors.value}
                   prefixCls={prefixCls.value}
                   status={validateState.value}
-                  onDomErrorVisibleChange={(v: boolean) => (domErrorVisible.value = v)}
                   validateStatus={validateState.value}
                   ref={inputRef}
                   help={help}

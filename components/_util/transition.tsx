@@ -129,13 +129,17 @@ export interface CSSMotionProps extends Partial<BaseTransitionProps<Element>> {
   css?: boolean;
 }
 
-const collapseMotion = (style: Ref<CSSProperties>, className: Ref<string>): CSSMotionProps => {
+const collapseMotion = (
+  name = 'ant-motion-collapse',
+  style: Ref<CSSProperties>,
+  className: Ref<string>,
+): CSSMotionProps => {
   return {
-    name: 'ant-motion-collapse',
+    name,
     appear: true,
     css: true,
     onBeforeEnter: node => {
-      className.value = 'ant-motion-collapse';
+      className.value = name;
       style.value = getCollapsedHeight(node);
     },
     onEnter: node => {
@@ -148,7 +152,7 @@ const collapseMotion = (style: Ref<CSSProperties>, className: Ref<string>): CSSM
       style.value = {};
     },
     onBeforeLeave: node => {
-      className.value = 'ant-motion-collapse';
+      className.value = name;
       style.value = getCurrentHeight(node);
     },
     onLeave: node => {

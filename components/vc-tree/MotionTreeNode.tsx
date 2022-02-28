@@ -42,7 +42,7 @@ export default defineComponent({
       if (props.motion) {
         return props.motion;
       } else {
-        return collapseMotion(transitionStyle, transitionClass);
+        return collapseMotion(undefined, transitionStyle, transitionClass);
       }
     });
     const onMotionEnd = (type?: 'appear' | 'leave') => {

@@ -19,6 +19,7 @@ export default (
   pageHeader: ComputedRef<{ ghost: boolean }>;
   form?: ComputedRef<{
     requiredMark?: RequiredMark;
+    colon?: boolean;
   }>;
   autoInsertSpaceInButton: ComputedRef<boolean>;
   renderEmpty?: ComputedRef<(componentName?: string) => VueNode>;

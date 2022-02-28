@@ -36,6 +36,7 @@ A form consists of one or more form fields whose type includes input, textarea, 
 | hideRequiredMark | Hide required mark of all form items | Boolean | false |  |
 | layout | Define form layout | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |  |
 | labelAlign | text align of label of all items | 'left' \| 'right' | 'right' |  |
+| labelWrap | whether label can be wrap | boolean | false | 3.0 |
 | labelCol | The layout of label. You can set `span` `offset` to something like `{span: 3, offset: 12}` or `sm: {span: 3, offset: 12}` same as with `<Col>` | [object](/components/grid/#Col) |  |  |
 | wrapperCol | The layout for input controls, same as `labelCol` | [object](/components/grid/#Col) |  |  |
 | colon | change default props colon value of Form.Item (only effective when prop layout is horizontal) | boolean | true |  |

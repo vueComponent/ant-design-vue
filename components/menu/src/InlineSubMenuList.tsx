@@ -36,7 +36,7 @@ export default defineComponent({
     const mergedMotion = computed(() => {
       const m =
         motion.value || defaultMotions.value?.[fixedMode.value] || defaultMotions.value?.other;
-      const res = typeof m === 'function' ? m(style, className) : m;
+      const res = typeof m === 'function' ? m(undefined, style, className) : m;
       return { ...res, appear: props.keyPath.length <= 1 };
     });
     return () => {

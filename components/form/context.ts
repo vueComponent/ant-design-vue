@@ -12,6 +12,7 @@ export interface FormContextProps {
   name?: ComputedRef<string>;
   colon?: ComputedRef<boolean>;
   labelAlign?: ComputedRef<FormLabelAlign>;
+  labelWrap?: ComputedRef<boolean>;
   labelCol?: ComputedRef<ColProps>;
   wrapperCol?: ComputedRef<ColProps>;
   requiredMark?: ComputedRef<RequiredMark>;

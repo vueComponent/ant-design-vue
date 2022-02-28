@@ -75,7 +75,7 @@ export default defineComponent({
     const className = ref('');
     const mergedMotion = computed(() => {
       const m = motion.value || defaultMotions.value?.[mode.value] || defaultMotions.value?.other;
-      const res = typeof m === 'function' ? m(style, className) : m;
+      const res = typeof m === 'function' ? m(undefined, style, className) : m;
       return res ? getTransitionProps(res.name, { css: true }) : undefined;
     });
     return () => {

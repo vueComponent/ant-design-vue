@@ -61,7 +61,7 @@ export interface MenuContextProps {
   defaultMotions?: ComputedRef<Partial<{
     [key in MenuMode | 'other']:
       | CSSMotionProps
-      | ((style: Ref<CSSProperties>, className: Ref<string>) => CSSMotionProps);
+      | ((name: string, style: Ref<CSSProperties>, className: Ref<string>) => CSSMotionProps);
   }> | null>;
 
   // // Popup

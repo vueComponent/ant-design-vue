@@ -1,16 +1,16 @@
-import { addClass, removeClass } from '../../vc-util/Dom/class';
 import { nextTick } from 'vue';
-import type { CSSMotionProps } from '../../_util/transition';
+import { addClass, removeClass } from '../vc-util/Dom/class';
+import type { CSSMotionProps } from './transition';
 
-const listAnimation = (name): CSSMotionProps => {
+const collapseMotion = (name = 'ant-motion-collapse'): CSSMotionProps => {
   return {
     name,
     appear: true,
     css: true,
     onBeforeEnter: (node: HTMLDivElement) => {
-      addClass(node, name);
       node.style.height = '0px';
       node.style.opacity = '0';
+      addClass(node, name);
     },
     onEnter: (node: HTMLDivElement) => {
       nextTick(() => {
@@ -41,4 +41,4 @@ const listAnimation = (name): CSSMotionProps => {
     },
   };
 };
-export default listAnimation;
+export default collapseMotion;

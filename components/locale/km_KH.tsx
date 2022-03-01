@@ -1,58 +1,58 @@
 /* eslint-disable no-template-curly-in-string */
-import Pagination from '../vc-pagination/locale/en_GB';
-import DatePicker from '../date-picker/locale/en_GB';
-import TimePicker from '../time-picker/locale/en_GB';
-import Calendar from '../calendar/locale/en_GB';
+import Pagination from '../vc-pagination/locale/km_KH';
+import DatePicker from '../date-picker/locale/km_KH';
+import TimePicker from '../time-picker/locale/km_KH';
+import Calendar from '../calendar/locale/km_KH';
 import type { Locale } from '../locale-provider';
 
 const typeTemplate = '${label} is not a valid ${type}';
 
 const localeValues: Locale = {
-  locale: 'en-gb',
+  locale: 'km',
   Pagination,
   DatePicker,
   TimePicker,
   Calendar,
   Table: {
-    filterTitle: 'Filter menu',
-    filterConfirm: 'OK',
-    filterReset: 'Reset',
-    filterEmptyText: 'No filters',
-    emptyText: 'No data',
-    selectAll: 'Select current page',
-    selectInvert: 'Invert current page',
-    selectNone: 'Clear all data',
-    selectionAll: 'Select all data',
-    sortTitle: 'Sort',
-    expand: 'Expand row',
-    collapse: 'Collapse row',
-    triggerDesc: 'Click to sort descending',
-    triggerAsc: 'Click to sort ascending',
-    cancelSort: 'Click to cancel sorting',
+    filterTitle: 'បញ្ចីតម្រៀប',
+    filterConfirm: 'យល់ព្រម',
+    filterReset: 'ត្រឡប់ដើម',
+    filterEmptyText: 'គ្មានបញ្ចីតម្រៀប',
+    emptyText: 'គ្មានទិន្នន័យ',
+    selectAll: 'រើសក្នុងទំព័រនេះ',
+    selectInvert: 'បញ្ច្រាសក្នុងទំព័រនេះ',
+    selectNone: 'លុបចេញទាំងអស់',
+    selectionAll: 'រើសយកទាំងអស់',
+    sortTitle: 'តម្រៀប',
+    expand: 'ពន្លាត',
+    collapse: 'បិតបាំង',
+    triggerDesc: 'ចុចដើម្បីរៀបតាំលំដាប់ធំ',
+    triggerAsc: 'ចុចដើម្បីរៀបតាំលំដាប់តូច​',
+    cancelSort: 'ចុចដើម្បីបោះបង់',
   },
   Modal: {
-    okText: 'OK',
-    cancelText: 'Cancel',
-    justOkText: 'OK',
+    okText: 'យល់ព្រម',
+    cancelText: 'យល់ព្រម',
+    justOkText: 'យល់ព្រម',
   },
   Popconfirm: {
-    okText: 'OK',
-    cancelText: 'Cancel',
+    okText: 'យល់ព្រម',
+    cancelText: 'យល់ព្រម',
   },
   Transfer: {
-    searchPlaceholder: 'Search here',
-    itemUnit: 'item',
+    searchPlaceholder: 'ស្វែងរកនៅទីនេះ',
+    itemUnit: '',
     itemsUnit: 'items',
   },
   Upload: {
-    uploading: 'Uploading...',
-    removeFile: 'Remove file',
-    uploadError: 'Upload error',
-    previewFile: 'Preview file',
-    downloadFile: 'Download file',
+    uploading: 'កំពុងបញ្ចូលឡើង...',
+    removeFile: 'លុបឯកសារ',
+    uploadError: 'បញ្ចូលមិនជោកជ័យ',
+    previewFile: 'មើលឯកសារ',
+    downloadFile: 'ទាញយកឯកសារ',
   },
   Empty: {
-    description: 'No data',
+    description: 'គ្មានទិន្នន័យ',
   },
   Form: {
     defaultValidateMessages: {

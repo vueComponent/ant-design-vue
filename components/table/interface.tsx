@@ -30,6 +30,8 @@ export interface TableLocale {
   filterConfirm?: any;
   filterReset?: any;
   filterEmptyText?: any;
+  filterCheckall?: any;
+  filterSearchPlaceholder?: any;
   emptyText?: any | (() => any);
   selectAll?: any;
   selectNone?: any;

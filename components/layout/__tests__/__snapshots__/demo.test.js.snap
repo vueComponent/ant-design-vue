@@ -118,7 +118,7 @@ exports[`renders ./components/layout/demo/fixed.vue correctly 1`] = `
 
 exports[`renders ./components/layout/demo/fixed-sider.vue correctly 1`] = `
 <section class="ant-layout ant-layout-has-sider">
-  <aside style="overflow: auto; height: 100vh; position: fixed; left: 0px; max-width: 200px; min-width: 200px; width: 200px; flex: 0 0 200px;" class="ant-layout-sider ant-layout-sider-dark">
+  <aside style="overflow: auto; height: 100vh; position: fixed; left: 0px; flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;" class="ant-layout-sider ant-layout-sider-dark">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul class="ant-menu ant-menu-root ant-menu-inline ant-menu-dark" role="menu" data-menu-list="true">
@@ -171,7 +171,7 @@ exports[`renders ./components/layout/demo/fixed-sider.vue correctly 1`] = `
     <!---->
   </aside>
   <section class="ant-layout" style="margin-left: 200px;">
-    <header class="ant-layout-header" style="padding: 0px; background: rgb(255, 255, 255);"></header>
+    <header class="ant-layout-header" style="background: rgb(255, 255, 255); padding: 0px;"></header>
     <main class="ant-layout-content" style="margin: 24px 16px 0px; overflow: initial;">
       <div style="padding: 24px; background: rgb(255, 255, 255); text-align: center;"> ... <br> Really <br> ... <br> ... <br> ... <br> long <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> ... <br> content </div>
     </main>

@@ -10,6 +10,7 @@ import { Row } from '../grid';
 import Item from './Item';
 import { flattenChildren } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
+import type { Key } from '../_util/type';
 import { tuple } from '../_util/type';
 import ItemMeta from './ItemMeta';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -32,6 +33,7 @@ export interface ListGridType {
   lg?: ColumnCount;
   xl?: ColumnCount;
   xxl?: ColumnCount;
+  xxxl?: ColumnCount;
 }
 
 export const ListSize = tuple('small', 'default', 'large');
@@ -53,7 +55,7 @@ export const listProps = {
     ]),
   ),
   prefixCls: PropTypes.string,
-  rowKey: PropTypes.any,
+  rowKey: [String, Number, Function] as PropType<Key | ((item: any) => Key)>,
   renderItem: PropTypes.any,
   size: PropTypes.oneOf(ListSize),
   split: PropTypes.looseBool,
@@ -107,6 +109,8 @@ const List = defineComponent({
         paginationSize.value = paginationObj.value.pageSize;
       }
     });
+
+    const listItemsKeys: Key[] = [];
 
     const triggerPaginationEvent = (eventName: string) => (page: number, pageSize: number) => {
       paginationCurrent.value = page;
@@ -225,16 +229,16 @@ const List = defineComponent({
       return undefined;
     });
 
-    const renderInnerItem = (keys: number[], item: any, index: number) => {
+    const renderInnerItem = (item: any, index: number) => {
       const renderItem = props.renderItem ?? slots.renderItem;
       if (!renderItem) return null;
 
       let key;
-
-      if (typeof props.rowKey === 'function') {
-        key = props.rowKey(item);
-      } else if (typeof props.rowKey === 'string') {
-        key = item[props.rowKey];
+      const rowKeyType = typeof props.rowKey;
+      if (rowKeyType === 'function') {
+        key = (props.rowKey as any)(item);
+      } else if (rowKeyType === 'string' || rowKeyType === 'number') {
+        key = item[props.rowKey as any];
       } else {
         key = item.key;
       }
@@ -243,7 +247,7 @@ const List = defineComponent({
         key = `list-item-${index}`;
       }
 
-      keys[index] = key;
+      listItemsKeys[index] = key;
 
       return renderItem({ item, index });
     };
@@ -253,7 +257,6 @@ const List = defineComponent({
       const footer = props.footer ?? slots.footer?.();
       const header = props.header ?? slots.header?.();
       const children = flattenChildren(slots.default?.());
-      const keys = [];
       const isSomethingAfterLastItem = !!(loadMore || props.pagination || footer);
       const classString = {
         ...classObj.value,
@@ -271,11 +274,12 @@ const List = defineComponent({
 
       let childrenContent = isLoading.value && <div style={{ minHeight: '53px' }} />;
       if (splitDataSource.value.length > 0) {
+        listItemsKeys.length = 0;
         const items = splitDataSource.value.map((item: any, index: number) =>
-          renderInnerItem(keys, item, index),
+          renderInnerItem(item, index),
         );
         const childrenList = items.map((child: any, index) => (
-          <div key={keys[index]} style={colStyle.value}>
+          <div key={listItemsKeys[index]} style={colStyle.value}>
             {child}
           </div>
         ));

@@ -21,7 +21,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/XOS8qZ0kU/InputNumber.svg
 | autofocus | 自动获取焦点 | boolean | false |  |
 | defaultValue | 初始值 | number |  |  |
 | disabled | 禁用 | boolean | false |  |
-| formatter | 指定输入框展示值的格式 | function(value: number \| string): string | - |  |
+| formatter | 指定输入框展示值的格式 | function(value: number \| string, info: { userTyping: boolean, input: string }): string | - | info: 3.0 |
 | max | 最大值 | number | Infinity |  |
 | min | 最小值 | number | -Infinity |  |
 | parser | 指定从 formatter 里转换回数字的方式，和 formatter 搭配使用 | function( string): number | - |  |
@@ -36,6 +36,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/XOS8qZ0kU/InputNumber.svg
 | controls | 是否显示增减按钮 | boolean | true | 3.0 |
 | keyboard | 是否启用键盘快捷行为 | boolean | true | 3.0 |
 | stringMode | 字符值模式，开启后支持高精度小数。同时 `change` 事件将返回 string 类型 | boolean | false | 3.0 |
+| controls | 是否显示增减按钮 | boolean | true | 3.0 |
+| prefix | 带有前缀图标的 input | slot | - | 3.0 |
 
 ### 事件
 

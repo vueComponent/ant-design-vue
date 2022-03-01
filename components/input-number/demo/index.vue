@@ -9,6 +9,7 @@
     <keyboardVue />
     <outOfRangeVue />
     <borderlessVue />
+    <prefixVue />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -21,6 +22,7 @@ import addonVue from './addon.vue';
 import borderlessVue from './borderless.vue';
 import keyboardVue from './keyboard.vue';
 import outOfRangeVue from './out-of-range.vue';
+import prefixVue from './prefix.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -29,6 +31,7 @@ export default defineComponent({
   CN,
   US,
   components: {
+    prefixVue,
     Basic,
     Disabled,
     Digit,

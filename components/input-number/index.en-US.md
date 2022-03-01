@@ -18,7 +18,7 @@ When a numeric value needs to be provided.
 | autofocus | get focus when component mounted | boolean | false |
 | defaultValue | initial value | number |  |
 | disabled | disable the input | boolean | false |
-| formatter | Specifies the format of the value presented | function(value: number \| string): string | - |
+| formatter | Specifies the format of the value presented | function(value: number \| string, info: { userTyping: boolean, input: string }): string | - | info: 3.0 |
 | max | max value | number | Infinity |
 | min | min value | number | -Infinity |
 | parser | Specifies the value extracted from formatter | function( string): number | - |
@@ -33,6 +33,8 @@ When a numeric value needs to be provided.
 | controls | Whether to show `+-` controls | boolean | true | 3.0 |
 | keyboard | If enable keyboard behavior | boolean | true | 3.0 |
 | stringMode | Set value as string to support high precision decimals. Will return string value by `change` | boolean | false | 3.0 |
+| controls | Whether to show `+-` controls | boolean | true | 3.0 |
+| prefix | The prefix icon for the Input | slot | - | 3.0 |
 
 ### events
 

@@ -18,6 +18,7 @@ import { useInjectFormItemContext } from '../form/FormItemContext';
 import type { FocusEventHandler } from '../_util/EventInterface';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import omit from '../_util/omit';
+import type { VueNode } from '../_util/type';
 
 function fixEmojiLength(value: string, maxLength: number) {
   return [...(value || '')].slice(0, maxLength).join('');
@@ -195,7 +196,7 @@ export default defineComponent({
 
       if (showCount.value) {
         const valueLength = [...mergedValue.value].length;
-        let dataCount = '';
+        let dataCount: VueNode = '';
         if (typeof showCount.value === 'object') {
           dataCount = showCount.value.formatter({ count: valueLength, maxlength });
         } else {
@@ -212,7 +213,7 @@ export default defineComponent({
               customClass,
             )}
             style={style}
-            data-count={dataCount}
+            data-count={typeof dataCount !== 'object' ? dataCount : undefined}
           >
             {textareaNode}
           </div>

@@ -25,6 +25,7 @@ A basic widget for getting the user input is a text field. Keyboard and mouse ca
 | disabled | Whether the input is disabled. | boolean | false |  |
 | id | The ID for input | string |  |  |
 | maxlength | max length | number |  | 1.5.0 |
+| showCount | Whether show text count | boolean | false | 3.0 |
 | prefix | The prefix icon for the Input. | string\|slot |  |  |
 | size | The size of the input box. Note: in the context of a form, the `large` size is used. Available: `large` `default` `small` | string | `default` |  |
 | suffix | The suffix icon for the Input. | string\|slot |  |  |

@@ -1,6 +1,5 @@
 import classNames from '../_util/classNames';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
-import { getInputClassName } from './Input';
 import PropTypes from '../_util/vue-types';
 import { cloneElement } from '../_util/vnode';
 import type { PropType, VNode } from 'vue';
@@ -8,10 +7,7 @@ import { ref, defineComponent } from 'vue';
 import { tuple } from '../_util/type';
 import type { Direction, SizeType } from '../config-provider';
 import type { MouseEventHandler } from '../_util/EventInterface';
-
-export function hasPrefixSuffix(propsAndSlots: any) {
-  return !!(propsAndSlots.prefix || propsAndSlots.suffix || propsAndSlots.allowClear);
-}
+import { getInputClassName, hasPrefixSuffix } from './util';
 
 function hasAddon(propsAndSlots: any) {
   return !!(propsAndSlots.addonBefore || propsAndSlots.addonAfter);

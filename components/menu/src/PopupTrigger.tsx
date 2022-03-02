@@ -42,7 +42,6 @@ export default defineComponent({
       forceSubMenuRender,
       motion,
       defaultMotions,
-      mode,
     } = useInjectMenu();
     const forceRender = useInjectForceRender();
     const placement = computed(() =>
@@ -72,7 +71,7 @@ export default defineComponent({
       emit('visibleChange', visible);
     };
     const mergedMotion = computed(() => {
-      const m = motion.value || defaultMotions.value?.[mode.value] || defaultMotions.value?.other;
+      const m = motion.value || defaultMotions.value?.[props.mode] || defaultMotions.value?.other;
       const res = typeof m === 'function' ? m() : m;
       return res ? getTransitionProps(res.name, { css: true }) : undefined;
     });

@@ -10,6 +10,13 @@
 
 ---
 
+## 3.0.0-beta.12
+
+`2022-03-02`
+
+- 🌟 Optimize `Menu` horizontal mode animation to avoid flickering
+- 🐞 Fix the height issue caused by `Upload` animation [#5298](https://github.com/vueComponent/ant-design-vue/issues/5298)
+
 ## 3.0.0-beta.11
 
 `2022-02-28`

@@ -101,7 +101,9 @@ export default defineComponent({
     const motion = computed(() => {
       const m = typeof props.animation === 'object' ? props.animation : getMotion(props as any);
       ['onAfterEnter', 'onAfterLeave'].forEach(eventName => {
-        m[eventName] = () => {
+        const originFn = m[eventName];
+        m[eventName] = node => {
+          originFn?.(node);
           goNextStatus();
         };
       });

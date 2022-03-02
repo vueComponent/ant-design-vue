@@ -10,9 +10,15 @@ A versatile menu for navigation.
 
 ## When To Use
 
-Navigation is an important part of any website, as a good navigation setup allows users to move around the site quickly and efficiently. Ant Design offers top and side navigation options. Top navigation provides all the categories and functions of the website. Side navigation provides the multi-level structure of the website.
+Navigation is an important part of any website, as a good navigation setup allows users to move around the site quickly and efficiently. Ant Design offers two navigation options: top and side. Top navigation provides all the categories and functions of the website. Side navigation provides the multi-level structure of the website.
 
 More layouts with navigation: [Layout](/components/layout).
+
+## Notes for developers
+
+- Menu is rendered as a `ul` element, so it only supports [`li` and `script-supporting` elements](https://html.spec.whatwg.org/multipage/grouping-content.html#the-ul-element) as children nodes。Your customized node should be wrapped by `Menu.Item`.
+- Menu needs to collect its node structure, so its children should be `Menu.*` or encapsulated HOCs.
+- Must set unique key for `SubMenu`
 
 ## API
 
@@ -95,3 +101,13 @@ The children of Menu.ItemGroup must be `MenuItem`.
 ### Menu.Divider
 
 Divider line in between menu items, only used in vertical popup Menu or Dropdown Menu.
+
+| Param  | Description            | Type    | Default value | Version |
+| ------ | ---------------------- | ------- | ------------- | ------- |
+| dashed | Whether line is dashed | boolean | false         | 4.17.0  |
+
+## FAQ
+
+### Why will Menu's children be rendered twice?
+
+Menu collects structure info with twice-render to support HOC usage. Merging into one render may cause the logic to become much more complex. Contributions to help improve the collection logic are welcomed.

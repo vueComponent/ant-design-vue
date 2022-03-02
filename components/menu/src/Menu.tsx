@@ -17,7 +17,6 @@ import type {
 } from './interface';
 import devWarning from '../../vc-util/devWarning';
 import type { CSSMotionProps } from '../../_util/transition';
-import { collapseMotion } from '../../_util/transition';
 import uniq from 'lodash-es/uniq';
 import { SiderCollapsedKey } from '../../layout/injectionKey';
 import { flattenChildren } from '../../_util/props-util';
@@ -28,6 +27,7 @@ import EllipsisOutlined from '@ant-design/icons-vue/EllipsisOutlined';
 import { cloneElement } from '../../_util/vnode';
 import { OVERFLOW_KEY, PathContext } from './hooks/useKeyPath';
 import type { FocusEventHandler, MouseEventHandler } from '../../_util/EventInterface';
+import collapseMotion from '../../_util/collapseMotion';
 
 export const menuProps = {
   id: String,

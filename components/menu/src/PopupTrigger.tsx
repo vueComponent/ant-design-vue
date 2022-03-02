@@ -71,11 +71,9 @@ export default defineComponent({
     const onVisibleChange = (visible: boolean) => {
       emit('visibleChange', visible);
     };
-    const style = ref({});
-    const className = ref('');
     const mergedMotion = computed(() => {
       const m = motion.value || defaultMotions.value?.[mode.value] || defaultMotions.value?.other;
-      const res = typeof m === 'function' ? m(undefined, style, className) : m;
+      const res = typeof m === 'function' ? m() : m;
       return res ? getTransitionProps(res.name, { css: true }) : undefined;
     });
     return () => {

@@ -413,9 +413,8 @@ export default defineComponent({
               <MenuContextProvider
                 key={child.key}
                 overflowDisabled={index > lastVisibleIndex.value}
-              >
-                {child}
-              </MenuContextProvider>
+                v-slots={{ default: () => child }}
+              ></MenuContextProvider>
             ));
       const overflowedIndicator = slots.overflowedIndicator?.() || <EllipsisOutlined />;
 
@@ -446,9 +445,8 @@ export default defineComponent({
                     title={overflowedIndicator}
                     disabled={allVisible}
                     internalPopupClose={len === 0}
-                  >
-                    {originOmitItems}
-                  </SubMenu>
+                    v-slots={{ default: () => originOmitItems }}
+                  ></SubMenu>
                   <PathContext>
                     <SubMenu
                       eventKey={OVERFLOW_KEY}
@@ -456,9 +454,8 @@ export default defineComponent({
                       title={overflowedIndicator}
                       disabled={allVisible}
                       internalPopupClose={len === 0}
-                    >
-                      {originOmitItems}
-                    </SubMenu>
+                      v-slots={{ default: () => originOmitItems }}
+                    ></SubMenu>
                   </PathContext>
                 </>
               );

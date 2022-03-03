@@ -269,7 +269,6 @@ export default defineComponent({
         return slots.default?.();
       }
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
-
       let titleNode = () => null;
       if (!overflowDisabled.value && mode.value !== 'inline') {
         titleNode = () => (
@@ -321,22 +320,24 @@ export default defineComponent({
             onMouseenter={onMouseEnter}
             onMouseleave={onMouseLeave}
             data-submenu-id={key}
-            v-slots={() => {
-              return (
-                <>
-                  {titleNode()}
+            v-slots={{
+              default: () => {
+                return (
+                  <>
+                    {titleNode()}
 
-                  {/* Inline mode */}
-                  {!overflowDisabled.value && (
-                    <InlineSubMenuList
-                      id={popupId}
-                      open={open.value}
-                      keyPath={keysPath.value}
-                      v-slots={{ default: slots.default }}
-                    ></InlineSubMenuList>
-                  )}
-                </>
-              );
+                    {/* Inline mode */}
+                    {!overflowDisabled.value && (
+                      <InlineSubMenuList
+                        id={popupId}
+                        open={open.value}
+                        keyPath={keysPath.value}
+                        v-slots={{ default: slots.default }}
+                      ></InlineSubMenuList>
+                    )}
+                  </>
+                );
+              },
             }}
           ></Overflow.Item>
         </MenuContextProvider>

@@ -102,9 +102,7 @@ export default defineComponent({
           forceRender={forceRender || forceSubMenuRender.value}
           popupAnimation={mergedMotion.value}
           v-slots={{
-            popup: () => {
-              return slots.popup?.({ visible: innerVisible.value });
-            },
+            popup: slots.popup,
             default: slots.default,
           }}
         ></Trigger>

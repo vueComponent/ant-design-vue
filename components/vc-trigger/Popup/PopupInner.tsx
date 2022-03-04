@@ -115,9 +115,9 @@ export default defineComponent({
     };
 
     watch(
-      [toRef(motion.value, 'name'), status],
+      [motion, status],
       () => {
-        if (!motion.value.name && status.value === 'motion') {
+        if (!motion.value && status.value === 'motion') {
           goNextStatus();
         }
       },

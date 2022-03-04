@@ -350,6 +350,7 @@ const Form = defineComponent({
       requiredMark: mergedRequiredMark,
       validateTrigger: computed(() => props.validateTrigger),
       rules: computed(() => props.rules),
+      validateMessages: computed(() => props.validateMessages),
       addField,
       removeField,
     });

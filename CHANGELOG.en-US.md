@@ -10,6 +10,12 @@
 
 ---
 
+## 2.2.9
+
+`2022-03-04`
+
+- 🐞 Fix FormItem validateMessage differ from Form [#5303](https://github.com/vueComponent/ant-design-vue/issues/5303)
+
 ## 2.2.8
 
 `2021-09-17`

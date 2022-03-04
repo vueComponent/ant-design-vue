@@ -182,6 +182,10 @@ export default defineComponent({
     const validateRules = (options: ValidateOptions) => {
       const { validateFirst = false, messageVariables } = props;
       const { triggerName } = options || {};
+      const mergedOptions: ValidateOptions = {
+        ...options,
+        validateMessages: formContext.validateMessages.value,
+      };
 
       let filteredRules = rulesRef.value;
       if (triggerName) {
@@ -201,7 +205,7 @@ export default defineComponent({
         namePath.value,
         fieldValue.value,
         filteredRules as RuleObject[],
-        options,
+        mergedOptions,
         validateFirst,
         messageVariables,
       );

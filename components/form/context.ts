@@ -19,6 +19,7 @@ export interface FormContextProps {
   removeField: (eventKey: string) => void;
   validateTrigger?: ComputedRef<string | string[]>;
   rules?: ComputedRef<{ [k: string]: ValidationRule[] | ValidationRule }>;
+  validateMessages?: ComputedRef<object>;
 }
 
 export const FormContextKey: InjectionKey<FormContextProps> = Symbol('formContextKey');

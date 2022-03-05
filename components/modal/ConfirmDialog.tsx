@@ -1,7 +1,7 @@
 import classNames from '../_util/classNames';
 import type { ModalFuncProps } from './Modal';
 import Dialog from './Modal';
-import ActionButton from './ActionButton';
+import ActionButton from '../_util/ActionButton';
 import { defineComponent } from 'vue';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import { getTransitionName } from '../_util/transition';

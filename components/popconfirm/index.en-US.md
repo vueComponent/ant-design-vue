@@ -24,6 +24,7 @@ The difference with the 'confirm' modal dialog is that it's more lightweight tha
 | okText | text of the Confirm button | string\|slot | `Confirm` |  |
 | okButton | custom render confirm button | slot | - | 3.0 |
 | okType | Button `type` of the Confirm button | string | `primary` |  |
+| showCancel | Show cancel button | boolean | true | 3.0 |
 | title | title of the confirmation box | string\|slot | - |  |
 | visible (v-model) | hide or show | boolean | - |  |
 | icon | customize icon of confirmation | vNode\|slot | &lt;Icon type="exclamation-circle" /&gt; |  |

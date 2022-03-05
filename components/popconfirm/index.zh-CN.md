@@ -23,6 +23,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fjMCD9xRq/Popconfirm.svg
 | okText | 确认按钮文字 | string\|slot | 确定 |  |
 | okButton | 完全自定义确认按钮 | slot | - | 3.0 |
 | okType | 确认按钮类型 | string | primary |  |
+| showCancel | 是否显示取消按钮 | boolean | true | 3.0 |
 | title | 确认框的描述 | string\|slot | 无 |  |
 | visible (v-model) | 是否显示 | boolean | - |  |
 | icon | 自定义弹出气泡 Icon 图标 | vNode | &lt;Icon type="exclamation-circle" /&gt; |  |

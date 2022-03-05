@@ -20,6 +20,7 @@ import { getTransitionName } from '../_util/transition';
 import { cloneVNodes } from '../_util/vnode';
 import omit from '../_util/omit';
 import { tooltipDefaultProps } from '../tooltip/Tooltip';
+import ActionButton from '../_util/ActionButton';
 
 export const popconfirmProps = () => ({
   ...abstractTooltipProps(),
@@ -36,6 +37,9 @@ export const popconfirmProps = () => ({
   icon: PropTypes.any,
   okButtonProps: PropTypes.object,
   cancelButtonProps: PropTypes.object,
+  showCancel: { type: Boolean, default: true },
+  onConfirm: Function as PropType<(e: MouseEvent) => void>,
+  onCancel: Function as PropType<(e: MouseEvent) => void>,
 });
 
 export type PopconfirmProps = Partial<ExtractPropTypes<ReturnType<typeof popconfirmProps>>>;
@@ -61,7 +65,7 @@ const Popconfirm = defineComponent({
     disabled: false,
   }),
   slots: ['title', 'content', 'okText', 'icon', 'cancelText', 'cancelButton', 'okButton'],
-  emits: ['update:visible', 'confirm', 'cancel', 'visibleChange'],
+  emits: ['update:visible', 'visibleChange'],
   setup(props: PopconfirmProps, { slots, emit, expose }) {
     onMounted(() => {
       devWarning(
@@ -71,7 +75,6 @@ const Popconfirm = defineComponent({
       );
     });
     const tooltipRef = ref();
-
     expose({
       getPopupDomNode: () => {
         return tooltipRef.value?.getPopupDomNode?.();
@@ -91,14 +94,17 @@ const Popconfirm = defineComponent({
       emit('visibleChange', value, e);
     };
 
-    const onConfirm = (e: MouseEvent) => {
+    const close = (e: MouseEvent) => {
       settingVisible(false, e);
-      emit('confirm', e);
+    };
+
+    const onConfirm = (e: MouseEvent) => {
+      return props.onConfirm?.(e);
     };
 
     const onCancel = (e: MouseEvent) => {
       settingVisible(false, e);
-      emit('cancel', e);
+      props.onCancel?.(e);
     };
 
     const onKeyDown = (e: KeyboardEvent) => {
@@ -114,9 +120,10 @@ const Popconfirm = defineComponent({
       }
       settingVisible(value);
     };
-    const { prefixCls: prefixClsConfirm, configProvider } = useConfigInject('popconfirm', props);
-    const rootPrefixCls = computed(() => configProvider.getPrefixCls());
-    const popoverPrefixCls = computed(() => configProvider.getPrefixCls('popover'));
+    const { prefixCls: prefixClsConfirm, getPrefixCls } = useConfigInject('popconfirm', props);
+    const rootPrefixCls = computed(() => getPrefixCls());
+    const popoverPrefixCls = computed(() => getPrefixCls('popover'));
+    const btnPrefixCls = computed(() => getPrefixCls('btn'));
     const [popconfirmLocale] = useLocaleReceiver('Popconfirm', defaultLocale.Popconfirm);
     const renderOverlay = () => {
       const {
@@ -127,6 +134,7 @@ const Popconfirm = defineComponent({
         okText = slots.okText?.(),
         okType,
         icon = slots.icon?.(),
+        showCancel = true,
       } = props;
       const { cancelButton, okButton } = slots;
       const cancelProps: ButtonProps = {
@@ -147,15 +155,26 @@ const Popconfirm = defineComponent({
             <div class={`${popoverPrefixCls.value}-message-title`}>{title}</div>
           </div>
           <div class={`${popoverPrefixCls.value}-buttons`}>
-            {cancelButton ? (
-              cancelButton(cancelProps)
-            ) : (
-              <Button {...cancelProps}>{cancelText || popconfirmLocale.value.cancelText}</Button>
-            )}
+            {showCancel ? (
+              cancelButton ? (
+                cancelButton(cancelProps)
+              ) : (
+                <Button {...cancelProps}>{cancelText || popconfirmLocale.value.cancelText}</Button>
+              )
+            ) : null}
             {okButton ? (
               okButton(okProps)
             ) : (
-              <Button {...okProps}>{okText || popconfirmLocale.value.okText}</Button>
+              <ActionButton
+                buttonProps={{ size: 'small', ...convertLegacyProps(okType), ...okButtonProps }}
+                actionFn={onConfirm}
+                close={close}
+                prefixCls={btnPrefixCls.value}
+                quitOnNullishReturnValue
+                emitEvent
+              >
+                {okText || popconfirmLocale.value.okText}
+              </ActionButton>
             )}
           </div>
         </div>
@@ -170,6 +189,8 @@ const Popconfirm = defineComponent({
         'cancelText',
         'okText',
         'onUpdate:visible',
+        'onConfirm',
+        'onCancel',
       ]);
       const overlayClassNames = classNames(prefixClsConfirm.value, overlayClassName);
       return (

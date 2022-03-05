@@ -28,7 +28,7 @@ export type SharedTimeProps<DateType> = {
   /** @deprecated Please use `disabledTime` instead. */
   disabledSeconds?: DisabledTimes['disabledSeconds'];
 
-  // disabledTime?: (date: DateType, type?: RangeType) => DisabledTimes;
+  disabledTime?: (date: DateType) => DisabledTimes;
 };
 
 export type TimePanelProps<DateType> = {

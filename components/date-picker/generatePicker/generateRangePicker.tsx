@@ -17,6 +17,7 @@ import type { PanelMode, RangeValue } from '../../vc-picker/interface';
 import type { RangePickerSharedProps } from '../../vc-picker/RangePicker';
 import devWarning from '../../vc-util/devWarning';
 import { useInjectFormItemContext } from '../../form/FormItemContext';
+import omit from '../../_util/omit';
 
 export default function generateRangePicker<DateType, ExtraProps = {}>(
   generateConfig: GenerateConfig<DateType>,
@@ -160,7 +161,9 @@ export default function generateRangePicker<DateType, ExtraProps = {}>(
         additionalOverrideProps = {
           ...additionalOverrideProps,
           ...(showTime ? getTimeProps({ format, picker, ...showTime }) : {}),
-          ...(picker === 'time' ? getTimeProps({ format, ...restProps, picker }) : {}),
+          ...(picker === 'time'
+            ? getTimeProps({ format, ...omit(restProps, ['disabledTime']), picker })
+            : {}),
         };
         const pre = prefixCls.value;
         return (

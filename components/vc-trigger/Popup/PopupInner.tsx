@@ -108,7 +108,7 @@ export default defineComponent({
     };
 
     watch(
-      [motion.value, status],
+      [motion, status],
       () => {
         if (!motion.value && status.value === 'motion') {
           goNextStatus();

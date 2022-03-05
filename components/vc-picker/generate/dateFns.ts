@@ -105,7 +105,7 @@ const generateConfig: GenerateConfig<Date> = {
         const date = parseDate(formatText, format, new Date(), {
           locale: Locale[dealLocal(locale)],
         });
-        if (isValid(date) && isMatch(formatText, format)) {
+        if (isValid(date) && formatText.length === format.length && isMatch(formatText, format)) {
           return date;
         }
       }

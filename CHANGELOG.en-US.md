@@ -10,6 +10,14 @@
 
 ---
 
+## 3.0.0-beta.13
+
+`2022-03-04`
+
+- 🌟 Optimize the animation after Menu overflow to avoid flickering
+- 🐞 Fix the issue of automatic parse when inputting invalid values when using dateFns [#5302](https://github.com/vueComponent/ant-design-vue/issues/5302)
+- 🐞 Fix `Carousel` click error when using image [#5299](https://github.com/vueComponent/ant-design-vue/issues/5299)
+
 ## 3.0.0-beta.12
 
 `2022-03-02`

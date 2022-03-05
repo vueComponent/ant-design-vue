@@ -309,7 +309,7 @@ export const keyHandler = (e, accessibility, rtl) => {
 };
 
 export const swipeStart = (e, swipe, draggable) => {
-  e.target.tagName === 'IMG' && safePreventDefault.preventDefault();
+  e.target.tagName === 'IMG' && safePreventDefault(e);
   if (!swipe || (!draggable && e.type.indexOf('mouse') !== -1)) return '';
   return {
     dragging: true,

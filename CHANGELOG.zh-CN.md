@@ -10,6 +10,14 @@
 
 ---
 
+## 3.0.0-beta.13
+
+`2022-03-04`
+
+- 🌟 优化 Menu overflow 后动画，避免闪动
+- 🐞 修复日期组件使用 dateFns 时，输入不合法值时自动 parse 问题 [#5302](https://github.com/vueComponent/ant-design-vue/issues/5302)
+- 🐞 修复 `Carousel` 使用图片时点击报错问题 [#5299](https://github.com/vueComponent/ant-design-vue/issues/5299)
+
 ## 3.0.0-beta.12
 
 `2022-03-02`

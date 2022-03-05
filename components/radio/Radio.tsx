@@ -16,7 +16,6 @@ export const radioProps = {
   name: PropTypes.string,
   id: PropTypes.string,
   autofocus: PropTypes.looseBool,
-  type: PropTypes.string.def('radio'),
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
   onBlur: PropTypes.func,
@@ -92,7 +91,7 @@ export default defineComponent({
 
       return (
         <label class={wrapperClassString} onClick={onClick}>
-          <VcCheckbox {...rProps} ref={vcCheckbox} />
+          <VcCheckbox {...rProps} type="radio" ref={vcCheckbox} />
           {slots.default && <span>{slots.default()}</span>}
         </label>
       );

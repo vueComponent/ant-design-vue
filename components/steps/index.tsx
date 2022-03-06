@@ -1,43 +1,47 @@
-import type { App, ExtractPropTypes } from 'vue';
+import type { App, ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
-import PropTypes, { withUndefined } from '../_util/vue-types';
+import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import VcSteps, { Step as VcStep } from '../vc-steps';
-import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import classNames from '../_util/classNames';
 import Progress from '../progress';
 import omit from '../_util/omit';
 import { VcStepProps } from '../vc-steps/Step';
+import type { ProgressDotRender } from '../vc-steps/Steps';
+import type { MouseEventHandler } from '../_util/EventInterface';
 
 export const stepsProps = () => ({
-  prefixCls: PropTypes.string,
-  iconPrefix: PropTypes.string,
-  current: PropTypes.number,
-  initial: PropTypes.number,
-  percent: PropTypes.number,
-  responsive: PropTypes.looseBool,
-  labelPlacement: PropTypes.oneOf(tuple('horizontal', 'vertical')).def('horizontal'),
-  status: PropTypes.oneOf(tuple('wait', 'process', 'finish', 'error')),
-  size: PropTypes.oneOf(tuple('default', 'small')),
-  direction: PropTypes.oneOf(tuple('horizontal', 'vertical')),
-  progressDot: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func])),
-  type: PropTypes.oneOf(tuple('default', 'navigation')),
-  onChange: PropTypes.func,
-  'onUpdate:current': PropTypes.func,
+  prefixCls: String,
+  iconPrefix: String,
+  current: Number,
+  initial: Number,
+  percent: Number,
+  responsive: { type: Boolean, default: undefined },
+  labelPlacement: String as PropType<'horizontal' | 'vertical'>,
+  status: String as PropType<'wait' | 'process' | 'finish' | 'error'>,
+  size: String as PropType<'default' | 'small'>,
+  direction: String as PropType<'horizontal' | 'vertical'>,
+  progressDot: {
+    type: [Boolean, Function] as PropType<boolean | ProgressDotRender>,
+    default: undefined as boolean | ProgressDotRender,
+  },
+  type: String as PropType<'default' | 'navigation'>,
+  onChange: Function as PropType<(current: number) => void>,
+  'onUpdate:current': Function as PropType<(current: number) => void>,
 });
 
 export const stepProps = () => ({
   description: PropTypes.any,
   icon: PropTypes.any,
-  status: PropTypes.oneOf(tuple('wait', 'process', 'finish', 'error')),
-  disabled: PropTypes.looseBool,
+  status: String as PropType<'wait' | 'process' | 'finish' | 'error'>,
+  disabled: { type: Boolean, default: undefined },
   title: PropTypes.any,
   subTitle: PropTypes.any,
-  onClick: PropTypes.func,
+  onClick: Function as PropType<MouseEventHandler>,
 });
 
 export type StepsProps = Partial<ExtractPropTypes<ReturnType<typeof stepsProps>>>;
@@ -50,6 +54,7 @@ const Steps = defineComponent({
   props: initDefaultProps(stepsProps(), {
     current: 0,
     responsive: true,
+    labelPlacement: 'horizontal',
   }),
   slots: ['progressDot'],
   emits: ['update:current', 'change'],

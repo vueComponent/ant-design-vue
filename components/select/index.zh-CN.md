@@ -36,6 +36,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/_0XzgOis7/Select.svg
 | dropdownRender | 自定义下拉框内容 | ({menuNode: VNode, props}) => VNode \| v-slot | - |  |
 | dropdownStyle | 下拉菜单的 style 属性 | object | - |  |
 | dropdownMenuStyle | dropdown 菜单自定义样式 | object | - |  |
+| fieldNames | 自定义节点 label、value、options 的字段 | object | { label: `label`, value: `value`, options: `options` } | 3.0 |
 | filterOption | 是否根据输入项进行筛选。当其为一个函数时，会接收 `inputValue` `option` 两个参数，当 `option` 符合筛选条件时，应返回 `true`，反之则返回 `false`。 | boolean or function(inputValue, option) | true |  |
 | firstActiveValue | 默认高亮的选项 | string\|string\[] | - |  |
 | getPopupContainer | 菜单渲染父节点。默认渲染到 body 上，如果你遇到菜单滚动定位问题，试试修改为滚动的区域，并相对其定位。 | Function(triggerNode) | () => document.body |  |

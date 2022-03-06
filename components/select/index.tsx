@@ -27,7 +27,13 @@ export interface LabeledValue {
 export type SelectValue = RawValue | RawValue[] | LabeledValue | LabeledValue[] | undefined;
 
 export const selectProps = () => ({
-  ...omit(vcSelectProps<SelectValue>(), ['inputIcon', 'mode', 'getInputElement', 'backfill']),
+  ...omit(vcSelectProps<SelectValue>(), [
+    'inputIcon',
+    'mode',
+    'getInputElement',
+    'getRawInputElement',
+    'backfill',
+  ]),
   value: {
     type: [Array, Object, String, Number] as PropType<SelectValue>,
   },

@@ -32,6 +32,8 @@ To input a value in a range.
 | tooltipPlacement | Set Tooltip display position. Ref [`Tooltip`](/components/tooltip/). | string |  | 1.5.0 |
 | tooltipVisible | If true, Tooltip will show always, or it will not show anyway, even if dragging or hovering. | Boolean |  |  |
 | getTooltipPopupContainer | The DOM container of the Tooltip, the default behavior is to create a div element in body. | Function | () => document.body | 1.5.0 |
+| trackStyle | The style of slider track | CSSProperties | - |  |
+| handleStyle | The style of slider handle | CSSProperties | - |  |
 
 ### events
 

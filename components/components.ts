@@ -150,13 +150,21 @@ export { default as Row } from './row';
 export type { SelectProps } from './select';
 export { default as Select, SelectOptGroup, SelectOption } from './select';
 
-export type { SkeletonProps } from './skeleton';
+export type {
+  SkeletonProps,
+  SkeletonButtonProps,
+  SkeletonInputProps,
+  SkeletonImageProps,
+  SkeletonAvatarProps,
+  SkeletonTitleProps,
+} from './skeleton';
 export {
   default as Skeleton,
   SkeletonButton,
   SkeletonAvatar,
   SkeletonInput,
   SkeletonImage,
+  SkeletonTitle,
 } from './skeleton';
 
 export type { SliderProps } from './slider';

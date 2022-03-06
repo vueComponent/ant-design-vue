@@ -45,3 +45,19 @@ Provide a placeholder while you wait for content to load, or to visualise conten
 | --- | --- | --- | --- |
 | rows | Set the row count of paragraph | number | - |
 | width | Set the width of paragraph. When width is an Array, it can set the width of each row. Otherwise only set the last row width | number \| string \| Array<number \| string> | - |
+
+### SkeletonButtonProps (3.0+)
+
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| active | Show animation effect | boolean | false |  |
+| block | Option to fit button width to its parent width | boolean | false |  |
+| shape | Set the shape of button | `circle` \| `round` \| `default` | - |  |
+| size | Set the size of button | `large` \| `small` \| `default` | - |  |
+
+### SkeletonInputProps (3.0+)
+
+| Property | Description           | Type                            | Default |
+| -------- | --------------------- | ------------------------------- | ------- |
+| active   | Show animation effect | boolean                         | false   |
+| size     | Set the size of input | `large` \| `small` \| `default` | -       |

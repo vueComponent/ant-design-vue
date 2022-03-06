@@ -1,6 +1,7 @@
 import { computed, defineComponent } from 'vue';
 import classNames from '../_util/classNames';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import omit from '../_util/omit';
 import type { SkeletonElementProps } from './Element';
 import { skeletonElementProps } from './Element';
 
@@ -11,7 +12,7 @@ const path =
 
 const SkeletonImage = defineComponent({
   name: 'ASkeletonImage',
-  props: skeletonElementProps(),
+  props: omit(skeletonElementProps(), ['size', 'shape', 'active']),
   setup(props) {
     const { prefixCls } = useConfigInject('skeleton', props);
     const cls = computed(() => classNames(prefixCls.value, `${prefixCls.value}-element`));

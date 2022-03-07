@@ -1,5 +1,6 @@
 import type { Direction, SizeType } from '../config-provider';
 import classNames from '../_util/classNames';
+import { filterEmpty } from '../_util/props-util';
 
 export function getInputClassName(
   prefixCls: string,
@@ -16,7 +17,22 @@ export function getInputClassName(
     [`${prefixCls}-borderless`]: !bordered,
   });
 }
+const isValid = (value: any) => {
+  return (
+    value !== undefined &&
+    value !== null &&
+    (Array.isArray(value) ? filterEmpty(value).length : true)
+  );
+};
 
 export function hasPrefixSuffix(propsAndSlots: any) {
-  return !!(propsAndSlots.prefix || propsAndSlots.suffix || propsAndSlots.allowClear);
+  return (
+    isValid(propsAndSlots.prefix) ||
+    isValid(propsAndSlots.suffix) ||
+    isValid(propsAndSlots.allowClear)
+  );
+}
+
+export function hasAddon(propsAndSlots: any) {
+  return isValid(propsAndSlots.addonBefore) || isValid(propsAndSlots.addonAfter);
 }

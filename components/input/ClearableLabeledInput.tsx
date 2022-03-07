@@ -7,11 +7,7 @@ import { ref, defineComponent } from 'vue';
 import { tuple } from '../_util/type';
 import type { Direction, SizeType } from '../config-provider';
 import type { MouseEventHandler } from '../_util/EventInterface';
-import { getInputClassName, hasPrefixSuffix } from './util';
-
-function hasAddon(propsAndSlots: any) {
-  return !!(propsAndSlots.addonBefore || propsAndSlots.addonAfter);
-}
+import { getInputClassName, hasAddon, hasPrefixSuffix } from './util';
 
 const ClearableInputType = ['text', 'input'];
 

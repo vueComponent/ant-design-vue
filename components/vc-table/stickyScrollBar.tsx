@@ -99,6 +99,9 @@ export default defineComponent<StickyScrollBarProps>({
     };
 
     const onContainerScroll = () => {
+      if (!props.scrollBodyRef.value) {
+        return;
+      }
       const tableOffsetTop = getOffset(props.scrollBodyRef.value).top;
       const tableBottomOffset = tableOffsetTop + props.scrollBodyRef.value.offsetHeight;
       const currentClientOffset =

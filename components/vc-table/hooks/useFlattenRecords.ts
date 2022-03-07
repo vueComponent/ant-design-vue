@@ -9,12 +9,14 @@ function flatRecord<T>(
   childrenColumnName: string,
   expandedKeys: Set<Key>,
   getRowKey: GetRowKey<T>,
+  index: number,
 ) {
   const arr = [];
 
   arr.push({
     record,
     indent,
+    index,
   });
 
   const key = getRowKey(record);
@@ -30,6 +32,7 @@ function flatRecord<T>(
         childrenColumnName,
         expandedKeys,
         getRowKey,
+        i,
       );
 
       arr.push(...tempArr);
@@ -56,27 +59,30 @@ export default function useFlattenRecords<T = unknown>(
   expandedKeysRef: Ref<Set<Key>>,
   getRowKey: Ref<GetRowKey<T>>,
 ) {
-  const arr: Ref<{ record: T; indent: number }[]> = computed(() => {
+  const arr: Ref<{ record: T; indent: number; index: number }[]> = computed(() => {
     const childrenColumnName = childrenColumnNameRef.value;
     const expandedKeys = expandedKeysRef.value;
     const data = dataRef.value;
     if (expandedKeys?.size) {
-      const temp: { record: T; indent: number }[] = [];
+      const temp: { record: T; indent: number; index: number }[] = [];
 
       // collect flattened record
       for (let i = 0; i < data?.length; i += 1) {
         const record = data[i];
 
-        temp.push(...flatRecord<T>(record, 0, childrenColumnName, expandedKeys, getRowKey.value));
+        temp.push(
+          ...flatRecord<T>(record, 0, childrenColumnName, expandedKeys, getRowKey.value, i),
+        );
       }
 
       return temp;
     }
 
-    return data?.map(item => {
+    return data?.map((item, index) => {
       return {
         record: item,
         indent: 0,
+        index,
       };
     });
   });

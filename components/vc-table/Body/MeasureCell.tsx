@@ -11,7 +11,7 @@ export default defineComponent<MeasureCellProps>({
   name: 'MeasureCell',
   props: ['columnKey'] as any,
   setup(props, { emit }) {
-    const tdRef = ref();
+    const tdRef = ref<HTMLTableCellElement>();
     onMounted(() => {
       if (tdRef.value) {
         emit('columnResize', props.columnKey, tdRef.value.offsetWidth);

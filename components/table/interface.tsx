@@ -4,6 +4,7 @@ import type {
   RenderedCell as RcRenderedCell,
   ExpandableConfig,
   DefaultRecordType,
+  FixedType,
 } from '../vc-table/interface';
 import type { TooltipProps } from '../tooltip';
 import type { CheckboxProps } from '../checkbox';
@@ -111,6 +112,8 @@ export interface ColumnType<RecordType = DefaultRecordType> extends RcColumnType
   filteredValue?: FilterValue | null;
   defaultFilteredValue?: FilterValue | null;
   filterIcon?: VueNode | ((opt: { filtered: boolean; column: ColumnType }) => VueNode);
+  filterMode?: 'menu' | 'tree';
+  filterSearch?: boolean;
   onFilter?: (value: string | number | boolean, record: RecordType) => boolean;
   filterDropdownVisible?: boolean;
   onFilterDropdownVisibleChange?: (visible: boolean) => void;
@@ -158,7 +161,7 @@ export interface TableRowSelection<T = DefaultRecordType> {
   onSelectNone?: () => void;
   selections?: INTERNAL_SELECTION_ITEM[] | boolean;
   hideSelectAll?: boolean;
-  fixed?: boolean;
+  fixed?: FixedType;
   columnWidth?: string | number;
   columnTitle?: string | VueNode;
   checkStrictly?: boolean;

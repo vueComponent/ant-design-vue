@@ -520,7 +520,6 @@ const InteralTable = defineComponent<
       expandType,
       childrenColumnName,
       locale: tableLocale,
-      expandIconColumnIndex,
       getPopupContainer: computed(() => props.getPopupContainer),
     });
 
@@ -581,8 +580,11 @@ const InteralTable = defineComponent<
 
         const renderPagination = (position: string) => (
           <Pagination
-            class={`${prefixCls.value}-pagination ${prefixCls.value}-pagination-${position}`}
             {...mergedPagination.value}
+            class={[
+              `${prefixCls.value}-pagination ${prefixCls.value}-pagination-${position}`,
+              mergedPagination.value.class,
+            ]}
             size={paginationSize}
           />
         );

@@ -12,6 +12,7 @@ import type {
   ColumnGroupType,
 } from '../interface';
 import { INTERNAL_COL_DEFINE } from '../utils/legacyUtil';
+import { EXPAND_COLUMN } from '../constant';
 
 function flatColumns<RecordType>(columns: ColumnsType<RecordType>): ColumnType<RecordType>[] {
   return columns.reduce((list, column) => {
@@ -121,8 +122,38 @@ function useColumns<RecordType>(
   // Add expand column
   const withExpandColumns = computed<ColumnsType<RecordType>>(() => {
     if (expandable.value) {
-      const expandColIndex = expandIconColumnIndex.value || 0;
-      const prevColumn = baseColumns.value[expandColIndex];
+      let cloneColumns = baseColumns.value.slice();
+
+      // >>> Warning if use `expandIconColumnIndex`
+      if (process.env.NODE_ENV !== 'production' && expandIconColumnIndex.value >= 0) {
+        warning(
+          false,
+          '`expandIconColumnIndex` is deprecated. Please use `Table.EXPAND_COLUMN` in `columns` instead.',
+        );
+      }
+
+      // >>> Insert expand column if not exist
+      if (!cloneColumns.includes(EXPAND_COLUMN)) {
+        const expandColIndex = expandIconColumnIndex.value || 0;
+        if (expandColIndex >= 0) {
+          cloneColumns.splice(expandColIndex, 0, EXPAND_COLUMN);
+        }
+      }
+
+      // >>> Deduplicate additional expand column
+      if (
+        process.env.NODE_ENV !== 'production' &&
+        cloneColumns.filter(c => c === EXPAND_COLUMN).length > 1
+      ) {
+        warning(false, 'There exist more than one `EXPAND_COLUMN` in `columns`.');
+      }
+      const expandColumnIndex = cloneColumns.indexOf(EXPAND_COLUMN);
+      cloneColumns = cloneColumns.filter(
+        (column, index) => column !== EXPAND_COLUMN || index === expandColumnIndex,
+      );
+
+      // >>> Check if expand column need to fixed
+      const prevColumn = baseColumns.value[expandColumnIndex];
 
       let fixedColumn: FixedType | null;
       if ((expandFixed.value === 'left' || expandFixed.value) && !expandIconColumnIndex.value) {
@@ -140,9 +171,11 @@ function useColumns<RecordType>(
       const expandIconValue = expandIcon.value;
       const prefixClsValue = prefixCls.value;
       const expandRowByClickValue = expandRowByClick.value;
+      // >>> Create expandable column
       const expandColumn = {
         [INTERNAL_COL_DEFINE]: {
           class: `${prefixCls.value}-expand-icon-col`,
+          columnType: 'EXPAND_COLUMN',
         },
         title: '',
         fixed: fixedColumn,
@@ -168,14 +201,13 @@ function useColumns<RecordType>(
         },
       };
 
-      // Insert expand column in the target position
-      const cloneColumns = baseColumns.value.slice();
-      if (expandColIndex >= 0) {
-        cloneColumns.splice(expandColIndex, 0, expandColumn);
-      }
-      return cloneColumns;
+      return cloneColumns.map(col => (col === EXPAND_COLUMN ? expandColumn : col));
     }
-    return baseColumns.value;
+    if (process.env.NODE_ENV !== 'production' && baseColumns.value.includes(EXPAND_COLUMN)) {
+      warning(false, '`expandable` is not config but there exist `EXPAND_COLUMN` in `columns`.');
+    }
+
+    return baseColumns.value.filter(col => col !== EXPAND_COLUMN);
   });
 
   const mergedColumns = computed(() => {

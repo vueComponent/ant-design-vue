@@ -284,6 +284,7 @@ export default defineComponent({
         'bordered',
         'htmlSize',
         'lazy',
+        'showCount',
       ]);
       const inputProps = {
         ...otherProps,
@@ -360,7 +361,7 @@ export default defineComponent({
 
       return (
         <ClearableLabeledInput
-          {...omit(inputProps, ['element', 'valueModifiers', 'suffix'])}
+          {...omit(inputProps, ['element', 'valueModifiers', 'suffix', 'showCount'])}
           ref={clearableInputRef}
           v-slots={{ ...slots, element: renderInput, suffix: renderShowCountSuffix }}
         />

@@ -142,15 +142,9 @@ export default defineComponent({
 
     return () => {
       const pre = prefixCls.value;
-      const {
-        collapsedWidth,
-        width,
-        reverseArrow,
-        zeroWidthTriggerStyle,
-        trigger,
-        collapsible,
-        theme,
-      } = props;
+      const { collapsedWidth, width, reverseArrow, zeroWidthTriggerStyle, collapsible, theme } =
+        props;
+      const trigger = props.trigger || (slots.trigger && slots.trigger());
       const rawWidth = collapsed.value ? collapsedWidth : width;
       // use "px" as fallback unit for width
       const siderWidth = isNumeric(rawWidth) ? `${rawWidth}px` : String(rawWidth);

@@ -55,6 +55,8 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Ax4DA0njr/TreeSelect.svg
 | value(v-model) | 指定当前选中的条目 | string/string\[] | - |  |
 | virtual | 设置 false 时关闭虚拟滚动 | boolean | true | 3.0 |
 | title | 自定义标题 | slot |  | 3.0.0 |
+| notFoundContent | 当下拉列表为空时显示的内容 | slot | `Not Found` |  |
+| tagRender | 自定义 tag 内容，多选时生效 | slot | - | 3.0 |
 
 ### 事件
 

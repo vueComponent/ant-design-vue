@@ -58,7 +58,11 @@ export default defineComponent({
       return new Promise(resolve => {
         const { id } = treeNode.dataRef;
         setTimeout(() => {
-          treeData.value = treeData.value.concat([genTreeNode(id, false), genTreeNode(id, true)]);
+          treeData.value = treeData.value.concat([
+            genTreeNode(id, false),
+            genTreeNode(id, true),
+            genTreeNode(id, true),
+          ]);
           console.log(treeData.value);
           resolve(true);
         }, 300);

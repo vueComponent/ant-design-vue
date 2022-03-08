@@ -54,6 +54,8 @@ Tree selection control.
 | value(v-model) | To set the current selected treeNode(s). | string\|string\[] | - |  |
 | virtual | Disable virtual scroll when set to false | boolean | true | 3.0 |
 | title | custom title | slot |  | 3.0.0 |
+| notFoundContent | Specify content to show when no result matches | slot | `Not Found` |  |
+| tagRender | Customize tag render when `multiple` | (props) => slot | - | 3.0 |
 
 ### Events
 

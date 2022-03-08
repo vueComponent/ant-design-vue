@@ -97,7 +97,7 @@ const TreeSelect = defineComponent({
       devWarning(
         props.multiple !== false || !props.treeCheckable,
         'TreeSelect',
-        '`multiple` will alway be `true` when `treeCheckable` is true',
+        '`multiple` will always be `true` when `treeCheckable` is true',
       );
       devWarning(
         props.replaceFields === undefined,
@@ -234,6 +234,7 @@ const TreeSelect = defineComponent({
           class={mergedClassName}
           listHeight={listHeight}
           listItemHeight={listItemHeight}
+          treeLine={!!treeLine}
           inputIcon={suffixIcon}
           multiple={multiple}
           removeIcon={removeIcon}

@@ -134,11 +134,15 @@ exports[`renders ./components/tree-select/demo/suffix.vue correctly 1`] = `
 exports[`renders ./components/tree-select/demo/tree-line.vue correctly 1`] = `
 <div class="ant-space ant-space-vertical">
   <div class="ant-space-item" style="margin-bottom: 8px;"><button type="button" role="switch" aria-checked="true" class="ant-switch-checked ant-switch">
-      <!----><span class="ant-switch-inner">treeLine</span>
+      <div class="ant-switch-handle">
+        <!---->
+      </div><span class="ant-switch-inner">treeLine</span>
     </button></div>
   <!---->
   <div class="ant-space-item" style="margin-bottom: 8px;"><button type="button" role="switch" aria-checked="false" class="ant-switch">
-      <!----><span class="ant-switch-inner">showLeafIcon</span>
+      <div class="ant-switch-handle">
+        <!---->
+      </div><span class="ant-switch-inner">showLeafIcon</span>
     </button></div>
   <!---->
   <div class="ant-space-item">

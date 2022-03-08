@@ -98,7 +98,7 @@ export default defineComponent({
         initExpandedKeys = Object.keys(keyEntities);
       } else if (props.defaultExpandParent) {
         initExpandedKeys = conductExpandParent(
-          props.expandedKeys || props.defaultExpandedKeys,
+          props.expandedKeys || props.defaultExpandedKeys || [],
           keyEntities,
         );
       } else {
@@ -203,8 +203,8 @@ export default defineComponent({
       };
 
       // Windows / Mac single pick
-      const ctrlPick: boolean = nativeEvent.ctrlKey || nativeEvent.metaKey;
-      const shiftPick: boolean = nativeEvent.shiftKey;
+      const ctrlPick: boolean = nativeEvent?.ctrlKey || nativeEvent?.metaKey;
+      const shiftPick: boolean = nativeEvent?.shiftKey;
 
       // Generate new selected keys
       let newSelectedKeys: Key[];

@@ -20,12 +20,12 @@ Render addon contents to timepicker panel's bottom.
   <div>
     <a-time-picker v-model:value="value" v-model:open="open" @openChange="handleOpenChange">
       <template #renderExtraFooter="{ prefixCls }">
-        <a-button size="small" type="primary" @click="handleClose">Ok {{ prefixCls }}</a-button>
+        <a-button size="small" type="primary" @click="handleClose">OK {{ prefixCls }}</a-button>
       </template>
     </a-time-picker>
     <a-time-picker v-model:value="value" v-model:open="open2">
       <template #renderExtraFooter>
-        <a-button size="small" type="primary" @click="handleClose">Ok</a-button>
+        <a-button size="small" type="primary" @click="handleClose">OK</a-button>
       </template>
     </a-time-picker>
   </div>

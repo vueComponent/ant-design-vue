@@ -33,10 +33,12 @@ import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
   setup() {
-    const panes = ref<{ title: string; content: string; key: string; closable?: boolean }[]>([
-      { title: 'Tab 1', content: 'Content of Tab 1', key: '1' },
-      { title: 'Tab 2', content: 'Content of Tab 2', key: '2' },
-    ]);
+    const panes = ref<{ title: string; content: string; key: string; closable?: boolean }[]>(
+      new Array(2).fill(null).map((_, index) => {
+        const id = String(index + 1);
+        return { title: `Tab ${id}`, content: `Content of Tab Pane ${id}`, key: id };
+      }),
+    );
     const activeKey = ref(panes.value[0].key);
     const newTabIndex = ref(0);
 

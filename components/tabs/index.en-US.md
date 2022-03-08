@@ -27,6 +27,7 @@ Ant Design has 3 types of Tabs for different situations.
 | size | preset tab bar size | `large` \| `default` \| `small` | `default` |  |
 | tabBarStyle | Tab bar style object | object | - |  |
 | tabPosition | Position of tabs | `top` \| `right` \| `bottom` \| `left` | `top` |  |
+| destroyInactiveTabPane | Whether destroy inactive TabPane when change tab | boolean | false |  |
 | type | Basic style of tabs | `line` \| `card` \| `editable-card` | `line` |  |
 | tabBarGutter | The gap between tabs | number | - |  |
 

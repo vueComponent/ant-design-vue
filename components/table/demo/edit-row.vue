@@ -33,7 +33,7 @@ Table with editable rows.
       <template v-else-if="column.dataIndex === 'operation'">
         <div class="editable-row-operations">
           <span v-if="editableData[record.key]">
-            <a @click="save(record.key)">Save</a>
+            <a-typography-link @click="save(record.key)">Save</a-typography-link>
             <a-popconfirm title="Sure to cancel?" @confirm="cancel(record.key)">
               <a>Cancel</a>
             </a-popconfirm>

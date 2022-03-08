@@ -35,7 +35,7 @@ export const SELECTION_COLUMN = {} as const;
 export const SELECTION_ALL = 'SELECT_ALL' as const;
 export const SELECTION_INVERT = 'SELECT_INVERT' as const;
 export const SELECTION_NONE = 'SELECT_NONE' as const;
-
+const EMPTY_LIST: Key[] = [];
 interface UseSelectionConfig<RecordType> {
   prefixCls: Ref<string>;
   pageData: Ref<RecordType[]>;
@@ -87,7 +87,7 @@ export default function useSelection<RecordType>(
   const [mergedSelectedKeys, setMergedSelectedKeys] = useMergedState(
     mergedRowSelection.value.selectedRowKeys ||
       mergedRowSelection.value.defaultSelectedRowKeys ||
-      [],
+      EMPTY_LIST,
     {
       value: computed(() => mergedRowSelection.value.selectedRowKeys),
     },

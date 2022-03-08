@@ -82,9 +82,10 @@ Specify `dataSource` of Table as an array of data.
 | expandFixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean \| string | false | 3.0 |
 | expandIcon | Customize row expand Icon. | Function(props):VNode \| v-slot:expandIcon="props" | - |  |
 | expandRowByClick | Whether to expand row by clicking anywhere in the whole row | boolean | `false` |  |
-| expandIconColumnIndex | Customize expand icon column index. Not render when `-1` | 0 |  |
 | footer | Table footer renderer | Function(currentPageData)\| v-slot:footer="currentPageData" |  |
 | indentSize | Indent size in pixels of tree data | number | 15 |  |
+| rowExpandable | Enable row can be expandable | (record) => boolean | - |  |
+| showExpandColumn | Show expand column | boolean | true | 3.0 |
 | loading | Loading status of table | boolean\|[object](/components/spin) | `false` |
 | locale | i18n text including filter, sort, empty text, etc | object | filterConfirm: 'Ok' <br /> filterReset: 'Reset' <br /> emptyText: 'No Data' |  |
 | pagination | Config of pagination. You can ref table pagination [config](#pagination) or full [`pagination`](/components/pagination/) document, hide it by setting it to `false` | object |  |  |
@@ -108,10 +109,6 @@ Specify `dataSource` of Table as an array of data.
 | emptyText | Customize the display content when empty data | v-slot:emptyText | - | 3.0 |
 | summary | Summary content | v-slot:summary | - | 3.0 |
 | transformCellText | The data can be changed again before rendering, generally used for the default configuration of empty data. You can configured globally through [ConfigProvider](/components/config-provider-cn/) | Function({ text, column, record, index }) => any, The `text` here is the data processed by other defined cell api, and it may be of type VNode \| string \| number | - | 1.5.4 ｜ |
-
-- `expandFixed`
-  - When set to true or `left` and `expandIconColumnIndex` is not set or is 0, enable fixed
-  - When set to true or `right` and `expandIconColumnIndex` is set to the number of table columns, enable fixed
 
 ### Events
 
@@ -166,10 +163,12 @@ One of the Table `columns` prop for describing the table's columns, Column has t
 | filteredValue | Controlled filtered value, filter icon will highlight | string\[] | - |  |
 | filterIcon | Customized filter icon | ({filtered: boolean, column: Column}) | `false` |  |
 | filterMultiple | Whether multiple filters can be selected | boolean | `true` |  |
+| filterMode | To specify the filter interface | 'menu' \| 'tree' | 'menu' | 3.0 |
+| filterSearch | Whether to be searchable for filter menu | Boolean | false | 3.0 |
 | filters | Filter menu config | object\[] | - |  |
 | fixed | Set column to be fixed: `true`(same as left) `'left'` `'right'` | boolean\|string | `false` |  |
 | key | Unique key of this column, you can ignore this prop if you've set a unique `dataIndex` | string | - |  |
-| customRender | Renderer of the table cell. The return value should be a VNode, or an object for colSpan/rowSpan config | Function({text, record, index}) {} | - |  |
+| customRender | Renderer of the table cell. The return value should be a VNode | Function({text, record, index}) {} | - |  |
 | responsive | The list of breakpoints at which to display this column. Always visible if not set. | [Breakpoint](#Breakpoint)\[] | - | 3.0 |
 | sorter | Sort function for local sort, see [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)'s compareFunction. If you need sort buttons only, set to `true` | Function\|boolean | - |  |
 | sortOrder | Order of sorted values: `'ascend'` `'descend'` `false` | boolean\|string | - |  |

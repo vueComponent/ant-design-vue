@@ -109,6 +109,7 @@ export interface TableProps<RecordType = DefaultRecordType> {
   defaultExpandAllRows?: boolean;
   indentSize?: number;
   expandIconColumnIndex?: number;
+  showExpandColumn?: boolean;
   expandedRowClassName?: RowClassName<RecordType>;
   childrenColumnName?: string;
   rowExpandable?: (record: RecordType) => boolean;

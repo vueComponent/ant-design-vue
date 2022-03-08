@@ -43,9 +43,7 @@ export default defineComponent<SummaryCellProps>({
           align={align}
           colSpan={mergedColSpan}
           rowSpan={rowSpan}
-          customRender={() => ({
-            children: slots.default?.(),
-          })}
+          customRender={() => slots.default?.()}
           {...fixedInfo}
         />
       );

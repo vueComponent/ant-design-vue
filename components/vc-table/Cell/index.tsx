@@ -1,6 +1,6 @@
 import classNames from '../../_util/classNames';
 import { flattenChildren, isValidElement, parseStyleText } from '../../_util/props-util';
-import type { CSSProperties, TdHTMLAttributes } from 'vue';
+import type { CSSProperties } from 'vue';
 import { computed, defineComponent, isVNode, renderSlot } from 'vue';
 
 import type {
@@ -13,6 +13,7 @@ import type {
   AlignType,
   CellEllipsisType,
   TransformCellText,
+  AdditionalProps,
 } from '../interface';
 import { getPathValue, validateValue } from '../utils/valueUtil';
 import { useInjectSlots } from '../../table/context';
@@ -61,7 +62,7 @@ export interface CellProps<RecordType = DefaultRecordType> {
   /** @private Used for `expandable` with nest tree */
   appendNode?: any;
 
-  additionalProps?: TdHTMLAttributes;
+  additionalProps?: AdditionalProps;
 
   rowType?: 'header' | 'body' | 'footer';
 
@@ -106,10 +107,18 @@ export default defineComponent<CellProps>({
     const contextSlots = useInjectSlots();
     const { onHover, startRow, endRow } = useInjectHover();
     const colSpan = computed(() => {
-      return props.colSpan ?? (props.additionalProps?.colspan as number);
+      return (
+        props.colSpan ??
+        props.additionalProps?.colSpan ??
+        (props.additionalProps?.colspan as number)
+      );
     });
     const rowSpan = computed(() => {
-      return props.rowSpan ?? (props.additionalProps?.rowspan as number);
+      return (
+        props.rowSpan ??
+        props.additionalProps?.rowSpan ??
+        (props.additionalProps?.rowspan as number)
+      );
     });
     const hovering = computed(() => {
       const { index } = props;

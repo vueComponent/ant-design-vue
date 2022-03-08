@@ -86,7 +86,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 | expandFixed | 控制展开图标是否固定，可选 true `left` `right` | boolean \| string | false | 3.0 |
 | expandIcon | 自定义展开图标 | Function(props):VNode \| v-slot:expandIcon="props" | - |  |
 | expandRowByClick | 通过点击行来展开子行 | boolean | `false` |  |
-| expandIconColumnIndex | 自定义展开按钮的列顺序，`-1` 时不展示 | number | - |  |
 | footer | 表格尾部 | Function(currentPageData)\|v-slot:footer="currentPageData" |  |  |
 | getPopupContainer | 设置表格内各类浮层的渲染节点，如筛选菜单 | (triggerNode) => HTMLElement | `() => TableHtmlElement` | 1.5.0 |
 | loading | 页面是否加载中 | boolean\|[object](/components/spin-cn) | false |  |
@@ -105,6 +104,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 | title | 表格标题 | Function(currentPageData)\|v-slot:title="currentPageData" |  |  |
 | indentSize | 展示树形数据时，每层缩进的宽度，以 px 为单位 | number | 15 |  |
 | rowExpandable | 设置是否允许行展开 | (record) => boolean | - | 3.0 |
+| showExpandColumn | 设置是否展示行展开列 | boolean | true | 3.0 |
 | customHeaderRow | 设置头部行属性 | Function(columns, index) | - |  |
 | customRow | 设置行属性 | Function(record, index) | - |  |
 | headerCell | 个性化头部单元格 | v-slot:headerCell="{title, column}" | - | 3.0 |
@@ -114,10 +114,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 | emptyText | 自定义空数据时的显示内容 | v-slot:emptyText | - | 3.0 |
 | summary | 总结栏 | v-slot:summary | - | 3.0 |
 | transformCellText | 数据渲染前可以再次改变，一般用于空数据的默认配置，可以通过 [ConfigProvider](/components/config-provider-cn/) 全局统一配置 | Function({ text, column, record, index }) => any，此处的 text 是经过其它定义单元格 api 处理后的数据，有可能是 VNode \| string \| number 类型 | - | 1.5.4 |
-
-- `expandFixed`
-  - 当设置为 true 或 `left` 且 `expandIconColumnIndex` 未设置或为 0 时，开启固定
-  - 当设置为 true 或 `right` 且 `expandIconColumnIndex` 设置为表格列数时，开启固定
 
 ### 事件
 
@@ -171,10 +167,12 @@ cover: https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg
 | filteredValue | 筛选的受控属性，外界可用此控制列的筛选状态，值为已筛选的 value 数组 | string\[] | - |  |
 | filterIcon | 自定义 filter 图标。 | VNode \| ({filtered: boolean, column: Column}) => vNode | false |  |
 | filterMultiple | 是否多选 | boolean | true |  |
+| filterMode | 指定筛选菜单的用户界面 | 'menu' \| 'tree' | 'menu' | 3.0 |
+| filterSearch | 筛选菜单项是否可搜索 | Boolean | false | 3.0 |
 | filters | 表头的筛选菜单项 | object\[] | - |  |
 | fixed | 列是否固定，可选 `true`(等效于 left) `'left'` `'right'` | boolean\|string | false |  |
 | key | Vue 需要的 key，如果已经设置了唯一的 `dataIndex`，可以忽略这个属性 | string | - |  |
-| customRender | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引，@return 里面可以设置表格行/列合并,可参考 demo 表格行/列合并 | Function({text, record, index, column}) {} | - |  |
+| customRender | 生成复杂数据的渲染函数，参数分别为当前行的值，当前行数据，行索引 | Function({text, record, index, column}) {} | - |  |
 | responsive | 响应式 breakpoint 配置列表。未设置则始终可见。 | [Breakpoint](#Breakpoint)\[] | - | 3.0 |
 | showSorterTooltip | 表头显示下一次排序的 tooltip 提示, 覆盖 table 中 `showSorterTooltip` | boolean \| [Tooltip props](/components/tooltip/#API) | true |  |
 | sorter | 排序函数，本地排序使用一个函数(参考 [Array.sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) 的 compareFunction)，需要服务端排序可设为 true | Function\|boolean | - |  |

@@ -22,9 +22,15 @@ For long table，need to scroll to view the header and scroll bar，then you can
       <template v-if="column.key === 'operation'"><a>action</a></template>
     </template>
     <template #summary>
-      <a-table-summary>
+      <a-table-summary :fixed="fixedTop ? 'top' : 'bottom'">
         <a-table-summary-row>
-          <a-table-summary-cell :index="0" :col-span="2">Fix Left</a-table-summary-cell>
+          <a-table-summary-cell :index="0" :col-span="2">
+            <a-switch
+              v-model:checked="fixedTop"
+              checked-children="Fixed Top"
+              un-checked-children="Fixed Top"
+            ></a-switch>
+          </a-table-summary-cell>
           <a-table-summary-cell :index="2" :col-span="8">Scroll Context</a-table-summary-cell>
           <a-table-summary-cell :index="10">Fix Right</a-table-summary-cell>
         </a-table-summary-row>
@@ -117,6 +123,7 @@ export default defineComponent({
     return {
       data,
       columns,
+      fixedTop: ref(false),
     };
   },
 });

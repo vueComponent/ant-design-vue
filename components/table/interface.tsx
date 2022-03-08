@@ -73,6 +73,7 @@ export type ColumnTitle<RecordType> = VueNode | ((props: ColumnTitleProps<Record
 
 export type FilterValue = (Key | boolean)[];
 export type FilterKey = Key[] | null;
+export type FilterSearchType = boolean | ((input: string, record: {}) => boolean);
 export interface FilterConfirmProps {
   closeDropdown: boolean;
 }

@@ -12,6 +12,7 @@ import type {
   Key,
   TableLocale,
   GetPopupContainer,
+  FilterSearchType,
 } from '../../interface';
 import FilterDropdownMenuWrapper from './FilterWrapper';
 import type { FilterState } from '.';
@@ -24,6 +25,11 @@ import type { DataNode, EventDataNode } from '../../../tree';
 import type { CheckboxChangeEvent, EventHandler } from '../../../_util/EventInterface';
 import FilterSearch from './FilterSearch';
 import Tree from '../../../tree';
+
+interface FilterRestProps {
+  confirm?: Boolean;
+  closeDropdown?: Boolean;
+}
 
 const { SubMenu, Item: MenuItem } = Menu;
 
@@ -44,12 +50,14 @@ function renderFilterItems({
   filteredKeys,
   filterMultiple,
   searchValue,
+  filterSearch,
 }: {
   filters: ColumnFilterItem[];
   prefixCls: string;
   filteredKeys: Key[];
   filterMultiple: boolean;
   searchValue: string;
+  filterSearch: FilterSearchType;
 }) {
   return filters.map((filter, index) => {
     const key = String(filter.value);
@@ -67,6 +75,7 @@ function renderFilterItems({
             filteredKeys,
             filterMultiple,
             searchValue,
+            filterSearch,
           })}
         </SubMenu>
       );
@@ -81,6 +90,9 @@ function renderFilterItems({
       </MenuItem>
     );
     if (searchValue.trim()) {
+      if (typeof filterSearch === 'function') {
+        return filterSearch(searchValue, filter) ? item : undefined;
+      }
       return searchValueMatched(searchValue, filter.text) ? item : undefined;
     }
     return item;
@@ -131,7 +143,7 @@ export default defineComponent<FilterDropdownProps<any>>({
           (props.filterState.filteredKeys?.length || props.filterState.forceFiltered)
         ),
     );
-
+    const filterFlattenKeys = computed(() => flattenKeys(props.column?.filters));
     const filterDropdownRef = computed(() => {
       const { filterDropdown, slots = {}, customFilterDropdown } = props.column;
       return (
@@ -188,6 +200,8 @@ export default defineComponent<FilterDropdownProps<any>>({
       { immediate: true },
     );
 
+    // const expandKeys = shallowRef(filterFlattenKeys.value.slice());
+    // const onExpandChange = keys => (expandKeys.value = keys);
     const openKeys = shallowRef([]);
 
     const openRef = ref();
@@ -241,7 +255,15 @@ export default defineComponent<FilterDropdownProps<any>>({
       internalTriggerFilter(filteredKeys.value);
     };
 
-    const onReset = () => {
+    const onReset = (
+      { confirm, closeDropdown }: FilterRestProps = { confirm: false, closeDropdown: false },
+    ) => {
+      if (confirm) {
+        internalTriggerFilter([]);
+      }
+      if (closeDropdown) {
+        triggerVisible(false);
+      }
       searchValue.value = '';
       filteredKeys.value = [];
     };
@@ -270,7 +292,7 @@ export default defineComponent<FilterDropdownProps<any>>({
 
     const onCheckAll = (e: CheckboxChangeEvent) => {
       if (e.target.checked) {
-        const allFilterKeys = flattenKeys(props.column?.filters).map(key => String(key));
+        const allFilterKeys = filterFlattenKeys.value;
         filteredKeys.value = allFilterKeys;
       } else {
         filteredKeys.value = [];
@@ -289,6 +311,8 @@ export default defineComponent<FilterDropdownProps<any>>({
         }
         return item;
       });
+
+    const treeData = computed(() => getTreeData({ filters: props.column.filters }));
     // ======================== Style ========================
     const dropdownMenuClass = computed(() =>
       classNames({
@@ -338,6 +362,10 @@ export default defineComponent<FilterDropdownProps<any>>({
                 <Checkbox
                   class={`${tablePrefixCls}-filter-dropdown-checkall`}
                   onChange={onCheckAll}
+                  checked={selectedKeys.length === filterFlattenKeys.value.length}
+                  indeterminate={
+                    selectedKeys.length > 0 && selectedKeys.length < filterFlattenKeys.value.length
+                  }
                 >
                   {locale.filterCheckall}
                 </Checkbox>
@@ -353,9 +381,11 @@ export default defineComponent<FilterDropdownProps<any>>({
                 checkedKeys={selectedKeys}
                 selectedKeys={selectedKeys}
                 showIcon={false}
-                treeData={getTreeData({ filters: column.filters })}
+                treeData={treeData.value}
                 autoExpandParent
                 defaultExpandAll
+                // expandedKeys={expandKeys.value as Key[]}
+                // onExpand={onExpandChange}
                 filterTreeNode={
                   searchValue.value.trim()
                     ? node => searchValueMatched(searchValue.value, node.title)
@@ -390,6 +420,7 @@ export default defineComponent<FilterDropdownProps<any>>({
               default: () =>
                 renderFilterItems({
                   filters: column.filters || [],
+                  filterSearch: filterSearch.value,
                   prefixCls,
                   filteredKeys: filteredKeys.value,
                   filterMultiple,
@@ -430,7 +461,7 @@ export default defineComponent<FilterDropdownProps<any>>({
                 type="link"
                 size="small"
                 disabled={selectedKeys.length === 0}
-                onClick={onReset}
+                onClick={() => onReset()}
               >
                 {locale.filterReset}
               </Button>

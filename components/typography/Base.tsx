@@ -52,6 +52,7 @@ export interface EditConfig {
   onEnd?: () => void;
   maxlength?: number;
   autoSize?: boolean | AutoSizeType;
+  triggerType?: ('icon' | 'text')[];
 }
 
 export interface EllipsisConfig {
@@ -99,7 +100,7 @@ const Base = defineComponent<InternalBlockProps>({
   inheritAttrs: false,
   emits: ['update:content'],
   setup(props, { slots, attrs, emit }) {
-    const { prefixCls } = useConfigInject('typography', props);
+    const { prefixCls, direction } = useConfigInject('typography', props);
 
     const state = reactive({
       edit: false,
@@ -362,12 +363,12 @@ const Base = defineComponent<InternalBlockProps>({
     function renderEdit() {
       if (!props.editable) return;
 
-      const { tooltip } = props.editable as EditConfig;
+      const { tooltip, triggerType = ['icon'] } = props.editable as EditConfig;
       const icon = slots.editableIcon ? slots.editableIcon() : <EditOutlined role="button" />;
       const title = slots.editableTooltip ? slots.editableTooltip() : state.editStr;
       const ariaLabel = typeof title === 'string' ? title : '';
 
-      return (
+      return triggerType.indexOf('icon') !== -1 ? (
         <Tooltip key="edit" title={tooltip === false ? '' : title}>
           <TransButton
             ref={editIcon}
@@ -378,7 +379,7 @@ const Base = defineComponent<InternalBlockProps>({
             {icon}
           </TransButton>
         </Tooltip>
-      );
+      ) : null;
     }
 
     function renderCopy() {
@@ -428,6 +429,8 @@ const Base = defineComponent<InternalBlockProps>({
           onChange={onContentChange}
           onCancel={onEditCancel}
           onEnd={onEnd}
+          direction={direction.value}
+          v-slots={{ enterIcon: slots.editableEnterIcon }}
         />
       );
     }
@@ -437,7 +440,7 @@ const Base = defineComponent<InternalBlockProps>({
     }
 
     return () => {
-      const { editing } = editable.value;
+      const { editing, triggerType = ['icon'] } = editable.value;
       const children =
         props.ellipsis || props.editable
           ? props.content !== undefined
@@ -538,7 +541,7 @@ const Base = defineComponent<InternalBlockProps>({
                       [`${prefixCls.value}-${type}`]: type,
                       [`${prefixCls.value}-disabled`]: disabled,
                       [`${prefixCls.value}-ellipsis`]: rows,
-                      [`${prefixCls.value}-single-line`]: rows === 1,
+                      [`${prefixCls.value}-single-line`]: rows === 1 && !state.isEllipsis,
                       [`${prefixCls.value}-ellipsis-single-line`]: cssTextOverflow,
                       [`${prefixCls.value}-ellipsis-multiple-line`]: cssLineClamp,
                     },
@@ -549,6 +552,8 @@ const Base = defineComponent<InternalBlockProps>({
                     WebkitLineClamp: cssLineClamp ? rows : undefined,
                   }}
                   aria-label={ariaLabel}
+                  direction={direction.value}
+                  onClick={triggerType.indexOf('text') !== -1 ? onEditClick : () => {}}
                   {...textProps}
                 >
                   {showTooltip ? (

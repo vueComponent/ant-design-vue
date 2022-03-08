@@ -70,6 +70,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/GOM1KQ24O/Typography.svg
 | 名称 | 说明 | 参数 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
 | editableIcon | 自定义编辑图标 | - | &lt;EditOutlined /> |  |
+| enterEnterIcon | 在编辑段中自定义“enter”图标 | `{className: string}` | `<EnterOutlined />` | 3.0 |
 | editableTooltip | 自定义提示文本，当 `editable.tooltip = false` 时关闭 | - | `编辑` |  |
 | copyableIcon | 自定义拷贝图标 | `{ copied: boolean }` | `copied ? <CheckOutlined /> : <CopyOutlined />` |  |
 | copyableTooltip | 自定义提示文案，当 `copyable.tooltip = false` 时关闭 | `{ copied: boolean }` | `copied ? '复制成功' : '复制'` |  |
@@ -104,6 +105,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/GOM1KQ24O/Typography.svg
     onChange: function(string),
     onCancel: function,
     onEnd: function,
+    triggerType: ('icon' | 'text')[],
   }
 ```
 
@@ -119,6 +121,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/GOM1KQ24O/Typography.svg
 | onStart | 进入编辑中状态时触发 | function | - |  |
 | onCancel | 按 ESC 退出编辑状态时触发 | function | - |  |
 | onEnd | 按 ENTER 结束编辑状态时触发 | function | - |  |
+| triggerType | Edit mode trigger - icon, text or both (not specifying icon as trigger hides it) | Array&lt;`icon`\|`text`> | \[`icon`] |  |
 
 ### ellipsis
 

@@ -69,6 +69,7 @@ Basic text writing, including headings, body text, lists, and more.
 | Name | Description | Property | Default | Version |
 | --- | --- | --- | --- | --- |
 | editableIcon | Custom editable icon | - | &lt;EditOutlined /> |  |
+| editableEnterIcon | Custom "enter" icon in the edit field | `{className: string}` | `<EnterOutlined />` | 3.0 |
 | editableTooltip | Custom tooltip text, hide when `editable.tooltip = false` | - | `Edit` |  |
 | copyableIcon | Custom copy icon | `{ copied: boolean }` | `copied ? <CheckOutlined /> : <CopyOutlined />` |  |
 | copyableTooltip | Custom tooltip text, hide when `copyable.tooltip = false` | `{ copied: boolean }` | `copied ? 'Copied' : 'Copy'` |  |
@@ -103,6 +104,7 @@ Basic text writing, including headings, body text, lists, and more.
     onChange: function(string),
     onCancel: function,
     onEnd: function,
+    triggerType: ('icon' | 'text')[],
   }
 ```
 
@@ -118,6 +120,7 @@ Basic text writing, including headings, body text, lists, and more.
 | onStart | Called when enter editable state | function | - |  |
 | onCancel | Called when type ESC to exit editable state | function | - |  |
 | onEnd | Called when type ENTER to exit editable state | function | - |  |
+| triggerType | Edit mode trigger - icon, text or both (not specifying icon as trigger hides it) | Array&lt;`icon`\|`text`> | \[`icon`] |  |
 
 ### ellipsis
 

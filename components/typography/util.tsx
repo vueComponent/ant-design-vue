@@ -23,14 +23,6 @@ const wrapperStyle: CSSProperties = {
   lineHeight: 'inherit',
 };
 
-function pxToNumber(value: string | null) {
-  if (!value) return 0;
-
-  const match = value.match(/^\d*(\.\d*)?/);
-
-  return match ? Number(match[0]) : 0;
-}
-
 function styleToString(style: CSSStyleDeclaration) {
   // There are some different behavior between Firefox & Chrome.
   // We have to handle this ourself.
@@ -38,8 +30,43 @@ function styleToString(style: CSSStyleDeclaration) {
   return styleNames.map(name => `${name}: ${style.getPropertyValue(name)};`).join('');
 }
 
+function resetDomStyles(target: HTMLElement, origin: HTMLElement) {
+  target.setAttribute('aria-hidden', 'true');
+  const originStyle = window.getComputedStyle(origin);
+  const originCSS = styleToString(originStyle);
+  // Set shadow
+  target.setAttribute('style', originCSS);
+  target.style.position = 'fixed';
+  target.style.left = '0';
+  target.style.height = 'auto';
+  target.style.minHeight = 'auto';
+  target.style.maxHeight = 'auto';
+  target.style.paddingTop = '0';
+  target.style.paddingBottom = '0';
+  target.style.borderTopWidth = '0';
+  target.style.borderBottomWidth = '0';
+  target.style.top = '-999999px';
+  target.style.zIndex = '-1000';
+  // clean up css overflow
+  target.style.textOverflow = 'clip';
+  target.style.whiteSpace = 'normal';
+  (target.style as any).webkitLineClamp = 'none';
+}
+
+function getRealLineHeight(originElement: HTMLElement) {
+  const heightContainer = document.createElement('div');
+  resetDomStyles(heightContainer, originElement);
+  heightContainer.appendChild(document.createTextNode('text'));
+  document.body.appendChild(heightContainer);
+  // The element real height is always less than multiple of line-height
+  // Use getBoundingClientRect to get actual single row height of the element
+  const realHeight = heightContainer.getBoundingClientRect().height;
+  document.body.removeChild(heightContainer);
+  return realHeight;
+}
+
 export default (
-  originEle: HTMLElement,
+  originElement: HTMLElement,
   option: Option,
   content: string,
   fixedContent: VNodeTypes[],
@@ -56,30 +83,10 @@ export default (
   }
 
   const { rows, suffix = '' } = option;
-  // Get origin style
-  const originStyle = window.getComputedStyle(originEle);
-  const originCSS = styleToString(originStyle);
-  const lineHeight = pxToNumber(originStyle.lineHeight);
-  const maxHeight = Math.round(
-    lineHeight * (rows + 1) +
-      pxToNumber(originStyle.paddingTop) +
-      pxToNumber(originStyle.paddingBottom),
-  );
+  const lineHeight = getRealLineHeight(originElement);
+  const maxHeight = Math.round(lineHeight * rows * 100) / 100;
 
-  // Set shadow
-  ellipsisContainer.setAttribute('style', originCSS);
-  ellipsisContainer.style.position = 'fixed';
-  ellipsisContainer.style.left = '0';
-  ellipsisContainer.style.height = 'auto';
-  ellipsisContainer.style.minHeight = 'auto';
-  ellipsisContainer.style.maxHeight = 'auto';
-  ellipsisContainer.style.top = '-999999px';
-  ellipsisContainer.style.zIndex = '-1000';
-
-  // clean up css overflow
-  ellipsisContainer.style.textOverflow = 'clip';
-  ellipsisContainer.style.whiteSpace = 'normal';
-  ellipsisContainer.style.webkitLineClamp = 'none';
+  resetDomStyles(ellipsisContainer, originElement);
 
   // Render in the fake container
   const vm = createApp({
@@ -100,7 +107,8 @@ export default (
 
   // Check if ellipsis in measure div is height enough for content
   function inRange() {
-    return ellipsisContainer.offsetHeight < maxHeight;
+    const currentHeight = Math.round(ellipsisContainer.getBoundingClientRect().height * 100) / 100;
+    return currentHeight - 0.1 <= maxHeight; // -.1 for firefox
   }
 
   // Skip ellipsis if already match

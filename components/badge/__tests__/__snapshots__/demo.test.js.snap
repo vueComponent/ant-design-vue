@@ -20,7 +20,9 @@ exports[`renders ./components/badge/demo/change.vue correctly 1`] = `
   <!---->
 </div><span class="ant-badge"><span class="ant-avatar ant-avatar-lg ant-avatar-square"><span class="ant-avatar-string" style="transform: scale(1) translateX(-50%);"><!----></span></span><sup data-show="true" class="ant-scroll-number ant-badge-dot"></sup>
 <!----></span><button type="button" role="switch" aria-checked="true" class="ant-switch-checked ant-switch">
-  <!----><span class="ant-switch-inner"><!----></span>
+  <div class="ant-switch-handle">
+    <!---->
+  </div><span class="ant-switch-inner"><!----></span>
 </button>
 `;
 

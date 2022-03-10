@@ -363,6 +363,7 @@ exports[`renders ./components/page-header/demo/actions.vue correctly 1`] = `
       
       <div
         class="ant-row"
+        type="flex"
       >
         
         <div

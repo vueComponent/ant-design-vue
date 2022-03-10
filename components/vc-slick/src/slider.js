@@ -7,7 +7,7 @@ import { getStyle, getListeners } from '../../_util/props-util';
 import InnerSlider from './inner-slider';
 import defaultProps from './default-props';
 import { canUseDOM } from './utils/innerSliderUtils';
-const enquire = canUseDOM() && require('enquire.js');
+import enquire from 'enquire.js';
 
 Vue.use(ref, { name: 'ant-ref' });
 

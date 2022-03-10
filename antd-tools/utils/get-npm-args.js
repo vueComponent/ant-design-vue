@@ -2,6 +2,11 @@
 
 // NOTE: the following code was partially adopted from https://github.com/iarna/in-publish
 module.exports = function getNpmArgs() {
+  // https://github.com/iarna/in-publish/pull/14
+  if (process.env.npm_command) {
+    return [process.env.npm_command];
+  }
+
   let npmArgv = null;
 
   try {

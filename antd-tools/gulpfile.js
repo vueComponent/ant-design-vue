@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const { getProjectPath } = require('./utils/projectHelper');
+const { getProjectPath, getConfig } = require('./utils/projectHelper');
 const runCmd = require('./runCmd');
 const getBabelCommonConfig = require('./getBabelCommonConfig');
 const merge2 = require('merge2');
@@ -26,6 +26,7 @@ const stripCode = require('gulp-strip-code');
 const compareVersions = require('compare-versions');
 const getTSCommonConfig = require('./getTSCommonConfig');
 const replaceLib = require('./replaceLib');
+const sortApiTable = require('./sortApiTable');
 
 const packageJson = require(getProjectPath('package.json'));
 const tsDefaultReporter = ts.reporter.defaultReporter();
@@ -49,11 +50,17 @@ function dist(done) {
     }
 
     const info = stats.toJson();
+    const { dist: { finalize } = {}, bail } = getConfig();
 
     if (stats.hasErrors()) {
-      console.error(info.errors);
+      (info.errors || []).forEach(error => {
+        console.error(error);
+      });
+      // https://github.com/ant-design/ant-design/pull/31662
+      if (bail) {
+        process.exit(1);
+      }
     }
-
     if (stats.hasWarnings()) {
       console.warn(info.warnings);
     }
@@ -68,6 +75,11 @@ function dist(done) {
       version: false,
     });
     console.log(buildInfo);
+    // Additional process of dist finalize
+    if (finalize) {
+      console.log('[Dist] Finalization...');
+      finalize();
+    }
     done(0);
   });
 }
@@ -103,7 +115,7 @@ function babelify(js, modules) {
   if (modules === false) {
     babelConfig.plugins.push(replaceLib);
   }
-  let stream = js.pipe(babel(babelConfig)).pipe(
+  const stream = js.pipe(babel(babelConfig)).pipe(
     through2.obj(function z(file, encoding, next) {
       this.push(file.clone());
       if (file.path.match(/\/style\/index\.(js|jsx|ts|tsx)$/)) {
@@ -128,33 +140,40 @@ function babelify(js, modules) {
       next();
     }),
   );
-  if (modules === false) {
-    stream = stream.pipe(
-      stripCode({
-        start_comment: '@remove-on-es-build-begin',
-        end_comment: '@remove-on-es-build-end',
-      }),
-    );
-  }
   return stream.pipe(gulp.dest(modules === false ? esDir : libDir));
 }
 
 function compile(modules) {
+  const { compile: { transformTSFile, transformFile, includeLessFile = [] } = {} } = getConfig();
   rimraf.sync(modules !== false ? libDir : esDir);
+
+  // =============================== LESS ===============================
   const less = gulp
     .src(['components/**/*.less'])
     .pipe(
       through2.obj(function (file, encoding, next) {
-        this.push(file.clone());
+        // Replace content
+        const cloneFile = file.clone();
+        const content = file.contents.toString().replace(/^\uFEFF/, '');
+
+        cloneFile.contents = Buffer.from(content);
+
+        // Clone for css here since `this.push` will modify file.path
+        const cloneCssFile = cloneFile.clone();
+
+        this.push(cloneFile);
+
+        // Transform less file
         if (
-          file.path.match(/\/style\/index\.less$/) ||
-          file.path.match(/\/style\/v2-compatible-reset\.less$/)
+          file.path.match(/(\/|\\)style(\/|\\)index\.less$/) ||
+          file.path.match(/(\/|\\)style(\/|\\)v2-compatible-reset\.less$/) ||
+          includeLessFile.some(regex => file.path.match(regex))
         ) {
-          transformLess(file.path)
+          transformLess(cloneCssFile.contents.toString(), cloneCssFile.path)
             .then(css => {
-              file.contents = Buffer.from(css);
-              file.path = file.path.replace(/\.less$/, '.css');
-              this.push(file);
+              cloneCssFile.contents = Buffer.from(css);
+              cloneCssFile.path = cloneCssFile.path.replace(/\.less$/, '.css');
+              this.push(cloneCssFile);
               next();
             })
             .catch(e => {
@@ -170,6 +189,25 @@ function compile(modules) {
     .src(['components/**/*.@(png|svg)'])
     .pipe(gulp.dest(modules === false ? esDir : libDir));
   let error = 0;
+
+  // =============================== FILE ===============================
+  let transformFileStream;
+
+  if (transformFile) {
+    transformFileStream = gulp
+      .src(['components/**/*.tsx'])
+      .pipe(
+        through2.obj(function (file, encoding, next) {
+          let nextFile = transformFile(file) || file;
+          nextFile = Array.isArray(nextFile) ? nextFile : [nextFile];
+          nextFile.forEach(f => this.push(f));
+          next();
+        }),
+      )
+      .pipe(gulp.dest(modules === false ? esDir : libDir));
+  }
+
+  // ================================ TS ================================
   const source = [
     'components/**/*.js',
     'components/**/*.jsx',
@@ -179,7 +217,29 @@ function compile(modules) {
     '!components/*/__tests__/*',
   ];
 
-  const tsResult = gulp.src(source).pipe(
+  // Strip content if needed
+  let sourceStream = gulp.src(source);
+  if (modules === false) {
+    sourceStream = sourceStream.pipe(
+      stripCode({
+        start_comment: '@remove-on-es-build-begin',
+        end_comment: '@remove-on-es-build-end',
+      }),
+    );
+  }
+
+  if (transformTSFile) {
+    sourceStream = sourceStream.pipe(
+      through2.obj(function (file, encoding, next) {
+        let nextFile = transformTSFile(file) || file;
+        nextFile = Array.isArray(nextFile) ? nextFile : [nextFile];
+        nextFile.forEach(f => this.push(f));
+        next();
+      }),
+    );
+  }
+
+  const tsResult = sourceStream.pipe(
     ts(tsConfig, {
       error(e) {
         tsDefaultReporter.error(e);
@@ -199,7 +259,7 @@ function compile(modules) {
   tsResult.on('end', check);
   const tsFilesStream = babelify(tsResult.js, modules);
   const tsd = tsResult.dts.pipe(gulp.dest(modules === false ? esDir : libDir));
-  return merge2([less, tsFilesStream, tsd, assets]);
+  return merge2([less, tsFilesStream, tsd, assets, transformFileStream].filter(s => s));
 }
 
 function tag() {
@@ -420,13 +480,25 @@ gulp.task(
     const npmArgs = getNpmArgs();
     if (npmArgs) {
       for (let arg = npmArgs.shift(); arg; arg = npmArgs.shift()) {
-        if (/^pu(b(l(i(sh?)?)?)?)?$/.test(arg) && npmArgs.indexOf('--with-antd-tools') < 0) {
+        if (
+          /^pu(b(l(i(sh?)?)?)?)?$/.test(arg) &&
+          npmArgs.indexOf('--with-antd-tools') < 0 &&
+          !process.env.npm_config_with_antd_tools
+        ) {
           reportError();
           done(1);
           return;
         }
       }
     }
+    done();
+  }),
+);
+
+gulp.task(
+  'sort-api-table',
+  gulp.series(done => {
+    sortApiTable();
     done();
   }),
 );

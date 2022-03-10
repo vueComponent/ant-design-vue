@@ -1,16 +1,14 @@
 const less = require('less');
-const { readFileSync } = require('fs');
 const path = require('path');
 const postcss = require('postcss');
-const NpmImportPlugin = require('less-plugin-npm-import');
 const autoprefixer = require('autoprefixer');
+const NpmImportPlugin = require('less-plugin-npm-import');
+const { getConfig } = require('./utils/projectHelper');
 
-function transformLess(lessFile, config = {}) {
+function transformLess(lessContent, lessFilePath, config = {}) {
   const { cwd = process.cwd() } = config;
-  const resolvedLessFile = path.resolve(cwd, lessFile);
-
-  let data = readFileSync(resolvedLessFile, 'utf-8');
-  data = data.replace(/^\uFEFF/, '');
+  const { compile: { lessConfig } = {} } = getConfig();
+  const resolvedLessFile = path.resolve(cwd, lessFilePath);
 
   // Do less compile
   const lessOpts = {
@@ -18,13 +16,12 @@ function transformLess(lessFile, config = {}) {
     filename: resolvedLessFile,
     plugins: [new NpmImportPlugin({ prefix: '~' })],
     javascriptEnabled: true,
+    ...lessConfig,
   };
   return less
-    .render(data, lessOpts)
+    .render(lessContent, lessOpts)
     .then(result => postcss([autoprefixer]).process(result.css, { from: undefined }))
-    .then(r => {
-      return r.css;
-    });
+    .then(r => r.css);
 }
 
 module.exports = transformLess;

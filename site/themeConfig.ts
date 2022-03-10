@@ -13,6 +13,7 @@ const themeConfig = [
       'gray-8': '@text-color',
       'background-color-base': '#555',
       'skeleton-color': 'rgba(0,0,0,0.8)',
+      'root-entry-name': 'dark',
     },
   },
 ];

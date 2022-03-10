@@ -89,9 +89,11 @@ export default defineComponent({
         if (theme.value === 'dark') {
           document.getElementsByTagName('html')[0].setAttribute('data-doc-theme', 'dark');
           document.getElementsByTagName('body')[0].setAttribute('data-theme', 'dark');
+          document.getElementsByTagName('html')[0].style.colorScheme = 'dark';
         } else {
           document.getElementsByTagName('html')[0].setAttribute('data-doc-theme', 'light');
           document.getElementsByTagName('body')[0].setAttribute('data-theme', 'light');
+          document.getElementsByTagName('html')[0].style.colorScheme = 'light';
         }
       },
       { immediate: true },

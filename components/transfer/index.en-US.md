@@ -24,7 +24,7 @@ One or more elements can be selected from either column, one click on the proper
 | disabled | Whether disabled transfer | boolean | false |  |
 | filterOption | A function to determine whether an item should show in search result list | (inputValue, option): boolean |  |  |
 | footer | customize the progress dot by setting a scoped slot | slot="footer" slot-scope="props" |  |  |
-| listStyle | A custom CSS style used for rendering the transfer columns. | object |  |  |
+| listStyle | A custom CSS style used for rendering the transfer columns. | CSSProperties |  |  |
 | locale | i18n text including filter, empty text, item unit, etc | object | `{ itemUnit: 'item', itemsUnit: 'items', notFoundContent: 'The list is empty', searchPlaceholder: 'Search here' }` |  |
 | oneWay | Display as single direction style | boolean | false | 3.0.0 |
 | operations | A set of operations that are sorted from top to bottom. | string\[] | \['>', '<'] |  |

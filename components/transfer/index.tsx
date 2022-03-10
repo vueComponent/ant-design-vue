@@ -351,7 +351,7 @@ const Transfer = defineComponent({
             renderList={children}
             onScroll={handleLeftScroll}
             disabled={disabled}
-            direction="left"
+            direction={direction.value === 'rtl' ? 'right' : 'left'}
             showSelectAll={showSelectAll}
             selectAllLabel={selectAllLabels[0] || slots.leftSelectAllLabel}
             pagination={mergedPagination}
@@ -389,7 +389,7 @@ const Transfer = defineComponent({
             renderList={children}
             onScroll={handleRightScroll}
             disabled={disabled}
-            direction="right"
+            direction={direction.value === 'rtl' ? 'left' : 'right'}
             showSelectAll={showSelectAll}
             selectAllLabel={selectAllLabels[1] || slots.rightSelectAllLabel}
             showRemove={oneWay}

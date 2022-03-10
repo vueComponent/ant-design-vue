@@ -1,4 +1,4 @@
-import { Locale } from '../interface';
+import type { Locale } from '../interface';
 
 const locale: Locale = {
   locale: 'ka_GE',

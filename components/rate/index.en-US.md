@@ -27,7 +27,7 @@ Rate component.
 
 ### events
 
-| Events Name | Description                        | Arguments               |
+| Events Name | Description                        | Arguments               |     |
 | ----------- | ---------------------------------- | ----------------------- | --- |
 | blur        | callback when component lose focus | Function()              | -   |
 | change      | callback when select value         | Function(value: number) | -   |

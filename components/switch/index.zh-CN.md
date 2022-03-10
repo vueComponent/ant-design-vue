@@ -19,19 +19,19 @@ cover: https://gw.alipayobjects.com/zos/alicdn/zNdJQMhfm/Switch.svg
 | --- | --- | --- | --- | --- |
 | autofocus | 组件自动获取焦点 | boolean | false |  |
 | checked(v-model) | 指定当前是否选中 | checkedValue \| unCheckedValue | false |  |
+| checkedChildren | 选中时的内容 | string\|slot |  |  |
+| checkedValue | 选中时的值 | boolean \| string \| number | true | 2.2.1 |
 | disabled | 是否禁用 | boolean | false |  |
 | loading | 加载中的开关 | boolean | false |  |
 | size | 开关大小，可选值：`default` `small` | string | default |  |
-| checkedChildren | 选中时的内容 | string\|slot |  |  |
 | unCheckedChildren | 非选中时的内容 | string\|slot |  |  |
-| checkedValue | 选中时的值 | boolean \| string \| number | true | 2.2.1 |
 | unCheckedValue | 非选中时的值 | boolean \| string \| number | false | 2.2.1 |
 
 ### 事件
 
-| 事件名称 | 说明           | 回调参数                                                     |
+| 事件名称 | 说明           | 回调参数                                                     |     |
 | -------- | -------------- | ------------------------------------------------------------ | --- |
-| change   | 变化时回调函数 | Function(checked: boolean \| string \| number, event: Event) |
+| change   | 变化时回调函数 | Function(checked: boolean \| string \| number, event: Event) |     |
 | click    | 点击时回调函数 | Function(checked: boolean \| string \| number, event: Event) |     |
 
 ## 方法

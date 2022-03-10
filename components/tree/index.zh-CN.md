@@ -16,30 +16,30 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Xh-oWqg9k/Tree.svg
 
 ### Tree props
 
-| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |  |
 | --- | --- | --- | --- | --- | --- |
-| blockNode | 是否节点占据一行 | boolean | false |  |
-| treeData | treeNodes 数据，如果设置则不需要手动构造 TreeNode 节点（key 在整个树范围内唯一） | [TreeNode[]](#TreeNode) | -- |  |
-| fieldNames | 替换 treeNode 中 title,key,children 字段为 treeData 中对应的字段 | object | {children:'children', title:'title', key:'key' } | 3.0.0 |
-| autoExpandParent | 是否自动展开父节点 | boolean | true |  |
-| checkable | 节点前添加 Checkbox 复选框 | boolean | false |  |
-| checkedKeys(v-model) | （受控）选中复选框的树节点（注意：父子节点有关联，如果传入父节点 key，则子节点自动选中；相应当子节点 key 都传入，父节点也自动选中。当设置`checkable`和`checkStrictly`，它是一个有`checked`和`halfChecked`属性的对象，并且父子节点的选中与否不再关联 | string\[] \| number\[] \| {checked: string\[] \| number\[], halfChecked: string\[] \| number\[]} | \[] |  |
-| checkStrictly | checkable 状态下节点选择完全受控（父子节点选中状态不再关联） | boolean | false |  |
-| defaultExpandAll | 默认展开所有树节点, 如果是异步数据，需要在数据返回后再实例化，建议用 v-if="data.length"；当有 expandedKeys 时，defaultExpandAll 将失效 | boolean | false |  |
-| disabled | 将树禁用 | bool | false |  |
-| draggable | 设置节点可拖拽 | boolean | false |  |
-| expandedKeys(v-model) | （受控）展开指定的树节点 | string\[] \| number\[] | \[] |  |
-| filterTreeNode | 按需筛选树节点（高亮），返回 true | function(node) | - |  |
-| loadData | 异步加载数据 | function(node) | - |  |
-| loadedKeys | （受控）已经加载的节点，需要配合 `loadData` 使用 | string\[] \| number\[] | \[] |  |
-| multiple | 支持点选多个节点（节点本身） | boolean | false |  |
+| autoExpandParent | 是否自动展开父节点 | boolean | true |  |  |
+| blockNode | 是否节点占据一行 | boolean | false |  |  |
+| checkable | 节点前添加 Checkbox 复选框 | boolean | false |  |  |
+| checkedKeys(v-model) | （受控）选中复选框的树节点（注意：父子节点有关联，如果传入父节点 key，则子节点自动选中；相应当子节点 key 都传入，父节点也自动选中。当设置`checkable`和`checkStrictly`，它是一个有`checked`和`halfChecked`属性的对象，并且父子节点的选中与否不再关联 | string\[] \| number\[] \| {checked: string\[] \| number\[], halfChecked: string\[] \| number\[]} | \[] |  |  |
+| checkStrictly | checkable 状态下节点选择完全受控（父子节点选中状态不再关联） | boolean | false |  |  |
+| defaultExpandAll | 默认展开所有树节点, 如果是异步数据，需要在数据返回后再实例化，建议用 v-if="data.length"；当有 expandedKeys 时，defaultExpandAll 将失效 | boolean | false |  |  |
+| disabled | 将树禁用 | bool | false |  |  |
+| draggable | 设置节点可拖拽 | boolean | false |  |  |
+| expandedKeys(v-model) | （受控）展开指定的树节点 | string\[] \| number\[] | \[] |  |  |
+| fieldNames | 替换 treeNode 中 title,key,children 字段为 treeData 中对应的字段 | object | {children:'children', title:'title', key:'key' } | 3.0.0 |  |
+| filterTreeNode | 按需筛选树节点（高亮），返回 true | function(node) | - |  |  |
+| loadData | 异步加载数据 | function(node) | - |  |  |
+| loadedKeys | （受控）已经加载的节点，需要配合 `loadData` 使用 | string\[] \| number\[] | \[] |  |  |
+| multiple | 支持点选多个节点（节点本身） | boolean | false |  |  |
 | selectable | 是否可选中 | boolean | true |  |  |
-| selectedKeys(v-model) | （受控）设置选中的树节点 | string\[] \| number\[] | - |  |
-| showIcon | 是否展示 TreeNode title 前的图标，没有默认样式，如设置为 true，需要自行定义图标相关样式 | boolean | false |  |
-| switcherIcon | 自定义树节点的展开/折叠图标 | slot | - |  |
-| showLine | 是否展示连接线 | boolean \| {showLeafIcon: boolean}(3.0+) | false |  |
-| title | 自定义标题 | slot |  | 2.0.0 |
-| virtual | 设置 false 时关闭虚拟滚动 | boolean | true | 3.0 |
+| selectedKeys(v-model) | （受控）设置选中的树节点 | string\[] \| number\[] | - |  |  |
+| showIcon | 是否展示 TreeNode title 前的图标，没有默认样式，如设置为 true，需要自行定义图标相关样式 | boolean | false |  |  |
+| showLine | 是否展示连接线 | boolean \| {showLeafIcon: boolean}(3.0+) | false |  |  |
+| switcherIcon | 自定义树节点的展开/折叠图标 | slot | - |  |  |
+| title | 自定义标题 | slot |  | 2.0.0 |  |
+| treeData | treeNodes 数据，如果设置则不需要手动构造 TreeNode 节点（key 在整个树范围内唯一） | [TreeNode\[\]](#TreeNode) | -- |  |  |
+| virtual | 设置 false 时关闭虚拟滚动 | boolean | true | 3.0 |  |
 
 ### 事件
 
@@ -61,15 +61,15 @@ cover: https://gw.alipayobjects.com/zos/alicdn/Xh-oWqg9k/Tree.svg
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| class | 节点的 class | string | - |  |
-| style | 节点的 style | string\|object | - |  |
 | checkable | 当树为 checkable 时，设置独立节点是否展示 Checkbox | boolean | - |  |
+| class | 节点的 class | string | - |  |
 | disableCheckbox | 禁掉 checkbox | boolean | false |  |
 | disabled | 禁掉响应 | boolean | false |  |
 | icon | 自定义图标。可接收组件，props 为当前节点 props | slot\|slot-scope | - |  |
 | isLeaf | 设置为叶子节点(设置了`loadData`时有效) | boolean | false |  |
 | key | 被树的 (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys 属性所用。注意：整个树范围内的所有节点的 key 值不能重复！ | string \| number | 内部计算出的节点位置 |  |
 | selectable | 设置节点是否可被选中 | boolean | true |  |
+| style | 节点的 style | string\|object | - |  |
 | title | 标题 | string | '---' |  |
 
 ### DirectoryTree props

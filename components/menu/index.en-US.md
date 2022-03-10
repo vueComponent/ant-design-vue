@@ -43,13 +43,13 @@ More layouts with navigation: [Layout](/components/layout).
 | mode | type of the menu; `vertical`, `horizontal`, and `inline` modes are supported | `vertical` \| `horizontal` \| `inline` | `vertical` |
 | multiple | Allow selection of multiple items | boolean | false |
 | openKeys(v-model) | array with the keys of currently opened sub menus | string\[] |  |
+| overflowedIndicator | Customized icon when menu is collapsed | DOM | `<span>···</span>` |
 | selectable | allow selecting menu items | boolean | true |
 | selectedKeys(v-model) | array with the keys of currently selected menu items | string\[] |  |
 | style | style of the root node | object |  |
 | subMenuCloseDelay | delay time to hide submenu when mouse leave, unit: second | number | 0.1 |
 | subMenuOpenDelay | delay time to show submenu when mouse enter, unit: second | number | 0 |
 | theme | color theme of the menu | string: `light` `dark` | `light` |
-| overflowedIndicator | Customized icon when menu is collapsed | DOM | `<span>···</span>` |
 | triggerSubMenuAction | method of trigger submenu | `click` \| `hover` | `hover` |
 
 ### Menu Events
@@ -73,11 +73,11 @@ More layouts with navigation: [Layout](/components/layout).
 
 | Param          | Description                         | Type         | Default value | Version |
 | -------------- | ----------------------------------- | ------------ | ------------- | ------- |
-| popupClassName | Sub-menu class name                 | string       |               | 1.5.0   |
 | disabled       | whether sub menu is disabled or not | boolean      | false         |         |
-| key            | Unique ID of the sub menu, required | string       |               |         |
-| title          | title of the sub menu               | string\|slot |               |         |
 | expandIcon     | Customized expandIcon               | slot         | arrow icon    | ｜      |
+| key            | Unique ID of the sub menu, required | string       |               |         |
+| popupClassName | Sub-menu class name                 | string       |               | 1.5.0   |
+| title          | title of the sub menu               | string\|slot |               |         |
 
 The children of Menu.SubMenu must be `MenuItem` or `SubMenu`.
 

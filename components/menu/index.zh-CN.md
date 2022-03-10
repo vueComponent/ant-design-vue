@@ -44,12 +44,12 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
 | mode | 菜单类型，现在支持垂直、水平、和内嵌模式三种 | `vertical` \| `horizontal` \| `inline` | `vertical` |
 | multiple | 是否允许多选 | boolean | false |
 | openKeys(v-model) | 当前展开的 SubMenu 菜单项 key 数组 | string\[] |  |
+| overflowedIndicator | 自定义 Menu 折叠时的图标 | DOM | `<span>···</span>` |
 | selectable | 是否允许选中 | boolean | true |
 | selectedKeys(v-model) | 当前选中的菜单项 key 数组 | string\[] |  |
 | subMenuCloseDelay | 用户鼠标离开子菜单后关闭延时，单位：秒 | number | 0.1 |
 | subMenuOpenDelay | 用户鼠标进入子菜单后开启延时，单位：秒 | number | 0 |
 | theme | 主题颜色 | string: `light` `dark` | `light` |
-| overflowedIndicator | 自定义 Menu 折叠时的图标 | DOM | `<span>···</span>` |
 | triggerSubMenuAction | 修改 Menu 子菜单的触发方式 | `click` \| `hover` | `hover` |
 
 ### Menu 事件
@@ -66,20 +66,20 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
 | 参数     | 说明                     | 类型        | 默认值 | 版本  |
 | -------- | ------------------------ | ----------- | ------ | ----- |
 | disabled | 是否禁用                 | boolean     | false  |       |
+| icon     | 菜单图标                 | slot        |        | 2.8.0 |
 | key      | item 的唯一标志          | string      |        |       |
 | title    | 设置收缩时展示的悬浮标题 | string/slot |        |       |
-| icon     | 菜单图标                 | slot        |        | 2.8.0 |
 
 ### Menu.SubMenu
 
 | 参数           | 说明                     | 类型         | 默认值   | 版本  |
 | -------------- | ------------------------ | ------------ | -------- | ----- |
-| popupClassName | 子菜单样式               | string       |          | 1.5.0 |
 | disabled       | 是否禁用                 | boolean      | false    |       |
-| key            | 唯一标志, 必填           | string       |          |       |
-| title          | 子菜单项值               | string\|slot |          |       |
 | expandIcon     | 自定义 Menu 展开收起图标 | slot         | 箭头图标 |       |
 | icon           | 菜单图标                 | slot         |          | 2.8.0 |
+| key            | 唯一标志, 必填           | string       |          |       |
+| popupClassName | 子菜单样式               | string       |          | 1.5.0 |
+| title          | 子菜单项值               | string\|slot |          |       |
 
 Menu.SubMenu 的子元素必须是 `MenuItem` 或者 `SubMenu`.
 

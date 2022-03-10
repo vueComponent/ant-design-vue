@@ -33,6 +33,7 @@ The properties of config are as follows:
 | bottom | Distance from the bottom of the viewport, when `placement` is `bottomRight` or `bottomLeft` (unit: pixels). | string | `24px` |  |
 | btn | Customized close button | VNode \| () => VNode | - |  |
 | class | Customized CSS class | string | - |  |
+| closeIcon | custom close icon | VNode \| () => VNode | - |  |
 | description | The content of notification box (required) | string\| VNode \| () => VNode | - |  |
 | duration | Time in seconds before Notification is closed. When set to 0 or null, it will never be closed automatically | number | 4.5 |  |
 | getContainer | Return the mount node for Notification | () => HTMLNode | () => document.body |  |
@@ -41,10 +42,9 @@ The properties of config are as follows:
 | message | The title of notification box (required) | string\| VNode \| () => VNode | - |  |
 | placement | Position of Notification, can be one of `topLeft` `topRight` `bottomLeft` `bottomRight` | string | `topRight` |  |
 | style | Customized inline style | Object \| string | - |  |
-| onClose | Specify a function that will be called when the close button is clicked | Function | - |  |
-| onClick | Specify a function that will be called when the notification is clicked | Function | - |  |
 | top | Distance from the top of the viewport, when `placement` is `topRight` or `topLeft` (unit: pixels). | string | `24px` |  |
-| closeIcon | custom close icon | VNode \| () => VNode | - |  |
+| onClick | Specify a function that will be called when the notification is clicked | Function | - |  |
+| onClose | Specify a function that will be called when the close button is clicked | Function | - |  |
 
 `notification` also provides a global `config()` method that can be used for specifying the default options. Once this method is used, all the notification boxes will take into account these globally defined options when displaying.
 
@@ -66,10 +66,10 @@ notification.config({
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | bottom | Distance from the bottom of the viewport, when `placement` is `bottomRight` or `bottomLeft` (unit: pixels). | string | `24px` |  |
+| closeIcon | custom close icon | VNode \| () => VNode | - |  |
 | duration | Time in seconds before Notification is closed. When set to 0 or null, it will never be closed automatically | number | 4.5 |  |
 | getContainer | Return the mount node for Notification | () => HTMLNode | () => document.body |  |
+| maxCount | Max Notification show, drop oldest if exceed limit | number | - | 3.0 |
 | placement | Position of Notification, can be one of `topLeft` `topRight` `bottomLeft` `bottomRight` | string | `topRight` |  |
 | rtl | Whether to enable RTL mode | boolean | false |  |
 | top | Distance from the top of the viewport, when `placement` is `topRight` or `topLeft` (unit: pixels). | string | `24px` |  |
-| closeIcon | custom close icon | VNode \| () => VNode | - |  |
-| maxCount | Max Notification show, drop oldest if exceed limit | number | - | 3.0 |

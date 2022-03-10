@@ -29,10 +29,10 @@ Timeline
 
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
+| mode | By sending `alternate` the timeline will distribute the nodes to the left and right. | `left` \| `alternate` \| `right` | `left` |
 | pending | Set the last ghost node's existence or its content | boolean\|string\|slot | `false` |
 | pendingDot | Set the dot of the last ghost node when pending is true | string\|slot | `<LoadingOutlined />` |
 | reverse | reverse nodes or not | boolean | false |
-| mode | By sending `alternate` the timeline will distribute the nodes to the left and right. | `left` \| `alternate` \| `right` | `left` |
 
 ### Timeline.Item
 
@@ -42,5 +42,5 @@ Node of timeline
 | --- | --- | --- | --- | --- |
 | color | Set the circle's color to `blue`, `red`, `green` or other custom colors | string | `blue` |  |
 | dot | Customize timeline dot | string\|slot | - |  |
-| position | Customize node position | `left` \| `right` | - |  |
 | label | Set the label | string \| slot | - | 3.0 |
+| position | Customize node position | `left` \| `right` | - |  |

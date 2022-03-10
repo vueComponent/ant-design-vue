@@ -17,8 +17,6 @@ Almost anything can be represented in a tree structure. Examples include directo
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| treeData | treeNode of tree, please use `treeNodes` before v1.1.4 | [TreeNode[]](#TreeNode) | - |  |
-| fieldNames | Replace the title,key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', title:'title', key:'key' } | 3.0.0 |
 | autoExpandParent | Whether to automatically expand a parent treeNode | boolean | true |  |
 | blockNode | Whether treeNode fill remaining horizontal space | boolean | false |  |
 | checkable | Adds a `Checkbox` before the treeNodes | boolean | false |  |
@@ -28,6 +26,7 @@ Almost anything can be represented in a tree structure. Examples include directo
 | disabled | whether disabled the tree | bool | false |  |
 | draggable | Specifies whether this Tree is draggable (IE > 8) | boolean | false |  |
 | expandedKeys(v-model) | (Controlled) Specifies the keys of the expanded treeNodes | string\[] \| number\[] | \[] |  |
+| fieldNames | Replace the title,key and children fields in treeNode with the corresponding fields in treeData | object | { children:'children', title:'title', key:'key' } | 3.0.0 |
 | filterTreeNode | Defines a function to filter (highlight) treeNodes. When the function returns `true`, the corresponding treeNode will be highlighted | function(node) | - |  |
 | loadData | Load data asynchronously | function(node) | - |  |
 | loadedKeys | (Controlled) Set loaded tree nodes. Need work with `loadData` | string\[] \| number\[] | \[] |  |
@@ -35,9 +34,10 @@ Almost anything can be represented in a tree structure. Examples include directo
 | selectable | whether can be selected | boolean | true |  |
 | selectedKeys(v-model) | (Controlled) Specifies the keys of the selected treeNodes | string\[] \| number\[] | - |  |
 | showIcon | Shows the icon before a TreeNode's title. There is no default style; you must set a custom style for it if set to `true` | boolean | false |  |
-| switcherIcon | customize collapse/expand icon of tree node | slot | - |  |
 | showLine | Shows a connecting line | boolean \| {showLeafIcon: boolean}(3.0+) | false |  |
+| switcherIcon | customize collapse/expand icon of tree node | slot | - |  |
 | title | custom title | slot |  | 2.0.0 |
+| treeData | treeNode of tree, please use `treeNodes` before v1.1.4 | [TreeNode\[\]](#TreeNode) | - |  |
 | virtual | Disable virtual scroll when set to false | boolean | true | 3.0 |
 
 ### Events
@@ -60,15 +60,15 @@ Almost anything can be represented in a tree structure. Examples include directo
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| class | className | string | - |  |
-| style | style | string\|object | - |  |
 | checkable | When Tree is checkable, set TreeNode display Checkbox or not | boolean | - |  |
+| class | className | string | - |  |
 | disableCheckbox | Disables the checkbox of the treeNode | boolean | false |  |
 | disabled | Disables the treeNode | boolean | false |  |
 | icon | customize icon. When you pass component, whose render will receive full TreeNode props as component props | slot\|slot-scope | - |  |
 | isLeaf | Determines if this is a leaf node(effective when `loadData` is specified) | boolean | false |  |
 | key | Used with (default)ExpandedKeys / (default)CheckedKeys / (default)SelectedKeys. P.S.: It must be unique in all of treeNodes of the tree! | string \| number | internal calculated position of treeNode |  |
 | selectable | Set whether the treeNode can be selected | boolean | true |  |
+| style | style | string\|object | - |  |
 | title | Title | string | '---' |  |
 
 ### DirectoryTree props

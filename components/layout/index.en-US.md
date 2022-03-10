@@ -77,8 +77,8 @@ The wrapper.
 | Property | Description | Type | Default |
 | --- | --- | --- | --- |
 | class | container className | string | - |
-| style | to customize the styles | object\|string | - |
 | hasSider | whether contain Sider in children, don't have to assign it normally. Useful in ssr avoid style flickering | boolean | - |
+| style | to customize the styles | object\|string | - |
 
 ### Layout.Sider
 
@@ -101,10 +101,10 @@ The sidebar.
 
 ### Events
 
-| Events Name | Description | Arguments |
+| Events Name | Description | Arguments |  |
 | --- | --- | --- | --- |
-| collapse | the callback function, executed by clicking the trigger or activating the responsive layout | (collapsed, type) => {} |
 | breakpoint | the callback function, executed when [breakpoints](/components/grid#api) changed | (broken) => {} | - |
+| collapse | the callback function, executed by clicking the trigger or activating the responsive layout | (collapsed, type) => {} |  |
 
 #### breakpoint width
 

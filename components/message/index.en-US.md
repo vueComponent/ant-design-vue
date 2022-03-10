@@ -48,14 +48,14 @@ The properties of config are as follows:
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| class | Customized CSS class | string | - |
+| class | Customized CSS class | string | - |  |
 | content | content of the message | string\| VNode \| () => VNode | - |  |
 | duration | time(seconds) before auto-dismiss, don't dismiss if set to 0 | number | 3 |  |
-| onClose | Specify a function that will be called when the message is closed | function | - |  |
 | icon | Customized Icon | VNode \| ()=> VNode | - |  |
 | key | The unique identifier of the Message | string\|number | - |  |
 | style | Customized inline style | CSSProperties | - |  |
 | onClick | Specify a function that will be called when the message is clicked | function | - |  |
+| onClose | Specify a function that will be called when the message is closed | function | - |  |
 | onClose | Specify a function that will be called when the message is closed | function | - |  |
 
 ### Global static methods
@@ -84,4 +84,4 @@ message.config({
 | maxCount | max message show, drop oldest if exceed limit | number | - |  |
 | prefixCls | The prefix className of message node | string | `ant-message` | 3.0 |
 | rtl | Whether to enable RTL mode | boolean | false | 3.0 |
-| top | distance from top | string | `8px` |
+| top | distance from top | string | `8px` |  |

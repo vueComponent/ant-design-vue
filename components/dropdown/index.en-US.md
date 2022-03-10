@@ -15,17 +15,17 @@ When there are more than a few options to choose from, you can wrap them in a `D
 
 ### Dropdown
 
-| Property | Description | Type | Default |
+| Property | Description | Type | Default |  |
 | --- | --- | --- | --- | --- |
-| disabled | whether the dropdown menu is disabled | boolean | - |
 | destroyPopupOnHide | Whether destroy dropdown when hidden | boolean | false |  |
-| getPopupContainer | to set the container of the dropdown menu. The default is to create a `div` element in `body`, you can reset it to the scrolling area and make a relative reposition. [example](https://codepen.io/afc163/pen/zEjNOy?editors=0010) | Function(triggerNode) | `() => document.body` |
-| overlay(v-slot) | the dropdown menu | [Menu](/components/menu) | - |
-| overlayClassName | Class name of the dropdown root element | string | - |
-| overlayStyle | Style of the dropdown root element | object | - |
-| placement | placement of pop menu: `bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |
-| trigger | the trigger mode which executes the drop-down action, hover doesn't work on mobile device | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |
-| visible(v-model) | whether the dropdown menu is visible | boolean | - |
+| disabled | whether the dropdown menu is disabled | boolean | - |  |
+| getPopupContainer | to set the container of the dropdown menu. The default is to create a `div` element in `body`, you can reset it to the scrolling area and make a relative reposition. [example](https://codepen.io/afc163/pen/zEjNOy?editors=0010) | Function(triggerNode) | `() => document.body` |  |
+| overlay(v-slot) | the dropdown menu | [Menu](/components/menu) | - |  |
+| overlayClassName | Class name of the dropdown root element | string | - |  |
+| overlayStyle | Style of the dropdown root element | object | - |  |
+| placement | placement of pop menu: `bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |  |
+| trigger | the trigger mode which executes the drop-down action, hover doesn't work on mobile device | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |  |
+| visible(v-model) | whether the dropdown menu is visible | boolean | - |  |
 
 ### events
 
@@ -44,8 +44,8 @@ You should use [Menu](/components/menu/) as `overlay`. The menu items and divide
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | disabled | whether the dropdown menu is disabled | boolean | - |  |
-| loading | Set the loading status of button | boolean \| { delay: number } | false | 3.0 |
 | icon | Icon (appears on the right) | vNode \| slot | - | 1.5.0 |
+| loading | Set the loading status of button | boolean \| { delay: number } | false | 3.0 |
 | overlay(v-slot) | the dropdown menu | [Menu](/components/menu) | - |  |
 | placement | placement of pop menu: `bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |  |
 | size | size of the button, the same as [Button](/components/button) | string | `default` |  |

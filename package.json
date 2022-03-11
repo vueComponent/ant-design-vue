@@ -29,8 +29,12 @@
     "typings/global.d.ts"
   ],
   "scripts": {
-    "predev": "node node_modules/esbuild/install.js",
-    "dev": "npm run version && yarn predev && yarn routes && vite serve site",
+    "predev": "npm run version && node node_modules/esbuild/install.js",
+    "precompile": "npm run version",
+    "pretest": "npm run version",
+    "predist": "npm run version",
+    "presite": "npm run version",
+    "dev": "yarn predev && yarn routes && vite serve site",
     "test": "cross-env NODE_ENV=test jest --config .jest.js",
     "compile": "node antd-tools/cli/run.js compile",
     "generator-webtypes": "tsc -p antd-tools/generator-types/tsconfig.json && node antd-tools/generator-types/index.js",

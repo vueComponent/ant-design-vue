@@ -26,10 +26,10 @@ The differences with Select are:
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| #default (for customize input element) | customize input element | HTMLInputElement / HTMLTextAreaElement | `<Input />` |  |
 | allowClear | Show clear button, effective in multiple mode only. | boolean | false |  |
 | autofocus | get focus when component mounted | boolean | false |  |
 | backfill | backfill selected item the input when using keyboard | boolean | false |  |
+| default (for customize input element) | customize input element | slot | `<Input />` |  |
 | defaultActiveFirstOption | Whether active first option by default | boolean | true |  |
 | defaultOpen | Initial open state of dropdown | boolean | - |  |
 | disabled | Whether disabled select | boolean | false |  |

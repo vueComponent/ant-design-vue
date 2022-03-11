@@ -27,10 +27,10 @@ cover: https://gw.alipayobjects.com/zos/alicdn/qtJm4yt45/AutoComplete.svg
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| #default (自定义输入框) | 自定义输入框 | HTMLInputElement / HTMLTextAreaElement | `<Input />` |  |
 | allowClear | 支持清除, 单选模式有效 | boolean | false |  |
 | autofocus | 自动获取焦点 | boolean | false |  |
 | backfill | 使用键盘选择选项的时候把选中项回填到输入框中 | boolean | false |  |
+| default (自定义输入框) | 自定义输入框 | slot | `<Input />` |  |
 | defaultActiveFirstOption | 是否默认高亮第一个选项。 | boolean | true |  |
 | defaultOpen | 是否默认展开下拉菜单 | boolean | - |  |
 | disabled | 是否禁用 | boolean | false |  |

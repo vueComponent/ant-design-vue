@@ -111,6 +111,7 @@ const SelectSelector = defineComponent<SelectorProps>({
     // ===================== Render ======================
     // >>> Render Selector Node. Includes Item & Rest
     function defaultRenderSelector(
+      title: VueNode,
       content: VueNode,
       itemDisabled: boolean,
       closable?: boolean,
@@ -121,6 +122,9 @@ const SelectSelector = defineComponent<SelectorProps>({
           class={classNames(`${selectionPrefixCls.value}-item`, {
             [`${selectionPrefixCls.value}-item-disabled`]: itemDisabled,
           })}
+          title={
+            typeof title === 'string' || typeof title === 'number' ? title.toString() : undefined
+          }
         >
           <span class={`${selectionPrefixCls.value}-item-content`}>{content}</span>
           {closable && (
@@ -183,7 +187,7 @@ const SelectSelector = defineComponent<SelectorProps>({
 
       return typeof props.tagRender === 'function'
         ? customizeRenderSelector(value, displayLabel, itemDisabled, closable, onClose)
-        : defaultRenderSelector(displayLabel, itemDisabled, closable, onClose);
+        : defaultRenderSelector(label, displayLabel, itemDisabled, closable, onClose);
     }
 
     function renderRest(omittedValues: DisplayLabelValueType[]) {
@@ -195,7 +199,7 @@ const SelectSelector = defineComponent<SelectorProps>({
           ? maxTagPlaceholder(omittedValues)
           : maxTagPlaceholder;
 
-      return defaultRenderSelector(content, false);
+      return defaultRenderSelector(content, content, false);
     }
 
     return () => {

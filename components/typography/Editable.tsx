@@ -122,6 +122,7 @@ const Editable = defineComponent({
           onCompositionstart={onCompositionStart}
           onCompositionend={onCompositionEnd}
           onBlur={onBlur}
+          rows={1}
           autoSize={props.autoSize === undefined || props.autoSize}
         />
         {slots.enterIcon ? (

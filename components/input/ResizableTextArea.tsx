@@ -1,5 +1,6 @@
 import type { CSSProperties, VNode } from 'vue';
 import {
+  onMounted,
   getCurrentInstance,
   watch,
   onBeforeUnmount,
@@ -142,6 +143,11 @@ const ResizableTextArea = defineComponent({
         });
       },
     );
+    onMounted(() => {
+      nextTick(() => {
+        resizeTextarea();
+      });
+    });
     const instance = getCurrentInstance();
     expose({
       resizeTextarea,

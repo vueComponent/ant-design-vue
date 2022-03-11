@@ -23,7 +23,7 @@ When there are more than a few options to choose from, you can wrap them in a `D
 | overlay(v-slot) | the dropdown menu | [Menu](/components/menu) | - |  |
 | overlayClassName | Class name of the dropdown root element | string | - |  |
 | overlayStyle | Style of the dropdown root element | object | - |  |
-| placement | placement of pop menu: `bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |  |
+| placement | placement of pop menu: `bottomLeft` `bottom` `bottomRight` `topLeft` `top` `topRight` | String | `bottomLeft` |  |
 | trigger | the trigger mode which executes the drop-down action, hover doesn't work on mobile device | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |  |
 | visible(v-model) | whether the dropdown menu is visible | boolean | - |  |
 
@@ -47,7 +47,7 @@ You should use [Menu](/components/menu/) as `overlay`. The menu items and divide
 | icon | Icon (appears on the right) | vNode \| slot | - | 1.5.0 |
 | loading | Set the loading status of button | boolean \| { delay: number } | false | 3.0 |
 | overlay(v-slot) | the dropdown menu | [Menu](/components/menu) | - |  |
-| placement | placement of pop menu: `bottomLeft` `bottomCenter` `bottomRight` `topLeft` `topCenter` `topRight` | String | `bottomLeft` |  |
+| placement | placement of pop menu: `bottomLeft` `bottom` `bottomRight` `topLeft` `top` `topRight` | String | `bottomLeft` |  |
 | size | size of the button, the same as [Button](/components/button) | string | `default` |  |
 | trigger | the trigger mode which executes the drop-down action | Array&lt;`click`\|`hover`\|`contextmenu`> | `['hover']` |  |
 | type | type of the button, the same as [Button](/components/button) | string | `default` |  |

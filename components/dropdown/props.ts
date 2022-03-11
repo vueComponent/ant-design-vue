@@ -17,8 +17,15 @@ type Align = {
   useCssBottom?: boolean;
   useCssTransform?: boolean;
 };
+
+export type DropdownArrowOptions = {
+  pointAtCenter?: boolean;
+};
 const dropdownProps = () => ({
-  arrow: PropTypes.looseBool,
+  arrow: {
+    type: [Boolean, Object] as PropType<boolean | DropdownArrowOptions>,
+    default: undefined,
+  },
   trigger: {
     type: [Array, String] as PropType<
       ('click' | 'hover' | 'contextmenu')[] | 'click' | 'hover' | 'contextmenu'

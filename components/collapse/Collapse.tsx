@@ -13,9 +13,9 @@ import { computed, defineComponent, ref, watch } from 'vue';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import firstNotUndefined from '../_util/firstNotUndefined';
 import classNames from '../_util/classNames';
-import animation from '../_util/openAnimation';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { CollapsePanelProps } from './CollapsePanel';
+import collapseMotion from '../_util/collapseMotion';
 
 type Key = number | string;
 
@@ -37,7 +37,7 @@ export default defineComponent({
     accordion: false,
     destroyInactivePanel: false,
     bordered: true,
-    openAnimation: animation,
+    openAnimation: collapseMotion('ant-motion-collapse', false),
     expandIconPosition: 'left',
   }),
   slots: ['expandIcon'],

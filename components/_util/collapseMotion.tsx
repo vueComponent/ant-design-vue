@@ -2,10 +2,10 @@ import { nextTick } from 'vue';
 import { addClass, removeClass } from '../vc-util/Dom/class';
 import type { CSSMotionProps } from './transition';
 
-const collapseMotion = (name = 'ant-motion-collapse'): CSSMotionProps => {
+const collapseMotion = (name = 'ant-motion-collapse', appear = true): CSSMotionProps => {
   return {
     name,
-    appear: true,
+    appear,
     css: true,
     onBeforeEnter: (node: HTMLDivElement) => {
       node.style.height = '0px';

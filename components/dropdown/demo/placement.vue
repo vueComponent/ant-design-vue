@@ -53,10 +53,10 @@ export default defineComponent({
     return {
       placements: [
         'bottomLeft',
-        'bottomCenter',
+        'bottom',
         'bottomRight',
         'topLeft',
-        'topCenter',
+        'top',
         'topRight',
       ] as DropdownProps['placement'][],
     };

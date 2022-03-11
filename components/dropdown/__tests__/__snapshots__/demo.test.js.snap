@@ -76,7 +76,7 @@ exports[`renders ./components/dropdown/demo/placement.vue correctly 1`] = `
   </button>
   <!--v-if-->
   <!----><button class="ant-btn ant-dropdown-trigger" type="button">
-    <!----><span>bottomCenter</span>
+    <!----><span>bottom</span>
   </button>
   <!--v-if-->
   <!----><button class="ant-btn ant-dropdown-trigger" type="button">
@@ -87,7 +87,7 @@ exports[`renders ./components/dropdown/demo/placement.vue correctly 1`] = `
   </button>
   <!--v-if-->
   <!----><button class="ant-btn ant-dropdown-trigger" type="button">
-    <!----><span>topCenter</span>
+    <!----><span>top</span>
   </button>
   <!--v-if-->
   <!----><button class="ant-btn ant-dropdown-trigger" type="button">

@@ -39,7 +39,16 @@ const dropdownProps = () => ({
   prefixCls: PropTypes.string,
   transitionName: PropTypes.string,
   placement: PropTypes.oneOf(
-    tuple('topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter', 'bottomRight'),
+    tuple(
+      'topLeft',
+      'topCenter',
+      'top',
+      'topRight',
+      'bottomLeft',
+      'bottomCenter',
+      'bottom',
+      'bottomRight',
+    ),
   ),
   overlayClassName: PropTypes.string,
   overlayStyle: PropTypes.style,

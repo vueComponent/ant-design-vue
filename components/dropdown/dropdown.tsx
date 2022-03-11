@@ -83,10 +83,21 @@ const Dropdown = defineComponent({
     };
 
     const placement = computed(() => {
-      if (props.placement !== undefined) {
-        return props.placement;
+      const placement = props.placement;
+      if (!placement) {
+        return direction.value === 'rtl' ? 'bottomRight' : 'bottomLeft';
       }
-      return direction.value === 'rtl' ? 'bottomRight' : 'bottomLeft';
+
+      if (placement.includes('Center')) {
+        const newPlacement = placement.slice(0, placement.indexOf('Center'));
+        devWarning(
+          !placement.includes('Center'),
+          'Dropdown',
+          `You are using '${placement}' placement in Dropdown, which is deprecated. Try to use '${newPlacement}' instead.`,
+        );
+        return newPlacement;
+      }
+      return placement;
     });
 
     const handleVisibleChange = (val: boolean) => {

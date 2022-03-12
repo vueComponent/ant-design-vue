@@ -17,6 +17,7 @@
     <CustomDropdownMenu />
     <OptionLabelProp />
     <BigData />
+    <fieldNamesVue />
   </demo-sort>
 </template>
 <script lang="ts">
@@ -37,6 +38,7 @@ import CustomDropdownMenu from './custom-dropdown-menu.vue';
 import OptionLabelProp from './option-label-prop.vue';
 import BigData from './big-data.vue';
 import Responsive from './responsive.vue';
+import fieldNamesVue from './field-names.vue';
 import CN from '../index.zh-CN.md';
 import US from '../index.en-US.md';
 import { defineComponent } from 'vue';
@@ -44,6 +46,7 @@ export default defineComponent({
   CN,
   US,
   components: {
+    fieldNamesVue,
     Basic,
     Size,
     Tags,

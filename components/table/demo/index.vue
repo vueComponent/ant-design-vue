@@ -5,7 +5,6 @@
     <Bordered />
     <Ellipsis />
     <ColspanRowspan />
-    <CustomFilterPanel />
     <EditCell />
     <EditRow />
     <ExpandChildren />
@@ -14,9 +13,10 @@
     <FixedColumns />
     <FixedHeader />
     <GroupingColumns />
-    <Head />
     <MultipleSorter />
     <NestedTable />
+    <Head />
+    <CustomFilterPanel />
     <ResetFilter />
     <RowSelectionAndOperation />
     <RowSelectionCustom />

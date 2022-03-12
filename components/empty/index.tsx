@@ -1,7 +1,5 @@
 import type { CSSProperties, FunctionalComponent } from 'vue';
-import { inject } from 'vue';
 import classNames from '../_util/classNames';
-import { defaultConfigProvider } from '../config-provider';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import DefaultEmptyImg from './empty';
 import SimpleEmptyImg from './simple';
@@ -9,6 +7,7 @@ import { filterEmpty } from '../_util/props-util';
 import PropTypes from '../_util/vue-types';
 import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 const defaultEmptyImg = <DefaultEmptyImg />;
 const simpleEmptyImg = <SimpleEmptyImg />;
@@ -33,10 +32,10 @@ interface EmptyType extends FunctionalComponent<EmptyProps> {
 }
 
 const Empty: EmptyType = (props, { slots = {}, attrs }) => {
-  const configProvider = inject('configProvider', defaultConfigProvider);
-  const { getPrefixCls, direction } = configProvider;
+  const { direction, prefixCls: prefixClsRef } = useConfigInject('empty', props);
+  const prefixCls = prefixClsRef.value;
+
   const {
-    prefixCls: customizePrefixCls,
     image = defaultEmptyImg,
     description = slots.description?.() || undefined,
     imageStyle,
@@ -48,7 +47,6 @@ const Empty: EmptyType = (props, { slots = {}, attrs }) => {
     <LocaleReceiver
       componentName="Empty"
       children={(locale: Locale) => {
-        const prefixCls = getPrefixCls('empty', customizePrefixCls);
         const des = typeof description !== 'undefined' ? description : locale.description;
         const alt = typeof des === 'string' ? des : 'empty';
         let imageNode: EmptyProps['image'] = null;
@@ -63,7 +61,7 @@ const Empty: EmptyType = (props, { slots = {}, attrs }) => {
           <div
             class={classNames(prefixCls, className, {
               [`${prefixCls}-normal`]: image === simpleEmptyImg,
-              [`${prefixCls}-rtl`]: direction === 'rtl',
+              [`${prefixCls}-rtl`]: direction.value === 'rtl',
             })}
             {...restProps}
           >

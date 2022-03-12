@@ -76,7 +76,7 @@ function getMessageInstance(args: MessageArgsProps, callback: (i: NotificationIn
       transitionName,
       hasTransitionName,
       style: { top: defaultTop }, // 覆盖原来的样式
-      getContainer,
+      getContainer: getContainer || args.getPopupContainer,
       maxCount,
       name: 'message',
     },
@@ -91,7 +91,7 @@ function getMessageInstance(args: MessageArgsProps, callback: (i: NotificationIn
   );
 }
 
-type NoticeType = 'info' | 'success' | 'error' | 'warning' | 'loading';
+export type NoticeType = 'info' | 'success' | 'error' | 'warning' | 'loading';
 
 export interface ThenableArgument {
   (val: any): void;
@@ -115,6 +115,7 @@ export interface MessageArgsProps {
   type?: NoticeType;
   prefixCls?: string;
   rootPrefixCls?: string;
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   onClose?: () => void;
   icon?: (() => VueNode) | VueNode;
   key?: string | number;

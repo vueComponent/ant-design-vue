@@ -66,6 +66,7 @@ export const formProps = {
   wrapperCol: { type: Object as PropType<ColProps & HTMLAttributes> },
   colon: PropTypes.looseBool,
   labelAlign: PropTypes.oneOf(tuple('left', 'right')),
+  labelWrap: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   requiredMark: { type: [String, Boolean] as PropType<RequiredMark | ''>, default: undefined },
   /** @deprecated Will warning in future branch. Pls use `requiredMark` instead. */
@@ -145,6 +146,7 @@ const Form = defineComponent({
       }
       return true;
     });
+    const mergedColon = computed(() => props.colon ?? contextForm.value?.colon);
     const validateMessages = computed(() => {
       return {
         ...defaultValidateMessages,
@@ -367,9 +369,10 @@ const Form = defineComponent({
       name: computed(() => props.name),
       labelAlign: computed(() => props.labelAlign),
       labelCol: computed(() => props.labelCol),
+      labelWrap: computed(() => props.labelWrap),
       wrapperCol: computed(() => props.wrapperCol),
       vertical: computed(() => props.layout === 'vertical'),
-      colon: computed(() => props.colon),
+      colon: mergedColon,
       requiredMark: mergedRequiredMark,
       validateTrigger: computed(() => props.validateTrigger),
       rules: computed(() => props.rules),

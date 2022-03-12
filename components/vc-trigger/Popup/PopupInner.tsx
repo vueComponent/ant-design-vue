@@ -2,16 +2,7 @@ import type { AlignType } from '../interface';
 import useVisibleStatus from './useVisibleStatus';
 import useStretchStyle from './useStretchStyle';
 import type { CSSProperties } from 'vue';
-import {
-  computed,
-  defineComponent,
-  nextTick,
-  ref,
-  toRef,
-  Transition,
-  watch,
-  withModifiers,
-} from 'vue';
+import { computed, defineComponent, ref, toRef, Transition, watch, withModifiers } from 'vue';
 import type { RefAlign } from '../../vc-align/Align';
 import Align from '../../vc-align/Align';
 import { getMotion } from '../utils/motionUtil';
@@ -84,7 +75,7 @@ export default defineComponent({
       if (status.value === 'align') {
         // Repeat until not more align needed
         if (preAlignedClassName !== nextAlignedClassName) {
-          nextTick(() => {
+          Promise.resolve().then(() => {
             forceAlign();
           });
         } else {
@@ -101,8 +92,10 @@ export default defineComponent({
     const motion = computed(() => {
       const m = typeof props.animation === 'object' ? props.animation : getMotion(props as any);
       ['onAfterEnter', 'onAfterLeave'].forEach(eventName => {
-        m[eventName] = () => {
+        const originFn = m[eventName];
+        m[eventName] = node => {
           goNextStatus();
+          originFn?.(node);
         };
       });
       return m;
@@ -130,6 +123,12 @@ export default defineComponent({
         return (elementRef.value as any).$el || elementRef.value;
       },
     });
+    const alignDisabled = computed(() => {
+      if ((props.align as any)?.points && (status.value === 'align' || status.value === 'stable')) {
+        return false;
+      }
+      return true;
+    });
     return () => {
       const {
         zIndex,
@@ -146,19 +145,12 @@ export default defineComponent({
       const mergedStyle: CSSProperties = {
         ...stretchStyle.value,
         zIndex,
-        opacity:
-          statusValue === 'motion' || statusValue === 'stable' || !visible.value ? undefined : 0,
-        pointerEvents: statusValue === 'stable' ? undefined : 'none',
+        opacity: statusValue === 'motion' || statusValue === 'stable' || !visible.value ? null : 0,
+        pointerEvents: statusValue === 'stable' ? null : 'none',
         ...(attrs.style as object),
       };
 
-      // Align statusValue
-      let alignDisabled = true;
-      if (align?.points && (statusValue === 'align' || statusValue === 'stable')) {
-        alignDisabled = false;
-      }
-
-      let childNode: any = flattenChildren(slots.default?.());
+      let childNode: any = flattenChildren(slots.default?.({ visible: props.visible }));
 
       // Wrapper when multiple children
       if (childNode.length > 1) {
@@ -167,6 +159,7 @@ export default defineComponent({
       const mergedClassName = classNames(prefixCls, attrs.class, alignedClassName.value);
       const hasAnimate = visible.value || !props.visible;
       const transitionProps = hasAnimate ? getTransitionProps(motion.value.name, motion.value) : {};
+
       return (
         <Transition
           ref={elementRef}
@@ -181,7 +174,7 @@ export default defineComponent({
                   key="popup"
                   ref={alignRef}
                   monitorWindowResize
-                  disabled={alignDisabled}
+                  disabled={alignDisabled.value}
                   align={align}
                   onAlign={onInternalAlign}
                   v-slots={{

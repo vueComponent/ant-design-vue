@@ -1,11 +1,9 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, toRef, defineComponent } from 'vue';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import DoubleLeftOutlined from '@ant-design/icons-vue/DoubleLeftOutlined';
 import DoubleRightOutlined from '@ant-design/icons-vue/DoubleRightOutlined';
-import { tuple } from '../_util/type';
-import PropTypes, { withUndefined } from '../_util/vue-types';
 import VcSelect from '../select';
 import MiniSelect from './MiniSelect';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
@@ -15,42 +13,65 @@ import classNames from '../_util/classNames';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const paginationProps = () => ({
-  total: PropTypes.number,
-  defaultCurrent: PropTypes.number,
-  disabled: PropTypes.looseBool,
-  current: PropTypes.number,
-  defaultPageSize: PropTypes.number,
-  pageSize: PropTypes.number,
-  hideOnSinglePage: PropTypes.looseBool,
-  showSizeChanger: PropTypes.looseBool,
-  pageSizeOptions: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
-  buildOptionText: PropTypes.func,
-  showSizeChange: PropTypes.func,
-  showQuickJumper: withUndefined(PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object])),
-  showTotal: PropTypes.any,
-  size: PropTypes.string,
-  simple: PropTypes.looseBool,
-  locale: PropTypes.object,
-  prefixCls: PropTypes.string,
-  selectPrefixCls: PropTypes.string,
-  itemRender: PropTypes.func,
-  role: PropTypes.string,
-  showLessItems: PropTypes.looseBool,
-  onChange: PropTypes.func,
-  onShowSizeChange: PropTypes.func,
-  'onUpdate:current': PropTypes.func,
-  'onUpdate:pageSize': PropTypes.func,
+  total: Number,
+  defaultCurrent: Number,
+  disabled: { type: Boolean, default: undefined },
+  current: Number,
+  defaultPageSize: Number,
+  pageSize: Number,
+  hideOnSinglePage: { type: Boolean, default: undefined },
+  showSizeChanger: { type: Boolean, default: undefined },
+  pageSizeOptions: Array as PropType<(string | number)[]>,
+  buildOptionText: Function as PropType<(opt: { value: any }) => any>,
+  showQuickJumper: {
+    type: [Boolean, Object] as PropType<boolean | { goButton?: any }>,
+    default: undefined as boolean | { goButton?: any },
+  },
+  showTotal: Function as PropType<(total: number, range: [number, number]) => any>,
+  size: String as PropType<'default' | 'small'>,
+  simple: { type: Boolean, default: undefined },
+  locale: Object,
+  prefixCls: String,
+  selectPrefixCls: String,
+  totalBoundaryShowSizeChanger: Number,
+  selectComponentClass: String,
+  itemRender: Function as PropType<
+    (opt: {
+      page: number;
+      type: 'page' | 'prev' | 'next' | 'jump-prev' | 'jump-next';
+      originalElement: any;
+    }) => any
+  >,
+  role: String,
+  showLessItems: { type: Boolean, default: undefined },
+  onChange: Function as PropType<(page: number, pageSize: number) => void>,
+  onShowSizeChange: Function as PropType<(current: number, size: number) => void>,
+  'onUpdate:current': Function as PropType<(current: number) => void>,
+  'onUpdate:pageSize': Function as PropType<(size: number) => void>,
 });
 
+export type PaginationPosition = 'top' | 'bottom' | 'both';
 export const paginationConfig = () => ({
   ...paginationProps(),
-  position: PropTypes.oneOf(tuple('top', 'bottom', 'both')),
+  position: String as PropType<PaginationPosition>,
 });
 
 export type PaginationProps = Partial<ExtractPropTypes<ReturnType<typeof paginationProps>>>;
 export type PaginationConfig = Partial<ExtractPropTypes<ReturnType<typeof paginationConfig>>>;
 
-export type PaginationLocale = any;
+export interface PaginationLocale {
+  items_per_page?: string;
+  jump_to?: string;
+  jump_to_confirm?: string;
+  page?: string;
+  prev_page?: string;
+  next_page?: string;
+  prev_5?: string;
+  next_5?: string;
+  prev_3?: string;
+  next_3?: string;
+}
+
 export default defineComponent({
   name: 'APagination',
   inheritAttrs: false,
@@ -110,6 +131,7 @@ export default defineComponent({
         size,
         itemRender = slots.itemRender,
         buildOptionText = slots.buildOptionText,
+        selectComponentClass,
         ...restProps
       } = props;
 
@@ -119,7 +141,7 @@ export default defineComponent({
         ...getIconsProps(prefixCls.value),
         prefixCls: prefixCls.value,
         selectPrefixCls: selectPrefixCls.value,
-        selectComponentClass: isSmall ? MiniSelect : VcSelect,
+        selectComponentClass: selectComponentClass || (isSmall ? MiniSelect : VcSelect),
         locale: locale.value,
         buildOptionText,
         ...attrs,

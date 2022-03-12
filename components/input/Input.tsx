@@ -13,7 +13,7 @@ import antInputDirective from '../_util/antInputDirective';
 import classNames from '../_util/classNames';
 import type { InputProps } from './inputProps';
 import inputProps from './inputProps';
-import type { Direction, SizeType } from '../config-provider';
+import { getInputClassName } from './util';
 import ClearableLabeledInput from './ClearableLabeledInput';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 import omit from '../_util/omit';
@@ -24,7 +24,7 @@ export function fixControlledValue(value: string | number) {
   if (typeof value === 'undefined' || value === null) {
     return '';
   }
-  return value;
+  return String(value);
 }
 
 export function resolveOnChange(
@@ -71,22 +71,6 @@ export function resolveOnChange(
     return;
   }
   onChange(event);
-}
-
-export function getInputClassName(
-  prefixCls: string,
-  bordered: boolean,
-  size?: SizeType,
-  disabled?: boolean,
-  direction?: Direction,
-) {
-  return classNames(prefixCls, {
-    [`${prefixCls}-sm`]: size === 'small',
-    [`${prefixCls}-lg`]: size === 'large',
-    [`${prefixCls}-disabled`]: disabled,
-    [`${prefixCls}-rtl`]: direction === 'rtl',
-    [`${prefixCls}-borderless`]: !bordered,
-  });
 }
 
 export interface InputFocusOptions extends FocusOptions {
@@ -146,6 +130,9 @@ export default defineComponent({
       () => {
         if (props.value !== undefined) {
           stateValue.value = props.value;
+        }
+        if (props.disabled) {
+          focused.value = false;
         }
       },
     );
@@ -297,6 +284,7 @@ export default defineComponent({
         'bordered',
         'htmlSize',
         'lazy',
+        'showCount',
       ]);
       const inputProps = {
         ...otherProps,
@@ -328,6 +316,38 @@ export default defineComponent({
       return withDirectives(inputNode as VNode, [[antInputDirective]]);
     };
 
+    const renderShowCountSuffix = () => {
+      const value = stateValue.value;
+      const { maxlength, suffix = slots.suffix?.(), showCount } = props;
+      // Max length value
+      const hasMaxLength = Number(maxlength) > 0;
+
+      if (suffix || showCount) {
+        const valueLength = [...fixControlledValue(value)].length;
+        let dataCount = null;
+        if (typeof showCount === 'object') {
+          dataCount = showCount.formatter({ count: valueLength, maxlength });
+        } else {
+          dataCount = `${valueLength}${hasMaxLength ? ` / ${maxlength}` : ''}`;
+        }
+        return (
+          <>
+            {!!showCount && (
+              <span
+                class={classNames(`${prefixCls.value}-show-count-suffix`, {
+                  [`${prefixCls.value}-show-count-has-suffix`]: !!suffix,
+                })}
+              >
+                {dataCount}
+              </span>
+            )}
+            {suffix}
+          </>
+        );
+      }
+      return null;
+    };
+
     return () => {
       const inputProps: any = {
         ...attrs,
@@ -341,9 +361,9 @@ export default defineComponent({
 
       return (
         <ClearableLabeledInput
-          {...omit(inputProps, ['element', 'valueModifiers'])}
+          {...omit(inputProps, ['element', 'valueModifiers', 'suffix', 'showCount'])}
           ref={clearableInputRef}
-          v-slots={{ ...slots, element: renderInput }}
+          v-slots={{ ...slots, element: renderInput, suffix: renderShowCountSuffix }}
         />
       );
     };

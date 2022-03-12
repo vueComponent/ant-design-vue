@@ -1,8 +1,8 @@
 import type { VNodeTypes, PropType, ComputedRef, Ref } from 'vue';
 import { unref, inject, defineComponent, computed } from 'vue';
-import PropTypes from '../_util/vue-types';
 import defaultLocaleData from './default';
 import type { Locale } from '.';
+export type LocaleComponentName = Exclude<keyof Locale, 'locale'>;
 
 export interface LocaleReceiverProps {
   componentName?: string;
@@ -21,7 +21,7 @@ export interface LocaleReceiverContext {
 export default defineComponent({
   name: 'LocaleReceiver',
   props: {
-    componentName: PropTypes.string,
+    componentName: String as PropType<LocaleComponentName>,
     defaultLocale: {
       type: [Object, Function],
     },
@@ -62,9 +62,7 @@ export default defineComponent({
   },
 });
 
-type LocaleComponent = keyof Locale;
-
-export function useLocaleReceiver<T extends LocaleComponent>(
+export function useLocaleReceiver<T extends LocaleComponentName>(
   componentName: T,
   defaultLocale?: Locale[T] | Function | ComputedRef<Locale[T] | Function>,
   propsLocale?: Ref<Locale[T]>,

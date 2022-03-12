@@ -6,5 +6,10 @@ export type ChangeEvent = Event & {
     value?: string | undefined;
   };
 };
+export type CheckboxChangeEvent = Event & {
+  target: {
+    checked?: boolean;
+  };
+};
 
 export type EventHandler = (...args: any[]) => void;

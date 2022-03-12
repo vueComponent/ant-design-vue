@@ -17,11 +17,12 @@ To use `confirm()` to show a confirmation modal dialog.
 </docs>
 
 <template>
-  <div>
+  <a-space wrap>
     <a-button @click="showConfirm">Confirm</a-button>
+    <a-button @click="showPromiseConfirm">With promise</a-button>
     <a-button type="dashed" @click="showDeleteConfirm">Delete</a-button>
     <a-button type="dashed" @click="showPropsConfirm">With extra props</a-button>
-  </div>
+  </a-space>
 </template>
 <script lang="ts">
 import { ExclamationCircleOutlined } from '@ant-design/icons-vue';
@@ -78,10 +79,29 @@ export default defineComponent({
         },
       });
     };
+
+    function showPromiseConfirm() {
+      Modal.confirm({
+        title: 'Do you want to delete these items?',
+        icon: createVNode(ExclamationCircleOutlined),
+        content: 'When clicked the OK button, this dialog will be closed after 1 second',
+        async onOk() {
+          try {
+            return await new Promise((resolve, reject) => {
+              setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+            });
+          } catch {
+            return console.log('Oops errors!');
+          }
+        },
+        onCancel() {},
+      });
+    }
     return {
       showConfirm,
       showDeleteConfirm,
       showPropsConfirm,
+      showPromiseConfirm,
     };
   },
 });

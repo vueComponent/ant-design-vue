@@ -13,7 +13,7 @@ import { useInjectSize } from '../_util/hooks/useSize';
 
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 
-export const avatarProps = {
+export const avatarProps = () => ({
   prefixCls: PropTypes.string,
   shape: PropTypes.oneOf(tuple('circle', 'square')).def('circle'),
   size: {
@@ -27,17 +27,18 @@ export const avatarProps = {
   alt: PropTypes.string,
   gap: PropTypes.number,
   draggable: PropTypes.bool,
+  crossOrigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
   loadError: {
     type: Function as PropType<() => boolean>,
   },
-};
+});
 
-export type AvatarProps = Partial<ExtractPropTypes<typeof avatarProps>>;
+export type AvatarProps = Partial<ExtractPropTypes<ReturnType<typeof avatarProps>>>;
 
 const Avatar = defineComponent({
   name: 'AAvatar',
   inheritAttrs: false,
-  props: avatarProps,
+  props: avatarProps(),
   slots: ['icon'],
   setup(props, { slots, attrs }) {
     const isImgExist = ref(true);
@@ -125,7 +126,7 @@ const Avatar = defineComponent({
     });
 
     return () => {
-      const { shape, size: customSize, src, alt, srcset, draggable } = props;
+      const { shape, size: customSize, src, alt, srcset, draggable, crossOrigin } = props;
       const icon = getPropsSlot(slots, props, 'icon');
       const pre = prefixCls.value;
       const size = customSize === 'default' ? groupSize.value : customSize;
@@ -159,6 +160,7 @@ const Avatar = defineComponent({
             srcset={srcset}
             onError={handleImgLoadError}
             alt={alt}
+            crossorigin={crossOrigin}
           />
         );
       } else if (icon) {

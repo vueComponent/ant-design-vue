@@ -12,6 +12,7 @@ import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
+import useDestroyed from '../_util/hooks/useDestroyed';
 
 export const pageHeaderProps = {
   backIcon: PropTypes.any,
@@ -37,8 +38,11 @@ const PageHeader = defineComponent({
   setup(props, { emit, slots }) {
     const { prefixCls, direction, pageHeader } = useConfigInject('page-header', props);
     const compact = ref(false);
+    const isDestroyed = useDestroyed();
     const onResize = ({ width }: { width: number }) => {
-      compact.value = width < 768;
+      if (!isDestroyed.value) {
+        compact.value = width < 768;
+      }
     };
     const ghost = computed(() => props.ghost ?? pageHeader.value?.ghost ?? true);
 

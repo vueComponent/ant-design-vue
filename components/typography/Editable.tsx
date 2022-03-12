@@ -2,7 +2,9 @@ import KeyCode from '../_util/KeyCode';
 import PropTypes from '../_util/vue-types';
 import TextArea from '../input/TextArea';
 import EnterOutlined from '@ant-design/icons-vue/EnterOutlined';
-import { defineComponent, ref, reactive, watch, onMounted } from 'vue';
+import type { PropType } from 'vue';
+import { defineComponent, ref, reactive, watch, onMounted, computed } from 'vue';
+import type { Direction } from '../config-provider';
 
 const Editable = defineComponent({
   name: 'Editable',
@@ -16,9 +18,10 @@ const Editable = defineComponent({
     onEnd: PropTypes.func,
     onChange: PropTypes.func,
     originContent: PropTypes.string,
+    direction: String as PropType<Direction>,
   },
   emits: ['save', 'cancel', 'end', 'change'],
-  setup(props, { emit }) {
+  setup(props, { emit, slots }) {
     const state = reactive({
       current: props.value || '',
       lastKeyCode: undefined,
@@ -102,9 +105,13 @@ const Editable = defineComponent({
     function confirmChange() {
       emit('save', state.current.trim());
     }
-
+    const textAreaClassName = computed(() => ({
+      [`${props.prefixCls}`]: true,
+      [`${props.prefixCls}-edit-content`]: true,
+      [`${props.prefixCls}-rtl`]: props.direction === 'rtl',
+    }));
     return () => (
-      <div class={`${props.prefixCls} ${props.prefixCls}-edit-content`}>
+      <div class={textAreaClassName.value}>
         <TextArea
           ref={saveTextAreaRef}
           maxlength={props.maxlength}
@@ -115,9 +122,14 @@ const Editable = defineComponent({
           onCompositionstart={onCompositionStart}
           onCompositionend={onCompositionEnd}
           onBlur={onBlur}
+          rows={1}
           autoSize={props.autoSize === undefined || props.autoSize}
         />
-        <EnterOutlined class={`${props.prefixCls}-edit-content-confirm`} />
+        {slots.enterIcon ? (
+          slots.enterIcon({ className: `${props.prefixCls}-edit-content-confirm` })
+        ) : (
+          <EnterOutlined class={`${props.prefixCls}-edit-content-confirm`} />
+        )}
       </div>
     );
   },

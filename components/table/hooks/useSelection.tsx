@@ -1,7 +1,7 @@
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import type { DataNode } from '../../tree';
 import { INTERNAL_COL_DEFINE } from '../../vc-table';
-import type { ColumnType, FixedType } from '../../vc-table/interface';
+import type { FixedType } from '../../vc-table/interface';
 import type { GetCheckDisabled } from '../../vc-tree/interface';
 import { arrAdd, arrDel } from '../../vc-tree/util';
 import { conductCheck } from '../../vc-tree/utils/conductUtil';
@@ -10,7 +10,7 @@ import devWarning from '../../vc-util/devWarning';
 import useMergedState from '../../_util/hooks/useMergedState';
 import useState from '../../_util/hooks/useState';
 import type { Ref } from 'vue';
-import { computed, shallowRef } from 'vue';
+import { watchEffect, computed, shallowRef } from 'vue';
 import type { CheckboxProps } from '../../checkbox';
 import Checkbox from '../../checkbox';
 import Dropdown from '../../dropdown';
@@ -20,6 +20,7 @@ import type {
   TableRowSelection,
   Key,
   ColumnsType,
+  ColumnType,
   GetRowKey,
   TableLocale,
   SelectionItem,
@@ -29,14 +30,12 @@ import type {
 } from '../interface';
 
 // TODO: warning if use ajax!!!
+
+export const SELECTION_COLUMN = {} as const;
 export const SELECTION_ALL = 'SELECT_ALL' as const;
 export const SELECTION_INVERT = 'SELECT_INVERT' as const;
 export const SELECTION_NONE = 'SELECT_NONE' as const;
-
-function getFixedType<RecordType>(column: ColumnsType<RecordType>[number]): FixedType | undefined {
-  return (column && column.fixed) as FixedType;
-}
-
+const EMPTY_LIST: Key[] = [];
 interface UseSelectionConfig<RecordType> {
   prefixCls: Ref<string>;
   pageData: Ref<RecordType[]>;
@@ -45,7 +44,6 @@ interface UseSelectionConfig<RecordType> {
   getRecordByKey: (key: Key) => RecordType;
   expandType: Ref<ExpandType>;
   childrenColumnName: Ref<string>;
-  expandIconColumnIndex?: Ref<number>;
   locale: Ref<TableLocale>;
   getPopupContainer?: Ref<GetPopupContainer>;
 }
@@ -79,22 +77,46 @@ export default function useSelection<RecordType>(
   rowSelectionRef: Ref<TableRowSelection<RecordType> | undefined>,
   configRef: UseSelectionConfig<RecordType>,
 ): [TransformColumns<RecordType>, Ref<Set<Key>>] {
-  // ======================== Caches ========================
-  const preserveRecordsRef = shallowRef(new Map<Key, RecordType>());
   const mergedRowSelection = computed(() => {
     const temp = rowSelectionRef.value || {};
     const { checkStrictly = true } = temp;
     return { ...temp, checkStrictly };
   });
+
   // ========================= Keys =========================
   const [mergedSelectedKeys, setMergedSelectedKeys] = useMergedState(
     mergedRowSelection.value.selectedRowKeys ||
       mergedRowSelection.value.defaultSelectedRowKeys ||
-      [],
+      EMPTY_LIST,
     {
       value: computed(() => mergedRowSelection.value.selectedRowKeys),
     },
   );
+
+  // ======================== Caches ========================
+  const preserveRecordsRef = shallowRef(new Map<Key, RecordType>());
+
+  const updatePreserveRecordsCache = (keys: Key[]) => {
+    if (mergedRowSelection.value.preserveSelectedRowKeys) {
+      const newCache = new Map<Key, RecordType>();
+      // Keep key if mark as preserveSelectedRowKeys
+      keys.forEach(key => {
+        let record = configRef.getRecordByKey(key);
+
+        if (!record && preserveRecordsRef.value.has(key)) {
+          record = preserveRecordsRef.value.get(key)!;
+        }
+
+        newCache.set(key, record);
+      });
+      // Refresh to new cache
+      preserveRecordsRef.value = newCache;
+    }
+  };
+
+  watchEffect(() => {
+    updatePreserveRecordsCache(mergedSelectedKeys.value);
+  });
 
   const keyEntities = computed(() =>
     mergedRowSelection.value.checkStrictly
@@ -179,26 +201,12 @@ export default function useSelection<RecordType>(
   const setSelectedKeys = (keys: Key[]) => {
     let availableKeys: Key[];
     let records: RecordType[];
+    updatePreserveRecordsCache(keys);
     const { preserveSelectedRowKeys, onChange: onSelectionChange } = mergedRowSelection.value;
     const { getRecordByKey } = configRef;
     if (preserveSelectedRowKeys) {
-      // Keep key if mark as preserveSelectedRowKeys
-      const newCache = new Map<Key, RecordType>();
       availableKeys = keys;
-      records = keys.map(key => {
-        let record = getRecordByKey(key);
-
-        if (!record && preserveRecordsRef.value.has(key)) {
-          record = preserveRecordsRef.value.get(key)!;
-        }
-
-        newCache.set(key, record);
-
-        return record;
-      });
-
-      // Refresh to new cache
-      preserveRecordsRef.value = newCache;
+      records = keys.map(key => preserveRecordsRef.value.get(key)!);
     } else {
       // Filter key which not exist in the `dataSource`
       availableKeys = [];
@@ -249,7 +257,14 @@ export default function useSelection<RecordType>(
           key: 'all',
           text: tableLocale.value.selectionAll,
           onSelect() {
-            setSelectedKeys(data.value.map((record, index) => getRowKey.value(record, index)));
+            setSelectedKeys(
+              data.value
+                .map((record, index) => getRowKey.value(record, index))
+                .filter(key => {
+                  const checkProps = checkboxPropsMap.value.get(key);
+                  return !checkProps?.disabled || derivedSelectedKeySet.value.has(key);
+                }),
+            );
           },
         };
       }
@@ -261,11 +276,13 @@ export default function useSelection<RecordType>(
             const keySet = new Set(derivedSelectedKeySet.value);
             pageData.value.forEach((record, index) => {
               const key = getRowKey.value(record, index);
-
-              if (keySet.has(key)) {
-                keySet.delete(key);
-              } else {
-                keySet.add(key);
+              const checkProps = checkboxPropsMap.value.get(key);
+              if (!checkProps?.disabled) {
+                if (keySet.has(key)) {
+                  keySet.delete(key);
+                } else {
+                  keySet.add(key);
+                }
               }
             });
 
@@ -289,7 +306,12 @@ export default function useSelection<RecordType>(
           text: tableLocale.value.selectNone,
           onSelect() {
             onSelectNone?.();
-            setSelectedKeys([]);
+            setSelectedKeys(
+              Array.from(derivedSelectedKeySet.value).filter(key => {
+                const checkProps = checkboxPropsMap.value.get(key);
+                return checkProps?.disabled;
+              }),
+            );
           },
         };
       }
@@ -310,19 +332,21 @@ export default function useSelection<RecordType>(
       checkStrictly,
     } = mergedRowSelection.value;
 
-    const {
-      prefixCls,
-      getRecordByKey,
-      getRowKey,
-      expandType,
-      expandIconColumnIndex,
-      getPopupContainer,
-    } = configRef;
+    const { prefixCls, getRecordByKey, getRowKey, expandType, getPopupContainer } = configRef;
     if (!rowSelectionRef.value) {
-      return columns;
+      if (process.env.NODE_ENV !== 'production') {
+        devWarning(
+          !columns.includes(SELECTION_COLUMN),
+          'Table',
+          '`rowSelection` is not config but `SELECTION_COLUMN` exists in the `columns`.',
+        );
+      }
+
+      return columns.filter(col => col !== SELECTION_COLUMN);
     }
 
     // Support selection
+    let cloneColumns = columns.slice();
     const keySet = new Set(derivedSelectedKeySet.value);
 
     // Record key only need check with enabled
@@ -587,8 +611,62 @@ export default function useSelection<RecordType>(
       return node;
     };
 
-    // Columns
+    // Insert selection column if not exist
+    if (!cloneColumns.includes(SELECTION_COLUMN)) {
+      // Always after expand icon
+      if (
+        cloneColumns.findIndex(
+          (col: any) => col[INTERNAL_COL_DEFINE]?.columnType === 'EXPAND_COLUMN',
+        ) === 0
+      ) {
+        const [expandColumn, ...restColumns] = cloneColumns;
+        cloneColumns = [expandColumn, SELECTION_COLUMN, ...restColumns];
+      } else {
+        // Normal insert at first column
+        cloneColumns = [SELECTION_COLUMN, ...cloneColumns];
+      }
+    }
+
+    // Deduplicate selection column
+    const selectionColumnIndex = cloneColumns.indexOf(SELECTION_COLUMN);
+    if (
+      process.env.NODE_ENV !== 'production' &&
+      cloneColumns.filter(col => col === SELECTION_COLUMN).length > 1
+    ) {
+      devWarning(false, 'Table', 'Multiple `SELECTION_COLUMN` exist in `columns`.');
+    }
+    cloneColumns = cloneColumns.filter(
+      (column, index) => column !== SELECTION_COLUMN || index === selectionColumnIndex,
+    );
+
+    // Fixed column logic
+    const prevCol: ColumnType<RecordType> & Record<string, any> =
+      cloneColumns[selectionColumnIndex - 1];
+    const nextCol: ColumnType<RecordType> & Record<string, any> =
+      cloneColumns[selectionColumnIndex + 1];
+
+    let mergedFixed: FixedType | undefined = fixed;
+
+    if (mergedFixed === undefined) {
+      if (nextCol?.fixed !== undefined) {
+        mergedFixed = nextCol.fixed;
+      } else if (prevCol?.fixed !== undefined) {
+        mergedFixed = prevCol.fixed;
+      }
+    }
+
+    if (
+      mergedFixed &&
+      prevCol &&
+      prevCol[INTERNAL_COL_DEFINE]?.columnType === 'EXPAND_COLUMN' &&
+      prevCol.fixed === undefined
+    ) {
+      prevCol.fixed = mergedFixed;
+    }
+
+    // Replace with real selection column
     const selectionColumn = {
+      fixed: mergedFixed,
       width: selectionColWidth,
       className: `${prefixCls.value}-selection-column`,
       title: mergedRowSelection.value.columnTitle || title,
@@ -598,15 +676,7 @@ export default function useSelection<RecordType>(
       },
     };
 
-    if (expandType.value === 'row' && columns.length && !expandIconColumnIndex.value) {
-      const [expandColumn, ...restColumns] = columns;
-      const selectionFixed = fixed || getFixedType(restColumns[0]);
-      if (selectionFixed) {
-        expandColumn.fixed = selectionFixed;
-      }
-      return [expandColumn, { ...selectionColumn, fixed: selectionFixed }, ...restColumns];
-    }
-    return [{ ...selectionColumn, fixed: fixed || getFixedType(columns[0]) }, ...columns];
+    return cloneColumns.map(col => (col === SELECTION_COLUMN ? selectionColumn : col));
   };
 
   return [transformColumns, derivedSelectedKeySet];

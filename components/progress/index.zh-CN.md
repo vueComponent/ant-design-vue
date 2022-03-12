@@ -28,9 +28,9 @@ cover: https://gw.alipayobjects.com/zos/alicdn/xqsDu4ZyR/Progress.svg
 | strokeColor | 进度条的色彩 | string | - |  |
 | strokeLinecap | 进度条的样式 | `round` \| `square` | `round` |  |
 | success | 成功进度条相关配置 | { percent: number, strokeColor: string } | - |  |
+| title | html 标签 title | string | - | 3.0 |
 | trailColor | 未完成的分段的颜色 | string | - |  |
 | type | 类型，可选 `line` `circle` `dashboard` | string | `line` |  |
-| title | html 标签 title | string | - | 3.0 |
 
 ### `type="line"`
 

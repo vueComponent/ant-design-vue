@@ -1,7 +1,7 @@
 import classNames from '../_util/classNames';
 import type { ModalFuncProps } from './Modal';
 import Dialog from './Modal';
-import ActionButton from './ActionButton';
+import ActionButton from '../_util/ActionButton';
 import { defineComponent } from 'vue';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import { getTransitionName } from '../_util/transition';
@@ -91,6 +91,7 @@ export default defineComponent<ConfirmDialogProps>({
         focusTriggerAfterClose,
         rootPrefixCls,
         bodyStyle,
+        wrapClassName,
       } = props;
       const okType = props.okType || 'primary';
       const prefixCls = props.prefixCls || 'ant-modal';
@@ -127,7 +128,10 @@ export default defineComponent<ConfirmDialogProps>({
         <Dialog
           prefixCls={prefixCls}
           class={classString}
-          wrapClassName={classNames({ [`${contentPrefixCls}-centered`]: !!centered })}
+          wrapClassName={classNames(
+            { [`${contentPrefixCls}-centered`]: !!centered },
+            wrapClassName,
+          )}
           onCancel={e => close({ triggerCancel: true }, e)}
           visible={visible}
           title=""

@@ -30,7 +30,7 @@ export default defineComponent({
       const overlay = getPropsSlot(slots, props, 'overlay');
       if (overlay) {
         return (
-          <DropDown overlay={overlay} placement="bottomCenter">
+          <DropDown overlay={overlay} placement="bottom">
             <span class={`${prefixCls}-overlay-link`}>
               {breadcrumbItem}
               <DownOutlined />

@@ -70,11 +70,9 @@ export default defineComponent({
     const onVisibleChange = (visible: boolean) => {
       emit('visibleChange', visible);
     };
-    const style = ref({});
-    const className = ref('');
     const mergedMotion = computed(() => {
       const m = motion.value || defaultMotions.value?.[props.mode] || defaultMotions.value?.other;
-      const res = typeof m === 'function' ? m(style, className) : m;
+      const res = typeof m === 'function' ? m() : m;
       return res ? getTransitionProps(res.name, { css: true }) : undefined;
     });
     return () => {
@@ -104,9 +102,7 @@ export default defineComponent({
           forceRender={forceRender || forceSubMenuRender.value}
           popupAnimation={mergedMotion.value}
           v-slots={{
-            popup: () => {
-              return slots.popup?.({ visible: innerVisible.value });
-            },
+            popup: slots.popup,
             default: slots.default,
           }}
         ></Trigger>

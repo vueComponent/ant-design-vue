@@ -31,45 +31,44 @@ A form consists of one or more form fields whose type includes input, textarea, 
 
 | Property | Description | Type | Default Value | Version |
 | --- | --- | --- | --- | --- |
-| model | data of form component | object |  |  |
-| rules | validation rules of form | object |  |  |
+| colon | change default props colon value of Form.Item (only effective when prop layout is horizontal) | boolean | true |  |
 | hideRequiredMark | Hide required mark of all form items | Boolean | false |  |
-| layout | Define form layout | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |  |
 | labelAlign | text align of label of all items | 'left' \| 'right' | 'right' |  |
 | labelCol | The layout of label. You can set `span` `offset` to something like `{span: 3, offset: 12}` or `sm: {span: 3, offset: 12}` same as with `<Col>` | [object](/components/grid/#Col) |  |  |
-| wrapperCol | The layout for input controls, same as `labelCol` | [object](/components/grid/#Col) |  |  |
-| colon | change default props colon value of Form.Item (only effective when prop layout is horizontal) | boolean | true |  |
-| validateOnRuleChange | whether to trigger validation when the `rules` prop is changed | boolean | true |  |
+| labelWrap | whether label can be wrap | boolean | false | 3.0 |
+| layout | Define form layout | 'horizontal'\|'vertical'\|'inline' | 'horizontal' |  |
+| model | data of form component | object |  |  |
 | name | Form name. Will be the prefix of Field `id` | string | - | 2.0.0 |
-| scrollToFirstError | Auto scroll to first failed field when submit | boolean \| [options](https://github.com/stipsan/scroll-into-view-if-needed/#options) | false | 2.0.0 |
-| validateTrigger | Config field validate trigger | string \| string[] | `change` | 2.0.0 |
 | noStyle | No style for `true`, used as a pure field control | boolean | false | 3.0 |
+| rules | validation rules of form | object |  |  |
+| scrollToFirstError | Auto scroll to first failed field when submit | boolean \| [options](https://github.com/stipsan/scroll-into-view-if-needed/#options) | false | 2.0.0 |
+| validateOnRuleChange | whether to trigger validation when the `rules` prop is changed | boolean | true |  |
+| validateTrigger | Config field validate trigger | string \| string\[] | `change` | 2.0.0 |
+| wrapperCol | The layout for input controls, same as `labelCol` | [object](/components/grid/#Col) |  |  |
 
 ### Events
 
-| Events Name | Description | Arguments | Version |
+| Events Name | Description | Arguments | Version |  |
 | --- | --- | --- | --- | --- |
-| submit | Defines a function will be called if form data validation is successful. | Function(e:Event) |  |
-| validate | triggers after a form item is validated | Function(name, status, errorMsgs) |  |  |
 | finish | Trigger after submitting the form and verifying data successfully | function(values) | - | 2.0.0 |
 | finishFailed | Trigger after submitting the form and verifying data failed | function({ values, errorFields, outOfDate }) | - | 2.0.0 |
+| submit | Defines a function will be called if form data validation is successful. | Function(e:Event) |  |  |
+| validate | triggers after a form item is validated | Function(name, status, errorMsgs) |  |  |
 
 ### Methods
 
-| Method | Description | Parameters |
+| Method | Description | Parameters |  |
 | --- | --- | --- | --- |
-| validate | Validate fields, it is same as validateFields | (nameList?: [NamePath](#NamePath)[]) => Promise |  |
-| validateFields | Validate fields | (nameList?: [NamePath](#NamePath)[]) => Promise |  |
-| scrollToField | Scroll to field position | (name: [NamePath](#NamePath), options: [[ScrollOptions](https://github.com/stipsan/scroll-into-view-if-needed/tree/ece40bd9143f48caf4b99503425ecb16b0ad8249#options)]) => void |  |
-| resetFields | reset all the fields and remove validation result | — |
-| clearValidate | clear validation message for certain fields. The parameter is name or an array of names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | Function(props: string \| array) |
+| clearValidate | clear validation message for certain fields. The parameter is name or an array of names of the form items whose validation messages will be removed. When omitted, all fields' validation messages will be cleared | Function(props: string \| array) |  |
+| resetFields | reset all the fields and remove validation result | — |  |
+| scrollToField | Scroll to field position | (name: [NamePath](#NamePath), options: \[[ScrollOptions](https://github.com/stipsan/scroll-into-view-if-needed/tree/ece40bd9143f48caf4b99503425ecb16b0ad8249#options)]) => void |  |
+| validate | Validate fields, it is same as validateFields | (nameList?: [NamePath](#NamePath)\[]) => Promise |  |
+| validateFields | Validate fields | (nameList?: [NamePath](#NamePath)\[]) => Promise |  |
 
 ### Form.Item
 
 | Property | Description | Type | Default Value | Version |
 | --- | --- | --- | --- | --- |
-| name | a key of `model`. In the use of validate and resetFields method, the attribute is required | string |  | 2.0.0 |
-| rules | validation rules of form | object \| array |  |  |
 | autoLink | Whether to automatically associate form fields. In most cases, you can use automatic association. If the conditions for automatic association are not met, you can manually associate them. See the notes below. | boolean | true |  |
 | colon | Used with `label`, whether to display `:` after label text. | boolean | true |  |
 | extra | The extra prompt message. It is similar to help. Usage example: to display error message and prompt message at the same time. | string\|slot |  |  |
@@ -77,13 +76,15 @@ A form consists of one or more form fields whose type includes input, textarea, 
 | help | The prompt message. If not provided, the prompt message will be generated by the validation rule. | string\|slot |  |  |
 | htmlFor | Set sub label `htmlFor`. | string |  |  |
 | label | Label text | string\|slot |  |  |
-| labelCol | The layout of label. You can set `span` `offset` to something like `{span: 3, offset: 12}` or `sm: {span: 3, offset: 12}` same as with `<Col>` | [object](/components/grid/#Col) |  |  |
 | labelAlign | text align of label | 'left' \| 'right' | 'right' |  |
+| labelCol | The layout of label. You can set `span` `offset` to something like `{span: 3, offset: 12}` or `sm: {span: 3, offset: 12}` same as with `<Col>` | [object](/components/grid/#Col) |  |  |
+| name | a key of `model`. In the use of validate and resetFields method, the attribute is required | string |  | 2.0.0 |
 | required | Whether provided or not, it will be generated by the validation rule. | boolean | false |  |
-| validateStatus | The validation status. If not provided, it will be generated by validation rule. options: 'success' 'warning' 'error' 'validating' | string |  |  |
-| wrapperCol | The layout for input controls, same as `labelCol` | [object](/components/grid/#Col) |  |  |
+| rules | validation rules of form | object \| array |  |  |
 | validateFirst | Whether stop validate on first rule of error for this field. | boolean | false |  |
-| validateTrigger | When to validate the value of children node | string \| string[] | `change` |  |
+| validateStatus | The validation status. If not provided, it will be generated by validation rule. options: 'success' 'warning' 'error' 'validating' | string |  |  |
+| validateTrigger | When to validate the value of children node | string \| string\[] | `change` |  |
+| wrapperCol | The layout for input controls, same as `labelCol` | [object](/components/grid/#Col) |  |  |
 
 ### Note
 
@@ -106,7 +107,7 @@ But it also has some disadvantages:
 </a-form-item>
 ```
 
-As above Form.Item does not know whether to collect `name="a"` or `name=`b``, you can solve this kind of problem in the following two ways:
+As above Form.Item does not know whether to collect `name="a"` or `name=`b\`\`, you can solve this kind of problem in the following two ways:
 
 The first is to use multiple `a-form-item`:
 
@@ -174,7 +175,6 @@ If the form field to be monitored does not meet the conditions of automatic moni
 
 | Property | Description | Type | Default Value |
 | --- | --- | --- | --- |
-| trigger | When to validate the value of children node. | 'blur' \| 'change' \| `['change', 'blur']` | - |
 | enum | validate a value from a list of possible values | string | - |
 | len | validate an exact length of a field | number | - |
 | max | validate a max length of a field | number | - |
@@ -183,6 +183,7 @@ If the form field to be monitored does not meet the conditions of automatic moni
 | pattern | validate from a regular expression | RegExp | - |
 | required | indicates whether field is required | boolean | `false` |
 | transform | transform a value before validation | function(value) => transformedValue:any | - |
+| trigger | When to validate the value of children node. | 'blur' \| 'change' \| `['change', 'blur']` | - |
 | type | built-in validation type, [available options](https://github.com/yiminghe/async-validator#type) | string | 'string' |
 | validator | custom validate function (Note: [callback must be called](https://github.com/ant-design/ant-design/issues/5155)) | function(rule, value, callback) | - |
 | whitespace | treat required fields that only contain whitespace as errors | boolean | `false` |

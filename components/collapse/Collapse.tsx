@@ -13,9 +13,9 @@ import { computed, defineComponent, ref, watch } from 'vue';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import firstNotUndefined from '../_util/firstNotUndefined';
 import classNames from '../_util/classNames';
-import animation from '../_util/openAnimation';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { CollapsePanelProps } from './CollapsePanel';
+import collapseMotion from '../_util/collapseMotion';
 
 type Key = number | string;
 
@@ -37,7 +37,7 @@ export default defineComponent({
     accordion: false,
     destroyInactivePanel: false,
     bordered: true,
-    openAnimation: animation,
+    openAnimation: collapseMotion('ant-motion-collapse', false),
     expandIconPosition: 'left',
   }),
   slots: ['expandIcon'],
@@ -71,15 +71,19 @@ export default defineComponent({
         <RightOutlined rotate={panelProps.isActive ? 90 : undefined} />
       );
 
-      return isValidElement(Array.isArray(expandIcon) ? icon[0] : icon)
-        ? cloneElement(
-            icon,
-            {
-              class: `${prefixCls.value}-arrow`,
-            },
-            false,
-          )
-        : icon;
+      return (
+        <div>
+          {isValidElement(Array.isArray(expandIcon) ? icon[0] : icon)
+            ? cloneElement(
+                icon,
+                {
+                  class: `${prefixCls.value}-arrow`,
+                },
+                false,
+              )
+            : icon}
+        </div>
+      );
     };
     const setActiveKey = (activeKey: Key[]) => {
       if (props.activeKey === undefined) {

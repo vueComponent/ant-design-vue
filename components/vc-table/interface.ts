@@ -15,7 +15,7 @@
  * - onFilterDropdownVisibleChange
  */
 
-import type { CSSProperties, HTMLAttributes, Ref } from 'vue';
+import type { CSSProperties, Ref, TdHTMLAttributes } from 'vue';
 
 export type Key = number | string;
 
@@ -106,6 +106,7 @@ export interface ColumnType<RecordType> extends ColumnSharedType<RecordType> {
     text: any; // 兼容 V2
     record: RecordType;
     index: number;
+    renderIndex: number;
     column: ColumnType<RecordType>;
   }) => any | RenderedCell<RecordType>;
   rowSpan?: number;
@@ -114,7 +115,7 @@ export interface ColumnType<RecordType> extends ColumnSharedType<RecordType> {
   maxWidth?: number;
   resizable?: boolean;
   customCell?: GetComponentProps<RecordType>;
-  /** @deprecated Please use `onCell` instead */
+  /** @deprecated Please use `customCell` instead */
   onCellClick?: (record: RecordType, e: MouseEvent) => void;
 }
 
@@ -131,13 +132,16 @@ export interface StickyOffsets {
   right: readonly number[];
   isSticky?: boolean;
 }
-
+export type AdditionalProps = TdHTMLAttributes & {
+  colSpan?: number;
+  rowSpan?: number;
+};
 // ================= Customized =================
 export type GetComponentProps<DataType> = (
   data: DataType,
   index?: number,
   column?: ColumnType<any>,
-) => Omit<HTMLAttributes, 'style'> & { style?: CSSProperties };
+) => AdditionalProps;
 
 // type Component<P> = DefineComponent<P> | FunctionalComponent<P> | string;
 
@@ -194,8 +198,10 @@ export interface LegacyExpandableProps<RecordType> {
   defaultExpandAllRows?: boolean;
 
   indentSize?: number;
-
+  /** @deprecated Please use `EXPAND_COLUMN` in `columns` directly */
   expandIconColumnIndex?: number;
+
+  showExpandColumn?: boolean;
 
   expandedRowClassName?: RowClassName<RecordType>;
 
@@ -231,7 +237,9 @@ export interface ExpandableConfig<RecordType> {
   onExpandedRowsChange?: (expandedKeys: readonly Key[]) => void;
   defaultExpandAllRows?: boolean;
   indentSize?: number;
+  /** @deprecated Please use `EXPAND_COLUMN` in `columns` directly */
   expandIconColumnIndex?: number;
+  showExpandColumn?: boolean;
   expandedRowClassName?: RowClassName<RecordType>;
   childrenColumnName?: string;
   rowExpandable?: (record: RecordType) => boolean;

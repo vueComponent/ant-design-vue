@@ -1,7 +1,7 @@
 <docs>
 ---
 order: 5
-title: 
+title:
   zh-CN: 动态
   en-US: Dynamic
 ---
@@ -11,14 +11,14 @@ title:
 展示动态变化的效果。
 
 ## en-US
-  
+
 The count will be animated as it changes.
 </docs>
 
 <template>
   <div>
     <a-badge :count="count">
-      <a href="#" class="head-example" />
+      <a-avatar shape="square" size="large" />
     </a-badge>
     <a-button-group>
       <a-button @click="decline">
@@ -29,12 +29,11 @@ The count will be animated as it changes.
       </a-button>
     </a-button-group>
   </div>
-  <div style="margin-top: 10px">
-    <a-badge :dot="show">
-      <a href="#" class="head-example" />
-    </a-badge>
-    <a-switch v-model:checked="show" />
-  </div>
+  <a-divider />
+  <a-badge :dot="show">
+    <a-avatar shape="square" size="large" />
+  </a-badge>
+  <a-switch v-model:checked="show" />
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';

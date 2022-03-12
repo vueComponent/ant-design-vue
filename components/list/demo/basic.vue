@@ -27,7 +27,7 @@ Basic list.
             <a href="https://www.antdv.com/">{{ item.title }}</a>
           </template>
           <template #avatar>
-            <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+            <a-avatar src="https://joeschmoe.io/api/v1/random" />
           </template>
         </a-list-item-meta>
       </a-list-item>

@@ -21,6 +21,6 @@ title:
     <a-button type="primary" ghost>Primary</a-button>
     <a-button ghost>Default</a-button>
     <a-button type="dashed" ghost>Dashed</a-button>
-    <a-button danger ghost>Danger</a-button>
+    <a-button type="primary" danger ghost>Danger</a-button>
   </div>
 </template>

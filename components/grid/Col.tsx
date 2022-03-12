@@ -1,7 +1,6 @@
-import type { CSSProperties, ExtractPropTypes } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 import classNames from '../_util/classNames';
-import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectRow } from './context';
 
@@ -29,38 +28,28 @@ function parseFlex(flex: FlexType): string {
   return flex;
 }
 
-const stringOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number]);
-export const colSize = PropTypes.shape<ColSize>({
-  span: stringOrNumber,
-  order: stringOrNumber,
-  offset: stringOrNumber,
-  push: stringOrNumber,
-  pull: stringOrNumber,
-}).loose;
-const objectOrNumber = PropTypes.oneOfType([PropTypes.string, PropTypes.number, colSize]);
+const colProps = () => ({
+  span: [String, Number],
+  order: [String, Number],
+  offset: [String, Number],
+  push: [String, Number],
+  pull: [String, Number],
+  xs: { type: [String, Number, Object] as PropType<string | number | ColSize> },
+  sm: { type: [String, Number, Object] as PropType<string | number | ColSize> },
+  md: { type: [String, Number, Object] as PropType<string | number | ColSize> },
+  lg: { type: [String, Number, Object] as PropType<string | number | ColSize> },
+  xl: { type: [String, Number, Object] as PropType<string | number | ColSize> },
+  xxl: { type: [String, Number, Object] as PropType<string | number | ColSize> },
+  xxxl: { type: [String, Number, Object] as PropType<string | number | ColSize> },
+  prefixCls: String,
+  flex: [String, Number],
+});
 
-const colProps = {
-  span: stringOrNumber,
-  order: stringOrNumber,
-  offset: stringOrNumber,
-  push: stringOrNumber,
-  pull: stringOrNumber,
-  xs: objectOrNumber,
-  sm: objectOrNumber,
-  md: objectOrNumber,
-  lg: objectOrNumber,
-  xl: objectOrNumber,
-  xxl: objectOrNumber,
-  xxxl: objectOrNumber,
-  prefixCls: PropTypes.string,
-  flex: stringOrNumber,
-};
-
-export type ColProps = Partial<ExtractPropTypes<typeof colProps>>;
+export type ColProps = Partial<ExtractPropTypes<ReturnType<typeof colProps>>>;
 
 export default defineComponent({
   name: 'ACol',
-  props: colProps,
+  props: colProps(),
   setup(props, { slots }) {
     const { gutter, supportFlexGap, wrap } = useInjectRow();
     const { prefixCls, direction } = useConfigInject('col', props);
@@ -123,7 +112,7 @@ export default defineComponent({
 
         // Hack for Firefox to avoid size issue
         // https://github.com/ant-design/ant-design/pull/20023#issuecomment-564389553
-        if (flex === 'auto' && wrap.value === false && !style.minWidth) {
+        if (wrap.value === false && !style.minWidth) {
           style.minWidth = 0;
         }
       }

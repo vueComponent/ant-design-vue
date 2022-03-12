@@ -20,7 +20,9 @@ exports[`renders ./components/slider/demo/basic.vue correctly 1`] = `
     <div class="ant-slider-handle ant-slider-handle-2" style="left: 50%; transform: translateX(-50%);" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-disabled="false"></div>
     <div class="ant-slider-mark"></div>
   </div> Disabled: <button size="small" type="button" role="switch" aria-checked="false" class="ant-switch-small ant-switch">
-    <!----><span class="ant-switch-inner"><!----></span>
+    <div class="ant-switch-handle">
+      <!---->
+    </div><span class="ant-switch-inner"><!----></span>
   </button>
 </div>
 `;
@@ -173,7 +175,9 @@ exports[`renders ./components/slider/demo/reverse.vue correctly 1`] = `
     <div class="ant-slider-handle ant-slider-handle-2" style="right: 50%; transform: translateX(+50%);" role="slider" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-disabled="false"></div>
     <div class="ant-slider-mark"></div>
   </div> Reversed: <button size="small" type="button" role="switch" aria-checked="true" class="ant-switch-small ant-switch-checked ant-switch">
-    <!----><span class="ant-switch-inner"><!----></span>
+    <div class="ant-switch-handle">
+      <!---->
+    </div><span class="ant-switch-inner"><!----></span>
   </button>
 </div>
 `;

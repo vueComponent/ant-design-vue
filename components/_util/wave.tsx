@@ -24,6 +24,7 @@ export default defineComponent({
   name: 'Wave',
   props: {
     insertExtraNode: Boolean,
+    disabled: Boolean,
   },
   setup(props, { slots, expose }) {
     const instance = getCurrentInstance();
@@ -60,10 +61,11 @@ export default defineComponent({
       return insertExtraNode ? 'ant-click-animating' : 'ant-click-animating-without-extra-node';
     };
     const onClick = (node: HTMLElement, waveColor: string) => {
-      if (!node || isHidden(node) || node.className.indexOf('-leave') >= 0) {
+      const { insertExtraNode, disabled } = props;
+      if (disabled || !node || isHidden(node) || node.className.indexOf('-leave') >= 0) {
         return;
       }
-      const { insertExtraNode } = props;
+
       extraNode = document.createElement('div');
       extraNode.className = 'ant-click-animating-node';
       const attributeName = getAttributeName();

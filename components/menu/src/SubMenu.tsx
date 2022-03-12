@@ -230,6 +230,37 @@ export default defineComponent({
     const subMenuTriggerModeRef = computed(() =>
       triggerModeRef.value === 'horizontal' ? 'vertical' : triggerModeRef.value,
     );
+    const baseTitleNode = () => {
+      const subMenuPrefixClsValue = subMenuPrefixCls.value;
+      const icon = getPropsSlot(slots, props, 'icon');
+      const expandIcon = props.expandIcon || slots.expandIcon || menuExpandIcon.value;
+      const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);
+      return (
+        <div
+          style={directionStyle.value}
+          class={`${subMenuPrefixClsValue}-title`}
+          tabindex={mergedDisabled.value ? null : -1}
+          ref={elementRef}
+          title={typeof title === 'string' ? title : null}
+          data-menu-id={key}
+          aria-expanded={open.value}
+          aria-haspopup
+          aria-controls={popupId}
+          aria-disabled={mergedDisabled.value}
+          onClick={onInternalTitleClick}
+          onFocus={onInternalFocus}
+        >
+          {title}
+
+          {/* Only non-horizontal mode shows the icon */}
+          {mode.value !== 'horizontal' && expandIcon ? (
+            expandIcon({ ...props, isOpen: open.value })
+          ) : (
+            <i class={`${subMenuPrefixClsValue}-arrow`} />
+          )}
+        </div>
+      );
+    };
     return () => {
       if (isMeasure) {
         if (!hasKey) {
@@ -238,36 +269,6 @@ export default defineComponent({
         return slots.default?.();
       }
       const subMenuPrefixClsValue = subMenuPrefixCls.value;
-      const baseTitleNode = () => {
-        const icon = getPropsSlot(slots, props, 'icon');
-        const expandIcon = props.expandIcon || slots.expandIcon || menuExpandIcon.value;
-        const title = renderTitle(getPropsSlot(slots, props, 'title'), icon);
-        return (
-          <div
-            style={directionStyle.value}
-            class={`${subMenuPrefixClsValue}-title`}
-            tabindex={mergedDisabled.value ? null : -1}
-            ref={elementRef}
-            title={typeof title === 'string' ? title : null}
-            data-menu-id={key}
-            aria-expanded={open.value}
-            aria-haspopup
-            aria-controls={popupId}
-            aria-disabled={mergedDisabled.value}
-            onClick={onInternalTitleClick}
-            onFocus={onInternalFocus}
-          >
-            {title}
-
-            {/* Only non-horizontal mode shows the icon */}
-            {mode.value !== 'horizontal' && expandIcon ? (
-              expandIcon({ ...props, isOpen: open.value })
-            ) : (
-              <i class={`${subMenuPrefixClsValue}-arrow`} />
-            )}
-          </div>
-        );
-      };
       let titleNode = () => null;
       if (!overflowDisabled.value && mode.value !== 'inline') {
         titleNode = () => (
@@ -282,9 +283,11 @@ export default defineComponent({
             v-slots={{
               popup: () => (
                 <MenuContextProvider mode={subMenuTriggerModeRef.value} isRootMenu={false}>
-                  <SubMenuList id={popupId} ref={popupRef}>
-                    {slots.default?.()}
-                  </SubMenuList>
+                  <SubMenuList
+                    id={popupId}
+                    ref={popupRef}
+                    v-slots={{ default: slots.default }}
+                  ></SubMenuList>
                 </MenuContextProvider>
               ),
             }}
@@ -295,7 +298,7 @@ export default defineComponent({
       } else {
         // 包裹一层，保持结构一致，防止动画丢失
         // https://github.com/vueComponent/ant-design-vue/issues/4325
-        titleNode = () => <PopupTrigger>{baseTitleNode()}</PopupTrigger>;
+        titleNode = () => <PopupTrigger v-slots={{ default: baseTitleNode }}></PopupTrigger>;
       }
       return (
         <MenuContextProvider mode={renderMode.value}>
@@ -317,19 +320,24 @@ export default defineComponent({
             onMouseenter={onMouseEnter}
             onMouseleave={onMouseLeave}
             data-submenu-id={key}
-            v-slots={() => {
-              return (
-                <>
-                  {titleNode()}
+            v-slots={{
+              default: () => {
+                return (
+                  <>
+                    {titleNode()}
 
-                  {/* Inline mode */}
-                  {!overflowDisabled.value && (
-                    <InlineSubMenuList id={popupId} open={open.value} keyPath={keysPath.value}>
-                      {slots.default?.()}
-                    </InlineSubMenuList>
-                  )}
-                </>
-              );
+                    {/* Inline mode */}
+                    {!overflowDisabled.value && (
+                      <InlineSubMenuList
+                        id={popupId}
+                        open={open.value}
+                        keyPath={keysPath.value}
+                        v-slots={{ default: slots.default }}
+                      ></InlineSubMenuList>
+                    )}
+                  </>
+                );
+              },
             }}
           ></Overflow.Item>
         </MenuContextProvider>

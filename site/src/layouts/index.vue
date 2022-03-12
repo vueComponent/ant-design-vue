@@ -54,7 +54,7 @@
           </a-affix>
         </section>
         <div class="fixed-widgets" :style="isZhCN ? { bottom: '175px' } : {}">
-          <a-dropdown placement="topCenter">
+          <a-dropdown placement="top">
             <template #overlay>
               <a-menu
                 :selected-keys="[themeMode.theme.value]"

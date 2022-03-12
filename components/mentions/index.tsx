@@ -29,8 +29,8 @@ interface MentionsEntity {
 
 export type MentionPlacement = 'top' | 'bottom';
 
-const getMentions = (value = '', config: MentionsConfig): MentionsEntity[] => {
-  const { prefix = '@', split = ' ' } = config || {};
+const getMentions = (value = '', config: MentionsConfig = {}): MentionsEntity[] => {
+  const { prefix = '@', split = ' ' } = config;
   const prefixList: string[] = Array.isArray(prefix) ? prefix : [prefix];
 
   return value

@@ -20,6 +20,7 @@ Basic text writing, including headings, body text, lists, and more.
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | code | Code style | boolean | false |  |
+| content(v-model) | When using ellipsis or editable, use content instead of children | string | - |  |
 | copyable | Whether to be copyable, customize it via setting an object | boolean \| [copyable](#copyable) | false | [copyable](#copyable) |
 | delete | Deleted line style | boolean | false |  |
 | disabled | Disabled content | boolean | false |  |
@@ -30,13 +31,13 @@ Basic text writing, including headings, body text, lists, and more.
 | strong | Bold style | boolean | false |  |
 | type | Content type | `secondary` \| `success` \| `warning` \| `danger` | - |  |
 | underline | Underlined style | boolean | false |  |
-| content(v-model) | When using ellipsis or editable, use content instead of children | string | - |  |
 
 ### Typography.Title
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | code | Code style | boolean | false |  |
+| content(v-model) | When using ellipsis or editable, use content instead of children | string | - |  |
 | copyable | Whether to be copyable, customize it via setting an object | boolean \| [copyable](#copyable) | false | [copyable](#copyable) |
 | delete | Deleted line style | boolean | false |  |
 | disabled | Disabled content | boolean | false |  |
@@ -46,13 +47,13 @@ Basic text writing, including headings, body text, lists, and more.
 | mark | Marked style | boolean | false |  |
 | type | Content type | `secondary` \| `success` \| `warning` \| `danger` | - |  |
 | underline | Underlined style | boolean | false |  |
-| content(v-model) | When using ellipsis or editable, use content instead of children | string | - |  |
 
 ### Typography.Paragraph
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | code | Code style | boolean | false |  |
+| content(v-model) | When using ellipsis or editable, use content instead of children | string | - |  |
 | copyable | Whether to be copyable, customize it via setting an object | boolean \| [copyable](#copyable) | false | [copyable](#copyable) |
 | delete | Deleted line style | boolean | false |  |
 | disabled | Disabled content | boolean | false |  |
@@ -62,16 +63,16 @@ Basic text writing, including headings, body text, lists, and more.
 | strong | Bold style | boolean | false |  |
 | type | Content type | `secondary` \| `success` \| `warning` \| `danger` | - |  |
 | underline | Underlined style | boolean | false |  |
-| content(v-model) | When using ellipsis or editable, use content instead of children | string | - |  |
 
 ### slots
 
 | Name | Description | Property | Default | Version |
 | --- | --- | --- | --- | --- |
-| editableIcon | Custom editable icon | - | &lt;EditOutlined /> |  |
-| editableTooltip | Custom tooltip text, hide when `editable.tooltip = false` | - | `Edit` |  |
 | copyableIcon | Custom copy icon | `{ copied: boolean }` | `copied ? <CheckOutlined /> : <CopyOutlined />` |  |
 | copyableTooltip | Custom tooltip text, hide when `copyable.tooltip = false` | `{ copied: boolean }` | `copied ? 'Copied' : 'Copy'` |  |
+| editableEnterIcon | Custom "enter" icon in the edit field | `{className: string}` | `<EnterOutlined />` | 3.0 |
+| editableIcon | Custom editable icon | - | &lt;EditOutlined /> |  |
+| editableTooltip | Custom tooltip text, hide when `editable.tooltip = false` | - | `Edit` |  |
 | ellipsisSymbol | Custom description of ellipsis | - | - |  |
 | ellipsisTooltip | Show tooltip when ellipsis | - | - |  |
 
@@ -103,6 +104,7 @@ Basic text writing, including headings, body text, lists, and more.
     onChange: function(string),
     onCancel: function,
     onEnd: function,
+    triggerType: ('icon' | 'text')[],
   }
 ```
 
@@ -112,12 +114,13 @@ Basic text writing, including headings, body text, lists, and more.
 | editing | Whether to be editable | boolean | false |  |
 | maxlength | `maxlength` attribute of textarea | number | - |  |
 | tooltip | Whether to show tooltip | boolean | true |  |
+| triggerType | Edit mode trigger - icon, text or both (not specifying icon as trigger hides it) | Array&lt;`icon`\|`text`> | \[`icon`] |  |
+| onCancel | Called when type ESC to exit editable state | function | - |  |
 | onCancel | Called when type ESC to exit editable state | function | - |  |
 | onChange | Called when input at textarea | function(event) | - |  |
 | onEnd | Called when type ENTER to exit editable state | function | - |  |
-| onStart | Called when enter editable state | function | - |  |
-| onCancel | Called when type ESC to exit editable state | function | - |  |
 | onEnd | Called when type ENTER to exit editable state | function | - |  |
+| onStart | Called when enter editable state | function | - |  |
 
 ### ellipsis
 

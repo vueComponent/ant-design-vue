@@ -18,19 +18,27 @@ describe('Typography', () => {
 
   const LINE_STR_COUNT = 20;
   const errorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
-
   // Mock offsetHeight
   const originOffsetHeight = Object.getOwnPropertyDescriptor(
     HTMLElement.prototype,
     'offsetHeight',
   ).get;
-  Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
-    get() {
+  const mockGetBoundingClientRect = jest.spyOn(HTMLElement.prototype, 'getBoundingClientRect');
+  beforeAll(() => {
+    Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
+      get() {
+        let html = this.innerHTML;
+        html = html.replace(/<[^>]*>/g, '');
+        const lines = Math.ceil(html.length / LINE_STR_COUNT);
+        return lines * 16;
+      },
+    });
+    mockGetBoundingClientRect.mockImplementation(function fn() {
       let html = this.innerHTML;
       html = html.replace(/<[^>]*>/g, '');
       const lines = Math.ceil(html.length / LINE_STR_COUNT);
-      return lines * 16;
-    },
+      return { height: lines * 16 };
+    });
   });
 
   // Mock getComputedStyle

@@ -3,7 +3,7 @@ import type { ModalFunc, ModalFuncProps } from './Modal';
 import Modal, { destroyFns } from './Modal';
 import confirm, { withWarn, withInfo, withSuccess, withError, withConfirm } from './confirm';
 
-export type { ActionButtonProps } from './ActionButton';
+export type { ActionButtonProps } from '../_util/ActionButton';
 export type { ModalProps, ModalFuncProps } from './Modal';
 
 function modalWarn(props: ModalFuncProps) {

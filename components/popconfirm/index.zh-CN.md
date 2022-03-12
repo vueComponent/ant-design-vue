@@ -16,17 +16,18 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fjMCD9xRq/Popconfirm.svg
 
 | 参数 | 说明 | 类型 | 默认值 | 版本 |
 | --- | --- | --- | --- | --- |
-| cancelButtonProps | cancel 按钮 props | [ButtonProps](/components/button/#API) | - |
-| cancelText | 取消按钮文字 | string\|slot | 取消 |  |
 | cancelButton | 完全自定义取消按钮 | slot | - | 3.0 |
-| okButtonProps | ok 按钮 props | [ButtonProps](/components/button/#API) | - |
-| okText | 确认按钮文字 | string\|slot | 确定 |  |
+| cancelButtonProps | cancel 按钮 props | [ButtonProps](/components/button/#API) | - |  |
+| cancelText | 取消按钮文字 | string\|slot | 取消 |  |
+| disabled | 点击 Popconfirm 子元素是否弹出气泡确认框 | boolean | false |  |
+| icon | 自定义弹出气泡 Icon 图标 | vNode | &lt;Icon type="exclamation-circle" /> |  |
 | okButton | 完全自定义确认按钮 | slot | - | 3.0 |
+| okButtonProps | ok 按钮 props | [ButtonProps](/components/button/#API) | - |  |
+| okText | 确认按钮文字 | string\|slot | 确定 |  |
 | okType | 确认按钮类型 | string | primary |  |
+| showCancel | 是否显示取消按钮 | boolean | true | 3.0 |
 | title | 确认框的描述 | string\|slot | 无 |  |
 | visible (v-model) | 是否显示 | boolean | - |  |
-| icon | 自定义弹出气泡 Icon 图标 | vNode | &lt;Icon type="exclamation-circle" /&gt; |  |
-| disabled | 点击 Popconfirm 子元素是否弹出气泡确认框 | boolean | false |  |
 
 ### 事件
 

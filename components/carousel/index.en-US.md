@@ -18,8 +18,8 @@ A carousel component. Scales with its container.
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | autoplay | Whether to scroll automatically | boolean | `false` |  |
-| dots | Whether to show the dots at the bottom of the gallery | boolean | `true` |  |
 | dotPosition | The position of the dots, which can be one of `top` `bottom` `left` `right` | string | `bottom` | 1.5.0 |
+| dots | Whether to show the dots at the bottom of the gallery | boolean | `true` |  |
 | dotsClass | Class name of the dots | string | `slick-dots` |  |
 | easing | Transition interpolation function name | string | `linear` |  |
 | effect | Transition effect | `scrollx` \| `fade` | `scrollx` |  |

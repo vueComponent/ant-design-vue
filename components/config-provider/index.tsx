@@ -1,66 +1,24 @@
-import type { PropType, ExtractPropTypes, UnwrapRef, App, Plugin, WatchStopHandle } from 'vue';
-import { reactive, provide, defineComponent, watch, watchEffect } from 'vue';
-import PropTypes from '../_util/vue-types';
+import type { UnwrapRef, App, Plugin, WatchStopHandle } from 'vue';
+import { computed, reactive, provide, defineComponent, watch, watchEffect } from 'vue';
 import defaultRenderEmpty from './renderEmpty';
 import type { RenderEmptyHandler } from './renderEmpty';
 import type { Locale } from '../locale-provider';
 import LocaleProvider, { ANT_MARK } from '../locale-provider';
-import type { TransformCellTextProps } from '../table/interface';
+
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import type { RequiredMark } from '../form/Form';
+
 import type { MaybeRef } from '../_util/type';
 import message from '../message';
 import notification from '../notification';
+import { registerTheme } from './cssVariables';
+import defaultLocale from '../locale/default';
+import type { ValidateMessages } from '../form/interface';
 
-export type SizeType = 'small' | 'middle' | 'large' | undefined;
+import type { ConfigProviderProps, Theme } from './context';
+import { configProviderProps, useProvideGlobalForm } from './context';
 
-export interface CSPConfig {
-  nonce?: string;
-}
-
-export type { RenderEmptyHandler };
-
-export type Direction = 'ltr' | 'rtl';
-
-export interface ConfigConsumerProps {
-  getTargetContainer?: () => HTMLElement;
-  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
-  rootPrefixCls?: string;
-  getPrefixCls: (suffixCls?: string, customizePrefixCls?: string) => string;
-  renderEmpty: RenderEmptyHandler;
-  transformCellText?: (tableProps: TransformCellTextProps) => any;
-  csp?: CSPConfig;
-  autoInsertSpaceInButton?: boolean;
-  input?: {
-    autoComplete?: string;
-  };
-  locale?: Locale;
-  pageHeader?: {
-    ghost: boolean;
-  };
-  componentSize?: SizeType;
-  direction?: 'ltr' | 'rtl';
-  space?: {
-    size?: SizeType | number;
-  };
-  virtual?: boolean;
-  dropdownMatchSelectWidth?: boolean | number;
-}
-
-export const configConsumerProps = [
-  'getTargetContainer',
-  'getPopupContainer',
-  'rootPrefixCls',
-  'getPrefixCls',
-  'renderEmpty',
-  'csp',
-  'autoInsertSpaceInButton',
-  'locale',
-  'pageHeader',
-];
-
+export type { ConfigProviderProps, Theme, SizeType, Direction, CSPConfig } from './context';
 export const defaultPrefixCls = 'ant';
-
 function getGlobalPrefixCls() {
   return globalConfigForApi.prefixCls || defaultPrefixCls;
 }
@@ -107,13 +65,16 @@ type GlobalConfigProviderProps = {
 };
 
 let stopWatchEffect: WatchStopHandle;
-const setGlobalConfig = (params: GlobalConfigProviderProps) => {
+const setGlobalConfig = (params: GlobalConfigProviderProps & { theme?: Theme }) => {
   if (stopWatchEffect) {
     stopWatchEffect();
   }
   stopWatchEffect = watchEffect(() => {
     Object.assign(globalConfigBySet, reactive(params));
   });
+  if (params.theme) {
+    registerTheme(getGlobalPrefixCls(), params.theme);
+  }
 };
 
 export const globalConfig = () => ({
@@ -142,61 +103,10 @@ export const globalConfig = () => ({
   },
 });
 
-export const configProviderProps = {
-  getTargetContainer: {
-    type: Function as PropType<() => HTMLElement>,
-  },
-  getPopupContainer: {
-    type: Function as PropType<(triggerNode: HTMLElement) => HTMLElement>,
-  },
-  prefixCls: String,
-  getPrefixCls: {
-    type: Function as PropType<(suffixCls?: string, customizePrefixCls?: string) => string>,
-  },
-  renderEmpty: {
-    type: Function as PropType<RenderEmptyHandler>,
-  },
-  transformCellText: {
-    type: Function as PropType<(tableProps: TransformCellTextProps) => any>,
-  },
-  csp: {
-    type: Object as PropType<CSPConfig>,
-    default: undefined as CSPConfig,
-  },
-  input: {
-    type: Object as PropType<{ autocomplete: string }>,
-  },
-  autoInsertSpaceInButton: PropTypes.looseBool,
-  locale: {
-    type: Object as PropType<Locale>,
-  },
-  pageHeader: {
-    type: Object as PropType<{ ghost: boolean }>,
-  },
-  componentSize: {
-    type: String as PropType<SizeType>,
-  },
-  direction: {
-    type: String as PropType<'ltr' | 'rtl'>,
-  },
-  space: {
-    type: Object as PropType<{ size: SizeType | number }>,
-  },
-  virtual: PropTypes.looseBool,
-  dropdownMatchSelectWidth: { type: [Number, Boolean], default: true },
-  form: {
-    type: Object as PropType<{ requiredMark?: RequiredMark }>,
-  },
-  // internal use
-  notUpdateGlobalConfig: Boolean,
-};
-
-export type ConfigProviderProps = Partial<ExtractPropTypes<typeof configProviderProps>>;
-
 const ConfigProvider = defineComponent({
   name: 'AConfigProvider',
   inheritAttrs: false,
-  props: configProviderProps,
+  props: configProviderProps(),
   setup(props, { slots }) {
     const getPrefixCls = (suffixCls?: string, customizePrefixCls?: string) => {
       const { prefixCls = 'ant' } = props;
@@ -240,7 +150,24 @@ const ConfigProvider = defineComponent({
         Object.assign(globalConfigByCom, configProvider);
       });
     }
+    const validateMessagesRef = computed(() => {
+      // Additional Form provider
+      let validateMessages: ValidateMessages = {
+        ...defaultLocale.Form?.defaultValidateMessages,
+      };
 
+      if (props.locale) {
+        validateMessages =
+          props.locale.Form?.defaultValidateMessages ||
+          defaultLocale.Form?.defaultValidateMessages ||
+          {};
+      }
+      if (props.form && props.form.validateMessages) {
+        validateMessages = { ...validateMessages, ...props.form.validateMessages };
+      }
+      return validateMessages;
+    });
+    useProvideGlobalForm({ validateMessages: validateMessagesRef });
     provide('configProvider', configProvider);
 
     const renderProvider = (legacyLocale: Locale) => {

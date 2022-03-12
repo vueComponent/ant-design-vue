@@ -13,6 +13,7 @@ function resolve(moduleName) {
 
 // We need hack the require to ensure use package module first
 // For example, `typescript` is required by `gulp-typescript` but provided by `antd`
+// we do not need for ant-design-vue
 let injected = false;
 function injectRequire() {
   if (injected) return;
@@ -45,9 +46,35 @@ function getConfig() {
   return {};
 }
 
+/**
+ * 是否存在可用的browserslist config
+ * https://github.com/browserslist/browserslist#queries
+ * @returns
+ */
+function isThereHaveBrowserslistConfig() {
+  try {
+    const packageJson = require(getProjectPath('package.json'));
+    if (packageJson.browserslist) {
+      return true;
+    }
+  } catch (e) {
+    //
+  }
+  if (fs.existsSync(getProjectPath('.browserslistrc'))) {
+    return true;
+  }
+  if (fs.existsSync(getProjectPath('browserslist'))) {
+    return true;
+  }
+  // parent项目的配置支持，需要再补充
+  // ROWSERSLIST ROWSERSLIST_ENV 变量的形式，需要再补充。
+  return false;
+}
+
 module.exports = {
   getProjectPath,
   resolve,
   injectRequire,
   getConfig,
+  isThereHaveBrowserslistConfig,
 };

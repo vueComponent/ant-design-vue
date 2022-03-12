@@ -32,7 +32,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/9Ltop8JwH/Breadcrumb.svg
 
 #### 事件
 
-| 事件名称 | 说明     | 回调参数             | 版本 |
+| 事件名称 | 说明     | 回调参数             | 版本 |       |
 | -------- | -------- | -------------------- | ---- | ----- |
 | click    | 单击事件 | (e:MouseEvent)=>void | -    | 1.5.0 |
 

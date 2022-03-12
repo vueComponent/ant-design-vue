@@ -10,7 +10,7 @@ import ListBody from './ListBody';
 import type { VNode, VNodeTypes, ExtractPropTypes, PropType } from 'vue';
 import { watchEffect, computed, defineComponent, ref } from 'vue';
 import type { RadioChangeEvent } from '../radio/interface';
-import type { TransferItem } from './index';
+import type { TransferDirection, TransferItem } from './index';
 
 const defaultRender = () => null;
 
@@ -42,7 +42,7 @@ export const transferListProps = {
   itemsUnit: PropTypes.string,
   renderList: PropTypes.any,
   disabled: PropTypes.looseBool,
-  direction: PropTypes.string,
+  direction: String as PropType<TransferDirection>,
   showSelectAll: PropTypes.looseBool,
   remove: PropTypes.string,
   selectAll: PropTypes.string,
@@ -141,9 +141,9 @@ export default defineComponent({
       );
     };
 
-    const getCheckBox = (showSelectAll: boolean, disabled?: boolean, prefixCls?: string) => {
+    const getCheckBox = ({ disabled, prefixCls }: { disabled?: boolean; prefixCls?: string }) => {
       const checkedAll = checkStatus.value === 'all';
-      const checkAllCheckbox = showSelectAll !== false && (
+      const checkAllCheckbox = (
         <Checkbox
           disabled={disabled}
           checked={checkedAll}
@@ -267,7 +267,7 @@ export default defineComponent({
         renderList,
         onItemSelectAll,
         onItemRemove,
-        showSelectAll,
+        showSelectAll = true,
         showRemove,
         pagination,
       } = props;
@@ -293,8 +293,7 @@ export default defineComponent({
 
       const listFooter = footerDom ? <div class={`${prefixCls}-footer`}>{footerDom}</div> : null;
 
-      const checkAllCheckbox =
-        !showRemove && !pagination && getCheckBox(showSelectAll, disabled, prefixCls);
+      const checkAllCheckbox = !showRemove && !pagination && getCheckBox({ disabled, prefixCls });
 
       let menu = null;
       if (showRemove) {
@@ -303,6 +302,7 @@ export default defineComponent({
             {/* Remove Current Page */}
             {pagination && (
               <Menu.Item
+                key="removeCurrent"
                 onClick={() => {
                   const pageKeys = getEnabledItemKeys(
                     (defaultListBodyRef.value.items || []).map(entity => entity.item),
@@ -316,6 +316,7 @@ export default defineComponent({
 
             {/* Remove All */}
             <Menu.Item
+              key="removeAll"
               onClick={() => {
                 onItemRemove?.(enabledItemKeys.value);
               }}
@@ -328,6 +329,7 @@ export default defineComponent({
         menu = (
           <Menu>
             <Menu.Item
+              key="selectAll"
               onClick={() => {
                 const keys = enabledItemKeys.value;
                 onItemSelectAll(getNewSelectKeys(keys, []));
@@ -348,6 +350,7 @@ export default defineComponent({
               </Menu.Item>
             )}
             <Menu.Item
+              key="selectInvert"
               onClick={() => {
                 let availableKeys: string[];
                 if (pagination) {
@@ -387,8 +390,12 @@ export default defineComponent({
       return (
         <div class={listCls} style={attrs.style}>
           <div class={`${prefixCls}-header`}>
-            {checkAllCheckbox}
-            {dropdown}
+            {showSelectAll ? (
+              <>
+                {checkAllCheckbox}
+                {dropdown}
+              </>
+            ) : null}
             <span class={`${prefixCls}-header-selected`}>
               <span>{getSelectAllLabel(checkedKeys.length, filteredItems.value.length)}</span>
               <span class={`${prefixCls}-header-title`}>{slots.titleText?.()}</span>

@@ -20,11 +20,12 @@ function ColGroup<RecordType>({ colWidths, columns, columCount }: ColGroupProps<
     const additionalProps = column && column[INTERNAL_COL_DEFINE];
 
     if (width || additionalProps || mustInsert) {
+      const { columnType, ...restAdditionalProps } = additionalProps || {};
       cols.unshift(
         <col
           key={i}
           style={{ width: typeof width === 'number' ? `${width}px` : width }}
-          {...additionalProps}
+          {...restAdditionalProps}
         />,
       );
       mustInsert = true;

@@ -10,9 +10,15 @@ A versatile menu for navigation.
 
 ## When To Use
 
-Navigation is an important part of any website, as a good navigation setup allows users to move around the site quickly and efficiently. Ant Design offers top and side navigation options. Top navigation provides all the categories and functions of the website. Side navigation provides the multi-level structure of the website.
+Navigation is an important part of any website, as a good navigation setup allows users to move around the site quickly and efficiently. Ant Design offers two navigation options: top and side. Top navigation provides all the categories and functions of the website. Side navigation provides the multi-level structure of the website.
 
 More layouts with navigation: [Layout](/components/layout).
+
+## Notes for developers
+
+- Menu is rendered as a `ul` element, so it only supports [`li` and `script-supporting` elements](https://html.spec.whatwg.org/multipage/grouping-content.html#the-ul-element) as children nodes。Your customized node should be wrapped by `Menu.Item`.
+- Menu needs to collect its node structure, so its children should be `Menu.*` or encapsulated HOCs.
+- Must set unique key for `SubMenu`
 
 ## API
 
@@ -37,13 +43,13 @@ More layouts with navigation: [Layout](/components/layout).
 | mode | type of the menu; `vertical`, `horizontal`, and `inline` modes are supported | `vertical` \| `horizontal` \| `inline` | `vertical` |
 | multiple | Allow selection of multiple items | boolean | false |
 | openKeys(v-model) | array with the keys of currently opened sub menus | string\[] |  |
+| overflowedIndicator | Customized icon when menu is collapsed | DOM | `<span>···</span>` |
 | selectable | allow selecting menu items | boolean | true |
 | selectedKeys(v-model) | array with the keys of currently selected menu items | string\[] |  |
 | style | style of the root node | object |  |
 | subMenuCloseDelay | delay time to hide submenu when mouse leave, unit: second | number | 0.1 |
 | subMenuOpenDelay | delay time to show submenu when mouse enter, unit: second | number | 0 |
 | theme | color theme of the menu | string: `light` `dark` | `light` |
-| overflowedIndicator | Customized icon when menu is collapsed | DOM | `<span>···</span>` |
 | triggerSubMenuAction | method of trigger submenu | `click` \| `hover` | `hover` |
 
 ### Menu Events
@@ -67,11 +73,11 @@ More layouts with navigation: [Layout](/components/layout).
 
 | Param          | Description                         | Type         | Default value | Version |
 | -------------- | ----------------------------------- | ------------ | ------------- | ------- |
-| popupClassName | Sub-menu class name                 | string       |               | 1.5.0   |
 | disabled       | whether sub menu is disabled or not | boolean      | false         |         |
-| key            | Unique ID of the sub menu, required | string       |               |         |
-| title          | title of the sub menu               | string\|slot |               |         |
 | expandIcon     | Customized expandIcon               | slot         | arrow icon    | ｜      |
+| key            | Unique ID of the sub menu, required | string       |               |         |
+| popupClassName | Sub-menu class name                 | string       |               | 1.5.0   |
+| title          | title of the sub menu               | string\|slot |               |         |
 
 The children of Menu.SubMenu must be `MenuItem` or `SubMenu`.
 
@@ -95,3 +101,13 @@ The children of Menu.ItemGroup must be `MenuItem`.
 ### Menu.Divider
 
 Divider line in between menu items, only used in vertical popup Menu or Dropdown Menu.
+
+| Param  | Description            | Type    | Default value | Version |
+| ------ | ---------------------- | ------- | ------------- | ------- |
+| dashed | Whether line is dashed | boolean | false         | 4.17.0  |
+
+## FAQ
+
+### Why will Menu's children be rendered twice?
+
+Menu collects structure info with twice-render to support HOC usage. Merging into one render may cause the logic to become much more complex. Contributions to help improve the collection logic are welcomed.

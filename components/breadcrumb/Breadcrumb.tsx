@@ -66,9 +66,9 @@ export default defineComponent({
       return path;
     };
 
-    const addChildPath = (paths: string[], childPath = '', params: unknown) => {
+    const addChildPath = (paths: string[], childPath: string, params: unknown) => {
       const originalPaths = [...paths];
-      const path = getPath(childPath, params);
+      const path = getPath(childPath || '', params);
       if (path) {
         originalPaths.push(path);
       }

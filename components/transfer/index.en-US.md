@@ -20,14 +20,14 @@ One or more elements can be selected from either column, one click on the proper
 
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
-| dataSource | Used for setting the source data. The elements that are part of this array will be present the left column. Except the elements whose keys are included in `targetKeys` prop. | \[{key: string.isRequired,title: string.isRequired,description: string,disabled: bool}\] | \[] |  |
+| dataSource | Used for setting the source data. The elements that are part of this array will be present the left column. Except the elements whose keys are included in `targetKeys` prop. | \[{key: string.isRequired,title: string.isRequired,description: string,disabled: bool}] | \[] |  |
 | disabled | Whether disabled transfer | boolean | false |  |
 | filterOption | A function to determine whether an item should show in search result list | (inputValue, option): boolean |  |  |
 | footer | customize the progress dot by setting a scoped slot | slot="footer" slot-scope="props" |  |  |
-| listStyle | A custom CSS style used for rendering the transfer columns. | object |  |  |
+| listStyle | A custom CSS style used for rendering the transfer columns. | CSSProperties |  |  |
 | locale | i18n text including filter, empty text, item unit, etc | object | `{ itemUnit: 'item', itemsUnit: 'items', notFoundContent: 'The list is empty', searchPlaceholder: 'Search here' }` |  |
 | oneWay | Display as single direction style | boolean | false | 3.0.0 |
-| operations | A set of operations that are sorted from top to bottom. | string\[] | \['>', '<'] |  |
+| operations | A set of operations that are sorted from top to bottom. | string\[] | \['>', '&lt;'] |  |
 | operationStyle | A custom CSS style used for rendering the operations column | CSSProperties | - | 3.0.0 |
 | pagination | Use pagination. Not work in render props | boolean \| { pageSize: number } | false | 3.0.0 |
 | render | The function to generate the item shown on a column. Based on an record (element of the dataSource array), this function should return a element which is generated from that record. Also, it can return a plain object with `value` and `label`, `label` is a element and `value` is for title | Function(record) \| slot |  |  |
@@ -61,14 +61,14 @@ Transfer accept `children` to customize render list, using follow props:
 }
 ```
 
-| Property        | Description             | Type                                | Version |
-| --------------- | ----------------------- | ----------------------------------- | ------- |
-| direction       | List render direction   | 'left' \| 'right'                   |         |
-| disabled        | Disable list or not     | boolean                             |         |
-| filteredItems   | Filtered items          | TransferItem[]                      |         |
-| onItemSelect    | Select item             | (key: string, selected: boolean)    |         |
-| onItemSelectAll | Select a group of items | (keys: string[], selected: boolean) |         |
-| selectedKeys    | Selected items          | string[]                            |         |
+| Property        | Description             | Type                                 | Version |
+| --------------- | ----------------------- | ------------------------------------ | ------- |
+| direction       | List render direction   | 'left' \| 'right'                    |         |
+| disabled        | Disable list or not     | boolean                              |         |
+| filteredItems   | Filtered items          | TransferItem\[]                      |         |
+| selectedKeys    | Selected items          | string\[]                            |         |
+| onItemSelect    | Select item             | (key: string, selected: boolean)     |         |
+| onItemSelectAll | Select a group of items | (keys: string\[], selected: boolean) |         |
 
 #### example
 

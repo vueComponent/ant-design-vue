@@ -89,19 +89,23 @@ cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 | inputReadOnly | 设置输入框为只读（避免在移动设备上打开虚拟键盘） | boolean | false |  |
 | locale | 国际化配置 | object | [默认配置](https://github.com/vueComponent/ant-design-vue/blob/next/components/date-picker/locale/example.json) | - |
 | mode | 日期面板的状态 | `time` \| `date` \| `month` \| `year` \| `decade` | - |  |
+| nextIcon | 自定义下一个图标 | slot | - | 3.0 |
 | open | 控制弹层是否展开 | boolean | - |  |
 | picker | 设置选择器类型 | `date` \| `week` \| `month` \| `quarter` \| `year` | `date` | `quarter` |
 | placeholder | 输入框提示文字 | string \| \[string, string] | - |  |
 | popupStyle | 额外的弹出日历样式 | CSSProperties | {} |  |
+| prevIcon | 自定义上一个图标 | slot | - | 3.0 |
 | size | 输入框大小，`large` 高度为 40px，`small` 为 24px，默认是 32px | `large` \| `middle` \| `small` | - |  |
 | suffixIcon | 自定义的选择框后缀图标 | v-slot:suffixIcon | - |  |
+| superNextIcon | 自定义 `<<` 切换图标 | slot | - | 3.0 |
+| superPrevIcon | 自定义 `>>` 切换图标 | slot | - | 3.0 |
 | valueFormat | 可选，绑定值的格式，对 value、defaultValue、defaultPickerValue 起作用。不指定则绑定值为 dayjs 对象 | string，[具体格式](https://day.js.org/docs/zh-CN/display/format) | - |  |
 
 ### 共有的事件
 
-| 事件名称    | 说明                     | 回调参数              |
+| 事件名称    | 说明                     | 回调参数              |     |
 | ----------- | ------------------------ | --------------------- | --- |
-| openChange  | 弹出日历和关闭日历的回调 | function(status)      |
+| openChange  | 弹出日历和关闭日历的回调 | function(status)      |     |
 | panelChange | 日期面板变化时的回调     | function(value, mode) | -   |
 
 ### 共同的方法
@@ -178,9 +182,9 @@ cover: https://gw.alipayobjects.com/zos/alicdn/RT_USzA48/DatePicker.svg
 
 | 事件名称 | 说明 | 回调参数 |
 | --- | --- | --- |
-| calendarChange | 待选日期发生变化的回调 | function(dates: \[dayjs, dayjs\] \| \[string, string\], dateStrings: \[string, string\], info: { range:`start`\|`end` }) |
-| change | 日期范围发生变化的回调 | function(dates: \[dayjs, dayjs\] \| \[string, string\], dateStrings: \[string, string\]) |
-| ok | 点击确定按钮的回调 | function(dates: \[dayjs, dayjs\] \| \[string, string\]) |
+| calendarChange | 待选日期发生变化的回调 | function(dates: \[dayjs, dayjs] \| \[string, string], dateStrings: \[string, string], info: { range:`start`\|`end` }) |
+| change | 日期范围发生变化的回调 | function(dates: \[dayjs, dayjs] \| \[string, string], dateStrings: \[string, string]) |
+| ok | 点击确定按钮的回调 | function(dates: \[dayjs, dayjs] \| \[string, string]) |
 
 ## FAQ
 

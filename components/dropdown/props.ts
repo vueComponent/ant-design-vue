@@ -17,8 +17,15 @@ type Align = {
   useCssBottom?: boolean;
   useCssTransform?: boolean;
 };
+
+export type DropdownArrowOptions = {
+  pointAtCenter?: boolean;
+};
 const dropdownProps = () => ({
-  arrow: PropTypes.looseBool,
+  arrow: {
+    type: [Boolean, Object] as PropType<boolean | DropdownArrowOptions>,
+    default: undefined,
+  },
   trigger: {
     type: [Array, String] as PropType<
       ('click' | 'hover' | 'contextmenu')[] | 'click' | 'hover' | 'contextmenu'
@@ -32,7 +39,16 @@ const dropdownProps = () => ({
   prefixCls: PropTypes.string,
   transitionName: PropTypes.string,
   placement: PropTypes.oneOf(
-    tuple('topLeft', 'topCenter', 'topRight', 'bottomLeft', 'bottomCenter', 'bottomRight'),
+    tuple(
+      'topLeft',
+      'topCenter',
+      'top',
+      'topRight',
+      'bottomLeft',
+      'bottomCenter',
+      'bottom',
+      'bottomRight',
+    ),
   ),
   overlayClassName: PropTypes.string,
   overlayStyle: PropTypes.style,
@@ -41,6 +57,7 @@ const dropdownProps = () => ({
   mouseLeaveDelay: PropTypes.number,
   openClassName: PropTypes.string,
   minOverlayWidthMatchTrigger: PropTypes.looseBool,
+  destroyPopupOnHide: PropTypes.looseBool,
   onVisibleChange: {
     type: Function as PropType<(val: boolean) => void>,
   },
@@ -49,17 +66,18 @@ const dropdownProps = () => ({
   },
 });
 
-const ButtonTypesProps = buttonTypes();
+const buttonTypesProps = buttonTypes();
 const dropdownButtonProps = () => ({
   ...dropdownProps(),
-  type: ButtonTypesProps.type,
+  type: buttonTypesProps.type,
   size: PropTypes.oneOf(tuple('small', 'large')),
-  htmlType: ButtonTypesProps.htmlType,
+  htmlType: buttonTypesProps.htmlType,
   href: PropTypes.string,
   disabled: PropTypes.looseBool,
   prefixCls: PropTypes.string,
   icon: PropTypes.any,
   title: PropTypes.string,
+  loading: buttonTypesProps.loading,
   onClick: {
     type: Function as PropType<MouseEventHandler>,
   },

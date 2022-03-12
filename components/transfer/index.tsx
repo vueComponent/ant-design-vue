@@ -7,13 +7,13 @@ import List from './list';
 import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
-import type { RenderEmptyHandler } from '../config-provider';
 import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { TransferListBodyProps } from './ListBody';
 import type { PaginationType } from './interface';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import type { RenderEmptyHandler } from '../config-provider/renderEmpty';
 
 export type { TransferListProps } from './list';
 export type { TransferOperationProps } from './operation';
@@ -351,7 +351,7 @@ const Transfer = defineComponent({
             renderList={children}
             onScroll={handleLeftScroll}
             disabled={disabled}
-            direction="left"
+            direction={direction.value === 'rtl' ? 'right' : 'left'}
             showSelectAll={showSelectAll}
             selectAllLabel={selectAllLabels[0] || slots.leftSelectAllLabel}
             pagination={mergedPagination}
@@ -389,7 +389,7 @@ const Transfer = defineComponent({
             renderList={children}
             onScroll={handleRightScroll}
             disabled={disabled}
-            direction="right"
+            direction={direction.value === 'rtl' ? 'left' : 'right'}
             showSelectAll={showSelectAll}
             selectAllLabel={selectAllLabels[1] || slots.rightSelectAllLabel}
             showRemove={oneWay}

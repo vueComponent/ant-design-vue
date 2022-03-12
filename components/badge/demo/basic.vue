@@ -1,7 +1,7 @@
 <docs>
 ---
 order: 0
-title: 
+title:
   zh-CN: 基本
   en-US: Basic
 ---
@@ -17,16 +17,16 @@ Simplest Usage. Badge will be hidden when `count` is `0`, but we can use `showZe
 </docs>
 <template>
   <a-badge count="5">
-    <a href="#" class="head-example" />
+    <a-avatar shape="square" size="large" />
   </a-badge>
   <a-badge count="0" show-zero>
-    <a href="#" class="head-example" />
+    <a-avatar shape="square" size="large" />
   </a-badge>
   <a-badge>
     <template #count>
       <clock-circle-outlined style="color: #f5222d" />
     </template>
-    <a href="#" class="head-example"></a>
+    <a-avatar shape="square" size="large" />
   </a-badge>
 </template>
 

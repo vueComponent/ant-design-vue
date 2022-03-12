@@ -240,73 +240,75 @@ const Preview = defineComponent({
       removeListeners();
     });
 
-    return () => (
-      <Dialog
-        {...attrs}
-        transitionName="zoom"
-        maskTransitionName="fade"
-        closable={false}
-        keyboard
-        prefixCls={props.prefixCls}
-        onClose={onClose}
-        afterClose={onAfterClose}
-        visible={props.visible}
-        wrapClassName={wrapClassName}
-        getContainer={props.getContainer}
-      >
-        <ul class={`${props.prefixCls}-operations`}>
-          {tools.map(({ icon: IconType, onClick, type, disabled }) => (
-            <li
-              class={classnames(toolClassName, {
-                [`${props.prefixCls}-operations-operation-disabled`]: disabled && disabled?.value,
-              })}
-              onClick={onClick}
-              key={type}
-            >
-              <IconType class={iconClassName} />
-            </li>
-          ))}
-        </ul>
-        <div
-          class={`${props.prefixCls}-img-wrapper`}
-          style={{
-            transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
-          }}
+    return () => {
+      return (
+        <Dialog
+          {...attrs}
+          transitionName="zoom"
+          maskTransitionName="fade"
+          closable={false}
+          keyboard
+          prefixCls={props.prefixCls}
+          onClose={onClose}
+          afterClose={onAfterClose}
+          visible={props.visible}
+          wrapClassName={wrapClassName}
+          getContainer={props.getContainer}
         >
-          <img
-            onMousedown={onMouseDown}
-            ref={imgRef}
-            class={`${props.prefixCls}-img`}
-            src={combinationSrc.value}
-            alt={props.alt}
+          <ul class={`${props.prefixCls}-operations`}>
+            {tools.map(({ icon: IconType, onClick, type, disabled }) => (
+              <li
+                class={classnames(toolClassName, {
+                  [`${props.prefixCls}-operations-operation-disabled`]: disabled && disabled?.value,
+                })}
+                onClick={onClick}
+                key={type}
+              >
+                <IconType class={iconClassName} />
+              </li>
+            ))}
+          </ul>
+          <div
+            class={`${props.prefixCls}-img-wrapper`}
             style={{
-              transform: `scale3d(${scale.value}, ${scale.value}, 1) rotate(${rotate.value}deg)`,
+              transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
             }}
-          />
-        </div>
-        {showLeftOrRightSwitches.value && (
-          <div
-            class={classnames(`${props.prefixCls}-switch-left`, {
-              [`${props.prefixCls}-switch-left-disabled`]: currentPreviewIndex.value <= 0,
-            })}
-            onClick={onSwitchLeft}
           >
-            <LeftOutlined />
+            <img
+              onMousedown={onMouseDown}
+              ref={imgRef}
+              class={`${props.prefixCls}-img`}
+              src={combinationSrc.value}
+              alt={props.alt}
+              style={{
+                transform: `scale3d(${scale.value}, ${scale.value}, 1) rotate(${rotate.value}deg)`,
+              }}
+            />
           </div>
-        )}
-        {showLeftOrRightSwitches.value && (
-          <div
-            class={classnames(`${props.prefixCls}-switch-right`, {
-              [`${props.prefixCls}-switch-right-disabled`]:
-                currentPreviewIndex.value >= previewGroupCount.value - 1,
-            })}
-            onClick={onSwitchRight}
-          >
-            <RightOutlined />
-          </div>
-        )}
-      </Dialog>
-    );
+          {showLeftOrRightSwitches.value && (
+            <div
+              class={classnames(`${props.prefixCls}-switch-left`, {
+                [`${props.prefixCls}-switch-left-disabled`]: currentPreviewIndex.value <= 0,
+              })}
+              onClick={onSwitchLeft}
+            >
+              <LeftOutlined />
+            </div>
+          )}
+          {showLeftOrRightSwitches.value && (
+            <div
+              class={classnames(`${props.prefixCls}-switch-right`, {
+                [`${props.prefixCls}-switch-right-disabled`]:
+                  currentPreviewIndex.value >= previewGroupCount.value - 1,
+              })}
+              onClick={onSwitchRight}
+            >
+              <RightOutlined />
+            </div>
+          )}
+        </Dialog>
+      );
+    };
   },
 });
 

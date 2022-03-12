@@ -97,7 +97,7 @@ const TreeSelect = defineComponent({
       devWarning(
         props.multiple !== false || !props.treeCheckable,
         'TreeSelect',
-        '`multiple` will alway be `true` when `treeCheckable` is true',
+        '`multiple` will always be `true` when `treeCheckable` is true',
       );
       devWarning(
         props.replaceFields === undefined,
@@ -108,7 +108,6 @@ const TreeSelect = defineComponent({
 
     const formItemContext = useInjectFormItemContext();
     const {
-      configProvider,
       prefixCls,
       renderEmpty,
       direction,
@@ -125,12 +124,8 @@ const TreeSelect = defineComponent({
     const choiceTransitionName = computed(() =>
       getTransitionName(rootPrefixCls.value, '', props.choiceTransitionName),
     );
-    const treePrefixCls = computed(() =>
-      configProvider.getPrefixCls('select-tree', props.prefixCls),
-    );
-    const treeSelectPrefixCls = computed(() =>
-      configProvider.getPrefixCls('tree-select', props.prefixCls),
-    );
+    const treePrefixCls = computed(() => getPrefixCls('select-tree', props.prefixCls));
+    const treeSelectPrefixCls = computed(() => getPrefixCls('tree-select', props.prefixCls));
 
     const mergedDropdownClassName = computed(() =>
       classNames(props.dropdownClassName, `${treeSelectPrefixCls.value}-dropdown`, {
@@ -239,6 +234,7 @@ const TreeSelect = defineComponent({
           class={mergedClassName}
           listHeight={listHeight}
           listItemHeight={listItemHeight}
+          treeLine={!!treeLine}
           inputIcon={suffixIcon}
           multiple={multiple}
           removeIcon={removeIcon}

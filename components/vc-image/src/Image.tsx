@@ -1,4 +1,4 @@
-import type { ImgHTMLAttributes, CSSProperties } from 'vue';
+import type { ImgHTMLAttributes, CSSProperties, PropType } from 'vue';
 import { ref, watch, defineComponent, computed, onMounted } from 'vue';
 import isNumber from 'lodash-es/isNumber';
 import cn from '../../_util/classNames';
@@ -29,21 +29,17 @@ export interface ImagePropsType extends Omit<ImgHTMLAttributes, 'placeholder' | 
   preview?: boolean | ImagePreviewType;
 }
 export const imageProps = {
-  src: PropTypes.string,
-  wrapperClassName: PropTypes.string,
+  src: String,
+  wrapperClassName: String,
   wrapperStyle: PropTypes.style,
-  prefixCls: PropTypes.string,
-  previewPrefixCls: PropTypes.string,
+  prefixCls: String,
+  previewPrefixCls: String,
   placeholder: PropTypes.any,
-  fallback: PropTypes.string,
-  preview: PropTypes.oneOfType([
-    PropTypes.looseBool,
-    PropTypes.shape({
-      visible: PropTypes.bool,
-      onVisibleChange: PropTypes.func,
-      getContainer: PropTypes.oneOfType([PropTypes.func, PropTypes.looseBool, PropTypes.string]),
-    }).loose,
-  ]).def(true),
+  fallback: String,
+  preview: {
+    type: [Boolean, Object] as PropType<boolean | ImagePreviewType>,
+    default: true as boolean | ImagePreviewType,
+  },
 };
 type ImageStatus = 'normal' | 'error' | 'loading';
 

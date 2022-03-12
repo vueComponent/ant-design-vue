@@ -4,7 +4,9 @@ exports[`Collapse should support remove expandIcon 1`] = `
 <div class="ant-collapse ant-collapse-icon-position-left">
   <div class="ant-collapse-item">
     <div class="ant-collapse-header" role="button" tabindex="0" aria-expanded="false">
-      <!---->header
+      <div>
+        <!---->
+      </div>header
       <!---->
     </div>
     <!---->

@@ -80,10 +80,10 @@ export default function usePagination(
     return mP;
   });
 
-  const refreshPagination = (current = 1, pageSize?: number) => {
+  const refreshPagination = (current?: number, pageSize?: number) => {
     if (pagination.value === false) return;
     setInnerPagination({
-      current,
+      current: current ?? 1,
       pageSize: pageSize || mergedPagination.value.pageSize,
     });
   };

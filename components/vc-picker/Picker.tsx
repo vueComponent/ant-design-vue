@@ -28,7 +28,7 @@ import usePickerInput from './hooks/usePickerInput';
 import useTextValueMapping from './hooks/useTextValueMapping';
 import useValueTexts from './hooks/useValueTexts';
 import useHoverValue from './hooks/useHoverValue';
-import type { CSSProperties, Ref } from 'vue';
+import type { CSSProperties, HTMLAttributes, Ref } from 'vue';
 import { computed, defineComponent, ref, toRef, watch } from 'vue';
 import type { ChangeEvent, FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import type { VueNode } from '../_util/type';
@@ -38,6 +38,7 @@ import { warning } from '../vc-util/warning';
 import classNames from '../_util/classNames';
 import type { SharedTimeProps } from './panels/TimePanel';
 import { useProviderTrigger } from '../vc-trigger/context';
+import { legacyPropsWarning } from './utils/warnUtil';
 
 export type PickerRefConfig = {
   focus: () => void;
@@ -72,6 +73,7 @@ export type PickerSharedProps<DateType> = {
   superNextIcon?: VueNode;
   getPopupContainer?: (node: HTMLElement) => HTMLElement;
   panelRender?: (originPanel: VueNode) => VueNode;
+  inputRender?: (props: HTMLAttributes) => VueNode;
 
   // Events
   onChange?: (value: DateType | null, dateString: string) => void;
@@ -167,6 +169,7 @@ function Picker<DateType>() {
       'placeholder',
       'getPopupContainer',
       'panelRender',
+      'inputRender',
       'onChange',
       'onOpenChange',
       'onFocus',
@@ -200,15 +203,19 @@ function Picker<DateType>() {
       const needConfirmButton = computed(
         () => (picker.value === 'date' && !!props.showTime) || picker.value === 'time',
       );
-
+      // ============================ Warning ============================
+      if (process.env.NODE_ENV !== 'production') {
+        legacyPropsWarning(props);
+      }
       // ============================= State =============================
       const formatList = computed(() =>
         toArray(getDefaultFormat(props.format, picker.value, props.showTime, props.use12Hours)),
       );
 
       // Panel ref
-      const panelDivRef = ref(null);
-      const inputDivRef = ref(null);
+      const panelDivRef = ref<HTMLDivElement>(null);
+      const inputDivRef = ref<HTMLDivElement>(null);
+      const containerRef = ref<HTMLDivElement>(null);
 
       // Real value
       const [mergedValue, setInnerValue] = useMergedState<DateType>(null, {
@@ -318,9 +325,17 @@ function Picker<DateType>() {
         triggerOpen,
         forwardKeydown,
         isClickOutside: target =>
-          !elementsContains([panelDivRef.value, inputDivRef.value], target as HTMLElement),
+          !elementsContains(
+            [panelDivRef.value, inputDivRef.value, containerRef.value],
+            target as HTMLElement,
+          ),
         onSubmit: () => {
-          if (props.disabledDate && props.disabledDate(selectedValue.value)) {
+          if (
+            // When user typing disabledDate with keyboard and enter, this value will be empty
+            !selectedValue.value ||
+            // Normal disabled check
+            (props.disabledDate && props.disabledDate(selectedValue.value))
+          ) {
             return false;
           }
 
@@ -520,6 +535,31 @@ function Picker<DateType>() {
           );
         }
 
+        const mergedInputProps: HTMLAttributes = {
+          id,
+          tabindex,
+          disabled,
+          readonly: inputReadOnly || typeof formatList.value[0] === 'function' || !typing.value,
+          value: hoverValue.value || text.value,
+          onInput: (e: ChangeEvent) => {
+            triggerTextChange(e.target.value);
+          },
+          autofocus,
+          placeholder,
+          ref: inputRef,
+          title: text.value,
+          ...inputProps.value,
+          size: getInputSize(picker, formatList.value[0], generateConfig),
+          ...getDataOrAriaProps(props),
+          autocomplete,
+        };
+
+        const inputNode = props.inputRender ? (
+          props.inputRender(mergedInputProps)
+        ) : (
+          <input {...mergedInputProps} />
+        );
+
         // ============================ Warning ============================
         if (process.env.NODE_ENV !== 'production') {
           warning(
@@ -547,6 +587,7 @@ function Picker<DateType>() {
             }}
           >
             <div
+              ref={containerRef}
               class={classNames(prefixCls, attrs.class, {
                 [`${prefixCls}-disabled`]: disabled,
                 [`${prefixCls}-focused`]: focused.value,
@@ -566,26 +607,7 @@ function Picker<DateType>() {
                 })}
                 ref={inputDivRef}
               >
-                <input
-                  id={id}
-                  tabindex={tabindex}
-                  disabled={disabled}
-                  readonly={
-                    inputReadOnly || typeof formatList.value[0] === 'function' || !typing.value
-                  }
-                  value={hoverValue.value || text.value}
-                  onInput={(e: ChangeEvent) => {
-                    triggerTextChange(e.target.value);
-                  }}
-                  autofocus={autofocus}
-                  placeholder={placeholder}
-                  ref={inputRef}
-                  title={text.value}
-                  {...inputProps.value}
-                  size={getInputSize(picker, formatList.value[0], generateConfig)}
-                  {...getDataOrAriaProps(props)}
-                  autocomplete={autocomplete}
-                />
+                {inputNode}
                 {suffixNode}
                 {clearNode}
               </div>

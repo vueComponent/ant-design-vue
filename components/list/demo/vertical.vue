@@ -60,7 +60,7 @@ for (let i = 0; i < 23; i++) {
   listData.push({
     href: 'https://www.antdv.com/',
     title: `ant design vue part ${i}`,
-    avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+    avatar: 'https://joeschmoe.io/api/v1/random',
     description:
       'Ant Design, a design language for background applications, is refined by Ant UED Team.',
     content:

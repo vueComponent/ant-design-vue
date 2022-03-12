@@ -98,6 +98,7 @@ export interface ModalFuncProps {
   okType?: LegacyButtonType;
   cancelText?: string | (() => VueNode) | VueNode;
   icon?: (() => VueNode) | VueNode;
+  wrapClassName?: String;
   /* Deprecated */
   iconType?: string;
   mask?: boolean;
@@ -108,7 +109,7 @@ export interface ModalFuncProps {
   maskStyle?: CSSProperties;
   type?: 'info' | 'success' | 'error' | 'warn' | 'warning' | 'confirm';
   keyboard?: boolean;
-  getContainer?: string | HTMLElement | getContainerFunc | false;
+  getContainer?: string | HTMLElement | getContainerFunc | false | null;
   autoFocusButton?: null | 'ok' | 'cancel';
   transitionName?: string;
   maskTransitionName?: string;

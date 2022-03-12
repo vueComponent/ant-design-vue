@@ -2,8 +2,8 @@
 ---
 order: 12
 title:
-  zh-CN: 带字数提示的文本域
-  en-US: Textarea with character counting
+  zh-CN: 带字数提示
+  en-US: With character counting
 ---
 
 ## zh-CN
@@ -16,15 +16,20 @@ Show character counting.
 
 </docs>
 <template>
-  <a-textarea v-model:value="value" show-count :maxlength="100" />
+  <a-input v-model:value="value1" show-count :maxlength="20" />
+  <br />
+  <br />
+  <a-textarea v-model:value="value2" show-count :maxlength="100" />
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   setup() {
-    const value = ref<string>('test value');
+    const value1 = ref<string>('test value');
+    const value2 = ref<string>('test value');
     return {
-      value,
+      value1,
+      value2,
     };
   },
 });

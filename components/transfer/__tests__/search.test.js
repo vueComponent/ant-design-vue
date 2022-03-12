@@ -80,7 +80,7 @@ describe('Search', () => {
 
     onSearch.mockReset();
 
-    wrapper.findAll('.ant-transfer-list-search-action')[0].trigger('click');
+    wrapper.findAll('.ant-input-clear-icon')[0].trigger('click');
     expect(onSearch).toBeCalledWith('left', '');
   });
 });

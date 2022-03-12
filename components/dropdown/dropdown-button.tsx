@@ -32,8 +32,9 @@ export default defineComponent({
 
     return () => {
       const {
-        type,
+        type = 'default',
         disabled,
+        loading,
         htmlType,
         class: className = '',
         overlay = slots.overlay?.(),
@@ -47,6 +48,9 @@ export default defineComponent({
         icon = slots.icon?.() || <EllipsisOutlined />,
         mouseEnterDelay,
         mouseLeaveDelay,
+        overlayClassName,
+        overlayStyle,
+        destroyPopupOnHide,
         onClick,
         'onUpdate:visible': _updateVisible,
         ...restProps
@@ -62,12 +66,16 @@ export default defineComponent({
         mouseEnterDelay,
         mouseLeaveDelay,
         visible,
+        overlayClassName,
+        overlayStyle,
+        destroyPopupOnHide,
       };
 
       const leftButton = (
         <Button
           type={type}
           disabled={disabled}
+          loading={loading}
           onClick={onClick}
           htmlType={htmlType}
           href={href}

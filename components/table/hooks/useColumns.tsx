@@ -3,10 +3,13 @@ import { renderSlot } from 'vue';
 import type { Ref } from 'vue';
 import type { ContextSlots } from '../context';
 import type { TransformColumns, ColumnsType } from '../interface';
+import { SELECTION_COLUMN } from './useSelection';
+import { EXPAND_COLUMN } from '../../vc-table';
 
 function fillSlots<RecordType>(columns: ColumnsType<RecordType>, contextSlots: Ref<ContextSlots>) {
   const $slots = contextSlots.value;
   return columns.map(column => {
+    if (column === SELECTION_COLUMN || column === EXPAND_COLUMN) return column;
     const cloneColumn = { ...column };
     const { slots = {} } = cloneColumn;
     cloneColumn.__originColumn__ = column;

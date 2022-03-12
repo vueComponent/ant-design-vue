@@ -22,12 +22,12 @@ A long list can be divided into several pages using `Pagination`, and only one p
 | Property | Description | Type | Default | Version |
 | --- | --- | --- | --- | --- |
 | current(v-model) | current page number | number | - |  |
-| pageSize(v-model) | number of data items per page | number | - |  |
 | defaultCurrent | default initial page number | number | 1 |  |
 | defaultPageSize | default number of data items per page | number | 10 |  |
 | disabled | Disable pagination | boolean | - | 1.5.0 |
 | hideOnSinglePage | Whether to hide pager on single page | boolean | false |  |
 | itemRender | to customize item innerHTML | (page, type: 'page' \| 'prev' \| 'next', originalElement) => vNode \| v-slot | - |  |
+| pageSize(v-model) | number of data items per page | number | - |  |
 | pageSizeOptions | specify the sizeChanger options | string\[] | \['10', '20', '30', '40'] |  |
 | showLessItems | Show less page items | boolean | false | 1.5.0 |
 | showQuickJumper | determine whether you can jump to pages directly | boolean | false |  |
@@ -40,7 +40,7 @@ A long list can be divided into several pages using `Pagination`, and only one p
 
 ### events
 
-| Events Name | Description | Arguments |
+| Events Name | Description | Arguments |  |
 | --- | --- | --- | --- |
 | change | Called when the page number or `pageSize` is changed, and it takes the resulting page number and pageSize as its arguments | Function(page, pageSize) | noop |
 | showSizeChange | a callback function, executed when `pageSize` is changed | Function(current, size) | noop |

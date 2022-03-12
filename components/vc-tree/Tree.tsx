@@ -25,11 +25,11 @@ import DropIndicator from './DropIndicator';
 import {
   computed,
   defineComponent,
-  onMounted,
   onUnmounted,
   reactive,
   ref,
   shallowRef,
+  watch,
   watchEffect,
 } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
@@ -145,34 +145,38 @@ export default defineComponent({
     });
     let init = false; // 处理 defaultXxxx api, 仅仅首次有效
 
-    onMounted(() => {
-      init = true;
-    });
+    watch(
+      [() => props.expandedKeys, () => props.autoExpandParent, keyEntities],
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      ([_newKeys, newAutoExpandParent], [_oldKeys, oldAutoExpandParent]) => {
+        let keys = expandedKeys.value;
+        // ================ expandedKeys =================
+        if (
+          props.expandedKeys !== undefined ||
+          (init && newAutoExpandParent !== oldAutoExpandParent)
+        ) {
+          keys =
+            props.autoExpandParent || (!init && props.defaultExpandParent)
+              ? conductExpandParent(props.expandedKeys, keyEntities.value)
+              : props.expandedKeys;
+        } else if (!init && props.defaultExpandAll) {
+          const cloneKeyEntities = { ...keyEntities.value };
+          delete cloneKeyEntities[MOTION_KEY];
+          keys = Object.keys(cloneKeyEntities).map(key => cloneKeyEntities[key].key);
+        } else if (!init && props.defaultExpandedKeys) {
+          keys =
+            props.autoExpandParent || props.defaultExpandParent
+              ? conductExpandParent(props.defaultExpandedKeys, keyEntities.value)
+              : props.defaultExpandedKeys;
+        }
 
-    // ================ expandedKeys =================
-    watchEffect(() => {
-      let keys = expandedKeys.value;
-      // ================ expandedKeys =================
-      if (props.expandedKeys !== undefined || (init && props.autoExpandParent)) {
-        keys =
-          props.autoExpandParent || (!init && props.defaultExpandParent)
-            ? conductExpandParent(props.expandedKeys, keyEntities.value)
-            : props.expandedKeys;
-      } else if (!init && props.defaultExpandAll) {
-        const cloneKeyEntities = { ...keyEntities.value };
-        delete cloneKeyEntities[MOTION_KEY];
-        keys = Object.keys(cloneKeyEntities).map(key => cloneKeyEntities[key].key);
-      } else if (!init && props.defaultExpandedKeys) {
-        keys =
-          props.autoExpandParent || props.defaultExpandParent
-            ? conductExpandParent(props.defaultExpandedKeys, keyEntities.value)
-            : props.defaultExpandedKeys;
-      }
-
-      if (keys) {
-        expandedKeys.value = keys;
-      }
-    });
+        if (keys) {
+          expandedKeys.value = keys;
+        }
+        init = true;
+      },
+      { immediate: true },
+    );
 
     // ================ flattenNodes =================
     const flattenNodes = computed(() => {

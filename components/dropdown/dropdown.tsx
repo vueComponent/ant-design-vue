@@ -10,6 +10,7 @@ import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 import omit from '../_util/omit';
+import getPlacements from '../tooltip/placements';
 
 export type DropdownProps = Partial<ExtractPropTypes<ReturnType<typeof dropdownProps>>>;
 
@@ -82,10 +83,21 @@ const Dropdown = defineComponent({
     };
 
     const placement = computed(() => {
-      if (props.placement !== undefined) {
-        return props.placement;
+      const placement = props.placement;
+      if (!placement) {
+        return direction.value === 'rtl' ? 'bottomRight' : 'bottomLeft';
       }
-      return direction.value === 'rtl' ? 'bottomRight' : 'bottomLeft';
+
+      if (placement.includes('Center')) {
+        const newPlacement = placement.slice(0, placement.indexOf('Center'));
+        devWarning(
+          !placement.includes('Center'),
+          'Dropdown',
+          `You are using '${placement}' placement in Dropdown, which is deprecated. Try to use '${newPlacement}' instead.`,
+        );
+        return newPlacement;
+      }
+      return placement;
     });
 
     const handleVisibleChange = (val: boolean) => {
@@ -121,10 +133,15 @@ const Dropdown = defineComponent({
       if (triggerActions && triggerActions.indexOf('contextmenu') !== -1) {
         alignPoint = true;
       }
+
+      const builtinPlacements = getPlacements({
+        arrowPointAtCenter: typeof arrow === 'object' && arrow.pointAtCenter,
+      });
       const dropdownProps = omit(
         {
           ...props,
           ...attrs,
+          builtinPlacements,
           overlayClassName: overlayClassNameCustomized,
           arrow,
           alignPoint,

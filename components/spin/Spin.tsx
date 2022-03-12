@@ -15,7 +15,7 @@ export const spinProps = () => ({
   spinning: PropTypes.looseBool,
   size: SpinSize,
   wrapperClassName: PropTypes.string,
-  tip: PropTypes.string,
+  tip: PropTypes.any,
   delay: PropTypes.number,
   indicator: PropTypes.any,
 });
@@ -121,7 +121,12 @@ export default defineComponent({
     },
   },
   render() {
-    const { size, prefixCls: customizePrefixCls, tip, wrapperClassName } = this.$props;
+    const {
+      size,
+      prefixCls: customizePrefixCls,
+      tip = this.$slots.tip?.(),
+      wrapperClassName,
+    } = this.$props;
     const { class: cls, style, ...divProps } = this.$attrs;
     const { getPrefixCls, direction } = this.configProvider;
     const prefixCls = getPrefixCls('spin', customizePrefixCls);

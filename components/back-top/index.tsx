@@ -1,7 +1,6 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import {
   defineComponent,
-  inject,
   nextTick,
   onActivated,
   onBeforeUnmount,
@@ -10,17 +9,16 @@ import {
   ref,
   watch,
   onDeactivated,
-  computed,
 } from 'vue';
 import VerticalAlignTopOutlined from '@ant-design/icons-vue/VerticalAlignTopOutlined';
 import PropTypes from '../_util/vue-types';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import getScroll from '../_util/getScroll';
 import { getTransitionProps, Transition } from '../_util/transition';
-import { defaultConfigProvider } from '../config-provider';
 import scrollTo from '../_util/scrollTo';
 import { withInstall } from '../_util/type';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const backTopProps = {
   visibilityHeight: PropTypes.number.def(400),
@@ -39,7 +37,7 @@ const BackTop = defineComponent({
   props: backTopProps,
   emits: ['click'],
   setup(props, { slots, attrs, emit }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
+    const { prefixCls, direction } = useConfigInject('back-top', props);
     const domRef = ref();
     const state = reactive({
       visible: false,
@@ -113,8 +111,6 @@ const BackTop = defineComponent({
       scrollRemove();
     });
 
-    const prefixCls = computed(() => configProvider.getPrefixCls('back-top', props.prefixCls));
-
     return () => {
       const defaultElement = (
         <div class={`${prefixCls.value}-content`}>
@@ -129,17 +125,18 @@ const BackTop = defineComponent({
         class: {
           [`${prefixCls.value}`]: true,
           [`${attrs.class}`]: attrs.class,
-          [`${prefixCls.value}-rtl`]: configProvider.direction === 'rtl',
+          [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
         },
       };
 
-      const backTopBtn = state.visible ? (
-        <div {...divProps} ref={domRef}>
-          {slots.default?.() || defaultElement}
-        </div>
-      ) : null;
       const transitionProps = getTransitionProps('fade');
-      return <Transition {...transitionProps}>{backTopBtn}</Transition>;
+      return (
+        <Transition {...transitionProps}>
+          <div v-show={state.visible} {...divProps} ref={domRef}>
+            {slots.default?.() || defaultElement}
+          </div>
+        </Transition>
+      );
     };
   },
 });

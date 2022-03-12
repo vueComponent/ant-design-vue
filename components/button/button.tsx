@@ -23,7 +23,6 @@ type Loading = boolean | number;
 
 const rxTwoCNChar = /^[\u4e00-\u9fa5]{2}$/;
 const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
-const props = buttonTypes();
 
 function isUnborderedButtonType(type: ButtonType | undefined) {
   return type === 'text' || type === 'link';
@@ -33,11 +32,11 @@ export default defineComponent({
   name: 'AButton',
   inheritAttrs: false,
   __ANT_BUTTON: true,
-  props,
+  props: buttonTypes(),
   slots: ['icon'],
   emits: ['click', 'mousedown'],
   setup(props, { slots, attrs, emit }) {
-    const { prefixCls, autoInsertSpaceInButton, direction } = useConfigInject('btn', props);
+    const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
 
     const buttonNodeRef = ref<HTMLElement>(null);
     const delayTimeoutRef = ref(undefined);
@@ -73,25 +72,17 @@ export default defineComponent({
     );
 
     const classes = computed(() => {
-      const { type, shape, size, ghost, block, danger } = props;
+      const { type, shape = 'default', ghost, block, danger } = props;
       const pre = prefixCls.value;
-      // large => lg
-      // small => sm
-      let sizeCls = '';
-      switch (size) {
-        case 'large':
-          sizeCls = 'lg';
-          break;
-        case 'small':
-          sizeCls = 'sm';
-          break;
-        default:
-          break;
-      }
+
+      const sizeClassNameMap = { large: 'lg', small: 'sm', middle: undefined };
+      const sizeFullname = size.value;
+      const sizeCls = sizeFullname ? sizeClassNameMap[sizeFullname] || '' : '';
+
       return {
         [`${pre}`]: true,
         [`${pre}-${type}`]: type,
-        [`${pre}-${shape}`]: shape,
+        [`${pre}-${shape}`]: shape !== 'default' && shape,
         [`${pre}-${sizeCls}`]: sizeCls,
         [`${pre}-loading`]: innerLoading.value,
         [`${pre}-background-ghost`]: ghost && !isUnborderedButtonType(type),
@@ -206,7 +197,11 @@ export default defineComponent({
         return buttonNode;
       }
 
-      return <Wave ref="wave">{buttonNode}</Wave>;
+      return (
+        <Wave ref="wave" disabled={!!innerLoading.value}>
+          {buttonNode}
+        </Wave>
+      );
     };
   },
 });

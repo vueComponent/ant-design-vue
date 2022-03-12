@@ -31,7 +31,7 @@ A breadcrumb displays the current location within a hierarchy. It allows going b
 
 #### Events
 
-| Events Name | Description                   | Arguments            | Version |
+| Events Name | Description                   | Arguments            | Version |       |
 | ----------- | ----------------------------- | -------------------- | ------- | ----- |
 | click       | handler to handle click event | (e:MouseEvent)=>void | -       | 1.5.0 |
 

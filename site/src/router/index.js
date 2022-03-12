@@ -78,6 +78,17 @@ const routes = [
         meta: { enTitle: 'Customize Theme', title: '定制主题', category: 'docs' },
         component: () => import('../vueDocs/customize-theme.en-US.md'),
       },
+
+      {
+        path: 'vue/customize-theme-variable-cn',
+        meta: { enTitle: 'Dynamic Theme (Experimental)', title: '动态主题', category: 'docs' },
+        component: () => import('../vueDocs/customize-theme-variable.zh-CN.md'),
+      },
+      {
+        path: 'vue/customize-theme-variable',
+        meta: { enTitle: 'Dynamic Theme (Experimental)', title: '动态主题', category: 'docs' },
+        component: () => import('../vueDocs/customize-theme-variable.en-US.md'),
+      },
       {
         path: 'vue/migration-v2-cn',
         meta: { enTitle: 'V1 to V2', title: '从 v1 到 v2', category: 'docs' },

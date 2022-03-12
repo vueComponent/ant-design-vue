@@ -9,6 +9,7 @@
     <placement />
     <sub-menu />
     <trigger />
+    <loadingVue />
   </demo-sort>
 </template>
 
@@ -25,11 +26,13 @@ import OverlayVisible from './overlay-visible.vue';
 import Placement from './placement.vue';
 import SubMenu from './sub-menu.vue';
 import Trigger from './trigger.vue';
+import loadingVue from './loading.vue';
 
 export default defineComponent({
   CN,
   US,
   components: {
+    loadingVue,
     Basic,
     ContextMenu,
     DropdownButton,

@@ -4,6 +4,7 @@ import Button from '../button';
 import type { ButtonProps } from '../button';
 import type { LegacyButtonType } from '../button/buttonTypes';
 import { convertLegacyProps } from '../button/buttonTypes';
+import useDestroyed from './hooks/useDestroyed';
 
 const actionButtonProps = {
   type: {
@@ -32,6 +33,7 @@ export default defineComponent({
     const buttonRef = ref();
     const loading = ref(false);
     let timeoutId: any;
+    const isDestroyed = useDestroyed();
     onMounted(() => {
       if (props.autofocus) {
         timeoutId = setTimeout(() => buttonRef.value.$el?.focus());
@@ -49,7 +51,9 @@ export default defineComponent({
       loading.value = true;
       returnValueOfOnOk!.then(
         (...args: any[]) => {
-          loading.value = false;
+          if (!isDestroyed.value) {
+            loading.value = false;
+          }
           close(...args);
           clickedRef.value = false;
         },
@@ -58,7 +62,9 @@ export default defineComponent({
           // eslint-disable-next-line no-console
           console.error(e);
           // See: https://github.com/ant-design/ant-design/issues/6183
-          loading.value = false;
+          if (!isDestroyed.value) {
+            loading.value = false;
+          }
           clickedRef.value = false;
         },
       );

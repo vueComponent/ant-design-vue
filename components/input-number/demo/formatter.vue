@@ -17,7 +17,7 @@ Display value within it's situation with `formatter`, and we usually use `parser
 </docs>
 
 <template>
-  <div>
+  <a-space>
     <a-input-number
       v-model:value="value1"
       :formatter="value => `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')"
@@ -30,7 +30,7 @@ Display value within it's situation with `formatter`, and we usually use `parser
       :formatter="value => `${value}%`"
       :parser="value => value.replace('%', '')"
     />
-  </div>
+  </a-space>
 </template>
 <script lang="ts">
 import { defineComponent, ref } from 'vue';

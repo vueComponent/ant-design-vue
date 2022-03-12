@@ -37,10 +37,11 @@ export function getOverflowOptions(autoAdjustOverflow?: boolean | AdjustOverflow
 
 export default function getPlacements(config: PlacementsConfig) {
   const {
-    arrowWidth = 5,
+    arrowWidth = 4,
     horizontalArrowShift = 16,
     verticalArrowShift = 8,
     autoAdjustOverflow,
+    arrowPointAtCenter,
   } = config;
   const placementMap = {
     left: {
@@ -93,7 +94,7 @@ export default function getPlacements(config: PlacementsConfig) {
     },
   };
   Object.keys(placementMap).forEach(key => {
-    placementMap[key] = config.arrowPointAtCenter
+    placementMap[key] = arrowPointAtCenter
       ? {
           ...placementMap[key],
           overflow: getOverflowOptions(autoAdjustOverflow),

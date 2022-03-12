@@ -2,7 +2,7 @@ import type { ExtractPropTypes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import type { SizeType } from '../config-provider';
 import omit from '../_util/omit';
-import type { LiteralUnion } from '../_util/type';
+import type { LiteralUnion, VueNode } from '../_util/type';
 export const inputDefaultValue = Symbol() as unknown as string;
 const inputProps = {
   id: PropTypes.string,
@@ -61,6 +61,7 @@ const inputProps = {
   maxlength: PropTypes.number,
   loading: PropTypes.looseBool,
   bordered: PropTypes.looseBool,
+  showCount: { type: [Boolean, Object] as PropType<boolean | ShowCountProps> },
   htmlSize: Number,
   onPressEnter: PropTypes.func,
   onKeydown: PropTypes.func,
@@ -80,13 +81,13 @@ export interface AutoSizeType {
   maxRows?: number;
 }
 export interface ShowCountProps {
-  formatter: (args: { count: number; maxlength?: number }) => string;
+  formatter: (args: { count: number; maxlength?: number }) => VueNode;
 }
 const textAreaProps = {
   ...omit(inputProps, ['prefix', 'addonBefore', 'addonAfter', 'suffix']),
+  rows: Number,
   autosize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
   autoSize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
-  showCount: { type: [Boolean, Object] as PropType<boolean | ShowCountProps> },
   onResize: { type: Function as PropType<(size: { width: number; height: number }) => void> },
   onCompositionstart: PropTypes.func,
   onCompositionend: PropTypes.func,

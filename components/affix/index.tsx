@@ -179,10 +179,7 @@ const Affix = defineComponent({
     watch(
       () => props.target,
       val => {
-        let newTarget = null;
-        if (val) {
-          newTarget = val() || null;
-        }
+        const newTarget = val?.() || null;
         if (state.prevTarget !== newTarget) {
           removeObserveTarget(currentInstance);
           if (newTarget) {

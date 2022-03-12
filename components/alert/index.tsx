@@ -1,5 +1,5 @@
-import type { ExtractPropTypes } from 'vue';
-import { inject, defineComponent, ref } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import { defineComponent, ref } from 'vue';
 import CloseOutlined from '@ant-design/icons-vue/CloseOutlined';
 import CheckCircleOutlined from '@ant-design/icons-vue/CheckCircleOutlined';
 import ExclamationCircleOutlined from '@ant-design/icons-vue/ExclamationCircleOutlined';
@@ -13,9 +13,10 @@ import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { getTransitionProps, Transition } from '../_util/transition';
 import { isValidElement, getPropsSlot } from '../_util/props-util';
-import { defaultConfigProvider } from '../config-provider';
 import { tuple, withInstall } from '../_util/type';
 import { cloneElement } from '../_util/vnode';
+import type { NodeMouseEventHandler } from '../vc-tree/contextTypes';
+import useConfigInject from '../_util/hooks/useConfigInject';
 
 function noop() {}
 
@@ -37,7 +38,7 @@ const AlertTypes = tuple('success', 'info', 'warning', 'error');
 
 export type AlertType = typeof AlertTypes[number];
 
-const alertProps = {
+export const alertProps = () => ({
   /**
    * Type of Alert styles, options: `success`, `info`, `warning`, `error`
    */
@@ -57,18 +58,18 @@ const alertProps = {
   prefixCls: PropTypes.string,
   banner: PropTypes.looseBool,
   icon: PropTypes.any,
-  onClose: PropTypes.any,
-};
+  closeIcon: PropTypes.any,
+  onClose: Function as PropType<NodeMouseEventHandler>,
+});
 
-export type AlertProps = Partial<ExtractPropTypes<typeof alertProps>>;
+export type AlertProps = Partial<ExtractPropTypes<ReturnType<typeof alertProps>>>;
 
 const Alert = defineComponent({
   name: 'AAlert',
   inheritAttrs: false,
-  props: alertProps,
-  emits: ['close'],
+  props: alertProps(),
   setup(props, { slots, emit, attrs, expose }) {
-    const configProvider = inject('configProvider', defaultConfigProvider);
+    const { prefixCls, direction } = useConfigInject('alert', props);
     const closing = ref(false);
     const closed = ref(false);
     const alertNode = ref();
@@ -94,11 +95,9 @@ const Alert = defineComponent({
     };
 
     expose({ animationEnd });
-
+    const motionStyle = ref<CSSProperties>({});
     return () => {
-      const { prefixCls: customizePrefixCls, banner } = props;
-      const { getPrefixCls } = configProvider;
-      const prefixCls = getPrefixCls('alert', customizePrefixCls);
+      const { banner, closeIcon: customCloseIcon = slots.closeIcon?.() } = props;
 
       let { closable, type, showIcon } = props;
 
@@ -118,22 +117,30 @@ const Alert = defineComponent({
       if (closeText) {
         closable = true;
       }
-
-      const alertCls = classNames(prefixCls, {
-        [`${prefixCls}-${type}`]: true,
-        [`${prefixCls}-closing`]: closing.value,
-        [`${prefixCls}-with-description`]: !!description,
-        [`${prefixCls}-no-icon`]: !showIcon,
-        [`${prefixCls}-banner`]: !!banner,
-        [`${prefixCls}-closable`]: closable,
+      const prefixClsValue = prefixCls.value;
+      const alertCls = classNames(prefixClsValue, {
+        [`${prefixClsValue}-${type}`]: true,
+        [`${prefixClsValue}-closing`]: closing.value,
+        [`${prefixClsValue}-with-description`]: !!description,
+        [`${prefixClsValue}-no-icon`]: !showIcon,
+        [`${prefixClsValue}-banner`]: !!banner,
+        [`${prefixClsValue}-closable`]: closable,
+        [`${prefixClsValue}-rtl`]: direction.value === 'rtl',
       });
 
       const closeIcon = closable ? (
-        <button type="button" onClick={handleClose} class={`${prefixCls}-close-icon`} tabindex={0}>
+        <button
+          type="button"
+          onClick={handleClose}
+          class={`${prefixClsValue}-close-icon`}
+          tabindex={0}
+        >
           {closeText ? (
-            <span class={`${prefixCls}-close-text`}>{closeText}</span>
-          ) : (
+            <span class={`${prefixClsValue}-close-text`}>{closeText}</span>
+          ) : customCloseIcon === undefined ? (
             <CloseOutlined />
+          ) : (
+            customCloseIcon
           )}
         </button>
       ) : null;
@@ -141,29 +148,40 @@ const Alert = defineComponent({
       const iconNode = (icon &&
         (isValidElement(icon) ? (
           cloneElement(icon, {
-            class: `${prefixCls}-icon`,
+            class: `${prefixClsValue}-icon`,
           })
         ) : (
-          <span class={`${prefixCls}-icon`}>{icon}</span>
-        ))) || <IconType class={`${prefixCls}-icon`} />;
+          <span class={`${prefixClsValue}-icon`}>{icon}</span>
+        ))) || <IconType class={`${prefixClsValue}-icon`} />;
 
-      const transitionProps = getTransitionProps(`${prefixCls}-slide-up`, {
+      const transitionProps = getTransitionProps(`${prefixClsValue}-motion`, {
         appear: false,
+        css: true,
         onAfterLeave: animationEnd,
+        onBeforeLeave: (node: HTMLDivElement) => {
+          node.style.maxHeight = `${node.offsetHeight}px`;
+        },
+        onLeave: (node: HTMLDivElement) => {
+          node.style.maxHeight = '0px';
+        },
       });
       return closed.value ? null : (
         <Transition {...transitionProps}>
           <div
+            role="alert"
             {...attrs}
+            style={{ ...(attrs.style as Object), ...motionStyle.value }}
             v-show={!closing.value}
             class={[attrs.class, alertCls]}
             data-show={!closing.value}
             ref={alertNode}
           >
             {showIcon ? iconNode : null}
-            <div class={`${prefixCls}-content`}>
-              <div class={`${prefixCls}-message`}>{message}</div>
-              <div class={`${prefixCls}-description`}>{description}</div>
+            <div class={`${prefixClsValue}-content`}>
+              {message ? <div class={`${prefixClsValue}-message`}>{message}</div> : null}
+              {description ? (
+                <div class={`${prefixClsValue}-description`}>{description}</div>
+              ) : null}
             </div>
             {closeIcon}
           </div>

@@ -4,7 +4,6 @@
 'use strict';
 
 require('colorful').colorful();
-require('colorful').isatty = true;
 const gulp = require('gulp');
 const program = require('commander');
 

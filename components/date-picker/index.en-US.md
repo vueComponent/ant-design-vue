@@ -88,12 +88,16 @@ The following APIs are shared by DatePicker, RangePicker.
 | inputReadOnly | Set the `readonly` attribute of the input tag (avoids virtual keyboard on touch devices) | boolean | false |  |
 | locale | Localization configuration | object | [default](https://github.com/vueComponent/ant-design-vue/blob/next/components/date-picker/locale/example.json) |  |
 | mode | The picker panel mode | `time` \| `date` \| `month` \| `year` \| `decade` | - |  |
+| nextIcon | The custom next icon | slot | - | 3.0 |
 | open | The open state of picker | boolean | - |  |
 | picker | Set picker type | `date` \| `week` \| `month` \| `quarter` \| `year` | `date` | `quarter` |
 | placeholder | The placeholder of date input | string \| \[string,string] | - |  |
 | popupStyle | To customize the style of the popup calendar | CSSProperties | {} |  |
+| prevIcon | The custom prev icon | slot | - | 3.0 |
 | size | To determine the size of the input box, the height of `large` and `small`, are 40px and 24px respectively, while default size is 32px | `large` \| `middle` \| `small` | - |  |
 | suffixIcon | The custom suffix icon | v-slot:suffixIcon | - |  |
+| superNextIcon | The custom super next icon | slot | - | 3.0 |
+| superPrevIcon | The custom super prev icon | slot | - | 3.0 |
 | valueFormat | optional, format of binding value. If not specified, the binding value will be a Date object | string，[date formats](https://day.js.org/docs/en/display/format) | - |  |
 
 ### Common Events
@@ -175,11 +179,11 @@ The following APIs are shared by DatePicker, RangePicker.
 
 ### RangePicker Events
 
-| Events Name | Description | Arguments | Version |
+| Events Name | Description | Arguments | Version |  |
 | --- | --- | --- | --- | --- |
 | calendarChange | Callback function, can be executed when the start time or the end time of the range is changing. | function(dates: \[dayjs, dayjs], dateStrings: \[string, string], info: { range:`start`\|`end` }) | - |  |
-| change | a callback function, can be executed when the selected time is changing | function(dates: \[dayjs, dayjs\] \| \[string, string\], dateStrings: \[string, string\]) |  |
-| ok | callback when click ok button | function(dates: \[dayjs, dayjs\] \| \[string, string\]) |  |
+| change | a callback function, can be executed when the selected time is changing | function(dates: \[dayjs, dayjs] \| \[string, string], dateStrings: \[string, string]) |  |  |
+| ok | callback when click ok button | function(dates: \[dayjs, dayjs] \| \[string, string]) |  |  |
 
 ## FAQ
 

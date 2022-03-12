@@ -31,7 +31,7 @@ A Card that supports `cover`, `avatar`, `title` and `description`.
     </template>
     <a-card-meta title="Card title" description="This is the description">
       <template #avatar>
-        <a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+        <a-avatar src="https://joeschmoe.io/api/v1/random" />
       </template>
     </a-card-meta>
   </a-card>

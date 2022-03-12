@@ -158,10 +158,12 @@ export const tableProps = () => {
       default: undefined,
     },
     indentSize: { type: Number as PropType<TableProps['indentSize']>, default: undefined },
+    /** @deprecated Please use `EXPAND_COLUMN` in `columns` directly */
     expandIconColumnIndex: {
       type: Number as PropType<TableProps['expandIconColumnIndex']>,
       default: undefined,
     },
+    showExpandColumn: { type: Boolean, default: undefined },
     expandedRowClassName: {
       type: Function as PropType<TableProps['expandedRowClassName']>,
       default: undefined,
@@ -494,6 +496,7 @@ const InteralTable = defineComponent<
     );
 
     const expandIconColumnIndex = computed(() => {
+      if (props.showExpandColumn === false) return -1;
       // Adjust expand icon index, no overwrite expandIconColumnIndex if set.
       if (expandType.value === 'nest' && props.expandIconColumnIndex === undefined) {
         return props.rowSelection ? 1 : 0;
@@ -520,7 +523,6 @@ const InteralTable = defineComponent<
       expandType,
       childrenColumnName,
       locale: tableLocale,
-      expandIconColumnIndex,
       getPopupContainer: computed(() => props.getPopupContainer),
     });
 
@@ -581,8 +583,11 @@ const InteralTable = defineComponent<
 
         const renderPagination = (position: string) => (
           <Pagination
-            class={`${prefixCls.value}-pagination ${prefixCls.value}-pagination-${position}`}
             {...mergedPagination.value}
+            class={[
+              `${prefixCls.value}-pagination ${prefixCls.value}-pagination-${position}`,
+              mergedPagination.value.class,
+            ]}
             size={paginationSize}
           />
         );

@@ -41,6 +41,6 @@ Display statistic number.
 
 #### Statistic.Countdown Events
 
-| Events Name | Description            | Arguments  |
+| Events Name | Description            | Arguments  |     |
 | ----------- | ---------------------- | ---------- | --- |
 | finish      | Trigger when time's up | () => void | -   |

@@ -94,6 +94,7 @@ Array [
   "SkeletonButton: { name: ASkeletonButton }",
   "SkeletonImage: { name: ASkeletonImage }",
   "SkeletonInput: { name: ASkeletonInput }",
+  "SkeletonTitle: { name: SkeletonTitle }",
   "Slider: { name: ASlider }",
   "Space: { name: ASpace }",
   "Spin: { name: ASpin }",

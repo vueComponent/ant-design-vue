@@ -14,29 +14,30 @@ title:
 
 Lookup-Patterns - Uncertain Category.
 </docs>
-
 <template>
   <div class="global-search-wrapper" style="width: 300px">
     <a-auto-complete
       v-model:value="value"
-      class="global-search"
-      size="large"
-      style="width: 100%"
-      option-label-prop="title"
+      :dropdown-match-select-width="252"
+      style="width: 300px"
       :options="dataSource"
       @select="onSelect"
       @search="handleSearch"
     >
       <template #option="item">
-        Found {{ item.query }} on
-        <a
-          :href="`https://s.taobao.com/search?q=${item.query}`"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {{ item.category }}
-        </a>
-        <span class="global-search-item-count">{{ item.count }} results</span>
+        <div style="display: flex; justify-content: space-between">
+          <span>
+            Found {{ item.query }} on
+            <a
+              :href="`https://s.taobao.com/search?q=${item.query}`"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ item.category }}
+            </a>
+          </span>
+          <span>{{ item.count }} results</span>
+        </div>
       </template>
       <a-input-search size="large" placeholder="input here" enter-button></a-input-search>
     </a-auto-complete>
@@ -86,40 +87,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style>
-.global-search-wrapper {
-  padding-right: 50px;
-}
-
-.global-search {
-  width: 100%;
-}
-
-.global-search.ant-select-auto-complete .ant-select-selection--single {
-  margin-right: -46px;
-}
-
-.global-search.ant-select-auto-complete .ant-input-affix-wrapper .ant-input:not(:last-child) {
-  padding-right: 62px;
-}
-
-.global-search.ant-select-auto-complete .ant-input-affix-wrapper .ant-input-suffix button {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.global-search-item {
-  display: flex;
-}
-
-.global-search-item-desc {
-  flex: auto;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-
-.global-search-item-count {
-  flex: none;
-}
-</style>

@@ -84,7 +84,7 @@ const Switch = defineComponent({
       },
     );
 
-    const { prefixCls } = useConfigInject('switch', props);
+    const { prefixCls, direction, size } = useConfigInject('switch', props);
     const refSwitchNode = ref();
     const focus = () => {
       refSwitchNode.value?.focus();
@@ -138,11 +138,12 @@ const Switch = defineComponent({
     };
 
     const classNames = computed(() => ({
-      [`${prefixCls.value}-small`]: props.size === 'small',
+      [`${prefixCls.value}-small`]: size.value === 'small',
       [`${prefixCls.value}-loading`]: props.loading,
       [`${prefixCls.value}-checked`]: checkedStatus.value,
       [`${prefixCls.value}-disabled`]: props.disabled,
       [prefixCls.value]: true,
+      [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
     }));
 
     return () => (
@@ -171,7 +172,9 @@ const Switch = defineComponent({
           class={[attrs.class, classNames.value]}
           ref={refSwitchNode}
         >
-          {props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null}
+          <div class={`${prefixCls.value}-handle`}>
+            {props.loading ? <LoadingOutlined class={`${prefixCls.value}-loading-icon`} /> : null}
+          </div>
           <span class={`${prefixCls.value}-inner`}>
             {checkedStatus.value
               ? getPropsSlot(slots, props, 'checkedChildren')

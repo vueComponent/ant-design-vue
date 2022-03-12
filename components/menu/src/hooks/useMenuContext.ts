@@ -1,5 +1,5 @@
 import type { Key } from '../../../_util/type';
-import type { ComputedRef, CSSProperties, InjectionKey, PropType, Ref, UnwrapRef } from 'vue';
+import type { ComputedRef, InjectionKey, PropType, Ref, UnwrapRef } from 'vue';
 import { defineComponent, inject, provide, toRef } from 'vue';
 import type {
   BuiltinPlacements,
@@ -59,9 +59,7 @@ export interface MenuContextProps {
   // // Motion
   motion?: ComputedRef<CSSMotionProps | null>;
   defaultMotions?: ComputedRef<Partial<{
-    [key in MenuMode | 'other']:
-      | CSSMotionProps
-      | ((style: Ref<CSSProperties>, className: Ref<string>) => CSSMotionProps);
+    [key in MenuMode | 'other']: CSSMotionProps | ((name?: string) => CSSMotionProps);
   }> | null>;
 
   // // Popup

@@ -73,7 +73,7 @@
         <Footer />
       </a-col>
     </a-row>
-    <RightBottomAd :is-c-n="isZhCN" :is-mobile="isMobile" />
+    <WWAdsVue v-if="isZhCN && !isMobile" />
   </div>
 </template>
 <script lang="ts">
@@ -93,6 +93,7 @@ import RightBottomAd from '../components/rice/right_bottom_rice.vue';
 import { CloseOutlined, MenuOutlined } from '@ant-design/icons-vue';
 import ThemeIcon from './ThemeIcon.vue';
 import surelyVueVue from '../components/surelyVue.vue';
+import WWAdsVue from '../components/rice/WWAds.vue';
 
 const rControl = /[\u0000-\u001f]/g;
 const rSpecial = /[\s~`!@#$%^&*()\-_+=[\]{}|\\;:"'<>,.?/]+/g;
@@ -112,6 +113,7 @@ export default defineComponent({
     MenuOutlined,
     ThemeIcon,
     surelyVueVue,
+    WWAdsVue,
   },
   setup() {
     const visible = ref(false);

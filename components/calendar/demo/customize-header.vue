@@ -57,7 +57,7 @@ Customize Calendar header content.
                 :value="String(current.month())"
                 @change="
                   selectedMonth => {
-                    onChange(current.month(parseInt(selectedMonth, 10)));
+                    onChange(current.month(parseInt(String(selectedMonth), 10)));
                   }
                 "
               >

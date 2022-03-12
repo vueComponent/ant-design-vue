@@ -119,7 +119,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               ? generateConfig.toDate(props.value as string | DateType, props.valueFormat)
               : props.value;
           }
-          return null;
+          return (props.value === '' ? undefined : props.value) as DateType;
         });
         const defaultValue = computed(() => {
           if (props.defaultValue) {
@@ -127,7 +127,7 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
               ? generateConfig.toDate(props.defaultValue as string | DateType, props.valueFormat)
               : props.defaultValue;
           }
-          return null;
+          return (props.defaultValue === '' ? undefined : props.defaultValue) as DateType;
         });
         const defaultPickerValue = computed(() => {
           if (props.defaultPickerValue) {
@@ -138,7 +138,9 @@ export default function generateSinglePicker<DateType, ExtraProps = {}>(
                 )
               : props.defaultPickerValue;
           }
-          return null;
+          return (
+            props.defaultPickerValue === '' ? undefined : props.defaultPickerValue
+          ) as DateType;
         });
 
         return () => {

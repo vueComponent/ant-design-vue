@@ -31,6 +31,7 @@ import {
   shallowRef,
   watch,
   watchEffect,
+  nextTick,
 } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { CheckInfo, DraggableFn } from './props';
@@ -246,6 +247,26 @@ export default defineComponent({
     const scrollTo: ScrollTo = scroll => {
       listRef.value.scrollTo(scroll);
     };
+    watch(
+      () => props.activeKey,
+      () => {
+        if (props.activeKey !== undefined) {
+          activeKey.value = props.activeKey;
+        }
+      },
+      { immediate: true },
+    );
+    watch(
+      activeKey,
+      val => {
+        nextTick(() => {
+          if (val !== null) {
+            scrollTo({ key: val });
+          }
+        });
+      },
+      { immediate: true, flush: 'post' },
+    );
     // =========================== Expanded ===========================
     /** Set uncontrolled `expandedKeys`. This will also auto update `flattenNodes`. */
     const setExpandedKeys = (keys: Key[]) => {
@@ -270,16 +291,14 @@ export default defineComponent({
       currentMouseOverDroppableNodeKey = null;
     };
     // if onNodeDragEnd is called, onWindowDragEnd won't be called since stopPropagation() is called
-    const onNodeDragEnd: NodeDragEventHandler = (event, node, outsideTree = false) => {
+    const onNodeDragEnd: NodeDragEventHandler = (event, node) => {
       const { onDragend } = props;
 
       dragState.dragOverNodeKey = null;
 
       cleanDragState();
 
-      if (onDragend && !outsideTree) {
-        onDragend({ event, node: node.eventData });
-      }
+      onDragend?.({ event, node: node.eventData });
 
       dragNode = null;
     };
@@ -552,8 +571,8 @@ export default defineComponent({
         dropPosition: dropPosition + Number(posArr[posArr.length - 1]),
       };
 
-      if (onDrop && !outsideTree) {
-        onDrop(dropResult);
+      if (!outsideTree) {
+        onDrop?.(dropResult);
       }
 
       dragNode = null;
@@ -865,8 +884,9 @@ export default defineComponent({
       if (activeKey.value === newActiveKey) {
         return;
       }
-
-      activeKey.value = newActiveKey;
+      if (props.activeKey !== undefined) {
+        activeKey.value = newActiveKey;
+      }
       if (newActiveKey !== null) {
         scrollTo({ key: newActiveKey });
       }

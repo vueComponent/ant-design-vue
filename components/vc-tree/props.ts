@@ -121,6 +121,7 @@ export type DraggableFn = (node: DataNode) => boolean;
 export const treeProps = () => ({
   prefixCls: String,
   focusable: { type: Boolean, default: undefined },
+  activeKey: [Number, String] as PropType<Key>,
   tabindex: Number,
   children: PropTypes.any,
   treeData: { type: Array as PropType<DataNode[]> }, // Generate treeNode by children

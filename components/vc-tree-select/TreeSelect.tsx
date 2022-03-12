@@ -387,7 +387,15 @@ export default defineComponent({
       const values = displayKeys.map(
         key => keyEntities.value[key]?.node?.[mergedFieldNames.value.value] ?? key,
       );
-      const rawDisplayValues = convert2LabelValues(values);
+      // Back fill with origin label
+      const labeledValues = values.map(val => {
+        const targetItem = rawLabeledValues.value.find(item => item.value === val);
+        return {
+          value: val,
+          label: targetItem?.label,
+        };
+      });
+      const rawDisplayValues = convert2LabelValues(labeledValues);
 
       const firstVal = rawDisplayValues[0];
 
@@ -728,6 +736,7 @@ export default defineComponent({
           emptyOptions={!mergedTreeData.value.length}
           onDropdownVisibleChange={onInternalDropdownVisibleChange}
           tagRender={props.tagRender || slots.tagRender}
+          dropdownMatchSelectWidth={props.dropdownMatchSelectWidth ?? true}
         />
       );
     };

@@ -1,4 +1,4 @@
-// base rc-tree-select@5.0.0-alpha.4
+// base rc-tree-select@5.1.4
 import type { TreeSelectProps } from './TreeSelect';
 import TreeSelect, { treeSelectProps } from './TreeSelect';
 import TreeNode from './TreeNode';

@@ -151,13 +151,16 @@ export default defineComponent({
 
           // >>> Select item
           case KeyCode.ENTER: {
-            const { selectable, value } = activeEntity.value?.node || {};
-            if (activeEntity.value && selectable !== false) {
-              onInternalSelect(null, {
-                node: { key: activeKey.value },
-                selected: !legacyContext.checkedKeys.includes(value),
-              });
+            if (activeEntity.value) {
+              const { selectable, value } = activeEntity.value.node || {};
+              if (selectable !== false) {
+                onInternalSelect(null, {
+                  node: { key: activeKey.value },
+                  selected: !legacyContext.checkedKeys.includes(value),
+                });
+              }
             }
+
             break;
           }
 
@@ -233,6 +236,7 @@ export default defineComponent({
             showLine={treeLine}
             loadData={searchValue ? null : (loadData as any)}
             motion={treeMotion}
+            activeKey={activeKey.value}
             // We handle keys by out instead tree self
             checkable={checkable}
             checkStrictly

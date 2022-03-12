@@ -127,7 +127,7 @@ function generateCalendar<
             ? (generateConfig.toDate(props.value, props.valueFormat) as DateType)
             : (props.value as DateType);
         }
-        return props.value as DateType;
+        return null;
       });
       const defaultValue = computed(() => {
         if (props.defaultValue) {
@@ -135,7 +135,7 @@ function generateCalendar<
             ? (generateConfig.toDate(props.defaultValue, props.valueFormat) as DateType)
             : (props.defaultValue as DateType);
         }
-        return props.defaultValue as DateType;
+        return null;
       });
 
       // Value

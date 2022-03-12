@@ -28,7 +28,7 @@ const subMenuProps = {
   disabled: Boolean,
   level: Number,
   popupClassName: String,
-  popupOffset: Array as PropType<number[]>,
+  popupOffset: Array as unknown as PropType<[number, number]>,
   internalPopupClose: Boolean,
   eventKey: String,
   expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,

@@ -71,13 +71,14 @@ More layouts with navigation: [Layout](/components/layout).
 
 ### Menu.SubMenu
 
-| Param          | Description                         | Type         | Default value | Version |
-| -------------- | ----------------------------------- | ------------ | ------------- | ------- |
-| disabled       | whether sub menu is disabled or not | boolean      | false         |         |
-| expandIcon     | Customized expandIcon               | slot         | arrow icon    | ｜      |
-| key            | Unique ID of the sub menu, required | string       |               |         |
-| popupClassName | Sub-menu class name                 | string       |               | 1.5.0   |
-| title          | title of the sub menu               | string\|slot |               |         |
+| Param | Description | Type | Default value | Version |
+| --- | --- | --- | --- | --- |
+| disabled | whether sub menu is disabled or not | boolean | false |  |
+| expandIcon | Customized expandIcon | slot | arrow icon | ｜ |
+| key | Unique ID of the sub menu, required | string |  |  |
+| popupClassName | Sub-menu class name | string |  | 1.5.0 |
+| popupOffset | Sub-menu offset, not working when `mode="inline"` | \[number, number] | - |  |
+| title | title of the sub menu | string\|slot |  |  |
 
 The children of Menu.SubMenu must be `MenuItem` or `SubMenu`.
 

@@ -147,7 +147,7 @@ export default defineComponent({
         width,
         reverseArrow,
         zeroWidthTriggerStyle,
-        trigger,
+        trigger = slots.trigger?.(),
         collapsible,
         theme,
       } = props;

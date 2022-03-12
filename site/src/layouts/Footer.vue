@@ -106,7 +106,9 @@
     </div>
     <div style="padding: 10px 144px">
       备案号：
-      <a href="http://www.beian.miit.gov.cn/" target="_blank">浙ICP备19034671号</a>
+      <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">浙ICP备19034671号</a>
+      &nbsp;&nbsp;&nbsp; 增值电信业务经营许可证：
+      <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">浙B2-20220161</a>
     </div>
   </footer>
 </template>

@@ -7,7 +7,6 @@ const DuplicatePackageCheckerPlugin = require('duplicate-package-checker-webpack
 const getWebpackConfig = require('./antd-tools/getWebpackConfig');
 const darkVars = require('./scripts/dark-vars');
 const compactVars = require('./scripts/compact-vars');
-
 function injectLessVariables(config, variables) {
   (Array.isArray(config) ? config : [config]).forEach(conf => {
     conf.module.rules.forEach(rule => {
@@ -90,21 +89,7 @@ function processWebpackThemeConfig(themeConfig, theme, vars) {
     });
 
     // apply ${theme} less variables
-    config.module.rules.forEach(rule => {
-      // filter less rule
-      if (rule.test instanceof RegExp && rule.test.test('.less')) {
-        const lessRule = rule.use[rule.use.length - 1];
-        if (lessRule.options.lessOptions) {
-          lessRule.options.lessOptions.modifyVars = vars;
-        } else {
-          lessRule.options.modifyVars = vars;
-        }
-      }
-    });
-
-    // apply ${theme} less variables
     injectLessVariables(config, vars);
-
     // ignore emit ${theme} entry js & js.map file
     config.plugins.push(
       new RemovePlugin({

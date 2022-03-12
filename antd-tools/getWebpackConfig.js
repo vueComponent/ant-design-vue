@@ -8,6 +8,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CleanUpStatsPlugin = require('./utils/CleanUpStatsPlugin');
+const FilterWarningsPlugin = require('webpack-filter-warnings-plugin');
 // const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 const distFileBaseName = 'antd';
@@ -75,7 +76,7 @@ function getWebpackConfig(modules) {
         'readline',
         'repl',
         'tls',
-      ].reduce((acc, name) => Object.assign({}, acc, { [name]: false }), {}),
+      ].reduce((acc, name) => Object.assign({}, acc, { [name]: 'empty' }), {}),
     },
 
     module: {
@@ -173,9 +174,9 @@ function getWebpackConfig(modules) {
               loader: 'less-loader',
               options: {
                 lessOptions: {
-                  sourceMap: true,
                   javascriptEnabled: true,
                 },
+                sourceMap: true,
               },
             },
           ],
@@ -208,6 +209,12 @@ All rights reserved.
         color: '#2f54eb',
       }),
       new CleanUpStatsPlugin(),
+      new FilterWarningsPlugin({
+        // suppress conflicting order warnings from mini-css-extract-plugin.
+        // ref: https://github.com/ant-design/ant-design/issues/14895
+        // see https://github.com/webpack-contrib/mini-css-extract-plugin/issues/250
+        exclude: /mini-css-extract-plugin[^]*Conflicting order between:/,
+      }),
     ],
     performance: {
       hints: false,
@@ -274,7 +281,7 @@ All rights reserved.
     return [prodConfig, uncompressedConfig];
   }
 
-  return config;
+  return [config];
 }
 
 getWebpackConfig.webpack = webpack;

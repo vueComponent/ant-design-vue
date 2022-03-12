@@ -1,4 +1,5 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import { presetPrimaryColors } from '@ant-design/colors';
 import { computed, defineComponent } from 'vue';
 import type { Direction } from '../config-provider';
 import PropTypes from '../_util/vue-types';
@@ -55,8 +56,8 @@ export const sortGradient = (gradients: StringGradients) => {
  */
 export const handleGradient = (strokeColor: ProgressGradient, directionConfig: Direction) => {
   const {
-    from = '#1890ff',
-    to = '#1890ff',
+    from = presetPrimaryColors.blue,
+    to = presetPrimaryColors.blue,
     direction = directionConfig === 'rtl' ? 'to left' : 'to right',
     ...rest
   } = strokeColor;

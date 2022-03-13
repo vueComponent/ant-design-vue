@@ -36,11 +36,17 @@ $ vue create antd-demo
 
 ### 3. 使用组件
 
+#### 安装
+
 ```bash
 $ npm i --save ant-design-vue@next
 ```
 
-**完整引入**
+#### 注册
+
+如果使用 Vue 默认的模板语法，需要注册组件后方可使用，有如下三种方式注册组件：
+
+**全局完整注册**
 
 ```jsx
 import { createApp } from 'vue';
@@ -53,9 +59,9 @@ const app = createApp(App);
 app.use(Antd).mount('#app');
 ```
 
-以上代码便完成了 Antd 的引入。需要注意的是，样式文件需要单独引入。
+以上代码便完成了 Antd 的全局注册。需要注意的是，样式文件需要单独引入。
 
-**局部导入组件**
+**全局部分注册**
 
 ```jsx
 import { createApp } from 'vue';
@@ -70,19 +76,32 @@ app.use(Button).mount('#app');
 app.config.globalProperties.$message = message;
 ```
 
-> 你可以在左侧菜单选用更多组件。
+**局部注册组件**
+
+此种方式需要分别注册组件子组件，如 Button、ButtonGroup，并且注册后仅在当前组件中有效。所以我们推荐使用上述两种方式。
+
+```html
+<template>
+  <a-button>Add</a-button>
+</template>
+<script>
+  import { Button } from 'ant-design-vue';
+  const ButtonGroup = Button.Group;
+
+  export default {
+    components: {
+      AButton: Button,
+      AButtonGroup: ButtonGroup,
+    },
+  };
+</script>
+```
 
 ## 兼容性
 
 Ant Design Vue 2.x+ 支持所有的现代浏览器。
 
 如果需要支持 IE9+，你可以使用 Ant Design Vue 1.x & Vue 2.x。
-
-对于 IE 系列浏览器，需要提供 [es5-shim](https://github.com/es-shims/es5-shim) 和 [es6-shim](https://github.com/paulmillr/es6-shim) 等 Polyfills 的支持。
-
-如果你使用了 babel，强烈推荐使用 [babel-polyfill](https://babeljs.io/docs/usage/polyfill/) 和 [babel-plugin-transform-runtime](https://babeljs.io/docs/plugins/transform-runtime/) 来替代以上两个 shim。
-
-> 避免同时使用 babel 和 shim 两种兼容方法，以规避 [#6512](https://github.com/ant-design/ant-design/issues/6512) 中所遇问题
 
 ## 按需加载
 
@@ -113,8 +132,3 @@ import 'ant-design-vue/es/message/style/css'; //vite只能用 ant-design-vue/es 
 ## 配置主题和字体
 
 - [改变主题](/docs/vue/customize-theme-cn)
-
-## 小贴士
-
-- 你可以享用 `npm` 生态圈里的所有模块。
-- 虽然 Vue 官方推荐模板编写组件，不过对于复杂组件，[jsx](https://github.com/vueComponent/jsx)未必不是一个更好的选择。

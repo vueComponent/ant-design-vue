@@ -44,19 +44,18 @@ CSS Variable use `--ant` prefix by default. When exist multiple antd style file 
 
 Modify `prefixCls` on the root of ConfigProvider:
 
-```tsx
-import { ConfigProvider } from 'ant-design-vue';
-
-export default () => (
-  <ConfigProvider prefixCls="custom">
-    <MyApp />
-  </ConfigProvider>
-);
+```html
+<template>
+  <a-config-provider prefix-cls="custom">
+    <my-app />
+  </a-config-provider>
+</template>
 ```
 
 Also need call the static function to modify `prefixCls`:
 
 ```ts
+import { ConfigProvider } from 'ant-design-vue';
 ConfigProvider.config({
   prefixCls: 'custom',
   theme: {

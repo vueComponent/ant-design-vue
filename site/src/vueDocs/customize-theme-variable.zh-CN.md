@@ -44,19 +44,18 @@ ConfigProvider.config({
 
 通过 ConfigProvider 在顶层修改 `prefixCls`：
 
-```tsx
-import { ConfigProvider } from 'ant-design-vue';
-
-export default () => (
-  <ConfigProvider prefixCls="custom">
-    <MyApp />
-  </ConfigProvider>
-);
+```html
+<template>
+  <a-config-provider prefix-cls="custom">
+    <my-app />
+  </a-config-provider>
+</template>
 ```
 
 通过静态方法设置主题色以及对应 `prefixCls`：
 
 ```ts
+import { ConfigProvider } from 'ant-design-vue';
 ConfigProvider.config({
   prefixCls: 'custom',
   theme: {

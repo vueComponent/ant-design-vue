@@ -34,11 +34,17 @@ And, setup your vue project configuration.
 
 ### 3. Use antd's Components
 
+#### Install
+
 ```bash
 $ npm i --save ant-design-vue@next
 ```
 
-**Fully import**
+#### Component Registration
+
+If you use Vue's default template syntax, you need to register components before you can use them. There are three ways to register components:
+
+**Global Registration All Components**
 
 ```jsx
 import { createApp } from 'vue';
@@ -53,7 +59,7 @@ app.use(Antd).mount('#app');
 
 The above imports Antd entirely. Note that CSS file needs to be imported separately.
 
-**Only import the components you need**
+**Global Registration Some Components**
 
 ```jsx
 import { createApp } from 'vue';
@@ -68,7 +74,26 @@ app.use(Button).mount('#app');
 app.config.globalProperties.$message = message;
 ```
 
-> All the components in antd are listed in the sidebar.
+**Local Registration**
+
+In this way, component sub-components, such as Button and ButtonGroup, need to be registered separately, and they are only valid in the current component after registration. Therefore, we recommend using the above two methods.
+
+```html
+<template>
+  <a-button>Add</a-button>
+</template>
+<script>
+  import { Button } from 'ant-design-vue';
+  const ButtonGroup = Button.Group;
+
+  export default {
+    components: {
+      AButton: Button,
+      AButtonGroup: ButtonGroup,
+    },
+  };
+</script>
+```
 
 ### 4. Component list
 
@@ -77,12 +102,6 @@ app.config.globalProperties.$message = message;
 ## Compatibility
 
 Ant Design Vue 2.x supports all the modern browsers. If you want to use IE9+, you can use Ant Design Vue 1.x & Vue 2.x.
-
-You need to provide [es5-shim](https://github.com/es-shims/es5-shim) and [es6-shim](https://github.com/paulmillr/es6-shim) and other polyfills for IE browsers.
-
-If you are using babel, we strongly recommend using [babel-polyfill](https://babeljs.io/docs/usage/polyfill/) and [babel-plugin-transform-runtime](https://babeljs.io/docs/plugins/transform-runtime/) instead of those two shims.
-
-> Please avoid using both the babel and shim methods at the same time.
 
 ## Import on Demand
 
@@ -113,7 +132,3 @@ import 'ant-design-vue/es/message/style/css'; //use ant-design-vue/es instead of
 ## Customization
 
 - [Customize Theme](/docs/vue/customize-theme)
-
-## Tips
-
-- You can use any `npm` modules.

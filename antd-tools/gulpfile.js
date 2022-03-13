@@ -398,9 +398,19 @@ gulp.task('compile-with-lib', done => {
   compile().on('finish', done);
 });
 
+gulp.task('compile-finalize', done => {
+  // Additional process of compile finalize
+  const { compile: { finalize } = {} } = getConfig();
+  if (finalize) {
+    console.log('[Compile] Finalization...');
+    finalize();
+  }
+  done();
+});
+
 gulp.task(
   'compile',
-  gulp.series(gulp.parallel('compile-with-es', 'compile-with-lib'), done => {
+  gulp.series(gulp.parallel('compile-with-es', 'compile-with-lib'), 'compile-finalize', done => {
     console.log('end compile at ', new Date());
     console.log('compile time ', (new Date() - startTime) / 1000, 's');
     done();

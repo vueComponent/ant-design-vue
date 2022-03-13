@@ -28,7 +28,7 @@ export default defineComponent({
   },
   setup(props, { slots, expose }) {
     const instance = getCurrentInstance();
-    const { csp } = useConfigInject('', props);
+    const { csp, prefixCls } = useConfigInject('', props);
     expose({
       csp,
     });
@@ -58,7 +58,7 @@ export default defineComponent({
     };
     const getAttributeName = () => {
       const { insertExtraNode } = props;
-      return insertExtraNode ? 'ant-click-animating' : 'ant-click-animating-without-extra-node';
+      return insertExtraNode ? `${prefixCls.value}-click-animating` : `${prefixCls.value}-click-animating-without-extra-node`;
     };
     const onClick = (node: HTMLElement, waveColor: string) => {
       const { insertExtraNode, disabled } = props;
@@ -67,7 +67,7 @@ export default defineComponent({
       }
 
       extraNode = document.createElement('div');
-      extraNode.className = 'ant-click-animating-node';
+      extraNode.className = `${prefixCls.value}-click-animating-node`;
       const attributeName = getAttributeName();
       node.removeAttribute(attributeName);
       node.setAttribute(attributeName, 'true');
@@ -87,7 +87,7 @@ export default defineComponent({
         }
         extraNode.style.borderColor = waveColor;
         styleForPesudo.innerHTML = `
-        [ant-click-animating-without-extra-node='true']::after, .ant-click-animating-node {
+        [${prefixCls.value}-click-animating-without-extra-node='true']::after, .${prefixCls.value}-click-animating-node {
           --antd-wave-shadow-color: ${waveColor};
         }`;
         if (!document.body.contains(styleForPesudo)) {

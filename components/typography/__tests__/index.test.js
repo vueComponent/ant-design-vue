@@ -58,6 +58,7 @@ describe('Typography', () => {
     Object.defineProperty(HTMLElement.prototype, 'offsetHeight', {
       get: originOffsetHeight,
     });
+    mockGetBoundingClientRect.mockRestore();
     window.getComputedStyle = originGetComputedStyle;
   });
 

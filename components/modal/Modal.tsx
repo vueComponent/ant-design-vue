@@ -34,7 +34,7 @@ if (canUseDocElement()) {
   addEventListener(document.documentElement, 'click', getClickPosition, true);
 }
 
-const modalProps = () => ({
+export const modalProps = () => ({
   prefixCls: String,
   visible: { type: Boolean, default: undefined },
   confirmLoading: { type: Boolean, default: undefined },

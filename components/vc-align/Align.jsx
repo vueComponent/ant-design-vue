@@ -11,6 +11,22 @@ function getElement(func) {
   return func();
 }
 
+function isBody(node) {
+  const name = node.nodeName.toLowerCase();
+  return name === 'body' || name === 'html';
+}
+
+function getScrollParents(node, list = []) {
+  if (node == null || isBody(node)) return list;
+  if (node instanceof window.Node) {
+    const { overflow, overflowX, overflowY } = getComputedStyle(node);
+    if (/auto|scroll|overlay|hidden/.test(overflow + overflowY + overflowX)) {
+      list.push(node);
+    }
+  }
+  return getScrollParents(node.parentNode, list);
+}
+
 function getPoint(point) {
   if (typeof point !== 'object' || !point) return null;
   return point;
@@ -36,6 +52,7 @@ export default {
       // if parent ref not attached .... use document.getElementById
       !this.aligned && this.forceAlign();
       if (!props.disabled && props.monitorWindowResize) {
+        this.startMonitorTargetParentsScroll();
         this.startMonitorWindowResize();
       }
     });
@@ -96,6 +113,7 @@ export default {
   },
   beforeDestroy() {
     this.stopMonitorWindowResize();
+    this.stopMonitorTargetParentsScroll();
   },
   methods: {
     startMonitorWindowResize() {
@@ -110,6 +128,19 @@ export default {
         this.bufferMonitor.clear();
         this.resizeHandler.remove();
         this.resizeHandler = null;
+      }
+    },
+
+    startMonitorTargetParentsScroll() {
+      const scrollParents = getScrollParents(getElement(this.target));
+      this.scrollParentsHandlerCollections = scrollParents.map(node => {
+        return addEventListener(node, 'scroll', this.forceAlign);
+      });
+    },
+
+    stopMonitorTargetParentsScroll() {
+      if (this.scrollParentsHandlerCollections) {
+        this.scrollParentsHandlerCollections.forEach(handler => handler.remove());
       }
     },
 

@@ -21,7 +21,10 @@ export const rowProps = () => ({
   align: String as PropType<typeof RowAligns[number]>,
   justify: String as PropType<typeof RowJustify[number]>,
   prefixCls: String,
-  gutter: { type: [Number, Array, Object] as PropType<Gutter | [Gutter, Gutter]>, default: 0 },
+  gutter: {
+    type: [Number, Array] as PropType<Gutter | [Gutter, Gutter]>,
+    default: 0 as Gutter | [Gutter, Gutter],
+  },
   wrap: { type: Boolean, default: undefined },
 });
 

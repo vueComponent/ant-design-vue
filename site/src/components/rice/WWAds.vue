@@ -1,6 +1,6 @@
 <template>
   <div id="rice">
-    <div class="wwads-cn wwads-vertical" data-id="62" style="max-width: 200px"></div>
+    <div class="wwads-cn wwads-horizontal" data-id="62" style="max-width: 350px"></div>
   </div>
 </template>
 <script>
@@ -27,13 +27,13 @@ export default defineComponent({
 </script>
 <style scoped>
 #rice {
-  width: 125px;
-  position: fixed;
-  z-index: 19;
-  bottom: 10px;
-  right: 10px;
+  /* width: 180px; */
+  /* position: fixed; */
+  /* z-index: 19; */
   padding: 10px;
   border-radius: 3px;
   font-size: 13px;
+  /* background-color: red;
+  max-height: 150px; */
 }
 </style>

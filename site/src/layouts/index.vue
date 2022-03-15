@@ -37,7 +37,8 @@
       </template>
       <a-col :xxxl="20" :xxl="20" :xl="19" :lg="18" :md="18" :sm="24" :xs="24">
         <section :class="mainContainerClass">
-          <TopAd :is-c-n="isZhCN" />
+          <!-- <TopAd :is-c-n="isZhCN" /> -->
+          <WWAdsVue v-if="isZhCN" />
           <Demo v-if="isDemo" :page-data="pageData" :is-zh-c-n="isZhCN">
             <component :is="matchCom" />
           </Demo>
@@ -78,7 +79,6 @@
         <Footer />
       </a-col>
     </a-row>
-    <WWAdsVue v-if="isZhCN && !isMobile" />
   </div>
 </template>
 <script lang="ts">

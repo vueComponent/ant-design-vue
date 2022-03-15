@@ -58,10 +58,10 @@ More about pagination, please check [`Pagination`](https://www.antdv.com/compone
 
 ### List.Item
 
-| Property | Description | Type | Default |
-| --- | --- | --- | --- |
-| actions | The actions content of list item. If `itemLayout` is `vertical`, shows the content on bottom, otherwise shows content on the far right. | Array\\<vNode>\|slot | - |
-| extra | The extra content of list item. If `itemLayout` is `vertical`, shows the content on right, otherwise shows content on the far right. | string\|slot | - |
+| Property | Description | Type | Default | Version |
+| --- | --- | --- | --- | --- |
+| actions | The actions content of list item. If `itemLayout` is `vertical`, shows the content on bottom, otherwise shows content on the far right. | vNode[] \|slot | - |  |
+| extra | The extra content of list item. If `itemLayout` is `vertical`, shows the content on right, otherwise shows content on the far right. | string\|slot | - |  |
 
 ### List.Item.Meta
 

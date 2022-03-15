@@ -10,6 +10,38 @@
 
 ---
 
+##3.1.0-rc.0
+
+`2022-03-15`
+
+### 🔥🔥🔥 The official version is expected to be released at the end of March or early April, when 3.x will become the default version, and the documentation will also point to the 3.x documentation by default 🔥🔥🔥
+
+- 🔥 Support CSS variables, if you encounter style building errors after upgrading, please check [Dynamic Theme Documentation](https://ant.design/docs/react/customize-theme-variable-en) to troubleshoot the problem. [Experience](https://antdv.com/components/config-provider-cn/#components-config-provider-demo-theme)
+- 🔥 Support RTL [experience](https://antdv.com/components/config-provider-cn/#components-config-provider-demo-direction)
+- 🌟 `LayoutSider` `trigger` support slot [#5317](https://github.com/vueComponent/ant-design-vue/issues/5317)
+- 🌟 `Select` add `filterSort` `virtual` `listHeight` configuration [#5310](https://github.com/vueComponent/ant-design-vue/issues/5310)
+- 🌟 `SubMenu` added `popupOffset` [#5312](https://github.com/vueComponent/ant-design-vue/issues/5312)
+- 🌟 `Affix` add customIcon slot [60e259](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/60e2597f7f80ca354acc859a832a71d1110b3f4c)
+- 🌟 `Avatar` add `crossOrigin` `maxPopoverTrigger` property [5bdb45](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/5bdb45d6688700f0fcc10324c898cb114a1fa469)
+- 🌟 `Button` adds global size support [16b3b5f](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/16b3b5fc366fcce155b4c37459a0b12f1031bfe6)
+- 🌟 `DatePicker` added slots `prevIcon` `nextIcon` `superPrevIcon` `superNextIcon` [27e7ed](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/27e7ed68fb4331e9e9a07738c68f135820496dd9)
+- 🌟 `Divider` added `orientationMargin` [c528d7](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/c528d74c11dd323403705250b918e5408bce2c3c)
+- 🌟 `Dropdown` added `destroyPopupOnHide` `loading` [c4c691](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/c4c691b20777fe459a24a429b50e0fc8cdbdef85)
+- 🌟 `Form` added `labelWrap` [cb95d1](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/cb95d1202adce3375f73e55598cccea619a4d861)
+- 🌟 `Input` added `showCount` [85767d](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/85767de39688b5da6157df9317666adaad6e184f)
+- 🌟 `InputNumber` add `prefix` slot [efea6b](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/efea6b000e581f9c71ba98f80febace4e024910c)
+- 🌟 `MenuDivider` added `dashed` dotted line [32fc4f](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/32fc4fc7c4f3913dec771a6a96b097bcda754b40)
+- 🌟 `Modal` method usage added `wrapClassName` [d38ecc](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/d38ecce22c63adc5e8e52657fcbbef89e048b621)
+- 🌟 `Modal.confirm` adds `showCancel` and `propmise` support [a041b5](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/a041b5bacea2f94f55fee358ff39e5abd0d1b39f)
+- 🌟 Added `Skeleton.Button` `Skeleton.Input` two sub-components [2bd5fc](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/2bd5fc15ffecf3cb3083accab02ceb97bd9ade38)
+- 🌟 `Spin` supports `tip` slot [93a06a](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/93a06a45f58c0920e8f43c49c9859ce4ca10c94e)
+- 🌟 `Table` added `filterMode` to support tree filtering [79ff7a](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/79ff7ac2dba4ab5cf01241ceef072f2c4be20e12)
+- 🌟 `Typography` add `enterIcon` slot, `triggerType` property [e777bc](https://github.com/vueComponent/ant-design-vue/pull/5327/commits/e777bc17435b2610a0c0e1c29f60b900bcaab03c)
+- 🐞 Fix `DatePicker` using string mode, console output type is wrong [#5323](https://github.com/vueComponent/ant-design-vue/issues/5323)
+- 🐞 Fix the problem that the parent node cannot be selected after all the child nodes of `TreeSelect` are disabled [#5316](https://github.com/vueComponent/ant-design-vue/issues/5316)
+- 🐞 Fix `Row` `gutter` ts type hint error [2efe1a](https://github.com/vueComponent/ant-design-vue/commit/2efe1af6b66247b6bc89bf43bc3d2f1dc1f2a5d9)
+- 🐞 Fix `Wave` not working when custom prefixCls [#5334](https://github.com/vueComponent/ant-design-vue/issues/5334)
+
 ## 3.0.0-beta.13
 
 `2022-03-04`

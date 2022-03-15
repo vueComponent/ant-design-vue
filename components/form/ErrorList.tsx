@@ -37,7 +37,7 @@ export default defineComponent({
         colMItem,
       );
       (transitionGroupProps as any).class = baseClassName.value;
-      return (
+      return props.errors?.length ? (
         <TransitionGroup {...transitionGroupProps} tag="div">
           {props.errors?.map((error: any, index: number) => (
             <div
@@ -49,7 +49,7 @@ export default defineComponent({
             </div>
           ))}
         </TransitionGroup>
-      );
+      ) : null;
     };
   },
 });

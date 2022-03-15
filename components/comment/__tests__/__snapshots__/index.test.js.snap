@@ -49,7 +49,7 @@ exports[`Comment Comment can be used as editor, user can customize the editor co
                   <div class="ant-form-item-control-input-content"><textarea rows="4" class="ant-input"></textarea></div>
                   <!---->
                 </div>
-                <div class="ant-form-item-explain ant-form-item-explain-connected"></div>
+                <!---->
                 <!---->
               </div>
             </div>
@@ -62,7 +62,7 @@ exports[`Comment Comment can be used as editor, user can customize the editor co
                     </button></div>
                   <!---->
                 </div>
-                <div class="ant-form-item-explain ant-form-item-explain-connected"></div>
+                <!---->
                 <!---->
               </div>
             </div>

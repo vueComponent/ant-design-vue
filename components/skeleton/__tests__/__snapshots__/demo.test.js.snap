@@ -92,7 +92,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
           </button></div>
         <!---->
       </div>
-      <div class="ant-form-item-explain ant-form-item-explain-connected"></div>
+      <!---->
       <!---->
     </div>
   </div>
@@ -109,7 +109,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
           </button></div>
         <!---->
       </div>
-      <div class="ant-form-item-explain ant-form-item-explain-connected"></div>
+      <!---->
       <!---->
     </div>
   </div>
@@ -124,7 +124,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <div class="ant-form-item-explain ant-form-item-explain-connected"></div>
+      <!---->
       <!---->
     </div>
   </div>
@@ -139,7 +139,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <div class="ant-form-item-explain ant-form-item-explain-connected"></div>
+      <!---->
       <!---->
     </div>
   </div>
@@ -154,7 +154,7 @@ exports[`renders ./components/skeleton/demo/element.vue correctly 1`] = `
         </div>
         <!---->
       </div>
-      <div class="ant-form-item-explain ant-form-item-explain-connected"></div>
+      <!---->
       <!---->
     </div>
   </div>

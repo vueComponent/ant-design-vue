@@ -35,7 +35,14 @@
         <a-row :gutter="[24, 24]">
           <template v-for="component in group.children" :key="component.title">
             <a-col :xs="24" :sm="12" :lg="8" :xl="6">
-              <router-link :to="getLocalizedPathname(component.path, isZhCN)">
+              <component
+                :is="component.target ? 'a' : 'router-link'"
+                v-bind="
+                  component.target
+                    ? { href: component.path, target: component.target }
+                    : { to: getLocalizedPathname(component.path, isZhCN) }
+                "
+              >
                 <a-card size="small" class="components-overview-card">
                   <template #title>
                     <div class="components-overview-title">
@@ -47,7 +54,7 @@
                     <img :src="component.cover" :alt="component.title" />
                   </div>
                 </a-card>
-              </router-link>
+              </component>
             </a-col>
           </template>
         </a-row>
@@ -84,8 +91,28 @@ export default defineComponent({
           );
           return { ...group, children: components };
         })
-        .filter(i => i.children.length);
+        .filter(i => i.children.length)
+        .concat([
+          {
+            children: [
+              {
+                category: 'Components',
+                cols: 1,
+                cover: 'https://gw.alipayobjects.com/zos/alicdn/f-SbcX2Lx/Table.svg',
+                path: 'https://surely.cool/',
+                subtitle: '更强大的表格',
+                title: 'Powerful Table',
+                type: 'Advanced And Powerful',
+                target: '_blank',
+              },
+            ],
+            enTitle: 'Advanced And Powerful',
+            title: '更强大',
+            order: 0,
+          },
+        ]);
     });
+    console.log(menuItems.value);
     onMounted(() => {
       inputRef.value.focus();
     });

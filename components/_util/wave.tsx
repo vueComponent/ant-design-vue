@@ -58,7 +58,9 @@ export default defineComponent({
     };
     const getAttributeName = () => {
       const { insertExtraNode } = props;
-      return insertExtraNode ? `${prefixCls.value}-click-animating` : `${prefixCls.value}-click-animating-without-extra-node`;
+      return insertExtraNode
+        ? `${prefixCls.value}-click-animating`
+        : `${prefixCls.value}-click-animating-without-extra-node`;
     };
     const onClick = (node: HTMLElement, waveColor: string) => {
       const { insertExtraNode, disabled } = props;

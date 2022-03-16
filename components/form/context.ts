@@ -37,6 +37,7 @@ export const useProvideForm = (state: FormContextProps) => {
 
 export const useInjectForm = () => {
   return inject(FormContextKey, {
+    name: computed(() => undefined),
     labelAlign: computed(() => 'right' as FormLabelAlign),
     vertical: computed(() => false),
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -45,10 +46,14 @@ export const useInjectForm = () => {
     removeField: (_eventKey: string) => {},
     model: computed(() => undefined),
     rules: computed(() => undefined),
+    colon: computed(() => undefined),
+    labelWrap: computed(() => undefined),
+    labelCol: computed(() => undefined),
     requiredMark: computed(() => false),
+    validateTrigger: computed(() => undefined),
     onValidate: () => {},
     validateMessages: computed(() => defaultValidateMessages),
-  });
+  } as FormContextProps);
 };
 
 /** Used for ErrorList only */

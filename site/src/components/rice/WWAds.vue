@@ -33,6 +33,7 @@ export default defineComponent({
   padding: 10px;
   border-radius: 3px;
   font-size: 13px;
+  float: right;
   /* background-color: red;
   max-height: 150px; */
 }

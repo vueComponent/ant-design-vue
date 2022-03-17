@@ -33,7 +33,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/8cYb5seNB/Radio.svg
 | buttonStyle | RadioButton 的风格样式，目前有描边和填色两种风格 | `outline` \| `solid` | `outline` |  |
 | disabled | 禁选所有子单选器 | boolean | false |  |
 | name | RadioGroup 下所有 `input[type="radio"]` 的 `name` 属性 | string | - |  |
-| options | 以配置形式设置子元素 | string\[] \| Array&lt;{ label: string value: string disabled?: boolean }> | - |  |
+| options | 以配置形式设置子元素 | string\[] \| number[] \| Array&lt;{ label: string value: string disabled?: boolean }> | - |  |
 | optionType | 用于设置 Radio `options` 类型 | `default` \| `button` | `default` | 3.0.0 |
 | size | 大小，只对按钮样式生效 | `large` \| `default` \| `small` | `default` |  |
 | value(v-model) | 用于设置当前选中的值 | any | - |  |

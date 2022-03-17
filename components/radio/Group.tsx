@@ -27,7 +27,7 @@ const radioGroupProps = {
   value: PropTypes.any,
   size: PropTypes.oneOf(RadioGroupSizeTypes).def('default'),
   options: {
-    type: Array as PropType<Array<String | RadioGroupChildOption>>,
+    type: Array as PropType<Array<string | RadioGroupChildOption | number>>,
   },
   disabled: PropTypes.looseBool,
   name: PropTypes.string,
@@ -95,7 +95,7 @@ export default defineComponent({
         const optionsPrefixCls =
           optionType === 'button' ? `${prefixCls.value}-button` : prefixCls.value;
         children = options.map(option => {
-          if (typeof option === 'string') {
+          if (typeof option === 'string' || typeof option === 'number') {
             return (
               <Radio
                 key={option}

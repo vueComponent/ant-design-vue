@@ -16,8 +16,8 @@ export const abstractCheckboxGroupProps = () => {
     name: String,
     prefixCls: String,
     options: {
-      type: Array as PropType<Array<CheckboxOptionType | string>>,
-      default: () => [] as Array<CheckboxOptionType | string>,
+      type: Array as PropType<Array<CheckboxOptionType | string | number>>,
+      default: () => [] as Array<CheckboxOptionType | string | number>,
     },
     disabled: Boolean,
     id: String,

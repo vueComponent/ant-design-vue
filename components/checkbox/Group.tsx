@@ -21,7 +21,7 @@ export default defineComponent({
     );
     const options = computed(() => {
       return props.options.map(option => {
-        if (typeof option === 'string') {
+        if (typeof option === 'string' || typeof option === 'number') {
           return {
             label: option,
             value: option,

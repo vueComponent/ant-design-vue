@@ -72,6 +72,7 @@ const inputProps = {
   onInput: PropTypes.func,
   'onUpdate:value': PropTypes.func,
   valueModifiers: Object,
+  hidden: Boolean,
 };
 export default inputProps;
 export type InputProps = Partial<ExtractPropTypes<typeof inputProps>>;

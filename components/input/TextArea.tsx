@@ -24,6 +24,26 @@ function fixEmojiLength(value: string, maxLength: number) {
   return [...(value || '')].slice(0, maxLength).join('');
 }
 
+function setTriggerValue(
+  isCursorInEnd: boolean,
+  preValue: string,
+  triggerValue: string,
+  maxLength: number,
+) {
+  let newTriggerValue = triggerValue;
+  if (isCursorInEnd) {
+    // 光标在尾部，直接截断
+    newTriggerValue = fixEmojiLength(triggerValue, maxLength!);
+  } else if (
+    [...(preValue || '')].length < triggerValue.length &&
+    [...(triggerValue || '')].length > maxLength!
+  ) {
+    // 光标在中间，如果最后的值超过最大值，则采用原先的值
+    newTriggerValue = preValue;
+  }
+  return newTriggerValue;
+}
+
 export default defineComponent({
   name: 'ATextarea',
   inheritAttrs: false,
@@ -40,6 +60,40 @@ export default defineComponent({
     // Max length value
     const hasMaxLength = computed(() => Number(props.maxlength) > 0);
     const compositing = ref(false);
+
+    const oldCompositionValueRef = ref<string>();
+    const oldSelectionStartRef = ref<number>(0);
+    const onInternalCompositionStart = (e: CompositionEvent) => {
+      compositing.value = true;
+      // 拼音输入前保存一份旧值
+      oldCompositionValueRef.value = mergedValue.value as string;
+      // 保存旧的光标位置
+      oldSelectionStartRef.value = (e.currentTarget as any).selectionStart;
+      emit('compositionstart', e);
+    };
+
+    const onInternalCompositionEnd = (e: CompositionEvent) => {
+      compositing.value = false;
+      let triggerValue = (e.currentTarget as any).value;
+      if (hasMaxLength.value) {
+        const isCursorInEnd =
+          oldSelectionStartRef.value >= props.maxlength + 1 ||
+          oldSelectionStartRef.value === oldCompositionValueRef.value?.length;
+        triggerValue = setTriggerValue(
+          isCursorInEnd,
+          oldCompositionValueRef.value as string,
+          triggerValue,
+          props.maxlength,
+        );
+      }
+      // Patch composition onChange when value changed
+      if (triggerValue !== mergedValue.value) {
+        setValue(triggerValue);
+        resolveOnChange(e.currentTarget as any, e, triggerChange, triggerValue);
+      }
+
+      emit('compositionend', e);
+    };
     const instance = getCurrentInstance();
     watch(
       () => props.value,
@@ -103,12 +157,24 @@ export default defineComponent({
     };
 
     const handleChange = (e: Event) => {
-      const { value, composing } = e.target as any;
-      compositing.value = (e as any).isComposing || composing;
-      if ((compositing.value && props.lazy) || stateValue.value === value) return;
-      let triggerValue = (e.currentTarget as any).value;
+      const { composing } = e.target as any;
+      let triggerValue = (e.target as any).value;
+      compositing.value = !!((e as any).isComposing || composing);
+      if ((compositing.value && props.lazy) || stateValue.value === triggerValue) return;
+
       if (hasMaxLength.value) {
-        triggerValue = fixEmojiLength(triggerValue, props.maxlength!);
+        // 1. 复制粘贴超过maxlength的情况 2.未超过maxlength的情况
+        const target = e.target as any;
+        const isCursorInEnd =
+          target.selectionStart >= props.maxlength! + 1 ||
+          target.selectionStart === triggerValue.length ||
+          !target.selectionStart;
+        triggerValue = setTriggerValue(
+          isCursorInEnd,
+          mergedValue.value as string,
+          triggerValue,
+          props.maxlength!,
+        );
       }
       resolveOnChange(e.currentTarget as any, e, triggerChange, triggerValue);
       setValue(triggerValue);
@@ -132,6 +198,8 @@ export default defineComponent({
         onChange: handleChange,
         onBlur,
         onKeydown: handleKeyDown,
+        onCompositionstart: onInternalCompositionStart,
+        onCompositionend: onInternalCompositionEnd,
       };
       if (props.valueModifiers?.lazy) {
         delete resizeProps.onInput;
@@ -172,7 +240,7 @@ export default defineComponent({
       mergedValue.value = val;
     });
     return () => {
-      const { maxlength, bordered = true } = props;
+      const { maxlength, bordered = true, hidden } = props;
       const { style, class: customClass } = attrs;
 
       const inputProps: any = {
@@ -204,6 +272,7 @@ export default defineComponent({
         }
         textareaNode = (
           <div
+            hidden={hidden}
             class={classNames(
               `${prefixCls.value}-textarea`,
               {

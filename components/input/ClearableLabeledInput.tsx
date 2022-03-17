@@ -33,6 +33,7 @@ export default defineComponent({
     focused: PropTypes.looseBool,
     bordered: PropTypes.looseBool.def(true),
     triggerFocus: { type: Function as PropType<() => void> },
+    hidden: Boolean,
   },
   setup(props, { slots, attrs }) {
     const containerRef = ref();
@@ -91,6 +92,7 @@ export default defineComponent({
         direction,
         readonly,
         bordered,
+        hidden,
         addonAfter = slots.addonAfter,
         addonBefore = slots.addonBefore,
       } = props;
@@ -121,6 +123,7 @@ export default defineComponent({
           class={affixWrapperCls}
           style={attrs.style}
           onMouseup={onInputMouseUp}
+          hidden={hidden}
         >
           {prefixNode}
           {cloneElement(element, {
@@ -139,6 +142,7 @@ export default defineComponent({
         addonAfter = slots.addonAfter?.(),
         size,
         direction,
+        hidden,
       } = props;
       // Not wrap when there is not addons
       if (!hasAddon({ addonBefore, addonAfter })) {
@@ -169,7 +173,7 @@ export default defineComponent({
       // Need another wrapper for changing display:table to display:inline-block
       // and put style prop in wrapper
       return (
-        <span class={mergedGroupClassName} style={attrs.style}>
+        <span class={mergedGroupClassName} style={attrs.style} hidden={hidden}>
           <span class={mergedWrapperClassName}>
             {addonBeforeNode}
             {cloneElement(labeledElement, { style: null })}
@@ -185,6 +189,7 @@ export default defineComponent({
         allowClear,
         direction,
         bordered,
+        hidden,
         addonAfter = slots.addonAfter,
         addonBefore = slots.addonBefore,
       } = props;
@@ -204,7 +209,7 @@ export default defineComponent({
         },
       );
       return (
-        <span class={affixWrapperCls} style={attrs.style}>
+        <span class={affixWrapperCls} style={attrs.style} hidden={hidden}>
           {cloneElement(element, {
             style: null,
             value,

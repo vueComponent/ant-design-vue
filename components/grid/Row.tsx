@@ -9,7 +9,7 @@ import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
 import useProvideRow from './context';
 
 const RowAligns = tuple('top', 'middle', 'bottom', 'stretch');
-const RowJustify = tuple('start', 'end', 'center', 'space-around', 'space-between');
+const RowJustify = tuple('start', 'end', 'center', 'space-around', 'space-between', 'space-evenly');
 
 export type Gutter = number | Partial<Record<Breakpoint, number>>;
 

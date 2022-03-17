@@ -34,6 +34,7 @@ import FormItemLabel from './FormItemLabel';
 import FormItemInput from './FormItemInput';
 import type { ValidationRule } from './Form';
 import { useProvideFormItemContext } from './FormItemContext';
+import useDebounce from './utils/useDebounce';
 
 const ValidateStatuses = tuple('success', 'warning', 'error', 'validating', '');
 export type ValidateStatus = typeof ValidateStatuses[number];
@@ -368,15 +369,24 @@ export default defineComponent({
     onBeforeUnmount(() => {
       formContext.removeField(eventKey);
     });
+    const debounceErrors = useDebounce(errors);
+    const mergedValidateStatus = computed(() => {
+      if (props.validateStatus !== undefined) {
+        return props.validateStatus;
+      } else if (debounceErrors.value.length) {
+        return 'error';
+      }
+      return validateState.value;
+    });
     const itemClassName = computed(() => ({
       [`${prefixCls.value}-item`]: true,
 
       // Status
-      [`${prefixCls.value}-item-has-feedback`]: validateState.value && props.hasFeedback,
-      [`${prefixCls.value}-item-has-success`]: validateState.value === 'success',
-      [`${prefixCls.value}-item-has-warning`]: validateState.value === 'warning',
-      [`${prefixCls.value}-item-has-error`]: validateState.value === 'error',
-      [`${prefixCls.value}-item-is-validating`]: validateState.value === 'validating',
+      [`${prefixCls.value}-item-has-feedback`]: mergedValidateStatus.value && props.hasFeedback,
+      [`${prefixCls.value}-item-has-success`]: mergedValidateStatus.value === 'success',
+      [`${prefixCls.value}-item-has-warning`]: mergedValidateStatus.value === 'warning',
+      [`${prefixCls.value}-item-has-error`]: mergedValidateStatus.value === 'error',
+      [`${prefixCls.value}-item-is-validating`]: mergedValidateStatus.value === 'validating',
       [`${prefixCls.value}-item-hidden`]: props.hidden,
     }));
     return () => {
@@ -387,7 +397,7 @@ export default defineComponent({
           {...attrs}
           class={[
             itemClassName.value,
-            (help !== undefined && help !== null) || errors.value.length
+            (help !== undefined && help !== null) || debounceErrors.value.length
               ? `${prefixCls.value}-item-with-help`
               : '',
             attrs.class,
@@ -409,10 +419,11 @@ export default defineComponent({
                 {/* Input Group */}
                 <FormItemInput
                   {...props}
-                  errors={help !== undefined && help !== null ? toArray(help) : errors.value}
+                  errors={
+                    help !== undefined && help !== null ? toArray(help) : debounceErrors.value
+                  }
                   prefixCls={prefixCls.value}
-                  status={validateState.value}
-                  validateStatus={validateState.value}
+                  status={mergedValidateStatus.value}
                   ref={inputRef}
                   help={help}
                   extra={props.extra ?? slots.extra?.()}

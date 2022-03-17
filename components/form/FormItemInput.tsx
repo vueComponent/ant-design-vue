@@ -40,7 +40,6 @@ const FormItemInput = defineComponent({
     'prefixCls',
     'errors',
     'hasFeedback',
-    'validateStatus',
     'onDomErrorVisibleChange',
     'wrapperCol',
     'help',
@@ -68,7 +67,7 @@ const FormItemInput = defineComponent({
         help = slots.help?.(),
         errors = slots.errors?.(),
         hasFeedback,
-        validateStatus,
+        status,
         extra = slots.extra?.(),
       } = props;
       const baseClassName = `${prefixCls}-item`;
@@ -79,7 +78,7 @@ const FormItemInput = defineComponent({
       const className = classNames(`${baseClassName}-control`, mergedWrapperCol.class);
 
       // Should provides additional icon if `hasFeedback`
-      const IconNode = validateStatus && iconMap[validateStatus];
+      const IconNode = status && iconMap[status];
 
       return (
         <Col

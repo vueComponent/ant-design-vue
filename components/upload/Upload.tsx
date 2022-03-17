@@ -13,6 +13,7 @@ import { uploadProps } from './interface';
 import { file2Obj, getFileItem, removeFileItem, updateFileList } from './utils';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale/default';
+import type { CSSProperties } from 'vue';
 import { computed, defineComponent, onMounted, ref, toRef } from 'vue';
 import { flattenChildren, initDefaultProps } from '../_util/props-util';
 import useMergedState from '../_util/hooks/useMergedState';
@@ -295,7 +296,7 @@ export default defineComponent({
       defaultLocale.Upload,
       computed(() => props.locale),
     );
-    const renderUploadList = (button?: VueNode) => {
+    const renderUploadList = (button?: VueNode, buttonVisible?: boolean) => {
       const {
         removeIcon,
         previewIcon,
@@ -331,6 +332,7 @@ export default defineComponent({
           isImageUrl={isImageUrl}
           progress={progress}
           itemRender={itemRender}
+          appendActionVisible={buttonVisible}
           v-slots={{ ...slots, appendAction: () => button }}
         />
       ) : (
@@ -403,11 +405,8 @@ export default defineComponent({
         [`${prefixCls.value}-rtl`]: direction.value === 'rtl',
       });
       const children = flattenChildren(slots.default?.());
-      const uploadButton = (
-        <div
-          class={uploadButtonCls}
-          style={children && children.length ? undefined : { display: 'none' }}
-        >
+      const renderUploadButton = (uploadButtonStyle?: CSSProperties) => (
+        <div class={uploadButtonCls} style={uploadButtonStyle}>
           <VcUpload {...rcUploadProps} ref={upload} v-slots={slots} />
         </div>
       );
@@ -415,13 +414,13 @@ export default defineComponent({
       if (listType === 'picture-card') {
         return (
           <span class={classNames(`${prefixCls.value}-picture-card-wrapper`, attrs.class)}>
-            {renderUploadList(uploadButton)}
+            {renderUploadList(renderUploadButton(), !!(children && children.length))}
           </span>
         );
       }
       return (
         <span class={attrs.class}>
-          {uploadButton}
+          {renderUploadButton(children && children.length ? undefined : { display: 'none' })}
           {renderUploadList()}
         </span>
       );

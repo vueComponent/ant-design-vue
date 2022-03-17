@@ -90,7 +90,7 @@ export { default as Image, ImagePreviewGroup } from './image';
 export type { InputNumberProps } from './input-number';
 export { default as InputNumber } from './input-number';
 
-export type { LayoutProps } from './layout';
+export type { LayoutProps, SiderProps } from './layout';
 export {
   default as Layout,
   LayoutHeader,

@@ -33,6 +33,7 @@ export default defineComponent({
     previewFile: previewImage,
     isImageUrl,
     items: [],
+    appendActionVisible: true,
   }),
   setup(props, { slots, expose }) {
     const motionAppear = ref(false);
@@ -167,6 +168,7 @@ export default defineComponent({
         progress,
         appendAction = slots.appendAction,
         itemRender,
+        appendActionVisible,
       } = props;
       const appendActionDom = appendAction?.()[0];
       return (
@@ -201,7 +203,7 @@ export default defineComponent({
               />
             );
           })}
-          {isValidElement(appendActionDom) ? (
+          {appendActionVisible && isValidElement(appendActionDom) ? (
             <HackSlot key="__ant_upload_appendAction">{appendActionDom}</HackSlot>
           ) : null}
         </TransitionGroup>

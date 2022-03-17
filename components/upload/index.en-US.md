@@ -105,7 +105,7 @@ When uploading state change, it returns:
 
 ## FAQ
 
-### How to implement upload server side?
+### How do I implement upload server side?
 
 - You can consult [jQuery-File-Upload](https://github.com/blueimp/jQuery-File-Upload/wiki#server-side) about how to implement server side upload interface.
 - There is a mock example of [express](https://github.com/react-component/upload/blob/master/server.js) in rc-upload.
@@ -118,10 +118,10 @@ Please set property `url` of each item in `fileList` to control content of link.
 
 See <https://github.com/react-component/upload#customrequest>.
 
-### Why `fileList` in control will not trigger `change` `status` update when file not in the list?
+### Why will the `fileList` that's in control not trigger `change` `status` update when the file is not in the list?
 
 `change` only trigger when file in the list, it will ignore left events when removed from the list. Please note that there exist bug which makes event still trigger even the file is not in the list before `3.0.0-beta.10`.
 
-### Why sometime `change` return File object and sometime return { originFileObj: File }?
+### Why does `change` sometimes return File object and other times return { originFileObj: File }?
 
 For compatible case, we return File object when `beforeUpload` return `false`. It will merge to `{ originFileObj: File }` in next major version. Current version is compatible to get origin file by `info.file.originFileObj`. You can change this before major release.

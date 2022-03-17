@@ -114,8 +114,10 @@ function uploadProps<T = any>() {
         FileList: FileType[],
       ) => BeforeUploadValueType | Promise<BeforeUploadValueType>
     >,
-    onChange: Function as PropType<(info: UploadChangeParam<T>) => void>,
-    'onUpdate:fileList': Function as PropType<(fileList: UploadChangeParam<T>['fileList']) => void>,
+    onChange: Function as PropType<(info: UploadChangeParam<UploadFile<T>>) => void>,
+    'onUpdate:fileList': Function as PropType<
+      (fileList: UploadChangeParam<UploadFile<T>>['fileList']) => void
+    >,
     onDrop: Function as PropType<(event: DragEvent) => void>,
     listType: String as PropType<UploadListType>,
     onPreview: Function as PropType<(file: UploadFile<T>) => void>,
@@ -181,6 +183,7 @@ function uploadListProps<T = any>() {
     >,
     isImageUrl: Function as PropType<(file: UploadFile) => boolean>,
     appendAction: Function as PropType<() => VueNode>,
+    appendActionVisible: { type: Boolean, default: undefined },
     itemRender: Function as PropType<ItemRender<T>>,
   };
 }

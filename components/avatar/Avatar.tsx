@@ -10,6 +10,7 @@ import { responsiveArray } from '../_util/responsiveObserve';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import ResizeObserver from '../vc-resize-observer';
 import { useInjectSize } from '../_util/hooks/useSize';
+import eagerComputed from '../_util/eagerComputed';
 
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 
@@ -54,13 +55,8 @@ const Avatar = defineComponent({
     const size = computed(() => {
       return props.size === 'default' ? groupSize.value : props.size;
     });
-    const needResponsive = computed(() =>
-      Object.keys(typeof size.value === 'object' ? size.value || {} : {}).some(key =>
-        ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].includes(key),
-      ),
-    );
-    const screens = useBreakpoint(needResponsive);
-    const responsiveSize = computed(() => {
+    const screens = useBreakpoint();
+    const responsiveSize = eagerComputed(() => {
       if (typeof props.size !== 'object') {
         return undefined;
       }

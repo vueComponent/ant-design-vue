@@ -17,6 +17,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import useBreakpoint from '../_util/hooks/useBreakpoint';
 import type { Breakpoint } from '../_util/responsiveObserve';
 import { responsiveArray } from '../_util/responsiveObserve';
+import eagerComputed from '../_util/eagerComputed';
 
 export { ListItemProps } from './Item';
 export type { ListItemMetaProps } from './ItemMeta';
@@ -43,7 +44,7 @@ export const listProps = () => ({
   bordered: PropTypes.looseBool,
   dataSource: PropTypes.array,
   extra: PropTypes.any,
-  grid: { type: Object as PropType<ListGridType>, default: undefined },
+  grid: { type: Object as PropType<ListGridType>, default: undefined as ListGridType },
   itemLayout: String as PropType<ListItemLayout>,
   loading: {
     type: [Boolean, Object] as PropType<boolean | (SpinProps & HTMLAttributes)>,
@@ -200,14 +201,9 @@ const List = defineComponent({
       return dd;
     });
 
-    const needResponsive = computed(() =>
-      Object.keys(props.grid || {}).some(key =>
-        ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].includes(key),
-      ),
-    );
-    const screens = useBreakpoint(needResponsive);
+    const screens = useBreakpoint();
 
-    const currentBreakpoint = computed(() => {
+    const currentBreakpoint = eagerComputed(() => {
       for (let i = 0; i < responsiveArray.length; i += 1) {
         const breakpoint: Breakpoint = responsiveArray[i];
         if (screens.value[breakpoint]) {

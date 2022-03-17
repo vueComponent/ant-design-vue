@@ -51,8 +51,15 @@ const Avatar = defineComponent({
     const { prefixCls } = useConfigInject('avatar', props);
 
     const groupSize = useInjectSize();
-
-    const screens = useBreakpoint();
+    const size = computed(() => {
+      return props.size === 'default' ? groupSize.value : props.size;
+    });
+    const needResponsive = computed(() =>
+      Object.keys(typeof size.value === 'object' ? size.value || {} : {}).some(key =>
+        ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].includes(key),
+      ),
+    );
+    const screens = useBreakpoint(needResponsive);
     const responsiveSize = computed(() => {
       if (typeof props.size !== 'object') {
         return undefined;
@@ -126,27 +133,26 @@ const Avatar = defineComponent({
     });
 
     return () => {
-      const { shape, size: customSize, src, alt, srcset, draggable, crossOrigin } = props;
+      const { shape, src, alt, srcset, draggable, crossOrigin } = props;
       const icon = getPropsSlot(slots, props, 'icon');
       const pre = prefixCls.value;
-      const size = customSize === 'default' ? groupSize.value : customSize;
       const classString = {
         [`${attrs.class}`]: !!attrs.class,
         [pre]: true,
-        [`${pre}-lg`]: size === 'large',
-        [`${pre}-sm`]: size === 'small',
+        [`${pre}-lg`]: size.value === 'large',
+        [`${pre}-sm`]: size.value === 'small',
         [`${pre}-${shape}`]: shape,
         [`${pre}-image`]: src && isImgExist.value,
         [`${pre}-icon`]: icon,
       };
 
       const sizeStyle: CSSProperties =
-        typeof size === 'number'
+        typeof size.value === 'number'
           ? {
-              width: `${size}px`,
-              height: `${size}px`,
-              lineHeight: `${size}px`,
-              fontSize: icon ? `${size / 2}px` : '18px',
+              width: `${size.value}px`,
+              height: `${size.value}px`,
+              lineHeight: `${size.value}px`,
+              fontSize: icon ? `${size.value / 2}px` : '18px',
             }
           : {};
 
@@ -173,9 +179,9 @@ const Avatar = defineComponent({
           transform: transformString,
         };
         const sizeChildrenStyle =
-          typeof size === 'number'
+          typeof size.value === 'number'
             ? {
-                lineHeight: `${size}px`,
+                lineHeight: `${size.value}px`,
               }
             : {};
         childrenToRender = (

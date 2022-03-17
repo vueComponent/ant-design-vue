@@ -4,6 +4,8 @@ import { TinyColor } from '@ctrl/tinycolor';
 import { generate } from '@ant-design/colors';
 import type { Theme } from './context';
 import { updateCSS } from '../vc-util/Dom/dynamicCSS';
+import canUseDom from '../_util/canUseDom';
+import devWarning from '../vc-util/devWarning';
 
 const dynamicStyleMark = `-ant-${Date.now()}-${Math.random()}`;
 
@@ -86,12 +88,16 @@ export function registerTheme(globalPrefixCls: string, theme: Theme) {
     key => `--${globalPrefixCls}-${key}: ${variables[key]};`,
   );
 
-  updateCSS(
-    `
+  if (canUseDom()) {
+    updateCSS(
+      `
   :root {
     ${cssList.join('\n')}
   }
   `,
-    `${dynamicStyleMark}-dynamic-theme`,
-  );
+      `${dynamicStyleMark}-dynamic-theme`,
+    );
+  } else {
+    devWarning(false, 'ConfigProvider', 'SSR do not support dynamic theme with css variables.');
+  }
 }

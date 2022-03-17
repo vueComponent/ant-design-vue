@@ -12,7 +12,7 @@ import {
 import Wave from '../_util/wave';
 import buttonTypes from './buttonTypes';
 import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
-import { flattenChildren, getPropsSlot } from '../_util/props-util';
+import { flattenChildren, getPropsSlot, initDefaultProps } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
 
@@ -32,7 +32,7 @@ export default defineComponent({
   name: 'AButton',
   inheritAttrs: false,
   __ANT_BUTTON: true,
-  props: buttonTypes(),
+  props: initDefaultProps(buttonTypes(), { type: 'default' }),
   slots: ['icon'],
   emits: ['click', 'mousedown'],
   setup(props, { slots, attrs, emit }) {

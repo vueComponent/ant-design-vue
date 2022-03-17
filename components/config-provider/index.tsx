@@ -152,9 +152,7 @@ const ConfigProvider = defineComponent({
     }
     const validateMessagesRef = computed(() => {
       // Additional Form provider
-      let validateMessages: ValidateMessages = {
-        ...defaultLocale.Form?.defaultValidateMessages,
-      };
+      let validateMessages: ValidateMessages = {};
 
       if (props.locale) {
         validateMessages =

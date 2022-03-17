@@ -1,7 +1,7 @@
 import type { ShowSearchType, FieldNames, BaseOptionType, DefaultOptionType } from '../vc-cascader';
 import VcCascader, { cascaderProps as vcCascaderProps } from '../vc-cascader';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
-import RedoOutlined from '@ant-design/icons-vue/RedoOutlined';
+import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import getIcons from '../select/utils/iconUtil';
 import type { VueNode } from '../_util/type';
@@ -215,7 +215,7 @@ const Cascader = defineComponent({
 
       const loadingIcon = (
         <span class={`${prefixCls.value}-menu-item-loading-icon`}>
-          <RedoOutlined spin />
+          <LoadingOutlined spin />
         </span>
       );
 

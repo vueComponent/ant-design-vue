@@ -18,7 +18,7 @@ Select multiple options
 <template>
   <a-cascader
     v-model:value="value"
-    style="width: 233px"
+    style="width: 100%"
     multiple
     max-tag-count="responsive"
     :options="options"

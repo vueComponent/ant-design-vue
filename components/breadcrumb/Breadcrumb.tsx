@@ -14,7 +14,7 @@ export interface Route {
   children?: Omit<Route, 'children'>[];
 }
 
-const breadcrumbProps = {
+export const breadcrumbProps = {
   prefixCls: PropTypes.string,
   routes: { type: Array as PropType<Route[]> },
   params: PropTypes.any,

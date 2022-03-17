@@ -13,7 +13,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 const PresetStatusColorRegex = new RegExp(`^(${PresetStatusColorTypes.join('|')})$`);
 
-const tagProps = {
+export const tagProps = {
   prefixCls: PropTypes.string,
   color: {
     type: String as PropType<LiteralUnion<PresetColorType | PresetStatusColorType, string>>,

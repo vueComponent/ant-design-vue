@@ -13,7 +13,7 @@ function isSelectOptionOrSelectOptGroup(child: any): boolean {
   return child?.type?.isSelectOption || child?.type?.isSelectOptGroup;
 }
 
-const autoCompleteProps = {
+export const autoCompleteProps = {
   ...omit(selectProps(), ['loading', 'mode', 'optionLabelProp', 'labelInValue']),
   dataSource: PropTypes.array,
   dropdownMenuStyle: PropTypes.style,

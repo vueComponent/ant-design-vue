@@ -5,7 +5,7 @@ import PropTypes from '../../_util/vue-types';
 import { useInjectMenu } from './hooks/useMenuContext';
 import { useMeasure } from './hooks/useKeyPath';
 
-const menuItemGroupProps = {
+export const menuItemGroupProps = {
   title: PropTypes.any,
 };
 

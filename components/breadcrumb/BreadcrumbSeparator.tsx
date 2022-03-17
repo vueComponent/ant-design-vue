@@ -4,7 +4,7 @@ import PropTypes from '../_util/vue-types';
 import { flattenChildren } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
-const breadcrumbSeparatorProps = {
+export const breadcrumbSeparatorProps = {
   prefixCls: PropTypes.string,
 };
 export type BreadcrumbSeparatorProps = Partial<ExtractPropTypes<typeof breadcrumbSeparatorProps>>;

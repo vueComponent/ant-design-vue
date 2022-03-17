@@ -5,7 +5,7 @@ import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
 
-const checkboxProps = {
+export const checkboxProps = {
   prefixCls: String,
   name: String,
   id: String,

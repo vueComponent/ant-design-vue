@@ -128,7 +128,7 @@ function getRows(children: VNode[], column: number) {
   return rows;
 }
 
-const descriptionsProps = {
+export const descriptionsProps = {
   prefixCls: PropTypes.string,
   bordered: PropTypes.looseBool,
   size: PropTypes.oneOf(tuple('default', 'middle', 'small')).def('default'),

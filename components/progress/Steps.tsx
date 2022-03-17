@@ -5,7 +5,7 @@ import PropTypes from '../_util/vue-types';
 import type { ProgressSize } from './props';
 import { progressProps } from './props';
 
-const stepsProps = {
+export const stepsProps = {
   ...progressProps(),
   steps: PropTypes.number,
   size: {

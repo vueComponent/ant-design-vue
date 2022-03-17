@@ -41,7 +41,7 @@ export interface AffixState {
 }
 
 // Affix
-const affixProps = {
+export const affixProps = {
   /**
    * 距离窗口顶部达到指定偏移量后触发
    */

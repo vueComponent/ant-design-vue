@@ -6,7 +6,7 @@ import classNames from '../_util/classNames';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectAnchor } from './context';
 
-const anchorLinkProps = {
+export const anchorLinkProps = {
   prefixCls: PropTypes.string,
   href: PropTypes.string.def('#'),
   title: PropTypes.any,

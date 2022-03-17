@@ -13,7 +13,7 @@ import Overflow from '../../vc-overflow';
 import devWarning from '../../vc-util/devWarning';
 
 let indexGuid = 0;
-const menuItemProps = {
+export const menuItemProps = {
   id: String,
   role: String,
   disabled: Boolean,

@@ -28,7 +28,7 @@ function parseFlex(flex: FlexType): string {
   return flex;
 }
 
-const colProps = () => ({
+export const colProps = () => ({
   span: [String, Number],
   order: [String, Number],
   offset: [String, Number],

@@ -23,7 +23,7 @@ export type CardSize = 'default' | 'small';
 
 const { TabPane } = Tabs;
 
-const cardProps = () => ({
+export const cardProps = () => ({
   prefixCls: PropTypes.string,
   title: PropTypes.any,
   extra: PropTypes.any,

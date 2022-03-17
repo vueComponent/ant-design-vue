@@ -7,7 +7,7 @@ import { defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
-const ribbonProps = {
+export const ribbonProps = {
   prefix: PropTypes.string,
   color: { type: String as PropType<LiteralUnion<PresetColorType, string>> },
   text: PropTypes.any,

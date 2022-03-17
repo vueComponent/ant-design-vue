@@ -30,7 +30,7 @@ export interface AlignProps {
   disabled?: boolean;
 }
 
-const alignProps = {
+export const alignProps = {
   align: Object as PropType<AlignType>,
   target: [Object, Function] as PropType<TargetType>,
   onAlign: Function as PropType<OnAlign>,

@@ -13,7 +13,7 @@ import omit from '../_util/omit';
 
 export const SwitchSizes = tuple('small', 'default');
 type CheckedType = boolean | string | number;
-const switchProps = {
+export const switchProps = {
   id: PropTypes.string,
   prefixCls: PropTypes.string,
   size: PropTypes.oneOf(SwitchSizes),

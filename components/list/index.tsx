@@ -200,7 +200,12 @@ const List = defineComponent({
       return dd;
     });
 
-    const screens = useBreakpoint();
+    const needResponsive = computed(() =>
+      Object.keys(props.grid || {}).some(key =>
+        ['xs', 'sm', 'md', 'lg', 'xl', 'xxl'].includes(key),
+      ),
+    );
+    const screens = useBreakpoint(needResponsive);
 
     const currentBreakpoint = computed(() => {
       for (let i = 0; i < responsiveArray.length; i += 1) {

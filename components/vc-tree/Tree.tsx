@@ -63,7 +63,7 @@ export default defineComponent({
     checkStrictly: false,
     draggable: false,
     defaultExpandParent: true,
-    autoExpandParent: false,
+    autoExpandParent: true,
     defaultExpandAll: false,
     defaultExpandedKeys: [],
     defaultCheckedKeys: [],

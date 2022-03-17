@@ -44,7 +44,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/3XZcjGpvK/Menu.svg
 | mode | 菜单类型，现在支持垂直、水平、和内嵌模式三种 | `vertical` \| `horizontal` \| `inline` | `vertical` |
 | multiple | 是否允许多选 | boolean | false |
 | openKeys(v-model) | 当前展开的 SubMenu 菜单项 key 数组 | string\[] |  |
-| overflowedIndicator | 自定义 Menu 折叠时的图标 | DOM | `<span>···</span>` |
+| overflowedIndicator | 用于自定义 Menu 水平空间不足时的省略收缩的图标 | slot | `<EllipsisOutlined />` |
 | selectable | 是否允许选中 | boolean | true |
 | selectedKeys(v-model) | 当前选中的菜单项 key 数组 | string\[] |  |
 | subMenuCloseDelay | 用户鼠标离开子菜单后关闭延时，单位：秒 | number | 0.1 |

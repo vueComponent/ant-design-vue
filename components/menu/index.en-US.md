@@ -43,7 +43,7 @@ More layouts with navigation: [Layout](/components/layout).
 | mode | type of the menu; `vertical`, `horizontal`, and `inline` modes are supported | `vertical` \| `horizontal` \| `inline` | `vertical` |
 | multiple | Allow selection of multiple items | boolean | false |
 | openKeys(v-model) | array with the keys of currently opened sub menus | string\[] |  |
-| overflowedIndicator | Customized icon when menu is collapsed | DOM | `<span>···</span>` |
+| overflowedIndicator | Customized the ellipsis icon when menu is collapsed horizontally | slot | `<EllipsisOutlined />` |
 | selectable | allow selecting menu items | boolean | true |
 | selectedKeys(v-model) | array with the keys of currently selected menu items | string\[] |  |
 | style | style of the root node | object |  |

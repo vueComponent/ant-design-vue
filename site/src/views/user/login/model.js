@@ -1,4 +1,4 @@
-import { parse } from 'query-string';
+import qs from 'qs';
 import router from '../../../router';
 import { fakeAccountLogin } from './service';
 
@@ -17,7 +17,7 @@ export default {
       // Login successfully
       if (response.status === 'ok') {
         const urlParams = new URL(window.location.href);
-        let redirect = parse(location.search).redirect;
+        let redirect = qs.parse(location.search).redirect;
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
           if (redirectUrlParams.origin === urlParams.origin) {

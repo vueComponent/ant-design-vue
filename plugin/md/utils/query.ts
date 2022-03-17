@@ -1,4 +1,4 @@
-import qs from 'querystring';
+import qs from 'qs';
 
 export interface VueQuery {
   vue?: boolean;

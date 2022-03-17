@@ -38,14 +38,12 @@ export default defineComponent({
         [`${prefixCls.value}-item-head-custom`]: dot,
         [`${prefixCls.value}-item-head-${color}`]: true,
       });
+      const customColor = /blue|red|green|gray/.test(color || '') ? undefined : color;
       return (
         <li class={itemClassName}>
           {label && <div class={`${prefixCls.value}-item-label`}>{label}</div>}
           <div class={`${prefixCls.value}-item-tail`} />
-          <div
-            class={dotClassName}
-            style={{ borderColor: /blue|red|green|gray/.test(color) ? undefined : color }}
-          >
+          <div class={dotClassName} style={{ borderColor: customColor, color: customColor }}>
             {dot}
           </div>
           <div class={`${prefixCls.value}-item-content`}>{slots.default?.()}</div>

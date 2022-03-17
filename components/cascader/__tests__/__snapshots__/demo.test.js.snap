@@ -79,7 +79,7 @@ exports[`renders ./components/cascader/demo/lazy.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/cascader/demo/multiple.vue correctly 1`] = `
-<div style="width: 233px;" class="ant-select ant-cascader ant-select-multiple ant-select-allow-clear">
+<div style="width: 100%;" class="ant-select ant-cascader ant-select-multiple ant-select-allow-clear">
   <!---->
   <!---->
   <div class="ant-select-selector">

@@ -118,7 +118,7 @@ exports[`renders ./components/layout/demo/fixed.vue correctly 1`] = `
 
 exports[`renders ./components/layout/demo/fixed-sider.vue correctly 1`] = `
 <section class="ant-layout ant-layout-has-sider">
-  <aside style="overflow: auto; height: 100vh; position: fixed; left: 0px; flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;" class="ant-layout-sider ant-layout-sider-dark">
+  <aside style="overflow: auto; height: 100vh; position: fixed; left: 0px; top: 0px; bottom: 0px; flex: 0 0 200px; max-width: 200px; min-width: 200px; width: 200px;" class="ant-layout-sider ant-layout-sider-dark">
     <div class="ant-layout-sider-children">
       <div class="logo"></div>
       <ul class="ant-menu ant-menu-root ant-menu-inline ant-menu-dark" role="menu" data-menu-list="true">

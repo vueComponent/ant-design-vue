@@ -1,6 +1,15 @@
 import classNames from '../_util/classNames';
 import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
-import { inject, defineComponent, ref, watch, onMounted, onBeforeUnmount, provide } from 'vue';
+import {
+  watchEffect,
+  inject,
+  defineComponent,
+  ref,
+  watch,
+  onMounted,
+  onBeforeUnmount,
+  provide,
+} from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
@@ -114,18 +123,25 @@ export default defineComponent({
     siderHook && siderHook.addSider(uniqueId);
 
     onMounted(() => {
-      if (typeof window !== 'undefined') {
-        const { matchMedia } = window;
-        if (matchMedia! && props.breakpoint && props.breakpoint in dimensionMaxMap) {
-          mql = matchMedia(`(max-width: ${dimensionMaxMap[props.breakpoint]})`);
-          try {
-            mql.addEventListener('change', responsiveHandler);
-          } catch (error) {
-            mql.addListener(responsiveHandler);
-          }
-          responsiveHandler(mql);
+      watchEffect(() => {
+        try {
+          mql?.removeEventListener('change', responsiveHandler);
+        } catch (error) {
+          mql?.removeListener(responsiveHandler);
         }
-      }
+        if (typeof window !== 'undefined') {
+          const { matchMedia } = window;
+          if (matchMedia! && props.breakpoint && props.breakpoint in dimensionMaxMap) {
+            mql = matchMedia(`(max-width: ${dimensionMaxMap[props.breakpoint]})`);
+            try {
+              mql.addEventListener('change', responsiveHandler);
+            } catch (error) {
+              mql.addListener(responsiveHandler);
+            }
+            responsiveHandler(mql);
+          }
+        }
+      });
     });
     onBeforeUnmount(() => {
       try {

@@ -18,7 +18,9 @@ When dealing with long content, a fixed sider can provide a better user experien
 </docs>
 <template>
   <a-layout has-sider>
-    <a-layout-sider :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0 }">
+    <a-layout-sider
+      :style="{ overflow: 'auto', height: '100vh', position: 'fixed', left: 0, top: 0, bottom: 0 }"
+    >
       <div class="logo" />
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <a-menu-item key="1">

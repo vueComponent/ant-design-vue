@@ -37,7 +37,12 @@ export interface Locale {
   global?: Record<string, any>;
   PageHeader?: { back: string };
   Icon?: Record<string, any>;
-  Text?: Record<string, any>;
+  Text?: {
+    edit?: any;
+    copy?: any;
+    copied?: any;
+    expand?: any;
+  };
 }
 
 export interface LocaleProviderProps {

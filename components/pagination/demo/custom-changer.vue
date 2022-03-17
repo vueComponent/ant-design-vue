@@ -18,10 +18,10 @@ Customize dropdown options such as adding all options
 <template>
   <a-pagination
     v-model:current="current"
+    v-model:page-size="pageSize"
     :page-size-options="pageSizeOptions"
     :total="total"
     show-size-changer
-    :page-size="pageSize"
     @showSizeChange="onShowSizeChange"
   >
     <template #buildOptionText="props">

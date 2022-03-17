@@ -11,6 +11,7 @@ import VcPagination from '../vc-pagination';
 import enUS from '../vc-pagination/locale/en_US';
 import classNames from '../_util/classNames';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import useBreakpoint from '../_util/hooks/useBreakpoint';
 
 export const paginationProps = () => ({
   total: Number,
@@ -43,6 +44,7 @@ export const paginationProps = () => ({
     }) => any
   >,
   role: String,
+  responsive: Boolean,
   showLessItems: { type: Boolean, default: undefined },
   onChange: Function as PropType<(page: number, pageSize: number) => void>,
   onShowSizeChange: Function as PropType<(current: number, size: number) => void>,
@@ -82,6 +84,7 @@ export default defineComponent({
     const selectPrefixCls = computed(() =>
       configProvider.getPrefixCls('select', props.selectPrefixCls),
     );
+    const breakpoint = useBreakpoint();
     const [locale] = useLocaleReceiver('Pagination', enUS, toRef(props, 'locale'));
     const getIconsProps = (pre: string) => {
       const ellipsis = <span class={`${pre}-item-ellipsis`}>•••</span>;
@@ -132,10 +135,11 @@ export default defineComponent({
         itemRender = slots.itemRender,
         buildOptionText = slots.buildOptionText,
         selectComponentClass,
+        responsive,
         ...restProps
       } = props;
 
-      const isSmall = size === 'small';
+      const isSmall = size === 'small' || !!(breakpoint.value?.xs && !size && responsive);
       const paginationProps = {
         ...restProps,
         ...getIconsProps(prefixCls.value),

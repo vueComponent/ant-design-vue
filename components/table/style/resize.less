@@ -1,0 +1,28 @@
+.@{table-prefix-cls}-resize-handle {
+  position: absolute;
+  top: 0;
+  height: 100% !important;
+  bottom: 0;
+  left: auto !important;
+  right: -8px;
+  cursor: col-resize;
+  touch-action: none;
+  user-select: auto;
+  width: 16px;
+  z-index: 1;
+  &-line {
+    display: block;
+    width: 1px;
+    margin-left: 7px;
+    height: 100% !important;
+    background-color: @primary-color;
+    opacity: 0;
+  }
+  &:hover &-line {
+    opacity: 1;
+  }
+}
+
+.dragging .@{table-prefix-cls}-resize-handle-line {
+  opacity: 1;
+}

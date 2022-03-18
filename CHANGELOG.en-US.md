@@ -10,7 +10,24 @@
 
 ---
 
-##3.1.0-rc.0
+## 3.1.0-rc.1
+
+`2022-03-18`
+
+### 🔥🔥🔥 The official version is expected to be released at the end of March or early April, when 3.x will become the default version, and the documentation will also point to the 3.x documentation by default 🔥🔥🔥
+
+- 🌟 Export more component properties to facilitate secondary development [#5340](https://github.com/vueComponent/ant-design-vue/issues/5340) [#5353](https://github.com/ vueComponent/ant-design-vue/issues/5353)
+- 🌟 `Timeline` can be used for antd icon when custom color [2b81a7](https://github.com/vueComponent/ant-design-vue/commit/2b81a7213b169dc72f02c7e0f57afffd67333f0e)
+- 🌟 `Radio` `Checkbox` supports number type
+- 🌟 `Popover` does not display the popup when the slot is empty [71e110](https://github.com/vueComponent/ant-design-vue/commit/71e110036ea0339207c168f268907dcc0de277e8)
+- 🌟 `Pagination` supports responsiveness [85197c](https://github.com/vueComponent/ant-design-vue/commit/85197c4b50a7aae95079bfaa700c8868ed36cbad)
+- 🌟 Adjust the truncation logic after `Textarea` exceeds the maximum length (the text will not change after it exceeds) [d92921](https://github.com/vueComponent/ant-design-vue/commit/d929217752aac2dcfcd56852c7dbc3a834819de1)
+- 🐞 Fix `Table` column drag handle style missing [#5348](https://github.com/vueComponent/ant-design-vue/issues/5348)
+- 🐞 Fix `FormItem` error prompt repeated display problem [#5349](https://github.com/vueComponent/ant-design-vue/issues/5349)
+- 🐞 Fix `FormItem` cannot be used alone [#5343](https://github.com/vueComponent/ant-design-vue/issues/5343)
+- 🐞 Fix `Tooltip` not displaying in `Switch` in loading state [625eff](https://github.com/vueComponent/ant-design-vue/commit/625efff1fa8fb3c93a5c657538274fe76a4a4f1f)
+
+## 3.1.0-rc.0
 
 `2022-03-15`
 

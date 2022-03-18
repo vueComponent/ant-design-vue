@@ -10,6 +10,23 @@
 
 ---
 
+## 3.1.0-rc.1
+
+`2022-03-18`
+
+### 🔥🔥🔥 预计 3 月底或 4 月初发布正式版，届时 3.x 将成为默认版本，文档也将默认指向 3.x 文档 🔥🔥🔥
+
+- 🌟 导出更多组件属性，方便二次开发 [#5340](https://github.com/vueComponent/ant-design-vue/issues/5340) [#5353](https://github.com/vueComponent/ant-design-vue/issues/5353)
+- 🌟 `Timeline` 自定义颜色时可对 antd icon 生效 [2b81a7](https://github.com/vueComponent/ant-design-vue/commit/2b81a7213b169dc72f02c7e0f57afffd67333f0e)
+- 🌟 `Radio` `Checkbox` 支持 number 类型
+- 🌟 `Popover` 在 slot 为空时，不展示弹窗 [71e110](https://github.com/vueComponent/ant-design-vue/commit/71e110036ea0339207c168f268907dcc0de277e8)
+- 🌟 `Pagination` 支持响应式 [85197c](https://github.com/vueComponent/ant-design-vue/commit/85197c4b50a7aae95079bfaa700c8868ed36cbad)
+- 🌟 调整 `Textarea` 超出最大长度后的截断逻辑（超出后文本不再变化）[d92921](https://github.com/vueComponent/ant-design-vue/commit/d929217752aac2dcfcd56852c7dbc3a834819de1)
+- 🐞 修复 `Table` column 拖动手柄样式丢失问题 [#5348](https://github.com/vueComponent/ant-design-vue/issues/5348)
+- 🐞 修复 `FormItem` 错误提示重复显示问题 [#5349](https://github.com/vueComponent/ant-design-vue/issues/5349)
+- 🐞 修复 `FormItem` 不可单独使用问题 [#5343](https://github.com/vueComponent/ant-design-vue/issues/5343)
+- 🐞 修复 `Switch` 在 loading 状态下的 `Tooltip` 不展示问题 [625eff](https://github.com/vueComponent/ant-design-vue/commit/625efff1fa8fb3c93a5c657538274fe76a4a4f1f)
+
 ## 3.1.0-rc.0
 
 `2022-03-15`

@@ -1,0 +1,21 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - ayla
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@releases/v3
+      env:
+        ACCESS_TOKEN: ${{ secrets.DEPLOY }}
+        BRANCH: ayla
+        FOLDER: dist
+        BUILD_SCRIPT: yarn && yarn run dist

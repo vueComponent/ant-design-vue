@@ -93,7 +93,7 @@ exports[`renders ./components/select/demo/basic.vue correctly 1`] = `
 `;
 
 exports[`renders ./components/select/demo/big-data.vue correctly 1`] = `
-<h2>10000 Items</h2>
+<h2>100000 Items</h2>
 <div style="width: 100%;" class="ant-select ant-select-multiple ant-select-show-search">
   <!---->
   <!---->

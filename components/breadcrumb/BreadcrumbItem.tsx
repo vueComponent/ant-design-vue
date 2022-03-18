@@ -6,7 +6,7 @@ import DropDown from '../dropdown/dropdown';
 import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
-const breadcrumbItemProps = {
+export const breadcrumbItemProps = {
   prefixCls: PropTypes.string,
   href: PropTypes.string,
   separator: PropTypes.any,

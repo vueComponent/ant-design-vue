@@ -58,7 +58,7 @@ const getMentions = (value = '', config: MentionsConfig = {}): MentionsEntity[] 
     .filter((entity): entity is MentionsEntity => !!entity && !!entity.value);
 };
 
-const mentionsProps = {
+export const mentionsProps = {
   ...baseMentionsProps,
   loading: PropTypes.looseBool,
   onFocus: {

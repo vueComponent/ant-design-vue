@@ -7,7 +7,7 @@ import type { StringGradients, ProgressGradient } from './props';
 import { progressProps } from './props';
 import { getSuccessPercent, validProgress } from './utils';
 
-const lineProps = {
+export const lineProps = {
   ...progressProps(),
   prefixCls: PropTypes.string,
   direction: {

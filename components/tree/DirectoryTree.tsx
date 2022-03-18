@@ -21,7 +21,7 @@ import { filterEmpty } from '../_util/props-util';
 
 export type ExpandAction = false | 'click' | 'doubleclick' | 'dblclick';
 
-const directoryTreeProps = {
+export const directoryTreeProps = {
   ...treeProps(),
   expandAction: { type: [Boolean, String] as PropType<ExpandAction> },
 };

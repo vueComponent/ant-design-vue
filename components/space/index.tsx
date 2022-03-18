@@ -14,7 +14,7 @@ const spaceSize = {
   middle: 16,
   large: 24,
 };
-const spaceProps = {
+export const spaceProps = {
   prefixCls: PropTypes.string,
   size: {
     type: [String, Number, Array] as PropType<SpaceSize | [SpaceSize, SpaceSize]>,

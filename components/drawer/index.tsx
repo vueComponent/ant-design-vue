@@ -34,7 +34,7 @@ export interface PushState {
 
 const defaultPushState: PushState = { distance: 180 };
 
-const drawerProps = () => ({
+export const drawerProps = () => ({
   autofocus: PropTypes.looseBool,
   closable: PropTypes.looseBool,
   closeIcon: PropTypes.any,

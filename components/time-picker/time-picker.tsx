@@ -19,7 +19,7 @@ export interface TimePickerLocale {
   rangePlaceholder?: [string, string];
 }
 
-const timePickerProps = {
+export const timePickerProps = {
   format: String,
   showNow: { type: Boolean, default: undefined },
   showHour: { type: Boolean, default: undefined },

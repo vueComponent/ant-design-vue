@@ -30,7 +30,7 @@ import useRefs from '../../../_util/hooks/useRefs';
 import pick from 'lodash-es/pick';
 
 const DEFAULT_SIZE = { width: 0, height: 0, left: 0, top: 0, right: 0 };
-const tabNavListProps = () => {
+export const tabNavListProps = () => {
   return {
     id: { type: String },
     tabPosition: { type: String as PropType<TabPosition> },

@@ -20,7 +20,7 @@ export function convertLegacyProps(type?: LegacyButtonType): ButtonProps {
   return { type };
 }
 
-const buttonProps = () => ({
+export const buttonProps = () => ({
   prefixCls: PropTypes.string,
   type: PropTypes.oneOf(ButtonTypes),
   htmlType: PropTypes.oneOf(ButtonHTMLTypes).def('button'),

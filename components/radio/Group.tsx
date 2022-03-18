@@ -22,7 +22,7 @@ export type RadioGroupChildOption = {
   disabled?: boolean;
 };
 
-const radioGroupProps = {
+export const radioGroupProps = {
   prefixCls: PropTypes.string,
   value: PropTypes.any,
   size: PropTypes.oneOf(RadioGroupSizeTypes).def('default'),

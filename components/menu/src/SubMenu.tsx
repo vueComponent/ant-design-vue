@@ -22,7 +22,7 @@ import isValid from '../../_util/isValid';
 
 let indexGuid = 0;
 
-const subMenuProps = {
+export const subMenuProps = {
   icon: PropTypes.any,
   title: PropTypes.any,
   disabled: Boolean,

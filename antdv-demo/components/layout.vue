@@ -14,7 +14,7 @@ import { isZhCN } from '../utils/util';
 import { Provider, create } from '../../components/_util/store';
 import NProgress from 'nprogress';
 import MobileMenu from '../../components/vc-drawer/src';
-// import TopAd from './top_ad';
+import WWAds from './WWAds.vue';
 import GoogleAds from './GoogleAds';
 import SurelyVue from './surelyVue';
 
@@ -303,6 +303,7 @@ export default {
               <a-col xxl={20} xl={19} lg={19} md={18} sm={24} xs={24}>
                 <section class="main-container main-container-component">
                   {showAd ? <GeektimeAds isMobile={isMobile} /> : null}
+                  <WWAds />
                   {!isMobile ? (
                     <div class={['toc-affix', isCN ? 'toc-affix-cn' : '']} style="width: 150px;">
                       {this.getSubMenu(isCN)}

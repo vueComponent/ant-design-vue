@@ -72,6 +72,7 @@ export default defineComponent({
         id,
         prefixCls: prefixCls.value,
         ...restAttrs,
+        onClick,
       };
       if (checkboxGroup && !skipGroup) {
         checkboxProps.onChange = (...args) => {
@@ -103,7 +104,6 @@ export default defineComponent({
           style={style}
           onMouseenter={onMouseenter as EventHandler}
           onMouseleave={onMouseleave as EventHandler}
-          onClick={onClick}
         >
           <VcCheckbox {...checkboxProps} class={checkboxClass} ref={checkboxRef} />
           {children.length ? <span>{children}</span> : null}

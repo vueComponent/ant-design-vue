@@ -1,12 +1,12 @@
 import { onBeforeUnmount, ref } from 'vue';
 
 const useDestroyed = () => {
-  const mounted = ref(true);
+  const destroyed = ref(false);
   onBeforeUnmount(() => {
-    mounted.value = false;
+    destroyed.value = true;
   });
 
-  return mounted;
+  return destroyed;
 };
 
 export default useDestroyed;

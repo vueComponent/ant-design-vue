@@ -112,7 +112,6 @@ export default defineComponent({
           },
         ]);
     });
-    console.log(menuItems.value);
     onMounted(() => {
       inputRef.value.focus();
     });

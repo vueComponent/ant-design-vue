@@ -61,7 +61,7 @@ const Select = defineComponent({
   inheritAttrs: false,
   props: initDefaultProps(selectProps(), {
     listHeight: 256,
-    listItemHeight: 32,
+    listItemHeight: 24,
   }),
   SECRET_COMBOBOX_MODE_DO_NOT_USE,
   // emits: ['change', 'update:value', 'blur'],

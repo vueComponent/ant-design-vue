@@ -9,6 +9,7 @@ import {
   ref,
   computed,
 } from 'vue';
+import { isString, isObject } from 'lodash-es';
 import classNames from '../_util/classNames';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import Affix from '../affix';
@@ -63,6 +64,20 @@ export const anchorProps = () => ({
   onClick: Function as PropType<(e: MouseEvent, link: { title: any; href: string }) => void>,
 });
 
+export const anchorEmits = {
+  change: (link: string) => isString(link),
+  click: (
+    e: Event,
+    info: {
+      title: any;
+      href: string;
+    },
+  ) => e instanceof Event && isObject(info),
+};
+export type AnchorEmits = typeof anchorEmits;
+
+export type AnchorInstance = InstanceType<typeof Anchor>;
+
 export type AnchorProps = Partial<ExtractPropTypes<ReturnType<typeof anchorProps>>>;
 
 export interface AnchorState {
@@ -72,10 +87,11 @@ export interface AnchorState {
   animating: boolean;
 }
 
-export default defineComponent({
+export const Anchor = defineComponent({
   name: 'AAnchor',
   inheritAttrs: false,
   props: anchorProps(),
+  emits: anchorEmits,
   setup(props, { emit, attrs, slots, expose }) {
     const { prefixCls, getTargetContainer, direction } = useConfigInject('anchor', props);
     const inkNodeRef = ref();
@@ -264,3 +280,5 @@ export default defineComponent({
     };
   },
 });
+
+export default Anchor;

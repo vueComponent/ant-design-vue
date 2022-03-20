@@ -1,3 +1,4 @@
+import { cloneElement } from '../../_util/vnode';
 import type { ExtractPropTypes, PropType, VNode } from 'vue';
 import { defineComponent, getCurrentInstance, inject, onMounted, withDirectives } from 'vue';
 import PropTypes from '../../_util/vue-types';
@@ -83,8 +84,9 @@ const Input = defineComponent({
         attrs,
       } = props;
 
-      const InputNode: any = inputElement || withDirectives((<input />) as VNode, [[antInput]]);
+      let inputNode: any = inputElement || withDirectives((<input />) as VNode, [[antInput]]);
 
+      const inputProps = inputNode.props || {};
       const {
         onKeydown: onOriginKeyDown,
         onInput: onOriginInput,
@@ -94,78 +96,81 @@ const Input = defineComponent({
         onCompositionstart: onOriginCompositionStart,
         onCompositionend: onOriginCompositionEnd,
         style,
-      } = InputNode.props || {};
-
-      const inputProps = Object.assign(
-        {
-          id,
-          ref: inputRef,
-          disabled,
-          tabindex,
-          autocomplete: autocomplete || 'off',
-          autofocus,
-          class: classNames(`${prefixCls}-selection-search-input`, InputNode?.props?.class),
-          style: { ...style, opacity: editable ? null : 0 },
-          role: 'combobox',
-          'aria-expanded': open,
-          'aria-haspopup': 'listbox',
-          'aria-owns': `${id}_list`,
-          'aria-autocomplete': 'list',
-          'aria-controls': `${id}_list`,
-          'aria-activedescendant': activeDescendantId,
-          ...attrs,
-          value: editable ? value : '',
-          readonly: !editable,
-          unselectable: !editable ? 'on' : null,
-          onKeydown: (event: KeyboardEvent) => {
-            onKeydown(event);
-            if (onOriginKeyDown) {
-              onOriginKeyDown(event);
-            }
+      } = inputProps;
+      inputNode = cloneElement(
+        inputNode,
+        Object.assign(
+          {
+            id,
+            ref: inputRef,
+            disabled,
+            tabindex,
+            autocomplete: autocomplete || 'off',
+            autofocus,
+            class: classNames(`${prefixCls}-selection-search-input`, inputNode?.props?.class),
+            style: { ...style, opacity: editable ? null : 0 },
+            role: 'combobox',
+            'aria-expanded': open,
+            'aria-haspopup': 'listbox',
+            'aria-owns': `${id}_list`,
+            'aria-autocomplete': 'list',
+            'aria-controls': `${id}_list`,
+            'aria-activedescendant': activeDescendantId,
+            ...attrs,
+            value: editable ? value : '',
+            readonly: !editable,
+            unselectable: !editable ? 'on' : null,
+            onKeydown: (event: KeyboardEvent) => {
+              onKeydown(event);
+              if (onOriginKeyDown) {
+                onOriginKeyDown(event);
+              }
+            },
+            onMousedown: (event: MouseEvent) => {
+              onMousedown(event);
+              if (onOriginMouseDown) {
+                onOriginMouseDown(event);
+              }
+            },
+            onInput: (event: Event) => {
+              onChange(event);
+              if (onOriginInput) {
+                onOriginInput(event);
+              }
+            },
+            onCompositionstart(event: CompositionEvent) {
+              onCompositionstart(event);
+              if (onOriginCompositionStart) {
+                onOriginCompositionStart(event);
+              }
+            },
+            onCompositionend(event: CompositionEvent) {
+              onCompositionend(event);
+              if (onOriginCompositionEnd) {
+                onOriginCompositionEnd(event);
+              }
+            },
+            onPaste,
+            onFocus: (...args: any[]) => {
+              clearTimeout(blurTimeout);
+              onOriginFocus && onOriginFocus(args[0]);
+              onFocus && onFocus(args[0]);
+              VCSelectContainerEvent?.focus(args[0]);
+            },
+            onBlur: (...args: any[]) => {
+              blurTimeout = setTimeout(() => {
+                onOriginBlur && onOriginBlur(args[0]);
+                onBlur && onBlur(args[0]);
+                VCSelectContainerEvent?.blur(args[0]);
+              }, 100);
+            },
           },
-          onMousedown: (event: MouseEvent) => {
-            onMousedown(event);
-            if (onOriginMouseDown) {
-              onOriginMouseDown(event);
-            }
-          },
-          onInput: (event: Event) => {
-            onChange(event);
-            if (onOriginInput) {
-              onOriginInput(event);
-            }
-          },
-          onCompositionstart(event: CompositionEvent) {
-            onCompositionstart(event);
-            if (onOriginCompositionStart) {
-              onOriginCompositionStart(event);
-            }
-          },
-          onCompositionend(event: CompositionEvent) {
-            onCompositionend(event);
-            if (onOriginCompositionEnd) {
-              onOriginCompositionEnd(event);
-            }
-          },
-          onPaste,
-          onFocus: (...args: any[]) => {
-            clearTimeout(blurTimeout);
-            onOriginFocus && onOriginFocus(args[0]);
-            onFocus && onFocus(args[0]);
-            VCSelectContainerEvent?.focus(args[0]);
-          },
-          onBlur: (...args: any[]) => {
-            blurTimeout = setTimeout(() => {
-              onOriginBlur && onOriginBlur(args[0]);
-              onBlur && onBlur(args[0]);
-              VCSelectContainerEvent?.blur(args[0]);
-            }, 100);
-          },
-        },
-        InputNode.type === 'textarea' ? {} : { type: 'search' },
-      );
-
-      return <InputNode {...inputProps}></InputNode>;
+          inputNode.type === 'textarea' ? {} : { type: 'search' },
+        ),
+        true,
+        true,
+      ) as VNode;
+      return inputNode;
     };
   },
 });

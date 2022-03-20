@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { shallowRef, watchEffect } from 'vue';
+import { toRaw, shallowRef, watchEffect } from 'vue';
 import type { FieldNames, RawValueType } from '../Select';
 import { convertChildrenToData } from '../utils/legacyUtil';
 
@@ -16,7 +16,7 @@ export default function useOptions<OptionType>(
   const valueOptions = shallowRef();
   const labelOptions = shallowRef();
   watchEffect(() => {
-    let newOptions = options.value;
+    let newOptions = toRaw(options.value);
     const childrenAsData = !options.value;
 
     if (childrenAsData) {
@@ -25,16 +25,16 @@ export default function useOptions<OptionType>(
 
     const newValueOptions = new Map<RawValueType, OptionType>();
     const newLabelOptions = new Map<any, OptionType>();
-
+    const fieldNamesValue = fieldNames.value;
     function dig(optionList: OptionType[], isChildren = false) {
       // for loop to speed up collection speed
       for (let i = 0; i < optionList.length; i += 1) {
         const option = optionList[i];
-        if (!option[fieldNames.value.options] || isChildren) {
-          newValueOptions.set(option[fieldNames.value.value], option);
-          newLabelOptions.set(option[fieldNames.value.label], option);
+        if (!option[fieldNamesValue.options] || isChildren) {
+          newValueOptions.set(option[fieldNamesValue.value], option);
+          newLabelOptions.set(option[fieldNamesValue.label], option);
         } else {
-          dig(option[fieldNames.value.options], true);
+          dig(option[fieldNamesValue.options], true);
         }
       }
     }

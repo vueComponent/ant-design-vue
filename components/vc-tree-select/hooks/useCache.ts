@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { computed, shallowRef } from 'vue';
+import { toRaw, computed, shallowRef } from 'vue';
 import type { LabeledValueType, RawValueType } from '../TreeSelect';
 
 /**
@@ -15,7 +15,7 @@ export default (values: Ref<LabeledValueType[]>): [Ref<LabeledValueType[]>] => {
     const { valueLabels } = cacheRef.value;
     const valueLabelsCache = new Map<RawValueType, any>();
 
-    const filledValues = values.value.map(item => {
+    const filledValues = toRaw(values.value).map(item => {
       const { value } = item;
       const mergedLabel = item.label ?? valueLabels.get(value);
 

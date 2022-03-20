@@ -21,6 +21,7 @@ import { useProvideCascader } from './context';
 import OptionList from './OptionList';
 import { BaseSelect } from '../vc-select';
 import devWarning from '../vc-util/devWarning';
+import useMaxLevel from '../vc-tree/useMaxLevel';
 
 export interface ShowSearchType<OptionType extends BaseOptionType = DefaultOptionType> {
   filter?: (inputValue: string, options: OptionType[], fieldNames: FieldNames) => boolean;
@@ -259,6 +260,8 @@ export default defineComponent({
       ref<SingleValueType[]>([]),
       ref<SingleValueType[]>([]),
     ];
+
+    const { maxLevel, levelEntities } = useMaxLevel(pathKeyEntities);
     watchEffect(() => {
       const [existValues, missingValues] = missingValuesInfo.value;
 
@@ -274,7 +277,13 @@ export default defineComponent({
       const keyPathValues = toPathKeys(existValues);
       const ketPathEntities = pathKeyEntities.value;
 
-      const { checkedKeys, halfCheckedKeys } = conductCheck(keyPathValues, true, ketPathEntities);
+      const { checkedKeys, halfCheckedKeys } = conductCheck(
+        keyPathValues,
+        true,
+        ketPathEntities,
+        maxLevel.value,
+        levelEntities.value,
+      );
 
       // Convert key back to value cells
       [checkedValues.value, halfCheckedValues.value, missingCheckedValues.value] = [
@@ -356,9 +365,17 @@ export default defineComponent({
               nextRawCheckedKeys,
               { checked: false, halfCheckedKeys: halfCheckedPathKeys },
               pathKeyEntities.value,
+              maxLevel.value,
+              levelEntities.value,
             ));
           } else {
-            ({ checkedKeys } = conductCheck(nextRawCheckedKeys, true, pathKeyEntities.value));
+            ({ checkedKeys } = conductCheck(
+              nextRawCheckedKeys,
+              true,
+              pathKeyEntities.value,
+              maxLevel.value,
+              levelEntities.value,
+            ));
           }
 
           // Roll up to parent level keys

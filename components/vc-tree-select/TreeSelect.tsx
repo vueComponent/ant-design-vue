@@ -29,6 +29,7 @@ import type { VueNode } from '../_util/type';
 import { conductCheck } from '../vc-tree/utils/conductUtil';
 import { warning } from '../vc-util/warning';
 import { toReactive } from '../_util/toReactive';
+import useMaxLevel from '../vc-tree/useMaxLevel';
 
 export type OnInternalSelect = (value: RawValueType, info: { selected: boolean }) => void;
 
@@ -364,13 +365,15 @@ export default defineComponent({
 
     // const [mergedValues] = useCache(rawLabeledValues);
     const rawValues = computed(() => rawLabeledValues.value.map(item => item.value));
-
+    const { maxLevel, levelEntities } = useMaxLevel(keyEntities);
     // Convert value to key. Will fill missed keys for conduct check.
     const [rawCheckedValues, rawHalfCheckedValues] = useCheckedKeys(
       rawLabeledValues,
       rawHalfLabeledValues,
       treeConduction,
       keyEntities,
+      maxLevel,
+      levelEntities,
     );
 
     // Convert rawCheckedKeys to check strategy related values
@@ -504,7 +507,9 @@ export default defineComponent({
       selectedKey: Key,
       { selected, source }: { selected: boolean; source: SelectSource },
     ) => {
-      const entity = keyEntities.value[selectedKey];
+      const keyEntitiesValue = toRaw(keyEntities.value);
+      const valueEntitiesValue = toRaw(valueEntities.value);
+      const entity = keyEntitiesValue[selectedKey];
       const node = entity?.node;
       const selectedValue = node?.[mergedFieldNames.value.value] ?? selectedKey;
 
@@ -521,24 +526,32 @@ export default defineComponent({
         if (treeConduction.value) {
           // Should keep missing values
           const { missingRawValues, existRawValues } = splitRawValues(newRawValues);
-          const keyList = existRawValues.map(val => valueEntities.value.get(val).key);
+          const keyList = existRawValues.map(val => valueEntitiesValue.get(val).key);
 
           // Conduction by selected or not
           let checkedKeys: Key[];
           if (selected) {
-            ({ checkedKeys } = conductCheck(keyList, true, keyEntities.value));
+            ({ checkedKeys } = conductCheck(
+              keyList,
+              true,
+              keyEntitiesValue,
+              maxLevel.value,
+              levelEntities.value,
+            ));
           } else {
             ({ checkedKeys } = conductCheck(
               keyList,
               { checked: false, halfCheckedKeys: rawHalfCheckedValues.value },
-              keyEntities.value,
+              keyEntitiesValue,
+              maxLevel.value,
+              levelEntities.value,
             ));
           }
 
           // Fill back of keys
           newRawValues = [
             ...missingRawValues,
-            ...checkedKeys.map(key => keyEntities.value[key].node[mergedFieldNames.value.value]),
+            ...checkedKeys.map(key => keyEntitiesValue[key].node[mergedFieldNames.value.value]),
           ];
         }
         triggerChange(newRawValues, { selected, triggerValue: selectedValue }, source || 'option');

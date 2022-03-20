@@ -29,13 +29,20 @@ export const backTopProps = {
   // visible: PropTypes.looseBool, // Only for test. Don't use it.
 };
 
+export const backTopEmits = {
+  click: (e: Event) => e instanceof Event,
+};
+export type BackTopEmits = typeof backTopEmits;
+
+export type BackTopInstance = InstanceType<typeof BackTop>;
+
 export type BackTopProps = Partial<ExtractPropTypes<typeof backTopProps>>;
 
 const BackTop = defineComponent({
   name: 'ABackTop',
   inheritAttrs: false,
   props: backTopProps,
-  emits: ['click'],
+  emits: backTopEmits,
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, direction } = useConfigInject('back-top', props);
     const domRef = ref();

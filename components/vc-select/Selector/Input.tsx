@@ -175,29 +175,4 @@ const Input = defineComponent({
   },
 });
 
-// Input.props = {
-//   inputRef: PropTypes.any,
-//   prefixCls: PropTypes.string,
-//   id: PropTypes.string,
-//   inputElement: PropTypes.any,
-//   disabled: PropTypes.looseBool,
-//   autofocus: PropTypes.looseBool,
-//   autocomplete: PropTypes.string,
-//   editable: PropTypes.looseBool,
-//   accessibilityIndex: PropTypes.number,
-//   value: PropTypes.string,
-//   open: PropTypes.looseBool,
-//   tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-//   /** Pass accessibility props to input */
-//   attrs: PropTypes.object,
-//   onKeydown: PropTypes.func,
-//   onMousedown: PropTypes.func,
-//   onChange: PropTypes.func,
-//   onPaste: PropTypes.func,
-//   onCompositionstart: PropTypes.func,
-//   onCompositionend: PropTypes.func,
-//   onFocus: PropTypes.func,
-//   onBlur: PropTypes.func,
-// };
-
 export default Input;

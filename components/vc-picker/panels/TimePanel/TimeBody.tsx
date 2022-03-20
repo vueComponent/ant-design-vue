@@ -7,7 +7,7 @@ import type { SharedTimeProps } from '.';
 import { setTime as utilSetTime } from '../../utils/timeUtil';
 import { cloneElement } from '../../../_util/vnode';
 import type { VueNode } from '../../../_util/type';
-import type { Ref } from 'vue';
+import type { Ref, VNode } from 'vue';
 import { onBeforeUpdate, ref, watchEffect, computed, defineComponent } from 'vue';
 
 function generateUnits(
@@ -245,7 +245,7 @@ const TimeBody = defineComponent({
       ) {
         if (condition !== false) {
           columns.push({
-            node: cloneElement(node, {
+            node: cloneElement(node as unknown as VNode, {
               prefixCls: columnPrefixCls,
               value: columnValue,
               active: activeColumnIndex === columns.length,

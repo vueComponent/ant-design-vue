@@ -59,20 +59,13 @@ export default defineComponent({
     });
     return () => {
       const children = flattenChildren(slots.default?.());
-      const {
-        indeterminate,
-        skipGroup,
-        id = formItemContext.id.value,
-        onClick,
-        ...restProps
-      } = props;
+      const { indeterminate, skipGroup, id = formItemContext.id.value, ...restProps } = props;
       const { onMouseenter, onMouseleave, onInput, class: className, style, ...restAttrs } = attrs;
       const checkboxProps: CheckboxProps = {
         ...restProps,
         id,
         prefixCls: prefixCls.value,
         ...restAttrs,
-        onClick,
       };
       if (checkboxGroup && !skipGroup) {
         checkboxProps.onChange = (...args) => {

@@ -28,13 +28,21 @@ function isUnborderedButtonType(type: ButtonType | undefined) {
   return type === 'text' || type === 'link';
 }
 
-export default defineComponent({
+export const buttonEmits = {
+  click: (e: Event) => e instanceof Event,
+  mousedown: (e: MouseEvent) => e instanceof MouseEvent,
+};
+export type ButtonEmits = typeof buttonEmits;
+
+export type ButtonInstance = InstanceType<typeof Button>;
+
+export const Button = defineComponent({
   name: 'AButton',
   inheritAttrs: false,
   __ANT_BUTTON: true,
   props: initDefaultProps(buttonTypes(), { type: 'default' }),
   slots: ['icon'],
-  emits: ['click', 'mousedown'],
+  emits: buttonEmits,
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
 
@@ -213,3 +221,5 @@ export default defineComponent({
     };
   },
 });
+
+export default Button;

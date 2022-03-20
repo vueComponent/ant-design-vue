@@ -104,7 +104,7 @@ const Input = defineComponent({
           tabindex,
           autocomplete: autocomplete || 'off',
           autofocus,
-          class: classNames(`${prefixCls}-selection-search-input`, InputNode?.props?.className),
+          class: classNames(`${prefixCls}-selection-search-input`, InputNode?.props?.class),
           style: { ...style, opacity: editable ? null : 0 },
           role: 'combobox',
           'aria-expanded': open,

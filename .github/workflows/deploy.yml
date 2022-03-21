@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@master
 
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@releases/v3
+      uses: JamesIves/github-pages-deploy-action@master
       env:
         ACCESS_TOKEN: ${{ secrets.DEPLOY }}
-        BRANCH: ayla
+        BRANCH: gh-pages
         FOLDER: dist
         BUILD_SCRIPT: yarn && yarn run dist

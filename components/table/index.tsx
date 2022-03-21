@@ -3,7 +3,6 @@ import Column from './Column';
 import ColumnGroup from './ColumnGroup';
 import type { TableProps, TablePaginationConfig } from './Table';
 import { defineComponent } from 'vue';
-import type { App } from 'vue';
 import { EXPAND_COLUMN, Summary, SummaryCell, SummaryRow } from '../vc-table';
 import {
   SELECTION_ALL,
@@ -44,13 +43,4 @@ export default Object.assign(Table, {
   Column,
   ColumnGroup,
   Summary: TableSummary,
-  install: (app: App) => {
-    app.component(TableSummary.name, TableSummary);
-    app.component(TableSummaryCell.name, TableSummaryCell);
-    app.component(TableSummaryRow.name, TableSummaryRow);
-    app.component(Table.name, Table);
-    app.component(Column.name, Column);
-    app.component(ColumnGroup.name, ColumnGroup);
-    return app;
-  },
 });

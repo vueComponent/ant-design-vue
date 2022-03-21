@@ -55,6 +55,7 @@ export type DragNodeEvent = {
   selectHandle: HTMLSpanElement;
   pos: string;
 };
+
 export interface Entity {
   node: NodeElement;
   index: number;
@@ -64,7 +65,7 @@ export interface Entity {
   children?: Entity[];
 }
 
-export interface DataEntity<TreeDataType extends BasicDataNode = DataNode>
+export interface DataEntity<TreeDataType extends BasicDataNode = BasicDataNode>
   extends Omit<Entity, 'node' | 'parent' | 'children'> {
   node: TreeDataType;
   nodes: TreeDataType[];

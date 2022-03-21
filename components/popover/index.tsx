@@ -4,7 +4,6 @@ import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, initDefaultProps } from '../_util/props-util';
-import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import omit from '../_util/omit';
 import { getTransitionName } from '../_util/transition';
@@ -65,4 +64,4 @@ const Popover = defineComponent({
   },
 });
 
-export default withInstall(Popover);
+export default Popover;

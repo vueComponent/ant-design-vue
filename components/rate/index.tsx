@@ -1,7 +1,6 @@
 import type { ExtractPropTypes, VNode } from 'vue';
 import { watch, defineComponent, ref, reactive, onMounted } from 'vue';
 import { initDefaultProps, getPropsSlot, findDOMNode } from '../_util/props-util';
-import { withInstall } from '../_util/type';
 import { getOffsetLeft } from './util';
 import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
@@ -238,4 +237,4 @@ const Rate = defineComponent({
   },
 });
 
-export default withInstall(Rate);
+export default Rate;

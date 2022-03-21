@@ -1,4 +1,4 @@
-import type { App, VNodeTypes, Plugin, ExtractPropTypes } from 'vue';
+import type { VNodeTypes, ExtractPropTypes } from 'vue';
 import { defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
@@ -88,20 +88,9 @@ const Result = defineComponent({
   },
 });
 
-/* add resource */
-Result.PRESENTED_IMAGE_403 = ExceptionMap[403];
-Result.PRESENTED_IMAGE_404 = ExceptionMap[404];
-Result.PRESENTED_IMAGE_500 = ExceptionMap[500];
-
 /* istanbul ignore next */
-Result.install = function (app: App) {
-  app.component(Result.name, Result);
-  return app;
-};
-
-export default Result as typeof Result &
-  Plugin & {
-    readonly PRESENTED_IMAGE_403: typeof unauthorized;
-    readonly PRESENTED_IMAGE_404: typeof noFound;
-    readonly PRESENTED_IMAGE_500: typeof serverError;
-  };
+export default Object.assign(Result, {
+  PRESENTED_IMAGE_403: ExceptionMap[403],
+  PRESENTED_IMAGE_404: ExceptionMap[404],
+  PRESENTED_IMAGE_500: ExceptionMap[500],
+});

@@ -4,7 +4,6 @@ import VcSlider from '../vc-slider/src/Slider';
 import VcRange from '../vc-slider/src/Range';
 import VcHandle from '../vc-slider/src/Handle';
 import type { VueNode } from '../_util/type';
-import { withInstall } from '../_util/type';
 import type { TooltipPlacement } from '../tooltip/Tooltip';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import SliderTooltip from './SliderTooltip';
@@ -211,4 +210,4 @@ const Slider = defineComponent({
   },
 });
 
-export default withInstall(Slider);
+export default Slider;

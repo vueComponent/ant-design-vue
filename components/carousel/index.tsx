@@ -4,7 +4,6 @@ import PropTypes from '../_util/vue-types';
 import warning from '../_util/warning';
 import classNames from '../_util/classNames';
 import SlickCarousel from '../vc-slick';
-import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export type SwipeDirection = 'left' | 'down' | 'right' | 'up' | string;
@@ -146,4 +145,4 @@ const Carousel = defineComponent({
   },
 });
 
-export default withInstall(Carousel);
+export default Carousel;

@@ -5,7 +5,6 @@ import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
 import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import getIcons from '../select/utils/iconUtil';
 import type { VueNode } from '../_util/type';
-import { withInstall } from '../_util/type';
 import omit from '../_util/omit';
 import { computed, defineComponent, ref, watchEffect } from 'vue';
 import type { ExtractPropTypes, PropType } from 'vue';
@@ -275,4 +274,4 @@ const Cascader = defineComponent({
   },
 });
 
-export default withInstall(Cascader);
+export default Cascader;

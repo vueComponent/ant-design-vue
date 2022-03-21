@@ -8,7 +8,6 @@ import Operation from './operation';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
 import type { VueNode } from '../_util/type';
-import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { TransferListBodyProps } from './ListBody';
 import type { PaginationType } from './interface';
@@ -410,4 +409,4 @@ const Transfer = defineComponent({
   },
 });
 
-export default withInstall(Transfer);
+export default Transfer;

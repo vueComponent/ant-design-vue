@@ -3,7 +3,7 @@ import { defineComponent, computed, ref, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty } from '../_util/props-util';
 import type { SizeType } from '../config-provider';
-import { tuple, withInstall } from '../_util/type';
+import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import useFlexGapSupport from '../_util/hooks/useFlexGapSupport';
 import classNames from '../_util/classNames';
@@ -128,4 +128,4 @@ const Space = defineComponent({
   },
 });
 
-export default withInstall(Space);
+export default Space;

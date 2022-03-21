@@ -7,7 +7,7 @@ import type { Ref } from 'vue';
 import { ref, watchEffect } from 'vue';
 import { warning } from '../../vc-util/warning';
 
-export default (treeData: Ref<any>, fieldNames: Ref<FieldNames>) => {
+export const useDataEntities = (treeData: Ref<any>, fieldNames: Ref<FieldNames>) => {
   const valueEntities = ref<Map<RawValueType, DataEntity>>(new Map());
   const keyEntities = ref<Record<string, DataEntity>>({});
   watchEffect(() => {

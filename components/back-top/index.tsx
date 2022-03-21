@@ -16,7 +16,6 @@ import addEventListener from '../vc-util/Dom/addEventListener';
 import getScroll from '../_util/getScroll';
 import { getTransitionProps, Transition } from '../_util/transition';
 import scrollTo from '../_util/scrollTo';
-import { withInstall } from '../_util/type';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
@@ -141,4 +140,4 @@ const BackTop = defineComponent({
   },
 });
 
-export default withInstall(BackTop);
+export default BackTop;

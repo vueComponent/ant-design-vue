@@ -203,11 +203,7 @@ export const defaultConfigProvider: UnwrapRef<ConfigProviderProps> = reactive({
 });
 
 ConfigProvider.config = setGlobalConfig;
-ConfigProvider.install = function (app: App) {
-  app.component(ConfigProvider.name, ConfigProvider);
-};
 
-export default ConfigProvider as typeof ConfigProvider &
-  Plugin & {
-    readonly config: typeof setGlobalConfig;
-  };
+export default Object.assign(ConfigProvider, {
+  config: setGlobalConfig,
+});

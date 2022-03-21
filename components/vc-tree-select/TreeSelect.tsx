@@ -8,7 +8,7 @@ import { useProvideLegacySelectContext } from './LegacyContext';
 import useTreeData from './hooks/useTreeData';
 import { toArray, fillFieldNames, isNil } from './utils/valueUtil';
 import useCache from './hooks/useCache';
-import useDataEntities from './hooks/useDataEntities';
+import { useDataEntities } from './hooks/useDataEntities';
 import { fillAdditionalInfo, fillLegacyProps } from './utils/legacyUtil';
 import useCheckedKeys from './hooks/useCheckedKeys';
 import useFilterTreeData from './hooks/useFilterTreeData';

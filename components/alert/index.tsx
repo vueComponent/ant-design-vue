@@ -13,7 +13,7 @@ import classNames from '../_util/classNames';
 import PropTypes from '../_util/vue-types';
 import { getTransitionProps, Transition } from '../_util/transition';
 import { isValidElement, getPropsSlot } from '../_util/props-util';
-import { tuple, withInstall } from '../_util/type';
+import { tuple } from '../_util/type';
 import { cloneElement } from '../_util/vnode';
 import type { NodeMouseEventHandler } from '../vc-tree/contextTypes';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -191,4 +191,4 @@ const Alert = defineComponent({
   },
 });
 
-export default withInstall(Alert);
+export default Alert;

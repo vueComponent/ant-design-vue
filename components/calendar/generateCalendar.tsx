@@ -12,7 +12,6 @@ import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import enUS from './locale/en_US';
 import CalendarHeader from './Header';
 import type { VueNode } from '../_util/type';
-import type { App } from 'vue';
 import { computed, defineComponent, toRef } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
@@ -324,11 +323,6 @@ function generateCalendar<
       };
     },
   });
-
-  Calendar.install = function (app: App) {
-    app.component(Calendar.name, Calendar);
-    return app;
-  };
 
   return Calendar;
 }

@@ -146,10 +146,4 @@ const AutoComplete = defineComponent({
 export default Object.assign(AutoComplete, {
   Option,
   OptGroup,
-  install(app: App) {
-    app.component(AutoComplete.name, AutoComplete);
-    app.component(Option.displayName, Option);
-    app.component(OptGroup.displayName, OptGroup);
-    return app;
-  },
 });

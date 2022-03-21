@@ -14,7 +14,6 @@ import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
-import { withInstall } from '../_util/type';
 import {
   addObserveTarget,
   removeObserveTarget,
@@ -236,4 +235,4 @@ const Affix = defineComponent({
   },
 });
 
-export default withInstall(Affix);
+export default Affix;

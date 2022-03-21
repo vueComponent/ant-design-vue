@@ -3,7 +3,6 @@ import { provide, defineComponent, reactive, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import type { ModalLocale } from '../modal/locale';
 import warning from '../_util/warning';
-import { withInstall } from '../_util/type';
 import type { ValidateMessages } from '../form/interface';
 import type { TransferLocale } from '../transfer';
 import type { PickerLocale as DatePickerLocale } from '../date-picker/generatePicker';
@@ -98,4 +97,4 @@ LocaleProvider.install = function (app: App) {
   return app;
 };
 
-export default withInstall(LocaleProvider);
+export default LocaleProvider;

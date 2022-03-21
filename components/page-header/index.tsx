@@ -8,7 +8,6 @@ import Breadcrumb from '../breadcrumb';
 import Avatar from '../avatar';
 import TransButton from '../_util/transButton';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
-import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
@@ -162,4 +161,4 @@ const PageHeader = defineComponent({
   },
 });
 
-export default withInstall(PageHeader);
+export default PageHeader;

@@ -10,7 +10,6 @@ import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFill
 import Button from '../button';
 import { useLocaleReceiver } from '../locale-provider/LocaleReceiver';
 import defaultLocale from '../locale-provider/default';
-import { withInstall } from '../_util/type';
 import useMergedState from '../_util/hooks/useMergedState';
 import devWarning from '../vc-util/devWarning';
 import KeyCode from '../_util/KeyCode';
@@ -219,4 +218,4 @@ const Popconfirm = defineComponent({
     };
   },
 });
-export default withInstall(Popconfirm);
+export default Popconfirm;

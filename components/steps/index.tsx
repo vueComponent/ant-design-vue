@@ -134,9 +134,4 @@ export const Step = defineComponent({
 });
 export default Object.assign(Steps, {
   Step,
-  install: (app: App) => {
-    app.component(Steps.name, Steps);
-    app.component(Step.name, Step);
-    return app;
-  },
 });

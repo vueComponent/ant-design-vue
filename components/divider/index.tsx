@@ -1,7 +1,6 @@
 import { flattenChildren } from '../_util/props-util';
 import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
-import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const dividerProps = {
@@ -87,4 +86,4 @@ const Divider = defineComponent({
   },
 });
 
-export default withInstall(Divider);
+export default Divider;

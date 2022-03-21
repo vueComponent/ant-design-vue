@@ -1,4 +1,3 @@
-import { withInstall } from '../_util/type';
 import ToolTip, { tooltipProps } from './Tooltip';
 
 export type {
@@ -11,4 +10,4 @@ export type {
 
 export { tooltipProps };
 
-export default withInstall(ToolTip);
+export default ToolTip;

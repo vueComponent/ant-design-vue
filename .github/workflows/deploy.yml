@@ -14,10 +14,10 @@ jobs:
     - name: Install and Build 🔧
       run: |
         yarn
-        yarn run dist
+        yarn run build
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4.2.5
       with:
         token: ${{ secrets.DEPLOY }}
         branch: gh-pages
-        folder: dist
+        folder: site/dist

@@ -16,7 +16,7 @@ jobs:
         yarn
         yarn run dist
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@4.2.5
+      uses: JamesIves/github-pages-deploy-action@v4.2.5
       env:
         ACCESS_TOKEN: ${{ secrets.DEPLOY }}
         BRANCH: gh-pages

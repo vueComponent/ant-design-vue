@@ -6,7 +6,7 @@ import type {
   InternalFieldNames,
 } from '../Cascader';
 import { toPathKey } from '../utils/commonUtil';
-import type { Ref } from 'vue';
+import type { Ref, VNode } from 'vue';
 import { computed } from 'vue';
 import { isValidElement } from '../../_util/props-util';
 import { cloneElement } from '../../_util/vnode';
@@ -32,7 +32,9 @@ export default (
 
         // If exist non-string value, use VueNode instead
         return mergedLabels.reduce((list, label, index) => {
-          const keyedLabel = isValidElement(label) ? cloneElement(label, { key: index }) : label;
+          const keyedLabel = isValidElement(label)
+            ? cloneElement(label as unknown as VNode, { key: index })
+            : label;
 
           if (index === 0) {
             return [keyedLabel];

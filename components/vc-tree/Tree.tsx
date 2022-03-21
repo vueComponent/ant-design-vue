@@ -32,6 +32,7 @@ import {
   watch,
   watchEffect,
   nextTick,
+  toRaw,
 } from 'vue';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import type { CheckInfo, DraggableFn } from './props';
@@ -40,6 +41,7 @@ import { warning } from '../vc-util/warning';
 import KeyCode from '../_util/KeyCode';
 import classNames from '../_util/classNames';
 import pickAttrs from '../_util/pickAttrs';
+import useMaxLevel from './useMaxLevel';
 
 const MAX_RETRY_TIMES = 10;
 
@@ -101,8 +103,12 @@ export default defineComponent({
       // abstract-drag-over-node is the top node
       dragOverNodeKey: null,
     });
-    const treeData = computed(() => {
-      return props.treeData !== undefined ? props.treeData : convertTreeToData(props.children);
+    const treeData = shallowRef([]);
+    watchEffect(() => {
+      treeData.value =
+        props.treeData !== undefined
+          ? toRaw(props.treeData)
+          : convertTreeToData(toRaw(props.children));
     });
     const keyEntities = shallowRef({});
 
@@ -137,7 +143,9 @@ export default defineComponent({
 
     watchEffect(() => {
       if (treeData.value) {
-        const entitiesMap = convertDataToEntities(treeData.value, { fieldNames: fieldNames.value });
+        const entitiesMap = convertDataToEntities(toRaw(treeData.value), {
+          fieldNames: fieldNames.value,
+        });
         keyEntities.value = {
           [MOTION_KEY]: MotionEntity,
           ...entitiesMap.keyEntities,
@@ -180,32 +188,37 @@ export default defineComponent({
     );
 
     // ================ flattenNodes =================
-    const flattenNodes = computed(() => {
-      return flattenTreeData(treeData.value, expandedKeys.value, fieldNames.value);
+    const flattenNodes = shallowRef([]);
+    watchEffect(() => {
+      flattenNodes.value = flattenTreeData(
+        toRaw(treeData.value),
+        toRaw(expandedKeys.value),
+        fieldNames.value,
+      );
     });
     // ================ selectedKeys =================
     watchEffect(() => {
       if (props.selectable) {
         if (props.selectedKeys !== undefined) {
-          selectedKeys.value = calcSelectedKeys(props.selectedKeys, props);
+          selectedKeys.value = calcSelectedKeys(toRaw(props.selectedKeys), props);
         } else if (!init && props.defaultSelectedKeys) {
-          selectedKeys.value = calcSelectedKeys(props.defaultSelectedKeys, props);
+          selectedKeys.value = calcSelectedKeys(toRaw(props.defaultSelectedKeys), props);
         }
       }
     });
-
+    const { maxLevel, levelEntities } = useMaxLevel(keyEntities);
     // ================= checkedKeys =================
     watchEffect(() => {
       if (props.checkable) {
         let checkedKeyEntity;
 
         if (props.checkedKeys !== undefined) {
-          checkedKeyEntity = parseCheckedKeys(props.checkedKeys) || {};
+          checkedKeyEntity = parseCheckedKeys(toRaw(props.checkedKeys)) || {};
         } else if (!init && props.defaultCheckedKeys) {
-          checkedKeyEntity = parseCheckedKeys(props.defaultCheckedKeys) || {};
+          checkedKeyEntity = parseCheckedKeys(toRaw(props.defaultCheckedKeys)) || {};
         } else if (treeData.value) {
           // If `treeData` changed, we also need check it
-          checkedKeyEntity = parseCheckedKeys(props.checkedKeys) || {
+          checkedKeyEntity = parseCheckedKeys(toRaw(props.checkedKeys)) || {
             checkedKeys: checkedKeys.value,
             halfCheckedKeys: halfCheckedKeys.value,
           };
@@ -216,7 +229,13 @@ export default defineComponent({
             checkedKeyEntity;
 
           if (!props.checkStrictly) {
-            const conductKeys = conductCheck(newCheckedKeys, true, keyEntities.value);
+            const conductKeys = conductCheck(
+              newCheckedKeys,
+              true,
+              keyEntities.value,
+              maxLevel.value,
+              levelEntities.value,
+            );
             ({ checkedKeys: newCheckedKeys, halfCheckedKeys: newHalfCheckedKeys } = conductKeys);
           }
 
@@ -399,7 +418,7 @@ export default defineComponent({
         delayedDragEnterLogic[pos] = window.setTimeout(() => {
           if (dragState.draggingNodeKey === null) return;
 
-          let newExpandedKeys = [...expandedKeys.value];
+          let newExpandedKeys = expandedKeys.value.slice();
           const entity = keyEntities.value[node.eventKey];
 
           if (entity && (entity.children || []).length) {
@@ -549,7 +568,7 @@ export default defineComponent({
 
       if (dropTargetKey === null) return;
       const abstractDropNodeProps = {
-        ...getTreeNodeProps(dropTargetKey, treeNodeRequiredProps.value),
+        ...getTreeNodeProps(dropTargetKey, toRaw(treeNodeRequiredProps.value)),
         active: activeItem.value?.key === dropTargetKey,
         data: keyEntities.value[dropTargetKey].node,
       };
@@ -646,7 +665,7 @@ export default defineComponent({
         checked,
         nativeEvent: e,
       };
-
+      const keyEntitiesValue = keyEntities.value;
       if (checkStrictly) {
         const newCheckedKeys = checked
           ? arrAdd(checkedKeys.value, key)
@@ -654,7 +673,6 @@ export default defineComponent({
         const newHalfCheckedKeys = arrDel(halfCheckedKeys.value, key);
         checkedObj = { checked: newCheckedKeys, halfChecked: newHalfCheckedKeys };
 
-        const keyEntitiesValue = keyEntities.value;
         eventObj.checkedNodes = newCheckedKeys
           .map(checkedKey => keyEntitiesValue[checkedKey])
           .filter(entity => entity)
@@ -668,7 +686,9 @@ export default defineComponent({
         let { checkedKeys: newCheckedKeys, halfCheckedKeys: newHalfCheckedKeys } = conductCheck(
           [...checkedKeys.value, key],
           true,
-          keyEntities.value,
+          keyEntitiesValue,
+          maxLevel.value,
+          levelEntities.value,
         );
 
         // If remove, we do it again to correction
@@ -678,7 +698,9 @@ export default defineComponent({
           ({ checkedKeys: newCheckedKeys, halfCheckedKeys: newHalfCheckedKeys } = conductCheck(
             Array.from(keySet),
             { checked: false, halfCheckedKeys: newHalfCheckedKeys },
-            keyEntities.value,
+            keyEntitiesValue,
+            maxLevel.value,
+            levelEntities.value,
           ));
         }
 
@@ -689,7 +711,7 @@ export default defineComponent({
         eventObj.checkedNodesPositions = [];
         eventObj.halfCheckedKeys = newHalfCheckedKeys;
         newCheckedKeys.forEach(checkedKey => {
-          const entity = keyEntities.value[checkedKey];
+          const entity = keyEntitiesValue[checkedKey];
           if (!entity) return;
 
           const { node, pos } = entity;
@@ -906,7 +928,6 @@ export default defineComponent({
 
     const offsetActiveKey = (offset: number) => {
       let index = flattenNodes.value.findIndex(({ key }) => key === activeKey.value);
-
       // Align with index
       if (index === -1 && offset < 0) {
         index = flattenNodes.value.length;

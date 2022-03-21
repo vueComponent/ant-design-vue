@@ -10,6 +10,18 @@
 
 ---
 
+## 3.1.0-rc.2
+
+`2022-03-19`
+
+### 🔥🔥🔥 The official version is expected to be released at the end of March or early April, when 3.x will become the default version, and the documentation will also point to the 3.x documentation by default 🔥🔥🔥
+
+### 🔥🔥🔥 Surely Vue supports css var sync 🔥🔥🔥
+
+- 🌟 Optimize the underlying virtual scrolling components to scroll millions of data smoothly, involving `Select` `Tree` `TreeSelect` `AutoComplete` `Cascader` components
+- 🐞 Fix the animation does not take effect when the `Button` component switches loading [#5360](https://github.com/vueComponent/ant-design-vue/issues/5360)
+- 🐞 Fix the console error when `Modal` switches loading [#5361](https://github.com/vueComponent/ant-design-vue/issues/5361)
+
 ## 3.1.0-rc.1
 
 `2022-03-18`

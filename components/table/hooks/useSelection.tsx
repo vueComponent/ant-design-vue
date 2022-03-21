@@ -28,6 +28,7 @@ import type {
   ExpandType,
   GetPopupContainer,
 } from '../interface';
+import useMaxLevel from '../../vc-tree/useMaxLevel';
 
 // TODO: warning if use ajax!!!
 
@@ -120,7 +121,7 @@ export default function useSelection<RecordType>(
 
   const keyEntities = computed(() =>
     mergedRowSelection.value.checkStrictly
-      ? { keyEntities: null }
+      ? null
       : convertDataToEntities(configRef.data.value as unknown as DataNode[], {
           externalGetKey: configRef.getRowKey.value as any,
           childrenPropName: configRef.childrenColumnName.value,
@@ -155,7 +156,7 @@ export default function useSelection<RecordType>(
     });
     return map;
   });
-
+  const { maxLevel, levelEntities } = useMaxLevel(keyEntities);
   const isCheckboxDisabled: GetCheckDisabled<RecordType> = (r: RecordType) =>
     !!checkboxPropsMap.value.get(configRef.getRowKey.value(r))?.disabled;
 
@@ -167,6 +168,8 @@ export default function useSelection<RecordType>(
       mergedSelectedKeys.value,
       true,
       keyEntities.value,
+      maxLevel.value,
+      levelEntities.value,
       isCheckboxDisabled as any,
     );
     return [checkedKeys || [], halfCheckedKeys];
@@ -571,6 +574,8 @@ export default function useSelection<RecordType>(
                       [...originCheckedKeys, key],
                       true,
                       keyEntities.value,
+                      maxLevel.value,
+                      levelEntities.value,
                       isCheckboxDisabled as any,
                     );
                     const { checkedKeys, halfCheckedKeys } = result;
@@ -584,6 +589,8 @@ export default function useSelection<RecordType>(
                         Array.from(tempKeySet),
                         { checked: false, halfCheckedKeys },
                         keyEntities.value,
+                        maxLevel.value,
+                        levelEntities.value,
                         isCheckboxDisabled as any,
                       ).checkedKeys;
                     }

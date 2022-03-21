@@ -59,13 +59,7 @@ export default defineComponent({
     });
     return () => {
       const children = flattenChildren(slots.default?.());
-      const {
-        indeterminate,
-        skipGroup,
-        id = formItemContext.id.value,
-        onClick,
-        ...restProps
-      } = props;
+      const { indeterminate, skipGroup, id = formItemContext.id.value, ...restProps } = props;
       const { onMouseenter, onMouseleave, onInput, class: className, style, ...restAttrs } = attrs;
       const checkboxProps: CheckboxProps = {
         ...restProps,
@@ -103,7 +97,6 @@ export default defineComponent({
           style={style}
           onMouseenter={onMouseenter as EventHandler}
           onMouseleave={onMouseleave as EventHandler}
-          onClick={onClick}
         >
           <VcCheckbox {...checkboxProps} class={checkboxClass} ref={checkboxRef} />
           {children.length ? <span>{children}</span> : null}

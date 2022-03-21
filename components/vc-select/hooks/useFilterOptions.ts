@@ -8,7 +8,7 @@ import type {
 } from '../Select';
 import { injectPropsWithOption } from '../utils/valueUtil';
 import type { Ref } from 'vue';
-import { computed } from 'vue';
+import { toRaw, computed } from 'vue';
 
 function includes(test: any, search: string) {
   return toArray(test).join('').toUpperCase().includes(search);
@@ -22,22 +22,24 @@ export default (
   optionFilterProp?: Ref<string>,
 ) =>
   computed(() => {
-    if (!searchValue.value || filterOption.value === false) {
+    const searchValueVal = searchValue.value;
+    const optionFilterPropValue = optionFilterProp?.value;
+    const filterOptionValue = filterOption?.value;
+    if (!searchValueVal || filterOptionValue === false) {
       return options.value;
     }
-
     const { options: fieldOptions, label: fieldLabel, value: fieldValue } = fieldNames.value;
     const filteredOptions: DefaultOptionType[] = [];
 
-    const customizeFilter = typeof filterOption.value === 'function';
+    const customizeFilter = typeof filterOptionValue === 'function';
 
-    const upperSearch = searchValue.value.toUpperCase();
+    const upperSearch = searchValueVal.toUpperCase();
     const filterFunc = customizeFilter
-      ? (filterOption.value as FilterFunc<BaseOptionType>)
+      ? (filterOptionValue as FilterFunc<BaseOptionType>)
       : (_: string, option: DefaultOptionType) => {
           // Use provided `optionFilterProp`
-          if (optionFilterProp.value) {
-            return includes(option[optionFilterProp.value], upperSearch);
+          if (optionFilterPropValue) {
+            return includes(option[optionFilterPropValue], upperSearch);
           }
 
           // Auto select `label` or `value` by option type
@@ -53,17 +55,17 @@ export default (
       ? opt => injectPropsWithOption(opt)
       : opt => opt;
 
-    options.value.forEach(item => {
+    toRaw(options.value).forEach(item => {
       // Group should check child options
       if (item[fieldOptions]) {
         // Check group first
-        const matchGroup = filterFunc(searchValue.value, wrapOption(item));
+        const matchGroup = filterFunc(searchValueVal, wrapOption(item));
         if (matchGroup) {
           filteredOptions.push(item);
         } else {
           // Check option
           const subOptions = item[fieldOptions].filter((subItem: DefaultOptionType) =>
-            filterFunc(searchValue.value, wrapOption(subItem)),
+            filterFunc(searchValueVal, wrapOption(subItem)),
           );
           if (subOptions.length) {
             filteredOptions.push({
@@ -76,10 +78,9 @@ export default (
         return;
       }
 
-      if (filterFunc(searchValue.value, wrapOption(item))) {
+      if (filterFunc(searchValueVal, wrapOption(item))) {
         filteredOptions.push(item);
       }
     });
-
     return filteredOptions;
   });

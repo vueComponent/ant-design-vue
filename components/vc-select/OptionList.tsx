@@ -5,7 +5,7 @@ import classNames from '../_util/classNames';
 import pickAttrs from '../_util/pickAttrs';
 import { isValidElement } from '../_util/props-util';
 import createRef from '../_util/createRef';
-import { computed, defineComponent, nextTick, reactive, watch } from 'vue';
+import { computed, defineComponent, nextTick, reactive, toRaw, watch } from 'vue';
 import List from '../vc-virtual-list';
 import useMemo from '../_util/hooks/useMemo';
 import { isPlatformMac } from './utils/platformUtil';
@@ -105,7 +105,9 @@ const OptionList = defineComponent({
       () => {
         if (!baseProps.multiple && baseProps.open && props.rawValues.size === 1) {
           const value = Array.from(props.rawValues)[0];
-          const index = memoFlattenOptions.value.findIndex(({ data }) => data.value === value);
+          const index = toRaw(memoFlattenOptions.value).findIndex(
+            ({ data }) => data.value === value,
+          );
           if (index !== -1) {
             setActive(index);
             nextTick(() => {

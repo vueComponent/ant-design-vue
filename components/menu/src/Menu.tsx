@@ -1,5 +1,5 @@
 import type { Key } from '../../_util/type';
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, PropType, VNode } from 'vue';
 import { computed, defineComponent, ref, inject, watchEffect, watch, onMounted, unref } from 'vue';
 import shallowEqual from '../../_util/shallowequal';
 import type { StoreMenuInfo } from './hooks/useMenuContext';
@@ -357,7 +357,7 @@ export default defineComponent({
             let icon = props.expandIcon || slots.expandIcon;
             icon = typeof icon === 'function' ? icon(opt) : icon;
             return cloneElement(
-              icon,
+              icon as unknown as VNode,
               {
                 class: `${prefixCls.value}-submenu-expand-icon`,
               },

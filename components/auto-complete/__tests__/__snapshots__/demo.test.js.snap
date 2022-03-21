@@ -30,7 +30,7 @@ exports[`renders ./components/auto-complete/demo/custom.vue correctly 1`] = `
 <div style="width: 200px;" class="ant-select ant-select-show-search ant-select-auto-complete ant-select-single ant-select-customize-input ant-select-show-search">
   <!---->
   <!---->
-  <div class="ant-select-selector"><span class="ant-select-selection-search"><textarea placeholder="input here" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-input ant-select-selection-search-input" style="height: 50px;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></textarea></span>
+  <div class="ant-select-selector"><span class="ant-select-selection-search"><textarea placeholder="input here" id="rc_select_TEST_OR_SSR" autocomplete="off" class="ant-input ant-select-selection-search-input custom" style="height: 50px;" role="combobox" aria-haspopup="listbox" aria-owns="rc_select_TEST_OR_SSR_list" aria-autocomplete="list" aria-controls="rc_select_TEST_OR_SSR_list" aria-activedescendant="rc_select_TEST_OR_SSR_list_0"></textarea></span>
     <!----><span class="ant-select-selection-placeholder"><!----></span>
   </div>
   <!---->

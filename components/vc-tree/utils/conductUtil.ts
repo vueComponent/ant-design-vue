@@ -186,6 +186,8 @@ export function conductCheck<TreeDataType extends BasicDataNode = DataNode>(
   keyList: Key[],
   checked: true | { checked: false; halfCheckedKeys: Key[] },
   keyEntities: Record<Key, DataEntity<TreeDataType>>,
+  maxLevel: number,
+  levelEntities: Map<number, Set<DataEntity<TreeDataType>>>,
   getCheckDisabled?: GetCheckDisabled<TreeDataType>,
 ): ConductReturnType {
   const warningMissKeys: Key[] = [];
@@ -208,24 +210,6 @@ export function conductCheck<TreeDataType extends BasicDataNode = DataNode>(
       return hasEntity;
     }),
   );
-  const levelEntities = new Map<number, Set<DataEntity<TreeDataType>>>();
-  let maxLevel = 0;
-
-  // Convert entities by level for calculation
-  Object.keys(keyEntities).forEach(key => {
-    const entity = keyEntities[key];
-    const { level } = entity;
-
-    let levelSet: Set<DataEntity<TreeDataType>> = levelEntities.get(level);
-    if (!levelSet) {
-      levelSet = new Set();
-      levelEntities.set(level, levelSet);
-    }
-
-    levelSet.add(entity);
-
-    maxLevel = Math.max(maxLevel, level);
-  });
 
   warning(
     !warningMissKeys.length,

@@ -11,10 +11,10 @@ import {
 } from 'vue';
 import Wave from '../_util/wave';
 import buttonTypes from './buttonTypes';
-import LoadingOutlined from '@ant-design/icons-vue/LoadingOutlined';
-import { flattenChildren, getPropsSlot, initDefaultProps } from '../_util/props-util';
+import { flattenChildren, initDefaultProps } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
+import LoadingIcon from './LoadingIcon';
 
 import type { ButtonType } from './buttonTypes';
 import type { VNode, Ref } from 'vue';
@@ -146,9 +146,8 @@ export default defineComponent({
     });
 
     return () => {
-      const children = flattenChildren(getPropsSlot(slots, props));
-
-      const icon = getPropsSlot(slots, props, 'icon');
+      const { icon = slots.icon?.() } = props;
+      const children = flattenChildren(slots.default?.());
 
       isNeedInserted = children.length === 1 && !icon && !isUnborderedButtonType(props.type);
 
@@ -171,7 +170,16 @@ export default defineComponent({
         delete buttonProps.disabled;
       }
 
-      const iconNode = innerLoading.value ? <LoadingOutlined /> : icon;
+      const iconNode =
+        icon && !innerLoading.value ? (
+          icon
+        ) : (
+          <LoadingIcon
+            existIcon={!!icon}
+            prefixCls={prefixCls.value}
+            loading={!!innerLoading.value}
+          />
+        );
 
       const kids = children.map(child =>
         insertSpace(child, isNeedInserted && autoInsertSpace.value),

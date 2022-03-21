@@ -13,7 +13,7 @@ jobs:
       uses: actions/checkout@master
 
     - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@master
+      uses: JamesIves/github-pages-deploy-action@releases/v3
       env:
         ACCESS_TOKEN: ${{ secrets.DEPLOY }}
         BRANCH: gh-pages

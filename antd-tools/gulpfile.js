@@ -357,7 +357,7 @@ function publish(tagString, done) {
   }
   const publishNpm = process.env.PUBLISH_NPM_CLI || 'npm';
   runCmd(publishNpm, args, code => {
-    tag();
+    // tag();
     githubRelease(() => {
       done(code);
     });

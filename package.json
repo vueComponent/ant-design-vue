@@ -57,7 +57,7 @@
     "routes": "node site/scripts/genrateRoutes.js",
     "tsc": "tsc --noEmit",
     "vue-tsc": "vue-tsc --noEmit",
-    "site": "npm run routes && ./node_modules/vite/bin/vite.js build site --base=https://AylaAsia-zhaopan.github.io/ant-design-vue",
+    "site": "npm run routes && ./node_modules/vite/bin/vite.js build site --base=https://AylaAsia-zhaopan.github.io/ayla-antd",
     "pub:site": "npm run site && node site/scripts/pushToOSS.js",
     "prepare": "husky install",
     "version": "node ./scripts/generate-version",
@@ -75,7 +75,7 @@
     "url": "git+https://github.com/AylaAsia-zhaopan/ayla-antd"
   },
   "license": "MIT",
-  "homepage": "https://AylaAsia-zhaopan.github.io/ant-design-vue",
+  "homepage": "https://AylaAsia-zhaopan.github.io/ayla-antd",
   "peerDependencies": {
     "vue": ">=3.2.0"
   },

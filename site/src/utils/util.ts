@@ -30,7 +30,7 @@ export function getLocalizedPathname(
   let fullPath;
   if (!zhCN) {
     // to enUS
-    fullPath = /\/?index-cn/.test(pathname) ? '/' : pathname.replace('-cn', '');
+    fullPath = /\/?-cn/.test(pathname) ? '/' : pathname.replace('-cn', '');
   } else if (pathname === '/') {
     fullPath = '/index-cn';
   } else if (pathname.endsWith('/')) {

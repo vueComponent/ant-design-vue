@@ -49,21 +49,15 @@ export default defineComponent({
     const route = useRoute();
     const onLangChange = () => {
       const {
-        location: { pathname },
+        location: { hash },
       } = window;
-      const currentProtocol = `${window.location.protocol}//`;
-      const currentHref = window.location.href.substr(currentProtocol.length);
 
       if (isLocalStorageNameSupported()) {
-        localStorage.setItem('locale', isZhCN(pathname) ? 'en-US' : 'zh-CN');
+        localStorage.setItem('locale', isZhCN(hash) ? 'en-US' : 'zh-CN');
       }
-
-      window.location.href =
-        currentProtocol +
-        currentHref.replace(
-          window.location.pathname,
-          getLocalizedPathname(pathname, !isZhCN(pathname)).path,
-        );
+      window.location.href = `${window.location.origin}${
+        getLocalizedPathname(window.location.hash, !isZhCN(hash)).path
+      }`;
     };
 
     const changeVersion = () => {

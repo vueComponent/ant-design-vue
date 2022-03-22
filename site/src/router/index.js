@@ -4,7 +4,7 @@ import Iframe from '../layouts/Iframe.vue';
 // import Iframe from '../components/iframe.jsx';
 import demoRoutes from './demoRoutes';
 // import otherRoutes from './otherRoutes';
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHashHistory } from 'vue-router';
 const routes = [
   // ...otherRoutes,
   {
@@ -177,7 +177,7 @@ const routes = [
 ];
 
 export default createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   fallback: false,
   routes,
   scrollBehavior: to => {

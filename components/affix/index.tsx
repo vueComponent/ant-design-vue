@@ -79,7 +79,7 @@ export type AffixInstance = ComponentPublicInstance<Record<string, any>, AffixEx
 export const Affix = defineComponent({
   name: 'AAffix',
   props: affixProps,
-  emits: affixEmits,
+  emits: ['change', 'testUpdatePosition'] as unknown as AffixEmits,
   setup(props, { slots, emit, expose }) {
     const placeholderNode = ref();
     const fixedNode = ref();
@@ -239,7 +239,13 @@ export const Affix = defineComponent({
       const className = classNames({
         [prefixCls.value]: affixStyle,
       });
-      const restProps = omit(props, ['prefixCls', 'offsetTop', 'offsetBottom', 'target']);
+      const restProps = omit(props, [
+        'prefixCls',
+        'offsetTop',
+        'offsetBottom',
+        'target',
+        'onChange',
+      ]);
       return (
         <ResizeObserver onResize={updatePosition}>
           <div {...restProps} style={placeholderStyle} ref={placeholderNode}>

@@ -6,6 +6,7 @@ name: Node.js Package
 on:
   push:
     branches: [ayla]
+    path: ['package.json']
 
 jobs:
   build:

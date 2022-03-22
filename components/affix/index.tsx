@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes } from 'vue';
+import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import {
   defineComponent,
   ref,
@@ -54,8 +54,8 @@ export const affixProps = {
   /** 设置 Affix 需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数 */
   target: PropTypes.func.def(getDefaultTarget),
   prefixCls: PropTypes.string,
-  onChange: PropTypes.func,
-  onTestUpdatePosition: PropTypes.func,
+  onChange: Function as PropType<AffixEmits['change']>,
+  onTestUpdatePosition: Function as PropType<AffixEmits['testUpdatePosition']>,
 };
 
 // Affix Emits

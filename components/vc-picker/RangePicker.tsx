@@ -12,6 +12,7 @@ import {
   isEqual,
   getClosingViewDate,
   isSameDate,
+  isSameTime,
   isSameWeek,
   isSameQuarter,
   formatValue,
@@ -423,7 +424,6 @@ function RangerPicker<DateType>() {
         let endValue = getValue(values, 1);
         const { generateConfig, locale, picker, order, onCalendarChange, allowEmpty, onChange } =
           props;
-
         // >>>>> Format start & end values
         if (startValue && endValue && generateConfig.isAfter(startValue, endValue)) {
           if (
@@ -436,7 +436,8 @@ function RangerPicker<DateType>() {
             (picker !== 'week' &&
               picker !== 'quarter' &&
               picker !== 'time' &&
-              !isSameDate(generateConfig, startValue, endValue))
+              isSameDate(generateConfig, startValue, endValue)) ||
+            isSameTime(generateConfig, startValue, endValue)
           ) {
             // Clean up end date when start date is after end date
             if (sourceIndex === 0) {
@@ -469,7 +470,6 @@ function RangerPicker<DateType>() {
             : '';
         if (onCalendarChange) {
           const info: RangeInfo = { range: sourceIndex === 0 ? 'start' : 'end' };
-
           onCalendarChange(values, [startStr, endStr], info);
         }
 

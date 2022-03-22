@@ -55,7 +55,8 @@ export default defineComponent({
       if (isLocalStorageNameSupported()) {
         localStorage.setItem('locale', isZhCN(hash) ? 'en-US' : 'zh-CN');
       }
-      window.location.href = `${window.location.origin}${window.location.pathname}${
+      const pathname = window.location.pathname.substring(0, window.location.pathname.length - 1);
+      window.location.href = `${window.location.origin}${pathname}${
         getLocalizedPathname(window.location.hash, !isZhCN(hash)).path
       }`;
     };

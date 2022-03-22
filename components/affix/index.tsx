@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes } from 'vue';
+import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes } from 'vue';
 import {
   defineComponent,
   ref,
@@ -67,9 +67,14 @@ export const affixEmits = {
 
 export type AffixEmits = typeof affixEmits;
 
-export type AffixInstance = InstanceType<typeof Affix>;
+export type AffixExpose = {
+  updatePosition: (...args: any[]) => void;
+  lazyUpdatePosition: (...args: any[]) => void;
+};
 
 export type AffixProps = Partial<ExtractPropTypes<typeof affixProps>>;
+
+export type AffixInstance = ComponentPublicInstance<Record<string, any>, AffixExpose>;
 
 export const Affix = defineComponent({
   name: 'AAffix',

@@ -15,7 +15,7 @@ export default {
       'ant-design-vue': path.resolve(__dirname, '../components'),
     },
   },
-  base: '/',
+  base: './',
   server: {
     host: true,
   },

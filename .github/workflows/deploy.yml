@@ -11,7 +11,7 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
-    - name: Install and Build 🔧
+    - name: Install and Build
       run: |
         yarn
         yarn run build

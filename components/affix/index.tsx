@@ -10,6 +10,7 @@ import {
   onUnmounted,
   onUpdated,
 } from 'vue';
+import { isBoolean } from 'lodash-es';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
@@ -40,7 +41,7 @@ export interface AffixState {
   prevTarget: Window | HTMLElement | null;
 }
 
-// Affix
+// Affix Props
 export const affixProps = {
   /**
    * 距离窗口顶部达到指定偏移量后触发
@@ -57,12 +58,23 @@ export const affixProps = {
   onTestUpdatePosition: PropTypes.func,
 };
 
+// Affix Emits
+export const affixEmits = {
+  /** 固定状态改变时触发的回调函数 */
+  change: (lastAffix: boolean) => isBoolean(lastAffix),
+  testUpdatePosition: () => true,
+};
+
+export type AffixEmits = typeof affixEmits;
+
+export type AffixInstance = InstanceType<typeof Affix>;
+
 export type AffixProps = Partial<ExtractPropTypes<typeof affixProps>>;
 
-const Affix = defineComponent({
+export const Affix = defineComponent({
   name: 'AAffix',
   props: affixProps,
-  emits: ['change', 'testUpdatePosition'],
+  emits: affixEmits,
   setup(props, { slots, emit, expose }) {
     const placeholderNode = ref();
     const fixedNode = ref();

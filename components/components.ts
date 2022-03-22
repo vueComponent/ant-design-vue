@@ -1,5 +1,5 @@
-export type { AffixProps } from './affix';
-export { default as Affix } from './affix';
+export type { AffixInstance, AffixProps, AffixEmits } from './affix';
+export { Affix, affixProps, affixEmits } from './affix';
 
 export type { AnchorProps, AnchorLinkProps } from './anchor';
 export { default as Anchor, AnchorLink } from './anchor';

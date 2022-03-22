@@ -4,6 +4,17 @@ import * as components from './components';
 import { default as version } from './version';
 export * from './components';
 
+export const aGlobalProperties = {
+  $message: components.message,
+  $notification: components.notification,
+  $info: components.Modal.info,
+  $success: components.Modal.success,
+  $error: components.Modal.error,
+  $warning: components.Modal.warning,
+  $confirm: components.Modal.confirm,
+  $destroyAll: components.Modal.destroyAll,
+};
+
 export const install = function (app: App) {
   Object.keys(components).forEach(key => {
     const component = components[key];
@@ -12,16 +23,14 @@ export const install = function (app: App) {
     }
   });
 
-  app.config.globalProperties.$message = components.message;
-  app.config.globalProperties.$notification = components.notification;
-  app.config.globalProperties.$info = components.Modal.info;
-  app.config.globalProperties.$success = components.Modal.success;
-  app.config.globalProperties.$error = components.Modal.error;
-  app.config.globalProperties.$warning = components.Modal.warning;
-  app.config.globalProperties.$confirm = components.Modal.confirm;
-  app.config.globalProperties.$destroyAll = components.Modal.destroyAll;
+  Object.keys(aGlobalProperties).forEach(key => {
+    app.config.globalProperties[key] = aGlobalProperties[key];
+  });
+
   return app;
 };
+
+export type AComponentCustomProperties = typeof aGlobalProperties;
 
 export { version };
 

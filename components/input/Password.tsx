@@ -24,11 +24,11 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     ...inputProps,
-    prefixCls: PropTypes.string,
-    inputPrefixCls: PropTypes.string,
+    prefixCls: String,
+    inputPrefixCls: String,
     action: PropTypes.string.def('click'),
     visibilityToggle: PropTypes.looseBool.def(true),
-    iconRender: PropTypes.func,
+    iconRender: Function,
   },
   setup(props, { slots, attrs, expose }) {
     const visible = ref(false);

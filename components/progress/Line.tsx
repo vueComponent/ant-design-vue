@@ -9,7 +9,7 @@ import { getSuccessPercent, validProgress } from './utils';
 
 export const lineProps = {
   ...progressProps(),
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   direction: {
     type: String as PropType<Direction>,
   },

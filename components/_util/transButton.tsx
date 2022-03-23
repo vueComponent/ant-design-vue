@@ -19,10 +19,10 @@ const TransButton = defineComponent({
   name: 'TransButton',
   inheritAttrs: false,
   props: {
-    noStyle: PropTypes.looseBool,
-    onClick: PropTypes.func,
-    disabled: PropTypes.looseBool,
-    autofocus: PropTypes.looseBool,
+    noStyle: { type: Boolean, default: undefined },
+    onClick: Function,
+    disabled: { type: Boolean, default: undefined },
+    autofocus: { type: Boolean, default: undefined },
   },
   setup(props, { slots, emit, attrs, expose }) {
     const domRef = ref();

@@ -93,7 +93,7 @@ export const configProviderProps = () => ({
   input: {
     type: Object as PropType<{ autocomplete: string }>,
   },
-  autoInsertSpaceInButton: PropTypes.looseBool,
+  autoInsertSpaceInButton: { type: Boolean, default: undefined },
   locale: {
     type: Object as PropType<Locale>,
     default: undefined as Locale,
@@ -110,7 +110,7 @@ export const configProviderProps = () => ({
   space: {
     type: Object as PropType<{ size: SizeType | number }>,
   },
-  virtual: PropTypes.looseBool,
+  virtual: { type: Boolean, default: undefined },
   dropdownMatchSelectWidth: { type: [Number, Boolean], default: true },
   form: {
     type: Object as PropType<{

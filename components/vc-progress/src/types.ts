@@ -8,24 +8,24 @@ export type GapPositionType = 'top' | 'right' | 'bottom' | 'left';
 export type StrokeLinecapType = 'round' | 'butt' | 'square';
 
 export const propTypes = {
-  gapDegree: PropTypes.number,
+  gapDegree: Number,
   gapPosition: {
     type: String as PropType<GapPositionType>,
   },
   percent: {
     type: [Array, Number] as PropType<number | number[]>,
   },
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   strokeColor: {
     type: [Object, String, Array] as PropType<StrokeColorType>,
   },
   strokeLinecap: {
     type: String as PropType<StrokeLinecapType>,
   },
-  strokeWidth: PropTypes.number,
-  trailColor: PropTypes.string,
-  trailWidth: PropTypes.number,
-  transition: PropTypes.string,
+  strokeWidth: Number,
+  trailColor: String,
+  trailWidth: Number,
+  transition: String,
 };
 
 export type ProgressProps = Partial<ExtractPropTypes<typeof propTypes>>;

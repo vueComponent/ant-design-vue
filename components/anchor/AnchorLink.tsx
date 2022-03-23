@@ -7,10 +7,10 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectAnchor } from './context';
 
 export const anchorLinkProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   href: PropTypes.string.def('#'),
   title: PropTypes.any,
-  target: PropTypes.string,
+  target: String,
 };
 
 export type AnchorLinkProps = Partial<ExtractPropTypes<typeof anchorLinkProps>>;

@@ -19,29 +19,29 @@ export interface SuccessProps {
 }
 
 export const progressProps = () => ({
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   type: PropTypes.oneOf(ProgressType),
-  percent: PropTypes.number,
+  percent: Number,
   format: { type: Function as PropType<(percent?: number, successPercent?: number) => VueNode> },
   status: PropTypes.oneOf(progressStatuses),
-  showInfo: PropTypes.looseBool,
-  strokeWidth: PropTypes.number,
+  showInfo: { type: Boolean, default: undefined },
+  strokeWidth: Number,
   strokeLinecap: PropTypes.oneOf(tuple('butt', 'round', 'square')),
   strokeColor: {
     type: [String, Object] as PropType<string | ProgressGradient>,
   },
-  trailColor: PropTypes.string,
-  width: PropTypes.number,
+  trailColor: String,
+  width: Number,
   success: {
     type: Object as PropType<SuccessProps>,
     default: (): SuccessProps => ({}),
   },
-  gapDegree: PropTypes.number,
+  gapDegree: Number,
   gapPosition: PropTypes.oneOf(tuple('top', 'bottom', 'left', 'right')),
   size: PropTypes.oneOf(ProgressSize),
-  steps: PropTypes.number,
+  steps: Number,
   /** @deprecated Use `success` instead */
-  successPercent: PropTypes.number,
+  successPercent: Number,
   title: String,
 });
 

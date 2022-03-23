@@ -8,9 +8,9 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 export default defineComponent({
   name: 'AInputGroup',
   props: {
-    prefixCls: PropTypes.string,
+    prefixCls: String,
     size: { type: String as PropType<SizeType> },
-    compact: PropTypes.looseBool,
+    compact: { type: Boolean, default: undefined },
     onMouseenter: { type: Function as PropType<MouseEventHandler> },
     onMouseleave: { type: Function as PropType<MouseEventHandler> },
     onFocus: { type: Function as PropType<FocusEventHandler> },

@@ -21,7 +21,7 @@ export function convertLegacyProps(type?: LegacyButtonType): ButtonProps {
 }
 
 export const buttonProps = () => ({
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   type: PropTypes.oneOf(ButtonTypes),
   htmlType: PropTypes.oneOf(ButtonHTMLTypes).def('button'),
   shape: PropTypes.oneOf(ButtonShapes),
@@ -32,14 +32,14 @@ export const buttonProps = () => ({
     type: [Boolean, Object] as PropType<boolean | { delay?: number }>,
     default: (): boolean | { delay?: number } => false,
   },
-  disabled: PropTypes.looseBool,
-  ghost: PropTypes.looseBool,
-  block: PropTypes.looseBool,
-  danger: PropTypes.looseBool,
+  disabled: { type: Boolean, default: undefined },
+  ghost: { type: Boolean, default: undefined },
+  block: { type: Boolean, default: undefined },
+  danger: { type: Boolean, default: undefined },
   icon: PropTypes.any,
-  href: PropTypes.string,
-  target: PropTypes.string,
-  title: PropTypes.string,
+  href: String,
+  target: String,
+  title: String,
   onClick: {
     type: Function as PropType<(event: MouseEvent) => void>,
   },

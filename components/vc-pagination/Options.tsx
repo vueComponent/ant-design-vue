@@ -6,17 +6,17 @@ import type { EventHandler } from '../_util/EventInterface';
 
 export default defineComponent({
   props: {
-    disabled: PropTypes.looseBool,
-    changeSize: PropTypes.func,
-    quickGo: PropTypes.func,
+    disabled: { type: Boolean, default: undefined },
+    changeSize: Function,
+    quickGo: Function,
     selectComponentClass: PropTypes.any,
-    current: PropTypes.number,
+    current: Number,
     pageSizeOptions: PropTypes.array.def(['10', '20', '50', '100']),
-    pageSize: PropTypes.number,
-    buildOptionText: PropTypes.func,
+    pageSize: Number,
+    buildOptionText: Function,
     locale: PropTypes.object,
-    rootPrefixCls: PropTypes.string,
-    selectPrefixCls: PropTypes.string,
+    rootPrefixCls: String,
+    selectPrefixCls: String,
     goButton: PropTypes.any,
   },
   setup(props) {

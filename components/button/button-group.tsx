@@ -8,7 +8,7 @@ import type { SizeType } from '../config-provider';
 import UnreachableException from '../_util/unreachableException';
 
 const buttonGroupProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   size: {
     type: String as PropType<SizeType>,
   },

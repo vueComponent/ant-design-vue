@@ -33,8 +33,8 @@ const initialPosition = {
   y: 0,
 };
 const PreviewType = {
-  src: PropTypes.string,
-  alt: PropTypes.string,
+  src: String,
+  alt: String,
   ...IDialogPropTypes,
 };
 const Preview = defineComponent({

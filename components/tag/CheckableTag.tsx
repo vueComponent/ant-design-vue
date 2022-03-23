@@ -7,8 +7,8 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 const CheckableTag = defineComponent({
   name: 'ACheckableTag',
   props: {
-    prefixCls: PropTypes.string,
-    checked: PropTypes.looseBool,
+    prefixCls: String,
+    checked: { type: Boolean, default: undefined },
     onChange: {
       type: Function as PropType<(checked: boolean) => void>,
     },

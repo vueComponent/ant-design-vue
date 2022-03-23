@@ -14,15 +14,15 @@ import omit from '../_util/omit';
 export const SwitchSizes = tuple('small', 'default');
 type CheckedType = boolean | string | number;
 export const switchProps = {
-  id: PropTypes.string,
-  prefixCls: PropTypes.string,
+  id: String,
+  prefixCls: String,
   size: PropTypes.oneOf(SwitchSizes),
-  disabled: PropTypes.looseBool,
+  disabled: { type: Boolean, default: undefined },
   checkedChildren: PropTypes.any,
   unCheckedChildren: PropTypes.any,
   tabindex: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  autofocus: PropTypes.looseBool,
-  loading: PropTypes.looseBool,
+  autofocus: { type: Boolean, default: undefined },
+  loading: { type: Boolean, default: undefined },
   checked: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.looseBool]),
   checkedValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.looseBool]).def(
     true,

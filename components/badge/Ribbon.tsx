@@ -8,7 +8,7 @@ import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const ribbonProps = {
-  prefix: PropTypes.string,
+  prefix: String,
   color: { type: String as PropType<LiteralUnion<PresetColorType, string>> },
   text: PropTypes.any,
   placement: PropTypes.oneOf(tuple('start', 'end')).def('end'),

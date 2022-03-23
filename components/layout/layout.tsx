@@ -5,9 +5,9 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import { SiderHookProviderKey } from './injectionKey';
 
 export const basicProps = {
-  prefixCls: PropTypes.string,
-  hasSider: PropTypes.looseBool,
-  tagName: PropTypes.string,
+  prefixCls: String,
+  hasSider: { type: Boolean, default: undefined },
+  tagName: String,
 };
 
 export type BasicProps = Partial<ExtractPropTypes<typeof basicProps>> & HTMLAttributes;

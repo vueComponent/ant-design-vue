@@ -11,8 +11,8 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import useProvideSize from '../_util/hooks/useSize';
 
 export const groupProps = () => ({
-  prefixCls: PropTypes.string,
-  maxCount: PropTypes.number,
+  prefixCls: String,
+  maxCount: Number,
   maxStyle: {
     type: Object as PropType<CSSProperties>,
     default: () => ({} as CSSProperties),

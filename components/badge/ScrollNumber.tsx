@@ -8,9 +8,9 @@ import SingleNumber from './SingleNumber';
 import { filterEmpty } from '../_util/props-util';
 
 export const scrollNumberProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   count: PropTypes.any,
-  component: PropTypes.string,
+  component: String,
   title: PropTypes.oneOfType([PropTypes.number, PropTypes.string, null]),
   show: Boolean,
 };

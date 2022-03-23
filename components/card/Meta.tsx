@@ -6,7 +6,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 export default defineComponent({
   name: 'ACardMeta',
   props: {
-    prefixCls: PropTypes.string,
+    prefixCls: String,
     title: PropTypes.any,
     description: PropTypes.any,
     avatar: PropTypes.any,

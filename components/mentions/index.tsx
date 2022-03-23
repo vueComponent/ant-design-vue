@@ -60,7 +60,7 @@ const getMentions = (value = '', config: MentionsConfig = {}): MentionsEntity[] 
 
 export const mentionsProps = {
   ...baseMentionsProps,
-  loading: PropTypes.looseBool,
+  loading: { type: Boolean, default: undefined },
   onFocus: {
     type: Function as PropType<(e: FocusEvent) => void>,
   },

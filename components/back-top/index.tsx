@@ -24,9 +24,9 @@ export const backTopProps = {
   visibilityHeight: PropTypes.number.def(400),
   duration: PropTypes.number.def(450),
   target: Function as PropType<() => HTMLElement | Window | Document>,
-  prefixCls: PropTypes.string,
-  onClick: PropTypes.func,
-  // visible: PropTypes.looseBool, // Only for test. Don't use it.
+  prefixCls: String,
+  onClick: Function,
+  // visible: { type: Boolean, default: undefined }, // Only for test. Don't use it.
 };
 
 export type BackTopProps = Partial<ExtractPropTypes<typeof backTopProps>>;

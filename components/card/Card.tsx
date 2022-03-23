@@ -24,7 +24,7 @@ export type CardSize = 'default' | 'small';
 const { TabPane } = Tabs;
 
 export const cardProps = () => ({
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   title: PropTypes.any,
   extra: PropTypes.any,
   bordered: PropTypes.looseBool.def(true),
@@ -39,8 +39,8 @@ export const cardProps = () => ({
     type: Array as PropType<CardTabListType[]>,
   },
   tabBarExtraContent: PropTypes.any,
-  activeTabKey: PropTypes.string,
-  defaultActiveTabKey: PropTypes.string,
+  activeTabKey: String,
+  defaultActiveTabKey: String,
   cover: PropTypes.any,
   onTabChange: {
     type: Function as PropType<(key: string) => void>,

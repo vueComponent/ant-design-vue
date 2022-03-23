@@ -56,11 +56,11 @@ const TransBtn: TransBtnType = (props, { slots }) => {
 TransBtn.inheritAttrs = false;
 TransBtn.displayName = 'TransBtn';
 TransBtn.props = {
-  class: PropTypes.string,
+  class: String,
   customizeIcon: PropTypes.any,
   customizeIconProps: PropTypes.any,
-  onMousedown: PropTypes.func,
-  onClick: PropTypes.func,
+  onMousedown: Function,
+  onClick: Function,
 };
 
 export default TransBtn;

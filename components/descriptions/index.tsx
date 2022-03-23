@@ -29,13 +29,13 @@ import { flattenChildren } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const DescriptionsItemProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   label: PropTypes.any,
-  span: PropTypes.number,
+  span: Number,
 };
 
 const descriptionsItemProp = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   label: PropTypes.any,
   labelStyle: PropTypes.style,
   contentStyle: PropTypes.style,
@@ -129,8 +129,8 @@ function getRows(children: VNode[], column: number) {
 }
 
 export const descriptionsProps = {
-  prefixCls: PropTypes.string,
-  bordered: PropTypes.looseBool,
+  prefixCls: String,
+  bordered: { type: Boolean, default: undefined },
   size: PropTypes.oneOf(tuple('default', 'middle', 'small')).def('default'),
   title: PropTypes.any,
   extra: PropTypes.any,
@@ -139,7 +139,7 @@ export const descriptionsProps = {
     default: (): number | Partial<Record<Breakpoint, number>> => DEFAULT_COLUMN_MAP,
   },
   layout: PropTypes.oneOf(tuple('horizontal', 'vertical')),
-  colon: PropTypes.looseBool,
+  colon: { type: Boolean, default: undefined },
   labelStyle: PropTypes.style,
   contentStyle: PropTypes.style,
 };

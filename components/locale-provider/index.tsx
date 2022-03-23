@@ -59,7 +59,7 @@ const LocaleProvider = defineComponent({
     locale: {
       type: Object as PropType<Locale>,
     },
-    ANT_MARK__: PropTypes.string,
+    ANT_MARK__: String,
   },
   setup(props, { slots }) {
     warning(

@@ -23,16 +23,16 @@ export type RadioGroupChildOption = {
 };
 
 export const radioGroupProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   value: PropTypes.any,
   size: PropTypes.oneOf(RadioGroupSizeTypes).def('default'),
   options: {
     type: Array as PropType<Array<string | RadioGroupChildOption | number>>,
   },
-  disabled: PropTypes.looseBool,
-  name: PropTypes.string,
+  disabled: { type: Boolean, default: undefined },
+  name: String,
   buttonStyle: PropTypes.string.def('outline'),
-  id: PropTypes.string,
+  id: String,
   optionType: PropTypes.oneOf(RadioGroupOptionTypes).def('default'),
 };
 

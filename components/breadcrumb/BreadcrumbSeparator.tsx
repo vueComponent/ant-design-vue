@@ -5,7 +5,7 @@ import { flattenChildren } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const breadcrumbSeparatorProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
 };
 export type BreadcrumbSeparatorProps = Partial<ExtractPropTypes<typeof breadcrumbSeparatorProps>>;
 

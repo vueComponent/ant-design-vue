@@ -15,21 +15,21 @@ import isNumeric from '../_util/isNumeric';
 export const badgeProps = {
   /** Number to show in badge */
   count: PropTypes.any,
-  showZero: PropTypes.looseBool,
+  showZero: { type: Boolean, default: undefined },
   /** Max count to show */
   overflowCount: PropTypes.number.def(99),
   /** whether to show red dot without number */
-  dot: PropTypes.looseBool,
-  prefixCls: PropTypes.string,
-  scrollNumberPrefixCls: PropTypes.string,
+  dot: { type: Boolean, default: undefined },
+  prefixCls: String,
+  scrollNumberPrefixCls: String,
   status: PropTypes.oneOf(tuple('success', 'processing', 'default', 'error', 'warning')),
   // sync antd@4.6.0
   size: PropTypes.oneOf(tuple('default', 'small')).def('default'),
-  color: PropTypes.string,
+  color: String,
   text: PropTypes.any,
   offset: PropTypes.arrayOf(PropTypes.oneOfType([String, Number])),
   numberStyle: PropTypes.style,
-  title: PropTypes.string,
+  title: String,
 };
 
 export type BadgeProps = Partial<ExtractPropTypes<typeof badgeProps>>;

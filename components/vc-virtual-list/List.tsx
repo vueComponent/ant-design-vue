@@ -79,12 +79,12 @@ const List = defineComponent({
   name: 'List',
   inheritAttrs: false,
   props: {
-    prefixCls: PropTypes.string,
+    prefixCls: String,
     data: PropTypes.array,
-    height: PropTypes.number,
-    itemHeight: PropTypes.number,
+    height: Number,
+    itemHeight: Number,
     /** If not match virtual scroll condition, Set List still use height of container. */
-    fullHeight: PropTypes.looseBool,
+    fullHeight: { type: Boolean, default: undefined },
     itemKey: {
       type: [String, Number, Function] as PropType<Key | ((item: Record<string, any>) => Key)>,
       required: true,
@@ -93,11 +93,11 @@ const List = defineComponent({
       type: [String, Object] as PropType<string | Component>,
     },
     /** Set `false` will always use real scroll instead of virtual one */
-    virtual: PropTypes.looseBool,
-    children: PropTypes.func,
-    onScroll: PropTypes.func,
-    onMousedown: PropTypes.func,
-    onMouseenter: PropTypes.func,
+    virtual: { type: Boolean, default: undefined },
+    children: Function,
+    onScroll: Function,
+    onMousedown: Function,
+    onMouseenter: Function,
     onVisibleChange: Function as PropType<(visibleList: any[], fullList: any[]) => void>,
   },
   setup(props, { expose }) {

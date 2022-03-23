@@ -23,11 +23,11 @@ export default defineComponent({
   name: 'ScrollBar',
   inheritAttrs: false,
   props: {
-    prefixCls: PropTypes.string,
-    scrollTop: PropTypes.number,
-    scrollHeight: PropTypes.number,
-    height: PropTypes.number,
-    count: PropTypes.number,
+    prefixCls: String,
+    scrollTop: Number,
+    scrollHeight: Number,
+    height: Number,
+    count: Number,
     onScroll: {
       type: Function as PropType<(scrollTop: number) => void>,
     },

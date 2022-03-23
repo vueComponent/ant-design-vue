@@ -41,7 +41,7 @@ export type ListSize = 'small' | 'default' | 'large';
 export type ListItemLayout = 'horizontal' | 'vertical';
 
 export const listProps = () => ({
-  bordered: PropTypes.looseBool,
+  bordered: { type: Boolean, default: undefined },
   dataSource: PropTypes.array,
   extra: PropTypes.any,
   grid: { type: Object as PropType<ListGridType>, default: undefined as ListGridType },
@@ -59,7 +59,7 @@ export const listProps = () => ({
   rowKey: [String, Number, Function] as PropType<Key | ((item: any) => Key)>,
   renderItem: PropTypes.any,
   size: String as PropType<ListSize>,
-  split: PropTypes.looseBool,
+  split: { type: Boolean, default: undefined },
   header: PropTypes.any,
   footer: PropTypes.any,
   locale: {

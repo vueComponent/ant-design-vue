@@ -1,56 +1,47 @@
-<docs>
----
-order: 0
-title:
-  zh-CN: 基本用法
-  en-US: Basic usage
----
-
-## zh-CN
-
-第一个对话框。
-
-## en-US
-
-Basic modal.
-
-</docs>
-
 <template>
   <div>
-    <div ref="container"></div>
-    <a-button type="primary" @click="showModal">Open Modal</a-button>
-    <a-modal v-model:visible="visible" title="Basic Modal" @ok="handleOk">
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-    </a-modal>
+    <a-menu
+      v-model:selected-keys="selectedKeys"
+      :open-keys="openKeys"
+      style="width: 256px"
+      mode="inline"
+    >
+      <a-sub-menu key="sub1">
+        <template #icon>
+          <MailOutlined />
+        </template>
+        <template #title>Navigation One</template>
+        <a-menu-item key="3">Option 3</a-menu-item>
+        <a-menu-item key="4">Option 4</a-menu-item>
+      </a-sub-menu>
+    </a-menu>
+    <a-button @click="open">展开</a-button>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, ref } from 'vue';
+<script>
+import { defineComponent, ref, watchEffect } from 'vue';
+import { MailOutlined } from '@ant-design/icons-vue';
 export default defineComponent({
+  components: {
+    MailOutlined,
+  },
   setup() {
-    const visible = ref<boolean>(false);
-
-    const showModal = () => {
-      visible.value = true;
+    const selectedKeys = ref(['1']);
+    const openKeys = ref([]);
+    const open = () => {
+      openKeys.value.push('sub1');
+      // openKeys.value = [...openKeys.value, 'sub1'];
     };
-
-    const handleOk = (e: MouseEvent) => {
-      console.log(e);
-      visible.value = false;
-    };
-    const container = ref();
+    const test = ref([1]);
+    watchEffect(() => {
+      console.log(111, test.value);
+    });
+    window.openKeys = openKeys;
+    window.test = test;
     return {
-      container,
-      visible,
-      showModal,
-      handleOk,
-      getContainer() {
-        console.log('container', container.value);
-        return container.value;
-      },
+      selectedKeys,
+      openKeys,
+      open,
     };
   },
 });

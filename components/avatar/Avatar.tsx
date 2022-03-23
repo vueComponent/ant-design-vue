@@ -15,18 +15,18 @@ import eagerComputed from '../_util/eagerComputed';
 export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 
 export const avatarProps = () => ({
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   shape: PropTypes.oneOf(tuple('circle', 'square')).def('circle'),
   size: {
     type: [Number, String, Object] as PropType<AvatarSize>,
     default: (): AvatarSize => 'default',
   },
-  src: PropTypes.string,
+  src: String,
   /** Srcset of image avatar */
-  srcset: PropTypes.string,
+  srcset: String,
   icon: PropTypes.any,
-  alt: PropTypes.string,
-  gap: PropTypes.number,
+  alt: String,
+  gap: Number,
   draggable: PropTypes.bool,
   crossOrigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
   loadError: {

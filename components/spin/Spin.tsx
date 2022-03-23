@@ -11,12 +11,12 @@ import { defaultConfigProvider } from '../config-provider';
 export const SpinSize = PropTypes.oneOf(tuple('small', 'default', 'large'));
 
 export const spinProps = () => ({
-  prefixCls: PropTypes.string,
-  spinning: PropTypes.looseBool,
+  prefixCls: String,
+  spinning: { type: Boolean, default: undefined },
   size: SpinSize,
-  wrapperClassName: PropTypes.string,
+  wrapperClassName: String,
   tip: PropTypes.any,
-  delay: PropTypes.number,
+  delay: Number,
   indicator: PropTypes.any,
 });
 

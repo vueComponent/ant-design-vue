@@ -7,12 +7,12 @@ import classNames from '../_util/classNames';
 
 export default defineComponent({
   props: {
-    minOverlayWidthMatchTrigger: PropTypes.looseBool,
+    minOverlayWidthMatchTrigger: { type: Boolean, default: undefined },
     arrow: PropTypes.looseBool.def(false),
     prefixCls: PropTypes.string.def('rc-dropdown'),
-    transitionName: PropTypes.string,
+    transitionName: String,
     overlayClassName: PropTypes.string.def(''),
-    openClassName: PropTypes.string,
+    openClassName: String,
     animation: PropTypes.any,
     align: PropTypes.object,
     overlayStyle: PropTypes.style,
@@ -21,11 +21,11 @@ export default defineComponent({
     trigger: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def(
       'hover',
     ),
-    alignPoint: PropTypes.looseBool,
+    alignPoint: { type: Boolean, default: undefined },
     showAction: PropTypes.array,
     hideAction: PropTypes.array,
-    getPopupContainer: PropTypes.func,
-    visible: PropTypes.looseBool,
+    getPopupContainer: Function,
+    visible: { type: Boolean, default: undefined },
     defaultVisible: PropTypes.looseBool.def(false),
     mouseEnterDelay: PropTypes.number.def(0.15),
     mouseLeaveDelay: PropTypes.number.def(0.1),

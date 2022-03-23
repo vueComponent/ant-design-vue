@@ -7,8 +7,8 @@ import DownOutlined from '@ant-design/icons-vue/DownOutlined';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const breadcrumbItemProps = {
-  prefixCls: PropTypes.string,
-  href: PropTypes.string,
+  prefixCls: String,
+  href: String,
   separator: PropTypes.any,
   overlay: PropTypes.any,
 };

@@ -24,7 +24,7 @@ import ActionButton from '../_util/ActionButton';
 
 export const popconfirmProps = () => ({
   ...abstractTooltipProps(),
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   content: PropTypes.any,
   title: PropTypes.any,
   okType: {

@@ -577,18 +577,18 @@ const Base = defineComponent<InternalBlockProps>({
 export const baseProps = () => ({
   editable: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
   copyable: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
-  prefixCls: PropTypes.string,
-  component: PropTypes.string,
+  prefixCls: String,
+  component: String,
   type: PropTypes.oneOf(['secondary', 'success', 'danger', 'warning']),
-  disabled: PropTypes.looseBool,
+  disabled: { type: Boolean, default: undefined },
   ellipsis: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
-  code: PropTypes.looseBool,
-  mark: PropTypes.looseBool,
-  underline: PropTypes.looseBool,
-  delete: PropTypes.looseBool,
-  strong: PropTypes.looseBool,
-  keyboard: PropTypes.looseBool,
-  content: PropTypes.string,
+  code: { type: Boolean, default: undefined },
+  mark: { type: Boolean, default: undefined },
+  underline: { type: Boolean, default: undefined },
+  delete: { type: Boolean, default: undefined },
+  strong: { type: Boolean, default: undefined },
+  keyboard: { type: Boolean, default: undefined },
+  content: String,
 });
 
 Base.props = baseProps();

@@ -15,18 +15,18 @@ import useRefs from '../_util/hooks/useRefs';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export const rateProps = {
-  prefixCls: PropTypes.string,
-  count: PropTypes.number,
-  value: PropTypes.number,
-  allowHalf: PropTypes.looseBool,
-  allowClear: PropTypes.looseBool,
+  prefixCls: String,
+  count: Number,
+  value: Number,
+  allowHalf: { type: Boolean, default: undefined },
+  allowClear: { type: Boolean, default: undefined },
   tooltips: PropTypes.arrayOf(PropTypes.string),
-  disabled: PropTypes.looseBool,
+  disabled: { type: Boolean, default: undefined },
   character: PropTypes.any,
-  autofocus: PropTypes.looseBool,
+  autofocus: { type: Boolean, default: undefined },
   tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  direction: PropTypes.string,
-  id: PropTypes.string,
+  direction: String,
+  id: String,
 };
 
 export type RateProps = Partial<ExtractPropTypes<typeof rateProps>>;

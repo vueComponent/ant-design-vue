@@ -16,7 +16,7 @@ import useDestroyed from '../_util/hooks/useDestroyed';
 
 export const pageHeaderProps = {
   backIcon: PropTypes.any,
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   title: PropTypes.any,
   subTitle: PropTypes.any,
   breadcrumb: PropTypes.object,
@@ -24,8 +24,8 @@ export const pageHeaderProps = {
   footer: PropTypes.any,
   extra: PropTypes.any,
   avatar: PropTypes.object,
-  ghost: PropTypes.looseBool,
-  onBack: PropTypes.func,
+  ghost: { type: Boolean, default: undefined },
+  onBack: Function,
 };
 
 export type PageHeaderProps = Partial<ExtractPropTypes<typeof pageHeaderProps>>;

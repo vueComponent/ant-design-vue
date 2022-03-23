@@ -15,7 +15,7 @@ export interface Route {
 }
 
 export const breadcrumbProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   routes: { type: Array as PropType<Route[]> },
   params: PropTypes.any,
   separator: PropTypes.any,

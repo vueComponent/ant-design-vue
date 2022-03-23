@@ -51,9 +51,9 @@ export const abstractCheckboxProps = () => {
     indeterminate: { type: Boolean, default: undefined },
     type: { type: String, default: 'checkbox' },
     autofocus: { type: Boolean, default: undefined },
-    onChange: PropTypes.func,
-    'onUpdate:checked': PropTypes.func,
-    onClick: PropTypes.func,
+    onChange: Function,
+    'onUpdate:checked': Function,
+    onClick: Function,
     skipGroup: { type: Boolean, default: false },
   };
 };

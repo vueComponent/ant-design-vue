@@ -7,12 +7,12 @@ import { progressProps } from './props';
 
 export const stepsProps = {
   ...progressProps(),
-  steps: PropTypes.number,
+  steps: Number,
   size: {
     type: String as PropType<ProgressSize>,
   },
-  strokeColor: PropTypes.string,
-  trailColor: PropTypes.string,
+  strokeColor: String,
+  trailColor: String,
 };
 
 export type StepsProps = Partial<ExtractPropTypes<typeof stepsProps>>;

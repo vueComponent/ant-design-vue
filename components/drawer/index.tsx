@@ -35,21 +35,21 @@ export interface PushState {
 const defaultPushState: PushState = { distance: 180 };
 
 export const drawerProps = () => ({
-  autofocus: PropTypes.looseBool,
-  closable: PropTypes.looseBool,
+  autofocus: { type: Boolean, default: undefined },
+  closable: { type: Boolean, default: undefined },
   closeIcon: PropTypes.any,
-  destroyOnClose: PropTypes.looseBool,
-  forceRender: PropTypes.looseBool,
+  destroyOnClose: { type: Boolean, default: undefined },
+  forceRender: { type: Boolean, default: undefined },
   getContainer: PropTypes.any,
-  maskClosable: PropTypes.looseBool,
-  mask: PropTypes.looseBool,
+  maskClosable: { type: Boolean, default: undefined },
+  mask: { type: Boolean, default: undefined },
   maskStyle: PropTypes.object,
   /** @deprecated Use `style` instead */
   wrapStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   style: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   class: PropTypes.any,
   /** @deprecated Use `class` instead */
-  wrapClassName: PropTypes.string,
+  wrapClassName: String,
   size: {
     type: String as PropType<sizeType>,
   },
@@ -58,14 +58,14 @@ export const drawerProps = () => ({
   bodyStyle: PropTypes.object,
   contentWrapperStyle: PropTypes.object,
   title: PropTypes.any,
-  visible: PropTypes.looseBool,
+  visible: { type: Boolean, default: undefined },
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  zIndex: PropTypes.number,
-  prefixCls: PropTypes.string,
+  zIndex: Number,
+  prefixCls: String,
   push: PropTypes.oneOfType([PropTypes.looseBool, { type: Object as PropType<PushState> }]),
   placement: PropTypes.oneOf(PlacementTypes),
-  keyboard: PropTypes.looseBool,
+  keyboard: { type: Boolean, default: undefined },
   extra: PropTypes.any,
   footer: PropTypes.any,
   footerStyle: PropTypes.object,
@@ -77,7 +77,7 @@ export const drawerProps = () => ({
   },
   handle: PropTypes.any,
   /** @deprecated Use `@afterVisibleChange` instead */
-  afterVisibleChange: PropTypes.func,
+  afterVisibleChange: Function,
 });
 
 export type DrawerProps = Partial<ExtractPropTypes<ReturnType<typeof drawerProps>>>;

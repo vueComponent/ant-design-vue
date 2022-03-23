@@ -14,13 +14,13 @@ const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?
 const PresetStatusColorRegex = new RegExp(`^(${PresetStatusColorTypes.join('|')})$`);
 
 export const tagProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   color: {
     type: String as PropType<LiteralUnion<PresetColorType | PresetStatusColorType, string>>,
   },
   closable: PropTypes.looseBool.def(false),
   closeIcon: PropTypes.any,
-  visible: PropTypes.looseBool,
+  visible: { type: Boolean, default: undefined },
   onClose: {
     type: Function as PropType<(e: MouseEvent) => void>,
   },

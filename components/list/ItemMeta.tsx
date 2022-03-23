@@ -6,7 +6,7 @@ import PropTypes from '../_util/vue-types';
 export const listItemMetaProps = {
   avatar: PropTypes.any,
   description: PropTypes.any,
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   title: PropTypes.any,
 };
 

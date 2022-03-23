@@ -7,15 +7,15 @@ import PropTypes from '../_util/vue-types';
 import type { TransferItem } from '.';
 
 export const transferListBodyProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   filteredRenderItems: PropTypes.array.def([]),
   selectedKeys: PropTypes.array,
-  disabled: PropTypes.looseBool,
-  showRemove: PropTypes.looseBool,
+  disabled: { type: Boolean, default: undefined },
+  showRemove: { type: Boolean, default: undefined },
   pagination: PropTypes.any,
-  onItemSelect: PropTypes.func,
-  onScroll: PropTypes.func,
-  onItemRemove: PropTypes.func,
+  onItemSelect: Function,
+  onScroll: Function,
+  onItemRemove: Function,
 };
 
 export type TransferListBodyProps = Partial<ExtractPropTypes<typeof transferListBodyProps>>;

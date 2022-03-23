@@ -24,11 +24,11 @@ const dimensionMaxMap = {
 export type CollapseType = 'clickTrigger' | 'responsive';
 
 export const siderProps = {
-  prefixCls: PropTypes.string,
-  collapsible: PropTypes.looseBool,
-  collapsed: PropTypes.looseBool,
-  defaultCollapsed: PropTypes.looseBool,
-  reverseArrow: PropTypes.looseBool,
+  prefixCls: String,
+  collapsible: { type: Boolean, default: undefined },
+  collapsed: { type: Boolean, default: undefined },
+  defaultCollapsed: { type: Boolean, default: undefined },
+  reverseArrow: { type: Boolean, default: undefined },
   zeroWidthTriggerStyle: PropTypes.style,
   trigger: PropTypes.any,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

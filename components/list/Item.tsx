@@ -9,7 +9,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import { ListContextKey } from './contextKey';
 
 export const ListItemProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   extra: PropTypes.any,
   actions: PropTypes.array,
   grid: PropTypes.any,

@@ -8,18 +8,18 @@ import type { RadioChangeEvent, RadioGroupContext } from './interface';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 
 export const radioProps = {
-  prefixCls: PropTypes.string,
-  checked: PropTypes.looseBool,
-  disabled: PropTypes.looseBool,
-  isGroup: PropTypes.looseBool,
+  prefixCls: String,
+  checked: { type: Boolean, default: undefined },
+  disabled: { type: Boolean, default: undefined },
+  isGroup: { type: Boolean, default: undefined },
   value: PropTypes.any,
-  name: PropTypes.string,
-  id: PropTypes.string,
-  autofocus: PropTypes.looseBool,
-  onChange: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onClick: PropTypes.func,
+  name: String,
+  id: String,
+  autofocus: { type: Boolean, default: undefined },
+  onChange: Function,
+  onFocus: Function,
+  onBlur: Function,
+  onClick: Function,
 };
 
 export type RadioProps = Partial<ExtractPropTypes<typeof radioProps>>;

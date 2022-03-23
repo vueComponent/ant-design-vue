@@ -15,12 +15,12 @@ export const transferListItemProps = {
   renderedText: PropTypes.any,
   renderedEl: PropTypes.any,
   item: PropTypes.any,
-  checked: PropTypes.looseBool,
-  prefixCls: PropTypes.string,
-  disabled: PropTypes.looseBool,
-  showRemove: PropTypes.looseBool,
-  onClick: PropTypes.func,
-  onRemove: PropTypes.func,
+  checked: { type: Boolean, default: undefined },
+  prefixCls: String,
+  disabled: { type: Boolean, default: undefined },
+  showRemove: { type: Boolean, default: undefined },
+  onClick: Function,
+  onRemove: Function,
 };
 
 export type TransferListItemProps = Partial<ExtractPropTypes<typeof transferListItemProps>>;

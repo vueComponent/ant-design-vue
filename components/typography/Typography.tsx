@@ -44,8 +44,8 @@ const Typography = defineComponent<InternalTypographyProps>({
 });
 
 Typography.props = {
-  prefixCls: PropTypes.string,
-  component: PropTypes.string,
+  prefixCls: String,
+  component: String,
 };
 
 export default Typography;

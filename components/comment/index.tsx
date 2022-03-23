@@ -14,7 +14,7 @@ export const commentProps = {
   /** The main content of the comment */
   content: PropTypes.any,
   /** Comment prefix defaults to '.ant-comment' */
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   /** A datetime element containing the time to be displayed */
   datetime: PropTypes.any,
 };

@@ -4,14 +4,14 @@ import getDialogPropTypes from './IDialogPropTypes';
 import Portal from '../_util/PortalWrapper';
 import { defineComponent, ref, watch } from 'vue';
 import { useProvidePortal } from '../vc-trigger/context';
+import { initDefaultProps } from '../_util/props-util';
 const IDialogPropTypes = getDialogPropTypes();
 const DialogWrap = defineComponent({
   name: 'DialogWrap',
   inheritAttrs: false,
-  props: {
-    ...IDialogPropTypes,
-    visible: IDialogPropTypes.visible.def(false),
-  },
+  props: initDefaultProps(IDialogPropTypes, {
+    visible: false,
+  }),
   setup(props, { attrs, slots }) {
     const animatedVisible = ref(props.visible);
     useProvidePortal({}, { inTriggerContext: false });

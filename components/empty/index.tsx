@@ -85,7 +85,7 @@ Empty.PRESENTED_IMAGE_DEFAULT = defaultEmptyImg;
 Empty.PRESENTED_IMAGE_SIMPLE = simpleEmptyImg;
 Empty.inheritAttrs = false;
 Empty.props = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   image: PropTypes.any,
   description: PropTypes.any,
   imageStyle: PropTypes.object,

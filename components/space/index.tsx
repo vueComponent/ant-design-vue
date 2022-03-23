@@ -15,13 +15,13 @@ const spaceSize = {
   large: 24,
 };
 export const spaceProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   size: {
     type: [String, Number, Array] as PropType<SpaceSize | [SpaceSize, SpaceSize]>,
   },
   direction: PropTypes.oneOf(tuple('horizontal', 'vertical')).def('horizontal'),
   align: PropTypes.oneOf(tuple('start', 'end', 'center', 'baseline')),
-  wrap: PropTypes.looseBool,
+  wrap: { type: Boolean, default: undefined },
 };
 
 export type SpaceProps = Partial<ExtractPropTypes<typeof spaceProps>>;

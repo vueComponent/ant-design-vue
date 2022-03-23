@@ -44,7 +44,7 @@ export const alertProps = () => ({
    */
   type: PropTypes.oneOf(AlertTypes),
   /** Whether Alert can be closed */
-  closable: PropTypes.looseBool,
+  closable: { type: Boolean, default: undefined },
   /** Close text to show */
   closeText: PropTypes.any,
   /** Content of Alert */
@@ -54,9 +54,9 @@ export const alertProps = () => ({
   /** Trigger when animation ending of Alert */
   afterClose: PropTypes.func.def(noop),
   /** Whether to show icon */
-  showIcon: PropTypes.looseBool,
-  prefixCls: PropTypes.string,
-  banner: PropTypes.looseBool,
+  showIcon: { type: Boolean, default: undefined },
+  prefixCls: String,
+  banner: { type: Boolean, default: undefined },
   icon: PropTypes.any,
   closeIcon: PropTypes.any,
   onClose: Function as PropType<NodeMouseEventHandler>,

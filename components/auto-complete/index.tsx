@@ -17,7 +17,7 @@ export const autoCompleteProps = {
   ...omit(selectProps(), ['loading', 'mode', 'optionLabelProp', 'labelInValue']),
   dataSource: PropTypes.array,
   dropdownMenuStyle: PropTypes.style,
-  // optionLabelProp: PropTypes.string,
+  // optionLabelProp: String,
   dropdownMatchSelectWidth: { type: [Number, Boolean], default: true },
 };
 
@@ -32,12 +32,12 @@ const AutoComplete = defineComponent({
   inheritAttrs: false,
   props: {
     ...autoCompleteProps,
-    prefixCls: PropTypes.string,
-    showSearch: PropTypes.looseBool,
-    transitionName: PropTypes.string,
+    prefixCls: String,
+    showSearch: { type: Boolean, default: undefined },
+    transitionName: String,
     choiceTransitionName: PropTypes.string.def('zoom'),
-    autofocus: PropTypes.looseBool,
-    backfill: PropTypes.looseBool,
+    autofocus: { type: Boolean, default: undefined },
+    backfill: { type: Boolean, default: undefined },
     // optionLabelProp: PropTypes.string.def('children'),
     filterOption: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.func]).def(false),
     defaultActiveFirstOption: PropTypes.looseBool.def(true),

@@ -8,22 +8,22 @@ import Skeleton from '../skeleton/Skeleton';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const statisticProps = {
-  prefixCls: PropTypes.string,
-  decimalSeparator: PropTypes.string,
-  groupSeparator: PropTypes.string,
-  format: PropTypes.string,
+  prefixCls: String,
+  decimalSeparator: String,
+  groupSeparator: String,
+  format: String,
   value: {
     type: [String, Number, Object] as PropType<countdownValueType>,
   },
   valueStyle: PropTypes.style,
   valueRender: PropTypes.any,
   formatter: PropTypes.any,
-  precision: PropTypes.number,
+  precision: Number,
   prefix: PropTypes.any,
   suffix: PropTypes.any,
   title: PropTypes.any,
-  onFinish: PropTypes.func,
-  loading: PropTypes.looseBool,
+  onFinish: Function,
+  loading: { type: Boolean, default: undefined },
 };
 
 export type StatisticProps = Partial<ExtractPropTypes<typeof statisticProps>>;

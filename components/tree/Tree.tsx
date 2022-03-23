@@ -120,7 +120,7 @@ export const treeProps = () => {
     showIcon: { type: Boolean, default: undefined },
     icon: { type: Function as PropType<(nodeProps: AntdTreeNodeAttribute) => any> },
     switcherIcon: PropTypes.any,
-    prefixCls: PropTypes.string,
+    prefixCls: String,
     /**
      * @default{title,key,children}
      * deprecated, please use `fieldNames` instead

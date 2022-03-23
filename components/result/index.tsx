@@ -29,7 +29,7 @@ export const ExceptionMap = {
 const ExceptionStatus = Object.keys(ExceptionMap);
 
 export const resultProps = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   icon: PropTypes.any,
   status: PropTypes.oneOf(tuple('success', 'error', 'info', 'warning', '404', '403', '500')).def(
     'info',

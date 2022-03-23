@@ -301,7 +301,7 @@
     &-arrow {
       position: absolute;
       top: 50%;
-      right: 16px;
+      right: 12px;
       width: 10px;
       color: @menu-item-color;
       transform: translateY(-50%);
@@ -393,12 +393,11 @@
           color: @menu-highlight-color;
 
           &::after {
-            border-bottom: 2px solid @menu-highlight-color;
+            border-bottom: 3px solid @menu-highlight-color;
           }
         }
       }
     }
-
     > .@{menu-prefix-cls}-item,
     > .@{menu-prefix-cls}-submenu {
       position: relative;
@@ -477,6 +476,9 @@
       overflow: hidden;
       line-height: @menu-item-height;
       text-overflow: ellipsis;
+    }
+    .@{menu-prefix-cls}-submenu-title {
+      margin: 0;
     }
 
     // disable margin collapsed

@@ -15,7 +15,7 @@ export default {
       'ant-design-vue': path.resolve(__dirname, '../components'),
     },
   },
-  base: './',
+  base: process.env.NODE_ENV === 'production' ? './' : '/',
   server: {
     host: true,
   },

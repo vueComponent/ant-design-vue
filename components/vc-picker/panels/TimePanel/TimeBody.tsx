@@ -101,13 +101,13 @@ const TimeBody = defineComponent({
           disabledConfig.disabledMinutes,
           disabledConfig.disabledSeconds,
         ];
+      } else {
+        [mergedDisabledHours.value, mergedDisabledMinutes.value, mergedDisabledSeconds.value] = [
+          props.disabledHours,
+          props.disabledMinutes,
+          props.disabledSeconds,
+        ];
       }
-
-      [mergedDisabledHours.value, mergedDisabledMinutes.value, mergedDisabledSeconds.value] = [
-        props.disabledHours,
-        props.disabledMinutes,
-        props.disabledSeconds,
-      ];
     });
     const setTime = (
       isNewPM: boolean | undefined,

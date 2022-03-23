@@ -21,8 +21,9 @@ Both the top navigation and the sidebar, commonly used in application site.
       <div class="logo" />
       <a-menu
         v-model:selectedKeys="selectedKeys1"
+        theme="dark"
         mode="horizontal"
-        :style="{ lineHeight: '56px', fontSize: '16px', fontWeight: '500' }"
+        :style="{ lineHeight: '64px' }"
       >
         <a-menu-item key="1">nav 1</a-menu-item>
         <a-menu-item key="2">nav 2</a-menu-item>
@@ -34,12 +35,9 @@ Both the top navigation and the sidebar, commonly used in application site.
         <a-menu
           v-model:selectedKeys="selectedKeys2"
           v-model:openKeys="openKeys"
-          theme="dark"
           mode="inline"
-          :inline-indent="12"
           :style="{ height: '100%', borderRight: 0 }"
         >
-          <a-menu-item key="3">nav 3</a-menu-item>
           <a-sub-menu key="sub1">
             <template #title>
               <span>

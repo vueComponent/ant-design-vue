@@ -304,9 +304,11 @@ export default defineComponent({
         validateDisabled.value = false;
       });
     };
-
+    const htmlFor = computed(() => {
+      return props.htmlFor === undefined ? fieldId.value : props.htmlFor;
+    });
     const onLabelClick = () => {
-      const id = fieldId.value;
+      const id = htmlFor.value;
       if (!id || !inputRef.value) {
         return;
       }
@@ -409,7 +411,7 @@ export default defineComponent({
                 {/* Label */}
                 <FormItemLabel
                   {...props}
-                  htmlFor={fieldId.value}
+                  htmlFor={htmlFor.value}
                   required={isRequired.value}
                   requiredMark={formContext.requiredMark.value}
                   prefixCls={prefixCls.value}

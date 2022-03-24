@@ -18,7 +18,7 @@
 
 - 🌟 Optimize the search and click performance of `Tree` `TreeSelect` [#5365](https://github.com/vueComponent/ant-design-vue/issues/5365)
 - 🌟 `Menu` selectedKeys, openKeys support depth watch [7bf1e0](https://github.com/vueComponent/ant-design-vue/commit/7bf1e0dda1fe8f70f6c8b17ba90b217df2a75bd4)
-- 🐞 Fix `Checkbox` `Radio` triggering two `click` events for one click [#5363](https://github.com/vueComponent/ant-design-vue/issues/5363) [#5389](https ://github.com/vueComponent/ant-design-vue/issues/5389)
+- 🐞 Fix `Checkbox` `Radio` triggering two `click` events for one click [#5363](https://github.com/vueComponent/ant-design-vue/issues/5363) [#5389](https://github.com/vueComponent/ant-design-vue/issues/5389)
 - 🐞 Fix `FormItem` `htmlFor` property invalid issue [#5384](https://github.com/vueComponent/ant-design-vue/issues/5384)
 - 🐞 Fix `Upload` limit the number, the last upload is abort issue [#5385](https://github.com/vueComponent/ant-design-vue/issues/5385)
 - 🐞 Fix `RangePicker` `showTime`, disabled does not consider time issue [#5286](https://github.com/vueComponent/ant-design-vue/issues/5286)

@@ -61,12 +61,7 @@ export default defineComponent({
 
     return () => {
       const radioGroup = radioGroupContext;
-      const {
-        prefixCls: customizePrefixCls,
-        id = formItemContext.id.value,
-        onClick,
-        ...restProps
-      } = props;
+      const { prefixCls: customizePrefixCls, id = formItemContext.id.value, ...restProps } = props;
 
       const rProps: RadioProps = {
         prefixCls: prefixCls.value,
@@ -90,7 +85,7 @@ export default defineComponent({
       });
 
       return (
-        <label class={wrapperClassString} onClick={onClick}>
+        <label class={wrapperClassString}>
           <VcCheckbox {...rProps} type="radio" ref={vcCheckbox} />
           {slots.default && <span>{slots.default()}</span>}
         </label>

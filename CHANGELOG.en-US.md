@@ -10,6 +10,23 @@
 
 ---
 
+## 3.1.0-rc.3
+
+`2022-03-24`
+
+### 🔥🔥🔥 The official version is expected to be released at the end of March or early April, when 3.x will become the default version, and the documentation will also point to the 3.x documentation by default 🔥🔥🔥
+
+- 🌟 Optimize the search and click performance of `Tree` `TreeSelect` [#5365](https://github.com/vueComponent/ant-design-vue/issues/5365)
+- 🌟 `Menu` selectedKeys, openKeys support depth watch [7bf1e0](https://github.com/vueComponent/ant-design-vue/commit/7bf1e0dda1fe8f70f6c8b17ba90b217df2a75bd4)
+- 🐞 Fix `Checkbox` `Radio` triggering two `click` events for one click [#5363](https://github.com/vueComponent/ant-design-vue/issues/5363) [#5389](https ://github.com/vueComponent/ant-design-vue/issues/5389)
+- 🐞 Fix `FormItem` `htmlFor` property invalid issue [#5384](https://github.com/vueComponent/ant-design-vue/issues/5384)
+- 🐞 Fix `Upload` limit the number, the last upload is abort issue [#5385](https://github.com/vueComponent/ant-design-vue/issues/5385)
+- 🐞 Fix `RangePicker` `showTime`, disabled does not consider time issue [#5286](https://github.com/vueComponent/ant-design-vue/issues/5286)
+- 🐞 Fix `Layout.Sidebar` cannot be expanded after responsive collapse [#5373](https://github.com/vueComponent/ant-design-vue/issues/5373)
+- 🐞 Fix `AutoComplete` custom children's class not mounted [414e7a](https://github.com/vueComponent/ant-design-vue/commit/414e7a1c56455017dbc3780ce7b1b4abd0f1c4d7)
+- 🐞 Fix `TimeRangePicker` disabledTime not taking effect [#5387](https://github.com/vueComponent/ant-design-vue/issues/5387)
+- 🐞 Fix `Dropdown` automatic correction of pop-up window position is invalid [#5391](https://github.com/vueComponent/ant-design-vue/issues/5391)
+
 ## 3.1.0-rc.2
 
 `2022-03-19`

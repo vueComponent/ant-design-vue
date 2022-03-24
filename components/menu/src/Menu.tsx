@@ -139,9 +139,11 @@ export default defineComponent({
     watch(
       () => props.selectedKeys,
       selectedKeys => {
-        mergedSelectedKeys.value = selectedKeys || mergedSelectedKeys.value;
+        if (selectedKeys) {
+          mergedSelectedKeys.value = selectedKeys.slice();
+        }
       },
-      { immediate: true },
+      { immediate: true, deep: true },
     );
 
     const selectedSubMenuKeys = ref([]);
@@ -212,10 +214,10 @@ export default defineComponent({
       () => props.openKeys,
       (openKeys = mergedOpenKeys.value) => {
         if (!shallowEqual(mergedOpenKeys.value, openKeys)) {
-          mergedOpenKeys.value = openKeys;
+          mergedOpenKeys.value = openKeys.slice();
         }
       },
-      { immediate: true },
+      { immediate: true, deep: true },
     );
 
     let timeout: any;

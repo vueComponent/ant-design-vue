@@ -16,7 +16,7 @@
 // >>> Primary  color.less中的bule-base已修改
 @primary-color: @blue-6;
 @primary-color-hover: #6391ff;
-@primary-color-active: #206ccf;
+@primary-color-active: #2154ce;
 @primary-color-outline: fade(@primary-color, @outline-fade);
 
 @processing-color: @blue-6;
@@ -87,6 +87,7 @@
 // 修改text-color/text-color-secondary颜色
 @text-color: #2d3134;
 @text-color-secondary: #737b82;
+@text-color-ash: #cfd2d6;
 @text-color-inverse: @white;
 @icon-color: inherit;
 @icon-color-hover: fade(@black, 75%);
@@ -109,6 +110,8 @@
 @line-height-base: 1.5715;
 @border-radius-base: 2px;
 @border-radius-sm: @border-radius-base;
+@border-radius-md: @border-radius-base + 2px;
+@border-radius-lg: @border-radius-base + 4px;
 
 // vertical paddings
 @padding-lg: 24px; // containers
@@ -357,13 +360,13 @@
 
 // Layout 修改背景色、
 @layout-body-background: #f1f2f3;
-@layout-header-background: #001529;
+@layout-header-background: #ffffff;
 @layout-header-height: 56px;
-@layout-header-padding: 0 50px;
-@layout-header-color: @text-color;
+@layout-header-padding: 0 30px;
+@layout-header-color: #172b4d;
 @layout-footer-padding: 24px 50px;
 @layout-footer-background: @layout-body-background;
-@layout-sider-background: @layout-header-background;
+@layout-sider-background: #1d1f21;
 @layout-trigger-height: 48px;
 @layout-trigger-background: #002140;
 @layout-trigger-color: #fff;
@@ -588,7 +591,7 @@
 @menu-inline-toplevel-item-height: 40px;
 @menu-item-height: 40px;
 @menu-item-group-height: @line-height-base;
-@menu-collapsed-width: 80px;
+@menu-collapsed-width: 48px;
 @menu-bg: @component-background;
 @menu-popup-bg: @component-background;
 @menu-item-color: @text-color;
@@ -601,21 +604,21 @@
 @menu-item-group-title-color: @text-color-secondary;
 @menu-item-vertical-margin: 4px;
 @menu-item-font-size: @font-size-base;
-@menu-item-boundary-margin: 8px;
-@menu-item-padding-horizontal: 20px;
+@menu-item-boundary-margin: 4px;
+@menu-item-padding-horizontal: 25px;
 @menu-item-padding: 0 @menu-item-padding-horizontal;
 @menu-horizontal-line-height: 46px;
-@menu-icon-margin-right: 10px;
+@menu-icon-margin-right: 16px;
 @menu-icon-size: @menu-item-font-size;
 @menu-icon-size-lg: @font-size-lg;
 @menu-item-group-title-font-size: @menu-item-font-size;
 
 // dark theme
-@menu-dark-color: @text-color-secondary-dark;
+@menu-dark-color: @text-color-ash;
 @menu-dark-danger-color: @error-color;
-@menu-dark-bg: @layout-header-background;
-@menu-dark-arrow-color: #fff;
-@menu-dark-inline-submenu-bg: #000c17;
+@menu-dark-bg: #1d1f21;
+@menu-dark-arrow-color: @text-color-ash;
+@menu-dark-inline-submenu-bg: #1d1f21;
 @menu-dark-highlight-color: #fff;
 @menu-dark-item-active-bg: @primary-color;
 @menu-dark-item-active-danger-bg: @error-color;

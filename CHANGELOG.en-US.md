@@ -10,6 +10,15 @@
 
 ---
 
+## 3.1.0-rc.4
+
+`2022-03-25`
+
+### 🔥🔥🔥 The official version is expected to be released at the end of March or early April, when 3.x will become the default version, and the documentation will also point to the 3.x documentation by default 🔥🔥🔥
+
+- 🐞 Fix `Select` options do not support push and other variant methods [#5398](https://github.com/vueComponent/ant-design-vue/issues/5398)
+- 🐞 Fix `MenuItem` custom icon, the original icon class name is lost [#5390](https://github.com/vueComponent/ant-design-vue/issues/5390)
+
 ## 3.1.0-rc.3
 
 `2022-03-24`

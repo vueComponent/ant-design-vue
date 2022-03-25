@@ -1,5 +1,6 @@
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 @import '../color/colors';
+@import './ayla-variable.less';
 
 @theme: default;
 
@@ -13,10 +14,10 @@
 // [CSS-VARIABLE-REPLACE-END: html-variables]
 
 // -------- Colors -----------
-// >>> Primary  color.less中的bule-base已修改
-@primary-color: @blue-6;
-@primary-color-hover: #6391ff;
-@primary-color-active: #2154ce;
+// >>> Primary
+@primary-color: @ayla-color-primary-6;
+@primary-color-hover: @ayla-color-primary-5;
+@primary-color-active: @ayla-color-primary-7;
 @primary-color-outline: fade(@primary-color, @outline-fade);
 
 @processing-color: @blue-6;

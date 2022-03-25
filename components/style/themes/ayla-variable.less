@@ -1,69 +1,125 @@
-html {
+// ========= Primary Color =========
+@ayla-color-primary-7: #57852e;
+@ayla-color-primary-6: #699937;
+@ayla-color-primary-5: #7dad41;
+@ayla-color-primary-3: #b1d182;
+@ayla-color-primary-2: #d1e5b7;
+@ayla-color-primary-1: #f5f9ef;
+
+// ========= Line Color =========
+@ayla-color-line-4: #737b82;
+@ayla-color-line-3: #9ea6ad;
+@ayla-color-line-2: #cfd2d6;
+@ayla-color-line-1: #f1f2f3;
+
+// ========= Fill Color =========
+@ayla-color-fill-6: #737b82;
+@ayla-color-fill-5: #9ea6ad;
+@ayla-color-fill-4: #cfd2d6;
+@ayla-color-fill-3: #f1f2f3;
+@ayla-color-fill-2: #f8f8f9;
+@ayla-color-fill-1: #ffffff;
+
+// ========= Text Color =========
+@ayla-color-text-5: #2d3134;
+@ayla-color-text-4: #737b82;
+@ayla-color-text-3: #9ea6ad;
+@ayla-color-text-2: #cfd2d6;
+@ayla-color-text-1: #ffffff;
+
+// ========= Success Color =========
+@ayla-color-success-6: #04ac3d;
+@ayla-color-success-5: #43c16e;
+@ayla-color-success-4: #03812e;
+@ayla-color-success-3: #81d69e;
+@ayla-color-success-2: #c0eacf;
+@ayla-color-success-1: #f3fff7;
+
+// ========= Warning Color =========
+@ayla-color-warning-6: #ff7d00;
+@ayla-color-warning-5: #ff9a2e;
+@ayla-color-warning-4: #d25f00;
+@ayla-color-warning-3: #ffcf8b;
+@ayla-color-warning-2: #fff7e8;
+@ayla-color-warning-1: #fff7e8;
+
+// ========= Danger Color =========
+@ayla-color-danger-6: #dc2934;
+@ayla-color-danger-5: #e55e67;
+@ayla-color-danger-4: #a51f27;
+@ayla-color-danger-3: #ee9499;
+@ayla-color-danger-2: #f6c9cc;
+@ayla-color-danger-1: #fff4f5;
+
+// ========= Button =========
+@ayla-btn-height: 32px;
+@ayla-btn-height-lg: 40px;
+@ayla-btn-height-sm: 24px;
+
+@ayla-btn-padding-x: 14px;
+@ayla-btn-padding-x-lg: 14px;
+@ayla-btn-padding-x-sm: 9px;
+
+:root {
   // ========= Primary Color =========
-  --ayla-color-primary-6: #699937;
-  --ayla-color-primary-5: #7dad41;
-  --ayla-color-primary-7: #57852e;
-  --ayla-color-primary-3: #b1d182;
-  --ayla-color-primary-2: #d1e5b7;
-  --ayla-color-primary-1: #f5f9ef;
+  --ayla-color-primary-7: @ayla-color-primary-7;
+  --ayla-color-primary-6: @ayla-color-primary-6;
+  --ayla-color-primary-5: @ayla-color-primary-5;
+  --ayla-color-primary-3: @ayla-color-primary-3;
+  --ayla-color-primary-2: @ayla-color-primary-2;
+  --ayla-color-primary-1: @ayla-color-primary-1;
 
   // ========= Line Color =========
-  --ayla-color-line-4: #737b82;
-  --ayla-color-line-3: #9ea6ad;
-  --ayla-color-line-2: #cfd2d6;
-  --ayla-color-line-1: #f1f2f3;
+  --ayla-color-line-4: @ayla-color-line-4;
+  --ayla-color-line-3: @ayla-color-line-3;
+  --ayla-color-line-2: @ayla-color-line-2;
+  --ayla-color-line-1: @ayla-color-line-1;
 
   // ========= Fill Color =========
-  --ayla-color-fill-6: #737b82;
-  --ayla-color-fill-5: #9ea6ad;
-  --ayla-color-fill-4: #cfd2d6;
-  --ayla-color-fill-3: #f1f2f3;
-  --ayla-color-fill-2: #f8f8f9;
-  --ayla-color-fill-1: #ffffff;
+  --ayla-color-fill-6: @ayla-color-fill-6;
+  --ayla-color-fill-5: @ayla-color-fill-5;
+  --ayla-color-fill-4: @ayla-color-fill-4;
+  --ayla-color-fill-3: @ayla-color-fill-3;
+  --ayla-color-fill-2: @ayla-color-fill-2;
+  --ayla-color-fill-1: @ayla-color-fill-1;
 
   // ========= Text Color =========
-  --ayla-color-text-5: #2d3134;
-  --ayla-color-text-4: #737b82;
-  --ayla-color-text-3: #9ea6ad;
-  --ayla-color-text-2: #cfd2d6;
-  --ayla-color-text-1: #ffffff;
+  --ayla-color-text-5: @ayla-color-text-5;
+  --ayla-color-text-4: @ayla-color-text-4;
+  --ayla-color-text-3: @ayla-color-text-3;
+  --ayla-color-text-2: @ayla-color-text-2;
+  --ayla-color-text-1: @ayla-color-text-1;
 
   // ========= Success Color =========
-  --ayla-color-success-6: #04ac3d;
-  --ayla-color-success-5: #43c16e;
-  --ayla-color-success-4: #03812e;
-  --ayla-color-success-3: #81d69e;
-  --ayla-color-success-2: #c0eacf;
-  --ayla-color-success-1: #f3fff7;
+  --ayla-color-success-6: @ayla-color-success-6;
+  --ayla-color-success-5: @ayla-color-success-5;
+  --ayla-color-success-4: @ayla-color-success-4;
+  --ayla-color-success-3: @ayla-color-success-3;
+  --ayla-color-success-2: @ayla-color-success-2;
+  --ayla-color-success-1: @ayla-color-success-1;
 
   // ========= Warning Color =========
-  --ayla-color-warning-6: #ff7d00;
-  --ayla-color-warning-5: #ff9a2e;
-  --ayla-color-warning-4: #d25f00;
-  --ayla-color-warning-3: #ffcf8b;
-  --ayla-color-warning-2: #fff7e8;
-  --ayla-color-warning-1: #fff7e8;
+  --ayla-color-warning-6: @ayla-color-warning-6;
+  --ayla-color-warning-5: @ayla-color-warning-5;
+  --ayla-color-warning-4: @ayla-color-warning-4;
+  --ayla-color-warning-3: @ayla-color-warning-3;
+  --ayla-color-warning-2: @ayla-color-warning-2;
+  --ayla-color-warning-1: @ayla-color-warning-1;
 
   // ========= Danger Color =========
-  --ayla-color-danger-6: #dc2934;
-  --ayla-color-danger-5: #e55e67;
-  --ayla-color-danger-4: #a51f27;
-  --ayla-color-danger-3: #ee9499;
-  --ayla-color-danger-2: #f6c9cc;
+  --ayla-color-danger-6: @ayla-color-danger-6;
+  --ayla-color-danger-5: @ayla-color-danger-5;
+  --ayla-color-danger-4: @ayla-color-danger-4;
+  --ayla-color-danger-3: @ayla-color-danger-3;
+  --ayla-color-danger-2: @ayla-color-danger-2;
+  --ayla-color-danger-1: @ayla-color-danger-1;
 
   // ========= Button =========
-  --ayla-btn-height: 30px;
-  --ayla-btn-height-lg: 40px;
-  --ayla-btn-height-sm: 24px;
+  --ayla-btn-height: @ayla-btn-height;
+  --ayla-btn-height-lg: @ayla-btn-height-lg;
+  --ayla-btn-height-sm: @ayla-btn-height-sm;
 
-  --ayla-btn-padding-x: 14px;
-  --ayla-btn-padding-y: 5px;
-  --ayla-btn-padding-x-lg: 14px;
-  --ayla-btn-padding-y-lg: 8px;
-  --ayla-btn-padding-x-sm: 14px;
-  --ayla-btn-padding-y-sm: 1px;
+  --ayla-btn-padding-x: @ayla-btn-padding-x;
+  --ayla-btn-padding-x-lg: @ayla-btn-padding-x-lg;
+  --ayla-btn-padding-x-sm: @ayla-btn-padding-x-sm;
 }
-
-@btn-height-base: var(--ayla-btn-height);
-@btn-height-lg: var(--ayla-btn-height-lg);
-@btn-height-sm: var(--ayla-btn-height-sm);

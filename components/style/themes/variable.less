@@ -1,5 +1,6 @@
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 @import '../color/colors';
+@import './ayla-variable.less';
 
 @theme: variable;
 
@@ -71,9 +72,9 @@ html {
 
 // -------- Colors -----------
 // >>> Primary
-@primary-color: #3c75ff;
-@primary-color-hover: #6391ff;
-@primary-color-active: #2154ce;
+@primary-color: var(--ayla-color-primary-6);
+@primary-color-hover: var(--ayla-color-primary-5);
+@primary-color-active: var(--ayla-color-primary-7);
 @primary-color-outline: ~'var(--@{ant-prefix}-primary-color-outline)';
 
 @processing-color: @primary-color;

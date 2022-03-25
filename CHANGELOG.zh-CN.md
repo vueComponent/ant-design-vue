@@ -10,6 +10,23 @@
 
 ---
 
+## 3.1.0-rc.3
+
+`2022-03-24`
+
+### 🔥🔥🔥 预计 3 月底或 4 月初发布正式版，届时 3.x 将成为默认版本，文档也将默认指向 3.x 文档 🔥🔥🔥
+
+- 🌟 优化 `Tree` `TreeSelect` 的搜索、点击性能 [#5365](https://github.com/vueComponent/ant-design-vue/issues/5365)
+- 🌟 `Menu` selectedKeys、openKeys 支持深度 watch [7bf1e0](https://github.com/vueComponent/ant-design-vue/commit/7bf1e0dda1fe8f70f6c8b17ba90b217df2a75bd4)
+- 🐞 修复 `Checkbox` `Radio` 一次点击触发两次 `click` 事件问题 [#5363](https://github.com/vueComponent/ant-design-vue/issues/5363) [#5389](https://github.com/vueComponent/ant-design-vue/issues/5389)
+- 🐞 修复 `FormItem` `htmlFor` 属性失效问题 [#5384](https://github.com/vueComponent/ant-design-vue/issues/5384)
+- 🐞 修复 `Upload` 限制数量时，最后一个上传被 abort 问题 [#5385](https://github.com/vueComponent/ant-design-vue/issues/5385)
+- 🐞 修复 `RangePicker` `showTime`时， disabled 未考虑 time 问题 [#5286](https://github.com/vueComponent/ant-design-vue/issues/5286)
+- 🐞 修复 `Layout.Sidebar` 响应式折叠后，无法展开问题 [#5373](https://github.com/vueComponent/ant-design-vue/issues/5373)
+- 🐞 修复 `AutoComplete` 自定义 children 的 class 未挂载问题 [414e7a](https://github.com/vueComponent/ant-design-vue/commit/414e7a1c56455017dbc3780ce7b1b4abd0f1c4d7)
+- 🐞 修复 `TimeRangePicker` disabledTime 未生效问题 [#5387](https://github.com/vueComponent/ant-design-vue/issues/5387)
+- 🐞 修复 `Dropdown` 自动修正弹窗位置失效问题 [#5391](https://github.com/vueComponent/ant-design-vue/issues/5391)
+
 ## 3.1.0-rc.2
 
 `2022-03-19`

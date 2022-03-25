@@ -1,5 +1,5 @@
-import type { Ref } from 'vue';
-import { toRaw, computed } from 'vue';
+import type { Ref, ShallowRef } from 'vue';
+import { shallowRef, watch, toRaw } from 'vue';
 import type { DataNode, SimpleModeConfig } from '../interface';
 import { convertChildrenToData } from '../utils/legacyUtil';
 import type { DefaultOptionType } from '../TreeSelect';
@@ -49,20 +49,26 @@ export default function useTreeData(
   treeData: Ref<DataNode[]>,
   children: Ref<VueNode[]>,
   simpleMode: Ref<boolean | SimpleModeConfig>,
-): Ref<DefaultOptionType[]> {
-  return computed(() => {
-    const simpleModeValue = simpleMode.value;
-    if (treeData.value) {
-      return simpleMode.value
-        ? parseSimpleTreeData(toRaw(treeData.value), {
-            id: 'id',
-            pId: 'pId',
-            rootPId: null,
-            ...(simpleModeValue !== true ? simpleModeValue : {}),
-          })
-        : treeData.value;
-    }
-
-    return convertChildrenToData(toRaw(children.value));
-  });
+): ShallowRef<DefaultOptionType[]> {
+  const mergedTreeData = shallowRef<DefaultOptionType[]>();
+  watch(
+    [simpleMode, treeData, children],
+    () => {
+      const simpleModeValue = simpleMode.value;
+      if (treeData.value) {
+        mergedTreeData.value = simpleMode.value
+          ? parseSimpleTreeData(toRaw(treeData.value), {
+              id: 'id',
+              pId: 'pId',
+              rootPId: null,
+              ...(simpleModeValue !== true ? simpleModeValue : {}),
+            })
+          : toRaw(treeData.value);
+      } else {
+        mergedTreeData.value = convertChildrenToData(toRaw(children.value));
+      }
+    },
+    { immediate: true, deep: true },
+  );
+  return mergedTreeData;
 }

@@ -42,7 +42,7 @@ import { toArray } from './utils/commonUtil';
 import useFilterOptions from './hooks/useFilterOptions';
 import useCache from './hooks/useCache';
 import type { Key, VueNode } from '../_util/type';
-import { computed, defineComponent, ref, toRef, watchEffect } from 'vue';
+import { computed, defineComponent, ref, shallowRef, toRef, watchEffect } from 'vue';
 import type { ExtractPropTypes, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { initDefaultProps } from '../_util/props-util';
@@ -314,13 +314,15 @@ export default defineComponent({
     };
 
     // Fill tag as option if mode is `tags`
-    const filledTagOptions = computed(() => {
+    const filledTagOptions = shallowRef();
+    watchEffect(() => {
       if (props.mode !== 'tags') {
-        return mergedOptions.value;
+        filledTagOptions.value = mergedOptions.value;
+        return;
       }
 
       // >>> Tag mode
-      const cloneOptions = [...mergedOptions.value];
+      const cloneOptions = mergedOptions.value.slice();
 
       // Check if value exist in options (include new patch item)
       const existOptions = (val: RawValueType) => valueOptions.value.has(val);
@@ -336,7 +338,7 @@ export default defineComponent({
           }
         });
 
-      return cloneOptions;
+      filledTagOptions.value = cloneOptions;
     });
 
     const filteredOptions = useFilterOptions(

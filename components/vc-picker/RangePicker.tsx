@@ -421,8 +421,16 @@ function RangerPicker<DateType>() {
         let values = newValue;
         let startValue = getValue(values, 0);
         let endValue = getValue(values, 1);
-        const { generateConfig, locale, picker, order, onCalendarChange, allowEmpty, onChange } =
-          props;
+        const {
+          generateConfig,
+          locale,
+          picker,
+          order,
+          onCalendarChange,
+          allowEmpty,
+          onChange,
+          showTime,
+        } = props;
 
         // >>>>> Format start & end values
         if (startValue && endValue && generateConfig.isAfter(startValue, endValue)) {
@@ -436,7 +444,9 @@ function RangerPicker<DateType>() {
             (picker !== 'week' &&
               picker !== 'quarter' &&
               picker !== 'time' &&
-              !isSameDate(generateConfig, startValue, endValue))
+              !(showTime
+                ? isEqual(generateConfig, startValue, endValue)
+                : isSameDate(generateConfig, startValue, endValue)))
           ) {
             // Clean up end date when start date is after end date
             if (sourceIndex === 0) {

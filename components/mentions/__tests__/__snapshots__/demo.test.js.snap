@@ -15,7 +15,7 @@ exports[`renders ./components/mentions/demo/basic.vue correctly 1`] = `
 exports[`renders ./components/mentions/demo/form.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="form_item_coders" class="ant-form-item-required" title="Top coders">Top coders
+    <div class="ant-col ant-col-6 ant-form-item-label"><label for="form_item_coders" class="ant-form-item-required" title="Top coders">Top coders
         <!---->
       </label></div>
     <div class="ant-col ant-col-18 ant-form-item-control">
@@ -32,7 +32,7 @@ exports[`renders ./components/mentions/demo/form.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="form_item_bio" class="ant-form-item-required" title="Bio">Bio
+    <div class="ant-col ant-col-6 ant-form-item-label"><label for="form_item_bio" class="ant-form-item-required" title="Bio">Bio
         <!---->
       </label></div>
     <div class="ant-col ant-col-18 ant-form-item-control">

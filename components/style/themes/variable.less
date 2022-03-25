@@ -9,9 +9,9 @@
 // An override for the html selector for theme prefixes
 @html-selector: html;
 
-html {
-  @base-primary: @blue-6;
+@base-primary: @blue-6;
 
+html {
   // ========= Primary Color =========
   --@{ant-prefix}-primary-color: @base-primary;
   --@{ant-prefix}-primary-color-hover: color(~`colorPalette('@{base-primary}', 5) `);

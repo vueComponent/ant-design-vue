@@ -3,7 +3,7 @@ alt async autocomplete autofocus autoplay capture cellpadding cellspacing challe
 charset checked classid classname colspan cols content contenteditable contextmenu
 controls coords crossorigin data datetime default defer dir disabled download draggable
 enctype form formaction formenctype formmethod formnovalidate formtarget frameborder
-headers height hidden high href hreflang htmlfor httpequiv icon id inputmode integrity
+headers height hidden high href hreflang htmlfor for httpequiv icon id inputmode integrity
 is keyparams keytype kind label lang list loop low manifest marginheight marginwidth max maxlength media
 mediagroup method min minlength multiple muted name novalidate nonce open
 optimum pattern placeholder poster preload radiogroup readonly rel required

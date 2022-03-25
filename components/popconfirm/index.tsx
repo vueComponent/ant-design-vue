@@ -31,7 +31,7 @@ export const popconfirmProps = () => ({
     type: String as PropType<LegacyButtonType>,
     default: 'primary',
   },
-  disabled: PropTypes.looseBool.def(false),
+  disabled: { type: Boolean, default: false },
   okText: PropTypes.any,
   cancelText: PropTypes.any,
   icon: PropTypes.any,

@@ -1,4 +1,3 @@
-import PropTypes from '../_util/vue-types';
 import type { HTMLAttributes } from 'vue';
 import { defineComponent } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';

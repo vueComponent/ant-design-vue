@@ -1,4 +1,4 @@
-import type { HTMLAttributes } from 'vue';
+import type { CSSProperties, HTMLAttributes, PropType } from 'vue';
 import { computed, defineComponent, inject, provide, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import contains from '../vc-util/Dom/contains';
@@ -56,7 +56,7 @@ export default defineComponent({
     onPopupVisibleChange: PropTypes.func.def(noop),
     afterPopupVisibleChange: PropTypes.func.def(noop),
     popup: PropTypes.any,
-    popupStyle: PropTypes.style,
+    popupStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
     prefixCls: PropTypes.string.def('rc-trigger-popup'),
     popupClassName: PropTypes.string.def(''),
     popupPlacement: String,
@@ -71,20 +71,20 @@ export default defineComponent({
     getPopupContainer: Function,
     getDocument: PropTypes.func.def(returnDocument),
     forceRender: { type: Boolean, default: undefined },
-    destroyPopupOnHide: PropTypes.looseBool.def(false),
-    mask: PropTypes.looseBool.def(false),
-    maskClosable: PropTypes.looseBool.def(true),
+    destroyPopupOnHide: { type: Boolean, default: false },
+    mask: { type: Boolean, default: false },
+    maskClosable: { type: Boolean, default: true },
     // onPopupAlign: PropTypes.func.def(noop),
     popupAlign: PropTypes.object.def(() => ({})),
     popupVisible: { type: Boolean, default: undefined },
-    defaultPopupVisible: PropTypes.looseBool.def(false),
+    defaultPopupVisible: { type: Boolean, default: false },
     maskTransitionName: String,
     maskAnimation: String,
     stretch: String,
     alignPoint: { type: Boolean, default: undefined }, // Maybe we can support user pass position in the future
-    autoDestroy: PropTypes.looseBool.def(false),
+    autoDestroy: { type: Boolean, default: false },
     mobile: Object,
-    getTriggerDOMNode: Function,
+    getTriggerDOMNode: Function as PropType<(d?: HTMLElement) => HTMLElement>,
   },
   setup(props) {
     const align = computed(() => {

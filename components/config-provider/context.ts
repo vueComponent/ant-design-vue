@@ -4,7 +4,6 @@ import type { ValidateMessages } from '../form/interface';
 import type { RequiredMark } from '../form/Form';
 import type { RenderEmptyHandler } from './renderEmpty';
 import type { TransformCellTextProps } from '../table/interface';
-import PropTypes from '../_util/vue-types';
 import type { Locale } from '../locale-provider';
 
 type GlobalFormCOntextProps = {

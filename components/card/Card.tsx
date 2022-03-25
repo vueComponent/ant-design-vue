@@ -1,4 +1,4 @@
-import type { VNodeTypes, PropType, VNode, ExtractPropTypes } from 'vue';
+import type { VNodeTypes, PropType, VNode, ExtractPropTypes, CSSProperties } from 'vue';
 import { isVNode, defineComponent, renderSlot } from 'vue';
 import Tabs from '../tabs';
 import Row from '../row';
@@ -27,11 +27,11 @@ export const cardProps = () => ({
   prefixCls: String,
   title: PropTypes.any,
   extra: PropTypes.any,
-  bordered: PropTypes.looseBool.def(true),
-  bodyStyle: PropTypes.style,
-  headStyle: PropTypes.style,
-  loading: PropTypes.looseBool.def(false),
-  hoverable: PropTypes.looseBool.def(false),
+  bordered: { type: Boolean, default: true },
+  bodyStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  headStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  loading: { type: Boolean, default: false },
+  hoverable: { type: Boolean, default: false },
   type: { type: String as PropType<CardType> },
   size: { type: String as PropType<CardSize> },
   actions: PropTypes.any,

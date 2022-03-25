@@ -41,7 +41,7 @@ export default defineComponent({
     expandIconPosition: 'left',
   }),
   slots: ['expandIcon'],
-  emits: ['change', 'update:activeKey'],
+  // emits: ['change', 'update:activeKey'],
   setup(props, { attrs, slots, emit }) {
     const stateActiveKey = ref<Key[]>(
       getActiveKeysArray(firstNotUndefined([props.activeKey, props.defaultActiveKey])),

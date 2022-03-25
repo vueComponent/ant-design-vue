@@ -1,5 +1,6 @@
 import PropTypes from '../_util/vue-types';
 import { tuple } from '../_util/type';
+import type { CSSProperties, PropType } from 'vue';
 export const triggerTypes = tuple('hover', 'focus', 'click', 'contextmenu');
 
 export const placementTypes = tuple(
@@ -27,7 +28,7 @@ export default () => ({
   placement: PropTypes.oneOf(placementTypes),
   color: String,
   transitionName: String,
-  overlayStyle: PropTypes.style,
+  overlayStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   overlayClassName: String,
   openClassName: String,
   prefixCls: String,

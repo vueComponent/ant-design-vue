@@ -76,7 +76,7 @@ export const transferProps = {
     type: [Function, Object] as PropType<((style: ListStyle) => CSSProperties) | CSSProperties>,
     default: () => ({}),
   },
-  operationStyle: PropTypes.style,
+  operationStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   titles: { type: Array as PropType<string[]> },
   operations: { type: Array as PropType<string[]> },
   showSearch: { type: Boolean, default: false },

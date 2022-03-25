@@ -27,7 +27,7 @@ export const badgeProps = () => ({
   color: String,
   text: PropTypes.any,
   offset: Array as unknown as PropType<[number | string, number | string]>,
-  numberStyle: Object as PropType<CSSProperties>,
+  numberStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   title: String,
 });
 

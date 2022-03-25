@@ -1,5 +1,4 @@
-import { tuple } from '../_util/type';
-import type { PropType } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import PropTypes from '../_util/vue-types';
 
 import buttonTypes from '../button/buttonTypes';
@@ -35,23 +34,21 @@ const dropdownProps = () => ({
   visible: { type: Boolean, default: undefined },
   disabled: { type: Boolean, default: undefined },
   align: { type: Object as PropType<Align> },
-  getPopupContainer: Function,
+  getPopupContainer: Function as PropType<(triggerNode: HTMLElement) => HTMLElement>,
   prefixCls: String,
   transitionName: String,
-  placement: PropTypes.oneOf(
-    tuple(
-      'topLeft',
-      'topCenter',
-      'top',
-      'topRight',
-      'bottomLeft',
-      'bottomCenter',
-      'bottom',
-      'bottomRight',
-    ),
-  ),
+  placement: String as PropType<
+    | 'topLeft'
+    | 'topCenter'
+    | 'top'
+    | 'topRight'
+    | 'bottomLeft'
+    | 'bottomCenter'
+    | 'bottom'
+    | 'bottomRight'
+  >,
   overlayClassName: String,
-  overlayStyle: PropTypes.style,
+  overlayStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   forceRender: { type: Boolean, default: undefined },
   mouseEnterDelay: Number,
   mouseLeaveDelay: Number,
@@ -70,7 +67,7 @@ const buttonTypesProps = buttonTypes();
 const dropdownButtonProps = () => ({
   ...dropdownProps(),
   type: buttonTypesProps.type,
-  size: PropTypes.oneOf(tuple('small', 'large')),
+  size: String as PropType<'small' | 'large'>,
   htmlType: buttonTypesProps.htmlType,
   href: String,
   disabled: { type: Boolean, default: undefined },

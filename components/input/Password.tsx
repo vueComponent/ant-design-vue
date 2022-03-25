@@ -27,7 +27,7 @@ export default defineComponent({
     prefixCls: String,
     inputPrefixCls: String,
     action: PropTypes.string.def('click'),
-    visibilityToggle: PropTypes.looseBool.def(true),
+    visibilityToggle: { type: Boolean, default: true },
     iconRender: Function,
   },
   setup(props, { slots, attrs, expose }) {

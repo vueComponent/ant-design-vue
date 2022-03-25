@@ -11,10 +11,7 @@ import useProvideSize from '../_util/hooks/useSize';
 export const groupProps = () => ({
   prefixCls: String,
   maxCount: Number,
-  maxStyle: {
-    type: Object as PropType<CSSProperties>,
-    default: undefined as CSSProperties,
-  },
+  maxStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   maxPopoverPlacement: { type: String as PropType<'top' | 'bottom'>, default: 'top' },
   maxPopoverTrigger: String as PropType<'hover' | 'focus' | 'click'>,
   /*

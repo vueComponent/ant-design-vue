@@ -31,7 +31,7 @@ export interface ImagePropsType extends Omit<ImgHTMLAttributes, 'placeholder' | 
 export const imageProps = {
   src: String,
   wrapperClassName: String,
-  wrapperStyle: PropTypes.style,
+  wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   prefixCls: String,
   previewPrefixCls: String,
   placeholder: PropTypes.any,

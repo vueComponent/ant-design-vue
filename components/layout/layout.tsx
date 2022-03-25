@@ -1,6 +1,5 @@
 import type { ExtractPropTypes, HTMLAttributes } from 'vue';
 import { computed, createVNode, defineComponent, provide, ref } from 'vue';
-import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { SiderHookProviderKey } from './injectionKey';
 

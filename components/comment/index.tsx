@@ -5,8 +5,8 @@ import { flattenChildren } from '../_util/props-util';
 import type { VueNode } from '../_util/type';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
-export const commentProps = {
-  actions: PropTypes.array,
+export const commentProps = () => ({
+  actions: Array,
   /** The element to display as the comment author. */
   author: PropTypes.any,
   /** The element to display as the comment avatar - generally an antd Avatar */
@@ -17,13 +17,13 @@ export const commentProps = {
   prefixCls: String,
   /** A datetime element containing the time to be displayed */
   datetime: PropTypes.any,
-};
+});
 
-export type CommentProps = Partial<ExtractPropTypes<typeof commentProps>>;
+export type CommentProps = Partial<ExtractPropTypes<ReturnType<typeof commentProps>>>;
 
 const Comment = defineComponent({
   name: 'AComment',
-  props: commentProps,
+  props: commentProps(),
   slots: ['actions', 'author', 'avatar', 'content', 'datetime'],
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('comment', props);

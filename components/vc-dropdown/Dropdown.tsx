@@ -1,3 +1,4 @@
+import type { CSSProperties, PropType } from 'vue';
 import { computed, defineComponent, ref, watch } from 'vue';
 import PropTypes from '../_util/vue-types';
 import Trigger from '../vc-trigger';
@@ -8,14 +9,14 @@ import classNames from '../_util/classNames';
 export default defineComponent({
   props: {
     minOverlayWidthMatchTrigger: { type: Boolean, default: undefined },
-    arrow: PropTypes.looseBool.def(false),
+    arrow: { type: Boolean, default: false },
     prefixCls: PropTypes.string.def('rc-dropdown'),
     transitionName: String,
     overlayClassName: PropTypes.string.def(''),
     openClassName: String,
     animation: PropTypes.any,
     align: PropTypes.object,
-    overlayStyle: PropTypes.style,
+    overlayStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
     placement: PropTypes.string.def('bottomLeft'),
     overlay: PropTypes.any,
     trigger: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).def(
@@ -26,7 +27,7 @@ export default defineComponent({
     hideAction: PropTypes.array,
     getPopupContainer: Function,
     visible: { type: Boolean, default: undefined },
-    defaultVisible: PropTypes.looseBool.def(false),
+    defaultVisible: { type: Boolean, default: false },
     mouseEnterDelay: PropTypes.number.def(0.15),
     mouseLeaveDelay: PropTypes.number.def(0.1),
   },

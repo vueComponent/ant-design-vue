@@ -3,6 +3,7 @@ import Trigger from '../../vc-trigger';
 import { placements } from './placements';
 import Content from './Content';
 import { getPropsSlot } from '../../_util/props-util';
+import type { CSSProperties, PropType } from 'vue';
 import { defineComponent, ref, watchEffect } from 'vue';
 function noop() {}
 export default defineComponent({
@@ -16,18 +17,21 @@ export default defineComponent({
     transitionName: String,
     animation: PropTypes.any,
     afterVisibleChange: PropTypes.func.def(() => {}),
-    overlayStyle: PropTypes.style,
+    overlayStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
     overlayClassName: String,
     prefixCls: PropTypes.string.def('rc-tooltip'),
     mouseEnterDelay: PropTypes.number.def(0.1),
     mouseLeaveDelay: PropTypes.number.def(0.1),
     getTooltipContainer: Function,
-    destroyTooltipOnHide: PropTypes.looseBool.def(false),
+    destroyTooltipOnHide: { type: Boolean, default: false },
     align: PropTypes.object.def(() => ({})),
     arrowContent: PropTypes.any.def(null),
     tipId: String,
     builtinPlacements: PropTypes.object,
-    overlayInnerStyle: PropTypes.style,
+    overlayInnerStyle: {
+      type: Object as PropType<CSSProperties>,
+      default: undefined as CSSProperties,
+    },
     popupVisible: { type: Boolean, default: undefined },
     onVisibleChange: Function,
     onPopupAlign: Function,

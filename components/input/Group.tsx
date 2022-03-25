@@ -1,6 +1,5 @@
 import type { PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
-import PropTypes from '../_util/vue-types';
 import type { SizeType } from '../config-provider';
 import type { FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 import useConfigInject from '../_util/hooks/useConfigInject';

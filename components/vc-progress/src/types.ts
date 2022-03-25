@@ -1,5 +1,4 @@
 import type { PropType, ExtractPropTypes } from 'vue';
-import PropTypes from '../../_util/vue-types';
 
 export type StrokeColorType = string | string[] | object;
 

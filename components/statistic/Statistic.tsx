@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { defineComponent } from 'vue';
 import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
@@ -15,7 +15,7 @@ export const statisticProps = {
   value: {
     type: [String, Number, Object] as PropType<countdownValueType>,
   },
-  valueStyle: PropTypes.style,
+  valueStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   valueRender: PropTypes.any,
   formatter: PropTypes.any,
   precision: Number,

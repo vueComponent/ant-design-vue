@@ -57,7 +57,7 @@ const inputProps = {
   suffix: PropTypes.any,
   autofocus: { type: Boolean, default: undefined },
   allowClear: { type: Boolean, default: undefined },
-  lazy: PropTypes.looseBool.def(true),
+  lazy: { type: Boolean, default: true },
   maxlength: Number,
   loading: { type: Boolean, default: undefined },
   bordered: { type: Boolean, default: undefined },

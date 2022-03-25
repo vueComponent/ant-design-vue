@@ -20,7 +20,7 @@ export default defineComponent({
     placement: 'bottomRight',
     type: 'default',
   }),
-  emits: ['click', 'visibleChange', 'update:visible'],
+  // emits: ['click', 'visibleChange', 'update:visible'],
   slots: ['icon', 'leftButton', 'rightButton', 'overlay'],
   setup(props, { slots, attrs, emit }) {
     const handleVisibleChange = (val: boolean) => {

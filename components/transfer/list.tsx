@@ -35,7 +35,7 @@ export const transferListProps = {
   handleFilter: Function,
   handleClear: Function,
   renderItem: Function,
-  showSearch: PropTypes.looseBool.def(false),
+  showSearch: { type: Boolean, default: false },
   searchPlaceholder: String,
   notFoundContent: PropTypes.any,
   itemUnit: String,

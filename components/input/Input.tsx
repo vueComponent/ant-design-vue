@@ -268,7 +268,7 @@ export default defineComponent({
         valueModifiers = {},
         htmlSize,
       } = props;
-      const otherProps = omit(props as InputProps & { inputType: any; placeholder: string }, [
+      const otherProps = omit(props as InputProps & { placeholder: string }, [
         'prefixCls',
         'onPressEnter',
         'addonBefore',
@@ -280,7 +280,6 @@ export default defineComponent({
         // specify either the value prop, or the defaultValue prop, but not both.
         'defaultValue',
         'size',
-        'inputType',
         'bordered',
         'htmlSize',
         'lazy',

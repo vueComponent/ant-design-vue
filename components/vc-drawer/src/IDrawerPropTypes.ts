@@ -1,5 +1,5 @@
 import PropTypes from '../../_util/vue-types';
-import type { PropType } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 
 export type IPlacement = 'left' | 'top' | 'right' | 'bottom';
 type ILevelMove = number | [number, number];
@@ -7,7 +7,7 @@ const props = () => ({
   prefixCls: String,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  style: PropTypes.style,
+  style: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   class: String,
   placement: {
     type: String as PropType<IPlacement>,
@@ -23,10 +23,13 @@ const props = () => ({
   ease: String,
   showMask: { type: Boolean, default: undefined },
   maskClosable: { type: Boolean, default: undefined },
-  maskStyle: PropTypes.style,
+  maskStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   afterVisibleChange: Function,
   keyboard: { type: Boolean, default: undefined },
-  contentWrapperStyle: PropTypes.style,
+  contentWrapperStyle: {
+    type: Object as PropType<CSSProperties>,
+    default: undefined as CSSProperties,
+  },
   autofocus: { type: Boolean, default: undefined },
   open: { type: Boolean, default: undefined },
 });

@@ -1,4 +1,5 @@
-import type { ExtractPropTypes } from 'vue';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
+import type { MouseEventHandler } from '../_util/EventInterface';
 import PropTypes from '../_util/vue-types';
 
 function dialogPropTypes() {
@@ -20,19 +21,19 @@ function dialogPropTypes() {
     maskTransitionName: String,
     animation: PropTypes.any,
     maskAnimation: PropTypes.any,
-    wrapStyle: PropTypes.object,
-    bodyStyle: PropTypes.object,
-    maskStyle: PropTypes.object,
+    wrapStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+    bodyStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+    maskStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
     prefixCls: String,
     wrapClassName: String,
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    width: [String, Number],
+    height: [String, Number],
     zIndex: Number,
     bodyProps: PropTypes.any,
     maskProps: PropTypes.any,
     wrapProps: PropTypes.any,
     getContainer: PropTypes.any,
-    dialogStyle: PropTypes.object,
+    dialogStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
     dialogClass: String,
     closeIcon: PropTypes.any,
     forceRender: { type: Boolean, default: undefined },
@@ -40,7 +41,7 @@ function dialogPropTypes() {
     // https://github.com/ant-design/ant-design/issues/19771
     // https://github.com/react-component/dialog/issues/95
     focusTriggerAfterClose: { type: Boolean, default: undefined },
-    onClose: Function,
+    onClose: Function as PropType<MouseEventHandler>,
     modalRender: Function,
   };
 }

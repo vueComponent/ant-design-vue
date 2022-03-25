@@ -18,7 +18,7 @@ export const tagProps = {
   color: {
     type: String as PropType<LiteralUnion<PresetColorType | PresetStatusColorType, string>>,
   },
-  closable: PropTypes.looseBool.def(false),
+  closable: { type: Boolean, default: false },
   closeIcon: PropTypes.any,
   visible: { type: Boolean, default: undefined },
   onClose: {

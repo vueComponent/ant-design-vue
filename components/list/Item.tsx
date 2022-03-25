@@ -3,6 +3,7 @@ import classNames from '../_util/classNames';
 import { isStringElement, isEmptyElement, flattenChildren } from '../_util/props-util';
 import { Col } from '../grid';
 import { cloneElement } from '../_util/vnode';
+import type { CSSProperties, PropType } from 'vue';
 import { defineComponent, inject, ref } from 'vue';
 import ItemMeta from './ItemMeta';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -13,7 +14,7 @@ export const ListItemProps = {
   extra: PropTypes.any,
   actions: PropTypes.array,
   grid: PropTypes.any,
-  colStyle: PropTypes.style,
+  colStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
 };
 
 export default defineComponent({

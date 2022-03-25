@@ -29,7 +29,10 @@ export const siderProps = {
   collapsed: { type: Boolean, default: undefined },
   defaultCollapsed: { type: Boolean, default: undefined },
   reverseArrow: { type: Boolean, default: undefined },
-  zeroWidthTriggerStyle: PropTypes.style,
+  zeroWidthTriggerStyle: {
+    type: Object as PropType<CSSProperties>,
+    default: undefined as CSSProperties,
+  },
   trigger: PropTypes.any,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   collapsedWidth: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),

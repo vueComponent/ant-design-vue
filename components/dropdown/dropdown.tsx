@@ -23,7 +23,7 @@ const Dropdown = defineComponent({
     placement: 'bottomLeft',
     trigger: 'hover',
   }),
-  emits: ['visibleChange', 'update:visible'],
+  // emits: ['visibleChange', 'update:visible'],
   slots: ['overlay'],
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, rootPrefixCls, direction, getPopupContainer } = useConfigInject(

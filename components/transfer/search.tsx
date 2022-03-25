@@ -1,4 +1,3 @@
-import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 import Input from '../input';

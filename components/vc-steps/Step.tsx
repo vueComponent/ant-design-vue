@@ -1,5 +1,5 @@
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import type { CSSProperties } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import { defineComponent } from 'vue';
 import type { EventHandler } from '../_util/EventInterface';
 
@@ -9,7 +9,7 @@ function isString(str: any): str is string {
 function noop() {}
 export const VcStepProps = () => ({
   prefixCls: String,
-  wrapperStyle: PropTypes.style,
+  wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   itemWidth: String,
   active: { type: Boolean, default: undefined },
   disabled: { type: Boolean, default: undefined },

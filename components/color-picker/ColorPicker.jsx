@@ -29,10 +29,10 @@ export default {
     colorRounded: Number, //颜色数值保留几位小数
     size: PropTypes.oneOf(['default', 'small', 'large']).def('default'), //尺寸
     getPopupContainer: Function, //指定渲染容器
-    disabled: PropTypes.looseBool.def(false), //是否禁用
+    disabled: { type: Boolean, default: false }, //是否禁用
     format: String, //颜色格式设置
-    alpha: PropTypes.looseBool.def(false), //是否开启透明通道
-    hue: PropTypes.looseBool.def(true), //是否开启色彩预选
+    alpha: { type: Boolean, default: false }, //是否开启透明通道
+    hue: { type: Boolean, default: true }, //是否开启色彩预选
   },
 
   data() {

@@ -31,7 +31,7 @@ export default defineComponent({
     addonAfter: PropTypes.any,
     readonly: { type: Boolean, default: undefined },
     focused: { type: Boolean, default: undefined },
-    bordered: PropTypes.looseBool.def(true),
+    bordered: { type: Boolean, default: true },
     triggerFocus: { type: Function as PropType<() => void> },
     hidden: Boolean,
   },

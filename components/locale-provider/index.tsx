@@ -1,6 +1,5 @@
 import type { App, VNode, PropType } from 'vue';
 import { provide, defineComponent, reactive, watch } from 'vue';
-import PropTypes from '../_util/vue-types';
 import type { ModalLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { withInstall } from '../_util/type';

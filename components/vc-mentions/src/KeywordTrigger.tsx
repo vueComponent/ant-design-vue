@@ -1,4 +1,3 @@
-import PropTypes from '../../_util/vue-types';
 import Trigger from '../../vc-trigger';
 import DropdownMenu from './DropdownMenu';
 import type { PropType } from 'vue';

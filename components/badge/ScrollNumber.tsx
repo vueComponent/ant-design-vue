@@ -7,11 +7,11 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import SingleNumber from './SingleNumber';
 import { filterEmpty } from '../_util/props-util';
 
-export const scrollNumberProps = {
+const scrollNumberProps = {
   prefixCls: String,
   count: PropTypes.any,
   component: String,
-  title: PropTypes.oneOfType([PropTypes.number, PropTypes.string, null]),
+  title: PropTypes.any,
   show: Boolean,
 };
 

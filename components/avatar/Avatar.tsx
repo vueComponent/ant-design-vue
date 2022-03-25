@@ -1,5 +1,5 @@
 import type { VueNode } from '../_util/type';
-import { tuple } from '../_util/type';
+
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent, nextTick, onMounted, ref, watch } from 'vue';
 import { getPropsSlot } from '../_util/props-util';
@@ -16,7 +16,7 @@ export type AvatarSize = 'large' | 'small' | 'default' | number | ScreenSizeMap;
 
 export const avatarProps = () => ({
   prefixCls: String,
-  shape: PropTypes.oneOf(tuple('circle', 'square')).def('circle'),
+  shape: { type: String as PropType<'circle' | 'square'>, default: 'circle' },
   size: {
     type: [Number, String, Object] as PropType<AvatarSize>,
     default: (): AvatarSize => 'default',
@@ -27,7 +27,7 @@ export const avatarProps = () => ({
   icon: PropTypes.any,
   alt: String,
   gap: Number,
-  draggable: PropTypes.bool,
+  draggable: { type: Boolean, default: undefined },
   crossOrigin: String as PropType<'' | 'anonymous' | 'use-credentials'>,
   loadError: {
     type: Function as PropType<() => boolean>,

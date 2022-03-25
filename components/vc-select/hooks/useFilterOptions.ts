@@ -7,15 +7,15 @@ import type {
   BaseOptionType,
 } from '../Select';
 import { injectPropsWithOption } from '../utils/valueUtil';
-import type { Ref } from 'vue';
-import { toRaw, computed } from 'vue';
+import type { Ref, ShallowRef } from 'vue';
+import { computed } from 'vue';
 
 function includes(test: any, search: string) {
   return toArray(test).join('').toUpperCase().includes(search);
 }
 
 export default (
-  options: Ref<DefaultOptionType[]>,
+  options: ShallowRef<DefaultOptionType[]>,
   fieldNames: Ref<FieldNames>,
   searchValue?: Ref<string>,
   filterOption?: Ref<SelectProps['filterOption']>,
@@ -55,7 +55,7 @@ export default (
       ? opt => injectPropsWithOption(opt)
       : opt => opt;
 
-    toRaw(options.value).forEach(item => {
+    options.value.forEach(item => {
       // Group should check child options
       if (item[fieldOptions]) {
         // Check group first

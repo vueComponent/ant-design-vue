@@ -1,5 +1,5 @@
-import type { Ref } from 'vue';
-import { toRaw, computed } from 'vue';
+import type { Ref, ShallowRef } from 'vue';
+import { computed } from 'vue';
 import type { DefaultOptionType, InternalFieldName, TreeSelectProps } from '../TreeSelect';
 import { fillLegacyProps } from '../utils/legacyUtil';
 
@@ -7,7 +7,7 @@ type GetFuncType<T> = T extends boolean ? never : T;
 type FilterFn = GetFuncType<TreeSelectProps['filterTreeNode']>;
 
 export default (
-  treeData: Ref<DefaultOptionType[]>,
+  treeData: ShallowRef<DefaultOptionType[]>,
   searchValue: Ref<string>,
   {
     treeNodeFilterProp,
@@ -56,24 +56,8 @@ export default (
         }
       }
       return res;
-      // return list
-      //   .map(dataNode => {
-      //     const children = dataNode[fieldChildren];
-
-      //     const match = keepAll || filterOptionFunc(searchValueVal, fillLegacyProps(dataNode));
-      //     const childList = dig(children || [], match);
-
-      //     if (match || childList.length) {
-      //       return {
-      //         ...dataNode,
-      //         [fieldChildren]: childList,
-      //       };
-      //     }
-      //     return null;
-      //   })
-      //   .filter(node => node);
     }
 
-    return dig(toRaw(treeData.value));
+    return dig(treeData.value);
   });
 };

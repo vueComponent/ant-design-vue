@@ -104,12 +104,16 @@ export default defineComponent({
       dragOverNodeKey: null,
     });
     const treeData = shallowRef([]);
-    watchEffect(() => {
-      treeData.value =
-        props.treeData !== undefined
-          ? toRaw(props.treeData)
-          : convertTreeToData(toRaw(props.children));
-    });
+    watch(
+      [() => props.treeData, () => props.children],
+      () => {
+        treeData.value =
+          props.treeData !== undefined
+            ? toRaw(props.treeData)
+            : convertTreeToData(toRaw(props.children));
+      },
+      { immediate: true, deep: true },
+    );
     const keyEntities = shallowRef({});
 
     const focused = ref(false);
@@ -143,7 +147,7 @@ export default defineComponent({
 
     watchEffect(() => {
       if (treeData.value) {
-        const entitiesMap = convertDataToEntities(toRaw(treeData.value), {
+        const entitiesMap = convertDataToEntities(treeData.value, {
           fieldNames: fieldNames.value,
         });
         keyEntities.value = {
@@ -190,19 +194,15 @@ export default defineComponent({
     // ================ flattenNodes =================
     const flattenNodes = shallowRef([]);
     watchEffect(() => {
-      flattenNodes.value = flattenTreeData(
-        toRaw(treeData.value),
-        toRaw(expandedKeys.value),
-        fieldNames.value,
-      );
+      flattenNodes.value = flattenTreeData(treeData.value, expandedKeys.value, fieldNames.value);
     });
     // ================ selectedKeys =================
     watchEffect(() => {
       if (props.selectable) {
         if (props.selectedKeys !== undefined) {
-          selectedKeys.value = calcSelectedKeys(toRaw(props.selectedKeys), props);
+          selectedKeys.value = calcSelectedKeys(props.selectedKeys, props);
         } else if (!init && props.defaultSelectedKeys) {
-          selectedKeys.value = calcSelectedKeys(toRaw(props.defaultSelectedKeys), props);
+          selectedKeys.value = calcSelectedKeys(props.defaultSelectedKeys, props);
         }
       }
     });
@@ -213,12 +213,12 @@ export default defineComponent({
         let checkedKeyEntity;
 
         if (props.checkedKeys !== undefined) {
-          checkedKeyEntity = parseCheckedKeys(toRaw(props.checkedKeys)) || {};
+          checkedKeyEntity = parseCheckedKeys(props.checkedKeys) || {};
         } else if (!init && props.defaultCheckedKeys) {
-          checkedKeyEntity = parseCheckedKeys(toRaw(props.defaultCheckedKeys)) || {};
+          checkedKeyEntity = parseCheckedKeys(props.defaultCheckedKeys) || {};
         } else if (treeData.value) {
           // If `treeData` changed, we also need check it
-          checkedKeyEntity = parseCheckedKeys(toRaw(props.checkedKeys)) || {
+          checkedKeyEntity = parseCheckedKeys(props.checkedKeys) || {
             checkedKeys: checkedKeys.value,
             halfCheckedKeys: halfCheckedKeys.value,
           };

@@ -98,7 +98,7 @@ export default defineComponent({
     );
     const mergedExpandedKeys = computed(() => {
       if (legacyContext.treeExpandedKeys) {
-        return toRaw(legacyContext.treeExpandedKeys).slice();
+        return legacyContext.treeExpandedKeys.slice();
       }
       return baseProps.searchValue ? searchExpandedKeys.value : expandedKeys.value;
     });

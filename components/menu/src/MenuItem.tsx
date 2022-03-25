@@ -233,9 +233,13 @@ export default defineComponent({
             onFocus={onInternalFocus}
             title={typeof title === 'string' ? title : undefined}
           >
-            {cloneElement(icon, {
-              class: `${prefixCls.value}-item-icon`,
-            })}
+            {cloneElement(
+              icon,
+              {
+                class: `${prefixCls.value}-item-icon`,
+              },
+              false,
+            )}
             {renderItemChildren(icon, children)}
           </Overflow.Item>
         </Tooltip>

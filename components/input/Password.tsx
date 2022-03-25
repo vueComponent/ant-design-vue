@@ -23,7 +23,7 @@ export default defineComponent({
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
-    ...inputProps,
+    ...inputProps(),
     prefixCls: String,
     inputPrefixCls: String,
     action: PropTypes.string.def('click'),

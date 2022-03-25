@@ -3,13 +3,13 @@ import { computed, createVNode, defineComponent, provide, ref } from 'vue';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { SiderHookProviderKey } from './injectionKey';
 
-export const basicProps = {
+export const basicProps = () => ({
   prefixCls: String,
   hasSider: { type: Boolean, default: undefined },
   tagName: String,
-};
+});
 
-export type BasicProps = Partial<ExtractPropTypes<typeof basicProps>> & HTMLAttributes;
+export type BasicProps = Partial<ExtractPropTypes<ReturnType<typeof basicProps>>> & HTMLAttributes;
 
 type GeneratorArgument = {
   suffixCls: string;
@@ -21,7 +21,7 @@ function generator({ suffixCls, tagName, name }: GeneratorArgument) {
   return (BasicComponent: typeof Basic) => {
     const Adapter = defineComponent({
       name,
-      props: basicProps,
+      props: basicProps(),
       setup(props, { slots }) {
         const { prefixCls } = useConfigInject(suffixCls, props);
         return () => {
@@ -39,14 +39,14 @@ function generator({ suffixCls, tagName, name }: GeneratorArgument) {
 }
 
 const Basic = defineComponent({
-  props: basicProps,
+  props: basicProps(),
   setup(props, { slots }) {
     return () => createVNode(props.tagName, { class: props.prefixCls }, slots);
   },
 });
 
 const BasicLayout = defineComponent({
-  props: basicProps,
+  props: basicProps(),
   setup(props, { slots }) {
     const { direction } = useConfigInject('', props);
     const siders = ref<string[]>([]);

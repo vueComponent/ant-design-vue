@@ -47,7 +47,7 @@ function setTriggerValue(
 export default defineComponent({
   name: 'ATextarea',
   inheritAttrs: false,
-  props: textAreaProps,
+  props: textAreaProps(),
   setup(props, { attrs, expose, emit }) {
     const formItemContext = useInjectFormItemContext();
     const stateValue = ref(props.value === undefined ? props.defaultValue : props.value);

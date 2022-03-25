@@ -99,7 +99,7 @@ export {
   LayoutContent,
 } from './layout';
 
-export type { ListProps } from './list';
+export type { ListProps, ListItemProps, ListItemMetaProps } from './list';
 export { default as List, ListItem, ListItemMeta } from './list';
 
 export type { MessageArgsProps } from './message';

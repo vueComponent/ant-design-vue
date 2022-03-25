@@ -107,9 +107,7 @@ export function triggerFocus(
 export default defineComponent({
   name: 'AInput',
   inheritAttrs: false,
-  props: {
-    ...inputProps,
-  },
+  props: inputProps(),
   setup(props, { slots, attrs, expose, emit }) {
     const inputRef = ref();
     const clearableInputRef = ref();

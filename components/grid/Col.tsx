@@ -34,13 +34,34 @@ export const colProps = () => ({
   offset: [String, Number],
   push: [String, Number],
   pull: [String, Number],
-  xs: { type: [String, Number, Object] as PropType<string | number | ColSize> },
-  sm: { type: [String, Number, Object] as PropType<string | number | ColSize> },
-  md: { type: [String, Number, Object] as PropType<string | number | ColSize> },
-  lg: { type: [String, Number, Object] as PropType<string | number | ColSize> },
-  xl: { type: [String, Number, Object] as PropType<string | number | ColSize> },
-  xxl: { type: [String, Number, Object] as PropType<string | number | ColSize> },
-  xxxl: { type: [String, Number, Object] as PropType<string | number | ColSize> },
+  xs: {
+    type: [String, Number, Object] as PropType<string | number | ColSize>,
+    default: undefined as string | number | ColSize,
+  },
+  sm: {
+    type: [String, Number, Object] as PropType<string | number | ColSize>,
+    default: undefined as string | number | ColSize,
+  },
+  md: {
+    type: [String, Number, Object] as PropType<string | number | ColSize>,
+    default: undefined as string | number | ColSize,
+  },
+  lg: {
+    type: [String, Number, Object] as PropType<string | number | ColSize>,
+    default: undefined as string | number | ColSize,
+  },
+  xl: {
+    type: [String, Number, Object] as PropType<string | number | ColSize>,
+    default: undefined as string | number | ColSize,
+  },
+  xxl: {
+    type: [String, Number, Object] as PropType<string | number | ColSize>,
+    default: undefined as string | number | ColSize,
+  },
+  xxxl: {
+    type: [String, Number, Object] as PropType<string | number | ColSize>,
+    default: undefined as string | number | ColSize,
+  },
   prefixCls: String,
   flex: [String, Number],
 });

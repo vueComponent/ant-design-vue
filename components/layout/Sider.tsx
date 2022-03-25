@@ -23,7 +23,7 @@ const dimensionMaxMap = {
 
 export type CollapseType = 'clickTrigger' | 'responsive';
 
-export const siderProps = {
+export const siderProps = () => ({
   prefixCls: String,
   collapsible: { type: Boolean, default: undefined },
   collapsed: { type: Boolean, default: undefined },
@@ -40,14 +40,9 @@ export const siderProps = {
   theme: PropTypes.oneOf(tuple('light', 'dark')).def('dark'),
   onBreakpoint: Function as PropType<(broken: boolean) => void>,
   onCollapse: Function as PropType<(collapsed: boolean, type: CollapseType) => void>,
-};
+});
 
-export type SiderProps = Partial<ExtractPropTypes<typeof siderProps>>;
-// export interface SiderState {
-//   collapsed?: boolean;
-//   below: boolean;
-//   belowShow?: boolean;
-// }
+export type SiderProps = Partial<ExtractPropTypes<ReturnType<typeof siderProps>>>;
 
 export interface SiderContextProps {
   sCollapsed?: boolean;
@@ -65,7 +60,7 @@ const generateId = (() => {
 export default defineComponent({
   name: 'ALayoutSider',
   inheritAttrs: false,
-  props: initDefaultProps(siderProps, {
+  props: initDefaultProps(siderProps(), {
     collapsible: false,
     defaultCollapsed: false,
     reverseArrow: false,

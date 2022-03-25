@@ -141,10 +141,12 @@ export default {
       !props.expandedRowRender || !('scroll' in props) || !props.scroll.x,
       '`expandedRowRender` and `scroll` are not compatible. Please use one of them at one time.',
     );
+    const rowSelection = getRowSelection(this.$props);
+    this.prevGetCheckboxProps = rowSelection.getCheckboxProps;
     this.CheckboxPropsCache = {};
 
     this.store = (this.$root.constructor.observable || Vue.observable)({
-      selectedRowKeys: getRowSelection(this.$props).selectedRowKeys || [],
+      selectedRowKeys: rowSelection.selectedRowKeys || [],
       selectionDirty: false,
     });
     return {
@@ -177,7 +179,8 @@ export default {
         if (val && 'selectedRowKeys' in val) {
           this.store.selectedRowKeys = val.selectedRowKeys || [];
           const { rowSelection } = this;
-          if (rowSelection && val.getCheckboxProps !== rowSelection.getCheckboxProps) {
+          if (rowSelection && val.getCheckboxProps !== this.prevGetCheckboxProps) {
+            this.prevGetCheckboxProps = val.getCheckboxProps;
             this.CheckboxPropsCache = {};
           }
         } else if (oldVal && !val) {

@@ -10,15 +10,16 @@ import Button from '../../button';
 import ListItem from './ListItem';
 import type { HTMLAttributes } from 'vue';
 import { computed, defineComponent, getCurrentInstance, onMounted, ref, watchEffect } from 'vue';
-import { initDefaultProps, isValidElement } from '../../_util/props-util';
+import { filterEmpty, initDefaultProps, isValidElement } from '../../_util/props-util';
 import type { VueNode } from '../../_util/type';
 import useConfigInject from '../../_util/hooks/useConfigInject';
 import { getTransitionGroupProps, TransitionGroup } from '../../_util/transition';
 import collapseMotion from '../../_util/collapseMotion';
 
 const HackSlot = (_, { slots }) => {
-  return slots.default?.()[0];
+  return filterEmpty(slots.default?.())[0];
 };
+
 export default defineComponent({
   name: 'AUploadList',
   props: initDefaultProps(uploadListProps(), {
@@ -166,11 +167,11 @@ export default defineComponent({
         previewIcon,
         downloadIcon,
         progress,
-        appendAction = slots.appendAction,
+        appendAction,
         itemRender,
         appendActionVisible,
       } = props;
-      const appendActionDom = appendAction?.()[0];
+      const appendActionDom = appendAction?.();
       return (
         <TransitionGroup {...transitionGroupProps.value} tag="div">
           {items.map(file => {
@@ -203,8 +204,12 @@ export default defineComponent({
               />
             );
           })}
-          {appendActionVisible && isValidElement(appendActionDom) ? (
-            <HackSlot key="__ant_upload_appendAction">{appendActionDom}</HackSlot>
+          {appendAction ? (
+            <HackSlot
+              key="__ant_upload_appendAction"
+              v-show={!!appendActionVisible}
+              v-slots={{ default: () => appendActionDom }}
+            ></HackSlot>
           ) : null}
         </TransitionGroup>
       );

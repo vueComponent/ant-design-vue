@@ -85,7 +85,7 @@ const FormItemLabel: FunctionalComponent<FormItemLabelProps> = (props, { slots, 
   return (
     <Col {...mergedLabelCol} class={labelColClassName}>
       <label
-        html-for={htmlFor}
+        for={htmlFor}
         class={labelClassName}
         title={typeof label === 'string' ? label : ''}
         onClick={e => emit('click', e)}

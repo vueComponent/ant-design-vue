@@ -296,7 +296,7 @@ export default defineComponent({
       defaultLocale.Upload,
       computed(() => props.locale),
     );
-    const renderUploadList = (button?: VueNode, buttonVisible?: boolean) => {
+    const renderUploadList = (button?: () => VueNode, buttonVisible?: boolean) => {
       const {
         removeIcon,
         previewIcon,
@@ -333,10 +333,11 @@ export default defineComponent({
           progress={progress}
           itemRender={itemRender}
           appendActionVisible={buttonVisible}
-          v-slots={{ ...slots, appendAction: () => button }}
+          appendAction={button}
+          v-slots={{ ...slots }}
         />
       ) : (
-        button
+        button?.()
       );
     };
     return () => {
@@ -414,7 +415,7 @@ export default defineComponent({
       if (listType === 'picture-card') {
         return (
           <span class={classNames(`${prefixCls.value}-picture-card-wrapper`, attrs.class)}>
-            {renderUploadList(renderUploadButton(), !!(children && children.length))}
+            {renderUploadList(renderUploadButton, !!(children && children.length))}
           </span>
         );
       }

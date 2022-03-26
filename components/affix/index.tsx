@@ -1,4 +1,4 @@
-import type { CSSProperties, ExtractPropTypes } from 'vue';
+import type { ComponentPublicInstance, CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import {
   defineComponent,
   ref,
@@ -10,7 +10,6 @@ import {
   onUnmounted,
   onUpdated,
 } from 'vue';
-import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
@@ -41,28 +40,41 @@ export interface AffixState {
 }
 
 // Affix
-export const affixProps = {
+export const affixProps = () => ({
   /**
    * 距离窗口顶部达到指定偏移量后触发
    */
-  offsetTop: PropTypes.number,
+  offsetTop: Number,
   /** 距离窗口底部达到指定偏移量后触发 */
-  offsetBottom: PropTypes.number,
+  offsetBottom: Number,
   /** 固定状态改变时触发的回调函数 */
   // onChange?: (affixed?: boolean) => void;
   /** 设置 Affix 需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数 */
-  target: PropTypes.func.def(getDefaultTarget),
-  prefixCls: PropTypes.string,
-  onChange: PropTypes.func,
-  onTestUpdatePosition: PropTypes.func,
+  target: {
+    type: Function as PropType<() => Window | HTMLElement | null>,
+    default: getDefaultTarget,
+  },
+  prefixCls: String,
+  onChange: Function as PropType<AffixEmits['change']>,
+  onTestUpdatePosition: Function as PropType<AffixEmits['testUpdatePosition']>,
+});
+
+export type AffixProps = Partial<ExtractPropTypes<ReturnType<typeof affixProps>>>;
+
+export type AffixEmits = {
+  change: (lastAffix: boolean) => boolean;
+  testUpdatePosition: () => boolean;
 };
 
-export type AffixProps = Partial<ExtractPropTypes<typeof affixProps>>;
+export type AffixExpose = {
+  updatePosition: (...args: any[]) => void;
+  lazyUpdatePosition: (...args: any[]) => void;
+};
 
+export type AffixInstance = ComponentPublicInstance<AffixProps, AffixExpose>;
 const Affix = defineComponent({
   name: 'AAffix',
-  props: affixProps,
-  emits: ['change', 'testUpdatePosition'],
+  props: affixProps(),
   setup(props, { slots, emit, expose }) {
     const placeholderNode = ref();
     const fixedNode = ref();
@@ -222,7 +234,14 @@ const Affix = defineComponent({
       const className = classNames({
         [prefixCls.value]: affixStyle,
       });
-      const restProps = omit(props, ['prefixCls', 'offsetTop', 'offsetBottom', 'target']);
+      const restProps = omit(props, [
+        'prefixCls',
+        'offsetTop',
+        'offsetBottom',
+        'target',
+        'onChange',
+        'onTestUpdatePosition',
+      ]);
       return (
         <ResizeObserver onResize={updatePosition}>
           <div {...restProps} style={placeholderStyle} ref={placeholderNode}>

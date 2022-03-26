@@ -6,7 +6,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
     <div class="ant-row" style="margin-left: -12px; margin-right: -12px;">
       <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-col ant-form-item-label"><label html-for="advanced_search_field-1" class="ant-form-item-required" title="field-1">field-1
+          <div class="ant-col ant-form-item-label"><label for="advanced_search_field-1" class="ant-form-item-required" title="field-1">field-1
               <!---->
             </label></div>
           <div class="ant-col ant-form-item-control">
@@ -21,7 +21,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-col ant-form-item-label"><label html-for="advanced_search_field-2" class="ant-form-item-required" title="field-2">field-2
+          <div class="ant-col ant-form-item-label"><label for="advanced_search_field-2" class="ant-form-item-required" title="field-2">field-2
               <!---->
             </label></div>
           <div class="ant-col ant-form-item-control">
@@ -36,7 +36,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-col ant-form-item-label"><label html-for="advanced_search_field-3" class="ant-form-item-required" title="field-3">field-3
+          <div class="ant-col ant-form-item-label"><label for="advanced_search_field-3" class="ant-form-item-required" title="field-3">field-3
               <!---->
             </label></div>
           <div class="ant-col ant-form-item-control">
@@ -51,7 +51,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-col ant-form-item-label"><label html-for="advanced_search_field-4" class="ant-form-item-required" title="field-4">field-4
+          <div class="ant-col ant-form-item-label"><label for="advanced_search_field-4" class="ant-form-item-required" title="field-4">field-4
               <!---->
             </label></div>
           <div class="ant-col ant-form-item-control">
@@ -66,7 +66,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-col ant-form-item-label"><label html-for="advanced_search_field-5" class="ant-form-item-required" title="field-5">field-5
+          <div class="ant-col ant-form-item-label"><label for="advanced_search_field-5" class="ant-form-item-required" title="field-5">field-5
               <!---->
             </label></div>
           <div class="ant-col ant-form-item-control">
@@ -81,7 +81,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px;">
         <div class="ant-row ant-form-item">
-          <div class="ant-col ant-form-item-label"><label html-for="advanced_search_field-6" class="ant-form-item-required" title="field-6">field-6
+          <div class="ant-col ant-form-item-label"><label for="advanced_search_field-6" class="ant-form-item-required" title="field-6">field-6
               <!---->
             </label></div>
           <div class="ant-col ant-form-item-control">
@@ -96,7 +96,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px; display: none;">
         <div class="ant-row ant-form-item">
-          <div class="ant-col ant-form-item-label"><label html-for="advanced_search_field-7" class="ant-form-item-required" title="field-7">field-7
+          <div class="ant-col ant-form-item-label"><label for="advanced_search_field-7" class="ant-form-item-required" title="field-7">field-7
               <!---->
             </label></div>
           <div class="ant-col ant-form-item-control">
@@ -111,7 +111,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px; display: none;">
         <div class="ant-row ant-form-item">
-          <div class="ant-col ant-form-item-label"><label html-for="advanced_search_field-8" class="ant-form-item-required" title="field-8">field-8
+          <div class="ant-col ant-form-item-label"><label for="advanced_search_field-8" class="ant-form-item-required" title="field-8">field-8
               <!---->
             </label></div>
           <div class="ant-col ant-form-item-control">
@@ -126,7 +126,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px; display: none;">
         <div class="ant-row ant-form-item">
-          <div class="ant-col ant-form-item-label"><label html-for="advanced_search_field-9" class="ant-form-item-required" title="field-9">field-9
+          <div class="ant-col ant-form-item-label"><label for="advanced_search_field-9" class="ant-form-item-required" title="field-9">field-9
               <!---->
             </label></div>
           <div class="ant-col ant-form-item-control">
@@ -141,7 +141,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
       </div>
       <div class="ant-col ant-col-8" style="padding-left: 12px; padding-right: 12px; display: none;">
         <div class="ant-row ant-form-item">
-          <div class="ant-col ant-form-item-label"><label html-for="advanced_search_field-10" class="ant-form-item-required" title="field-10">field-10
+          <div class="ant-col ant-form-item-label"><label for="advanced_search_field-10" class="ant-form-item-required" title="field-10">field-10
               <!---->
             </label></div>
           <div class="ant-col ant-form-item-control">
@@ -170,7 +170,7 @@ exports[`renders ./components/form/demo/advanced-search.vue correctly 1`] = `
 exports[`renders ./components/form/demo/basic.vue correctly 1`] = `
 <form autocomplete="off" class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-8 ant-form-item-label"><label html-for="basic_username" class="ant-form-item-required" title="Username">Username
+    <div class="ant-col ant-col-8 ant-form-item-label"><label for="basic_username" class="ant-form-item-required" title="Username">Username
         <!---->
       </label></div>
     <div class="ant-col ant-col-16 ant-form-item-control">
@@ -183,7 +183,7 @@ exports[`renders ./components/form/demo/basic.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-8 ant-form-item-label"><label html-for="basic_password" class="ant-form-item-required" title="Password">Password
+    <div class="ant-col ant-col-8 ant-form-item-label"><label for="basic_password" class="ant-form-item-required" title="Password">Password
         <!---->
       </label></div>
     <div class="ant-col ant-col-16 ant-form-item-control">
@@ -225,7 +225,7 @@ exports[`renders ./components/form/demo/basic.vue correctly 1`] = `
 exports[`renders ./components/form/demo/custom-validation.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="custom-validation_pass" class="ant-form-item-required" title="Password">Password
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="custom-validation_pass" class="ant-form-item-required" title="Password">Password
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -238,7 +238,7 @@ exports[`renders ./components/form/demo/custom-validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="custom-validation_checkPass" class="" title="Confirm">Confirm
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="custom-validation_checkPass" class="" title="Confirm">Confirm
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -251,7 +251,7 @@ exports[`renders ./components/form/demo/custom-validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="custom-validation_age" class="" title="Age">Age
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="custom-validation_age" class="" title="Age">Age
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -289,7 +289,7 @@ exports[`renders ./components/form/demo/custom-validation.vue correctly 1`] = `
 exports[`renders ./components/form/demo/customized-form-controls.vue correctly 1`] = `
 <form class="ant-form ant-form-inline">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-form-item-label"><label html-for="customized_form_controls_price" class="" title="Price">Price
+    <div class="ant-col ant-form-item-label"><label for="customized_form_controls_price" class="" title="Price">Price
         <!---->
       </label></div>
     <div class="ant-col ant-form-item-control">
@@ -389,7 +389,7 @@ exports[`renders ./components/form/demo/dynamic-form-items.vue correctly 1`] = `
 exports[`renders ./components/form/demo/dynamic-form-items-complex.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-form-item-label"><label html-for="dynamic_form_nest_item_area" class="ant-form-item-required" title="Area">Area
+    <div class="ant-col ant-form-item-label"><label for="dynamic_form_nest_item_area" class="ant-form-item-required" title="Area">Area
         <!---->
       </label></div>
     <div class="ant-col ant-form-item-control">
@@ -442,7 +442,7 @@ exports[`renders ./components/form/demo/dynamic-form-items-complex.vue correctly
 exports[`renders ./components/form/demo/dynamic-rule.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="dynamic_rule_username" class="ant-form-item-required" title="Username">Username
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="dynamic_rule_username" class="ant-form-item-required" title="Username">Username
         <!---->
       </label></div>
     <div class="ant-col ant-col-8 ant-form-item-control">
@@ -455,7 +455,7 @@ exports[`renders ./components/form/demo/dynamic-rule.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="dynamic_rule_nickname" class="" title="Nickname">Nickname
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="dynamic_rule_nickname" class="" title="Nickname">Nickname
         <!---->
       </label></div>
     <div class="ant-col ant-col-8 ant-form-item-control">
@@ -497,7 +497,7 @@ exports[`renders ./components/form/demo/dynamic-rule.vue correctly 1`] = `
 exports[`renders ./components/form/demo/form-context.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-8 ant-form-item-label"><label html-for="form_context_group" class="ant-form-item-required" title="Group Name">Group Name
+    <div class="ant-col ant-col-8 ant-form-item-label"><label for="form_context_group" class="ant-form-item-required" title="Group Name">Group Name
         <!---->
       </label></div>
     <div class="ant-col ant-col-16 ant-form-item-control">
@@ -594,7 +594,7 @@ exports[`renders ./components/form/demo/horizontal-login.vue correctly 1`] = `
 exports[`renders ./components/form/demo/inline-login.vue correctly 1`] = `
 <form autocomplete="off" class="ant-form ant-form-inline">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-form-item-label"><label html-for="horizontal_login_username" class="ant-form-item-required" title="Username">Username
+    <div class="ant-col ant-form-item-label"><label for="horizontal_login_username" class="ant-form-item-required" title="Username">Username
         <!---->
       </label></div>
     <div class="ant-col ant-form-item-control">
@@ -607,7 +607,7 @@ exports[`renders ./components/form/demo/inline-login.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-form-item-label"><label html-for="horizontal_login_password" class="ant-form-item-required" title="Password">Password
+    <div class="ant-col ant-form-item-label"><label for="horizontal_login_password" class="ant-form-item-required" title="Password">Password
         <!---->
       </label></div>
     <div class="ant-col ant-form-item-control">
@@ -790,7 +790,7 @@ exports[`renders ./components/form/demo/layout.vue correctly 1`] = `
 exports[`renders ./components/form/demo/nest-messages.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-8 ant-form-item-label"><label html-for="nest-messages_user_name" class="ant-form-item-required" title="Name">Name
+    <div class="ant-col ant-col-8 ant-form-item-label"><label for="nest-messages_user_name" class="ant-form-item-required" title="Name">Name
         <!---->
       </label></div>
     <div class="ant-col ant-col-16 ant-form-item-control">
@@ -803,7 +803,7 @@ exports[`renders ./components/form/demo/nest-messages.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-8 ant-form-item-label"><label html-for="nest-messages_user_email" class="" title="Email">Email
+    <div class="ant-col ant-col-8 ant-form-item-label"><label for="nest-messages_user_email" class="" title="Email">Email
         <!---->
       </label></div>
     <div class="ant-col ant-col-16 ant-form-item-control">
@@ -816,7 +816,7 @@ exports[`renders ./components/form/demo/nest-messages.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-8 ant-form-item-label"><label html-for="nest-messages_user_age" class="" title="Age">Age
+    <div class="ant-col ant-col-8 ant-form-item-label"><label for="nest-messages_user_age" class="" title="Age">Age
         <!---->
       </label></div>
     <div class="ant-col ant-col-16 ant-form-item-control">
@@ -834,7 +834,7 @@ exports[`renders ./components/form/demo/nest-messages.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-8 ant-form-item-label"><label html-for="nest-messages_user_website" class="" title="Website">Website
+    <div class="ant-col ant-col-8 ant-form-item-label"><label for="nest-messages_user_website" class="" title="Website">Website
         <!---->
       </label></div>
     <div class="ant-col ant-col-16 ant-form-item-control">
@@ -847,7 +847,7 @@ exports[`renders ./components/form/demo/nest-messages.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-8 ant-form-item-label"><label html-for="nest-messages_user_introduction" class="" title="Introduction">Introduction
+    <div class="ant-col ant-col-8 ant-form-item-label"><label for="nest-messages_user_introduction" class="" title="Introduction">Introduction
         <!---->
       </label></div>
     <div class="ant-col ant-col-16 ant-form-item-control">
@@ -878,7 +878,7 @@ exports[`renders ./components/form/demo/nest-messages.vue correctly 1`] = `
 exports[`renders ./components/form/demo/normal-login.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal login-form">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-form-item-label"><label html-for="normal_login_username" class="ant-form-item-required" title="Username">Username
+    <div class="ant-col ant-form-item-label"><label for="normal_login_username" class="ant-form-item-required" title="Username">Username
         <!---->
       </label></div>
     <div class="ant-col ant-form-item-control">
@@ -891,7 +891,7 @@ exports[`renders ./components/form/demo/normal-login.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-form-item-label"><label html-for="normal_login_password" class="ant-form-item-required" title="Password">Password
+    <div class="ant-col ant-form-item-label"><label for="normal_login_password" class="ant-form-item-required" title="Password">Password
         <!---->
       </label></div>
     <div class="ant-col ant-form-item-control">
@@ -923,7 +923,7 @@ exports[`renders ./components/form/demo/normal-login.vue correctly 1`] = `
 exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label html-for="time_related_controls_date-picker" class="ant-form-item-required" title="DatePicker">DatePicker
+    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="time_related_controls_date-picker" class="ant-form-item-required" title="DatePicker">DatePicker
         <!---->
       </label></div>
     <div class="ant-col ant-col-xs-24 ant-col-sm-16 ant-form-item-control">
@@ -943,7 +943,7 @@ exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] 
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label html-for="time_related_controls_date-time-picker" class="ant-form-item-required" title="DatePicker[showTime]">DatePicker[showTime]
+    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="time_related_controls_date-time-picker" class="ant-form-item-required" title="DatePicker[showTime]">DatePicker[showTime]
         <!---->
       </label></div>
     <div class="ant-col ant-col-xs-24 ant-col-sm-16 ant-form-item-control">
@@ -963,7 +963,7 @@ exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] 
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label html-for="time_related_controls_month-picker" class="ant-form-item-required" title="MonthPicker">MonthPicker
+    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="time_related_controls_month-picker" class="ant-form-item-required" title="MonthPicker">MonthPicker
         <!---->
       </label></div>
     <div class="ant-col ant-col-xs-24 ant-col-sm-16 ant-form-item-control">
@@ -983,7 +983,7 @@ exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] 
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label html-for="time_related_controls_range-picker" class="ant-form-item-required" title="RangePicker">RangePicker
+    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="time_related_controls_range-picker" class="ant-form-item-required" title="RangePicker">RangePicker
         <!---->
       </label></div>
     <div class="ant-col ant-col-xs-24 ant-col-sm-16 ant-form-item-control">
@@ -1005,7 +1005,7 @@ exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] 
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label html-for="time_related_controls_range-time-picker" class="ant-form-item-required" title="RangePicker[showTime]">RangePicker[showTime]
+    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="time_related_controls_range-time-picker" class="ant-form-item-required" title="RangePicker[showTime]">RangePicker[showTime]
         <!---->
       </label></div>
     <div class="ant-col ant-col-xs-24 ant-col-sm-16 ant-form-item-control">
@@ -1027,7 +1027,7 @@ exports[`renders ./components/form/demo/time-related-controls.vue correctly 1`] 
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label html-for="time_related_controls_time-picker" class="ant-form-item-required" title="TimePicker">TimePicker
+    <div class="ant-col ant-col-xs-24 ant-col-sm-8 ant-form-item-label"><label for="time_related_controls_time-picker" class="ant-form-item-required" title="TimePicker">TimePicker
         <!---->
       </label></div>
     <div class="ant-col ant-col-xs-24 ant-col-sm-16 ant-form-item-control">
@@ -1319,7 +1319,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="validate_other_select" class="ant-form-item-required" title="Select">Select
+    <div class="ant-col ant-col-6 ant-form-item-label"><label for="validate_other_select" class="ant-form-item-required" title="Select">Select
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1341,7 +1341,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="validate_other_select-multiple" class="ant-form-item-required" title="Select[multiple]">Select[multiple]
+    <div class="ant-col ant-col-6 ant-form-item-label"><label for="validate_other_select-multiple" class="ant-form-item-required" title="Select[multiple]">Select[multiple]
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1387,7 +1387,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="validate_other_switch" class="" title="Switch">Switch
+    <div class="ant-col ant-col-6 ant-form-item-label"><label for="validate_other_switch" class="" title="Switch">Switch
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1404,7 +1404,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="validate_other_slider" class="" title="Slider">Slider
+    <div class="ant-col ant-col-6 ant-form-item-label"><label for="validate_other_slider" class="" title="Slider">Slider
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1426,7 +1426,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="validate_other_radio-group" class="" title="Radio.Group">Radio.Group
+    <div class="ant-col ant-col-6 ant-form-item-label"><label for="validate_other_radio-group" class="" title="Radio.Group">Radio.Group
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1441,7 +1441,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="validate_other_radio-button" class="ant-form-item-required" title="Radio.Button">Radio.Button
+    <div class="ant-col ant-col-6 ant-form-item-label"><label for="validate_other_radio-button" class="ant-form-item-required" title="Radio.Button">Radio.Button
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1456,7 +1456,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="validate_other_checkbox-group" class="" title="Checkbox.Group">Checkbox.Group
+    <div class="ant-col ant-col-6 ant-form-item-label"><label for="validate_other_checkbox-group" class="" title="Checkbox.Group">Checkbox.Group
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1480,7 +1480,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="validate_other_rate" class="" title="Rate">Rate
+    <div class="ant-col ant-col-6 ant-form-item-label"><label for="validate_other_rate" class="" title="Rate">Rate
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1526,7 +1526,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-6 ant-form-item-label"><label html-for="validate_other_upload" class="" title="Upload">Upload
+    <div class="ant-col ant-col-6 ant-form-item-label"><label for="validate_other_upload" class="" title="Upload">Upload
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1581,7 +1581,7 @@ exports[`renders ./components/form/demo/validate-other.vue correctly 1`] = `
 exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
 <form class="ant-form ant-form-horizontal">
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_name" class="ant-form-item-required" title="Activity name">Activity name
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="form_item_name" class="ant-form-item-required" title="Activity name">Activity name
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1594,7 +1594,7 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_region" class="ant-form-item-required" title="Activity zone">Activity zone
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="form_item_region" class="ant-form-item-required" title="Activity zone">Activity zone
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1616,7 +1616,7 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_date1" class="ant-form-item-required" title="Activity time">Activity time
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="form_item_date1" class="ant-form-item-required" title="Activity time">Activity time
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1636,7 +1636,7 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_delivery" class="" title="Instant delivery">Instant delivery
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="form_item_delivery" class="" title="Instant delivery">Instant delivery
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1653,7 +1653,7 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_type" class="ant-form-item-required" title="Activity type">Activity type
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="form_item_type" class="ant-form-item-required" title="Activity type">Activity type
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1668,7 +1668,7 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_resource" class="ant-form-item-required" title="Resources">Resources
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="form_item_resource" class="ant-form-item-required" title="Resources">Resources
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">
@@ -1683,7 +1683,7 @@ exports[`renders ./components/form/demo/validation.vue correctly 1`] = `
     </div>
   </div>
   <div class="ant-row ant-form-item">
-    <div class="ant-col ant-col-4 ant-form-item-label"><label html-for="form_item_desc" class="ant-form-item-required" title="Activity form">Activity form
+    <div class="ant-col ant-col-4 ant-form-item-label"><label for="form_item_desc" class="ant-form-item-required" title="Activity form">Activity form
         <!---->
       </label></div>
     <div class="ant-col ant-col-14 ant-form-item-control">

@@ -3,24 +3,27 @@ import classNames from '../_util/classNames';
 import { isStringElement, isEmptyElement, flattenChildren } from '../_util/props-util';
 import { Col } from '../grid';
 import { cloneElement } from '../_util/vnode';
+import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, inject, ref } from 'vue';
 import ItemMeta from './ItemMeta';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { ListContextKey } from './contextKey';
+import type { ListGridType } from '.';
 
-export const ListItemProps = {
-  prefixCls: PropTypes.string,
+export const listItemProps = () => ({
+  prefixCls: String,
   extra: PropTypes.any,
   actions: PropTypes.array,
-  grid: PropTypes.any,
-  colStyle: PropTypes.style,
-};
+  grid: Object as PropType<ListGridType>,
+  colStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+});
 
+export type ListItemProps = Partial<ExtractPropTypes<ReturnType<typeof listItemProps>>>;
 export default defineComponent({
   name: 'AListItem',
   inheritAttrs: false,
   Meta: ItemMeta,
-  props: ListItemProps,
+  props: listItemProps(),
   slots: ['actions', 'extra'],
   setup(props, { slots, attrs }) {
     const { itemLayout, grid } = inject(ListContextKey, {

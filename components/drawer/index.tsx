@@ -19,6 +19,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import { tuple, withInstall } from '../_util/type';
 import omit from '../_util/omit';
 import devWarning from '../vc-util/devWarning';
+import type { KeyboardEventHandler, MouseEventHandler } from '../_util/EventInterface';
 
 type ILevelMove = number | [number, number];
 
@@ -35,40 +36,43 @@ export interface PushState {
 const defaultPushState: PushState = { distance: 180 };
 
 export const drawerProps = () => ({
-  autofocus: PropTypes.looseBool,
-  closable: PropTypes.looseBool,
+  autofocus: { type: Boolean, default: undefined },
+  closable: { type: Boolean, default: undefined },
   closeIcon: PropTypes.any,
-  destroyOnClose: PropTypes.looseBool,
-  forceRender: PropTypes.looseBool,
+  destroyOnClose: { type: Boolean, default: undefined },
+  forceRender: { type: Boolean, default: undefined },
   getContainer: PropTypes.any,
-  maskClosable: PropTypes.looseBool,
-  mask: PropTypes.looseBool,
-  maskStyle: PropTypes.object,
+  maskClosable: { type: Boolean, default: undefined },
+  mask: { type: Boolean, default: undefined },
+  maskStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   /** @deprecated Use `style` instead */
   wrapStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   style: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   class: PropTypes.any,
   /** @deprecated Use `class` instead */
-  wrapClassName: PropTypes.string,
+  wrapClassName: String,
   size: {
     type: String as PropType<sizeType>,
   },
-  drawerStyle: PropTypes.object,
-  headerStyle: PropTypes.object,
-  bodyStyle: PropTypes.object,
-  contentWrapperStyle: PropTypes.object,
+  drawerStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  headerStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  bodyStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  contentWrapperStyle: {
+    type: Object as PropType<CSSProperties>,
+    default: undefined as CSSProperties,
+  },
   title: PropTypes.any,
-  visible: PropTypes.looseBool,
+  visible: { type: Boolean, default: undefined },
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  zIndex: PropTypes.number,
-  prefixCls: PropTypes.string,
+  zIndex: Number,
+  prefixCls: String,
   push: PropTypes.oneOfType([PropTypes.looseBool, { type: Object as PropType<PushState> }]),
   placement: PropTypes.oneOf(PlacementTypes),
-  keyboard: PropTypes.looseBool,
+  keyboard: { type: Boolean, default: undefined },
   extra: PropTypes.any,
   footer: PropTypes.any,
-  footerStyle: PropTypes.object,
+  footerStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   level: PropTypes.any,
   levelMove: {
     type: [Number, Array, Function] as PropType<
@@ -77,7 +81,10 @@ export const drawerProps = () => ({
   },
   handle: PropTypes.any,
   /** @deprecated Use `@afterVisibleChange` instead */
-  afterVisibleChange: PropTypes.func,
+  afterVisibleChange: Function as PropType<(visible: boolean) => void>,
+  onAfterVisibleChange: Function as PropType<(visible: boolean) => void>,
+  'onUpdate:visible': Function as PropType<(visible: boolean) => void>,
+  onClose: Function as PropType<MouseEventHandler | KeyboardEventHandler>,
 });
 
 export type DrawerProps = Partial<ExtractPropTypes<ReturnType<typeof drawerProps>>>;
@@ -95,7 +102,7 @@ const Drawer = defineComponent({
     push: defaultPushState,
   }),
   slots: ['closeIcon', 'title', 'extra', 'footer', 'handle'],
-  emits: ['update:visible', 'close', 'afterVisibleChange'],
+  // emits: ['update:visible', 'close', 'afterVisibleChange'],
   setup(props, { emit, slots, attrs }) {
     const sPush = ref(false);
     const destroyClose = ref(false);
@@ -343,6 +350,9 @@ const Drawer = defineComponent({
           'title',
           'push',
           'wrapStyle',
+          'onAfterVisibleChange',
+          'onClose',
+          'onUpdate:visible',
         ]),
         ...val,
         onClose: close,

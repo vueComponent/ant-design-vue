@@ -1,6 +1,5 @@
 import type { App, VNode, PropType } from 'vue';
 import { provide, defineComponent, reactive, watch } from 'vue';
-import PropTypes from '../_util/vue-types';
 import type { ModalLocale } from '../modal/locale';
 import warning from '../_util/warning';
 import { withInstall } from '../_util/type';
@@ -59,7 +58,7 @@ const LocaleProvider = defineComponent({
     locale: {
       type: Object as PropType<Locale>,
     },
-    ANT_MARK__: PropTypes.string,
+    ANT_MARK__: String,
   },
   setup(props, { slots }) {
     warning(

@@ -12,6 +12,7 @@ export { collapsePanelProps };
 export type CollapsePanelProps = Partial<ExtractPropTypes<ReturnType<typeof collapsePanelProps>>>;
 export default defineComponent({
   name: 'ACollapsePanel',
+  inheritAttrs: false,
   props: initDefaultProps(collapsePanelProps(), {
     showArrow: true,
     isActive: false,
@@ -20,8 +21,8 @@ export default defineComponent({
     forceRender: false,
   }),
   slots: ['expandIcon', 'extra', 'header'],
-  emits: ['itemClick'],
-  setup(props, { slots, emit }) {
+  // emits: ['itemClick'],
+  setup(props, { slots, emit, attrs }) {
     devWarning(
       props.disabled === undefined,
       'Collapse.Panel',
@@ -61,6 +62,7 @@ export default defineComponent({
         [`${prefixClsValue}-item-active`]: isActive,
         [`${prefixClsValue}-item-disabled`]: disabled,
         [`${prefixClsValue}-no-arrow`]: !showArrow,
+        [`${attrs.class}`]: !!attrs.class,
       });
 
       let icon = <i class="arrow" />;
@@ -85,7 +87,7 @@ export default defineComponent({
       };
 
       return (
-        <div class={itemCls}>
+        <div {...attrs} class={itemCls}>
           <div
             class={headerCls}
             onClick={() => collapsible !== 'header' && handleItemClick()}

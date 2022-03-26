@@ -1,4 +1,4 @@
-import type { CSSProperties, FunctionalComponent } from 'vue';
+import type { CSSProperties, FunctionalComponent, PropType } from 'vue';
 import classNames from '../_util/classNames';
 import LocaleReceiver from '../locale-provider/LocaleReceiver';
 import DefaultEmptyImg from './empty';
@@ -85,10 +85,10 @@ Empty.PRESENTED_IMAGE_DEFAULT = defaultEmptyImg;
 Empty.PRESENTED_IMAGE_SIMPLE = simpleEmptyImg;
 Empty.inheritAttrs = false;
 Empty.props = {
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   image: PropTypes.any,
   description: PropTypes.any,
-  imageStyle: PropTypes.object,
+  imageStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
 };
 
 export default withInstall(Empty);

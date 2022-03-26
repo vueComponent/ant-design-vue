@@ -47,14 +47,13 @@ export const affixProps = () => ({
   offsetTop: Number,
   /** 距离窗口底部达到指定偏移量后触发 */
   offsetBottom: Number,
-  /** 固定状态改变时触发的回调函数 */
-  // onChange?: (affixed?: boolean) => void;
   /** 设置 Affix 需要监听其滚动事件的元素，值为一个返回对应 DOM 元素的函数 */
   target: {
     type: Function as PropType<() => Window | HTMLElement | null>,
     default: getDefaultTarget,
   },
   prefixCls: String,
+  /** 固定状态改变时触发的回调函数 */
   onChange: Function as PropType<AffixEmits['change']>,
   onTestUpdatePosition: Function as PropType<AffixEmits['testUpdatePosition']>,
 });
@@ -62,8 +61,8 @@ export const affixProps = () => ({
 export type AffixProps = Partial<ExtractPropTypes<ReturnType<typeof affixProps>>>;
 
 export type AffixEmits = {
-  change: (lastAffix: boolean) => boolean;
-  testUpdatePosition: () => boolean;
+  change: (lastAffix: boolean) => void;
+  testUpdatePosition: () => void;
 };
 
 export type AffixExpose = {

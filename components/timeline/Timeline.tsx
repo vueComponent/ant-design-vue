@@ -10,11 +10,11 @@ import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const timelineProps = () => ({
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   /** 指定最后一个幽灵节点是否存在或内容 */
   pending: PropTypes.any,
   pendingDot: PropTypes.any,
-  reverse: PropTypes.looseBool,
+  reverse: { type: Boolean, default: undefined },
   mode: PropTypes.oneOf(tuple('left', 'alternate', 'right', '')),
 });
 

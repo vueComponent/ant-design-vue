@@ -27,7 +27,7 @@ const ResizableTextArea = defineComponent({
   name: 'ResizableTextArea',
   mixins: [BaseMixin],
   inheritAttrs: false,
-  props: textAreaProps,
+  props: textAreaProps(),
   setup(props, { attrs, emit, expose }) {
     let nextFrameActionId: any;
     let resizeFrameId: any;

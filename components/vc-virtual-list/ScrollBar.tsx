@@ -1,10 +1,9 @@
-import type { PropType } from 'vue';
 import { defineComponent, reactive } from 'vue';
+import type { PropType } from 'vue';
 import classNames from '../_util/classNames';
 import createRef from '../_util/createRef';
 import raf from '../_util/raf';
 import supportsPassive from '../_util/supportsPassive';
-import PropTypes from '../_util/vue-types';
 
 const MIN_SIZE = 20;
 
@@ -23,11 +22,11 @@ export default defineComponent({
   name: 'ScrollBar',
   inheritAttrs: false,
   props: {
-    prefixCls: PropTypes.string,
-    scrollTop: PropTypes.number,
-    scrollHeight: PropTypes.number,
-    height: PropTypes.number,
-    count: PropTypes.number,
+    prefixCls: String,
+    scrollTop: Number,
+    scrollHeight: Number,
+    height: Number,
+    count: Number,
     onScroll: {
       type: Function as PropType<(scrollTop: number) => void>,
     },

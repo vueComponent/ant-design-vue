@@ -5,7 +5,6 @@ import { defineComponent, ref, onMounted } from 'vue';
  * This helps accessibility reader to tread as a interactive button to operation.
  */
 import KeyCode from './KeyCode';
-import PropTypes from './vue-types';
 
 const inlineStyle = {
   border: 0,
@@ -19,10 +18,10 @@ const TransButton = defineComponent({
   name: 'TransButton',
   inheritAttrs: false,
   props: {
-    noStyle: PropTypes.looseBool,
-    onClick: PropTypes.func,
-    disabled: PropTypes.looseBool,
-    autofocus: PropTypes.looseBool,
+    noStyle: { type: Boolean, default: undefined },
+    onClick: Function,
+    disabled: { type: Boolean, default: undefined },
+    autofocus: { type: Boolean, default: undefined },
   },
   setup(props, { slots, emit, attrs, expose }) {
     const domRef = ref();

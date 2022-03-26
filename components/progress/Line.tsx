@@ -2,20 +2,19 @@ import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
 import { presetPrimaryColors } from '@ant-design/colors';
 import { computed, defineComponent } from 'vue';
 import type { Direction } from '../config-provider';
-import PropTypes from '../_util/vue-types';
 import type { StringGradients, ProgressGradient } from './props';
 import { progressProps } from './props';
 import { getSuccessPercent, validProgress } from './utils';
 
-export const lineProps = {
+export const lineProps = () => ({
   ...progressProps(),
-  prefixCls: PropTypes.string,
+  prefixCls: String,
   direction: {
     type: String as PropType<Direction>,
   },
-};
+});
 
-export type LineProps = Partial<ExtractPropTypes<typeof lineProps>>;
+export type LineProps = Partial<ExtractPropTypes<ReturnType<typeof lineProps>>>;
 
 /**
  * {
@@ -70,7 +69,7 @@ export const handleGradient = (strokeColor: ProgressGradient, directionConfig: D
 
 export default defineComponent({
   name: 'Line',
-  props: lineProps,
+  props: lineProps(),
   setup(props, { slots }) {
     const backgroundProps = computed(() => {
       const { strokeColor, direction } = props;

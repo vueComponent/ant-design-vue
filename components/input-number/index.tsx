@@ -11,8 +11,9 @@ import { cloneElement } from '../_util/vnode';
 import omit from '../_util/omit';
 import PropTypes from '../_util/vue-types';
 import isValidValue from '../_util/isValidValue';
-export const inputNumberProps = {
-  ...baseInputNumberProps,
+const baseProps = baseInputNumberProps();
+export const inputNumberProps = () => ({
+  ...baseProps,
   size: { type: String as PropType<SizeType> },
   bordered: { type: Boolean, default: true },
   placeholder: String,
@@ -22,16 +23,16 @@ export const inputNumberProps = {
   addonBefore: PropTypes.any,
   addonAfter: PropTypes.any,
   prefix: PropTypes.any,
-  'update:value': baseInputNumberProps.onChange,
-};
+  'update:value': baseProps.onChange,
+});
 
-export type InputNumberProps = Partial<ExtractPropTypes<typeof inputNumberProps>>;
+export type InputNumberProps = Partial<ExtractPropTypes<ReturnType<typeof inputNumberProps>>>;
 
 const InputNumber = defineComponent({
   name: 'AInputNumber',
   inheritAttrs: false,
-  props: inputNumberProps,
-  emits: ['focus', 'blur', 'change', 'input', 'update:value'],
+  props: inputNumberProps(),
+  // emits: ['focus', 'blur', 'change', 'input', 'update:value'],
   slots: ['addonBefore', 'addonAfter', 'prefix'],
   setup(props, { emit, expose, attrs, slots }) {
     const formItemContext = useInjectFormItemContext();

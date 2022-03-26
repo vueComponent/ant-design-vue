@@ -57,7 +57,7 @@ const Steps = defineComponent({
     labelPlacement: 'horizontal',
   }),
   slots: ['progressDot'],
-  emits: ['update:current', 'change'],
+  // emits: ['update:current', 'change'],
   setup(props, { attrs, slots, emit }) {
     const { prefixCls, direction: rtlDirection, configProvider } = useConfigInject('steps', props);
     const screens = useBreakpoint();

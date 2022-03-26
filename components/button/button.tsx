@@ -10,7 +10,7 @@ import {
   watchEffect,
 } from 'vue';
 import Wave from '../_util/wave';
-import buttonTypes from './buttonTypes';
+import buttonProps from './buttonTypes';
 import { flattenChildren, initDefaultProps } from '../_util/props-util';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import devWarning from '../vc-util/devWarning';
@@ -27,14 +27,14 @@ const isTwoCNChar = rxTwoCNChar.test.bind(rxTwoCNChar);
 function isUnborderedButtonType(type: ButtonType | undefined) {
   return type === 'text' || type === 'link';
 }
-
+export { buttonProps };
 export default defineComponent({
   name: 'AButton',
   inheritAttrs: false,
   __ANT_BUTTON: true,
-  props: initDefaultProps(buttonTypes(), { type: 'default' }),
+  props: initDefaultProps(buttonProps(), { type: 'default' }),
   slots: ['icon'],
-  emits: ['click', 'mousedown'],
+  // emits: ['click', 'mousedown'],
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, autoInsertSpaceInButton, direction, size } = useConfigInject('btn', props);
 
@@ -151,7 +151,7 @@ export default defineComponent({
 
       isNeedInserted = children.length === 1 && !icon && !isUnborderedButtonType(props.type);
 
-      const { type, htmlType, disabled, href, title, target } = props;
+      const { type, htmlType, disabled, href, title, target, onMousedown } = props;
 
       const iconType = innerLoading.value ? 'loading' : icon;
       const buttonProps = {
@@ -164,6 +164,7 @@ export default defineComponent({
           { [`${prefixCls.value}-icon-only`]: children.length === 0 && !!iconType },
         ],
         onClick: handleClick,
+        onMousedown,
       };
       // https://github.com/vueComponent/ant-design-vue/issues/4930
       if (!disabled) {

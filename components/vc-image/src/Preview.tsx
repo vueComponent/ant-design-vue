@@ -8,7 +8,6 @@ import LeftOutlined from '@ant-design/icons-vue/LeftOutlined';
 import RightOutlined from '@ant-design/icons-vue/RightOutlined';
 
 import classnames from '../../_util/classNames';
-import PropTypes from '../../_util/vue-types';
 import Dialog from '../../vc-dialog';
 import getIDialogPropTypes from '../../vc-dialog/IDialogPropTypes';
 import { getOffset } from '../../vc-util/Dom/css';
@@ -33,8 +32,8 @@ const initialPosition = {
   y: 0,
 };
 const PreviewType = {
-  src: PropTypes.string,
-  alt: PropTypes.string,
+  src: String,
+  alt: String,
   ...IDialogPropTypes,
 };
 const Preview = defineComponent({

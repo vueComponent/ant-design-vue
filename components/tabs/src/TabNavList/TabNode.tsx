@@ -25,7 +25,7 @@ export default defineComponent({
   props: {
     id: { type: String as PropType<string> },
     prefixCls: { type: String as PropType<string> },
-    tab: { type: Object as PropType<Tab> },
+    tab: { type: Object as PropType<Tab & { closeIcon?: () => any }> },
     active: { type: Boolean },
     closable: { type: Boolean },
     editable: { type: Object as PropType<EditableConfig> },

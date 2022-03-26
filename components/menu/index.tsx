@@ -7,6 +7,7 @@ import SubMenu from './src/SubMenu';
 import type { MenuItemGroupProps } from './src/ItemGroup';
 import ItemGroup from './src/ItemGroup';
 import Divider from './src/Divider';
+import type { MenuDividerProps } from './src/Divider';
 import type { App, Plugin } from 'vue';
 import type { MenuTheme, MenuMode } from './src/interface';
 /* istanbul ignore next */
@@ -23,7 +24,15 @@ Menu.Item = MenuItem;
 Menu.Divider = Divider;
 Menu.SubMenu = SubMenu;
 Menu.ItemGroup = ItemGroup;
-export type { MenuProps, SubMenuProps, MenuItemProps, MenuItemGroupProps, MenuTheme, MenuMode };
+export type {
+  MenuProps,
+  SubMenuProps,
+  MenuItemProps,
+  MenuItemGroupProps,
+  MenuTheme,
+  MenuMode,
+  MenuDividerProps,
+};
 export {
   SubMenu,
   MenuItem as Item,

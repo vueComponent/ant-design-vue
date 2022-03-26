@@ -5,16 +5,14 @@ import PropTypes from '../_util/vue-types';
 import Radio from './Radio';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { tuple } from '../_util/type';
-import type { RadioChangeEvent } from './interface';
+import type { RadioChangeEvent, RadioGroupButtonStyle, RadioGroupOptionType } from './interface';
 import { useInjectFormItemContext } from '../form/FormItemContext';
 
 const RadioGroupSizeTypes = tuple('large', 'default', 'small');
 
 export type RadioGroupSize = typeof RadioGroupSizeTypes[number];
 
-const RadioGroupOptionTypes = tuple('default', 'button');
-
-export type RadioGroupOption = typeof RadioGroupOptionTypes[number];
+export type RadioGroupOption = RadioGroupOptionType;
 
 export type RadioGroupChildOption = {
   label?: any;
@@ -22,26 +20,28 @@ export type RadioGroupChildOption = {
   disabled?: boolean;
 };
 
-export const radioGroupProps = {
-  prefixCls: PropTypes.string,
+export const radioGroupProps = () => ({
+  prefixCls: String,
   value: PropTypes.any,
   size: PropTypes.oneOf(RadioGroupSizeTypes).def('default'),
   options: {
     type: Array as PropType<Array<string | RadioGroupChildOption | number>>,
   },
-  disabled: PropTypes.looseBool,
-  name: PropTypes.string,
-  buttonStyle: PropTypes.string.def('outline'),
-  id: PropTypes.string,
-  optionType: PropTypes.oneOf(RadioGroupOptionTypes).def('default'),
-};
+  disabled: { type: Boolean, default: undefined },
+  name: String,
+  buttonStyle: { type: String as PropType<RadioGroupButtonStyle>, default: 'outline' },
+  id: String,
+  optionType: { type: String as PropType<RadioGroupOptionType>, default: 'default' },
+  onChange: Function as PropType<(e: RadioChangeEvent) => void>,
+  'onUpdate:value': Function as PropType<(val: any) => void>,
+});
 
-export type RadioGroupProps = Partial<ExtractPropTypes<typeof radioGroupProps>>;
+export type RadioGroupProps = Partial<ExtractPropTypes<ReturnType<typeof radioGroupProps>>>;
 
 export default defineComponent({
   name: 'ARadioGroup',
-  props: radioGroupProps,
-  emits: ['update:value', 'change'],
+  props: radioGroupProps(),
+  // emits: ['update:value', 'change'],
   setup(props, { slots, emit }) {
     const formItemContext = useInjectFormItemContext();
     const { prefixCls, direction, size } = useConfigInject('radio', props);

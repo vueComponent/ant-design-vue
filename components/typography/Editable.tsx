@@ -1,26 +1,29 @@
 import KeyCode from '../_util/KeyCode';
-import PropTypes from '../_util/vue-types';
 import TextArea from '../input/TextArea';
 import EnterOutlined from '@ant-design/icons-vue/EnterOutlined';
-import type { PropType } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, ref, reactive, watch, onMounted, computed } from 'vue';
 import type { Direction } from '../config-provider';
+import type { ChangeEventHandler } from '../_util/EventInterface';
+import type { AutoSizeType } from '../input/inputProps';
 
+const editableProps = () => ({
+  prefixCls: String,
+  value: String,
+  maxlength: Number,
+  autoSize: { type: [Boolean, Object] as PropType<boolean | AutoSizeType> },
+  onSave: Function as PropType<(val: string) => void>,
+  onCancel: Function as PropType<() => void>,
+  onEnd: Function as PropType<() => void>,
+  onChange: Function as PropType<(val: string) => void>,
+  originContent: String,
+  direction: String as PropType<Direction>,
+});
+export type EditableProps = Partial<ExtractPropTypes<ReturnType<typeof editableProps>>>;
 const Editable = defineComponent({
   name: 'Editable',
-  props: {
-    prefixCls: PropTypes.string,
-    value: PropTypes.string,
-    maxlength: PropTypes.number,
-    autoSize: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
-    onSave: PropTypes.func,
-    onCancel: PropTypes.func,
-    onEnd: PropTypes.func,
-    onChange: PropTypes.func,
-    originContent: PropTypes.string,
-    direction: String as PropType<Direction>,
-  },
-  emits: ['save', 'cancel', 'end', 'change'],
+  props: editableProps(),
+  // emits: ['save', 'cancel', 'end', 'change'],
   setup(props, { emit, slots }) {
     const state = reactive({
       current: props.value || '',
@@ -116,7 +119,7 @@ const Editable = defineComponent({
           ref={saveTextAreaRef}
           maxlength={props.maxlength}
           value={state.current}
-          onChange={onChange}
+          onChange={onChange as ChangeEventHandler}
           onKeydown={onKeyDown}
           onKeyup={onKeyUp}
           onCompositionstart={onCompositionStart}

@@ -15,7 +15,7 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     getContainer: PropTypes.func.isRequired,
-    didUpdate: PropTypes.func,
+    didUpdate: Function,
   },
   setup(props, { slots }) {
     let isSSR = true;

@@ -23,12 +23,12 @@ export default defineComponent({
   mixins: [BaseMixin],
   inheritAttrs: false,
   props: {
-    ...inputProps,
-    prefixCls: PropTypes.string,
-    inputPrefixCls: PropTypes.string,
+    ...inputProps(),
+    prefixCls: String,
+    inputPrefixCls: String,
     action: PropTypes.string.def('click'),
-    visibilityToggle: PropTypes.looseBool.def(true),
-    iconRender: PropTypes.func,
+    visibilityToggle: { type: Boolean, default: true },
+    iconRender: Function,
   },
   setup(props, { slots, attrs, expose }) {
     const visible = ref(false);

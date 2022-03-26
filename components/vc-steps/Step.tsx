@@ -1,5 +1,5 @@
 import PropTypes, { withUndefined } from '../_util/vue-types';
-import type { CSSProperties } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import { defineComponent } from 'vue';
 import type { EventHandler } from '../_util/EventInterface';
 
@@ -8,17 +8,17 @@ function isString(str: any): str is string {
 }
 function noop() {}
 export const VcStepProps = () => ({
-  prefixCls: PropTypes.string,
-  wrapperStyle: PropTypes.style,
-  itemWidth: PropTypes.string,
-  active: PropTypes.looseBool,
-  disabled: PropTypes.looseBool,
-  status: PropTypes.string,
-  iconPrefix: PropTypes.string,
+  prefixCls: String,
+  wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  itemWidth: String,
+  active: { type: Boolean, default: undefined },
+  disabled: { type: Boolean, default: undefined },
+  status: String,
+  iconPrefix: String,
   icon: PropTypes.any,
-  adjustMarginRight: PropTypes.string,
-  stepNumber: PropTypes.number,
-  stepIndex: PropTypes.number,
+  adjustMarginRight: String,
+  stepNumber: Number,
+  stepIndex: Number,
   description: PropTypes.any,
   title: PropTypes.any,
   subTitle: PropTypes.any,
@@ -28,9 +28,9 @@ export const VcStepProps = () => ({
     finish: PropTypes.any,
     error: PropTypes.any,
   }).loose,
-  onClick: PropTypes.func,
-  onStepClick: PropTypes.func,
-  stepIcon: PropTypes.func,
+  onClick: Function,
+  onStepClick: Function,
+  stepIcon: Function,
 });
 export default defineComponent({
   name: 'Step',

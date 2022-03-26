@@ -1,7 +1,7 @@
 import Trigger from '../vc-trigger';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import type { CSSProperties } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import { computed, ref, defineComponent } from 'vue';
 import type { VueNode } from '../_util/type';
 import type { DropdownRender, Placement, RenderDOMFunc } from './BaseSelect';
@@ -84,26 +84,26 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
   inheritAttrs: false,
   props: {
     dropdownAlign: PropTypes.object,
-    visible: PropTypes.looseBool,
-    disabled: PropTypes.looseBool,
-    dropdownClassName: PropTypes.string,
+    visible: { type: Boolean, default: undefined },
+    disabled: { type: Boolean, default: undefined },
+    dropdownClassName: String,
     dropdownStyle: PropTypes.object,
-    placement: PropTypes.string,
-    empty: PropTypes.looseBool,
-    autoAdjustOverflow: PropTypes.looseBool,
-    prefixCls: PropTypes.string,
-    popupClassName: PropTypes.string,
-    animation: PropTypes.string,
-    transitionName: PropTypes.string,
-    getPopupContainer: PropTypes.func,
-    dropdownRender: PropTypes.func,
-    containerWidth: PropTypes.number,
+    placement: String,
+    empty: { type: Boolean, default: undefined },
+    autoAdjustOverflow: { type: Boolean, default: undefined },
+    prefixCls: String,
+    popupClassName: String,
+    animation: String,
+    transitionName: String,
+    getPopupContainer: Function,
+    dropdownRender: Function,
+    containerWidth: Number,
     dropdownMatchSelectWidth: PropTypes.oneOfType([Number, Boolean]).def(true),
     popupElement: PropTypes.any,
-    direction: PropTypes.string,
-    getTriggerDOMNode: PropTypes.func,
-    onPopupVisibleChange: PropTypes.func,
-    onPopupMouseEnter: PropTypes.func,
+    direction: String,
+    getTriggerDOMNode: Function,
+    onPopupVisibleChange: Function as PropType<(open: boolean) => void>,
+    onPopupMouseEnter: Function,
   } as any,
   setup(props, { slots, attrs, expose }) {
     const builtInPlacements = computed(() => {

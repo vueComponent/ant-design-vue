@@ -1,22 +1,19 @@
-import type { VNode, ExtractPropTypes } from 'vue';
+import type { VNode, ExtractPropTypes, PropType } from 'vue';
 import { inject, cloneVNode, isVNode, defineComponent, nextTick } from 'vue';
 import debounce from 'lodash-es/debounce';
-import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';
-import BaseMixin from '../_util/BaseMixin';
 import { getComponent, getSlot } from '../_util/props-util';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import { defaultConfigProvider } from '../config-provider';
 
-export const SpinSize = PropTypes.oneOf(tuple('small', 'default', 'large'));
-
+export type SpinSize = 'small' | 'default' | 'large';
 export const spinProps = () => ({
-  prefixCls: PropTypes.string,
-  spinning: PropTypes.looseBool,
-  size: SpinSize,
-  wrapperClassName: PropTypes.string,
+  prefixCls: String,
+  spinning: { type: Boolean, default: undefined },
+  size: String as PropType<SpinSize>,
+  wrapperClassName: String,
   tip: PropTypes.any,
-  delay: PropTypes.number,
+  delay: Number,
   indicator: PropTypes.any,
 });
 
@@ -36,7 +33,6 @@ export function setDefaultIndicator(Content: any) {
 
 export default defineComponent({
   name: 'ASpin',
-  mixins: [BaseMixin],
   inheritAttrs: false,
   props: initDefaultProps(spinProps(), {
     size: 'default',
@@ -83,7 +79,7 @@ export default defineComponent({
     updateSpinning() {
       const { spinning, sSpinning } = this;
       if (sSpinning !== spinning) {
-        this.setState({ sSpinning: spinning });
+        this.sSpinning = spinning;
       }
     },
     cancelExistingSpin() {

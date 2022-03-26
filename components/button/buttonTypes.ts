@@ -1,16 +1,12 @@
-import { tuple } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 
 import type { ExtractPropTypes, PropType } from 'vue';
 import type { SizeType } from '../config-provider';
 
-const ButtonTypes = tuple('default', 'primary', 'ghost', 'dashed', 'link', 'text');
-export type ButtonType = typeof ButtonTypes[number];
-const ButtonShapes = tuple('default', 'circle', 'round');
-export type ButtonShape = typeof ButtonShapes[number];
+export type ButtonType = 'link' | 'default' | 'primary' | 'ghost' | 'dashed' | 'text';
+export type ButtonShape = 'default' | 'circle' | 'round';
 
-const ButtonHTMLTypes = tuple('submit', 'button', 'reset');
-export type ButtonHTMLType = typeof ButtonHTMLTypes[number];
+export type ButtonHTMLType = 'submit' | 'button' | 'reset';
 
 export type LegacyButtonType = ButtonType | 'danger';
 export function convertLegacyProps(type?: LegacyButtonType): ButtonProps {
@@ -21,10 +17,10 @@ export function convertLegacyProps(type?: LegacyButtonType): ButtonProps {
 }
 
 export const buttonProps = () => ({
-  prefixCls: PropTypes.string,
-  type: PropTypes.oneOf(ButtonTypes),
-  htmlType: PropTypes.oneOf(ButtonHTMLTypes).def('button'),
-  shape: PropTypes.oneOf(ButtonShapes),
+  prefixCls: String,
+  type: String as PropType<ButtonType>,
+  htmlType: { type: String as PropType<ButtonHTMLType>, default: 'button' },
+  shape: { type: String as PropType<ButtonShape> },
   size: {
     type: String as PropType<SizeType>,
   },
@@ -32,15 +28,18 @@ export const buttonProps = () => ({
     type: [Boolean, Object] as PropType<boolean | { delay?: number }>,
     default: (): boolean | { delay?: number } => false,
   },
-  disabled: PropTypes.looseBool,
-  ghost: PropTypes.looseBool,
-  block: PropTypes.looseBool,
-  danger: PropTypes.looseBool,
+  disabled: { type: Boolean, default: undefined },
+  ghost: { type: Boolean, default: undefined },
+  block: { type: Boolean, default: undefined },
+  danger: { type: Boolean, default: undefined },
   icon: PropTypes.any,
-  href: PropTypes.string,
-  target: PropTypes.string,
-  title: PropTypes.string,
+  href: String,
+  target: String,
+  title: String,
   onClick: {
+    type: Function as PropType<(event: MouseEvent) => void>,
+  },
+  onMousedown: {
     type: Function as PropType<(event: MouseEvent) => void>,
   },
 });

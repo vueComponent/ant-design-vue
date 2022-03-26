@@ -4,20 +4,15 @@ import Avatar from './Avatar';
 import Popover from '../popover';
 import type { PropType, ExtractPropTypes, CSSProperties } from 'vue';
 import { defineComponent } from 'vue';
-import PropTypes from '../_util/vue-types';
 import { flattenChildren, getPropsSlot } from '../_util/props-util';
-import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import useProvideSize from '../_util/hooks/useSize';
 
 export const groupProps = () => ({
-  prefixCls: PropTypes.string,
-  maxCount: PropTypes.number,
-  maxStyle: {
-    type: Object as PropType<CSSProperties>,
-    default: () => ({} as CSSProperties),
-  },
-  maxPopoverPlacement: PropTypes.oneOf(tuple('top', 'bottom')).def('top'),
+  prefixCls: String,
+  maxCount: Number,
+  maxStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+  maxPopoverPlacement: { type: String as PropType<'top' | 'bottom'>, default: 'top' },
   maxPopoverTrigger: String as PropType<'hover' | 'focus' | 'click'>,
   /*
    * Size of avatar, options: `large`, `small`, `default`
@@ -25,7 +20,7 @@ export const groupProps = () => ({
    * */
   size: {
     type: [Number, String, Object] as PropType<AvatarSize>,
-    default: (): AvatarSize => 'default',
+    default: 'default' as AvatarSize,
   },
 });
 

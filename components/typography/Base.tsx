@@ -5,7 +5,6 @@ import raf from '../_util/raf';
 import { isStyleSupport } from '../_util/styleChecker';
 import Editable from './Editable';
 import measure from './util';
-import PropTypes from '../_util/vue-types';
 import type { TypographyProps } from './Typography';
 import Typography from './Typography';
 import ResizeObserver from '../vc-resize-observer';
@@ -14,7 +13,7 @@ import copy from '../_util/copy-to-clipboard';
 import CheckOutlined from '@ant-design/icons-vue/CheckOutlined';
 import CopyOutlined from '@ant-design/icons-vue/CopyOutlined';
 import EditOutlined from '@ant-design/icons-vue/EditOutlined';
-import type { VNodeTypes, CSSProperties } from 'vue';
+import type { VNodeTypes, CSSProperties, PropType, HTMLAttributes } from 'vue';
 import {
   defineComponent,
   reactive,
@@ -95,10 +94,38 @@ interface InternalBlockProps extends BlockProps {
 
 const ELLIPSIS_STR = '...';
 
-const Base = defineComponent<InternalBlockProps>({
+export const baseProps = () => ({
+  editable: {
+    type: [Boolean, Object] as PropType<InternalBlockProps['editable']>,
+    default: undefined as InternalBlockProps['editable'],
+  },
+  copyable: {
+    type: [Boolean, Object] as PropType<InternalBlockProps['copyable']>,
+    default: undefined as InternalBlockProps['copyable'],
+  },
+  prefixCls: String,
+  component: String,
+  type: String as PropType<BaseType>,
+  disabled: { type: Boolean, default: undefined },
+  ellipsis: {
+    type: [Boolean, Object] as PropType<InternalBlockProps['ellipsis']>,
+    default: undefined as InternalBlockProps['ellipsis'],
+  },
+  code: { type: Boolean, default: undefined },
+  mark: { type: Boolean, default: undefined },
+  underline: { type: Boolean, default: undefined },
+  delete: { type: Boolean, default: undefined },
+  strong: { type: Boolean, default: undefined },
+  keyboard: { type: Boolean, default: undefined },
+  content: String,
+  'onUpdate:content': Function as PropType<(content: string) => void>,
+});
+
+const Base = defineComponent({
   name: 'Base',
   inheritAttrs: false,
-  emits: ['update:content'],
+  props: baseProps(),
+  // emits: ['update:content'],
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, direction } = useConfigInject('typography', props);
 
@@ -466,7 +493,7 @@ const Base = defineComponent<InternalBlockProps>({
               ...restProps
             } = {
               ...props,
-              ...attrs,
+              ...(attrs as HTMLAttributes),
             };
             const { rows, suffix, tooltip } = ellipsis.value;
 
@@ -488,6 +515,7 @@ const Base = defineComponent<InternalBlockProps>({
               'underline',
               'strong',
               'keyboard',
+              'onUpdate:content',
             ]);
 
             const cssEllipsis = canUseCSSEllipsis.value;
@@ -574,22 +602,4 @@ const Base = defineComponent<InternalBlockProps>({
   },
 });
 
-export const baseProps = () => ({
-  editable: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
-  copyable: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
-  prefixCls: PropTypes.string,
-  component: PropTypes.string,
-  type: PropTypes.oneOf(['secondary', 'success', 'danger', 'warning']),
-  disabled: PropTypes.looseBool,
-  ellipsis: PropTypes.oneOfType([PropTypes.looseBool, PropTypes.object]),
-  code: PropTypes.looseBool,
-  mark: PropTypes.looseBool,
-  underline: PropTypes.looseBool,
-  delete: PropTypes.looseBool,
-  strong: PropTypes.looseBool,
-  keyboard: PropTypes.looseBool,
-  content: PropTypes.string,
-});
-
-Base.props = baseProps();
 export default Base;

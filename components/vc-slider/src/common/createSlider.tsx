@@ -16,18 +16,18 @@ function noop() {}
 export default function createSlider(Component) {
   // const displayName = `ComponentEnhancer(${Component.displayName})`
   const propTypes = {
-    id: PropTypes.string,
-    min: PropTypes.number,
-    max: PropTypes.number,
-    step: PropTypes.number,
+    id: String,
+    min: Number,
+    max: Number,
+    step: Number,
     marks: PropTypes.object,
-    included: PropTypes.looseBool,
-    prefixCls: PropTypes.string,
-    disabled: PropTypes.looseBool,
-    handle: PropTypes.func,
-    dots: PropTypes.looseBool,
-    vertical: PropTypes.looseBool,
-    reverse: PropTypes.looseBool,
+    included: { type: Boolean, default: undefined },
+    prefixCls: String,
+    disabled: { type: Boolean, default: undefined },
+    handle: Function,
+    dots: { type: Boolean, default: undefined },
+    vertical: { type: Boolean, default: undefined },
+    reverse: { type: Boolean, default: undefined },
     minimumTrackStyle: PropTypes.object, // just for compatibility, will be deperecate
     maximumTrackStyle: PropTypes.object, // just for compatibility, will be deperecate
     handleStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.arrayOf(PropTypes.object)]),
@@ -35,8 +35,8 @@ export default function createSlider(Component) {
     railStyle: PropTypes.object,
     dotStyle: PropTypes.object,
     activeDotStyle: PropTypes.object,
-    autofocus: PropTypes.looseBool,
-    draggableTrack: PropTypes.looseBool,
+    autofocus: { type: Boolean, default: undefined },
+    draggableTrack: { type: Boolean, default: undefined },
   };
   return defineComponent({
     name: 'CreateSlider',

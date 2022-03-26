@@ -6,12 +6,13 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import PreviewGroup from './PreviewGroup';
 
 export type ImageProps = Partial<
-  ExtractPropTypes<typeof imageProps> & Omit<ImgHTMLAttributes, 'placeholder' | 'onClick'>
+  ExtractPropTypes<ReturnType<typeof imageProps>> &
+    Omit<ImgHTMLAttributes, 'placeholder' | 'onClick'>
 >;
 const Image = defineComponent<ImageProps>({
   name: 'AImage',
   inheritAttrs: false,
-  props: imageProps as any,
+  props: imageProps() as any,
   setup(props, { slots, attrs }) {
     const { prefixCls } = useConfigInject('image', props);
     return () => {

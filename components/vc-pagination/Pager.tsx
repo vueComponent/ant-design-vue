@@ -6,12 +6,12 @@ export default defineComponent({
   name: 'Pager',
   inheritAttrs: false,
   props: {
-    rootPrefixCls: PropTypes.string,
-    page: PropTypes.number,
-    active: PropTypes.looseBool,
-    last: PropTypes.looseBool,
+    rootPrefixCls: String,
+    page: Number,
+    active: { type: Boolean, default: undefined },
+    last: { type: Boolean, default: undefined },
     locale: PropTypes.object,
-    showTitle: PropTypes.looseBool,
+    showTitle: { type: Boolean, default: undefined },
     itemRender: {
       type: Function,
       default: () => {},

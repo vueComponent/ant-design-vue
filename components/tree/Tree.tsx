@@ -13,6 +13,7 @@ import renderSwitcherIcon from './utils/iconUtil';
 import dropIndicatorRender from './utils/dropIndicator';
 import devWarning from '../vc-util/devWarning';
 import { warning } from '../vc-util/warning';
+import omit from '../_util/omit';
 
 export interface AntdTreeNodeAttribute {
   eventKey: string;
@@ -79,8 +80,9 @@ export interface AntTreeNodeDropEvent {
 }
 
 export const treeProps = () => {
+  const baseTreeProps = vcTreeProps();
   return {
-    ...vcTreeProps(),
+    ...baseTreeProps,
     showLine: {
       type: [Boolean, Object] as PropType<boolean | { showLeafIcon: boolean }>,
       default: undefined,
@@ -120,7 +122,7 @@ export const treeProps = () => {
     showIcon: { type: Boolean, default: undefined },
     icon: { type: Function as PropType<(nodeProps: AntdTreeNodeAttribute) => any> },
     switcherIcon: PropTypes.any,
-    prefixCls: PropTypes.string,
+    prefixCls: String,
     /**
      * @default{title,key,children}
      * deprecated, please use `fieldNames` instead
@@ -129,6 +131,10 @@ export const treeProps = () => {
     replaceFields: { type: Object as PropType<FieldNames> },
     blockNode: { type: Boolean, default: undefined },
     openAnimation: PropTypes.any,
+    onDoubleclick: baseTreeProps.onDblclick,
+    'onUpdate:selectedKeys': Function as PropType<(keys: Key[]) => void>,
+    'onUpdate:checkedKeys': Function as PropType<(keys: Key[]) => void>,
+    'onUpdate:expandedKeys': Function as PropType<(keys: Key[]) => void>,
   };
 };
 
@@ -144,16 +150,16 @@ export default defineComponent({
     blockNode: false,
   }),
   slots: ['icon', 'title', 'switcherIcon', 'titleRender'],
-  emits: [
-    'update:selectedKeys',
-    'update:checkedKeys',
-    'update:expandedKeys',
-    'expand',
-    'select',
-    'check',
-    'doubleclick',
-    'dblclick',
-  ],
+  // emits: [
+  //   'update:selectedKeys',
+  //   'update:checkedKeys',
+  //   'update:expandedKeys',
+  //   'expand',
+  //   'select',
+  //   'check',
+  //   'doubleclick',
+  //   'dblclick',
+  // ],
   setup(props, { attrs, expose, emit, slots }) {
     warning(
       !(props.treeData === undefined && slots.default),
@@ -206,10 +212,17 @@ export default defineComponent({
         fieldNames = props.replaceFields,
         motion = props.openAnimation,
         itemHeight = 28,
+        onDoubleclick,
+        onDblclick,
       } = props as TreeProps;
       const newProps = {
         ...attrs,
-        ...props,
+        ...omit(props, [
+          'onUpdate:checkedKeys',
+          'onUpdate:expandedKeys',
+          'onUpdate:selectedKeys',
+          'onDoubleclick',
+        ]),
         showLine: Boolean(showLine),
         dropIndicatorRender,
         fieldNames,
@@ -242,6 +255,7 @@ export default defineComponent({
           onCheck={handleCheck}
           onExpand={handleExpand}
           onSelect={handleSelect}
+          onDblclick={onDblclick || onDoubleclick}
           v-slots={{
             ...slots,
             checkable: () => <span class={`${prefixCls.value}-checkbox-inner`} />,

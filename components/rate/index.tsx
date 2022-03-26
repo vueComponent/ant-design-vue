@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, VNode } from 'vue';
+import type { ExtractPropTypes, PropType, VNode } from 'vue';
 import { watch, defineComponent, ref, reactive, onMounted } from 'vue';
 import { initDefaultProps, getPropsSlot, findDOMNode } from '../_util/props-util';
 import { withInstall } from '../_util/type';
@@ -13,28 +13,36 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import Star from './Star';
 import useRefs from '../_util/hooks/useRefs';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import type { Direction } from '../config-provider';
+import type { FocusEventHandler, KeyboardEventHandler } from '../_util/EventInterface';
 
-export const rateProps = {
-  prefixCls: PropTypes.string,
-  count: PropTypes.number,
-  value: PropTypes.number,
-  allowHalf: PropTypes.looseBool,
-  allowClear: PropTypes.looseBool,
-  tooltips: PropTypes.arrayOf(PropTypes.string),
-  disabled: PropTypes.looseBool,
+export const rateProps = () => ({
+  prefixCls: String,
+  count: Number,
+  value: Number,
+  allowHalf: { type: Boolean, default: undefined },
+  allowClear: { type: Boolean, default: undefined },
+  tooltips: Array as PropType<string[]>,
+  disabled: { type: Boolean, default: undefined },
   character: PropTypes.any,
-  autofocus: PropTypes.looseBool,
+  autofocus: { type: Boolean, default: undefined },
   tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  direction: PropTypes.string,
-  id: PropTypes.string,
-};
+  direction: String as PropType<Direction>,
+  id: String,
+  onChange: Function as PropType<(value: number) => void>,
+  onHoverChange: Function as PropType<(value: number) => void>,
+  'onUpdate:value': Function as PropType<(value: number) => void>,
+  onFocus: Function as PropType<FocusEventHandler>,
+  onBlur: Function as PropType<FocusEventHandler>,
+  onKeydown: Function as PropType<KeyboardEventHandler>,
+});
 
-export type RateProps = Partial<ExtractPropTypes<typeof rateProps>>;
+export type RateProps = Partial<ExtractPropTypes<ReturnType<typeof rateProps>>>;
 
 const Rate = defineComponent({
   name: 'ARate',
   inheritAttrs: false,
-  props: initDefaultProps(rateProps, {
+  props: initDefaultProps(rateProps(), {
     value: 0,
     count: 5,
     allowHalf: false,
@@ -42,7 +50,7 @@ const Rate = defineComponent({
     tabindex: 0,
     direction: 'ltr',
   }),
-  emits: ['hoverChange', 'update:value', 'change', 'focus', 'blur', 'keydown'],
+  // emits: ['hoverChange', 'update:value', 'change', 'focus', 'blur', 'keydown'],
   setup(props, { slots, attrs, emit, expose }) {
     const { prefixCls, direction } = useConfigInject('rate', props);
     const formItemContext = useInjectFormItemContext();

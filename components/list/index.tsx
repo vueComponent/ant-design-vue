@@ -19,7 +19,7 @@ import type { Breakpoint } from '../_util/responsiveObserve';
 import { responsiveArray } from '../_util/responsiveObserve';
 import eagerComputed from '../_util/eagerComputed';
 
-export { ListItemProps } from './Item';
+export type { ListItemProps } from './Item';
 export type { ListItemMetaProps } from './ItemMeta';
 
 export type ColumnType = 'gutter' | 'column' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl';
@@ -41,7 +41,7 @@ export type ListSize = 'small' | 'default' | 'large';
 export type ListItemLayout = 'horizontal' | 'vertical';
 
 export const listProps = () => ({
-  bordered: PropTypes.looseBool,
+  bordered: { type: Boolean, default: undefined },
   dataSource: PropTypes.array,
   extra: PropTypes.any,
   grid: { type: Object as PropType<ListGridType>, default: undefined as ListGridType },
@@ -57,9 +57,9 @@ export const listProps = () => ({
   },
   prefixCls: String,
   rowKey: [String, Number, Function] as PropType<Key | ((item: any) => Key)>,
-  renderItem: PropTypes.any,
+  renderItem: Function as PropType<(opt: { item: any; index: number }) => any>,
   size: String as PropType<ListSize>,
-  split: PropTypes.looseBool,
+  split: { type: Boolean, default: undefined },
   header: PropTypes.any,
   footer: PropTypes.any,
   locale: {

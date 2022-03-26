@@ -19,10 +19,12 @@ import { cloneElement } from '../../_util/vnode';
 import Overflow from '../../vc-overflow';
 import devWarning from '../../vc-util/devWarning';
 import isValid from '../../_util/isValid';
+import type { MouseEventHandler } from '../../_util/EventInterface';
+import type { Key } from 'ant-design-vue/es/_util/type';
 
 let indexGuid = 0;
 
-export const subMenuProps = {
+export const subMenuProps = () => ({
   icon: PropTypes.any,
   title: PropTypes.any,
   disabled: Boolean,
@@ -32,16 +34,19 @@ export const subMenuProps = {
   internalPopupClose: Boolean,
   eventKey: String,
   expandIcon: Function as PropType<(p?: { isOpen: boolean; [key: string]: any }) => any>,
-};
+  onMouseenter: Function as PropType<MouseEventHandler>,
+  onMouseleave: Function as PropType<MouseEventHandler>,
+  onTitleClick: Function as PropType<(e: MouseEvent, key: Key) => void>,
+});
 
-export type SubMenuProps = Partial<ExtractPropTypes<typeof subMenuProps>>;
+export type SubMenuProps = Partial<ExtractPropTypes<ReturnType<typeof subMenuProps>>>;
 
 export default defineComponent({
   name: 'ASubMenu',
   inheritAttrs: false,
-  props: subMenuProps,
+  props: subMenuProps(),
   slots: ['icon', 'title', 'expandIcon'],
-  emits: ['titleClick', 'mouseenter', 'mouseleave'],
+  // emits: ['titleClick', 'mouseenter', 'mouseleave'],
   setup(props, { slots, attrs, emit }) {
     useProvideFirstLevel(false);
     const isMeasure = useMeasure();

@@ -3,11 +3,17 @@ import PropTypes from '../_util/vue-types';
 import type { SizeType } from '../config-provider';
 import omit from '../_util/omit';
 import type { LiteralUnion, VueNode } from '../_util/type';
+import type {
+  ChangeEventHandler,
+  CompositionEventHandler,
+  FocusEventHandler,
+  KeyboardEventHandler,
+} from '../_util/EventInterface';
 export const inputDefaultValue = Symbol() as unknown as string;
-const inputProps = {
-  id: PropTypes.string,
-  prefixCls: PropTypes.string,
-  inputPrefixCls: PropTypes.string,
+const inputProps = () => ({
+  id: String,
+  prefixCls: String,
+  inputPrefixCls: String,
   defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   value: {
     type: [String, Number, Symbol] as PropType<string | number>,
@@ -47,35 +53,35 @@ const inputProps = {
     >,
     default: 'text',
   },
-  name: PropTypes.string,
+  name: String,
   size: { type: String as PropType<SizeType> },
-  disabled: PropTypes.looseBool,
-  readonly: PropTypes.looseBool,
+  disabled: { type: Boolean, default: undefined },
+  readonly: { type: Boolean, default: undefined },
   addonBefore: PropTypes.any,
   addonAfter: PropTypes.any,
   prefix: PropTypes.any,
   suffix: PropTypes.any,
-  autofocus: PropTypes.looseBool,
-  allowClear: PropTypes.looseBool,
-  lazy: PropTypes.looseBool.def(true),
-  maxlength: PropTypes.number,
-  loading: PropTypes.looseBool,
-  bordered: PropTypes.looseBool,
+  autofocus: { type: Boolean, default: undefined },
+  allowClear: { type: Boolean, default: undefined },
+  lazy: { type: Boolean, default: true },
+  maxlength: Number,
+  loading: { type: Boolean, default: undefined },
+  bordered: { type: Boolean, default: undefined },
   showCount: { type: [Boolean, Object] as PropType<boolean | ShowCountProps> },
   htmlSize: Number,
-  onPressEnter: PropTypes.func,
-  onKeydown: PropTypes.func,
-  onKeyup: PropTypes.func,
-  onFocus: PropTypes.func,
-  onBlur: PropTypes.func,
-  onChange: PropTypes.func,
-  onInput: PropTypes.func,
-  'onUpdate:value': PropTypes.func,
+  onPressEnter: Function as PropType<KeyboardEventHandler>,
+  onKeydown: Function as PropType<KeyboardEventHandler>,
+  onKeyup: Function as PropType<KeyboardEventHandler>,
+  onFocus: Function as PropType<FocusEventHandler>,
+  onBlur: Function as PropType<FocusEventHandler>,
+  onChange: Function as PropType<ChangeEventHandler>,
+  onInput: Function as PropType<ChangeEventHandler>,
+  'onUpdate:value': Function as PropType<(val: string) => void>,
   valueModifiers: Object,
   hidden: Boolean,
-};
+});
 export default inputProps;
-export type InputProps = Partial<ExtractPropTypes<typeof inputProps>>;
+export type InputProps = Partial<ExtractPropTypes<ReturnType<typeof inputProps>>>;
 
 export interface AutoSizeType {
   minRows?: number;
@@ -84,17 +90,17 @@ export interface AutoSizeType {
 export interface ShowCountProps {
   formatter: (args: { count: number; maxlength?: number }) => VueNode;
 }
-const textAreaProps = {
-  ...omit(inputProps, ['prefix', 'addonBefore', 'addonAfter', 'suffix']),
+const textAreaProps = () => ({
+  ...omit(inputProps(), ['prefix', 'addonBefore', 'addonAfter', 'suffix']),
   rows: Number,
   autosize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
   autoSize: { type: [Boolean, Object] as PropType<AutoSizeType>, default: undefined },
   onResize: { type: Function as PropType<(size: { width: number; height: number }) => void> },
-  onCompositionstart: PropTypes.func,
-  onCompositionend: PropTypes.func,
+  onCompositionstart: Function as PropType<CompositionEventHandler>,
+  onCompositionend: Function as PropType<CompositionEventHandler>,
   valueModifiers: Object,
-};
+});
 
 export { textAreaProps };
 
-export type TextAreaProps = Partial<ExtractPropTypes<typeof textAreaProps>>;
+export type TextAreaProps = Partial<ExtractPropTypes<ReturnType<typeof textAreaProps>>>;

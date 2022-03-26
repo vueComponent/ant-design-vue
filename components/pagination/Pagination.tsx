@@ -78,7 +78,7 @@ export default defineComponent({
   name: 'APagination',
   inheritAttrs: false,
   props: paginationProps(),
-  emits: ['change', 'showSizeChange', 'update:current', 'update:pageSize'],
+  // emits: ['change', 'showSizeChange', 'update:current', 'update:pageSize'],
   setup(props, { slots, attrs }) {
     const { prefixCls, configProvider, direction } = useConfigInject('pagination', props);
     const selectPrefixCls = computed(() =>

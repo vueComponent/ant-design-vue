@@ -18,8 +18,6 @@ import { cloneElement } from '../_util/vnode';
 import type { NodeMouseEventHandler } from '../vc-tree/contextTypes';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
-function noop() {}
-
 const iconMapFilled = {
   success: CheckCircleFilled,
   info: InfoCircleFilled,
@@ -44,7 +42,7 @@ export const alertProps = () => ({
    */
   type: PropTypes.oneOf(AlertTypes),
   /** Whether Alert can be closed */
-  closable: PropTypes.looseBool,
+  closable: { type: Boolean, default: undefined },
   /** Close text to show */
   closeText: PropTypes.any,
   /** Content of Alert */
@@ -52,11 +50,11 @@ export const alertProps = () => ({
   /** Additional content of Alert */
   description: PropTypes.any,
   /** Trigger when animation ending of Alert */
-  afterClose: PropTypes.func.def(noop),
+  afterClose: Function as PropType<() => void>,
   /** Whether to show icon */
-  showIcon: PropTypes.looseBool,
-  prefixCls: PropTypes.string,
-  banner: PropTypes.looseBool,
+  showIcon: { type: Boolean, default: undefined },
+  prefixCls: String,
+  banner: { type: Boolean, default: undefined },
   icon: PropTypes.any,
   closeIcon: PropTypes.any,
   onClose: Function as PropType<NodeMouseEventHandler>,

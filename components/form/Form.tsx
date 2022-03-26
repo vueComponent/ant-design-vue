@@ -23,6 +23,7 @@ import type {
   ValidateErrorEntity,
   ValidateOptions,
   Callbacks,
+  ValidateMessages,
 } from './interface';
 import { useInjectSize } from '../_util/hooks/useSize';
 import useConfigInject from '../_util/hooks/useConfigInject';
@@ -60,25 +61,28 @@ export type ValidationRule = {
   trigger?: string;
 };
 
-export const formProps = {
+export const formProps = () => ({
   layout: PropTypes.oneOf(tuple('horizontal', 'inline', 'vertical')),
   labelCol: { type: Object as PropType<ColProps & HTMLAttributes> },
   wrapperCol: { type: Object as PropType<ColProps & HTMLAttributes> },
-  colon: PropTypes.looseBool,
+  colon: { type: Boolean, default: undefined },
   labelAlign: PropTypes.oneOf(tuple('left', 'right')),
-  labelWrap: PropTypes.looseBool,
-  prefixCls: PropTypes.string,
+  labelWrap: { type: Boolean, default: undefined },
+  prefixCls: String,
   requiredMark: { type: [String, Boolean] as PropType<RequiredMark | ''>, default: undefined },
   /** @deprecated Will warning in future branch. Pls use `requiredMark` instead. */
-  hideRequiredMark: PropTypes.looseBool,
+  hideRequiredMark: { type: Boolean, default: undefined },
   model: PropTypes.object,
   rules: { type: Object as PropType<{ [k: string]: ValidationRule[] | ValidationRule }> },
-  validateMessages: PropTypes.object,
-  validateOnRuleChange: PropTypes.looseBool,
+  validateMessages: {
+    type: Object as PropType<ValidateMessages>,
+    default: undefined as ValidateMessages,
+  },
+  validateOnRuleChange: { type: Boolean, default: undefined },
   // 提交失败自动滚动到第一个错误字段
   scrollToFirstError: { type: [Boolean, Object] as PropType<boolean | Options> },
-  onSubmit: PropTypes.func,
-  name: PropTypes.string,
+  onSubmit: Function as PropType<(e: Event) => void>,
+  name: String,
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
   size: { type: String as PropType<SizeType> },
   onValuesChange: { type: Function as PropType<Callbacks['onValuesChange']> },
@@ -86,9 +90,9 @@ export const formProps = {
   onFinish: { type: Function as PropType<Callbacks['onFinish']> },
   onFinishFailed: { type: Function as PropType<Callbacks['onFinishFailed']> },
   onValidate: { type: Function as PropType<Callbacks['onValidate']> },
-};
+});
 
-export type FormProps = Partial<ExtractPropTypes<typeof formProps>>;
+export type FormProps = Partial<ExtractPropTypes<ReturnType<typeof formProps>>>;
 
 export type FormExpose = {
   resetFields: (name?: NamePath) => void;
@@ -120,14 +124,14 @@ function isEqualName(name1: NamePath, name2: NamePath) {
 const Form = defineComponent({
   name: 'AForm',
   inheritAttrs: false,
-  props: initDefaultProps(formProps, {
+  props: initDefaultProps(formProps(), {
     layout: 'horizontal',
     hideRequiredMark: false,
     colon: true,
   }),
   Item: FormItem,
   useForm,
-  emits: ['finishFailed', 'submit', 'finish', 'validate'],
+  // emits: ['finishFailed', 'submit', 'finish', 'validate'],
   setup(props, { emit, slots, expose, attrs }) {
     const size = useInjectSize(props);
     const { prefixCls, direction, form: contextForm } = useConfigInject('form', props);

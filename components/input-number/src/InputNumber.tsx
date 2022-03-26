@@ -34,7 +34,7 @@ const getDecimalIfValidate = (value: ValueType) => {
   return decimal.isInvalidate() ? null : decimal;
 };
 
-export const inputNumberProps = {
+export const inputNumberProps = () => ({
   /** value will show as string */
   stringMode: { type: Boolean as PropType<boolean> },
 
@@ -76,12 +76,12 @@ export const inputNumberProps = {
   },
   onBlur: { type: Function as PropType<(e: InputEvent) => void> },
   onFocus: { type: Function as PropType<(e: InputEvent) => void> },
-};
+});
 
 export default defineComponent({
   name: 'InnerInputNumber',
   inheritAttrs: false,
-  props: inputNumberProps,
+  props: inputNumberProps(),
   slots: ['upHandler', 'downHandler'],
   setup(props, { attrs, slots, emit, expose }) {
     const inputRef = ref<HTMLInputElement>();

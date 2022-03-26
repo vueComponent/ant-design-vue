@@ -11,7 +11,6 @@ import {
   onDeactivated,
 } from 'vue';
 import VerticalAlignTopOutlined from '@ant-design/icons-vue/VerticalAlignTopOutlined';
-import PropTypes from '../_util/vue-types';
 import addEventListener from '../vc-util/Dom/addEventListener';
 import getScroll from '../_util/getScroll';
 import { getTransitionProps, Transition } from '../_util/transition';
@@ -19,23 +18,24 @@ import scrollTo from '../_util/scrollTo';
 import { withInstall } from '../_util/type';
 import throttleByAnimationFrame from '../_util/throttleByAnimationFrame';
 import useConfigInject from '../_util/hooks/useConfigInject';
+import type { MouseEventHandler } from '../_util/EventInterface';
 
-export const backTopProps = {
-  visibilityHeight: PropTypes.number.def(400),
-  duration: PropTypes.number.def(450),
+export const backTopProps = () => ({
+  visibilityHeight: { type: Number, default: 400 },
+  duration: { type: Number, default: 450 },
   target: Function as PropType<() => HTMLElement | Window | Document>,
-  prefixCls: PropTypes.string,
-  onClick: PropTypes.func,
-  // visible: PropTypes.looseBool, // Only for test. Don't use it.
-};
+  prefixCls: String,
+  onClick: Function as PropType<MouseEventHandler>,
+  // visible: { type: Boolean, default: undefined }, // Only for test. Don't use it.
+});
 
 export type BackTopProps = Partial<ExtractPropTypes<typeof backTopProps>>;
 
 const BackTop = defineComponent({
   name: 'ABackTop',
   inheritAttrs: false,
-  props: backTopProps,
-  emits: ['click'],
+  props: backTopProps(),
+  // emits: ['click'],
   setup(props, { slots, attrs, emit }) {
     const { prefixCls, direction } = useConfigInject('back-top', props);
     const domRef = ref();

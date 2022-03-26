@@ -10,6 +10,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import SliderTooltip from './SliderTooltip';
 import classNames from '../_util/classNames';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import type { FocusEventHandler } from '../_util/EventInterface';
 
 export type SliderValue = number | [number, number];
 
@@ -64,10 +65,13 @@ export const sliderProps = () => ({
     type: Function as PropType<(triggerNode: HTMLElement) => HTMLElement>,
   },
   autofocus: { type: Boolean, default: undefined },
-  onChange: { type: Function as PropType<(value: Value) => void> },
-  onAfterChange: { type: Function as PropType<(value: Value) => void> },
   handleStyle: { type: [Object, Array] as PropType<CSSProperties[] | CSSProperties> },
   trackStyle: { type: [Object, Array] as PropType<CSSProperties[] | CSSProperties> },
+  onChange: { type: Function as PropType<(value: Value) => void> },
+  onAfterChange: { type: Function as PropType<(value: Value) => void> },
+  onFocus: { type: Function as PropType<FocusEventHandler> },
+  onBlur: { type: Function as PropType<FocusEventHandler> },
+  'onUpdate:value': { type: Function as PropType<(value: Value) => void> },
 });
 
 export type SliderProps = Partial<ExtractPropTypes<ReturnType<typeof sliderProps>>>;
@@ -77,7 +81,7 @@ const Slider = defineComponent({
   name: 'ASlider',
   inheritAttrs: false,
   props: sliderProps(),
-  emits: ['update:value', 'change', 'afterChange', 'blur'],
+  // emits: ['update:value', 'change', 'afterChange', 'blur'],
   slots: ['mark'],
   setup(props, { attrs, slots, emit, expose }) {
     const { prefixCls, rootPrefixCls, direction, getPopupContainer, configProvider } =
@@ -173,7 +177,7 @@ const Slider = defineComponent({
             step={restProps.step!}
             draggableTrack={draggableTrack}
             class={cls}
-            ref={ref}
+            ref={sliderRef}
             handle={(info: HandleGeneratorInfo) =>
               handleWithTooltip({
                 tooltipPrefixCls,
@@ -183,6 +187,7 @@ const Slider = defineComponent({
             }
             prefixCls={prefixCls.value}
             onChange={handleChange}
+            onBlur={handleBlur}
             v-slots={{ mark: slots.mark }}
           />
         );
@@ -193,7 +198,7 @@ const Slider = defineComponent({
           id={id}
           step={restProps.step!}
           class={cls}
-          ref={ref}
+          ref={sliderRef}
           handle={(info: HandleGeneratorInfo) =>
             handleWithTooltip({
               tooltipPrefixCls,

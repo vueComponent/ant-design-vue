@@ -1,4 +1,5 @@
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue';
+import type { MouseEventHandler } from '../_util/EventInterface';
 import type { VueNode } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 
@@ -8,7 +9,18 @@ export interface CheckboxOptionType {
   value: CheckboxValueType;
   disabled?: boolean;
   indeterminate?: boolean;
-  onChange?: (e: Event) => void;
+  onChange?: (e: CheckboxChangeEvent) => void;
+}
+
+export interface CheckboxChangeEvent {
+  target: CheckboxChangeEventTarget;
+  stopPropagation: () => void;
+  preventDefault: () => void;
+  nativeEvent: MouseEvent;
+}
+
+export interface CheckboxChangeEventTarget extends CheckboxProps {
+  checked: boolean;
 }
 
 export const abstractCheckboxGroupProps = () => {
@@ -51,9 +63,9 @@ export const abstractCheckboxProps = () => {
     indeterminate: { type: Boolean, default: undefined },
     type: { type: String, default: 'checkbox' },
     autofocus: { type: Boolean, default: undefined },
-    onChange: PropTypes.func,
-    'onUpdate:checked': PropTypes.func,
-    onClick: PropTypes.func,
+    onChange: Function as PropType<(e: CheckboxChangeEvent) => void>,
+    'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
+    onClick: Function as PropType<MouseEventHandler>,
     skipGroup: { type: Boolean, default: false },
   };
 };

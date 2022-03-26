@@ -1,6 +1,6 @@
 import { flattenChildren, getPropsSlot, isValidElement } from '../../_util/props-util';
 import PropTypes from '../../_util/vue-types';
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent, getCurrentInstance, onBeforeUnmount, ref, watch } from 'vue';
 import { useInjectKeyPath, useMeasure } from './hooks/useKeyPath';
 import { useInjectFirstLevel, useInjectMenu } from './hooks/useMenuContext';
@@ -11,24 +11,30 @@ import KeyCode from '../../_util/KeyCode';
 import useDirectionStyle from './hooks/useDirectionStyle';
 import Overflow from '../../vc-overflow';
 import devWarning from '../../vc-util/devWarning';
+import type { MouseEventHandler } from '../../_util/EventInterface';
 
 let indexGuid = 0;
-export const menuItemProps = {
+export const menuItemProps = () => ({
   id: String,
   role: String,
   disabled: Boolean,
   danger: Boolean,
   title: { type: [String, Boolean], default: undefined },
   icon: PropTypes.any,
-};
+  onMouseenter: Function as PropType<MouseEventHandler>,
+  onMouseleave: Function as PropType<MouseEventHandler>,
+  onClick: Function as PropType<MouseEventHandler>,
+  onKeydown: Function as PropType<MouseEventHandler>,
+  onFocus: Function as PropType<MouseEventHandler>,
+});
 
-export type MenuItemProps = Partial<ExtractPropTypes<typeof menuItemProps>>;
+export type MenuItemProps = Partial<ExtractPropTypes<ReturnType<typeof menuItemProps>>>;
 
 export default defineComponent({
   name: 'AMenuItem',
   inheritAttrs: false,
-  props: menuItemProps,
-  emits: ['mouseenter', 'mouseleave', 'click', 'keydown', 'focus'],
+  props: menuItemProps(),
+  // emits: ['mouseenter', 'mouseleave', 'click', 'keydown', 'focus'],
   slots: ['icon', 'title'],
   setup(props, { slots, emit, attrs }) {
     const instance = getCurrentInstance();

@@ -21,18 +21,18 @@ export default {
     event: 'change.value', //为了支持v-model直接返回颜色字符串 所以用了自定义的事件,与pickr自带change事件进行区分
   },
   props: {
-    prefixCls: PropTypes.string,
-    defaultValue: PropTypes.string, //默认值
+    prefixCls: String,
+    defaultValue: String, //默认值
     config: PropTypes.object, //pickr配置
-    value: PropTypes.string, //颜色值
+    value: String, //颜色值
     locale: PropTypes.object, //双语包
-    colorRounded: PropTypes.number, //颜色数值保留几位小数
+    colorRounded: Number, //颜色数值保留几位小数
     size: PropTypes.oneOf(['default', 'small', 'large']).def('default'), //尺寸
-    getPopupContainer: PropTypes.func, //指定渲染容器
-    disabled: PropTypes.looseBool.def(false), //是否禁用
-    format: PropTypes.string, //颜色格式设置
-    alpha: PropTypes.looseBool.def(false), //是否开启透明通道
-    hue: PropTypes.looseBool.def(true), //是否开启色彩预选
+    getPopupContainer: Function, //指定渲染容器
+    disabled: { type: Boolean, default: false }, //是否禁用
+    format: String, //颜色格式设置
+    alpha: { type: Boolean, default: false }, //是否开启透明通道
+    hue: { type: Boolean, default: true }, //是否开启色彩预选
   },
 
   data() {

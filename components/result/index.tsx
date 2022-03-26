@@ -1,7 +1,6 @@
-import type { App, VNodeTypes, Plugin, ExtractPropTypes } from 'vue';
+import type { App, VNodeTypes, Plugin, ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
-import { tuple } from '../_util/type';
 import CheckCircleFilled from '@ant-design/icons-vue/CheckCircleFilled';
 import CloseCircleFilled from '@ant-design/icons-vue/CloseCircleFilled';
 import ExclamationCircleFilled from '@ant-design/icons-vue/ExclamationCircleFilled';
@@ -25,21 +24,22 @@ export const ExceptionMap = {
   '403': unauthorized,
 };
 
+export type ExceptionStatusType = 403 | 404 | 500 | '403' | '404' | '500';
+export type ResultStatusType = ExceptionStatusType | keyof typeof IconMap;
+
 // ExceptionImageMap keys
 const ExceptionStatus = Object.keys(ExceptionMap);
 
-export const resultProps = {
-  prefixCls: PropTypes.string,
+export const resultProps = () => ({
+  prefixCls: String,
   icon: PropTypes.any,
-  status: PropTypes.oneOf(tuple('success', 'error', 'info', 'warning', '404', '403', '500')).def(
-    'info',
-  ),
+  status: { type: [Number, String] as PropType<ResultStatusType>, default: 'info' },
   title: PropTypes.any,
   subTitle: PropTypes.any,
   extra: PropTypes.any,
-};
+});
 
-export type ResultProps = Partial<ExtractPropTypes<typeof resultProps>>;
+export type ResultProps = Partial<ExtractPropTypes<ReturnType<typeof resultProps>>>;
 
 const renderIcon = (prefixCls: string, { status, icon }) => {
   if (ExceptionStatus.includes(`${status}`)) {
@@ -60,7 +60,7 @@ const renderExtra = (prefixCls: string, extra: VNodeTypes) =>
 
 const Result = defineComponent({
   name: 'AResult',
-  props: resultProps,
+  props: resultProps(),
   slots: ['title', 'subTitle', 'icon', 'extra'],
   setup(props, { slots }) {
     const { prefixCls, direction } = useConfigInject('result', props);

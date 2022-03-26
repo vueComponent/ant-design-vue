@@ -1,22 +1,25 @@
-import type { PropType } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, computed } from 'vue';
 import classNames from '../_util/classNames';
-import PropTypes from '../_util/vue-types';
 import useConfigInject from '../_util/hooks/useConfigInject';
+
+const checkableTagProps = () => ({
+  prefixCls: String,
+  checked: { type: Boolean, default: undefined },
+  onChange: {
+    type: Function as PropType<(checked: boolean) => void>,
+  },
+  onClick: {
+    type: Function as PropType<(e: MouseEvent) => void>,
+  },
+  'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
+});
+export type CheckableTagProps = Partial<ExtractPropTypes<ReturnType<typeof checkableTagProps>>>;
 
 const CheckableTag = defineComponent({
   name: 'ACheckableTag',
-  props: {
-    prefixCls: PropTypes.string,
-    checked: PropTypes.looseBool,
-    onChange: {
-      type: Function as PropType<(checked: boolean) => void>,
-    },
-    onClick: {
-      type: Function as PropType<(e: MouseEvent) => void>,
-    },
-  },
-  emits: ['update:checked', 'change', 'click'],
+  props: checkableTagProps(),
+  // emits: ['update:checked', 'change', 'click'],
   setup(props, { slots, emit }) {
     const { prefixCls } = useConfigInject('tag', props);
     const handleClick = (e: MouseEvent) => {

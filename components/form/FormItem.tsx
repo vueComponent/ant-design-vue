@@ -27,7 +27,7 @@ import { toArray } from './utils/typeUtil';
 import { warning } from '../vc-util/warning';
 import find from 'lodash-es/find';
 import { tuple } from '../_util/type';
-import type { InternalNamePath, RuleError, RuleObject, ValidateOptions } from './interface';
+import type { InternalNamePath, Rule, RuleError, RuleObject, ValidateOptions } from './interface';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import { useInjectForm } from './context';
 import FormItemLabel from './FormItemLabel';
@@ -81,31 +81,31 @@ function getPropByPath(obj: any, namePathList: any, strict?: boolean) {
     v: tempObj ? tempObj[keyArr[i]] : undefined,
   };
 }
-export const formItemProps = {
-  htmlFor: PropTypes.string,
-  prefixCls: PropTypes.string,
+export const formItemProps = () => ({
+  htmlFor: String,
+  prefixCls: String,
   label: PropTypes.any,
   help: PropTypes.any,
   extra: PropTypes.any,
   labelCol: { type: Object as PropType<ColProps & HTMLAttributes> },
   wrapperCol: { type: Object as PropType<ColProps & HTMLAttributes> },
-  hasFeedback: PropTypes.looseBool.def(false),
-  colon: PropTypes.looseBool,
+  hasFeedback: { type: Boolean, default: false },
+  colon: { type: Boolean, default: undefined },
   labelAlign: PropTypes.oneOf(tuple('left', 'right')),
   prop: { type: [String, Number, Array] as PropType<string | number | Array<string | number>> },
   name: { type: [String, Number, Array] as PropType<string | number | Array<string | number>> },
-  rules: PropTypes.oneOfType([Array, Object]),
-  autoLink: PropTypes.looseBool.def(true),
-  required: PropTypes.looseBool,
-  validateFirst: PropTypes.looseBool,
+  rules: [Array, Object] as PropType<Rule[] | Rule>,
+  autoLink: { type: Boolean, default: true },
+  required: { type: Boolean, default: undefined },
+  validateFirst: { type: Boolean, default: undefined },
   validateStatus: PropTypes.oneOf(tuple('', 'success', 'warning', 'error', 'validating')),
   validateTrigger: { type: [String, Array] as PropType<string | string[]> },
   messageVariables: { type: Object as PropType<Record<string, string>> },
   hidden: Boolean,
   noStyle: Boolean,
-};
+});
 
-export type FormItemProps = Partial<ExtractPropTypes<typeof formItemProps>>;
+export type FormItemProps = Partial<ExtractPropTypes<ReturnType<typeof formItemProps>>>;
 
 export type FormItemExpose = {
   onFieldBlur: () => void;
@@ -125,7 +125,7 @@ export default defineComponent({
   name: 'AFormItem',
   inheritAttrs: false,
   __ANT_NEW_FORM_ITEM: true,
-  props: formItemProps,
+  props: formItemProps(),
   slots: ['help', 'label', 'extra'],
   setup(props, { slots, attrs, expose }) {
     warning(props.prop === undefined, `\`prop\` is deprecated. Please use \`name\` instead.`);

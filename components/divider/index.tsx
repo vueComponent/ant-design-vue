@@ -4,7 +4,7 @@ import { computed, defineComponent } from 'vue';
 import { withInstall } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
-export const dividerProps = {
+export const dividerProps = () => ({
   prefixCls: String,
   type: {
     type: String as PropType<'horizontal' | 'vertical' | ''>,
@@ -23,12 +23,12 @@ export const dividerProps = {
     default: false,
   },
   orientationMargin: [String, Number],
-};
-export type DividerProps = Partial<ExtractPropTypes<typeof dividerProps>>;
+});
+export type DividerProps = Partial<ExtractPropTypes<ReturnType<typeof dividerProps>>>;
 
 const Divider = defineComponent({
   name: 'ADivider',
-  props: dividerProps,
+  props: dividerProps(),
   setup(props, { slots }) {
     const { prefixCls: prefixClsRef, direction } = useConfigInject('divider', props);
     const hasCustomMarginLeft = computed(

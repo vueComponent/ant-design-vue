@@ -3,6 +3,7 @@ import Trigger from '../../vc-trigger';
 import { placements } from './placements';
 import Content from './Content';
 import { getPropsSlot } from '../../_util/props-util';
+import type { CSSProperties, PropType } from 'vue';
 import { defineComponent, ref, watchEffect } from 'vue';
 function noop() {}
 export default defineComponent({
@@ -10,27 +11,30 @@ export default defineComponent({
   inheritAttrs: false,
   props: {
     trigger: PropTypes.any.def(['hover']),
-    defaultVisible: PropTypes.looseBool,
-    visible: PropTypes.looseBool,
+    defaultVisible: { type: Boolean, default: undefined },
+    visible: { type: Boolean, default: undefined },
     placement: PropTypes.string.def('right'),
-    transitionName: PropTypes.string,
+    transitionName: String,
     animation: PropTypes.any,
     afterVisibleChange: PropTypes.func.def(() => {}),
-    overlayStyle: PropTypes.style,
-    overlayClassName: PropTypes.string,
+    overlayStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
+    overlayClassName: String,
     prefixCls: PropTypes.string.def('rc-tooltip'),
     mouseEnterDelay: PropTypes.number.def(0.1),
     mouseLeaveDelay: PropTypes.number.def(0.1),
-    getTooltipContainer: PropTypes.func,
-    destroyTooltipOnHide: PropTypes.looseBool.def(false),
+    getTooltipContainer: Function,
+    destroyTooltipOnHide: { type: Boolean, default: false },
     align: PropTypes.object.def(() => ({})),
     arrowContent: PropTypes.any.def(null),
-    tipId: PropTypes.string,
+    tipId: String,
     builtinPlacements: PropTypes.object,
-    overlayInnerStyle: PropTypes.style,
-    popupVisible: PropTypes.looseBool,
-    onVisibleChange: PropTypes.func,
-    onPopupAlign: PropTypes.func,
+    overlayInnerStyle: {
+      type: Object as PropType<CSSProperties>,
+      default: undefined as CSSProperties,
+    },
+    popupVisible: { type: Boolean, default: undefined },
+    onVisibleChange: Function,
+    onPopupAlign: Function,
   },
   slots: ['arrowContent', 'overlay'],
   setup(props, { slots, attrs, expose }) {
@@ -117,7 +121,7 @@ export default defineComponent({
         mouseEnterDelay,
         ...extraProps,
         ...attrs,
-        onPopupVisibleChange: props.onVisibleChange || noop,
+        onPopupVisibleChange: props.onVisibleChange || (noop as any),
         onPopupAlign: props.onPopupAlign || noop,
         ref: triggerDOM,
         popup: getPopupElement(),

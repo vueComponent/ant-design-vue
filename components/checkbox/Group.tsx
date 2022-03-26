@@ -8,7 +8,7 @@ import { CheckboxGroupContextKey, checkboxGroupProps } from './interface';
 export default defineComponent({
   name: 'ACheckboxGroup',
   props: checkboxGroupProps(),
-  emits: ['change', 'update:value'],
+  // emits: ['change', 'update:value'],
   setup(props, { slots, emit, expose }) {
     const formItemContext = useInjectFormItemContext();
     const { prefixCls, direction } = useConfigInject('checkbox', props);

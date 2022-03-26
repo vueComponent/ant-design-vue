@@ -4,6 +4,9 @@ export interface RadioChangeEventTarget extends RadioProps {
   checked: boolean;
 }
 
+export type RadioGroupButtonStyle = 'outline' | 'solid';
+export type RadioGroupOptionType = 'default' | 'button';
+
 export interface RadioChangeEvent {
   target: RadioChangeEventTarget;
   stopPropagation: () => void;

@@ -77,50 +77,50 @@ const Selector = defineComponent<SelectorProps>({
   name: 'Selector',
   inheritAttrs: false,
   props: {
-    id: PropTypes.string,
-    prefixCls: PropTypes.string,
-    showSearch: PropTypes.looseBool,
-    open: PropTypes.looseBool,
+    id: String,
+    prefixCls: String,
+    showSearch: { type: Boolean, default: undefined },
+    open: { type: Boolean, default: undefined },
     /** Display in the Selector value, it's not same as `value` prop */
     values: PropTypes.array,
-    multiple: PropTypes.looseBool,
-    mode: PropTypes.string,
-    searchValue: PropTypes.string,
-    activeValue: PropTypes.string,
+    multiple: { type: Boolean, default: undefined },
+    mode: String,
+    searchValue: String,
+    activeValue: String,
     inputElement: PropTypes.any,
 
-    autofocus: PropTypes.looseBool,
-    activeDescendantId: PropTypes.string,
+    autofocus: { type: Boolean, default: undefined },
+    activeDescendantId: String,
     tabindex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    disabled: PropTypes.looseBool,
+    disabled: { type: Boolean, default: undefined },
     placeholder: PropTypes.any,
     removeIcon: PropTypes.any,
 
     // Tags
     maxTagCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    maxTagTextLength: PropTypes.number,
+    maxTagTextLength: Number,
     maxTagPlaceholder: PropTypes.any,
-    tagRender: PropTypes.func,
-    optionLabelRender: PropTypes.func,
+    tagRender: Function,
+    optionLabelRender: Function,
 
     /** Check if `tokenSeparators` contains `\n` or `\r\n` */
-    tokenWithEnter: PropTypes.looseBool,
+    tokenWithEnter: { type: Boolean, default: undefined },
 
     // Motion
-    choiceTransitionName: PropTypes.string,
+    choiceTransitionName: String,
 
     onToggleOpen: { type: Function as PropType<(open?: boolean) => void> },
     /** `onSearch` returns go next step boolean to check if need do toggle open */
-    onSearch: PropTypes.func,
-    onSearchSubmit: PropTypes.func,
-    onRemove: PropTypes.func,
+    onSearch: Function,
+    onSearchSubmit: Function,
+    onRemove: Function,
     onInputKeyDown: { type: Function as PropType<EventHandler> },
 
     /**
      * @private get real dom for trigger align.
      * This may be removed after React provides replacement of `findDOMNode`
      */
-    domRef: PropTypes.func,
+    domRef: Function,
   } as any,
   setup(props, { expose }) {
     const inputRef = createRef();

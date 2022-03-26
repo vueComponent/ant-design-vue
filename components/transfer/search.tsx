@@ -1,4 +1,3 @@
-import PropTypes from '../_util/vue-types';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import SearchOutlined from '@ant-design/icons-vue/SearchOutlined';
 import Input from '../input';
@@ -7,12 +6,12 @@ import { defineComponent } from 'vue';
 import type { ChangeEvent } from '../_util/EventInterface';
 
 export const transferSearchProps = {
-  prefixCls: PropTypes.string,
-  placeholder: PropTypes.string,
-  value: PropTypes.string,
-  handleClear: PropTypes.func,
-  disabled: PropTypes.looseBool,
-  onChange: PropTypes.func,
+  prefixCls: String,
+  placeholder: String,
+  value: String,
+  handleClear: Function,
+  disabled: { type: Boolean, default: undefined },
+  onChange: Function,
 };
 
 export type TransferSearchProps = Partial<ExtractPropTypes<typeof transferSearchProps>>;

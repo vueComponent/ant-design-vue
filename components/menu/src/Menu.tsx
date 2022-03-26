@@ -29,15 +29,15 @@ import { OVERFLOW_KEY, PathContext } from './hooks/useKeyPath';
 import type { FocusEventHandler, MouseEventHandler } from '../../_util/EventInterface';
 import collapseMotion from '../../_util/collapseMotion';
 
-export const menuProps = {
+export const menuProps = () => ({
   id: String,
   prefixCls: String,
   disabled: Boolean,
   inlineCollapsed: Boolean,
   disabledOverflow: Boolean,
   forceSubMenuRender: Boolean,
-  openKeys: Array,
-  selectedKeys: Array,
+  openKeys: Array as PropType<Key[]>,
+  selectedKeys: Array as PropType<Key[]>,
   activeKey: String, // 内部组件使用
   selectable: { type: Boolean, default: true },
   multiple: { type: Boolean, default: false },
@@ -68,15 +68,15 @@ export const menuProps = {
   'onUpdate:openKeys': Function as PropType<(keys: Key[]) => void>,
   'onUpdate:selectedKeys': Function as PropType<(keys: Key[]) => void>,
   'onUpdate:activeKey': Function as PropType<(key: Key) => void>,
-};
+});
 
-export type MenuProps = Partial<ExtractPropTypes<typeof menuProps>>;
+export type MenuProps = Partial<ExtractPropTypes<ReturnType<typeof menuProps>>>;
 
 const EMPTY_LIST: string[] = [];
 export default defineComponent({
   name: 'AMenu',
   inheritAttrs: false,
-  props: menuProps,
+  props: menuProps(),
   slots: ['expandIcon', 'overflowedIndicator'],
   setup(props, { slots, emit, attrs }) {
     const { prefixCls, direction, getPrefixCls } = useConfigInject('menu', props);

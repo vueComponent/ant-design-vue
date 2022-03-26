@@ -7,10 +7,10 @@ import { tuple } from '../_util/type';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
 export const timelineItemProps = () => ({
-  prefixCls: PropTypes.string,
-  color: PropTypes.string,
+  prefixCls: String,
+  color: String,
   dot: PropTypes.any,
-  pending: PropTypes.looseBool,
+  pending: { type: Boolean, default: undefined },
   position: PropTypes.oneOf(tuple('left', 'right', '')).def(''),
   label: PropTypes.any,
 });

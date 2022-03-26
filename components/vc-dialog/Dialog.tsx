@@ -70,7 +70,7 @@ export default defineComponent({
       }
     };
 
-    const onInternalClose = (e: Event) => {
+    const onInternalClose = (e: MouseEvent | KeyboardEvent) => {
       props.onClose?.(e);
     };
 

@@ -1,24 +1,24 @@
 import type { ExtractPropTypes, PropType } from 'vue';
 import { computed, defineComponent } from 'vue';
 import type { VueNode } from '../_util/type';
-import PropTypes from '../_util/vue-types';
 import type { ProgressSize } from './props';
 import { progressProps } from './props';
 
-export const stepsProps = {
+export const stepsProps = () => ({
   ...progressProps(),
-  steps: PropTypes.number,
+  steps: Number,
   size: {
     type: String as PropType<ProgressSize>,
   },
-  strokeColor: PropTypes.string,
-  trailColor: PropTypes.string,
-};
+  strokeColor: String,
+  trailColor: String,
+});
 
 export type StepsProps = Partial<ExtractPropTypes<typeof stepsProps>>;
 
 export default defineComponent({
-  props: stepsProps,
+  name: 'Steps',
+  props: stepsProps(),
   setup(props, { slots }) {
     const current = computed(() => Math.round(props.steps * ((props.percent || 0) / 100)));
     const stepWidth = computed(() => (props.size === 'small' ? 2 : 14));

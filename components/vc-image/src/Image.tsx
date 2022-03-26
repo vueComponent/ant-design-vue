@@ -28,10 +28,10 @@ export interface ImagePropsType extends Omit<ImgHTMLAttributes, 'placeholder' | 
   fallback?: string;
   preview?: boolean | ImagePreviewType;
 }
-export const imageProps = {
+export const imageProps = () => ({
   src: String,
   wrapperClassName: String,
-  wrapperStyle: PropTypes.style,
+  wrapperStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },
   prefixCls: String,
   previewPrefixCls: String,
   placeholder: PropTypes.any,
@@ -40,7 +40,7 @@ export const imageProps = {
     type: [Boolean, Object] as PropType<boolean | ImagePreviewType>,
     default: true as boolean | ImagePreviewType,
   },
-};
+});
 type ImageStatus = 'normal' | 'error' | 'loading';
 
 const mergeDefaultValue = <T extends object>(obj: T, defaultValues: object): T => {
@@ -56,7 +56,7 @@ let uuid = 0;
 const ImageInternal = defineComponent({
   name: 'Image',
   inheritAttrs: false,
-  props: imageProps,
+  props: imageProps(),
   emits: ['click'],
   setup(props, { attrs, slots, emit }) {
     const prefixCls = computed(() => props.prefixCls);

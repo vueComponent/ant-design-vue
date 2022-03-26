@@ -22,9 +22,10 @@ import classNames from '../../../_util/classNames';
 import useConfigInject from '../../../_util/hooks/useConfigInject';
 import { useInjectSlots } from '../../context';
 import type { DataNode, EventDataNode } from '../../../tree';
-import type { CheckboxChangeEvent, EventHandler } from '../../../_util/EventInterface';
+import type { EventHandler } from '../../../_util/EventInterface';
 import FilterSearch from './FilterSearch';
 import Tree from '../../../tree';
+import type { CheckboxChangeEvent } from '../../../checkbox/interface';
 
 interface FilterRestProps {
   confirm?: Boolean;

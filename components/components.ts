@@ -99,13 +99,20 @@ export {
   LayoutContent,
 } from './layout';
 
-export type { ListProps } from './list';
+export type { ListProps, ListItemProps, ListItemMetaProps } from './list';
 export { default as List, ListItem, ListItemMeta } from './list';
 
 export type { MessageArgsProps } from './message';
 export { default as message } from './message';
 
-export type { MenuProps, MenuTheme, SubMenuProps, MenuItemProps, MenuMode } from './menu';
+export type {
+  MenuProps,
+  MenuTheme,
+  SubMenuProps,
+  MenuItemProps,
+  MenuMode,
+  MenuDividerProps,
+} from './menu';
 export { default as Menu, MenuDivider, MenuItem, MenuItemGroup, SubMenu } from './menu';
 
 export type { MentionsProps } from './mentions';

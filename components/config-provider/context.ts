@@ -4,7 +4,6 @@ import type { ValidateMessages } from '../form/interface';
 import type { RequiredMark } from '../form/Form';
 import type { RenderEmptyHandler } from './renderEmpty';
 import type { TransformCellTextProps } from '../table/interface';
-import PropTypes from '../_util/vue-types';
 import type { Locale } from '../locale-provider';
 
 type GlobalFormCOntextProps = {
@@ -93,7 +92,7 @@ export const configProviderProps = () => ({
   input: {
     type: Object as PropType<{ autocomplete: string }>,
   },
-  autoInsertSpaceInButton: PropTypes.looseBool,
+  autoInsertSpaceInButton: { type: Boolean, default: undefined },
   locale: {
     type: Object as PropType<Locale>,
     default: undefined as Locale,
@@ -110,7 +109,7 @@ export const configProviderProps = () => ({
   space: {
     type: Object as PropType<{ size: SizeType | number }>,
   },
-  virtual: PropTypes.looseBool,
+  virtual: { type: Boolean, default: undefined },
   dropdownMatchSelectWidth: { type: [Number, Boolean], default: true },
   form: {
     type: Object as PropType<{

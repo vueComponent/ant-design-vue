@@ -21,7 +21,7 @@ export type PopoverProps = Partial<ExtractPropTypes<ReturnType<typeof popoverPro
 const Popover = defineComponent({
   name: 'APopover',
   props: initDefaultProps(popoverProps(), {
-    ...tooltipDefaultProps,
+    ...tooltipDefaultProps(),
     trigger: 'hover',
     transitionName: 'zoom-big',
     placement: 'top',

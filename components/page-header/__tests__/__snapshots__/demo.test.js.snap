@@ -722,7 +722,6 @@ exports[`renders ./components/page-header/demo/content.vue correctly 1`] = `
           class="ant-avatar ant-avatar-circle ant-avatar-image"
         >
           <img
-            draggable="false"
             src="https://avatars1.githubusercontent.com/u/8186664?s=460&v=4"
           />
         </span>

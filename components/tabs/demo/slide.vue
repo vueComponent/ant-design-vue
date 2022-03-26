@@ -40,7 +40,7 @@ export default defineComponent({
   setup() {
     const mode = ref<TabsProps['tabPosition']>('top');
     const activeKey = ref(1);
-    const callback = (val: string) => {
+    const callback: TabsProps['onTabScroll'] = val => {
       console.log(val);
     };
     return {

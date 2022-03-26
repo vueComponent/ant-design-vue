@@ -3,7 +3,7 @@
 exports[`renders ./components/comment/demo/basic.vue correctly 1`] = `
 <div class="ant-comment">
   <div class="ant-comment-inner">
-    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img draggable="false" src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
+    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
     <div class="ant-comment-content">
       <div class="ant-comment-content-author"><span class="ant-comment-content-author-name"><a>Han Solo</a></span><span class="ant-comment-content-author-time"><!----><span>a few seconds ago</span></span></div>
       <div class="ant-comment-content-detail">
@@ -24,7 +24,7 @@ exports[`renders ./components/comment/demo/editor.vue correctly 1`] = `
 <!--v-if-->
 <div class="ant-comment">
   <div class="ant-comment-inner">
-    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img draggable="false" src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
+    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
     <div class="ant-comment-content">
       <div class="ant-comment-content-author">
         <!---->
@@ -120,7 +120,7 @@ exports[`renders ./components/comment/demo/list.vue correctly 1`] = `
 exports[`renders ./components/comment/demo/nested.vue correctly 1`] = `
 <div class="ant-comment">
   <div class="ant-comment-inner">
-    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img draggable="false" src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
+    <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
     <div class="ant-comment-content">
       <div class="ant-comment-content-author"><span class="ant-comment-content-author-name"><a>Han Solo</a></span>
         <!---->
@@ -136,7 +136,7 @@ exports[`renders ./components/comment/demo/nested.vue correctly 1`] = `
   <div class="ant-comment-nested">
     <div class="ant-comment">
       <div class="ant-comment-inner">
-        <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img draggable="false" src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
+        <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
         <div class="ant-comment-content">
           <div class="ant-comment-content-author"><span class="ant-comment-content-author-name"><a>Han Solo</a></span>
             <!---->
@@ -152,7 +152,7 @@ exports[`renders ./components/comment/demo/nested.vue correctly 1`] = `
       <div class="ant-comment-nested">
         <div class="ant-comment">
           <div class="ant-comment-inner">
-            <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img draggable="false" src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
+            <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
             <div class="ant-comment-content">
               <div class="ant-comment-content-author"><span class="ant-comment-content-author-name"><a>Han Solo</a></span>
                 <!---->
@@ -169,7 +169,7 @@ exports[`renders ./components/comment/demo/nested.vue correctly 1`] = `
         </div>
         <div class="ant-comment">
           <div class="ant-comment-inner">
-            <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img draggable="false" src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
+            <div class="ant-comment-avatar"><span class="ant-avatar ant-avatar-circle ant-avatar-image"><img src="https://joeschmoe.io/api/v1/random" alt="Han Solo"></span></div>
             <div class="ant-comment-content">
               <div class="ant-comment-content-author"><span class="ant-comment-content-author-name"><a>Han Solo</a></span>
                 <!---->

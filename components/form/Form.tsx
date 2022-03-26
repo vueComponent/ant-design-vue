@@ -174,7 +174,7 @@ const Form = defineComponent({
       delete fields[eventKey];
     };
 
-    const getFieldsByNameList = (nameList: NamePath) => {
+    const getFieldsByNameList = (nameList: NamePath[]) => {
       const provideNameList = !!nameList;
       const namePathList = provideNameList ? toArray(nameList).map(getNamePath) : [];
       if (!provideNameList) {
@@ -186,17 +186,17 @@ const Form = defineComponent({
         );
       }
     };
-    const resetFields = (name: NamePath) => {
+    const resetFields = (name?: NamePath) => {
       if (!props.model) {
         warning(false, 'Form', 'model is required for resetFields to work.');
         return;
       }
-      getFieldsByNameList(name).forEach(field => {
+      getFieldsByNameList(name ? [name] : undefined).forEach(field => {
         field.resetField();
       });
     };
-    const clearValidate = (name: NamePath) => {
-      getFieldsByNameList(name).forEach(field => {
+    const clearValidate = (name?: NamePath) => {
+      getFieldsByNameList(name ? [name] : undefined).forEach(field => {
         field.clearValidate();
       });
     };
@@ -214,8 +214,8 @@ const Form = defineComponent({
     const validate = (...args: any[]) => {
       return validateField(...args);
     };
-    const scrollToField = (name: NamePath, options = {}) => {
-      const fields = getFieldsByNameList(name);
+    const scrollToField = (name?: NamePath, options = {}) => {
+      const fields = getFieldsByNameList(name ? [name] : undefined);
       if (fields.length) {
         const fieldId = fields[0].fieldId.value;
         const node = fieldId ? document.getElementById(fieldId) : null;

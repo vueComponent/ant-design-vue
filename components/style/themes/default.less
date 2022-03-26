@@ -27,26 +27,26 @@
 @info-color-deprecated-bg: color(~`colorPalette('@{info-color}', 1) `);
 @info-color-deprecated-border: color(~`colorPalette('@{info-color}', 3) `);
 
-// >>> Success  已修改green-base
-@success-color: @green-6;
-@success-color-hover: #43c16e;
-@success-color-active: #03812e;
+// >>> Success
+@success-color: @ayla-color-success-6;
+@success-color-hover: @ayla-color-success-5;
+@success-color-active: @ayla-color-success-7;
 @success-color-outline: fade(@success-color, @outline-fade);
 @success-color-deprecated-bg: #81d69e;
 @success-color-deprecated-border: #81d69e;
 
-// >>> Warning 已修改gold-base
-@warning-color: @gold-6;
-@warning-color-hover: #ff9a2e;
-@warning-color-active: #d25f00;
+// >>> Warning
+@warning-color: @ayla-color-warning-6;
+@warning-color-hover: @ayla-color-warning-5;
+@warning-color-active: @ayla-color-warning-7;
 @warning-color-outline: fade(@warning-color, @outline-fade);
 @warning-color-deprecated-bg: #ffcf8b;
 @warning-color-deprecated-border: #ffcf8b;
 
-// >>> Error 已修改red-base
-@error-color: @red-6;
-@error-color-hover: #e55e67;
-@error-color-active: #a51f27;
+// >>> Error
+@error-color: @ayla-color-danger-6;
+@error-color-hover: @ayla-color-danger-5;
+@error-color-active: @ayla-color-danger-7;
 @error-color-outline: fade(@error-color, @outline-fade);
 @error-color-deprecated-bg: #ee9499;
 @error-color-deprecated-border: #ee9499;
@@ -81,12 +81,9 @@
 // Popover background color
 @popover-background: @component-background;
 @popover-customize-border-color: @border-color-split;
-// @font-family: @ayla-font-family;
-@font-family: 'PingFang SC', 'PingFang HK', 'SF Pro', 'HarmonyOS Sans SC', 'HarmonyOS Sans TC',
-  'HarmonyOS Sans', 'Source Han Sans CN', 'Source Han Sans HK', Roboto, sans-serif;
+@font-family: @ayla-font-family;
 @code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-// @text-color: @ayla-color-text-5;
-@text-color: #2d3134;
+@text-color: @ayla-color-text-5;
 @text-color-secondary: #737b82;
 @text-color-ash: #cfd2d6;
 @text-color-inverse: @white;

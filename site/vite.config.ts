@@ -48,7 +48,7 @@ export default {
       less: {
         modifyVars: {
           hack: `true;@import "${require.resolve('../components/style/color/colorPalette.less')}";`,
-          'root-entry-name': 'variable',
+          'root-entry-name': 'default',
         },
         javascriptEnabled: true,
         // includePaths: ["node_modules/"],

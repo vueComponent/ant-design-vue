@@ -173,12 +173,18 @@ const Form = defineComponent({
     const getFieldsByNameList = (nameList: NamePath) => {
       const provideNameList = !!nameList;
       const namePathList = provideNameList ? toArray(nameList).map(getNamePath) : [];
+      const isFieldValue = Object.values(fields).some(field =>
+        isEqualName(nameList, field.fieldName.value),
+      );
+
       if (!provideNameList) {
         return Object.values(fields);
       } else {
         return Object.values(fields).filter(
           field =>
-            namePathList.findIndex(namePath => isEqualName(namePath, field.fieldName.value)) > -1,
+            (isFieldValue ? [nameList] : namePathList).findIndex(namePath =>
+              isEqualName(namePath, field.fieldName.value),
+            ) > -1,
         );
       }
     };

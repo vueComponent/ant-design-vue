@@ -262,8 +262,8 @@
   }
 
   // &:focus {
-  //   border-color: var(--ayla-color-primary-6);
-  //   box-shadow: inset 0 0 0 1px var(--ayla-color-primary-6), inset 0 0 0 2px #f4f4f4;
+  //   border-color: @ayla-color-primary-6);
+  //   box-shadow: inset 0 0 0 1px @ayla-color-primary-6), inset 0 0 0 2px #f4f4f4;
   // }
 
   &:not([disabled]):hover {
@@ -302,20 +302,20 @@
 // default button style (secondary button)
 .btn-default() {
   // .button-variant-other(@btn-default-color; @btn-default-bg; @btn-default-border; );
-  color: var(--ayla-color-text-5);
-  border-color: var(--ayla-color-line-1);
-  background: var(--ayla-color-fill-2);
+  color: @ayla-color-text-5;
+  border-color: @ayla-color-line-1;
+  background: @ayla-color-fill-2;
 
   &:hover {
-    color: var(--ayla-color-text-5);
-    border-color: var(--ayla-color-line-1);
-    background: var(--ayla-color-fill-3);
+    color: @ayla-color-text-5;
+    border-color: @ayla-color-line-1;
+    background: @ayla-color-fill-3;
   }
 
   &:active {
-    color: var(--ayla-color-text-5);
-    border-color: var(--ayla-color-line-1);
-    background: var(--ayla-color-fill-4);
+    color: @ayla-color-text-5;
+    border-color: @ayla-color-line-1;
+    background: @ayla-color-fill-4;
   }
 
   &:hover,
@@ -324,7 +324,7 @@
     text-decoration: none;
   }
 
-  .button-disabled(var(--ayla-color-text-2), var(--ayla-color-fill-2), var(--ayla-color-line-1));
+  .button-disabled(@ayla-color-text-2, @ayla-color-fill-2, @ayla-color-line-1);
 }
 // ghost button style
 .btn-ghost() {

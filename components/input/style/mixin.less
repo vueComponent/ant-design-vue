@@ -23,12 +23,12 @@
     border-color: @hoverBorderColor;
   }
   & when not (@theme = variable) {
-    box-shadow: @input-outline-offset @outline-blur-size @outline-width
-      fade(@borderColor, @outline-fade);
+    // box-shadow: @input-outline-offset @outline-blur-size @outline-width
+    //   fade(@borderColor, @outline-fade);
   }
   & when (@theme = variable) {
     border-color: @hoverBorderColor;
-    box-shadow: @input-outline-offset @outline-blur-size @outline-width @outlineColor;
+    // box-shadow: @input-outline-offset @outline-blur-size @outline-width @outlineColor;
   }
   border-right-width: @border-width-base !important;
   outline: 0;

@@ -14,10 +14,10 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg
 
 在 Ant Design Vue 中我们提供了五种按钮。
 
-- 主按钮：用于主行动点，一个操作区域只能有一个主按钮。
-- 默认按钮：用于没有主次之分的一组行动点。
-- 虚线按钮：常用于添加操作。
-- 文本按钮：用于最次级的行动点。
+- 主要按钮：用于主行动点，一个操作区域只能有一个主要按钮。
+- 次要按钮：用于没有主次之分的一组行动点。
+<!-- - 虚线按钮：常用于添加操作。 -->
+- 文字按钮：用于最次级的行动点。
 - 链接按钮：一般用于链接，即导航至某位置。
 
 以及四种状态属性与上面配合使用。
@@ -46,7 +46,7 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg
 | shape | 设置按钮形状 | `default` \| `circle` \| `round` | 'default' |  |
 | size | 设置按钮大小 | `large` \| `middle` \| `small` | `middle` |  |
 | target | 相当于 a 链接的 target 属性，href 存在时生效 | string | - |  |
-| type | 设置按钮类型 | `primary` \| `ghost` \| `dashed` \| `link` \| `text` \| `default` | `default` |  |
+| type | 设置按钮类型 | `primary` \| `ghost` \| `link` \| `text` \| `default` | `default` |  |
 
 ### 事件
 
@@ -60,6 +60,6 @@ cover: https://gw.alipayobjects.com/zos/alicdn/fNUKzY1sk/Button.svg
 
 ### 如何移除 2 个汉字之间的空格
 
-根据 Ant Design 设计规范要求，我们会在按钮内(文本按钮和链接按钮除外)只有两个汉字时自动添加空格，如果你不需要这个特性，可以设置 [ConfigProvider](/components/config-provider/#API) 的 `autoInsertSpaceInButton` 为 `false`。
+根据 Ant Design 设计规范要求，我们会在按钮内(文字按钮和链接按钮除外)只有两个汉字时自动添加空格，如果你不需要这个特性，可以设置 [ConfigProvider](/components/config-provider/#API) 的 `autoInsertSpaceInButton` 为 `false`。
 
 <img src="https://gw.alipayobjects.com/zos/antfincdn/MY%26THAPZrW/38f06cb9-293a-4b42-b183-9f443e79ffea.png" style="box-shadow: none; margin: 0; width: 100px" alt="移除两个汉字之间的空格"  />

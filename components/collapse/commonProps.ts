@@ -7,7 +7,7 @@ export type CollapsibleType = 'header' | 'disabled';
 
 export type ActiveKeyType = Array<string | number> | string | number;
 
-interface PanelProps {
+export interface PanelProps {
   isActive?: boolean;
   header?: any;
   showArrow?: boolean;

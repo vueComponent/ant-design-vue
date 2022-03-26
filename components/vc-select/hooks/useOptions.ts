@@ -1,5 +1,5 @@
 import type { Ref } from 'vue';
-import { toRaw, shallowRef, watchEffect } from 'vue';
+import { toRaw, shallowRef, watchEffect, watch } from 'vue';
 import type { FieldNames, RawValueType } from '../Select';
 import { convertChildrenToData } from '../utils/legacyUtil';
 
@@ -15,13 +15,20 @@ export default function useOptions<OptionType>(
   const mergedOptions = shallowRef();
   const valueOptions = shallowRef();
   const labelOptions = shallowRef();
+  const tempMergedOptions = shallowRef([]);
+  watch(
+    [options, children],
+    () => {
+      if (options.value) {
+        tempMergedOptions.value = toRaw(options.value).slice();
+      } else {
+        tempMergedOptions.value = convertChildrenToData(children.value);
+      }
+    },
+    { immediate: true, deep: true },
+  );
   watchEffect(() => {
-    let newOptions = toRaw(options.value);
-    const childrenAsData = !options.value;
-
-    if (childrenAsData) {
-      newOptions = convertChildrenToData(children.value);
-    }
+    const newOptions = tempMergedOptions.value;
 
     const newValueOptions = new Map<RawValueType, OptionType>();
     const newLabelOptions = new Map<any, OptionType>();

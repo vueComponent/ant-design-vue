@@ -3,11 +3,11 @@ import type { DataEntity } from '../../vc-tree/interface';
 import { conductCheck } from '../../vc-tree/utils/conductUtil';
 import type { LabeledValueType, RawValueType } from '../TreeSelect';
 import type { Ref, ShallowRef } from 'vue';
-import { toRaw, shallowRef, watchEffect } from 'vue';
+import { shallowRef, watchEffect } from 'vue';
 
 export default (
-  rawLabeledValues: Ref<LabeledValueType[]>,
-  rawHalfCheckedValues: Ref<LabeledValueType[]>,
+  rawLabeledValues: ShallowRef<LabeledValueType[]>,
+  rawHalfCheckedValues: ShallowRef<LabeledValueType[]>,
   treeConduction: Ref<boolean>,
   keyEntities: Ref<Record<Key, DataEntity>>,
   maxLevel: Ref<number>,
@@ -17,10 +17,8 @@ export default (
   const newRawHalfCheckedValues = shallowRef<RawValueType[]>([]);
 
   watchEffect(() => {
-    let checkedKeys: RawValueType[] = toRaw(rawLabeledValues.value).map(({ value }) => value);
-    let halfCheckedKeys: RawValueType[] = toRaw(rawHalfCheckedValues.value).map(
-      ({ value }) => value,
-    );
+    let checkedKeys: RawValueType[] = rawLabeledValues.value.map(({ value }) => value);
+    let halfCheckedKeys: RawValueType[] = rawHalfCheckedValues.value.map(({ value }) => value);
 
     const missingValues = checkedKeys.filter(key => !keyEntities.value[key]);
 

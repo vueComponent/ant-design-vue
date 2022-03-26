@@ -53,7 +53,7 @@ export default defineComponent({
     showAction: PropTypes.any.def([]),
     hideAction: PropTypes.any.def([]),
     getPopupClassNameFromAlign: PropTypes.any.def(returnEmptyString),
-    onPopupVisibleChange: PropTypes.func.def(noop),
+    onPopupVisibleChange: Function as PropType<(open: boolean) => void>,
     afterPopupVisibleChange: PropTypes.func.def(noop),
     popup: PropTypes.any,
     popupStyle: { type: Object as PropType<CSSProperties>, default: undefined as CSSProperties },

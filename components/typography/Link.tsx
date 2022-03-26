@@ -1,13 +1,13 @@
-import type { AnchorHTMLAttributes, FunctionalComponent } from 'vue';
+import type { AnchorHTMLAttributes, ExtractPropTypes, FunctionalComponent } from 'vue';
 import warning from '../_util/warning';
-import type { BlockProps } from './Base';
 import Base, { baseProps } from './Base';
-import PropTypes from '../_util/vue-types';
 import omit from '../_util/omit';
 
-export interface LinkProps extends BlockProps, Omit<AnchorHTMLAttributes, 'type'> {
-  ellipsis?: boolean;
-}
+export const linkProps = () =>
+  omit({ ...baseProps(), ellipsis: { type: Boolean, default: undefined } }, ['component']);
+
+export type LinkProps = Partial<ExtractPropTypes<ReturnType<typeof linkProps>>> &
+  AnchorHTMLAttributes;
 
 const Link: FunctionalComponent<LinkProps> = (props, { slots, attrs }) => {
   const { ellipsis, rel, ...restProps } = { ...props, ...attrs };
@@ -31,6 +31,6 @@ const Link: FunctionalComponent<LinkProps> = (props, { slots, attrs }) => {
 
 Link.displayName = 'ATypographyLink';
 Link.inheritAttrs = false;
-Link.props = omit({ ...baseProps(), ellipsis: PropTypes.looseBool }, ['component']) as any;
+Link.props = linkProps();
 
 export default Link;

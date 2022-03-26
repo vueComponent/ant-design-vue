@@ -13,7 +13,7 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 const PresetColorRegex = new RegExp(`^(${PresetColorTypes.join('|')})(-inverse)?$`);
 const PresetStatusColorRegex = new RegExp(`^(${PresetStatusColorTypes.join('|')})$`);
 
-export const tagProps = {
+export const tagProps = () => ({
   prefixCls: String,
   color: {
     type: String as PropType<LiteralUnion<PresetColorType | PresetStatusColorType, string>>,
@@ -24,15 +24,16 @@ export const tagProps = {
   onClose: {
     type: Function as PropType<(e: MouseEvent) => void>,
   },
+  'onUpdate:visible': Function as PropType<(vis: boolean) => void>,
   icon: PropTypes.any,
-};
+});
 
-export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<typeof tagProps>>;
+export type TagProps = HTMLAttributes & Partial<ExtractPropTypes<ReturnType<typeof tagProps>>>;
 
 const Tag = defineComponent({
   name: 'ATag',
-  props: tagProps,
-  emits: ['update:visible', 'close'],
+  props: tagProps(),
+  // emits: ['update:visible', 'close'],
   slots: ['closeIcon', 'icon'],
   setup(props: TagProps, { slots, emit, attrs }) {
     const { prefixCls, direction } = useConfigInject('tag', props);

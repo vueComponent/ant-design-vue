@@ -6,15 +6,15 @@ import type { StringGradients, ProgressGradient } from './props';
 import { progressProps } from './props';
 import { getSuccessPercent, validProgress } from './utils';
 
-export const lineProps = {
+export const lineProps = () => ({
   ...progressProps(),
   prefixCls: String,
   direction: {
     type: String as PropType<Direction>,
   },
-};
+});
 
-export type LineProps = Partial<ExtractPropTypes<typeof lineProps>>;
+export type LineProps = Partial<ExtractPropTypes<ReturnType<typeof lineProps>>>;
 
 /**
  * {
@@ -69,7 +69,7 @@ export const handleGradient = (strokeColor: ProgressGradient, directionConfig: D
 
 export default defineComponent({
   name: 'Line',
-  props: lineProps,
+  props: lineProps(),
   setup(props, { slots }) {
     const backgroundProps = computed(() => {
       const { strokeColor, direction } = props;

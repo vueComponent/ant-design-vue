@@ -7,15 +7,13 @@ import { PresetColorTypes } from '../_util/colors';
 import warning from '../_util/warning';
 import { getStyle, filterEmpty, isValidElement, initDefaultProps } from '../_util/props-util';
 import { cloneElement } from '../_util/vnode';
-import type { triggerTypes, placementTypes } from './abstractTooltipProps';
+export type { TriggerType, TooltipPlacement } from './abstractTooltipProps';
 import abstractTooltipProps from './abstractTooltipProps';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import getPlacements from './placements';
 import firstNotUndefined from '../_util/firstNotUndefined';
 import raf from '../_util/raf';
 export type { AdjustOverflow, PlacementsConfig } from './placements';
-
-export type TooltipPlacement = typeof placementTypes[number];
 
 // https://github.com/react-component/tooltip
 // https://github.com/yiminghe/dom-align
@@ -48,20 +46,16 @@ export const tooltipProps = () => ({
   title: PropTypes.any,
 });
 
-export const tooltipDefaultProps = {
+export const tooltipDefaultProps = () => ({
   trigger: 'hover',
   transitionName: 'zoom-big-fast',
-  align: () => ({}),
+  align: {},
   placement: 'top',
   mouseEnterDelay: 0.1,
   mouseLeaveDelay: 0.1,
   arrowPointAtCenter: false,
   autoAdjustOverflow: true,
-};
-
-export type TriggerTypes = typeof triggerTypes[number];
-
-export type PlacementTypes = typeof placementTypes[number];
+});
 
 export type TooltipProps = Partial<ExtractPropTypes<ReturnType<typeof tooltipProps>>>;
 
@@ -71,7 +65,7 @@ export default defineComponent({
   props: initDefaultProps(tooltipProps(), {
     trigger: 'hover',
     transitionName: 'zoom-big-fast',
-    align: () => ({}),
+    align: {},
     placement: 'top',
     mouseEnterDelay: 0.1,
     mouseLeaveDelay: 0.1,
@@ -79,7 +73,7 @@ export default defineComponent({
     autoAdjustOverflow: true,
   }),
   slots: ['title'],
-  emits: ['update:visible', 'visibleChange'],
+  // emits: ['update:visible', 'visibleChange'],
   setup(props, { slots, emit, attrs, expose }) {
     const { prefixCls, getTargetContainer } = useConfigInject('tooltip', props);
 

@@ -5,7 +5,6 @@ import { defineComponent, ref, onMounted } from 'vue';
  * This helps accessibility reader to tread as a interactive button to operation.
  */
 import KeyCode from './KeyCode';
-import PropTypes from './vue-types';
 
 const inlineStyle = {
   border: 0,

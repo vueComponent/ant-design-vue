@@ -1,5 +1,4 @@
 import type { CSSProperties, ExtractPropTypes, PropType } from 'vue';
-import type { MouseEventHandler } from '../_util/EventInterface';
 import PropTypes from '../_util/vue-types';
 
 function dialogPropTypes() {
@@ -37,11 +36,11 @@ function dialogPropTypes() {
     dialogClass: String,
     closeIcon: PropTypes.any,
     forceRender: { type: Boolean, default: undefined },
-    getOpenCount: Function,
+    getOpenCount: Function as PropType<() => number>,
     // https://github.com/ant-design/ant-design/issues/19771
     // https://github.com/react-component/dialog/issues/95
     focusTriggerAfterClose: { type: Boolean, default: undefined },
-    onClose: Function as PropType<MouseEventHandler>,
+    onClose: Function as PropType<(e: MouseEvent | KeyboardEvent) => void>,
     modalRender: Function,
   };
 }

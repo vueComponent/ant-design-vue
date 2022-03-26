@@ -1,4 +1,4 @@
-import type { ExtractPropTypes, PropType } from 'vue';
+import type { ExtractPropTypes, HTMLAttributes, PropType } from 'vue';
 import { computed, onMounted, ref, toRef, defineComponent } from 'vue';
 import Tooltip from '../tooltip';
 import abstractTooltipProps from '../tooltip/abstractTooltipProps';
@@ -35,8 +35,14 @@ export const popconfirmProps = () => ({
   okText: PropTypes.any,
   cancelText: PropTypes.any,
   icon: PropTypes.any,
-  okButtonProps: PropTypes.object,
-  cancelButtonProps: PropTypes.object,
+  okButtonProps: {
+    type: Object as PropType<ButtonProps & HTMLAttributes>,
+    default: undefined as ButtonProps & HTMLAttributes,
+  },
+  cancelButtonProps: {
+    type: Object as PropType<ButtonProps & HTMLAttributes>,
+    default: undefined as ButtonProps & HTMLAttributes,
+  },
   showCancel: { type: Boolean, default: true },
   onConfirm: Function as PropType<(e: MouseEvent) => void>,
   onCancel: Function as PropType<(e: MouseEvent) => void>,
@@ -52,10 +58,9 @@ export interface PopconfirmLocale {
 const Popconfirm = defineComponent({
   name: 'APopconfirm',
   props: initDefaultProps(popconfirmProps(), {
-    ...tooltipDefaultProps,
+    ...tooltipDefaultProps(),
     trigger: 'click',
     transitionName: 'zoom-big',
-    align: () => ({}),
     placement: 'top',
     mouseEnterDelay: 0.1,
     mouseLeaveDelay: 0.1,

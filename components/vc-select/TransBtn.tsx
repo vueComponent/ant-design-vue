@@ -1,4 +1,5 @@
-import type { FunctionalComponent } from 'vue';
+import type { FunctionalComponent, PropType } from 'vue';
+import type { MouseEventHandler } from '../_util/EventInterface';
 import type { VueNode } from '../_util/type';
 import PropTypes from '../_util/vue-types';
 import type { RenderNode } from './BaseSelect';
@@ -59,8 +60,8 @@ TransBtn.props = {
   class: String,
   customizeIcon: PropTypes.any,
   customizeIconProps: PropTypes.any,
-  onMousedown: Function,
-  onClick: Function,
+  onMousedown: Function as PropType<MouseEventHandler>,
+  onClick: Function as PropType<MouseEventHandler>,
 };
 
 export default TransBtn;

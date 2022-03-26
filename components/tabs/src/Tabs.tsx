@@ -25,6 +25,8 @@ import { useProvideTabs } from './TabContext';
 import type { Key } from '../../_util/type';
 import pick from 'lodash-es/pick';
 import PropTypes from '../../_util/vue-types';
+import type { MouseEventHandler } from '../../_util/EventInterface';
+import omit from '../../_util/omit';
 
 export type TabsType = 'line' | 'card' | 'editable-card';
 export type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
@@ -61,11 +63,11 @@ export const tabsProps = () => {
       type: Function as PropType<(activeKey: Key, e: KeyboardEvent | MouseEvent) => void>,
     },
     onTabScroll: { type: Function as PropType<OnTabScroll> },
-
+    'onUpdate:activeKey': { type: Function as PropType<(activeKey: Key) => void> },
     // Accessibility
     locale: { type: Object as PropType<TabsLocale>, default: undefined as TabsLocale },
-    onPrevClick: Function,
-    onNextClick: Function,
+    onPrevClick: Function as PropType<MouseEventHandler>,
+    onNextClick: Function as PropType<MouseEventHandler>,
     tabBarExtraContent: PropTypes.any,
   };
 };
@@ -133,7 +135,7 @@ const InternalTabs = defineComponent({
     'removeIcon',
     'renderTabBar',
   ],
-  emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
+  // emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
   setup(props, { attrs, slots }) {
     devWarning(
       !(props.onPrevClick !== undefined) && !(props.onNextClick !== undefined),
@@ -343,7 +345,7 @@ export default defineComponent({
     'removeIcon',
     'renderTabBar',
   ],
-  emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
+  // emits: ['tabClick', 'tabScroll', 'change', 'update:activeKey'],
   setup(props, { attrs, slots, emit }) {
     const handleChange = (key: string) => {
       emit('update:activeKey', key);
@@ -352,7 +354,13 @@ export default defineComponent({
     return () => {
       const tabs = parseTabList(flattenChildren(slots.default?.()));
       return (
-        <InternalTabs {...props} {...attrs} onChange={handleChange} tabs={tabs} v-slots={slots} />
+        <InternalTabs
+          {...omit(props, ['onUpdate:activeKey'])}
+          {...attrs}
+          onChange={handleChange}
+          tabs={tabs}
+          v-slots={slots}
+        />
       );
     };
   },

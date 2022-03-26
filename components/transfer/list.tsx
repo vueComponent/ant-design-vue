@@ -65,7 +65,7 @@ export default defineComponent({
   name: 'TransferList',
   inheritAttrs: false,
   props: transferListProps,
-  emits: ['scroll', 'itemSelectAll', 'itemRemove', 'itemSelect'],
+  // emits: ['scroll', 'itemSelectAll', 'itemRemove', 'itemSelect'],
   slots: ['footer', 'titleText'],
   setup(props, { attrs, slots }) {
     const filterValue = ref('');

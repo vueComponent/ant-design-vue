@@ -7,7 +7,7 @@ import type { countdownValueType } from './utils';
 import Skeleton from '../skeleton/Skeleton';
 import useConfigInject from '../_util/hooks/useConfigInject';
 
-export const statisticProps = {
+export const statisticProps = () => ({
   prefixCls: String,
   decimalSeparator: String,
   groupSeparator: String,
@@ -22,15 +22,14 @@ export const statisticProps = {
   prefix: PropTypes.any,
   suffix: PropTypes.any,
   title: PropTypes.any,
-  onFinish: Function,
   loading: { type: Boolean, default: undefined },
-};
+});
 
-export type StatisticProps = Partial<ExtractPropTypes<typeof statisticProps>>;
+export type StatisticProps = Partial<ExtractPropTypes<ReturnType<typeof statisticProps>>>;
 
 export default defineComponent({
   name: 'AStatistic',
-  props: initDefaultProps(statisticProps, {
+  props: initDefaultProps(statisticProps(), {
     decimalSeparator: '.',
     groupSeparator: ',',
     loading: false,

@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, ref, computed } from 'vue';
 import PropTypes from '../_util/vue-types';
 import { filterEmpty, flattenChildren, isEmptyContent } from '../_util/props-util';
@@ -13,8 +13,9 @@ import useConfigInject from '../_util/hooks/useConfigInject';
 import classNames from '../_util/classNames';
 import ResizeObserver from '../vc-resize-observer';
 import useDestroyed from '../_util/hooks/useDestroyed';
+import type { MouseEventHandler } from '../_util/EventInterface';
 
-export const pageHeaderProps = {
+export const pageHeaderProps = () => ({
   backIcon: PropTypes.any,
   prefixCls: String,
   title: PropTypes.any,
@@ -25,15 +26,15 @@ export const pageHeaderProps = {
   extra: PropTypes.any,
   avatar: PropTypes.object,
   ghost: { type: Boolean, default: undefined },
-  onBack: Function,
-};
+  onBack: Function as PropType<MouseEventHandler>,
+});
 
-export type PageHeaderProps = Partial<ExtractPropTypes<typeof pageHeaderProps>>;
+export type PageHeaderProps = Partial<ExtractPropTypes<ReturnType<typeof pageHeaderProps>>>;
 
 const PageHeader = defineComponent({
   name: 'APageHeader',
-  props: pageHeaderProps,
-  emits: ['back'],
+  props: pageHeaderProps(),
+  // emits: ['back'],
   slots: ['backIcon', 'avatar', 'breadcrumb', 'title', 'subTitle', 'tags', 'extra', 'footer'],
   setup(props, { emit, slots }) {
     const { prefixCls, direction, pageHeader } = useConfigInject('page-header', props);

@@ -1,12 +1,17 @@
 import useConfigInject from '../../_util/hooks/useConfigInject';
+import type { ExtractPropTypes } from 'vue';
 import { computed, defineComponent } from 'vue';
+
+export const menuDividerProps = () => ({
+  prefixCls: String,
+  dashed: Boolean,
+});
+
+export type MenuDividerProps = Partial<ExtractPropTypes<ReturnType<typeof menuDividerProps>>>;
 
 export default defineComponent({
   name: 'AMenuDivider',
-  props: {
-    prefixCls: String,
-    dashed: Boolean,
-  },
+  props: menuDividerProps(),
   setup(props) {
     const { prefixCls } = useConfigInject('menu', props);
     const cls = computed(() => {

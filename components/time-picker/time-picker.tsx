@@ -19,7 +19,7 @@ export interface TimePickerLocale {
   rangePlaceholder?: [string, string];
 }
 
-export const timePickerProps = {
+export const timePickerProps = () => ({
   format: String,
   showNow: { type: Boolean, default: undefined },
   showHour: { type: Boolean, default: undefined },
@@ -31,7 +31,7 @@ export const timePickerProps = {
   secondStep: Number,
   hideDisabledOptions: { type: Boolean, default: undefined },
   popupClassName: String,
-};
+});
 
 export interface CommonTimePickerProps {
   format?: string;
@@ -64,7 +64,7 @@ function createTimePicker<
   DTimeRangePickerProps extends TimeRangePickerProps<DateType> = TimeRangePickerProps<DateType>,
 >(generateConfig: GenerateConfig<DateType>) {
   const DatePicker = generatePicker<DateType>(generateConfig, {
-    ...timePickerProps,
+    ...timePickerProps(),
     order: { type: Boolean, default: true },
   });
 
@@ -75,7 +75,7 @@ function createTimePicker<
     props: {
       ...commonProps<DateType>(),
       ...datePickerProps<DateType>(),
-      ...timePickerProps,
+      ...timePickerProps(),
       addon: { type: Function },
     } as any,
     slot: ['addon', 'renderExtraFooter', 'suffixIcon', 'clearIcon'],
@@ -145,7 +145,7 @@ function createTimePicker<
     props: {
       ...commonProps<DateType>(),
       ...rangePickerProps<DateType>(),
-      ...timePickerProps,
+      ...timePickerProps(),
       order: { type: Boolean, default: true },
     } as any,
     slot: ['renderExtraFooter', 'suffixIcon', 'clearIcon'],

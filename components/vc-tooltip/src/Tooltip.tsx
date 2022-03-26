@@ -121,7 +121,7 @@ export default defineComponent({
         mouseEnterDelay,
         ...extraProps,
         ...attrs,
-        onPopupVisibleChange: props.onVisibleChange || noop,
+        onPopupVisibleChange: props.onVisibleChange || (noop as any),
         onPopupAlign: props.onPopupAlign || noop,
         ref: triggerDOM,
         popup: getPopupElement(),

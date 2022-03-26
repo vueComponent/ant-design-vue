@@ -21,7 +21,7 @@ export default defineComponent({
     defaultValue: PropTypes.any,
     allowClear: { type: Boolean, default: undefined },
     element: PropTypes.any,
-    handleReset: Function,
+    handleReset: Function as PropType<MouseEventHandler>,
     disabled: { type: Boolean, default: undefined },
     direction: { type: String as PropType<Direction> },
     size: { type: String as PropType<SizeType> },

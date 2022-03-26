@@ -1,4 +1,6 @@
+import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, onBeforeUnmount, onMounted, onUpdated, ref } from 'vue';
+import omit from '../_util/omit';
 import initDefaultProps from '../_util/props-util/initDefaultProps';
 import Statistic, { statisticProps } from './Statistic';
 import type { countdownValueType, FormatConfig } from './utils';
@@ -9,13 +11,23 @@ const REFRESH_INTERVAL = 1000 / 30;
 function getTime(value?: countdownValueType) {
   return new Date(value as any).getTime();
 }
+export const countdownProps = () => {
+  return {
+    ...statisticProps(),
+    value: [Number, String],
+    format: String,
+    onFinish: Function as PropType<() => void>,
+    onChange: Function as PropType<(value?: countdownValueType) => void>,
+  };
+};
 
+export type CountdownProps = Partial<ExtractPropTypes<ReturnType<typeof countdownProps>>>;
 export default defineComponent({
   name: 'AStatisticCountdown',
-  props: initDefaultProps(statisticProps, {
+  props: initDefaultProps(countdownProps(), {
     format: 'HH:mm:ss',
   }),
-  emits: ['finish', 'change'],
+  // emits: ['finish', 'change'],
   setup(props, { emit, slots }) {
     const countdownId = ref<any>();
     const statistic = ref();
@@ -80,7 +92,7 @@ export default defineComponent({
         <Statistic
           ref={statistic}
           {...{
-            ...props,
+            ...omit(props, ['onFinish', 'onChange']),
             valueRender: valueRenderHtml,
             formatter: formatCountdown,
           }}

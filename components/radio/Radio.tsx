@@ -1,4 +1,4 @@
-import type { ExtractPropTypes } from 'vue';
+import type { ExtractPropTypes, PropType } from 'vue';
 import { defineComponent, inject, ref } from 'vue';
 import PropTypes from '../_util/vue-types';
 import VcCheckbox from '../vc-checkbox/Checkbox';
@@ -6,8 +6,10 @@ import classNames from '../_util/classNames';
 import useConfigInject from '../_util/hooks/useConfigInject';
 import type { RadioChangeEvent, RadioGroupContext } from './interface';
 import { useInjectFormItemContext } from '../form/FormItemContext';
+import omit from '../_util/omit';
+import type { FocusEventHandler, MouseEventHandler } from '../_util/EventInterface';
 
-export const radioProps = {
+export const radioProps = () => ({
   prefixCls: String,
   checked: { type: Boolean, default: undefined },
   disabled: { type: Boolean, default: undefined },
@@ -16,18 +18,20 @@ export const radioProps = {
   name: String,
   id: String,
   autofocus: { type: Boolean, default: undefined },
-  onChange: Function,
-  onFocus: Function,
-  onBlur: Function,
-  onClick: Function,
-};
+  onChange: Function as PropType<(event: RadioChangeEvent) => void>,
+  onFocus: Function as PropType<FocusEventHandler>,
+  onBlur: Function as PropType<FocusEventHandler>,
+  onClick: Function as PropType<MouseEventHandler>,
+  'onUpdate:checked': Function as PropType<(checked: boolean) => void>,
+  'onUpdate:value': Function as PropType<(checked: boolean) => void>,
+});
 
-export type RadioProps = Partial<ExtractPropTypes<typeof radioProps>>;
+export type RadioProps = Partial<ExtractPropTypes<ReturnType<typeof radioProps>>>;
 
 export default defineComponent({
   name: 'ARadio',
-  props: radioProps,
-  emits: ['update:checked', 'update:value', 'change', 'blur', 'focus'],
+  props: radioProps(),
+  // emits: ['update:checked', 'update:value', 'change', 'blur', 'focus'],
   setup(props, { emit, expose, slots }) {
     const formItemContext = useInjectFormItemContext();
     const vcCheckbox = ref<HTMLElement>();
@@ -66,7 +70,7 @@ export default defineComponent({
       const rProps: RadioProps = {
         prefixCls: prefixCls.value,
         id,
-        ...restProps,
+        ...omit(restProps, ['onUpdate:checked', 'onUpdate:value']),
       };
 
       if (radioGroup) {

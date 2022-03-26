@@ -1,7 +1,7 @@
 import Trigger from '../vc-trigger';
 import PropTypes from '../_util/vue-types';
 import classNames from '../_util/classNames';
-import type { CSSProperties } from 'vue';
+import type { CSSProperties, PropType } from 'vue';
 import { computed, ref, defineComponent } from 'vue';
 import type { VueNode } from '../_util/type';
 import type { DropdownRender, Placement, RenderDOMFunc } from './BaseSelect';
@@ -102,7 +102,7 @@ const SelectTrigger = defineComponent<SelectTriggerProps, { popupRef: any }>({
     popupElement: PropTypes.any,
     direction: String,
     getTriggerDOMNode: Function,
-    onPopupVisibleChange: Function,
+    onPopupVisibleChange: Function as PropType<(open: boolean) => void>,
     onPopupMouseEnter: Function,
   } as any,
   setup(props, { slots, attrs, expose }) {

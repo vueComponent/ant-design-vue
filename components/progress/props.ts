@@ -26,9 +26,10 @@ export const progressProps = () => ({
   status: PropTypes.oneOf(progressStatuses),
   showInfo: { type: Boolean, default: undefined },
   strokeWidth: Number,
-  strokeLinecap: PropTypes.oneOf(tuple('butt', 'round', 'square')),
+  strokeLinecap: String as PropType<'butt' | 'square' | 'round'>,
   strokeColor: {
     type: [String, Object] as PropType<string | ProgressGradient>,
+    default: undefined as string | ProgressGradient,
   },
   trailColor: String,
   width: Number,
@@ -37,7 +38,7 @@ export const progressProps = () => ({
     default: (): SuccessProps => ({}),
   },
   gapDegree: Number,
-  gapPosition: PropTypes.oneOf(tuple('top', 'bottom', 'left', 'right')),
+  gapPosition: String as PropType<'top' | 'bottom' | 'left' | 'right'>,
   size: PropTypes.oneOf(ProgressSize),
   steps: Number,
   /** @deprecated Use `success` instead */

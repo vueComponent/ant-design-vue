@@ -14,7 +14,7 @@ const spaceSize = {
   middle: 16,
   large: 24,
 };
-export const spaceProps = {
+export const spaceProps = () => ({
   prefixCls: String,
   size: {
     type: [String, Number, Array] as PropType<SpaceSize | [SpaceSize, SpaceSize]>,
@@ -22,9 +22,9 @@ export const spaceProps = {
   direction: PropTypes.oneOf(tuple('horizontal', 'vertical')).def('horizontal'),
   align: PropTypes.oneOf(tuple('start', 'end', 'center', 'baseline')),
   wrap: { type: Boolean, default: undefined },
-};
+});
 
-export type SpaceProps = Partial<ExtractPropTypes<typeof spaceProps>>;
+export type SpaceProps = Partial<ExtractPropTypes<ReturnType<typeof spaceProps>>>;
 
 function getNumberSize(size: SpaceSize) {
   return typeof size === 'string' ? spaceSize[size] : size || 0;
@@ -32,7 +32,7 @@ function getNumberSize(size: SpaceSize) {
 
 const Space = defineComponent({
   name: 'ASpace',
-  props: spaceProps,
+  props: spaceProps(),
   slots: ['split'],
   setup(props, { slots }) {
     const { prefixCls, space, direction: directionConfig } = useConfigInject('space', props);

@@ -1,8 +1,7 @@
 import type { Ref } from 'vue';
 import {
+  watchEffect,
   getCurrentInstance,
-  onBeforeUpdate,
-  onBeforeMount,
   defineComponent,
   onBeforeUnmount,
   onMounted,
@@ -22,12 +21,13 @@ interface StickyScrollBarProps {
   onScroll: (params: { scrollLeft?: number }) => void;
   offsetScroll: number;
   container: HTMLElement | Window;
+  scrollBodySizeInfo: { scrollWidth: number; clientWidth: number };
 }
 
 export default defineComponent<StickyScrollBarProps>({
   name: 'StickyScrollBar',
   inheritAttrs: false,
-  props: ['offsetScroll', 'container', 'scrollBodyRef'] as any,
+  props: ['offsetScroll', 'container', 'scrollBodyRef', 'scrollBodySizeInfo'] as any,
   emits: ['scroll'],
   setup(props, { emit, expose }) {
     const tableContext = useInjectTable();
@@ -35,18 +35,15 @@ export default defineComponent<StickyScrollBarProps>({
     const bodyWidth = ref(0);
     const scrollBarWidth = ref(0);
     const instance = getCurrentInstance();
-    const updateSomeValue = () => {
-      bodyScrollWidth.value = props.scrollBodyRef.value.scrollWidth || 0;
-      bodyWidth.value = props.scrollBodyRef.value.clientWidth || 0;
-      scrollBarWidth.value =
-        bodyScrollWidth.value && bodyWidth.value * (bodyWidth.value / bodyScrollWidth.value);
-    };
-    onBeforeMount(() => {
-      updateSomeValue();
-    });
-    onBeforeUpdate(() => {
-      updateSomeValue();
-    });
+    watchEffect(
+      () => {
+        bodyScrollWidth.value = props.scrollBodySizeInfo.scrollWidth || 0;
+        bodyWidth.value = props.scrollBodySizeInfo.clientWidth || 0;
+        scrollBarWidth.value =
+          bodyScrollWidth.value && bodyWidth.value * (bodyWidth.value / bodyScrollWidth.value);
+      },
+      { flush: 'post' },
+    );
 
     const scrollBarRef = ref();
 

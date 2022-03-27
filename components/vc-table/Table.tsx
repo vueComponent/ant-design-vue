@@ -33,6 +33,7 @@ import useSticky from './hooks/useSticky';
 import FixedHolder from './FixedHolder';
 import type { CSSProperties } from 'vue';
 import {
+  onUpdated,
   computed,
   defineComponent,
   nextTick,
@@ -327,6 +328,10 @@ export default defineComponent<TableProps<DefaultRecordType>>({
     const fullTableRef = ref<HTMLDivElement>();
     const scrollHeaderRef = ref<HTMLDivElement>();
     const scrollBodyRef = ref<HTMLDivElement>();
+    const scrollBodySizeInfo = ref<{ scrollWidth: number; clientWidth: number }>({
+      scrollWidth: 0,
+      clientWidth: 0,
+    });
     const scrollSummaryRef = ref<HTMLDivElement>();
     const [pingedLeft, setPingedLeft] = useState(false);
     const [pingedRight, setPingedRight] = useState(false);
@@ -495,6 +500,18 @@ export default defineComponent<TableProps<DefaultRecordType>>({
       nextTick(() => {
         triggerOnScroll();
         setScrollbarSize(getTargetScrollBarSize(scrollBodyRef.value).width);
+        scrollBodySizeInfo.value = {
+          scrollWidth: scrollBodyRef.value?.scrollWidth || 0,
+          clientWidth: scrollBodyRef.value?.clientWidth || 0,
+        };
+      });
+    });
+    onUpdated(() => {
+      nextTick(() => {
+        scrollBodySizeInfo.value = {
+          scrollWidth: scrollBodyRef.value?.scrollWidth || 0,
+          clientWidth: scrollBodyRef.value?.clientWidth || 0,
+        };
       });
     });
 
@@ -762,6 +779,7 @@ export default defineComponent<TableProps<DefaultRecordType>>({
                 scrollBodyRef={scrollBodyRef}
                 onScroll={onScroll}
                 container={container}
+                scrollBodySizeInfo={scrollBodySizeInfo.value}
               />
             )}
           </>

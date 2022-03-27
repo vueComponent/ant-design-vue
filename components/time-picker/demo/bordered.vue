@@ -17,6 +17,8 @@ Bordered-less style component.
 </docs>
 
 <template>
-  <a-time-picker :bordered="false" />
-  <a-time-range-picker :bordered="false" />
+  <a-space direction="vertical">
+    <a-time-picker :bordered="false" />
+    <a-time-range-picker :bordered="false" />
+  </a-space>
 </template>

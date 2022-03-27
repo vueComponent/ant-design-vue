@@ -17,7 +17,7 @@ Render addon contents to timepicker panel's bottom.
 </docs>
 
 <template>
-  <div>
+  <a-space direction="vertical">
     <a-time-picker v-model:value="value" v-model:open="open" @openChange="handleOpenChange">
       <template #renderExtraFooter="{ prefixCls }">
         <a-button size="small" type="primary" @click="handleClose">OK {{ prefixCls }}</a-button>
@@ -28,7 +28,7 @@ Render addon contents to timepicker panel's bottom.
         <a-button size="small" type="primary" @click="handleClose">OK</a-button>
       </template>
     </a-time-picker>
-  </div>
+  </a-space>
 </template>
 <script lang="ts">
 import { Dayjs } from 'dayjs';

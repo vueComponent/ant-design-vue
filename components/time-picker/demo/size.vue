@@ -17,11 +17,11 @@ The input box comes in three sizes. large is used in the form, while the medium 
 </docs>
 
 <template>
-  <div>
+  <a-space direction="vertical">
     <a-time-picker v-model:value="value1" size="large" />
     <a-time-picker v-model:value="value2" />
     <a-time-picker v-model:value="value3" size="small" />
-  </div>
+  </a-space>
 </template>
 <script lang="ts">
 import dayjs from 'dayjs';

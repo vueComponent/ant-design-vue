@@ -94,3 +94,8 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+.example {
+  margin: 16px 0;
+}
+</style>

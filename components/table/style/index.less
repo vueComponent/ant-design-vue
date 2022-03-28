@@ -99,17 +99,17 @@
           text-align: center;
         }
 
-        &:not(:last-child):not(.@{table-prefix-cls}-selection-column):not(.@{table-prefix-cls}-row-expand-icon-cell):not([colspan])::before {
-          position: absolute;
-          top: 50%;
-          right: 0;
-          width: 1px;
-          height: 1.6em;
-          background-color: @table-header-cell-split-color;
-          transform: translateY(-50%);
-          transition: background-color 0.3s;
-          content: '';
-        }
+        // &:not(:last-child):not(.@{table-prefix-cls}-selection-column):not(.@{table-prefix-cls}-row-expand-icon-cell):not([colspan])::before {
+        //   position: absolute;
+        //   top: 50%;
+        //   right: 0;
+        //   width: 1px;
+        //   height: 1.6em;
+        //   background-color: @table-header-cell-split-color;
+        //   transform: translateY(-50%);
+        //   transition: background-color 0.3s;
+        //   content: '';
+        // }
       }
     }
 
@@ -663,13 +663,13 @@
       position: relative;
 
       &::before {
-        box-shadow: inset 10px 0 8px -8px darken(@shadow-color, 5%);
+        box-shadow: inset 10px 0 8px -10px rgb(0 0 0 / 10%);
       }
     }
 
     .@{table-prefix-cls}-cell-fix-left-first::after,
     .@{table-prefix-cls}-cell-fix-left-last::after {
-      box-shadow: inset 10px 0 8px -8px darken(@shadow-color, 5%);
+      box-shadow: inset 10px 0 8px -10px rgb(0 0 0 / 10%);
     }
 
     .@{table-prefix-cls}-cell-fix-left-last::before {
@@ -682,13 +682,13 @@
       position: relative;
 
       &::after {
-        box-shadow: inset -10px 0 8px -8px darken(@shadow-color, 5%);
+        box-shadow: inset -10px 0 8px -10px rgb(0 0 0 / 10%);
       }
     }
 
     .@{table-prefix-cls}-cell-fix-right-first::after,
     .@{table-prefix-cls}-cell-fix-right-last::after {
-      box-shadow: inset -10px 0 8px -8px darken(@shadow-color, 5%);
+      box-shadow: inset -10px 0 8px -10px rgb(0 0 0 / 10%);
     }
   }
 

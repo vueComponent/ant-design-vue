@@ -10,6 +10,16 @@
 
 ---
 
+## 3.1.0-rc.5
+
+`2022-03-28`
+
+### 🔥🔥🔥 预计 3 月底或 4 月初发布正式版，届时 3.x 将成为默认版本，文档也将默认指向 3.x 文档 🔥🔥🔥
+
+- 🌟 优化组件 ts 类型提示 [#5408](https://github.com/vueComponent/ant-design-vue/issues/5408)
+- 🐞 修复 `Form` 无法滚动到嵌套字段 [#5404](https://github.com/vueComponent/ant-design-vue/issues/5404)
+- 🐞 修复 `Table` 吸底滚动条响应式失效 [afd74c](https://github.com/vueComponent/ant-design-vue/commit/afd74c95d8ccd6ced5ce5f5c1a9abe3a398a0217)
+
 ## 3.1.0-rc.4
 
 `2022-03-25`

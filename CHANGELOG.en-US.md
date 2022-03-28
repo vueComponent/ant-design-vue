@@ -10,6 +10,16 @@
 
 ---
 
+## 3.1.0-rc.5
+
+`2022-03-28`
+
+### 🔥🔥🔥 The official version is expected to be released at the end of March or early April, when 3.x will become the default version, and the documentation will also point to the 3.x documentation by default 🔥🔥🔥
+
+- 🌟 Optimize component ts type hints [#5408](https://github.com/vueComponent/ant-design-vue/issues/5408)
+- 🐞 Fix `Form` cannot scroll to nested fields [#5404](https://github.com/vueComponent/ant-design-vue/issues/5404)
+- 🐞 Fix `Table` bottom-sucking scroll bar responsive failure [afd74c](https://github.com/vueComponent/ant-design-vue/commit/afd74c95d8ccd6ced5ce5f5c1a9abe3a398a0217)
+
 ## 3.1.0-rc.4
 
 `2022-03-25`

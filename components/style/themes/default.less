@@ -1,5 +1,6 @@
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 @import '../color/colors';
+@import './ayla-variable.less';
 
 @theme: default;
 
@@ -13,10 +14,10 @@
 // [CSS-VARIABLE-REPLACE-END: html-variables]
 
 // -------- Colors -----------
-// >>> Primary  color.less中的bule-base已修改
-@primary-color: @blue-6;
-@primary-color-hover: #6391ff;
-@primary-color-active: #2154ce;
+// >>> Primary
+@primary-color: @ayla-color-primary-6;
+@primary-color-hover: @ayla-color-primary-5;
+@primary-color-active: @ayla-color-primary-7;
 @primary-color-outline: fade(@primary-color, @outline-fade);
 
 @processing-color: @blue-6;
@@ -26,26 +27,26 @@
 @info-color-deprecated-bg: color(~`colorPalette('@{info-color}', 1) `);
 @info-color-deprecated-border: color(~`colorPalette('@{info-color}', 3) `);
 
-// >>> Success  已修改green-base
-@success-color: @green-6;
-@success-color-hover: #43c16e;
-@success-color-active: #03812e;
+// >>> Success
+@success-color: @ayla-color-success-6;
+@success-color-hover: @ayla-color-success-5;
+@success-color-active: @ayla-color-success-7;
 @success-color-outline: fade(@success-color, @outline-fade);
 @success-color-deprecated-bg: #81d69e;
 @success-color-deprecated-border: #81d69e;
 
-// >>> Warning 已修改gold-base
-@warning-color: @gold-6;
-@warning-color-hover: #ff9a2e;
-@warning-color-active: #d25f00;
+// >>> Warning
+@warning-color: @ayla-color-warning-6;
+@warning-color-hover: @ayla-color-warning-5;
+@warning-color-active: @ayla-color-warning-7;
 @warning-color-outline: fade(@warning-color, @outline-fade);
 @warning-color-deprecated-bg: #ffcf8b;
 @warning-color-deprecated-border: #ffcf8b;
 
-// >>> Error 已修改red-base
-@error-color: @red-6;
-@error-color-hover: #e55e67;
-@error-color-active: #a51f27;
+// >>> Error
+@error-color: @ayla-color-danger-6;
+@error-color-hover: @ayla-color-danger-5;
+@error-color-active: @ayla-color-danger-7;
 @error-color-outline: fade(@error-color, @outline-fade);
 @error-color-deprecated-bg: #ee9499;
 @error-color-deprecated-border: #ee9499;
@@ -80,12 +81,9 @@
 // Popover background color
 @popover-background: @component-background;
 @popover-customize-border-color: @border-color-split;
-@font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-  'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-  'Noto Color Emoji';
+@font-family: @ayla-font-family;
 @code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
-// 修改text-color/text-color-secondary颜色
-@text-color: #2d3134;
+@text-color: @ayla-color-text-5;
 @text-color-secondary: #737b82;
 @text-color-ash: #cfd2d6;
 @text-color-inverse: @white;
@@ -121,7 +119,7 @@
 @padding-xss: 4px; // more small
 
 // vertical padding for all form controls
-@control-padding-horizontal: @padding-sm;
+@control-padding-horizontal: 10px;
 @control-padding-horizontal-sm: @padding-xs;
 
 // vertical margins
@@ -237,13 +235,13 @@
 
 @btn-font-size-lg: @font-size-lg;
 @btn-font-size-sm: @font-size-base;
-@btn-padding-horizontal-base: @padding-md - 1px;
-@btn-padding-horizontal-lg: @btn-padding-horizontal-base;
-@btn-padding-horizontal-sm: @padding-xs - 1px;
+@btn-padding-horizontal-base: 14px;
+@btn-padding-horizontal-lg: 14px;
+@btn-padding-horizontal-sm: 9px;
 
-@btn-height-base: @height-base;
-@btn-height-lg: @height-lg;
-@btn-height-sm: @height-sm;
+@btn-height-base: 32px;
+@btn-height-lg: 40px;
+@btn-height-sm: 24px;
 
 @btn-line-height: @line-height-base;
 
@@ -450,8 +448,8 @@
 @input-placeholder-color: hsv(0, 0, 75%);
 @input-color: @text-color;
 @input-icon-color: @input-color;
-@input-border-color: @border-color-base;
-@input-bg: @component-background;
+@input-border-color: @ayla-color-line-1;
+@input-bg: @ayla-color-fill-2;
 @input-number-hover-border-color: @input-hover-border-color;
 @input-number-handler-active-bg: #f4f4f4;
 @input-number-handler-hover-bg: @primary-5;
@@ -471,17 +469,17 @@
 
 // Select
 // ---
-@select-border-color: @border-color-base;
-@select-item-selected-color: @text-color;
-@select-item-selected-font-weight: 600;
+@select-border-color: @ayla-color-line-1;
+@select-item-selected-color: @ayla-color-primary-6;
+@select-item-selected-font-weight: @ayla-font-weight-regular;
 @select-dropdown-bg: @component-background;
-@select-item-selected-bg: @primary-1;
-@select-item-active-bg: @item-hover-bg;
+@select-item-selected-bg: @component-background;
+@select-item-active-bg: @ayla-color-fill-2;
 @select-dropdown-vertical-padding: @dropdown-vertical-padding;
 @select-dropdown-font-size: @dropdown-font-size;
 @select-dropdown-line-height: @dropdown-line-height;
 @select-dropdown-height: 32px;
-@select-background: @component-background;
+@select-background: @ayla-color-fill-2;
 @select-clear-background: @select-background;
 @select-selection-item-bg: @background-color-base;
 @select-selection-item-border-color: @border-color-split;

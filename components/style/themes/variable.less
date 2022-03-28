@@ -1,5 +1,6 @@
 /* stylelint-disable at-rule-empty-line-before,at-rule-name-space-after,at-rule-no-unknown */
 @import '../color/colors';
+// @import './ayla-variable.less';
 
 @theme: variable;
 
@@ -71,9 +72,12 @@ html {
 
 // -------- Colors -----------
 // >>> Primary
-@primary-color: #3c75ff;
-@primary-color-hover: #6391ff;
-@primary-color-active: #2154ce;
+// @primary-color: var(--ayla-color-primary-6);
+// @primary-color-hover: var(--ayla-color-primary-5);
+// @primary-color-active: var(--ayla-color-primary-7);
+@primary-color: red;
+@primary-color-hover: red;
+@primary-color-active: red;
 @primary-color-outline: ~'var(--@{ant-prefix}-primary-color-outline)';
 
 @processing-color: @primary-color;
@@ -135,9 +139,7 @@ html {
 // Popover background color
 @popover-background: @component-background;
 @popover-customize-border-color: @border-color-split;
-@font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-  'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-  'Noto Color Emoji';
+@font-family: var(--ayla-font-family);
 @code-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 // 修改text-color/text-color-secondary颜色
 @text-color: #2d3134;
@@ -292,13 +294,13 @@ html {
 
 @btn-font-size-lg: @font-size-lg;
 @btn-font-size-sm: @font-size-base;
-@btn-padding-horizontal-base: @padding-md - 1px;
-@btn-padding-horizontal-lg: @btn-padding-horizontal-base;
-@btn-padding-horizontal-sm: @padding-xs - 1px;
+@btn-padding-horizontal-base: 14px;
+@btn-padding-horizontal-lg: 14px;
+@btn-padding-horizontal-sm: 9px;
 
-@btn-height-base: @height-base;
-@btn-height-lg: @height-lg;
-@btn-height-sm: @height-sm;
+@btn-height-base: 32px;
+@btn-height-lg: 40px;
+@btn-height-sm: 24px;
 
 @btn-line-height: @line-height-base;
 

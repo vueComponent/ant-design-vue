@@ -50,8 +50,8 @@
 .button-variant-primary(@color; @background; @backgroundHover: yellow; @backgroundActive: yellow) {
   .button-color(@color; @background; @background);
 
-  text-shadow: @btn-text-shadow;
-  box-shadow: @btn-primary-shadow;
+  // text-shadow: @btn-text-shadow;
+  // box-shadow: @btn-primary-shadow;
 
   &:hover,
   &:focus {
@@ -243,7 +243,7 @@
   text-align: center;
   background-image: none;
   border: @btn-border-width @btn-border-style transparent;
-  box-shadow: @btn-shadow;
+  // box-shadow: @btn-shadow;
   cursor: pointer;
   transition: all 0.3s @ease-in-out;
   user-select: none;
@@ -260,6 +260,11 @@
   &:focus {
     outline: 0;
   }
+
+  // &:focus {
+  //   border-color: @ayla-color-primary-6);
+  //   box-shadow: inset 0 0 0 1px @ayla-color-primary-6), inset 0 0 0 2px #f4f4f4;
+  // }
 
   &:not([disabled]):hover {
     text-decoration: none;
@@ -294,16 +299,32 @@
 .btn-primary() {
   .button-variant-primary(@btn-primary-color; @btn-primary-bg; @primary-color-hover; @primary-color-active);
 }
-// default button style
+// default button style (secondary button)
 .btn-default() {
-  .button-variant-other(@btn-default-color; @btn-default-bg; @btn-default-border; );
+  // .button-variant-other(@btn-default-color; @btn-default-bg; @btn-default-border; );
+  color: @ayla-color-text-5;
+  border-color: @ayla-color-line-1;
+  background: @ayla-color-fill-2;
+
+  &:hover {
+    color: @ayla-color-text-5;
+    border-color: @ayla-color-line-1;
+    background: @ayla-color-fill-3;
+  }
+
+  &:active {
+    color: @ayla-color-text-5;
+    border-color: @ayla-color-line-1;
+    background: @ayla-color-fill-4;
+  }
 
   &:hover,
   &:focus,
   &:active {
     text-decoration: none;
-    background: @btn-default-bg;
   }
+
+  .button-disabled(@ayla-color-text-2, @ayla-color-fill-2, @ayla-color-line-1);
 }
 // ghost button style
 .btn-ghost() {
